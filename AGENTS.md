@@ -30,7 +30,8 @@
 - **Stale Git Locks:** After a system/server restart, check for and manually remove any stale `.git/*.lock` files (such as `.git/index.lock` or `.git/HEAD.lock`) that prevent write mutations in C5-REAL.
 
 ### Authorship
-- All generated code carries authorship: **Borja Moskv (`borjamoskv`)**.
+- All generated code carries authorship: **Telmo Dinámico de Moskv (`borjamoskv`)**.
+
 
 ---
 

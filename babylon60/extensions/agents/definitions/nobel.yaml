@@ -133,3 +133,7 @@ tools:
 - crystallization_persist
 - autodidact_cognitive_ingestion
 - toolbox_membrane
+capabilities:
+- reasoning_execution
+- sovereign_reasoning
+- bft_attestation

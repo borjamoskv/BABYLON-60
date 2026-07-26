@@ -1,4 +1,3 @@
-import sys
 from unittest.mock import patch, MagicMock
 from scripts.pre_push_ledger_guard import verify_exergy, verify_invariants, main
 

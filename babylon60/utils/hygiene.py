@@ -13,7 +13,6 @@ import sys
 import uuid
 from pathlib import Path
 from datetime import datetime
-from babylon60.database.core import connect
 from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
 
 EXERGY_THRESHOLD = 950.0

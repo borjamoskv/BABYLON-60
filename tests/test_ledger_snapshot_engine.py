@@ -1,7 +1,6 @@
 import json
 import sqlite3
-from pathlib import Path
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from scripts.ledger_snapshot_engine import compute_sha256, create_snapshot, main, AUTHOR
 
 def test_author_identity():

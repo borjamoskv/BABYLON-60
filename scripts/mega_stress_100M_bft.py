@@ -11,14 +11,9 @@ Authorship: Borja Moskv (borjamoskv)
 
 from __future__ import annotations
 
-import asyncio
-import hashlib
-import json
 import logging
-import os
 import sys
 import time
-import uuid
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -100,7 +95,7 @@ def main():
         logger.error("🔴 [FATAL] Violación de Inmunidad de Hash-Chain durante la prueba de estrés.")
         sys.exit(1)
         
-    logger.info(f"🟢 [INTEGRIDAD ATTESTED] Hash-Chain SHA3-256 100% VÁLIDO.")
+    logger.info("🟢 [INTEGRIDAD ATTESTED] Hash-Chain SHA3-256 100% VÁLIDO.")
     
     # 2. Prueba de Resistencia a Idempotencia
     logger.info("🧪 Probando Deduplicación por Idempotencia Causal (UUID v5)...")
@@ -125,7 +120,7 @@ def main():
     print(f"Total Execution Time         : {total_elapsed:.4f} s")
     print(f"Average Throughput           : {avg_throughput:,.2f} tx/s")
     print(f"SHA3-256 Hash Chain Valid    : {valid_integrity}")
-    print(f"UUID v5 Idempotency Status   : PASS")
+    print("UUID v5 Idempotency Status   : PASS")
     print("="*60 + "\n")
 
 if __name__ == "__main__":

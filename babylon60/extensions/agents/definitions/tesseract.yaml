@@ -57,3 +57,7 @@ tools:
 - spawn_legion
 - singularity_forge
 - toolbox_membrane
+capabilities:
+- architect_execution
+- sovereign_reasoning
+- bft_attestation

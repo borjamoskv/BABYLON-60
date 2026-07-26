@@ -78,3 +78,7 @@ tools:
 - notebooklm_ingest
 - notebooklm_status
 - agentic_task_boundary
+capabilities:
+- synthesis_execution
+- sovereign_reasoning
+- bft_attestation

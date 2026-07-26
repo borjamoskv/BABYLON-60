@@ -22,10 +22,22 @@ def _validate_synchronous(synchronous: str) -> str:
     return synchronous
 
 
+def resolve_db_path(db_path: str | Path) -> Path:
+    """Resuelve la ruta de la base de datos a un directorio soberano unificado ~/.babylon60/dbs/
+    para erradicar la entropía y proliferación de DBs dispersas en el repositorio."""
+    p = Path(db_path)
+    if p.is_absolute():
+        return p
+    central_dir = Path.home() / ".babylon60" / "dbs"
+    central_dir.mkdir(parents=True, exist_ok=True)
+    return central_dir / p.name
+
+
 async def connect(db_path: str | Path, *, synchronous: str = "FULL") -> aiosqlite.Connection:
     """Conexión async (aiosqlite) con los pragmas de INV_BFT_02 aplicados."""
     mode = _validate_synchronous(synchronous)
-    db = await aiosqlite.connect(str(db_path), isolation_level=None, timeout=5.0)
+    resolved_path = resolve_db_path(db_path)
+    db = await aiosqlite.connect(str(resolved_path), isolation_level=None, timeout=5.0)
     await db.execute("PRAGMA journal_mode=WAL")
     await db.execute(f"PRAGMA synchronous={mode}")
     await db.execute("PRAGMA foreign_keys=ON")
@@ -37,9 +49,11 @@ def connect_sync(db_path: str | Path, *, synchronous: str = "FULL") -> sqlite3.C
     """Conexión síncrona (CLI/scripts fuera de event loop; INV_BFT_02 prohíbe
     sqlite3 síncrono DENTRO de un event loop — para eso está connect())."""
     mode = _validate_synchronous(synchronous)
-    conn = sqlite3.connect(str(db_path), isolation_level=None, timeout=5.0)
+    resolved_path = resolve_db_path(db_path)
+    conn = sqlite3.connect(str(resolved_path), isolation_level=None, timeout=5.0)
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute(f"PRAGMA synchronous={mode}")
     conn.execute("PRAGMA foreign_keys=ON")
     conn.execute(f"PRAGMA busy_timeout={_BUSY_TIMEOUT_MS}")
     return conn
+

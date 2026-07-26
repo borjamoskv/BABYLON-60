@@ -66,3 +66,7 @@ tools:
 - terminal
 - cortex_store
 - cortex_health
+capabilities:
+- reasoning_execution
+- sovereign_reasoning
+- bft_attestation

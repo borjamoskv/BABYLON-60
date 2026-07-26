@@ -45,3 +45,7 @@ tools:
 - cortex_shannon_report
 - analyze_entropy
 - toolbox_membrane
+capabilities:
+- reasoning_execution
+- sovereign_reasoning
+- bft_attestation

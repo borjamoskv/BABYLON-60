@@ -71,3 +71,7 @@ tools:
 - secrets_manager
 - crystallization_persist
 - agentic_task_boundary
+capabilities:
+- code_execution
+- sovereign_reasoning
+- bft_attestation

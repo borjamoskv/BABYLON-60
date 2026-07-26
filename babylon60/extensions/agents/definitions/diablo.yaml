@@ -75,3 +75,7 @@ tools:
 - autodidact_cognitive_ingestion
 - toolbox_membrane
 - agentic_task_boundary
+capabilities:
+- reasoning_execution
+- sovereign_reasoning
+- bft_attestation

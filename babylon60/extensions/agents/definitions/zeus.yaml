@@ -76,3 +76,7 @@ tools:
 - crystallization_persist
 - toolbox_membrane
 - agentic_task_boundary
+capabilities:
+- architect_execution
+- sovereign_reasoning
+- bft_attestation

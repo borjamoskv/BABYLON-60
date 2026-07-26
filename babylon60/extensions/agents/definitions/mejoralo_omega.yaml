@@ -76,3 +76,7 @@ tools:
 - cortex_search
 - mejoralo_scan
 - mejoralo_heal
+capabilities:
+- code_execution
+- sovereign_reasoning
+- bft_attestation

@@ -21,13 +21,12 @@ Consuming operations:
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from causal_isomorphism.ir import (
     IRModule,
     IRFunction,
     IRExpr,
     IRExprKind,
-    IRMatchArm,
 )
 
 
@@ -64,43 +63,36 @@ class LinearTypeChecker:
             if not (is_linear or is_affine):
                 continue
 
-            # Get the set of all usage counts across all branches
             usages = self._get_usage_paths(param.name, func.body)
 
-            if is_linear:
-                if usages != {1}:
-                    if len(usages) == 1:
-                        found_str = f"{next(iter(usages))}"
-                    else:
-                        found_str = f"{sorted(list(usages))} across paths"
-                    violations.append(
-                        LinearViolation(
-                            function_name=func.name,
-                            parameter_name=param.name,
-                            message=(
-                                f"Linear parameter '{param.name}' must be consumed exactly once. "
-                                f"Found {found_str} usage(s)."
-                            ),
-                        )
-                    )
-            elif is_affine:
-                if any(u > 1 for u in usages):
-                    if len(usages) == 1:
-                        found_str = f"{next(iter(usages))}"
-                    else:
-                        found_str = f"{sorted(list(usages))} across paths"
-                    violations.append(
-                        LinearViolation(
-                            function_name=func.name,
-                            parameter_name=param.name,
-                            message=(
-                                f"Affine parameter '{param.name}' must be consumed at most once. "
-                                f"Found {found_str} usage(s)."
-                            ),
-                        )
-                    )
+            v = self._check_param_violation(func.name, param.name, usages, is_linear, is_affine)
+            if v:
+                violations.append(v)
 
         return violations
+
+    @staticmethod
+    def _format_usage_str(usages: set[int]) -> str:
+        if len(usages) == 1:
+            return f"{next(iter(usages))}"
+        return f"{sorted(list(usages))} across paths"
+
+    def _check_param_violation(self, func_name: str, param_name: str, usages: set[int], is_linear: bool, is_affine: bool) -> LinearViolation | None:
+        if is_linear and usages != {1}:
+            found_str = self._format_usage_str(usages)
+            return LinearViolation(
+                function_name=func_name,
+                parameter_name=param_name,
+                message=f"Linear parameter '{param_name}' must be consumed exactly once. Found {found_str} usage(s).",
+            )
+        if is_affine and any(u > 1 for u in usages):
+            found_str = self._format_usage_str(usages)
+            return LinearViolation(
+                function_name=func_name,
+                parameter_name=param_name,
+                message=f"Affine parameter '{param_name}' must be consumed at most once. Found {found_str} usage(s).",
+            )
+        return None
 
     def _add_sets(self, s1: set[int], s2: set[int]) -> set[int]:
         return {x + y for x in s1 for y in s2}

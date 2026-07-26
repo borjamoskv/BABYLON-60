@@ -66,3 +66,7 @@ tools:
 - cortex_shannon_report
 - crystallization_persist
 - agentic_task_boundary
+capabilities:
+- code_execution
+- sovereign_reasoning
+- bft_attestation

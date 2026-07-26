@@ -1,6 +1,4 @@
 import os
-import tempfile
-from pathlib import Path
 from scripts.symlink_depth_auditor import audit_symlinks, main
 
 def test_audit_symlinks_valid(tmp_path):

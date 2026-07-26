@@ -140,3 +140,7 @@ tools:
 - suno_music_generator
 - bandcamp_assimilation
 - terminal
+capabilities:
+- reasoning_execution
+- sovereign_reasoning
+- bft_attestation

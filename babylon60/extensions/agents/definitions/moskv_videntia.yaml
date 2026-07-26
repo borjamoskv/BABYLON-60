@@ -75,3 +75,7 @@ tools:
 - regression_test_forge
 - crystallization_persist
 - agentic_task_boundary
+capabilities:
+- reasoning_execution
+- sovereign_reasoning
+- bft_attestation

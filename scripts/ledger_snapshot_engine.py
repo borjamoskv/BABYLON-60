@@ -15,7 +15,6 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
-from babylon60.database.core import connect
 from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
 
 REPO_ROOT = Path(__file__).parents[1]

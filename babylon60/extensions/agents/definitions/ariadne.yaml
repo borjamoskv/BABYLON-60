@@ -62,3 +62,7 @@ tools:
 - ast_analyzer
 - crystallization_persist
 - agentic_task_boundary
+capabilities:
+- architect_execution
+- sovereign_reasoning
+- bft_attestation
