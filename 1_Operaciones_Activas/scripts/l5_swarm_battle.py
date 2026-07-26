@@ -51,6 +51,11 @@ lex_mod = importlib.util.module_from_spec(spec_lex)
 spec_lex.loader.exec_module(lex_mod)
 LexicalConsistencyEnforcer = lex_mod.LexicalConsistencyEnforcer
 
+spec_exergy = importlib.util.spec_from_file_location("00_PROMPT_EXERGY", str(ROOT_SCRIPTS / "00_PROMPT_EXERGY.py"))
+exergy_mod = importlib.util.module_from_spec(spec_exergy)
+spec_exergy.loader.exec_module(exergy_mod)
+PromptExergyEvaluator = exergy_mod.PromptExergyEvaluator
+
 # Directivas de contención filosófica para la matriz de modelos
 PHILOSOPHIES = {
     "WORKER_ALPHA_SONNET_MIMIC": {
@@ -84,7 +89,7 @@ PHILOSOPHIES = {
 
 class SwarmBattleJudge:
     """Juez de Consenso MOSKV v2.5. Controla la matriz heterogénea de modelos y ancla veredictos en L5."""
-    __slots__ = ("db_path", "lock", "hal_guard", "l5_engine", "task_id", "openrouter_key", "pool_manager")
+    __slots__ = ("db_path", "lock", "hal_guard", "l5_engine", "task_id", "openrouter_key", "pool_manager", "lex_enforcer", "exergy_evaluator")
 
     def __init__(self, db_path: Path):
         self.db_path = db_path
@@ -102,6 +107,9 @@ class SwarmBattleJudge:
 
         # Enforcer Semántico
         self.lex_enforcer = LexicalConsistencyEnforcer(db_path.parent / "2_Nucleo_Estatico/docs/theory/glosario.md")
+
+        # Evaluador de Disipación de Atención Cuadrática (Ω149)
+        self.exergy_evaluator = PromptExergyEvaluator(max_allowed_tokens=300)
 
     async def execute_battle(self, operator_task: str) -> str:
         """Dispara la malla distribuida de trabajadores en paralelo y dicta sentencia por consenso exergético."""
@@ -161,6 +169,11 @@ class SwarmBattleJudge:
         # Generar par de claves Ed25519 para el sobre del trabajador (INV_C5_10)
         worker_sk = nacl.signing.SigningKey.generate()
         worker_prompt = f"{directive}\n\nTarea a resolver de forma aislada: {task}\nProporciona únicamente el código o solución técnica pura."
+
+        # Control Termodinámico (O(N^2) Dissipation Check) antes de despachar
+        sys.stdout.write(f"[🌀 EXERGY CHECK] Auditando disipación cuadrática de la matriz de contexto para {name}...\n")
+        if not self.exergy_evaluator.enforce_boundary(worker_prompt):
+            raise RuntimeError(f"Swarm Node {name} abortado por saturación atencional (Context Poisoning Ω18). Reduzca la verbosidad de la directiva.")
 
         raw_output = None
 
