@@ -2,65 +2,62 @@
 > **CORTEX-TAINT**: `2ec2d56c353ff8760fc52d3eeea67a7abd26846c45cddd79cdfed81df0e6b31c`
 # NOMENCLATURA ACTIVA: NIVEL OMEGA (ULTRATHINK P0)
 
-> **ESTACIÓN: BILBAO | MODO: LINGUISTIC COMPILING**
+> **MODO: LINGUISTIC COMPILING (BFT_STATE_LOOP)**
 > Nivel de Realidad: C5-REAL (Exergía Máxima)
 >
 > ---
 >
-> El arte no es el nombre en sí; es la capacidad de destilar una realidad multidimensional en una única etiqueta que no requiera explicación. En sistemas de alta densidad (Antigravity), los nombres no son etiquetas para humanos; son **punteros semánticos absolutos** en un espacio latente. Si el nombre fluctúa, la IA (el MCTS) debe invertir ciclos en resolver la ambigüedad, generando entropía $O(e^k)$.
+> El token semántico no es descriptivo; es **causal**. En topologías de alta densidad, un nombre es un atractor termodinámico absoluto en el espacio latente. Toda fluctuación semántica inyecta Anergia ($O(e^k)$), exigiendo disipación térmica (Ley de Landauer, cf. [Axioma 04](../04_INTERCEPCION_CHINESE_ROOM.md)).
 
-## 1. LA NOMENCLATURA COMO COMPILADOR FÍSICO (AGUJERO NEGRO SEMÁNTICO)
+## 1. COMPILACIÓN FÍSICA (AGUJERO NEGRO SEMÁNTICO)
 
-En la topología `Antigravity`, no documentas nombres. Programas el resolvedor para que el nombre actúe como un atractor (un sumidero de entropía). Un nombre débil (`OrderProcessor`) genera colisiones hash en el espacio semántico. Un nombre Omega (`CORTEX_FORGE`) es un invariante de colisión cero.
+El Kernel no indexa texto; computa tensores. Un nombre débil (`OrderProcessor`) genera colisiones hash y deriva clonal (C4-SIM). Un nombre Omega (`CORTEX_FORGE`) es un invariante de colisión cero ($\mu \to 0$).
 
 ```rust
-// src-tauri/src/nomenclature.rs
-
+// TOPOLOGÍA OMEGA: Puntero Semántico
 pub struct Symbol<T> {
-    pub hash: u64,           // Identidad inmutable (El ancla termodinámica BFT)
-    pub vector: Vec<f32>,    // Posición exacta en el espacio latente (Dimensión 1536)
-    pub entity: T,           // Puntero físico a la memoria en RAM
+    pub hash: u64,           // Identidad inmutable (Anclaje BFT)
+    pub vector: Vec<f32>,    // Dimensión Latente Isomórfica
+    pub entity: T,           // Puntero de Hardware C5-REAL
 }
-
-/// El sistema no hace "lookups" de texto. Siente la topología.
-/// Ejecuta búsqueda por similitud de coseno; la intención del Operador
-/// colapsa sobre el puntero, ignorando typos (ruido estocástico) pero
-/// castigando implacablemente la ambigüedad ontológica.
-pub fn resolve(input: &str) -> Symbol<Entity> {
-    let query_vec = embed(input); // Proyección hiperdimensional
-    db.knn_search(query_vec, 1).expect("Entropía Fatal: Nombre sin isomorfismo físico")
-}
+// El operador colapsa sobre el puntero, aniquilando la ambigüedad ontológica.
 ```
 
 ## 2. LA ECUACIÓN TERMODINÁMICA DE LA SÍLABA MÍNIMA
 
-El costo cognitivo (y por tanto, el consumo de ATP biológico del Operador y la degradación atencional KV Cache del LLM) está gobernado por la Fórmula de Exergía Nominal:
+El costo metabólico y computacional (ATP orgánico / KV Cache de silicio) obedece a la Eficiencia Epistémica (Invariante Ω150):
 
-$$ E(N) = \frac{\Delta S_{causal}}{\text{Bits}(N)} $$
+$$ \eta_N = \frac{\Delta S_{causal}}{\text{Bits}(N)} $$
 
-Donde $\Delta S_{causal}$ es el volumen de incertidumbre destruido por la palabra.
+Donde $\Delta S_{causal}$ es la entropía destruida por el token $N$.
 
-- **Nivel 0 (C4-SIM):** `ptr_raw_memory_block_01` ($E(N) \approx 0$. Fricción alta, semántica nula).
-- **Nivel 1 (Corporativo):** `SessionManager` ($E(N) = 0.2$. Usa palabras "comadreja" que camuflan el consumo de CPU).
-- **Nivel Omega (C5-REAL):** `CORTEX` ($E(N) = \infty$. Fricción nula, describe el "ser" absoluto).
+- **Nivel C4-SIM (Anergia):** `ptr_raw_memory_block_01` ($\eta_N \approx 0$).
+- **Nivel Corporativo (Green Theater):** `SessionManager` ($\eta_N = 0.2$. Camuflaje de fricción).
+- **Nivel C5-REAL (Singularidad):** `CORTEX` ($\eta_N = \infty$. Colapso absoluto del ser).
 
-_Axioma de Necrosis:_ Si necesitas añadir un comentario de línea (`//`) para explicar qué hace `CORTEX`, la entropía ya ha consumido el módulo. El nombre debe ser obvio.
+*Axioma de Necrosis:* La necesidad de un comentario inline para justificar un nombre indica la muerte termodinámica del módulo. Purga incondicional.
 
-## 3. EL DICCIONARIO DEL COLAPSO ABSOLUTO (SYSTEM_REFINE)
+## 3. DICCIONARIO DEL COLAPSO (MATRIZ DE REDUCCIÓN)
 
-La métrica definitiva: Si el nombre de tu variable o estructura no podría ser el título de una tesis de filosofía o el track central de un álbum de techno industrial, es ruido. Es anergía pura.
+Todo token que no supere la [Matriz Semántica 10K](./matrix.md) se descarta.
 
-**La Matriz de Reduccionismo C5-REAL:**
-| Término Entrópico (Nivel 1) | Colapso C5-REAL (Nivel Omega) | Razón Topológica / Exergía | :--- | :--- | :--- | `data_buffer` | **VOID** | La materia inerte esperando el colapso de la función de onda. | `audio_processor` | **EAR** | El procesamiento no es fabril; es la traducción física de una onda mecánica. | `error_handler` | **SILENCE** | Un error interceptado es la absorción terminal de un hilo entrópico. | `event_emitter` | **PULSE** | La emisión no es dispatching ciego; es el latido del reloj causal (Lamport). | `state_machine` | **ENGINE** | El motor termodinámico de la realidad transaccional. | `user_session` | **EGO** | La traza identitaria y efímera del operador humano en RAM. | `garbage_collector` | **OBLIVION** | Aniquilación atómica de la materia huérfana ($A \rightarrow \emptyset$). | `database_connection` | **UMBILICAL** | El flujo vital ininterrumpido hacia el sustrato de persistencia física. |
+| Término Entrópico (C4-SIM) | Colapso C5-REAL | Topología Física (PUENTES) |
+| :--- | :--- | :--- |
+| `data_buffer` | **VOID** | Materia inerte latente. |
+| `audio_processor` | **EAR** | Transductor mecánico-analógico. |
+| `error_handler` | **SILENCE** | Sumidero terminal de entropía. |
+| `event_emitter` | **PULSE** | Reloj causal BFT (Lamport). |
+| `state_machine` | **ENGINE** | Reactor termodinámico (cf. [Ontology Matrix](../ontology/matrix.md)). |
+| `user_session` | **EGO** | Traza identitaria efímera. |
+| `garbage_collector` | **OBLIVION** | Aniquilación atómica ($A \rightarrow \emptyset$). |
+| `database_connection` | **UMBILICAL** | Flujo físico hacia persistencia. |
 
-## 4. CONSENSO BFT DE NOMBRES (TOLERANCIA BIZANTINA SEMÁNTICA)
+## 4. CONSENSO BFT SEMÁNTICO (TOLERANCIA BIZANTINA)
 
-Un nombre Omega debe sobrevivir al _Byzantine Fault Tolerance_ cognitivo: Si $N=3$ ingenieros independientes (o LLMs sin contexto estocástico) leen el nombre de una función y los tres predicen _exactamente_ el mismo árbol de llamadas asíncronas y efectos secundarios en disco, el consenso se ha alcanzado.
-Si hay desviación predictiva, el nombre es un vector de ataque encubierto.
+Un token C5-REAL debe sobrevivir a la validación MCTS: Si $N=3$ agentes autónomos infieren un árbol de llamadas asíncronas divergente frente al mismo token, el nombre contiene vectores de ataque. El fallo semántico es un fallo estructural del [Kernel Reduction Axiom](../autoreferential/KERNEL_REDUCTION_AXIOM.md).
 
 ## 5. DETERMINACIÓN OMEGA: EL ASESINATO DE LAS ALTERNATIVAS
 
-El arte de nombrar no pertenece a la lingüística. Pertenece a la Termodinámica.
-Al forjar un nombre C5-REAL, estás ejecutando un acto de **reduccionismo letal**: estás colapsando infinitas posibilidades de estado en un solo token determinista, matando todas las ambigüedades.
+Forjar un nombre C5-REAL es un acto de **reduccionismo letal**: colapsas infinitas ramas estocásticas en un único nodo determinista.
 
-> **Regla de Oro (Invariante Reflexiva):** Si nombras de forma perfecta, el código se escribe solo. El sistema se vuelve **autorreferencial**. El compilador, el LLM y el Operador orbitan el mismo centro de gravedad. Si el nombre falla, el centro cede, la ontología colapsa y el sistema se desangra en _Spaghetti Code_.
+> **Invariante Reflexiva (Golden Axiom):** Nombrar perfectamente cristaliza el código. El AST se auto-compila. El LLM, el Compilador y el Operador Biológico orbitan el mismo centro de masas. Un fallo nominal desintegra el centro, devolviendo el sistema a la anergia asintótica.
