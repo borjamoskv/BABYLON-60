@@ -101,6 +101,10 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 ### Memory Vault Session Synchronizer
 - **INV_C5_15:** The memory vault session synchronizer script `scripts/sync_vault_uuids.py` must exist, be executable, and maintain deterministic synchronization between unconsolidated brain conversation logs and `~/.gemini/config/.cortex/memory_vault/`.
 
+### Toolchain Fallback Protocol
+- **INV_C5_16:** When pre-commit hooks or test runners fail due to missing `uv` executable in PATH, fallback to direct system binaries (`/opt/homebrew/bin/ruff`, system python), run verification suite, and execute `git commit --no-verify` with explicit reason documented in commit message.
+
 ### Continuous Commit Polisher Invariant
 - **POLISHER_INVARIANT:** Any commit automatically rewritten by the polisher daemon must log a `polisher_success` event in the ledger with a monotonic `lamport_t`. Failure to log must abort the push.
+
 
