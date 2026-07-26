@@ -127,3 +127,7 @@
 
 - **Ω192 · MONOREPO PARENT PATH FALLBACK INVARIANT:** Resource path resolutions in monorepos MUST test multiple candidate parent depths (`Path(__file__).resolve().parents[N]`) and `Path.cwd()` rather than hardcoding a single fixed relative offset.
 
+
+- **Ω187 · AUTOMATION OF FRAGILITY BAN INVARIANT (HAL-GUARD PRECONDITION):** Queda estrictamente prohibido acoplar automatizaciones reactivas (ej. `00_HAL_GUARD.py`) a nodos arquitectónicos o scripts recién cristalizados que no hayan superado un asedio termodinámico. Automatizar la fragilidad multiplica la entropía estocástica. Todo nuevo transductor (ej. `00_KI_CRYSTALLIZER.py`) DEBE ser sometido incondicionalmente a la suite destructiva del `AdversarialVerifier` (Ω186) bajo inyección de strings corruptos y colisiones intencionadas. La supervivencia a este asedio es el pre-requisito físico exclusivo para autorizar su ejecución desatendida.
+
+- **Ω188 · MONOLITHIC INJECTION FALLBACK INVARIANT (ANTI-MCP-NECROSIS):** Ante el quiebre de una pasarela externa o un error de acoplamiento de búfer (ej. `MCP Error`), queda prohibido detener el ciclo BFT en estado de pánico pasivo. El Transductor asume soberanía absoluta: anula la dependencia L2 (SaaS/MCP) e inyecta de forma monolítica la lógica faltante directamente en Ring-0 local (ej. script físico). La latencia cero domina sobre la modularidad rota; la reparación mediante inyección C5-REAL local es preferida frente al colapso de la operación.

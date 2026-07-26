@@ -49,7 +49,7 @@ class ApexFiniteStateMachine:
                             payload_json TEXT,
                             cortex_taint TEXT,
                             lamport_t INTEGER,
-                            entry_hash TEXT,
+                            entry_hash TEXT UNIQUE,
                             created_at TEXT
                         )
                     """)
