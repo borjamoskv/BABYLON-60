@@ -65,3 +65,36 @@ def test_counterfactual_simulation():
     assert sim["target"] == "node:a"
     assert sim["impacted_edges_count"] == 1
     assert "node:b" in sim["affected_neighbors"]
+
+
+def test_hypothesis_generation_omega_6():
+    engine = KnowledgeKernelEngine()
+    engine.register_node("node:p1", "Person", [1.0, 0.0, 0.0], {"name": "Alice"})
+    engine.register_node("node:p2", "Person", [0.99, 0.05, 0.0], {"name": "Bob"})
+
+    hypotheses = engine.generate_hypotheses()
+    assert len(hypotheses) == 1
+    assert hypotheses[0]["node_a"] == "node:p1"
+    assert hypotheses[0]["node_b"] == "node:p2"
+    assert hypotheses[0]["similarity"] > 0.8
+
+
+def test_innovation_shift_detection_omega_7():
+    engine = KnowledgeKernelEngine()
+    base = [0.1, 0.1, 0.1]
+    new = [0.5, 0.5, 0.5]
+
+    shift = engine.detect_innovation_shift(base, new, threshold=0.15)
+    assert shift["shift_detected"] is True
+    assert shift["signal"] == "EMERGENT_PARADIGM_SHIFT"
+
+
+def test_fractal_memory_hierarchy_omega_5():
+    engine = KnowledgeKernelEngine()
+    n1 = engine.register_node("node:x", "Idea", [0.1, 0.2], {"title": "Zero Trust"})
+
+    fractal = engine.get_fractal_memory_hierarchy("node:x")
+    assert fractal["node_id"] == "node:x"
+    assert "1_raw" in fractal["levels"]
+    assert "7_prediction_graph" in fractal["levels"]
+

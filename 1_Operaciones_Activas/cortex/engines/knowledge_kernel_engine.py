@@ -197,6 +197,81 @@ class KnowledgeKernelEngine:
             "cascade_factor": len(impacted_neighbors) * 1.414,
         }
 
+    def generate_hypotheses(self) -> List[Dict[str, Any]]:
+        """
+        Omega 6 Hypothesis Engine.
+        Detects topological convergence between unlinked actors / nodes in semantic vector space.
+        """
+        hypotheses: List[Dict[str, Any]] = []
+        node_ids = list(self._nodes.keys())
+        for i in range(len(node_ids)):
+            for j in range(i + 1, len(node_ids)):
+                id1, id2 = node_ids[i], node_ids[j]
+                n1, n2 = self._nodes[id1], self._nodes[id2]
+
+                # Check if edge already exists
+                has_edge = any(
+                    (e.source == id1 and e.target == id2) or (e.source == id2 and e.target == id1)
+                    for e in self._edges
+                )
+                if not has_edge and n1.embedding and n2.embedding and len(n1.embedding) == len(n2.embedding):
+                    dot = sum(a * b for a, b in zip(n1.embedding, n2.embedding))
+                    mag1 = math.sqrt(sum(a * a for a in n1.embedding))
+                    mag2 = math.sqrt(sum(b * b for b in n2.embedding))
+                    sim = dot / (mag1 * mag2) if mag1 > 0 and mag2 > 0 else 0.0
+
+                    if sim > 0.8:
+                        hypotheses.append({
+                            "node_a": id1,
+                            "node_b": id2,
+                            "similarity": sim,
+                            "hypothesis": f"Nodes {id1} and {id2} converge on latent vector space (sim={sim:.3f}) without explicit link."
+                        })
+        return hypotheses
+
+    def detect_innovation_shift(
+        self, baseline_embedding: List[float], new_embedding: List[float], threshold: float = 0.15
+    ) -> Dict[str, Any]:
+        """
+        Omega 7 Innovation Detection Engine.
+        Tracks vector displacement across global semantic space to signal emergent paradigm shifts.
+        """
+        if len(baseline_embedding) != len(new_embedding) or not baseline_embedding:
+            return {"shift_detected": False, "displacement": 0.0, "reason": "Dimensionality mismatch"}
+
+        diff_sq = sum((b - n) ** 2 for b, n in zip(baseline_embedding, new_embedding))
+        displacement = math.sqrt(diff_sq)
+        shift_detected = displacement >= threshold
+
+        return {
+            "shift_detected": shift_detected,
+            "displacement": displacement,
+            "threshold": threshold,
+            "signal": "EMERGENT_PARADIGM_SHIFT" if shift_detected else "STABLE_LATENT_GEOMETRY",
+        }
+
+    def get_fractal_memory_hierarchy(self, node_id: str) -> Dict[str, Any]:
+        """
+        Omega 5 Fractal Memory Engine.
+        Generates 7 tiers of memory representation for a given knowledge primitive.
+        """
+        if node_id not in self._nodes:
+            raise KeyError(f"Node {node_id} not found")
+
+        node = self._nodes[node_id]
+        return {
+            "node_id": node_id,
+            "levels": {
+                "1_raw": str(node.metadata),
+                "2_parsed": {"type": node.node_type, "id": node.id},
+                "3_embedded": node.embedding,
+                "4_summarized": f"Node[{node.node_type}] - {node.id}",
+                "5_concept_graph": [e.target for e in self._edges if e.source == node_id],
+                "6_claim_graph": [c.claim_id for c in self._claims.values() if node_id in c.evidence],
+                "7_prediction_graph": self.simulate_counterfactual(node_id, {"query": "abduction"}),
+            }
+        }
+
     def export_telemetry(self) -> Dict[str, Any]:
         return {
             "reality_level": "C5-REAL",
@@ -206,3 +281,4 @@ class KnowledgeKernelEngine:
             "claims_count": len(self._claims),
             "compression_status": CompressionPyramid.compute_exergy_density(len(self._events)),
         }
+
