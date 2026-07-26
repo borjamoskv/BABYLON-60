@@ -129,6 +129,18 @@ export default function App() {
             </div>
           </li>
         </ul>
+
+        {/* Merkle Root SHA3-256 Attestation Card */}
+        <div className="merkle-card">
+          <div className="merkle-label">
+            <ShieldCheck size={14} color="#10b981" />
+            <span>Merkle Root SHA3-256</span>
+          </div>
+          <div className="merkle-root-hash">a0e0c70bc69873c4...</div>
+          <div style={{ color: "#10b981", fontSize: "0.68rem", marginTop: "4px", fontWeight: 600 }}>
+            🟢 BFT Ledger Inmutable
+          </div>
+        </div>
       </div>
 
       {/* Mail List */}

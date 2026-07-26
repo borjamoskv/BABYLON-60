@@ -325,3 +325,51 @@ class CortexPersistLedger:
                 last_lamport = lamport_t
 
             return True
+
+    def get_merkle_root(self) -> str:
+        """
+        Calcula la Raiz de Merkle (Merkle Root SHA3-256) sobre todos los hashes de entrada.
+        Permite atestación criptográfica O(1) del estado completo del ledger.
+        """
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT entry_hash FROM cortex_ledger ORDER BY seq ASC")
+            leaves = [row[0] for row in cursor.fetchall()]
+
+        if not leaves:
+            return ZERO_HASH_256
+
+        # Construcción jerárquica del árbol de Merkle
+        layer = [bytes.fromhex(h) for h in leaves]
+        while len(layer) > 1:
+            if len(layer) % 2 != 0:
+                layer.append(layer[-1])  # Duplicar último nodo si es impar
+            next_layer = []
+            for i in range(0, len(layer), 2):
+                combined = layer[i] + layer[i + 1]
+                next_layer.append(hashlib.sha3_256(combined).digest())
+            layer = next_layer
+
+        return layer[0].hex()
+
+    def get_state_attestation(self) -> Dict[str, Any]:
+        """
+        Retorna un manifiesto de atestación del estado actual del ledger (C5-REAL).
+        """
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT COUNT(*), COALESCE(MAX(lamport_t), 0), COALESCE(MAX(seq), 0) FROM cortex_ledger")
+            row = cursor.fetchone()
+
+        merkle_root = self.get_merkle_root()
+        is_valid = self.verify_integrity()
+
+        return {
+            "total_entries": row[0],
+            "max_lamport": row[1],
+            "max_seq": row[2],
+            "merkle_root": merkle_root,
+            "integrity_verified": is_valid,
+            "attested_at": datetime.now(timezone.utc).isoformat(),
+        }
+

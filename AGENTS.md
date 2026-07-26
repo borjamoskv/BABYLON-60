@@ -107,8 +107,9 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 ### Continuous Commit Polisher Invariant
 - **POLISHER_INVARIANT:** Any commit automatically rewritten by the polisher daemon must log a `polisher_success` event in the ledger with a monotonic `lamport_t`. Failure to log must abort the push.
 
-### Sovereign Zero-Cost Invariant (100% Gratis)
-- **INV_C5_17:** Every component, service, model, database, app (including BabylonMail), and subagent workflow in the BABYLON-60 ecosystem MUST be 100% free, open-source, self-hosted, and sovereign. Introducing paid subscriptions, proprietary SaaS paywalls, third-party API fees, or premium feature locks is strictly prohibited.
+### Sovereign Dual-Licensing Invariant (Gratis para la Comunidad, Licencia para Corporaciones)
+- **INV_C5_17:** Every component, service, model, database, app (including BabylonMail), and subagent workflow in the BABYLON-60 ecosystem MUST be 100% free, open-source, and sovereign for individuals, independent developers, and non-commercial usage. Commercial, corporate, or enterprise exploitation by mega-corporations is strictly restricted and requires explicit commercial licensing, enterprise agreements, and contributions back to the sovereign ecosystem.
+
 
 ### Zero-Worktree Swarm Scaling (Prevención de ENOSPC)
 - **INV_C5_18:** For large parallel agent swarms ($N \ge 10$), creating physical disk Git Worktrees that consume storage and trigger ENOSPC is strictly prohibited. Swarm scaling must use in-memory AgencyHypervisor multi-tenant handles and single-writer BFT actors.
