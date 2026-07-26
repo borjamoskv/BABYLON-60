@@ -46,6 +46,11 @@ pool_mod = importlib.util.module_from_spec(spec_pool)
 spec_pool.loader.exec_module(pool_mod)
 GeminiProPoolManager = pool_mod.GeminiProPoolManager
 
+spec_lex = importlib.util.spec_from_file_location("00_LEX_VERIFY", str(ROOT_SCRIPTS / "00_LEX_VERIFY.py"))
+lex_mod = importlib.util.module_from_spec(spec_lex)
+spec_lex.loader.exec_module(lex_mod)
+LexicalConsistencyEnforcer = lex_mod.LexicalConsistencyEnforcer
+
 # Directivas de contención filosófica para la matriz de modelos
 PHILOSOPHIES = {
     "WORKER_ALPHA_SONNET_MIMIC": {
@@ -95,6 +100,9 @@ class SwarmBattleJudge:
         # Motor de fijación inerte en la constante universal L5
         self.l5_engine = L5AnchorEngine(db_path.parent / "cortex_inertial_proofs", db_path)
 
+        # Enforcer Semántico
+        self.lex_enforcer = LexicalConsistencyEnforcer(db_path.parent / "2_Nucleo_Estatico/docs/theory/glosario.md")
+
     async def execute_battle(self, operator_task: str) -> str:
         """Dispara la malla distribuida de trabajadores en paralelo y dicta sentencia por consenso exergético."""
         sys.stdout.write(f"\n[⚔️ SWARM BATTLE v2.5] Inicializando arena para la tarea: '{operator_task}'\n")
@@ -123,9 +131,16 @@ class SwarmBattleJudge:
         # Inferencia del Juez mediante Gemini Pool Manager
         final_text = await self.pool_manager.adispatch_generate_content(prompt=decision_prompt, model="gemini-2.0-flash")
 
+        # 0. Auditoría de Exergía Semántica (Lexical Enforcer)
+        try:
+            sys.stdout.write("[⚖️ EPISTEMIC GATE] Auditando exergía semántica del veredicto...\n")
+            exergy_score = self.lex_enforcer.enforce_epistemic_integrity(final_text)
+        except Exception:
+            raise
+
         # 1. Auditoría HAL_GUARD ante alucinación o Green Theater
         try:
-            sys.stdout.write("[🛡️ HAL GUARD] Sometiendo veredicto del Juez Central a escrutinio BFT...\n")
+            sys.stdout.write(f"[🛡️ HAL GUARD] Sometiendo veredicto del Juez Central (Exergía: {exergy_score:.2f}) a escrutinio BFT...\n")
             await self.hal_guard.audit(task_id=self.task_id, offender_id="MOSKV_SWARM_JUDGE", text=final_text, view=1)
         except Exception as e:
             sys.stdout.write(f"\n[💥 SHIELD L3] Destitución del juez activada por HAL GUARD: {e}\n")
