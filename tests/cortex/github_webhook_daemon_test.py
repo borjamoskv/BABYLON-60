@@ -22,8 +22,8 @@ def make_sig(payload: bytes, secret: str = "test-secret-key") -> str:
 
 class TestInitPerceptionLedger:
     def test_creates_db_and_table(self, tmp_path: pathlib.Path) -> None:
-        with patch("cortex.github_webhook_daemon.CORTEX_DB_PATH", str(tmp_path / "test.db")):
-            with patch("cortex.github_webhook_daemon.os.path.exists", return_value=True):
+        with patch("cortex.bridges.github_webhook_daemon.CORTEX_DB_PATH", str(tmp_path / "test.db")):
+            with patch("cortex.bridges.github_webhook_daemon.os.path.exists", return_value=True):
                 from cortex.bridges.github_webhook_daemon import init_perception_ledger
 
                 init_perception_ledger()
@@ -36,7 +36,7 @@ class TestInitPerceptionLedger:
 class TestLogEvent:
     def test_log_event_new_payload(self, tmp_path: pathlib.Path) -> None:
         db_path = str(tmp_path / "events.db")
-        with patch("cortex.github_webhook_daemon.CORTEX_DB_PATH", db_path):
+        with patch("cortex.bridges.github_webhook_daemon.CORTEX_DB_PATH", db_path):
             from cortex.bridges.github_webhook_daemon import init_perception_ledger, log_event
 
             init_perception_ledger()
@@ -45,7 +45,7 @@ class TestLogEvent:
 
     def test_log_event_idempotency_lock(self, tmp_path: pathlib.Path) -> None:
         db_path = str(tmp_path / "events.db")
-        with patch("cortex.github_webhook_daemon.CORTEX_DB_PATH", db_path):
+        with patch("cortex.bridges.github_webhook_daemon.CORTEX_DB_PATH", db_path):
             from cortex.bridges.github_webhook_daemon import init_perception_ledger, log_event
 
             init_perception_ledger()
@@ -55,7 +55,7 @@ class TestLogEvent:
 
     def test_lamport_clock_increments(self, tmp_path: pathlib.Path) -> None:
         db_path = str(tmp_path / "events.db")
-        with patch("cortex.github_webhook_daemon.CORTEX_DB_PATH", db_path):
+        with patch("cortex.bridges.github_webhook_daemon.CORTEX_DB_PATH", db_path):
             from cortex.bridges.github_webhook_daemon import init_perception_ledger, log_event
 
             init_perception_ledger()
@@ -133,7 +133,7 @@ class TestGitHubWebhookHandler:
         handler.rfile = BytesIO(payload)
         handler.send_response = MagicMock()
         handler.end_headers = MagicMock()
-        with patch("cortex.github_webhook_daemon.SECRET_KEY", "test-secret-key"):
+        with patch("cortex.bridges.github_webhook_daemon.SECRET_KEY", "test-secret-key"):
             GitHubWebhookHandler.do_POST(handler)
         handler.send_response.assert_called_once_with(403)
 
@@ -158,11 +158,11 @@ class TestGitHubWebhookHandler:
         db_path = str(tmp_path / "webhook.db")
         trigger_path = str(tmp_path / ".trigger_swarm")
         with (
-            patch("cortex.github_webhook_daemon.SECRET_KEY", "test-secret-key"),
-            patch("cortex.github_webhook_daemon.CORTEX_DB_PATH", db_path),
-            patch("cortex.github_webhook_daemon.TRIGGER_PATH", trigger_path),
-            patch("cortex.github_webhook_daemon.init_perception_ledger"),
-            patch("cortex.github_webhook_daemon.log_event", return_value=True),
+            patch("cortex.bridges.github_webhook_daemon.SECRET_KEY", "test-secret-key"),
+            patch("cortex.bridges.github_webhook_daemon.CORTEX_DB_PATH", db_path),
+            patch("cortex.bridges.github_webhook_daemon.TRIGGER_PATH", trigger_path),
+            patch("cortex.bridges.github_webhook_daemon.init_perception_ledger"),
+            patch("cortex.bridges.github_webhook_daemon.log_event", return_value=True),
         ):
             GitHubWebhookHandler.do_POST(handler)
         handler.send_response.assert_called_once_with(202)
@@ -186,8 +186,8 @@ class TestGitHubWebhookHandler:
         handler.end_headers = MagicMock()
         handler.wfile = BytesIO()
         with (
-            patch("cortex.github_webhook_daemon.SECRET_KEY", "test-secret-key"),
-            patch("cortex.github_webhook_daemon.log_event", return_value=False),
+            patch("cortex.bridges.github_webhook_daemon.SECRET_KEY", "test-secret-key"),
+            patch("cortex.bridges.github_webhook_daemon.log_event", return_value=False),
         ):
             GitHubWebhookHandler.do_POST(handler)
         handler.send_response.assert_called_once_with(200)

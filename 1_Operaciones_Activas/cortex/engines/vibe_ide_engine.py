@@ -9,9 +9,9 @@ import hashlib
 import time
 from typing import Dict, Tuple
 
-from cortex.swarm.memory_store import AgentMemory
-from cortex.swarm.sanitizer import ZeroTrustSanitizer
-from cortex.swarm.sandbox import VesicularSandbox
+from agents.swarm.memory_store import AgentMemory
+from agents.swarm.sanitizer import ZeroTrustSanitizer
+from agents.swarm.sandbox import VesicularSandbox
 
 class VibeIDEEngine:
     """Motor C5-REAL para IDE Agéntico con degradación de agencia 4 -> 0 y memoria Dual-Tier."""

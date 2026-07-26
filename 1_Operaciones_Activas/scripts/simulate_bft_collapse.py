@@ -31,7 +31,7 @@ def ejecutar_ataque_bizantino(db_path: Path):
         cursor.execute("UPDATE master_ledger SET cortex_taint = 'ATTACKER_CORRUPTION' WHERE seq = 1")
         conn.commit()
         print("[⚠️] Alerta: El trigger de inmutabilidad no detuvo el UPDATE.")
-    except sqlite3.OperationalError as e:
+    except sqlite3.IntegrityError as e:
         print(f"[✅] Éxito Exergético: El motor SQLite abortó el ataque. Razón: {e}")
 
     # 2. Intento de evasión B: Manipulación física sin recalcular el hash (Romper Hash-Chain)
@@ -86,7 +86,19 @@ def verificar_y_forzar_colapso(db_path: Path):
 
 # --- SIMULACIÓN DEL ENTORNO DE FALLO ---
 async def simular_entorno():
-    db_test = Path("master_ledger.db")
+    db_test = Path("master_ledger_test.db")
+    if db_test.exists():
+        db_test.unlink()
+
+    # Inicializamos usando la ontología C5-REAL para crear tablas, triggers y el archivo físico
+    from cortex.core.lexicon import LexiconEngine
+    engine = LexiconEngine(root_dir=Path.cwd(), db_name=db_test.name)
+    await engine.initialize_c5_substrate("test:bft_simulation")
+
+    # Inyectamos un bloque válido primero
+    future = await engine.actor.submit_mutation("Valid", "Test", "This is valid", "test:valid")
+    await future
+    await engine.close()
 
     # Ejecutar la inyección maliciosa
     ejecutar_ataque_bizantino(db_test)
@@ -98,4 +110,6 @@ async def simular_entorno():
         print(f"\n[💥][MÁXIMA EXERGÍA] COLAPSO EXITOSO:\n{ex_bft}")
 
 if __name__ == "__main__":
+    import sys
+    sys.path.append(str(Path.cwd() / "1_Operaciones_Activas"))
     asyncio.run(simular_entorno())
