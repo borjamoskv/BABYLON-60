@@ -228,6 +228,7 @@ class SQLiteAppendOnlyStorage:
                     SELECT RAISE(FAIL, 'BFTCausalInvariantError: DELETE blocked on append-only ledger.');
                 END;
             """)
+        self.conn.commit()
 
     def write_envelope(self, env: C5EnrichedEnvelope):
         with self.conn:
@@ -236,6 +237,7 @@ class SQLiteAppendOnlyStorage:
                 (seq, event_id, stream, payload_json, cortex_taint, lamport_t, prev_hash, entry_hash, created_at)
                 VALUES (:seq, :event_id, :stream, :payload_json, :cortex_taint, :lamport_t, :prev_hash, :entry_hash, :created_at)
             """, env)
+        self.conn.commit()
 
     def load_all(self) -> List[C5EnrichedEnvelope]:
         self.conn.row_factory = sqlite3.Row
@@ -274,6 +276,8 @@ class LexiconLedgerActor:
 
     async def start(self):
         self.is_running = True
+        if not hasattr(self, 'queue') or self.queue is None:
+            self.queue = asyncio.Queue()
         self._loop_task = asyncio.create_task(self._processing_loop())
 
     async def stop(self):
@@ -281,11 +285,17 @@ class LexiconLedgerActor:
         if self._loop_task:
             await self.queue.put(None)
             await self._loop_task
+        if hasattr(self.storage, 'conn') and self.storage.conn:
+            try:
+                self.storage.conn.execute("PRAGMA wal_checkpoint(TRUNCATE);")
+            except Exception:
+                pass
+            self.storage.conn.close()
 
-    async def submit_mutation(self, term: str, category: str, description: str, taint: str) -> asyncio.Future:
+    async def submit_mutation(self, term: str, category: str, description: str, taint: str) -> dict:
         future = asyncio.get_running_loop().create_future()
         await self.queue.put((term, category, description, taint, future))
-        return future
+        return await future
 
     async def _processing_loop(self):
         while self.is_running:
@@ -301,12 +311,13 @@ class LexiconLedgerActor:
 
                 cursor = self.storage.conn.cursor()
                 cursor.execute("SELECT * FROM master_ledger WHERE event_id = ?", (event_id,))
-                existing = cursor.fetchone()
+                existing_row = cursor.fetchone()
 
-                if existing:
+                if existing_row:
                     self.storage.conn.row_factory = sqlite3.Row
                     cursor.execute("SELECT * FROM master_ledger WHERE event_id = ?", (event_id,))
-                    future.set_result(dict(cursor.fetchone()))
+                    row = cursor.fetchone()
+                    future.set_result(dict(row) if row else {})
                 else:
                     # Cálculo anticipado del sobre para validación criptográfica en la red
                     temp_seq = self.current_seq + 1
@@ -350,8 +361,6 @@ class LexiconLedgerActor:
 
                     # Consolidación física L2
                     self.storage.write_envelope(envelope)
-
-                    # Testigo L3 asíncrono
                     asyncio.create_task(self.sentinel.commit_entry(self.current_seq, entry_hash, taint))
                     future.set_result(envelope)
             except Exception as e:

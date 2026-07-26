@@ -7,7 +7,19 @@ Rule Compliance: Ω11 (AST / HTML syntax invariant).
 import os
 from pathlib import Path
 
-DASHBOARD_PATH = str(Path(__file__).resolve().parent.parent / "escohotado_dashboard.html")
+def _find_dashboard_path() -> str:
+    candidates = [
+        Path(__file__).resolve().parent / "escohotado_dashboard.html",
+        Path(__file__).resolve().parent.parent / "escohotado_dashboard.html",
+        Path(__file__).resolve().parents[2] / "cortex" / "escohotado_dashboard.html",
+        Path.cwd() / "cortex" / "escohotado_dashboard.html",
+    ]
+    for c in candidates:
+        if c.exists():
+            return str(c)
+    return str(candidates[0])
+
+DASHBOARD_PATH = _find_dashboard_path()
 
 def test_dashboard_file_integrity() -> None:
     assert os.path.exists(DASHBOARD_PATH)

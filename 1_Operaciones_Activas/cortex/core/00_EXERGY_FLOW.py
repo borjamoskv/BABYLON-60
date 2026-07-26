@@ -39,9 +39,9 @@ class ExergyFlowRegulator:
             # Variación neta de la anergía estocástica disipada
             da_slop_dt = 1.0 - (self.lambda_8 * liquidador_active) - archivista_reduction
 
-            if da_slop_dt > 0.5:
+            if liquidador_active == 1.0:
                 sys.stderr.write(
-                    f"\n[⚠️ ALERTA TERMODINÁMICA - Ω184] Tasa de anergía creciente: {da_slop_dt:.2f}\n"
+                    f"\n[⚠️ ALERTA TERMODINÁMICA - Ω184] Taint crítico detectado (Taint >= tau_kill).\n"
                     f"-> Activando Operador Destructor Λ8 vía truncamiento forzado.\n"
                 )
                 await self._execute_sigkill_purge()

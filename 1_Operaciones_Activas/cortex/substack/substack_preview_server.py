@@ -11,10 +11,19 @@ import http.server
 import socketserver
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-ARCHIVE_DIR = BASE_DIR / "artifacts" / "substack_archive"
-if not ARCHIVE_DIR.exists():
-    ARCHIVE_DIR = BASE_DIR.parent / "artifacts" / "substack_archive"
+def _find_archive_dir() -> Path:
+    candidates = [
+        Path(__file__).resolve().parent.parent / "artifacts" / "substack_archive",
+        Path.cwd() / "artifacts" / "substack_archive",
+        Path(__file__).resolve().parents[2] / "artifacts" / "substack_archive",
+        Path(__file__).resolve().parents[3] / "artifacts" / "substack_archive",
+    ]
+    for c in candidates:
+        if c.exists():
+            return c
+    return candidates[0]
+
+ARCHIVE_DIR = _find_archive_dir()
 
 HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="es">
