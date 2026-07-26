@@ -1,10 +1,47 @@
-"""ultrathink_scheduler.py — Async scheduler for the ULTRATHINK 10k-node swarm.
+# ultrathink_scheduler.py — Async scheduler with BFTLedgerActor and Prometheus metrics
 
-Dispatches payloads to the consensus engine with exponential backoff on failure.
+"""Scheduler for ULTRATHINK swarm.
+
+* Uses :class:`babylon60.bft.ledger_actor.BFTLedgerActor` as the single-writer
+  to guarantee Byzantine‑fault‑tolerant ordering of events.
+* Exposes Prometheus metrics on a configurable port (default 8000).
 """
+
 import asyncio
+import os
 import logging
 import time
+from pathlib import Path
+
+from prometheus_client import start_http_server, Gauge, Counter, Histogram
+
+from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
+
+# ---------------------------------------------------------------------------
+# Prometheus metrics
+# ---------------------------------------------------------------------------
+SCHEDULER_QUEUE_SIZE = Gauge(
+    "ultrathink_scheduler_queue_size",
+    "Current number of pending scheduler tasks",
+)
+LEDGER_WRITE_LATENCY_MS = Histogram(
+    "ultrathink_ledger_write_latency_ms",
+    "Latency of writes to the BFT ledger (ms)",
+)
+PROPOSALS_TOTAL = Counter(
+    "ultrathink_proposals_total",
+    "Total number of proposal attempts (including retries)",
+)
+PROPOSALS_SUCCESS = Counter(
+    "ultrathink_proposals_success",
+    "Number of proposals that eventually succeeded",
+)
+
+# ---------------------------------------------------------------------------
+# Scheduler configuration
+# ---------------------------------------------------------------------------
+MAX_RETRIES: int = 5
+BASE_BACKOFF_S: float = 0.05  # seconds, exponential back‑off base
 
 logging.basicConfig(
     level=logging.INFO,
@@ -12,49 +49,84 @@ logging.basicConfig(
 )
 log = logging.getLogger("ultrathink.scheduler")
 
-MAX_RETRIES: int = 5
-BASE_BACKOFF_S: float = 0.05
-
-
-class ConsensusEngineStub:
-    """Placeholder for the Rust consensus engine FFI bridge."""
-
-    def propose(self, payload: bytes) -> None:
-        # In production this calls into the Rust HotStuff crate via PyO3.
-        pass
-
-
-def get_consensus_engine() -> ConsensusEngineStub:
-    return ConsensusEngineStub()
-
 
 async def propose_with_backoff(
-    engine: ConsensusEngineStub,
-    payload: bytes,
+    actor: BFTLedgerActor,
+    payload: str,
     task_id: int,
 ) -> bool:
-    """Propose a payload with exponential backoff on failure."""
+    """Create a :class:`LedgerEvent` and append it to the BFT actor.
+
+    Retries on ``TimeoutError``, ``OSError`` or ``ValueError`` (invalid
+    ``cortex_taint``) according to ``MAX_RETRIES``.
+    """
     for attempt in range(1, MAX_RETRIES + 1):
         try:
-            engine.propose(payload)
+            PROPOSALS_TOTAL.inc()
+            event = LedgerEvent(
+                stream="scheduler",
+                entity_id=f"task-{task_id}",
+                event_type="CREATED",
+                payload={"data": payload},
+                cortex_taint="[CORTEX-TAINT:borjamoskv:seal:scheduler]",
+                source_db="ultrathink",
+                source_table="scheduler",
+                source_pk=str(task_id),
+            )
+            start = time.time()
+            future = actor.append(event)
+            await future
+            elapsed_ms = (time.time() - start) * 1000
+            LEDGER_WRITE_LATENCY_MS.observe(elapsed_ms)
             log.info(f"task-{task_id}: proposed successfully on attempt {attempt}")
+            PROPOSALS_SUCCESS.inc()
             return True
-        except (OSError, RuntimeError, asyncio.TimeoutError) as exc:
+        except (TimeoutError, OSError, RuntimeError, ValueError) as exc:
             wait = BASE_BACKOFF_S * (2 ** (attempt - 1))
-            log.warning(f"task-{task_id}: attempt {attempt} failed ({exc}), retrying in {wait:.3f}s")
+            log.warning(
+                f"task-{task_id}: attempt {attempt} failed ({exc}), retrying in {wait:.3f}s"
+            )
             await asyncio.sleep(wait)
     log.error(f"task-{task_id}: exhausted {MAX_RETRIES} retries")
     return False
 
 
 async def main() -> None:
-    engine = get_consensus_engine()
-    total_tasks: int = 1000
-    successes: int = 0
-    t0 = time.monotonic()
+    # -------------------------------------------------------------------
+    # Metrics server
+    # -------------------------------------------------------------------
+    metrics_port = int(os.getenv("PROMETHEUS_PORT", "8000"))
+    start_http_server(metrics_port)
+    log.info(f"Prometheus metrics exposed on :{metrics_port}/")
 
+    # -------------------------------------------------------------------
+    # BFT ledger actor setup
+    # -------------------------------------------------------------------
+    db_path = Path("ultrathink_scheduler_ledger.db")
+    actor = BFTLedgerActor(db_path)
+    await actor.start()
+
+    # -------------------------------------------------------------------
+    # Payload preparation (fallback to dummy tasks if map file missing)
+    # -------------------------------------------------------------------
+    map_file = "docs/C5_SKILLS_BRIDGES_MAP.md"
+    payloads: list[str] = []
+    if os.path.exists(map_file):
+        with open(map_file, encoding="utf-8") as f:
+            for line in f:
+                if "**" in line:
+                    vector = line.split("**")[1]
+                    payloads.append(f"EXEC_VECTOR:{vector}")
+    if not payloads:
+        log.warning("No mapped vectors found, falling back to dummy tasks.")
+        payloads = [f"task-{i}" for i in range(1000)]
+
+    total_tasks = len(payloads)
+    SCHEDULER_QUEUE_SIZE.set(total_tasks)
+
+    t0 = time.monotonic()
     tasks = [
-        propose_with_backoff(engine, f"task-{i}".encode(), i)
+        asyncio.create_task(propose_with_backoff(actor, payloads[i], i))
         for i in range(total_tasks)
     ]
     results = await asyncio.gather(*tasks)
@@ -62,7 +134,10 @@ async def main() -> None:
 
     elapsed = time.monotonic() - t0
     log.info(f"Completed: {successes}/{total_tasks} proposals in {elapsed:.3f}s")
-    log.info(f"Throughput: {successes / elapsed:.1f} proposals/s")
+    if elapsed > 0:
+        log.info(f"Throughput: {int(successes / elapsed)} proposals/s")
+
+    await actor.stop()
 
 
 if __name__ == "__main__":
