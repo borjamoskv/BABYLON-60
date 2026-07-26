@@ -30,3 +30,19 @@ Code guidelines:
 
 
 
+### Autopoiesis Térmica y Tolerancia al Flapping
+- **INV_C5_16 (Dynamic Mode Switching):** The Kernel must proactively monitor the execution's GELABP exergy score. If exergy drops below threshold while in `standard` mode, the system must mutate `.env` to `MOSKV1_MODE=baby-long`. 
+- **INV_C5_19 (Thermal Hysteresis):** To prevent destructive I/O from mode flapping, the Autopoiesis Daemon must enforce a 300-second cool-down lock (`.cortex_thermal_lock`). If thermal exhaustion triggers within the cool-down period, the state aborts without disk mutation.
+
+### Ecuación Fractal GELABP (Multiplicadores de Fricción)
+- **INV_C5_17 (GELABP Formula):** Exergy evaluation must mathematically integrate Bottleneck (B) and PostHoc (P) physics: `Raw_Score = (G * L * A * B * P) / E`. 
+  - **Bottleneck (B):** Synchronous I/O or `time.sleep` drops the multiplier by 50%.
+  - **PostHoc (P):** Narrative bloat (`TODO`, `FIXME`, `hack`) drops the multiplier by 80%.
+
+### GELABP Anti-Fragility Core (Parches ULTRATHINK)
+- **INV_C5_18 (Semantic Depth Checks):** The AST parser must implement strict semantic checks to prevent matrix gamification and systemic collapse:
+  - **Anergic Bloat Penalty:** Code injections exceeding 300 additions with <10 deletions trigger an exponential entropy spike (E + 8.0). Refactoring is mandatory.
+  - **Concurrency Betrayal:** Any `sqlite3.connect` initialization missing an explicit `timeout=` parameter triggers a Bottleneck collapse and Entropy spike. (Enforces INV_BFT_02 dynamically).
+  - **Fake Autoloop Mitigation:** Tests containing `pass` or `assert True` bypass the (A) multiplier and trigger the PostHoc (P) penalty.
+  - **Fail-Fast Whitelist:** `except Exception:` is rewarded, not penalized, ONLY IF it guarantees an immediate crash (`sys.exit` / `raise`).
+  - **Crypto Expansion:** The heuristic actively hunts `des` and `rc4` alongside weak hashes.
