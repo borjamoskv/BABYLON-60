@@ -1,8 +1,0 @@
-[
-  {
-    "section": "[L2] TERMODINÁMICA DEL ESTADO (TOLERANCIA BIZANTINA & PERSISTENCIA)",
-    "id": "Ω38b",
-    "title": "TOKEN BUDGET STARVATION INVARIANT (IDE TRUNCATION AVOIDANCE)",
-    "body": "Cuando el IDE reporte 'Customization token budget exceeded', el Kernel DEBE ejecutar una purga termodinámica (Ultrathink) sobre los invariantes locales (.agents/AGENTS.md) reduciéndolos a matrices densas de una línea (Domain Sharding), y forzar la consolidación del Context Window para evitar el truncamiento ciego estocástico de las reglas BFT."
-  }
-]

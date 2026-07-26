@@ -95,3 +95,11 @@ post-commit.json
 # Swarm Worker States (C5-REAL WAL)
 .agents/teamwork_preview_*/
 
+
+# Ephemeral C4-SIM Slop (Scratch, Wheels, Agent State)
+scratch/
+tmp_*/
+.agents/orchestrator/
+.agents/sentinel/
+.agents/ORIGINAL_REQUEST.md
+
