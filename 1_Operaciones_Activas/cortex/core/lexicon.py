@@ -76,9 +76,10 @@ class GitSentinel:
     """Automatiza el no-repudio atómico mediante commits firmados localmente (Nivel L3)."""
     __slots__ = ("repo_path", "lock")
 
-    def __init__(self, repo_path: Path):
+    def __init__(self, repo_path: Path, push_enabled: bool = False):
         self.repo_path = repo_path
         self.lock = asyncio.Lock()
+        self.push_enabled = push_enabled
 
     async def commit_entry(self, seq: int, entry_hash: str, taint: str) -> bool:
         """Captura el rastro causal y el hash SHA3 dentro del árbol de Git de forma asíncrona."""
@@ -194,7 +195,8 @@ class BM25Engine:
 class SQLiteAppendOnlyStorage:
     def __init__(self, db_path: Path):
         self.db_path = db_path
-        self.conn = sqlite3.connect(self.db_path)
+        # INV_BFT_02: Timeout explícito para evitar deadlocks termodinámicos
+        self.conn = sqlite3.connect(self.db_path, timeout=5.0)
         self._init_db()
 
     def _init_db(self):
