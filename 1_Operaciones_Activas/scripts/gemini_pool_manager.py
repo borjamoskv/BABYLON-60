@@ -135,12 +135,15 @@ class GeminiProPoolManager:
             if slot.is_available:
                 return slot
 
-        raise EpistemicPoolHalt("Todas las cuentas de Gemini Pro están saturadas en Cooldown (429 Rate Limit).")
+        # Si todas están en cooldown, esperar el tiempo de cooldown mínimo
+        min_cooldown = min(max(0.0, s.cooldown_until - time.time()) for s in self.slots)
+        time.sleep(min_cooldown + 0.5)
+        return self.slots[0]
 
-    def dispatch_generate_content(self, prompt: str, model: str = "gemini-1.5-pro") -> str:
+    def dispatch_generate_content(self, prompt: str, model: str = "gemini-2.0-flash") -> str:
         """Dispara una inferencia rotando entre las cuentas disponibles con tolerancia BFT."""
         attempts = 0
-        max_attempts = len(self.slots) if self.slots else 1
+        max_attempts = 10
 
         last_error: Optional[Exception] = None
         start_time = time.perf_counter()
@@ -160,7 +163,7 @@ class GeminiProPoolManager:
             )
 
             try:
-                with urllib.request.urlopen(req, timeout=12) as response:
+                with urllib.request.urlopen(req, timeout=15) as response:
                     data = json.loads(response.read().decode("utf-8"))
                     candidates = data.get("candidates", [])
                     if candidates and "content" in candidates[0]:
@@ -173,24 +176,26 @@ class GeminiProPoolManager:
                     return ""
             except urllib.error.HTTPError as e:
                 if e.code == 429 or e.code == 503:
-                    # Enfriar esta cuenta con Backoff Exponencial
-                    slot.set_cooldown(60.0)
-                    last_error = e
                     attempts += 1
+                    sleep_time = min(2.0 ** attempts, 15.0)
+                    slot.set_cooldown(sleep_time)
+                    last_error = e
+                    time.sleep(sleep_time)
                     continue
                 else:
                     self.telemetry.record(slot.api_key[:8], False, time.perf_counter() - start_time)
                     raise EpistemicPoolHalt(f"HTTPError Gemini API [{e.code}]: {e.reason}")
             except (urllib.error.URLError, TimeoutError, OSError) as e:
-                slot.set_cooldown(15.0)
-                last_error = e
                 attempts += 1
+                slot.set_cooldown(3.0)
+                last_error = e
+                time.sleep(2.0)
                 continue
 
         self.telemetry.record("pool_exhausted", False, time.perf_counter() - start_time)
         raise EpistemicPoolHalt(f"Agotadas todas las cuentas ({max_attempts}) del pool Gemini Pro. Error: {last_error}")
 
-    async def adispatch_generate_content(self, prompt: str, model: str = "gemini-1.5-pro") -> str:
+    async def adispatch_generate_content(self, prompt: str, model: str = "gemini-2.0-flash") -> str:
         """Versión asíncrona no bloqueante de dispatch_generate_content (Ω45/Ω27)."""
         import asyncio
 

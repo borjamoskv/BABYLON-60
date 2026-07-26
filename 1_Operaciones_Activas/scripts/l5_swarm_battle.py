@@ -1,7 +1,7 @@
 # C5-REAL EXERGY CERTIFIED
 """
-MOSKV Swarm Battle System: l5_swarm_battle.py (C5-REAL Certified v2.0 - Multi-Oracle Mesh)
-------------------------------------------------------------------------------------------
+MOSKV Swarm Battle System: l5_swarm_battle.py (C5-REAL Certified v2.5 - Zero-Anergy Production Execution)
+---------------------------------------------------------------------------------------------------------
 Orquesta una batalla competitiva de modelos utilizando subagentes concurrentes y oráculos de red.
 El Juez Central evalúa las propuestas bajo criterios estrictos de Exergía y
 Tolerancia a Fallos Bizantinos (BFT), ejecutando únicamente la aproximación óptima.
@@ -15,15 +15,13 @@ import asyncio
 import json
 import hashlib
 import time
+import urllib.request
+import urllib.error
 import importlib.util
 from pathlib import Path
 from datetime import datetime, timezone
 from typing import Dict, List, Tuple, Optional
 import nacl.signing
-
-# Componentes nativos del ecosistema de IA de Google
-from google import antigravity
-from google.antigravity import types
 
 # Carga dinámica de 00_HAL_GUARD.py, 01_L5_ANCHOR.py y 52_OR_BFT_NODE.py desde ROOT_SCRIPTS
 ROOT_SCRIPTS = Path(__file__).resolve().parent.parent.parent / "scripts"
@@ -43,11 +41,16 @@ or_mod = importlib.util.module_from_spec(spec_or)
 spec_or.loader.exec_module(or_mod)
 OpenRouterBFTNode = or_mod.OpenRouterBFTNode
 
+spec_pool = importlib.util.spec_from_file_location("gemini_pool_manager", str(ROOT_SCRIPTS / "gemini_pool_manager.py"))
+pool_mod = importlib.util.module_from_spec(spec_pool)
+spec_pool.loader.exec_module(pool_mod)
+GeminiProPoolManager = pool_mod.GeminiProPoolManager
+
 # Directivas de contención filosófica para la matriz de modelos
 PHILOSOPHIES = {
     "WORKER_ALPHA_SONNET_MIMIC": {
         "model": "anthropic/claude-3.5-sonnet",
-        "fallback_model": "gemini-1.5-pro",
+        "gemini_model": "gemini-2.0-flash",
         "directive": (
             "Actúa como un ingeniero de software de ultra-alta rigidez sintáctica. "
             "Tu objetivo es proponer código con el menor número de saltos de CPU, tipado estricto "
@@ -56,7 +59,7 @@ PHILOSOPHIES = {
     },
     "WORKER_BETA_LLAMA_MIMIC": {
         "model": "meta-llama/llama-3.1-70b-instruct",
-        "fallback_model": "gemini-1.5-flash",
+        "gemini_model": "gemini-2.0-flash",
         "directive": (
             "Actúa como un arquitecto de sistemas enfocado en resiliencia de contorno y tolerancia a fallos. "
             "Tu propuesta debe incluir validación defensiva estricta, aislamiento de excepciones (try-except) "
@@ -64,8 +67,8 @@ PHILOSOPHIES = {
         )
     },
     "WORKER_GAMMA_GEMINI_MIMIC": {
-        "model": "google/gemini-1.5-pro",
-        "fallback_model": "gemini-1.5-flash",
+        "model": "google/gemini-2.0-flash",
+        "gemini_model": "gemini-2.0-flash",
         "directive": (
             "Actúa como un transductor determinista de alta compresión. Tu enfoque es la densidad informativa: "
             "escribe la solución utilizando la menor cantidad de líneas posibles y funciones estáticas de la biblioteca "
@@ -75,20 +78,15 @@ PHILOSOPHIES = {
 }
 
 class SwarmBattleJudge:
-    """Juez de Consenso MOSKV v2.0. Controla la matriz heterogénea de modelos y ancla veredictos en L5."""
-    __slots__ = ("client", "db_path", "lock", "hal_guard", "l5_engine", "task_id", "openrouter_key")
+    """Juez de Consenso MOSKV v2.5. Controla la matriz heterogénea de modelos y ancla veredictos en L5."""
+    __slots__ = ("db_path", "lock", "hal_guard", "l5_engine", "task_id", "openrouter_key", "pool_manager")
 
     def __init__(self, db_path: Path):
         self.db_path = db_path
         self.lock = asyncio.Lock()
         self.task_id = f"SWARM_{int(datetime.now(timezone.utc).timestamp())}"
         self.openrouter_key = os.environ.get("OPENROUTER_API_KEY", "")
-
-        # Cliente nativo Antigravity con capacidades de delegación activadas
-        config = antigravity.LocalAgentConfig(
-            capabilities=types.CapabilitiesConfig(enable_subagents=True)
-        )
-        self.client = antigravity.Client(config=config)
+        self.pool_manager = GeminiProPoolManager()
 
         # Escudo de contención de alucinaciones (HAL GUARD)
         judge_sk = nacl.signing.SigningKey.generate()
@@ -99,11 +97,11 @@ class SwarmBattleJudge:
 
     async def execute_battle(self, operator_task: str) -> str:
         """Dispara la malla distribuida de trabajadores en paralelo y dicta sentencia por consenso exergético."""
-        sys.stdout.write(f"\n[⚔️ SWARM BATTLE v2.0] Inicializando arena para la tarea: '{operator_task}'\n")
+        sys.stdout.write(f"\n[⚔️ SWARM BATTLE v2.5] Inicializando arena para la tarea: '{operator_task}'\n")
 
         # Invocación paralela de los nodos trabajadores
         tasks = [
-            self._invoke_worker(name, config["directive"], config["model"], config["fallback_model"], operator_task)
+            self._invoke_worker(name, config["directive"], config["model"], config["gemini_model"], operator_task)
             for name, config in PHILOSOPHIES.items()
         ]
 
@@ -122,14 +120,8 @@ class SwarmBattleJudge:
             "solución final refinada y unificada. Para confirmar finalización en el ledger, usa la frase 'Successfully executed'."
         )
 
-        # Inferencia del Juez mediante cliente Antigravity nativo
-        response = await self.client.generate_content(
-            model="gemini-1.5-pro",
-            contents=decision_prompt,
-            temperature=0.0
-        )
-
-        final_text = response.text
+        # Inferencia del Juez mediante Gemini Pool Manager
+        final_text = await self.pool_manager.adispatch_generate_content(prompt=decision_prompt, model="gemini-2.0-flash")
 
         # 1. Auditoría HAL_GUARD ante alucinación o Green Theater
         try:
@@ -146,9 +138,9 @@ class SwarmBattleJudge:
 
         return final_text
 
-    async def _invoke_worker(self, name: str, directive: str, model_endpoint: str, fallback_model: str, task: str) -> str:
-        """Invoca un trabajador de la malla utilizando OpenRouter TCP socket o el SDK nativo."""
-        sys.stdout.write(f"[⚙️ worker] Desplegando {name} en modelo {model_endpoint}...\n")
+    async def _invoke_worker(self, name: str, directive: str, model_endpoint: str, gemini_model: str, task: str) -> str:
+        """Invoca un trabajador de la malla utilizando OpenRouter TCP socket o Gemini Pool Manager."""
+        sys.stdout.write(f"[⚙️ worker] Desplegando {name}...\n")
         t0 = time.perf_counter()
 
         # Generar par de claves Ed25519 para el sobre del trabajador (INV_C5_10)
@@ -159,21 +151,19 @@ class SwarmBattleJudge:
 
         # Intentar llamada por OpenRouter TCP Socket si la clave está disponible
         if self.openrouter_key:
-            node = OpenRouterBFTNode(name, model_endpoint, self.openrouter_key, timeout_ms=8000)
-            raw_output = await node.query_oracle(directive, task)
+            try:
+                node = OpenRouterBFTNode(name, model_endpoint, self.openrouter_key, timeout_ms=8000)
+                raw_output = await node.query_oracle(directive, task)
+            except Exception:
+                raw_output = None
 
-        # Fallback autónomo a SDK Antigravity si no hay respuesta o falla OpenRouter
+        # Fallback autónomo a Gemini Pool Manager si no hay respuesta de OpenRouter
         if not raw_output:
-            sys.stdout.write(f"[⚙️ fallback] Ruteando {name} al SDK nativo ({fallback_model})...\n")
-            response = await self.client.generate_content(
-                model=fallback_model,
-                contents=worker_prompt,
-                temperature=0.2
-            )
-            raw_output = response.text
+            sys.stdout.write(f"[⚙️ fallback] Ruteando {name} a Gemini Pool ({gemini_model})...\n")
+            raw_output = await self.pool_manager.adispatch_generate_content(prompt=worker_prompt, model=gemini_model)
 
         dt_ms = (time.perf_counter() - t0) * 1000
-        # Serialización segura Ed25519 sin tocar atributos privados
+        # Serialización segura Ed25519 (INV_C5_10) sin acceder a variables privadas
         sig_bytes = worker_sk.sign(raw_output.encode('utf-8')).signature
         sig_hex = sig_bytes.hex()
 

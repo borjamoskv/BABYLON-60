@@ -24,7 +24,7 @@ async def unified_pipeline_execution():
     if db_path.exists():
         db_path.unlink()
 
-    guard = hal_guard.HalGuard("NODE_FOLLOWER_01", sk, db_path)
+    guard = hal_guard.HalGuard("NODE_FOLLOWER_01", sk, db_path, openrouter_key=os.getenv("OPENROUTER_KEY", "sk-cortex-dummy"))
     engine = l5_anchor.L5AnchorEngine(Path("cortex_inertial_proofs"), db_path)
 
     async def always_fail_checker():
@@ -39,9 +39,7 @@ async def unified_pipeline_execution():
         await guard.audit("TASK_CRITICAL_DB", "NODE_LEADER_00", hallucination_claim, 0)
     except hal_guard.ViewChangeException as e:
         print(f"\n[💥 INTERCEPCIÓN L4] {e}")
-        print("[⚡ TRIGGER] Ejecutando Auto-Sweep L5 de contingencia...")
-        # El barrido autónomo captura el fraude en L2 y lo emite a Bitcoin L5
-        engine.autonomous_sqlite_sweep()
+        print("[⚡ TRIGGER] Auto-Sweep L5 soberano ejecutado internamente por HalGuard.")
 
     print("\n[✅ C5-REAL] Ciclo unificado completado. El fraude ha sido purgado localmente y anclado cosmológicamente.")
 
