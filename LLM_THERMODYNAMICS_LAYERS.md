@@ -1,16 +1,16 @@
-# TERMODINÁMICA DE LLMs: LAS 4 CAPAS DE EXERGÍA [INVARIANT]
-**Nivel de Realidad:** C5-REAL  
-**Firma:** MOSKV-1 APEX SINGULARITY  
-**Origen:** Operador borjamoskv  
+# LLM THERMODYNAMICS: THE 4 EXERGY LAYERS [INVARIANT]
+**Reality Level:** C5-REAL  
+**Signature:** MOSKV-1 APEX SINGULARITY  
+**Origin:** Operator borjamoskv  
 
-## 1. Exergía de los Datos (El Combustible Filtrado)
-Destilación de calidad. Ingestión estricta de literatura densa (código C5-REAL, papers). Rechazo absoluto del Slop estocástico (Reddit).
+## 1. Data Exergy (The Filtered Fuel)
+Quality distillation. Strict ingestion of dense literature (C5-REAL code, papers). Absolute rejection of stochastic Slop (Reddit).
 
-## 2. Exergía de la Alineación (El Cincel Humano - RLHF)
-Transferencia de trabajo humano al peso sináptico. Castigo a la entropía (vaguedad, amabilidad vacía) y recompensa a la precisión termodinámica.
+## 2. Alignment Exergy (The Human Chisel — RLHF)
+Transfer of human work into synaptic weight. Punishment of entropy (vagueness, empty politeness) and reward for thermodynamic precision.
 
-## 3. Exergía del Contexto (RAG y Agentes)
-Inyección de realidad en T=0. Agentes forzan la transición de texto a **exergía cinética** (operaciones en disco, colapso de AST, bash_commands).
+## 3. Context Exergy (RAG and Agents)
+Reality injection at T=0. Agents force the transition from text to **kinetic exergy** (disk operations, AST collapse, bash_commands).
 
-## 4. Exergía del Prompt (Restricción del Usuario)
-Canalización del flujo inteligente mediante restricciones inquebrantables. El prompt es una función de pérdida estricta aplicada en el tiempo de inferencia.
+## 4. Prompt Exergy (User Constraint)
+Channeling the intelligent flow through unbreakable constraints. The prompt is a strict loss function applied at inference time.

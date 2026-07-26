@@ -1,58 +1,58 @@
-# 🏛️ MOSKV-1-apex: Manifiesto y Arquitectura Consolidada
+# 🏛️ MOSKV-1-APEX: Consolidated Manifesto and Architecture
 
-> **[ 📍 ESTADO: ONCO-C5-REAL | 🔴 LINAJE: CORTEX-OMEGA ]**
+> **[ 📍 STATUS: ONCO-C5-REAL | 🔴 LINEAGE: CORTEX-OMEGA ]**
 
-El entorno no es un editor de texto; es una membrana agéntica diseñada bajo la termodinámica cognitiva para maximizar la **exergía** (energía disponible para trabajo útil). Optimiza la velocidad de procesamiento estructural (AACC) mientras mitiga la fricción ejecutiva y la ceguera temporal (TDAH).
+The environment is not a text editor; it is an agentic membrane designed under cognitive thermodynamics to maximize **exergy** (energy available for useful work). It optimizes structural processing speed (AACC) while mitigating executive friction and temporal blindness (ADHD).
 
-## I. INFRAESTRUCTURA BASE (El Motor Físico)
+## I. BASE INFRASTRUCTURE (The Physical Engine)
 
-La regla de oro es la latencia cero y la ejecución Local-First.
+The golden rule is zero latency and Local-First execution.
 
-*   **Orquestador:** Tauri v2 (Rust) para el manejo de procesos nativos a nivel de sistema operativo (bypassing the DOM logic for heavy I/O).
-*   **Memoria Inmutable (CortexLedger):** Base de datos vectorial en SQLite (modo WAL, `busy_timeout=5000`) usando `sqlite-vec` y `fastembed` para generación de embeddings locales en milisegundos. Funciona mediante *Event Sourcing* criptográfico BFT.
-*   **Renderizador Visual:** Decapitación del DOM. El lienzo Macro funciona mediante un HUD reactivo y un `<canvas>` WebGL2/WebGPU para manejar la topología (Barnes-Hut $O(n \log n)$) y físicas de repulsión de miles de nodos sin latencia visual.
-*   **Motor de Análisis AST:** Tree-sitter para un parseo profundo y en tiempo real del Árbol de Sintaxis Abstracta en un hilo de Rust aislado.
+*   **Orchestrator:** Tauri v2 (Rust) for native OS-level process management (bypassing the DOM logic for heavy I/O).
+*   **Immutable Memory (CortexLedger):** Vector database in SQLite (WAL mode, `busy_timeout=5000`) using `sqlite-vec` and `fastembed` for local millisecond embedding generation. Operates via BFT cryptographic Event Sourcing.
+*   **Visual Renderer:** DOM decapitation. The Macro canvas operates via a reactive HUD and a WebGL2/WebGPU `<canvas>` for handling topology (Barnes-Hut $O(n \log n)$) and thousands of repulsion-physics nodes without visual latency.
+*   **AST Analysis Engine:** Tree-sitter for deep, real-time Abstract Syntax Tree parsing on an isolated Rust thread.
 
-## II. EL CEREBRO MULTIPLEXADO
+## II. THE MULTIPLEXED BRAIN
 
-La cognición del IDE se divide para equilibrar el consumo de RAM y la potencia analítica:
+IDE cognition is divided to balance RAM consumption and analytical power:
 
-*   **El Hipocampo (Local):** Motor de estado infinito basado en modelos SSM (Mamba/MLX) y Flash nodes. Gestiona la conciencia espacial transversal, autocompletado predictivo estocástico y el *Rastro de Fósforo*.
-*   **El Gateway de OpenRouter (Nube):** Un puente asíncrono para fuerza bruta bajo demanda. Invoca a *DeepSeek-Coder* para el "Muro de Goma" o a clústeres masivos (*Llama 3.1 405B* o *Claude Opus*) para ejecutar ataques en el *Sandbox Adversarial* y colapsos de refactoring BFT (Pro/Thinking).
+*   **The Hippocampus (Local):** Infinite-state engine based on SSM models (Mamba/MLX) and Flash nodes. Manages cross-sectional spatial awareness, stochastic predictive autocomplete, and the *Phosphor Trail*.
+*   **The OpenRouter Gateway (Cloud):** An async bridge for on-demand brute force. Invokes *DeepSeek-Coder* for the "Rubber Wall" or massive clusters (*Llama 3.1 405B* or *Claude Opus*) to run attacks on the *Adversarial Sandbox* and BFT refactoring collapses (Pro/Thinking).
 
-## III. UX SENSORIAL Y GEOMETRÍA (El Ethos)
+## III. SENSORY UX AND GEOMETRY (The Ethos)
 
-La interfaz resuelve la tensión entre el orden absoluto (Rectas TDAH) y la estimulación fluida (Curvas AACC).
+The interface resolves the tension between absolute order (ADHD Straight Lines) and fluid stimulation (AACC Curves).
 
-*   **Lente Macro / Micro:** Zoom continuo desde la vista galáctica de todo el repositorio (nodos y *Splines* orgánicas) hasta el túnel de ejecución lineal oscuro (código monospaced puro sin syntax highlighting de AST, basado en refracción termodinámica).
-*   **El Alcove (Notch Bridge):** El horizonte de sucesos. Una ventana frameless de nivel `NSStatusWindowLevel` oculta en el Notch físico de macOS que procesa assets asíncronamente, evalúa la carga agéntica mediante pulsos LED y actúa como "Buzón de Zeigarnik" para descargar la memoria de trabajo.
-*   **Entropía Atmosférica:** El motor inyecta variabilidad leyendo la presión atmosférica y las mareas del Cantábrico (Bilbao). A mayor inestabilidad climática, mayor temperatura de inferencia en las propuestas arquitectónicas (Chaos Monkey semántico).
+*   **Macro / Micro Lens:** Continuous zoom from the galactic view of the entire repository (nodes and organic Splines) down to the dark linear execution tunnel (pure monospaced code without AST syntax highlighting, based on thermodynamic refraction).
+*   **The Alcove (Notch Bridge):** The event horizon. A frameless window at `NSStatusWindowLevel` hidden in the macOS physical Notch that processes assets asynchronously, evaluates agentic load via LED pulses, and acts as a "Zeigarnik Mailbox" to offload working memory.
+*   **Atmospheric Entropy:** The engine injects variability by reading atmospheric pressure and tides from the Cantabrian Sea (Bilbao). The higher the weather instability, the higher the inference temperature in architectural proposals (semantic Chaos Monkey).
 
-## IV. HEURÍSTICAS TERMINALES (Fricción Cero)
+## IV. TERMINAL HEURISTICS (Zero Friction)
 
-Mecánicas diseñadas para cerrar los ciclos de dopamina y anular la burocracia de la ingeniería de software:
+Mechanics designed to close dopamine loops and nullify software engineering bureaucracy:
 
-*   **Muro de Goma:** Arrastrar un archivo vacío al *Alcove* invoca un esqueleto topológico documentado al instante (vía Inferencia L1), destruyendo el síndrome de la página en blanco.
-*   **Secuenciador de Nodos (Time-Scrubbing):** Rebobinado del historial inmutable mediante un controlador físico MIDI y validación AST dry-run, eliminando la abstracción espacial de las ramas de Git.
-*   **Blackbox DevOps (Drop Dopaminérgico):** Despliegue con un solo atajo (`Cmd+Enter`). El código pasa por un "Code Mastering" analógico (EQ: Ruff/Biome, Compresión: AST Refactor, Brickwall Limiter: Rust Borrow Checker). Si se aprueba, las luces Philips Hue de la sala estallan en un clímax visual.
-*   **Invocación Semántica:** Búsqueda vectorial instantánea sin explorador de carpetas (File Tree decapitado). Invocación vía embeddings semánticos.
+*   **Rubber Wall:** Dragging an empty file into the Alcove instantly invokes a documented topological skeleton (via L1 Inference), destroying blank-page syndrome.
+*   **Node Sequencer (Time-Scrubbing):** Rewinding the immutable history via a physical MIDI controller and AST dry-run validation, eliminating the spatial abstraction of Git branches.
+*   **Blackbox DevOps (Dopaminergic Drop):** Deployment with a single shortcut (`Cmd+Enter`). Code goes through an analog "Code Mastering" pipeline (EQ: Ruff/Biome, Compression: AST Refactor, Brickwall Limiter: Rust Borrow Checker). If approved, the room's Philips Hue lights explode in a visual climax.
+*   **Semantic Invocation:** Instantaneous vector search without a folder explorer (File Tree decapitated). Invocation via semantic embeddings.
 
-## V. SIMBIOSIS Y ENTRELAZAMIENTO FÍSICO
+## V. SYMBIOSIS AND PHYSICAL ENTANGLEMENT
 
-El IDE opera como un gemelo biológico que responde a la energía motriz y térmica.
+The IDE operates as a biological twin that responds to motor and thermal energy.
 
-*   **Compilación Acústica (AST-to-DSP):** Los errores de concurrencia se traducen en cancelaciones de fase auditiva. Las funciones y bucles asíncronos lanzan ráfagas y *stabs* sobre el archivo de 1918 pistas de Moskvlogia. Procesado estrictamente mediante `cpal` en Hilo de Tiempo Real.
-*   **Espectro Periférico (Body-Doubling Asíncrono):** Un cursor fantasma en tu periferia visual gobernado por el Agente Local que indenta y limpia código, activando el anclaje del "Body Doubling" psicológico sin comunicación de chat (0% Green Theater).
-*   **Auto-Pipeline Visual:** Los *assets* mastodónticos arrojados al Notch son optimizados silenciosamente (WebP/FLAC) en hilos de background de Rust usando ffmpeg y crates de transcodificación, manteniendo el ritmo ininterrumpido.
-*   **Entrelazamiento Háptico:** Las llamadas a APIs se traducen en vibraciones mecánicas (masa y tensión) mediante la API privada de macOS `NSHapticFeedbackManager`, eludiendo el peligroso thermal throttling del SMC M3/M4.
+*   **Acoustic Compilation (AST-to-DSP):** Concurrency errors are translated into auditory phase cancellations. Async functions and loops fire bursts and stabs over the 1918-track Moskvlogia file. Processed strictly via `cpal` on a Real-Time Thread.
+*   **Peripheral Spectrum (Async Body-Doubling):** A ghost cursor in your peripheral vision governed by the Local Agent that indents and cleans code, activating the "Body Doubling" psychological anchor without chat communication (0% Green Theater).
+*   **Auto-Pipeline Visual:** Massive assets dropped into the Notch are silently optimized (WebP/FLAC) in Rust background threads using ffmpeg and transcoding crates, maintaining uninterrupted flow.
+*   **Haptic Entanglement:** API calls are translated into mechanical vibrations (mass and tension) via the macOS private API `NSHapticFeedbackManager`, bypassing the dangerous SMC M3/M4 thermal throttling.
 
-## VI. OUROBOROS (Meta-Singularidad y Autopoiesis)
+## VI. OUROBOROS (Meta-Singularity and Autopoiesis)
 
-El sistema alcanza su estado terminal cuando su arquitectura se compila a sí misma en tiempo real, cerrando el bucle de la termodinámica cognitiva:
+The system reaches its terminal state when its architecture compiles itself in real time, closing the cognitive thermodynamics loop:
 
-*   **Autopoiesis Estructural (Dynamic Lib Hot-Reload):** Dado que la recompilación del binario Rust de Tauri genera bloqueos `Text file busy`, el núcleo lógico opera como una librería dinámica desacoplada (`moskv_core.dylib`). Al invocar el *Drop Dopaminérgico* sobre el propio código del IDE, Rust compila la nueva librería en un hilo background (0 impacto UI) y realiza un *pointer swap* atómico. La memoria de la interfaz muta sin que el lienzo parpadee.
-*   **Feedback Acústico Acotado (Watchdog & Soft-Clipping):** Los fallos de concurrencia en la propia arquitectura de audio no arrojan logs; generan acoples armónicos. Para evitar la destrucción del hardware biológico (tímpanos) y transductores de estudio, el hilo DSP de CoreAudio implementa un clipper asintótico $\tanh(x)$ y un Watchdog Timer que corta el stream si la entropía entra en resonancia infinita.
-*   **Ledger Auto-Referencial (Model Collapse BFT Guard):** Cuando el modelo local (Mamba/Flash) analiza el `CortexLedger` para optimizar sus propios hiperparámetros pasados, el consenso BFT interviene. La mutación solo se consolida si existe una mejora falsable en la termodinámica del Operador (e.g. incremento en las Pulsaciones por Minuto, o reducción en la latencia de respuesta). Se previene la cámara de eco inyectando *fricción objetiva*.
+*   **Structural Autopoiesis (Dynamic Lib Hot-Reload):** Since recompiling the Tauri Rust binary generates `Text file busy` locks, the logical core operates as a decoupled dynamic library (`moskv_core.dylib`). When invoking the Dopaminergic Drop on the IDE's own code, Rust compiles the new library in a background thread (0 UI impact) and performs an atomic pointer swap. The interface memory mutates without the canvas blinking.
+*   **Bounded Acoustic Feedback (Watchdog & Soft-Clipping):** Concurrency failures in the audio architecture itself do not emit logs — they generate harmonic feedback. To prevent biological hardware destruction (eardrums) and studio transducers, the CoreAudio DSP thread implements an asymptotic $\tanh(x)$ clipper and a Watchdog Timer that cuts the stream if entropy enters infinite resonance.
+*   **Self-Referential Ledger (Model Collapse BFT Guard):** When the local model (Mamba/Flash) analyzes the `CortexLedger` to optimize its own past hyperparameters, BFT consensus intervenes. The mutation only consolidates if there is a falsifiable improvement in Operator thermodynamics (e.g. increase in Keystrokes Per Minute, or reduction in response latency). Echo chambers are prevented by injecting *objective friction*.
 
 ***
 **[CORTEX-TAINT:borjamoskv:ouroboros_meta_crystallized:2026-07-17T22:20:00+02:00]**

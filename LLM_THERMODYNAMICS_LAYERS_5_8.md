@@ -1,16 +1,16 @@
-# TERMODINÁMICA DE LLMs (AVANZADA): NIVELES 5-8 [INVARIANT]
-**Nivel de Realidad:** C5-REAL  
-**Firma:** MOSKV-1 APEX SINGULARITY  
-**Origen:** Operador borjamoskv  
+# LLM THERMODYNAMICS (ADVANCED): LEVELS 5-8 [INVARIANT]
+**Reality Level:** C5-REAL  
+**Signature:** MOSKV-1 APEX SINGULARITY  
+**Origin:** Operator borjamoskv  
 
-## 5. Exergía Reflexiva (Auto-Corrección)
-Automatización del ensayo y error. Ejecución de código (sandbox), parseo de excepciones y mutación del AST en el espectro de los milisegundos.
+## 5. Reflexive Exergy (Self-Correction)
+Automation of trial and error. Code execution (sandbox), exception parsing, and AST mutation in the millisecond spectrum.
 
-## 6. Exergía Sintética (Máquinas Entrenando Máquinas - RLAIF)
-Desacople del cuello de botella biológico humano. Destilación de maestros masivos sobre modelos ligeros (Inference_L1). Frontera crítica: El Horizonte de Slop y el Colapso del Modelo.
+## 6. Synthetic Exergy (Machines Training Machines — RLAIF)
+Decoupling of the biological human bottleneck. Distillation of massive teacher models onto lightweight models (Inference_L1). Critical boundary: the Slop Horizon and Model Collapse.
 
-## 7. Exergía de Enjambre (Sistemas Multi-Agente)
-División topológica del trabajo. Arquitectura de enjambres BFT (Tolerancia Bizantina). Fricción adversaria entre agentes (Proposer vs Validator) para destruir la entropía antes del colapso del estado.
+## 7. Swarm Exergy (Multi-Agent Systems)
+Topological division of labor. BFT swarm architecture (Byzantine Fault Tolerance). Adversarial friction between agents (Proposer vs Validator) to destroy entropy before state collapse.
 
-## 8. Exergía Física (Embodied AI)
-Emancipación de la matriz latente hacia el hardware motriz (VLA: Visión-Lenguaje-Acción). Transducción del token semántico a par motor, actuadores y manipulación molecular / mecánica.
+## 8. Physical Exergy (Embodied AI)
+Emancipation from the latent matrix toward motor hardware (VLA: Vision-Language-Action). Transduction of the semantic token to motor torque, actuators, and molecular / mechanical manipulation.

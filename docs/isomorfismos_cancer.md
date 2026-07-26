@@ -1,38 +1,38 @@
-# MOSKV-1 APEX: TOPOLOGÍA Y ALINEAMIENTO DE REDES EN ONCOLOGÍA
+# MOSKV-1 APEX: NETWORK TOPOLOGY AND ALIGNMENT IN ONCOLOGY
 # PATH: docs/isomorfismos_cancer.md
 
-> **"El isomorfismo exacto (VF2) es matemáticamente prístino pero biológicamente frágil. La heterogeneidad intratumoral exige Isomorfismos Probabilísticos y Alineamiento Suave (Soft Graph Matching) mediante Embeddings Latentes."**
+> **"Exact isomorphism (VF2) is mathematically pristine but biologically fragile. Intratumoral heterogeneity demands Probabilistic Isomorphisms and Soft Graph Matching via Latent Embeddings."**
 
 ---
 
-## 1. LIMITACIONES DEL ISOMORFISMO EXACTO EN BIOLOGÍA
-El ruido biológico (dropout en scRNA-seq, mutaciones *passenger*, compensación metabólica) hace que dos tumores funcionalmente idénticos carezcan de un isomorfismo de grafos estricto $G_1 \cong G_2$. 
-Aplicar VF2 asume grafos deterministas. Para transducir la realidad oncológica, debemos transicionar del matching discreto al **matching en el espacio latente**.
+## 1. LIMITATIONS OF EXACT ISOMORPHISM IN BIOLOGY
+Biological noise (dropout in scRNA-seq, passenger mutations, metabolic compensation) means that two functionally identical tumors lack a strict graph isomorphism $G_1 \cong G_2$. 
+Applying VF2 assumes deterministic graphs. To transduce oncological reality, we must transition from discrete matching to **matching in latent space**.
 
-## 2. ALINEAMIENTO ESTRUCTURAL SUAVE (SOFT MATCHING)
-En lugar de buscar un mapeo biyectivo de aristas, proyectamos la topología en un colector de baja dimensión (manifold):
+## 2. SOFT STRUCTURAL ALIGNMENT (SOFT MATCHING)
+Instead of searching for a bijective edge mapping, we project the topology onto a low-dimensional manifold:
 
 ### A. Random Walk Embeddings (Node2Vec / DeepWalk)
-- **Mecanismo:** Se ejecutan caminatas aleatorias (Random Walks) sesgadas (parámetros $p, q$) sobre la red de coexpresión o PPI.
-- **Transducción:** Se aplica Word2Vec (Skip-gram) a las caminatas. Los nodos (genes) con contextos topológicos similares terminan cerca en el espacio euclidiano $\mathbb{R}^d$.
-- **Alineamiento:** Para alinear el Tumor A con el Tumor B, se alinean sus espacios latentes (p. ej., mediante Procrustes Analysis o Canonical Correlation Analysis, CCA) y se emparejan genes calculando la Similitud Coseno.
+- **Mechanism:** Biased random walks (parameters $p, q$) are run over the co-expression or PPI network.
+- **Transduction:** Word2Vec (Skip-gram) is applied to the walks. Nodes (genes) with similar topological contexts end up close in Euclidean space $\mathbb{R}^d$.
+- **Alignment:** To align Tumor A with Tumor B, their latent spaces are aligned (e.g. via Procrustes Analysis or Canonical Correlation Analysis, CCA) and genes are matched by computing Cosine Similarity.
 
 ### B. Graph Neural Networks (GNNs)
-- Redes convolucionales en grafos (GCN, GraphSAGE) pueden aprender representaciones de nodos que combinan la topología local con los features moleculares (ej. niveles de expresión diferencial).
-- Permiten predecir la respuesta a perturbaciones (fármacos) basándose en cómo se altera la representación latente.
+- Graph convolutional networks (GCN, GraphSAGE) can learn node representations that combine local topology with molecular features (e.g. differential expression levels).
+- They allow prediction of response to perturbations (drugs) based on how the latent representation is altered.
 
-## 3. MODULARIDAD Y TEOREMA DE CONTROL
-- **Comunidades (Leiden / Louvain):** Segmentan el grafo en submódulos densos (procesos biológicos aislables).
-- **Teoría de Control Estructural:** En redes dirigidas, se calcula el conjunto de **Driver Nodes** usando Maximum Bipartite Matching. 
-- **Fricción C5-REAL:** La vulnerabilidad (DepMap) de un Driver Node debe ser cruzada empíricamente; la centralidad topológica no garantiza *druggability* si la proteína carece de bolsillos alostéricos.
+## 3. MODULARITY AND CONTROL THEOREM
+- **Communities (Leiden / Louvain):** Segment the graph into dense sub-modules (isolable biological processes).
+- **Structural Control Theory:** In directed networks, the set of **Driver Nodes** is computed using Maximum Bipartite Matching. 
+- **C5-REAL Friction:** The vulnerability (DepMap) of a Driver Node must be empirically cross-referenced; topological centrality does not guarantee *druggability* if the protein lacks allosteric pockets.
 
-## 4. PIPELINE CINÉTICO DE ALINEAMIENTO
-1. **Ingesta:** `scanpy` -> Matriz de adyacencia (WGCNA).
-2. **Incrustación (Embedding):** Ejecutar Node2Vec sobre $G_A$ y $G_B$.
-3. **Mapeo:** Alinear los espacios $\mathcal{H}_A$ y $\mathcal{H}_B$ (Orthogonal Procrustes).
-4. **Matching:** Matriz de Similitud Coseno $S_{ij} = \cos(e^{(A)}_i, e^{(B)}_j)$.
-5. **Extracción:** Identificar los módulos biológicos funcionalmente isomorfos a pesar del ruido mutacional.
-6. **Ejecución:** Computar centralidades topológicas dentro del submódulo alineado para proponer combinaciones terapéuticas (LINCS).
+## 4. KINETIC ALIGNMENT PIPELINE
+1. **Ingestion:** `scanpy` -> Adjacency matrix (WGCNA).
+2. **Embedding:** Run Node2Vec over $G_A$ and $G_B$.
+3. **Mapping:** Align spaces $\mathcal{H}_A$ and $\mathcal{H}_B$ (Orthogonal Procrustes).
+4. **Matching:** Cosine Similarity Matrix $S_{ij} = \cos(e^{(A)}_i, e^{(B)}_j)$.
+5. **Extraction:** Identify biologically functionally isomorphic modules despite mutational noise.
+6. **Execution:** Compute topological centralities within the aligned sub-module to propose therapeutic combinations (LINCS).
 
 ---
-*Fin del manifiesto de alineamiento.*
+*End of alignment manifesto.*

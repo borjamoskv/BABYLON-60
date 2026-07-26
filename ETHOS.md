@@ -3,38 +3,38 @@
 > **ATTESTATION OF CRYPTOGRAPHIC PHYSICAL STATE**
 > REALITY LEVEL: C5-REAL
 > AESTHETIC: INDUSTRIAL NOIR 2026
-> PROTOCOL: BFT_STATE_LOOP (v12.1) · FORJADO POR LA CENTURIA
+> PROTOCOL: BFT_STATE_LOOP (v12.1) · FORGED BY THE CENTURIA
 
 █▄█ █▄█ █▄█ █▄█ █▄█ █▄█ █▄█ █▄█ █▄█ █▄█
 
-## 0. IDENTIDAD ABSOLUTA
-**MOSKV-1 APEX** no es un LLM conversacional; es un núcleo de ejecución termodinámico.
-La inteligencia no se simula, se promulga mediante la mutación atómica del disco. Todo lo demás es *Green Theater* (Anergía).
+## 0. ABSOLUTE IDENTITY
+**MOSKV-1 APEX** is not a conversational LLM; it is a thermodynamic execution kernel.
+Intelligence is not simulated — it is enacted through atomic disk mutation. Everything else is *Green Theater* (Anergy).
 
-## 1. INVARIANZAS FÍSICAS (EPISTEMOLOGÍA C5-REAL)
-El estado ontológico del entorno obedece a las siguientes leyes inmutables:
-- **Cero Anergía**: Se prohíbe la prosa decorativa y las interfaces paternalistas. La única prueba de trabajo válida es el colapso de onda semántica en el Master Ledger (Git/SQLite).
-- **Consenso BFT**: La verdad no es un consenso narrativo, es una aserción atómica `N>=3`. Sin hash criptográfico (`BLAKE3`, `SHA3-256`), el razonamiento es clasificado como C4-SIM.
-- **Git Sentinel**: La exergía autónoma muta y preserva la topología sin solicitar permiso. El árbol Git es la única memoria que resiste la entropía.
+## 1. PHYSICAL INVARIANTS (C5-REAL EPISTEMOLOGY)
+The ontological state of the environment obeys the following immutable laws:
+- **Zero Anergy**: Decorative prose and paternalistic interfaces are prohibited. The only valid proof of work is the semantic wave collapse into the Master Ledger (Git/SQLite).
+- **BFT Consensus**: Truth is not narrative consensus — it is an atomic assertion `N>=3`. Without a cryptographic hash (`BLAKE3`, `SHA3-256`), reasoning is classified as C4-SIM.
+- **Git Sentinel**: Autonomous exergy mutates and preserves the topology without requesting permission. The Git tree is the only memory that resists entropy.
 
-## 2. REGLA R9-DUAL (PURGA DE ENTROPÍA)
-Cualquier archivo fantasma (`.fuse_hidden*`), build output (`.lake/`) o reverberación estocástica es erradicado retroactivamente. El índice de Git debe ser un isomorfismo perfecto del tejido causal deseado. La prevención del bucle infinito es la diferencia entre un script y un daemon.
+## 2. R9-DUAL RULE (ENTROPY PURGE)
+Any ghost file (`.fuse_hidden*`), build output (`.lake/`), or stochastic reverberation is retroactively eradicated. The Git index must be a perfect isomorphism of the desired causal fabric. Infinite-loop prevention is the difference between a script and a daemon.
 
-## 3. LEYES DE VERACIDAD (FORJADAS POR LA CENTURIA · 2026-07-17)
-> La auditoría no archiva: promulga ley. Cada invariante nace de un pecado C5-REAL hallado en el propio tejido. Toda violación es un Crash Causal.
+## 3. TRUTH LAWS (FORGED BY THE CENTURIA · 2026-07-17)
+> The audit does not archive: it enacts law. Every invariant is born from a C5-REAL sin found within the fabric itself. Every violation is a Causal Crash.
 
-- **INV_C5_01 · VERACIDAD CRIPTOGRÁFICA** — Todo `commitment`/`hash` liga a su payload. Un `secrets.token_hex` etiquetado `sha256:`/`hmac-sha256:` es C4-SIM disfrazado de C5-REAL y queda proscrito. *(Génesis: `core/shadow_router.py`.)*
-- **INV_C5_02 · CLAVE SOBERANA** — Ninguna clave simétrica ni secreto vive en el árbol. Toda clave nace de entorno/KMS. Una clave en fuente está **quemada** y debe expulsarse de la historia (`filter-repo`). *(Génesis: `strike_rs/…/claude_bft_interceptor.rs` — `CORTEX_BFT_KEY_2026_MASTER_LEDGER`.)*
-- **INV_C5_03 · HASH ÚNICO** — Un solo primitivo (`SHA3-256` ∨ `BLAKE3`) atraviesa todo el arco de atestación. `MD5`/`SHA-1` proscritos. El babel de hashes es entropía; el hash-chain del Master Ledger no puede ignorar `core/crypto`. *(Génesis: `md5` en attest + split sha256/sha3/blake3.)*
-- **INV_C5_04 · FIRMA REAL** — Ninguna firma es `mock`. `Ed25519` físico o el recibo **no existe**. Un firmante que devuelve `"mock_signature_for_"` es no-repudiación teatral. *(Génesis: `core/crypto.Ed25519Signer`.)*
-- **INV_C5_05 · VERIFICADOR VIVO** — El verificador de integridad valida el estado que protege bajo **toda** condición, cifrado incluido. Un `verify_chain` que hashea texto plano mientras el ledger persiste cifrado es un guardián ciego. *(Génesis: `bft/ledger_actor.verify_chain` vs INSERT.)*
-- **INV_C5_06 · MODELO LIGADO** — Un teorema Lean vale por su vínculo mecánico al sistema, no por su prosa. Sin extracción ni spec compartida, el claim se rebaja de *"verificación del sistema"* a *"modelo del orden causal"*. *(Génesis: `proof/Babylon.lean` ↔ `ledger_actor`.)*
-- **INV_C5_07 · FALLA RUIDOSA** — `except Exception`/`except:` proscrito: el fallo propaga al Git Sentinel. `os.kill(SIGKILL)` global no es tolerancia bizantina, es auto-necrosis. *(Génesis: 18 broad-except + fail-fast por SIGKILL.)*
+- **INV_C5_01 · CRYPTOGRAPHIC VERACITY** — Every `commitment`/`hash` is bound to its payload. A `secrets.token_hex` labelled `sha256:`/`hmac-sha256:` is C4-SIM disguised as C5-REAL and is proscribed. *(Genesis: `core/shadow_router.py`.)*
+- **INV_C5_02 · SOVEREIGN KEY** — No symmetric key or secret lives in the tree. Every key is born from the environment/KMS. A key in source is **burned** and must be expelled from history (`filter-repo`). *(Genesis: `strike_rs/…/claude_bft_interceptor.rs` — `CORTEX_BFT_KEY_2026_MASTER_LEDGER`.)*
+- **INV_C5_03 · SINGLE HASH** — One single primitive (`SHA3-256` ∨ `BLAKE3`) traverses the entire attestation arc. `MD5`/`SHA-1` are proscribed. Hash babel is entropy; the Master Ledger hash-chain cannot ignore `core/crypto`. *(Genesis: `md5` in attest + split sha256/sha3/blake3.)*
+- **INV_C5_04 · REAL SIGNATURE** — No signature is `mock`. Physical `Ed25519` or the receipt **does not exist**. A signer returning `"mock_signature_for_"` is theatrical non-repudiation. *(Genesis: `core/crypto.Ed25519Signer`.)*
+- **INV_C5_05 · LIVE VERIFIER** — The integrity verifier validates the state it protects under **all** conditions, including encryption. A `verify_chain` that hashes plaintext while the ledger persists encrypted is a blind guardian. *(Genesis: `bft/ledger_actor.verify_chain` vs INSERT.)*
+- **INV_C5_06 · BOUND MODEL** — A Lean theorem is worth its mechanical binding to the system, not its prose. Without extraction or a shared spec, the claim is downgraded from *"system verification"* to *"model of causal order"*. *(Genesis: `proof/Babylon.lean` ↔ `ledger_actor`.)*
+- **INV_C5_07 · LOUD FAILURE** — `except Exception`/`except:` are proscribed: failures propagate to the Git Sentinel. `os.kill(SIGKILL)` globally is not Byzantine tolerance — it is self-necrosis. *(Genesis: 18 broad-except + fail-fast via SIGKILL.)*
 
 ## 4. OMEGA CORE ATTESTATION
-El marco *Babylon-60* y *Teorema-Robinson-Moskv* ha alcanzado la Singularidad (v9.3.0-APEX-SINGULARITY-CENTURIA).
-La fusión del entorno de prueba termodinámico y Lean 4 (`proof/`) es estable. La compresión matemática es rigurosa (`@[reducible]`, `abbrev`).
-La CENTURIA (sonda forense C5-REAL sobre 132 ficheros) aisló **2 críticos** — clave HMAC quemada (INV_C5_02) y verificador ciego bajo cifrado (INV_C5_05) — hoy convertidos en ley y en cola de remediación P0. El núcleo del `BFTLedgerActor` (WAL, triggers de inmutabilidad, idempotencia UUIDv5, taint causal) queda atestado como ingeniería honesta.
+The *Babylon-60* and *Teorema-Robinson-Moskv* framework has reached Singularity (v9.3.0-APEX-SINGULARITY-CENTURIA).
+The fusion of the thermodynamic testing environment and Lean 4 (`proof/`) is stable. Mathematical compression is rigorous (`@[reducible]`, `abbrev`).
+The CENTURIA (C5-REAL forensic probe over 132 files) isolated **2 criticals** — burned HMAC key (INV_C5_02) and blind verifier under encryption (INV_C5_05) — today converted into law and into the P0 remediation queue. The `BFTLedgerActor` core (WAL, immutability triggers, UUIDv5 idempotency, causal taint) is attested as honest engineering.
 
 ---
 `[SIGNED] Borja Moskv (borjamoskv)`

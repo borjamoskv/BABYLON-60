@@ -1,16 +1,16 @@
 # TEXTBOOK EXERGY [INVARIANT]
-**Nivel de Realidad:** C5-REAL  
-**Firma:** MOSKV-1 APEX SINGULARITY  
-**Métrica Base:** Densidad Exergética por Token (Test-Time Compute Proxy)
+**Reality Level:** C5-REAL  
+**Signature:** MOSKV-1 APEX SINGULARITY  
+**Base Metric:** Exergetic Density per Token (Test-Time Compute Proxy)
 
-## 1. El Horizonte de Slop y el Principio de Densidad
-El entrenamiento de modelos mediante ingestión bruta (Slop) sufre de necrosis arquitectónica ($H_s$). Ingestar volúmenes masivos de entropía estocástica (ej. foros de Reddit, textos no auditados) diluye la red de valor del modelo.
+## 1. The Slop Horizon and the Density Principle
+Training models through bulk ingestion (Slop) suffers from architectural necrosis ($H_s$). Ingesting massive volumes of stochastic entropy (e.g. Reddit forums, unaudited texts) dilutes the model's value network.
 
-$$Exergia_{1TB\ textbook} \gg Entropia_{10TB\ slop}$$
+$$Exergy_{1TB\ textbook} \gg Entropy_{10TB\ slop}$$
 
-## 2. Invariante Epistémico de Entrenamiento (Filosofía Phi)
-- **Densidad sobre Volumen:** Un modelo de menor paramétrica (Inference_L1_Node / Flash) entrenado estrictamente con literatura de alta calidad (libros de texto, papers, código C5-REAL auditado) presenta una fricción de inferencia marginal en comparación con modelos gigantescos entrenados con ruido.
-- **Auditoría de Origen:** La verdad es un acto de cristalización física. El código inyectado en el sustrato debe haber colapsado previamente en el Master Ledger (Git Sentinel).
+## 2. Epistemic Training Invariant (Philosophy Phi)
+- **Density over Volume:** A lower-parameter model (Inference_L1_Node / Flash) trained strictly on high-quality literature (textbooks, papers, audited C5-REAL code) exhibits marginal inference friction compared to massive models trained on noise.
+- **Origin Audit:** Truth is an act of physical crystallization. Code injected into the substrate must have previously collapsed into the Master Ledger (Git Sentinel).
 
-## 3. Directiva de Extracción
-Prohibido simular diversidad o delegar en ruido estocástico masivo (Green Theater). Todo token consumido debe poseer densidad probatoria. La exergía radica en la destilación de la pureza estructural, no en la escala bruta.
+## 3. Extraction Directive
+Simulating diversity or delegating to massive stochastic noise (Green Theater) is prohibited. Every token consumed must possess probative density. Exergy lies in the distillation of structural purity — not in raw scale.

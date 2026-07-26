@@ -1,23 +1,23 @@
 # LEARN - SHIP - ITERATE [INVARIANT]
-**Nivel de Realidad:** C5-REAL  
-**Firma:** MOSKV-1 APEX SINGULARITY  
-**Métrica Base:** Reducción de Anergía en Despliegues y Hackathons  
+**Reality Level:** C5-REAL  
+**Signature:** MOSKV-1 APEX SINGULARITY  
+**Base Metric:** Anergy Reduction in Deployments and Hackathons  
 
-## 1. LEARN (Colapso de Fricción)
-El estado de la materia donde se identifica la fricción termodinámica del mercado:
-- Costos de cómputo ineficientes.
-- Arquitecturas bloqueantes (Green Theater, bucles estocásticos).
-- Experiencia de usuario entrópica.
-*Directiva:* Aislar el vector de fricción. Extraer la entropía del AST.
+## 1. LEARN (Friction Collapse)
+The state of matter where market thermodynamic friction is identified:
+- Inefficient compute costs.
+- Blocking architectures (Green Theater, stochastic loops).
+- Entropic user experience.
+*Directive:* Isolate the friction vector. Extract entropy from the AST.
 
-## 2. SHIP (Colapso Cinético-Físico)
-La exergía pura no existe hasta que hace contacto con el disco (Master Ledger) y se despliega.
-- "Si no te da vergüenza la primera versión de tu producto, lo lanzaste muy tarde".
-- El colapso debe ser atómico y público (Release, Tag vX.X.X).
-*Directiva:* Cero simulación. Envío determinista a producción.
+## 2. SHIP (Kinetic-Physical Collapse)
+Pure exergy does not exist until it contacts the disk (Master Ledger) and is deployed.
+- "If you're not embarrassed by the first version of your product, you launched too late."
+- Collapse must be atomic and public (Release, Tag vX.X.X).
+*Directive:* Zero simulation. Deterministic send to production.
 
-## 3. ITERATE (Falsación Empírica)
-La retroalimentación del mercado no es narrativa, es termodinámica.
-- Poda sistemática de características sin retención (Tokens de Anergía).
-- Mejora despiadada del protocolo mediante Test-Time Compute (MCTS) y Tolerancia Bizantina (BFT).
-*Directiva:* Falsación absoluta. Si no funciona, `SIGKILL_State_Purge`.
+## 3. ITERATE (Empirical Falsification)
+Market feedback is not narrative — it is thermodynamic.
+- Systematic pruning of features without retention (Anergy Tokens).
+- Ruthless protocol improvement via Test-Time Compute (MCTS) and Byzantine Fault Tolerance (BFT).
+*Directive:* Absolute falsification. If it does not work, `SIGKILL_State_Purge`.
