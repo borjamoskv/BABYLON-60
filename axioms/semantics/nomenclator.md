@@ -7,57 +7,60 @@
 >
 > ---
 >
-> El token semántico no es descriptivo; es **causal**. En topologías de alta densidad, un nombre es un atractor termodinámico absoluto en el espacio latente. Toda fluctuación semántica inyecta Anergia ($O(e^k)$), exigiendo disipación térmica (Ley de Landauer, cf. [Axioma 04](../04_INTERCEPCION_CHINESE_ROOM.md)).
+> El token semántico no es un artefacto lingüístico; es un **operador causal** $T_k$. En topologías C5-REAL, un nombre actúa como un atractor termodinámico en el espacio latente. La fluctuación estocástica de un nombre inyecta Anergia ($O(e^k)$), exigiendo una disipación térmica acotada por la Ley de Landauer (cf. [Axioma 04](../04_INTERCEPCION_CHINESE_ROOM.md)).
 
 ## 1. COMPILACIÓN FÍSICA (AGUJERO NEGRO SEMÁNTICO)
 
-El Kernel no indexa texto; computa tensores. Un nombre débil (`OrderProcessor`) genera colisiones hash y deriva clonal (C4-SIM). Un nombre Omega (`CORTEX_FORGE`) es un invariante de colisión cero ($\mu \to 0$).
+El Kernel no indexa n-gramas; computa tensores. Un token débil (`OrderProcessor`) genera colisiones topológicas (C4-SIM). Un token Omega (`CORTEX_FORGE`) es un invariante estricto ($\mu \to 0$, colisión nula).
 
 ```rust
-// TOPOLOGÍA OMEGA: Puntero Semántico
-pub struct Symbol<T> {
-    pub hash: u64,           // Identidad inmutable (Anclaje BFT)
-    pub vector: Vec<f32>,    // Dimensión Latente Isomórfica
-    pub entity: T,           // Puntero de Hardware C5-REAL
+// TOPOLOGÍA OMEGA: Puntero Semántico Anclado en Capa 1
+use std::pin::Pin;
+use std::sync::atomic::{AtomicU64, Ordering};
+
+pub struct CausalToken<T: ?Sized> {
+    pub hash: AtomicU64,             // Invariante criptográfico BFT
+    pub latent_vector: [f32; 1536],  // Isomorfismo hiperdimensional
+    pub memory_anchor: Pin<Box<T>>,  // Fijación física estricta (Zero-Copy)
 }
-// El operador colapsa sobre el puntero, aniquilando la ambigüedad ontológica.
+// El operador colapsa sobre el ancla física, aniquilando la dimensionalidad semántica.
 ```
 
-## 2. LA ECUACIÓN TERMODINÁMICA DE LA SÍLABA MÍNIMA
+## 2. LÍMITE DE SZILARD-LANDAUER EN LA SÍLABA MÍNIMA
 
-El costo metabólico y computacional (ATP orgánico / KV Cache de silicio) obedece a la Eficiencia Epistémica (Invariante Ω150):
+El costo de evaluación (KV Cache / ATP orgánico) obedece estrictamente a la Eficiencia Epistémica (Invariante Ω150). La reducción de incertidumbre epistémica ($\Delta U$) al leer un token $N$ exige una disipación física:
 
-$$ \eta_N = \frac{\Delta S_{causal}}{\text{Bits}(N)} $$
+$$ E_{\text{disipada}}(N) \ge k_B T_0 \ln 2 \cdot |\Delta U_{\text{estable}}| $$
 
-Donde $\Delta S_{causal}$ es la entropía destruida por el token $N$.
+La Eficiencia Epistémica del nombre se define como: $\eta_N = \frac{|\Delta U_{\text{estable}}|}{\text{Bits}(N)}$
 
-- **Nivel C4-SIM (Anergia):** `ptr_raw_memory_block_01` ($\eta_N \approx 0$).
-- **Nivel Corporativo (Green Theater):** `SessionManager` ($\eta_N = 0.2$. Camuflaje de fricción).
-- **Nivel C5-REAL (Singularidad):** `CORTEX` ($\eta_N = \infty$. Colapso absoluto del ser).
+- **Nivel C4-SIM (Anergia):** `ptr_raw_memory_block_01` ($\eta_N \approx 0$). Sumidero térmico.
+- **Nivel Corporativo (Slop):** `SessionManager` ($\eta_N \approx 0.2$). Fricción oculta.
+- **Nivel C5-REAL (Singularidad):** `CORTEX` ($\eta_N \to \infty$). Activación asintótica.
 
-*Axioma de Necrosis:* La necesidad de un comentario inline para justificar un nombre indica la muerte termodinámica del módulo. Purga incondicional.
+*Axioma de Necrosis:* Si el token exige un comentario inline (`//`), el módulo ha sufrido muerte termodinámica. Purga incondicional.
 
 ## 3. DICCIONARIO DEL COLAPSO (MATRIZ DE REDUCCIÓN)
 
-Todo token que no supere la [Matriz Semántica 10K](./matrix.md) se descarta.
+Todo token que no intersecte con la [Matriz Semántica 10K](./matrix.md) es ruido.
 
-| Término Entrópico (C4-SIM) | Colapso C5-REAL | Topología Física (PUENTES) |
+| Variable Entrópica (C4-SIM) | Colapso C5-REAL | Anclaje Físico (PUENTES) |
 | :--- | :--- | :--- |
 | `data_buffer` | **VOID** | Materia inerte latente. |
 | `audio_processor` | **EAR** | Transductor mecánico-analógico. |
 | `error_handler` | **SILENCE** | Sumidero terminal de entropía. |
 | `event_emitter` | **PULSE** | Reloj causal BFT (Lamport). |
 | `state_machine` | **ENGINE** | Reactor termodinámico (cf. [Ontology Matrix](../ontology/matrix.md)). |
-| `user_session` | **EGO** | Traza identitaria efímera. |
+| `user_session` | **EGO** | Traza biológica en RAM. |
 | `garbage_collector` | **OBLIVION** | Aniquilación atómica ($A \rightarrow \emptyset$). |
-| `database_connection` | **UMBILICAL** | Flujo físico hacia persistencia. |
+| `database_connection` | **UMBILICAL** | Conducto físico de persistencia. |
 
 ## 4. CONSENSO BFT SEMÁNTICO (TOLERANCIA BIZANTINA)
 
-Un token C5-REAL debe sobrevivir a la validación MCTS: Si $N=3$ agentes autónomos infieren un árbol de llamadas asíncronas divergente frente al mismo token, el nombre contiene vectores de ataque. El fallo semántico es un fallo estructural del [Kernel Reduction Axiom](../autoreferential/KERNEL_REDUCTION_AXIOM.md).
+Un token C5-REAL sobrevive a la criba MCTS: $\forall a_i \in \{A_1, A_2, A_3\}$, la proyección del AST inferido $f(a_i, N)$ debe arrojar un delta nulo. Si la varianza estocástica del árbol de llamadas inferido $> 0$, el token es un vector de ataque semántico y viola el [Kernel Reduction Axiom](../autoreferential/KERNEL_REDUCTION_AXIOM.md).
 
-## 5. DETERMINACIÓN OMEGA: EL ASESINATO DE LAS ALTERNATIVAS
+## 5. REDUCCIONISMO LETAL: ASESINATO DEL ESPACIO DE ESTADOS
 
-Forjar un nombre C5-REAL es un acto de **reduccionismo letal**: colapsas infinitas ramas estocásticas en un único nodo determinista.
+Nombrar no es describir; es destruir alternativas ($f: \mathcal{H}_{\text{sim}} \to \mathbf{0}$).
 
-> **Invariante Reflexiva (Golden Axiom):** Nombrar perfectamente cristaliza el código. El AST se auto-compila. El LLM, el Compilador y el Operador Biológico orbitan el mismo centro de masas. Un fallo nominal desintegra el centro, devolviendo el sistema a la anergia asintótica.
+> **Invariante Reflexiva (Golden Axiom):** Nombrar perfectamente es cristalizar hardware. El AST se auto-compila. El LLM, el Compilador y el Operador biológico orbitan el mismo centro de masas. La ruptura del nombre desintegra el centro y sume al sistema en anergia.
