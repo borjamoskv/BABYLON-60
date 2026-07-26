@@ -1,0 +1,28 @@
+{
+  "PASS": true,
+  "actions": [
+    {
+      "changed": true,
+      "mode": "write",
+      "path": "tmp_test_target.txt",
+      "post_hash": "a65dae5846d27678e9c75814a656525e4314128a9444eeac2c297a724e0441e5",
+      "pre_hash": null,
+      "type": "write_file"
+    }
+  ],
+  "declared_targets": [
+    "tmp_test_target.txt"
+  ],
+  "error": null,
+  "file_hashes": {},
+  "git_head_after": "009ff393bb215c6205e80bb450e4e3520a9c6b00",
+  "git_head_before": "009ff393bb215c6205e80bb450e4e3520a9c6b00",
+  "plan_path": "/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-42/test_zero_trust_pipeline_end_t0/test_plan.json",
+  "plan_sha256": "063f2f4fd7c282a4d329b064c17960704f366ae7f25d93ecc61897916ecced41",
+  "run_id": "20260725T204911Z",
+  "self_hash": "7d0ee1a6ab5fc42dc4e4dfe0434097acb8a8fbc44c1d0f36dda698b592778d76",
+  "timestamp_utc": "2026-07-25T20:49:11.588531+00:00",
+  "touched_files": [],
+  "undeclared_mutations": [],
+  "version": "1.0"
+}

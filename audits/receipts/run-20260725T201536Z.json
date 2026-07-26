@@ -1,0 +1,20 @@
+{
+  "PASS": false,
+  "actions": [],
+  "declared_targets": [
+    "cortex/hypervisor/collision.py",
+    "tests/test_collision_hypervisor.py"
+  ],
+  "error": "Action 0 ('run_python_script') failed: Script failed rc=1: tests/test_collision_hypervisor.py\nstderr: Traceback (most recent call last):\n  File \"/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/tests/test_collision_hypervisor.py\", line 5, in <module>\n    from cortex.hypervisor.collision import CollisionPrimitive\nModuleNotFoundError: No module named 'cortex'\n",
+  "file_hashes": {},
+  "git_head_after": "4a4c2618016878d0bfa5eb8e0e15b2ed83c52d0b",
+  "git_head_before": "4a4c2618016878d0bfa5eb8e0e15b2ed83c52d0b",
+  "plan_path": "agent_plan.json",
+  "plan_sha256": "27674be87648b0afa26089d70787c442f0b0b4418eee3630e3b98a0925c3f211",
+  "run_id": "20260725T201536Z",
+  "self_hash": "4f6bfe0887ee4ec6bb7ae3e580e9d191d77fcd003dc942933498b88b60cc0aa9",
+  "timestamp_utc": "2026-07-25T20:15:36.341895+00:00",
+  "touched_files": [],
+  "undeclared_mutations": [],
+  "version": "1.0"
+}

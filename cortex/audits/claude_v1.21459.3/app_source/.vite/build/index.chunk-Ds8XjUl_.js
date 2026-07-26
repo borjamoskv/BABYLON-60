@@ -1,3 +1,0 @@
-// C5-REAL EXERGY CERTIFIED
-"use strict";(function(){try{var e=typeof window<"u"?window:typeof global<"u"?global:typeof globalThis<"u"?globalThis:typeof self<"u"?self:{};e.SENTRY_RELEASE={id:"e0f338aea51a130071b62788fee794575c1b9d0e"}}catch{}})();try{(function(){var e=typeof window<"u"?window:typeof global<"u"?global:typeof globalThis<"u"?globalThis:typeof self<"u"?self:{},f=new e.Error().stack;f&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[f]="4bf9a207-f0ea-4c9a-9065-bfcaff2afa53",e._sentryDebugIdIdentifier="sentry-dbid-4bf9a207-f0ea-4c9a-9065-bfcaff2afa53")})()}catch{}
-//# sourceMappingURL=index.chunk-Ds8XjUl_.js.map

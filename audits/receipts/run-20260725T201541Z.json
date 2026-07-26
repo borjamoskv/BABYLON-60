@@ -1,0 +1,30 @@
+{
+  "PASS": true,
+  "actions": [
+    {
+      "returncode": 0,
+      "script": "tests/test_collision_hypervisor.py",
+      "stderr_preview": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_preview": "",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "type": "run_python_script"
+    }
+  ],
+  "declared_targets": [
+    "cortex/hypervisor/collision.py",
+    "tests/test_collision_hypervisor.py"
+  ],
+  "error": null,
+  "file_hashes": {},
+  "git_head_after": "4a4c2618016878d0bfa5eb8e0e15b2ed83c52d0b",
+  "git_head_before": "4a4c2618016878d0bfa5eb8e0e15b2ed83c52d0b",
+  "plan_path": "agent_plan.json",
+  "plan_sha256": "27674be87648b0afa26089d70787c442f0b0b4418eee3630e3b98a0925c3f211",
+  "run_id": "20260725T201541Z",
+  "self_hash": "313bbb5be97313f0f075272cf870f0f2c682e3598f0295de056a3d2f8736fe93",
+  "timestamp_utc": "2026-07-25T20:15:41.755597+00:00",
+  "touched_files": [],
+  "undeclared_mutations": [],
+  "version": "1.0"
+}
