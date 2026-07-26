@@ -24,6 +24,11 @@ async def run_stress_test():
     print("[⚔️ STRESS TEST] Inicializando arnés de saturación termodinámica...")
     db_path = Path("swarm_stress_ledger.db")
 
+    # R6 HONEST-CHECK: Purga física del entorno sucio previo para garantizar T=0 en el arnés.
+    for p in [db_path, Path(f"{db_path}-wal"), Path(f"{db_path}-shm")]:
+        if p.exists():
+            p.unlink()
+
     # 1. Forzar inserción masiva para inflar el índice de contaminación (Taint)
     with sqlite3.connect(db_path) as conn:
         conn.execute("PRAGMA journal_mode=WAL;")

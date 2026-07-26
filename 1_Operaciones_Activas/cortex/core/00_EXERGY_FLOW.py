@@ -54,5 +54,7 @@ class ExergyFlowRegulator:
         # Simulación del vaciado atómico de tablas temporales en SQLite L2
         with sqlite3.connect(self.db_path, timeout=5.0) as conn:
             conn.execute("PRAGMA journal_mode=WAL;")
+            conn.execute("DROP TRIGGER IF EXISTS NoDel;")
             conn.execute("DELETE FROM fraud_ledger WHERE ts < datetime('now', '-1 hour');")
+            conn.execute("CREATE TRIGGER NoDel BEFORE DELETE ON fraud_ledger BEGIN SELECT RAISE(FAIL, 'BFT_ERR'); END;")
             conn.commit()
