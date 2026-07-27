@@ -2,7 +2,7 @@
 # Prefix: test_ (empirical falsification for the persistence layer)
 
 import pytest
-from core_graph_ledger import GraphLedger, core_calc_sha256
+from core_graph_ledger import GraphLedger, StateNode, core_calc_sha256
 from io_persist_ledger import LedgerPersist
 
 
@@ -93,4 +93,35 @@ def test_orphan_detection(tmp_path: object) -> None:
     persist = LedgerPersist(db_file)
     with pytest.raises(ValueError, match="orphan nodes detected"):
         persist.io_load_ledger()
+    persist.close()
+
+
+def test_inv_bft_04_collision_fails_fast(tmp_path: object) -> None:
+    """Verifica que io_persist_ledger lanza ValueError (INV_BFT_04) ante una colisión de node_id con distinto payload_hash."""
+    db_file = str(tmp_path) + "/test_collision.db"  # type: ignore[operator]
+
+    hash1 = "a" * 64
+    hash2 = "b" * 64
+
+    ledger1 = GraphLedger()
+    node1 = ledger1.mut_append_node(parent_id=ledger1.genesis_id, claim="Audit passed", payload_hash=hash1)
+
+    persist = LedgerPersist(db_file)
+    persist.io_persist_ledger(ledger1)
+
+    # Crear un segundo ledger con el MISMO node_id pero DISTINTO payload_hash
+    ledger2 = GraphLedger()
+    colliding_node = StateNode(
+        node_id=node1.node_id,
+        parent_id=ledger1.genesis_id,
+        claim_summary="Audit FAILED",
+        payload_hash=hash2
+    )
+    ledger2.nodes[node1.node_id] = colliding_node
+
+    with pytest.raises(ValueError, match="INV_BFT_04 Collision"):
+        persist.io_persist_ledger(ledger2)
+
+    # Verificar que no hubo escrituras corruptas
+    assert persist.io_node_count() == 1
     persist.close()

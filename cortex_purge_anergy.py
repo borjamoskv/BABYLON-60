@@ -11,6 +11,9 @@ import datetime
 import hashlib
 import json
 import yaml
+import subprocess
+import shlex
+from pathlib import Path
 from typing import List, Dict, Tuple, Any
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -39,6 +42,16 @@ def ensure_dirs() -> None:
     for d in [ARCHIVE_SCRIPTS, ARCHIVE_DATA, ARCHIVE_DBS]:
         os.makedirs(d, exist_ok=True)
 
+def _get_target_dir(item: str) -> str | None:
+    if item.endswith(".py"):
+        return ARCHIVE_SCRIPTS
+    if item.endswith(".db"):
+        return ARCHIVE_DBS
+    if item.endswith((".json", ".jsonl", ".csv", ".npz", ".png", ".html", ".sarif", ".yaml", ".yml")):
+        return ARCHIVE_DATA
+    return None
+
+
 def categorize_and_move() -> Tuple[int, int, List[Dict[str, Any]]]:
     moved_count: int = 0
     moved_bytes: int = 0
@@ -46,43 +59,32 @@ def categorize_and_move() -> Tuple[int, int, List[Dict[str, Any]]]:
 
     for item in os.listdir(PROJECT_ROOT):
         item_path = os.path.join(PROJECT_ROOT, item)
-        
-        if os.path.isdir(item_path):
+        if os.path.isdir(item_path) or item in PROTECTED_FILES:
             continue
-            
-        if item in PROTECTED_FILES:
+
+        target_dir = _get_target_dir(item)
+        if not target_dir:
             continue
-            
-        # Classify by extension
-        target_dir = None
-        if item.endswith(".py"):
-            target_dir = ARCHIVE_SCRIPTS
-        elif item.endswith(".db"):
-            target_dir = ARCHIVE_DBS
-        elif item.endswith((".json", ".jsonl", ".csv", ".npz", ".png", ".html", ".sarif")):
-            target_dir = ARCHIVE_DATA
-        elif item.endswith(".yaml") or item.endswith(".yml"):
-            target_dir = ARCHIVE_DATA
-            
-        if target_dir:
-            dest_path = os.path.join(target_dir, item)
-            size = os.path.getsize(item_path)
-            shutil.move(item_path, dest_path)
-            moved_count += 1
-            moved_bytes += size
-            actions.append({"file": item, "destination": target_dir, "bytes": size})
-            
+
+        dest_path = os.path.join(target_dir, item)
+        size = os.path.getsize(item_path)
+        shutil.move(item_path, dest_path)
+        moved_count += 1
+        moved_bytes += size
+        actions.append({"file": item, "destination": target_dir, "bytes": size})
+
     return moved_count, moved_bytes, actions
+
 
 def main() -> None:
     print("[*] C5-REAL: Iniciando Anergy Token Purge (Root Directory Entropy Collapse)...")
     ensure_dirs()
     count, total_bytes, actions = categorize_and_move()
-    
+
     # Generate deterministic Merkle root (Cortex Taint)
     payload = json.dumps(actions, sort_keys=True).encode("utf-8")
     cortex_taint = hashlib.sha3_256(payload).hexdigest()
-    
+
     audit_report = {
         "Claim": "Root directory Anergy (loose scripts, DBs, and datasets) has been structurally purged and archived, restoring 00_WORKSPACE.md hierarchy invariant.",
         "Proof": {
@@ -97,14 +99,47 @@ def main() -> None:
         "Cortex_Taint": cortex_taint,
         "Timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat()
     }
-    
+
     os.makedirs(os.path.dirname(AUDIT_YAML), exist_ok=True)
     with open(AUDIT_YAML, "w", encoding="utf-8") as f:
         yaml.dump(audit_report, f, sort_keys=False, allow_unicode=True)
-        
+
     print(f"[+] Purga completada. {count} ficheros movidos ({total_bytes} bytes).")
     print(f"[+] Cortex Taint Hash: {cortex_taint}")
     print(f"[+] Audit guardado en: {AUDIT_YAML}")
+
+
+class BFTCausalInvariantError(Exception):
+    """BFT Causal Invariant Exception for Anergy Purge Engine."""
+
+def safe_purge_anergy(target_db_path: str, cortex_taint: str) -> bool:
+    """
+    Versión segura y auditada para purgar la anergia del ledger.
+    Evita inyecciones de comandos de la IA sanitizando las entradas.
+    """
+    # 1. Validar estrictamente la ruta para evitar Path Traversal
+    db_path = Path(target_db_path).resolve()
+    if not db_path.exists() or db_path.suffix != ".db":
+        raise FileNotFoundError(f"Ruta de base de datos inválida o insegura: {target_db_path}")
+        
+    # 2. Sanitizar el taint de la IA usando shlex
+    sanitized_taint = shlex.quote(cortex_taint)
+    
+    # 3. Forzar el uso de listas en subprocess eliminando shell=True
+    # Evita que caracteres como ';', '&&' o '|' inyectados ejecuten código arbitrario
+    cmd = ["uv", "run", "cortex-purge", "--db", str(db_path), "--taint", sanitized_taint]
+    
+    try:
+        result = subprocess.run(
+            cmd, 
+            capture_output=True, 
+            text=True, 
+            check=True,
+            env={**os.environ, "CORTEX_ISOLATION": "1"} # Mantener aislamiento per-tenant
+        )
+        return "PURGE_SUCCESS" in result.stdout
+    except subprocess.CalledProcessError as e:
+        raise BFTCausalInvariantError(f"Fallo crítico en la purga: {e.stderr}")
 
 if __name__ == "__main__":
     main()
