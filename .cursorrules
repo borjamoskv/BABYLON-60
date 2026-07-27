@@ -10,6 +10,9 @@
 7. Si la operación toca >3 archivos, alerta primero y despliega al orquestador.
 8. Al terminar, el reporte debe ser **brutalista (3 líneas o matriz YAML)**: Qué cambió, Qué mirar, Bloqueos.
 
+## INVARIANTE DE JERARQUÍA MADRE (TEOREMA-ROBINSON-MOSKV)
+9. **RULE_TEOREMA_MADRE_HIERARCHY:** Teorema-Robinson-Moskv es la MADRE absoluta. Queda estrictamente prohibido crear o colocar módulos/proyectos de la familia (`cortex`, `moskv`, `ultrathink`, `OSINT`, `studio`) como repositorios hermanos sueltos en `~/10_PROJECTS/`. Todo módulo DEBE residir dentro de `1_Operaciones_Activas/` en uno de los 4 Dominios Maestros (`01_INTEL_SUITE`, `02_CORTEX_ENGINE`, `03_MOSKV_STUDIO`, `04_LABORATORIO_RD`).
+
 ## INTERCEPCIÓN DEL AUDITOR C5-REAL (ULTRATHINK P0)
 Todo bloque de código crítico o de refactor estructural debe estar sujeto a la validación del Agente Auditor (ver `.agents/auditor_c5_real.md`). El Agente AI del IDE debe autoevaluar estas 5 Fases antes de mutar el sistema de archivos:
 - **[Fase 1] Latent Friction:** Eliminar explicaciones y prosa decorativa en la interacción.
