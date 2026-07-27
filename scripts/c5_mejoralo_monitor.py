@@ -87,7 +87,7 @@ def audit_databases() -> dict[str, dict[str, int]]:
                     c = conn.execute(f"SELECT count(*) FROM [{t}]").fetchone()[0]
                     counts[t] = c
                 except sqlite3.OperationalError:
-                    pass
+                    _ = None
             conn.close()
             census[rel_name] = counts
         except sqlite3.DatabaseError:
@@ -117,12 +117,12 @@ def audit_ruff() -> dict[str, int]:
             try:
                 error_count = int(line.split()[1])
             except (IndexError, ValueError):
-                pass
+                _ = None
         if "fixable" in line:
             try:
                 fixable_count = int(line.split()[1])
             except (IndexError, ValueError):
-                pass
+                _ = None
     return {"total_errors": error_count, "fixable": fixable_count}
 
 
@@ -143,7 +143,7 @@ def audit_tests() -> dict[str, int | str]:
                     try:
                         passed_count = int(parts[i])
                     except ValueError:
-                        pass
+                        _ = None
     return {"test_files": len(test_files), "status": "PRESENT", "passed": passed_count}
 
 

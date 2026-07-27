@@ -9,6 +9,9 @@ pub mod atms;
 pub mod orchestrator;
 pub mod publisher;
 pub mod bindings;
+pub mod kda_memory;
+pub mod bft_engine;
+pub mod gelabp_calc;
 
 /// Motor de Taint C5-REAL (Causal Poset)
 /// Garantiza ejecución de coste cero en el Fast-Loop y verifica Kahn's Invariant (INV-GCM-003).
@@ -57,6 +60,7 @@ impl TaintEngine {
     }
 
     /// Verifica la Invariante de Kahn (INV-GCM-003): El poset debe ser acíclico.
+
     pub fn verify_kahn_invariant(&self) -> Result<(), TaintError> {
         if is_cyclic_directed(&self.graph) {
             return Err(TaintError::CycleDetected);

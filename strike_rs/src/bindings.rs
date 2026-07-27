@@ -6,6 +6,11 @@ use crate::ledger::MasterLedger;
 use crate::atms::Atms;
 use crate::omega0::{Statement, Modality, Justification, JustifiedStatement};
 use crate::publisher::{Publisher, ExportFormat};
+use crate::bft_engine::{BftAsyncEngine, BftNode};
+use crate::kda_memory::KdaMemoryBuffer;
+use crate::gelabp_calc::ExergyParams;
+use std::sync::Arc;
+use tokio::sync::RwLock;
 
 #[pyclass]
 pub struct CortexKernel {
@@ -145,7 +150,58 @@ impl CortexKernel {
 #[pymodule]
 fn strike_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<CortexKernel>()?;
+    m.add_class::<BftSwarmEngine>()?;
     Ok(())
+}
+
+#[pyclass]
+pub struct BftSwarmEngine {
+    engine: BftAsyncEngine,
+    memory: Arc<RwLock<KdaMemoryBuffer>>,
+}
+
+#[pymethods]
+impl BftSwarmEngine {
+    #[new]
+    pub fn new(concurrency_limit: usize, memory_capacity: usize) -> Self {
+        Self {
+            engine: BftAsyncEngine::new(concurrency_limit),
+            memory: Arc::new(RwLock::new(KdaMemoryBuffer::new(memory_capacity))),
+        }
+    }
+
+    pub fn add_node(&mut self, id: String, deps: Vec<String>, payload: String, latency_ms: u64, should_fail: bool) {
+        self.engine.add_node(BftNode {
+            id,
+            deps,
+            payload,
+            latency_ms,
+            should_fail,
+        });
+    }
+
+    pub fn run_dag(&self, g: f64, l: f64, e_base: f64, db_path: String) -> PyResult<String> {
+        let rt = tokio::runtime::Builder::new_current_thread()
+            .enable_all()
+            .build()
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to build tokio runtime: {}", e)))?;
+        
+        let params = ExergyParams { g, l, a: 1.0, b: 1.0, p: 1.0, e_base };
+
+        rt.block_on(async {
+            match self.engine.run_dag(self.memory.clone(), params, &db_path).await {
+                Ok(_) => {
+                    let mem = self.memory.read().await;
+                    Ok(format!("SUCCESS: DAG executed. Memory entries: {} crystallized in {}", mem.len(), db_path))
+                },
+                Err(e) => Err(PyRuntimeError::new_err(format!("BFT Rollback Triggered: {}", e))),
+            }
+        })
+    }
+
+    pub fn stress_test_native(&mut self, count: usize) {
+        self.engine.stress_test_native(count);
+    }
 }
 
 #[cfg(test)]

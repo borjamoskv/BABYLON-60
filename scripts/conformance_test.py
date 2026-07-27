@@ -1,9 +1,14 @@
 import glob
 import json
 import os
+import shutil
 import subprocess
 import sys
 import zipfile
+
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
 
 
 def run_cmd(cmd: list[str], env: dict[str, str] | None = None) -> str:
@@ -17,7 +22,11 @@ def run_cmd(cmd: list[str], env: dict[str, str] | None = None) -> str:
 
 def check_wheel_contents() -> None:
     print("\n--- Verifying Wheel Contents ---")
-    run_cmd(["uv", "build"])
+    uv_bin = shutil.which("uv")
+    if uv_bin:
+        run_cmd([uv_bin, "build"])
+    else:
+        run_cmd([sys.executable, "-m", "pip", "wheel", ".", "--no-deps", "-w", "dist/"])
     wheels = glob.glob("dist/*.whl")
     if not wheels:
         print("ERROR: No wheels found in dist/")
@@ -99,7 +108,11 @@ def test_replay_corruption() -> None:
 
 def run_ci_checks() -> None:
     print("\n--- Running CI Scope Verification ---")
-    run_cmd(["uv", "run", "--all-extras", "pytest", "tests/"])
+    uv_bin = shutil.which("uv")
+    if uv_bin:
+        run_cmd([uv_bin, "run", "--all-extras", "pytest", "tests/"])
+    else:
+        run_cmd([sys.executable, "-m", "pytest", "tests/"])
 
 
 def main() -> None:

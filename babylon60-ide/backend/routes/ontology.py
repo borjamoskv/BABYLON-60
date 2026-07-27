@@ -54,16 +54,19 @@ def _human_size(size: int) -> str:
     return f"{size:.1f} TB"
 
 
+import re
+
+
 def _resolve_db(name: str) -> Path:
-    root = _get_project_root()
-    db_path = root / name
-    if not db_path.exists():
-        raise HTTPException(404, f"Database '{name}' not found")
-    if not db_path.suffix == ".db":
-        raise HTTPException(400, "Only .db files allowed")
-    # Prevent path traversal
-    if not db_path.resolve().parent == root.resolve():
+    root = _get_project_root().resolve()
+    filename = Path(name).name
+    if not re.match(r"^[a-zA-Z0-9_\-]+\.db$", filename):
+        raise HTTPException(400, "Invalid database filename format. Must be an alphanumeric .db file.")
+    db_path = (root / filename).resolve()
+    if db_path.parent != root:
         raise HTTPException(403, "Path traversal denied")
+    if not db_path.exists():
+        raise HTTPException(404, f"Database '{filename}' not found")
     return db_path
 
 

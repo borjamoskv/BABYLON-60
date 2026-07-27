@@ -8,7 +8,7 @@ try:
     from dotenv import load_dotenv
     load_dotenv(os.path.join(_BASE, '.env.vault'))
 except ImportError:
-    pass
+    _ = None
 VAULT_DIR = os.path.expandvars('$CORTEX_ROOT/20_VAULT')
 VAULT_KEY = os.environ.get('CORTEX_VAULT_KEY')
 DB_PATH = os.path.expandvars(os.environ.get('CORTEX_DB_PATH', os.path.join(_BASE, 'cortex_memory.db')))

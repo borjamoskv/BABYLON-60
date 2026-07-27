@@ -34,7 +34,8 @@ class BFT_Validator:
         try:
             return cbor2.loads(payload_bytes)
         except (cbor2.CBORDecodeError, ValueError):
-            pass
+            # Fallback to JSON payload parsing
+            _ = None
         try:
             raw = payload_bytes.decode("utf-8") if isinstance(payload_bytes, bytes) else payload_bytes
             return json.loads(raw)

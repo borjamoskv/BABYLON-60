@@ -28,18 +28,22 @@ def _get_project_root() -> Path:
     return Path(__file__).resolve().parent.parent.parent.parent
 
 
+import re
+
+
 @router.post("")
 def run_query(req: QueryRequest) -> dict[str, Any]:
     """Execute a read-only SQL query against any discovered database."""
-    root = _get_project_root()
-    db_path = root / req.database
+    root = _get_project_root().resolve()
+    filename = Path(req.database).name
+    if not re.match(r"^[a-zA-Z0-9_\-]+\.db$", filename):
+        raise HTTPException(400, "Invalid database filename format. Must be an alphanumeric .db file.")
 
-    if not db_path.exists():
-        raise HTTPException(404, f"Database '{req.database}' not found")
-    if not db_path.suffix == ".db":
-        raise HTTPException(400, "Only .db files allowed")
-    if not db_path.resolve().parent == root.resolve():
+    db_path = (root / filename).resolve()
+    if db_path.parent != root:
         raise HTTPException(403, "Path traversal denied")
+    if not db_path.exists():
+        raise HTTPException(404, f"Database '{filename}' not found")
 
     # Block obvious write statements at the string level as defense-in-depth
     sql_upper = req.sql.strip().upper()

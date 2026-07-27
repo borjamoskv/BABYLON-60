@@ -26,29 +26,30 @@ class InferenceRequest(BaseModel):
     max_tokens: int = Field(default=1024, ge=1, le=8192)
 
 
-def validate_zero_network(url: str) -> None:
-    lower = url.lower()
-    forbidden = ["openai.com", "anthropic.com", "dashscope", "googleapis.com", "deepmind"]
-    for domain in forbidden:
-        if domain in lower:
-            raise HTTPException(
-                status_code=403,
-                detail=f"C5-REAL VIOLATION: Zero-Network Policy breached. External endpoint '{domain}' is strictly forbidden."
-            )
-    parsed = urllib.parse.urlparse(lower)
-    if parsed.hostname not in ["127.0.0.1", "localhost", "::1"]:
+ALLOWED_LOOPBACK_HOSTS = {"127.0.0.1", "localhost", "::1"}
+
+
+def validate_and_sanitize_loopback_url(url: str) -> str:
+    parsed = urllib.parse.urlparse(url.lower())
+    if parsed.scheme and parsed.scheme not in ("http", "https"):
+        raise HTTPException(status_code=403, detail="C5-REAL VIOLATION: Invalid URL scheme. Scheme must be http.")
+    hostname = parsed.hostname
+    if not hostname or hostname not in ALLOWED_LOOPBACK_HOSTS:
         raise HTTPException(
             status_code=403,
             detail=f"C5-REAL VIOLATION: Endpoint '{url}' must be confined to loopback (127.0.0.1 / localhost)."
         )
+    port = parsed.port if parsed.port is not None else 11434
+    if not (1 <= port <= 65535):
+        raise HTTPException(status_code=403, detail="Invalid loopback port bounds.")
+    return f"http://{hostname}:{port}"
 
 
 @router.post("/generate")
 def generate_local(req: InferenceRequest) -> dict[str, Any]:
     """Execute local inference against Ollama / MLX socket."""
-    validate_zero_network(req.base_url)
-
-    endpoint = f"{req.base_url.rstrip('/')}/chat/completions"
+    base_endpoint = validate_and_sanitize_loopback_url(req.base_url)
+    endpoint = f"{base_endpoint}/v1/chat/completions"
     payload = {
         "model": req.model,
         "messages": [

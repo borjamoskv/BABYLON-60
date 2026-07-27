@@ -28,7 +28,7 @@ def hash_payload(payload: Dict[str, Any]) -> str:
 
 
 class EpistemicHalt(Exception):
-    pass
+    """Epistemic halt exception for sovereign replay kernel."""
 
 
 class ReplayKernel:
@@ -183,5 +183,3 @@ class ReplayKernel:
         if event["parent_hash"] is None:
             raise EpistemicHalt("Evento sin parent_hash")
 
-
-pass

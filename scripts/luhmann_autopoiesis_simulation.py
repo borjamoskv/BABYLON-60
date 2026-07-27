@@ -17,7 +17,7 @@ try:
     from apex_trials.ledger import AmendmentLedger
     AmendmentLedgerClass = AmendmentLedger
 except ImportError:
-    pass
+    _ = None
 
 class LuhmannAutopoiesisSimulation:
     """

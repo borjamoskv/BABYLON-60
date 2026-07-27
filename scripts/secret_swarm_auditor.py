@@ -109,7 +109,7 @@ def scan_file(filepath: str) -> List[Dict[str, Any]]:
                             'hash': secret_hash
                         })
     except (UnicodeDecodeError, OSError):
-        pass
+        _ = None
         
     return findings
 

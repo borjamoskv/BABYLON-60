@@ -15,8 +15,6 @@ import aiosqlite
 class BFTCausalInvariantError(RuntimeError):
     """FAIL-FAST Exception for violations of Babylon.lean BFT invariants."""
 
-    pass
-
 
 NAMESPACE_UUID = uuid.UUID("9897d6fd-d6a7-4fe9-86bc-f0c312886d5d")
 ZERO_HASH = "0" * 64

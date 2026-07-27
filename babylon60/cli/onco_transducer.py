@@ -66,7 +66,7 @@ class OncologyTransducer:
                     if u in initial_state and v in initial_state:
                         graph.add_edge(u, v)
             except (ImportError, AttributeError):
-                pass
+                logger.debug("Optional oncology primitives edges unavailable; using default self-edges.")
 
         raw_history, nodes = simulate_boolean_network(
             graph, initial_state, steps=steps, perturbed_nodes=perturbed_nodes, early_stop=False
