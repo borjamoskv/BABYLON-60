@@ -1,0 +1,118 @@
+#!/usr/bin/env python3
+import sys
+import os
+import subprocess
+import json
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+OPS_DIR = os.path.join(BASE_DIR, "1_Operaciones_Activas")
+
+DOMAINS = {
+    "intel": "01_INTEL_SUITE",
+    "engine": "02_CORTEX_ENGINE",
+    "studio": "03_MOSKV_STUDIO",
+    "lab": "04_LABORATORIO_RD"
+}
+
+BANNER = """
+===============================================================
+   MOSKV-OS / TEOREMA DE ROBINSON-MOSKV - CLI MAESTRO
+===============================================================
+[MADRE OPERATIVA] 4 Dominios Consolidados
+  - 01_INTEL_SUITE   (OSINT, Anti-Mafia & Agentes Documentales)
+  - 02_CORTEX_ENGINE (BABYLON-60, Ultrathink, Persist, Sentinel)
+  - 03_MOSKV_STUDIO  (App Nativa Tauri, UI Web, Forjas)
+  - 04_LABORATORIO_RD (Compilador Moskv84, Strike-RS, Simulación)
+===============================================================
+"""
+
+def print_help():
+    print(BANNER)
+    print("Uso: ./moskv <comando> [opciones]\n")
+    print("Comandos disponibles:")
+    print("  status   Muestra el estado completo de los 4 Dominios Maestros.")
+    print("  intel    Interactúa con el paquete 01_INTEL_SUITE (OSINT & Miner).")
+    print("  engine   Interactúa con el motor 02_CORTEX_ENGINE (Ultrathink & Persist).")
+    print("  studio   Lanza la interfaz 03_MOSKV_STUDIO (Tauri / Web UI).")
+    print("  lab      Ejecuta pruebas en 04_LABORATORIO_RD (Compilador & Rust).")
+    print("  sync     Sincroniza el monorepo con GitHub (master).")
+    print()
+
+def show_status():
+    print(BANNER)
+    print("STATUS DE DOMINIOS:")
+    for key, folder in DOMAINS.items():
+        path = os.path.join(OPS_DIR, folder)
+        exists = "OK (Presente)" if os.path.exists(path) else "ERROR (Faltante)"
+        subdirs = len([d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))]) if os.path.exists(path) else 0
+        print(f"  [{key.upper():<6}] {folder:<20} -> Status: {exists:<15} ({subdirs} submódulos)")
+    
+    print("\nREPOS Y CONTROL DE VERSIONES:")
+    try:
+        git_sha = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], cwd=BASE_DIR).decode().strip()
+        git_branch = subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"], cwd=BASE_DIR).decode().strip()
+        print(f"  Git Commit: {git_sha} | Branch: {git_branch}")
+    except Exception:
+        print("  Git Info: N/A")
+
+def run_domain(domain_key, extra_args):
+    folder = DOMAINS.get(domain_key)
+    if not folder:
+        print(f"Error: Dominio desconocido '{domain_key}'")
+        sys.exit(1)
+    
+    domain_path = os.path.join(OPS_DIR, folder)
+    print(f"Entering domain [{domain_key.upper()}] at: {domain_path}")
+    
+    if domain_key == "intel":
+        miner_py = os.path.join(domain_path, "substack-osint-miner", "cli.py")
+        if os.path.exists(miner_py):
+            subprocess.run([sys.executable, miner_py] + extra_args)
+        else:
+            print(f"INTEL SUITE preparado en {domain_path}")
+    elif domain_key == "engine":
+        babylon_py = os.path.join(domain_path, "BABYLON-60", "ultrathink", "ultrathink_scheduler.py")
+        if os.path.exists(babylon_py):
+            subprocess.run([sys.executable, babylon_py] + extra_args)
+        else:
+            print(f"CORTEX ENGINE preparado en {domain_path}")
+    elif domain_key == "studio":
+        print(f"Iniciando MOSKV STUDIO en {domain_path}...")
+        web_path = os.path.join(domain_path, "portal")
+        if os.path.exists(web_path):
+            print("Para iniciar el servidor de desarrollo UI: cd 1_Operaciones_Activas/03_MOSKV_STUDIO/portal && npm run dev")
+    elif domain_key == "lab":
+        print(f"LABORATORIO R&D en {domain_path}")
+        strike_toml = os.path.join(domain_path, "strike-rs", "Cargo.toml")
+        if os.path.exists(strike_toml):
+            print("Ejecutando strike-rs...")
+            subprocess.run(["cargo", "check", "--manifest-path", strike_toml])
+
+def sync_git():
+    print("Sincronizando Monorepo con GitHub...")
+    subprocess.run(["git", "add", "-A"], cwd=BASE_DIR)
+    subprocess.run(["git", "commit", "-m", "chore(moskv): auto-sync monorepo state"], cwd=BASE_DIR)
+    subprocess.run(["git", "push", "origin", "master", "--no-verify"], cwd=BASE_DIR)
+
+def main():
+    if len(sys.argv) < 2:
+        print_help()
+        sys.exit(0)
+    
+    cmd = sys.argv[1].lower()
+    extra_args = sys.argv[2:]
+    
+    if cmd in ["-h", "--help", "help"]:
+        print_help()
+    elif cmd == "status":
+        show_status()
+    elif cmd in DOMAINS:
+        run_domain(cmd, extra_args)
+    elif cmd == "sync":
+        sync_git()
+    else:
+        print(f"Comando no reconocido: {cmd}")
+        print_help()
+
+if __name__ == "__main__":
+    main()
