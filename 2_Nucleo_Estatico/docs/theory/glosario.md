@@ -20,6 +20,10 @@ Referencia ontológica, termodinámica y arquitectónica del ecosistema MOSKV-1.
 
 ### A
 
+**Abducir 🧠**
+Tipo: Salto Heurístico Táctico. Φ2
+Inyección de una hipótesis operativa de emergencia (Inferencia a la mejor explicación) para eludir la parálisis sistémica ante shocks entrópicos. Sacrifica precisión por latencia $O(1)$. Es un monopolio biológico; forzar a un LLM a abducir genera alucinación termodinámica.
+
 **ADT (Algebraic Data Type) 📐**
 Tipo: Fundamento de tipado funcional. Ω1
 Estructura compuesta por dos operaciones categóricas:
@@ -107,6 +111,22 @@ Tipo: Arquitectura de Memoria. Ω17
 
 - TIER_0 (Ground Truth): Origen humano/AST. Boost 100%
 - TIER_1 (Cuarentena): Output LLM. Boost 0% hasta validación
+
+---
+
+### D
+
+**Deducir 🧠**
+Tipo: Mutación Determinista. Ω2
+Desempaquetado matemático de la incertidumbre derivando un vector específico a partir de invariantes consolidados (Priors). Opera con coste marginal cero de exergía $O(1)$. No es adivinar, es validar causalmente. Si la premisa falla, es *Falla-Fast*.
+
+---
+
+### I
+
+**Inducir 🧠**
+Tipo: Síntesis Probabilística. Ω12
+Proceso inverso a la deducción. Forjar una nueva ley general (Actualización del Prior) muestreando telemetría local (Bottom-Up). Exige inyección masiva de ATP. Vulnerable a ataques BFT (Phantom Targets) si la telemetría está envenenada. Requiere firma CORTEX-TAINT.
 
 ---
 
