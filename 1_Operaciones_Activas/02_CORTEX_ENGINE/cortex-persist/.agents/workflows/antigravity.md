@@ -1,1 +1,0 @@
-/Users/borjafernandezangulo/.gemini/config/workflows/antigravity.md
