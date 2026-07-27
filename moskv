@@ -82,9 +82,10 @@ def run_integration_tests():
     results["02_CORTEX_ENGINE"] = "PASSED" if res_engine.returncode == 0 else f"FAILED (code {res_engine.returncode})"
 
     # 3. Test Moskv Studio
-    print("[3/4] Probando 03_MOSKV_STUDIO (Portal React Package)...")
-    portal_pkg = os.path.join(OPS_DIR, "03_MOSKV_STUDIO", "portal", "package.json")
-    results["03_MOSKV_STUDIO"] = "PASSED" if os.path.exists(portal_pkg) else "FAILED (package.json not found)"
+    print("[3/4] Probando 03_MOSKV_STUDIO (Portal React/Vite Build)...")
+    portal_dir = os.path.join(OPS_DIR, "03_MOSKV_STUDIO", "portal")
+    res_studio = subprocess.run(["npm", "run", "build"], cwd=portal_dir, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+    results["03_MOSKV_STUDIO"] = "PASSED" if res_studio.returncode == 0 else f"FAILED (code {res_studio.returncode})"
 
     # 4. Test Laboratorio R&D
     print("[4/4] Probando 04_LABORATORIO_RD (Strike-RS Rust Check)...")
