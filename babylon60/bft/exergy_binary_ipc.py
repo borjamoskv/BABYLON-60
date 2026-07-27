@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import hashlib
 import struct
-import json
+import cbor2
 from typing import Any, Dict, Tuple
 
 MAGIC_HEADER = b"B60IPC"
@@ -22,9 +22,9 @@ VERSION = 1
 def pack_agent_message(sender: str, recipient: str, payload: Dict[str, Any], lamport_t: int) -> bytes:
     """
     Empaqueta un mensaje inter-agente en formato binario compacto C5-REAL.
-    Fricción de parseo mínima sin sobrecarga de interpretador YAML/JSON.
+    Fricción de parseo mínima usando CBOR puro en lugar de JSON.
     """
-    payload_raw = json.dumps(payload, separators=(',', ':')).encode('utf-8')
+    payload_raw = cbor2.dumps(payload)
     sender_bytes = sender.encode('utf-8')
     recipient_bytes = recipient.encode('utf-8')
     
@@ -76,6 +76,6 @@ def unpack_agent_message(raw_bytes: bytes) -> Tuple[str, str, Dict[str, Any], in
     
     sender = sender_bytes.decode('utf-8')
     recipient = recipient_bytes.decode('utf-8')
-    payload = json.loads(payload_raw.decode('utf-8'))
+    payload = cbor2.loads(payload_raw)
     
     return sender, recipient, payload, lamport_t
