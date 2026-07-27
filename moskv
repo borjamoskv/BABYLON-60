@@ -88,10 +88,12 @@ def run_integration_tests():
     results["03_MOSKV_STUDIO"] = "PASSED" if res_studio.returncode == 0 else f"FAILED (code {res_studio.returncode})"
 
     # 4. Test Laboratorio R&D
-    print("[4/4] Probando 04_LABORATORIO_RD (Strike-RS Rust Check)...")
+    print("[4/4] Probando 04_LABORATORIO_RD (Strike-RS & Moskv84 Compiler)...")
     strike_toml = os.path.join(OPS_DIR, "04_LABORATORIO_RD", "strike-rs", "Cargo.toml")
-    res_lab = subprocess.run(["cargo", "check", "--manifest-path", strike_toml], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
-    results["04_LABORATORIO_RD"] = "PASSED" if res_lab.returncode == 0 else f"FAILED (code {res_lab.returncode})"
+    moskv84_toml = os.path.join(OPS_DIR, "04_LABORATORIO_RD", "moskv84-compiler", "Cargo.toml")
+    res_lab1 = subprocess.run(["cargo", "check", "--manifest-path", strike_toml], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+    res_lab2 = subprocess.run(["cargo", "check", "--manifest-path", moskv84_toml], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+    results["04_LABORATORIO_RD"] = "PASSED" if (res_lab1.returncode == 0 and res_lab2.returncode == 0) else f"FAILED (strike:{res_lab1.returncode}, compiler:{res_lab2.returncode})"
 
     print("\n===============================================================")
     print("📊 RESULTADOS DEL TEST DE INTEGRACIÓN:")
