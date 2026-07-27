@@ -31,12 +31,19 @@ def print_help():
     print("Uso: ./moskv <comando> [opciones]\n")
     print("Comandos disponibles:")
     print("  status   Muestra el estado completo de los 4 Dominios Maestros.")
+    print("  test     Ejecuta un test de integración rápido en los 4 dominios.")
     print("  intel    Interactúa con el paquete 01_INTEL_SUITE (OSINT & Miner).")
     print("  engine   Interactúa con el motor 02_CORTEX_ENGINE (Ultrathink & Persist).")
     print("  studio   Lanza la interfaz 03_MOSKV_STUDIO (Tauri / Web UI).")
     print("  lab      Ejecuta pruebas en 04_LABORATORIO_RD (Compilador & Rust).")
     print("  sync     Sincroniza el monorepo con GitHub (master).")
     print()
+
+def get_python(submodule_path):
+    venv_py = os.path.join(submodule_path, "venv", "bin", "python")
+    if os.path.exists(venv_py):
+        return venv_py
+    return sys.executable
 
 def show_status():
     print(BANNER)
@@ -55,11 +62,50 @@ def show_status():
     except Exception:
         print("  Git Info: N/A")
 
-def get_python(submodule_path):
-    venv_py = os.path.join(submodule_path, "venv", "bin", "python")
-    if os.path.exists(venv_py):
-        return venv_py
-    return sys.executable
+def run_integration_tests():
+    print(BANNER)
+    print("🧪 INICIANDO TEST DE INTEGRACIÓN RÁPIDO (4 DOMINIOS MAESTROS)\n")
+    results = {}
+
+    # 1. Test Intel Suite
+    print("[1/4] Probando 01_INTEL_SUITE (Substack OSINT)...")
+    sub_path = os.path.join(OPS_DIR, "01_INTEL_SUITE", "substack-osint-miner")
+    py_bin = get_python(sub_path)
+    res_intel = subprocess.run([py_bin, os.path.join(sub_path, "cli.py"), "--help"], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+    results["01_INTEL_SUITE"] = "PASSED" if res_intel.returncode == 0 else f"FAILED (code {res_intel.returncode})"
+
+    # 2. Test Cortex Engine
+    print("[2/4] Probando 02_CORTEX_ENGINE (BABYLON-60 / Consensus)...")
+    eng_path = os.path.join(OPS_DIR, "02_CORTEX_ENGINE", "BABYLON-60")
+    py_bin = get_python(eng_path)
+    res_engine = subprocess.run([py_bin, os.path.join(eng_path, "ultrathink", "ultrathink_scheduler.py")], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+    results["02_CORTEX_ENGINE"] = "PASSED" if res_engine.returncode == 0 else f"FAILED (code {res_engine.returncode})"
+
+    # 3. Test Moskv Studio
+    print("[3/4] Probando 03_MOSKV_STUDIO (Portal React Package)...")
+    portal_pkg = os.path.join(OPS_DIR, "03_MOSKV_STUDIO", "portal", "package.json")
+    results["03_MOSKV_STUDIO"] = "PASSED" if os.path.exists(portal_pkg) else "FAILED (package.json not found)"
+
+    # 4. Test Laboratorio R&D
+    print("[4/4] Probando 04_LABORATORIO_RD (Strike-RS Rust Check)...")
+    strike_toml = os.path.join(OPS_DIR, "04_LABORATORIO_RD", "strike-rs", "Cargo.toml")
+    res_lab = subprocess.run(["cargo", "check", "--manifest-path", strike_toml], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+    results["04_LABORATORIO_RD"] = "PASSED" if res_lab.returncode == 0 else f"FAILED (code {res_lab.returncode})"
+
+    print("\n===============================================================")
+    print("📊 RESULTADOS DEL TEST DE INTEGRACIÓN:")
+    print("===============================================================")
+    all_passed = True
+    for domain, status in results.items():
+        icon = "✅" if status == "PASSED" else "❌"
+        print(f"  {icon} {domain:<25} -> {status}")
+        if status != "PASSED":
+            all_passed = False
+    print("===============================================================")
+    if all_passed:
+        print("🎉 TODOS LOS DOMINIOS OPERATIVOS (100% HEALTH PASS)\n")
+    else:
+        print("⚠️ SE DETECTARON ERRORES EN ALGUNOS DOMINIOS\n")
 
 def run_domain(domain_key, extra_args):
     folder = DOMAINS.get(domain_key)
@@ -116,6 +162,8 @@ def main():
         print_help()
     elif cmd == "status":
         show_status()
+    elif cmd in ["test", "check"]:
+        run_integration_tests()
     elif cmd in DOMAINS:
         run_domain(cmd, extra_args)
     elif cmd == "sync":
