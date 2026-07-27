@@ -196,3 +196,9 @@ def test_inv_c5_18_zero_worktree_swarm():
     assert not hits, _fail_msg("INV_C5_18 (Zero-Worktree Swarm Scaling)", hits)
 
 
+
+
+def test_inv_c5_19_stub():
+    """INV_C5_19 — Auto-generated stub for rule validation."""
+    # TODO: Implement concrete scan logic for rule INV_C5_19
+    pass

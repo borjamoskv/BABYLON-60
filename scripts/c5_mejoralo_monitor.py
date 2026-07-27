@@ -61,12 +61,25 @@ def audit_git_entropy() -> dict[str, str | int | list[str]]:
     }
 
 
-def audit_databases() -> dict[str, dict[str, int]]:
-    census: dict[str, dict[str, int]] = {}
+def _get_table_counts(conn: sqlite3.Connection, tables: list[str]) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for t in tables:
+        if t.startswith("sqlite_"):
+            continue
+        try:
+            counts[t] = int(conn.execute(f"SELECT count(*) FROM [{t}]").fetchone()[0])  # nosec B608
+        except sqlite3.OperationalError:
+            pass
+    return counts
+
+
+def audit_db_census() -> dict[str, dict[str, int]]:
     db_paths = [
-        p for p in ROOT_DIR.rglob("*.db")
+        p
+        for p in ROOT_DIR.rglob("*.db")
         if not any(part in ("venv", ".venv", ".git", "__pycache__") for part in p.parts)
     ]
+    census: dict[str, dict[str, int]] = {}
     for db_path in sorted(db_paths):
         rel_name = str(db_path.relative_to(ROOT_DIR))
         try:
@@ -79,20 +92,18 @@ def audit_databases() -> dict[str, dict[str, int]]:
                     "SELECT name FROM sqlite_master WHERE type='table'"
                 ).fetchall()
             ]
-            counts: dict[str, int] = {}
-            for t in tables:
-                if t.startswith("sqlite_"):
-                    continue
-                try:
-                    c = conn.execute(f"SELECT count(*) FROM [{t}]").fetchone()[0]
-                    counts[t] = c
-                except sqlite3.OperationalError:
-                    _ = None
+            census[rel_name] = _get_table_counts(conn, tables)
             conn.close()
-            census[rel_name] = counts
         except sqlite3.DatabaseError:
             census[rel_name] = {"ERROR": -1}
     return census
+
+
+def _parse_int_token(parts: list[str], idx: int = 1) -> int | None:
+    try:
+        return int(parts[idx])
+    except (IndexError, ValueError):
+        return None
 
 
 def audit_ruff() -> dict[str, int]:
@@ -111,19 +122,33 @@ def audit_ruff() -> dict[str, int]:
         if parts and parts[0].isdigit():
             error_count += int(parts[0])
         if "fixable" in line.lower():
-            fixable_count += int(parts[0]) if parts[0].isdigit() else 0
+            val = _parse_int_token(parts, 0)
+            if val is not None:
+                fixable_count += val
     for line in result.stderr.splitlines():
+        parts = line.split()
         if "Found" in line and "error" in line:
-            try:
-                error_count = int(line.split()[1])
-            except (IndexError, ValueError):
-                _ = None
+            val = _parse_int_token(parts, 1)
+            if val is not None:
+                error_count = val
         if "fixable" in line:
-            try:
-                fixable_count = int(line.split()[1])
-            except (IndexError, ValueError):
-                _ = None
+            val = _parse_int_token(parts, 1)
+            if val is not None:
+                fixable_count = val
     return {"total_errors": error_count, "fixable": fixable_count}
+
+
+def _parse_passed_count_from_line(line: str) -> int | None:
+    if "passed" not in line:
+        return None
+    parts = line.split()
+    for i, p in enumerate(parts):
+        if p.startswith("passed") or (i + 1 < len(parts) and parts[i + 1].startswith("passed")):
+            try:
+                return int(parts[i])
+            except ValueError:
+                return None
+    return None
 
 
 def audit_tests() -> dict[str, int | str]:
@@ -136,14 +161,9 @@ def audit_tests() -> dict[str, int | str]:
     result = subprocess.run(cmd, cwd=str(ROOT_DIR), capture_output=True, text=True)
     passed_count = 0
     for line in result.stdout.splitlines():
-        if "passed" in line:
-            parts = line.split()
-            for i, p in enumerate(parts):
-                if p.startswith("passed") or (i + 1 < len(parts) and parts[i+1].startswith("passed")):
-                    try:
-                        passed_count = int(parts[i])
-                    except ValueError:
-                        _ = None
+        cnt = _parse_passed_count_from_line(line)
+        if cnt is not None:
+            passed_count = cnt
     return {"test_files": len(test_files), "status": "PRESENT", "passed": passed_count}
 
 
@@ -172,6 +192,15 @@ def git_sentinel_commit(status_hash: str) -> str:
     return _git(["rev-parse", "--short", "HEAD"])
 
 
+def _print_db_census_entry(db_name: str, tables: dict[str, int]) -> int:
+    if isinstance(tables, dict) and "ERROR" not in tables:
+        db_total = sum(tables.values())
+        print(f"  {db_name:30s} → {db_total:>8,} nodos ({len(tables)} tablas)")
+        return db_total
+    print(f"  {db_name:30s} → ERROR")
+    return 0
+
+
 def c5_real_colapso() -> None:
     print("=" * 60)
     print(" MOSKV-1 APEX — C5-REAL STATE MONITOR (MEJORALO)")
@@ -187,16 +216,11 @@ def c5_real_colapso() -> None:
             print(f"      ↳ {f}")
 
     # Phase 2: BFT Database Census
-    db_census = audit_databases()
+    db_census = audit_db_census()
     total_nodes = 0
     print("\n[BFT] Censo de Bases de Datos:")
     for db_name, tables in db_census.items():
-        if isinstance(tables, dict) and "ERROR" not in tables:
-            db_total = sum(tables.values())
-            total_nodes += db_total
-            print(f"  {db_name:30s} → {db_total:>8,} nodos ({len(tables)} tablas)")
-        else:
-            print(f"  {db_name:30s} → ERROR")
+        total_nodes += _print_db_census_entry(db_name, tables)
     print(f"  {'TOTAL':30s} → {total_nodes:>8,} nodos")
 
     # Phase 3: Linter
