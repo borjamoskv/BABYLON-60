@@ -264,7 +264,23 @@ $$\forall\, \text{inv} \in \text{AGENTS.md} : \exists\, \text{test} \in \text{te
 
 ---
 
-## VIII. METATEORÍA — TEOREMAS DERIVADOS
+## VIII. AXIOMAS DE INTEGRIDAD EPISTÉMICA (INGESTA)
+
+### AX-EPI-1 (Requisito de Evidencia Verbatim — INV_INGESTA_08)
+
+$$\forall\, a \in \text{Attestations} : \text{status}(a) = \text{C5-REAL} \implies \exists\, s \in \text{Source} : \text{extract}(a, s) \neq \emptyset$$
+
+> Una atestación solo alcanza el nivel C5-REAL si contiene una extracción directa y literal (verbatim) de la fuente primaria. Sin extracción física, es una afirmación (C4-SIM).
+
+### AX-EPI-2 (Tasa de Fallo como Instrumento de Medida — INV_INGESTA_08)
+
+$$\text{success\_rate}(\text{Verifier}) = 1.0 \implies \forall\, a \in \text{Attestations} : \text{status}(a) \to \text{UNBACKED}$$
+
+> Un verificador que jamás rechaza carece de capacidad de discriminación. Una tasa de confirmación del 100% en entornos estocásticos degrada automáticamente todas las atestaciones a estado `UNBACKED` por construcción.
+
+---
+
+## IX. METATEORÍA — TEOREMAS DERIVADOS
 
 Los siguientes teoremas se derivan exclusivamente de los axiomas anteriores.
 
@@ -318,7 +334,7 @@ Cada nodo escribe exactamente una entrada. Si $N \leq K$, entonces $\text{entrie
 
 ---
 
-## IX. MAPEO AXIOMAS → INVARIANTES DE AGENTS.MD
+## X. MAPEO AXIOMAS → INVARIANTES DE AGENTS.MD
 
 | Axioma | Invariante(s) | Descripción |
 |:---|:---|:---|
@@ -338,10 +354,12 @@ Cada nodo escribe exactamente una entrada. Si $N \leq K$, entonces $\text{entrie
 | AX-AUTO-1 | INV_C5_19 | Histéresis térmica |
 | AX-AUTO-2 | INV_C5_22 | Swarm workspace lock |
 | AX-AUTO-3 | INV_C5_13 | Autopoietic alignment |
+| AX-EPI-1 | INV_INGESTA_08 | Requisito de evidencia verbatim |
+| AX-EPI-2 | INV_INGESTA_08 | Degradación por tasa de confirmación 100% |
 
 ---
 
-## X. VERIFICADOR FORMAL
+## XI. VERIFICADOR FORMAL
 
 Ver script ejecutable: [`scripts/axiom_verifier_z3.py`](file:///Users/borjafernandezangulo/BABYLON-60/scripts/axiom_verifier_z3.py)
 
