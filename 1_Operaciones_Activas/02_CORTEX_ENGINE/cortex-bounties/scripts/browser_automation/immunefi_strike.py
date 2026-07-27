@@ -80,7 +80,7 @@ class CDPSession:
         except asyncio.TimeoutError:
             return {}
 
-    async def ast.literal_eval(self, js: str):
+    async def eval_javascript(self, js: str):
         r = await self.send("Runtime.evaluate", {
             "expression": js,
             "returnByValue": True,

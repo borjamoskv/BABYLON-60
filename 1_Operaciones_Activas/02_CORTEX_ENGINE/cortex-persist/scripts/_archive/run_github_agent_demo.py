@@ -1,8 +1,8 @@
+from __future__ import annotations
 #!/usr/bin/env python3
 """Run the BABYLON60 GitHubAgent end-to-end from the terminal."""
 
 import logging
-from __future__ import annotations
 
 import argparse
 import asyncio

@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 
 # Import the module to be refuted
-from __import__("00_APEX_FSM").ApexFiniteStateMachine as APEX
+import importlib; APEX = importlib.import_module("00_APEX_FSM").ApexFiniteStateMachine
 
 async def adversarial_refutation():
     """

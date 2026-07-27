@@ -69,7 +69,7 @@ class CDPSession:
         await self.ws.send(json.dumps({"id": msg_id, "method": method, "params": params or {}}))
         return (await asyncio.wait_for(fut, timeout=20)).get("result", {})
 
-    async def ast.literal_eval(self, js: str):
+    async def eval_javascript(self, js: str):
         r = await self.send("Runtime.evaluate", {"expression": js, "returnByValue": True, "awaitPromise": True})
         return r.get("result", {}).get("value")
 

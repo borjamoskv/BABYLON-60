@@ -1,3 +1,4 @@
+from __future__ import annotations
 """
 cat_id: generate-ecosystem-map
 cat_type: script
@@ -10,7 +11,6 @@ exergy_tier: P1
 import logging
 
 
-from __future__ import annotations
 
 import ast
 import os

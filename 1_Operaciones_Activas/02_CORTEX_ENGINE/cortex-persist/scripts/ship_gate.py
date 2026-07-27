@@ -1,3 +1,4 @@
+from __future__ import annotations
 # [C5-REAL] Exergy-Maximized
 """
 cat_id: ship-gate
@@ -12,7 +13,6 @@ exergy_tier: P2
 import logging
 
 
-from __future__ import annotations
 
 import json
 import os
