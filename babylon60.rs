@@ -71,6 +71,16 @@ impl DAGLedger {
             signature: "SIG_OK".to_string(),
         };
         ev.hash = ev.compute_hash();
+        
+        // INV_BFT_04: Fail-fast collision check
+        if let Some(existing) = self.events.get(&id) {
+            if existing.hash != ev.hash {
+                panic!("Fail-fast: INV_BFT_04 Collision: payload_hash differs for id {}", id);
+            } else {
+                return; // INSERT OR IGNORE safe
+            }
+        }
+        
         self.events.insert(id.clone(), ev);
         self.latest = vec![id];
     }

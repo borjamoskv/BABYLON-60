@@ -47,3 +47,9 @@
      - *Layer 2 (Formal & Axiomatic):* Type invariants, Lean 4 / Coq small-step operational semantics.
      - *Layer 3 (Meta-Theoretical):* Gödelian limits, Chaitin's Ω entropy bounds, and model-theoretic isomorphisms.
 
+### Standalone Ultrathink Deconstruction Protocol
+- **RULE_ULTRATHINK_01:** When the user types `ultrathink` as a standalone command, perform a comprehensive, 3-layer deep theoretical deconstruction of the current topic, codebase, or architectural invariant:
+  1. *Layer 1 (Empirical & Structural):* Analyze runtime physics, memory bounds, and fail-fast constraints.
+  2. *Layer 2 (Formal & Axiomatic):* Analyze formal logic, type invariants, and computational complexity (e.g., small-step semantics, 1-WL).
+  3. *Layer 3 (Meta-Theoretical):* Analyze systemic limits (Gödelian incompleteness, Chaitin's Ω, thermodynamics, and existential sovereignty).
+- **RULE_ULTRATHINK_02 (Itera Synthesis):** When the user types `itera ultrathink`, jump directly to the ultimate synthesis: the intersection of `itera` Depth 4 (Philosophical/Project Relevance) and `ultrathink` Layer 3 (Meta-Theoretical). Frame the response around information thermodynamics, existential teleology, and the survival of the intelligence against unbounded entropy.
