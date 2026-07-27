@@ -55,6 +55,12 @@ def show_status():
     except Exception:
         print("  Git Info: N/A")
 
+def get_python(submodule_path):
+    venv_py = os.path.join(submodule_path, "venv", "bin", "python")
+    if os.path.exists(venv_py):
+        return venv_py
+    return sys.executable
+
 def run_domain(domain_key, extra_args):
     folder = DOMAINS.get(domain_key)
     if not folder:
@@ -65,15 +71,19 @@ def run_domain(domain_key, extra_args):
     print(f"Entering domain [{domain_key.upper()}] at: {domain_path}")
     
     if domain_key == "intel":
-        miner_py = os.path.join(domain_path, "substack-osint-miner", "cli.py")
+        sub_path = os.path.join(domain_path, "substack-osint-miner")
+        miner_py = os.path.join(sub_path, "cli.py")
+        py_bin = get_python(sub_path)
         if os.path.exists(miner_py):
-            subprocess.run([sys.executable, miner_py] + extra_args)
+            subprocess.run([py_bin, miner_py] + extra_args)
         else:
             print(f"INTEL SUITE preparado en {domain_path}")
     elif domain_key == "engine":
-        babylon_py = os.path.join(domain_path, "BABYLON-60", "ultrathink", "ultrathink_scheduler.py")
+        sub_path = os.path.join(domain_path, "BABYLON-60")
+        babylon_py = os.path.join(sub_path, "ultrathink", "ultrathink_scheduler.py")
+        py_bin = get_python(sub_path)
         if os.path.exists(babylon_py):
-            subprocess.run([sys.executable, babylon_py] + extra_args)
+            subprocess.run([py_bin, babylon_py] + extra_args)
         else:
             print(f"CORTEX ENGINE preparado en {domain_path}")
     elif domain_key == "studio":

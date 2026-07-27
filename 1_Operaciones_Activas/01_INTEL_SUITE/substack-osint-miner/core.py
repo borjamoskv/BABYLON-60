@@ -5,7 +5,6 @@ import urllib.parse
 import json
 from bs4 import BeautifulSoup
 import networkx as nx
-from sklearn.cluster import DBSCAN
 
 EMAIL_RE = re.compile(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}')
 
