@@ -68,11 +68,13 @@ def run_integration_tests():
     results = {}
 
     # 1. Test Intel Suite
-    print("[1/4] Probando 01_INTEL_SUITE (Substack OSINT)...")
+    print("[1/4] Probando 01_INTEL_SUITE (Substack OSINT & Documentary Agent)...")
     sub_path = os.path.join(OPS_DIR, "01_INTEL_SUITE", "substack-osint-miner")
+    doc_py = os.path.join(OPS_DIR, "01_INTEL_SUITE", "documentary_agent_omega", "main.py")
     py_bin = get_python(sub_path)
-    res_intel = subprocess.run([py_bin, os.path.join(sub_path, "cli.py"), "--help"], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
-    results["01_INTEL_SUITE"] = "PASSED" if res_intel.returncode == 0 else f"FAILED (code {res_intel.returncode})"
+    res_intel1 = subprocess.run([py_bin, os.path.join(sub_path, "cli.py"), "--help"], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+    res_intel2 = subprocess.run([py_bin, doc_py, "--help"], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+    results["01_INTEL_SUITE"] = "PASSED" if (res_intel1.returncode == 0 and res_intel2.returncode == 0) else f"FAILED (osint:{res_intel1.returncode}, doc:{res_intel2.returncode})"
 
     # 2. Test Cortex Engine
     print("[2/4] Probando 02_CORTEX_ENGINE (BABYLON-60 / Consensus)...")

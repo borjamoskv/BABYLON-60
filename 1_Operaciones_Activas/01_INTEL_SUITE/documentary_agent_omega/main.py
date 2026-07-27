@@ -153,6 +153,11 @@ def concat_videos(video_files: list[str], output_path: str):
     os.remove(list_path)
 
 async def main():
+    if len(sys.argv) > 1 and sys.argv[1] in ["-h", "--help", "help"]:
+        print("Uso: python main.py [tema_del_documental]")
+        print("Genera un documental audiovisual C5-REAL completo usando Gemini Omni Flash, Edge-TTS y FFmpeg.")
+        return
+
     if len(sys.argv) < 2:
         topic = "El Colapso de la Edad de Bronce" # Fallback épico por defecto
     else:
