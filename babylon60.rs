@@ -408,8 +408,7 @@ fn main() {
 // 11. Immutable Artifact Export
 fn export_artifact_bundle(ledger: &DAGLedger) {
     use std::io::Write;
-    use std::collections::hash_map::DefaultHasher;
-    use std::hash::{Hash, Hasher};
+    use sha2::{Sha256, Digest}; // INV_C5_15: 32-byte raw L1 anchor
 
     let mut canonical_lines = Vec::new();
     for ev in ledger.events.values() {
@@ -423,10 +422,10 @@ fn export_artifact_bundle(ledger: &DAGLedger) {
     canonical_lines.sort();
     let canonical_graph = canonical_lines.join("\n") + "\n";
     
-    // Basic hash for simulation purposes
-    let mut hasher = DefaultHasher::new();
-    canonical_graph.hash(&mut hasher);
-    let graph_hash = format!("{:x}", hasher.finish());
+    // INV_C5_15: Secure 256-bit hash for absolute entropy commitment
+    let mut hasher = Sha256::new();
+    hasher.update(canonical_graph.as_bytes());
+    let graph_hash = format!("{:064x}", hasher.finalize());
 
     let manifest = format!(r#"{{
   "version": "1.0",
