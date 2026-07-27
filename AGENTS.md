@@ -115,6 +115,9 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 ### Zero-Worktree Swarm Scaling (Prevención de ENOSPC)
 - **INV_C5_18:** For large parallel agent swarms ($N \ge 10$), creating physical disk Git Worktrees that consume storage and trigger ENOSPC is strictly prohibited. Swarm scaling must use in-memory AgencyHypervisor multi-tenant handles and single-writer BFT actors.
 
+### Epistemic Integrity in Ledger Attestation
+- **INV_INGESTA_08:** Una atestación con tasa de confirmación 100% se marca UNBACKED por construcción. El verificador debe poder perder. La atestación sin evidencia citable (cadenas verbatim extraídas de la fuente primaria) es aserción con adorno. No se admite teatro de simulación: C4-SIM jamás debe presentarse como C5-REAL.
+
 
 
 
