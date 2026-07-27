@@ -45,4 +45,30 @@ Inductive Step : State -> State -> Prop :=
       Step s (mkState 
                 (regs s) 
                 (ledger s) 
-                (mkClock (S (tick (clock s))))).
+                (mkClock (S (tick (clock s)))))
+                
+  | step_dah : forall (s : State) (r : nat) (v : F60_Val),
+      Step s (mkState 
+                (fun x => if Nat.eqb x r then 
+                            match (regs s r) with 
+                            | Some val => Some (Qmult val v) 
+                            | None => None 
+                            end 
+                          else (regs s) x) 
+                (ledger s) 
+                (clock s))
+
+  | step_lal : forall (s : State) (r_dest r_src : nat),
+      Step s (mkState 
+                (fun x => if Nat.eqb x r_dest then 
+                            match (regs s r_dest), (regs s r_src) with 
+                            | Some v1, Some v2 => Some (Qminus v1 v2) 
+                            | _, _ => None 
+                            end 
+                          else (regs s) x) 
+                (ledger s) 
+                (clock s))
+
+  | step_nu : forall (s : State) (r : nat) (target : string),
+      (* Trampa de falsación. Se omite el salto de PC por brevedad del modelo *)
+      Step s s.

@@ -1,41 +1,86 @@
-import './App.css'
+import { useState } from 'react';
+import { LayoutDashboard, Target, Users, CalendarClock, Blocks, Settings } from 'lucide-react';
+import { Dashboard } from './components/Dashboard';
+import { GoalMode } from './components/GoalMode';
+import { SwarmOverview } from './components/SwarmOverview';
+import { ScheduledTasks } from './components/ScheduledTasks';
+import { FinancialPlugins } from './components/FinancialPlugins';
+import './App.css';
+
+type View = 'dashboard' | 'goal' | 'swarm' | 'scheduled' | 'plugins';
 
 function App() {
+  const [currentView, setCurrentView] = useState<View>('dashboard');
+
+  const renderView = () => {
+    switch (currentView) {
+      case 'dashboard': return <Dashboard />;
+      case 'goal': return <GoalMode />;
+      case 'swarm': return <SwarmOverview />;
+      case 'scheduled': return <ScheduledTasks />;
+      case 'plugins': return <FinancialPlugins />;
+      default: return <Dashboard />;
+    }
+  };
+
   return (
-    <div className="app-container">
-      <header className="hero">
-        <h1 className="heading-gradient">BABYLON-60</h1>
-        <p>The formal fortress against unbounded digital entropy. A mathematically pure orchestration engine.</p>
-        <button className="btn-primary">Initialize Kernel</button>
-      </header>
+    <div className="dashboard-layout">
+      {/* Sidebar Navigation */}
+      <nav className="sidebar">
+        <div className="brand">
+          <h1>BABYLON-60</h1>
+        </div>
+        
+        <div className="nav-links" style={{ flex: 1 }}>
+          <a 
+            className={`nav-item ${currentView === 'dashboard' ? 'active' : ''}`}
+            onClick={() => setCurrentView('dashboard')}
+          >
+            <LayoutDashboard className="nav-icon" /> Dashboard
+          </a>
+          
+          <a 
+            className={`nav-item ${currentView === 'goal' ? 'active' : ''}`}
+            onClick={() => setCurrentView('goal')}
+          >
+            <Target className="nav-icon" /> Goal Mode
+          </a>
 
-      <main className="grid-features">
-        <div className="glass-panel feature-card">
-          <h3>BFT Fail-Fast</h3>
-          <p>Strict memory invariants prevent silent causality overwrites. We abort before entropy diverges.</p>
-          <div className="code-block">
-            <code>panic!("Fail-fast: INV_BFT_04 Collision");</code>
-          </div>
+          <a 
+            className={`nav-item ${currentView === 'swarm' ? 'active' : ''}`}
+            onClick={() => setCurrentView('swarm')}
+          >
+            <Users className="nav-icon" /> Swarm Orchestrator
+          </a>
+
+          <a 
+            className={`nav-item ${currentView === 'scheduled' ? 'active' : ''}`}
+            onClick={() => setCurrentView('scheduled')}
+          >
+            <CalendarClock className="nav-icon" /> Scheduled Tasks
+          </a>
+
+          <a 
+            className={`nav-item ${currentView === 'plugins' ? 'active' : ''}`}
+            onClick={() => setCurrentView('plugins')}
+          >
+            <Blocks className="nav-icon" /> Financial Plugins
+          </a>
         </div>
 
-        <div className="glass-panel feature-card">
-          <h3>L1 Thermodynamic Anchor</h3>
-          <p>Absolute entropy commitment anchored natively to Bitcoin's Proof of Work via raw 32-byte Merkle Roots.</p>
-          <div className="code-block">
-            <code>graph.sha256 = 5eea556d...</code>
-          </div>
+        <div className="nav-links">
+          <a className="nav-item">
+            <Settings className="nav-icon" /> Settings
+          </a>
         </div>
+      </nav>
 
-        <div className="glass-panel feature-card">
-          <h3>Zero-Worktree Scalability</h3>
-          <p>In-memory BFT actors orchestrating asynchronous swarm scaling without ENOSPC vulnerabilities.</p>
-          <div className="code-block">
-            <code>queue.push_back(Coroutine);</code>
-          </div>
-        </div>
+      {/* Main Content Area */}
+      <main className="main-content">
+        {renderView()}
       </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -17,14 +17,19 @@ mod tests {
             .arg("causal_test.b60")
             .output();
             
-        // For a full implementation, we would extract the graph_sha256 from the stdout
-        // or from the generated artifact_bundle_v3/manifest.json and assert equality.
+        use sha2::{Sha256, Digest};
         
-        // Example mock assertion representing the homomorphic check:
-        // let py_hash = extract_hash(py_res);
-        // let rs_hash = extract_hash(rs_res);
-        // assert_eq!(py_hash, rs_hash, "Differential Failsafe: Traces diverge!");
+        let py_output = py_res.expect("Python interpreter failed to run");
+        let rs_output = rs_res.expect("Rust kernel failed to run");
         
-        assert!(true, "Differential homomorphism scaffolding intact.");
+        let mut hasher_py = Sha256::new();
+        hasher_py.update(&py_output.stdout);
+        let py_hash = format!("{:x}", hasher_py.finalize());
+        
+        let mut hasher_rs = Sha256::new();
+        hasher_rs.update(&rs_output.stdout);
+        let rs_hash = format!("{:x}", hasher_rs.finalize());
+        
+        assert_eq!(py_hash, rs_hash, "Differential Failsafe: Traces diverge between Python and Rust Kernel!");
     }
 }
