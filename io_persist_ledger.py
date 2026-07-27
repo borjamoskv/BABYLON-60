@@ -41,11 +41,19 @@ class LedgerPersist:
         cursor = self.conn.cursor()
         inserted = 0
         for node in ledger.nodes.values():
-            cursor.execute(
-                "INSERT OR IGNORE INTO dag_nodes (node_id, parent_id, claim, payload_hash) VALUES (?, ?, ?, ?)",
-                (node.node_id, node.parent_id, node.claim_summary, node.payload_hash)
-            )
-            inserted += cursor.rowcount
+            try:
+                cursor.execute(
+                    "INSERT INTO dag_nodes (node_id, parent_id, claim, payload_hash) VALUES (?, ?, ?, ?)",
+                    (node.node_id, node.parent_id, node.claim_summary, node.payload_hash)
+                )
+                inserted += 1
+            except sqlite3.IntegrityError:
+                # Bifurcación INV_BFT_04: Validar colisión de UUID
+                cursor.execute("SELECT payload_hash FROM dag_nodes WHERE node_id = ?", (node.node_id,))
+                existing_hash = cursor.fetchone()[0]
+                if existing_hash != node.payload_hash:
+                    raise ValueError(f"Fail-fast: INV_BFT_04 Collision for UUID {node.node_id}. State corruption detected.")
+                # Si el hash coincide, es replay idempotente; se ignora en silencio.
         self.conn.commit()
         return inserted
 

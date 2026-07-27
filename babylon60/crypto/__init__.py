@@ -21,7 +21,6 @@ from .hash_registry import (
 from .hash_registry import (
     configure as configure_hash,
 )
-from .vault import Vault
 
 
 def get_master_key() -> bytes | None:
@@ -42,7 +41,6 @@ __all__ = [
     "CortexEncrypter",
     "HashAlgorithm",
     "RFC3161Client",
-    "Vault",
     "configure_hash",
     "cortex_hash",
     "cortex_hash_raw",
