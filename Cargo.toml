@@ -7,3 +7,15 @@ members = [
     "fuzz",
 ]
 resolver = "2"
+
+[package]
+name = "babylon60_root"
+version = "3.0.0"
+edition = "2021"
+
+[[bin]]
+name = "b60_kernel"
+path = "babylon60.rs"
+
+[dependencies]
+sha2 = "0.10"
