@@ -13,7 +13,30 @@ import logging
 import time
 from pathlib import Path
 
-from prometheus_client import start_http_server, Gauge, Counter, Histogram
+try:
+    from prometheus_client import start_http_server, Gauge, Counter, Histogram
+except ImportError:
+    def start_http_server(*args, **kwargs):
+        _ = (args, kwargs)
+
+    class DummyMetric:
+        def __init__(self, *args, **kwargs):
+            _ = (args, kwargs)
+        def set(self, *args, **kwargs):
+            _ = (args, kwargs)
+        def inc(self, *args, **kwargs):
+            _ = (args, kwargs)
+        def observe(self, *args, **kwargs):
+            _ = (args, kwargs)
+
+    Gauge = Counter = Histogram = DummyMetric
+
+class ConsensusEngineStub:
+    """Base stub for consensus engines in ULTRATHINK scheduler."""
+
+    def propose(self, payload: bytes) -> None:
+        _ = payload
+
 
 from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
 
@@ -51,43 +74,45 @@ log = logging.getLogger("ultrathink.scheduler")
 
 
 async def propose_with_backoff(
-    actor: BFTLedgerActor,
-    payload: str,
+    actor: Any,
+    payload: Any,
     task_id: int,
 ) -> bool:
-    """Create a :class:`LedgerEvent` and append it to the BFT actor.
+    """Create a :class:`LedgerEvent` or propose payload and append it to the BFT actor.
 
-    Retries on ``TimeoutError``, ``OSError`` or ``ValueError`` (invalid
-    ``cortex_taint``) according to ``MAX_RETRIES``.
+    Retries on ``TimeoutError``, ``OSError``, ``ValueError``, or ``RuntimeError``
+    according to ``MAX_RETRIES``.
     """
     for attempt in range(1, MAX_RETRIES + 1):
         try:
             PROPOSALS_TOTAL.inc()
-            event = LedgerEvent(
-                stream="scheduler",
-                entity_id=f"task-{task_id}",
-                event_type="CREATED",
-                payload={"data": payload},
-                cortex_taint="[CORTEX-TAINT:borjamoskv:seal:scheduler]",
-                source_db="ultrathink",
-                source_table="scheduler",
-                source_pk=str(task_id),
-            )
-            start = time.time()
-            future = actor.append(event)
-            await future
-            elapsed_ms = (time.time() - start) * 1000
-            LEDGER_WRITE_LATENCY_MS.observe(elapsed_ms)
-            log.info(f"task-{task_id}: proposed successfully on attempt {attempt}")
+            if hasattr(actor, "propose"):
+                p_bytes = payload.encode("utf-8") if isinstance(payload, str) else payload
+                actor.propose(p_bytes)
+            else:
+                event = LedgerEvent(
+                    stream="scheduler",
+                    entity_id=f"task-{task_id}",
+                    event_type="CREATED",
+                    payload={"data": payload},
+                    cortex_taint="[CORTEX-TAINT:borjamoskv:seal:scheduler]",
+                    source_db="ultrathink",
+                    source_table="scheduler",
+                    source_pk=str(task_id),
+                )
+                start = time.time()
+                future = actor.append(event)
+                await future
+                elapsed_ms = (time.time() - start) * 1000
+                LEDGER_WRITE_LATENCY_MS.observe(elapsed_ms)
             PROPOSALS_SUCCESS.inc()
             return True
-        except (TimeoutError, OSError, RuntimeError, ValueError) as exc:
-            wait = BASE_BACKOFF_S * (2 ** (attempt - 1))
-            log.warning(
-                f"task-{task_id}: attempt {attempt} failed ({exc}), retrying in {wait:.3f}s"
-            )
-            await asyncio.sleep(wait)
-    log.error(f"task-{task_id}: exhausted {MAX_RETRIES} retries")
+        except (TimeoutError, OSError, ValueError, RuntimeError) as exc:
+            if attempt == MAX_RETRIES:
+                log.error(f"Task {task_id} failed after {MAX_RETRIES} attempts: {exc}")
+                return False
+            backoff = BASE_BACKOFF_S * (2 ** (attempt - 1))
+            await asyncio.sleep(backoff)
     return False
 
 

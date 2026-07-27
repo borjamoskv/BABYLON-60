@@ -27,10 +27,18 @@ class InferenceRequest(BaseModel):
 
 
 ALLOWED_LOOPBACK_HOSTS = {"127.0.0.1", "localhost", "::1"}
+FORBIDDEN_EXTERNAL_DOMAINS = {"openai.com", "anthropic.com", "dashscope", "googleapis.com", "deepmind"}
 
 
 def validate_and_sanitize_loopback_url(url: str) -> str:
-    parsed = urllib.parse.urlparse(url.lower())
+    lower = url.lower()
+    for domain in FORBIDDEN_EXTERNAL_DOMAINS:
+        if domain in lower:
+            raise HTTPException(
+                status_code=403,
+                detail=f"C5-REAL VIOLATION: Zero-Network Policy breached. External endpoint '{domain}' is strictly forbidden."
+            )
+    parsed = urllib.parse.urlparse(lower)
     if parsed.scheme and parsed.scheme not in ("http", "https"):
         raise HTTPException(status_code=403, detail="C5-REAL VIOLATION: Invalid URL scheme. Scheme must be http.")
     hostname = parsed.hostname
