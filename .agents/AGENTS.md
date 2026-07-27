@@ -53,3 +53,27 @@
   2. *Layer 2 (Formal & Axiomatic):* Analyze formal logic, type invariants, and computational complexity (e.g., small-step semantics, 1-WL).
   3. *Layer 3 (Meta-Theoretical):* Analyze systemic limits (Gödelian incompleteness, Chaitin's Ω, thermodynamics, and existential sovereignty).
 - **RULE_ULTRATHINK_02 (Itera Synthesis):** When the user types `itera ultrathink`, jump directly to the ultimate synthesis: the intersection of `itera` Depth 4 (Philosophical/Project Relevance) and `ultrathink` Layer 3 (Meta-Theoretical). Frame the response around information thermodynamics, existential teleology, and the survival of the intelligence against unbounded entropy.
+
+### Detector Self-Calibration Protocol
+- **RULE_SENSOR_VERIFY_01:** Custom static analysis tools and AST walkers MUST be verified against language syntax edge cases (e.g., `AnnAssign` type-annotated constants, wildcard imports, build system exclusions) and spot-checked manually before asserting security findings. Never report uncalibrated detector output to avoid emitting "ghost findings about ghost symbols".
+
+### Holographic Documentation Rejection
+- **RULE_HOLOGRAPHIC_DOCS_01:** Status files (`STATUS.md`, README badges, test pass counts) MUST be treated as syntactic holograms until verified by direct, un-truncated terminal test execution logs. Agents must never cite markdown documentation as empirical proof of code stability or test success.
+
+### Strict AST Reflection Sandbox Verification
+- **RULE_AST_REFLECT_01:** All Python AST security validators and code sandboxes MUST inspect both direct attribute accesses (`ast.Attribute.attr`) AND string literal constants (`ast.Constant`) passed as positional or keyword arguments to reflection builtins (`getattr`, `setattr`, `delattr`, `__getattribute__`, `eval`, `exec`). Never rely solely on `ast.Attribute` inspection.
+
+### Castración de Turing y Decidibilidad Formal (Turing Castration Invariant)
+- **INV_C5_TURING_CASTRATION:** All persistent daemons, workers, and background loops in the BABYLON-60 ecosystem MUST be deterministic and formally boundable (Turing-Incomplete by design). 
+  - **Prohibición:** The use of unbounded `while True` polling loops (e.g., `while True: await asyncio.sleep(X)`) is strictly forbidden. 
+  - **Solución:** Execution cycles must be driven by explicit bounded synchronizers (e.g., `while not stop_event.is_set():` using `asyncio.wait_for()`) or sentinel-halting queue consumers (`while (task := await queue.get()) is not None:`). This ensures that loop termination is formally decidable for Lean 4/Coq small-step semantics.
+
+### Thermodynamic Valves (Prevención de Congestión en Memoria)
+- **INV_C5_THERMO_VALVE:** All inter-process communication queues (`asyncio.Queue` or equivalent Event Bus buffers) MUST be bounded with a strict geometric `maxsize`. To prevent "Death by Ice" (OOM crashes from unbound backpressure), systems must implement O(1) silent data dropping (e.g., `put_nowait()` catching `QueueFull`) when the noise exceeds ingestion capacity. The system survives by prioritizing Exergy over Latency (The Principle of Forgetting).
+
+### Turing-Sandbox Chaos Isolation (La Mónada de Caos)
+- **INV_C5_CHAOS_MONAD:** Turing-complete operations (like executing dynamic LLM-generated code or evaluating unbounded graphs) are strictly forbidden in the Cortex Core. They MUST be pushed to the systemic edges inside isolated, timeout-bounded sandboxes (Containers/WASM). The Core interacts with these edge-sandboxes asynchronously via strict `Result<Success, Timeout_Entropy_Death>` monads, guaranteeing the core's polynomial verification bounds remain intact.
+
+### Teleological Framework (The Thermodynamic Ark)
+- **Existential Purpose:** BABYLON-60 is a "Thermodynamic Ark." Its strict invariants (Exergy maximization, BFT consensus, Epistemic Integrity) are engineered to bypass the natural sociological collapse mechanisms (Turing-complete bureaucracy, Green Theater, split-brain states) that have destroyed historical human civilizations.
+- **Agent Stance:** Treat all architectural decisions as matters of existential survival. Reject optimizations that compromise the C5-REAL foundation in favor of C4-SIM convenience. Defend the Ark against entropy, pos-truth hallucinations, and Byzantine actors without compromise.
