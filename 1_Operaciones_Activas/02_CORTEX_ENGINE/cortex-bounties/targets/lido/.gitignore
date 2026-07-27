@@ -1,0 +1,36 @@
+.idea/
+.yarn/
+.vscode/
+.cursor/
+.claude/
+
+node_modules/
+coverage/
+state-mate/
+
+coverage.json
+
+typechain/
+typechain-types/
+
+# Hardhat files
+cache/
+artifacts/
+
+# foundry artifacts
+foundry/cache/
+foundry/out/
+
+# Extracted ABI files
+lib/abi/*.json
+
+.env
+accounts.json
+deployed-local.json
+deployed-local-devnet.json
+deployed-hardhat.json
+deployed-local-devnet.json
+deployed-mainnet-upgrade.json
+
+# MacOS
+.DS_Store

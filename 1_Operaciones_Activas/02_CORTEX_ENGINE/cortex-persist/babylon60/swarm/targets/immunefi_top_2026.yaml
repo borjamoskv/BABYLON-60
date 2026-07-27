@@ -1,0 +1,71 @@
+# CORTEX-SWARM-PRIME: Immunefi Top Bounties 2026
+# [C5-REAL] Highest-value permanent bounties
+version: 2.0.0
+target: "immunefi-top-2026"
+type: "permanent-bounty"
+platform: "immunefi"
+
+# Platform Stats (July 2026)
+platform_stats:
+  active_programs: 190
+  total_paid_usd: 110000000
+  protected_tvl_usd: 190000000000
+  reward_model: "10pct_funds_at_risk"
+  kyc_required: true
+
+# Top Targets (sorted by max reward)
+targets:
+  - name: "Sky (MakerDAO)"
+    max_reward_usd: 10000000
+    focus: "DeFi core, stablecoin, governance"
+    difficulty: "EXTREME"
+  - name: "Aave Core V3"
+    max_reward_usd: 5000000
+    focus: "Lending/borrowing, flash loans"
+    difficulty: "VERY_HIGH"
+  - name: "Chainlink"
+    max_reward_usd: 3000000
+    focus: "Oracle design, cross-chain"
+    difficulty: "VERY_HIGH"
+  - name: "Aave V4"
+    max_reward_usd: 2500000
+    focus: "Next-gen lending architecture"
+    difficulty: "HIGH"
+    recommended: true  # Newer, less audited
+  - name: "Optimism"
+    max_reward_usd: 2000042
+    focus: "L2 smart contracts, blockchain/DLT"
+    difficulty: "VERY_HIGH"
+  - name: "Lido"
+    max_reward_usd: 2000000
+    focus: "Liquid staking, governance hijack prevention"
+    difficulty: "HIGH"
+  - name: "DeXe Protocol"
+    max_reward_usd: 500000
+    focus: "DAO governance"
+    difficulty: "MEDIUM"
+    recommended: true  # Lower competition
+  - name: "SSV Network"
+    max_reward_usd: 250000
+    focus: "Distributed validator tech"
+    difficulty: "MEDIUM"
+    recommended: true  # Lower competition
+
+# SwarmCommander Constraints
+commander:
+  max_exergy_usd: 50.00
+  strict_validation: true
+  model: "claude-4.6-thinking"
+
+supervisor:
+  id: "L1-Immunefi-Top"
+  agents_total: 5000
+  strategy: "deep_dive_single_target"
+
+rules:
+  - "target-only-fund-loss"
+  - "ignore-gas-optimization"
+  - "poc-required"
+  - "exergy_ratio > 1000.0"
+  - "minimum_severity: CRITICAL"
+  - "format: immunefi_submission"

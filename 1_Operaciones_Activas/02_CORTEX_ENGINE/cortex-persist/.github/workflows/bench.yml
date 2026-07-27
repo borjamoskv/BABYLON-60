@@ -1,0 +1,53 @@
+name: Criterion Benchmark · C5-ABSOLUTE
+
+on:
+  push:
+    branches: [main]
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  bench:
+    name: cargo bench (Rust FFI core)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+
+      - name: Install Rust toolchain (stable)
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+
+      - name: Cache cargo registry + build
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            cortex_rs/target
+          key: ${{ runner.os }}-cargo-bench-${{ hashFiles('cortex_rs/Cargo.lock') }}
+
+      - name: Run Criterion benchmarks
+        working-directory: cortex_rs
+        run: cargo bench --bench '*' -- --output-format bencher | tee ../benchmark_results.txt
+
+      - name: Upload raw benchmark artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: criterion-bench-${{ github.sha }}
+          path: benchmark_results.txt
+          retention-days: 90
+
+      - name: Attach results to GitHub Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: benchmark_results.txt
+          body: |
+            ## Benchmark Results · C5-ABSOLUTE Proof
+            Criterion.rs output attached. Throughput target: ≥390k events/sec (GIL-free Rust-FFI core).

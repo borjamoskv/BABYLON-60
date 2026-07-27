@@ -1,0 +1,107 @@
+---
+// @C5-REAL
+import Layout from '../layouts/Layout.astro';
+import CortexExplorer from '../components/CortexExplorer.tsx';
+import { Database, Shield, Users, ArrowRight, Terminal } from 'lucide-react';
+---
+
+<Layout title="CORTEX Foundation · Silicon Truth for AI Systems" description="Sovereign research and tooling for agent memory, post-quantum agent networks, and the synthetic economy.">
+  <div class="fixed top-0 inset-x-0 h-[600px] bg-gradient-to-b from-cortex-accent/10 via-cortex-bg to-transparent pointer-events-none -z-10"></div>
+
+  <!-- Header Navigation -->
+  <header class="w-full border-b border-white/5 bg-cortex-bg/60 backdrop-blur-2xl sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 group no-underline" id="nav-brand-link">
+        <div class="w-6 h-6 rounded-sm bg-[#2b3be5] flex items-center justify-center shadow-[0_0_15px_rgba(43,59,229,0.4)] group-hover:shadow-[0_0_25px_rgba(43,59,229,0.7)] transition-shadow">
+          <span class="text-[10px] font-mono font-bold text-white">CO</span>
+        </div>
+        <span class="font-mono text-sm tracking-widest uppercase text-white/90">Cortex<span class="text-white/30">.Org</span></span>
+      </a>
+      <nav class="hidden md:flex gap-8 text-xs font-mono uppercase tracking-[0.1em]">
+        <a href="/memoria" class="text-white/50 hover:text-white transition-colors no-underline" id="nav-link-memoria">I. Memoria</a>
+        <a href="/agentes" class="text-white/50 hover:text-white transition-colors no-underline" id="nav-link-agentes">II. Agentes</a>
+        <a href="/influencers" class="text-white/50 hover:text-white transition-colors no-underline" id="nav-link-influencers">III. Influencers IA</a>
+      </nav>
+      <a href="https://cortexpersist.dev" class="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded text-xs font-mono uppercase tracking-wider text-white transition-all hover:border-cortex-accent/50 no-underline" id="nav-action-link">
+        Dev Portal →
+      </a>
+    </div>
+  </header>
+
+  <main class="relative min-h-screen max-w-7xl mx-auto px-6 pt-24 pb-32 w-full">
+    
+    <!-- Hero Header -->
+    <div class="text-center mb-20">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cortex-accent/20 bg-cortex-accent/5 mb-8">
+        <span class="w-1.5 h-1.5 rounded-full bg-cortex-accent"></span>
+        <span class="font-mono text-[9px] tracking-widest uppercase text-cortex-accent">Sovereign Knowledge Hub</span>
+      </div>
+      
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter uppercase text-white leading-none mb-6" id="main-hero-title">
+        The Truth Protocol <br />
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cortex-accent via-cortex-secondary to-white">for Autonomous Systems</span>
+      </h1>
+      
+      <p class="text-base md:text-lg text-cortex-muted max-w-xl mx-auto leading-relaxed font-light mb-12">
+        Demystifying AI execution. We build and audit cryptographic memory substrates, secure agent environments, and analyze synthetic commercial mechanics.
+      </p>
+    </div>
+
+    <!-- Interactive Explorer -->
+    <div class="mb-24" id="cortex-explorer-section">
+      <CortexExplorer client:load />
+    </div>
+
+    <!-- Feature Pillars -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="pillars-section">
+      {/* Pillar 1 */}
+      <div class="bg-cortex-cards/30 border border-white/5 p-6 rounded-2xl flex flex-col justify-between hover:border-white/10 transition-colors">
+        <div>
+          <div className="w-10 h-10 rounded-lg bg-[#2b3be5]/10 flex items-center justify-center mb-6">
+            <Database className="w-5 h-5 text-cortex-secondary" />
+          </div>
+          <h3 className="font-mono text-sm uppercase text-white font-bold tracking-wider mb-2">I. Memoria Criptográfica</h3>
+          <p className="text-xs text-cortex-muted leading-relaxed mb-6">
+            Análisis y especificaciones sobre cómo blindar la memoria semántica de los agentes mediante Merkle-trees y validaciones de estado. Evita la manipulación retrospectiva de hechos.
+          </p>
+        </div>
+        <a href="/memoria" class="text-xs font-mono uppercase tracking-widest text-[#4d5eff] hover:underline flex items-center gap-2 group no-underline">
+          Read thesis <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+        </a>
+      </div>
+
+      {/* Pillar 2 */}
+      <div class="bg-cortex-cards/30 border border-white/5 p-6 rounded-2xl flex flex-col justify-between hover:border-white/10 transition-colors">
+        <div>
+          <div className="w-10 h-10 rounded-lg bg-[#2b3be5]/10 flex items-center justify-center mb-6">
+            <Shield className="w-5 h-5 text-cortex-secondary" />
+          </div>
+          <h3 className="font-mono text-sm uppercase text-white font-bold tracking-wider mb-2">II. Entornos de Agente</h3>
+          <p className="text-xs text-cortex-muted leading-relaxed mb-6">
+            Auditoría de protocolos cuánticos como ML-DSA y aislamiento en enclaves de hardware (TPM/SGX) para transicionar de C4-SIM a la verdad matemática C5-REAL.
+          </p>
+        </div>
+        <a href="/agentes" class="text-xs font-mono uppercase tracking-widest text-[#4d5eff] hover:underline flex items-center gap-2 group no-underline">
+          Read thesis <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+        </a>
+      </div>
+
+      {/* Pillar 3 */}
+      <div class="bg-cortex-cards/30 border border-white/5 p-6 rounded-2xl flex flex-col justify-between hover:border-white/10 transition-colors">
+        <div>
+          <div className="w-10 h-10 rounded-lg bg-[#2b3be5]/10 flex items-center justify-center mb-6">
+            <Users className="w-5 h-5 text-cortex-secondary" />
+          </div>
+          <h3 className="font-mono text-sm uppercase text-white font-bold tracking-wider mb-2">III. Influencers de IA</h3>
+          <p className="text-xs text-cortex-muted leading-relaxed mb-6">
+            Métricas de engagement, modelaje comercial y auditoría de la "economía de la mentira". Quién genera señal real y quién extrae valor con espectáculos de humo sintético.
+          </p>
+        </div>
+        <a href="/influencers" class="text-xs font-mono uppercase tracking-widest text-[#4d5eff] hover:underline flex items-center gap-2 group no-underline">
+          Read thesis <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+        </a>
+      </div>
+    </div>
+
+  </main>
+</Layout>

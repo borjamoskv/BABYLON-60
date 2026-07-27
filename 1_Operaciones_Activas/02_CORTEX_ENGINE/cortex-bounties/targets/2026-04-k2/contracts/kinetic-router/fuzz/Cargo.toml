@@ -1,0 +1,138 @@
+[package]
+name = "k2-kinetic-router-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[package.metadata]
+cargo-fuzz = true
+
+# Exclude from parent workspace
+[workspace]
+
+[lib]
+name = "k2_kinetic_router_fuzz"
+path = "src/lib.rs"
+
+[dependencies]
+libfuzzer-sys = "0.4"
+arbitrary = { version = "1", features = ["derive"] }
+soroban-sdk = { version = "23.0.3", features = ["testutils"] }
+
+# Shared types for fuzz tests
+[dependencies.k2-shared]
+path = "../../shared"
+
+# Additional dependencies for Tena's monolithic fuzzer
+[dependencies.k2-kinetic-router]
+path = ".."
+
+[dependencies.k2-a-token]
+path = "../../a-token"
+
+[dependencies.k2-debt-token]
+path = "../../debt-token"
+
+[dependencies.k2-interest-rate-strategy]
+path = "../../interest-rate-strategy"
+
+[dependencies.k2-price-oracle]
+path = "../../price-oracle"
+
+[dependencies.k2_token]
+path = "../../token"
+
+# Release optimizations for Tena's fuzzer
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+
+# === Fuzz Targets ===
+
+# Tena's monolithic fuzzer
+[[bin]]
+name = "fuzz_target_1"
+path = "fuzz_targets/fuzz_target_1.rs"
+test = false
+doc = false
+bench = false
+
+# Ijonas's specialized fuzzers
+[[bin]]
+name = "fuzz_lending_operations"
+path = "fuzz_targets/fuzz_lending_operations.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fuzz_liquidation"
+path = "fuzz_targets/fuzz_liquidation.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fuzz_flash_loan"
+path = "fuzz_targets/fuzz_flash_loan.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fuzz_admin_ops"
+path = "fuzz_targets/fuzz_admin_ops.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fuzz_reserve_config"
+path = "fuzz_targets/fuzz_reserve_config.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fuzz_admin_transfer"
+path = "fuzz_targets/fuzz_admin_transfer.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fuzz_auth_boundaries"
+path = "fuzz_targets/fuzz_auth_boundaries.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fuzz_multi_asset"
+path = "fuzz_targets/fuzz_multi_asset.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fuzz_price_scenarios"
+path = "fuzz_targets/fuzz_price_scenarios.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fuzz_economic_invariants"
+path = "fuzz_targets/fuzz_economic_invariants.rs"
+test = false
+doc = false
+bench = false
+
+# === Utilities ===
+
+[[bin]]
+name = "generate_seeds"
+path = "src/bin/generate_seeds.rs"
+test = false
+doc = false

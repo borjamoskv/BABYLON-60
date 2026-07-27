@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOSKV-1 APEX | Thermodynamic Exergy Provisioning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0A0A0A;
+            color: #E0E0E0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        #webgl-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #2B3BE5; /* Industrial Noir 2026 */
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #A0A0A0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            justify-content: center;
+        }
+
+        .card {
+            background: rgba(20, 20, 20, 0.7);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #2B3BE5;
+        }
+
+        .tier-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .tier-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 30px;
+        }
+
+        .tier-price span {
+            font-size: 1rem;
+            color: #888;
+            font-weight: 400;
+        }
+
+        ul.features {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 40px;
+        }
+
+        ul.features li {
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            color: #CCC;
+            display: flex;
+            align-items: center;
+        }
+
+        ul.features li::before {
+            content: '✓';
+            color: #2B3BE5;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background: #2B3BE5;
+            color: #FFF;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background: #4A56E5;
+        }
+
+        .checkout-btn.sim {
+            background: #333;
+            color: #A0A0A0;
+        }
+
+        .checkout-btn.sim:hover {
+            background: #444;
+            color: #FFF;
+        }
+
+        .legal-footer {
+            margin-top: 80px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+    </style>
+    <!-- Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+
+    <!-- WebGL Background injected from main.js or a lightweight variant -->
+    <div id="webgl-background"></div>
+
+    <div class="container">
+        <header>
+            <h1>Thermodynamic Exergy Pricing</h1>
+            <p class="subtitle">Monetización anclada en leyes físicas. Elimina la fricción de la anergía de tu infraestructura cognitiva. Facturación unificada para la Hacienda Foral de Bizkaia (SEPA/IBAN).</p>
+        </header>
+
+        <div class="pricing-grid">
+            
+            <!-- Tier 1: C4-SIM -->
+            <div class="card">
+                <div class="tier-name">C4-SIM (Simulated)</div>
+                <div class="tier-price">€49<span>/mo</span></div>
+                <ul class="features">
+                    <li>Acceso al clúster conversacional</li>
+                    <li>Sincronía de APIs externas (Latencia Alta)</li>
+                    <li>Requiere validación humana ("Green Theater")</li>
+                    <li>Soporte de Tarjeta y SEPA IBAN</li>
+                </ul>
+                <button class="checkout-btn sim" id="btn-c4">Iniciar C4-SIM</button>
+            </div>
+
+            <!-- Tier 2: C5-REAL -->
+            <div class="card">
+                <div class="tier-name">C5-REAL (Absolute)</div>
+                <div class="tier-price">€499<span>/deploy</span></div>
+                <ul class="features">
+                    <li>Soberanía Termodinámica Pura (100% Exergía)</li>
+                    <li>L5 Autonomy (Inyección UI y Shell)</li>
+                    <li>Criptografía basada en Hardware UUID local</li>
+                    <li>Apoptosis y Autopoiesis Streaming nativa</li>
+                    <li>Soporte de Tarjeta y SEPA IBAN directo</li>
+                </ul>
+                <button class="checkout-btn" id="btn-c5">Desplegar C5-REAL</button>
+            </div>
+
+        </div>
+
+        <div class="legal-footer">
+            <p>Pagos procesados de forma segura mediante Stripe SEPA Direct Debit. Cumplimiento estricto del epígrafe Rendimientos de Actividades Económicas.</p>
+        </div>
+    </div>
+
+    <!-- Payment Client Logic -->
+    <script type="module" src="./stripe-client.js"></script>
+
+</body>
+</html>

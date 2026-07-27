@@ -1,0 +1,38 @@
+{
+  "name": "cortex-landing",
+  "type": "module",
+  "version": "0.3.2b1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build && .venv/bin/python scripts/patch_worker.py",
+    "preview": "astro preview",
+    "astro": "astro",
+    "test": "make test-fast"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^13.7.0",
+    "@astrojs/react": "^4.2.0",
+    "@react-three/fiber": "^9.6.1",
+    "@remotion/cli": "^4.0.487",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@types/three": "^0.183.1",
+    "astro": "^6.4.8",
+    "framer-motion": "^12.40.0",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.25",
+    "lucide-react": "^0.474.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "^4.0.487",
+    "three": "^0.183.2",
+    "wrangler": "^4.100.0",
+    "zod": "^4.3.6"
+  },
+  "overrides": {
+    "esbuild": "^0.28.1",
+    "undici": "^7.28.0",
+    "ws": "^8.21.0"
+  }
+}

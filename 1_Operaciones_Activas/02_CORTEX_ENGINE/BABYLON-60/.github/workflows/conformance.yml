@@ -1,0 +1,17 @@
+# C5-REAL EXERGY CERTIFIED
+name: Conformance
+
+on: [push, pull_request]
+
+jobs:
+  conformance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install uv
+        run: pip install uv
+      - name: Run Conformance Script
+        run: uv run --all-extras python scripts/conformance_test.py

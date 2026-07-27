@@ -1,0 +1,226 @@
+{
+  "schema_version": "C5-REAL-BRAIN-1.0",
+  "declaration": "C5-REAL",
+  "proof_parameters": {
+    "k_B": 1.380649e-23,
+    "T_body": 310.15,
+    "ln_2": 0.69314718056
+  },
+  "landauer_limit_1MB_consolidation_J": 1.9918673666292888e-13,
+  "structural_nodes": {
+    "PFC": {
+      "name": "Prefrontal Cortex",
+      "type": "Executive Control",
+      "base_metabolic_cost": 0.4
+    },
+    "DMN": {
+      "name": "Default Mode Network",
+      "type": "Stochastic Sampler",
+      "base_metabolic_cost": 0.5
+    },
+    "SN": {
+      "name": "Salience Network",
+      "type": "Arbitrator/Interrupt Controller",
+      "base_metabolic_cost": 0.2
+    },
+    "BG": {
+      "name": "Basal Ganglia",
+      "type": "Gated Action Selector",
+      "base_metabolic_cost": 0.25
+    },
+    "TH": {
+      "name": "Thalamus",
+      "type": "Packet Router / Multiplexer",
+      "base_metabolic_cost": 0.15
+    },
+    "HC": {
+      "name": "Hippocampus",
+      "type": "Synaptic JIT Cache",
+      "base_metabolic_cost": 0.2
+    },
+    "NC": {
+      "name": "Neocortex",
+      "type": "Associative Database",
+      "base_metabolic_cost": 0.6
+    }
+  },
+  "synaptic_edges": [
+    {
+      "source": "SN",
+      "target": "PFC",
+      "weight": 0.8,
+      "desc": "Salience trigger routes attention to Executive Control"
+    },
+    {
+      "source": "SN",
+      "target": "DMN",
+      "weight": -0.9,
+      "desc": "Salience suppression of Default Mode Network"
+    },
+    {
+      "source": "PFC",
+      "target": "BG",
+      "weight": 0.7,
+      "desc": "Executive action selection command"
+    },
+    {
+      "source": "BG",
+      "target": "TH",
+      "weight": -0.8,
+      "desc": "Gating threshold inhibitions"
+    },
+    {
+      "source": "TH",
+      "target": "PFC",
+      "weight": 0.9,
+      "desc": "Sensory packet dispatch to Executive Buffers"
+    },
+    {
+      "source": "PFC",
+      "target": "NC",
+      "weight": 0.6,
+      "desc": "Memory query / retrieval vectors"
+    },
+    {
+      "source": "HC",
+      "target": "NC",
+      "weight": 0.5,
+      "desc": "Consolidation / batch index writing"
+    },
+    {
+      "source": "DMN",
+      "target": "HC",
+      "weight": 0.4,
+      "desc": "Stochastic sampler seeding episodic memory"
+    }
+  ],
+  "verified_scenarios": {
+    "baseline": {
+      "parameters": {
+        "DA": 0.5,
+        "NE": 0.5,
+        "5HT": 0.5,
+        "ACh": 0.5
+      },
+      "output": {
+        "activations": {
+          "PFC": 0.602,
+          "DMN": 0.3192,
+          "SN": 0.6,
+          "BG": 0.6816,
+          "TH": 0.6134,
+          "HC": 0.5806,
+          "NC": 0.5892
+        },
+        "thermodynamics": {
+          "exergy": 0.6012,
+          "entropy": 0.4415,
+          "metabolic_load": 3.5524
+        },
+        "status": "STOCHASTIC_BALANCE"
+      }
+    },
+    "adhd_high_entropy": {
+      "parameters": {
+        "DA": 0.15,
+        "NE": 0.85,
+        "5HT": 0.4,
+        "ACh": 0.3
+      },
+      "output": {
+        "activations": {
+          "PFC": 0.1442,
+          "DMN": 0.1623,
+          "SN": 1.0,
+          "BG": 0.1754,
+          "TH": 0.1578,
+          "HC": 0.2833,
+          "NC": 0.2276
+        },
+        "thermodynamics": {
+          "exergy": 0.1761,
+          "entropy": 0.5324,
+          "metabolic_load": 2.8996
+        },
+        "status": "THERMAL_RUNAWAY"
+      }
+    },
+    "hyperfocus_singularity": {
+      "parameters": {
+        "DA": 0.95,
+        "NE": 0.9,
+        "5HT": 0.6,
+        "ACh": 0.85
+      },
+      "output": {
+        "activations": {
+          "PFC": 1.0,
+          "DMN": 0.0,
+          "SN": 1.0,
+          "BG": 1.0,
+          "TH": 0.9,
+          "HC": 0.98,
+          "NC": 0.988
+        },
+        "thermodynamics": {
+          "exergy": 0.966,
+          "entropy": 0.26,
+          "metabolic_load": 4.0738
+        },
+        "status": "HYPERFOCUS_SINGULARITY"
+      }
+    },
+    "deep_sleep_replay": {
+      "parameters": {
+        "DA": 0.05,
+        "NE": 0.05,
+        "5HT": 0.8,
+        "ACh": 0.1
+      },
+      "output": {
+        "activations": {
+          "PFC": 0.0162,
+          "DMN": 0.9795,
+          "SN": 0.06,
+          "BG": 0.0329,
+          "TH": 0.0296,
+          "HC": 0.0848,
+          "NC": 0.0574
+        },
+        "thermodynamics": {
+          "exergy": 0.0339,
+          "entropy": 0.6627,
+          "metabolic_load": 2.8723
+        },
+        "status": "RESTING_SAMPLER"
+      }
+    },
+    "focused_cognition": {
+      "parameters": {
+        "DA": 0.7,
+        "NE": 0.4,
+        "5HT": 0.6,
+        "ACh": 0.75
+      },
+      "output": {
+        "activations": {
+          "PFC": 0.9428,
+          "DMN": 0.2709,
+          "SN": 0.48,
+          "BG": 1.0,
+          "TH": 0.9,
+          "HC": 0.8828,
+          "NC": 0.9068
+        },
+        "thermodynamics": {
+          "exergy": 0.918,
+          "entropy": 0.2925,
+          "metabolic_load": 4.0142
+        },
+        "status": "EXECUTIVE_COGNITION"
+      }
+    }
+  },
+  "verification_status": "SUCCESS",
+  "integrity_hash": "sha256:4b8a4f009e53b49c00b8a21ee03ff42d1f893e3d93bfb127bc0f83ae83011ee6"
+}

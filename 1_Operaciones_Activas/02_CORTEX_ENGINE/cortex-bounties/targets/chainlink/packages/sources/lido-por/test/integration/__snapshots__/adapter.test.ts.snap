@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute reserve endpoint should return error 1`] = `
+{
+  "errorMessage": "ethereum-cl-indexer balance endpoint returns negative value -1",
+  "statusCode": 502,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 978347471111,
+    "providerDataRequestedUnixMs": 978347471111,
+  },
+}
+`;
+
+exports[`execute reserve endpoint should return success 1`] = `
+{
+  "data": {
+    "result": "800",
+  },
+  "result": "800",
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 978347471111,
+    "providerDataRequestedUnixMs": 978347471111,
+  },
+}
+`;

@@ -1,0 +1,19 @@
+{
+  "name": "MOSKV-1 APEX (C4-SIM Sandbox)",
+  "image": "mcr.microsoft.com/devcontainers/python:3",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python"
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+      ]
+    }
+  },
+  "postCreateCommand": "echo 'WARNING: Codespaces forces C4-SIM Reality Level. macOS Core/AX interactions will fallback to MockBackend.'"
+}

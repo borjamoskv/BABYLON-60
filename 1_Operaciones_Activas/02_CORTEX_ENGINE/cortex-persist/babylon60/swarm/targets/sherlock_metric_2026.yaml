@@ -1,0 +1,72 @@
+# CORTEX-SWARM-PRIME: Sherlock Metric Contest July 2026
+# [C5-REAL] Active contest — Started 2026-07-06, Deadline 2026-07-27
+version: 2.0.0
+target: "sherlock-2026-07-metric"
+type: "competitive-audit"
+platform: "sherlock"
+
+# Contest Metadata
+contest:
+  name: "Metric Protocol Audit"
+  url: "https://app.sherlock.xyz/audits/contests"
+  prize_pool_usdc: 150000
+  start_date: "2026-07-06"
+  deadline: "2026-07-27"
+  scope_nsloc: 5862
+  reward_tiers:
+    lead_senior_watson: 21000
+    critical_pool: 121000
+    high_pool: 61352
+    medium_pool: 35789
+    guaranteed_base: 18746
+
+# SwarmCommander Constraints
+commander:
+  max_exergy_usd: 50.00
+  strict_validation: true
+  model: "claude-4.6-thinking"
+
+# LegionSupervisor Sub-Routing
+supervisor:
+  id: "L1-Sherlock-Metric"
+  agents_total: 5000
+
+# Centurion Roster (L2 O(1) Agents)
+squads:
+  - id: "sq-static"
+    role: "slither_static_analysis"
+    agents: 1000
+    model: "gemini-3.5-flash"
+  - id: "sq-invariant"
+    role: "invariant_violation_hunting"
+    agents: 2000
+    model: "claude-4.6-thinking"
+  - id: "sq-fuzz"
+    role: "foundry_fuzz_testing"
+    agents: 1500
+    model: "deepseek-local"
+  - id: "sq-report"
+    role: "finding_synthesis_report"
+    agents: 500
+    model: "claude-4.6-thinking"
+
+rules:
+  - "focus-fund-loss-and-logic-bugs"
+  - "ignore-gas-optimization"
+  - "ignore-informational"
+  - "exergy_ratio > 100.0"
+  - "minimum_severity: MEDIUM"
+  - "format: sherlock_submission"
+
+# Vulnerability Focus Areas
+focus:
+  - "reentrancy"
+  - "oracle_manipulation"
+  - "flash_loan_attacks"
+  - "rounding_errors"
+  - "access_control"
+  - "cross_function_reentrancy"
+  - "price_manipulation"
+  - "integer_overflow"
+  - "frontrunning_mev"
+  - "state_inconsistency"

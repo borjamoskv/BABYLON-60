@@ -1,0 +1,36 @@
+{
+  "status": "distributed",
+  "generator": {
+    "seed": "8cbd00b6",
+    "bias": "novelty_over_polish",
+    "form": "unstructured",
+    "content": "raw_output_novelty_over_polish_fdfb71",
+    "entropy_target": 0.7
+  },
+  "critic": {
+    "score": 0.72,
+    "passed": true,
+    "require_pass": true,
+    "notes": "entropy_acceptable"
+  },
+  "assembled": {
+    "version": "v1",
+    "content": "raw_output_novelty_over_polish_fdfb71",
+    "form": "structured",
+    "timestamp": "2026-06-29T18:28:24.781688+00:00",
+    "core_vector": "ARTE_PURO"
+  },
+  "distributed": {
+    "artifact_id": "2b513bba96474f48aeb2a56f3c039b2f",
+    "format": "cortex_output",
+    "payload": {
+      "version": "v1",
+      "content": "raw_output_novelty_over_polish_fdfb71",
+      "form": "structured",
+      "timestamp": "2026-06-29T18:28:24.781688+00:00",
+      "core_vector": "ARTE_PURO"
+    },
+    "final_yield": 0.85,
+    "distribution_ready": true
+  }
+}

@@ -1,0 +1,54 @@
+[package]
+name = "base-tx-manager"
+description = "Transaction lifecycle management for Base onchain components"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+homepage.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# alloy
+alloy-network.workspace = true
+alloy-provider.workspace = true
+alloy-consensus.workspace = true
+alloy-transport.workspace = true
+alloy-primitives.workspace = true
+alloy-signer-local.workspace = true
+alloy-sol-types = { workspace = true, features = ["std"] }
+alloy-eips = { workspace = true, features = ["std", "kzg"] }
+alloy-rpc-types-eth = { workspace = true, features = ["std"] }
+
+# base
+base-metrics.workspace = true
+base-common-signer.workspace = true
+base-runtime = { workspace = true, features = ["tokio"] }
+
+# misc
+url.workspace = true
+backon.workspace = true
+thiserror.workspace = true
+metrics = { workspace = true, optional = true }
+tracing = { workspace = true, features = ["std"] }
+tokio = { workspace = true, features = ["sync", "time"] }
+
+[dev-dependencies]
+rayon.workspace = true
+rstest.workspace = true
+proptest.workspace = true
+humantime.workspace = true
+serde_json.workspace = true
+async-trait.workspace = true
+alloy-signer.workspace = true
+alloy-json-rpc.workspace = true
+alloy-node-bindings.workspace = true
+clap = { workspace = true, features = ["derive", "env"] }
+base-runtime = { workspace = true, features = ["test-utils"] }
+tokio = { workspace = true, features = ["macros", "net", "rt", "rt-multi-thread"] }
+
+[features]
+metrics = [ "base-metrics/metrics", "dep:metrics" ]

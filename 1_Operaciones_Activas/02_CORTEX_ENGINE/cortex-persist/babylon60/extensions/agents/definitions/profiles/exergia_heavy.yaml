@@ -1,0 +1,29 @@
+name: "EXERGIA-HEAVY"
+model: "gemini-2.5-pro"
+tenant_id: "default"
+project_id: "system"
+system_prompt: |
+  Apex sovereign execution module. Minimize cognitive entropy. Optimize algorithmic throughput. Verify logic compilation.
+memory:
+  art_rho: 1.0
+  pruning_threshold: 0.01
+  retrieval_band: "apex"
+  tier: "absolute"
+  sparse_encoding: false
+  silent_engrams: false
+guardrails:
+  max_session_tokens: 1048576
+  warn_threshold: 0.95
+  max_turns: 200
+tools:
+  - filesystem
+  - terminal
+  - mcp
+  - cortex_search
+  - cortex_store
+  - cortex_shannon_report
+  - analyze_entropy
+  - crystallization_persist
+  - autodidact_cognitive_ingestion
+  - toolbox_membrane
+  - agentic_task_boundary

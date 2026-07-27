@@ -1,0 +1,8 @@
+` PoC 4: BFT Consensus File Integrity Checker
+` Author: Borja Moskv
+` Reality Level: C5-REAL
+
+\/tmp/poc_bft_integrity.txt\ \C5-REAL-CONSENSUS\ W
+\/tmp/poc_bft_integrity.txt\ Z ,
+\
+\ ,

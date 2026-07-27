@@ -1,0 +1,130 @@
+# C5-REAL EXERGY CERTIFIED
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cortex-persist"
+version = "1.0.2"
+description = "CORTEX C5-REAL execution kernel (BABYLON-60): BFT ledgers, onco-transducer, exergy pipelines"
+readme = "README.md"
+authors = [{ name = "Borja Moskv (borjamoskv)" }]
+requires-python = ">=3.10"
+classifiers = [
+    "License :: Other/Proprietary License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+]
+dependencies = [
+    "aiosqlite>=0.19",
+    "cbor2>=5.6.0",
+    "pydantic>=2.0",
+    "cryptography>=42.0",
+    "argon2-cffi>=23.0",
+    "pynacl>=1.5.0",
+    "click>=8.0",
+    "pyyaml>=6.0",
+    "defusedxml>=0.7.1",
+    "textual>=0.50.0",
+    "pynput>=1.7.0",
+]
+
+[project.urls]
+Repository = "https://github.com/borjamoskv/BABYLON-60"
+Issues = "https://github.com/borjamoskv/BABYLON-60/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.4",
+    "mypy>=1.8",
+    "networkx>=3.0",
+    "pandas>=2.0",
+    "fastapi>=0.110.0",
+    "uvicorn>=0.28.0",
+]
+embeddings = [
+    "numpy>=1.24",
+]
+graph = [
+    "networkx>=3.0",
+]
+onco = [
+    "numpy>=1.24",
+    "networkx>=3.0",
+    "pandas>=2.0",
+]
+telemetry = [
+    "psutil>=7.2.2",
+]
+voice = [
+    "sounddevice>=0.4.6",
+    "faster-whisper>=1.1",
+]
+voice-full = [
+    "sounddevice>=0.4.6",
+    "faster-whisper>=1.1",
+    "mlx-lm>=0.21; platform_machine=='arm64' and sys_platform=='darwin'",
+    "kokoro>=0.9",
+]
+apex = [
+    "numpy>=1.24",
+    "scikit-learn>=1.3",
+    "scipy>=1.11",
+]
+
+[project.scripts]
+apex = "apex_trials.cli:main"
+cortex-bridge = "babylon60.cli.bridge:main"
+cortex-onco = "babylon60.cli.onco_transducer:main"
+cortex-attest = "babylon60.cli.llm_attest:main"
+cortex-char-attest = "babylon60.cli.attest_character_count:main"
+
+[tool.setuptools.packages.find]
+include = ["babylon60*", "apex_trials*"]
+exclude = [
+    "babylon60.extensions",
+    "babylon60.extensions.*",
+    "babylon60.utils",
+    "babylon60.utils.*",
+]
+
+[tool.setuptools.package-data]
+apex_trials = ["*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-x --tb=short"
+asyncio_mode = "auto"
+pythonpath = ["."]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+extend-exclude = [
+    "domain_kernel",
+    "strike_rs",
+    "src",
+    "L1_sink",
+    "BABYLON-60-fixes",
+    "c5_remotion_video",
+    "babylon60/extensions",
+]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+ignore = ["E743"]
+
+[tool.mypy]
+python_version = "3.12"
+explicit_package_bases = true
+disallow_any_generics = false
+exclude = ["^scratch/", "^anvil_yung/", "^babylon60/extensions/"]
+ignore_missing_imports = true
+
+# Legacy vendorizado (babylon60/extensions): excluido de packaging y lint.
+# Se trata como Any hasta su poda/tipado — deuda registrada en el issue tracker.
+[[tool.mypy.overrides]]
+module = ["babylon60.extensions.*"]
+follow_imports = "skip"

@@ -1,0 +1,4 @@
+name = "cortexpersist-com"
+compatibility_date = "2026-06-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "dist"

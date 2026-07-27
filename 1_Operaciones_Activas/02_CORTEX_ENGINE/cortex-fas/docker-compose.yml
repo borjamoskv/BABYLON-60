@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  cortex-fas-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cortex-fas-api
+    restart: unless-stopped
+
+    environment:
+      ENVIRONMENT: production
+      LOG_LEVEL: info
+      PYTHONUNBUFFERED: 1
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - ./case_studies:/app/case_studies:ro
+      - ./logs:/app/logs
+
+    networks:
+      - cortex-net
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+    security_opt:
+      - no-new-privileges:true
+
+networks:
+  cortex-net:
+    driver: bridge

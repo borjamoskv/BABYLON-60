@@ -1,0 +1,27 @@
+{
+  "protocol": "Google Search Right to be Forgotten (RTBF) Payload",
+  "status": "AWAITING_EXECUTION",
+  "operator": "borjamoskv",
+  "targets": [
+    {
+      "type": "AGGREGATOR",
+      "platform": "Viberate",
+      "url": "https://www.viberate.com/artist/borja-moskv/",
+      "reason": "Exposes legal PII ([REDACTED_LEGAL_PII]) crossed with pseudonym without consent."
+    },
+    {
+      "type": "STREAMING_CREDITS",
+      "platform": "Apple Music",
+      "url": "https://music.apple.com/us/artist/borja-moskv/[ID]",
+      "reason": "Exposes copyright/composer metadata directly mapping to identity."
+    }
+  ],
+  "execution_steps": [
+    "1. Do NOT execute this payload until Phase 2 (GDPR/DistroKid) has propagated.",
+    "2. Once Viberate/Apple Music have removed the data, the links will still exist in Google Cache.",
+    "3. Go to: https://search.google.com/search-console/remove-outdated-content",
+    "4. Submit each URL from the targets list above.",
+    "5. Select 'The content has changed or is no longer on the site'.",
+    "6. Google will clear the cache, completely destroying the cross-identity link in the OSINT surface."
+  ]
+}

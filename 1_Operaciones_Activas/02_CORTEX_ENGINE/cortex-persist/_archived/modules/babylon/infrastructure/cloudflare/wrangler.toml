@@ -1,0 +1,9 @@
+name = "babylon-edge"
+compatibility_date = "2024-03-20"
+pages_build_output_dir = "../../apps/web/dist"
+
+[env.production]
+name = "babylon-edge-prod"
+
+[vars]
+CORTEX_REALITY_LEVEL = "C5-REAL"

@@ -1,0 +1,114 @@
+#ifndef HEADER_fd_src_flamenco_rewards_fd_rewards_h
+#define HEADER_fd_src_flamenco_rewards_fd_rewards_h
+
+/* fd_rewards.h provides APIs for distributing Solana staking rewards. */
+
+#include "../stakes/fd_stake_delegations.h"
+
+struct fd_prev_epoch_inflation_rewards {
+  ulong  validator_rewards;
+  double prev_epoch_duration_in_years;
+  double validator_rate;
+  double foundation_rate;
+};
+typedef struct fd_prev_epoch_inflation_rewards fd_prev_epoch_inflation_rewards_t;
+
+struct fd_partitioned_rewards_calculation {
+  uint128 validator_points;
+  ulong   old_vote_balance_and_staked;
+  ulong   validator_rewards;
+  double  validator_rate;
+  double  foundation_rate;
+  double  prev_epoch_duration_in_years;
+  ulong   capitalization;
+};
+typedef struct fd_partitioned_rewards_calculation fd_partitioned_rewards_calculation_t;
+
+FD_PROTOTYPES_BEGIN
+
+/* fd_begin_partitioned_rewards updates epoch bank stake and vote
+   account reward calculations.  Updates vote accounts with payouts and
+   increases capitalization.  Called in the epoch boundary (start of
+   first block of an epoch).
+
+   Call stack is as follows:
+   - begin_partitioned_rewards
+     - calculate_rewards_and_distribute_vote_rewards
+       - calculate_rewards_for_partitioning
+         - calculate_reward_points_partitioned (calculates total points)
+           - calculate_points_all
+         - calculate_stake_vote_rewards (calculates reward list)
+           - calculate_stake_vote_rewards_account
+             - for each delegation: redeem_rewards
+               - calculate_stake_rewards
+                 - calculate_stake_points_and_credits
+       - ... update all vote accounts ...
+     - ... update epoch rewards bank field ... */
+
+void
+fd_begin_partitioned_rewards( fd_bank_t *                    bank,
+                              fd_accdb_user_t *              accdb,
+                              fd_funk_txn_xid_t const *      xid,
+                              fd_runtime_stack_t *           runtime_stack,
+                              fd_capture_ctx_t *             capture_ctx,
+                              fd_stake_delegations_t const * stake_delegations,
+                              fd_hash_t const *              parent_blockhash,
+                              ulong                          parent_epoch );
+
+/* fd_rewards_recalculate_partitioned_rewards restores epoch bank stake
+   and account reward calculations.  Does not update accounts.  Called
+   when restoring replay state from a snapshot.
+
+   Call stack is as follows:
+   - calculate_stake_vote_rewards (calculates reward list)
+     - calculate_stake_vote_rewards_account
+       - for each delegation: redeem_rewards
+         - calculate_stake_rewards
+           - calculate_stake_points_and_credits */
+
+void
+fd_rewards_recalculate_partitioned_rewards( fd_banks_t *              banks,
+                                            fd_bank_t *               bank,
+                                            fd_accdb_user_t *         accdb,
+                                            fd_funk_txn_xid_t const * xid,
+                                            fd_runtime_stack_t *      runtime_stack,
+                                            fd_capture_ctx_t *        capture_ctx );
+
+/* fd_distribute_partitioned_epoch_rewards pays out rewards to stake
+   accounts.  Called at the beginning of a few slots per epoch.
+
+   Call stack is as follows:
+   - distribute_epoch_rewards_in_partition
+     - for each stake account: distribute_epoch_reward_to_stake_acc */
+
+void
+fd_distribute_partitioned_epoch_rewards( fd_bank_t *               bank,
+                                         fd_accdb_user_t *         accdb,
+                                         fd_funk_txn_xid_t const * xid,
+                                         fd_capture_ctx_t *        capture_ctx );
+
+/* fd_rewards_get_reward_distribution_num_blocks returns the number of
+   blocks required to distribute rewards for a given epoch schedule and
+   stake account count. Useful for testing partition sizing logic. */
+
+uint
+fd_rewards_get_reward_distribution_num_blocks( fd_epoch_schedule_t const * epoch_schedule,
+                                               ulong                       slot,
+                                               ulong                       total_stake_accounts );
+
+struct fd_commission_split {
+  ulong voter_portion;
+  ulong staker_portion;
+  uint  is_split;
+};
+
+typedef struct fd_commission_split fd_commission_split_t;
+
+void
+fd_vote_commission_split( uchar                   commission,
+                          ulong                   on,
+                          fd_commission_split_t * result );
+
+FD_PROTOTYPES_END
+
+#endif /* HEADER_fd_src_flamenco_rewards_fd_rewards_h */

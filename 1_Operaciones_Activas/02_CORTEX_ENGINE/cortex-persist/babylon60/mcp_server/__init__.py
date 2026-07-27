@@ -1,0 +1,50 @@
+# [C5-REAL] Exergy-Maximized
+"""CORTEX MCP Server Package.
+
+Optimized Multi-Transport Implementation.
+Uses __getattr__ lazy loading (PEP 562) to avoid pulling in
+optional dependencies like markdownify on package import.
+"""
+
+from __future__ import annotations
+
+import importlib
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from babylon60.mcp_server.resilient_gateway import (
+        create_resilient_gateway,
+        run_resilient_gateway,
+    )
+    from babylon60.mcp_server.server import create_mcp_server, run_server
+    from babylon60.mcp_server.utils import MCPServerConfig
+
+__all__ = [
+    "MCPServerConfig",
+    "create_mcp_server",
+    "create_resilient_gateway",
+    "run_resilient_gateway",
+    "run_server",
+]
+
+_LAZY_IMPORTS: dict[str, tuple[str, str]] = {
+    "create_resilient_gateway": (
+        "babylon60.mcp_server.resilient_gateway",
+        "create_resilient_gateway",
+    ),
+    "run_resilient_gateway": ("babylon60.mcp_server.resilient_gateway", "run_resilient_gateway"),
+    "create_mcp_server": ("babylon60.mcp_server.server", "create_mcp_server"),
+    "run_server": ("babylon60.mcp_server.server", "run_server"),
+    "MCPServerConfig": ("babylon60.mcp_server.utils", "MCPServerConfig"),
+}
+
+
+def __getattr__(name: str) -> object:
+    """Lazy-load MCP symbols on first access (PEP 562)."""
+    if name in _LAZY_IMPORTS:
+        module_path, attr_name = _LAZY_IMPORTS[name]
+        module = importlib.import_module(module_path)
+        value = getattr(module, attr_name)
+        globals()[name] = value
+        return value
+    raise AttributeError(f"module 'babylon60.mcp_server' has no attribute {name!r}")

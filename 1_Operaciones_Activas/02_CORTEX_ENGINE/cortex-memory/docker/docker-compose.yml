@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8009:8000"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_NAME=cortex
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: cortex
+    ports:
+      - "5435:5432"
+    volumes:
+      - ../migrations:/docker-entrypoint-initdb.d

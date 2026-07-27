@@ -1,0 +1,8 @@
+$(call add-hdrs,fd_quic_defs.h fd_quic_frames_templ.h fd_quic_dft.h fd_quic_templ.h fd_quic_undefs.h)
+$(call add-hdrs,fd_quic_transport_params.h)
+$(call add-objs,fd_quic_transport_params,fd_quic)
+$(call make-unit-test,test_quic_transport_params,test_quic_transport_params,fd_quic fd_tls fd_waltz fd_ballet fd_util)
+$(call run-unit-test,test_quic_transport_params)
+ifdef FD_HAS_HOSTED
+$(call make-fuzz-test,fuzz_quic_parse_transport_params,fuzz_quic_parse_transport_params,fd_quic fd_ballet fd_util)
+endif

@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`websocket crypto endpoint should return success 1`] = `
+{
+  "data": {
+    "result": 2930.4483973989,
+  },
+  "result": 2930.4483973989,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 1018,
+    "providerDataStreamEstablishedUnixMs": 1010,
+    "providerIndicatedTimeUnixMs": 1646249828102,
+  },
+}
+`;
+
+exports[`websocket crypto_lwba endpoint should only subscribe once 1`] = `
+{
+  "data": {
+    "ask": 1794.2063137650225,
+    "bid": 1793.6242715443277,
+    "mid": 1793.915292654675,
+  },
+  "result": null,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 2028,
+    "providerDataStreamEstablishedUnixMs": 2020,
+    "providerIndicatedTimeUnixMs": 1680187094577,
+  },
+}
+`;
+
+exports[`websocket crypto_lwba endpoint should only subscribe once 2`] = `
+{
+  "data": {
+    "ask": 1794.2063137650225,
+    "bid": 1793.6242715443277,
+    "mid": 1793.915292654675,
+  },
+  "result": null,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 2028,
+    "providerDataStreamEstablishedUnixMs": 2020,
+    "providerIndicatedTimeUnixMs": 1680187094577,
+  },
+}
+`;
+
+exports[`websocket crypto_lwba endpoint should return error (invariant violation) 1`] = `
+{
+  "error": {
+    "message": "Invariant violation. LWBA response must contain mid, bid and ask prices. Got: (bid: null, mid: 1793.915292654675, ask: 1794.2063137650225)",
+    "name": "AdapterLWBAError",
+  },
+  "status": "errored",
+  "statusCode": 500,
+}
+`;
+
+exports[`websocket crypto_lwba endpoint should return success 1`] = `
+{
+  "data": {
+    "ask": 1794.2063137650225,
+    "bid": 1793.6242715443277,
+    "mid": 1793.915292654675,
+  },
+  "result": null,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 2028,
+    "providerDataStreamEstablishedUnixMs": 2020,
+    "providerIndicatedTimeUnixMs": 1680187094577,
+  },
+}
+`;
+
+exports[`websocket forex endpoint should return success 1`] = `
+{
+  "data": {
+    "result": 1.08272,
+  },
+  "result": 1.08272,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 4048,
+    "providerDataStreamEstablishedUnixMs": 4040,
+    "providerIndicatedTimeUnixMs": 1649964792474,
+  },
+}
+`;
+
+exports[`websocket iex endpoint iex A request should return success 1`] = `
+{
+  "data": {
+    "result": 232.66,
+  },
+  "result": 232.66,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 3038,
+    "providerDataStreamEstablishedUnixMs": 3030,
+    "providerIndicatedTimeUnixMs": 1736885388216,
+  },
+}
+`;
+
+exports[`websocket iex endpoint should update the ttl after heartbeat is received 1`] = `
+{
+  "data": {
+    "result": 232.66,
+  },
+  "result": 232.66,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 3038,
+    "providerDataStreamEstablishedUnixMs": 3030,
+    "providerIndicatedTimeUnixMs": 1736885388216,
+  },
+}
+`;

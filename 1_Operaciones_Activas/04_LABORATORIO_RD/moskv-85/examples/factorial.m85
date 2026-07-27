@@ -1,0 +1,25 @@
+` MOSKV-85 Factorial Program
+` Author: Borja Moskv
+` Reality Level: C5-REAL
+
+\Factorial of 5 calculation starting...\ ,
+\
+\ ,
+
+` Initialize Accumulator (1) in memory[0]
+1 0 g
+
+` Initialize Counter (5) in memory[1]
+5 1 g
+
+` Run loop: while(memory[1] > 1) { memory[0] = memory[0] * memory[1]; memory[1]--; }
+[ 1 h 1 b ]
+[ 0 h 1 h * 0 g 1 h J 1 g ]
+f
+
+` Print result
+\Result: \ ,
+0 h .
+\
+\ ,
+m

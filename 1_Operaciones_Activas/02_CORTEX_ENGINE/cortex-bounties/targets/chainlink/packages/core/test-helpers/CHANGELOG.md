@@ -1,0 +1,101 @@
+# @chainlink/ea-test-helpers
+
+## 1.4.9
+
+### Patch Changes
+
+- [#3915](https://github.com/smartcontractkit/external-adapters-js/pull/3915) [`3fadb7c`](https://github.com/smartcontractkit/external-adapters-js/commit/3fadb7c5e479b48ab41fa8e44150c221dd5cb2e2) Thanks [@dependabot](https://github.com/apps/dependabot)! - Bump pbkdf2 from 3.1.2 to 3.1.3
+
+- [#3972](https://github.com/smartcontractkit/external-adapters-js/pull/3972) [`e5d13f2`](https://github.com/smartcontractkit/external-adapters-js/commit/e5d13f2e726c1ed196de16f6e50a3aa6a290f810) Thanks [@dependabot](https://github.com/apps/dependabot)! - Bump sha.js from 2.4.11 to 2.4.12
+
+## 1.4.8
+
+### Patch Changes
+
+- [#3805](https://github.com/smartcontractkit/external-adapters-js/pull/3805) [`2d18954`](https://github.com/smartcontractkit/external-adapters-js/commit/2d1895428866a279ca2464f494c5c3efcece1f3b) Thanks [@renovate](https://github.com/apps/renovate)! - Update NodeJS to version 22.14.0
+
+- [#3801](https://github.com/smartcontractkit/external-adapters-js/pull/3801) [`c40ad81`](https://github.com/smartcontractkit/external-adapters-js/commit/c40ad81e979aed773a0dda68381bacdc6bc7f1d4) Thanks [@renovate](https://github.com/apps/renovate)! - Update TypeScript version to 5.8.3
+
+## 1.4.7
+
+### Patch Changes
+
+- [#3695](https://github.com/smartcontractkit/external-adapters-js/pull/3695) [`cbb4f08`](https://github.com/smartcontractkit/external-adapters-js/commit/cbb4f08a8e2d006ddffff1acd1d7e6d11bdff9c6) Thanks [@renovate](https://github.com/apps/renovate)! - update dependency hardhat to v2.22.19
+
+## 1.4.6
+
+### Patch Changes
+
+- [#3656](https://github.com/smartcontractkit/external-adapters-js/pull/3656) [`f32e247`](https://github.com/smartcontractkit/external-adapters-js/commit/f32e2477bcc37a8e37b73676616c8d9e5dce9a45) Thanks [@renovate](https://github.com/apps/renovate)! - Update Node.js to v22.13.1
+
+- [#3564](https://github.com/smartcontractkit/external-adapters-js/pull/3564) [`3fac674`](https://github.com/smartcontractkit/external-adapters-js/commit/3fac674cfeb93f73009959ba2ea0fbf342c3c66d) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependency nock to v13.5.6
+
+## 1.4.5
+
+### Patch Changes
+
+- [#3533](https://github.com/smartcontractkit/external-adapters-js/pull/3533) [`563b976`](https://github.com/smartcontractkit/external-adapters-js/commit/563b976bd699a28e42120fdbcf730a1d4b5c2db5) Thanks [@renovate](https://github.com/apps/renovate)! - Bump @types/node version
+
+- [#3534](https://github.com/smartcontractkit/external-adapters-js/pull/3534) [`d8023b9`](https://github.com/smartcontractkit/external-adapters-js/commit/d8023b911fd37ccdc2b41788b072fb9c875fff31) Thanks [@renovate](https://github.com/apps/renovate)! - Bump nock
+
+## 1.4.4
+
+### Patch Changes
+
+- [#3260](https://github.com/smartcontractkit/external-adapters-js/pull/3260) [`13cfd21`](https://github.com/smartcontractkit/external-adapters-js/commit/13cfd215dcbd14c31f173bd874da36d636434627) Thanks [@renovate](https://github.com/apps/renovate)! - Bump TS version
+
+- [#3512](https://github.com/smartcontractkit/external-adapters-js/pull/3512) [`056ca36`](https://github.com/smartcontractkit/external-adapters-js/commit/056ca36cc51772f3e0cda1db8d6edd7e4a333db6) Thanks [@renovate](https://github.com/apps/renovate)! - Bump hardhat
+
+## 1.4.3
+
+### Patch Changes
+
+- c600ca386: Upgrade typescript version to 5.0.4
+
+## 1.4.2
+
+### Patch Changes
+
+- 65014014d: Upgraded typescript version to 4.9.5
+
+## 1.4.1
+
+### Patch Changes
+
+- a54b4216b: Type refactoring
+
+## 1.4.0
+
+### Minor Changes
+
+- fe96b484a: Replace @chainlink/types exports with @chainlink/ea-bootstrap exports
+
+## 1.3.0
+
+### Minor Changes
+
+- fe96b484a: Replace @chainlink/types exports with @chainlink/ea-bootstrap exports
+
+## 1.2.0
+
+### Minor Changes
+
+- 4dd7722b0: add mockWebSocketFlow support for requests and responses with string type
+
+## 1.1.0
+
+### Minor Changes
+
+- 72f96124d: Add WS testing fw
+
+## 1.0.1
+
+### Patch Changes
+
+- ** DUMMY VERSION BUMP - Test release pipeline **
+
+## 1.0.0
+
+### Major Changes
+
+- EAv2 Release. Start of individual EA versioning.

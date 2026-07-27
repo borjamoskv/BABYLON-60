@@ -1,0 +1,568 @@
+//! Base Chain configuration.
+
+use alloy_chains::Chain;
+use alloy_eips::eip1898::BlockNumHash;
+use alloy_primitives::{Address, B256, U256, address, b256, uint};
+use base_common_genesis::{
+    ChainGenesis, FeeConfig, HardForkConfig, HardforkConfig, RollupConfig, SystemConfig,
+};
+
+/// Complete configuration for a Base chain
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct ChainConfig {
+    // Identity
+    /// L2 chain ID.
+    pub chain_id: u64,
+    /// L1 chain ID.
+    pub l1_chain_id: u64,
+
+    // Block timing
+    /// L2 block time in seconds.
+    pub block_time: u64,
+    /// Sequencer window size in blocks.
+    pub seq_window_size: u64,
+    /// Maximum sequencer drift in seconds.
+    pub max_sequencer_drift: u64,
+    /// Channel timeout in L1 blocks.
+    pub channel_timeout: u64,
+
+    // Hardfork schedule
+    /// Bedrock activation block.
+    pub bedrock_block: u64,
+    /// Regolith activation timestamp.
+    pub regolith_timestamp: u64,
+    /// Canyon activation timestamp.
+    pub canyon_timestamp: u64,
+    /// Delta activation timestamp.
+    pub delta_timestamp: u64,
+    /// Ecotone activation timestamp.
+    pub ecotone_timestamp: u64,
+    /// Fjord activation timestamp.
+    pub fjord_timestamp: u64,
+    /// Granite activation timestamp.
+    pub granite_timestamp: u64,
+    /// Holocene activation timestamp.
+    pub holocene_timestamp: u64,
+    /// Pectra blob schedule activation timestamp (optional, sepolia-only).
+    pub pectra_blob_schedule_timestamp: Option<u64>,
+    /// Isthmus activation timestamp.
+    pub isthmus_timestamp: u64,
+    /// Jovian activation timestamp.
+    pub jovian_timestamp: u64,
+    /// Base Azul activation timestamp (optional).
+    pub azul_timestamp: Option<u64>,
+    /// Beryl activation timestamp (optional).
+    pub beryl_timestamp: Option<u64>,
+
+    // Genesis
+    /// L1 genesis block hash.
+    pub genesis_l1_hash: B256,
+    /// L1 genesis block number.
+    pub genesis_l1_number: u64,
+    /// L2 genesis block hash.
+    pub genesis_l2_hash: B256,
+    /// L2 genesis block number.
+    pub genesis_l2_number: u64,
+    /// L2 genesis timestamp.
+    pub genesis_l2_time: u64,
+    /// Genesis batcher address.
+    pub genesis_batcher_address: Address,
+    /// Genesis overhead.
+    pub genesis_overhead: U256,
+    /// Genesis scalar.
+    pub genesis_scalar: U256,
+    /// Genesis gas limit.
+    pub genesis_gas_limit: u64,
+
+    // Base fee params
+    /// EIP-1559 elasticity multiplier.
+    pub eip1559_elasticity: u64,
+    /// EIP-1559 denominator (pre-Canyon).
+    pub eip1559_denominator: u64,
+    /// EIP-1559 denominator (Canyon and later).
+    pub eip1559_denominator_canyon: u64,
+
+    // Contract addresses
+    /// Batch inbox address on L1.
+    pub batch_inbox_address: Address,
+    /// Deposit contract (`OptimismPortal`) address on L1.
+    pub deposit_contract_address: Address,
+    /// `SystemConfig` proxy address on L1.
+    pub system_config_address: Address,
+    /// Protocol versions address on L1.
+    pub protocol_versions_address: Address,
+
+    // Roles
+    /// Unsafe block signer address.
+    pub unsafe_block_signer: Option<Address>,
+
+    // Gas limits
+    /// Maximum gas limit for L2 blocks.
+    pub max_gas_limit: u64,
+    /// Maximum number of entries deleted per execution-layer pruning batch.
+    pub prune_delete_limit: usize,
+
+    // Networking
+    /// Bootnodes for peer discovery, split by stack layer.
+    pub bootnodes: Bootnodes,
+
+    // Execution genesis
+    /// Embedded genesis JSON for reth alloc tables.
+    pub genesis_json: &'static str,
+}
+
+/// Raw bootnode strings split by the stack layer that should consume them.
+///
+/// Execution and consensus run independent discv5 networks (different protocol
+/// IDs and ports). Mixing them at bootstrap time is wasted work — and broken,
+/// since each side will fail to authenticate the other's packets.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct Bootnodes {
+    /// Bootnodes for the execution-layer discv5 network (enode URLs on the
+    /// EL discovery ports, e.g. 30301 / 9200).
+    pub execution: &'static [&'static str],
+    /// Bootnodes for the consensus-layer discv5 network (ENRs on the CL
+    /// discovery port, e.g. 9222).
+    pub consensus: &'static [&'static str],
+}
+
+impl Bootnodes {
+    /// Empty bootnodes for both layers.
+    pub const EMPTY: Self = Self { execution: &[], consensus: &[] };
+
+    /// Total number of raw bootnode entries across both layers.
+    pub const fn total(&self) -> usize {
+        self.execution.len() + self.consensus.len()
+    }
+}
+
+impl ChainConfig {
+    /// CLI chain name for Base Mainnet.
+    pub const MAINNET_NAME: &'static str = "base";
+    /// CLI chain name for Base Sepolia.
+    pub const SEPOLIA_NAME: &'static str = "base-sepolia";
+    /// Legacy CLI chain name for Base Sepolia.
+    pub const SEPOLIA_ALIAS: &'static str = "base_sepolia";
+    /// CLI chain name for Base Zeronet.
+    pub const ZERONET_NAME: &'static str = "base-zeronet";
+    /// CLI chain name for the local Base devnet.
+    pub const DEVNET_NAME: &'static str = "dev";
+    /// All chain names accepted by Base chain parsers.
+    pub const SUPPORTED_NAMES: &'static [&'static str] = &[
+        Self::MAINNET_NAME,
+        Self::SEPOLIA_ALIAS,
+        Self::SEPOLIA_NAME,
+        Self::ZERONET_NAME,
+        Self::DEVNET_NAME,
+    ];
+
+    /// Base Mainnet chain configuration.
+    pub const fn mainnet() -> &'static Self {
+        &MAINNET
+    }
+
+    /// Base Sepolia chain configuration.
+    pub const fn sepolia() -> &'static Self {
+        &SEPOLIA
+    }
+
+    /// Local dev chain configuration (all forks active at genesis).
+    pub const fn devnet() -> &'static Self {
+        &DEVNET
+    }
+
+    /// Base Zeronet chain configuration.
+    pub const fn zeronet() -> &'static Self {
+        &ZERONET
+    }
+
+    /// Returns all known chain configurations, including devnet.
+    pub const fn all() -> [&'static Self; 4] {
+        [&MAINNET, &SEPOLIA, &DEVNET, &ZERONET]
+    }
+
+    /// Looks up a chain config by CLI chain name.
+    pub fn by_name(name: &str) -> Option<&'static Self> {
+        match name {
+            Self::MAINNET_NAME => Some(Self::mainnet()),
+            Self::SEPOLIA_NAME | Self::SEPOLIA_ALIAS => Some(Self::sepolia()),
+            Self::ZERONET_NAME => Some(Self::zeronet()),
+            Self::DEVNET_NAME => Some(Self::devnet()),
+            _ => None,
+        }
+    }
+
+    /// Looks up a chain config by L2 chain ID.
+    pub const fn by_chain_id(id: u64) -> Option<&'static Self> {
+        match id {
+            8453 => Some(&MAINNET),
+            84532 => Some(&SEPOLIA),
+            763360 => Some(&ZERONET),
+            _ => None,
+        }
+    }
+
+    /// Returns the EIP-1559 [`FeeConfig`] for this chain.
+    pub const fn fee_config(&self) -> FeeConfig {
+        FeeConfig {
+            eip1559_elasticity: self.eip1559_elasticity,
+            eip1559_denominator: self.eip1559_denominator,
+            eip1559_denominator_canyon: self.eip1559_denominator_canyon,
+        }
+    }
+
+    /// Returns the [`HardForkConfig`] (Base upgrade activation timestamps) for this chain.
+    pub const fn hardfork_config(&self) -> HardForkConfig {
+        HardForkConfig {
+            regolith_time: Some(self.regolith_timestamp),
+            canyon_time: Some(self.canyon_timestamp),
+            delta_time: Some(self.delta_timestamp),
+            ecotone_time: Some(self.ecotone_timestamp),
+            fjord_time: Some(self.fjord_timestamp),
+            granite_time: Some(self.granite_timestamp),
+            holocene_time: Some(self.holocene_timestamp),
+            pectra_blob_schedule_time: self.pectra_blob_schedule_timestamp,
+            isthmus_time: Some(self.isthmus_timestamp),
+            jovian_time: Some(self.jovian_timestamp),
+            base: HardforkConfig { azul: self.azul_timestamp, beryl: self.beryl_timestamp },
+        }
+    }
+
+    /// Returns the [`ChainGenesis`] (L1/L2 genesis anchor + initial system config) for this chain.
+    pub const fn chain_genesis(&self) -> ChainGenesis {
+        ChainGenesis {
+            l1: BlockNumHash { hash: self.genesis_l1_hash, number: self.genesis_l1_number },
+            l2: BlockNumHash { hash: self.genesis_l2_hash, number: self.genesis_l2_number },
+            l2_time: self.genesis_l2_time,
+            system_config: Some(SystemConfig {
+                batcher_address: self.genesis_batcher_address,
+                overhead: self.genesis_overhead,
+                scalar: self.genesis_scalar,
+                gas_limit: self.genesis_gas_limit,
+                base_fee_scalar: None,
+                blob_base_fee_scalar: None,
+                eip1559_denominator: None,
+                eip1559_elasticity: None,
+                operator_fee_scalar: None,
+                operator_fee_constant: None,
+                min_base_fee: None,
+                da_footprint_gas_scalar: None,
+            }),
+        }
+    }
+
+    /// Returns the full [`RollupConfig`] for this chain, derived from its [`ChainConfig`].
+    pub fn rollup_config(&self) -> RollupConfig {
+        RollupConfig {
+            genesis: self.chain_genesis(),
+            block_time: self.block_time,
+            max_sequencer_drift: self.max_sequencer_drift,
+            seq_window_size: self.seq_window_size,
+            channel_timeout: self.channel_timeout,
+            granite_channel_timeout: RollupConfig::GRANITE_CHANNEL_TIMEOUT,
+            l1_chain_id: self.l1_chain_id,
+            l2_chain_id: Chain::from_id(self.chain_id),
+            hardforks: self.hardfork_config(),
+            batch_inbox_address: self.batch_inbox_address,
+            deposit_contract_address: self.deposit_contract_address,
+            l1_system_config_address: self.system_config_address,
+            protocol_versions_address: self.protocol_versions_address,
+            blobs_enabled_l1_timestamp: None,
+            chain_op_config: self.fee_config(),
+        }
+    }
+}
+
+impl From<&ChainConfig> for FeeConfig {
+    fn from(cfg: &ChainConfig) -> Self {
+        cfg.fee_config()
+    }
+}
+
+impl From<&ChainConfig> for HardForkConfig {
+    fn from(cfg: &ChainConfig) -> Self {
+        cfg.hardfork_config()
+    }
+}
+
+impl From<&ChainConfig> for ChainGenesis {
+    fn from(cfg: &ChainConfig) -> Self {
+        cfg.chain_genesis()
+    }
+}
+
+impl From<&ChainConfig> for RollupConfig {
+    fn from(cfg: &ChainConfig) -> Self {
+        cfg.rollup_config()
+    }
+}
+
+const MAINNET: ChainConfig = ChainConfig {
+    chain_id: 8453,
+    l1_chain_id: 1,
+
+    block_time: 2,
+    seq_window_size: 3600,
+    max_sequencer_drift: 600,
+    channel_timeout: 300,
+
+    bedrock_block: 0,
+    regolith_timestamp: 0,
+    canyon_timestamp: 1_704_992_401,
+    delta_timestamp: 1_708_560_000,
+    ecotone_timestamp: 1_710_374_401,
+    fjord_timestamp: 1_720_627_201,
+    granite_timestamp: 1_726_070_401,
+    holocene_timestamp: 1_736_445_601,
+    pectra_blob_schedule_timestamp: None,
+    isthmus_timestamp: 1_746_806_401,
+    jovian_timestamp: 1_764_691_201,
+    azul_timestamp: Some(1_779_386_400),
+    beryl_timestamp: None,
+
+    genesis_l1_hash: b256!("5c13d307623a926cd31415036c8b7fa14572f9dac64528e857a470511fc30771"),
+    genesis_l1_number: 17_481_768,
+    genesis_l2_hash: b256!("f712aa9241cc24369b143cf6dce85f0902a9731e70d66818a3a5845b296c73dd"),
+    genesis_l2_number: 0,
+    genesis_l2_time: 1_686_789_347,
+    genesis_batcher_address: address!("5050f69a9786f081509234f1a7f4684b5e5b76c9"),
+    genesis_overhead: uint!(0xbc_U256),
+    genesis_scalar: uint!(0xa6fe0_U256),
+    genesis_gas_limit: 30_000_000,
+
+    eip1559_elasticity: 6,
+    eip1559_denominator: 50,
+    eip1559_denominator_canyon: 250,
+
+    batch_inbox_address: address!("ff00000000000000000000000000000000008453"),
+    deposit_contract_address: address!("49048044d57e1c92a77f79988d21fa8faf74e97e"),
+    system_config_address: address!("73a79fab69143498ed3712e519a88a918e1f4072"),
+    protocol_versions_address: address!("8062abc286f5e7d9428a0ccb9abd71e50d93b935"),
+
+    unsafe_block_signer: Some(address!("Af6E19BE0F9cE7f8afd49a1824851023A8249e8a")),
+
+    max_gas_limit: 105_000_000,
+    prune_delete_limit: 20_000,
+
+    bootnodes: Bootnodes {
+        execution: &[
+            "enode://87a32fd13bd596b2ffca97020e31aef4ddcc1bbd4b95bb633d16c1329f654f34049ed240a36b449fda5e5225d70fe40bc667f53c304b71f8e68fc9d448690b51@3.231.138.188:30301",
+            "enode://87a32fd13bd596b2ffca97020e31aef4ddcc1bbd4b95bb633d16c1329f654f34049ed240a36b449fda5e5225d70fe40bc667f53c304b71f8e68fc9d448690b51@3.231.138.188:9200",
+            "enode://ca21ea8f176adb2e229ce2d700830c844af0ea941a1d8152a9513b966fe525e809c3a6c73a2c18a12b74ed6ec4380edf91662778fe0b79f6a591236e49e176f9@184.72.129.189:30301",
+            "enode://ca21ea8f176adb2e229ce2d700830c844af0ea941a1d8152a9513b966fe525e809c3a6c73a2c18a12b74ed6ec4380edf91662778fe0b79f6a591236e49e176f9@184.72.129.189:9200",
+            "enode://acf4507a211ba7c1e52cdf4eef62cdc3c32e7c9c47998954f7ba024026f9a6b2150cd3f0b734d9c78e507ab70d59ba61dfe5c45e1078c7ad0775fb251d7735a2@3.220.145.177:30301",
+            "enode://acf4507a211ba7c1e52cdf4eef62cdc3c32e7c9c47998954f7ba024026f9a6b2150cd3f0b734d9c78e507ab70d59ba61dfe5c45e1078c7ad0775fb251d7735a2@3.220.145.177:9200",
+            "enode://8a5a5006159bf079d06a04e5eceab2a1ce6e0f721875b2a9c96905336219dbe14203d38f70f3754686a6324f786c2f9852d8c0dd3adac2d080f4db35efc678c5@3.231.11.52:30301",
+            "enode://8a5a5006159bf079d06a04e5eceab2a1ce6e0f721875b2a9c96905336219dbe14203d38f70f3754686a6324f786c2f9852d8c0dd3adac2d080f4db35efc678c5@3.231.11.52:9200",
+            "enode://cdadbe835308ad3557f9a1de8db411da1a260a98f8421d62da90e71da66e55e98aaa8e90aa7ce01b408a54e4bd2253d701218081ded3dbe5efbbc7b41d7cef79@54.198.153.150:30301",
+            "enode://cdadbe835308ad3557f9a1de8db411da1a260a98f8421d62da90e71da66e55e98aaa8e90aa7ce01b408a54e4bd2253d701218081ded3dbe5efbbc7b41d7cef79@54.198.153.150:9200",
+        ],
+        consensus: &[
+            "enr:-J24QNz9lbrKbN4iSmmjtnr7SjUMk4zB7f1krHZcTZx-JRKZd0kA2gjufUROD6T3sOWDVDnFJRvqBBo62zuF-hYCohOGAYiOoEyEgmlkgnY0gmlwhAPniryHb3BzdGFja4OFQgCJc2VjcDI1NmsxoQKNVFlCxh_B-716tTs-h1vMzZkSs1FTu_OYTNjgufplG4N0Y3CCJAaDdWRwgiQG",
+            "enr:-J24QH-f1wt99sfpHy4c0QJM-NfmsIfmlLAMMcgZCUEgKG_BBYFc6FwYgaMJMQN5dsRBJApIok0jFn-9CS842lGpLmqGAYiOoDRAgmlkgnY0gmlwhLhIgb2Hb3BzdGFja4OFQgCJc2VjcDI1NmsxoQJ9FTIv8B9myn1MWaC_2lJ-sMoeCDkusCsk4BYHjjCq04N0Y3CCJAaDdWRwgiQG",
+            "enr:-J24QDXyyxvQYsd0yfsN0cRr1lZ1N11zGTplMNlW4xNEc7LkPXh0NAJ9iSOVdRO95GPYAIc6xmyoCCG6_0JxdL3a0zaGAYiOoAjFgmlkgnY0gmlwhAPckbGHb3BzdGFja4OFQgCJc2VjcDI1NmsxoQJwoS7tzwxqXSyFL7g0JM-KWVbgvjfB8JA__T7yY_cYboN0Y3CCJAaDdWRwgiQG",
+            "enr:-J24QHmGyBwUZXIcsGYMaUqGGSl4CFdx9Tozu-vQCn5bHIQbR7On7dZbU61vYvfrJr30t0iahSqhc64J46MnUO2JvQaGAYiOoCKKgmlkgnY0gmlwhAPnCzSHb3BzdGFja4OFQgCJc2VjcDI1NmsxoQINc4fSijfbNIiGhcgvwjsjxVFJHUstK9L1T8OTKUjgloN0Y3CCJAaDdWRwgiQG",
+            "enr:-J24QG3ypT4xSu0gjb5PABCmVxZqBjVw9ca7pvsI8jl4KATYAnxBmfkaIuEqy9sKvDHKuNCsy57WwK9wTt2aQgcaDDyGAYiOoGAXgmlkgnY0gmlwhDbGmZaHb3BzdGFja4OFQgCJc2VjcDI1NmsxoQIeAK_--tcLEiu7HvoUlbV52MspE0uCocsx1f_rYvRenIN0Y3CCJAaDdWRwgiQG",
+        ],
+    },
+
+    genesis_json: include_str!("../res/genesis/base.json"),
+};
+
+const SEPOLIA: ChainConfig = ChainConfig {
+    chain_id: 84532,
+    l1_chain_id: 11155111,
+
+    block_time: 2,
+    seq_window_size: 3600,
+    max_sequencer_drift: 600,
+    channel_timeout: 300,
+
+    bedrock_block: 0,
+    regolith_timestamp: 0,
+    canyon_timestamp: 1_699_981_200,
+    delta_timestamp: 1_703_203_200,
+    ecotone_timestamp: 1_708_534_800,
+    fjord_timestamp: 1_716_998_400,
+    granite_timestamp: 1_723_478_400,
+    holocene_timestamp: 1_732_633_200,
+    pectra_blob_schedule_timestamp: Some(1_742_486_400),
+    isthmus_timestamp: 1_744_905_600,
+    jovian_timestamp: 1_763_568_001,
+    azul_timestamp: Some(1_776_708_000),
+    beryl_timestamp: None,
+
+    genesis_l1_hash: b256!("cac9a83291d4dec146d6f7f69ab2304f23f5be87b1789119a0c5b1e4482444ed"),
+    genesis_l1_number: 4_370_868,
+    genesis_l2_hash: b256!("0dcc9e089e30b90ddfc55be9a37dd15bc551aeee999d2e2b51414c54eaf934e4"),
+    genesis_l2_number: 0,
+    genesis_l2_time: 1_695_768_288,
+    genesis_batcher_address: address!("6cdebe940bc0f26850285caca097c11c33103e47"),
+    genesis_overhead: uint!(0x834_U256),
+    genesis_scalar: uint!(0xf4240_U256),
+    genesis_gas_limit: 25_000_000,
+
+    eip1559_elasticity: 10,
+    eip1559_denominator: 50,
+    eip1559_denominator_canyon: 250,
+
+    batch_inbox_address: address!("ff00000000000000000000000000000000084532"),
+    deposit_contract_address: address!("49f53e41452c74589e85ca1677426ba426459e85"),
+    system_config_address: address!("f272670eb55e895584501d564afeb048bed26194"),
+    protocol_versions_address: address!("79add5713b383daa0a138d3c4780c7a1804a8090"),
+
+    unsafe_block_signer: Some(address!("b830b99c95Ea32300039624Cb567d324D4b1D83C")),
+
+    max_gas_limit: 45_000_000,
+    prune_delete_limit: 10_000,
+
+    bootnodes: Bootnodes {
+        execution: &[
+            "enode://548f715f3fc388a7c917ba644a2f16270f1ede48a5d88a4d14ea287cc916068363f3092e39936f1a3e7885198bef0e5af951f1d7b1041ce8ba4010917777e71f@18.210.176.114:30301",
+            "enode://548f715f3fc388a7c917ba644a2f16270f1ede48a5d88a4d14ea287cc916068363f3092e39936f1a3e7885198bef0e5af951f1d7b1041ce8ba4010917777e71f@18.210.176.114:9200",
+            "enode://6f10052847a966a725c9f4adf6716f9141155b99a0fb487fea3f51498f4c2a2cb8d534e680ee678f9447db85b93ff7c74562762c3714783a7233ac448603b25f@107.21.251.55:30301",
+            "enode://6f10052847a966a725c9f4adf6716f9141155b99a0fb487fea3f51498f4c2a2cb8d534e680ee678f9447db85b93ff7c74562762c3714783a7233ac448603b25f@107.21.251.55:9200",
+        ],
+        consensus: &[
+            "enr:-J64QFa3qMsONLGphfjEkeYyF6Jkil_jCuJmm7_a42ckZeUQGLVzrzstZNb1dgBp1GGx9bzImq5VxJLP-BaptZThGiWGAYrTytOvgmlkgnY0gmlwhGsV-zeHb3BzdGFja4S0lAUAiXNlY3AyNTZrMaEDahfSECTIS_cXyZ8IyNf4leANlZnrsMEWTkEYxf4GMCmDdGNwgiQGg3VkcIIkBg",
+            "enr:-J64QBwRIWAco7lv6jImSOjPU_W266lHXzpAS5YOh7WmgTyBZkgLgOwo_mxKJq3wz2XRbsoBItbv1dCyjIoNq67mFguGAYrTxM42gmlkgnY0gmlwhBLSsHKHb3BzdGFja4S0lAUAiXNlY3AyNTZrMaEDmoWSi8hcsRpQf2eJsNUx-sqv6fH4btmo2HsAzZFAKnKDdGNwgiQGg3VkcIIkBg",
+        ],
+    },
+
+    genesis_json: include_str!("../res/genesis/sepolia_base.json"),
+};
+
+const DEVNET: ChainConfig = ChainConfig {
+    chain_id: 1337,
+    l1_chain_id: 900,
+
+    block_time: 2,
+    seq_window_size: 3600,
+    max_sequencer_drift: 600,
+    channel_timeout: 300,
+
+    bedrock_block: 0,
+    regolith_timestamp: 0,
+    canyon_timestamp: 0,
+    delta_timestamp: 0,
+    ecotone_timestamp: 0,
+    fjord_timestamp: 0,
+    granite_timestamp: 0,
+    holocene_timestamp: 0,
+    pectra_blob_schedule_timestamp: None,
+    isthmus_timestamp: 0,
+    jovian_timestamp: 0,
+    azul_timestamp: Some(0),
+    beryl_timestamp: None,
+
+    genesis_l1_hash: B256::ZERO,
+    genesis_l1_number: 0,
+    genesis_l2_hash: B256::ZERO,
+    genesis_l2_number: 0,
+    genesis_l2_time: 0,
+    genesis_batcher_address: Address::ZERO,
+    genesis_overhead: U256::ZERO,
+    genesis_scalar: U256::ZERO,
+    genesis_gas_limit: 30_000_000,
+
+    eip1559_elasticity: 6,
+    eip1559_denominator: 50,
+    eip1559_denominator_canyon: 250,
+
+    batch_inbox_address: Address::ZERO,
+    deposit_contract_address: Address::ZERO,
+    system_config_address: Address::ZERO,
+    protocol_versions_address: Address::ZERO,
+
+    unsafe_block_signer: None,
+
+    max_gas_limit: 30_000_000,
+    prune_delete_limit: 20_000,
+
+    bootnodes: Bootnodes::EMPTY,
+
+    genesis_json: include_str!("../res/genesis/dev.json"),
+};
+
+const ZERONET: ChainConfig = ChainConfig {
+    chain_id: 763360,
+    l1_chain_id: 560048,
+
+    block_time: 2,
+    seq_window_size: 3600,
+    max_sequencer_drift: 600,
+    channel_timeout: 300,
+
+    bedrock_block: 0,
+    regolith_timestamp: 0,
+    canyon_timestamp: 0,
+    delta_timestamp: 0,
+    ecotone_timestamp: 0,
+    fjord_timestamp: 0,
+    granite_timestamp: 0,
+    holocene_timestamp: 0,
+    pectra_blob_schedule_timestamp: None,
+    isthmus_timestamp: 0,
+    jovian_timestamp: 0,
+    azul_timestamp: Some(1_775_152_800),
+    beryl_timestamp: None,
+
+    genesis_l1_hash: b256!("b7d4b69971ff31d5179be5e1b83f5a4f438f4cd1db886a6630623b7047f32cfd"),
+    genesis_l1_number: 2_450_277,
+    genesis_l2_hash: b256!("1842d6ef4c40e2a4794458e167f6d327269df919b626979111c37ad3a96047bf"),
+    genesis_l2_number: 0,
+    genesis_l2_time: 1_773_959_340,
+    genesis_batcher_address: address!("4c810fec547f6c143db51953af51a1de79bead21"),
+    genesis_overhead: U256::ZERO,
+    genesis_scalar: uint!(0x010000000000000000000000000000000000000000000000000c3c9d00000558_U256),
+    genesis_gas_limit: 25_000_000,
+
+    eip1559_elasticity: 6,
+    eip1559_denominator: 50,
+    eip1559_denominator_canyon: 250,
+
+    batch_inbox_address: address!("00975f9c430b216f84ec52374d7f5eb8eec3139a"),
+    deposit_contract_address: address!("7b9fb81a8e041814903c9385b22d88ac303df699"),
+    system_config_address: address!("cc7c76564bea74a963a0bd75e0bc9bce3ff0ea80"),
+    protocol_versions_address: address!("646c8604cf62b23e0cf094f2e790c6c75547ff85"),
+
+    unsafe_block_signer: Some(address!("cf17274338d3128f6C96d9af54511a17e8b38a08")),
+
+    max_gas_limit: 25_000_000,
+    prune_delete_limit: 10_000,
+
+    bootnodes: Bootnodes {
+        execution: &[
+            "enode://cd4528698249ad8b36fa7b1cad75aa5683ad355e6f0776629eaff1d83cfbb575062330d711efefbfa0d531c86969c2daf9a88fb28cddbbad216f46ac367981eb@44.198.4.118:30301",
+            "enode://cd4528698249ad8b36fa7b1cad75aa5683ad355e6f0776629eaff1d83cfbb575062330d711efefbfa0d531c86969c2daf9a88fb28cddbbad216f46ac367981eb@44.198.4.118:9200",
+            "enode://ea188fb5482ff8eb372956d674ecb6d09cbd42e6874121957a47b2ad252f54953c49866d2dcabcfc272fcc63e163a67b097fe4354283e56ddf077fc017b2a127@52.2.11.95:30301",
+            "enode://ea188fb5482ff8eb372956d674ecb6d09cbd42e6874121957a47b2ad252f54953c49866d2dcabcfc272fcc63e163a67b097fe4354283e56ddf077fc017b2a127@52.2.11.95:9200",
+        ],
+        consensus: &[
+            "enr:-J-4QDS5Z5P4BoDbOlLGOcdXjcv2Nc5_PgP28lIxP4lKU6qYR-m10c8rHdcHk0DdmTvZpndoSpuK__688dmX-tlOsNKGAZ22NI20gmlkgnY0gmlwhCzGBHaHb3BzdGFja4WA-80FAIlzZWNwMjU2azGhA4Qs8_ZWeMdUNldNdjnAxd018gjWofqKoW4_pr0qzvTtg3RjcIIkBoN1ZHCCJAY",
+            "enr:-J-4QKgMF6zAv7u_75LTXLJKgLtEn4HcI8gaqsDAl78nfw7VQE-EN6dUZCZW4_CI42MAOWUCinrV8rP5hbBu3aje-u-GAZ22LUBogmlkgnY0gmlwhDQCC1-Hb3BzdGFja4WA-80FAIlzZWNwMjU2azGhArwjzoKlEKQiEXtuZ0qT23Wy_3IeEXbAJo7VKDO2Yovig3RjcIIkBoN1ZHCCJAY",
+        ],
+    },
+
+    genesis_json: include_str!("../res/genesis/zeronet_base.json"),
+};
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn mainnet_fee_config_matches_const() {
+        // Guard against drift between the hardcoded `FeeConfig::BASE_MAINNET` constant
+        // (used as a serde default) and the canonical `ChainConfig::mainnet().fee_config()`.
+        assert_eq!(ChainConfig::mainnet().fee_config(), FeeConfig::base_mainnet());
+    }
+
+    #[test]
+    fn supported_chain_names_resolve() {
+        for name in ChainConfig::SUPPORTED_NAMES {
+            assert!(ChainConfig::by_name(name).is_some(), "{name} should resolve");
+        }
+        assert_eq!(ChainConfig::by_name(ChainConfig::SEPOLIA_ALIAS), Some(ChainConfig::sepolia()));
+    }
+}

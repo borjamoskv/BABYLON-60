@@ -1,0 +1,100 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            width: 320px;
+            background-color: #050508;
+            color: #f3f4f6;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 16px;
+            box-sizing: border-box;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1e2235;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        .header h1 {
+            font-size: 1.1rem;
+            margin: 0;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 40%, #2b3be5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .badge {
+            background-color: rgba(255, 86, 0, 0.1);
+            border: 1px solid #ff5600;
+            color: #ff5600;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .desc {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            background-color: #2b3be5;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #ff5600;
+        }
+
+        .btn:disabled {
+            background-color: #1e2235;
+            color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .console {
+            background-color: #020204;
+            border: 1px solid #1e2235;
+            border-radius: 6px;
+            padding: 8px;
+            font-family: monospace;
+            font-size: 0.75rem;
+            height: 120px;
+            overflow-y: auto;
+            color: #34d399;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Anti-Mafia Sentinel</h1>
+        <span class="badge">C5-REAL</span>
+    </div>
+    <p class="desc">Haz clic en el botón para escanear y eliminar recomendaciones del cluster Mafia en esta publicación.</p>
+    <button id="purge-btn" class="btn">Purgar Recomendaciones</button>
+    <div id="console" class="console">> [Sentinel listo para escanear]</div>
+    <script src="popup.js"></script>
+</body>
+</html>

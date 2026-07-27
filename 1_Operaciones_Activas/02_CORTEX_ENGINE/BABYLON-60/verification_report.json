@@ -1,0 +1,184 @@
+[
+  {
+    "id": "AIACT_ART12",
+    "claim": "EU AI Act Art. 12 exige registro automático de eventos (logs)",
+    "urls": [
+      "https://artificialintelligenceact.eu/article/12/"
+    ],
+    "probes": [
+      "(?i)automatic(ally)? record",
+      "(?i)\\blogs?\\b",
+      "(?i)traceability",
+      "(?i)compile|type system|static typing"
+    ],
+    "status": "CONFIRMADO",
+    "found": "timeline . Summary This article states that high-risk AI systems must have the ability to automatically record events throughout their lifespan. This  ⋅ y Management System Article 18: Documentation Keeping Article 19: Automatically Generated Logs Article 20: Corrective Actions and Duty of Information ",
+    "src": "https://artificialintelligenceact.eu/article/12/",
+    "ms": 924,
+    "notes": []
+  },
+  {
+    "id": "ANDROID_MEM",
+    "claim": "Android: vulnerabilidades de memoria 76% (2019) → 24% (2024)",
+    "urls": [
+      "https://security.googleblog.com/2024/09/eliminating-memory-safety-vulnerabilities-Android.html",
+      "https://security.googleblog.com/2022/12/memory-safe-languages-in-android-13.html"
+    ],
+    "probes": [
+      "76\\s*%",
+      "24\\s*%",
+      "(?i)memory[- ]safety vulnerabilit"
+    ],
+    "status": "CONFIRMADO",
+    "found": "dated data on how the percentage of memory safety vulnerabilities in Android dropped from 76% to 24% over 6 years as development shifted to memory saf ⋅ ata on how the percentage of memory safety vulnerabilities in Android dropped from 76% to 24% over 6 years as development shifted to memory safe langu",
+    "src": "https://security.googleblog.com/2024/09/eliminating-memory-safety-vulnerabilities-Android.html",
+    "ms": 856,
+    "notes": []
+  },
+  {
+    "id": "BERGER_REPRO",
+    "claim": "Berger TOPLAS 2019: la replicación desmonta Ray et al. FSE 2014",
+    "urls": [
+      "https://arxiv.org/abs/1901.10220"
+    ],
+    "probes": [
+      "(?i)reproduc",
+      "(?i)(small|little|not|fail|weak).{0,40}(effect|significan|evidence)"
+    ],
+    "status": "PARCIAL",
+    "found": "n Code Quality, by Emery D. Berger and 4 other authors View PDF Abstract: This paper is a reproduction of work by Ray et al. which claimed to have unc",
+    "src": "https://arxiv.org/abs/1901.10220",
+    "ms": 255,
+    "notes": []
+  },
+  {
+    "id": "FABLE_PY",
+    "claim": "Fable 4 (2023) añadió target Python; menos maduro que JS",
+    "urls": [
+      "https://raw.githubusercontent.com/fable-compiler/Fable/main/CHANGELOG.md",
+      "https://raw.githubusercontent.com/fable-compiler/Fable/main/README.md"
+    ],
+    "probes": [
+      "(?i)##?\\s*4\\.0\\.0.*?20(2[2-5])",
+      "(?i)python",
+      "(?i)rust|dart|typescript"
+    ],
+    "status": "CONFIRMADO",
+    "found": "igher](https://dotnet.microsoft.com/download) - [node.js](https://nodejs.org) with npm - [Python 3](https://www.python.org/) is installed and availabl ⋅ python.org/) is installed and available as `python` - [Uv](https://docs.astral.sh/uv/) - [Rust](https://www.rust-lang.org/tools/install) - [Dart](http",
+    "src": "https://raw.githubusercontent.com/fable-compiler/Fable/main/README.md",
+    "ms": 815,
+    "notes": [
+      "raw.githubusercontent.com: HTTPError"
+    ]
+  },
+  {
+    "id": "GAO_15",
+    "claim": "Gao/Bird/Barr ICSE 2017: ~15% de bugs JS detectables por tipos",
+    "urls": [
+      "https://www0.cs.ucl.ac.uk/staff/e.barr/pub/typestudy.pdf",
+      "https://ttendency.cs.ucl.ac.uk/projects/type_study/documents/type_study.pdf"
+    ],
+    "probes": [
+      "15\\s*%",
+      "(?i)detectable",
+      "(?i)flow|typescript"
+    ],
+    "status": "INACCESIBLE",
+    "found": "",
+    "src": "",
+    "ms": 25189,
+    "notes": [
+      "www0.cs.ucl.ac.uk: HTTPError",
+      "ttendency.cs.ucl.ac.uk: TimeoutError"
+    ]
+  },
+  {
+    "id": "MSFT_70",
+    "claim": "Microsoft: ~70% de CVEs son memory safety (BlueHat IL 2019)",
+    "urls": [
+      "https://msrc.microsoft.com/blog/2019/07/a-proactive-approach-to-more-secure-code/",
+      "https://raw.githubusercontent.com/microsoft/MSRC-Security-Research/master/presentations/2019_02_BlueHatIL/2019_01%20-%20BlueHatIL%20-%20Trends%2C%20challenge%2C%20and%20shifts%20in%20software%20vulnerability%20mitigation.pdf"
+    ],
+    "probes": [
+      "~?\\s*70\\s*%",
+      "(?i)memory safety"
+    ],
+    "status": "NO_ENCONTRADO",
+    "found": "",
+    "src": "https://msrc.microsoft.com/blog/2019/07/a-proactive-approach-to-more-secure-code/",
+    "ms": 596,
+    "notes": []
+  },
+  {
+    "id": "PY_TYPES_WILD",
+    "claim": "Rak-amnouykit et al.: baja cobertura de anotaciones en Python real",
+    "urls": [
+      "https://arxiv.org/abs/2011.06413",
+      "https://www.cs.rpi.edu/~milanova/docs/dls2020.pdf"
+    ],
+    "probes": [
+      "\\b\\d{1,2}(\\.\\d)?\\s*%",
+      "(?i)mypy",
+      "(?i)pytype",
+      "(?i)disagree"
+    ],
+    "status": "NO_ENCONTRADO",
+    "found": "",
+    "src": "https://arxiv.org/abs/2011.06413",
+    "ms": 240,
+    "notes": []
+  },
+  {
+    "id": "QIN_PLDI20",
+    "claim": "Qin et al. PLDI 2020: Rust no previene deadlocks ni bugs lógicos",
+    "urls": [
+      "https://arxiv.org/abs/2003.03296",
+      "https://songlh.github.io/paper/rust-study.pdf"
+    ],
+    "probes": [
+      "(?i)deadlock",
+      "(?i)unsafe",
+      "(?i)blocking bug|concurrency bug"
+    ],
+    "status": "PARCIAL",
+    "found": "analysis result shows that Rust can keep its promise that all memory-safety bugs require unsafe code, and many memory-safety bugs in our dataset are m",
+    "src": "https://arxiv.org/abs/2003.03296",
+    "ms": 239,
+    "notes": []
+  },
+  {
+    "id": "SCHNEIER_LOG",
+    "claim": "Schneier&Kelsey: logs seguros protegen entradas PREVIAS al compromiso",
+    "urls": [
+      "https://www.schneier.com/wp-content/uploads/2016/02/paper-secure-logs.pdf",
+      "https://www.schneier.com/academic/paperfiles/paper-auditlogs.pdf"
+    ],
+    "probes": [
+      "(?i)before.{0,30}compromis",
+      "(?i)forward",
+      "(?i)cannot.{0,40}(read|alter|undetect)"
+    ],
+    "status": "CONFIRMADO",
+    "found": "a secure connection, using an authentication and key-agreement protocol that has perfect forward secrecy, such as authenticated DiffieHellman. The pur ⋅ , L1 , L2 , . . . , Lt , and the value At+1 . He cannot compute At−n for any n ≤ t, so he cannot read or falsify any previous entry. He can delete a b",
+    "src": "https://www.schneier.com/wp-content/uploads/2016/02/paper-secure-logs.pdf",
+    "ms": 2645,
+    "notes": []
+  },
+  {
+    "id": "TAKIKAWA",
+    "claim": "Takikawa POPL 2016: sound gradual typing con ralentizaciones catastróficas",
+    "urls": [
+      "https://www2.ccs.neu.edu/racket/pubs/popl16-tfgnvf.pdf"
+    ],
+    "probes": [
+      "(?i)\\b\\d{1,3}x\\b",
+      "(?i)overhead",
+      "(?i)sound gradual typing"
+    ],
+    "status": "CONFIRMADO",
+    "found": "n over the slowdown factor that a team may consider acceptable. One team may think of a 1.1x slowdown as barely acceptable, while another one may tole ⋅ dual typing remains theoretical, the few emerging implementations suffer from performance overheads due to these checks. None of the publications on t",
+    "src": "https://www2.ccs.neu.edu/racket/pubs/popl16-tfgnvf.pdf",
+    "ms": 2684,
+    "notes": []
+  }
+]

@@ -1,0 +1,15 @@
+[package]
+name = "moskv_rpc_cartel"
+version = "0.1.0"
+edition = "2021"
+authors = ["borjamoskv"]
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+axum = "0.7"
+reqwest = { version = "0.12", features = ["json"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tower = "0.4"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }

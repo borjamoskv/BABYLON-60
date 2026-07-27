@@ -1,0 +1,327 @@
+# [C5-REAL] Exergy-Maximized
+"""
+Hybrid Search Engine.
+
+Implements Reciprocal Rank Fusion (RRF) to unify semantic vector search
+and full-text lexical search. Optimized for high-precision recall.
+"""
+
+from __future__ import annotations
+
+import asyncio
+import logging
+import math
+import sqlite3
+from datetime import datetime, timezone
+from typing import Final
+
+import aiosqlite
+
+from babylon60.search.causal_gap import (
+    CausalGap,
+    SearchCandidate,
+    compute_candidate_score,
+)
+from babylon60.search.models import SearchResult
+from babylon60.search.text import text_search, text_search_sync
+from babylon60.search.vector import semantic_search, semantic_search_sync
+
+__all__ = ["hybrid_search", "hybrid_search_sync"]
+
+logger = logging.getLogger("babylon60.search.hybrid")
+
+# RRF_K constant governs the impact of low-rank results.
+# Industry standard (Corpus-Scale) is 60.
+RRF_K: Final[int] = 60
+
+# Temporal decay constant: λ=0.01 gives half-life ≈ 70 days
+_DECAY_LAMBDA: Final[float] = 0.01
+
+
+def _apply_temporal_decay(results: list[SearchResult], recency_weight: float) -> list[SearchResult]:
+    """Apply exponential time decay to search results.
+
+    Ω₁₃: A 2-year-old fact should not rank identically to today's.
+    Uses exp(-λ * age_days) with configurable recency_weight blend.
+
+    Final score = rrf_score * (1 - w) + recency_factor * w
+    """
+    recency_weight = float(recency_weight)
+    now = datetime.now(timezone.utc)
+    from typing import cast
+
+    for r in results:
+        try:
+            if isinstance(r.created_at, datetime):
+                dt = cast(datetime, r.created_at)
+            else:
+                # Parse created_at (ISO format from SQLite)
+                dt = datetime.fromisoformat(str(r.created_at).replace("Z", "+00:00"))
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            age_days = (now - dt).total_seconds() / 86400.0
+        except (ValueError, TypeError, AttributeError):
+            age_days = 0.0  # Unknown age = no penalty
+
+        recency_factor = math.exp(-_DECAY_LAMBDA * max(age_days, 0.0))
+        r.score = round(
+            r.score * (1.0 - recency_weight) + recency_factor * recency_weight,
+            6,
+        )
+
+    # Re-sort by updated scores
+    results.sort(key=lambda r: r.score, reverse=True)
+    return results
+
+
+async def hybrid_search(
+    conn: aiosqlite.Connection,
+    query: str,
+    query_embedding: list[float],
+    top_k: int = 10,
+    tenant_id: str = "default",
+    project: str | None = None,
+    as_of: str | None = None,
+    vector_weight: float = 0.6,
+    text_weight: float = 0.4,
+    confidence: str | None = None,
+    causal_gap: CausalGap | None = None,
+    recency_weight: float = 0.1,
+    include_graph: bool = False,
+    graph_depth: int = 0,
+    **kwargs,
+) -> list[SearchResult]:
+    """
+    Sovereign Hybrid Search: Semantic + Text via RRF.
+    Executes branch searches in parallel for minimal latency.
+    """
+    # 1. Dispatch branch searches concurrently
+    # Over-fetch by 2x to ensure sufficient overlap for RRF
+    fetch_limit = top_k * 2
+
+    sem_task = semantic_search(
+        conn,
+        query_embedding,
+        top_k=fetch_limit,
+        tenant_id=tenant_id,
+        project=project,
+        as_of=as_of,
+        confidence=confidence,
+    )
+    txt_task = text_search(
+        conn,
+        query,
+        tenant_id=tenant_id,
+        project=project,
+        limit=fetch_limit,
+        as_of=as_of,
+        confidence=confidence,
+    )
+
+    try:
+        sem_results, txt_results = await asyncio.gather(sem_task, txt_task)
+    except (sqlite3.Error, OSError, ValueError, RuntimeError) as exc:
+        logger.error("Hybrid branch search failed: %s", exc)
+        # Fallback to empty if both fail, or partial if one survives
+        # (non-gather approach would be needed) But here we want atomicity or failure.
+        return []
+
+    # 2. Rank Fusion Logic (RRF)
+    # Weights should ideally sum to 1.0 but we normalize them here
+    total_w = vector_weight + text_weight
+    w_vec = vector_weight / total_w
+    w_txt = text_weight / total_w
+
+    rrf_scores: dict[str, float] = {}
+    result_map: dict[str, SearchResult] = {}
+
+    # Standardize Semantic Results
+    for rank, res in enumerate(sem_results):
+        score = w_vec / (RRF_K + rank + 1)
+        rrf_scores[res.fact_id] = rrf_scores.get(res.fact_id, 0.0) + score
+        result_map[res.fact_id] = res
+
+    # Standardize Text Results
+    for rank, res in enumerate(txt_results):
+        score = w_txt / (RRF_K + rank + 1)
+        rrf_scores[res.fact_id] = rrf_scores.get(res.fact_id, 0.0) + score
+        if res.fact_id not in result_map:
+            result_map[res.fact_id] = res
+
+    # 3. Final Ranking & Selection
+    # Sort by the aggregated RRF score
+    sorted_ids = sorted(rrf_scores, key=lambda fid: rrf_scores[fid], reverse=True)[:top_k]
+
+    merged: list[SearchResult] = []
+    for fid in sorted_ids:
+        r = result_map[fid]
+        r.score = round(rrf_scores[fid], 6)
+        merged.append(r)
+
+    # Ω₁₃: Temporal decay - older facts naturally discounted
+    if recency_weight > 0 and merged:
+        merged = _apply_temporal_decay(merged, recency_weight)
+    # Ω₁₃: Causal gap re-ranking - similarity alone is insufficient
+    if causal_gap is not None and merged:
+        merged = _rerank_by_causal_gap(merged, causal_gap)
+
+    # 🕸️ GraphRAG Native Expansion (SOTA Alignment)
+    if include_graph and graph_depth > 0 and merged:
+        fact_ids = [r.fact_id for r in merged]
+        contexts = await _expand_graph_context(conn, fact_ids, graph_depth)
+        for r in merged:
+            if str(r.fact_id) in contexts:
+                r.graph_context = {"edges": contexts[str(r.fact_id)]}
+
+    # 🔥 Fire-and-forget BM25 feedback loop
+    if merged:
+        asyncio.create_task(_bm25_feedback_loop(conn, query, merged))
+
+    logger.debug(
+        "Hybrid search executed. query='%s' results=%d top_score=%.4f",
+        query[:30],
+        len(merged),
+        merged[0].score if merged else 0.0,
+    )
+
+    return merged
+
+
+def hybrid_search_sync(
+    conn: sqlite3.Connection,
+    query: str,
+    query_embedding: list[float],
+    top_k: int = 10,
+    tenant_id: str = "default",
+    project: str | None = None,
+    vector_weight: float = 0.6,
+    text_weight: float = 0.4,
+    causal_gap: CausalGap | None = None,
+    recency_weight: float = 0.1,
+) -> list[SearchResult]:
+    """Hybrid search combining semantic + text via RRF (sync)."""
+    fetch_limit = top_k * 2
+    sem_results = semantic_search_sync(
+        conn, query_embedding, fetch_limit, tenant_id=tenant_id, project=project
+    )
+    txt_results = text_search_sync(
+        conn, query, tenant_id=tenant_id, project=project, limit=fetch_limit
+    )
+
+    total_w = vector_weight + text_weight
+    w_vec = vector_weight / total_w
+    w_txt = text_weight / total_w
+
+    rrf_scores: dict[str, float] = {}
+    result_map: dict[str, SearchResult] = {}
+
+    for rank, res in enumerate(sem_results):
+        score = w_vec / (RRF_K + rank + 1)
+        rrf_scores[res.fact_id] = rrf_scores.get(res.fact_id, 0.0) + score
+        result_map[res.fact_id] = res
+
+    for rank, res in enumerate(txt_results):
+        score = w_txt / (RRF_K + rank + 1)
+        rrf_scores[res.fact_id] = rrf_scores.get(res.fact_id, 0.0) + score
+        if res.fact_id not in result_map:
+            result_map[res.fact_id] = res
+
+    sorted_ids = sorted(rrf_scores, key=lambda fid: rrf_scores[fid], reverse=True)[:top_k]
+    merged: list[SearchResult] = []
+    for fid in sorted_ids:
+        r = result_map[fid]
+        r.score = round(rrf_scores[fid], 6)
+        merged.append(r)
+
+    # Ω₁₃: Temporal decay
+    if recency_weight > 0 and merged:
+        merged = _apply_temporal_decay(merged, recency_weight)
+    # Ω₁₃: Causal gap re-ranking
+    if causal_gap is not None and merged:
+        merged = _rerank_by_causal_gap(merged, causal_gap)
+
+    return merged
+
+
+def _rerank_by_causal_gap(
+    results: list[SearchResult],
+    gap: CausalGap,
+) -> list[SearchResult]:
+    """Re-rank results by causal gap reduction, not mere similarity.
+
+    Ω₁₃: causal_gap_reduction_required_for_search_success = true
+    """
+    missing = gap.missing_evidence.lower()
+    candidates: list[tuple[SearchResult, float]] = []
+
+    for rank, r in enumerate(results):
+        content_lower = r.content.lower()
+        # Evidence match: word overlap with missing_evidence
+        missing_words = set(missing.split())
+        content_words = set(content_lower.split())
+        overlap = len(missing_words & content_words)
+        evidence_score = min(overlap / max(len(missing_words), 1), 1.0)
+
+        sc = SearchCandidate(
+            doc_id=str(r.fact_id),
+            semantic_score=r.score,
+            evidence_match_score=evidence_score,
+            confidence_gain_score=gap.expected_confidence_gain,
+            novelty_score=1.0 / (rank + 1),  # Higher rank = lower novelty
+        )
+        final = compute_candidate_score(sc)
+        r.causal_gap_score = round(final, 6)
+        candidates.append((r, final))
+
+    candidates.sort(key=lambda x: x[1], reverse=True)
+    return [c[0] for c in candidates]
+
+
+async def _expand_graph_context(
+    conn: aiosqlite.Connection, fact_ids: list[str], depth: int = 1
+) -> dict[str, list[dict]]:
+    """Native GraphRAG: Traverse causal_edges to fetch structural context."""
+    context: dict[str, list[dict]] = {}
+    if not fact_ids or depth < 1:
+        return context
+
+    # 1-hop traversal to align with AtmsGraph logic
+    placeholders = ",".join(["?"] * len(fact_ids))
+    try:
+        query = f"""
+            SELECT parent_id, child_id, relationship_type
+            FROM causal_edges
+            WHERE parent_id IN ({placeholders}) OR child_id IN ({placeholders})
+        """
+        cursor = await conn.execute(query, fact_ids + fact_ids)
+        edges = await cursor.fetchall()
+
+        for p_id, c_id, rel in edges:
+            p_id, c_id = str(p_id), str(c_id)
+            if p_id in fact_ids:
+                if p_id not in context:
+                    context[p_id] = []
+                context[p_id].append({"entails": c_id, "type": rel})
+            if c_id in fact_ids:
+                if c_id not in context:
+                    context[c_id] = []
+                context[c_id].append({"depends_on": p_id, "type": rel})
+    except sqlite3.OperationalError as e:
+        logger.warning("GraphRAG expansion skipped (table missing or error): %s", e)
+
+    return context
+
+
+async def _bm25_feedback_loop(
+    conn: aiosqlite.Connection, query: str, results: list[SearchResult]
+) -> None:
+    """Fire-and-forget background task to reinforce BM25 weights based on hybrid selection."""
+    if not results:
+        return
+    try:
+        logger.debug(
+            "[BM25-FEEDBACK] Reinforcing %d results for query: '%s'", len(results), query[:30]
+        )
+        # Placeholder: Implement actual FTS5 or tracking table update
+    except Exception as e:  # noqa: BLE001
+        logger.error("[BM25-FEEDBACK] Failed: %s", e)

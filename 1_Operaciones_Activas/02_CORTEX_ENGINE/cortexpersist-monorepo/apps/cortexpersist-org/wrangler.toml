@@ -1,0 +1,14 @@
+name = "cortexpersist-org"
+pages_build_output_dir = "./out"
+compatibility_date = "2024-03-20"
+
+[site]
+bucket = "./out"
+
+[[rules]]
+type = "Text"
+globs = ["**/*.js", "**/*.css", "**/*.woff2"]
+fall_through = false
+
+[headers]
+"/assets/*".Cache-Control = "public, max-age=31536000, immutable"

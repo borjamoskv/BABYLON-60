@@ -1,0 +1,57 @@
+#ifndef HEADER_fd_src_discof_restore_utils_fd_ssarchive_h
+#define HEADER_fd_src_discof_restore_utils_fd_ssarchive_h
+
+#include "../../../util/fd_util_base.h"
+#include "../../../flamenco/types/fd_types_custom.h"
+
+FD_PROTOTYPES_BEGIN
+
+/* Parses a snapshot filename into components.
+
+    incremental-snapshot-344185432-344209085-45eJ5C91fEenPRFc8NiqaDXMCHcPFwRUTMH3k1zY6a1B.tar.zst
+    snapshot-344185432-BSP9ztdFEjwvkBo2LhHA47g9Q3PDwja9x5fj7taFRKH5.tar.zst
+    snapshot-369927872-AaswH3EY2QJtTL1rTGxKCKsJ6SAjAeAvNfJhgM9D4ytU.tar
+
+   Returns -1 on failure and 0 on success. */
+
+int
+fd_ssarchive_parse_filename( char const * _name,
+                             ulong *      full_slot,
+                             ulong *      incremental_slot,
+                             uchar        hash[ static FD_HASH_FOOTPRINT ],
+                             int *        is_zstd );
+
+/* Given a directory on the filesystem, determine the most recent (full,
+   incremental) slot pair, whether each snapshot is zstd compressed, the
+   associated full and incremental hashes, and the snapshot paths.  The
+   incremental slot is set to ULONG_MAX if the highest pair is just a
+   full snapshot alone, or if incremental_snapshot is 0 (only full
+   snapshots are considered).  In this case, incremental_path is left
+   empty, *incremental_is_zstd is set to 0, and incremental_hash is
+   zeroed.
+
+   Returns -1 on failure, and 0 on success. */
+
+int
+fd_ssarchive_latest_pair( char const * directory,
+                          int          incremental_snapshot,
+                          ulong *      full_slot,
+                          ulong *      incremental_slot,
+                          char         full_path[ static PATH_MAX ],
+                          char         incremental_path[ static PATH_MAX ],
+                          int *        full_is_zstd,
+                          int *        incremental_is_zstd,
+                          uchar        full_hash[ static FD_HASH_FOOTPRINT ],
+                          uchar        incremental_hash[ static FD_HASH_FOOTPRINT ] );
+
+/* Given a directory on the file system, remove old snapshots by slot
+   age until the number of full snapshots matches the
+   max_full_snapshots_to_keep and the number of incremental snapshots
+   matches the max_incremental_snapshots_to_keep parameter. */
+void
+fd_ssarchive_remove_old_snapshots( char const * directory,
+                                   uint         max_full_snapshots_to_keep,
+                                   uint         max_incremental_snapshots_to_keep );
+FD_PROTOTYPES_END
+
+#endif /* HEADER_fd_src_discof_restore_utils_fd_ssarchive_h */

@@ -1,0 +1,73 @@
+import { BaseEndpointTypes } from '../endpoint/crypto-lwba'
+import { TiingoWebsocketTransport, wsMessageContent, wsSelectUrl } from './utils'
+
+interface Message {
+  service: string
+  messageType: string
+  data: [string, string, string, string, number, number, number, number, number, number]
+}
+
+const dataKeys = {
+  messageType: 0,
+  ticker: 1,
+  datetime: 2,
+  exchange: 3,
+  weightedMidPrice: 4,
+  weightedSpreadPcnt: 5,
+  bidSize: 6,
+  bidPrice: 7,
+  askSize: 8,
+  askPrice: 9,
+} as const
+
+export type WsTransportTypes = BaseEndpointTypes & {
+  Provider: {
+    WsMessage: Message
+  }
+}
+export const transport: TiingoWebsocketTransport<WsTransportTypes> =
+  new TiingoWebsocketTransport<WsTransportTypes>({
+    url: (context, _desiredSubs, urlConfigFunctionParameters) => {
+      transport.apiKey = context.adapterSettings.API_KEY
+      return wsSelectUrl(
+        context.adapterSettings.WS_API_ENDPOINT,
+        context.adapterSettings.SECONDARY_WS_API_ENDPOINT,
+        'crypto-synth-top',
+        urlConfigFunctionParameters,
+      )
+    },
+
+    handlers: {
+      message(message) {
+        if (!message?.data?.length || message.messageType !== 'A') {
+          return []
+        }
+        const [base, quote] = message.data[dataKeys.ticker].split('/')
+        return [
+          {
+            params: { base, quote },
+            response: {
+              result: null,
+              data: {
+                mid: message.data[dataKeys.weightedMidPrice],
+                bid: message.data[dataKeys.bidPrice],
+                ask: message.data[dataKeys.askPrice],
+              },
+              timestamps: {
+                providerIndicatedTimeUnixMs: new Date(message.data[dataKeys.datetime]).valueOf(),
+              },
+            },
+          },
+        ]
+      },
+    },
+
+    builders: {
+      subscribeMessage: (params) => {
+        return wsMessageContent('subscribe', transport.apiKey, 4, params.base, params.quote)
+      },
+      unsubscribeMessage: (params) => {
+        return wsMessageContent('unsubscribe', transport.apiKey, 4, params.base, params.quote)
+      },
+    },
+  })

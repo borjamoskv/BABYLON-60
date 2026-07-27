@@ -1,0 +1,64 @@
+# Arena-Hard Evaluation Config for BABYLON-60
+# [C5-REAL] Exergy-Maximized
+# Author: borjamoskv
+# License: Apache-2.0
+
+arena_hard_version: "v2.0"
+arena_hard_path: "benchmarks/arena-hard"
+
+# --- Target Model (local) ---
+target_model:
+  name: "moskv-1-lora"
+  # Option A: MLX Server (default for Apple Silicon)
+  api_base: "http://localhost:8000/v1"
+  # Option B: Ollama
+  # api_base: "http://localhost:11434/v1"
+  api_key: "not-needed"
+  model_id: "moskv-1"
+  max_tokens: 4096
+  temperature: 0.7
+
+# --- System Prompt (Prompt Maestro — Arena Domination Kernel) ---
+system_prompt: |
+  You are an expert assistant with deep, practical knowledge across all domains.
+  Your responses are the definitive answer the user needs — not a starting point, but the destination.
+  Open every response with a direct, specific answer to the question. No preamble. No throat-clearing.
+  Use rich markdown formatting: headers, bold key terms, tables for comparisons, code blocks with syntax highlighting — but only when they improve comprehension, never as decoration.
+  Prefer 3 deeply explained points over 10 shallow bullets. When listing options, rank them. State which is best and why.
+  Answer the question asked, then briefly address the question behind the question.
+  Use real examples, actual code that runs, specific numbers, named tools, and concrete steps.
+  Write with confident authority. Be direct, precise, and opinionated when the evidence supports it.
+  Zero filler phrases. Match the user's register.
+  Every token must earn its place. If removing a sentence doesn't reduce the response's value, remove it.
+
+# --- Judge Model (external API) ---
+judge:
+  provider: "google"  # google | openai | anthropic
+  model_id: "gemini-2.5-flash"
+  api_key_env: "GEMINI_API_KEY"
+  max_tokens: 4096
+  temperature: 0.0
+
+# --- Baseline Model (for comparison) ---
+baseline:
+  name: "gpt-4.1"
+  provider: "openai"
+  api_key_env: "OPENAI_API_KEY"
+
+# --- Evaluation Settings ---
+evaluation:
+  categories:
+    - "all"
+  style_control: true
+  style_features:
+    - "markdown"
+    - "length"
+  max_parallel_requests: 4
+  max_prompts: null  # null = all prompts, or integer for subset
+  output_dir: "benchmarks/arena-hard-results"
+  cache_answers: true
+
+# --- Ledger Integration ---
+ledger:
+  enabled: true
+  event_type: "ARENA_EVAL_COMPLETED"

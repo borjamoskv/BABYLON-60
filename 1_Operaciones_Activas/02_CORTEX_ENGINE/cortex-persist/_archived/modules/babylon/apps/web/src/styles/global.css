@@ -1,0 +1,59 @@
+/* Industrial Noir 2026 (C5-REAL Aesthetic) */
+:root {
+  --cortex-bg: #0A0A0A;
+  --cortex-accent: #2B3BE5;
+  --cortex-text: #E0E0E0;
+  --cortex-muted: #808080;
+  --cortex-border: rgba(43, 59, 229, 0.3);
+
+  --font-humanist: 'Inter', 'Roboto', 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--cortex-bg);
+  color: var(--cortex-text);
+  font-family: var(--font-humanist);
+  min-height: 100vh;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Glassmorphism primitives */
+.cortex-panel {
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--cortex-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cortex-panel:hover {
+  border-color: var(--cortex-accent);
+  box-shadow: 0 0 20px rgba(43, 59, 229, 0.2);
+}
+
+.cortex-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+
+.cortex-accent-text {
+  color: var(--cortex-accent);
+}
+
+.cortex-code {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--cortex-accent);
+}

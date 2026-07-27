@@ -1,0 +1,573 @@
+{
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./composites/bitcoin-json-rpc"
+    },
+    {
+      "path": "./composites/bsol-price"
+    },
+    {
+      "path": "./composites/calculated-price"
+    },
+    {
+      "path": "./composites/crypto-volatility-index"
+    },
+    {
+      "path": "./composites/glv-token"
+    },
+    {
+      "path": "./composites/gm-token"
+    },
+    {
+      "path": "./composites/gmx-tokens"
+    },
+    {
+      "path": "./composites/gold"
+    },
+    {
+      "path": "./composites/historical-average"
+    },
+    {
+      "path": "./composites/implied-price"
+    },
+    {
+      "path": "./composites/llama-guard"
+    },
+    {
+      "path": "./composites/market-status"
+    },
+    {
+      "path": "./composites/medianizer"
+    },
+    {
+      "path": "./composites/multi-address-list"
+    },
+    {
+      "path": "./composites/nexus-kiln"
+    },
+    {
+      "path": "./composites/nftx"
+    },
+    {
+      "path": "./composites/proof-of-reserves"
+    },
+    {
+      "path": "./composites/proof-of-reserves-v2"
+    },
+    {
+      "path": "./composites/rocket-pool"
+    },
+    {
+      "path": "./composites/savax-price"
+    },
+    {
+      "path": "./composites/secure-mint"
+    },
+    {
+      "path": "./composites/set-token-index"
+    },
+    {
+      "path": "./composites/the-graph"
+    },
+    {
+      "path": "./composites/tokenized-equity"
+    },
+    {
+      "path": "./composites/xsushi-price"
+    },
+    {
+      "path": "./core/factories"
+    },
+    {
+      "path": "./core/reference-data-reader"
+    },
+    {
+      "path": "./core/test-helpers"
+    },
+    {
+      "path": "./non-deployable/reduce"
+    },
+    {
+      "path": "./non-deployable/token-allocation"
+    },
+    {
+      "path": "./non-deployable/token-allocation-test"
+    },
+    {
+      "path": "./scripts"
+    },
+    {
+      "path": "./sources/ada-balance"
+    },
+    {
+      "path": "./sources/aleno"
+    },
+    {
+      "path": "./sources/allium-state"
+    },
+    {
+      "path": "./sources/amberdata"
+    },
+    {
+      "path": "./sources/anchorage"
+    },
+    {
+      "path": "./sources/anyblock"
+    },
+    {
+      "path": "./sources/apex"
+    },
+    {
+      "path": "./sources/asseto-finance"
+    },
+    {
+      "path": "./sources/avalanche-platform"
+    },
+    {
+      "path": "./sources/backed-fi"
+    },
+    {
+      "path": "./sources/bank-frick"
+    },
+    {
+      "path": "./sources/bea"
+    },
+    {
+      "path": "./sources/binance"
+    },
+    {
+      "path": "./sources/bitgo"
+    },
+    {
+      "path": "./sources/bitgo-reserves"
+    },
+    {
+      "path": "./sources/bitgo-reserves-test"
+    },
+    {
+      "path": "./sources/blockchain.com"
+    },
+    {
+      "path": "./sources/blockchair"
+    },
+    {
+      "path": "./sources/blocksize-capital"
+    },
+    {
+      "path": "./sources/blocksize-capital-state"
+    },
+    {
+      "path": "./sources/bob"
+    },
+    {
+      "path": "./sources/btc.com"
+    },
+    {
+      "path": "./sources/cache.gold"
+    },
+    {
+      "path": "./sources/canton-functions"
+    },
+    {
+      "path": "./sources/ceffu"
+    },
+    {
+      "path": "./sources/celsius-address-list"
+    },
+    {
+      "path": "./sources/cfbenchmarks"
+    },
+    {
+      "path": "./sources/chain-reserve-wallet"
+    },
+    {
+      "path": "./sources/cmeth"
+    },
+    {
+      "path": "./sources/coinapi"
+    },
+    {
+      "path": "./sources/coinbase"
+    },
+    {
+      "path": "./sources/coinbase-prime"
+    },
+    {
+      "path": "./sources/coingecko"
+    },
+    {
+      "path": "./sources/coinlore"
+    },
+    {
+      "path": "./sources/coinmarketcap"
+    },
+    {
+      "path": "./sources/coinmetrics"
+    },
+    {
+      "path": "./sources/coinmetrics-lwba"
+    },
+    {
+      "path": "./sources/coinpaprika"
+    },
+    {
+      "path": "./sources/coinpaprika-state"
+    },
+    {
+      "path": "./sources/coinranking"
+    },
+    {
+      "path": "./sources/covid-tracker"
+    },
+    {
+      "path": "./sources/cryptoapis"
+    },
+    {
+      "path": "./sources/cryptocompare"
+    },
+    {
+      "path": "./sources/data-engine"
+    },
+    {
+      "path": "./sources/deep-blue"
+    },
+    {
+      "path": "./sources/deribit"
+    },
+    {
+      "path": "./sources/deutsche-boerse"
+    },
+    {
+      "path": "./sources/dlc-btc-por"
+    },
+    {
+      "path": "./sources/dlc-cbtc-por"
+    },
+    {
+      "path": "./sources/dxfeed"
+    },
+    {
+      "path": "./sources/elwood"
+    },
+    {
+      "path": "./sources/enzyme"
+    },
+    {
+      "path": "./sources/eodhistoricaldata"
+    },
+    {
+      "path": "./sources/eth-balance"
+    },
+    {
+      "path": "./sources/eth-beacon"
+    },
+    {
+      "path": "./sources/etherscan"
+    },
+    {
+      "path": "./sources/exchange-copter"
+    },
+    {
+      "path": "./sources/expand-network"
+    },
+    {
+      "path": "./sources/finage"
+    },
+    {
+      "path": "./sources/finalto"
+    },
+    {
+      "path": "./sources/finnhub"
+    },
+    {
+      "path": "./sources/finnhub-secondary"
+    },
+    {
+      "path": "./sources/fireblocks"
+    },
+    {
+      "path": "./sources/fmpcloud"
+    },
+    {
+      "path": "./sources/frxeth-exchange-rate"
+    },
+    {
+      "path": "./sources/ftse-sftp"
+    },
+    {
+      "path": "./sources/galaxis"
+    },
+    {
+      "path": "./sources/gemini"
+    },
+    {
+      "path": "./sources/generic-api"
+    },
+    {
+      "path": "./sources/gmci"
+    },
+    {
+      "path": "./sources/graphql"
+    },
+    {
+      "path": "./sources/gsr"
+    },
+    {
+      "path": "./sources/harris-and-trotter"
+    },
+    {
+      "path": "./sources/hashnote"
+    },
+    {
+      "path": "./sources/hastra"
+    },
+    {
+      "path": "./sources/icap"
+    },
+    {
+      "path": "./sources/ice"
+    },
+    {
+      "path": "./sources/ignition-address-list"
+    },
+    {
+      "path": "./sources/instruxi-sxt"
+    },
+    {
+      "path": "./sources/ion.au"
+    },
+    {
+      "path": "./sources/itick"
+    },
+    {
+      "path": "./sources/ix-trust-sync"
+    },
+    {
+      "path": "./sources/json-rpc"
+    },
+    {
+      "path": "./sources/kaiko"
+    },
+    {
+      "path": "./sources/kaiko-state"
+    },
+    {
+      "path": "./sources/layer2-sequencer-health"
+    },
+    {
+      "path": "./sources/lcx"
+    },
+    {
+      "path": "./sources/lido"
+    },
+    {
+      "path": "./sources/lido-por"
+    },
+    {
+      "path": "./sources/liveart"
+    },
+    {
+      "path": "./sources/lotus"
+    },
+    {
+      "path": "./sources/m0"
+    },
+    {
+      "path": "./sources/matrixdock"
+    },
+    {
+      "path": "./sources/mobula-state"
+    },
+    {
+      "path": "./sources/mock-ea"
+    },
+    {
+      "path": "./sources/moonbeam-address-list"
+    },
+    {
+      "path": "./sources/moore-hk"
+    },
+    {
+      "path": "./sources/mycryptoapi"
+    },
+    {
+      "path": "./sources/nav-consulting"
+    },
+    {
+      "path": "./sources/nav-fund-services"
+    },
+    {
+      "path": "./sources/nav-generic"
+    },
+    {
+      "path": "./sources/ncfx"
+    },
+    {
+      "path": "./sources/nomia"
+    },
+    {
+      "path": "./sources/nomia2"
+    },
+    {
+      "path": "./sources/nyfed"
+    },
+    {
+      "path": "./sources/oanda"
+    },
+    {
+      "path": "./sources/onchain-gas"
+    },
+    {
+      "path": "./sources/ondo"
+    },
+    {
+      "path": "./sources/onre"
+    },
+    {
+      "path": "./sources/openexchangerates"
+    },
+    {
+      "path": "./sources/polkadot-balance"
+    },
+    {
+      "path": "./sources/polygon"
+    },
+    {
+      "path": "./sources/por-address-list"
+    },
+    {
+      "path": "./sources/por-indexer"
+    },
+    {
+      "path": "./sources/r25"
+    },
+    {
+      "path": "./sources/s3-csv-reader"
+    },
+    {
+      "path": "./sources/securitize"
+    },
+    {
+      "path": "./sources/snowflake"
+    },
+    {
+      "path": "./sources/sochain"
+    },
+    {
+      "path": "./sources/solactive"
+    },
+    {
+      "path": "./sources/solana-functions"
+    },
+    {
+      "path": "./sources/solana-view-function"
+    },
+    {
+      "path": "./sources/sportsdataio"
+    },
+    {
+      "path": "./sources/stader-address-list"
+    },
+    {
+      "path": "./sources/stader-balance"
+    },
+    {
+      "path": "./sources/stader-labs"
+    },
+    {
+      "path": "./sources/starknet-gas-price"
+    },
+    {
+      "path": "./sources/streamex"
+    },
+    {
+      "path": "./sources/superstate"
+    },
+    {
+      "path": "./sources/swell-address-list"
+    },
+    {
+      "path": "./sources/synthetix-debt-pool"
+    },
+    {
+      "path": "./sources/synthetix-feeds"
+    },
+    {
+      "path": "./sources/t-rize-proof-of-insurance"
+    },
+    {
+      "path": "./sources/the-network-firm"
+    },
+    {
+      "path": "./sources/therundown"
+    },
+    {
+      "path": "./sources/tiingo"
+    },
+    {
+      "path": "./sources/tiingo-state"
+    },
+    {
+      "path": "./sources/token-balance"
+    },
+    {
+      "path": "./sources/tp"
+    },
+    {
+      "path": "./sources/tradermade"
+    },
+    {
+      "path": "./sources/tradinghours"
+    },
+    {
+      "path": "./sources/trueusd"
+    },
+    {
+      "path": "./sources/truflation"
+    },
+    {
+      "path": "./sources/twelvedata"
+    },
+    {
+      "path": "./sources/twosigma"
+    },
+    {
+      "path": "./sources/uniswap-v2"
+    },
+    {
+      "path": "./sources/upvest"
+    },
+    {
+      "path": "./sources/uscpi-one"
+    },
+    {
+      "path": "./sources/view-function"
+    },
+    {
+      "path": "./sources/view-function-multi-chain"
+    },
+    {
+      "path": "./sources/view-starknet-latest-answer"
+    },
+    {
+      "path": "./sources/wbtc-address-set"
+    },
+    {
+      "path": "./sources/wintermute"
+    },
+    {
+      "path": "./sources/wisdomtree"
+    },
+    {
+      "path": "./sources/wrapped"
+    },
+    {
+      "path": "./targets/dydx-stark"
+    },
+    {
+      "path": "./targets/harmony"
+    }
+  ]
+}

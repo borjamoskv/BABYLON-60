@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ДЕКОДЕР-9 // HARMONY FORGE RELIC</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Outfit:wght@800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Nicotine/Dirt stains & screen overlays -->
+    <div class="dirty-overlay"></div>
+    <div class="crt-overlay"></div>
+    <div class="tape-glitch"></div>
+    
+    <!-- Top System Header -->
+    <header class="app-header">
+        <a href="https://portrait.so/borja" target="_blank" class="logo-link">
+            <div class="soviet-seal">
+                <span class="star">★</span>
+                <div class="seal-text">
+                    <h2>BORJA MOSKV</h2>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Center Led Status Panel -->
+        <div class="system-status-panel">
+            <span class="pulse-dot"></span>
+            <span id="status-text" class="status-text">SYSTEM STANDBY</span>
+        </div>
+
+        <div class="archive-metadata">
+            <div class="meta-row">
+                <span class="hash-label">LEDGER_STATE:</span>
+                <span class="hash-val">C5-REAL // SEALED</span>
+            </div>
+            <div class="meta-row">
+                <span class="hash-label">HASH:</span>
+                <span class="hash-val" id="file-hash">0x9f8b4e7a2c3d10a9f0e8d7c6b5a4f3e2</span>
+            </div>
+            <div class="meta-row links-row">
+                <span class="hash-label">EXT_LINKS:</span>
+                <span class="hash-val">
+                    <a href="https://soundcloud.com/borja-moskv" target="_blank" class="header-link">SOUNDCLOUD</a>
+                    <span class="divider">//</span>
+                    <a href="https://borjamoskv.bandcamp.com/album/far-ndula" target="_blank" class="header-link">BANDCAMP</a>
+                </span>
+            </div>
+        </div>
+
+        <div class="glowing-counter-wrapper">
+            <span class="counter-label">TAPE COUNTER</span>
+            <div class="tape-counter" id="tape-counter">00:00:00</div>
+        </div>
+    </header>
+
+    <!-- Main Immersive Grid -->
+    <div class="app-wrapper">
+        
+        <!-- Left: Soviet Newspaper Column (Torn relic sidebar) -->
+        <aside class="newspaper-column">
+            <div class="torn-edge-left"></div>
+            <div class="newspaper-content">
+                <div class="newspaper-header">
+                    <h3>СОВЕТСКИЙ ФИЗКУЛЬТУРНИК</h3>
+                    <div class="newspaper-date">Пятница, 19 мая 1989 г. • Цена 3 коп.</div>
+                </div>
+                <div class="newspaper-divider"></div>
+                
+                <h4 class="article-title">ЭКСЕРГЕТИЧЕСКИЙ ПРОГРЕСС И АКУСТИКА</h4>
+                
+                <div class="article-columns">
+                    <p>
+                        В соответствии с решением партии в Новосибирском Академгородке была запущена экспериментальная установка <strong>«ДЕКОДЕР-9»</strong>. Данное устройство предназначено для калибровки и синтеза гармонических колебаний, нейтрализующих вредную энтропию в рабочих цехах.
+                    </p>
+                    <p>
+                        Исследования показали, что микротональная сетка (21-EDO) повышает exergy-баланс пролетариата на 14%. Любые попытки саботажа со стороны западных буржуазных агентов будут подавлены.
+                    </p>
+                </div>
+
+                <div class="newspaper-divider-thin"></div>
+
+                <!-- Soviet Sports Propaganda Poster snippet -->
+                <div class="propaganda-poster">
+                    <div class="constructivist-shapes">
+                        <div class="red-wedge"></div>
+                        <div class="black-stripe"></div>
+                        <div class="athlete-silhouette"></div>
+                    </div>
+                    <span class="propaganda-text">КРЕПИ ФИЗКУЛЬТУРУ И ТРУД!</span>
+                </div>
+
+                <div class="newspaper-divider-thin"></div>
+
+                <div class="redacted-box">
+                    <span class="stamp-redacted">ЦЕНЗУРА // REDACTED</span>
+                    <p>
+                        [СЕКРЕТНО] Проект калибровки КИ (Knowledge Items) под кодовым именем <em>DRUNNING-KRUGER-Ω</em> завершил фазу слияния. Любые отклонения в логических весах будут караться понижением доверия.
+                    </p>
+                </div>
+                
+                <div class="stamps-footer">
+                    <div class="round-stamp">ОТК.9</div>
+                    <div class="archive-code">АРХИВ: 89-DK-1989</div>
+                </div>
+            </div>
+            <div class="torn-edge-right"></div>
+        </aside>
+
+        <!-- Center: Synthesis Control Console & VHS Slot -->
+        <main class="console-panel">
+            <div class="nicotine-stain"></div>
+            
+            <div class="panel-section">
+                <div class="panel-section-title">VHS CASSETTE CONTROLS // КАССЕТНАЯ ДЕКА</div>
+                
+                <!-- Front-loading VHS Slot Graphic -->
+                <div class="vhs-deck-wrapper">
+                    <div class="vhs-slot">
+                        <div class="vhs-door">
+                            <span class="insert-text">INSERT CASSETTE / КАССЕТА ВНУТРИ</span>
+                            <div class="vhs-reels-view">
+                                <div class="vhs-reel" id="left-reel">
+                                    <div class="reel-core"></div>
+                                    <div class="reel-spokes"></div>
+                                </div>
+                                <div class="vhs-reel" id="right-reel">
+                                    <div class="reel-core"></div>
+                                    <div class="reel-spokes"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Physical VHS Deck Buttons -->
+                    <div class="physical-deck-buttons">
+                        <button id="rew-btn" class="deck-btn" title="REWIND (SPEED PRESET)"><span class="icon">◀◀</span> REW</button>
+                        <button id="play-btn" class="btn-primary" title="PLAY TAPE">START TAPE / ПУСК</button>
+                        <button id="ff-btn" class="deck-btn" title="FAST FORWARD"><span class="icon">▶▶</span> FF</button>
+                        <button id="eject-btn" class="deck-btn-danger" title="EJECT (RESET SYSTEMS)">EJECT</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider-double"></div>
+
+            <div class="panel-section">
+                <div class="panel-section-title">HARMONIC MATRICES // ГАРМОНИКА</div>
+                
+                <div class="control-grid-2col">
+                    <div class="control-group">
+                        <label for="root-select">ROOT KEY / ТОНАЛЬНОСТЬ</label>
+                        <div class="select-wrapper">
+                            <select id="root-select">
+                                <option value="A">A (ЛЯ)</option>
+                                <option value="C">C (ДО)</option>
+                                <option value="D">D (РЕ)</option>
+                                <option value="E">E (МИ)</option>
+                                <option value="G">G (СОЛЬ)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="scale-select">ALGORITHM / АЛГОРИТМ</label>
+                        <div class="select-wrapper">
+                            <select id="scale-select">
+                                <option value="pentatonic_minor">PENTATONIC MINOR (СЛЕЗЫ)</option>
+                                <option value="pentatonic_major">PENTATONIC MAJOR (ТРИУМФ)</option>
+                                <option value="dorian">DORIAN MODE (КОСМОС)</option>
+                                <option value="phrygian_dominant">PHRYGIAN DOMINANT (СТЕПЬ)</option>
+                                <option value="locrian">LOCRIAN MODE (БЕЗДНА)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group margin-top-12">
+                    <div class="label-val">
+                        <label for="tempo-slider">MOTOR SPEED / СКОРОСТЬ МОТОРА (BPM)</label>
+                        <span id="tempo-val" class="amber-glow">90</span>
+                    </div>
+                    <input type="range" id="tempo-slider" min="50" max="150" value="90">
+                </div>
+            </div>
+
+            <div class="divider-double"></div>
+
+            <div class="panel-section">
+                <div class="panel-section-title">TAPE DEGRADATION // ИЗНОС ЛЕНТЫ</div>
+                
+                <div class="control-group">
+                    <div class="label-val">
+                        <label for="wow-flutter-slider">WOW & FLUTTER / ДЕТОНАЦИЯ ДВИГАТЕЛЯ</label>
+                        <span id="wow-flutter-val" class="amber-glow">25%</span>
+                    </div>
+                    <input type="range" id="wow-flutter-slider" min="0" max="100" value="25">
+                </div>
+
+                <div class="control-group">
+                    <div class="label-val">
+                        <label for="tape-wear-slider">TAPE DUST & CRACKLE / ПЫЛЬ И ШУМ</label>
+                        <span id="tape-wear-val" class="amber-glow">35%</span>
+                    </div>
+                    <input type="range" id="tape-wear-slider" min="0" max="100" value="35">
+                </div>
+
+                <div class="control-group">
+                    <div class="label-val">
+                        <label for="filter-cutoff-slider">TAPE DECAY LPF / СРЕЗ ВЫСОКИХ ЧАСТОТ</label>
+                        <span id="filter-cutoff-val" class="amber-glow">800 Hz</span>
+                    </div>
+                    <input type="range" id="filter-cutoff-slider" min="150" max="3000" value="800">
+                </div>
+            </div>
+
+            <div class="divider-double"></div>
+
+            <div class="panel-section">
+                <div class="panel-section-title">SIGNAL MIXER & CHANNELS // СМЕШИВАНИЕ</div>
+                
+                <div class="channel-toggle-grid">
+                    <div class="channel-toggle">
+                        <label class="switch">
+                            <input type="checkbox" id="enable-pad" checked>
+                            <span class="slider-switch"></span>
+                        </label>
+                        <span>Ambient Pad / ГУЛ</span>
+                    </div>
+                    <div class="channel-toggle">
+                        <label class="switch">
+                            <input type="checkbox" id="enable-pluck" checked>
+                            <span class="slider-switch"></span>
+                        </label>
+                        <span>Arpeggiator / РИТМ</span>
+                    </div>
+                    <div class="channel-toggle">
+                        <label class="switch">
+                            <input type="checkbox" id="enable-bell">
+                            <span class="slider-switch"></span>
+                        </label>
+                        <span>FM Glass Bells / КОЛОКОЛ</span>
+                    </div>
+                    <div class="channel-toggle">
+                        <label class="switch">
+                            <input type="checkbox" id="enable-trumpet" checked>
+                            <span class="slider-switch"></span>
+                        </label>
+                        <span>Vocoder Trumpet / ТРУБА</span>
+                    </div>
+                    <div class="channel-toggle">
+                        <label class="switch">
+                            <input type="checkbox" id="enable-theremin" checked>
+                            <span class="slider-switch"></span>
+                        </label>
+                        <span>Theremin / ТЕРЕМИН</span>
+                    </div>
+                    <div class="channel-toggle">
+                        <label class="switch">
+                            <input type="checkbox" id="enable-guitar" checked>
+                            <span class="slider-switch"></span>
+                        </label>
+                        <span>Sad Guitar / ГИТАРА</span>
+                    </div>
+                    <div class="channel-toggle">
+                        <label class="switch">
+                            <input type="checkbox" id="enable-drums">
+                            <span class="slider-switch"></span>
+                        </label>
+                        <span>7/19 Drums / БАРАБАНЫ</span>
+                    </div>
+                    <div class="channel-toggle">
+                        <label class="switch">
+                            <input type="checkbox" id="negative-harmony">
+                            <span class="slider-switch"></span>
+                        </label>
+                        <span>Negative / ИНВЕРСИЯ</span>
+                    </div>
+                    <div class="channel-toggle">
+                        <label class="switch">
+                            <input type="checkbox" id="fractal-mode">
+                            <span class="slider-switch"></span>
+                        </label>
+                        <span>Fractal / ФРАКТАЛ</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider-double"></div>
+
+            <div class="panel-section">
+                <div class="panel-section-title">REVERBERATION & ECHO // ПРОСТРАНСТВО</div>
+                
+                <div class="control-group">
+                    <div class="label-val">
+                        <label for="delay-slider">TAPE ECHO FEEDBACK / ЭХО</label>
+                        <span id="delay-val" class="amber-glow">40%</span>
+                    </div>
+                    <input type="range" id="delay-slider" min="0" max="100" value="40">
+                </div>
+
+                <div class="control-group">
+                    <div class="label-val">
+                        <label for="reverb-slider">CAVE REVERB DEPTH / РЕВЕРБЕРАЦИЯ</label>
+                        <span id="reverb-val" class="amber-glow">50%</span>
+                    </div>
+                    <input type="range" id="reverb-slider" min="0" max="100" value="50">
+                </div>
+            </div>
+        </main>
+
+        <!-- Right: Corrupted Streaming Player Wrapper around Visualizer and Canvas -->
+        <section class="streaming-viewport-wrapper">
+            
+            <!-- Corrupted Streaming Frame (Mubi / VHS Hybrid look) -->
+            <div class="streaming-player glass">
+                <div class="nicotine-stain"></div>
+                
+                <!-- Video Player Title / Status bar -->
+                <div class="player-top-bar">
+                    <div class="channel-indicator">
+                        <span class="red-rec-dot"></span>
+                        <span class="rec-label">LIVE STREAM</span>
+                    </div>
+                    <h2 class="stream-title">ARCHIVAL RECORDING // RE-DECODER-9.vhs</h2>
+                    <div class="stream-info-pills">
+                        <span class="pill">SECAM</span>
+                        <span class="pill">240p MONO</span>
+                        <span class="pill" id="vhs-timestamp">19-MAY-1989</span>
+                    </div>
+                </div>
+
+                <!-- Main Glitched Video Screens Container -->
+                <div class="video-screens-container">
+                    
+                    <!-- Top Visualizer Block (Gravity Grid) -->
+                    <div class="video-block">
+                        <div class="video-block-header">
+                            <span class="block-title">GRAVITATIONAL SCANNER // ГРАВИТАЦИОННАЯ СЕТКА</span>
+                            <span class="tracking-indicator" id="tracking-text">PLAYING • TAPE OK</span>
+                        </div>
+                        <div class="canvas-canvas-wrapper">
+                            <canvas id="sandbox-canvas"></canvas>
+                            <!-- Overlay Video Playhead Glitch Lines -->
+                            <div class="horizontal-tear"></div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Visualizer Block (Signal Oscilloscope) -->
+                    <div class="video-block">
+                        <div class="video-block-header">
+                            <span class="block-title">SIGNAL SPECTRUM // ОСЦИЛЛОГРАФ</span>
+                            <span class="signal-frequency">FS: 22050 HZ</span>
+                        </div>
+                        <div class="canvas-canvas-wrapper-small">
+                            <canvas id="visualizer-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Streaming Player Control bar -->
+                <div class="player-control-bar">
+                    <div class="playhead-track">
+                        <div class="playhead-progress" id="playhead-progress"></div>
+                    </div>
+                    
+                    <div class="player-controls-row">
+                        <div class="left-controls">
+                            <button id="player-play-btn" class="player-icon-btn" title="Toggle Play/Stop">⏸</button>
+                            <div class="stream-volume-wrapper">
+                                <span class="volume-icon">🔊</span>
+                                <div class="volume-slider-bar">
+                                    <div class="volume-progress" style="width: 80%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right-controls">
+                            <button id="clear-nodes" class="btn-secondary">RESET TAPE NODES</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lost Archives / Presets Selection List -->
+            <div class="lost-archives-section glass">
+                <div class="nicotine-stain"></div>
+                <h3>LOST ARCHIVES VAULT //АРХИВНЫЕ ЛЕНТЫ</h3>
+                <p class="section-desc">Select an archival tape to recalibrate the synthesizer circuits.</p>
+                
+                <div class="archive-list">
+                    <div class="archive-item active" id="preset-slow">
+                        <div class="tape-mini-icon">📼</div>
+                        <div class="archive-info">
+                            <span class="archive-name">TAPE 01: SIBERIAN AMBIENT LOOP</span>
+                            <span class="archive-meta">DURATION: 12:45 // WEAR: 50% // WOW: 60%</span>
+                        </div>
+                    </div>
+                    <div class="archive-item" id="preset-fast">
+                        <div class="tape-mini-icon">📼</div>
+                        <div class="archive-info">
+                            <span class="archive-name">TAPE 02: RED ATHLETIC MARCH</span>
+                            <span class="archive-meta">DURATION: 04:12 // WEAR: 15% // WOW: 15%</span>
+                        </div>
+                    </div>
+                    <div class="archive-item" id="preset-entropy">
+                        <div class="tape-mini-icon">📼</div>
+                        <div class="archive-info">
+                            <span class="archive-name">TAPE 03: SWARM ENTROPY (DRUNNING-KRUGER-Ω)</span>
+                            <span class="archive-meta">DURATION: 99:99 // WEAR: 90% // WOW: 85%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Redacted Footer -->
+    <footer class="app-footer">
+        <p>ДЕКОДЕР-9 // VERIFIED BY DRUNNING-KRUGER-Ω // CALIBRATOR_SIGNATURE: 0x8f2d5e71bc9a80e1 // SHA-256 COMPLIANT</p>
+        <div class="footer-links">
+            <a href="https://soundcloud.com/borja-moskv" target="_blank" class="footer-link">SOUNDCLOUD</a>
+            <span class="divider">//</span>
+            <a href="https://borjamoskv.bandcamp.com/album/far-ndula" target="_blank" class="footer-link">BANDCAMP</a>
+            <span class="divider">//</span>
+            <a href="https://portrait.so/borja" target="_blank" class="footer-link">PORTRAIT</a>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

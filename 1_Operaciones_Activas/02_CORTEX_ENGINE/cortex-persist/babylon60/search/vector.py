@@ -1,0 +1,286 @@
+# [C5-REAL] Exergy-Maximized
+
+from __future__ import annotations
+
+import json
+import logging
+import sqlite3
+from typing import TYPE_CHECKING, Any
+
+import aiosqlite
+
+if TYPE_CHECKING:
+    from babylon60.crypto import CortexEncrypter
+
+from babylon60.search.models import SearchResult
+from babylon60.storage import StorageMode, get_storage_mode
+
+__all__ = ["semantic_search", "semantic_search_sync"]
+
+logger = logging.getLogger("babylon60.search.vector")
+
+# ─── SQL fragment constants ────────────────────────────────
+_FILTER_PROJECT = " AND f.project = ?"
+_FILTER_ACTIVE = " AND f.valid_until IS NULL"
+
+
+async def semantic_search(
+    conn: Any,
+    query_embedding: list[float],
+    top_k: int = 5,
+    tenant_id: str = "default",
+    project: str | None = None,
+    as_of: str | None = None,
+    confidence: str | None = None,
+) -> list[SearchResult]:
+    """Perform semantic vector search using sqlite-vec or pgvector (PostgreSQL)."""
+    if get_storage_mode() == StorageMode.POSTGRES:
+        sql = """
+            SELECT
+                f.id, f.content, f.project, f.fact_type, f.confidence,
+                f.valid_from, f.valid_until, f.tags, f.source, f.meta as metadata,
+                (f.embedding <=> $1) as distance, f.created_at, f.updated_at, f.tx_id, t.hash
+            FROM facts AS f
+            LEFT JOIN transactions t ON f.tx_id = t.id
+            WHERE f.tenant_id = $2
+              AND f.embedding IS NOT NULL
+        """
+        params: list[Any] = [query_embedding, tenant_id]
+        param_idx = 3
+
+        if project:
+            sql += " AND f.project = $" + str(param_idx)
+            params.append(project)
+            param_idx += 1
+
+        if as_of:
+            sql += (
+                " AND f.valid_from <= $"
+                + str(param_idx)
+                + " AND (f.valid_until IS NULL OR f.valid_until > $"
+                + str(param_idx)
+                + ") AND f.is_tombstoned = FALSE"
+            )
+            params.append(as_of)
+            param_idx += 1
+        else:
+            sql += " AND f.valid_until IS NULL AND f.is_tombstoned = FALSE"
+
+        if confidence:
+            sql += f" AND f.confidence >= ${param_idx}"
+            params.append(confidence)
+            param_idx += 1
+
+        sql += f" ORDER BY f.embedding <=> $1 ASC LIMIT ${param_idx}"
+        params.append(top_k)
+
+        try:
+            if hasattr(conn, "fetch"):
+                rows = await conn.fetch(sql, *params)
+            elif hasattr(conn, "acquire"):
+                async with conn.acquire() as real_conn:
+                    rows = await real_conn.fetch(sql, *params)
+            else:
+                raise TypeError(
+                    f"PostgreSQL connection object has no fetch or acquire method: {type(conn)}"
+                )
+        except Exception as e:  # noqa: BLE001
+            logger.error("PostgreSQL pgvector search failed: %s", e)
+            return []
+
+        from babylon60.crypto import get_default_encrypter
+
+        enc = get_default_encrypter()
+        return [_row_to_result(row, enc, tenant_id) for row in rows]
+
+    # Default SQLite-vec execution path
+    embedding_json = json.dumps(query_embedding)
+    sql, params = _build_semantic_query(
+        tenant_id, embedding_json, top_k, project, as_of, confidence
+    )  # codeql[py/sql-injection]
+
+    try:
+        cursor = await conn.execute(sql, params)  # codeql[py/sql-injection]
+        rows = await cursor.fetchall()
+    except (aiosqlite.Error, sqlite3.Error, ValueError) as e:
+        logger.error("Semantic search failed: %s", e)
+        return []
+
+    from babylon60.crypto import get_default_encrypter
+
+    enc = get_default_encrypter()
+
+    return [_row_to_result(row, enc, tenant_id) for row in rows[:top_k]]
+
+
+def _build_semantic_query(
+    tenant_id: str,
+    embedding_json: str,
+    top_k: int,
+    project: str | None,
+    as_of: str | None,
+    confidence: str | None,
+) -> tuple[str, list]:
+    """Internal helper to build semantic search SQL."""
+    parts = [
+        """
+        SELECT
+            f.id, f.content, f.project, f.fact_type, f.confidence,
+            f.valid_from, f.valid_until, f.tags, f.source, f.metadata,
+            ve.distance, f.created_at, f.updated_at, f.tx_id, t.hash
+        FROM fact_embeddings AS ve
+        JOIN facts AS f ON f.id = ve.fact_id
+        LEFT JOIN transactions t ON f.tx_id = t.id
+        WHERE f.tenant_id = ?
+            AND ve.embedding MATCH ?
+            AND k = ?
+        """
+    ]
+    params = [tenant_id, embedding_json, top_k * 3]
+
+    if project:
+        parts.append(_FILTER_PROJECT)
+        params.append(project)
+
+    if as_of:
+        parts.append(
+            " AND coalesce(json_extract(f.metadata, '$.valid_from'), f.created_at) <= ? AND (f.is_tombstoned = 0 OR json_extract(f.metadata, '$.valid_until') > ? OR json_extract(f.metadata, '$.tombstoned_at') > ?)"
+        )
+        params.extend([as_of, as_of, as_of])
+    else:
+        parts.append(_FILTER_ACTIVE)
+
+    if confidence:
+        parts.append(" AND f.confidence >= ?")
+        params.append(float(confidence))
+
+    parts.append(" ORDER BY ve.distance ASC")
+    return "".join(parts), params
+
+
+def _row_to_result(row: tuple, enc: CortexEncrypter, tenant_id: str) -> SearchResult:
+    """Helper to parse a search result row with decryption and metadata processing."""
+    try:
+        if isinstance(row[7], list):
+            tags = row[7]
+        else:
+            tags = json.loads(row[7]) if row[7] else []
+    except (json.JSONDecodeError, TypeError):
+        tags = []
+
+    try:
+        if isinstance(row[9], dict):
+            meta = row[9]
+        elif row[9] and str(row[9]).startswith(enc.PREFIX):
+            try:
+                meta = enc.decrypt_json(row[9], tenant_id=tenant_id)
+            except (ValueError, OSError) as e:
+                logger.error("Vector meta decryption failed for tenant %s: %s", tenant_id, e)
+                meta = {}
+        else:
+            meta = json.loads(row[9]) if row[9] else {}
+    except (json.JSONDecodeError, TypeError):
+        meta = {}
+
+    content = row[1]
+    if content and str(content).startswith(enc.PREFIX):
+        try:
+            content = enc.decrypt_str(content, tenant_id=tenant_id)
+        except (ValueError, OSError) as e:
+            logger.error("Vector content decryption failed for tenant %s: %s", tenant_id, e)
+
+    score = 1.0 - (row[10] if row[10] else 0.0)
+
+    return SearchResult(
+        fact_id=row[0],
+        content=content,  # type: ignore[reportArgumentType]
+        project=row[2],
+        fact_type=row[3],
+        confidence=row[4],
+        valid_from=row[5],
+        valid_until=row[6],
+        tags=tags,
+        source=row[8],
+        meta=meta,  # type: ignore[reportArgumentType]
+        score=score,
+        created_at=row[11],
+        updated_at=row[12],
+        tx_id=row[13],
+        hash=row[14],
+    )
+
+
+def semantic_search_sync(
+    conn: sqlite3.Connection,
+    query_embedding: list[float],
+    top_k: int = 5,
+    tenant_id: str = "default",
+    project: str | None = None,
+    confidence: str | None = None,
+) -> list[SearchResult]:
+    """Vector KNN search (sync)."""
+    embedding_json = json.dumps(query_embedding)
+
+    sql = """
+        SELECT
+            f.id, f.content, f.project, f.fact_type, f.confidence,
+            f.source, f.tags, ve.distance
+        FROM fact_embeddings AS ve
+        JOIN facts AS f ON f.id = ve.fact_id
+        WHERE f.tenant_id = ?
+            AND ve.embedding MATCH ?
+            AND k = ?
+            AND f.valid_until IS NULL
+    """
+    params: list = [tenant_id, embedding_json, top_k * 3]
+    if project:
+        sql += _FILTER_PROJECT
+        params.append(project)
+    if confidence:
+        sql += " AND f.confidence >= ?"
+        params.append(float(confidence))
+    sql += " ORDER BY ve.distance ASC"
+
+    try:
+        cursor = conn.execute(sql, params)  # codeql[py/sql-injection]
+        rows = cursor.fetchall()
+    except (sqlite3.Error, ValueError) as e:
+        logger.error("Semantic search sync failed: %s", e)
+        return []
+
+    from babylon60.crypto import get_default_encrypter
+
+    enc = get_default_encrypter()
+
+    results = []
+    for row in rows[:top_k]:
+        try:
+            tags = json.loads(row[6]) if row[6] else []
+        except (json.JSONDecodeError, TypeError):
+            tags = []
+
+        content = row[1]
+        if content and str(content).startswith(enc.PREFIX):
+            try:
+                content = enc.decrypt_str(content, tenant_id=tenant_id)
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("Suppressed exception: %s", exc)
+
+        score = 1.0 - (row[7] if row[7] else 0.0)
+        results.append(
+            SearchResult(
+                fact_id=row[0],
+                content=content,  # type: ignore[type-error]
+                project=row[2],
+                fact_type=row[3],
+                confidence=row[4],
+                source=row[5],
+                tags=tags,
+                score=score,
+                valid_from="unknown",
+                valid_until=None,
+                created_at="unknown",
+                updated_at="unknown",
+            )
+        )
+    return results

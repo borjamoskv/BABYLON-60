@@ -1,0 +1,5 @@
+consolidated_session_directives:
+  - rule: "El análisis de seguridad del sistema debe descartar mitigaciones instructivas en texto plano (efectividad de protección documentada <42.80% en ProxyPrompt 2025) y enforzar el aislamiento arquitectónico del sandbox físico de macOS (ruta R5 en Antigravity) como barrera primaria de control."
+  - rule: "Frente a ataques de optimización por gradiente e incremental-token (PLeak 2024), el compilador de prompts del sistema debe emplear redundancia instructiva en copyright y esquemas estructurados para mitigar la degradación de la atención ponderada central ('lost in the middle' en ventanas >100K tokens)."
+  - rule: "Toda interacción multi-agente y comunicación lateral (handoff) debe ser formalmente auditada bajo el principio de indistinguibilidad criptográfica de estados ante consultas iterativas (H0 vs H1 sobre prompts depurados de datos sensibles, arxiv:2502.12630)."
+  - rule: "El módulo de visualización FableExplorer y la tabla de telemetría MarketReality deben enforzar y renderizar el flujo de latencia media de la pasarela mediante SVG interactivos y checklists de asimilación de políticas de cumplimiento de citas."

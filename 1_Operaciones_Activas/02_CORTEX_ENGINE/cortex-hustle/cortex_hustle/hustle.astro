@@ -1,0 +1,759 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+// APEX Sovereign Trend-Forge Console
+const title = "APEX Sovereign Trend-Forge — Dashboard";
+const description = "Control center for autonomous trend detection, opportunity scoring, and landing page forge.";
+---
+
+<SiteLayout title={title} description={description}>
+  <div class="header-nav">
+    <div class="nav-inner">
+      <a href="/dev" class="back-link">← DEV PORTAL</a>
+      <div class="nav-logo">
+        <span class="logo-icon">🔥</span>
+        <span class="logo-title font-mono">APEX_TREND_FORGE v4.0</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="content-wrapper">
+    <div class="title-section">
+      <h1>APEX Sovereign Trend-Forge</h1>
+      <p class="subtitle text-[#8E95AF]">
+        Autonomous SaaS incubator powered by CORTEX-Persist. Detects viral trends, scores opportunities, and deploys high-conversion landing pages to silicon using a parallel Legion worker swarm.
+      </p>
+    </div>
+
+    <!-- Main Grid -->
+    <div class="main-grid">
+      <!-- Left: Controls & Endocrine -->
+      <div class="left-panel">
+        <!-- Endocrine Registry Pulse -->
+        <div class="glass-card">
+          <div class="card-header">
+            <h3>🧬 METABOLIC ENDOCRINE PULSE</h3>
+            <span class="status-badge" id="pulse-badge">● STABLE</span>
+          </div>
+          <p class="card-description">Hormonal homeostasis of the autonomous agentic execution registry.</p>
+          
+          <div class="endocrine-list">
+            <div class="hormone-item">
+              <div class="hormone-meta">
+                <span class="hormone-name text-purple">DOPAMINE</span>
+                <span class="hormone-val" id="dopamine-val">0.00</span>
+              </div>
+              <div class="hormone-bar"><div class="hormone-fill dopamine" id="dopamine-bar"></div></div>
+            </div>
+            
+            <div class="hormone-item">
+              <div class="hormone-meta">
+                <span class="hormone-name text-red">ADRENALINE</span>
+                <span class="hormone-val" id="adrenaline-val">0.00</span>
+              </div>
+              <div class="hormone-bar"><div class="hormone-fill adrenaline" id="adrenaline-bar"></div></div>
+            </div>
+
+            <div class="hormone-item">
+              <div class="hormone-meta">
+                <span class="hormone-name text-yellow">CORTISOL</span>
+                <span class="hormone-val" id="cortisol-val">0.00</span>
+              </div>
+              <div class="hormone-bar"><div class="hormone-fill cortisol" id="cortisol-bar"></div></div>
+            </div>
+
+            <div class="hormone-item">
+              <div class="hormone-meta">
+                <span class="hormone-name text-green">SEROTONIN</span>
+                <span class="hormone-val" id="serotonin-val">0.00</span>
+              </div>
+              <div class="hormone-bar"><div class="hormone-fill serotonin" id="serotonin-bar"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Forge Controller -->
+        <div class="glass-card">
+          <div class="card-header">
+            <h3>🚀 TREND FORGE LEGION CONTROLS</h3>
+          </div>
+          <p class="card-description">Trigger dynamic parallel incubation cycles powered by Legion Centuria workers.</p>
+          
+          <div class="form-group">
+            <label for="keywords">Seed Keywords (comma separated)</label>
+            <input type="text" id="keywords" placeholder="ai compliance, developer doc agent, automated devops" class="form-input" />
+          </div>
+          
+          <div class="button-row" style="display: flex; gap: 12px; margin-bottom: 12px;">
+            <button class="btn btn-primary font-mono" id="btn-trigger" style="flex: 1; min-height: 48px; border-radius: 6px; padding: 0;">
+              ⚡ SINGLE CYCLE
+            </button>
+            <button class="btn font-mono" id="btn-trigger-multi" style="flex: 1.2; min-height: 48px; background: linear-gradient(135deg, #2B3BE5, #B026FF); color: #FFF; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; box-shadow: 0 0 20px rgba(176,38,255,0.25);">
+              🔮 100-CYCLE SWARM
+            </button>
+          </div>
+          
+          <!-- Progress Tracker Block -->
+          <div id="progress-container" style="margin-bottom: 16px; display: none; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 6px;">
+            <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; margin-bottom: 6px;">
+              <span style="color: #B4E6B0;">CYCLE PROGRESS</span>
+              <span id="progress-text" style="color: #FFFFFF;">0/100</span>
+            </div>
+            <div style="height: 6px; background: rgba(255, 255, 255, 0.05); border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
+              <div id="progress-bar-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #2B3BE5, #00E5A3); transition: width 0.4s ease;"></div>
+            </div>
+            <div id="progress-status" style="font-size: 10px; color: #8E95AF; font-family: monospace; margin-bottom: 10px;">Idle</div>
+            <button class="btn-cancel font-mono" id="btn-cancel-cycle" style="width: 100%; min-height: 32px; background: rgba(229, 43, 43, 0.1); border: 1px solid rgba(229, 43, 43, 0.3); color: #E52B2B; border-radius: 4px; font-size: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s;">
+              🛑 HALT SWARM EXECUTION
+            </button>
+          </div>
+          
+          <div class="console-box" id="console-logs">
+            [SYS] Waiting for ignition...
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Opportunities & Forged MVPs -->
+      <div class="right-panel">
+        <!-- Active Opportunities -->
+        <div class="glass-card">
+          <div class="card-header">
+            <h3>📈 SCORED OPPORTUNITIES</h3>
+          </div>
+          
+          <!-- Search & Filter Controls -->
+          <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 16px;">
+            <input type="text" id="search-input" placeholder="Search opportunities..." class="form-input" style="flex: 1; padding: 8px 12px; font-size: 12px; margin: 0;" />
+            <select id="verdict-filter" class="form-input" style="padding: 8px 12px; font-size: 12px; margin: 0; background: rgba(15,15,18,0.85); color: #FFF; outline: none; border-color: rgba(255,255,255,0.08);">
+              <option value="ALL">All Verdicts</option>
+              <option value="EXECUTE">Execute Only</option>
+              <option value="MONITOR">Monitor Only</option>
+            </select>
+          </div>
+          
+          <div class="list-container" id="opp-list" style="max-height: 400px; overflow-y: auto; padding-right: 4px;">
+            <div class="empty-list">No opportunities detected yet. Run a Forge Cycle.</div>
+          </div>
+        </div>
+
+        <!-- Forged MVPs -->
+        <div class="glass-card">
+          <div class="card-header">
+            <h3>💻 DEPLOYED LANDING PAGES (MVPs)</h3>
+          </div>
+          <div class="mvp-grid" id="mvp-grid" style="max-height: 300px; overflow-y: auto; padding-right: 4px;">
+            <!-- Dynamic list of MVPs -->
+          </div>
+        </div>
+
+        <!-- Ledger Integrity -->
+        <div class="glass-card">
+          <div class="card-header">
+            <h3>🔒 LEDGER INTEGRITY CHAIN</h3>
+            <span class="status-badge valid" id="ledger-badge">C5-REAL SECURE</span>
+          </div>
+          <p class="card-description">Ledger audit trace is verified in real-time by cryptographic hash-chains.</p>
+          <div class="ledger-info font-mono" id="ledger-info">
+            Loading cryptographic chain metadata...
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</SiteLayout>
+
+<style>
+  /* Navigation */
+  .header-nav {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(12px);
+    padding: 16px 32px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .back-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: #8E95AF;
+    transition: color 0.2s ease;
+  }
+  .back-link:hover {
+    color: #CCFF00;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .logo-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+  }
+
+  /* Content Wrapper */
+  .content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+  .title-section {
+    margin-bottom: 40px;
+    border-left: 3px solid #2B3BE5;
+    padding-left: 20px;
+  }
+  .title-section h1 {
+    font-size: 36px;
+    font-weight: 900;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.03em;
+    color: #FFFFFF;
+  }
+
+  /* Grid Layout */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 24px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .main-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .left-panel, .right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* Glass Cards */
+  .glass-card {
+    background: rgba(15, 15, 18, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .card-header h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+    margin: 0;
+  }
+  .card-description {
+    color: #8E95AF;
+    font-size: 12px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  /* Endocrine Registry */
+  .endocrine-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .hormone-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .hormone-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .hormone-name.text-purple { color: #B026FF; }
+  .hormone-name.text-red { color: #E52B2B; }
+  .hormone-name.text-yellow { color: #FFCC00; }
+  .hormone-name.text-green { color: #00E5A3; }
+  .hormone-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .hormone-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 3px;
+    transition: width 1s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .hormone-fill.dopamine { background: #B026FF; box-shadow: 0 0 8px rgba(176,38,255,0.6); }
+  .hormone-fill.adrenaline { background: #E52B2B; box-shadow: 0 0 8px rgba(229,43,43,0.6); }
+  .hormone-fill.cortisol { background: #FFCC00; box-shadow: 0 0 8px rgba(255,204,0,0.6); }
+  .hormone-fill.serotonin { background: #00E5A3; box-shadow: 0 0 8px rgba(0,229,163,0.6); }
+
+  /* Controls */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .form-group label {
+    font-size: 11px;
+    color: #8E95AF;
+    font-weight: 600;
+  }
+  .form-input {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    padding: 10px 12px;
+    color: #FFFFFF;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-input:focus {
+    border-color: #2B3BE5;
+  }
+  .btn-primary {
+    background: #CCFF00;
+    color: #000000;
+    border: none;
+    border-radius: 6px;
+    padding: 14px;
+    width: 100%;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(204, 255, 0, 0.25);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(204, 255, 0, 0.45);
+  }
+
+  .btn-cancel:hover {
+    background: rgba(229, 43, 43, 0.25) !important;
+    border-color: #E52B2B !important;
+  }
+
+  .console-box {
+    margin-top: 16px;
+    background: #000000;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 6px;
+    padding: 12px;
+    height: 120px;
+    overflow-y: auto;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #00E5A3;
+    white-space: pre-wrap;
+  }
+
+  /* List & Opportunities */
+  .list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .opp-item {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 6px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color 0.2s;
+  }
+  .opp-item:hover {
+    border-color: #2B3BE5;
+  }
+  .opp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .opp-title {
+    font-weight: 700;
+    color: #FFFFFF;
+    font-size: 14px;
+  }
+  .opp-verdict {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+  .opp-verdict.execute { background: rgba(0, 229, 163, 0.1); color: #00e5a3; border: 1px solid rgba(0, 229, 163, 0.2); }
+  .opp-verdict.monitor { background: rgba(255, 204, 0, 0.1); color: #ffcc00; border: 1px solid rgba(255, 204, 0, 0.2); }
+  
+  .opp-scores {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: #8E95AF;
+    background: rgba(255,255,255,0.01);
+    padding: 8px;
+    border-radius: 4px;
+  }
+  .score-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-prune {
+    background: transparent;
+    border: 1px solid rgba(229, 43, 43, 0.3);
+    color: #E52B2B;
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-prune:hover {
+    background: rgba(229, 43, 43, 0.15);
+    border-color: #E52B2B;
+    transform: scale(1.1);
+  }
+
+  /* MVPs */
+  .mvp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .mvp-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .mvp-title {
+    font-weight: 700;
+    color: #FFFFFF;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .mvp-btn {
+    display: block;
+    text-align: center;
+    background: rgba(43, 59, 229, 0.15);
+    border: 1px solid rgba(43, 59, 229, 0.3);
+    color: #FFFFFF;
+    font-size: 11px;
+    padding: 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .mvp-btn:hover {
+    background: #2B3BE5;
+    border-color: #2B3BE5;
+  }
+
+  /* Badges */
+  .status-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #8E95AF;
+  }
+  .status-badge.valid {
+    color: #00E5A3;
+    background: rgba(0, 229, 163, 0.1);
+    border: 1px solid rgba(0, 229, 163, 0.3);
+  }
+
+  .ledger-info {
+    font-size: 11px;
+    color: #8E95AF;
+    background: rgba(0,0,0,0.3);
+    padding: 12px;
+    border-radius: 6px;
+    max-height: 100px;
+    overflow-y: auto;
+  }
+
+  .empty-list {
+    text-align: center;
+    font-size: 12px;
+    color: #8E95AF;
+    padding: 24px;
+  }
+</style>
+
+<script>
+  const btnTrigger = document.getElementById("btn-trigger") as HTMLButtonElement;
+  const btnTriggerMulti = document.getElementById("btn-trigger-multi") as HTMLButtonElement;
+  const btnCancelCycle = document.getElementById("btn-cancel-cycle") as HTMLButtonElement;
+  const keywordsInput = document.getElementById("keywords") as HTMLInputElement;
+  const consoleLogs = document.getElementById("console-logs") as HTMLDivElement;
+
+  const progressContainer = document.getElementById("progress-container") as HTMLDivElement;
+  const progressText = document.getElementById("progress-text") as HTMLSpanElement;
+  const progressBarFill = document.getElementById("progress-bar-fill") as HTMLDivElement;
+  const progressStatus = document.getElementById("progress-status") as HTMLDivElement;
+
+  const searchInput = document.getElementById("search-input") as HTMLInputElement;
+  const verdictFilter = document.getElementById("verdict-filter") as HTMLSelectElement;
+
+  let cachedDashboardData: any = null;
+
+  function appendLog(msg: string) {
+    const time = new Date().toLocaleTimeString();
+    consoleLogs.innerText += `\n[${time}] ${msg}`;
+    consoleLogs.scrollTop = consoleLogs.scrollHeight;
+  }
+
+  btnTrigger?.addEventListener("click", async () => {
+    btnTrigger.disabled = true;
+    btnTrigger.innerText = "⏳ SCANNING...";
+    appendLog("Initiating manual Scan & Forge cycle...");
+    
+    const keywords = keywordsInput.value.split(",").map(k => k.trim()).filter(Boolean);
+    
+    try {
+      const res = await fetch("/api/v1/hustle/cycle", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ keywords: keywords.length > 0 ? keywords : null })
+      });
+      const data = await res.json();
+      appendLog(`Response: ${data.message || 'Cycle started'}`);
+    } catch (e) {
+      appendLog(`Error: ${e}`);
+    } finally {
+      setTimeout(() => {
+        btnTrigger.disabled = false;
+        btnTrigger.innerText = "⚡ SINGLE CYCLE";
+      }, 3000);
+    }
+  });
+
+  btnTriggerMulti?.addEventListener("click", async () => {
+    btnTriggerMulti.disabled = true;
+    appendLog("Launching 100-Cycle Swarm parallel incubation...");
+    
+    try {
+      const res = await fetch("/api/v1/hustle/multi-cycle", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cycles: 100 })
+      });
+      const data = await res.json();
+      appendLog(`Multi-cycle Response: ${data.message || 'Launched'}`);
+    } catch (e) {
+      appendLog(`Multi-cycle Launch Error: ${e}`);
+      btnTriggerMulti.disabled = false;
+    }
+  });
+
+  btnCancelCycle?.addEventListener("click", async () => {
+    btnCancelCycle.disabled = true;
+    appendLog("Sending Swarm cancellation request...");
+    try {
+      const res = await fetch("/api/v1/hustle/cancel-cycle", {
+        method: "POST"
+      });
+      const data = await res.json();
+      appendLog(`Cancellation: ${data.message}`);
+    } catch (e) {
+      appendLog(`Cancellation Error: ${e}`);
+    } finally {
+      setTimeout(() => {
+        btnCancelCycle.disabled = false;
+      }, 1000);
+    }
+  });
+
+  // Re-render opportunities when filters change
+  searchInput?.addEventListener("input", renderOpportunities);
+  verdictFilter?.addEventListener("change", renderOpportunities);
+
+  // Bind deletion globally
+  (window as any).deleteOpportunity = async function(id: number) {
+    if (!confirm("Are you sure you want to prune this opportunity and delete its landing page?")) return;
+    try {
+      const res = await fetch(`/api/v1/hustle/opportunity/${id}`, {
+        method: "DELETE"
+      });
+      const data = await res.json();
+      appendLog(`Prune Response: ${data.message || 'Opportunity pruned'}`);
+      updateDashboard();
+    } catch (e) {
+      appendLog(`Prune Error: ${e}`);
+    }
+  };
+
+  function renderOpportunities() {
+    if (!cachedDashboardData) return;
+    const data = cachedDashboardData;
+    const oppList = document.getElementById("opp-list")!;
+    
+    const query = searchInput.value.toLowerCase().trim();
+    const verdict = verdictFilter.value;
+    
+    let filtered = data.opportunities || [];
+    
+    if (query) {
+      filtered = filtered.filter((opp: any) => 
+        opp.project.toLowerCase().includes(query) || 
+        opp.headline.toLowerCase().includes(query) ||
+        opp.content.toLowerCase().includes(query)
+      );
+    }
+    
+    if (verdict !== "ALL") {
+      filtered = filtered.filter((opp: any) => opp.verdict === verdict);
+    }
+    
+    if (filtered.length > 0) {
+      oppList.innerHTML = filtered.map((opp: any) => `
+        <div class="opp-item">
+          <div class="opp-header">
+            <span class="opp-title">${opp.project}</span>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <span class="opp-verdict ${opp.verdict.toLowerCase()}">${opp.verdict}</span>
+              <button class="btn-prune" onclick="deleteOpportunity(${opp.id})" title="Prune opportunity">✕</button>
+            </div>
+          </div>
+          <div style="font-size: 12px; color: #E0E0E0;">${opp.headline}</div>
+          <div class="opp-scores">
+            <div class="score-item"><span>TAM</span><span>${opp.tam}/25</span></div>
+            <div class="score-item"><span>COMP</span><span>${opp.competition}/25</span></div>
+            <div class="score-item"><span>ADV</span><span>${opp.advantage}/25</span></div>
+            <div class="score-item"><span>TTM</span><span>${opp.ttm}/25</span></div>
+          </div>
+        </div>
+      `).join("");
+    } else {
+      oppList.innerHTML = `<div class="empty-list">No matching opportunities found.</div>`;
+    }
+  }
+
+  async function updateDashboard() {
+    try {
+      const res = await fetch("/api/v1/hustle/dashboard");
+      const data = await res.json();
+      cachedDashboardData = data;
+
+      // Endocrine Pulse
+      if (data.endocrine) {
+        document.getElementById("dopamine-val")!.innerText = (data.endocrine.DOPAMINE || 0).toFixed(2);
+        document.getElementById("dopamine-bar")!.style.width = `${(data.endocrine.DOPAMINE || 0) * 100}%`;
+
+        document.getElementById("adrenaline-val")!.innerText = (data.endocrine.ADRENALINE || 0).toFixed(2);
+        document.getElementById("adrenaline-bar")!.style.width = `${(data.endocrine.ADRENALINE || 0) * 100}%`;
+
+        document.getElementById("cortisol-val")!.innerText = (data.endocrine.CORTISOL || 0).toFixed(2);
+        document.getElementById("cortisol-bar")!.style.width = `${(data.endocrine.CORTISOL || 0) * 100}%`;
+
+        document.getElementById("serotonin-val")!.innerText = (data.endocrine.SEROTONIN || 0).toFixed(2);
+        document.getElementById("serotonin-bar")!.style.width = `${(data.endocrine.SEROTONIN || 0) * 100}%`;
+      }
+
+      // Cycle Progress
+      if (data.cycle_progress) {
+        const prog = data.cycle_progress;
+        if (prog.active) {
+          progressContainer.style.display = "block";
+          btnTriggerMulti.disabled = true;
+          btnTriggerMulti.innerText = "⏳ SWARM ACTIVE...";
+          
+          const percent = (prog.current / prog.total) * 100;
+          progressBarFill.style.width = `${percent}%`;
+          progressText.innerText = `${prog.current}/${prog.total}`;
+          progressStatus.innerText = `Active Swarm: Processing: "${prog.last_topic || 'Initializing workers...'}"`;
+          
+          if (prog.current > 0) {
+            appendLog(`Swarm Progress: Processed cycle ${prog.current}/${prog.total}.`);
+          }
+        } else {
+          progressContainer.style.display = "none";
+          btnTriggerMulti.disabled = false;
+          btnTriggerMulti.innerText = "🔮 100-CYCLE SWARM";
+        }
+      }
+
+      // Ledger Status
+      if (data.ledger_integrity) {
+        const badge = document.getElementById("ledger-badge")!;
+        badge.innerText = data.ledger_integrity.status;
+        if (data.ledger_integrity.valid) {
+          badge.className = "status-badge valid";
+        } else {
+          badge.className = "status-badge invalid";
+        }
+        document.getElementById("ledger-info")!.innerText = `Chain Status: ${data.ledger_integrity.status}\nLedger Verification: OK\nExergy Ledger: Active`;
+      }
+
+      // Render opportunities (with filters applied)
+      renderOpportunities();
+
+      // Deployed MVPs
+      const mvpGrid = document.getElementById("mvp-grid")!;
+      const executeOpps = (data.opportunities || []).filter((o: any) => o.verdict === "EXECUTE");
+      if (executeOpps.length > 0) {
+        mvpGrid.innerHTML = executeOpps.map((opp: any) => {
+          const waitlistCount = (data.waitlist || []).filter((w: any) => w.project === opp.project).length;
+          return `
+            <div class="mvp-card">
+              <div>
+                <div class="mvp-title">${opp.project}</div>
+                <div style="font-size: 11px; color: #8E95AF;">Waitlist: <strong style="color: #00E5A3;">${waitlistCount}</strong> signups</div>
+              </div>
+              <a href="/mvp/${opp.slug}" target="_blank" class="mvp-btn">VIEW LANDING PAGE →</a>
+            </div>
+          `;
+        }).join("");
+      } else {
+        mvpGrid.innerHTML = `<div class="empty-list" style="grid-column: 1/-1;">No landing pages generated yet.</div>`;
+      }
+
+    } catch (e) {
+      console.error("Dashboard poll failed:", e);
+    }
+  }
+
+  // Poll dashboard data
+  setInterval(updateDashboard, 2000);
+  updateDashboard();
+</script>

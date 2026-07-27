@@ -1,0 +1,443 @@
+# [C5-REAL] Exergy-Maximized
+# This file is part of CORTEX.
+# Licensed under the Apache License, Version 2.0.
+# See top-level LICENSE file for details.
+# Change Date: 2030-01-01 (Transitions to Apache 2.0)
+
+"""Sovereign Write Worker (KETER-∞ Metal-Level).
+
+Eliminates SQLite BUSY errors by routing ALL writes through a single
+dedicated thread with one persistent connection using BEGIN IMMEDIATE.
+
+Architecture:
+    ┌─────────────┐    asyncio.Queue    ┌──────────────────┐
+    │ Async Callers├───────────────────►│  _writer_loop()  │
+    │ (daemon/CLI) │                    │  (dedicated task) │
+    └─────────────┘    Future<Result>   └──────┬───────────┘
+                       ◄────────────────────────┘
+                                         Single sqlite3
+                                         Connection (WAL)
+
+The writer loop processes operations sequentially in-application (RAM),
+eliminating lock contention at the SQLite level entirely.
+
+Usage:
+    writer = SqliteWriteWorker(db_path)
+    await writer.start()
+
+    # Automatic batching via transaction grouping:
+    result = await writer.execute(
+        "INSERT INTO facts (project, content) VALUES (?, ?)",
+        ("cortex", "A new fact")
+    )
+
+    # For multi-statement transactions:
+    async with writer.transaction() as tx:
+        await tx.execute("INSERT INTO ...", params1)
+        await tx.execute("UPDATE ...", params2)
+        # Auto-commits on exit, auto-rollbacks on exception
+
+    await writer.stop()
+"""
+
+from __future__ import annotations
+
+import asyncio
+import logging
+import queue
+import sqlite3
+import threading
+import time
+from contextlib import asynccontextmanager
+from typing import Any
+
+from babylon60.database.messages import (
+    TransactionProxy as _TransactionProxy,
+)
+from babylon60.database.messages import (
+    _Message,
+    _Shutdown,
+    _TxBegin,
+    _TxCommit,
+    _TxRollback,
+    _WriteManyOp,
+    _WriteOp,
+)
+from babylon60.utils.result import Err, Ok, Result
+
+__all__ = ["SqliteWriteWorker"]
+
+logger = logging.getLogger("babylon60.db.writer")
+
+
+# ─── Write Worker ─────────────────────────────────────────────────────
+
+
+class SqliteWriteWorker:
+    """Single-writer queue for SQLite.
+
+    All writes are serialized through an asyncio.Queue and processed
+    by a single dedicated task holding one persistent connection.
+    This eliminates SQLITE_BUSY errors architecturally.
+    """
+
+    # Checkpoint WAL every N writes to avoid unbounded WAL growth.
+    _CHECKPOINT_INTERVAL: int = 5000
+
+    def __init__(self, db_path: str, *, queue_size: int = 10_000):
+        self._db_path = db_path
+        self._queue: queue.Queue[_Message] = queue.Queue(maxsize=queue_size)
+        self._thread: threading.Thread | None = None
+        self._conn: sqlite3.Connection | None = None
+        self._started = False
+        self._loop: asyncio.AbstractEventLoop | None = None
+        self._write_count: int = 0
+        self._metrics: dict[str, float] = {
+            "avg_wait_ms": 0.0,
+            "avg_exec_ms": 0.0,
+            "total_ops": 0,
+        }
+
+    @property
+    def metrics(self) -> dict[str, float]:
+        return self._metrics.copy()
+
+    @property
+    def is_running(self) -> bool:
+        return self._started and self._thread is not None and self._thread.is_alive()
+
+    async def start(self) -> None:
+        """Start the writer loop."""
+        if self._started:
+            return
+
+        self._loop = asyncio.get_running_loop()
+
+        # Create the thread which will manage the connection
+        self._thread = threading.Thread(
+            target=self._writer_loop, args=(self._loop,), name="cortex-sqlite-writer", daemon=True
+        )
+        self._thread.start()
+        self._started = True
+        logger.info(
+            "SqliteWriteWorker started (db=%s, queue_size=%d)",
+            self._db_path,
+            self._queue.maxsize,
+        )
+
+    def _create_connection(self) -> sqlite3.Connection:
+        """Create and configure the single writer connection (runs in executor)."""
+        from babylon60.database.core import connect_writer
+
+        conn = connect_writer(self._db_path)
+        if hasattr(conn, "authorize_causal_writes"):
+            conn.authorize_causal_writes()  # pyright: ignore[reportAttributeAccessIssue] # Dynamically verified via hasattr  # pyright: ignore[reportAttributeAccessIssue] # Dynamically verified via hasattr
+        # Manual transaction control (autocommit mode)
+        conn.isolation_level = None
+        # Performance pragmas are applied centrally by connect_writer()
+        # so the writer does not duplicate connection tuning.
+        logger.debug("Writer connection configured via connect_writer() factory")
+        return conn
+
+    async def stop(self) -> None:
+        """Gracefully stop the writer loop."""
+        if not self._started:
+            return
+
+        # Send poison pill
+        loop = asyncio.get_running_loop()
+        shutdown = _Shutdown(future=loop.create_future())
+        self._queue.put(shutdown)
+
+        # Wait for the writer to process remaining items and exit
+        try:
+            await asyncio.wait_for(shutdown.future, timeout=10.0)
+        except asyncio.TimeoutError:
+            logger.warning("Writer shutdown timed out, killing thread via daemon exit")
+
+        # Final WAL checkpoint before closing
+        if self._conn:
+            try:
+                await asyncio.get_running_loop().run_in_executor(
+                    None,
+                    lambda: self._conn.execute("PRAGMA wal_checkpoint(TRUNCATE)"),  # type: ignore[reportOptionalMemberAccess]
+                )
+                logger.debug("Final WAL checkpoint completed on shutdown")
+            except sqlite3.Error as e:
+                logger.warning("WAL checkpoint on shutdown failed: %s", e)
+
+        # Close connection in executor
+        if self._conn:
+            await asyncio.get_running_loop().run_in_executor(None, self._conn.close)
+            self._conn = None
+
+        self._started = False
+        self._write_count = 0
+        logger.info("SqliteWriteWorker stopped")
+
+    async def checkpoint(self) -> Result[int, str]:
+        """Manual WAL checkpoint. Call during low-activity periods.
+
+        Returns:
+            Ok(pages_checkpointed) on success, Err(message) on failure.
+        """
+        if not self._started or not self._conn:
+            return Err("Writer not running")
+
+        loop = asyncio.get_running_loop()
+        try:
+            cursor = await loop.run_in_executor(
+                None,
+                lambda: self._conn.execute("PRAGMA wal_checkpoint(PASSIVE)"),  # type: ignore[reportOptionalMemberAccess]
+            )
+            row = cursor.fetchone()
+            pages = row[1] if row else 0
+            self._write_count = 0
+            logger.debug("WAL checkpoint completed: %d pages", pages)
+            return Ok(pages)
+        except sqlite3.Error as e:
+            return Err(f"WAL checkpoint failed: {e}")
+
+    async def execute(self, sql: str, params: tuple[Any, ...] = ()) -> Result[int, str]:
+        """Enqueue a write operation and wait for the result.
+
+        Returns:
+            Ok(rowcount) on success, Err(message) on failure.
+        """
+        if not self._started:
+            return Err("SqliteWriteWorker is not running")
+
+        loop = asyncio.get_running_loop()
+        op = _WriteOp(sql=sql, params=params, future=loop.create_future())
+        self._queue.put(op)
+        return await op.future
+
+    async def execute_many(self, operations: list[tuple[str, tuple[Any, ...]]]) -> Result[int, str]:
+        """Execute multiple writes as a single transaction.
+
+        Returns:
+            Ok(total_rowcount) on success, Err(message) on failure.
+        """
+        if not self._started:
+            return Err("SqliteWriteWorker is not running")
+
+        loop = asyncio.get_running_loop()
+        op = _WriteManyOp(operations=operations, future=loop.create_future())
+        self._queue.put(op)
+        return await op.future
+
+    @asynccontextmanager
+    async def transaction(self):
+        """Context manager for transactional writes.
+
+        Usage:
+            async with writer.transaction() as tx:
+                await tx.execute("INSERT ...", params)
+                await tx.execute("UPDATE ...", params)
+        """
+        loop = asyncio.get_running_loop()
+
+        # Begin transaction
+        begin = _TxBegin(future=loop.create_future())
+        self._queue.put(begin)
+        result = await begin.future
+        if isinstance(result, Err):
+            raise RuntimeError(f"Failed to begin transaction: {result.error}")
+
+        proxy = _TransactionProxy(self)
+        try:
+            yield proxy
+            # Commit on clean exit
+            commit = _TxCommit(future=loop.create_future())
+            self._queue.put(commit)
+            await commit.future
+        except BaseException:
+            # Rollback on error
+            rollback = _TxRollback(future=loop.create_future())
+            self._queue.put(rollback)
+            await rollback.future
+            raise
+
+    # ─── Internal Writer Loop ─────────────────────────────────────────
+
+    def _writer_loop(self, loop: asyncio.AbstractEventLoop) -> None:
+        """Main writer loop - processes messages sequentially."""
+        # Create connection in the dedicated thread
+        self._conn = self._create_connection()
+        conn = self._conn
+
+        logger.debug("Writer loop started, processing queue")
+
+        while True:
+            msg = self._queue.get()
+            try:
+                should_exit = self._dispatch_message(msg, conn, loop)
+                if should_exit:
+                    break
+            except (sqlite3.Error, RuntimeError) as e:
+                logger.exception("Unexpected error in writer loop: %s", e)
+
+        logger.debug("Writer loop exited")
+
+    def _dispatch_message(
+        self,
+        msg: _Message,
+        conn: sqlite3.Connection,
+        loop: asyncio.AbstractEventLoop,
+    ) -> bool:
+        """Dispatch a single message. Returns True if loop should exit."""
+        if isinstance(msg, _Shutdown):
+            self._handle_shutdown(conn, loop, msg.future)
+            return True
+        if isinstance(msg, _WriteOp):
+            self._process_write(conn, msg, loop)
+        elif isinstance(msg, _WriteManyOp):
+            self._process_write_many(conn, msg, loop)
+        elif isinstance(msg, _TxBegin):
+            self._handle_tx_sql(conn, loop, msg.future, "BEGIN IMMEDIATE")
+        elif isinstance(msg, _TxCommit):
+            self._handle_tx_sql(conn, loop, msg.future, "COMMIT")
+        elif isinstance(msg, _TxRollback):
+            self._handle_tx_sql(conn, loop, msg.future, "ROLLBACK")
+        return False
+
+    def _handle_shutdown(
+        self,
+        conn: sqlite3.Connection,
+        loop: asyncio.AbstractEventLoop,
+        fut: asyncio.Future,
+    ) -> None:
+        """Drain remaining writes and signal shutdown complete."""
+        while not self._queue.empty():
+            try:
+                remaining = self._queue.get_nowait()
+                if isinstance(remaining, _WriteOp):
+                    self._process_write(conn, remaining, loop)
+                elif isinstance(remaining, _WriteManyOp):
+                    self._process_write_many(conn, remaining, loop)
+            except queue.Empty:
+                break
+        loop.call_soon_threadsafe(fut.set_result, Ok(None))
+
+    def _handle_tx_sql(
+        self,
+        conn: sqlite3.Connection,
+        loop: asyncio.AbstractEventLoop,
+        fut: asyncio.Future,
+        sql: str,
+    ) -> None:
+        """Execute a transaction control statement (BEGIN/COMMIT/ROLLBACK)."""
+        try:
+            conn.execute(sql)
+            loop.call_soon_threadsafe(fut.set_result, Ok(None))
+        except sqlite3.Error as e:
+            if sql == "ROLLBACK":
+                logger.error("ROLLBACK failed: %s", e)
+            loop.call_soon_threadsafe(fut.set_result, Err(f"{sql} failed: {e}"))
+
+    def _process_write(
+        self,
+        conn: sqlite3.Connection,
+        op: _WriteOp,
+        loop: asyncio.AbstractEventLoop,
+    ) -> None:
+        """Process a single write operation in the executor."""
+        start_wait = op.created_at if hasattr(op, "created_at") else time.monotonic()  # type: ignore[reportAttributeAccessIssue]
+        wait_ms = (time.monotonic() - start_wait) * 1000
+        try:
+            start_exec = time.monotonic()
+            cursor = conn.execute(op.sql, op.params)
+            # Auto-commit if not inside an explicit transaction
+            if not conn.in_transaction:
+                conn.commit()
+            exec_ms = (time.monotonic() - start_exec) * 1000
+
+            # Update metrics
+            ops = self._metrics["total_ops"]
+            m_wait = self._metrics["avg_wait_ms"]
+            m_exec = self._metrics["avg_exec_ms"]
+
+            # Use weighted moving average to prevent overflow and keep metrics responsive
+            self._metrics["avg_wait_ms"] = (m_wait * ops + wait_ms) / (ops + 1)
+            self._metrics["avg_exec_ms"] = (m_exec * ops + exec_ms) / (ops + 1)
+            self._metrics["total_ops"] += 1
+
+            loop.call_soon_threadsafe(op.future.set_result, Ok(cursor.rowcount))
+
+            # Periodic WAL checkpoint to prevent unbounded WAL growth
+            self._write_count += 1
+            if self._write_count >= self._CHECKPOINT_INTERVAL:
+                self._maybe_checkpoint(conn, loop)
+
+        except sqlite3.Error as e:
+            logger.warning("Write failed: %s | SQL: %s", e, op.sql[:100])
+            loop.call_soon_threadsafe(
+                op.future.set_result,
+                Err(f"SQLite write error: {e}"),
+            )
+
+    def _process_write_many(
+        self,
+        conn: sqlite3.Connection,
+        op: _WriteManyOp,
+        loop: asyncio.AbstractEventLoop,
+    ) -> None:
+        """Process multiple write operations in a single transaction in the executor."""
+        start_wait = time.monotonic()
+        wait_ms = (time.monotonic() - start_wait) * 1000
+        try:
+            start_exec = time.monotonic()
+
+            # Start transaction explicitly if not in one
+            in_transaction = conn.in_transaction
+            if not in_transaction:
+                conn.execute("BEGIN IMMEDIATE")
+
+            total_rows = 0
+            for sql, params in op.operations:
+                cursor = conn.execute(sql, params)
+                total_rows += cursor.rowcount
+
+            if not in_transaction:
+                conn.commit()
+
+            exec_ms = (time.monotonic() - start_exec) * 1000
+
+            # Update metrics
+            ops = self._metrics["total_ops"]
+            m_wait = self._metrics["avg_wait_ms"]
+            m_exec = self._metrics["avg_exec_ms"]
+
+            self._metrics["avg_wait_ms"] = (m_wait * ops + wait_ms) / (ops + 1)
+            self._metrics["avg_exec_ms"] = (m_exec * ops + exec_ms) / (ops + 1)
+            self._metrics["total_ops"] += 1
+
+            loop.call_soon_threadsafe(op.future.set_result, Ok(total_rows))
+
+            self._write_count += len(op.operations)
+            if self._write_count >= self._CHECKPOINT_INTERVAL:
+                self._maybe_checkpoint(conn, loop)
+
+        except sqlite3.Error as e:
+            logger.warning(
+                "WriteMany failed: %s | First SQL: %s",
+                e,
+                op.operations[0][0][:100] if op.operations else "",
+            )
+            try:
+                conn.rollback()
+            except sqlite3.Error:
+                pass
+            loop.call_soon_threadsafe(
+                op.future.set_result,
+                Err(f"SQLite execute_many error: {e}"),
+            )
+
+    def _maybe_checkpoint(self, conn: sqlite3.Connection, loop: asyncio.AbstractEventLoop) -> None:
+        """Perform a WAL checkpoint if the interval has been reached."""
+        try:
+            conn.execute("PRAGMA wal_checkpoint(PASSIVE)")
+            self._write_count = 0
+            logger.debug("Periodic WAL checkpoint at %d writes", self._CHECKPOINT_INTERVAL)
+        except sqlite3.Error as e:
+            logger.debug("WAL checkpoint deferred: %s", e)

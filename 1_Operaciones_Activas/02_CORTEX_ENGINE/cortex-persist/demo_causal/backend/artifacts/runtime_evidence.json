@@ -1,0 +1,10 @@
+{
+  "generated_at": "2026-06-21T04:21:15.549179+00:00",
+  "events_count": 10001,
+  "replay_count": 10001,
+  "initial_hash": "423fa0994747c31dc3b0d4c6b592944c81d09471e48006d98432888f9af46957",
+  "final_hash": "423fa0994747c31dc3b0d4c6b592944c81d09471e48006d98432888f9af46957",
+  "integrity_result": "valid",
+  "git_commit": "108988a07bd8a4eb85cc07f7f839c99f17bbe501",
+  "hash_match": true
+}

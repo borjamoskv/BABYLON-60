@@ -1,0 +1,13 @@
+[gossip]
+    entrypoints = [
+        "entrypoint.testnet.solana.com:8001",
+        "entrypoint2.testnet.solana.com:8001",
+    ]
+[consensus]
+    expected_genesis_hash = "4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY"
+[accounts]
+    file_size_gib = 40
+    max_accounts = 200_000_000
+[snapshots]
+    [snapshots.sources]
+        servers = [ "http://solana-testnet-rpc.jumpisolated.com:8899", "https://solana-testnet-tls.jumpisolated.com" ]

@@ -1,0 +1,85 @@
+# @chainlink/apex-adapter
+
+## 1.0.11
+
+### Patch Changes
+
+- [#4131](https://github.com/smartcontractkit/external-adapters-js/pull/4131) [`4c94fd9`](https://github.com/smartcontractkit/external-adapters-js/commit/4c94fd916bd8b57898ae61cde0888a09fc543a6e) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Bumped framework version to fix a websocket connection issue
+
+## 1.0.10
+
+### Patch Changes
+
+- [#4118](https://github.com/smartcontractkit/external-adapters-js/pull/4118) [`1136034`](https://github.com/smartcontractkit/external-adapters-js/commit/113603435a15a9f760ba1d16c4d70822dc358b75) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Bumped framework version
+
+## 1.0.9
+
+### Patch Changes
+
+- [#4075](https://github.com/smartcontractkit/external-adapters-js/pull/4075) [`af8f3e7`](https://github.com/smartcontractkit/external-adapters-js/commit/af8f3e722812b4413788fcb9fcef8674056f1cc3) Thanks [@dependabot](https://github.com/apps/dependabot)! - Bump form-data from 4.0.1 to 4.0.4
+
+## 1.0.8
+
+### Patch Changes
+
+- [#3936](https://github.com/smartcontractkit/external-adapters-js/pull/3936) [`6147728`](https://github.com/smartcontractkit/external-adapters-js/commit/6147728aa69ec39fc180a11a34757d1c730ad6af) Thanks [@Fletch153](https://github.com/Fletch153)! - Bumped framework version
+
+## 1.0.7
+
+### Patch Changes
+
+- [#3840](https://github.com/smartcontractkit/external-adapters-js/pull/3840) [`8b08579`](https://github.com/smartcontractkit/external-adapters-js/commit/8b085790e1fcd3543ec0ea540e1915bacd998ec4) Thanks [@dskloetc](https://github.com/dskloetc)! - Bumped framework version
+
+## 1.0.6
+
+### Patch Changes
+
+- [#3805](https://github.com/smartcontractkit/external-adapters-js/pull/3805) [`2d18954`](https://github.com/smartcontractkit/external-adapters-js/commit/2d1895428866a279ca2464f494c5c3efcece1f3b) Thanks [@renovate](https://github.com/apps/renovate)! - Update NodeJS to version 22.14.0
+
+- [#3801](https://github.com/smartcontractkit/external-adapters-js/pull/3801) [`c40ad81`](https://github.com/smartcontractkit/external-adapters-js/commit/c40ad81e979aed773a0dda68381bacdc6bc7f1d4) Thanks [@renovate](https://github.com/apps/renovate)! - Update TypeScript version to 5.8.3
+
+- [#3810](https://github.com/smartcontractkit/external-adapters-js/pull/3810) [`e47e08a`](https://github.com/smartcontractkit/external-adapters-js/commit/e47e08ac2b6224751d9cf486caee7964b6f58ad9) Thanks [@dskloetc](https://github.com/dskloetc)! - Bumped framework version
+
+## 1.0.5
+
+### Patch Changes
+
+- [#3788](https://github.com/smartcontractkit/external-adapters-js/pull/3788) [`ef5fdd1`](https://github.com/smartcontractkit/external-adapters-js/commit/ef5fdd152d6615ed979198d05427705a6ccb6359) Thanks [@dskloetc](https://github.com/dskloetc)! - Bumped framework version
+
+## 1.0.4
+
+### Patch Changes
+
+- [#3741](https://github.com/smartcontractkit/external-adapters-js/pull/3741) [`765b1de`](https://github.com/smartcontractkit/external-adapters-js/commit/765b1de0f9d31d3556647db88680050bd0faa39a) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency axios to v1.8.4
+
+## 1.0.3
+
+### Patch Changes
+
+- [#3739](https://github.com/smartcontractkit/external-adapters-js/pull/3739) [`6920e67`](https://github.com/smartcontractkit/external-adapters-js/commit/6920e67081583de936806af89c44e1be807fc878) Thanks [@dskloetc](https://github.com/dskloetc)! - Bumped framework version
+
+## 1.0.2
+
+### Patch Changes
+
+- [#3711](https://github.com/smartcontractkit/external-adapters-js/pull/3711) [`352ee28`](https://github.com/smartcontractkit/external-adapters-js/commit/352ee28d36fbf176f6c443402ac865595517a559) Thanks [@dependabot](https://github.com/apps/dependabot)! - Bump axios from 1.8.1 to 1.8.2
+
+- [#3707](https://github.com/smartcontractkit/external-adapters-js/pull/3707) [`40eaef9`](https://github.com/smartcontractkit/external-adapters-js/commit/40eaef949333229726985b46aab6c527860bb3df) Thanks [@renovate](https://github.com/apps/renovate)! - update dependency axios to v1.8.1
+
+- [#3713](https://github.com/smartcontractkit/external-adapters-js/pull/3713) [`4753dfa`](https://github.com/smartcontractkit/external-adapters-js/commit/4753dfa17038ec4f0b8041becb216dfaec9e9f3f) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Bumped framework version
+
+## 1.0.1
+
+### Patch Changes
+
+- [#3697](https://github.com/smartcontractkit/external-adapters-js/pull/3697) [`9386505`](https://github.com/smartcontractkit/external-adapters-js/commit/938650552ffc49fafe7264b2cea872b4cf20b785) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Update url
+
+## 1.0.0
+
+### Major Changes
+
+- [#3672](https://github.com/smartcontractkit/external-adapters-js/pull/3672) [`805468b`](https://github.com/smartcontractkit/external-adapters-js/commit/805468bb897609126d60ec267b8d21cbd6d7c3cf) Thanks [@mmcallister-cll](https://github.com/mmcallister-cll)! - Apex EA Initial Commit
+
+### Patch Changes
+
+- [#3673](https://github.com/smartcontractkit/external-adapters-js/pull/3673) [`1e1c478`](https://github.com/smartcontractkit/external-adapters-js/commit/1e1c4785e78eeeda775b6a7630594498f60ad9bf) Thanks [@Subarna-Singh](https://github.com/Subarna-Singh)! - Bumped framework version

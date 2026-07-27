@@ -1,0 +1,105 @@
+---
+// @C5-REAL
+import Layout from '../layouts/Layout.astro';
+import { Shield, Key, Cpu, ArrowLeft, ArrowUpRight } from 'lucide-react';
+---
+
+<Layout title="II. Entornos de Agente Seguro · CORTEX Foundation" description="Auditing secure enclaves, post-quantum ML-DSA signatures, and regulatory loops for AI agents.">
+  <div class="fixed top-0 inset-x-0 h-[600px] bg-gradient-to-b from-[#2b3be5]/5 via-cortex-bg to-transparent pointer-events-none -z-10"></div>
+
+  <!-- Header Navigation -->
+  <header class="w-full border-b border-white/5 bg-cortex-bg/60 backdrop-blur-2xl sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="/" class="text-xs font-mono text-cortex-muted hover:text-white transition-colors uppercase tracking-widest no-underline flex items-center gap-2" id="back-home-link">
+        <ArrowLeft class="w-4 h-4" /> Back to Hub
+      </a>
+      <span class="font-mono text-xs text-cortex-accent font-bold uppercase tracking-widest">II. Agentes</span>
+    </div>
+  </header>
+
+  <main class="relative min-h-screen max-w-4xl mx-auto px-6 pt-16 pb-32 w-full">
+    
+    <article class="prose prose-invert max-w-none">
+      
+      <header class="mb-16 border-b border-white/10 pb-10">
+        <div class="flex items-center gap-4 mb-6 font-mono text-[10px] text-cortex-accent uppercase tracking-widest">
+          <span class="px-2.5 py-0.5 bg-cortex-accent/10 border border-cortex-accent/20 rounded">Security Audit</span>
+          <span>Sovereign Enclaves</span>
+          <span>PQC Verification</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white uppercase mb-6 leading-tight" id="article-title">
+          Entornos Seguros de Hardware y Criptografía Cuántica
+        </h1>
+        <p class="text-lg text-cortex-muted leading-relaxed font-light">
+          Cómo blindar las identidades autónomas de los agentes mediante criptografía post-cuántica ML-DSA y aislamiento en silicio para evitar falsificaciones en redes descentralizadas.
+        </p>
+      </header>
+
+      <blockquote class="text-lg md:text-xl font-light leading-relaxed text-white/90 border-l-4 border-cortex-accent pl-6 py-4 my-10 bg-[#2b3be5]/5 rounded-r-lg italic">
+        "Si la clave privada que firma las decisiones de tu agente reside en una variable de entorno desprotegida, la inmutabilidad de tu ledger no vale nada."
+      </blockquote>
+
+      <h2 class="text-2xl font-bold text-white mt-12 mb-6">1. Identidad Digital de Agentes en Enclaves de Silicio</h2>
+      <p class="text-white/80 leading-relaxed mb-6">
+        En un ecosistema corporativo gobernado por agentes autónomos, las firmas digitales convencionales (como ECDSA sobre curvas elípticas tipo secp256k1) se enfrentan a dos grandes amenazas: la computación cuántica a medio plazo y los ataques locales al sistema operativo en el corto plazo.
+      </p>
+      <p class="text-white/80 leading-relaxed mb-6">
+        La respuesta técnica a estas vulnerabilidades consiste en implementar <strong>Enclaves Seguros de Hardware (Trusted Execution Environments - TEE)</strong>, como Intel SGX, AMD SEV o módulos dedicados TPM (Trusted Platform Module).
+      </p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+        <div class="bg-cortex-cards/30 border border-white/5 p-5 rounded-xl">
+          <div class="w-8 h-8 rounded bg-[#2b3be5]/10 flex items-center justify-center mb-4">
+            <Cpu class="w-4 h-4 text-cortex-secondary" />
+          </div>
+          <h4 class="font-mono text-xs uppercase text-white font-semibold mb-2">Aislamiento por Enclaves (TEE)</h4>
+          <p class="text-[11px] text-cortex-muted leading-normal">
+            El entorno de ejecución del agente corre en memoria RAM cifrada directamente por el procesador. El sistema operativo anfitrión no puede leer ni alterar la memoria de trabajo, protegiendo las llaves en caliente.
+          </p>
+        </div>
+        <div class="bg-cortex-cards/30 border border-white/5 p-5 rounded-xl">
+          <div class="w-8 h-8 rounded bg-[#2b3be5]/10 flex items-center justify-center mb-4">
+            <Key class="w-4 h-4 text-cortex-secondary" />
+          </div>
+          <h4 class="font-mono text-xs uppercase text-white font-semibold mb-2">Firmas Criptográficas ML-DSA</h4>
+          <p class="text-[11px] text-cortex-muted leading-normal">
+            CORTEX utiliza firmas de nivel post-cuántico (ML-DSA, anteriormente Dilithium, estandarizado por el NIST). La firma criptográfica de los puntos de control del ledger resiste ataques cuánticos y ataques de canal lateral.
+          </p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold text-white mt-12 mb-6">2. Optimización Fiscal y Estructura Corporativa (Ley 49/2002)</h2>
+      <p class="text-white/80 leading-relaxed mb-6">
+        El despliegue de redes de agentes soberanos requiere estructuraciones comerciales robustas. Uno de los hacks legales más eficaces que utiliza el ecosistema español para financiar infraestructura de IA consiste en el sello <strong>"iHelp Activada"</strong>.
+      </p>
+      <p class="text-white/80 leading-relaxed mb-8">
+        Bajo la <strong>Ley 49/2002 de Régimen Fiscal de Entidades sin Fines Lucrativos y de los Incentivos Fiscales al Mecenazgo</strong> en España, las suscripciones y donaciones a fundaciones y asociaciones autorizadas pueden estructurarse de la siguiente manera:
+      </p>
+
+      {/* Box of Ley 49/2002 */}
+      <div class="bg-black/60 border border-white/10 rounded-xl p-6 font-mono text-xs text-cortex-muted mb-10 shadow-lg">
+        <div class="flex justify-between items-center mb-4 border-b border-white/5 pb-2 text-white font-bold">
+          <span>TAX REPORT: LEY 49/2002 STRUCTURING</span>
+          <span class="text-cortex-success">ACTIVE</span>
+        </div>
+        <ul class="space-y-4 text-white/80 pl-0 list-none">
+          <li class="relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-cortex-success">
+            <strong>Exención de IVA (21%):</strong> Las transacciones estructuradas como aportaciones a entidades con fines de investigación científica o desarrollo tecnológico están exentas de IVA, reduciendo instantáneamente la fricción del coste para el comprador español.
+          </li>
+          <li class="relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-cortex-success">
+            <strong>Deducción Fiscal de hasta el 80%:</strong> Los primeros 250€ donados por una persona física tienen derecho a una deducción fiscal del 80% en el IRPF. Los importes adicionales disfrutan de una deducción de hasta el 45%. Para personas jurídicas (empresas), la deducción en el Impuesto sobre Sociedades alcanza el 40%.
+          </li>
+          <li class="relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-cortex-success">
+            <strong>Monetización de Recursos:</strong> Al estructurar la red de validación de agentes como una organización sin fines de lucro enfocada en la verdad algorítmica, los validadores de la red reciben incentivos deducibles directamente financiados por patrocinadores institucionales.
+          </li>
+        </ul>
+      </div>
+
+      <p class="text-white/80 leading-relaxed mb-6">
+        Este arbitraje de capital asegura que las empresas que despliegan agentes soberanos en territorio europeo puedan optimizar el flujo de efectivo legalmente, canalizando el capital hacia servidores en la nube sin soportar cargas impositivas severas.
+      </p>
+
+    </article>
+
+  </main>
+</Layout>

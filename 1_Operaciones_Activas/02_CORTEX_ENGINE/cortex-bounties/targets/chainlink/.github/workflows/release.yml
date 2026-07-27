@@ -1,0 +1,49 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+    # The only commits that will contain changes to the masterlist will be releases
+    paths:
+      - MASTERLIST.md
+  workflow_dispatch:
+    inputs:
+      # For this workflow, build-all will cause all adapters to have their image pulled and republished to the public ECR
+      # NOTE: If the images haven't been already published to the private ECR, this will fail; in that case run the deploy workflow first.
+      build-all:
+        description: whether to run steps for all adapters, regardless of whether they were changed in this event
+        required: false
+        default: 'false'
+
+concurrency:
+  group: deploy-and-release
+  cancel-in-progress: false
+
+jobs:
+  gh-release:
+    name: GH Release
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+    steps:
+      - uses: actions/checkout@v5
+      - name: Get release version
+        id: get-version
+        run: |
+          echo "result=$(jq -r '.version' package.json)" >> $GITHUB_OUTPUT
+      - name: Get release body
+        run: |
+          sha=$(git rev-parse HEAD)
+          repo=$(gh repo view --json nameWithOwner -q .nameWithOwner)
+          # Get the merged PR body to use in the GH release body
+          gh api /repos/$repo/commits/$sha/pulls \
+            --jq '(map(select(.merged_at != null)))
+            | unique_by(.number)
+            | "This release was merged in PR #" + (.[0].number | tostring) + "\n" + (.[0].body | split("\n\n\n# Releases") | .[1])' > pr_body.tmp
+      - name: Create release
+        uses: softprops/action-gh-release@c95fe1489396fe8a9eb87c0abf8aa5b2ef267fda # v2.2.1
+        with:
+          tag_name: v${{ steps.get-version.outputs.result }}
+          name: Release v${{ steps.get-version.outputs.result }}
+          body_path: pr_body.tmp

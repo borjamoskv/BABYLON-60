@@ -1,0 +1,14 @@
+{
+  "api_import": "cortex.api:app",
+  "database_path": "~/.babylon60/runtime.db",
+  "database_url": "",
+  "deploy_mode": "local",
+  "git_sha": "b60f46fd3612c9041eede32e99ea534e50a8a9e7",
+  "issued_at": "2026-06-15T17:37:51Z",
+  "schema_path": "~/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/cortex-persist/schema/events_log.sql",
+  "schema_sha256_hint": 1064730757712100694,
+  "storage_mode": "local",
+  "stripe_configured": true,
+  "stripe_enabled": true,
+  "target": "local"
+}

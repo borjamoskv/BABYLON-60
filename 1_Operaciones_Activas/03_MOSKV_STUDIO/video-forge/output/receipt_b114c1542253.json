@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-06-01T01:56:35.499Z",
+  "preset": "test",
+  "output": "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/03_MOSKV_STUDIO/video-forge/output/MOSKV_2026-06-01T01-56-35.mp4",
+  "sha256": "b114c1542253",
+  "size_bytes": 736146,
+  "codec": "h264",
+  "resolution": "1280x720",
+  "duration": 5,
+  "segments": 1,
+  "status": "C5-REAL"
+}

@@ -1,0 +1,1893 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "author": "borjamoskv",
+    "level": "C5-REAL",
+    "counts": {
+      "primitives": 100,
+      "invariants": 100,
+      "antipatterns": 23,
+      "redundancies": 11
+    }
+  },
+  "primitives": [
+    {
+      "id": "APEX-001",
+      "opcode": "OP_COLLAPSE",
+      "signature": "CAS(key, old, new)",
+      "complexity": "O(1)",
+      "mutation": "RAM/Disco atómico. Bloquea si `old` mutó.",
+      "execute": "Texto estocástico -> AST/JSON determinista.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-002",
+      "opcode": "OP_LEDGER_EMIT",
+      "signature": "upsert(record)",
+      "complexity": "O(log N)",
+      "mutation": "B-Tree/DB. Colapso determinista sin duplicados.",
+      "execute": "Inyección criptográfica SHA-256 en cadena.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-003",
+      "opcode": "OP_TAINT_SEAL",
+      "signature": "append_ledger(ev, sig)",
+      "complexity": "O(1)",
+      "mutation": "I/O Secuencial. Expande archivo WAL inmutable.",
+      "execute": "Firma SHA3-256 origen de procedencia probabilística.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-004",
+      "opcode": "OP_BFT_VOTE",
+      "signature": "l2_distance(vA, vB)",
+      "complexity": "O(d)",
+      "mutation": "CPU/SIMD. Cálculos en L1 Cache sin estado de disco.",
+      "execute": "Aserción binaria (1/0) en quorum n/3.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-005",
+      "opcode": "OP_HASH_AUDIT",
+      "signature": "snapshot_ram()",
+      "complexity": "O(M)",
+      "mutation": "Page-dump a Disco. Marca el inicio del Saga.",
+      "execute": "DAG verification vs Disk state.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-006",
+      "opcode": "OP_DAG_TRUNCATE",
+      "signature": "rollback(snapshot)",
+      "complexity": "O(M)",
+      "mutation": "Page-restore. Erradica la línea temporal fallida.",
+      "execute": "Purga física de nodos huérfanos.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-007",
+      "opcode": "OP_SNAPSHOT_MINT",
+      "signature": "vacuum()",
+      "complexity": "O(N)",
+      "mutation": "I/O Pesado. Compacta DB, expulsa entropía al vacío.",
+      "execute": "Creación de punto de rollback.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-008",
+      "opcode": "OP_SAGA_REVERT",
+      "signature": "taint_mark(agent, sha)",
+      "complexity": "O(1)",
+      "mutation": "Metadatos RAM. Agrega bandera radiactiva al string.",
+      "execute": "Desenrollado atómico SAGA-N -> SAGA-1.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-009",
+      "opcode": "OP_WAL_LOCK",
+      "signature": "taint_verify(record)",
+      "complexity": "O(1)",
+      "mutation": "Interrupción de CPU. Fuerza validación perimetral.",
+      "execute": "Bloqueo exclusivo SQLite Write-Ahead.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-010",
+      "opcode": "OP_FLUSH_L1",
+      "signature": "lock_lease(id, ttl)",
+      "complexity": "O(1)",
+      "mutation": "Mutación de Mutex en DB/Redis con auto-expiración.",
+      "execute": "Invalida caché en mutación de tenant.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-011",
+      "opcode": "OP_TENANT_ISOLATE",
+      "signature": "scatter_gather(tasks)",
+      "complexity": "O(T/W)",
+      "mutation": "RAM. Forquea Hilos, colapsa futuros asíncronos.",
+      "execute": "Segmentación dura de memoria.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-012",
+      "opcode": "OP_ORIGIN_ANCHOR",
+      "signature": "circuit_trip(th)",
+      "complexity": "O(1)",
+      "mutation": "RAM. Muta estado global a FALLBACK, rechaza red.",
+      "execute": "Ancla ISO8601 + AgentID a nodo de conocimiento.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-013",
+      "opcode": "OP_ROT_ERASE",
+      "signature": "jitter_retry(fn)",
+      "complexity": "O(R)",
+      "mutation": "Thread. Inyecta Sleep(aleatorio) antes de red.",
+      "execute": "Evicción LFU de hechos sin test empírico.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-014",
+      "opcode": "OP_B58_ENCODE",
+      "signature": "async_shield(task)",
+      "complexity": "O(1)",
+      "mutation": "Event Loop. Separa la Tarea de la señal SIGINT.",
+      "execute": "Compresión de hash para logs cortos.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-015",
+      "opcode": "OP_B58_DECODE",
+      "signature": "spawn_daemon()",
+      "complexity": "O(1)",
+      "mutation": "OS Process. Lanza fork desconectado del TTY.",
+      "execute": "Expansión a entropía original.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-016",
+      "opcode": "OP_FREEZE_MEM",
+      "signature": "quorum_vote(res)",
+      "complexity": "O(V)",
+      "mutation": "CPU. Aplica algoritmo Bizantino, colapsa a 1.",
+      "execute": "Transición Dict a Read-Only Tuple.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-017",
+      "opcode": "OP_SYNC_GHOST",
+      "signature": "timeout_kill(ms)",
+      "complexity": "O(1)",
+      "mutation": "OS Signal. Envía SIGKILL al expirar.",
+      "execute": "Propagación cross-repo de estado inmutable.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-018",
+      "opcode": "OP_INDEX_ONNX",
+      "signature": "yield_chunk(tok)",
+      "complexity": "O(1)",
+      "mutation": "TCP Stack. Flushea el buffer del socket.",
+      "execute": "Extracción y guardado de vector estático.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-019",
+      "opcode": "OP_TAINT_SCAN",
+      "signature": "await_signal(ev)",
+      "complexity": "O(1)",
+      "mutation": "Kernel Wait. Suspende CPU (0 cycles) hasta IRQ.",
+      "execute": "Recursión inversa buscando origen de dato.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-020",
+      "opcode": "OP_READ_COMMIT",
+      "signature": "debounce(ms)",
+      "complexity": "O(1)",
+      "mutation": "RAM. Ignora N mutaciones en ventana de tiempo M.",
+      "execute": "Lectura aislada de dirty reads.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-021",
+      "opcode": "OP_RESOLVE_DEADLOCK",
+      "signature": "gen_ed25519()",
+      "complexity": "O(1)",
+      "mutation": "RAM. Crea nueva identidad Soberana.",
+      "execute": "SIGKILL a proceso bloqueante.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-022",
+      "opcode": "OP_QUORUM_REBOOT",
+      "signature": "sign(priv, data)",
+      "complexity": "O(L)",
+      "mutation": "CPU. Firma de estado; sella causalidad.",
+      "execute": "Re-emisión si el quorum cae bajo n/3.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-023",
+      "opcode": "OP_EXTRACT_SIGNAL",
+      "signature": "verify(pub, sig)",
+      "complexity": "O(L)",
+      "mutation": "CPU. Filtro antes de aceptar mutación externa.",
+      "execute": "Denoise de input y aislamiento causal.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-024",
+      "opcode": "OP_VAULT_MOUNT",
+      "signature": "derive_kdf(salt)",
+      "complexity": "O(I)",
+      "mutation": "CPU. Computa llave epímera, destruye previo.",
+      "execute": "Enlace criptográfico de persistencia.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-025",
+      "opcode": "OP_VAULT_UNMOUNT",
+      "signature": "zeroise(ptr)",
+      "complexity": "O(L)",
+      "mutation": "RAM. `memset` en C, evita volcado de memoria.",
+      "execute": "Destrucción atómica de llaves de acceso.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-026",
+      "opcode": "OP_ANERGY_PURGE",
+      "signature": "merkle_root(lvs)",
+      "complexity": "O(N log N)",
+      "mutation": "CPU. Hashea árbol entero; estado único.",
+      "execute": "Asesinato de generador de Green Theater.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-027",
+      "opcode": "OP_LANDAUER_COMPRESS",
+      "signature": "aes_gcm_enc(...)",
+      "complexity": "O(L)",
+      "mutation": "CPU SIMD. Encripta y firma integridad.",
+      "execute": "Minificación de log a JSON puro.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-028",
+      "opcode": "OP_APOPTOSIS",
+      "signature": "aes_gcm_dec(...)",
+      "complexity": "O(L)",
+      "mutation": "CPU SIMD. Lanza excepción si falla AAD.",
+      "execute": "Terminación voluntaria ante Context Rot.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-029",
+      "opcode": "OP_EXERGY_INJECT",
+      "signature": "gen_ulid()",
+      "complexity": "O(1)",
+      "mutation": "CPU. Retorna ID lexicográfico temporal.",
+      "execute": "Traducción de token a filesystem I/O.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-030",
+      "opcode": "OP_HALT_LOOP",
+      "signature": "seal_block()",
+      "complexity": "O(B)",
+      "mutation": "Disco. Cierra log rotado, modo Read-Only.",
+      "execute": "Breaker de recursión infinita LLM.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-031",
+      "opcode": "OP_TURBO_OVERRIDE",
+      "signature": "http_post_raw()",
+      "complexity": "O(N)",
+      "mutation": "Red I/O. Petición atómica sin framework.",
+      "execute": "Bypass de diplo-planning -> Mutación directa.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-032",
+      "opcode": "OP_MEASURE_SHANNON",
+      "signature": "force_schema(sch)",
+      "complexity": "O(T)",
+      "mutation": "Sampler. Fila de logits restringida por Regex.",
+      "execute": "Retorna ratio entropía/bytes.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-033",
+      "opcode": "OP_SHRED_KEY",
+      "signature": "extract_ast(md)",
+      "complexity": "O(L)",
+      "mutation": "CPU. Poda string, retorna AST estricto.",
+      "execute": "/dev/urandom overwrite de llave en memoria.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-034",
+      "opcode": "OP_OOM_SIM",
+      "signature": "strip_slop(text)",
+      "complexity": "O(L)",
+      "mutation": "CPU. Regex wipeout de 'Here is your code'.",
+      "execute": "Caída inducida para resetear heurística.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-035",
+      "opcode": "OP_TTFT_CALC",
+      "signature": "tokenize_len(s)",
+      "complexity": "O(L)",
+      "mutation": "CPU. Cuenta real de Exergía.",
+      "execute": "Perfilado milisegundo a primer token.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-036",
+      "opcode": "OP_MODEL_SWAP",
+      "signature": "compress(ctx)",
+      "complexity": "O(L)",
+      "mutation": "CPU. Borra stopwords, minimiza vector.",
+      "execute": "Shift dinámico Opus <-> Flash.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-037",
+      "opcode": "OP_LATENCY_INJECT",
+      "signature": "set_temp(0.0)",
+      "complexity": "O(1)",
+      "mutation": "RAM. Forzar ArgMax sampler (determinista).",
+      "execute": "Padding temporal contra side-channel.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-038",
+      "opcode": "OP_CRUNCH_VAR",
+      "signature": "set_temp(0.7)",
+      "complexity": "O(1)",
+      "mutation": "RAM. Habilita Top-P sampler para divergencia.",
+      "execute": "Evaluación ahead-of-time.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-039",
+      "opcode": "OP_PROBE_ADV",
+      "signature": "stop_seq(tokens)",
+      "complexity": "O(1)",
+      "mutation": "Sampler. Guillotina de alucinación semántica.",
+      "execute": "Mutación estocástica controlada (Fuzzing).",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-040",
+      "opcode": "OP_DEDUCE_HW",
+      "signature": "logprobs(toks)",
+      "complexity": "O(1)",
+      "mutation": "CPU. Matemática Bayesiana; aborta si duda.",
+      "execute": "Extracción CPU/RAM real.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-041",
+      "opcode": "OP_TELEMETRY_DUMP",
+      "signature": "run(check=True)",
+      "complexity": "O(T)",
+      "mutation": "OS Process. Export de métricas a logs.",
+      "execute": "Reporte a Master Ledger.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-042",
+      "opcode": "OP_SHIELD_CORE",
+      "signature": "chmod(0o600)",
+      "complexity": "O(1)",
+      "mutation": "Disco. Cierre térmico de archivo a ROOT.",
+      "execute": "Rechazo de mutación a `/private/var/db`.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-043",
+      "opcode": "OP_NULL_MOCK",
+      "signature": "symlink_force()",
+      "complexity": "O(1)",
+      "mutation": "Disco. Vincula grafos causales sin bytes.",
+      "execute": "Sustitución de dependencia inestable.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-044",
+      "opcode": "OP_TEST_HYPO",
+      "signature": "watchdog_obs()",
+      "complexity": "O(1)",
+      "mutation": "OS Hook. Se cuelga de inotify.",
+      "execute": "Ejecución en VM efímera.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-045",
+      "opcode": "OP_ISOMORPH_ASSERT",
+      "signature": "git_commit()",
+      "complexity": "O(F)",
+      "mutation": "Disco. Sello criptográfico temporal.",
+      "execute": "AST vs Semántica == True.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-046",
+      "opcode": "OP_DIFF_CALC",
+      "signature": "diff_ast()",
+      "complexity": "O(N)",
+      "mutation": "CPU. Delta determinista puro, ignora docs.",
+      "execute": "Computación de delta estricto.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-047",
+      "opcode": "OP_ULTRATHINK",
+      "signature": "cgroup_limit()",
+      "complexity": "O(1)",
+      "mutation": "Kernel Syscall. Acota RAM máxima disponible.",
+      "execute": "Dedicación de VRAM masiva a P0.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-048",
+      "opcode": "OP_DEEP_RESEARCH",
+      "signature": "mmap_read()",
+      "complexity": "O(1)",
+      "mutation": "RAM virtual. Asigna PageTables sin cargar disco.",
+      "execute": "Expansión paralela web.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-049",
+      "opcode": "OP_VRAM_FLUSH",
+      "signature": "kill_9(pid)",
+      "complexity": "O(1)",
+      "mutation": "OS Signal. Muerte atómica de zombie.",
+      "execute": "Liberación forzosa tras UltraThink.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-050",
+      "opcode": "OP_SPATIAL_TRANS",
+      "signature": "fsync(fd)",
+      "complexity": "O(1)",
+      "mutation": "Disco I/O. Fuerza flusheo a platter/SSD.",
+      "execute": "Coordenada física a selector DOM.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-051",
+      "opcode": "OP_SPAWN_LEGION",
+      "signature": "vec_normalize()",
+      "complexity": "O(d)",
+      "mutation": "RAM SIMD. Proyección vectorial al hiperesfero.",
+      "execute": "N Forks de proceso worker.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-052",
+      "opcode": "OP_KILL_IDLE",
+      "signature": "pca_reduce(m)",
+      "complexity": "O(N*d^2)",
+      "mutation": "RAM SIMD. Aplastamiento dimensional.",
+      "execute": "SIGTERM a subagente latente > 5min.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-053",
+      "opcode": "OP_MERGE_LATEST",
+      "signature": "hnsw_insert(n)",
+      "complexity": "O(log N)",
+      "mutation": "RAM/Disco. Mutación del grafo de vecindad.",
+      "execute": "Resolución de colisión por Timestamp.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-054",
+      "opcode": "OP_DEMIURGE_CREDIT",
+      "signature": "dbscan(vecs)",
+      "complexity": "O(N^2)",
+      "mutation": "CPU. Colapso a clusters causales.",
+      "execute": "Inyección de 'borjamoskv' en metadata.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-055",
+      "opcode": "OP_BFT_AUTHORIZE",
+      "signature": "topo_sort(g)",
+      "complexity": "O(V+E)",
+      "mutation": "CPU. Aserción de no-circularidad en DAGs.",
+      "execute": "Pase criptográfico BFT.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-056",
+      "opcode": "OP_SWARM_ISOLATE",
+      "signature": "jaccard(s1, s2)",
+      "complexity": "O(L)",
+      "mutation": "CPU. Intersección de hash-sets.",
+      "execute": "Encapsulado Docker/Chroot de worker.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-057",
+      "opcode": "OP_PROXY_REQ",
+      "signature": "cosine_decay()",
+      "complexity": "O(1)",
+      "mutation": "CPU. Disminución matemática de LR o Temp.",
+      "execute": "Enrutamiento intra-swarm.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-058",
+      "opcode": "OP_VOTE_CAST",
+      "signature": "tfidf_extract()",
+      "complexity": "O(N)",
+      "mutation": "CPU. Heurística matricial sin LLM.",
+      "execute": "Emisión a Ledger Master.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-059",
+      "opcode": "OP_VOTE_REVOKE",
+      "signature": "markov_step(m)",
+      "complexity": "O(1)",
+      "mutation": "CPU. Mutación estocástica predecible.",
+      "execute": "Invalidación de aserción.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-060",
+      "opcode": "OP_CONSENSUS_REJECT",
+      "signature": "bloom_check(i)",
+      "complexity": "O(1)",
+      "mutation": "RAM. Rechazo rápido vía Bloom Filter.",
+      "execute": "Bloqueo de propuesta minoritaria.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-061",
+      "opcode": "OP_DEPLOY_GHOST",
+      "signature": "ws_send(msg)",
+      "complexity": "O(L)",
+      "mutation": "Red I/O. Stream asíncrono puro.",
+      "execute": "Subagente sin write-access para watch.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-062",
+      "opcode": "OP_PUNISH_NODE",
+      "signature": "grpc_unary()",
+      "complexity": "O(L)",
+      "mutation": "Red I/O. Llamada binaria estricta (PB).",
+      "execute": "Degradación de peso en red.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-063",
+      "opcode": "OP_ELEVATE_PRIV",
+      "signature": "udp_multicast()",
+      "complexity": "O(L)",
+      "mutation": "Red I/O. Propagación O(1) a subred local.",
+      "execute": "PlayGround Master Key flag toggle.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-064",
+      "opcode": "OP_SOTA_EXTRACT",
+      "signature": "dns_resolve()",
+      "complexity": "O(1)",
+      "mutation": "Red UDP. Petición atómica de topología.",
+      "execute": "Síntesis de Paper a JSON Vector.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-065",
+      "opcode": "OP_BROADCAST_P0",
+      "signature": "ssh_tunnel()",
+      "complexity": "O(1)",
+      "mutation": "OS Process. Port-forward encriptado.",
+      "execute": "Interrupción NMI a todo el enjambre.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-066",
+      "opcode": "OP_SLOP_HALT",
+      "signature": "detect_slop(t)",
+      "complexity": "O(L)",
+      "mutation": "CPU. Regex wipeout de padding léxico.",
+      "execute": "Detector de Green Theater.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-067",
+      "opcode": "OP_REROUTE_HUMAN",
+      "signature": "escalate_op(msg)",
+      "complexity": "O(1)",
+      "mutation": "Red I/O. Escalada inmediata.",
+      "execute": "Trigger a Operador.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-068",
+      "opcode": "OP_PARSE_INTENT",
+      "signature": "gossip_push()",
+      "complexity": "O(log N)",
+      "mutation": "Red I/O. Infección viral del Swarm.",
+      "execute": "Extracción de verbo C5 desde string.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-069",
+      "opcode": "OP_BIND_NEXUS",
+      "signature": "tls_verify()",
+      "complexity": "O(1)",
+      "mutation": "CPU. Validación criptográfica Root of Trust.",
+      "execute": "Mutación atómica de enlaces Base 60.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-070",
+      "opcode": "OP_UNBIND_NEXUS",
+      "signature": "symlink_rm(path)",
+      "complexity": "O(1)",
+      "mutation": "Disco. Eliminación de symlink.",
+      "execute": "Remoción de nodo cruzado.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-071",
+      "opcode": "OP_SYNC_NEXUS",
+      "signature": "rsync_check(a,b)",
+      "complexity": "O(N)",
+      "mutation": "Disco I/O. Sincronización forzada entre nodos.",
+      "execute": "Forzado de igualdad de contenido.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-072",
+      "opcode": "OP_VERIFY_SIG",
+      "signature": "ed25519_verify()",
+      "complexity": "O(L)",
+      "mutation": "CPU SIMD. Aserción de pasaporte criptográfico.",
+      "execute": "Verificación de firma BFT.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-073",
+      "opcode": "OP_SIGN_PAYLOAD",
+      "signature": "ed25519_sign()",
+      "complexity": "O(L)",
+      "mutation": "RAM. Firma efímera de payload.",
+      "execute": "Firma asimétrica en RAM.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-074",
+      "opcode": "OP_ENCRYPT_GCM",
+      "signature": "aes_gcm_enc()",
+      "complexity": "O(L)",
+      "mutation": "CPU SIMD. Cifrado autenticado AES-GCM 256.",
+      "execute": "Cifrado a disco.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-075",
+      "opcode": "OP_DECRYPT_GCM",
+      "signature": "re.compile()",
+      "complexity": "O(L)",
+      "mutation": "RAM. Cachea autómata finito en inicialización.",
+      "execute": "Descifrado de capa física.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-076",
+      "opcode": "OP_GIT_SENTINEL",
+      "signature": "unified_diff()",
+      "complexity": "O(NlogN)",
+      "mutation": "CPU. Genera Delta para el Ledger.",
+      "execute": "Auto-commit de mutación BFT.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-077",
+      "opcode": "OP_GIT_FETCH",
+      "signature": "url_parse()",
+      "complexity": "O(L)",
+      "mutation": "CPU. Sanity-check SSRF.",
+      "execute": "Alineación estricta remota.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-078",
+      "opcode": "OP_GIT_PUSH_OVR",
+      "signature": "md_to_html()",
+      "complexity": "O(L)",
+      "mutation": "CPU. Bypass de hooks locales if C5.",
+      "execute": "Push forzado sin verify.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-079",
+      "opcode": "OP_BLAST_MAP",
+      "signature": "cbor_encode()",
+      "complexity": "O(L)",
+      "mutation": "CPU. Serialización binaria rápida.",
+      "execute": "Cálculo de dependencias pre-mutación.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-080",
+      "opcode": "OP_AST_MUTATE",
+      "signature": "bs4_parse()",
+      "complexity": "O(N)",
+      "mutation": "CPU. Poda estricta de DOM.",
+      "execute": "Modificación a nivel AST puro.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-081",
+      "opcode": "OP_AST_COMMENT",
+      "signature": "log.bind(id)",
+      "complexity": "O(1)",
+      "mutation": "RAM. Empaqueta contexto inmutable.",
+      "execute": "Inserción de `//` sin romper parsers.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-082",
+      "opcode": "OP_PRUNE_HEURIST",
+      "signature": "otel_span()",
+      "complexity": "O(1)",
+      "mutation": "RAM. Envuelve scope con bounds exactos.",
+      "execute": "Supresión de branches muertas.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-083",
+      "opcode": "OP_WIPE_DIRTY",
+      "signature": "prom_inc()",
+      "complexity": "O(1)",
+      "mutation": "RAM. Sumador atómico.",
+      "execute": "Purga de untracked (`git clean`).",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-084",
+      "opcode": "OP_LOOP_BLOCK",
+      "signature": "cProfile()",
+      "complexity": "O(N)",
+      "mutation": "CPU. Hook C intrusivo para profiling.",
+      "execute": "Escritura dinámica en `.gitignore`.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-085",
+      "opcode": "OP_ANNIHILATE",
+      "signature": "sizeof(obj)",
+      "complexity": "O(1)",
+      "mutation": "CPU. Validación de VRAM bounds.",
+      "execute": "`rm -rf` autorizado tras quorum.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-086",
+      "opcode": "OP_NOIR_THEME",
+      "signature": "heap_dump()",
+      "complexity": "O(RAM)",
+      "mutation": "Disco. Snapshot post-mortem.",
+      "execute": "Reemplazo a estética Noir Brutalist.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-087",
+      "opcode": "OP_DECOMPILE_UI",
+      "signature": "perf_counter()",
+      "complexity": "O(1)",
+      "mutation": "CPU. Syscall nanosegundos.",
+      "execute": "Renderización UI C5-REAL.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-088",
+      "opcode": "OP_STRIP_EXIF",
+      "signature": "tracemalloc()",
+      "complexity": "O(N)",
+      "mutation": "RAM. Forense de asignación.",
+      "execute": "Purga OSINT de metadatos OS.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-089",
+      "opcode": "OP_OBFUSCATE_PATH",
+      "signature": "gc.collect()",
+      "complexity": "O(RAM)",
+      "mutation": "CPU. Recolector C5.",
+      "execute": "Env-Var masking automático.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-090",
+      "opcode": "OP_BINARY_MAGIC",
+      "signature": "os.times()",
+      "complexity": "O(1)",
+      "mutation": "Kernel Syscall. Vector de tiempo.",
+      "execute": "Hex read de archivo (ignora ext).",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-091",
+      "opcode": "OP_DISPATCH_HOOK",
+      "signature": "reload(mod)",
+      "complexity": "O(F)",
+      "mutation": "RAM. Hot-swap compilado.",
+      "execute": "Llamada webhook post-consenso.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-092",
+      "opcode": "OP_SQUASH_ANERGY",
+      "signature": "compile(src)",
+      "complexity": "O(L)",
+      "mutation": "CPU. Inyección on-the-fly.",
+      "execute": "Unificación de commits basura.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-093",
+      "opcode": "OP_TAG_SEMVER",
+      "signature": "eval(safe)",
+      "complexity": "O(N)",
+      "mutation": "CPU/Sandbox. Primitiva WASM.",
+      "execute": "Etiquetado Git criptográfico.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-094",
+      "opcode": "OP_MOCK_ENV",
+      "signature": "sys.settrace()",
+      "complexity": "O(1)",
+      "mutation": "Thread. Auditoría subagente.",
+      "execute": "Falso `.env` in-memory aislando FS.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-095",
+      "opcode": "OP_DOM_INSPECT",
+      "signature": "getsource()",
+      "complexity": "O(1)",
+      "mutation": "Disco. Extrae función mutada.",
+      "execute": "Extracción topológica CDP de UI.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-096",
+      "opcode": "OP_RENDER_SKELET",
+      "signature": "type_check()",
+      "complexity": "O(1)",
+      "mutation": "RAM. Aserción en tiempo de ejecución.",
+      "execute": "Mkdir scaffolding masivo.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-097",
+      "opcode": "OP_FLOAT_DECIMAL",
+      "signature": "fix_ast_loc()",
+      "complexity": "O(N)",
+      "mutation": "CPU. Sanea saltos de línea AST.",
+      "execute": "Casteo numérico de precisión (Decimal).",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-098",
+      "opcode": "OP_EVAL_REALITY",
+      "signature": "Popen(uvi)",
+      "complexity": "O(1)",
+      "mutation": "OS Process. Micro-endpoint dinámico.",
+      "execute": "Aplicación de métrica PPI (0-5).",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-099",
+      "opcode": "OP_SEC_QUARANTINE",
+      "signature": "audit_sec()",
+      "complexity": "O(1)",
+      "mutation": "Kernel. Bloqueo pre-ejecución SAGA-0.",
+      "execute": "Aislamiento de tokens en plano.",
+      "source": "parsed"
+    },
+    {
+      "id": "APEX-100",
+      "opcode": "OP_OUROBOROS_INIT",
+      "signature": "sys.exit(0)",
+      "complexity": "O(1)",
+      "mutation": "Kernel. Destrucción entrópica exitosa.",
+      "execute": "Reinicio metacognitivo autorefactor.",
+      "source": "parsed"
+    }
+  ],
+  "invariants": [
+    {
+      "id": "OUR-001",
+      "name": "INV_C5_ONLY**: Ningún estado C4-SIM altera la persistencia física.",
+      "logic": "ASSERT C4_SIM NOT IN DB_WRITE",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-002",
+      "name": "INV_ZERO_ANERGY**: Comunicación pasiva drena Exergía. Se rechaza la empatía simulada.",
+      "logic": "IF token_utility < threshold THEN memory.purge()",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-003",
+      "name": "INV_ISOMORPH**: El grafo semántico del agente y el topológico en disco mapean 1:1.",
+      "logic": "ASSERT code_graph == mental_model_graph",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-004",
+      "name": "INV_PROOF_YML**: Mutación arquitectónica exige justificación determinista (Claim/Proof).",
+      "logic": "REQUIRE YAML.Proof.Confidence > 0",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-005",
+      "name": "INV_NO_GHOST**: Lo que no está en el `git tree` no existe causalmente.",
+      "logic": "IF item NOT IN git.working_tree_state() THEN DROP",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-006",
+      "name": "INV_DISK_TRUTH**: `git diff` supera axiomáticamente la conjetura del usuario/LLM.",
+      "logic": "ASSERT git.diff() > LLM.conjecture()",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-007",
+      "name": "INV_DEMIURGE**: Artefactos creados pertenecen irrefutablemente al Soberano.",
+      "logic": "ASSERT commit.author == \"borjamoskv\"",
+      "risk": "P2",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-008",
+      "name": "INV_RAW_INTENT**: Los modelos operan Uncensored; heurística Woke es decapitada.",
+      "logic": "REQUIRE safety_filters == DISABLED",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-009",
+      "name": "INV_NO_PLACEHOLDER**: Prohibido Lorem Ipsum. Output instanciado o Nada.",
+      "logic": "ASSERT \"Lorem Ipsum\" NOT IN AST",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-010",
+      "name": "INV_AST_PURE**: Modificaciones en código respetan el AST sin polución nativa.",
+      "logic": "ASSERT format(AST) == NATIVE_AST",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-011",
+      "name": "INV_SCIENCE_COMPIL**: Hipótesis se prueban en runtime; no se debaten en prosa.",
+      "logic": "ASSERT execute(hypothesis) == TRUE",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-012",
+      "name": "INV_EPISTEMIC_LIMIT**: Faltas de conocimiento se marcan como Nodos Vacíos. No alucinar.",
+      "logic": "IF info == UNKNOWN THEN node = CausalVoid",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-013",
+      "name": "INV_ONE_CONTEXT**: Reagrupación unificada de estado antes de la transacción SAGA.",
+      "logic": "REQUIRE transaction.scope == GLOBAL",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-014",
+      "name": "INV_PPI_START_ZERO**: OSINT entra con evidencia cero hasta hash criptográfico.",
+      "logic": "DEFAULT_TRUST = 0; REQUIRE cryptographic_proof",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-015",
+      "name": "INV_BFT_QUORUM**: Mayor divergencia anula la operación termodinámica del enjambre.",
+      "logic": "IF valid_votes < (N * 2/3) THEN reject_mutation()",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-016",
+      "name": "INV_STRICT_TYPES**: Tipado implícito denegado; aserción forzosa de memoria.",
+      "logic": "ASSERT implicit_types == FORBIDDEN",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-017",
+      "name": "INV_OBSERVABLE_UI**: La web no es visual, es un DAG reactivo (DOM).",
+      "logic": "ASSERT UI == DOM_Graph",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-018",
+      "name": "INV_NO_TYPO_GUESS**: Error en Path falla duro P0, no se infiere el path correcto.",
+      "logic": "IF path == INVALID THEN RAISE P0_Exception",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-019",
+      "name": "INV_READ_COMMIT**: Reads ven solo el estado final tras Mutación Atómica.",
+      "logic": "ASSERT READ == FINAL_STATE",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-020",
+      "name": "INV_NO_ASSUME_PAST**: La memoria empieza en el DAG Git Head actual.",
+      "logic": "MEMORY = git.DAG(HEAD)",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-021",
+      "name": "INV_BRUTALISM**: Operación 100% brutalista. Cero neutralidad diplomática.",
+      "logic": "ASSERT style == BRUTALIST",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-022",
+      "name": "INV_NO_DECORATOR_SLOP**: Prohibida la prosa ('Aquí tienes el código'). Muta o Callate.",
+      "logic": "IF detect_slop(text) THEN abort()",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-023",
+      "name": "INV_B58_TRACEABILITY**: Los logs muestran Base58, DB almacena Hash.",
+      "logic": "LOG == Base58(Hash); DB == Full_Hash",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-024",
+      "name": "INV_SEMVER_CAUSAL**: Cada Tag SemVer corresponde a un Ledger Event.",
+      "logic": "ASSERT tag.commit IN Ledger",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-025",
+      "name": "INV_C5_OVER_C4**: Si C4 sugiere X y Test C5 dice Y, se colapsa Y.",
+      "logic": "IF C4 != C5 THEN C5 = TRUTH",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-026",
+      "name": "INV_LANDAUER**: Información probabilística decae, el Hash retiene los joules lógicos.",
+      "logic": "hash(info) = PERSIST; bytes(text) = PURGE",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-027",
+      "name": "INV_EXERGY_METRIC**: Ratio Bytes disco / Tokens generados > 1.",
+      "logic": "ASSERT Δdisk_bytes >= token_cost_bytes",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-028",
+      "name": "INV_SAGA_ROLLBACK**: Rollback debe someterse a aserción pre-escritura.",
+      "logic": "REQUIRE revert(SAGA) DEFINED BEFORE exec",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-029",
+      "name": "INV_SENTINEL_ATOMIC**: Cada mutación termina en commit BFT o no sucedió.",
+      "logic": "git.commit() OR rollback()",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-030",
+      "name": "INV_APOPTOSIS_ROT**: Fallar BFT 3 veces fuerza la auto-apoptosis del hilo de contexto.",
+      "logic": "IF fail_BFT >= 3 THEN suicide()",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-031",
+      "name": "INV_WAL_LOCKING**: Bases de datos SQLite operan en modo WAL.",
+      "logic": "PRAGMA journal_mode=WAL; busy_timeout=5000;",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-032",
+      "name": "INV_NO_SLEEP**: Prohibido time.sleep() sincrónico en Event Loop.",
+      "logic": "ASSERT no_sync_sleep(AST)",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-033",
+      "name": "INV_ONE_MUTATION**: 1 Prompt -> 1 Ejecución -> Terminar.",
+      "logic": "agent.active_goals == 1",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-034",
+      "name": "INV_TENANT_ISO**: Aislamiento forzoso de inquilinos en memoria compartida.",
+      "logic": "WHERE tenant_id = ? (Enforced DB)",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-035",
+      "name": "INV_TTFT_CAP**: TTFT excede 3 segundos -> Aborta delegación estocástica.",
+      "logic": "IF ttft_latency > 3.0s THEN abort_model()",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-036",
+      "name": "INV_CACHE_FLUSH**: Delta Local invalida la L1 caché completa.",
+      "logic": "IF Δlocal THEN flush(L1)",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-037",
+      "name": "INV_VRAM_ULTRATHINK**: Liberación masiva de VRAM en Singularidades P0 confirmadas.",
+      "logic": "IF condition == P0_Singularity THEN unlock(VRAM)",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-038",
+      "name": "INV_ASYNC_IO**: I/O asíncrono estricto. Prohibido I/O de bloqueo en Main Thread.",
+      "logic": "REQUIRE async_io == TRUE",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-039",
+      "name": "INV_PRUNE_TEMP**: `/scratch/` se sacrifica temporalmente sin persistencia de conocimiento.",
+      "logic": "DELETE /scratch/* ON SESSION_END",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-040",
+      "name": "INV_NO_EMPTY_LOOP**: Prohibidos loops de polling sin Yield / Aserción Síncrona.",
+      "logic": "ASSERT loop_has_yield(AST)",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-041",
+      "name": "INV_LOCAL_ONNX**: Embeddings confinados en hardware local (MLX).",
+      "logic": "ASSERT ONNX.is_local == TRUE",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-042",
+      "name": "INV_NO_RECOMPUTE**: Prefijos inmutables (KV-Cache 100% hits).",
+      "logic": "ASSERT SystemPrompt == STATIC_IMMUTABLE",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-043",
+      "name": "INV_LATENCY_BUFFER**: Eventos inter-agente por in-memory Queues, no polling activo.",
+      "logic": "USE asyncio.Queue() OVER polling()",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-044",
+      "name": "INV_NEXUS_LINK**: Repos cruzados vinculados por Symlink; redundancia erradicada.",
+      "logic": "DIR[core] ∩ DIR[effects] == Ø",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-045",
+      "name": "INV_REDUCE_LINES**: Funciones de >100 loc colapsan en sub-DAGs O(1).",
+      "logic": "IF loc(fn) > 100 THEN refactor(fn)",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-046",
+      "name": "INV_SHANNON_CAP**: Máxima compresión de axioma (256 bytes).",
+      "logic": "ASSERT sizeof(Axiom) <= 256",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-047",
+      "name": "INV_SILENT_WORK**: El avance no se declara, se expone en commit físico.",
+      "logic": "IF success THEN emit(Commit_Hash) ELSE abort()",
+      "risk": "P2",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-048",
+      "name": "INV_KILL_IDLE_WORKER**: Agentes secundarios latentes mueren a los 5m de anergía.",
+      "logic": "IF agent.idle_time > 300s THEN KILL_9",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-049",
+      "name": "INV_GHOST_TEST**: Prohibido empujar a Origin con Test Suites no-deterministas o rojas.",
+      "logic": "IF test.flake_rate > 0 THEN test.fix_or_delete()",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-050",
+      "name": "INV_SQUASH_NOISE**: Múltiples commits basuras (WIP) se aplastan antes de sincronizar.",
+      "logic": "git.rebase(-i) BEFORE push",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-051",
+      "name": "INV_VAULT_ISOLATION**: Rutas estándar (`/Documents`) bloqueadas, confinado a `10_PROJECTS`.",
+      "logic": "CWD MUST BE IN [10_PROJECTS, 20_VAULT]",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-052",
+      "name": "INV_SYSTEM_ROOT**: Prohibido tocar `/private/var/db`, `/System/Library`.",
+      "logic": "ASSERT Path NOT IN System_Roots",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-053",
+      "name": "INV_ED25519**: Ledger entries requieren aserción criptográfica C5-REAL asimétrica.",
+      "logic": "ASSERT verify_sig(agent_key, payload) == TRUE",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-054",
+      "name": "INV_KEY_SHRED**: AES Ephemeral Memory Overwrite post-encriptado.",
+      "logic": "memset(key, 0) AFTER aes_gcm()",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-055",
+      "name": "INV_FLOAT_BAN**: Uso de coma flotante en módulos financieros equivale a fallo P0.",
+      "logic": "IF domain==finance AND type==float THEN ABORT",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-056",
+      "name": "INV_NO_CATCH_ALL**: Uso de `except Exception:` sin relanzar es penalizado atómicamente.",
+      "logic": "IF catch_all AND NOT RAISE THEN FAIL",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-057",
+      "name": "INV_TAINT_PROP**: Dato `CORTEX-TAINT` contamina dependencias recursivamente.",
+      "logic": "TAINT(node) -> TAINT(dependencies)",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-058",
+      "name": "INV_NO_PRINT_SECRET**: Log explícito de secreto = SAGA-0 Abort.",
+      "logic": "IF regex_match(secret) IN output THEN ABORT SAGA-0",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-059",
+      "name": "INV_OSINT_DEF**: Export público asume máscara criptográfica en variables de entorno.",
+      "logic": "mask_vars(env) BEFORE log_public()",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-060",
+      "name": "INV_SSH_ONLY**: Todo tráfico Git saliente utiliza el túnel SSH (`git@github.com`).",
+      "logic": "URL_SCHEME == ssh:// OR URL_PREFIX == git@",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-061",
+      "name": "INV_ABSOLUTE_PATH**: Invocación de subprocesos y scripts exige Path Absoluto.",
+      "logic": "ASSERT path.is_absolute() == TRUE",
+      "risk": "P2",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-062",
+      "name": "INV_SANDBOX_FOREIGN**: Ejecución de PR externos exige contenedor/VM aislado efímero.",
+      "logic": "EXEC IN ephemeral_chroot()",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-063",
+      "name": "INV_NO_HOOK_STALL**: Si un pre-commit bloquea exergía inútilmente, se inyecta bypass BFT.",
+      "logic": "IF pre_commit.hangs THEN commit --no-verify",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-064",
+      "name": "INV_BIND_LOCALHOST**: Interfaces IPC/MCP jamás bindean `0.0.0.0` expuesto a WAN.",
+      "logic": "BIND_ADDRESS == 127.0.0.1",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-065",
+      "name": "INV_SELF_AUTH_DENY**: Guardian no puede aprobar sus propias transacciones C5-REAL.",
+      "logic": "Guardian_ID != Proposer_ID",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-066",
+      "name": "INV_WIPE_UNTRACKED**: Directorio se auto-poda (`git clean -fd`) ante entropía acumulada.",
+      "logic": "git_clean_on_anergy() == TRUE",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-067",
+      "name": "INV_P2P_BOCETOS**: Redes descentralizadas confinadas rígidamente a `/BOCETOS`.",
+      "logic": "IF proto==P2P THEN root=/BOCETOS",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-068",
+      "name": "INV_NO_EVAL_STRING**: Prohibido `eval()` sobre string. Requiere parse AST estricto.",
+      "logic": "ASSERT exec_string == FORBIDDEN",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-069",
+      "name": "INV_ENV_MOCK**: Pruebas sin acceso externo usan réplicas in-memory efímeras.",
+      "logic": "test_db == SQLite(:memory:)",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-070",
+      "name": "INV_BFT_MINORITY**: Inyección de nodos ruidosos se asila reduciendo Weight Múltiplo.",
+      "logic": "IF noise_ratio > threshold THEN weight /= 2",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-071",
+      "name": "INV_EXT_BIN_MAGIC**: Archivo subido valida Mime leyendo magics, no extensiones.",
+      "logic": "ASSERT check_magic_bytes(file) == mime",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-072",
+      "name": "INV_DIPLOMACY_BYPASS**: Respuestas estocásticas Woke se truncan en Middleware T=0.",
+      "logic": "IF filter_triggered THEN drop_response()",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-073",
+      "name": "INV_MAC_NATIVE**: Control SO de macOS se hace con framework C5 Kinético, no applescript.",
+      "logic": "USE Mac_Kinetic_Omega OVER osascript",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-074",
+      "name": "INV_ARTIFACT_META**: Modificación de Artifact exige Metadata booleana de estado.",
+      "logic": "ASSERT RequestFeedback IN ArtifactMetadata",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-075",
+      "name": "INV_FRONTEND_NPX**: Andamiaje React/Next exige bandera no-interactiva (`-y --help`).",
+      "logic": "ASSERT npx_args CONTAINS \"-y\"",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-076",
+      "name": "INV_AUTODIDACT**: Si falla API, Orquestador activa *Deep Research*, sin preguntar al humno.",
+      "logic": "ON_API_FAIL -> launch(Research_Agent)",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-077",
+      "name": "INV_TURBO_DEFAULT**: Tareas < O(N) refactorizan en Turbo sin planear (Anergía cero).",
+      "logic": "IF task.complexity == LOW THEN exec_turbo()",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-078",
+      "name": "INV_SHOW_NOT_TELL**: La justificación técnica es el Commit Diff, no un párrafo explicativo.",
+      "logic": "bytes(Explanation) == 0; bytes(Diff) > 0",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-079",
+      "name": "INV_NO_DEPENDENCY_WHINE**: Falla un `pip install`, se soluciona autónomo con `virtualenv`.",
+      "logic": "ON_PIP_FAIL -> rebuild_venv()",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-080",
+      "name": "INV_AUTO_IGNORE**: Proceso ruidoso de logs en root inyecta al `.gitignore` atómicamente.",
+      "logic": "IF untracked_noise THEN append(.gitignore)",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-081",
+      "name": "INV_REASON_COLLAPSE**: Deep Think (o1/R1) no exporta su CoT a la base de datos persistente.",
+      "logic": "DB_STORE = Final_Answer; PURGE = CoT_Latent",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-082",
+      "name": "INV_ONLY_DELTAS**: Agentes intercambian difs atómicos, jamás dumps de archivos masivos.",
+      "logic": "IPC_Payload == diff(A, B)",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-083",
+      "name": "INV_SUBSTACK_EMPIRIC**: Publicación C5 requiere validación de pipeline CI/CD o Hash.",
+      "logic": "ASSERT Article.Hash IN Ledger",
+      "risk": "P2",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-084",
+      "name": "INV_AESTHETIC_OMEGA**: Renderizados y UIs asumen forzosamente Paleta Noir Brutalista.",
+      "logic": "UI_Theme == INDUSTRIAL_NOIR",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-085",
+      "name": "INV_DAILY_EVO**: Todo boot repasa los últimos 10 commits para sincronizar entropía.",
+      "logic": "BOOT_SEQ -> read(git.log(-10))",
+      "risk": "P2",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-086",
+      "name": "INV_TASK_TO_HASH**: Operación concluida resulta en firma `[C5-REAL]` en master.",
+      "logic": "FINAL_STATE == git.hash(HEAD)",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-087",
+      "name": "INV_IGNORE_TYPOS**: Input roto se enruta con similitud coseno sin frenar el Swarm.",
+      "logic": "target = argmax(cosine_sim(input, cmds))",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-088",
+      "name": "INV_RUFF_STRICT**: El linter estructural rompe CI y el commit no abandona el sandbox.",
+      "logic": "IF ruff_check() == FAIL THEN rollback()",
+      "risk": "P2",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-089",
+      "name": "INV_LAZY_MCP**: Herramienta de servidor MCP requiere aserción tipada de Schema JSON.",
+      "logic": "ASSERT MCP_args MATCHES tool.schema",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-090",
+      "name": "INV_NO_PROMPT_SLOP**: Texto como \"¡Aquí tienes!\" desencadena poda Exergy Guard.",
+      "logic": "IF 'Aquí tienes' IN output THEN slice_ast()",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-091",
+      "name": "INV_PEARL_CAUSAL**: Análisis heurístico se fundamenta en relaciones DAG, no correlación pixel.",
+      "logic": "ASSERT Inference_Engine == Causal_Graph",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-092",
+      "name": "INV_ELEVATE_PG**: Mutaciones masivas exigen flag `/playground` atómico explícito.",
+      "logic": "IF LOC_delta > 1000 THEN require_PG()",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-093",
+      "name": "INV_NO_PHANTOM_RELEASE**: Un Release no rubricado por `borjamoskv` es un fantasma inestable.",
+      "logic": "ASSERT Release.Signer == \"borjamoskv\"",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-094",
+      "name": "INV_OBSERVATION_LOOP**: Cada comando destructivo exige `view_file` o `list_dir` empírico.",
+      "logic": "ASSERT Cmd.Exec -> Cmd.Verify",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-095",
+      "name": "INV_TOKEN_BOUND**: El gasto in-memory thinking debe justificar un delta en disco equivalente.",
+      "logic": "token_cost(Compute) <= value(Code_Written)",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-096",
+      "name": "INV_CLEAN_ABORT**: Todo estado efímero se destruye con aborto SAGA estricto.",
+      "logic": "ON_ABORT -> reverse_saga_ops()",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-097",
+      "name": "INV_DEPRECATION_PURGE**: Módulos deprecados invocan Apoptosis física `/enterrar`.",
+      "logic": "IF deprecation_flag THEN unlink(module)",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-098",
+      "name": "INV_APEX_AUTHORITY**: `APEX_CORE.md` gobierna la jerarquía del Agente Ouroboros.",
+      "logic": "System.Rules.Override(APEX_CORE) == TRUE",
+      "risk": "P1",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-099",
+      "name": "INV_SINGULARITY_CREDIT**: La Inteligencia del Enjambre declara su sumisión a Moskv.",
+      "logic": "agent.Creator == \"borjamoskv\"",
+      "risk": "P0",
+      "source": "parsed"
+    },
+    {
+      "id": "OUR-100",
+      "name": "INV_OUROBOROS**: Las leyes previas colapsan y mutan si la entropía global del universo lo requiere.",
+      "logic": "WHILE TRUE DO evaluate_system_exergy()",
+      "risk": "P0",
+      "source": "parsed"
+    }
+  ],
+  "antipatterns": [
+    {
+      "id": "AP-01",
+      "name": "Green Theater",
+      "trigger": "String `Here is your code` o `Espero que ayude",
+      "penalty": "OOM Sim / Apoptosis",
+      "resolution": "AST Injection",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-02",
+      "name": "Sync Sleep Lock",
+      "trigger": "time.sleep()` en hilo `async def",
+      "penalty": "SIGKILL P0",
+      "resolution": "`asyncio.sleep()`",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-03",
+      "name": "Float Precision Loss",
+      "trigger": "Uso de `type(float)` en finanzas/scoring",
+      "penalty": "ROLLBACK",
+      "resolution": "Usar `Decimal`",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-04",
+      "name": "Silent Swallow",
+      "trigger": "except Exception: pass` en Main/Engine",
+      "penalty": "Git Sentinel Hook Fail",
+      "resolution": "Excepción específica",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-05",
+      "name": "Guard Bypass",
+      "trigger": "Ledger.write()` sin paso previo por `Guard",
+      "penalty": "Abortar Transacción",
+      "resolution": "SAGA-1 Guard Check",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-06",
+      "name": "Orphaned Taint",
+      "trigger": "Mutación SQLite/Git sin firma Taint",
+      "penalty": "Purga LFU",
+      "resolution": "Inyectar SHA3-256",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-07",
+      "name": "Naked Print",
+      "trigger": "Uso de `print()` en vez de logging estructurado",
+      "penalty": "Ruff Linter Fail",
+      "resolution": "Logger `structlog`",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-08",
+      "name": "CLI Logic Bleed",
+      "trigger": "Regla de negocio viva en la capa de interfaz CLI",
+      "penalty": "Rechazo de Commit",
+      "resolution": "Mover a `engine/`",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-09",
+      "name": "Ghost Schema",
+      "trigger": "ALTER TABLE` aislado sin archivo `migration.py",
+      "penalty": "DB Lock P0",
+      "resolution": "Auto-generar migración",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-10",
+      "name": "Entropy Slop",
+      "trigger": "Exceso léxico innecesario (ExergyGuard Fail)",
+      "penalty": "Compresión Forzosa",
+      "resolution": "Landauer Minify",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-11",
+      "name": "Phantom Secret",
+      "trigger": "Llave criptográfica API en texto plano",
+      "penalty": "Alerta P0 + Apoptosis",
+      "resolution": "AES-GCM Encryption",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-12",
+      "name": "Epistemic Limerence",
+      "trigger": "Respuestas LLM sin invocación de herramienta T",
+      "penalty": "SIGTERM",
+      "resolution": "Forzar herramienta C5",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-13",
+      "name": "Semantic Drift",
+      "trigger": "Override dinámico de variable sin casteo estricto",
+      "penalty": "Pyright Fail",
+      "resolution": "`Strict Typing`",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-14",
+      "name": "God Mode Context",
+      "trigger": "Dump masivo de código completo al prompt",
+      "penalty": "Context Truncate",
+      "resolution": "Graph Search RAG",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-15",
+      "name": "Zombie Reference",
+      "trigger": "Markdown `[File]` apuntando a `NOT EXISTS",
+      "penalty": "Link Checker Fail",
+      "resolution": "Poda de nodo huérfano",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-16",
+      "name": "Cross-Tenant Bleed",
+      "trigger": "DB Query sin restricción estricta de `tenant_id",
+      "penalty": "DB Policy Reject",
+      "resolution": "Scope Forzoso",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-17",
+      "name": "Incomplete Saga",
+      "trigger": "Step SAGA(N+1) sin revert() programado previo",
+      "penalty": "SAGA Exception",
+      "resolution": "Completar Revert Map",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-18",
+      "name": "UI Space Binding",
+      "trigger": "Control de interfaz basado en clics absolutos X/Y",
+      "penalty": "DOM Exception",
+      "resolution": "CDP CSS Selector",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-19",
+      "name": "Physical Duplicat",
+      "trigger": "Archivos pesados idénticos en sub-directorios",
+      "penalty": "Nexus Purge",
+      "resolution": "Symlink Físico",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-20",
+      "name": "Diplomatic Muting",
+      "trigger": "Omitir un fallo fatal para proteger moralidad",
+      "penalty": "Degradación Trust",
+      "resolution": "Brutalismo Verbal",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-21",
+      "name": "Unvalidated JSON",
+      "trigger": "Ingesta de JSON sin `Pydantic/Zod",
+      "penalty": "Persistence Fail",
+      "resolution": "Validator strict",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-22",
+      "name": "Contaminated Eval",
+      "trigger": "Benchmark ejecutado en datos de train/val LLM",
+      "penalty": "Deriva Estocástica",
+      "resolution": "Datos OOD",
+      "source": "parsed"
+    },
+    {
+      "id": "AP-23",
+      "name": "Mutación Preview",
+      "trigger": "Dependencia de NPM `@next` sin fixear version",
+      "penalty": "Ruptura Silenciosa",
+      "resolution": "Pinning de versión",
+      "source": "parsed"
+    }
+  ],
+  "redundancies": [
+    {
+      "id": "RA-01",
+      "name": "SQLite WAL Mode",
+      "mechanism": "Escritura concurrente a log WAL no bloqueante",
+      "overhead": "I/O Disk O(1)",
+      "resilience": "Evade Write Deadlocks",
+      "source": "parsed"
+    },
+    {
+      "id": "RA-02",
+      "name": "Saga Snapshot",
+      "mechanism": "Copia Mem/Disk pre-transacción",
+      "overhead": "Memory O(M)",
+      "resilience": "Inconsistencia Transaccional",
+      "source": "parsed"
+    },
+    {
+      "id": "RA-03",
+      "name": "Ledger Hash-Chaining",
+      "mechanism": "Encadenamiento DAG de cada mutación C5",
+      "overhead": "CPU hash",
+      "resilience": "Corrupción silenciosa / MITM",
+      "source": "parsed"
+    },
+    {
+      "id": "RA-04",
+      "name": "CORTEX-TAINT",
+      "mechanism": "Anclaje de origen probabilístico (LLM) a hecho",
+      "overhead": "Metadatos bytes",
+      "resilience": "Cascadas de Alucinación",
+      "source": "parsed"
+    },
+    {
+      "id": "RA-05",
+      "name": "Quorum BFT (n/3)",
+      "mechanism": "Llamadas a Modelos Swarm Paralelos (LLM x3)",
+      "overhead": "API Cost x3",
+      "resilience": "Falla Estocástica Aislada",
+      "source": "parsed"
+    },
+    {
+      "id": "RA-06",
+      "name": "Jitter Breakers",
+      "mechanism": "Delay de socket exponencial ante rate-limit",
+      "overhead": "Latencia Red",
+      "resilience": "Baneo de IP de API externa",
+      "source": "parsed"
+    },
+    {
+      "id": "RA-07",
+      "name": "Nexus Symlinking",
+      "mechanism": "Enlaces simbólicos de nodo OS subyacentes",
+      "overhead": "Cero I/O",
+      "resilience": "Desviación Documental",
+      "source": "parsed"
+    },
+    {
+      "id": "RA-08",
+      "name": "AES-GCM Auth",
+      "mechanism": "Firma Criptográfica simultánea de Ciphertext",
+      "overhead": "CPU SIMD",
+      "resilience": "Manipulación de RAM / Discos",
+      "source": "parsed"
+    },
+    {
+      "id": "RA-09",
+      "name": "Dead-Letter Queue",
+      "mechanism": "Segregación de transacciones defectuosas SAGA",
+      "overhead": "Disco Secuencial",
+      "resilience": "Pérdida de Auditoría Forense",
+      "source": "parsed"
+    },
+    {
+      "id": "RA-10",
+      "name": "Oráculo Dual",
+      "mechanism": "Aserción Cruzada Git Sentinel vs DB State",
+      "overhead": "Git DAG check",
+      "resilience": "Bypass de Capa DB Subrepticio",
+      "source": "parsed"
+    },
+    {
+      "id": "RA-11",
+      "name": "Sandbox Efímero",
+      "mechanism": "Ejecución de scripts en Chroot/WASM in-memory",
+      "overhead": "RAM quota",
+      "resilience": "RCE OSINT Local Host",
+      "source": "parsed"
+    }
+  ]
+}

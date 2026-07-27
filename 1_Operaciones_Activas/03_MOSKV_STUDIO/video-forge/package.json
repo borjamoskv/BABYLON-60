@@ -1,0 +1,15 @@
+{
+  "name": "moskv-video-forge",
+  "version": "1.0.0",
+  "description": "Autonomous video generation pipeline — Industrial Noir 2026",
+  "type": "module",
+  "scripts": {
+    "generate": "node pipeline.js",
+    "generate:test": "node pipeline.js --preset test",
+    "generate:reel": "node pipeline.js --preset reel",
+    "generate:loop": "node pipeline.js --preset loop",
+    "generate:widescreen": "node pipeline.js --preset widescreen"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

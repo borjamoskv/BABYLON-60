@@ -1,0 +1,55 @@
+[package]
+name = "base-consensus-peers"
+version.workspace = true
+description = "Network peers library for Base"
+
+edition.workspace = true
+license.workspace = true
+homepage.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# consensus
+base-common-chains.workspace = true
+
+# Alloy
+alloy-rlp = { workspace = true, features = ["std"] }
+alloy-primitives = { workspace = true, features = ["k256", "getrandom"] }
+
+# Networking
+discv5 = { workspace = true, features = ["libp2p"] }
+libp2p-identity = { workspace = true, features = ["secp256k1"] }
+libp2p = { workspace = true, features = ["macros", "tokio", "tcp", "noise", "gossipsub", "ping", "yamux", "identify"] }
+
+# Cryptography
+secp256k1.workspace = true
+
+# Misc
+url.workspace = true
+dirs.workspace = true
+serde = { workspace = true, features = ["std"] }
+tracing = { workspace = true, features = ["std"] }
+thiserror = { workspace = true, features = ["std"] }
+serde_json = { workspace = true, features = ["std"] }
+unsigned-varint = { workspace = true, features = ["std"] }
+derive_more = { workspace = true, features = ["display", "deref", "debug"] }
+
+# `arbitrary` feature dependencies
+arbitrary = { workspace = true, features = ["derive"], optional = true }
+
+[dev-dependencies]
+rstest.workspace = true
+arbtest.workspace = true
+tempfile.workspace = true
+multihash.workspace = true
+
+arbitrary = { workspace = true, features = ["derive"] }
+alloy-primitives = { workspace = true, features = ["arbitrary"] }
+
+[features]
+default = []
+arbitrary = [ "alloy-primitives/arbitrary", "dep:arbitrary" ]

@@ -1,0 +1,18 @@
+{
+  "vector_id": "TV-SER-010-canonical-map-ordering",
+  "description": "Assert identical hash for Maps with identical content but varying input key order (tests Canonical Byte Ordering).",
+  "category": "TV-SER",
+  "initial_state": {},
+  "input_proposal": [
+    {
+      "type": "Assertion",
+      "data": { "z_key": "value_1", "a_key": "value_2" }
+    },
+    {
+      "type": "Assertion",
+      "data": { "a_key": "value_2", "z_key": "value_1" }
+    }
+  ],
+  "expected_behavior": "SUCCESS",
+  "expected_hash": "c04bebd2d615bafcf79a7a36f5683879e400a9cb0ff48a7ba5ea05e57c51a6e3"
+}

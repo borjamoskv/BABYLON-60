@@ -1,0 +1,15 @@
+{
+  "feedback_id": "a8abb211c2854277b3bb6ec802a53f4a",
+  "timestamp": "2026-06-29T21:17:37.045717+00:00",
+  "job_id": "96fbe512-7647-4d2d-b6b2-1f1c1518b1eb",
+  "action": "stable",
+  "estimated_metrics": {
+    "originality_ratio": 0.5,
+    "distribution_yield": 0.0,
+    "entropy": 0.5,
+    "coherence": 0.5,
+    "fatigue": 0.0
+  },
+  "artifact_status": "assembled",
+  "rejection_reason": null
+}

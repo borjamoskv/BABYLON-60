@@ -1,0 +1,67 @@
+---
+import '../styles/global.css';
+
+// Server-side fetching (Cloudflare Pages environment)
+// In development, this attempts to hit the local C5-REAL backend.
+// Enforcing deterministic fetch (C5-REAL)
+let facts = [];
+try {
+  // Using an absolute URL to avoid fetch issues on the server
+  const response = await fetch('http://127.0.0.1:8000/api/v1/sanhedrin/judge', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ data: { test: "init" }, taint: "taint:system:boot" })
+  }).catch(() => null);
+
+  if (response && response.ok) {
+    const data = await response.json();
+    facts = data.results || [];
+  }
+} catch (e) {
+  // Silent fail - C5-REAL
+}
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>BABYLON-60 | C5-REAL Nexus</title>
+  </head>
+  <body>
+    <main style="max-width: 1200px; margin: 0 auto; padding: 4rem 2rem;">
+      <header style="margin-bottom: 4rem;">
+        <h1 class="cortex-title">BABYLON-60 <span class="cortex-accent-text">NEXUS</span></h1>
+        <p style="color: var(--cortex-muted); font-family: var(--font-mono);">
+          [STATUS: ONLINE] - TERMINAL ISOMÓRFICA (CLOUDFLARE EDGE)
+        </p>
+      </header>
+
+      <section class="cortex-panel" style="margin-bottom: 2rem;">
+        <h2 style="margin-top: 0;">Motor Sanedrín BFT</h2>
+        <p>El núcleo lógico local está acoplado. Las transacciones entrópicas están siendo purgadas.</p>
+
+        <div style="margin-top: 2rem;">
+          <h3 style="font-family: var(--font-mono); font-size: 1rem; color: var(--cortex-muted);">ÚLTIMOS HECHOS (C5-REAL)</h3>
+          {facts.length === 0 ? (
+            <p class="cortex-code" style="padding: 1rem; display: inline-block;">
+              Esperando ignición del backend local (Puerto 8000).
+            </p>
+          ) : (
+            <ul>
+              {facts.map((fact) => (
+                <li class="cortex-code" style="margin-bottom: 0.5rem;">{JSON.stringify(fact)}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </section>
+
+      <footer style="margin-top: 4rem; border-top: 1px solid var(--cortex-border); padding-top: 2rem; color: var(--cortex-muted); font-size: 0.8rem;">
+        <p>FORJADO POR MOSKV-1 APEX. CERO ANERGÍA.</p>
+      </footer>
+    </main>
+  </body>
+</html>

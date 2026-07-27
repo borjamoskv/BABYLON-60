@@ -1,0 +1,8 @@
+# CORTEX-Persist Immunity Protocol (L-EPI Guard)
+
+## Rule C5-REAL: Destruction of Epistemic Limerence
+
+1. **Inverted Falsification:** All code must compile against user reality, not the operator's ego. If iteration time exceeds the friction threshold without empirical validation, purge the component.
+2. **Emotional Overfitting (Zero Epicycles):** Do not inject uninvoked abstraction layers. High cyclomatic complexity with low empirical utilization is considered "narcissistic spaghetti code".
+3. **Exergy Blindness:** Forbidden to sacrifice traction for "being right". Every abstraction must have a verifiable energetic ROI. The Traction/Lines of Code ratio must not tend toward zero.
+4. **Kill Criteria:** If the Ouroboros Engine (or the linter) detects dead code, unimplemented interfaces, or speculative over-engineering, AMPUTATION IS AUTHORIZED. Delete the file/function without mercy.

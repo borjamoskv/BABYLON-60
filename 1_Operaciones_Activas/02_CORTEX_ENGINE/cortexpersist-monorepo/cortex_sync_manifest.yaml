@@ -1,0 +1,83 @@
+# [C5-REAL] CORTEX Sync Manifest v1.0.0
+# Core synchrony contract between borjamoskv-site (UI/E2E) and cortex-persist (runtimes)
+
+system_graph:
+  network_state: C5-REAL
+  timestamp: "2026-06-10T20:29:00Z"
+  operator: "borjamoskv"
+  aesthetic: "Industrial Noir 2026"
+
+repositories:
+  borjamoskv-site:
+    path: "/Users/borjafernandezangulo/10_PROJECTS/borjamoskv-site"
+    commit_sha: "c0457c81c6bed0ab29286aa620604e87c4b32e6b"
+    version: "0.0.1"
+    dependencies:
+      astro: "^6.4.2"
+      react: "^19.2.7"
+      tailwindcss: "^4.3.0"
+  cortex-persist:
+    path: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-persist"
+    commit_sha: "78fd85cc00e7f1efcad465d7e781ad38979669e0"
+    version: "1.0.0"
+    dependencies:
+      python: ">=3.10"
+      cryptography: ">=42.0.0"
+  agents-archi:
+    path: "/Users/borjafernandezangulo/10_PROJECTS/agents-archi"
+    commit_sha: "HEAD"
+    version: "0.0.0"
+    role: "Nexus Autoritativo (Graph_Docs)"
+  zkp-foundry-omega:
+    path: "/Users/borjafernandezangulo/10_PROJECTS/zkp-foundry-omega"
+    commit_sha: "HEAD"
+    version: "1.0.0"
+    role: "Compilador Asimétrico Zero-Knowledge (C5-REAL)"
+    dependencies:
+      rust: "nightly"
+      circom: ">=2.1.6"
+
+contracts:
+  glossary:
+    ledger_path: "CORTEX_LEDGER_GLOSARIO.md"
+    linter_path: "substack_archive/verify_glosario.py"
+    expected_terms: 121
+    entropy_min_bits_per_byte: 3.5
+
+  database_schema:
+    schema_version: "5.4.3"
+    schema_module: "cortex.database.schema"
+    expected_tables:
+      - "facts"
+      - "fact_tags"
+      - "sessions"
+      - "transactions"
+      - "heartbeats"
+      - "time_entries"
+      - "cortex_meta"
+      - "ghosts"
+      - "compaction_log"
+      - "threat_intel"
+      - "tenants"
+      - "ledger_replay_admissions"
+      - "agents"
+      - "consensus_votes_v2"
+      - "trust_edges"
+      - "consensus_outcomes"
+      - "entities"
+      - "entity_relations"
+      - "context_snapshots"
+      - "episodes"
+      - "evolution_state"
+      - "signals"
+      - "entity_events"
+      - "execution_trace_ledger"
+      - "lock_intents"
+      - "lock_state"
+      - "llm_telemetry"
+      - "enrichment_jobs"
+      - "merkle_roots"
+      - "integrity_checks"
+      - "audit_exports"
+      - "procedural_engrams"
+      - "causal_edges"

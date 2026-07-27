@@ -1,0 +1,50 @@
+[workspace]
+resolver = "2"
+members = [
+    "contracts/kinetic-router",
+    "contracts/a-token",
+    "contracts/debt-token",
+    "contracts/price-oracle",
+    "contracts/pool-configurator",
+    "contracts/liquidation-engine",
+    "contracts/interest-rate-strategy",
+    "contracts/incentives",
+    "contracts/shared",
+    "contracts/treasury",
+    "contracts/flash-liquidation-helper",
+    "contracts/token",
+    "contracts/aquarius-swap-adapter",
+    "contracts/soroswap-swap-adapter",
+    "tests/integration-tests",
+    "tests/unit-tests",
+    "tests/c4",
+]
+exclude = [
+    "soroswap-core",
+    "contracts/*/fuzz",
+    "contracts/redstone-adapter",
+    "contracts/redstone-adapter/common",
+]
+
+[workspace.dependencies]
+soroban-sdk = "23.0.3"
+soroban-token-sdk = "23.0.3"
+hex = "0.4.3"
+hex-literal = "1.0.0"
+redstone = { git = "https://github.com/redstone-finance/rust-sdk", tag = "3.1.0-pre1", default-features = false, features = ["soroban"] }
+redstone-testing = { git = "https://github.com/redstone-finance/rust-sdk", tag = "redstone-testing-v0.3.4" }
+
+[profile.release]
+opt-level = "z"
+overflow-checks = true
+debug = 0
+strip = "symbols"
+debug-assertions = false
+panic = "abort"
+codegen-units = 1
+lto = true
+incremental = false
+
+[profile.release-with-logs]
+inherits = "release"
+debug-assertions = true

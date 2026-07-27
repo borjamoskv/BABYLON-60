@@ -1,0 +1,51 @@
+{
+  "name": "bitflow-dlmm-tests",
+  "version": "1.0.0",
+  "description": "Run unit tests on this project.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "clarigen && clarigen docs && vitest run",
+    "test-simple": "vitest run",
+    "test:unit": "vitest run tests/",
+    "test:report": "clarigen && clarigen docs && vitest run -- --coverage --costs",
+    "test:report:coverage": "clarigen && clarigen docs && vitest run -- --coverage --costs && genhtml lcov.info --branch-coverage -o coverage/",
+    "test:watch": "chokidar \"tests/**/*.ts\" \"fuzz/**/*.ts\" \"contracts/**/*.clar\" -c \"npm run test:report\"",
+    "test:all": "clarigen && clarigen docs && npm run test:unit && npm run fuzz",
+    "fuzz": "./scripts/fuzz-args.sh vitest run fuzz/",
+    "fuzz:comprehensive": "./scripts/fuzz-args.sh vitest run fuzz/comprehensive.test.ts",
+    "fuzz:quote-engine": "./scripts/fuzz-args.sh vitest run fuzz/quote-engine-validation.test.ts",
+    "fuzz:bin-traversal": "./scripts/fuzz-args.sh vitest run fuzz/bin-traversal.test.ts",
+    "fuzz:zero-fee": "./scripts/fuzz-args.sh vitest run fuzz/zero-fee-exploit.test.ts",
+    "fuzz:basic": "./scripts/fuzz-args.sh vitest run fuzz/basic.test.ts",
+    "fuzz:arithmetic-edge-cases": "./scripts/fuzz-args.sh vitest run fuzz/arithmetic-edge-cases.test.ts",
+    "test:edge-cases": "vitest run tests/core/arithmetic-edge-cases.test.ts",
+    "genhtml": "genhtml lcov.info --branch-coverage -o coverage/",
+    "build": "clarigen && clarigen docs",
+    "build:docs": "clarigen docs"
+  },
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@clarigen/cli": "4.0.0",
+    "@clarigen/core": "4.0.0",
+    "@clarigen/test": "4.0.0",
+    "@stacks/clarinet-sdk": "3.9.2",
+    "@stacks/transactions": "7.3.0",
+    "chokidar-cli": "3.0.0",
+    "typescript": "5.9.2",
+    "vite": "7.1.3",
+    "vitest": "^4.0.9",
+    "vitest-environment-clarinet": "3.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "prettier": "^3.6.2"
+  },
+  "prettier": {
+    "singleQuote": true
+  }
+}

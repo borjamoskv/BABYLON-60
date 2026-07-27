@@ -1,0 +1,11 @@
+{
+  "http": {
+    "free": {
+      "rateLimit1h": 4000
+    },
+    "growth": {
+      "rateLimit1h": 69000
+    }
+  },
+  "ws": {}
+}

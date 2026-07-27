@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute arbitrum network should return failure when transaction submission is unknown 1`] = `
+{
+  "data": {
+    "result": 1,
+  },
+  "jobRunID": "1",
+  "result": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute base network should return failure when transaction submission is unknown 1`] = `
+{
+  "data": {
+    "result": 1,
+  },
+  "jobRunID": "1",
+  "result": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute celo network should return failure when transaction submission is unknown 1`] = `
+{
+  "data": {
+    "result": 1,
+  },
+  "jobRunID": "1",
+  "result": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute ink network should return failure when transaction submission is unknown 1`] = `
+{
+  "data": {
+    "result": 1,
+  },
+  "jobRunID": "1",
+  "result": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute mantle network should return failure when transaction submission is unknown 1`] = `
+{
+  "data": {
+    "result": 1,
+  },
+  "jobRunID": "1",
+  "result": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute megaeth network should return failure when transaction submission is unknown 1`] = `
+{
+  "data": {
+    "result": 1,
+  },
+  "jobRunID": "1",
+  "result": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute katana network should return failure when transaction submission is unknown 1`] = `
+{
+  "data": {
+    "result": 1,
+  },
+  "jobRunID": "1",
+  "result": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute metis network should return failure when transaction submission is unknown 1`] = `
+{
+  "data": {
+    "result": 1,
+  },
+  "jobRunID": "1",
+  "result": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute optimism network should return failure when transaction submission is unknown 1`] = `
+{
+  "data": {
+    "result": 1,
+  },
+  "jobRunID": "1",
+  "result": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute soneium network should return failure when transaction submission is unknown 1`] = `
+{
+  "data": {
+    "result": 1,
+  },
+  "jobRunID": "1",
+  "result": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute unichain network should return failure when transaction submission is unknown 1`] = `
+{
+  "data": {
+    "result": 1,
+  },
+  "jobRunID": "1",
+  "result": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute xlayer network should return failure when transaction submission is unknown 1`] = `
+{
+  "data": {
+    "result": 1,
+  },
+  "jobRunID": "1",
+  "result": 1,
+  "statusCode": 200,
+}
+`;

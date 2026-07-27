@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Prediction Schema (L3 & L4)",
+  "type": "object",
+  "required": ["prediction_id", "model_id", "falsifiable_condition", "experiment_design"],
+  "properties": {
+    "prediction_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "model_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "falsifiable_condition": {
+      "type": "string",
+      "minLength": 1,
+      "description": "If model is true, this MUST occur."
+    },
+    "experiment_design": {
+      "type": "object",
+      "required": ["setup_saga", "execution_trigger", "success_criteria"],
+      "properties": {
+        "setup_saga": { "type": "string", "minLength": 1 },
+        "execution_trigger": { "type": "string", "minLength": 1 },
+        "success_criteria": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "experiment_result": {
+      "type": "string",
+      "enum": ["PENDING", "REFUTED", "CORROBORATED"]
+    }
+  },
+  "additionalProperties": false
+}

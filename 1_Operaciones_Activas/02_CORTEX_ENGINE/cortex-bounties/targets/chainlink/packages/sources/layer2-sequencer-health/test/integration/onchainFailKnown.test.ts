@@ -1,0 +1,519 @@
+import { AdapterRequest } from '@chainlink/ea-bootstrap'
+import type { SuiteContext } from '@chainlink/ea-test-helpers'
+import { setupExternalAdapterTest } from '@chainlink/ea-test-helpers'
+import { ethers } from 'ethers'
+import { SuperTest, Test } from 'supertest'
+import { server as startServer } from '../../src'
+import { mockResponseFailureBlock, mockResponseFailureHealth } from './fixtures'
+
+const mockMessages = {
+  'https://arb1.arbitrum.io/rpc': 'gas price too low',
+  'https://mainnet.optimism.io': 'cannot accept 0 gas price transaction',
+  'https://mainnet.base.org': 'transaction underpriced',
+  'https://rpc.linea.build': 'Gas price below configured minimum gas price',
+  'https://andromeda.metis.io/?owner=1088': 'cannot accept 0 gas price transaction',
+  'https://rpc.scroll.io':
+    'invalid transaction: insufficient funds for l1fee + gas * price + value',
+  'https://mainnet.era.zksync.io': 'max fee per gas less than block base fee',
+  'https://rpc-gel.inkonchain.com': 'intrinsic gas too low: gas 0',
+  'https://rpc.mantle.xyz': 'failed to forward tx to sequencer',
+  'https://mainnet.unichain.org': 'intrinsic gas too low: gas 0',
+  'https://rpc.soneium.org': 'intrinsic gas too low: gas 0',
+  'https://forno.celo.org': 'intrinsic gas too low: gas 0',
+  'https://xlayerrpc.okx.com': 'intrinsic gas too low: gas 0',
+  'https://mainnet.megaeth.com/rpc': 'intrinsic gas too low',
+  'https://rpc.katana.network': 'intrinsic gas too low',
+}
+
+jest.mock('ethers', () => {
+  const originalModule = jest.requireActual('ethers')
+  return {
+    __esModule: true,
+    ...originalModule,
+    ethers: {
+      ...originalModule.ethers,
+      Wallet: class MockWallet extends originalModule.Wallet {
+        sendTransaction(): Promise<ethers.providers.TransactionResponse> {
+          return new Promise((_, reject) => {
+            const url = this.provider.connection.url
+            const message = mockMessages[url as keyof typeof mockMessages]
+            if (url.indexOf('scroll') !== -1) {
+              reject({ error: { error: { message } } })
+            }
+            reject({ error: { message } })
+          })
+        }
+      },
+    },
+  }
+})
+
+describe('execute', () => {
+  const id = '1'
+  const context: SuiteContext = {
+    req: null,
+    server: startServer,
+  }
+
+  const envVariables = {
+    CACHE_ENABLED: 'false',
+  }
+
+  setupExternalAdapterTest(envVariables, context)
+
+  async function sendRequestAndExpectStatus(data: AdapterRequest, status: number) {
+    const response = await (context.req as SuperTest<Test>)
+      .post('/')
+      .send(data)
+      .set('Accept', '*/*')
+      .set('Content-Type', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200)
+    expect(response.body.result).toEqual(status)
+    expect(response.body).toMatchSnapshot()
+  }
+
+  describe('arbitrum network', () => {
+    it('should return success when transaction submission is known', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'arbitrum',
+          requireTxFailure: true,
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 0)
+    })
+
+    it('should return failure if tx not required', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'arbitrum',
+          requireTxFailure: false,
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 1)
+    })
+  })
+
+  describe('optimism network', () => {
+    it('should return success when transaction submission is known', async () => {
+      mockResponseFailureHealth()
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'optimism',
+          requireTxFailure: true,
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 0)
+    })
+
+    it('should return failure if tx not required', async () => {
+      mockResponseFailureHealth()
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'optimism',
+          requireTxFailure: false,
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 1)
+    })
+  })
+
+  describe('base network', () => {
+    it('should return success when transaction submission is known', async () => {
+      mockResponseFailureHealth()
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'base',
+          requireTxFailure: true,
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 0)
+    })
+
+    it('should return failure if tx not required', async () => {
+      mockResponseFailureHealth()
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'base',
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 1)
+    })
+  })
+
+  describe('Linea network', () => {
+    it('should return success when transaction submission is known', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'linea',
+          requireTxFailure: true,
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 0)
+    })
+
+    it('should return failure if tx not required', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'linea',
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 1)
+    })
+  })
+
+  describe('metis network', () => {
+    it('should return success when transaction submission is known', async () => {
+      mockResponseFailureHealth()
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'metis',
+          requireTxFailure: true,
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 0)
+    })
+
+    it('should return failure if tx not required', async () => {
+      mockResponseFailureHealth()
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'metis',
+          requireTxFailure: false,
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 1)
+    })
+  })
+
+  describe('scroll network', () => {
+    it('should return success when transaction submission is known', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'scroll',
+          requireTxFailure: true,
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 0)
+    })
+
+    it('should return failure if tx not required', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'scroll',
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 1)
+    })
+  })
+
+  describe('zksync network', () => {
+    it('should return success when transaction submission is known', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'zksync',
+          requireTxFailure: true,
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 0)
+    })
+
+    it('should return failure if tx not required', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'zksync',
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 1)
+    })
+  })
+
+  describe('ink network', () => {
+    it('should return success when transaction submission is known', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'ink',
+          requireTxFailure: true,
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 0)
+    })
+
+    it('should return failure if tx not required', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'ink',
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 1)
+    })
+  })
+
+  describe('mantle network', () => {
+    it('should return success when transaction submission is known', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'mantle',
+          requireTxFailure: true,
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 0)
+    })
+
+    it('should return failure if tx not required', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'mantle',
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 1)
+    })
+  })
+
+  describe('unichain network', () => {
+    it('should return success when transaction submission is known', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'unichain',
+          requireTxFailure: true,
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 0)
+    })
+
+    it('should return failure if tx not required', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'unichain',
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 1)
+    })
+  })
+
+  describe('soneium network', () => {
+    it('should return success when transaction submission is known', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'soneium',
+          requireTxFailure: true,
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 0)
+    })
+
+    it('should return failure if tx not required', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'soneium',
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 1)
+    })
+  })
+
+  describe('celo network', () => {
+    it('should return success when transaction submission is known', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'celo',
+          requireTxFailure: true,
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 0)
+    })
+
+    it('should return failure if tx not required', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'celo',
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 1)
+    })
+  })
+
+  describe('xlayer network', () => {
+    it('should return success when transaction submission is known', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'xlayer',
+          requireTxFailure: true,
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 0)
+    })
+
+    it('should return failure if tx not required', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'xlayer',
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 1)
+    })
+  })
+
+  describe('megaeth network', () => {
+    it('should return success when transaction submission is known', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'megaeth',
+          requireTxFailure: true,
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 0)
+    })
+
+    it('should return failure if tx not required', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'megaeth',
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 1)
+    })
+  })
+
+  describe('katana network', () => {
+    it('should return success when transaction submission is known', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'katana',
+          requireTxFailure: true,
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 0)
+    })
+
+    it('should return failure if tx not required', async () => {
+      mockResponseFailureBlock()
+
+      const data: AdapterRequest = {
+        id,
+        data: {
+          network: 'katana',
+        },
+      }
+
+      await sendRequestAndExpectStatus(data, 1)
+    })
+  })
+})

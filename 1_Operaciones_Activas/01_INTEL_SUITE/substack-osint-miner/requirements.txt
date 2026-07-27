@@ -1,0 +1,12 @@
+beautifulsoup4
+networkx
+scikit-learn
+numpy
+click
+rich
+sentence-transformers
+feedparser
+requests
+neo4j
+googletrans==4.0.0-rc1
+feedparser

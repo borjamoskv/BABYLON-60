@@ -1,0 +1,185 @@
+# Rust
+/target
+**/target/
+**/*.rs.bk
+# Cargo.lock should be committed for reproducible builds
+
+# Soroban
+*.wasm
+*.optimized.wasm
+# Exception: External contract WASM files should be tracked
+!external/*.wasm
+
+# Local Scripts
+.scripts/
+scripts/
+batch/
+.local/
+
+# Fuzz Tests - ignore artifacts but keep source code
+**/fuzz/target/
+**/fuzz/corpus/
+**/fuzz/artifacts/
+**/fuzz/coverage/
+**/fuzz/.fuzz_stats
+**/fuzz/**/s/
+**/fuzz/**/s.zip
+**/fuzz/Cargo.lock
+
+# Fuzz tests in progress (only kinetic-router is ready)
+contracts/a-token/fuzz/
+contracts/aquarius-swap-adapter/fuzz/
+contracts/debt-token/fuzz/
+contracts/flash-liquidation-helper/fuzz/
+contracts/incentives/fuzz/
+contracts/interest-rate-strategy/fuzz/
+contracts/liquidation-engine/fuzz/
+contracts/pool-configurator/fuzz/
+contracts/price-oracle/fuzz/
+contracts/redstone-adapter/fuzz/
+contracts/soroswap-swap-adapter/fuzz/
+contracts/token/fuzz/
+contracts/treasury/fuzz/
+
+# Docker
+docker-compose.yml
+docker-entrypoint.sh
+Dockerfile
+Dockerfile.tests
+env.template
+
+# IDE
+.vscode/
+.idea/
+.cursor/
+.claude/
+
+# Contract IDs (testnet deployments)
+.pool-contract-id
+.oracle-contract-id
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+.env.local
+
+# Test snapshots
+test_snapshots/
+**/test_snapshots/
+
+# Deployment artifacts
+deployment.txt
+test-assets.txt
+reserve-contracts.txt
+deployed/*.json
+# Exception: Keep latest testnet deployment
+!deployed/testnet_deployment.json
+
+# Node/TypeScript
+node_modules/
+dist/
+*.tsbuildinfo
+scripts/node_modules/
+scripts/dist/
+api/keys.json
+
+# API directory
+api/
+
+# Integration tests (root level only - contracts/integration-tests/ is tracked)
+/integration-tests/
+
+# Reports and test outputs
+reports/
+stellar-resource-usage-report/
+
+# External dependencies
+soroswap-core/
+contracts/redstone-official/
+contracts/redstone-adapter/
+
+# Scripts
+.scripts/
+
+# Usage tracking node_modules
+scripts/usage/node_modules/
+scripts/usage/**/node_modules/
+scripts/usage/bindings/**/node_modules/
+
+# Auto-generated binding README files
+scripts/usage/bindings/**/README.md
+
+
+# Test folders in contracts (all tests are in tests/ folder)
+contracts/integration-tests/
+contracts/unit-tests/
+contracts/*/src/test/
+
+# Unstaged/uncommitted files
+Cargo.lock
+.stellar/
+
+# Deployment state tracking - only track current state.json and DEPLOYMENT_SUMMARY.md
+deployments/testnet/*.backup*
+deployments/testnet/state_.json
+deployments/mainnet/*.backup*
+deployments/mainnet/*.old
+!deployments/testnet/state.json
+!deployments/testnet/DEPLOYMENT_SUMMARY.md
+!deployments/testnet/reward_tokens.json
+!deployments/mainnet/state.json
+!deployments/mainnet/DEPLOYMENT_SUMMARY.md
+
+# OS files
+deployments/**/.DS_Store
+
+deployment/configure_oracle.sh
+AQUARIUS_CHANGES_SUMMARY.md
+AQUARIUS_DEX_INTEGRATION_PLAN.md
+AQUARIUS_IMPLEMENTATION_SUMMARY.md
+AQUARIUS_INTEGRATION_GUIDE.md
+FINAL_OPTIMIZATION_SUMMARY.md
+FLASH_LIQUIDATION_OPTIMIZATION_RESULTS.md
+FRESH_DEPLOYMENT_SUMMARY.md
+IMPLEMENTATION_SUMMARY.md
+LIQUIDATOR_OPTIMIZATION_PLAN.md
+LIQUIDATOR_OPTIMIZATION_RESULTS.md
+OPTIMIZATION_SUMMARY.md
+PRODUCTION_READINESS_REVIEW.md
+README_RESOURCE_ANALYSIS.md
+RESOURCE_ANALYSIS_REPORT.md
+RESOURCE_OPTIMIZATION_GUIDE.md
+STALE_INDEX_BUG_FIX.md
+aquarius-amm/
+k2-testnet-ui-internal/
+k2-testnet-ui/
+money-market-contracts/
+soroban-amm/
+xycloans/
+
+price-pusher
+deployment/price-updater/
+
+# Ignore markdown files in root directory except README.md and README_SPONSOR.md
+/*.md
+!README.md
+!README_SPONSOR.md
+
+# Audit reports folder
+audit/
+
+# Local/non-prod scripts
+local_scripts/
+
+# Local/non-prod documentation
+local_docs/

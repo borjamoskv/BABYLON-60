@@ -1,0 +1,11 @@
+{
+  "lib/forge-std": {
+    "rev": "726a6ee5fc8427a0013d6f624e486c9130c0e336"
+  },
+  "lib/infinity-periphery": {
+    "rev": "481650d4079e213b9d036ffedc908db9b18ffcf5"
+  },
+  "lib/pancake-create3-factory": {
+    "rev": "959233c3742131de85443e7272999e2ab288852d"
+  }
+}

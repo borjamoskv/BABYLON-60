@@ -1,0 +1,43 @@
+name = "cortex-edge-middleware"
+main = "src/index.ts"
+compatibility_date = "2026-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+CORTEX_ENV = "production"
+CORTEX_VERSION = "0.1.0"
+
+# KV namespace for rate limiting & telemetry counters
+[[kv_namespaces]]
+binding = "CORTEX_KV"
+id = "9dc2fe33efdd410aa8fd937c294caa1f"
+preview_id = "dfd93b840c08402e90a7856f6ccc794d"
+
+# Routes — apply worker to all 4 domains
+[[routes]]
+pattern = "cortexpersist.com/*"
+zone_name = "cortexpersist.com"
+
+[[routes]]
+pattern = "cortexpersist.dev/*"
+zone_name = "cortexpersist.dev"
+
+[[routes]]
+pattern = "cortexpersist.org/*"
+zone_name = "cortexpersist.org"
+
+[[routes]]
+pattern = "agents.archi/*"
+zone_name = "agents.archi"
+
+[env.staging]
+name = "cortex-edge-middleware-staging"
+vars = { CORTEX_ENV = "staging", CORTEX_VERSION = "0.1.0" }
+
+[[env.staging.kv_namespaces]]
+binding = "CORTEX_KV"
+id = "dfd93b840c08402e90a7856f6ccc794d"
+
+[[env.staging.routes]]
+pattern = "staging.cortexpersist.com/*"
+zone_name = "cortexpersist.com"

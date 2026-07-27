@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+# Crates that must compile in a no_std environment.
+# If a crate is added with `#![cfg_attr(not(feature = "std"), no_std)]` or `#![no_std]`,
+# add it here to ensure it stays no_std-compatible.
+no_std_packages=(
+  # common crates (ported from op-alloy)
+  base-common-consensus
+  base-common-evm
+  base-common-chains
+  base-common-rpc-types
+  base-common-rpc-types-engine
+
+  # consensus protocol crates
+  base-metrics
+  base-common-genesis
+  base-consensus-derive
+  base-protocol
+
+  # proof crates are checked via check-no-std-proof.sh (nightly, -Zbuild-std=core,alloc),
+  # which is strictly more thorough than the stable --no-default-features check here.
+)
+
+for package in "${no_std_packages[@]}"; do
+  cmd="cargo build --locked -p $package --target riscv32imac-unknown-none-elf --no-default-features"
+  if [ -n "$CI" ]; then
+    echo "::group::$cmd"
+  else
+    printf "\n%s:\n  %s\n" "$package" "$cmd"
+  fi
+  $cmd
+  if [ -n "$CI" ]; then
+    echo "::endgroup::"
+  fi
+done

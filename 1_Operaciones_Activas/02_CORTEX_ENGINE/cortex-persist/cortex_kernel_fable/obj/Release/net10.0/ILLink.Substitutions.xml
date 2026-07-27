@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<linker>
+  <assembly fullname="cortex_kernel_fable">
+    <resource name="FSharpSignatureData.cortex_kernel_fable" action="remove"></resource>
+    <resource name="FSharpSignatureCompressedData.cortex_kernel_fable" action="remove"></resource>
+    <resource name="FSharpSignatureDataB.cortex_kernel_fable" action="remove"></resource>
+    <resource name="FSharpSignatureCompressedDataB.cortex_kernel_fable" action="remove"></resource>
+    <resource name="FSharpOptimizationData.cortex_kernel_fable" action="remove"></resource>
+    <resource name="FSharpOptimizationCompressedData.cortex_kernel_fable" action="remove"></resource>
+    <resource name="FSharpOptimizationDataB.cortex_kernel_fable" action="remove"></resource>
+    <resource name="FSharpOptimizationCompressedDataB.cortex_kernel_fable" action="remove"></resource>
+    <resource name="FSharpOptimizationInfo.cortex_kernel_fable" action="remove"></resource>
+    <resource name="FSharpSignatureInfo.cortex_kernel_fable" action="remove"></resource>
+  </assembly>
+</linker>

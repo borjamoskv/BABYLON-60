@@ -1,0 +1,96 @@
+# [C5-REAL] Exergy-Maximized
+"""Causal Rollback Engine (MVP).
+
+Motor de control de daño perfecto. Corta ramas de ejecución enteras y
+sus dependencias causales, extirpando "dolor futuro" en el DAG.
+"""
+
+from __future__ import annotations
+
+import logging
+from typing import TYPE_CHECKING, Any
+
+from babylon60.ledger.causal_graph import CausalGraph
+
+if TYPE_CHECKING:
+    from babylon60.ledger.cost_field import CostField
+    from babylon60.ledger.execution_trace import ExecutionTraceLedger
+
+logger = logging.getLogger("babylon60.engine.core.rollback_engine")
+
+
+class CausalRollbackEngine:
+    """Implementa Selective Rewind sobre el CausalGraph."""
+
+    def __init__(self, db_path: str, ledger: ExecutionTraceLedger, cost_field: CostField):
+        self.db_path = db_path
+        self.ledger = ledger
+        self.cost_field = cost_field
+        self.graph = CausalGraph(db_path)
+
+    async def simulate_reversal_cost(
+        self, event_id: str, tenant_id: str = "default"
+    ) -> dict[str, Any]:
+        """Calcula el costo y viabilidad de revertir el subgrafo afectado."""
+        subgraph = await self.graph.compute_affected_subgraph(event_id, tenant_id)
+        if not subgraph:
+            return {"affected_nodes": 0, "total_reversal_cost": 0.0, "possible": False, "nodes": []}
+
+        total_cost = sum(n["cost"] for n in subgraph)
+        can_rollback = all(bool(n["rollback_possible"]) for n in subgraph)
+
+        return {
+            "affected_nodes": len(subgraph),
+            "total_reversal_cost": total_cost,
+            "possible": can_rollback,
+            "nodes": [n["id"] for n in subgraph],
+        }
+
+    async def apply_rollback(self, event_id: str, tenant_id: str = "default") -> dict[str, Any]:
+        """Applies the physical rollback marking the DAG as reverted."""
+        sim = await self.simulate_reversal_cost(event_id, tenant_id)
+
+        if not sim["possible"]:
+            logger.warning(
+                "[Causal Rollback] FAILED for %s. Subgraph contains irreversible nodes.", event_id
+            )
+            return {"status": "failed", "reason": "irreversible_nodes", "details": sim}
+
+        nodes = sim["nodes"]
+        if not nodes:
+            return {"status": "failed", "reason": "not_found", "details": sim}
+
+        from babylon60.audit.ledger import EnterpriseAuditLedger
+        from babylon60.database.core import connect_async
+
+        async with await connect_async(self.db_path) as conn:
+            # Mark all affected nodes as rolled_back
+            placeholders = ",".join("?" * len(nodes))
+            query = f"UPDATE execution_trace_ledger SET outcome = 'rolled_back' WHERE tenant_id = ? AND id IN ({placeholders})"
+            await conn.execute(query, [tenant_id] + nodes)
+
+            # Cryptographic Audit Log (ZK-Guard Sovereign Seal)
+            audit = EnterpriseAuditLedger(conn)
+            for node in nodes:
+                await audit.log_action(
+                    tenant_id=tenant_id,
+                    actor_role="scheduler",
+                    actor_id="causal_rollback_engine",
+                    action="ROLLBACK",
+                    resource=f"execution_trace:{node}",
+                    status="SUCCESS",
+                )
+
+            await conn.commit()
+
+        logger.info(
+            "[Causal Rollback] EXITO para %s. Extirpados %s nodos (freed_energy=%.2f).",
+            event_id,
+            len(nodes),
+            sim["total_reversal_cost"],
+        )
+        return {
+            "status": "success",
+            "extirpated_nodes": len(nodes),
+            "freed_energy": sim["total_reversal_cost"],
+        }

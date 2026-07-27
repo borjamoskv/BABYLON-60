@@ -1,0 +1,25 @@
+# Ignore Rust build artifacts
+**/target/
+target/
+cortexpersist-saas/apps/api/target/
+
+# Ignore local dependency directories
+node_modules/
+
+# Ignore build outputs
+dist/
+.astro/
+.vercel/
+
+# Ignore version control and system files
+.git/
+.DS_Store
+
+# Ignore large project subdirectories not needed for frontend build
+cortexpersist-saas/
+.venv/
+.agents/
+.mypy_cache/
+.ruff_cache/
+tests/
+

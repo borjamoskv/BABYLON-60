@@ -1,0 +1,85 @@
+*ATTIC*
+/build
+/build-cross
+bin
+dump
+unit-test
+tmp
+frontend
+.DS_Store
+
+genhtml/
+target/
+*.lcov
+*.profraw
+*.profdata
+/report
+flamegraph.html
+perf.data
+perf.data.old
+
+# GDB
+.gdb_history
+
+# Clangd
+.cache
+/.clangd
+compile_commands.json
+
+# Rust
+**/Cargo.lock
+
+# Dependencies
+opt/
+opt-msan/
+deps-bundle.tar.zst
+
+# Nix
+/result
+
+# Vimdiff
+*.orig
+
+# Vim
+*.swp
+*.swo
+
+# VSCode
+.vscode
+
+.claude
+
+# JetBrains
+.fleet
+.idea
+
+# Packet Captures
+*.pcap
+*.pcapng
+
+# Logs
+*.log
+
+# VitePress docs
+/book/.vitepress/cache
+/book/.vitepress/dist
+/book/node_modules
+/book/bun.lock
+/book/bun.lockb
+
+# Custom config
+/*.toml
+/*.sh
+
+# Python
+venv
+.venv
+*.pyc
+*.egg-info/
+
+# Fuchsia trace format
+*.fxt
+
+# LLMs
+.claude
+.codex

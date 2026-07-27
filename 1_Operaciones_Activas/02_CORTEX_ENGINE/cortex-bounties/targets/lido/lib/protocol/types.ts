@@ -1,0 +1,220 @@
+import { BaseContract as EthersBaseContract, ContractTransactionReceipt, Interface, LogDescription } from "ethers";
+
+import { HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/signers";
+
+import {
+  Accounting,
+  AccountingOracle,
+  ACL,
+  Burner,
+  DepositSecurityModule,
+  HashConsensus,
+  ICSModule,
+  IStakingModule,
+  Kernel,
+  LazyOracle,
+  Lido,
+  LidoExecutionLayerRewardsVault,
+  LidoLocator,
+  NodeOperatorsRegistry,
+  OperatorGrid,
+  OracleDaemonConfig,
+  OracleReportSanityChecker,
+  PredepositGuarantee,
+  StakingRouter,
+  TriggerableWithdrawalsGateway,
+  UpgradeableBeacon,
+  ValidatorConsolidationRequests,
+  ValidatorExitDelayVerifier,
+  ValidatorsExitBusOracle,
+  VaultFactory,
+  VaultHub,
+  WithdrawalQueueERC721,
+  WithdrawalVault,
+  WstETH,
+} from "typechain-types";
+
+export type LogDescriptionExtended = LogDescription & {
+  address?: string;
+};
+
+export type ProtocolNetworkItems = {
+  locator: string;
+  // signers
+  agentAddress: string;
+  votingAddress: string;
+  easyTrackAddress: string;
+  // foundation contracts
+  accountingOracle: string;
+  depositSecurityModule: string;
+  elRewardsVault: string;
+  lido: string;
+  accounting: string;
+  oracleReportSanityChecker: string;
+  burner: string;
+  stakingRouter: string;
+  validatorExitDelayVerifier: string;
+  validatorsExitBusOracle: string;
+  triggerableWithdrawalsGateway: string;
+  withdrawalQueue: string;
+  withdrawalVault: string;
+  oracleDaemonConfig: string;
+  wstETH: string;
+  // aragon contracts
+  kernel: string;
+  acl: string;
+  // stacking modules
+  nor: string;
+  sdvt: string;
+  csm: string;
+  // hash consensus
+  hashConsensus: string;
+  // vaults
+  stakingVaultFactory: string;
+  stakingVaultBeacon: string;
+  vaultHub: string;
+  predepositGuarantee: string;
+  operatorGrid: string;
+  validatorConsolidationRequests: string;
+  lazyOracle: string;
+};
+
+export interface ContractTypes {
+  LidoLocator: LidoLocator;
+  AccountingOracle: AccountingOracle;
+  DepositSecurityModule: DepositSecurityModule;
+  LidoExecutionLayerRewardsVault: LidoExecutionLayerRewardsVault;
+  Lido: Lido;
+  Accounting: Accounting;
+  OracleReportSanityChecker: OracleReportSanityChecker;
+  Burner: Burner;
+  StakingRouter: StakingRouter;
+  ValidatorExitDelayVerifier: ValidatorExitDelayVerifier;
+  ValidatorsExitBusOracle: ValidatorsExitBusOracle;
+  WithdrawalQueueERC721: WithdrawalQueueERC721;
+  WithdrawalVault: WithdrawalVault;
+  OracleDaemonConfig: OracleDaemonConfig;
+  Kernel: Kernel;
+  ACL: ACL;
+  HashConsensus: HashConsensus;
+  PredepositGuarantee: PredepositGuarantee;
+  NodeOperatorsRegistry: NodeOperatorsRegistry;
+  ICSModule: ICSModule;
+  WstETH: WstETH;
+  TriggerableWithdrawalsGateway: TriggerableWithdrawalsGateway;
+  VaultFactory: VaultFactory;
+  UpgradeableBeacon: UpgradeableBeacon;
+  VaultHub: VaultHub;
+  OperatorGrid: OperatorGrid;
+  IStakingModule: IStakingModule;
+  ValidatorConsolidationRequests: ValidatorConsolidationRequests;
+  LazyOracle: LazyOracle;
+}
+
+export type ContractName = keyof ContractTypes;
+export type ContractType<Name extends ContractName> = ContractTypes[Name];
+
+export type BaseContract = EthersBaseContract;
+
+export type LoadedContract<T extends BaseContract = BaseContract> = T & {
+  address: string;
+};
+
+export type CoreContracts = {
+  accountingOracle: LoadedContract<AccountingOracle>;
+  depositSecurityModule: LoadedContract<DepositSecurityModule>;
+  elRewardsVault: LoadedContract<LidoExecutionLayerRewardsVault>;
+  lido: LoadedContract<Lido>;
+  accounting: LoadedContract<Accounting>;
+  oracleReportSanityChecker: LoadedContract<OracleReportSanityChecker>;
+  burner: LoadedContract<Burner>;
+  stakingRouter: LoadedContract<StakingRouter>;
+  validatorExitDelayVerifier: LoadedContract<ValidatorExitDelayVerifier>;
+  validatorsExitBusOracle: LoadedContract<ValidatorsExitBusOracle>;
+  withdrawalQueue: LoadedContract<WithdrawalQueueERC721>;
+  withdrawalVault: LoadedContract<WithdrawalVault>;
+  oracleDaemonConfig: LoadedContract<OracleDaemonConfig>;
+  wstETH: LoadedContract<WstETH>;
+  triggerableWithdrawalsGateway: LoadedContract<TriggerableWithdrawalsGateway>;
+};
+
+export type AragonContracts = {
+  kernel: LoadedContract<Kernel>;
+  acl: LoadedContract<ACL>;
+};
+
+export type StakingModuleContracts = {
+  nor: LoadedContract<NodeOperatorsRegistry>;
+  sdvt: LoadedContract<NodeOperatorsRegistry>;
+  csm?: LoadedContract<IStakingModule>;
+};
+
+export type StakingModuleName = "nor" | "sdvt" | "csm";
+
+export type HashConsensusContracts = {
+  hashConsensus: LoadedContract<HashConsensus>;
+};
+
+export type WstETHContracts = {
+  wstETH: LoadedContract<WstETH>;
+};
+
+export type VaultsContracts = {
+  stakingVaultFactory: LoadedContract<VaultFactory>;
+  stakingVaultBeacon: LoadedContract<UpgradeableBeacon>;
+  vaultHub: LoadedContract<VaultHub>;
+  predepositGuarantee: LoadedContract<PredepositGuarantee>;
+  operatorGrid: LoadedContract<OperatorGrid>;
+  validatorConsolidationRequests: LoadedContract<ValidatorConsolidationRequests>;
+  lazyOracle: LoadedContract<LazyOracle>;
+};
+
+export type ProtocolContracts = { locator: LoadedContract<LidoLocator> } & CoreContracts &
+  AragonContracts &
+  StakingModuleContracts &
+  HashConsensusContracts &
+  WstETHContracts &
+  VaultsContracts;
+
+export type ProtocolSigners = {
+  agent: string;
+  voting: string;
+  easyTrack: string;
+};
+
+export type Signer = keyof ProtocolSigners;
+
+export type ProtocolContextFlags = {
+  withCSM: boolean;
+};
+
+export type ProtocolContext = {
+  contracts: ProtocolContracts;
+  signers: ProtocolSigners;
+  interfaces: Array<BaseContract["interface"]>;
+  flags: ProtocolContextFlags;
+  isScratch: boolean;
+  isMainnet: boolean;
+  getSigner: (signer: Signer, balance?: bigint) => Promise<HardhatEthersSigner>;
+  getEvents: (
+    receipt: ContractTransactionReceipt,
+    eventName: string,
+    extraInterfaces?: Interface[], // additional interfaces to parse
+  ) => LogDescriptionExtended[];
+};
+
+export type RequireAllKeys<O, A extends readonly (keyof O)[]> =
+  Exclude<keyof O, A[number]> extends never // ← nothing missing?
+    ? A[number] extends keyof O
+      ? A
+      : never //   and nothing extra?
+    : never;
+
+/**
+ * Helper function to ensure all keys of an object are present in an array
+ * @param arr - The array of keys to check
+ * @returns The array of keys
+ */
+export function keysOf<O>() {
+  return <const A extends readonly (keyof O)[]>(arr: RequireAllKeys<O, A>) => arr;
+}

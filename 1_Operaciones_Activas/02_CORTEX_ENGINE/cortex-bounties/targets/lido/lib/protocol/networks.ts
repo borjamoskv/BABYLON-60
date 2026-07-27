@@ -1,0 +1,163 @@
+import * as process from "node:process";
+
+import hre from "hardhat";
+
+import { log } from "lib";
+import { readNetworkState, Sk } from "lib/state-file";
+
+import { getMode } from "../../hardhat.helpers";
+
+import {
+  MAINNET_AGENT_ADDRESS,
+  MAINNET_EASY_TRACK_EXECUTOR_ADDRESS,
+  MAINNET_LOCATOR_ADDRESS,
+  MAINNET_VOTING_ADDRESS,
+} from "./mainnet";
+import { ProtocolNetworkItems } from "./types";
+
+export function isNonForkingHardhatNetwork() {
+  const networkName = hre.network.name;
+  if (networkName === "hardhat") {
+    const networkConfig = hre.config.networks[networkName];
+    return !networkConfig.forking?.enabled;
+  }
+  return false;
+}
+
+export async function parseDeploymentJson(name: string) {
+  try {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore - file is missing out of the box, that's why we need to catch the error
+    return await import(`../../deployed-${name}.json`);
+  } catch (e) {
+    log.error(e as Error);
+    throw new Error("Failed to parse deployed-local.json. Did you run scratch deploy?");
+  }
+}
+
+export class ProtocolNetworkConfig {
+  constructor(
+    public readonly env: Record<keyof ProtocolNetworkItems, string>,
+    public readonly defaults: Record<keyof ProtocolNetworkItems, string>,
+    public readonly source: string,
+  ) {}
+
+  get(key: keyof ProtocolNetworkItems): string {
+    return process.env[this.env[key]] || this.defaults[key] || "";
+  }
+}
+
+const defaultEnv = {
+  locator: "LOCATOR_ADDRESS",
+  // signers
+  agentAddress: "AGENT_ADDRESS",
+  votingAddress: "VOTING_ADDRESS",
+  easyTrackAddress: "EASY_TRACK_EXECUTOR_ADDRESS",
+  // foundation contracts
+  accountingOracle: "ACCOUNTING_ORACLE_ADDRESS",
+  depositSecurityModule: "DEPOSIT_SECURITY_MODULE_ADDRESS",
+  elRewardsVault: "EL_REWARDS_VAULT_ADDRESS",
+  lido: "LIDO_ADDRESS",
+  accounting: "ACCOUNTING_ADDRESS",
+  oracleReportSanityChecker: "ORACLE_REPORT_SANITY_CHECKER_ADDRESS",
+  burner: "BURNER_ADDRESS",
+  stakingRouter: "STAKING_ROUTER_ADDRESS",
+  validatorExitDelayVerifier: "VALIDATOR_EXIT_DELAY_VERIFIER_ADDRESS",
+  validatorsExitBusOracle: "VALIDATORS_EXIT_BUS_ORACLE_ADDRESS",
+  withdrawalQueue: "WITHDRAWAL_QUEUE_ADDRESS",
+  withdrawalVault: "WITHDRAWAL_VAULT_ADDRESS",
+  oracleDaemonConfig: "ORACLE_DAEMON_CONFIG_ADDRESS",
+  wstETH: "WSTETH_ADDRESS",
+  // aragon contracts
+  kernel: "ARAGON_KERNEL_ADDRESS",
+  acl: "ARAGON_ACL_ADDRESS",
+  // stacking modules
+  nor: "NODE_OPERATORS_REGISTRY_ADDRESS",
+  sdvt: "SIMPLE_DVT_REGISTRY_ADDRESS",
+  csm: "CSM_REGISTRY_ADDRESS",
+  // hash consensus
+  hashConsensus: "HASH_CONSENSUS_ADDRESS",
+  // vaults
+  stakingVaultFactory: "STAKING_VAULT_FACTORY_ADDRESS",
+  stakingVaultBeacon: "STAKING_VAULT_BEACON_ADDRESS",
+  validatorConsolidationRequests: "VALIDATOR_CONSOLIDATION_REQUESTS_ADDRESS",
+} as ProtocolNetworkItems;
+
+const getPrefixedEnv = (prefix: string, obj: ProtocolNetworkItems) =>
+  Object.fromEntries(Object.entries(obj).map(([key, value]) => [key, `${prefix}_${value}`])) as ProtocolNetworkItems;
+
+const getDefaults = (obj: ProtocolNetworkItems) =>
+  Object.fromEntries(Object.entries(obj).map(([key]) => [key, ""])) as ProtocolNetworkItems;
+
+async function getLocalNetworkConfig(network: string, source: "fork" | "scratch"): Promise<ProtocolNetworkConfig> {
+  const config = await parseDeploymentJson(network);
+  const defaults: Record<keyof ProtocolNetworkItems, string> = {
+    ...getDefaults(defaultEnv),
+    locator: config[Sk.lidoLocator].proxy.address,
+    agentAddress: config[Sk.appAgent].proxy.address,
+    votingAddress: config[Sk.appVoting].proxy.address,
+    easyTrackAddress: config[Sk.appVoting].proxy.address,
+    stakingVaultFactory: config[Sk.stakingVaultFactory].address,
+    stakingVaultBeacon: config[Sk.stakingVaultBeacon].address,
+    operatorGrid: config[Sk.operatorGrid].proxy.address,
+    validatorConsolidationRequests: config[Sk.validatorConsolidationRequests].address,
+  };
+  return new ProtocolNetworkConfig(getPrefixedEnv(network.toUpperCase(), defaultEnv), defaults, `${network}-${source}`);
+}
+
+async function getMainnetForkNetworkConfig(): Promise<ProtocolNetworkConfig> {
+  const state = readNetworkState();
+
+  const defaults: Record<keyof ProtocolNetworkItems, string> = {
+    ...getDefaults(defaultEnv),
+    locator: MAINNET_LOCATOR_ADDRESS,
+    agentAddress: MAINNET_AGENT_ADDRESS,
+    votingAddress: MAINNET_VOTING_ADDRESS,
+    easyTrackAddress: MAINNET_EASY_TRACK_EXECUTOR_ADDRESS,
+    stakingVaultFactory: state[Sk.stakingVaultFactory].address,
+    stakingVaultBeacon: state[Sk.stakingVaultBeacon].address,
+    operatorGrid: state[Sk.operatorGrid].proxy.address,
+    validatorConsolidationRequests: state[Sk.validatorConsolidationRequests].address,
+  };
+  return new ProtocolNetworkConfig(getPrefixedEnv("MAINNET", defaultEnv), defaults, "mainnet-fork");
+}
+
+async function getForkingNetworkConfig(): Promise<ProtocolNetworkConfig> {
+  const state = readNetworkState();
+
+  const defaults: Record<keyof ProtocolNetworkItems, string> = {
+    ...getDefaults(defaultEnv),
+    locator: state[Sk.lidoLocator].proxy.address,
+    agentAddress: state[Sk.appAgent].proxy.address,
+    votingAddress: state[Sk.appVoting].proxy.address,
+    easyTrackAddress: state[Sk.easyTrackEVMScriptExecutor]?.address,
+    stakingVaultFactory: state[Sk.stakingVaultFactory]?.address,
+    stakingVaultBeacon: state[Sk.stakingVaultBeacon]?.address,
+    operatorGrid: state[Sk.operatorGrid]?.proxy.address,
+    validatorConsolidationRequests: state[Sk.validatorConsolidationRequests]?.address,
+  };
+
+  const chainId = state[Sk.chainId];
+  const prefix = chainId === 1 ? "MAINNET" : chainId === 560048 ? "HOODI" : "";
+
+  return new ProtocolNetworkConfig(getPrefixedEnv(prefix, defaultEnv), defaults, "state-network-config");
+}
+
+export async function getNetworkConfig(network: string): Promise<ProtocolNetworkConfig> {
+  switch (network) {
+    case "hardhat":
+      if (getMode() === "scratch") {
+        return getLocalNetworkConfig(network, "scratch");
+      }
+      return getForkingNetworkConfig();
+    case "local":
+      return getLocalNetworkConfig(network, "fork");
+    case "mainnet-fork":
+      return getMainnetForkNetworkConfig();
+    case "custom":
+      console.log("Using custom network configuration");
+      return getMainnetForkNetworkConfig();
+    default:
+      throw new Error(`Network ${network} is not supported`);
+  }
+}

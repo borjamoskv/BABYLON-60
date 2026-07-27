@@ -1,0 +1,80 @@
+[
+  {
+    "id": "BABYLON60-TARGET_REAL-2026",
+    "title": "Memory Corruption in TargetToCorrupt via Arithmetic Underflow",
+    "severity": "Critical",
+    "path": "data/STRIKE_PACKAGES/BABYLON60-TARGET_REAL-2026/REPORT.md"
+  },
+  {
+    "id": "LZ-STELLAR-001",
+    "title": "Multi-user Fee Drain via Global Balance Refund in EndpointV2",
+    "severity": "Critical",
+    "path": "data/STRIKE_PACKAGES/LZ-STELLAR-001/REPORT.md"
+  },
+  {
+    "id": "STARGATE-STRIKE-2026",
+    "title": "Message Forgery & Validator Bypass in LayerZero V2 Stargate",
+    "severity": "Critical",
+    "path": "data/STRIKE_PACKAGES/STARGATE-STRIKE-2026/REPORT.md"
+  },
+  {
+    "id": "SIGMA-SKY-BREACH-09X",
+    "title": "Sky Protocol USDS PSM Dust Trapping via Division Truncation",
+    "severity": "Critical",
+    "path": "data/STRIKE_PACKAGES/SIGMA-SKY-BREACH-09X/REPORT.md"
+  },
+  {
+    "id": "SIGMA-SSV-FEE-DOS-2026",
+    "title": "SSV Network Operator snapshot update DoS via checked arithmetic overflow",
+    "severity": "Medium",
+    "path": "data/STRIKE_PACKAGES/SIGMA-SSV-FEE-DOS-2026/REPORT.md"
+  },
+  {
+    "id": "SKY-YIELD-THEFT",
+    "title": "Sky Protocol stUSDS Savings Agent Atomic Yield-Theft",
+    "severity": "Critical",
+    "path": "data/STRIKE_PACKAGES/SKY-YIELD-THEFT/REPORT.md"
+  },
+  {
+    "id": "BABYLON60-EXERGY-SIGMA-1",
+    "title": "OpenAI Atlas Browser Guard Bypass via Indirect Prompt Injection",
+    "severity": "Critical",
+    "path": "data/STRIKE_PACKAGES/BABYLON60-EXERGY-SIGMA-1/REPORT.md"
+  },
+  {
+    "id": "LZ-STELLAR-H-01",
+    "title": "LayerZero Stellar Endpoint DoS via Storage Read Limit Exhaustion",
+    "severity": "High",
+    "path": "data/STRIKE_PACKAGES/LZ-STELLAR-H-01/REPORT.md"
+  },
+  {
+    "id": "LZ-STELLAR-H-03",
+    "title": "LayerZero Stellar Endpoint Phishing via lz_compose_alert",
+    "severity": "High",
+    "path": "data/STRIKE_PACKAGES/LZ-STELLAR-H-03/REPORT.md"
+  },
+  {
+    "id": "LZ-STELLAR-H-04",
+    "title": "LayerZero Stellar Endpoint Fee Refund Hijacking via Re-entrant Token Callbacks",
+    "severity": "High",
+    "path": "data/STRIKE_PACKAGES/LZ-STELLAR-H-04/REPORT.md"
+  },
+  {
+    "id": "LZ-STELLAR-H-05",
+    "title": "LayerZero Stellar Endpoint Sequence Overwrite via clear Re-entrancy",
+    "severity": "High",
+    "path": "data/STRIKE_PACKAGES/LZ-STELLAR-H-05/REPORT.md"
+  },
+  {
+    "id": "LZ-STELLAR-M-02",
+    "title": "LayerZero Stellar Endpoint DoS via Persistent Storage TTL Expiration",
+    "severity": "Medium",
+    "path": "data/STRIKE_PACKAGES/LZ-STELLAR-M-02/REPORT.md"
+  },
+  {
+    "id": "BABYLON60-API-AUDIT-2026",
+    "title": "BABYLON60 REST API Security Audit Report",
+    "severity": "Mixed",
+    "path": "data/STRIKE_PACKAGES/BABYLON60-API-AUDIT-2026/REPORT.md"
+  }
+]

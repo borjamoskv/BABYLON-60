@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute lwba endpoint returns success and valid LWBA triplet 1`] = `
+{
+  "data": {
+    "ask": 1.1473068612168396,
+    "bid": 1.1470467994160611,
+    "mid": 1.1471768303164502,
+    "sources": {
+      "USDC": [
+        "data-engine",
+      ],
+      "WETH": [
+        "data-engine",
+      ],
+    },
+  },
+  "result": null,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 978347471111,
+    "providerDataRequestedUnixMs": 978347471111,
+  },
+}
+`;
+
+exports[`execute price endpoint returns success with data-engine + metadata 1`] = `
+{
+  "data": {
+    "result": 1.1471768303164502,
+    "sources": {
+      "USDC": [
+        "data-engine",
+      ],
+      "WETH": [
+        "data-engine",
+      ],
+    },
+  },
+  "result": 1.1471768303164502,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 978347471111,
+    "providerDataRequestedUnixMs": 978347471111,
+  },
+}
+`;

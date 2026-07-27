@@ -1,0 +1,21 @@
+{
+  "name": "InsurAce",
+  "slug": "insurace",
+  "category": "Insurance",
+  "chains": [
+    "Binance",
+    "Ethereum",
+    "Avalanche",
+    "Polygon"
+  ],
+  "tvl_current": 139375.17951000002,
+  "tvl_peak": 141983,
+  "tvl_trend": "stable",
+  "github_org": "InsurAce-Protocol",
+  "risk_score": 15,
+  "confidence": "C5-REAL",
+  "audit_links": [
+    "https://docs.insurace.io/landing-page/documentation/security-1"
+  ],
+  "contracts": {}
+}

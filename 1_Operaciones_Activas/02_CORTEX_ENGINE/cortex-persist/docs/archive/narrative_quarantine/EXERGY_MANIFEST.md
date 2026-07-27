@@ -1,0 +1,207 @@
+# BABYLON-60 EXERGY MANIFEST
+> Sovereign Hierarchical Ordering of all Cognitive Assets (C5-REAL)
+
+## EXERGY RANKING
+
+### Exergy 97.4
+- **[SKILL]** `accidental-data-loss-prevention`
+  - Path: `~/.gemini/config/skills/accidental-data-loss-prevention`
+### Exergy 96.2
+- **[SKILL]** `managing-python-dependencies`
+  - Path: `~/.gemini/config/skills/managing-python-dependencies`
+- **[SKILL]** `Browser-CDP-Automation-OMEGA`
+  - Path: `~/.gemini/config/skills/Browser-CDP-Automation-OMEGA`
+### Exergy 95.0
+- **[SKILL]** `Autodidact-Research-OMEGA`
+  - Path: `~/.gemini/config/skills/Autodidact-Research-OMEGA`
+- **[SKILL]** `Agent-Paper-RedTeam-OMEGA`
+  - Path: `~/.gemini/config/skills/Agent-Paper-RedTeam-OMEGA`
+### Exergy 94.6
+- **[SKILL]** `Antigravity-Github-Omega`
+  - Path: `~/.gemini/config/skills/Antigravity-Github-Omega`
+- **[SKILL]** `Autodidact-History-OMEGA`
+  - Path: `~/.gemini/config/skills/Autodidact-History-OMEGA`
+### Exergy 94.2
+- **[SKILL]** `Aesthetic-Foundry-Omega`
+  - Path: `~/.gemini/config/skills/Aesthetic-Foundry-Omega`
+### Exergy 93.8
+- **[SKILL]** `Autonomous-Audit-OMEGA`
+  - Path: `~/.gemini/config/skills/Autonomous-Audit-OMEGA`
+- **[SKILL]** `Python-Extractor-OMEGA`
+  - Path: `~/.gemini/config/skills/Python-Extractor-OMEGA`
+### Exergy 93.4
+- **[SKILL]** `Estado-Del-Arte-OMEGA`
+  - Path: `~/.gemini/config/skills/Estado-Del-Arte-OMEGA`
+### Exergy 92.6
+- **[SKILL]** `Exergy-Engine-OMEGA`
+  - Path: `~/.gemini/config/skills/Exergy-Engine-OMEGA`
+### Exergy 92.2
+- **[SKILL]** `API-Provider-OMEGA`
+  - Path: `~/.gemini/config/skills/API-Provider-OMEGA`
+- **[SKILL]** `ouroboros-infinity`
+  - Path: `~/.gemini/config/skills/ouroboros-infinity`
+### Exergy 91.8
+- **[SKILL]** `Mac-Control-OMEGA`
+  - Path: `~/.gemini/config/skills/Mac-Control-OMEGA`
+### Exergy 89.0
+- **[SKILL]** `Sortu-APEX`
+  - Path: `~/.gemini/config/skills/Sortu-APEX`
+### TBD
+- **[SKILL]** `Network-Security-L4-OMEGA`
+  - Path: `~/.gemini/config/skills/Network-Security-L4-OMEGA`
+- **[SKILL]** `scripts`
+  - Path: `~/.gemini/config/skills/scripts`
+- **[SKILL (Plugin)]** `google-antigravity-sdk`
+  - Path: `~/.gemini/config/plugins/google-antigravity-sdk/skills/google-antigravity-sdk`
+- **[SKILL (Plugin)]** `debug-optimize-lcp`
+  - Path: `~/.gemini/config/plugins/chrome-devtools-plugin/skills/debug-optimize-lcp`
+- **[SKILL (Plugin)]** `troubleshooting`
+  - Path: `~/.gemini/config/plugins/chrome-devtools-plugin/skills/troubleshooting`
+- **[SKILL (Plugin)]** `chrome-devtools`
+  - Path: `~/.gemini/config/plugins/chrome-devtools-plugin/skills/chrome-devtools`
+- **[SKILL (Plugin)]** `memory-leak-debugging`
+  - Path: `~/.gemini/config/plugins/chrome-devtools-plugin/skills/memory-leak-debugging`
+- **[SKILL (Plugin)]** `a11y-debugging`
+  - Path: `~/.gemini/config/plugins/chrome-devtools-plugin/skills/a11y-debugging`
+- **[SKILL (Plugin)]** `chrome-extensions`
+  - Path: `~/.gemini/config/plugins/modern-web-guidance-plugin/skills/chrome-extensions`
+- **[SKILL (Plugin)]** `modern-web-guidance`
+  - Path: `~/.gemini/config/plugins/modern-web-guidance-plugin/skills/modern-web-guidance`
+- **[SCRIPT]** `deploy_cortex_cloud.sh`
+  - Path: `~/10_PROJECTS/babylon60/scripts/deploy_cortex_cloud.sh`
+- **[SCRIPT]** `zero_debt.sh`
+  - Path: `~/10_PROJECTS/babylon60/scripts/zero_debt.sh`
+- **[SCRIPT]** `diagnose.sh`
+  - Path: `~/10_PROJECTS/babylon60/scripts/diagnose.sh`
+- **[SCRIPT]** `test_pruner.py`
+  - Path: `~/10_PROJECTS/babylon60/scripts/test_pruner.py`
+- **[SCRIPT]** `repo_health_changed.py`
+  - Path: `~/10_PROJECTS/babylon60/scripts/repo_health_changed.py`
+- **[SCRIPT]** `cortex-boot.sh`
+  - Path: `~/10_PROJECTS/babylon60/scripts/cortex-boot.sh`
+- **[SCRIPT]** `build_semantic_trees.py`
+  - Path: `~/10_PROJECTS/babylon60/scripts/build_semantic_trees.py`
+- **[SCRIPT]** `test_osc.py`
+  - Path: `~/10_PROJECTS/babylon60/scripts/test_osc.py`
+- **[SCRIPT]** `auto_radar.sh`
+  - Path: `~/10_PROJECTS/babylon60/scripts/auto_radar.sh`
+- **[SCRIPT]** `sovereign_pre_commit.py`
+  - Path: `~/10_PROJECTS/babylon60/scripts/sovereign_pre_commit.py`
+- **[SCRIPT]** `legion_strike.py`
+  - Path: `~/10_PROJECTS/babylon60/scripts/legion_strike.py`
+- **[SCRIPT]** `entropy_gate.py`
+  - Path: `~/10_PROJECTS/babylon60/scripts/entropy_gate.py`
+- **[SCRIPT]** `README.md`
+  - Path: `~/10_PROJECTS/babylon60/scripts/README.md`
+- **[SCRIPT]** `extract_openapi.py`
+  - Path: `~/10_PROJECTS/babylon60/scripts/extract_openapi.py`
+- **[SCRIPT]** `cortex_persist.sh`
+  - Path: `~/10_PROJECTS/babylon60/scripts/cortex_persist.sh`
+- **[SCRIPT]** `generate_telemetry.py`
+  - Path: `~/10_PROJECTS/babylon60/scripts/generate_telemetry.py`
+- **[SCRIPT]** `sovereign_pre_commit.sh`
+  - Path: `~/10_PROJECTS/babylon60/scripts/sovereign_pre_commit.sh`
+- **[SCRIPT]** `generate_sdks.sh`
+  - Path: `~/10_PROJECTS/babylon60/scripts/generate_sdks.sh`
+- **[SCRIPT]** `_changed_files.py`
+  - Path: `~/10_PROJECTS/babylon60/scripts/_changed_files.py`
+- **[SCRIPT]** `radar_cron.sh`
+  - Path: `~/10_PROJECTS/babylon60/scripts/radar_cron.sh`
+- **[SCRIPT]** `ouroboros_prune.py`
+  - Path: `~/10_PROJECTS/babylon60/scripts/ouroboros_prune.py`
+- **[SCRIPT]** `memory_bench.py`
+  - Path: `~/10_PROJECTS/babylon60/scripts/memory_bench.py`
+- **[WORKFLOW]** `confluence-awwwards.md`
+  - Path: `~/10_PROJECTS/babylon60/.agents/workflows/confluence-awwwards.md`
+- **[WORKFLOW]** `CORTEX-PERSIST-WHITEPAPER.md`
+  - Path: `~/10_PROJECTS/babylon60/.agents/workflows/CORTEX-PERSIST-WHITEPAPER.md`
+- **[WORKFLOW]** `confluence-nightshift.md`
+  - Path: `~/10_PROJECTS/babylon60/.agents/workflows/confluence-nightshift.md`
+- **[WORKFLOW]** `RFC-CORTEX-NATIVE-AI.md`
+  - Path: `~/10_PROJECTS/babylon60/.agents/workflows/RFC-CORTEX-NATIVE-AI.md`
+- **[WORKFLOW]** `confluence-inmortal.md`
+  - Path: `~/10_PROJECTS/babylon60/.agents/workflows/confluence-inmortal.md`
+- **[WORKFLOW]** `confluence-mmx.md`
+  - Path: `~/10_PROJECTS/babylon60/.agents/workflows/confluence-mmx.md`
+- **[WORKFLOW]** `CORTEX-NATIVE-AI-MANIFESTO.md`
+  - Path: `~/10_PROJECTS/babylon60/.agents/workflows/CORTEX-NATIVE-AI-MANIFESTO.md`
+- **[WORKFLOW]** `confluence-sindicate.md`
+  - Path: `~/10_PROJECTS/babylon60/.agents/workflows/confluence-sindicate.md`
+- **[WORKFLOW]** `confluence-black-swan.md`
+  - Path: `~/10_PROJECTS/babylon60/.agents/workflows/confluence-black-swan.md`
+- **[WORKFLOW]** `browser-subagent.md`
+  - Path: `~/10_PROJECTS/babylon60/.agent/workflows/browser-subagent.md`
+- **[WORKFLOW]** `musa_creativa.md`
+  - Path: `~/10_PROJECTS/babylon60/.agent/workflows/musa_creativa.md`
+- **[WORKFLOW]** `idea.md`
+  - Path: `~/10_PROJECTS/babylon60/.agent/workflows/idea.md`
+- **[WORKFLOW]** `omega_protocol.md`
+  - Path: `~/10_PROJECTS/babylon60/.agent/workflows/omega_protocol.md`
+- **[WORKFLOW]** `flujo_glorioso_v2.md`
+  - Path: `~/10_PROJECTS/babylon60/.agent/workflows/flujo_glorioso_v2.md`
+- **[WORKFLOW]** `playground.md`
+  - Path: `~/10_PROJECTS/babylon60/.agent/workflows/playground.md`
+- **[WORKFLOW]** `legion.md`
+  - Path: `~/10_PROJECTS/babylon60/.agent/workflows/legion.md`
+- **[WORKFLOW]** `memory.md`
+  - Path: `~/10_PROJECTS/babylon60/.agent/workflows/memory.md`
+- **[WORKFLOW]** `sentinel_seguridad.md`
+  - Path: `~/10_PROJECTS/babylon60/.agent/workflows/sentinel_seguridad.md`
+- **[WORKFLOW]** `build.md`
+  - Path: `~/10_PROJECTS/babylon60/.agent/workflows/build.md`
+- **[WORKFLOW]** `arquitecto_codigo.md`
+  - Path: `~/10_PROJECTS/babylon60/.agent/workflows/arquitecto_codigo.md`
+- **[WORKFLOW]** `comandante_despliegue.md`
+  - Path: `~/10_PROJECTS/babylon60/.agent/workflows/comandante_despliegue.md`
+- **[WORKFLOW]** `ouroboros.md`
+  - Path: `~/10_PROJECTS/babylon60/.agent/workflows/ouroboros.md`
+- **[WORKFLOW]** `cooldown.md`
+  - Path: `~/10_PROJECTS/babylon60/.agent/workflows/cooldown.md`
+- **[AGENT]** `planner.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/planner.py`
+- **[AGENT]** `neural.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/neural.py`
+- **[AGENT]** `manifest.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/manifest.py`
+- **[AGENT]** `copilot_debounce.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/copilot_debounce.py`
+- **[AGENT]** `handoff.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/handoff.py`
+- **[AGENT]** `copilot_cache.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/copilot_cache.py`
+- **[AGENT]** `supervisor.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/supervisor.py`
+- **[AGENT]** `sovereign_e2e_swarm.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/sovereign_e2e_swarm.py`
+- **[AGENT]** `tools.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/tools.py`
+- **[AGENT]** `system_prompt.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/system_prompt.py`
+- **[AGENT]** `copilot_contracts.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/copilot_contracts.py`
+- **[AGENT]** `copilot_context.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/copilot_context.py`
+- **[AGENT]** `copilot_llm_strategy.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/copilot_llm_strategy.py`
+- **[AGENT]** `bus.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/bus.py`
+- **[AGENT]** `loader.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/loader.py`
+- **[AGENT]** `autonomous.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/autonomous.py`
+- **[AGENT]** `pitches.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/pitches.py`
+- **[AGENT]** `contracts.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/contracts.py`
+- **[AGENT]** `copilot_server.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/copilot_server.py`
+- **[AGENT]** `builtin_tools.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/builtin_tools.py`
+- **[AGENT]** `base.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/base.py`
+- **[AGENT]** `message_schema.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/message_schema.py`
+- **[AGENT]** `state.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/state.py`
+- **[AGENT]** `schema.py`
+  - Path: `~/10_PROJECTS/babylon60/cortex/agents/schema.py`

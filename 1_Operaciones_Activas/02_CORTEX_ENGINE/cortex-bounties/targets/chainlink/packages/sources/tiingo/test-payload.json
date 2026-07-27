@@ -1,0 +1,17 @@
+{
+  "requests": [
+    {
+      "from": "ETH",
+      "to": "USD"
+    },
+    {
+      "base": "ETH",
+      "convert": "USD",
+      "endpoint": "realized-vol"
+    },
+    {
+      "aprTerm": "30Day",
+      "endpoint": "cryptoyield"
+    }
+  ]
+}

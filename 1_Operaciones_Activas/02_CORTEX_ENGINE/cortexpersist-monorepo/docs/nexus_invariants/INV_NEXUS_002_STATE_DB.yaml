@@ -1,0 +1,3 @@
+Invariant_ID: INV-NEXUS-002
+Dominio: Consolidación de Estado Epistemológico
+Regla_Central: "Todo rastro temporal de inferencia (invoked.timestamp), cachés intermedios de agentes (*.meta.json) y artefactos transaccionales (*.data.json) deben purgarse del árbol de directorios del código fuente. La persistencia de estado atómico queda estrictamente confinada a un motor centralizado de un solo archivo con soporte concurrente (ej. SQLite WAL) o una base de datos CORTEX de estado puro. Prohibida la polución estocástica del disco."

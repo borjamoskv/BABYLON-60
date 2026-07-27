@@ -1,0 +1,193 @@
+[
+  {
+    "slug": "marilyn-rocks",
+    "title": "Marilyn Rocks",
+    "img": "marilyn-rocks--qPeLHxE.webp",
+    "technique": "Acrílico sobre pizarra",
+    "series": "Rocks",
+    "desc": "Retrato hiperrealista de Marilyn Monroe en acrílico sobre pizarra con mica mineral."
+  },
+  {
+    "slug": "amy",
+    "title": "Amy",
+    "img": "hq-amy-BRTriASV.webp",
+    "year": 2023,
+    "technique": "Acrílico sobre pizarra",
+    "series": "Rocks",
+    "desc": "Retrato de Amy Winehouse en hiperrealismo POP sobre pizarra natural."
+  },
+  {
+    "slug": "james-dean",
+    "title": "James Dean",
+    "img": "hq-james-CjsTrO7r.webp",
+    "series": "Rocks",
+    "desc": "Retrato de James Dean, icono eterno del cine, en hiperrealismo POP."
+  },
+  {
+    "slug": "johnny",
+    "title": "Johnny",
+    "img": "hq-johnny-5ueL8eU0.webp",
+    "series": "Rocks",
+    "desc": "Retrato de Johnny Depp en hiperrealismo POP sobre soporte mineral."
+  },
+  {
+    "slug": "retrato-i",
+    "title": "Retrato I",
+    "img": "hq-portrait-1-bV-_WHlX.webp",
+    "desc": "Retrato hiperrealista por encargo — la mirada como centro de la obra."
+  },
+  {
+    "slug": "el-gran-dakari",
+    "title": "El Gran Dakari",
+    "img": "el-gran-dakari-C1tAWAhR.webp",
+    "desc": "Retrato de gran formato con la fuerza expresiva del hiperrealismo POP."
+  },
+  {
+    "slug": "audrey-hepburn",
+    "title": "Audrey Hepburn",
+    "img": "audrey-hepburn-DbIBTtIp.webp",
+    "desc": "Audrey Hepburn reimaginada — elegancia clásica en clave pop contemporánea."
+  },
+  {
+    "slug": "geisha",
+    "title": "Geisha",
+    "img": "geisha-MfRtKWdu.webp",
+    "desc": "Retrato de inspiración japonesa — delicadeza y color en técnica mixta."
+  },
+  {
+    "slug": "lagrimas-de-oro",
+    "title": "Lágrimas de Oro",
+    "img": "lagrimas-de-oro-DikHc-Tk.webp",
+    "desc": "La emoción hecha materia: lágrimas doradas sobre un rostro hiperrealista."
+  },
+  {
+    "slug": "love",
+    "title": "Love",
+    "img": "love-DA7L_L5F.webp",
+    "desc": "Una declaración en color — el amor como gesto pictórico."
+  },
+  {
+    "slug": "la-pensadora",
+    "title": "La Pensadora",
+    "img": "la-pensadora-CFHSnMA0.webp",
+    "desc": "Retrato introspectivo — el pensamiento como paisaje interior."
+  },
+  {
+    "slug": "amor-en-conserva",
+    "title": "Amor en Conserva",
+    "img": "amor-en-conserva-CMHRIKXx.webp",
+    "technique": "Intervención en lata de conserva",
+    "series": "En.lata.das",
+    "desc": "Intervención artística en lata de conserva — el amor, listo para abrir."
+  },
+  {
+    "slug": "baroque-farrokh",
+    "title": "Baroque Farrokh",
+    "img": "baroque-farrokh-mjg4ClA9.webp",
+    "series": "Tributos Musicales",
+    "desc": "Tributo barroco a Farrokh Bulsara — Freddie Mercury como icono clásico."
+  },
+  {
+    "slug": "cantinflas-i",
+    "title": "Cantinflas I",
+    "img": "cantinflas-0-D712oJYO.webp",
+    "desc": "Homenaje a Mario Moreno «Cantinflas» — humor y humanidad en retrato."
+  },
+  {
+    "slug": "dar-la-lata",
+    "title": "Dar la Lata",
+    "img": "dar-la-lata-DxWlKgS-.webp",
+    "technique": "Reciclaje artístico",
+    "series": "En.lata.das",
+    "desc": "Reciclaje artístico — la lata cotidiana convertida en pieza única."
+  },
+  {
+    "slug": "mr-fahrenheit",
+    "title": "Mr. Fahrenheit",
+    "img": "mr-fahrenheit-BzcoVisa.webp",
+    "technique": "Pintura sobre pizarra",
+    "series": "Tributos Musicales",
+    "desc": "Freddie Mercury a 200 grados — tributo musical sobre pizarra."
+  },
+  {
+    "slug": "divinos-amy",
+    "title": "DiviNos Amy",
+    "img": "divinos-amy-Celol3XJ.webp",
+    "series": "DiviNos",
+    "desc": "Amy Winehouse en la serie DiviNos — iconos divinos, humanos demasiado humanos."
+  },
+  {
+    "slug": "divinos-marilyn",
+    "title": "DiviNos Marilyn",
+    "img": "divinos-marilyn-By8KYPMI.webp",
+    "series": "DiviNos",
+    "desc": "Marilyn Monroe en la serie DiviNos — el mito y su fragilidad."
+  },
+  {
+    "slug": "divinos-johnny",
+    "title": "DiviNos Johnny",
+    "img": "divinos-johnny-gl9M1ZKj.webp",
+    "series": "DiviNos",
+    "desc": "Johnny Depp en la serie DiviNos — retrato entre lo sagrado y lo pop."
+  },
+  {
+    "slug": "asucar-celia-cruz",
+    "title": "Asúcar (Celia Cruz)",
+    "img": "celia-cruz-cantinflowers-DO-SRKMB.webp",
+    "year": 2020,
+    "technique": "Acrílico y collage (sobres de azúcar, envoltorios) sobre lienzo 3D",
+    "series": "DiviNos",
+    "desc": "Retrato vibrante de Celia Cruz en formato grande, integrando un collage de sobres de azúcar reales y colores saturados que homenajean el «Sugar Blues»."
+  },
+  {
+    "slug": "tedas-queen",
+    "title": "Tedás Queen",
+    "img": "tedas-queen-GT9W8egT.webp",
+    "series": "Tributos Musicales",
+    "desc": "Tributo a Queen — energía escénica trasladada al lienzo."
+  },
+  {
+    "slug": "hammock-in-tin",
+    "title": "Hammock in Tin",
+    "img": "hammock-in-tin-XD5nAoyg.webp",
+    "series": "En.lata.das",
+    "desc": "Micromundo en lata: una hamaca, una siesta, un océano de metal."
+  },
+  {
+    "slug": "sardine-tin",
+    "title": "Sardine Tin",
+    "img": "sardine-tin-collage-Bo41LZ-o.webp",
+    "series": "En.lata.das",
+    "desc": "Collage en lata de sardinas — lo cotidiano elevado a arte objeto."
+  },
+  {
+    "slug": "en-caja",
+    "title": "En Caja",
+    "img": "en-caja-CDdrJMsP.webp",
+    "desc": "Arte objeto — una historia guardada en caja, lista para descubrir."
+  },
+  {
+    "slug": "soy-un-amor",
+    "title": "Soy un Amor y tengo Alas",
+    "img": "soy-un-amor-y-tengo-alas-ItTo7aOd.webp",
+    "desc": "Ternura con alas — pieza que celebra el amor que levanta el vuelo."
+  },
+  {
+    "slug": "the-golden-couple",
+    "title": "The Golden Couple",
+    "img": "the-golden-couple-C9C95N75.webp",
+    "desc": "Retrato de pareja en dorados — dos vidas, un mismo brillo."
+  },
+  {
+    "slug": "pink-and-sparkles",
+    "title": "Pink and Sparkles",
+    "img": "pink-and-sparkles-c4K6RUzC.webp",
+    "desc": "Rosa y destellos — color, brillo y actitud en una pieza luminosa."
+  },
+  {
+    "slug": "monster-dragon",
+    "title": "Monster Dragon",
+    "img": "monster-dragon-QQiqdImO.webp",
+    "desc": "Criatura fantástica en clave pop — imaginación sin correa."
+  }
+]

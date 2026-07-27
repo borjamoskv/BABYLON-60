@@ -1,0 +1,7 @@
+{
+  "error": {
+    "code": 400,
+    "message": "Imagen 3 is only available on paid plans. Please upgrade your account at https://ai.dev/projects.",
+    "status": "INVALID_ARGUMENT"
+  }
+}

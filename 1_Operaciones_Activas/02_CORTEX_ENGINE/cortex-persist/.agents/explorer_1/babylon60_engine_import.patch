@@ -1,0 +1,13 @@
+diff --git a/babylon60/engine/__init__.py b/babylon60/engine/__init__.py
+index af8374d..9c8e144 100644
+--- a/babylon60/engine/__init__.py
++++ b/babylon60/engine/__init__.py
+@@ -85,7 +85,7 @@ from .meta import (
+     sovereign_arbiter,
+     vision_reasoner,
+ )
+-from .swarm import (
++from babylon60.swarm import (
+     agent_mixin,
+     aleph_omega,
+     auth,

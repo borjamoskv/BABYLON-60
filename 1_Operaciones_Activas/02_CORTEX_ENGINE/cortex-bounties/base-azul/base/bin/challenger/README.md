@@ -1,0 +1,7 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
+# `base-challenger-bin`
+
+ZK-proof dispute game challenger binary for Base.
+
+Parses CLI arguments, builds a validated configuration, and delegates to
+`base_challenger::run()` for the full service lifecycle.

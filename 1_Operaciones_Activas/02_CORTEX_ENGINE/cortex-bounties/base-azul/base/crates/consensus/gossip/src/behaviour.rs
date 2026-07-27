@@ -1,0 +1,165 @@
+//! Network Behaviour Module.
+
+use std::convert::Infallible;
+
+use derive_more::Debug;
+use libp2p::{
+    gossipsub::{Config, IdentTopic, MessageAuthenticity},
+    swarm::NetworkBehaviour,
+};
+use tracing::info;
+
+use crate::{ConnectionLimitsConfig, Event, Handler};
+
+/// An error that can occur when creating a [`Behaviour`].
+#[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
+pub enum BehaviourError {
+    /// The gossipsub behaviour creation failed.
+    #[error("gossipsub behaviour creation failed")]
+    GossipsubCreationFailed,
+    /// Subscription failed.
+    #[error("subscription failed")]
+    SubscriptionFailed,
+    /// Failed to set the peer score on the gossipsub.
+    #[error("{0}")]
+    PeerScoreFailed(String),
+}
+
+/// Specifies the [`NetworkBehaviour`] of the node
+#[derive(NetworkBehaviour, Debug)]
+#[behaviour(out_event = "Event")]
+pub struct Behaviour {
+    // Keep this first: libp2p calls behaviour connection hooks in field order, and connection
+    // limits should reject excess connections before other behaviours allocate handlers.
+    /// Enforces hard caps for pending and established libp2p connections.
+    #[debug(skip)]
+    pub connection_limits: libp2p::connection_limits::Behaviour,
+    /// Responds to inbound pings and send outbound pings.
+    #[debug(skip)]
+    pub ping: libp2p::ping::Behaviour,
+    /// Enables gossipsub as the routing layer.
+    pub gossipsub: libp2p::gossipsub::Behaviour,
+    /// Enables the identify protocol.
+    #[debug(skip)]
+    pub identify: libp2p::identify::Behaviour,
+    /// Enables the sync request/response protocol.
+    /// See `<https://specs.base.org/protocol/consensus/p2p#payload_by_number>`
+    #[debug(skip)]
+    pub sync_req_resp: libp2p_stream::Behaviour,
+}
+
+impl Behaviour {
+    /// Configures the swarm behaviors, subscribes to the gossip topics, and returns a new
+    /// [`Behaviour`].
+    pub fn new(
+        public_key: libp2p::identity::PublicKey,
+        cfg: Config,
+        handlers: &[Box<dyn Handler>],
+    ) -> Result<Self, BehaviourError> {
+        Self::new_with_connection_limits(
+            public_key,
+            cfg,
+            handlers,
+            ConnectionLimitsConfig::default(),
+        )
+    }
+
+    /// Configures the swarm behaviors, subscribes to the gossip topics, and returns a new
+    /// [`Behaviour`] with the given connection limits.
+    pub fn new_with_connection_limits(
+        public_key: libp2p::identity::PublicKey,
+        cfg: Config,
+        handlers: &[Box<dyn Handler>],
+        connection_limits: ConnectionLimitsConfig,
+    ) -> Result<Self, BehaviourError> {
+        let connection_limits = libp2p::connection_limits::Behaviour::new(connection_limits.into());
+        let ping = libp2p::ping::Behaviour::default();
+
+        let mut gossipsub = libp2p::gossipsub::Behaviour::new(MessageAuthenticity::Anonymous, cfg)
+            .map_err(|_| BehaviourError::GossipsubCreationFailed)?;
+
+        let identify = libp2p::identify::Behaviour::new(
+            libp2p::identify::Config::new(String::new(), public_key)
+                .with_agent_version("base".to_string()),
+        );
+
+        let sync_req_resp = libp2p_stream::Behaviour::new();
+
+        let subscriptions = handlers
+            .iter()
+            .flat_map(|handler| {
+                handler
+                    .topics()
+                    .iter()
+                    .map(|topic| {
+                        let topic = IdentTopic::new(topic.to_string());
+                        gossipsub
+                            .subscribe(&topic)
+                            .map_err(|_| BehaviourError::SubscriptionFailed)?;
+                        Ok(topic.to_string())
+                    })
+                    .collect::<Vec<_>>()
+            })
+            .collect::<Result<Vec<String>, BehaviourError>>()?;
+
+        if !subscriptions.is_empty() {
+            info!(target: "gossip", "Subscribed to topics:");
+        }
+        for topic in subscriptions {
+            info!(target: "gossip", topic = %topic, "Subscribed");
+        }
+
+        Ok(Self { connection_limits, identify, ping, gossipsub, sync_req_resp })
+    }
+}
+
+impl From<Infallible> for Event {
+    /// Converts an impossible connection limits event to [`Event`].
+    fn from(value: Infallible) -> Self {
+        match value {}
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use alloy_chains::Chain;
+    use alloy_primitives::Address;
+    use base_common_genesis::RollupConfig;
+    use libp2p::gossipsub::{IdentTopic, TopicHash};
+
+    use super::*;
+    use crate::{config, handler::BlockHandler};
+
+    fn base_mainnet_topics() -> Vec<TopicHash> {
+        vec![
+            IdentTopic::new("/optimism/8453/0/blocks").hash(),
+            IdentTopic::new("/optimism/8453/1/blocks").hash(),
+            IdentTopic::new("/optimism/8453/2/blocks").hash(),
+            IdentTopic::new("/optimism/8453/3/blocks").hash(),
+        ]
+    }
+
+    #[test]
+    fn test_behaviour_no_handlers() {
+        let key = libp2p::identity::Keypair::generate_secp256k1();
+        let cfg = config::default_config();
+        let handlers = vec![];
+        let _ = Behaviour::new(key.public(), cfg, &handlers).unwrap();
+    }
+
+    #[test]
+    fn test_behaviour_with_handlers() {
+        let key = libp2p::identity::Keypair::generate_secp256k1();
+        let cfg = config::default_config();
+        let (_, recv) = tokio::sync::watch::channel(Address::default());
+        let block_handler = BlockHandler::new(
+            RollupConfig { l2_chain_id: Chain::base_mainnet(), ..Default::default() },
+            recv,
+        );
+        let handlers: Vec<Box<dyn Handler>> = vec![Box::new(block_handler)];
+        let behaviour = Behaviour::new(key.public(), cfg, &handlers).unwrap();
+        let mut topics = behaviour.gossipsub.topics().cloned().collect::<Vec<TopicHash>>();
+        topics.sort();
+        assert_eq!(topics, base_mainnet_topics());
+    }
+}

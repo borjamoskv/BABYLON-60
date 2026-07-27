@@ -1,0 +1,45 @@
+# External test contexts
+external-test-context
+
+# Agent-related planning and notes (internal development)
+notes/
+
+# Dependencies
+clarity/node_modules/
+clarity/package-lock.json
+clarity/yarn.lock
+
+# Build artifacts
+clarity/.cache/
+clarity/coverage/
+clarity/*.log
+clarity/lcov.info
+clarity/costs-reports.json
+
+# Test logs (git-ignore, but keep structure)
+clarity/logs/
+!clarity/logs/.gitkeep
+
+# IDE
+clarity/.vscode/
+clarity/.idea/
+clarity/*.swp
+clarity/*.swo
+clarity/*~
+
+# OS
+clarity/.DS_Store
+clarity/Thumbs.db
+
+# Keep corpus and crashes (tracked in git)
+!clarity/fuzz/corpus/
+!clarity/fuzz/crashes/
+
+# But ignore large files in corpus/crashes
+clarity/fuzz/corpus/seeds/*.bin
+clarity/fuzz/corpus/seeds/*.large
+clarity/fuzz/crashes/*.large
+
+# Temporary files
+clarity/*.tmp
+clarity/*.temp

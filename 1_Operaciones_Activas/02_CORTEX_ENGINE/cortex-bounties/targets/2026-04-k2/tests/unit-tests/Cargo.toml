@@ -1,0 +1,18 @@
+[package]
+name = "k2-unit-tests"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["rlib"]
+
+# Empty dependencies for WASM build compatibility
+[dependencies]
+
+# All dependencies are dev-only since this crate is test-only
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }
+# Only shared types needed - contracts are imported as WASM
+k2-shared = { path = "../../contracts/shared" }
+k2-kinetic-router = { path = "../../contracts/kinetic-router" }
+hex = "0.4"

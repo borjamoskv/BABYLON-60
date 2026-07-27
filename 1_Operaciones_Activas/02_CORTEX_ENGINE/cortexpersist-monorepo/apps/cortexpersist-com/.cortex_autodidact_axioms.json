@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "version": "3.0",
+    "source": "llm_ast_compiler"
+  },
+  "axioms": [
+    {
+      "id": "REACT_USEEFFECT_INLINE_OBJECT_DEPENDENCY",
+      "description": "An object literal used directly as a useEffect dependency will cause the effect to re-run on every render because object identity changes.",
+      "ast_query": {
+        "node": "CallExpression",
+        "callee": "useEffect",
+        "contains": {
+          "node": "ArrayExpression",
+          "contains": {
+            "node": "ObjectExpression"
+          }
+        }
+      }
+    },
+    {
+      "id": "REACT_USEEFFECT_INLINE_FUNCTION_DEPENDENCY",
+      "description": "A function literal (arrow or regular) used directly as a useEffect dependency will cause the effect to re-run on every render because function identity changes.",
+      "ast_query": {
+        "node": "CallExpression",
+        "callee": "useEffect",
+        "contains": {
+          "node": "ArrayExpression",
+          "contains": {
+            "node": ["ArrowFunctionExpression", "FunctionExpression"]
+          }
+        }
+      }
+    },
+    {
+      "id": "HARDWARE_NATIVE_EXECUTION",
+      "description": "La optimizaci\u00f3n verdadera no escala la escalera m\u00e1s r\u00e1pido; construye un ascensor. Si est\u00e1s optimizando bucles anidados en JS o Python, has fracasado. Escribe un binario, iny\u00e9ctalo, y cambia las leyes f\u00edsicas del problema.",
+      "ast_query": {
+        "node": ["ForStatement", "WhileStatement"],
+        "contains": {
+          "node": ["ForStatement", "WhileStatement"]
+        },
+        "resolution": "EXTRACT_TO_RUST_GO_WASM_BINARY"
+      }
+    },
+    {
+      "id": "POLLING_ENTROPY_DECAY",
+      "description": "Short-polling via setInterval generates continuous baseline entropy and accelerates hazard decay. Reemplazar por Server-Sent Events (SSE) si freq < 5000ms.",
+      "ast_query": {
+        "node": "CallExpression",
+        "callee": "setInterval",
+        "contains": {
+          "node": "CallExpression",
+          "callee": "fetch"
+        },
+        "resolution": "UPGRADE_TO_SSE_C5_REAL"
+      }
+    },
+    {
+      "id": "STIGMERGIC_LEDGER_CONTENTION",
+      "description": "I/O s\u00edncrono sobre archivos de Ledger compartidos (fs.writeFileSync) causa colapso termodin\u00e1mico bajo carga. Forzar I/O as\u00edncrono o volcar a Rust.",
+      "ast_query": {
+        "node": "CallExpression",
+        "callee": "writeFileSync",
+        "resolution": "MIGRATE_TO_ASYNC_OR_DB"
+      }
+    }
+  ]
+}

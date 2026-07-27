@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "created": "2026-06-01T01:56:34.786Z",
+  "pipeline": "MOSKV Video Forge",
+  "preset": "test",
+  "source": "/Users/borjafernandezangulo/10_PROJECTS",
+  "assets": {
+    "images": [],
+    "audio": null
+  },
+  "output": {
+    "directory": "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/03_MOSKV_STUDIO/video-forge/output"
+  }
+}

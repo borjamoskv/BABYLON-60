@@ -1,0 +1,18 @@
+` MOSKV-85 Concurrency Demonstration
+` This script showcases threads and channel communications using the new opcodes (F, O, T, Y).
+` Execution level: C5-REAL
+
+` 1. Create channel (F) -> Pushes channel ID 0 to stack
+F
+
+` 2. Spawn Producer 1: Pushes 5, pushes channel ID 0, sends value via O. Spawns via Y.
+[ 5 0 O ] Y
+
+` 3. Spawn Producer 2: Pushes 10, pushes channel ID 0, sends value via O. Spawns via Y.
+[ 10 0 O ] Y
+
+` 4. Main thread: Wait and receive from channel 0 twice, add values, and print.
+0 T
+0 T
++ .
+\n\

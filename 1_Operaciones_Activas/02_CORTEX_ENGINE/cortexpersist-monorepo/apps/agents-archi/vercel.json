@@ -1,0 +1,21 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "cd ../.. && pnpm turbo run build --filter=@cortex/agents-archi",
+  "installCommand": "pnpm install",
+  "outputDirectory": ".next",
+  "regions": ["mad1", "cdg1"],
+  "env": {
+    "CORTEX_API_KEY": "@cortex-api-key",
+    "CORTEX_SIGNING_PRIVATE_KEY": "@cortex-signing-private-key"
+  },
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/_next/static/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
+  ]
+}

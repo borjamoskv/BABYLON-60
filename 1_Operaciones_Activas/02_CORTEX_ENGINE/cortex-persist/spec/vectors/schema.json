@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CORTEX Epistemic Microkernel Conformance Vector",
+  "type": "object",
+  "required": ["vector_id", "description", "category", "initial_state", "input_proposal", "expected_behavior"],
+  "properties": {
+    "vector_id": {
+      "type": "string",
+      "description": "Unique identifier for this test vector."
+    },
+    "description": {
+      "type": "string",
+      "description": "The normative rule being tested."
+    },
+    "category": {
+      "type": "string",
+      "enum": ["TV-TOP", "TV-SER", "TV-STM", "TV-CRY"],
+      "description": "The failure domain category."
+    },
+    "initial_state": {
+      "type": "object",
+      "description": "The base DAG topology before the proposal is applied. Can be empty."
+    },
+    "input_proposal": {
+      "type": "object",
+      "description": "The ProposedState or raw objects to be committed."
+    },
+    "expected_behavior": {
+      "type": "string",
+      "description": "SUCCESS or a specific Error Code."
+    },
+    "expected_hash": {
+      "type": "string",
+      "description": "If expected_behavior is SUCCESS, the exact SHA3-256 hash or Merkle Root that the kernel MUST produce."
+    }
+  }
+}

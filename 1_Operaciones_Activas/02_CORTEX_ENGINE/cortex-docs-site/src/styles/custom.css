@@ -1,0 +1,53 @@
+:root {
+  /* Industrial Noir 2026 Base Colors */
+  --sl-color-accent-low: #0a0a1a;
+  --sl-color-accent: #2B3BE5;
+  --sl-color-accent-high: #7b88ff;
+  
+  --sl-color-bg: #0A0A0A;
+  --sl-color-bg-nav: #050505;
+  --sl-color-bg-sidebar: #080808;
+  --sl-color-bg-inline-code: #111111;
+  --sl-color-gray-1: #e0e0e0;
+  --sl-color-gray-2: #c0c0c0;
+  --sl-color-gray-3: #888888;
+  --sl-color-gray-4: #444444;
+  --sl-color-gray-5: #222222;
+  --sl-color-gray-6: #151515;
+
+  /* Typography */
+  --sl-font: 'Inter', system-ui, sans-serif;
+  
+  /* Selection */
+  --sl-color-text-selection: #ffffff;
+  --sl-color-bg-selection: rgba(43, 59, 229, 0.4);
+}
+
+:root[data-theme='light'] {
+  /* We force a dark aesthetic even on light mode, or we can use a stark white/blue theme */
+  --sl-color-bg: #FFFFFF;
+  --sl-color-bg-nav: #F5F5F5;
+  --sl-color-bg-sidebar: #FAFAFA;
+  --sl-color-bg-inline-code: #EAEAEA;
+  --sl-color-gray-1: #111111;
+  --sl-color-gray-2: #333333;
+  --sl-color-gray-3: #666666;
+  --sl-color-gray-4: #999999;
+  --sl-color-gray-5: #DDDDDD;
+  --sl-color-gray-6: #F0F0F0;
+}
+
+body {
+  font-family: var(--sl-font);
+  background-color: var(--sl-color-bg);
+  color: var(--sl-color-gray-1);
+}
+
+.hero .tagline {
+  color: var(--sl-color-gray-2);
+}
+
+.card-grid .card {
+  border-color: var(--sl-color-gray-5);
+  background: var(--sl-color-bg-sidebar);
+}

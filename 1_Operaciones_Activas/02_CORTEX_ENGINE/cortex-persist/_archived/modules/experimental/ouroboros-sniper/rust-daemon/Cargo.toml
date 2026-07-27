@@ -1,0 +1,65 @@
+[package]
+name = "ouroboros-daemon"
+version = "0.2.0"
+edition = "2021"
+
+[dependencies]
+# Async runtime — Sovereign execution layer
+tokio = { version = "1", features = ["full"] }
+
+# Telegram MTProto nativo (sin REST — CLIENT LEVEL)
+grammers-client = "0.10.0"
+grammers-session = "0.10.0"
+
+# Discord Gateway WebSocket
+tokio-tungstenite = { version = "0.20", features = ["native-tls"] }
+futures-util = "0.3"
+
+# CSE Layer (Artemis-derived) traits
+async-trait = "0.1"
+tokio-stream = { version = "0.1", features = ["sync"] }
+
+# GitHub API HTTP client
+reqwest = { version = "0.11", features = ["json", "native-tls"], default-features = false }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# URL parsing (Flashbots relay endpoint)
+url = "2"
+
+# Timestamps for deadlines
+chrono = "0.4"
+
+# Terminal UI — Industrial Noir Dashboard
+ratatui = "0.30.2"
+crossterm = "0.28.1"
+
+# Pattern matching O(1) — Multi-string en texto raw
+aho-corasick = "1.1"
+
+# Hex encoding for calldata selector matching (GÉNESIS-Ω)
+hex = "0.4"
+
+# Logging & Telemetry
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# Utils
+dotenv = "0.15"
+anyhow = "1.0"
+rand = "0.9"
+alloy = { version = "2.1.1", features = ["full", "node-bindings", "rpc-types", "signers", "contract", "providers"] }
+
+# ML local inference — Stub mode (Candle disabled due to half/f16 ABI break on macOS Metal)
+# candle-core = { version = "0.8", features = ["metal"] }
+# candle-nn = "0.8"
+# TODO: Re-enable when candle stabilizes f16 ABI
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = 'abort'
+strip = true

@@ -1,0 +1,118 @@
+[project]
+name = "bitflow-dlmm"
+description = ""
+authors = []
+telemetry = false
+cache_dir = ".cache"
+
+[contracts.sip-010-trait-ft-standard-v-1-1]
+path = "contracts/external/sip-010-trait-ft-standard-v-1-1.clar"
+clarity_version = 3
+epoch = "3.0"
+
+[contracts.sip-013-trait-sft-standard-v-1-1]
+path = "contracts/external/sip-013-trait-sft-standard-v-1-1.clar"
+clarity_version = 4
+epoch = "3.3"
+
+[contracts.sip-013-transfer-many-trait-v-1-1]
+path = "contracts/external/sip-013-transfer-many-trait-v-1-1.clar"
+clarity_version = 4
+epoch = "3.3"
+
+[contracts.token-stx-v-1-1]
+path = "contracts/external/token-stx-v-1-1.clar"
+clarity_version = 3
+epoch = "3.0"
+
+[contracts.dlmm-core-trait-v-1-1]
+path = "contracts/dlmm-core-trait-v-1-1.clar"
+clarity_version = 4
+epoch = "3.3"
+
+[contracts.dlmm-pool-trait-v-1-1]
+path = "contracts/dlmm-pool-trait-v-1-1.clar"
+clarity_version = 4
+epoch = "3.3"
+
+[contracts.dlmm-staking-trait-v-1-1]
+path = "contracts/dlmm-staking-trait-v-1-1.clar"
+clarity_version = 4
+epoch = "3.3"
+
+[contracts.dlmm-core-v-1-1]
+path = "contracts/dlmm-core-v-1-1.clar"
+clarity_version = 4
+epoch = "3.3"
+
+[contracts.dlmm-staking-sbtc-usdc-v-1-1]
+path = "contracts/dlmm-staking-sbtc-usdc-v-1-1.clar"
+clarity_version = 4
+epoch = "3.3"
+
+[contracts.dlmm-pool-sbtc-usdc-v-1-1]
+path = "contracts/dlmm-pool-sbtc-usdc-v-1-1.clar"
+clarity_version = 4
+epoch = "3.3"
+
+[contracts.dlmm-swap-router-v-1-1]
+path = "contracts/dlmm-swap-router-v-1-1.clar"
+clarity_version = 4
+epoch = "3.3"
+
+[contracts.dlmm-liquidity-router-v-1-1]
+path = "contracts/dlmm-liquidity-router-v-1-1.clar"
+clarity_version = 4
+epoch = "3.3"
+
+[contracts.dlmm-core-multi-helper-v-1-1]
+path = "contracts/dlmm-core-multi-helper-v-1-1.clar"
+clarity_version = 4
+epoch = "3.3"
+
+[contracts.dlmm-core-validation-helper-v-1-1]
+path = "contracts/dlmm-core-validation-helper-v-1-1.clar"
+clarity_version = 4
+epoch = "3.3"
+
+[contracts.dlmm-pool-multi-helper-v-1-1]
+path = "contracts/dlmm-pool-multi-helper-v-1-1.clar"
+clarity_version = 4
+epoch = "3.3"
+
+[contracts.dlmm-pool-sbtc-usdc-validation-v-1-1]
+path = "contracts/dlmm-pool-sbtc-usdc-validation-v-1-1.clar"
+clarity_version = 4
+epoch = "3.3"
+
+[contracts.mock-sbtc-token]
+path = "contracts/mocks/mock-sbtc-token.clar"
+clarity_version = 4
+epoch = "3.3"
+
+[contracts.mock-usdc-token]
+path = "contracts/mocks/mock-usdc-token.clar"
+clarity_version = 4
+epoch = "3.3"
+
+[contracts.mock-pool]
+path = "contracts/mocks/mock-pool.clar"
+clarity_version = 4
+epoch = "3.3"
+
+[contracts.mock-random-token]
+path = "contracts/mocks/mock-random-token.clar"
+clarity_version = 4
+epoch = "3.3"
+
+[repl.analysis]
+passes = ["check_checker"]
+check_checker = { trusted_sender = false, trusted_caller = false, callee_filter = false }
+
+# Check-checker settings:
+# trusted_sender: if true, inputs are trusted after tx_sender has been checked.
+# trusted_caller: if true, inputs are trusted after contract-caller has been checked.
+# callee_filter: if true, untrusted data may be passed into a private function without a
+# warning, if it gets checked inside. This check will also propagate up to the
+# caller.
+# More information: https://www.hiro.so/blog/new-safety-checks-in-clarinet

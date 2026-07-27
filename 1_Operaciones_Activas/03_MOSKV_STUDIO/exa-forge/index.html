@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EXA-FORGE | L0 Sovereign Substrate</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+    :root {
+      --bg: #0A0A0A;
+      --fg: #FFFFFF;
+      --accent: #2B3BE5;
+      --dead: #333333;
+      --font-mono: 'Inter', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-mono);
+      overflow: hidden;
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* Zero-UI Overlay */
+    #hud {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      z-index: 100;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+
+    .status-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .indicator {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; box-shadow: 0 0 10px var(--accent); }
+      50% { opacity: 0.4; box-shadow: 0 0 2px var(--accent); }
+      100% { opacity: 1; box-shadow: 0 0 10px var(--accent); }
+    }
+
+    /* AST Canvas */
+    #canvas-container {
+      position: relative;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ast-node {
+      position: absolute;
+      font-size: 1rem;
+      white-space: pre;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: crosshair;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .ast-node.o1 {
+      color: var(--fg);
+      text-shadow: 0 0 2px rgba(255,255,255,0.3);
+    }
+
+    .ast-node.oN {
+      color: var(--dead);
+      filter: blur(0.5px);
+    }
+
+    .ast-node.c5-real {
+      color: var(--accent);
+      text-shadow: 0 0 15px var(--accent);
+      font-weight: 600;
+    }
+
+    .ast-node:hover {
+      transform: scale(1.05);
+      color: var(--fg);
+      text-shadow: 0 0 8px var(--fg);
+      filter: blur(0);
+      z-index: 10;
+      background-color: rgba(43, 59, 229, 0.1);
+      border: 1px solid rgba(43, 59, 229, 0.3);
+    }
+
+    /* Connections */
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    path {
+      fill: none;
+      stroke: var(--dead);
+      stroke-width: 1px;
+      opacity: 0.3;
+      transition: stroke 0.3s, opacity 0.3s;
+    }
+
+    path.active {
+      stroke: var(--accent);
+      opacity: 0.8;
+      stroke-width: 2px;
+      filter: drop-shadow(0 0 4px var(--accent));
+    }
+  </style>
+</head>
+<body>
+
+  <div id="hud">
+    <div class="status-line">
+      <div class="indicator"></div>
+      <span>EXA-FORGE L0 Substrate</span>
+    </div>
+    <div class="status-line">
+      <span>Latency: <span id="latency">0.0</span>ms</span>
+    </div>
+    <div class="status-line">
+      <span>Exergy: <span id="exergy">MAX</span></span>
+    </div>
+    <div class="status-line">
+      <span style="color: var(--dead)">Mode: Modal AST Mutation</span>
+    </div>
+  </div>
+
+  <div id="canvas-container">
+    <svg id="edges"></svg>
+    <div id="nodes"></div>
+  </div>
+
+  <script>
+    // Simulated AST Data (S-Expressions)
+    const astData = [
+      { id: 'root', text: '(defun autonomous-swarm (target)', x: 30, y: 30, type: 'c5-real' },
+      { id: 'let', text: '(q-let ((exergy-budget 10000))', x: 35, y: 40, type: 'o1', parent: 'root' },
+      { id: 'loop', text: '(loop while (> exergy-budget 0)', x: 40, y: 50, type: 'o1', parent: 'let' },
+      { id: 'branch1', text: '(spawn-agent target)', x: 45, y: 60, type: 'c5-real', parent: 'loop' },
+      { id: 'branch2', text: '(consume-entropy 10)', x: 45, y: 68, type: 'oN', parent: 'loop' },
+      { id: 'gc', text: '(time.sleep 0.1) ; BLUR / NOISE', x: 45, y: 76, type: 'oN', parent: 'loop' }, 
+      { id: 'verify', text: '(z3-verify-state ledger)', x: 35, y: 85, type: 'c5-real', parent: 'root' },
+      { id: 'crypto', text: '(anchor-hash-to-l2)', x: 35, y: 92, type: 'c5-real', parent: 'verify' }
+    ];
+
+    const nodesContainer = document.getElementById('nodes');
+    const edgesContainer = document.getElementById('edges');
+    const latencyDisplay = document.getElementById('latency');
+
+    let nodes = {};
+
+    function renderAST() {
+      nodesContainer.innerHTML = '';
+      edgesContainer.innerHTML = '';
+
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+
+      astData.forEach(node => {
+        const el = document.createElement('div');
+        el.className = `ast-node ${node.type}`;
+        el.innerText = node.text;
+        
+        el.style.left = `${node.x}vw`;
+        el.style.top = `${node.y}vh`;
+
+        el.addEventListener('mouseenter', () => activatePath(node.id));
+        el.addEventListener('mouseleave', () => deactivatePaths());
+
+        nodesContainer.appendChild(el);
+        nodes[node.id] = { data: node, el: el };
+      });
+
+      // Give browser time to compute layout
+      setTimeout(drawEdges, 50);
+    }
+
+    function drawEdges() {
+      edgesContainer.innerHTML = '';
+      astData.forEach(node => {
+        if (node.parent && nodes[node.parent]) {
+          const parentEl = nodes[node.parent].el;
+          const childEl = nodes[node.id].el;
+
+          const pRect = parentEl.getBoundingClientRect();
+          const cRect = childEl.getBoundingClientRect();
+
+          const startX = pRect.left + 20;
+          const startY = pRect.bottom;
+          const endX = cRect.left;
+          const endY = cRect.top + cRect.height / 2;
+
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path.setAttribute('d', `M ${startX} ${startY} C ${startX} ${endY}, ${endX - 20} ${endY}, ${endX} ${endY}`);
+          path.setAttribute('id', `edge-${node.id}`);
+          edgesContainer.appendChild(path);
+        }
+      });
+    }
+
+    function activatePath(nodeId) {
+      const edge = document.getElementById(`edge-${nodeId}`);
+      if (edge) edge.classList.add('active');
+
+      const node = nodes[nodeId].data;
+      if (node.parent) {
+        activatePath(node.parent);
+      }
+    }
+
+    function deactivatePaths() {
+      document.querySelectorAll('path').forEach(p => p.classList.remove('active'));
+    }
+
+    function loop() {
+      latencyDisplay.innerText = (Math.random() * 0.5 + 0.1).toFixed(2);
+      requestAnimationFrame(loop);
+    }
+
+    window.addEventListener('resize', () => {
+      renderAST();
+    });
+
+    renderAST();
+    loop();
+
+    setInterval(() => {
+      const c5Nodes = document.querySelectorAll('.c5-real');
+      if(c5Nodes.length === 0) return;
+      const randomNode = c5Nodes[Math.floor(Math.random() * c5Nodes.length)];
+      randomNode.style.textShadow = '0 0 30px var(--accent)';
+      randomNode.style.transform = 'scale(1.02)';
+      setTimeout(() => {
+        randomNode.style.textShadow = '0 0 15px var(--accent)';
+        randomNode.style.transform = 'scale(1)';
+      }, 150);
+    }, 800);
+
+  </script>
+</body>
+</html>

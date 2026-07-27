@@ -1,0 +1,23 @@
+{
+  "system": "CORTEX-FAS v6 (Digital Twin)",
+  "mode": "adversarial stress simulation",
+  "epistemic_status": "counterfactual_simulation_only",
+  "case_topology": "iHelp-like donation + discount coupling",
+  "assumption_lattice": [
+    "100% contraprestation equivalence treated as linear correlation",
+    "Art. 16 Ley 49/2002 strict threshold enforcement applied",
+    "Zero de minimis tolerance modeled",
+    "AEAT agent mapped as maximal correlation seeker"
+  ],
+  "simulation_output": {
+    "regime_shift_model_score": 0.8676,
+    "system_energy_spike": 0.3051,
+    "lyapunov_lambda_baseline": 0.0005,
+    "primary_sensitivity_axis": "DONORS (Declarantes IRPF)",
+    "secondary_sensitivity_axis": "NETWORK_PROMOTER",
+    "regime_signal": "Threshold overflow detected under strict assumptions.",
+    "interpretation": "High sensitivity to reclassification rules detected under current state assumptions",
+    "dominant_driver": "Art16_threshold_constraint",
+    "note": "Result is conditional on rule strictness assumptions, NOT a legal prediction or assertion of factual wrongdoing."
+  }
+}

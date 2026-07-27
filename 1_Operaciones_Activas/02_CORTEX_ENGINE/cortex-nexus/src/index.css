@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* =========================================
+     CORTEX-NEXUS: THEME MATRIX (DESIGN VARIATIONS)
+     ========================================= */
+
+  /* 1. INDUSTRIAL NOIR 2026 (Default) */
+  :root, [data-theme="noir"] {
+    --background: 0 0% 4%; /* #0a0a0a */
+    --foreground: 0 0% 70%; /* #b3b3b3 */
+    --card: 0 0% 6%;
+    --card-foreground: 0 0% 90%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 90%;
+    --primary: 235 80% 60%; /* YInMn Blue variant */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 90%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 235 80% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 235 80% 60%;
+    --radius: 0.25rem;
+    
+    /* Font override for Noir */
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  /* 2. SOFT MINIMALISM (Calm) */
+  [data-theme="calm"] {
+    --background: 30 20% 98%; /* Warm off-white */
+    --foreground: 30 10% 20%;
+    --card: 0 0% 100%;
+    --card-foreground: 30 10% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 30 10% 20%;
+    --primary: 30 20% 40%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 20% 92%;
+    --secondary-foreground: 30 10% 20%;
+    --muted: 30 20% 92%;
+    --muted-foreground: 30 5% 50%;
+    --accent: 30 20% 90%;
+    --accent-foreground: 30 10% 20%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 30 20% 90%;
+    --input: 30 20% 90%;
+    --ring: 30 20% 40%;
+    --radius: 1.5rem; /* Super rounded */
+    
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Outfit', sans-serif;
+  }
+
+  /* 3. CYBER BRUTALISM (Brutal) */
+  [data-theme="brutal"] {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 110 100% 50%; /* Neon Green */
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 90%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 110 100% 50%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 0%;
+    --input: 0 0% 0%;
+    --ring: 0 0% 0%;
+    --radius: 0px; /* Sharp edges */
+    
+    --font-heading: 'JetBrains Mono', monospace;
+    --font-body: 'JetBrains Mono', monospace;
+  }
+
+  /* 4. GLASSMORPHISM (Glass) */
+  [data-theme="glass"] {
+    --background: 260 50% 10%; /* Deep purple base */
+    --foreground: 0 0% 100%;
+    --card: 260 50% 20%; /* Will be overriden by rgba in components but acts as fallback */
+    --card-foreground: 0 0% 100%;
+    --popover: 260 50% 20%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 320 80% 60%; /* Pink accent */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 260 40% 30%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 260 40% 30%;
+    --muted-foreground: 260 20% 70%;
+    --accent: 320 80% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 260 30% 40%;
+    --input: 260 30% 40%;
+    --ring: 320 80% 60%;
+    --radius: 1rem;
+    
+    --font-heading: 'Roboto', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Smooth transitions for theme switching */
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, border-radius 0.3s ease;
+  }
+  
+  html, body, #root {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-body);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+
+  /* Brutalism specific overrides */
+  [data-theme="brutal"] * {
+    box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+    transition: none !important; /* Brutalism has no smooth transitions */
+  }
+
+  /* Glassmorphism specific overrides */
+  [data-theme="glass"] body {
+    background: radial-gradient(circle at top left, #3a1c71, #d76d77, #ffaf7b);
+    background-attachment: fixed;
+  }
+  
+  [data-theme="glass"] .bg-card, 
+  [data-theme="glass"] .bg-background {
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+}

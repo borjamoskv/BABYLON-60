@@ -1,0 +1,44 @@
+#![doc = include_str!("../README.md")]
+#![doc(
+    html_logo_url = "https://avatars.githubusercontent.com/u/16627100?s=200&v=4",
+    html_favicon_url = "https://avatars.githubusercontent.com/u/16627100?s=200&v=4",
+    issue_tracker_base_url = "https://github.com/base/base/issues/"
+)]
+#![cfg_attr(not(test), warn(unused_crate_dependencies))]
+#![cfg_attr(docsrs, feature(doc_cfg, doc_auto_cfg))]
+
+#[macro_use]
+extern crate tracing;
+
+mod id;
+pub use id::PeerId;
+
+mod nodes;
+pub use nodes::BootNodes;
+
+mod store;
+pub use store::{BootStore, BootStoreFile};
+
+mod score;
+pub use score::PeerScoreLevel;
+
+mod enr;
+pub use enr::{BaseEnr, BaseEnrError, EnrValidation};
+
+mod any;
+pub use any::{AnyNode, DialOptsError};
+
+mod boot;
+pub use boot::{BootNode, BootNodeParseError};
+
+mod record;
+pub use record::{NodeRecord, NodeRecordParseError};
+
+mod utils;
+pub use utils::{PeerIdConversionError, PeerUtils};
+
+mod monitoring;
+pub use monitoring::PeerMonitoring;
+
+mod secrets;
+pub use secrets::{KeypairError, ParseKeyError, SecretKeyLoader};

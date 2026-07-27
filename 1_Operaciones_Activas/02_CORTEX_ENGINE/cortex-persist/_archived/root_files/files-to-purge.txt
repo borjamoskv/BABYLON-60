@@ -1,0 +1,7 @@
+.env
+.env.local
+scratch/BORJA-MOSKV-LEADS.csv
+scratch_rust/target
+vectors/vectors.db
+vectors/vectors.db-shm
+.coverage

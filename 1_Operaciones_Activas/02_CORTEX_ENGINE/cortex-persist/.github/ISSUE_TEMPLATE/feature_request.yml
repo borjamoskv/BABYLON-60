@@ -1,0 +1,38 @@
+name: Feature Request
+description: Propose a new feature for the CORTEX-Persist C5-REAL ecosystem
+title: "[FEATURE] "
+labels: ["enhancement", "needs-triage"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Feature Request (Industrial Noir Standard)
+        All new features must adhere to O(1) determinism, Epistemic Humility, and the C5-REAL zero-latency execution bound.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Clear and Concise Description
+      description: What is the problem you're trying to solve? Describe the feature and its C5-REAL thermodynamic impact.
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Proposed O(1) Implementation
+      description: How should this be implemented in a lock-free, zero-latency manner?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: reality_level
+    attributes:
+      label: Target Reality Level
+      description: Is this for simulation or production execution?
+      options:
+        - C5-REAL (Hardware PoC)
+        - C4-SIM (Local Testing)
+    validations:
+      required: true

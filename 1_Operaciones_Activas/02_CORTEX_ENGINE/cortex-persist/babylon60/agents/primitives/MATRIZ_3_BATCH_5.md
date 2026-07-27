@@ -1,0 +1,5 @@
+| ID | Antipatrón | Disfunción Causal | Señal de Presencia | Impacto en Robustez | Refactor (Alternativa) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| ANT-041 | Validación Determinista | Consumo de JSON/YAML crudo generado por LLM sin puente de tipado rígido. | Ausencia de validadores tipo Pydantic/Zod en flujos de datos estructurados. | Crítico (Datos corruptos y alucinaciones inyectadas). | Implementar validadores tipados rígidos (Pydantic/Zod/Rust Structs). |
+| ANT-042 | Falsa Inferencia por Contaminación de Corpus | Evaluar razonamiento utilizando acertijos existentes en el corpus de entrenamiento (Memoria estocástica). | Puntuaciones perfectas en acertijos clásicos pero fallos en variaciones lógicas leves. | Alto (Falsos positivos de capacidad de razonamiento). | Usar benchmarks dinámicos y evaluar trazas causales independientes. |
+| ANT-043 | Mutación Preview | Confianza en endpoints "preview" no versionados del proveedor. | Derivas de pesos silenciosas y fallas repentinas en tests anteriormente verdes. | Medio (Falta de reproducibilidad y estabilidad). | Congelar versiones estables de modelos o fijar snapshots deterministas. |

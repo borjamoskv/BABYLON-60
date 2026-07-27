@@ -1,0 +1,22 @@
+# C5-REAL EXERGY CERTIFIED
+[package]
+name = "base-blobs"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+homepage.workspace = true
+repository.workspace = true
+description = "EIP-4844 blob encoding and decoding for the Base batcher"
+
+[lints]
+workspace = true
+
+[dependencies]
+thiserror.workspace = true
+alloy-eips.workspace = true
+alloy-primitives.workspace = true
+base-protocol = { workspace = true, features = ["std"] }
+
+[dev-dependencies]
+rstest.workspace = true

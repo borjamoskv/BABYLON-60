@@ -1,0 +1,59 @@
+#![doc = include_str!("../README.md")]
+#![doc(
+    html_logo_url = "https://avatars.githubusercontent.com/u/16627100?s=200&v=4",
+    html_favicon_url = "https://avatars.githubusercontent.com/u/16627100?s=200&v=4",
+    issue_tracker_base_url = "https://github.com/base/base/issues/"
+)]
+#![cfg_attr(docsrs, feature(doc_cfg, doc_auto_cfg))]
+#![cfg_attr(not(feature = "metrics"), no_std)]
+
+extern crate alloc;
+
+#[macro_use]
+extern crate tracing;
+
+mod attributes;
+pub use attributes::StatefulAttributesBuilder;
+
+mod errors;
+pub use errors::{
+    BatchDecompressionError, BlobDecodingError, BlobProviderError, BuilderError,
+    PipelineEncodingError, PipelineError, PipelineErrorKind, ResetError,
+};
+
+mod pipeline;
+pub use pipeline::{
+    AttributesQueueStage, BatchProviderStage, BatchStreamStage, ChannelProviderStage,
+    ChannelReaderStage, DerivationPipeline, FrameQueueStage, L1RetrievalStage, PipelineBuilder,
+    PolledAttributesQueueStage,
+};
+
+mod sources;
+pub use sources::{
+    BLOB_ENCODING_ROUNDS, BLOB_ENCODING_VERSION, BLOB_MAX_DATA_SIZE, BlobData, BlobSource,
+    CalldataSource, EthereumDataSource,
+};
+
+mod stages;
+pub use stages::{
+    AttributesQueue, BatchProvider, BatchQueue, BatchStream, BatchStreamProvider, BatchValidator,
+    ChannelAssembler, ChannelBank, ChannelProvider, ChannelReader, ChannelReaderProvider,
+    FJORD_MAX_CHANNEL_BANK_SIZE, FrameQueue, FrameQueueProvider, L1Retrieval, L1RetrievalProvider,
+    MAX_CHANNEL_BANK_SIZE, NextBatchProvider, NextFrameProvider, PollingTraversal,
+};
+
+mod traits;
+pub use traits::{
+    AttributesBuilder, AttributesProvider, BatchValidationProviderDerive, BlobProvider,
+    ChainProvider, DataAvailabilityProvider, L2ChainProvider, NextAttributes, OriginAdvancer,
+    OriginProvider, Pipeline, ResetProvider, SignalReceiver, StageReset,
+};
+
+mod types;
+pub use types::{ActivationSignal, PipelineResult, ResetSignal, Signal, StepResult};
+
+mod metrics;
+pub use metrics::Metrics;
+
+#[cfg(any(test, feature = "test-utils"))]
+pub mod test_utils;

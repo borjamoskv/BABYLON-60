@@ -1,0 +1,15 @@
+{
+  "feedback_id": "8c2a752c73d14a6183d3f139e5ad856e",
+  "timestamp": "2026-06-29T21:18:46.540647+00:00",
+  "job_id": "be32dde9cb40",
+  "action": "creative_run",
+  "estimated_metrics": {
+    "originality_ratio": 0.3,
+    "distribution_yield": 0.0,
+    "entropy": 0.3,
+    "coherence": 0.4,
+    "fatigue": 0.0
+  },
+  "artifact_status": "rejected",
+  "rejection_reason": "adversarial_fail"
+}

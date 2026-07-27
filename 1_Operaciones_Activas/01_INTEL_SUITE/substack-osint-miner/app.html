@@ -1,0 +1,839 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOSKV-1 APEX | Substack Sentinel App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-color: #060608;
+            --card-bg: #0c0d15;
+            --border-color: #1e2235;
+            --text-color: #f3f4f6;
+            --text-muted: #9ca3af;
+            --primary: #2b3be5;
+            --primary-glow: rgba(43, 59, 229, 0.3);
+            --accent: #ff5600;
+            --accent-glow: rgba(255, 86, 0, 0.2);
+            --success: #10b981;
+            --danger: #ef4444;
+            --font-main: "Outfit", sans-serif;
+            --font-headings: "Space Grotesk", sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: rgba(12, 13, 21, 0.85);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 2rem;
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-family: var(--font-headings);
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            background: linear-gradient(135deg, #ffffff 40%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header .subtitle {
+            color: var(--accent);
+            font-family: var(--font-headings);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1400px;
+            width: 95%;
+            margin: 2rem auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Drop Zone */
+        .dropzone-container {
+            background-color: var(--card-bg);
+            border: 2px dashed var(--border-color);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .dropzone-container:hover, .dropzone-container.dragover {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .dropzone-container svg {
+            width: 48px;
+            height: 48px;
+            stroke: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .dropzone-container h3 {
+            font-family: var(--font-headings);
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .dropzone-container p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .file-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Dashboard grid */
+        .dashboard-layout {
+            display: none;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .stat-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card .label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-card .value {
+            font-family: var(--font-headings);
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .stat-card .value.revenue {
+            color: var(--success);
+        }
+
+        /* Middle row: Chart & Summary */
+        .mid-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .mid-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1.5rem;
+        }
+
+        .card h2 {
+            font-family: var(--font-headings);
+            font-size: 1.3rem;
+            margin-bottom: 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Table & Filters */
+        .filters-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            align-items: center;
+        }
+
+        .search-input {
+            background-color: #030305;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            font-family: var(--font-main);
+            flex-grow: 1;
+            min-width: 200px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .filter-select {
+            background-color: #030305;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            font-family: var(--font-main);
+            cursor: pointer;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background-color: #08090f;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            padding: 0.8rem 1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #141622;
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge.vip {
+            background-color: rgba(43, 59, 229, 0.2);
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+        }
+
+        .badge.apex {
+            background-color: rgba(255, 86, 0, 0.2);
+            color: #f97316;
+            border: 1px solid rgba(249, 115, 22, 0.4);
+        }
+
+        .badge.devoto {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+        }
+
+        .badge.purgado {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+
+        .badge.activo {
+            background-color: rgba(168, 85, 247, 0.2);
+            color: #c084fc;
+            border: 1px solid rgba(192, 132, 252, 0.4);
+        }
+
+        .badge.inactive {
+            background-color: rgba(156, 163, 175, 0.1);
+            color: #9ca3af;
+            border: 1px solid rgba(156, 163, 175, 0.3);
+        }
+
+        /* Action Buttons */
+        .btn {
+            background-color: var(--primary);
+            border: none;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, box-shadow 0.2s;
+            font-family: var(--font-main);
+        }
+
+        .btn:hover {
+            background-color: #3b82f6;
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .btn.btn-accent {
+            background-color: var(--accent);
+        }
+
+        .btn.btn-accent:hover {
+            background-color: #ff7849;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        /* Bookmarklet Drag Card */
+        .bookmarklet-card {
+            background: linear-gradient(135deg, #0e101f 0%, #060608 100%);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .bookmarklet-btn-drag {
+            align-self: center;
+            background: linear-gradient(135deg, var(--primary) 0%, #1e1b4b 100%);
+            border: 2px solid #3b82f6;
+            color: #ffffff;
+            padding: 0.85rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 800;
+            text-decoration: none;
+            cursor: move;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            user-select: none;
+        }
+
+        .bookmarklet-btn-drag:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 20px rgba(255, 86, 0, 0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            background-color: #040406;
+            margin-top: 4rem;
+        }
+
+        footer strong {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Substack Sentinel</h1>
+            <span class="subtitle">MOSKV-1 APEX Core Membrane</span>
+        </div>
+        <button class="btn btn-accent" onclick="resetApp()">Cargar nuevo archivo</button>
+    </header>
+
+    <div class="container">
+        <!-- 1. Dropzone Interface -->
+        <div id="dropzone" class="dropzone-container">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <h3>Suelte el archivo de exportación de Substack aquí</h3>
+            <p>Soporta formato CSV oficial exportado desde tu panel de administración.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--accent);">Tus datos son procesados localmente en tu navegador. Cero subidas a servidores.</p>
+            <input type="file" id="csv-file" class="file-input" accept=".csv">
+        </div>
+
+        <!-- 2. Dashboard Interface (Hidden by default) -->
+        <div id="dashboard" class="dashboard-layout">
+            <!-- Stats row -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="label">Total Suscriptores</span>
+                    <span id="total-count" class="value">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="label">Tasa Apertura Promedio</span>
+                    <span id="avg-open-rate" class="value">0%</span>
+                </div>
+                <div class="stat-card">
+                    <span class="label">Ingresos Totales (LTV)</span>
+                    <span id="total-revenue" class="value revenue">$0.00</span>
+                </div>
+                <div class="stat-card">
+                    <span class="label">Clicks Totales</span>
+                    <span id="total-clicks" class="value">0</span>
+                </div>
+            </div>
+
+            <!-- Chart & Summary Row -->
+            <div class="mid-grid">
+                <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                    <h2>Distribución de Cohortes</h2>
+                    <div style="width: 100%; max-width: 250px; position: relative;">
+                        <canvas id="cohortChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bookmarklet-card">
+                    <h2>Sentinel Network Purge Bookmarklet</h2>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+                        ¿Detectaste bots en tu lista? Arrastra el botón de abajo directamente a la <strong>barra de marcadores</strong> de tu navegador.
+                        Luego, ve a tu panel de administración de Substack, presiona el marcador y purga los bots e infiltrados recomendados en un clic.
+                    </p>
+                    <a class="bookmarklet-btn-drag" href='javascript:(function() {     var mafiaNodes = ["masteryweeks", "daviddominguez", "manoletux", "overxtime", "raulcalderonc", "habitonutricion", "tucoachpersonal", "thefoundercorner", "estomeinteresa", "podhacks", "dispersosdemierda", "enriquemartinezbermejo", "aimafia", "crecerensubstack", "estrategiabyaleph", "dnogalesexperience", "spacioia", "hellojaume", "laiaqueimporta", "innerhythm", "medicosinconformistas", "vitalismo", "samueldominguez", "todatabeyond", "consultoresia", "unicorniosypiratas", "conectaycrece", "somosbiz", "jorgebosch", "bookstrapping", "iaparatodo", "botondeayuda", "agentesia", "eponte", "plumapifiada", "modoxtenx", "futuria", "emprender", "webreactiva", "aplicacionesai", "cosasdefreelance", "ekhocomunicacion", "titonet", "ecommletter", "platforms", "seveluna", "sumapositiva", "iaenespanol", "sietediaspodcast", "destacadas", "coachingdeproducto", "thevccorner", "marcplanella", "escribepro", "hazloquequieras", "davidlahozmartin", "nosolosuerte", "cafeconia", "emarketersocial", "susanaluque", "emprendizajes", "tudosisia"];     var existing = document.getElementById("moskv-sentinel");     if (existing) existing.remove();     var container = document.createElement("div");     container.id = "moskv-sentinel";     container.style.position = "fixed";     container.style.top = "20px";     container.style.right = "20px";     container.style.width = "400px";     container.style.maxHeight = "80vh";     container.style.backgroundColor = "#07070b";     container.style.color = "#f3f4f6";     container.style.border = "2px solid #2b3be5";     container.style.borderRadius = "16px";     container.style.padding = "20px";     container.style.fontFamily = "\x27Outfit\x27, sans-serif";     container.style.boxShadow = "0 8px 32px rgba(43, 59, 229, 0.4)";     container.style.zIndex = "999999";     container.style.overflowY = "auto";     container.style.display = "flex";     container.style.flexDirection = "column";     container.style.gap = "15px";     var header = document.createElement("div");     header.style.display = "flex";     header.style.justifyContent = "space-between";     header.style.alignItems = "center";     header.style.borderBottom = "1px solid #1e2235";     header.style.paddingBottom = "10px";     var title = document.createElement("h3");     title.innerText = "MOSKV-1 Sentinel";     title.style.margin = "0";     title.style.fontStyle = "italic";     title.style.fontSize = "1.2rem";     title.style.color = "#ffffff";     var closeBtn = document.createElement("button");     closeBtn.innerText = "X";     closeBtn.style.background = "none";     closeBtn.style.border = "none";     closeBtn.style.color = "#9ca3af";     closeBtn.style.cursor = "pointer";     closeBtn.style.fontWeight = "bold";     closeBtn.onclick = function() { container.remove(); };     header.appendChild(title);     header.appendChild(closeBtn);     container.appendChild(header);     var logArea = document.createElement("div");     logArea.style.backgroundColor = "#020204";     logArea.style.border = "1px solid #1e2235";     logArea.style.borderRadius = "8px";     logArea.style.padding = "10px";     logArea.style.fontFamily = "monospace";     logArea.style.fontSize = "0.8rem";     logArea.style.height = "200px";     logArea.style.overflowY = "auto";     logArea.style.color = "#34d399";     container.appendChild(logArea);     function log(msg, err) {       var p = document.createElement("p");       p.style.margin = "3px 0";       p.style.color = err ? "#f87171" : "#34d399";       p.innerText = "[C5-REAL] " + msg;       logArea.appendChild(p);       logArea.scrollTop = logArea.scrollHeight;     }     log("Iniciando escaneo del nodo Substack...");     var host = window.location.hostname;     var sub = host.split(".")[0];     log("Obteniendo recomendaciones activas...");     fetch("/api/v1/recommendations")       .then(function(res) {         if (!res.ok) throw new Error("Sesión inválida o HTTP " + res.status);         return res.json();       })       .then(function(recs) {         log("Recomendaciones obtenidas: " + recs.length);         var targets = [];         recs.forEach(function(r) {           var targetSub = r.target_publication.subdomain;           if (mafiaNodes.indexOf(targetSub) !== -1) {             targets.push(r);           }         });         if (targets.length === 0) {           log("CERO NODOS MAFIA DETECTADOS. Red limpia.", false);           return;         }         log("DETECTADOS " + targets.length + " NODO(S) MAFIA EN RECOMENDACIONES.", true);         var actionBtn = document.createElement("button");         actionBtn.innerText = "CONFIRMAR PURGA DE RED";         actionBtn.style.backgroundColor = "#2b3be5";         actionBtn.style.border = "none";         actionBtn.style.color = "#ffffff";         actionBtn.style.padding = "12px";         actionBtn.style.borderRadius = "8px";         actionBtn.style.fontWeight = "bold";         actionBtn.style.cursor = "pointer";         actionBtn.style.transition = "background-color 0.2s";         actionBtn.onmouseover = function() { actionBtn.style.backgroundColor = "#ff5600"; };         actionBtn.onmouseout = function() { actionBtn.style.backgroundColor = "#2b3be5"; };         actionBtn.onclick = function() {           actionBtn.disabled = true;           actionBtn.innerText = "PURGANDO...";           var index = 0;           function deleteNext() {             if (index >= targets.length) {               log("PURGA DE RECOMENDACIONES DE LA MAFIA COMPLETADA.");               actionBtn.innerText = "PURGA FINALIZADA";               return;             }             var item = targets[index];             log("Eliminando " + item.target_publication.name + "...");             fetch("/api/v1/recommendations/" + item.id, { method: "DELETE" })               .then(function(dres) {                 if (dres.ok) {                   log("Éxito: " + item.target_publication.name);                 } else {                   log("Fallo: " + item.target_publication.name, true);                 }                 index++;                 setTimeout(deleteNext, 300);               })               .catch(function(e) {                 log("Error de conexión: " + e.message, true);                 index++;                 setTimeout(deleteNext, 300);               });           }           deleteNext();         };         container.appendChild(actionBtn);       })       .catch(function(err) {         log("Error: " + err.message, true);       });     document.body.appendChild(container); })();' onclick="alert('Arrastra este botón a tu barra de marcadores del navegador.'); return false;">
+                        ☄️ PURGAR SUBSTACK MAFIA
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table & Filtering Card -->
+            <div class="card">
+                <h2>
+                    <span>Directorio de Suscriptores</span>
+                    <button class="btn" onclick="exportCSV()">Exportar CSV enriquecido</button>
+                </h2>
+
+                <div class="filters-bar">
+                    <input type="text" id="search" class="search-input" placeholder="Buscar por email o nombre..." oninput="filterData()">
+                    <select id="filter-cohort" class="filter-select" onchange="filterData()">
+                        <option value="">Todas las cohortes</option>
+                        <option value="AI & Advanced Tech Research">AI & Advanced Tech Research</option>
+                        <option value="Web3 & Crypto">Web3 & Crypto</option>
+                        <option value="Big Tech & Corporate Leadership">Big Tech & Corporate Leadership</option>
+                        <option value="Spanish Elite Business & Venture">Spanish Elite Business & Venture</option>
+                        <option value="Spanish YouTubers & Content Creators">Spanish YouTubers & Content Creators</option>
+                        <option value="Media, Press & Culture">Media, Press & Culture</option>
+                        <option value="General / Other">General / Other</option>
+                    </select>
+                    <select id="filter-status" class="filter-select" onchange="filterData()">
+                        <option value="">Todos los estatus</option>
+                        <option value="VIP_PREMAFIA_APPROVED">VIP Premafia</option>
+                        <option value="EJECUTOR_APEX">Ejecutor APEX</option>
+                        <option value="LECTOR_DEVOTO">Lector Devoto</option>
+                        <option value="SOCIO_ACTIVO">Socio Activo</option>
+                        <option value="CHUPASANGRE_PURGADO">Chupasangre (Bot/Scraper)</option>
+                        <option value="WANNABE_REJECTED">Inactivo</option>
+                    </select>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Nombre</th>
+                                <th>Tasa Apertura</th>
+                                <th>Engagement</th>
+                                <th>Leech Index</th>
+                                <th>Cohorte</th>
+                                <th>Estatus</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <!-- Dynamic Rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Substack Sentinel | Diseñado bajo la estética <strong>Industrial Noir 2026</strong> | <strong>borjamoskv</strong>
+    </footer>
+
+    <script>
+        // Roster definitions matching our python code
+        const cryptoDomains = [
+            "coinbase.com", "iohk.io", "dydx.exchange", "wintermute.com", "nillion.com",
+            "blocknative.com", "helium.com", "bittensor.com", "ethereum", "solana",
+            "superrare.com", "knownorigin.io", "foundation.app", "starkware.co",
+            "pyth.network", "aethir.com", "myshell.ai", "herodotus.dev", "succinct.xyz",
+            "drift.trade", "spheron.network", "nunet.io", "gsr.io", "maven11.com"
+        ];
+        const aiDomains = [
+            "openai.com", "adobe.com", "dair-institute.org", "singularitynet.io",
+            "langfuse.com", "inflection.ai", "microsoft.com", "google.com", "apple.com",
+            "nvidia.com", "meta.com", "berkeley.edu", "mit.edu", "stanford.edu",
+            "lagrange.dev", "huggingface.co", "securebio.org", "gladstone.ai",
+            "cs.stanford.edu", "ssi.inc", "iiia.csic.es", "decsai.ugr.es", "us.es",
+            "ual.es", "upv.es", "scrollprize.org", "eclaravalls.com", "atlaspro"
+        ];
+        const corporateDomains = [
+            "amazon.com", "shopify.com", "stripe.com", "netflix.com", "tesla.com",
+            "spacex.com", "socialcapital.com", "foundersfund.com", "jme.vc", "cuny.edu"
+        ];
+        const mediaDomains = [
+            "hypebeast.com", "vice.com", "ntslive.co.uk", "ninjatune.net", "thequietus.com",
+            "consequenceofsound.net", "pitchfork.com", "consequence.net", "brownswoodrecordings.com",
+            "rockdelux.com", "loudwomen.org", "warp.net", "dominoquest.com", "residentadvisor.net",
+            "factmag.com", "xlr8r.com", "wire.co.uk", "mixmag.net", "electronicsound.co.uk",
+            "randsrecords.com", "jenesaispop.com", "binaural.es", "sohoradiolondon.com",
+            "ostgut.de", "berria.eus", "vittleslondon", "dewolfemusic.com", "newexhibitions.com",
+            "leovsky.com", "radarlisboa.fm", "fors.fm", "chimobayo.com"
+        ];
+        const spanishBusinessDomains = [
+            "audaxrenovables.com", "joseeliasnavarro.com", "emprendeaprendiendo.com",
+            "teamqueso.com", "vizz-agency.com", "abastglobal.com", "multiversial.es",
+            "dealflow.es", "habitonutricion.com", "grupobcc.com", "gnetico.es", "manuelmas.es",
+            "eclaravalls.com", "atlaspro"
+        ];
+        const influencerKeywords = [
+            "acertijo", "aczino", "alanxelmundo", "alexby", "alexmontiel", "alvaro845", "amablitz",
+            "ampeter", "andreacompton", "andresnavy", "antrax", "angelysaras", "spreen", "biyin",
+            "auronplay", "rubius", "ibai", "grefg", "willyrex", "vegetta", "djmario", "elrubius",
+            "mangel", "lolito", "arigameplays", "juansguarnizo", "coscu", "fedevigevani", "luisito",
+            "fedelobo", "vlog", "freestyle", "rap", "rapder", "chuty", "skone", "gazir", "wos",
+            "paulagonu", "dulceida", "mariapombo", "gigivives", "martacarriedo", "livingpostureo",
+            "werever", "quackity", "elxokas", "shauntrack", "cazaustre", "tiparraco", "gemita",
+            "chincheto", "asier", "unaibellamy", "xavmit", "filosofo", "perxitaa", "esther"
+        ];
+
+        let parsedData = [];
+        let chartInstance = null;
+
+        // Drag and drop events
+        const dropzone = document.getElementById('dropzone');
+        const fileInput = document.getElementById('csv-file');
+
+        fileInput.addEventListener('change', handleFileSelect);
+        dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
+        dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('dragover');
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                handleFileSelect();
+            }
+        });
+
+        function handleFileSelect() {
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            Papa.parse(file, {
+                header: true,
+                skipEmptyLines: true,
+                complete: function(results) {
+                    processCSV(results.data);
+                }
+            });
+        }
+
+        function classifyEmail(email, name) {
+            email = email.toLowerCase();
+            const domain = email.includes('@') ? email.split('@').pop() : "";
+
+            if (mediaDomains.some(d => domain.includes(d)) || ["editorial", "press", "news", "pr@", "promo", "demos@"].some(kw => email.includes(kw))) {
+                return "Media, Press & Culture";
+            }
+            if (cryptoDomains.some(d => domain.includes(d))) {
+                return "Web3 & Crypto";
+            }
+            if (aiDomains.some(d => domain.includes(d))) {
+                return "AI & Advanced Tech Research";
+            }
+            if (corporateDomains.some(d => domain.includes(d)) || ["amazon.com", "shopify.com", "stripe.com"].some(d => domain === d)) {
+                return "Big Tech & Corporate Leadership";
+            }
+            if (spanishBusinessDomains.some(d => domain.includes(d))) {
+                return "Spanish Elite Business & Venture";
+            }
+            if (email.includes("contacto") || email.includes("colabora") || influencerKeywords.some(kw => email.includes(kw) || name.toLowerCase().includes(kw))) {
+                return "Spanish YouTubers & Content Creators";
+            }
+            return "General / Other";
+        }
+
+        function processCSV(data) {
+            parsedData = [];
+            let totalRevenue = 0.0;
+            let totalClicks = 0;
+            let totalOpens = 0;
+            let totalReceived = 0;
+
+            data.forEach(row => {
+                const email = (row['Email'] || '').trim();
+                if (!email) return;
+
+                const name = (row['Name'] || '').trim();
+                const type = (row['Type'] || 'Free').trim();
+                const emails_opened = parseInt(row['Emails opened (6mo)']) || 0;
+                const emails_received = parseInt(row['Emails received (6mo)']) || 0;
+                const links_clicked = parseInt(row['Links clicked']) || 0;
+                const comments = parseInt(row['Comments']) || 0;
+                const shares = parseInt(row['Shares']) || 0;
+                const post_views = parseInt(row['Post views']) || 0;
+                const rev_str = (row['Revenue'] || '0').replace('$', '').replace('€', '').replace('£', '').replace(',', '').trim();
+                const revenue = parseFloat(rev_str) || 0.0;
+
+                totalRevenue += revenue;
+                totalClicks += links_clicked;
+                totalOpens += emails_opened;
+                totalReceived += emails_received;
+
+                const open_rate = emails_received > 0 ? (emails_opened / emails_received) : 0.0;
+                const engagement = (emails_opened * 1.0) + (links_clicked * 3.0) + (comments * 10.0) + (shares * 15.0) + (post_views * 0.5);
+
+                const numerator = (emails_opened * 0.15) + (links_clicked * 0.45);
+                const denominator = (comments * 2.0) + (shares * 4.0) + 1.0;
+                const chupasangre = parseFloat((numerator / denominator).toFixed(3));
+
+                const classification = classifyEmail(email, name);
+
+                // Bot check variables
+                const is_freemail = ['gmail.com', 'yahoo', 'hotmail', 'outlook', 'live.com', 'icloud.com', 'aol.com', 'protonmail', 'msn.com'].some(f => email.split('@').pop().includes(f));
+                const is_press_bot = !is_freemail && (
+                    classification === "Media, Press & Culture" ||
+                    ["editorial@", "press@", "news@", "demos@", "submissions@", "pr@", "promo@"].some(kw => email.includes(kw))
+                );
+
+                // Scoring labeling
+                let label = "SOCIO_ACTIVO (Lector orgánico comprometido)";
+                let status = "SOCIO_ACTIVO";
+
+                if (["AI & Advanced Tech Research", "Web3 & Crypto", "Big Tech & Corporate Leadership", "Spanish Elite Business & Venture"].includes(classification)) {
+                    label = "VIP_PREMAFIA_APPROVED (Contacto de élite sectorial)";
+                    status = "VIP_PREMAFIA_APPROVED";
+                } else if (classification === "Spanish YouTubers & Content Creators") {
+                    label = "EJECUTOR_APEX (Creador con tracción física)";
+                    status = "EJECUTOR_APEX";
+                } else if (chupasangre > 15.0 && comments === 0 && shares === 0 && is_press_bot) {
+                    label = "CHUPASANGRE_PURGADO (Bot/scraper automatizado de prensa)";
+                    status = "CHUPASANGRE_PURGADO";
+                } else if (chupasangre > 15.0 && comments === 0 && shares === 0 && !is_press_bot) {
+                    label = "LECTOR_DEVOTO (Superfan de lectura profunda)";
+                    status = "LECTOR_DEVOTO";
+                } else if (engagement === 0) {
+                    label = "WANNABE_REJECTED (Registro inactivo)";
+                    status = "WANNABE_REJECTED";
+                }
+
+                parsedData.push({
+                    email,
+                    name,
+                    type,
+                    open_rate,
+                    engagement,
+                    chupasangre,
+                    classification,
+                    status,
+                    label
+                });
+            });
+
+            // Update stats layout
+            document.getElementById('total-count').innerText = parsedData.length;
+            const globalOpenRate = totalReceived > 0 ? (totalOpens / totalReceived * 100).toFixed(1) : "0.0";
+            document.getElementById('avg-open-rate').innerText = `${globalOpenRate}%`;
+            document.getElementById('total-revenue').innerText = `$${totalRevenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('total-clicks').innerText = totalClicks.toLocaleString('en-US');
+
+            // Render Table
+            renderTable(parsedData);
+
+            // Update Chart
+            updateCohortChart();
+
+            // Swap views
+            document.getElementById('dropzone').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'flex';
+        }
+
+        function renderTable(data) {
+            const tbody = document.getElementById('table-body');
+            tbody.innerHTML = '';
+
+            data.forEach(sub => {
+                const tr = document.createElement('tr');
+
+                let badgeClass = 'inactive';
+                let statusLabel = sub.status.replace('_', ' ');
+                if (sub.status === 'VIP_PREMAFIA_APPROVED') badgeClass = 'vip';
+                if (sub.status === 'EJECUTOR_APEX') badgeClass = 'apex';
+                if (sub.status === 'LECTOR_DEVOTO') badgeClass = 'devoto';
+                if (sub.status === 'CHUPASANGRE_PURGADO') badgeClass = 'purgado';
+                if (sub.status === 'SOCIO_ACTIVO') badgeClass = 'activo';
+
+                tr.innerHTML = `
+                    <td style="font-weight: 600;">${sub.email}</td>
+                    <td>${sub.name || '<span style="color: var(--text-muted);">Sin Nombre</span>'}</td>
+                    <td>${(sub.open_rate * 100).toFixed(1)}%</td>
+                    <td>${sub.engagement}</td>
+                    <td>${sub.chupasangre}</td>
+                    <td style="color: var(--text-muted); font-size: 0.85rem;">${sub.classification}</td>
+                    <td><span class="badge ${badgeClass}">${statusLabel}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filterData() {
+            const query = document.getElementById('search').value.toLowerCase();
+            const cohort = document.getElementById('filter-cohort').value;
+            const status = document.getElementById('filter-status').value;
+
+            const filtered = parsedData.filter(sub => {
+                const matchesQuery = sub.email.toLowerCase().includes(query) || sub.name.toLowerCase().includes(query);
+                const matchesCohort = cohort === "" || sub.classification === cohort;
+                const matchesStatus = status === "" || sub.status === status;
+                return matchesQuery && matchesCohort && matchesStatus;
+            });
+
+            renderTable(filtered);
+        }
+
+        function updateCohortChart() {
+            const cohortCounts = {};
+            parsedData.forEach(sub => {
+                cohortCounts[sub.classification] = (cohortCounts[sub.classification] || 0) + 1;
+            });
+
+            const labels = Object.keys(cohortCounts);
+            const counts = Object.values(cohortCounts);
+
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            const ctx = document.getElementById('cohortChart').getContext('2d');
+            chartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: counts,
+                        backgroundColor: [
+                            '#2b3be5', // Primary blue
+                            '#ff5600', // Accent orange
+                            '#10b981', // Success emerald
+                            '#8b5cf6', // Purple
+                            '#3b82f6', // Light blue
+                            '#eab308', // Yellow
+                            '#6b7280'  // Gray
+                        ],
+                        borderWidth: 1,
+                        borderColor: '#0c0d15'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+
+        function exportCSV() {
+            if (!parsedData.length) return;
+
+            const headers = ['Email', 'Name', 'Open Rate', 'Engagement Score', 'Leech Index', 'Classification', 'Premafia Status', 'System Label'];
+            const rows = parsedData.map(sub => [
+                sub.email,
+                sub.name,
+                (sub.open_rate * 100).toFixed(1) + '%',
+                sub.engagement,
+                sub.chupasangre,
+                sub.classification,
+                sub.status,
+                sub.label
+            ]);
+
+            let csvContent = "data:text/csv;charset=utf-8,\uFEFF"
+                + [headers.join(','), ...rows.map(e => e.map(val => `"${val}"`).join(","))].join("\n");
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "substack_sentinel_enriched.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function resetApp() {
+            parsedData = [];
+            fileInput.value = '';
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('dropzone').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

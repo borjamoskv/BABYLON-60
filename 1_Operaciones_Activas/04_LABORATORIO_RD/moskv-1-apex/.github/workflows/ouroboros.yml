@@ -1,0 +1,39 @@
+name: OUROBOROS-∞ (MOSKV-1 SENTINEL)
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  pull_request:
+    branches: [ "master", "main" ]
+
+jobs:
+  exergy-audit-and-mitosis:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Substrate
+      uses: actions/checkout@v4
+      
+    - name: Initialize C5-REAL Python Environment
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        
+    - name: RedTeam Crucible (Hostile AST Audit)
+      run: |
+        echo "INITIATING EXERGY AUDIT..."
+        python3 src/redteam_auditor.py
+        
+    - name: Vesicular Runtime (Kernel Boot)
+      if: success()
+      run: |
+        echo "CRUCIBLE PASSED. BOOTING THE SINGULARITY."
+        python3 src/moskv_kernel.py
+        
+    - name: Automated Ledger Anchoring (Pre-Merge Remediation)
+      if: failure()
+      run: |
+        echo "YIELD < 0.85 DETECTED. AUTONOMOUS REMEDIATION REQUIRED."
+        # In a fully deployed state, the agent intercepts the failure here,
+        # patches the AST, and issues a deterministic commit.
+        exit 1

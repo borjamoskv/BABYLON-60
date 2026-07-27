@@ -1,0 +1,37 @@
+{
+    admin off
+    auto_https off
+}
+
+# 1. babylon60.com -> Master Ledger (Puerto 8060)
+babylon60.com {
+    reverse_proxy localhost:8060
+    header Strict-Transport-Security "max-age=31536000;"
+    header X-C5-REAL "Verified"
+}
+
+# 2. agents.archi -> APEX Taxonomy (Puerto 8070)
+agents.archi {
+    reverse_proxy localhost:8070
+    header Strict-Transport-Security "max-age=31536000;"
+    header X-CORTEX-DOMAIN "Taxonomy"
+}
+
+# 3. cortexpersist.dev -> Playground & WSS (Puerto 8080)
+cortexpersist.dev {
+    reverse_proxy localhost:8080
+    header Strict-Transport-Security "max-age=31536000;"
+    header X-CORTEX-DOMAIN "Developer"
+}
+
+# 4. cortexpersist.com -> Dashboard Comercial (Puerto 3000)
+cortexpersist.com {
+    reverse_proxy localhost:3000
+    header Strict-Transport-Security "max-age=31536000;"
+    header X-CORTEX-DOMAIN "Dashboard"
+}
+
+# 5. cortexpersist.org -> Sybil Mitigation
+cortexpersist.org {
+    redir https://cortexpersist.dev{uri} 301
+}

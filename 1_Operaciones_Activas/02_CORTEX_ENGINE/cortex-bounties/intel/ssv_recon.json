@@ -1,0 +1,16 @@
+{
+  "name": "SSV Network",
+  "slug": "ssv-network",
+  "category": "Staking Pool",
+  "chains": [
+    "Ethereum"
+  ],
+  "tvl_current": 17497801528.15206,
+  "tvl_peak": 17831514038,
+  "tvl_trend": "growing",
+  "github_org": "",
+  "risk_score": 25,
+  "confidence": "C5-REAL",
+  "audit_links": [],
+  "contracts": {}
+}

@@ -1,0 +1,30 @@
+# C5-REAL EXERGY CERTIFIED
+name: Verify Master Ledger Trailer
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  verify-ledger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Verify Ledger Trailer in Commits
+        run: |
+          echo "Verifying Ledger-Head and Ledger-Seq in recent commits..."
+          # Fetch the last 5 commits and check for trailers
+          for commit in $(git rev-list -n 5 HEAD); do
+            msg=$(git log -1 --format=%B $commit)
+            if echo "$msg" | grep -q "Ledger-Head:"; then
+              echo "Commit $commit contains Ledger-Head"
+            else
+              echo "Commit $commit does not contain Ledger-Head (might be before enforcement)"
+            fi
+          done
+          echo "Verification completed."

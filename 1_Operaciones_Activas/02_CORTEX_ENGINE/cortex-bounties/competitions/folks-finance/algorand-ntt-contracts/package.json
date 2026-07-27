@@ -1,0 +1,31 @@
+{
+  "name": "algorand-ntt-contracts",
+  "version": "0.0.1",
+  "scripts": {
+    "format": "prettier --write .",
+    "teal": "algokit compile py ./ntt_contracts --target-avm-version 11 --optimization-level 2 --no-output-source-map --no-output-client --no-output-arc32 --no-output-arc56 --output-teal --out-dir ../specs/teal",
+    "arc56": "algokit compile py ./ntt_contracts --target-avm-version 11 --optimization-level 2 --no-output-source-map --no-output-client --no-output-arc32 --output-arc56 --no-output-teal --out-dir ../specs/arc56",
+    "client": "algokit generate client ./specs/arc56 --output ./specs/client/{contract_name}.client.ts --language typescript",
+    "build": "npm run teal && npm run arc56 && npm run client",
+    "clean": "rm -rf ./specs",
+    "test": "jest --runInBand",
+    "script": "tsx --env-file=.env"
+  },
+  "dependencies": {
+    "@algorandfoundation/algokit-utils": "^9.2.0",
+    "algosdk": "^3.5.2"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-typescript": "^7.27.0",
+    "@noble/hashes": "^1.8.0",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@types/jest": "^29.0.1",
+    "install": "^0.13.0",
+    "jest": "^29.0.3",
+    "npm": "^11.4.1",
+    "prettier": "^3.5.3",
+    "tsx": "^4.20.6"
+  },
+  "type": "module"
+}

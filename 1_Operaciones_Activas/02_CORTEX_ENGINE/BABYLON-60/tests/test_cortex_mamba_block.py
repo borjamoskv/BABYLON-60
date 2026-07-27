@@ -1,0 +1,58 @@
+# C5-REAL EXERGY CERTIFIED
+# C5-REAL
+# MOSKV-1 APEX SINGULARITY
+# FALSACIÓN EMPÍRICA: MAMBA BLOCK TOPOLOGY
+
+import sys
+import os
+
+# Add parent directory to path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from cortex_mamba_block import MambaBlock
+
+
+def test_mamba_block_forward() -> None:
+    """Verifica que el bloque Mamba completo procesa secuencias causalmente sin entropía de forma."""
+    d_model = 8
+    d_state = 16
+    seq_len = 50
+
+    block = MambaBlock(d_model=d_model, d_state=d_state)
+
+    # Sequence of 50 tokens, each of dimension 8
+    sequence = [[0.5] * d_model for _ in range(seq_len)]
+
+    out = block.forward(sequence)
+
+    assert len(out) == seq_len, "El colapso de longitud de secuencia falló en el Bloque Mamba."
+    assert len(out[0]) == d_model, "La proyección de salida divirgió del d_model."
+
+
+def test_mamba_block_causality() -> None:
+    """Aserción de causalidad estructural: Un cambio en t=10 no debe afectar t < 10."""
+    d_model = 4
+    d_state = 8
+    seq_len = 20
+
+    block = MambaBlock(d_model=d_model, d_state=d_state)
+
+    seq_a = [[0.1] * d_model for _ in range(seq_len)]
+    seq_b = [[0.1] * d_model for _ in range(seq_len)]
+    seq_b[10] = [0.9] * d_model  # Inject entropy at t=10
+
+    out_a = block.forward(seq_a)
+    out_b = block.forward(seq_b)
+
+    # t < 10 must be identical
+    for t in range(10):
+        for i in range(d_model):
+            assert abs(out_a[t][i] - out_b[t][i]) < 1e-9, "Violación Causal: Filtro de información temporal roto."
+
+    # t >= 10 must diverge
+    diverged = False
+    for i in range(d_model):
+        if abs(out_a[10][i] - out_b[10][i]) > 1e-9:
+            diverged = True
+            break
+
+    assert diverged, "Entropía inyectada no registrada en el estado futuro."

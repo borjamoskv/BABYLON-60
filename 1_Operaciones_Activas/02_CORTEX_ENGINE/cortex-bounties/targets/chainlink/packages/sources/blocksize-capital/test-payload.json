@@ -1,0 +1,18 @@
+{
+ "requests": [
+    {
+      "from": "LINK",
+      "to": "USD"
+    },
+    {
+      "from": "LINK",
+      "to": "USD",
+      "endpoint": "cryptolwba"
+    },
+    {
+      "from": "AMPL",
+      "to": "USD",
+      "endpoint": "vwap"
+    }
+  ]
+}

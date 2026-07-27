@@ -1,0 +1,8 @@
+{
+  "architecture": "MOSKV-1 APEX",
+  "level": "C5-REAL",
+  "ledger_hash": "2f09254f116f69da4f6ce1a644769f87a2874672",
+  "mpc_status": "OPTIMAL",
+  "exergy_destruction": "MINIMAL",
+  "hil_validation": "SUCCESS"
+}

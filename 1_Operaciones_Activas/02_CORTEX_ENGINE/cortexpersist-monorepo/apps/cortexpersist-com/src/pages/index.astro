@@ -1,0 +1,72 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { CrossDomainCTA } from '@cortex/ui';
+
+import AttractorMatrix from '@/components/AttractorMatrix';
+import ParticleGrid from '@/components/ParticleGrid';
+import ThermodynamicVectorSpace from '@/components/ThermodynamicVectorSpace';
+import SwarmTelemetryLog from '@/components/SwarmTelemetryLog';
+import ManualCollisionInjector from '@/components/ManualCollisionInjector';
+---
+
+<Layout 
+  title="CortexPersist — Trust Infrastructure for AI Agents"
+  description="Cryptographically anchored persistent state for AI agents. Ed25519 signing, Merkle anchoring, hash chain integrity."
+>
+  <main style="min-height: 100vh; background: #030303; color: #e0e0e0;">
+    <section style="padding: 4rem 2rem 2rem; text-align: center; font-family: monospace;">
+      <h1 style="font-size: 1.1rem; font-weight: bold; letter-spacing: 0.2em; color: #00ff88;">
+        CORTEX PERSIST
+      </h1>
+      <p style="color: #555; font-size: 0.8rem; margin-top: 0.5rem; letter-spacing: 0.1em; margin-bottom: 1.5rem;">
+        Trust infrastructure for AI agents · Ω₂ Entropic Asymmetry
+      </p>
+      <CrossDomainCTA client:load href="https://agents.archi?ref=cortexpersist-com" target="_blank">
+        Forensic Records Ledger
+      </CrossDomainCTA>
+
+      <div style="margin: 2rem auto 0; max-width: 860px; text-align: left; background: #0a0a0a; border: 1px solid #1f2937; border-left: 3px solid #2b3be5; padding: 1.25rem 1.5rem; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+          <span style="font-size: 0.7rem; font-weight: bold; color: #2b3be5; letter-spacing: 0.15em;">ONTO-17 · KINETIC TRANSDUCTION</span>
+          <span style="font-size: 0.65rem; color: #00ff88; background: rgba(0,255,136,0.1); padding: 0.2rem 0.5rem; border-radius: 2px;">C5-REAL VERIFIED</span>
+        </div>
+        <h2 style="font-size: 0.95rem; font-weight: bold; color: #f3f4f6; margin-bottom: 0.5rem; letter-spacing: 0.05em;">
+          Claude Science & the Thermodynamic Law of Research Compression
+        </h2>
+        <p style="font-size: 0.78rem; color: #9ca3af; line-height: 1.6; margin-bottom: 0.8rem;">
+          Accelerating hypothesis generation via MCTS workbenches collapses the initial thinking loop but transfers total systemic entropy to the institutional validation boundary. Without <strong style="color: #e5e7eb;">Verified Inheritance</strong> from a cryptographic memory membrane (<code style="color: #00ff88; font-size: 0.75rem;">strike-rs BLAKE3</code>), unverified intermediate states propagate Epistemic Drift across scientific pipelines.
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.75rem; font-size: 0.72rem; color: #d1d5db; border-top: 1px solid #1f2937; padding-top: 0.75rem;">
+          <div>
+            <span style="color: #60a5fa; font-weight: bold;">[LOGOS] Fast-Loop Generation</span><br/>
+            Stateless reasoning engines (Claude Science / Fable 5) operating as high-speed candidate ALUs.
+          </div>
+          <div>
+            <span style="color: #34d399; font-weight: bold;">[ETHOS] BLAKE3 Taint Anchoring</span><br/>
+            Continuous drift detection, structural F# invariant checks, and immutable Merkle auditing under EU AI Act mandates.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding: 0 2rem 2rem;">
+      <AttractorMatrix client:only="react" />
+    </section>
+
+    <section style="padding: 0 2rem 2rem;">
+      <ThermodynamicVectorSpace client:only="react" />
+    </section>
+
+    <section style="padding: 0 2rem 2rem;">
+      <ParticleGrid client:only="react" count={600} />
+    </section>
+
+    <section style="padding: 0 2rem 2rem;">
+      <SwarmTelemetryLog client:only="react" />
+    </section>
+
+    <section style="padding: 0 2rem 4rem;">
+      <ManualCollisionInjector client:only="react" />
+    </section>
+  </main>
+</Layout>

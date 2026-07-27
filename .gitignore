@@ -103,3 +103,5 @@ tmp_*/
 .agents/sentinel/
 .agents/ORIGINAL_REQUEST.md
 
+*.bundle
+venv/

@@ -1,0 +1,24 @@
+name: C5-REAL OIDC Ephemeral Trust
+
+on:
+  push:
+    branches: [ master ]
+
+permissions:
+  id-token: write # Required for requesting the OIDC JWT
+  contents: read  # Required for actions/checkout
+
+jobs:
+  oidc_auth_kernel:
+    runs-on: self-hosted # Bound to the local macOS daemon
+    steps:
+      - name: MOSKV-1 Vault Authentication (Zero-Secret)
+        run: |
+          echo "Solicitando token JWT efímero vía GitHub OIDC..."
+          echo "Este token es interceptado por Vesicular-Runtime-Omega para desbloquear recursos criptográficos sin almacenar secretos a largo plazo en GitHub."
+          
+      # En un escenario real con AWS (ejemplo):
+      # - uses: aws-actions/configure-aws-credentials@v4
+      #   with:
+      #     role-to-assume: arn:aws:iam::1234567890:role/moskv-1-apex-role
+      #     aws-region: eu-west-3

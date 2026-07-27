@@ -1,0 +1,140 @@
+[
+  {
+    "id": "3439f899-1112-4832-9926-b2bf8d9f4caf",
+    "snfBefore": "9274ebee6feb147775040ede135f1e59b7b589b111e001a26d041254cfa8e44f",
+    "snfAfter": "70c261d9b8616c61e9efd5356ae5cc776c8dd4fb929d707ae5ce6fdc6a7fe378",
+    "divergence": true,
+    "type": "WITNESS_EXTRACTED",
+    "witness": {
+      "vector": "CAIR",
+      "faultClass": "TOPOLOGY_INVERSION",
+      "minimalNodes": [
+        {
+          "id": "1ae96436-9211-4c5a-abb6-465f2488fb06",
+          "intent": "informational",
+          "role": "heading",
+          "label": "LLM Generated Form",
+          "structuralDepth": 1
+        },
+        {
+          "id": "h1",
+          "intent": "informational",
+          "role": "heading",
+          "label": "LLM Generated Form",
+          "structuralDepth": 1
+        },
+        {
+          "id": "llm-btn-1",
+          "intent": "control",
+          "role": "button",
+          "label": "Submit",
+          "structuralDepth": 1
+        }
+      ],
+      "minimalEdges": [
+        {
+          "type": "contain",
+          "from": "root",
+          "to": "h1"
+        },
+        {
+          "type": "contain",
+          "from": "root",
+          "to": "llm-btn-1"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ec504610-60b8-4202-a136-03a52af910e6",
+    "snfBefore": "9062e53accde5ab51f2c6b02f81946169c13ab69f34240b1c558082090927d7a",
+    "snfAfter": "70c261d9b8616c61e9efd5356ae5cc776c8dd4fb929d707ae5ce6fdc6a7fe378",
+    "divergence": true,
+    "type": "WITNESS_EXTRACTED",
+    "witness": {
+      "vector": "CAIR",
+      "faultClass": "TOPOLOGY_INVERSION",
+      "minimalNodes": [
+        {
+          "id": "09ea080f-c285-48a0-a8d6-ac59ada1d067",
+          "intent": "informational",
+          "role": "heading",
+          "label": "LLM Generated Form",
+          "structuralDepth": 1
+        },
+        {
+          "id": "h1",
+          "intent": "informational",
+          "role": "heading",
+          "label": "LLM Generated Form",
+          "structuralDepth": 1
+        },
+        {
+          "id": "llm-btn-1",
+          "intent": "control",
+          "role": "button",
+          "label": "Submit",
+          "structuralDepth": 1
+        }
+      ],
+      "minimalEdges": [
+        {
+          "type": "contain",
+          "from": "root",
+          "to": "h1"
+        },
+        {
+          "type": "contain",
+          "from": "root",
+          "to": "llm-btn-1"
+        }
+      ]
+    }
+  },
+  {
+    "id": "0553bbd5-ecc1-4df6-86b6-60e2f1dbb602",
+    "snfBefore": "74bf123d68f8fa2cc8bbe6a9b51d572cc1ceb983d90fa3c2e1e604deead1a040",
+    "snfAfter": "70c261d9b8616c61e9efd5356ae5cc776c8dd4fb929d707ae5ce6fdc6a7fe378",
+    "divergence": true,
+    "type": "WITNESS_EXTRACTED",
+    "witness": {
+      "vector": "CAIR",
+      "faultClass": "TOPOLOGY_INVERSION",
+      "minimalNodes": [
+        {
+          "id": "09478dcd-6b2f-4000-9d02-1e1d5574ce53",
+          "intent": "informational",
+          "role": "heading",
+          "label": "LLM Generated Form",
+          "structuralDepth": 1
+        },
+        {
+          "id": "h1",
+          "intent": "informational",
+          "role": "heading",
+          "label": "LLM Generated Form",
+          "structuralDepth": 1
+        },
+        {
+          "id": "llm-btn-1",
+          "intent": "control",
+          "role": "button",
+          "label": "Submit",
+          "structuralDepth": 1
+        }
+      ],
+      "minimalEdges": [
+        {
+          "type": "contain",
+          "from": "root",
+          "to": "h1"
+        },
+        {
+          "type": "contain",
+          "from": "root",
+          "to": "llm-btn-1"
+        }
+      ]
+    }
+  }
+]

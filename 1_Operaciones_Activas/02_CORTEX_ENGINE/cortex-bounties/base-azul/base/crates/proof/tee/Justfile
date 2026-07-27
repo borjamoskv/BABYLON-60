@@ -1,0 +1,171 @@
+set positional-arguments
+
+eif_describe_image := "base-prover-nitro-enclave-describe"
+eif_output := "eif.bin"
+
+# Default recipe to display help information
+default:
+    @just --list
+
+# Run the nitro JSON-RPC server on the host
+nitro-server *args:
+    RUST_LOG=info \
+        cargo run --package base-prover-nitro-host --bin base-prover-nitro-host -- server {{ args }}
+
+# Run the nitro enclave (Linux only)
+nitro-enclave *args:
+    RUST_LOG=info \
+        cargo run --package base-prover-nitro-enclave --bin base-prover-nitro-enclave {{ args }}
+
+# Run server and enclave in a single process for local development
+nitro-local *args:
+    RUST_LOG=info RUST_BACKTRACE=1 \
+        cargo run --package base-prover-nitro-host --bin base-prover-nitro-host --features local -- local \
+        --l1-eth-url "${L1_ETH_URL:-http://localhost:8545}" \
+        --l2-eth-url "${L2_ETH_URL:-http://localhost:9545}" \
+        --l1-beacon-url "${L1_BEACON_URL:-http://localhost:5052}" \
+        --l2-chain-id "${L2_CHAIN_ID:-8453}" \
+        --listen-addr "${LISTEN_ADDR:-0.0.0.0:8000}" \
+        --enable-experimental-witness-endpoint \
+        --metrics.enabled \
+        --logs.stdout.format json \
+        {{ args }}
+
+# Print config hashes for all supported chains
+config-hashes:
+    cargo test -p base-enclave print_real_config_hashes -- --nocapture --ignored
+
+# Get the enclave signer's Ethereum address from a remote prover
+signer-address url:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    command -v cast >/dev/null 2>&1 || { echo "Error: 'cast' (foundry) is required. Install: https://book.getfoundry.sh/getting-started/installation"; exit 1; }
+    command -v python3 >/dev/null 2>&1 || { echo "Error: 'python3' is required."; exit 1; }
+
+    # Fetch the 65-byte uncompressed public key (0x04 || x || y),
+    # strip the prefix byte, keccak-hash, and take the last 20 bytes.
+    PUB_KEY_HEX=$(cast rpc enclave_signerPublicKey -r "{{ url }}" \
+        | python3 -c "import json, sys; data = json.load(sys.stdin)[0]; print('0x' + bytes(data[1:]).hex())")
+
+    HASH=$(cast keccak "$PUB_KEY_HEX")
+    ADDR=$(cast to-check-sum-address "0x${HASH: -40}")
+    echo "Signer address: $ADDR"
+
+# Get PCR0 and teeImageHash from a remote prover's attestation document
+remote-pcr0 url:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    command -v cast >/dev/null 2>&1 || { echo "Error: 'cast' (foundry) is required. Install: https://book.getfoundry.sh/getting-started/installation"; exit 1; }
+    command -v python3 >/dev/null 2>&1 || { echo "Error: 'python3' is required."; exit 1; }
+    python3 -c "import cbor2" 2>/dev/null || {
+        echo "Error: python3 'cbor2' package is required."
+        echo "Install with: pip3 install cbor2"
+        exit 1
+    }
+
+    # Fetch the COSE_Sign1 attestation document, decode the CBOR payload,
+    # and extract PCR0 (the enclave image measurement).
+    PCR0=$(cast rpc enclave_signerAttestation -r "{{ url }}" \
+        | python3 -c "import cbor2,json,sys; data=bytes(json.load(sys.stdin)[0]); _,_,payload,_=cbor2.loads(data); doc=cbor2.loads(payload); print(doc['pcrs'][0].hex())")
+
+    TEE_IMAGE_HASH=$(cast keccak "0x$PCR0")
+    echo "PCR0:         $PCR0"
+    echo "teeImageHash: $TEE_IMAGE_HASH"
+
+# Build EIF and extract it (via --target describe)
+build-eif *args="":
+    #!/usr/bin/env bash
+    set -euo pipefail
+    cd ../../..
+    DOCKER_BUILDKIT=1 docker build --platform linux/amd64 {{ args }} -f etc/docker/Dockerfile.nitro-enclave --target describe -t {{ eif_describe_image }} .
+    docker rm -f eif-extract 2>/dev/null || true
+    docker create --name eif-extract {{ eif_describe_image }}
+    docker cp eif-extract:/app/eif.bin crates/proof/tee/{{ eif_output }}
+    docker rm eif-extract
+    echo "EIF built successfully: crates/proof/tee/{{ eif_output }}"
+    ls -lh crates/proof/tee/{{ eif_output }}
+
+# Show PCR values for the current EIF image
+describe-eif:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    echo "PCR values for {{ eif_describe_image }}:"
+    docker run --rm --platform linux/amd64 {{ eif_describe_image }} \
+        ./nitro-cli describe-eif --eif-path eif.bin
+
+# Build twice and compare to verify reproducibility
+verify-reproducible:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    cleanup() {
+        rm -f eif-first.bin eif-second.bin
+        docker rmi {{ eif_describe_image }} {{ eif_describe_image }}:first {{ eif_describe_image }}:second 2>/dev/null || true
+    }
+    trap cleanup EXIT
+
+    echo "=== Building EIF (first) ==="
+    just build-eif
+    docker tag {{ eif_describe_image }} {{ eif_describe_image }}:first
+    mv "{{ eif_output }}" eif-first.bin
+
+    echo ""
+    echo "=== Building EIF (second, --no-cache) ==="
+    just build-eif --no-cache
+    docker tag {{ eif_describe_image }} {{ eif_describe_image }}:second
+    mv "{{ eif_output }}" eif-second.bin
+
+    echo ""
+    echo "=== Comparing sha256 hashes ==="
+    HASH1=$(just sha256 eif-first.bin)
+    HASH2=$(just sha256 eif-second.bin)
+    echo "First:  $HASH1"
+    echo "Second: $HASH2"
+    if [ "$HASH1" != "$HASH2" ]; then
+        echo "FAILURE: SHA256 hashes differ — build is NOT reproducible"
+        exit 1
+    fi
+    echo "SHA256: MATCH"
+
+    echo ""
+    echo "=== Comparing PCR0 values ==="
+    PCR0_FIRST=$(just pcr0 {{ eif_describe_image }}:first)
+    PCR0_SECOND=$(just pcr0 {{ eif_describe_image }}:second)
+    echo "First:  $PCR0_FIRST"
+    echo "Second: $PCR0_SECOND"
+    if [ "$PCR0_FIRST" != "$PCR0_SECOND" ]; then
+        echo "FAILURE: PCR0 values differ — build is NOT reproducible"
+        exit 1
+    fi
+    echo "PCR0: MATCH"
+
+    echo ""
+    echo "SUCCESS: Build is reproducible!"
+    echo "  SHA256: $HASH1"
+    echo "  PCR0:   $PCR0_FIRST"
+
+# Clean EIF artifacts
+clean-eif:
+    rm -f "{{ eif_output }}" eif-first.bin eif-second.bin
+    docker rmi {{ eif_describe_image }} {{ eif_describe_image }}:first {{ eif_describe_image }}:second 2>/dev/null || true
+    @echo "EIF artifacts cleaned"
+
+# --- Private helpers ---
+
+[private]
+sha256 file:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if command -v sha256sum >/dev/null 2>&1; then
+        sha256sum "{{ file }}" | cut -d' ' -f1
+    else
+        shasum -a 256 "{{ file }}" | cut -d' ' -f1
+    fi
+
+[private]
+pcr0 image:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    docker run --rm --platform linux/amd64 {{ image }} \
+        ./nitro-cli describe-eif --eif-path eif.bin \
+        | grep -o '"PCR0": "[^"]*"' \
+        | cut -d'"' -f4

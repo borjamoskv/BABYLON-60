@@ -1,0 +1,157 @@
+site_name: CORTEX Documentation
+site_description: Trust Infrastructure for Autonomous AI — cryptographic verification, audit trails, and EU AI Act compliance for AI agent memory.
+site_url: https://babylon60.com
+repo_url: https://github.com/borjamoskv/Cortex-Persist
+repo_name: borjamoskv/Cortex-Persist
+edit_uri: edit/main/docs/
+exclude_docs: |
+  internal/
+  architecture/
+  audits/
+  articles/
+  blog/
+  design/
+  launch/
+  proposals/
+  research/
+  agents/
+  ortu-omega/
+  prototypes/
+  demo-padres/
+  data/
+  live_status.html
+  llms.txt
+  wave_5_proposal.md
+copyright: "© 2026 MOSKV-1 Sovereign Systems · Apache 2.0"
+
+theme:
+  name: material
+  logo: https://raw.githubusercontent.com/borjamoskv/Cortex-Persist/main/src/assets/logo-white.svg
+  favicon: https://raw.githubusercontent.com/borjamoskv/Cortex-Persist/main/src/assets/logo-white.svg
+  palette:
+    - scheme: slate
+      primary: black
+      accent: lime
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    - scheme: default
+      primary: black
+      accent: lime
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  features:
+    - navigation.instant
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - content.tabs.link
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+
+nav:
+  - Home: index.md
+  - Evaluation:
+      - Comparisons vs. Vector DBs: competitors.md
+      - How it fits your stack: integration_stacks.md
+      - Audit Pack Anatomy: audit_pack_anatomy.md
+  - By Role:
+      - Builder (Hello World): personas/builder.md
+      - Security Lead: personas/security_lead.md
+      - Compliance & Buyers: personas/compliance_buyer.md
+      - Systems Architect: personas/architect.md
+  - Getting Started:
+      - Public Product Surface: product-surface.md
+      - Quickstart: quickstart.md
+      - Installation: installation.md
+      - Configuration: configuration.md
+  - Reference:
+      - Architecture: architecture.md
+      - Architecture Crystallization: architecture-crystallization.md
+      - Skill Taxonomy: skills/SKILL-TAXONOMY.md
+      - Capabilities: CORTEX-CAPABILITIES.md
+      - SDK Surface: SDK-SURFACE.md
+      - Trust Semantics: TRUST-SEMANTICS.md
+      - Event Model: EVENT-MODEL.md
+      - Error Code Registry: ERROR-CODE-REGISTRY.md
+      - Operating Axioms: operating-axioms.md
+      - Knowledge Architecture: knowledge-architecture.md
+      - Peano Soberano (7 Axioms): peano-soberano.md
+      - API Classes: reference.md
+      - CLI Reference: cli.md
+      - REST API: api.md
+      - MCP Server: mcp.md
+      - SDKs: sdks.md
+  - Guides:
+      - Developer Guide: developer-guide.md
+      - Deployment: deployment.md
+      - Cross-Platform: cross_platform_guide.md
+  - Compliance & Security:
+      - Security Trust Model: SECURITY_TRUST_MODEL.md
+      - Deep Change Protocols: CONTRIBUTING.md
+      - Operations: OPERATIONS.md
+      - Axioms: AXIOMS.md
+      - Axiom Registry: axiom-registry.md
+      - EU AI Act Compliance: compliance.md
+      - Security: security.md
+      - Sovereign Infrastructure: sovereign-infrastructure.md
+  - Tutorials:
+      - Course Suite: course/README.md
+      - Memory for LangChain Agents: tutorials/langchain.md
+      - Multi-Agent Consensus: tutorials/consensus.md
+      - Time-Travel Debugging: tutorials/temporal.md
+      - Site Monitoring Daemon: tutorials/daemon.md
+  - Project:
+      - Sintetología Agéntica: SINTETOLOGÍA AGÉNTICA.md
+      - Sovereign Agent Manifesto: sovereign_agent_manifesto.md
+      - Sovereign Vibe-Coding: vibe_coding.md
+      - FAQ: faq.md
+      - Changelog: changelog.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/borjamoskv/Cortex-Persist
+    - icon: fontawesome/brands/x-twitter
+      link: https://x.com/borjamoskv
+  homepage: https://babylon60.com
+
+extra_css:
+  - stylesheets/industrial_noir.css
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: "!!python/name:pymdownx.superfences.fence_code_format"
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [.]
+          options:
+            show_source: false
+            show_root_heading: true
+            show_category_heading: true
+            show_signature_annotations: true

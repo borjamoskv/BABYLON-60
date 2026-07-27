@@ -1,0 +1,366 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute address endpoint should return success 1`] = `
+{
+  "data": {
+    "result": [
+      {
+        "address": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+        "chainId": "mainnet",
+        "network": "ethereum",
+      },
+      {
+        "address": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "chainId": "mainnet",
+        "network": "ethereum",
+      },
+      {
+        "address": "0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc",
+        "chainId": "mainnet",
+        "network": "ethereum",
+      },
+      {
+        "address": "0x90f79bf6eb2c4f870365e785982e1f101e93b906",
+        "chainId": "mainnet",
+        "network": "ethereum",
+      },
+      {
+        "address": "0x15d34aaf54267db7d7c367839aaf71a00a2c6a65",
+        "chainId": "mainnet",
+        "network": "ethereum",
+      },
+      {
+        "address": "0x9965507d1a55bcc2695c58ba16fb37d819b0a4dc",
+        "chainId": "mainnet",
+        "network": "ethereum",
+      },
+      {
+        "address": "0x976ea74026e726554db657fa54763abd0c3a0aa9",
+        "chainId": "mainnet",
+        "network": "ethereum",
+      },
+      {
+        "address": "0x14dc79964da2c08b23698b3d3cc7ca32193d9955",
+        "chainId": "mainnet",
+        "network": "ethereum",
+      },
+      {
+        "address": "0x23618e81e3f5cdf7f54c3d65f7fbc0abf5b21e8f",
+        "chainId": "mainnet",
+        "network": "ethereum",
+      },
+      {
+        "address": "0xa0ee7a142d267c1f36714e4a8f75612f20a79720",
+        "chainId": "mainnet",
+        "network": "ethereum",
+      },
+    ],
+  },
+  "result": null,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 978347471111,
+    "providerDataRequestedUnixMs": 978347471111,
+  },
+}
+`;
+
+exports[`execute apiAddress endpoint bedrock BTC should return success 1`] = `
+{
+  "data": {
+    "result": [
+      {
+        "address": "btc_1",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+      {
+        "address": "btc_2",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+    ],
+  },
+  "result": null,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 978347471111,
+    "providerDataRequestedUnixMs": 978347471111,
+  },
+}
+`;
+
+exports[`execute apiAddress endpoint bedrock tokens should return success 1`] = `
+{
+  "data": {
+    "result": [
+      {
+        "chainId": "1",
+        "contractAddress": "token_1",
+        "wallets": [
+          "vault_1",
+        ],
+      },
+      {
+        "chainId": "56",
+        "contractAddress": "token_2",
+        "wallets": [
+          "vault_2",
+        ],
+      },
+    ],
+  },
+  "result": null,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 978347471111,
+    "providerDataRequestedUnixMs": 978347471111,
+  },
+}
+`;
+
+exports[`execute apiAddress endpoint bedrock vault should return success 1`] = `
+{
+  "data": {
+    "result": [
+      {
+        "address": "vault_1",
+        "chainId": "1",
+        "network": "eth",
+      },
+    ],
+  },
+  "result": null,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 978347471111,
+    "providerDataRequestedUnixMs": 978347471111,
+  },
+}
+`;
+
+exports[`execute apiAddress endpoint coinbase BTC should return success 1`] = `
+{
+  "data": {
+    "result": [
+      {
+        "address": "bc1qkqu7akp4lf3vmkde5l4ydp596wp8fm93m9yptd",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+      {
+        "address": "1xT8bWnZzS339nQLnrdqBW6yz8Nt5KjLC",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+      {
+        "address": "1FprAosJemf7TDvLGaTHbUWms3Z1uLUwJS",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+      {
+        "address": "1CgpdCJAkEQrzgqRh4C2EkyKsGCZxDFPEa",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+    ],
+  },
+  "result": null,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 978347471111,
+    "providerDataRequestedUnixMs": 978347471111,
+  },
+}
+`;
+
+exports[`execute apiAddress endpoint solv BBN should return success 1`] = `
+{
+  "data": {
+    "result": [
+      {
+        "address": "bbn_s_1",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+      {
+        "address": "bbn_s_2",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+    ],
+  },
+  "result": null,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 978347471111,
+    "providerDataRequestedUnixMs": 978347471111,
+    "providerIndicatedTimeUnixMs": 1609499471112,
+  },
+}
+`;
+
+exports[`execute apiAddress endpoint solv CORE should return success 1`] = `
+{
+  "data": {
+    "result": [
+      {
+        "address": "core_s_1",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+      {
+        "address": "core_s_2",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+    ],
+  },
+  "result": null,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 978347471111,
+    "providerDataRequestedUnixMs": 978347471111,
+    "providerIndicatedTimeUnixMs": 1609499471112,
+  },
+}
+`;
+
+exports[`execute apiAddress endpoint solv ENA should return success 1`] = `
+{
+  "data": {
+    "result": [
+      {
+        "address": "ena_s_1",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+      {
+        "address": "ena_s_2",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+    ],
+  },
+  "result": null,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 978347471111,
+    "providerDataRequestedUnixMs": 978347471111,
+    "providerIndicatedTimeUnixMs": 1609499471112,
+  },
+}
+`;
+
+exports[`execute apiAddress endpoint solv JUP should return success 1`] = `
+{
+  "data": {
+    "result": [
+      {
+        "address": "jup_s_1",
+        "chainId": "solv",
+        "network": "ceffu",
+      },
+      {
+        "address": "jup_s_2",
+        "chainId": "solv",
+        "network": "ceffu",
+      },
+    ],
+  },
+  "result": null,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 978347471111,
+    "providerDataRequestedUnixMs": 978347471111,
+    "providerIndicatedTimeUnixMs": 1609499471112,
+  },
+}
+`;
+
+exports[`execute apiAddress endpoint solv TRADING should return success 1`] = `
+{
+  "data": {
+    "result": [
+      {
+        "address": "trading_s_1",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+      {
+        "address": "trading_s_2",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+    ],
+  },
+  "result": null,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 978347471111,
+    "providerDataRequestedUnixMs": 978347471111,
+    "providerIndicatedTimeUnixMs": 1609499471112,
+  },
+}
+`;
+
+exports[`execute apiAddress endpoint solv should return success 1`] = `
+{
+  "data": {
+    "result": [
+      {
+        "address": "btc_s_1",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+      {
+        "address": "btc_s_2",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+    ],
+  },
+  "result": null,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 978347471111,
+    "providerDataRequestedUnixMs": 978347471111,
+    "providerIndicatedTimeUnixMs": 1609499471112,
+  },
+}
+`;
+
+exports[`execute apiAddress endpoint zeus BTC should return success 1`] = `
+{
+  "data": {
+    "result": [
+      {
+        "address": "bc1p698gf9gm8j34gvars97j6spsgrlxlhvyfajt2tsz2vnw9fcat9cqjcjn4v",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+      {
+        "address": "bc1p795t8whcfpl6uyxj38enzt43cg8scphrgvn2e79y3xgflv6s6nrsrmudk6",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+      {
+        "address": "bc1p96utmwdngv3xwdn90d7wg4tyqke70fs6js8ajgqkk89zn08z8d5q8xzchd",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+      {
+        "address": "bc1pd46txhc0a3t8juc2r4njyuk4rv3099dcn039ny0hzgt24tgx3qlszg5e6f",
+        "chainId": "mainnet",
+        "network": "bitcoin",
+      },
+    ],
+  },
+  "result": null,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 978347471111,
+    "providerDataRequestedUnixMs": 978347471111,
+  },
+}
+`;

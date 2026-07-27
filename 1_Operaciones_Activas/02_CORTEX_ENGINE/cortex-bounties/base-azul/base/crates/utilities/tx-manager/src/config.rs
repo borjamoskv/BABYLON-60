@@ -1,0 +1,308 @@
+//! Transaction manager configuration.
+//!
+//! [`TxManagerConfig`] is the validated runtime configuration for the
+//! transaction manager. All fields are `pub` for direct construction.
+//! Use [`TxManagerConfig::validate`] to check invariants, or convert
+//! from `TxManagerCli` via `TryFrom` which validates automatically.
+
+use std::time::Duration;
+
+use alloy_primitives::utils::parse_units;
+use thiserror::Error;
+
+// ── Error ───────────────────────────────────────────────────────────────
+
+/// Errors returned during configuration validation.
+#[derive(Debug, Error)]
+#[non_exhaustive]
+pub enum ConfigError {
+    /// A field value is out of the allowed range.
+    #[error("{field} must be {constraint}, got {value}")]
+    OutOfRange {
+        /// The field name that is out of range.
+        field: &'static str,
+        /// The constraint description.
+        constraint: &'static str,
+        /// The actual value.
+        value: String,
+    },
+
+    /// A gwei string could not be parsed or represents an invalid value.
+    #[error("invalid gwei value for {field}: {reason}")]
+    InvalidGwei {
+        /// The field name that contains the invalid gwei value.
+        field: &'static str,
+        /// Human-readable reason the parse failed.
+        reason: String,
+    },
+
+    /// A field value is semantically invalid (e.g. negative or overflows).
+    #[error("{field} has invalid value: {reason}")]
+    InvalidValue {
+        /// The field name.
+        field: &'static str,
+        /// Human-readable reason.
+        reason: String,
+    },
+}
+
+// ── GweiParser ─────────────────────────────────────────────────────────
+
+/// Parses gwei decimal strings to wei (`u128`) via
+/// [`alloy_primitives::utils::parse_units`].
+///
+/// Placed on a unit struct per project convention (prefer methods on types
+/// over bare functions).
+#[derive(Debug)]
+pub struct GweiParser;
+
+impl GweiParser {
+    /// Parses a gwei decimal string to wei (`u128`).
+    ///
+    /// Suitable for use as a clap `value_parser`. Error context (which
+    /// flag failed) is provided by clap automatically.
+    pub fn parse_value(gwei: &str) -> Result<u128, ConfigError> {
+        Self::parse(gwei, "value")
+    }
+
+    /// Parses a gwei decimal string to wei (`u128`).
+    ///
+    /// # Errors
+    ///
+    /// Returns [`ConfigError::InvalidGwei`] if the string is not a valid
+    /// decimal number. Returns [`ConfigError::InvalidValue`] if the parsed
+    /// value is negative or overflows `u128`.
+    pub fn parse(gwei: &str, field: &'static str) -> Result<u128, ConfigError> {
+        let parsed = parse_units(gwei, "gwei")
+            .map_err(|e| ConfigError::InvalidGwei { field, reason: e.to_string() })?;
+        if parsed.is_negative() {
+            return Err(ConfigError::InvalidValue {
+                field,
+                reason: format!("negative values not allowed: {gwei}"),
+            });
+        }
+        u128::try_from(parsed).map_err(|_| ConfigError::InvalidValue {
+            field,
+            reason: format!("value too large: {gwei}"),
+        })
+    }
+}
+
+// ── TxManagerConfig ─────────────────────────────────────────────────────
+
+/// Validated runtime configuration for the transaction manager.
+///
+/// All fields are public for direct construction. Use [`Self::validate`]
+/// to check invariants, or convert from `TxManagerCli` via `TryFrom`
+/// which validates automatically.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct TxManagerConfig {
+    /// Number of block confirmations to wait.
+    pub num_confirmations: u64,
+    /// Nonce-too-low abort threshold.
+    pub safe_abort_nonce_too_low_count: u64,
+    /// Maximum fee multiplier applied to the suggested gas price.
+    pub fee_limit_multiplier: u64,
+    /// Minimum suggested fee (in wei) at which the fee-limit check activates.
+    pub fee_limit_threshold: u128,
+    /// Minimum tip cap (in wei) to use for transactions.
+    pub min_tip_cap: u128,
+    /// Minimum basefee (in wei) to use for transactions.
+    pub min_basefee: u128,
+    /// Network request timeout.
+    pub network_timeout: Duration,
+    /// Fee-bump resubmission timeout.
+    pub resubmission_timeout: Duration,
+    /// Receipt polling interval.
+    pub receipt_query_interval: Duration,
+    /// Overall send timeout (zero = disabled).
+    pub tx_send_timeout: Duration,
+    /// Mempool appearance timeout (zero = disabled).
+    pub tx_not_in_mempool_timeout: Duration,
+    /// Maximum time to poll for confirmation before giving up.
+    pub confirmation_timeout: Duration,
+    /// Minimum blob base fee (in wei) to use for blob transactions.
+    pub min_blob_fee: u128,
+}
+
+impl Default for TxManagerConfig {
+    fn default() -> Self {
+        Self {
+            num_confirmations: 10,
+            safe_abort_nonce_too_low_count: 3,
+            fee_limit_multiplier: 5,
+            fee_limit_threshold: 100_000_000_000, // 100 gwei
+            min_tip_cap: 0,
+            min_basefee: 0,
+            network_timeout: Duration::from_secs(10),
+            resubmission_timeout: Duration::from_secs(48),
+            receipt_query_interval: Duration::from_secs(12),
+            tx_send_timeout: Duration::ZERO,
+            tx_not_in_mempool_timeout: Duration::from_secs(120),
+            confirmation_timeout: Duration::from_secs(300),
+            min_blob_fee: 1_000_000_000, // 1 gwei
+        }
+    }
+}
+
+impl TxManagerConfig {
+    /// Validates the configuration fields.
+    ///
+    /// # Errors
+    ///
+    /// Returns [`ConfigError::OutOfRange`] if any required field is zero:
+    /// - `num_confirmations` must be >= 1
+    /// - `safe_abort_nonce_too_low_count` must be >= 1
+    /// - `fee_limit_multiplier` must be >= 1
+    /// - `min_blob_fee` must be >= 1
+    /// - `network_timeout` must be > 0
+    /// - `resubmission_timeout` must be > 0
+    /// - `receipt_query_interval` must be > 0
+    /// - `confirmation_timeout` must be > 0
+    pub fn validate(&self) -> Result<(), ConfigError> {
+        macro_rules! reject_zero {
+            ($($field:ident),+ $(,)?) => {$(
+                if self.$field == 0 {
+                    return Err(ConfigError::OutOfRange {
+                        field: stringify!($field),
+                        constraint: ">= 1",
+                        value: "0".to_string(),
+                    });
+                }
+            )+};
+        }
+
+        macro_rules! reject_zero_duration {
+            ($($field:ident),+ $(,)?) => {$(
+                if self.$field.is_zero() {
+                    return Err(ConfigError::OutOfRange {
+                        field: stringify!($field),
+                        constraint: "> 0",
+                        value: "0s".to_string(),
+                    });
+                }
+            )+};
+        }
+
+        reject_zero!(num_confirmations, safe_abort_nonce_too_low_count, fee_limit_multiplier);
+        reject_zero_duration!(
+            network_timeout,
+            resubmission_timeout,
+            receipt_query_interval,
+            confirmation_timeout,
+        );
+        reject_zero!(min_blob_fee);
+        Ok(())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use proptest::prelude::*;
+    use rstest::rstest;
+
+    use super::*;
+
+    // ── GweiParser tests ───────────────────────────────────────────
+
+    #[rstest]
+    #[case::zero("0", 0)]
+    #[case::one_gwei("1", 1_000_000_000)]
+    #[case::one_point_zero("1.0", 1_000_000_000)]
+    #[case::half_gwei("0.5", 500_000_000)]
+    #[case::hundred_gwei("100", 100_000_000_000)]
+    #[case::fractional("0.001", 1_000_000)]
+    #[case::nine_decimals("1.123456789", 1_123_456_789)]
+    fn gwei_parse_valid(#[case] gwei: &str, #[case] expected_wei: u128) {
+        let result = GweiParser::parse(gwei, "test_field").unwrap();
+        assert_eq!(result, expected_wei);
+    }
+
+    #[rstest]
+    #[case::abc("abc")]
+    #[case::spaces("  ")]
+    fn gwei_parse_invalid(#[case] gwei: &str) {
+        let result = GweiParser::parse(gwei, "test_field");
+        let err = result.unwrap_err();
+        assert!(
+            matches!(err, ConfigError::InvalidGwei { field: "test_field", ref reason } if !reason.is_empty()),
+            "expected InvalidGwei with non-empty reason, got: {err}"
+        );
+    }
+
+    #[test]
+    fn gwei_parse_negative_returns_invalid_value() {
+        let result = GweiParser::parse("-1", "test_field");
+        assert!(matches!(result, Err(ConfigError::InvalidValue { field: "test_field", .. })));
+        let err = result.unwrap_err();
+        assert!(err.to_string().contains("negative"), "error should mention negative: {err}");
+    }
+
+    // ── ConfigError display ─────────────────────────────────────────
+
+    #[rstest]
+    #[case::out_of_range(
+        ConfigError::OutOfRange { field: "num_confirmations", constraint: ">= 1", value: "0".to_string() },
+        "num_confirmations must be >= 1, got 0"
+    )]
+    #[case::invalid_value(
+        ConfigError::InvalidValue { field: "fee_limit_threshold", reason: "negative values not allowed: -1".to_string() },
+        "fee_limit_threshold has invalid value: negative values not allowed: -1"
+    )]
+    fn config_error_display(#[case] error: ConfigError, #[case] expected: &str) {
+        let msg = error.to_string();
+        assert!(msg.contains(expected), "expected display to contain {expected:?}, got: {msg}");
+    }
+
+    // ── Thread safety ───────────────────────────────────────────────
+
+    #[test]
+    fn tx_manager_config_is_send_and_sync() {
+        fn assert_send_sync<T: Send + Sync>() {}
+        assert_send_sync::<TxManagerConfig>();
+    }
+
+    // ── Property tests ──────────────────────────────────────────────
+
+    proptest! {
+        #[test]
+        fn gwei_parse_non_negative(whole in 0u64..1_000_000, frac in 0u32..1_000_000_000) {
+            let gwei_str = format!("{whole}.{frac:09}");
+            let result = GweiParser::parse(&gwei_str, "prop_test");
+            prop_assert!(result.is_ok(), "valid decimal string should parse: {gwei_str}");
+        }
+    }
+
+    // ── Default impl tests ─────────────────────────────────────────
+
+    #[test]
+    fn default_passes_validation() {
+        TxManagerConfig::default().validate().expect("default config should be valid");
+    }
+
+    #[test]
+    fn default_min_blob_fee_is_one_gwei() {
+        assert_eq!(TxManagerConfig::default().min_blob_fee, 1_000_000_000);
+    }
+
+    #[test]
+    fn validation_rejects_zero_confirmation_timeout() {
+        let config =
+            TxManagerConfig { confirmation_timeout: Duration::ZERO, ..TxManagerConfig::default() };
+        let err = config.validate().unwrap_err();
+        assert!(
+            matches!(err, ConfigError::OutOfRange { field: "confirmation_timeout", .. }),
+            "expected OutOfRange for confirmation_timeout, got: {err}"
+        );
+    }
+
+    #[test]
+    fn validation_rejects_zero_min_blob_fee() {
+        let config = TxManagerConfig { min_blob_fee: 0, ..TxManagerConfig::default() };
+        let err = config.validate().unwrap_err();
+        assert!(
+            matches!(err, ConfigError::OutOfRange { field: "min_blob_fee", .. }),
+            "expected OutOfRange for min_blob_fee, got: {err}"
+        );
+    }
+}

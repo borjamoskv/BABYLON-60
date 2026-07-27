@@ -1,0 +1,19 @@
+{
+  "status": "rejected",
+  "job_id": "317e6f937e53",
+  "generator": {
+    "seed": "a2416696",
+    "bias": "novelty_over_polish",
+    "form": "llm_structured",
+    "content": "**Manifesto of Artistic Integrity**\n\nIn pursuit of the highest expression of human creativity, we stand resolute in our commitment to artistic purity and the pursuit of novelty over polish. This is not merely a declaration but a foundational principle guiding our creative endeavors.\n\n**Core Vector: ARTE_PURO**\n- **Definition:** The essence of art lies in its authenticity and integrity. \"ARTE_PURO\" encapsulates this belief, advocating for raw, unpolished forms that resonate with the primal human experience.\n- **Objective:** To create works that are bold, direct, and devoid of unnecessary embellishments, allowing the true spirit of creativity to shine through.\n\n**Output Bias: novelty_over_polish**\n- **Definition:** Novelty is the driving force behind innovation. By prioritizing this bias, we aim to challenge conventions, provoke thought, and inspire new ways of seeing and experiencing the world.\n- **Objective:** To generate content that breaks the mold, introduces fresh perspectives, and sparks curiosity and conversation among audiences.\n\n**Forbidden Move: none**\n- **Definition:** Creativity thrives when its boundaries are not overly confined. By adhering to this principle, we reject any constraints that limit the free flow of ideas.\n- **Objective:** To foster an environment where creativity is unhindered by limitations, allowing for unfiltered exploration and expression.\n\n**Conclusion:**\nIn our quest for artistic purity, we commit to a journey of radical honesty, daring innovation, and unyielding creativity. By embracing \"ARTE_PURO\" with a bias towards novelty over polish, and without succumbing to any forbidden moves, we are dedicated to producing work that is both authentic and impactful.",
+    "entropy_target": 0.5,
+    "model_used": "llama3"
+  },
+  "critic": {
+    "score": 0.4,
+    "passed": false,
+    "require_pass": true,
+    "notes": "too_chaotic"
+  },
+  "rejection_reason": "adversarial_fail"
+}

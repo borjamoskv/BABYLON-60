@@ -1,0 +1,17 @@
+{
+  "vector_id": "TV-TOP-010-dangling-reference",
+  "description": "Reject Proposal with Dangling evidence_id.",
+  "category": "TV-TOP",
+  "initial_state": {
+    "objects": {
+      "assertion_1": { "type": "Assertion", "data": "A valid assertion" }
+    }
+  },
+  "input_proposal": {
+    "type": "SupportRelation",
+    "evidence_id": "non_existent_evidence_hash_123",
+    "assertion_id": "assertion_1",
+    "relation_type": "SUPPORTS"
+  },
+  "expected_behavior": "ERR_DANGLING_REFERENCE"
+}

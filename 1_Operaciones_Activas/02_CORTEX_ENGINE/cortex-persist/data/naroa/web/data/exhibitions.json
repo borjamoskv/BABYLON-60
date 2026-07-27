@@ -1,0 +1,86 @@
+{
+  "exhibitions": [
+    {
+      "id": "espejos-del-alma-2024",
+      "title": "Espejos del Alma",
+      "subtitle": "Retrospectiva Emocional",
+      "location": "Galería Vanguardia, Bilbao",
+      "year": 2024,
+      "month": "Noviembre",
+      "day": 15,
+      "type": "solo",
+      "description": "Una inmersión profunda en la psique humana a través de 15 retratos de gran formato. La exposición explora cómo la mirada construye identidad.",
+      "image": "images/artworks/espejos-del-alma.webp",
+      "url": "#/galeria"
+    },
+    {
+      "id": "identity-fragments-2024",
+      "title": "Identity Fragments",
+      "subtitle": "Colectiva Contemporánea",
+      "location": "Espacio Oculto, Madrid",
+      "year": 2024,
+      "month": "Mayo",
+      "day": 22,
+      "type": "group",
+      "description": "Participación con la obra 'Fragmentación IV' en una muestra sobre la identidad digital y física en la era moderna.",
+      "image": "images/artworks/kintsugi-gold-1.webp",
+      "url": "https://espaciooculto.madrid"
+    },
+    {
+      "id": "pop-icons-2023",
+      "title": "POP Culture Icons",
+      "subtitle": "Virtual Exhibition",
+      "location": "Artsy Online",
+      "year": 2023,
+      "month": "Septiembre",
+      "type": "online",
+      "description": "Muestra digital curada seleccionando las mejores reinterpretaciones del pop art actual. Naroa presentó su serie 'Neon Dreams'.",
+      "url": "https://artsy.net"
+    },
+    {
+      "id": "retratos-vivos-2022",
+      "title": "Retratos Vivos",
+      "location": "Kursaala, Donostia",
+      "year": 2022,
+      "month": "Febrero",
+      "type": "solo",
+      "description": "Primera gran exposición individual presentando la técnica de hiperrealismo con texturas mixtas. Un éxito de crítica local."
+    },
+    {
+      "id": "emergentes-2021",
+      "title": "Artistas Emergentes Euskadi",
+      "location": "Sala Rekalde, Bilbao",
+      "year": 2021,
+      "month": "Julio",
+      "type": "group",
+      "description": "Seleccionada como una de las 10 artistas revelación del año. Obra expuesta: 'La Mirada Ausente'."
+    },
+    {
+      "id": "art-market-2020",
+      "title": "Bilbao Art Market",
+      "location": "Ensanche, Bilbao",
+      "year": 2020,
+      "month": "Diciembre",
+      "type": "market",
+      "description": "Stand propio en la feria de arte navideña, con venta directa de obra pequeña y láminas limitadas."
+    },
+    {
+      "id": "mujeres-creadoras-2019",
+      "title": "Mujeres Creadoras",
+      "location": "Casa de Cultura de Getxo",
+      "year": 2019,
+      "month": "Marzo",
+      "type": "group",
+      "description": "Exposición colectiva celebrando el mes de la mujer. Participación con tríptico sobre la maternidad."
+    },
+    {
+      "id": "bbaa-final-2018",
+      "title": "Grado BBAA Final Show",
+      "location": "UPV/EHU Leoia",
+      "year": 2018,
+      "month": "Junio",
+      "type": "group",
+      "description": "Exposición de fin de grado. Presentación del proyecto 'Génesis de la Forma'."
+    }
+  ]
+}

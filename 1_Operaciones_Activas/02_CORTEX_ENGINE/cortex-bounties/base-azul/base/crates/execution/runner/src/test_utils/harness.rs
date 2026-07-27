@@ -1,0 +1,308 @@
+//! Unified test harness combining node and engine helpers, plus optional flashblocks adapter.
+
+use std::{sync::Arc, time::Duration};
+
+use alloy_eips::{BlockHashOrNumber, eip7685::Requests};
+use alloy_primitives::{B64, B256, Bytes};
+use alloy_provider::{Provider, RootProvider};
+use alloy_rpc_client::RpcClient;
+use alloy_rpc_types::BlockNumberOrTag;
+use alloy_rpc_types_engine::PayloadAttributes;
+use base_common_consensus::BaseBlock;
+use base_common_network::Base;
+use base_common_rpc_types::GenesisInfo;
+use base_common_rpc_types_engine::BasePayloadAttributes;
+use base_execution_chainspec::BaseChainSpec;
+use base_test_utils::build_test_genesis;
+use eyre::{Result, eyre};
+use reth_primitives_traits::{Block as BlockT, RecoveredBlock};
+use reth_provider::{BlockNumReader, BlockReader, ChainSpecProvider};
+use tokio::time::sleep;
+
+use crate::{
+    BaseNodeExtension, FromExtensionConfig,
+    test_utils::{
+        BLOCK_BUILD_DELAY_MS, BLOCK_TIME_SECONDS, GAS_LIMIT, L1_BLOCK_INFO_DEPOSIT_TX,
+        NODE_STARTUP_DELAY_MS,
+        engine::{EngineApi, IpcEngine},
+        node::{LocalNode, LocalNodeProvider},
+        tracing::init_silenced_tracing,
+    },
+};
+
+/// A block that has been built and accepted via `engine_newPayload` but not yet
+/// promoted to the canonical head via a forkchoice update.
+#[derive(Debug, Clone, Copy)]
+pub struct PreparedBlock {
+    /// Hash of the parent the new block was built on.
+    pub parent_hash: B256,
+    /// Hash of the newly-built block.
+    pub new_block_hash: B256,
+}
+
+/// Builder for configuring and launching a test harness.
+#[derive(Debug, Default)]
+pub struct TestHarnessBuilder {
+    extensions: Vec<Box<dyn BaseNodeExtension>>,
+    chain_spec: Option<Arc<BaseChainSpec>>,
+}
+
+impl TestHarnessBuilder {
+    /// Create a new builder with no extensions.
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    /// Add an extension to be applied during node launch using its config type.
+    pub fn with_ext<T: FromExtensionConfig + 'static>(mut self, config: T::Config) -> Self {
+        self.extensions.push(Box::new(T::from_config(config)));
+        self
+    }
+
+    /// Add a pre-constructed extension to be applied during node launch.
+    ///
+    /// Prefer [`with_ext`](Self::with_ext) for simpler configuration.
+    pub fn with_extension(mut self, ext: impl BaseNodeExtension + 'static) -> Self {
+        self.extensions.push(Box::new(ext));
+        self
+    }
+
+    /// Set a custom chain spec for the test harness.
+    ///
+    /// If not provided, the default genesis is built programmatically.
+    pub fn with_chain_spec(mut self, chain_spec: Arc<BaseChainSpec>) -> Self {
+        self.chain_spec = Some(chain_spec);
+        self
+    }
+
+    /// Build and launch the test harness.
+    pub async fn build(self) -> Result<TestHarness> {
+        init_silenced_tracing();
+
+        let chain_spec = self.chain_spec.unwrap_or_else(|| {
+            let genesis = build_test_genesis();
+            Arc::new(BaseChainSpec::from_genesis(genesis))
+        });
+
+        let node = LocalNode::new(self.extensions, chain_spec).await?;
+        let engine = node.engine_api()?;
+
+        sleep(Duration::from_millis(NODE_STARTUP_DELAY_MS)).await;
+
+        Ok(TestHarness { node, engine })
+    }
+}
+
+/// High-level façade that bundles a local node, engine API client, and common helpers.
+#[derive(Debug)]
+pub struct TestHarness {
+    node: LocalNode,
+    engine: EngineApi<IpcEngine>,
+}
+
+impl TestHarness {
+    /// Launch a new harness using the default configuration (no extensions).
+    pub async fn new() -> Result<Self> {
+        TestHarnessBuilder::new().build().await
+    }
+
+    /// Create a builder for configuring the test harness with extensions.
+    pub fn builder() -> TestHarnessBuilder {
+        TestHarnessBuilder::new()
+    }
+
+    /// Create a harness from pre-built parts.
+    ///
+    /// This is useful when you need to capture extension state before building the harness.
+    pub const fn from_parts(node: LocalNode, engine: EngineApi<IpcEngine>) -> Self {
+        Self { node, engine }
+    }
+
+    /// Return a Base JSON-RPC provider connected to the harness node.
+    pub fn provider(&self) -> RootProvider<Base> {
+        self.node.provider().expect("provider should always be available after node initialization")
+    }
+
+    /// Access the low-level blockchain provider for direct database queries.
+    pub fn blockchain_provider(&self) -> LocalNodeProvider {
+        self.node.blockchain_provider()
+    }
+
+    /// HTTP URL for sending JSON-RPC requests to the local node.
+    pub fn rpc_url(&self) -> String {
+        format!("http://{}", self.node.http_api_addr)
+    }
+
+    /// Websocket URL for subscribing to JSON-RPC notifications.
+    pub fn ws_url(&self) -> String {
+        format!("ws://{}", self.node.ws_api_addr)
+    }
+
+    /// Return a JSON-RPC client connected to the harness node.
+    pub fn rpc_client(&self) -> Result<RpcClient> {
+        let url = self.rpc_url().parse()?;
+        Ok(RpcClient::new_http(url))
+    }
+
+    /// Direct access to the IPC-backed Engine API client.
+    pub const fn engine(&self) -> &EngineApi<IpcEngine> {
+        &self.engine
+    }
+
+    /// Build a block using the provided transactions and push it through the engine
+    /// up to (but not including) the final canonical forkchoice update.
+    ///
+    /// Returns the parent hash and the new block hash so callers can issue the
+    /// final FCU themselves — useful for benchmarks that want to time only the
+    /// canonical FCU step.
+    pub async fn prepare_unsafe_block(
+        &self,
+        mut transactions: Vec<Bytes>,
+    ) -> Result<PreparedBlock> {
+        if transactions.first().is_none_or(|tx| tx != &L1_BLOCK_INFO_DEPOSIT_TX) {
+            transactions.insert(0, L1_BLOCK_INFO_DEPOSIT_TX);
+        }
+
+        let latest_block = self
+            .provider()
+            .get_block_by_number(BlockNumberOrTag::Latest)
+            .await?
+            .ok_or_else(|| eyre!("No genesis block found"))?;
+
+        let parent_hash = latest_block.header.hash;
+        let parent_beacon_block_root =
+            latest_block.header.parent_beacon_block_root.unwrap_or(B256::ZERO);
+        let next_timestamp = latest_block.header.timestamp + BLOCK_TIME_SECONDS;
+
+        let min_base_fee = latest_block.header.base_fee_per_gas.unwrap_or_default();
+        let chain_spec = self.node.blockchain_provider().chain_spec();
+        let base_fee_params = chain_spec.base_fee_params_at_timestamp(next_timestamp);
+        let eip_1559_params = ((base_fee_params.max_change_denominator as u64) << 32)
+            | (base_fee_params.elasticity_multiplier as u64);
+
+        let payload_attributes = BasePayloadAttributes {
+            payload_attributes: PayloadAttributes {
+                timestamp: next_timestamp,
+                parent_beacon_block_root: Some(parent_beacon_block_root),
+                withdrawals: Some(vec![]),
+                ..Default::default()
+            },
+            transactions: Some(transactions),
+            gas_limit: Some(GAS_LIMIT),
+            no_tx_pool: Some(true),
+            min_base_fee: Some(min_base_fee),
+            eip_1559_params: Some(B64::from(eip_1559_params)),
+        };
+
+        let forkchoice_result = self
+            .engine
+            .update_forkchoice(parent_hash, parent_hash, Some(payload_attributes))
+            .await?;
+
+        let payload_id = forkchoice_result
+            .payload_id
+            .ok_or_else(|| eyre!("Forkchoice update did not return payload ID"))?;
+
+        sleep(Duration::from_millis(BLOCK_BUILD_DELAY_MS)).await;
+
+        let azul_active = GenesisInfo::extract_from(&chain_spec.genesis.config.extra_fields)
+            .and_then(|genesis_info| genesis_info.base.azul)
+            .is_some_and(|activation_time| next_timestamp >= activation_time);
+
+        let (execution_payload, execution_requests): (_, Vec<Bytes>) = if azul_active {
+            let payload_envelope = self.engine.get_payload_v5(payload_id).await?;
+            (payload_envelope.execution_payload, payload_envelope.execution_requests)
+        } else {
+            let payload_envelope = self.engine.get_payload_v4(payload_id).await?;
+            (payload_envelope.execution_payload, payload_envelope.execution_requests)
+        };
+
+        let execution_requests = if execution_requests.is_empty() {
+            Requests::default()
+        } else {
+            Requests::new(execution_requests)
+        };
+
+        let payload_status = self
+            .engine
+            .new_payload(execution_payload, vec![], parent_beacon_block_root, execution_requests)
+            .await?;
+
+        if payload_status.status.is_invalid() {
+            return Err(eyre!("Engine rejected payload: {:?}", payload_status));
+        }
+
+        let new_block_hash = payload_status
+            .latest_valid_hash
+            .ok_or_else(|| eyre!("Payload status missing latest_valid_hash"))?;
+
+        Ok(PreparedBlock { parent_hash, new_block_hash })
+    }
+
+    /// Build a block using the provided transactions and push it through the engine.
+    pub async fn build_block_from_transactions(&self, transactions: Vec<Bytes>) -> Result<()> {
+        let PreparedBlock { parent_hash, new_block_hash } =
+            self.prepare_unsafe_block(transactions).await?;
+
+        self.engine.update_forkchoice(parent_hash, new_block_hash, None).await?;
+
+        Ok(())
+    }
+
+    /// Advance the canonical chain by `n` empty blocks.
+    pub async fn advance_chain(&self, n: u64) -> Result<()> {
+        for _ in 0..n {
+            self.build_block_from_transactions(vec![]).await?;
+        }
+        Ok(())
+    }
+
+    /// Return the latest recovered block as seen by the local blockchain provider.
+    pub fn latest_block(&self) -> RecoveredBlock<BaseBlock> {
+        let provider = self.blockchain_provider();
+        let best_number = provider.best_block_number().expect("able to read best block number");
+        let block = provider
+            .block(BlockHashOrNumber::Number(best_number))
+            .expect("able to load canonical block")
+            .expect("canonical block exists");
+        BlockT::try_into_recovered(block).expect("able to recover canonical block")
+    }
+
+    /// Return the chain specification used by the harness.
+    pub fn chain_spec(&self) -> Arc<BaseChainSpec> {
+        self.node.blockchain_provider().chain_spec()
+    }
+
+    /// Return the chain ID used by the harness.
+    pub fn chain_id(&self) -> u64 {
+        self.chain_spec().chain().id()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use alloy_primitives::U256;
+    use alloy_provider::Provider;
+    use base_test_utils::{Account, DEVNET_CHAIN_ID};
+
+    use super::*;
+
+    #[tokio::test]
+    async fn test_harness_setup() -> Result<()> {
+        let harness = TestHarness::new().await?;
+
+        let provider = harness.provider();
+        let chain_id = provider.get_chain_id().await?;
+        assert_eq!(chain_id, DEVNET_CHAIN_ID);
+
+        let alice_balance = provider.get_balance(Account::Alice.address()).await?;
+        assert!(alice_balance > U256::ZERO);
+
+        let block_number = provider.get_block_number().await?;
+        harness.advance_chain(5).await?;
+        let new_block_number = provider.get_block_number().await?;
+        assert_eq!(new_block_number, block_number + 5);
+
+        Ok(())
+    }
+}

@@ -1,0 +1,118 @@
+name: ∞ MÖBIUS — Code IS Data
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  issues:
+    types: [opened]
+  schedule:
+    # Run reflexion cycle daily at 06:00 UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Agent action to execute'
+        required: true
+        default: 'reflexion'
+        type: choice
+        options:
+          - reflexion
+          - workflow-audit
+          - self-evolve
+          - pandora-assault
+          - aletheia-audit
+          - colmena-quorum
+          - aegis-guard
+          - eidolon-sim
+          - thanatos-purge
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  actions: read
+
+jobs:
+  # ─── PR Analysis ─────────────────────────────────────────────
+  pr-analyze:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+
+      - name: ∞ MÖBIUS — PR Analysis
+        uses: ./.github/actions/cortex-meta-agent
+        with:
+          action: pr-analyze
+          pr-number: ${{ github.event.pull_request.number }}
+
+  # ─── Issue Triage ────────────────────────────────────────────
+  issue-triage:
+    if: github.event_name == 'issues'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+
+      - name: ∞ MÖBIUS — Issue Triage
+        uses: ./.github/actions/cortex-meta-agent
+        with:
+          action: issue-triage
+          issue-number: ${{ github.event.issue.number }}
+
+  # ─── Reflexion Cycle (Self-Healing) ──────────────────────────
+  reflexion:
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'reflexion')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+
+      - name: ∞ MÖBIUS — Reflexion Cycle
+        uses: ./.github/actions/cortex-meta-agent
+        with:
+          action: reflexion
+
+  # ─── Workflow Audit (Metacognition) ──────────────────────────
+  workflow-audit:
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'workflow-audit'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+
+      - name: ∞ MÖBIUS — Workflow Audit
+        uses: ./.github/actions/cortex-meta-agent
+        with:
+          action: workflow-audit
+
+  # ─── Self-Evolution (Autopoiesis) ────────────────────────────
+  self-evolve:
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'self-evolve'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+
+      - name: ∞ MÖBIUS — Self-Evolution
+        uses: ./.github/actions/cortex-meta-agent
+        with:
+          action: self-evolve
+
+  # ─── New Agents ──────────────────────────────────────────────
+  new-agents:
+    if: github.event_name == 'workflow_dispatch' && contains(fromJson('["pandora-assault", "aletheia-audit", "colmena-quorum", "aegis-guard", "eidolon-sim", "thanatos-purge"]'), github.event.inputs.action)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+
+      - name: ∞ MÖBIUS — ${{ github.event.inputs.action }}
+        uses: ./.github/actions/cortex-meta-agent
+        with:
+          action: ${{ github.event.inputs.action }}

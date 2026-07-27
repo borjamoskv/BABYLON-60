@@ -1,0 +1,37 @@
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      OPTIMISM_NODE: ${{ secrets.OPTIMISM_NODE }}
+      OP_SEPOLIA_NODE: ${{ secrets.OP_SEPOLIA_NODE }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.3.6
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint
+      - run: rm -rf cache/fuzz cache/invariant
+      - run: forge build
+      - run: pnpm run coverage
+      - uses: codecov/codecov-action@v4
+        if: always()
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: lcov.info,coverage/lcov.info

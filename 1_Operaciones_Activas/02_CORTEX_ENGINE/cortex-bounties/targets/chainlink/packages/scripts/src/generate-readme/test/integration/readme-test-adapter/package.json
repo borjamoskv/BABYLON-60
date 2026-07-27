@@ -1,0 +1,15 @@
+{
+  "name": "@chainlink/readme-test-adapter",
+  "version": "1.2.71",
+  "dependencies": {
+    "@chainlink/ea-bootstrap": "workspace:*",
+    "@chainlink/ea-factories": "workspace:*",
+    "tslib": "2.3.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/supertest": "2.0.16",
+    "nock": "13.5.6",
+    "supertest": "6.2.4"
+  }
+}

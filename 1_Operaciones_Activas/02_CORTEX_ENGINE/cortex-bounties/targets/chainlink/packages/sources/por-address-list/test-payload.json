@@ -1,0 +1,26 @@
+{
+ "requests": [{
+    "chainId": "1",
+    "contractAddress": "0xAae0B305B3F1edDE7B11b680d4FA9252F7a1c524",
+    "network": "ethereum",
+    "batchSize": 100
+ }, {
+    "chainId": "mainnet",
+    "contractAddress": "0x9480f77911634a7dba7082b1422df058d23ba6c1",
+    "contractAddressNetwork": "binance",
+    "network": "bitcoin",
+    "batchSize": 100
+ }, {
+    "endpoint": "bedrockBtcAddress",
+    "type": "BTC"
+ }, {
+    "endpoint": "solvBtcAddress"
+ }, {
+    "endpoint": "multichainAddress",
+    "contractAddress": "0xb7C0817Dd23DE89E4204502dd2C2EF7F57d3A3B8",
+    "contractAddressNetwork": "BINANCE",
+    "abiName": "PoRAddressListMulti"
+ }, {
+   "endpoint": "zeusBtcAddress"
+}]
+}

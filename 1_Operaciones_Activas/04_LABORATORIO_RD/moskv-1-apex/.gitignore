@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ruff_cache/
+*.egg-info/
+
+# Node
+node_modules/
+
+# Databases / crystallized state
+*.db
+*.sqlite
+*.sqlite3
+
+# Secrets / cryptographic seeds (load via env/Keychain, never git)
+*.key
+kernel/crypto/pq_seed.key
+
+# OS noise
+.DS_Store

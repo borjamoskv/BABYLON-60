@@ -1,0 +1,323 @@
+/* C5-REAL EXERGY CERTIFIED */
+:root {
+  --bg-primary: #0a0a0c;
+  --bg-secondary: #121216;
+  --bg-tertiary: #1a1a22;
+  --accent-cobalt: #2b3be5;
+  --accent-cobalt-hover: #3d4ef8;
+  --accent-glow: rgba(43, 59, 229, 0.25);
+  --text-main: #f0f2f8;
+  --text-muted: #8a8f9e;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --badge-bg: rgba(43, 59, 229, 0.15);
+  --success-color: #10b981;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  overflow: hidden;
+  height: 100vh;
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background: radial-gradient(circle at 10% 20%, rgba(43, 59, 229, 0.05) 0%, transparent 60%);
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background-color: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.brand-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--accent-cobalt), #1a237e);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.brand-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+}
+
+.user-badge {
+  background: var(--badge-bg);
+  border: 1px solid rgba(43, 59, 229, 0.3);
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.user-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.user-email {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-cobalt-hover);
+  word-break: break-all;
+}
+
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  list-style: none;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-item:hover, .nav-item.active {
+  background-color: var(--bg-tertiary);
+  color: var(--text-main);
+}
+
+.nav-item.active {
+  border-left: 3px solid var(--accent-cobalt);
+}
+
+.badge {
+  background-color: var(--accent-cobalt);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* Mail List */
+.mail-list-container {
+  width: 380px;
+  background-color: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.list-header {
+  padding: 20px 20px 12px 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.compose-btn {
+  background: linear-gradient(135deg, var(--accent-cobalt), var(--accent-cobalt-hover));
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--accent-glow);
+  transition: transform 0.15s ease;
+}
+
+.compose-btn:hover {
+  transform: translateY(-1px);
+}
+
+.mail-items {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.mail-card {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.mail-card:hover, .mail-card.selected {
+  background-color: var(--bg-secondary);
+}
+
+.mail-card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.sender-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.mail-time {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.mail-subject {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-main);
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mail-preview {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Mail Detail View */
+.mail-detail {
+  flex: 1;
+  background-color: var(--bg-secondary);
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-header {
+  padding: 24px 32px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.detail-subject {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.detail-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--accent-cobalt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--accent-cobalt-hover);
+}
+
+.meta-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.from-email {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.to-email {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.detail-body {
+  padding: 32px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #d1d5db;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Status Banner */
+.auto-provisioned-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #10b981;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  margin-top: 12px;
+}
+
+.merkle-card {
+  margin-top: auto;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+}
+
+.merkle-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.merkle-root-hash {
+  font-family: 'JetBrains Mono', monospace;
+  color: #3d4ef8;
+  font-weight: 600;
+  word-break: break-all;
+}

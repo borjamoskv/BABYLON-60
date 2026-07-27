@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Market status endpoint should return success with closed 1`] = `
+{
+  "data": {
+    "result": 1,
+    "statusString": "CLOSED",
+  },
+  "result": 1,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 1641035471111,
+    "providerDataRequestedUnixMs": 1641035471111,
+  },
+}
+`;
+
+exports[`Market status endpoint should return success with nyse 24/5 1`] = `
+{
+  "data": {
+    "result": 5,
+    "statusString": "WEEKEND",
+  },
+  "result": 5,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 1641035471111,
+    "providerDataRequestedUnixMs": 1641035471111,
+  },
+}
+`;
+
+exports[`Market status endpoint should return success with open 1`] = `
+{
+  "data": {
+    "result": 2,
+    "statusString": "OPEN",
+  },
+  "result": 2,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 1641035471111,
+    "providerDataRequestedUnixMs": 1641035471111,
+  },
+}
+`;
+
+exports[`Market status endpoint should return success with open with uppercase market 1`] = `
+{
+  "data": {
+    "result": 2,
+    "statusString": "OPEN",
+  },
+  "result": 2,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 1641035471111,
+    "providerDataRequestedUnixMs": 1641035471111,
+  },
+}
+`;

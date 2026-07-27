@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "version": "4.0",
+    "source": "llm_ast_compilation_matrix"
+  },
+  "axioms": [
+    {
+      "id": "REACT_USEEFFECT_INLINE_OBJECT_DEPENDENCY",
+      "description": "An object literal used directly as a useEffect dependency will cause the effect to re-run on every render because object identity changes.",
+      "ast_query": {
+        "node": "CallExpression",
+        "callee": "useEffect",
+        "contains": {
+          "node": "ArrayExpression",
+          "contains": {
+            "node": "ObjectExpression"
+          }
+        }
+      },
+      "dataset_csv": ".cortex_cel_dataset.csv"
+    },
+    {
+      "id": "REACT_USEEFFECT_INLINE_FUNCTION_DEPENDENCY",
+      "description": "A function literal (arrow or regular) used directly as a useEffect dependency will cause the effect to re-run on every render because function identity changes.",
+      "ast_query": {
+        "node": "CallExpression",
+        "callee": "useEffect",
+        "contains": {
+          "node": "ArrayExpression",
+          "contains": {
+            "node": [
+              "ArrowFunctionExpression",
+              "FunctionExpression"
+            ]
+          }
+        }
+      },
+      "dataset_csv": ".cortex_cel_dataset.csv"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+# CORTEX-SWARM-PRIME: Cantina Permanent Bounties
+# [C5-REAL] Always-open high-value targets
+version: 2.0.0
+target: "cantina-permanent-2026"
+type: "permanent-bounty"
+platform: "cantina"
+
+# Top Targets (sorted by max reward)
+targets:
+  - name: "Uniswap Labs"
+    max_reward_usd: 15500000
+    focus: "DEX core, routing, governance"
+    difficulty: "EXTREME"
+    url: "https://cantina.xyz/opportunities"
+  - name: "Reserve Protocol"
+    max_reward_usd: 10000000
+    focus: "RToken basket, collateral plugins"
+    difficulty: "EXTREME"
+  - name: "Euler"
+    max_reward_usd: 7500000
+    focus: "Lending protocol v2"
+    difficulty: "VERY_HIGH"
+  - name: "Polymarket"
+    max_reward_usd: 5000000
+    focus: "Prediction market contracts"
+    difficulty: "HIGH"
+    launched: "2026-04"
+  - name: "Coinbase"
+    max_reward_usd: 5000000
+    focus: "Exchange infrastructure"
+    difficulty: "VERY_HIGH"
+  - name: "Morpho"
+    max_reward_usd: 2500000
+    focus: "Lending aggregator"
+    difficulty: "HIGH"
+    recommended: true  # Newer protocol, less audited
+  - name: "Pendle Finance"
+    max_reward_usd: 2000000
+    focus: "Yield tokenization"
+    difficulty: "HIGH"
+    recommended: true  # Newer protocol, less audited
+  - name: "dYdX Trading"
+    max_reward_usd: 1000000
+    focus: "Perpetuals DEX"
+    difficulty: "HIGH"
+
+# SwarmCommander Constraints
+commander:
+  max_exergy_usd: 25.00
+  strict_validation: true
+  model: "claude-4.6-thinking"
+
+# Strategy: Pick ONE target and specialize
+supervisor:
+  id: "L1-Cantina-Permanent"
+  agents_total: 2000
+  strategy: "deep_dive_single_target"
+
+rules:
+  - "target-only-fund-loss"
+  - "ignore-gas-optimization"
+  - "exergy_ratio > 500.0"
+  - "minimum_severity: HIGH"
+  - "format: cantina_submission"
+  - "reward_model: 10pct_funds_at_risk"

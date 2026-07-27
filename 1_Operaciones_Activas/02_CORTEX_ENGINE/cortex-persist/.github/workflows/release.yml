@@ -1,0 +1,107 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+  attestations: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/cortex-persist/
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.13"
+      - run: pip install build twine
+      - name: Verify Tag Matches pyproject.toml
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          PROJECT_VERSION=$(python -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])")
+          if [[ "$GITHUB_REF_NAME" != "v$PROJECT_VERSION" ]]; then
+            echo "Error: Tag $GITHUB_REF_NAME does not match project version v$PROJECT_VERSION"
+            exit 1
+          fi
+      - run: python -m build
+      - run: python scripts/release_preflight.py
+      - run: python -m twine check dist/*
+
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0.15.11
+        with:
+          format: spdx-json
+          output-file: dist/sbom.spdx.json
+          upload-artifact: false
+
+      - name: Attest SBOM
+        uses: actions/attest-sbom@v4
+        with:
+          subject-path: 'dist/*.whl'
+          sbom-path: 'dist/sbom.spdx.json'
+
+      - name: Generate build provenance
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-path: 'dist/*'
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1  # trusted publisher — keep tag
+
+      - name: Sign artifacts with Sigstore
+        uses: sigstore/gh-action-sigstore-python@v3.3.0  # signing — keep tag for compat
+        with:
+          inputs: dist/*
+
+      - name: Upload signed artifacts
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: signed-dist
+          path: |
+            dist/*
+            dist/*.sigstore.json
+
+      - name: Verify PyPI release is visible
+        run: |
+          python - <<'PY'
+          import json
+          import time
+          import urllib.error
+          import urllib.request
+          from pathlib import Path
+
+          version = None
+          for path in Path("dist").glob("*.whl"):
+              stem = path.name.split("-")
+              if len(stem) >= 2:
+                  version = stem[1]
+                  break
+          if version is None:
+              raise SystemExit("unable to determine built version from wheel filename")
+
+          url = "https://pypi.org/pypi/cortex-persist/json"
+          for attempt in range(12):
+              try:
+                  with urllib.request.urlopen(url, timeout=30) as response:
+                      payload = json.load(response)
+              except urllib.error.HTTPError as exc:
+                  if exc.code != 404:
+                      raise
+                  payload = {"releases": {}}
+              if version in payload.get("releases", {}):
+                  print(f"PyPI now exposes cortex-persist {version}")
+                  break
+              if attempt == 11:
+                  raise SystemExit(f"cortex-persist {version} not visible on PyPI after publish")
+              time.sleep(10)
+          PY

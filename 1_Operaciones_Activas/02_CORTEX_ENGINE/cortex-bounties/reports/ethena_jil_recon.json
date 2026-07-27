@@ -1,0 +1,14 @@
+{
+  "name": "Ethena",
+  "slug": "ethena",
+  "category": "",
+  "chains": [],
+  "tvl_current": 4433746324.06808,
+  "tvl_peak": 7320242407.92005,
+  "tvl_trend": "declining",
+  "github_org": "ethena-labs",
+  "risk_score": 45,
+  "confidence": "C5-REAL",
+  "audit_links": [],
+  "contracts": {}
+}

@@ -1,0 +1,6 @@
+# Lido Protocol Upgrade Parameters - Mainnet Configuration
+# This file contains deployment parameters for upgrading Lido protocol contracts on Ethereum mainnet
+
+# Vault hub configuration
+[vaultHub]
+maxRelativeShareLimitBP = 1000  # 10%, absolute max shareLimit of a vault relative to Lido TVL (in basis points)

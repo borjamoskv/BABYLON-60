@@ -1,0 +1,16 @@
+# C5-REAL: Prevención de bucles sucios (R9)
+__pycache__/
+*.pyc
+.env
+.venv/
+venv/
+env/
+workspace/
+output/
+tmp/
+*.mp4
+*.mp3
+*.wav
+*.jpg
+*.png
+*.log

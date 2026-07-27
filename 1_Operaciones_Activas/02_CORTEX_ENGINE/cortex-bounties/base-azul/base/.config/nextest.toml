@@ -1,0 +1,42 @@
+# C5-REAL EXERGY CERTIFIED
+[test-groups.system-test-serial]
+max-threads = 1
+
+[test-groups.e2e-tests]
+max-threads = 1
+
+[test-groups.builder-integration]
+max-threads = 1
+
+[test-groups.devnet]
+max-threads = 6
+
+[profile.ci]
+junit = { path = "test-results.xml" }
+retries = 1
+
+# Action tests use a full EVM stack; the slowest tests can take 30-45 s.
+# Flag anything that runs longer than 90 s as slow and kill it after 2 periods.
+[[profile.ci.overrides]]
+filter = 'package(base-action-harness)'
+slow-timeout = { period = "90s", terminate-after = 2 }
+
+[[profile.default.overrides]]
+filter = 'test(system_test_)'
+test-group = 'system-test-serial'
+retries = 2
+
+[[profile.default.overrides]]
+filter = 'binary(e2e_testsuite)'
+test-group = 'e2e-tests'
+
+[[profile.default.overrides]]
+filter = 'package(base-builder-core) & (binary(data_availability) | binary(flashblocks) | binary(txpool) | binary(bundles))'
+test-group = 'builder-integration'
+retries = 1
+
+[[profile.default.overrides]]
+filter = 'package(devnet)'
+test-group = 'devnet'
+retries = 1
+slow-timeout = { period = "120s", terminate-after = 3 }

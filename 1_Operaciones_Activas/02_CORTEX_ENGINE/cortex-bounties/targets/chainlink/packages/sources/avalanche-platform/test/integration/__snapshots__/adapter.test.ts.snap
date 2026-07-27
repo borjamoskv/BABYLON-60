@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute balance endpoint should return error with empty addresses 1`] = `
+{
+  "error": {
+    "message": "Input, at 'addresses' or 'result' path, must be a non-empty array.",
+    "name": "AdapterError",
+  },
+  "status": "errored",
+  "statusCode": 400,
+}
+`;
+
+exports[`execute balance endpoint should return success 1`] = `
+{
+  "data": {
+    "result": [
+      {
+        "addresses": [
+          "P-fuji1vd9sddlllrlk9fvj9lhntpw8t00lmvtnqkl2jt",
+        ],
+        "balance": "2000000000000",
+      },
+    ],
+  },
+  "result": null,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 978347471111,
+    "providerDataRequestedUnixMs": 978347471111,
+  },
+}
+`;

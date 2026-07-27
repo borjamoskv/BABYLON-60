@@ -1,0 +1,15 @@
+{
+  "feedback_id": "18e26c45ab6e45a889b40df5c4b4a09a",
+  "timestamp": "2026-06-29T18:28:24.782396+00:00",
+  "job_id": "9495fab7-380d-421e-bff8-f40b1c53918f",
+  "action": "force_swarm_mode",
+  "estimated_metrics": {
+    "originality_ratio": 0.7,
+    "distribution_yield": 1.0,
+    "entropy": 0.7,
+    "coherence": 0.72,
+    "fatigue": 0.0
+  },
+  "artifact_status": "distributed",
+  "rejection_reason": null
+}

@@ -1,0 +1,148 @@
+{
+  "meta": {
+    "version": "1.0",
+    "mode": "bayesian_belief_network",
+    "last_updated": "2026-06-02T05:15:08.356257+00:00"
+  },
+  "axioms": {
+    "REACT_USEEFFECT_INLINE_OBJECT_DEPENDENCY": {
+      "posterior_mean": 0.32064,
+      "posterior_variance": 0.00024,
+      "total_observations": 7,
+      "evidence_score": 0.596,
+      "observations": [
+        {
+          "repo": "cortexpersist-com",
+          "ate": 0.108,
+          "se": 0.1783,
+          "timestamp": "2026-06-02T05:15:08.356239+00:00"
+        },
+        {
+          "repo": "Repo_A_Legacy",
+          "ate": 0.12,
+          "se": 0.08,
+          "timestamp": "2026-06-02T05:42:44.647891+00:00"
+        },
+        {
+          "repo": "Repo_B_Core",
+          "ate": 0.45,
+          "se": 0.02,
+          "timestamp": "2026-06-02T05:42:44.648827+00:00"
+        },
+        {
+          "repo": "Repo_C_Edge",
+          "ate": 0.38,
+          "se": 0.05,
+          "timestamp": "2026-06-02T05:42:44.648988+00:00"
+        },
+        {
+          "repo": "Repo_D_Vue_Core",
+          "ate": 0.01,
+          "se": 0.04,
+          "timestamp": "2026-06-02T05:44:51.452418+00:00"
+        },
+        {
+          "repo": "Repo_E_Data_Pipeline",
+          "ate": -0.02,
+          "se": 0.09,
+          "timestamp": "2026-06-02T05:44:51.452658+00:00"
+        },
+        {
+          "repo": "Repo_F_Angular_Legacy",
+          "ate": 0.05,
+          "se": 0.06,
+          "timestamp": "2026-06-02T05:44:51.452821+00:00"
+        }
+      ],
+      "metadata": {
+        "invariance_score": 0.5564,
+        "heterogeneity_profile": "LOW",
+        "validity_domain": [
+          "Requires: virtual_dom"
+        ],
+        "regime_clusters": {
+          "Regime_2": [
+            "Repo_A_Legacy",
+            "Repo_F_Angular_Legacy"
+          ],
+          "Regime_0": [
+            "Repo_B_Core",
+            "Repo_C_Edge",
+            "Repo_D_Vue_Core"
+          ],
+          "Regime_1": [
+            "Repo_E_Data_Pipeline"
+          ]
+        },
+        "primary_structural_driver": "virtual_dom"
+      },
+      "causal_model": {
+        "Causal_Graph_Resolution": {
+          "True_Structural_Drivers": [],
+          "Falsified_Proxy_Variables": [
+            {
+              "feature": "virtual_dom",
+              "p_value": 0.8382
+            },
+            {
+              "feature": "async_state_complexity",
+              "p_value": 0.3788
+            },
+            {
+              "feature": "modern_tooling",
+              "p_value": 0.816
+            }
+          ],
+          "Previous_Assumption_Falsified": true
+        },
+        "Software_Phase_Space_Model": {
+          "Phase_Boundary_Variable": "UNDETERMINED_COMPLEX_INTERACTION",
+          "Dimensionality": 0
+        }
+      },
+      "interventions": [
+        {
+          "timestamp": "2026-06-02T05:50:53.533903+00:00",
+          "details": {
+            "Repo": "Repo_B_Core",
+            "Intervention": "do(async_state_complexity = 0.1)",
+            "Pre_Intervention": {
+              "ATE": 0.45,
+              "SE": 0.02,
+              "Regime": "High Asynchrony"
+            },
+            "Post_Intervention": {
+              "ATE": 0.06,
+              "SE": 0.04,
+              "Regime": "Forced Synchrony"
+            },
+            "Causal_Estimand": {
+              "E[Y | do(X)]": 0.06,
+              "Causal_Difference": 0.39,
+              "Status": "CAUSALITY_PROVEN"
+            }
+          }
+        }
+      ]
+    },
+    "REACT_USEEFFECT_INLINE_FUNCTION_DEPENDENCY": {
+      "posterior_mean": 0.10467,
+      "posterior_variance": 0.03081,
+      "total_observations": 1,
+      "evidence_score": 0.596,
+      "observations": [
+        {
+          "repo": "cortexpersist-com",
+          "ate": 0.108,
+          "se": 0.1783,
+          "timestamp": "2026-06-02T05:15:08.356253+00:00"
+        }
+      ]
+    }
+  },
+  "observability": {
+    "last_cfi": 0.622,
+    "fragility_status": "DEGRADED",
+    "history_length": 1
+  }
+}

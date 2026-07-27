@@ -1,0 +1,15 @@
+[package]
+name = "k2-c4"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["rlib"]
+
+# Empty dependencies for WASM build compatibility
+[dependencies]
+
+# All dependencies are dev-only since this crate is test-only
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }
+k2-shared = { path = "../../contracts/shared" }

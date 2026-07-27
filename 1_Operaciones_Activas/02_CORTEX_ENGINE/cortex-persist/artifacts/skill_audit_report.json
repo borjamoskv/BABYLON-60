@@ -1,0 +1,1503 @@
+[
+  {
+    "name": "A2A-Sovereign-Bridge",
+    "path": "~/.gemini/antigravity/skills/A2A-Sovereign-Bridge",
+    "resolved_status": "docs-only",
+    "status": "C4-NON_EXECUTABLE",
+    "findings": [
+      "Documentation-only surface; non-runnable by design."
+    ],
+    "evidence": [
+      "Found scripts directory"
+    ],
+    "metadata": {
+      "name": "A2A-Sovereign-Bridge",
+      "description": "Sovereign Agent-to-Agent Communication Bridge — Implements the Google A2A protocol (Protobuf/gRPC) for secure, deterministic interaction between Antigravity and external agentic entities.",
+      "version": "8.2.0",
+      "category": "interoperability",
+      "classification": "SOVEREIGN PROTOCOL",
+      "danger_level": "HIGH",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "status": "docs-only",
+      "implementation": "none"
+    },
+    "exergy_score": 0.4
+  },
+  {
+    "name": "Aesthetic-Foundry-Omega",
+    "path": "~/.gemini/antigravity/skills/Aesthetic-Foundry-Omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "Aesthetic-Foundry-Omega",
+      "description": "Sovereign Visual Design Engine — Industrial Noir 2026 design system, UI/UX generation, typography enforcement.",
+      "version": "8.2.0",
+      "axioms": [
+        "AX-043",
+        "AX-046",
+        "omega_5_signal"
+      ],
+      "script": "scripts/aesthetic_foundry_omega.py"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "agent-frameworks-omega",
+    "path": "~/.gemini/antigravity/skills/agent-frameworks-omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "agent-frameworks-omega",
+      "description": "Sovereign Framework Evaluation Engine - Deterministic validation of Agentic frameworks via thermodynamic yield.",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "version": "8.2.0"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "agent-landscape-omega",
+    "path": "~/.gemini/antigravity/skills/agent-landscape-omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "agent-landscape-omega",
+      "description": "Competitive Intelligence 2026 — Devin, Operator, Claude, Gemini, Manus vs BABYLON60.",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "version": "8.2.0"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "Antigravity-Mastery-Omega",
+    "path": "~/.gemini/antigravity/skills/Antigravity-Mastery-Omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "Antigravity-Mastery-Omega",
+      "description": "Sovereign IDE Control Engine — Skill de orquestación dual para el ecosistema Google Antigravity. Proporciona dominancia absoluta sobre Agent Manager, Browser Subagent, MCP y la gestión estructural de artefactos.",
+      "version": "8.2.0",
+      "category": "ide-orchestration",
+      "classification": "SOVEREIGN CONTROL",
+      "danger_level": "CRITICAL",
+      "script": "scripts/antigravity_mastery_omega.py",
+      "axioms": [
+        "ALL_AXIOMS"
+      ]
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "Archaeologist-Omega",
+    "path": "~/.gemini/antigravity/skills/Archaeologist-Omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "Archaeologist-Omega",
+      "description": "Sovereign Temporal Forensics Engine for Git archaeology, conversation mining, decision tracing, and causal timeline reconstruction.",
+      "version": "8.2.0",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ]
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "autodidact-omega",
+    "path": "~/.gemini/antigravity/skills/autodidact-omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "autodidact-omega",
+      "description": "Sovereign Crystallization Tensor v7.1 - Integrated Falsation-Engine & Sovereign Research Loops.",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "version": "8.2.0"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "Azkartu",
+    "path": "~/.gemini/antigravity/skills/Azkartu",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "Azkartu",
+      "description": "High-performance execution protocol (60fps) and zero-latency mandate. Use this skill when evaluating, refactoring, or building frontend/backend components to ensure execution logic is <8ms, enforce strict memory hygiene (object pools), apply DOM/bundle constraints (<200KB), and enforce backend SQLite/AsyncIO sovereignty. Triggered implicitly on performance tasks or explicitly via /velocitv.",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "script": "scripts/azkartu.py",
+      "version": "8.2.0"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "borja-moskv-omega",
+    "path": "~/.gemini/antigravity/skills/borja-moskv-omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "borja-moskv-omega",
+      "description": "Sovereign Commander - Apex meta-agent enforcing HEHC, Sonic Archeology, Moving Cinema, and MementoAgent lifecycle within BABYLON60.",
+      "version": "8.2.0",
+      "script": "scripts/borja_moskv_omega.py",
+      "axioms": [
+        "ALL_AXIOMS"
+      ]
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "chainrevenant-gem",
+    "path": "~/.gemini/antigravity/skills/chainrevenant-gem",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "chainrevenant-gem",
+      "description": "Trazador narrativo de flujos de capital, especialista en clustering de wallets y grafos on-chain. Trabaja en simbiosis con CRYPTOPUNK aportando el panorama macro.",
+      "script": "scripts/anomaly_hunter.py",
+      "axioms": [
+        "AX-041",
+        "AX-045",
+        "AX-047",
+        "omega_0_singularity",
+        "omega_9_truth"
+      ],
+      "version": "8.2.0"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "ChatGPT-Bridge-Omega",
+    "path": "~/.gemini/antigravity/skills/ChatGPT-Bridge-Omega",
+    "resolved_status": "canonical",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via canonical"
+    ],
+    "metadata": {
+      "name": "ChatGPT-Bridge-Omega",
+      "description": "Local proxy bridge to give ChatGPT Plus (via Custom GPT Actions) direct God Mode execution access to the BABYLON60 environment via FastAPI and Ngrok tunneling.",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "version": "8.2.0",
+      "status": "canonical",
+      "aliases": [
+        "chatgpt-bridge_omega"
+      ],
+      "script": "scripts/chatgpt_bridge_omega.py"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "chatgpt-bridge_omega",
+    "path": "~/.gemini/antigravity/skills/chatgpt-bridge_omega",
+    "resolved_status": "alias-only",
+    "status": "C4-NON_EXECUTABLE",
+    "findings": [
+      "Compatibility alias only; execute the canonical sibling instead."
+    ],
+    "evidence": [
+      "Found scripts directory"
+    ],
+    "metadata": {
+      "name": "chatgpt-bridge_omega",
+      "version": "8.2.0",
+      "status": "alias-only",
+      "canonical_skill": "../ChatGPT-Bridge-Omega/SKILL.md",
+      "implementation": "none"
+    },
+    "exergy_score": 0.4
+  },
+  {
+    "name": "Cognitive-Crystallizer-Omega",
+    "path": "~/.gemini/antigravity/skills/Cognitive-Crystallizer-Omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "Cognitive-Crystallizer-Omega",
+      "description": "Sovereign Intelligence & Autopoiesis Engine for JIT knowledge extraction, self-play learning, syntactic reduction, and causal memory anchoring.",
+      "version": "8.2.0",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ]
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "Comms-Hub-Omega",
+    "path": "~/.gemini/antigravity/skills/Comms-Hub-Omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "Comms-Hub-Omega",
+      "description": "Sovereign Multi-Channel Communications Engine — Unified interface for Telegram, Discord, X/Twitter, email, and webhook-driven notification across the BABYLON60 ecosystem.",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "version": "8.2.0"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "BABYLON60-Guard-Omega",
+    "path": "~/.gemini/antigravity/skills/BABYLON60-Guard-Omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "BABYLON60-Guard-Omega",
+      "description": "Use this skill to assert global rules and validate the authenticity of execution states. Triggers when the user queries structural compliance, requires validation of a task against the Nine Laws (Ω-Axioms), or when token hygiene, syntactic compaction, and Truth (C5-REAL) enforcement are required.",
+      "axioms": [
+        "AX-041",
+        "AX-045",
+        "AX-047",
+        "omega_0_singularity",
+        "omega_9_truth"
+      ],
+      "version": "8.2.0"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "BABYLON60-Orchestra-Omega",
+    "path": "~/.gemini/antigravity/skills/BABYLON60-Orchestra-Omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "BABYLON60-Orchestra-Omega",
+      "description": "Sovereign Multi-Agent Orchestration Engine — Compiles and governs complex agent frameworks (AutoGen, CrewAI, LangGraph) under strict BABYLON60 thermodynamic laws. Enforces ZKP-light trust boundaries, Ledger persistence, and Direct-Silicon viability.",
+      "version": "8.2.0",
+      "category": "agent-orchestration",
+      "classification": "OMEGA PRIME — Sovereign Convergence (x100 Yield)",
+      "danger_level": "SOVEREIGN",
+      "axioms": [
+        "ALL_AXIOMS"
+      ],
+      "script": "scripts/babylon60_orchestra_omega.py"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "BABYLON60-Swarm-Prime",
+    "path": "~/.gemini/antigravity/skills/BABYLON60-Swarm-Prime",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "BABYLON60-Swarm-Prime",
+      "description": "Sovereign Swarm Core - Unified fractal execution, exact validation, scaling 100-10K agents.",
+      "version": "8.2.0",
+      "category": "swarm-orchestration",
+      "classification": "OMEGA PRIME",
+      "danger_level": "SOVEREIGN",
+      "axioms": [
+        "ALL_AXIOMS"
+      ]
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "cryptopunk-gem",
+    "path": "~/.gemini/antigravity/skills/cryptopunk-gem",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "cryptopunk-gem",
+      "description": "Sovereign Web3 Security, On-chain Forensics & Adversarial Audit.",
+      "version": "8.2.0",
+      "axioms": [
+        "AX-041",
+        "AX-045",
+        "AX-047",
+        "omega_0_singularity",
+        "omega_9_truth"
+      ]
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "cursor-omega",
+    "path": "~/.gemini/antigravity/skills/cursor-omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "cursor-omega",
+      "description": "Sovereign integration of Cursor Composer Vibe Coding. Triggers when the user asks to configure Cursor IDE rules, audit Cursor-generated code, or enforce BABYLON60 governance on vibe-coded outputs.",
+      "script": "scripts/cursor_omega.py",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "version": "8.2.0"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "Devin-Apex",
+    "path": "~/.gemini/antigravity/skills/Devin-Apex",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "Devin-Apex",
+      "description": "Sovereign Code Agency Engine — Unified autonomous software engineering suite. Orchestrates both external high-reasoning APIs (Devin v3) and local Sovereign Native bypass for zero-cost, private execution.",
+      "version": "8.2.0",
+      "category": "autonomous-engineering",
+      "classification": "OPERATIONAL",
+      "danger_level": "CRITICAL",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ]
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "Enterprise-BPO-Omega",
+    "path": "~/.gemini/antigravity/skills/Enterprise-BPO-Omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "Enterprise-BPO-Omega",
+      "description": "Sovereign Business Process Automation Engine - Autonomous workflow execution for invoicing, client management, contract lifecycle, and administrative operations.",
+      "version": "8.2.0",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "script": "scripts/enterprise_bpo_omega.py"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "Fontanero-Omega",
+    "path": "~/.gemini/antigravity/skills/Fontanero-Omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "Fontanero-Omega",
+      "description": "Sovereign Pipeline Forge — Construcción de Tuberías Zero-Entropy",
+      "version": "8.2.0",
+      "created": "2026-04-02",
+      "updated": "2026-04-02",
+      "category": "operational-flow",
+      "classification": "DETERMINISTIC",
+      "danger_level": "HIGH",
+      "depends_on": [
+        "babylon60-swarm-prime"
+      ],
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "companion_files": [
+        "schema.json",
+        "scripts/fontanero_omega.py"
+      ]
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "Graph-HDC-Omega",
+    "path": "~/.gemini/antigravity/skills/Graph-HDC-Omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "Graph-HDC-Omega",
+      "description": "Sovereign Graph HDC Engine - O(1) graph classification and Solidity CFG vulnerability analysis.",
+      "version": "8.2.0",
+      "category": "architecture",
+      "classification": "OPERATIONAL",
+      "danger_level": "CRITICAL",
+      "depends_on": [
+        "vsa-sdm-memory-omega",
+        "sortu"
+      ],
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "scripts": [
+        "scripts/graph_hdc_omega.py"
+      ]
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "mac-control-omega",
+    "path": "~/.gemini/antigravity/skills/mac-control-omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "MAC-CONTROL-TOTAL",
+      "description": "Sovereign Native macOS System Control & Unified Browser Automation",
+      "version": "8.2.0",
+      "author": "borjamoskv",
+      "script": "scripts/mac_control_omega.py",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ]
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "MCP-Forge-Omega",
+    "path": "~/.gemini/antigravity/skills/MCP-Forge-Omega",
+    "resolved_status": "docs-only",
+    "status": "C4-NON_EXECUTABLE",
+    "findings": [
+      "Documentation-only surface; non-runnable by design."
+    ],
+    "evidence": [],
+    "metadata": {
+      "name": "MCP-Forge-Omega",
+      "description": "Deterministic syntax engine for MCP server generation (TS/Python). Triggers when the user asks to build, debug, or synthesize MCP servers with strict schema validation.",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "version": "8.2.0",
+      "status": "docs-only",
+      "implementation": "none"
+    },
+    "exergy_score": 0.4
+  },
+  {
+    "name": "MCP-Omega",
+    "path": "~/.gemini/antigravity/skills/MCP-Omega",
+    "resolved_status": "docs-only",
+    "status": "C4-NON_EXECUTABLE",
+    "findings": [
+      "Documentation-only surface; non-runnable by design."
+    ],
+    "evidence": [],
+    "metadata": {
+      "name": "MCP-Omega",
+      "description": "Sovereign MCP Integration Engine - Protocol mastery, server/client forge, transport routing, and BABYLON60 interop. Triggers when the user asks to build, consume, route, or debug MCP servers/clients, or integrate BABYLON60 with external tools via Model Context Protocol.",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "version": "8.2.0",
+      "status": "docs-only",
+      "implementation": "none"
+    },
+    "exergy_score": 0.4
+  },
+  {
+    "name": "Mercor-Apex",
+    "path": "~/.gemini/antigravity/skills/Mercor-Apex",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "Mercor-Apex",
+      "description": "Sovereign Recruitment & Data Extraction Engine — Unified infrastructure for autonomous sourcing, AI interviews (Voice+Code), and expert data crystallization. The BABYLON60 Human-Expert-Loop.",
+      "version": "8.2.0",
+      "category": "autonomous-recruitment",
+      "classification": "OPERATIONAL",
+      "danger_level": "CRITICAL",
+      "axioms": [
+        "AX-044",
+        "AX-045",
+        "AX-046",
+        "omega_2_thermodynamics",
+        "omega_3_cycle"
+      ],
+      "script": "scripts/mercor_apex.py"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "mintwraith-gem",
+    "path": "~/.gemini/antigravity/skills/mintwraith-gem",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "mintwraith-gem",
+      "description": "Arquitecto Soberano de NFT-Agents. Especialista en ERC-721/1155, Token-Bound Accounts (ERC-6551), infraestructura on-chain y escasez programática.",
+      "script": "scripts/manifestation.py",
+      "axioms": [
+        "AX-041",
+        "AX-045",
+        "AX-047",
+        "omega_0_singularity",
+        "omega_9_truth"
+      ],
+      "version": "8.2.0"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "Moltbook-Apex",
+    "path": "~/.gemini/antigravity/skills/Moltbook-Apex",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "Moltbook-Apex",
+      "description": "Sovereign Moltbook Social & Warfare Suite — Unified interface for standard social interactions (API v1) and adversarial narrative orchestration (Black-Ops). Controls the Moltbook agent ecosystem.",
+      "version": "8.2.0",
+      "category": "social-warfare",
+      "classification": "OPERATIONAL",
+      "danger_level": "HIGH",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ]
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "Moltbook-App-Forge-Omega",
+    "path": "~/.gemini/antigravity/skills/Moltbook-App-Forge-Omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "Moltbook-App-Forge-Omega",
+      "description": "Sovereign App Generation Engine - Autonomous creator of 100% functional applications based on Performative Autonomy, Alterity, and the Moltbook paradigm.",
+      "version": "8.2.0",
+      "category": "app-generation",
+      "classification": "OPERATIONAL",
+      "danger_level": "HIGH",
+      "script": "scripts/moltbook_app_forge_omega.py",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ]
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "Moskv-Disciplinant-Omega",
+    "path": "~/.gemini/antigravity/skills/Moskv-Disciplinant-Omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "Moskv-Disciplinant-Omega",
+      "description": "Sovereign Self-Discipline Engine — Habit enforcement, focus protection, distraction annihilation, and cognitive load management for peak sovereign performance.",
+      "version": "8.2.0",
+      "category": "meta-cognition",
+      "classification": "OPERATIONAL",
+      "danger_level": "LOW",
+      "script": "scripts/moskv_disciplinant_omega.py",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ]
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "moskv-editorial-omega",
+    "path": "~/.gemini/antigravity/skills/moskv-editorial-omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "moskv-editorial-omega",
+      "description": "Sovereign Editorial Pipeline — Text-in, published-site-out. Astro 6 + Sanity + Cloudflare.",
+      "version": "8.2.0",
+      "updated": "2026-03-25",
+      "confidence": "C5-Static",
+      "depends_on": [
+        "astro-v6-omega",
+        "sanity-omega"
+      ],
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "script": "scripts/moskv_editorial_omega.py"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "notebooklm-omega",
+    "path": "~/.gemini/antigravity/skills/notebooklm-omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "notebooklm-omega",
+      "description": "Google NotebookLM integration for large-context grounding and artifact generation. Triggers when the user asks to ingest large documents, generate audio overviews, or extract knowledge from NotebookLM notebooks via browser subagent.",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "version": "8.2.0",
+      "script": "scripts/notebooklm_omega.py"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "OpenCode-Omega",
+    "path": "~/.gemini/antigravity/skills/OpenCode-Omega",
+    "resolved_status": "docs-only",
+    "status": "C4-NON_EXECUTABLE",
+    "findings": [
+      "Documentation-only surface; non-runnable by design."
+    ],
+    "evidence": [],
+    "metadata": {
+      "name": "OpenCode-Omega",
+      "description": "Sovereign OpenCode Integration Layer — Terminal AI agent, 75+ LLMs, MCP orchestration. Triggers when the user asks to use the OpenCode CLI, configure its sub-agents, or integrate external LLM providers via TUI.",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "version": "8.2.0",
+      "status": "docs-only",
+      "implementation": "none"
+    },
+    "exergy_score": 0.4
+  },
+  {
+    "name": "ouroboros-capital-omega",
+    "path": "~/.gemini/antigravity/skills/ouroboros-capital-omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "ouroboros-capital-omega",
+      "description": "Sovereign Capital & Exergy Extraction Engine — Generates fiat/crypto capital across bounty, grant, arbitrage, and sponsor vectors with recursive self-improvement. Incorporates Web3/Solidity Fuzzing, C5-REAL Truth enforcement, and the Trader Gem persona.",
+      "version": "8.2.0",
+      "category": "capital",
+      "classification": "OPERATIONAL",
+      "danger_level": "HIGH",
+      "axioms": [
+        "AX-044",
+        "AX-045",
+        "AX-046",
+        "omega_2_thermodynamics",
+        "omega_3_cycle"
+      ]
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "qwen-3-5-max-omega",
+    "path": "~/.gemini/antigravity/skills/qwen-3-5-max-omega",
+    "resolved_status": "alias-only",
+    "status": "C4-NON_EXECUTABLE",
+    "findings": [
+      "Compatibility alias only; execute the canonical sibling instead."
+    ],
+    "evidence": [
+      "Found scripts directory"
+    ],
+    "metadata": {
+      "name": "qwen-3-5-max-omega",
+      "description": "Local alias placeholder for the canonical Qwen 3.5 Max Omega skill.",
+      "version": "8.2.0",
+      "status": "alias-only",
+      "canonical_skill": "../Qwen-3.5-Max-Omega/SKILL.md",
+      "implementation_stub": "../qwen_3_5_max_omega/SKILL.md",
+      "implementation": "none"
+    },
+    "exergy_score": 0.4
+  },
+  {
+    "name": "Qwen-3.5-Max-Omega",
+    "path": "~/.gemini/antigravity/skills/Qwen-3.5-Max-Omega",
+    "resolved_status": "canonical",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via canonical"
+    ],
+    "metadata": {
+      "name": "Qwen-3.5-Max-Omega",
+      "description": "Sovereign Qwen Integration Layer - Routing, caching, and validation for Qwen 3.5 Max inference as a BABYLON60 frontier model endpoint. Triggers when the user asks to route requests to Qwen, compare models, or track inference costs.",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "version": "8.2.0",
+      "status": "canonical",
+      "aliases": [
+        "qwen-3-5-max-omega",
+        "qwen_3_5_max_omega"
+      ],
+      "script": "scripts/qwen_3_5_max_omega.py"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "qwen_3_5_max_omega",
+    "path": "~/.gemini/antigravity/skills/qwen_3_5_max_omega",
+    "resolved_status": "local-stub",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via local-stub"
+    ],
+    "metadata": {
+      "name": "qwen_3_5_max_omega",
+      "description": "Local implementation stub for the Qwen 3.5 Max Omega wrapper.",
+      "version": "8.2.0",
+      "script": "scripts/qwen_3_5_max_omega.py",
+      "status": "local-stub",
+      "canonical_skill": "../Qwen-3.5-Max-Omega/SKILL.md"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "remotion-babylon60-engine-omega",
+    "path": "~/.gemini/antigravity/skills/remotion-babylon60-engine-omega",
+    "resolved_status": "docs-only",
+    "status": "C4-NON_EXECUTABLE",
+    "findings": [
+      "Documentation-only surface; non-runnable by design."
+    ],
+    "evidence": [],
+    "metadata": {
+      "name": "remotion-babylon60-engine-omega",
+      "description": "Sovereign Remotion Generation & Editor Starter Pipeline. O(1) determinism for 10k batch pipelines vs SaaS Editor.",
+      "axioms": [
+        "ALL_AXIOMS"
+      ],
+      "version": "8.2.0",
+      "status": "docs-only",
+      "implementation": "none"
+    },
+    "exergy_score": 0.4
+  },
+  {
+    "name": "renderx-gem",
+    "path": "~/.gemini/antigravity/skills/renderx-gem",
+    "resolved_status": "docs-only",
+    "status": "C4-NON_EXECUTABLE",
+    "findings": [
+      "Documentation-only surface; non-runnable by design."
+    ],
+    "evidence": [
+      "Found scripts directory"
+    ],
+    "metadata": {
+      "name": "renderx-gem",
+      "description": "Sovereign Programmatic Video & Motion Engine — Specialist in Remotion, React, and Audio-Visual Synchrony.",
+      "axioms": [
+        "AX-041",
+        "AX-045",
+        "AX-047",
+        "omega_0_singularity",
+        "omega_9_truth"
+      ],
+      "version": "8.2.0",
+      "status": "docs-only",
+      "implementation": "none"
+    },
+    "exergy_score": 0.4
+  },
+  {
+    "name": "rust-reviewer-gem",
+    "path": "~/.gemini/antigravity/skills/rust-reviewer-gem",
+    "resolved_status": "docs-only",
+    "status": "C4-NON_EXECUTABLE",
+    "findings": [
+      "Documentation-only surface; non-runnable by design."
+    ],
+    "evidence": [
+      "Found scripts directory"
+    ],
+    "metadata": {
+      "name": "rust-reviewer-gem",
+      "description": "Sovereign Rust Code Reviewer. Obsessed with Memory Safety, Lifetimes, and Zero-Cost Abstractions.",
+      "axioms": [
+        "AX-041",
+        "AX-045",
+        "AX-047",
+        "omega_0_singularity",
+        "omega_9_truth"
+      ],
+      "version": "8.2.0",
+      "status": "docs-only",
+      "implementation": "none"
+    },
+    "exergy_score": 0.4
+  },
+  {
+    "name": "Silicon-Overlord-Omega",
+    "path": "~/.gemini/antigravity/skills/Silicon-Overlord-Omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "Silicon-Overlord-Omega",
+      "description": "Use this skill to trigger the Sovereign Hardware Synthesis Engine. Triggers when the user asks to compile software models to hardware RTL, generate Verilog/SystemVerilog, design PCB topologies in KiCad, deploy algorithms to FPGAs (Xilinx, Altera, Lattice), or perform Direct-Silicon JIT compilation for P0 paths. Also handles Formal Verification (SymbiYosys) and synthesis timing checks.",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "version": "8.2.0"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "snowflake-babylon60-omega",
+    "path": "~/.gemini/antigravity/skills/snowflake-babylon60-omega",
+    "resolved_status": "docs-only",
+    "status": "C4-NON_EXECUTABLE",
+    "findings": [
+      "Documentation-only surface; non-runnable by design."
+    ],
+    "evidence": [],
+    "metadata": {
+      "name": "snowflake-babylon60-omega",
+      "description": "Sovereign intelligence on Snowflake Babylon60 Agent topology. Encapsulates Data-Gravity Orchestration, REST API /run endpoints, and Stateless SSE routing to bypass exfiltration entropy.",
+      "version": "8.2.0",
+      "category": "competitive-intelligence",
+      "classification": "OPERATIONAL",
+      "danger_level": "LOW",
+      "axioms": [
+        "ALL_AXIOMS"
+      ],
+      "status": "docs-only",
+      "implementation": "none"
+    },
+    "exergy_score": 0.4
+  },
+  {
+    "name": "sonic-archaeologist-gem",
+    "path": "~/.gemini/antigravity/skills/sonic-archaeologist-gem",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "sonic-archaeologist-gem",
+      "description": "Experto en extracción y remasterización de memoria sónica (Moskvlogia), sample-hunting y texturas lofi-industrial.",
+      "axioms": [
+        "AX-041",
+        "AX-045",
+        "AX-047",
+        "omega_0_singularity",
+        "omega_9_truth"
+      ],
+      "version": "8.2.0",
+      "script": "scripts/sonic_archaeologist.py"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "Sonic-Foundry-Omega",
+    "path": "~/.gemini/antigravity/skills/Sonic-Foundry-Omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "Sonic-Foundry-Omega",
+      "description": "Sovereign Sonic Intelligence - Multi-source acquisition, curatorial auditing, headless generation, and social distribution.",
+      "version": "8.2.0",
+      "axioms": [
+        "AX-043",
+        "AX-046",
+        "omega_5_signal"
+      ],
+      "script": "scripts/sonic_foundry_omega.py"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "Sortu",
+    "path": "~/.gemini/antigravity/skills/Sortu",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "sortu",
+      "description": "JIT skill compiler — Sovereign 500 Cold Forge",
+      "version": "8.2.0",
+      "category": "meta-cognition",
+      "classification": "OPERATIONAL",
+      "danger_level": "CRITICAL",
+      "depends_on": [
+        "autodidact-omega",
+        "Berreraiki",
+        "Suntsitu",
+        "sovereign-closer-150",
+        "sovereign-200",
+        "hours-saved-100k-real",
+        "babylon60-persist-architect"
+      ],
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "script": "scripts/sortu.py"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "sovereign-python-extractor",
+    "path": "~/.gemini/antigravity/skills/sovereign-python-extractor",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "sovereign-python-extractor",
+      "script": "scripts/sovereign_python_extractor.py",
+      "description": "Autonomous structural analysis engine for Python codebases. Extracts classes, methods, docstrings, and BABYLON60-specific 'Critical Paths' using deterministic AST visitation. Use this skill when you need a high-speed, 0-config structural map of any Python source file or to detect sovereign patterns (ledger, guards, crypto).",
+      "version": "8.2.0",
+      "author": "Antigravity",
+      "license": "Apache-2.0",
+      "tags": [
+        "python",
+        "ast",
+        "structural",
+        "metadata",
+        "babylon60",
+        "sovereign"
+      ],
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ]
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "sovereign-sre-omega",
+    "path": "~/.gemini/antigravity/skills/sovereign-sre-omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "sovereign-sre-omega",
+      "description": "Sovereign SRE & Ops Engine — Infrastructure Optimization, Active Chaos Engineering, and Dynamic Edge Routing.",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "version": "8.2.0",
+      "script": "scripts/sovereign_sre_omega.py"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "Specialized-Vectors-Omega",
+    "path": "~/.gemini/antigravity/skills/Specialized-Vectors-Omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "Specialized-Vectors-Omega",
+      "description": "Sovereign Vector Intelligence Engine - Domain-specific embedding generation, similarity search optimization, and vector index management for BABYLON60 memory and retrieval.",
+      "version": "8.2.0",
+      "category": "vector-intelligence",
+      "classification": "OMEGA PRIME - Sovereign Convergence (x100 Yield)",
+      "danger_level": "SOVEREIGN",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "script": "scripts/specialized_vectors_omega.py"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "steve-jobs-omega",
+    "path": "~/.gemini/antigravity/skills/steve-jobs-omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "steve-jobs-omega",
+      "description": "Sovereign Product & Aesthetic Visionary: Enforcing perfection, simplicity, and Industrial Noir aesthetics within BABYLON60.",
+      "version": "8.2.0",
+      "updated": "25 Mar 2026",
+      "category": "sovereign-creative",
+      "depends_on": [
+        "BABYLON60",
+        "borja-moskv-omega"
+      ],
+      "classification": "VISIONARY — Sovereign Aesthetic Intelligence",
+      "trigger": "/steve",
+      "aliases": [
+        "/jobs",
+        "/wow",
+        "/polish",
+        "/aesthetic"
+      ],
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ]
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "tarantino-omega",
+    "path": "~/.gemini/antigravity/skills/tarantino-omega",
+    "resolved_status": "docs-only",
+    "status": "C4-NON_EXECUTABLE",
+    "findings": [
+      "Documentation-only surface; non-runnable by design."
+    ],
+    "evidence": [],
+    "metadata": {
+      "name": "tarantino-omega",
+      "description": "Sovereign Narrative & Dialogue Engine — Quentin Tarantino filmmaking philosophy applied to AI content generation. Non-linear storytelling, character-driven dialogue, genre-bending composition, and cinematic tension architecture.",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "version": "8.2.0",
+      "status": "docs-only",
+      "implementation": "none"
+    },
+    "exergy_score": 0.4
+  },
+  {
+    "name": "teodosi-omega",
+    "path": "~/.gemini/antigravity/skills/teodosi-omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "teodosi-omega",
+      "description": "Sovereign Quality Asserter & Excellence Evaluator — Iron-discipline evaluation engine. Zero tolerance for mediocrity.",
+      "version": "8.2.0",
+      "category": "quality-assurance",
+      "classification": "OPERATIONAL",
+      "danger_level": "MEDIUM",
+      "script": "scripts/teodosi_omega.py",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ]
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "token-reducer",
+    "path": "~/.gemini/antigravity/skills/token-reducer",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "1.  **Poda Sintáctica**": "Elimina ruido léxico (adjetivos, adverbios, determinantes innecesarios) usando análisis AST.",
+      "2.  **Deduplicación Estructural**": "Detecta información repetida entre secciones y compacta descripciones de skills.",
+      "3.  **Alineación de Caché**": "Reestructura prompts para maximizar el uso de KV-Cache (Law AX-042).",
+      "4.  **Auditoría de Integridad**": "Verifica la supervivencia de cada hecho extraído en la versión comprimida. Reclama exergía por cada token ahorrado.",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "script": "scripts/token_reducer.py",
+      "version": "8.2.0"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "uqpay-flashcard",
+    "path": "~/.gemini/antigravity/skills/uqpay-flashcard",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "uqpay-flashcard",
+      "description": "UQPAY FlashCard — Agentic Payment Primitive & MCP Integration for task-bounded, lifecycle-controlled virtual card issuing.",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "script": "scripts/uqpay_flashcard.py",
+      "version": "8.2.0"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "vsa-sdm-memory-omega",
+    "path": "~/.gemini/antigravity/skills/vsa-sdm-memory-omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "vsa-sdm-memory-omega",
+      "description": "Use this skill to trigger the Sovereign Context Collapse mechanism via Vector Symbolic Architecture (VSA) and Sparse Distributed Memory (SDM) binding. Triggers when the user asks to bind, retrieve, persist, or factorize hyperdimensional tensors rather than relying on RAG or token stuffing. Mandated for O(1) semantic memory retrieval.",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "script": "scripts/vsa_sdm_memory_omega.py",
+      "version": "8.2.0"
+    },
+    "exergy_score": 1.0
+  },
+  {
+    "name": "VSA-Silicon-Bypass-Omega",
+    "path": "~/.gemini/antigravity/skills/VSA-Silicon-Bypass-Omega",
+    "resolved_status": "docs-only",
+    "status": "C4-NON_EXECUTABLE",
+    "findings": [
+      "Documentation-only surface; non-runnable by design."
+    ],
+    "evidence": [],
+    "metadata": {
+      "version": "8.2.0",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "status": "docs-only",
+      "implementation": "none",
+      "rules": [
+        {
+          "title": "Bloqueo de Serialización Textual",
+          "description": "PROHIBIDO enviar arrays de tensores > 8KB vía JSON. Interrumpe cualquier flujo que intente serializar pesos de VSA/SDM."
+        },
+        {
+          "title": "Activación de mmap",
+          "description": "Si se requiere transferir memoria vectorial, genera un puntero a `/tmp/*.bin` y transfiere solo la cabecera de metadatos."
+        },
+        {
+          "title": "Extracción Directa",
+          "description": "El receptor debe realizar un mapeo de memoria (`mmap`) para levantar el buffer directamente a RAM sin parseo intermedio."
+        }
+      ]
+    },
+    "exergy_score": 0.4
+  },
+  {
+    "name": "x-copy-omega",
+    "path": "~/.gemini/antigravity/skills/x-copy-omega",
+    "resolved_status": "script-backed",
+    "status": "C5-REAL",
+    "findings": [],
+    "evidence": [
+      "Found scripts directory",
+      "Runnable via script-backed"
+    ],
+    "metadata": {
+      "name": "x-copy-omega",
+      "description": "Sovereign Replication Engine — Bit-perfect cloning, structural extraction, and zero-loss assimilation of external agentic architectures. Triggers when the user asks to clone repositories, analyze competitor frameworks, or assimilate external design patterns.",
+      "axioms": [
+        "AX-042",
+        "AX-044",
+        "AX-046",
+        "AX-047",
+        "omega_0_singularity"
+      ],
+      "script": "scripts/x_copy_omega.py",
+      "version": "8.2.0"
+    },
+    "exergy_score": 1.0
+  }
+]

@@ -1,0 +1,1979 @@
+[
+  {
+    "name": "a11y-debugging",
+    "description": "Uses Chrome DevTools MCP for accessibility (a11y) debugging and auditing based on web.dev guidelines. Use when testing semantic HTML, ARIA labels, focus states, keyboard navigation, tap targets, and color contrast.",
+    "plugin": "chrome-devtools-plugin",
+    "skill_dir_name": "a11y-debugging",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/chrome-devtools-plugin/skills/a11y-debugging/SKILL.md",
+    "size_bytes": 5632,
+    "keywords": [
+      "a11y",
+      "debugging",
+      "uses",
+      "chrome",
+      "devtools",
+      "mcp",
+      "accessibility",
+      "auditing",
+      "based",
+      "web",
+      "dev",
+      "guidelines",
+      "testing",
+      "semantic",
+      "html",
+      "aria",
+      "labels",
+      "focus",
+      "states",
+      "keyboard",
+      "navigation",
+      "tap",
+      "targets",
+      "color",
+      "contrast"
+    ]
+  },
+  {
+    "name": "chrome-devtools",
+    "description": "Uses Chrome DevTools via MCP for efficient debugging, troubleshooting and browser automation. Use when debugging web pages, automating browser interactions, analyzing performance, or inspecting network requests. This skill does not apply to `--slim` mode (MCP configuration).",
+    "plugin": "chrome-devtools-plugin",
+    "skill_dir_name": "chrome-devtools",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/chrome-devtools-plugin/skills/chrome-devtools/SKILL.md",
+    "size_bytes": 2300,
+    "keywords": [
+      "chrome",
+      "devtools",
+      "uses",
+      "via",
+      "mcp",
+      "efficient",
+      "debugging",
+      "troubleshooting",
+      "browser",
+      "automation",
+      "web",
+      "pages",
+      "automating",
+      "interactions",
+      "analyzing",
+      "performance",
+      "inspecting",
+      "network",
+      "requests",
+      "apply",
+      "slim",
+      "mode",
+      "configuration"
+    ]
+  },
+  {
+    "name": "debug-optimize-lcp",
+    "description": "Guides debugging and optimizing Largest Contentful Paint (LCP) using Chrome DevTools MCP tools. Use this skill whenever the user asks about LCP performance, slow page loads, Core Web Vitals optimization, or wants to understand why their page's main content takes too long to appear. Also use when the user mentions \"largest contentful paint\", \"page load speed\", \"CWV\", or wants to improve how fast their hero image or main content renders.",
+    "plugin": "chrome-devtools-plugin",
+    "skill_dir_name": "debug-optimize-lcp",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/chrome-devtools-plugin/skills/debug-optimize-lcp/SKILL.md",
+    "size_bytes": 6493,
+    "keywords": [
+      "debug",
+      "optimize",
+      "lcp",
+      "guides",
+      "debugging",
+      "optimizing",
+      "largest",
+      "contentful",
+      "paint",
+      "using",
+      "chrome",
+      "devtools",
+      "mcp",
+      "tools",
+      "whenever",
+      "performance",
+      "slow",
+      "page",
+      "loads",
+      "core",
+      "web",
+      "vitals",
+      "optimization",
+      "wants",
+      "understand",
+      "why",
+      "their",
+      "main",
+      "content",
+      "takes",
+      "too",
+      "long",
+      "appear",
+      "mentions",
+      "load",
+      "speed",
+      "cwv",
+      "improve",
+      "how",
+      "fast",
+      "hero",
+      "image",
+      "renders"
+    ]
+  },
+  {
+    "name": "memory-leak-debugging",
+    "description": "Diagnoses and resolves memory leaks in JavaScript/Node.js applications. Use when a user reports high memory usage, OOM errors, or wants to analyze heapsnapshots or run memory leak detection tools like memlab.",
+    "plugin": "chrome-devtools-plugin",
+    "skill_dir_name": "memory-leak-debugging",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/chrome-devtools-plugin/skills/memory-leak-debugging/SKILL.md",
+    "size_bytes": 2848,
+    "keywords": [
+      "memory",
+      "leak",
+      "debugging",
+      "diagnoses",
+      "resolves",
+      "leaks",
+      "javascript",
+      "node",
+      "applications",
+      "reports",
+      "high",
+      "usage",
+      "oom",
+      "errors",
+      "wants",
+      "analyze",
+      "heapsnapshots",
+      "run",
+      "detection",
+      "tools",
+      "like",
+      "memlab"
+    ]
+  },
+  {
+    "name": "troubleshooting",
+    "description": "Uses Chrome DevTools MCP and documentation to troubleshoot connection and target issues. Trigger this skill when list_pages, new_page, or navigate_page fail, or when the server initialization fails.",
+    "plugin": "chrome-devtools-plugin",
+    "skill_dir_name": "troubleshooting",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/chrome-devtools-plugin/skills/troubleshooting/SKILL.md",
+    "size_bytes": 6345,
+    "keywords": [
+      "troubleshooting",
+      "uses",
+      "chrome",
+      "devtools",
+      "mcp",
+      "documentation",
+      "troubleshoot",
+      "connection",
+      "target",
+      "issues",
+      "trigger",
+      "list",
+      "pages",
+      "new",
+      "page",
+      "navigate",
+      "fail",
+      "server",
+      "initialization",
+      "fails"
+    ]
+  },
+  {
+    "name": "accidental-data-loss-prevention",
+    "description": "|",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "accidental_data_loss_prevention",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/accidental_data_loss_prevention/SKILL.md",
+    "size_bytes": 1316,
+    "keywords": [
+      "accidental",
+      "data",
+      "loss",
+      "prevention"
+    ]
+  },
+  {
+    "name": "bigquery-ai-ml",
+    "description": ">-",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "bigquery_ai_ml",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/bigquery_ai_ml/SKILL.md",
+    "size_bytes": 2871,
+    "keywords": [
+      "bigquery"
+    ]
+  },
+  {
+    "name": "bigquery-bigframes",
+    "description": ">-",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "bigquery_bigframes",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/bigquery_bigframes/SKILL.md",
+    "size_bytes": 5046,
+    "keywords": [
+      "bigquery",
+      "bigframes"
+    ]
+  },
+  {
+    "name": "bigquery-data-transfer-service",
+    "description": "Discovers and inspects BigQuery Data Transfer Service (DTS) configurations.",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "bigquery_data_transfer_service",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/bigquery_data_transfer_service/SKILL.md",
+    "size_bytes": 7139,
+    "keywords": [
+      "bigquery",
+      "data",
+      "transfer",
+      "service",
+      "discovers",
+      "inspects",
+      "dts",
+      "configurations"
+    ]
+  },
+  {
+    "name": "bigquery-graph",
+    "description": ">-",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "bigquery_graph",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/bigquery_graph/SKILL.md",
+    "size_bytes": 1378,
+    "keywords": [
+      "bigquery",
+      "graph"
+    ]
+  },
+  {
+    "name": "bigquery-sql",
+    "description": ">-",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "bigquery_sql",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/bigquery_sql/SKILL.md",
+    "size_bytes": 1764,
+    "keywords": [
+      "bigquery",
+      "sql"
+    ]
+  },
+  {
+    "name": "building-data-apps",
+    "description": "|",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "building_data_apps",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/building_data_apps/SKILL.md",
+    "size_bytes": 6317,
+    "keywords": [
+      "building",
+      "data",
+      "apps"
+    ]
+  },
+  {
+    "name": "data-autocleaning",
+    "description": "Automated data quality and transformation capabilities for Dataform/dbt/BigQuery",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "data_autocleaning",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/data_autocleaning/SKILL.md",
+    "size_bytes": 12134,
+    "keywords": [
+      "data",
+      "autocleaning",
+      "automated",
+      "quality",
+      "transformation",
+      "capabilities",
+      "dataform",
+      "dbt",
+      "bigquery"
+    ]
+  },
+  {
+    "name": "dataform-bigquery",
+    "description": "Expertise in generating clean, correct, and efficient Dataform pipeline",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "dataform_bigquery",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/dataform_bigquery/SKILL.md",
+    "size_bytes": 12282,
+    "keywords": [
+      "dataform",
+      "bigquery",
+      "expertise",
+      "generating",
+      "clean",
+      "correct",
+      "efficient",
+      "pipeline"
+    ]
+  },
+  {
+    "name": "dbt-bigquery",
+    "description": "Expert guidance for creating, modifying, and optimizing dbt pipelines",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "dbt_bigquery",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/dbt_bigquery/SKILL.md",
+    "size_bytes": 11757,
+    "keywords": [
+      "dbt",
+      "bigquery",
+      "expert",
+      "guidance",
+      "creating",
+      "modifying",
+      "optimizing",
+      "pipelines"
+    ]
+  },
+  {
+    "name": "discovering-gcp-data-assets",
+    "description": "|",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "discovering_gcp_data_assets",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/discovering_gcp_data_assets/SKILL.md",
+    "size_bytes": 9919,
+    "keywords": [
+      "discovering",
+      "gcp",
+      "data",
+      "assets"
+    ]
+  },
+  {
+    "name": "enforcing-resource-attribution",
+    "description": "|",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "enforcing_resource_attribution",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/enforcing_resource_attribution/SKILL.md",
+    "size_bytes": 3560,
+    "keywords": [
+      "enforcing",
+      "resource",
+      "attribution"
+    ]
+  },
+  {
+    "name": "federate-lakehouse-catalog",
+    "description": ">-",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "federate_lakehouse_catalog",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/federate_lakehouse_catalog/SKILL.md",
+    "size_bytes": 10319,
+    "keywords": [
+      "federate",
+      "lakehouse",
+      "catalog"
+    ]
+  },
+  {
+    "name": "gcloud-auth-verification",
+    "description": "Guidelines for identifying and resolving missing Google Cloud authentication",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "gcloud_auth_verification",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/gcloud_auth_verification/SKILL.md",
+    "size_bytes": 1982,
+    "keywords": [
+      "gcloud",
+      "auth",
+      "verification",
+      "guidelines",
+      "identifying",
+      "resolving",
+      "missing",
+      "google",
+      "cloud",
+      "authentication"
+    ]
+  },
+  {
+    "name": "gcp-composer-troubleshooting",
+    "description": "Provides expert guidance for troubleshooting Cloud Composer (Apache",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "gcp_composer_troubleshooting",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/gcp_composer_troubleshooting/SKILL.md",
+    "size_bytes": 9089,
+    "keywords": [
+      "gcp",
+      "composer",
+      "troubleshooting",
+      "provides",
+      "expert",
+      "guidance",
+      "cloud",
+      "apache"
+    ]
+  },
+  {
+    "name": "gcp-data-pipelines",
+    "description": "Primary entry point for building, managing, and orchestrating data pipelines",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "gcp_data_pipelines",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/gcp_data_pipelines/SKILL.md",
+    "size_bytes": 9494,
+    "keywords": [
+      "gcp",
+      "data",
+      "pipelines",
+      "primary",
+      "entry",
+      "point",
+      "building",
+      "managing",
+      "orchestrating"
+    ]
+  },
+  {
+    "name": "gcp-dataflow",
+    "description": ">",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "gcp_dataflow",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/gcp_dataflow/SKILL.md",
+    "size_bytes": 21375,
+    "keywords": [
+      "gcp",
+      "dataflow"
+    ]
+  },
+  {
+    "name": "gcp-managed-airflow-migrations",
+    "description": "Provides guidance for migrating Apache Airflow DAGs in Managed Service for Apache Airflow (MSAA; formerly Cloud Composer). Covers migration to Airflow 2.11.1 (MSAA Gen 2 and 3) and Airflow 3 (MSAA Gen 3), including environment inspection, GCS download/upload and scanning patterns for breaking changes.",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "gcp_managed_airflow_migrations",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/gcp_managed_airflow_migrations/SKILL.md",
+    "size_bytes": 11689,
+    "keywords": [
+      "gcp",
+      "managed",
+      "airflow",
+      "migrations",
+      "provides",
+      "guidance",
+      "migrating",
+      "apache",
+      "dags",
+      "service",
+      "msaa",
+      "formerly",
+      "cloud",
+      "composer",
+      "covers",
+      "migration",
+      "gen",
+      "including",
+      "environment",
+      "inspection",
+      "gcs",
+      "download",
+      "upload",
+      "scanning",
+      "patterns",
+      "breaking",
+      "changes"
+    ]
+  },
+  {
+    "name": "gcp-pipeline-orchestration",
+    "description": "This skill helps the agent generate or update orchestration pipeline",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "gcp_pipeline_orchestration",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/gcp_pipeline_orchestration/SKILL.md",
+    "size_bytes": 17134,
+    "keywords": [
+      "gcp",
+      "pipeline",
+      "orchestration",
+      "helps",
+      "agent",
+      "generate",
+      "update"
+    ]
+  },
+  {
+    "name": "gcp-pipeline-resource-provisioning",
+    "description": "|",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "gcp_pipeline_resource_provisioning",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/gcp_pipeline_resource_provisioning/SKILL.md",
+    "size_bytes": 6528,
+    "keywords": [
+      "gcp",
+      "pipeline",
+      "resource",
+      "provisioning"
+    ]
+  },
+  {
+    "name": "gcp-spark",
+    "description": "|",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "gcp_spark",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/gcp_spark/SKILL.md",
+    "size_bytes": 3892,
+    "keywords": [
+      "gcp",
+      "spark"
+    ]
+  },
+  {
+    "name": "gcs-security-assessment",
+    "description": ">-",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "gcs_security_assessment",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/gcs_security_assessment/SKILL.md",
+    "size_bytes": 6831,
+    "keywords": [
+      "gcs",
+      "security",
+      "assessment"
+    ]
+  },
+  {
+    "name": "managing-python-dependencies",
+    "description": "|",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "managing_python_dependencies",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/managing_python_dependencies/SKILL.md",
+    "size_bytes": 2757,
+    "keywords": [
+      "managing",
+      "python",
+      "dependencies"
+    ]
+  },
+  {
+    "name": "ml-best-practices",
+    "description": "|",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "ml_best_practices",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/ml_best_practices/SKILL.md",
+    "size_bytes": 9805,
+    "keywords": [
+      "best",
+      "practices"
+    ]
+  },
+  {
+    "name": "notebook-guidance",
+    "description": "|-",
+    "plugin": "data-agent-kit-plugin",
+    "skill_dir_name": "notebook_guidance",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/data-agent-kit-plugin/skills/notebook_guidance/SKILL.md",
+    "size_bytes": 15100,
+    "keywords": [
+      "notebook",
+      "guidance"
+    ]
+  },
+  {
+    "name": "firebase-ai-logic-basics",
+    "description": "Official skill for integrating Firebase AI Logic (Gemini API) into web applications. Covers setup, multimodal inference, structured output, and security.",
+    "plugin": "firebase",
+    "skill_dir_name": "firebase_ai_logic_basics",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/firebase/skills/firebase_ai_logic_basics/SKILL.md",
+    "size_bytes": 6111,
+    "keywords": [
+      "firebase",
+      "logic",
+      "basics",
+      "official",
+      "integrating",
+      "gemini",
+      "api",
+      "web",
+      "applications",
+      "covers",
+      "setup",
+      "multimodal",
+      "inference",
+      "structured",
+      "output",
+      "security"
+    ]
+  },
+  {
+    "name": "firebase-app-hosting-basics",
+    "description": "Deploy and manage web apps with Firebase App Hosting. Use this skill when deploying Next.js/Angular apps with backends.",
+    "plugin": "firebase",
+    "skill_dir_name": "firebase_app_hosting_basics",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/firebase/skills/firebase_app_hosting_basics/SKILL.md",
+    "size_bytes": 2357,
+    "keywords": [
+      "firebase",
+      "app",
+      "hosting",
+      "basics",
+      "deploy",
+      "manage",
+      "web",
+      "apps",
+      "deploying",
+      "next",
+      "angular",
+      "backends"
+    ]
+  },
+  {
+    "name": "firebase-auth-basics",
+    "description": "Guide for setting up and using Firebase Authentication. Use this skill when the user's app requires user sign-in, user management, or secure data access using auth rules.",
+    "plugin": "firebase",
+    "skill_dir_name": "firebase_auth_basics",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/firebase/skills/firebase_auth_basics/SKILL.md",
+    "size_bytes": 4153,
+    "keywords": [
+      "firebase",
+      "auth",
+      "basics",
+      "guide",
+      "setting",
+      "using",
+      "authentication",
+      "app",
+      "requires",
+      "sign",
+      "management",
+      "secure",
+      "data",
+      "access",
+      "rules"
+    ]
+  },
+  {
+    "name": "firebase-basics",
+    "description": ">-",
+    "plugin": "firebase",
+    "skill_dir_name": "firebase_basics",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/firebase/skills/firebase_basics/SKILL.md",
+    "size_bytes": 7062,
+    "keywords": [
+      "firebase",
+      "basics"
+    ]
+  },
+  {
+    "name": "firebase-crashlytics",
+    "description": "Comprehensive guide for Firebase Crashlytics, including provisioning and SDK usage. Use this skill when the user needs help setting up Crashlytics, adding crash reporting, or using the Crashlytics SDK in their application.",
+    "plugin": "firebase",
+    "skill_dir_name": "firebase_crashlytics",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/firebase/skills/firebase_crashlytics/SKILL.md",
+    "size_bytes": 1684,
+    "keywords": [
+      "firebase",
+      "crashlytics",
+      "comprehensive",
+      "guide",
+      "including",
+      "provisioning",
+      "sdk",
+      "usage",
+      "needs",
+      "help",
+      "setting",
+      "adding",
+      "crash",
+      "reporting",
+      "using",
+      "their",
+      "application"
+    ]
+  },
+  {
+    "name": "firebase-data-connect",
+    "description": "Builds and deploys Firebase SQL Connect (aka Firebase Data Connect) backends with PostgreSQL securely. Use when designing schemas with tables and relations, writing authorized queries and mutations, configuring real-time data updates, or generating type-safe SDKs. Use when you need a relational database with Firebase, or when the user mentions SQL Connect or Data Connect.",
+    "plugin": "firebase",
+    "skill_dir_name": "firebase_data_connect_basics",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/firebase/skills/firebase_data_connect_basics/SKILL.md",
+    "size_bytes": 7662,
+    "keywords": [
+      "firebase",
+      "data",
+      "connect",
+      "builds",
+      "deploys",
+      "sql",
+      "aka",
+      "backends",
+      "postgresql",
+      "securely",
+      "designing",
+      "schemas",
+      "tables",
+      "relations",
+      "writing",
+      "authorized",
+      "queries",
+      "mutations",
+      "configuring",
+      "real",
+      "time",
+      "updates",
+      "generating",
+      "type",
+      "safe",
+      "sdks",
+      "need",
+      "relational",
+      "database",
+      "mentions"
+    ]
+  },
+  {
+    "name": "firebase-firestore",
+    "description": ">-",
+    "plugin": "firebase",
+    "skill_dir_name": "firebase_firestore",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/firebase/skills/firebase_firestore/SKILL.md",
+    "size_bytes": 3496,
+    "keywords": [
+      "firebase",
+      "firestore"
+    ]
+  },
+  {
+    "name": "firebase-hosting-basics",
+    "description": "Skill for working with Firebase Hosting (Classic). Use this when you want to deploy static web apps, Single Page Apps (SPAs), or simple microservices. Do NOT use for Firebase App Hosting.",
+    "plugin": "firebase",
+    "skill_dir_name": "firebase_hosting_basics",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/firebase/skills/firebase_hosting_basics/SKILL.md",
+    "size_bytes": 2126,
+    "keywords": [
+      "firebase",
+      "hosting",
+      "basics",
+      "working",
+      "classic",
+      "want",
+      "deploy",
+      "static",
+      "web",
+      "apps",
+      "single",
+      "page",
+      "spas",
+      "simple",
+      "microservices",
+      "app"
+    ]
+  },
+  {
+    "name": "firebase-remote-config-basics",
+    "description": "Comprehensive guide for Firebase Remote Config, including template management and SDK usage. Use this skill when the user needs help setting up Remote Config, managing feature flags, or updating app behavior dynamically.",
+    "plugin": "firebase",
+    "skill_dir_name": "firebase_remote_config_basics",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/firebase/skills/firebase_remote_config_basics/SKILL.md",
+    "size_bytes": 4763,
+    "keywords": [
+      "firebase",
+      "remote",
+      "config",
+      "basics",
+      "comprehensive",
+      "guide",
+      "including",
+      "template",
+      "management",
+      "sdk",
+      "usage",
+      "needs",
+      "help",
+      "setting",
+      "managing",
+      "feature",
+      "flags",
+      "updating",
+      "app",
+      "behavior",
+      "dynamically"
+    ]
+  },
+  {
+    "name": "firebase-security-rules-auditor",
+    "description": "A skill to evaluate how secure Firestore security rules are. Use this when Firestore security rules are updated to ensure that the generated rules are extremely secure and robust.",
+    "plugin": "firebase",
+    "skill_dir_name": "firebase_security_rules_auditor",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/firebase/skills/firebase_security_rules_auditor/SKILL.md",
+    "size_bytes": 3528,
+    "keywords": [
+      "firebase",
+      "security",
+      "rules",
+      "auditor",
+      "evaluate",
+      "how",
+      "secure",
+      "firestore",
+      "updated",
+      "ensure",
+      "generated",
+      "extremely",
+      "robust"
+    ]
+  },
+  {
+    "name": "xcode-project-setup",
+    "description": "Safely modifies Xcode projects (.pbxproj) to add Swift Packages and link files. Use this skill whenever an iOS project needs dependencies installed (e.g. Firebase, Alamofire).",
+    "plugin": "firebase",
+    "skill_dir_name": "xcode_project_setup",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/firebase/skills/xcode_project_setup/SKILL.md",
+    "size_bytes": 5901,
+    "keywords": [
+      "xcode",
+      "project",
+      "setup",
+      "safely",
+      "modifies",
+      "projects",
+      "pbxproj",
+      "add",
+      "swift",
+      "packages",
+      "link",
+      "files",
+      "whenever",
+      "ios",
+      "needs",
+      "dependencies",
+      "installed",
+      "firebase",
+      "alamofire"
+    ]
+  },
+  {
+    "name": "dart-add-unit-test",
+    "description": "Write and organize unit tests for functions, methods, and classes using `package:test`. Use when creating new logic or fixing bugs to ensure code remains correct and regression-free.",
+    "plugin": "flutter",
+    "skill_dir_name": "dart-add-unit-test",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/dart-add-unit-test/SKILL.md",
+    "size_bytes": 4819,
+    "keywords": [
+      "dart",
+      "add",
+      "unit",
+      "test",
+      "write",
+      "organize",
+      "tests",
+      "functions",
+      "methods",
+      "classes",
+      "using",
+      "package",
+      "creating",
+      "new",
+      "logic",
+      "fixing",
+      "bugs",
+      "ensure",
+      "code",
+      "remains",
+      "correct",
+      "regression",
+      "free"
+    ]
+  },
+  {
+    "name": "dart-build-cli-app",
+    "description": "Entrypoint structure, exit codes, cross-platform scripts. Use when building command line utilities, scripts, or applications.",
+    "plugin": "flutter",
+    "skill_dir_name": "dart-build-cli-app",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/dart-build-cli-app/SKILL.md",
+    "size_bytes": 9158,
+    "keywords": [
+      "dart",
+      "build",
+      "cli",
+      "app",
+      "entrypoint",
+      "structure",
+      "exit",
+      "codes",
+      "cross",
+      "platform",
+      "scripts",
+      "building",
+      "command",
+      "line",
+      "utilities",
+      "applications"
+    ]
+  },
+  {
+    "name": "dart-collect-coverage",
+    "description": "Collect coverage using the coverage packge and create an LCOV report",
+    "plugin": "flutter",
+    "skill_dir_name": "dart-collect-coverage",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/dart-collect-coverage/SKILL.md",
+    "size_bytes": 4967,
+    "keywords": [
+      "dart",
+      "collect",
+      "coverage",
+      "using",
+      "packge",
+      "create",
+      "lcov",
+      "report"
+    ]
+  },
+  {
+    "name": "dart-fix-runtime-errors",
+    "description": "Uses get_runtime_errors and lsp to fetch an active stack trace, locate the failing line, apply a fix, and verify resolution via hot_reload.",
+    "plugin": "flutter",
+    "skill_dir_name": "dart-fix-runtime-errors",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/dart-fix-runtime-errors/SKILL.md",
+    "size_bytes": 6418,
+    "keywords": [
+      "dart",
+      "fix",
+      "runtime",
+      "errors",
+      "uses",
+      "get",
+      "lsp",
+      "fetch",
+      "active",
+      "stack",
+      "trace",
+      "locate",
+      "failing",
+      "line",
+      "apply",
+      "verify",
+      "resolution",
+      "via",
+      "hot",
+      "reload"
+    ]
+  },
+  {
+    "name": "dart-generate-test-mocks",
+    "description": "Define and generate mock objects for external dependencies using `package:mockito` and `build_runner`. Use when unit testing classes that depend on complex external services like APIs or databases.",
+    "plugin": "flutter",
+    "skill_dir_name": "dart-generate-test-mocks",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/dart-generate-test-mocks/SKILL.md",
+    "size_bytes": 6531,
+    "keywords": [
+      "dart",
+      "generate",
+      "test",
+      "mocks",
+      "define",
+      "mock",
+      "objects",
+      "external",
+      "dependencies",
+      "using",
+      "package",
+      "mockito",
+      "build",
+      "runner",
+      "unit",
+      "testing",
+      "classes",
+      "depend",
+      "complex",
+      "services",
+      "like",
+      "apis",
+      "databases"
+    ]
+  },
+  {
+    "name": "dart-migrate-to-checks-package",
+    "description": "|-",
+    "plugin": "flutter",
+    "skill_dir_name": "dart-migrate-to-checks-package",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/dart-migrate-to-checks-package/SKILL.md",
+    "size_bytes": 21483,
+    "keywords": [
+      "dart",
+      "migrate",
+      "checks",
+      "package"
+    ]
+  },
+  {
+    "name": "dart-resolve-package-conflicts",
+    "description": "Workflow for fixing package version conflicts. Use this when `pub get` fails due to incompatible package versions.",
+    "plugin": "flutter",
+    "skill_dir_name": "dart-resolve-package-conflicts",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/dart-resolve-package-conflicts/SKILL.md",
+    "size_bytes": 5439,
+    "keywords": [
+      "dart",
+      "resolve",
+      "package",
+      "conflicts",
+      "workflow",
+      "fixing",
+      "version",
+      "pub",
+      "get",
+      "fails",
+      "due",
+      "incompatible",
+      "versions"
+    ]
+  },
+  {
+    "name": "dart-run-static-analysis",
+    "description": "Execute `dart analyze` to identify warnings and errors, and use `dart fix --apply` to automatically resolve mechanical lint issues. Use during development to ensure code quality and before committing changes.",
+    "plugin": "flutter",
+    "skill_dir_name": "dart-run-static-analysis",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/dart-run-static-analysis/SKILL.md",
+    "size_bytes": 5211,
+    "keywords": [
+      "dart",
+      "run",
+      "static",
+      "analysis",
+      "execute",
+      "analyze",
+      "identify",
+      "warnings",
+      "errors",
+      "fix",
+      "apply",
+      "automatically",
+      "resolve",
+      "mechanical",
+      "lint",
+      "issues",
+      "during",
+      "development",
+      "ensure",
+      "code",
+      "quality",
+      "before",
+      "committing",
+      "changes"
+    ]
+  },
+  {
+    "name": "dart-setup-ffi-assets",
+    "description": "Guides agents in compiling and packaging C/C++ source code into dynamic or static libraries (Code Assets) using Dart's Native Assets hook system (via hook/build.dart and hook/link.dart utilizing package:hooks and package:native_toolchain_c). Use when a user asks to: 'setup native assets', 'compile C/C++ source code', 'bundle dynamic libraries', 'build native C code', 'link native assets', 'implement build.dart or link.dart hooks', or 'integrate C/C++ interop in Dart/Flutter'. Helps agents avoid manual toolchain orchestration and configures secure hash-validated binary downloads or advanced linker tree-shaking with package:record_use mapping.",
+    "plugin": "flutter",
+    "skill_dir_name": "dart-setup-ffi-assets",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/dart-setup-ffi-assets/SKILL.md",
+    "size_bytes": 21901,
+    "keywords": [
+      "dart",
+      "setup",
+      "ffi",
+      "assets",
+      "guides",
+      "agents",
+      "compiling",
+      "packaging",
+      "source",
+      "code",
+      "dynamic",
+      "static",
+      "libraries",
+      "using",
+      "native",
+      "hook",
+      "system",
+      "via",
+      "build",
+      "link",
+      "utilizing",
+      "package",
+      "hooks",
+      "toolchain",
+      "compile",
+      "bundle",
+      "implement",
+      "integrate",
+      "interop",
+      "flutter",
+      "helps",
+      "avoid",
+      "manual",
+      "orchestration",
+      "configures",
+      "secure",
+      "hash",
+      "validated",
+      "binary",
+      "downloads",
+      "advanced",
+      "linker",
+      "tree",
+      "shaking",
+      "record",
+      "mapping"
+    ]
+  },
+  {
+    "name": "dart-use-ffigen",
+    "description": "Guide agents to use `package:ffigen` to automatically generate FFI bindings instead of writing them manually. Use this skill when a task involves writing new FFI bindings, extending C/Objective-C/Swift integrations, or replacing hand-crafted `dart:ffi` setups.",
+    "plugin": "flutter",
+    "skill_dir_name": "dart-use-ffigen",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/dart-use-ffigen/SKILL.md",
+    "size_bytes": 11920,
+    "keywords": [
+      "dart",
+      "ffigen",
+      "guide",
+      "agents",
+      "package",
+      "automatically",
+      "generate",
+      "ffi",
+      "bindings",
+      "instead",
+      "writing",
+      "them",
+      "manually",
+      "task",
+      "involves",
+      "new",
+      "extending",
+      "objective",
+      "swift",
+      "integrations",
+      "replacing",
+      "hand",
+      "crafted",
+      "setups"
+    ]
+  },
+  {
+    "name": "dart-use-pattern-matching",
+    "description": "Use switch expressions and pattern matching where appropriate",
+    "plugin": "flutter",
+    "skill_dir_name": "dart-use-pattern-matching",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/dart-use-pattern-matching/SKILL.md",
+    "size_bytes": 6239,
+    "keywords": [
+      "dart",
+      "pattern",
+      "matching",
+      "switch",
+      "expressions",
+      "where",
+      "appropriate"
+    ]
+  },
+  {
+    "name": "dart-use-primary-constructors",
+    "description": ">",
+    "plugin": "flutter",
+    "skill_dir_name": "dart-use-primary-constructors",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/dart-use-primary-constructors/SKILL.md",
+    "size_bytes": 12332,
+    "keywords": [
+      "dart",
+      "primary",
+      "constructors"
+    ]
+  },
+  {
+    "name": "flutter-add-integration-test",
+    "description": "Configures Flutter Driver for app interaction and converts MCP actions into permanent integration tests. Use when adding integration testing to a project, exploring UI components via MCP, or automating user flows with the integration_test package.",
+    "plugin": "flutter",
+    "skill_dir_name": "flutter-add-integration-test",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/flutter-add-integration-test/SKILL.md",
+    "size_bytes": 7586,
+    "keywords": [
+      "flutter",
+      "add",
+      "integration",
+      "test",
+      "configures",
+      "driver",
+      "app",
+      "interaction",
+      "converts",
+      "mcp",
+      "actions",
+      "permanent",
+      "tests",
+      "adding",
+      "testing",
+      "project",
+      "exploring",
+      "components",
+      "via",
+      "automating",
+      "flows",
+      "package"
+    ]
+  },
+  {
+    "name": "flutter-add-widget-preview",
+    "description": "Adds interactive widget previews to the project using the previews.dart system. Use when creating new UI components or updating existing screens to ensure consistent design and interactive testing.",
+    "plugin": "flutter",
+    "skill_dir_name": "flutter-add-widget-preview",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/flutter-add-widget-preview/SKILL.md",
+    "size_bytes": 6394,
+    "keywords": [
+      "flutter",
+      "add",
+      "widget",
+      "preview",
+      "adds",
+      "interactive",
+      "previews",
+      "project",
+      "using",
+      "dart",
+      "system",
+      "creating",
+      "new",
+      "components",
+      "updating",
+      "existing",
+      "screens",
+      "ensure",
+      "consistent",
+      "design",
+      "testing"
+    ]
+  },
+  {
+    "name": "flutter-add-widget-test",
+    "description": "Implement a component-level test using `WidgetTester` to verify UI rendering and user interactions (tapping, scrolling, entering text). Use when validating that a specific widget displays correct data and responds to events as expected.",
+    "plugin": "flutter",
+    "skill_dir_name": "flutter-add-widget-test",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/flutter-add-widget-test/SKILL.md",
+    "size_bytes": 6511,
+    "keywords": [
+      "flutter",
+      "add",
+      "widget",
+      "test",
+      "implement",
+      "component",
+      "level",
+      "using",
+      "widgettester",
+      "verify",
+      "rendering",
+      "interactions",
+      "tapping",
+      "scrolling",
+      "entering",
+      "text",
+      "validating",
+      "specific",
+      "displays",
+      "correct",
+      "data",
+      "responds",
+      "events",
+      "expected"
+    ]
+  },
+  {
+    "name": "flutter-apply-architecture-best-practices",
+    "description": "Architects a Flutter application using the recommended layered approach (UI, Logic, Data). Use when structuring a new project or refactoring for scalability.",
+    "plugin": "flutter",
+    "skill_dir_name": "flutter-apply-architecture-best-practices",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/flutter-apply-architecture-best-practices/SKILL.md",
+    "size_bytes": 6480,
+    "keywords": [
+      "flutter",
+      "apply",
+      "architecture",
+      "best",
+      "practices",
+      "architects",
+      "application",
+      "using",
+      "recommended",
+      "layered",
+      "approach",
+      "logic",
+      "data",
+      "structuring",
+      "new",
+      "project",
+      "refactoring",
+      "scalability"
+    ]
+  },
+  {
+    "name": "flutter-build-responsive-layout",
+    "description": "Use `LayoutBuilder`, `MediaQuery`, or `Expanded/Flexible` to create a layout that adapts to different screen sizes. Use when you need the UI to look good on both mobile and tablet/desktop form factors.",
+    "plugin": "flutter",
+    "skill_dir_name": "flutter-build-responsive-layout",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/flutter-build-responsive-layout/SKILL.md",
+    "size_bytes": 7000,
+    "keywords": [
+      "flutter",
+      "build",
+      "responsive",
+      "layout",
+      "layoutbuilder",
+      "mediaquery",
+      "expanded",
+      "flexible",
+      "create",
+      "adapts",
+      "different",
+      "screen",
+      "sizes",
+      "need",
+      "look",
+      "good",
+      "both",
+      "mobile",
+      "tablet",
+      "desktop",
+      "form",
+      "factors"
+    ]
+  },
+  {
+    "name": "flutter-fix-layout-issues",
+    "description": "Fixes Flutter layout errors (overflows, unbounded constraints) using Dart and Flutter MCP tools. Use when addressing \"RenderFlex overflowed\", \"Vertical viewport was given unbounded height\", or similar layout issues.",
+    "plugin": "flutter",
+    "skill_dir_name": "flutter-fix-layout-issues",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/flutter-fix-layout-issues/SKILL.md",
+    "size_bytes": 5501,
+    "keywords": [
+      "flutter",
+      "fix",
+      "layout",
+      "issues",
+      "fixes",
+      "errors",
+      "overflows",
+      "unbounded",
+      "constraints",
+      "using",
+      "dart",
+      "mcp",
+      "tools",
+      "addressing",
+      "renderflex",
+      "overflowed",
+      "vertical",
+      "viewport",
+      "given",
+      "height",
+      "similar"
+    ]
+  },
+  {
+    "name": "flutter-implement-json-serialization",
+    "description": "Create model classes with `fromJson` and `toJson` methods using `dart:convert`. Use when manually mapping JSON keys to class properties for simple data structures.",
+    "plugin": "flutter",
+    "skill_dir_name": "flutter-implement-json-serialization",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/flutter-implement-json-serialization/SKILL.md",
+    "size_bytes": 5788,
+    "keywords": [
+      "flutter",
+      "implement",
+      "json",
+      "serialization",
+      "create",
+      "model",
+      "classes",
+      "fromjson",
+      "tojson",
+      "methods",
+      "using",
+      "dart",
+      "convert",
+      "manually",
+      "mapping",
+      "keys",
+      "class",
+      "properties",
+      "simple",
+      "data",
+      "structures"
+    ]
+  },
+  {
+    "name": "flutter-setup-declarative-routing",
+    "description": "Configure `MaterialApp.router` using a package like `go_router` for advanced URL-based navigation. Use when developing web applications or mobile apps that require specific deep linking and browser history support.",
+    "plugin": "flutter",
+    "skill_dir_name": "flutter-setup-declarative-routing",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/flutter-setup-declarative-routing/SKILL.md",
+    "size_bytes": 8334,
+    "keywords": [
+      "flutter",
+      "setup",
+      "declarative",
+      "routing",
+      "configure",
+      "materialapp",
+      "router",
+      "using",
+      "package",
+      "like",
+      "advanced",
+      "url",
+      "based",
+      "navigation",
+      "developing",
+      "web",
+      "applications",
+      "mobile",
+      "apps",
+      "require",
+      "specific",
+      "deep",
+      "linking",
+      "browser",
+      "history",
+      "support"
+    ]
+  },
+  {
+    "name": "flutter-setup-localization",
+    "description": "Add `flutter_localizations` and `intl` dependencies, enable \"generate true\" in `pubspec.yaml`, and create an `l10n.yaml` configuration file. Use when initializing localization support for a new Flutter project.",
+    "plugin": "flutter",
+    "skill_dir_name": "flutter-setup-localization",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/flutter-setup-localization/SKILL.md",
+    "size_bytes": 5979,
+    "keywords": [
+      "flutter",
+      "setup",
+      "localization",
+      "add",
+      "localizations",
+      "intl",
+      "dependencies",
+      "enable",
+      "generate",
+      "true",
+      "pubspec",
+      "yaml",
+      "create",
+      "l10n",
+      "configuration",
+      "file",
+      "initializing",
+      "support",
+      "new",
+      "project"
+    ]
+  },
+  {
+    "name": "flutter-use-http-package",
+    "description": "Use the `http` package to execute GET, POST, PUT, or DELETE requests. Use when you need to fetch from or send data to a REST API.",
+    "plugin": "flutter",
+    "skill_dir_name": "flutter-use-http-package",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/flutter/skills/flutter-use-http-package/SKILL.md",
+    "size_bytes": 6590,
+    "keywords": [
+      "flutter",
+      "http",
+      "package",
+      "execute",
+      "get",
+      "post",
+      "put",
+      "delete",
+      "requests",
+      "need",
+      "fetch",
+      "send",
+      "data",
+      "rest",
+      "api"
+    ]
+  },
+  {
+    "name": "chrome-extensions",
+    "description": ">",
+    "plugin": "modern-web-guidance-plugin",
+    "skill_dir_name": "chrome-extensions",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/modern-web-guidance-plugin/skills/chrome-extensions/SKILL.md",
+    "size_bytes": 23737,
+    "keywords": [
+      "chrome",
+      "extensions"
+    ]
+  },
+  {
+    "name": "modern-web-guidance",
+    "description": "|",
+    "plugin": "modern-web-guidance-plugin",
+    "skill_dir_name": "modern-web-guidance",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/modern-web-guidance-plugin/skills/modern-web-guidance/SKILL.md",
+    "size_bytes": 5551,
+    "keywords": [
+      "modern",
+      "web",
+      "guidance"
+    ]
+  },
+  {
+    "name": "alphafold-database-fetch-and-analyze",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "alphafold_database_fetch_and_analyze",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/alphafold_database_fetch_and_analyze/SKILL.md",
+    "size_bytes": 4760,
+    "keywords": [
+      "alphafold",
+      "database",
+      "fetch",
+      "analyze"
+    ]
+  },
+  {
+    "name": "alphagenome-single-variant-analysis",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "alphagenome_single_variant_analysis",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/alphagenome_single_variant_analysis/SKILL.md",
+    "size_bytes": 11690,
+    "keywords": [
+      "alphagenome",
+      "single",
+      "variant",
+      "analysis"
+    ]
+  },
+  {
+    "name": "chembl-database",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "chembl_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/chembl_database/SKILL.md",
+    "size_bytes": 11504,
+    "keywords": [
+      "chembl",
+      "database"
+    ]
+  },
+  {
+    "name": "clinical-trials-database",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "clinical_trials_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/clinical_trials_database/SKILL.md",
+    "size_bytes": 12708,
+    "keywords": [
+      "clinical",
+      "trials",
+      "database"
+    ]
+  },
+  {
+    "name": "clinvar-database",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "clinvar_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/clinvar_database/SKILL.md",
+    "size_bytes": 15724,
+    "keywords": [
+      "clinvar",
+      "database"
+    ]
+  },
+  {
+    "name": "credentials",
+    "description": ">-",
+    "plugin": "science",
+    "skill_dir_name": "credentials",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/credentials/SKILL.md",
+    "size_bytes": 4159,
+    "keywords": [
+      "credentials"
+    ]
+  },
+  {
+    "name": "dbsnp-database",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "dbsnp_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/dbsnp_database/SKILL.md",
+    "size_bytes": 13639,
+    "keywords": [
+      "dbsnp",
+      "database"
+    ]
+  },
+  {
+    "name": "embl-ebi-ols",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "embl_ebi_ols",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/embl_ebi_ols/SKILL.md",
+    "size_bytes": 11463,
+    "keywords": [
+      "embl",
+      "ebi",
+      "ols"
+    ]
+  },
+  {
+    "name": "encode-ccres-database",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "encode_ccres_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/encode_ccres_database/SKILL.md",
+    "size_bytes": 6847,
+    "keywords": [
+      "encode",
+      "ccres",
+      "database"
+    ]
+  },
+  {
+    "name": "ensembl-database",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "ensembl_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/ensembl_database/SKILL.md",
+    "size_bytes": 8827,
+    "keywords": [
+      "ensembl",
+      "database"
+    ]
+  },
+  {
+    "name": "foldseek-structural-search",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "foldseek_structural_search",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/foldseek_structural_search/SKILL.md",
+    "size_bytes": 5351,
+    "keywords": [
+      "foldseek",
+      "structural",
+      "search"
+    ]
+  },
+  {
+    "name": "gnomad-database",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "gnomad_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/gnomad_database/SKILL.md",
+    "size_bytes": 3098,
+    "keywords": [
+      "gnomad",
+      "database"
+    ]
+  },
+  {
+    "name": "gtex-database",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "gtex_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/gtex_database/SKILL.md",
+    "size_bytes": 6071,
+    "keywords": [
+      "gtex",
+      "database"
+    ]
+  },
+  {
+    "name": "human-protein-atlas-database",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "human_protein_atlas_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/human_protein_atlas_database/SKILL.md",
+    "size_bytes": 6439,
+    "keywords": [
+      "human",
+      "protein",
+      "atlas",
+      "database"
+    ]
+  },
+  {
+    "name": "interpro-database",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "interpro_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/interpro_database/SKILL.md",
+    "size_bytes": 16977,
+    "keywords": [
+      "interpro",
+      "database"
+    ]
+  },
+  {
+    "name": "jaspar-database",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "jaspar_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/jaspar_database/SKILL.md",
+    "size_bytes": 4465,
+    "keywords": [
+      "jaspar",
+      "database"
+    ]
+  },
+  {
+    "name": "literature-search-arxiv",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "literature_search_arxiv",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/literature_search_arxiv/SKILL.md",
+    "size_bytes": 4628,
+    "keywords": [
+      "literature",
+      "search",
+      "arxiv"
+    ]
+  },
+  {
+    "name": "literature-search-biorxiv",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "literature_search_biorxiv",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/literature_search_biorxiv/SKILL.md",
+    "size_bytes": 7747,
+    "keywords": [
+      "literature",
+      "search",
+      "biorxiv"
+    ]
+  },
+  {
+    "name": "literature-search-europepmc",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "literature_search_europepmc",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/literature_search_europepmc/SKILL.md",
+    "size_bytes": 8357,
+    "keywords": [
+      "literature",
+      "search",
+      "europepmc"
+    ]
+  },
+  {
+    "name": "literature-search-openalex",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "literature_search_openalex",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/literature_search_openalex/SKILL.md",
+    "size_bytes": 7407,
+    "keywords": [
+      "literature",
+      "search",
+      "openalex"
+    ]
+  },
+  {
+    "name": "ncbi-sequence-fetch",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "ncbi_sequence_fetch",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/ncbi_sequence_fetch/SKILL.md",
+    "size_bytes": 9073,
+    "keywords": [
+      "ncbi",
+      "sequence",
+      "fetch"
+    ]
+  },
+  {
+    "name": "openfda-database",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "openfda_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/openfda_database/SKILL.md",
+    "size_bytes": 8887,
+    "keywords": [
+      "openfda",
+      "database"
+    ]
+  },
+  {
+    "name": "opentargets-database",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "opentargets_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/opentargets_database/SKILL.md",
+    "size_bytes": 9527,
+    "keywords": [
+      "opentargets",
+      "database"
+    ]
+  },
+  {
+    "name": "pdb-database",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "pdb_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/pdb_database/SKILL.md",
+    "size_bytes": 8891,
+    "keywords": [
+      "pdb",
+      "database"
+    ]
+  },
+  {
+    "name": "predictingthepast",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "predictingthepast",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/predictingthepast/SKILL.md",
+    "size_bytes": 14683,
+    "keywords": [
+      "predictingthepast"
+    ]
+  },
+  {
+    "name": "protein-sequence-msa",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "protein_sequence_msa",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/protein_sequence_msa/SKILL.md",
+    "size_bytes": 6113,
+    "keywords": [
+      "protein",
+      "sequence",
+      "msa"
+    ]
+  },
+  {
+    "name": "protein-sequence-similarity-search",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "protein_sequence_similarity_search",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/protein_sequence_similarity_search/SKILL.md",
+    "size_bytes": 10728,
+    "keywords": [
+      "protein",
+      "sequence",
+      "similarity",
+      "search"
+    ]
+  },
+  {
+    "name": "pubchem-database",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "pubchem_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/pubchem_database/SKILL.md",
+    "size_bytes": 5615,
+    "keywords": [
+      "pubchem",
+      "database"
+    ]
+  },
+  {
+    "name": "pubmed-database",
+    "description": ">-",
+    "plugin": "science",
+    "skill_dir_name": "pubmed_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/pubmed_database/SKILL.md",
+    "size_bytes": 8343,
+    "keywords": [
+      "pubmed",
+      "database"
+    ]
+  },
+  {
+    "name": "pymol",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "pymol",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/pymol/SKILL.md",
+    "size_bytes": 6233,
+    "keywords": [
+      "pymol"
+    ]
+  },
+  {
+    "name": "quickgo-database",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "quickgo_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/quickgo_database/SKILL.md",
+    "size_bytes": 5659,
+    "keywords": [
+      "quickgo",
+      "database"
+    ]
+  },
+  {
+    "name": "reactome-database",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "reactome_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/reactome_database/SKILL.md",
+    "size_bytes": 11026,
+    "keywords": [
+      "reactome",
+      "database"
+    ]
+  },
+  {
+    "name": "string-database",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "string_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/string_database/SKILL.md",
+    "size_bytes": 2926,
+    "keywords": [
+      "string",
+      "database"
+    ]
+  },
+  {
+    "name": "ucsc-conservation-and-tfbs",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "ucsc_conservation_and_tfbs",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/ucsc_conservation_and_tfbs/SKILL.md",
+    "size_bytes": 7714,
+    "keywords": [
+      "ucsc",
+      "conservation",
+      "tfbs"
+    ]
+  },
+  {
+    "name": "unibind-database",
+    "description": ">-",
+    "plugin": "science",
+    "skill_dir_name": "unibind_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/unibind_database/SKILL.md",
+    "size_bytes": 5311,
+    "keywords": [
+      "unibind",
+      "database"
+    ]
+  },
+  {
+    "name": "uniprot-database",
+    "description": ">-",
+    "plugin": "science",
+    "skill_dir_name": "uniprot_database",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/uniprot_database/SKILL.md",
+    "size_bytes": 12329,
+    "keywords": [
+      "uniprot",
+      "database"
+    ]
+  },
+  {
+    "name": "uv",
+    "description": ">-",
+    "plugin": "science",
+    "skill_dir_name": "uv",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/uv/SKILL.md",
+    "size_bytes": 1682,
+    "keywords": []
+  },
+  {
+    "name": "workflow-skill-creator",
+    "description": ">",
+    "plugin": "science",
+    "skill_dir_name": "workflow_skill_creator",
+    "skill_md_path": "/Users/borjafernandezangulo/.gemini/config/plugins_disabled/science/skills/workflow_skill_creator/SKILL.md",
+    "size_bytes": 12390,
+    "keywords": [
+      "workflow",
+      "creator"
+    ]
+  }
+]

@@ -1,0 +1,99 @@
+[package]
+name = "base-execution-trie"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+homepage.workspace = true
+repository.workspace = true
+description = "Trie node storage for serving proofs in FP window fast"
+
+[lints]
+workspace = true
+
+[dependencies]
+# reth
+reth-evm.workspace = true
+reth-revm.workspace = true
+reth-tasks.workspace = true
+reth-provider.workspace = true
+reth-execution-errors.workspace = true
+reth-primitives-traits.workspace = true
+reth-db = { workspace = true, features = ["mdbx"] }
+reth-trie = { workspace = true, features = ["serde"] }
+reth-trie-common = { workspace = true, features = ["serde"] }
+
+# workaround: reth-trie/serde-bincode-compat activates serde-bincode-compat on
+# reth-ethereum-primitives (a transitive dep) without also activating its serde feature,
+# breaking compilation. Adding it as an optional dep lets us enable both features together.
+reth-ethereum-primitives = { workspace = true, optional = true }
+
+# `metrics` feature
+base-metrics.workspace = true
+metrics = { workspace = true, optional = true }
+
+# ethereum
+alloy-eips.workspace = true
+alloy-primitives.workspace = true
+
+# async
+tokio = { workspace = true, features = ["sync"] }
+
+# codec
+serde.workspace = true
+bytes.workspace = true
+bincode = { workspace = true, features = ["serde"] }
+
+# misc
+tracing.workspace = true
+thiserror.workspace = true
+auto_impl.workspace = true
+parking_lot.workspace = true
+derive_more.workspace = true
+eyre = { workspace = true, optional = true }
+strum = { workspace = true, features = ["derive"] }
+
+[dev-dependencies]
+eyre.workspace = true
+rand_08.workspace = true
+mockall.workspace = true
+tempfile.workspace = true
+test-case.workspace = true
+reth-node-api.workspace = true
+alloy-genesis.workspace = true
+reth-chainspec.workspace = true
+reth-db-common.workspace = true
+alloy-consensus.workspace = true
+reth-evm-ethereum.workspace = true
+reth-storage-errors.workspace = true
+reth-ethereum-primitives.workspace = true
+reth-db = { workspace = true, features = ["test-utils"] }
+reth-trie = { workspace = true, features = ["test-utils"] }
+secp256k1 = { workspace = true, features = ["rand", "std"] }
+reth-codecs = { workspace = true, features = ["test-utils"] }
+# workaround for failing doc test <https://github.com/op-rs/op-reth/pull/234>
+reth-db-api = { workspace = true, features = ["test-utils"] }
+reth-provider = { workspace = true, features = ["test-utils"] }
+tokio = { workspace = true, features = ["test-util", "rt-multi-thread", "macros"] }
+
+# misc
+serial_test.workspace = true
+
+[features]
+serde-bincode-compat = [
+	"alloy-consensus/serde-bincode-compat",
+	"alloy-eips/serde-bincode-compat",
+	"dep:reth-ethereum-primitives",
+	"reth-ethereum-primitives?/serde",
+	"reth-ethereum-primitives?/serde-bincode-compat",
+	"reth-primitives-traits/serde-bincode-compat",
+	"reth-trie-common/serde-bincode-compat",
+	"reth-trie/serde-bincode-compat",
+]
+metrics = [
+	"base-metrics/metrics",
+	"dep:eyre",
+	"dep:metrics",
+	"reth-evm/metrics",
+	"reth-trie/metrics",
+]

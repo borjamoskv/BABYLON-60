@@ -1,0 +1,138 @@
+# K2 Lending Operations Fuzzer Dictionary
+# Run with: cargo +nightly fuzz run fuzz_lending_operations --sanitizer=none -- -dict=dict.txt
+
+# =============================================================================
+# Operation discriminants (12 operations)
+# =============================================================================
+op_supply="\x00"
+op_borrow="\x01"
+op_repay="\x02"
+op_withdraw="\x03"
+op_advance_time="\x04"
+op_supply_more="\x05"
+op_partial_withdraw="\x06"
+op_repay_all="\x07"
+op_withdraw_all="\x08"
+op_set_price="\x09"
+op_liquidate="\x0A"
+op_set_collateral="\x0B"
+
+# =============================================================================
+# User discriminants
+# =============================================================================
+user1="\x00"
+user2="\x01"
+
+# =============================================================================
+# Option discriminants
+# =============================================================================
+option_none="\x00"
+option_some="\x01"
+
+# =============================================================================
+# Amount hints
+# =============================================================================
+hint_raw="\x00"
+hint_max="\x01"
+hint_min="\x02"
+hint_power_of_two="\x03"
+hint_ltv_boundary="\x04"
+
+# =============================================================================
+# Common amounts (little-endian u64)
+# =============================================================================
+# 0
+amount_zero="\x00\x00\x00\x00\x00\x00\x00\x00"
+# 1
+amount_one="\x01\x00\x00\x00\x00\x00\x00\x00"
+# 1000000 (0.1 token with 7 decimals)
+amount_1m="\x40\x42\x0F\x00\x00\x00\x00\x00"
+# 10000000 (1 token)
+amount_10m="\x80\x96\x98\x00\x00\x00\x00\x00"
+# 100000000 (10 tokens)
+amount_100m="\x00\xE1\xF5\x05\x00\x00\x00\x00"
+# 1000000000 (100 tokens)
+amount_1b="\x00\xCA\x9A\x3B\x00\x00\x00\x00"
+# 10000000000 (1000 tokens)
+amount_10b="\x00\xE4\x0B\x54\x02\x00\x00\x00"
+# u64::MAX
+amount_max="\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF"
+
+# =============================================================================
+# Powers of 2 (for bit boundary testing)
+# =============================================================================
+pow2_30="\x00\x00\x00\x40\x00\x00\x00\x00"
+pow2_31="\x00\x00\x00\x80\x00\x00\x00\x00"
+pow2_32="\x00\x00\x00\x00\x01\x00\x00\x00"
+pow2_63="\x00\x00\x00\x00\x00\x00\x00\x80"
+
+# =============================================================================
+# LTV boundary amounts (80% of common values)
+# =============================================================================
+# 800000000 (80% of 1B)
+ltv_80_1b="\x00\x28\x6B\x2F\x00\x00\x00\x00"
+# 8000000000 (80% of 10B)
+ltv_80_10b="\x00\x90\x23\xDC\x01\x00\x00\x00"
+
+# =============================================================================
+# Time durations (little-endian u32)
+# =============================================================================
+# 1 hour (3600 seconds)
+time_1h="\x10\x0E\x00\x00"
+# 1 day (86400 seconds)
+time_1d="\x80\x51\x01\x00"
+# 1 week (604800 seconds)
+time_1w="\x80\x3A\x09\x00"
+# 30 days (2592000 seconds)
+time_30d="\x80\x8D\x27\x00"
+# 1 year (31536000 seconds)
+time_1y="\x80\x1A\xE1\x01"
+
+# =============================================================================
+# Price in basis points (little-endian u16)
+# =============================================================================
+# 100 bps = 1%
+price_1pct="\x64\x00"
+# 1000 bps = 10%
+price_10pct="\xE8\x03"
+# 5000 bps = 50%
+price_50pct="\x88\x13"
+# 8000 bps = 80% (LTV threshold)
+price_80pct="\x40\x1F"
+# 8500 bps = 85% (liquidation threshold)
+price_85pct="\x34\x21"
+# 10000 bps = 100% (base price)
+price_100pct="\x10\x27"
+# 20000 bps = 200%
+price_200pct="\x20\x4E"
+
+# =============================================================================
+# Percentages for partial withdraw (u8)
+# =============================================================================
+pct_10="\x0A"
+pct_25="\x19"
+pct_50="\x32"
+pct_75="\x4B"
+pct_100="\x64"
+
+# =============================================================================
+# Boolean values
+# =============================================================================
+bool_false="\x00"
+bool_true="\x01"
+
+# =============================================================================
+# Common operation sequences (prebuilt)
+# =============================================================================
+# Some(Supply) with User1
+seq_supply_u1="\x01\x00\x00"
+# Some(Borrow) with User1
+seq_borrow_u1="\x01\x01\x00"
+# Some(Repay) with User1
+seq_repay_u1="\x01\x02\x00"
+# Some(Withdraw) with User1
+seq_withdraw_u1="\x01\x03\x00"
+# Some(SetPrice)
+seq_set_price="\x01\x09"
+# Some(Liquidate) with User2 as liquidator, User1 as borrower
+seq_liquidate_u2_u1="\x01\x0A\x01\x00"

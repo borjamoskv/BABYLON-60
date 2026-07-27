@@ -1,0 +1,350 @@
+warning: profiles for the non root package will be ignored, specify profiles at the workspace root:
+package:   /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/contracts/kinetic-router/Cargo.toml
+workspace: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/Cargo.toml
+warning: profiles for the non root package will be ignored, specify profiles at the workspace root:
+package:   /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/contracts/a-token/Cargo.toml
+workspace: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/Cargo.toml
+warning: profiles for the non root package will be ignored, specify profiles at the workspace root:
+package:   /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/contracts/debt-token/Cargo.toml
+workspace: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/Cargo.toml
+warning: profiles for the non root package will be ignored, specify profiles at the workspace root:
+package:   /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/contracts/interest-rate-strategy/Cargo.toml
+workspace: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/Cargo.toml
+warning: profiles for the non root package will be ignored, specify profiles at the workspace root:
+package:   /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/contracts/price-oracle/Cargo.toml
+workspace: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/Cargo.toml
+warning: profiles for the non root package will be ignored, specify profiles at the workspace root:
+package:   /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/contracts/pool-configurator/Cargo.toml
+workspace: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/Cargo.toml
+warning: profiles for the non root package will be ignored, specify profiles at the workspace root:
+package:   /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/contracts/liquidation-engine/Cargo.toml
+workspace: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/Cargo.toml
+warning: profiles for the non root package will be ignored, specify profiles at the workspace root:
+package:   /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/contracts/incentives/Cargo.toml
+workspace: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/Cargo.toml
+warning: profiles for the non root package will be ignored, specify profiles at the workspace root:
+package:   /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/contracts/treasury/Cargo.toml
+workspace: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/Cargo.toml
+warning: profiles for the non root package will be ignored, specify profiles at the workspace root:
+package:   /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/contracts/flash-liquidation-helper/Cargo.toml
+workspace: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/Cargo.toml
+warning: profiles for the non root package will be ignored, specify profiles at the workspace root:
+package:   /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/contracts/token/Cargo.toml
+workspace: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/Cargo.toml
+warning: profiles for the non root package will be ignored, specify profiles at the workspace root:
+package:   /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/contracts/aquarius-swap-adapter/Cargo.toml
+workspace: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/Cargo.toml
+warning: profiles for the non root package will be ignored, specify profiles at the workspace root:
+package:   /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/contracts/soroswap-swap-adapter/Cargo.toml
+workspace: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-bounties/targets/2026-04-k2/Cargo.toml
+warning: use of deprecated method `soroban_sdk::events::Events::publish`: use the #[contractevent] macro on a contract event type
+  --> contracts/shared/src/upgradeable.rs:67:26
+   |
+67 |             env.events().publish(
+   |                          ^^^^^^^
+   |
+   = note: `#[warn(deprecated)]` on by default
+
+warning: use of deprecated method `soroban_sdk::events::Events::publish`: use the #[contractevent] macro on a contract event type
+  --> contracts/shared/src/upgradeable.rs:81:22
+   |
+81 |         env.events().publish(
+   |                      ^^^^^^^
+
+warning: use of deprecated method `soroban_sdk::events::Events::publish`: use the #[contractevent] macro on a contract event type
+   --> contracts/shared/src/upgradeable.rs:107:22
+    |
+107 |         env.events().publish(
+    |                      ^^^^^^^
+
+warning: use of deprecated method `soroban_sdk::events::Events::publish`: use the #[contractevent] macro on a contract event type
+   --> contracts/shared/src/upgradeable.rs:129:22
+    |
+129 |         env.events().publish(
+    |                      ^^^^^^^
+
+warning: unused variable: `reported_amount_out`
+   --> contracts/shared/src/dex.rs:416:9
+    |
+416 |     let reported_amount_out: u128 = call_soroswap(
+    |         ^^^^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_reported_amount_out`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: `k2-shared` (lib) generated 5 warnings (run `cargo fix --lib -p k2-shared` to apply 1 suggestion)
+warning: unused import: `Address as _`
+  --> tests/integration-tests/src/test_prepare_execute_liquidation.rs:11:17
+   |
+11 |     testutils::{Address as _, MockAuth, MockAuthInvoke},
+   |                 ^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused imports: `Address as _`, `MockAuthInvoke`, and `MockAuth`
+  --> tests/integration-tests/src/test_reserve_fragmentation.rs:12:30
+   |
+12 | use soroban_sdk::testutils::{Address as _, MockAuth, MockAuthInvoke};
+   |                              ^^^^^^^^^^^^  ^^^^^^^^  ^^^^^^^^^^^^^^
+
+warning: unused import: `IntoVal`
+  --> tests/integration-tests/src/test_reserve_fragmentation.rs:13:28
+   |
+13 | use soroban_sdk::{Address, IntoVal};
+   |                            ^^^^^^^
+
+warning: unused import: `interest_rate_strategy`
+  --> tests/integration-tests/src/test_reserve_fragmentation.rs:20:38
+   |
+20 |     use crate::{a_token, debt_token, interest_rate_strategy};
+   |                                      ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `k2_shared::WAD`
+  --> tests/integration-tests/src/test_swap_collateral.rs:11:5
+   |
+11 | use k2_shared::WAD;
+   |     ^^^^^^^^^^^^^^
+
+warning: unused import: `token`
+  --> tests/integration-tests/src/test_critical_flows.rs:14:19
+   |
+14 | use soroban_sdk::{token, Env};
+   |                   ^^^^^
+
+warning: unused import: `k2_shared::WAD`
+ --> tests/integration-tests/src/poc_close_factor_bypass.rs:5:5
+  |
+5 | use k2_shared::WAD;
+  |     ^^^^^^^^^^^^^^
+
+warning: unused import: `k2_shared::WAD`
+ --> tests/integration-tests/src/test_tracker_reset.rs:5:5
+  |
+5 | use k2_shared::WAD;
+  |     ^^^^^^^^^^^^^^
+
+warning: unused import: `testutils::Address as _`
+ --> tests/integration-tests/src/test_tracker_reset.rs:6:24
+  |
+6 | use soroban_sdk::{Env, testutils::Address as _};
+  |                        ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `k2_shared::WAD`
+ --> tests/integration-tests/src/poc_execute_liquidation_bypass.rs:5:5
+  |
+5 | use k2_shared::WAD;
+  |     ^^^^^^^^^^^^^^
+
+warning: use of deprecated method `soroban_sdk::Env::register_contract_wasm`: use `register`
+   --> tests/integration-tests/src/test_flash_liquidation.rs:974:31
+    |
+974 |     let price_oracle_id = env.register_contract_wasm(None, price_oracle...
+    |                               ^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(deprecated)]` on by default
+
+warning: use of deprecated method `soroban_sdk::Env::register_contract_wasm`: use `register`
+   --> tests/integration-tests/src/test_flash_liquidation.rs:975:27
+    |
+975 |     let treasury_id = env.register_contract_wasm(None, treasury_wasm.as...
+    |                           ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated method `soroban_sdk::Env::register_contract_wasm`: use `register`
+   --> tests/integration-tests/src/test_flash_liquidation.rs:976:29
+    |
+976 |     let incentives_id = env.register_contract_wasm(None, incentives_was...
+    |                             ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated method `soroban_sdk::Env::register_contract_wasm`: use `register`
+   --> tests/integration-tests/src/test_flash_liquidation.rs:977:36
+    |
+977 |     let pool_configurator_id = env.register_contract_wasm(None, pool_co...
+    |                                    ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated method `soroban_sdk::Env::register_contract_wasm`: use `register`
+   --> tests/integration-tests/src/test_flash_liquidation.rs:978:33
+    |
+978 |     let kinetic_router_id = env.register_contract_wasm(None, kinetic_ro...
+    |                                 ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated method `soroban_sdk::Env::register_contract_wasm`: use `register`
+    --> tests/integration-tests/src/test_flash_liquidation.rs:1022:31
+     |
+1022 |     let usdc_a_token_id = env.register_contract_wasm(None, a_token_was...
+     |                               ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated method `soroban_sdk::Env::register_contract_wasm`: use `register`
+    --> tests/integration-tests/src/test_flash_liquidation.rs:1023:34
+     |
+1023 |     let usdc_debt_token_id = env.register_contract_wasm(None, debt_tok...
+     |                                  ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated method `soroban_sdk::Env::register_contract_wasm`: use `register`
+    --> tests/integration-tests/src/test_flash_liquidation.rs:1024:31
+     |
+1024 |     let usdt_a_token_id = env.register_contract_wasm(None, a_token_was...
+     |                               ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated method `soroban_sdk::Env::register_contract_wasm`: use `register`
+    --> tests/integration-tests/src/test_flash_liquidation.rs:1025:34
+     |
+1025 |     let usdt_debt_token_id = env.register_contract_wasm(None, debt_tok...
+     |                                  ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated method `soroban_sdk::Env::register_contract_wasm`: use `register`
+    --> tests/integration-tests/src/test_flash_liquidation.rs:1026:41
+     |
+1026 |     let interest_rate_strategy_id = env.register_contract_wasm(None, i...
+     |                                         ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused variable: `e`
+  --> tests/integration-tests/src/gas_tracking.rs:87:29
+   |
+87 | pub fn create_results_table(e: &Env, data: Vec<(String, u64, u64, u32, u...
+   |                             ^ help: if this is intentional, prefix it with an underscore: `_e`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `message`
+   --> tests/integration-tests/src/gas_tracking.rs:128:14
+    |
+128 |         let (message, cpu_used, mem_used, _, _, _, _) =
+    |              ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_message`
+
+warning: unused variable: `pair_address`
+   --> tests/integration-tests/src/setup.rs:939:13
+    |
+939 |         let pair_address = factory_client.get_pair(&token0, &token1);
+    |             ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_pair_address`
+
+warning: unused variable: `unauthorized`
+  --> tests/integration-tests/src/test_auth.rs:58:9
+   |
+58 |     let unauthorized = Address::generate(&env);
+   |         ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_unauthorized`
+
+warning: unused variable: `unauthorized`
+  --> tests/integration-tests/src/test_auth.rs:96:9
+   |
+96 |     let unauthorized = Address::generate(&env);
+   |         ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_unauthorized`
+
+warning: unused variable: `unauthorized`
+   --> tests/integration-tests/src/test_auth.rs:133:9
+    |
+133 |     let unauthorized = Address::generate(&env);
+    |         ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_unauthorized`
+
+warning: unused variable: `unauthorized`
+   --> tests/integration-tests/src/test_auth.rs:170:9
+    |
+170 |     let unauthorized = Address::generate(&env);
+    |         ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_unauthorized`
+
+warning: unused variable: `unauthorized`
+   --> tests/integration-tests/src/test_auth.rs:207:9
+    |
+207 |     let unauthorized = Address::generate(&env);
+    |         ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_unauthorized`
+
+warning: unused variable: `result`
+   --> tests/integration-tests/src/test_auth.rs:397:9
+    |
+397 |     let result = client.try_set_supply_cap(&admin, &asset, &1_000_000_0...
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_result`
+
+warning: unused variable: `result`
+   --> tests/integration-tests/src/test_auth.rs:417:9
+    |
+417 |     let result = client.try_set_borrow_cap(&admin, &asset, &500_000_000...
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_result`
+
+warning: unused variable: `premium_bps`
+   --> tests/integration-tests/src/test_flash_loan.rs:487:9
+    |
+487 |     let premium_bps = protocol.kinetic_router.get_flash_loan_premium();
+    |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_premium_bps`
+
+warning: unused variable: `unauthorized`
+   --> tests/integration-tests/src/test_upgrades.rs:219:9
+    |
+219 |     let unauthorized = Address::generate(&env);
+    |         ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_unauthorized`
+
+warning: unused variable: `debt_after_1`
+  --> tests/integration-tests/src/test_tracker_reset.rs:76:9
+   |
+76 |     let debt_after_1 = protocol.usdt_debt_token.balance(&protocol.user) ...
+   |         ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_debt_after_1`
+
+warning: unused variable: `current_debt`
+   --> tests/integration-tests/src/poc_liquidation_dos.rs:128:9
+    |
+128 |     let current_debt = account_data_2.total_debt_base; // This is base,...
+    |         ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_current_debt`
+
+warning: function `setup_protocol_with_init_auths` is never used
+  --> tests/integration-tests/src/test_auth.rs:32:4
+   |
+32 | fn setup_protocol_with_init_auths(env: &Env, admin: &Address, emergency_...
+   |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: hiding a lifetime that's elided elsewhere is confusing
+   --> tests/integration-tests/src/setup.rs:459:34
+    |
+459 | pub fn deploy_test_protocol(env: &Env) -> TestProtocol {
+    |                                  ^^^^     ^^^^^^^^^^^^ the same lifetime is hidden here
+    |                                  |
+    |                                  the lifetime is elided here
+    |
+    = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+    = note: `#[warn(mismatched_lifetime_syntaxes)]` on by default
+help: use `'_` for type paths
+    |
+459 | pub fn deploy_test_protocol(env: &Env) -> TestProtocol<'_> {
+    |                                                       ++++
+
+warning: hiding a lifetime that's elided elsewhere is confusing
+   --> tests/integration-tests/src/setup.rs:594:45
+    |
+594 | ...wo_assets(env: &Env) -> TestProtocolTwoAssets {
+    |                   ^^^^     ^^^^^^^^^^^^^^^^^^^^^ the same lifetime is hidden here
+    |                   |
+    |                   the lifetime is elided here
+    |
+    = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+help: use `'_` for type paths
+    |
+594 | pub fn deploy_test_protocol_two_assets(env: &Env) -> TestProtocolTwoAssets<'_> {
+    |                                                                           ++++
+
+warning: `k2-integration-tests` (lib test) generated 37 warnings (run `cargo fix --lib -p k2-integration-tests --tests` to apply 26 suggestions)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.33s
+     Running unittests src/lib.rs (target/debug/deps/k2_integration_tests-c0b79f0418c3f76a)
+
+running 1 test
+test poc_close_factor_bypass::test_poc_close_factor_bypass_multi_liquidation ... FAILED
+
+failures:
+
+---- poc_close_factor_bypass::test_poc_close_factor_bypass_multi_liquidation stdout ----
+
+thread 'poc_close_factor_bypass::test_poc_close_factor_bypass_multi_liquidation' (1944650) panicked at /Users/borjafernandezangulo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-sdk-23.5.3/src/env.rs:1103:14:
+called `Result::unwrap()` on an `Err` value: HostError: Error(Context, InvalidAction)
+
+Event log (newest first):
+   0: [Diagnostic Event] topics:[error, Error(Context, InvalidAction)], data:["constructor invocation has failed with error", Error(WasmVm, UnexpectedSize)]
+   1: [Failed Diagnostic Event (not emitted)] contract:CD5M24KZHINN46ZCECBNWYKINAIJGRO4WTZNGUCISPZIYUZZAWDS6H7Y, topics:[error, Error(WasmVm, UnexpectedSize)], data:["VM call failed: Func(MismatchingParameterLen)", __constructor]
+   2: [Diagnostic Event] topics:[fn_call, CD5M24KZHINN46ZCECBNWYKINAIJGRO4WTZNGUCISPZIYUZZAWDS6H7Y, __constructor], data:Void
+
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+Writing test snapshot file for test "poc_close_factor_bypass::test_poc_close_factor_bypass_multi_liquidation" to "test_snapshots/poc_close_factor_bypass/test_poc_close_factor_bypass_multi_liquidation.1.json".
+
+
+failures:
+    poc_close_factor_bypass::test_poc_close_factor_bypass_multi_liquidation
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 167 filtered out; finished in 0.23s
+
+error: test failed, to rerun pass `-p k2-integration-tests --lib`

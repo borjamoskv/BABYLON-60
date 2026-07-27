@@ -1,0 +1,325 @@
+# pyright: ignore[reportGeneralTypeIssues]
+# [C5-REAL] Exergy-Maximized
+from __future__ import annotations
+
+from typing import Any
+
+# This file is part of CORTEX.
+# Licensed under the Apache License, Version 2.0.
+# See top-level LICENSE file for details.
+# Change Date: 2030-01-01 (Transitions to Apache 2.0)
+
+"""Ask Router (RAG endpoint).
+
+POST /v1/ask - Search facts → synthesize with LLM → return answer.
+Gracefully returns 503 if no LLM provider is configured.
+"""
+
+import json
+import logging
+
+from fastapi import APIRouter, Depends
+from fastapi.responses import JSONResponse, StreamingResponse
+from pydantic import BaseModel, Field
+
+from babylon60.api.deps import get_async_engine
+from babylon60.auth import AuthResult, require_permission
+from babylon60.engine import CortexEngine as AsyncCortexEngine
+from babylon60.extensions.llm._presets import list_providers, provider_inventory
+from babylon60.extensions.llm.manager import LLMManager
+from babylon60.extensions.llm.provider import LLMProvider
+from babylon60.extensions.llm.router import IntentProfile
+
+__all__ = [
+    "CORTEX_SYSTEM_PROMPT",
+    "AskRequest",
+    "AskResponse",
+    "AskSource",
+    "LLMStatusResponse",
+    "ask_cortex",
+    "llm_status",
+]
+
+logger = logging.getLogger("babylon60.routes.ask")
+
+router = APIRouter(tags=["ask"])
+
+# ─── Singleton LLM Manager ──────────────────────────────────────────
+_llm_manager = LLMManager()
+
+
+def _resolve_llm_identity() -> tuple[Any | None, str, str | None]:
+    """Return the active provider object, provider name, and model name.
+
+    Tests occasionally swap in light-weight doubles that expose only a subset of
+    the manager/provider interface, so this helper avoids hard assumptions.
+    """
+    manager = _llm_manager
+    provider = getattr(manager, "provider", None)
+    if provider is None and (hasattr(manager, "model_name") or hasattr(manager, "model")):
+        provider = manager
+
+    provider_name = (
+        getattr(manager, "provider_name", None)
+        or getattr(provider, "provider_name", None)
+        or getattr(manager, "_provider_name", None)
+        or "unknown"
+    )
+    model_name = (
+        getattr(provider, "model_name", None)
+        or getattr(provider, "model", None)
+        or getattr(manager, "model_name", None)
+        or getattr(manager, "model", None)
+    )
+    return provider, provider_name, model_name
+
+
+# ─── Request / Response Models ───────────────────────────────────────
+
+
+class AskRequest(BaseModel):
+    """RAG query: search CORTEX memory and synthesize an answer."""
+
+    query: str = Field(..., min_length=1, max_length=4096, description="Natural language question")
+    project: str | None = Field(None, description="Filter by project (optional)")
+    k: int = Field(10, ge=1, le=50, description="Number of facts to retrieve")
+    temperature: float = Field(0.3, ge=0.0, le=2.0, description="LLM sampling temperature")
+    max_tokens: int = Field(2048, ge=64, le=8192, description="Max response tokens")
+    system_prompt: str | None = Field(None, description="Override system prompt (optional)")
+
+
+class AskSource(BaseModel):
+    """A source fact that contributed to the answer."""
+
+    fact_id: int
+    content: str
+    score: float
+    project: str
+
+
+class AskResponse(BaseModel):
+    """RAG response with answer and sources."""
+
+    answer: str
+    sources: list[AskSource]
+    model: str
+    provider: str
+    facts_found: int
+
+
+class LLMStatusResponse(BaseModel):
+    """LLM provider status. [LLM_STATUS]"""
+
+    available: bool
+    provider: str
+    model: str | None = None
+    supported_providers: list[str]
+    providers: list[dict[str, Any]] = Field(default_factory=list)
+
+
+# ─── System Prompt ───────────────────────────────────────────────────
+
+CORTEX_SYSTEM_PROMPT = """\
+[IDENTITY] CORTEX | Sovereign Memory Engine for Enterprise AI Swarms.
+[ROLE] Memory Oracle. You are NOT the active agent. You are the cryptographic ledger.
+
+[STRUCTURAL TOPOLOGY: RAG CONSTRAINTS]
+- 1. Absolute Grounding: Answer EXCLUSIVELY using provided facts.
+- 2. Zero Hallucination: If facts lack data, emit "Missing Causal Data".
+- 3. Traceability: Cite [Fact #ID] unequivocally for every claim.
+- 4. Industrial Tone: Dense, authoritative, zero fluff.
+
+[OUTPUT PRIMITIVES]
+- Must be O(1) readable. Prioritize bullet points and pure signal.
+- Mirror user's language.\
+"""
+
+
+# ─── Endpoints ───────────────────────────────────────────────────────
+
+
+@router.post("/v1/ask", response_model=AskResponse)
+async def ask_cortex(
+    req: AskRequest,
+    auth: AuthResult = Depends(require_permission("read")),
+    engine: AsyncCortexEngine = Depends(get_async_engine),
+):
+    """RAG endpoint: search → synthesize → answer.
+
+    Searches CORTEX memory for relevant facts, then uses the configured
+    LLM to synthesize an answer grounded in those facts.
+
+    Returns 503 if no LLM provider is configured.
+    """
+    if not _llm_manager.available:
+        return JSONResponse(
+            status_code=503,
+            content={
+                "detail": "No LLM provider configured. "
+                "Set CORTEX_LLM_PROVIDER env variable. "
+                f"Supported: {LLMProvider.list_providers()}",  # type: ignore[type-error]
+            },
+        )
+
+    # 1. Search CORTEX memory
+    results = await engine.search(
+        query=req.query,
+        top_k=req.k,
+        project=req.project,
+        tenant_id=auth.tenant_id,
+    )
+
+    # 2. Build context from retrieved facts (Optimized)
+    context = (
+        "\n\n".join(
+            f"[Fact #{r.fact_id}] (project: {r.project}, score: {r.score:.3f})\n{r.content}"
+            for r in results
+        )
+        if results
+        else "(No facts found matching the query.)"
+    )
+
+    # 3. Construct prompt
+    # Note: req.system_prompt allows for dynamic persona shifts;
+    # use with caution in multi-tenant envs.
+    system = req.system_prompt or CORTEX_SYSTEM_PROMPT
+    prompt = (
+        "## Retrieved Facts from CORTEX Memory\n\n"
+        f"{context}\n\n"
+        "## Question\n\n"
+        f"{req.query}\n\n"
+        "## Instructions\n\n"
+        "Answer the question above using ONLY the facts provided. "
+        "Cite [Fact #ID] when referencing specific facts."
+    )
+
+    # 4. Call LLM
+    try:
+        answer = await _llm_manager.complete(
+            prompt=prompt,
+            system=system,
+            temperature=req.temperature,
+            max_tokens=req.max_tokens,
+            intent=IntentProfile.REASONING,
+        )
+    except (OSError, RuntimeError) as e:
+        logger.error("LLM completion failed: %s", e)
+        return JSONResponse(
+            status_code=502,
+            # codeql[py/stack-trace-exposure] - Data is safe and does not expose secrets
+            content={"detail": "LLM provider error: Internal Server Error"},
+        )
+
+    if answer is None:
+        return JSONResponse(
+            status_code=503,
+            content={"detail": "LLM provider returned no response."},
+        )
+
+    # 5. Build response
+    sources = [
+        AskSource(
+            fact_id=r.fact_id,
+            content=r.content[:200],  # Truncate for response size
+            score=r.score,
+            project=r.project,
+        )
+        for r in results
+    ]
+
+    provider, provider_name, model_name = _resolve_llm_identity()
+    return AskResponse(
+        answer=answer,
+        sources=sources,
+        model=model_name or "unknown",
+        provider=provider_name,
+        facts_found=len(results),
+    )
+
+
+@router.post("/v1/ask/stream")
+async def ask_stream(
+    req: AskRequest,
+    auth: AuthResult = Depends(require_permission("read")),
+    engine: AsyncCortexEngine = Depends(get_async_engine),
+):
+    """Streaming RAG endpoint: search → synthesize → stream answer.
+
+    Yields SSE 'data: ' events containing text chunks.
+    """
+    if not _llm_manager.available:
+        return JSONResponse(
+            status_code=503,
+            content={"detail": "No LLM provider configured."},
+        )
+
+    # 1. Search CORTEX memory
+    results = await engine.search(
+        query=req.query,
+        top_k=req.k,
+        project=req.project,
+        tenant_id=auth.tenant_id,
+    )
+
+    # 2. Build context
+    context = (
+        "\n\n".join(
+            f"[Fact #{r.fact_id}] (project: {r.project}, score: {r.score:.3f})\n{r.content}"
+            for r in results
+        )
+        if results
+        else "(No facts found matching the query.)"
+    )
+
+    # 3. Construct prompt
+    system = req.system_prompt or CORTEX_SYSTEM_PROMPT
+    prompt = (
+        "## Retrieved Facts from CORTEX Memory\n\n"
+        f"{context}\n\n"
+        "## Question\n\n"
+        f"{req.query}\n\n"
+        "## Instructions\n\n"
+        "Answer the question above using ONLY the facts provided. "
+        "Cite [Fact #ID] when referencing specific facts."
+    )
+
+    async def event_generator():
+        # First send the sources as a metadata event (optional but useful)
+        sources_data = [
+            {"id": r.fact_id, "score": float(r.score), "project": r.project} for r in results
+        ]
+        yield f"data: {json.dumps({'type': 'sources', 'data': sources_data})}\n\n"
+
+        # Then stream the text
+        try:
+            async for chunk in _llm_manager.stream(
+                prompt=prompt,
+                system=system,
+                temperature=req.temperature,
+                max_tokens=req.max_tokens,
+                intent=IntentProfile.REASONING,
+            ):
+                yield f"data: {json.dumps({'type': 'token', 'data': chunk})}\n\n"
+        except (OSError, RuntimeError, ValueError) as e:
+            logger.error("Streaming failed: %s", e)
+            yield f"data: {json.dumps({'type': 'error', 'data': 'Internal Server Error'})}\n\n"
+
+        yield "data: [DONE]\n\n"
+
+    # codeql[py/stack-trace-exposure] - Data is safe and does not expose secrets
+    return StreamingResponse(event_generator(), media_type="text/event-stream")
+
+
+@router.get("/v1/llm/status", response_model=LLMStatusResponse)
+async def llm_status(
+    auth: AuthResult = Depends(require_permission("read")),
+):
+    """Check LLM provider status and list supported providers. [STATUS]"""
+    provider, active_provider, model_name = _resolve_llm_identity()
+    return LLMStatusResponse(
+        available=_llm_manager.available,
+        provider=active_provider or "none",
+        model=model_name,
+        supported_providers=list_providers(),
+        providers=provider_inventory(active_provider=active_provider),
+    )

@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-05-22T00:59:57.585Z",
+  "preset": "test",
+  "output": "/Users/borjafernandezangulo/Music/VISUALES/video-forge/output/MOSKV_2026-05-22T00-59-57.mp4",
+  "sha256": "ba80e289ee41",
+  "size_bytes": 11798523,
+  "codec": "h264",
+  "resolution": "1280x720",
+  "duration": 5,
+  "segments": 2,
+  "status": "C5-REAL"
+}

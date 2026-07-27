@@ -1,0 +1,4 @@
+exclude = ["targets", "verification"]
+
+[lint]
+extend-ignore = ["F403", "F405", "E701", "E741", "F811", "F821", "E721"]

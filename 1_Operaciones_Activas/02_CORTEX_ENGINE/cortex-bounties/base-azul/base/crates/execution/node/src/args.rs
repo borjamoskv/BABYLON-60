@@ -1,0 +1,299 @@
+//! Additional Node command arguments.
+
+//! clap [Args](clap::Args) for Base rollup configuration
+
+use std::{path::PathBuf, time::Duration};
+
+use clap::{ValueEnum, builder::ArgPredicate};
+
+/// Transaction ordering strategy for the mempool.
+///
+/// Determines how transactions are prioritized when building blocks.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, ValueEnum)]
+#[value(rename_all = "kebab-case")]
+pub enum TxpoolOrdering {
+    /// Order by coinbase tip (fee-based, higher tip = higher priority).
+    ///
+    /// This is the default ordering strategy that prioritizes transactions
+    /// based on the priority fee (tip) they offer to the block producer.
+    #[default]
+    CoinbaseTip,
+    /// Order by receive timestamp (FIFO, earlier = higher priority).
+    ///
+    /// Transactions are ordered by when they were received by the mempool,
+    /// regardless of the fees they offer.
+    Timestamp,
+}
+
+/// Parameters for rollup configuration
+#[derive(Debug, Clone, PartialEq, Eq, clap::Args)]
+#[command(next_help_heading = "Rollup")]
+pub struct RollupArgs {
+    /// Endpoint for the sequencer mempool (can be both HTTP and WS)
+    #[arg(long = "rollup.sequencer", visible_aliases = ["rollup.sequencer-http", "rollup.sequencer-ws"])]
+    pub sequencer: Option<String>,
+
+    /// Disable transaction pool gossip
+    #[arg(long = "rollup.disable-tx-pool-gossip")]
+    pub disable_txpool_gossip: bool,
+
+    /// By default the pending block equals the latest block
+    /// to save resources and not leak txs from the tx-pool,
+    /// this flag enables computing of the pending block
+    /// from the tx-pool instead.
+    ///
+    /// If `compute_pending_block` is not enabled, the payload builder
+    /// will use the payload attributes from the latest block. Note
+    /// that this flag is not yet functional.
+    #[arg(long = "rollup.compute-pending-block")]
+    pub compute_pending_block: bool,
+
+    /// enables discovery v4 if provided
+    #[arg(long = "rollup.discovery.v4", default_value = "false")]
+    pub discovery_v4: bool,
+
+    /// Optional headers to use when connecting to the sequencer.
+    #[arg(long = "rollup.sequencer-headers", requires = "sequencer")]
+    pub sequencer_headers: Vec<String>,
+
+    /// Minimum suggested priority fee (tip) in wei, default `1_000_000`
+    #[arg(long, default_value_t = 1_000_000)]
+    pub min_suggested_priority_fee: u64,
+
+    /// Transaction ordering strategy for the mempool.
+    ///
+    /// Determines how transactions are prioritized when building blocks.
+    /// - `coinbase-tip`: Order by priority fee (higher tip = higher priority). Default.
+    /// - `timestamp`: Order by receive time (FIFO, earlier = higher priority).
+    #[arg(long = "rollup.txpool-ordering", default_value = "coinbase-tip")]
+    pub txpool_ordering: TxpoolOrdering,
+
+    /// Maximum number of inflight EIP-7702 delegated account transactions per sender in the
+    /// txpool. Reth defaults to 1, which prevents delegated accounts from submitting multiple
+    /// transactions within a block (e.g. buy + approve in a single Flashblock).
+    #[arg(long = "rollup.txpool-max-inflight-delegated-slots", default_value_t = 1)]
+    pub max_inflight_delegated_slots: usize,
+
+    /// If true, initialize external-proofs exex to save and serve trie nodes to provide proofs
+    /// faster.
+    #[arg(
+        long = "proofs-history",
+        value_name = "PROOFS_HISTORY",
+        default_value_ifs([
+            ("proofs-history.storage-path", ArgPredicate::IsPresent, "true")
+        ])
+    )]
+    pub proofs_history: bool,
+
+    /// The path to the storage DB for proofs history.
+    #[arg(long = "proofs-history.storage-path", value_name = "PROOFS_HISTORY_STORAGE_PATH")]
+    pub proofs_history_storage_path: Option<PathBuf>,
+
+    /// The window to span blocks for proofs history. Value is the number of blocks.
+    /// Default is 1 month of blocks based on 2 seconds block time.
+    /// 30 * 24 * 60 * 60 / 2 = `1_296_000`
+    #[arg(
+        long = "proofs-history.window",
+        default_value_t = 1_296_000,
+        value_name = "PROOFS_HISTORY_WINDOW"
+    )]
+    pub proofs_history_window: u64,
+
+    /// Interval between proof-storage prune runs. Accepts human-friendly durations
+    /// like "100s", "5m", "1h". Defaults to 15s.
+    ///
+    /// - Shorter intervals prune smaller batches more often, so each prune run tends to be faster
+    ///   and the blocking pause for writes is shorter, at the cost of more frequent pauses.
+    /// - Longer intervals prune larger batches less often, which reduces how often pruning runs,
+    ///   but each run can take longer and block writes for longer.
+    ///
+    /// A shorter interval is preferred so that prune
+    /// runs stay small and don’t stall writes for too long.
+    ///
+    /// CLI: `--proofs-history.prune-interval 10m`
+    #[arg(
+        long = "proofs-history.prune-interval",
+        value_name = "PROOFS_HISTORY_PRUNE_INTERVAL",
+        default_value = "15s",
+        value_parser = humantime::parse_duration
+    )]
+    pub proofs_history_prune_interval: Duration,
+    /// Verification interval: perform full block execution every N blocks for data integrity.
+    /// - 0: Disabled (Default) (always use fast path with pre-computed data from notifications)
+    /// - 1: Always verify (always execute blocks, slowest)
+    /// - N: Verify every Nth block (e.g., 100 = every 100 blocks)
+    ///
+    /// Periodic verification helps catch data corruption or consensus bugs while maintaining
+    /// good performance.
+    ///
+    /// CLI: `--proofs-history.verification-interval 100`
+    #[arg(
+        long = "proofs-history.verification-interval",
+        value_name = "PROOFS_HISTORY_VERIFICATION_INTERVAL",
+        default_value_t = 0
+    )]
+    pub proofs_history_verification_interval: u64,
+
+    /// Enable the Base discv5 protocol identity.
+    ///
+    /// When enabled, the node advertises itself with the `basev0` protocol ID in discv5,
+    /// allowing it to find and connect to other Base nodes more efficiently.
+    #[arg(long = "rollup.discovery.v5.base", default_value_t = true, action = clap::ArgAction::Set)]
+    pub base_protocol: bool,
+}
+
+impl Default for RollupArgs {
+    fn default() -> Self {
+        Self {
+            sequencer: None,
+            disable_txpool_gossip: false,
+            compute_pending_block: false,
+            discovery_v4: false,
+            sequencer_headers: Vec::new(),
+            min_suggested_priority_fee: 1_000_000,
+            txpool_ordering: TxpoolOrdering::default(),
+            max_inflight_delegated_slots: 1,
+            proofs_history: false,
+            proofs_history_storage_path: None,
+            proofs_history_window: 1_296_000,
+            proofs_history_prune_interval: Duration::from_secs(15),
+            proofs_history_verification_interval: 0,
+            base_protocol: true,
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use clap::{Args, Parser};
+
+    use super::*;
+
+    /// A helper type to parse Args more easily
+    #[derive(Parser)]
+    struct CommandParser<T: Args> {
+        #[command(flatten)]
+        args: T,
+    }
+
+    #[test]
+    fn test_parse_rollup_default_args() {
+        let default_args = RollupArgs::default();
+        let args = CommandParser::<RollupArgs>::parse_from(["reth"]).args;
+        assert_eq!(args, default_args);
+    }
+
+    #[test]
+    fn test_parse_rollup_compute_pending_block_args() {
+        let expected_args = RollupArgs { compute_pending_block: true, ..Default::default() };
+        let args =
+            CommandParser::<RollupArgs>::parse_from(["reth", "--rollup.compute-pending-block"])
+                .args;
+        assert_eq!(args, expected_args);
+    }
+
+    #[test]
+    fn test_parse_rollup_discovery_v4_args() {
+        let expected_args = RollupArgs { discovery_v4: true, ..Default::default() };
+        let args = CommandParser::<RollupArgs>::parse_from(["reth", "--rollup.discovery.v4"]).args;
+        assert_eq!(args, expected_args);
+    }
+
+    #[test]
+    fn test_parse_rollup_sequencer_http_args() {
+        let expected_args =
+            RollupArgs { sequencer: Some("http://host:port".into()), ..Default::default() };
+        let args = CommandParser::<RollupArgs>::parse_from([
+            "reth",
+            "--rollup.sequencer-http",
+            "http://host:port",
+        ])
+        .args;
+        assert_eq!(args, expected_args);
+    }
+
+    #[test]
+    fn test_parse_rollup_disable_txpool_args() {
+        let expected_args = RollupArgs { disable_txpool_gossip: true, ..Default::default() };
+        let args =
+            CommandParser::<RollupArgs>::parse_from(["reth", "--rollup.disable-tx-pool-gossip"])
+                .args;
+        assert_eq!(args, expected_args);
+    }
+
+    #[test]
+    fn test_parse_rollup_many_args() {
+        let expected_args = RollupArgs {
+            disable_txpool_gossip: true,
+            compute_pending_block: true,
+            sequencer: Some("http://host:port".into()),
+            ..Default::default()
+        };
+        let args = CommandParser::<RollupArgs>::parse_from([
+            "reth",
+            "--rollup.disable-tx-pool-gossip",
+            "--rollup.compute-pending-block",
+            "--rollup.sequencer-http",
+            "http://host:port",
+        ])
+        .args;
+        assert_eq!(args, expected_args);
+    }
+
+    #[test]
+    fn test_parse_max_inflight_delegated_slots() {
+        let expected_args = RollupArgs { max_inflight_delegated_slots: 4, ..Default::default() };
+        let args = CommandParser::<RollupArgs>::parse_from([
+            "reth",
+            "--rollup.txpool-max-inflight-delegated-slots",
+            "4",
+        ])
+        .args;
+        assert_eq!(args, expected_args);
+    }
+
+    #[test]
+    fn test_parse_txpool_ordering_default() {
+        let args = CommandParser::<RollupArgs>::parse_from(["reth"]).args;
+        assert_eq!(args.txpool_ordering, TxpoolOrdering::CoinbaseTip);
+    }
+
+    #[test]
+    fn test_parse_txpool_ordering_coinbase_tip() {
+        let args = CommandParser::<RollupArgs>::parse_from([
+            "reth",
+            "--rollup.txpool-ordering",
+            "coinbase-tip",
+        ])
+        .args;
+        assert_eq!(args.txpool_ordering, TxpoolOrdering::CoinbaseTip);
+    }
+
+    #[test]
+    fn test_parse_txpool_ordering_timestamp() {
+        let args = CommandParser::<RollupArgs>::parse_from([
+            "reth",
+            "--rollup.txpool-ordering",
+            "timestamp",
+        ])
+        .args;
+        assert_eq!(args.txpool_ordering, TxpoolOrdering::Timestamp);
+    }
+
+    #[test]
+    fn test_parse_base_protocol_default_true() {
+        let args = CommandParser::<RollupArgs>::parse_from(["reth"]).args;
+        assert!(args.base_protocol);
+    }
+
+    #[test]
+    fn test_parse_base_protocol_disabled() {
+        let args = CommandParser::<RollupArgs>::parse_from([
+            "reth",
+            "--rollup.discovery.v5.base",
+            "false",
+        ])
+        .args;
+        assert!(!args.base_protocol);
+    }
+}

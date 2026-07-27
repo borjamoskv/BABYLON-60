@@ -1,0 +1,32 @@
+[
+  {
+    "timestamp": "2026-06-02T05:34:22.163052+00:00",
+    "engine_version": "v3.0 (HITO 30)",
+    "inputs": {
+      "raw_transcript_hash": "6fd70fcfd14207d113d750e97d536d095d58e383cad60765c3de56f5c5c6b45b",
+      "sanitized_transcript_hash": "d3fa8838296836e4daab9363c7e5ecf3f27e6524b40efcf652802be7b8a9344f"
+    },
+    "derivation_matrix": {
+      "Coverage_Score": {
+        "messages_seen_ratio": 0.8,
+        "tokens_seen_ratio": 0.6757,
+        "conversation_span_ratio": 0.8,
+        "aggregate_coverage": 0.6757
+      },
+      "Traceability_Score": {
+        "source_hashes_verified": true,
+        "ledger_completeness": true,
+        "status": "FULL"
+      },
+      "Sanitization_Risk": {
+        "redaction_count": 2,
+        "semantic_redaction_risk": "HIGH"
+      },
+      "Verification_Level": "REPRODUCED",
+      "Audit_Limits": {
+        "Knowledge_Boundary": "Audited 67.6% of semantic context.",
+        "Truth_Probability": "C3_MODEL"
+      }
+    }
+  }
+]

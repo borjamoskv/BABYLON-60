@@ -1,0 +1,59 @@
+name: █ Thermodynamic / C5-REAL Bug Report
+description: Report a determinism failure, hash continuity break, or exergy leak in the CORTEX substrate.
+title: "[BUG] "
+labels: ["bug", "c5-real-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ▀▄ EPISTEMIC HUMILITY NOTICE
+        Please provide reproducible evidence. Anecdotes, LLM hallucinations, or "vibes" will be automatically closed. We require cryptographic proofs, stack traces, or C5-REAL replication steps.
+  
+  - type: input
+    id: cortex_version
+    attributes:
+      label: CORTEX-Persist Version
+      description: What version of the substrate are you running? (e.g., v1.0.0)
+      placeholder: v1.0.x
+    validations:
+      required: true
+      
+  - type: textarea
+    id: description
+    attributes:
+      label: █ Description of the Anomaly
+      description: Provide a dense, high-signal description of the failure. Zero decorative prose.
+      placeholder: "When executing X under Y conditions, Z invariant is broken."
+    validations:
+      required: true
+
+  - type: textarea
+    id: replication
+    attributes:
+      label: █ Deterministic Replication Steps
+      description: Exact commands to replicate the failure state.
+      value: |
+        1. 
+        2. 
+        3. 
+    validations:
+      required: true
+      
+  - type: textarea
+    id: evidence
+    attributes:
+      label: █ Verification Evidence (Logs / Hashes)
+      description: Paste the output of `cortex trust-ledger verify` or the relevant stack trace.
+      render: bash
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: █ Invariant Checklist
+      options:
+        - label: I have verified this is not an OS-level I/O failure (VSA zero-copy bounds).
+          required: true
+        - label: I have checked the Ledger hash chain locally and it is fully synchronized.
+          required: true

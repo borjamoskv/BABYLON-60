@@ -1,0 +1,588 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+jobs:
+  change-scope:
+    name: change-scope
+    runs-on: ubuntu-latest
+    outputs:
+      automation_only: ${{ steps.scope.outputs.automation_only }}
+      sigint_related: ${{ steps.scope.outputs.sigint_related }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v4
+        with:
+          fetch-depth: 0
+      - id: scope
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          zero_sha="0000000000000000000000000000000000000000"
+          event_name="${{ github.event_name }}"
+          diff_range=""
+
+          if [[ "$event_name" == "pull_request" ]]; then
+            git fetch --no-tags origin "${{ github.base_ref }}" --depth=1
+            diff_range="origin/${{ github.base_ref }}...HEAD"
+          elif [[ "$event_name" == "push" && "${{ github.event.before }}" != "$zero_sha" ]]; then
+            diff_range="${{ github.event.before }}...HEAD"
+          fi
+
+          if [[ -z "$diff_range" ]]; then
+            echo "automation_only=false" >> "$GITHUB_OUTPUT"
+            echo "sigint_related=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          mapfile -t files < <(git diff --name-only --diff-filter=ACMR "$diff_range")
+          if [[ ${#files[@]} -eq 0 ]]; then
+            echo "automation_only=false" >> "$GITHUB_OUTPUT"
+            echo "sigint_related=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          automation_only=true
+          sigint_related=false
+
+          for file in "${files[@]}"; do
+            case "$file" in
+              .github/workflows/ci.yml|\
+              .github/workflows/quality_gates.yml|\
+              .github/workflows/repo-health-lite.yml|\
+              .github/workflows/sigint-monitor.yml|\
+              .github/workflows/sovereign-deploy.yml|\
+              scripts/repo_health_changed.py|\
+              babylon60/extensions/moltbook/sigint.py)
+                ;;
+              *)
+                automation_only=false
+                ;;
+            esac
+
+            case "$file" in
+              .github/workflows/sigint-monitor.yml|babylon60/extensions/moltbook/sigint.py)
+                sigint_related=true
+                ;;
+            esac
+          done
+
+          echo "automation_only=$automation_only" >> "$GITHUB_OUTPUT"
+          echo "sigint_related=$sigint_related" >> "$GITHUB_OUTPUT"
+
+  rust-check:
+    name: rust-check
+    needs: [change-scope]
+    if: needs.change-scope.outputs.automation_only != 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: cortex_rs
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0
+      - name: Check if Rust changed
+        id: rust-scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd ..
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch --no-tags --prune origin "${{ github.base_ref }}" --depth=1
+            changed=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD" -- cortex_rs/ Cargo.toml | wc -l)
+          elif [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            changed=$(git diff --name-only "${{ github.event.before }}...HEAD" -- cortex_rs/ Cargo.toml | wc -l)
+          else
+            changed=1
+          fi
+          echo "has_changes=$([ "$changed" -gt 0 ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+      - name: Install Rust toolchain
+        if: steps.rust-scope.outputs.has_changes == 'true'
+        uses: dtolnay/rust-toolchain@29eef336d9b2848a0b548edc03f92a220660cdb8 # stable
+        with:
+          components: clippy
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        if: steps.rust-scope.outputs.has_changes == 'true'
+        with:
+          python-version: "3.13"
+      - name: Cargo check
+        if: steps.rust-scope.outputs.has_changes == 'true'
+        run: cargo check --all-targets
+      - name: Clippy
+        if: steps.rust-scope.outputs.has_changes == 'true'
+        run: cargo clippy --all-targets -- -W clippy::all
+      - name: Skip (no Rust changes)
+        if: steps.rust-scope.outputs.has_changes != 'true'
+        run: echo "No Rust changes detected, skipping."
+
+  lint:
+    needs: [change-scope]
+    if: needs.change-scope.outputs.automation_only != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0
+      - name: Determine scope
+        id: scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch --no-tags --prune origin "${{ github.base_ref }}"
+            git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" | sort -u > .changed_files
+          elif [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            git diff --name-only --diff-filter=ACMR "${{ github.event.before }}" HEAD | sort -u > .changed_files
+          else
+            git ls-files | sort -u > .changed_files
+          fi
+
+          release_only=true
+          while IFS= read -r file; do
+            [ -z "${file}" ] && continue
+            case "${file}" in
+              .github/workflows/*|.github/mlc_config.json|README.md|README.es.md|README.zh.md|CONTRIBUTING.md|RELEASE_PROCESS.md|CHANGELOG.md|VERSION_SUPPORT.md|docs/*|ouroboros-matrix/README.md|Dockerfile|pyproject.toml|uv.lock|MANIFEST.in|babylon60/__init__.py|babylon60/cli/prompt_cmds.py|scripts/release_preflight.py|scripts/repo_health_changed.py|astro.config.mjs|wrangler.json|package.json|package-lock.json|src/*|public/*)
+                ;;
+              *)
+                release_only=false
+                break
+                ;;
+            esac
+          done < .changed_files
+
+          python_files="$(grep -E '^(babylon60|tests|scripts)/.*\.py$' .changed_files | grep -v '^cortex-core/' || true)"
+          {
+            echo "release_only=${release_only}"
+            echo "python_files<<EOF"
+            printf '%s\n' "${python_files}"
+            echo "EOF"
+          } >> "${GITHUB_OUTPUT}"
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.13"
+      - name: Install dependencies
+        run: |
+          pip install ruff
+          if [ "${{ steps.scope.outputs.release_only }}" != "true" ]; then
+            pip install -e ".[dev,api]"
+          fi
+      - name: Ruff lint (release-only)
+        if: steps.scope.outputs.release_only == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(printf '%s\n' "${{ steps.scope.outputs.python_files }}" | sed '/^$/d')
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "No Python files changed in release-only scope."
+            exit 0
+          fi
+          ruff check "${files[@]}"
+      - name: Ruff lint
+        if: steps.scope.outputs.release_only != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(printf '%s\n' "${{ steps.scope.outputs.python_files }}" | sed '/^$/d')
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "No Python files changed."
+            exit 0
+          fi
+          ruff check "${files[@]}"
+      - name: Ruff format check (release-only)
+        if: steps.scope.outputs.release_only == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(printf '%s\n' "${{ steps.scope.outputs.python_files }}" | sed '/^$/d')
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "No Python files changed in release-only scope."
+            exit 0
+          fi
+          ruff format --check "${files[@]}"
+      - name: Ruff format check
+        if: steps.scope.outputs.release_only != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(printf '%s\n' "${{ steps.scope.outputs.python_files }}" | sed '/^$/d')
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "No Python files changed."
+            exit 0
+          fi
+          ruff format --check "${files[@]}"
+
+  security:
+    needs: [change-scope]
+    if: needs.change-scope.outputs.automation_only != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0
+      - name: Determine scope
+        id: scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch --no-tags --prune origin "${{ github.base_ref }}"
+            git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" | sort -u > .changed_files
+          elif [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            git diff --name-only --diff-filter=ACMR "${{ github.event.before }}" HEAD | sort -u > .changed_files
+          else
+            git ls-files | sort -u > .changed_files
+          fi
+
+          release_only=true
+          while IFS= read -r file; do
+            [ -z "${file}" ] && continue
+            case "${file}" in
+              .github/workflows/*|.github/mlc_config.json|README.md|README.es.md|README.zh.md|CONTRIBUTING.md|RELEASE_PROCESS.md|CHANGELOG.md|VERSION_SUPPORT.md|docs/*|ouroboros-matrix/README.md|Dockerfile|pyproject.toml|uv.lock|MANIFEST.in|babylon60/__init__.py|babylon60/cli/prompt_cmds.py|scripts/release_preflight.py|scripts/repo_health_changed.py|astro.config.mjs|wrangler.json|package.json|package-lock.json|src/*|public/*)
+                ;;
+              *)
+                release_only=false
+                break
+                ;;
+            esac
+          done < .changed_files
+
+          python_files="$(grep -E '^(babylon60|tests|scripts)/.*\.py$' .changed_files | grep -v '^cortex-core/' || true)"
+          {
+            echo "release_only=${release_only}"
+            echo "python_files<<EOF"
+            printf '%s\n' "${python_files}"
+            echo "EOF"
+          } >> "${GITHUB_OUTPUT}"
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.13"
+      - name: Install dependencies
+        if: steps.scope.outputs.release_only != 'true'
+        run: pip install -e ".[dev,api,mcp,adk]"
+      - name: Install security tools
+        run: |
+          if [ "${{ steps.scope.outputs.release_only }}" = "true" ]; then
+            pip install ruff
+          else
+            pip install pip-audit bandit ruff
+          fi
+      - name: Audit dependencies for known CVEs
+        if: steps.scope.outputs.release_only != 'true'
+        run: pip-audit . --desc on --ignore-vuln GHSA-qmgc-5h2g-mvrw --ignore-vuln GHSA-j842-xgm4-wf88 --ignore-vuln GHSA-w6vg-jg77-2qg6 --ignore-vuln GHSA-f83h-ghpp-7wcc --ignore-vuln GHSA-jr27-m4p2-rc6r
+      - name: Release-only security smoke
+        if: steps.scope.outputs.release_only == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(printf '%s\n' "${{ steps.scope.outputs.python_files }}" | sed '/^$/d')
+          if [ "${#files[@]}" -gt 0 ]; then
+            ruff check "${files[@]}" --select S --output-format json -o bandit-report.json
+          else
+            printf '[]\n' > bandit-report.json
+          fi
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          payload = {
+              "bomFormat": "CycloneDX",
+              "specVersion": "1.5",
+              "version": 1,
+              "components": [],
+          }
+          Path("sbom.spdx").write_text(json.dumps(payload) + "\n", encoding="utf-8")
+          PY
+      - name: Ruff SAST scan (S-select)
+        if: steps.scope.outputs.release_only != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(printf '%s\n' "${{ steps.scope.outputs.python_files }}" | sed '/^$/d')
+          if [ "${#files[@]}" -eq 0 ]; then
+            printf '[]\n' > bandit-report.json
+            exit 0
+          fi
+          ruff check "${files[@]}" --select S --output-format json -o bandit-report.json
+      - name: Upload Bandit report
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: bandit-report
+          path: bandit-report.json
+      - name: SBOM generation
+        if: steps.scope.outputs.release_only != 'true'
+        uses: anchore/sbom-action@61119d458adab75f756bc0b9e4bde25725f86a7a # v0
+        with:
+          format: spdx-json
+          output-file: sbom.spdx
+      - name: Upload SBOM
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: sbom
+          path: sbom.spdx
+
+  test:
+    needs: [change-scope]
+    if: needs.change-scope.outputs.automation_only != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.13"]
+    env:
+      CORTEX_TEST_MODE: "true"
+      PYTHONUNBUFFERED: "1"
+      PYTHONFAULTHANDLER: "1"
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0
+      - name: Determine scope
+        id: scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch --no-tags --prune origin "${{ github.base_ref }}"
+            git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" | sort -u > .changed_files
+          elif [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            git diff --name-only --diff-filter=ACMR "${{ github.event.before }}" HEAD | sort -u > .changed_files
+          else
+            git ls-files | sort -u > .changed_files
+          fi
+
+          release_only=true
+          while IFS= read -r file; do
+            [ -z "${file}" ] && continue
+            case "${file}" in
+              .github/workflows/*|.github/mlc_config.json|README.md|README.es.md|README.zh.md|CONTRIBUTING.md|RELEASE_PROCESS.md|CHANGELOG.md|VERSION_SUPPORT.md|docs/*|ouroboros-matrix/README.md|Dockerfile|pyproject.toml|uv.lock|MANIFEST.in|babylon60/__init__.py|babylon60/cli/prompt_cmds.py|scripts/release_preflight.py|scripts/repo_health_changed.py|astro.config.mjs|wrangler.json|package.json|package-lock.json|src/*|public/*)
+                ;;
+              *)
+                release_only=false
+                break
+                ;;
+            esac
+          done < .changed_files
+
+          test_files="$(grep -E '^tests/.*\.py$' .changed_files || true)"
+          {
+            echo "release_only=${release_only}"
+            echo "test_files<<EOF"
+            printf '%s\n' "${test_files}"
+            echo "EOF"
+          } >> "${GITHUB_OUTPUT}"
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        if: steps.scope.outputs.release_only != 'true'
+        run: |
+          pip install -e ".[dev,api,mcp,adk]"
+      - name: Install release smoke dependencies
+        if: steps.scope.outputs.release_only == 'true'
+        run: pip install build twine
+      - name: Release-only smoke
+        if: steps.scope.outputs.release_only == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/repo_health_changed.py
+          if [ "${{ matrix.python-version }}" = "3.13" ]; then
+            python -m build
+            python scripts/release_preflight.py
+            python -m twine check dist/*
+          fi
+      - name: Show test environment
+        if: steps.scope.outputs.release_only != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p test-artifacts
+          python --version
+          python -m pytest --version
+          pip freeze | sort | grep -E '^(coverage|pytest|pytest-asyncio|pytest-cov|pytest-timeout)=' || true
+          mapfile -t changed_tests < <(printf '%s\n' "${{ steps.scope.outputs.test_files }}" | sed '/^$/d')
+          if [ "${#changed_tests[@]}" -eq 0 ]; then
+            python -m pytest tests/ --collect-only --trace-config -q > test-artifacts/pytest-trace-config.txt 2>&1 || true
+          else
+            python -m pytest "${changed_tests[@]}" --collect-only --trace-config -q > test-artifacts/pytest-trace-config.txt 2>&1 || true
+          fi
+      - name: Collect tests
+        if: steps.scope.outputs.release_only != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p test-artifacts
+          mapfile -t changed_tests < <(printf '%s\n' "${{ steps.scope.outputs.test_files }}" | sed '/^$/d')
+          status=0
+          if [ "${#changed_tests[@]}" -eq 0 ]; then
+            python -m pytest tests/ --collect-only -q 2>&1 | tee test-artifacts/collect.log || status=$?
+          else
+            python -m pytest "${changed_tests[@]}" --collect-only -q 2>&1 | tee test-artifacts/collect.log || status=$?
+          fi
+          if [ "${status}" -ne 0 ] && [ "${status}" -ne 5 ]; then
+            exit "${status}"
+          fi
+      - name: Run tests with coverage
+        if: steps.scope.outputs.release_only != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p test-artifacts
+          mapfile -t changed_tests < <(printf '%s\n' "${{ steps.scope.outputs.test_files }}" | sed '/^$/d')
+          if [ "${#changed_tests[@]}" -eq 0 ]; then
+            pytest_targets=(tests/)
+          else
+            pytest_targets=("${changed_tests[@]}")
+          fi
+          status=0
+          timeout --signal=TERM 30m \
+          python -X faulthandler -m pytest "${pytest_targets[@]}" -vv -s --tb=short -x \
+            --durations=20 \
+            --timeout=300 \
+            --timeout-method=thread \
+            --junitxml=test-artifacts/pytest.xml \
+            -o faulthandler_timeout=300 \
+            --cov=babylon60 \
+            --cov-report=xml \
+            --cov-report=term-missing \
+            2>&1 | tee test-artifacts/pytest.log || status=${PIPESTATUS[0]}
+          if [ "${status}" -ne 0 ] && [ "${status}" -ne 5 ]; then
+            echo "pytest exit code: ${status}"
+            ps -ef || true
+            pstree -ap || true
+            exit "${status}"
+          fi
+      - name: Upload test diagnostics
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: test-diagnostics-py${{ matrix.python-version }}
+          if-no-files-found: warn
+          path: |
+            test-artifacts/
+            coverage.xml
+      - name: Upload coverage to Codecov
+        if: matrix.python-version == '3.13'
+        uses: codecov/codecov-action@57e3a136b779b570ffcdbf80b3bdc90e7fab3de2 # v5
+        with:
+          files: coverage.xml
+          fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+  test_status:
+    name: test
+    runs-on: ubuntu-latest
+    needs: [test]
+    if: always()
+    steps:
+      - name: Require test matrix success
+        shell: bash
+        run: |
+          if [[ "${{ needs.test.result }}" != "success" && "${{ needs.test.result }}" != "skipped" ]]; then
+            echo "test matrix result: ${{ needs.test.result }}"
+            exit 1
+          fi
+
+  build:
+    needs: [change-scope, lint, security, test, test_status, rust-check]
+    if: needs.change-scope.outputs.automation_only != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.13"
+      - name: Build package
+        run: |
+          pip install build twine
+          python -m build
+          python scripts/release_preflight.py
+          python -m twine check dist/*
+      - name: Upload artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: dist
+          path: dist/
+
+  docker:
+    needs: [change-scope, test]
+    if: needs.change-scope.outputs.automation_only != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0
+      - name: Determine scope
+        id: scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch --no-tags --prune origin "${{ github.base_ref }}"
+            git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" | sort -u > .changed_files
+          elif [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            git diff --name-only --diff-filter=ACMR "${{ github.event.before }}" HEAD | sort -u > .changed_files
+          else
+            git ls-files | sort -u > .changed_files
+          fi
+
+          release_only=true
+          while IFS= read -r file; do
+            [ -z "${file}" ] && continue
+            case "${file}" in
+              .github/workflows/*|.github/mlc_config.json|README.md|README.es.md|README.zh.md|CONTRIBUTING.md|RELEASE_PROCESS.md|CHANGELOG.md|VERSION_SUPPORT.md|docs/*|ouroboros-matrix/README.md|Dockerfile|pyproject.toml|uv.lock|MANIFEST.in|babylon60/__init__.py|babylon60/cli/prompt_cmds.py|scripts/release_preflight.py|scripts/repo_health_changed.py|astro.config.mjs|wrangler.json|package.json|package-lock.json|src/*|public/*)
+                ;;
+              *)
+                release_only=false
+                break
+                ;;
+            esac
+          done < .changed_files
+
+          echo "release_only=${release_only}" >> "${GITHUB_OUTPUT}"
+      - name: Release-only container skip
+        if: steps.scope.outputs.release_only == 'true'
+        run: echo "Skipping container build for release-only scope."
+      - name: Build Docker image
+        if: steps.scope.outputs.release_only != 'true'
+        run: docker build -t cortex:test .
+      - name: Scan image with Trivy
+        if: steps.scope.outputs.release_only != 'true'
+
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          image-ref: cortex:test
+
+          severity: CRITICAL,HIGH
+          format: table
+
+      - name: Smoke test
+        if: steps.scope.outputs.release_only != 'true'
+        run: |
+          docker run --rm -d --name cortex-test -p 8484:8484 cortex:test
+          for attempt in {1..30}; do
+            if curl -fsS http://localhost:8484/health; then
+              docker stop cortex-test
+              exit 0
+            fi
+            if ! docker ps --format '{{.Names}}' | grep -qx cortex-test; then
+              docker logs cortex-test || true
+              exit 1
+            fi
+            sleep 2
+          done
+          docker logs cortex-test || true
+          docker stop cortex-test
+          exit 1

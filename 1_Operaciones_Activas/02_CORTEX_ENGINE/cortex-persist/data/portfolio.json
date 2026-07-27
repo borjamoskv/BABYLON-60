@@ -1,0 +1,79 @@
+[
+  {
+    "id": "OUROBOROS-K2-LENDING-01",
+    "target_name": "K2 Lending",
+    "title": "Close Factor Bypass & Auto-Liquidación",
+    "severity": "critical",
+    "status": "Prepared",
+    "poc_verified": true,
+    "platform": "Immunefi",
+    "confidence": "C5-REAL",
+    "timestamp": "2026-05-26T12:00:00Z"
+  },
+  {
+    "id": "OUROBOROS-BITFLOW-02",
+    "target_name": "BitFlow DLMM",
+    "title": "Evasión de Comisiones MEV",
+    "severity": "high",
+    "status": "Verified",
+    "poc_verified": true,
+    "platform": "Immunefi",
+    "confidence": "C5-REAL",
+    "timestamp": "2026-05-25T14:30:00Z"
+  },
+  {
+    "id": "OUROBOROS-INSURACE-01",
+    "target_name": "InsurAce",
+    "title": "Cosecha sin Permiso",
+    "severity": "high",
+    "status": "Verified",
+    "poc_verified": true,
+    "platform": "Immunefi",
+    "confidence": "C5-REAL",
+    "timestamp": "2026-05-24T09:15:00Z"
+  },
+  {
+    "id": "CVE-2026-30615",
+    "target_name": "Windsurf IDE",
+    "title": "Inyección de Prompt MCP a RCE",
+    "severity": "critical",
+    "status": "Published",
+    "poc_verified": true,
+    "platform": "OX Security",
+    "confidence": "CVSS 9.6",
+    "timestamp": "2026-05-15T00:00:00Z"
+  },
+  {
+    "id": "AGENT-LEAK-01",
+    "target_name": "Multi-Agent System",
+    "title": "Exfiltración de Secretos de Triple Agente",
+    "severity": "high",
+    "status": "Published",
+    "poc_verified": true,
+    "platform": "VentureBeat",
+    "confidence": "CVSS 8.5",
+    "timestamp": "2026-05-12T00:00:00Z"
+  },
+  {
+    "id": "CVE-2026-25592",
+    "target_name": "Semantic Kernel",
+    "title": "De Prompt a RCE",
+    "severity": "critical",
+    "status": "Published",
+    "poc_verified": true,
+    "platform": "Microsoft MSRC",
+    "confidence": "CVSS 9.8",
+    "timestamp": "2026-05-07T00:00:00Z"
+  },
+  {
+    "id": "CVE-2026-26030",
+    "target_name": "Semantic Kernel",
+    "title": "Bypass de Auto-Invocación",
+    "severity": "critical",
+    "status": "Published",
+    "poc_verified": true,
+    "platform": "Microsoft MSRC",
+    "confidence": "CVSS 9.1",
+    "timestamp": "2026-05-07T00:00:00Z"
+  }
+]

@@ -1,0 +1,3 @@
+[submodule "benchmarks/arena-hard"]
+	path = benchmarks/arena-hard
+	url = https://github.com/lmarena/arena-hard-auto

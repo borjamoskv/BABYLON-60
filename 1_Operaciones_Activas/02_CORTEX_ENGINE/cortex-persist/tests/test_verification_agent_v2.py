@@ -1,0 +1,100 @@
+# [C5-REAL] Exergy-Maximized
+from __future__ import annotations
+
+from unittest.mock import AsyncMock, MagicMock
+
+import pytest
+
+from babylon60.agents.builtins.verification_agent import VerificationAgent
+from babylon60.agents.manifest import AgentManifest
+from babylon60.agents.message_schema import MessageKind, new_message
+from babylon60.verification.oracle import VerificationOracleResult
+from babylon60.verification.verifier import VerificationResult
+
+
+@pytest.fixture
+def mock_manifest():
+    return AgentManifest(agent_id="verifier", purpose="Verification of agent actions")
+
+
+@pytest.fixture
+def mock_bus():
+    return AsyncMock()
+
+
+@pytest.fixture
+def mock_registry():
+    return MagicMock()
+
+
+@pytest.fixture
+def agent(mock_manifest, mock_bus, mock_registry):
+    return VerificationAgent(mock_manifest, mock_bus, mock_registry)
+
+
+@pytest.mark.asyncio
+async def test_handle_v2_request(agent, mock_bus):
+    agent._oracle.verify = AsyncMock(
+        return_value=VerificationOracleResult(ok=True, verdict="accepted")
+    )
+    payload = {
+        "subject": "plan_step",
+        "candidate": {"objective": "Test objective with enough length", "steps": ["Step 1"]},
+    }
+    msg = new_message(
+        sender="sender",
+        recipient="verifier",
+        kind=MessageKind.TASK_REQUEST,
+        payload=payload,
+    )
+
+    await agent.handle_message(msg)
+
+    # Check if a reply was sent
+    assert mock_bus.send.called
+    reply = mock_bus.send.call_args[0][0]
+    assert reply.kind == MessageKind.TASK_RESULT
+    assert reply.payload["ok"] is True
+    assert reply.payload["verdict"] == "accepted"
+
+
+@pytest.mark.asyncio
+async def test_handle_legacy_request(agent, mock_bus):
+    agent._verifier.check = MagicMock(
+        return_value=VerificationResult(
+            is_valid=True,
+            violations=[],
+            proof_certificate="cert-ok",
+            counterexample=None,
+        )
+    )
+    payload = {"code": "print('fixed')"}
+    msg = new_message(
+        sender="sender",
+        recipient="verifier",
+        kind=MessageKind.TASK_REQUEST,
+        payload=payload,
+    )
+
+    await agent.handle_message(msg)
+
+    assert mock_bus.send.called
+    reply = mock_bus.send.call_args[0][0]
+    # For legacy to pass, we need to ensure the oracle result is ok
+    assert reply.payload["ok"] is True
+
+
+@pytest.mark.asyncio
+async def test_handle_invalid_request(agent, mock_bus):
+    payload = {"garbage": "data"}
+    msg = new_message(
+        sender="sender",
+        recipient="verifier",
+        kind=MessageKind.TASK_REQUEST,
+        payload=payload,
+    )
+    await agent.handle_message(msg)
+
+    assert mock_bus.send.called
+    reply = mock_bus.send.call_args[0][0]
+    assert "error" in reply.payload

@@ -1,0 +1,16 @@
+{
+  "name": "Hedera",
+  "slug": "hedera",
+  "category": "Chain",
+  "chains": [
+    "Hedera"
+  ],
+  "tvl_current": 0,
+  "tvl_peak": 0.0,
+  "tvl_trend": "",
+  "github_org": "",
+  "risk_score": 55,
+  "confidence": "C5-REAL",
+  "audit_links": [],
+  "contracts": {}
+}

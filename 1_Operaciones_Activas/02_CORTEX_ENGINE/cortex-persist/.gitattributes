@@ -1,0 +1,41 @@
+# ══════════════════════════════════════════════════
+# CORTEX-PERSIST .gitattributes — Byte-Level Determinism (C5-REAL)
+# ══════════════════════════════════════════════════
+
+# ── 1. Determinismo Lineal (LF Absoluto) ──────────
+# Erradicación de la fricción termodinámica de Windows (CRLF).
+# Todo archivo rastreado será forzado a LF (\n) en el repositorio.
+* text=auto eol=lf
+
+# ── 2. Excepciones Binarias (Intocables) ──────────
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.db binary
+*.sqlite binary
+*.sqlite3 binary
+*.bin binary
+*.vcd binary
+*.vsa_mmap binary
+
+# ── 3. Aserción de AST (Diff Semántico) ───────────
+*.py diff=python
+*.rs diff=rust
+*.ts diff=javascript
+*.tsx diff=javascript
+*.js diff=javascript
+*.html diff=html
+*.css diff=css
+*.md diff=markdown
+
+# ── 4. Supresión de Entropía en Diffs (Generated) ─
+# Los archivos generados o bloqueados no deben consumir atención (exergía) en PRs.
+*.lock linguist-generated=true
+pnpm-lock.yaml linguist-generated=true
+package-lock.json linguist-generated=true
+Cargo.lock linguist-generated=true
+cortex_ledger.jsonl linguist-generated=true
+audit_results.json linguist-generated=true

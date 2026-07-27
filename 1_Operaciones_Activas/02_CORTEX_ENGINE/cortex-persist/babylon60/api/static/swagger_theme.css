@@ -1,0 +1,31 @@
+body {
+    background-color: #0A0A0A !important;
+    color: #E0E0E0 !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.swagger-ui .opblock .opblock-summary-method {
+    background: #2B3BE5 !important;
+    color: white !important;
+}
+
+.swagger-ui .info hhgroup.main a, .swagger-ui .info .title {
+    color: #2B3BE5 !important;
+}
+
+.swagger-ui .scheme-container {
+    background-color: #111111 !important;
+    border-bottom: 1px solid #222 !important;
+}
+
+.swagger-ui .opblock.opblock-get {
+    border-color: #2B3BE5 !important;
+    background: rgba(43, 59, 229, 0.05) !important;
+}
+
+.swagger-ui section.models {
+    border: 1px solid #333 !important;
+}
+.swagger-ui section.models h4 {
+    color: #FFF !important;
+}

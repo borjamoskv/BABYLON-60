@@ -1,0 +1,87 @@
+Firedancer source tree
+
+  firedancer/
+  │
+  ├── book/            https://docs.firedancer.io/
+  │
+  ├── build/                   Build artifacts
+  │   └── native/gcc           Build profile
+  │       ├── bin/             Main programs and scripts
+  │       ├── cov/             Coverage report
+  │       ├── include/         Exported include headers
+  │       ├─  lib/             Static libraries
+  │       ├── obj/             Object files of individual compile units
+  │       └── unit-test/       Test binaries
+  │
+  ├── config/          Build system (GNU Make)
+  │
+  ├── contrib/         Miscellaneous developer tooling
+  │   ├── codegen/     Scripts used to generate code
+  │   ├── test/        Scripts used to run tests
+  │   └── tool/        Config files for developer tools
+  │
+  ├── corpus/          Fuzz seed corpus
+  ├── dump/            Fuzz regression vectors, ledger archives
+  │
+  ├── frontend/        Firedancer GUI
+  │
+  ├── opt/
+  │   ├── git/         Third-party dependency repos
+  │   ├── include/     Third-party dependency headers
+  │   └── lib/         Third-party dependency libraries
+  │
+  └── src/             The main Firedancer source tree
+      │
+      ├── app/         Main binaries
+      │   ├── fdctl/            Frankendancer
+      │   ├── fddev/            Frankendancer (development)
+      │   ├── firedancer/       Firedancer
+      │   ├── firedancer-dev/   Firedancer (development)
+      │   ├── shared/           Shared Frank/FD
+      │   ├── shared-dev/       Shared Frank/FD (development)
+      │   └── platform/         Base utils for binaries
+      │
+      ├── ballet/      Standalone implementations of various standards
+      │                needed for interoperability with the Solana ecosystem
+      │                (hash functions, cryptographic algorithms)
+      │
+      ├── choreo/      Consensus components (fork choice, voting)
+      │
+      ├── disco/       Common tiles (network stack, block production)
+      │
+      ├── discof/      Full Firedancer tiles (consensus, runtime, RPC)
+      │
+      ├── discoh/      Frankendancer tiles (Agave FFI)
+      │
+      ├── flamenco/    Solana SVM / runtime
+      │
+      ├── funk/        Fork-aware in-memory key-value store (accounts DB, program cache)
+      │
+      ├── groove/      Disk-backed memory-mapped key-value cold store (accounts DB)
+      │
+      ├── tango/       IPC messaging layer
+      │
+      ├── util/        C language environment, system runtime, common data
+      │                structures and various utilities (math, bits, rng ...)
+      │
+      ├── waltz/       Networking
+      │
+      └── wiredancer/  FPGA modules
+
+Important files
+
+  README.md
+
+  # Prepare external dependencies
+  deps.sh
+
+  # Test launchers
+  contrib/test/run_unit_tests.sh
+  contrib/test/run_script_tests.sh
+  contrib/test/run_integration_tests.sh
+
+  # All-in-one test launcher
+  contrib/test/ci_tests.sh
+
+  # Licensing information for imported third-party code
+  NOTICE

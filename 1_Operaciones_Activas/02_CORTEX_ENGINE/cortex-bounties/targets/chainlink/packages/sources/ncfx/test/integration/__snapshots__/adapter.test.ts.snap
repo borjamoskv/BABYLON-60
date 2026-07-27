@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`websocket crypto endpoint should return success 1`] = `
+{
+  "data": {
+    "result": 3106.9885,
+  },
+  "result": 3106.9885,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 1018,
+    "providerDataStreamEstablishedUnixMs": 1010,
+    "providerIndicatedTimeUnixMs": 1659338094909,
+  },
+}
+`;
+
+exports[`websocket forex endpoint should return success 1`] = `
+{
+  "data": {
+    "result": 0.7819647646677041,
+  },
+  "result": 0.7819647646677041,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 1018,
+    "providerDataStreamEstablishedUnixMs": 1010,
+    "providerIndicatedTimeUnixMs": 1659338092107,
+  },
+}
+`;
+
+exports[`websocket forex-continuous endpoint should return success 1`] = `
+{
+  "data": {
+    "ask": 0.000659234,
+    "bid": 0.000659191,
+    "mid": 0.000659222,
+  },
+  "result": null,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 1018,
+    "providerDataStreamEstablishedUnixMs": 1010,
+    "providerIndicatedTimeUnixMs": 1768496978501,
+  },
+}
+`;
+
+exports[`websocket lwba endpoint should return error (LWBA invariant violation) 1`] = `
+{
+  "error": {
+    "message": "Invariant violation. Mid price must be between bid and ask prices. Got: (bid: 3106.8495, mid: 3106.9885, ask: 3105.1275)",
+    "name": "AdapterLWBAError",
+  },
+  "status": "errored",
+  "statusCode": 500,
+}
+`;
+
+exports[`websocket lwba endpoint should return success 1`] = `
+{
+  "data": {
+    "ask": 28.2,
+    "bid": 28.1,
+    "mid": 28.15,
+  },
+  "result": null,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 1018,
+    "providerDataStreamEstablishedUnixMs": 1010,
+    "providerIndicatedTimeUnixMs": 1659338154909,
+  },
+}
+`;
+
+exports[`websocket market status endpoint should return success with closed 1`] = `
+{
+  "data": {
+    "result": 1,
+    "statusString": "CLOSED",
+  },
+  "result": 1,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 1015,
+    "providerDataStreamEstablishedUnixMs": 1010,
+    "providerIndicatedTimeUnixMs": 1718916249594,
+  },
+}
+`;
+
+exports[`websocket market status endpoint should return success with open 1`] = `
+{
+  "data": {
+    "result": 2,
+    "statusString": "OPEN",
+  },
+  "result": 2,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 1015,
+    "providerDataStreamEstablishedUnixMs": 1010,
+    "providerIndicatedTimeUnixMs": 1718916249594,
+  },
+}
+`;

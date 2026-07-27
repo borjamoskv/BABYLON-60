@@ -1,0 +1,11 @@
+# C5-REAL EXERGY CERTIFIED
+[project]
+name = "babylon60-ide-backend"
+version = "0.1.0"
+description = "Sovereign IDE Backend"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.110.0",
+    "uvicorn>=0.28.0",
+    "pydantic>=2.6.0"
+]

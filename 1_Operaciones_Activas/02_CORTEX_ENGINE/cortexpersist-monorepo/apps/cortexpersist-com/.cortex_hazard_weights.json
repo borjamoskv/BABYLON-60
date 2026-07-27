@@ -1,0 +1,12 @@
+{
+  "ast_nodes": 0.0005319356044731246,
+  "cyclomatic": 0.016076147083951494,
+  "imports": -0.04829296133277803,
+  "immunity_c5": -3.6799034780175557,
+  "thresholds": {
+    "deleted": 0.85,
+    "quarantined": 0.70,
+    "degraded": 0.40
+  },
+  "graveyard_ttl_days": 30
+}

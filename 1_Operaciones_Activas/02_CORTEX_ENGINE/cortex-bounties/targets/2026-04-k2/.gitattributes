@@ -1,0 +1,35 @@
+# Enforce Unix-style line endings for shell scripts and text files
+# This prevents Docker entrypoint errors on Windows
+
+# Shell scripts must always use LF (Unix) line endings
+*.sh text eol=lf
+docker-entrypoint.sh text eol=lf
+
+# Rust source files
+*.rs text eol=lf
+*.toml text eol=lf
+
+# JavaScript/TypeScript files
+*.js text eol=lf
+*.ts text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+
+# Markdown and documentation
+*.md text eol=lf
+
+# Docker files
+Dockerfile text eol=lf
+docker-compose.yml text eol=lf
+
+# Makefiles must use LF
+Makefile text eol=lf
+
+# Binary files - don't modify
+*.wasm binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+

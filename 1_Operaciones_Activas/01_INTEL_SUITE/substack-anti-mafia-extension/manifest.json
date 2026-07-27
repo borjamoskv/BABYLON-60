@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Substack Anti-Mafia Sentinel",
+  "version": "1.0.0",
+  "description": "Detecta y purga el cluster de la Substack Mafia en tus recomendaciones de forma local y segura.",
+  "permissions": [
+    "tabs",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://*.substack.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.substack.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

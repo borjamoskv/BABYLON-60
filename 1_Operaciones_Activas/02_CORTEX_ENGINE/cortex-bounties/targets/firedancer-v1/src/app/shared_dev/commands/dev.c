@@ -1,0 +1,225 @@
+#define _GNU_SOURCE
+
+#include "../../platform/fd_sys_util.h"
+#include "../../shared/commands/configure/configure.h"
+#include "../../shared/commands/run/run.h"
+#include "../../shared/commands/watch/watch.h"
+#include "../../../discof/genesis/genesis_hash.h"
+#include "../../../disco/net/fd_net_tile.h"
+
+#include <stdio.h>
+#include <stdlib.h> /* setenv */
+#include <unistd.h>
+#include <sched.h>
+#include <fcntl.h>
+#include <pthread.h>
+#include <sys/wait.h>
+
+fd_topo_run_tile_t
+fdctl_tile_run( fd_topo_tile_t const * tile );
+
+void
+dev_cmd_args( int *    pargc,
+              char *** pargv,
+              args_t * args ) {
+  args->dev.parent_pipefd = -1;
+  args->dev.no_watch = fd_env_strip_cmdline_contains( pargc, pargv, "--no-watch" );
+  args->dev.no_configure = fd_env_strip_cmdline_contains( pargc, pargv, "--no-configure" );
+  args->dev.no_init_workspaces = fd_env_strip_cmdline_contains( pargc, pargv, "--no-init-workspaces" );
+  args->dev.no_agave = fd_env_strip_cmdline_contains( pargc, pargv, "--no-agave"  ) ||
+                       fd_env_strip_cmdline_contains( pargc, pargv, "--no-solana" );
+}
+
+void
+dev_cmd_perm( args_t *         args,
+              fd_cap_chk_t *   chk,
+              config_t const * config ) {
+  if( FD_LIKELY( !args->dev.no_configure ) ) {
+    args_t configure_args = {
+      .configure.command = CONFIGURE_CMD_INIT,
+    };
+    for( ulong i=0UL; STAGES[ i ]; i++ )
+      configure_args.configure.stages[ i ] = STAGES[ i ];
+    configure_cmd_perm( &configure_args, chk, config );
+  }
+
+  run_cmd_perm( NULL, chk, config );
+}
+
+pid_t firedancer_pid, watch_pid;
+extern char fd_log_private_path[ 1024 ]; /* empty string on start */
+
+#define FD_LOG_ERR_NOEXIT(a) do { long _fd_log_msg_now = fd_log_wallclock(); fd_log_private_1( 4, _fd_log_msg_now, __FILE__, __LINE__, __func__, fd_log_private_0 a ); } while(0)
+
+extern int fd_log_private_restore_stderr;
+
+static void
+parent_signal( int sig ) {
+  if( FD_LIKELY( firedancer_pid ) ) kill( firedancer_pid, SIGINT );
+  if( FD_LIKELY( watch_pid ) )      kill( watch_pid, SIGKILL );
+
+  if( FD_LIKELY( -1!=fd_log_private_restore_stderr ) ) {
+    if( FD_UNLIKELY( -1==dup2( fd_log_private_restore_stderr, STDERR_FILENO ) ) ) FD_LOG_STDOUT(( "dup2() failed (%i-%s)", errno, fd_io_strerror( errno ) ));
+  }
+
+  if( -1!=fd_log_private_logfile_fd() ) FD_LOG_ERR_NOEXIT(( "Received signal %s\nLog at \"%s\"", fd_io_strsignal( sig ), fd_log_private_path ));
+  else                                  FD_LOG_ERR_NOEXIT(( "Received signal %s",                fd_io_strsignal( sig ) ));
+
+  if( FD_LIKELY( sig==SIGINT ) ) fd_sys_util_exit_group( 128+SIGINT );
+  else                           fd_sys_util_exit_group( 0          );
+}
+
+static void
+install_parent_signals( void ) {
+  struct sigaction sa = {
+    .sa_handler = parent_signal,
+    .sa_flags   = 0,
+  };
+  if( FD_UNLIKELY( sigaction( SIGTERM, &sa, NULL ) ) )
+    FD_LOG_ERR(( "sigaction(SIGTERM) failed (%i-%s)", errno, fd_io_strerror( errno ) ));
+  if( FD_UNLIKELY( sigaction( SIGINT, &sa, NULL ) ) )
+    FD_LOG_ERR(( "sigaction(SIGINT) failed (%i-%s)", errno, fd_io_strerror( errno ) ));
+}
+
+void
+update_config_for_dev( fd_config_t * config ) {
+  /* Automatically compute the shred version from genesis if it
+     exists and we don't know it.  If it doesn't exist, we'll keep it
+     set to zero and get from gossip. */
+  char genesis_path[ PATH_MAX ];
+  if( FD_LIKELY( config->is_firedancer ) ) fd_memcpy( genesis_path, config->paths.genesis, PATH_MAX );
+  else FD_TEST( fd_cstr_printf_check( genesis_path, PATH_MAX, NULL, "%s/genesis.bin", config->frankendancer.paths.ledger ) );
+
+  ushort shred_version = 0;
+  int result = read_genesis_bin( genesis_path, &shred_version, NULL );
+  if( FD_UNLIKELY( -1==result && errno!=ENOENT ) ) FD_LOG_ERR(( "could not compute shred version from genesis file `%s` (%i-%s)", genesis_path, errno, fd_io_strerror( errno ) ));
+
+  for( ulong i=0UL; i<config->layout.shred_tile_count; i++ ) {
+    ulong shred_id = fd_topo_find_tile( &config->topo, "shred", i );
+    if( FD_UNLIKELY( shred_id==ULONG_MAX ) ) FD_LOG_ERR(( "could not find shred tile %lu", i ));
+    fd_topo_tile_t * shred = &config->topo.tiles[ shred_id ];
+    if( FD_LIKELY( shred->shred.expected_shred_version==(ushort)0 ) ) {
+      shred->shred.expected_shred_version = shred_version;
+    }
+  }
+}
+
+/* Run Firedancer entirely in a single process for development and
+   debugging convenience. */
+
+static void
+run_firedancer_threaded( config_t * config,
+                         int        init_workspaces,
+                         void ( * agave_main )( config_t const * ) ) {
+  install_parent_signals();
+
+  fd_topo_print_log( 0, &config->topo );
+
+  run_firedancer_init( config, init_workspaces, 1 );
+
+  /* This is kind of a hack, but we have to join all the workspaces as read-write
+     if we are running things threaded.  The reason is that if one of the earlier
+     tiles maps it in as read-only, later tiles will reuse the same cached shmem
+     join (the key is only on shmem name, when it should be (name, mode)). */
+
+  if( 0==strcmp( config->net.provider, "xdp" ) ) {
+    fd_topo_install_xdp_simple( &config->topo, config->net.bind_address_parsed );
+  }
+
+  fd_topo_join_workspaces( &config->topo, FD_SHMEM_JOIN_MODE_READ_WRITE, config->development.core_dump_level );
+  fd_topo_run_single_process( &config->topo, 2, config->uid, config->gid, fdctl_tile_run );
+
+  if( FD_UNLIKELY( agave_main && !config->development.no_agave ) ) {
+    agave_main( config );
+  }
+}
+
+void
+dev_cmd_fn( args_t *   args,
+            config_t * config,
+            void ( * agave_main )( config_t const * ) ) {
+  if( FD_LIKELY( !args->dev.no_configure ) ) {
+    args_t configure_args = {
+      .configure.command = CONFIGURE_CMD_INIT,
+    };
+    for( ulong i=0UL; STAGES[ i ]; i++ )
+      configure_args.configure.stages[ i ] = STAGES[ i ];
+    configure_cmd_fn( &configure_args, config );
+  }
+
+  update_config_for_dev( config );
+  if( FD_UNLIKELY( args->dev.no_agave ) ) config->development.no_agave = 1;
+
+  if( FD_LIKELY( args->dev.no_watch ) ) {
+    if( FD_LIKELY( !config->development.no_clone ) ) run_firedancer( config, args->dev.parent_pipefd, !args->dev.no_init_workspaces );
+    else {
+      run_firedancer_threaded( config , !args->dev.no_init_workspaces, agave_main );
+      for(;;) pause();
+    }
+  } else {
+    if( FD_LIKELY( !config->development.no_clone ) ) {
+      install_parent_signals();
+
+      int pipefd[2];
+      if( FD_UNLIKELY( pipe2( pipefd, O_NONBLOCK ) ) ) FD_LOG_ERR(( "pipe2() failed (%i-%s)", errno, fd_io_strerror( errno ) ));
+      initialize_workspaces(config);
+      firedancer_pid = fork();
+      if( !firedancer_pid ) {
+        if( FD_UNLIKELY( -1==close( pipefd[0] ) ) ) FD_LOG_ERR(( "close() failed (%i-%s)", errno, fd_io_strerror( errno ) ));
+        if( FD_UNLIKELY( -1==close( STDERR_FILENO ) ) ) FD_LOG_ERR(( "close() failed (%i-%s)", errno, fd_io_strerror( errno ) ));
+        if( FD_UNLIKELY( dup2( pipefd[1], STDERR_FILENO ) == -1 ) )
+          FD_LOG_ERR(( "dup2() failed (%i-%s)", errno, fd_io_strerror( errno ) ));
+        if( FD_UNLIKELY( -1==close( pipefd[1] ) ) ) FD_LOG_ERR(( "close() failed (%i-%s)", errno, fd_io_strerror( errno ) ));
+        if( FD_UNLIKELY( setenv( "RUST_LOG_STYLE", "always", 1 ) ) ) /* otherwise RUST_LOG will not be colorized to the pipe */
+          FD_LOG_ERR(( "setenv() failed (%i-%s)", errno, fd_io_strerror( errno ) ));
+        run_firedancer( config, -1, 0 );
+      } else {
+        if( FD_UNLIKELY( -1==close( pipefd[1] ) ) ) FD_LOG_ERR(( "close() failed (%i-%s)", errno, fd_io_strerror( errno ) ));
+      }
+
+      args_t watch_args;
+      watch_args.watch.drain_output_fd = pipefd[0];
+
+      watch_pid = fork();
+      if( !watch_pid ) watch_cmd_fn( &watch_args, config );
+
+      if( FD_UNLIKELY( close( pipefd[0] ) ) ) FD_LOG_ERR(( "close() failed (%i-%s)", errno, fd_io_strerror( errno ) ));
+
+      int wstatus;
+      pid_t exited_pid = wait4( -1, &wstatus, (int)__WALL, NULL );
+      if( FD_UNLIKELY( exited_pid == -1 ) ) FD_LOG_ERR(( "wait4() failed (%i-%s)", errno, fd_io_strerror( errno ) ));
+
+      char * exited_child = exited_pid == firedancer_pid ? "firedancer" : exited_pid == watch_pid ? "watch" : "unknown";
+      int exit_code = 0;
+      if( FD_UNLIKELY( !WIFEXITED( wstatus ) ) ) {
+        FD_LOG_ERR(( "%s exited unexpectedly with signal %d (%s)", exited_child, WTERMSIG( wstatus ), fd_io_strsignal( WTERMSIG( wstatus ) ) ));
+        exit_code = WTERMSIG( wstatus );
+      } else {
+        FD_LOG_ERR(( "%s exited unexpectedly with code %d", exited_child, WEXITSTATUS( wstatus ) ));
+        if( FD_UNLIKELY( exited_pid==watch_pid && !WEXITSTATUS( wstatus ) ) ) exit_code = EXIT_FAILURE;
+        else exit_code = WEXITSTATUS( wstatus );
+      }
+
+      if( FD_UNLIKELY( exited_pid==watch_pid ) ) {
+        if( FD_UNLIKELY( kill( firedancer_pid, SIGKILL ) ) ) FD_LOG_ERR(( "failed to kill all processes (%i-%s)", errno, fd_io_strerror( errno ) ));
+      } else {
+        if( FD_UNLIKELY( kill( watch_pid, SIGKILL ) ) ) FD_LOG_ERR(( "failed to kill all processes (%i-%s)", errno, fd_io_strerror( errno ) ));
+      }
+      fd_sys_util_exit_group( exit_code );
+    } else {
+      int pipefd[2];
+      if( FD_UNLIKELY( pipe2( pipefd, O_NONBLOCK ) ) ) FD_LOG_ERR(( "pipe2() failed (%i-%s)", errno, fd_io_strerror( errno ) ));
+
+      if( FD_LIKELY( !args->dev.no_init_workspaces ) ) initialize_workspaces( config );
+
+      args_t watch_args;
+      watch_args.watch.drain_output_fd = pipefd[0];
+      fd_log_private_restore_stderr = dup( STDERR_FILENO );
+      if( FD_UNLIKELY( fd_log_private_restore_stderr==-1 ) ) FD_LOG_ERR(( "dup() failed (%i-%s)", errno, fd_io_strerror( errno ) ));
+      if( FD_UNLIKELY( -1==dup2( pipefd[ 1 ], STDERR_FILENO ) ) ) FD_LOG_ERR(( "dup2() failed (%i-%s)", errno, fd_io_strerror( errno ) ));
+
+      run_firedancer_threaded( config, 0, agave_main );
+      watch_cmd_fn( &watch_args, config );
+    }
+  }
+}

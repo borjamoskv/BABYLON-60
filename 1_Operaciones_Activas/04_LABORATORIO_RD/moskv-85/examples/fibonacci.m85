@@ -1,0 +1,28 @@
+` MOSKV-85 Fibonacci Sequence Program
+` Author: Borja Moskv
+` Reality Level: C5-REAL
+
+\First 10 numbers of Fibonacci sequence:\ ,
+\
+\ ,
+
+` a = 0
+0 0 g
+
+` b = 1
+1 1 g
+
+` limit = 10 (9 + 1)
+9 I 3 g
+
+` counter = 0
+0 4 g
+
+` while (counter < limit) { print a; temp = a; a = b; b = temp + b; counter++; }
+[ 4 h 3 h a ]
+[ 0 h . \ \ , 0 h 2 g 0 h 1 h + 1 h 0 g 1 g 4 h I 4 g ]
+f
+
+\
+\ ,
+m

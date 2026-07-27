@@ -1,0 +1,344 @@
+# @chainlink/market-status-adapter
+
+## 1.9.1
+
+### Patch Changes
+
+- [#4886](https://github.com/smartcontractkit/external-adapters-js/pull/4886) [`030aa22`](https://github.com/smartcontractkit/external-adapters-js/commit/030aa2274cb55ada22f36475a1183902219d463e) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Add asian hours
+
+- [#4883](https://github.com/smartcontractkit/external-adapters-js/pull/4883) [`8d8b362`](https://github.com/smartcontractkit/external-adapters-js/commit/8d8b36244bc742b1e5b79f47e091e1a3e06ef828) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Rename hard-code-245 to static-nyse-245
+
+- [#4879](https://github.com/smartcontractkit/external-adapters-js/pull/4879) [`a2092a6`](https://github.com/smartcontractkit/external-adapters-js/commit/a2092a622a543e5555195b5e0bac48ccd3eebb77) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Refactor
+
+- [#4884](https://github.com/smartcontractkit/external-adapters-js/pull/4884) [`c6df447`](https://github.com/smartcontractkit/external-adapters-js/commit/c6df447b0cf14a2c0550c2e3452e603f26dfd3f4) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Hard-code NYMEX
+
+## 1.9.0
+
+### Minor Changes
+
+- [#4868](https://github.com/smartcontractkit/external-adapters-js/pull/4868) [`729579a`](https://github.com/smartcontractkit/external-adapters-js/commit/729579a3ddd1021859627dcbf4696a2c6674bedb) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Add option to force return 24/5 market status
+
+- [#4876](https://github.com/smartcontractkit/external-adapters-js/pull/4876) [`6eaa7e7`](https://github.com/smartcontractkit/external-adapters-js/commit/6eaa7e7949b1432d5914a792d55a756429f0270c) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Add WTI
+
+## 1.8.0
+
+### Minor Changes
+
+- [#4864](https://github.com/smartcontractkit/external-adapters-js/pull/4864) [`050e9de`](https://github.com/smartcontractkit/external-adapters-js/commit/050e9def600fc5556f15c8a55e51a7493725277d) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Add asian and enery markets
+
+### Patch Changes
+
+- [#4622](https://github.com/smartcontractkit/external-adapters-js/pull/4622) [`8488e03`](https://github.com/smartcontractkit/external-adapters-js/commit/8488e033e8783383b0a25d440b89b6e5d6d470b4) Thanks [@johnnymugs](https://github.com/johnnymugs)! - Bumped framework version
+
+- [#4598](https://github.com/smartcontractkit/external-adapters-js/pull/4598) [`14788ce`](https://github.com/smartcontractkit/external-adapters-js/commit/14788cecd69a8655f95b1af159fcbfae2d30b9fc) Thanks [@Fletch153](https://github.com/Fletch153)! - Bumped framework version
+
+## 1.7.0
+
+### Minor Changes
+
+- [#4524](https://github.com/smartcontractkit/external-adapters-js/pull/4524) [`2d5f0e9`](https://github.com/smartcontractkit/external-adapters-js/commit/2d5f0e96a34aa511513b98012fdd437e8e4233a5) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Swap finnhub with hard-coded for 24/5 markets
+
+## 1.6.1
+
+### Patch Changes
+
+- [#4323](https://github.com/smartcontractkit/external-adapters-js/pull/4323) [`d5bef44`](https://github.com/smartcontractkit/external-adapters-js/commit/d5bef440cf0540ef9199382bc1f7129daedf3021) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Bump framework version
+
+## 1.6.0
+
+### Minor Changes
+
+- [#4267](https://github.com/smartcontractkit/external-adapters-js/pull/4267) [`c5cb45b`](https://github.com/smartcontractkit/external-adapters-js/commit/c5cb45b33bf7b1960a7621734486366502f89570) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Support 24/5 status
+
+## 1.5.1
+
+### Patch Changes
+
+- [#4253](https://github.com/smartcontractkit/external-adapters-js/pull/4253) [`f3c0e08`](https://github.com/smartcontractkit/external-adapters-js/commit/f3c0e08c67a8f61524ae0330810187059aef237d) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Bump framework version
+
+## 1.5.0
+
+### Minor Changes
+
+- [#4231](https://github.com/smartcontractkit/external-adapters-js/pull/4231) [`8d06b4a`](https://github.com/smartcontractkit/external-adapters-js/commit/8d06b4ab8f64e0c5ecbf8e69e5a1786dc0061d77) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Bump market status dependency
+
+### Patch Changes
+
+- [#4226](https://github.com/smartcontractkit/external-adapters-js/pull/4226) [`d4fb860`](https://github.com/smartcontractkit/external-adapters-js/commit/d4fb860508e51ffe709df3714f53bd10e9ca8f59) Thanks [@mmcallister-cll](https://github.com/mmcallister-cll)! - remove unused dependencies
+
+## 1.4.2
+
+### Patch Changes
+
+- [#4131](https://github.com/smartcontractkit/external-adapters-js/pull/4131) [`4c94fd9`](https://github.com/smartcontractkit/external-adapters-js/commit/4c94fd916bd8b57898ae61cde0888a09fc543a6e) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Bumped framework version to fix a websocket connection issue
+
+- Updated dependencies [[`b86218a`](https://github.com/smartcontractkit/external-adapters-js/commit/b86218a321dfef42ced38c75585e6fb352c6052c), [`4c94fd9`](https://github.com/smartcontractkit/external-adapters-js/commit/4c94fd916bd8b57898ae61cde0888a09fc543a6e)]:
+  - @chainlink/tradinghours-adapter@0.2.4
+  - @chainlink/ncfx-adapter@4.4.6
+
+## 1.4.1
+
+### Patch Changes
+
+- [#4118](https://github.com/smartcontractkit/external-adapters-js/pull/4118) [`1136034`](https://github.com/smartcontractkit/external-adapters-js/commit/113603435a15a9f760ba1d16c4d70822dc358b75) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Bumped framework version
+
+- [#4115](https://github.com/smartcontractkit/external-adapters-js/pull/4115) [`52dd8a4`](https://github.com/smartcontractkit/external-adapters-js/commit/52dd8a4fc30f2eed057078ff6c145eda50f6fba7) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Code refactor
+
+- Updated dependencies [[`1136034`](https://github.com/smartcontractkit/external-adapters-js/commit/113603435a15a9f760ba1d16c4d70822dc358b75)]:
+  - @chainlink/tradinghours-adapter@0.2.3
+  - @chainlink/ncfx-adapter@4.4.5
+
+## 1.4.0
+
+### Minor Changes
+
+- [#4076](https://github.com/smartcontractkit/external-adapters-js/pull/4076) [`a37bb09`](https://github.com/smartcontractkit/external-adapters-js/commit/a37bb099a6b0c5b5f39aceb1e5efff777588f222) Thanks [@mmcallister-cll](https://github.com/mmcallister-cll)! - multi-market-status endpoint support, added additional markets to tradinghours and finnhub
+
+### Patch Changes
+
+- Updated dependencies [[`a37bb09`](https://github.com/smartcontractkit/external-adapters-js/commit/a37bb099a6b0c5b5f39aceb1e5efff777588f222)]:
+  - @chainlink/tradinghours-adapter@0.2.2
+
+## 1.3.1
+
+### Patch Changes
+
+- [#3936](https://github.com/smartcontractkit/external-adapters-js/pull/3936) [`6147728`](https://github.com/smartcontractkit/external-adapters-js/commit/6147728aa69ec39fc180a11a34757d1c730ad6af) Thanks [@Fletch153](https://github.com/Fletch153)! - Bumped framework version
+
+- Updated dependencies [[`6147728`](https://github.com/smartcontractkit/external-adapters-js/commit/6147728aa69ec39fc180a11a34757d1c730ad6af)]:
+  - @chainlink/tradinghours-adapter@0.2.1
+  - @chainlink/ncfx-adapter@4.4.4
+
+## 1.3.0
+
+### Minor Changes
+
+- [#3901](https://github.com/smartcontractkit/external-adapters-js/pull/3901) [`c619154`](https://github.com/smartcontractkit/external-adapters-js/commit/c619154bdebd03502ee784aa41e92aa5d5ee0ab1) Thanks [@martin-cll](https://github.com/martin-cll)! - Add support for nyse market and finnhub-secondary adapter
+
+### Patch Changes
+
+- Updated dependencies [[`76e8737`](https://github.com/smartcontractkit/external-adapters-js/commit/76e8737331c8f9d02b498d82c30c6acadb7a57d3)]:
+  - @chainlink/tradinghours-adapter@0.2.0
+
+## 1.2.15
+
+### Patch Changes
+
+- [#3840](https://github.com/smartcontractkit/external-adapters-js/pull/3840) [`8b08579`](https://github.com/smartcontractkit/external-adapters-js/commit/8b085790e1fcd3543ec0ea540e1915bacd998ec4) Thanks [@dskloetc](https://github.com/dskloetc)! - Bumped framework version
+
+- Updated dependencies [[`8b08579`](https://github.com/smartcontractkit/external-adapters-js/commit/8b085790e1fcd3543ec0ea540e1915bacd998ec4)]:
+  - @chainlink/tradinghours-adapter@0.1.17
+  - @chainlink/ncfx-adapter@4.4.3
+
+## 1.2.14
+
+### Patch Changes
+
+- [#3805](https://github.com/smartcontractkit/external-adapters-js/pull/3805) [`2d18954`](https://github.com/smartcontractkit/external-adapters-js/commit/2d1895428866a279ca2464f494c5c3efcece1f3b) Thanks [@renovate](https://github.com/apps/renovate)! - Update NodeJS to version 22.14.0
+
+- [#3801](https://github.com/smartcontractkit/external-adapters-js/pull/3801) [`c40ad81`](https://github.com/smartcontractkit/external-adapters-js/commit/c40ad81e979aed773a0dda68381bacdc6bc7f1d4) Thanks [@renovate](https://github.com/apps/renovate)! - Update TypeScript version to 5.8.3
+
+- [#3810](https://github.com/smartcontractkit/external-adapters-js/pull/3810) [`e47e08a`](https://github.com/smartcontractkit/external-adapters-js/commit/e47e08ac2b6224751d9cf486caee7964b6f58ad9) Thanks [@dskloetc](https://github.com/dskloetc)! - Bumped framework version
+
+- Updated dependencies [[`2d18954`](https://github.com/smartcontractkit/external-adapters-js/commit/2d1895428866a279ca2464f494c5c3efcece1f3b), [`c40ad81`](https://github.com/smartcontractkit/external-adapters-js/commit/c40ad81e979aed773a0dda68381bacdc6bc7f1d4), [`e47e08a`](https://github.com/smartcontractkit/external-adapters-js/commit/e47e08ac2b6224751d9cf486caee7964b6f58ad9)]:
+  - @chainlink/tradinghours-adapter@0.1.16
+  - @chainlink/ncfx-adapter@4.4.2
+
+## 1.2.13
+
+### Patch Changes
+
+- [#3788](https://github.com/smartcontractkit/external-adapters-js/pull/3788) [`ef5fdd1`](https://github.com/smartcontractkit/external-adapters-js/commit/ef5fdd152d6615ed979198d05427705a6ccb6359) Thanks [@dskloetc](https://github.com/dskloetc)! - Bumped framework version
+
+- Updated dependencies [[`ef5fdd1`](https://github.com/smartcontractkit/external-adapters-js/commit/ef5fdd152d6615ed979198d05427705a6ccb6359)]:
+  - @chainlink/tradinghours-adapter@0.1.15
+  - @chainlink/ncfx-adapter@4.4.1
+
+## 1.2.12
+
+### Patch Changes
+
+- [#3739](https://github.com/smartcontractkit/external-adapters-js/pull/3739) [`6920e67`](https://github.com/smartcontractkit/external-adapters-js/commit/6920e67081583de936806af89c44e1be807fc878) Thanks [@dskloetc](https://github.com/dskloetc)! - Bumped framework version
+
+- Updated dependencies [[`6920e67`](https://github.com/smartcontractkit/external-adapters-js/commit/6920e67081583de936806af89c44e1be807fc878), [`ce7ce5d`](https://github.com/smartcontractkit/external-adapters-js/commit/ce7ce5d72215f25714f59c8962e36cb554da2f2e)]:
+  - @chainlink/tradinghours-adapter@0.1.14
+  - @chainlink/ncfx-adapter@4.4.0
+
+## 1.2.11
+
+### Patch Changes
+
+- [#3713](https://github.com/smartcontractkit/external-adapters-js/pull/3713) [`4753dfa`](https://github.com/smartcontractkit/external-adapters-js/commit/4753dfa17038ec4f0b8041becb216dfaec9e9f3f) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Bumped framework version
+
+- Updated dependencies [[`4753dfa`](https://github.com/smartcontractkit/external-adapters-js/commit/4753dfa17038ec4f0b8041becb216dfaec9e9f3f)]:
+  - @chainlink/tradinghours-adapter@0.1.13
+  - @chainlink/ncfx-adapter@4.3.4
+
+## 1.2.10
+
+### Patch Changes
+
+- [#3673](https://github.com/smartcontractkit/external-adapters-js/pull/3673) [`1e1c478`](https://github.com/smartcontractkit/external-adapters-js/commit/1e1c4785e78eeeda775b6a7630594498f60ad9bf) Thanks [@Subarna-Singh](https://github.com/Subarna-Singh)! - Bumped framework version
+
+- Updated dependencies [[`1e1c478`](https://github.com/smartcontractkit/external-adapters-js/commit/1e1c4785e78eeeda775b6a7630594498f60ad9bf)]:
+  - @chainlink/tradinghours-adapter@0.1.12
+  - @chainlink/ncfx-adapter@4.3.3
+
+## 1.2.9
+
+### Patch Changes
+
+- [#3656](https://github.com/smartcontractkit/external-adapters-js/pull/3656) [`f32e247`](https://github.com/smartcontractkit/external-adapters-js/commit/f32e2477bcc37a8e37b73676616c8d9e5dce9a45) Thanks [@renovate](https://github.com/apps/renovate)! - Update Node.js to v22.13.1
+
+- [#3564](https://github.com/smartcontractkit/external-adapters-js/pull/3564) [`3fac674`](https://github.com/smartcontractkit/external-adapters-js/commit/3fac674cfeb93f73009959ba2ea0fbf342c3c66d) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependency nock to v13.5.6
+
+- Updated dependencies [[`f32e247`](https://github.com/smartcontractkit/external-adapters-js/commit/f32e2477bcc37a8e37b73676616c8d9e5dce9a45), [`3fac674`](https://github.com/smartcontractkit/external-adapters-js/commit/3fac674cfeb93f73009959ba2ea0fbf342c3c66d)]:
+  - @chainlink/tradinghours-adapter@0.1.11
+  - @chainlink/ncfx-adapter@4.3.2
+
+## 1.2.8
+
+### Patch Changes
+
+- [#3629](https://github.com/smartcontractkit/external-adapters-js/pull/3629) [`0bede17`](https://github.com/smartcontractkit/external-adapters-js/commit/0bede1726a01a0fc4c5831be521b974dfac79234) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Bumped framework version, includes fastify v4 to v5 upgrade
+
+- Updated dependencies [[`0bede17`](https://github.com/smartcontractkit/external-adapters-js/commit/0bede1726a01a0fc4c5831be521b974dfac79234)]:
+  - @chainlink/tradinghours-adapter@0.1.10
+  - @chainlink/ncfx-adapter@4.3.1
+
+## 1.2.7
+
+### Patch Changes
+
+- Updated dependencies [[`23d203c`](https://github.com/smartcontractkit/external-adapters-js/commit/23d203cf5c289aebbaf06c316e8b75b46e97694b)]:
+  - @chainlink/ncfx-adapter@4.3.0
+
+## 1.2.6
+
+### Patch Changes
+
+- [#3619](https://github.com/smartcontractkit/external-adapters-js/pull/3619) [`55df8b1`](https://github.com/smartcontractkit/external-adapters-js/commit/55df8b1867403001c5bb11339bb2244e6c219c3f) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Bumped framework version
+
+- [#3618](https://github.com/smartcontractkit/external-adapters-js/pull/3618) [`e30440e`](https://github.com/smartcontractkit/external-adapters-js/commit/e30440e20f06c72eb701ac539692815e77978a73) Thanks [@mmcallister-cll](https://github.com/mmcallister-cll)! - Bumped framework version
+
+- Updated dependencies [[`55df8b1`](https://github.com/smartcontractkit/external-adapters-js/commit/55df8b1867403001c5bb11339bb2244e6c219c3f), [`e30440e`](https://github.com/smartcontractkit/external-adapters-js/commit/e30440e20f06c72eb701ac539692815e77978a73)]:
+  - @chainlink/tradinghours-adapter@0.1.9
+  - @chainlink/ncfx-adapter@4.2.2
+
+## 1.2.5
+
+### Patch Changes
+
+- [#3598](https://github.com/smartcontractkit/external-adapters-js/pull/3598) [`f9a4dc2`](https://github.com/smartcontractkit/external-adapters-js/commit/f9a4dc24e77f1f5b5e967b5f2d03eb58c15ef9b2) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Bumped framework version
+
+- [#3595](https://github.com/smartcontractkit/external-adapters-js/pull/3595) [`8a15f40`](https://github.com/smartcontractkit/external-adapters-js/commit/8a15f408d53ccbf131e16c39faefa0ecabbe6ac7) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Bumped framework version
+
+- Updated dependencies [[`f9a4dc2`](https://github.com/smartcontractkit/external-adapters-js/commit/f9a4dc24e77f1f5b5e967b5f2d03eb58c15ef9b2), [`8a15f40`](https://github.com/smartcontractkit/external-adapters-js/commit/8a15f408d53ccbf131e16c39faefa0ecabbe6ac7)]:
+  - @chainlink/tradinghours-adapter@0.1.8
+  - @chainlink/ncfx-adapter@4.2.1
+
+## 1.2.4
+
+### Patch Changes
+
+- Updated dependencies [[`7dba1e5`](https://github.com/smartcontractkit/external-adapters-js/commit/7dba1e56315b521de5b8bc5c3f25eb19432f5b0f)]:
+  - @chainlink/ncfx-adapter@4.2.0
+
+## 1.2.3
+
+### Patch Changes
+
+- [#3558](https://github.com/smartcontractkit/external-adapters-js/pull/3558) [`62f0f3b`](https://github.com/smartcontractkit/external-adapters-js/commit/62f0f3b031052e808224b80f7cfce4073c967664) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Bumped framework version
+
+- [#3562](https://github.com/smartcontractkit/external-adapters-js/pull/3562) [`8cc19c5`](https://github.com/smartcontractkit/external-adapters-js/commit/8cc19c591a7db6764d49290c14aa8bbdb8eef54d) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Bumped framework version
+
+- Updated dependencies [[`62f0f3b`](https://github.com/smartcontractkit/external-adapters-js/commit/62f0f3b031052e808224b80f7cfce4073c967664), [`8cc19c5`](https://github.com/smartcontractkit/external-adapters-js/commit/8cc19c591a7db6764d49290c14aa8bbdb8eef54d)]:
+  - @chainlink/tradinghours-adapter@0.1.7
+  - @chainlink/ncfx-adapter@4.1.8
+
+## 1.2.2
+
+### Patch Changes
+
+- [#3533](https://github.com/smartcontractkit/external-adapters-js/pull/3533) [`563b976`](https://github.com/smartcontractkit/external-adapters-js/commit/563b976bd699a28e42120fdbcf730a1d4b5c2db5) Thanks [@renovate](https://github.com/apps/renovate)! - Bump @types/node version
+
+- [#3534](https://github.com/smartcontractkit/external-adapters-js/pull/3534) [`d8023b9`](https://github.com/smartcontractkit/external-adapters-js/commit/d8023b911fd37ccdc2b41788b072fb9c875fff31) Thanks [@renovate](https://github.com/apps/renovate)! - Bump nock
+
+- Updated dependencies [[`563b976`](https://github.com/smartcontractkit/external-adapters-js/commit/563b976bd699a28e42120fdbcf730a1d4b5c2db5), [`d8023b9`](https://github.com/smartcontractkit/external-adapters-js/commit/d8023b911fd37ccdc2b41788b072fb9c875fff31), [`52a7206`](https://github.com/smartcontractkit/external-adapters-js/commit/52a7206643de969b0f596996618e36005e50ac81)]:
+  - @chainlink/tradinghours-adapter@0.1.6
+  - @chainlink/ncfx-adapter@4.1.7
+
+## 1.2.1
+
+### Patch Changes
+
+- [#3530](https://github.com/smartcontractkit/external-adapters-js/pull/3530) [`690c025`](https://github.com/smartcontractkit/external-adapters-js/commit/690c025c0a3e0863679418d26dc41c8b662978d8) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Bumped framework version
+
+- [#3260](https://github.com/smartcontractkit/external-adapters-js/pull/3260) [`13cfd21`](https://github.com/smartcontractkit/external-adapters-js/commit/13cfd215dcbd14c31f173bd874da36d636434627) Thanks [@renovate](https://github.com/apps/renovate)! - Bump TS version
+
+- Updated dependencies [[`690c025`](https://github.com/smartcontractkit/external-adapters-js/commit/690c025c0a3e0863679418d26dc41c8b662978d8), [`13cfd21`](https://github.com/smartcontractkit/external-adapters-js/commit/13cfd215dcbd14c31f173bd874da36d636434627)]:
+  - @chainlink/tradinghours-adapter@0.1.5
+  - @chainlink/ncfx-adapter@4.1.6
+
+## 1.2.0
+
+### Minor Changes
+
+- [#3498](https://github.com/smartcontractkit/external-adapters-js/pull/3498) [`fa34fe9`](https://github.com/smartcontractkit/external-adapters-js/commit/fa34fe96b09c1e99b73ddadebdba9da0e6529c0d) Thanks [@martin-cll](https://github.com/martin-cll)! - Use NCFX as primary for forex and metals markets
+
+## 1.1.0
+
+### Minor Changes
+
+- [#3484](https://github.com/smartcontractkit/external-adapters-js/pull/3484) [`59a1f37`](https://github.com/smartcontractkit/external-adapters-js/commit/59a1f3733c45bcede3da05c240bc6e7422393535) Thanks [@martin-cll](https://github.com/martin-cll)! - Default to unknown status instead of closed
+
+### Patch Changes
+
+- [#3480](https://github.com/smartcontractkit/external-adapters-js/pull/3480) [`13c68c5`](https://github.com/smartcontractkit/external-adapters-js/commit/13c68c550cd0131940c41eb28d2f257d68d6312c) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Bumped framework version
+
+- Updated dependencies [[`13c68c5`](https://github.com/smartcontractkit/external-adapters-js/commit/13c68c550cd0131940c41eb28d2f257d68d6312c)]:
+  - @chainlink/tradinghours-adapter@0.1.4
+  - @chainlink/ncfx-adapter@4.1.5
+
+## 1.0.4
+
+### Patch Changes
+
+- [#3460](https://github.com/smartcontractkit/external-adapters-js/pull/3460) [`2fd3620`](https://github.com/smartcontractkit/external-adapters-js/commit/2fd362051a0b8f9b1c0c564ade41780fcf9f379b) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Bumped framework version
+
+- Updated dependencies [[`2fd3620`](https://github.com/smartcontractkit/external-adapters-js/commit/2fd362051a0b8f9b1c0c564ade41780fcf9f379b)]:
+  - @chainlink/tradinghours-adapter@0.1.3
+  - @chainlink/ncfx-adapter@4.1.4
+
+## 1.0.3
+
+### Patch Changes
+
+- [#3436](https://github.com/smartcontractkit/external-adapters-js/pull/3436) [`9a4d510`](https://github.com/smartcontractkit/external-adapters-js/commit/9a4d510dff13669760a91738dbe7df524f077483) Thanks [@karen-stepanyan](https://github.com/karen-stepanyan)! - Bumped framework version
+
+- Updated dependencies [[`d9f885b`](https://github.com/smartcontractkit/external-adapters-js/commit/d9f885b29c1e3c536156c57fce9a57091df790ed), [`9a4d510`](https://github.com/smartcontractkit/external-adapters-js/commit/9a4d510dff13669760a91738dbe7df524f077483)]:
+  - @chainlink/tradinghours-adapter@0.1.2
+  - @chainlink/ncfx-adapter@4.1.3
+
+## 1.0.2
+
+### Patch Changes
+
+- [#3415](https://github.com/smartcontractkit/external-adapters-js/pull/3415) [`8d83d60`](https://github.com/smartcontractkit/external-adapters-js/commit/8d83d60953e04b1f797f21f1504a3976ea0a4f36) Thanks [@mxiao-cll](https://github.com/mxiao-cll)! - Bumped framework version
+
+- Updated dependencies [[`8d83d60`](https://github.com/smartcontractkit/external-adapters-js/commit/8d83d60953e04b1f797f21f1504a3976ea0a4f36)]:
+  - @chainlink/tradinghours-adapter@0.1.1
+  - @chainlink/ncfx-adapter@4.1.2
+
+## 1.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`dea8800`](https://github.com/smartcontractkit/external-adapters-js/commit/dea88009fcfd474dd5516005dc9e074a3a89d579)]:
+  - @chainlink/ncfx-adapter@4.1.1
+
+## 1.0.0
+
+### Major Changes
+
+- [#3395](https://github.com/smartcontractkit/external-adapters-js/pull/3395) [`e708db1`](https://github.com/smartcontractkit/external-adapters-js/commit/e708db177c613b06a60447b8094198966f8be1c4) Thanks [@martin-cll](https://github.com/martin-cll)! - Initial implementation

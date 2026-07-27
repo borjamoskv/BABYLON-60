@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOSKV-1 APEX | SOVEREIGN INTERFACE</title>
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0A0A0A;
+            --surface-color: #121212;
+            --border-color: #1E1E1E;
+            --primary: #2B3BE5;
+            --primary-glow: rgba(43, 59, 229, 0.4);
+            --primary-hover: #4D5CFF;
+            --text-main: #FFFFFF;
+            --text-muted: #888888;
+            --success: #00E676;
+            --warning: #FFD600;
+            --danger: #FF1744;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Ambient background glow */
+        .ambient-glow {
+            position: fixed;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80vw;
+            height: 50vh;
+            background: radial-gradient(circle, var(--primary-glow) 0%, rgba(10,10,10,0) 70%);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 10;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-text {
+            font-weight: 800;
+            letter-spacing: 0.15rem;
+            font-size: 1.25rem;
+            color: var(--text-main);
+        }
+
+        .logo-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border: 1px solid var(--primary);
+            border-radius: 3px;
+            color: var(--primary);
+            box-shadow: 0 0 8px var(--primary-glow);
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            z-index: 5;
+        }
+
+        /* 3D/Physics Particle Bridge Area */
+        .bridge-section {
+            position: relative;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            height: 250px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1rem;
+        }
+
+        .bridge-canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .bridge-overlay {
+            position: relative;
+            z-index: 2;
+            pointer-events: none;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+        }
+
+        .node-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: rgba(18, 18, 18, 0.7);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1.25rem;
+            border-radius: 4px;
+            align-self: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .node-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 0.1rem;
+            color: var(--text-muted);
+        }
+
+        .node-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .bridge-label-center {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--primary);
+            text-shadow: 0 0 5px var(--primary-glow);
+            letter-spacing: 0.05rem;
+        }
+
+        /* Metrics grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .metric-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .metric-card:hover {
+            border-color: var(--primary);
+        }
+
+        .metric-header {
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .metric-sub {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .metric-bar {
+            height: 3px;
+            background: var(--border-color);
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .metric-bar-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 1s ease-in-out;
+            box-shadow: 0 0 8px var(--primary-glow);
+        }
+
+        /* Content Layout: 2 Columns */
+        .content-split {
+            display: grid;
+            grid-template-columns: 1.6fr 1.2fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .content-split {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section-box {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-left: 3px solid var(--primary);
+            padding-left: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Dossier tabs styling */
+        .tab-buttons {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-muted);
+            padding: 0.5rem 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-main);
+            border-color: var(--border-color);
+        }
+
+        .tab-btn.active {
+            color: var(--text-main);
+            background: rgba(43, 59, 229, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 8px rgba(43, 59, 229, 0.15);
+        }
+
+        .tab-content {
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            line-height: 1.6;
+        }
+
+        .tab-content.active {
+            display: flex;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .highlight-box {
+            background: rgba(43, 59, 229, 0.05);
+            border-left: 2px solid var(--primary);
+            padding: 1rem;
+            border-radius: 0 4px 4px 0;
+            font-size: 0.9rem;
+            color: #DFE2FF;
+        }
+
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .scenario-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .scenario-card {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            background: rgba(10, 10, 10, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .scenario-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .scenario-card.optimist { border-top: 3px solid var(--success); }
+        .scenario-card.moderate { border-top: 3px solid var(--warning); }
+        .scenario-card.pesimist { border-top: 3px solid var(--danger); }
+
+        .scenario-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .scenario-cost {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .scenario-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Checklist styling */
+        .checklist-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: rgba(10, 10, 10, 0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checklist-item:hover {
+            border-color: var(--primary);
+            background: rgba(43, 59, 229, 0.02);
+        }
+
+        .checklist-checkbox {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            background: var(--surface-color);
+            cursor: pointer;
+            position: relative;
+            margin-top: 0.1rem;
+            transition: all 0.3s;
+        }
+
+        .checklist-checkbox:checked {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .checklist-checkbox:checked::after {
+            content: "✓";
+            color: var(--text-main);
+            font-size: 0.75rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+        }
+
+        .checklist-text {
+            font-size: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            transition: color 0.3s;
+        }
+
+        .checklist-item.checked {
+            border-color: var(--border-color);
+            opacity: 0.6;
+        }
+
+        .checklist-item.checked .checklist-text {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .checklist-phase {
+            font-size: 0.7rem;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+            padding: 1.5rem;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            z-index: 10;
+            background: var(--bg-color);
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--primary-hover);
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-glow"></div>
+    
+    <header>
+        <div class="logo-section">
+            <span class="logo-text">MOSKV-1 APEX</span>
+            <span class="logo-badge">C5-REAL</span>
+        </div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted);">
+            LEDGER STATUS: <span style="color: var(--success); text-shadow: 0 0 5px rgba(0, 230, 118, 0.4);">SECURE</span>
+        </div>
+    </header>
+
+    <main>
+        <!-- The Space Between Us: Dynamic Particle Bridge -->
+        <section class="bridge-section">
+            <div class="bridge-canvas-container">
+                <canvas id="bridge-canvas"></canvas>
+            </div>
+            <div class="bridge-overlay">
+                <div class="node-info" style="align-self: flex-start; margin-top: 1rem; margin-left: 1rem;">
+                    <span class="node-title">NODE_001</span>
+                    <span class="node-value">BORJA MOSKV</span>
+                </div>
+                
+                <div class="node-info" style="align-self: flex-start; margin-top: 1rem; margin-right: 1rem;">
+                    <span class="node-title">NODE_002</span>
+                    <span class="node-value">MOSKV-1 APEX</span>
+                </div>
+            </div>
+            <div class="bridge-label-center" id="bridge-status-text">COGNITIVE INTERFACE BRIDGE ACTIVE</div>
+        </section>
+
+        <!-- Live Telemetry Stats -->
+        <section class="metrics-grid">
+            <div class="metric-card">
+                <span class="metric-header">Exergy Alignment</span>
+                <span class="metric-value" id="val-exergy">--%</span>
+                <span class="metric-sub">Thermodynamic efficiency index</span>
+                <div class="metric-bar">
+                    <div class="metric-bar-fill" id="bar-exergy"></div>
+                </div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-header">Friction (Anergy)</span>
+                <span class="metric-value" id="val-anergy">--</span>
+                <span class="metric-sub" id="sub-anergy">Chars generated per mutation</span>
+                <div class="metric-bar">
+                    <div class="metric-bar-fill" id="bar-anergy"></div>
+                </div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-header">Intent Latency</span>
+                <span class="metric-value" id="val-latency">--s</span>
+                <span class="metric-sub">Bridge execution response gap</span>
+                <div class="metric-bar">
+                    <div class="metric-bar-fill" id="bar-latency"></div>
+                </div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-header">Sealed Mutations</span>
+                <span class="metric-value" id="val-mutations">--</span>
+                <span class="metric-sub">Ledger events stored in Git Sentinel</span>
+                <div class="metric-bar">
+                    <div class="metric-bar-fill" id="bar-mutations" style="width: 100%;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main split section -->
+        <div class="content-split">
+            <!-- Left Panel: Interactive Dossier -->
+            <section class="section-box">
+                <h2 class="section-title">DOSSIER DE DEFENSA FISCAL & ATENUANTES</h2>
+                
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="switchTab('tab-osint')">OSINT & RIESGOS</button>
+                    <button class="tab-btn" onclick="switchTab('tab-estrategia')">ESTRATEGIA</button>
+                    <button class="tab-btn" onclick="switchTab('tab-atenuante')">ATENUANTE CLÍNICA</button>
+                    <button class="tab-btn" onclick="switchTab('tab-escenarios')">ESCENARIOS</button>
+                </div>
+
+                <!-- Tab 1: OSINT -->
+                <div class="tab-content active" id="tab-osint">
+                    <p>La defensa inicial basada en la consideración de la operativa como una mera "ganancia patrimonial pasiva" está invalidada por la evidencia OSINT pública de la entrevista en Substack (diciembre 2023).</p>
+                    <div class="highlight-box">
+                        <strong>Factores de Cargo Críticos:</strong><br>
+                        • <strong>Habitualidad Comercial:</strong> Manifestación de operar más de 1,500 dominios ENS y 80 ETH de volumen de ventas.<br>
+                        • <strong>Dedicación Exclusiva:</strong> Declaraciones explícitas ("Exclusive dedication to web3 art" durante 2.5 años).<br>
+                        • <strong>Trazabilidad on-chain:</strong> Atribución directa a wallets operativas asociadas a Borja Moskv.
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Esto califica la renta directamente como <strong>Rendimiento de Actividades Económicas</strong> bajo la Norma Foral 13/2013 de Bizkaia.</p>
+                </div>
+
+                <!-- Tab 2: Strategy -->
+                <div class="tab-content" id="tab-estrategia">
+                    <p>El "Nuevo Enfoque" ofensivo asume proactivamente la calificación de Actividad Económica para <strong>asfixiar la base imponible</strong> mediante la deducción del 100% de la estructura de costes de explotación:</p>
+                    <div class="highlight-box" style="background: rgba(0, 230, 118, 0.05); border-left-color: var(--success);">
+                        <strong>Líneas de Deducción Estructuradas:</strong><br>
+                        • <strong>Gas Fees de Red:</strong> Comisiones de red de todas las transacciones on-chain (exitosas y fallidas).<br>
+                        • <strong>Capital Semilla:</strong> Coste de adquisición inicial de los dominios ENS expirados sin vender.<br>
+                        • <strong>IVA Incluido:</strong> Aplicación de la doctrina de IVA incluido a dominios ENS para minorar la base imponible en un 17.35%.<br>
+                        • <strong>Propiedad Intelectual (Sound.xyz):</strong> Exención de IVA al tratarse de obras musicales de creación original de autor.
+                    </div>
+                </div>
+
+                <!-- Tab 3: ADHD -->
+                <div class="tab-content" id="tab-atenuante">
+                    <p>El expediente pericial de diagnóstico clínico de <strong>TDAH</strong> se incorpora formalmente a la estrategia tributaria como vector atenuante de culpabilidad subjetiva:</p>
+                    <div class="highlight-box" style="background: rgba(255, 214, 0, 0.05); border-left-color: var(--warning);">
+                        <strong>Fundamento Jurídico de la Defensa:</strong><br>
+                        • <strong>LGT Artículo 179.2.d) (Y Norma Foral):</strong> Exclusión de responsabilidad por infracción tributaria en ausencia de culpabilidad.<br>
+                        • <strong>Disfunción Ejecutiva Documentada:</strong> Justificación médica de la incapacidad administrativa y cognitiva de procesar las obligaciones burocráticas y autoliquidaciones periódicas recurrentes.<br>
+                        • <strong>Exclusión del Dolo:</strong> Demostración de que las omisiones administrativas responden a una limitación clínica, no a un ánimo defraudador voluntario.
+                    </div>
+                </div>
+
+                <!-- Tab 4: Scenarios -->
+                <div class="tab-content" id="tab-escenarios">
+                    <p>Mapeo de consecuencias financieras según el grado de admisión de la Hacienda Foral de Bizkaia:</p>
+                    <div class="scenario-grid">
+                        <div class="scenario-card optimist">
+                            <span class="scenario-name" style="color: var(--success);">Optimista</span>
+                            <span class="scenario-cost">Regularización Complementaria</span>
+                            <p class="scenario-desc">Admisión total de deducciones, exención en Sound.xyz y TDAH exime multas por infracción.</p>
+                        </div>
+                        <div class="scenario-card moderate">
+                            <span class="scenario-name" style="color: var(--warning);">Moderado</span>
+                            <span class="scenario-cost">Comprobación con Acuerdo</span>
+                            <p class="scenario-desc">Admisión de gas verificado, exención parcial en Sound y multa mínima del 50% con reducciones.</p>
+                        </div>
+                        <div class="scenario-card pesimist">
+                            <span class="scenario-name" style="color: var(--danger);">Pesimista</span>
+                            <span class="scenario-cost">Inspección Hostil</span>
+                            <p class="scenario-desc">Rechazo de gas fees por falta de facturas PDF, 21% IVA global y sanción del 100% al 150%.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Panel: Checklist -->
+            <section class="section-box">
+                <h2 class="section-title">CHECKLIST DE EXTRACCIÓN</h2>
+                <div class="checklist-list" id="checklist-container">
+                    <!-- Javascript will populate checklist -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer id="footer-details">
+        MOSKV-1 APEX v10.0 · CRYSTALLIZED IN MEMORY STORE VIA L5 PROTOCOL
+    </footer>
+
+    <!-- Canvas Simulation & Interactive Logic -->
+    <script>
+        // ----------------------------------------------------
+        // 1. Live Telemetry & Tab Switch Logic
+        // ----------------------------------------------------
+        
+        // Default local metrics state
+        let currentMetrics = {
+            session_id: "3cfc9bef-827d-441c-8453-7e917c32297a",
+            latency: 0.000012,
+            anergy: 204.63,
+            exergy: 0.7954,
+            mutations: 79
+        };
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Activate button clicked
+            const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => btn.getAttribute('onclick').includes(tabId));
+            if (activeBtn) activeBtn.classList.add('active');
+            
+            const activeContent = document.getElementById(tabId);
+            if (activeContent) activeContent.classList.add('active');
+        }
+
+        async function fetchMetrics() {
+            try {
+                const response = await fetch('./cortex_metrics.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    currentMetrics = data;
+                }
+            } catch (e) {
+                console.log("[MOSKV-1] Local mode: Using embedded metrics state.");
+            }
+            updateUI();
+        }
+
+        function updateUI() {
+            // Update Text Nodes
+            document.getElementById('val-exergy').innerText = (currentMetrics.exergy * 100).toFixed(1) + "%";
+            document.getElementById('val-anergy').innerText = currentMetrics.anergy.toFixed(1);
+            document.getElementById('val-latency').innerText = currentMetrics.latency.toFixed(6) + "s";
+            document.getElementById('val-mutations').innerText = currentMetrics.mutations;
+
+            // Update Bars
+            document.getElementById('bar-exergy').style.width = (currentMetrics.exergy * 100) + "%";
+            
+            // Anergy bar is normalized (0 fluff is 100% full, 1000 fluff is empty)
+            const anergyPercent = Math.max(0, Math.min(100, 100 - (currentMetrics.anergy / 10)));
+            document.getElementById('bar-anergy').style.width = anergyPercent + "%";
+            
+            // Latency bar: less is better (0 latency is 100% full)
+            const latencyPercent = Math.max(0, Math.min(100, 100 - (currentMetrics.latency * 1000)));
+            document.getElementById('bar-latency').style.width = latencyPercent + "%";
+
+            // Status bar
+            const bridgeStatus = document.getElementById('bridge-status-text');
+            if (currentMetrics.exergy > 0.85) {
+                bridgeStatus.innerText = "COGNITIVE INTERFACE BRIDGE ACTIVE - STATUS: TURBO";
+                bridgeStatus.style.color = "var(--success)";
+            } else {
+                bridgeStatus.innerText = "COGNITIVE INTERFACE BRIDGE ACTIVE - STATUS: FLUFF DETECTED";
+                bridgeStatus.style.color = "var(--warning)";
+            }
+
+            // Footer
+            document.getElementById('footer-details').innerText = `MOSKV-1 APEX v10.0 · SESSION LEDGER ${currentMetrics.session_id} · EXERGY OPTIMAL`;
+        }
+
+        // ----------------------------------------------------
+        // 2. Interactive Checklist Logic
+        // ----------------------------------------------------
+        const checklistItems = [
+            { id: "c1", phase: "FASE 1", title: "Mapeo de Wallets", desc: "Listar public keys de Ethereum, Polygon, Arbitrum y Optimism de los últimos 4 años." },
+            { id: "c2", phase: "FASE 1", title: "Segregación de Cuentas", desc: "Separar wallets de flipping y alta frecuencia frente a las de hold personal/ahorro." },
+            { id: "c3", phase: "FASE 2", title: "Descarga de CSV (Transactions)", desc: "Exportar transacciones de Etherscan para auditar Gas Fees pagados." },
+            { id: "c4", phase: "FASE 2", title: "Descarga de CSV (ERC-721/1155)", desc: "Mapear historial completo de adquisiciones y transmisiones de dominios ENS." },
+            { id: "c5", phase: "FASE 3", title: "Inventario de Pérdidas por Expiración", desc: "Identificar dominios ENS comprados que expiraron sin vender (pérdida del 100%)." },
+            { id: "c6", phase: "FASE 3", title: "Registro de Fallos Operativos", desc: "Listar transacciones fallidas (Out of Gas) donde se quemó el gas fee." },
+            { id: "c7", phase: "FASE 4", title: "Historial de Sound.xyz", desc: "Exportar regalías musicales y demostrar explotación artística de propiedad intelectual." }
+        ];
+
+        function renderChecklist() {
+            const container = document.getElementById('checklist-container');
+            container.innerHTML = "";
+            
+            // Load state from localStorage if exists
+            const checkedStates = JSON.parse(localStorage.getItem('moskv_checklist') || "{}");
+
+            checklistItems.forEach(item => {
+                const isChecked = checkedStates[item.id] || false;
+                
+                const itemDiv = document.createElement('div');
+                itemDiv.className = `checklist-item ${isChecked ? 'checked' : ''}`;
+                itemDiv.id = `item-card-${item.id}`;
+                itemDiv.onclick = () => toggleCheck(item.id);
+                
+                itemDiv.innerHTML = `
+                    <input type="checkbox" class="checklist-checkbox" id="check-${item.id}" ${isChecked ? 'checked' : ''} onclick="event.stopPropagation(); toggleCheck('${item.id}');">
+                    <div class="checklist-text">
+                        <span class="checklist-phase">${item.phase}</span>
+                        <strong style="margin-bottom: 0.15rem; display: block;">${item.title}</strong>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">${item.desc}</span>
+                    </div>
+                `;
+                container.appendChild(itemDiv);
+            });
+        }
+
+        function toggleCheck(id) {
+            const checkbox = document.getElementById(`check-${id}`);
+            const itemCard = document.getElementById(`item-card-${id}`);
+            const checkedStates = JSON.parse(localStorage.getItem('moskv_checklist') || "{}");
+            
+            const newState = !checkbox.checked;
+            checkbox.checked = newState;
+            checkedStates[id] = newState;
+            localStorage.setItem('moskv_checklist', JSON.stringify(checkedStates));
+            
+            if (newState) {
+                itemCard.classList.add('checked');
+            } else {
+                itemCard.classList.remove('checked');
+            }
+        }
+
+        // ----------------------------------------------------
+        // 3. Canvas Simulation (Physics & Waves)
+        // ----------------------------------------------------
+        const canvas = document.getElementById('bridge-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        let waveOffset = 0;
+
+        function animateBridge() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const startX = 140; // Approx right edge of Borja info box
+            const endX = canvas.width - 150; // Approx left edge of Apex info box
+            const centerY = canvas.height / 2;
+            const distance = endX - startX;
+            
+            // Dynamic wave properties based on current exergy
+            const exergy = currentMetrics.exergy || 0.8;
+            const frequency = 0.01 + (1 - exergy) * 0.04;
+            const amplitude = 5 + (1 - exergy) * 45;
+            const speed = 0.05 + (1 - exergy) * 0.15;
+            
+            waveOffset += speed;
+
+            // Draw glowing electric connection waves
+            const numWaves = 3;
+            for (let w = 0; w < numWaves; w++) {
+                ctx.beginPath();
+                ctx.strokeStyle = w === 0 ? 'var(--primary)' : `rgba(43, 59, 229, ${0.4 - w * 0.1})`;
+                ctx.lineWidth = w === 0 ? 2 : 1.5;
+                ctx.shadowBlur = w === 0 ? 15 : 0;
+                ctx.shadowColor = 'var(--primary)';
+                
+                for (let x = startX; x <= endX; x++) {
+                    const progress = (x - startX) / distance;
+                    // Envelope function to pinch the wave ends at the nodes
+                    const envelope = Math.sin(progress * Math.PI);
+                    
+                    const y = centerY + Math.sin(x * frequency + waveOffset + w * Math.PI / 4) * amplitude * envelope;
+                    
+                    if (x === startX) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                ctx.stroke();
+            }
+
+            // Draw energy packets flowing through the channel
+            ctx.shadowBlur = 10;
+            ctx.fillStyle = '#FFFFFF';
+            const numPackets = 4;
+            for (let i = 0; i < numPackets; i++) {
+                const progress = ((waveOffset * 0.15 + (i / numPackets)) % 1);
+                const x = startX + progress * distance;
+                const envelope = Math.sin(progress * Math.PI);
+                const y = centerY + Math.sin(x * frequency + waveOffset) * amplitude * envelope;
+                
+                ctx.beginPath();
+                ctx.arc(x, y, 3, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            // Draw node anchor points
+            ctx.fillStyle = 'var(--primary)';
+            ctx.beginPath();
+            ctx.arc(startX, centerY, 6, 0, Math.PI * 2);
+            ctx.arc(endX, centerY, 6, 0, Math.PI * 2);
+            ctx.fill();
+
+            requestAnimationFrame(animateBridge);
+        }
+
+        // Initialize App
+        fetchMetrics();
+        renderChecklist();
+        animateBridge();
+        
+        // Poll metrics every 10 seconds
+        setInterval(fetchMetrics, 10000);
+    </script>
+</body>
+</html>

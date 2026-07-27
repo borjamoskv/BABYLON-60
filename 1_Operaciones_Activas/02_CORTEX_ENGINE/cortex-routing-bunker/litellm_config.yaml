@@ -1,0 +1,27 @@
+model_list:
+  - model_name: fable-primary
+    litellm_params:
+      model: anthropic/claude-3-5-sonnet-20240620
+      api_base: https://api.anthropic.com/v1/messages
+      api_key: os.environ/ANTHROPIC_API_KEY
+  - model_name: fable-failover-1
+    litellm_params:
+      model: mistral/mistral-large-latest
+      api_key: os.environ/MISTRAL_API_KEY
+  - model_name: fable-failover-2
+    litellm_params:
+      model: groq/llama3-70b-8192
+      api_key: os.environ/GROQ_API_KEY
+
+router_settings:
+  routing_strategy: fallback
+  fallbacks: 
+    - {"fable-primary": ["fable-failover-1", "fable-failover-2"]}
+
+litellm_settings:
+  cache: true
+  cache_params:
+    type: redis
+    host: redis
+    port: 6379
+  success_callback: ["langfuse"]

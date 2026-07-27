@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cortex-hustle"
+version = "1.0.0"
+description = "APEX Sovereign Trend-Forge extension package for CORTEX-Persist"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "Borja Moskv", email = "borja@borjamoskv.com"}
+]
+dependencies = [
+    "httpx>=0.24.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["cortex_hustle*"]

@@ -1,0 +1,196 @@
+# [C5-REAL] Exergy-Maximized
+"""
+Billing Schema Integrity Gateway.
+
+Immutable ledger proxy for all Stripe billing webhooks.
+Ensures zero state mutations occur imperatively inside HTTP routes.
+"""
+
+from __future__ import annotations
+
+import asyncio
+import json
+import logging
+import time
+import uuid
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+import aiosqlite
+
+from babylon60.config import DB_PATH
+from babylon60.database.core import connect_async_ctx
+
+logger = logging.getLogger(__name__)
+
+
+class BillingIntegrityGateway:
+    def __init__(self, db_path: str | None = None) -> None:
+        self.db_path = db_path or DB_PATH
+
+    async def initialize(self) -> None:
+        """Ensure ledger_events schema is present."""
+        schema_path = Path(__file__).resolve().parent.parent.parent / "schema" / "events_log.sql"
+        if schema_path.exists():
+            schema_sql = schema_path.read_text(encoding="utf-8")
+            async with connect_async_ctx(self.db_path) as conn:
+                await conn.executescript(schema_sql)
+                await conn.commit()
+
+    async def append_billing_event(
+        self, event_type: str, payload: dict[str, Any], actor: str = "stripe"
+    ) -> str:
+        """Append an event to the ledger with 'pending' status."""
+        event_id = f"evt_{uuid.uuid4().hex}"
+        payload_json = json.dumps(payload)
+        ts = datetime.fromtimestamp(time.time(), tz=timezone.utc).isoformat()
+
+        async with connect_async_ctx(self.db_path) as conn:
+            await conn.execute(
+                """
+                INSERT INTO ledger_events (event_id, ts, tool, actor, action, payload_json, semantic_status)
+                VALUES (?, ?, ?, ?, ?, ?, 'pending')
+                """,
+                (event_id, ts, "billing_gateway", actor, event_type, payload_json),
+            )
+            await conn.commit()
+
+        # Fire and forget processing
+        asyncio.create_task(self.process_pending_events())
+        return event_id
+
+    async def process_pending_events(self) -> None:
+        """Process 'pending' billing events asynchronously."""
+        async with connect_async_ctx(self.db_path) as conn:
+            conn.row_factory = aiosqlite.Row
+            cursor = await conn.execute(
+                """
+                SELECT * FROM ledger_events
+                WHERE semantic_status = 'pending' AND tool = 'billing_gateway'
+                ORDER BY ts ASC
+                """
+            )
+            rows = await cursor.fetchall()
+
+            for row in rows:
+                event_id = row["event_id"]
+                action = row["action"]
+                payload = json.loads(row["payload_json"])
+
+                try:
+                    await self._handle_event(action, payload)
+                    await conn.execute(
+                        "UPDATE ledger_events SET semantic_status = 'applied' WHERE event_id = ?",
+                        (event_id,),
+                    )
+                except Exception as e:  # noqa: BLE001
+                    logger.exception("Failed to process billing event %s", event_id)
+                    await conn.execute(
+                        "UPDATE ledger_events SET semantic_status = 'error', semantic_error = ? WHERE event_id = ?",
+                        (str(e), event_id),
+                    )
+            await conn.commit()
+
+    async def _handle_event(self, action: str, payload: dict[str, Any]) -> None:
+        """Route the specific action to the AuthManager."""
+        # We decouple imperative logic from stripe.py
+        import babylon60.api.state as api_state
+        from babylon60.core import config
+
+        if action == "checkout.session.completed":
+            session = payload["data"]["object"]
+            customer_email = session.get("customer_email") or session.get(
+                "customer_details", {}
+            ).get("email", "unknown")
+            plan = session.get("metadata", {}).get("plan", "pro")
+
+            from decimal import Decimal, InvalidOperation
+
+            amount_usd = Decimal("0.0")
+            if plan == "pwyw":
+                try:
+                    amount_usd = Decimal(str(session.get("metadata", {}).get("amount_usd", "0.0")))
+                except (InvalidOperation, ValueError, TypeError):
+                    amount_usd = Decimal("0.0")
+
+            if plan == "pwyw" and amount_usd > Decimal("0.0"):
+                calls_limit = int(amount_usd * Decimal("10000"))
+                rate_limit = min(30 + int(amount_usd * Decimal("5")), 1000)
+                projects_limit = max(1, int(amount_usd / Decimal("2")))
+                storage_bytes = int(amount_usd * Decimal(str(100 * 1024 * 1024)))
+                permissions = ["read", "write"]
+            else:
+                from babylon60.routes.stripe import PLAN_CONFIG
+
+                plan_cfg = PLAN_CONFIG.get(plan, PLAN_CONFIG["pro"])
+                calls_limit = plan_cfg.get("calls_limit", 50000)
+                rate_limit = plan_cfg.get("rate_limit", 300)
+                projects_limit = plan_cfg.get("projects_limit", 10)
+                storage_bytes = 1024 * 1024 * 1024
+                permissions = plan_cfg.get("permissions", ["read", "write"])
+
+            if api_state.auth_manager:
+                await api_state.auth_manager.create_key(
+                    name=f"stripe-{customer_email}",
+                    tenant_id=customer_email,
+                    permissions=permissions,
+                    rate_limit=rate_limit,
+                )
+                logger.info(
+                    "Ledger applied: provisioned key for %s (Plan: %s)", customer_email, plan
+                )
+
+            tenant_config = {
+                "plan": plan,
+                "amount_usd": float(amount_usd),
+                "calls_limit": calls_limit,
+                "rate_limit": rate_limit,
+                "projects_limit": projects_limit,
+                "storage_bytes": storage_bytes,
+                "stripe_subscription_item_id": f"si_{customer_email[-8:]}"
+                if not config.STRIPE_SECRET_KEY
+                else "",
+            }
+
+            from babylon60.database.core import causal_write
+
+            async with connect_async_ctx(self.db_path) as conn:
+                with causal_write(conn):
+                    await conn.execute(
+                        """
+                        INSERT INTO tenants (id, name, config, is_active)
+                        VALUES (?, ?, ?, 1)
+                        ON CONFLICT(id) DO UPDATE SET
+                          name = excluded.name,
+                          config = excluded.config
+                        """,
+                        (customer_email, customer_email, json.dumps(tenant_config)),
+                    )
+                    await conn.commit()
+                logger.info("Tenants table updated for tenant: %s", customer_email)
+
+        elif action == "customer.subscription.deleted":
+            subscription = payload["data"]["object"]
+            customer_id = subscription.get("customer", "")
+
+            from babylon60.routes.stripe import _get_stripe
+
+            stripe_obj = _get_stripe()
+            customer = stripe_obj.Customer.retrieve(customer_id)
+            email = customer.get("email", "")
+
+            if email and api_state.auth_manager:
+                keys = await api_state.auth_manager.list_keys(tenant_id=email)
+                for key in keys:
+                    if key.name.startswith("stripe-"):
+                        await api_state.auth_manager.revoke_key(key.id)
+                        logger.info("Ledger applied: revoked key %s for %s", key.name, email)
+
+
+# Global singleton
+_billing_gateway = BillingIntegrityGateway()
+
+
+def get_billing_gateway() -> BillingIntegrityGateway:
+    return _billing_gateway

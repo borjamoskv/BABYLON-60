@@ -1,0 +1,83 @@
+import { EndpointContext, MarketStatus } from '@chainlink/external-adapter-framework/adapter'
+import { makeLogger } from '@chainlink/external-adapter-framework/util'
+import type { MultiMarketStatusEndpointTypes } from '../endpoint/multi-market-status'
+import { inputParameters } from '../endpoint/multi-market-status'
+import { getMarketSources } from '../source/sources'
+import type { MarketStatusResult } from './base-market-status'
+import { BaseMarketStatusTransport } from './base-market-status'
+
+const logger = makeLogger('MarketStatusTransport')
+
+type RequestParams = typeof inputParameters.validated
+
+export class MultiMarketStatusTransport extends BaseMarketStatusTransport<MultiMarketStatusEndpointTypes> {
+  async _handleRequest(
+    context: EndpointContext<MultiMarketStatusEndpointTypes>,
+    param: RequestParams,
+  ): Promise<MarketStatusResult> {
+    const markets = param.market.split(',').map((m) => m.trim())
+    const underlyingRequests = []
+
+    for (const market of markets) {
+      const sourceNames = getMarketSources(param.type, market)
+      underlyingRequests.push(
+        this.sendSourceRequest(context, sourceNames.primary, {
+          market,
+          type: param.type,
+          force245MarketStatus: false,
+        }),
+        this.sendSourceRequest(context, sourceNames.secondary, {
+          market,
+          type: param.type,
+          force245MarketStatus: false,
+        }),
+      )
+    }
+
+    const responses = await Promise.all(underlyingRequests)
+    logger.debug(`All responses: ${JSON.stringify(responses)}`)
+
+    if (
+      (param.openMode === 'any' &&
+        responses.some((response) => response.marketStatus === MarketStatus.OPEN)) ||
+      (param.openMode === 'all' &&
+        responses.every((response) => response.marketStatus === MarketStatus.OPEN))
+    ) {
+      return {
+        marketStatus: MarketStatus.OPEN,
+        statusString: MarketStatus[MarketStatus.OPEN],
+        providerIndicatedTimeUnixMs: Date.now(),
+      }
+    }
+
+    if (
+      (param.closedMode === 'any' &&
+        responses.some((response) => response.marketStatus === MarketStatus.CLOSED)) ||
+      (param.closedMode === 'all' &&
+        responses.every((response) => response.marketStatus === MarketStatus.CLOSED))
+    ) {
+      return {
+        marketStatus: MarketStatus.CLOSED,
+        statusString: MarketStatus[MarketStatus.CLOSED],
+        providerIndicatedTimeUnixMs: Date.now(),
+      }
+    }
+
+    const unknownResponses = responses.filter(
+      (response) => response.marketStatus === MarketStatus.UNKNOWN,
+    )
+    logger.warn(
+      `Returning UNKNOWN for ${param.market}, responses with unknown status: ${JSON.stringify(
+        unknownResponses,
+      )}`,
+    )
+
+    return {
+      marketStatus: MarketStatus.UNKNOWN,
+      statusString: MarketStatus[MarketStatus.UNKNOWN],
+      providerIndicatedTimeUnixMs: Date.now(),
+    }
+  }
+}
+
+export const transport = new MultiMarketStatusTransport()

@@ -1,0 +1,47 @@
+{
+  "name": "@chainlink/dlc-btc-por-adapter",
+  "version": "4.4.4",
+  "description": "Chainlink dlc-btc-por adapter.",
+  "keywords": [
+    "Chainlink",
+    "LINK",
+    "blockchain",
+    "oracle",
+    "dlc-btc-por"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "url": "https://github.com/smartcontractkit/external-adapters-js",
+    "type": "git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf dist && rm -f tsconfig.tsbuildinfo",
+    "prepack": "yarn build",
+    "build": "tsc -b",
+    "server": "node -e 'require(\"./index.js\").server()'",
+    "server:dist": "node -e 'require(\"./dist/index.js\").server()'",
+    "start": "yarn server:dist"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "22.14.1",
+    "bitcoinjs-lib": "6.1.7",
+    "nock": "13.5.6",
+    "typescript": "5.8.3"
+  },
+  "dependencies": {
+    "@bitcoinerlab/secp256k1": "1.1.1",
+    "@chainlink/external-adapter-framework": "2.11.6",
+    "@noble/hashes": "1.4.0",
+    "@scure/base": "1.1.9",
+    "@scure/btc-signer": "1.2.2",
+    "bip32": "4.0.0",
+    "ethers": "^5.4.6",
+    "tslib": "2.4.1"
+  }
+}

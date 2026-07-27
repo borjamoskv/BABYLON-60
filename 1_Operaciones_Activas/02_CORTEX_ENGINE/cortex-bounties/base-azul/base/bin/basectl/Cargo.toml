@@ -1,0 +1,20 @@
+# C5-REAL EXERGY CERTIFIED
+[package]
+name = "basectl"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "basectl"
+path = "src/main.rs"
+
+[lints]
+workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+basectl-cli = { workspace = true }
+rustls = { workspace = true, features = ["ring"] }
+clap = { workspace = true, features = ["derive"] }
+tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }

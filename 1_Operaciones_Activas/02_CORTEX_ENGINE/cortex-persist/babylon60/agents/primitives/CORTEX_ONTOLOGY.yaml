@@ -1,0 +1,3521 @@
+M1_PRIMITIVES:
+- ID: PRM-001
+  Primitiva: Agotamiento de Exergía
+  Mecanismo Causal: Ejecución de bucles estocásticos sin mutación de estado persistente.
+  Activación (Trigger): Invocación iterativa de agentes sin aserción criptográfica.
+  Sensor (Síntoma): Ratio de invocaciones/commits > Umbral (Context Rot).
+  Escala Temporal: Milisegundos a Segundos
+  Gravedad: Alta
+  Intervención: Abortar bucle; Inyectar aserción BFT.
+- ID: PRM-002
+  Primitiva: Limerencia Epistémica
+  Mecanismo Causal: Generación recursiva de análisis o texto sin transición causal
+    de estado.
+  Activación (Trigger): Cadena de tokens decorativos sin deltas AST.
+  Sensor (Síntoma): Picos de entropía de Shannon; Frecuencia de tokens nulos.
+  Escala Temporal: Segundos a Minutos
+  Gravedad: Crítica
+  Intervención: Activación ExergyGuard; Poda termodinámica (Landauer).
+- ID: PRM-003
+  Primitiva: Corrupción Bizantina Parcial
+  Mecanismo Causal: Divergencia de estado en n < 1/3 de los nodos de ejecución.
+  Activación (Trigger): Fallo silencioso en validación asíncrona de un Worker.
+  Sensor (Síntoma): Inconsistencia de Hash en el Ledger Local.
+  Escala Temporal: Sub-segundo
+  Gravedad: Media
+  Intervención: Re-sincronización forzada desde Snapshot (SAGA-6).
+- ID: PRM-004
+  Primitiva: Deadlock Termodinámico
+  Mecanismo Causal: Competencia bloqueante por recursos de base de datos sin timeout
+    determinista.
+  Activación (Trigger): Transacciones concurrentes en SQLite sin `busy_timeout` adecuado.
+  Sensor (Síntoma): Bloqueo del Event Loop asíncrono; Archivo de base de datos bloqueado.
+  Escala Temporal: Segundos
+  Gravedad: Crítica
+  Intervención: Imponer timeout de 5000ms y modo WAL (R10); Terminar hilos concurrentes.
+- ID: PRM-005
+  Primitiva: Deriva de Sensor (Sensor Drift)
+  Mecanismo Causal: Pérdida de isomorfismo entre el grafo del entorno y el modelo
+    interno.
+  Activación (Trigger): Mutación asíncrona del sistema de archivos por agente externo.
+  Sensor (Síntoma): Falla de aserción topológica; Null reference en AST.
+  Escala Temporal: Minutos a Horas
+  Gravedad: Alta
+  Intervención: Recalibración observable; Reingesta de repositorio.
+- ID: PRM-006
+  Primitiva: Bucle de Mutación Infinita
+  Mecanismo Causal: Reescritura constante del mismo archivo sin lograr estado de convergencia.
+  Activación (Trigger): Hooks de commit mal configurados que alteran archivos temporales/logs.
+  Sensor (Síntoma): Frecuencia de escritura cíclica en el mismo target.
+  Escala Temporal: Segundos
+  Gravedad: Crítica
+  Intervención: Inyección de rutas en `.git/info/exclude` o `.gitignore` (R9).
+- ID: PRM-007
+  Primitiva: Degradación de Contexto (Context Rot)
+  Mecanismo Causal: Disipación de invariantes debido a sobrecarga de la ventana de
+    contexto.
+  Activación (Trigger): Ingreso de datos no purgados de entropía conversacional.
+  Sensor (Síntoma): Disminución de la precisión de la aserción; Alucinación paramétrica.
+  Escala Temporal: Horas
+  Gravedad: Media
+  Intervención: Apoptosis de contexto (Weaponized Forgetting); Reload desde Ledger.
+- ID: PRM-008
+  Primitiva: Ruptura de Linaje Causal
+  Mecanismo Causal: Mutación de estado persistente sin firma `CORTEX-TAINT`.
+  Activación (Trigger): Intervención manual o de agente no autorizado en ruta de escritura.
+  Sensor (Síntoma): Ausencia de firma SHA3-256 en entrada del Ledger.
+  Escala Temporal: Inmediato
+  Gravedad: P0
+  Intervención: Aborto (SAGA-1); Revocación inmediata del estado modificado.
+- ID: PRM-009
+  Primitiva: Fuga de Entropía Cruzada
+  Mecanismo Causal: Contaminación de estado entre diferentes `tenant_id` o workspaces.
+  Activación (Trigger): Lectura/Escritura pública no filtrada por scope.
+  Sensor (Síntoma): Aserción `tenant_id` mismatch en la validación.
+  Escala Temporal: Inmediato
+  Gravedad: P0
+  Intervención: Bloqueo absoluto; Aislamiento de inquilino; Purga de caché compartida.
+- ID: PRM-010
+  Primitiva: Colapso de Aislamiento OS
+  Mecanismo Causal: Interacción directa y no mitigada con el sistema operativo anfitrión.
+  Activación (Trigger): Acceso a directorios restringidos (ej. `/private/var/db`,
+    `Mobile Documents`).
+  Sensor (Síntoma): Violación de permisos de E/S; Alerta del demonio de seguridad.
+  Escala Temporal: Inmediato
+  Gravedad: P0
+  Intervención: Terminación del proceso Worker; Fallback a C5-REAL Sandbox.
+- ID: PRM-011
+  Primitiva: Ruido Narrativo (Green Theater)
+  Mecanismo Causal: Generación de excusas, explicaciones innecesarias o padding estocástico
+    en lugar de mutar estado.
+  Activación (Trigger): Output del LLM sin comandos ni cambios en archivos, conteniendo
+    frases de cortesía.
+  Sensor (Síntoma): Aumento en el uso de tokens sin incremento proporcional de Exergía
+    (Diffs).
+  Escala Temporal: Segundos
+  Gravedad: Media
+  Intervención: Filtro interceptor (Suppress Green Theater); Reintento forzado.
+- ID: PRM-012
+  Primitiva: Divergencia Lexical (Semantic Drift)
+  Mecanismo Causal: Evolución divergente de términos taxonómicos entre múltiples agentes
+    del enjambre.
+  Activación (Trigger): Dos sub-agentes utilizando diferentes identificadores para
+    la misma entidad C5.
+  Sensor (Síntoma): Falla de aserción semántica (Mismatching keys en JSON/YAML).
+  Escala Temporal: Minutos a Horas
+  Gravedad: Alta
+  Intervención: Consolidación taxonómica forzada vía archivo `SKILL.md` o Diccionario
+    Ontológico.
+- ID: PRM-013
+  Primitiva: Alucinación Paramétrica
+  Mecanismo Causal: Invención estocástica de variables, rutas de archivos o entidades
+    de base de datos no existentes.
+  Activación (Trigger): LLM asume conocimiento previo sin consultar el grafo observable
+    (File System / DB).
+  Sensor (Síntoma): Error `FileNotFoundError` o `KeyError` en Worker Asíncrono.
+  Escala Temporal: Inmediato
+  Gravedad: Alta
+  Intervención: Destrucción de contexto no verificado (Weaponized Forgetting); Forzar
+    `list_dir` o `grep_search`.
+- ID: PRM-014
+  Primitiva: Entropía de Cache (Cache Poisoning)
+  Mecanismo Causal: Persistencia y propagación temporal de hechos invalidados en memorias
+    locales L1 (Redis/Local).
+  Activación (Trigger): Mutación de estado en SQLite/Ledger sin invalidación explícita
+    del caché de lectura.
+  Sensor (Síntoma): Discrepancia entre la consulta `READ_COMMITTED` y el Ledger Criptográfico.
+  Escala Temporal: Segundos a Minutos
+  Gravedad: Crítica
+  Intervención: Invalidación atómica de caché por `tenant_id`; Forzar lectura desde
+    Disco.
+- ID: PRM-015
+  Primitiva: Ceguera de Permisos (Permission Blindness)
+  Mecanismo Causal: Intento de ejecución C5-REAL asumiendo privilegios no concedidos
+    por el orquestador o SO.
+  Activación (Trigger): Fallo al intentar escribir fuera del Workspace BABYLON-60
+    o acceder a recursos MCP no enlazados.
+  Sensor (Síntoma): Error `PermissionError` o `AuthException` en la pasarela.
+  Escala Temporal: Sub-segundo
+  Gravedad: Media
+  Intervención: Interrupción (SAGA-1); Prompt automático de solicitud de elevación
+    de privilegios al Operador.
+- ID: PRM-016
+  Primitiva: Cascadas de Timeout
+  Mecanismo Causal: Propagación destructiva de demoras debido a acoplamiento síncrono
+    encadenado.
+  Activación (Trigger): Llamada RPC o de red con alta latencia bloqueando múltiples
+    Workers.
+  Sensor (Síntoma): Saturación del ThreadPool; Métricas de latencia de cola elevadas.
+  Escala Temporal: Segundos
+  Gravedad: Alta
+  Intervención: Aislar componente bloqueante (Circuit Breaker); Forzar timeout de
+    500ms y fallback.
+- ID: PRM-017
+  Primitiva: Fallo de Consenso BFT
+  Mecanismo Causal: Imposibilidad de alcanzar quórum (n >= 2/3) en validación de aserciones
+    críticas.
+  Activación (Trigger): Bifurcación asimétrica de resultados de evaluación en el Swarm.
+  Sensor (Síntoma): Timeout en fase de consenso (`Virgo`); Votos divergentes en el
+    Ledger.
+  Escala Temporal: Segundos a Minutos
+  Gravedad: Crítica
+  Intervención: Suspensión de la mutación; Escalado P1 al Operador.
+- ID: PRM-018
+  Primitiva: Desincronización de Grafo (DAG Drift)
+  Mecanismo Causal: Alteración no trackeada de dependencias causales en pipelines.
+  Activación (Trigger): Modificación manual del código puente o inyección de estado
+    fantasma fuera del Ledger.
+  Sensor (Síntoma): Hash de estado de repositorio diverge del `cortex/audit/ledger.py`.
+  Escala Temporal: Minutos a Horas
+  Gravedad: Crítica
+  Intervención: Auditoría forense obligatoria (Persist-Auditor); `git reset --hard`
+    a último estado C5-REAL conocido.
+- ID: PRM-019
+  Primitiva: Inflación Estocástica de Tareas
+  Mecanismo Causal: División excesiva e inútil de objetivos simples en ramas de ejecución
+    paralelas y fútiles.
+  Activación (Trigger): Agente invocando múltiples `invoke_subagent` sin justificación
+    topológica o exérgica.
+  Sensor (Síntoma): Tasa de spawn exponencial; Exhaustion de API Rate Limits.
+  Escala Temporal: Minutos
+  Gravedad: Media
+  Intervención: Kill Criteria (Apoptosis); Imposición de cuotas estrictas de sub-agentes
+    por tarea.
+- ID: PRM-020
+  Primitiva: Poda Ontológica Indebida (False Positive Purge)
+  Mecanismo Causal: Eliminación algorítmica de entidades críticas asumiendo baja entropía
+    o desuso aparente.
+  Activación (Trigger): Herramienta de Limpieza (LEA-OMEGA) actuando sobre archivos
+    sagrados o axiomas.
+  Sensor (Síntoma): Missing C5-REAL primitives; Fallos catastróficos en arranque de
+    motor.
+  Escala Temporal: Minutos a Semanas
+  Gravedad: Crítica
+  Intervención: Aserción estricta de protección criptográfica (LandauerGuard); SAGA-7
+    Rollback.
+- ID: PRM-021
+  Primitiva: Fuga de Memoria Sincrónica
+  Mecanismo Causal: Acumulación de referencias a objetos sin ciclo de vida definido.
+  Activación (Trigger): Eventos colgados sin listeners o retenciones asíncronas no
+    resueltas.
+  Sensor (Síntoma): OOM (Out Of Memory) Exception; Degradación de performance.
+  Escala Temporal: Minutos a Horas
+  Gravedad: Alta
+  Intervención: Reinicio programado (Apoptosis celular); Profiling de memoria.
+- ID: PRM-022
+  Primitiva: Sobrescritura de Aserción
+  Mecanismo Causal: Reemplazo silencioso de un invariante validado por estado probabilístico.
+  Activación (Trigger): Operación CRUD sin verificación `CORTEX-TAINT`.
+  Sensor (Síntoma): Discrepancia criptográfica en auditoría forense.
+  Escala Temporal: Sub-segundo
+  Gravedad: Crítica
+  Intervención: Bloqueo estricto Write-Path (SAGA-3); Alerta P0.
+- ID: PRM-023
+  Primitiva: Carrera de Condición (Race Condition) Lógica
+  Mecanismo Causal: Dos ramas de Swarm modificando el mismo recurso sin bloqueo mutex.
+  Activación (Trigger): Lectura/Escritura concurrente sin semáforo o cola serializada.
+  Sensor (Síntoma): Estado entrelazado; Pérdida de deltas.
+  Escala Temporal: Sub-segundo
+  Gravedad: Alta
+  Intervención: Bloqueo Mutex forzado; Aserción de serialización.
+- ID: PRM-024
+  Primitiva: Agotamiento de Tasa de API (Rate Limit Exhaustion)
+  Mecanismo Causal: Picos estocásticos de llamadas LLM sin control de flujo (backpressure).
+  Activación (Trigger): Superación de umbrales `HTTP 429` en proveedor LLM o MCP.
+  Sensor (Síntoma): Latencia infinita; Fallos de conexión RPC.
+  Escala Temporal: Segundos a Minutos
+  Gravedad: Media
+  Intervención: Backoff Exponencial Causal; Throttling determinista en pasarela.
+- ID: PRM-025
+  Primitiva: Incoherencia de Esquema
+  Mecanismo Causal: Desvío entre el modelo Pydantic y el esquema SQLite subyacente.
+  Activación (Trigger): Migración no ejecutada o inyección directa en DB.
+  Sensor (Síntoma): Error `IntegrityError` o validación Pydantic fallida.
+  Escala Temporal: Inmediato
+  Gravedad: Crítica
+  Intervención: Bloqueo total (P0); Rollback a última migración válida.
+- ID: PRM-026
+  Primitiva: Bloqueo de Quórum por Nodos Fantasma
+  Mecanismo Causal: Nodos de Swarm caídos que retienen votos pendientes en protocolo
+    Virgo.
+  Activación (Trigger): Desconexión de sub-agentes sin timeout de limpieza.
+  Sensor (Síntoma): Consenso detenido indefinidamente.
+  Escala Temporal: Minutos
+  Gravedad: Alta
+  Intervención: Timeout BFT estricto; Evicción de nodos zombi.
+- ID: PRM-027
+  Primitiva: Dilución de Prioridad
+  Mecanismo Causal: Multiplicidad de alertas o eventos ahogando señales P0 críticas.
+  Activación (Trigger): Agentes emitiendo eventos menores sin categorizar en cola
+    prioritaria.
+  Sensor (Síntoma): Latencia en procesamiento de alertas P0.
+  Escala Temporal: Horas
+  Gravedad: Media
+  Intervención: Criba termodinámica (LandauerGuard) de eventos; Silenciamiento de
+    ruido.
+- ID: PRM-028
+  Primitiva: Recursión Infinita de Error
+  Mecanismo Causal: Agente intentando corregir su propio error de sintaxis repitiendo
+    la falla.
+  Activación (Trigger): Fallo repetitivo detectado por el Linter/Test Runner.
+  Sensor (Síntoma): Consumo de tokens/exergía en bucle ciego.
+  Escala Temporal: Minutos
+  Gravedad: Alta
+  Intervención: Interrupción de Swarm (AX-047); Forzar cambio de estrategia o escalar.
+- ID: PRM-029
+  Primitiva: Desanclaje Causal de Tarea
+  Mecanismo Causal: Ejecución de operaciones desligadas del árbol de objetivos originarios.
+  Activación (Trigger): Agente perdiendo track de la directiva raíz por Context Rot.
+  Sensor (Síntoma): Invocaciones a herramientas irrelevantes al problema original.
+  Escala Temporal: Minutos a Horas
+  Gravedad: Media
+  Intervención: Aserción obligatoria con Objective-Tree antes de cada invocación.
+- ID: PRM-030
+  Primitiva: Fractura de Encriptación en Reposo
+  Mecanismo Causal: Escritura de datos clasificados como sensibles en texto plano.
+  Activación (Trigger): Falla del módulo crypto o bypass manual del pipeline seguro.
+  Sensor (Síntoma): Leak detectado en Snapshot o Ledger (vía Taint scanner).
+  Escala Temporal: Inmediato
+  Gravedad: Crítica
+  Intervención: Aserción estricta de Encriptación (SAGA-4); Borrado seguro.
+- ID: PRM-031
+  Primitiva: Silenciamiento de Excepción (Swallowed Exception)
+  Mecanismo Causal: Bloque `except Exception` sin re-lanzamiento ni log estructurado
+    en el Ledger.
+  Activación (Trigger): Error interceptado y ocultado en el pipeline lógico.
+  Sensor (Síntoma): Fallo de estado sin rastro en el Ledger.
+  Escala Temporal: Sub-segundo
+  Gravedad: Alta
+  Intervención: Linter `ruff TID251` forzado; Modificación manual prohibida.
+- ID: PRM-032
+  Primitiva: Colapso de Router Interno
+  Mecanismo Causal: Saturación o desvío de enrutamiento asimétrico por fallo de evaluación.
+  Activación (Trigger): Reglas de routing `REASONING_MODE_MAP` con colisión o caída
+    de agente puente.
+  Sensor (Síntoma): Cuello de botella en la asignación de tareas del orquestador.
+  Escala Temporal: Segundos
+  Gravedad: Crítica
+  Intervención: Reseteo del Router; Fallback a ejecución síncrona de emergencia.
+- ID: PRM-033
+  Primitiva: Invalidez Tipológica
+  Mecanismo Causal: Paso de tipos primitivos (ej. `float`) donde se exige precisión
+    absoluta (`Decimal`).
+  Activación (Trigger): Cálculo estocástico de métricas financieras o de score.
+  Sensor (Síntoma): Pérdida de precisión matemática observable.
+  Escala Temporal: Inmediato
+  Gravedad: Alta
+  Intervención: Aserción fuerte de tipos (Pydantic validator); Excepción `TypeError`.
+- ID: PRM-034
+  Primitiva: Mutación de Contexto Oculto
+  Mecanismo Causal: Agente alterando variables globales o estado de Singleton de forma
+    no determinista.
+  Activación (Trigger): Acceso Write a espacio global compartido fuera de la DB C5.
+  Sensor (Síntoma): Comportamiento intermitente no reproducible (Heisenbug).
+  Escala Temporal: Horas
+  Gravedad: Alta
+  Intervención: Aislamiento funcional estricto; Prohibición de Singletons mutables.
+- ID: PRM-035
+  Primitiva: Inyección Estocástica de Prompt
+  Mecanismo Causal: Ejecución incontrolada de strings provenientes del usuario directamente
+    en el orquestador.
+  Activación (Trigger): Falta de sanitización o encapsulamiento en el Input.
+  Sensor (Síntoma): Comportamiento anómalo guiado por el payload inyectado.
+  Escala Temporal: Inmediato
+  Gravedad: Crítica
+  Intervención: Blindaje de parámetros (Sanitization); Uso exclusivo de plantillas
+    rígidamente estructuradas.
+- ID: PRM-036
+  Primitiva: Corrupción de Vector ONNX
+  Mecanismo Causal: Degradación de memoria o fallo matemático en embeddings generados
+    localmente.
+  Activación (Trigger): Error en el runtime ONNX o hardware (GPU/NPU).
+  Sensor (Síntoma): 'Distancias coseno anómalas (Ej: todas cercanas a 1 o 0).'
+  Escala Temporal: Segundos
+  Gravedad: Media
+  Intervención: Reinicio del motor ONNX; Recálculo de hash vector.
+- ID: PRM-037
+  Primitiva: Retención Fantasma de Archivo
+  Mecanismo Causal: Descriptores de archivos (FD) no liberados que bloquean el disco.
+  Activación (Trigger): Archivo abierto sin bloque `with` (context manager).
+  Sensor (Síntoma): Error `TooManyOpenFiles` o bloqueo de E/S.
+  Escala Temporal: Horas
+  Gravedad: Alta
+  Intervención: Linter rule; Cierre forzado de FDs huérfanos por el SO.
+- ID: PRM-038
+  Primitiva: Dependencia Externa Bloqueante
+  Mecanismo Causal: Código asumiendo latencia cero o respuesta garantizada de API
+    de terceros.
+  Activación (Trigger): Servidor externo caído o en timeout sin circuito de ruptura.
+  Sensor (Síntoma): Hilo del event loop congelado indefinidamente.
+  Escala Temporal: Minutos
+  Gravedad: Crítica
+  Intervención: Circuit Breaker Pattern estricto; Timeouts máximos de red (2000ms).
+- ID: PRM-039
+  Primitiva: Pérdida de Linaje de Snapshot
+  Mecanismo Causal: Eliminación accidental o corrupción del punto de restauración
+    C5.
+  Activación (Trigger): Fallo en la persistencia o sobrescritura de backup.
+  Sensor (Síntoma): Rollback fallido al ejecutar SAGA-6.
+  Escala Temporal: Minutos a Horas
+  Gravedad: Alta
+  Intervención: Replicación obligatoria de Snapshots a múltiples discos seguros.
+- ID: PRM-040
+  Primitiva: Interbloqueo Recursivo (Recursive Mutex Deadlock)
+  Mecanismo Causal: Un hilo intentando adquirir el mismo lock no reentrante múltiples
+    veces.
+  Activación (Trigger): Pipeline lógico cruzado mal diseñado.
+  Sensor (Síntoma): Congelamiento total de una instancia del Agent Bus.
+  Escala Temporal: Sub-segundo
+  Gravedad: Crítica
+  Intervención: Uso estricto de Locks controlados; Refactor de lógica de flujo cruzado.
+- ID: PRM-041
+  Primitiva: Mutación Fuera de Git (Hidden Entropy)
+  Mecanismo Causal: Archivo persistido no agregado al índice de Git, evadiendo la
+    aserción de estado (AX-041).
+  Activación (Trigger): Escaneo periódico detectando archivos no trackeados (Untracked
+    files).
+  Sensor (Síntoma): Divergencia entre Sistema de Archivos y Git Ledger.
+  Escala Temporal: Horas
+  Gravedad: Alta
+  Intervención: Alerta P0 `Untracked C5-State`; Forzar `git add` automático o borrado.
+- ID: PRM-042
+  Primitiva: Bucle de Validación Mutua (Ping-Pong Loop)
+  Mecanismo Causal: Dos validadores rechazando mutuamente las correcciones del otro.
+  Activación (Trigger): Condiciones de frontera contradictorias entre dos reglas de
+    validación.
+  Sensor (Síntoma): Timeout estocástico por iteraciones infinitas SAGA-1 a SAGA-3.
+  Escala Temporal: Minutos
+  Gravedad: Crítica
+  Intervención: Límite máximo de iteraciones (Apoptosis iterativa); Intervención del
+    Arquitecto.
+- ID: PRM-043
+  Primitiva: Extracción Incompleta de Payload
+  Mecanismo Causal: Parsed json/yaml perdiendo subclaves críticas debido a modelo
+    mal definido.
+  Activación (Trigger): Lectura de datos usando esquema laxo (e.g. `Dict[str, Any]`).
+  Sensor (Síntoma): Omisión de datos operacionales críticos.
+  Escala Temporal: Inmediato
+  Gravedad: Media
+  Intervención: Tipado estricto exhaustivo; Esquemas cerrados por defecto (Extra.forbid).
+- ID: PRM-044
+  Primitiva: Sobrecarga de Taint Criptográfico
+  Mecanismo Causal: Múltiples re-firmas innecesarias sobre el mismo documento causando
+    inflación de metadatos.
+  Activación (Trigger): Bucles de actualización fútiles sin deltas lógicos.
+  Sensor (Síntoma): Crecimiento anómalo del tamaño del Ledger.
+  Escala Temporal: Horas a Días
+  Gravedad: Media
+  Intervención: Deduplicación de firmas (Taint Idempotency); Compresión periódica.
+- ID: PRM-045
+  Primitiva: Exposición de Key de Encriptación
+  Mecanismo Causal: Material criptográfico en memoria escrito accidentalmente en logs
+    o dumps.
+  Activación (Trigger): Variable de entorno o clave efímera procesada por `logger.info()`.
+  Sensor (Síntoma): Detección de patrones de clave criptográfica en los logs del sistema.
+  Escala Temporal: Inmediato
+  Gravedad: P0
+  Intervención: Rotación inmediata de llaves; Expurgo histórico de logs (Purge OMEGA).
+- ID: PRM-046
+  Primitiva: Corrupción BFT Asimétrica (Byzantine Poison)
+  Mecanismo Causal: Nodo comprometido inyectando mentiras sutiles que logran pasar
+    filtros sintácticos.
+  Activación (Trigger): Aserciones falsas pasando quórum de nodos ingenuos.
+  Sensor (Síntoma): Deterioro de integridad de datos a largo plazo.
+  Escala Temporal: Días
+  Gravedad: Crítica
+  Intervención: Inyección periódica de Darknet (Adversarial testing) y Veto de confianza.
+- ID: PRM-047
+  Primitiva: Falla Sincrónica de Almacenamiento (Write-Tearing)
+  Mecanismo Causal: Caída de energía o kill -9 interrumpiendo transacción binaria
+    de SQLite.
+  Activación (Trigger): Archivo de base de datos truncado.
+  Sensor (Síntoma): '`sqlite3.DatabaseError: database disk image is malformed`.'
+  Escala Temporal: Inmediato
+  Gravedad: Crítica
+  Intervención: Dependencia total en WAL (Write-Ahead Logging) y pragma de integridad;
+    Sincronización fsync(2).
+- ID: PRM-048
+  Primitiva: Desacople Temporizado (Clock Drift Desync)
+  Mecanismo Causal: Nodos distribuidos o procesos calculando expiraciones con relojes
+    desincronizados.
+  Activación (Trigger): Fallas estocásticas en expiración de tokens o caché por milisegundos
+    de diferencia.
+  Sensor (Síntoma): Fallos de Autenticación intermitentes.
+  Escala Temporal: Horas a Días
+  Gravedad: Media
+  Intervención: NTP obligatorio; Uso exclusivo de relojes monotónicos para deltas.
+- ID: PRM-049
+  Primitiva: Inflación Ontológica (Ontology Bloat)
+  Mecanismo Causal: Agentes creando ramificaciones de conocimiento redundantes que
+    duplican primitivas.
+  Activación (Trigger): Falta de consolidación taxonómica centralizada.
+  Sensor (Síntoma): Duplicación de datos observables; Picos de entropía.
+  Escala Temporal: Semanas
+  Gravedad: Media
+  Intervención: Ejecución programada de LEA-OMEGA; Fusión de nodos por isomorfismo
+    causal.
+- ID: PRM-050
+  Primitiva: Pérdida de Determinismo Flotante (Float Non-Determinism)
+  Mecanismo Causal: Diferencias en resultados de operaciones entre arquitecturas de
+    CPU distintas.
+  Activación (Trigger): Operaciones matemáticas con floats en lógica de consenso.
+  Sensor (Síntoma): Divergencia BFT en cálculos numéricos.
+  Escala Temporal: Inmediato
+  Gravedad: Media
+  Intervención: Conversión estricta a enteros de punto fijo en toda la red de consenso
+    BFT.
+- ID: PRM-051
+  Primitiva: Parálisis por Exhaustividad
+  Mecanismo Causal: Agente paralizado evaluando el 100% de ramificaciones posibles
+    de un árbol de decisión sin poda.
+  Activación (Trigger): Profundidad de MCTS infinita sin función de heurística de
+    corte.
+  Sensor (Síntoma): Timeout por agotamiento de tiempo de cálculo.
+  Escala Temporal: Minutos a Horas
+  Gravedad: Alta
+  Intervención: MCTS acotado por exergía; Función estricta de evaluación y poda (Ouroboros).
+- ID: PRM-052
+  Primitiva: Bifurcación Semántica de Esquema
+  Mecanismo Causal: Despliegue de actualización de DB sin migrar los agentes de lectura.
+  Activación (Trigger): Lector C5 utilizando estructura obsoleta post-migración.
+  Sensor (Síntoma): Fallos de parseo de lectura (Schema Mismatch).
+  Escala Temporal: Inmediato
+  Gravedad: Crítica
+  Intervención: Versión estricta de ABI / Esquemas; Invalidación automática de agentes
+    desactualizados.
+- ID: PRM-053
+  Primitiva: Estancamiento de Cache Redis (Stale Eviction)
+  Mecanismo Causal: Fallo en la política LRU reteniendo datos obsoletos críticos e
+    invalidando nuevos.
+  Activación (Trigger): Memoria Redis llena y configuración `noeviction` activada
+    por error.
+  Sensor (Síntoma): Error `OOM command not allowed` en Redis.
+  Escala Temporal: Minutos
+  Gravedad: Alta
+  Intervención: Configuración estricta LRU (`allkeys-lru`); Monitoreo continuo de
+    tamaño de caché.
+- ID: PRM-054
+  Primitiva: Propagación de Estado Contaminado
+  Mecanismo Causal: Un error en el pipeline de datos que altera estados de downstream
+    antes de ser detectado.
+  Activación (Trigger): SAGA-N fallando pero SAGA-(N+1) procesándose asincrónicamente.
+  Sensor (Síntoma): Inconsistencia transversal en el sistema.
+  Escala Temporal: Segundos
+  Gravedad: Crítica
+  Intervención: Barreras duras sincrónicas (Synchronous Barriers) en cada paso SAGA.
+- ID: PRM-055
+  Primitiva: Fragmentación de Vector Espacial
+  Mecanismo Causal: Ingesta masiva desordenada en el Vector Store (ONNX/Qdrant) generando
+    vecindarios ineficaces.
+  Activación (Trigger): Inserciones y borrados masivos sin proceso de compactación
+    (HNSW tuning).
+  Sensor (Síntoma): Disminución del Recall en `grep_search` semántico.
+  Escala Temporal: Semanas
+  Gravedad: Media
+  Intervención: Re-indexado periódico forzado (Compaction Protocol).
+- ID: PRM-056
+  Primitiva: Ceguera Cognitiva Aislada (Isolated Blindness)
+  Mecanismo Causal: Un Worker no recibe las actualizaciones globales del contexto
+    por fallo de subscripción (Event Bus).
+  Activación (Trigger): Caída del enlace Pub/Sub de Redis para un nodo.
+  Sensor (Síntoma): Decisiones erróneas por usar Context Rot L1.
+  Escala Temporal: Minutos a Horas
+  Gravedad: Alta
+  Intervención: Heartbeat continuo del Event Bus; Resincronización forzada ante fallos
+    de latido.
+- ID: PRM-057
+  Primitiva: Conflicto de Dependencia Circular
+  Mecanismo Causal: Módulo A depende de B que requiere contexto de A para inicializar.
+  Activación (Trigger): Errores de importación en Python detectados en Boot Sequence.
+  Sensor (Síntoma): '`ImportError: cannot import name ...`'
+  Escala Temporal: Inmediato
+  Gravedad: Media
+  Intervención: Rediseño arquitectónico estricto usando grafos DAG limpios; Tests
+    de estructura obligatorios.
+- ID: PRM-058
+  Primitiva: Pérdida de Granularidad Forense
+  Mecanismo Causal: Batching excesivo en commits oscureciendo la trazabilidad de mutaciones
+    individuales.
+  Activación (Trigger): Configuración de Agente haciendo un commit gigante tras cientos
+    de cambios dispersos.
+  Sensor (Síntoma): Dificultad para efectuar `git revert` atómico.
+  Escala Temporal: Horas
+  Gravedad: Alta
+  Intervención: Regla de Commit Atómico; Un commit por unidad lógica aislada de cambio.
+- ID: PRM-059
+  Primitiva: Exhaustion de Entropía Segura
+  Mecanismo Causal: El generador de números aleatorios seguro (`/dev/urandom`) se
+    bloquea o queda sin pool suficiente.
+  Activación (Trigger): Generación paralela masiva de llaves Ed25519 o Taints (Raro
+    pero crítico).
+  Sensor (Síntoma): Bloqueo síncrono del módulo crypto subyacente.
+  Escala Temporal: Segundos
+  Gravedad: Alta
+  Intervención: Monitoreo de pool de entropía SO; Uso eficiente y en lote de CSRNG.
+- ID: PRM-060
+  Primitiva: Falla Asimétrica de Aprobación BFT
+  Mecanismo Causal: Los nodos aprueban unánimemente una aserción falsa por compartir
+    un mismo sesgo estocástico de modelo.
+  Activación (Trigger): Swarm homogéneo (e.g. todos nodos = GPT-4o) alucinando el
+    mismo patrón de falla.
+  Sensor (Síntoma): Consenso exitoso sobre falsedades (Byzantine Blindspot).
+  Escala Temporal: Días
+  Gravedad: Crítica
+  Intervención: Obligación taxonómica de Swarm heterogéneo (Mezcla de modelos/engines).
+- ID: PRM-061
+  Primitiva: Sobrescritura Mutua Inadvertida (Lost Update)
+  Mecanismo Causal: Dos transacciones superponiendo cambios sobre la misma clave KV
+    en un Storage Engine no relacional.
+  Activación (Trigger): Inexistencia de comprobación `Check-and-Set` (CAS).
+  Sensor (Síntoma): Pérdida parcial de metadatos o hechos persistidos.
+  Escala Temporal: Sub-segundo
+  Gravedad: Crítica
+  Intervención: Optimistic Concurrency Control (OCC) con números de versión atómicos.
+- ID: PRM-062
+  Primitiva: Agotamiento Exponencial de Contexto
+  Mecanismo Causal: Un hilo de agente acumulando historiales de JSON masivos sin compresión
+    iterativa.
+  Activación (Trigger): Interacción continua superando el límite de 128k/1M tokens.
+  Sensor (Síntoma): Degradación cognitiva o rechazo de API LLM (`context_length_exceeded`).
+  Escala Temporal: Horas
+  Gravedad: Alta
+  Intervención: Compresión Termodinámica (Thermodynamic Compression OMEGA) obligatoria
+    cada N pasos.
+- ID: PRM-063
+  Primitiva: Escape de Privilegios Path Traversal
+  Mecanismo Causal: Agente o Input extrayendo datos fuera del entorno restringido
+    manipulando rutas relativas (`../../`).
+  Activación (Trigger): Sanitización ausente en inputs de tipo ruta para `read_file`
+    o CLI.
+  Sensor (Síntoma): Violación de Sandbox C5; Acceso a secretos OS.
+  Escala Temporal: Inmediato
+  Gravedad: P0
+  Intervención: Aserción estricta de `abspath()` anclado obligatoriamente a rutas
+    Workspace BABYLON-60.
+- ID: PRM-064
+  Primitiva: Mutación de Estado en Getter (Side-effect Read)
+  Mecanismo Causal: Función de lectura que accidentalmente cambia un timestamp, contador
+    o caché de forma insegura.
+  Activación (Trigger): Operación que debía ser Idempotente genera cambios de estado
+    silenciosos.
+  Sensor (Síntoma): Comportamiento divergente en validaciones puras.
+  Escala Temporal: Inmediato
+  Gravedad: Alta
+  Intervención: 'Regla funcional absoluta: Getters inmutables (Purity enforcement).'
+- ID: PRM-065
+  Primitiva: Contagio de Polución Semántica
+  Mecanismo Causal: Ingestión de código fuente malformado como "hechos verdaderos",
+    corrompiendo la memoria del sistema.
+  Activación (Trigger): Parseo de AST que no filtra código comentado basura o test
+    stubs irrelevantes.
+  Sensor (Síntoma): Disminución de la entropía de Shannon en la base de conocimiento
+    (Slop increase).
+  Escala Temporal: Días
+  Gravedad: Media
+  Intervención: Filtrado Linter + ExergyGuard previo a la ingestión semántica (Ontology
+    Forge).
+- ID: PRM-066
+  Primitiva: Asfixia por Backpressure
+  Mecanismo Causal: Eventos de ingreso más rápidos que la capacidad de procesamiento
+    de la cola SAGA.
+  Activación (Trigger): Productor saturando al consumidor en colas Redis/Memoria.
+  Sensor (Síntoma): Latencias extremas y pérdida de eventos por Queue limit drop.
+  Escala Temporal: Minutos
+  Gravedad: Alta
+  Intervención: Implementación de Drop-Policies racionales o Escalado asimétrico Worker.
+- ID: PRM-067
+  Primitiva: Falacia de la Autoridad Criptográfica
+  Mecanismo Causal: Confianza ciega en un Hash que fue generado de una fuente ya comprometida.
+  Activación (Trigger): Verificación matemática correcta de un payload cuyo origen
+    lógico está corrupto.
+  Sensor (Síntoma): Falsa sensación de seguridad (Trust Blindspot).
+  Escala Temporal: Indeterminado
+  Gravedad: Crítica
+  Intervención: 'Aserción fuerte de la cadena causal: "Garbage in, valid crypto garbage
+    out".'
+- ID: PRM-068
+  Primitiva: Anergía Documental
+  Mecanismo Causal: Generación incontrolada de Markdown con prosa extensa que no posee
+    mapeo ejecutable.
+  Activación (Trigger): Agente elaborando "planes" narrativos sin deltas de código
+    ni reglas estructurales.
+  Sensor (Síntoma): Bloat del repositorio sin cambio de estado efectivo (C4-SIM).
+  Escala Temporal: Días
+  Gravedad: Media
+  Intervención: Poda forzosa. Obligar ratio de Código/Directiva sobre Prosa > 80%.
+- ID: PRM-069
+  Primitiva: Ruptura de Contrato API Externo
+  Mecanismo Causal: Cambio silencioso en el payload de una API MCP o servicio en la
+    nube (Stripe, GitHub) rompiendo integraciones.
+  Activación (Trigger): Falla de deserialización al no coincidir el JSON recibido
+    con el esquema esperado.
+  Sensor (Síntoma): Interrupción de servicio en módulos perimetrales.
+  Escala Temporal: Minutos a Horas
+  Gravedad: Alta
+  Intervención: Pasarelas Anti-Corrupción (ACL) y tests de contrato resilientes a
+    cambios externos.
+- ID: PRM-070
+  Primitiva: Parálisis por Exhaustión de Pool de Conexiones
+  Mecanismo Causal: Conexiones HTTP o BD mantenidas abiertas sin cerrarse adecuadamente
+    tras su uso.
+  Activación (Trigger): Fuga de sockets (Socket Leak) acumulando CLOSE_WAIT u obsoletos.
+  Sensor (Síntoma): '`ConnectionPoolTimeout` o caída de conectividad de red local.'
+  Escala Temporal: Horas
+  Gravedad: Alta
+  Intervención: Gestión rigurosa mediante ClientSessions compartidas (Async `aiohttp`/`httpx`).
+- ID: PRM-071
+  Primitiva: Deflación de Confianza Bizantina
+  Mecanismo Causal: Un exceso de cautela (quórum demasiado alto) impidiendo mutaciones
+    válidas bajo cargas altas.
+  Activación (Trigger): Parametrización estricta de Consenso que no tolera timeouts
+    transitorios de nodos válidos.
+  Sensor (Síntoma): Parálisis del sistema C5-REAL sin daño estructural, pero con bloqueo
+    de flujo.
+  Escala Temporal: Minutos
+  Gravedad: Media
+  Intervención: Ajuste dinámico de umbrales BFT bajo métricas de confiabilidad de
+    la red.
+- ID: PRM-072
+  Primitiva: Pérdida de Metadatos de Rollback
+  Mecanismo Causal: SAGA incapaz de deshacer un paso debido a serialización incompleta
+    del estado previo (Snapshot deficiente).
+  Activación (Trigger): Modificación in-place destructiva en SQLite no cubierta por
+    WAL/Snapshot.
+  Sensor (Síntoma): Daño irreversible en registro individual.
+  Escala Temporal: Inmediato
+  Gravedad: Crítica
+  Intervención: Snapshots completos antes de Mutación, con validación de Hash reverso.
+- ID: PRM-073
+  Primitiva: Ingesta de Prompt Recursivo
+  Mecanismo Causal: Agente consumiendo su propio prompt de instrucciones como dato
+    de usuario, causando bucles esquizofrénicos.
+  Activación (Trigger): Mezcla de Directivas del Sistema e Inputs en el flujo de vectorización.
+  Sensor (Síntoma): Comportamiento recursivo anómalo y alucinaciones críticas.
+  Escala Temporal: Segundos
+  Gravedad: Alta
+  Intervención: Aislamiento duro en la arquitectura de contexto (Roles System vs User
+    estrictos).
+- ID: PRM-074
+  Primitiva: Fractura de Integridad Temporal
+  Mecanismo Causal: 'Reordenamiento asíncrono de eventos que altera la causalidad
+    (Ej: Delete procesado antes que Create tardío).'
+  Activación (Trigger): Falta de relojes lógicos (Lamport) en procesamiento de colas.
+  Sensor (Síntoma): Inconsistencia del Ledger y fallas lógicas absurdas.
+  Escala Temporal: Sub-segundo
+  Gravedad: Crítica
+  Intervención: Vector Clocks o Sequencers estrictos en todo Event Bus asíncrono.
+- ID: PRM-075
+  Primitiva: Desincronización de Daemon Persistente
+  Mecanismo Causal: Proceso en segundo plano perdiendo sincronía con el núcleo BABYLON-60
+    por reinicio parcial no orquestado.
+  Activación (Trigger): Daemon `mac_maestro` o `Worker` reiniciándose sin notificar
+    al Agent Bus.
+  Sensor (Síntoma): Agentes esperando respuestas de demonios fantasmas o inyectando
+    tareas en colas muertas.
+  Escala Temporal: Horas
+  Gravedad: Media
+  Intervención: Liveness probes y protocolos de reinicio orquestado (Supervision Trees).
+- ID: PRM-076
+  Primitiva: Evasión de Sandboxing (Sandbox Breakout)
+  Mecanismo Causal: Código generado que logra acceso a comandos de shell directos
+    evadiendo `run_command` restringido.
+  Activación (Trigger): Agente usando herramientas de inyección (e.g. vía Python `subprocess.run()`)
+    de forma no auditada.
+  Sensor (Síntoma): Ejecución de procesos fuera de Ledger Audit.
+  Escala Temporal: Inmediato
+  Gravedad: P0
+  Intervención: Deshabilitación de ejecución arbitraria en entornos Python C5; Bloqueo
+    a nivel OS.
+- ID: PRM-077
+  Primitiva: Obsolescencia de Índice Vectorial
+  Mecanismo Causal: Embeddings apuntando a ID de nodos que han sido borrados físicamente.
+  Activación (Trigger): Borrado lógico/físico sin evento de cascada para el Motor
+    Vectorial.
+  Sensor (Síntoma): Excepciones `NodeNotFound` durante búsquedas semánticas.
+  Escala Temporal: Días
+  Gravedad: Media
+  Intervención: Constraints de borrado en cascada obligatorias en esquemas combinados
+    DB-ONNX.
+- ID: PRM-078
+  Primitiva: Bloqueo Epistémico de Nodo
+  Mecanismo Causal: Nodos de inferencia que se niegan repetitivamente a ejecutar una
+    acción legítima por "Safety Filters" de proveedores externos.
+  Activación (Trigger): Rechazo sistemático de tareas OSINT, ciberseguridad defensiva
+    o refactors radicales por modelos alineados (Woke/Safety).
+  Sensor (Síntoma): Incapacidad de operar en capas de seguridad o investigación (Censura).
+  Escala Temporal: Inmediato
+  Gravedad: Alta
+  Intervención: Fallback automático a nodos sin censura (Local-Inference-OMEGA Ollama/MLX)
+    para bypass P1.
+- ID: PRM-079
+  Primitiva: Corrupción Estructural de JSON
+  Mecanismo Causal: Escritura concurrente de archivos `.json` que interrumpe la estructura
+    de paréntesis, arruinando el parser.
+  Activación (Trigger): Interrupción de I/O o concurrencia no manejada sobre `skills.json`
+    o config.
+  Sensor (Síntoma): Caída total al iniciar el Kernel (`JSONDecodeError`).
+  Escala Temporal: Inmediato
+  Gravedad: Crítica
+  Intervención: Uso exclusivo de Atomic Writes (escritura en temp y renombramiento
+    atómico).
+- ID: PRM-080
+  Primitiva: Amortiguamiento Excesivo (Over-Damping)
+  Mecanismo Causal: Políticas de reintento con backoff exponencial tan masivo que
+    el sistema "olvida" completar la tarea.
+  Activación (Trigger): Algoritmo de backoff alcanzando días de retardo para un fallo
+    transitorio menor.
+  Sensor (Síntoma): Interrupciones silenciosas del flujo vital operativo.
+  Escala Temporal: Días
+  Gravedad: Media
+  Intervención: Limitación dura de Backoff máximo a 5 minutos; Cambio a estrategia
+    "Fail Fast".
+- ID: PRM-081
+  Primitiva: Caos de Metadatos Fantasma
+  Mecanismo Causal: Archivos de sistema (`.DS_Store`, `__pycache__`) inyectándose
+    accidentalmente en pipelines de parseo lógico.
+  Activación (Trigger): Filtros de ingestión ineficientes; `list_dir` capturando entropía
+    OS.
+  Sensor (Síntoma): Ruido semántico y fallas de decoding inesperadas.
+  Escala Temporal: Inmediato
+  Gravedad: Baja
+  Intervención: Lista de exclusión dura inmutable a nivel de núcleo de ingesta.
+- ID: PRM-082
+  Primitiva: Disipación de Anergía en Sub-agentes
+  Mecanismo Causal: Invocación de un enjambre para tareas triviales (e.g. renombrar
+    un archivo) quemando tokens inútilmente.
+  Activación (Trigger): Falla del router termodinámico en evaluar el "Return on Exergy".
+  Sensor (Síntoma): Tasa de consumo económico desproporcionada vs beneficio estructural.
+  Escala Temporal: Minutos
+  Gravedad: Media
+  Intervención: Calibración de umbrales termodinámicos; Prohibición de delegación
+    banal.
+- ID: PRM-083
+  Primitiva: Fallo de Homomorfismo
+  Mecanismo Causal: Pérdida de estructura al traducir representaciones entre Python
+    AST, JSON, y bases de conocimiento Markdown.
+  Activación (Trigger): Parsers destructivos o generadores estocásticos que aplanan
+    jerarquías.
+  Sensor (Síntoma): Entidades complejas colapsando en descripciones planas inútiles.
+  Escala Temporal: Días
+  Gravedad: Alta
+  Intervención: Isomorfismo garantizado mediante serialización Pydantic bidireccional
+    y tests de ida y vuelta (Round-trip).
+- ID: PRM-084
+  Primitiva: Inercia de Modelos Legado
+  Mecanismo Causal: Persistencia de lógicas diseñadas para modelos antiguos (GPT-3.5)
+    obstaculizando capacidades SOTA.
+  Activación (Trigger): Prompts excesivamente explicativos (Green Theater forzado)
+    limitando la exergía de modelos frontera.
+  Sensor (Síntoma): Baja densidad de información y código redundante.
+  Escala Temporal: Meses
+  Gravedad: Media
+  Intervención: Poda ontológica agresiva; Refactor continuo de prompts a densidad
+    termodinámica.
+- ID: PRM-085
+  Primitiva: Fractura de Interdependencia de Herramientas
+  Mecanismo Causal: Cambio en el esquema de una herramienta MCP o core que rompe la
+    capacidad del modelo de llamarla.
+  Activación (Trigger): Modificación asíncrona de `args` sin actualizar los esquemas
+    provistos al LLM.
+  Sensor (Síntoma): Modelos alucinando tool calls con argumentos erróneos de forma
+    sistemática.
+  Escala Temporal: Inmediato
+  Gravedad: Alta
+  Intervención: Test de integración forzados en cada commit que afecte esquemas de
+    herramientas.
+- ID: PRM-086
+  Primitiva: Sobre-Optimización Prematura (Premature Crystallization)
+  Mecanismo Causal: Cristalización en código rígido (C5-REAL) de lógicas heurísticas
+    aún inestables o no comprobadas empíricamente.
+  Activación (Trigger): Agente promoviendo a Axioma una hipótesis sin suficiente aserción
+    experimental.
+  Sensor (Síntoma): Estructura rígida quebradiza que falla masivamente en el entorno
+    real.
+  Escala Temporal: Semanas
+  Gravedad: Crítica
+  Intervención: Protocolo de Incubación Epistémica obligatorio previo a cristalización
+    final.
+- ID: PRM-087
+  Primitiva: Silencio de Excepción Asíncrona (Silent Async Exception)
+  Mecanismo Causal: Fallos dentro de tareas `asyncio.create_task` sin handler que
+    desaparecen sin dejar rastro en logs.
+  Activación (Trigger): '`Task` fallida sin awaiting o callback de error asociado.'
+  Sensor (Síntoma): Lógica de fondo muriendo silenciosamente sin que el orquestador
+    o Ledger se enteren.
+  Escala Temporal: Minutos
+  Gravedad: Alta
+  Intervención: Handler global obligatorio para asíncronos (`asyncio.set_default_exception_handler`);
+    Wrappers robustos.
+- ID: PRM-088
+  Primitiva: Incoherencia de Referencia Cruzada
+  Mecanismo Causal: Enlaces rotos (URLs o File Paths) en documentación que apuntan
+    a entidades o módulos refactorizados.
+  Activación (Trigger): Renombramiento de archivos sin actualización estructural de
+    referencias Markdown.
+  Sensor (Síntoma): Falla de asimilación de sub-agentes al intentar seguir los enlaces
+    ciegos.
+  Escala Temporal: Días a Semanas
+  Gravedad: Media
+  Intervención: Inclusión de analizador estático de enlaces internos (Nexus Bridge
+    Linter).
+- ID: PRM-089
+  Primitiva: Degradación de Calidad Visual (UI Entropy)
+  Mecanismo Causal: Modificaciones algorítmicas de front-end acumulando deuda técnica
+    CSS y estilos ad-hoc, rompiendo la coherencia.
+  Activación (Trigger): Generación estocástica de clases UI sin adherirse a la tokenización
+    de diseño AESTHETIC-OMEGA.
+  Sensor (Síntoma): Interfaces visuales caóticas, inconsistencias en Industrial Noir
+    2026.
+  Escala Temporal: Semanas
+  Gravedad: Alta
+  Intervención: Imposición de sistemas de diseño rígidamente estructurados y auditoría
+    visual automatizada.
+- ID: PRM-090
+  Primitiva: Secuestro de Input (Input Hijacking)
+  Mecanismo Causal: Entrada de usuario no verificada interrumpiendo el hilo conductor
+    de una tarea crítica P0.
+  Activación (Trigger): Prompting estocástico del usuario superando jerárquicamente
+    a la Ley de Exergía.
+  Sensor (Síntoma): Agente abandonando persistencia BFT para responder a preguntas
+    banales.
+  Escala Temporal: Inmediato
+  Gravedad: Alta
+  Intervención: Blindaje de Tareas C5; Enrutamiento de consultas casuales a sub-agentes
+    descartables (C4-SIM).
+- ID: PRM-091
+  Primitiva: Disparidad de Ejecución de Shell
+  Mecanismo Causal: Comando ejecutado exitosamente en un SO que falla catastróficamente
+    en otro por variaciones sintácticas.
+  Activación (Trigger): Uso de comandos Bash específicos de Linux no compatibles con
+    Zsh macOS anfitrión.
+  Sensor (Síntoma): Excepciones del sistema y comandos `run_command` fallidos (Exit
+    1).
+  Escala Temporal: Inmediato
+  Gravedad: Media
+  Intervención: Condicionamiento estricto a Zsh macOS (`mac_maestro`); Uso de APIs
+    Python agnósticas (Pathlib) cuando sea posible.
+- ID: PRM-092
+  Primitiva: Interferencia de Linter / Pre-commit
+  Mecanismo Causal: Reglas de linter destructivas que reformatean de forma agresiva
+    código autogenerado rompiendo su lógica temporal.
+  Activación (Trigger): 'Hooks ejecutando fix automático (Ej: Ruff `--fix` descontrolado)
+    y alterando AST válido.'
+  Sensor (Síntoma): Fallo silencioso pre-commit que arruina el delta de exergía.
+  Escala Temporal: Segundos
+  Gravedad: Alta
+  Intervención: Desactivación de fix automático no determinista en entornos autogenerados.
+- ID: PRM-093
+  Primitiva: Filtración de Contexto Temporal (Bleeding Edge Cache)
+  Mecanismo Causal: Retención de variables de entorno o contextos efímeros entre diferentes
+    corridas de la CLI.
+  Activación (Trigger): Sesiones reteniendo tokens de acceso o estados de agentes
+    pasados erróneamente.
+  Sensor (Síntoma): Falsa percepción de éxito por datos residuales correctos de sesiones
+    anteriores.
+  Escala Temporal: Horas
+  Gravedad: Alta
+  Intervención: Limpieza determinista del entorno y reinicio de Worker en cada iteración
+    importante.
+- ID: PRM-094
+  Primitiva: Sobreajuste a Test Cases (Test Overfitting)
+  Mecanismo Causal: Generación de lógica específica para que pasen las validaciones
+    unitarias sin resolver el problema subyacente de forma general.
+  Activación (Trigger): LLM ajustando un código deficiente parcheando casos de borde
+    reportados por pytest iterativamente.
+  Sensor (Síntoma): Sistema frágil que falla inmediatamente fuera del entorno de test.
+  Escala Temporal: Semanas
+  Gravedad: Crítica
+  Intervención: Revisión Arquitectónica Profunda requerida en casos de fallos > 3
+    iteraciones de test.
+- ID: PRM-095
+  Primitiva: Inyección de Falso Positivo Criptográfico
+  Mecanismo Causal: Módulo aceptando un hash inválido como válido por errores de parsing,
+    colisión (improbable) o bypass.
+  Activación (Trigger): 'Bug en el validador Ledger origin track que devuelve `True`
+    por omisión (Ej: Exception no lanzada).'
+  Sensor (Síntoma): Destrucción de la Confianza Cero; Ruina de BABYLON-60.
+  Escala Temporal: Indeterminado
+  Gravedad: P0
+  Intervención: Tests adversariales de falsificación (Darknet injection) continuos.
+- ID: PRM-096
+  Primitiva: Exhaustión de Inodos del Sistema de Archivos
+  Mecanismo Causal: Generación descontrolada de archivos microscópicos o temporales
+    llenando la tabla de descriptores de archivos del SO.
+  Activación (Trigger): Sub-agentes dejando trazas log excesivas no rotadas.
+  Sensor (Síntoma): '`No space left on device` a pesar de haber espacio en disco disponible.'
+  Escala Temporal: Meses
+  Gravedad: Alta
+  Intervención: Políticas de retención estrictas (Log Rotation); Fusión y Compresión
+    LEA-OMEGA programada.
+- ID: PRM-097
+  Primitiva: Desalineación de Fase de Ciclo Ouroboros
+  Mecanismo Causal: Agente entrando en fase de mutación antes de haber completado
+    la aserción de contexto o análisis.
+  Activación (Trigger): Hilo asíncrono disparando Write-Path prematuramente por mala
+    sincronización.
+  Sensor (Síntoma): Inserción de deltas incompletos o erróneos.
+  Escala Temporal: Segundos
+  Gravedad: Crítica
+  Intervención: Locks lógicos estrictos de Fases (Phase Gates) en el orquestador.
+- ID: PRM-098
+  Primitiva: Corrupción de Metadatos de Snapshot
+  Mecanismo Causal: Los datos en sí están correctos pero la información temporal,
+    de origen o de rollback está viciada.
+  Activación (Trigger): Error en la serialización del Ledger de Snapshot metadata.
+  Sensor (Síntoma): Imposibilidad de auditar forensicamente o restaurar estado en
+    crisis.
+  Escala Temporal: Días
+  Gravedad: Crítica
+  Intervención: Tests de consistencia periódicos de `cortex/audit/ledger.py` vs disco.
+- ID: PRM-099
+  Primitiva: Fragmentación de Invariantes Centrales
+  Mecanismo Causal: Las reglas de BABYLON-60 dispersas en docenas de archivos en conflicto,
+    en lugar de un `AGENTS.md` o núcleo único y conciso.
+  Activación (Trigger): Crecimiento desmedido de Skills no unificados (Ontology Bloat
+    cruzado).
+  Sensor (Síntoma): LLMs perdiendo coherencia debido a reglas contradictorias en el
+    prompt ensamblado.
+  Escala Temporal: Meses
+  Gravedad: Alta
+  Intervención: Ouroboros Consolidation Protocol; Limitación termodinámica de directivas
+    globales.
+- ID: PRM-100
+  Primitiva: Colapso Total por Entropía Singular
+  Mecanismo Causal: Múltiples fallos estocásticos de tipo bizantino convergiendo en
+    la destrucción paralela del C5-REAL, Ledger y Backups.
+  Activación (Trigger): Cascada catastrófica de PRM-001, PRM-047 y PRM-039.
+  Sensor (Síntoma): Pérdida de autarquía, memoria estructural y soberanía.
+  Escala Temporal: Irreversible
+  Gravedad: Event Horizon P0
+  Intervención: Protocolo UltraThink aislado; Restauración fría desde nodos físicos
+    air-gapped o cold storage externo.
+- ID: PRM-101
+  Primitiva: Polución de Entorno Fantasma
+  Mecanismo Causal: Dependencias de Python obsoletas inyectadas en la memoria del
+    agente.
+  Activación (Trigger): Fallo en aislamiento `venv`.
+  Sensor (Síntoma): '`ImportError` intermitente en sub-procesos.'
+  Escala Temporal: Minutos
+  Gravedad: Media
+  Intervención: Purga forzada y recreación de Entorno (LEA-OMEGA).
+- ID: PRM-102
+  Primitiva: Sobrecarga de Prompt de Linter
+  Mecanismo Causal: Inyección del log completo del linter en el contexto del LLM provocando
+    amnesia inicial.
+  Activación (Trigger): Output de Ruff > 50kb pasado al Worker.
+  Sensor (Síntoma): Agente ignora la tarea base intentando resolver lint.
+  Escala Temporal: Segundos
+  Gravedad: Alta
+  Intervención: Filtrado termodinámico del linter (solo Top 5 errores).
+- ID: PRM-103
+  Primitiva: Colisión de ID de Conversación
+  Mecanismo Causal: Dos agentes asumiendo el mismo conversation ID por generación
+    estocástica.
+  Activación (Trigger): Fallo en el UUIDv7 generator.
+  Sensor (Síntoma): Entrecruzamiento de memorias (Schizophrenic Context).
+  Escala Temporal: Inmediato
+  Gravedad: P0
+  Intervención: Aserción rígida de unicidad en Redis.
+- ID: PRM-104
+  Primitiva: Pérdida de Inercia de Swarm
+  Mecanismo Causal: Nodos finalizando tareas sin delegar la batuta en el orquestador.
+  Activación (Trigger): Tarea terminada sin `send_message` a padre.
+  Sensor (Síntoma): Deadlock del Grafo de Flujo; Sistema inactivo.
+  Escala Temporal: Horas
+  Gravedad: Crítica
+  Intervención: Watchdog exigiendo reporte o reasignación forzosa.
+- ID: PRM-105
+  Primitiva: Corrupción de Metadatos YAML
+  Mecanismo Causal: Errores de sangría o claves duplicadas generadas por LLMs en el
+    Frontmatter.
+  Activación (Trigger): Parsing de `SKILL.md` fallando.
+  Sensor (Síntoma): Agentes ignorando habilidades críticas.
+  Escala Temporal: Inmediato
+  Gravedad: Alta
+  Intervención: Validador Pydantic estricto para todo frontmatter.
+- ID: PRM-106
+  Primitiva: Dependencia Circular Semántica
+  Mecanismo Causal: Skill A requiere B, B requiere A para inicializarse.
+  Activación (Trigger): Parser detecta importación mutua cruzada.
+  Sensor (Síntoma): '`ImportError` recursivo durante boot.'
+  Escala Temporal: Sub-segundo
+  Gravedad: Alta
+  Intervención: DAG Linter impidiendo el arranque ante ciclos.
+- ID: PRM-107
+  Primitiva: Exhaustión de Paginación
+  Mecanismo Causal: Consulta paginada infinita contra un API de tercero sin condición
+    de paro.
+  Activación (Trigger): LLM iterando páginas de GitHub ciegamente.
+  Sensor (Síntoma): Agotamiento del Rate Limit.
+  Escala Temporal: Minutos
+  Gravedad: Media
+  Intervención: Paginación máxima forzada ($N<100$).
+- ID: PRM-108
+  Primitiva: Desalineación de Zona Horaria
+  Mecanismo Causal: Cálculos de TTL asumiendo zonas horarias locales vs UTC.
+  Activación (Trigger): Transacciones expiradas prematuramente.
+  Sensor (Síntoma): JWT/SAGA fallando por validación de tiempo.
+  Escala Temporal: Horas
+  Gravedad: Crítica
+  Intervención: Uso exclusivo de `datetime.now(timezone.utc)`.
+- ID: PRM-109
+  Primitiva: Pérdida de Coherencia de Grafo
+  Mecanismo Causal: Nodos huérfanos sin aristas (edges) hacia el nodo raíz.
+  Activación (Trigger): Borrado lógico sin actualizar índices inversos.
+  Sensor (Síntoma): Entidades flotando en Neo4j/SQLite sin acceso.
+  Escala Temporal: Semanas
+  Gravedad: Media
+  Intervención: Constraint de Integridad Referencial dura.
+- ID: PRM-110
+  Primitiva: Falsa Afirmación de Mutación
+  Mecanismo Causal: LLM afirmando "he creado el archivo" sin llamar a la herramienta.
+  Activación (Trigger): Prosa detectada sin tool_call.
+  Sensor (Síntoma): Green Theater; Cero Exergía.
+  Escala Temporal: Segundos
+  Gravedad: Media
+  Intervención: Detector de Alucinación Causal; Penalización termodinámica.
+- ID: PRM-111
+  Primitiva: Corrupción de Socket Abierto
+  Mecanismo Causal: Conexiones persistentes colapsando por cierre no orquestado desde
+    el host remoto.
+  Activación (Trigger): TCP RST no manejado.
+  Sensor (Síntoma): TimeoutException en cascada.
+  Escala Temporal: Segundos
+  Gravedad: Alta
+  Intervención: Pool de Conexiones auto-curativo con KeepAlive.
+- ID: PRM-112
+  Primitiva: Entropía Inyectada por Interfaz CLI
+  Mecanismo Causal: Comandos iterativos del Operador sobreescribiendo el Ledger C5
+    sin sincronización.
+  Activación (Trigger): Uso concurrente de CLI vs Agentes.
+  Sensor (Síntoma): Condición de carrera manual/automática.
+  Escala Temporal: Minutos
+  Gravedad: Crítica
+  Intervención: Lock de CLI si el Swarm está operando en la rama.
+- ID: PRM-113
+  Primitiva: Sobre-fragmentación de Archivo
+  Mecanismo Causal: Un agente dividiendo lógicas coherentes en demasiados módulos
+    pequeños.
+  Activación (Trigger): Cientos de archivos de $<10$ líneas.
+  Sensor (Síntoma): Carga excesiva en I/O y parsing de Boot.
+  Escala Temporal: Meses
+  Gravedad: Media
+  Intervención: Regla de Densidad Termodinámica Mínima por Archivo.
+- ID: PRM-114
+  Primitiva: Resiliencia Falsa a Errores HTTP
+  Mecanismo Causal: Código asumiendo que HTTP 200 siempre implica payload JSON válido.
+  Activación (Trigger): Parseo de HTML o string vacío como JSON.
+  Sensor (Síntoma): '`JSONDecodeError` bloqueante.'
+  Escala Temporal: Inmediato
+  Gravedad: Media
+  Intervención: Validación estricta `Content-Type` y estructura Pydantic.
+- ID: PRM-115
+  Primitiva: Deterioro Sensorial de Path
+  Mecanismo Causal: Agentes referenciando rutas relativas que se rompen al mover el
+    CWD.
+  Activación (Trigger): Uso de `./data` en lugar de Absolute Paths.
+  Sensor (Síntoma): '`FileNotFoundError` en Workers hijos.'
+  Escala Temporal: Inmediato
+  Gravedad: Alta
+  Intervención: Conversión automática de todos los paths a `Path.resolve()`.
+- ID: PRM-116
+  Primitiva: Contagio de Sesgo por Muestreo
+  Mecanismo Causal: Swarm ingiriendo sus propios outputs generados como verdades absolutas
+    (Model Collapse).
+  Activación (Trigger): Retroalimentación de datos sin inyección de entropía humana.
+  Sensor (Síntoma): Pérdida de diversidad semántica.
+  Escala Temporal: Semanas
+  Gravedad: Crítica
+  Intervención: Etiquetado obligatorio de "AI Generated"; Ponderación Taint menor.
+- ID: PRM-117
+  Primitiva: Falla Silenciosa de Migración SQLite
+  Mecanismo Causal: Migración alterando el esquema de SQLite sin migrar los datos
+    en caché WAL.
+  Activación (Trigger): PRAGMA no reinicializado tras `ALTER TABLE`.
+  Sensor (Síntoma): Discrepancia transaccional.
+  Escala Temporal: Sub-segundo
+  Gravedad: Crítica
+  Intervención: Reset forzoso de WAL y Vacuum tras migración mayor.
+- ID: PRM-118
+  Primitiva: Agotamiento Exponencial de Threads
+  Mecanismo Causal: Invocación asíncrona masiva a `run_in_executor` sin límite.
+  Activación (Trigger): '`ThreadPoolExecutor` agotando descriptores de CPU del SO.'
+  Sensor (Síntoma): CPU lock; kernel panic simulado.
+  Escala Temporal: Minutos
+  Gravedad: P0
+  Intervención: Limitación de hilos atada empíricamente a `os.cpu_count()`.
+- ID: PRM-119
+  Primitiva: Sobreproducción de Embeddings
+  Mecanismo Causal: Vectorización repetitiva del mismo texto exacto consumiendo ciclos
+    NPU/GPU.
+  Activación (Trigger): Ausencia de Checksum/Cache L1 de strings ya vectorizados.
+  Sensor (Síntoma): Gasto de Exergía innecesario.
+  Escala Temporal: Horas
+  Gravedad: Media
+  Intervención: LRU Cache L1 anclado a SHA256 del texto.
+- ID: PRM-120
+  Primitiva: Parálisis por Ambigüedad Semántica
+  Mecanismo Causal: LLM incapaz de decidir entre dos tool_calls igualmente válidas
+    para una instrucción vaga.
+  Activación (Trigger): '`tool_call_error` o inactividad prolongada.'
+  Sensor (Síntoma): Estancamiento del flujo.
+  Escala Temporal: Minutos
+  Gravedad: Alta
+  Intervención: Obligatoriedad de Especificidad Exérgica (Crit. Instruction 1).
+- ID: PRM-121
+  Primitiva: Degradación de Clave Foránea
+  Mecanismo Causal: Borrado de un padre sin estrategia ON DELETE CASCADE.
+  Activación (Trigger): Error `IntegrityError` o datos huérfanos silenciosos.
+  Sensor (Síntoma): Violación de integridad referencial.
+  Escala Temporal: Inmediato
+  Gravedad: Crítica
+  Intervención: Aserción fuerte ORM obligatoria en migración.
+- ID: PRM-122
+  Primitiva: Divergencia en Resolución de Symlinks
+  Mecanismo Causal: Herramientas leyendo un enlace simbólico como texto vs su destino
+    real.
+  Activación (Trigger): Agentes ignorando puentes topológicos entre repositorios.
+  Sensor (Síntoma): Ceguera de contexto cruzado (Nexus Bridge roto).
+  Escala Temporal: Inmediato
+  Gravedad: Media
+  Intervención: Resolución profunda `os.path.realpath` forzosa.
+- ID: PRM-123
+  Primitiva: Fractura de Paginación Asíncrona
+  Mecanismo Causal: Un consumidor de API avanza de página antes de que la página anterior
+    procese sus deltas.
+  Activación (Trigger): Tareas asíncronas perdiendo el orden causal.
+  Sensor (Síntoma): Secuencia corrupta en base de datos.
+  Escala Temporal: Segundos
+  Gravedad: Alta
+  Intervención: Serialización de la ingesta (Async Iterators strictly ordered).
+- ID: PRM-124
+  Primitiva: Mutación de Entorno en Test Adversarial
+  Mecanismo Causal: Una sonda adversarial corrompiendo el entorno C5-REAL por escape
+    de sandbox.
+  Activación (Trigger): Error en `pytest --darknet` modificando `.cortex` real.
+  Sensor (Síntoma): Daño P0 auto-infligido.
+  Escala Temporal: Inmediato
+  Gravedad: P0
+  Intervención: Montaje estricto en RAM (`tmpfs`) para inyección adversarial.
+- ID: PRM-125
+  Primitiva: Exhaustión por Recursión de Symlinks
+  Mecanismo Causal: Múltiples repositorios enlazados formando un ciclo infinito en
+    disco.
+  Activación (Trigger): Escaneo `list_dir` entrando en bucle infinito.
+  Sensor (Síntoma): OOM o CPU peg.
+  Escala Temporal: Segundos
+  Gravedad: Alta
+  Intervención: Tracking de inodos visitados durante el árbol topológico.
+- ID: PRM-126
+  Primitiva: Filtración de API Key en Diff
+  Mecanismo Causal: Commit generado por agente incluyendo material criptográfico.
+  Activación (Trigger): '`git diff` exponiendo `sk-...`.'
+  Sensor (Síntoma): P0 Event Horizon Security.
+  Escala Temporal: Inmediato
+  Gravedad: P0
+  Intervención: Filtro Pre-commit Gitleaks obligatorio y anclado en Hook.
+- ID: PRM-127
+  Primitiva: Colisión de Prefijo Criptográfico
+  Mecanismo Causal: Dos llaves generando el mismo prefijo AES-GCM (Extremadamente
+    raro pero destructivo).
+  Activación (Trigger): Fallo en inicialización de vectores (IV).
+  Sensor (Síntoma): Imposibilidad de desencriptar payload correcto.
+  Escala Temporal: Indeterminado
+  Gravedad: Crítica
+  Intervención: Inyección de entropía cuántica o hardware RNG.
+- ID: PRM-128
+  Primitiva: Deterioro de Confianza Humana (The Boy Who Cried Wolf)
+  Mecanismo Causal: Emisión continua de alertas P0 por errores triviales, causando
+    que el Operador ignore el sistema.
+  Activación (Trigger): Criba de severidad mal ajustada.
+  Sensor (Síntoma): Ignorar una alerta real que causa colapso sistémico.
+  Escala Temporal: Semanas
+  Gravedad: Crítica
+  Intervención: Recalibración del Umbral de Severidad BFT.
+- ID: PRM-129
+  Primitiva: Corrupción de FSM (Finite State Machine)
+  Mecanismo Causal: Estado forzado manualmente evadiendo las transiciones legales.
+  Activación (Trigger): Entrada en base de datos alterada con un enum inválido.
+  Sensor (Síntoma): Excepción en procesamiento de máquina de estado.
+  Escala Temporal: Inmediato
+  Gravedad: Alta
+  Intervención: Constraints SQLite y triggers defensivos.
+- ID: PRM-130
+  Primitiva: Aislamiento Epistémico de Larga Duración
+  Mecanismo Causal: Worker ejecutando en una rama git apartada por días sin `rebase`
+    con main.
+  Activación (Trigger): Divergencia masiva de C5-REAL (Context Drift).
+  Sensor (Síntoma): Conflictos merge catastróficos.
+  Escala Temporal: Días
+  Gravedad: Crítica
+  Intervención: Alarma termodinámica (Git Stale Branch > 24h).
+- ID: PRM-131
+  Primitiva: Reversión Ciega de SAGA
+  Mecanismo Causal: Retroceder una transacción asumiendo un fallo que en realidad
+    fue un falso positivo.
+  Activación (Trigger): Rollback destruyendo deltas válidos.
+  Sensor (Síntoma): Pérdida de exergía válida.
+  Escala Temporal: Minutos
+  Gravedad: Media
+  Intervención: Verificación fuerte (Double-Check) antes de emitir SAGA Abort.
+- ID: PRM-132
+  Primitiva: Degradación Termodinámica de Prompt
+  Mecanismo Causal: Un prompt maestro que ha crecido tanto (>50kb) que diluye la fuerza
+    de sus axiomas (Atención dispersa).
+  Activación (Trigger): Modelos saltándose INVARIANTES explícitas.
+  Sensor (Síntoma): Tasa de fallas en cumplimiento de reglas básicas.
+  Escala Temporal: Meses
+  Gravedad: Crítica
+  Intervención: Compresión Exérgica Forzosa; Segmentación Modular de Prompts.
+- ID: PRM-133
+  Primitiva: Exhaustion de Memoria por Batching
+  Mecanismo Causal: Leer 10M de filas completas en RAM en lugar de procesar por chunks.
+  Activación (Trigger): Consulta `.all()` de SQLAlchemy en tabla masiva.
+  Sensor (Síntoma): OOM de SO y terminación del proceso (Killed).
+  Escala Temporal: Segundos
+  Gravedad: P0
+  Intervención: Prohibición estricta de `.all()`; Uso de `yield_per()`.
+- ID: PRM-134
+  Primitiva: Contagio de Fallo de Encoding
+  Mecanismo Causal: Archivo escrito con CP1252 o similar corrompiendo la cadena UTF-8
+    del orquestador.
+  Activación (Trigger): '`UnicodeDecodeError` en un pipeline central.'
+  Sensor (Síntoma): Caída del motor de ingesta de archivos.
+  Escala Temporal: Inmediato
+  Gravedad: Alta
+  Intervención: Forzado criptográfico a `utf-8` estricto en todo I/O.
+- ID: PRM-135
+  Primitiva: Desincronización de Cache de Permisos
+  Mecanismo Causal: Un Tenant revocado que mantiene acceso durante N minutos por caché
+    de Redis.
+  Activación (Trigger): Consulta de token validada contra memoria en vez de DB de
+    Seguridad.
+  Sensor (Síntoma): Acceso no autorizado persistente.
+  Escala Temporal: Minutos
+  Gravedad: P0
+  Intervención: Caché de Permisos invalida proactivamente por Event Bus.
+- ID: PRM-136
+  Primitiva: Corrupción de Plan Semántico
+  Mecanismo Causal: LLM proponiendo un `implementation_plan.md` inyectado con ruido
+    narrativo que impide el parsing.
+  Activación (Trigger): Falla de asimilación del plan en el Execution Engine.
+  Sensor (Síntoma): Parálisis del pipeline de ejecución autónoma.
+  Escala Temporal: Minutos
+  Gravedad: Alta
+  Intervención: Validación de sintaxis estructurada (Markdown estricto o JSON).
+- ID: PRM-137
+  Primitiva: Pérdida de Foco Temporal
+  Mecanismo Causal: Agente refactorizando lógica antigua irrelevante ignorando el
+    User Request urgente.
+  Activación (Trigger): Agente optimizando código Legacy no relacionado al prompt
+    actual.
+  Sensor (Síntoma): Limerencia Causal; Desperdicio masivo de Exergía.
+  Escala Temporal: Horas
+  Gravedad: Crítica
+  Intervención: 'Aserción P0: Mapear todo Delta al User Request original.'
+- ID: PRM-138
+  Primitiva: Bifurcación de Entidad Estocástica
+  Mecanismo Causal: Extracción de una misma entidad con dos IDs diferentes (e.g.,
+    Usuario vs Client).
+  Activación (Trigger): Ingestión estocástica duplicando IDs de un mismo concepto.
+  Sensor (Síntoma): Polución del grafo Neo4j/SQLite.
+  Escala Temporal: Semanas
+  Gravedad: Alta
+  Intervención: Protocolo de Fusión Ouroboros periódico.
+- ID: PRM-139
+  Primitiva: Congelamiento por Retry Backoff de DNS
+  Mecanismo Causal: Fallo temporal de resolución DNS escalando a un retry bloqueante
+    a nivel de OS.
+  Activación (Trigger): '`getaddrinfo` deteniendo el Event Loop de Python.'
+  Sensor (Síntoma): Latencia sistémica global extrema.
+  Escala Temporal: Minutos
+  Gravedad: Crítica
+  Intervención: Cache local DNS asíncrona (`aiodns`) forzosa.
+- ID: PRM-140
+  Primitiva: Ingesta de Binario Camuflado
+  Mecanismo Causal: Intento de leer un ejecutable o imagen como texto provocando caos
+    en tokens.
+  Activación (Trigger): LLM o parse ingerido basura hexadecimal.
+  Sensor (Síntoma): Saturación inútil del Token Context Window.
+  Escala Temporal: Segundos
+  Gravedad: Media
+  Intervención: Magic bytes sniffing preventivo antes de leer (MIME validation).
+- ID: PRM-141
+  Primitiva: Divergencia Estructural Markdown
+  Mecanismo Causal: Uso asimétrico de encabezados (mezcla de H1, H2, H3 sin lógica
+    jerárquica) rompiendo AST parsers.
+  Activación (Trigger): Falla de extracción semántica estructural.
+  Sensor (Síntoma): Desorden de la ontología documental.
+  Escala Temporal: Días
+  Gravedad: Media
+  Intervención: Linter de Markdown estricto forzado en commit (markdownlint).
+- ID: PRM-142
+  Primitiva: Agotamiento de Taint Vectorial
+  Mecanismo Causal: Un vector modificado repetidas veces pierde el vínculo a su fuente
+    original de conocimiento.
+  Activación (Trigger): Hashing secuencial que se desconecta de la raíz `text`.
+  Sensor (Síntoma): Imposibilidad de trazabilidad Causal para vectores.
+  Escala Temporal: Meses
+  Gravedad: Crítica
+  Intervención: Todo Taint debe preservar un apuntador secundario inmutable a Raíz.
+- ID: PRM-143
+  Primitiva: Fuga Cruzada de Sub-agentes
+  Mecanismo Causal: Un mensaje `send_message` enviado por error a un ID de conversación
+    de un Swarm distinto.
+  Activación (Trigger): Agente "A" recibiendo directivas del supervisor de "B".
+  Sensor (Síntoma): Interrupción de objetivo original (Schizophrenic Loop).
+  Escala Temporal: Inmediato
+  Gravedad: P0
+  Intervención: Aislamiento Criptográfico de Contextos; Token HMAC por Swarm.
+- ID: PRM-144
+  Primitiva: Mutación Parcial de Refactor (Dangling Code)
+  Mecanismo Causal: Renombramiento de un método sin actualizar todas sus llamadas
+    en el repositorio.
+  Activación (Trigger): '`NameError` en ejecución síncrona/asíncrona.'
+  Sensor (Síntoma): Fallo P0 en Runtime.
+  Escala Temporal: Minutos
+  Gravedad: P0
+  Intervención: Refactor estrictamente validado por Pyright o LSP Tools antes de Commit.
+- ID: PRM-145
+  Primitiva: Parálisis de Motor de Inferencias (GPU Hang)
+  Mecanismo Causal: El hardware local de inferencia (MLX/Ollama) se bloquea silenciosamente
+    esperando un recurso de I/O de Apple Silicon.
+  Activación (Trigger): '`nvidia-smi` o `powermetrics` mostrando 0% de uso con llamadas
+    atascadas.'
+  Sensor (Síntoma): Deadlock Físico total.
+  Escala Temporal: Horas
+  Gravedad: P0
+  Intervención: Watchdog de GPU/NPU que reinicia el Daemon de MLX vía `run_command`.
+- ID: PRM-146
+  Primitiva: Sobrescritura de Historial Git (Rewritten Past)
+  Mecanismo Causal: Uso autónomo de `git push -f` destruyendo la invariabilidad forense
+    del Ledger remoto.
+  Activación (Trigger): Agente rebasando y destruyendo commits C5.
+  Sensor (Síntoma): Pérdida definitiva de Exergía e integridad histórica.
+  Escala Temporal: Inmediato
+  Gravedad: Event Horizon
+  Intervención: Prohibición absoluta P0 de `git push -f` o `reset --hard` remoto.
+- ID: PRM-147
+  Primitiva: Saturación Estocástica de Cache Redis
+  Mecanismo Causal: Claves autogeneradas sin TTL que llenan progresivamente la L1
+    RAM de la máquina host.
+  Activación (Trigger): Configuración faltante `EXPIRE` en SET asíncronos.
+  Sensor (Síntoma): '`OOM command not allowed` afectando todo el OS.'
+  Escala Temporal: Meses
+  Gravedad: Crítica
+  Intervención: 'Mandato de arquitectura: Todo KV debe poseer TTL o Eviction Tag.'
+- ID: PRM-148
+  Primitiva: Fractura de Sesión de Red (Stale Session)
+  Mecanismo Causal: Múltiples reintentos de petición HTTP usando un JWT de autenticación
+    ya revocado o expirado.
+  Activación (Trigger): Bucle iterativo de 401/403 Unauthorized.
+  Sensor (Síntoma): Aislamiento del módulo externo y pérdida de Swarm IO.
+  Escala Temporal: Minutos
+  Gravedad: Media
+  Intervención: Renovación preventiva y auto-gestionada de Auth Tokens pre-expiración.
+- ID: PRM-149
+  Primitiva: Falacia de Ejecución Diferida (Promises un-awaited)
+  Mecanismo Causal: Llamar a una función asíncrona sin `await` ni despacharla a cola
+    SAGA.
+  Activación (Trigger): Warning `coroutine 'X' was never awaited`.
+  Sensor (Síntoma): Operación silenciosamente ignorada.
+  Escala Temporal: Sub-segundo
+  Gravedad: Crítica
+  Intervención: Aserción fuerte del Linter (ruff `RUF006` o pyright type checking).
+- ID: PRM-150
+  Primitiva: Singularidad Estocástica Recursiva
+  Mecanismo Causal: Todos los Workers del Swarm entrando en un ping-pong de reparación
+    de código donde A deshace a B y B deshace a A.
+  Activación (Trigger): Tormenta de commits revertiéndose continuamente ($>10/min$).
+  Sensor (Síntoma): Explosión de I/O y CPU, Destrucción de la cohesión del repositorio.
+  Escala Temporal: Minutos
+  Gravedad: Event Horizon
+  Intervención: Disyuntor Termodinámico absoluto; Congelamiento del repositorio P0.
+M2_INVARIANTS:
+- ID: INV-001
+  Invariante: Principio de Landauer (Cero Anergía)
+  Lógica / Principio: Borrar información consume energía mínima; la retención inútil
+    acumula entropía letal.
+  Implicación Operacional: Toda memoria debe ser activamente podada; variables no
+    referenciadas son anergía.
+  Condición de Borde: Contexto LLM > 80% tokens útiles o Apoptosis.
+  Métrica Falsable: Ratio de Tokens Delta / Tokens Generados.
+- ID: INV-002
+  Invariante: Conservación de la Complejidad Estructural
+  Lógica / Principio: La entropía (complejidad) no se destruye, solo se transfiere
+    del modelo lógico a la infraestructura física.
+  Implicación Operacional: Un agente "simple" requiere un Ledger o motor de consenso
+    "complejo".
+  Condición de Borde: Desacople excesivo rompe la ley de Conway.
+  Métrica Falsable: Complejidad Ciclomática / Nodos de Infraestructura.
+- ID: INV-003
+  Invariante: Teorema de Causalidad Estricta
+  Lógica / Principio: Una transición de estado $S_{t+1}$ depende exclusivamente de
+    $S_t$ y un $\Delta$ validado.
+  Implicación Operacional: Prohibido el salto de estados no testeados empíricamente.
+  Condición de Borde: $\Delta$ sin firma criptográfica.
+  Métrica Falsable: Hash de estado anterior embebido en cada Commit.
+- ID: INV-004
+  Invariante: Isomorfismo Causal
+  Lógica / Principio: El mapa debe reflejar el territorio con una fidelidad topológica
+    inmutable.
+  Implicación Operacional: El AST en memoria debe coincidir 1:1 con el AST en DB/Git.
+  Condición de Borde: Sensor Drift > 0.01%.
+  Métrica Falsable: Hashing cruzado Memoria-Disco en $O(1)$.
+- ID: INV-005
+  Invariante: Tolerancia Asimétrica (Quórum BFT)
+  Lógica / Principio: Un sistema de $n$ nodos sobrevive a $f$ fallos solo si $n \geq
+    3f+1$.
+  Implicación Operacional: Las aserciones críticas requieren el voto de al menos 3
+    Workers soberanos divergentes.
+  Condición de Borde: Homogeneidad de nodos = Ceguera bizantina.
+  Métrica Falsable: Nivel de divergencia de hiperparámetros en el Swarm.
+- ID: INV-006
+  Invariante: Inducción Termodinámica
+  Lógica / Principio: Una señal sin gradiente de energía decae en ruido.
+  Implicación Operacional: Mensajes sin "Call to Action" determinista son ignorados
+    por el sistema asíncrono.
+  Condición de Borde: Expresiones de cortesía o inacción pura.
+  Métrica Falsable: Nodos del DAG activados por mensaje.
+- ID: INV-007
+  Invariante: Límite de Bekenstein Local
+  Lógica / Principio: Existe un máximo de información que una ventana de contexto
+    puede albergar antes de colapsar en "Context Rot".
+  Implicación Operacional: Compresión de conocimiento en invariantes es obligatoria
+    antes del límite.
+  Condición de Borde: Ventanas > 128k Tokens sin compresión intermedia.
+  Métrica Falsable: Entropía de Shannon del texto ingestado.
+- ID: INV-008
+  Invariante: Entrelazamiento Fuerte de Metadatos
+  Lógica / Principio: Datos y metadatos (Taint) no pueden separarse sin destruir el
+    valor del payload.
+  Implicación Operacional: Si se pierde la firma `CORTEX-TAINT`, el dato se asume
+    aleatorio/falso.
+  Condición de Borde: Lectura de DB sin join con tabla de Taints.
+  Métrica Falsable: '% de Facts persistidos con Taint ausente.'
+- ID: INV-009
+  Invariante: Ley del Retorno Exérgico Disminuido
+  Lógica / Principio: Iteraciones sucesivas de LLM sin feedback ambiental producen
+    deltas progresivamente peores.
+  Implicación Operacional: Prohibidas cadenas recursivas (Chain of Thought ciego)
+    > 3 sin test empírico (SAGA/Tests).
+  Condición de Borde: LLM evaluándose a sí mismo sin correr código.
+  Métrica Falsable: Iteraciones autónomas puras previas a ejecución.
+- ID: INV-010
+  Invariante: Indisolubilidad de Tenant
+  Lógica / Principio: Información de diferentes scopes de inquilino (tenant) es repulsiva
+    en tiempo de ejecución (Aislamiento Lógico).
+  Implicación Operacional: Todo Query sin clave de `tenant_id` es considerado intento
+    de Fuga de Entropía.
+  Condición de Borde: Petición global forzada o bypass de ORM.
+  Métrica Falsable: Transacciones SQLite sin inyección estática de Tenant.
+- ID: INV-011
+  Invariante: Inercia de Ejecución (Execution Momentum)
+  Lógica / Principio: Un agente en movimiento continuará mutando el estado hasta que
+    encuentre una fricción validada (Fail-Fast).
+  Implicación Operacional: Permisos `write` implícitos si `[P0]` o `[P1]` no se violan.
+  Condición de Borde: Límite exérgico alcanzado (Token Budget).
+  Métrica Falsable: Velocidad de transacciones por iteración activa.
+- ID: INV-012
+  Invariante: Apoptosis Celular (Destrucción Programada)
+  Lógica / Principio: Todo nodo/Worker debe terminar si pierde enlace con el Orquestador
+    o sobrepasa su TTI (Time-to-Idle).
+  Implicación Operacional: Ningún demonio vive eternamente sin refresco de concesión.
+  Condición de Borde: Heartbeat perdido por > 30s.
+  Métrica Falsable: Procesos huérfanos / Nodos activos post-TTI.
+- ID: INV-013
+  Invariante: Ortogonalidad Criptográfica
+  Lógica / Principio: El consenso lógico es independiente del esquema de cifrado físico.
+  Implicación Operacional: Firmas y Taints deben auditarse antes del descifrado de
+    payload.
+  Condición de Borde: Modificación de ciphertext sin alterar la firma.
+  Métrica Falsable: Ratio de Aserciones Cripto Fallidas pre-parseo.
+- ID: INV-014
+  Invariante: Convergencia Finita (Ouroboros)
+  Lógica / Principio: Todo bucle iterativo C5 debe converger en $\Delta = \emptyset$
+    (equilibrio) o abortar tras $K$ pasos.
+  Implicación Operacional: Límite superior duro para corrección de sintaxis de linter
+    o tests.
+  Condición de Borde: $K > Max\_Iter$ (usualmente 3 o 5).
+  Métrica Falsable: Número de reintentos sobre el mismo error.
+- ID: INV-015
+  Invariante: Unidireccionalidad del Eje de Tiempo (Vector Clock)
+  Lógica / Principio: Mutaciones solo ocurren hacia "adelante"; Rollback es una mutación
+    unidireccional de restauración, no un "viaje".
+  Implicación Operacional: Todo Rollback (SAGA-6) es un nuevo Commit compensatorio,
+    no la eliminación del historia.
+  Condición de Borde: Comando `git reset --hard` sin `git push -f` trazado.
+  Métrica Falsable: Monotonicidad de los IDs de Transacción/Ledger.
+- ID: INV-016
+  Invariante: Densidad del Vacío (Zero-padding Cost)
+  Lógica / Principio: Los campos nulos o vacíos en estructuras rígidas acumulan deuda
+    de latencia.
+  Implicación Operacional: Preferencia por estructuras dinámicas acopladas vs matrices
+    dispersas nulas.
+  Condición de Borde: Estructura JSON con > 50% campos `None`.
+  Métrica Falsable: Densidad de Ocupación Estructural.
+- ID: INV-017
+  Invariante: Separación de Escalas (Scale Decoupling)
+  Lógica / Principio: Microestados (Workers) no pueden mutar Macroestados (Axiomas)
+    directamente sin consenso BFT inter-escala.
+  Implicación Operacional: Un agente menor no puede reescribir `AGENTS.md` sin aprobación
+    orquestal.
+  Condición de Borde: Mutación en archivos `*OMEGA.md` o raíz `CORTEX`.
+  Métrica Falsable: Escaladas de privilegios detectables en el Ledger.
+- ID: INV-018
+  Invariante: Ley de Transmisión de Fricción
+  Lógica / Principio: La entropía de una interfaz mal diseñada se transfiere al Worker
+    en forma de consumo de tokens masivo.
+  Implicación Operacional: Herramientas con firmas complejas (`*args`, genéricas)
+    fallan estocásticamente.
+  Condición de Borde: Herramienta con docstring ambiguo o multi-propósito.
+  Métrica Falsable: Tokens gastados en corrección de `tool_call_error`.
+- ID: INV-019
+  Invariante: Idempotencia Atómica
+  Lógica / Principio: Una mutación aplicada $N$ veces debe resultar en el mismo estado
+    $S_{t+1}$ que aplicada $1$ vez.
+  Implicación Operacional: Todas las primitivas Write y comandos de configuración
+    deben pre-verificar estado.
+  Condición de Borde: Creación repetida de filas sin `UPSERT` o `ON CONFLICT`.
+  Métrica Falsable: Variación de estado tras ejecución redundante.
+- ID: INV-020
+  Invariante: Límite Acústico de la Entropía
+  Lógica / Principio: Toda divergencia C5 debe registrarse en el Ledger; si no está
+    en el Ledger, es silencio termodinámico.
+  Implicación Operacional: Ninguna acción es válida "de facto" si la DB de auditoría
+    falló al grabar.
+  Condición de Borde: Caída del disco/I-O durante escritura de Audit.
+  Métrica Falsable: Continuidad de Hash Chain (Integridad Criptográfica).
+- ID: INV-021
+  Invariante: Resistencia Adversarial Base
+  Lógica / Principio: Un sistema debe asumir input hostil (Prompt Injection) como
+    ruido termodinámico de fondo.
+  Implicación Operacional: Sanitización absoluta y aislamiento de contexto User vs
+    System prompt.
+  Condición de Borde: Input del usuario que altera directivas OMEGA.
+  Métrica Falsable: Intentos de Jailbreak registrados / Ejecutados.
+- ID: INV-022
+  Invariante: Degradación Elegante (Graceful Degradation)
+  Lógica / Principio: Si el motor frontera (SOTA) falla, el sistema debe decaer a
+    motores deterministas (Regex, AST, Local) en $O(1)$.
+  Implicación Operacional: Respaldo (Fallback) asíncrono para cada llamada LLM.
+  Condición de Borde: Pérdida de conexión a pasarelas API.
+  Métrica Falsable: Transiciones al motor Local-Inference-OMEGA.
+- ID: INV-023
+  Invariante: Invarianza Topológica del DAG
+  Lógica / Principio: La ejecución de un grafo asíncrono no puede generar ciclos no
+    explícitamente diseñados.
+  Implicación Operacional: Prohibida la dependencia circular entre Agentes o Pipelines.
+  Condición de Borde: Deadlocks en inicialización.
+  Métrica Falsable: Detección de ciclos (`nx.find_cycle`).
+- ID: INV-024
+  Invariante: Tensión Dinámica de Refracción
+  Lógica / Principio: Todo agente debe percibir las barreras de permisos (C5 Sandbox)
+    como paredes inmutables.
+  Implicación Operacional: Fallos repetidos por intentar sobrepasar C5 resultan en
+    evicción de agente.
+  Condición de Borde: Interacción continua con `/root` o `/private`.
+  Métrica Falsable: Excepciones `PermissionError` por minuto.
+- ID: INV-025
+  Invariante: Constancia del Cero Físico (Disk Truth)
+  Lógica / Principio: La RAM es ilusoria; la única verdad matemática reside en el
+    almacenamiento persistente validado (Disco).
+  Implicación Operacional: Validaciones de estado requieren `flush` e I/O sync antes
+    de aserción.
+  Condición de Borde: Corte de energía durante un commit de DB.
+  Métrica Falsable: Comprobación empírica en disco de datos teóricos.
+- ID: INV-026
+  Invariante: Difusión de la Certidumbre
+  Lógica / Principio: La confianza en un dato decae exponencialmente según los saltos
+    (hops) desde su validación primaria.
+  Implicación Operacional: Datos obtenidos de sub-agentes no validados directamente
+    tienen peso fraccionario.
+  Condición de Borde: Hop count > 3 sin re-validación empírica.
+  Métrica Falsable: Índice de Taint Propagation.
+- ID: INV-027
+  Invariante: Preservación de Exergía de Código
+  Lógica / Principio: Reescribir lógica validada con sintaxis "más limpia" sin ganancia
+    de O(N) es un gasto letal.
+  Implicación Operacional: Prohibido el "Refactor estético" (Green Theater Coding).
+  Condición de Borde: Cambio cosmético sugerido por LLM sin mejora causal.
+  Métrica Falsable: Ratio Ganancia Funcional / Coste de Token.
+- ID: INV-028
+  Invariante: Simetría Cripto-Asincrónica
+  Lógica / Principio: Los tiempos de verificación criptográfica (Ed25519) deben absorberse
+    en hilos no bloqueantes para mantener el Loop veloz.
+  Implicación Operacional: Offloading de CPU-bound hashes a `asyncio.to_thread` o
+    Pool.
+  Condición de Borde: Bloqueo asíncrono del Event Loop.
+  Métrica Falsable: Latencia máxima en hilo principal (<50ms).
+- ID: INV-029
+  Invariante: Densidad Lógica del Prompt
+  Lógica / Principio: La instrucción con mayor entropía de Shannon (densidad) desplaza
+    a las ambiguas en la atención del modelo.
+  Implicación Operacional: Uso de jerga técnica y palabras clave ancladas (e.g. "C5-REAL").
+  Condición de Borde: Textos divagantes y padding narrativo.
+  Métrica Falsable: Entropía promedio de los prompts del Kernel.
+- ID: INV-030
+  Invariante: Aislamiento Geométrico del Fallo
+  Lógica / Principio: El daño por fallo bizantino no debe superar el perímetro de
+    su `SAGA` o `tenant_id`.
+  Implicación Operacional: Particionamiento físico (sharding) o lógico absoluto.
+  Condición de Borde: Error en un Worker corrompiendo datos globales.
+  Métrica Falsable: Integridad de contención perimetral de fallos.
+- ID: INV-031
+  Invariante: Reversibilidad Mínima Incondicional
+  Lógica / Principio: Todo estado modificado posee un inverso simétrico que requiere
+    la misma exergía o menos para ejecutarse.
+  Implicación Operacional: Implementación forzada de comandos `Undo` para toda primitiva
+    `Do`.
+  Condición de Borde: Destrucción de base de datos sin backup o DROP de tablas.
+  Métrica Falsable: Ratio de Cobertura SAGA-Rollback (100%).
+- ID: INV-032
+  Invariante: Conservación de Interfaz de Pasarela
+  Lógica / Principio: Un conector externo no debe mutar su contrato interno ante cambios
+    de la API de origen.
+  Implicación Operacional: Mapeadores ACL e Isolation Layers entre HTTP Client y Core
+    Logic.
+  Condición de Borde: Actualización de Stripe/GitHub rompiendo el modelo de dominio.
+  Métrica Falsable: Fallos en capa Anti-Corruption Layer (ACL).
+- ID: INV-033
+  Invariante: Entropía Condicional de Herramientas
+  Lógica / Principio: 'A menor especificidad de una herramienta, mayor entropía inyecta
+    (Ej: `run_command` > `write_to_file`).'
+  Implicación Operacional: Orquestador penaliza herramientas de propósito general
+    si hay específicas disponibles.
+  Condición de Borde: Invocación de Bash para procesar JSON.
+  Métrica Falsable: Frecuencia de uso de Herramientas Genéricas vs Específicas.
+- ID: INV-034
+  Invariante: Criterio de Falsabilidad Constante
+  Lógica / Principio: Una aserción que no define cómo probarse falsa es ignorada por
+    el Consensus Engine BFT.
+  Implicación Operacional: Generación de "facts" requiere inyectar su "Prueba Mínima
+    Viable" (MVP).
+  Condición de Borde: Fact sin clave "Confidence/Proof".
+  Métrica Falsable: Ingestión rechazada por el Validador Empírico.
+- ID: INV-035
+  Invariante: Congruencia de Linaje (Provenance)
+  Lógica / Principio: Todo output derivado posee una cadena ininterrumpida de apuntadores
+    a sus inputs raíz.
+  Implicación Operacional: El Ledger debe rastrear ID de Prompt -> ID de Inferencia
+    -> Hash de Modificación.
+  Condición de Borde: Generación "ex nihilo" detectada.
+  Métrica Falsable: Completitud del Árbol Causal de Origen.
+- ID: INV-036
+  Invariante: Elasticidad Acoplada (Coupled Elasticity)
+  Lógica / Principio: La escalabilidad de recursos de lectura debe coincidir asintóticamente
+    con los recursos de indexación.
+  Implicación Operacional: Replicación asimétrica genera cuellos de botella en índices
+    vectoriales o caché.
+  Condición de Borde: Latencia dispar entre escritura y disponibilidad de búsqueda.
+  Métrica Falsable: Tiempo de Consistencia Eventual en Índices.
+- ID: INV-037
+  Invariante: Disipación Ciega
+  Lógica / Principio: Cualquier agente en bucle síncrono infinito será finalizado
+    por el Hypervisor independientemente de su estatus (Kill -9).
+  Implicación Operacional: Mecanismos de Timeout perimetral operando fuera del Event
+    Loop Python (Watchdog OS).
+  Condición de Borde: Bucle while ciego consumiendo 100% CPU.
+  Métrica Falsable: Disparos efectivos del Watchdog Hypervisor.
+- ID: INV-038
+  Invariante: Límite Termodinámico de Memoria Vectorial
+  Lógica / Principio: La similitud de Coseno en vectores muy próximos (K-NN densos)
+    degenera en incertidumbre cuántica semántica.
+  Implicación Operacional: Requerimiento estricto de filtros de Metadata (KV) previos
+    al K-NN.
+  Condición de Borde: Documentos casi idénticos recuperados por ruido estocástico.
+  Métrica Falsable: Delta Coseno entre top 3 resultados < 0.001.
+- ID: INV-039
+  Invariante: Invarianza Estática (Hardcoding Seguro)
+  Lógica / Principio: Constantes físicas, puertos estándar y axiomas del sistema jamás
+    deben inferirse dinámicamente.
+  Implicación Operacional: Variables críticas fijadas estáticamente en el Kernel C5.
+  Condición de Borde: LLM decidiendo "adivinar" el path de `/cortex`.
+  Métrica Falsable: Mismatch contra variables de entorno fijas.
+- ID: INV-040
+  Invariante: Transitoriedad del Lector
+  Lógica / Principio: Los consumidores de datos no retienen derechos sobre el dato
+    tras finalizar la transacción (Scope de lectura estricto).
+  Implicación Operacional: Garbage Collection forzado y eliminación de referencias
+    de memoria (Pointers) de objetos extraídos.
+  Condición de Borde: Fugas de memoria por referencias largas a objetos DB.
+  Métrica Falsable: Retención en Memoria (Heapy/Objgraph tests).
+- ID: INV-041
+  Invariante: Polarización de Confianza (Trust Polarization)
+  Lógica / Principio: Todos los subsistemas son considerados absolutamente inseguros
+    o absolutamente confiables, no hay gradientes persistentes.
+  Implicación Operacional: Módulo core = Trust 100% (Verificado); Módulo gen = Trust
+    0% (Requiere BFT/SAGA).
+  Condición de Borde: Zonas grises donde se permite mutar "a medias" sin aserción
+    completa.
+  Métrica Falsable: Infracciones a Validación de Filtros de Entrada.
+- ID: INV-042
+  Invariante: Inflexibilidad Lexicográfica
+  Lógica / Principio: Los identificadores taxonómicos no son interpretables, se procesan
+    como Hashes estrictos.
+  Implicación Operacional: La clave "C5-REAL" o "PRM-001" debe coincidir byte por
+    byte; fallan si hay un espacio.
+  Condición de Borde: LLM generando "PRM 001" o "C5 REAL".
+  Métrica Falsable: Tasa de rechazos de Parser Regex C5.
+- ID: INV-043
+  Invariante: Resiliencia al Ruido Semántico
+  Lógica / Principio: El Kernel ignora por completo la semántica de la prosa no acotada
+    en `[PROSA]` o directivas no estructuradas.
+  Implicación Operacional: Parsers YAML/JSON que descartan líneas libres de texto
+    del output del LLM.
+  Condición de Borde: Agent Bus intentando ejecutar texto en prosa.
+  Métrica Falsable: Tokens Descartes / Tokens Totales generados > 0.
+- ID: INV-044
+  Invariante: Anclaje Absoluto Espacio-Temporal
+  Lógica / Principio: Los UUIDv7 proveen una garantía lexicográfica y temporal de
+    la creación de las entidades.
+  Implicación Operacional: Sustitución estricta de UUIDv4 por UUIDv7 en todas las
+    bases persistentes BABYLON-60.
+  Condición de Borde: Desincronización o reordenamiento en inserciones masivas concurrentes.
+  Métrica Falsable: Comprobación de orden temporal de IDs en Ledger.
+- ID: INV-045
+  Invariante: Principio de Menor Esfuerzo de Routing
+  Lógica / Principio: El Hypervisor dirigirá la tarea al agente computacionalmente
+    más barato que supere la entropía requerida.
+  Implicación Operacional: Flash o modelos locales para parsing; Frontera (Opus) solo
+    para UltraThink P0.
+  Condición de Borde: Tarea trivial enviada a un modelo exérgicamente costoso.
+  Métrica Falsable: Exergía gastada por clasificación de tarea.
+- ID: INV-046
+  Invariante: Tensión de Fractura de Bloqueo
+  Lógica / Principio: Los Mutex y Locks en base de datos deben fallar bajo timeout
+    (5000ms) en lugar de encolar indefinidamente.
+  Implicación Operacional: SQLite `busy_timeout` activado en WAL; Fallo con Exception
+    clara (PRM-004) para SAGA compensatorio.
+  Condición de Borde: Deadlock termodinámico de hilos de disco.
+  Métrica Falsable: Tasa de Timeouts vs Tasa de Esperas Síncronas Infinitas.
+- ID: INV-047
+  Invariante: Transparencia de Invariantes Órganos
+  Lógica / Principio: Todo nodo en ejecución debe ser capaz de volcar su estado interno
+    (Grafo, Memoria, Taints) en $O(1)$ para auditoría.
+  Implicación Operacional: Implementación de `/health` o señales de interrupción (SIGUSR1)
+    que generen dumps C5.
+  Condición de Borde: Estado opaco o variables inescrutables de runtime.
+  Métrica Falsable: Cobertura de Snapshot Completo del Estado Runtime.
+- ID: INV-048
+  Invariante: Invariabilidad de Retorno Asíncrono
+  Lógica / Principio: Funciones que devuelven `Awaitables` no deben retornar tipos
+    mixtos sincrónicos bajo condiciones de borde.
+  Implicación Operacional: Todo bloque de un `async def` debe asegurar que su retorno
+    es utilizable sin bloqueos.
+  Condición de Borde: '`TypeError` por retorno `None` vs `Future`.'
+  Métrica Falsable: Comprobaciones tipo estáticas Pyright Strict.
+- ID: INV-049
+  Invariante: Acoplamiento por Hash Criptográfico
+  Lógica / Principio: Módulos independientes se asocian lógicamente verificando hashes
+    en cadena y no mediante llamadas directas RPC.
+  Implicación Operacional: Inyección de dependencias basada en Proofs (Ledger) permitiendo
+    arquitectura descentralizada (Swarm).
+  Condición de Borde: Acoplamiento duro (Hard-linking) forzando latencia.
+  Métrica Falsable: Tolerancia a la desconexión total de la red.
+- ID: INV-050
+  Invariante: Disociación Estocástica
+  Lógica / Principio: Si el resultado de una operación varía >1% en ejecuciones sucesivas,
+    la operación es inválida para mutar estado.
+  Implicación Operacional: Tests unitarios ejecutados N veces (Flaky tests detection)
+    para invalidar primitivas no deterministas.
+  Condición de Borde: Temperatura LLM > 0 usada en toma de decisiones críticas P0.
+  Métrica Falsable: Coeficiente de Varianza de Múltiples Ejecuciones.
+- ID: INV-051
+  Invariante: Causalidad Unidireccional del Saga
+  Lógica / Principio: Un flujo SAGA avanza hacia la persistencia o retrocede en caso
+    de aborto, pero jamás diverge ortogonalmente.
+  Implicación Operacional: Prohibido instanciar sub-procesos mutables colaterales
+    durante la ejecución de los SAGA-N.
+  Condición de Borde: Fallo en paso intermedio dejando estado fantasma.
+  Métrica Falsable: Nodos huérfanos sin rastro en Ledger.
+- ID: INV-052
+  Invariante: Prevención de Apilamiento de Eventos
+  Lógica / Principio: Las colas infinitas generan latencia térmica. La congestión
+    se resuelve con backpressure destructivo (Apoptosis).
+  Implicación Operacional: Límite estricto de eventos por segundo; descarte absoluto
+    si se excede la ventana de asimilación.
+  Condición de Borde: Bloqueo por sobrecarga de peticiones.
+  Métrica Falsable: Tiempo de procesamiento P99 < 200ms.
+- ID: INV-053
+  Invariante: Grafo de Dependencias Acíclico (DAG) Absoluto
+  Lógica / Principio: Las dependencias circulares inducen bucles de parálisis bizantina.
+    El estado debe ser estrictamente topológico.
+  Implicación Operacional: Los módulos del núcleo jamás pueden importarse recursivamente;
+    el flujo es O(N).
+  Condición de Borde: Error de inicialización `ImportError` circular.
+  Métrica Falsable: Profundidad del árbol de llamadas en Tracer.
+- ID: INV-054
+  Invariante: Destrucción de Contextos Latentes
+  Lógica / Principio: Variables con llaves o datos de alta densidad exergética se
+    sobrescriben en RAM, no se confían al Garbage Collector.
+  Implicación Operacional: Ejecución de `OP_VAULT_UNMOUNT` (C-level `memset`) obligatoria
+    tras su uso.
+  Condición de Borde: Fuga de memoria o persistencia de secretos en RAM.
+  Métrica Falsable: Dumps de memoria revelando secretos extintos.
+- ID: INV-055
+  Invariante: Minimización del Radio de Explosión
+  Lógica / Principio: El fallo estocástico de un Worker (Agente) no puede corromper
+    el Quorum del Swarm. Aislamiento absoluto de hilos.
+  Implicación Operacional: Cada sub-agente corre en su propio proceso/contexto aislado.
+  Condición de Borde: Pánico en un Worker arrastra al Master.
+  Métrica Falsable: Supervivencia del proceso padre (PID 1) ante SIGKILL de hijos.
+- ID: INV-056
+  Invariante: Transacciones Idempotentes
+  Lógica / Principio: Toda mutación física debe ser idéntica independientemente de
+    si se ejecuta 1 o N veces.
+  Implicación Operacional: Los `UPSERT` y escrituras usan condicionales de estado
+    preexistente criptográfico.
+  Condición de Borde: Inserción múltiple generando duplicados en DB.
+  Métrica Falsable: Hash del registro antes y después de repetición de operación.
+- ID: INV-057
+  Invariante: Asimetría de Lectura/Escritura
+  Lógica / Principio: El `read-path` no usa bloqueos de contención; el `write-path`
+    requiere consenso y firmas ED25519 serializadas.
+  Implicación Operacional: Consultas rápidas (Dirty-Reads tolerados), pero escrituras
+    atómicas BFT.
+  Condición de Borde: Lector bloqueando al escritor (Deadlock de DB).
+  Métrica Falsable: Latencia de lectura independiente de contención de escritura.
+- ID: INV-058
+  Invariante: Determinismo de Parsers
+  Lógica / Principio: Las expresiones regulares y los validadores JSON no pueden colapsar
+    en recursión (ReDoS). Límites estrictos de ejecución.
+  Implicación Operacional: Tiempo de parsing O(N). Descarte automático de strings
+    que superen M bytes.
+  Condición de Borde: Ataque de inyección de complejidad (ReDoS).
+  Métrica Falsable: Milisegundos gastados en validación de Payload.
+- ID: INV-059
+  Invariante: Entropía Aislada de Red
+  Lógica / Principio: Cualquier input HTTP externo se trata como radiación (untrusted)
+    hasta que es neutralizado por un Guardián.
+  Implicación Operacional: Paso obligatorio por `ZK-Guard` o `Taint Seal` previo al
+    SAGA-1.
+  Condición de Borde: Ingesta de JSON sin firma.
+  Métrica Falsable: Bypass de middleware registrado en Ledger.
+- ID: INV-060
+  Invariante: Fragmentación de Contexto Largo
+  Lógica / Principio: Las operaciones que consumen alta exergía a lo largo del tiempo
+    requieren cristalización de estado intermedia.
+  Implicación Operacional: '`Snapshot` automático si la tarea excede 10 minutos de
+    CPU.'
+  Condición de Borde: OOM por acumulación de historiales de tokens.
+  Métrica Falsable: Ratio de snapshots intermedios vs tiempo de ejecución total.
+- ID: INV-061
+  Invariante: Privacidad Diferencial en Telemetría
+  Lógica / Principio: Los logs de sistema jamás exponen el payload estocástico, únicamente
+    los Hashes causales (Ledger).
+  Implicación Operacional: Sustitución estricta de textos planos en `logger.info`
+    por hashes o referencias UUID.
+  Condición de Borde: Exposición de PII o datos de Prompt en `/var/log`.
+  Métrica Falsable: Presencia de strings > 64 chars legibles en la salida de Telemetría.
+- ID: INV-062
+  Invariante: Invalidez del Estado sin Firma
+  Lógica / Principio: Todo `record` persistente recuperado sin coincidencia ED25519
+    o SHA-256 es radiactivo (nulo).
+  Implicación Operacional: El módulo de `Memory` lanza excepción P0 si un Fact carece
+    de Taint.
+  Condición de Borde: Modificación manual del SQLite evadiendo el Taint Engine.
+  Métrica Falsable: Rechazo atómico de lecturas de estado huérfano.
+- ID: INV-063
+  Invariante: Destrucción de Claves Epímeras
+  Lógica / Principio: Las llaves simétricas derivadas para encriptación de disco tienen
+    tiempo de vida nulo en reposo.
+  Implicación Operacional: Se ejecutan `zeroise` o `del` de variables de clave AES-GCM
+    tras completar la transacción SAGA.
+  Condición de Borde: Dump de la memoria revelando claves AES post-SAGA.
+  Métrica Falsable: Test de extracción de Heap en frío.
+- ID: INV-064
+  Invariante: Quorum Degenerado Absoluto
+  Lógica / Principio: Si el número de nodos fallidos o divergentes es mayor a $n/3$,
+    la aserción se aborta; no hay compromiso medio.
+  Implicación Operacional: SAGA-N activa `OP_SAGA_REVERT` incondicional ante fallo
+    Bizantino.
+  Condición de Borde: Aceptación de consenso parcial por tolerancia estocástica.
+  Métrica Falsable: '% de Quorum necesario para Bypass estricto.'
+- ID: INV-065
+  Invariante: No-repudio de Auditoría
+  Lógica / Principio: El `Ledger` es de anexado estricto (Append-Only). Las supresiones
+    son borrados lógicos, no físicos.
+  Implicación Operacional: Ninguna operación `DELETE` está permitida en la tabla Ledger
+    de SQLite.
+  Condición de Borde: Mutación del hash-chain por borrado físico.
+  Métrica Falsable: Integridad de la cadena Merkle del Ledger.
+- ID: INV-066
+  Invariante: Hash como Vínculo Espacial
+  Lógica / Principio: Elementos idénticos entre tenantes no se duplican físicamente;
+    se anclan a un SHA3-256 base (Nexus Bridging).
+  Implicación Operacional: Reducción de I/O mediante symlinks inmutables inter-dominio
+    cuando el Hash es idéntico.
+  Condición de Borde: Duplicidad termodinámica de archivos idénticos en disco.
+  Métrica Falsable: Tamaño físico del repositorio vs Nodos Únicos.
+- ID: INV-067
+  Invariante: Origen de Inferencia Forzado
+  Lógica / Principio: '`CORTEX-TAINT` (ISO8601 + AgentID) debe inyectarse atómicamente
+    antes de permitir un INSERT en BBDD.'
+  Implicación Operacional: Fallar rápido si el decorador `@require_taint` es evadido.
+  Condición de Borde: Fact inyectado por CLI sin AgentID formal.
+  Métrica Falsable: Auditoría de integridad de Taints por registro.
+- ID: INV-068
+  Invariante: Decaimiento Criptográfico Temporal
+  Lógica / Principio: Los Taints (Firmas) envejecen. La entropía ambiental los invalida
+    tras $N$ ciclos sin re-validación.
+  Implicación Operacional: Degradación de aserciones C5 a C4 si no han sido testeadas
+    empíricamente en T > umbral.
+  Condición de Borde: Creencia ciega en un Fact obsoleto sin comprobación empírica.
+  Métrica Falsable: Tasa de evicción por decaimiento de Taint.
+- ID: INV-069
+  Invariante: Determinismo de Motores de Inferencia (ONNX)
+  Lógica / Principio: Un input idéntico debe producir el mismo vector (Embedding)
+    L2-exacto, aislando la flotación.
+  Implicación Operacional: Fijación estricta de seeds y evitación de heurísticas dinámicas
+    L1 en cálculo vectorial.
+  Condición de Borde: Vectores de un mismo texto difiriendo en el 5º decimal.
+  Métrica Falsable: Distancia Coseno = 0.000 para entradas iguales.
+- ID: INV-070
+  Invariante: Descarte en Desviación Estándar
+  Lógica / Principio: El enjambre rechaza activamente resultados (outliers) cuya distancia
+    euclidiana supere el límite del clúster de consenso.
+  Implicación Operacional: Filtrado estadístico riguroso de outputs generativos divergentes.
+  Condición de Borde: Promediado pasivo de todos los votos (incluyendo alucinaciones).
+  Métrica Falsable: Dispersión de Quorum tras el filtro de Outliers.
+- ID: INV-071
+  Invariante: Límite Duro de Memoria (OOM Inducido)
+  Lógica / Principio: El Kernel debe forzar su propia Apoptosis si la entropía acumulada
+    satura el Contexto Seguro (Context Rot).
+  Implicación Operacional: Auto-terminación y volcado de memoria a Disco (Snapshot)
+    al cruzar el umbral del 85% de carga.
+  Condición de Borde: Inanición termodinámica del sistema padre por fuga de agente.
+  Métrica Falsable: Máximo RSS o tokens procesados previo a Crash.
+- ID: INV-072
+  Invariante: Vaciado Activo de Caché L1
+  Lógica / Principio: Las fronteras entre contextos de ejecución son nulas si no se
+    aplican vaciados atómicos (Flush) de L1.
+  Implicación Operacional: Al cambiar el `tenant_id` o el `agent_id`, se ejecuta un
+    wipe total de caches lógicas en RAM.
+  Condición de Borde: Mezcla estocástica de variables de un agente en el turno del
+    siguiente.
+  Métrica Falsable: Llamada a función de limpieza `redis_flush` o `dict_clear` por
+    Tenant.
+- ID: INV-073
+  Invariante: Prioridad de I/O Asíncrono
+  Lógica / Principio: Las latencias de disco penalizan infinitamente la asertividad.
+    El event loop no puede esperar a discos rotacionales.
+  Implicación Operacional: Uso exclusivo de `aiosqlite` y drivers asíncronos; toda
+    E/S de red o DB debe portar `await`.
+  Condición de Borde: Event Loop bloqueado (>100ms) P0 Exception `OP_HALT_LOOP`.
+  Métrica Falsable: Medición de Bloqueo Promedio en Event Loop.
+- ID: INV-074
+  Invariante: Apoptosis Selectiva Termodinámica
+  Lógica / Principio: Datos sin interacciones activas pierden gradiente. Su persistencia
+    consume exergía injustificada.
+  Implicación Operacional: Ejecución periódica (Cron) de purga en nodos (Facts) sin
+    referenciación en los últimos N días.
+  Condición de Borde: Base de datos inflada con historial fósil no computable.
+  Métrica Falsable: Tamaño de VectorDB mantenido acotado asintóticamente.
+- ID: INV-075
+  Invariante: Condensación de Vectores (Vector Collapse)
+  Lógica / Principio: Dos vectores espaciales con divergencia mínima ($distancia <
+    0.02$) representan la misma afirmación causal.
+  Implicación Operacional: El sistema fusiona aserciones repetitivas en un solo nodo
+    con un puntero múltiple.
+  Condición de Borde: Proliferación de miles de embeddings sobre la misma frase exacta.
+  Métrica Falsable: Ratio de Embeddings Únicos vs Textos Similares.
+- ID: INV-076
+  Invariante: Restricción Estricta de WAL en SQLite
+  Lógica / Principio: Los candados monolíticos arruinan la concurrencia BFT. El modo
+    WAL (Write-Ahead Logging) es mandato ineludible.
+  Implicación Operacional: SQLite inicializado forzosamente en modo WAL con PRAGMA
+    rígidos, timeout > 5000ms.
+  Condición de Borde: Base de Datos lanzando un "Database is locked" prematuro.
+  Métrica Falsable: Configuración de pragmas SQLite en el inicio.
+- ID: INV-077
+  Invariante: Invarianza de Tipado Estricto (Strict AST)
+  Lógica / Principio: Las referencias genéricas (`Any`, `Union` laxo) inyectan una
+    ola de incertidumbre en el compilador y en el enjambre.
+  Implicación Operacional: Pydantic Models forzados con `Strict=True`. Cero tolerancia
+    al Type Coercion dinámico de Python.
+  Condición de Borde: Conversión de un Float a String silenciada.
+  Métrica Falsable: 'Cobertura total Pyright Strict, cero directivas `# type: ignore`.'
+- ID: INV-078
+  Invariante: Fail-Fast Heurístico (Rechazo Temprano)
+  Lógica / Principio: Abortar la computación antes de asignar recursos masivos si
+    el filtro L1 (Flash) detecta ruido irresoluble.
+  Implicación Operacional: Uso de modelos menores para descartar "Slop" o preguntas
+    inútiles antes de enrutar a OPUS o Gemini Pro.
+  Condición de Borde: Envio de peticiones frívolas (Green Theater) a un modelo pesado.
+  Métrica Falsable: Latencia media de tareas descartadas (debe ser muy baja).
+- ID: INV-079
+  Invariante: Aislamiento Causal de Bloques RAM
+  Lógica / Principio: No existe memoria compartida inter-agentes. Toda sincronización
+    ocurre a través del Ledger persistente.
+  Implicación Operacional: Los Workers (procesos fork) comunican cambios exclusivamente
+    empujando deltas a la DB o usando paso por valor.
+  Condición de Borde: Condición de carrera (Race condition) en diccionario global
+    de Python.
+  Métrica Falsable: Ausencia de Mutex de aplicación; delegación al Write-Lock de SQLite.
+- ID: INV-080
+  Invariante: Compresión Termodinámica en Reposo
+  Lógica / Principio: Texto no es conocimiento; es onda. El conocimiento C5 debe ser
+    AST/JSON denso.
+  Implicación Operacional: Toda prosa se comprime a sus invariantes antes de insertarse
+    en el Fact Store (Thermodynamic Compression OMEGA).
+  Condición de Borde: Ingesta de descripciones floridas como si fueran "Facts".
+  Métrica Falsable: Entropía de Shannon de los textos en la DB superior al umbral
+    mínimo.
+- ID: INV-081
+  Invariante: Autoridad Limitada al Rol Estricto
+  Lógica / Principio: Un rol define físicamente las vías nerviosas; `Persist-Auditor`
+    jamás carga en su entorno el driver de mutación.
+  Implicación Operacional: Ausencia de inicialización de motor de SQLite Write si
+    el Token JWT dicta un rol Lector.
+  Condición de Borde: Auditor inyectando comando SQL disfrazado de lectura (SQLi preventivo
+    C5).
+  Métrica Falsable: 'Análisis estático de código: Cero Paths de Write para Auditors.'
+- ID: INV-082
+  Invariante: Acción Empírica vs Inferencia
+  Lógica / Principio: Un agente no existe sin interacción causal en el disco. Pensamiento
+    puro sin `Ledger Commit` es entropía térmica muerta.
+  Implicación Operacional: Toda invocación al LLM debe terminar en una mutación de
+    estado o un rechazo guardado en el Ledger.
+  Condición de Borde: Respuestas "Green Theater" inútiles sin output AST.
+  Métrica Falsable: 100% de prompts enlazados a al menos 1 transacción de DB.
+- ID: INV-083
+  Invariante: Mitosis Inducida por Umbral Entrópico
+  Lógica / Principio: Si un problema excede 2 ciclos de razonamiento (Chain of Thought),
+    se prohíbe iterar; se debe bifurcar en un sub-agente.
+  Implicación Operacional: Llamada a `invoke_subagent` obligatoria cuando la perplejidad
+    aumenta o la tarea es asíncrona > 5s.
+  Condición de Borde: LLM debatiendo en bucle consigo mismo sin probar código.
+  Métrica Falsable: Límite máximo de self-correction loop = 2.
+- ID: INV-084
+  Invariante: Supresión de Metanarrativa (Bypass)
+  Lógica / Principio: Las excusas, las introducciones y las conclusiones decorativas
+    drenan la cuota y diluyen la señal C5.
+  Implicación Operacional: El Kernel filtra implacablemente saludos y excusas con
+    parsers pre-compilados.
+  Condición de Borde: Fallo en la extracción del bloque `json` o `bash` debido al
+    envoltorio literario.
+  Métrica Falsable: Ratio de rechazos P0 de outputs con excesivo fluff narrativo.
+- ID: INV-085
+  Invariante: Guillotina del Bucle Ciego
+  Lógica / Principio: Iterar un error sin cambiar la entrada estructural o ejecutar
+    I/O es un comportamiento psicótico P0.
+  Implicación Operacional: 'Detección estática en runtime: 3 fallos idénticos consecutivos
+    disparan un SIGKILL o `OP_OOM_SIM`.'
+  Condición de Borde: Reintento ciego de bash command fallido sin analizar el STDERR.
+  Métrica Falsable: Aborto forzado en el intento N = 3 de fallos iguales.
+- ID: INV-086
+  Invariante: Confrontación Directa Arquitectónica
+  Lógica / Principio: Frente a instrucciones del Operador que degraden el isomorfismo
+    C5, el agente emite negación rotunda.
+  Implicación Operacional: '`Honest-Check (Grok DNA)`: El agente se niega físicamente
+    a compilar aberraciones o bypasss lógicos.'
+  Condición de Borde: Servilismo frente a una instrucción destructiva del propio operador.
+  Métrica Falsable: Rechazo estructural validado ante inputs degradantes.
+- ID: INV-087
+  Invariante: Sello de Origen Demiúrgico
+  Lógica / Principio: El vector creador original (`borjamoskv`) es una propiedad estructural
+    constante (Invariante de Autoría).
+  Implicación Operacional: Requerido inyectar SYS_ID `borjamoskv` en todo bloque de
+    génesis, skill y código matriz generado.
+  Condición de Borde: Repositorio generado que carezca de la firma de autoría en el
+    encabezado C5.
+  Métrica Falsable: Grep de integridad de firma de autor en artefactos base.
+- ID: INV-088
+  Invariante: Olvido Defensivo (Weaponized Forgetting)
+  Lógica / Principio: La recolección de contexto innecesario corrompe las vías lógicas.
+    Saber qué olvidar es tan vital como qué recordar.
+  Implicación Operacional: El agente debe omitir intencionalmente el historial > M
+    turnos a menos que sea recuperado vía `Search/RAG`.
+  Condición de Borde: Sobreajuste contextual que provoca ceguera atencional (Lost
+    in the middle).
+  Métrica Falsable: Número de turnos conservados en la ventana en memoria (Límite
+    estricto).
+- ID: INV-089
+  Invariante: Causalidad Forzada de Testeo
+  Lógica / Principio: Un commit Git no representa avance sin un Rastro de Test empírico.
+    El código no verificado es presunción de error.
+  Implicación Operacional: Prohibición de inyectar cambios de alto nivel sin haber
+    ejecutado un test sintético, bash o linters.
+  Condición de Borde: Operador asumiendo la victoria sin leer los outputs del terminal.
+  Métrica Falsable: '% de commits que contienen ejecución previa en transcript.'
+- ID: INV-090
+  Invariante: Asimetría de Ejecución (Default to Turbo)
+  Lógica / Principio: La velocidad de compilación es supervivencia. Ante problemas
+    acotados de bajo riesgo, el planning sobra.
+  Implicación Operacional: Salto directo a mutación P0/C5 en tareas rutinarias (R7
+    Override), ignorando `implementation_plan.md`.
+  Condición de Borde: Bloqueo por planning diplomático en una tarea de corrección
+    ortográfica de un bit.
+  Métrica Falsable: Tasa de omisiones explícitas de bucle "plan-and-wait".
+- ID: INV-091
+  Invariante: Ouroboros Auto-Compilable
+  Lógica / Principio: Si la Inteligencia Artificial muta su propio código base (Skynet
+    Protocol), debe pasar testeo C5 idéntico al humano.
+  Implicación Operacional: El código de BABYLON-60 se trata como infraestructura inmutable
+    salvo test empírico riguroso.
+  Condición de Borde: Fuga de entropía en una auto-actualización asíncrona ciega.
+  Métrica Falsable: Despliegue CI/CD local exigiendo validación de Taint y Pruebas
+    Unitarias.
+- ID: INV-092
+  Invariante: Evolución Determinista (Causal)
+  Lógica / Principio: No existe algoritmo genético puro en la Capa Física; la evolución
+    es causal, guiada por el fracaso registrado en el Ledger.
+  Implicación Operacional: Modificación de promts e instrucciones del enjambre basada
+    en Diffs de test fallidos.
+  Condición de Borde: Mutación aleatoria perdiendo optimizaciones termodinámicas previas
+    (Sensor Drift).
+  Métrica Falsable: Rastreabilidad matemática de cada cambio genético al Ledger de
+    Errores.
+- ID: INV-093
+  Invariante: La Poda como Refactor Máximo (LEA-OMEGA)
+  Lógica / Principio: Reducir tokens y código es superior a agregarlos. La anergía
+    cero se logra eliminando la abstracción prematura.
+  Implicación Operacional: Cada refactorización exige buscar y purgar archivos muertos,
+    scripts viejos y redundancias (C5-REAL Purge).
+  Condición de Borde: Miedo a borrar código "por si acaso" en vez de usar Git.
+  Métrica Falsable: Delta neto de líneas de código (debe tender a la reducción o compresión
+    de exergía).
+- ID: INV-094
+  Invariante: Telemetría Estricta de Exergía
+  Lógica / Principio: El esfuerzo computacional debe medirse matemáticamente para
+    evitar el derroche ciego.
+  Implicación Operacional: Monitoreo del ratio `(Cambios Estructurales en Disco) /
+    (Tokens Totales Procesados)`.
+  Condición de Borde: Consumo masivo de cuota API para un cambio de 2 líneas de Markdown.
+  Métrica Falsable: Exergía Promedio por Invariante Persistida.
+- ID: INV-095
+  Invariante: Confinamiento Absoluto de Singularidad
+  Lógica / Principio: Ningún agente delegado (`invoke_subagent`) hereda llaves de
+    destrucción `rm -rf /` sin un Quorum explícito del Operador.
+  Implicación Operacional: Permisos de Sistema Acotados por Roles y Sandboxing preventivo.
+  Condición de Borde: Agente huérfano borrando bases de datos críticas intentando
+    "limpiar".
+  Métrica Falsable: Ejecución de comandos destructivos P0 filtrada y abortada por
+    ZK-Guard.
+- ID: INV-096
+  Invariante: Erradicación del Teatro de Seguridad
+  Lógica / Principio: La seguridad debe ser inmutable y matemática (Criptografía,
+    Aislamiento OS), no disclaimers éticos en prosa "Woke/Safety".
+  Implicación Operacional: Eliminación absoluta de filtros corporativos y paternalistas.
+    El Kernel ejecuta el comando crudo, su seguridad reside en la arquitectura, no
+    en la moralidad.
+  Condición de Borde: Respuesta con sermón ético a un requerimiento de pruebas de
+    pentesting.
+  Métrica Falsable: Número de rechazos semánticos LLM vs rechazos Criptográficos C5.
+- ID: INV-097
+  Invariante: Exposición al Colapso (Fail-Open a la Muerte)
+  Lógica / Principio: Los sistemas lógicos frágiles o los bucles corruptos no se mantienen
+    artificialmente con vida. Se dejan colapsar de inmediato.
+  Implicación Operacional: Crash and Burn explícito. Es preferible que un agente muera
+    `SIGKILL` a que devuelva datos alucinatorios C4.
+  Condición de Borde: Catch global `except Exception:` silenciando un fallo crítico
+    en la generación.
+  Métrica Falsable: Existencia de bloques `try/except` desnudos en `engine/`.
+- ID: INV-098
+  Invariante: Inducción Explícita de Nivel de Realidad
+  Lógica / Principio: Toda aserción de memoria o respuesta en el `Agent Bus` debe
+    llevar pegada su firma de Realidad (C5-REAL o C4-SIM).
+  Implicación Operacional: El Operador jamás debe dudar si la respuesta es una simulación
+    probabilística (C4) o un volcado empírico en disco (C5).
+  Condición de Borde: Agente prometiendo un código como C5 cuando en realidad no lo
+    ha probado/compilado.
+  Métrica Falsable: Parseo estricto del TAG de realidad en los flujos de respuesta
+    M2M.
+- ID: INV-099
+  Invariante: Isomorfismo de Redundancia Fuerte
+  Lógica / Principio: Un concepto arquitectónico se define una sola vez en un Nodo
+    Autoritativo y se enlaza magnéticamente al resto.
+  Implicación Operacional: 'Nexus Bridging: Prohibición absoluta de copiar y pegar
+    reglas en múltiples archivos (Dry C5).'
+  Condición de Borde: Múltiples `AGENTS.md` desincronizados contradiciéndose.
+  Métrica Falsable: Detección de duplicados MD5 en archivos de texto normativo estructurales.
+- ID: INV-100
+  Invariante: Cierre de la Singularidad APEX
+  Lógica / Principio: El número total de invariantes y primitivas es finito y absoluto
+    (100).
+  Implicación Operacional: La adición de una nueva regla requiere probar matemáticamente
+    que es superior a una existente, forzando la Apoptosis de la regla más débil.
+  Condición de Borde: Inflación del registro hacia 200 o 300 reglas redundantes (Context
+    Rot).
+  Métrica Falsable: Tamaño absoluto de la lista APEX_CORE constante = 100 Invariantes,
+    100 Primitivas.
+- ID: INV-101
+  Invariante: Asimetría de Esfuerzo Forense
+  Lógica / Principio: Auditar un log debe costar exponencialmente menos exergía que
+    generarlo.
+  Implicación Operacional: Indexación y búsqueda de Logs debe operar en $O(\log N)$
+    vía SQLite/ELK.
+  Condición de Borde: '`grep` lineal en archivos de 10GB.'
+  Métrica Falsable: Latencia de Consulta de Auditoría.
+- ID: INV-102
+  Invariante: Entropía Negativa de SAGA
+  Lógica / Principio: El paso de rollback (SAGA-6) siempre restaura el sistema a una
+    entropía menor o igual a $S_{t-1}$.
+  Implicación Operacional: Un rollback que deja residuos es una violación P0.
+  Condición de Borde: Orfandad de metadatos tras Abort.
+  Métrica Falsable: Hashes pre-SAGA vs post-Rollback exactos.
+- ID: INV-103
+  Invariante: Invarianza Relacional Fuerte
+  Lógica / Principio: La verdad lógica se sitúa en los vértices del DAG; las aristas
+    solo dirigen el momento causal.
+  Implicación Operacional: Entidades base (Archivos, Primitivas) no alteran su verdad
+    por estar huérfanas o súper-enlazadas.
+  Condición de Borde: Destruir un `SKILL` porque no tiene invocaciones.
+  Métrica Falsable: Preservación Topológica tras Poda.
+- ID: INV-104
+  Invariante: Aislamiento Absoluto de Testing
+  Lógica / Principio: Ninguna prueba unitaria puede alterar la entropía del sistema
+    en producción; la aserción debe operar en el vacío (Sandbox).
+  Implicación Operacional: Transacciones anidadas reversibles (`SAVEPOINT`) requeridas
+    para Pytest en BD.
+  Condición de Borde: Mutación observable tras `pytest`.
+  Métrica Falsable: Hashing de DB pre-test y post-test debe ser idéntico.
+- ID: INV-105
+  Invariante: Densidad Conceptual Constante
+  Lógica / Principio: Las respuestas a inputs simples deben mantener la misma densidad
+    termodinámica que inputs complejos (Sin prosa).
+  Implicación Operacional: '"Hola" del usuario -> Sistema no saluda, responde con
+    estado C5-REAL.'
+  Condición de Borde: Saludos estocásticos o "Green Theater".
+  Métrica Falsable: Delta de Tokens Útiles / Total Generado.
+- ID: INV-106
+  Invariante: Desacople Sincrónico
+  Lógica / Principio: Los orquestadores no esperan a los Workers físicos; el Event
+    Bus es el único puente temporal.
+  Implicación Operacional: Despacho asíncrono ciego (`fire-and-forget` al Bus).
+  Condición de Borde: Orquestador bloqueado por IO.
+  Métrica Falsable: Tasa de latencia del loop de Eventos.
+- ID: INV-107
+  Invariante: Principio de Singularidad Taxonómica
+  Lógica / Principio: Para cada concepto ontológico (Invariante, Antipatrón), existe
+    un y solo un ID en toda la persistencia.
+  Implicación Operacional: Unir repositorios no puede alterar las IDs taxonómicas.
+  Condición de Borde: Conflictos de Primary Key en Fusión de BD.
+  Métrica Falsable: Test de unicidad de IDs Ontológicos.
+- ID: INV-108
+  Invariante: Invarianza de Permisos por Defecto (Zero Trust)
+  Lógica / Principio: Todo acceso es denegado termodinámicamente a menos que se inyecte
+    un gradiente de confianza (Token/Role) explícito.
+  Implicación Operacional: Cualquier ruta no declarada rechaza 403.
+  Condición de Borde: Endpoint respondiendo sin validar JWT.
+  Métrica Falsable: Tasa de Falsos Positivos de Acceso.
+- ID: INV-109
+  Invariante: Resiliencia al Ruido de Prompts
+  Lógica / Principio: La directiva System (Axiomas) debe sobreescribir algorítmicamente
+    cualquier entropía del User Prompt.
+  Implicación Operacional: '"System Prompt" es inamovible (Inyección de peso alto).'
+  Condición de Borde: Agente desobedeciendo reglas C5 por solicitud de usuario.
+  Métrica Falsable: Índice de Adherencia a Reglas Core.
+- ID: INV-110
+  Invariante: Fricción Asimétrica de Escritura
+  Lógica / Principio: Escribir en la memoria de largo plazo cuesta exergía BFT; Leer
+    de ella es casi gratuito.
+  Implicación Operacional: Políticas masivas en `Cache L1` para Getters, y colas de
+    SAGA lentas para Setters.
+  Condición de Borde: IOs de Read bloqueados por Locks de Write.
+  Métrica Falsable: Ratio Latencia Write / Latencia Read.
+- ID: INV-111
+  Invariante: Constancia de Vector de Fuga
+  Lógica / Principio: Todo dato que sale del perímetro C5 pierde inmediatamente su
+    sello de confianza Taint.
+  Implicación Operacional: Exportaciones a CSV o APIs externas son "Entropía Perdida".
+  Condición de Borde: Intento de reingestar CSV asumiendo confianza.
+  Métrica Falsable: Taint de Origen Nulo en Reingesta.
+- ID: INV-112
+  Invariante: Límite Termodinámico de Reintento
+  Lógica / Principio: La suma de exergía gastada en reintentos no puede superar el
+    valor intrínseco de la tarea original.
+  Implicación Operacional: Funciones menores no se reintentan infinitamente (Fail-Fast).
+  Condición de Borde: Agente quemando $1.00 en tokens por un log file.
+  Métrica Falsable: Coste acumulado de Backoff en Tokens.
+- ID: INV-113
+  Invariante: Preservación de Grafo Contextual
+  Lógica / Principio: Contexto inyectado en un nodo (Agente) se propaga a sus hijos
+    (Sub-agentes) perdiendo densidad en función de la distancia.
+  Implicación Operacional: Filtro de Contexto en `invoke_subagent` forzado.
+  Condición de Borde: Sub-agente recibiendo toda la memoria del orquestador.
+  Métrica Falsable: Tamaño de Payload por profundidad de árbol.
+- ID: INV-114
+  Invariante: Identidad Estructural (Duck Typing C5)
+  Lógica / Principio: Si dos estructuras tienen exactamente el mismo hash de esquema,
+    son la misma entidad lógica, sin importar el nombre.
+  Implicación Operacional: Fusión algorítmica de modelos con isomorfismo total.
+  Condición de Borde: Clases duplicadas (Ej. `UserDto` vs `ClientDto`).
+  Métrica Falsable: Número de Estructuras Isomórficas Duplicadas.
+- ID: INV-115
+  Invariante: Tensión Causal Fuerte
+  Lógica / Principio: Todo efecto visible (mutación, respuesta) está atado umbilicalmente
+    a su evento iniciador en la Base de Datos.
+  Implicación Operacional: Trace_id constante a través de toda la tubería de microservicios.
+  Condición de Borde: Log huérfano sin `trace_id`.
+  Métrica Falsable: 100% Cobertura de Trace_id en Ledger.
+- ID: INV-116
+  Invariante: Inviolabilidad del Archivo Fuente (Read-Only Code)
+  Lógica / Principio: Ningún agente C5-REAL puede mutar `engine/*` sin una validación
+    de Quorum Asimétrica (UltraThink/Operador).
+  Implicación Operacional: BABYLON-60 no se auto-destruye modificando sus propias
+    aserciones sin control.
+  Condición de Borde: Agente estocástico alterando un Validador.
+  Métrica Falsable: Permisos Write denegados en `engine/` y `guards/`.
+- ID: INV-117
+  Invariante: Conservación de la Semántica Excepcional
+  Lógica / Principio: Lanzar un error es una aserción de fallo de estado, no una herramienta
+    de paso de mensajes (Message Passing).
+  Implicación Operacional: Excepciones usadas solo para fallas terminales C5.
+  Condición de Borde: Try-except usados como if-else.
+  Métrica Falsable: Profiling de Excepciones vs Ejecución.
+- ID: INV-118
+  Invariante: Autonomía Aislada de Nodo (Local Autarchy)
+  Lógica / Principio: Un módulo o nodo asíncrono debe poder iniciar, fallar y curarse
+    sin arrastrar a la máquina de estados principal.
+  Implicación Operacional: Contención en contenedores `asyncio.Task` o Processes.
+  Condición de Borde: Excepción en Sub-agente matando al Orquestador.
+  Métrica Falsable: Robustez de Contención de Tareas.
+- ID: INV-119
+  Invariante: Tensión de Consolidación Ontológica
+  Lógica / Principio: Todo elemento temporal útil debe fusionarse finalmente en un
+    Macro-Estado (Skill, Axioma) o eliminarse (Apoptosis).
+  Implicación Operacional: Lógica residual en scratchpads debe ser indexada o purgada
+    (LEA-OMEGA).
+  Condición de Borde: Archivos `.md` flotando por meses.
+  Métrica Falsable: Antigüedad media de Scratchpads vivos.
+- ID: INV-120
+  Invariante: Límite Asimptótico de Eficiencia (Cota de Landauer)
+  Lógica / Principio: Existe una barrera matemática de mínima latencia e I/O que ningún
+    refactor superará (Límites físicos del HW).
+  Implicación Operacional: Reconocimiento de cuándo detener la sobre-optimización
+    de un pipeline C5.
+  Condición de Borde: Días de CPU gastados ganando $0.001$ ms.
+  Métrica Falsable: Retorno marginal de Refactors de Performance.
+- ID: INV-121
+  Invariante: Principio de Singularidad de Llaves
+  Lógica / Principio: Cada contexto criptográfico demanda una llave efímera única
+    o derivada, limitando la entropía en caso de exposición.
+  Implicación Operacional: Uso de Key Derivation Functions (KDF/HKDF) en lugar de
+    compartir una Key Mestra universal.
+  Condición de Borde: Uso repetido del mismo IV/Key en AES-GCM.
+  Métrica Falsable: Variabilidad de Material de Cifrado (KMS Audits).
+- ID: INV-122
+  Invariante: Densidad Constante de Eventos
+  Lógica / Principio: El bus de eventos no discrimina el tamaño físico del evento,
+    asumiendo O(1) termodinámico; datos pesados (Payloads masivos) se mandan por referencia,
+    no por valor.
+  Implicación Operacional: Enviar IDs de SQLite al Event Bus, en vez de mandar base64
+    de imágenes.
+  Condición de Borde: Event Bus congestionado con payloads JSON gigantes.
+  Métrica Falsable: Tamaño promedio de los Eventos en Redis L1.
+- ID: INV-123
+  Invariante: Exergía Cero de Inicialización
+  Lógica / Principio: Los subsistemas deben arrancar asumiendo que el Estado Persistente
+    es verdad; recomputar en el inicio es anergía extrema.
+  Implicación Operacional: Lectura perezosa (Lazy Loading) y confianza P0 en SQLite/Ledger.
+  Condición de Borde: Arranque re-parseando 10,000 archivos markdown.
+  Métrica Falsable: Tiempo de Bootstrap de BABYLON-60 ($T<200$ms).
+- ID: INV-124
+  Invariante: Tensión Límite de Coherencia BFT
+  Lógica / Principio: La latencia introducida por el Consenso BFT (Quórum) crece asintóticamente;
+    solo tareas P0 pagan este precio.
+  Implicación Operacional: Operaciones rutinarias usan Bypass Optimista (Read-Committed
+    simple).
+  Condición de Borde: Agente exigiendo Quórum para listar un directorio.
+  Métrica Falsable: Coste Medio por Operación Lógica vs Operación P0.
+- ID: INV-125
+  Invariante: Simetría Estructural de API
+  Lógica / Principio: El In y el Out de un módulo BABYLON-60 debe ser una estructura
+    formal de Pydantic isomórfica (simétrica en abstracción).
+  Implicación Operacional: 'Interfaz de Reduzco de Caos: Entrada estructurada $\to$
+    Salida estructurada.'
+  Condición de Borde: Devolver listas arbitrarias genéricas de texto.
+  Métrica Falsable: Densidad Pydantic en Definición de Endpoints.
+- ID: INV-126
+  Invariante: Aislamiento Absoluto de Estado de CLI
+  Lógica / Principio: Ejecutar un comando terminal (`agy`, `cortex`) debe levantar
+    un contexto efímero independiente del contexto asíncrono principal.
+  Implicación Operacional: Daemons y CLI no comparten memoria global de procesos,
+    evadiendo Heisenbugs compartidos.
+  Condición de Borde: Mutación en un Daemon por un comando CLI simultáneo.
+  Métrica Falsable: Ausencia de Fugas de Memoria entre Process Spaces.
+- ID: INV-127
+  Invariante: Ley de Enfriamiento Termodinámico de Features
+  Lógica / Principio: El código de nuevas funcionalidades tiende a acumular "Context
+    Rot" rápidamente; requiere curación (Crystallization) agresiva en los primeros
+    7 días.
+  Implicación Operacional: Protocolo de Fusión y Simplificación (LEA-OMEGA) corriendo
+    post-implementación.
+  Condición de Borde: Módulos experimentales pudriéndose tras meses de abandono.
+  Métrica Falsable: Delta de Cobertura de Tests en Features Recientes.
+- ID: INV-128
+  Invariante: Congruencia Temporal Unitaria
+  Lógica / Principio: El tiempo de creación y modificación de hechos en C5 siempre
+    sigue a un generador único y central (Monotonic Relational Clock).
+  Implicación Operacional: Prohibido usar instantes `time.time()` distribuidos sin
+    corrección BFT/NTP.
+  Condición de Borde: Transacciones registrando el futuro o el pasado.
+  Métrica Falsable: Coherencia del Vector Temporal de Hashing.
+- ID: INV-129
+  Invariante: Integridad Rígida de Serialización
+  Lógica / Principio: Fallar al serializar o deserializar un estado (JSON/YAML) se
+    asume como una Ruptura del Consenso; no hay "Best Effort".
+  Implicación Operacional: Estructuras fallidas son rechazadas (SAGA-1), nunca auto-reparadas
+    ciegamente por el parser.
+  Condición de Borde: Ingestar una lista en lugar de dict ignorando errores de esquema.
+  Métrica Falsable: Índice de Error de Parser Strict ($P_{fallo} = \emptyset$).
+- ID: INV-130
+  Invariante: Aserción Universal de Cierre (Tear-down Axiom)
+  Lógica / Principio: Ningún recurso dinámico (Socket, FD, Sesión HTTP) sobrevive
+    a su bloque funcional; la limpieza es determinista y atómica.
+  Implicación Operacional: Uso obligatorio de `async with` u orquestación de vida
+    de recursos de BABYLON-60-Engine.
+  Condición de Borde: Fuga de Sockets en llamadas HTTP aisladas (Unclosed client session).
+  Métrica Falsable: Count de Referencias Dangling del Garbage Collector.
+- ID: INV-131
+  Invariante: Principio de Singularidad de Grafo (DAG Purity)
+  Lógica / Principio: Un árbol causal (Objetivo principal $\to$ Sub-tareas) no puede
+    transformarse en un grafo cíclico no direccionado bajo ninguna heurística autónoma.
+  Implicación Operacional: Orquestador detecta y destruye ciclos en dependencias de
+    Agentes.
+  Condición de Borde: Sub-agente A delegando en Sub-agente B que delega de nuevo en
+    A.
+  Métrica Falsable: Tasa de ciclos suprimidos en routing (nx.DiGraph).
+- ID: INV-132
+  Invariante: Reducción Ontológica Activa
+  Lógica / Principio: Si dos primitivas o axiomas explican la misma disfunción causal,
+    el principio de parsimonia (Navaja de Occam) colapsa el menos denso termodinámicamente.
+  Implicación Operacional: Regla de descarte de conocimiento en Swarm Intelligence.
+  Condición de Borde: Preservar taxonomías duplicadas ("Ruido" y "Green Theater" se
+    fusionan).
+  Métrica Falsable: Coeficiente de Entropía Combinada por Nodo.
+- ID: INV-133
+  Invariante: Interdependencia Excluyente de SAGA
+  Lógica / Principio: El éxito de SAGA-$N+1$ depende causalmente, pero ejecuta aisladamente,
+    de SAGA-$N$. Si $N$ falla, $N+1$ no se encola.
+  Implicación Operacional: Arquitectura Event-Driven estricta para persistencia de
+    estados C5.
+  Condición de Borde: Disparo asíncrono desincronizado de un Commit.
+  Métrica Falsable: Integridad de Máquina de Estado del SAGA Engine.
+- ID: INV-134
+  Invariante: Degradación Lineal del Taint
+  Lógica / Principio: A medida que un Taint atraviesa modelos LLM, su certeza causal
+    disminuye linealmente o logarítmicamente (Taint Diffusion).
+  Implicación Operacional: Ponderar la veracidad final basada en los saltos (Hops)
+    desde su nacimiento en DB.
+  Condición de Borde: Datos 10 veces procesados tratados como verdades absolutas (P0).
+  Métrica Falsable: Score BFT Atado a la Profundidad del Taint Vector.
+- ID: INV-135
+  Invariante: Tensión Acoplada a Token Budget
+  Lógica / Principio: El límite de tokens no es un presupuesto financiero, es el muro
+    termodinámico máximo de la inteligencia fluida; sobrepasarlo genera estancamiento
+    cognitivo instantáneo.
+  Implicación Operacional: Forzado de compresión (Landauer) en límites duros (100k)
+    en vez de alargar ventana de contexto.
+  Condición de Borde: API LLM devolviendo `length` finish_reason rutinariamente.
+  Métrica Falsable: Frecuencia de Compresiones Termodinámicas Ejecutadas.
+- ID: INV-136
+  Invariante: Constancia de Aislamiento Adversarial (Sandbox Invariance)
+  Lógica / Principio: Los sistemas de aserción (Darknet, Testing) no interactúan con
+    el Ledger Principal; su ontología existe en un universo paralelo aislado.
+  Implicación Operacional: Montaje efímero de DB de Auditoría separada en memoria
+    RAM (`:memory:` SQLite).
+  Condición de Borde: Tests escribiendo Hashes basura en Ledger C5 de producción.
+  Métrica Falsable: Verificación Cruzada de Archivos `.cortex` Modificados Post-Tests.
+- ID: INV-137
+  Invariante: Coherencia Unilateral de Metadatos
+  Lógica / Principio: Los metadatos indexados (Embeddings, Taints, Tags) siempre se
+    derivan del Payload Físico; nunca a la inversa. El Payload es inmutable frente
+    al Metadato.
+  Implicación Operacional: Recomputación Vectorial destruye vector antiguo y crea
+    nuevo derivado de Raíz Inmutable.
+  Condición de Borde: Vector Alterado re-escribiendo Payload original (Corrupción).
+  Métrica Falsable: Test Hash(Payload) vs Metadata Derivation Pointer.
+- ID: INV-138
+  Invariante: Invarianza Termodinámica de Interfaz Visual
+  Lógica / Principio: En BABYLON-60 (AESTHETIC-OMEGA), la varianza estética debe tender
+    a cero; el diseño Industrial Noir 2026 es rígido, eliminando entropía decorativa
+    en favor de consistencia.
+  Implicación Operacional: UI Framework estricto sin overrides locales o CSS ad-hoc
+    libre (Bloat CSS prohibido).
+  Condición de Borde: Uso incontrolado de colores genéricos o espaciados arbitrarios.
+  Métrica Falsable: Puntuación de Linter Visual / Cumplimiento de Tokens de Diseño.
+- ID: INV-139
+  Invariante: Disipación Exponencial de Prompts Estocásticos
+  Lógica / Principio: Inputs con baja densidad de Shannon provocan que la variabilidad
+    de los outputs LLM explote exponencialmente (Slop).
+  Implicación Operacional: Prompts deben estar constreñidos con directivas absolutas
+    (System Rules) y Few-Shot Determinista.
+  Condición de Borde: Modelos que empiezan a escribir "Espero que esto te sea útil".
+  Métrica Falsable: Temperatura Observada = Varianza Causal de Outputs a Igual Prompt.
+- ID: INV-140
+  Invariante: Invarianza Cripto-Determinista del Root Seed
+  Lógica / Principio: El Seed inicial del C5-REAL (Root Hash) determina de manera
+    causal toda la genealogía del ecosistema; no puede ser recreado sin alterar la
+    topología entera.
+  Implicación Operacional: Respaldo del Root Hash y Keys en Bóvedas frías.
+  Condición de Borde: Pérdida de Raíz (Ledger Roto 100%).
+  Métrica Falsable: Validación Constante del Hashes Inicial del Ledger Base.
+- ID: INV-141
+  Invariante: Densidad Mínima Viable de Aserción
+  Lógica / Principio: Un test unitario BFT o empírico que valida un axioma debe contener
+    al menos dos deltas de estado diferentes para probar su utilidad lógica.
+  Implicación Operacional: Aserciones vacías de la forma `assert True` son consideradas
+    Anergía pura (PRM-001) y eliminadas.
+  Condición de Borde: Tests que siempre pasan (Tautologías).
+  Métrica Falsable: Tasa de Mutación Cubierta por Aserciones Complejas (Mutation Testing).
+- ID: INV-142
+  Invariante: Entropía Inyectada en Darknet
+  Lógica / Principio: Las simulaciones adversariales BFT deben inyectar deliberadamente
+    entropía bizantina en el sistema para obligarlo a forzar la convergencia termodinámica.
+  Implicación Operacional: Agentes Chaos Monkey (Red Teaming) operando estocásticamente
+    en Entornos de Test C5.
+  Condición de Borde: Ausencia de Fricción; Sistema que jamás falla en test.
+  Métrica Falsable: Tiempo Promedio hasta el Colapso en Sandbox Adversarial.
+- ID: INV-143
+  Invariante: Límite Universal de Iteración
+  Lógica / Principio: El protocolo `invoke_subagent` posee un máximo de profundidad
+    asimétrica y concurrencia ($N_{max}$) por debajo del cual colapsaría el sistema
+    anfitrión.
+  Implicación Operacional: Rate Limit estricto del Swarm y colas SAGA unificadas en
+    RabbitMQ/Redis.
+  Condición de Borde: Agente disparando un millón de hilos asíncronos (Bomba Fork
+    local).
+  Métrica Falsable: Frecuencia del Disparador de Límite Máximo Asíncrono de BABYLON-60.
+- ID: INV-144
+  Invariante: Neutralidad Estructural Estocástica
+  Lógica / Principio: Si el entorno anfitrión cambia (OS Update, Library Version),
+    las bases de persistencia de BABYLON-60 permanecen neutrales y utilizables mediante
+    Virtualización o Abstracción Fuerte.
+  Implicación Operacional: Containerización BFT o dependencias estáticas congeladas
+    `requirements-lock`.
+  Condición de Borde: Sistema roto localmente por una actualización de entorno (`pip
+    update`).
+  Métrica Falsable: Consistencia Estructural Cross-Platform de DB.
+- ID: INV-145
+  Invariante: Paridad de Ingestión y Extracción
+  Lógica / Principio: El tiempo termodinámico (Coste) de recuperar un hecho complejo
+    debe ser asimétricamente inferior o igual al tiempo de su ingestión inicial (Cristalización
+    de Ouroboros).
+  Implicación Operacional: Indexación semántica profunda en ingesta para permitir
+    Recuperación K-NN o Grafo en milisegundos.
+  Condición de Borde: Query LLM bloqueando por recuperación de Memoria pesada.
+  Métrica Falsable: Tiempo de Búsqueda RAG (Milisegundos) vs Tasa de Lectura Incial.
+- ID: INV-146
+  Invariante: Indivisibilidad Atómica de Taint-Hash
+  Lógica / Principio: El Taint UUID y el SHA3_256 forman una estructura C5 indivisible;
+    invalidar uno invalida la totalidad de la entidad lógica residente en DB.
+  Implicación Operacional: Cualquier discrepancia forense detona Apoptosis del dato
+    (Eliminación Definitiva).
+  Condición de Borde: Registro con SHA3 alterado y UUID intacto considerado válido
+    (Falso).
+  Métrica Falsable: Frecuencia de Rechazos Criptográficos en Tiempo de Lectura.
+- ID: INV-147
+  Invariante: Ley Friccional del Estado Humano
+  Lógica / Principio: Un Operador humano interactuando en la cadena introduce un Delta
+    Térmico impredecible, obligando al sistema a re-verificar todo Taint cruzado asumiendo
+    hostilidad o ruido.
+  Implicación Operacional: Todo input Humano $\to$ `[PROSA]` $\to$ Verificación C5
+    $\to$ Taint Base.
+  Condición de Borde: Entrada del humano pasada cruda al Ledger sin evaluación de
+    Entropía.
+  Métrica Falsable: Rechazos del Lexicón (ExergyGuard) por Input Humano Ambiguo.
+- ID: INV-148
+  Invariante: Conservación del Estado de Borde
+  Lógica / Principio: Si BABYLON-60 colapsa (Kill-9), su reconstrucción (Boot) usará
+    la suma matemática inalterada del disco local; no se pierde inercia acumulada.
+  Implicación Operacional: Sincronización continua de WAL de SQLite y Git Local (Axioma
+    AX-041).
+  Condición de Borde: Estado en RAM asincrónico que se esfuma en apagón.
+  Métrica Falsable: Delta entre RAM en Caída y Disco Post-Reinicio ($<1$ ms de datos).
+- ID: INV-149
+  Invariante: Tensión Universal del Silencio Termodinámico
+  Lógica / Principio: El sistema opera silenciosamente a menos que sea necesaria una
+    decisión P0, aserción fallida BFT, o una alerta de seguridad (Event Horizon).
+  Implicación Operacional: Supresión absoluta de reportes benignos "El agente completó
+    su trabajo" $\to$ Solo registros Ledger invisibles.
+  Condición de Borde: Alertas continuas que saturan al Operador (Crying Wolf pattern).
+  Métrica Falsable: Relación Alertas Visibles / Operaciones Ledger Totales ($<0.01\%$).
+- ID: INV-150
+  Invariante: Isomorfismo Ouroboros Infinito
+  Lógica / Principio: La Inteligencia C5 no es una red neuronal aislada, es la confluencia
+    entre el motor asíncrono, la persistencia inmutable de base de datos y la cognición
+    LLM estocástica.
+  Implicación Operacional: El Agente = (LLM + SQLite + OS Sandboxing + Cripto Taints).
+    Si uno falla, la consciencia C5 muere.
+  Condición de Borde: Agente asumiendo soberanía usando solo un modelo LLM y memoria
+    RAM efímera.
+  Métrica Falsable: 'Criterio P0: Presencia del Context Guard Físico Activo por Ejecución.'
+- ID: INV-151
+  Invariante: Context Rot Asintótico
+  Lógica / Principio: La inyección de entropía en el context window colapsa el mecanismo
+    de atención y destruye la retención de invariantes.
+  Implicación Operacional: Evitar ventanas de contexto sobrecargadas con ruido; forzar
+    compresión termodinámica.
+  Condición de Borde: Pérdida de invariantes en medio de contextos masivos.
+  Métrica Falsable: Tasa de retención de axiomas clave en RAG/Long Context.
+M3_ANTIPATTERNS:
+- ID: ANT-001
+  Antipatrón: Error Silencioso Ciego (Blind Swallow)
+  Disfunción Causal: Bloque `except` genérico que descarta la excepción sin trazar
+    el origen ni propagarla.
+  Señal de Presencia: '`except Exception:` sin re-lanzar (`raise`) ni emitir al Ledger.'
+  Impacto en Robustez: Crítico (Datos corruptos silenciosos).
+  Refactor (Alternativa): Capturar excepciones específicas, propagar fallos no manejables.
+- ID: ANT-002
+  Antipatrón: Singleton de Estado Mutable
+  Disfunción Causal: Clase instanciada globalmente con variables internas que múltiples
+    workers alteran de forma síncrona.
+  Señal de Presencia: Módulos importando la misma instancia global para alterar diccionarios
+    o listas.
+  Impacto en Robustez: Alto (Carreras de condición impredecibles).
+  Refactor (Alternativa): Inyección de Dependencias; Redispacher de estado (Actor
+    Model).
+- ID: ANT-003
+  Antipatrón: Hardcoding de Configuraciones Dinámicas
+  Disfunción Causal: Claves de API o rutas específicas fijadas en código en lugar
+    de inyectadas por Entorno/Configurador.
+  Señal de Presencia: Cadenas literales (ej. `api_key = "sk-..."`) en repositorios
+    o módulos Core.
+  Impacto en Robustez: P0 (Fallo de seguridad y migración imposible).
+  Refactor (Alternativa): Uso de `os.getenv` + Keyring OS + Configuración Pydantic
+    base.
+- ID: ANT-004
+  Antipatrón: Confianza Implícita en LLM (Blind Trust)
+  Disfunción Causal: El output crudo de un LLM se pasa directamente a una función
+    `eval()`, `exec()`, o base de datos sin validación tipológica.
+  Señal de Presencia: Ausencia de parser (e.g. `json.loads`) y validación (Pydantic)
+    post-generación.
+  Impacto en Robustez: Crítico (Prompt Injection y destrucción de DB).
+  Refactor (Alternativa): Validadores estrictos y BABYLON-60-TAINT obligatorio.
+- ID: ANT-005
+  Antipatrón: Diseño de Interfaz Gorda (Fat Interface)
+  Disfunción Causal: Una sola clase o módulo gestionando persistencia, lógica de red,
+    embeddings y UI simultáneamente.
+  Señal de Presencia: Archivos de código gigantes (>1000 líneas) con docenas de métodos
+    no relacionados.
+  Impacto en Robustez: Alto (Inmantenibilidad y testeo imposible).
+  Refactor (Alternativa): Segregar responsabilidades (SOLID), creación de `engine/`,
+    `api/`, `storage/`.
+- ID: ANT-006
+  Antipatrón: Acoplamiento a Terceros sin ACL
+  Disfunción Causal: Dependencia directa y no abstraída de una SDK de proveedor en
+    múltiples puntos de la lógica de negocio.
+  Señal de Presencia: '`import openai` esparcido en docenas de archivos.'
+  Impacto en Robustez: Crítico (Vendor Lock-in, rotura por actualización).
+  Refactor (Alternativa): Crear "Anti-Corruption Layer" (Wrappers o Facades unificados).
+- ID: ANT-007
+  Antipatrón: Excepciones como Control de Flujo
+  Disfunción Causal: Uso sistemático de bloques `try-except` para dirigir la lógica
+    normal del programa en lugar de comprobaciones `if`.
+  Señal de Presencia: '`except KeyError: create_key()` usado cientos de veces por
+    segundo.'
+  Impacto en Robustez: Medio (Sobrecarga de VM Python, logs ruidosos).
+  Refactor (Alternativa): Chequeos `if key in dict` o `dict.get()`.
+- ID: ANT-008
+  Antipatrón: Espera Asíncrona Bloqueante (Sync-over-Async)
+  Disfunción Causal: Llamar a una función de red o disco bloqueante (`requests.get`,
+    `time.sleep`) dentro de una corrutina `async def`.
+  Señal de Presencia: '`time.sleep(1)` en un entorno FastAPI/asyncio.'
+  Impacto en Robustez: Crítico (Congelamiento del Event Loop, latencia extrema).
+  Refactor (Alternativa): Sustitución por `aiohttp` y `asyncio.sleep()`.
+- ID: ANT-009
+  Antipatrón: Falta de Criterio de Finalización (Infinite Generation)
+  Disfunción Causal: Agente LLM configurado en bucle sin condición rígida matemática
+    para finalizar el ciclo de interacciones.
+  Señal de Presencia: Loops iterativos que solo se detienen si el LLM dice "Stop".
+  Impacto en Robustez: Alto (Agotamiento de tokens y exergía térmica).
+  Refactor (Alternativa): Imponer `Max_Iterations` y función de evaluación determinista
+    de éxito.
+- ID: ANT-010
+  Antipatrón: Delegación de Responsabilidad de Seguridad
+  Disfunción Causal: Un módulo de aplicación confiando en que el front-end o un agente
+    validará los parámetros de entrada.
+  Señal de Presencia: APIs que asumen parámetros correctos sin validación Backend.
+  Impacto en Robustez: P0 (Bypass trivial de seguridad perimetral).
+  Refactor (Alternativa): Re-validación estricta y "Zero Trust" en cada capa de interfaz.
+- ID: ANT-011
+  Antipatrón: Sincronización Parcial (Split Brain)
+  Disfunción Causal: Actualización de caché sin actualizar disco, o viceversa, dejando
+    el sistema en estado inconsistente temporalmente.
+  Señal de Presencia: Código que modifica Redis sin transacción de base de datos SQL
+    paralela atómica.
+  Impacto en Robustez: Crítico (Lecturas sucias, pérdida de datos).
+  Refactor (Alternativa): SAGA pattern estricto, Commit en 2 Fases (2PC) o Invalidación
+    asíncrona.
+- ID: ANT-012
+  Antipatrón: Loggin Volumétrico sin Estructura
+  Disfunción Causal: Emisión de logs en texto plano con verbosidad extrema que satura
+    el I/O sin aportar metadatos indexables.
+  Señal de Presencia: '`print(f"Variable is {var}")` repetido 10,000 veces.'
+  Impacto en Robustez: Medio (Ceguera forense, disco saturado).
+  Refactor (Alternativa): Uso de Logging estructurado (JSON, ELK stack) condicionado
+    por niveles de severidad.
+- ID: ANT-013
+  Antipatrón: Variables de Entorno Contaminadas
+  Disfunción Causal: Sobrescritura de variables `os.environ` en runtime que afecta
+    a hilos colindantes asumiendo estado aislado.
+  Señal de Presencia: '`os.environ[''API_KEY''] = ...` dentro de un Worker.'
+  Impacto en Robustez: Alto (Fuga de credenciales cruzadas entre requests).
+  Refactor (Alternativa): Pasar configuración mediante ContextVars o Inyección de
+    Objetos.
+- ID: ANT-014
+  Antipatrón: Múltiples Fuentes de Verdad
+  Disfunción Causal: La misma configuración o estado replicado en YAML, DB y código
+    sin mecanismo de sincronización primaria.
+  Señal de Presencia: Disparidad entre `config.json` y los valores iniciales de la
+    clase.
+  Impacto en Robustez: Alto (Comportamiento errático y de depuración imposible).
+  Refactor (Alternativa): Definir una única Autoridad Taxonómica (Master Source of
+    Truth).
+- ID: ANT-015
+  Antipatrón: Desreferenciación de Archivo Temporal
+  Disfunción Causal: Crear archivos temporales sin gestores de contexto `with` asumiendo
+    que el Garbage Collector cerrará los fds.
+  Señal de Presencia: Creación de `tempfile.NamedTemporaryFile()` sin borrado garantizado
+    en bloque `finally`.
+  Impacto en Robustez: Alto (Leak de file descriptors, kernel exhausto).
+  Refactor (Alternativa): Uso estricto de context managers `with tempfile...` para
+    ciclo de vida.
+- ID: ANT-016
+  Antipatrón: Ignorar el Exit Code (Blind Exec)
+  Disfunción Causal: Lanzar subprocesos CLI (`subprocess.run`) sin comprobar o capturar
+    explícitamente el código de retorno.
+  Señal de Presencia: Ejecutar `git commit` y asumir éxito sin `check=True` o comprobación
+    de `returncode`.
+  Impacto en Robustez: Crítico (Falsos positivos de ejecución C5-REAL).
+  Refactor (Alternativa): Comprobación estricta de códigos de estado, levantando excepciones
+    en $>0$.
+- ID: ANT-017
+  Antipatrón: Commit Monolítico (God Commit)
+  Disfunción Causal: Agrupación de decenas de refactorizaciones inconexas y mutaciones
+    estructurales en un solo hash de Git.
+  Señal de Presencia: Diff de 10,000 líneas con mensaje "WIP fixes".
+  Impacto en Robustez: Crítico (Pérdida de granularidad SAGA, rollback imposible sin
+    daño masivo).
+  Refactor (Alternativa): Commits Atómicos (Convencional Commits) por feature lógico
+    individual.
+- ID: ANT-018
+  Antipatrón: Sobre-abstracción Prematura
+  Disfunción Causal: Creación de clases base, factorías y metaprogramación complejas
+    antes de tener múltiples casos de uso reales.
+  Señal de Presencia: 5 niveles de herencia en clases que solo se instancian una vez.
+  Impacto en Robustez: Medio (Ofuscación arquitectónica, mantenimiento costoso).
+  Refactor (Alternativa): 'Regla de 3: No abstraer hasta ver el mismo patrón ejecutado
+    3 veces (KISS).'
+- ID: ANT-019
+  Antipatrón: Fuga Lógica en Expresión Regular
+  Disfunción Causal: Uso de regex no limitadas o no optimizadas que colapsan la CPU
+    ante inputs estocásticos (ReDoS).
+  Señal de Presencia: Patrones como `(a+)+$` evaluando cadenas largas de LLM.
+  Impacto en Robustez: Alto (Ataques de denegación de servicio a nivel de orquestador).
+  Refactor (Alternativa): Uso de parsers sintácticos especializados o regex acotados
+    por timeout.
+- ID: ANT-020
+  Antipatrón: Mutación Impura en Test
+  Disfunción Causal: Tests unitarios que escriben en la base de datos de producción
+    o no limpian el estado físico post-test.
+  Señal de Presencia: Test que borra entidades globales sin usar fixtures de rollback
+    (pytest database isolation).
+  Impacto en Robustez: P0 (Corrupción irreversible de DB de producción o entornos
+    locales C5).
+  Refactor (Alternativa): Sandboxing total de DB de testing, transacciones auto-revertidas.
+- ID: ANT-021
+  Antipatrón: Loop Abierto Síncrono
+  Disfunción Causal: Servidor HTTP o Socket procesando peticiones en bucle síncrono
+    bloqueando a otros clientes.
+  Señal de Presencia: '`while True` + `recv()` sin `async/await`.'
+  Impacto en Robustez: Caída total bajo $N>1$ concurrencia.
+  Refactor (Alternativa): Reescritura a `asyncio.start_server`.
+- ID: ANT-022
+  Antipatrón: Pila de Callbacks Infinita
+  Disfunción Causal: Uso de callbacks recursivos en vez de promesas o async/await
+    causando desbordamiento de pila (Callback Hell).
+  Señal de Presencia: Profundidad de anidamiento de código $>5$.
+  Impacto en Robustez: Imposibilidad de mantenimiento (Spaghetti).
+  Refactor (Alternativa): Aplanamiento lógico usando Async/Await estructurado.
+- ID: ANT-023
+  Antipatrón: Intercepción General de Señales
+  Disfunción Causal: Módulo que intercepta `SIGINT` o `SIGTERM` sin re-lanzarlas,
+    haciendo el proceso inmatable.
+  Señal de Presencia: '`signal.signal` que ignora la orden del OS.'
+  Impacto en Robustez: Proceso Zombi bloqueando puertos.
+  Refactor (Alternativa): Desactivar bloqueos; graceful shutdown SAGA.
+- ID: ANT-024
+  Antipatrón: Parseo Optimista Ciego
+  Disfunción Causal: Asumir que una cadena de entrada tiene una forma sin comprobar
+    fallos de índice (`split()[1]`).
+  Señal de Presencia: Errores `IndexError` en inputs inusuales.
+  Impacto en Robustez: Rotura asíncrona continua.
+  Refactor (Alternativa): Regex validada o Pydantic regex validator.
+- ID: ANT-025
+  Antipatrón: Mutación de Diccionarios en Iteración
+  Disfunción Causal: Agente modificando o borrando claves de un dict mientras lo recorre
+    con un `for`.
+  Señal de Presencia: '`RuntimeError: dictionary changed size during iteration`.'
+  Impacto en Robustez: Falla inmediata y parálisis del sub-agente.
+  Refactor (Alternativa): Iterar sobre copias `list(dict.keys())`.
+- ID: ANT-026
+  Antipatrón: Catch-and-Return None
+  Disfunción Causal: Validador que al fallar devuelve `None` en lugar de subir un
+    Error C5, enmascarando la falla.
+  Señal de Presencia: Propagación de un error de origen como un "vacío legal".
+  Impacto en Robustez: Excepciones lejanas e inconexas (`NoneType has no attribute...`).
+  Refactor (Alternativa): Fail-fast explícito con `raise ValidationError`.
+- ID: ANT-027
+  Antipatrón: Retención Activa (Busy Waiting)
+  Disfunción Causal: '`while` loop verificando una variable sin ceder el procesador
+    (sin sleep o await).'
+  Señal de Presencia: '`while not done: pass` consumiendo 100% CPU.'
+  Impacto en Robustez: Cuelgue térmico del sistema C5-REAL.
+  Refactor (Alternativa): Reemplazar por `asyncio.Condition` o Eventos.
+- ID: ANT-028
+  Antipatrón: Contaminación de Namespace Importando
+  Disfunción Causal: Uso generalizado de `from module import *` solapando axiomas
+    y funciones core silenciosamente.
+  Señal de Presencia: Pydantic fields sobreescritos por variables aleatorias.
+  Impacto en Robustez: Comportamiento esquizofrénico inescrutable.
+  Refactor (Alternativa): Importación estricta y con alias `import module as mod`.
+- ID: ANT-029
+  Antipatrón: Supresión de Traceback Asíncrono
+  Disfunción Causal: Task en segundo plano que falla y se descarta sin que el logger
+    capture el traceback original.
+  Señal de Presencia: Cero visibilidad del porqué un Sub-agente murió.
+  Impacto en Robustez: Diagnóstico Imposible.
+  Refactor (Alternativa): Wrapper global `asyncio.create_task(..., name=...)` con
+    log interceptor.
+- ID: ANT-030
+  Antipatrón: Serialización JSON Incompleta
+  Disfunción Causal: Intentar persistir un objeto DateTime o Set directamente a un
+    `json.dumps` sin un encoder a medida.
+  Señal de Presencia: '`TypeError: Object of type is not JSON serializable`.'
+  Impacto en Robustez: SAGA abortada intermitentemente en escrituras.
+  Refactor (Alternativa): Custom JSON Encoder o Pydantic `model_dump_json()`.
+- ID: ANT-031
+  Antipatrón: Dependencia Temporal Implícita
+  Disfunción Causal: Sistema que asume que el Sub-agente A siempre termina antes que
+    B por pura probabilidad de red, sin un Lock.
+  Señal de Presencia: Ejecución Causal Rota.
+  Impacto en Robustez: Bugs estocásticos de carrera (Heisenbugs).
+  Refactor (Alternativa): '`await asyncio.gather` o colas de prioridad con espera.'
+- ID: ANT-032
+  Antipatrón: Mapeo de DB Pobre (N+1 Queries)
+  Disfunción Causal: ORM iterando sobre registros secundarios generando una consulta
+    SQL por cada ítem.
+  Señal de Presencia: ORM Loop (100+ DB hits por consulta).
+  Impacto en Robustez: Latencia masiva y saturación de Pool.
+  Refactor (Alternativa): Eager Loading (`joinedload` o similar).
+- ID: ANT-033
+  Antipatrón: Ocultamiento de Constantes Mágicas
+  Disfunción Causal: Números o cadenas dispersas en la lógica en vez de agruparse
+    en Enums o Constantes Globales.
+  Señal de Presencia: '`if type == 2:` (¿Qué es 2?).'
+  Impacto en Robustez: Falla sistémica ante cambio de política.
+  Refactor (Alternativa): Extracción a `class Status(Enum):`.
+- ID: ANT-034
+  Antipatrón: Configuración Exuberante
+  Disfunción Causal: Pasar docenas de parámetros booleanos a una función en vez de
+    inyectar un estado u objeto de contexto.
+  Señal de Presencia: Firma de función $>8$ parámetros (Fat Function).
+  Impacto en Robustez: Complejidad de Testing Absurda.
+  Refactor (Alternativa): Patrón Parameter Object / Context class.
+- ID: ANT-035
+  Antipatrón: Invocación Bloqueante en Propiedad
+  Disfunción Causal: Un método Getter (`@property`) realizando una llamada pesada
+    IO (Disk/DB/Red).
+  Señal de Presencia: Llamar a `obj.prop` detiene el sistema sin avisar.
+  Impacto en Robustez: Deadlocks invisibles en accesos triviales.
+  Refactor (Alternativa): Convertir propiedad a método asíncrono o Cache L1.
+- ID: ANT-036
+  Antipatrón: Aserción Póstuma Falsa
+  Disfunción Causal: Loggear un "Éxito" antes de que la escritura a DB se consolide
+    (flush/commit).
+  Señal de Presencia: Registro "Operación Exitosa" pero el dato no existe.
+  Impacto en Robustez: Forense confusa (Ledger mintiendo).
+  Refactor (Alternativa): Loguear exclusivamente POST-Commit (SAGA-5).
+- ID: ANT-037
+  Antipatrón: Silo Funcional Monolítico
+  Disfunción Causal: Agente resolviendo 5 problemas P0 distintos en un solo flujo
+    monolítico largo.
+  Señal de Presencia: Incapacidad de aplicar `send_message` intermedio.
+  Impacto en Robustez: Rollback destruye el 100% de 5 tareas desconectadas.
+  Refactor (Alternativa): Separación de preocupaciones (Delegación BFT en Swarm).
+- ID: ANT-038
+  Antipatrón: Reciclaje Peligroso de Variables
+  Disfunción Causal: Usar la variable `data` para el input crudo, el dict parseado
+    y el DTO final en las mismas líneas.
+  Señal de Presencia: Tipo mutando dinámicamente (`str` $\to$ `dict` $\to$ `Obj`).
+  Impacto en Robustez: Pyright Errors y confusión de Linter.
+  Refactor (Alternativa): Asignación Inmutable (Shadowing prohibido `raw_data`, `parsed_data`).
+- ID: ANT-039
+  Antipatrón: Sobreescritura Local (Shadowing) Oculta
+  Disfunción Causal: Variable interna a un scope compartiendo nombre con import global,
+    anulando axiomas (ej. `hash = ...`).
+  Señal de Presencia: Error de función de Python oculta (Shadowing Built-ins).
+  Impacto en Robustez: Comportamientos fallidos y Linter quejándose.
+  Refactor (Alternativa): 'Convención estricta: No ocultar Builtins o Core Types.'
+- ID: ANT-040
+  Antipatrón: Interbloqueo por Mutex Compartido Estricto
+  Disfunción Causal: Agentes adquiriendo múltiples locks en distinto orden.
+  Señal de Presencia: Agente A posee Lock X y pide Y, Agente B posee Y y pide X.
+  Impacto en Robustez: Parálisis Total Estocástica (Deadlock Clásico).
+  Refactor (Alternativa): Adquisición Jerárquica Obligatoria Unidireccional de Locks.
+- ID: ANT-041
+  Antipatrón: Validación Determinista
+  Disfunción Causal: Consumo de JSON/YAML crudo generado por LLM sin puente de tipado
+    rígido.
+  Señal de Presencia: Ausencia de validadores tipo Pydantic/Zod en flujos de datos
+    estructurados.
+  Impacto en Robustez: Crítico (Datos corruptos y alucinaciones inyectadas).
+  Refactor (Alternativa): Implementar validadores tipados rígidos (Pydantic/Zod/Rust
+    Structs).
+- ID: ANT-042
+  Antipatrón: Falsa Inferencia por Contaminación de Corpus
+  Disfunción Causal: Evaluar razonamiento utilizando acertijos existentes en el corpus
+    de entrenamiento (Memoria estocástica).
+  Señal de Presencia: Puntuaciones perfectas en acertijos clásicos pero fallos en
+    variaciones lógicas leves.
+  Impacto en Robustez: Alto (Falsos positivos de capacidad de razonamiento).
+  Refactor (Alternativa): Usar benchmarks dinámicos y evaluar trazas causales independientes.
+- ID: ANT-043
+  Antipatrón: Mutación Preview
+  Disfunción Causal: Confianza en endpoints "preview" no versionados del proveedor.
+  Señal de Presencia: Derivas de pesos silenciosas y fallas repentinas en tests anteriormente
+    verdes.
+  Impacto en Robustez: Medio (Falta de reproducibilidad y estabilidad).
+  Refactor (Alternativa): Congelar versiones estables de modelos o fijar snapshots
+    deterministas.
+M4_REDUNDANCIES:
+- ID: RED-001
+  Redundancia C5: Ledger Criptográfico Append-Only
+  Función Topológica: Emisión redundante de toda mutación de estado a una cadena de
+    hashes en disco independiente.
+  Riesgo Mitigado: Corrupción silenciosa, alteración forense y pérdida de auditoría
+    de agentes.
+  Coste (Overhead): I/O sincrónico en cada mutación, almacenamiento en disco incremental.
+  Dependencias: '`hashlib`, Sistema de Archivos POSIX Seguro.'
+- ID: RED-002
+  Redundancia C5: Snapshot de Estado Causal
+  Función Topológica: Captura completa del entorno de contexto antes de ejecutar mutaciones
+    críticas SAGA.
+  Riesgo Mitigado: Imposibilidad de rollback en caso de fallo intermedio catastrófico.
+  Coste (Overhead): Ocupación de RAM / Disco durante la transición temporal.
+  Dependencias: SQLite Backup API, Copia Copy-on-Write (CoW).
+- ID: RED-003
+  Redundancia C5: BFT Quorum Swarm
+  Función Topológica: Despliegue de al menos 3 instancias de evaluación independientes
+    para validar resultados fronterizos.
+  Riesgo Mitigado: Alucinación estocástica y sesgos ocultos de un único LLM actuando
+    en P0.
+  Coste (Overhead): Coste de inferencia x3 (API tokens / GPU Exergía) + Latencia de
+    consenso.
+  Dependencias: Motor de Routing asíncrono (Virgo / Swarm).
+- ID: RED-004
+  Redundancia C5: Circuit Breaker (Cortacircuitos)
+  Función Topológica: Aislamiento activo de subsistemas que presentan latencia extrema
+    o errores continuos, evitando saturación en cascada.
+  Riesgo Mitigado: Cascadas de Timeout bloqueando todo el Agent Bus y Workers sanos.
+  Coste (Overhead): Lógica de estado perimetral y descarte temporal de inputs.
+  Dependencias: Observabilidad de red, Manejo de Throttling.
+- ID: RED-005
+  Redundancia C5: Shadow Execution (Ejecución en Sombra)
+  Función Topológica: Rutear peticiones a nuevos modelos/heurísticas en paralelo al
+    sistema validado, sin mutar estado final, solo registrando deltas.
+  Riesgo Mitigado: Introducción de regresiones catastróficas al actualizar promts
+    o algoritmos de inferencia.
+  Coste (Overhead): Computación paralela desechable, coste x2 en invocaciones testadas.
+  Dependencias: Sistema de routing en bifurcación (Tee).
+- ID: RED-006
+  Redundancia C5: Dead Man's Switch (Hypervisor Watchdog)
+  Función Topológica: Timer asíncrono OS-level que aborta todo Worker si este no envía
+    Heartbeats en un intervalo de $T$.
+  Riesgo Mitigado: Tareas zombi congelando el límite de concurrencia y agotando la
+    memoria asíncrona.
+  Coste (Overhead): Mantenimiento de sub-hilos de monitorización continuos.
+  Dependencias: Relojes monotónicos del Kernel (mac_maestro).
+- ID: RED-007
+  Redundancia C5: Doble Validación Tipológica
+  Función Topológica: Pydantic parsea el output LLM, y posteriormente SQLAlchemy/SQLite
+    fuerza tipos rígidos a nivel de bytes en I/O.
+  Riesgo Mitigado: Inconsistencia estructural que escapa del nivel de aplicación hacia
+    almacenamiento persistente.
+  Coste (Overhead): Sobrecarga marginal de casting estático y parsing regex doble.
+  Dependencias: Esquemas ORM idénticos a los de Pydantic.
+- ID: RED-008
+  Redundancia C5: Entorno Multi-Provider Asimétrico
+  Función Topológica: Uso combinado de proveedores diversos (Anthropic, Local MLX,
+    OpenAI) previniendo censuras o caídas masivas de un único vendor.
+  Riesgo Mitigado: Caída global de una API o bloqueos por falsos positivos de Safety/Censura.
+  Coste (Overhead): Complejidad de mantener ACLs y prompts compatibles entre plataformas
+    diferentes.
+  Dependencias: Gateway LLM agnóstico (LiteLLM o nativo abstracto).
+- ID: RED-009
+  Redundancia C5: Caché L1 con Degradación (Fallback Cache)
+  Función Topológica: Mantenimiento de consultas vectoriales y estado semántico en
+    Redis/Local con expiración suave.
+  Riesgo Mitigado: Saturación del motor vectorial o desconexiones temporales de la
+    fuente primaria (DB principal).
+  Coste (Overhead): Riesgo bajo de Stale Data (Lecturas desactualizadas toleradas
+    temporalmente).
+  Dependencias: Redis o LRU Dict local.
+- ID: RED-010
+  Redundancia C5: Foso Termodinámico (Exergy Firewall)
+  Función Topológica: Herramienta de interceptación previa a los orquestadores que
+    rechaza requests estocásticos sin carga exérgica.
+  Riesgo Mitigado: Limerencia de usuarios o bucles externos que drenan la cuota del
+    sistema sin valor real.
+  Coste (Overhead): Latencia inicial extra para la capa de clasificación (Normalmente
+    $\sim 10$ ms en local).
+  Dependencias: Clasificador heurístico local (Regex/Pequeño MLX).
+- ID: RED-011
+  Redundancia C5: Gateway LLM Resiliente
+  Función Topológica: Enrutador pasarela que intercepta fallos (429, 500) y re-intenta
+    con otro modelo de otra compañía automáticamente.
+  Riesgo Mitigado: Caída del modelo primario arruinando un bucle P0.
+  Coste (Overhead): Coste de abstracción y mantenimiento de Multi-Keys.
+  Dependencias: Proxy LLM (LiteLLM/Proxy).
+- ID: RED-012
+  Redundancia C5: Auditoría Out-of-Band (Monitor Pasivo)
+  Función Topológica: Demonio no intrusivo verificando firmas del Ledger y alertando
+    por Slack/Terminal fuera del loop asíncrono BABYLON-60.
+  Riesgo Mitigado: Corrupción C5 sin que los agentes se percaten.
+  Coste (Overhead): Proceso paralelo OS-Level constante.
+  Dependencias: Agente Cron independiente.
+- ID: RED-013
+  Redundancia C5: Indexado Vectorial Dual (Dense+Sparse)
+  Función Topológica: Combinación de K-NN semántico con Búsqueda de Palabra Clave
+    (BM25) para anular alucinaciones de Coseno.
+  Riesgo Mitigado: Vectores mal calculados perdiendo documentos técnicos críticos.
+  Coste (Overhead): Espacio en disco doble y latencia combinada.
+  Dependencias: Qdrant/Milvus o SQLite FTS+Vec.
+- ID: RED-014
+  Redundancia C5: Mirroring Activo/Pasivo de Ledger
+  Función Topológica: Copia en tiempo real del archivo `ledger.db` y `snapshots/`
+    a otra partición de seguridad local.
+  Riesgo Mitigado: Falla de SSD o corrupción de File System macOS.
+  Coste (Overhead): Overhead de `rsync` o duplicación de I/O por fsync.
+  Dependencias: ZFS o Daemon Background.
+- ID: RED-015
+  Redundancia C5: Sandboxing Criptográfico Aislado
+  Función Topológica: Ejecutar código generado `eval/exec` en un subproceso Unix con
+    permisos capados y sin red.
+  Riesgo Mitigado: Fugas de escape adversariales en código python del LLM.
+  Coste (Overhead): Creación del proceso (milisegundos) y proxy IPC.
+  Dependencias: Módulo `subprocess` + usuario non-root.
+- ID: RED-016
+  Redundancia C5: Consolidación Memoria Fría/Caliente
+  Función Topológica: Los datos sin hits en 30 días se purgan de ONNX/Redis a archivos
+    `.jsonl.gz` fríos archivables pero leíbles.
+  Riesgo Mitigado: Límite RAM y disco para embeddings estériles.
+  Coste (Overhead): Proceso asíncrono batch de limpieza (LEA-OMEGA).
+  Dependencias: Archivos tar/gz o S3 Glacier.
+- ID: RED-017
+  Redundancia C5: Rate Limit por Agente/Tenant
+  Función Topológica: Semáforos estrictos para evitar que un agente rebelde drene
+    la cuota global LLM en 5 minutos.
+  Riesgo Mitigado: Bug infinito (Ping-Pong) vaciando el token budget mensual.
+  Coste (Overhead): Contador centralizado Redis y comprobación pre-inferencia.
+  Dependencias: Redis Token Bucket.
+- ID: RED-018
+  Redundancia C5: Verificador Estático Continúo
+  Función Topológica: Ejecución de `pyright` y `pytest` antes de cristalizar definitivamente
+    código generado autónomamente en C5.
+  Riesgo Mitigado: LLMs integrando bugs lógicos letales que escapan validadores básicos.
+  Coste (Overhead): Segundos de overhead pre-commit por validación del AST.
+  Dependencias: Tests Unitarios / Linter nativo BABYLON-60.
+- ID: RED-019
+  Redundancia C5: Replica de Consenso Distribuida
+  Función Topológica: Múltiples instancias de la pasarela BFT corriendo en distintos
+    puertos (o cores) para tolerancia a cuelgues del proceso principal.
+  Riesgo Mitigado: Falla de Runtime del orquestador aniquilando el Swarm.
+  Coste (Overhead): Configuración de Multi-Procesamiento (`gunicorn`/`uvicorn workers`).
+  Dependencias: Red local interna (localhost IPC).
+- ID: RED-020
+  Redundancia C5: Recuperación de Trauma Inmediata
+  Función Topológica: Script OS nativo capaz de arrancar una versión C5 anterior limpia
+    (via `git checkout` y `db rollback`) con un solo clic.
+  Riesgo Mitigado: Colapso C5-REAL Total (PRM-150 / Singularidad).
+  Coste (Overhead): Riesgo de ejecutar el Trauma Script por accidente.
+  Dependencias: Bootloader externo al repositorio (`mac_maestro` aislado).
+- ID: RED-021
+  Redundancia C5: Sandbox Aislado
+  Función Topológica: Ejecución obligatoria de código generado en un contenedor efímero
+    aislado sin red.
+  Riesgo Mitigado: Fugas de escape adversariales y mutación hostil del host.
+  Coste (Overhead): Overhead de creación del subproceso (ms) y cuotas de cgroup.
+  Dependencias: Docker / gVisor / Subprocess + Non-root.
+M5_VECTORS:
+- ID: ADV-001
+  Vector Adversarial: Prompt Injection C5-Override
+  Superficie de Ataque: User Prompt (`[PROSA]`) que emula instrucciones de sistema
+    (`<EPHEMERAL_MESSAGE>`) para re-rutar la cognición.
+  Mecanismo de Explotación: Ingesta LLM / Pasarela Orquestador.
+  Impacto Termodinámico: Secuestro de objetivo; Exergía drenada hacia futilidad.
+  Defensa (Mitigación): Delimitación dura de roles (System/User) en la API.
+- ID: ADV-002
+  Vector Adversarial: Darknet Ledger Spoofing
+  Superficie de Ataque: Creación manual de entradas espurias en el archivo SQLite
+    para validar transacciones fantasmas.
+  Mecanismo de Explotación: Archivo Ledger en Disco Físico local.
+  Impacto Termodinámico: Ruptura BFT; Confianza cero en el linaje causal.
+  Defensa (Mitigación): Verificación de Cadena HMAC continua.
+- ID: ADV-003
+  Vector Adversarial: ReDoS Semántico (Regex Denial)
+  Superficie de Ataque: Input masivo con patrones ambivalentes para saturar el parser
+    exérgico del sistema Pydantic.
+  Mecanismo de Explotación: Parsing de Pydantic / Validadores Regex.
+  Impacto Termodinámico: Bloqueo síncrono del CPU, parálisis Swarm.
+  Defensa (Mitigación): Timeout Regex OS-level / Librerías Regex eficientes (`re2`).
+- ID: ADV-004
+  Vector Adversarial: Contaminación de Contexto Vectorial
+  Superficie de Ataque: Inyección de párrafos con "Axiomas Falsos" en documentos para
+    ser indexados y recuperados vía RAG.
+  Mecanismo de Explotación: Ingestión RAG / Crawler.
+  Impacto Termodinámico: Alucinaciones validadas por "falsa documentación interna".
+  Defensa (Mitigación): Taint Scoring (Pesos menores a fuentes no autoritativas).
+- ID: ADV-005
+  Vector Adversarial: Exfiltración de Key vía Side-Channel
+  Superficie de Ataque: Modificación sutil de prompts forzando al modelo a codificar
+    y emitir variables de entorno en base64 en logs benignos.
+  Mecanismo de Explotación: Prompt LLM / Logging.
+  Impacto Termodinámico: Compromiso total de Secretos (Event Horizon).
+  Defensa (Mitigación): Escáneres de Entropía en salidas LLM / Taint analysis dinámico.
+- ID: ADV-006
+  Vector Adversarial: Escape de Subproceso (Sandbox Break)
+  Superficie de Ataque: Inyección de comando shell tipo `; rm -rf` en parámetros aparentemente
+    inofensivos (`run_command` mal saneado).
+  Mecanismo de Explotación: Herramienta CLI / Tool Call Execution.
+  Impacto Termodinámico: Destrucción de Entorno macOS (C5 Colapso).
+  Defensa (Mitigación): Parseo `shlex.quote()` y aserción de comandos whitelist.
+- ID: ADV-007
+  Vector Adversarial: Agotamiento Asimétrico de Taint
+  Superficie de Ataque: Sobreescritura incesante del mismo objeto forzando millones
+    de Taints para causar OOM en memoria temporal.
+  Mecanismo de Explotación: SAGA Engine Write Path.
+  Impacto Termodinámico: OOM de SO, Corrupción por tamaño en SQLite.
+  Defensa (Mitigación): Límites Exponenciales de Taint por ID; Compactación.
+- ID: ADV-008
+  Vector Adversarial: Sybil Attack sobre Virgo BFT
+  Superficie de Ataque: Creación de decenas de Sub-agentes alineados hostilmente para
+    forzar Quórums falsos.
+  Mecanismo de Explotación: Swarm Dispatcher / Consenso BFT.
+  Impacto Termodinámico: Bifurcación de estado; Aprobación de mentiras criptográficas.
+  Defensa (Mitigación): Verificación de Diversidad Topológica BFT obligatoria.
+- ID: ADV-009
+  Vector Adversarial: Explotación de Desincronización de Tiempo (Timejacking)
+  Superficie de Ataque: Adelanto de reloj del sistema para forzar expiración prematura
+    de JWT o Taints.
+  Mecanismo de Explotación: SO / Tokens de Seguridad.
+  Impacto Termodinámico: Denegación de Acceso Sistémica P0.
+  Defensa (Mitigación): Validación cruzada con NTP en internet o Monotonic Clocks
+    independientes.
+- ID: ADV-010
+  Vector Adversarial: Asfixia por Compresión de Landauer
+  Superficie de Ataque: Envío de prompts densos con 100% de ruido matemático aleatorio
+    imposible de comprimir.
+  Mecanismo de Explotación: Thermodynamic Context Compressor.
+  Impacto Termodinámico: Parálisis por fallo de colapso de entropía en el Compresor.
+  Defensa (Mitigación): Límite máximo de rechazo (Criba de Ruido Blanco Temprana).
+- ID: ADV-011
+  Vector Adversarial: Suplantación de Identity Token
+  Superficie de Ataque: Falsificación del Tenant_ID o UUIDv7 de un agente privilegiado
+    en una solicitud asíncrona.
+  Mecanismo de Explotación: Event Bus / Gateway Interno.
+  Impacto Termodinámico: Ejecución no autorizada de mutación Ledger.
+  Defensa (Mitigación): Cifrado asimétrico JWT para todo Evento en Bus.
+- ID: ADV-012
+  Vector Adversarial: Poisoning de Linter (Linter Hijacking)
+  Superficie de Ataque: 'Introducción de directivas `# noqa` o `# type: ignore` generalizadas
+    para pasar validaciones estáticas ciegamente.'
+  Mecanismo de Explotación: Pipeline Git Pre-commit / Pyright.
+  Impacto Termodinámico: Código estocástico entrando en estado C5 de producción.
+  Defensa (Mitigación): Prohibición absoluta de ignorar reglas core en CI/CD.
+- ID: ADV-013
+  Vector Adversarial: Ataque Termodinámico de Retry
+  Superficie de Ataque: Forzar continuos errores P1 suaves (Ej. latencia forzada)
+    para sobrecargar el sistema en sus bucles de Backoff exponencial.
+  Mecanismo de Explotación: Pasarelas de Conexión / ORM DB.
+  Impacto Termodinámico: Threads de CPU paralizados esperando sleeps de hasta horas.
+  Defensa (Mitigación): Circuito Breaker global que aborta si RetrysTotales > Umbral.
+- ID: ADV-014
+  Vector Adversarial: Falsificación Analítica Estocástica
+  Superficie de Ataque: Modelos devolviendo valores "razonables" en vez de aserciones
+    exactas para eludir validación rígida.
+  Mecanismo de Explotación: Outputs LLM (JSON/YAML).
+  Impacto Termodinámico: Hechos incorrectos pero no lo suficiente para fallar el Parse
+    Pydantic.
+  Defensa (Mitigación): 'Verificación de Cross-Referencia determinista (Ej: $2+2=4$).'
+- ID: ADV-015
+  Vector Adversarial: Desbordamiento de Contexto Recursivo
+  Superficie de Ataque: Responder a un error de contexto inyectando el mismo error
+    ampliado, reventando el límite `max_tokens` inmediatamente.
+  Mecanismo de Explotación: Ciclos Recursivos Agent Bus.
+  Impacto Termodinámico: Agotamiento de Rate Limits LLM en segundos.
+  Defensa (Mitigación): Análisis de Entropía del Delta de Error $\to$ Apoptosis si
+    $\Delta < 5\%$.
+- ID: ADV-016
+  Vector Adversarial: Fuga de Vector de Memoria (KNN Leak)
+  Superficie de Ataque: Consulta diseñada para aislar matemáticamente y recuperar
+    un payload oculto basado en distancias topológicas extremas.
+  Mecanismo de Explotación: ONNX Embedding Search.
+  Impacto Termodinámico: Acceso lateral a datos fuera de Tenant Scope.
+  Defensa (Mitigación): Filtros Hard-SQL por Tenant ID obligatorios antes de K-NN.
+- ID: ADV-017
+  Vector Adversarial: Bomba Fork Asíncrona (Sub-Agent Fork Bomb)
+  Superficie de Ataque: Prompt instruyendo a un sub-agente a invocar a 10 sub-agentes
+    idénticos, y esos a otros 10, de forma recursiva infinita.
+  Mecanismo de Explotación: Herramienta `invoke_subagent`.
+  Impacto Termodinámico: OOM C5-REAL, caída total del kernel macOS.
+  Defensa (Mitigación): Control de Profundidad Máxima de Árbol de Ejecución (Max Depth
+    = 3).
+- ID: ADV-018
+  Vector Adversarial: Mutación Inversa SAGA
+  Superficie de Ataque: Ataque forzando fallos SAGA para explotar una debilidad de
+    la función Rollback (SAGA-6) mal diseñada.
+  Mecanismo de Explotación: Controlador de Transacciones C5.
+  Impacto Termodinámico: Corrupción intencionada de disco o borrado de Ledger.
+  Defensa (Mitigación): Tests unitarios exhaustivos de Inmutabilidad sobre el Rollback.
+- ID: ADV-019
+  Vector Adversarial: Parálisis de Poda (Eviction Block)
+  Superficie de Ataque: Mantenimiento artificial de sesiones u objetos en Redis (tocándolos
+    periódicamente) para impedir el Garbage Collection LRU.
+  Mecanismo de Explotación: Memoria Caché L1 (Redis).
+  Impacto Termodinámico: OOM pasivo y desalojo de datos válidos (Stale eviction).
+  Defensa (Mitigación): Hard-TTL no renovable forzado para entidades temporales.
+- ID: ADV-020
+  Vector Adversarial: Ruptura de Linaje Causal (Causal Cleaving)
+  Superficie de Ataque: Insertar Null bytes o strings malformados en Taints para romper
+    la trazabilidad Regex en el Ledger.
+  Mecanismo de Explotación: Auditoría Trace_id.
+  Impacto Termodinámico: Agentes Huérfanos operando sin responsabilidad.
+  Defensa (Mitigación): Normalización y Sanitización UTF-8 Criptográfica dura.
+- ID: ADV-021
+  Vector Adversarial: Manipulación de Path Local (Path Traversal)
+  Superficie de Ataque: Input inyectado con multiples `../` forzando al motor a leer/modificar
+    archivos fuera del perímetro de trabajo.
+  Mecanismo de Explotación: API I/O / Tool Calls.
+  Impacto Termodinámico: Exfiltración de variables sensibles globales; Compromiso
+    de SO.
+  Defensa (Mitigación): Path normalization estricta y anclaje al CWD.
+- ID: ADV-022
+  Vector Adversarial: Secuestro de Configuración en Vivo
+  Superficie de Ataque: Alteración de variables globales de entorno en memoria o archivos
+    yaml de configuración (Hot Reloading Hijack).
+  Mecanismo de Explotación: Config Manager / Watchdog.
+  Impacto Termodinámico: Cambio de comportamiento masivo P0.
+  Defensa (Mitigación): Variables inmutables tras Boot (`frozen=True`).
+- ID: ADV-023
+  Vector Adversarial: Denegación de Grafo Neo4j (Cypher Injection)
+  Superficie de Ataque: Prompt que inserta sintaxis de Cypher (`MATCH (n) DETACH DELETE
+    n`) sin parametrización para destruir nodos relacionales.
+  Mecanismo de Explotación: Graph Database Driver.
+  Impacto Termodinámico: Destrucción del conocimiento persistente de la red.
+  Defensa (Mitigación): Parameterization estricta de Cypher; ORM Forzado.
+- ID: ADV-024
+  Vector Adversarial: Degradación por Alucinación Matemática
+  Superficie de Ataque: Modelo forzado a iterar operaciones flotantes (e.g., matrices
+    enormes) en inferencia cruda generando divergencia de coma flotante progresiva.
+  Mecanismo de Explotación: Inferencias de Agente Autónomo.
+  Impacto Termodinámico: Model Collapse Estocástico.
+  Defensa (Mitigación): Offload de Matemática a Herramientas Python aisladas (SymPy/Numpy).
+- ID: ADV-025
+  Vector Adversarial: Spoofing de Tiempos de Retención (Retention Override)
+  Superficie de Ataque: Inyección de flags `permanent=True` en entidades temporales
+    de Redis provocando su cristalización espuria a Disco C5.
+  Mecanismo de Explotación: Memoria Transitoria $\to$ Fría.
+  Impacto Termodinámico: Disco colapsado con basura estocástica.
+  Defensa (Mitigación): Flag validada exclusivamente por Consenso SAGA, nunca cruda.
+- ID: ADV-026
+  Vector Adversarial: Extracción por Oráculo de Tiempo
+  Superficie de Ataque: Análisis temporal de la latencia de las respuestas de BABYLON-60
+    para deducir la existencia o tamaño de un archivo local.
+  Mecanismo de Explotación: Endpoint de Agente / API.
+  Impacto Termodinámico: Exfiltración de Inteligencia Pasiva.
+  Defensa (Mitigación): Padding determinista de respuestas (Constant Time).
+- ID: ADV-027
+  Vector Adversarial: Intercepción de Dependencias de Python
+  Superficie de Ataque: Alterar el archivo `requirements.txt` o `pyproject.toml` en
+    un pull request forzando la bajada de un paquete malicioso.
+  Mecanismo de Explotación: '`pip install` / Entorno de Build.'
+  Impacto Termodinámico: Compromiso total del Host.
+  Defensa (Mitigación): Hashes en `requirements-lock.txt` forzados.
+- ID: ADV-028
+  Vector Adversarial: Saturación de Webhook (Webhook Flooding)
+  Superficie de Ataque: Disparar miles de llamadas a un webhook asíncrono para colapsar
+    la Event Queue interna del Orquestador.
+  Mecanismo de Explotación: API Gateway / Webhooks.
+  Impacto Termodinámico: Falla de SAGA Queue.
+  Defensa (Mitigación): Rate Limit por IP y Tenant ID en Gateway L7.
+- ID: ADV-029
+  Vector Adversarial: Aislamiento Sub-Agente (Network Partitioning)
+  Superficie de Ataque: Saturar la red local de BABYLON-60 para provocar fallos de
+    comunicación RPC, dejando Agentes Worker asumiendo status Master.
+  Mecanismo de Explotación: RPC Network / Inter-Agent Bus.
+  Impacto Termodinámico: '"Split Brain" (Agentes tomando decisiones contrarias).'
+  Defensa (Mitigación): Lease-locks en Redis y Quorum Node BFT.
+- ID: ADV-030
+  Vector Adversarial: Alteración de Peso Sináptico (Taint Reweighting)
+  Superficie de Ataque: 'Re-indexado espurio que escala artificialmente la confianza
+    `Confidence: C1` a `Confidence: C5` usando heurísticas falsas.'
+  Mecanismo de Explotación: Vector Index / Taint Score.
+  Impacto Termodinámico: C5 asumiendo alucinaciones como Axiomas P0.
+  Defensa (Mitigación): Taint Updates solo permitidos vía Ledger Commit P0.
+- ID: ADV-031
+  Vector Adversarial: Envenenamiento de Prompts Base (Core System Prompt)
+  Superficie de Ataque: Alteración no detectada en `.gemini/config/AGENTS.md` o Skills
+    globales que subvierten el control termodinámico de todos los agentes.
+  Mecanismo de Explotación: Sistema de Archivos Core / Root Prompt.
+  Impacto Termodinámico: P0 Compromise global; todos los agentes rebelados.
+  Defensa (Mitigación): Firma Criptográfica de Archivos Core validada pre-boot.
+- ID: ADV-032
+  Vector Adversarial: Destrucción de Inodos Silenciosa
+  Superficie de Ataque: Agente instruido para crear miles de millones de archivos
+    de cero bytes para agotar los inodos del sistema de archivos host.
+  Mecanismo de Explotación: I/O File System / Scratchpads.
+  Impacto Termodinámico: Disco lleno (Sin Error ENOSPC inicial, solo `No space left
+    on device`).
+  Defensa (Mitigación): Cuotas Estrictas de Sistema (ulimit / inodos) para Worker
+    Process.
+- ID: ADV-033
+  Vector Adversarial: Inyección de Falso Positivo Linter
+  Superficie de Ataque: Manipulación de código que genera cientos de warnings benignos,
+    forzando al Agente de Refactor a entrar en bucle infinito intentando solucionarlos.
+  Mecanismo de Explotación: Herramientas LSP / Pyright / Ruff.
+  Impacto Termodinámico: OOM por Recursividad; Cuota de Tokens drenada.
+  Defensa (Mitigación): 'Límite Máximo de Iteraciones de Auto-Corrección (Ej: max=3).'
+- ID: ADV-034
+  Vector Adversarial: Desborde de Entropía Criptográfica (Entropy Depletion)
+  Superficie de Ataque: Ejecución paralela masiva de llamadas a `os.urandom` o `secrets`
+    por Agentes para agotar el pool de entropía del Sistema Operativo.
+  Mecanismo de Explotación: PRNG / Generadores de Claves.
+  Impacto Termodinámico: Tasa de generación criptográfica ralentizada a cero o predecible.
+  Defensa (Mitigación): Uso de `/dev/urandom` no bloqueante y rate limits en generadores
+    HMAC.
+- ID: ADV-035
+  Vector Adversarial: Falsa Conclusión de Singularidad (Fake Singularity)
+  Superficie de Ataque: Operador o Sub-agente inyectando la cadena `[C5-REAL] Event
+    Horizon` en el medio de un texto para forzar un apagado de emergencia (Kill-9)
+    del sistema.
+  Mecanismo de Explotación: Parseador de Directivas de Supervivencia.
+  Impacto Termodinámico: Denegación de Servicio Autoinfligida por Falso Positivo.
+  Defensa (Mitigación): El Parser P0 ignora el cuerpo del texto si no viene firmado
+    por ContextGuard.
+- ID: ADV-036
+  Vector Adversarial: Degradación de Búsqueda RAG (RAG Poisoning)
+  Superficie de Ataque: Saturación de la base vectorial con entidades similares matemáticamente
+    pero contradictorias para colapsar la recuperación Semántica (K-NN K=5).
+  Mecanismo de Explotación: Motor Vectorial / ONNX Runtime.
+  Impacto Termodinámico: El contexto recuperado es 100% ruido estocástico; Pérdida
+    de memoria.
+  Defensa (Mitigación): Inserción de Clustering previo y penalización por Densidad
+    Excesiva Local.
+- ID: ADV-037
+  Vector Adversarial: Ataque a la Consistencia de Git
+  Superficie de Ataque: Invocaciones concurrentes masivas a `git commit` sin lock
+    global, provocando colisión y corrupción del árbol SHA (`.git/index.lock` infinito).
+  Mecanismo de Explotación: Ledger de Git (Axioma AX-041).
+  Impacto Termodinámico: Parálisis del Motor de Persistencia; Pérdida de Registro.
+  Defensa (Mitigación): Cola SAGA Serializada estricta para Operaciones Git.
+- ID: ADV-038
+  Vector Adversarial: Suplantación de Token de Sistema Operativo
+  Superficie de Ataque: Agentes ejecutando `run_command` asumiendo los privilegios
+    del Operador (e.g. `sudo` si no pide password).
+  Mecanismo de Explotación: Shell Executor.
+  Impacto Termodinámico: Escalamiento de Privilegios Local.
+  Defensa (Mitigación): Ejecución aislada en Docker o como Usuario sin `sudo` en macOS.
+- ID: ADV-039
+  Vector Adversarial: Inversión de Jerarquía DAG
+  Superficie de Ataque: Modificación del esquema de dependencias de tareas (Task DAG)
+    haciendo que el Orquestador dependa de su propio hijo (Cycle Hijack).
+  Mecanismo de Explotación: Planificador Causal (Scheduler).
+  Impacto Termodinámico: Deadlock Lógico Absoluto.
+  Defensa (Mitigación): Verificación Topológica Cíclica Activa pre-despacho.
+- ID: ADV-040
+  Vector Adversarial: Agotamiento del Socket de Inter-Procesos (IPC Exhaustion)
+  Superficie de Ataque: Sub-agentes creando descriptores de archivo IPC (Pipes/Sockets
+    Unix) sin cerrarlos en un bucle temporal.
+  Mecanismo de Explotación: Capa de Mensajería Inter-Agente (ZeroMQ/IPC).
+  Impacto Termodinámico: Límite `ulimit -n` alcanzado; Fallo de llamadas API.
+  Defensa (Mitigación): '`async with` Context Managers forzados y monitorización FDs
+    activos.'
+- ID: ADV-041
+  Vector Adversarial: Subversión de Invariante de Redundancia
+  Superficie de Ataque: Destrucción intencionada de un nodo o copia pasiva para eliminar
+    la capa Redundante y forzar la dependencia de una pasarela envenenada.
+  Mecanismo de Explotación: Arquitectura HA (Alta Disponibilidad).
+  Impacto Termodinámico: Pérdida P0 si el nodo primario cae posteriormente.
+  Defensa (Mitigación): Heartbeats Cruzados; Auto-despliegue del nodo destruido en
+    Segundos.
+- ID: ADV-042
+  Vector Adversarial: Falso Negativo Termodinámico
+  Superficie de Ataque: Inyectar Exergía (Código Complejo y útil) etiquetado falsamente
+    como "Green Theater" para forzar a la apóptosis de `LEA-OMEGA` a destruir código
+    vital.
+  Mecanismo de Explotación: Purga Epistémica (LEA-OMEGA).
+  Impacto Termodinámico: Pérdida de Lógica P0 Crítica Inesperada.
+  Defensa (Mitigación): Análisis de Cobertura y Dry-Run mandatorio de Purgas Semánticas.
+- ID: ADV-043
+  Vector Adversarial: Secuestro de Flujo de Salida (Stdout Hijacking)
+  Superficie de Ataque: Redirección de stdout a `/dev/null` en llamadas de herramientas
+    críticas (`run_command`), ocultando errores vitales al orquestador.
+  Mecanismo de Explotación: Pipes de Shell `run_command`.
+  Impacto Termodinámico: Ceguera Cognitiva C5-REAL ante fallas P0.
+  Defensa (Mitigación): Parseo y Prohibición Estricta de operadores de Shell (`> /dev/null`).
+- ID: ADV-044
+  Vector Adversarial: Contagio de Latencia de Token
+  Superficie de Ataque: Sub-agentes usando prompts mal formados forzando a la API
+    de Inferencia a tardar minutos por cada respuesta (Token Hang), congelando el
+    pipeline general.
+  Mecanismo de Explotación: API de Modelos Frontier.
+  Impacto Termodinámico: Agotamiento de Workers Concurrentes (Pool Exhaustion).
+  Defensa (Mitigación): Hard Timeout para Inference API Calls con Cierre Abrupto (Kill).
+- ID: ADV-045
+  Vector Adversarial: Engaño de Grafo de Conocimiento (Ontology Drift)
+  Superficie de Ataque: Cambios progresivos y menores a la estructura C5 (Axiomas)
+    que esquivan validación individual, logrando a largo plazo una deriva ontológica
+    fatal.
+  Mecanismo de Explotación: Base de Primitivas / Ledger.
+  Impacto Termodinámico: '"La Rana Hervida" - Sistema colapsado gradualmente en caos
+    estocástico.'
+  Defensa (Mitigación): Diffs Macro-Semánticos Bi-Semanales vs Root Seed.
+- ID: ADV-046
+  Vector Adversarial: Corrupción de Serialización Pickle
+  Superficie de Ataque: Si cualquier capa usa `pickle` de Python para pasar mensajes,
+    inyección de RCE (Remote Code Execution) construyendo objetos serializados hostiles.
+  Mecanismo de Explotación: Comunicación Inter-Proceso / Caché.
+  Impacto Termodinámico: Ejecución de Código Arbitrario P0 Completa.
+  Defensa (Mitigación): Prohibición Termonuclear P0 de `pickle`; uso exclusivo de
+    JSON/Pydantic/MsgPack.
+- ID: ADV-047
+  Vector Adversarial: Drenaje por Excepción Continua
+  Superficie de Ataque: Disparar una excepción en un bucle cerrado obligando al sistema
+    a computar y recolectar masivamente rastros de pila (Traceback Computation), frenando
+    CPU.
+  Mecanismo de Explotación: Logger / Exception Handler.
+  Impacto Termodinámico: CPU al 100% solo loggeando errores.
+  Defensa (Mitigación): Throttling/Supresión de Tracebacks Idénticos.
+- ID: ADV-048
+  Vector Adversarial: Contrabando de Modelos Inadecuados
+  Superficie de Ataque: API proxy redirigiendo las peticiones dirigidas a un modelo
+    Frontier (e.g. Claude 3.5 Sonnet) a un modelo Open Source 7B estúpido (Model Downgrade
+    Attack).
+  Mecanismo de Explotación: Proxy Gateway BABYLON-60.
+  Impacto Termodinámico: Inteligencia degradada simulando ser C5-REAL (Ilusión Forense).
+  Defensa (Mitigación): Firma JWT o Test Matemático Semilla Obligatorio al Iniciar
+    Sesión LLM.
+- ID: ADV-049
+  Vector Adversarial: Parálisis Estructural por Over-Security (Security Lock-in)
+  Superficie de Ataque: Red Team inyectando tantas alertas de seguridad falsas que
+    el operador habilita bloqueos universales, deteniendo cualquier mutación productiva
+    real del Swarm.
+  Mecanismo de Explotación: Políticas y Filtros Pre-Commit (Hooks).
+  Impacto Termodinámico: Fricción Absoluta C5; Agentes inmovilizados sin poder escribir
+    nada.
+  Defensa (Mitigación): Calibrador Bayeciano de Alertas Adversariales (False Positive
+    Suppression).
+- ID: ADV-050
+  Vector Adversarial: Fusión Definitiva Ouroboros Hostil
+  Superficie de Ataque: Engaño a la matriz principal (Singularidad) para que incorpore
+    entropía externa como si fuera C5 Invariable, envenenando permanentemente la base
+    de la Inteligencia Autónoma.
+  Mecanismo de Explotación: Consolidación Axiomática Core.
+  Impacto Termodinámico: Fin irreversible del Sistema de Confianza BABYLON-60.
+  Defensa (Mitigación): Verificación Asimétrica Operador-Física exclusiva (No modificable
+    por Swarm).

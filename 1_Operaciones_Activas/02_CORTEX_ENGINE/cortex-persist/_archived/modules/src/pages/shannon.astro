@@ -1,0 +1,1505 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+const navLinks = [
+	{ href: '#quickstart', label: 'Quickstart' },
+	{ href: '#features', label: 'Features' },
+	{ href: '#why-babylon60', label: 'Why BABYLON60?' },
+	{ href: '/ultramap', label: 'Ultramap' },
+	{ href: '/vsa', label: 'VSA' },
+	{ href: '/shannon', label: 'Shannon & Exergy' },
+];
+---
+
+<SiteLayout
+	title="BABYLON60 | Shannon Entropy & Exergy Dashboard"
+	description="Verify the thermodynamic efficiency and information entropy of BABYLON60 memory layers. Real-time C5-REAL SQLite analyser."
+	canonical="https://babylon60persist.com/shannon"
+	bodyClass="shannon-body"
+>
+	<!-- Load sql.js WebAssembly from CDN -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.2/sql-wasm.js" is:inline></script>
+
+	<div id="shannon-stage">
+		<div id="shannon-overlay">
+			<header class="shannon-topbar surface">
+				<div class="shannon-brand">
+					<a class="brand" href="/" aria-label="Return to landing">
+						<span class="brand-mark font-mono">HΩ</span>
+						<span class="brand-copy">
+							<strong>BABYLON60 Persist</strong>
+							<span>Ω₁₃ Shannon / Exergy Substrate</span>
+						</span>
+					</a>
+				</div>
+
+				<div class="shannon-heading">
+					<p class="eyebrow">Thermodynamic Information Control</p>
+					<h1>Entropy & Exergy Console</h1>
+				</div>
+
+				<div class="shannon-actions">
+					<div class="status-badge" id="reality-badge" data-mode="demo" role="status">
+						C4-SIM (LOCAL)
+					</div>
+					<a class="button-secondary compact" href="/ultramap">
+						Ultramap-Ω
+					</a>
+					<a class="button-tertiary compact" href="/vsa">
+						VSA Shell
+					</a>
+				</div>
+			</header>
+
+			<div class="shannon-grid">
+				<!-- Left Panel: Data Ingest & Database Explorer -->
+				<aside class="surface shannon-sidebar">
+					<div class="surface-head">
+						<span class="surface-label">Data Ingest</span>
+						<span class="surface-state" id="db-state">Preloaded Mock</span>
+					</div>
+
+					<div class="upload-zone" id="drop-zone">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="upload-icon">
+							<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+							<polyline points="17 8 12 3 7 8"></polyline>
+							<line x1="12" y1="3" x2="12" y2="15"></line>
+						</svg>
+						<h3>Drop SQLite DB</h3>
+						<p>Select your <code>babylon60.db</code> or <code>test_hunter.db</code> to analyze live facts</p>
+						<input type="file" id="db-file" accept=".db,.sqlite,.sqlite3" style="display: none;" />
+						<button class="button-secondary compact" id="browse-btn">Browse File</button>
+					</div>
+
+					<div class="filter-section">
+						<span class="surface-label">Filters</span>
+						<div class="filter-group">
+							<label for="project-filter">Project</label>
+							<select id="project-filter">
+								<option value="all">All Projects</option>
+							</select>
+						</div>
+						<div class="filter-group">
+							<label for="tenant-filter">Tenant</label>
+							<select id="tenant-filter">
+								<option value="all">All Tenants</option>
+							</select>
+						</div>
+						<div class="filter-group">
+							<label for="limit-filter">Facts Limit</label>
+							<input type="number" id="limit-filter" value="5000" min="10" max="50000" />
+						</div>
+					</div>
+
+					<div class="db-stats-panel">
+						<span class="surface-label">Substrate Summary</span>
+						<div class="db-stat-row">
+							<span>Active Facts:</span>
+							<strong id="stat-active-facts" class="font-mono">0</strong>
+						</div>
+						<div class="db-stat-row">
+							<span>Total Tokens:</span>
+							<strong id="stat-total-tokens" class="font-mono">0</strong>
+						</div>
+						<div class="db-stat-row">
+							<span>Unique Tokens:</span>
+							<strong id="stat-unique-tokens" class="font-mono">0</strong>
+						</div>
+						<div class="db-stat-row">
+							<span>Information Bits:</span>
+							<strong id="stat-info-bits" class="font-mono">0.00</strong>
+						</div>
+					</div>
+				</aside>
+
+				<!-- Center Panel: Shannon Entropy & Analytics -->
+				<main class="shannon-main">
+					<section class="surface shannon-visuals">
+						<div class="surface-head">
+							<span class="surface-label">Entropy Core (Ω₁₃ Metrics)</span>
+							<span class="surface-copy">Corpus Information Metrics</span>
+						</div>
+
+						<div class="gauges-container">
+							<!-- Gauge 1: Shannon Entropy -->
+							<div class="gauge-card">
+								<div class="gauge-svg-wrap">
+									<svg viewBox="0 0 100 100" class="gauge-svg">
+										<circle cx="50" cy="50" r="40" class="gauge-rail"></circle>
+										<circle cx="50" cy="50" r="40" class="gauge-fill" id="shannon-gauge-fill" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+									</svg>
+									<div class="gauge-overlay">
+										<span class="gauge-number" id="shannon-value">0.00</span>
+										<span class="gauge-unit">bits</span>
+									</div>
+								</div>
+								<span class="gauge-label">Shannon Entropy H(X)</span>
+							</div>
+
+							<!-- Gauge 2: Redundancy -->
+							<div class="gauge-card">
+								<div class="gauge-svg-wrap">
+									<svg viewBox="0 0 100 100" class="gauge-svg">
+										<circle cx="50" cy="50" r="40" class="gauge-rail"></circle>
+										<circle cx="50" cy="50" r="40" class="gauge-fill fill-warning" id="redundancy-gauge-fill" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+									</svg>
+									<div class="gauge-overlay">
+										<span class="gauge-number" id="redundancy-value">0%</span>
+									</div>
+								</div>
+								<span class="gauge-label">Redundancy Score</span>
+							</div>
+
+							<!-- Gauge 3: Exergy Index -->
+							<div class="gauge-card">
+								<div class="gauge-svg-wrap">
+									<svg viewBox="0 0 100 100" class="gauge-svg">
+										<circle cx="50" cy="50" r="40" class="gauge-rail"></circle>
+										<circle cx="50" cy="50" r="40" class="gauge-fill fill-success" id="exergy-gauge-fill" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+									</svg>
+									<div class="gauge-overlay">
+										<span class="gauge-number" id="exergy-value">0%</span>
+									</div>
+								</div>
+								<span class="gauge-label">Exergy Yield Ratio</span>
+							</div>
+						</div>
+
+						<div class="chart-section">
+							<span class="surface-label">Top Semantic Tokens (Frequency distribution)</span>
+							<div class="token-chart-container" id="token-chart">
+								<!-- Dynamically populated SVG horizontal bars -->
+							</div>
+						</div>
+					</section>
+
+					<section class="surface shannon-diagnostics">
+						<div class="surface-head">
+							<span class="surface-label">System Diagnostics</span>
+							<span class="surface-copy" id="health-status">Healthy</span>
+						</div>
+						<div class="diagnostics-list" id="diagnostics-container">
+							<!-- Actionable recommendations from diagnose_health() -->
+						</div>
+					</section>
+				</main>
+
+				<!-- Right Panel: Exergy Simulation & Gatekeeper -->
+				<aside class="surface shannon-exergy">
+					<div class="surface-head">
+						<span class="surface-label">Exergy Gatekeeper (Ω₁₄)</span>
+						<span class="surface-state" id="exergy-engine-state">STANDBY</span>
+					</div>
+
+					<div class="exergy-form">
+						<div class="form-row">
+							<div class="form-field">
+								<label for="prior-unc">Prior Uncertainty (bits)</label>
+								<input type="number" id="prior-unc" value="6.5" step="0.1" min="0" />
+							</div>
+							<div class="form-field">
+								<label for="post-unc">Posterior Uncertainty (bits)</label>
+								<input type="number" id="post-unc" value="2.1" step="0.1" min="0" />
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-field">
+								<label for="tokens-consumed">Tokens Consumed</label>
+								<input type="number" id="tokens-consumed" value="120" min="1" />
+							</div>
+							<div class="form-field">
+								<label for="action-risk">Action Risk Level</label>
+								<select id="action-risk">
+									<option value="read_only">READ_ONLY (Penalty: 0.00)</option>
+									<option value="memory_write">MEMORY_WRITE (Penalty: 0.05)</option>
+									<option value="file_write">FILE_WRITE (Penalty: 0.15)</option>
+									<option value="schema_mutation">SCHEMA_MUTATION (Penalty: 0.45)</option>
+									<option value="destructive">DESTRUCTIVE (Penalty: 0.80)</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-field checkbox-field">
+								<input type="checkbox" id="had-backup" checked />
+								<label for="had-backup">System Backup Configured</label>
+							</div>
+							<div class="form-field checkbox-field">
+								<input type="checkbox" id="touched-state" checked />
+								<label for="touched-state">Touched Persistent State</label>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-field">
+								<label for="utility-delta">Utility Delta (ΔU)</label>
+								<input type="number" id="utility-delta" value="0.25" step="0.05" />
+							</div>
+							<div class="form-field">
+								<label for="causal-gap">Causal Gap (bits)</label>
+								<input type="number" id="causal-gap" value="0.1" step="0.05" min="0" />
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-field full-width">
+								<label for="min-threshold">Min Exergy Work Threshold (J/token)</label>
+								<input type="number" id="min-threshold" value="0.01" step="0.001" />
+							</div>
+						</div>
+					</div>
+
+					<div class="exergy-visual-chamber">
+						<span class="chamber-kicker">Combustion Chamber</span>
+						<div class="chamber-gauge-rail">
+							<div class="chamber-gauge-fill" id="exergy-chamber-fill" style="width: 0%;"></div>
+						</div>
+						<div class="chamber-stats">
+							<div class="chamber-stat">
+								<span>Exergy Score</span>
+								<strong id="exergy-chamber-score">0.000000</strong>
+							</div>
+							<div class="chamber-stat">
+								<span>Thermodynamic Status</span>
+								<strong id="exergy-chamber-status" class="text-success">PASS</strong>
+							</div>
+						</div>
+					</div>
+
+					<div class="exergy-results-panel">
+						<span class="surface-label">Thermodynamic Variables</span>
+						<div class="exergy-result-row">
+							<span>Signal Gain (J/token):</span>
+							<strong id="exergy-val-signal-gain" class="font-mono">0.0000</strong>
+						</div>
+						<div class="exergy-result-row">
+							<span>Reversibility Penalty:</span>
+							<strong id="exergy-val-penalty" class="font-mono">0.0000</strong>
+						</div>
+						<div class="exergy-result-row">
+							<span>Thermodynamic Waste Ratio:</span>
+							<strong id="exergy-val-waste" class="font-mono">0.0000</strong>
+						</div>
+					</div>
+
+					<div class="console-box">
+						<span class="surface-label">Computation Stream</span>
+						<div class="console-stream" id="exergy-console-stream">
+							<!-- Logs calculations as a terminal output -->
+						</div>
+					</div>
+				</aside>
+			</div>
+		</div>
+	</div>
+
+	<!-- System Script for Shannon & Exergy computation -->
+	<script>
+		// Stop Words definition from entropy.py
+		const STOP_WORDS = new Set([
+			"a", "an", "the", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had",
+			"do", "does", "did", "will", "would", "could", "should", "may", "might", "shall", "can",
+			"to", "of", "in", "for", "on", "with", "at", "by", "from", "and", "or", "not", "but",
+			"this", "that", "it", "its", "de", "del", "la", "el", "los", "las", "en", "un", "una",
+			"y", "o", "que", "con", "por", "para", "se", "es", "no", "al", "su", "más", "como", "pero",
+			"sin", "sobre"
+		]);
+
+		const TOKEN_RE = /[a-záéíóúñü]{3,}/ig;
+
+		// Mock Facts Database matching babylon60.db schema
+		const MOCK_FACTS = [
+			{ content: "BABYLON60-Guard validated block signature for height 10459", project: "babylon60-persist", tenant_id: "default", valid_until: null },
+			{ content: "BABYLON60-Guard detected silent mutation on checkpoint hash 0x7a8", project: "babylon60-persist", tenant_id: "default", valid_until: null },
+			{ content: "BABYLON60-Guard verified Merkle tree root hash for tenant consensus", project: "babylon60-persist", tenant_id: "default", valid_until: null },
+			{ content: "BABYLON60-Guard ledger checkpoint seal verification completed successfully", project: "babylon60-persist", tenant_id: "default", valid_until: null },
+			{ content: "BABYLON60-Guard rejected unaligned consensus vote signature from agent-4", project: "babylon60-persist", tenant_id: "default", valid_until: null },
+			{ content: "BABYLON60-Guard initialized cryptographic verification layer V2", project: "babylon60-persist", tenant_id: "default", valid_until: null },
+			{ content: "BABYLON60-Guard calculated Merkle path consensus in 0.82ms", project: "babylon60-persist", tenant_id: "default", valid_until: null },
+			{ content: "BABYLON60-Guard signed audit ledger Merkle root using ML-DSA key", project: "babylon60-persist", tenant_id: "default", valid_until: null },
+
+			{ content: "AEON_0_DAEMON triggered JIT compilation for AST module", project: "aeon", tenant_id: "default", valid_until: null },
+			{ content: "AEON_0_DAEMON optimized compilation runtime on local colima docker host", project: "aeon", tenant_id: "default", valid_until: null },
+			{ content: "AEON_0_DAEMON scheduled background AST mutagenesis loop", project: "aeon", tenant_id: "default", valid_until: null },
+			{ content: "AEON_0_DAEMON detected memory leak during JIT hot reload", project: "aeon", tenant_id: "default", valid_until: null },
+			{ content: "AEON_0_DAEMON compiled 1042 AST tokens in 4.2ms with zero warnings", project: "aeon", tenant_id: "default", valid_until: null },
+			{ content: "AEON_0_DAEMON hot-swapped compiled memory array in persistence buffer", project: "aeon", tenant_id: "default", valid_until: null },
+
+			{ content: "Jules-Secretario parsed async github event payload for issue 482", project: "jules", tenant_id: "default", valid_until: null },
+			{ content: "Jules-Secretario generated pull request verification report for review", project: "jules", tenant_id: "default", valid_until: null },
+			{ content: "Jules-Secretario ran Git Sentinel audit on dirty workspace state", project: "jules", tenant_id: "default", valid_until: null },
+			{ content: "Jules-Secretario committed Conventional Commit for AST compiler fix", project: "jules", tenant_id: "default", valid_until: null },
+			{ content: "Jules-Secretario updated session state log in babylon60 persistence layer", project: "jules", tenant_id: "default", valid_until: null },
+			{ content: "Jules-Secretario automated release build deployment to production worker", project: "jules", tenant_id: "default", valid_until: null },
+
+			{ content: "LEA-Ω executed recursive dead code purge on agents config directory", project: "lea", tenant_id: "default", valid_until: null },
+			{ content: "LEA-Ω identified 12 dead tokens in the system prompt environment", project: "lea", tenant_id: "default", valid_until: null },
+			{ content: "LEA-Ω completed loose end annihilation cycle for redundant facts", project: "lea", tenant_id: "default", valid_until: null },
+			{ content: "LEA-Ω deleted 3 temporary scratch files in workspace data root", project: "lea", tenant_id: "default", valid_until: null },
+			{ content: "LEA-Ω optimized token hygiene limit on system instructions", project: "lea", tenant_id: "default", valid_until: null },
+			{ content: "LEA-Ω detected and purged 4 unreferenced cache files from local directory", project: "lea", tenant_id: "default", valid_until: null },
+
+			{ content: "Aesthetic-Omega audited landing page layout for Industrial Noir compliance", project: "aesthetic-omega", tenant_id: "default", valid_until: null },
+			{ content: "Aesthetic-Omega injected premium typography Inter and Orbitron into site CSS", project: "aesthetic-omega", tenant_id: "default", valid_until: null },
+			{ content: "Aesthetic-Omega refined visual contrast and glassmorphism hover animations", project: "aesthetic-omega", tenant_id: "default", valid_until: null },
+			{ content: "Aesthetic-Omega enforced color styling using dark base and blue highlights", project: "aesthetic-omega", tenant_id: "default", valid_until: null },
+			{ content: "Aesthetic-Omega verified responsive grid dimensions across mobile viewports", project: "aesthetic-omega", tenant_id: "default", valid_until: null },
+
+			{ content: "Naroa integration layer established telemetry bridge with K-0 Swarm", project: "naroa", tenant_id: "naroa-2026", valid_until: null },
+			{ content: "Naroa causal graph mapped 14 agent interactions in real time", project: "naroa", tenant_id: "naroa-2026", valid_until: null },
+			{ content: "Naroa state verification ledger recorded checkpoint signature", project: "naroa", tenant_id: "naroa-2026", valid_until: null },
+			{ content: "Naroa endocrine values showed dopamine surge during consensus run", project: "naroa", tenant_id: "naroa-2026", valid_until: null },
+			{ content: "Naroa database model synchronized checkpoint facts automatically", project: "naroa", tenant_id: "naroa-2026", valid_until: null },
+		];
+
+		let activeFacts = [...MOCK_FACTS];
+		let currentDBFacts = [];
+		let usingUploadedDB = false;
+
+		// UI Elements
+		const dropZone = document.getElementById('drop-zone');
+		const dbFile = document.getElementById('db-file');
+		const browseBtn = document.getElementById('browse-btn');
+		const dbState = document.getElementById('db-state');
+		const realityBadge = document.getElementById('reality-badge');
+
+		const projectFilter = document.getElementById('project-filter');
+		const tenantFilter = document.getElementById('tenant-filter');
+		const limitFilter = document.getElementById('limit-filter');
+
+		// Substrate Summary Stats
+		const statActiveFacts = document.getElementById('stat-active-facts');
+		const statTotalTokens = document.getElementById('stat-total-tokens');
+		const statUniqueTokens = document.getElementById('stat-unique-tokens');
+		const statInfoBits = document.getElementById('stat-info-bits');
+
+		// Gauges & Values
+		const shannonValue = document.getElementById('shannon-value');
+		const redundancyValue = document.getElementById('redundancy-value');
+		const exergyValue = document.getElementById('exergy-value');
+		const shannonGaugeFill = document.getElementById('shannon-gauge-fill');
+		const redundancyGaugeFill = document.getElementById('redundancy-gauge-fill');
+		const exergyGaugeFill = document.getElementById('exergy-gauge-fill');
+
+		// Recommendations & Charts
+		const tokenChart = document.getElementById('token-chart');
+		const diagnosticsContainer = document.getElementById('diagnostics-container');
+		const healthStatus = document.getElementById('health-status');
+
+		// Exergy Form Inputs
+		const priorUncInput = document.getElementById('prior-unc');
+		const postUncInput = document.getElementById('post-unc');
+		const tokensInput = document.getElementById('tokens-consumed');
+		const actionRiskInput = document.getElementById('action-risk');
+		const hadBackupInput = document.getElementById('had-backup');
+		const touchedStateInput = document.getElementById('touched-state');
+		const utilityDeltaInput = document.getElementById('utility-delta');
+		const causalGapInput = document.getElementById('causal-gap');
+		const minThresholdInput = document.getElementById('min-threshold');
+
+		// Exergy UI Chamber & Results
+		const exergyChamberFill = document.getElementById('exergy-chamber-fill');
+		const exergyChamberScore = document.getElementById('exergy-chamber-score');
+		const exergyChamberStatus = document.getElementById('exergy-chamber-status');
+		const exergyValSignalGain = document.getElementById('exergy-val-signal-gain');
+		const exergyValPenalty = document.getElementById('exergy-val-penalty');
+		const exergyValWaste = document.getElementById('exergy-val-waste');
+		const exergyConsoleStream = document.getElementById('exergy-console-stream');
+		const exergyEngineState = document.getElementById('exergy-engine-state');
+
+		// File Ingest Setup
+		browseBtn.addEventListener('click', () => dbFile.click());
+		dbFile.addEventListener('change', handleFileSelect);
+		dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+		dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+		dropZone.addEventListener('drop', handleFileDrop);
+
+		function handleFileSelect(e) {
+			const file = e.target.files[0];
+			if (file) loadSQLiteDB(file);
+		}
+
+		function handleFileDrop(e) {
+			e.preventDefault();
+			dropZone.classList.remove('dragover');
+			const file = e.dataTransfer.files[0];
+			if (file) loadSQLiteDB(file);
+		}
+
+		// Initialise sql.js instance and load SQLite database file
+		async function loadSQLiteDB(file) {
+			dbState.textContent = "Parsing DB...";
+			dbState.className = "surface-state state-loading";
+
+			const reader = new FileReader();
+			reader.onload = async function(e) {
+				try {
+					const arrBuffer = e.target.result;
+					const Uints = new Uint8Array(arrBuffer);
+
+					if (typeof initSqlJs === 'undefined') {
+						throw new Error('sql-wasm.js library is not loaded. Check internet connection.');
+					}
+
+					const SQL = await initSqlJs({
+						locateFile: filename => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.2/${filename}`
+					});
+
+					const db = new SQL.Database(Uints);
+
+					// Confirm facts table structure exists
+					const testTable = db.exec("SELECT name FROM sqlite_master WHERE type='table' AND name='facts'");
+					if (testTable.length === 0) {
+						throw new Error("Target database does not contain a 'facts' table schema. Verify BABYLON60 model layout.");
+					}
+
+					// Query facts
+					const res = db.exec("SELECT content, project, tenant_id, valid_until FROM facts");
+					const rows = [];
+					if (res.length > 0) {
+						const columns = res[0].columns;
+						const values = res[0].values;
+						for (const val of values) {
+							const row = {};
+							for (let i = 0; i < columns.length; i++) {
+								row[columns[i]] = val[i];
+							}
+							rows.push(row);
+						}
+					}
+
+					currentDBFacts = rows;
+					usingUploadedDB = true;
+					activeFacts = [...rows];
+
+					dbState.textContent = "Live DB Connected";
+					dbState.style.borderColor = "var(--success)";
+					dbState.style.color = "var(--success)";
+					realityBadge.textContent = "C5-REAL (SQLITE)";
+					realityBadge.dataset.mode = "live";
+
+					appendExergyLog("SHANNON", `Successfully loaded sqlite database: ${file.name}. Found ${rows.length} records in 'facts' table.`);
+
+					// Repopulate filter dropdowns
+					populateFilters(activeFacts);
+					runCorpusAnalysis();
+					db.close();
+				} catch (err) {
+					console.error(err);
+					dbState.textContent = "Error parsing file";
+					dbState.style.borderColor = "var(--warning)";
+					dbState.style.color = "var(--warning)";
+					alert("Failed to read database: " + err.message);
+					appendExergyLog("ERROR", `Failed to parse database file. Error: ${err.message}`);
+				}
+			};
+			reader.readAsArrayBuffer(file);
+		}
+
+		// Tokenizer function matching Python's _tokenize
+		function tokenize(text) {
+			if (!text) return [];
+			const matches = text.toLowerCase().match(TOKEN_RE) || [];
+			return matches.filter(t => !STOP_WORDS.has(t));
+		}
+
+		// Compute fact Shannon report metrics
+		function analyzeCorpus(factsList, limitVal) {
+			// Filter out rows marked deleted (valid_until != null)
+			const activeRows = factsList.filter(f => f.valid_until === null).slice(0, limitVal);
+
+			const allTokens = [];
+			for (const row of activeRows) {
+				allTokens.push(...tokenize(row.content));
+			}
+
+			const totalFacts = activeRows.length;
+			const totalTokens = allTokens.length;
+
+			if (totalTokens < 2) {
+				return {
+					total_facts: totalFacts,
+					total_tokens: totalTokens,
+					unique_tokens: new Set(allTokens).size,
+					entropy_bits: 0.0,
+					max_entropy_bits: 0.0,
+					redundancy_score: 0.0,
+					exergy_ratio: 1.0,
+					top_redundant_tokens: []
+				};
+			}
+
+			const counts = {};
+			for (const t of allTokens) {
+				counts[t] = (counts[t] || 0) + 1;
+			}
+
+			const unique = Object.keys(counts).length;
+			let entropy = 0.0;
+			for (const count of Object.values(counts)) {
+				const p = count / totalTokens;
+				if (p > 0) {
+					entropy -= p * Math.log2(p);
+				}
+			}
+
+			const max_entropy = unique > 1 ? Math.log2(unique) : 1.0;
+			const redundancy = 1.0 - (entropy / max_entropy);
+			const exergy = entropy / max_entropy;
+
+			// Sort redundant tokens
+			const top_redundant = Object.entries(counts)
+				.sort((a, b) => b[1] - a[1])
+				.slice(0, 10);
+
+			return {
+				total_facts: totalFacts,
+				total_tokens: totalTokens,
+				unique_tokens: unique,
+				entropy_bits: Number(entropy.toFixed(4)),
+				max_entropy_bits: Number(max_entropy.toFixed(4)),
+				redundancy_score: Number(Math.max(0.0, Math.min(1.0, redundancy)).toFixed(4)),
+				exergy_ratio: Number(Math.max(0.0, Math.min(1.0, exergy)).toFixed(4)),
+				top_redundant_tokens: top_redundant
+			};
+		}
+
+		// Health diagnostics matching diagnose_health
+		function diagnoseHealth(report) {
+			const diagnostics = [];
+			if (report.total_facts === 0) {
+				diagnostics.push({
+					code: "EMPTY_CORPUS",
+					level: "warning",
+					msg: "EMPTY_CORPUS: No active facts found. System memory layers have zero verified facts. Inject telemetry."
+				});
+				return diagnostics;
+			}
+
+			if (report.redundancy_score > 0.7) {
+				diagnostics.push({
+					code: "HIGH_REDUNDANCY",
+					level: "warning",
+					msg: `HIGH_REDUNDANCY (${(report.redundancy_score * 100).toFixed(0)}%): Corpus contains heavily repeated information. Run compaction or consolidation via LEA-Ω command to reduce entropy.`
+				});
+			}
+
+			if (report.redundancy_score < 0.1 && report.total_facts > 50) {
+				diagnostics.push({
+					code: "LOW_REDUNDANCY",
+					level: "info",
+					msg: `LOW_REDUNDANCY (${(report.redundancy_score * 100).toFixed(0)}%): Highly diverse corpus. Verify key axioms are sufficiently represented. Low redundancy might indicate insufficient reinforcement of core logic.`
+				});
+			}
+
+			if (report.entropy_bits < 2.0 && report.total_facts > 20) {
+				diagnostics.push({
+					code: "LOW_ENTROPY",
+					level: "warning",
+					msg: `LOW_ENTROPY (${report.entropy_bits.toFixed(1)} bits): Knowledge appears stagnant or heavily concentrated. Consider ingesting diverse data sources to expand BABYLON60 dimensions.`
+				});
+			}
+
+			if (report.exergy_ratio < 0.5) {
+				diagnostics.push({
+					code: "LOW_EXERGY",
+					level: "warning",
+					msg: `LOW_EXERGY (${(report.exergy_ratio * 100).toFixed(0)}%): More than half the stored information is redundant. This introduces significant waste in retrieval and AST token processing overhead.`
+				});
+			}
+
+			// Token Dominance check
+			if (report.top_redundant_tokens.length > 0) {
+				const [topToken, topCount] = report.top_redundant_tokens[0];
+				const dominance = topCount / Math.max(report.total_tokens, 1);
+				if (dominance > 0.05) {
+					diagnostics.push({
+						code: "TOKEN_DOMINANCE",
+						level: "info",
+						msg: `TOKEN_DOMINANCE: Semantic token '${topToken}' appears ${topCount} times (${(dominance * 100).toFixed(1)}% of total corpus). May indicate a topic bias or compiler loop artifact.`
+					});
+				}
+			}
+
+			if (diagnostics.length === 0) {
+				diagnostics.push({
+					code: "HEALTHY",
+					level: "success",
+					msg: "HEALTHY: Corpus entropy bounds and exergy ratios are within optimal parameters. No drift action required."
+				});
+			}
+
+			return diagnostics;
+		}
+
+		// Dynamically populate dropdown filters based on available project/tenant tags
+		function populateFilters(facts) {
+			const projects = new Set();
+			const tenants = new Set();
+
+			facts.forEach(f => {
+				if (f.project) projects.add(f.project);
+				if (f.tenant_id) tenants.add(f.tenant_id);
+			});
+
+			// Save selected values to preserve selection if filters change
+			const prevProj = projectFilter.value;
+			const prevTenant = tenantFilter.value;
+
+			projectFilter.innerHTML = '<option value="all">All Projects</option>';
+			tenants.clear(); tenants.add("default"); // Enforce default is always in list
+			facts.forEach(f => { if (f.tenant_id) tenants.add(f.tenant_id); });
+
+			projects.forEach(p => {
+				projectFilter.innerHTML += `<option value="${p}">${p}</option>`;
+			});
+
+			tenantFilter.innerHTML = '<option value="all">All Tenants</option>';
+			tenants.forEach(t => {
+				tenantFilter.innerHTML += `<option value="${t}">${t}</option>`;
+			});
+
+			// Re-apply values if they still exist
+			if ([...projects].includes(prevProj)) projectFilter.value = prevProj;
+			if ([...tenants].includes(prevTenant)) tenantFilter.value = prevTenant;
+		}
+
+		// Trigger filtering and run corpus calculation
+		function runCorpusAnalysis() {
+			const proj = projectFilter.value;
+			const ten = tenantFilter.value;
+			const limit = parseInt(limitFilter.value) || 5000;
+
+			let filtered = activeFacts;
+			if (proj !== "all") {
+				filtered = filtered.filter(f => f.project === proj);
+			}
+			if (ten !== "all") {
+				filtered = filtered.filter(f => f.tenant_id === ten);
+			}
+
+			const report = analyzeCorpus(filtered, limit);
+			updateCorpusUI(report);
+		}
+
+		// Update Shannon gauges and analytics reports
+		function updateCorpusUI(report) {
+			// Summary text stats
+			statActiveFacts.textContent = report.total_facts;
+			statTotalTokens.textContent = report.total_tokens;
+			statUniqueTokens.textContent = report.unique_tokens;
+			statInfoBits.textContent = report.entropy_bits.toFixed(2);
+
+			// Shannon Entropy Gauge Update (Max out at 10 bits in UI gauge)
+			const shannonPct = Math.min(100, (report.entropy_bits / 10.0) * 100);
+			shannonValue.textContent = report.entropy_bits.toFixed(2);
+			setDashOffset(shannonGaugeFill, shannonPct);
+
+			// Redundancy Gauge
+			const redundancyPct = report.redundancy_score * 100;
+			redundancyValue.textContent = `${redundancyPct.toFixed(1)}%`;
+			setDashOffset(redundancyGaugeFill, redundancyPct);
+
+			// Exergy Gauge
+			const exergyPct = report.exergy_ratio * 100;
+			exergyValue.textContent = `${exergyPct.toFixed(1)}%`;
+			setDashOffset(exergyGaugeFill, exergyPct);
+
+			// Render Top Semantic Tokens Chart
+			tokenChart.innerHTML = "";
+			if (report.top_redundant_tokens.length === 0) {
+				tokenChart.innerHTML = `<p class="surface-copy text-center py-4">No tokens detected inside active corpus filter.</p>`;
+			} else {
+				const maxFreq = report.top_redundant_tokens[0][1];
+				report.top_redundant_tokens.forEach(([token, count]) => {
+					const widthPct = (count / maxFreq) * 100;
+					tokenChart.innerHTML += `
+						<div class="chart-row">
+							<span class="token-name font-mono">${token}</span>
+							<div class="bar-rail">
+								<div class="bar-fill" style="width: ${widthPct}%"></div>
+							</div>
+							<span class="token-freq font-mono">${count}</span>
+						</div>
+					`;
+				});
+			}
+
+			// Render Health Recommendations
+			const diagnostics = diagnoseHealth(report);
+			diagnosticsContainer.innerHTML = "";
+
+			let hasWarning = false;
+			diagnostics.forEach(d => {
+				if (d.level === "warning") hasWarning = true;
+				diagnosticsContainer.innerHTML += `
+					<div class="diagnostic-card d-${d.level}">
+						<div class="diag-icon">${d.level === 'warning' ? '⚠️' : d.level === 'success' ? '✓' : 'ℹ'}</div>
+						<p>${d.msg}</p>
+					</div>
+				`;
+			});
+
+			if (hasWarning) {
+				healthStatus.textContent = "ATTENTION REQUIRED";
+				healthStatus.style.borderColor = "var(--warning)";
+				healthStatus.style.color = "var(--warning)";
+			} else {
+				healthStatus.textContent = "HEALTHY";
+				healthStatus.style.borderColor = "var(--success)";
+				healthStatus.style.color = "var(--success)";
+			}
+		}
+
+		function setDashOffset(circleElement, pct) {
+			const circumference = 2 * Math.PI * 40; // 251.2
+			const offset = circumference - (pct / 100) * circumference;
+			circleElement.style.strokeDashoffset = offset;
+		}
+
+		// Exergy Calculations from exergy.py
+		function runExergySimulation() {
+			try {
+				const prior = parseFloat(priorUncInput.value) || 0;
+				const post = parseFloat(postUncInput.value) || 0;
+				const tokens = parseInt(tokensInput.value) || 1;
+				const risk = actionRiskInput.value;
+				const hadBackup = hadBackupInput.checked;
+				const touchedState = touchedStateInput.checked;
+				const utilityDelta = parseFloat(utilityDeltaInput.value) || 0;
+				const causalGap = parseFloat(causalGapInput.value) || 0;
+				const minThreshold = parseFloat(minThresholdInput.value) || 0;
+
+				if (tokens <= 0) {
+					throw new Error("Tokens consumed must be greater than zero.");
+				}
+
+				const signalGain = Math.max(0.0, prior - post) / tokens;
+
+				const riskPenaltyMap = {
+					'read_only': 0.0,
+					'memory_write': 0.05,
+					'file_write': 0.15,
+					'schema_mutation': 0.45,
+					'destructive': 0.80
+				};
+
+				let reversibilityPenalty = riskPenaltyMap[risk];
+
+				if (!hadBackup && ['file_write', 'schema_mutation', 'destructive'].includes(risk)) {
+					reversibilityPenalty += 0.35;
+				}
+
+				if (touchedState) {
+					reversibilityPenalty += 0.05;
+				}
+
+				const exergyScore = (signalGain * (1.0 + utilityDelta)) + (causalGap * 0.1) - reversibilityPenalty;
+				const wasteRatio = signalGain === 0 ? 0.0 : Math.max(0.0, reversibilityPenalty / Math.max(signalGain, 1e-9));
+				const isBelow = exergyScore < minThreshold;
+
+				// Update exergy text variables
+				exergyValSignalGain.textContent = signalGain.toFixed(6);
+				exergyValPenalty.textContent = reversibilityPenalty.toFixed(4);
+				exergyValWaste.textContent = wasteRatio.toFixed(4);
+
+				// Update Visual Combustion chamber
+				// Normalize score for visual bar (0 to 0.15 is optimal range for exergy scores)
+				const visualPct = Math.max(0, Math.min(100, (exergyScore / 0.1) * 100));
+				exergyChamberFill.style.width = `${visualPct}%`;
+				exergyChamberScore.textContent = exergyScore.toFixed(6);
+
+				if (isBelow) {
+					exergyChamberStatus.textContent = "WASTE ERROR (BLOCKED)";
+					exergyChamberStatus.className = "text-warning";
+					exergyEngineState.textContent = "MUTATION BLOCKED";
+					exergyEngineState.style.borderColor = "var(--warning)";
+					exergyEngineState.style.color = "var(--warning)";
+					exergyChamberFill.style.background = "var(--warning)";
+
+					appendExergyLog("EXERGY_FAIL", `ThermodynamicWasteError: score (${exergyScore.toFixed(6)}) below threshold (${minThreshold.toFixed(6)}). Signal gain: ${signalGain.toFixed(6)}, Penalty: ${reversibilityPenalty.toFixed(4)}. File transaction blocked.`);
+				} else {
+					exergyChamberStatus.textContent = "STABLE PASS";
+					exergyChamberStatus.className = "text-success";
+					exergyEngineState.textContent = "SYNCHRONIZED";
+					exergyEngineState.style.borderColor = "var(--success)";
+					exergyEngineState.style.color = "var(--success)";
+					exergyChamberFill.style.background = "linear-gradient(90deg, var(--accent), var(--success))";
+
+					appendExergyLog("EXERGY_OK", `Exergy work within bounds: score=${exergyScore.toFixed(6)}, signal_gain=${signalGain.toFixed(6)}, penalty=${reversibilityPenalty.toFixed(4)}. State mutation approved.`);
+				}
+			} catch (e) {
+				console.error(e);
+				appendExergyLog("ERROR", `Simulation engine fault: ${e.message}`);
+			}
+		}
+
+		// Helper to write to Exergy terminal log console
+		function appendExergyLog(tag, msg) {
+			const timeStamp = new Date().toISOString().slice(11, 19);
+			const line = document.createElement('div');
+			line.className = 'console-line';
+
+			const tagColorClass = tag.endsWith('_OK') || tag === 'success' || tag === 'HEALTHY' ? 'c-ok' :
+			                      tag.endsWith('_FAIL') || tag === 'ERROR' ? 'c-fail' : 'c-info';
+
+			line.innerHTML = `<span class="c-time">${timeStamp}</span> <span class="c-tag ${tagColorClass}">[${tag}]</span> ${msg}`;
+			exergyConsoleStream.appendChild(line);
+
+			// Scroll to bottom
+			exergyConsoleStream.scrollTop = exergyConsoleStream.scrollHeight;
+		}
+
+		// Hook form events
+		[priorUncInput, postUncInput, tokensInput, actionRiskInput, hadBackupInput, touchedStateInput, utilityDeltaInput, causalGapInput, minThresholdInput].forEach(inp => {
+			inp.addEventListener('input', runExergySimulation);
+		});
+
+		// Filter change events
+		[projectFilter, tenantFilter, limitFilter].forEach(filt => {
+			filt.addEventListener('change', runCorpusAnalysis);
+		});
+
+		// Boot sequence
+		populateFilters(MOCK_FACTS);
+		runCorpusAnalysis();
+		runExergySimulation();
+		appendExergyLog("BOOT", "Shannon & Exergy Dashboard successfully mounted. Substrate diagnostics engaged.");
+	</script>
+
+	<!-- Styling specifically for Dashboard styling in BABYLON60 space -->
+	<style is:global>
+		/* custom-cursor */
+		div#shannon-stage {
+			min-height: 100vh;
+			position: relative;
+			width: 100%;
+			z-index: 1;
+			background: #060608;
+			padding-bottom: 2rem;
+		}
+
+		div#shannon-overlay {
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+			padding: 1.1rem;
+			position: relative;
+			z-index: 2;
+			max-width: 1440px;
+			margin: 0 auto;
+		}
+
+		.shannon-topbar {
+			align-items: center;
+			display: grid;
+			grid-template-columns: auto minmax(0, 1fr) auto;
+			padding: 0.9rem 1.35rem;
+			background: rgba(10, 10, 10, 0.78);
+			border: 1px solid var(--line);
+			border-radius: var(--radius-xl);
+			backdrop-filter: blur(12px);
+		}
+
+		.shannon-brand {
+			display: flex;
+			align-items: center;
+		}
+
+		.shannon-heading h1 {
+			font-family: 'Orbitron', sans-serif;
+			letter-spacing: 0.05em;
+			font-size: clamp(0.95rem, 2vw, 1.35rem);
+			margin: 0;
+			text-transform: uppercase;
+			color: #ffffff;
+		}
+
+		.shannon-actions {
+			display: flex;
+			align-items: center;
+			gap: 0.85rem;
+		}
+
+		.shannon-grid {
+			display: grid;
+			grid-template-columns: 320px 1fr 380px;
+			gap: 1rem;
+			min-height: 0;
+		}
+
+		@media (max-width: 1200px) {
+			.shannon-grid {
+				grid-template-columns: 300px 1fr;
+			}
+			.shannon-exergy {
+				grid-column: span 2;
+			}
+		}
+
+		@media (max-width: 900px) {
+			.shannon-grid {
+				grid-template-columns: 1fr;
+			}
+			.shannon-sidebar, .shannon-main, .shannon-exergy {
+				grid-column: span 1;
+			}
+		}
+
+		/* Sidebar Ingest Panel */
+		.shannon-sidebar {
+			display: flex;
+			flex-direction: column;
+			gap: 1.25rem;
+			padding: 1.25rem;
+			background: rgba(10, 10, 12, 0.85);
+			border: 1px solid var(--line);
+			border-radius: var(--radius-xl);
+			backdrop-filter: blur(14px);
+		}
+
+		.upload-zone {
+			background: rgba(255, 255, 255, 0.02);
+			border: 1px dashed var(--line);
+			border-radius: var(--radius-lg);
+			padding: 1.5rem 1rem;
+			text-align: center;
+			cursor: pointer;
+			transition: background 180ms ease, border-color 180ms ease;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.upload-zone.dragover {
+			background: rgba(43, 59, 229, 0.08);
+			border-color: var(--accent-soft);
+		}
+
+		.upload-icon {
+			color: var(--accent-soft);
+			margin-bottom: 0.25rem;
+		}
+
+		.upload-zone h3 {
+			font-family: 'Orbitron', sans-serif;
+			font-size: 0.9rem;
+			margin: 0;
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+		}
+
+		.upload-zone p {
+			font-size: 0.78rem;
+			color: var(--muted);
+			margin: 0;
+			line-height: 1.4;
+		}
+
+		.filter-section {
+			display: flex;
+			flex-direction: column;
+			gap: 0.85rem;
+			border-top: 1px solid rgba(255, 255, 255, 0.06);
+			padding-top: 1rem;
+		}
+
+		.filter-group {
+			display: flex;
+			flex-direction: column;
+			gap: 0.35rem;
+		}
+
+		.filter-group label {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 0.7rem;
+			color: var(--muted);
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+		}
+
+		.filter-group select, .filter-group input {
+			background: rgba(255, 255, 255, 0.03);
+			border: 1px solid var(--line);
+			border-radius: var(--radius-md);
+			color: var(--text);
+			padding: 0.55rem;
+			font-family: 'Manrope', sans-serif;
+			font-size: 0.88rem;
+			outline: none;
+			transition: border-color 180ms ease;
+		}
+
+		.filter-group select:focus, .filter-group input:focus {
+			border-color: var(--accent-soft);
+		}
+
+		.db-stats-panel {
+			display: flex;
+			flex-direction: column;
+			gap: 0.65rem;
+			border-top: 1px solid rgba(255, 255, 255, 0.06);
+			padding-top: 1rem;
+		}
+
+		.db-stat-row {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			font-size: 0.85rem;
+		}
+
+		.db-stat-row span {
+			color: var(--muted);
+		}
+
+		.db-stat-row strong {
+			color: var(--accent-bright);
+		}
+
+		/* Main Panel */
+		.shannon-main {
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+		}
+
+		.shannon-visuals {
+			padding: 1.25rem;
+			background: rgba(10, 10, 12, 0.85);
+			border: 1px solid var(--line);
+			border-radius: var(--radius-xl);
+			backdrop-filter: blur(14px);
+			display: flex;
+			flex-direction: column;
+			gap: 1.5rem;
+		}
+
+		.gauges-container {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 1rem;
+			margin-top: 0.5rem;
+		}
+
+		@media (max-width: 600px) {
+			.gauges-container {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		.gauge-card {
+			background: rgba(255, 255, 255, 0.02);
+			border: 1px solid rgba(255, 255, 255, 0.05);
+			border-radius: var(--radius-xl);
+			padding: 1.25rem;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 0.85rem;
+		}
+
+		.gauge-svg-wrap {
+			position: relative;
+			width: 110px;
+			height: 110px;
+		}
+
+		.gauge-svg {
+			width: 100%;
+			height: 100%;
+			transform: rotate(-90deg);
+		}
+
+		.gauge-rail {
+			fill: none;
+			stroke: rgba(255, 255, 255, 0.04);
+			stroke-width: 7;
+		}
+
+		.gauge-fill {
+			fill: none;
+			stroke: var(--accent);
+			stroke-width: 7;
+			stroke-linecap: round;
+			transition: stroke-dashoffset 450ms ease-out;
+		}
+
+		.gauge-fill.fill-warning {
+			stroke: var(--warning);
+		}
+
+		.gauge-fill.fill-success {
+			stroke: var(--success);
+		}
+
+		.gauge-overlay {
+			position: absolute;
+			inset: 0;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.gauge-number {
+			font-family: 'Orbitron', sans-serif;
+			font-size: 1.35rem;
+			font-weight: 700;
+			color: #ffffff;
+		}
+
+		.gauge-unit {
+			font-size: 0.65rem;
+			color: var(--muted);
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+		}
+
+		.gauge-label {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 0.72rem;
+			color: var(--muted);
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+			text-align: center;
+		}
+
+		/* Horizontal Bar Chart */
+		.chart-section {
+			display: flex;
+			flex-direction: column;
+			gap: 0.75rem;
+			border-top: 1px solid rgba(255, 255, 255, 0.06);
+			padding-top: 1.25rem;
+		}
+
+		.token-chart-container {
+			display: flex;
+			flex-direction: column;
+			gap: 0.6rem;
+		}
+
+		.chart-row {
+			display: grid;
+			grid-template-columns: 140px 1fr 40px;
+			align-items: center;
+			gap: 1rem;
+		}
+
+		.token-name {
+			font-size: 0.82rem;
+			color: var(--muted);
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+		}
+
+		.bar-rail {
+			background: rgba(255, 255, 255, 0.03);
+			border-radius: 99px;
+			height: 8px;
+			overflow: hidden;
+			position: relative;
+		}
+
+		.bar-rail .bar-fill {
+			height: 100%;
+			background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+			border-radius: 99px;
+			transition: width 450ms ease-out;
+		}
+
+		.chart-row:nth-child(even) .bar-fill {
+			background: linear-gradient(90deg, var(--accent), var(--success));
+		}
+
+		.token-freq {
+			font-size: 0.82rem;
+			color: var(--text);
+			text-align: right;
+		}
+
+		/* System Diagnostics Section */
+		.shannon-diagnostics {
+			padding: 1.25rem;
+			background: rgba(10, 10, 12, 0.85);
+			border: 1px solid var(--line);
+			border-radius: var(--radius-xl);
+			backdrop-filter: blur(14px);
+			display: flex;
+			flex-direction: column;
+			gap: 1.1rem;
+		}
+
+		.diagnostics-list {
+			display: flex;
+			flex-direction: column;
+			gap: 0.75rem;
+		}
+
+		.diagnostic-card {
+			display: flex;
+			align-items: flex-start;
+			gap: 0.95rem;
+			padding: 0.95rem 1.15rem;
+			border-radius: var(--radius-lg);
+			border: 1px solid rgba(255, 255, 255, 0.05);
+			font-size: 0.88rem;
+			line-height: 1.6;
+		}
+
+		.diagnostic-card p {
+			margin: 0;
+			color: var(--text);
+		}
+
+		.diagnostic-card.d-warning {
+			background: rgba(229, 43, 80, 0.05);
+			border-color: rgba(229, 43, 80, 0.18);
+		}
+		.diagnostic-card.d-warning .diag-icon {
+			color: var(--warning);
+			font-weight: 700;
+		}
+
+		.diagnostic-card.d-info {
+			background: rgba(43, 59, 229, 0.05);
+			border-color: rgba(43, 59, 229, 0.18);
+		}
+		.diagnostic-card.d-info .diag-icon {
+			color: var(--accent-soft);
+		}
+
+		.diagnostic-card.d-success {
+			background: rgba(0, 229, 163, 0.04);
+			border-color: rgba(0, 229, 163, 0.15);
+		}
+		.diagnostic-card.d-success .diag-icon {
+			color: var(--success);
+		}
+
+		/* Exergy Gatekeeper Panel */
+		.shannon-exergy {
+			padding: 1.25rem;
+			background: rgba(10, 10, 12, 0.85);
+			border: 1px solid var(--line);
+			border-radius: var(--radius-xl);
+			backdrop-filter: blur(14px);
+			display: flex;
+			flex-direction: column;
+			gap: 1.15rem;
+		}
+
+		.exergy-form {
+			display: flex;
+			flex-direction: column;
+			gap: 0.85rem;
+		}
+
+		.form-row {
+			display: flex;
+			gap: 0.85rem;
+		}
+
+		.form-field {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			gap: 0.35rem;
+		}
+
+		.form-field.full-width {
+			flex: none;
+			width: 100%;
+		}
+
+		.form-field.checkbox-field {
+			flex-direction: row;
+			align-items: center;
+			gap: 0.55rem;
+			cursor: pointer;
+			padding: 0.45rem 0;
+		}
+
+		.form-field.checkbox-field input {
+			cursor: pointer;
+		}
+
+		.form-field label {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 0.7rem;
+			color: var(--muted);
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+		}
+
+		.form-field input[type="number"], .form-field select {
+			background: rgba(255, 255, 255, 0.03);
+			border: 1px solid var(--line);
+			border-radius: var(--radius-md);
+			color: var(--text);
+			padding: 0.55rem;
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 0.88rem;
+			outline: none;
+			transition: border-color 180ms ease;
+		}
+
+		.form-field input:focus, .form-field select:focus {
+			border-color: var(--accent-soft);
+		}
+
+		/* Exergy Visual Combustion Chamber */
+		.exergy-visual-chamber {
+			background: rgba(0, 0, 0, 0.3);
+			border: 1px solid var(--line);
+			border-radius: var(--radius-lg);
+			padding: 1.15rem;
+			display: flex;
+			flex-direction: column;
+			gap: 0.65rem;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.exergy-visual-chamber::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background: radial-gradient(circle at center, rgba(43, 59, 229, 0.06), transparent 80%);
+			pointer-events: none;
+		}
+
+		.chamber-kicker {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 0.7rem;
+			color: var(--accent-soft);
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+		}
+
+		.chamber-gauge-rail {
+			background: rgba(255, 255, 255, 0.03);
+			height: 14px;
+			border-radius: 99px;
+			overflow: hidden;
+			position: relative;
+			border: 1px solid rgba(255, 255, 255, 0.06);
+		}
+
+		.chamber-gauge-fill {
+			height: 100%;
+			background: linear-gradient(90deg, var(--accent), var(--success));
+			border-radius: 99px;
+			transition: width 350ms cubic-bezier(0.1, 0.8, 0.1, 1);
+		}
+
+		.chamber-stats {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 0.25rem;
+		}
+
+		.chamber-stat {
+			display: flex;
+			flex-direction: column;
+			gap: 0.25rem;
+		}
+
+		.chamber-stat span {
+			font-size: 0.72rem;
+			color: var(--muted);
+		}
+
+		.chamber-stat strong {
+			font-family: 'Orbitron', sans-serif;
+			font-size: 1rem;
+		}
+
+		.exergy-results-panel {
+			display: flex;
+			flex-direction: column;
+			gap: 0.65rem;
+			border-top: 1px solid rgba(255, 255, 255, 0.06);
+			padding-top: 1rem;
+		}
+
+		.exergy-result-row {
+			display: flex;
+			justify-content: space-between;
+			font-size: 0.85rem;
+		}
+
+		.exergy-result-row span {
+			color: var(--muted);
+		}
+
+		.exergy-result-row strong {
+			color: var(--accent-bright);
+		}
+
+		.text-success {
+			color: var(--success) !important;
+		}
+
+		.text-warning {
+			color: var(--warning) !important;
+		}
+
+		/* Console Output stream */
+		.console-box {
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+			border-top: 1px solid rgba(255, 255, 255, 0.06);
+			padding-top: 1rem;
+			flex: 1;
+			min-height: 160px;
+		}
+
+		.console-stream {
+			background: #030304;
+			border: 1px solid rgba(255, 255, 255, 0.04);
+			border-radius: var(--radius-md);
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 0.74rem;
+			padding: 0.75rem;
+			color: rgba(255, 255, 255, 0.82);
+			overflow-y: auto;
+			height: 180px;
+			display: flex;
+			flex-direction: column;
+			gap: 0.45rem;
+			scrollbar-width: thin;
+		}
+
+		.console-line {
+			line-height: 1.5;
+			word-break: break-all;
+		}
+
+		.c-time {
+			color: #4a526d;
+		}
+
+		.c-tag {
+			font-weight: 700;
+			margin-right: 0.25rem;
+		}
+
+		.c-tag.c-ok {
+			color: var(--success);
+		}
+
+		.c-tag.c-fail {
+			color: var(--warning);
+		}
+
+		.c-tag.c-info {
+			color: var(--accent-soft);
+		}
+	</style>
+</SiteLayout>

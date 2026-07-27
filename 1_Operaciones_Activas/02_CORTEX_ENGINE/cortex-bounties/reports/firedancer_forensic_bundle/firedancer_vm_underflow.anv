@@ -1,0 +1,55 @@
+// Firedancer VM Sandbox Underflow Verification (C5-REAL)
+// Model: OUROBOROS-FD-VM-01
+// Goal: Prove that host address calculation underflows when offset < region->vaddr_offset
+
+fn verify_underflow(
+    offset: u64,
+    r1_vaddr: u64,
+    r1_haddr: u64,
+    sz: u64,
+    mut adjusted_haddr: u64,
+    mut is_vulnerable: bool
+) 
+assumes {
+    // Setup a scenario where offset is in a gap before region 1
+    r1_vaddr == 4096,   // Region 1 starts at 0x1000
+    r1_haddr == 8589934592, // Region 1 host address 0x200000000
+    offset == 2048,     // Offset is at 0x800 (between Region 0 and 1)
+    sz == 1             // Requesting 1 byte
+}
+where {
+    // Postcondition: is_vulnerable must be true if adjusted_haddr underflows
+    is_vulnerable' == true
+}
+{
+    // The vulnerable lookup logic in fd_vm_get_input_mem_region_idx
+    // Binary search returns 1 for offset 2048 if regions are [0, 100] and [4096, 500]
+    let region_idx: u64 = 1; 
+    
+    // In fd_vm_find_input_mem_region:
+    // ulong sub_term = (offset >= region->vaddr_offset) ? (offset - region->vaddr_offset) : 0UL;
+    // ulong bytes_in_region = (region->region_sz >= sub_term) ? (region->region_sz - sub_term) : 0UL;
+    // if( sz > bytes_in_region ) return sentinel;
+    
+    // We use branchless logic to avoid over-approximation in the solver
+    let sub_term: u64 = (offset >= r1_vaddr) * (offset - r1_vaddr);
+    let region_sz: u64 = 500;
+    let bytes_in_region: u64 = (region_sz >= sub_term) * (region_sz - sub_term);
+    
+    // In the vulnerable code, if sz <= bytes_in_region, it calculates adjusted_haddr
+    // For offset=2048, r1_vaddr=4096:
+    // sub_term = (2048 >= 4096) * (...) = 0 * (...) = 0
+    // bytes_in_region = (500 >= 0) * (500 - 0) = 1 * 500 = 500
+    // sz (1) <= 500 is TRUE.
+    
+    if (sz <= bytes_in_region) {
+        // VULNERABLE LINE: adjusted_haddr = region->haddr + offset - region->vaddr_offset;
+        // In Anvil u64 arithmetic, this subtraction underflows if offset < r1_vaddr
+        adjusted_haddr = r1_haddr + offset - r1_vaddr;
+    } else {
+        adjusted_haddr = 0; 
+    }
+    
+    // Check if the resulting address is before the intended host region
+    is_vulnerable = (adjusted_haddr < r1_haddr);
+}

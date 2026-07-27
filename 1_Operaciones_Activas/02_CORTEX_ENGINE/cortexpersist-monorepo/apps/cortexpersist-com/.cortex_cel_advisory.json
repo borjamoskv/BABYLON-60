@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "version": "3.0",
+    "timestamp": "2026-06-02T05:08:03.345664+00:00",
+    "mode": "ground_truth_advisory"
+  },
+  "advisories": [
+    {
+      "rule": "REACT_USEEFFECT_INLINE_OBJECT_DEPENDENCY",
+      "status": "rejected",
+      "ate_hazard": 0.108,
+      "standard_error": 0.1783,
+      "confidence_interval_95": [
+        -0.2415,
+        0.4575
+      ],
+      "reproducibility": {
+        "dataset_used": ".cortex_cel_dataset.csv",
+        "n_files_analyzed": 81,
+        "n_files_with_pattern": 8,
+        "trace_files_sample": [
+          "src/components/ImmuneSimulation.tsx",
+          "src/components/CortexAuditLedger.tsx",
+          "src/components/CoxCinematicRuntime.tsx",
+          "src/components/CortexVoice.tsx",
+          "src/components/ForenseUI.tsx"
+        ]
+      }
+    },
+    {
+      "rule": "REACT_USEEFFECT_INLINE_FUNCTION_DEPENDENCY",
+      "status": "rejected",
+      "ate_hazard": 0.108,
+      "standard_error": 0.1783,
+      "confidence_interval_95": [
+        -0.2415,
+        0.4575
+      ],
+      "reproducibility": {
+        "dataset_used": ".cortex_cel_dataset.csv",
+        "n_files_analyzed": 81,
+        "n_files_with_pattern": 8,
+        "trace_files_sample": [
+          "src/components/ImmuneSimulation.tsx",
+          "src/components/CortexAuditLedger.tsx",
+          "src/components/CoxCinematicRuntime.tsx",
+          "src/components/CortexVoice.tsx",
+          "src/components/ForenseUI.tsx"
+        ]
+      }
+    }
+  ]
+}

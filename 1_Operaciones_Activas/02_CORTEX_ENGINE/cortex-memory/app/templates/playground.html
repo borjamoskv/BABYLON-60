@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cortex Memory — Agent Playground</title>
+    <!-- Outfit Font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ember-void: #0A0A0A;
+            --yinmn-blue: #2B3BE5;
+            --sovereign-amber: #FF9F1C;
+            --oxide-gold: #FFD700;
+            --parchment-white: #F3F4F6;
+            --mica-dust: rgba(43, 59, 229, 0.05);
+            --font-primary: 'Outfit', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition-soft: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Ambient scanline & noise overlays */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.02;
+            z-index: 9998;
+            pointer-events: none;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--ember-void);
+            color: var(--parchment-white);
+            font-family: var(--font-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(43, 59, 229, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(15px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 12px;
+            height: 12px;
+            background-color: var(--yinmn-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--yinmn-blue);
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 25px var(--yinmn-blue); }
+        }
+
+        .logo-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #ffffff 0%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-header-dot {
+            color: rgba(243, 244, 246, 0.3);
+        }
+
+        .logo-tag {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--yinmn-blue);
+            border: 1px solid rgba(43, 59, 229, 0.4);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            letter-spacing: 0.05em;
+        }
+
+        .system-status {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(243, 244, 246, 0.6);
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #10B981;
+            box-shadow: 0 0 8px #10B981;
+        }
+
+        .status-dot.active {
+            background-color: var(--sovereign-amber);
+            box-shadow: 0 0 8px var(--sovereign-amber);
+        }
+
+        main {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 1.5rem;
+            padding: 2rem;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1024px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: rgba(13, 12, 11, 0.8);
+            border: 1px solid rgba(43, 59, 229, 0.15);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            height: 78vh;
+        }
+
+        .panel-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid rgba(43, 59, 229, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.4);
+        }
+
+        .panel-title {
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-title::before {
+            content: "";
+            width: 4px;
+            height: 14px;
+            background-color: var(--yinmn-blue);
+            display: inline-block;
+        }
+
+        /* Playground Chat UI */
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            overflow-y: auto;
+            gap: 1rem;
+        }
+
+        .chat-message {
+            max-width: 80%;
+            padding: 1rem;
+            border-radius: 12px;
+            line-height: 1.5;
+            font-size: 0.95rem;
+            animation: fadeIn 0.4s ease forwards;
+            position: relative;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-message.user {
+            background: var(--yinmn-blue);
+            color: #ffffff;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+            box-shadow: 0 4px 15px rgba(43, 59, 229, 0.2);
+        }
+
+        .chat-message.agent {
+            background: rgba(243, 244, 246, 0.05);
+            border: 1px solid rgba(243, 244, 246, 0.1);
+            color: var(--parchment-white);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-message.agent.stateful {
+            border-color: rgba(255, 159, 28, 0.3);
+            background: rgba(255, 159, 28, 0.02);
+        }
+
+        .chat-message-meta {
+            font-size: 0.75rem;
+            color: rgba(243, 244, 246, 0.4);
+            margin-top: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-input-area {
+            padding: 1.25rem 1.5rem;
+            border-top: 1px solid rgba(43, 59, 229, 0.15);
+            background: rgba(10, 10, 10, 0.4);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .chat-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .toggle-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: rgba(243, 244, 246, 0.6);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 22px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(243, 244, 246, 0.1);
+            transition: .4s;
+            border-radius: 34px;
+            border: 1px solid rgba(243, 244, 246, 0.2);
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--yinmn-blue);
+            border-color: var(--yinmn-blue);
+            box-shadow: 0 0 10px rgba(43, 59, 229, 0.5);
+        }
+
+        input:checked + .slider.amber {
+            background-color: var(--sovereign-amber);
+            border-color: var(--sovereign-amber);
+            box-shadow: 0 0 10px rgba(255, 159, 28, 0.5);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(22px);
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            background: rgba(10, 10, 10, 0.6);
+            border: 1px solid rgba(43, 59, 229, 0.25);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: var(--parchment-white);
+            font-family: var(--font-primary);
+            font-size: 0.95rem;
+            transition: var(--transition-soft);
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--yinmn-blue);
+            box-shadow: 0 0 12px rgba(43, 59, 229, 0.2);
+        }
+
+        button {
+            background: var(--yinmn-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            font-family: var(--font-primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition-soft);
+            box-shadow: 0 4px 12px rgba(43, 59, 229, 0.2);
+        }
+
+        button:hover {
+            background: #3c4df4;
+            box-shadow: 0 4px 20px rgba(43, 59, 229, 0.4);
+            transform: translateY(-1px);
+        }
+
+        button.secondary {
+            background: rgba(243, 244, 246, 0.05);
+            border: 1px solid rgba(243, 244, 246, 0.1);
+            box-shadow: none;
+        }
+
+        button.secondary:hover {
+            background: rgba(243, 244, 246, 0.1);
+            border-color: rgba(243, 244, 246, 0.2);
+        }
+
+        /* Inspector UI */
+        .inspector-tabs {
+            display: flex;
+            border-bottom: 1px solid rgba(43, 59, 229, 0.15);
+            background: rgba(10, 10, 10, 0.2);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 0.75rem;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition-soft);
+            color: rgba(243, 244, 246, 0.5);
+        }
+
+        .tab.active {
+            color: var(--parchment-white);
+            border-bottom-color: var(--sovereign-amber);
+            background: rgba(255, 159, 28, 0.03);
+        }
+
+        .tab-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: none;
+        }
+
+        .tab-content.active {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Vector Trace List */
+        .trace-card {
+            background: rgba(243, 244, 246, 0.02);
+            border: 1px solid rgba(243, 244, 246, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: relative;
+        }
+
+        .trace-card.matched {
+            border-color: rgba(255, 159, 28, 0.25);
+            background: rgba(255, 159, 28, 0.02);
+        }
+
+        .trace-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+        }
+
+        .similarity-badge {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--sovereign-amber);
+            background: rgba(255, 159, 28, 0.1);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 159, 28, 0.2);
+        }
+
+        .similarity-bar-container {
+            width: 100%;
+            height: 4px;
+            background: rgba(243, 244, 246, 0.05);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 0.25rem;
+        }
+
+        .similarity-bar {
+            height: 100%;
+            background: var(--sovereign-amber);
+            box-shadow: 0 0 8px var(--sovereign-amber);
+            transition: width 1s ease;
+        }
+
+        .memory-text {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Memory Seed Form */
+        .seed-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            border-bottom: 1px solid rgba(43, 59, 229, 0.15);
+            padding-bottom: 1.5rem;
+        }
+
+        .form-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: rgba(243, 244, 246, 0.6);
+        }
+
+        .memory-list-scroll {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            overflow-y: auto;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: rgba(243, 244, 246, 0.4);
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(43, 59, 229, 0.2);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--yinmn-blue);
+        }
+
+        .info-card {
+            border: 1px dashed rgba(255, 159, 28, 0.3);
+            background: rgba(255, 159, 28, 0.02);
+            border-radius: 8px;
+            padding: 0.85rem;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            color: rgba(243, 244, 246, 0.7);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon"></div>
+            <h1 class="logo-title">Cortex Memory</h1>
+            <span class="logo-header-dot">/</span>
+            <span class="logo-tag">MVP.PLAYGROUND</span>
+        </div>
+        <div class="system-status">
+            <div class="status-item">
+                <span class="status-dot"></span>
+                <span>Substrate: C5-REAL</span>
+            </div>
+            <div class="status-item">
+                <span>User:</span>
+                <strong style="color: white;">dev_user</strong>
+            </div>
+            <div class="status-item">
+                <span>Agent:</span>
+                <strong style="color: var(--yinmn-blue);">copilot_v1</strong>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Chat UI Panel -->
+        <div class="panel">
+            <div class="panel-header">
+                <div class="panel-title">Agent Chat Session</div>
+                <div class="toggle-container">
+                    <span class="toggle-label" id="mode-label">Memory: STATEFUL</span>
+                    <label class="switch">
+                        <input type="checkbox" id="memory-toggle" checked onchange="toggleMemoryMode()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="chat-container" id="chat-messages">
+                <div class="chat-message agent">
+                    Hello! I'm your memory-enabled Agent. Ask me anything, or try explaining your programming languages and setup style to see how I dynamically remember it.
+                    <div class="chat-message-meta">
+                        <span>Agent</span>
+                        <span>Just now</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <div class="chat-controls">
+                    <div class="toggle-container">
+                        <span class="toggle-label">Auto-Learn Trigger</span>
+                        <label class="switch">
+                            <input type="checkbox" id="autolearn-toggle" checked>
+                            <span class="slider amber"></span>
+                        </label>
+                    </div>
+                    <span style="font-size: 0.75rem; color: rgba(243,244,246,0.4);">
+                        Try saying "remember that..." or "I like..."
+                    </span>
+                </div>
+                <form onsubmit="sendMessage(event)" class="input-wrapper">
+                    <input type="text" id="chat-input" placeholder="Type a message to the agent..." autocomplete="off">
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Inspector Panel -->
+        <div class="panel">
+            <div class="inspector-tabs">
+                <div class="tab active" onclick="switchTab('trace')">Vector Retrieval Trace</div>
+                <div class="tab" onclick="switchTab('database')">Vector DB Database</div>
+            </div>
+
+            <!-- Trace Tab -->
+            <div class="tab-content active" id="tab-trace">
+                <div class="info-card">
+                    This trace records the exact long-term memories retrieved from the pgvector database during the last stateful query, showing their cosine similarity scores.
+                </div>
+                <div class="memory-list-scroll" id="trace-list">
+                    <div class="empty-state">No retrieval traces yet. Send a message in stateful mode.</div>
+                </div>
+            </div>
+
+            <!-- Database Tab -->
+            <div class="tab-content" id="tab-database">
+                <div class="seed-form">
+                    <div class="form-label">Seed a new Memory fact</div>
+                    <div class="input-wrapper">
+                        <input type="text" id="seed-input" placeholder="e.g. User likes high-performance Rust queues.">
+                        <button type="button" class="secondary" onclick="seedMemory()">Save Fact</button>
+                    </div>
+                </div>
+                <div class="memory-list-scroll" id="database-list">
+                    <div class="empty-state">Loading database memories...</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const userId = "dev_user";
+        const agentId = "copilot_v1";
+        let activeTab = "trace";
+
+        // Load database memories on start
+        window.addEventListener('DOMContentLoaded', () => {
+            loadDatabaseMemories();
+        });
+
+        function switchTab(tabName) {
+            activeTab = tabName;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+            if (tabName === 'trace') {
+                document.querySelectorAll('.tab')[0].classList.add('active');
+                document.getElementById('tab-trace').classList.add('active');
+            } else {
+                document.querySelectorAll('.tab')[1].classList.add('active');
+                document.getElementById('tab-database').classList.add('active');
+                loadDatabaseMemories();
+            }
+        }
+
+        function toggleMemoryMode() {
+            const toggle = document.getElementById('memory-toggle');
+            const label = document.getElementById('mode-label');
+            if (toggle.checked) {
+                label.innerText = "Memory: STATEFUL";
+                label.style.color = "";
+            } else {
+                label.innerText = "Memory: STATELESS";
+                label.style.color = "rgba(243, 244, 246, 0.4)";
+            }
+        }
+
+        async function loadDatabaseMemories() {
+            const listEl = document.getElementById('database-list');
+            try {
+                const response = await fetch(`/memory/list?user_id=${userId}&agent_id=${agentId}`);
+                const data = await response.json();
+                const memories = data.results || [];
+                
+                if (memories.length === 0) {
+                    listEl.innerHTML = `<div class="empty-state">No memories stored in the vector database yet.</div>`;
+                    return;
+                }
+
+                listEl.innerHTML = memories.map(m => `
+                    <div class="trace-card">
+                        <div class="trace-meta">
+                            <span style="font-family: var(--font-mono); color: rgba(243,244,246,0.4);">ID: #${m.id}</span>
+                            <span style="color: rgba(243,244,246,0.4);">${new Date(m.created_at).toLocaleTimeString()}</span>
+                        </div>
+                        <div class="memory-text">${escapeHtml(m.content)}</div>
+                    </div>
+                `).join('');
+            } catch (err) {
+                console.error(err);
+                listEl.innerHTML = `<div class="empty-state" style="color: var(--sovereign-amber);">Failed to fetch memories from server.</div>`;
+            }
+        }
+
+        async function seedMemory() {
+            const input = document.getElementById('seed-input');
+            const content = input.value.trim();
+            if (!content) return;
+
+            try {
+                const res = await fetch('/memory/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        agent_id: agentId,
+                        content: content
+                    })
+                });
+                const data = await res.json();
+                if (data.status === 'ok') {
+                    input.value = '';
+                    loadDatabaseMemories();
+                    
+                    // Show a transient message in the trace context
+                    const traceList = document.getElementById('trace-list');
+                    traceList.innerHTML = `
+                        <div class="trace-card matched">
+                            <div class="trace-meta">
+                                <span class="similarity-badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #10B981;">Manual Seed</span>
+                                <span style="color: rgba(243,244,246,0.4);">Just now</span>
+                            </div>
+                            <div class="memory-text" style="color: #10B981;">Successfully injected memory: "${escapeHtml(content)}"</div>
+                        </div>
+                    ` + traceList.innerHTML;
+                }
+            } catch (err) {
+                alert("Failed to seed memory: " + err.message);
+            }
+        }
+
+        async function sendMessage(e) {
+            e.preventDefault();
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // 1. Add user message bubble
+            appendMessage(message, 'user');
+            input.value = '';
+
+            const useMemory = document.getElementById('memory-toggle').checked;
+            const autoLearn = document.getElementById('autolearn-toggle').checked;
+
+            try {
+                // Scroll chat to bottom
+                const chatContainer = document.getElementById('chat-messages');
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+
+                // 2. Call chat api
+                const res = await fetch('/memory/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        agent_id: agentId,
+                        message: message,
+                        use_memory: useMemory
+                    })
+                });
+                const data = await res.json();
+
+                // 3. Append agent response bubble
+                appendMessage(data.response, 'agent', useMemory);
+
+                // 4. Update the trace panel
+                updateTracePanel(data.retrieved_memories);
+
+                // 5. If auto-remembered, show feedback
+                if (data.auto_stored) {
+                    appendSystemNotification(`Auto-learned fact: "${data.stored_content}"`);
+                    loadDatabaseMemories();
+                }
+
+            } catch (err) {
+                console.error(err);
+                appendMessage("I encountered an error trying to connect to the memory database.", 'agent');
+            }
+        }
+
+        function appendMessage(text, sender, isStateful = false) {
+            const chatContainer = document.getElementById('chat-messages');
+            const msgEl = document.createElement('div');
+            msgEl.className = `chat-message ${sender} ${isStateful ? 'stateful' : ''}`;
+            
+            const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            msgEl.innerHTML = `
+                ${escapeHtml(text)}
+                <div class="chat-message-meta">
+                    <span>${sender === 'user' ? 'You' : 'Agent'}${isStateful ? ' (Stateful)' : ''}</span>
+                    <span>${timeStr}</span>
+                </div>
+            `;
+            chatContainer.appendChild(msgEl);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function appendSystemNotification(text) {
+            const chatContainer = document.getElementById('chat-messages');
+            const notifyEl = document.createElement('div');
+            notifyEl.style.fontSize = "0.8rem";
+            notifyEl.style.color = "var(--sovereign-amber)";
+            notifyEl.style.textAlign = "center";
+            notifyEl.style.margin = "0.5rem 0";
+            notifyEl.style.fontStyle = "italic";
+            notifyEl.innerHTML = `◈ SYSTEM: ${escapeHtml(text)}`;
+            chatContainer.appendChild(notifyEl);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function updateTracePanel(memories) {
+            const traceList = document.getElementById('trace-list');
+            if (!memories || memories.length === 0) {
+                traceList.innerHTML = `<div class="empty-state">No memories retrieved for this query.</div>`;
+                return;
+            }
+
+            traceList.innerHTML = memories.map(m => {
+                const simPercent = Math.max(0, Math.min(100, Math.round(m.similarity * 100)));
+                return `
+                    <div class="trace-card matched">
+                        <div class="trace-meta">
+                            <span class="similarity-badge">Similarity: ${(m.similarity).toFixed(4)}</span>
+                            <span style="color: rgba(243,244,246,0.4);">${new Date(m.created_at).toLocaleTimeString()}</span>
+                        </div>
+                        <div class="memory-text">${escapeHtml(m.content)}</div>
+                        <div class="similarity-bar-container">
+                            <div class="similarity-bar" style="width: ${simPercent}%;"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function escapeHtml(unsafe) {
+            return unsafe
+                 .replace(/&/g, "&amp;")
+                 .replace(/</g, "&lt;")
+                 .replace(/>/g, "&gt;")
+                 .replace(/"/g, "&quot;")
+                 .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>

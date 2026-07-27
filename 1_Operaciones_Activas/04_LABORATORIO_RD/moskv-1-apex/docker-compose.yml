@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # NATS JetStream - The Distributed Event Bus
+  nats:
+    image: nats:latest
+    ports:
+      - "4222:4222" # Client connections
+      - "8222:8222" # HTTP Management
+    command: ["-js"] # Enable JetStream
+    volumes:
+      - nats_data:/data
+    networks:
+      - cortex_swarm
+
+  # Neo4j - The Self-Modifying Graph (Live Memory)
+  neo4j:
+    image: neo4j:5
+    ports:
+      - "7474:7474" # HTTP Browser
+      - "7687:7687" # Bolt Protocol
+    environment:
+      - NEO4J_AUTH=neo4j/password
+      - NEO4J_apoc_export_file_enabled=true
+      - NEO4J_apoc_import_file_enabled=true
+      - NEO4J_apoc_import_file_use__neo4j__config=true
+    volumes:
+      - neo4j_data:/data
+    networks:
+      - cortex_swarm
+
+  # Neo4j Sandbox - For Replay CLI (Non-destructive)
+  neo4j_sandbox:
+    image: neo4j:5
+    ports:
+      - "7475:7474" # HTTP Browser
+      - "7688:7687" # Bolt Protocol
+    environment:
+      - NEO4J_AUTH=neo4j/password
+    networks:
+      - cortex_swarm
+
+volumes:
+  nats_data:
+  neo4j_data:
+
+networks:
+  cortex_swarm:
+    driver: bridge

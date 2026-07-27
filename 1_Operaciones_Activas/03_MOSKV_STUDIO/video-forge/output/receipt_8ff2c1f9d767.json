@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-05-21T23:50:55.460Z",
+  "preset": "test",
+  "output": "../video-forge/output/MOSKV_2026-05-21T23-50-55.mp4",
+  "sha256": "8ff2c1f9d767",
+  "size_bytes": 9822443,
+  "codec": "h264",
+  "resolution": "1280x720",
+  "duration": 5,
+  "segments": 1,
+  "status": "C5-REAL"
+}

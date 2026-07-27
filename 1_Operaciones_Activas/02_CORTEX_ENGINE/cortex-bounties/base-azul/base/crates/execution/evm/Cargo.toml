@@ -1,0 +1,74 @@
+[package]
+name = "base-execution-evm"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+homepage.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# Reth
+reth-evm.workspace = true
+reth-chainspec.workspace = true
+reth-storage-errors.workspace = true
+reth-execution-types.workspace = true
+reth-execution-errors.workspace = true
+reth-primitives-traits.workspace = true
+
+reth-rpc-eth-api = { workspace = true, optional = true }
+
+# ethereum
+alloy-evm.workspace = true
+alloy-eips.workspace = true
+alloy-consensus.workspace = true
+alloy-primitives.workspace = true
+base-common-chains.workspace = true
+base-common-evm = { workspace = true, features = ["std", "reth"] }
+base-common-consensus = { workspace = true, features = ["evm", "reth"] }
+base-common-rpc-types-engine = { workspace = true, features = ["reth"] }
+
+base-execution-chainspec.workspace = true
+base-execution-consensus.workspace = true
+
+# revm
+revm.workspace = true
+
+# misc
+thiserror.workspace = true
+
+[dev-dependencies]
+alloy-genesis.workspace = true
+reth-evm = { workspace = true, features = ["test-utils"] }
+reth-revm = { workspace = true, features = ["test-utils"] }
+base-common-consensus = { workspace = true, features = ["arbitrary"] }
+
+[features]
+default = [ "std" ]
+std = [
+	"alloy-consensus/std",
+	"alloy-eips/std",
+	"alloy-evm/std",
+	"alloy-genesis/std",
+	"alloy-primitives/std",
+	"base-common-chains/std",
+	"base-common-consensus/std",
+	"base-common-evm/std",
+	"base-common-rpc-types-engine/std",
+	"base-execution-chainspec/std",
+	"base-execution-consensus/std",
+	"reth-chainspec/std",
+	"reth-evm/std",
+	"reth-execution-errors/std",
+	"reth-execution-types/std",
+	"reth-primitives-traits/std",
+	"reth-revm/std",
+	"reth-storage-errors/std",
+	"revm/std",
+	"thiserror/std",
+]
+portable = [ "base-common-evm/portable", "reth-revm/portable", "revm/portable" ]
+rpc = [ "alloy-evm/rpc", "reth-rpc-eth-api" ]

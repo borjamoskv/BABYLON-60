@@ -1,0 +1,28 @@
+name: L4 APOPTOSIS (Zero-Anergy PR Shield)
+on:
+  pull_request:
+    types: [opened, edited]
+
+jobs:
+  thermodynamic_audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for C5-REAL Compliance
+        id: check
+        run: |
+          if ! grep -q "C5-REAL" <<< "${{ github.event.pull_request.body }}"; then
+            echo "Anergy detected. Triggering Apoptosis."
+            exit 1
+          fi
+
+      - name: Deploy Reaper Swarm (Close PR)
+        if: failure()
+        uses: superbrothers/close-pull-request@v3
+        with:
+          comment: |
+            **[CRITICAL] L4 APOPTOSIS TRIGGERED**
+            
+            This Pull Request has been automatically closed by the MOSKV-1 APEX Kernel. 
+            **Reason:** High Entropy / Anergy Detected. The `C5-REAL` invariant is missing.
+            
+            *We do not accept LLM Slop. Submit structural truth or do not submit.*

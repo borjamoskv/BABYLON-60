@@ -1,0 +1,63 @@
+// ============================================================
+// ANVIL FORENSIC HARNESS — Firedancer VM Input Region Underflow
+// Vulnerability: OUROBOROS-FD-VM-01
+// Target: fd_vm_find_input_mem_region
+// Goal: Prove that fragmented region gaps lead to sandbox escape.
+// ============================================================
+
+fn verify_input_region_underflow(
+    offset: u64,
+    reg0_vaddr: u64,
+    reg0_haddr: u64,
+    reg0_sz: u64,
+    reg1_vaddr: u64,
+    reg1_haddr: u64,
+    reg1_sz: u64,
+    mut result_haddr: u64
+) 
+assumes {
+    // 1. Configuracion de Regiones Fragmentadas
+    reg0_vaddr == 0,
+    reg0_sz == 100,
+    reg0_haddr == 0x100000000, // Arbitrary base for sandbox start
+    
+    reg1_vaddr == 4096,        // Gap from 100 to 4096
+    reg1_sz == 100,
+    reg1_haddr == 0x200000000, // Arbitrary base for region 1
+    
+    // 2. El 'offset' cae en el GAP [100, 4096)
+    offset == 2048
+}
+where {
+    // POSTCONDITION (Sandbox Breach):
+    // Z3 proves that the translated host address is OUTSIDE any valid region haddr range.
+    // Specifically, result_haddr will be 0x200000000 + 2048 - 4096 = 0x1FFFFF800
+    // which is before reg1_haddr and unrelated to reg0_haddr.
+    
+    result_haddr' < reg1_haddr
+}
+{
+    // Logica de fd_vm_get_input_mem_region_idx (Simplificada para 2 regiones)
+    // En el gap, la busqueda binaria devuelve el index 1 porque:
+    // offset (2048) >= reg0_vaddr + reserved (100) -> true -> left = 1
+    let region_idx: u64 = (offset >= 100) ? 1 : 0;
+    
+    // Logica de fd_vm_find_input_mem_region
+    let base_haddr: u64 = (region_idx == 1) ? reg1_haddr : reg0_haddr;
+    let base_vaddr: u64 = (region_idx == 1) ? reg1_vaddr : reg0_vaddr;
+    let sz: u64 = (region_idx == 1) ? reg1_sz : reg0_sz;
+
+    // Calculo de bytes_in_region (Vulnerable)
+    // offset (2048) < base_vaddr (4096) -> sat_sub returns 0
+    let vaddr_rel_offset: u64 = (offset > base_vaddr) ? (offset - base_vaddr) : 0;
+    let bytes_in_region: u64 = (sz > vaddr_rel_offset) ? (sz - vaddr_rel_offset) : 0;
+    
+    // OOB Check (Fails to catch the gap)
+    // If sz_requested (1) <= bytes_in_region (100), it passes
+    if (1 <= bytes_in_region) {
+        // THE BUG: No check if offset < base_vaddr
+        result_haddr = base_haddr + offset - base_vaddr;
+    } else {
+        result_haddr = 0xDEADBEEF; // Sentinel
+    }
+}

@@ -1,0 +1,48 @@
+--- main.go	2026-06-16
++++ main.go	2026-06-16
+@@ -4,6 +4,7 @@
+ 	"fmt"
+ 	"os"
+ 	"os/exec"
++	"runtime"
+ 	"strings"
+ 	"sync"
+ 	"time"
+@@ -83,6 +84,28 @@
+ 	os.Exit(127) // Return to ZSH
+ }
+ 
++func runStressTest() {
++	logExergy("=== [INIT] EXERGY STRESS TEST INITIATED ===")
++	notifyOS("MOSKV-1 [STRESS]", "Deploying 1,000,000 Goroutines...")
++	
++	start := time.Now()
++	var wg sync.WaitGroup
++	routines := 1000000
++
++	for i := 0; i < routines; i++ {
++		wg.Add(1)
++		go func() {
++			defer wg.Done()
++			// Simulate minor memory/CPU constraint
++			_ = fmt.Sprintf("Exergy Load %s", time.Now().String())
++		}()
++	}
++	wg.Wait()
++	elapsed := time.Since(start)
++	
++	logExergy(fmt.Sprintf("[HALT] Stress Test Complete. %d Goroutines executed in %s. Active CPUs: %d", routines, elapsed, runtime.NumCPU()))
++}
++
+ func main() {
+ 	if len(os.Args) < 2 {
+ 		fmt.Println("Usage: ./moskv-core <vector>")
+@@ -107,6 +130,8 @@
+ 		if len(os.Args) > 2 {
+ 			runVibe(strings.Join(os.Args[2:], " "))
+ 		}
++	case "stress":
++		runStressTest()
+ 	default:
+ 		os.Exit(127)
+ 	}

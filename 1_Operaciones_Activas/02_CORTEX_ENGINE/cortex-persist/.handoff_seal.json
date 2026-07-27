@@ -1,0 +1,8 @@
+{
+  "handoff_timestamp": "2026-06-06T15:44:19Z",
+  "status": "VSA_ANCHORED",
+  "hashes": {
+    ".exergy_state.json": "49677f17fb185d2da14fb67133f1fde1f37102adbea95158dca1aa68c952aaf1"
+  },
+  "signature": "BORJAMOSKV_CORTEX_HANDOFF_AUTHORITY"
+}

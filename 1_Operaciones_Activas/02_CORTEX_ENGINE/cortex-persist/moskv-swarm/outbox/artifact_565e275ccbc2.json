@@ -1,0 +1,19 @@
+{
+  "status": "rejected",
+  "job_id": "565e275ccbc2",
+  "generator": {
+    "seed": "1ffc5ead",
+    "bias": "novelty_over_polish",
+    "form": "llm_structured",
+    "content": "### Core Vector: ARTE_PURO  \n**Concept:** The essence of raw creativity without pretension or refinement.\n\n**Output Bias:** Emphasize novelty over polish in the creation process.\n\n**Forbidden Move:** None – No restrictions on creative freedom.\n\n**Raw Creative Artifact: Manifesto for Unpolished Creativity**\n\n---\n\n#### Title: \"The Art of Unrefinement\"\n\nIn an age where polished perfection seems to dominate, one must remember that true creativity thrives in its unrefined state. This manifesto is a call to arms for artists, thinkers, and creators who dare to embrace the raw, unfiltered essence of their craft.\n\n**1. Embrace the Imperfections**\n   - Recognize that every great creation starts with rough edges. The imperfections are where the authenticity lies.\n   - Avoid the urge to smooth over every blemish. Instead, celebrate the flaws as they add character and depth to your work.\n\n**2. Novelty Over Perfection**\n   - Novelty is the lifeblood of creativity. Push boundaries, explore new territories, and don’t be afraid to challenge existing norms.\n   - The polished version of a creation is often a missed opportunity for something truly original.\n\n**3. Let Go of Control**\n   - Creative freedom is essential. Give yourself permission to let your ideas flow without judgment.\n   - Embrace the chaos and uncertainty that come with unrefined creativity. They are the sparks that ignite innovation.\n\n**4. Experimentation as Your Guide**\n   - Use experimentation as a tool for discovery rather than a way to achieve perfection.\n   - Each experiment is a step closer to understanding what truly works and what doesn’t, without the constraint of preconceived notions.\n\n**5. Share the Rawness**\n   - There’s beauty in vulnerability. Share your raw ideas, your unfinished drafts, and your mistakes with others.\n   - Encourage feedback that accepts the work for what it is – a raw expression of your creativity.\n\n**6. Celebrate the Journey**\n   - Embrace the journey of creation, not just the end product.\n   - Each step along the way is a valuable part of the process, contributing to the authenticity and integrity of your final creation.\n\nIn the world of art and innovation, let us remember that polished perfection is just one way to present what we create. The rawness of our initial ideas, the novel approaches we take, and the unbridled freedom we embrace are what make true creativity shine.\n- Let’s unrefine together, celebrate the chaos, and push the boundaries of possibility.\n\n**Signed,**  \n[Your Name]  \nManifesto for Unpolished Creativity",
+    "entropy_target": 0.5,
+    "model_used": "llama3"
+  },
+  "critic": {
+    "score": 0.4,
+    "passed": false,
+    "require_pass": true,
+    "notes": "too_chaotic"
+  },
+  "rejection_reason": "adversarial_fail"
+}

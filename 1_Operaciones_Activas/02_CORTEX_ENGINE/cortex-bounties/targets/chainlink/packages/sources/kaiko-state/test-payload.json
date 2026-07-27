@@ -1,0 +1,6 @@
+{
+ "requests": [{
+  "from": "WSTETH",
+  "to": "USD"
+ }]
+}

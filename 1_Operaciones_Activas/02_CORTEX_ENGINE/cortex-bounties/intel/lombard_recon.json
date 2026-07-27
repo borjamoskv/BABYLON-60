@@ -1,0 +1,14 @@
+{
+  "name": "Lombard",
+  "slug": "lombard",
+  "category": "",
+  "chains": [],
+  "tvl_current": 1070648221.57964,
+  "tvl_peak": 1136708491.3945398,
+  "tvl_trend": "stable",
+  "github_org": "",
+  "risk_score": 25,
+  "confidence": "C5-REAL",
+  "audit_links": [],
+  "contracts": {}
+}

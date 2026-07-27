@@ -1,0 +1,76 @@
+# build output
+dist/
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+.vercel
+.env*.local
+.cortex_ledger.json
+.cortex_ledger.jsonl
+*.jsonl
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Rust build directories
+**/target/
+
+# SQLite databases
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+**/ledger.db
+
+# Telemetry and Hazard tracking
+.cortex_hazard_history.json
+asi-1-lab/logs/
+
+# Ouroboros Strike logs
+strike_daemon*.log
+
+# Local logs & temp scripts
+*.log
+fix_*.py
+scripts/extract_stripe_key.py
+scripts/execute_stripe_creation.py
+scripts/dump_brave_text.py
+scripts/cortex_beta_calibrator.py
+scripts/stripe_key.txt
+
+
+# Lab outputs
+asi-1-lab/workspace/output.json
+asi-1-lab/workspace/report.txt
+asi-1-lab/workspace/todo_count.json
+asi-1-lab/workspace/results/
+asi-1-lab/workspace/workspace/
+
+# C5-REAL: Audio binaries — excluded from Git history
+audio/releases/*.flac
+audio/releases/*.mp3
+public/audio/separated/
+.env.vercel
+
+# TypeScript build info cache
+*.tsbuildinfo

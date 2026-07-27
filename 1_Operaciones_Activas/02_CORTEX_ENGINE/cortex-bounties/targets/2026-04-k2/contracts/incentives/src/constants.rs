@@ -1,0 +1,1 @@
+pub const MAX_CLAIMABLE_ASSETS: u32 = 10;

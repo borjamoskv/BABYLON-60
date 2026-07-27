@@ -1,0 +1,118 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
+# Contributing to Base
+
+Thanks for your interest in improving Base.
+
+This document will help you get started. **Do not let this document intimidate you**. It should be considered as a guide to help you navigate the process.
+
+## Contributor Trust System
+
+We use [vouch](https://github.com/mitchellh/vouch) to manage contributor trust. This helps us maintain code quality by gating pull requests behind an explicit trust list.
+
+**What this means for you:**
+
+- **Issues** are how we stay in sync with the Base community and understand what matters most. Please keep them focused on bugs and feature requests so they remain useful signal — typo fixes and minor refactoring suggestions will be closed without comment.
+- **Pull requests** require you to be vouched and assigned an issue. PRs from unvouched users are auto-closed.
+
+**How to get vouched:**
+
+1. Open an issue describing the bug or feature you'd like to work on.
+2. A maintainer will review and comment `vouch` to add you to the trust list.
+3. Once vouched and assigned an issue, you can open pull requests.
+
+The trust list lives in [`.github/VOUCHED.td`](.github/VOUCHED.td).
+
+## Ways to Contribute
+
+There are three ways an individual can contribute:
+
+1. **By opening an issue:** If you believe you have uncovered a bug in Base or have a feature request, creating a new issue in the issue tracker is the way to begin the process.
+2. **By adding context:** Provide additional context to existing issues, such as screenshots, logs, and code snippets, to help resolve them.
+3. **By resolving issues:** Typically this is done by opening a pull request that fixes the underlying problem in a concrete and reviewable manner. Only do this once you have been vouched on the issue.
+
+## Scope of Contributions
+
+To ensure we're all rowing in the same direction and to prevent wasted effort, please note the following guidelines:
+
+### What We Accept from External Contributors
+
+- **Bug reports**: Well-documented bug reports with reproduction steps are always appreciated.
+- **Feature requests**: Feature requests, such as new RPCs or other improvements.
+
+### What We Don't Accept
+
+- **Typo fixes**: Issues and PRs that only fix typos will be closed.
+- **Minor refactoring**: Style cleanups, code reorganization, or other changes without a functional impact will be closed.
+
+### Before Starting Work
+
+If you're considering a contribution, **please open an issue first** to discuss your proposal. This helps:
+
+- Ensure the change aligns with project goals
+- Prevent duplicate work
+- Get early feedback on the approach
+- Save your time if the change isn't something we can accept
+
+We want to respect your time. Opening a discussion before investing significant effort helps ensure your contribution can be merged.
+
+## Submitting a Pull Request
+
+### Before You Start
+
+**Important:** Only work on issues that are assigned to you. If you're interested in an existing issue, comment on it to request assignment. This helps prevent duplicate work and ensures your contribution can be merged.
+
+If you want to work on something that doesn't have an issue yet, open an issue first and note that you'd like to implement it. Once we agree it's worthwhile, we'll assign the issue to you.
+
+1. Check for existing issues or PRs that address the same problem
+2. If you are assigned an issue but no longer have time to work on it, please let us know so we can unassign it
+
+### Developer Setup
+
+- Rust `1.93` or newer
+- [`just`](https://github.com/casey/just)
+- Foundry (`forge`) for Solidity-based test fixtures
+- Bun and Node.js `22+` if you want to run the spec site locally
+- Docker if you want to use the local devnet or build container images
+- Run `just setup` to install other deps
+
+
+### Making Changes
+
+1. Fork the repository and create your branch from `main`
+2. Make your changes, following the existing code style
+3. Add or update tests as appropriate
+4. Ensure all checks pass locally:
+   ```sh
+   just ci
+   ```
+
+### Opening the Pull Request
+
+1. Open a pull request only if you have been assigned the related issue
+2. Link to the related issue
+3. Describe what your changes do and why
+
+### After Submitting
+
+- Respond to feedback and requests for changes
+- Keep your PR up to date with the `main` branch
+- Be patient - reviews may take time
+
+## Submitting a Bug Report
+
+When filing a new bug report in the issue tracker, please include:
+
+- The Base version you are on (and that it is up to date)
+- Relevant logs and error messages
+- Concrete steps to reproduce the bug
+- Any relevant configuration
+
+The more minimal your reproduction case, the easier it is to diagnose and fix.
+
+## Getting Help
+
+If you have questions:
+
+- Open a discussion in the repository
+- Comment on the relevant issue
+- Check existing [documentation](https://docs.base.org/base-chain/quickstart/why-base) and issues first

@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "framework": "CORTEX-PERSIST/Ouroboros Z3 Verification Suite",
+    "source": "Damn Vulnerable DeFi v4",
+    "verification_engine": "Z3 SMT Solver",
+    "confidence": "C5-REAL (Symbolic Proof)",
+    "timestamp": "2026-05-10T03:54:37Z",
+    "total_challenges": 6,
+    "confirmed_vulnerable": 5,
+    "total_sat_queries": 19,
+    "bundle_hash": "b1aa8f6b2296cd0b4994f0da2ddafd6a891cdc68999e33df77f347b6aa9912ee"
+  },
+  "cwe_taxonomy": [
+    "CWE-20",
+    "CWE-284",
+    "CWE-290",
+    "CWE-362",
+    "CWE-682",
+    "CWE-841",
+    "CWE-863"
+  ],
+  "attack_patterns": {
+    "accounting_mismatch": [
+      "Unstoppable (direct transfer breaks internal counter)",
+      "Side Entrance (deposit-as-repayment creates phantom credits)"
+    ],
+    "access_control": [
+      "Naive Receiver (permissionless flashLoan on behalf of victim)",
+      "Truster (arbitrary external call as pool)",
+      "Selfie (transient voting power via flash loan)"
+    ],
+    "state_manipulation": [
+      "Naive Receiver (_msgSender forgery via calldata injection)",
+      "The Rewarder (transfer before bitmap update)"
+    ],
+    "temporal": [
+      "Selfie (TOCTOU: votes at queue-time, not execute-time)"
+    ]
+  },
+  "immunefi_template_mapping": {
+    "CWE-284": "Improper Access Control \u2192 Direct theft of funds",
+    "CWE-290": "Authentication Bypass by Spoofing \u2192 Unauthorized withdrawal",
+    "CWE-682": "Incorrect Calculation \u2192 Protocol insolvency",
+    "CWE-841": "Improper Behavioral Workflow \u2192 State corruption",
+    "CWE-20": "Improper Input Validation \u2192 Arbitrary code execution context",
+    "CWE-863": "Incorrect Authorization \u2192 Privilege escalation",
+    "CWE-362": "Race Condition (TOCTOU) \u2192 Governance takeover"
+  },
+  "results": [
+    {
+      "name": "Unstoppable",
+      "status": "PASS",
+      "confirmed": false,
+      "sat_count": 0,
+      "elapsed": 0.118,
+      "cwe": [
+        "CWE-682"
+      ],
+      "pattern": "Invariant Break \u2014 Accounting Mismatch",
+      "severity": "HIGH",
+      "output_hash": "9fad953dc876a924"
+    },
+    {
+      "name": "Naive Receiver",
+      "status": "PASS",
+      "confirmed": true,
+      "sat_count": 6,
+      "elapsed": 0.153,
+      "cwe": [
+        "CWE-284",
+        "CWE-290"
+      ],
+      "pattern": "Fee Exhaustion + Meta-TX Identity Forgery",
+      "severity": "CRITICAL",
+      "output_hash": "c8cb843d2ad69dab"
+    },
+    {
+      "name": "Side Entrance",
+      "status": "PASS",
+      "confirmed": true,
+      "sat_count": 3,
+      "elapsed": 0.107,
+      "cwe": [
+        "CWE-682",
+        "CWE-841"
+      ],
+      "pattern": "Dual-Accounting Confusion \u2014 Deposit as Repayment",
+      "severity": "CRITICAL",
+      "output_hash": "44d40ef791023a49"
+    },
+    {
+      "name": "Truster",
+      "status": "PASS",
+      "confirmed": true,
+      "sat_count": 2,
+      "elapsed": 0.112,
+      "cwe": [
+        "CWE-20",
+        "CWE-863"
+      ],
+      "pattern": "Arbitrary External Call \u2014 Approval Injection",
+      "severity": "CRITICAL",
+      "output_hash": "1231a13227586fb6"
+    },
+    {
+      "name": "Selfie",
+      "status": "PASS",
+      "confirmed": true,
+      "sat_count": 5,
+      "elapsed": 0.121,
+      "cwe": [
+        "CWE-284",
+        "CWE-362"
+      ],
+      "pattern": "Flash Loan Governance Takeover \u2014 TOCTOU",
+      "severity": "CRITICAL",
+      "output_hash": "7d18367672e9711b"
+    },
+    {
+      "name": "The Rewarder",
+      "status": "PASS",
+      "confirmed": true,
+      "sat_count": 3,
+      "elapsed": 0.135,
+      "cwe": [
+        "CWE-682",
+        "CWE-841"
+      ],
+      "pattern": "Multi-Claim Bitmap Race \u2014 Transfer Before State Update",
+      "severity": "CRITICAL",
+      "output_hash": "8b3a6d511d2bef09"
+    }
+  ]
+}

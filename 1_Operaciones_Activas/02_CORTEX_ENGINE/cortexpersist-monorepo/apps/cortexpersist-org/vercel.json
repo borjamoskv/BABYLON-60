@@ -1,0 +1,7 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "cd ../.. && pnpm turbo run build --filter=@cortex/org",
+  "installCommand": "pnpm install",
+  "outputDirectory": ".next",
+  "regions": ["mad1", "cdg1"]
+}

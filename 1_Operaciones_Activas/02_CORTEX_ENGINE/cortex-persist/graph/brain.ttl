@@ -1,0 +1,72 @@
+@prefix brain: <http://cortex-persist/brain#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Cortex-Persist C4-SIM RDF Brain Graph
+
+brain:BulboRaquideo a brain:Region ;
+  brain:layer "L1" ;
+  brain:function "vital_rhythms" ;
+  brain:compute "PID0_daemon" ;
+  brain:latency "<5ms" .
+
+brain:PuenteVarolio a brain:Region ;
+  brain:layer "L1" ;
+  brain:function "sleep_wake_routing" ;
+  brain:compute "load_balancer_cron" .
+
+brain:Cerebelo a brain:Region ;
+  brain:layer "L1" ;
+  brain:function "motor_prediction" ;
+  brain:compute "fpu_pid_controller" .
+
+brain:FormacionReticular a brain:Region ;
+  brain:layer "L1" ;
+  brain:function "arousal" ;
+  brain:compute "interrupt_controller" .
+
+brain:Amigdala a brain:Region ;
+  brain:layer "L2" ;
+  brain:function "salience_detection" ;
+  brain:compute "IDS_nmi" .
+
+brain:Hipocampo a brain:Region ;
+  brain:layer "L2" ;
+  brain:function "episodic_memory" ;
+  brain:compute "vector_db_commit_log" .
+
+brain:Hipotalamo a brain:Region ;
+  brain:layer "L2" ;
+  brain:function "homeostasis" ;
+  brain:compute "hardware_monitor" .
+
+brain:Cingulado a brain:Region ;
+  brain:layer "L2" ;
+  brain:function "error_evaluation" ;
+  brain:compute "loss_function" .
+
+brain:Talamo a brain:Region ;
+  brain:layer "L3" ;
+  brain:function "sensory_router" ;
+  brain:compute "bus_router" .
+
+brain:GangliosBasales a brain:Region ;
+  brain:layer "L3" ;
+  brain:function "action_selection" ;
+  brain:compute "rl_gating" .
+
+brain:Occipital a brain:Region ;
+  brain:layer "L4" ;
+  brain:function "vision" ;
+  brain:compute "cnn" .
+
+brain:Prefrontal a brain:Region ;
+  brain:layer "L4" ;
+  brain:function "executive_control" ;
+  brain:compute "llm_hypervisor" .
+
+# Relations
+brain:Talamo brain:routesTo brain:Occipital .
+brain:GangliosBasales brain:gates brain:Prefrontal .
+brain:Hipocampo brain:feedsContext brain:Prefrontal .
+brain:Amigdala brain:interrupts brain:Prefrontal .

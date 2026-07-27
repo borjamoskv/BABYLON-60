@@ -1,0 +1,417 @@
+# [C5-REAL] Exergy-Maximized
+from __future__ import annotations
+
+import builtins
+import importlib
+import sys
+from contextlib import contextmanager
+from unittest.mock import patch
+
+_MISSING = object()
+
+
+@contextmanager
+def _temporarily_reset_modules(*names: str):
+    expanded = list(names)
+    for name in names:
+        if name.startswith("babylon60.extensions."):
+            expanded.append(name.replace("babylon60.extensions.", "cortex.extensions.", 1))
+        if name.startswith("babylon60."):
+            expanded.append(name.replace("babylon60.", "cortex.", 1))
+        elif name == "babylon60":
+            expanded.append("cortex")
+    names = tuple(expanded)
+    previous = {name: sys.modules.get(name) for name in names}
+    parent_attrs: dict[str, tuple[object, str, object]] = {}
+
+    for name in names:
+        parent_name, _, child_name = name.rpartition(".")
+        if not parent_name:
+            continue
+        parent = sys.modules.get(parent_name)
+        if parent is None:
+            continue
+        parent_attrs[name] = (parent, child_name, getattr(parent, child_name, _MISSING))
+        if hasattr(parent, child_name):
+            try:
+                delattr(parent, child_name)
+            except AttributeError:
+                pass
+
+    for name in names:
+        sys.modules.pop(name, None)
+
+    try:
+        yield
+    finally:
+        for name, module in previous.items():
+            if module is None:
+                sys.modules.pop(name, None)
+            else:
+                sys.modules[name] = module
+        for parent, child_name, previous_attr in parent_attrs.values():
+            if previous_attr is _MISSING:
+                if hasattr(parent, child_name):
+                    try:
+                        delattr(parent, child_name)
+                    except AttributeError:
+                        pass
+            else:
+                setattr(parent, child_name, previous_attr)
+
+
+def test_routes_package_import_is_lazy_without_fastapi() -> None:
+    package_name = "babylon60.routes"
+    admin_module = "babylon60.routes.admin"
+    graph_module = "babylon60.routes.graph"
+    real_import = builtins.__import__
+
+    def guarded_import(name, globals=None, locals=None, fromlist=(), level=0):  # type: ignore[no-untyped-def]
+        if name == "fastapi" or name.startswith("fastapi."):
+            raise ImportError("blocked optional dependency: fastapi")
+        return real_import(name, globals, locals, fromlist, level)
+
+    with _temporarily_reset_modules(package_name, admin_module, graph_module):
+        with patch("builtins.__import__", side_effect=guarded_import):
+            module = importlib.import_module(package_name)
+
+        assert module.__name__ == package_name
+        assert admin_module not in sys.modules
+        assert graph_module not in sys.modules
+        assert callable(module.__getattr__)
+
+
+def test_routes_submodules_materialize_on_demand() -> None:
+    package_name = "babylon60.routes"
+    admin_module = "babylon60.routes.admin"
+    graph_module = "babylon60.routes.graph"
+
+    with _temporarily_reset_modules(package_name, admin_module, graph_module):
+        module = importlib.import_module(package_name)
+
+        assert module.admin.__name__ == admin_module
+        assert admin_module in sys.modules
+        assert graph_module not in sys.modules
+
+
+def test_ledger_origin_signatures_materialize_on_demand() -> None:
+    package_name = "babylon60.ledger"
+    models_module = "babylon60.ledger.models"
+    origin_module = "babylon60.ledger.origin"
+    replay_module = "babylon60.ledger.replay"
+
+    with _temporarily_reset_modules(package_name, models_module, origin_module, replay_module):
+        module = importlib.import_module(package_name)
+
+        assert origin_module not in sys.modules
+        assert replay_module not in sys.modules
+        assert module.LedgerEvent.__name__ == "LedgerEvent"
+        assert models_module in sys.modules
+        assert origin_module not in sys.modules
+        assert replay_module not in sys.modules
+        assert module.OriginKeyRegistry.__name__ == "OriginKeyRegistry"
+        assert origin_module in sys.modules
+        assert replay_module not in sys.modules
+        assert module.ReplayAdmissionPolicy.__name__ == "ReplayAdmissionPolicy"
+        assert replay_module in sys.modules
+
+
+def test_browser_package_import_is_lazy_without_playwright() -> None:
+    package_name = "babylon60.extensions.browser"
+    engine_module = "babylon60.extensions.browser.engine"
+    real_import = builtins.__import__
+
+    def guarded_import(name, globals=None, locals=None, fromlist=(), level=0):  # type: ignore[no-untyped-def]
+        if name == "playwright.async_api" or name.startswith("playwright."):
+            raise ImportError("blocked optional dependency: playwright")
+        return real_import(name, globals, locals, fromlist, level)
+
+    with _temporarily_reset_modules(package_name, engine_module):
+        with patch("builtins.__import__", side_effect=guarded_import):
+            module = importlib.import_module(package_name)
+
+        assert module.__name__ == package_name
+        assert engine_module not in sys.modules
+        assert callable(module.__getattr__)
+
+
+def test_gate_package_import_is_lazy() -> None:
+    package_name = "babylon60.extensions.gate"
+    core_module = "babylon60.extensions.gate.core"
+    errors_module = "babylon60.extensions.gate.errors"
+    enums_module = "babylon60.extensions.gate.enums"
+
+    with _temporarily_reset_modules(package_name, core_module, errors_module, enums_module):
+        module = importlib.import_module(package_name)
+
+        assert module.__name__ == package_name
+        assert core_module not in sys.modules
+        assert errors_module not in sys.modules
+        assert enums_module not in sys.modules
+        assert callable(module.__getattr__)
+
+
+def test_gate_public_exports_materialize_on_demand() -> None:
+    package_name = "babylon60.extensions.gate"
+    core_module = "babylon60.extensions.gate.core"
+    errors_module = "babylon60.extensions.gate.errors"
+    enums_module = "babylon60.extensions.gate.enums"
+
+    with _temporarily_reset_modules(package_name, core_module, errors_module, enums_module):
+        module = importlib.import_module(package_name)
+
+        assert module.GateExpired.__name__ == "GateExpired"
+        assert errors_module in sys.modules
+        assert core_module not in sys.modules
+        assert module.ActionStatus.__name__ == "ActionStatus"
+        assert enums_module in sys.modules
+
+
+def test_signals_package_import_is_lazy_without_aiosqlite() -> None:
+    package_name = "babylon60.extensions.signals"
+    bus_module = "babylon60.extensions.signals.bus"
+    models_module = "babylon60.extensions.signals.models"
+    real_import = builtins.__import__
+
+    def guarded_import(name, globals=None, locals=None, fromlist=(), level=0):  # type: ignore[no-untyped-def]
+        if name == "aiosqlite" or name.startswith("aiosqlite."):
+            raise ImportError("blocked optional dependency: aiosqlite")
+        return real_import(name, globals, locals, fromlist, level)
+
+    with _temporarily_reset_modules(package_name, bus_module, models_module):
+        with patch("builtins.__import__", side_effect=guarded_import):
+            module = importlib.import_module(package_name)
+
+        assert module.__name__ == package_name
+        assert bus_module not in sys.modules
+        assert models_module not in sys.modules
+        assert callable(module.__getattr__)
+
+
+def test_signals_public_exports_materialize_on_demand() -> None:
+    package_name = "babylon60.extensions.signals"
+    bus_module = "babylon60.extensions.signals.bus"
+    models_module = "babylon60.extensions.signals.models"
+
+    with _temporarily_reset_modules(package_name, bus_module, models_module):
+        module = importlib.import_module(package_name)
+
+        assert module.Signal.__name__ == "Signal"
+        assert models_module in sys.modules
+        assert bus_module not in sys.modules
+        assert module.SignalBus.__name__ == "SignalBus"
+        assert bus_module in sys.modules
+
+
+def test_metering_package_import_is_lazy() -> None:
+    package_name = "babylon60.extensions.metering"
+    quotas_module = "babylon60.extensions.metering.quotas"
+    tracker_module = "babylon60.extensions.metering.tracker"
+
+    with _temporarily_reset_modules(package_name, quotas_module, tracker_module):
+        module = importlib.import_module(package_name)
+
+        assert module.__name__ == package_name
+        assert quotas_module not in sys.modules
+        assert tracker_module not in sys.modules
+        assert callable(module.__getattr__)
+
+
+def test_metering_public_exports_materialize_on_demand() -> None:
+    package_name = "babylon60.extensions.metering"
+    quotas_module = "babylon60.extensions.metering.quotas"
+    tracker_module = "babylon60.extensions.metering.tracker"
+
+    with _temporarily_reset_modules(package_name, quotas_module, tracker_module):
+        module = importlib.import_module(package_name)
+
+        assert "free" in module.PLAN_QUOTAS
+        assert quotas_module in sys.modules
+        assert tracker_module not in sys.modules
+        assert module.UsageTracker.__name__ == "UsageTracker"
+        assert tracker_module in sys.modules
+
+
+def test_search_package_import_is_lazy_without_aiosqlite() -> None:
+    package_name = "babylon60.search"
+    hybrid_module = "babylon60.search.hybrid"
+    models_module = "babylon60.search.models"
+    text_module = "babylon60.search.text"
+    vector_module = "babylon60.search.vector"
+    real_import = builtins.__import__
+
+    def guarded_import(name, globals=None, locals=None, fromlist=(), level=0):  # type: ignore[no-untyped-def]
+        if name == "aiosqlite" or name.startswith("aiosqlite."):
+            raise ImportError("blocked optional dependency: aiosqlite")
+        return real_import(name, globals, locals, fromlist, level)
+
+    with _temporarily_reset_modules(
+        package_name,
+        hybrid_module,
+        models_module,
+        text_module,
+        vector_module,
+    ):
+        with patch("builtins.__import__", side_effect=guarded_import):
+            module = importlib.import_module(package_name)
+
+        assert module.__name__ == package_name
+        assert hybrid_module not in sys.modules
+        assert models_module not in sys.modules
+        assert text_module not in sys.modules
+        assert vector_module not in sys.modules
+        assert callable(module.__getattr__)
+
+
+def test_search_public_exports_materialize_on_demand() -> None:
+    package_name = "babylon60.search"
+    causal_gap_module = "babylon60.search.causal_gap"
+    hybrid_module = "babylon60.search.hybrid"
+    models_module = "babylon60.search.models"
+
+    with _temporarily_reset_modules(
+        package_name,
+        causal_gap_module,
+        hybrid_module,
+        models_module,
+    ):
+        module = importlib.import_module(package_name)
+
+        assert module.SearchResult.__name__ == "SearchResult"
+        assert models_module in sys.modules
+        assert causal_gap_module not in sys.modules
+        assert hybrid_module not in sys.modules
+        assert module.CausalGap.__name__ == "CausalGap"
+        assert causal_gap_module in sys.modules
+        assert module.hybrid_search.__name__ == "hybrid_search"
+        assert hybrid_module in sys.modules
+
+
+def test_gateway_package_import_is_lazy_without_aiosqlite() -> None:
+    package_name = "babylon60.gateway"
+    router_module = "babylon60.gateway.router"
+    bus_module = "babylon60.extensions.signals.bus"
+    real_import = builtins.__import__
+
+    def guarded_import(name, globals=None, locals=None, fromlist=(), level=0):  # type: ignore[no-untyped-def]
+        if name == "aiosqlite" or name.startswith("aiosqlite."):
+            raise ImportError("blocked optional dependency: aiosqlite")
+        return real_import(name, globals, locals, fromlist, level)
+
+    with _temporarily_reset_modules(package_name, router_module, bus_module):
+        with patch("builtins.__import__", side_effect=guarded_import):
+            module = importlib.import_module(package_name)
+
+        assert module.__name__ == package_name
+        assert router_module not in sys.modules
+        assert bus_module not in sys.modules
+        assert callable(module.__getattr__)
+
+
+def test_gateway_adapters_package_import_is_lazy_without_fastapi() -> None:
+    package_name = "babylon60.gateway.adapters"
+    rest_module = "babylon60.gateway.adapters.rest"
+    telegram_module = "babylon60.gateway.adapters.telegram"
+    real_import = builtins.__import__
+
+    def guarded_import(name, globals=None, locals=None, fromlist=(), level=0):  # type: ignore[no-untyped-def]
+        if name == "fastapi" or name.startswith("fastapi."):
+            raise ImportError("blocked optional dependency: fastapi")
+        return real_import(name, globals, locals, fromlist, level)
+
+    with _temporarily_reset_modules(package_name, rest_module, telegram_module):
+        with patch("builtins.__import__", side_effect=guarded_import):
+            module = importlib.import_module(package_name)
+
+        assert module.__name__ == package_name
+        assert rest_module not in sys.modules
+        assert telegram_module not in sys.modules
+        assert callable(module.__getattr__)
+
+
+def test_ledger_package_import_is_lazy_without_aiosqlite() -> None:
+    package_name = "babylon60.ledger"
+    core_module = "babylon60.ledger.ledger_core"
+    models_module = "babylon60.ledger.models"
+    real_import = builtins.__import__
+
+    def guarded_import(name, globals=None, locals=None, fromlist=(), level=0):  # type: ignore[no-untyped-def]
+        if name == "aiosqlite" or name.startswith("aiosqlite."):
+            raise ImportError("blocked optional dependency: aiosqlite")
+        return real_import(name, globals, locals, fromlist, level)
+
+    with _temporarily_reset_modules(package_name, core_module, models_module):
+        with patch("builtins.__import__", side_effect=guarded_import):
+            module = importlib.import_module(package_name)
+
+        assert module.__name__ == package_name
+        assert core_module not in sys.modules
+        assert models_module not in sys.modules
+        assert callable(module.__getattr__)
+
+
+def test_ledger_public_exports_materialize_on_demand() -> None:
+    package_name = "babylon60.ledger"
+    core_module = "babylon60.ledger.ledger_core"
+    models_module = "babylon60.ledger.models"
+
+    with _temporarily_reset_modules(package_name, core_module, models_module):
+        module = importlib.import_module(package_name)
+
+        assert module.LedgerEvent.__name__ == "LedgerEvent"
+        assert models_module in sys.modules
+        assert core_module not in sys.modules
+        assert module.ImmutableLedger is module.SovereignLedger
+        assert core_module in sys.modules
+
+
+def test_graph_package_import_is_lazy_without_aiosqlite() -> None:
+    package_name = "babylon60.graph"
+    backends_module = "babylon60.graph.backends"
+    engine_module = "babylon60.graph.engine"
+    models_module = "babylon60.graph.models"
+    sqlite_backend_module = "babylon60.graph.backends.sqlite"
+    real_import = builtins.__import__
+
+    def guarded_import(name, globals=None, locals=None, fromlist=(), level=0):  # type: ignore[no-untyped-def]
+        if name == "aiosqlite" or name.startswith("aiosqlite."):
+            raise ImportError("blocked optional dependency: aiosqlite")
+        return real_import(name, globals, locals, fromlist, level)
+
+    with _temporarily_reset_modules(
+        package_name,
+        backends_module,
+        engine_module,
+        models_module,
+        sqlite_backend_module,
+    ):
+        with patch("builtins.__import__", side_effect=guarded_import):
+            module = importlib.import_module(package_name)
+
+        assert module.__name__ == package_name
+        assert backends_module not in sys.modules
+        assert engine_module not in sys.modules
+        assert models_module not in sys.modules
+        assert sqlite_backend_module not in sys.modules
+        assert callable(module.__getattr__)
+
+
+def test_sync_package_import_is_lazy_without_crypto_stack() -> None:
+    package_name = "babylon60.extensions.sync"
+    common_module = "babylon60.extensions.sync.common"
+    write_module = "babylon60.extensions.sync.write"
+    real_import = builtins.__import__
+
+    def guarded_import(name, globals=None, locals=None, fromlist=(), level=0):  # type: ignore[no-untyped-def]
+        if name == "babylon60.crypto" or name.startswith("babylon60.crypto."):
+            raise ImportError("blocked optional dependency: cortex.crypto")
+        return real_import(name, globals, locals, fromlist, level)
+
+    with _temporarily_reset_modules(package_name, common_module, write_module):
+        with patch("builtins.__import__", side_effect=guarded_import):
+            module = importlib.import_module(package_name)
+
+        assert module.__name__ == package_name
+        assert common_module not in sys.modules
+        assert write_module not in sys.modules
+        assert callable(module.__getattr__)

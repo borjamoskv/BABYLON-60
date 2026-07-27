@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "QNMgay7T6zk=",
+  "success": true,
+  "projectFilePath": "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-persist/cortex_kernel_fable/cortex_kernel_fable.fsproj",
+  "expectedPackageFiles": [
+    "/Users/borjafernandezangulo/.nuget/packages/fable.core/5.1.0/fable.core.5.1.0.nupkg.sha512",
+    "/Users/borjafernandezangulo/.nuget/packages/fsharp.core/10.0.105/fsharp.core.10.0.105.nupkg.sha512"
+  ],
+  "logs": []
+}

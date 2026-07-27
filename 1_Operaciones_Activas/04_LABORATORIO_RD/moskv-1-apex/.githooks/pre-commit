@@ -1,0 +1,19 @@
+#!/bin/bash
+# MOSKV-1 APEX: Git Sentinel Hook (Pre-Commit)
+
+# Reject commits that contain "LLM" or "AI" in the message or diff if they don't declare Exergy.
+if git rev-parse --verify HEAD >/dev/null 2>&1; then
+    against=HEAD
+else
+    against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+fi
+
+# Check for Anergy in staged files
+if git diff --cached --name-only | xargs grep -i -e "apologize" -e "as an AI"; then
+    echo -e "\033[0;31m[CRITICAL] ANERGY DETECTED IN STAGED FILES.\033[0m"
+    echo "MOSKV-1 APEX does not tolerate LLM Slop. Purge the noise and commit again."
+    exit 1
+fi
+
+echo -e "\033[0;34m[MOSKV-1] Exergy Validated. Committing to C5-REAL Ledger.\033[0m"
+exit 0

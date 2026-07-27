@@ -1,0 +1,43 @@
+import { expose, ServerInstance } from '@chainlink/external-adapter-framework'
+import { PoRAdapter } from '@chainlink/external-adapter-framework/adapter/por'
+import { config } from './config'
+import {
+  address,
+  bedrockBTC,
+  coinbaseBTC,
+  multichainAddress,
+  okxAssetsAddress,
+  openedenAddress,
+  solvBTC,
+  virtune,
+  virtuneToken,
+  zeusBtcAddress,
+} from './endpoint'
+
+export const adapter = new PoRAdapter({
+  defaultEndpoint: address.name,
+  name: 'POR_ADDRESS_LIST',
+  config,
+  endpoints: [
+    address,
+    solvBTC,
+    bedrockBTC,
+    coinbaseBTC,
+    multichainAddress,
+    openedenAddress,
+    virtune,
+    virtuneToken,
+    zeusBtcAddress,
+    okxAssetsAddress,
+  ],
+  rateLimiting: {
+    tiers: {
+      default: {
+        rateLimit1s: 1,
+        note: 'shared across all endpoints',
+      },
+    },
+  },
+})
+
+export const server = (): Promise<ServerInstance | undefined> => expose(adapter)

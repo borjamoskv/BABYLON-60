@@ -1,0 +1,53 @@
+title: K2 Lending Protocol
+description: Decentralized borrowing & lending on Stellar Soroban
+remote_theme: just-the-docs/just-the-docs
+
+url: "https://shapeshifter-technologies.github.io"
+baseurl: "/k2-contracts"
+
+color_scheme: light
+
+aux_links:
+  "GitHub":
+    - "https://github.com/Shapeshifter-Technologies/k2-contracts"
+
+nav_sort: order
+
+# Only include the curated docs in the site
+exclude:
+  - "EXECUTE_LIQUIDATION_BUDGET_ANALYSIS.md"
+  - "EXECUTE_LIQUIDATION_OPTIMIZATION_AUDIT.md"
+  - "FUZZING.md"
+  - "fuzzy-testing.md"
+  - "how-to-run-fuzzy-tests.md"
+  - "MULTI_HOP_DEX_CONTEXT.md"
+  - "REDSTONE_DEPLOYMENT_GUIDE.md"
+  - "REMEDIATION_REPORT.md"
+  - "REMOVED_VIEW_FUNCTIONS.md"
+  - "ROUTER_SIZE_REDUCTION_PLAN.md"
+  - "SOROBAN_VS_EVM_CONTRACT_SIZE.md"
+  - "SWAP_QUOTE_CLIENT_MIGRATION.md"
+  - "TESTNET_LIQUIDATION_TESTING.md"
+  - "WATCHPUG_IMPLEMENTATION_PLAN.md"
+  - "WATCHPUG_REMEDIATION_PLAN.md"
+  - "EVENT_MIGRATION_DELIVERABLES.md"
+  - "pdf-style.css"
+  - "00-INDEX.md"
+  - "10-STORAGE.md"
+  - "11-ADMIN.md"
+  - "12-DEPLOYMENT.md"
+  - "13-INTEGRATION.md"
+  - "14-DEVELOPER.md"
+
+plugins:
+  - jekyll-remote-theme
+
+# Heading anchor links
+heading_anchors: true
+
+# Footer
+footer_content: "&copy; 2026 Shapeshifter Technologies. All rights reserved."
+
+# Back to top link
+back_to_top: true
+back_to_top_text: "Back to top"

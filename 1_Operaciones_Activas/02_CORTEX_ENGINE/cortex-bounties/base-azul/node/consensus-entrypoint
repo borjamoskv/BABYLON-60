@@ -1,0 +1,15 @@
+#!/bin/bash
+set -eu
+
+if [ "${USE_BASE_CONSENSUS:-false}" = "true" ]; then
+    if [ -f ./base-consensus-entrypoint ]; then
+        echo "Using Base Client"
+        exec ./base-consensus-entrypoint
+    else
+        echo "Base client is not supported for this node type"
+        exit 1
+    fi
+else
+    echo "Using OP Node"
+    exec ./op-node-entrypoint
+fi

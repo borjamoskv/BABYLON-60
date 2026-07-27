@@ -1,0 +1,14 @@
+/images/artworks/audrey-hepburn.webp
+/images/artworks/baroque-farrokh.webp
+/images/artworks/cantinflas-0.webp
+/images/artworks/el-gran-dakari.webp
+/images/artworks/geisha.webp
+/images/artworks/hq-amy.webp
+/images/artworks/hq-james.webp
+/images/artworks/hq-johnny.webp
+/images/artworks/lagrimas-de-oro.webp
+/images/artworks/love.webp
+/images/artworks/marilyn-rocks-hq-5.webp
+/images/artworks/mr-fahrenheit.webp
+/images/artworks/pajarraca-azul.webp
+/images/naroa-portrait.jpg

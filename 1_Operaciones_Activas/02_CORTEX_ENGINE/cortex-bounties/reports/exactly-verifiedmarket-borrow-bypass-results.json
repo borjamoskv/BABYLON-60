@@ -1,0 +1,18 @@
+{
+  "date": "2026-04-08",
+  "repo": "/tmp/exactly-protocol-clean",
+  "ref": "c62bf4c",
+  "command": "forge test --match-contract VerifiedMarketBypassPoC --json",
+  "raw_output_file": "/tmp/exactly-clean-bypass.json",
+  "suite": "test/VerifiedMarketBypassPoC.t.sol:VerifiedMarketBypassPoC",
+  "results": {
+    "test_poc_disallowedDelegateCanBorrowForAllowedBorrower()": {
+      "status": "Success",
+      "reason": null
+    },
+    "test_poc_disallowedDelegateCanWithdrawFromAllowedOwner()": {
+      "status": "Success",
+      "reason": null
+    }
+  }
+}

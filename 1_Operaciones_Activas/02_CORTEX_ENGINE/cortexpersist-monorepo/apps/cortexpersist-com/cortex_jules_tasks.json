@@ -1,0 +1,21 @@
+{
+  "agent": "jules",
+  "state": "executing",
+  "dopamine": 92.0,
+  "cortisol": 16.0,
+  "adrenaline": 46.0,
+  "tasks": [
+    {
+      "file": "asi-1-lab/workspace/test_file.py",
+      "line": 1,
+      "text": "Implement feature A",
+      "priority": "normal"
+    },
+    {
+      "file": "asi-1-lab/workspace/workspace_example.py",
+      "line": 1,
+      "text": "Example todo",
+      "priority": "normal"
+    }
+  ]
+}

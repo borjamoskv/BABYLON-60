@@ -1,0 +1,22 @@
+{
+  "name": "@cortex/sdk",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src/",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@noble/ed25519": "^2.1.0",
+    "@noble/hashes": "^1.4.0"
+  },
+  "devDependencies": {
+    "@cortex/tsconfig": "workspace:*",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  }
+}

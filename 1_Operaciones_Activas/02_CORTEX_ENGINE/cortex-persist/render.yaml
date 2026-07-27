@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: babylon60-api
+    env: docker
+    dockerContext: .
+    dockerfilePath: Dockerfile
+    disk:
+      name: babylon60-data
+      mountPath: /data
+      sizeGB: 10
+    envVars:
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: STRIPE_PRICE_TABLE
+        value: '{"pro": "price_1...", "team": "price_2..."}'

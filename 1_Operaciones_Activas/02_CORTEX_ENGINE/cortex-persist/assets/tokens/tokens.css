@@ -1,0 +1,41 @@
+/* [C5-REAL] Industrial Noir 2026 Design System - CSS Primitives & Semantics */
+:root {
+  /* --- Primitives --- */
+  --raw-void: #0A0A0A;
+  --raw-yinmn: #2B3BE5;
+  --raw-amber: #FF9F1C;
+  --raw-gold: #FFD700;
+  --raw-parchment: #F3F4F6;
+  --raw-mica: rgba(43, 59, 229, 0.05);
+  
+  --raw-font-primary: "Outfit", system-ui, -apple-system, sans-serif;
+  --raw-font-mono: "JetBrains Mono", SFMono-Regular, Consolas, monospace;
+  
+  --raw-radius-default: 12px;
+  --raw-radius-sharp: 4px;
+  
+  --raw-transition-default: 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  --raw-transition-fast: 200ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* --- Semantics --- */
+  --bg-primary: var(--raw-void);
+  --bg-secondary: #121212;
+  --bg-mica: var(--raw-mica);
+  
+  --text-primary: var(--raw-parchment);
+  --text-secondary: rgba(243, 244, 246, 0.6);
+  --text-muted: rgba(243, 244, 246, 0.35);
+  
+  --accent-primary: var(--raw-yinmn);
+  --accent-secondary: var(--raw-amber);
+  --accent-gold: var(--raw-gold);
+  
+  --border-color: rgba(243, 244, 246, 0.08);
+  --border-glow: rgba(43, 59, 229, 0.2);
+  
+  --font-sans: var(--raw-font-primary);
+  --font-code: var(--raw-font-mono);
+  
+  --radius: var(--raw-radius-default);
+  --transition: var(--raw-transition-default);
+}

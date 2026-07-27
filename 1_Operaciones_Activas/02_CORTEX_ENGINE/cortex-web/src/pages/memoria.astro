@@ -1,0 +1,121 @@
+---
+// @C5-REAL
+import Layout from '../layouts/Layout.astro';
+import { Database, Terminal, ShieldAlert, ArrowLeft } from 'lucide-react';
+---
+
+<Layout title="I. Memoria Criptográfica · CORTEX Foundation" description="Deep dive into cryptographically linked semantic memory systems for autonomous AI agents.">
+  <div class="fixed top-0 inset-x-0 h-[600px] bg-gradient-to-b from-[#2b3be5]/5 via-cortex-bg to-transparent pointer-events-none -z-10"></div>
+
+  <!-- Header Navigation -->
+  <header class="w-full border-b border-white/5 bg-cortex-bg/60 backdrop-blur-2xl sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="/" class="text-xs font-mono text-cortex-muted hover:text-white transition-colors uppercase tracking-widest no-underline flex items-center gap-2" id="back-home-link">
+        <ArrowLeft class="w-4 h-4" /> Back to Hub
+      </a>
+      <span class="font-mono text-xs text-cortex-accent font-bold uppercase tracking-widest">I. Memoria</span>
+    </div>
+  </header>
+
+  <main class="relative min-h-screen max-w-4xl mx-auto px-6 pt-16 pb-32 w-full">
+    
+    <article class="prose prose-invert max-w-none">
+      
+      <header class="mb-16 border-b border-white/10 pb-10">
+        <div class="flex items-center gap-4 mb-6 font-mono text-[10px] text-cortex-accent uppercase tracking-widest">
+          <span class="px-2.5 py-0.5 bg-cortex-accent/10 border border-cortex-accent/20 rounded">Research Paper</span>
+          <span>Version 4.2</span>
+          <span>Verifiable Substrate</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white uppercase mb-6 leading-tight" id="article-title">
+          Memoria Desacoplada e Integridad Semántica
+        </h1>
+        <p class="text-lg text-cortex-muted leading-relaxed font-light">
+          Análisis formal de las arquitecturas de memoria para agentes autónomos y la transición de registros locales editables (C4-SIM) a pruebas criptográficas definitivas (C5-REAL).
+        </p>
+      </header>
+
+      <blockquote class="text-lg md:text-xl font-light leading-relaxed text-white/90 border-l-4 border-cortex-accent pl-6 py-4 my-10 bg-[#2b3be5]/5 rounded-r-lg italic">
+        "Un agente sin memoria criptográfica es un agente cuyo pasado puede ser reescrito por cualquier operador con acceso de root."
+      </blockquote>
+
+      <h2 class="text-2xl font-bold text-white mt-12 mb-6">1. El Problema de la Mutabilidad Histórica</h2>
+      <p class="text-white/80 leading-relaxed mb-6">
+        En las arquitecturas tradicionales de agentes de IA (como LangGraph, CrewAI o Autogen), el historial de ejecución y la memoria de trabajo se guardan en bases de datos relacionales locales (SQLite/PostgreSQL) o almacenes de vectores (Pinecone/Chroma). Si bien esto proporciona persistencia de datos a baja latencia, expone una debilidad estructural crítica:
+      </p>
+      <ul class="space-y-3 text-white/80 mb-8 list-disc pl-6">
+        <li><strong>Falsificación Retrospectiva:</strong> Si el sistema anfitrión es comprometido, el operador de la base de datos puede alterar las decisiones pasadas del agente para encubrir fallos o desviar responsabilidades.</li>
+        <li><strong>Alucinación Silenciosa:</strong> El agente puede recuperar fragmentos de contexto que han sufrido mutaciones silenciosas (bit rot o inyecciones de código malicioso) sin percatarse de la discrepancia.</li>
+        <li><strong>Inexistencia de Firma de Origen:</strong> Los vectores recuperados no van acompañados de una firma criptográfica que demuestre que fueron generados legítimamente por el agente y no inyectados de forma externa.</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-white mt-12 mb-6">2. Arquitectura de Ledger C4-SIM</h2>
+      <p class="text-white/80 leading-relaxed mb-6">
+        Para mitigar esto, CORTEX introduce una estructura de hash inmutable inspirada en blockchains y árboles de Merkle. Cada hecho memorizado se registra como un evento con el siguiente formato:
+      </p>
+
+      <div class="bg-black/60 border border-white/10 rounded-xl p-5 font-mono text-xs text-cortex-muted mb-8 overflow-x-auto shadow-inner">
+        <pre className="text-white/95"><code>{`{
+  "event_id": "ev_092a",
+  "timestamp": "2026-06-01T18:24:00Z",
+  "actor": "agent_alpha",
+  "fact": "Target rate approved: $49/mo",
+  "prev_hash": "a4d3e8f7...",
+  "hash": "c5b2a198..."
+}`}</code></pre>
+      </div>
+
+      <p class="text-white/80 leading-relaxed mb-6">
+        El campo <code>hash</code> se calcula en base al contenido del evento y el hash anterior. Esto crea una <strong>cadena de bloques lógica</strong> (C4-SIM) que garantiza que ningún registro intermedio pueda alterarse sin invalidar la firma y todos los hashes posteriores.
+      </p>
+
+      <h2 class="text-2xl font-bold text-white mt-12 mb-6">3. La Transición a C5-REAL: Anclajes On-Chain</h2>
+      <p class="text-white/80 leading-relaxed mb-6">
+        Aunque la cadena de hashes C4-SIM es robusta localmente, carece de protección ante un operador malicioso que posea las claves privadas del agente y reescriba la historia completa recalculando todos los hashes retrospectivamente. Para alcanzar la verdad absoluta (C5-REAL), el sistema ejecuta el siguiente protocolo:
+      </p>
+
+      <div class="overflow-x-auto my-10 rounded-xl bg-cortex-cards/30 border border-white/5">
+        <table class="w-full text-left border-collapse m-0 font-mono text-xs">
+          <thead>
+            <tr class="bg-[#2b3be5]/10 border-b border-white/10 text-white">
+              <th class="p-4 uppercase tracking-wider font-bold">Fase de Consenso</th>
+              <th class="p-4 uppercase tracking-wider font-bold">Operación Técnica</th>
+              <th class="p-4 uppercase tracking-wider font-bold">Garantía de Seguridad</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/5 text-white/80">
+            <tr class="hover:bg-white/5 transition-colors">
+              <td class="p-4 font-bold text-white">1. Generación de Hojas</td>
+              <td class="p-4">Hasheo de logs individuales con SHA-256</td>
+              <td class="p-4">Inmutabilidad a nivel de registro único</td>
+            </tr>
+            <tr class="hover:bg-white/5 transition-colors">
+              <td class="p-4 font-bold text-white">2. Estructuración Merkle</td>
+              <td class="p-4">Compilación de hashes en un Árbol de Merkle</td>
+              <td class="p-4">Agrupación eficiente y pruebas O(log N)</td>
+            </tr>
+            <tr class="hover:bg-white/5 transition-colors">
+              <td class="p-4 font-bold text-white">3. Firma ML-DSA</td>
+              <td class="p-4">Firma cuántica del Merkle Root en Enclave Seguro</td>
+              <td class="p-4">Protección contra robos de claves</td>
+            </tr>
+            <tr class="hover:bg-white/5 transition-colors">
+              <td class="p-4 font-bold text-white">4. Compromiso On-Chain</td>
+              <td class="p-4">Publicación del Root firmado en L2 (Base/Arbitrum)</td>
+              <td class="p-4">Establecimiento del orden temporal definitivo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="p-5 bg-cortex-warning/5 border border-cortex-warning/20 rounded-xl flex items-start gap-4 my-10">
+        <ShieldAlert class="w-6 h-6 text-cortex-warning flex-shrink-0" />
+        <div class="text-xs text-white/95 font-mono leading-normal">
+          <strong class="text-white uppercase font-bold text-cortex-warning">ALERTA DE SEGURIDAD:</strong> Todo ledger local sin exportaciones de puntos de verificación es considerado C4-SIM. Para habilitar las auditorías válidas en juicios de responsabilidad corporativa, el módulo de persistencia debe configurarse con anclaje automático cada 1.000 bloques.
+        </div>
+      </div>
+
+    </article>
+
+  </main>
+</Layout>

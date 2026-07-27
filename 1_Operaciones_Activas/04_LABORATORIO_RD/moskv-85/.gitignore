@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.DS_Store
+*.log
+moskv85_consensus.db*
+stress_consensus.db*

@@ -1,0 +1,59 @@
+[package]
+name = "base-consensus-rpc"
+description = "RPC Types and Client for Base"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+homepage.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# Workspace
+base-consensus-gossip.workspace = true
+base-consensus-engine.workspace = true
+base-consensus-safedb.workspace = true
+base-protocol = { workspace = true, features = ["serde", "std"] }
+base-common-genesis = { workspace = true, features = ["serde", "std"] }
+
+# Base Alloy
+base-common-rpc-types-engine = { workspace = true, features = ["serde", "std"] }
+
+# Alloy
+alloy-eips = { workspace = true, features = ["serde", "std"] }
+alloy-primitives = { workspace = true, features = ["map", "rlp", "serde", "std"] }
+
+# Misc
+ipnet.workspace = true
+backon.workspace = true
+libp2p.workspace = true
+async-trait.workspace = true
+serde = { workspace = true, features = ["std"] }
+tokio = { workspace = true, features = ["time"] }
+tracing = { workspace = true, features = ["std"] }
+thiserror = { workspace = true, features = ["std"] }
+
+# RPC
+getrandom = { workspace = true, features = ["wasm_js"] }
+jsonrpsee = { workspace = true, features = ["macros", "server"] }
+
+[dev-dependencies]
+rstest.workspace = true
+serde_json = { workspace = true, features = ["std"] }
+
+[features]
+default = []
+reqwest = [ "client" ]
+client = [
+	"jsonrpsee/async-client",
+	"jsonrpsee/client",
+	"jsonrpsee/http-client",
+]
+metrics = [
+	"base-consensus-engine/metrics",
+	"base-consensus-gossip/metrics",
+	"libp2p/metrics",
+]

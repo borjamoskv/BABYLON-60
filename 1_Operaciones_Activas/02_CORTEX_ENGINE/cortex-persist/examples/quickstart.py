@@ -1,0 +1,40 @@
+"""CORTEX Quickstart - Store, Search, Ask in 10 lines.
+
+import logging
+Usage:
+    pip install cortex-persist
+    export CORTEX_API_KEY=your_key
+    python quickstart.py
+"""
+
+from cortex import CortexClient
+
+client = CortexClient(base_url="http://localhost:8000")  # pyright: ignore[reportCallIssue]
+
+# 1. Store a fact
+client.store(
+    content="CORTEX is a Sovereign Memory Engine for Enterprise AI Swarms.",
+    fact_type="knowledge",
+    project="demo",
+)
+logging.getLogger(__name__).info("✅ Fact stored")
+
+# 2. Search by semantic similarity
+results = client.search("What is CORTEX?", top_k=3)
+for r in results:
+    logging.getLogger(__name__).info(f"  [#{r.fact_id}] (score: {r.score:.3f}) {r.content[:80]}")
+
+# 3. Ask with RAG (requires LLM provider configured)
+try:
+    import httpx
+
+    resp = httpx.post(
+        "http://localhost:8000/v1/ask",
+        json={"query": "What is CORTEX?", "k": 5},
+        headers={"X-API-Key": "your_key"},
+    )
+    logging.getLogger(__name__).info(f"\n🧠 Answer: {resp.json()['answer']}")
+except Exception as e:  # noqa: BLE001
+    logging.getLogger(__name__).info(f"\n⚠️ RAG requires LLM provider: {e}")
+
+logging.getLogger(__name__).info("\n🎉 CORTEX is operational!")

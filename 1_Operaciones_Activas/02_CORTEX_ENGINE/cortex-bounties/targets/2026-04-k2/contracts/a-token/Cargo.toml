@@ -1,0 +1,21 @@
+[package]
+name = "k2-a-token"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+soroban-sdk = { workspace = true }
+soroban-token-sdk = { workspace = true }
+k2-shared = { path = "../shared" }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }
+
+[features]
+testutils = ["soroban-sdk/testutils"]
+
+[profile.release]
+overflow-checks = true

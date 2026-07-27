@@ -1,0 +1,801 @@
+use {
+    crate::blockstore::Blockstore,
+    itertools::Itertools,
+    log::*,
+    solana_clock::{Epoch, Slot},
+    solana_epoch_schedule::EpochSchedule,
+    solana_leader_schedule::{FixedSchedule, LeaderSchedule, SlotLeader},
+    solana_pubkey::Pubkey,
+    solana_runtime::{bank::Bank, leader_schedule_utils},
+    std::{
+        collections::{HashMap, VecDeque, hash_map::Entry},
+        sync::{
+            Arc, RwLock,
+            atomic::{AtomicU64, Ordering},
+        },
+    },
+};
+
+type CachedSchedules = (HashMap<Epoch, Arc<LeaderSchedule>>, VecDeque<u64>);
+const MAX_SCHEDULES: usize = 10;
+
+// FIREDANCER: Some constants for the number and size of the leader
+// schedules we send across the IPC boundary.
+const FIREDANCER_STAKE_WEIGHT_CNT: usize = 108_000;
+const FIREDANCER_MAX_COMPRESSED_STAKE_WEIGHTS: usize = FIREDANCER_STAKE_WEIGHT_CNT * 2 + 1;
+const FIREDANCER_MAX_ID_WEIGHTS: usize = 40_200;
+const FIREDANCER_PACKET_HEADER_SZ: usize = 48;
+const FIREDANCER_VOTE_PACKET_RECORD_SZ: usize = 72;
+const FIREDANCER_ID_WEIGHT_RECORD_SZ: usize = 40;
+const FIREDANCER_PACKET_MAX_SZ: usize = FIREDANCER_PACKET_HEADER_SZ
+    + FIREDANCER_MAX_COMPRESSED_STAKE_WEIGHTS * FIREDANCER_VOTE_PACKET_RECORD_SZ
+    + FIREDANCER_MAX_ID_WEIGHTS * FIREDANCER_ID_WEIGHT_RECORD_SZ;
+
+struct CacheCapacity(usize);
+impl Default for CacheCapacity {
+    fn default() -> Self {
+        CacheCapacity(MAX_SCHEDULES)
+    }
+}
+
+#[derive(Default)]
+pub struct LeaderScheduleCache {
+    // Map from an epoch to a leader schedule for that epoch
+    pub cached_schedules: RwLock<CachedSchedules>,
+    epoch_schedule: EpochSchedule,
+    max_epoch: AtomicU64,
+    max_schedules: CacheCapacity,
+    fixed_schedule: Option<Arc<FixedSchedule>>,
+    // FIREDANCER: Lock for sharing access to tango channel sending
+    // leader schedule updates to interested tiles.
+    firedancer_rwlock: Option<RwLock<()>>,
+}
+
+impl LeaderScheduleCache {
+    pub fn new_from_bank(bank: &Bank) -> Self {
+        // FIREDANCER: No need to send leader schedule updates from this path
+        Self::new(bank.epoch_schedule().clone(), bank, false)
+    }
+
+    // FIREDANCER: Whether we need to send leader schedule updates to Firedancer
+    pub fn new(epoch_schedule: EpochSchedule, root_bank: &Bank, firedancer_send: bool) -> Self {
+        // FIREDANCER: Whether we need to send leader schedule updates to Firedancer
+        let firedancer_rwlock = if firedancer_send {
+            Some(RwLock::new(()))
+        } else {
+            None
+        };
+        let max_epoch = epoch_schedule.get_leader_schedule_epoch(root_bank.slot());
+        let cache = Self {
+            cached_schedules: RwLock::new((HashMap::new(), VecDeque::new())),
+            epoch_schedule,
+            max_epoch: AtomicU64::new(max_epoch),
+            max_schedules: CacheCapacity::default(),
+            fixed_schedule: None,
+            // FIREDANCER: Leader schedule will need to be communicated from this path.
+            firedancer_rwlock,
+        };
+
+        // Calculate the schedule for all epochs in epoch stakes
+        // FIREDANCER: Send the stake weights for the current and next epoch
+        // so that Firedancer can compute its own leader schedule.
+        let min_epoch = root_bank
+            .epoch_stakes_map()
+            .keys()
+            .min()
+            .copied()
+            .unwrap_or_default();
+        for epoch in min_epoch..=max_epoch {
+            cache.compute_leader_schedule(epoch, root_bank, epoch >= max_epoch - 1);
+        }
+        cache
+    }
+
+    pub fn max_schedules(&self) -> usize {
+        self.max_schedules.0
+    }
+
+    pub fn set_root(&self, root_bank: &Bank) {
+        let new_max_epoch = self
+            .epoch_schedule
+            .get_leader_schedule_epoch(root_bank.slot());
+        let old_max_epoch = self.max_epoch.swap(new_max_epoch, Ordering::AcqRel);
+        assert!(new_max_epoch >= old_max_epoch);
+
+        // Calculate the epoch as soon as it's rooted
+        if new_max_epoch > old_max_epoch {
+            // FIREDANCER: Send this epoch schedule to Firedancer, it's the result of a
+            // new rooted bank at epoch boundary.
+            self.compute_leader_schedule(new_max_epoch, root_bank, true);
+        }
+    }
+
+    pub fn slot_leader_at(&self, slot: Slot, bank: Option<&Bank>) -> Option<SlotLeader> {
+        if let Some(bank) = bank {
+            self.slot_leader_at_else_compute(slot, bank)
+        } else if self.epoch_schedule.slots_per_epoch == 0 {
+            None
+        } else {
+            self.slot_leader_at_no_compute(slot)
+        }
+    }
+
+    /// Returns the (next slot, last slot) consecutive range of slots after
+    /// the given current_slot that the given node will be leader.
+    pub fn next_leader_slot(
+        &self,
+        pubkey: &Pubkey,
+        current_slot: Slot,
+        bank: &Bank,
+        blockstore: Option<&Blockstore>,
+        max_slot_range: u64,
+    ) -> Option<(Slot, Slot)> {
+        let (epoch, start_index) = bank.get_epoch_and_slot_index(current_slot + 1);
+        let max_epoch = self.max_epoch.load(Ordering::Acquire);
+        if epoch > max_epoch {
+            debug!(
+                "Requested next leader in slot: {} of unconfirmed epoch: {}",
+                current_slot + 1,
+                epoch
+            );
+            return None;
+        }
+        // Collect leader schedules first so they stay alive for the iterator chain
+        let schedules: Vec<_> = (epoch..=max_epoch)
+            .map(|epoch| self.get_leader_schedule_else_compute(epoch, bank))
+            .while_some()
+            .zip(epoch..)
+            .collect();
+
+        // Slots after current_slot where pubkey is the leader.
+        let mut schedule = schedules
+            .iter()
+            .flat_map(|(leader_schedule, k)| {
+                let offset = if *k == epoch { start_index as usize } else { 0 };
+                let num_slots = bank.get_slots_in_epoch(*k) as usize;
+                let first_slot = bank.epoch_schedule().get_first_slot_in_epoch(*k);
+                leader_schedule
+                    .get_leader_upcoming_slots(pubkey, offset)
+                    .take_while(move |i| *i < num_slots)
+                    .map(move |i| i as Slot + first_slot)
+            })
+            .skip_while(|slot| {
+                // Skip slots we already have shreds for
+                blockstore
+                    .map(|bs| bs.has_existing_shreds_for_slot(*slot))
+                    .unwrap_or(false)
+            });
+        let first_slot = schedule.next()?;
+        let max_slot = first_slot.saturating_add(max_slot_range);
+        let last_slot = schedule
+            .take_while(|slot| *slot < max_slot)
+            .zip(first_slot + 1..)
+            .take_while(|(a, b)| a == b)
+            .map(|(s, _)| s)
+            .last()
+            .unwrap_or(first_slot);
+        Some((first_slot, last_slot))
+    }
+
+    pub fn set_fixed_leader_schedule(&mut self, fixed_schedule: Option<FixedSchedule>) {
+        self.fixed_schedule = fixed_schedule.map(Arc::new);
+    }
+
+    fn slot_leader_at_no_compute(&self, slot: Slot) -> Option<SlotLeader> {
+        let (epoch, slot_index) = self.epoch_schedule.get_epoch_and_slot_index(slot);
+        if let Some(ref fixed_schedule) = self.fixed_schedule {
+            return Some(fixed_schedule.leader_schedule[slot_index]);
+        }
+        self.cached_schedules
+            .read()
+            .unwrap()
+            .0
+            .get(&epoch)
+            .map(|schedule| schedule[slot_index])
+    }
+
+    fn slot_leader_at_else_compute(&self, slot: Slot, bank: &Bank) -> Option<SlotLeader> {
+        let cache_result = self.slot_leader_at_no_compute(slot);
+        // Forbid asking for slots in an unconfirmed epoch
+        let bank_epoch = self.epoch_schedule.get_epoch_and_slot_index(slot).0;
+        if bank_epoch > self.max_epoch.load(Ordering::Acquire) {
+            debug!("Requested leader in slot: {slot} of unconfirmed epoch: {bank_epoch}");
+            return None;
+        }
+        if cache_result.is_some() {
+            cache_result
+        } else {
+            let (epoch, slot_index) = bank.get_epoch_and_slot_index(slot);
+            // FIREDANCER: Don't send this epoch schedule to Firedancer, it's not the result of a
+            // new rooted bank at epoch boundary.
+            self.compute_leader_schedule(epoch, bank, false)
+                .map(|leader_schedule| leader_schedule[slot_index])
+        }
+    }
+
+    pub fn get_epoch_leader_schedule(&self, epoch: Epoch) -> Option<Arc<LeaderSchedule>> {
+        self.cached_schedules.read().unwrap().0.get(&epoch).cloned()
+    }
+
+    fn get_leader_schedule_else_compute(
+        &self,
+        epoch: Epoch,
+        bank: &Bank,
+    ) -> Option<Arc<LeaderSchedule>> {
+        if let Some(ref fixed_schedule) = self.fixed_schedule {
+            return Some(fixed_schedule.leader_schedule.clone());
+        }
+        let epoch_schedule = self.get_epoch_leader_schedule(epoch);
+        if epoch_schedule.is_some() {
+            epoch_schedule
+        } else {
+            // FIREDANCER: Don't send this epoch schedule to Firedancer, it's not the result of a
+            // new rooted bank at epoch boundary.
+            self.compute_leader_schedule(epoch, bank, false)
+        }
+    }
+
+    /// FIREDANCER: Add rooted argument, we only send computed leader schedules to Firedancer for
+    /// banks that are rooted.
+    fn compute_leader_schedule(
+        &self,
+        epoch: Epoch,
+        bank: &Bank,
+        rooted: bool,
+    ) -> Option<Arc<LeaderSchedule>> {
+        let leader_schedule = leader_schedule_utils::leader_schedule(epoch, bank);
+        leader_schedule.map(|leader_schedule| {
+            let leader_schedule = Arc::new(leader_schedule);
+            let (ref mut cached_schedules, ref mut order) = *self.cached_schedules.write().unwrap();
+            // Check to see if schedule exists in case somebody already inserted in the time we were
+            // waiting for the lock
+            let entry = cached_schedules.entry(epoch);
+            if let Entry::Vacant(v) = entry {
+                v.insert(leader_schedule.clone());
+                order.push_back(epoch);
+                Self::retain_latest(cached_schedules, order, self.max_schedules());
+            }
+            // FIREDANCER: New leader schedule has been computed, ensure that
+            // we communicate the stake weights used to generate it so that
+            // Firedancer can generate the same leader schedule.  For example,
+            // the pack tile needs this to know when it should start packing
+            // blocks. This call will block until it can send the update.
+            if rooted {
+                unsafe {
+                    Self::firedancer_send_leader_schedule(epoch, bank, leader_schedule.clone(), &self.firedancer_rwlock);
+                }
+            }
+            leader_schedule
+        })
+    }
+
+    /// FIREDANCER: Send compressed stake weights over the IPC boundary
+    /// to Firedancer.  Adjacent non-leader entries are merged into
+    /// aggregate dummy records so the message is bounded by
+    /// FIREDANCER_MAX_COMPRESSED_STAKE_WEIGHTS instead of the full
+    /// vote account set.
+    unsafe fn firedancer_send_leader_schedule(
+      epoch: Epoch,
+      bank: &Bank,
+      leader_schedule: Arc<LeaderSchedule>,
+      send_firedancer: &Option<RwLock<()>>,
+  ) {
+
+      if let Some(lock) = send_firedancer.as_ref() {
+          let _guard = lock.write().unwrap();
+
+          let (first_slot, slot_cnt) = (
+              bank.epoch_schedule().get_first_slot_in_epoch(epoch),
+              bank.epoch_schedule().get_slots_in_epoch(epoch),
+          );
+          let mut stakes: Vec<(Pubkey, Pubkey, u64)> = bank
+              .epoch_vote_accounts(epoch)
+              .map(|x| {
+                  x.iter().filter(|&(_, (stake, _))| *stake > 0).map(
+                      |(vote_pubkey, (stake, vote_account))| {
+                          (*vote_pubkey, *vote_account.node_pubkey(), *stake)
+                      },
+                  )
+              })
+              .unwrap()
+              .collect::<Vec<_>>();
+          stakes.sort_unstable_by(|(l_pubkey, _, l_stake), (r_pubkey, _, r_stake)| {
+              if r_stake == l_stake {
+                  r_pubkey.cmp(l_pubkey)
+              } else {
+                  r_stake.cmp(l_stake)
+              }
+          });
+
+
+          let leader_vote_keys: std::collections::HashSet<Pubkey> = leader_schedule
+              .get_slot_leaders()
+              .iter()
+              .map(|sl| sl.vote_address)
+              .collect();
+
+          // FD_DUMMY_ACCOUNT sentinel: [0x00 * 31, 0xFF]
+          let dummy_pubkey = {
+              let mut bytes = [0u8; 32];
+              bytes[31] = 0xFF;
+              Pubkey::from(bytes)
+          };
+
+          let mut memory: Box<[u8; FIREDANCER_PACKET_MAX_SZ]> = vec![0u8; FIREDANCER_PACKET_MAX_SZ].try_into().unwrap();
+
+          // Compress stake weights: keep leaders as-is, merge
+          // consecutive non-leaders into single dummy entries.
+          let mut idx = 0usize;
+
+          let needs_compression = stakes.len() > FIREDANCER_MAX_COMPRESSED_STAKE_WEIGHTS;
+
+          for i in 0..stakes.len() {
+              let (vote_pubkey, node_pubkey, stake) = stakes[i];
+              let is_leader = leader_vote_keys.contains(&vote_pubkey);
+
+              if !needs_compression || is_leader {
+                  let offset = FIREDANCER_PACKET_HEADER_SZ + idx * FIREDANCER_VOTE_PACKET_RECORD_SZ;
+                  memory[offset..offset + 32].copy_from_slice(&vote_pubkey.to_bytes());
+                  memory[offset + 32..offset + 64].copy_from_slice(&node_pubkey.to_bytes());
+                  memory[offset + 64..offset + 72].copy_from_slice(&stake.to_le_bytes());
+                  idx += 1;
+              } else if idx != 0 && i > 0 && !leader_vote_keys.contains(&stakes[i - 1].0) {
+                  let prev_offset = FIREDANCER_PACKET_HEADER_SZ + (idx - 1) * FIREDANCER_VOTE_PACKET_RECORD_SZ;
+                  let prev_stake = u64::from_le_bytes(memory[prev_offset + 64..prev_offset + 72].try_into().unwrap());
+                  memory[prev_offset + 64..prev_offset + 72].copy_from_slice(&(prev_stake + stake).to_le_bytes());
+              } else {
+                  let offset = FIREDANCER_PACKET_HEADER_SZ + idx * FIREDANCER_VOTE_PACKET_RECORD_SZ;
+                  memory[offset..offset + 32].copy_from_slice(&dummy_pubkey.to_bytes());
+                  memory[offset + 32..offset + 64].copy_from_slice(&dummy_pubkey.to_bytes());
+                  memory[offset + 64..offset + 72].copy_from_slice(&stake.to_le_bytes());
+                  idx += 1;
+              }
+          }
+
+          // Compute id weights for Turbine tree: aggregate stake
+          // by node identity (handles 1:N vote-to-id mapping),
+          // sort by (stake desc, id desc), truncate to 40,200.
+          let mut id_stake_map: HashMap<Pubkey, u64> = HashMap::new();
+          for &(_, node_pubkey, stake) in stakes.iter() {
+              *id_stake_map.entry(node_pubkey).or_insert(0) += stake;
+          }
+          let mut id_weights: Vec<(Pubkey, u64)> = id_stake_map.into_iter().collect();
+          id_weights.sort_unstable_by(|(l_id, l_stake), (r_id, r_stake)| {
+              if r_stake == l_stake {
+                  r_id.cmp(l_id)
+              } else {
+                  r_stake.cmp(l_stake)
+              }
+          });
+          let excluded_id_stake: u64 = id_weights
+              .iter()
+              .skip(FIREDANCER_MAX_ID_WEIGHTS)
+              .map(|&(_, stake)| stake)
+              .sum();
+          id_weights.truncate(FIREDANCER_MAX_ID_WEIGHTS);
+
+          // Serialize id weight records (32B id + 8B stake) after
+          // the compressed vote weights.
+          let id_weights_base = FIREDANCER_PACKET_HEADER_SZ + idx * FIREDANCER_VOTE_PACKET_RECORD_SZ;
+          for (j, (id, stake)) in id_weights.iter().enumerate() {
+              let offset = id_weights_base + j * FIREDANCER_ID_WEIGHT_RECORD_SZ;
+              memory[offset..offset + 32].copy_from_slice(&id.to_bytes());
+              memory[offset + 32..offset + 40].copy_from_slice(&stake.to_le_bytes());
+          }
+
+          // Header: matches fd_stake_weight_msg_t layout (6 fields, 48 bytes)
+          memory[0..8].copy_from_slice(&epoch.to_le_bytes());
+          memory[8..16].copy_from_slice(&(idx as u64).to_le_bytes());              // staked_vote_cnt
+          memory[16..24].copy_from_slice(&(id_weights.len() as u64).to_le_bytes()); // staked_id_cnt
+          memory[24..32].copy_from_slice(&first_slot.to_le_bytes());
+          memory[32..40].copy_from_slice(&slot_cnt.to_le_bytes());
+          memory[40..48].copy_from_slice(&excluded_id_stake.to_le_bytes());        // excluded_stake
+
+          let msg_len = id_weights_base + id_weights.len() * FIREDANCER_ID_WEIGHT_RECORD_SZ;
+
+          unsafe extern "C" {
+              fn fd_ext_poh_publish_leader_schedule(data: *const u8, len: u64);
+          }
+          unsafe { fd_ext_poh_publish_leader_schedule(memory.as_ptr(), msg_len as u64); }
+      }
+  }
+
+    fn retain_latest(
+        schedules: &mut HashMap<Epoch, Arc<LeaderSchedule>>,
+        order: &mut VecDeque<u64>,
+        max_schedules: usize,
+    ) {
+        while schedules.len() > max_schedules {
+            let first = order.pop_front().unwrap();
+            schedules.remove(&first);
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use {
+        super::*,
+        crate::{
+            blockstore::make_slot_entries,
+            genesis_utils::{
+                GenesisConfigInfo, bootstrap_validator_stake_lamports, create_genesis_config,
+                create_genesis_config_with_leader,
+            },
+            staking_utils::tests::setup_vote_and_stake_accounts,
+        },
+        crossbeam_channel::unbounded,
+        solana_clock::{DEFAULT_SLOTS_PER_EPOCH, NUM_CONSECUTIVE_LEADER_SLOTS},
+        solana_epoch_schedule::{
+            DEFAULT_LEADER_SCHEDULE_SLOT_OFFSET, EpochSchedule, MINIMUM_SLOTS_PER_EPOCH,
+        },
+        solana_keypair::Keypair,
+        solana_leader_schedule::{LeaderSchedule, SlotLeader},
+        solana_runtime::stake_utils,
+        solana_signer::Signer,
+        std::{sync::Arc, thread::Builder},
+    };
+
+    #[test]
+    fn test_new_cache() {
+        let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(2);
+        let bank = Bank::new_for_tests(&genesis_config);
+        let cache = LeaderScheduleCache::new_from_bank(&bank);
+        assert_eq!(bank.slot(), 0);
+        assert_eq!(cache.max_schedules(), MAX_SCHEDULES);
+
+        // Epoch schedule for all epochs in the range:
+        // [0, leader_schedule_epoch(bank.slot())] should
+        // be calculated by constructor
+        let epoch_schedule = bank.epoch_schedule();
+        let leader_schedule_epoch = bank.get_leader_schedule_epoch(bank.slot());
+        for epoch in 0..=leader_schedule_epoch {
+            let first_slot_in_leader_schedule_epoch = epoch_schedule.get_first_slot_in_epoch(epoch);
+            let last_slot_in_leader_schedule_epoch = epoch_schedule.get_last_slot_in_epoch(epoch);
+            assert!(
+                cache
+                    .slot_leader_at(first_slot_in_leader_schedule_epoch, None)
+                    .is_some()
+            );
+            assert!(
+                cache
+                    .slot_leader_at(last_slot_in_leader_schedule_epoch, None)
+                    .is_some()
+            );
+            if epoch == leader_schedule_epoch {
+                assert!(
+                    cache
+                        .slot_leader_at(last_slot_in_leader_schedule_epoch + 1, None)
+                        .is_none()
+                );
+            }
+        }
+
+        let (cached_schedules, order) = &*cache.cached_schedules.read().unwrap();
+
+        // Should be a schedule for every epoch just checked
+        assert_eq!(cached_schedules.len() as u64, leader_schedule_epoch + 1);
+
+        // Order should contain every epoch in order of lowest to highest
+        assert_eq!(order, &VecDeque::from_iter(0..=leader_schedule_epoch));
+    }
+
+    #[test]
+    fn test_retain_latest() {
+        let mut cached_schedules: HashMap<Epoch, Arc<LeaderSchedule>> = HashMap::new();
+        let mut order = VecDeque::new();
+        for i in 0..=MAX_SCHEDULES {
+            cached_schedules.insert(i as u64, Arc::new(LeaderSchedule::default()));
+            order.push_back(i as u64);
+        }
+        LeaderScheduleCache::retain_latest(&mut cached_schedules, &mut order, MAX_SCHEDULES);
+        assert_eq!(cached_schedules.len(), MAX_SCHEDULES);
+        let mut keys: Vec<_> = cached_schedules.keys().cloned().collect();
+        keys.sort_unstable();
+        let expected: Vec<_> = (1..=MAX_SCHEDULES as u64).collect();
+        let expected_order: VecDeque<_> = (1..=MAX_SCHEDULES as u64).collect();
+        assert_eq!(expected, keys);
+        assert_eq!(expected_order, order);
+    }
+
+    #[test]
+    fn test_thread_race_leader_schedule_cache() {
+        let num_runs = 10;
+        for _ in 0..num_runs {
+            run_thread_race()
+        }
+    }
+
+    fn run_thread_race() {
+        let slots_per_epoch = MINIMUM_SLOTS_PER_EPOCH;
+        let epoch_schedule = EpochSchedule::custom(slots_per_epoch, slots_per_epoch / 2, true);
+        let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(2);
+        let bank = Arc::new(Bank::new_for_tests(&genesis_config));
+        let cache = Arc::new(LeaderScheduleCache::new(epoch_schedule, &bank));
+
+        let num_threads = 10;
+        let (threads, senders): (Vec<_>, Vec<_>) = (0..num_threads)
+            .map(|_| {
+                let cache = cache.clone();
+                let bank = bank.clone();
+                let (sender, receiver) = unbounded();
+                (
+                    Builder::new()
+                        .name("test_thread_race_leader_schedule_cache".to_string())
+                        .spawn(move || {
+                            let _ = receiver.recv();
+                            cache.slot_leader_at(bank.slot(), Some(&bank));
+                        })
+                        .unwrap(),
+                    sender,
+                )
+            })
+            .unzip();
+
+        for sender in &senders {
+            sender.send(true).unwrap();
+        }
+
+        for t in threads.into_iter() {
+            t.join().unwrap();
+        }
+
+        let (ref cached_schedules, ref order) = *cache.cached_schedules.read().unwrap();
+        assert_eq!(cached_schedules.len(), 1);
+        assert_eq!(order.len(), 1);
+    }
+
+    #[test]
+    fn test_next_leader_slot() {
+        let pubkey = solana_pubkey::new_rand();
+        let GenesisConfigInfo {
+            mut genesis_config,
+            voting_keypair,
+            ..
+        } = create_genesis_config_with_leader(42, &pubkey, bootstrap_validator_stake_lamports());
+        let slot_leader = SlotLeader {
+            id: pubkey,
+            vote_address: voting_keypair.pubkey(),
+        };
+        genesis_config.epoch_schedule = EpochSchedule::custom(
+            DEFAULT_SLOTS_PER_EPOCH,
+            DEFAULT_LEADER_SCHEDULE_SLOT_OFFSET,
+            false,
+        );
+
+        let bank = Bank::new_for_tests(&genesis_config);
+        let cache = Arc::new(LeaderScheduleCache::new_from_bank(&bank));
+
+        assert_eq!(
+            cache.slot_leader_at(bank.slot(), Some(&bank)).unwrap(),
+            slot_leader
+        );
+        assert_eq!(
+            cache.next_leader_slot(&pubkey, 0, &bank, None, u64::MAX),
+            Some((1, 863_999))
+        );
+        assert_eq!(
+            cache.next_leader_slot(&pubkey, 1, &bank, None, u64::MAX),
+            Some((2, 863_999))
+        );
+        assert_eq!(
+            cache.next_leader_slot(
+                &pubkey,
+                2 * genesis_config.epoch_schedule.slots_per_epoch - 1, // no schedule generated for epoch 2
+                &bank,
+                None,
+                u64::MAX
+            ),
+            None
+        );
+
+        assert_eq!(
+            cache.next_leader_slot(
+                &solana_pubkey::new_rand(), // not in leader_schedule
+                0,
+                &bank,
+                None,
+                u64::MAX
+            ),
+            None
+        );
+    }
+
+    #[test]
+    fn test_next_leader_slot_blockstore() {
+        let pubkey = solana_pubkey::new_rand();
+        let GenesisConfigInfo {
+            mut genesis_config,
+            voting_keypair,
+            ..
+        } = create_genesis_config_with_leader(42, &pubkey, bootstrap_validator_stake_lamports());
+        let slot_leader = SlotLeader {
+            id: pubkey,
+            vote_address: voting_keypair.pubkey(),
+        };
+        genesis_config.epoch_schedule.warmup = false;
+
+        let bank = Bank::new_for_tests(&genesis_config);
+        let cache = Arc::new(LeaderScheduleCache::new_from_bank(&bank));
+        let ledger_path = get_tmp_ledger_path_auto_delete!();
+
+        let blockstore = Blockstore::open(ledger_path.path())
+            .expect("Expected to be able to open database ledger");
+
+        assert_eq!(
+            cache.slot_leader_at(bank.slot(), Some(&bank)).unwrap(),
+            slot_leader,
+        );
+        // Check that the next leader slot after 0 is slot 1
+        assert_eq!(
+            cache
+                .next_leader_slot(&pubkey, 0, &bank, Some(&blockstore), u64::MAX)
+                .unwrap()
+                .0,
+            1
+        );
+
+        // Write a shred into slot 2 that chains to slot 1,
+        // but slot 1 is empty so should not be skipped
+        let (shreds, _) = make_slot_entries(2, 1, 1);
+        blockstore.insert_shreds(shreds, None, false).unwrap();
+        assert_eq!(
+            cache
+                .next_leader_slot(&pubkey, 0, &bank, Some(&blockstore), u64::MAX)
+                .unwrap()
+                .0,
+            1
+        );
+
+        // Write a shred into slot 1
+        let (shreds, _) = make_slot_entries(1, 0, 1);
+
+        // Check that slot 1 and 2 are skipped
+        blockstore.insert_shreds(shreds, None, false).unwrap();
+        assert_eq!(
+            cache
+                .next_leader_slot(&pubkey, 0, &bank, Some(&blockstore), u64::MAX)
+                .unwrap()
+                .0,
+            3
+        );
+
+        // Integrity checks
+        assert_eq!(
+            cache.next_leader_slot(
+                &pubkey,
+                2 * genesis_config.epoch_schedule.slots_per_epoch - 1, // no schedule generated for epoch 2
+                &bank,
+                Some(&blockstore),
+                u64::MAX
+            ),
+            None
+        );
+
+        assert_eq!(
+            cache.next_leader_slot(
+                &solana_pubkey::new_rand(), // not in leader_schedule
+                0,
+                &bank,
+                Some(&blockstore),
+                u64::MAX
+            ),
+            None
+        );
+    }
+
+    #[test]
+    fn test_next_leader_slot_next_epoch() {
+        let GenesisConfigInfo {
+            mut genesis_config,
+            mint_keypair,
+            ..
+        } = create_genesis_config(10_000 * bootstrap_validator_stake_lamports());
+        genesis_config.epoch_schedule.warmup = false;
+
+        let (bank, bank_forks) = Bank::new_with_bank_forks_for_tests(&genesis_config);
+        let cache = Arc::new(LeaderScheduleCache::new_from_bank(&bank));
+
+        // Create new vote account
+        let validator_identity = Keypair::new();
+        let vote_account = Keypair::new();
+        setup_vote_and_stake_accounts(
+            &bank,
+            &mint_keypair,
+            &vote_account,
+            &validator_identity,
+            bootstrap_validator_stake_lamports()
+                + stake_utils::get_minimum_delegation(
+                    bank.feature_set
+                        .is_active(&agave_feature_set::upgrade_bpf_stake_program_to_v5::id()),
+                ),
+        );
+        let node_pubkey = validator_identity.pubkey();
+
+        // Have to wait until the epoch at after the epoch stakes generated at genesis
+        // for the new votes to take effect.
+        let mut target_slot = 1;
+        let epoch = bank.get_leader_schedule_epoch(0);
+        while bank.get_leader_schedule_epoch(target_slot) == epoch {
+            target_slot += 1;
+        }
+
+        let bank = bank_forks
+            .write()
+            .unwrap()
+            .insert(Bank::new_from_parent(bank, &Pubkey::default(), target_slot))
+            .clone_without_scheduler();
+        let mut expected_slot = 0;
+        let epoch = bank.get_leader_schedule_epoch(target_slot);
+        for i in 0..epoch {
+            expected_slot += bank.get_slots_in_epoch(i);
+        }
+
+        let schedule = cache.compute_leader_schedule(epoch, &bank).unwrap();
+        let mut index = 0;
+        while schedule[index].id != node_pubkey {
+            index += 1;
+            assert_ne!(index, genesis_config.epoch_schedule.slots_per_epoch);
+        }
+        expected_slot += index;
+
+        // If the max root isn't set, we'll get None
+        assert!(
+            cache
+                .next_leader_slot(&node_pubkey, 0, &bank, None, u64::MAX)
+                .is_none()
+        );
+
+        cache.set_root(&bank);
+        let res = cache
+            .next_leader_slot(&node_pubkey, 0, &bank, None, u64::MAX)
+            .unwrap();
+
+        assert_eq!(res.0, expected_slot);
+        assert!(res.1 >= expected_slot + NUM_CONSECUTIVE_LEADER_SLOTS - 1);
+
+        let res = cache
+            .next_leader_slot(
+                &node_pubkey,
+                0,
+                &bank,
+                None,
+                NUM_CONSECUTIVE_LEADER_SLOTS - 1,
+            )
+            .unwrap();
+
+        assert_eq!(res.0, expected_slot);
+        assert_eq!(res.1, expected_slot + NUM_CONSECUTIVE_LEADER_SLOTS - 2);
+    }
+
+    #[test]
+    fn test_schedule_for_unconfirmed_epoch() {
+        let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(2);
+        let bank = Arc::new(Bank::new_for_tests(&genesis_config));
+        let cache = LeaderScheduleCache::new_from_bank(&bank);
+
+        assert_eq!(cache.max_epoch.load(Ordering::Acquire), 1);
+
+        // Asking for the leader for the last slot in epoch 1 is ok b/c
+        // epoch 1 is confirmed
+        assert_eq!(bank.get_epoch_and_slot_index(95).0, 1);
+        assert!(cache.slot_leader_at(95, Some(&bank)).is_some());
+
+        // Asking for the lader for the first slot in epoch 2 is not ok
+        // b/c epoch 2 is unconfirmed
+        assert_eq!(bank.get_epoch_and_slot_index(96).0, 2);
+        assert!(cache.slot_leader_at(96, Some(&bank)).is_none());
+
+        let bank2 = Bank::new_from_parent(bank, &solana_pubkey::new_rand(), 95);
+        assert!(bank2.epoch_vote_accounts(2).is_some());
+
+        // Set root for a slot in epoch 1, so that epoch 2 is now confirmed
+        cache.set_root(&bank2);
+        assert_eq!(cache.max_epoch.load(Ordering::Acquire), 2);
+        assert!(cache.slot_leader_at(96, Some(&bank2)).is_some());
+        assert_eq!(bank2.get_epoch_and_slot_index(223).0, 2);
+        assert!(cache.slot_leader_at(223, Some(&bank2)).is_some());
+        assert_eq!(bank2.get_epoch_and_slot_index(224).0, 3);
+        assert!(cache.slot_leader_at(224, Some(&bank2)).is_none());
+    }
+}

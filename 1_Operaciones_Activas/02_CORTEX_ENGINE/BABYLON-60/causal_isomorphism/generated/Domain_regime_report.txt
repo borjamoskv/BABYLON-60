@@ -1,0 +1,60 @@
+╔══════════════════════════════════════════════════════════════╗
+║     CAUSAL ISOMORPHISM TRANSPILER — BABYLON-60             ║
+║     Trilingual Regime: F# → {Solidity, Rust}              ║
+╚══════════════════════════════════════════════════════════════╝
+
+Source:    /Users/borjafernandezangulo/BABYLON-60/domain_kernel/IRPAutomata.fs
+Hash:      e9f78b444ca42f825e69780b3cf86b652c2f770e29502badb3588bafdb0f5803
+Timestamp: 2026-07-27T14:57:55.269103+00:00
+Status:    ❌ REGIME VIOLATIONS DETECTED
+
+── IR Module ──
+  Name:       Domain
+  Unions:     0
+  Records:    0
+  Functions:  0
+  Submodules: 1
+
+── Solidity Target ──
+=== Regime Validation Report ===
+Types:     5
+Functions: 6
+  Permitted: 5
+  Blocked:   1
+Violations: 1 (1 errors, 0 warnings)
+
+  ❌ [fsharp→solidity] applyThermalStress: ANTIPATTERN: Physics computation in Solidity — must stay in F# Domain Kernel (Rule: STATE_TRANSITION→solidity)
+
+Blocked functions (regime-filtered):
+  🚫 applyThermalStress
+
+Permitted functions:
+  ✅ commitBoundary
+  ✅ genesisLedger
+  ✅ validateAndAppend
+  ✅ getPath
+  ✅ runVerificationSuite
+
+── Rust Target ──
+=== Regime Validation Report ===
+Types:     5
+Functions: 6
+  Permitted: 4
+  Blocked:   2
+Violations: 2 (2 errors, 0 warnings)
+
+  ❌ [fsharp→rust] applyThermalStress: ANTIPATTERN: Physics computation in Rust — must stay in F# Domain Kernel (Rule: STATE_TRANSITION→rust)
+  ❌ [fsharp→rust] commitBoundary: ANTIPATTERN: Consensus anchoring in Rust — must stay in Solidity/Anvil (Rule: COMMIT_BOUNDARY→rust)
+
+Blocked functions (regime-filtered):
+  🚫 applyThermalStress
+  🚫 commitBoundary
+
+Permitted functions:
+  ✅ genesisLedger
+  ✅ validateAndAppend
+  ✅ getPath
+  ✅ runVerificationSuite
+
+Solidity output: /Users/borjafernandezangulo/BABYLON-60/causal_isomorphism/generated/DomainAnchor.sol
+Rust output:     /Users/borjafernandezangulo/BABYLON-60/causal_isomorphism/generated/domain.rs

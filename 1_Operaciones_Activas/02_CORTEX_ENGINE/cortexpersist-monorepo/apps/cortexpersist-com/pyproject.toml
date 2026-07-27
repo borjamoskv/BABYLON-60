@@ -1,0 +1,36 @@
+[project]
+name = "cortex-persist-workspace"
+version = "0.0.1"
+description = "Cortex-Persist Python Workspace"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "cortex-persist",
+    "cortex-persist-langchain"
+]
+
+[tool.uv.workspace]
+members = [
+    "packages/cortex-persist-python",
+    "packages/cortex-persist-langchain-python"
+]
+
+[tool.uv.sources]
+cortex-persist = { workspace = true }
+cortex-persist-langchain = { workspace = true }
+
+[tool.pytest.ini_options]
+testpaths = [
+    "packages/cortex-persist-python/tests",
+    "packages/cortex-persist-langchain-python/tests"
+]
+addopts = "-n auto"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.0",
+    "pytest-asyncio>=1.4.0",
+    "pytest-cov>=7.1.0",
+    "pytest-timeout>=2.4.0",
+    "pytest-xdist>=3.8.0",
+]

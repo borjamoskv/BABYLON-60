@@ -1,0 +1,14 @@
+{
+  "time_series": [
+    {
+      "timestamp": "2026-06-02T05:50:33.809882+00:00",
+      "systemic_cfi": 0.622,
+      "subsystems": {
+        "Gateway_Lyapunov_Delay": 0.93,
+        "Pricing_Timeline_Nodes": 0.0,
+        "Creators_Network_Density": 0.0,
+        "Tax_Deduction_Ceiling": 1.0
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  litellm:
+    image: ghcr.io/berriai/litellm:main-latest
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./litellm_config.yaml:/app/config.yaml
+    environment:
+      - LITELLM_MASTER_KEY=sk-sovereign-proxy-2026
+      - REDIS_URL=redis://redis:6379
+    command: [ "--config", "/app/config.yaml", "--port", "4000" ]
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --save 60 1 --loglevel warning

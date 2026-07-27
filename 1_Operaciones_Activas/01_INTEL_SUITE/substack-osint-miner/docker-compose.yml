@@ -1,0 +1,18 @@
+# C5-REAL EXERGY CERTIFIED
+version: '3.8'
+
+services:
+  neo4j:
+    image: neo4j:5.12
+    container_name: osint_neo4j
+    ports:
+      - "7474:7474" # HTTP UI
+      - "7687:7687" # Bolt port
+    environment:
+      - NEO4J_AUTH=neo4j/osint-password-2026
+      - NEO4J_PLUGINS=["apoc"]
+    volumes:
+      - neo4j_data:/data
+
+volumes:
+  neo4j_data:

@@ -1,0 +1,244 @@
+//! Loads and formats Base transaction RPC response.
+
+use std::{
+    fmt::{Debug, Formatter},
+    future::Future,
+    time::Duration,
+};
+
+use alloy_primitives::{B256, Bytes};
+use alloy_rpc_types_eth::TransactionInfo;
+use base_common_consensus::{BaseTransaction, BaseTransactionInfo, DepositInfo, DepositReceiptExt};
+use futures::StreamExt;
+use reth_chain_state::CanonStateSubscriptions;
+use reth_primitives_traits::{Recovered, SignedTransaction, SignerRecoverable, WithEncoded};
+use reth_rpc_eth_api::{
+    EthApiTypes as _, FromEthApiError, FromEvmError, RpcConvert, RpcNodeCore, RpcReceipt,
+    TxInfoMapper,
+    helpers::{EthTransactions, LoadReceipt, LoadTransaction, SpawnBlocking, spec::SignersForRpc},
+};
+use reth_rpc_eth_types::{EthApiError, TransactionSource, block::convert_transaction_receipt};
+use reth_storage_api::{ProviderTx, ReceiptProvider, TransactionsProvider, errors::ProviderError};
+use reth_transaction_pool::{
+    AddedTransactionOutcome, PoolPooledTx, PoolTransaction, TransactionOrigin, TransactionPool,
+};
+use tracing::{debug, warn};
+
+use crate::{BaseEthApi, BaseEthApiError, SequencerClient};
+
+impl<N, Rpc> EthTransactions for BaseEthApi<N, Rpc>
+where
+    N: RpcNodeCore,
+    BaseEthApiError: FromEvmError<N::Evm>,
+    Rpc: RpcConvert<Primitives = N::Primitives, Error = BaseEthApiError>,
+{
+    fn signers(&self) -> &SignersForRpc<Self::Provider, Self::NetworkTypes> {
+        self.inner.eth_api.signers()
+    }
+
+    fn send_raw_transaction_sync_timeout(&self) -> Duration {
+        self.inner.eth_api.send_raw_transaction_sync_timeout()
+    }
+
+    async fn send_transaction(
+        &self,
+        origin: TransactionOrigin,
+        tx: WithEncoded<Recovered<PoolPooledTx<Self::Pool>>>,
+    ) -> Result<B256, Self::Error> {
+        let (tx, recovered) = tx.split();
+
+        // broadcast raw transaction to subscribers if there is any.
+        self.eth_api().broadcast_raw_transaction(tx.clone());
+
+        let pool_transaction = <Self::Pool as TransactionPool>::Transaction::from_pooled(recovered);
+
+        // On Base, transactions are forwarded directly to the sequencer to be included in
+        // blocks that it builds.
+        if let Some(client) = self.raw_tx_forwarder().as_ref() {
+            debug!(target: "rpc::eth", hash = %pool_transaction.hash(), "forwarding raw transaction to sequencer");
+            let hash = client.forward_raw_transaction(&tx).await.inspect_err(|err| {
+                    debug!(target: "rpc::eth", error = %err, hash=% *pool_transaction.hash(), "failed to forward raw transaction");
+                })?;
+
+            // Retain tx in local tx pool after forwarding, for local RPC usage.
+            let _ = self.inner.eth_api.add_pool_transaction(origin, pool_transaction).await.inspect_err(|err| {
+                warn!(target: "rpc::eth", error = %err, %hash, "successfully sent tx to sequencer, but failed to persist in local tx pool");
+            });
+
+            return Ok(hash);
+        }
+
+        // submit the transaction to the pool with the given origin
+        let AddedTransactionOutcome { hash, .. } = self
+            .pool()
+            .add_transaction(origin, pool_transaction)
+            .await
+            .map_err(Self::Error::from_eth_err)?;
+
+        Ok(hash)
+    }
+
+    /// Decodes and recovers the transaction and submits it to the pool.
+    ///
+    /// And awaits the receipt from canonical blocks.
+    fn send_raw_transaction_sync(
+        &self,
+        tx: Bytes,
+    ) -> impl Future<Output = Result<RpcReceipt<Self::NetworkTypes>, Self::Error>> + Send {
+        let this = self.clone();
+        let timeout_duration = self.send_raw_transaction_sync_timeout();
+        async move {
+            let mut canonical_stream = this.provider().canonical_state_stream();
+            let hash = EthTransactions::send_raw_transaction(&this, tx).await?;
+
+            tokio::time::timeout(timeout_duration, async {
+                while let Some(notification) = canonical_stream.next().await {
+                    let chain = notification.committed();
+                    if let Some((block, tx, receipt, all_receipts)) =
+                        chain.find_transaction_and_receipt_by_hash(hash)
+                        && let Some(receipt) = convert_transaction_receipt(
+                            block,
+                            all_receipts,
+                            tx,
+                            receipt,
+                            this.converter(),
+                        )
+                        .transpose()?
+                    {
+                        return Ok(receipt);
+                    }
+                }
+                Err(Self::Error::from_eth_err(EthApiError::TransactionConfirmationTimeout {
+                    hash,
+                    duration: timeout_duration,
+                }))
+            })
+            .await
+            .unwrap_or_else(|_elapsed| {
+                Err(Self::Error::from_eth_err(EthApiError::TransactionConfirmationTimeout {
+                    hash,
+                    duration: timeout_duration,
+                }))
+            })
+        }
+    }
+
+    /// Returns the transaction receipt for the given hash.
+    fn transaction_receipt(
+        &self,
+        hash: B256,
+    ) -> impl Future<Output = Result<Option<RpcReceipt<Self::NetworkTypes>>, Self::Error>> + Send
+    {
+        let this = self.clone();
+        async move {
+            let Some((tx, meta, receipt)) = this.load_transaction_and_receipt(hash).await? else {
+                return Ok(None);
+            };
+            self.build_transaction_receipt(tx, meta, receipt).await.map(Some)
+        }
+    }
+}
+
+impl<N, Rpc> LoadTransaction for BaseEthApi<N, Rpc>
+where
+    N: RpcNodeCore,
+    BaseEthApiError: FromEvmError<N::Evm>,
+    Rpc: RpcConvert<Primitives = N::Primitives, Error = BaseEthApiError>,
+{
+    async fn transaction_by_hash(
+        &self,
+        hash: B256,
+    ) -> Result<Option<TransactionSource<ProviderTx<Self::Provider>>>, Self::Error> {
+        // 1. Try to find the transaction on disk (historical blocks)
+        if let Some((tx, meta)) = self
+            .spawn_blocking_io(move |this| {
+                this.provider()
+                    .transaction_by_hash_with_meta(hash)
+                    .map_err(Self::Error::from_eth_err)
+            })
+            .await?
+        {
+            let transaction = tx
+                .try_into_recovered_unchecked()
+                .map_err(|_| EthApiError::InvalidTransactionSignature)?;
+
+            return Ok(Some(TransactionSource::Block {
+                transaction,
+                index: meta.index,
+                block_hash: meta.block_hash,
+                block_number: meta.block_number,
+                base_fee: meta.base_fee,
+            }));
+        }
+
+        // 2. check local pool
+        if let Some(tx) = self.pool().get(&hash).map(|tx| tx.transaction.clone_into_consensus()) {
+            return Ok(Some(TransactionSource::Pool(tx)));
+        }
+
+        Ok(None)
+    }
+}
+
+impl<N, Rpc> BaseEthApi<N, Rpc>
+where
+    N: RpcNodeCore,
+    Rpc: RpcConvert<Primitives = N::Primitives>,
+{
+    /// Returns the [`SequencerClient`] if one is set.
+    pub fn raw_tx_forwarder(&self) -> Option<SequencerClient> {
+        self.inner.sequencer_client.clone()
+    }
+}
+
+/// Base implementation of [`TxInfoMapper`].
+///
+/// For deposits, receipt is fetched to extract `deposit_nonce` and `deposit_receipt_version`.
+/// Otherwise, it works like regular Ethereum implementation, i.e. uses [`TransactionInfo`].
+pub struct BaseTxInfoMapper<Provider> {
+    provider: Provider,
+}
+
+impl<Provider: Clone> Clone for BaseTxInfoMapper<Provider> {
+    fn clone(&self) -> Self {
+        Self { provider: self.provider.clone() }
+    }
+}
+
+impl<Provider> Debug for BaseTxInfoMapper<Provider> {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("BaseTxInfoMapper").finish()
+    }
+}
+
+impl<Provider> BaseTxInfoMapper<Provider> {
+    /// Creates [`BaseTxInfoMapper`] that uses [`ReceiptProvider`] borrowed from given `eth_api`.
+    pub const fn new(provider: Provider) -> Self {
+        Self { provider }
+    }
+}
+
+impl<T, Provider> TxInfoMapper<T> for BaseTxInfoMapper<Provider>
+where
+    T: BaseTransaction + SignedTransaction,
+    Provider: ReceiptProvider<Receipt: DepositReceiptExt>,
+{
+    type Out = BaseTransactionInfo;
+    type Err = ProviderError;
+
+    fn try_map(&self, tx: &T, tx_info: TransactionInfo) -> Result<Self::Out, ProviderError> {
+        let deposit_meta = if tx.is_deposit() {
+            self.provider.receipt_by_hash(*tx.tx_hash())?.and_then(|receipt| {
+                receipt.as_deposit_receipt().map(|receipt| DepositInfo {
+                    deposit_receipt_version: receipt.deposit_receipt_version,
+                    deposit_nonce: receipt.deposit_nonce,
+                })
+            })
+        } else {
+            None
+        }
+        .unwrap_or_default();
+
+        Ok(BaseTransactionInfo::new(tx_info, deposit_meta))
+    }
+}

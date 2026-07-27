@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Twin Forge — El laboratorio de código de Martina y Pablo" />
+  <meta name="theme-color" content="#0A0A0A" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
+  <title>Twin Forge</title>
+</head>
+<body>
+  <div id="app">
+    <!-- Splash Screen -->
+    <div class="splash" id="splash">
+      <div class="splash__logo">
+        <div class="splash__title">Twin Forge</div>
+        <div class="splash__subtitle">Tu laboratorio de código 🔧</div>
+      </div>
+      <div class="splash__profiles">
+        <div class="splash__card splash__card--martina" id="profile-martina" data-profile="martina">
+          <div class="splash__avatar">👩‍💻</div>
+          <div class="splash__name">Martina</div>
+          <div class="splash__hint">Violeta & Rosa</div>
+        </div>
+        <div class="splash__card splash__card--pablo" id="profile-pablo" data-profile="pablo">
+          <div class="splash__avatar">👨‍💻</div>
+          <div class="splash__name">Pablo</div>
+          <div class="splash__hint">Cyan & Naranja</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IDE -->
+    <div class="ide" id="ide">
+      <!-- Toolbar -->
+      <div class="toolbar" id="toolbar">
+        <span class="toolbar__brand" id="toolbar-brand" title="Volver al inicio">⚡ Twin Forge</span>
+        <div class="toolbar__sep"></div>
+        <button class="toolbar__btn toolbar__btn--run" id="btn-run" title="Ejecutar (Ctrl+Enter)">▶ Ejecutar</button>
+        <button class="toolbar__btn" id="btn-save" title="Guardar">💾 Guardar</button>
+        <div class="toolbar__sep"></div>
+        <select class="toolbar__lang" id="lang-select">
+          <option value="javascript">JavaScript</option>
+          <option value="python">Python</option>
+          <option value="html">HTML</option>
+        </select>
+        <button class="toolbar__btn" id="btn-menu" title="Menú (móvil)">☰</button>
+        <div class="toolbar__spacer"></div>
+        <div class="toolbar__profile" id="toolbar-profile">
+          <div class="toolbar__profile-avatar" id="toolbar-avatar">👩‍💻</div>
+          <span class="toolbar__profile-name" id="toolbar-name">Martina</span>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="ide__body">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+          <div class="sidebar__tabs">
+            <button class="sidebar__tab active" data-tab="missions">Misiones</button>
+            <button class="sidebar__tab" data-tab="files">Mis Archivos</button>
+            <button class="sidebar__tab" data-tab="achievements">Logros</button>
+          </div>
+          <div class="sidebar__content" id="sidebar-content"></div>
+        </div>
+
+        <!-- Main Editor + Console -->
+        <div class="ide__main">
+          <div class="editor-area">
+            <div class="editor-area__monaco" id="editor-container"></div>
+            <div class="canvas-preview" id="canvas-preview">
+              <canvas id="game-canvas" width="320" height="240"></canvas>
+            </div>
+          </div>
+          <div class="resize-handle" id="resize-handle"></div>
+          <div class="console" id="console-panel">
+            <div class="console__header">
+              <span class="console__title">Consola</span>
+              <span class="console__badge" id="console-count">0</span>
+              <button class="console__clear" id="btn-clear">Limpiar</button>
+            </div>
+            <div class="console__output" id="console-output"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

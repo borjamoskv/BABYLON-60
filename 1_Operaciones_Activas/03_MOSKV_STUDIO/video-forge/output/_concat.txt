@@ -1,0 +1,6 @@
+file '/Users/borjafernandezangulo/Music/VISUALES/video-forge/output/_segment_000_scene_00.mp4'
+file '/Users/borjafernandezangulo/Music/VISUALES/video-forge/output/_segment_001_scene_01.mp4'
+file '/Users/borjafernandezangulo/Music/VISUALES/video-forge/output/_segment_002_scene_02.mp4'
+file '/Users/borjafernandezangulo/Music/VISUALES/video-forge/output/_segment_003_scene_03.mp4'
+file '/Users/borjafernandezangulo/Music/VISUALES/video-forge/output/_segment_004_scene_04.mp4'
+file '/Users/borjafernandezangulo/Music/VISUALES/video-forge/output/_segment_005_scene_05.mp4'

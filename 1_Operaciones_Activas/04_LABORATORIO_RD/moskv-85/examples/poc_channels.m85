@@ -1,0 +1,11 @@
+` PoC 3: Multi-agent Concurrent Communication via channels
+` Author: Borja Moskv
+` Reality Level: C5-REAL
+
+F ` create channel 0
+F ` create channel 1
+[ 0 T #!!!!+ + 1 O ] Y ` spawn child thread
+#!!!!K 0 O ` parent sends 42 to channel 0
+1 T . ` parent receives from channel 1 and prints
+\
+\ ,

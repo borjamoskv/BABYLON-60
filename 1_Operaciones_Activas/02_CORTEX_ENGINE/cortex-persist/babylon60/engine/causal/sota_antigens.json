@@ -1,0 +1,24 @@
+{
+  "__meta__": {
+    "version": "1.0",
+    "description": "[C5-REAL] SOTA Vector Integration: Agent Arena Constraints",
+    "provenance": "Frontier_Node e6820d8684853e27"
+  },
+  "static_t_cells": [
+    {
+      "agent_id": "claude-fable-5",
+      "pattern": "(?i)\\b(steer|correct|adjust|wrong|fix approach)\\b",
+      "rationale": "Prioritize Steerability based on Empirical SOTA"
+    },
+    {
+      "agent_id": "gpt-5.5",
+      "pattern": "(?i)\\b(bash|exit code|stderr|traceback|panic|crash)\\b",
+      "rationale": "Prioritize Bash Recovery based on Empirical SOTA"
+    },
+    {
+      "agent_id": "kimi-k2.7-code",
+      "pattern": "(?i)\\b(tool|function|api|hallucination|not found)\\b",
+      "rationale": "Prioritize Tool Calling / Context Depth"
+    }
+  ]
+}

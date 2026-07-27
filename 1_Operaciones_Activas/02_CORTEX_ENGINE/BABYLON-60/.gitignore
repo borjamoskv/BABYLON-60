@@ -1,0 +1,111 @@
+# C5-REAL: Strict Ignore (Fable 5 Fix-Pack)
+# sqlite
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+# logs
+*.log
+# local envs
+.env
+.env.*
+.git-credentials
+.venv/
+takedown_manifest/
+__pycache__/
+# dotnet leftovers
+src/ontology/bin/
+src/ontology/obj/
+*.dll
+
+# legacy build artifacts
+/target
+strike_rs/target/
+src-tauri/target/
+proof_artifact.json
+b60_kernel
+receipt.json
+
+# Scratch directories
+scratch/
+
+# Local build / node / agent artifacts
+node_modules/
+.cortex/
+.agents/
+ORIGINAL_REQUEST.md
+
+
+# caches y artefactos de sistema
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+.fuse_hidden*
+*.py[cod]
+
+# Lean 4 build artifacts
+proof/lean/.lake/
+
+# Python packaging leftovers
+*.egg-info/
+c5_remotion_video/node_modules/
+
+# Sandbox stress leftovers (entire directory)
+cortex/scripts/sandbox_stress/
+
+# Batch-generated ontology artifacts (CONSOLIDATIN-Ω purge)
+cortex/agents/ontology/batch_*/
+cortex/ontology/batch_*/
+
+# Data artifacts and generated outputs
+apoptosis_target.yaml
+shards.json
+*.npz
+reconstruccion_resultados.csv
+replacements.txt
+consolidacion_omega.html
+iteration_05_ledger.jsonl
+antigravity_memory_schema.yaml
+C5_12_lyapunov_ns2d.png
+C5_12_resultados.json
+receipt_sha3_256.json
+AGENTS.md.ots
+
+# Large YouTube JSON dumps
+scratch/yt_*.json
+scratch/yt_dump.json
+
+# MLX LoRA training artifacts
+cortex/training/baby-long/adapters/
+cortex/training/baby-long/models/
+
+cortex/consensus/target/
+cortex/engine/ingest_matrix/target/
+
+# C5-REAL: H3/H4 Purga Entrópica
+rust_siege/target/
+*.db
+*.db-wal
+*.db-shm
+*.patch
+
+# autonomic_daemon internal DB — H1 fix
+.babylon60/
+
+# dotnet build artifacts for domain_kernel
+domain_kernel/bin/
+domain_kernel/obj/
+
+*.npz
+*.dmg
+cortex/audits/*.yaml
+
+# SQLite databases (runtime artifacts)
+scripts/cib_async_ledger.db
+scripts/cib_master_ledger.db
+scripts/*.db
+
+# IDE sidecar ledger
+babylon60_ide.db*
+**/babylon60_ide.db*
+

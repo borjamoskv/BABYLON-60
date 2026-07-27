@@ -1,0 +1,34 @@
+[package]
+name = "base-proofs-extension"
+description = "Proofs extension for Base node"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+homepage.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# workspace
+base-node-runner.workspace = true
+
+# reth
+reth-db.workspace = true
+reth-tasks.workspace = true
+reth-node-api.workspace = true
+base-node-core.workspace = true
+base-execution-rpc.workspace = true
+base-execution-trie.workspace = true
+base-execution-exex = { workspace = true, features = ["metrics"] }
+
+# tokio
+tokio.workspace = true
+
+# tracing
+tracing = { workspace = true, features = ["std"] }
+
+# misc
+eyre.workspace = true

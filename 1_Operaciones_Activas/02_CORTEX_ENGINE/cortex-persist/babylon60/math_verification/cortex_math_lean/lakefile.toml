@@ -1,0 +1,10 @@
+name = "cortex_math_lean"
+version = "0.1.0"
+defaultTargets = ["cortex_math_lean"]
+
+[[lean_lib]]
+name = "CortexMathLean"
+
+[[lean_exe]]
+name = "cortex_math_lean"
+root = "Main"

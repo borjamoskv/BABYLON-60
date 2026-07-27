@@ -1,0 +1,32 @@
+name: PR Governor
+
+permissions:
+  contents: read
+  pull-requests: read
+
+on:
+  pull_request:
+    branches: [main]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pr.number,
+              per_page: 500
+            });
+
+            const filteredFiles = files.filter(f => !f.filename.startsWith('cortex_mev_base/target/'));
+            if (filteredFiles.length > 500) {
+              core.setFailed(`PR too large (${filteredFiles.length} files changed, limit is 500)`);
+            }

@@ -1,0 +1,94 @@
+{
+  "version": "1.0.0",
+  "created": "2026-05-22T01:27:15.786Z",
+  "pipeline": "MOSKV Creative Director Orchestrator",
+  "preset": "widescreen",
+  "source": "/Users/borjafernandezangulo/Music/VISUALES",
+  "assets": {
+    "images": [
+      "/Users/borjafernandezangulo/Music/VISUALES/video-forge/output/scene_00.png",
+      "/Users/borjafernandezangulo/Music/VISUALES/video-forge/output/scene_01.png",
+      "/Users/borjafernandezangulo/Music/VISUALES/video-forge/output/scene_02.png",
+      "/Users/borjafernandezangulo/Music/VISUALES/video-forge/output/scene_03.png",
+      "/Users/borjafernandezangulo/Music/VISUALES/video-forge/output/scene_04.png",
+      "/Users/borjafernandezangulo/Music/VISUALES/video-forge/output/scene_05.png"
+    ],
+    "audio": "/Users/borjafernandezangulo/Music/VISUALES/32ypico_audio.m4a"
+  },
+  "output": {
+    "directory": "/Users/borjafernandezangulo/Music/VISUALES/video-forge/output"
+  },
+  "storyboard": {
+    "title": "CORTEX Core Dev - Industrial Noir 2026 Profile",
+    "preset": "widescreen",
+    "duration": 60,
+    "theme": "Industrial Noir 2026: High-contrast, raw industrial textures, deep black #0A0A0A backgrounds, electric blue #2B3BE5 accents, and technical blueprint overlays.",
+    "scenes": [
+      {
+        "narration": "Imagina encontrar un bug en un validador de Solana que podría provocar un fork en toda la red. Eso no es ciencia ficción. Soy CORTEX Core Dev, de Bizkaia, y audito el código donde se arriesgan millones.",
+        "duration": 10,
+        "imagePrompt": "Industrial noir style. A close-up of a computer screen displaying complex C code with a highlighted race condition bug. The background is pitch black #0A0A0A with sharp, electric blue #2B3BE5 glowing accents. Technical blueprint lines overlay the screen. High contrast, raw metallic texture, cinematic lighting.",
+        "overlayText": "SOLANA VALIDATOR AUDIT: FIREDANCER",
+        "effects": [
+          "glitch",
+          "vignette",
+          "grain"
+        ]
+      },
+      {
+        "narration": "No vengo de Silicon Valley, sino de la cultura industrial vasca. Donde las cosas se hacen con las manos y se miden con rigor. Encuentro vulnerabilidades reales en protocolos DeFi con Proof of Concept verificables.",
+        "duration": 10,
+        "imagePrompt": "Industrial noir style. A dark, high-contrast Basque industrial shipyard or factory interior at night. Deep black shadows #0A0A0A contrasted with sharp electric blue #2B3BE5 laser lines mapping out structural blueprints. Raw concrete and steel textures, atmospheric mist, cinematic wide angle.",
+        "overlayText": "BIZKAIA: INDUSTRIAL ROOTED SECURITY",
+        "effects": [
+          "kenburns",
+          "grain",
+          "vignette"
+        ]
+      },
+      {
+        "narration": "He creado CORTEX Persist, una librería open-source que resuelve un problema crítico: ¿cómo pruebas qué sabía tu agente de IA cuando tomó una decisión? Evidencia criptográfica local-first, no simples logs.",
+        "duration": 10,
+        "imagePrompt": "Industrial noir style. A glowing cryptographic Merkle tree diagram rendered in electric blue #2B3BE5 lines against a pure black #0A0A0A background. Raw digital noise, technical data overlays, and terminal code lines. High contrast, sharp focus, blueprint aesthetic.",
+        "overlayText": "CORTEX PERSIST: CRYPTO EVIDENCE FOR AI",
+        "effects": [
+          "scanlines",
+          "glitch",
+          "vignette"
+        ]
+      },
+      {
+        "narration": "La música electrónica es la tercera pata de mi trípode. En EXERGIA-Ω, aplico procesamiento de señal y masterización espacial. Porque la señal importa más que el ruido, tanto en el código como en el sonido.",
+        "duration": 10,
+        "imagePrompt": "Industrial noir style. A dark music production studio with modular synthesizers. Knobs and patch cables glowing with electric blue #2B3BE5 LED lights against deep black #0A0A0A shadows. Oscilloscope displaying a sharp blue soundwave. Raw texture, high contrast, moody cinematic close-up.",
+        "overlayText": "EXERGIA-Ω: SIGNAL VS NOISE",
+        "effects": [
+          "kenburns",
+          "grain"
+        ]
+      },
+      {
+        "narration": "Me audito a mí mismo. Sé que la velocidad puede ser una compulsión y que los frameworks complejos a veces son solo ruido. La capacidad real está en la percepción, la acción y el registro determinista.",
+        "duration": 10,
+        "imagePrompt": "Industrial noir style. A minimalist, high-contrast portrait silhouette of a man looking down at a glowing blue terminal screen. The environment is pitch black #0A0A0A, illuminated only by the sharp electric blue #2B3BE5 light of the screen. Blueprint grid lines subtly overlay the background. Raw, gritty texture.",
+        "overlayText": "SELF-AUDIT: PERCEPTION -> ACTION -> RECORD",
+        "effects": [
+          "vignette",
+          "grain",
+          "scanlines"
+        ]
+      },
+      {
+        "narration": "Estamos viviendo la transición del software al silicio. Euskadi tiene una ventaja industrial asimétrica en esta guerra del hardware. No soy un influencer; construyo en local, verifico antes de afirmar, y hago que las cosas funcionen.",
+        "duration": 10,
+        "imagePrompt": "Industrial noir style. A macro shot of a modern silicon microchip with glowing electric blue #2B3BE5 circuitry pathways on a dark metallic #0A0A0A substrate. Technical blueprint schematics overlay the chip. High contrast, raw industrial texture, cinematic depth of field.",
+        "overlayText": "CORTEX Core Dev: VERIFY OR FAIL",
+        "effects": [
+          "kenburns",
+          "glitch",
+          "vignette"
+        ]
+      }
+    ]
+  }
+}

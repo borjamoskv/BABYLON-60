@@ -1,0 +1,66 @@
+# C5-REAL EXERGY CERTIFIED
+name: "Anergy & Security Advanced Audit"
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '30 18 * * 1' # Cada lunes a las 18:30 UTC
+jobs:
+  analyze:
+    name: CodeQL & Supply Chain Scan
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'python', 'rust' ] # Cubre tu core python y strike_rs
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: ${{ matrix.language }}
+        queries: security-extended,security-and-quality
+
+    # Compilación manual requerida para strike_rs (Rust Core via PyO3)
+    - name: Setup Rust Toolchain (For strike_rs)
+      if: matrix.language == 'rust'
+      uses: dtolnay/rust-toolchain@stable
+
+    - name: Build Rust Core
+      if: matrix.language == 'rust'
+      run: |
+        cd strike_rs
+        cargo build --release
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:${{matrix.language}}"
+
+  secret-scan:
+    name: Secret Protection & Hallucination Guard
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Scan for Hardcoded Secrets
+      uses: trufflesecurity/trufflehog@main
+      with:
+        path: ./
+        base: ${{ github.event.repository.default_branch }}
+        head: HEAD

@@ -1,0 +1,60 @@
+use alloy_consensus::BlockBody;
+use base_common_consensus::{BaseTransaction, DepositReceiptExt};
+use reth_payload_primitives::PayloadBuilderAttributes;
+use reth_primitives_traits::{FullBlockHeader, NodePrimitives, SignedTransaction, WithEncoded};
+
+use crate::BasePayloadBuilderAttributes;
+
+/// Helper trait to encapsulate common bounds on [`NodePrimitives`] for the payload builder.
+pub trait PayloadPrimitives:
+    NodePrimitives<
+        Receipt: DepositReceiptExt,
+        SignedTx = Self::_TX,
+        BlockBody = BlockBody<Self::_TX, Self::_Header>,
+        BlockHeader = Self::_Header,
+    >
+{
+    /// Helper AT to bound [`NodePrimitives::Block`] type without causing bound cycle.
+    type _TX: SignedTransaction + BaseTransaction;
+    /// Helper AT to bound [`NodePrimitives::Block`] type without causing bound cycle.
+    type _Header: FullBlockHeader;
+}
+
+impl<Tx, T, Header> PayloadPrimitives for T
+where
+    Tx: SignedTransaction + BaseTransaction,
+    T: NodePrimitives<
+            SignedTx = Tx,
+            Receipt: DepositReceiptExt,
+            BlockBody = BlockBody<Tx, Header>,
+            BlockHeader = Header,
+        >,
+    Header: FullBlockHeader,
+{
+    type _TX = Tx;
+    type _Header = Header;
+}
+
+/// Attributes for the payload builder.
+pub trait Attributes: PayloadBuilderAttributes {
+    /// Primitive transaction type.
+    type Transaction: SignedTransaction;
+
+    /// Whether to use the transaction pool for the payload.
+    fn no_tx_pool(&self) -> bool;
+
+    /// Sequencer transactions to include in the payload.
+    fn sequencer_transactions(&self) -> &[WithEncoded<Self::Transaction>];
+}
+
+impl<T: SignedTransaction> Attributes for BasePayloadBuilderAttributes<T> {
+    type Transaction = T;
+
+    fn no_tx_pool(&self) -> bool {
+        self.no_tx_pool
+    }
+
+    fn sequencer_transactions(&self) -> &[WithEncoded<Self::Transaction>] {
+        &self.transactions
+    }
+}

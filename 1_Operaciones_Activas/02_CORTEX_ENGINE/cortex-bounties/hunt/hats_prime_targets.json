@@ -1,0 +1,52 @@
+[
+    {
+        "pool_id": 19,
+        "asset": "ANGLE",
+        "name": "ANGLE Protocol",
+        "address": "0x31429d1856aD1377A8A0079410B297e1a9e214c2",
+        "balance": 1005024.53,
+        "status": "PRIME",
+        "repo": "https://github.com/AngleProtocol",
+        "last_checked": "2026-05-05T08:26:00"
+    },
+    {
+        "pool_id": 20,
+        "asset": "INSURE",
+        "name": "InsureToken",
+        "address": "0xd83AE04c9eD29d6D3E6Bf720C71bc7BeB424393E",
+        "balance": 344712.45,
+        "status": "PRIME",
+        "repo": "https://github.com/InsurAce-Protocol",
+        "last_checked": "2026-05-05T08:26:00"
+    },
+    {
+        "pool_id": 22,
+        "asset": "PHONON",
+        "name": "Phonon DAO",
+        "address": "0x758B4684BE769E92eeFeA93f60DDA0181eA303Ec",
+        "balance": 1755000.00,
+        "status": "PRIME",
+        "repo": "https://github.com/PhononDAO",
+        "last_checked": "2026-05-05T08:26:00"
+    },
+    {
+        "pool_id": 23,
+        "asset": "PAL",
+        "name": "Paladin Token",
+        "address": "0xAB846Fb6C81370327e784Ae7CbB6d6a6af6Ff4BF",
+        "balance": 250000.00,
+        "status": "PRIME",
+        "repo": "https://github.com/paladin-finance",
+        "last_checked": "2026-05-05T08:26:00"
+    },
+    {
+        "pool_id": 25,
+        "asset": "FIN",
+        "name": "DeFiner",
+        "address": "0x054f76beED60AB6dBEb23502178C52d6C5dEbE40",
+        "balance": 33837.37,
+        "status": "PRIME",
+        "repo": "https://github.com/DeFinerProtocol",
+        "last_checked": "2026-05-05T08:26:00"
+    }
+]

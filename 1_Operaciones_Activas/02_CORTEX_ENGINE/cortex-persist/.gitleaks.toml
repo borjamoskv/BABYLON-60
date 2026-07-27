@@ -1,0 +1,69 @@
+# ============================================
+# GITLEAKS CONFIG — Reglas de detección de secretos
+# ============================================
+title = "gitleaks config"
+
+[extend]
+useDefault = true
+
+# ---- Reglas personalizadas ----
+
+[[rules]]
+id = "generic-api-key"
+description = "Generic API Key"
+regex = '''(?i)(api[_-]?key|apikey)\s*[:=]\s*['"]?([a-zA-Z0-9_\-]{20,})['"]?'''
+tags = ["api", "key"]
+
+[[rules]]
+id = "connection-string"
+description = "Database Connection String"
+regex = '''(?i)(mongodb(\+srv)?|postgres(ql)?|mysql|mssql|redis):\/\/[^\s'"]+'''
+tags = ["database", "connection"]
+
+[[rules]]
+id = "jwt-token"
+description = "JWT Token"
+regex = '''eyJ[a-zA-Z0-9_-]{10,}\.eyJ[a-zA-Z0-9_-]{10,}\.[a-zA-Z0-9_-]{10,}'''
+tags = ["jwt", "token"]
+
+[[rules]]
+id = "env-secrets"
+description = "Hardcoded .env values"
+regex = '''(?i)(SECRET|PASSWORD|TOKEN|PRIVATE[_-]?KEY|AUTH)\s*=\s*['"]?[^\s'"]{8,}['"]?'''
+tags = ["env", "secret"]
+
+[[rules]]
+id = "slack-webhook"
+description = "Slack Webhook URL"
+regex = '''https://hooks\.slack\.com/services/T[A-Z0-9]+/B[A-Z0-9]+/[a-zA-Z0-9]+'''
+tags = ["slack", "webhook"]
+
+[[rules]]
+id = "firebase-config"
+description = "Firebase API Key"
+regex = '''AIza[0-9A-Za-z_-]{35}'''
+tags = ["firebase", "google"]
+
+[[rules]]
+id = "internal-ip"
+description = "Internal IP Address"
+regex = '''(?:^|\s|=|")((?:10|172\.(?:1[6-9]|2[0-9]|3[01])|192\.168)\.\d{1,3}\.\d{1,3})'''
+tags = ["network", "internal"]
+
+# ---- Allowlist global ----
+[allowlist]
+description = "Global Allowlist"
+paths = [
+  '''(.*?)\.lock$''',
+  '''(.*?)\.sum$''',
+  '''package-lock\.json$''',
+  '''yarn\.lock$''',
+  '''go\.sum$''',
+  '''vendor/''',
+  '''node_modules/''',
+  '''\.gitleaks\.toml$''',
+  '''\.secrets\.baseline$''',
+  '''(.*?)test(.*?)\.py$''',       # Archivos de test (ajustar si es riesgoso)
+  '''fixtures/''',
+  '''__mocks__/''',
+]

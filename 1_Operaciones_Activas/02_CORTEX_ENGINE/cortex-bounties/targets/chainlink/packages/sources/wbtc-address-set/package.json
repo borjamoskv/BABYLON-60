@@ -1,0 +1,43 @@
+{
+  "name": "@chainlink/wbtc-address-set-adapter",
+  "version": "2.1.23",
+  "description": "Chainlink adapter to query wBTC address set.",
+  "keywords": [
+    "Chainlink",
+    "LINK",
+    "wBTC",
+    "BTC",
+    "blockchain",
+    "oracle",
+    "Proof of Reserves"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "url": "https://github.com/smartcontractkit/external-adapters-js",
+    "type": "git"
+  },
+  "author": "Kristijan Rebernisak <kristijan.rebernisak@smartcontract.com>",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf dist && rm -f tsconfig.tsbuildinfo",
+    "prepack": "yarn build",
+    "build": "tsc -b",
+    "server": "node -e 'require(\"./index.js\").server()'",
+    "server:dist": "node -e 'require(\"./dist/index.js\").server()'",
+    "start": "yarn server:dist"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "22.14.1",
+    "nock": "13.5.6",
+    "typescript": "5.8.3"
+  },
+  "dependencies": {
+    "@chainlink/external-adapter-framework": "2.11.6",
+    "tslib": "2.4.1"
+  }
+}

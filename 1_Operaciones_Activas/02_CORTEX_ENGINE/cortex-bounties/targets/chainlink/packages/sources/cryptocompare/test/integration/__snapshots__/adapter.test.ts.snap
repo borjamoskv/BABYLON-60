@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute crypto api should return failure for array 1`] = `
+{
+  "error": {
+    "message": "[Param: base] input type is not the expected one (string)",
+    "name": "AdapterError",
+  },
+  "status": "errored",
+  "statusCode": 400,
+}
+`;
+
+exports[`execute crypto api should return success 1`] = `
+{
+  "data": {
+    "result": 1276.75,
+  },
+  "result": 1276.75,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 1641035471111,
+    "providerDataRequestedUnixMs": 1641035471111,
+  },
+}
+`;
+
+exports[`execute marketcap api should return success 1`] = `
+{
+  "data": {
+    "result": 156240830222.34824,
+  },
+  "result": 156240830222.34824,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 1641035471111,
+    "providerDataRequestedUnixMs": 1641035471111,
+  },
+}
+`;
+
+exports[`execute volume api should return success 1`] = `
+{
+  "data": {
+    "result": 735584356.0525743,
+  },
+  "result": 735584356.0525743,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 1641035471111,
+    "providerDataRequestedUnixMs": 1641035471111,
+  },
+}
+`;
+
+exports[`execute vwap api should return success 1`] = `
+{
+  "data": {
+    "result": 0.9224,
+  },
+  "result": 0.9224,
+  "statusCode": 200,
+  "timestamps": {
+    "providerDataReceivedUnixMs": 1641035471111,
+    "providerDataRequestedUnixMs": 1641035471111,
+  },
+}
+`;

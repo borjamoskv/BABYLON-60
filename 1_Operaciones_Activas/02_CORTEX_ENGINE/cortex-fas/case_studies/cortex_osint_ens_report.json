@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-06-16T11:42:45.957808+00:00",
+  "module": "ENS-OSINT-Miner-Ledger",
+  "reality_level": "C5-REAL",
+  "results": [
+    {
+      "taxpayer": "Gorka Azkarate",
+      "address": "0xdf0cb57f3f12fd6870f064d95168ac2bb753e52a",
+      "ens": null,
+      "off_chain_correlation": "FAILED_NO_ENS",
+      "cex_exposure": [
+        {
+          "type": "simulated_cex_hit",
+          "cex": "Simulated_Offshore_CEX"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+# [C5-REAL] Exergy-Maximized
+"""
+Staleness pruning strategy for compaction.
+"""
+
+import logging
+import time
+from datetime import datetime, timedelta, timezone
+from typing import TYPE_CHECKING
+
+__all__ = ["execute_staleness_prune", "find_stale_facts"]
+
+if TYPE_CHECKING:
+    from babylon60.compaction.compactor import CompactionResult
+    from babylon60.engine import CortexEngine
+
+logger = logging.getLogger("babylon60.compaction.staleness")
+_LOG_FMT = "Compactor [%s] %s"
+
+
+async def execute_staleness_prune(
+    engine: "CortexEngine",
+    project: str,
+    result: "CompactionResult",
+    dry_run: bool,
+    max_age_days: int,
+    min_consensus: float,
+) -> None:
+    """Execute the STALENESS_PRUNE strategy."""
+    stale_ids = await find_stale_facts(engine, project, max_age_days, min_consensus)
+    if not stale_ids:
+        return
+
+    result.strategies_applied.append("staleness_prune")
+    if not dry_run:
+        for fid in stale_ids:
+            await engine.deprecate(fid, "compacted:stale")
+            result.deprecated_ids.append(fid)
+
+    detail = f"staleness_prune: {len(stale_ids)} stale facts"
+    result.details.append(detail)
+    logger.info(_LOG_FMT, project, detail)
+
+
+async def find_stale_facts(
+    engine: "CortexEngine",
+    project: str,
+    max_age_days: int = 90,
+    min_consensus: float = 0.5,
+) -> list[int]:
+    """Find facts older than max_age_days with consensus below min_consensus."""
+    conn = await engine.get_conn()
+    cutoff = (
+        datetime.fromtimestamp(time.time(), tz=timezone.utc) - timedelta(days=max_age_days)
+    ).isoformat()
+
+    cursor = await conn.execute(
+        "SELECT id FROM facts "
+        "WHERE project = ? AND valid_until IS NULL "
+        "AND created_at < ? AND consensus_score < ? "
+        "ORDER BY id ASC",
+        (project, cutoff, min_consensus),
+    )
+    rows = await cursor.fetchall()
+
+    return [r[0] for r in rows]

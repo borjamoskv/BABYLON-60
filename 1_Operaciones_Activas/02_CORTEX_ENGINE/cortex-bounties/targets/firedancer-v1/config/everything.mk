@@ -1,0 +1,567 @@
+.PHONY: all info check bin rust include lib unit-test integration-test fuzz-test help clean distclean asm ppp show-deps proof
+.PHONY: run-unit-test run-integration-test run-script-test run-fuzz-test
+.PHONY: seccomp-policies cov-report dist-cov-report frontend frontend-clean
+
+OBJDIR:=$(BASEDIR)/$(BUILDDIR)
+
+# Grab all the Local.mk files in the source tree, save to a variable so that
+# other rules can depend on this list. We will include these files later on.
+# Don't use "-L" if source code directory structure has symlink loops.
+#
+# Use ?= so that users can (optionally) perform partial compilation in special
+# circumstances.
+LOCAL_MKS?=$(shell $(FIND) -L src -type f -name Local.mk)
+
+CPPFLAGS+=-DFD_BUILD_INFO=\"$(OBJDIR)/info\"
+CPPFLAGS+=$(EXTRA_CPPFLAGS)
+
+# Auxiliary rules that should not set up dependencies
+AUX_RULES:=clean distclean help run-unit-test run-integration-test cov-report dist-cov-report seccomp-policies frontend
+
+# Dry rules that should set up dependency targets, but not generate them
+DRY_RULES:=check show-deps proof
+
+all: info bin include lib unit-test fuzz-test
+
+help:
+	# Configuration
+	# MACHINE         = $(MACHINE)
+	# EXTRAS          = $(EXTRAS)
+	# SHELL           = $(SHELL)
+	# BASEDIR         = $(BASEDIR)
+	# BUILDDIR        = $(BUILDDIR)
+	# OBJDIR          = $(OBJDIR)
+	# CPPFLAGS        = $(CPPFLAGS)
+	# CC              = $(CC)
+	# CFLAGS          = $(CFLAGS)
+	# CXX             = $(CXX)
+	# CXXFLAGS        = $(CXXFLAGS)
+	# LD              = $(LD)
+	# LDFLAGS         = $(LDFLAGS)
+	# AR              = $(AR)
+	# ARFLAGS         = $(ARFLAGS)
+	# RANLIB          = $(RANLIB)
+	# CP              = $(CP)
+	# RM              = $(RM)
+	# MKDIR           = $(MKDIR)
+	# RMDIR           = $(RMDIR)
+	# TOUCH           = $(TOUCH)
+	# SED             = $(SED)
+	# FIND            = $(FIND)
+	# SCRUB           = $(SCRUB)
+	# FUZZFLAGS       = $(FUZZFLAGS)
+	# EXTRAS_CPPFLAGS = $(EXTRA_CPPFLAGS)
+	# Explicit goals are: all bin include lib unit-test integration-test help clean distclean asm ppp
+	# "make all" is equivalent to "make bin include lib unit-test fuzz-test"
+	# "make info" makes build info $(OBJDIR)/info for the current platform (if not already made)
+	# "make check" quickly checks for obvious compile errors
+	# "make bin" makes all binaries for the current platform (except those requiring the Rust toolchain)
+	# "make include" makes all include files for the current platform
+	# "make lib" makes all libraries for the current platform
+	# "make unit-test" makes all unit-tests for the current platform
+	# "make integration-test" makes all integration-tests for the current platform
+	# "make rust" makes all binaries for the current platform that require the Rust toolchain
+	# "make run-unit-test" runs all unit-tests for the current platform. NOTE: this will not (re)build the test executables
+	# "make run-integration-test" runs all integration-tests for the current platform. NOTE: this will not (re)build the test executables
+	# "make help" prints this message
+	# "make clean" removes editor temp files and the current platform build
+	# "make distclean" removes editor temp files and all platform builds
+	# "make asm" makes all source files into assembly language files
+	# "make ppp" run all source files through the preprocessor
+	# "make show-deps" shows all the dependencies
+	# "make cov-report" creates an LCOV coverage report from LLVM profdata. Requires make run-unit-test EXTRAS="llvm-cov"
+	# Fuzzing (requires fuzzing profile):
+	#   "make fuzz-test" makes all fuzz-tests for the current platform
+	#   "make run-fuzz-test" re-runs all fuzz tests over existing corpora
+	#   "make fuzz_TARGET_unit" re-runs a specific fuzz-test over the existing corpus
+	#   "make fuzz_TARGET_run" runs a specific fuzz-test in explore mode for 600 seconds
+
+info: $(OBJDIR)/info
+
+clean: frontend-clean
+	$(RMDIR) $(OBJDIR) && $(RMDIR) target && $(RMDIR) agave/target && \
+$(SCRUB)
+
+distclean:
+	$(RMDIR) $(BASEDIR) && $(RMDIR) target && $(RMDIR) agave/target && \
+$(SCRUB)
+
+run-unit-test:
+	contrib/test/run_unit_tests.sh --tests $(OBJDIR)/unit-test/automatic.txt $(TEST_OPTS)
+
+run-integration-test:
+	contrib/test/run_integration_tests.sh --tests $(OBJDIR)/integration-test/automatic.txt $(TEST_OPTS)
+
+##############################
+# Usage: $(call make-lib,name)
+
+define _make-lib
+
+lib: $(OBJDIR)/lib/lib$(1).a
+
+endef
+
+make-lib = $(eval $(call _make-lib,$(1)))
+
+##############################
+# Usage: $(call add-objs,objs,lib)
+
+define _add-objs
+
+DEPFILES+=$(foreach obj,$(1),$(patsubst $(OBJDIR)/src/%,$(OBJDIR)/obj/%,$(OBJDIR)/$(MKPATH)$(obj).d))
+
+$(OBJDIR)/lib/lib$(2).a: $(foreach obj,$(1),$(patsubst $(OBJDIR)/src/%,$(OBJDIR)/obj/%,$(OBJDIR)/$(MKPATH)$(obj).o))
+
+endef
+
+add-objs = $(eval $(call _add-objs,$(1),$(2)))
+
+##############################
+# Usage: $(call add-asms,asms,lib)
+
+define _add-asms
+
+$(OBJDIR)/lib/lib$(2).a: $(foreach obj,$(1),$(patsubst $(OBJDIR)/src/%,$(OBJDIR)/obj/%,$(OBJDIR)/$(MKPATH)$(obj).o))
+
+endef
+
+add-asms = $(eval $(call _add-asms,$(1),$(2)))
+
+##############################
+# Usage: $(call add-hdrs,hdrs)
+
+define _add-hdrs
+
+include: $(foreach hdr,$(1),$(patsubst $(OBJDIR)/src/%,$(OBJDIR)/include/firedancer/%,$(OBJDIR)/$(MKPATH)$(hdr)))
+
+endef
+
+add-hdrs = $(eval $(call _add-hdrs,$(1)))
+
+##############################
+# Usage: $(call add-examples,examples)
+
+define _add-examples
+
+include: $(foreach example,$(1),$(patsubst $(OBJDIR)/src/%,$(OBJDIR)/example/%,$(OBJDIR)/$(MKPATH)$(example)))
+
+endef
+
+add-examples = $(eval $(call _add-examples,$(1)))
+
+##############################
+# Usage: $(call add-scripts,scripts)
+# Usage: $(call add-test-scripts,scripts)
+
+# Note: This doesn't mirror the directory hierarchy so can't use generic rule
+
+define _add-script
+
+$(OBJDIR)/$(1)/$(2): $(MKPATH)$(2)
+	$(MKDIR) $$(dir $$@) && \
+$(CP) $$< $$@ && \
+chmod 755 $$@ && \
+$(TOUCH) $$@
+
+$(1): $(OBJDIR)/$(1)/$(2)
+
+endef
+
+add-scripts = $(foreach script,$(1),$(eval $(call _add-script,bin,$(script))))
+add-test-scripts = $(foreach script,$(1),$(eval $(call _add-script,unit-test,$(script))))
+
+##############################
+# Usage: $(call make-bin,name,objs,libs)
+# Usage: $(call make-shared,name,objs,libs)
+# Usage: $(call make-unit-test,name,objs,libs)
+# Usage: $(call make-integration-test,name,objs,libs)
+# Usage: $(call run-unit-test,name,args)
+# Usage: $(call run-integration-test,name,args)
+# Usage: $(call make-fuzz-test,name,objs,libs)
+
+# Note: The library arguments require customization of each target
+
+# _make-exe usage:
+#
+#   $(1): Filename of exe
+#   $(2): List of objects
+#   $(3): List of libraries
+#   $(4): Name of meta target (such that make $(4) will include this target)
+#   $(5): Subdirectory of target
+#   $(6): Extra LDFLAGS
+define _make-exe
+
+DEPFILES+=$(foreach obj,$(2),$(patsubst $(OBJDIR)/src/%,$(OBJDIR)/obj/%,$(OBJDIR)/$(MKPATH)$(obj).d))
+
+.PHONY: $(1)
+$(1): $(OBJDIR)/$(5)/$(1)
+
+$(OBJDIR)/$(5)/$(1): $(foreach obj,$(2),$(patsubst $(OBJDIR)/src/%,$(OBJDIR)/obj/%,$(OBJDIR)/$(MKPATH)$(obj).o)) $(foreach lib,$(3),$(OBJDIR)/lib/lib$(lib).a)
+	$(MKDIR) $$(dir $$@) && \
+$(LD) -L$(OBJDIR)/lib $(foreach obj,$(2),$(patsubst $(OBJDIR)/src/%,$(OBJDIR)/obj/%,$(OBJDIR)/$(MKPATH)$(obj).o)) $(foreach lib,$(3),-l$(lib)) $(6) $(LDFLAGS) -o $$@
+
+$(4): $(OBJDIR)/$(5)/$(1)
+
+endef
+
+# Generate list of automatic unit tests from $(call run-unit-test,...)
+unit-test: $(OBJDIR)/unit-test/automatic.txt
+define _run-unit-test
+RUN_UNIT_TEST+=$(OBJDIR)/unit-test/$(1)
+endef
+$(OBJDIR)/unit-test/automatic.txt: $(LOCAL_MKS)
+	$(MKDIR) "$(OBJDIR)/unit-test"
+	$(RM) $@
+	@$(foreach test,$(RUN_UNIT_TEST),echo $(test)>>$@;)
+
+# Generate list of automatic integration tests from $(call run-integration-test,...)
+integration-test: $(OBJDIR)/integration-test/automatic.txt
+define _run-integration-test
+RUN_INTEGRATION_TEST+=$(OBJDIR)/integration-test/$(1)
+endef
+$(OBJDIR)/integration-test/automatic.txt: $(LOCAL_MKS)
+	$(MKDIR) "$(OBJDIR)/integration-test"
+	$(RM) $@
+	@$(foreach test,$(RUN_INTEGRATION_TEST),echo $(test)>>$@;)
+	$(TOUCH) "$@"
+
+ifndef FD_HAS_FUZZ
+FUZZ_EXTRA:=$(OBJDIR)/lib/libfd_fuzz_stub.a
+endif
+
+define _fuzz-test
+
+$(eval $(call _make-exe,$(1),$(2),$(3),fuzz-test,fuzz-test,$(LDFLAGS_FUZZ) $(FUZZ_EXTRA) $(4)))
+
+$(OBJDIR)/fuzz-test/$(1): $(FUZZ_EXTRA)
+
+.PHONY: $(1)_unit
+$(1)_unit:
+	$(MKDIR) "corpus/$(1)" && \
+$(MKDIR) -p "$(OBJDIR)/cov/raw" && \
+FD_LOG_PATH="" \
+LLVM_PROFILE_FILE="$(OBJDIR)/cov/raw/$(1)_unit.profraw" \
+$(FIND) corpus/$(1) -type f -exec $(OBJDIR)/fuzz-test/$(1) $(FUZZFLAGS) {} +
+
+.PHONY: $(1)_run
+$(1)_run:
+	$(MKDIR) "corpus/$(1)/explore" && \
+$(MKDIR) -p "$(OBJDIR)/cov/raw" && \
+FD_LOG_PATH="" \
+LLVM_PROFILE_FILE="$(OBJDIR)/cov/raw/$(1)_run.profraw" \
+$(OBJDIR)/fuzz-test/$(1) -artifact_prefix=corpus/$(1)/ $(FUZZFLAGS) corpus/$(1)/explore corpus/$(1)
+
+run-fuzz-test: $(1)_unit
+
+endef
+
+make-bin       = $(eval $(call _make-exe,$(1),$(2),$(3),bin,bin,$(4) $(LDFLAGS_EXE)))
+make-bin-rust  = $(eval $(call _make-exe,$(1),$(2),$(3),rust,bin,$(4) $(LDFLAGS_EXE)))
+make-shared    = $(eval $(call _make-exe,$(1),$(2),$(3),lib,lib,$(4) $(LDFLAGS_SO)))
+make-unit-test = $(eval $(call _make-exe,$(1),$(2),$(3),unit-test,unit-test,$(4) $(LDFLAGS_EXE)))
+run-unit-test  = $(eval $(call _run-unit-test,$(1)))
+make-integration-test = $(eval $(call _make-exe,$(1),$(2),$(3),integration-test,integration-test,$(4) $(LDFLAGS_EXE)))
+run-integration-test  = $(eval $(call _run-integration-test,$(1)))
+make-fuzz-test = $(eval $(call _fuzz-test,$(1),$(2),$(3),$(4) $(LDFLAGS_EXE)))
+
+##############################
+# Usage: $(call make-proof,name,source_file)
+
+define _make-proof
+
+.PHONY: $(1)
+$(1):
+	$(CBMC) $(MKPATH)$(2) --c17 -DCBMC --function cbmc_main
+
+proof: $(1)
+
+endef
+
+make-proof = $(eval $(call _make-proof,$(1),$(2)))
+
+##############################
+## GENERIC RULES
+
+$(OBJDIR)/info :
+	$(MKDIR) $(dir $@) && \
+echo -e \
+"# date     `date +'%Y-%m-%d %H:%M:%S %z'`\n"\
+"# source   `whoami`@`hostname`:`pwd`\n"\
+"# machine  $(MACHINE)\n"\
+"# extras   $(EXTRAS)" > $(OBJDIR)/info && \
+git status --porcelain=2 --branch >> $(OBJDIR)/info
+
+$(OBJDIR)/obj/%.d : src/%.c $(OBJDIR)/info
+	$(MKDIR) $(dir $@) && \
+$(CC) $(CPPFLAGS) $(CFLAGS) -M -MP $< -o $@.tmp && \
+$(SED) 's,\($(notdir $*)\)\.o[ :]*,$(OBJDIR)/obj/$*.o $(OBJDIR)/obj/$*.S $(OBJDIR)/obj/$*.i $@ : ,g' < $@.tmp > $@ && \
+$(RM) $@.tmp
+
+$(OBJDIR)/obj/%.d : src/%.cxx $(OBJDIR)/info
+	$(MKDIR) $(dir $@) && \
+$(CXX) $(CPPFLAGS) $(CXXFLAGS) -M -MP $< -o $@.tmp && \
+$(SED) 's,\($(notdir $*)\)\.o[ :]*,$(OBJDIR)/obj/$*.o $(OBJDIR)/obj/$*.S $(OBJDIR)/obj/$*.i $@ : ,g' < $@.tmp > $@ && \
+$(RM) $@.tmp
+
+$(OBJDIR)/obj/%.o : src/%.c $(OBJDIR)/info
+	$(MKDIR) $(dir $@) && \
+$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/obj/%.o : src/%.cxx $(OBJDIR)/info
+	$(MKDIR) $(dir $@) && \
+$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+
+$(OBJDIR)/obj/%.o : src/%.S $(OBJDIR)/info
+	$(MKDIR) $(dir $@) && \
+$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/obj/%.S : src/%.c $(OBJDIR)/info
+	$(MKDIR) $(dir $@) && \
+$(CC) $(patsubst -g,,$(CPPFLAGS) $(CFLAGS)) -S -fverbose-asm $< -o $@.tmp && \
+$(SED) 's,^#,                                                                                               #,g' < $@.tmp > $@ && \
+$(RM) $@.tmp
+
+$(OBJDIR)/obj/%.S : src/%.cxx $(OBJDIR)/info
+	$(MKDIR) $(dir $@) && \
+$(CXX) $(patsubst -g,,$(CPPFLAGS) $(CXXFLAGS)) -S -fverbose-asm $< -o $@.tmp && \
+$(SED) 's,^#,                                                                                               #,g' < $@.tmp > $@ && \
+$(RM) $@.tmp
+
+$(OBJDIR)/obj/%.i : src/%.c $(OBJDIR)/info
+	$(MKDIR) $(dir $@) && \
+$(CC) $(CPPFLAGS) $(CFLAGS) -E $< -o $@
+
+$(OBJDIR)/obj/%.i : src/%.cxx $(OBJDIR)/info
+	$(MKDIR) $(dir $@) && \
+$(CXX) $(CPPFLAGS) $(CXXFLAGS) -E $< -o $@
+
+$(OBJDIR)/obj/%.check : src/%.c
+	@$(CC) $(CPPFLAGS) $(CFLAGS) -fsyntax-only $<
+
+$(OBJDIR)/obj/%.check : src/%.cxx
+	@$(CXX) $(CPPFLAGS) $(CXXFLAGS) -fsyntax-only $<
+
+$(OBJDIR)/lib/%.a :
+	$(MKDIR) $(dir $@) && \
+$(RM) $@ && \
+$(AR) $(ARFLAGS) $@ $^ && \
+$(RANLIB)  $@
+
+$(OBJDIR)/include/firedancer/% : src/%
+	$(MKDIR) $(dir $@) && \
+$(CP) $^ $@ && \
+$(TOUCH) $@
+
+$(OBJDIR)/example/% : src/%
+	$(MKDIR) $(dir $@) && \
+$(CP) $^ $@ && \
+$(TOUCH) $@
+
+ifeq ($(filter $(MAKECMDGOALS),$(AUX_RULES)),)
+# If we are not in an auxiliary rule (aka we need to actually build something/need dep tree)
+
+# Include all the make fragments
+
+define _include-mk
+MKPATH:=$(dir $(1))
+include $(1)
+MKPATH:=
+endef
+
+# Include all of the Local.mk files we found earlier
+$(foreach mk,$(LOCAL_MKS),$(eval $(call _include-mk,$(mk))))
+
+# Include all the dependencies.  Must be after the make fragments
+# include so that DEPFILES is fully populated (similarly for the
+# show-deps target).
+
+show-deps:
+	@for d in $(DEPFILES); do echo $$d; done
+
+# Define the check target.  Must be after the make fragments include so that
+# DEPFILES is fully populated
+
+check: $(DEPFILES:.d=.check)
+
+ifeq ($(filter $(MAKECMDGOALS),$(AUX_RULES) $(DRY_RULES)),)
+# Generate dependency files
+include $(DEPFILES)
+endif
+
+# Define the asm target.  Must be after the make fragments include so that
+# DEPFILES is fully populated
+
+asm: $(DEPFILES:.d=.S)
+
+# Define the ppp target.  Must be after the make fragments include so that
+# DEPFILES is fully populated
+
+ppp: $(DEPFILES:.d=.i)
+
+endif
+
+run-script-test: bin unit-test
+	mkdir -p "$(OBJDIR)/cov/raw" && \
+OBJDIR=$(OBJDIR) \
+MACHINE=$(MACHINE) \
+LLVM_PROFILE_FILE="$(OBJDIR)/cov/raw/script_test-%p.profraw" \
+LOG_PATH="$(OBJDIR)/log/fd-script-test-report" \
+contrib/test/run_script_tests.sh
+
+run-test-vectors: bin unit-test
+	mkdir -p "$(OBJDIR)/cov/raw" && \
+OBJDIR=$(OBJDIR) \
+MACHINE=$(MACHINE) \
+LLVM_PROFILE_FILE="$(OBJDIR)/cov/raw/test_vectors-%p.profraw" \
+LOG_PATH="$(OBJDIR)/log/fd-test-vectors-report" \
+contrib/test/run_test_vectors.sh
+
+run-solcap-tests: bin unit-test
+	OBJDIR=$(OBJDIR) \
+	MACHINE=$(MACHINE) \
+	contrib/test/run_solcap_tests.sh
+
+seccomp-policies:
+	$(FIND) . -name '*.seccomppolicy' -exec $(PYTHON) contrib/codegen/generate_filters.py {} \;
+
+##############################
+# LLVM Coverage
+#
+# Below steps create a report which lines of code have been executed/
+# "covered" by tests.  For convenience, below supports merging coverage
+# data from multiple machine types.
+#
+# Enabling the 'llvm-cov' extra has two effects on clang-compiled objects:
+# - Coverage instrumentation is inserted, which causes profile data
+#   to get written out to disk when running code
+# - Adds an "__llvm_covmap" section to each object containing "coverage
+#   mappings".   Those tells tooling how to translate profile data to
+#   source line coverage
+#
+# Documentation:
+#   https://clang.llvm.org/docs/SourceBasedCodeCoverage.html
+#   https://llvm.org/docs/CoverageMappingFormat.html
+#   https://man.archlinux.org/man/lcov.1.en
+#
+# We thus have these steps
+#
+# 1. For each machine
+# 1.1. Compile with llvm-cov
+# 1.2. Run tests (This Makefile sets $LLVM_PROFILE_FILE appropriately for each kind of test)
+# 1.3. Merge raw profiles from test runs into a per-machine profile using 'llvm-profdata merge'
+# 1.4. Merge all machine objects into a thin .ar file
+# 1.5. Generate lcov tracefile from coverage mappings (step 1.4) and indexed profile data (step 1.3)
+# 1.6. Generate machine-specific HTML report using 'genhtml'
+#
+# 2. Once across all machines
+# 2.1. Merge lcov tracefiles using 'lcov -a'
+# 2.2. Generate combined HTML report using 'genhtml'
+
+# llvm-cov step 1.3: Merge and index "raw" profile data from test runs
+$(OBJDIR)/cov/cov.profdata: $(wildcard $(OBJDIR)/cov/raw/*.profraw)
+	$(MKDIR) $(OBJDIR)/cov && $(LLVM_PROFDATA) merge -o $@ $^
+
+# llvm-cov step 1.4
+# Create a thin archive containing all objects with coverage mappings.
+# Sigh ... llvm-cov has a bug that makes it blow up when it encounters
+# any object in the archive without an __llvm_covmap section, such as
+# objects compiled from assembly code.
+.PHONY: $(OBJDIR)/cov/mappings.ar
+$(OBJDIR)/cov/mappings.ar:
+	rm -f $(OBJDIR)/cov/mappings.ar &&                        \
+  $(MKDIR) $(dir $@) &&                                       \
+  $(FIND) $(addsuffix /obj,$(OBJDIR)) -name '*.o' -exec sh -c \
+    '[ -n "`llvm-objdump -h $$1 | $(GREP) llvm_covmap`" ]     \
+    && llvm-ar --thin q $@ $$1' sh {} \;
+
+# llvm-cov step 1.5
+$(OBJDIR)/cov/cov.lcov: $(addsuffix /cov/cov.profdata,$(OBJDIR)) $(OBJDIR)/cov/mappings.ar
+ifeq ($(OBJDIR),)
+	echo "No profile data found. Did you set OBJDIRS?" >&2 && exit 1
+endif
+	$(LLVM_COV) export                    \
+  -format=lcov                          \
+  $(addprefix -instr-profile=,$<)       \
+  $(OBJDIR)/cov/mappings.ar             \
+  --ignore-filename-regex="(test_|fuzz_).*\\.c" \
+> $@
+
+# llvm-cov step 2.1
+# Merge multiple lcov files together
+$(BASEDIR)/cov/cov.lcov: $(shell $(FIND) $(BASEDIR) -name 'cov.lcov' -print)
+	$(MKDIR) $(BASEDIR)/cov && $(LCOV) -o $@ $(addprefix -a ,$^)
+
+# llvm-cov step 1.6, 2.2
+# Create HTML coverage report using lcov genhtml
+%/cov/html/index.html: %/cov/cov.lcov
+	rm -rf $(dir $@) && $(GENHTML) --output $(dir $@) $<
+	@echo "Created coverage report at $@"
+
+# `make cov-report` produces a coverage report from test runs for the
+# currently selected build profile
+cov-report: $(OBJDIR)/cov/html/index.html
+	$(LCOV) --summary $(OBJDIR)/cov/cov.lcov
+
+# `make dist-cov-report OBJDIRS="build/native/gcc build/native/clang ..."`
+# produces a coverage report from multiple build profiles
+dist-cov-report: $(BASEDIR)/cov/html/index.html
+	$(LCOV) --summary $(BASEDIR)/cov/cov.lcov
+
+# frontend release channel. alpha releases are new frontend features
+# that require internal testing before releasing to frankendancer
+FRONTEND_RELEASE_CHANNEL := stable
+ifeq ($(FRONTEND_RELEASE_CHANNEL),stable)
+else ifeq ($(FRONTEND_RELEASE_CHANNEL),alpha)
+else ifeq ($(FRONTEND_RELEASE_CHANNEL),dev)
+else
+$(error "unexpected FRONTEND_RELEASE_CHANNEL")
+endif
+
+frontend: frontend-clean
+	cd frontend && npm ci && npm run build
+	rm -rf src/disco/gui/dist_$(FRONTEND_RELEASE_CHANNEL)
+	mkdir -p src/disco/gui/dist_$(FRONTEND_RELEASE_CHANNEL)
+	cp -r frontend/dist/* src/disco/gui/dist_$(FRONTEND_RELEASE_CHANNEL)
+	cd frontend && git rev-parse HEAD > ../src/disco/gui/dist_$(FRONTEND_RELEASE_CHANNEL)/version
+	> src/disco/gui/generated/http_import_dist.c; \
+	echo "/* THIS FILE WAS GENERATED BY make frontend. DO NOT EDIT BY HAND! */" >> src/disco/gui/generated/http_import_dist.c; \
+	echo "#include \"http_import_dist.h\"" >> src/disco/gui/generated/http_import_dist.c; \
+	echo "" >> src/disco/gui/generated/http_import_dist.c; \
+	for release_channel in stable alpha dev; do \
+		counter=0; \
+		if [ ! -d "src/disco/gui/dist_$$release_channel" ]; then continue; fi; \
+		for file in $$($(FIND) src/disco/gui/dist_$$release_channel -type f | sort); do \
+			compress_prefix=$$(echo "$$file" | sed "s|src/disco/gui/dist_$${release_channel}/|src/disco/gui/dist_$${release_channel}_cmp/|"); \
+			echo "FD_IMPORT_BINARY( file_$$release_channel$$counter, \"$$file\" );" >> src/disco/gui/generated/http_import_dist.c; \
+			echo "FD_IMPORT_BINARY( file_$$release_channel$${counter}_zstd, \"$${compress_prefix}.zst\" );" >> src/disco/gui/generated/http_import_dist.c; \
+			echo "FD_IMPORT_BINARY( file_$$release_channel$${counter}_gzip, \"$${compress_prefix}.gz\" );" >> src/disco/gui/generated/http_import_dist.c; \
+			counter=$$((counter + 1)); \
+		done; \
+		echo "" >> src/disco/gui/generated/http_import_dist.c; \
+	done; \
+	echo "" >> src/disco/gui/generated/http_import_dist.c; \
+	for release_channel in stable alpha dev; do \
+		echo "fd_http_static_file_t STATIC_FILES_$$(echo $$release_channel | tr '[:lower:]' '[:upper:]')[] = {" >> src/disco/gui/generated/http_import_dist.c; \
+		counter=0; \
+		for file in $$($(FIND) src/disco/gui/dist_$$release_channel -type f | sort); do \
+			stripped_file=$$(echo $$file | sed "s|^src/disco/gui/dist_$$release_channel/||"); \
+			echo "	{" >> src/disco/gui/generated/http_import_dist.c; \
+			echo "		.name = \"/$$stripped_file\"," >> src/disco/gui/generated/http_import_dist.c; \
+			echo "		.data = file_$$release_channel$$counter," >> src/disco/gui/generated/http_import_dist.c; \
+			echo "		.data_len = &file_$$release_channel$${counter}_sz," >> src/disco/gui/generated/http_import_dist.c; \
+			echo "		.zstd_data = file_$$release_channel$${counter}_zstd," >> src/disco/gui/generated/http_import_dist.c; \
+			echo "		.zstd_data_len = &file_$$release_channel$${counter}_zstd_sz," >> src/disco/gui/generated/http_import_dist.c; \
+			echo "		.gzip_data = file_$$release_channel$${counter}_gzip," >> src/disco/gui/generated/http_import_dist.c; \
+			echo "		.gzip_data_len = &file_$$release_channel$${counter}_gzip_sz," >> src/disco/gui/generated/http_import_dist.c; \
+			echo "	}," >> src/disco/gui/generated/http_import_dist.c; \
+			counter=$$((counter + 1)); \
+		done; \
+		echo "	{0}" >> src/disco/gui/generated/http_import_dist.c; \
+		echo "};" >> src/disco/gui/generated/http_import_dist.c; \
+		echo "" >> src/disco/gui/generated/http_import_dist.c; \
+	done; \
+
+frontend-clean:
+	rm -rf src/disco/gui/dist_stable_cmp
+	rm -rf src/disco/gui/dist_alpha_cmp
+	rm -rf src/disco/gui/dist_dev_cmp

@@ -1,0 +1,76 @@
+#include "fd_ssmanifest_parser.h"
+#include "../../../flamenco//types/fd_types.h"
+#include "../../../util/fd_util.h"
+
+#include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+
+int
+main( int     argc,
+      char ** argv ) {
+  fd_boot( &argc, &argv );
+
+  if( FD_UNLIKELY( argc!=2 ) ) {
+    FD_LOG_ERR(( "Usage: %s <MANIFEST_FILE>", argv[0] ));
+    return EXIT_FAILURE;
+  }
+
+  struct stat st;
+  if( FD_UNLIKELY( -1==stat( argv[1], &st ) ) ) FD_LOG_ERR(( "stat() failed (%d-%s)", errno, fd_io_strerror( errno ) ));
+  ulong size = (ulong)st.st_size;
+
+  ulong cpu_idx = fd_tile_cpu_id( fd_tile_idx() );
+  if( cpu_idx>fd_shmem_cpu_cnt() ) cpu_idx = 0UL;
+
+  char const * _page_sz   = fd_env_strip_cmdline_cstr ( &argc, &argv, "--page-sz",  NULL, "gigantic"                   );
+  ulong        page_cnt   = fd_env_strip_cmdline_ulong( &argc, &argv, "--page-cnt", NULL, 2UL                          );
+  ulong        numa_idx   = fd_env_strip_cmdline_ulong( &argc, &argv, "--numa-idx", NULL, fd_shmem_numa_idx( cpu_idx ) );
+
+  ulong page_sz = fd_cstr_to_shmem_page_sz( _page_sz );
+  if( FD_UNLIKELY( !page_sz ) ) FD_LOG_ERR(( "unsupported --page-sz" ));
+
+  fd_wksp_t * wksp = fd_wksp_new_anonymous( page_sz, page_cnt, fd_shmem_cpu_idx( numa_idx ), "wksp", 0UL );
+  FD_TEST( wksp );
+
+  uchar * buffer = fd_wksp_alloc_laddr( wksp, 1UL, size, 1UL );
+  FD_TEST( buffer );
+
+  int fd = open( argv[1], O_RDONLY );
+  if( FD_UNLIKELY( -1==fd ) ) FD_LOG_ERR(( "open() failed (%d-%s)", errno, fd_io_strerror( errno ) ));
+
+  ulong read_bytes = 0UL;
+  while( read_bytes<size ) {
+    long bytes = read( fd, buffer+read_bytes, size-read_bytes );
+    if( FD_UNLIKELY( -1==bytes ) ) FD_LOG_ERR(( "read() failed (%d-%s)", errno, fd_io_strerror( errno ) ));
+    else if( FD_UNLIKELY( !bytes ) ) break;
+    read_bytes += (ulong)bytes;
+  }
+
+  fd_snapshot_manifest_t * manifest = aligned_alloc( alignof(fd_snapshot_manifest_t), sizeof(fd_snapshot_manifest_t) );
+  FD_TEST( manifest );
+
+  FD_LOG_NOTICE(( "Parsing %lu bytes from %s", size, argv[1] ));
+
+  fd_ssmanifest_parser_t * parser = fd_ssmanifest_parser_join( fd_ssmanifest_parser_new( aligned_alloc( fd_ssmanifest_parser_align(), fd_ssmanifest_parser_footprint() ) ) );
+  FD_TEST( parser );
+
+  fd_ssmanifest_parser_init( parser, manifest );
+
+  long ts = -fd_log_wallclock();
+
+  int result = fd_ssmanifest_parser_consume( parser, buffer, size, NULL, NULL );
+  if( FD_UNLIKELY( result!=FD_SSMANIFEST_PARSER_ADVANCE_DONE ) ) FD_LOG_ERR(( "fd_ssmanifest_parser_consume failed (%d)", result ));
+
+  /* re-entering the parser after DONE must return ERROR. */
+  fd_rng_t rng[1]; fd_rng_join( fd_rng_new( rng, (uint)fd_log_wallclock(), 0UL ) );
+  uchar garbage[16];
+  for( ulong i=0UL; i<sizeof(garbage); i++ ) garbage[i] = (uchar)fd_rng_uint( rng );
+  int reentry_result = fd_ssmanifest_parser_consume( parser, garbage, sizeof(garbage), NULL, NULL );
+  FD_TEST( reentry_result==FD_SSMANIFEST_PARSER_ADVANCE_ERROR );
+
+  long elapsed = fd_log_wallclock() + ts;
+  FD_LOG_NOTICE(( "fd_ssmanifest_parser decoded %lu bytes in %ld ms", size, elapsed/(1000L*1000L) ));
+}

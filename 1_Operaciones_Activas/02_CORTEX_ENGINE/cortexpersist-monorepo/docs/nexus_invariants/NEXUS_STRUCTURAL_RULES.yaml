@@ -1,0 +1,3 @@
+Invariant_ID: INV-NEXUS-001
+Dominio: Continuidad Estructural y Auditoría Centralizada
+Regla_Central: "Todo registro temporal (CHANGELOG), vector de ataque (threat-model) y evidencia empírica (VERIFICATION) debe emanar geométricamente de un único nodo criptográfico (cortexpersist-monorepo). Prohibida la divergencia semántica en repositorios satélite."

@@ -1,0 +1,13 @@
+# Mandato Ω₉: Prohibido exponer claves privadas en el repositorio.
+.env
+
+# Artefactos de compilación
+out/
+cache/
+target/
+
+# Sesión Telegram (contiene tokens de autenticación)
+*.session
+
+# Artifacts binarios
+ouroboros-daemon

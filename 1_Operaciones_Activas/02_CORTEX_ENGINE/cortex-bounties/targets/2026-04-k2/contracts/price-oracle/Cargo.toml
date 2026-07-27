@@ -1,0 +1,21 @@
+[package]
+name = "k2-price-oracle"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+testutils = []
+
+[dependencies]
+soroban-sdk = { workspace = true }
+k2-shared = { path = "../shared" }
+# Note: Using WASM import instead of SDK dependency
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }
+
+[profile.release]
+overflow-checks = true

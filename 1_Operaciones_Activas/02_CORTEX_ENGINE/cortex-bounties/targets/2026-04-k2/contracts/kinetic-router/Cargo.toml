@@ -1,0 +1,24 @@
+[package]
+name = "k2-kinetic-router"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+soroban-sdk = { workspace = true }
+k2-shared = { path = "../shared" }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }
+k2_price_oracle = { path = "../price-oracle", package = "k2-price-oracle" }
+k2_a_token = { path = "../a-token", package = "k2-a-token" }
+k2_debt_token = { path = "../debt-token", package = "k2-debt-token" }
+k2_interest_rate_strategy = { path = "../interest-rate-strategy", package = "k2-interest-rate-strategy" }
+
+[features]
+testutils = ["soroban-sdk/testutils"]
+
+[profile.release]
+overflow-checks = true

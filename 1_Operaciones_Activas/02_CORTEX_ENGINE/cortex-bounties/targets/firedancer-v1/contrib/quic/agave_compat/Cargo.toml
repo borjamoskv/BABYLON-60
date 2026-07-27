@@ -1,0 +1,21 @@
+[package]
+name = "firedancer-agave-quic-test"
+version = "0.1.0"
+edition = "2021"
+publish = false
+build = "build.rs"
+
+[build-dependencies]
+bindgen = "0.70"
+
+[dependencies]
+crossbeam-channel = "0.5"
+env_logger = "0.11"
+libc = "0.2"
+rand = "0"
+solana-connection-cache = "3.1.4"
+solana-client = "3.1.4"
+solana-keypair = "3.1.0"
+solana-streamer = "3.1.4"
+solana-quic-client = "3.1.4"
+tokio-util = "0.7"

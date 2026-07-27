@@ -1,0 +1,15 @@
+Claim: Los antipatrones (Anergía Estocástica, Spider Web Architecture, Ouroboros Emocional) son fallas de topología, no errores de sintaxis. Representan disipación de ATP sin mutación de estado C5-REAL.
+Proof:
+  Base: f43888b8
+  Range: [0, 1]
+  Confidence: C5-REAL
+Isomorphisms:
+  - Green Theater <-> Disipación Térmica
+  - Spider Web Architecture <-> Deadlock Termodinámico
+  - Prompt Injection <-> Corrupción de Memoria
+  - Code Duplication <-> Anergía Estructural
+Blast_Radius_Matrix:
+  Vector: Eliminación Sistémica de Antipatrones
+  Blast Radius: Global (Swarm)
+  Target Invariant: MUTEX_DRY_ENFORCEMENT, MUTEX_DECOUPLED_COHESION
+  Anergy Risk: Bajo
