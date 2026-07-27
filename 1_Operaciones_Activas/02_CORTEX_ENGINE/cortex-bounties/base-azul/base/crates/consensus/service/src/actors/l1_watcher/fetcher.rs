@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Narrow provider trait for [`super::L1WatcherActor`].
 
 use alloy_eips::BlockId;

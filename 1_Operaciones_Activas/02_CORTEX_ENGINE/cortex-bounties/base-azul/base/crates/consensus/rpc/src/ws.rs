@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Custom RPC subscription endpoints for the base node to stream internal state/data.
 
 use base_consensus_engine::EngineState;

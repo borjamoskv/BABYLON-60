@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Base component roles.
 
 use alloy_primitives::Address;

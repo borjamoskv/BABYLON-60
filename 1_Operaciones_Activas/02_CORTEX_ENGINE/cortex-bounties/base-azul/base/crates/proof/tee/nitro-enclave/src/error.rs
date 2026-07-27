@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Error types for enclave server operations.
 
 use base_proof_preimage::PreimageKey;

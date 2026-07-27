@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Subscription types for the `eth_` `PubSub` RPC extension
 
 use alloy_consensus::Eip658Value;

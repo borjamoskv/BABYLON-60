@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! [`PrecompileProvider`] for FPVM-accelerated rollup precompiles.
 
 use alloc::string::String;

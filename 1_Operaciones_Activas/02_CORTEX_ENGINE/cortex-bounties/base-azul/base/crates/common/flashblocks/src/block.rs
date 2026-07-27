@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the [`Flashblock`] type used in Flashblocks.
 
 use std::io::Read;

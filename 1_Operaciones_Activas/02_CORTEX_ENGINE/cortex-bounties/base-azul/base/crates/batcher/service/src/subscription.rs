@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Block subscription implementations for the batcher service.
 
 use std::sync::Arc;

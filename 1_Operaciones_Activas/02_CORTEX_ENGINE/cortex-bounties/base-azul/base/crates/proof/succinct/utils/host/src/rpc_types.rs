@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! RPC types for rollup outputs.
 //!
 //! These types are copied from kona-rpc to avoid bringing in rollup-boost dependencies.

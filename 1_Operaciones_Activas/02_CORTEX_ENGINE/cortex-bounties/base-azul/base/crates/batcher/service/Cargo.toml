@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 [package]
 name = "base-batcher-service"
 description = "Batcher service: config, CLI arguments, and service startup"

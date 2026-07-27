@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /// Generates a `TxManagerCli` struct with transaction manager CLI arguments,
 /// parameterized by env var prefix at compile time.
 ///

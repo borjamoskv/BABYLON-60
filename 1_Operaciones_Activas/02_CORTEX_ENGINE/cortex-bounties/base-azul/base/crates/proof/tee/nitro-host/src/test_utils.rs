@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Shared test utilities for the `base-proof-tee-nitro-host` crate.
 
 use std::{

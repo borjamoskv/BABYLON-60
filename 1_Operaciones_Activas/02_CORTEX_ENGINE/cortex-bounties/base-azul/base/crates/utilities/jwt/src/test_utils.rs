@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Test utilities for JWT handling.
 
 use alloy_rpc_types_engine::JwtSecret;

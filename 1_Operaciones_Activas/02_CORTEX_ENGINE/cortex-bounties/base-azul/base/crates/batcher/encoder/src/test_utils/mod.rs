@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Test utilities for the batcher encoder.
 
 use std::collections::VecDeque;

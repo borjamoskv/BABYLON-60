@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains brotli decompression utilities.
 
 use alloc::{vec, vec::Vec};

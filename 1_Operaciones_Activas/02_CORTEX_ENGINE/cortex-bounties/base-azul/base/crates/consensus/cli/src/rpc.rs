@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Rpc CLI Arguments
 //!
 //! Flags for configuring the RPC server.

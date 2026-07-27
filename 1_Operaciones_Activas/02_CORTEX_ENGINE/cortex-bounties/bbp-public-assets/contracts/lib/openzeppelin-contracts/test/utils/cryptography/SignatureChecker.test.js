@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { toEthSignedMessageHash } = require('../../helpers/sign');
 
 const { expect } = require('chai');

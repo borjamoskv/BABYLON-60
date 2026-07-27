@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Async trait definitions for RPC clients.
 
 use alloy_primitives::{Address, B256, Bytes, U256};

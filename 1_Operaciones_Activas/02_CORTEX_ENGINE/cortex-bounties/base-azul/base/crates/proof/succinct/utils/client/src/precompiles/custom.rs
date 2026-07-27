@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Custom crypto provider for KZG proof verification.
 
 use kzg_rs::{Bytes32, Bytes48, KzgProof, KzgSettings};

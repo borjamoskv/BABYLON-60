@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # base-batcher-encoder
 
 Batcher encoding pipeline: `BatchPipeline` trait and `BatchEncoder` state machine.

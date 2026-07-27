@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! JSON-RPC client for polling prover instance signer endpoints.
 
 use std::{collections::HashMap, sync::Mutex, time::Duration};

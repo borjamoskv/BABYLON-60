@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Genesis types.
 
 use alloy_eips::eip1898::BlockNumHash;

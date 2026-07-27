@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! A builder for the [`GossipDriver`].
 
 use std::time::Duration;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Terminal UI framework: frame layout, keybindings, and terminal lifecycle.
 
 /// Application frame layout and help sidebar.

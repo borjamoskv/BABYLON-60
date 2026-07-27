@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Priority fee estimation based on resource consumption in flashblocks.
 //!
 //! This module provides the core algorithm for estimating the priority fee needed

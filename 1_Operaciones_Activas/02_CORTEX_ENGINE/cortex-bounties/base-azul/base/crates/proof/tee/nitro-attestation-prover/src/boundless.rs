@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! [`BoundlessProver`] — proving backend using the Boundless marketplace.
 //!
 //! Submits proof requests to the Boundless decentralised proving marketplace

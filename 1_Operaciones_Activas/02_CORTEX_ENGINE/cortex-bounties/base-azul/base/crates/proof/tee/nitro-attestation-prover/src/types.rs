@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Core types and trait for attestation proof generation.
 
 use alloy_primitives::{Address, Bytes};

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Metering store.
 //!
 //! Provides a concurrent cache for resource metering data with LRU eviction

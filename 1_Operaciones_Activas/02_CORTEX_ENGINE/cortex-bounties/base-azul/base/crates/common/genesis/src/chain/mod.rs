@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Module containing the chain config.
 
 mod addresses;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Loads Base pending block for a RPC response.
 
 use alloy_eips::BlockNumberOrTag;

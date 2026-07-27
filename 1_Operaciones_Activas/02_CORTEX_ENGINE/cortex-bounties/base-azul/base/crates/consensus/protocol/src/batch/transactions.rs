@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module contains the [`SpanBatchTransactions`] type and logic for encoding and decoding
 //! transactions in a span batch.
 

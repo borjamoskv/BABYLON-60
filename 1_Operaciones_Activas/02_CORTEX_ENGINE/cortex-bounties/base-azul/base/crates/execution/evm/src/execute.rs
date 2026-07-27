@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Base block execution strategy.
 
 /// Helper type with backwards compatible methods to obtain executor providers.

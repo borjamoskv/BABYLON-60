@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Rejected transaction types shared between builder and audit-archiver.
 
 use alloy_primitives::TxHash;

@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-health`
 
 Shared health check utilities for Base services.

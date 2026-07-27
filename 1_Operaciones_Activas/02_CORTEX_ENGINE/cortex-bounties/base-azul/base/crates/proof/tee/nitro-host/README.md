@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-proof-tee-nitro-host`
 
 Host-side TEE proving backend for AWS Nitro Enclaves.

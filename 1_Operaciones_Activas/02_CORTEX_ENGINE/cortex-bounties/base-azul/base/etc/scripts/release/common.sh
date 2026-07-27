@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env bash
 # common.sh - Shared helper functions for release scripts
 #

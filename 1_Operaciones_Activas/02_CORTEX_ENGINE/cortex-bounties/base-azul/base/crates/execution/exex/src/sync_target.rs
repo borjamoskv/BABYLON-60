@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Sync target with trie data cache for the background sync loop.
 //!
 //! Buffers trie data from exex notifications so the sync loop can use

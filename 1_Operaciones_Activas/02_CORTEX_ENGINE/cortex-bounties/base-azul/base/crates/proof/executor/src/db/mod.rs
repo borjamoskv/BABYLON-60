@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module contains an implementation of an in-memory Trie DB for [`revm`], that allows for
 //! incremental updates through fetching node preimages on the fly during execution.
 

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Encoder configuration and its validation error type.
 
 use base_common_genesis::RollupConfig;

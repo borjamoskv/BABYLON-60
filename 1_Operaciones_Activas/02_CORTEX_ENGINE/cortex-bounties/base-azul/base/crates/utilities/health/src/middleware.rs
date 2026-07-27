@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Tower middleware for backwards-compatible HTTP GET health checks.
 //!
 //! Replicates go-ethereum's behavior of returning HTTP 200 for empty GET requests

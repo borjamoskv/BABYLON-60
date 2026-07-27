@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! RPC-based polling source for the latest unsafe L2 head block.
 
 use std::sync::{Arc, Mutex};

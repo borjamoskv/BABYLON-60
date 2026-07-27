@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Multi-block range proof generation binary.
 #![recursion_limit = "256"]
 

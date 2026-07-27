@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Mock types for the frame queue stage.
 
 use alloc::{boxed::Box, vec::Vec};

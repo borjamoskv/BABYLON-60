@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! `eth_` `PubSub` RPC extension for flashblocks and standard subscriptions
 //!
 //! This module provides an extended `eth_subscribe` implementation that supports both

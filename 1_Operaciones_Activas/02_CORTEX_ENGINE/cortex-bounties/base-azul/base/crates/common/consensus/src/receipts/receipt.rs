@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Receipt type for execution and storage.
 
 use alloc::vec::Vec;

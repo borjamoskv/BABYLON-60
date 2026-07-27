@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the block executor for base.
 
 use alloc::{borrow::Cow, boxed::Box, vec::Vec};

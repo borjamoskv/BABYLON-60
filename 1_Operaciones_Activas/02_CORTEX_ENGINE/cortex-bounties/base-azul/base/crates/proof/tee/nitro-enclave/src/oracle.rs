@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! HashMap-backed preimage oracle for in-enclave stateless execution.
 
 use std::{collections::HashMap, fmt, sync::Arc};

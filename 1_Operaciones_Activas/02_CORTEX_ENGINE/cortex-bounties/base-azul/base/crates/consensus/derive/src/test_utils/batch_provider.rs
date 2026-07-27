@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! A mock implementation of the [`NextBatchProvider`] stage for testing.
 
 use alloc::{boxed::Box, vec::Vec};

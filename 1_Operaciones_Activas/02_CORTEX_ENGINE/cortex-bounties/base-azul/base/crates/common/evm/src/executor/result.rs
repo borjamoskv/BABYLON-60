@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the [`BaseTxResult`] type.
 
 use alloy_evm::{block::TxResult as TxResultTrait, eth::EthTxResult};

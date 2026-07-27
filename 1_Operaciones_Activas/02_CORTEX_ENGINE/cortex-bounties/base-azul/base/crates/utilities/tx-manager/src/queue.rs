@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Bounded async transaction send queue with backpressure.
 //!
 //! [`TxQueue`] wraps a [`TxManager`] and limits the number of in-flight

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! `AnchorStateRegistry` contract bindings.
 //!
 //! Provides the anchor state (latest finalized output root) used as the starting

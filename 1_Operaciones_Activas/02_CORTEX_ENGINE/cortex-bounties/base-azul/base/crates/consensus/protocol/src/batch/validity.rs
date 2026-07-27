@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the [`BatchValidity`], [`BatchDropReason`] and their encodings.
 
 /// Reasons why a batch may be dropped.

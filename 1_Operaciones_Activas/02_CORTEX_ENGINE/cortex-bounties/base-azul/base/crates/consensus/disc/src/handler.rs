@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Handler to the [`discv5::Discv5`] service spawned in a thread.
 
 use std::{collections::HashSet, string::String, sync::Arc, time::Duration};

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Error types for sources.
 
 use alloc::string::{String, ToString};

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/bin/bash
 # Simulates a sequencer failover: stops the active sequencer on the current
 # raft leader's CL node via admin_stopSequencer, then transfers raft leadership

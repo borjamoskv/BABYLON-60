@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Contributing Guidelines
 
 There are many ways to contribute to OpenZeppelin Contracts.

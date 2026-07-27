@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module contains the [`TrieNode`] type, which represents a node within a standard Merkle
 //! Patricia Trie.
 

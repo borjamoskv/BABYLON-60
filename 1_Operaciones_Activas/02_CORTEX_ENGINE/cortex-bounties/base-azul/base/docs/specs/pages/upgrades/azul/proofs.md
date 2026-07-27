@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Azul: Proof System
 
 Azul introduces a multi-proof system for the L2 checkpoints that secure withdrawals to L1. A

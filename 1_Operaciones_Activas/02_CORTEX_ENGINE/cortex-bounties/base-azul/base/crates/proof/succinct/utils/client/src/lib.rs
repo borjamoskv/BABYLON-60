@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Succinct zkVM client utilities for Base proof generation.
 
 pub mod boot;

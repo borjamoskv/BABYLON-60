@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-metrics`
 
 Utility macros and types for recording metrics in base crates.

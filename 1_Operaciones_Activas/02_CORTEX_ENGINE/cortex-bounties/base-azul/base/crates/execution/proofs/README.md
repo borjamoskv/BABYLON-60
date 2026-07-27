@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-proofs-extension`
 
 Proofs history extension for Base node. Enables on-disk storage and retrieval of historical Merkle proofs for state verification.

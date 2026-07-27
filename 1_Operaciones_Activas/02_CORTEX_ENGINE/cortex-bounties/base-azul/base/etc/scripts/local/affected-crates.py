@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """Determine which workspace crates are affected by changes on the current branch.
 

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Wall-clock scheduled ticker that records its own drift on every fire.
 //!
 //! Wraps [`tokio::time::Interval`] together with the wall-clock target time

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Test utilities for the protocol crate.
 
 use alloc::{boxed::Box, format, string::String, sync::Arc, vec::Vec};

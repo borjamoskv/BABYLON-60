@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! CLI argument definitions for proposer.
 
 use std::time::Duration;

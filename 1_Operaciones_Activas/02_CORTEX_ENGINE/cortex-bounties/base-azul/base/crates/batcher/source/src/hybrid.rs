@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Hybrid block source that races a subscription stream against interval-based polling.
 
 use std::{collections::HashMap, time::Duration};

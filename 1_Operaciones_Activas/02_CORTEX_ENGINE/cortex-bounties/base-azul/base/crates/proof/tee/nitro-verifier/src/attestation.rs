@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! `COSE_Sign1` parsing and attestation document extraction.
 //!
 //! Adapted from the Automata SDK's `cose.rs` and `doc.rs`, replacing the

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Macros used across test utilities.
 
 /// A shorthand syntax for constructing [`base_protocol::Frame`]s.

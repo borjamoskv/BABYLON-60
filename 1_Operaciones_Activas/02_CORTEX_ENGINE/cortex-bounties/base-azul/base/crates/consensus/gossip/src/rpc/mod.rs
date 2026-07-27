@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! RPC API types and request handling for P2P administration.
 //!
 //! This module provides a JSON-RPC compatible interface for monitoring and controlling

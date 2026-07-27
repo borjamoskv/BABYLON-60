@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Shared CLI argument types and configuration helpers for succinct scripts.
 
 use std::path::PathBuf;

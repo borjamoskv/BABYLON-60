@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # base-batcher-source
 
 L2 unsafe block source for the Base batcher.

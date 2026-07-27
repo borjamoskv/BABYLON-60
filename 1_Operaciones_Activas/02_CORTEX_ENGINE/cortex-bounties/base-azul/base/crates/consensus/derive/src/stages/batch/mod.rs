@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains stages pertaining to the processing of [Batch]es.
 //!
 //! Sitting after the [`ChannelReader`] stage, the [`BatchStream`] and [`BatchProvider`] stages are

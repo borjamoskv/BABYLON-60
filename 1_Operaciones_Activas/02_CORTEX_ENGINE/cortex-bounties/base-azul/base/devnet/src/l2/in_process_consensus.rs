@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! In-process consensus node for L2 devnet.
 //!
 //! Runs `base-consensus-node` directly in the test process, eliminating the Docker

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Historical proofs RPC server implementation for `debug_` namespace.
 
 use std::{marker::PhantomData, sync::Arc};

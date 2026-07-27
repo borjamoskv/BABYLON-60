@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { join, relative, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'

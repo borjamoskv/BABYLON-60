@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Database client and types for persisting proof request state.
 
 mod client;

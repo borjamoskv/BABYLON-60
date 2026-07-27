@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Metering collector that reads timing data from `PendingBlocks` broadcasts.
 
 use std::{collections::HashMap, fmt, sync::Arc};

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Commonly used `NodeRecord` type for peers.
 //!
 //! This is a simplified version of the `NodeRecord` type in reth.

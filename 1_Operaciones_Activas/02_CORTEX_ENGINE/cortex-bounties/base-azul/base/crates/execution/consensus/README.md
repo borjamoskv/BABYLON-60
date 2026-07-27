@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-execution-consensus`
 
 Consensus implementation for Base.

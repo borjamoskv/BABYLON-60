@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the RPC Configuration.
 
 use std::{net::SocketAddr, num::NonZeroUsize, path::PathBuf, time::Duration};

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Development RPC API for exposing internal engine state and task queue information.
 //!
 //! This module provides development and debugging endpoints that allow introspection

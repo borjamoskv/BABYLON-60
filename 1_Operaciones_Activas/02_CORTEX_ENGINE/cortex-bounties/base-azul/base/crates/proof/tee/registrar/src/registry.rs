@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Registry client adapter for the registrar.
 //!
 //! Wraps [`TEEProverRegistryContractClient`] from `base-proof-contracts` with

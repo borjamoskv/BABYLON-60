@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Tests interactions with sequencer actor's inputs channels.
 
 use std::{str::FromStr, time::Duration};

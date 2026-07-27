@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use async_trait::async_trait;
 use jsonrpsee::core::RpcResult;
 

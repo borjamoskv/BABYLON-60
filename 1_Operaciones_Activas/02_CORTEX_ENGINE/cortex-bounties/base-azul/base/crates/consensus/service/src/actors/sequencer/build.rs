@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Payload builder for the sequencer.
 //!
 //! Contains [`PayloadBuilder`], which drives L1 origin selection, attribute

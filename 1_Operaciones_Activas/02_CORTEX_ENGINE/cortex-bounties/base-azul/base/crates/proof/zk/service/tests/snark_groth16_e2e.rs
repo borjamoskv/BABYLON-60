@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! End-to-end integration test for the SNARK Groth16 two-stage proving pipeline.
 //!
 //! Delegates to [`SnarkE2e::run()`], which is also used by the standalone

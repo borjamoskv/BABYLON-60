@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains trait [`DefaultBase`] used to create a default context.
 use revm::{
     Context, Journal, MainContext,

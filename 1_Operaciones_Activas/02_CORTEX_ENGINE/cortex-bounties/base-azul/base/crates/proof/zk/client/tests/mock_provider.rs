@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Integration test demonstrating that `ZkProofProvider` can be mocked for
 //! testing without needing a real gRPC server.
 

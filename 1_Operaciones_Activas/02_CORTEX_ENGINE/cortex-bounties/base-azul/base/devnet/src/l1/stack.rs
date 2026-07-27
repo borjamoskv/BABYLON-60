@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! L1 stack orchestration (Reth + Lighthouse).
 
 use std::path::PathBuf;

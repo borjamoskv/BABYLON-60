@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Base consensus errors
 
 use alloy_primitives::B256;

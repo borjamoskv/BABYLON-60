@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Shared test helpers for tx-manager integration tests.
 //!
 //! Each integration test compiles this module independently, so not every

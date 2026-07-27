@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Latency benchmark for `engine_forkchoiceUpdatedV3` on the unsafe-head path.
 //!
 //! Per iteration:

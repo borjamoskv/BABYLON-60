@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Batcher service startup and wiring.
 
 use std::sync::Arc;

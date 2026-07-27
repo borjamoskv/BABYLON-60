@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Benchmarks for [`WebSocketPublisher`] publish throughput.
 
 use std::{hint::black_box, net::SocketAddr, num::NonZeroUsize, time::Duration};

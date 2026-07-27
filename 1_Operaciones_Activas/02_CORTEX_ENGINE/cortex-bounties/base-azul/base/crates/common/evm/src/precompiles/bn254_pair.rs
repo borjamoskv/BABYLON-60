@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use revm::precompile::{Precompile, PrecompileError, PrecompileId, PrecompileResult, bn254};
 
 /// Max input size for the bn254 pair precompile after the Granite hardfork.

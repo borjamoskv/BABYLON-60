@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Flashblock sequence validation and reorganization detection.
 //!
 //! Provides stateless validation logic for flashblock sequencing and chain reorg detection.

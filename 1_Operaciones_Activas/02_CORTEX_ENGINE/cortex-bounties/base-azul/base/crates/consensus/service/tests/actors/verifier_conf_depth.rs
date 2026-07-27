@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Integration tests verifying that `verifier_l1_confs` correctly constrains the derivation
 //! pipeline's view of L1.
 //!

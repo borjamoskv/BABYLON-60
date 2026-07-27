@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Registration-gated health check for the nitro prover.
 //!
 //! Delegates signer validity checks to [`RegistrationChecker`], which is shared

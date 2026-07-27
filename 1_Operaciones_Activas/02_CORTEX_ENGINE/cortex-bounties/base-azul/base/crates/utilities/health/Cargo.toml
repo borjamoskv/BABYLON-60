@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 [package]
 name = "base-health"
 description = "Shared health check RPC endpoint for JSON-RPC servers"

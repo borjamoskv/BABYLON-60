@@ -23,7 +23,7 @@ The package replicates the structure of the main OpenZeppelin Contracts package,
 ```diff
 -import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 +import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
- 
+
 -contract MyCollectible is ERC721 {
 +contract MyCollectible is ERC721Upgradeable {
 ```

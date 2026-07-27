@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Error types for the safe head database.
 
 /// Errors from safe head database operations.

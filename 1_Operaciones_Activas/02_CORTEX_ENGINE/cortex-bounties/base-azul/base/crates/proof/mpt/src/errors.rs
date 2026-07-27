@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Errors for the `base-consensus-derive` crate.
 
 use alloc::string::String;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Miner API extension for Base.
 
 use alloy_primitives::U64;

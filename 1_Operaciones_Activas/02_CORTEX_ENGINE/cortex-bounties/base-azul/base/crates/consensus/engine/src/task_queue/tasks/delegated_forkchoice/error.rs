@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Error types for the delegated forkchoice task.
 
 use thiserror::Error;

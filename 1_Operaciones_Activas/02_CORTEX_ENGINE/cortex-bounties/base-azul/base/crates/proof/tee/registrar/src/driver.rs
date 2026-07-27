@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Registration driver — core orchestration loop.
 //!
 //! Discovers prover instances, checks on-chain registration status, generates

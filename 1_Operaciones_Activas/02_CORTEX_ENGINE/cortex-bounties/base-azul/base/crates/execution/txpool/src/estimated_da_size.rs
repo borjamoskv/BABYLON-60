@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Additional support for estimating the data availability size of transactions.
 
 /// Helper trait that allows attaching an estimated data availability size.

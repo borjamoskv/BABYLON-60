@@ -10,14 +10,18 @@ import time
 from datetime import datetime, timezone
 from typing import Any
 
-DEFAULT_DB_PATH = os.path.join(os.path.dirname(__file__), "../../db/memory.db")
-DEFAULT_CHROMA_PATH = os.path.join(os.path.dirname(__file__), "../../db/chroma_memory")
+MONOREPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../../.."))
+DEFAULT_DB_PATH = os.path.join(MONOREPO_ROOT, "db/memory.db")
+DEFAULT_CHROMA_PATH = os.path.join(MONOREPO_ROOT, "db/chroma_memory")
 
 class AgentMemory:
     def __init__(self, db_path: str = DEFAULT_DB_PATH, chroma_path: str = DEFAULT_CHROMA_PATH) -> None:
         is_test = "PYTEST_CURRENT_TEST" in os.environ or os.environ.get("CORTEX_TEST_MODE") == "1"
         if is_test and db_path == DEFAULT_DB_PATH:
             db_path = ":memory:"
+
+        if db_path != ":memory:" and os.path.dirname(db_path):
+            os.makedirs(os.path.dirname(os.path.abspath(db_path)), exist_ok=True)
 
         self.conn = sqlite3.connect(db_path, isolation_level=None)
         # Habilitar WAL para concurrencia BFT segura (R10)

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Binary for estimating proving costs across a range of blocks.
 
 use std::{

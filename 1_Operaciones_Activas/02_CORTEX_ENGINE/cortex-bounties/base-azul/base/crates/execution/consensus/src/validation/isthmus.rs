@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Block verification w.r.t. consensus rules new in Isthmus hardfork.
 
 use alloy_consensus::BlockHeader;

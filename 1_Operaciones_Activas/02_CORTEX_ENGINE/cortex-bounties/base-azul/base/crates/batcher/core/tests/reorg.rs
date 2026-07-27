@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Integration tests for reorg handling in [`BatchDriver`].
 
 use std::{

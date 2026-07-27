@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # base-consensus-safedb
 
 Persistent safe head tracking for the Base derivation pipeline.

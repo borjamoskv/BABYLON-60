@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the cursor for the derivation pipeline.
 //!
 //! This module provides the [`PipelineCursor`] which tracks the state of the derivation

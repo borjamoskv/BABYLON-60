@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! RPC extensions for the metering store.
 
 use alloy_primitives::TxHash;

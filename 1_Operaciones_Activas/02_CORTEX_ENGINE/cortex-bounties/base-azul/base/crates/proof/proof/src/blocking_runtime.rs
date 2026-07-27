@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module contains a blocking runtime for futures, allowing for synchronous execution of async
 //! code in an embedded environment.
 

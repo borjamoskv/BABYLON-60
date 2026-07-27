@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Throttle client trait for applying DA limits to the block builder.
 
 use auto_impl::auto_impl;

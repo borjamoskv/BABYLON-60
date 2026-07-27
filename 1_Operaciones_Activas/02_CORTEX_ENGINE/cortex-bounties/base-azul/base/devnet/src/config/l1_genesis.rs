@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! L1 execution layer genesis configuration.
 
 use alloy_primitives::{Address, U256, address};

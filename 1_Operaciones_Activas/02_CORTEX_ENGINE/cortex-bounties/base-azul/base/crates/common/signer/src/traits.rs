@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! JSON-RPC trait definition for the `eth_signTransaction` endpoint.
 
 use alloy_primitives::Bytes;

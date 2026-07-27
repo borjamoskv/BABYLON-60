@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Client for polling Derivation Delegate sync status.
 
 use std::time::Duration;

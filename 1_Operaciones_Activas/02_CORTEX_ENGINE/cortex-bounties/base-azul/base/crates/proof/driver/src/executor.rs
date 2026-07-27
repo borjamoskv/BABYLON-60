@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! An abstraction for the driver's block executor.
 //!
 //! This module provides the [`Executor`] trait which abstracts block execution for the driver.

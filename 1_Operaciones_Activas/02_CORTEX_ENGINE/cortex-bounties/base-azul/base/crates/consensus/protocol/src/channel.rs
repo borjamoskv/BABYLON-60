@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Channel Types
 
 use alloc::vec::Vec;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Balance monitor [`ProviderLayer`] implementation.
 //!
 //! Provides a [`BalanceMonitorLayer`] that plugs into any alloy provider stack

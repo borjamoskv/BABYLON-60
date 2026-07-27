@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Running a Reth Node
 
 This is an implementation of the Reth node setup that supports Flashblocks mode based on configuration.

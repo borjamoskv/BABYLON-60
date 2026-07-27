@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Implementation of the `ListProofs` gRPC endpoint.
 
 use base_zk_client::{

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Command that initializes the Base Proofs storage with the current state of the chain.
 
 use std::{path::PathBuf, sync::Arc};

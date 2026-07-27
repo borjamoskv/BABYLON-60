@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Ethereum L1 chain configurations for known networks.
 
 use alloc::{

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Registrar metrics constants.
 
 base_metrics::define_metrics! {

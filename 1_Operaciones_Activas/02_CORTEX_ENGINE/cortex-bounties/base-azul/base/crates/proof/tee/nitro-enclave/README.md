@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-proof-tee-nitro-enclave`
 
 Nitro Enclave runtime, types, and proving logic.

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Test utilities for integration testing.
 //!
 //! This module provides testing infrastructure including:

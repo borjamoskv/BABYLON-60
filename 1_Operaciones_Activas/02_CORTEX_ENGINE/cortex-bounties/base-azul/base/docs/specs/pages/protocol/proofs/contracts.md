@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Contracts
 
 The proof contracts turn offchain proof material into onchain checkpoint games. A game claims an

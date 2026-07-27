@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Prometheus metrics for the tips ingress RPC service.
 
 base_metrics::define_metrics! {

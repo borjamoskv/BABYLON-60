@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 CONTRACT_PAUSED = "Contract is paused"
 CONTRACT_NOT_PAUSED = "Contract is not paused"
 

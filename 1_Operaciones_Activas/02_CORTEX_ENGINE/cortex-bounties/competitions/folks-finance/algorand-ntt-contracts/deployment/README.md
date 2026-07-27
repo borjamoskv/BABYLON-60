@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 ## Deployment
 
 This folder contains the script to deploy and configure your Wormhole NTT token on Algorand. You should follow the official [Wormhole Documentation](https://wormhole.com/docs/products/token-transfers/native-token-transfers/guides/deploy-to-evm/) as a deployment guide for the other chains.

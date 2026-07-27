@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! L2 Client CLI arguments with JWT handling.
 
 use std::path::PathBuf;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anyhow::Result;
 use async_trait::async_trait;
 use rdkafka::producer::{FutureProducer, FutureRecord};

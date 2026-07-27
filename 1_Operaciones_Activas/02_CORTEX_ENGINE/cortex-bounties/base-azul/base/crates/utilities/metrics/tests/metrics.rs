@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Integration tests for the base-metrics macros and types.
 
 use metrics_util::{

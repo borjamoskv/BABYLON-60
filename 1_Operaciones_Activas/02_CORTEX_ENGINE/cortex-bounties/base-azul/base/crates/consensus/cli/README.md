@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-consensus-cli`
 
 CLI argument types for Base consensus clients.

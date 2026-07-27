@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Integration tests for the network actor.
 
 use crate::actors::network::mocks::TestNetwork;

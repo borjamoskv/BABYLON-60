@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-consensus-disc`
 
 Discovery service for Base.

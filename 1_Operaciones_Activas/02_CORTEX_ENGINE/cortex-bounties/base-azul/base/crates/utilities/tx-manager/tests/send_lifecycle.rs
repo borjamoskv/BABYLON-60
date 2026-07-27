@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Integration tests for the transaction send lifecycle with Anvil.
 //!
 //! Covers [`SimpleTxManager::send`], [`SimpleTxManager::publish_tx`], and

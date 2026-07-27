@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! RPC Module to serve the P2P API.
 
 use std::{net::IpAddr, str::FromStr, time::Duration};

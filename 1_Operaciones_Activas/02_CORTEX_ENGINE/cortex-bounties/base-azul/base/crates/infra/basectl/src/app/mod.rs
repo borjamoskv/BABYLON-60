@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Core application logic, actions, resources, and routing for basectl.
 
 mod action;

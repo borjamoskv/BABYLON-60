@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Build script for `base-proof-succinct-elfs`.
 //!
 //! The SP1 ELF binaries are NOT committed to git. This script resolves them by

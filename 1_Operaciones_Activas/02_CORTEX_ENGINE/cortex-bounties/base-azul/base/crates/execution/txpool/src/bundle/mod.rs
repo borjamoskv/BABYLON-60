@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Bundle transaction types and lifecycle management for `eth_sendBundle` RPC support.
 
 mod rpc;

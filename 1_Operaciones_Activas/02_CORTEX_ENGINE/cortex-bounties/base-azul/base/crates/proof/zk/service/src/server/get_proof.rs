@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use base_zk_client::{GetProofRequest, GetProofResponse, ProofJobStatus, ReceiptType};
 use base_zk_db::ProofStatus;
 use sp1_sdk::SP1ProofWithPublicValues;

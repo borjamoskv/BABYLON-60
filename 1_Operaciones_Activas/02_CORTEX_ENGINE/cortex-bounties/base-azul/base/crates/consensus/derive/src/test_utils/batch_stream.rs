@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! A mock implementation of the [`BatchStream`] stage for testing.
 //!
 //! [`BatchStream`]: crate::stages::BatchStream

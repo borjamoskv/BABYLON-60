@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Proofs
 
 The proof system is the set of offchain services and onchain contracts that make L2 checkpoint

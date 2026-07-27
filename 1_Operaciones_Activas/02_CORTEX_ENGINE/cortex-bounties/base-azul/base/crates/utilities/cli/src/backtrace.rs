@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Minimal helper utility to set the backtrace environment variable if not set.
 
 /// The backtracing utility.

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Block watching, receipt ingestion, and first-seen timestamp tracking.
 
 use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};

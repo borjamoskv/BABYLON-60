@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module contains each stage of the derivation pipeline.
 //!
 //! It offers a high-level API to functionally apply each stage's output as an input to the next

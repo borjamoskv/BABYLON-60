@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Tests for the balance monitor.
 
 use std::time::Duration;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! NSM (Nitro Secure Module) session management and random number generation.
 
 #[cfg(target_os = "linux")]

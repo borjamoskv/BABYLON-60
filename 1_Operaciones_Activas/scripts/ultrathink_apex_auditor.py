@@ -4,8 +4,10 @@ import os
 import hashlib
 import math
 
-JSON_PATH = "/Users/borjafernandezangulo/.gemini/antigravity-ide/brain/108c0350-3a5f-40f4-8b10-3fcc4383ab9c/channel_videos.json"
-REPORT_DIR = "/Users/borjafernandezangulo/.gemini/antigravity-ide/brain/108c0350-3a5f-40f4-8b10-3fcc4383ab9c"
+HOME_DIR = os.path.expanduser("~")
+DEFAULT_BRAIN = os.path.join(HOME_DIR, ".gemini/antigravity-ide/brain/108c0350-3a5f-40f4-8b10-3fcc4383ab9c")
+JSON_PATH = os.environ.get("ULTRATHINK_JSON_PATH", os.path.join(DEFAULT_BRAIN, "channel_videos.json"))
+REPORT_DIR = os.environ.get("ULTRATHINK_REPORT_DIR", DEFAULT_BRAIN)
 
 def sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode('utf-8')).hexdigest()

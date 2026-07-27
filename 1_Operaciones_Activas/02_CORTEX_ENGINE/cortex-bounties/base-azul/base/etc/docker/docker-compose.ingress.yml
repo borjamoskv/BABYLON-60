@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 x-rust-service-build: &rust-service-build
   context: ../..
   dockerfile: etc/docker/Dockerfile.rust-services

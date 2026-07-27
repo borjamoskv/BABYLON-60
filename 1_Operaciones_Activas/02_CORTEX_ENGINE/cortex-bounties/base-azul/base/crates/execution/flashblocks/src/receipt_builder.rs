@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Unified receipt builder for Base transactions.
 //!
 //! This module provides a receipt builder that handles both deposit and non-deposit

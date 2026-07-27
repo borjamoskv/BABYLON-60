@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Collected metrics for the websocket proxy.
 
 base_metrics::define_metrics! {

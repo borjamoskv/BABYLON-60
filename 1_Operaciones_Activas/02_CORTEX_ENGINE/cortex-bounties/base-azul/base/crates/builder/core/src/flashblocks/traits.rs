@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the payload builder trait.
 
 use reth_node_api::PayloadBuilderAttributes;

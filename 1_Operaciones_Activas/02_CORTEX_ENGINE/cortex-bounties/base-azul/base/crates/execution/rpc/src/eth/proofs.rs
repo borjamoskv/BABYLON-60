@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Historical proofs RPC server implementation.
 
 use std::time::Instant;

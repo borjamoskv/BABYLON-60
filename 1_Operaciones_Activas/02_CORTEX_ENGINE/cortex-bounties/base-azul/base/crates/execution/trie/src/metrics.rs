@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Storage wrapper that records metrics for all operations.
 
 use std::{

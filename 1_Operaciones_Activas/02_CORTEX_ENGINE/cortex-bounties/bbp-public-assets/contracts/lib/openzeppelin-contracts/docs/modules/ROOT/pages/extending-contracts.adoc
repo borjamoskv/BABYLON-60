@@ -96,7 +96,7 @@ contract ERC20WithSafeTransfer is ERC20 {
     function _validRecipient(address to) private view returns (bool) {
         ...
     }
-    
+
     ...
 }
 ```

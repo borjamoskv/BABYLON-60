@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Implements a mock [`L2ChainProvider`] and [`BatchValidationProvider`] for testing.
 
 use alloc::{boxed::Box, string::ToString, sync::Arc};

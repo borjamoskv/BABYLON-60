@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! ZK proof client error types.
 
 use thiserror::Error;

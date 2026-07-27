@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Running the certora verification tool
 
 These instructions detail the process for running Certora Verification Tool on OpenZeppelin Contracts.

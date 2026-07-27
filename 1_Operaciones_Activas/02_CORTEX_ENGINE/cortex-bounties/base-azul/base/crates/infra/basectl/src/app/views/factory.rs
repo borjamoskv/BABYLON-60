@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use super::{
     CommandCenterView, ConductorView, ConfigView, DaMonitorView, FlashblocksView, HomeView,
     ProofsView, UpgradesView,

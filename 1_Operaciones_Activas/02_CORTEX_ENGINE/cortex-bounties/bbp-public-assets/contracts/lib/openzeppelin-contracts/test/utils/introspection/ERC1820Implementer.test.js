@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { expectRevert, singletons } = require('@openzeppelin/test-helpers');
 const { bufferToHex, keccakFromString } = require('ethereumjs-util');
 

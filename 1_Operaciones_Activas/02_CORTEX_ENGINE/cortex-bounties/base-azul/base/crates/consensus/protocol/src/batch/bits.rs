@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Module for working with span batch bits.
 
 use alloc::{vec, vec::Vec};

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Bond lifecycle management.
 //!
 //! The [`BondManager`] tracks dispute games through a multi-phase credit

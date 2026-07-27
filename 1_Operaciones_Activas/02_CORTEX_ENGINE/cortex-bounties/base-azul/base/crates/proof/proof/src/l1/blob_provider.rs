@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the concrete implementation of the [`BlobProvider`] trait for the client program.
 
 #[cfg(feature = "std")]

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Error types for the derivation pipeline.
 //!
 //! This module contains comprehensive error types for the derivation pipeline, organized

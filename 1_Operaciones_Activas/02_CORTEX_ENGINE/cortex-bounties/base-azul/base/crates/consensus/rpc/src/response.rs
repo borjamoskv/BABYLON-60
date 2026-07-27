@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Response to safe head request
 
 #[cfg(test)]

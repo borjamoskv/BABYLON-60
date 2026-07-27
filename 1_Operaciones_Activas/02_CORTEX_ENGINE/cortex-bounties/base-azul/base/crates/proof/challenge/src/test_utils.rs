@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Test utilities: mock stubs for contract clients, ZK proof provider, tx manager, and scanner
 //! tests.
 

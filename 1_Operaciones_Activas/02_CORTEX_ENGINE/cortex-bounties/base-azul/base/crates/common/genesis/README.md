@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-common-genesis`
 
 <a href="https://crates.io/crates/base-common-genesis"><img src="https://img.shields.io/crates/v/base-common-genesis.svg" alt="base-common-genesis crate"></a>

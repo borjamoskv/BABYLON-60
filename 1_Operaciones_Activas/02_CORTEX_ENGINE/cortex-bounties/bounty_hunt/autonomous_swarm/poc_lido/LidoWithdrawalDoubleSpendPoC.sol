@@ -40,7 +40,7 @@ contract LidoWithdrawalDoubleSpendPoC is Test {
         lastRequestIds = wq.requestWithdrawals(amounts, address(this));
     }
 
-    // 2. Oracle heartbeat resumes, but processing loop calculates finalized indices incorrectly 
+    // 2. Oracle heartbeat resumes, but processing loop calculates finalized indices incorrectly
     // due to the double-submit in exactly the same stalled timestamp slot.
     function attackPhase2_ClaimTheft(uint256[] calldata hints) external {
         // The queue attempts to finalize both requests due to state synchronization jitter,

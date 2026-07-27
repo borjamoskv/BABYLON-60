@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-proof-client`
 
 Oracle-backed derivation and execution orchestration for the Base ZK proof program.

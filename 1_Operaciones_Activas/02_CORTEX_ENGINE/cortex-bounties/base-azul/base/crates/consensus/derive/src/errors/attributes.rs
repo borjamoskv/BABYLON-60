@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Error types for the attributes builder.
 
 use alloc::string::String;

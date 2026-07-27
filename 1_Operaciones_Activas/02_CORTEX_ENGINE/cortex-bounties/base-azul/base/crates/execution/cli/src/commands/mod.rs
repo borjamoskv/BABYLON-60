@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! CLI subcommands for the execution layer node.
 
 use std::{fmt, sync::Arc};

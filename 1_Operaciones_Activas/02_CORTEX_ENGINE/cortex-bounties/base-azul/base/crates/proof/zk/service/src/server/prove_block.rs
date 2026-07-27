@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use base_zk_client::{ProveBlockRequest, ProveBlockResponse};
 use base_zk_db::{CreateProofRequest, ProofType};
 use tonic::{Request, Response, Status};

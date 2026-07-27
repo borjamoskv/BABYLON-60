@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Optional admin JSON-RPC handler.
 //!
 //! Provides `POST /` JSON-RPC admin methods mirroring the Go `op-proposer` API:

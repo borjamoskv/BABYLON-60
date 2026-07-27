@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 [package]
 name = "base-common-signer"
 description = "Remote transaction signer for EthereumWallet integration via eth_signTransaction"

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Canyon consensus rule checks.
 
 use alloy_consensus::BlockHeader;

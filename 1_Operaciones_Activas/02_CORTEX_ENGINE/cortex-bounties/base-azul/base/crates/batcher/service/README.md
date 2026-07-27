@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-batcher-service`
 
 Batcher service configuration and startup glue.

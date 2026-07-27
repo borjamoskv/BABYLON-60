@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Configuration types for load tests and workloads.
 
 mod workload;

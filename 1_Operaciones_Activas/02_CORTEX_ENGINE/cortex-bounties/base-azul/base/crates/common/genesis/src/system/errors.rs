@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains error types for system config updates.
 
 use alloy_primitives::B256;

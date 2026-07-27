@@ -77340,6 +77340,9 @@
 ## Archivo: ./1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-web/tsconfig.json
 - [Contenido No-Python Asimilado]
 
+## Archivo: ./1_Operaciones_Activas/02_CORTEX_ENGINE/cortex/ANERGY_TOKEN_PURGE_REPORT.md
+- [Contenido No-Python Asimilado]
+
 ## Archivo: ./1_Operaciones_Activas/02_CORTEX_ENGINE/cortex/__init__.py
 
 ## Archivo: ./1_Operaciones_Activas/02_CORTEX_ENGINE/cortex/aem/__init__.py
@@ -77600,6 +77603,9 @@
 ## Archivo: ./1_Operaciones_Activas/02_CORTEX_ENGINE/cortex/cesl/compiler_test.py
 - def test_cesl_compiler_end_to_end(...)
 
+## Archivo: ./1_Operaciones_Activas/02_CORTEX_ENGINE/cortex/compiled_theorem.py
+- def synthesized_theorem_0(...)
+
 ## Archivo: ./1_Operaciones_Activas/02_CORTEX_ENGINE/cortex/core/00_APEX_FSM.py
 - class ApexFiniteStateMachine(...)
 - def __init__(...)
@@ -77785,6 +77791,12 @@
 - def validate_causal_hierarchy(...)
 - def __init__(...)
 - def audit_quad_pillars(...)
+
+## Archivo: ./1_Operaciones_Activas/02_CORTEX_ENGINE/cortex/core/robinson.py
+- def is_tautology(...)
+- def subsumes(...)
+- def resolve(...)
+- def robinson_resolution(...)
 
 ## Archivo: ./1_Operaciones_Activas/02_CORTEX_ENGINE/cortex/core/test_dummy_forge.py
 - def test_hello(...)
@@ -78025,12 +78037,6 @@
 
 ## Archivo: ./1_Operaciones_Activas/02_CORTEX_ENGINE/cortex/ouroboros_ultrathink_transduction.yaml
 - [Contenido No-Python Asimilado]
-
-## Archivo: ./1_Operaciones_Activas/02_CORTEX_ENGINE/cortex/robinson.py
-- def is_tautology(...)
-- def subsumes(...)
-- def resolve(...)
-- def robinson_resolution(...)
 
 ## Archivo: ./1_Operaciones_Activas/02_CORTEX_ENGINE/cortex/substack/substack_preview_server.py
 - def _find_archive_dir(...)
@@ -79993,8 +79999,6 @@
 - def enforce_boundary(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/00_init_ledger.py
-- def init_bft_ledger_tables(...)
-- def init_ledger(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/01_L5_ANCHOR.py
 - class L5AnchorEngine(...)
@@ -80005,9 +80009,6 @@
 - def autonomous_sqlite_sweep(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/01_cdp_transducer.py
-- def init_ledger(...)
-- def fetch_cdp_status(...)
-- def commit_to_ledger(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/02_UNIFIED_PIPELINE.py
 
@@ -80024,23 +80025,10 @@
 - def main(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/16_codegen_primitives.py
-- class DomainSpec(...)
-- def generate_896_primitives_yaml(...)
-- def generate_rust_transductors(...)
-- def main(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/17_codegen_github.py
-- class PrimitiveDict(...)
-- def generate_centuria(...)
-- def save_to_markdown(...)
-- def save_to_sqlite(...)
-- def main(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/18_codegen_playwright.py
-- class PlaywrightPrimitiveDict(...)
-- def generate_playwright_primitives(...)
-- def save_to_markdown(...)
-- def save_to_sqlite(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/20_format_all.py
 - def run_cmd(...)
@@ -80071,14 +80059,10 @@
 - def commit(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/40_stress_db.py
-- def worker(...)
-- def run_stress_test(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/41_iter_100.py
-- def itera_100(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/42_iter_5000.py
-- def itera_5000(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/43_iter_ultrathink.py
 - def get_ledger_hash(...)
@@ -80090,14 +80074,6 @@
 - def _call_api(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/50_audit_loop.py
-- class AuditState(...)
-- def phase_1_latent_friction(...)
-- def phase_2_phantom_target(...)
-- def phase_3_idempotency_lock(...)
-- def phase_4_bft_consensus(...)
-- def phase_5_git_sentinel(...)
-- def execute_bft_state_loop(...)
-- def write_to_cortex_ledger(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/51_SIMULATE_L4_API_LATENCY.py
 
@@ -80118,13 +80094,10 @@
 - def __init__(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/52_legion_purge.py
-- def run_legion_purge(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/53_SIMULATE_CIRCUIT_BREAKER.py
 
 ## Archivo: ./1_Operaciones_Activas/scripts/53_centuria_swarm.py
-- def run_ruff_fix(...)
-- def deploy_centuria_swarm(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/54_SIMULATE_ORACLE_BYZANTINE_FAULT.py
 
@@ -80198,7 +80171,6 @@
 - def get_process_memory_map(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/benchmark_pool.py
-- def run_simulated_benchmark(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/c5_assimilate_and_reorg.py
 - def extract_ast(...)
@@ -80333,7 +80305,6 @@
 - def audit_files(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/cortex_purge.py
-- def main(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/detect_sim.py
 - def shannon_entropy(...)
@@ -80380,23 +80351,6 @@
 - def append_keys_to_env(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/gemini_pool_manager.py
-- class EpistemicPoolHalt(...)
-- class GeminiProTelemetry(...)
-- class GeminiAccountSlot(...)
-- class GeminiProPoolManager(...)
-- def __init__(...)
-- def get_instance(...)
-- def record(...)
-- def snapshot(...)
-- def __init__(...)
-- def is_available(...)
-- def set_cooldown(...)
-- def reset_stats(...)
-- def __init__(...)
-- def _load_keys(...)
-- def get_next_available_slot(...)
-- def dispatch_generate_content(...)
-- def get_pool_stats(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/generate_896_primitives.py
 
@@ -80514,31 +80468,14 @@
 - def make_broadcast(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/stress_100k_async.py
-- def run_active_inference_task(...)
-- def run_rust_strike_task(...)
-- def _db_op(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/stress_10k_async.py
-- def run_active_inference_task(...)
-- def run_rust_strike_task(...)
-- def _db_op(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/stress_500k_async.py
-- def run_active_inference_task(...)
-- def run_rust_strike_task(...)
-- def _get_cat_engine(...)
-- def _db_op(...)
-- def _cat_op(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/stress_c6_1_storage_chaos.py
-- def init_db(...)
-- def writer_and_checkpointer_loop(...)
-- def run_chaos(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/stress_c6_recovery_siege.py
-- def init_db(...)
-- def worker_loop(...)
-- def run_siege(...)
 
 ## Archivo: ./1_Operaciones_Activas/scripts/test_896_primitives.py
 

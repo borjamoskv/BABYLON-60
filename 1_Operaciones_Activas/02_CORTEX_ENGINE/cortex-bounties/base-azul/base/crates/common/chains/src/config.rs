@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Base Chain configuration.
 
 use alloy_chains::Chain;

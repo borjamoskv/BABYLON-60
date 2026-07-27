@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Registry for macro-generated metric initializers.
 //!
 //! `define_metrics!` registers each generated `init()` function here from a

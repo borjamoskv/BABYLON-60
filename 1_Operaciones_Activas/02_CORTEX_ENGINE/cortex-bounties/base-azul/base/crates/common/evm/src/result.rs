@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the `[BaseHaltReason]` type.
 use revm::context_interface::result::HaltReason;
 

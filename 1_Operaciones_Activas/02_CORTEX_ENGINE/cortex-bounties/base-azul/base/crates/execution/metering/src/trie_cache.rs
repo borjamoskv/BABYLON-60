@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Pending trie caching for efficient bundle metering.
 //!
 //! When metering bundles on top of pending flashblocks, we cache the pre-computed

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Implementation of [`HashedCursor`] and [`TrieCursor`] for
 //! [`BaseProofsStorage`](crate::BaseProofsStorage).
 

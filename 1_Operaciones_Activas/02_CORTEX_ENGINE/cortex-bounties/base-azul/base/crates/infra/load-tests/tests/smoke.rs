@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Smoke tests for load testing core functionality.
 
 use std::time::Duration;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Common test suite for [`BaseProofsStore`] implementations.
 
 use std::sync::Arc;

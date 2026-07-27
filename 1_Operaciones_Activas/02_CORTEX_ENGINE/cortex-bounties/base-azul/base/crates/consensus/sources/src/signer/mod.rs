@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Signer utilities for the base node.
 //!
 //! We currently support two types of block signers:

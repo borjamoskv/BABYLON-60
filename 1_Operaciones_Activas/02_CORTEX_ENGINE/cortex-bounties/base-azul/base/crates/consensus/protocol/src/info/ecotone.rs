@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains ecotone-specific L1 block info types.
 
 use alloc::vec::Vec;

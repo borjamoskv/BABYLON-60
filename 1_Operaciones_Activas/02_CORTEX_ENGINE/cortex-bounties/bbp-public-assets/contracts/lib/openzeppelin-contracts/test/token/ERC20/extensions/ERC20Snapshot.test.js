@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { BN, expectEvent, expectRevert } = require('@openzeppelin/test-helpers');
 const ERC20Snapshot = artifacts.require('$ERC20Snapshot');
 

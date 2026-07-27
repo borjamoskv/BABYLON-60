@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Reorg detection error type.
 
 use alloy_primitives::B256;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Solidity-aligned types for the `INitroEnclaveVerifier` on-chain interface.
 //!
 //! Inlined from the contracts repo's `INitroEnclaveVerifier.sol`. ABI encoding

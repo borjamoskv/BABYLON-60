@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Logs directory utilities for CLI binaries.
 
 use std::{ffi::OsString, path::PathBuf};

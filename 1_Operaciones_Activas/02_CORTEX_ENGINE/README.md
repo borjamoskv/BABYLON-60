@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # 02_CORTEX_ENGINE
 
 **Motor de Ejecución de IA, Memoria Determinista (cortex-persist) y Orquestación (ultrathink)**

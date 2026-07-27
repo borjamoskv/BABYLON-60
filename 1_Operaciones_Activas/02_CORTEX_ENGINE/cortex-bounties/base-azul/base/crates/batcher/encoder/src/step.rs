@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Step result and error types for the batcher pipeline.
 
 /// Result of a [`BatchPipeline::step`](crate::BatchPipeline::step) call.

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the tip cursor for the derivation driver.
 //!
 //! This module provides the [`TipCursor`] which encapsulates the L2 safe head state

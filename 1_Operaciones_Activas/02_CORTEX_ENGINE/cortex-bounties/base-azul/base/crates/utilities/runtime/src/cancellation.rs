@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Cancellation signal abstraction replacing `tokio_util::sync::CancellationToken`.
 
 use std::{future::Future, pin::Pin};

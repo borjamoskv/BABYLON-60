@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AlgoAmount } from "@algorandfoundation/algokit-utils/types/amount";
 import { keccak_256 } from "@noble/hashes/sha3";
 import { OnApplicationComplete, getApplicationAddress } from "algosdk";

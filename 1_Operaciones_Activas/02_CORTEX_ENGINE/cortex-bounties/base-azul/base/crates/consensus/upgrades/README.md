@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-consensus-upgrades`
 
 <a href="https://crates.io/crates/base-consensus-upgrades"><img src="https://img.shields.io/crates/v/base-consensus-upgrades.svg" alt="base-consensus-upgrades crate"></a>

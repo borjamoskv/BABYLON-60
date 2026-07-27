@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! In-memory implementation of [`BaseProofsStore`] for testing purposes
 
 use std::{collections::BTreeMap, sync::Arc};

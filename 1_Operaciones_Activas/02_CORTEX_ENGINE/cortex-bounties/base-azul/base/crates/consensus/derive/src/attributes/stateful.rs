@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The [`AttributesBuilder`] and it's default implementation.
 
 use alloc::{boxed::Box, fmt::Debug, string::ToString, sync::Arc, vec, vec::Vec};

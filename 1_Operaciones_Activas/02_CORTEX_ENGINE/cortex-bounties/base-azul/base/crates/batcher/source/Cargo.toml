@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 [package]
 name = "base-batcher-source"
 description = "L2 unsafe block source: UnsafeBlockSource trait and HybridBlockSource"

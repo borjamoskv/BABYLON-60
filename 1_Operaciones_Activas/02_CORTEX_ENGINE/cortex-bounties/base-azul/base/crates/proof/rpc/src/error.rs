@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! RPC-specific error types.
 
 use alloy_transport::{RpcError as AlloyRpcError, TransportError};

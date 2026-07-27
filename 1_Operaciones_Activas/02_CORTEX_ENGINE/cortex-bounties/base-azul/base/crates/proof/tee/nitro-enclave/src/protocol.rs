@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Typed request/response protocol for host ↔ enclave communication over vsock.
 
 use base_proof_preimage::PreimageKey;

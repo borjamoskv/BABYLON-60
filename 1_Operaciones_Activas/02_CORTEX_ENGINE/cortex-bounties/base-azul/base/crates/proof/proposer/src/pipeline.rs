@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Parallel proving pipeline for the proposer.
 //!
 //! The [`ProvingPipeline`] is an event-driven coordinator that runs multiple

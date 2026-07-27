@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Hook accumulator for the node builder.
 //!
 //! [`NodeHooks`] collects RPC, node-started, and `ExEx` hooks that extensions install. These hooks

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Tests for [`SynchronizeTask::execute`].
 
 use std::sync::Arc;

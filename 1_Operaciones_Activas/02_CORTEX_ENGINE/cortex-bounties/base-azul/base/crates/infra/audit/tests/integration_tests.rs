@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Integration tests for the Kafka publisher and S3 archiver pipeline.
 
 use std::time::Duration;

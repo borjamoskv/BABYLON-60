@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! A task for finalizing an L2 block.
 
 use std::{sync::Arc, time::Instant};

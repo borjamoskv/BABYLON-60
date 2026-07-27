@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! TUI view components for basectl panels and dashboards.
 
 mod command_center;

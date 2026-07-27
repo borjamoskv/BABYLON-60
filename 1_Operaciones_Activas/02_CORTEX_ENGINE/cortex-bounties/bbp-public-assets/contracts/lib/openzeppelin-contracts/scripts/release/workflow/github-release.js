@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { readFileSync } = require('fs');
 const { join } = require('path');
 const { version } = require(join(__dirname, '../../../package.json'));

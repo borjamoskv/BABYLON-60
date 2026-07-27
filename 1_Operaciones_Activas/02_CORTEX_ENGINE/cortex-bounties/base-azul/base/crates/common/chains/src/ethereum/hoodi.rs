@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Ethereum Hoodi testnet L1 chain configuration.
 
 use alloy_chains::NamedChain;

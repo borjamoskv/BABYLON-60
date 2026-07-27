@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Host-side utilities for SP1 proof generation.
 
 /// L2 block range calculation and splitting.

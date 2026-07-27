@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Proof History Database Schema
 
 > Location: `crates/optimism/trie/src/db`

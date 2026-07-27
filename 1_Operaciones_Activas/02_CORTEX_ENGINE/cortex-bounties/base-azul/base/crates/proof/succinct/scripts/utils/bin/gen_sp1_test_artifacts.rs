@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Binary for generating SP1 test artifacts.
 
 use std::{

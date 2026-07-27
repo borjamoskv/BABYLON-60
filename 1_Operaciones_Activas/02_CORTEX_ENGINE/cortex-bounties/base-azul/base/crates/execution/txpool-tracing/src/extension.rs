@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the [`TxPoolExtension`] which wires up the transaction pool tracing
 //! subscription on the Base node builder.
 

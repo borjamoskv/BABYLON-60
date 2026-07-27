@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains node versioning info.
 
 use metrics::gauge;

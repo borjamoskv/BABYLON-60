@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-consensus-peers`
 
 <a href="https://crates.io/crates/base-consensus-peers"><img src="https://img.shields.io/crates/v/base-consensus-peers.svg?label=base-consensus-peers&labelColor=2a2f35" alt="base-consensus-peers"></a>

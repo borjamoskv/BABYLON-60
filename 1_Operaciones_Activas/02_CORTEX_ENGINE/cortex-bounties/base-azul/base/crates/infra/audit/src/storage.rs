@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::{fmt, fmt::Debug, time::Instant};
 
 use alloy_primitives::TxHash;

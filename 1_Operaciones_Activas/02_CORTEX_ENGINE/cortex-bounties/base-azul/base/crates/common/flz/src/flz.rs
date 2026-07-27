@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /// Cost per zero byte.
 pub const ZERO_BYTE_COST: u64 = 4;
 

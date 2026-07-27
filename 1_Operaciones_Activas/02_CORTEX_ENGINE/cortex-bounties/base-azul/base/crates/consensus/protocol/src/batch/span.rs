@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Span Batch implementation for efficient multi-block L2 transaction batching.
 //!
 //! Span batches are an advanced batching format that can contain transactions for multiple

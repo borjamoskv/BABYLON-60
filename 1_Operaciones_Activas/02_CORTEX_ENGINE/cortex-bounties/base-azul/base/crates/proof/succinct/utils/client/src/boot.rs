@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module contains the prologue phase of the client program, pulling in the boot
 //! information, which is passed to the zkVM as public inputs to be verified on-chain.
 

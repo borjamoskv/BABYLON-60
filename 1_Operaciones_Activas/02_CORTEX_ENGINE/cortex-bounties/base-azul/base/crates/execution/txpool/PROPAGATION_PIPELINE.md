@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Mempool Propagation Pipeline
 
 Multi-PR implementation plan for forwarding transactions from mempool nodes

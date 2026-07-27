@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Common test harness for audit integration tests with Kafka and S3 fixtures.
 
 use rdkafka::{ClientConfig, consumer::StreamConsumer, producer::FutureProducer};

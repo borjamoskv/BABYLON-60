@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Production [`ThrottleClient`] that calls `miner_setMaxDASize` via jsonrpsee.
 
 use alloy_primitives::U64;

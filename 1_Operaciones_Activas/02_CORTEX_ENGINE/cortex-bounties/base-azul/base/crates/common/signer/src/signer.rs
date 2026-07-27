@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Remote signer implementation that delegates signing to an external signer sidecar.
 
 use std::time::Duration;

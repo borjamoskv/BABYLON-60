@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The redb-backed safe head database.
 //!
 //! # Persistence and crash safety

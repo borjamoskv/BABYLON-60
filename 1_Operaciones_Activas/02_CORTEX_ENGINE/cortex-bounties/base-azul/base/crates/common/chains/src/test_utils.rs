@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Test-only module providing rollup configs derived from [`ChainConfig`].
 
 use base_common_genesis::RollupConfig;

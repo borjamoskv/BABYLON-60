@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Validity proof proposer for Base using SP1 zero-knowledge proofs.
 
 #![recursion_limit = "256"]

@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # RPC
 
 This document specifies the JSON-RPC methods implemented by the Flashblocks RPC provider.

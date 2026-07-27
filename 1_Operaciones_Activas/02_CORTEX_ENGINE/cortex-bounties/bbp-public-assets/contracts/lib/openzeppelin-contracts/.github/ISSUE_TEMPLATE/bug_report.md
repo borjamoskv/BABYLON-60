@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 ---
 name: Bug report
 about: Report a bug in OpenZeppelin Contracts

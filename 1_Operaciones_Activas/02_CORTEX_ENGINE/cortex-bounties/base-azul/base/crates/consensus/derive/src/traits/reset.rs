@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Traits for resetting stages.
 
 use alloc::boxed::Box;

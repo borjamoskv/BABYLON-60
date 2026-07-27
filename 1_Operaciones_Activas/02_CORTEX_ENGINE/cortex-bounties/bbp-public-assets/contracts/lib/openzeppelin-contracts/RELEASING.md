@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Releasing
 
 > Visit the documentation for [details about release schedule](https://docs.openzeppelin.com/contracts/releases-stability).
@@ -40,7 +41,7 @@ A release branch can be updated with cherry-picked patches from `master`, or may
     checkout release-vX.Y
     cherry-pick id: "Patch B" tag: ""
     commit id: "Release vX.Y.1"
-    
+
     checkout master
     merge release-vX.Y
     commit id: "Feature E"

@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-common-chains`
 
 Single source of truth for Base chain configuration and network upgrade bindings.

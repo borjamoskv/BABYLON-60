@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Configuration types and validation for the challenger.
 
 use std::{fmt, net::SocketAddr, ops::Deref, time::Duration};

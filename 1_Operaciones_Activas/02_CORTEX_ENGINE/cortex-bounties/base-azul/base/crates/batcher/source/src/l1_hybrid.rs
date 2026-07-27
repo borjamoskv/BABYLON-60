@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Hybrid L1 head source that races a subscription stream against interval-based polling.
 
 use async_trait::async_trait;

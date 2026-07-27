@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the [`EthereumDataSource`], which is a concrete implementation of the
 //! [`DataAvailabilityProvider`] trait for the Ethereum protocol.
 

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The async batch driver that orchestrates encoding, block sourcing, and L1 submission.
 
 use std::time::Duration;

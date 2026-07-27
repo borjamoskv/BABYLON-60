@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Deployment artifact types (genesis, rollup config, addresses).
 
 use std::path::Path;

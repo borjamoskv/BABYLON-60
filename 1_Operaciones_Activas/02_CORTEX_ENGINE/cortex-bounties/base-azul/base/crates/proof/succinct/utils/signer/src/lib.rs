@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Transaction signing utilities supporting `Web3Signer`, local private keys, and Google Cloud HSM.
 
 use std::{str::FromStr, sync::Arc};

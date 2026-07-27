@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! In-process builder node for system tests.
 //!
 //! This module provides [`InProcessBuilder`], which spawns a real builder node in the

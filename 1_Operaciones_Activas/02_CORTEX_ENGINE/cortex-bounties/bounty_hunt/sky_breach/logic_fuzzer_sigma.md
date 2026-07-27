@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Fuzzing Spec: Logic-Fuzzer-Σ (Sky Agent Network)
 
 **ID**: Σ-SKY-AGENT-2026
@@ -22,7 +23,7 @@
 
 ## Tooling: Sovereign Fuzzer (Python/Solidity)
 Use the `borja-moskv-omega` executor to spawn a specialized Foundry/Echidna fuzzer for the identified contract addresses.
-- **Invariants**: 
+- **Invariants**:
     - `total_usds_minted == total_collateral_value * cr`
     - `agent_allocation <= agent_limit`
     - `stusds_yield_per_share >= prev_yield_per_share`

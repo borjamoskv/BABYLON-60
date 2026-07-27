@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! ECDSA secp256k1 key generation, signing, and verification.
 
 use alloy_primitives::{Address, Bytes, keccak256};

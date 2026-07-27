@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module contains the [`SingleBatch`] type.
 
 use alloc::vec::Vec;

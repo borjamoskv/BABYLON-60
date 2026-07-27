@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Timing helper macros built on top of the `base-metrics` timer types.
 
 /// Creates a [`DropTimer`] (or [`NoopDropTimer`]) that records elapsed duration

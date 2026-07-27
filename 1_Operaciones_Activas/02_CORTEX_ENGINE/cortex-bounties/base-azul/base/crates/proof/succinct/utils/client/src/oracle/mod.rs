@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Oracle implementations for zkVM guest data access, including blob storage.
 
 mod blob_provider;

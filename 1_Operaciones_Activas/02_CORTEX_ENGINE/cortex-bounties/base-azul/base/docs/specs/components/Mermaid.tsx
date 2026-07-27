@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { useEffect, useId, useRef, useState } from 'react'
 
 type MermaidProps = {

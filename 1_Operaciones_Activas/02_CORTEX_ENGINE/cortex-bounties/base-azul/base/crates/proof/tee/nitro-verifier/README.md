@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # base-proof-tee-nitro-verifier
 
 Pure verification logic for AWS Nitro Enclave attestation documents.

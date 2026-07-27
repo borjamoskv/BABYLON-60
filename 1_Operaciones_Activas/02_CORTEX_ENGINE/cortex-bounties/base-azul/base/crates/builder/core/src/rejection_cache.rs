@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Shared, cross-block cache of permanently rejected transaction hashes.
 
 use std::time::Duration;

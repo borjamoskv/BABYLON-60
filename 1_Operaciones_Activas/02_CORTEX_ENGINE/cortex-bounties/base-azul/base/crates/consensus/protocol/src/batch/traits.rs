@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Traits for working with protocol types.
 
 use alloc::boxed::Box;

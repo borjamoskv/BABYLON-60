@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Defines the interface for the core derivation pipeline.
 
 use alloc::boxed::Box;

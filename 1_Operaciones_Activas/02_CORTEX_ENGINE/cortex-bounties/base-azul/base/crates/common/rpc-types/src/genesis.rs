@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Base types for genesis data.
 
 use alloy_serde::OtherFields;

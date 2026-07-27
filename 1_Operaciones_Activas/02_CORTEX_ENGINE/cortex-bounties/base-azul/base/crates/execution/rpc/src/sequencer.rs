@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Helpers for Base-specific RPC implementations.
 
 use std::{str::FromStr, sync::Arc, time::Instant};

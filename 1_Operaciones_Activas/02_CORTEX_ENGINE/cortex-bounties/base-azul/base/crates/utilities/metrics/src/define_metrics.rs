@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Macros for defining and describing metrics.
 
 /// Defines a metrics struct named `Metrics` with static associated functions.

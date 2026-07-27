@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the kind of system config update.
 
 /// Represents type of update to the system config.

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Signal types for the `base-consensus-derive` pipeline.
 //!
 //! Signals are the primary method of communication in the downwards direction

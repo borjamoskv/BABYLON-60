@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Result types for the `base-consensus-derive` pipeline.
 
 use crate::PipelineErrorKind;

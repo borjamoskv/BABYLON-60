@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AlgorandClient } from "@algorandfoundation/algokit-utils/types/algorand-client";
 
 import { NetworkType } from "./types.ts";

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Binary for fetching and saving a succinct proof to disk.
 
 use std::fs;

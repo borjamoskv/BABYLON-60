@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # ZK Prover
 
 The ZK prover is an offchain service that uses SP1 programs to produce permissionless proofs for

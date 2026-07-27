@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Nonce allocation and tracking.
 
 use std::{collections::BTreeSet, sync::Arc, time::Duration};

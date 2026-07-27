@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # The risc0 toolchain ships an older rustc (1.91) than the workspace MSRV (1.93).
 # The --ignore-rust-version flag is required when invoking cargo build.
 #

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the `BlobData` struct.
 
 use alloc::{boxed::Box, vec};

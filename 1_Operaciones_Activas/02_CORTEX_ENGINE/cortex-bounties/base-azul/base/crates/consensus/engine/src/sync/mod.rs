@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Sync start algorithm for the Base rollup node.
 
 use base_common_genesis::RollupConfig;

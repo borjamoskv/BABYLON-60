@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Shared SNARK Groth16 end-to-end test logic.
 //!
 //! Used by both the integration test (`tests/snark_groth16_e2e.rs`) and the

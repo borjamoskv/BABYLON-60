@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Error types for derivation pipeline stages.
 
 use base_protocol::SpanBatchElement;

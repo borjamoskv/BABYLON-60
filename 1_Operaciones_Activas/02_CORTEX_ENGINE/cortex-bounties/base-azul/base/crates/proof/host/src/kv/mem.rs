@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains a concrete implementation of the [`KeyValueStore`] trait that stores data in memory.
 
 use std::collections::HashMap;

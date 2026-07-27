@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-metering`
 
 Metering RPC for Base node. Provides RPC methods for measuring transaction and block execution timing.

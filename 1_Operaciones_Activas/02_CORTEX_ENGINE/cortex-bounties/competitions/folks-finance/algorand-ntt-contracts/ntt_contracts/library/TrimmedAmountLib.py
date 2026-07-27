@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from algopy import UInt64, subroutine
 from algopy.arc4 import UInt8
 
@@ -7,8 +8,8 @@ from . import MathLib
 
 """Library to handle token amounts with different decimals.
 
-Amounts represented in VAAs are capped at 8 decimals. This means that any amount that's given as having more decimals 
-is truncated to 8 decimals. On the way out, these amount have to be scaled back to the original decimal amount. 
+Amounts represented in VAAs are capped at 8 decimals. This means that any amount that's given as having more decimals
+is truncated to 8 decimals. On the way out, these amount have to be scaled back to the original decimal amount.
 
 Uses the TrimmedAmount type which is a named tuple of a token amount and its decimals.
 

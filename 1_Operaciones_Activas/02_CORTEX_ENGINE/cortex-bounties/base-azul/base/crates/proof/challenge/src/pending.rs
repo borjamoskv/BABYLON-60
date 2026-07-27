@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Pending proof state machine and collection.
 //!
 //! [`PendingProofs`] tracks in-flight proof sessions keyed by dispute-game

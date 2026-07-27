@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Utilities for the rollup node service, internal to the crate.
 
 use tracing::info;

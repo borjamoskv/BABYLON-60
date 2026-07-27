@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! A task for the `engine_forkchoiceUpdated` method, with no attributes.
 
 use std::sync::Arc;
@@ -33,7 +34,7 @@ use crate::{
 /// forkchoice management in most user scenarios.
 ///
 /// [`InsertTask`]: crate::InsertTask
-/// [`ConsolidateTask`]: crate::ConsolidateTask  
+/// [`ConsolidateTask`]: crate::ConsolidateTask
 /// [`FinalizeTask`]: crate::FinalizeTask
 /// [`BuildTask`]: crate::BuildTask
 #[derive(Debug, Clone, Constructor)]

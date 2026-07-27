@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the `PipelineBuilder` object that is used to build a `DerivationPipeline`.
 
 use alloc::sync::Arc;

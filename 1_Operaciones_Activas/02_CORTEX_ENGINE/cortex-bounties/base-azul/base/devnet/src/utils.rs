@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Utility functions for system tests.
 
 const ALPHANUMERIC: &[char] = &[

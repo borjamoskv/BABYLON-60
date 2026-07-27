@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! RAII timer that records elapsed duration to a histogram metric on drop.
 
 /// Call [`.stop()`](Self::stop) to record early; otherwise the duration is

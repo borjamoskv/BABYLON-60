@@ -3,7 +3,7 @@
 @@ -199,6 +199,11 @@
          return _owners[tokenId];
      }
- 
+
 +    // FV
 +    function _getApproved(uint256 tokenId) internal view returns (address) {
 +        return _tokenApprovals[tokenId];

@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # VULNERABILITY REPORT — Agentic Guard Bypass via Third-Party Injection
 
 **ID**: CORTEX-EXERGY-SIGMA-1
@@ -43,7 +44,7 @@ Yes. This breaches the core invariant of agentic safety and token-budget control
 
 ## 5. Remediation Plan
 ### Short-term:
-- Implement a strict **"Sanitized-Zone"** for all web-content read by the agent. 
+- Implement a strict **"Sanitized-Zone"** for all web-content read by the agent.
 - Introduce a secondary **Admission Guard** that verifies every tool-calling parameter against the original system prompt before execution.
 
 ### Long-term:

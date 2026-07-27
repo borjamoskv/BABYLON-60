@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { AlgorandFixture } from "@algorandfoundation/algokit-utils/types/testing";
 import { sha256 } from "@noble/hashes/sha2";
 import { type Address, OnApplicationComplete, encodeUint64, getApplicationAddress } from "algosdk";

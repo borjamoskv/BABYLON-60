@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Error types for the `base-proof-executor` crate.
 //!
 //! This module provides comprehensive error handling for the stateless L2 block

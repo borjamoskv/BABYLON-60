@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Binary for fetching the L2 Output Oracle configuration.
 
 use std::{env, sync::Arc};

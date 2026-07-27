@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 [package]
 name = "base-proof-tee-nitro-verifier"
 description = "Pure verification logic for AWS Nitro Enclave attestation documents"

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains driver-related error types.
 
 use base_consensus_derive::PipelineErrorKind;

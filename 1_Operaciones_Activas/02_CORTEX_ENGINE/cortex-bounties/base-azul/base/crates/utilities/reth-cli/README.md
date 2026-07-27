@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-reth-cli`
 
 Reth-specific CLI utilities for Base execution layer binaries.

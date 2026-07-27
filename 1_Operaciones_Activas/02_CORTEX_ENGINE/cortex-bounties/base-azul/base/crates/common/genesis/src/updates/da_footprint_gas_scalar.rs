@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The da footprint gas scalar update type.
 
 use alloy_primitives::LogData;

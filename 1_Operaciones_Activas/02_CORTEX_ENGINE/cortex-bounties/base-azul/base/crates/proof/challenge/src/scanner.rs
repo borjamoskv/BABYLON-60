@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Game scanner for the challenger service.
 //!
 //! Scans the [`DisputeGameFactory`](base_proof_contracts::DisputeGameFactoryClient)

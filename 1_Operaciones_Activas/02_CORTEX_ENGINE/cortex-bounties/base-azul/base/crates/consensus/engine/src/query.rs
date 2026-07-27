@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Engine query interface for external communication.
 //!
 //! Provides a channel-based API for querying engine state and configuration

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /// Pipeline construction and block execution.
 pub mod executor;
 /// In-memory preimage oracle for the zkVM.

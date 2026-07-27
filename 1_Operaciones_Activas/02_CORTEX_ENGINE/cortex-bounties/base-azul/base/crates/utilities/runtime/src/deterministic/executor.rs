@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Internal executor state: task queue, waker, virtual clock, and sleep alarm.
 
 use std::{

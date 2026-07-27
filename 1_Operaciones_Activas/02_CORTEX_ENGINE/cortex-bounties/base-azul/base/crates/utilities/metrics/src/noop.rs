@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! No-op metric types used when the `metrics` feature is disabled.
 
 /// A no-op metric handle that compiles to nothing, providing zero-cost stubs

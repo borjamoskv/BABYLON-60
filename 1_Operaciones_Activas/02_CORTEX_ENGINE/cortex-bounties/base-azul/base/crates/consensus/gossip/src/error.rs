@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Error types for the gossip networking module.
 
 use std::net::IpAddr;

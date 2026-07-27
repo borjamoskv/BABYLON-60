@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Metrics for flashblocks.
 
 base_metrics::define_metrics! {

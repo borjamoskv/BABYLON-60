@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # External
 
 This folder contains external smart contracts used by the Algorand NTT implementation.

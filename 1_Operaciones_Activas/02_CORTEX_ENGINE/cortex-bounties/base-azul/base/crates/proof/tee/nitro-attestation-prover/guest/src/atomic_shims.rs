@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Atomic operation shims for the riscv32im zkVM target.
 //!
 //! The riscv32im ISA lacks the "A" (atomics) extension, so LLVM emits calls to

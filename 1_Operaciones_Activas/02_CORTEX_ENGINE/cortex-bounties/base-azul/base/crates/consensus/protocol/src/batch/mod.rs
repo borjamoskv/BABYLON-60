@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Batch types and processing for Base L2 derivation.
 //!
 //! This module contains comprehensive batch handling functionality for the Base

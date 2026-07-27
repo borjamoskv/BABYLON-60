@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Metrics helpers for the sequencer actor.
 
 use base_consensus_derive::AttributesBuilder;

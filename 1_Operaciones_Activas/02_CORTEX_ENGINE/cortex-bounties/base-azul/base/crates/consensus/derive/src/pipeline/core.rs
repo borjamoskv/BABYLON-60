@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the core derivation pipeline.
 
 use alloc::{boxed::Box, collections::VecDeque, string::ToString, sync::Arc};

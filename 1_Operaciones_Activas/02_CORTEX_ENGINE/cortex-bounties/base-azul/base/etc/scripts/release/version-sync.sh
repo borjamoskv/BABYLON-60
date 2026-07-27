@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env bash
 # version-sync.sh - Create a PR to sync Cargo.toml version with release branch name
 #

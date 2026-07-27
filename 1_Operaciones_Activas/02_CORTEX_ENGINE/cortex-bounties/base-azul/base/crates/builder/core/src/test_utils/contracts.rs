@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /// Solidity ABI bindings for the [`FlashblocksNumber`](https://github.com/Uniswap/flashblocks_number_contract) contract used in integration tests.
 pub mod flashblocks_number_contract {
     use alloy_sol_types::sol;

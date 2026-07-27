@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The batcher pipeline trait.
 
 use base_common_consensus::BaseBlock;

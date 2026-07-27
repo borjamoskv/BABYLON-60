@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Integration tests verifying that the registry's rollup configs agree with chain hardfork
 //! schedules for every [`BaseUpgrade`] variant.
 

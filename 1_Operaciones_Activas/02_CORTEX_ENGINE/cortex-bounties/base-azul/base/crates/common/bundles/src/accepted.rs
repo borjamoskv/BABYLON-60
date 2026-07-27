@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Accepted bundle type that has been validated and metered.
 
 use alloy_consensus::transaction::Recovered;

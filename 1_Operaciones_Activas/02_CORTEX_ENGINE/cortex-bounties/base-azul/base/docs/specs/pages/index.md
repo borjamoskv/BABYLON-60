@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Base Specification
 
 This specification defines the Base Chain protocol: how nodes derive and execute blocks, how

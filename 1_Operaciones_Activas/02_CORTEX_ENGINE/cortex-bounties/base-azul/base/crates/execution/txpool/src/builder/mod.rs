@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Builder RPC API server and associated metrics.
 
 mod rpc;

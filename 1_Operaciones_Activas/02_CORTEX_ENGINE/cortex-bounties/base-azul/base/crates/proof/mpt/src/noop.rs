@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Trait implementations for `base-proof-mpt` traits that are effectively a no-op.
 //! Provides trait implementations for downstream users who do not require hinting.
 

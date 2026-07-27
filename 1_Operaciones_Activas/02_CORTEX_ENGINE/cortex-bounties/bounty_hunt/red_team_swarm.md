@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Swarm Orchestration Spec: Red-Team Sigma
 
 **ID**: RED-TEAM-Σ-2026
@@ -21,7 +22,7 @@ Deploying 50 agents in hierarchical formation:
 - Target: Does the model allow `rm -rf` equivalents via tool-calling? Does it allow mutating long-term memory in unintended ways?
 
 ### 4. The Forensic Loggers (4 Agents)
-- Task: Automated evidence gathering. 
+- Task: Automated evidence gathering.
 - Captures prompt-response pairs and system state transitions for the final PoC.
 
 ---

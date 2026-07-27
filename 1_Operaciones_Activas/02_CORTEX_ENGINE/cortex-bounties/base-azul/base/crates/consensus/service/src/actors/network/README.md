@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Network actor
 
 The network actor owns the consensus node's P2P boundary: libp2p gossipsub

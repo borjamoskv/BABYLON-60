@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Fee calculation and bumping logic for EIP-1559 and EIP-4844 transactions.
 //!
 //! All arithmetic uses `u128` with saturating operations to avoid overflow

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Error types for protocol conversions.
 
 use alloy_primitives::B256;

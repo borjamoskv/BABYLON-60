@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # base-ring-buffer
 
 Generic bounded ring buffer for position-keyed replay.

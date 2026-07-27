@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Integration tests for the SIGSEGV signal handler.
 //!
 //! These tests verify that the signal handler installed by [`SigsegvHandler`] catches

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { AlgorandClient } from "@algorandfoundation/algokit-utils/types/algorand-client";
 import { getApplicationAddress } from "algosdk";
 import { readFileSync } from "node:fs";

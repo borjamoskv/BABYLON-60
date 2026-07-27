@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the hardfork configuration for the chain.
 
 use alloc::string::{String, ToString};

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Configuration for the [`SequencerActor`].
 //!
 //! [`SequencerActor`]: super::SequencerActor

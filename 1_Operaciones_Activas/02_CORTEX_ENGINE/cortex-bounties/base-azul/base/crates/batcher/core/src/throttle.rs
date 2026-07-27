@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Throttle controller for DA backlog management.
 
 /// Configuration for the throttle controller.

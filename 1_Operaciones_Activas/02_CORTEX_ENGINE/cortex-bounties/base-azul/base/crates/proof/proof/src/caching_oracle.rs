@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the [`CachingOracle`], which is a wrapper around an
 //! [`OracleReader`](base_proof_preimage::OracleReader) and [`HintWriter`](base_proof_preimage::HintWriter)
 //! that stores a configurable number of responses in an [`LruCache`] for quick retrieval.

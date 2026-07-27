@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module contains the [`BatchProvider`] stage.
 
 use alloc::{boxed::Box, sync::Arc};

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The Base RPC API using `jsonrpsee`
 
 use core::net::IpAddr;

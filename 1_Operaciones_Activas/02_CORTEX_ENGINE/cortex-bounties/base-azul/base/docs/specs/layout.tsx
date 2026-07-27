@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { ReactNode } from 'react'
 import { MDXProvider } from 'vocs/mdx-react'
 

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Shared fixtures and test data reused by integration tests across the Base codebase.
 
 use std::sync::Arc;

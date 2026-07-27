@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Rate-limited reverse-proxy servers for L1, L2, and Beacon RPC endpoints.
 
 mod config;

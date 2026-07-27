@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { keccak_256 } from "@noble/hashes/sha3";
 
 import type { MessageReceived, MessageToSend } from "../../specs/client/MockTransceiver.client.ts";

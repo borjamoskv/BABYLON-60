@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module contains a subscriber layer for `tracing-subscriber` that collects traces and their
 //! log levels.
 

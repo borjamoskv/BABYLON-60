@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Mock implementations for testing engine client functionality.
 
 use std::{collections::HashMap, sync::Arc};

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Consensus-layer gossipsub driver for Base.
 
 use std::{

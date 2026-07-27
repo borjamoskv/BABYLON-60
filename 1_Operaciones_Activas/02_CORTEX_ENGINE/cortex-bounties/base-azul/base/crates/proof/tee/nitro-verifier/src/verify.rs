@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Top-level attestation verification orchestrating COSE parsing, certificate
 //! chain validation, signature verification, and content validation.
 //!

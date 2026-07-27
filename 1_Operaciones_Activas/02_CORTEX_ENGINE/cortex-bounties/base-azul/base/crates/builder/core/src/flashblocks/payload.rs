@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use core::time::Duration;
 use std::{
     ops::{Div, Rem},

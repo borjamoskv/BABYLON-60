@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module contains the legacy transaction data type for a span batch.
 
 use alloy_consensus::{SignableTransaction, Signed, TxLegacy};

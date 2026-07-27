@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Module containing the [`BatchWithInclusionBlock`] struct.
 
 use base_common_genesis::RollupConfig;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Implements the Base engine API RPC methods.
 
 use alloy_eips::eip7685::Requests;

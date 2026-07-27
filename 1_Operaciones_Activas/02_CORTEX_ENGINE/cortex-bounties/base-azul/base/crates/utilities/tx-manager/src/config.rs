@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Transaction manager configuration.
 //!
 //! [`TxManagerConfig`] is the validated runtime configuration for the

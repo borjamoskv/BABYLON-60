@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { type ABIStruct, getABIEncodedValue } from "@algorandfoundation/algokit-utils/types/app-arc56";
 import { sha512_256 } from "@noble/hashes/sha2";
 import { keccak_256 } from "@noble/hashes/sha3";

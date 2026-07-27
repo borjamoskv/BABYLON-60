@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env bash
 # create-tag.sh - Create and push a release tag (RC or final)
 #

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Integration test for static metric initializer registration.
 
 use metrics_util::{

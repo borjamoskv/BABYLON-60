@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! `AggregateVerifier` contract bindings.
 //!
 //! Used to query individual dispute game instances (status, ZK/TEE prover

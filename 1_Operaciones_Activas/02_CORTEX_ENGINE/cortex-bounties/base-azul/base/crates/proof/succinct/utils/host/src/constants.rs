@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::path::PathBuf;
 
 use cargo_metadata::MetadataCommand;

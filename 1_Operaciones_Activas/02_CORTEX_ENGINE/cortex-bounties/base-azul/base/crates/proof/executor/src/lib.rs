@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![doc = include_str!("../README.md")]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 #![cfg_attr(not(any(test, feature = "test-utils")), no_std)]

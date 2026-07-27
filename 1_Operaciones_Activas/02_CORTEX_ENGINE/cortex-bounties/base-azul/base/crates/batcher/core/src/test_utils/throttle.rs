@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Test [`ThrottleClient`] implementations.
 
 use std::sync::{Arc, Mutex};

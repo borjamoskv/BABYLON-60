@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains peer scoring types.
 
 use std::collections::HashMap;

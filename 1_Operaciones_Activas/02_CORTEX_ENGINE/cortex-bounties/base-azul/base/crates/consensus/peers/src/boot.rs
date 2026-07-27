@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the [`BootNode`] type which is used to represent a boot node in the network.
 
 use std::{net::IpAddr, str::FromStr};

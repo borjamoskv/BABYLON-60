@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Full batcher runtime configuration.
 
 use std::{net::SocketAddr, time::Duration};

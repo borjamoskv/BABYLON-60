@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Flashblocks test harness module.
 //!
 //! Provides test utilities for flashblocks including:

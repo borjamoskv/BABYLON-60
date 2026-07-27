@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Proving utilities for executing multi-block range proofs.
 
 use std::time::{Duration, Instant};

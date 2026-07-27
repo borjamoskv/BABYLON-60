@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Abstracts the derivation pipeline from the driver.
 //!
 //! This module provides the [`DriverPipeline`] trait which serves as a high-level

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! `DelayedWETH` contract bindings.
 //!
 //! Used to read the withdrawal delay from the `DelayedWETH` contract. The

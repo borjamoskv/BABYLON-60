@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { HardhatError } = require('hardhat/internal/core/errors');
 
 // Modifies `artifacts.require(X)` so that instead of X it loads the XUpgradeable contract.

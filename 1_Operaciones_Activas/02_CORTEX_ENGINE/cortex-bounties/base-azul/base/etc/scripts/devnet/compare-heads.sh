@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env bash
 # Compare latest/safe/finalized block numbers between builder (sequencer) and
 # client (validator) on the local devnet. Refreshes every 2 seconds.

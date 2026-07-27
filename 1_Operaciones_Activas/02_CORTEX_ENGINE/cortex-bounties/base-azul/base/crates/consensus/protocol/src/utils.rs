@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Utility methods used by protocol types.
 
 use alloc::vec::Vec;

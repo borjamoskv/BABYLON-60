@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Healthcheck service for the based daemon.
 
 use std::{

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Signal handler to extract a backtrace from stack overflows and segfaults.
 //!
 //! Uses the [`backtrace`] crate for stack unwinding and symbol resolution,

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env node
 
 // Adjusts the format of the changelog that changesets generates.

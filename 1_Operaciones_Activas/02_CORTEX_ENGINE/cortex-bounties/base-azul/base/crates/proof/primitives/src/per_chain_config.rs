@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Per-chain configuration types for canonical chain identification.
 //!
 //! These types provide binary serialization that produces deterministic

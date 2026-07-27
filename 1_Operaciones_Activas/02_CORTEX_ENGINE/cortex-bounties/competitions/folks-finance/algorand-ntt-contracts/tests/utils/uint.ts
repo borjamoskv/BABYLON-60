@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 export const MAX_UINT8 = 2n ** 8n - 1n;
 export const MAX_UINT16 = 2n ** 16n - 1n;
 export const MAX_UINT32 = 2n ** 32n - 1n;

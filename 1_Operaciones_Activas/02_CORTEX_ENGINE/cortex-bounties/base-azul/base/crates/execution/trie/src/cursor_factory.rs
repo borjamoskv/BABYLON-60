@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Implements [`TrieCursorFactory`] and [`HashedCursorFactory`] for [`BaseProofsStore`] types.
 
 use std::marker::PhantomData;

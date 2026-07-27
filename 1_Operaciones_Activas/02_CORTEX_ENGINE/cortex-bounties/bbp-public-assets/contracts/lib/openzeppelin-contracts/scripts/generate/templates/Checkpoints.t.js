@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const format = require('../format-lines');
 const { capitalize } = require('../../helpers');
 const { OPTS, LEGACY_OPTS } = require('./Checkpoints.opts.js');
@@ -88,7 +89,7 @@ function testPush(
         ${opts.keyTypeName} lastKey = keys[keys.length - 1];
         if (lastKey > 0) {
             pastKey = _bound${capitalize(opts.keyTypeName)}(pastKey, 0, lastKey - 1);
-    
+
             vm.expectRevert();
             this.push(pastKey, values[keys.length % values.length]);
         }
@@ -177,7 +178,7 @@ function testPush(
         ${opts.keyTypeName} lastKey = keys[keys.length - 1];
         if (lastKey > 0) {
             pastKey = _bound${capitalize(opts.keyTypeName)}(pastKey, 0, lastKey - 1);
-    
+
             vm.roll(pastKey);
             vm.expectRevert();
             this.push(values[keys.length % values.length]);

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Build script that compiles `proto/zk_prover.proto` into Rust types via
 //! tonic/prost. By default only client code is generated; enabling the
 //! `server` Cargo feature also generates the server trait and helpers.

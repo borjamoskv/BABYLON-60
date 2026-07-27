@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Binary for saving the SP1 program ELF to disk.
 
 use std::fs;

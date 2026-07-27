@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Raw Span Batch Prefix
 
 use alloy_primitives::{FixedBytes, bytes};

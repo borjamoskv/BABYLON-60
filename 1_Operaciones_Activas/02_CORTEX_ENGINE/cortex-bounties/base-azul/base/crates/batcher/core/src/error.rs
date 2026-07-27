@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Error types for the batch driver.
 
 use base_batcher_encoder::StepError;

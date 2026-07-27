@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! A program to verify a Base L2 block STF with Ethereum DA in the zkVM.
 //!
 //! This binary contains the client program for executing the Base rollup state transition

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { algorandFixture } from "@algorandfoundation/algokit-utils/testing";
 import type { TransactionSignerAccount } from "@algorandfoundation/algokit-utils/types/account";
 import { type Account, type Address, OnApplicationComplete, getApplicationAddress } from "algosdk";
@@ -3120,7 +3121,7 @@ describe("NttManager", () => {
   describe("V-007: Decimal Mismatch Exploit (C5-REAL Strike)", () => {
     test("attacker mints 100x tokens by falsifying from_decimals in VAA payload", async () => {
       const inboundBucketId = getInboundBucketIdBytes(PEER_CHAIN_ID);
-      const malicious_from_decimals = 0; 
+      const malicious_from_decimals = 0;
       const amount = 1n;
 
       const messageReceived = getMessageReceived(

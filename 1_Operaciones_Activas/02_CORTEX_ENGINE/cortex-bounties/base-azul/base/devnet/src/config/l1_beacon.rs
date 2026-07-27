@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! L1 beacon chain (consensus layer) configuration.
 
 /// Generates the L1 beacon chain configuration as YAML.

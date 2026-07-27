@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The RPC server for the sequencer actor.
 //! Mostly handles queries from the admin rpc.
 

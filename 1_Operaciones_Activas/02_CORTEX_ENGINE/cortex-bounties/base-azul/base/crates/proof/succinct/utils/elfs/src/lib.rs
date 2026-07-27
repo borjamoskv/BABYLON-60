@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The zkvm ELF binaries.
 //!
 //! The actual binaries live out of tree under `crates/proof/succinct/elf/` and are

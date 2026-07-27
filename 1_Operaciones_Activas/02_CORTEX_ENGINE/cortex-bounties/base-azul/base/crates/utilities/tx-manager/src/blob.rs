@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! EIP-7594 blob transaction sidecar construction.
 //!
 //! [`BlobTxBuilder`] wraps alloy's KZG sidecar API to produce

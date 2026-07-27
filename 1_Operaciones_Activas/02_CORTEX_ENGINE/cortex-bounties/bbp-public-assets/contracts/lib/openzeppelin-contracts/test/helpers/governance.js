@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { forward } = require('../helpers/time');
 
 function zip(...args) {

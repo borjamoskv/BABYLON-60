@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Implements the rollup client rpc endpoints. These endpoints serve data about the rollup state.
 //!
 //! Implemented in the op-node in <https://github.com/ethereum-optimism/optimism/blob/174e55f0a1e73b49b80a561fd3fedd4fea5770c6/op-service/sources/rollupclient.go#L16>

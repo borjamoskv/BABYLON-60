@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use base_protocol::SyncStatus;
 use jsonrpsee::{core::RpcResult, proc_macros::rpc};
 

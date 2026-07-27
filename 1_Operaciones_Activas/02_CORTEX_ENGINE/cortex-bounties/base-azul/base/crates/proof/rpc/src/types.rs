@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! RPC response types for Base rollup nodes.
 
 use alloy_network::Ethereum;

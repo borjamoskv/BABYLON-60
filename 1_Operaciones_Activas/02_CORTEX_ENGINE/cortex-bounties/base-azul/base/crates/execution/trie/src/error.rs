@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Errors interfacing with [`BaseProofsStore`](crate::BaseProofsStore) type.
 
 use std::sync::Arc;

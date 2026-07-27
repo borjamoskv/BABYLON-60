@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::net::SocketAddr;
 
 use axum::{Router, http::StatusCode, response::IntoResponse, routing::get};

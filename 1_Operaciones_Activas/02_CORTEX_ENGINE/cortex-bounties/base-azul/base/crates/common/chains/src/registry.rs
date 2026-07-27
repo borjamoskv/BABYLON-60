@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Rollup chain configuration registry.
 
 use alloy_primitives::{Address, map::HashMap};

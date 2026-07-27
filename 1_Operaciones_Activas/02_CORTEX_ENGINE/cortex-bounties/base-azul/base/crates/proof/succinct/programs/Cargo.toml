@@ -1,8 +1,9 @@
+# C5-REAL EXERGY CERTIFIED
 # Sub-workspace for the SP1 zkVM guest programs (range + aggregation).
 #
 # These crates are built separately via `just succinct build-elfs`
 # (which shells out to `cargo prove build` with the SP1 toolchain and
-# the `riscv32im-succinct-zkvm-elf` target). 
+# the `riscv32im-succinct-zkvm-elf` target).
 
 [workspace]
 resolver = "2"

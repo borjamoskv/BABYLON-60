@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Integration tests for `define_metrics_args!` and `define_log_args!` macros.
 
 use clap::{CommandFactory, Parser};

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! L1 head source implementations for the batcher service.
 
 use std::sync::Arc;

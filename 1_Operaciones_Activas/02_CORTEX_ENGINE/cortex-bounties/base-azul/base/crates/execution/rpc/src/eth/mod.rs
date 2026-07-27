@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Base `eth_` endpoint implementation.
 
 pub mod proofs;

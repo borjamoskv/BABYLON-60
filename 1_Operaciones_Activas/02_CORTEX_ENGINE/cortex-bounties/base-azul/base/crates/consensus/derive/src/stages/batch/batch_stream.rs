@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module contains the `BatchStream` stage.
 
 use alloc::{boxed::Box, collections::VecDeque, string::ToString, sync::Arc};

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { config } = require('hardhat');
 
 const optimizationsEnabled = config.solidity.compilers.some(c => c.settings.optimizer.enabled);

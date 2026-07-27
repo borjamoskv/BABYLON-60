@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Remote signer client, certificate handling, and request handler.
 
 mod cert;

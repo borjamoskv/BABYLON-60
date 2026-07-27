@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains error types specific to the L1 block info transaction.
 
 /// An error type for parsing L1 block info transactions.

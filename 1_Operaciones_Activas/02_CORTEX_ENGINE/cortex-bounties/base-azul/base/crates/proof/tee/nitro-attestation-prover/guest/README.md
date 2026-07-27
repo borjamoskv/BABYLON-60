@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Nitro Verifier Guest Program
 
 RISC Zero guest program that verifies AWS Nitro Enclave attestation documents

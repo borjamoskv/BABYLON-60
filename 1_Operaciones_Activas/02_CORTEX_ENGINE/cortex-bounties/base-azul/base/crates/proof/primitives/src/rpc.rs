@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // This module requires at least one of the RPC features to compile correctly.
 // The `lib.rs` cfg gate normally ensures this, but we add an explicit guard for
 // safety in case the module is ever included directly.

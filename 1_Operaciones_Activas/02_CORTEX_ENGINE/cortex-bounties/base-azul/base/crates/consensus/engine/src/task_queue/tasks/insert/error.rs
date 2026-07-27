@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the error types for the [`InsertTask`].
 //!
 //! [InsertTask]: crate::InsertTask

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Receipt types for RPC
 
 use alloy_consensus::{Receipt, ReceiptWithBloom, TxReceipt};

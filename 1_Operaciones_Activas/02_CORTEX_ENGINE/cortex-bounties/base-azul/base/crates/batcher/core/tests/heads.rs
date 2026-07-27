@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Integration tests for L1 head source and safe head watch behaviour in [`BatchDriver`].
 
 use std::{

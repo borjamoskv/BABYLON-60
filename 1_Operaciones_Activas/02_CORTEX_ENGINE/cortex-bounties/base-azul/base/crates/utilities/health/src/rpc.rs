@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Health check RPC trait, types, and default implementation.
 
 use async_trait::async_trait;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Integration tests for pause/resume admin commands in [`BatchDriver`].
 
 use std::{

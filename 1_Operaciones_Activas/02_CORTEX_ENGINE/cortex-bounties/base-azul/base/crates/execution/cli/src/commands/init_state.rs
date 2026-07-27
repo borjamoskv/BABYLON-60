@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Command that initializes the node from a genesis file.
 
 use std::sync::Arc;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { readFileSync, writeFileSync } from "node:fs";
 
 import type { NetworkType } from "./types.ts";

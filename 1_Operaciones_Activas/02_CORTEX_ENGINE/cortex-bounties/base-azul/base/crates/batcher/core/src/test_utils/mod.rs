@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Test utilities for consumers of `base-batcher-core`.
 
 mod throttle;

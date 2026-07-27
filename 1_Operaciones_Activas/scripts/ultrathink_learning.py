@@ -9,6 +9,7 @@ import time
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
+sys.path.insert(0, os.path.join(PROJECT_ROOT, "02_CORTEX_ENGINE"))
 
 from cortex.engines.entropy_mapping_engine import ThermodynamicEntropyEngine
 
@@ -59,7 +60,9 @@ def ultrathink_audit(filepath: str) -> None:
     print(f"S_Synthetic: {s_synthetic:.6f} nats | S_C5: {s_c5:.6f} nats | Delta: {exergy_delta:.6f} nats")
 
     # Inject into Ledger
-    db_path = ".cortex/cortex.db"
+    db_path = os.path.join(PROJECT_ROOT, "02_CORTEX_ENGINE", "cortex", "cortex.db")
+    if not os.path.exists(db_path):
+        db_path = ".cortex/cortex.db"
     if os.path.exists(db_path):
         try:
             conn = sqlite3.connect(db_path, timeout=5.0)

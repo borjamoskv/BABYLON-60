@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Integration test for `GetProof` `error_message` field.
 //!
 //! Submits a `ProveBlock` request that will fail (`number_of_blocks_to_prove=0`),

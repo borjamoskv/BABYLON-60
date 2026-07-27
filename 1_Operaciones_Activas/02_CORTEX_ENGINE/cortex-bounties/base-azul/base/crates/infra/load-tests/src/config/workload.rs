@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use serde::{Deserialize, Serialize};
 
 /// Configuration for a workload generator.

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Helper function for Receipt root calculation for Base hardforks.
 
 use alloc::vec::Vec;

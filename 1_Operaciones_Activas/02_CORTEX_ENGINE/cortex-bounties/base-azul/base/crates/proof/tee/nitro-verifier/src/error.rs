@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Error types for Nitro attestation verification.
 
 use thiserror::Error;

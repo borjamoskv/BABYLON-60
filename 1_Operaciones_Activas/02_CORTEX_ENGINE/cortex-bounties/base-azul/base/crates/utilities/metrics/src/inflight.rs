@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! RAII guard for tracking in-flight operations.
 
 /// RAII guard that increments a gauge on creation and decrements it on drop.

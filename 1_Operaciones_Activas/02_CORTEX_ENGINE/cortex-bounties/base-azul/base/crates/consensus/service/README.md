@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-consensus-node`
 
 <a href="https://crates.io/crates/base-consensus-node"><img src="https://img.shields.io/crates/v/base-consensus-node.svg" alt="base-consensus-node crate"></a>

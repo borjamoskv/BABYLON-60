@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Shared signer-validity checker backed by the on-chain `TEEProverRegistry`.
 //!
 //! Two consumers, two policies:

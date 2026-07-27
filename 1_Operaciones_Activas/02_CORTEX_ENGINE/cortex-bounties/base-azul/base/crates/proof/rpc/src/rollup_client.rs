@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Rollup RPC client implementation for Base rollup nodes.
 
 use std::time::Duration;

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 name: Python Tests
 
 on:
@@ -15,17 +16,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
-        
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        
+
     - name: Run tests with pytest
       run: |
         pytest tests/

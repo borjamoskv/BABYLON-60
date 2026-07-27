@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Events emitted by an [`UnsafeBlockSource`][crate::UnsafeBlockSource].
 
 use base_common_consensus::BaseBlock;

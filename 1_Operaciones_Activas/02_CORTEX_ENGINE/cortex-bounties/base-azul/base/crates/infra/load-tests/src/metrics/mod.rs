@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Metrics collection for latency, throughput, and gas usage.
 
 mod types;

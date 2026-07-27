@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Loads and formats Base receipt RPC response.
 
 use std::fmt::Debug;

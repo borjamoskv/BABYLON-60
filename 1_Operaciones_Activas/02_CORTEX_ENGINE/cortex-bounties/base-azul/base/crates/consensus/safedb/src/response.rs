@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Response type for safe head queries.
 
 use alloy_eips::BlockNumHash;

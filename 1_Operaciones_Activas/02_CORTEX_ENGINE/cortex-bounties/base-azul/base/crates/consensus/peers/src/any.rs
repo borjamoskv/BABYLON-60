@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the `AnyNode` enum, which can represent a peer in any form.
 
 use derive_more::From;

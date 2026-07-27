@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Abstraction over receipt building logic to allow plugging different primitive types into
 //! [`super::BaseBlockExecutor`].
 

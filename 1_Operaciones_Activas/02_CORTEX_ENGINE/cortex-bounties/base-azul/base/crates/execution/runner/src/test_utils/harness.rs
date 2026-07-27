@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Unified test harness combining node and engine helpers, plus optional flashblocks adapter.
 
 use std::{sync::Arc, time::Duration};

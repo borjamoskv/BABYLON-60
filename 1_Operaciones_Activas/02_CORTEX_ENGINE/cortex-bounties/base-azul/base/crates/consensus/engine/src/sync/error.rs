@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the error types used for finding the starting forkchoice state.
 
 use alloy_eips::BlockId;

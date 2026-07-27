@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Precompile looper contract for calling precompiles multiple times per transaction.
 
 use alloy_primitives::{Bytes, hex};

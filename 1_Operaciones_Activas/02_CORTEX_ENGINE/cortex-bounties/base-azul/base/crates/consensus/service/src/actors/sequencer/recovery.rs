@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Shared recovery mode flag for the sequencer.
 //!
 //! [`RecoveryModeGuard`] is a cheaply-cloneable wrapper around an atomic bool

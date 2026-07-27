@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Initialization job for proofs storage. Handles storing the existing state into the proofs
 //! storage.
 

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Payload sealer state machine.
 //!
 //! Tracks a sealed payload through the commit → gossip → insert pipeline,

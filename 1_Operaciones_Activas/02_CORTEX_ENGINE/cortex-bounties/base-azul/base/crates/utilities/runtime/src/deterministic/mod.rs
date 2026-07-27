@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Deterministic async executor for reproducible test execution.
 //!
 //! Uses a seeded RNG to shuffle the ready-task queue before each polling

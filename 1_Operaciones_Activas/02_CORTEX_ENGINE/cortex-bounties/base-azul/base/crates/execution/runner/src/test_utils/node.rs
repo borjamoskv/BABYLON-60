@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Local node setup with Base Sepolia chainspec
 
 use std::{any::Any, fmt, net::SocketAddr, path::PathBuf, sync::Arc};

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the [`Metadata`] type used in Flashblocks.
 
 use serde::{Deserialize, Serialize};

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! An implementation of the [`DataAvailabilityProvider`] trait for tests.
 
 use alloc::{boxed::Box, vec::Vec};

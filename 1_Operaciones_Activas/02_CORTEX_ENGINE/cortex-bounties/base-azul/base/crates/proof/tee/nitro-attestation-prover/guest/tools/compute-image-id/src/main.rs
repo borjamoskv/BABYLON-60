@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Bundles a raw RISC-V ELF into the R0BF (RISC Zero Binary Format) and
 //! computes the image ID.
 //!

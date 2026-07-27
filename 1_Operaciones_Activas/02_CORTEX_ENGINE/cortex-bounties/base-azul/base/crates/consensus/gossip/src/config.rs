@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Gossipsub Config
 
 use std::time::Duration;

@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Configuration
 
 There are four categories of Base configuration:

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Constants used throughout the proposer.
 
 use std::time::Duration;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Core transaction manager implementation.
 //!
 //! [`SimpleTxManager`] takes a [`TxCandidate`] through the full construction

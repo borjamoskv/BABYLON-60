@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 Documentation is hosted at https://docs.openzeppelin.com/contracts.
 
 All of the content for the site is in this repository. The guides are in the

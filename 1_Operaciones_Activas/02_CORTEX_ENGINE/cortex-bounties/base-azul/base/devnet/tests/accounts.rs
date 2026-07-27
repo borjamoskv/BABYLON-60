@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Tests for mnemonic-based account derivation.
 
 use alloy_primitives::address;

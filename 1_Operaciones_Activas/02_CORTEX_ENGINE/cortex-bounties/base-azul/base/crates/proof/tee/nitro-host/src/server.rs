@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::{fmt, net::SocketAddr, sync::Arc, time::Duration};
 
 use base_health::{HealthzApiServer, HealthzRpc};

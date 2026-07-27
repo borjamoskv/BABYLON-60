@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """Verify or refresh the sha256 entries in ``crates/proof/succinct/elf/manifest.toml``.
 

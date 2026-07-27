@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! [Header] assembly logic for the [`StatelessL2Builder`].
 
 use alloc::vec::Vec;

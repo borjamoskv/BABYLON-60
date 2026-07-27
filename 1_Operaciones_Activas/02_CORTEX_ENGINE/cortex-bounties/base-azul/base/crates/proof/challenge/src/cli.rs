@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! CLI argument definitions for the challenger.
 //!
 //! All flags use the `BASE_CHALLENGER_` environment-variable prefix

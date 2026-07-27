@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Mock testing utilities for the [`ChannelBank`] stage.
 //!
 //! [ChannelBank]: crate::stages::ChannelBank

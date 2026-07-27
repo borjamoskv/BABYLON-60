@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # 01_INTEL_SUITE
 
 **Dominio de Inteligencia Documental, OSINT y Detección Anti-Mafia**

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! [`DirectProver`] — proving backend using `risc0_zkvm::default_prover()`.
 //!
 //! Routes automatically based on environment variables:

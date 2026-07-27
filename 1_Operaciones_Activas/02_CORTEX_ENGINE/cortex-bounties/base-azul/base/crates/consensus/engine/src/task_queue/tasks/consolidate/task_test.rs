@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Tests for `ConsolidateTask::execute`
 
 use std::sync::Arc;

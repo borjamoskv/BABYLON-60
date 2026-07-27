@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! HTTP-RPC bundle event publisher.
 //!
 //! `RpcBundleEventPublisher` implements [`BundleEventPublisher`] by sending

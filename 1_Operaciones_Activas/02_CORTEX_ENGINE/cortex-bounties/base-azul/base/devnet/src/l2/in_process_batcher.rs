@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! In-process batcher for L2 devnet.
 //!
 //! Runs `base-batcher-service` directly in the test process, eliminating the Docker

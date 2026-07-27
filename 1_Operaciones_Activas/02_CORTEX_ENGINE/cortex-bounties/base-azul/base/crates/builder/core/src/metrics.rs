@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Builder metrics collected during block and flashblock construction.
 
 use crate::{ExecutionInfo, FlashblockDiagnostics, ResourceLimits};

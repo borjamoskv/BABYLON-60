@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module contains the `ChannelReader` struct.
 
 use alloc::{boxed::Box, string::ToString, sync::Arc};

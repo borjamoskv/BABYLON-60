@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Metrics definitions and convenience helpers for the ZK prover service.
 //!
 //! Uses the `metrics` crate facade (`counter!`, `histogram!`) so the exporter

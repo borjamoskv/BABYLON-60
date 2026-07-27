@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! RPC-fed event reader.
 //!
 //! `RpcEventReader` implements [`EventReader`] by receiving [`Event`]s from a

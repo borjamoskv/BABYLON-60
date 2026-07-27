@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // RISC Zero guest program for Nitro attestation verification.
 //
 // NOT compiled by the host crate — exists as source for manual compilation

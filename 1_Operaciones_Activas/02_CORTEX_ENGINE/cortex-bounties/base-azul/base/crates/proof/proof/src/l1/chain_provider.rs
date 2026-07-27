@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the concrete implementation of the [`ChainProvider`] trait for the proof.
 
 use alloc::{boxed::Box, sync::Arc, vec::Vec};

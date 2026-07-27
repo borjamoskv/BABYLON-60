@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! GossipSub-based consensus layer networking for Base.
 //!
 //! This module implements the networking layer for Base consensus using libp2p's GossipSub

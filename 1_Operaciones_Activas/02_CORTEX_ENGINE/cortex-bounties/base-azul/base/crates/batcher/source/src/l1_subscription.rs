@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! L1 head subscription trait for keepalive-aware streaming.
 
 use futures::stream::BoxStream;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module contains the `BatchQueue` stage implementation.
 
 use alloc::{boxed::Box, sync::Arc, vec::Vec};

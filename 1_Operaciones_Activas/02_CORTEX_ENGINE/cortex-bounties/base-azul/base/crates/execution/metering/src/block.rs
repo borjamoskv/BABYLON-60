@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Block metering logic.
 
 use std::{sync::Arc, time::Instant};

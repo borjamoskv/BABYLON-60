@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains a small type that identifies if the transaction pool should be enabled.
 
 use std::sync::Arc;

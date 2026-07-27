@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Configuration types and validation for the proposer.
 
 use std::{net::SocketAddr, time::Duration};

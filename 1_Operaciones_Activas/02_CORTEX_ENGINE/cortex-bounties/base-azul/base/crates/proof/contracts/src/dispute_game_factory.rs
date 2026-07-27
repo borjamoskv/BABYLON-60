@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! `DisputeGameFactory` contract bindings.
 //!
 //! Used to create new dispute games and query existing ones.

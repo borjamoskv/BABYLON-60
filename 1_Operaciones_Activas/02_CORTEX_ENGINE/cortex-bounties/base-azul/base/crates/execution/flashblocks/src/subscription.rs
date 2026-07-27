@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! WebSocket subscription handling for flashblocks.
 
 use std::{sync::Arc, time::Duration};

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Smoke tests for the full Devnet stack.
 
 use std::time::Duration;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Benchmark for sender recovery performance.
 //!
 //! Compares sequential vs parallel ECDSA sender recovery

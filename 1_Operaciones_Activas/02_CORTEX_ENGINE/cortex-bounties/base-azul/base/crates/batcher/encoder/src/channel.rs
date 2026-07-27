@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Channel state machine types.
 
 use std::{fmt, ops::Range, sync::Arc};

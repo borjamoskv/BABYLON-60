@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Test [`BatchPipeline`] implementations for action-testing the batch driver.
 
 use std::sync::{Arc, Mutex};

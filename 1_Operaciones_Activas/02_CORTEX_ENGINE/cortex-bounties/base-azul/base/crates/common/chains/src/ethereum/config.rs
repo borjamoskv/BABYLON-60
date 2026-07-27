@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Static Ethereum L1 chain configuration mapping.
 
 use alloy_chains::NamedChain;

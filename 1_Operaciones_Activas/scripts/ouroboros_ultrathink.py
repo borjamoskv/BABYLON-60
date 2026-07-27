@@ -10,12 +10,13 @@ import time
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
+sys.path.insert(0, os.path.join(PROJECT_ROOT, "02_CORTEX_ENGINE"))
 
 from cortex.engines.entropy_mapping_engine import ThermodynamicEntropyEngine
 
 def compute_workspace_ast_domain_counts() -> dict[str, int]:
     domain_counts: dict[str, int] = {}
-    cortex_dir = os.path.join(PROJECT_ROOT, "cortex")
+    cortex_dir = os.path.join(PROJECT_ROOT, "02_CORTEX_ENGINE", "cortex")
     if os.path.exists(cortex_dir):
         for root, _dirs, files in os.walk(cortex_dir):
             for file in files:
@@ -74,7 +75,7 @@ def run_transduction() -> None:
     taint_sha3 = hashlib.sha3_256(raw_json.encode("utf-8")).hexdigest()
     payload["CORTEX_TAINT"] = f"taint:borjamoskv:ouroboros:{int(time.time())}:{taint_sha3}"
 
-    output_path = os.path.join(PROJECT_ROOT, "cortex", "ouroboros_ultrathink_transduction.yaml")
+    output_path = os.path.join(PROJECT_ROOT, "02_CORTEX_ENGINE", "cortex", "ouroboros_ultrathink_transduction.yaml")
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
     yaml_out = []

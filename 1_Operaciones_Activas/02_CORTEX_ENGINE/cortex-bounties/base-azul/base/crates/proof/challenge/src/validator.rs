@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Output root validation for candidate dispute games.
 //!
 //! The [`OutputValidator`] verifies both the final output root and intermediate

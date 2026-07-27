@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Contributor Covenant Code of Conduct
 
 ## Our Pledge

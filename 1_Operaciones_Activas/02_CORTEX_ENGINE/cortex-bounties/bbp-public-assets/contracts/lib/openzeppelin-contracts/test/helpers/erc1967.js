@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const ImplementationLabel = 'eip1967.proxy.implementation';
 const AdminLabel = 'eip1967.proxy.admin';
 const BeaconLabel = 'eip1967.proxy.beacon';

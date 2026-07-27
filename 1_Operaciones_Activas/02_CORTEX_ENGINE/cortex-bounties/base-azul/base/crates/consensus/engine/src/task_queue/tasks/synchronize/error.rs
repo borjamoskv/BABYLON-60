@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains error types for the [`crate::SynchronizeTask`].
 
 use alloy_rpc_types_engine::PayloadStatusEnum;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Succinct proving backend using the SP1 cluster.
 
 use std::{fmt, time::SystemTime};

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Test utilities for the [`ChannelReader`] stage.
 //!
 //! [ChannelReader]: crate::stages::ChannelReader

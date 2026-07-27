@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Admin command channel for runtime control of the batch driver.
 
 use tokio::sync::{mpsc, oneshot};

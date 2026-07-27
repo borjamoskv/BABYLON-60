@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! WebSocket transport with per-connect JWT authentication.
 //!
 //! [`JwtWsConnect`] implements [`PubSubConnect`] by minting a fresh JWT on

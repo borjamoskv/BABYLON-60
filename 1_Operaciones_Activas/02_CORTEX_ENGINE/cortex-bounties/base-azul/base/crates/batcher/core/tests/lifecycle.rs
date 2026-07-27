@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Integration tests for [`BatchDriver`] lifecycle: source exhaustion, flush, and drain.
 
 use std::{

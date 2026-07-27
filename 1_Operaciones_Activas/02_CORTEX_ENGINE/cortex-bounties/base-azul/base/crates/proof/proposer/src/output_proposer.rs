@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! `OutputProposer` trait and `ProposalSubmitter` implementation for L1 transaction submission.
 //!
 //! Submits output proposals by creating new dispute games via `DisputeGameFactory.createWithInitData()`.

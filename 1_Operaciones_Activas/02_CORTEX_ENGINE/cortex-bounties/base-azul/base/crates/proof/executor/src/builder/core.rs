@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Stateless Base L2 block builder implementation.
 //!
 //! The [`StatelessL2Builder`] provides a complete block building and execution engine

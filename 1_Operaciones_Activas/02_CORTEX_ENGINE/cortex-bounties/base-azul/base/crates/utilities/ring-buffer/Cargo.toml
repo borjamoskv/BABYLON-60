@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 [package]
 name = "base-ring-buffer"
 description = "Generic bounded ring buffer for position-keyed replay"

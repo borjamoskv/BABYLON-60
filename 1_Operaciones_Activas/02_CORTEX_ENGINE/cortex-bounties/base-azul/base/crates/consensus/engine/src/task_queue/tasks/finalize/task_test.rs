@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Tests for [`FinalizeTask::execute`].
 
 use std::sync::Arc;

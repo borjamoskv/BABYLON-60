@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Integration tests for `define_tx_manager_cli!` macro with a custom prefix.
 
 use clap::{CommandFactory, Parser};

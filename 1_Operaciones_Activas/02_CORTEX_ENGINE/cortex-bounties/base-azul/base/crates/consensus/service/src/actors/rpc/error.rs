@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use jsonrpsee::core::RegisterMethodError;
 
 /// An error returned by the [`crate::RpcActor`].

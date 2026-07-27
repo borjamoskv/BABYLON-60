@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Transaction outcome types for the batch driver.
 
 /// The outcome of a submitted batch transaction.

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Factory helpers for constructing test [`BatchDriver`] instances and [`BatchSubmission`] stubs.
 
 use std::{sync::Arc, time::Duration};

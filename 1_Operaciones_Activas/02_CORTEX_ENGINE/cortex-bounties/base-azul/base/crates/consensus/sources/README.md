@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-consensus-sources`
 
 <a href="https://crates.io/crates/base-consensus-sources"><img src="https://img.shields.io/crates/v/base-consensus-sources.svg" alt="base-consensus-sources crate"></a>

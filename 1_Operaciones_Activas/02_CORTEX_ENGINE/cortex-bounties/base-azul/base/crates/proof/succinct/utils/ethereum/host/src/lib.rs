@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Ethereum DA host utilities for witness generation.
 
 /// Single-chain SP1 host implementation.

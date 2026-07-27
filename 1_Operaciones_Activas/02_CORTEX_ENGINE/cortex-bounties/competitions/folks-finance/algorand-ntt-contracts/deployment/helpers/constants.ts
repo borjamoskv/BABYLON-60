@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { NetworkType } from "./types.ts";
 
 export const WORMHOLE_CORE_APP_ID = (networkType: NetworkType) =>

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /// Initializes the tracing subscriber for a binary, with optional application-specific
 /// noise-suppression directives appended on top of the workspace defaults.
 ///

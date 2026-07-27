@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Builder API RPC extension for registering the `base_insertValidatedTransaction` endpoint.
 
 use base_execution_txpool::{BuilderApiImpl, BuilderApiServer};

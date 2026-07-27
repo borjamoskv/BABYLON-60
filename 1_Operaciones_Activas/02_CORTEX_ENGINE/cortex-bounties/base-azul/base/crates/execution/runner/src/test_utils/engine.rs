@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Engine API integration for canonical block production.
 //!
 //! This module provides a typed, type-safe Engine API client based on

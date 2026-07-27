@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Module containing the core [`Batch`] enum.
 
 use alloy_primitives::bytes;

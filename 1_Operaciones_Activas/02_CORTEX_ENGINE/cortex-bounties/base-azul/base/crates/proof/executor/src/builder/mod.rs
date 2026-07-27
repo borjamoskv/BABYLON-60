@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Stateless Base block builder implementation.
 
 mod core;

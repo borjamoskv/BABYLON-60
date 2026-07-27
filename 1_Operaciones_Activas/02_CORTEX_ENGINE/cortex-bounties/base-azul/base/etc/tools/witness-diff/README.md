@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # witness-diff
 
 `witness-diff` compares two execution witnesses to identify exactly which trie nodes, bytecodes, or key preimages differ between them. The primary use case is investigating state root mismatches: when two nodes disagree on the post-block state root for the same block, this tool locates the specific accounts and storage slots that diverge rather than requiring you to diff multi-megabyte JSON blobs manually.

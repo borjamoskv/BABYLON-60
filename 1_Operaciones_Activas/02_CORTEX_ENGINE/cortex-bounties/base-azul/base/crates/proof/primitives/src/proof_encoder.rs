@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! TEE proof encoding for the `AggregateVerifier` contract.
 
 use alloc::vec;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! [`NodeActor`] implementation for an L1 chain watcher that polls for L1 block updates over HTTP
 //! RPC.
 

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Benchmarks for state root computation during block building.
 //!
 //! Measures the cost of the two `calculate_state_root` modes with 10

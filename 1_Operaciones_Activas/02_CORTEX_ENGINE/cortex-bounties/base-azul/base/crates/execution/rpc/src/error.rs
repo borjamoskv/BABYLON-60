@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! RPC errors specific to OP.
 
 use std::convert::Infallible;

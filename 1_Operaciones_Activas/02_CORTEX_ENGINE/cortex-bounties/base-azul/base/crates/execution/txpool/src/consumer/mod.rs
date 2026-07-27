@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Transaction pool consumer that processes pending transactions via broadcast.
 
 use std::sync::Arc;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Configuration file path wrappers for L1 and L2 configs.
 //!
 //! These types wrap `Option<PathBuf>` and provide methods to load

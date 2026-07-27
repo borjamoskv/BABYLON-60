@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the [`BatchReader`] which is used to iteratively consume batches from raw data.
 
 use alloc::vec::Vec;

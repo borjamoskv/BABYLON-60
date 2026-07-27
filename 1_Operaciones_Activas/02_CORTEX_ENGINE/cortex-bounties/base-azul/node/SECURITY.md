@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Security
 
 ## Bug bounty program
@@ -28,7 +29,7 @@ For more information on reporting vulnerabilities and our HackerOne bug bounty
 program, view our [security program policies][7].
 
 [1]: https://www.coinbase.com/blog/celebrating-10-years-of-our-bug-bounty-program
-[2]: https://hackerone.com/coinbase?type=team 
+[2]: https://hackerone.com/coinbase?type=team
 [3]: https://docs.optimism.io/
 [4]: https://immunefi.com/bounty/optimism/
 [5]: https://docs.optimism.io/docs/releases/bedrock/

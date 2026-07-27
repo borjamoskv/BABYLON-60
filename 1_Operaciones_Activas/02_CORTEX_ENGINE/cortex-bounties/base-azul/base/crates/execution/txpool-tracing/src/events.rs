@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Domain types describing tracex events and pools.
 
 use std::time::Instant;

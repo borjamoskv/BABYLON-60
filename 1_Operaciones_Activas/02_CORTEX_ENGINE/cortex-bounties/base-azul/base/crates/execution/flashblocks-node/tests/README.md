@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 ## Flashblocks RPC Integration Tests
 
 The suites under this directory exercise `base-flashblocks-node` the same way external

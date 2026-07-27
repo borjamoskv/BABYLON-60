@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-balance-monitor`
 
 Block-driven onchain balance monitoring for Base services.

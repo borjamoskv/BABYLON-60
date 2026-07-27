@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Mock proving backend for testing.
 //!
 //! Produces instant fake proofs using SP1's mock prover APIs.

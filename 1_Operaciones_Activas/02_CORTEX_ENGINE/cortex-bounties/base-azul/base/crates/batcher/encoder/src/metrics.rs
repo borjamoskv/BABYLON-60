@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Batcher metric definitions and label values.
 
 base_metrics::define_metrics! {

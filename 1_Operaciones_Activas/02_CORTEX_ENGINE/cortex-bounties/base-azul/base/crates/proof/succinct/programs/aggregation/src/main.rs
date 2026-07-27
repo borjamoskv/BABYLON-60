@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! A program that aggregates the proofs of the range program.
 
 #![cfg_attr(target_os = "zkvm", no_main)]

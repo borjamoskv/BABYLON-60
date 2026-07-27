@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the builder for the [`RollupNode`].
 
 use std::{path::PathBuf, sync::Arc, time::Duration};

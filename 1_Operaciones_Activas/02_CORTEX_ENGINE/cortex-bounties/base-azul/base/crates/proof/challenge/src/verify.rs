@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Account proof verification utilities.
 //!
 //! Provides [`AccountProofVerifier`] for verifying `eth_getProof` responses

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Traits for the metering RPC module.
 
 use alloy_eips::BlockNumberOrTag;

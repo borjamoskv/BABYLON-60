@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Startup scan of recent L1 blocks for submitted batcher frames.
 
 use std::collections::HashMap;

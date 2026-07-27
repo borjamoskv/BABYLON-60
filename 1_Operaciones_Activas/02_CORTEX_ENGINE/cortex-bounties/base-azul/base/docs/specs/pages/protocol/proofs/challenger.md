@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Challenger
 
 The challenger is an offchain service that protects the proof system by independently checking

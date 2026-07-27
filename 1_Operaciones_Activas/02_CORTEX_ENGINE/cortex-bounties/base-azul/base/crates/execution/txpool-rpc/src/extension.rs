@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! `TxPool` RPC extension for registering transaction pool management APIs.
 
 use base_node_runner::{BaseNodeExtension, BaseRpcContext, FromExtensionConfig, NodeHooks};

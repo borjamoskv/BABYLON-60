@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # The Base P2P Networking Stack
 
 This guide walks through the peer-to-peer networking architecture used by Base nodes. It is written

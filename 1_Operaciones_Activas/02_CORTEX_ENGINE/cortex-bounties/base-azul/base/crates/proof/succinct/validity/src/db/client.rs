@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::time::Duration;
 
 use alloy_primitives::{Address, B256};
@@ -32,9 +33,9 @@ impl DriverDBClient {
         l2_chain_id: i64,
     ) -> Result<PgQueryResult, Error> {
         sqlx::query!(
-            "INSERT INTO chain_locks (l1_chain_id, l2_chain_id, locked_at) 
+            "INSERT INTO chain_locks (l1_chain_id, l2_chain_id, locked_at)
              VALUES ($1, $2, NOW())
-             ON CONFLICT (l1_chain_id, l2_chain_id) 
+             ON CONFLICT (l1_chain_id, l2_chain_id)
              DO UPDATE SET locked_at = NOW()",
             l1_chain_id,
             l2_chain_id
@@ -514,7 +515,7 @@ impl DriverDBClient {
     ) -> Result<PgQueryResult, Error> {
         sqlx::query!(
             r#"
-            UPDATE requests 
+            UPDATE requests
             SET status = $1, updated_at = NOW()
             WHERE id = $2
             "#,
@@ -535,7 +536,7 @@ impl DriverDBClient {
     ) -> Result<PgQueryResult, Error> {
         sqlx::query!(
             r#"
-            UPDATE requests 
+            UPDATE requests
             SET status = $1, proof_request_id = $2, proof_request_time = NOW(), updated_at = NOW()
             WHERE id = $3
             "#,

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Main driver loop for the challenger service.
 //!
 //! The [`Driver`] ties together all challenger components — scanning for

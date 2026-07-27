@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Contributing to Base Node
 
 ## Code of Conduct

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::{path::PathBuf, process::Command, time::Duration};
 
 use eyre::{Result, WrapErr, ensure};

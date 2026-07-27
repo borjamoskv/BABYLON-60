@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from algopy import Bytes, Contract, OnCompleteAction, Txn, UInt64, op
 from algopy.arc4 import Bool, DynamicBytes, Struct, emit
 

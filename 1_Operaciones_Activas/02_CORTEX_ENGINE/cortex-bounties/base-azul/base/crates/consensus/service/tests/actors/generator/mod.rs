@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Test block generator utilities including block builder and seed helpers.
 
 pub(crate) mod block_builder;

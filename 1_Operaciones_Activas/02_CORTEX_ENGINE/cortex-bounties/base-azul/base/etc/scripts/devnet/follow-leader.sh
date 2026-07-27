@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/bin/bash
 # Polls all op-conductor nodes to find the current raft leader, then streams
 # logs from the corresponding sequencer CL container. Automatically switches

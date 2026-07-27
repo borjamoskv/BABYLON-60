@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Shared test utilities: reusable mock stubs for L1/L2 clients, contract clients, and proposer.
 
 use std::{

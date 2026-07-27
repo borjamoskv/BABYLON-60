@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the [`PreimageKey`] type, which is used to identify preimages that may be fetched from
 //! the preimage oracle.
 

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Command for generating test vectors.
 
 use std::sync::Arc;

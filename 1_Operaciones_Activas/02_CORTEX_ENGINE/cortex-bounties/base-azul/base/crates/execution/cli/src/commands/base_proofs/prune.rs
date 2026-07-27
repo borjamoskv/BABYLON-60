@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Command that prunes the Base Proofs storage.
 
 use std::{path::PathBuf, sync::Arc};

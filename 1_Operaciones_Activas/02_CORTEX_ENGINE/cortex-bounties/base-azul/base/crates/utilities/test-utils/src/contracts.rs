@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Solidity contract bindings for integration tests.
 //!
 //! This module provides pre-compiled contract bindings that can be used

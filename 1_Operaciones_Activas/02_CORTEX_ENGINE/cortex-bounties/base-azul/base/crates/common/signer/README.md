@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-common-signer`
 
 Remote transaction signer that delegates signing to an external signer sidecar via

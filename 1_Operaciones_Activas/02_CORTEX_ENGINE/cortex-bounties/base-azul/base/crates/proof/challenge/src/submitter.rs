@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Challenge submission logic for disputing invalid dispute games.
 //!
 //! Three dispute paths are supported:

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the concrete implementation of the [`L2ChainProvider`] trait for the client program.
 
 use alloc::{boxed::Box, sync::Arc, vec::Vec};

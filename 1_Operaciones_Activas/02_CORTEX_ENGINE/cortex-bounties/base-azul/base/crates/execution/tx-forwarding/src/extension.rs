@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the [`TxForwardingExtension`] which wires up the transaction
 //! forwarding pipeline on the Base node builder.
 

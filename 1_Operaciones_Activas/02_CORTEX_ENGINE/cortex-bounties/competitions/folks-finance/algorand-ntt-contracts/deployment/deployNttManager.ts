@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AlgoAmount } from "@algorandfoundation/algokit-utils/types/amount";
 import { bytesToHex, getApplicationAddress } from "algosdk";
 

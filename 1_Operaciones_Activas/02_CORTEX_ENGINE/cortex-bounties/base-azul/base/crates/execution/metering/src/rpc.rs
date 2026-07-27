@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Implementation of the metering RPC API.
 
 use std::sync::{

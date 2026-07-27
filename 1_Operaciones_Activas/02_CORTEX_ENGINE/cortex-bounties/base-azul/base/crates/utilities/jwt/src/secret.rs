@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! JWT secret loading and generation utilities.
 
 #[cfg(unix)]

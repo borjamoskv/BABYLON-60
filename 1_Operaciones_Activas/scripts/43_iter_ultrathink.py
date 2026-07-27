@@ -12,6 +12,7 @@ os.environ["CHROMA_SERVER_NO_TELEMETRY"] = "1"
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(PROJECT_ROOT)
+sys.path.append(os.path.join(PROJECT_ROOT, "02_CORTEX_ENGINE"))
 os.chdir(PROJECT_ROOT)
 
 from cortex.engines.mcts_vnode_compiler import L3InferenceEnginePhysical  # noqa: E402
@@ -43,7 +44,7 @@ def run_itera_ultrathink(cycles: int = 16) -> None:
             theorem = engine.compile_theorem(f"ULTRATHINK_PHYSICAL_COLLAPSE_ITER_{cycle_num}_{time.time()}")
 
             # Guardar el archivo compiled_theorem.py
-            compiled_path = os.path.join("cortex", "compiled_theorem.py")
+            compiled_path = os.path.join("02_CORTEX_ENGINE", "cortex", "compiled_theorem.py")
             with open(compiled_path, "w", encoding="utf-8") as f:
                 f.write(theorem.payload)
 
@@ -101,7 +102,7 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
                 print("[ITERA-ULTRATHINK] BM-Ω // C5-REAL ACTIVE. OMEGA Node Dispatching parallel validation (Pipeline, Zero-Barrier Ω185)...")
                 test_env = os.environ.copy()
                 validation_proc = subprocess.Popen(
-                    [".venv/bin/pytest", "cortex/swarm/engine_fsm_test.py"],
+                    [".venv/bin/pytest", "02_CORTEX_ENGINE/cortex/swarm/engine_fsm_test.py"],
                     env=test_env,
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL,
@@ -125,7 +126,7 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
             # 5. Git Sentinel: Guardar cambios en el ledger
             print("[ITERA-ULTRATHINK] Git Sentinel: Sellar estado en el ledger...")
             subprocess.run(
-                ["git", "add", "mundo_f_ledger.yml", "cortex/compiled_theorem.py"],
+                ["git", "add", "mundo_f_ledger.yml", "02_CORTEX_ENGINE/cortex/compiled_theorem.py"],
                 check=True,
             )
             staged_check = subprocess.run(["git", "diff", "--cached", "--quiet"])

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Witness generation traits and collectors.
 
 /// Core witness generation trait and type aliases.

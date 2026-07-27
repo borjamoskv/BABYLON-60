@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Base Node types config.
 
 use base_common_consensus::BasePrimitives;

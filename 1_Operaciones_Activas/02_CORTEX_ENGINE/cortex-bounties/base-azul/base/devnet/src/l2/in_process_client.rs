@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! In-process Base client node.
 //!
 //! Replaces Docker-based `ClientContainer` with an in-process node for faster tests.

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! End-to-end test of the live trie collector.
 
 use std::sync::Arc;

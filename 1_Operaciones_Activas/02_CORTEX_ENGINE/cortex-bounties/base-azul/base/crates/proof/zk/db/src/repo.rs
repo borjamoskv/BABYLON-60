@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use sqlx::{PgPool, Result, Row};
 use uuid::Uuid;
 

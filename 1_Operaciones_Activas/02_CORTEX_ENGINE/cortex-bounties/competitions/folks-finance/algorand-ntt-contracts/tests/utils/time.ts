@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { AlgorandFixture } from "@algorandfoundation/algokit-utils/types/testing";
 
 export const SECONDS_IN_MINUTE = 60n;

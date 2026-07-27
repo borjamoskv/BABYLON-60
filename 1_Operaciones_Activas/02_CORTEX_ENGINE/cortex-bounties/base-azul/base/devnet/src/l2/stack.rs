@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! L2 stack orchestration (Builder + Consensus + Batcher).
 //!
 //! This module provides [`L2Stack`], which composes a complete L2 network by orchestrating:

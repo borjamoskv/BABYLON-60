@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Prometheus metrics collection for engine operations.
 //!
 //! Provides metric identifiers and labels for monitoring engine performance,

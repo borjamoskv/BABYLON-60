@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Proposer driver types and lifecycle management.
 //!
 //! Contains configuration types ([`DriverConfig`], [`RecoveredState`]) shared

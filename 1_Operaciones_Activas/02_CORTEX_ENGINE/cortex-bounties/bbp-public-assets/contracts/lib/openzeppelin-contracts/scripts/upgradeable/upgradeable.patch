@@ -63,35 +63,35 @@ index 9fc95518..53130e3c 100644
 --- a/README.md
 +++ b/README.md
 @@ -16,17 +16,20 @@
- 
+
  :building_construction: **Want to scale your decentralized application?** Check out [OpenZeppelin Defender](https://openzeppelin.com/defender) — a secure platform for automating and monitoring your operations.
- 
+
 +> **Note**
 +> You are looking at the upgradeable variant of OpenZeppelin Contracts. Be sure to review the documentation on [Using OpenZeppelin Contracts with Upgrades](https://docs.openzeppelin.com/contracts/4.x/upgradeable).
 +
  ## Overview
- 
+
  ### Installation
- 
+
  ```
 -$ npm install @openzeppelin/contracts
 +$ npm install @openzeppelin/contracts-upgradeable
  ```
- 
+
  OpenZeppelin Contracts features a [stable API](https://docs.openzeppelin.com/contracts/releases-stability#api-stability), which means that your contracts won't break unexpectedly when upgrading to a newer minor version.
- 
+
 -An alternative to npm is to use the GitHub repository (`openzeppelin/openzeppelin-contracts`) to retrieve the contracts. When doing this, make sure to specify the tag for a release such as `v4.5.0`, instead of using the `master` branch.
 +An alternative to npm is to use the GitHub repository (`openzeppelin/openzeppelin-contracts-upgradeable`) to retrieve the contracts. When doing this, make sure to specify the tag for a release such as `v4.5.0`, instead of using the `master` branch.
- 
+
  ### Usage
- 
+
 @@ -35,10 +38,11 @@ Once installed, you can use the contracts in the library by importing them:
  ```solidity
  pragma solidity ^0.8.0;
- 
+
 -import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 +import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
- 
+
 -contract MyCollectible is ERC721 {
 -    constructor() ERC721("MyCollectible", "MCO") {
 +contract MyCollectible is ERC721Upgradeable {
@@ -222,7 +222,7 @@ index 16f830d1..9ef98148 100644
 --- a/contracts/token/ERC20/extensions/ERC20Capped.sol
 +++ b/contracts/token/ERC20/extensions/ERC20Capped.sol
 @@ -7,6 +7,8 @@ import "../ERC20.sol";
- 
+
  /**
   * @dev Extension of {ERC20} that adds a cap to the supply of tokens.
 + *
@@ -275,11 +275,11 @@ index 6a4e1cad..55d8eced 100644
 +++ b/contracts/utils/cryptography/EIP712.sol
 @@ -4,7 +4,6 @@
  pragma solidity ^0.8.8;
- 
+
  import "./ECDSA.sol";
 -import "../ShortStrings.sol";
  import "../../interfaces/IERC5267.sol";
- 
+
  /**
 @@ -30,27 +29,19 @@ import "../../interfaces/IERC5267.sol";
   *
@@ -293,7 +293,7 @@ index 6a4e1cad..55d8eced 100644
 -
      bytes32 private constant _TYPE_HASH =
          keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)");
- 
+
 -    // Cache the domain separator as an immutable value, but also store the chain id that it corresponds to, in order to
 -    // invalidate the cached domain separator if the chain id changes.
 -    bytes32 private immutable _cachedDomainSeparator;
@@ -304,14 +304,14 @@ index 6a4e1cad..55d8eced 100644
      bytes32 private immutable _hashedName;
 +    /// @custom:oz-renamed-from _HASHED_VERSION
      bytes32 private immutable _hashedVersion;
- 
+
 -    ShortString private immutable _name;
 -    ShortString private immutable _version;
 -    string private _nameFallback;
 -    string private _versionFallback;
 +    string private _name;
 +    string private _version;
- 
+
      /**
       * @dev Initializes the domain separator and parameter caches.
 @@ -65,29 +56,23 @@ abstract contract EIP712 is IERC5267 {
@@ -333,7 +333,7 @@ index 6a4e1cad..55d8eced 100644
 +        _hashedName = 0;
 +        _hashedVersion = 0;
      }
- 
+
      /**
       * @dev Returns the domain separator for the current chain.
       */
@@ -345,12 +345,12 @@ index 6a4e1cad..55d8eced 100644
 -        }
 +        return _buildDomainSeparator();
      }
- 
+
      function _buildDomainSeparator() private view returns (bytes32) {
 -        return keccak256(abi.encode(_TYPE_HASH, _hashedName, _hashedVersion, block.chainid, address(this)));
 +        return keccak256(abi.encode(_TYPE_HASH, _EIP712NameHash(), _EIP712VersionHash(), block.chainid, address(this)));
      }
- 
+
      /**
 @@ -129,14 +114,80 @@ abstract contract EIP712 is IERC5267 {
              uint256[] memory extensions
@@ -477,5 +477,5 @@ index 54a4e772..ba4602ed 100644
 -          });
 -        }
        });
- 
+
        it('hash digest', async function () {

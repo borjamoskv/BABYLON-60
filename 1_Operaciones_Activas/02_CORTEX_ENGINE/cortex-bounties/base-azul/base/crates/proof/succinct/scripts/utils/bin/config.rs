@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Binary for generating and displaying succinct configuration values.
 
 use alloy_primitives::B256;

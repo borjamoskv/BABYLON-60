@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # ⚔️ LEGIØN-10K — Deep Forensic Analysis (Code-Verified)
 
 **Date**: 2026-04-01

@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Jovian: Execution Engine
 
 ## Minimum Base Fee
@@ -91,7 +92,7 @@ def daFootprint(block: Block) -> int:
       )
       daFootprint += daUsageEstimate * daFootprintGasScalar
 
-  return daFootprint 
+  return daFootprint
 ```
 
 where `intercept`, `minTransactionSize`, `fastlzCoef` and `fastlzSize`

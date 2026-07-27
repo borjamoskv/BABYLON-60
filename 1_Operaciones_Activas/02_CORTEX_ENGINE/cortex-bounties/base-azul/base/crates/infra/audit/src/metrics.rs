@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Metrics for audit operations including Kafka reads, S3 writes, and event processing.
 
 base_metrics::define_metrics! {

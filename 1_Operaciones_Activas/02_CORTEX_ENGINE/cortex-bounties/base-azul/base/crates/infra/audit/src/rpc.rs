@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! RPC server for the audit archiver.
 //!
 //! Exposes the `base_persistRejectedTransactionBatch` method for receiving batches

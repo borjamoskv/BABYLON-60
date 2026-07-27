@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the [`BatchValidator`] stage.
 
 use alloc::{boxed::Box, sync::Arc, vec::Vec};

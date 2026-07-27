@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module contains derivation errors thrown within the pipeline.
 
 use alloc::string::String;
@@ -33,7 +34,7 @@ macro_rules! ensure {
 /// # Error Handling Strategy
 /// ```text
 /// Temporary -> Retry operation, may succeed with more data
-/// Critical  -> Stop derivation, external intervention required  
+/// Critical  -> Stop derivation, external intervention required
 /// Reset     -> Reset pipeline state, continue with clean slate
 /// ```
 ///
@@ -109,7 +110,7 @@ pub enum PipelineErrorKind {
 /// - [`Self::MissingL1Data`]: Required L1 data not available
 /// - [`Self::EndOfSource`]: Data source completely exhausted
 ///
-/// ## Stage-Specific Errors  
+/// ## Stage-Specific Errors
 /// - [`Self::ChannelProviderEmpty`]: No channels available for processing
 /// - [`Self::ChannelReaderEmpty`]: Channel reader has no data
 /// - [`Self::BatchQueueEmpty`]: No batches available for processing

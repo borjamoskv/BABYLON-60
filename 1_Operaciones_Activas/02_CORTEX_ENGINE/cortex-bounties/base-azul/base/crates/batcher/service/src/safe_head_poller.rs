@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Background poller that keeps the safe L2 head watch channel up to date.
 
 use std::{future::Future, time::Duration};

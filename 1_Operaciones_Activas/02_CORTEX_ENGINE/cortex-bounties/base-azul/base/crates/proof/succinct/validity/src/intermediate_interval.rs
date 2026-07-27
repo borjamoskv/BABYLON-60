@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Resolve the canonical `INTERMEDIATE_BLOCK_INTERVAL` from on-chain.
 //!
 //! Single source of truth: the `AggregateVerifier` implementation registered in the

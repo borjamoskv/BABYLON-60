@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { algorandFixture } from "@algorandfoundation/algokit-utils/testing";
 import type { TransactionSignerAccount } from "@algorandfoundation/algokit-utils/types/account";
 import type { Account, Address } from "algosdk";

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Stages pertaining to the reading and decoding of channels.
 //!
 //! Sitting after the [`FrameQueue`] stage, the [`ChannelBank`] and [`ChannelAssembler`] stages are

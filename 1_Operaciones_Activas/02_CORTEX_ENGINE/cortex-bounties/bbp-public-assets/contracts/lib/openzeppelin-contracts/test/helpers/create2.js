@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 function computeCreate2Address(saltHex, bytecode, deployer) {
   return web3.utils.toChecksumAddress(
     `0x${web3.utils

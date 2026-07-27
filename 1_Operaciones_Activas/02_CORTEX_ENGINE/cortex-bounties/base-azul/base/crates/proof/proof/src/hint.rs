@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module contains the [`HintType`] enum.
 
 use alloc::{

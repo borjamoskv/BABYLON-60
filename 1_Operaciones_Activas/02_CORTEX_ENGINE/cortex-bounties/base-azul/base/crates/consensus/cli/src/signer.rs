@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Signer CLI Flags for consensus clients.
 //!
 //! This module defines argument types for configuring block signing,

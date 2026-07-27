@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The [`BatchEncoder`] implementation.
 
 use std::{

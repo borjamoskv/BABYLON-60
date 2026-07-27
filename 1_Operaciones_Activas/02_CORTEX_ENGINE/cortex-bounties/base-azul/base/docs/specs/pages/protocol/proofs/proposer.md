@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Proposer
 
 The proposer is an offchain service that turns canonical L2 checkpoint ranges into

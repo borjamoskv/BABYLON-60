@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Error types for the remote signer.
 
 use alloy_primitives::{Address, B256};

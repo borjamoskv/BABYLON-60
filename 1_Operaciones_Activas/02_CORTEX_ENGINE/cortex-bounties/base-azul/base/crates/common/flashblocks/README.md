@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-common-flashblocks`
 
 Flashblocks primitive types for Base's pre-confirmation infrastructure.

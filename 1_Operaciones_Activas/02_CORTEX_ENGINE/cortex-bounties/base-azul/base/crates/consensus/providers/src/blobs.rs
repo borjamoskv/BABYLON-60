@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains an online implementation of the `BlobProvider` trait.
 
 use std::{boxed::Box, string::ToString, vec::Vec};

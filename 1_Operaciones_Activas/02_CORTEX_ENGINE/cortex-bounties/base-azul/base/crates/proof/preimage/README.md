@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # `base-proof-preimage`
 
 High-level `no_std`-compatible API over the [Preimage Oracle][preimage-abi-spec].

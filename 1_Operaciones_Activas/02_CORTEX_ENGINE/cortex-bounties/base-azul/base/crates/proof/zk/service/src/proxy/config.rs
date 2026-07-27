@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::time::Duration;
 
 /// Shared rate-limiting parameters applied to all proxy instances.

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Contains the [`SystemConfig`] type.
 
 use alloc::vec::Vec;
