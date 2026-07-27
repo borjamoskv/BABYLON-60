@@ -4,7 +4,6 @@
 import asyncio
 import sqlite3
 import hashlib
-import json
 from pathlib import Path
 
 class BFTCausalInvariantError(Exception):

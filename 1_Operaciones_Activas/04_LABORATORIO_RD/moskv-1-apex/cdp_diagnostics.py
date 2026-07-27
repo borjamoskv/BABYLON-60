@@ -1,5 +1,5 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
-import sys
 import json
 import urllib.request
 import urllib.error
@@ -45,7 +45,7 @@ def mock_cdp_profile():
 def run_diagnostics():
     print(f"[Web-Diagnostics-OMEGA] Iniciando escaneo CDP en puerto {CHROME_DEBUG_PORT}...")
     targets = check_cdp_target()
-    
+
     if targets:
         print("[Web-Diagnostics-OMEGA] Chrome detectado. Extrayendo WebSocket Debuggers...")
         # En una topología completa, aquí se abriría un websocket contra targets[0]['webSocketDebuggerUrl']

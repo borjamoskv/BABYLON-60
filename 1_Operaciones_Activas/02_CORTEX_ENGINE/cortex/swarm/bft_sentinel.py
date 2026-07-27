@@ -1,12 +1,22 @@
 # C5-REAL EXERGY CERTIFIED
-import time
-import subprocess
+from __future__ import annotations
+
 import os
 import sys
+import time
+import subprocess
+from pathlib import Path
+
 
 def get_repo_path() -> str:
-    # Asume que este archivo está en cortex/swarm/
-    return os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    curr = Path(__file__).resolve().parent
+    while curr != curr.root and curr != Path("/"):
+        if (curr / ".git").exists() or (curr / ".cursorrules").exists():
+            return str(curr)
+        curr = curr.parent
+    # Fallback to current working directory or fixed depth
+    return os.getcwd()
+
 
 def run_sentinel() -> None:
     repo_path = get_repo_path()
@@ -17,23 +27,27 @@ def run_sentinel() -> None:
 
     while True:
         try:
-            # 1. Chequeamos si hay cambios (tracked o untracked)
-            status = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True, check=True)
-
+            status = subprocess.run(
+                ["git", "status", "--porcelain"],
+                capture_output=True,
+                text=True,
+                check=True,
+            )
             mutations = status.stdout.strip()
 
             if mutations:
                 print(f"[BFT_SENTINEL] Mutación termodinámica detectada:\n{mutations}")
                 print("[BFT_SENTINEL] Ejecutando colapso de onda (BFT State Loop)...")
 
-                # 2. Forzar colapso de estado
                 subprocess.run(["git", "add", "."], check=True)
-
                 commit_msg = "chore(bft): autonomous state collapse [C5-REAL]"
                 subprocess.run(["git", "commit", "-m", commit_msg], check=True)
 
                 new_hash = subprocess.run(
-                    ["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=True
+                    ["git", "rev-parse", "HEAD"],
+                    capture_output=True,
+                    text=True,
+                    check=True,
                 ).stdout.strip()
 
                 print(f"[BFT_SENTINEL] Estado consolidado físicamente. Ledger Hash: {new_hash}")
@@ -43,13 +57,14 @@ def run_sentinel() -> None:
         except Exception as e:
             print(f"[BFT_SENTINEL] Error en transducción: {e}")
 
-        # 3. Termodinámica: Prevenir saturación de I/O
         time.sleep(5)
 
+
 if __name__ == "__main__":
-    # Prevenir ejecución si no estamos en un repo git
-    if not os.path.isdir(os.path.join(get_repo_path(), ".git")):
-        print("[BFT_SENTINEL] Error: No se encontró ledger Git en la raíz.")
+    repo = get_repo_path()
+    if not (Path(repo) / ".git").exists() and not (Path(repo) / ".cursorrules").exists():
+        print(f"[BFT_SENTINEL] Error: No se encontró ledger Git ni .cursorrules en {repo}.")
         sys.exit(1)
 
     run_sentinel()
+

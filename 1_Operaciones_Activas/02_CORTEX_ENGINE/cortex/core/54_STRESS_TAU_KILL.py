@@ -43,7 +43,7 @@ async def stress_apex_core(num_tasks: int = 1000):
     success_count = sum(results)
 
     # Verificar resultados
-    print(f"\n[📊 RESULTADOS DE AVALANCHA]")
+    print("\n[📊 RESULTADOS DE AVALANCHA]")
     print(f"Total Tareas: {num_tasks}")
     print(f"Éxitos en WAL: {success_count}")
     print(f"Tiempo Total: {elapsed:.4f}s")

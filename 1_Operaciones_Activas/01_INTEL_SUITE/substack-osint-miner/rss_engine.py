@@ -1,11 +1,9 @@
 # C5-REAL EXERGY CERTIFIED
 import feedparser
 import requests
-import time
 from bs4 import BeautifulSoup
 import re
 import datetime
-import urllib.parse
 from rich.console import Console
 from vector_engine import NarrativeEngine
 

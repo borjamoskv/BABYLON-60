@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 FAS v24 — CRONOS L5 Engine (x10 Upgrade)
@@ -36,22 +37,22 @@ def generate_complex_case(cycle):
     taxpayer = f"{random.choice(NAMES)} {random.choice(SURNAMES)}"
     blockchain = random.choice(["Ethereum", "Bitcoin", "Solana", "BSC", "Polygon"])
     vector = random.choice(VECTORS)
-    
+
     # Financials
     volume = random.uniform(50_000, 5_000_000)
     unreported_gain = volume * random.uniform(0.1, 0.8)
-    
+
     # Simple IRPF calc
     tax_base = unreported_gain * 0.24 # avg
-    
+
     # Obfuscation
     jef = random.uniform(0.1, 0.99)
     if jef < 0.3: penalty = 0.50
     elif jef < 0.7: penalty = 1.00
     else: penalty = 1.50
-    
+
     interest = tax_base * 0.040625
-    
+
     return {
         "cycle": cycle,
         "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -79,33 +80,33 @@ def generate_complex_case(cycle):
 def main():
     base_dir = os.path.dirname(__file__)
     ledger_path = os.path.join(base_dir, "bizkaia_cronos_ledger.jsonl")
-    
+
     cycles = 100
     interval = 300
-    
-    print(f"[*] CRONOS L5 ENGINE ACTIVATED.")
+
+    print("[*] CRONOS L5 ENGINE ACTIVATED.")
     print(f"[*] Configuration: {cycles} cycles, {interval}s interval (Total: {cycles*interval/3600:.1f} hours)")
-    
+
     with open(ledger_path, "a") as f:
         for c in range(cycles):
             start_t = time.time()
             batch_size = random.randint(10, 50)
             print(f"[{datetime.now(timezone.utc).isoformat()}] CRONOS Cycle {c}/{cycles} - Generating {batch_size} complex topologies...")
-            
+
             for _ in range(batch_size):
                 case = generate_complex_case(c)
                 f.write(json.dumps(case) + "\n")
             f.flush()
-            
+
             # Simulated trigger to Phase 5 (Actas generation would go here)
             # We don't call it natively to avoid spamming the disk with thousands of MD files,
             # but the ledger captures the hyper-complex data.
-            
+
             elapsed = time.time() - start_t
             sleep_time = max(0, interval - elapsed)
             print(f"    -> Cycle {c} complete. Sleeping {sleep_time:.1f}s...")
             time.sleep(sleep_time)
-            
+
     print("[*] CRONOS L5 ENGINE COMPLETE.")
 
 if __name__ == "__main__":

@@ -11,7 +11,6 @@ import sys
 import asyncio
 import sqlite3
 from pathlib import Path
-from datetime import datetime, timezone
 
 class ExergyFlowRegulator:
     """Implementación del sistema de ecuaciones diferenciales T1 para el control de la KV-Cache."""
@@ -41,8 +40,8 @@ class ExergyFlowRegulator:
 
             if liquidador_active == 1.0:
                 sys.stderr.write(
-                    f"\n[⚠️ ALERTA TERMODINÁMICA - Ω184] Taint crítico detectado (Taint >= tau_kill).\n"
-                    f"-> Activando Operador Destructor Λ8 vía truncamiento forzado.\n"
+                    "\n[⚠️ ALERTA TERMODINÁMICA - Ω184] Taint crítico detectado (Taint >= tau_kill).\n"
+                    "-> Activando Operador Destructor Λ8 vía truncamiento forzado.\n"
                 )
                 await self._execute_sigkill_purge()
 

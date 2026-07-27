@@ -1,7 +1,5 @@
 # C5-REAL EXERGY CERTIFIED
 import re
-import datetime
-import urllib.parse
 import json
 from bs4 import BeautifulSoup
 import networkx as nx

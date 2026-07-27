@@ -1,7 +1,6 @@
 # C5-REAL EXERGY CERTIFIED - BATCH MAPPER & SYMLINK TRANSDUCER
 import os
 import shutil
-import subprocess
 
 def create_symlink(target, link_name):
     """

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 #!/usr/bin/env python3
 """
@@ -9,9 +10,9 @@ owner: borjamoskv
 exergy_tier: P2
 """
 
-import logging
 import datetime
 import hashlib
+import logging
 import os
 import re
 import subprocess

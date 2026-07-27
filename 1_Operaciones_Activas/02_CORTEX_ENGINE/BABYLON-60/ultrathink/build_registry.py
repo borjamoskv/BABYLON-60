@@ -9,7 +9,6 @@ Output: 2_Nucleo_Estatico/skill_registry.json
 """
 
 import json
-import os
 import re
 from pathlib import Path
 

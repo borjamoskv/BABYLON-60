@@ -3,13 +3,35 @@
 C5-REAL Invariant Sentinel
 Autonomously detects state drifts and updates invariants to prevent false halts.
 """
+from __future__ import annotations
 
 import os
 import sys
 import subprocess
+from typing import Set
 
-RULES_FILE = ".cursorrules"
-AGENTS_RULES = ".agents/auditor_c5_real.md"
+RULES_FILE: str = ".cursorrules"
+AGENTS_RULES: str = ".agents/auditor_c5_real.md"
+
+IGNORE_DIRS: Set[str] = {
+    ".git",
+    ".venv",
+    "venv",
+    "node_modules",
+    "dist",
+    "target",
+    ".mypy_cache",
+    ".ruff_cache",
+    ".cortex",
+    "scratch",
+    ".scratch",
+    ".agents",
+    ".pytest_cache",
+    "3_Historico_Inerte",
+    "0_Buzon_Entrada",
+    "__pycache__",
+}
+
 
 def get_current_branch() -> str:
     try:
@@ -18,8 +40,10 @@ def get_current_branch() -> str:
     except (subprocess.CalledProcessError, FileNotFoundError, OSError):
         return "master"
 
+
 def get_python_version() -> str:
     return f"{sys.version_info.major}.{sys.version_info.minor}"
+
 
 def audit_and_align_invariants() -> bool:
     print("[C5-REAL] Ignición de Invariant Sentinel...")
@@ -34,26 +58,10 @@ def audit_and_align_invariants() -> bool:
     print(f"[Sentinel] Versión Python activa: '{current_py}'")
 
     # 3. Escaneo de Absolute Paths prohibidos (Ω23)
-    # Buscamos en el workspace si hay alguna ruta absoluta hardcodeada en archivos .py, .go, .ts
     for root, dirs, files in os.walk("."):
-        # Ignorar directorios virtuales y ocultos
-        dirs[:] = [
-            d
-            for d in dirs
-            if d
-            not in [
-                ".git",
-                ".venv",
-                "node_modules",
-                "dist",
-                "target",
-                ".mypy_cache",
-                ".ruff_cache",
-                ".cortex",
-            ]
-        ]
+        dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
         depth = root.count(os.sep)
-        if depth >= 5:
+        if depth >= 10:
             dirs[:] = []
             continue
         for file in files:
@@ -63,7 +71,7 @@ def audit_and_align_invariants() -> bool:
                     user_home = os.path.expanduser("~")
                     with open(fpath, "r", encoding="utf-8") as f:
                         content = f.read()
-                        if user_home in content and fpath != os.path.join(".", "cortex", "invariant_sentinel.py"):
+                        if user_home in content and not fpath.endswith("invariant_sentinel.py"):
                             print(f"[ALERT] Ruta absoluta detectada en {fpath} (Violación Ω23).")
                 except (OSError, UnicodeDecodeError):
                     continue
@@ -80,5 +88,7 @@ def audit_and_align_invariants() -> bool:
     print(f"[C5-REAL] Finalizado. Invariantes alineados con el sustrato físico. Mutado: {mutated}")
     return mutated
 
+
 if __name__ == "__main__":
     audit_and_align_invariants()
+

@@ -1,11 +1,10 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """\u2234 BABYLON60-PERSIST: Sovereign Synthesis Persistence Protocol
 Records the 2026 Core Stack into the Native Ledger.
 """
 
 import logging
-
-
 import sys
 from pathlib import Path
 

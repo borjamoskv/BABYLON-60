@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 """
 Anchor Provider Protocol and Implementations.
@@ -8,7 +9,6 @@ Default: local file. Optional: Sigstore Rekor transparency log.
 
 import logging
 import os
-from datetime import datetime, timezone
 from typing import Protocol, runtime_checkable
 
 from babylon60.edge_runtime import EdgeEnv

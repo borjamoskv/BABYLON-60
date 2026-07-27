@@ -6,10 +6,8 @@ C5-REAL EXERGY CERTIFIED · MOSKV-1 APEX
 
 import json
 import os
-import re
 import hashlib
 import math
-from collections import Counter
 
 JSON_PATH = "/Users/borjafernandezangulo/.gemini/antigravity-ide/brain/108c0350-3a5f-40f4-8b10-3fcc4383ab9c/channel_videos.json"
 REPORT_DIR = "/Users/borjafernandezangulo/.gemini/antigravity-ide/brain/108c0350-3a5f-40f4-8b10-3fcc4383ab9c"
@@ -22,7 +20,7 @@ def calculate_gelabp(video: dict) -> dict:
     duration = video.get("duration", 0) or 0
     title = video.get("title", "")
     desc = video.get("description", "") or ""
-    
+
     # G (Gradient): View momentum relative to baseline 50k
     G = min(views / 50000.0, 5.0) if views > 0 else 0.1
     # L (Leverage): Mid-roll optimization (>10 mins = high leverage)
@@ -37,10 +35,10 @@ def calculate_gelabp(video: dict) -> dict:
     P = 0.8 if "!" in title or "?" in title else 1.0
     # E (Entropy): Complexity of speech vs raw views
     E = max(math.log(views + 1) / 10.0, 1.0) if views > 0 else 1.0
-    
+
     raw_score = (G * L * A * B * P) / E
     scaled_score = min(raw_score * 200.0, 1000.0)
-    
+
     return {
         "score": round(scaled_score, 2),
         "G": round(G, 2),
@@ -61,25 +59,25 @@ def main():
                         videos.append(json.loads(line))
                     except Exception:
                         pass
-                        
+
     total_vids = len(videos)
     total_views = sum(v.get("view_count", 0) or 0 for v in videos)
-    
+
     # Process GELABP & Evidence
     dossier_patreon = []
     dossier_advertisers = []
     dossier_content_id = []
-    
+
     for v in videos:
         vid_id = v.get("id")
         title = v.get("title", "")
         desc = v.get("description", "") or ""
         views = v.get("view_count", 0) or 0
         dur = v.get("duration", 0) or 0
-        
+
         gelabp = calculate_gelabp(v)
         hash_receipt = sha256_text(f"{vid_id}:{title}:{views}")
-        
+
         v_entry = {
             "id": vid_id,
             "title": title,
@@ -89,15 +87,15 @@ def main():
             "hash": hash_receipt,
             "url": f"https://www.youtube.com/watch?v={vid_id}"
         }
-        
+
         # Patreon Violation Mapping
         if gelabp["risk_hits"] >= 2:
             dossier_patreon.append(v_entry)
-            
+
         # Brand Safety Risk Mapping
         if gelabp["B"] <= 0.6:
             dossier_advertisers.append(v_entry)
-            
+
         # Content ID candidate (>15 mins with TV/Streamer commentary keywords)
         if dur >= 900 and any(kw in title.upper() for kw in ["DIRECTO", "TV", "XOKAS", "IGLESIAS", "ZAPATERO", "SÁNCHEZ"]):
             dossier_content_id.append(v_entry)

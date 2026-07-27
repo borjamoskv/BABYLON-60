@@ -1,7 +1,6 @@
 # C5-REAL EXERGY CERTIFIED
 import asyncio
 import time
-import os
 
 # Import the orchestrator and node directly
 import sys

@@ -1,7 +1,5 @@
 # C5-REAL EXERGY CERTIFIED
-import os
 import sys
-import time
 from pathlib import Path
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials

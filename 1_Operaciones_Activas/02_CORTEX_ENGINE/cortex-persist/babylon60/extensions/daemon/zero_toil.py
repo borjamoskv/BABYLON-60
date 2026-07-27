@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 """CORTEX v6+ - Zero-Toil Autonomous Assimilation Daemon.
 
@@ -17,8 +18,9 @@ from babylon60.cli.common import DEFAULT_DB
 
 logger = logging.getLogger("babylon60.daemon.zero_toil")
 
+MONOREPO_ROOT = Path(__file__).resolve().parents[6]
 BRAIN_DIR = Path(os.path.expanduser("~/.gemini/antigravity/brain"))
-CORTEX_META_DIR = Path(os.path.expanduser("~/10_PROJECTS/cortex-meta"))
+CORTEX_META_DIR = MONOREPO_ROOT / "1_Operaciones_Activas" / "02_CORTEX_ENGINE"
 
 ENTROPIC_SINKS = {".pytest_cache", ".ruff_cache", "__pycache__"}
 
@@ -58,7 +60,7 @@ class ZeroToilDaemon:
         # Invocamos al CLI closer en background para automatizar el cierre
         # sin que el usuario tenga que hacerlo interactivamente.
 
-        script_path = Path(os.path.expanduser("~/60_SCRIPTS/cortex_session_closer.py"))
+        script_path = MONOREPO_ROOT / "1_Operaciones_Activas" / "scripts" / "exergy_indexer.py"
         if script_path.exists():
             env = os.environ.copy()
             env["CORTEX_CONV_ID"] = conv_id

@@ -2,7 +2,6 @@
 import torch
 import torchaudio
 import os
-import math
 
 class Base60AudioDataset(torch.utils.data.Dataset):
     """

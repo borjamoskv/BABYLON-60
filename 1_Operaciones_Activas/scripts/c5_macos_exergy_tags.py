@@ -1,8 +1,6 @@
 # C5-REAL EXERGY CERTIFIED - MACOS TAHOE KERNEL
 import os
-import sys
 import datetime
-import subprocess
 from pathlib import Path
 
 def apply_macos_tag(filepath: str, color: str):

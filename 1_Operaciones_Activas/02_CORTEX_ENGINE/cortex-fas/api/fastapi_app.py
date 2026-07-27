@@ -1,6 +1,6 @@
+# C5-REAL EXERGY CERTIFIED
 import sys
 import os
-import json
 from datetime import datetime
 from fastapi import FastAPI, HTTPException, Header, Depends
 from pydantic import BaseModel
@@ -104,19 +104,19 @@ def run_stress_test(input_data: StressTestInput = None, user: User = Depends(ver
         input_data = StressTestInput()
 
     state = JurisprudenceState()
-    
+
     if input_data.preset == "strict_compliance":
         state.drift_vector["art13_lgt_strength"] = 0.90
         state.drift_vector["donation_skepticism"] = 0.90
     else:
         state.drift_vector["art13_lgt_strength"] = 0.50
         state.drift_vector["donation_skepticism"] = 0.50
-    
+
     twin = DigitalTwinJurisprudentialEngine(state)
     db = get_db()
     try:
         analysis = twin.analyze_full()
-        
+
         # Log to usage_logs
         log = UsageLog(
             user_id=user.id,
@@ -126,15 +126,15 @@ def run_stress_test(input_data: StressTestInput = None, user: User = Depends(ver
             regime=analysis["regime"]
         )
         db.add(log)
-        
+
         # Update user usage count and last seen timestamp
         db.query(User).filter(User.id == user.id).update({
             "requests_used": User.requests_used + 1,
             "last_request_at": datetime.utcnow()
         })
-        
+
         db.commit()
-        
+
         return OutputContract(
             mode="adversarial_stress_simulation",
             epistemic_status="counterfactual_only",

@@ -1,9 +1,8 @@
 # C5-REAL EXERGY CERTIFIED
 import pytest
 import sqlite3
-import asyncio
 from pathlib import Path
-from cortex.core.lexicon import LexiconEngine, LexiconLedgerActor
+from cortex.core.lexicon import LexiconEngine
 
 @pytest.mark.asyncio
 async def test_bft_causal_invariant_corruption(tmp_path: Path):

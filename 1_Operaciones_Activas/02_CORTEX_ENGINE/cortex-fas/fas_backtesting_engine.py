@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 FAS v15 — External Shock Field & Backtesting Engine
@@ -7,32 +8,31 @@ Reality level: C5-REAL
 from enum import Enum
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Dict, List, Optional
-import numpy as np
+from typing import Dict, List
 import json
 
 from fas_phase2_core import JurisprudenceState, CaseNode, Jurisdiction
-from fas_energy_physics import JuridicalEnergyEngine, JuridicalPhysicsEngine, ExternalShock as BaseExternalShock
+from fas_energy_physics import JuridicalEnergyEngine, JuridicalPhysicsEngine
 
 # ============================================================
 # 1. SHOCK TYPES (forzamiento externo)
 # ============================================================
 
 class ExternalShockType(Enum):
-    LEGISLATIVE_AMENDMENT = "legislative_amendment"  
-    TS_OVERRULE = "ts_overrule"                        
-    TEAC_CRITERION_SHIFT = "teac_criterion_shift"      
-    TJUE_PRECEDENT = "tjue_precedent"                 
-    AEAT_CIRCULAR = "aeat_circular"                    
+    LEGISLATIVE_AMENDMENT = "legislative_amendment"
+    TS_OVERRULE = "ts_overrule"
+    TEAC_CRITERION_SHIFT = "teac_criterion_shift"
+    TJUE_PRECEDENT = "tjue_precedent"
+    AEAT_CIRCULAR = "aeat_circular"
 
 @dataclass
 class ExternalShock:
     type: ExternalShockType
-    magnitude: float           
-    affected_domain: str       
+    magnitude: float
+    affected_domain: str
     timestamp: datetime
     description: str = ""
-    
+
     COUPLING = {
         "art13": 0.3,
         "art16": 0.4,
@@ -40,7 +40,7 @@ class ExternalShock:
         "burden": 0.2,
         "global": 0.15
     }
-    
+
     TYPE_IMPACT = {
         ExternalShockType.TS_OVERRULE: 0.4,
         ExternalShockType.TJUE_PRECEDENT: 0.35,
@@ -59,23 +59,23 @@ class ExternalShockField:
         self.energy_engine = energy_engine
         self.shocks: List[ExternalShock] = []
         self.energy_shock_history: List[float] = []
-    
+
     def apply(self, shock: ExternalShock):
         self.shocks.append(shock)
         self.perturb_drift(shock)
         E_shock = self.compute_shock_energy(shock)
         self.energy_shock_history.append(E_shock)
-        
+
         if shock.type == ExternalShockType.TJUE_PRECEDENT:
             self.phase_reset(shock)
-        
+
         if shock.type in [ExternalShockType.TS_OVERRULE, ExternalShockType.TEAC_CRITERION_SHIFT]:
             self.update_thresholds(shock)
-    
+
     def perturb_drift(self, shock: ExternalShock):
         coupling = shock.COUPLING.get(shock.affected_domain, 0.15)
         impact = shock.magnitude * coupling
-        
+
         if shock.affected_domain == "art13":
             self.state.drift_vector["art13_lgt_strength"] += impact
         elif shock.affected_domain == "art16":
@@ -84,23 +84,23 @@ class ExternalShockField:
             self.state.drift_vector["donation_skepticism"] += impact
         elif shock.affected_domain == "burden":
             self.state.drift_vector["burden_shift_intensity"] += impact
-        else:  
+        else:
             for key in self.state.drift_vector:
                 self.state.drift_vector[key] += impact * 0.25
-    
+
     def compute_shock_energy(self, shock: ExternalShock) -> float:
         type_impact = shock.TYPE_IMPACT.get(shock.type, 0.15)
         E_shock = shock.magnitude * type_impact
         return E_shock
-    
+
     def phase_reset(self, shock: ExternalShock):
         for jurisdiction in self.state.threshold_map:
             current = self.state.threshold_map[jurisdiction]
             self.state.threshold_map[jurisdiction] = current * 0.95 + 0.65 * 0.05
-    
+
     def update_thresholds(self, shock: ExternalShock):
         impact = shock.magnitude * shock.TYPE_IMPACT.get(shock.type, 0.15)
-        
+
         if shock.type == ExternalShockType.TS_OVERRULE:
             for jurisdiction in self.state.threshold_map:
                 if shock.affected_domain == "art13":
@@ -114,10 +114,10 @@ class ExternalShockField:
                         self.state.threshold_map[jurisdiction] -= impact * 0.15
                     elif shock.affected_domain == "donation":
                         self.state.threshold_map[jurisdiction] += impact * 0.15
-    
+
     def get_total_shock_energy(self) -> float:
         return sum(self.energy_shock_history)
-    
+
     def get_recent_shock_magnitude(self, window_days: int = 365) -> float:
         now = datetime.now()
         recent = [
@@ -215,16 +215,16 @@ class BacktestingEngine:
             actual_outcome="burden_shift"
         ),
     ]
-    
+
     def __init__(self, shock_field: ExternalShockField):
         self.shock_field = shock_field
         self.predictions: List[Dict] = []
         self.actuals: List[Dict] = []
-    
+
     def run(self, corpus: List[CaseNode]) -> Dict:
         sorted_shocks = sorted(self.HISTORY_SHOCKS, key=lambda s: (s.year, s.month))
         sorted_corpus = sorted(corpus, key=lambda c: c.date)
-        
+
         initial_energy = self.shock_field.energy_engine.compute(current_tick=0).E_total
         physics = JuridicalPhysicsEngine(self.shock_field.state)
         self.predictions.append({
@@ -233,11 +233,11 @@ class BacktestingEngine:
             "regime": physics.classify_regime(initial_energy).value,
             "phase_transition": "NONE"
         })
-        
+
         shock_idx = 0
         case_idx = 0
         current_tick = 0
-        
+
         for year in range(2010, 2027):
             while shock_idx < len(sorted_shocks) and sorted_shocks[shock_idx].year == year:
                 shock = ExternalShock(
@@ -247,7 +247,7 @@ class BacktestingEngine:
                     timestamp=datetime(year, sorted_shocks[shock_idx].month, 1),
                     description=sorted_shocks[shock_idx].description
                 )
-                
+
                 self.shock_field.apply(shock)
                 current_tick += 1
                 analysis = JuridicalPhysicsEngine(self.shock_field.state).analyze()
@@ -259,20 +259,20 @@ class BacktestingEngine:
                     "phase_transition": analysis["phase_transition"],
                     "drift": analysis["drift_vector"]
                 })
-                
+
                 self.actuals.append({
                     "year": year,
                     "outcome": sorted_shocks[shock_idx].actual_outcome
                 })
-                
+
                 shock_idx += 1
-            
+
             while case_idx < len(sorted_corpus) and sorted_corpus[case_idx].date.year == year:
                 case = sorted_corpus[case_idx]
                 self.shock_field.state.update_from_case(case)
                 current_tick += 1
                 case_idx += 1
-            
+
             analysis = JuridicalPhysicsEngine(self.shock_field.state).analyze()
             self.predictions.append({
                 "year": year,
@@ -283,9 +283,9 @@ class BacktestingEngine:
                 "drift": analysis["drift_vector"],
                 "attractor": analysis["dominant_attractor"]
             })
-        
+
         accuracy = self.compute_accuracy()
-        
+
         return {
             "timeline": self.predictions,
             "actuals": self.actuals,
@@ -293,23 +293,23 @@ class BacktestingEngine:
             "total_shocks": len(self.shock_field.shocks),
             "total_shock_energy": self.shock_field.get_total_shock_energy()
         }
-    
+
     def compute_accuracy(self) -> Dict:
         transition_predictions = [
             p for p in self.predictions
             if p.get("phase_transition") != "NONE"
         ]
-        
+
         if len(transition_predictions) == 0:
             return {"phase_transition": 0.0}
-        
+
         correct_transitions = 0
         for pred in transition_predictions:
             for actual in self.actuals:
                 if actual["year"] >= pred["year"]:
                     correct_transitions += 1
                     break
-        
+
         transition_accuracy = correct_transitions / len(transition_predictions) if len(transition_predictions) > 0 else 0.0
         return {
             "phase_transition": transition_accuracy,
@@ -328,25 +328,25 @@ class CompleteJurisprudentialPhysicsEngine:
         self.energy_engine = JuridicalEnergyEngine(state, shock_model)
         self.shock_field = ExternalShockField(state, self.energy_engine)
         self.backtester = BacktestingEngine(self.shock_field)
-    
+
     def apply_shock(self, shock: ExternalShock):
         self.shock_field.apply(shock)
-    
+
     def backtest(self, corpus: List[CaseNode]) -> Dict:
         return self.backtester.run(corpus)
 
 if __name__ == "__main__":
     state = JurisprudenceState()
     engine = CompleteJurisprudentialPhysicsEngine(state)
-    
+
     # Mock de 10 casos históricos
     from fas_phase2_core import EconomicEvent, JudicialInference
     corpus = []
     for y in range(2010, 2020):
-        corpus.append(CaseNode(f"CASE-{y}", Jurisdiction.TS, datetime(y, 6, 1), "sentencia", 
+        corpus.append(CaseNode(f"CASE-{y}", Jurisdiction.TS, datetime(y, 6, 1), "sentencia",
                      events_economic=[EconomicEvent.PAYMENT_FIXED],
                      events_inference=[JudicialInference.CONTRAPRESTACION_CORRELATION],
                      events_system=[]))
-                     
+
     res = engine.backtest(corpus)
     print(json.dumps(res, indent=2, ensure_ascii=False))

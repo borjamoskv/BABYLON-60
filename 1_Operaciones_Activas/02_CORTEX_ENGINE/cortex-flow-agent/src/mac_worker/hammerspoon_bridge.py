@@ -1,4 +1,4 @@
-import subprocess
+# C5-REAL EXERGY CERTIFIED
 import asyncio
 
 class MacWorker:

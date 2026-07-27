@@ -1,6 +1,5 @@
 # C5-REAL EXERGY CERTIFIED
 import asyncio
-import sqlite3
 import nacl.signing
 from pathlib import Path
 import sys

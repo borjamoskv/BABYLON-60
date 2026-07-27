@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 FAS v24 — ENS OSINT Miner (Bizkaia Wallet Forensics)
@@ -17,7 +18,7 @@ from datetime import datetime, timezone
 
 def fetch_json(url):
     req = urllib.request.Request(
-        url, 
+        url,
         headers={'User-Agent': 'Cortex-FAS-OSINT/1.0 (Macintosh; Intel Mac OS X 10_15_7)'}
     )
     with urllib.request.urlopen(req, timeout=10) as response:
@@ -29,7 +30,7 @@ def resolve_ens(address):
         url = f"https://api.ensideas.com/ens/resolve/{address}"
         data = fetch_json(url)
         return data.get('name')
-    except Exception as e:
+    except Exception:
         return None
 
 def search_github(username):
@@ -59,7 +60,7 @@ def trace_cex_exposure(address):
         "0x77696fba4bca99dcaf4df1e4dcddcdb2075a22e0": "Kraken",
         "0xdf0cb57f3f12fd6870f064d95168ac2bb753e52a": "Simulated_Offshore_CEX" # Structural hit for ledger target
     }
-    
+
     url = f"https://api.etherscan.io/api?module=account&action=txlist&address={address}&startblock=0&endblock=99999999&page=1&offset=20&sort=desc"
     try:
         time.sleep(1) # Delay for unauthenticated rate limit
@@ -69,18 +70,18 @@ def trace_cex_exposure(address):
             for tx in data["result"]:
                 frm = tx.get("from", "").lower()
                 to = tx.get("to", "").lower()
-                
+
                 if frm in known_cex:
                     exposure.append({"type": "deposit_from_cex", "cex": known_cex[frm], "hash": tx.get("hash")})
                 if to in known_cex:
                     exposure.append({"type": "withdrawal_to_cex", "cex": known_cex[to], "hash": tx.get("hash")})
-                    
+
         # Fallback simulation for offline/ledger targets if empty
         if not exposure and address.lower() in known_cex:
              exposure.append({"type": "simulated_cex_hit", "cex": known_cex[address.lower()]})
-             
+
         return exposure if exposure else [{"status": "No direct CEX exposure found in last 20 txs"}]
-    except Exception as e:
+    except Exception:
         if address.lower() in known_cex:
              return [{"type": "simulated_cex_hit", "cex": known_cex[address.lower()]}]
         return [{"error": "etherscan_api_limit_or_failure"}]
@@ -88,9 +89,9 @@ def trace_cex_exposure(address):
 def process_target(taxpayer, address, blockchain):
     if blockchain.lower() != "ethereum":
         return None
-        
+
     print(f"[*] Targeting: {taxpayer} - {address}")
-    
+
     # 1. ENS Resolution
     ens_name = resolve_ens(address)
     if not ens_name:
@@ -104,17 +105,17 @@ def process_target(taxpayer, address, blockchain):
     else:
         print(f" [+] ENS Discovered: {ens_name}")
         root_name = ens_name.replace(".eth", "")
-        
+
         # 2. GitHub Cross-reference
         github_data = search_github(root_name)
-        
+
         # 3. Bizkaia Heuristics (Regex/Keyword matching)
         bizkaia_hits = False
         if github_data and github_data.get("location"):
             loc = github_data["location"].lower()
             if any(keyword in loc for keyword in ["basque", "bizkaia", "vizcaya", "bilbao", "spain", "euskadi"]):
                 bizkaia_hits = True
-                
+
         ens_data_result = {
             "taxpayer": taxpayer,
             "address": address,
@@ -123,21 +124,21 @@ def process_target(taxpayer, address, blockchain):
             "bizkaia_regional_match": bizkaia_hits,
             "github_profile": github_data
         }
-        
+
         if github_data:
             print(f" [+] GitHub Match: {github_data['name']} ({github_data['location']}) - Bizkaia Match: {bizkaia_hits}")
         else:
             print(f" [-] No GitHub Match for '{root_name}'")
 
     # 4. CEX Exposure Tracing
-    print(f" [*] Tracing CEX Exposure (Model 721)...")
+    print(" [*] Tracing CEX Exposure (Model 721)...")
     cex_exposure = trace_cex_exposure(address)
     ens_data_result["cex_exposure"] = cex_exposure
     if any(c.get("cex") for c in cex_exposure):
         print(f" [+] CEX Exposure detected: {[c.get('cex') for c in cex_exposure if c.get('cex')]}")
     else:
-        print(f" [-] No clear CEX exposure.")
-        
+        print(" [-] No clear CEX exposure.")
+
     return ens_data_result
 
 def load_ledger_targets(filepath):
@@ -145,7 +146,7 @@ def load_ledger_targets(filepath):
     if not os.path.exists(filepath):
         print(f"[!] Ledger not found: {filepath}")
         return targets
-        
+
     with open(filepath, 'r') as f:
         for line in f:
             if not line.strip(): continue
@@ -165,31 +166,31 @@ def load_ledger_targets(filepath):
 def main():
     ledger_path = os.path.join(os.path.dirname(__file__), "bizkaia_training_ledger.jsonl")
     targets = load_ledger_targets(ledger_path)
-    
+
     if not targets:
         print("[!] No Ethereum targets found in ledger. Exiting.")
         sys.exit(0)
-        
+
     print(f"[*] Found {len(targets)} Ethereum targets in ledger.")
-    
+
     results = []
     for t in targets[:10]: # Limit to 10 for OSINT mining to avoid rate limits
         res = process_target(t["taxpayer"], t["address"], t["blockchain"])
         if res:
             results.append(res)
         print("---")
-        
+
     report = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "module": "ENS-OSINT-Miner-Ledger",
         "reality_level": "C5-REAL",
         "results": results
     }
-    
+
     output_path = os.path.join(os.path.dirname(__file__), "cortex_osint_ens_report.json")
     with open(output_path, "w") as f:
         json.dump(report, f, indent=2)
-        
+
     print(f"[CORTEX] OSINT ENS Miner complete. Report saved to {output_path}")
 
 if __name__ == "__main__":

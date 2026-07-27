@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 #!/usr/bin/env python3
 """
@@ -9,8 +10,8 @@ owner: borjamoskv
 exergy_tier: P2
 """
 
-import logging
 import datetime
+import logging
 
 HEADER = """# 300 Primitivas de Oncologia Molecular
 ### Ontologia CORTEX / BABYLON-60 -- bloques fundamentales que la investigacion del cancer estudia y ataca
@@ -439,7 +440,6 @@ OUTPUT_FILE = ".agents/workflows/oncologia.md"
 import os
 
 os.makedirs(".agents/workflows", exist_ok=True)
-import datetime
 now = datetime.datetime.now().strftime("%Y-%m-%d")
 content = HEADER.format(date=now) + CONTENT_P1 + CONTENT_P2
 

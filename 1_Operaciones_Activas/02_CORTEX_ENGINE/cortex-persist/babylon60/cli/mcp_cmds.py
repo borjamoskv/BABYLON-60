@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 """CORTEX MCP Module CLI commands.
 
@@ -64,10 +65,9 @@ def sovereign_mcp() -> None:
     import json
     import sys
 
-    from cortex_rs import McpSovereignHost  # type: ignore
-
     from babylon60.extensions.policy.jis_auditor import JISAuditor
     from babylon60.memory.vsa import VSAPipelineBridge
+    from cortex_rs import McpSovereignHost  # type: ignore
 
     sys.stderr.write("🚀 Booting CORTEX Sovereign MCP Server (Rust-native, Transport: stdio)...\n")
     sys.stderr.flush()

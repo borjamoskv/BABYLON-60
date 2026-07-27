@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 cat_id: build-swarm-mapping
 cat_type: script
@@ -8,8 +9,6 @@ exergy_tier: P2
 """
 
 import logging
-
-
 from pathlib import Path
 
 import yaml

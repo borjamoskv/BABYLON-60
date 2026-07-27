@@ -46,7 +46,7 @@ async def anchor_ledger_root():
     ots_file = await anchor.anchor_hash(root_hash)
 
     if ots_file:
-        print(f"\n[🛡️ L5 SECURE] Ciclo Termodinámico Cerrado. Estado L1 anclado criptográficamente en OTS.")
+        print("\n[🛡️ L5 SECURE] Ciclo Termodinámico Cerrado. Estado L1 anclado criptográficamente en OTS.")
         sys.exit(0)
     else:
         print("\n[💥 REFUTED] Fricción en L5. No se pudo generar el sello.")

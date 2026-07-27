@@ -1,4 +1,4 @@
-import ast
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 IMMUNEFI STRIKE v2 — Multi-Step CDP
@@ -143,7 +143,7 @@ async def strike():
     print("[STRIKE] Step 4: Wallet")
     await session.type_text("input[placeholder*='0x'], input[name*='wallet']", WALLET)
     await session.screenshot("/tmp/strike_v2_4_wallet.png")
-    
+
     print("[STRIKE] COMPLETED. Check /tmp/strike_v2_*.png")
     if session.ws:
         await session.ws.close()

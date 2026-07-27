@@ -2,7 +2,6 @@
 import torch
 import torchaudio
 import dac
-import os
 
 class C5RealCodecBridge:
     """

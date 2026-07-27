@@ -7,9 +7,8 @@ Audita y restringe el tamaño del prompt inyectado para prevenir la anergía ate
 
 Invariantes: Ω21 (Límite de Landauer), Ω174 (Compresión de Kolmogorov)"""
 import sys
-import math
 import zlib
-from typing import Dict, Tuple
+from typing import Tuple
 
 class PromptExergyEvaluator:
     """Evalúa la pérdida de exergía por andamiaje redundante en el contexto."""

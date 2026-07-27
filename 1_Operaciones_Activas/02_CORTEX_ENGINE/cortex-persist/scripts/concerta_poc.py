@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 """
 cat_id: concerta-poc
@@ -8,8 +9,8 @@ owner: borjamoskv
 exergy_tier: P2
 """
 
-import logging
 import hashlib
+import logging
 import time
 
 

@@ -1,9 +1,9 @@
+# C5-REAL EXERGY CERTIFIED
 import sqlite3
 import time
 import os
 import json
 import logging
-from dataclasses import dataclass
 
 DB_PATH = os.getenv("CORTEX_DB_PATH", "cortex_scheduler.db")
 
@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 class CortexScheduler:
     """Motor Causal Base 60 - Autonomous Scheduler (C5-REAL)."""
-    
+
     def __init__(self, db_path=DB_PATH):
         self.db_path = db_path
         self._init_db()
@@ -75,20 +75,20 @@ class CortexScheduler:
             task_id = task["id"]
             action_desc = f"EXECUTED_VIA_SCHEDULER: {task['task_name']}"
             now = time.time()
-            
+
             conn.execute(
                 "UPDATE scheduler_queue SET status = 'EXECUTED', executed_at = ? WHERE id = ?",
                 (now, task_id)
             )
-            
+
             # 3. Anclar el log de la realidad
             conn.execute(
                 "INSERT INTO reality_loop_logs (tick_timestamp, action_taken, target_id) VALUES (?, ?, ?)",
                 (now, action_desc, task_id)
             )
-            
+
             logger.info(f"Colapso de Entropía -> {action_desc} (Entropía: {task['entropy_level']})")
-            
+
             return {
                 "status": "COLLAPSED",
                 "task_id": task_id,

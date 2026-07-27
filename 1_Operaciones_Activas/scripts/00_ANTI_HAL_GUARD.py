@@ -3,10 +3,9 @@ import sys
 import re
 import asyncio
 import json
-import hashlib
 import subprocess
 from pathlib import Path
-from typing import Dict, Callable, Awaitable, Optional, Set, List
+from typing import Dict, Callable, Awaitable, Optional, List
 import nacl.signing
 
 # Expresión regular O(1) inyectada en el espacio de nombres global
@@ -130,7 +129,7 @@ class BFTAntiHallucinationGuard:
                         ["git", "commit", "-m", f"security(cortex): L4 Fraud Alert contra {proposer_id} por alucinación en {task_id}"],
                         capture_output=True, check=True
                     )
-                    print(f"[🛡️ GIT SENTINEL L3] Prueba de Fraude archivada criptográficamente en Ledger Git.")
+                    print("[🛡️ GIT SENTINEL L3] Prueba de Fraude archivada criptográficamente en Ledger Git.")
                 except Exception:
                     pass
 

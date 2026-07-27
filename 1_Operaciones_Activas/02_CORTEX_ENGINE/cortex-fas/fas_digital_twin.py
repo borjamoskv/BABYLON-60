@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 FAS v18 — Digital Twin Jurisprudential Engine
@@ -10,7 +11,7 @@ Integration of JEF + Shocks + Attractors + Lyapunov Proxy.
 import copy
 import numpy as np
 import warnings
-from typing import List, Dict, Tuple
+from typing import List, Dict
 from dataclasses import dataclass
 from enum import Enum
 
@@ -25,11 +26,11 @@ from fas_backtesting_engine import ExternalShockField, BacktestingEngine
 # ============================================================
 
 class LyapunovRegime(Enum):
-    RIGID_DOGMA = "RIGID_DOGMA"          
-    STRUCTURAL_STABILITY = "STRUCTURAL_STABILITY"  
-    INTERPRETATIVE_DRIFT = "INTERPRETATIVE_DRIFT"  
-    CHAOTIC_DOCTRINAL = "CHAOTIC_DOCTRINAL"  
-    NON_IDENTITY = "NON_IDENTITY"  
+    RIGID_DOGMA = "RIGID_DOGMA"
+    STRUCTURAL_STABILITY = "STRUCTURAL_STABILITY"
+    INTERPRETATIVE_DRIFT = "INTERPRETATIVE_DRIFT"
+    CHAOTIC_DOCTRINAL = "CHAOTIC_DOCTRINAL"
+    NON_IDENTITY = "NON_IDENTITY"
 
 @dataclass
 class LyapunovResult:
@@ -46,26 +47,26 @@ class LyapunovResult:
 
 class LyapunovProxyEngine:
     DOMAIN_SENSITIVITY = {
-        "art13": 1.2,  
-        "art16": 1.4,  
-        "donation": 0.9,  
-        "burden": 1.1,  
+        "art13": 1.2,
+        "art16": 1.4,
+        "donation": 0.9,
+        "burden": 1.1,
         "global": 1.0
     }
-    
+
     def __init__(self, base_state: JurisprudenceState):
         self.base_state = base_state
         self.shock_model = ExternalShockModel()
-    
+
     def perturb_case(self, state: JurisprudenceState, epsilon_case: CaseNode) -> JurisprudenceState:
         state.case_history.append(epsilon_case)
         state.update_from_case(epsilon_case)
         return state
-    
+
     def run_dynamics(self, state: JurisprudenceState) -> float:
         engine = JuridicalEnergyEngine(state, self.shock_model)
         return engine.compute(current_tick=len(state.case_history)).E_total
-    
+
     def create_epsilon_case(self, perturbation_type: str = "correlation", intensity: float = 0.05) -> CaseNode:
         from datetime import datetime
         if perturbation_type == "correlation":
@@ -80,14 +81,14 @@ class LyapunovProxyEngine:
             events_economic = [EconomicEvent.PAYMENT_ONE_OFF, EconomicEvent.ACCESS_INDEPENDENT]
             events_inference = [JudicialInference.DONATION_INTENT_RECOGNIZED, JudicialInference.INSUFFICIENT_EVIDENCE]
             events_system = [SystemStateEvent.THRESHOLD_RAISE]
-        else:  
+        else:
             events_economic = [EconomicEvent.PAYMENT_FIXED, EconomicEvent.LOOSE_COUPLING]
             events_inference = [JudicialInference.BURDEN_SHIFT, JudicialInference.PRECEDENT_STRENGTHENED]
             events_system = [SystemStateEvent.INSTITUTIONAL_BIAS]
-        
+
         return CaseNode(
             case_id=f"EPSILON-{perturbation_type}-{intensity}",
-            jurisdiction=Jurisdiction.TS,  
+            jurisdiction=Jurisdiction.TS,
             date=datetime.now(),
             source_type="sintético",
             events_economic=events_economic,
@@ -100,7 +101,7 @@ class LyapunovProxyEngine:
             notes_threshold_signal="",
             notes_divergence_signal=""
         )
-    
+
     def compute_lyapunov(self, epsilon_cases: List[CaseNode] = None, steps: int = 10, epsilon_intensity: float = 0.05) -> LyapunovResult:
         if epsilon_cases is None:
             epsilon_cases = [
@@ -109,36 +110,36 @@ class LyapunovProxyEngine:
                 self.create_epsilon_case("donation", epsilon_intensity),
                 self.create_epsilon_case("burden", epsilon_intensity)
             ]
-        
+
         divergences = []
         sensitivity_by_domain = {}
-        
+
         for eps_case in epsilon_cases:
             perturbation_type = eps_case.notes_why_important.split(":")[1].split()[0].strip()
-            
+
             state_0 = copy.deepcopy(self.base_state)
             E0_initial = self.run_dynamics(state_0)
-            
+
             state_1 = copy.deepcopy(self.base_state)
             state_1 = self.perturb_case(state_1, eps_case)
             E1_initial = self.run_dynamics(state_1)
-            
+
             delta_0 = abs(E1_initial - E0_initial)
-            
+
             if delta_0 == 0:
                 continue
-            
+
             trajectory_divergence = []
-            
+
             for t in range(1, steps + 1):
                 state_0.drift_vector["art16_lgt_expansion"] *= 1.01
                 state_0.drift_vector["art13_lgt_strength"] *= 1.005
                 state_0.drift_vector["donation_skepticism"] *= 1.008
-                
+
                 state_1.drift_vector["art16_lgt_expansion"] *= 1.01
                 state_1.drift_vector["art13_lgt_strength"] *= 1.005
                 state_1.drift_vector["donation_skepticism"] *= 1.008
-                
+
                 sensitivity = self.DOMAIN_SENSITIVITY.get(perturbation_type, 1.0)
                 if perturbation_type == "correlation":
                     state_1.drift_vector["art13_lgt_strength"] *= (1.002 * sensitivity)
@@ -146,37 +147,37 @@ class LyapunovProxyEngine:
                     state_1.drift_vector["art16_lgt_expansion"] *= (1.003 * sensitivity)
                 elif perturbation_type == "donation":
                     state_1.drift_vector["donation_skepticism"] *= (1.001 * sensitivity)
-                
+
                 E0_t = self.run_dynamics(state_0)
                 E1_t = self.run_dynamics(state_1)
-                
+
                 delta_t = abs(E1_t - E0_t)
                 trajectory_divergence.append(delta_t)
-            
+
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")
                 log_ratios = [np.log(max(d, 1e-9) / delta_0) for d in trajectory_divergence]
-            
+
             growth = np.mean(log_ratios) / steps
             divergences.append(growth)
             sensitivity_by_domain[perturbation_type] = growth
-        
+
         lambda_value = float(np.mean(divergences)) if divergences else 0.0
         regime = self.classify_regime(lambda_value)
         interpretation = self.get_interpretation(lambda_value, regime)
         risk_level = self.get_risk_level(lambda_value, regime)
         flip_probability = self.compute_flip_probability(lambda_value, regime)
         dominant_sensitivity = max(sensitivity_by_domain.keys(), key=lambda k: sensitivity_by_domain.get(k, 0.0)) if sensitivity_by_domain else "unknown"
-        
+
         return LyapunovResult(lambda_value, regime, interpretation, risk_level, flip_probability, dominant_sensitivity)
-    
+
     def classify_regime(self, lambda_value: float) -> LyapunovRegime:
         if lambda_value < -0.1: return LyapunovRegime.RIGID_DOGMA
         elif lambda_value < 0.1: return LyapunovRegime.STRUCTURAL_STABILITY
         elif lambda_value < 0.5: return LyapunovRegime.INTERPRETATIVE_DRIFT
         elif lambda_value < 1.0: return LyapunovRegime.CHAOTIC_DOCTRINAL
         else: return LyapunovRegime.NON_IDENTITY
-    
+
     def get_interpretation(self, lambda_value: float, regime: LyapunovRegime) -> str:
         interpretations = {
             LyapunovRegime.RIGID_DOGMA: "Derecho codificado (baja interpretación, dogma rígido)",
@@ -186,13 +187,13 @@ class LyapunovProxyEngine:
             LyapunovRegime.NON_IDENTITY: "Derecho no-identitario (mutación constante, significado inestable)"
         }
         return interpretations.get(regime, "Unknown")
-    
+
     def get_risk_level(self, lambda_value: float, regime: LyapunovRegime) -> str:
         if regime in [LyapunovRegime.RIGID_DOGMA, LyapunovRegime.STRUCTURAL_STABILITY]: return "LOW"
         elif regime == LyapunovRegime.INTERPRETATIVE_DRIFT: return "MODERATE"
         elif regime == LyapunovRegime.CHAOTIC_DOCTRINAL: return "HIGH_NONLINEARITY"
         else: return "CRITICAL_UNPREDICTABLE"
-    
+
     def compute_flip_probability(self, lambda_value: float, regime: LyapunovRegime) -> float:
         if regime == LyapunovRegime.RIGID_DOGMA: return 0.02
         elif regime == LyapunovRegime.STRUCTURAL_STABILITY: return 0.08
@@ -214,14 +215,14 @@ class DigitalTwinJurisprudentialEngine:
         self.shock_field = ExternalShockField(state, self.energy_engine)
         self.lyapunov_engine = LyapunovProxyEngine(state)
         self.backtester = BacktestingEngine(self.shock_field)
-    
+
     def analyze_full(self) -> Dict:
         from fas_energy_physics import JuridicalPhysicsEngine
         physics = JuridicalPhysicsEngine(self.state)
         energy_analysis = physics.analyze()
-        
+
         lyapunov_result = self.lyapunov_engine.compute_lyapunov()
-        
+
         full_analysis = {
             "energy": energy_analysis["energy"],
             "regime": energy_analysis["regime"],
@@ -240,15 +241,15 @@ class DigitalTwinJurisprudentialEngine:
             "threshold_map": energy_analysis["threshold_map"],
             "case_count": energy_analysis["case_count"]
         }
-        
+
         return full_analysis
 
 if __name__ == "__main__":
     import json
-    
+
     state = JurisprudenceState()
     engine = DigitalTwinJurisprudentialEngine(state)
     analysis = engine.analyze_full()
-    
+
     print("[CORTEX] DIGITAL TWIN INITIALIZED.")
     print(json.dumps(analysis, indent=2, ensure_ascii=False))

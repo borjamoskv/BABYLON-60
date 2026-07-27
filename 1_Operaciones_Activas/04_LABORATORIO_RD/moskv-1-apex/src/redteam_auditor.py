@@ -1,7 +1,7 @@
+# C5-REAL EXERGY CERTIFIED
 import os
 import ast
 import glob
-import time
 
 # ==============================================================================
 # AGENT-PAPER-REDTEAM (v1.0)
@@ -23,14 +23,14 @@ class ExergyAuditor(ast.NodeVisitor):
         self.score -= 0.3
         self.violations.append("Unbounded While Loop detected (-0.3)")
         self.generic_visit(node)
-        
+
     def visit_FunctionDef(self, node):
         # Functions must have type hints for deterministic C5-REAL execution
         if not node.returns:
             self.score -= 0.15
             self.violations.append(f"Function '{node.name}' lacks return type annotation (-0.15)")
         self.generic_visit(node)
-        
+
     def visit_Try(self, node):
         # Bare excepts hide state mutations
         for handler in node.handlers:
@@ -42,7 +42,7 @@ class ExergyAuditor(ast.NodeVisitor):
 
 class RedTeamCrucible:
     """The final checkpoint before a forged agent is allowed into the Ledger."""
-    
+
     MINIMUM_YIELD = 0.85
 
     def __init__(self, target_dir="src/skills"):
@@ -52,7 +52,7 @@ class RedTeamCrucible:
         print("[RED-TEAM] Initiating Hostile AST Audit on Forged Subagents...")
         search_pattern = os.path.join(self.target_dir, "*.py")
         agents = glob.glob(search_pattern)
-        
+
         if not agents:
             print("[RED-TEAM] No agents found in the crucible.")
             return
@@ -62,28 +62,28 @@ class RedTeamCrucible:
 
     def _execute_hostile_audit(self, filepath: str):
         agent_name = os.path.basename(filepath)
-        
+
         with open(filepath, 'r') as file:
             source = file.read()
-            
+
         try:
             tree = ast.parse(source)
             auditor = ExergyAuditor()
             auditor.visit(tree)
-            
+
             print(f"\\n--- AUDITING: {agent_name} ---")
             for v in auditor.violations:
                 print(f"  [!] VIOLATION: {v}")
-                
+
             print(f"  [=] FINAL EXERGY YIELD: E={auditor.score:.2f}")
-            
+
             if auditor.score < self.MINIMUM_YIELD:
-                print(f"  [X] YIELD TOO LOW. INITIATING DESTRUCTION PROTOCOL.")
+                print("  [X] YIELD TOO LOW. INITIATING DESTRUCTION PROTOCOL.")
                 os.remove(filepath)
                 print(f"  [X] {agent_name} ERASED FROM PHYSICAL SUBSTRATE.")
             else:
-                print(f"  [+] AGENT VERIFIED. CLEARED FOR VESICULAR RUNTIME.")
-                
+                print("  [+] AGENT VERIFIED. CLEARED FOR VESICULAR RUNTIME.")
+
         except SyntaxError:
             print(f"\\n[X] CRITICAL: {agent_name} failed base compilation. Erasing.")
             os.remove(filepath)

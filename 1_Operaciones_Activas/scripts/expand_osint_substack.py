@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """expand_osint_substack.py
 
@@ -9,7 +10,11 @@ Usage:
 Writes a JSON array of discovered authors, compatible with existing OSINT dataset.
 """
 
-import sys, json, time, random, re
+import sys
+import json
+import time
+import random
+import re
 from pathlib import Path
 from urllib.parse import quote_plus
 

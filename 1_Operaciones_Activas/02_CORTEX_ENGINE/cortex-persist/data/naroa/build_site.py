@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 Generador estático de naroagutierrezgil.com
@@ -9,10 +10,10 @@ Uso:  python3 build_site.py [--mirror DIR]
 Salida: ./web/  (carpeta lista para `vercel --prod`)
 """
 
-import logging
 import argparse
 import html
 import json
+import logging
 import os
 import shutil
 import sys
@@ -868,7 +869,7 @@ JS = """(function(){
     var closeLb=function(){lb.classList.remove('is-active');};
     lb.addEventListener('click',function(e){if(e.target===lb||e.target===lbClose)closeLb()});
     document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb()});
-    
+
     document.querySelectorAll('.card img, .work__figure img').forEach(function(img){
       img.addEventListener('click',function(e){
         e.preventDefault();

@@ -3,7 +3,7 @@ import os
 import json
 import asyncio
 import time
-from typing import Dict, Any, List
+from typing import Dict, Any
 
 try:
     import aiohttp

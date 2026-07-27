@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 """
 cat_id: generate-telemetry
@@ -9,10 +10,8 @@ exergy_tier: P2
 """
 
 
-import logging
-
-
 import datetime
+import logging
 import os
 import random
 
@@ -30,7 +29,7 @@ def generate_svg():
     <!-- Industrial Noir 2026 Aesthetic -->
     <rect width="800" height="200" fill="#0A0A0A" rx="10"/>
     <rect width="798" height="198" x="1" y="1" fill="none" stroke="#2B3BE5" stroke-width="2" rx="10"/>
-    
+
     <!-- Grid pattern for technical feel -->
     <defs>
         <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
@@ -50,10 +49,10 @@ def generate_svg():
     <g transform="translate(30, 100)">
         <text x="0" y="0" font-family="Courier, monospace" font-size="14" fill="#CCCCCC">O(1) P95 LATENCY</text>
         <text x="0" y="30" font-family="Courier, monospace" font-size="28" fill="#FFFFFF">{latency_p95} ms</text>
-        
+
         <text x="200" y="0" font-family="Courier, monospace" font-size="14" fill="#CCCCCC">DISPATCH THROUGHPUT</text>
         <text x="200" y="30" font-family="Courier, monospace" font-size="28" fill="#FFFFFF">{throughput} ops/s</text>
-        
+
         <text x="450" y="0" font-family="Courier, monospace" font-size="14" fill="#CCCCCC">ACTIVE K-0 AGENTS</text>
         <text x="450" y="30" font-family="Courier, monospace" font-size="28" fill="#FFFFFF">{active_agents}</text>
 

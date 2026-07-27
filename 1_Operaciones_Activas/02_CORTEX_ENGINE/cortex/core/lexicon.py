@@ -19,7 +19,7 @@ import subprocess
 from cryptography.fernet import Fernet
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, TypedDict, Union
+from typing import Dict, List, Optional, Tuple, TypedDict
 
 from .bft_swarm import BFTNode
 

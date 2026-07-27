@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import os
 import json
 import subprocess
@@ -41,15 +42,15 @@ def audit_repo(repo):
     name = repo["name"]
     clone_url = repo["clone_url"]
     repo_path = os.path.join(WORKSPACE, name)
-    
+
     print(f"Auditing {name}...")
-    
+
     if os.path.exists(repo_path):
         shutil.rmtree(repo_path)
     run_cmd(f"git clone --depth 1 {clone_url} {repo_path}")
-    
+
     score = 100
-    
+
     # 1. GitHub Actions
     action_findings = analyze_actions(repo_path)
     if "No GitHub Actions found (-5)" in action_findings:
@@ -57,7 +58,7 @@ def audit_repo(repo):
     for f in action_findings:
         if "(-10)" in f:
             score -= 10
-            
+
     # 2. Semgrep
     semgrep_out = run_cmd("semgrep scan --config auto --json", cwd=repo_path)
     semgrep_findings = []
@@ -69,11 +70,11 @@ def audit_repo(repo):
             if sev in ["ERROR", "WARNING"]:
                 semgrep_findings.append(f"{r['check_id']}: {sev}")
                 score -= 5 if sev == "ERROR" else 2
-    except Exception as e:
+    except Exception:
         semgrep_findings.append("Failed to run semgrep.")
-        
+
     score = max(0, score)
-    
+
     return {
         "name": name,
         "score": score,
@@ -84,19 +85,19 @@ def audit_repo(repo):
 def main():
     os.makedirs(WORKSPACE, exist_ok=True)
     repos = fetch_repos()
-    
+
     results = []
     for repo in repos:
         if not repo["fork"]:
             results.append(audit_repo(repo))
-            
+
     overall_score = sum(r["score"] for r in results) / len(results) if results else 0
-    
+
     # Generate Report
-    report = f"# MOSKV-1 APEX: Sovereign C5-REAL Audit Report\n\n"
+    report = "# MOSKV-1 APEX: Sovereign C5-REAL Audit Report\n\n"
     report += f"**Overall Score:** {overall_score:.2f} / 100\n\n"
     report += "## Repository Analysis\n\n"
-    
+
     for r in results:
         report += f"### {r['name']} - Score: {r['score']}/100\n"
         report += "- **GitHub Actions:**\n"
@@ -104,19 +105,19 @@ def main():
             for a in r['actions']: report += f"  - {a}\n"
         else:
             report += "  - OK\n"
-            
+
         report += "- **Semgrep Findings:**\n"
         if r['semgrep']:
             for s in r['semgrep'][:5]: report += f"  - {s}\n"
             if len(r['semgrep']) > 5: report += f"  - ... and {len(r['semgrep']) - 5} more.\n"
         else:
             report += "  - OK\n"
-            
+
         report += "\n"
-        
+
     with open(REPORT_PATH, "w") as f:
         f.write(report)
-        
+
     print(f"Audit completed. Report saved to {REPORT_PATH}")
 
 if __name__ == '__main__':

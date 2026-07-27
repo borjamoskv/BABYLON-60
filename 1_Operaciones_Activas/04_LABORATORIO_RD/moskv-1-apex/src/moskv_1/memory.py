@@ -1,6 +1,7 @@
+# C5-REAL EXERGY CERTIFIED
 import json
 import time
-from typing import Optional, Union, Dict, Any, List
+from typing import Dict, Any, List
 from moskv_1.event_bus import CortexEvent
 from moskv_1.immunity import ImmunityLayer, ImmuneState
 
@@ -109,11 +110,11 @@ class MemoryStore:
         immune_state_obj, calculated_entropy = self.immunity.evaluate_signal(content_str)
         if entropy is None:
             entropy = calculated_entropy
-        
+
         is_quarantined = payload.get("is_quarantined")
         if is_quarantined is None:
             is_quarantined = (immune_state_obj == ImmuneState.QUARANTINED or immune_state_obj == ImmuneState.NECROTIC)
-            
+
         immune_state = payload.get("immune_state", immune_state_obj.value)
 
         node_id = payload.get("nodeId") or event.hash
@@ -128,9 +129,9 @@ class MemoryStore:
         if self.driver:
             cypher = """
                 MERGE (r:BrainRegion {name: $sourceRegion})
-                MERGE (n:MemoryNode {id: $id}) 
-                SET n.entropy = $entropy, 
-                    n.content = $content, 
+                MERGE (n:MemoryNode {id: $id})
+                SET n.entropy = $entropy,
+                    n.content = $content,
                     n.lastUpdated = timestamp(),
                     n.spawnHash = $hash,
                     n.is_quarantined = $is_quarantined,

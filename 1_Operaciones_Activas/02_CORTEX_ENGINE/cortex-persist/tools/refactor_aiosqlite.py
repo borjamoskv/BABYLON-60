@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 cat_id: refactor-aiosqlite
 cat_type: script
@@ -8,8 +9,6 @@ exergy_tier: P2
 """
 
 import logging
-
-
 import re
 from pathlib import Path
 

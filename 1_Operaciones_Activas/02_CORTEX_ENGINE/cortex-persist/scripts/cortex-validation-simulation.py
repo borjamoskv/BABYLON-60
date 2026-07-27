@@ -1,11 +1,7 @@
-import time
-import sqlite3
-
+# C5-REAL EXERGY CERTIFIED
 import hashlib
-import random
-from typing import List, Dict
-
-
+import sqlite3
+import time
 
 # C5-REAL: 6-Layer CORTEX Validation & Attestation Loop (Epistemology Loop)
 # Implements strict Ouroboros OMEGA execution + Swarm BFT Attestation.
@@ -35,13 +31,13 @@ class ValidatorNode:
         self.node_id = node_id
         self.is_byzantine = is_byzantine
 
-    def sign_attestation(self, proposal_id: str, state_hash: str) -> Dict:
+    def sign_attestation(self, proposal_id: str, state_hash: str) -> dict:
         if self.is_byzantine:
             # Nodo corrupto o alucinado altera el hash
             corrupted_hash = hashlib.sha256(f"{state_hash}_corrupted".encode()).hexdigest()
             print(f" -> [Validator {self.node_id}] WARNING: Byzantine behavior. Emitting corrupted signature.")
             return {"node_id": self.node_id, "signature": f"sig:{self.node_id}:err", "hash": corrupted_hash}
-        
+
         # Firma legítima del hash de estado estable
         valid_sig = f"sig:{self.node_id}:{hashlib.sha256(f'{proposal_id}_{state_hash}'.encode()).hexdigest()[:8]}"
         print(f" -> [Validator {self.node_id}] Verification SUCCESS. Attestation signed.")
@@ -60,13 +56,13 @@ class CortexValidationSimulator:
             ValidatorNode("Wolfram-Byzantine", is_byzantine=True)  # Nodo Bizantino de control
         ]
         init_db()
-        
+
     def phase_1_ingest(self) -> str:
         print("[PHASE 1 · Ingest] Ingesta Sensorial Pura (AST Crudo)...")
         time.sleep(0.2)
         raw_ast = "{ 'module': 'auth', 'status': 'vulnerable' }"
         return raw_ast
-        
+
     def phase_2_audit(self, raw_data: str) -> bool:
         print("[PHASE 2 · Audit] Auditoría Metacognitiva Adversarial...")
         time.sleep(0.2)
@@ -74,12 +70,12 @@ class CortexValidationSimulator:
             print(" -> [Audit] Vulnerability detected. Proceeding to mutate.")
             return True
         return False
-        
+
     def phase_3_mutate(self) -> str:
         print("[PHASE 3 · Mutate] Mutación de Precisión (Aniquilación de Entropía)...")
         time.sleep(0.2)
         return "{ 'module': 'auth', 'status': 'secure' }"
-        
+
     def phase_4_anchor(self, new_state: str) -> str:
         print("[PHASE 4 · Anchor] Anclaje Invariante (Git Sentinel)...")
         state_hash = hashlib.sha256(new_state.encode()).hexdigest()
@@ -88,7 +84,7 @@ class CortexValidationSimulator:
         print(f" -> [Git Sentinel] git add . && git commit -m 'chore(quarantine): proposed state {self.proposal_id}'")
         self.state_history.append(state_hash)
         return state_hash
-        
+
     def phase_5_verify(self) -> bool:
         print("[PHASE 5 · Verify] Verificación Empírica Cruda (Tests Locales)...")
         time.sleep(0.2)
@@ -99,18 +95,18 @@ class CortexValidationSimulator:
     def phase_6_attest(self, state_hash: str) -> bool:
         print("[PHASE 6 · Attest] Atestación Bizantina de Swarm (Quorum Consensus)...")
         time.sleep(0.3)
-        
+
         signatures = []
         for val in self.validators:
             sig = val.sign_attestation(self.proposal_id, state_hash)
             signatures.append(sig)
-            
+
         # Conteo de firmas válidas sobre el hash de estado real
         valid_signatures = [s for s in signatures if s["hash"] == state_hash]
         quorum_reached = len(valid_signatures) >= 3  # Quorum mínimo de 3/5
-        
+
         print(f" -> [Attest] Valid Signatures: {len(valid_signatures)}/{len(self.validators)}. Quorum reached: {quorum_reached}")
-        
+
         if quorum_reached:
             # Persistencia en base de datos concurrentes WAL
             conn = sqlite3.connect(DB_PATH)
@@ -123,47 +119,47 @@ class CortexValidationSimulator:
             )
             conn.commit()
             conn.close()
-            
+
             # Promoción del Sentinel Git a main
             print(f" -> [Git Sentinel] Quorum verified. Merge auto/quarantine-{self.proposal_id} to main.")
             print(f" -> [Git Sentinel] Ledger update: committed hash {state_hash[:10]}...")
             return True
         else:
-            print(f" -> [Git Sentinel] Quorum FAILED. Apoptosis trigger. Reverting changes.")
+            print(" -> [Git Sentinel] Quorum FAILED. Apoptosis trigger. Reverting changes.")
             print(f" -> [Git Sentinel] git checkout main && git branch -D auto/quarantine-{self.proposal_id}")
             return False
-        
+
     def execute_loop(self) -> bool:
         print(f"\n=== EXECUTING CORTEX 6-LAYER EPHEMERAL LOOP: {self.task_name} ===")
-        
+
         # 1. Ingest
         raw_state = self.phase_1_ingest()
-        
+
         # 2. Audit
         if not self.phase_2_audit(raw_state):
             print("[ABORT] Phase 2: Audit failed. Terminating.")
             return False
-            
+
         # 3. Mutate
         new_state = self.phase_3_mutate()
-        
+
         # 4. Anchor
         state_hash = self.phase_4_anchor(new_state)
-        
+
         # 5. Verify
         if not self.phase_5_verify():
             print("[ABORT] Phase 5: Verification failed. Triggering Rollback.")
             # Revertir commit de quarantine
             return False
-            
+
         # 6. Attest
         success = self.phase_6_attest(state_hash)
-        
+
         if success:
-            print(f"[SUCCESS] 6-Layer loop complete. State stabilized in DB & Git Ledger.")
+            print("[SUCCESS] 6-Layer loop complete. State stabilized in DB & Git Ledger.")
         else:
-            print(f"[FAILED] Phase 6 consensus rejected. Loop aborted.")
-            
+            print("[FAILED] Phase 6 consensus rejected. Loop aborted.")
+
         return success
 
 if __name__ == "__main__":

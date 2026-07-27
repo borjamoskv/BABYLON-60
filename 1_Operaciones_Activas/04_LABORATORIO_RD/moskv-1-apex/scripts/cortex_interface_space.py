@@ -1,5 +1,5 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
-import os
 import sys
 import json
 import time
@@ -8,28 +8,28 @@ from pathlib import Path
 def calculate_space_metrics():
     app_data_dir = Path("/Users/borjafernandezangulo/.gemini/antigravity")
     brain_dir = app_data_dir / "brain"
-    
+
     if not brain_dir.exists():
         print("[!] Error: Brain directory does not exist.")
         sys.exit(1)
-        
+
     subdirs = [d for d in brain_dir.iterdir() if d.is_dir()]
     if not subdirs:
         print("[!] Error: No active sessions found.")
         sys.exit(1)
-        
+
     latest_subdir = max(subdirs, key=lambda d: d.stat().st_mtime)
     transcript_path = latest_subdir / ".system_generated" / "logs" / "transcript.jsonl"
-    
+
     if not transcript_path.exists():
         print(f"[!] Error: Transcript not found at {transcript_path}")
         sys.exit(1)
-        
+
     user_times = []
     tool_times = []
     total_anergy_chars = 0
     mutations = 0
-    
+
     with open(transcript_path, 'r', encoding='utf-8') as f:
         for line in f:
             if not line.strip():
@@ -39,7 +39,7 @@ def calculate_space_metrics():
                 step_type = step.get("type", "")
                 timestamp = step.get("timestamp", time.time() * 1000.0) / 1000.0
                 content = step.get("content", "")
-                
+
                 if step_type == "USER_INPUT":
                     user_times.append(timestamp)
                 elif step_type in ("PLANNER_RESPONSE", "MODEL_RESPONSE"):
@@ -64,15 +64,15 @@ def calculate_space_metrics():
 
     # 2. Information Density / Friction (Anergy per mutation)
     anergy_ratio = total_anergy_chars / (mutations if mutations > 0 else 1)
-    
+
     # 3. Exergy index (Inverse of friction normalized)
     exergy_idx = max(0.0, min(1.0, 1.0 - (anergy_ratio / 1000.0)))
-    
+
     return latency, anergy_ratio, exergy_idx, mutations, latest_subdir.name
 
 def draw_space():
     latency, anergy, exergy, mutations, session_id = calculate_space_metrics()
-    
+
     # Write metrics to JSON file in docs folder
     base_dir = Path(__file__).parent.parent
     metrics_path = base_dir / "docs" / "cortex_metrics.json"
@@ -94,11 +94,11 @@ def draw_space():
     bridge_width = 40
     bridge_cursor = int(exergy * bridge_width)
     bridge_cursor = max(0, min(bridge_width - 1, bridge_cursor))
-    
+
     bridge = ["·"] * bridge_width
     bridge[bridge_cursor] = "█"
     bridge_str = "".join(bridge)
-    
+
     print("\n" + "="*50)
     print("  MOSKV-1 APEX: THE SPACE BETWEEN US (COGNITIVE METRIC)")
     print("="*50)

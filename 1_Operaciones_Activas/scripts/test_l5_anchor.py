@@ -5,7 +5,7 @@ from pathlib import Path
 sys.path.append(str(Path.cwd() / "1_Operaciones_Activas"))
 
 import nacl.signing
-from cortex.core.bft_swarm import BFTNode, BFTMessage
+from cortex.core.bft_swarm import BFTNode
 from cortex.core.l5_opentimestamps import BlockchainAnchor
 
 async def main():
@@ -45,7 +45,7 @@ async def main():
 
     try:
         await asyncio.wait_for(test_future, timeout=3.0)
-        print(f"\n[✅] Consenso L4 garantizado. Esperando asincronía L5 (3s)...")
+        print("\n[✅] Consenso L4 garantizado. Esperando asincronía L5 (3s)...")
         # Damos tiempo a que el subprocess de OTS resuelva
         await asyncio.sleep(3.0)
 

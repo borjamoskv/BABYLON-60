@@ -1,6 +1,7 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
-import logging
 import gc
+import logging
 import os
 import statistics
 import sys

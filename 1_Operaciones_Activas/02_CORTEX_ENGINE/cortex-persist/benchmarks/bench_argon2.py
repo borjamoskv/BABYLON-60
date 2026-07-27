@@ -1,10 +1,12 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized Benchmark for Argon2id Hashing
 import logging
 import time
 
 import argon2
-import cortex_rs
 import numpy as np
+
+import cortex_rs
 
 
 def run_benchmarks(iterations=50):

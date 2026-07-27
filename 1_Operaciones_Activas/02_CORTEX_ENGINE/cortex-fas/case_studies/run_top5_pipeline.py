@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 FAS v24 — HVT Pipeline Orchestrator
@@ -28,7 +29,7 @@ def main():
         for line in f:
             if line.strip():
                 try: records.append(json.loads(line))
-                except Exception as e: pass
+                except Exception: pass
 
     if not records:
         print("[-] No records found.")
@@ -42,7 +43,7 @@ def main():
         for r in top_5:
             f.write(json.dumps(r) + "\n")
 
-    print(f"[*] Injected TOP 5 HVT from CRONOS into training ledger.")
+    print("[*] Injected TOP 5 HVT from CRONOS into training ledger.")
 
     # 3. Run Pipeline
     print("\n[+] RUNNING OSINT MINER...")

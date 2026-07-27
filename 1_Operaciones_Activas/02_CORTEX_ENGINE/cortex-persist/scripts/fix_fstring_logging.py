@@ -1,4 +1,6 @@
+# C5-REAL EXERGY CERTIFIED
 from __future__ import annotations
+
 # [C5-REAL] Exergy-Maximized
 """
 cat_id: fix-fstring-logging
@@ -10,11 +12,8 @@ exergy_tier: P2
 """
 
 
-import logging
-
-
-
 import ast
+import logging
 import os
 import re
 import sys

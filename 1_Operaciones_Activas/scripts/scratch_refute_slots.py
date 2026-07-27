@@ -1,5 +1,4 @@
 # C5-REAL EXERGY CERTIFIED
-import sys
 import unittest.mock
 
 class BFTCoordinator:

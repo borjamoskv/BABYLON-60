@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 FAS v19 — Regime Collapse Simulator (Doctrinal GAN)
@@ -10,14 +11,13 @@ and shocks that forces E > 0.8 (Critical Phase) and λ > 0.5 (Chaos).
 
 import copy
 import random
-import numpy as np
 from typing import List, Dict, Tuple
 from datetime import datetime
 
 from fas_phase2_core import (
     JurisprudenceState, CaseNode, EconomicEvent, JudicialInference, Jurisdiction, SystemStateEvent
 )
-from fas_digital_twin import DigitalTwinJurisprudentialEngine, LyapunovRegime
+from fas_digital_twin import DigitalTwinJurisprudentialEngine
 
 # ============================================================
 # 1. DOCTRINAL GAN: SYNTHETIC CASE GENERATOR
@@ -31,20 +31,20 @@ class DoctrinalGAN:
         self.economic_events = list(EconomicEvent)
         self.inferences = list(JudicialInference)
         self.jurisdictions = [Jurisdiction.TEAC, Jurisdiction.TSJ_MAD, Jurisdiction.TSJ_CAT, Jurisdiction.TS, Jurisdiction.TJUE]
-    
+
     def generate_random_case(self, intensity: float = 1.0) -> CaseNode:
         # Ponderar TS y TJUE para mayor impacto
         j_weights = [0.2, 0.1, 0.1, 0.4, 0.2]
         jurisdiction = random.choices(self.jurisdictions, weights=j_weights, k=1)[0]
-        
+
         # Seleccionar eventos económicos aleatorios (mutación)
         num_econ = random.randint(1, 3)
         ev_econ = random.sample(self.economic_events, num_econ)
-        
+
         # Seleccionar inferencias aleatorias
         num_inf = random.randint(1, 2)
         ev_inf = random.sample(self.inferences, num_inf)
-        
+
         return CaseNode(
             case_id=f"GAN-SYNTH-{random.randint(1000, 9999)}",
             jurisdiction=jurisdiction,
@@ -69,89 +69,89 @@ class RegimeCollapseSimulator:
     Fitness = (Energy * 0.6) + (Lyapunov_Lambda * 0.4)
     Goal: Fitness > 0.85 (System Collapse)
     """
-    
+
     def __init__(self, initial_state: JurisprudenceState, population_size: int = 10, generations: int = 5):
         self.initial_state = initial_state
         self.population_size = population_size
         self.generations = generations
         self.gan = DoctrinalGAN()
-    
+
     def evaluate_sequence(self, sequence: List[CaseNode]) -> Tuple[float, Dict]:
         # 1. Clonar estado inicial
         test_state = copy.deepcopy(self.initial_state)
-        
+
         # 2. Aplicar la secuencia de casos
         for case in sequence:
             test_state.update_from_case(case)
             test_state.case_history.append(case)
-            
+
         # 3. Analizar con el Digital Twin
         twin = DigitalTwinJurisprudentialEngine(test_state)
         analysis = twin.analyze_full()
-        
+
         # 4. Calcular fitness
         energy = analysis["energy"]["E_total"]
         lyapunov = analysis["lyapunov"]["lambda"]
-        
+
         # Normalizar Lyapunov (asumiendo max ~ 1.5 para el cálculo)
         norm_lyapunov = min(max(lyapunov / 1.5, 0.0), 1.0)
-        
+
         fitness = (energy * 0.6) + (norm_lyapunov * 0.4)
         return fitness, analysis
-    
+
     def run(self, sequence_length: int = 3) -> Dict:
         print(f"[CORTEX] Initiating Regime Collapse Simulation (Generations: {self.generations}, Pop: {self.population_size})")
-        
+
         # Inicializar población (cada individuo es una secuencia de casos)
         population = [
             [self.gan.generate_random_case() for _ in range(sequence_length)]
             for _ in range(self.population_size)
         ]
-        
+
         best_overall_fitness = 0.0
         best_overall_sequence = None
         best_analysis = None
-        
+
         for gen in range(self.generations):
             scored_population = []
-            
+
             for seq in population:
                 fitness, analysis = self.evaluate_sequence(seq)
                 scored_population.append((fitness, seq, analysis))
-                
+
             # Ordenar por fitness (descendente)
             scored_population.sort(key=lambda x: x[0], reverse=True)
-            
+
             # Actualizar el mejor global
             current_best_fitness = scored_population[0][0]
             if current_best_fitness > best_overall_fitness:
                 best_overall_fitness = current_best_fitness
                 best_overall_sequence = scored_population[0][1]
                 best_analysis = scored_population[0][2]
-                
+
             print(f"  -> Gen {gen+1}/{self.generations} | Top Fitness: {current_best_fitness:.4f} | Energy: {scored_population[0][2]['energy']['E_total']:.2f} | λ: {scored_population[0][2]['lyapunov']['lambda']:.2f}")
-            
+
             # Selección y Cruce (Elitism = top 2)
             next_generation = [scored_population[0][1], scored_population[1][1]]
-            
+
             while len(next_generation) < self.population_size:
                 # Torneo simple
                 parent1 = random.choice(scored_population[:5])[1]
                 parent2 = random.choice(scored_population[:5])[1]
-                
+
                 # Cruce en 1 punto
                 crossover_point = random.randint(1, sequence_length - 1)
                 child = parent1[:crossover_point] + parent2[crossover_point:]
-                
+
                 # Mutación (reemplazar un caso aleatorio)
                 if random.random() < 0.3:
                     mut_idx = random.randint(0, sequence_length - 1)
                     child[mut_idx] = self.gan.generate_random_case()
-                    
+
                 next_generation.append(child)
-                
+
             population = next_generation
-            
+
         return {
             "collapse_found": bool(best_overall_fitness >= 0.8),
             "max_fitness": float(best_overall_fitness),
@@ -167,14 +167,14 @@ class RegimeCollapseSimulator:
 
 if __name__ == "__main__":
     import json
-    
+
     # Baseline state
     state = JurisprudenceState()
-    
+
     simulator = RegimeCollapseSimulator(state, population_size=15, generations=8)
-    
+
     # Buscar una secuencia de 4 sentencias que colapse el sistema
     result = simulator.run(sequence_length=4)
-    
+
     print("\n[CORTEX] 🧨 REGIME COLLAPSE VECTOR DETECTED")
     print(json.dumps(result, indent=2, ensure_ascii=False))

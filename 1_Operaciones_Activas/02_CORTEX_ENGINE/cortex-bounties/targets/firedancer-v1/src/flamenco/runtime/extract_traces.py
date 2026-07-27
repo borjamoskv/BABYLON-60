@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import argparse
 import re
 import sys
@@ -6,7 +7,7 @@ import time
 def reg_val_pattern(x):
     return "(?P<r{}>[0-9A-F]{{16}})".format(x)
 
-trace_line_pattern = "^\ *(?P<ic>\d+)\ \[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}\]\ *(?P<pc>\d+): (?P<instr>[\w\ \,\-\+\_\[\]]+).*\n$".format(
+trace_line_pattern = r"^\ *(?P<ic>\d+)\ \[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}\]\ *(?P<pc>\d+): (?P<instr>[\w\ \,\-\+\_\[\]]+).*\n$".format(
     reg_val_pattern(0),
     reg_val_pattern(1),
     reg_val_pattern(2),
@@ -88,7 +89,7 @@ def traces_diff(fd_traces, sl_traces, skip_traces):
             if n_matches > best_n_matches:
                 best_n_matches = n_matches
                 best_sl_idx = sl_idx
-                
+
                 if len(fd_trace) == len(sl_trace):
                     good_match = best_n_matches == len(fd_trace) and best_n_matches == len(sl_trace)
                     if good_match:
@@ -97,12 +98,12 @@ def traces_diff(fd_traces, sl_traces, skip_traces):
         if best_sl_idx == -1:
             print("NO MATCH:", fd_idx, flush=True)
             continue
-        
+
         fd_lines = [x[0] for x in fd_traces[fd_idx]]
         sl_lines = [x[0] for x in sl_traces[best_sl_idx]]
 
         good_match = best_n_matches == len(fd_lines) and best_n_matches == len(sl_lines)
-        
+
         if good_match:
             used_sl_idxs.add(best_sl_idx)
             n_good_matches += 1

@@ -1,4 +1,4 @@
-import ast
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 CODE4RENA K2 LENDING STRIKE — CDP Invisible Maestro
@@ -129,7 +129,7 @@ class CDPSession:
                 const el = document.querySelector('{selector}');
                 if (el) {{
                     el.focus();
-                    const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value') ? 
+                    const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value') ?
                                    Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set :
                                    Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value').set;
                     if(setter) {{

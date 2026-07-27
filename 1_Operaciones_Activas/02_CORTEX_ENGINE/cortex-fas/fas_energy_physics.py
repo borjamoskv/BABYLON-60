@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 FAS v14 — Juridical Energy Engine (JEF v1) + Shock Dynamics
@@ -12,12 +13,12 @@ Added Option A: External Shock Model & Stability Duration.
 
 import numpy as np
 import math
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Tuple
 from dataclasses import dataclass
 from enum import Enum
 from fas_phase2_core import (
     JurisprudenceState, JudicialInference, EconomicEvent, ReasoningGraphGenerator,
-    CaseNode, Jurisdiction, SystemStateEvent
+    CaseNode, Jurisdiction
 )
 
 # ============================================================
@@ -68,10 +69,10 @@ class ExternalShockModel:
     """Modela impactos exógenos que rompen la inercia del sistema."""
     def __init__(self):
         self.active_shocks: List[ExternalShock] = []
-        
+
     def inject_shock(self, shock: ExternalShock):
         self.active_shocks.append(shock)
-        
+
     def get_current_shock_energy(self, current_tick: int) -> float:
         """Decay exponencial del shock a lo largo del tiempo (casos)."""
         total_shock = 0.0
@@ -94,18 +95,18 @@ class JuridicalEnergyEngine:
         "conflict": 0.20,
         "shock": 0.20  # Added shock weight
     }
-    
+
     def __init__(self, state: JurisprudenceState, shock_model: ExternalShockModel):
         self.state = state
         self.shock_model = shock_model
-    
+
     def compute(self, current_tick: int) -> EnergyComponents:
         E_corr = self.correlation_energy()
         E_thresh = self.threshold_variance()
         E_entropy = self.doctrinal_entropy()
         E_conflict = self.precedent_friction()
         E_shock = self.shock_model.get_current_shock_energy(current_tick)
-        
+
         E_total = (
             self.WEIGHTS["correlation"] * E_corr +
             self.WEIGHTS["threshold"] * E_thresh +
@@ -113,7 +114,7 @@ class JuridicalEnergyEngine:
             self.WEIGHTS["conflict"] * E_conflict +
             self.WEIGHTS["shock"] * E_shock
         )
-        
+
         return EnergyComponents(
             E_correlation=round(E_corr, 4),
             E_threshold=round(E_thresh, 4),
@@ -122,7 +123,7 @@ class JuridicalEnergyEngine:
             E_shock=round(E_shock, 4),
             E_total=round(E_total, 4)
         )
-    
+
     def correlation_energy(self) -> float:
         if len(self.state.case_history) == 0: return 0.0
         total = 0.0
@@ -136,7 +137,7 @@ class JuridicalEnergyEngine:
             EconomicEvent.TIGHT_COUPLING, EconomicEvent.HIGH_HOMOGENEITY,
             EconomicEvent.PRICE_MARKET_ALIGNED
         ]
-        
+
         for case in self.state.case_history:
             strength = 0.0
             for inference in case.events_inference:
@@ -146,11 +147,11 @@ class JuridicalEnergyEngine:
             for booster in correlation_boosters:
                 if booster in case.events_economic: strength += 0.05
             total += strength
-        
+
         E_corr = total / len(self.state.case_history)
         E_corr *= (1.0 + self.state.drift_vector.get("art13_lgt_strength", 0.0))
         return clamp(E_corr, 0.0, 1.0)
-    
+
     def threshold_variance(self) -> float:
         thresholds = list(self.state.threshold_map.values())
         if len(thresholds) < 2: return 0.0
@@ -158,42 +159,42 @@ class JuridicalEnergyEngine:
         max_variance = 0.06
         E_thresh = variance / max_variance
         return clamp(E_thresh, 0.0, 1.0)
-    
+
     def doctrinal_entropy(self) -> float:
         if len(self.state.case_history) == 0: return 0.0
         inference_counts: Dict[JudicialInference, int] = {}
         for case in self.state.case_history:
             for inference in case.events_inference:
                 inference_counts[inference] = inference_counts.get(inference, 0) + 1
-        
+
         total_inferences = sum(inference_counts.values())
         if total_inferences == 0: return 0.0
-        
+
         entropy = 0.0
         for count in inference_counts.values():
             p = count / total_inferences
             if p > 0: entropy -= p * math.log(p)
-        
+
         max_entropy = math.log(len(JudicialInference.__members__))
         E_entropy = entropy / max_entropy if max_entropy > 0 else 0
         return clamp(E_entropy, 0.0, 1.0)
-    
+
     def precedent_friction(self) -> float:
         if len(self.state.case_history) < 2: return 0.0
         conflict_points = 0.0
         narrowing_inferences = [JudicialInference.PRECEDENT_NARROWED, JudicialInference.PRECEDENT_DISTINGUISHED]
-        
+
         for i, case in enumerate(self.state.case_history[1:], 1):
             prev_case = self.state.case_history[i - 1]
             if any(inv in narrowing_inferences for inv in case.events_inference):
                 prev_main = self.get_main_inference(prev_case)
                 curr_main = self.get_main_inference(case)
                 conflict_points += 0.15 if prev_main != curr_main else 0.05
-        
+
         E_conflict = conflict_points / len(self.state.case_history)
         E_conflict *= (1.0 + self.state.drift_vector.get("art16_lgt_expansion", 0.0))
         return clamp(E_conflict, 0.0, 1.0)
-    
+
     def get_main_inference(self, case: CaseNode) -> JudicialInference:
         priority = [
             JudicialInference.CONTRAPRESTACION_CORRELATION, JudicialInference.SIMULATION_DETECTED,
@@ -213,7 +214,7 @@ class PhaseTransitionDetector:
         self.energy_history: List[float] = []
         self.regime_history: List[Regime] = []
         self.current_stability_duration = 0
-    
+
     def update_stability(self, current_regime: Regime):
         if not self.regime_history:
             self.regime_history.append(current_regime)
@@ -223,20 +224,20 @@ class PhaseTransitionDetector:
         else:
             self.regime_history.append(current_regime)
             self.current_stability_duration = 1
-            
+
     def detect(self, current_tick: int) -> PhaseTransition:
         E_total = self.engine.compute(current_tick).E_total
         self.energy_history.append(E_total)
-        
+
         if len(self.energy_history) < 3:
             return PhaseTransition.NONE
-        
+
         dE_dt = self.energy_history[-1] - self.energy_history[-3]
-        
+
         if dE_dt > 0.15: return PhaseTransition.CRITICAL
         elif dE_dt > 0.08: return PhaseTransition.WARNING
         else: return PhaseTransition.NONE
-    
+
     def predict_shift(self) -> Dict[str, float]:
         drift = self.engine.state.drift_vector
         likelihood = {
@@ -248,9 +249,9 @@ class PhaseTransitionDetector:
         return {k: round(v / total, 4) for k, v in likelihood.items()} if total > 0 else likelihood
 
 class AttractorType(Enum):
-    CORRELATION_REGIME = "correlation_regime"      
-    SIMULATION_REGIME = "simulation_regime"        
-    DONATION_PROTECTION = "donation_protection"    
+    CORRELATION_REGIME = "correlation_regime"
+    SIMULATION_REGIME = "simulation_regime"
+    DONATION_PROTECTION = "donation_protection"
 
 class AttractorMapping:
     def identify(self, state: JurisprudenceState) -> Tuple[AttractorType, float]:
@@ -277,10 +278,10 @@ class JuridicalPhysicsEngine:
         self.transition_detector = PhaseTransitionDetector(self.energy_engine)
         self.attractor_mapper = AttractorMapping()
         self.current_tick = 0
-        
+
     def inject_shock(self, shock: ExternalShock):
         self.shock_model.inject_shock(shock)
-    
+
     def analyze(self) -> Dict:
         self.current_tick += 1
         energy = self.energy_engine.compute(self.current_tick)
@@ -289,7 +290,7 @@ class JuridicalPhysicsEngine:
         transition = self.transition_detector.detect(self.current_tick)
         shift_likelihood = self.transition_detector.predict_shift()
         attractor, strength = self.attractor_mapper.identify(self.state)
-        
+
         return {
             "energy": energy.__dict__,
             "regime": regime.value,
@@ -302,7 +303,7 @@ class JuridicalPhysicsEngine:
             "drift_vector": {k: round(v, 4) for k, v in self.state.drift_vector.items()},
             "case_count": len(self.state.case_history)
         }
-    
+
     def classify_regime(self, E: float) -> Regime:
         if E < 0.3: return Regime.STABLE_FORMALISM
         elif E < 0.6: return Regime.INTERPRETATIVE_DRIFT
@@ -316,10 +317,10 @@ class JuridicalPhysicsEngine:
 if __name__ == "__main__":
     import json
     from datetime import datetime
-    
+
     # Simulating the 10 cases injected previously (Mock objects to satisfy internal structure)
     state = JurisprudenceState()
-    
+
     # Pre-populate state to simulate the outcome of the 10 real cases
     state.threshold_map = {
         Jurisdiction.AEAT: 0.71, Jurisdiction.TEAC: 0.77, Jurisdiction.TSJ_CAT: 0.65,
@@ -330,29 +331,29 @@ if __name__ == "__main__":
         "art13_lgt_strength": 0.08, "art16_lgt_expansion": 0.15,
         "donation_skepticism": 0.22, "burden_shift_intensity": 0.18
     }
-    
+
     # Adding mock cases to satisfy the counts
     for i in range(10):
-        c = CaseNode(f"CASE-{i}", Jurisdiction.TS, datetime.now(), "sentencia", 
+        c = CaseNode(f"CASE-{i}", Jurisdiction.TS, datetime.now(), "sentencia",
                      events_economic=[EconomicEvent.PAYMENT_FIXED, EconomicEvent.HIGH_HOMOGENEITY],
                      events_inference=[JudicialInference.CONTRAPRESTACION_CORRELATION],
                      events_system=[])
         state.case_history.append(c)
 
     physics = JuridicalPhysicsEngine(state)
-    
+
     print("=========================================================================")
     print("  FAS v14 : JURIDICAL ENERGY ENGINE (JEF v1) + EXTERNAL SHOCKS           ")
     print("=========================================================================\n")
-    
+
     print(">>> TICK 10: BASE STATE (Interpretative Drift)")
     print(json.dumps(physics.analyze(), indent=2))
-    
+
     print("\n" + "-"*73 + "\n")
-    
+
     print(">>> TICK 11: SHOCK INJECTION (TJUE rules against AEAT systemic reclassifications)")
     shock = ExternalShock(ShockType.TJUE_PREJUDICIAL, magnitude=0.85, target_jurisdictions=[Jurisdiction.TS, Jurisdiction.TEAC], timestamp=physics.current_tick)
     physics.inject_shock(shock)
-    
+
     print(json.dumps(physics.analyze(), indent=2))
     print("\n=========================================================================")

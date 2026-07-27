@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 cat_id: "purge-zombie-branches"
 cat_type: "script"
@@ -10,8 +11,6 @@ Purges zombie branches that have been merged or are abandoned.
 """
 
 import logging
-
-
 import re
 import subprocess
 

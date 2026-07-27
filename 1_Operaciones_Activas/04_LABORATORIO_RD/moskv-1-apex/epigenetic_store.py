@@ -1,8 +1,8 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 import sqlite3
 import hashlib
 import json
-import os
 
 DB_PATH = "swarm_os.sqlite"
 
@@ -25,13 +25,13 @@ def inject_context(raw_payload: dict):
     """
     payload_str = json.dumps(raw_payload, sort_keys=True)
     hash_key = hashlib.sha256(payload_str.encode('utf-8')).hexdigest()
-    
+
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     c.execute('INSERT OR IGNORE INTO epigenetic_memory (hash_key, payload, methylated) VALUES (?, ?, 1)', (hash_key, payload_str))
     conn.commit()
     conn.close()
-    
+
     print(f"[EpigeneticStore] Context injected and silenced. TF: {hash_key[:8]}...")
     return hash_key
 
@@ -44,7 +44,7 @@ def invoke_demethylation(tf_hash: str):
     c.execute('SELECT payload FROM epigenetic_memory WHERE hash_key = ?', (tf_hash,))
     row = c.fetchone()
     conn.close()
-    
+
     if row:
         print(f"[EpigeneticStore] Memory demethylated for TF: {tf_hash[:8]}...")
         return json.loads(row[0])

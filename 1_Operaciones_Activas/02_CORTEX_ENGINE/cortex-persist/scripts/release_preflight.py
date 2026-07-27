@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 """
 cat_id: release-preflight
@@ -10,8 +11,6 @@ exergy_tier: P2
 
 
 import logging
-
-
 import sys
 import tarfile
 import zipfile

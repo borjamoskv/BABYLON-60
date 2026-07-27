@@ -1,7 +1,7 @@
+# C5-REAL EXERGY CERTIFIED
 # api/webhook_handler.py
 import stripe
 import os
-import json
 from fastapi import APIRouter, Request, HTTPException
 from api.database import (
     get_db, upgrade_user_tier,
@@ -53,7 +53,7 @@ async def stripe_webhook(request: Request):
             email = customer["email"]
             downgrade_user_tier(email, "free", TIER_LIMITS["free"], db)
             log_event(email, "subscription_cancelled", {}, db)
-            
+
     finally:
         db.close()
 

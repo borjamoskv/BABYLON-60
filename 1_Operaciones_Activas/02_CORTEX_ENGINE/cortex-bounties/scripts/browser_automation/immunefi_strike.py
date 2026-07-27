@@ -1,4 +1,4 @@
-import ast
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 IMMUNEFI STRIKE — Mac-Control-OMEGA CDP Substrate
@@ -206,38 +206,38 @@ async def audit_page(session: CDPSession):
     """Audit current page state."""
     url = await session.get_url()
     print(f"\n[AUDIT] Current URL: {url}")
-    
+
     inputs = await session.get_all_inputs()
     print(f"[AUDIT] Found {len(inputs)} input fields:")
     for inp in inputs[:20]:
         print(f"  [{inp['index']}] {inp['tag']} type={inp['type']} id='{inp['id']}' "
               f"placeholder='{inp['placeholder'][:40]}' aria='{inp['ariaLabel'][:40]}'")
-    
+
     # Get page title/h1
     h1 = await session.eval("document.querySelector('h1,h2')?.innerText")
     print(f"[AUDIT] Page heading: {h1}")
-    
+
     return inputs
 
 
 async def fill_immunefi_form(session: CDPSession):
     """Main form fill logic — adapts to discovered field structure."""
-    
+
     url = await session.get_url()
     print(f"\n[STRIKE] URL: {url}")
-    
+
     if "immunefi" not in url:
         print("[STRIKE] Navigating to Immunefi submission...")
         await session.navigate("https://bugs.immunefi.com/dashboard/new-submission")
         await asyncio.sleep(3)
-    
+
     await session.screenshot("/tmp/immunefi_01_initial.png")
-    
+
     # --- Audit all fields ---
     await audit_page(session)
-    
+
     # --- Strategy: Try known Immunefi selectors first, then fallback ---
-    
+
     # 1. Program selector (search for Exactly)
     print("\n[STRIKE] Step 1: Program selector")
     selectors_to_try = [
@@ -265,14 +265,14 @@ async def fill_immunefi_form(session: CDPSession):
             print(f"[STRIKE] Program selection: {clicked}")
             program_found = True
             break
-    
+
     if not program_found:
         print("[STRIKE] ⚠️  Program selector not found")
-    
+
     # Wait for form to expand
     await asyncio.sleep(3)
     await session.screenshot("/tmp/immunefi_02_program.png")
-    
+
     # 2. Title field
     print("\n[STRIKE] Step 2: Title field")
     await session.wait_for("input[name='title'], input[placeholder*='title' i]", timeout=10)
@@ -287,7 +287,7 @@ async def fill_immunefi_form(session: CDPSession):
         if exists:
             title_filled = await session.fill_field(sel, TITLE, "Title")
             break
-    
+
     if not title_filled:
         print("[STRIKE] ⚠️  Title field not found, attempting fallback")
         await session.eval(f"""
@@ -303,9 +303,9 @@ async def fill_immunefi_form(session: CDPSession):
                 }}
             }})()
         """)
-    
+
     await asyncio.sleep(1)
-    
+
     # 3. Severity selector
     print("\n[STRIKE] Step 3: Severity")
     severity_set = await session.eval("""
@@ -314,7 +314,7 @@ async def fill_immunefi_form(session: CDPSession):
             const btns = Array.from(document.querySelectorAll('button'));
             const high = btns.find(el => el.textContent.trim() === 'High');
             if (high) { high.click(); return 'button:High'; }
-            
+
             // Try select element
             const sel = document.querySelector('select[name*="severity"], select[aria-label*="severity" i]');
             if (sel) {
@@ -322,18 +322,18 @@ async def fill_immunefi_form(session: CDPSession):
                 sel.dispatchEvent(new Event('change', {bubbles: true}));
                 return 'select:High';
             }
-            
+
             // Try labels/cards
             const labels = Array.from(document.querySelectorAll('label, div[role="radio"], div[role="option"]'));
             const targetLabel = labels.find(el => el.textContent.trim() === 'High');
             if (targetLabel) { targetLabel.click(); return 'label:High'; }
-            
+
             return null;
         })()
     """)
     print(f"[STRIKE] Severity: {severity_set}")
     await asyncio.sleep(1)
-    
+
     # 4. Description / Summary textarea
     print("\n[STRIKE] Step 4: Description/Summary")
     escaped_summary = SUMMARY.replace("\\", "\\\\").replace("`", "\\`").replace("${", "\\${").replace("\n", "\\n")
@@ -366,7 +366,7 @@ async def fill_immunefi_form(session: CDPSession):
     """)
     print(f"[STRIKE] Description: {desc_set}")
     await asyncio.sleep(1)
-    
+
     # 5. Steps / PoC textarea (second textarea)
     print("\n[STRIKE] Step 5: Steps to Reproduce")
     escaped_steps = STEPS.replace("\\", "\\\\").replace("`", "\\`").replace("${", "\\${").replace("\n", "\\n")
@@ -388,7 +388,7 @@ async def fill_immunefi_form(session: CDPSession):
     """)
     print(f"[STRIKE] Steps: {steps_set}")
     await asyncio.sleep(1)
-    
+
     # 6. Wallet address field
     print("\n[STRIKE] Step 6: Wallet/Payout address")
     wallet_set = await session.eval(f"""
@@ -421,23 +421,23 @@ async def fill_immunefi_form(session: CDPSession):
     """)
     print(f"[STRIKE] Wallet: {wallet_set}")
     await asyncio.sleep(1)
-    
+
     # Final screenshot
     await session.screenshot("/tmp/immunefi_03_filled.png")
-    
+
     # Re-audit to confirm values
     print("\n[STRIKE] ═══ FINAL STATE AUDIT ═══")
     final_inputs = await session.get_all_inputs()
     for inp in final_inputs[:15]:
         if inp.get('value'):
             print(f"  [{inp['index']}] {inp['tag']} '{inp['placeholder'][:30]}' → value: '{inp['value']}'")
-    
+
     print("\n[STRIKE] Screenshots saved:")
     print("  /tmp/immunefi_01_initial.png")
     print("  /tmp/immunefi_02_program.png")
     print("  /tmp/immunefi_03_filled.png")
     print("\n[STRIKE] ⚠️  FORM FILLED — NOT SUBMITTED (awaiting sovereign confirmation)")
-    
+
     return True
 
 
@@ -449,7 +449,7 @@ async def main():
     print("  Target: Exactly Protocol VerifiedMarket Bypass")
     print(f"  Wallet: {WALLET}")
     print("═" * 60)
-    
+
     # Find Chrome tabs
     tabs = []
     for port in [9229, 9222, 9223, 9224]:
@@ -460,16 +460,16 @@ async def main():
             tabs = t
             print(f"[CDP] Port {port}: {len(t)} tabs")
             break
-    
+
     if not tabs:
         print("[CDP] ❌ No Chrome debug session. Open Chrome with:")
         print("  open -a 'Google Chrome' --args --remote-debugging-port=9229")
         return
-    
+
     print("[CDP] Tabs found:")
     for t in tabs[:10]:
         print(f"  → {t.get('url', '')[:80]}")
-    
+
     # Find Immunefi tab or use first available
     target = find_immunefi_tab(tabs)
     if target:
@@ -477,19 +477,19 @@ async def main():
     else:
         target = tabs[0]
         print(f"\n[CDP] Using tab: {target.get('url', '')[:60]}")
-    
+
     ws_url = target.get("webSocketDebuggerUrl")
     if not ws_url:
         print("[CDP] ❌ No WebSocket URL for tab")
         return
-    
+
     session = CDPSession(ws_url)
     await session.connect()
-    
+
     success = await fill_immunefi_form(session)
-    
+
     await session.close()
-    
+
     print("\n" + "═" * 60)
     print(f"  STATUS: {'✅ C5-REAL FORM FILLED' if success else '⚠️  PARTIAL'}")
     print("═" * 60)

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 C5-REAL OSINT Validator for Substack Author Dataset (BABYLON-60)
@@ -107,7 +108,7 @@ def validate_dataset():
         sys.exit(1)
     else:
         print("✅ ALL RECORDS VERIFIED C5-REAL — ZERO INFERENCE VIOLATIONS DETECTED")
-        print(f"   Validated 8/8 records cleanly against OSINT schema.")
+        print("   Validated 8/8 records cleanly against OSINT schema.")
         print("=" * 70)
         sys.exit(0)
 

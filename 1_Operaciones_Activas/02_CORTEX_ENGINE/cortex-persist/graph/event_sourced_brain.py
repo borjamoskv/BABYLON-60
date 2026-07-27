@@ -1,8 +1,9 @@
+# C5-REAL EXERGY CERTIFIED
 # Cortex-Persist :: Event-Sourced Brain Simulator (C4-SIM)
 # Deterministic replayable connectome execution model
 
-import logging
 import json
+import logging
 import time
 from dataclasses import asdict, dataclass
 from typing import Any

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import os
 import time
 import datetime
@@ -16,7 +17,7 @@ class CortexBlogHandler(FileSystemEventHandler):
     def on_created(self, event):
         if event.is_directory:
             return
-            
+
         filepath = Path(event.src_path)
         if filepath.suffix.lower() in ['.jpg', '.jpeg', '.png', '.gif', '.webp']:
             self.process_image(filepath)
@@ -26,18 +27,18 @@ class CortexBlogHandler(FileSystemEventHandler):
         # Purga de recursividad: ignorar webp ya procesados
         if image_path.suffix.lower() == '.webp' and image_path.stem.startswith(date_str):
             return
-            
+
         # 1. Espera termodinámica (asegurar que el FS termine el I/O)
         time.sleep(0.5)
-        
+
         title = image_path.stem.replace('-', ' ').replace('_', ' ').title()
         date_str = datetime.datetime.now().strftime("%Y-%m-%d")
         slug = f"{date_str}-{image_path.stem}"
-        
+
         # 2. Compresión Exergética (Conversión a WebP)
         webp_name = f"{slug}.webp"
         webp_path = IMAGES_DIR / webp_name
-        
+
         try:
             if image_path.suffix.lower() != '.webp':
                 with Image.open(image_path) as img:
@@ -67,7 +68,7 @@ url: {REMOTE_URL}/{slug}
             with open(entry_path, "w") as f:
                 f.write(content)
             print(f"[{datetime.datetime.now().isoformat()}] C5-REAL: Entry forjado -> {entry_path.name}")
-        
+
         # 4. Mutación Autónoma del Ledger (R4 Git Sentinel intrínseco)
         self.commit_to_ledger(slug)
 
@@ -82,15 +83,15 @@ url: {REMOTE_URL}/{slug}
 def run_daemon():
     IMAGES_DIR.mkdir(parents=True, exist_ok=True)
     ENTRIES_DIR.mkdir(parents=True, exist_ok=True)
-    
-    print(f"C5-REAL Cortex Daemon Init (V2 - OMEGA). Operador: borjamoskv.")
-    print(f"Features: FSEvents Watchdog | Compresión WebP | Git Autómata")
-    
+
+    print("C5-REAL Cortex Daemon Init (V2 - OMEGA). Operador: borjamoskv.")
+    print("Features: FSEvents Watchdog | Compresión WebP | Git Autómata")
+
     event_handler = CortexBlogHandler()
     observer = Observer()
     observer.schedule(event_handler, str(IMAGES_DIR), recursive=False)
     observer.start()
-    
+
     try:
         while True:
             time.sleep(1)

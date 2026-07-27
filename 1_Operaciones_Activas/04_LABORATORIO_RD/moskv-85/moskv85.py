@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # MOSKV-85 SYSTEM KERNEL
 # Author: Borja Moskv (borjamoskv)
 # Reality Level: C5-REAL
@@ -26,7 +27,7 @@ class Moskv85Interpreter:
         self.stack = []
         self.running = True
         self.db_path = db_path
-        
+
         if shared_state is not None:
             self.shared_state = shared_state
             self.memory = shared_state['memory']
@@ -65,10 +66,10 @@ class Moskv85Interpreter:
         cursor.execute("INSERT INTO proposals (filepath, data) VALUES (?, ?);", (filepath, data))
         proposal_id = cursor.lastrowid
         conn.commit()
-        
+
         votes = []
         lock = threading.Lock()
-        
+
         def validator(v_id):
             try:
                 v_conn = sqlite3.connect(self.db_path, timeout=5.0)
@@ -87,7 +88,7 @@ class Moskv85Interpreter:
         threads = [threading.Thread(target=validator, args=(i,)) for i in range(3)]
         for t in threads: t.start()
         for t in threads: t.join()
-        
+
         if len(votes) >= 3:
             try:
                 with open(filepath, "w", encoding="utf-8") as f:
@@ -120,14 +121,14 @@ class Moskv85Interpreter:
         n = len(raw_code)
         while i < n:
             c = raw_code[i]
-            
+
             # Comments
             if c == "`":
                 while i < n and raw_code[i] != "\n":
                     i += 1
                 i += 1
                 continue
-                
+
             # String literals
             if c == "\\":
                 i += 1
@@ -138,11 +139,11 @@ class Moskv85Interpreter:
                 ast.append("".join(str_chars))
                 i += 1
                 continue
-                
+
             if c not in ALPHABET_SET:
                 i += 1
                 continue
-                
+
             # Block parsing
             if c == "[":
                 depth = 1
@@ -159,7 +160,7 @@ class Moskv85Interpreter:
                 ast.append(sub_ast)
                 i = idx + 1
                 continue
-                
+
             # 32-bit literal
             if c == "#":
                 lit_chars = raw_code[i+1 : i+6]
@@ -168,7 +169,7 @@ class Moskv85Interpreter:
                 ast.append(val)
                 i += 6
                 continue
-                
+
             # 64-bit literal
             if c == "$":
                 lit_chars = raw_code[i+1 : i+11]
@@ -177,24 +178,24 @@ class Moskv85Interpreter:
                 ast.append(val)
                 i += 11
                 continue
-                
+
             # Direct digits 0-9
             if c in "0123456789":
                 ast.append(int(c))
                 i += 1
                 continue
-                
+
             # Normal opcode
             ast.append(c)
             i += 1
-            
+
         return self.optimize_ast(ast)
 
     def optimize_ast(self, ast):
         optimized = []
         i = 0
         n = len(ast)
-        
+
         BINARY_OPS = {"+", "-", "*", "/", "%", "^", "=", "a", "b", "q", "G", "L", "M", "N"}
         UNARY_OPS = {"!", "A", "D", "E", "I", "J", "S"}
 
@@ -204,11 +205,11 @@ class Moskv85Interpreter:
                 optimized.append(self.optimize_ast(node))
                 i += 1
                 continue
-            
+
             # Constant folding for binary operations
-            if (node in BINARY_OPS 
-                    and len(optimized) >= 2 
-                    and isinstance(optimized[-2], int) 
+            if (node in BINARY_OPS
+                    and len(optimized) >= 2
+                    and isinstance(optimized[-2], int)
                     and isinstance(optimized[-1], int)):
                 b = optimized.pop()
                 a = optimized.pop()
@@ -228,10 +229,10 @@ class Moskv85Interpreter:
                 elif node == "N": optimized.append(min(a, b))
                 i += 1
                 continue
-                
+
             # Constant folding for unary operations
-            if (node in UNARY_OPS 
-                    and len(optimized) >= 1 
+            if (node in UNARY_OPS
+                    and len(optimized) >= 1
                     and isinstance(optimized[-1], int)):
                 val = optimized.pop()
                 if node == "!": optimized.append(~val)
@@ -243,7 +244,7 @@ class Moskv85Interpreter:
                 elif node == "S": optimized.append(-1 if val < 0 else (1 if val > 0 else 0))
                 i += 1
                 continue
-                
+
             optimized.append(node)
             i += 1
         return optimized
@@ -256,7 +257,7 @@ class Moskv85Interpreter:
         for node in ast:
             if not self.running:
                 break
-            
+
             if isinstance(node, int):
                 self.push(node)
             elif isinstance(node, list):
@@ -422,7 +423,7 @@ class Moskv85Interpreter:
             cond_block = self.pop()
             if not isinstance(cond_block, list) or not isinstance(body_block, list):
                 raise TypeError("While loop requires AST execution blocks")
-            
+
             while self.running:
                 self.execute_ast(cond_block)
                 if not self.running:
@@ -544,7 +545,7 @@ class Moskv85Interpreter:
             self.push(val)
         elif inst == "V":
             self.push(85)
-            
+
         # File I/O (BFT Protected)
         elif inst == "W":
             data = self.pop()
@@ -585,7 +586,7 @@ class Moskv85Interpreter:
             try:
                 with open(filepath, "r", encoding="utf-8") as f:
                     self.push(f.read())
-            except Exception as e:
+            except Exception:
                 self.push(0)
 
 
@@ -635,5 +636,5 @@ if __name__ == "__main__":
     if args.debug:
         sys.stderr.write(f"\n[FINAL DEBUG] Stack: {interpreter.stack}\n")
         sys.stderr.write(f"[FINAL DEBUG] Memory: {interpreter.memory}\n")
-        
+
     sys.exit(0)

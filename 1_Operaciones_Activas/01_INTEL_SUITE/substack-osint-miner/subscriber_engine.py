@@ -2,13 +2,11 @@
 import csv
 import json
 import os
-import sys
 import time
 import sqlite3
 from datetime import datetime
 from typing import Any, Optional
 from rich.console import Console
-from rich.table import Table
 
 console = Console()
 
@@ -329,7 +327,7 @@ class SubstackSubscriberEngine:
 
         with open(output_md, 'w', encoding='utf-8') as f:
             f.write("# C5-REAL OSINT SUBSTACK SUBSCRIBER REPORT\n")
-            f.write(f"*Author: Borja Moskv (borjamoskv)*  \n")
+            f.write("*Author: Borja Moskv (borjamoskv)*  \n")
             f.write(f"*Crystallized: {datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')}*  \n")
             f.write(f"*File Source:* `{file_path}`  \n\n")
 
@@ -522,7 +520,7 @@ class SubstackSubscriberEngine:
         with open(output_md, 'w', encoding='utf-8') as f:
             f.write("# REPORT: Sincronización y Auditoría del Substack Vault\n")
             f.write(f"*Crystallized: {datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')}*  \n")
-            f.write(f"*Author: Borja Moskv (borjamoskv)*  \n\n")
+            f.write("*Author: Borja Moskv (borjamoskv)*  \n\n")
 
             f.write("## 1. Métricas de Transacción Ledger (C5-REAL)\n")
             f.write("| Parámetro | Valor |\n")

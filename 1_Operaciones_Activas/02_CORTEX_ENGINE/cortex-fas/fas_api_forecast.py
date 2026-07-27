@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 FAS v16 — Doctrinal Weather Forecast API
@@ -9,12 +10,12 @@ Exposes the FAS engine via a REST API to query litigation temperature and doctri
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from typing import List, Dict, Optional
+from typing import List, Dict
 import uvicorn
 from datetime import datetime
 
 from fas_phase2_core import (
-    JurisprudenceState, CaseNode, Jurisdiction, EconomicEvent, JudicialInference
+    JurisprudenceState, CaseNode, Jurisdiction, EconomicEvent
 )
 from fas_energy_physics import JuridicalPhysicsEngine
 from fas_lyapunov_chaos import LyapunovProxyEngine
@@ -53,7 +54,7 @@ async def analyze_structure(input_data: StructureInput):
                 parsed_events.append(EconomicEvent(e_str))
             except ValueError:
                 pass # Ignore invalid events for pure simulation
-        
+
         # 2. Simulate the structure being evaluated as a potential case
         # (This calculates how this specific structure would stress the current thresholds)
         temp_case = CaseNode(
@@ -65,18 +66,18 @@ async def analyze_structure(input_data: StructureInput):
             events_inference=[], # Left empty, physics engine will infer based on pressure
             events_system=[]
         )
-        
+
         # We don't append it to history permanently, just check the state
         physics = JuridicalPhysicsEngine(global_state)
         analysis = physics.analyze()
-        
+
         # Risk surface calculation based on drift
         risk_surface = {
             "reclassification_risk (art.13)": analysis["drift_vector"].get("art13_lgt_strength", 0.0),
             "simulation_risk (art.16)": analysis["drift_vector"].get("art16_lgt_expansion", 0.0),
             "burden_shift_risk": analysis["drift_vector"].get("burden_shift_intensity", 0.0),
         }
-        
+
         return ForecastResponse(
             regime=analysis["regime"],
             temperature_index=analysis["energy"]["E_total"],
@@ -106,7 +107,7 @@ async def analyze_chaos(input_data: LyapunovInput):
                 parsed_events.append(EconomicEvent(e_str))
             except ValueError:
                 pass
-                
+
         eps_case = CaseNode(
             case_id=f"EPSILON-{datetime.now().timestamp()}",
             jurisdiction=Jurisdiction.AEAT,
@@ -116,10 +117,10 @@ async def analyze_chaos(input_data: LyapunovInput):
             events_inference=[],
             events_system=[]
         )
-        
+
         lyapunov_engine = LyapunovProxyEngine(global_state)
         res = lyapunov_engine.analyze_chaos([eps_case])
-        
+
         return LyapunovResponse(
             lyapunov_lambda=res["lyapunov_lambda"],
             regime=res["regime"],

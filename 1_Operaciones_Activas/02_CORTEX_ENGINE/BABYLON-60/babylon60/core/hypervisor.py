@@ -8,13 +8,10 @@ Enforces INV_C5_18 (Zero-Worktree Swarm Scaling) & INV_BFT_02 (Single-Writer BFT
 from __future__ import annotations
 
 import asyncio
-import hashlib
-import json
 import logging
 import time
 from dataclasses import dataclass, field
-from pathlib import Path
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, Optional
 
 from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
 

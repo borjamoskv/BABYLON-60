@@ -16,10 +16,8 @@ Proof: { Base: SHA256(DiskState), Range: [0, 1], Confidence: C5 }
 
 import os
 import sys
-import hashlib
 import ast
 import subprocess
-from typing import Callable, Any, Dict
 
 # Invariant Definition (The Contract)
 # -----------------------------------

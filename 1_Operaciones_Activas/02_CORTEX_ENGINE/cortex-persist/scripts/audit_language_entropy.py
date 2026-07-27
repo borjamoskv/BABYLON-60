@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 """
 cat_id: audit-language-entropy
@@ -8,9 +9,9 @@ owner: borjamoskv
 exergy_tier: P2
 """
 
-import logging
 import ast
 import json
+import logging
 import os
 import re
 import sys

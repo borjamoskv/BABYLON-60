@@ -5,7 +5,7 @@ axioms.py (C5-REAL Certified)
 Definición de Tipos Algebráicos de Datos (ADTs) para el control exhaustivo de estados.
 Implementación directa de la Invariante Ω1 del Glosario Soberano.
 """
-from typing import Literal, Union, NamedTuple, Tuple
+from typing import Union, NamedTuple
 
 # Tipo Producto (AND): Estructura binaria rígida de transacciones
 class C5StateVector(NamedTuple):

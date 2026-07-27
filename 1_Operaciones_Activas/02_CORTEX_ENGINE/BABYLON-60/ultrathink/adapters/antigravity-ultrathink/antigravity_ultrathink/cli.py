@@ -132,7 +132,7 @@ def main():
     if dry_run:
         print("\n--- DRY RUN: Generated prompt ---")
         print(prompt)
-        print(f"\n--- Routing result (JSON) ---")
+        print("\n--- Routing result (JSON) ---")
         print(json.dumps(result.to_dict(), indent=2, ensure_ascii=False))
         return
 
@@ -150,7 +150,7 @@ def main():
 
         runner = InMemoryRunner(agent=agent, app_name="ultrathink")
 
-        print(f"\033[94m[MOSKV-1 APEX]\033[0m Launching Antigravity worker with ULTRATHINK P0...")
+        print("\033[94m[MOSKV-1 APEX]\033[0m Launching Antigravity worker with ULTRATHINK P0...")
         session = runner.session_service.create_session(
             app_name="ultrathink",
             user_id="moskv-oracle",

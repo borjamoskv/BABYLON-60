@@ -1,10 +1,8 @@
+# C5-REAL EXERGY CERTIFIED
 import json
 import os
-import re
 import hashlib
 import math
-from collections import Counter
-from datetime import datetime
 
 JSON_PATH = "/Users/borjafernandezangulo/.gemini/antigravity-ide/brain/108c0350-3a5f-40f4-8b10-3fcc4383ab9c/channel_videos.json"
 REPORT_DIR = "/Users/borjafernandezangulo/.gemini/antigravity-ide/brain/108c0350-3a5f-40f4-8b10-3fcc4383ab9c"
@@ -18,14 +16,14 @@ def calculate_gelabp_apex(video: dict) -> dict:
     title = video.get("title", "")
     desc = video.get("description", "") or ""
     date_str = video.get("upload_date", "")
-    
+
     # G (Gradient): View momentum relative to baseline 50k
     G = min(views / 50000.0, 5.0) if views > 0 else 0.1
     # L (Leverage): Mid-roll optimization (>10 mins = high leverage, >20 mins = double leverage)
     L = 2.5 if duration >= 1200 else (2.0 if duration >= 600 else 1.0)
     # A (Autoloop): Velocity factor (videos uploaded per day / frequency)
     A = 1.8
-    
+
     # B (Bottleneck): Comprehensive Multi-Axis TOS Violation Categories
     categories = {
         "Acoso_Objetivo": ["ACOSADOR", "OBSESIÓN", "ACOSANDO", "FONSI", "PABLO IGLESIAS", "ZAPATERO", "QUESADA", "SEGARRA", "XOKAS", "EXPÓSITO", "GARTE", "RIVERSS"],
@@ -33,7 +31,7 @@ def calculate_gelabp_apex(video: dict) -> dict:
         "Violencia_Descalificacion": ["ATACARON", "AGREDIR", "VIOLENTOS", "VIOLENCIA", "HUMILLAR", "HUMILLARON", "HUMILLA", "RIDÍCULO", "RIDICULO", "DESOKUPA", "MAMPORRERO", "P*RVERTIDOS"],
         "Clickbait_Amigdala": ["ADMITE", "COLAPSA", "DESTRUYE", "CONFIESA", "BULO", "LLORADERAS", "VERGÜENZA", "VERGUENZA", "RINDE", "MORTAL", "CEBO"]
     }
-    
+
     full_text = f"{title} {desc}".upper()
     cat_hits = {}
     total_hits = 0
@@ -42,14 +40,14 @@ def calculate_gelabp_apex(video: dict) -> dict:
         if matched:
             cat_hits[cat] = matched
             total_hits += len(matched)
-            
+
     B = max(1.0 - (total_hits * 0.12), 0.1)
     P = 0.75 if "!" in title or "?" in title else 1.0
     E = max(math.log(views + 1) / 10.0, 1.0) if views > 0 else 1.0
-    
+
     raw_score = (G * L * A * B * P) / E
     scaled_score = min(raw_score * 200.0, 1000.0)
-    
+
     return {
         "score": round(scaled_score, 2),
         "G": round(G, 2),
@@ -71,14 +69,14 @@ def main():
                         videos.append(json.loads(line))
                     except Exception:
                         pass
-                        
+
     total_vids = len(videos)
     total_views = sum(v.get("view_count", 0) or 0 for v in videos)
-    
+
     dossier_patreon = []
     dossier_advertisers = []
     dossier_copyright = []
-    
+
     for v in videos:
         vid_id = v.get("id")
         title = v.get("title", "")
@@ -86,10 +84,10 @@ def main():
         views = v.get("view_count", 0) or 0
         dur = v.get("duration", 0) or 0
         date_str = v.get("upload_date", "N/A")
-        
+
         gelabp = calculate_gelabp_apex(v)
         hash_receipt = sha256_text(f"{vid_id}:{title}:{views}:{date_str}")
-        
+
         v_entry = {
             "id": vid_id,
             "title": title,
@@ -100,15 +98,15 @@ def main():
             "hash": hash_receipt,
             "url": f"https://www.youtube.com/watch?v={vid_id}"
         }
-        
+
         # Patreon: Target Harassment & Bullying (Hits in Acoso_Objetivo or Violencia_Descalificacion)
         if "Acoso_Objetivo" in gelabp["cat_hits"] or "Violencia_Descalificacion" in gelabp["cat_hits"]:
             dossier_patreon.append(v_entry)
-            
+
         # Advertisers: Low B factor (High friction / Hate speech indicators)
         if gelabp["B"] <= 0.64:
             dossier_advertisers.append(v_entry)
-            
+
         # Copyright: Long format (>15 min) commentary on media/TV/streamers
         if dur >= 900 and any(kw in title.upper() for kw in ["DIRECTO", "TV", "XOKAS", "IGLESIAS", "ZAPATERO", "SÁNCHEZ", "NOLAN", "FERRÁN TORRES", "MESSI", "BURGER KING", "SOTO IVARS"]):
             dossier_copyright.append(v_entry)

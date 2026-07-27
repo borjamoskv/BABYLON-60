@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 """
 cat_id: test-deployment
@@ -8,8 +9,8 @@ owner: borjamoskv
 exergy_tier: P2
 """
 
-import logging
 import asyncio
+import logging
 
 from babylon60.engine.core.cortex_engine import CortexEngine
 from babylon60.extensions.llm import _telemetry as llm_telemetry

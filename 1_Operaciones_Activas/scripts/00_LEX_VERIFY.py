@@ -9,7 +9,7 @@ Invariante Ω01 - EpistemicHalt ante Deriva Semántica."""
 import sys
 import re
 from pathlib import Path
-from typing import Dict, Set
+from typing import Set
 
 # Patrones prohibidos del Green Theater (Filtrado de Anergía Semántica)
 RE_ANERGY_PATTERNS = re.compile(

@@ -71,7 +71,7 @@ def fetch_feed(domain):
                         "content_tokens": clean_and_tokenize(title + " " + description + " " + (content_text or ""))
                     })
             return posts
-    except Exception as e:
+    except Exception:
         # Algunos dominios pueden no tener RSS activo o fallar
         return []
 

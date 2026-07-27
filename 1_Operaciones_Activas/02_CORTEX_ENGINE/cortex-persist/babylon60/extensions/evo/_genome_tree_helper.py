@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 """Tree manipulation helper functions for StrategyGenome.
 
@@ -5,6 +6,7 @@ Reality Level: C5-REAL
 """
 
 from __future__ import annotations
+
 from typing import Any
 
 from babylon60.isa.builder import AgentOp

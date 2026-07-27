@@ -1,8 +1,7 @@
 # C5-REAL EXERGY CERTIFIED
 import asyncio
 import json
-import hashlib
-from typing import Dict, List, Optional, Set
+from typing import Dict, Optional, Set
 import nacl.signing
 import nacl.encoding
 

@@ -1,4 +1,4 @@
-import ast
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 IMMUNEFI K2 LENDING STRIKE — CDP Invisible Maestro
@@ -158,7 +158,7 @@ async def strike():
 
     # ─── STEP 1: Program Selection ────────────────────────────────
     print("[STRIKE] Step 1: Selecting K2 Lending program...")
-    
+
     # Try react-select input
     await session.eval("""
         (function() {

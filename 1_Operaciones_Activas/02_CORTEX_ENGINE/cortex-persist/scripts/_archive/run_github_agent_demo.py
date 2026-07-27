@@ -1,12 +1,13 @@
+# C5-REAL EXERGY CERTIFIED
 from __future__ import annotations
+
 #!/usr/bin/env python3
 """Run the BABYLON60 GitHubAgent end-to-end from the terminal."""
-
-import logging
 
 import argparse
 import asyncio
 import json
+import logging
 
 from babylon60.services.github_agent_demo import build_github_agent_payload, run_github_agent_demo
 

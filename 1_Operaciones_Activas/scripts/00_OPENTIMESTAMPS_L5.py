@@ -6,10 +6,8 @@ Módulo de Anclaje Inerte Universal L5.
 Vincula los Hashes de Fraude Bizantino a la capa de consenso inmutable
 de Bitcoin usando OpenTimestamps, asegurando entropía cero temporal.
 """
-import sys
 import hashlib
 import time
-from typing import Optional
 
 class OpenTimestampsAnchor:
     """Anclaje de sellado inercial para colapsos BFT."""
@@ -33,7 +31,7 @@ class OpenTimestampsAnchor:
         ots_receipt = hashlib.sha256(payload).hexdigest()
 
         print(f"[🔗 L5 ANCHOR] Recibo Bitcoin generado y verificado: {ots_receipt[:16]}.ots")
-        print(f"[🔗 L5 ANCHOR] El fraude es ahora un hecho cosmológico inalterable.")
+        print("[🔗 L5 ANCHOR] El fraude es ahora un hecho cosmológico inalterable.")
         return f"{ots_receipt}.ots"
 
 if __name__ == "__main__":

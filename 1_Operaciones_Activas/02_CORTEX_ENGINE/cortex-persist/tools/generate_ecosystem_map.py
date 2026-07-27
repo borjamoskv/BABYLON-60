@@ -1,4 +1,6 @@
+# C5-REAL EXERGY CERTIFIED
 from __future__ import annotations
+
 """
 cat_id: generate-ecosystem-map
 cat_type: script
@@ -8,11 +10,8 @@ owner: borjamoskv
 exergy_tier: P1
 """
 
-import logging
-
-
-
 import ast
+import logging
 import os
 import sqlite3
 from pathlib import Path

@@ -1,8 +1,6 @@
+# C5-REAL EXERGY CERTIFIED
 from typing import Optional, List, Any
-import asyncio
 import aiohttp
-import json
-from moskv_1.event_bus import EventBus, CortexEvent
 from moskv_1.event_bus import EventBus, CortexEvent
 
 class BrainRegion:
@@ -38,21 +36,21 @@ class BrainRegion:
             "prompt": prompt,
             "stream": False
         }
-        
+
         async with aiohttp.ClientSession() as session:
             try:
                 async with session.post(url, json=payload) as response:
                     if response.status != 200:
                         return "[ERROR] Inference Core Unreachable."
-                    
+
                     data = await response.json()
                     output = data.get("response", "")
-                    
+
                     # Socket-level syntactic validation (Anti-Slop Protocol)
                     slop_signatures = ["Here is", "Sure,", "I can help", "Let me know"]
                     if any(sig.lower() in output.lower() for sig in slop_signatures):
                         return "[QUARANTINE] Detected Green Theater (LLM Slop). Output suppressed."
-                        
+
                     return output
             except Exception as e:
                 return f"[ERROR] Local inference failed: {e}"

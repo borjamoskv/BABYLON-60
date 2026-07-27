@@ -2,7 +2,6 @@
 import os
 import json
 import urllib.request
-import math
 from sentence_transformers import SentenceTransformer
 import numpy as np
 from rich.console import Console

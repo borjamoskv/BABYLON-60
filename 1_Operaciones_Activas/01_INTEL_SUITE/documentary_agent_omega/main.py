@@ -11,7 +11,6 @@ from google import genai
 from google.genai import types
 from duckduckgo_search import DDGS
 from tqdm import tqdm
-import urllib.request
 
 # C5-REAL: Documentary Agent using Gemini Omni Flash
 # Autor: borjamoskv

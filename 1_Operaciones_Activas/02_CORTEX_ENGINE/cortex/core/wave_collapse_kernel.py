@@ -1,8 +1,6 @@
 # C5-REAL EXERGY CERTIFIED
 import asyncio
 from pathlib import Path
-from cortex.core.bft_swarm import BFTNode
-from cortex.core.lexicon import LexiconLedgerActor
 
 class DeterministicCollapseKernel:
     """
@@ -25,7 +23,7 @@ class DeterministicCollapseKernel:
         if self.is_collapsed:
             return
 
-        print(f"\n[🌀 WAVE COLLAPSE] EJECUTANDO INVARIANTE Φ8: COLAPSO DE ONDA PROBABILÍSTICA")
+        print("\n[🌀 WAVE COLLAPSE] EJECUTANDO INVARIANTE Φ8: COLAPSO DE ONDA PROBABILÍSTICA")
         print(f" Target: Destitución inmediata de {target_node_id} por disipación de anergía.")
 
         # Intercepción del bucle físico: Forzar inicio de View Change en todos los nodos honestos
@@ -39,4 +37,4 @@ class DeterministicCollapseKernel:
         await asyncio.gather(*vch_tasks)
         self.is_collapsed = True
 
-        print(f"[🛡️ REALIDAD FIJADA] Estado reconfigurado con entropía cero. Malla L4 estabilizada.")
+        print("[🛡️ REALIDAD FIJADA] Estado reconfigurado con entropía cero. Malla L4 estabilizada.")

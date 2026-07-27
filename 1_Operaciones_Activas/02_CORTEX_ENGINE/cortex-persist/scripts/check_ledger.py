@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 """
 cat_id: check-ledger
@@ -8,8 +9,8 @@ owner: borjamoskv
 exergy_tier: P2
 """
 
-import logging
 import asyncio
+import logging
 import os
 
 from babylon60.audit.ledger import EnterpriseAuditLedger

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """Lightweight runtime smoke for the restored BABYLON60 surfaces.
 This smoke intentionally checks a narrow but high-value slice:
@@ -10,7 +11,6 @@ This smoke intentionally checks a narrow but high-value slice:
 from __future__ import annotations
 
 import logging
-
 import subprocess
 import sys
 import tempfile

@@ -11,10 +11,8 @@ import time
 import os
 import json
 import urllib.parse
-import re
 from core import SubstackMiner
 from rss_engine import SubstackLiveIngestor
-from vector_engine import NarrativeEngine
 from neo4j_engine import Neo4jExporter
 from subscriber_engine import SubstackSubscriberEngine
 
@@ -198,7 +196,7 @@ def live_ingest(url, neo4j):
     os.makedirs("output", exist_ok=True)
     with open("output/network_map.json", "w", encoding="utf-8") as f:
         json.dump(miner.export_graph(), f, indent=2)
-    console.print(f"[bold green]✔ Cognition map saved to output/network_map.json[/bold green]")
+    console.print("[bold green]✔ Cognition map saved to output/network_map.json[/bold green]")
 
     # Automatically sync to local Neo4j if requested and available
     if neo4j:

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 FAS v23 — Bizkaia Wallet Forensics Batch Runner
@@ -38,7 +39,7 @@ RISK_VECTORS = [
 
 def fetch_json(url):
     req = urllib.request.Request(
-        url, 
+        url,
         headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)'}
     )
     with urllib.request.urlopen(req, timeout=10) as response:
@@ -67,7 +68,7 @@ def calculate_bizkaia_wealth_tax(balance_eur):
         (5537532.50, 0.0175),
         (float('inf'), 0.0200)
     ]
-    
+
     remaining = taxable_base
     total_tax = 0.0
     for limit, rate in scale:
@@ -87,20 +88,20 @@ def main():
             state = {"current_cycle": 0, "max_cycles": 100}
     else:
         state = {"current_cycle": 0, "max_cycles": 100}
-        
+
     start_cycle = state.get("current_cycle", 0)
     max_cycles = state.get("max_cycles", 100)
-    
+
     if start_cycle >= max_cycles:
-        print(f"INFO: All cycles already completed.")
+        print("INFO: All cycles already completed.")
         sys.exit(0)
-        
+
     print(f"[CORTEX] Running batch execution from cycle {start_cycle} to {max_cycles} (YOLO Mode)...")
-    
+
     # Cache price to avoid rate limits
     btc_price = get_btc_price_eur()
     print(f"[CORTEX] Cached BTC spot price: {btc_price} EUR")
-    
+
     # Pre-fetch pool of addresses from unconfirmed transactions
     pool_addresses = []
     try:
@@ -113,19 +114,19 @@ def main():
         pool_addresses = list(dict.fromkeys(pool_addresses))
     except Exception as e:
         print(f"[WARNING] Failed to fetch unconfirmed transactions: {e}")
-        
+
     if not pool_addresses:
         pool_addresses = [FALLBACK_ADDRESS]
-        
+
     print(f"[CORTEX] Discovered {len(pool_addresses)} active addresses in unconfirmed feed.")
-    
+
     # Main execution loop
     ledger_entries = []
     for cycle in range(start_cycle, max_cycles):
         # Select address
         addr = pool_addresses[cycle % len(pool_addresses)]
         source = "unconfirmed_tx_feed" if addr != FALLBACK_ADDRESS else "satoshi_fallback"
-        
+
         balance_btc = 0.0
         # Fetch balance with rate limit delay
         try:
@@ -137,20 +138,20 @@ def main():
             addr = FALLBACK_ADDRESS
             balance_btc = 107.22279017
             source = "static_offline_fallback"
-            
+
         balance_eur = round(balance_btc * btc_price, 2)
         taxable_base, wealth_tax = calculate_bizkaia_wealth_tax(balance_eur)
-        
+
         # Metadata
         random.seed(cycle + 100)
         taxpayer = random.choice(BASQUE_NAMES)
         risk = random.choice(RISK_VECTORS)
-        
+
         penalty = round(wealth_tax * 0.50, 2)
         interests = round(wealth_tax * 0.040625 * random.uniform(1, 2), 2)
         total_due = round(wealth_tax + penalty + interests, 2)
         jef_score = round(min((balance_eur / 10000000) * (1.5 if wealth_tax > 0 else 0.5), 1.0), 4)
-        
+
         case_data = {
             "cycle": cycle,
             "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -175,9 +176,9 @@ def main():
                 "jef_score": jef_score
             }
         }
-        
+
         ledger_entries.append(case_data)
-        
+
         # Inline print for verification
         print(f"Cycle {cycle}: Address={addr} Balance={balance_btc:.6f} BTC Value={balance_eur:.2f} EUR Tax={wealth_tax:.2f} EUR")
 
@@ -185,13 +186,13 @@ def main():
     with open(LEDGER_PATH, "a") as f:
         for entry in ledger_entries:
             f.write(json.dumps(entry) + "\n")
-            
+
     # Update final state
     state["current_cycle"] = max_cycles
     state["last_updated"] = datetime.now(timezone.utc).isoformat()
     with open(STATE_PATH, "w") as f:
         json.dump(state, f, indent=2)
-        
+
     print(f"[CORTEX] Batch completed successfully. State updated to cycle {max_cycles}.")
 
 if __name__ == "__main__":

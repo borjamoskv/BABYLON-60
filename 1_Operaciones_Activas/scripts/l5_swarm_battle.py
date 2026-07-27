@@ -12,15 +12,10 @@ Invariante INV_C5_10 - PyNaCl ED25519 Serialization Compliance.
 import os
 import sys
 import asyncio
-import json
-import hashlib
 import time
-import urllib.request
-import urllib.error
 import importlib.util
 from pathlib import Path
 from datetime import datetime, timezone
-from typing import Dict, List, Tuple, Optional
 import nacl.signing
 
 # Carga dinámica de 00_HAL_GUARD.py, 01_L5_ANCHOR.py y 52_OR_BFT_NODE.py desde ROOT_SCRIPTS

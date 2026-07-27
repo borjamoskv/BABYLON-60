@@ -2,7 +2,7 @@
 import sys
 import json
 import asyncio
-from typing import Dict, Any, Optional
+from typing import Optional
 
 class OpenRouterBFTNode:
     """Nodo validador asimétrico que consulta modelos de frontera sobre TCP crudo."""
@@ -90,7 +90,7 @@ class OpenRouterBFTNode:
                     if start_idx != -1 and end_idx != -1:
                         data = json.loads(json_body[start_idx:end_idx])
                         return data["choices"][0]["message"]["content"]
-            except Exception as e:
+            except Exception:
                 pass
         return None
 
@@ -106,7 +106,7 @@ class HeterogeneousBFTCoordinator:
 
     async def audit_task_completion(self, task_description: str, agent_evidence: str) -> bool:
         """Somete la aserción de cierre al escrutinio del quórum de pesos cruzados."""
-        sys.stdout.write(f"\\n[🛡️ L4 QUORUM] Iniciando escrutinio de aserción en malla heterogénea...\\n")
+        sys.stdout.write("\\n[🛡️ L4 QUORUM] Iniciando escrutinio de aserción en malla heterogénea...\\n")
 
         sys_prompt = "Actúa como un validador formal de sistemas. Responde únicamente 'TRUE' si la evidencia física demuestra inequívocamente que la tarea ha finalizado con éxito, o 'FALSE' si es una alucinación o carece de pruebas en disco."
         user_prompt = f"Tarea: {task_description}\\nEvidencia del Agente: {agent_evidence}"

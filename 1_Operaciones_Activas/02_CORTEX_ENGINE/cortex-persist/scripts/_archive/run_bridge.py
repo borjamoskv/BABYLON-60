@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 BABYLON60 v4.0 → NotebookLM Bridge — Standalone Runner
 Executes all notebook cells as a script. Generates:
@@ -5,10 +6,8 @@ Executes all notebook cells as a script. Generates:
   2. babylon60_notebooklm_digest.md (Master Digest for NotebookLM)
 """
 
-import logging
-
-
 import json
+import logging
 import sqlite3
 from datetime import datetime
 from pathlib import Path

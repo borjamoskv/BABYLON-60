@@ -1,5 +1,5 @@
 # C5-REAL EXERGY CERTIFIED
-from cortex.robinson import robinson_resolution, resolve, is_tautology, subsumes
+from cortex.core.robinson import robinson_resolution, resolve, is_tautology, subsumes
 
 def test_resolve():
     clause1 = frozenset({'P', 'Q'})

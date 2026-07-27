@@ -1,6 +1,4 @@
 # C5-REAL EXERGY CERTIFIED
-import sys
-import os
 import sqlite3
 from pathlib import Path
 import importlib.util
