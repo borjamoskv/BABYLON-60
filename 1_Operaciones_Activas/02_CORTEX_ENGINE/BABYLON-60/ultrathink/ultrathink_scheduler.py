@@ -8,11 +8,17 @@
 * Exposes Prometheus metrics on a configurable port (default 8000).
 """
 
+import sys
 import asyncio
 import os
 import logging
 import time
 from pathlib import Path
+
+# Auto-resolve parent BABYLON-60 directory into sys.path
+BABYLON_ROOT = Path(__file__).resolve().parents[1]
+if str(BABYLON_ROOT) not in sys.path:
+    sys.path.insert(0, str(BABYLON_ROOT))
 
 try:
     from prometheus_client import start_http_server, Gauge, Counter, Histogram
