@@ -154,7 +154,7 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
                 if os.path.exists(compiled_path):
                     os.remove(compiled_path)
                     # Sellar la purga en git
-                    subprocess.run(["git", "add", "cortex/compiled_theorem.py"], check=True)
+                    subprocess.run(["git", "add", "02_CORTEX_ENGINE/cortex/compiled_theorem.py"], check=True)
                     purge_staged = subprocess.run(["git", "diff", "--cached", "--quiet"])
                     if purge_staged.returncode != 0:
                         subprocess.run(

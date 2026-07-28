@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 """
 Demiurge Omega (Sortu Protocol): Ephemeral Skill Compiler for CORTEX.
@@ -90,24 +91,53 @@ class DemiurgeCompiler:
                     "code": generated_code,
                 }
 
-            # Phase 4-5: Ephemeral Execution (Sandbox)
-            sandbox_globals: dict[str, Any] = {"__builtins__": {}}
+            import subprocess
+            import tempfile
+            import os
+
+            wrapped_code = generated_code + "\n\nimport asyncio\nif 'execute_skill' in locals():\n    print(asyncio.run(execute_skill()))\nelse:\n    print('__MISSING_EXECUTE_SKILL__')\n"
+
+            with tempfile.NamedTemporaryFile("w", suffix=".py", delete=False) as f:
+                f.write(wrapped_code)
+                f_name = f.name
+
             try:
-                code_obj = compile(generated_code, "<demiurge_ast>", "exec")
-                # Security Justification: The Demiurge JIT compiler requires exec() for
-                # ephemeral skill generation (autopoiesis) within a controlled sandbox.
-                # All inputs are validated via ASTSandbox whitelist before execution.
-                exec(code_obj, sandbox_globals)  # nosec B102
-            except (ValueError, TypeError, OSError, KeyError) as e:
-                await self._record_ghost(intent, generated_code, f"Compilation Error: {e}", 0.15)
+                import signal
+                start_time = asyncio.get_event_loop().time()
+                proc = subprocess.Popen(
+                    [sys.executable, f_name],
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    text=True,
+                    env={},
+                    start_new_session=True
+                )
+                try:
+                    out, err = proc.communicate(timeout=10.0)
+                except subprocess.TimeoutExpired:
+                    os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+                    out, err = proc.communicate()
+                    raise TimeoutError("Execution exceeded 10.0s (Zombie Purged)")
+
+                execution_time = asyncio.get_event_loop().time() - start_time
+                if proc.returncode != 0:
+                    raise ValueError(err or out)
+                stdout = out.strip()
+            except (ValueError, TypeError, OSError, KeyError, subprocess.TimeoutExpired) as e:
+                await self._record_ghost(intent, generated_code, f"Execution Error: {e}", 0.15)
                 return {
                     "status": "FAILED",
-                    "reason": f"Compilation Error: {e}",
+                    "reason": f"Execution Error: {e}",
                     "utility": 0.15,
                     "code": generated_code,
                 }
+            finally:
+                try:
+                    os.remove(f_name)
+                except OSError:
+                    pass
 
-            if "execute_skill" not in sandbox_globals:
+            if stdout == "__MISSING_EXECUTE_SKILL__":
                 return {
                     "status": "FAILED",
                     "reason": "Missing execute_skill()",
@@ -116,11 +146,7 @@ class DemiurgeCompiler:
                 }
 
             # Phase 6: Run the skill
-            start_time = asyncio.get_event_loop().time()
-            try:
-                # We must await the execution as the function is defined as async
-                result = await sandbox_globals["execute_skill"]()
-                execution_time = asyncio.get_event_loop().time() - start_time
+            result = stdout
 
                 # Assign a base utility score
                 utility = 0.9 if execution_time < 2.0 else 0.6

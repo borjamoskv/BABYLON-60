@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 import asyncio
 import json
@@ -281,7 +282,7 @@ async def _process_single_task(agent: str, payload: dict, anti_limerence, umap) 
 _gossip_bus: GossipBus | None = None
 
 
-async def process_queue() -> None:
+async def process_queue(*, stop_event: asyncio.Event | None = None) -> None:
     """Background loop to consume and execute pending swarm tasks."""
     logger.info("Autopulse Engine: Ignited. Watching swarm queue...")
     anti_limerence, umap = _load_anti_limerence_runtime()
@@ -294,8 +295,10 @@ async def process_queue() -> None:
 
     last_pulse = time.monotonic()
 
+    _stop = stop_event or asyncio.Event()
+
     try:
-        while True:
+        while not _stop.is_set():
             current_time = time.monotonic()
             loop_lag = (current_time - last_pulse) * 1000.0
 
@@ -324,7 +327,10 @@ async def process_queue() -> None:
                     )
                     logger.error("Unexpected error processing task: %s", e)
 
-            await asyncio.sleep(2.0)
+            try:
+                await asyncio.wait_for(_stop.wait(), timeout=2.0)
+            except asyncio.TimeoutError:
+                pass
             last_pulse = time.monotonic()
 
     except asyncio.CancelledError:

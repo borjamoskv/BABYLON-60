@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 from __future__ import annotations
 
@@ -185,10 +186,8 @@ def test_forensics_command_is_experimental_in_root_cli(monkeypatch) -> None:
     old_sys_module = sys.modules.get(name_to_restore)
 
     def safe_reload():
-        file_path = Path(real_mod.__file__)
-        code = file_path.read_text(encoding="utf-8")
-        # Re-execute the module file in its namespace
-        exec(code, real_mod.__dict__)
+        # Reload the module securely without dynamic exec
+        importlib.reload(real_mod)
 
     monkeypatch.delenv("CORTEX_ENABLE_EXPERIMENTAL_CLI", raising=False)
     monkeypatch.delenv("MOSKV_ENABLE_EXPERIMENTAL_CLI", raising=False)

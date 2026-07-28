@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 # This file is part of CORTEX.
 # Licensed under the Apache License, Version 2.0.
@@ -383,24 +384,39 @@ class ASTSandbox:
         captured = StringIO()
 
         try:
-            sys.stdout = captured
+            import subprocess
+            import tempfile
+            import os
 
-            # Set timeout (Unix only; no-op on Windows)
-            if hasattr(signal, "SIGALRM"):
-
-                def _timeout_handler(signum, frame):
-                    raise TimeoutError(f"Execution exceeded {self._timeout}s")
-
-                old_handler = signal.signal(signal.SIGALRM, _timeout_handler)
-                signal.alarm(self._timeout)
+            with tempfile.NamedTemporaryFile("w", suffix=".py", delete=False) as f:
+                f.write(code)
+                f_name = f.name
 
             try:
-                # nosec B102 - guarded by AST whitelist + timeout + restricted builtins
-                exec(compile(code, "<sandbox>", "exec"), namespace)  # nosec B102 - exec() in sandboxed namespace - explicit design decision for REPL
+                import signal
+                proc = subprocess.Popen(
+                    [sys.executable, f_name],
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    text=True,
+                    env={},
+                    start_new_session=True
+                )
+                try:
+                    out, err = proc.communicate(timeout=self._timeout)
+                except subprocess.TimeoutExpired:
+                    os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+                    out, err = proc.communicate()
+                    raise TimeoutError(f"Execution exceeded {self._timeout}s (Zombie Purged)")
+
+                captured.write(out)
+                if proc.returncode != 0:
+                    raise RuntimeError(err or out)
             finally:
-                if hasattr(signal, "SIGALRM"):
-                    signal.alarm(0)
-                    signal.signal(signal.SIGALRM, old_handler)
+                try:
+                    os.remove(f_name)
+                except OSError:
+                    pass
 
         except TimeoutError as e:
             return ExecResult(

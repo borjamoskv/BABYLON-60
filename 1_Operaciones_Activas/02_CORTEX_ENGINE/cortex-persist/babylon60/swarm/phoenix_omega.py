@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 """
 PHOENIX-OMEGA: Motor de Transformación Atómica y Escalado Estructural
@@ -200,11 +201,10 @@ class AnalysisEngine(BaseEngine):
         atom_names = {aid.split("::")[-1]: aid for aid in atoms}
 
         for aid, atom in atoms.items():
-            for dep in atom.dependencies:
-                if dep in atom_names:
-                    target_aid = atom_names[dep]
-                    if target_aid != aid:
-                        atoms[target_aid].dependents.add(aid)
+            valid_targets = {atom_names[dep] for dep in atom.dependencies if dep in atom_names}
+            valid_targets.discard(aid)
+            for target_aid in valid_targets:
+                atoms[target_aid].dependents.add(aid)
 
     def _build_coupling_graph(self, atoms: dict[str, StructuralAtom]) -> dict:
         """DERIVATION: Ω₁ (Multi-Scale Causality) -> Bi-directional context in O(1)."""
@@ -212,30 +212,33 @@ class AnalysisEngine(BaseEngine):
             aid: {"in": atom.dependents, "out": atom.dependencies} for aid, atom in atoms.items()
         }
 
+    @staticmethod
+    def _bfs_component(start: str, graph: dict, visited: set) -> set[str]:
+        """Extract a single connected component via BFS traversal."""
+        cluster = {start}
+        queue = [start]
+        visited.add(start)
+        while queue:
+            current = queue.pop(0)
+            neighbors = (
+                graph.get(current, {}).get("in", set())
+                | graph.get(current, {}).get("out", set())
+            ) - visited
+            visited.update(neighbors)
+            queue.extend(neighbors)
+            cluster.update(neighbors)
+        return cluster
+
     def _detect_clusters(self, graph: dict) -> list[set[str]]:
-        """Detects high-coupling modules using inline BFS for lower entropy."""
-        clusters = []
-        visited = set()
-        for node in graph:
-            if node in visited:
-                continue
-
-            cluster = {node}
-            queue = [node]
-            visited.add(node)
-            while queue:
-                current = queue.pop(0)
-                neighbors = (
-                    graph.get(current, {}).get("in", set())
-                    | graph.get(current, {}).get("out", set())
-                ) - visited
-                visited.update(neighbors)
-                queue.extend(neighbors)
-                cluster.update(neighbors)
-
-            if len(cluster) > 2:
-                clusters.append(cluster)
-        return clusters
+        """Detects high-coupling modules using BFS component extraction."""
+        visited: set[str] = set()
+        return [
+            component
+            for node in graph
+            if node not in visited
+            for component in [self._bfs_component(node, graph, visited)]
+            if len(component) > 2
+        ]
 
 
 class ExtractionEngine(BaseEngine):

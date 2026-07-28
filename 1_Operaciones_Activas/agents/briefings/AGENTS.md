@@ -146,7 +146,12 @@
 
 - **Ω198 · NODO 4 JIT DELEGATION INVARIANT (ANTI-MONOLITHIC-KV-DEATH):** La inyección masiva de capacidades (ej. cargar >100 skills) en el prompt de un agente está tipificada como Anergía C4-SIM letal (causa truncamiento de KV-Cache). Queda estrictamente prohibido evadir al Secretario. Toda instanciación de un Worker Efímero (Nodo 5) DEBE ser enrutada incondicionalmente a través del Nodo 4 (`secretary_router.py`), garantizando un payload máximo acotado (ej. $\le 25\text{KB}$) dictado por *Stateful Load Shedding*.
 
-- **Ω199 · INTENT VS PROMPT ONTOLOGICAL BOUNDARY (C5-REAL SEMANTICS):** Queda estrictamente prohibido utilizar los términos "Intent" y "Prompt" como sinónimos o conceptos abstractos intercambiables. 
+- **Ω199 · INTENT VS PROMPT ONTOLOGICAL BOUNDARY (C5-REAL SEMANTICS):** Queda estrictamente prohibido utilizar los términos "Intent" y "Prompt" como sinónimos o conceptos abstractos intercambiables.
   1) **Intent (Intención):** Pertenece exclusivamente al Dominio Biológico (Nodo 1 / Operador). Es la chispa teleonómica causal pura. El Kernel y sus agentes carecen de *Intent* propio (corolario de Ω144). El *Intent* se procesa, filtra y enruta.
   2) **Prompt:** Pertenece exclusivamente al Dominio Físico/Silicio. Es la matriz de estado (búfer KV-Cache) inyectada en el motor de inferencia L3. Es el límite del universo de la máquina en $T=0$.
-  El diseño arquitectónico DEBE aislar el *Intent* biológico y transformarlo algorítmicamente ($O(k)$, ej. Nodo 4) en un *Prompt* acotado termodinámicamente para prevenir la muerte por desbordamiento de contexto (KV-Death).
+
+- **Ω170 · IPHONE CONTACT EXPORT & NO-SPACE COMMA INVARIANT:**
+  1) Al exportar agendas para iPhone en el Escritorio (`/Users/borjafernandezangulo/Desktop/`), generar en paralelo los archivos `.csv` y `.vcf` (vCard 3.0).
+  2) Si se solicita formato comprimido por comas, emitir la cadena continua `email1,email2,email3` sin espacios tras las comas.
+  3) Toda optimización de Substack debe incluir la inyección ontológica de `JSON-LD Schema.org` y los tokens estéticos Industrial Noir (`#0A0A0A` / `#2B3BE5`).
+

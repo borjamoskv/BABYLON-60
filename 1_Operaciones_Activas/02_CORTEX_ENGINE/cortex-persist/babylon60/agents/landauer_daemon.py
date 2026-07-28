@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 """Landauer Daemon Agent - The Context Compactor.
 
@@ -26,6 +27,7 @@ class LandauerDaemonAgent(BaseAgent):
         super().__init__(manifest, bus)
         self.compaction_interval_seconds = compaction_interval_seconds
         self._daemon_task: asyncio.Task | None = None
+        self._stop_event = asyncio.Event()
 
     async def start(self) -> None:
         """Starts the daemon."""
@@ -34,7 +36,8 @@ class LandauerDaemonAgent(BaseAgent):
             self._daemon_task = asyncio.create_task(self._compaction_loop())
 
     async def stop(self) -> None:
-        """Stops the daemon."""
+        """Stops the daemon deterministically via Event signal."""
+        self._stop_event.set()
         if self._daemon_task:
             self._daemon_task.cancel()
             try:
@@ -51,16 +54,19 @@ class LandauerDaemonAgent(BaseAgent):
             self.manifest.agent_id,
             self.compaction_interval_seconds,
         )
-        while True:
+        while not self._stop_event.is_set():
             try:
-                await asyncio.sleep(self.compaction_interval_seconds)
+                await asyncio.wait_for(
+                    self._stop_event.wait(),
+                    timeout=self.compaction_interval_seconds,
+                )
+            except asyncio.TimeoutError:
                 await self._compact_memory()
             except asyncio.CancelledError:
                 logger.info("Landauer Daemon shutdown initiated")
                 break
             except Exception as exc:  # noqa: BLE001
                 logger.error(f"Landauer Daemon background loop failed: {exc}")
-                # Prevent silent thread death # noqa: BLE001
 
     async def _compact_memory(self) -> None:
         """Executes the actual pruning logic."""

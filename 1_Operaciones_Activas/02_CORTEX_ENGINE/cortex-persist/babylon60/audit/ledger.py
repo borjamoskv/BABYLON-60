@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Enterprise Audit Ledger (SOC 2 Compliance).
 
@@ -171,9 +172,9 @@ class EnterpriseAuditLedger:
         self._last_hash = "0" * 44
 
         self._lamport = LamportClock()
-        self._write_queue: asyncio.Queue = asyncio.Queue()
+        self._write_queue: asyncio.Queue = asyncio.Queue(maxsize=2048)
         self._writer_task: Optional[asyncio.Task] = None
-        self._forensic_queue: asyncio.Queue = asyncio.Queue()
+        self._forensic_queue: asyncio.Queue = asyncio.Queue(maxsize=2048)
         self._forensic_task: Optional[asyncio.Task] = None
 
         from babylon60.crypto.keys import KeyManager

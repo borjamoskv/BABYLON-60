@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 import ast
 import asyncio
@@ -88,8 +89,50 @@ def _execute_sync(source_code: str, global_ctx: dict) -> dict:
     exec_globals.update(global_ctx)
     exec_globals["__builtins__"] = safe_builtins
 
-    exec(compiled_code, exec_globals, local_env)
-    return local_env
+    import json
+    import tempfile
+    import subprocess
+    import sys
+    import os
+
+    # Chaos Monad: Isolated Edge Execution
+    wrapped_code = f"{source_code}\n\nimport json\n__res = {{k: v for k, v in locals().items() if not k.startswith('_') and isinstance(v, (str, int, float, bool, list, dict, type(None)))}}\nprint(json.dumps(__res))\n"
+
+    with tempfile.NamedTemporaryFile("w", suffix=".py", delete=False) as f:
+        f.write(wrapped_code)
+        f_name = f.name
+
+    try:
+        import signal
+        proc = subprocess.Popen(
+            [sys.executable, f_name],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            env={},
+            start_new_session=True
+        )
+        try:
+            out, err = proc.communicate(timeout=5.0)
+        except subprocess.TimeoutExpired:
+            os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+            out, err = proc.communicate()
+            raise RuntimeError("Execution exceeded 5.0s (Zombie Purged)")
+
+        if proc.returncode != 0:
+            raise RuntimeError(err or out)
+
+        try:
+            local_env = json.loads(out)
+        except json.JSONDecodeError:
+            local_env = {"raw_output": out}
+
+        return local_env
+    finally:
+        try:
+            os.remove(f_name)
+        except OSError:
+            pass
 
 
 def _worker(source_code: str, global_ctx: dict, conn) -> None:

@@ -7,8 +7,10 @@ import os
 import sys
 from pathlib import Path
 
-# Add project root to sys.path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+# Add project root and 02_CORTEX_ENGINE to sys.path
+root_path = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(root_path))
+sys.path.insert(0, str(root_path / "02_CORTEX_ENGINE"))
 
 import yaml
 from cortex.substack.substack_subscriber_audit import SubstackSubscriberAuditor, AuditSummary

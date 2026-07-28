@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 """
 Tiered Caching Strategy.
@@ -201,7 +202,7 @@ class TieredCache(Generic[T]):
 
     async def subscribe(self) -> asyncio.Queue:
         """Subscribe to cache events."""
-        q = asyncio.Queue()
+        q = asyncio.Queue(maxsize=1024)
         self._subscribers.append(q)
         return q
 

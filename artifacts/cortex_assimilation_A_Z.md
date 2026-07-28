@@ -77603,9 +77603,6 @@
 ## Archivo: ./1_Operaciones_Activas/02_CORTEX_ENGINE/cortex/cesl/compiler_test.py
 - def test_cesl_compiler_end_to_end(...)
 
-## Archivo: ./1_Operaciones_Activas/02_CORTEX_ENGINE/cortex/compiled_theorem.py
-- def synthesized_theorem_0(...)
-
 ## Archivo: ./1_Operaciones_Activas/02_CORTEX_ENGINE/cortex/core/00_APEX_FSM.py
 - class ApexFiniteStateMachine(...)
 - def __init__(...)

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 """
 Async Connection Pool.
@@ -26,7 +27,7 @@ logger = logging.getLogger("babylon60.pool")
 
 class _PoolState:
     def __init__(self, max_connections: int):
-        self.pool: asyncio.Queue[aiosqlite.Connection] = asyncio.Queue()
+        self.pool: asyncio.Queue[aiosqlite.Connection] = asyncio.Queue(maxsize=max_connections)
         self.active_count: int = 0
         self.lock = asyncio.Lock()
         self.semaphore = asyncio.Semaphore(max_connections)

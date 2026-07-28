@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 """
 LEGION-OMEGA: The Immortal Siege Engine.
@@ -119,27 +120,29 @@ class SwarmAgent(ABC):
         self.bus = bus
         self.engine = engine
 
-    async def run(self, queue: asyncio.Queue[str]) -> None:
-        while True:
-            target = await queue.get()
-            if target is None:
-                queue.task_done()
-                break
-            try:
-                signal = await self.execute(target)
-                await self.bus.emit(signal)
-            except (ValueError, TypeError, KeyError, OSError, RuntimeError) as e:
-                await self.bus.emit(
-                    SwarmSignal(
-                        agent_id=self.agent_id,
-                        target=target,
-                        status="FAILURE",
-                        payload={"error": str(e)},
-                        metrics={},
-                    )
+    async def _execute_safe(self, target: str) -> None:
+        """Execute a single target and emit the result signal."""
+        try:
+            signal = await self.execute(target)
+            await self.bus.emit(signal)
+        except (ValueError, TypeError, KeyError, OSError, RuntimeError) as e:
+            await self.bus.emit(
+                SwarmSignal(
+                    agent_id=self.agent_id,
+                    target=target,
+                    status="FAILURE",
+                    payload={"error": str(e)},
+                    metrics={},
                 )
+            )
+
+    async def run(self, queue: asyncio.Queue[str]) -> None:
+        while (target := await queue.get()) is not None:
+            try:
+                await self._execute_safe(target)
             finally:
                 queue.task_done()
+        queue.task_done()  # Acknowledge the None sentinel
 
     @abstractmethod
     async def execute(self, target: str) -> SwarmSignal:
@@ -284,9 +287,12 @@ class Squadron(ABC):
         targets = await self._map(target_pattern)
         if not targets:
             return {"error": "No targets"}
-        queue: asyncio.Queue[str] = asyncio.Queue()
+        queue: asyncio.Queue[str] = asyncio.Queue(maxsize=1024)
         for t in targets:
-            queue.put_nowait(t)
+            try:
+                queue.put_nowait(t)
+            except asyncio.QueueFull:
+                logger.warning(f"Legion Target Drop: QueueFull at target {t}")
         self.agents = [
             self._create_agent(f"{self.SQUAD_NAME}-{i:03d}") for i in range(self.REPLICAS)
         ]

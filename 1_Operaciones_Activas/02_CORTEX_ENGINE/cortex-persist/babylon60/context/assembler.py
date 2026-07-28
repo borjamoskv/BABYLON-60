@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 """CORTEX Context Assembler - Unified Knowledge Retrieval.
 
@@ -181,53 +182,45 @@ class ContextAssembler:
             if not query_terms:
                 return budget
 
-            # Scan files recursively
             for root, _, files in os.walk(self._knowledge_dir):
                 for file in files:
                     if file.endswith(".md") or file.endswith(".txt"):
                         path = os.path.join(root, file)
-                        path_lower = path.lower()
-                        match_count = sum(1 for term in query_terms if term in path_lower)
-
-                        if match_count > 0:
-                            try:
-                                with open(path, encoding="utf-8") as f:
-                                    content = f.read()
-
-                                # Score: 0.5 base + 0.1 per name match + content match boost
-                                content_lower = content.lower()
-                                content_match = sum(
-                                    1 for term in query_terms if term in content_lower
-                                )
-                                relevance = (
-                                    0.5 + (0.1 * match_count) + min(0.3, 0.05 * content_match)
-                                )
-
-                                token_cost = len(content) // 4
-                                if token_cost > budget:
-                                    content = content[: budget * 4]
-                                    token_cost = budget
-
-                                relative_name = os.path.relpath(path, self._knowledge_dir)
-
-                                if self._add_knowledge_item(
-                                    packet, relative_name, content, "fs_scan", token_cost, relevance
-                                ):
-                                    budget -= token_cost
-                                    logger.debug(
-                                        "  [FS_SCAN] Loaded KI '%s' (%d tokens, relevance %.2f)",
-                                        relative_name,
-                                        token_cost,
-                                        relevance,
-                                    )
-
-                                if budget <= 0:
-                                    return 0
-                            except OSError:
-                                continue
+                        budget = self._process_knowledge_file(path, query_terms, packet, budget)
+                        if budget <= 0:
+                            return 0
         except Exception as e:  # noqa: BLE001
             logger.warning("  [FS_SCAN] Scan failed: %s", e)
+        return budget
 
+    def _process_knowledge_file(self, path: str, query_terms: list[str], packet: ContextPacket, budget: int) -> int:
+        path_lower = path.lower()
+        match_count = sum(1 for term in query_terms if term in path_lower)
+        if match_count == 0:
+            return budget
+
+        try:
+            with open(path, encoding="utf-8") as f:
+                content = f.read()
+        except OSError:
+            return budget
+
+        content_lower = content.lower()
+        content_match = sum(1 for term in query_terms if term in content_lower)
+        relevance = 0.5 + (0.1 * match_count) + min(0.3, 0.05 * content_match)
+
+        token_cost = len(content) // 4
+        if token_cost > budget:
+            content = content[: budget * 4]
+            token_cost = budget
+
+        relative_name = os.path.relpath(path, self._knowledge_dir)
+        if self._add_knowledge_item(packet, relative_name, content, "fs_scan", token_cost, relevance):
+            budget -= token_cost
+            logger.debug(
+                "  [FS_SCAN] Loaded KI '%s' (%d tokens, relevance %.2f)",
+                relative_name, token_cost, relevance,
+            )
         return budget
 
     def _resolve_hints(self, hints: list[str], packet: ContextPacket, budget: int) -> int:
