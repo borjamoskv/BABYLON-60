@@ -21,7 +21,24 @@ class EpistemicHalt(Exception):
 def parse_yaml_routes(filepath: str) -> List[RouteConfig]:
     """Parseador de YAML para ontología de rutas (Ω15)."""
     if not os.path.exists(filepath):
-        raise EpistemicHalt(f"Archivo de ontología de rutas no encontrado: {filepath}")
+        fname = os.path.basename(filepath)
+        candidates = [
+            filepath,
+            os.path.join(os.getcwd(), filepath),
+            os.path.join(os.getcwd(), "ontology", fname),
+            os.path.join(os.getcwd(), "2_Nucleo_Estatico", "ontology", fname),
+            os.path.join(os.getcwd(), "2_Nucleo_Estatico", "axioms", "ontology", fname),
+            os.path.join(os.path.dirname(__file__), "..", "ontology", fname),
+            os.path.join(os.path.dirname(__file__), "..", "..", "2_Nucleo_Estatico", "axioms", "ontology", fname),
+        ]
+        found = False
+        for cand in candidates:
+            if os.path.exists(cand):
+                filepath = cand
+                found = True
+                break
+        if not found:
+            raise EpistemicHalt(f"Archivo de ontología de rutas no encontrado: {filepath}")
 
     try:
         import yaml

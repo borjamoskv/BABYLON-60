@@ -17,9 +17,22 @@ import argparse
 from typing import Dict, List, Any
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CHAOS_DB = os.path.join(BASE_DIR, "ledgers", "escohotado_chaos_entropy.db")
-ECON_DB = os.path.join(BASE_DIR, "ledgers", "escohotado_economics.db")
-SUBSTANCE_DB = os.path.join(BASE_DIR, "ledgers", "escohotado_substance.db")
+
+def resolve_db_path(filename: str) -> str:
+    candidates = [
+        os.path.join(BASE_DIR, "ledgers", filename),
+        os.path.join(os.getcwd(), "ledgers", filename),
+        os.path.join(os.getcwd(), "3_Historico_Inerte", "ledgers", filename),
+        os.path.join(os.path.dirname(BASE_DIR), "..", "3_Historico_Inerte", "ledgers", filename),
+    ]
+    for cand in candidates:
+        if os.path.exists(cand):
+            return cand
+    return os.path.join(BASE_DIR, "ledgers", filename)
+
+CHAOS_DB = resolve_db_path("escohotado_chaos_entropy.db")
+ECON_DB = resolve_db_path("escohotado_economics.db")
+SUBSTANCE_DB = resolve_db_path("escohotado_substance.db")
 
 def query_chaos_db() -> List[Dict[str, Any]]:
     if not os.path.exists(CHAOS_DB):

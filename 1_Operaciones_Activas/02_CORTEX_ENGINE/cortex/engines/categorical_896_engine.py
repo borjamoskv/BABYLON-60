@@ -265,7 +265,23 @@ class Categorical896Engine:
 
     def _load_yaml(self) -> None:
         if not os.path.exists(self.yaml_path):
-            raise FileNotFoundError(f"Missing 896 Primitives matrix at {self.yaml_path}")
+            candidates = [
+                self.yaml_path,
+                os.path.join(os.getcwd(), self.yaml_path),
+                os.path.join(os.getcwd(), "primitives", "896_categorical_logic_primitives.yml"),
+                os.path.join(os.getcwd(), "1_Operaciones_Activas", "primitives", "896_categorical_logic_primitives.yml"),
+                os.path.join(os.getcwd(), "2_Nucleo_Estatico", "primitives", "896_categorical_logic_primitives.yml"),
+                os.path.join(os.path.dirname(__file__), "..", "..", "primitives", "896_categorical_logic_primitives.yml"),
+                os.path.join(os.path.dirname(__file__), "..", "..", "2_Nucleo_Estatico", "primitives", "896_categorical_logic_primitives.yml"),
+            ]
+            found = False
+            for cand in candidates:
+                if os.path.exists(cand):
+                    self.yaml_path = cand
+                    found = True
+                    break
+            if not found:
+                raise FileNotFoundError(f"Missing 896 Primitives matrix at {self.yaml_path}")
 
         with open(self.yaml_path, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f)
@@ -303,7 +319,17 @@ class Categorical896Engine:
     # ── SQLite WAL Ledger ─────────────────────────────────────
 
     def _sync_sqlite_ledger(self) -> None:
-        conn = sqlite3.connect(self.db_path)
+        db_dir = os.path.dirname(self.db_path)
+        if db_dir and not os.path.exists(db_dir):
+            try:
+                os.makedirs(db_dir, exist_ok=True)
+            except Exception:
+                self.db_path = os.path.join(os.getcwd(), "categorical_896_ledger.db")
+        try:
+            conn = sqlite3.connect(self.db_path)
+        except sqlite3.OperationalError:
+            self.db_path = os.path.join(os.getcwd(), "categorical_896_ledger.db")
+            conn = sqlite3.connect(self.db_path)
         try:
             conn.execute("PRAGMA journal_mode=WAL;")
         except sqlite3.OperationalError:
