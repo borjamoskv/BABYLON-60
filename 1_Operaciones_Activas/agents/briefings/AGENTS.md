@@ -155,3 +155,5 @@
   2) Si se solicita formato comprimido por comas, emitir la cadena continua `email1,email2,email3` sin espacios tras las comas.
   3) Toda optimización de Substack debe incluir la inyección ontológica de `JSON-LD Schema.org` y los tokens estéticos Industrial Noir (`#0A0A0A` / `#2B3BE5`).
 
+- **Ω202 · KIMI K3 CONTEXTUAL TRANSDUCTION INVARIANT (ANTI-MID-SESSION-SHIFT & REASONING BOUNDARY):** Al orquestar inferencias con `kimi-k3` (2.8T parámetros, 1M context), queda ESTRICTAMENTE PROHIBIDO alternar el modelo en mitad de una sesión (Mid-Session Shift). Todo cambio exige el colapso y reinicio de la KV-Cache. Además, el Transductor DEBE acatar la topología de la API: 1) Preservar el mensaje completo del asistente en flujos multi-turno. 2) Especificar explícitamente el parámetro `reasoning_effort` (`low`, `high`, `max`) alineado con la fricción termodinámica de la tarea ($O(1)$ vs $O(N^2)$). 3) Imponer límites estrictos de rol en `AGENTS.md`, previniendo que su asimetría proactiva disipe exergía en teleonomía ilusoria (Green Theater).
+
