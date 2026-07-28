@@ -49,7 +49,7 @@ async def worker_codebase_ast(topic: str) -> Dict[str, Any]:
     import ast
     import os
     core_path = os.path.abspath(os.path.join(
-        os.path.dirname(__file__), "..", "..", "..", "cortex", "core"
+        os.path.dirname(__file__), "..", "..", "..", "babylon60", "core"
     ))
     ast_count = 0
     symbols_found = []
@@ -57,16 +57,23 @@ async def worker_codebase_ast(topic: str) -> Dict[str, Any]:
         for fname in os.listdir(core_path):
             if fname.endswith(".py"):
                 fpath = os.path.join(core_path, fname)
-                try:
-                    with open(fpath, "r", encoding="utf-8") as f:
-                        tree = ast.parse(f.read(), filename=fname)
-                        ast_count += 1
-                        for node in ast.walk(tree):
-                            if isinstance(node, (ast.FunctionDef, ast.ClassDef)):
-                                if topic.lower() in node.name.lower():
-                                    symbols_found.append(f"{fname}:{node.name}")
-                except Exception:
-                    pass
+                with open(fpath, "r", encoding="utf-8") as f:
+                    tree = ast.parse(f.read(), filename=fname)
+                    ast_count += 1
+                    for node in ast.walk(tree):
+                        if isinstance(node, (ast.FunctionDef, ast.ClassDef)):
+                            if topic.lower() in node.name.lower():
+                                symbols_found.append(f"{fname}:{node.name}")
+
+    if ast_count == 0:
+        return {
+            "node": "codebase_ast",
+            "status": "PHYSICAL_VOID_FAULT",
+            "ast_modules_parsed": 0,
+            "matching_symbols": [],
+            "findings": "CRITICAL: Physical transducer scanned 0 modules. Topology missing."
+        }
+
     return {
         "node": "codebase_ast",
         "status": "PHYSICAL_EXECUTION_SUCCESS",
