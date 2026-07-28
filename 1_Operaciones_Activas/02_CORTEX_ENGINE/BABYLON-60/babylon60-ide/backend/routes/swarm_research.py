@@ -44,26 +44,53 @@ class SwarmResearchRequest(BaseModel):
     )
     cortex_taint: str = Field(default="[CORTEX-TAINT:swarm_research]", description="Causal signature")
 
+def resolve_core_dir() -> str:
+    import os
+    candidates = [
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "cortex", "core")),
+        os.path.abspath(os.path.join(os.getcwd(), "1_Operaciones_Activas", "02_CORTEX_ENGINE", "cortex", "core")),
+        os.path.abspath(os.path.join(os.getcwd(), "cortex", "core")),
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "babylon60", "core")),
+    ]
+    for c in candidates:
+        if os.path.exists(c) and os.path.isdir(c):
+            return c
+    return candidates[0]
+
+def resolve_tests_dir() -> str:
+    import os
+    candidates = [
+        os.path.abspath(os.path.join(os.getcwd(), "tests")),
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "..", "..", "tests")),
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "tests")),
+    ]
+    for c in candidates:
+        if os.path.exists(c) and os.path.isdir(c):
+            return c
+    return candidates[0]
+
 async def worker_codebase_ast(topic: str) -> Dict[str, Any]:
     """Worker Node 1: Physical Codebase AST & Symbol Tree Parsing."""
     import ast
     import os
-    core_path = os.path.abspath(os.path.join(
-        os.path.dirname(__file__), "..", "..", "..", "babylon60", "core"
-    ))
+    core_path = resolve_core_dir()
     ast_count = 0
     symbols_found = []
+    parsing_errors = []
     if os.path.exists(core_path):
         for fname in os.listdir(core_path):
             if fname.endswith(".py"):
                 fpath = os.path.join(core_path, fname)
-                with open(fpath, "r", encoding="utf-8") as f:
-                    tree = ast.parse(f.read(), filename=fname)
-                    ast_count += 1
-                    for node in ast.walk(tree):
-                        if isinstance(node, (ast.FunctionDef, ast.ClassDef)):
-                            if topic.lower() in node.name.lower():
-                                symbols_found.append(f"{fname}:{node.name}")
+                try:
+                    with open(fpath, "r", encoding="utf-8") as f:
+                        tree = ast.parse(f.read(), filename=fname)
+                        ast_count += 1
+                        for node in ast.walk(tree):
+                            if isinstance(node, (ast.FunctionDef, ast.ClassDef)):
+                                if topic.lower() in node.name.lower():
+                                    symbols_found.append(f"{fname}:{node.name}")
+                except Exception as e:
+                    parsing_errors.append(f"Fallo AST en {fname}: {str(e)}")
 
     if ast_count == 0:
         return {
@@ -71,26 +98,24 @@ async def worker_codebase_ast(topic: str) -> Dict[str, Any]:
             "status": "PHYSICAL_VOID_FAULT",
             "ast_modules_parsed": 0,
             "matching_symbols": [],
+            "parsing_errors": parsing_errors,
             "findings": "CRITICAL: Physical transducer scanned 0 modules. Topology missing."
         }
 
     return {
         "node": "codebase_ast",
-        "status": "PHYSICAL_EXECUTION_SUCCESS",
+        "status": "PHYSICAL_EXECUTION_SUCCESS" if not parsing_errors else "PHYSICAL_EXECUTION_PARTIAL",
         "ast_modules_parsed": ast_count,
         "matching_symbols": symbols_found,
-        "findings": f"Parsed {ast_count} core AST modules. Found {len(symbols_found)} symbols matching '{topic}'."
+        "parsing_errors": parsing_errors,
+        "findings": f"Parsed {ast_count} core AST modules. Found {len(symbols_found)} symbols. Errors: {len(parsing_errors)}"
     }
 
 async def worker_epistemic_invariants(topic: str) -> Dict[str, Any]:
     """Worker Node 2: Real Epistemic Invariants & Falsification Trace Verification (Ω206)."""
     import os
-    core_dir = os.path.abspath(os.path.join(
-        os.path.dirname(__file__), "..", "..", "..", "babylon60", "core"
-    ))
-    tests_dir = os.path.abspath(os.path.join(
-        os.path.dirname(__file__), "..", "..", "..", "tests"
-    ))
+    core_dir = resolve_core_dir()
+    tests_dir = resolve_tests_dir()
     verified_modules = 0
     total_modules = 0
     if os.path.exists(core_dir):
