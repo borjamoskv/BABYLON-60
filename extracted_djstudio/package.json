@@ -1,0 +1,24 @@
+{
+  "name": "DJ.Studio",
+  "version": "3.1.37",
+  "description": "DJ.Studio",
+  "author": {
+    "name": "DJ.Studio BV"
+  },
+  "main": "./dist/main/main.js",
+  "dependencies": {
+    "@appmachine/ai-beatgrid": "0.0.81",
+    "@appmachine/apple-music": "1.2.11",
+    "@appmachine/audio-decoder": "1.0.19",
+    "@appmachine/audio-synth": "1.2.43",
+    "@appmachine/beatport-sdk": "^2.1.26",
+    "@appmachine/disk-utils": "1.0.13",
+    "@appmachine/internaleffects": "2.5.12",
+    "@appmachine/shared-memory": "^0.6.3",
+    "better-sqlite3-multiple-ciphers": "11.8.0",
+    "esbuild": "^0.25.0"
+  },
+  "overrides": {
+    "node-abi": "3.72.0"
+  }
+}
