@@ -34,3 +34,20 @@ def test_satisfiable_fo():
     ]
     # Cannot resolve -> SAT (False)
     assert robinson_resolution_fo(clauses) == False
+
+def test_theta_subsumption():
+    from cortex.core.robinson_fo import subsumes_fo
+    # C1 = {P(?x)}, C2 = {P(a), Q(b)}
+    # P(?x) theta-subsumes P(a) with ?x=a
+    c1 = frozenset({('P', '?x')})
+    c2 = frozenset({('P', 'a'), ('Q', 'b')})
+    assert subsumes_fo(c1, c2) == True
+
+    # C3 = {Q(b)}, C2 = {P(a), Q(b)} -> Q(b) is in C2!
+    c3 = frozenset({('Q', 'b')})
+    assert subsumes_fo(c3, c2) == True
+
+    # C4 = {P(c)} -> P(c) does not subsume {P(a), Q(b)}
+    c4 = frozenset({('P', 'c')})
+    assert subsumes_fo(c4, c2) == False
+

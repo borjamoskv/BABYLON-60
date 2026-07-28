@@ -61,3 +61,16 @@ extend-exclude = [
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F"]
 ignore = ["E743", "E402", "E701"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+norecursedirs = [
+    "cortex-bounties",
+    "firedancer-v1",
+    "ethereum-protocol",
+    "intuition-contracts-v2",
+    "laboratorio-rd",
+    "BABYLON-60",
+    "3_Historico_Inerte",
+    "02_CORTEX_ENGINE/cortex-bounties"
+]
