@@ -40,6 +40,9 @@ async def test_swarm_research_execution():
         assert resp["mode"] == "ULTRATHINK_KIMI_K3_SWARM_ISOMORPHISM"
         assert resp["workers_dispatched"] == 3
         assert len(resp["synthesis"]) == 3
+        assert resp["synthesis"][0]["status"] == "PHYSICAL_EXECUTION_SUCCESS"
+        assert resp["synthesis"][1]["status"] == "PHYSICAL_EXECUTION_SUCCESS"
+        assert resp["synthesis"][2]["status"] == "PHYSICAL_EXECUTION_SUCCESS"
         assert mock_actor.append.called
 
 @pytest.mark.asyncio

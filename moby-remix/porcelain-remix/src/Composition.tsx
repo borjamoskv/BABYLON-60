@@ -54,7 +54,7 @@ export const MyComposition = () => {
     <Composition
       id="MobyCosmicRemix"
       component={MyComponent}
-      durationInFrames={5612} // approx 3:44.5 at 25fps
+      durationInFrames={5570} // Match video duration
       fps={25}
       width={1280}
       height={720}
