@@ -11,6 +11,63 @@ def subsumes(clause1, clause2):
     """Returns True if clause1 subsumes clause2 (i.e., clause1 is a subset of clause2)."""
     return clause1.issubset(clause2)
 
+def pure_literal_elimination(clauses):
+    """
+    Removes clauses containing pure literals (literals whose negation doesn't appear).
+    """
+    while True:
+        all_literals = set()
+        for clause in clauses:
+            all_literals.update(clause)
+
+        pure_literals = set()
+        for lit in all_literals:
+            neg_lit = lit[1:] if lit.startswith('~') else '~' + lit
+            if neg_lit not in all_literals:
+                pure_literals.add(lit)
+
+        if not pure_literals:
+            break
+
+        new_clauses = {c for c in clauses if not any(p in c for p in pure_literals)}
+        if len(new_clauses) == len(clauses):
+            break
+        clauses = new_clauses
+    return clauses
+
+def unit_propagation(clauses):
+    """
+    Applies Unit Propagation (Boolean Constraint Propagation).
+    Returns the new set of clauses, and a boolean indicating if UNSAT was derived.
+    """
+    clauses = set(clauses)
+    while True:
+        units = [c for c in clauses if len(c) == 1]
+        if not units:
+            break
+
+        unit = units[0]
+        l = list(unit)[0]
+        neg_l = l[1:] if l.startswith('~') else '~' + l
+
+        new_clauses = set()
+        for c in clauses:
+            if l in c:
+                continue # Clause is subsumed by the unit
+            if neg_l in c:
+                new_c = set(c)
+                new_c.remove(neg_l)
+                if not new_c:
+                    return set(), True # Derives empty clause -> UNSAT
+                new_clauses.add(frozenset(new_c))
+            else:
+                new_clauses.add(c)
+
+        if clauses == new_clauses:
+            break
+        clauses = new_clauses
+    return clauses, False
+
 def resolve(clause1, clause2):
     """
     Returns a set of all possible clauses obtained by resolving clause1 and clause2.
@@ -30,14 +87,23 @@ def resolve(clause1, clause2):
 
 def robinson_resolution(clauses):
     """
-    Implements Robinson's Resolution Principle augmented with Subsumption
-    and Tautology Deletion for optimal exergy and minimal state explosion.
+    Implements Robinson's Resolution Principle augmented with DPLL techniques:
+    Unit Propagation, Pure Literal Elimination, Tautology Deletion, and Subsumption
+    for maximum thermodynamic exergy and minimal state explosion.
     Returns True if unsatisfiable (derives empty clause), False if satisfiable.
     """
     # 1. Tautology Deletion on initial clauses
     clauses = {frozenset(c) for c in clauses if not is_tautology(c)}
 
-    # 2. Forward Subsumption on initial clauses
+    # 2. DPLL Pre-processing: Unit Propagation and Pure Literal Elimination
+    clauses, unsat = unit_propagation(clauses)
+    if unsat:
+        return True
+    clauses = pure_literal_elimination(clauses)
+    if not clauses:
+        return False
+
+    # 3. Forward Subsumption on initial clauses
     active_clauses = set()
     for c in sorted(clauses, key=len):
         if not any(subsumes(active_c, c) for active_c in active_clauses):
@@ -55,16 +121,25 @@ def robinson_resolution(clauses):
                     return True # Unsatisfiable
                 generated_in_step.update(resolvents)
 
-        # 3. Forward Subsumption on new clauses
-        filtered_new = set()
-        for new_c in generated_in_step:
-            if any(subsumes(active_c, new_c) for active_c in active_clauses):
-                continue
-            filtered_new.add(new_c)
+        # Combine active and newly generated clauses
+        combined = active_clauses | generated_in_step
 
-        if not filtered_new or filtered_new.issubset(active_clauses):
+        # Apply intense DPLL pruning on the combined state space
+        combined, unsat = unit_propagation(combined)
+        if unsat:
+            return True
+        combined = pure_literal_elimination(combined)
+
+        if not combined:
+            return False # Fully satisfied by pure literals
+
+        # Cross-subsumption (Forward + Backward simultaneously via rebuilding)
+        filtered_combined = set()
+        for c in sorted(combined, key=len):
+            if not any(subsumes(active_c, c) for active_c in filtered_combined):
+                filtered_combined.add(c)
+
+        if filtered_combined == active_clauses:
             return False # Satisfiable, saturation reached
 
-        # 4. Backward Subsumption: remove active clauses subsumed by new ones
-        active_clauses = {c for c in active_clauses if not any(subsumes(new_c, c) for new_c in filtered_new)}
-        active_clauses.update(filtered_new)
+        active_clauses = filtered_combined
