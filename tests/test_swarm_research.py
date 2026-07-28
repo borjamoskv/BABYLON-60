@@ -26,7 +26,8 @@ async def test_swarm_research_execution():
     req = swarm_research_mod.SwarmResearchRequest(
         topic="CORTEX Thermodynamic Topology",
         max_workers=3,
-        enable_cloud_transduction=True
+        enable_cloud_transduction=True,
+        reasoning_effort="high"
     )
 
     mock_actor = AsyncMock()
@@ -40,3 +41,18 @@ async def test_swarm_research_execution():
         assert resp["workers_dispatched"] == 3
         assert len(resp["synthesis"]) == 3
         assert mock_actor.append.called
+
+@pytest.mark.asyncio
+async def test_swarm_hysteresis_gating():
+    # Test 10KB topic limit
+    large_topic = "X" * (1024 * 11)
+    req = swarm_research_mod.SwarmResearchRequest(
+        topic=large_topic,
+        max_workers=2
+    )
+
+    mock_actor = AsyncMock()
+    with patch.object(swarm_research_mod, "get_bft_actor", return_value=mock_actor):
+        with pytest.raises(swarm_research_mod.HTTPException) as exc_info:
+            await swarm_research_mod.execute_swarm_research(req)
+        assert exc_info.value.status_code == 413
