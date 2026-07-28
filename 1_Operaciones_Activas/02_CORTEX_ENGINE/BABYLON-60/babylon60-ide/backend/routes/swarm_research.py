@@ -86,10 +86,10 @@ async def worker_epistemic_invariants(topic: str) -> Dict[str, Any]:
     """Worker Node 2: Real Epistemic Invariants & Falsification Trace Verification (Ω206)."""
     import os
     core_dir = os.path.abspath(os.path.join(
-        os.path.dirname(__file__), "..", "..", "..", "cortex", "core"
+        os.path.dirname(__file__), "..", "..", "..", "babylon60", "core"
     ))
     tests_dir = os.path.abspath(os.path.join(
-        os.path.dirname(__file__), "..", "..", "..", "..", "..", "tests"
+        os.path.dirname(__file__), "..", "..", "..", "tests"
     ))
     verified_modules = 0
     total_modules = 0
@@ -103,6 +103,17 @@ async def worker_epistemic_invariants(topic: str) -> Dict[str, Any]:
                 verified_modules += 1
 
     falsification_ratio = (verified_modules / total_modules) if total_modules > 0 else 1.0
+
+    if total_modules == 0:
+        return {
+            "node": "epistemic_invariants",
+            "status": "PHYSICAL_VOID_FAULT",
+            "verified_modules": 0,
+            "total_modules": 0,
+            "falsification_ratio": 0.0,
+            "findings": "CRITICAL: Epistemic transducer found 0 modules. Topology missing."
+        }
+
     return {
         "node": "epistemic_invariants",
         "status": "PHYSICAL_EXECUTION_SUCCESS",
