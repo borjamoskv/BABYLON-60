@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import logging
 from pathlib import Path
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -15,15 +16,24 @@ from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from .routes import analytics, delegation, ledger, ontology, query, sentinel, telemetry, inference
+from .routes import analytics, delegation, ledger, ontology, query, sentinel, telemetry, inference, ultrathink
 from .services import cortex_ledger
 
 logger = logging.getLogger("babylon60")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    logger.info("Lifespan: Igniting BFTLedgerActor...")
+    await ultrathink.start_bft_actor()
+    yield
+    logger.info("Lifespan: Halting BFTLedgerActor (Flushing WAL)...")
+    await ultrathink.stop_bft_actor()
 
 app = FastAPI(
     title="BABYLON60 IDE",
     description="Sovereign IDE for tamper-evident agent memory inspection",
     version="0.4.0",
+    lifespan=lifespan,
 )
 
 # Initialize the IDE's own CortexLedger (append-only, hash-chained).
@@ -66,6 +76,7 @@ app.include_router(sentinel.router)
 app.include_router(delegation.router)
 app.include_router(telemetry.router)
 app.include_router(inference.router)
+app.include_router(ultrathink.router)
 
 
 @app.get("/api/health")
