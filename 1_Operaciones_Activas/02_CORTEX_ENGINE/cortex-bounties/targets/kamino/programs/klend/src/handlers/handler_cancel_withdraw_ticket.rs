@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{prelude::*, Accounts};
 use anchor_spl::{
     token::Token,
@@ -25,7 +26,7 @@ use crate::{
 
 pub fn process(
     ctx: Context<CancelWithdrawTicket>,
-    _ticket_sequence_number: u64,    
+    _ticket_sequence_number: u64,
     collateral_amount_to_cancel: u64,
 ) -> Result<()> {
     lending_checks::cancel_withdraw_ticket_checks(ctx.accounts)?;
@@ -40,18 +41,18 @@ pub fn process(
         LendingError::WithdrawTicketCancellationDisabled,
     );
 
-   
-   
+
+
     lending_operations::refresh_reserve(reserve, clock, None, lending_market.referral_fee_bps)?;
 
-   
+
     let initial_owner_queued_collateral_vault_balance =
         ctx.accounts.owner_queued_collateral_vault.amount;
     let initial_user_destination_collateral_balance =
         ctx.accounts.user_destination_collateral.amount;
     let initial_queued_collateral_amount = reserve.withdraw_queue.queued_collateral_amount;
 
-   
+
     let amount_to_cancel = lending_operations::cancel_withdraw_ticket(
         lending_market,
         reserve,
@@ -64,7 +65,7 @@ pub fn process(
         amount_to_cancel, withdraw_ticket.queued_collateral_amount
     );
 
-   
+
     token_transfer::recover_withdraw_queue_collateral_transfer(
         ctx.accounts.collateral_token_program.to_account_info(),
         ctx.accounts.reserve_collateral_mint.to_account_info(),
@@ -79,7 +80,7 @@ pub fn process(
         ctx.accounts.reserve_collateral_mint.decimals,
     )?;
 
-   
+
     lending_checks::post_cancel_withdraw_ticket_balance_checks(
         token_interface::accessor::amount(
             &ctx.accounts.owner_queued_collateral_vault.to_account_info(),

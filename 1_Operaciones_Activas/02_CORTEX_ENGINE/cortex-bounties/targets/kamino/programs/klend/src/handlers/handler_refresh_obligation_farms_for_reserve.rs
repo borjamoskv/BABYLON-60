@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{prelude::*, Accounts};
 use farms::{program::Farms, state::UserState as FarmsUserState};
 
@@ -28,10 +29,10 @@ pub(crate) fn process_impl_refresh_obligation_farms_for_reserve(
         account_ctx.obligation.key(),
         LendingError::InvalidAccountInput
     );
-   
-   
-   
-   
+
+
+
+
     require_keys_eq!(
         account_ctx.obligation_farm_user_state.load()?.farm_state,
         account_ctx.reserve_farm_state.key(),
@@ -42,7 +43,7 @@ pub(crate) fn process_impl_refresh_obligation_farms_for_reserve(
     let reserve = &account_ctx.reserve.load()?;
     let reserve_address: Pubkey = *account_ctx.reserve.to_account_info().key;
 
-   
+
     let farm_address = reserve.get_farm(farm_kind);
     if farm_address == Pubkey::default() {
         return Err(LendingError::NoFarmForReserve.into());

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { dlmmCore, sbtcUsdcPool, mockSbtcToken, mockUsdcToken } from "../../tests/helpers/helpers";
 import { rovOk } from '@clarigen/test';
 
@@ -45,7 +46,7 @@ export function captureUserState(user: string, binId?: bigint): UserState {
   const xTokenBalance = rovOk(mockSbtcToken.getBalance(user));
   const yTokenBalance = rovOk(mockUsdcToken.getBalance(user));
   let lpTokenBalance = 0n;
-  
+
   if (binId !== undefined) {
     const unsignedBinId = rovOk(dlmmCore.getUnsignedBinId(binId));
     try {
@@ -54,7 +55,7 @@ export function captureUserState(user: string, binId?: bigint): UserState {
       lpTokenBalance = 0n;
     }
   }
-  
+
   return { xTokenBalance, yTokenBalance, lpTokenBalance };
 }
 
@@ -80,7 +81,7 @@ export interface InvariantCheckResult {
 
 /**
  * Check invariants for swap-x-for-y
- * 
+ *
  * Invariants:
  * - Bin X balance MUST increase (by input - fees)
  * - Bin Y balance MUST decrease (by output)
@@ -152,7 +153,7 @@ export function checkSwapXForYInvariants(
 
 /**
  * Check invariants for swap-y-for-x
- * 
+ *
  * Invariants:
  * - Bin Y balance MUST increase (by input - fees)
  * - Bin X balance MUST decrease (by output)
@@ -224,7 +225,7 @@ export function checkSwapYForXInvariants(
 
 /**
  * Check invariants for add-liquidity
- * 
+ *
  * Invariants:
  * - LP supply for that bin MUST increase
  * - X balance in bin MUST increase (if xAmount > 0)
@@ -306,7 +307,7 @@ export function checkAddLiquidityInvariants(
 
 /**
  * Check invariants for withdraw-liquidity
- * 
+ *
  * Invariants:
  * - LP supply for that bin MUST decrease
  * - X balance in bin MUST decrease (if X was in bin)
@@ -394,7 +395,7 @@ export function checkWithdrawLiquidityInvariants(
 
 /**
  * Check invariants for move-liquidity
- * 
+ *
  * Invariants:
  * - Source bin LP supply MUST decrease
  * - Destination bin LP supply MUST increase
@@ -473,7 +474,7 @@ export function checkMoveLiquidityInvariants(
 
 /**
  * Check invariants for create-pool
- * 
+ *
  * Invariants:
  * - Pool MUST be created (poolCreated = true)
  * - Pool ID MUST be assigned

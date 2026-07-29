@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crate::shred::Error, solana_hash::Hash, solana_sha256_hasher::hashv,
     static_assertions::const_assert_eq, std::iter::successors,

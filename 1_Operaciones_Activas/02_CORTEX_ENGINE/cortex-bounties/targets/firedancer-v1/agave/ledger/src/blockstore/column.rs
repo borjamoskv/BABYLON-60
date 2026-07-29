@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Traits that define how data is encoded in the RocksDB-backed Blockstore.
 use {
     crate::{

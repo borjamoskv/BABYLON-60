@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 services:
   test:
     image: node:18
@@ -18,6 +19,6 @@ services:
     # image: dtr22/geth7702
     command: |
           --verbosity 1
-          --http -http.addr 0.0.0.0 --http.api 'eth,net,web3,debug' --http.port 8545 
+          --http -http.addr 0.0.0.0 --http.api 'eth,net,web3,debug' --http.port 8545
           --http.vhosts '*,localhost,host.docker.internal'
-          --dev --rpc.allow-unprotected-txs 
+          --dev --rpc.allow-unprotected-txs

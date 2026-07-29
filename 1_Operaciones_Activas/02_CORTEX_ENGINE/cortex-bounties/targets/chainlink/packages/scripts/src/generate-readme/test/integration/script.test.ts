@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as shell from 'shelljs'
 
 describe('readme generation script', () => {

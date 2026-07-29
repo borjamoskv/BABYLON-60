@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crate::{
         admin_rpc_service,

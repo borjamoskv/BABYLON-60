@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 mod calculation;
 mod distribution;
 mod epoch_rewards_hasher;

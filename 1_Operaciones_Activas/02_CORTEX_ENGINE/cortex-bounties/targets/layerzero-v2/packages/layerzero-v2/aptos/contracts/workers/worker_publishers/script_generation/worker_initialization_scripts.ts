@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /**
  * Initialize DVN script
  * This creates a script that can be used to initialize a DVN that was created using deployer::object_code_deployment.

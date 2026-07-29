@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import request, { SuperTest, Test } from 'supertest'
 import { expose, ServerInstance } from '@chainlink/external-adapter-framework'
 import { AddressInfo } from 'net'

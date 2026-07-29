@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![allow(clippy::arithmetic_side_effects)]
 use {
     criterion::{BatchSize, BenchmarkId, Criterion, Throughput, criterion_group, criterion_main},

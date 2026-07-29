@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { ecrecover, ecsign, PrefixedHexString, pubToAddress, toBuffer, toChecksumAddress } from 'ethereumjs-util'
 import { BigNumber, BigNumberish, Wallet } from 'ethers'
 import { arrayify, hexConcat, hexlify, keccak256, RLP } from 'ethers/lib/utils'

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { shouldSupportInterfaces } = require('./SupportsInterface.behavior');
 
 const ERC165 = artifacts.require('$ERC165');

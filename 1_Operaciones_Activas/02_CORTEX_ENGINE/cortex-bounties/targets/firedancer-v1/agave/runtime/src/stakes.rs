@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Stakes serve as a cache of stake and vote accounts to derive
 //! node stakes
 #[cfg(feature = "dev-context-only-utils")]

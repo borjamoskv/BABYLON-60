@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { EndpointContext } from '@chainlink/external-adapter-framework/adapter'
 import { calculateHttpRequestKey } from '@chainlink/external-adapter-framework/cache'
 import { TransportDependencies } from '@chainlink/external-adapter-framework/transports'

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { separateBatches } from '../../src/lib/middleware/ws/utils'
 import { WebSocketClassProvider, WsMessageRecorder } from '../../src/lib/middleware/ws/recorder'
 import { AdapterRequest, AdapterResponse, MakeWSHandler } from '../../src/types'

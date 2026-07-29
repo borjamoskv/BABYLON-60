@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { assertSuccess } from '@chainlink/ea-test-helpers'
 import { AdapterRequest } from '@chainlink/ea-bootstrap'
 import { makeExecute } from '../../src/adapter'

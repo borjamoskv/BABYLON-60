@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterRequest, FastifyInstance, util } from '@chainlink/ea-bootstrap'
 import request, { SuperTest, Test } from 'supertest'
 import * as process from 'process'

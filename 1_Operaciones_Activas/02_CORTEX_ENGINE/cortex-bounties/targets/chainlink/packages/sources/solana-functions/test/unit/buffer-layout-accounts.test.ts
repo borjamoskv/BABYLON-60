@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { makeStub } from '@chainlink/external-adapter-framework/util/testing-utils'
 import { type Rpc, type SolanaRpcApi } from '@solana/rpc'
 import { fetchFieldFromBufferLayoutStateAccount } from '../../src/shared/buffer-layout-accounts'

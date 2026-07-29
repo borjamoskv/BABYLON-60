@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Example Rust-based SBF program that supports the deprecated loader
 
 #![allow(unreachable_code)]

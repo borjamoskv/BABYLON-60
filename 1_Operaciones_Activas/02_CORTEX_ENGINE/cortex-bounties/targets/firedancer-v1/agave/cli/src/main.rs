@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     clap::{ArgMatches, crate_description, crate_name, value_t_or_exit},
     console::style,

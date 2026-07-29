@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module implements clone-on-write semantics for the SDK's `StakeHistory` to reduce
 //! unnecessary cloning of the underlying vector.
 pub use solana_stake_interface::stake_history::StakeHistoryGetEntry;

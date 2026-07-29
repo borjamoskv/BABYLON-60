@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { mapValues } = require('./iterate');
 
 const formatType = schema => Object.entries(schema).map(([name, type]) => ({ name, type }));

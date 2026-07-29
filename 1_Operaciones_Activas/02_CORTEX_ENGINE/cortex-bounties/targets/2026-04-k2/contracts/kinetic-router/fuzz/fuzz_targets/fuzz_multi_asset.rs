@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![no_main]
 
 //! Fuzz test for K2 multi-asset interactions.

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 Fix trailing whitespace in all tracked and untracked (non-ignored) files.

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `blockstore_metric_report_service` periodically reports ledger store metrics.
 
 use {

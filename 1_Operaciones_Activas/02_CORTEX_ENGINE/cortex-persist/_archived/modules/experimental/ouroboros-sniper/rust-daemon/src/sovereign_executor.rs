@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /// SOVEREIGN EXECUTOR — BABYLON60 CSE ACTION DISPATCHER
 /// Asimilado de paradigmxyz/artemis | Ley Ω₁ (Frontera Determinista)
 /// Recibe SovereignAction y despacha al executor correcto.

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use super::*;
 use soroban_sdk::{
     testutils::Address as _,
@@ -16,17 +17,17 @@ fn setup_tokens_and_pool(
     // Deploy token contracts using Stellar Asset Contract
     let token_a_admin = Address::generate(env);
     let token_b_admin = Address::generate(env);
-    
+
     let token_a_sac = env.register_stellar_asset_contract_v2(token_a_admin.clone());
     let token_b_sac = env.register_stellar_asset_contract_v2(token_b_admin.clone());
-    
+
     // Get the actual token addresses
     let token_a = token_a_sac.address();
     let token_b = token_b_sac.address();
-    
+
     let mock_pool_id = env.register_contract(None, mock_aquarius_pool::MockAquariusPool);
     let mock_pool = mock_aquarius_pool::MockAquariusPoolClient::new(env, &mock_pool_id);
-    
+
     // Initialize pool with sorted tokens
     let (token0, token1) = if &token_a < &token_b {
         (token_a.clone(), token_b.clone())
@@ -34,16 +35,16 @@ fn setup_tokens_and_pool(
         (token_b.clone(), token_a.clone())
     };
     mock_pool.initialize(&token0, &token1);
-    
+
     // Mint tokens to the adapter for testing
     use soroban_sdk::token::StellarAssetClient;
     let adapter_addr = &adapter.address;
     StellarAssetClient::new(env, &token_a).mint(adapter_addr, &1_000_000_000i128);
     StellarAssetClient::new(env, &token_b).mint(adapter_addr, &1_000_000_000i128);
-    
+
     // Register pool with adapter
     adapter.register_pool(admin, &token_a, &token_b, &mock_pool_id);
-    
+
     (token_a, token_b, mock_pool_id)
 }
 
@@ -72,10 +73,10 @@ mod mock_aquarius {
             assert!(tokens.len() == 2, "Tokens vector must have exactly 2 tokens");
             let token0 = tokens.get(0).unwrap();
             let token1 = tokens.get(1).unwrap();
-            
+
             // Verify sorting: token0 < token1
             assert!(token0 < token1, "Tokens must be sorted: token0 < token1");
-            
+
             // Simple mock: return 95% of input (simulating 5% slippage)
             let out_amount = (in_amount * 95) / 100;
             assert!(out_amount >= out_min, "Slippage too high");
@@ -95,10 +96,10 @@ mod mock_aquarius {
             assert!(tokens.len() == 2, "Tokens vector must have exactly 2 tokens");
             let token0 = tokens.get(0).unwrap();
             let token1 = tokens.get(1).unwrap();
-            
+
             // Verify sorting: token0 < token1
             assert!(token0 < token1, "Tokens must be sorted: token0 < token1");
-            
+
             // Return 95% of input
             (in_amount * 95) / 100
         }
@@ -206,7 +207,7 @@ fn test_initialize_success() {
     let env = Env::default();
     let admin = Address::generate(&env);
     let router = Address::generate(&env);
-    
+
     let contract_id = env.register(AquariusSwapAdapter, (admin.clone(), router.clone()));
     let client = AquariusSwapAdapterClient::new(&env, &contract_id);
 
@@ -410,7 +411,7 @@ fn test_token_sorting() {
     // Swap B -> A (reverse order - adapter must still sort correctly)
     let result2 = adapter.execute_swap(&token_b, &token_a, &1000u128, &900u128, &recipient);
     assert_eq!(result2, 950, "Expected 95% output (mock 5% slippage)");
-    
+
     // Verify both directions return same result (mock is symmetric)
     assert_eq!(result1, result2, "Both swap directions should return same result for same amount");
 }
@@ -431,11 +432,11 @@ fn test_token_sorting_explicit_order() {
     for _ in 0..3 {
         // Setup tokens and pool for each pair
         let (token_i, token_j, _pool) = setup_tokens_and_pool(&env, &adapter, &admin);
-        
+
         // Forward direction
         let result_fwd = adapter.execute_swap(&token_i, &token_j, &1000u128, &900u128, &recipient);
         assert_eq!(result_fwd, 950, "Forward swap failed");
-        
+
         // Reverse direction
         let result_rev = adapter.execute_swap(&token_j, &token_i, &1000u128, &900u128, &recipient);
         assert_eq!(result_rev, 950, "Reverse swap failed");
@@ -458,7 +459,7 @@ fn test_quote_respects_token_sorting() {
     // Mock pool verifies tokens are sorted in get_quote too
     let quote_ab = adapter.get_quote(&token_a, &token_b, &1000u128);
     let quote_ba = adapter.get_quote(&token_b, &token_a, &1000u128);
-    
+
     assert_eq!(quote_ab, 950, "Quote A->B should return 95%");
     assert_eq!(quote_ba, 950, "Quote B->A should return 95%");
     assert_eq!(quote_ab, quote_ba, "Both quote directions should be equal");
@@ -554,10 +555,10 @@ fn test_get_quote_matches_execute_swap() {
 
     // CRITICAL: Quote should match actual swap result
     let amount_in = 50_000u128;
-    
+
     let quote = adapter.get_quote(&from_token, &to_token, &amount_in);
     let actual = adapter.execute_swap(&from_token, &to_token, &amount_in, &0u128, &recipient);
-    
+
     assert_eq!(
         quote, actual,
         "Quote ({}) must match actual swap result ({})",
@@ -657,7 +658,7 @@ fn test_router_update_reflected_in_swap() {
 
     // First router returns 95%
     let router1_id = env.register_contract(None, mock_aquarius::MockAquariusRouter);
-    
+
     let admin = Address::generate(&env);
     let adapter_id = env.register(AquariusSwapAdapter, (admin.clone(), router1_id.clone()));
     let adapter = AquariusSwapAdapterClient::new(&env, &adapter_id);
@@ -673,10 +674,10 @@ fn test_router_update_reflected_in_swap() {
     // Change to new router (same mock but verifies router is actually changed)
     let router2_id = env.register_contract(None, mock_aquarius::MockAquariusRouter);
     adapter.set_router(&admin, &router2_id);
-    
+
     // Verify new router is used
     assert_eq!(adapter.get_router(), router2_id, "Router should be updated");
-    
+
     // Swap with new router (pool is still registered)
     let result2 = adapter.execute_swap(&from_token, &to_token, &1000u128, &0u128, &recipient);
     assert_eq!(result2, 950, "New router should also work correctly");

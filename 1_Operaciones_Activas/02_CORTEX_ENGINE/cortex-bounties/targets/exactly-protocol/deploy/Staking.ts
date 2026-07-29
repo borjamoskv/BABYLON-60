@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { DeployFunction } from "hardhat-deploy/types";
 import type { Market, StakedEXA } from "../types";
 import transferOwnership from "./.utils/transferOwnership";

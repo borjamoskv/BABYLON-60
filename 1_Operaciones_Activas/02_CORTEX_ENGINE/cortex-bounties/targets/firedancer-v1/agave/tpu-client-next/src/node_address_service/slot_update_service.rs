@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module provides [`SlotUpdateService`] that is used to get slot updates using provided
 //! stream.
 use {

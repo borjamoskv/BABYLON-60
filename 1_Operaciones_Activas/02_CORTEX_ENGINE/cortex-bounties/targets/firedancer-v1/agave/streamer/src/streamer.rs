@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `streamer` module defines a set of services for efficiently pulling data from UDP sockets.
 //!
 

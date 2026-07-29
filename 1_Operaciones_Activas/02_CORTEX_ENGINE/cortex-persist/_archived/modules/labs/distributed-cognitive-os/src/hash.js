@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const crypto = require('node:crypto');
 
 function stableStringify(value) {

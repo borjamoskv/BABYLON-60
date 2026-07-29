@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env node
 const { readSync, forEachWalkSync } = require('./common.js');
 const { execSync } = require('child_process');

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { getEAUrl, getRawNav } from '../../src/transport/ea'
 
 const originalEnv = { ...process.env }

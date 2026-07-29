@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import pytest
 from babylon60.swarm.router import SwarmRouter
 from babylon60.swarm.registry import AgentRegistry

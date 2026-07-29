@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /**
  * Custom Chai assertion for stETH value comparisons with fixed rounding margin.
  * The file will be auto-included in the test suite by the chai setup, no need to import it.

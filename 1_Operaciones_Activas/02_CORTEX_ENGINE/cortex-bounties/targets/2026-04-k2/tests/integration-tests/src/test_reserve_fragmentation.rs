@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 //! Tests for reserve fragmentation attack mitigation
@@ -32,7 +33,7 @@ fn create_test_reserve(
         .price_oracle
         .reset_circuit_breaker(&protocol.admin, &asset_enum);
     protocol.price_oracle.add_asset(&protocol.admin, &asset_enum);
-    
+
     let expiry = env.ledger().timestamp() + 604_800; // 7 days (max allowed by L-04)
     protocol.price_oracle.set_manual_override(
         &protocol.admin,

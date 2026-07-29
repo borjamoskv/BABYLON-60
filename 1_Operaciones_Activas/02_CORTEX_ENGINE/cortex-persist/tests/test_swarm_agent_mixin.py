@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import pytest
 import sqlite3
 from unittest.mock import patch, MagicMock

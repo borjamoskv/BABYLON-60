@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const proc = require('child_process');
 const read = cmd => proc.execSync(cmd, { encoding: 'utf8' }).trim();
 const run = cmd => {

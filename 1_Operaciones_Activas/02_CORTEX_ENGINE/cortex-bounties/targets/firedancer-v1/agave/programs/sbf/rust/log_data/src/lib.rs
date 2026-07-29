@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Example Rust-based SBF program that uses sol_log_data syscall
 
 use {

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { BaseEndpointTypes } from '../endpoint/price'
 import { BaseGlvTransport } from './base'
 import { EndpointContext } from '@chainlink/external-adapter-framework/adapter'

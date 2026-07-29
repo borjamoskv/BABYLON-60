@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /* eslint-disable max-nested-callbacks */
 import { expose, ServerInstance } from '@chainlink/external-adapter-framework'
 import { AdapterRequestBody, sleep } from '@chainlink/external-adapter-framework/util'

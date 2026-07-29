@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { TInputParameters as MaticXInputParameters } from './maticx'
 import type { TInputParameters as sFTMxInputParameters } from './sftmx'
 import type { TInputParameters as BNBxInputParameters } from './bnbx'

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Test program that reads instruction data using the r2 register pointer.
 
 #![allow(clippy::arithmetic_side_effects)]

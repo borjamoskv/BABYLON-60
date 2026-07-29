@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const hre = require('hardhat');
 
 async function getChainId() {

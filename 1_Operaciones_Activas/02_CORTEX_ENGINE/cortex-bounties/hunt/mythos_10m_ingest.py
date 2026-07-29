@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import os
 
 # Configuration
@@ -10,11 +11,11 @@ def ingest():
     print(f"[*] Starting ingestion of {TARGET_DIR}...")
     content_blob = []
     file_count = 0
-    
+
     for root, dirs, files in os.walk(TARGET_DIR):
         # Filter excluded directories
         dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS]
-        
+
         for file in files:
             ext = os.path.splitext(file)[1]
             if ext in EXTENSIONS:
@@ -30,13 +31,13 @@ def ingest():
                     print(f"[!] Error reading {rel_path}: {e}")
 
     full_blob = "".join(content_blob)
-    
+
     # Token estimation approximation (chars / 4)
     tokens = len(full_blob) // 4
-    
+
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
         f.write(full_blob)
-    
+
     print("[+] Ingestion complete.")
     print(f"[+] Files processed: {file_count}")
     print(f"[+] Estimated tokens: {tokens:,}")

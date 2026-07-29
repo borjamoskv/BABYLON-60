@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module implements Cluster Replicated Data Store for
 //! asynchronous updates in a distributed network.
 //!

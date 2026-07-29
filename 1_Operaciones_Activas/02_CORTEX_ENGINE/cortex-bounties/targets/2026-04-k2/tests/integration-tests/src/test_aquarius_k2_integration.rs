@@ -1,7 +1,8 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 /// Integration tests for Aquarius DEX adapter with K2 core features
-/// 
+///
 /// These tests verify that the Aquarius adapter implements the correct interface
 /// for K2's swap_handler parameter, which is used in:
 /// - swap_collateral()
@@ -28,34 +29,34 @@ fn test_aquarius_adapter_interface_compatibility() {
     //
     // Full integration testing requires complex multi-environment setup and
     // should be done on testnet/mainnet.
-    
+
     let env = Env::default();
     env.mock_all_auths();
-    
+
     // Deploy adapter
     let adapter_id = env.register(crate::aquarius_swap_adapter::WASM, ());
     let adapter = crate::aquarius_swap_adapter::Client::new(&env, &adapter_id);
-    
+
     // Verify adapter has the required interface
     let admin = Address::generate(&env);
     let router = Address::generate(&env);
-    
+
     // Initialize should work
     let init_result = adapter.try_initialize(&admin, &router);
     assert!(init_result.is_ok(), "Adapter should initialize");
-    
+
     // Verify execute_swap signature exists (will fail without pool, but signature is correct)
     let token_a = Address::generate(&env);
     let token_b = Address::generate(&env);
     let recipient = Address::generate(&env);
-    
+
     let _swap_result = adapter.try_execute_swap(&token_a, &token_b, &1000u128, &900u128, &recipient);
     // Expected to fail (no pool registered), but proves interface exists
-    
+
     // Verify get_quote signature exists
     let _quote_result = adapter.try_get_quote(&token_a, &token_b, &1000u128);
     // Expected to fail (no pool registered), but proves interface exists
-    
+
     assert!(true, "Aquarius adapter implements K2 swap_handler interface");
 }
 
@@ -64,7 +65,7 @@ fn test_aquarius_adapter_interface_compatibility() {
 fn test_swap_collateral_with_aquarius_full_integration() {
     // This test would require:
     // 1. Full K2 protocol deployment
-    // 2. Full Aquarius AMM deployment  
+    // 2. Full Aquarius AMM deployment
     // 3. Liquidity in Aquarius pools
     // 4. User positions in K2
     //

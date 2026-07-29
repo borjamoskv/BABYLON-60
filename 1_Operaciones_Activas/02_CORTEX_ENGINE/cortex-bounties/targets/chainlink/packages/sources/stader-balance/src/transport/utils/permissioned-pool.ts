@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { ethers } from 'ethers'
 import { BalanceResponse, fetchAddressBalance, formatValueInGwei, withErrorHandling } from './index'
 

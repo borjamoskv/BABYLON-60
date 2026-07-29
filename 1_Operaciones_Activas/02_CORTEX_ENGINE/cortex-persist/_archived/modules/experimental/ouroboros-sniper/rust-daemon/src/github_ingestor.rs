@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use reqwest::header::{HeaderMap, HeaderValue, AUTHORIZATION, USER_AGENT};
 use serde::Deserialize;
 use tokio::sync::mpsc::Sender;

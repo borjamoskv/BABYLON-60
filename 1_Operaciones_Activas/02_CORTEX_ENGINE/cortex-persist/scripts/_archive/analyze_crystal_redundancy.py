@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Script to analyze crystal redundancy (entropy) in the BABYLON60 database.
 

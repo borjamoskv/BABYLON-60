@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use k2_shared::{
     calculate_oracle_to_wad_factor, FlashLiquidationValidationParams,
     FlashLiquidationValidationResult, KineticRouterError, BASIS_POINTS_MULTIPLIER,

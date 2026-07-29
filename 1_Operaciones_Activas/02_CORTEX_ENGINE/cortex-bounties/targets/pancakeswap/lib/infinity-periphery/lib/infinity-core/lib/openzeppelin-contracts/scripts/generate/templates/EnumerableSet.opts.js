@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { capitalize } = require('../../helpers');
 
 const mapType = str => (str == 'uint256' ? 'Uint' : capitalize(str));

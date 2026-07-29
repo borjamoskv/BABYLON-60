@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as client from 'prom-client'
 
 export const rateLimitCreditsSpentTotal = new client.Counter({

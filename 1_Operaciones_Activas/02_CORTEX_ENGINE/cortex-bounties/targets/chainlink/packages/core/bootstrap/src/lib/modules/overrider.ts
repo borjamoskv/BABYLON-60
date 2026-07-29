@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { CoinsResponse, OverrideRecord } from '../../types'
 import { AdapterConfigError, AdapterInputError, AdapterOverriderError } from './error'
 import { logger } from './logger'

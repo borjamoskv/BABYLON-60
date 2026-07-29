@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crate::{contact_info, duplicate_shred},
     crossbeam_channel::{RecvError, SendError},

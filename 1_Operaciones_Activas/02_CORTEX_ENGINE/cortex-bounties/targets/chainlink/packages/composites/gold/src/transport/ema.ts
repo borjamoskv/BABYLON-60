@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // Copied and adjusted from tokenized-equity
 // EMA algorithm by @kalanyuz and @eshaqiri
 

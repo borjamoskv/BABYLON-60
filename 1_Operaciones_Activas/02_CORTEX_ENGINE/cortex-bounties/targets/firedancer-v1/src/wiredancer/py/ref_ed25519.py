@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # RFC8032 reference implementation pages 20-23
 #         + test vectors pages 24-27
 
@@ -66,7 +67,7 @@ def recover_x(y, sign):
 			return None
 		else:
 			return 0
-	
+
 	# Compute square root of x2
 	x = pow(x2, (p+3) // 8, p)
 	if (x*x - x2) % p != 0:
@@ -94,7 +95,7 @@ def point_decompress(s):
 	y = int.from_bytes(s, "little")
 	sign = y >> 255
 	y &= (1 << 255) - 1
-	
+
 	x = recover_x(y, sign)
 	if x is None:
 		return None

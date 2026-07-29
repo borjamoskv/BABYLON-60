@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 VERIFY-REPORT-Ω: Script de Verificación de Cristalización
 Simula la llegada de inteligencia desde Hound-Omega y verifica la generación del reporte.

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 pub const MAX_WORKERS: usize = 64;
 
 /// Protocol version.

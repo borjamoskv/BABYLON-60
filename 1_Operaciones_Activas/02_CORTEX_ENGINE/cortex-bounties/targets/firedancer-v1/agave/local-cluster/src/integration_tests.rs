@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Code used by the integration tests in the `local-cluster/tests` folder.
 //!
 //! According to the cargo documentation, integration tests are compiled as individual crates.

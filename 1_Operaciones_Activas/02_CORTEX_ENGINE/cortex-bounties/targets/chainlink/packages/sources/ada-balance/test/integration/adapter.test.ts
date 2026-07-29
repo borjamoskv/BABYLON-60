@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterRequest, Execute } from '@chainlink/ea-bootstrap'
 import * as adaBalance from '../../src/'
 import '@cardano-ogmios/client'

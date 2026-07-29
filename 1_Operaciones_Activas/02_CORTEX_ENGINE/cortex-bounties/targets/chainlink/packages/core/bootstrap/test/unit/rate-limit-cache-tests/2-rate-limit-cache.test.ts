@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { createStore } from 'redux'
 import { stub, SinonStub } from 'sinon'
 import { withDebug } from '../../../src/lib/middleware/debugger'

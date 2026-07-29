@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // CPI Example: Deposit collateral and borrow from an Anchor program
 //
 // This file is a reference example — it is NOT compiled as part of

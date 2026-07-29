@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import '@nomiclabs/hardhat-waffle'
 import '@typechain/hardhat'
 import { HardhatUserConfig, task } from 'hardhat/config'

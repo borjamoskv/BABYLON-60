@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from eth_consensus_specs.utils.ssz.ssz_impl import hash_tree_root, serialize
 from eth_consensus_specs.utils.ssz.ssz_typing import (
     Bitlist,

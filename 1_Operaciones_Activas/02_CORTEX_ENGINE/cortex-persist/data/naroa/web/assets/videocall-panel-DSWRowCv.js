@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 class u{constructor(){this.container=null,this.selectedDate=null,this.selectedTime=null,this.formData={}}init(e="contacto-container"){if(this.container=document.getElementById(e),!this.container){Logger.error("[VideoCallPanel] Container not found:",e);return}this.render(),this.bindEvents(),this.initEffects()}getAvailableDates(){const e=[],s=new Date;for(let a=1;a<=14;a++){const t=new Date(s);t.setDate(s.getDate()+a),t.getDay()!==0&&e.push({date:t,dayName:t.toLocaleDateString("es-ES",{weekday:"short"}),dayNum:t.getDate(),monthName:t.toLocaleDateString("es-ES",{month:"short"})})}return e.slice(0,10)}getAvailableSlots(){return[{time:"10:00",label:"10:00"},{time:"11:00",label:"11:00"},{time:"12:00",label:"12:00"},{time:"17:00",label:"17:00"},{time:"18:00",label:"18:00"},{time:"19:00",label:"19:00"}]}render(){const e=this.getAvailableDates();this.getAvailableSlots(),this.container.innerHTML=`
             <div class="videocall-panel">
                 <!-- Hero Section -->
@@ -8,12 +9,12 @@ class u{constructor(){this.container=null,this.selectedDate=null,this.selectedTi
                             Hablemos de <span class="text-gradient">Arte</span>
                         </h1>
                         <p class="hero-subtitle">
-                            Programa una videollamada con Naroa para conocer su obra, 
+                            Programa una videollamada con Naroa para conocer su obra,
                             encargar un retrato personalizado o resolver cualquier duda.
                         </p>
                     </div>
                     <div class="hero-avatar">
-                        <img src="images/artworks/the-world-is-yours.webp" 
+                        <img src="images/artworks/the-world-is-yours.webp"
                              alt="Naroa Gutiérrez Gil"
                              class="avatar-image">
                         <div class="avatar-status">
@@ -25,8 +26,8 @@ class u{constructor(){this.container=null,this.selectedDate=null,this.selectedTi
 
                 <!-- Quick Actions -->
                 <section class="quick-actions">
-                    <a href="https://wa.me/34600000000?text=Hola%20Naroa,%20me%20interesa%20tu%20obra" 
-                       target="_blank" 
+                    <a href="https://wa.me/34600000000?text=Hola%20Naroa,%20me%20interesa%20tu%20obra"
+                       target="_blank"
                        class="action-card whatsapp magnetic-btn">
                         <div class="action-icon">💬</div>
                         <div class="action-info">
@@ -34,8 +35,8 @@ class u{constructor(){this.container=null,this.selectedDate=null,this.selectedTi
                             <p>Respuesta inmediata</p>
                         </div>
                     </a>
-                    
-                    <a href="mailto:naroa@naroagutierrezgil.com?subject=Consulta%20sobre%20tu%20obra" 
+
+                    <a href="mailto:naroa@naroagutierrezgil.com?subject=Consulta%20sobre%20tu%20obra"
                        class="action-card email magnetic-btn">
                         <div class="action-icon">✉️</div>
                         <div class="action-info">
@@ -43,7 +44,7 @@ class u{constructor(){this.container=null,this.selectedDate=null,this.selectedTi
                             <p>naroa@naroagutierrezgil.com</p>
                         </div>
                     </a>
-                    
+
                     <button type="button" class="action-card videocall magnetic-btn" id="btn-schedule-call">
                         <div class="action-icon">🎥</div>
                         <div class="action-info">
@@ -65,8 +66,8 @@ class u{constructor(){this.container=null,this.selectedDate=null,this.selectedTi
                         <div class="date-picker">
                             <div class="dates-scroll">
                                 ${e.map((s,a)=>`
-                                    <button type="button" 
-                                            class="date-btn" 
+                                    <button type="button"
+                                            class="date-btn"
                                             data-date="${s.date.toISOString()}"
                                             style="--delay: ${a*.05}s">
                                         <span class="date-day">${s.dayName}</span>
@@ -87,16 +88,16 @@ class u{constructor(){this.container=null,this.selectedDate=null,this.selectedTi
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="contact-name">Nombre *</label>
-                                    <input type="text" id="contact-name" name="name" required 
+                                    <input type="text" id="contact-name" name="name" required
                                            placeholder="Tu nombre">
                                 </div>
                                 <div class="form-group">
                                     <label for="contact-email">Email *</label>
-                                    <input type="email" id="contact-email" name="email" required 
+                                    <input type="email" id="contact-email" name="email" required
                                            placeholder="tu@email.com">
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="contact-interest">¿Qué te interesa?</label>
                                 <select id="contact-interest" name="interest">
@@ -108,13 +109,13 @@ class u{constructor(){this.container=null,this.selectedDate=null,this.selectedTi
                                     <option value="otro">Otra consulta</option>
                                 </select>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="contact-message">Mensaje (opcional)</label>
                                 <textarea id="contact-message" name="message" rows="3"
                                           placeholder="Cuéntame más sobre lo que buscas..."></textarea>
                             </div>
-                            
+
                             <button type="submit" class="submit-btn magnetic-btn" id="submit-btn" disabled>
                                 <span class="btn-text">Confirmar videollamada</span>
                                 <span class="btn-icon">→</span>
@@ -129,7 +130,7 @@ class u{constructor(){this.container=null,this.selectedDate=null,this.selectedTi
                         <div class="success-icon">✨</div>
                         <h2>¡Perfecto!</h2>
                         <p class="success-message">
-                            Tu videollamada ha sido programada para el 
+                            Tu videollamada ha sido programada para el
                             <strong id="confirmed-datetime"></strong>.
                         </p>
                         <p class="success-note">
@@ -144,7 +145,7 @@ class u{constructor(){this.container=null,this.selectedDate=null,this.selectedTi
                 <!-- Footer -->
                 <footer class="panel-footer">
                     <p>
-                        ¿Prefieres hablar con MICA primero? 
+                        ¿Prefieres hablar con MICA primero?
                         <button type="button" class="mica-link" id="btn-open-mica">
                             Abre el chat →
                         </button>
@@ -154,8 +155,8 @@ class u{constructor(){this.container=null,this.selectedDate=null,this.selectedTi
         `}bindEvents(){const e=this.container.querySelector("#btn-schedule-call");e==null||e.addEventListener("click",()=>this.showScheduler()),this.container.querySelectorAll(".date-btn").forEach(i=>{i.addEventListener("click",()=>this.selectDate(i))});const a=this.container.querySelector("#contact-form");a==null||a.addEventListener("submit",i=>this.handleSubmit(i));const t=this.container.querySelector("#btn-back");t==null||t.addEventListener("click",()=>{window.location.hash="#/galeria"});const o=this.container.querySelector("#btn-open-mica");o==null||o.addEventListener("click",()=>{window.micaInstance&&window.micaInstance.toggle()})}showScheduler(){const e=this.container.querySelector("#scheduler-section");e==null||e.classList.add("visible"),e==null||e.scrollIntoView({behavior:"smooth",block:"start"})}selectDate(e){this.container.querySelectorAll(".date-btn").forEach(s=>s.classList.remove("selected")),e.classList.add("selected"),this.selectedDate=new Date(e.dataset.date),this.showTimeSlots()}showTimeSlots(){const e=this.getAvailableSlots(),s=this.container.querySelector("#time-slots");s.innerHTML=`
             <div class="slots-grid">
                 ${e.map((a,t)=>`
-                    <button type="button" 
-                            class="time-btn" 
+                    <button type="button"
+                            class="time-btn"
                             data-time="${a.time}"
                             style="--delay: ${t*.05}s">
                         ${a.label}

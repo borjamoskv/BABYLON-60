@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Logger } from '@chainlink/ea-bootstrap'
 import { DEFAULT_PRIVATE_KEY, ExtendedConfig, Networks } from './config'
 import { ec, Account, InvokeFunctionResponse, BlockWithTxHashes } from 'starknet'

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { DecodedV11Report } from '@chainlink/data-streams-sdk'
 import { BaseEndpointTypes } from '../endpoint/deutscheBoerseV11'
 import { DECIMALS } from './utils'

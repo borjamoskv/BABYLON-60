@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     agave_scheduler_bindings::SharablePubkeys, rts_alloc::Allocator, solana_pubkey::Pubkey,
     std::ptr::NonNull,

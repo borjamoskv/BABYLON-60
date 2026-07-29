@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use soroban_sdk::{
     auth::{ContractContext, InvokerContractAuthEntry, SubContractInvocation},
     xdr::ToXdr, symbol_short, Address, Bytes, BytesN, Env, IntoVal, Symbol, TryFromVal, Val, Vec,
@@ -62,10 +63,10 @@ fn calculate_amount_out(amount_in: i128, reserve_in: i128, reserve_out: i128) ->
         .checked_mul(3)?
         .checked_add(1000 - 1)?
         .checked_div(1000)?;
-    
+
     // Calculate amount_in_with_fee = amount_in - fee
     let amount_in_with_fee = amount_in.checked_sub(fee)?;
-    
+
     // Apply AMM formula: amount_out = (amount_in_with_fee * reserve_out) / (reserve_in + amount_in_with_fee)
     let numerator = amount_in_with_fee.checked_mul(reserve_out)?;
     let denominator = reserve_in.checked_add(amount_in_with_fee)?;
@@ -84,7 +85,7 @@ pub fn swap_exact_tokens_direct(
 ) -> Result<i128, KineticRouterError> {
     let caller = env.current_contract_address();
     let pair_address = compute_pair_address(env, factory, from_token, to_token);
-    
+
     // Soroswap returns Result<(i128, i128), Error>
     let (reserve_0, reserve_1): (i128, i128) = call_soroswap(
         env,
@@ -92,21 +93,21 @@ pub fn swap_exact_tokens_direct(
         "get_reserves",
         soroban_sdk::vec![env],
     )?;
-    
+
     let (token_0, _token_1) = sort_tokens(from_token, to_token);
     let (reserve_in, reserve_out) = if from_token == &token_0 {
         (reserve_0, reserve_1)
     } else {
         (reserve_1, reserve_0)
     };
-    
+
     let amount_out = calculate_amount_out(amount_in, reserve_in, reserve_out)
         .ok_or(KineticRouterError::InsufficientSwapOut)?;
-    
+
     if amount_out < min_out {
         return Err(KineticRouterError::InsufficientSwapOut);
     }
-    
+
     // Authorize current contract to transfer tokens to pair
     // Note: authorize_as_current_contract only authorizes the contract itself, not the EOA caller
     env.authorize_as_current_contract(soroban_sdk::vec![
@@ -125,7 +126,7 @@ pub fn swap_exact_tokens_direct(
             sub_invocations: Vec::<InvokerContractAuthEntry>::new(env),
         }),
     ]);
-    
+
     let _: () = env.invoke_contract(
         from_token,
         &symbol_short!("transfer"),
@@ -136,13 +137,13 @@ pub fn swap_exact_tokens_direct(
             amount_in.into_val(env),
         ],
     );
-    
+
     let (amount_0_out, amount_1_out) = if from_token == &token_0 {
         (0i128, amount_out)
     } else {
         (amount_out, 0i128)
     };
-    
+
     // Soroswap returns Result<(), Error>
     let _: () = call_soroswap(
         env,
@@ -155,7 +156,7 @@ pub fn swap_exact_tokens_direct(
             recipient.to_val(),
         ],
     )?;
-    
+
     Ok(amount_out)
 }
 
@@ -348,7 +349,7 @@ pub fn pair_exists(env: &Env, router: &Address, token_a: &Address, token_b: &Add
 }
 
 /// Swap via external handler contract
-/// 
+///
 /// This allows using any DEX by providing an adapter contract that implements
 /// the execute_swap interface. The handler receives tokens, swaps via any DEX,
 /// and returns the output tokens to the recipient.
@@ -374,7 +375,7 @@ pub fn swap_via_handler(
     recipient: &Address,
 ) -> Result<i128, KineticRouterError> {
     let caller = env.current_contract_address();
-    
+
     // Authorize current contract to transfer tokens to handler
     env.authorize_as_current_contract(soroban_sdk::vec![
         env,
@@ -392,7 +393,7 @@ pub fn swap_via_handler(
             sub_invocations: Vec::<InvokerContractAuthEntry>::new(env),
         }),
     ]);
-    
+
     // Transfer tokens to handler
     let _: () = env.invoke_contract(
         from_token,
@@ -404,56 +405,56 @@ pub fn swap_via_handler(
             amount_in.into_val(env),
         ],
     );
-    
+
     // L-01
     let balance_before: i128 = env.invoke_contract(
         to_token,
         &symbol_short!("balance"),
         soroban_sdk::vec![env, recipient.to_val()],
     );
-    
+
     // Call handler's execute_swap - handlers return Result<u128, Error>
     let reported_amount_out: u128 = call_soroswap(
         env,
         handler,
         "execute_swap",
         soroban_sdk::vec![
-            env, 
-            from_token.to_val(), 
+            env,
+            from_token.to_val(),
             to_token.to_val(),
             safe_i128_to_u128(env, amount_in).into_val(env),
             safe_i128_to_u128(env, min_out).into_val(env),
             recipient.to_val()
         ],
     )?;
-    
+
     // Verify actual balance increase matches or exceeds reported amount
     let balance_after: i128 = env.invoke_contract(
         to_token,
         &symbol_short!("balance"),
         soroban_sdk::vec![env, recipient.to_val()],
     );
-    
+
     let actual_amount_out = balance_after
         .checked_sub(balance_before)
         .ok_or(KineticRouterError::MathOverflow)?;
-    
+
     if actual_amount_out < 0 {
         return Err(KineticRouterError::InsufficientSwapOut);
     }
-    
+
     let actual_amount_out_u128 = safe_i128_to_u128(env, actual_amount_out);
-    
+
     // Use actual balance change, not handler-reported amount
     if actual_amount_out_u128 < safe_i128_to_u128(env, min_out) {
         return Err(KineticRouterError::InsufficientSwapOut);
     }
-    
+
     Ok(actual_amount_out)
 }
 
 /// Get swap quote from external handler contract
-/// 
+///
 /// This allows getting quotes from any DEX via an adapter contract.
 /// The handler must implement a get_quote function.
 ///
@@ -479,12 +480,12 @@ pub fn get_quote_from_handler(
         handler,
         "get_quote",
         soroban_sdk::vec![
-            env, 
-            from_token.to_val(), 
+            env,
+            from_token.to_val(),
             to_token.to_val(),
             safe_i128_to_u128(env, amount_in).into_val(env),
         ],
     )?;
-    
+
     Ok(safe_u128_to_i128(env, quote))
 }

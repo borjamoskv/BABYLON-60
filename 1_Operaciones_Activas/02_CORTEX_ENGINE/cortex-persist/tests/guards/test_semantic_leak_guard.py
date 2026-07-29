@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import pytest
 from babylon60.guards.semantic_leak_guard import SemanticLeakGuard, SemanticLeakViolationError
 

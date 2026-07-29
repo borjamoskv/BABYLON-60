@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use solana_pubkey::Pubkey;
 
 pub const LENDING_MARKET_AUTH: &[u8] = b"lma";

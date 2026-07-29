@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! `ForwardingStage` is a stage parallel to `BankingStage` that forwards
 //! packets to a node that is or will be leader soon.
 

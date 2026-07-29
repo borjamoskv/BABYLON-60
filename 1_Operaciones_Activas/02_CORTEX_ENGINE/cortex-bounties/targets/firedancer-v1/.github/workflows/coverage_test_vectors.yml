@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # Measures llvm-cov coverage for run_test_vectors.sh and posts a delta
 # report as a PR comment.  Triggered when test-vectors-commit-sha.txt,
 # run_test_vectors.sh, or this workflow file changes.

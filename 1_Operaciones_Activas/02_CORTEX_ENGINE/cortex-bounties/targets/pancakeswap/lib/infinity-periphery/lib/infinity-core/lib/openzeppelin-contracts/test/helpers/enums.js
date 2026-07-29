@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 function Enum(...options) {
   return Object.fromEntries(options.map((key, i) => [key, BigInt(i)]));
 }

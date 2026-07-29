@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { ethers } = require('hardhat');
 const { time, mine, mineUpTo } = require('@nomicfoundation/hardhat-network-helpers');
 const { mapValues } = require('./iterate');

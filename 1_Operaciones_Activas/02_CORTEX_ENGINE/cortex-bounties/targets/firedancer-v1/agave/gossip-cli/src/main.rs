@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! A command-line executable for monitoring a cluster's gossip plane.
 #[allow(deprecated)]
 use solana_gossip::{contact_info::ContactInfo, gossip_service::discover_peers};

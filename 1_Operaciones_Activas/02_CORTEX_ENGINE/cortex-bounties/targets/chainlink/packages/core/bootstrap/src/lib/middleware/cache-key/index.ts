@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import crypto from 'crypto'
 import objectHash from 'object-hash'
 

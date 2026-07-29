@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 export const wsMessageContent = (
   eventName: 'subscribe' | 'unsubscribe',
   apiKey: string,

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /// OUROBOROS SNIPER — BABYLON60 CSE TYPE LAYER
 /// Asimilado de paradigmxyz/artemis | Ley Ω₄ (Soberanía Arquitectónica)
 /// Collector → Strategy → Executor: O(1) event loop.

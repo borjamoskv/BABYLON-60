@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 interface ExplorerConfig {
   name: string;
   baseUrl: string;

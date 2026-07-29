@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { LoggerFactoryProvider } from '@chainlink/external-adapter-framework/util'
 import { setEnvVariables } from '@chainlink/external-adapter-framework/util/testing-utils'
 import { MockXhrServer, newServer } from 'mock-xmlhttprequest'

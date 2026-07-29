@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { config } from '../config'
 import { MoonbeamAddressContract_ABI } from '../config/MoonbeamAddressContractABI'
 import { ResponseCache } from '@chainlink/external-adapter-framework/cache/response'

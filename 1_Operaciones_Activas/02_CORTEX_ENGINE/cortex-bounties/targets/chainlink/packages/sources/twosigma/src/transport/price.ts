@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { BaseEndpointTypes, RequestParams } from '../endpoint/price'
 import { makeLogger, ProviderResult } from '@chainlink/external-adapter-framework/util'
 import { WebSocketTransport } from '@chainlink/external-adapter-framework/transports'

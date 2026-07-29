@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Read an obligation and display deposit/borrow positions and health metrics.
 //!
 //! Demonstrates how to:

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { DefaultConfig, Requester, util } from '@chainlink/ea-bootstrap'
 import {
   adapterNamesV2 as BalanceAdaptersV2,

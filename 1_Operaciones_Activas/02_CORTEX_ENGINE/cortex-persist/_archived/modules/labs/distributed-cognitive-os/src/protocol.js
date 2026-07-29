@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const NODE_ROLES = Object.freeze({
   COORDINATOR: 'coordinator',
   DMN: 'dmn',

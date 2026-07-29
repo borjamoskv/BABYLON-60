@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /// OUROBOROS STRATEGY — BABYLON60 ALPHA ARBITRAGE CORE
 /// Lógica pura: SovereignEvent → Vec<SovereignAction>
 /// Ley Ω₁: Frontera determinista. Sin I/O. Sin efectos secundarios.

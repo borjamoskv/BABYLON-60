@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! A command-line executable for monitoring the health of a cluster
 #![allow(clippy::arithmetic_side_effects)]
 

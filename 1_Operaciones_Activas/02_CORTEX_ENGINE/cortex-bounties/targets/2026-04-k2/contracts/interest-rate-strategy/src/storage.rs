@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use soroban_sdk::{contracttype, symbol_short, Address, Env, Symbol};
 use k2_shared::KineticRouterError;
 
@@ -13,7 +14,7 @@ pub struct InterestRateParams {
     pub base_variable_borrow_rate: u128,
     /// Variable rate slope below optimal utilization
     pub variable_rate_slope1: u128,
-    /// Variable rate slope above optimal utilization  
+    /// Variable rate slope above optimal utilization
     pub variable_rate_slope2: u128,
     pub optimal_utilization_rate: u128,
 }

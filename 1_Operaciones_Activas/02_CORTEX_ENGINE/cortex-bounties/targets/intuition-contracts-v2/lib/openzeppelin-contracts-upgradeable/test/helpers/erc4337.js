@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { ethers, config, predeploy } = require('hardhat');
 
 const SIG_VALIDATION_SUCCESS = '0x0000000000000000000000000000000000000000';

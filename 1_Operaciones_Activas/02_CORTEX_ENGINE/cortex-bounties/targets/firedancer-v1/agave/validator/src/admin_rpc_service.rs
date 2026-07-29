@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crossbeam_channel::Sender,
     jsonrpc_core::{BoxFuture, ErrorCode, MetaIoHandler, Metadata, Result},

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::*;
 
 pub const EMPTY_PAYLOAD_HASH: [u8; 32] = [0u8; 32];

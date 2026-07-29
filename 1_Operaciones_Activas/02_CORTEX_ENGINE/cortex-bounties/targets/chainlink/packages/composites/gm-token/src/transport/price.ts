@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { ResponseCache } from '@chainlink/external-adapter-framework/cache/response'
 import { TransportDependencies } from '@chainlink/external-adapter-framework/transports'
 import { Requester } from '@chainlink/external-adapter-framework/util/requester'

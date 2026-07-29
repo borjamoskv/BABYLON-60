@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::pin::Pin;
 
 use crate::proto::auth::auth_service_server::{AuthService, AuthServiceServer};

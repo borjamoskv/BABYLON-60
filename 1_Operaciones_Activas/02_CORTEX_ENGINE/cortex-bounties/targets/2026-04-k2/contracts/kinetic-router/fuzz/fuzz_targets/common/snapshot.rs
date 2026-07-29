@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::common::setup::TestEnv;
 
 #[derive(Debug, Clone)]
@@ -27,22 +28,22 @@ impl ProtocolSnapshot {
         let mut available_liquidity = Vec::new();
         let mut protocol_reserves = Vec::new();
         let mut prices = Vec::new();
-        
+
         for asset in &test_env.assets {
             let supply = asset.a_token.total_supply();
             let debt = asset.debt_token.total_supply();
             let underlying_balance = asset.token.balance(&asset.a_token.address);
-            
+
             total_supply.push(supply);
             total_debt.push(debt);
             treasury_balances.push(asset.token.balance(&test_env.treasury));
             available_liquidity.push(underlying_balance);
             prices.push(asset.current_price);
-            
+
             let expected_balance = supply - debt;
             let reserves = underlying_balance - expected_balance;
             protocol_reserves.push(reserves);
-            
+
             if let Ok(Ok(reserve_data)) = test_env.router.try_get_reserve_data(&asset.address) {
                 liquidity_indices.push(reserve_data.liquidity_index);
                 borrow_indices.push(reserve_data.variable_borrow_index);
@@ -51,27 +52,27 @@ impl ProtocolSnapshot {
                 borrow_indices.push(crate::common::constants::RAY);
             }
         }
-        
+
         let mut user_collateral = Vec::new();
         let mut user_debt = Vec::new();
         let mut user_underlying = Vec::new();
         let mut health_factors = Vec::new();
-        
+
         for user in &test_env.users {
             let mut collateral = Vec::new();
             let mut debt = Vec::new();
             let mut underlying = Vec::new();
-            
+
             for asset in &test_env.assets {
                 collateral.push(asset.a_token.balance(user));
                 debt.push(asset.debt_token.balance(user));
                 underlying.push(asset.token.balance(user));
             }
-            
+
             user_collateral.push(collateral);
             user_debt.push(debt);
             user_underlying.push(underlying);
-            
+
             // Capture health factor for each user
             let hf = if let Ok(Ok(account_data)) = test_env.router.try_get_user_account_data(user) {
                 account_data.health_factor
@@ -80,7 +81,7 @@ impl ProtocolSnapshot {
             };
             health_factors.push(hf);
         }
-        
+
         ProtocolSnapshot {
             total_supply,
             total_debt,

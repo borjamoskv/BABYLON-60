@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { ServerInstance } from '@chainlink/external-adapter-framework'
 import { PriceAdapter } from '@chainlink/external-adapter-framework/adapter'
 import { WebSocketClassProvider } from '@chainlink/external-adapter-framework/transports'

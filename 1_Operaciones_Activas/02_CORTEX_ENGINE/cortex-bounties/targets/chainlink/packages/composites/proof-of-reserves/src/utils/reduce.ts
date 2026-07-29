@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterContext, AdapterError, AdapterResponse } from '@chainlink/ea-bootstrap'
 import * as reduce from '@chainlink/reduce-adapter'
 import { ethers } from 'ethers'

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterRequest } from '@chainlink/ea-bootstrap'
 import { server as startServer } from '../../src/index'
 import {

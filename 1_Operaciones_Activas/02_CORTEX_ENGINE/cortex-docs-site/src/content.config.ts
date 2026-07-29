@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { defineCollection } from 'astro:content';
 import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';

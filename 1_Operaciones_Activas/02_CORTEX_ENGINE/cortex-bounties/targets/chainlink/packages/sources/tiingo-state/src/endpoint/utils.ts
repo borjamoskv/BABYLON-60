@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterRequest } from '@chainlink/external-adapter-framework/util'
 
 export function tiingoCommonSubscriptionRequestTransform() {

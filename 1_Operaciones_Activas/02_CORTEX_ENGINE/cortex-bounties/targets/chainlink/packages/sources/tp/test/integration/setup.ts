@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as process from 'process'
 import { SuperTest, Test } from 'supertest'
 import { Server, WebSocket } from 'mock-socket'

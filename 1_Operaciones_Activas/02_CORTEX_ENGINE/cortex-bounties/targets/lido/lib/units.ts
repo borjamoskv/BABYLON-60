@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { BigNumberish, parseEther as ether, parseUnits } from "ethers";
 
 export const ONE_ETHER = ether("1.0");

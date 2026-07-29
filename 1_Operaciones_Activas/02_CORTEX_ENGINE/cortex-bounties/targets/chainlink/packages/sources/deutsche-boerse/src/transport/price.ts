@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { createLwbaWsTransport } from './lwba'
 
 export const priceProtobufWsTransport = createLwbaWsTransport((quote) => {

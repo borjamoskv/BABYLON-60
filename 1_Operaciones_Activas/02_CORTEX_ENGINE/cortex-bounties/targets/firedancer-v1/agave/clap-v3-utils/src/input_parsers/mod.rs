@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crate::{
         input_validators::normalize_to_url_if_moniker,

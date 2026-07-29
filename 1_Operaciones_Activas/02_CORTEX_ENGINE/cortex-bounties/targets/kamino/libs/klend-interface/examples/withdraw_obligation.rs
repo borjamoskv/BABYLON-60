@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Withdraw collateral from an obligation and redeem it for the underlying liquidity.
 //!
 //! This is the standard withdraw flow for borrowers — it removes collateral from

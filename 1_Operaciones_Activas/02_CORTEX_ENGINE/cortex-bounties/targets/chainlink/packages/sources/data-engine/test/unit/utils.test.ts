@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { resolveResult, scaleDecimals } from '../../src/transport/utils'
 
 describe('scaleDecimals', () => {

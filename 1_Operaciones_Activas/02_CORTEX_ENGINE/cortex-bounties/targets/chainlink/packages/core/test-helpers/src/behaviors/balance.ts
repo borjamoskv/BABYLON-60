@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Execute } from '@chainlink/ea-bootstrap'
 import { serverErrors, successes, validationErrors } from '../helpers'
 

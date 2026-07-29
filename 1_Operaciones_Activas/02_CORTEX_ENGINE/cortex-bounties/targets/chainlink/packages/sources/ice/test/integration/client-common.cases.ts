@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { sleep } from '@chainlink/external-adapter-framework/util'
 import { config } from '../../src/config'
 import { InstrumentPartialUpdate, StreamingClient } from '../../src/transport/netdania'

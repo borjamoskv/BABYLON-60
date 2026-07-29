@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AxiosRequestConfig, Requester, Validator } from '@chainlink/ea-bootstrap'
 import { ExecuteWithConfig, InputParameters } from '@chainlink/ea-bootstrap'
 import { DEFAULT_BASE_URL, ExtendedConfig } from '../config'

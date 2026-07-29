@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::shred::{
     DATA_SHREDS_PER_FEC_BLOCK, Error, MAX_CODE_SHREDS_PER_SLOT, MAX_DATA_SHREDS_PER_SLOT,
     ShredType, traits::ShredCode as ShredCodeTrait,
@@ -17,7 +18,7 @@ pub(super) fn erasure_shard_index<T: ShredCodeTrait>(shred: &T) -> Option<usize>
     }
     let (max_data_shred_per_slot, max_code_shreds_per_slot) = if unsafe { fd_ext_larger_shred_limits_per_block() } != 0 {
         (32 * MAX_DATA_SHREDS_PER_SLOT, 32 * MAX_CODE_SHREDS_PER_SLOT)
-    } else { 
+    } else {
         (MAX_DATA_SHREDS_PER_SLOT, MAX_CODE_SHREDS_PER_SLOT)
     };
 

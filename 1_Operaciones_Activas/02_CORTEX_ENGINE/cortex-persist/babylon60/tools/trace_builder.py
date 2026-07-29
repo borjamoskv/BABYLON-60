@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """TraceBuilder: constructs ExecutionTrace from runtime audit events.
 
 Usage (shadow mode — does not touch hot-path):

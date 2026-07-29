@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 //! Integration tests for flash liquidation functionality in Kinetic Router
@@ -921,19 +922,19 @@ fn test_flash_liquidation_budget_analysis() {
 #[test]
 fn test_flash_liquidation_with_real_vm_instantiation() {
     use std::path::PathBuf;
-    
+
     let env = create_test_env_with_budget_limits();
-    
+
     println!("\n========================================");
     println!("🔬 REAL VM INSTANTIATION TEST");
     println!("========================================");
     println!("Loading WASM files from disk to force VM instantiation...\n");
-    
+
     // Get the workspace root
     let manifest_dir = std::env::var("CARGO_MANIFEST_DIR").unwrap();
     let workspace_root = PathBuf::from(&manifest_dir).parent().unwrap().parent().unwrap().to_path_buf();
     let target_dir = workspace_root.join("target/wasm32v1-none/release");
-    
+
     println!("📂 Loading WASM files from: {}", target_dir.display());
 
     // Load optimized WASM files from disk (required for < 128KB size limit)
@@ -953,7 +954,7 @@ fn test_flash_liquidation_with_real_vm_instantiation() {
         .expect("Failed to read incentives optimized WASM");
     let pool_configurator_wasm = std::fs::read(target_dir.join("k2_pool_configurator.optimized.wasm"))
         .expect("Failed to read pool_configurator optimized WASM");
-    
+
     println!("✅ All WASM files loaded successfully");
     println!("📊 WASM Sizes:");
     println!("  - kinetic_router: {} KB", kinetic_router_wasm.len() / 1024);
@@ -961,33 +962,33 @@ fn test_flash_liquidation_with_real_vm_instantiation() {
     println!("  - a_token: {} KB", a_token_wasm.len() / 1024);
     println!("  - debt_token: {} KB", debt_token_wasm.len() / 1024);
     println!("  - interest_rate_strategy: {} KB", interest_rate_strategy_wasm.len() / 1024);
-    
+
     let admin = Address::generate(&env);
     let emergency_admin = Address::generate(&env);
     let liquidity_provider = Address::generate(&env);
     let user = Address::generate(&env);
     let liquidator = Address::generate(&env);
-    
+
     // Deploy using register_contract_wasm to force VM instantiation
     println!("\n🚀 Deploying contracts with register_contract_wasm()...");
-    
+
     let price_oracle_id = env.register_contract_wasm(None, price_oracle_wasm.as_slice());
     let treasury_id = env.register_contract_wasm(None, treasury_wasm.as_slice());
     let incentives_id = env.register_contract_wasm(None, incentives_wasm.as_slice());
     let pool_configurator_id = env.register_contract_wasm(None, pool_configurator_wasm.as_slice());
     let kinetic_router_id = env.register_contract_wasm(None, kinetic_router_wasm.as_slice());
-    
+
     // Deploy mock contracts (these will still be Rust, but that's OK for this test)
     let mock_reflector = env.register(crate::setup::ReflectorStub, ());
     let mock_dex_router_id = env.register(crate::setup::MockSoroswapRouter, ());
-    
+
     // Initialize contracts
     let price_oracle = crate::price_oracle::Client::new(&env, &price_oracle_id);
     let treasury = crate::treasury::Client::new(&env, &treasury_id);
     let incentives = crate::incentives::Client::new(&env, &incentives_id);
     let pool_configurator = crate::pool_configurator::Client::new(&env, &pool_configurator_id);
     let kinetic_router = crate::kinetic_router::Client::new(&env, &kinetic_router_id);
-    
+
     let base_currency = Address::generate(&env);
     let native_xlm = Address::generate(&env);
     price_oracle.initialize(&admin, &mock_reflector, &base_currency, &native_xlm);
@@ -1002,35 +1003,35 @@ fn test_flash_liquidation_with_real_vm_instantiation() {
         &mock_dex_router_id,
         &Some(incentives_id.clone()),
     );
-    
+
     // Set pool configurator
     kinetic_router.set_pool_configurator(&pool_configurator_id);
-    
+
     // Setup mock Soroswap
     let mock_dex_router_client = crate::setup::MockSoroswapRouterClient::new(&env, &mock_dex_router_id);
     let factory_id = env.register(crate::setup::MockSoroswapFactory, ());
     mock_dex_router_client.router_initialize(&factory_id);
     kinetic_router.set_dex_router(&mock_dex_router_id);
-    
+
     // Create assets
     let usdc_sac = env.register_stellar_asset_contract_v2(admin.clone());
     let usdc_address = usdc_sac.address();
     let usdt_sac = env.register_stellar_asset_contract_v2(admin.clone());
     let usdt_address = usdt_sac.address();
-    
+
     // Deploy reserve tokens using WASM
     let usdc_a_token_id = env.register_contract_wasm(None, a_token_wasm.as_slice());
     let usdc_debt_token_id = env.register_contract_wasm(None, debt_token_wasm.as_slice());
     let usdt_a_token_id = env.register_contract_wasm(None, a_token_wasm.as_slice());
     let usdt_debt_token_id = env.register_contract_wasm(None, debt_token_wasm.as_slice());
     let interest_rate_strategy_id = env.register_contract_wasm(None, interest_rate_strategy_wasm.as_slice());
-    
+
     let usdc_a_token = crate::a_token::Client::new(&env, &usdc_a_token_id);
     let usdc_debt_token = crate::debt_token::Client::new(&env, &usdc_debt_token_id);
     let usdt_a_token = crate::a_token::Client::new(&env, &usdt_a_token_id);
     let usdt_debt_token = crate::debt_token::Client::new(&env, &usdt_debt_token_id);
     let interest_rate_strategy = crate::interest_rate_strategy::Client::new(&env, &interest_rate_strategy_id);
-    
+
     // Initialize tokens
     interest_rate_strategy.initialize(
         &admin,
@@ -1039,8 +1040,8 @@ fn test_flash_liquidation_with_real_vm_instantiation() {
         &600000000000000000000000000u128,
         &800000000000000000000000000u128,
     );
-    
-    usdc_a_token.initialize(&admin, &usdc_address, &kinetic_router_id, 
+
+    usdc_a_token.initialize(&admin, &usdc_address, &kinetic_router_id,
         &soroban_sdk::String::from_str(&env, "aUSDC"), &soroban_sdk::String::from_str(&env, "aUSDC"), &7u32);
     usdc_debt_token.initialize(&admin, &usdc_address, &kinetic_router_id,
         &soroban_sdk::String::from_str(&env, "dUSDC"), &soroban_sdk::String::from_str(&env, "dUSDC"), &7u32);
@@ -1048,7 +1049,7 @@ fn test_flash_liquidation_with_real_vm_instantiation() {
         &soroban_sdk::String::from_str(&env, "aUSDT"), &soroban_sdk::String::from_str(&env, "aUSDT"), &7u32);
     usdt_debt_token.initialize(&admin, &usdt_address, &kinetic_router_id,
         &soroban_sdk::String::from_str(&env, "dUSDT"), &soroban_sdk::String::from_str(&env, "dUSDT"), &7u32);
-    
+
     // Set oracle prices
     let usdc_asset_enum = crate::price_oracle::Asset::Stellar(usdc_address.clone());
     let usdt_asset_enum = crate::price_oracle::Asset::Stellar(usdt_address.clone());
@@ -1056,45 +1057,45 @@ fn test_flash_liquidation_with_real_vm_instantiation() {
     price_oracle.add_asset(&admin, &usdt_asset_enum);
     price_oracle.set_manual_override(&admin, &usdc_asset_enum, &Some(1_000_000_000_000_000u128), &Some(env.ledger().timestamp() + 604_800));
     price_oracle.set_manual_override(&admin, &usdt_asset_enum, &Some(1_000_000_000_000_000u128), &Some(env.ledger().timestamp() + 604_800));
-    
+
     // Initialize reserves
     let reserve_params = crate::kinetic_router::InitReserveParams {
         decimals: 7, ltv: 8000, liquidation_threshold: 8500, liquidation_bonus: 500,
         reserve_factor: 1000, supply_cap: 1_000_000_000_000_000, borrow_cap: 500_000_000_000_000,
         borrowing_enabled: true, flashloan_enabled: true,
     };
-    
+
     kinetic_router.init_reserve(&pool_configurator_id, &usdc_address, &usdc_a_token_id, &usdc_debt_token_id,
         &interest_rate_strategy_id, &treasury_id, &reserve_params);
     kinetic_router.init_reserve(&pool_configurator_id, &usdt_address, &usdt_a_token_id, &usdt_debt_token_id,
         &interest_rate_strategy_id, &treasury_id, &reserve_params);
-    
+
     // Mint and approve tokens
     let usdc_client = soroban_sdk::token::Client::new(&env, &usdc_address);
     let usdt_client = soroban_sdk::token::Client::new(&env, &usdt_address);
     let usdc_sac_admin = soroban_sdk::token::StellarAssetClient::new(&env, &usdc_address);
     let usdt_sac_admin = soroban_sdk::token::StellarAssetClient::new(&env, &usdt_address);
-    
+
     // Seed DEX with liquidity
     usdc_sac_admin.mint(&admin, &10_000_000_000_000i128);
     usdt_sac_admin.mint(&admin, &10_000_000_000_000i128);
     usdc_client.transfer(&admin, &mock_dex_router_id, &10_000_000_000_000i128);
     usdt_client.transfer(&admin, &mock_dex_router_id, &10_000_000_000_000i128);
-    
+
     // Mint to users
     usdc_sac_admin.mint(&liquidity_provider, &100_000_000_000_000i128);
     usdc_sac_admin.mint(&user, &100_000_000_000_000i128);
     usdt_sac_admin.mint(&liquidity_provider, &100_000_000_000_000i128);
     usdt_sac_admin.mint(&liquidator, &100_000_000_000_000i128);
-    
+
     // Approve
     usdc_client.approve(&liquidity_provider, &kinetic_router_id, &i128::MAX, &200000);
     usdc_client.approve(&user, &kinetic_router_id, &i128::MAX, &200000);
     usdt_client.approve(&liquidity_provider, &kinetic_router_id, &i128::MAX, &200000);
     usdt_client.approve(&liquidator, &kinetic_router_id, &i128::MAX, &200000);
-    
+
     println!("✅ All contracts deployed and initialized\n");
-    
+
     // Setup liquidatable position (H-04: 70% LTV + $0.80 crash)
     let usdc_supply = 100_000_000_000u128;
     let usdt_borrow = 70_000_000_000u128;
@@ -1117,23 +1118,23 @@ fn test_flash_liquidation_with_real_vm_instantiation() {
     let debt_to_cover = 35_000_000_000u128;
     let min_swap_out = 30_000_000_000u128;
     let deadline = env.ledger().timestamp() + 300;
-    
+
     println!("\n🔧 Resetting budget to measure liquidation with REAL VM instantiation...");
     #[allow(deprecated)]
     env.budget().reset_unlimited();
-    
+
     // Step 1: Prepare liquidation
     env.mock_auths(&[MockAuth {
         address: &liquidator,
         invoke: &MockAuthInvoke {
             contract: &kinetic_router_id,
             fn_name: "prepare_liquidation",
-            args: (&liquidator, &user, &usdt_address, &usdc_address, &debt_to_cover, 
+            args: (&liquidator, &user, &usdt_address, &usdc_address, &debt_to_cover,
                    &min_swap_out, &None::<Address>).into_val(&env),
             sub_invokes: &[],
         },
     }]);
-    
+
     let _auth = kinetic_router.prepare_liquidation(&liquidator, &user, &usdt_address, &usdc_address,
         &debt_to_cover, &min_swap_out, &None);
 
@@ -1147,34 +1148,34 @@ fn test_flash_liquidation_with_real_vm_instantiation() {
             sub_invokes: &[],
         },
     }]);
-    
+
     kinetic_router.execute_liquidation(&liquidator, &user, &usdt_address, &usdc_address,
         &deadline);
-    
+
     println!("\n========================================");
     println!("📈 REAL VM INSTANTIATION BUDGET");
     println!("========================================");
-    
+
     #[allow(deprecated)]
     env.budget().print();
-    
+
     let cost_estimate = env.cost_estimate();
     let cpu_used = cost_estimate.budget().cpu_instruction_cost();
-    
+
     println!("\n========================================");
     println!("🎯 REAL-WORLD ANALYSIS");
     println!("========================================");
     println!("Total CPU: {}", cpu_used);
     println!("CPU Limit: 100,000,000");
     println!("Percentage: {:.2}%", (cpu_used as f64 / 100_000_000.0) * 100.0);
-    
+
     if cpu_used > 100_000_000 {
         println!("\n❌ EXCEEDS LIMIT by {} instructions", cpu_used - 100_000_000);
         println!("This is why your UI transaction fails!");
     } else {
         println!("\n✅ Within limit (but check VM instantiation costs above)");
     }
-    
+
     println!("\n💡 Look for 'VmInstantiation' or 'VmCachedInstantiation' in the output above.");
     println!("If still zero, SDK v22 may be caching even with register_contract_wasm().");
     println!("========================================\n");

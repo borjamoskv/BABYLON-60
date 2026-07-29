@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -71,7 +72,7 @@ export class LogManager<TResult = any> {
   constructor(testName: string) {
     this.testName = testName;
     this.startTime = Date.now();
-    
+
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
     this.logDir = path.join(process.cwd(), 'logs', testName, timestamp);
     if (!fs.existsSync(this.logDir)) {
@@ -80,7 +81,7 @@ export class LogManager<TResult = any> {
 
     this.logFile = path.join(this.logDir, 'main.log');
     this.errorFile = path.join(this.logDir, 'errors.log');
-    
+
     this.stats = {
       total: 0,
       success: 0,
@@ -100,9 +101,9 @@ export class LogManager<TResult = any> {
   log(message: string, echoToConsole: boolean = true): void {
     const timestamp = new Date().toISOString();
     const logLine = `[${timestamp}] ${message}\n`;
-    
+
     fs.appendFileSync(this.logFile, logLine);
-    
+
     if (echoToConsole) {
       console.log(message);
     }
@@ -112,10 +113,10 @@ export class LogManager<TResult = any> {
     const timestamp = new Date().toISOString();
     const errorStr = error ? (error.stack || JSON.stringify(error, null, 2)) : '';
     const logLine = `[${timestamp}] ERROR: ${message}\n${errorStr}\n`;
-    
+
     fs.appendFileSync(this.errorFile, logLine);
     fs.appendFileSync(this.logFile, logLine);
-    
+
     console.error(`ERROR: ${message}`);
   }
 
@@ -127,10 +128,10 @@ export class LogManager<TResult = any> {
     if (typeof this.stats[key] === 'undefined') {
       this.stats[key] = 0;
     }
-    
+
     this.stats.total += amount;
     this.stats[key] += amount;
-  
+
     const _key = key.toString();
     if (_key.includes('failed') && _key !== "failed") {
         this.stats.failed += amount;
@@ -146,12 +147,12 @@ export class LogManager<TResult = any> {
     const percentage = Math.min(100, Math.floor((current / total) * 100));
     const filled = Math.floor((width * percentage) / 100);
     const empty = width - filled;
-    
+
     const bar = '█'.repeat(filled) + '░'.repeat(empty);
     const elapsed = ((Date.now() - this.startTime) / 1000).toFixed(1);
-    
+
     const line = `\r[${bar}] ${percentage}% (${current}/${total}) | ${elapsed}s | ${extraInfo}`;
-    
+
     try {
       fs.writeSync(this.ttyFd, `\x1b[2K${line}`);
     } catch (e) {
@@ -180,7 +181,7 @@ export class LogManager<TResult = any> {
     }, (_, v) => typeof v === 'bigint' ? v.toString() : v, 2));
 
     this.log(`Results saved to: ${resultsPath}`);
-    
+
     this.generateMarkdownSummary();
   }
 
@@ -188,7 +189,7 @@ export class LogManager<TResult = any> {
     let md = `# ${this.testName} Report\n\n`;
     md += `**Date:** ${new Date().toISOString()}\n`;
     md += `**Duration:** ${((Date.now() - this.startTime) / 1000).toFixed(2)}s\n\n`;
-    
+
     md += `## Statistics\n`;
     for (const [key, value] of Object.entries(this.stats)) {
       md += `- **${key}:** ${value}\n`;

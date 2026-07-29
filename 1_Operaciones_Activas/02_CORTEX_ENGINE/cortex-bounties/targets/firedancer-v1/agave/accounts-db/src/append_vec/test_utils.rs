@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Helpers for AppendVec tests and benches
 #![cfg(feature = "dev-context-only-utils")]
 use {

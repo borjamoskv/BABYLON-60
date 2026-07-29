@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // Abstraction over repo structure and I/O. Implementations can use real git/fs/yarn
 // or provide mock data for tests so tests are independent of repo layout.
 export interface Repo {

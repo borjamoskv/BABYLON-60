@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { makeLogger, splitArrayIntoChunks } from '@chainlink/external-adapter-framework/util'
 import axios from 'axios'
 import BigNumber from 'bignumber.js'
@@ -267,10 +268,10 @@ export class ActiveValidator extends Validator {
     // Get the current penalty for this validator from the Stader Penalty contract
     const validatorPenalty = await this.fetchPenalty()
     logger.debug(
-      `Validator (${this.addressData.address}), 
-      User deposit: ${userDeposit}. 
-      Pool Commission: ${poolCommission}. 
-      Withdrawal balance: ${withdrawalAddressBalance}. 
+      `Validator (${this.addressData.address}),
+      User deposit: ${userDeposit}.
+      Pool Commission: ${poolCommission}.
+      Withdrawal balance: ${withdrawalAddressBalance}.
       Deposited Eth: ${depositedEth}`,
     )
     // Add deposited ETH to balance found on beacon

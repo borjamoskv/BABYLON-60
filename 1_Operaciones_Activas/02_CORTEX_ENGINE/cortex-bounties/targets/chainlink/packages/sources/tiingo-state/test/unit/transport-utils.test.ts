@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { wsMessageContent } from '../../src/transport/utils'
 
 describe('transport-utils', () => {

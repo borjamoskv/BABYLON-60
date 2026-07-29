@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import nock, { Scope } from 'nock'
 
 export const mockSnowflakeResponse = (): Scope =>

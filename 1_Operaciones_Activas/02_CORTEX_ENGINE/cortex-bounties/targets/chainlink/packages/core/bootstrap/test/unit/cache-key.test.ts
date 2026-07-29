@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterData, AdapterRequest, APIEndpoint, Config, Execute } from '../../src/types'
 import { withCacheKey } from '../../src/lib/middleware/cache-key'
 

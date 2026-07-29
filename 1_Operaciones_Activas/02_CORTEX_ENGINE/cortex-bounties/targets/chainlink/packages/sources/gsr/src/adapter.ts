@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { DEFAULT_LWBA_ALIASES, PriceAdapter } from '@chainlink/external-adapter-framework/adapter'
 import { SettingsDefinitionMap } from '@chainlink/external-adapter-framework/config'
 import { AdapterRequest, AdapterResponse } from '@chainlink/external-adapter-framework/util'

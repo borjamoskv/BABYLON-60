@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { shouldBehaveLikeBalanceAdapter } from '@chainlink/ea-test-helpers'
 import { makeExecute } from '../../src/adapter'
 

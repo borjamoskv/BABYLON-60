@@ -1,7 +1,8 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 //! Regression tests for reserve ID collision fix (FIND-041)
-//! 
+//!
 //! Tests verify:
 //! 1. Reserve IDs are monotonic and never reused
 //! 2. 64-reserve hard cap is enforced
@@ -43,7 +44,7 @@ fn setup_router(env: &Env) -> (crate::kinetic_router::Client, Address, Address) 
     let oracle_id = env.register(MockPriceOracle, ());
     let treasury = Address::generate(&env);
     let dex_router = Address::generate(&env);
-    
+
     router.initialize(&admin, &emergency_admin, &oracle_id, &treasury, &dex_router, &None);
 
     let pool_configurator = Address::generate(&env);

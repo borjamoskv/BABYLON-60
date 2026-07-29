@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 Generate index.md files for specification directories to enable directory browsing in mkdocs.

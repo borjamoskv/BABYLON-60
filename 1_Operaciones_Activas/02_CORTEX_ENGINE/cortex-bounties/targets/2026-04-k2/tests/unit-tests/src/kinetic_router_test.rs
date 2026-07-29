@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 use crate::{kinetic_router, a_token, debt_token, interest_rate_strategy, price_oracle};
@@ -83,7 +84,7 @@ pub fn initialize_kinetic_router_with_oracle(
     (contract_id, oracle_addr)
 }
 
-// Returns (kinetic_router_address, oracle_address)  
+// Returns (kinetic_router_address, oracle_address)
 pub fn initialize_kinetic_router(
     env: &Env,
     admin: &Address,
@@ -142,7 +143,7 @@ pub fn create_and_init_test_reserve_with_oracle(
             8000u128.into_val(env),      // optimal_utilization_rate (80%)
         ],
     ).unwrap();
-    
+
     let treasury = Address::generate(env);
 
     let params = kinetic_router::InitReserveParams {
@@ -184,7 +185,7 @@ pub fn create_and_init_test_reserve_with_oracle(
     );
 
     let client = kinetic_router::Client::new(env, kinetic_router);
-    
+
     // Register asset with oracle and set price (1 USD with 14 decimals)
     let oracle_client = price_oracle::Client::new(env, oracle_addr);
     let asset_enum = price_oracle::Asset::Stellar(underlying_asset.clone());
@@ -195,7 +196,7 @@ pub fn create_and_init_test_reserve_with_oracle(
         &Some(1_000_000_000_000_000u128), // 1 USD with 14 decimals
         &Some(env.ledger().timestamp() + 604_800), // 7 days (max allowed by L-04)
     );
-    
+
     init_reserve_with_pool_configurator(
         env,
         &client,
@@ -403,7 +404,7 @@ fn test_set_reserve_supply_cap_unauthorized() {
     env.mock_all_auths();
     let result = client.try_set_reserve_supply_cap(&underlying_asset, &new_supply_cap);
     assert!(result.is_ok(), "Admin should be able to set supply cap");
-    
+
     let reserve_data = client.get_reserve_data(&underlying_asset);
     let config = to_shared_config(&reserve_data.configuration);
     assert_eq!(config.get_supply_cap(), new_supply_cap);
@@ -432,7 +433,7 @@ fn test_set_reserve_borrow_cap_unauthorized() {
     env.mock_all_auths();
     let result = client.try_set_reserve_borrow_cap(&underlying_asset, &new_borrow_cap);
     assert!(result.is_ok(), "Admin should be able to set borrow cap");
-    
+
     let reserve_data = client.get_reserve_data(&underlying_asset);
     let config = to_shared_config(&reserve_data.configuration);
     assert_eq!(config.get_borrow_cap(), new_borrow_cap);
@@ -534,7 +535,7 @@ fn test_borrow_cap_enforcement() {
     // This would require implementing borrow functionality in the lending pool
     // For now, we verify the cap is properly stored and retrieved
     assert_eq!(config.get_borrow_cap(), borrow_cap);
-    
+
     // Prevent env destructor from running to avoid budget exceeded error during snapshot creation
     std::mem::forget(env);
 }
@@ -614,7 +615,7 @@ fn test_set_reserve_debt_ceiling_unauthorized() {
     env.mock_all_auths();
     let result = client.try_set_reserve_debt_ceiling(&underlying_asset, &new_debt_ceiling);
     assert!(result.is_ok(), "Admin should be able to set debt ceiling");
-    
+
     let debt_ceiling = client.get_reserve_debt_ceiling(&underlying_asset);
     assert_eq!(debt_ceiling, new_debt_ceiling);
 }

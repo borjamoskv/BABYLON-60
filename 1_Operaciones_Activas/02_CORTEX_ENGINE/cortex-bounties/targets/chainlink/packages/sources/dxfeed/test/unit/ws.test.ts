@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { BaseEndpointTypes } from '../../src/endpoint/stock-quotes'
 import { buildWsTransport } from '../../src/transport/ws'
 

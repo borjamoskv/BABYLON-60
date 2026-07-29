@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { config } from '../config'
 import { httpTransport } from '../transport/addresses'
 import { EmptyInputParameters } from '@chainlink/external-adapter-framework/validation/input-params'

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const environmentVariables = [
   { envKey: 'AMBERDATA_ADAPTER_URL', defaultValue: 'amberdata' },
   { envKey: 'COINAPI_ADAPTER_URL', defaultValue: 'coinapi' },

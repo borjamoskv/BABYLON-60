@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Requester, Validator, Builder, DefaultConfig } from '@chainlink/ea-bootstrap'
 import {
   AdapterRequest,

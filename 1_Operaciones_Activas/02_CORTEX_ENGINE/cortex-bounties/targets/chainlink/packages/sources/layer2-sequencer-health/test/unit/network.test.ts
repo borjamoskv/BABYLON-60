@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { ExtendedConfig, makeConfig, Networks } from '../../src/config'
 import * as network from '../../src/network'
 import * as starkware from '../../src/starkware'

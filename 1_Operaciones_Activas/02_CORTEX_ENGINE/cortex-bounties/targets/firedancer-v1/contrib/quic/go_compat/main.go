@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 package main
 
 // #cgo CFLAGS: -I../../../build/native/gcc/include

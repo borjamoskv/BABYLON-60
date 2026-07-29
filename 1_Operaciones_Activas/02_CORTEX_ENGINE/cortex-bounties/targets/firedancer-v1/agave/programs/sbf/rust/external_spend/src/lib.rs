@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Example Rust-based SBF program that moves a lamport from one account to another
 
 #![allow(clippy::arithmetic_side_effects)]

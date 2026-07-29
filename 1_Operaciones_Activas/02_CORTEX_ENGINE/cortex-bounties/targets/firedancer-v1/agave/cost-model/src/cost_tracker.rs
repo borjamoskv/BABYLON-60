@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! `cost_tracker` keeps tracking transaction cost per chained accounts as well as for entire block
 //! The main functions are:
 //! - would_fit(&tx_cost), immutable function to test if tx with tx_cost would fit into current block

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { withStatusCode } from '../../src/lib/middleware/status-code'
 
 describe('Status code middleware', () => {

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::fmt::Formatter;
 
 use anchor_lang::prelude::*;
@@ -128,7 +129,7 @@ impl TokenInfo {
             return false;
         }
 
-       
+
 
         if self.scope_configuration.is_enabled() && !self.scope_configuration.has_twap() {
             return false;
@@ -236,7 +237,7 @@ impl ScopeConfiguration {
     }
 
     pub fn is_valid(&self) -> bool {
-       
+
         !self.is_enabled() || (self.price_chain != [u16::MAX; 4] && self.price_chain != [0; 4])
     }
 

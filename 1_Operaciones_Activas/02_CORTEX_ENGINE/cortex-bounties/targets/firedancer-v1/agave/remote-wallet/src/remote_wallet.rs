@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #[cfg(feature = "hidapi")]
 use {crate::ledger::is_valid_ledger, parking_lot::Mutex, std::sync::Arc};
 use {

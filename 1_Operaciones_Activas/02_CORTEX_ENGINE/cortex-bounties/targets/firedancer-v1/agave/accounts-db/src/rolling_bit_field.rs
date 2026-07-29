@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! functionally similar to a hashset
 //! Relies on there being a sliding window of key values. The key values continue to increase.
 //! Old key values are removed from the lesser values and do not accumulate.

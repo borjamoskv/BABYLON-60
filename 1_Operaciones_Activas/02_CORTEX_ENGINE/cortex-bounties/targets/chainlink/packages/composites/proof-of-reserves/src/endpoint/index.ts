@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { TInputParameters as MultiTInputParameters } from './multiReserves'
 import type { TInputParameters as SingleTInputParameters } from './reserves'
 

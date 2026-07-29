@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import pytest
 from unittest.mock import MagicMock, patch
 from babylon60.swarm.c5_epistemic_auditor import C5EpistemicAgent, EpistemicSquadron

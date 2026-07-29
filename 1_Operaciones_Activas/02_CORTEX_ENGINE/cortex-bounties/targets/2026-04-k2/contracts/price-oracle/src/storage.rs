@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use k2_shared::{Asset, AssetConfig, OracleConfig, OracleError, DEFAULT_ORACLE_CONFIG, MAX_RESERVES};
 use soroban_sdk::{contracttype, Address, Env, Map, Vec};
 
@@ -7,7 +8,7 @@ pub const TTL_THRESHOLD: u32 = 30 * 17280; // 30 days in ledgers
 pub const TTL_EXTENSION: u32 = 365 * 17280; // 1 year in ledgers
 
 /// Instance storage keys for bounded configuration data.
-/// 
+///
 /// Instance storage is used only for bounded configuration that doesn't grow
 /// with the number of assets. Dynamic per-asset data is stored in persistent storage.
 #[contracttype]
@@ -25,7 +26,7 @@ pub enum InstanceKey {
 }
 
 /// Persistent storage keys for dynamic per-asset data.
-/// 
+///
 /// Persistent storage is used for unbounded data that grows with the number of assets,
 /// with per-key TTL to avoid size cap issues and shared archival problems.
 #[contracttype]
@@ -85,11 +86,11 @@ pub fn get_oracle_config(env: &Env) -> Result<OracleConfig, OracleError> {
         .instance()
         .get(&InstanceKey::OracleConfig)
         .unwrap_or(DEFAULT_ORACLE_CONFIG);
-    
+
     if let Some(stored_precision) = env.storage().instance().get(&InstanceKey::ReflectorPrecision) {
         config.price_precision = stored_precision;
     }
-    
+
     Ok(config)
 }
 
@@ -150,7 +151,7 @@ pub fn remove_asset_config(env: &Env, asset: &Asset) {
 }
 
 /// Get all whitelisted assets as a map (for backward compatibility).
-/// 
+///
 /// Note: This iterates through the asset list, so it may be expensive for large numbers of assets.
 #[allow(dead_code)]
 pub fn get_whitelisted_assets(env: &Env) -> Map<Asset, AssetConfig> {
@@ -168,7 +169,7 @@ pub fn get_whitelisted_assets(env: &Env) -> Map<Asset, AssetConfig> {
 }
 
 /// Set whitelisted assets from a map (for backward compatibility during migration).
-/// 
+///
 /// This function is used during initialization and migration.
 #[allow(dead_code)]
 pub fn set_whitelisted_assets(env: &Env, assets: &Map<Asset, AssetConfig>) {
@@ -177,7 +178,7 @@ pub fn set_whitelisted_assets(env: &Env, assets: &Map<Asset, AssetConfig>) {
     if env.storage().persistent().has(&list_key) {
         env.storage().persistent().remove(&list_key);
     }
-    
+
     // Set each asset config individually
     let mut asset_list = Vec::new(env);
     let mut iter = assets.iter();
@@ -185,7 +186,7 @@ pub fn set_whitelisted_assets(env: &Env, assets: &Map<Asset, AssetConfig>) {
         set_asset_config(env, &asset, &config);
         asset_list.push_back(asset);
     }
-    
+
     // Set asset list
     if asset_list.len() > 0 {
         env.storage().persistent().set(&list_key, &asset_list);
@@ -228,7 +229,7 @@ pub fn set_asset_list(env: &Env, assets: &Vec<Asset>) {
 #[allow(dead_code)]
 pub fn add_to_asset_list(env: &Env, asset: &Asset) -> Result<(), OracleError> {
     let mut asset_list = get_asset_list(env);
-    
+
     // Check if asset is already in list
     let mut found = false;
     let len = asset_list.len().min(MAX_RESERVES);
@@ -238,7 +239,7 @@ pub fn add_to_asset_list(env: &Env, asset: &Asset) -> Result<(), OracleError> {
             break;
         }
     }
-    
+
     if !found {
         asset_list.push_back(asset.clone());
         set_asset_list(env, &asset_list);
@@ -263,7 +264,7 @@ pub fn remove_from_asset_list(env: &Env, asset: &Asset) {
 }
 
 /// Retrieves the last validated price stored for circuit breaker validation.
-/// 
+///
 /// Returns None if no price has been recorded yet for this asset (first query scenario).
 pub fn get_last_price(env: &Env, asset: &Asset) -> Option<u128> {
     let key = PersistentKey::LastPrice(asset.clone());
@@ -276,7 +277,7 @@ pub fn get_last_price(env: &Env, asset: &Asset) -> Option<u128> {
 }
 
 /// Stores the validated price for future circuit breaker comparisons.
-/// 
+///
 /// Called after price validation passes to enable change detection on subsequent queries.
 pub fn set_last_price(env: &Env, asset: &Asset, price: u128) {
     let key = PersistentKey::LastPrice(asset.clone());
@@ -287,7 +288,7 @@ pub fn set_last_price(env: &Env, asset: &Asset, price: u128) {
 }
 
 /// Clears the stored price, resetting circuit breaker for this asset.
-/// 
+///
 /// Used by admin reset functions to allow legitimate large price movements after
 /// major market events or oracle upgrades.
 pub fn clear_last_price(env: &Env, asset: &Asset) {

@@ -1,18 +1,19 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 //! # K2 Protocol Unit Tests
 //!
 //! Unit tests using WASM-backed contract registration for accurate resource measurement.
-//! 
+//!
 //! ## Building
-//! 
+//!
 //! Before running tests, build all contracts:
 //! ```bash
 //! stellar contract build
 //! ```
-//! 
+//!
 //! ## Running Tests
-//! 
+//!
 //! ```bash
 //! cargo test -p k2-unit-tests
 //! ```

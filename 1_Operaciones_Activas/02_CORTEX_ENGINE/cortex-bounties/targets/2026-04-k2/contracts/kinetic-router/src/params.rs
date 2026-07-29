@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::storage;
 use k2_shared::*;
 use soroban_sdk::{symbol_short, Address, Env, Symbol};
@@ -298,9 +299,9 @@ pub fn get_incentives_contract(env: Env) -> Option<Address> {
 pub fn set_incentives_contract(env: Env, incentives: Address) -> Result<u32, KineticRouterError> {
     let admin = storage::get_pool_admin(&env)?;
     admin.require_auth();
-    
+
     storage::set_incentives_contract(&env, &incentives);
-    
+
     let mut updated_count = 0u32;
     let reserves_list = storage::get_reserves_list(&env);
 
@@ -313,11 +314,11 @@ pub fn set_incentives_contract(env: Env, incentives: Address) -> Result<u32, Kin
             updated_count += 1;
         }
     }
-    
+
     env.events().publish(
         (symbol_short!("incentive"), symbol_short!("updated")),
         updated_count,
     );
-    
+
     Ok(updated_count)
 }

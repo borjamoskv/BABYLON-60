@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /**
  * Type definitions for the DLC.Link Attester API and Bitcoin address calculation
  */

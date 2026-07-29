@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 pub const LENDING_MARKET_AUTH: &[u8] = b"lma";
 pub const RESERVE_LIQ_SUPPLY: &[u8] = b"reserve_liq_supply";
 pub const FEE_RECEIVER: &[u8] = b"fee_receiver";

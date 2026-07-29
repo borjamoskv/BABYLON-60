@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const makeType = (valueSize, indexSize) => ({
   struct: `Uint${valueSize}Heap`,
   node: `Uint${valueSize}HeapNode`,

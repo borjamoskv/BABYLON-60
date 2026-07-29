@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import hashlib
 from inspect import getmembers, isclass
 from random import Random

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::balance;
 use crate::storage;
 use crate::storage::DebtTokenState;
@@ -366,7 +367,7 @@ impl DebtTokenContract {
             &Symbol::new(env, "handle_action"),
             args,
         );
-        
+
         // Emit event on failure for monitoring
         if result.is_err() {
             env.events().publish(

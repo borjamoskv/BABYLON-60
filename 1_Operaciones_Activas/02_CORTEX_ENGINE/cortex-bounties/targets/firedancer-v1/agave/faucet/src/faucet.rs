@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `faucet` module provides an object for launching a Solana Faucet,
 //! which is the custodian of any remaining lamports in a mint.
 //! The Solana Faucet builds and sends airdrop transactions,

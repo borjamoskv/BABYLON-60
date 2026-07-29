@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { TransportDependencies } from '@chainlink/external-adapter-framework/transports'
 import { Requester } from '@chainlink/external-adapter-framework/util/requester'
 import { AdapterResponse, sleep } from '@chainlink/external-adapter-framework/util'

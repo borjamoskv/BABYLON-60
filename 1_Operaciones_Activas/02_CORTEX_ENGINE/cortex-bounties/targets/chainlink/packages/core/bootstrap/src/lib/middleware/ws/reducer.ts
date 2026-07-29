@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { AdapterContext, AdapterData, AdapterRequest, UnknownWSMessage } from '../../../types'
 import { combineReducers, createReducer, isAnyOf } from '@reduxjs/toolkit'
 import { logger } from '../../modules/logger'

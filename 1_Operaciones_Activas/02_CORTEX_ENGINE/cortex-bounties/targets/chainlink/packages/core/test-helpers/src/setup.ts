@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { FastifyInstance } from '@chainlink/ea-bootstrap'
 import request, { SuperTest, Test } from 'supertest'
 import { AddressInfo } from 'net'

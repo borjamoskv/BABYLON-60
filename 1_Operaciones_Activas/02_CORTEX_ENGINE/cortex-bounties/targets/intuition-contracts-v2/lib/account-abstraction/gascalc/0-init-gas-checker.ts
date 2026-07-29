@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { GasCheckCollector, GasChecker } from './GasChecker'
 
 describe('gas calculations', function () {

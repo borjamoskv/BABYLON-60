@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { project, accounts } from './clarigen-types';
 import {
   cvToValue,
@@ -75,14 +76,14 @@ export function setupTokens() {
 }
 
 export function createTestPool() {
-  
+
   // Create pool with proper parameters
   txOk(dlmmCore.createPool(
-    sbtcUsdcPool.identifier,           
-    mockSbtcToken.identifier,          
-    mockUsdcToken.identifier,          
+    sbtcUsdcPool.identifier,
+    mockSbtcToken.identifier,
+    mockUsdcToken.identifier,
     10000000n,    // 0.1 BTC in active bin
-    5000000000n,  // 5000 USDC in active bin  
+    5000000000n,  // 5000 USDC in active bin
     1000n,        // burn amount
     1000n, 3000n, // x fees (0.1% protocol, 0.3% provider)
     1000n, 3000n, // y fees (0.1% protocol, 0.3% provider)
@@ -102,16 +103,16 @@ export function addLiquidityToBins(
   poolContract: string = sbtcUsdcPool.identifier,
   tokenXContract: string = mockSbtcToken.identifier,
   tokenYContract: string = mockUsdcToken.identifier,
-  caller: string = deployer) 
+  caller: string = deployer)
   {
 
   const minDlp = 1n; // Must be > 0
-  const activeBinId = rovOk(sbtcUsdcPool.getActiveBinId());  
+  const activeBinId = rovOk(sbtcUsdcPool.getActiveBinId());
   const output: { bin: bigint; xAmount: bigint; yAmount: bigint; liquidity: bigint;}[] = [];
 
   for (const { bin, xAmount, yAmount } of binsToAddLiquidity) {
     let _xAmount: bigint, _yAmount: bigint;
-    
+
     if (bin < activeBinId) {
       // Negative bins: only Y tokens (higher price bins)
       _xAmount = 0n;
@@ -125,7 +126,7 @@ export function addLiquidityToBins(
       _xAmount = xAmount;
       _yAmount = 0n;
     }
-    
+
     const liquidity = txOk(dlmmCore.addLiquidity(
       poolContract,
       tokenXContract,
@@ -145,15 +146,15 @@ export function addLiquidityToBins(
       liquidity: cvToValue(liquidity.result)
     });
   }
-  
+
   return output;
 }
 
 export function addLiquidityToBinsRelativeToActiveBin(positionData: { relativeBinId: bigint; xAmount: bigint; yAmount: bigint;}[]) {
 
-  const activeBinId = rovOk(sbtcUsdcPool.getActiveBinId());  
+  const activeBinId = rovOk(sbtcUsdcPool.getActiveBinId());
   const binsToAddLiquidity: { bin: bigint; xAmount: bigint; yAmount: bigint; }[] = [];
-  
+
   for (const { relativeBinId, xAmount, yAmount } of positionData) {
     binsToAddLiquidity.push({
       bin: activeBinId + relativeBinId,
@@ -174,7 +175,7 @@ export function bulkAddLiquidityToBins(
   relativeToActiveBin: boolean = false,
   receiver: string = deployer
 ) {
-  
+
   const binsToAddLiquidity: { bin: bigint; xAmount: bigint; yAmount: bigint; }[] = [];
   const activeBinId = rovOk(sbtcUsdcPool.getActiveBinId());
 
@@ -184,7 +185,7 @@ export function bulkAddLiquidityToBins(
       xAmount: xAmountPerBin,
       yAmount: yAmountPerBin
     };
-    
+
     if (relativeToActiveBin) {
       newEntry.bin += activeBinId;
     }
@@ -210,27 +211,27 @@ export function generateBinFactors(numEntries: number = Number(dlmmCore.constant
   // So: baseValue = PRICE_SCALE_BPS - CENTER_BIN_ID
   const baseValue = PRICE_SCALE_BPS - BigInt(CENTER_BIN_ID);
   const factors: bigint[] = [];
-  
+
   for (let i = 0; i < numEntries; i++) {
     factors.push(baseValue + BigInt(i));
   }
-  
+
   return factors;
 }
 
 export function setupTestEnvironment() {
   setupTokens();
-  
+
   // Register bin-step 25 before creating pool
   const binStep = 25n;
   const factors = generateBinFactors();
   txOk(dlmmCore.addBinStep(binStep, factors), deployer);
-  
+
   createTestPool();
 
   const xAmountPerBin = 5000000n;    // 0.05 BTC
   const yAmountPerBin = 2500000000n; // 2500 USDC
-  
+
   const binsToAddLiquidity = [
     { bin: -5n, xAmount: 0n,            yAmount: yAmountPerBin },
     { bin: -3n, xAmount: 0n,            yAmount: yAmountPerBin },

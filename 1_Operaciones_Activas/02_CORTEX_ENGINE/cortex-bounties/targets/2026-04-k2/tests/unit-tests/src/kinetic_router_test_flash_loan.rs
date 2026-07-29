@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::kinetic_router_test::{create_and_init_test_reserve_with_oracle, create_test_addresses, create_test_env, initialize_kinetic_router, initialize_kinetic_router_with_oracle};
 use k2_kinetic_router::router::KineticRouterContractClient;
 use soroban_sdk::{
@@ -6,12 +7,12 @@ use soroban_sdk::{
 
 mod good_receiver {
     use soroban_sdk::{contract, contractimpl, contracttype, token, Address, Bytes, Env, Map, Vec};
-    
+
     #[contracttype]
     pub enum DataKey {
         ATokens,
     }
-    
+
     #[contract]
     pub struct MockFlashLoanReceiver;
 
@@ -20,7 +21,7 @@ mod good_receiver {
         pub fn init(env: Env, asset_atoken_map: Map<Address, Address>) {
             env.storage().instance().set(&DataKey::ATokens, &asset_atoken_map);
         }
-        
+
         pub fn execute_operation(
             env: Env,
             assets: Vec<Address>,
@@ -30,13 +31,13 @@ mod good_receiver {
             _params: Bytes,
         ) -> bool {
             let atoken_map: Map<Address, Address> = env.storage().instance().get(&DataKey::ATokens).unwrap();
-            
+
             for i in 0..assets.len() {
                 let asset = assets.get(i).unwrap();
                 let amount = amounts.get(i).unwrap();
                 let premium = premiums.get(i).unwrap();
                 let total_owed = amount + premium;
-                
+
                 if let Some(atoken_address) = atoken_map.get(asset.clone()) {
                     let token_client = token::Client::new(&env, &asset);
                     token_client.transfer(
@@ -48,7 +49,7 @@ mod good_receiver {
                     return false;
                 }
             }
-            
+
             true
         }
     }
@@ -56,7 +57,7 @@ mod good_receiver {
 
 mod bad_receiver {
     use soroban_sdk::{contract, contractimpl, Address, Bytes, Env, Vec};
-    
+
     #[contract]
     pub struct MockBadFlashLoanReceiver;
 
@@ -99,11 +100,11 @@ fn test_flash_loan_happy_path() {
     let supply_amount = 10_000_000_000i128; // 10,000 tokens
     let token_client = token::StellarAssetClient::new(&env, &asset);
     token_client.mint(&user1, &supply_amount);
-    
+
     // Approve lending pool to spend tokens
     let token_client_std = token::Client::new(&env, &asset);
     token_client_std.approve(&user1, &kinetic_router, &supply_amount, &(env.ledger().sequence() + 1000000));
-    
+
     client.supply(&user1, &asset, &(supply_amount as u128), &user1, &0);
 
     // Get aToken address and create mapping
@@ -122,9 +123,9 @@ fn test_flash_loan_happy_path() {
     let flash_amount = 1_000_000_000u128; // 1,000 tokens
     let premium = (flash_amount * premium_bps as u128) / 10000;
     token_client.mint(&receiver, &(premium as i128));
-    
+
     let params = Bytes::new(&env);
-    
+
     // Execute flash loan
     let assets = Vec::from_array(&env, [asset.clone()]);
     let amounts = Vec::from_array(&env, [flash_amount]);
@@ -162,11 +163,11 @@ fn test_flash_loan_insufficient_repayment() {
     let supply_amount = 10_000_000_000i128; // 10,000 tokens
     let token_client = token::StellarAssetClient::new(&env, &asset);
     token_client.mint(&user1, &supply_amount);
-    
+
     // Approve lending pool to spend tokens
     let token_client_std = token::Client::new(&env, &asset);
     token_client_std.approve(&user1, &kinetic_router, &supply_amount, &(env.ledger().sequence() + 1000000));
-    
+
     client.supply(&user1, &asset, &(supply_amount as u128), &user1, &0);
 
     // Execute flash loan (should fail)
@@ -202,13 +203,13 @@ fn test_flash_loan_multi_asset() {
     let token_client2 = token::StellarAssetClient::new(&env, &asset2);
     token_client1.mint(&user1, &supply_amount);
     token_client2.mint(&user1, &supply_amount);
-    
+
     // Approve lending pool to spend tokens
     let token_client1_std = token::Client::new(&env, &asset1);
     let token_client2_std = token::Client::new(&env, &asset2);
     token_client1_std.approve(&user1, &kinetic_router, &supply_amount, &(env.ledger().sequence() + 1000000));
     token_client2_std.approve(&user1, &kinetic_router, &supply_amount, &(env.ledger().sequence() + 1000000));
-    
+
     client.supply(&user1, &asset1, &(supply_amount as u128), &user1, &0);
     client.supply(&user1, &asset2, &(supply_amount as u128), &user1, &0);
 
@@ -261,7 +262,7 @@ fn test_flash_loan_insufficient_liquidity() {
     let assets = Vec::from_array(&env, [asset.clone()]);
     let amounts = Vec::from_array(&env, [flash_amount]);
     let params = Bytes::new(&env);
-    
+
     let initiator = Address::generate(&env);
     let result = client.try_flash_loan(&initiator, &receiver, &assets, &amounts, &params);
     assert!(
@@ -297,11 +298,11 @@ fn test_flash_loan_premium_calculation() {
     let supply_amount = 10_000_000_000i128;
     let token_client = token::StellarAssetClient::new(&env, &asset);
     token_client.mint(&user1, &supply_amount);
-    
+
     // Approve lending pool to spend tokens
     let token_client_std = token::Client::new(&env, &asset);
     token_client_std.approve(&user1, &kinetic_router, &supply_amount, &(env.ledger().sequence() + 1000000));
-    
+
     client.supply(&user1, &asset, &(supply_amount as u128), &user1, &0);
 
     // Get aToken address and create mapping
@@ -352,11 +353,11 @@ fn test_flash_loan_permissionless() {
     let supply_amount = 10_000_000_000i128;
     let token_client = token::StellarAssetClient::new(&env, &asset);
     token_client.mint(&user1, &supply_amount);
-    
+
     // Approve lending pool to spend tokens
     let token_client_std = token::Client::new(&env, &asset);
     token_client_std.approve(&user1, &kinetic_router, &supply_amount, &(env.ledger().sequence() + 1000000));
-    
+
     client.supply(&user1, &asset, &(supply_amount as u128), &user1, &0);
 
     // Get aToken address and create mapping

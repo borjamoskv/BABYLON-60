@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import galois
 import numpy as np
 import struct
@@ -37,7 +38,7 @@ with open(out_dir + 'avx2_constants.bin', 'wb') as bin_file:
 
 # Write out the generic constant tables
 # We want to be able to do multiplication with just 3 loads and one add,
-# covering all the special cases: 
+# covering all the special cases:
 # 1. multiplication by 0 should automatically give 0, so we map log[0] =
 #    -256, then invlog[x] = 0 for x in [-512, 0).
 # 2. When the sum of the logs is greater than 255, we don't want to do

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { FTSE100Parser } from '../../../src/parsing/ftse100'
 import { expectedFtseData, ftseCsvFixture } from '../../fixtures'
 

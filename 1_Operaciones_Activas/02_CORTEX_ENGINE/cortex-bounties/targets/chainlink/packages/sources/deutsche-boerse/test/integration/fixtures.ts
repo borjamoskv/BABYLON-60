@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { create, toBinary } from '@bufbuild/protobuf'
 import { MockWebsocketServer } from '@chainlink/external-adapter-framework/util/testing-utils'
 import {

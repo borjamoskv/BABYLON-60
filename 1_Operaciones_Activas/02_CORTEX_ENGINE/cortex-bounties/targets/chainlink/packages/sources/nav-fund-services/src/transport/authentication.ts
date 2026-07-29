@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import CryptoJS from 'crypto-js'
 import { v4 as uuidv4 } from 'uuid'
 

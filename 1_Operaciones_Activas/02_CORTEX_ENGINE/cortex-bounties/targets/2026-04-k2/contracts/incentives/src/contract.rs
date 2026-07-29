@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::calculation;
 use crate::error::IncentivesError;
 use crate::events;
@@ -908,7 +909,7 @@ impl IncentivesContract {
     pub fn get_reward_token_balance(env: Env, reward_token: Address) -> u128 {
         let client = token::Client::new(&env, &reward_token);
         let balance = client.balance(&env.current_contract_address());
-        
+
         k2_shared::safe_i128_to_u128(&env, balance)
     }
 }

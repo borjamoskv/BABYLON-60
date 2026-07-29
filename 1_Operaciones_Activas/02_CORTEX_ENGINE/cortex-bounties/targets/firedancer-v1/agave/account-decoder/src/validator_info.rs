@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use serde::{Deserialize, Serialize};
 pub const MAX_SHORT_FIELD_LENGTH: usize = 80;
 pub const MAX_LONG_FIELD_LENGTH: usize = 300;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { DecodedV3Report } from '@chainlink/data-streams-sdk'
 import { BaseEndpointTypes } from '../endpoint/cryptoV3'
 import { DECIMALS } from './utils'

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `entry` module is a fundamental building block of Proof of History. It contains a
 //! unique ID that is the hash of the Entry before it, plus the hash of the
 //! transactions within it. Entries cannot be reordered, and its field `num_hashes`

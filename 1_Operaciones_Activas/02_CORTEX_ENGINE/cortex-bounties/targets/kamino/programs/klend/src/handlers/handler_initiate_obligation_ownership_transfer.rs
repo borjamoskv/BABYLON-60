@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{
     prelude::*,
     solana_program::sysvar::{instructions::Instructions as SysInstructions, SysvarId},
@@ -20,7 +21,7 @@ pub fn process(ctx: Context<InitiateObligationOwnershipTransfer>, new_owner: Pub
 
     obligation.check_ownership_transfer_not_in_progress()?;
 
-   
+
     lending_operations::clear_expired_borrow_order_on_initiating_obligation_ownership_transfer(
         obligation, clock,
     )?;

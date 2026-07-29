@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 def initialize_ptc_window(spec, state):
     empty_previous_epoch = [
         spec.Vector[spec.ValidatorIndex, spec.PTC_SIZE](

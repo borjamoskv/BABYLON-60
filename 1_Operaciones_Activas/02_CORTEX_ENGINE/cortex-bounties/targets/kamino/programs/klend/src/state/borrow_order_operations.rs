@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::fmt::Debug;
 
 use anchor_lang::{err, Result};
@@ -24,7 +25,7 @@ pub fn set_borrow_order(
     clock: &Clock,
     event_emitter: impl EventEmitter,
 ) -> Result<()> {
-   
+
     let Some(order_config) = order_config else {
         if borrow_order == &Default::default() {
             msg!("Ignored a no-op cancellation of the borrow order");
@@ -39,15 +40,15 @@ pub fn set_borrow_order(
 
     let timestamp = clock.unix_timestamp.try_into().expect("negative timestamp");
 
-   
+
     check_order_config_valid(&order_config, lending_market, reserve, timestamp)?;
 
-   
+
     borrow_order.clear_if_past_fillable_timestamp(timestamp);
 
-   
+
     if borrow_order == &Default::default() {
-       
+
         check_borrow_order_creation_enabled(lending_market)?;
         initialize_borrow_order(borrow_order, order_config, timestamp)?;
         event_emitter.emit(BorrowOrderPlaceEvent {
@@ -79,7 +80,7 @@ pub fn fill_borrow_order(
 ) -> Result<()> {
     check_borrow_order_execution_enabled(lending_market)?;
 
-   
+
     let reserve_max_borrow_rate_bps = reserve.config.max_borrow_rate_bps();
     if reserve_max_borrow_rate_bps > borrow_order.max_borrow_rate_bps {
         msg!(
@@ -90,7 +91,7 @@ pub fn fill_borrow_order(
         return err!(LendingError::BorrowOrderMaxBorrowRateExceeded);
     }
 
-   
+
     if !is_term_satisfied(
         borrow_order.get_min_debt_term_seconds(),
         reserve.config.get_debt_term_seconds(),
@@ -104,9 +105,9 @@ pub fn fill_borrow_order(
     }
 
     let current_timestamp: u64 = clock.unix_timestamp.try_into().expect("negative timestamp");
-   
-   
-   
+
+
+
     let seconds_until_reserve_debt_maturity =
         reserve
             .config
@@ -115,7 +116,7 @@ pub fn fill_borrow_order(
                 reserve_debt_maturity_timestamp.saturating_sub(current_timestamp)
             });
 
-   
+
     if !is_term_satisfied(
         borrow_order.get_min_debt_term_seconds(),
         seconds_until_reserve_debt_maturity,
@@ -129,7 +130,7 @@ pub fn fill_borrow_order(
         return err!(LendingError::BorrowOrderMinDebtTermInsufficient);
     }
 
-   
+
     if current_timestamp > borrow_order.fillable_until_timestamp {
         msg!(
             "At current timestamp {} it is no longer possible to fill an order fillable until {}",
@@ -139,10 +140,10 @@ pub fn fill_borrow_order(
         return err!(LendingError::BorrowOrderFillTimeLimitExceeded);
     }
 
-   
+
     let new_remaining_debt_amount = borrow_order.remaining_debt_amount - amount;
     if new_remaining_debt_amount > 0 {
-       
+
         let fill_value =
             calculate_market_value_from_liquidity_amount(reserve, Fraction::from_num(amount));
         if fill_value < lending_market.min_borrow_order_fill_value {
@@ -155,13 +156,13 @@ pub fn fill_borrow_order(
             return err!(LendingError::BorrowOrderFillValueTooSmall);
         }
 
-       
+
         check_order_remaining_debt_value(new_remaining_debt_amount, lending_market, reserve)?;
     }
 
     let borrow_order_initial_state = *borrow_order;
 
-   
+
     borrow_order.remaining_debt_amount = new_remaining_debt_amount;
 
     if borrow_order.remaining_debt_amount == 0 {
@@ -255,19 +256,19 @@ fn check_order_config_valid(
         enable_auto_rollover_on_filled_borrows: _,
     } = order_config;
 
-   
+
     if *max_borrow_rate_bps == 0 {
         msg!("Borrow order must specify max borrow rate");
         return err!(LendingError::InvalidOrderConfiguration);
     }
 
-   
+
     if *remaining_debt_amount == 0 {
         msg!("Borrow order must request non-0 debt",);
         return err!(LendingError::InvalidOrderConfiguration);
     }
 
-   
+
     if *fillable_until_timestamp < timestamp {
         msg!(
             "Fillable until timestamp {} cannot be in the past (at {})",
@@ -277,7 +278,7 @@ fn check_order_config_valid(
         return err!(LendingError::InvalidOrderConfiguration);
     }
 
-   
+
     check_order_remaining_debt_value(*remaining_debt_amount, lending_market, reserve)?;
 
     Ok(())
@@ -309,7 +310,7 @@ fn initialize_borrow_order(
     initial_order_config: BorrowOrderConfig,
     timestamp: u64,
 ) -> Result<()> {
-   
+
     let BorrowOrderConfig {
         debt_liquidity_mint,
         remaining_debt_amount,
@@ -320,7 +321,7 @@ fn initialize_borrow_order(
         enable_auto_rollover_on_filled_borrows,
     } = initial_order_config;
 
-   
+
     *borrow_order = BorrowOrder {
         active: true as u8,
         debt_liquidity_mint,
@@ -345,9 +346,9 @@ fn update_borrow_order_config(
     new_order_config: BorrowOrderConfig,
     timestamp: u64,
 ) -> Result<()> {
-   
-   
-   
+
+
+
     let BorrowOrder {
         active: _,
         debt_liquidity_mint: current_debt_liquidity_mint,
@@ -359,12 +360,12 @@ fn update_borrow_order_config(
         enable_auto_rollover_on_filled_borrows: current_enable_auto_rollover_on_filled_borrows,
         placed_at_timestamp: _,
         last_updated_at_timestamp,
-        requested_debt_amount, 
-        padding1: _,           
-        end_padding: _,        
+        requested_debt_amount,
+        padding1: _,
+        end_padding: _,
     } = borrow_order;
 
-   
+
     let BorrowOrderConfig {
         debt_liquidity_mint: new_debt_liquidity_mint,
         remaining_debt_amount: new_remaining_debt_amount,
@@ -375,21 +376,21 @@ fn update_borrow_order_config(
         enable_auto_rollover_on_filled_borrows: new_enable_auto_rollover_on_filled_borrows,
     } = new_order_config;
 
-   
+
     *last_updated_at_timestamp = timestamp;
     if new_remaining_debt_amount != *current_remaining_debt_amount {
         *requested_debt_amount = new_remaining_debt_amount;
     }
 
-   
+
     *current_remaining_debt_amount = new_remaining_debt_amount;
     *current_max_borrow_rate_bps = new_max_borrow_rate_bps;
     *current_min_debt_term_seconds = new_min_debt_term_seconds;
     *current_fillable_until_timestamp = new_fillable_until_timestamp;
     *current_enable_auto_rollover_on_filled_borrows = new_enable_auto_rollover_on_filled_borrows;
 
-   
-   
+
+
     check_not_updated(
         "debt liquidity mint",
         current_debt_liquidity_mint,

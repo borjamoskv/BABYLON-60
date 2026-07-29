@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from collections.abc import Callable, Sequence
 from random import Random
 

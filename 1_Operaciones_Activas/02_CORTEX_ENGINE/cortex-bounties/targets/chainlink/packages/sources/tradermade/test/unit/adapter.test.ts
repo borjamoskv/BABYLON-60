@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { EndpointContext } from '@chainlink/external-adapter-framework/adapter'
 import { metrics } from '@chainlink/external-adapter-framework/metrics'
 import { SubscriptionDeltas } from '@chainlink/external-adapter-framework/transports/abstract/streaming'

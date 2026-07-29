@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Example Rust-based SBF realloc test program
 
 pub const INVOKE_REALLOC_ZERO_RO: u8 = 0;

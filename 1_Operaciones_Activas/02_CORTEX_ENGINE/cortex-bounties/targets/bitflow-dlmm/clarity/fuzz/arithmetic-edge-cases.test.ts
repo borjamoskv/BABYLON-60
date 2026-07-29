@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import {
   alice,
   dlmmCore,
@@ -53,7 +54,7 @@ function generateBinId(rng: SeededRandom): bigint {
 }
 
 describe('Arithmetic Edge Cases Fuzz Test', () => {
-  
+
   beforeEach(async () => {
     setupTestEnvironment();
   });
@@ -62,23 +63,23 @@ describe('Arithmetic Edge Cases Fuzz Test', () => {
     const config = getFuzzConfig();
     const NUM_TRANSACTIONS = config.size;
     const RANDOM_SEED = config.seed;
-    
+
     const rng = new SeededRandom(RANDOM_SEED);
     const orchestrator = new LogManager('arithmetic-edge-cases');
-        
+
     orchestrator.log(`\n=== Arithmetic Edge Cases Fuzz Test ===`);
     orchestrator.log(`Seed: ${RANDOM_SEED}`);
     orchestrator.log(`Transactions: ${NUM_TRANSACTIONS}`);
     orchestrator.log(`\n`);
-    
+
     for (let txNumber = 1; txNumber <= NUM_TRANSACTIONS; txNumber++) {
       const operation: OperationType = rng.choice(OPERATION_OPTIONS);
       const binId = generateBinId(rng);
-      
+
       try {
         if (operation === 'swap-x-for-y') {
           const xAmount = generateSwapAmount(rng);
-          
+
           try {
             txOk(dlmmCore.swapXForY(
               sbtcUsdcPool.identifier,
@@ -87,7 +88,7 @@ describe('Arithmetic Edge Cases Fuzz Test', () => {
               binId,
               xAmount
             ), alice);
-            
+
             orchestrator.incrementStat('success');
           } catch (error: any) {
             const errorStr = String(error);
@@ -101,7 +102,7 @@ describe('Arithmetic Edge Cases Fuzz Test', () => {
           }
         } else if (operation === 'swap-y-for-x') {
           const yAmount = generateSwapAmount(rng);
-          
+
           try {
             txOk(dlmmCore.swapYForX(
               sbtcUsdcPool.identifier,
@@ -110,7 +111,7 @@ describe('Arithmetic Edge Cases Fuzz Test', () => {
               binId,
               yAmount
             ), alice);
-            
+
             orchestrator.incrementStat('success');
           } catch (error: any) {
             const errorStr = String(error);
@@ -126,7 +127,7 @@ describe('Arithmetic Edge Cases Fuzz Test', () => {
           const xAmount = generateLiquidityAmount(rng);
           const yAmount = generateLiquidityAmount(rng);
           const minDlp = 1n;
-          
+
           try {
             txOk(dlmmCore.addLiquidity(
               sbtcUsdcPool.identifier,
@@ -139,7 +140,7 @@ describe('Arithmetic Edge Cases Fuzz Test', () => {
               1000000n,
               1000000n
             ), alice);
-            
+
             orchestrator.incrementStat('success');
           } catch (error: any) {
             const errorStr = String(error);
@@ -153,12 +154,12 @@ describe('Arithmetic Edge Cases Fuzz Test', () => {
           }
         } else if (operation === 'withdraw-liquidity') {
           const liquidityBalance = getSbtcUsdcPoolLpBalance(binId, alice);
-          
+
           if (liquidityBalance > 0n) {
             const amountToWithdraw = nextBiasedValue(rng, 1n, liquidityBalance * 2n);
             const minXAmount = 0n;
             const minYAmount = 0n;
-            
+
             try {
               txOk(dlmmCore.withdrawLiquidity(
                 sbtcUsdcPool.identifier,
@@ -169,7 +170,7 @@ describe('Arithmetic Edge Cases Fuzz Test', () => {
                 minXAmount,
                 minYAmount
               ), alice);
-              
+
               orchestrator.incrementStat('success');
             } catch (error: any) {
               const errorStr = String(error);
@@ -186,11 +187,11 @@ describe('Arithmetic Edge Cases Fuzz Test', () => {
           const fromBinId = generateBinId(rng);
           const toBinId = generateBinId(rng);
           const liquidityBalance = getSbtcUsdcPoolLpBalance(fromBinId, alice);
-          
+
           if (liquidityBalance > 0n && fromBinId !== toBinId) {
             const amount = nextBiasedValue(rng, 1n, liquidityBalance);
             const minDlp = 1n;
-            
+
             try {
               txOk(dlmmCore.moveLiquidity(
                 sbtcUsdcPool.identifier,
@@ -203,7 +204,7 @@ describe('Arithmetic Edge Cases Fuzz Test', () => {
                 1000000n,
                 1000000n
               ), alice);
-              
+
               orchestrator.incrementStat('success');
             } catch (error: any) {
               const errorStr = String(error);
@@ -227,12 +228,12 @@ describe('Arithmetic Edge Cases Fuzz Test', () => {
            orchestrator.incrementStat('expectedErrors');
         }
       }
-      
+
       orchestrator.updateProgress(txNumber, NUM_TRANSACTIONS, `Panics: ${orchestrator.stats.panics}`);
     }
-    
+
     orchestrator.finish();
-    
+
     expect(orchestrator.stats.failed).toBe(0);
   });
 });

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /**
  * CORTEX Quickstart — JavaScript/TypeScript
  *

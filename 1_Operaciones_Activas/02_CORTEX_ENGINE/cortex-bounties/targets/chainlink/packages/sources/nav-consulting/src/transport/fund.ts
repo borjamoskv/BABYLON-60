@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Requester } from '@chainlink/external-adapter-framework/util/requester'
 import { getValidatorIds } from './authentication'
 import { AdapterError } from '@chainlink/external-adapter-framework/validation/error'

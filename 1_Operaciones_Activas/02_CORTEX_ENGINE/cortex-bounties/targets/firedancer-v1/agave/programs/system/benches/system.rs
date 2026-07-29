@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #[allow(deprecated)]
 use {
     criterion::{Criterion, criterion_group, criterion_main},

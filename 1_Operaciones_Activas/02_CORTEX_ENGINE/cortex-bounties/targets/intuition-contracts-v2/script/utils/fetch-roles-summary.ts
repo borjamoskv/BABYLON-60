@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { ethers } from "ethers";
 
 const BLOCK_RANGE_CHUNK_SIZE = 100_000;

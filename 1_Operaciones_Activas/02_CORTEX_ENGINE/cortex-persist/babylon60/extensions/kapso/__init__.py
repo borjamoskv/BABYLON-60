@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 KAPSO Extension for CORTEX-Persist
 Provides integration with Kapso WhatsApp API.

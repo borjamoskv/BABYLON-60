@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from eth_consensus_specs.test.helpers.execution_payload import (
     build_empty_execution_payload,
     build_empty_signed_execution_payload_bid,

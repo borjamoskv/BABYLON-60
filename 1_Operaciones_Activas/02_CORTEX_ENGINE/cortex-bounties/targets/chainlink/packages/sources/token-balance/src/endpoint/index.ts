@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 export { endpoint as cardano } from './cardano'
 export { endpoint as etherFi } from './etherFi'
 export { endpoint as evm } from './evm'

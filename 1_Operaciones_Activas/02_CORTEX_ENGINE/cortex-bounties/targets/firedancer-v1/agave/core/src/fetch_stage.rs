@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `fetch_stage` batches input from a UDP socket and sends it to a channel.
 
 use {

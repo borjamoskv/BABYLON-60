@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import {
   alice,
   bob,
@@ -30,7 +31,7 @@ import {
 let addBulkLiquidityOutput: { bin: bigint; xAmount: bigint; yAmount: bigint; liquidity: bigint;}[];
 
 describe('DLMM Core Liquidity Functions', () => {
-  
+
   beforeEach(async () => {
     addBulkLiquidityOutput = setupTestEnvironment();
       const poolData = rovOk(sbtcUsdcPool.getPool());
@@ -39,21 +40,21 @@ describe('DLMM Core Liquidity Functions', () => {
       expect(poolData.activeBinId).toBe(0n);
 
       expect(addBulkLiquidityOutput.length).toBe(9);
-      
+
       // Verify active bin has both tokens
       const activeBinEntry = addBulkLiquidityOutput.find(entry => entry.bin === 0n);
       expect(activeBinEntry).toBeDefined();
       expect(activeBinEntry!.xAmount).toBeGreaterThan(0n);
       expect(activeBinEntry!.yAmount).toBeGreaterThan(0n);
       expect(activeBinEntry!.liquidity).toBeGreaterThan(0n);
-      
+
       // Verify negative bins have only Y tokens
       const negativeBinEntry = addBulkLiquidityOutput.find(entry => entry.bin === -1n);
       expect(negativeBinEntry).toBeDefined();
       expect(negativeBinEntry!.xAmount).toBe(0n);
       expect(negativeBinEntry!.yAmount).toBeGreaterThan(0n);
       expect(negativeBinEntry!.liquidity).toBeGreaterThan(0n);
-      
+
       // Verify positive bins have only X tokens
       const positiveBinEntry = addBulkLiquidityOutput.find(entry => entry.bin === 1n);
       expect(positiveBinEntry).toBeDefined();
@@ -69,11 +70,11 @@ describe('DLMM Core Liquidity Functions', () => {
       const xAmount = 1000000n; // 0.01 BTC
       const yAmount = 500000000n; // 500 USDC
       const minDlp = 1n;
-      
+
       // Capture state before add liquidity
       const beforeBin = captureBinState(binId);
       const beforeUser = captureUserState(alice, binId);
-      
+
       const response = txOk(dlmmCore.addLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -85,19 +86,19 @@ describe('DLMM Core Liquidity Functions', () => {
         1000000n, // max-x-liquidity-fee
         1000000n  // max-y-liquidity-fee
       ), alice);
-      
+
       // Capture state after add liquidity
       const afterBin = captureBinState(binId);
       const afterUser = captureUserState(alice, binId);
       const liquidityReceived = cvToValue(response.result);
-      
+
       // Check balances changed correctly
       expect(afterUser.xTokenBalance).toBe(beforeUser.xTokenBalance - xAmount);
       expect(afterUser.yTokenBalance).toBe(beforeUser.yTokenBalance - yAmount);
       expect(afterUser.lpTokenBalance).toBe(beforeUser.lpTokenBalance + liquidityReceived);
       expect(liquidityReceived).toBeGreaterThan(0n);
       expect(liquidityReceived).toBeGreaterThanOrEqual(minDlp);
-      
+
       // Check invariants
       const invariantCheck = checkAddLiquidityInvariants(
         beforeBin,
@@ -109,7 +110,7 @@ describe('DLMM Core Liquidity Functions', () => {
         liquidityReceived,
         minDlp
       );
-      
+
       if (!invariantCheck.passed) {
         throw new Error(`Invariant violations: ${invariantCheck.errors.join('; ')}`);
       }
@@ -120,11 +121,11 @@ describe('DLMM Core Liquidity Functions', () => {
       const xAmount = 0n; // No X tokens for bins below active
       const yAmount = 500000000n; // 500 USDC
       const minDlp = 1n;
-      
+
       // Capture state before add liquidity
       const beforeBin = captureBinState(binId);
       const beforeUser = captureUserState(alice, binId);
-      
+
       const response = txOk(dlmmCore.addLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -136,16 +137,16 @@ describe('DLMM Core Liquidity Functions', () => {
         1000000n, // max-x-liquidity-fee
         1000000n  // max-y-liquidity-fee
       ), alice);
-      
+
       // Capture state after add liquidity
       const afterBin = captureBinState(binId);
       const afterUser = captureUserState(alice, binId);
       const liquidityReceived = cvToValue(response.result);
-      
+
       expect(afterUser.yTokenBalance).toBe(beforeUser.yTokenBalance - yAmount);
       expect(afterUser.lpTokenBalance).toBe(beforeUser.lpTokenBalance + liquidityReceived);
       expect(liquidityReceived).toBeGreaterThan(0n);
-      
+
       // Check invariants
       const invariantCheck = checkAddLiquidityInvariants(
         beforeBin,
@@ -157,7 +158,7 @@ describe('DLMM Core Liquidity Functions', () => {
         liquidityReceived,
         minDlp
       );
-      
+
       if (!invariantCheck.passed) {
         throw new Error(`Invariant violations: ${invariantCheck.errors.join('; ')}`);
       }
@@ -168,11 +169,11 @@ describe('DLMM Core Liquidity Functions', () => {
       const xAmount = 1000000n; // 0.01 BTC
       const yAmount = 0n; // No Y tokens for bins above active
       const minDlp = 1n;
-      
+
       // Capture state before add liquidity
       const beforeBin = captureBinState(binId);
       const beforeUser = captureUserState(alice, binId);
-      
+
       const response = txOk(dlmmCore.addLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -184,16 +185,16 @@ describe('DLMM Core Liquidity Functions', () => {
         1000000n, // max-x-liquidity-fee
         1000000n  // max-y-liquidity-fee
       ), alice);
-      
+
       // Capture state after add liquidity
       const afterBin = captureBinState(binId);
       const afterUser = captureUserState(alice, binId);
       const liquidityReceived = cvToValue(response.result);
-      
+
       expect(afterUser.xTokenBalance).toBe(beforeUser.xTokenBalance - xAmount);
       expect(afterUser.lpTokenBalance).toBe(beforeUser.lpTokenBalance + liquidityReceived);
       expect(liquidityReceived).toBeGreaterThan(0n);
-      
+
       // Check invariants
       const invariantCheck = checkAddLiquidityInvariants(
         beforeBin,
@@ -205,7 +206,7 @@ describe('DLMM Core Liquidity Functions', () => {
         liquidityReceived,
         minDlp
       );
-      
+
       if (!invariantCheck.passed) {
         throw new Error(`Invariant violations: ${invariantCheck.errors.join('; ')}`);
       }
@@ -214,9 +215,9 @@ describe('DLMM Core Liquidity Functions', () => {
     it('should fail when minimum DLP not met', async () => {
       const binId = 0n;
       const xAmount = 100n; // Very small amount
-      const yAmount = 50000n; // Very small amount  
+      const yAmount = 50000n; // Very small amount
       const minDlp = 999999999999n; // Unreasonably high minimum
-      
+
       const response = txErr(dlmmCore.addLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -228,7 +229,7 @@ describe('DLMM Core Liquidity Functions', () => {
         1000000n, // max-x-liquidity-fee
         1000000n  // max-y-liquidity-fee
       ), alice);
-      
+
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_MINIMUM_LP_AMOUNT);
     });
 
@@ -237,10 +238,10 @@ describe('DLMM Core Liquidity Functions', () => {
       const xAmount = 1000000n;
       const yAmount = 500000000n;
       const minDlp = 1n;
-      
+
       // Mint random tokens for testing
       txOk(mockRandomToken.mint(xAmount, alice), deployer);
-      
+
       const response = txErr(dlmmCore.addLiquidity(
         sbtcUsdcPool.identifier,
         mockRandomToken.identifier,
@@ -252,7 +253,7 @@ describe('DLMM Core Liquidity Functions', () => {
         1000000n, // max-x-liquidity-fee
         1000000n  // max-y-liquidity-fee
       ), alice);
-      
+
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_INVALID_X_TOKEN);
     });
 
@@ -261,10 +262,10 @@ describe('DLMM Core Liquidity Functions', () => {
       const xAmount = 1000000n;
       const yAmount = 500000000n;
       const minDlp = 1n;
-      
+
       // Mint random tokens for testing
       txOk(mockRandomToken.mint(yAmount, alice), deployer);
-      
+
       const response = txErr(dlmmCore.addLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -276,7 +277,7 @@ describe('DLMM Core Liquidity Functions', () => {
         1000000n, // max-x-liquidity-fee
         1000000n  // max-y-liquidity-fee
       ), alice);
-      
+
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_INVALID_Y_TOKEN);
     });
   });
@@ -290,7 +291,7 @@ describe('DLMM Core Liquidity Functions', () => {
         { bin: 1n, xAmount: 5000000n, yAmount: 0n }, // Above active bin - only X tokens
         { bin: -1n, xAmount: 0n, yAmount: 2500000000n }, // Below active bin - only Y tokens
       ];
-      
+
       addLiquidityToBins(
         binsToAddLiquidity,
         sbtcUsdcPool.identifier,
@@ -302,17 +303,17 @@ describe('DLMM Core Liquidity Functions', () => {
 
     it('should successfully withdraw liquidity from active bin', async () => {
       const binId = 0n; // Active bin
-      
+
       // Capture state before withdraw
       const beforeBin = captureBinState(binId);
       const beforeUser = captureUserState(alice, binId);
-      
+
       // Use existing liquidity from beforeEach
       const initialLiquidityBalance = getSbtcUsdcPoolLpBalance(binId, alice);
       const amountToWithdraw = initialLiquidityBalance / 2n; // Withdraw half
       const minXAmount = 1n;
       const minYAmount = 1n;
-      
+
       const response = txOk(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -322,12 +323,12 @@ describe('DLMM Core Liquidity Functions', () => {
         minXAmount,
         minYAmount
       ), alice);
-      
+
       // Capture state after withdraw
       const afterBin = captureBinState(binId);
       const afterUser = captureUserState(alice, binId);
       const withdrawResult = cvToValue(response.result);
-      
+
       // Check balances changed correctly
       expect(afterUser.xTokenBalance).toBe(beforeUser.xTokenBalance + withdrawResult.xAmount);
       expect(afterUser.yTokenBalance).toBe(beforeUser.yTokenBalance + withdrawResult.yAmount);
@@ -336,7 +337,7 @@ describe('DLMM Core Liquidity Functions', () => {
       expect(withdrawResult.yAmount).toBeGreaterThan(0n);
       expect(withdrawResult.xAmount).toBeGreaterThanOrEqual(minXAmount);
       expect(withdrawResult.yAmount).toBeGreaterThanOrEqual(minYAmount);
-      
+
       // Check invariants
       const invariantCheck = checkWithdrawLiquidityInvariants(
         beforeBin,
@@ -349,7 +350,7 @@ describe('DLMM Core Liquidity Functions', () => {
         minXAmount,
         minYAmount
       );
-      
+
       if (!invariantCheck.passed) {
         throw new Error(`Invariant violations: ${invariantCheck.errors.join('; ')}`);
       }
@@ -357,17 +358,17 @@ describe('DLMM Core Liquidity Functions', () => {
 
     it('should successfully withdraw Y tokens from bin below active', async () => {
       const binId = -1n; // Below active bin - has only Y tokens
-      
+
       // Capture state before withdraw
       const beforeBin = captureBinState(binId);
       const beforeUser = captureUserState(alice, binId);
-      
+
       // Use existing liquidity from beforeEach
       const initialLiquidityBalance = getSbtcUsdcPoolLpBalance(binId, alice);
       const amountToWithdraw = initialLiquidityBalance / 3n; // Withdraw one third
       const minXAmount = 0n; // Don't expect X tokens
       const minYAmount = 1n; // Expect Y tokens
-      
+
       const response = txOk(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -377,19 +378,19 @@ describe('DLMM Core Liquidity Functions', () => {
         minXAmount,
         minYAmount
       ), alice);
-      
+
       // Capture state after withdraw
       const afterBin = captureBinState(binId);
       const afterUser = captureUserState(alice, binId);
       const withdrawResult = cvToValue(response.result);
-      
+
       expect(afterUser.xTokenBalance).toBe(beforeUser.xTokenBalance + withdrawResult.xAmount);
       expect(afterUser.yTokenBalance).toBe(beforeUser.yTokenBalance + withdrawResult.yAmount);
       expect(afterUser.lpTokenBalance).toBe(beforeUser.lpTokenBalance - amountToWithdraw);
       expect(withdrawResult.xAmount).toBe(0n); // No X tokens from bin below active
       expect(withdrawResult.yAmount).toBeGreaterThan(0n);
       expect(withdrawResult.yAmount).toBeGreaterThanOrEqual(minYAmount);
-      
+
       // Check invariants
       const invariantCheck = checkWithdrawLiquidityInvariants(
         beforeBin,
@@ -402,7 +403,7 @@ describe('DLMM Core Liquidity Functions', () => {
         minXAmount,
         minYAmount
       );
-      
+
       if (!invariantCheck.passed) {
         throw new Error(`Invariant violations: ${invariantCheck.errors.join('; ')}`);
       }
@@ -410,11 +411,11 @@ describe('DLMM Core Liquidity Functions', () => {
 
     it('should successfully withdraw X tokens from bin above active', async () => {
       const binId = 1n; // Above active bin - has only X tokens
-      
+
       // Capture state before withdraw
       const beforeBin = captureBinState(binId);
       const beforeUser = captureUserState(alice, binId);
-      
+
       const liquidityBalance = getSbtcUsdcPoolLpBalance(binId, alice);
       const amountToWithdraw = liquidityBalance / 3n; // Withdraw one third
       const minXAmount = 1n; // Expect X tokens
@@ -441,7 +442,7 @@ describe('DLMM Core Liquidity Functions', () => {
       expect(withdrawResult.xAmount).toBeGreaterThan(0n);
       expect(withdrawResult.yAmount).toBe(0n); // No Y tokens from bin above active
       expect(withdrawResult.xAmount).toBeGreaterThanOrEqual(minXAmount);
-      
+
       // Check invariants
       const invariantCheck = checkWithdrawLiquidityInvariants(
         beforeBin,
@@ -454,7 +455,7 @@ describe('DLMM Core Liquidity Functions', () => {
         minXAmount,
         minYAmount
       );
-      
+
       if (!invariantCheck.passed) {
         throw new Error(`Invariant violations: ${invariantCheck.errors.join('; ')}`);
       }
@@ -462,16 +463,16 @@ describe('DLMM Core Liquidity Functions', () => {
 
     it('should withdraw complete liquidity position', async () => {
       const binId = 0n; // Active bin
-      
+
       // Capture state before withdraw
       const beforeBin = captureBinState(binId);
       const beforeUser = captureUserState(alice, binId);
-      
+
       const liquidityBalance = getSbtcUsdcPoolLpBalance(binId, alice);
       const amountToWithdraw = liquidityBalance; // Withdraw all
       const minXAmount = 1n;
       const minYAmount = 1n;
-      
+
       const response = txOk(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -481,18 +482,18 @@ describe('DLMM Core Liquidity Functions', () => {
         minXAmount,
         minYAmount
       ), alice);
-      
+
       // Capture state after withdraw
       const afterBin = captureBinState(binId);
       const afterUser = captureUserState(alice, binId);
       const withdrawResult = cvToValue(response.result);
-      
+
       expect(afterUser.xTokenBalance).toBe(beforeUser.xTokenBalance + withdrawResult.xAmount);
       expect(afterUser.yTokenBalance).toBe(beforeUser.yTokenBalance + withdrawResult.yAmount);
       expect(afterUser.lpTokenBalance).toBe(0n); // All liquidity withdrawn
       expect(withdrawResult.xAmount).toBeGreaterThan(0n);
       expect(withdrawResult.yAmount).toBeGreaterThan(0n);
-      
+
       // Check invariants
       const invariantCheck = checkWithdrawLiquidityInvariants(
         beforeBin,
@@ -505,7 +506,7 @@ describe('DLMM Core Liquidity Functions', () => {
         minXAmount,
         minYAmount
       );
-      
+
       if (!invariantCheck.passed) {
         throw new Error(`Invariant violations: ${invariantCheck.errors.join('; ')}`);
       }
@@ -518,11 +519,11 @@ describe('DLMM Core Liquidity Functions', () => {
       const secondWithdrawAmount = initialLiquidityBalance / 4n; // Withdraw another 1/4
       const minXAmount = 1n;
       const minYAmount = 1n;
-      
+
       // First withdrawal - capture state
       const beforeFirstBin = captureBinState(binId);
       const beforeFirstUser = captureUserState(alice, binId);
-      
+
       const firstResponse = txOk(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -532,11 +533,11 @@ describe('DLMM Core Liquidity Functions', () => {
         minXAmount,
         minYAmount
       ), alice);
-      
+
       const afterFirstBin = captureBinState(binId);
       const afterFirstUser = captureUserState(alice, binId);
       const firstWithdrawResult = cvToValue(firstResponse.result);
-      
+
       // Check invariants for first withdrawal
       const firstInvariantCheck = checkWithdrawLiquidityInvariants(
         beforeFirstBin,
@@ -549,15 +550,15 @@ describe('DLMM Core Liquidity Functions', () => {
         minXAmount,
         minYAmount
       );
-      
+
       if (!firstInvariantCheck.passed) {
         throw new Error(`First withdrawal invariant violations: ${firstInvariantCheck.errors.join('; ')}`);
       }
-      
+
       // Second withdrawal - capture state
       const beforeSecondBin = captureBinState(binId);
       const beforeSecondUser = captureUserState(alice, binId);
-      
+
       const secondResponse = txOk(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -567,11 +568,11 @@ describe('DLMM Core Liquidity Functions', () => {
         minXAmount,
         minYAmount
       ), alice);
-      
+
       const afterSecondBin = captureBinState(binId);
       const afterSecondUser = captureUserState(alice, binId);
       const secondWithdrawResult = cvToValue(secondResponse.result);
-      
+
       // Check invariants for second withdrawal
       const secondInvariantCheck = checkWithdrawLiquidityInvariants(
         beforeSecondBin,
@@ -584,11 +585,11 @@ describe('DLMM Core Liquidity Functions', () => {
         minXAmount,
         minYAmount
       );
-      
+
       if (!secondInvariantCheck.passed) {
         throw new Error(`Second withdrawal invariant violations: ${secondInvariantCheck.errors.join('; ')}`);
       }
-      
+
       // Verify final state
       const finalLiquidityBalance = getSbtcUsdcPoolLpBalance(binId, alice);
       expect(finalLiquidityBalance).toBe(initialLiquidityBalance - firstWithdrawAmount - secondWithdrawAmount);
@@ -602,7 +603,7 @@ describe('DLMM Core Liquidity Functions', () => {
       const amountToWithdraw = liquidityBalance / 10n; // Small withdrawal
       const minXAmount = 999999999999n; // Unreasonably high minimum
       const minYAmount = 1n;
-      
+
       const response = txErr(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -612,7 +613,7 @@ describe('DLMM Core Liquidity Functions', () => {
         minXAmount,
         minYAmount
       ), alice);
-      
+
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_MINIMUM_X_AMOUNT);
     });
 
@@ -622,7 +623,7 @@ describe('DLMM Core Liquidity Functions', () => {
       const amountToWithdraw = liquidityBalance / 10n; // Small withdrawal
       const minXAmount = 1n;
       const minYAmount = 999999999999n; // Unreasonably high minimum
-      
+
       const response = txErr(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -632,7 +633,7 @@ describe('DLMM Core Liquidity Functions', () => {
         minXAmount,
         minYAmount
       ), alice);
-      
+
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_MINIMUM_Y_AMOUNT);
     });
 
@@ -642,7 +643,7 @@ describe('DLMM Core Liquidity Functions', () => {
       const amountToWithdraw = liquidityBalance + 1000000n; // More than available
       const minXAmount = 1n;
       const minYAmount = 1n;
-      
+
       const response = txErr(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -652,7 +653,7 @@ describe('DLMM Core Liquidity Functions', () => {
         minXAmount,
         minYAmount
       ), alice);
-      
+
       expect(cvToValue(response.result)).toBe(errors.sbtcUsdcPool.ERR_INVALID_AMOUNT);
     });
 
@@ -661,7 +662,7 @@ describe('DLMM Core Liquidity Functions', () => {
       const amountToWithdraw = 0n; // Zero amount
       const minXAmount = 0n;
       const minYAmount = 0n;
-      
+
       const response = txErr(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -671,7 +672,7 @@ describe('DLMM Core Liquidity Functions', () => {
         minXAmount,
         minYAmount
       ), alice);
-      
+
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_INVALID_AMOUNT);
     });
 
@@ -693,7 +694,7 @@ describe('DLMM Core Liquidity Functions', () => {
         minXAmount,
         minYAmount
       ), alice);
-      
+
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_NO_POOL_DATA);
     });
 
@@ -701,11 +702,11 @@ describe('DLMM Core Liquidity Functions', () => {
       const binId = 10n; // Bin with no liquidity added
       const liquidityBalance = getSbtcUsdcPoolLpBalance(binId, alice);
       expect(liquidityBalance).toBe(0n); // Verify no liquidity exists
-      
+
       const amountToWithdraw = 1000000n;
       const minXAmount = 1n;
       const minYAmount = 1n;
-      
+
       // This test reveals a division by zero bug in the contract when totalSupply is 0
      const response = txErr(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
@@ -722,7 +723,7 @@ describe('DLMM Core Liquidity Functions', () => {
 
     it('should handle withdrawals from different users independently', async () => {
       const binId = 0n; // Active bin
-      
+
       // Add liquidity for bob
       txOk(dlmmCore.addLiquidity(
         sbtcUsdcPool.identifier,
@@ -735,16 +736,16 @@ describe('DLMM Core Liquidity Functions', () => {
         1000000n, // max-x-liquidity-fee
         1000000n  // max-y-liquidity-fee
       ), bob);
-      
+
       const aliceLiquidityBalance = getSbtcUsdcPoolLpBalance(binId, alice);
       const bobLiquidityBalance = getSbtcUsdcPoolLpBalance(binId, bob);
       const aliceWithdrawAmount = aliceLiquidityBalance / 2n;
       const bobWithdrawAmount = bobLiquidityBalance / 3n;
-      
+
       // Alice withdraws - capture state
       const beforeAliceBin = captureBinState(binId);
       const beforeAliceUser = captureUserState(alice, binId);
-      
+
       const aliceResponse = txOk(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -754,11 +755,11 @@ describe('DLMM Core Liquidity Functions', () => {
         1n,
         1n
       ), alice);
-      
+
       const afterAliceBin = captureBinState(binId);
       const afterAliceUser = captureUserState(alice, binId);
       const aliceResult = cvToValue(aliceResponse.result);
-      
+
       // Check invariants for Alice's withdrawal
       const aliceInvariantCheck = checkWithdrawLiquidityInvariants(
         beforeAliceBin,
@@ -771,15 +772,15 @@ describe('DLMM Core Liquidity Functions', () => {
         1n,
         1n
       );
-      
+
       if (!aliceInvariantCheck.passed) {
         throw new Error(`Alice withdrawal invariant violations: ${aliceInvariantCheck.errors.join('; ')}`);
       }
-      
+
       // Bob withdraws - capture state
       const beforeBobBin = captureBinState(binId);
       const beforeBobUser = captureUserState(bob, binId);
-      
+
       const bobResponse = txOk(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -789,11 +790,11 @@ describe('DLMM Core Liquidity Functions', () => {
         1n,
         1n
       ), bob);
-      
+
       const afterBobBin = captureBinState(binId);
       const afterBobUser = captureUserState(bob, binId);
       const bobResult = cvToValue(bobResponse.result);
-      
+
       // Check invariants for Bob's withdrawal
       const bobInvariantCheck = checkWithdrawLiquidityInvariants(
         beforeBobBin,
@@ -806,11 +807,11 @@ describe('DLMM Core Liquidity Functions', () => {
         1n,
         1n
       );
-      
+
       if (!bobInvariantCheck.passed) {
         throw new Error(`Bob withdrawal invariant violations: ${bobInvariantCheck.errors.join('; ')}`);
       }
-      
+
       // Verify final state
       const finalAliceLiquidity = getSbtcUsdcPoolLpBalance(binId, alice);
       const finalBobLiquidity = getSbtcUsdcPoolLpBalance(binId, bob);
@@ -820,16 +821,16 @@ describe('DLMM Core Liquidity Functions', () => {
 
     it('should handle edge case with very small withdrawal amounts', async () => {
       const binId = 0n; // Active bin
-      
+
       // Capture state before withdraw
       const beforeBin = captureBinState(binId);
       const beforeUser = captureUserState(alice, binId);
-      
+
       const initialLiquidityBalance = getSbtcUsdcPoolLpBalance(binId, alice);
       const amountToWithdraw = initialLiquidityBalance / 10n; // Small but not too small
       const minXAmount = 1n; // Allow any amount since withdrawal is tiny
       const minYAmount = 0n;
-      
+
       const response = txOk(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -839,18 +840,18 @@ describe('DLMM Core Liquidity Functions', () => {
         minXAmount,
         minYAmount
       ), alice);
-      
+
       // Capture state after withdraw
       const afterBin = captureBinState(binId);
       const afterUser = captureUserState(alice, binId);
       const withdrawResult = cvToValue(response.result);
-      
+
       expect(afterUser.xTokenBalance).toBe(beforeUser.xTokenBalance + withdrawResult.xAmount);
       expect(afterUser.yTokenBalance).toBe(beforeUser.yTokenBalance + withdrawResult.yAmount);
       expect(afterUser.lpTokenBalance).toBe(beforeUser.lpTokenBalance - amountToWithdraw);
       expect(withdrawResult.xAmount).toBeGreaterThanOrEqual(0n);
       expect(withdrawResult.yAmount).toBeGreaterThanOrEqual(0n);
-      
+
       // Check invariants
       const invariantCheck = checkWithdrawLiquidityInvariants(
         beforeBin,
@@ -863,7 +864,7 @@ describe('DLMM Core Liquidity Functions', () => {
         minXAmount,
         minYAmount
       );
-      
+
       if (!invariantCheck.passed) {
         throw new Error(`Invariant violations: ${invariantCheck.errors.join('; ')}`);
       }
@@ -871,27 +872,27 @@ describe('DLMM Core Liquidity Functions', () => {
 
     it('should calculate proportional token amounts correctly', async () => {
       const binId = 0n; // Active bin
-      
+
       // Capture state before withdraw
       const beforeBin = captureBinState(binId);
       const beforeUser = captureUserState(alice, binId);
-      
+
       // Get current bin balances to calculate expected proportions
       const binBalances = rovOk(sbtcUsdcPool.getBinBalances(binId + 500n)); // Bin ID + CENTER_BIN_ID
       const totalSupply = rovOk(sbtcUsdcPool.getTotalSupply(binId));
       const liquidityBalance = getSbtcUsdcPoolLpBalance(binId, alice);
       const amountToWithdraw = liquidityBalance / 2n;
-      
+
       // Skip test if totalSupply is 0 to avoid division by zero
       if (totalSupply === 0n) {
         expect(true).toBe(true); // Skip test
         return;
       }
-      
+
       // Calculate expected proportional amounts
       const expectedXAmount = (binBalances.xBalance * amountToWithdraw) / totalSupply;
       const expectedYAmount = (binBalances.yBalance * amountToWithdraw) / totalSupply;
-      
+
       const response = txOk(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -901,19 +902,19 @@ describe('DLMM Core Liquidity Functions', () => {
         0n, // Allow any amount for proportionality test
         0n
       ), alice);
-      
+
       // Capture state after withdraw
       const afterBin = captureBinState(binId);
       const afterUser = captureUserState(alice, binId);
       const withdrawResult = cvToValue(response.result);
-      
+
       // Allow for small rounding differences
       const tolerance = 10n;
       expect(withdrawResult.xAmount).toBeGreaterThanOrEqual(expectedXAmount - tolerance);
       expect(withdrawResult.xAmount).toBeLessThanOrEqual(expectedXAmount + tolerance);
       expect(withdrawResult.yAmount).toBeGreaterThanOrEqual(expectedYAmount - tolerance);
       expect(withdrawResult.yAmount).toBeLessThanOrEqual(expectedYAmount + tolerance);
-      
+
       // Check invariants
       const invariantCheck = checkWithdrawLiquidityInvariants(
         beforeBin,
@@ -926,7 +927,7 @@ describe('DLMM Core Liquidity Functions', () => {
         0n, // minXAmount was 0n in the call
         0n  // minYAmount was 0n in the call
       );
-      
+
       if (!invariantCheck.passed) {
         throw new Error(`Invariant violations: ${invariantCheck.errors.join('; ')}`);
       }
@@ -939,11 +940,11 @@ describe('DLMM Core Liquidity Functions', () => {
       const xAmountToAdd = 2000000n; // 0.02 BTC
       const yAmountToAdd = 0n; // No Y tokens for bins above active
       const minDlp = 1n;
-      
+
       // Add liquidity first - capture state
       const beforeAddBin = captureBinState(binId);
       const beforeAddUser = captureUserState(alice, binId);
-      
+
       const addResponse = txOk(dlmmCore.addLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -955,13 +956,13 @@ describe('DLMM Core Liquidity Functions', () => {
         1000000n, // max-x-liquidity-fee
         1000000n  // max-y-liquidity-fee
       ), alice);
-      
+
       const afterAddBin = captureBinState(binId);
       const afterAddUser = captureUserState(alice, binId);
       const liquidityAdded = cvToValue(addResponse.result);
-      
+
       expect(liquidityAdded).toBeGreaterThan(0n);
-      
+
       // Check invariants for add liquidity
       const addInvariantCheck = checkAddLiquidityInvariants(
         beforeAddBin,
@@ -973,16 +974,16 @@ describe('DLMM Core Liquidity Functions', () => {
         liquidityAdded,
         minDlp
       );
-      
+
       if (!addInvariantCheck.passed) {
         throw new Error(`Add liquidity invariant violations: ${addInvariantCheck.errors.join('; ')}`);
       }
-      
+
       // Then withdraw half of it - capture state
       const withdrawAmount = liquidityAdded / 2n;
       const beforeWithdrawBin = captureBinState(binId);
       const beforeWithdrawUser = captureUserState(alice, binId);
-      
+
       const withdrawResponse = txOk(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -992,14 +993,14 @@ describe('DLMM Core Liquidity Functions', () => {
         1n, // Expect X tokens
         0n  // Don't expect Y tokens
       ), alice);
-      
+
       const afterWithdrawBin = captureBinState(binId);
       const afterWithdrawUser = captureUserState(alice, binId);
       const withdrawResult = cvToValue(withdrawResponse.result);
-      
+
       expect(withdrawResult.xAmount).toBeGreaterThan(0n);
       expect(withdrawResult.yAmount).toBe(0n); // No Y tokens from bin above active
-      
+
       // Check invariants for withdraw liquidity
       const withdrawInvariantCheck = checkWithdrawLiquidityInvariants(
         beforeWithdrawBin,
@@ -1012,11 +1013,11 @@ describe('DLMM Core Liquidity Functions', () => {
         1n,
         0n
       );
-      
+
       if (!withdrawInvariantCheck.passed) {
         throw new Error(`Withdraw liquidity invariant violations: ${withdrawInvariantCheck.errors.join('; ')}`);
       }
-      
+
       const finalLiquidityBalance = getSbtcUsdcPoolLpBalance(binId, alice);
       expect(finalLiquidityBalance).toBe(liquidityAdded - withdrawAmount);
     });
@@ -1024,11 +1025,11 @@ describe('DLMM Core Liquidity Functions', () => {
     it('should handle multiple add/withdraw cycles', async () => {
       const binId = 0n; // Active bin
       const initialLiquidityBalance = getSbtcUsdcPoolLpBalance(binId, alice);
-      
+
       // First add - capture state
       const beforeFirstAddBin = captureBinState(binId);
       const beforeFirstAddUser = captureUserState(alice, binId);
-      
+
       const firstAddResponse = txOk(dlmmCore.addLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -1040,14 +1041,14 @@ describe('DLMM Core Liquidity Functions', () => {
         1000000n, // max-x-liquidity-fee
         1000000n  // max-y-liquidity-fee
       ), alice);
-      
+
       const afterFirstAddBin = captureBinState(binId);
       const afterFirstAddUser = captureUserState(alice, binId);
       const firstLiquidityAdded = cvToValue(firstAddResponse.result);
       const afterFirstAdd = getSbtcUsdcPoolLpBalance(binId, alice);
-      
+
       expect(afterFirstAdd).toBeGreaterThan(initialLiquidityBalance);
-      
+
       // Check invariants for first add
       const firstAddInvariantCheck = checkAddLiquidityInvariants(
         beforeFirstAddBin,
@@ -1059,16 +1060,16 @@ describe('DLMM Core Liquidity Functions', () => {
         firstLiquidityAdded,
         1n
       );
-      
+
       if (!firstAddInvariantCheck.passed) {
         throw new Error(`First add invariant violations: ${firstAddInvariantCheck.errors.join('; ')}`);
       }
-      
+
       // First withdraw - capture state
       const withdrawAmount = (afterFirstAdd - initialLiquidityBalance) / 2n;
       const beforeFirstWithdrawBin = captureBinState(binId);
       const beforeFirstWithdrawUser = captureUserState(alice, binId);
-      
+
       const firstWithdrawResponse = txOk(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -1078,15 +1079,15 @@ describe('DLMM Core Liquidity Functions', () => {
         1n,
         1n
       ), alice);
-      
+
       const afterFirstWithdrawBin = captureBinState(binId);
       const afterFirstWithdrawUser = captureUserState(alice, binId);
       const firstWithdrawResult = cvToValue(firstWithdrawResponse.result);
       const afterFirstWithdraw = getSbtcUsdcPoolLpBalance(binId, alice);
-      
+
       expect(afterFirstWithdraw).toBeLessThan(afterFirstAdd);
       expect(afterFirstWithdraw).toBeGreaterThan(initialLiquidityBalance);
-      
+
       // Check invariants for first withdraw
       const firstWithdrawInvariantCheck = checkWithdrawLiquidityInvariants(
         beforeFirstWithdrawBin,
@@ -1099,15 +1100,15 @@ describe('DLMM Core Liquidity Functions', () => {
         1n,
         1n
       );
-      
+
       if (!firstWithdrawInvariantCheck.passed) {
         throw new Error(`First withdraw invariant violations: ${firstWithdrawInvariantCheck.errors.join('; ')}`);
       }
-      
+
       // Second add - capture state
       const beforeSecondAddBin = captureBinState(binId);
       const beforeSecondAddUser = captureUserState(alice, binId);
-      
+
       const secondAddResponse = txOk(dlmmCore.addLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -1119,15 +1120,15 @@ describe('DLMM Core Liquidity Functions', () => {
         1000000n, // max-x-liquidity-fee
         1000000n  // max-y-liquidity-fee
       ), alice);
-      
+
       const afterSecondAddBin = captureBinState(binId);
       const afterSecondAddUser = captureUserState(alice, binId);
       const secondLiquidityAdded = cvToValue(secondAddResponse.result);
       const afterSecondAdd = getSbtcUsdcPoolLpBalance(binId, alice);
-      
+
       expect(afterSecondAdd).toBeGreaterThan(afterFirstWithdraw);
       expect(afterSecondAdd).toBeGreaterThan(initialLiquidityBalance);
-      
+
       // Check invariants for second add
       const secondAddInvariantCheck = checkAddLiquidityInvariants(
         beforeSecondAddBin,
@@ -1139,7 +1140,7 @@ describe('DLMM Core Liquidity Functions', () => {
         secondLiquidityAdded,
         1n
       );
-      
+
       if (!secondAddInvariantCheck.passed) {
         throw new Error(`Second add invariant violations: ${secondAddInvariantCheck.errors.join('; ')}`);
       }
@@ -1149,10 +1150,10 @@ describe('DLMM Core Liquidity Functions', () => {
       const binId = 0n;
       const liquidityBalance = getSbtcUsdcPoolLpBalance(binId, alice);
       const amountToWithdraw = liquidityBalance / 2n;
-      
+
       // Mint random tokens for testing
       txOk(mockRandomToken.mint(1000000n, alice), deployer);
-      
+
       const response = txErr(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
         mockRandomToken.identifier,
@@ -1162,7 +1163,7 @@ describe('DLMM Core Liquidity Functions', () => {
         1n,
         1n
       ), alice);
-      
+
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_INVALID_X_TOKEN);
     });
 
@@ -1170,10 +1171,10 @@ describe('DLMM Core Liquidity Functions', () => {
       const binId = 0n;
       const liquidityBalance = getSbtcUsdcPoolLpBalance(binId, alice);
       const amountToWithdraw = liquidityBalance / 2n;
-      
+
       // Mint random tokens for testing
       txOk(mockRandomToken.mint(1000000n, alice), deployer);
-      
+
       const response = txErr(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -1183,7 +1184,7 @@ describe('DLMM Core Liquidity Functions', () => {
         1n,
         1n
       ), alice);
-      
+
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_INVALID_Y_TOKEN);
     });
 
@@ -1192,7 +1193,7 @@ describe('DLMM Core Liquidity Functions', () => {
       const xAmount = 1000000000000000n; // Very large amount
       const yAmount = 50000000000000000n;
       const minDlp = 1n;
-      
+
       txOk(mockSbtcToken.mint(xAmount, alice), deployer);
       txOk(mockUsdcToken.mint(yAmount, alice), deployer);
 
@@ -1208,7 +1209,7 @@ describe('DLMM Core Liquidity Functions', () => {
         xAmount / 1000n,
         yAmount / 1000n
       ), alice);
-      
+
       const liquidityReceived = cvToValue(response.result);
       expect(liquidityReceived).toBeGreaterThan(0n);
     });
@@ -1218,7 +1219,7 @@ describe('DLMM Core Liquidity Functions', () => {
       const xAmount = 1n; // Very small
       const yAmount = 1n;
       const minDlp = 1n;
-      
+
       const response = txOk(dlmmCore.addLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -1230,7 +1231,7 @@ describe('DLMM Core Liquidity Functions', () => {
         1000000n,
         1000000n
       ), alice);
-      
+
       // Should return an error if amounts are too small
       expect(response).toBeDefined();
     });

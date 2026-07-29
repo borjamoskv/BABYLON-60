@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """Evolution Operations Mixin — genetic operators and adversarial processes."""
 
 from __future__ import annotations

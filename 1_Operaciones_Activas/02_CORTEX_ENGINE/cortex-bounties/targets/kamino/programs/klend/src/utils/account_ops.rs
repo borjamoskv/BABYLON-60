@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{prelude::*, AccountsClose, Owner, Result, ToAccountInfo, ZeroCopy};
 use anchor_spl::{
     token_2022::spl_token_2022::extension::ExtensionType,
@@ -33,10 +34,10 @@ pub fn initialize_pda_token_account<'info>(
 ) -> Result<()> {
     let is_token_2022 = token_program.key() == anchor_spl::token_2022::spl_token_2022::ID;
 
-   
-   
-   
-   
+
+
+
+
     let space = if is_token_2022 {
         anchor_spl::token_2022::get_account_data_size(
             CpiContext::new(
@@ -45,10 +46,10 @@ pub fn initialize_pda_token_account<'info>(
                     mint: token_mint.to_account_info(),
                 },
             ),
-           
-           
-           
-           
+
+
+
+
             &[ExtensionType::ImmutableOwner],
         )?
     } else {
@@ -57,7 +58,7 @@ pub fn initialize_pda_token_account<'info>(
 
     let lamports = Rent::get()?.minimum_balance(space.try_into().unwrap());
 
-   
+
     accounts::create_pda_account(
         system_program.to_account_info(),
         payer.to_account_info(),

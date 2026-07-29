@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use cortex_ledger::memory_store::{EpistemicFailure, MemoryStore};
 use std::path::PathBuf;
 use fs2::FileExt;
@@ -229,7 +230,7 @@ impl AgentClient for FableAgent {
 
         let body: serde_json::Value = response.json().map_err(|e| e.to_string())?;
         let raw_content = body["content"][0]["text"].as_str().ok_or("No content in response")?;
-        
+
         let clean_json = raw_content
             .replace("```json", "")
             .replace("```", "")
@@ -266,7 +267,7 @@ mod tests {
             let path_clone = file_path.clone();
             let success_clone = Arc::clone(&success_count);
             let error_clone = Arc::clone(&error_count);
-            
+
             handles.push(thread::spawn(move || {
                 let proposal = CorrectionProposal {
                     ticket_id: format!("TICKET-{}", i),
@@ -274,10 +275,10 @@ mod tests {
                     original_content_snippet: "fn main() { println!(\"Hello\"); }".to_string(),
                     replacement_content: format!("fn main() {{ println!(\"Thread {}\"); }}", i),
                 };
-                
+
                 match SourceApplier::apply(&proposal) {
                     Ok(_) => { success_clone.fetch_add(1, Ordering::SeqCst); },
-                    Err(e) => { 
+                    Err(e) => {
                         if e.contains("bloqueado por otro proceso") || e.contains("mutado fuera del control") {
                             error_clone.fetch_add(1, Ordering::SeqCst);
                         } else {
@@ -294,7 +295,7 @@ mod tests {
 
         let final_success = success_count.load(Ordering::SeqCst);
         let final_errors = error_count.load(Ordering::SeqCst);
-        
+
         // El fail-fast debería garantizar que las carreras de datos se resuelvan con error
         // para los hilos que colisionan, permitiendo que 1 o más logren escribir.
         assert!(final_success > 0, "Al menos una mutación debe triunfar");

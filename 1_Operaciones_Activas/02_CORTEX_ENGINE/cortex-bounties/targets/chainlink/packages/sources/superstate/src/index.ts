@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { expose, ServerInstance } from '@chainlink/external-adapter-framework'
 import { Adapter } from '@chainlink/external-adapter-framework/adapter'
 import {

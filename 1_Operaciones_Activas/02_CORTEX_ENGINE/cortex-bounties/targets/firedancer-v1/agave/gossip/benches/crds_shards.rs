@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     criterion::{Criterion, criterion_group, criterion_main},
     rand::{Rng, rng},

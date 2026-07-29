@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `metrics` module enables sending measurements to an `InfluxDB` instance
 
 use {

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { getCryptoPrice, getRwaPrice } from '@chainlink/data-engine-adapter'
 import { EndpointContext, MarketStatus } from '@chainlink/external-adapter-framework/adapter'
 import { Cache } from '@chainlink/external-adapter-framework/cache'

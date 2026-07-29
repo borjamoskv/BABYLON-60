@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use k2_shared::KineticRouterError;
 use crate::storage::InterestRateParams;
 use k2_shared::RAY;
@@ -45,7 +46,7 @@ pub fn validate_interest_rate_params(params: &InterestRateParams) -> Result<(), 
         .base_variable_borrow_rate
         .saturating_add(params.variable_rate_slope1)
         .saturating_add(params.variable_rate_slope2);
-    
+
     if total_rate > MAX_TOTAL_RATE {
         return Err(KineticRouterError::InvalidAmount);
     }

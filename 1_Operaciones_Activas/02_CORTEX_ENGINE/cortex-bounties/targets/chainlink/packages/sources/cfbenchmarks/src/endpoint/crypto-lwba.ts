@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { inputParameters } from './crypto'
 import { customInputValidation } from './utils'
 import { wsTransport } from '../transport/crypto-lwba'

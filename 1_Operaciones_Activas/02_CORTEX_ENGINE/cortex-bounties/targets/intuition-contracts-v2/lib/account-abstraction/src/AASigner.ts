@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { TransactionResponse } from '@ethersproject/abstract-provider'
 import { TransactionReceipt } from '@ethersproject/abstract-provider/src.ts/index'
 import { BytesLike, hexValue } from '@ethersproject/bytes'

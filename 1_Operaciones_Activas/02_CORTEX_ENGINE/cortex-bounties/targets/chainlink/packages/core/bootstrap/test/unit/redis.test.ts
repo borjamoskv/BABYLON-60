@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { defaultOptions, redactOptions, RedisCache } from '../../src/lib/middleware/cache/redis'
 import { CacheEntry } from '../../src/lib/middleware/cache/types'
 import { logger } from '../../src/lib/modules/logger'

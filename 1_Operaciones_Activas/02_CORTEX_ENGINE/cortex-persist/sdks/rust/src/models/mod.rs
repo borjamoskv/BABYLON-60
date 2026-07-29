@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 pub mod agent_register_request;
 pub use self::agent_register_request::AgentRegisterRequest;
 pub mod agent_response;

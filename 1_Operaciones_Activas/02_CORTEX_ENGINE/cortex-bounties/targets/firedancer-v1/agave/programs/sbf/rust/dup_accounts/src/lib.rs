@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Example Rust-based SBF program that tests duplicate accounts passed via accounts
 
 #![allow(clippy::arithmetic_side_effects)]

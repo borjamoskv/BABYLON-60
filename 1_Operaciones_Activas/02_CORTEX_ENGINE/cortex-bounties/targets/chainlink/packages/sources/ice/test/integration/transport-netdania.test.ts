@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { LoggerFactoryProvider } from '@chainlink/external-adapter-framework/util'
 import { clientTests, loggerFactory } from './client-common.cases'
 import * as process from 'node:process'

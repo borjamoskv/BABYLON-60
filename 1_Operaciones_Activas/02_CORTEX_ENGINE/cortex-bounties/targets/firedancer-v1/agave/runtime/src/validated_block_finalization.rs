@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Validated block finalization certificates.
 //!
 //! This module provides [`ValidatedBlockFinalizationCert`], a type that represents

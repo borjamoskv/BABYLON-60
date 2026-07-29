@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { AdapterContext, AdapterRequest, Middleware } from '../../../types'
 import { Store } from 'redux'
 import {

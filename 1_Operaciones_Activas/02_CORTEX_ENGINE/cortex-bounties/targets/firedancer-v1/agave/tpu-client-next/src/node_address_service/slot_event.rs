@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module provides [`SlotEvent`] enum that encapsulates slot start and end events.
 //!
 //! The implementation of the slot update provider defines semantics of these events. But typically,

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! # Gas and Resource Tracking Utilities
 //!
 //! Utilities for tracking CPU, memory, and storage resource usage in integration tests.
@@ -225,7 +226,7 @@ pub fn capture_resources(env: &Env, label: &str) -> ResourceCheckpoint {
     let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
         let cost_estimate = env.cost_estimate();
         let resources = cost_estimate.resources();
-        
+
         ResourceCheckpoint {
             label: label.to_string(),
             cpu_insns: cost_estimate.budget().cpu_instruction_cost(),
@@ -236,7 +237,7 @@ pub fn capture_resources(env: &Env, label: &str) -> ResourceCheckpoint {
             write_bytes: resources.write_bytes,
         }
     }));
-    
+
     match result {
         Ok(checkpoint) => checkpoint,
         Err(_) => {
@@ -281,7 +282,7 @@ pub fn print_resource_delta(delta: &ResourceDelta) {
 }
 
 /// Attribute costs to specific operation types
-/// 
+///
 /// Uses heuristics since Soroban doesn't provide per-operation traces:
 /// - VM instantiation: ~10M+ CPU instructions
 /// - Storage reads: ~100k CPU per entry
@@ -294,17 +295,17 @@ pub fn attribute_costs(delta: &ResourceDelta) -> ResourceAttribution {
     } else {
         0
     };
-    
+
     // Heuristic: Storage operations cost ~100-200k CPU per entry
     let storage_read_cost = (delta.read_entries_delta as u64) * 100_000;
     let storage_write_cost = (delta.write_entries_delta as u64) * 200_000;
-    
+
     // Remaining is computation
     let computation_cost = delta.cpu_insns_delta
         .saturating_sub(vm_cost)
         .saturating_sub(storage_read_cost)
         .saturating_sub(storage_write_cost);
-    
+
     ResourceAttribution {
         vm_instantiation_cost: vm_cost,
         storage_read_cost,
@@ -315,30 +316,30 @@ pub fn attribute_costs(delta: &ResourceDelta) -> ResourceAttribution {
 
 /// Print resource attribution breakdown
 pub fn print_attribution(attribution: &ResourceAttribution) {
-    let total = attribution.vm_instantiation_cost 
-        + attribution.storage_read_cost 
-        + attribution.storage_write_cost 
+    let total = attribution.vm_instantiation_cost
+        + attribution.storage_read_cost
+        + attribution.storage_write_cost
         + attribution.computation_cost;
-    
+
     if total == 0 {
         println!("No resource usage to attribute");
         return;
     }
-    
+
     println!("📊 Resource Attribution:");
-    println!("   VM Instantiation: {:>12} ({:>5.1}%)", 
+    println!("   VM Instantiation: {:>12} ({:>5.1}%)",
         attribution.vm_instantiation_cost,
         (attribution.vm_instantiation_cost as f64 / total as f64) * 100.0
     );
-    println!("   Storage Reads:    {:>12} ({:>5.1}%)", 
+    println!("   Storage Reads:    {:>12} ({:>5.1}%)",
         attribution.storage_read_cost,
         (attribution.storage_read_cost as f64 / total as f64) * 100.0
     );
-    println!("   Storage Writes:   {:>12} ({:>5.1}%)", 
+    println!("   Storage Writes:   {:>12} ({:>5.1}%)",
         attribution.storage_write_cost,
         (attribution.storage_write_cost as f64 / total as f64) * 100.0
     );
-    println!("   Computation:      {:>12} ({:>5.1}%)", 
+    println!("   Computation:      {:>12} ({:>5.1}%)",
         attribution.computation_cost,
         (attribution.computation_cost as f64 / total as f64) * 100.0
     );
@@ -371,10 +372,10 @@ pub fn check_resource_limits_with_warnings(e: &Env, message: &str) {
         let cpu_used = cost_estimate.budget().cpu_instruction_cost();
         let mem_used = cost_estimate.budget().memory_bytes_cost();
         let resources = cost_estimate.resources();
-        
+
         (cpu_used, mem_used, resources)
     }));
-    
+
     let (cpu_used, mem_used, resources) = match result {
         Ok((cpu, mem, res)) => (cpu, mem, res),
         Err(_) => {
@@ -385,9 +386,9 @@ pub fn check_resource_limits_with_warnings(e: &Env, message: &str) {
             return;
         }
     };
-    
+
     println!("{}", message);
-    
+
     // CPU check with warning levels
     let cpu_pct = (cpu_used as f64 / CPU_LIMIT as f64) * 100.0;
     if cpu_pct > 90.0 {
@@ -397,7 +398,7 @@ pub fn check_resource_limits_with_warnings(e: &Env, message: &str) {
     } else {
         println!("✅ CPU: {} / {} ({:.1}%)", cpu_used, CPU_LIMIT, cpu_pct);
     }
-    
+
     // Memory check
     let mem_pct = (mem_used as f64 / MEM_LIMIT as f64) * 100.0;
     if mem_pct > 90.0 {
@@ -407,13 +408,13 @@ pub fn check_resource_limits_with_warnings(e: &Env, message: &str) {
     } else {
         println!("✅ MEM: {} / {} ({:.1}%)", mem_used, MEM_LIMIT, mem_pct);
     }
-    
+
     // Storage checks
     // Note: read_entries field removed in SDK 23.x
     if resources.write_entries > (WRITE_ENTRIES_LIMIT * 3 / 4) {
         println!("🟡 Write Entries: {} / {} - WARNING", resources.write_entries, WRITE_ENTRIES_LIMIT);
     }
-    
+
     println!("===========================================");
 }
 
@@ -428,43 +429,43 @@ pub fn compare_optimization(
     println!("📊 Optimization Comparison");
     println!("========================================");
     println!();
-    
+
     let cpu_diff = after.cpu_insns as i128 - before.cpu_insns as i128;
     let mem_diff = after.mem_bytes as i128 - before.mem_bytes as i128;
-    
+
     println!("Before: {}", before_label);
     println!("After:  {}", after_label);
     println!();
-    
+
     println!("CPU Instructions:");
     println!("  Before: {}", before.cpu_insns);
     println!("  After:  {}", after.cpu_insns);
     if cpu_diff != 0 {
-        println!("  Change: {} ({:.1}%)", 
+        println!("  Change: {} ({:.1}%)",
             cpu_diff,
             (cpu_diff as f64 / before.cpu_insns as f64) * 100.0
         );
     }
     println!();
-    
+
     println!("Memory Bytes:");
     println!("  Before: {}", before.mem_bytes);
     println!("  After:  {}", after.mem_bytes);
     if mem_diff != 0 {
-        println!("  Change: {} ({:.1}%)", 
+        println!("  Change: {} ({:.1}%)",
             mem_diff,
             (mem_diff as f64 / before.mem_bytes as f64) * 100.0
         );
     }
     println!();
-    
+
     if cpu_diff < 0 {
-        println!("✅ Optimization successful: {} CPU instructions saved ({:.1}%)", 
+        println!("✅ Optimization successful: {} CPU instructions saved ({:.1}%)",
             -cpu_diff,
             (-cpu_diff as f64 / before.cpu_insns as f64) * 100.0
         );
     } else if cpu_diff > 0 {
-        println!("⚠️  Regression: {} CPU instructions added ({:.1}%)", 
+        println!("⚠️  Regression: {} CPU instructions added ({:.1}%)",
             cpu_diff,
             (cpu_diff as f64 / before.cpu_insns as f64) * 100.0
         );

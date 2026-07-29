@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { DEFAULT_ADMIN_ROLE, shouldBehaveLikeAccessControl } = require('./AccessControl.behavior.js');
 
 const AccessControl = artifacts.require('$AccessControl');

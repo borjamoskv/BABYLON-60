@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { applyMigrationScript, loadSteps, log, resolveMigrationFile } from "lib";
 
 const runMigrations = async (stepsFile: string): Promise<void> => {

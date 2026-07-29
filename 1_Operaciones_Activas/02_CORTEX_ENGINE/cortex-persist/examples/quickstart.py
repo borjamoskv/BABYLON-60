@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """CORTEX Quickstart - Store, Search, Ask in 10 lines.
 
 import logging

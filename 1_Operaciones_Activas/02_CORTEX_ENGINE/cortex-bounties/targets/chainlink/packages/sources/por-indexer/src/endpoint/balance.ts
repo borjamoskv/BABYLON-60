@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { InputParameters } from '@chainlink/external-adapter-framework/validation'
 import { PoRTotalBalanceEndpoint } from '@chainlink/external-adapter-framework/adapter/por'
 import { config, configDefinition } from '../config'

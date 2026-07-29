@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { updateEma } from '../../src/transport/ema'
 
 const TAU_MS = 30_000

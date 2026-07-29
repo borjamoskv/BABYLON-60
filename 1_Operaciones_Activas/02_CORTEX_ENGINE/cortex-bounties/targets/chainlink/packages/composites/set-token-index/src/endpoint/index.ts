@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as allocations from './allocations'
 import * as tokens from './tokens'
 import * as tokenIndex from './token-index'

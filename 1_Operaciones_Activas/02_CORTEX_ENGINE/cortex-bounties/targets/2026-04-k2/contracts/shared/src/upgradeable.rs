@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use soroban_sdk::{contracterror, Address, Env, Symbol};
 
 // TTL constants: 1 year = 365 days * 17280 ledgers/day ≈ 6,307,200 ledgers
@@ -55,12 +56,12 @@ pub mod admin {
     /// Propose a new admin address (two-step transfer, step 1).
     /// Only the current admin can propose a new admin.
     /// The proposed admin must call `accept_admin` to complete the transfer.
-    /// 
+    ///
     /// If a pending admin already exists, it will be replaced by the new proposal.
     pub fn propose_admin(env: &Env, caller: &Address, pending_admin: &Address) -> Result<(), UpgradeError> {
         require_admin(env, caller)?;
         caller.require_auth();
-        
+
         // Check if there's an existing pending admin and emit cancellation event if so
         if let Ok(existing_pending) = get_pending_admin(env) {
             use crate::events::AdminProposalCancelledEvent;
@@ -72,10 +73,10 @@ pub mod admin {
                 },
             );
         }
-        
+
         env.storage().instance().set(&PENDING_ADMIN_KEY, pending_admin);
         env.storage().instance().extend_ttl(TTL_THRESHOLD, TTL_EXTENSION);
-        
+
         // Emit event
         use crate::events::AdminProposedEvent;
         env.events().publish(
@@ -85,7 +86,7 @@ pub mod admin {
                 pending_admin: pending_admin.clone(),
             },
         );
-        
+
         Ok(())
     }
 
@@ -97,11 +98,11 @@ pub mod admin {
             return Err(UpgradeError::InvalidPendingAdmin);
         }
         caller.require_auth();
-        
+
         let previous_admin = get_admin(env)?;
         set_admin(env, caller);
         clear_pending_admin(env);
-        
+
         // Emit event
         use crate::events::AdminAcceptedEvent;
         env.events().publish(
@@ -111,7 +112,7 @@ pub mod admin {
                 new_admin: caller.clone(),
             },
         );
-        
+
         Ok(())
     }
 
@@ -120,10 +121,10 @@ pub mod admin {
     pub fn cancel_admin_proposal(env: &Env, caller: &Address) -> Result<(), UpgradeError> {
         require_admin(env, caller)?;
         caller.require_auth();
-        
+
         let cancelled_pending = get_pending_admin(env)?;
         clear_pending_admin(env);
-        
+
         // Emit event
         use crate::events::AdminProposalCancelledEvent;
         env.events().publish(
@@ -133,7 +134,7 @@ pub mod admin {
                 cancelled_pending_admin: cancelled_pending,
             },
         );
-        
+
         Ok(())
     }
 

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 #![allow(unused_imports)]
 
@@ -98,7 +99,7 @@ fn initialize_contract(env: &Env, emission_manager: &Address, lending_pool: &Add
 }
 
 /// PoC Test: Verifies that FIND-019 vulnerability is fixed
-/// 
+///
 /// This test demonstrates that the authentication fix prevents unauthorized
 /// reward accrual. An attacker cannot call handle_action with forged balances
 /// because token_address.require_auth() enforces that only the token contract
@@ -161,7 +162,7 @@ fn incentives_handle_action_prevents_unauthenticated_spoof() {
     // Attacker tries to call handle_action with forged supply/balance
     // This should FAIL because token_address.require_auth() enforces authentication
     // The token contract must authenticate itself - attacker cannot forge this
-    
+
     // Choose balances that would drain full incentives_reward_balance if attack succeeded:
     // accrued = emission_per_second * time_elapsed * user_balance / total_supply
     // Solve user_balance = incentives_reward_balance / (emission_per_second * time_elapsed)
@@ -169,7 +170,7 @@ fn incentives_handle_action_prevents_unauthenticated_spoof() {
     // user_balance = 1e21 / 1e8 = 1e13
     let forged_total_supply = 1u128; // smallest to maximize accrual
     let forged_user_balance = 10_000_000_000_000u128; // 1e13
-    
+
     // Attempt to call handle_action WITHOUT token authentication
     // This should panic with Auth error because token_address.require_auth() fails
     // The attacker cannot authenticate as the token contract
@@ -180,14 +181,14 @@ fn incentives_handle_action_prevents_unauthenticated_spoof() {
         &forged_user_balance,
         &0u32,
     );
-    
+
     // If we reach here, the attack succeeded (which should not happen)
     // The test should panic before reaching this point
     panic!("Authentication bypass succeeded - vulnerability not fixed!");
 }
 
 /// Test: Verifies that legitimate token contract CAN call handle_action
-/// 
+///
 /// This test ensures that the fix doesn't break legitimate functionality.
 /// When a token contract authenticates itself, handle_action should succeed.
 #[test]
@@ -199,7 +200,7 @@ fn incentives_handle_action_allows_authenticated_token() {
     let lending_pool = Address::generate(&env);
     let user = Address::generate(&env);
     let token = Address::generate(&env); // aToken/debtToken contract
-    
+
     // Deploy incentives
     let incentives_id = initialize_contract(&env, &emission_manager, &lending_pool);
     let incentives = incentives::Client::new(&env, &incentives_id);
@@ -294,7 +295,7 @@ fn incentives_handle_action_allows_authenticated_token() {
     // Verify rewards were accrued correctly
     let user_data = incentives.get_user_reward_data(&token, &reward_token, &user, &0u32);
     assert!(user_data.accrued > 0, "User should have accrued rewards");
-    
+
     // Verify index was updated
     let index = incentives.get_asset_reward_index(&token, &reward_token, &0u32);
     assert!(index.index > RAY, "Reward index should have increased");

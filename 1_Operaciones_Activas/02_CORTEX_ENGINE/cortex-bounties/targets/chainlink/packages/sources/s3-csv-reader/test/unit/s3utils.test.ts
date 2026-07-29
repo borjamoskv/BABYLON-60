@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { isValidBucket, isValidKeyPrefix } from '../../src/transport/s3utils'
 
 describe('s3utils test', () => {

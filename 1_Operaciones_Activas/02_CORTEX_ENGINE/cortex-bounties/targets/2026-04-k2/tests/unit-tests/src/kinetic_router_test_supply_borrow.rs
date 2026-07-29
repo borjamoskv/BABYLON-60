@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 use crate::{a_token, debt_token, interest_rate_strategy, kinetic_router, price_oracle};
@@ -460,7 +461,7 @@ fn test_collect_protocol_reserves() {
     let admin = Address::generate(&env);
     let user = Address::generate(&env);
     let non_admin = Address::generate(&env);
-    
+
     // Mock admin auth for initialization
     env.mock_all_auths();
 

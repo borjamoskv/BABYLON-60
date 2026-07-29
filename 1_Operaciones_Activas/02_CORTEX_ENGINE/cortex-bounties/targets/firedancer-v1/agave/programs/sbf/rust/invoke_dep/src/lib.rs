@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Example Rust-based SBF program that issues a cross-program-invocation
 
 pub const TEST_SUCCESS: u8 = 1;

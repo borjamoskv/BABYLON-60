@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 export const mockCreateRedisClient = (): RedisMock => new RedisMock()
 
 enum Event {

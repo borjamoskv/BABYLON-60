@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """Tests for trace_adapter and trace_builder.
 
 Uses only deterministic fixtures — no live engine, no DB, no network.

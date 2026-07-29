@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { BaseEndpointTypes } from '../endpoint/price'
 import { makeLogger } from '@chainlink/external-adapter-framework/util'
 import { WebsocketReverseMappingTransport } from '@chainlink/external-adapter-framework/transports/websocket'

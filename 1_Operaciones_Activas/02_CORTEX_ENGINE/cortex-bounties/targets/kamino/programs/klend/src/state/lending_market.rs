@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::prelude::*;
 use borsh::{BorshDeserialize, BorshSerialize};
 use bytemuck::Zeroable;
@@ -179,8 +180,8 @@ pub struct LendingMarket {
 
 
 
-   
-   
+
+
     pub min_borrow_order_fill_value: u64,
 
 
@@ -225,9 +226,9 @@ pub struct LendingMarket {
 
 
 
-   
-   
-   
+
+
+
     pub min_withdraw_queued_liquidity_value: u64,
 
 
@@ -379,7 +380,7 @@ impl LendingMarket {
     }
 
     pub fn set_elevation_group(&mut self, elevation_group: ElevationGroup) -> Result<()> {
-       
+
         if elevation_group.id == ELEVATION_GROUP_NONE {
             return err!(LendingError::InvalidElevationGroupConfig);
         }

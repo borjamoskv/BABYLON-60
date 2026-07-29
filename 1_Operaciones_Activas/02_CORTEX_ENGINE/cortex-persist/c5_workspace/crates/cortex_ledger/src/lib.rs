@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use cortex_types::{hash_bytes, hash_u64s};
 
 #[derive(Clone, Debug, PartialEq, Eq)]

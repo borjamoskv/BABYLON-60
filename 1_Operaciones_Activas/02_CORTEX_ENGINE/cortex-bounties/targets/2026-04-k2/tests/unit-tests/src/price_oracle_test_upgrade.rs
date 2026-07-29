@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 // Tests the upgrade flow for the price oracle contract.
@@ -65,7 +66,7 @@ fn test_upgrade_preserves_state() {
 
     let asset = price_oracle::Asset::Stellar(Address::generate(&env));
     client.add_asset(&admin, &asset);
-    
+
     let assets_before = client.get_whitelisted_assets();
     assert_eq!(assets_before.len(), 1);
 

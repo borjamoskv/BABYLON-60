@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crate::welford_stats::WelfordStats,
     agave_votor_messages::vote::Vote,

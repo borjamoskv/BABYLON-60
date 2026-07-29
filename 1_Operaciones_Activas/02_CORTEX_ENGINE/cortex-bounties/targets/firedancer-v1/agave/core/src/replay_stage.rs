@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `replay_stage` replays transactions broadcast by the leader.
 
 use {
@@ -3711,7 +3712,7 @@ impl ReplayStage {
                     }
                 }
 
-                // FIREDANCER: Send a slot completed notification.                
+                // FIREDANCER: Send a slot completed notification.
                 let mut memory: [u8; 88] = [0; 88];
 
                 let max_compute_units = bank.read_cost_tracker().unwrap().get_block_limit();
@@ -3722,7 +3723,7 @@ impl ReplayStage {
                 let nonvote_failed_txn_count = bank.non_vote_transaction_error_count();
                 let compute_units = bank.read_cost_tracker().unwrap().block_cost();
                 let mut tips = bank.tips.load(Ordering::Relaxed);
-                
+
                 // jito collects a 3% fee at the end of the block + 3% fee at distribution time
                 tips = tips - tips
                     .checked_mul(6)
@@ -3750,7 +3751,7 @@ impl ReplayStage {
                 unsafe {
                     fd_ext_plugin_publish_replay_stage(2, memory.as_ptr(), 88);
                 }
-                
+
                 // For leader banks:
                 // 1) Replay finishes before shredding, broadcast_stage will take care of
                 //      notifying votor

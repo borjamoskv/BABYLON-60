@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // Algorithm by @kalanyuz and @eshaqiri
 import { Smoother } from '../../endpoint/common'
 import { EmaFilter } from './ema'

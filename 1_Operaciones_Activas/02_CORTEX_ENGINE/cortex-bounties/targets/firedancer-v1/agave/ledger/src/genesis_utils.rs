@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 pub use solana_runtime::genesis_utils::{
     GenesisConfigInfo, bootstrap_validator_stake_lamports, create_genesis_config_with_leader,
 };

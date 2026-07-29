@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { PriceEndpoint } from '@chainlink/external-adapter-framework/adapter'
 import overrides from '../config/overrides.json'
 import { transport } from '../transport/volume'

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 
 use bitflags::bitflags;
 
@@ -8,7 +9,7 @@ bitflags! {
         const DEPOSIT =    1 << 0;
         const BORROW =     1 << 1;
         const LIQUIDATE =  1 << 2;
-       
+
 
         const NONE = 0;
     }
@@ -72,7 +73,7 @@ pub mod bitflags_str {
     {
         let flags = super::PermissionedOp::from_bits_truncate(*value);
 
-       
+
         let mut buffer = String::new();
         bitflags::parser::to_writer_strict(&flags, &mut buffer)
             .expect("Failed to serialize PermissionedOp - this should never happen");

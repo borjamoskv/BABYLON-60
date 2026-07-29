@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const customRules = require('solhint-plugin-openzeppelin');
 
 const rules = [

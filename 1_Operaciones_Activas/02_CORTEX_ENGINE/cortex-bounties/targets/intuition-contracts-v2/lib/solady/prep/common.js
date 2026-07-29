@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
@@ -7,7 +8,7 @@ const normalizeNewlines = s => s.replace(/\n(\n\s*)+/g, '\n\n');
 
 const hexNoPrefix = x => x.toString(16).replace(/^0[xX]/, '');
 
-const readSync = srcPath => 
+const readSync = srcPath =>
   fs.existsSync(srcPath) ? fs.readFileSync(srcPath, { encoding: 'utf8', flag: 'r' }) : '';
 
 const runCommandSync = (command, args) => {

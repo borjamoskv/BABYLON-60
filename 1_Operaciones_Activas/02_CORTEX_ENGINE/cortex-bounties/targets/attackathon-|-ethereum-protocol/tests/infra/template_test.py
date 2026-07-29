@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import inspect
 from collections.abc import Callable
 from contextlib import suppress

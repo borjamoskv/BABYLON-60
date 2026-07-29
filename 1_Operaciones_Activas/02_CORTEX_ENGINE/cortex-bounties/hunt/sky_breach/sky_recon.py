@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import json
 import asyncio
 import aiohttp
@@ -24,10 +25,10 @@ async def fetch_sky_chainlog(session):
 async def sky_mission_recon():
     async with aiohttp.ClientSession() as session:
         print("--- [SKY-RECON] Mission Start ---")
-        
+
         addresses = await fetch_sky_chainlog(session)
         print(f"[SKY-RECON] Found {len(addresses)} active 2026 contracts.")
-        
+
         # Mapping to GitHub repositories in-scope (according to Immunefi)
         recon_map = {
             "contracts": addresses,
@@ -39,10 +40,10 @@ async def sky_mission_recon():
             ],
             "payout_tier": "CRITICAL: $10,000,000"
         }
-        
+
         with open("bounty_hunt/sky_breach/sky_recon_ledger.json", "w") as f:
             json.dump(recon_map, f, indent=4)
-        
+
         print("[SKY-RECON] Sky-Recon Ledger initialized at sky_recon_ledger.json.")
 
 if __name__ == "__main__":

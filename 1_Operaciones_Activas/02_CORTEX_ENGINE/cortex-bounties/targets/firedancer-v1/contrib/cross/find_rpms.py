@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # find_rpms.py is a helper script to find RPM download URLs
 
 

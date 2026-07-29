@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as crypto from 'crypto'
 
 export interface DataSchema {

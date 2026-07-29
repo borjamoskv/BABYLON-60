@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AxiosRequestConfig, AdapterResponse } from '@chainlink/ea-bootstrap'
 import { AdapterConfigError, AdapterInputError, Logger, Requester } from '@chainlink/ea-bootstrap'
 import { adapter as cmc } from '@chainlink/coinmarketcap-adapter'

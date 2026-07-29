@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Transaction processing glue code, mainly consisting of Object-safe traits
 //!
 //! [InstalledSchedulerPool] lends one of pooled [InstalledScheduler]s as wrapped in

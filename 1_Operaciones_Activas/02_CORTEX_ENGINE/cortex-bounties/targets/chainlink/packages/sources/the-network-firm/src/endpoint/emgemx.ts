@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { PoRProviderEndpoint } from '@chainlink/external-adapter-framework/adapter/por'
 import { AdapterInputError } from '@chainlink/external-adapter-framework/validation/error'
 import { inputParameters } from '../transport/common'

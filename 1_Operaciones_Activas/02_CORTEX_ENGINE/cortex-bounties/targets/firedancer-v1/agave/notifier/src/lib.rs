@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(feature = "agave-unstable-api")]
 /// To activate Slack, Discord, PagerDuty and/or Telegram notifications, define these environment variables
 /// before using the `Notifier`

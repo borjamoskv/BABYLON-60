@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /// Utilities for querying filesystem metadata, including direct I/O support.
 #[cfg(all(target_os = "linux", not(target_env = "musl")))]
 use std::{ffi::CString, mem};

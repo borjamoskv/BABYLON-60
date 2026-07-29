@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     super::Bank,
     crate::{bank::CollectorFeeDetails, reward_info::RewardInfo},

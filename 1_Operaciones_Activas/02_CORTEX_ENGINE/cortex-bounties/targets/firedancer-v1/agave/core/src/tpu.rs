@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `tpu` module implements the Transaction Processing Unit, a
 //! multi-stage transaction processing pipeline in software.
 

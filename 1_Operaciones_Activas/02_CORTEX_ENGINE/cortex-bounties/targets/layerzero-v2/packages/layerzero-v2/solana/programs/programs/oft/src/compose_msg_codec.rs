@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const NONCE_OFFSET: usize = 0;
 const SRC_EID_OFFSET: usize = 8;
 const AMOUNT_LD_OFFSET: usize = 12;

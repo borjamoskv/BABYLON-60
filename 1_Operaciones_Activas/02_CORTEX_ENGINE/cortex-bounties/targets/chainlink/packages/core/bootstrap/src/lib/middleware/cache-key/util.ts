@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterRequest } from '../../../types'
 import { pick, omit } from 'lodash'
 import objectHash from 'object-hash'

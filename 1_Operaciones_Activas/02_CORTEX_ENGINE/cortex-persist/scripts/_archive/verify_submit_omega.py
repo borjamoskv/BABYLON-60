@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 VERIFY-SUBMIT-Ω: Script de Verificación del Puente de Entrega
 Valida el flujo COMPLETO: Reporte -> Metadatos -> Veto/Submission.

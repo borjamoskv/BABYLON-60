@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /* eslint-disable @typescript-eslint/no-var-requires */
 import fs, { readFileSync } from 'fs'
 import { join } from 'path'

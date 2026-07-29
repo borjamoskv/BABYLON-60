@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { ForexPriceEndpoint } from '@chainlink/external-adapter-framework/adapter'
 import { TransportRoutes } from '@chainlink/external-adapter-framework/transports'
 import overrides from '../config/overrides.json'
@@ -7,7 +8,7 @@ import { wsTransport } from '../transport/forex-ws'
 import { AdapterRequest } from '@chainlink/external-adapter-framework/util'
 import { PriceAdapterRequest } from '../index'
 
-/* 
+/*
 to improve data quality for forex feeds
 
 On receiving FOO/USD request, if FOO is on the list of assets that are queried in the standard direction (EUR, GBP, AUD, NZD, XAG, XAU, XPT, XPD, XCU)

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crate::client_ids::ClientId,
     serde::{Deserialize, Deserializer, Serialize, Serializer, de::Error as _, ser::Error as _},

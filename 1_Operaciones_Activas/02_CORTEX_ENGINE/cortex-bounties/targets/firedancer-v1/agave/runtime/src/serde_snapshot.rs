@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #[cfg(all(target_os = "linux", target_env = "gnu"))]
 use std::{
     ffi::{CStr, CString},

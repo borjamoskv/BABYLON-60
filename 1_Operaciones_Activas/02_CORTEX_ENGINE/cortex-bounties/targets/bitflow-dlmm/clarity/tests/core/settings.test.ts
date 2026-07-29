@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import {
   alice,
   bob,
@@ -12,7 +13,7 @@ import {
 } from "../helpers/helpers";
 
 import { describe, it, expect, beforeEach } from 'vitest';
-import { accounts } from '../helpers/clarigen-types'; 
+import { accounts } from '../helpers/clarigen-types';
 import {
   cvToValue,
 } from '@clarigen/core';
@@ -81,10 +82,10 @@ describe('DLMM Core Contract', () => {
         for (const principal of adminList) {
           txOk(dlmmCore.addAdmin(principal), deployer);
         }
-      
+
         let admins = rovOk(dlmmCore.getAdmins());
         expect(admins.length).toBe(5);
-        
+
         const response = txErr(dlmmCore.addAdmin(accounts.wallet_5.address), deployer);
         admins = rovOk(dlmmCore.getAdmins());
         expect(admins.length).toBe(5);
@@ -108,7 +109,7 @@ describe('DLMM Core Contract', () => {
         expect(admins.length).toBe(1);
         expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_CANNOT_REMOVE_CONTRACT_DEPLOYER);
       });
-    
+
       it('Should allow removal of normal admins', async () => {
         txOk(dlmmCore.addAdmin(alice), deployer);
         let admins = rovOk(dlmmCore.getAdmins());
@@ -152,7 +153,7 @@ describe('DLMM Core Contract', () => {
     it('Should allow admin to add valid bin step', async () => {
       const binStep = 100n;
       const factors = generateBinFactors();
-      
+
       let binSteps = rovOk(dlmmCore.getBinSteps());
       expect(binSteps.length, "initial bin step list should have 5 elements").toBe(5);
       expect(binSteps).toStrictEqual([1n, 5n, 10n, 20n, 25n]);
@@ -174,7 +175,7 @@ describe('DLMM Core Contract', () => {
     it('Should prevent non-admin from adding bin step', async () => {
       const binStep = 200n;
       const factors = generateBinFactors();
-      
+
       const response = txErr(dlmmCore.addBinStep(binStep, factors), alice);
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_NOT_AUTHORIZED);
     });
@@ -195,7 +196,7 @@ describe('DLMM Core Contract', () => {
 
     it.skip('Should prevent from adding a more than 1000 bin steps', async () => {
       const lastBinStep = 10000n;
-      
+
       for (const binStep of generateBinFactors(995, 100n)) {
         txOk(dlmmCore.addBinStep(binStep, generateBinFactors()), deployer);
       }
@@ -207,7 +208,7 @@ describe('DLMM Core Contract', () => {
 
   describe('Read-Only Functions', () => { ///////////////////////////////////////////////////////////////////
     beforeEach(initializeBinSteps);
-    
+
     it('should return current admins list', async () => {
       const result = rovOk(dlmmCore.getAdmins());
       expect(result).toEqual([deployer]);
@@ -227,7 +228,7 @@ describe('DLMM Core Contract', () => {
     it('should return minimum shares values', async () => {
       const minBinResult = rovOk(dlmmCore.getMinimumBinShares());
       const minBurntResult = rovOk(dlmmCore.getMinimumBurntShares());
-      
+
       expect(minBinResult).toBe(10000n);
       expect(minBurntResult).toBe(1000n);
     });
@@ -240,13 +241,13 @@ describe('DLMM Core Contract', () => {
 
   describe('Utility Functions', () => {
     beforeEach(initializeBinSteps);
-    
+
     it('should convert between signed and unsigned bin IDs', async () => {
       const testBinId = 250n;
-      
+
       const signedResult = rovOk(dlmmCore.getSignedBinId(testBinId));
       const unsignedResult = rovOk(dlmmCore.getUnsignedBinId(testBinId - 500n)); // CENTER_BIN_ID offset
-      
+
       expect(signedResult).toBe(testBinId - 500n);
       expect(unsignedResult).toBe(testBinId);
     });
@@ -256,7 +257,7 @@ describe('DLMM Core Contract', () => {
       const initialPrice = 100000000n; // PRICE_SCALE_BPS
       const binStep = 25n;
       const binId = 0n;
-      
+
       const result = rovOk(dlmmCore.getBinPrice(initialPrice, binStep, binId));
       expect(result).toBe(initialPrice);
     });
@@ -265,7 +266,7 @@ describe('DLMM Core Contract', () => {
       const xAmount = 1000000n;
       const yAmount = 2000000n;
       const binPrice = 1000000n;
-      
+
       const result = rovOk(dlmmCore.getLiquidityValue(xAmount, yAmount, binPrice));
       expect(result).toBeDefined();
     });
@@ -273,7 +274,7 @@ describe('DLMM Core Contract', () => {
 
   describe('Settings Management', () => {
     beforeEach(initializeBinSteps);
-    
+
     it('should allow admin to set public pool creation', async () => {
       txOk(dlmmCore.setPublicPoolCreation(true), deployer);
     });
@@ -281,7 +282,7 @@ describe('DLMM Core Contract', () => {
     it('should allow admin to set minimum shares', async () => {
       const newMinBin = 15000n;
       const newMinBurnt = 1500n;
-      
+
       txOk(dlmmCore.setMinimumShares(newMinBin, newMinBurnt), deployer);
     });
 
@@ -296,11 +297,11 @@ describe('DLMM Core Contract', () => {
       txOk(mockUsdcToken.mint(5000000000n, deployer), deployer);
 
       const response = txOk(dlmmCore.createPool(
-        sbtcUsdcPool.identifier,           
+        sbtcUsdcPool.identifier,
         mockRandomToken.identifier, // Using random token
-        mockUsdcToken.identifier,          
+        mockUsdcToken.identifier,
         10000000n,    // 0.1 BTC in active bin
-        5000000000n,  // 5000 USDC in active bin  
+        5000000000n,  // 5000 USDC in active bin
         1000n,        // burn amount
         1000n, 3000n, // x fees (0.1% protocol, 0.3% provider)
         1000n, 3000n, // y fees (0.1% protocol, 0.3% provider)
@@ -312,7 +313,7 @@ describe('DLMM Core Contract', () => {
         "https://bitflow.finance/dlmm", // uri
         true          // status
       ), deployer);
-      
+
       expect(response).toBeDefined();
     });
 
@@ -322,11 +323,11 @@ describe('DLMM Core Contract', () => {
       txOk(mockRandomToken.mint(5000000000n, deployer), deployer);
 
       const response = txOk(dlmmCore.createPool(
-        sbtcUsdcPool.identifier,           
+        sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
-        mockRandomToken.identifier, // Using random token        
+        mockRandomToken.identifier, // Using random token
         10000000n,    // 0.1 BTC in active bin
-        5000000000n,  // 5000 USDC in active bin  
+        5000000000n,  // 5000 USDC in active bin
         1000n,        // burn amount
         1000n, 3000n, // x fees (0.1% protocol, 0.3% provider)
         1000n, 3000n, // y fees (0.1% protocol, 0.3% provider)
@@ -338,7 +339,7 @@ describe('DLMM Core Contract', () => {
         "https://bitflow.finance/dlmm", // uri
         true          // status
       ), deployer);
-      
+
       expect(response).toBeDefined();
     });
   });

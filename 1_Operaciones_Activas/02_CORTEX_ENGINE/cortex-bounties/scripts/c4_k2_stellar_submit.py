@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 Code4rena K2 Stellar — Submission Helper
@@ -12,15 +13,15 @@ def main():
     # Read report
     with open(REPORT_PATH, 'r') as f:
         report = f.read()
-    
+
     # Extract key fields
     title = "Unauthenticated Token Admin Takeover via initialize() — Critical"
     severity = "Critical"
-    
+
     # Copy report to clipboard for easy paste
     process = subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE)
     process.communicate(report.encode('utf-8'))
-    
+
     print("=" * 60)
     print("🎯 K2 STELLAR — CODE4RENA SUBMISSION READY")
     print("=" * 60)
@@ -42,7 +43,7 @@ def main():
     print("⏰ Deadline: May 27, 2026 8:00 PM UTC (18 days)")
     print("💰 Pool: $135,000 USDC")
     print()
-    
+
     # Open C4 page
     subprocess.run(['open', 'https://code4rena.com/audits/2026-04-k2'])
     print("🌐 Browser opened to K2 audit page")

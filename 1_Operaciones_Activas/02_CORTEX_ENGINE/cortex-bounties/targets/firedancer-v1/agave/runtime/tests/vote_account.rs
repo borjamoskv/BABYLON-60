@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Tests for vote_account that require BLS signatures.
 //! These tests are in the runtime crate to avoid miri cross-compilation issues
 //! with the blst crate in the vote crate.

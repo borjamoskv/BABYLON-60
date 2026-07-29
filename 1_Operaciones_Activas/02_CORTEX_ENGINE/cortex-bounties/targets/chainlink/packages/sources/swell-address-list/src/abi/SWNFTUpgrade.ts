@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { ethers } from 'ethers'
 
 export const SWNFTUpgrade_ABI: ethers.ContractInterface = [

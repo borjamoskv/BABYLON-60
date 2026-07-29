@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #[cfg(test)]
 mod test_enforced_options {
     use oapp::options::{assert_type_3, combine_options};

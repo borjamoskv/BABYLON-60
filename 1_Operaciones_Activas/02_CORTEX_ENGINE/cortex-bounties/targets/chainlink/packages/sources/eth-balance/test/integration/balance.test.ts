@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterRequest } from '@chainlink/ea-bootstrap'
 import type { SuiteContext } from '@chainlink/ea-test-helpers'
 import { setupExternalAdapterTest } from '@chainlink/ea-test-helpers'

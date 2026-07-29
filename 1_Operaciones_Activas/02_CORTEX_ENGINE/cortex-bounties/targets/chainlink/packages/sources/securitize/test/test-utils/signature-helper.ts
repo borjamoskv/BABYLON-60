@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Buffer } from 'buffer'
 import { createHash } from 'crypto'
 import nacl from 'tweetnacl'

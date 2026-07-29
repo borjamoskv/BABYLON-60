@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import LRU from 'lru-cache'
 import type { LRUInterface } from './types'
 import { getEnv, parseBool } from '../../../util'

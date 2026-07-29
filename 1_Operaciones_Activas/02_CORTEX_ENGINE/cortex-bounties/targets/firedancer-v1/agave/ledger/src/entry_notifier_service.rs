@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crate::entry_notifier_interface::EntryNotifierArc,
     crossbeam_channel::{Receiver, RecvTimeoutError, Sender, unbounded},

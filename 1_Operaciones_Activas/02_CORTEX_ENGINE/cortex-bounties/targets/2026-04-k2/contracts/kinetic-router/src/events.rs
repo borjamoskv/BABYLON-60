@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // Re-export events from shared module for convenience
 pub use k2_shared::{
     AdminAcceptedEvent, AdminProposalCancelledEvent, AdminProposedEvent, AMMRouterUpdated,

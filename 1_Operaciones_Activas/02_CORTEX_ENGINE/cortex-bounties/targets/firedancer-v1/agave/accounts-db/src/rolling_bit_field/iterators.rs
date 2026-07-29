@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Iterators for RollingBitField
 
 use {super::RollingBitField, std::ops::Range};

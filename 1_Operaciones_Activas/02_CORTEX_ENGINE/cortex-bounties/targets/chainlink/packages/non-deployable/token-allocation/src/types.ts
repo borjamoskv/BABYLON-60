@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Config as BaseConfig, DefaultConfig, BigNumberish } from '@chainlink/ea-bootstrap'
 
 export type TokenAllocation = {

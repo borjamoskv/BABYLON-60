@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Sanhedrin Consensus Engine (BFT)
 Asynchronous multiplexer for orthogonal model validation.

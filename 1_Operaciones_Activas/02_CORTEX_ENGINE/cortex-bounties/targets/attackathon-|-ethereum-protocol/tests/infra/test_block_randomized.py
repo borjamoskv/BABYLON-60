@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Unit tests for the block_randomized module.
 """

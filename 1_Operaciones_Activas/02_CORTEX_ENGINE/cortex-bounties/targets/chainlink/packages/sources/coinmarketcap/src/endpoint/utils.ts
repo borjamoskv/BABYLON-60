@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { config } from '../config'
 import { SingleNumberResultResponse } from '@chainlink/external-adapter-framework/util'
 import { InputParameters } from '@chainlink/external-adapter-framework/validation'

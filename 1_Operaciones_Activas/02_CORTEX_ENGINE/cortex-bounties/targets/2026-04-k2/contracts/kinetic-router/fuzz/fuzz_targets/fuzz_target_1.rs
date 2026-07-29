@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![no_main]
 
 mod common;
@@ -33,27 +34,27 @@ static RUN_COUNT: AtomicU64 = AtomicU64::new(0);
 fuzz_target!(|input: Input| {
     let env = Env::default();
     let track_stats = stats_enabled();
-    
+
     let mut test_env = match TestEnv::new(&env, &input) {
         Some(e) => e,
         None => return,
     };
-    
+
     let mut last_snapshot = ProtocolSnapshot::capture(&test_env);
     let mut last_timestamp = env.ledger().timestamp();
-    
+
     for op in &input.operations {
         let before = ProtocolSnapshot::capture(&test_env);
         let success = execute_operation(&mut test_env, op);
         let after = ProtocolSnapshot::capture(&test_env);
-        
+
         // Track operation statistics if enabled
         if track_stats {
             STATS.record_operation(op, success);
         }
-        
+
         test_env.increment_operation_count();
-        
+
         // Track rounding errors per asset
         // We track errors up to ROUNDING_TRACK_MULTIPLIER * MAX_ROUNDING_PER_OP
         // to catch legitimate rounding while flagging potential exploits
@@ -65,11 +66,11 @@ fuzz_target!(|input: Input| {
                 test_env.track_rounding_error(i, diff);
             }
         }
-        
+
         // Core invariants - checked after every operation
         verify_operation_invariants(&test_env, op, &before, &after, success);
         if track_stats { INVARIANT_STATS.record(InvariantType::OperationInvariants); }
-        
+
         // Verify failed operations don't modify state
         if !success {
             verify_failed_operation_unchanged(&test_env, &before, &after);
@@ -85,7 +86,7 @@ fuzz_target!(|input: Input| {
         if track_stats { INVARIANT_STATS.record(InvariantType::UtilizationInvariants); }
         verify_liquidation_invariants(&test_env, &after);
         if track_stats { INVARIANT_STATS.record(InvariantType::LiquidationInvariants); }
-        
+
         // Flash loan specific invariants
         match op {
             Operation::FlashLoan { asset_idx, amount_percent, receiver_type, .. } => {
@@ -108,23 +109,23 @@ fuzz_target!(|input: Input| {
             }
             _ => {}
         }
-        
+
         // Index monotonicity - indices should only increase
         verify_index_monotonicity(&test_env, &before, &after);
         if track_stats { INVARIANT_STATS.record(InvariantType::IndexMonotonicity); }
-        
+
         // Accrued to treasury monotonicity - should never decrease (except to 0 on collection)
         verify_accrued_to_treasury_monotonicity(&test_env, &before, &after);
         if track_stats { INVARIANT_STATS.record(InvariantType::AccruedTreasuryMonotonicity); }
-        
+
         // Debt ceiling enforcement
         verify_debt_ceiling_invariants(&test_env, &after);
         if track_stats { INVARIANT_STATS.record(InvariantType::DebtCeilingInvariants); }
-        
+
         // Reserve factor validation
         verify_reserve_factor_invariants(&test_env, &before, &after);
         if track_stats { INVARIANT_STATS.record(InvariantType::ReserveFactorInvariants); }
-        
+
         // Time-dependent invariants
         let current_timestamp = env.ledger().timestamp();
         if current_timestamp > last_timestamp {
@@ -137,10 +138,10 @@ fuzz_target!(|input: Input| {
             if track_stats { INVARIANT_STATS.record(InvariantType::FeeCalculationInvariants); }
             last_timestamp = current_timestamp;
         }
-        
+
         // Liquidation-specific fairness check
         match op {
-            Operation::Liquidate { liquidator_idx, user_idx, collateral_idx, debt_idx, .. } 
+            Operation::Liquidate { liquidator_idx, user_idx, collateral_idx, debt_idx, .. }
             | Operation::LiquidateReceiveAToken { liquidator_idx, user_idx, collateral_idx, debt_idx, .. } => {
                 verify_liquidation_fairness(
                     &test_env, &before, &after,
@@ -150,7 +151,7 @@ fuzz_target!(|input: Input| {
                 );
                 if track_stats { INVARIANT_STATS.record(InvariantType::LiquidationFairness); }
             }
-            Operation::MultiAssetLiquidation { liquidator_idx, user_idx, collateral_idx, debt_idx, .. } 
+            Operation::MultiAssetLiquidation { liquidator_idx, user_idx, collateral_idx, debt_idx, .. }
             | Operation::CreateAndLiquidate { liquidator_idx, user_idx, collateral_idx, debt_idx } => {
                 verify_liquidation_fairness(
                     &test_env, &before, &after,
@@ -162,15 +163,15 @@ fuzz_target!(|input: Input| {
             }
             _ => {}
         }
-        
+
         // Rate manipulation detection
         verify_no_rate_manipulation(&test_env, &before, &after);
         if track_stats { INVARIANT_STATS.record(InvariantType::NoRateManipulation); }
-        
+
         // Oracle sanity checks
         verify_oracle_sanity(&test_env, &before, &after);
         if track_stats { INVARIANT_STATS.record(InvariantType::OracleSanity); }
-        
+
         // Economic exploit detection - check every 5 operations to reduce overhead
         if test_env.operation_count % 5 == 0 {
             verify_no_value_extraction(&test_env, &before, &after);
@@ -178,10 +179,10 @@ fuzz_target!(|input: Input| {
             verify_admin_cannot_steal(&test_env, &before, &after);
             if track_stats { INVARIANT_STATS.record(InvariantType::AdminCannotSteal); }
         }
-        
+
         last_snapshot = after;
     }
-    
+
     // Final comprehensive checks
     verify_final_invariants(&test_env, &last_snapshot);
     if track_stats { INVARIANT_STATS.record(InvariantType::FinalInvariants); }
@@ -189,7 +190,7 @@ fuzz_target!(|input: Input| {
     if track_stats { INVARIANT_STATS.record(InvariantType::CumulativeRounding); }
     verify_no_dust_accumulation(&test_env, &last_snapshot);
     if track_stats { INVARIANT_STATS.record(InvariantType::DustAccumulation); }
-    
+
     // Configuration invariants - checked at end
     verify_liquidation_bonus_invariants(&test_env);
     if track_stats { INVARIANT_STATS.record(InvariantType::LiquidationBonusInvariants); }
@@ -199,7 +200,7 @@ fuzz_target!(|input: Input| {
     if track_stats { INVARIANT_STATS.record(InvariantType::AccessControlInvariants); }
     verify_parameter_bounds(&test_env);
     if track_stats { INVARIANT_STATS.record(InvariantType::ParameterBounds); }
-    
+
     // Print stats periodically
     let count = RUN_COUNT.fetch_add(1, Ordering::Relaxed) + 1;
     if count == 1 {

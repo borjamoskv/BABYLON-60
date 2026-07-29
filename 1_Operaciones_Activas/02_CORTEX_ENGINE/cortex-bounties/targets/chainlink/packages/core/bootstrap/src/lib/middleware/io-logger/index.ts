@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { Middleware, AdapterErrorLog, AdapterRequest, AdapterContext } from '../../../types'
 import { logger as Logger } from '../../modules/logger'
 import { AdapterError } from '../../modules/error'

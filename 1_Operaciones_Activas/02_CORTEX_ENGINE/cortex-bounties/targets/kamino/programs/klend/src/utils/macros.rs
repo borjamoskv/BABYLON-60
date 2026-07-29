@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #[macro_export]
 macro_rules! gen_signer_seeds {
     (
@@ -103,16 +104,16 @@ macro_rules! refresh_farms {
 #[cfg(target_arch = "bpf")]
 #[macro_export]
 macro_rules! dbg_msg {
-   
-   
-   
-   
+
+
+
+
     () => {
         msg!("[{}:{}]", file!(), line!())
     };
     ($val:expr $(,)?) => {
-       
-       
+
+
         match $val {
             tmp => {
                 msg!("[{}:{}] {} = {:#?}",
@@ -129,16 +130,16 @@ macro_rules! dbg_msg {
 #[cfg(not(target_arch = "bpf"))]
 #[macro_export]
 macro_rules! dbg_msg {
-   
-   
-   
-   
+
+
+
+
     () => {
         println!("[{}:{}]", file!(), line!())
     };
     ($val:expr $(,)?) => {
-       
-       
+
+
         match $val {
             tmp => {
                 println!("[{}:{}] {} = {:#?}",
@@ -267,9 +268,9 @@ macro_rules! assert_fuzzy_eq_percentage {
 #[macro_export]
 macro_rules! assert_gt {
     ($left:expr, $right:expr) => {
-       
+
         if !($left > $right) {
-           
+
             panic!(
                 "Assertion failed: {:?} is not greater than {:?}",
                 $left, $right
@@ -281,9 +282,9 @@ macro_rules! assert_gt {
 #[macro_export]
 macro_rules! assert_gte {
     ($left:expr, $right:expr) => {
-       
+
         if !($left >= $right) {
-           
+
             panic!(
                 "Assertion failed: {:?} is not greater than {:?}",
                 $left, $right

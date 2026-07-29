@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import cocotb
 
 import random
@@ -36,7 +37,7 @@ def getMemOAddr(val):
 def scratch_offset(tag):
   a = [0x000, 0x018, 0x030, 0x048, 0x060, 0x078, 0x090, 0x0A8, 0x0C0, 0x0D8, 0x0F0, 0x108, 0x120, 0x138, 0x150, 0x168,
        0x180, 0x198, 0x1B0, 0x1C8, 0x1E0, 0x1F8, 0x210, 0x228, 0x240, 0x258, 0x270, 0x288, 0x2A0, 0x2B8, 0x2D0, 0x2E8]
-  return a[tag] 
+  return a[tag]
 
 def get_const(addr):
   const = [
@@ -85,9 +86,9 @@ class MathMonitor:
       self.mem[i] = 0
     for i in range(12):
       self.setMem(0, i+0x04, get_const(i))
-    
+
   def check( self, tag, errstr, expected, observed  ):
-    if( int(expected) == int(observed) ): 
+    if( int(expected) == int(observed) ):
       #print("SUCCESS! [{}]".format(errstr))
       return
     self.dut._log.info("[{}] FAILED! {}- exp: {:X} vs obs: {:X}".format(tag, errstr, expected, observed))
@@ -151,7 +152,7 @@ class MathMonitor:
         if (int(cpu.calc_next) == t and state == 1 and int(cpu.in_hash_valid) == 1 and not inserted):
           self.setIn( int(cpu.calc_next), init_vals, int(cpu.in_hash_data) )
           inserted = True
-          if init_vals == 2: 
+          if init_vals == 2:
             init_vals = 0
             if (next_tag == 31):
               next_tag = 0
@@ -173,7 +174,7 @@ class MathMonitor:
           expRslt[t] = evalOp(getOP(instr[t]), valA[t], valB[t], valT[t])
           if self.verbose: self.dut._log.info("[{}] EXPECTED: A[{:X}:{:X}] OP: {} B[{:X}:{:X}] T[{:X}:{:X}] OUT:{:X}".format(t, addrA[t], valA[t], getOP(instr[t]), addrB[t], valB[t], addrT[t], valT[t], expRslt[t]))
         if (state == 5): # BLOCK
-          if int(cpu.mem_man_tag) == t and int(cpu.block_valid[t]) == 1 and not resultChecked[t]: 
+          if int(cpu.mem_man_tag) == t and int(cpu.block_valid[t]) == 1 and not resultChecked[t]:
             if getOP(instr[t]) != 12:
               self.check(t, "Result", expRslt[t], int(cpu.mem_man_data))
               self.check(t, "OutAddr", self.getPhyAddr(t, addrO[t]), int(cpu.mem_man_addr))
@@ -197,7 +198,7 @@ class OutMonitor:
     self.out_vals = []
     self.expected = []
 
-    self.inout_match = {} 
+    self.inout_match = {}
     start = []
     i_cnt = 0
 
@@ -278,12 +279,12 @@ async def run_test(dut):
   while num_sent < num_inputs:
     if ( int(dut.i_ready) == 1 ):
       await send_rand_input(dut, num_sent)
-      num_sent += 1 
+      num_sent += 1
       for _ in range(random.randint(0,10)):
         await RisingEdge(dut.clk)
     else:
       await RisingEdge(dut.clk)
-    
+
   await RisingEdge(dut.clk)
   dut.i_hash  .value = 0
   dut.i_valid .value = 0

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterRequest, Execute } from '@chainlink/ea-bootstrap'
 import * as cryptoVolatilityAdapter from '../../src/index'
 import { BigNumber } from 'ethers'

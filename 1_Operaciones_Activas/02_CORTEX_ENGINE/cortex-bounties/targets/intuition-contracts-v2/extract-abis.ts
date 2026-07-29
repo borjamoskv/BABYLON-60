@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -79,7 +80,7 @@ function generateIndexFile(abisDir: string) {
     .map(contractName => {
       const fileName = `${contractName}.ts`;
       const filePath = path.join(abisDir, fileName);
-      
+
       if (fs.existsSync(filePath)) {
         return `export { ${contractName}Abi } from './${contractName}';`;
       }

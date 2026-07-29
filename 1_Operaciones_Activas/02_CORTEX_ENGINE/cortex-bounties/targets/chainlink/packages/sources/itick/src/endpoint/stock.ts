@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { StockEndpoint } from '@chainlink/external-adapter-framework/adapter/stock'
 import { TransportRoutes } from '@chainlink/external-adapter-framework/transports'
 import { SingleNumberResultResponse } from '@chainlink/external-adapter-framework/util'

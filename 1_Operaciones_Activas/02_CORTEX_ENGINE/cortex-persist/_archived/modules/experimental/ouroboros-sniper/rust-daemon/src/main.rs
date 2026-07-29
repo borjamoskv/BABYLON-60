@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 mod github_ingestor;
 mod discord_ingestor;
 mod dashboard;

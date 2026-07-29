@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Tracks the parent-ready condition
 //!
 //! The parent-ready condition pertains to a slot `s` and a block hash `hash(b)`,

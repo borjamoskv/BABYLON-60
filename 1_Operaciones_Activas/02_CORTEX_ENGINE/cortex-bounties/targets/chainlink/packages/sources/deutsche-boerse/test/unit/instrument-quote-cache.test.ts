@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { InstrumentQuoteCache } from '../../src/transport/instrument-quote-cache'
 
 describe('InstrumentQuoteCache', () => {

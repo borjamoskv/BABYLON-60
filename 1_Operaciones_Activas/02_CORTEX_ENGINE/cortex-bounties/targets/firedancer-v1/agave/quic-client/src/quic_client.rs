@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Simple client that connects to a given UDP port with the QUIC protocol and provides
 //! an interface for sending data which is restricted by the server's flow control.
 

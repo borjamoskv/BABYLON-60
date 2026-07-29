@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     solana_clap_utils::input_validators::normalize_to_url_if_moniker,
     solana_cli_config::{CONFIG_FILE, Config},

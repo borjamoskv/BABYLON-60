@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 //! Gated pool whitelist tests
 //!
@@ -36,7 +37,7 @@ fn initialize_kinetic_router(env: &Env, admin: &Address, emergency_admin: &Addre
     let dex_router = Address::generate(env);
 
     client.initialize(admin, emergency_admin, &price_oracle, &treasury, &dex_router, &None);
-    
+
     let pool_configurator = Address::generate(env);
     client.set_pool_configurator(&pool_configurator);
 
@@ -124,7 +125,7 @@ fn test_set_reserve_whitelist_as_non_admin() {
 
     // Clear auth mocking to test unauthorized access
     env.mock_auths(&[]);
-    
+
     // Non-admin should not be able to set whitelist
     let result = client.try_set_reserve_whitelist(&asset, &whitelist);
     assert!(result.is_err());
@@ -143,16 +144,16 @@ fn test_empty_whitelist_allows_all() {
     // Verify whitelist is empty
     let whitelist = client.get_reserve_whitelist(&asset);
     assert_eq!(whitelist.len(), 0, "Whitelist should be empty initially");
-    
+
     // Verify is_whitelisted returns true for empty whitelist
     assert!(
         client.is_whitelisted_for_reserve(&asset, &non_whitelisted),
         "Empty whitelist should allow all addresses"
     );
-    
+
     // With empty whitelist, the whitelist check should pass
     let result = client.try_supply(&non_whitelisted, &asset, &100_000u128, &non_whitelisted, &0u32);
-    
+
     // Should NOT fail with AddressNotWhitelisted error
     match result {
         Err(Ok(kinetic_router::KineticRouterError::AddressNotWhitelisted)) => {
@@ -181,7 +182,7 @@ fn test_whitelisted_user_can_supply() {
     let retrieved_whitelist = client.get_reserve_whitelist(&asset);
     assert_eq!(retrieved_whitelist.len(), 1, "Whitelist should have 1 address");
     assert_eq!(retrieved_whitelist.get(0).unwrap(), user1, "user1 should be in whitelist");
-    
+
     // Verify is_whitelisted returns true for whitelisted user
     assert!(
         client.is_whitelisted_for_reserve(&asset, &user1),
@@ -190,7 +191,7 @@ fn test_whitelisted_user_can_supply() {
 
     // Whitelisted user should pass the whitelist check
     let result = client.try_supply(&user1, &asset, &100_000u128, &user1, &0u32);
-    
+
     // Should NOT fail with AddressNotWhitelisted error
     match result {
         Err(Ok(kinetic_router::KineticRouterError::AddressNotWhitelisted)) => {
@@ -220,7 +221,7 @@ fn test_non_whitelisted_user_cannot_supply() {
         !client.is_whitelisted_for_reserve(&asset, &non_whitelisted),
         "non_whitelisted should NOT be whitelisted"
     );
-    
+
     // Verify user1 IS in the whitelist (sanity check)
     assert!(
         client.is_whitelisted_for_reserve(&asset, &user1),
@@ -230,7 +231,7 @@ fn test_non_whitelisted_user_cannot_supply() {
     // Non-whitelisted user should NOT be able to supply
     let result = client.try_supply(&non_whitelisted, &asset, &100_000u128, &non_whitelisted, &0u32);
     assert!(result.is_err(), "Non-whitelisted user should not be able to supply");
-    
+
     // Verify it's specifically the AddressNotWhitelisted error
     match result {
         Err(Ok(err)) => assert_eq!(
@@ -266,7 +267,7 @@ fn test_whitelisted_user_can_withdraw() {
 
     // Whitelisted user should pass the whitelist check
     let result = client.try_withdraw(&user1, &asset, &50_000u128, &user1);
-    
+
     // Should NOT fail with AddressNotWhitelisted error
     match result {
         Err(Ok(kinetic_router::KineticRouterError::AddressNotWhitelisted)) => {
@@ -294,7 +295,7 @@ fn test_non_whitelisted_user_cannot_withdraw() {
 
     // Non-whitelisted user should NOT be able to withdraw
     let result = client.try_withdraw(&non_whitelisted, &asset, &50_000u128, &non_whitelisted);
-    
+
     // Should fail specifically with AddressNotWhitelisted error
     match result {
         Err(Ok(err)) => assert_eq!(err, kinetic_router::KineticRouterError::AddressNotWhitelisted),
@@ -326,7 +327,7 @@ fn test_whitelisted_user_can_borrow() {
 
     // Whitelisted user should pass the whitelist check
     let result = client.try_borrow(&user1, &asset, &10_000u128, &1u32, &0u32, &user1);
-    
+
     // Should NOT fail with AddressNotWhitelisted error
     match result {
         Err(Ok(kinetic_router::KineticRouterError::AddressNotWhitelisted)) => {
@@ -357,7 +358,7 @@ fn test_non_whitelisted_user_cannot_borrow() {
     // Non-whitelisted user should NOT be able to borrow
     let result = client.try_borrow(&non_whitelisted, &asset, &10_000u128, &1u32, &0u32, &non_whitelisted);
     assert!(result.is_err(), "Non-whitelisted user should not be able to borrow");
-    
+
     match result {
         Err(Ok(err)) => assert_eq!(err, kinetic_router::KineticRouterError::AddressNotWhitelisted),
         _ => panic!("Expected AddressNotWhitelisted error"),
@@ -388,7 +389,7 @@ fn test_whitelisted_user_can_repay() {
 
     // Whitelisted user should pass the whitelist check
     let result = client.try_repay(&user1, &asset, &5_000u128, &1u32, &user1);
-    
+
     // Should NOT fail with AddressNotWhitelisted error
     match result {
         Err(Ok(kinetic_router::KineticRouterError::AddressNotWhitelisted)) => {
@@ -419,7 +420,7 @@ fn test_non_whitelisted_user_cannot_repay() {
     // Non-whitelisted user should NOT be able to repay
     let result = client.try_repay(&non_whitelisted, &asset, &5_000u128, &1u32, &non_whitelisted);
     assert!(result.is_err(), "Non-whitelisted user should not be able to repay");
-    
+
     match result {
         Err(Ok(err)) => assert_eq!(err, kinetic_router::KineticRouterError::AddressNotWhitelisted),
         _ => panic!("Expected AddressNotWhitelisted error"),
@@ -457,7 +458,7 @@ fn test_multiple_reserves_independent_whitelists() {
         }
         _ => {} // Other errors or success are fine
     }
-    
+
     let result2 = client.try_supply(&user1, &asset2, &100_000u128, &user1, &0u32);
     match result2 {
         Err(Ok(kinetic_router::KineticRouterError::AddressNotWhitelisted)) => {} // Expected
@@ -472,7 +473,7 @@ fn test_multiple_reserves_independent_whitelists() {
         }
         _ => {} // Other errors or success are fine
     }
-    
+
     let result4 = client.try_supply(&user2, &asset1, &100_000u128, &user2, &0u32);
     match result4 {
         Err(Ok(kinetic_router::KineticRouterError::AddressNotWhitelisted)) => {} // Expected
@@ -525,7 +526,7 @@ fn test_clear_whitelist() {
 
     // Verify whitelist has 1 entry
     assert_eq!(client.get_reserve_whitelist(&asset).len(), 1, "Whitelist should have 1 entry");
-    
+
     // Verify non_whitelisted is NOT whitelisted
     assert!(
         !client.is_whitelisted_for_reserve(&asset, &non_whitelisted),
@@ -545,7 +546,7 @@ fn test_clear_whitelist() {
 
     // Verify whitelist is now empty
     assert_eq!(client.get_reserve_whitelist(&asset).len(), 0, "Whitelist should be empty");
-    
+
     // Verify non_whitelisted IS now whitelisted (because empty whitelist allows all)
     assert!(
         client.is_whitelisted_for_reserve(&asset, &non_whitelisted),

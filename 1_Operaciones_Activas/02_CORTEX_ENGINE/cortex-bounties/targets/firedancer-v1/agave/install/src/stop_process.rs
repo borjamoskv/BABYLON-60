@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::{io, process::Child};
 
 fn kill_process(process: &mut Child) -> Result<(), io::Error> {

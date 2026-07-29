@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterError } from '@chainlink/external-adapter-framework/validation/error'
 
 export interface AssetoApiResponseBaseSchema {

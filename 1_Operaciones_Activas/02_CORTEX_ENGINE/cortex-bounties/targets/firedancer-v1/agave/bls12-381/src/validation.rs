@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::{
     Version,
     encoding::{Endianness, PodG1Point, PodG2Point},

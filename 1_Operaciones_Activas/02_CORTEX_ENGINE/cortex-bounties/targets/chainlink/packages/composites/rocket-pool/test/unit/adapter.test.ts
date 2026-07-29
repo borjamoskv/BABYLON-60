@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as adapter from '../../src'
 
 describe('adapter', () => {

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Reward info.
 
 use {solana_accounts_db::stake_rewards::StakeRewardInfo, solana_reward_info::RewardType};

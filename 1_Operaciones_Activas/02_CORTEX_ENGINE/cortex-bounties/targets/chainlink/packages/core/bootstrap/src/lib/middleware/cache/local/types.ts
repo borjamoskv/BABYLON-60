@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import LRU from 'lru-cache'
 
 // Extended from https://github.com/isaacs/node-lru-cache/blob/main/index.js#L169

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use grammers_client::{Client, SenderPool};
 use grammers_session::storages::SqliteSession;
 use std::sync::Arc;

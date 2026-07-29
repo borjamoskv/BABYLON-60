@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // define the same export types as used by export typechain/ethers
 import { BigNumberish } from 'ethers'
 import { BytesLike } from '@ethersproject/bytes'

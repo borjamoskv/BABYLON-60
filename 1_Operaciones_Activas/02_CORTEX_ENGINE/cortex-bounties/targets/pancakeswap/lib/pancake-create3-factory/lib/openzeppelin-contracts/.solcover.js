@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 module.exports = {
   norpc: true,
   testCommand: 'npm test',

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 export { endpoint as cryptoyield } from './crypto-yield'
 export { endpoint as volume } from './volume'
 export { endpoint as vwap } from './vwap'

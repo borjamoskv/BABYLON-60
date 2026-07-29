@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Example Rust-based SBF program that tests the `sol_get_epoch_stake`
 //! syscall.
 

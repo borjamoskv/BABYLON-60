@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import ast
 from typing import Any
 
@@ -9,14 +10,14 @@ class AntipatternVisitor(ast.NodeVisitor):
         self.violations: list[dict[str, Any]] = []
         self.in_async_func: bool = False
         self._current_func: str | None = None
-        
+
     def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef):
         self.in_async_func = True
         self._current_func = node.name
         self.generic_visit(node)
         self.in_async_func = False
         self._current_func = None
-        
+
     def visit_FunctionDef(self, node: ast.FunctionDef):
         self.in_async_func = False
         self._current_func = node.name
@@ -34,7 +35,7 @@ class AntipatternVisitor(ast.NodeVisitor):
                     "col": node.col_offset,
                     "msg": "Bare print() detectado. Usar logging.getLogger(__name__)."
                 })
-            
+
         # Detect time.sleep() inside async def
         if self.in_async_func:
             if isinstance(node.func, ast.Attribute):
@@ -88,12 +89,12 @@ def audit_file(filepath: str) -> list[dict[str, Any]]:
             source = f.read()
     except Exception as e:  # noqa: BLE001
         return [{"type": "IO_ERROR", "line": 0, "col": 0, "msg": str(e)}]
-        
+
     try:
         tree = ast.parse(source, filename=filepath)
     except SyntaxError as e:
         return [{"type": "SYNTAX_ERROR", "line": e.lineno, "col": e.offset, "msg": "Error de sintaxis, no se puede parsear AST."}]
-        
+
     visitor = AntipatternVisitor(filepath, source.split('\n'))
     visitor.visit(tree)
     return visitor.violations

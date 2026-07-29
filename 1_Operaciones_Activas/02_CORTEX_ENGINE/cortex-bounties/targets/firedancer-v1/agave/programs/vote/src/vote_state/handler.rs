@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Vote state handler API.
 //!
 //! Wraps the vote state behind a "handler" API to support converting from an

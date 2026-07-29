@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Silly tool that verifies whether C/C++ header include guards match
 Firedancer code style.

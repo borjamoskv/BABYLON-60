@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env node
 
 // This script removes the build artifacts of ignored contracts.

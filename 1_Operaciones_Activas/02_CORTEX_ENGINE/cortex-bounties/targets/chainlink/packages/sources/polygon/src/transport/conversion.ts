@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { config } from '../config'
 import { BaseEndpointTypes } from '../endpoint/conversion'
 import { HttpTransport } from '@chainlink/external-adapter-framework/transports'

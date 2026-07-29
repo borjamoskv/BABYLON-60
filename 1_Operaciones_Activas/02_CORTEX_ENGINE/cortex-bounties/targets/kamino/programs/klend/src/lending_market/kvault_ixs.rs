@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{
     prelude::*,
     solana_program::{instruction::Instruction, program},
@@ -17,7 +18,7 @@ pub fn cpi_update_klend_queue_accounting(
     withdraw_ticket_sequence_number: u64,
     ticketed_withdraw_result: TicketedWithdrawResult,
 ) -> Result<()> {
-   
+
     let (kvault_program, vault) = match (
         &ctx.accounts.progress_callback_program,
         &ctx.accounts.progress_callback_custom_account_0,
@@ -31,7 +32,7 @@ pub fn cpi_update_klend_queue_accounting(
     } = ticketed_withdraw_result;
     let reserve_address = ctx.accounts.reserve.key();
 
-   
+
     let accounts = vec![
         AccountMeta::new_readonly(ctx.accounts.withdraw_ticket.key(), true),
         AccountMeta::new_readonly(reserve_address, false),
@@ -41,7 +42,7 @@ pub fn cpi_update_klend_queue_accounting(
         AccountMeta::new(vault.key(), false),
     ];
 
-   
+
     let account_infos = [
         kvault_program.clone(),
         ctx.accounts.withdraw_ticket.to_account_info(),
@@ -52,7 +53,7 @@ pub fn cpi_update_klend_queue_accounting(
         vault.clone(),
     ];
 
-   
+
     let withdraw_ticket_seeds = &[
         seeds::WITHDRAW_TICKET,
         reserve_address.as_ref(),
@@ -60,7 +61,7 @@ pub fn cpi_update_klend_queue_accounting(
         &[ctx.bumps.withdraw_ticket],
     ];
 
-   
+
     let data_items = [
         UPDATE_KLEND_QUEUE_ACCOUNTING_DISCRIMINATOR.as_slice(),
         &[WithdrawTicketProgressEvent::QueuedLiquidityWithdrawn.into()],
@@ -68,7 +69,7 @@ pub fn cpi_update_klend_queue_accounting(
         &liquidity_amount_to_withdraw.to_le_bytes(),
     ];
 
-   
+
     let instruction = Instruction {
         program_id: kvault_program.key(),
         accounts,

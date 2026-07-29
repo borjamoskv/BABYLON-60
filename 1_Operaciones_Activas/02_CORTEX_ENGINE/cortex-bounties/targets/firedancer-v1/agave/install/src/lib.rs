@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![allow(clippy::arithmetic_side_effects)]
 use {
     clap::{App, AppSettings, Arg, ArgMatches, SubCommand, crate_description, crate_name},

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `weighted_shuffle` module provides an iterator over shuffled weights.
 
 use {

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env node
 const {
   readSync,
@@ -13,9 +14,9 @@ async function main() {
   const pathSequencesToIgnore = ['g', 'ext', 'legacy'];
 
   const cleanForRegex = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  
+
   const makeTagRegex = tag => new RegExp(
-    '(<!--\\s?' + cleanForRegex(tag) + ':start\\s?-->)([\s\S]*?)' + 
+    '(<!--\\s?' + cleanForRegex(tag) + ':start\\s?-->)([\s\S]*?)' +
     '(<!--\\s?' + cleanForRegex(tag) + ':end\\s?-->)'
   );
 
@@ -26,7 +27,7 @@ async function main() {
   const replaceInTag = (s, tag, replacement) =>
     s.replace(
       makeTagRegex(tag),
-      (m0, m1, m2, m3) => m1 + '\n' + strip(replacement) + '\n' + m3 
+      (m0, m1, m2, m3) => m1 + '\n' + strip(replacement) + '\n' + m3
     );
 
   const getTag = (s, tag) => {
@@ -36,7 +37,7 @@ async function main() {
   };
 
   const coalesce = (m, f) => m === null ? '' : f(m);
-  
+
   const toHeaderCase = str =>
     strip(str).toLowerCase()
     .replace(/(eth|sha|lz|uups|(eip|rip|erc|push|create)\-?[0-9]+i?)/g, m => m.toUpperCase())
@@ -98,23 +99,23 @@ async function main() {
   const getFunctionsAndModifiers = s =>
     getSubSections(s, /((?:\/\/\/\s[^\n]+\n\s*?)+)((?:function|fallback|receive|modifier)[^{]+)/g)
     .map(m => ({
-      natspec: cleanNatspecOrNote(m[1]), 
+      natspec: cleanNatspecOrNote(m[1]),
       def: deindent(strip(m[2])),
       h3: getFunctionSig(deindent(strip(m[2])))
     }));
 
-  const getConstantsAndImmutables = s => 
+  const getConstantsAndImmutables = s =>
     getSubSections(s, /((?:\/\/\/\s[^\n]+\n\s*?)+)((?:bytes|uint|address)[0-9]*\s+(?:public|internal)\s+(?:immutable|constant)\s+([A-Za-z0-9_]+)[^;]*)/g)
     .map(m => ({
-      natspec: cleanNatspecOrNote(m[1]), 
+      natspec: cleanNatspecOrNote(m[1]),
       def: deindent(strip(m[2])),
       h3: deindent(strip(m[3]))
     }));
-    
+
   const getCustomErrors = s =>
     getSubSections(s, /((?:\/\/\/\s[^\n]+\n\s*?)+)(error\s[^;]+);/g)
     .map(m => ({
-      natspec: cleanNatspecOrNote(m[1]), 
+      natspec: cleanNatspecOrNote(m[1]),
       def: deindent(strip(m[2])),
       h3: getFunctionSig(deindent(strip(m[2])))
     }));
@@ -122,7 +123,7 @@ async function main() {
   const getEvents = s =>
     getSubSections(s, /((?:\/\/\/\s[^\n]+\n\s*?)+)(event\s[^;]+);/g)
     .map(m => ({
-      natspec: cleanNatspecOrNote(m[1]), 
+      natspec: cleanNatspecOrNote(m[1]),
       def: deindent(strip(m[2])),
       h3: getFunctionSig(deindent(strip(m[2])))
     }));
@@ -130,13 +131,13 @@ async function main() {
   const getStructsAndEnums = s =>
     getSubSections(s, /((?:\/\/\/\s[^\n]+\n\s*?)+)((?:struct|enum)\s([A-Za-z0-9_]+)\s+\{[^}]+})/g)
     .map(m => ({
-      natspec: cleanNatspecOrNote(m[1]), 
+      natspec: cleanNatspecOrNote(m[1]),
       def: deindent(strip(m[2])),
       h3: deindent(strip(m[3]))
     }));
 
   const getNotice = s => coalesce(
-    s.match(/\/\/\/\s+@notice\s+([\s\S]+?)\/\/\/\s?@author/), 
+    s.match(/\/\/\/\s+@notice\s+([\s\S]+?)\/\/\/\s?@author/),
     m => m[1].replace(/\n\/\/\//g, '')
   );
 
@@ -151,7 +152,7 @@ async function main() {
   };
 
   const getTopIntro = s => coalesce(
-    s.match(/\/\/\/\s+@notice\s+[\s\S]+?(?:\/\/\/\s?@author\s+[\s\S]+?\n|\/\/\/\s+\([\s\S]+?\)\n)+([\s\S]*?)(?:library|abstract\s+contract|contract)\s[^.]+\{/), 
+    s.match(/\/\/\/\s+@notice\s+[\s\S]+?(?:\/\/\/\s?@author\s+[\s\S]+?\n|\/\/\/\s+\([\s\S]+?\)\n)+([\s\S]*?)(?:library|abstract\s+contract|contract)\s[^.]+\{/),
     m => normalizeNewlines(strip(
       m[1].replace('\n\n', '\n\n\n').split('\n')
       .map(l => l
@@ -177,7 +178,7 @@ async function main() {
   const getInherits = (s, srcPath) => coalesce(
     s.match(/contract\s+[A-Za-z0-9_]+\s+is\s+([^\{]*?)\s*\{/),
     m => '<b>Inherits:</b>  \n\n' +
-      m[1].split(',').map(strip).map(p => 
+      m[1].split(',').map(strip).map(p =>
         getImports(s, srcPath).map(q => has(q, p) ? '- `' + q + '`  \n' : '').join('')
       ).join('')
   );
@@ -200,10 +201,10 @@ async function main() {
 
     if (sections.length < 1) {
       src = src.replace(
-        /(library|contract)\s[\s\S]*?\{/, 
-        m => m + 
-          '/*============================================================*/\n' + 
-          '/*                         FUNCTIONS                          */\n' + 
+        /(library|contract)\s[\s\S]*?\{/,
+        m => m +
+          '/*============================================================*/\n' +
+          '/*                         FUNCTIONS                          */\n' +
           '/*============================================================*/\n'
       );
       sections = getSections(src);
@@ -211,7 +212,7 @@ async function main() {
 
     const docHeader = '# ' + getTitle(srcPath) + '\n\n' + getNotice(src);
     let docChunks = [];
-    sections.forEach(x => 
+    sections.forEach(x =>
       [
         getStructsAndEnums,
         getCustomErrors,
@@ -220,11 +221,11 @@ async function main() {
         getConstantsAndImmutables
       ]
       .reduce((acc, f) => acc.length ? acc : f(x.src), [])
-      .forEach((y, i) => 
+      .forEach((y, i) =>
         docChunks.push(
           ...(i ? [] : ['## ' + x.h2, ...(x.note ? [x.note] : [])]),
-          '### ' + y.h3, 
-          '```solidity\n' + y.def + '\n```', 
+          '### ' + y.h3,
+          '```solidity\n' + y.def + '\n```',
           y.natspec
         )
       )
@@ -234,10 +235,10 @@ async function main() {
       writeSync(
         getDocPath(srcPath),
         [
-          docHeader, 
+          docHeader,
           getTopIntro(src),
           getInherits(src, srcPath),
-          getTag(readSync(getDocPath(srcPath)), 'customintro'), 
+          getTag(readSync(getDocPath(srcPath)), 'customintro'),
           docChunks.join('\n\n')
         ].join('\n\n')
       );
@@ -259,7 +260,7 @@ async function main() {
     });
     const sidebarDocPath = path.join('docs', 'sidebar.md');
     writeSync(
-      sidebarDocPath, 
+      sidebarDocPath,
       replaceInTag(
         readSync(sidebarDocPath),
         'gen',

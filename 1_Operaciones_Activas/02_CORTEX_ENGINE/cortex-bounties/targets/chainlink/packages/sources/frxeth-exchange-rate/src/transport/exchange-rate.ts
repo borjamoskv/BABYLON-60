@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { TransportDependencies } from '@chainlink/external-adapter-framework/transports'
 import { SubscriptionTransport } from '@chainlink/external-adapter-framework/transports/abstract/subscription'
 import { BigNumber, ethers } from 'ethers'

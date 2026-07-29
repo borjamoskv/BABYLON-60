@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::*;
 
 pub const SOL_DECIMALS_RATE: u128 = u128::pow(10, 9);

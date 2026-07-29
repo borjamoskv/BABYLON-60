@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { PoRAddressEndpoint } from '@chainlink/external-adapter-framework/adapter/por'
 import { addressDebugTransport } from '../transport/address-debug'
 import { customInputValidation, inputParameters } from './address'

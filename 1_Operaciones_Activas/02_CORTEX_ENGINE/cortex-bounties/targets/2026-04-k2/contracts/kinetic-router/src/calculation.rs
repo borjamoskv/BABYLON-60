@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::storage;
 use k2_shared::{
     calculate_compound_interest, calculate_linear_interest, get_current_timestamp, ray_div,
@@ -73,7 +74,7 @@ pub(crate) fn update_liquidation_tracker_if_healthy(
                 return_prices: false,
                 known_balances: None,
             })?.account_data;
-            
+
             if account_data.health_factor >= WAD {
                 storage::clear_user_liquidation_amount(env, user);
             }
@@ -145,7 +146,7 @@ pub(crate) fn calculate_user_account_data_unified(
     // Collect assets and reserve data for active positions only
     let mut all_assets = Vec::new(env);
     let mut active_positions = Vec::new(env); // Store (asset, reserve_data) tuples
-    
+
     // Add extra assets first if provided (e.g., borrow asset, swap assets)
     if let Some(extras) = params.extra_assets {
         for i in 0..extras.len() {
@@ -154,7 +155,7 @@ pub(crate) fn calculate_user_account_data_unified(
             }
         }
     }
-    
+
     // MED-04: Bound iteration to next_reserve_id (high-water mark) instead of MAX_RESERVES (64)
     // EFF-03: Must use next_reserve_id, NOT reserves_count, because reserve IDs are never
     // reused after drop_reserve. Using count would skip higher IDs when gaps exist.
@@ -208,7 +209,7 @@ pub(crate) fn calculate_user_account_data_unified(
                 }
             }
         }
-        
+
         if missing_assets.is_empty() {
             known.clone()
         } else {
@@ -455,7 +456,7 @@ pub(crate) fn calculate_user_account_data_unified(
         ltv,
         health_factor,
     };
-    
+
     // Return price map only if requested
     let prices = if params.return_prices {
         Some(price_map)
@@ -599,7 +600,7 @@ pub fn calculate_user_account_data_with_prices(
     } else {
         None
     };
-    
+
     let params = AccountDataParams {
         extra_assets: extra_assets.as_ref(),
         return_prices: true,
@@ -897,7 +898,7 @@ pub fn calculate_liquidation_amounts_with_reserves(
     let debt_decimals_pow = 10_u128
         .checked_pow(debt_decimals)
         .ok_or(KineticRouterError::MathOverflow)?;
-    
+
     // N-05
     let debt_to_cover_base = {
         let dtc = U256::from_u128(env, debt_to_cover);
@@ -1281,11 +1282,11 @@ pub fn get_protocol_reserves(env: &Env, asset: &Address) -> Result<u128, Kinetic
     // Available liquidity = what should be in the contract (total_supply - total_borrow)
     // This is the amount that suppliers can claim minus what borrowers owe
     // Reserves = actual balance - available liquidity
-    
+
     if total_borrow > total_supply {
         return Err(KineticRouterError::InvalidAmount);
     }
-    
+
     let available_liquidity = total_supply.checked_sub(total_borrow).ok_or(KineticRouterError::MathOverflow)?;
     let raw_reserves = if underlying_balance > available_liquidity {
         underlying_balance.checked_sub(available_liquidity).ok_or(KineticRouterError::MathOverflow)?

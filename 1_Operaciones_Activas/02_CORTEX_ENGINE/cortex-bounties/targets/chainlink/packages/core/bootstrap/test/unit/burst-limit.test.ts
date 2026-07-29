@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterContext, Execute } from '../../src/types'
 import { createStore } from 'redux'
 import { useFakeTimers, SinonFakeTimers } from 'sinon'

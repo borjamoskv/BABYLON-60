@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{
     err, prelude::*, solana_program::instruction::Instruction, Discriminator, Key, Result,
 };
@@ -23,14 +24,14 @@ pub fn flash_repay_checks(
     let instruction_loader = ix_utils::BpfInstructionLoader {
         instruction_sysvar_account_info: &ctx.accounts.sysvar_info,
     };
-   
+
     let current_index: usize = instruction_loader.load_current_index()?.into();
     if instruction_loader.is_flash_forbidden_cpi_call()? {
         msg!("Flash Repay was called via CPI!");
         return err!(LendingError::FlashRepayCpi);
     }
 
-   
+
     if (borrow_instruction_index as usize) > current_index {
         msg!(
             "Flash repay: borrow instruction index {} has to be less than current index {}",
@@ -58,7 +59,7 @@ pub fn flash_repay_checks(
     }
     let borrow_liquidity_amount = u64::from_le_bytes(ixn.data[8..16].try_into().unwrap());
 
-   
+
 
     if ixn.accounts[3].pubkey != ctx.accounts.reserve.key() {
         msg!("Invalid reserve account on flash repay");
@@ -87,7 +88,7 @@ fn flash_borrow_checks_internal(
     liquidity_amount: u64,
     instruction_loader: &impl InstructionLoader,
 ) -> Result<()> {
-   
+
     let current_index: usize = instruction_loader.load_current_index()?.into();
     if instruction_loader.is_flash_forbidden_cpi_call()? {
         msg!("Flash Borrow was called via CPI!");
@@ -96,15 +97,15 @@ fn flash_borrow_checks_internal(
 
     let borrow_ix = instruction_loader.load_instruction_at(current_index)?;
 
-   
 
-   
-   
-   
-   
-   
 
-   
+
+
+
+
+
+
+
 
     let ix_iterator = ix_utils::IxIterator::new_at(current_index + 1, instruction_loader);
     let mut found_repay_ix = false;

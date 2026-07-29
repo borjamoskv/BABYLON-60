@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use hex_literal::hex;
 
 // Test Case: G1_VALIDATE_RANDOM_VALID

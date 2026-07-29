@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Loading signers and keypairs from the command line.
 //!
 //! This module contains utilities for loading [Signer]s and [Keypair]s from

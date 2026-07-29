@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { existsSync, readFileSync } from "node:fs";
 
 import { HardhatNetworkForkingUserConfig } from "hardhat/types";

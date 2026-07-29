@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import ast
 
 import random
@@ -17,7 +18,7 @@ class Expr:
         allocation.
 
         If statements are not supported as the entire datapath of the code
-        is meant to be executed regardless of the input data.  Instead, 
+        is meant to be executed regardless of the input data.  Instead,
         ternary operator is introduced which allows for Expr class to track
         both branches of the datapath.  In hardware terminology, all paths are
         executed and the correct data is multiplexed using ternary operators.
@@ -31,7 +32,7 @@ class Expr:
             This step is necessary as Expr has no other means of tracking what
             constitutes the intended output list.
                 - Expr.outputs(ab)
-        
+
     '''
     trace_q = None
     op_hist = None
@@ -204,7 +205,7 @@ class Expr:
             self.c,
             self.addr,
         )
-    
+
     def __hash__(self):
         return id(self)
 
@@ -517,7 +518,7 @@ class Expr:
             b = mmap[t.addr]
             c = mmap[t.addr]
             d = ti
-            
+
             h = (op << (4*6)) | (a << (3*6)) | (b << (2*6)) | (c << (1*6)) | (d << (0*6))
             if format == 'mif':
                 hex_st += '{:029b}\n'.format(h)

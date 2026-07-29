@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { logger } from '../../modules/logger'
 import { AdapterConfigError } from '../../modules/error'
 

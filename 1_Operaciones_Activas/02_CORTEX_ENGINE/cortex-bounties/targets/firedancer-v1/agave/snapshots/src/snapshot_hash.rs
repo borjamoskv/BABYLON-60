@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Helper types and functions for handling and dealing with snapshot hashes.
 use {
     solana_clock::Slot, solana_hash::Hash,

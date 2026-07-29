@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 fn main() {
     println!(
         r##"rbpf-cli is replaced by agave-ledger-tool program run subcommand.

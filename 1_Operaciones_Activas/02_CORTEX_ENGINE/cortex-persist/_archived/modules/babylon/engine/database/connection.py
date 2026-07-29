@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Database Connection & Vector Initialization
 """

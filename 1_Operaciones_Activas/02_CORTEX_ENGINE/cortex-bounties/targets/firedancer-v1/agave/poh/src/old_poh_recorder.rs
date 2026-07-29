@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `poh_recorder` module provides an object for synchronizing with Proof of History.
 //! It synchronizes PoH, bank's register_tick and the ledger
 //!

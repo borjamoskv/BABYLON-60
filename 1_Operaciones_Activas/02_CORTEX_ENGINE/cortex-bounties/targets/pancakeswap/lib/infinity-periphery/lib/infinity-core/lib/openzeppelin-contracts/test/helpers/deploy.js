@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { artifacts, ethers } = require('hardhat');
 const { setCode } = require('@nomicfoundation/hardhat-network-helpers');
 const { generators } = require('./random');

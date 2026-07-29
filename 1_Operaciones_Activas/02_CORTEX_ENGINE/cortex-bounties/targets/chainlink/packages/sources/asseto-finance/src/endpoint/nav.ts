@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterEndpoint } from '@chainlink/external-adapter-framework/adapter'
 import { config } from '../config'
 import { navTransport } from '../transport/nav'

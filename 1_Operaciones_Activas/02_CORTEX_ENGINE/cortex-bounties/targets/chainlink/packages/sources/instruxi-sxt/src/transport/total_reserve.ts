@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { HttpTransport } from '@chainlink/external-adapter-framework/transports'
 import { config } from '../config'
 import { ProviderResult } from '@chainlink/external-adapter-framework/util'

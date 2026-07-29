@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 jest.mock('@chainlink/external-adapter-framework/util', () => ({
   makeLogger: () => ({
     debug: jest.fn(),

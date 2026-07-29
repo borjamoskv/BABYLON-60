@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // jest.config.js (after)
 /** @type {import('jest').Config} */
 module.exports = {

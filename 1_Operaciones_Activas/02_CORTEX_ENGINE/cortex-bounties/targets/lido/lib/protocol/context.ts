@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { ContractTransactionReceipt, Interface } from "ethers";
 import hre from "hardhat";
 import { getMode } from "hardhat.helpers";

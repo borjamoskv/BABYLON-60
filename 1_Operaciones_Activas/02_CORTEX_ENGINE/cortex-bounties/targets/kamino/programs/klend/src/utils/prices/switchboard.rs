@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{
     err, error,
     prelude::{msg, AccountInfo},
@@ -42,11 +43,11 @@ fn get_switchboard_price(
         FatAccountLoader::try_from(switchboard_feed_info)?;
     let feed = feed_acc.load()?;
 
-   
-   
+
+
     let last_updated_slot = feed.result.slot;
 
-   
+
     let elapsed_slots = clock.slot.saturating_sub(last_updated_slot);
     let timestamp = u64::try_from(clock.unix_timestamp)
         .unwrap_or(0)
@@ -105,7 +106,7 @@ fn validate_switchboard_confidence(
     stdev_scale: u32,
     oracle_confidence_factor: u64,
 ) -> Result<()> {
-   
+
     let (scale_op, scale_diff): (&dyn Fn(u128, u128) -> Option<u128>, _) =
         if price_scale >= stdev_scale {
             (
@@ -123,7 +124,7 @@ fn validate_switchboard_confidence(
         .checked_pow(scale_diff)
         .ok_or_else(|| error!(LendingError::MathOverflow))?;
 
-   
+
 
     let stdev_x_confidence_factor_scaled = stdev_mantissa
         .checked_mul(oracle_confidence_factor.into())

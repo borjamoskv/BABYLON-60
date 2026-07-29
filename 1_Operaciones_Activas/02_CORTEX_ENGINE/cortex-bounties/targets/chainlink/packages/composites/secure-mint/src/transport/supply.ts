@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { calculateHttpRequestKey } from '@chainlink/external-adapter-framework/cache'
 import { Requester } from '@chainlink/external-adapter-framework/util/requester'
 import { AdapterError } from '@chainlink/external-adapter-framework/validation/error'

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { BaseEndpointTypes } from '../endpoint/vwap'
 import { HttpTransport } from '@chainlink/external-adapter-framework/transports'
 

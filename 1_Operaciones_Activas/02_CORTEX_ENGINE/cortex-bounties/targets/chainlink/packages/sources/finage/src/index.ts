@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { expose, ServerInstance } from '@chainlink/external-adapter-framework'
 import { IncludesFile, PriceAdapter } from '@chainlink/external-adapter-framework/adapter'
 import { PriceEndpointInputParametersDefinition } from '@chainlink/external-adapter-framework/adapter/price'
@@ -38,10 +39,10 @@ class FinageAdapter<T extends CustomSettingsDefinition> extends PriceAdapter<T> 
     req: PriceAdapterRequest<PriceEndpointInputParametersDefinition>,
     replySent: Promise<unknown>,
   ): Promise<AdapterResponse> {
-    /* 
-    overrides PriceAdapter.handleRequest [https://github.com/smartcontractkit/ea-framework-js/blob/main/src/adapter/price.ts#L160] 
+    /*
+    overrides PriceAdapter.handleRequest [https://github.com/smartcontractkit/ea-framework-js/blob/main/src/adapter/price.ts#L160]
     to implement inverse behavior for forex endpoint see: endpoint/forex.ts/excludesMap
-    
+
     */
     const response = await super.handleRequest(req, replySent)
 

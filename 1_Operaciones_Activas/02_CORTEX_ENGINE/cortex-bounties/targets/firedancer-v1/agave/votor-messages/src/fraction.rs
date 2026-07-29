@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Fraction type for precise stake threshold comparisons.
 
 use std::{fmt::Display, num::NonZeroU64};

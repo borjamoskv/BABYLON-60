@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /**
  * NB: ATM, there is no native support for BigInt math in TS/JS, so we're using this workaround.
  */

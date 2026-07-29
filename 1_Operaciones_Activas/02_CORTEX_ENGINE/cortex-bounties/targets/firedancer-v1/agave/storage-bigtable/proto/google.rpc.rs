@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /// The `Status` type defines a logical error model that is suitable for
 /// different programming environments, including REST APIs and RPC APIs. It is
 /// used by \[gRPC\](<https://github.com/grpc>). Each `Status` message contains

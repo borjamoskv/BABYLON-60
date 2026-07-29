@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // === Twin Forge — Main Entry Point ===
 import './styles/index.css';
 import * as monaco from 'monaco-editor';

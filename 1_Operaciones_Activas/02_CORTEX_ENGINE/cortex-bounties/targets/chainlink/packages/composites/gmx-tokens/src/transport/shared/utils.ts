@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import Decimal from 'decimal.js'
 
 export const SIGNED_PRICE_DECIMALS = 30

@@ -1,7 +1,8 @@
+// C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env node
 /**
  * Script to analyze rounding differences in swap calculations
- * 
+ *
  * This script:
  * 1. Verifies rounding direction in contract formulas
  * 2. Analyzes rounding difference data to categorize by conditions
@@ -127,20 +128,20 @@ function calculateCategoryStats(differences: RoundingDifference[]): CategoryStat
 
 function verifyRoundingDirection() {
   console.log('=== Rounding Direction Verification ===\n');
-  
+
   const contractFile = path.join(__dirname, '../contracts/dlmm-core-v-1-1.clar');
   const contractCode = fs.readFileSync(contractFile, 'utf-8');
-  
+
   // Check for ceiling operations: pattern (+ (* a b) (- scale 1)) / scale
   const ceilingPattern = /\(\+\s*\(\*\s*[^)]+\)\s*\(\-\s*[^)]+\s+u?1\)\)\s*\/\s*[^)]+/g;
   const ceilingMatches = contractCode.match(ceilingPattern);
-  
+
   console.log('Ceiling operations found (rounds up):');
   if (ceilingMatches && ceilingMatches.length > 0) {
     console.log(`  Found ${ceilingMatches.length} ceiling operations`);
     // Show key ones
-    const keyMatches = ceilingMatches.filter(m => 
-      m.includes('max-x-amount') || m.includes('max-y-amount') || 
+    const keyMatches = ceilingMatches.filter(m =>
+      m.includes('max-x-amount') || m.includes('max-y-amount') ||
       m.includes('PRICE_SCALE_BPS') || m.includes('bin-price')
     );
     keyMatches.slice(0, 3).forEach((match, i) => {
@@ -149,10 +150,10 @@ function verifyRoundingDirection() {
   } else {
     console.log('  None found');
   }
-  
+
   // Check key formulas
   console.log('\n=== Key Swap Formulas ===');
-  
+
   // swap-x-for-y: max-x-amount calculation (line 1260)
   const maxXMatch = contractCode.match(/max-x-amount.*?\([^)]+\)/s);
   if (maxXMatch) {
@@ -165,7 +166,7 @@ function verifyRoundingDirection() {
       console.log('  ✗ Uses FLOOR rounding (rounds down)');
     }
   }
-  
+
   // swap-y-for-x: max-y-amount calculation (line 1405)
   const maxYMatch = contractCode.match(/max-y-amount.*?\([^)]+\)/s);
   if (maxYMatch) {
@@ -178,14 +179,14 @@ function verifyRoundingDirection() {
       console.log('  ✗ Uses FLOOR rounding (rounds down)');
     }
   }
-  
+
   console.log('\n');
 }
 
 function analyzeRoundingDifferences(differences: RoundingDifference[]) {
   console.log('=== Rounding Differences Analysis ===\n');
   console.log(`Total swaps analyzed: ${differences.length}\n`);
-  
+
   // Add categories to each difference
   const categorized = differences.map(d => ({
     ...d,
@@ -196,7 +197,7 @@ function analyzeRoundingDifferences(differences: RoundingDifference[]) {
     binPositionCategory: categorizeBinPosition(d.binId, d.activeBinId),
     outputAmountCategory: categorizeOutputAmount(d.outputAmount),
   }));
-  
+
   // Overall statistics
   const overallStats = calculateCategoryStats(differences);
   console.log('Overall Statistics:');
@@ -211,7 +212,7 @@ function analyzeRoundingDifferences(differences: RoundingDifference[]) {
   console.log(`  Mean integer diff: ${overallStats.meanIntegerDiff.toFixed(2)} tokens`);
   console.log(`  Max integer diff: ${overallStats.maxIntegerDiff} tokens`);
   console.log(`  Integer diff = 0: ${differences.filter(d => d.integerDiff === 0).length} (${((differences.filter(d => d.integerDiff === 0).length / differences.length) * 100).toFixed(1)}%)\n`);
-  
+
   // Statistics by category
   const categories = {
     functionName: ['swap-x-for-y', 'swap-y-for-x'],
@@ -222,9 +223,9 @@ function analyzeRoundingDifferences(differences: RoundingDifference[]) {
     binPositionCategory: ['active', 'below-active', 'above-active'],
     outputAmountCategory: ['very-small', 'small', 'medium', 'large', 'very-large'],
   };
-  
+
   console.log('=== Statistics by Category ===\n');
-  
+
   for (const [categoryName, categoryValues] of Object.entries(categories)) {
     console.log(`By ${categoryName}:`);
     for (const value of categoryValues) {
@@ -241,13 +242,13 @@ function analyzeRoundingDifferences(differences: RoundingDifference[]) {
     }
     console.log('');
   }
-  
+
   // Find worst cases
   console.log('=== Worst Cases (Top 10 by Float % Diff) ===\n');
-  const sortedByPercent = [...differences].sort((a, b) => 
+  const sortedByPercent = [...differences].sort((a, b) =>
     Math.abs(b.floatPercentDiff) - Math.abs(a.floatPercentDiff)
   );
-  
+
   sortedByPercent.slice(0, 10).forEach((d, i) => {
     console.log(`${i + 1}. Tx ${d.txNumber} (${d.functionName}):`);
     console.log(`   Float diff: ${d.floatDiff} tokens (${d.floatPercentDiff.toFixed(4)}%)`);
@@ -256,7 +257,7 @@ function analyzeRoundingDifferences(differences: RoundingDifference[]) {
     console.log(`   Bin: ${d.binId}, Price: ${d.binPrice}, Fees: ${d.swapFeeTotal}`);
     console.log('');
   });
-  
+
   return categorized;
 }
 
@@ -268,7 +269,7 @@ function generateReport(categorized: any[], outputFile: string) {
     },
     categorized,
   };
-  
+
   fs.writeFileSync(outputFile, JSON.stringify(report, null, 2), 'utf-8');
   console.log(`\nDetailed report saved to: ${outputFile}`);
 }
@@ -276,44 +277,44 @@ function generateReport(categorized: any[], outputFile: string) {
 function main() {
   console.log('Rounding Difference Analysis Script\n');
   console.log('='.repeat(60) + '\n');
-  
+
   // Step 1: Verify rounding direction
   verifyRoundingDirection();
-  
+
   // Step 2: Load and analyze rounding differences
   const resultsDir = path.join(__dirname, '../logs/fuzz-test-results');
   if (!fs.existsSync(resultsDir)) {
     console.log('No results directory found. Run tests first.');
     return;
   }
-  
+
   const roundingFiles = fs.readdirSync(resultsDir)
     .filter(f => f.endsWith('.json') && f.includes('rounding-differences'))
     .sort()
     .reverse();
-  
+
   if (roundingFiles.length === 0) {
     console.log('No rounding differences files found. Run tests with enhanced logging first.');
     return;
   }
-  
+
   const latestFile = path.join(resultsDir, roundingFiles[0]);
   console.log(`Loading: ${roundingFiles[0]}\n`);
-  
+
   const differences: RoundingDifference[] = JSON.parse(fs.readFileSync(latestFile, 'utf-8'));
-  
+
   if (differences.length === 0) {
     console.log('No rounding differences found in file.');
     return;
   }
-  
+
   // Step 3: Analyze
   const categorized = analyzeRoundingDifferences(differences);
-  
+
   // Step 4: Generate report
   const reportFile = path.join(resultsDir, `rounding-analysis-${new Date().toISOString().replace(/[:.]/g, '-')}.json`);
   generateReport(categorized, reportFile);
-  
+
   console.log('\n=== Analysis Complete ===');
 }
 

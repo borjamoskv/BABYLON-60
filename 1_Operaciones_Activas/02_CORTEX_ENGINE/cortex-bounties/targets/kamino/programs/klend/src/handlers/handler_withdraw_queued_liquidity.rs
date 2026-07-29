@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{prelude::*, Accounts};
 use anchor_spl::{
     associated_token::AssociatedToken,
@@ -34,12 +35,12 @@ pub fn process(ctx: Context<WithdrawQueuedLiquidity>) -> Result<bool> {
 
     let withdraw_ticket = ctx.accounts.withdraw_ticket.load()?;
 
-   
+
     if withdraw_ticket.queued_collateral_amount == 0 {
-       
-       
-       
-       
+
+
+
+
         msg!("Progressing over a cancelled ticket; closing the ticket account");
         reserve.withdraw_queue.dequeue(0, true);
         drop(withdraw_ticket);
@@ -60,8 +61,8 @@ pub fn process(ctx: Context<WithdrawQueuedLiquidity>) -> Result<bool> {
     let require_closing_ticket = match destination_ta_validity {
         DestinationTokenAccountValidity::AtaToBeCreated => {
             msg!("User's destination liquidity ATA does not exist; creating it");
-           
-           
+
+
             create_ata(
                 ctx.accounts.user_destination_liquidity.to_account_info(),
                 ctx.accounts.withdraw_ticket_owner.to_account_info(),
@@ -72,9 +73,9 @@ pub fn process(ctx: Context<WithdrawQueuedLiquidity>) -> Result<bool> {
                 ctx.accounts.payer.to_account_info(),
                 &[],
             )?;
-           
-           
-           
+
+
+
             token_transfer::destination_ata_rent_refund_transfer(
                 ctx.accounts.withdraw_ticket.to_account_info(),
                 ctx.accounts.payer.to_account_info(),
@@ -104,8 +105,8 @@ pub fn process(ctx: Context<WithdrawQueuedLiquidity>) -> Result<bool> {
 
     let clock = Clock::get()?;
 
-   
-   
+
+
     lending_operations::refresh_reserve(
         &mut reserve,
         &clock,
@@ -121,9 +122,9 @@ pub fn process(ctx: Context<WithdrawQueuedLiquidity>) -> Result<bool> {
         &clock,
     )?;
 
-   
-   
-   
+
+
+
     drop(withdraw_ticket);
     drop(reserve);
     let withdraw_ticket = ctx.accounts.withdraw_ticket.load()?;
@@ -227,16 +228,16 @@ impl DestinationTokenAccountValidity {
             return Self::Invalid;
         }
 
-       
+
         if constraints::token_2022::check_only_supported_extensions_on_liquidity_mint(mint).is_err()
         {
             return Self::Invalid;
         }
 
         if account.data_is_empty() {
-           
+
             return if has_ata_address(account, owner, mint.key, token_program) {
-               
+
 
                 if constraints::token_2022::check_default_account_state_initialized(mint).is_err() {
                     return Self::Invalid;
@@ -261,13 +262,13 @@ impl DestinationTokenAccountValidity {
             return Self::Invalid;
         }
 
-       
-       
+
+
         if token_account.delegate.is_some() || token_account.is_frozen() {
             return Self::Invalid;
         }
 
-       
+
         if constraints::token_2022::check_only_supported_extensions_on_liquidity_ta(account)
             .is_err()
         {
@@ -281,7 +282,7 @@ impl DestinationTokenAccountValidity {
 #[derive(Accounts)]
 pub struct WithdrawQueuedLiquidity<'info> {
 
-   
+
     #[account(mut)]
     pub payer: Signer<'info>,
 
@@ -335,15 +336,15 @@ pub struct WithdrawQueuedLiquidity<'info> {
 
 
 
-   
-   
-   
-   
-   
-   
-   
-   
-   
+
+
+
+
+
+
+
+
+
     #[account(mut,
         address = withdraw_ticket.load()?.user_destination_liquidity_ta,
     )]

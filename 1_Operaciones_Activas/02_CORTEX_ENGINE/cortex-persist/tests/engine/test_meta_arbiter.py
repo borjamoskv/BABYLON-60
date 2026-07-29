@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """Tests for MetaArbiterKernel over ExecutionTrace.
 
 These tests are intentionally self-contained:

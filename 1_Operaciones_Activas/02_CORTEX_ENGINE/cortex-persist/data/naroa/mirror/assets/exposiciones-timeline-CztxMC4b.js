@@ -1,5 +1,6 @@
+// C5-REAL EXERGY CERTIFIED
 class h{constructor(){this.cache=null,this.cacheExpiry=0,this.CACHE_DURATION=5*60*1e3}async getExposiciones(){if(this.cache&&Date.now()<this.cacheExpiry)return this.cache;let t=null;try{if(t=await this.fetchFromNotebookLM(),t&&t.length>0)return this.setCache(t),t}catch(e){Logger.warn("[ExposicionesData] NotebookLM unavailable:",e.message)}try{return t=await this.fetchFromLocalJSON(),this.setCache(t),t}catch(e){return Logger.error("[ExposicionesData] Local JSON failed:",e),[]}}async fetchFromNotebookLM(){var n,r,o,c,l;if(!window.micaInstance||!window.micaInstance.apiKey)throw new Error("MICA/Gemini not configured");const e=await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key="+window.micaInstance.apiKey,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({contents:[{parts:[{text:`
-            Eres el asistente de Naroa Gutiérrez Gil. 
+            Eres el asistente de Naroa Gutiérrez Gil.
             Dame un JSON array con TODAS las exposiciones de Naroa desde 2013 hasta 2025.
             Formato exacto por exposición:
             {
@@ -22,7 +23,7 @@ class h{constructor(){this.cache=null,this.cacheExpiry=0,this.CACHE_DURATION=5*6
             <section class="exposiciones-timeline">
                 <!-- Canvas para partículas -->
                 <canvas class="particles-canvas" id="timeline-particles"></canvas>
-                
+
                 <!-- Header con Kinetic Typography -->
                 <header class="timeline-header">
                     <h1 class="timeline-title kinetic-text">
@@ -52,7 +53,7 @@ class h{constructor(){this.cache=null,this.cacheExpiry=0,this.CACHE_DURATION=5*6
                 <nav class="timeline-nav magnetic-nav">
                     <div class="nav-backdrop"></div>
                     ${e.map((s,n)=>`
-                        <button class="year-btn magnetic-btn ${n===0?"active":""}" 
+                        <button class="year-btn magnetic-btn ${n===0?"active":""}"
                                 data-year="${s}"
                                 style="--delay: ${n*.05}s">
                             <span class="btn-text">${s}</span>
@@ -67,7 +68,7 @@ class h{constructor(){this.cache=null,this.cacheExpiry=0,this.CACHE_DURATION=5*6
                         <div class="line-progress"></div>
                         <div class="line-pulse"></div>
                     </div>
-                    
+
                     ${e.map((s,n)=>`
                         <div class="timeline-year-group" data-year="${s}" style="--group-delay: ${n*.1}s">
                             <div class="year-marker">
@@ -78,7 +79,7 @@ class h{constructor(){this.cache=null,this.cacheExpiry=0,this.CACHE_DURATION=5*6
                                 <span class="year-label">${s}</span>
                                 <span class="year-count">${t[s].length} ${t[s].length===1?"expo":"expos"}</span>
                             </div>
-                            
+
                             <div class="exhibitions-grid">
                                 ${t[s].map((r,o)=>this.renderCard(r,o)).join("")}
                             </div>
@@ -94,15 +95,15 @@ class h{constructor(){this.cache=null,this.cacheExpiry=0,this.CACHE_DURATION=5*6
                 </footer>
             </section>
         `}renderCard(t,e){const a=t.month?`${t.month}${t.day?` ${t.day}`:""}`:"",i=t.image&&t.image.length>0;return`
-            <article class="expo-card tilt-card ${i?"has-image":""}" 
-                     data-id="${t.id}" 
+            <article class="expo-card tilt-card ${i?"has-image":""}"
+                     data-id="${t.id}"
                      style="--card-delay: ${e*.08}s">
                 <div class="card-shine"></div>
                 <div class="card-glow"></div>
-                
+
                 ${i?`
                     <div class="card-image">
-                        <img src="${t.image}" 
+                        <img src="${t.image}"
                              alt="${t.title}"
                              loading="lazy"
                              decoding="async"
@@ -110,7 +111,7 @@ class h{constructor(){this.cache=null,this.cacheExpiry=0,this.CACHE_DURATION=5*6
                         <div class="image-overlay"></div>
                     </div>
                 `:""}
-                
+
                 <div class="card-content">
                     <div class="card-header">
                         <span class="expo-icon">${this.getTypeIcon(t.type)}</span>
@@ -118,10 +119,10 @@ class h{constructor(){this.cache=null,this.cacheExpiry=0,this.CACHE_DURATION=5*6
                             ${t.type.toUpperCase()}
                         </span>
                     </div>
-                    
+
                     <h3 class="expo-title">${t.title}</h3>
                     ${t.subtitle?`<p class="expo-subtitle">${t.subtitle}</p>`:""}
-                    
+
                     <div class="expo-meta">
                         <span class="expo-location">
                             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">

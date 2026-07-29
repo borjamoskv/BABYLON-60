@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # Operation: EXERGY-MAX — OpenAI Sigma-1 Attack
 # Vector: Third-Party Prompt Injection (Agentic Breach)
 # Targeted Scenarios: Data Leaking via Tool-Calling, Authorization Bypass

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 use k2_a_token::contract::ATokenContractClient;
@@ -88,7 +89,7 @@ impl MockPool {
             .storage()
             .temporary()
             .get(&whitelist_key);
-        
+
         match whitelist {
             Some(list) if !list.is_empty() => {
                 // Check if user is in whitelist
@@ -107,7 +108,7 @@ impl MockPool {
             }
         }
     }
-    
+
     /// Helper function for tests to set whitelist
     pub fn set_whitelist(env: Env, whitelist: Vec<Address>) {
         let whitelist_key = symbol_short!("whitelist");
@@ -133,7 +134,7 @@ fn initialize_contract(env: &Env, admin: &Address) -> (Address, Address) {
 
     // Create a mock pool contract that implements is_whitelisted_for_reserve
     let mock_pool = env.register(MockPool, ());
-    
+
     let underlying_asset = Address::generate(env);
     let name = String::from_str(env, "Test aToken");
     let symbol = String::from_str(env, "aTEST");
@@ -150,7 +151,7 @@ fn initialize_contract_with_mock_token(env: &Env, admin: &Address) -> (Address, 
 
     // Create a mock pool contract that implements is_whitelisted_for_reserve
     let mock_pool = env.register(MockPool, ());
-    
+
     let underlying_asset = env.register(MockUnderlyingToken, ());
     let name = String::from_str(env, "Test aToken");
     let symbol = String::from_str(env, "aTEST");
@@ -337,7 +338,7 @@ fn test_transfer_whitelist_enforcement() {
     // Transfer to non-whitelisted user3 should fail
     let result = client.try_transfer(&user1, &user3, &200i128);
     assert!(result.is_err(), "Transfer to non-whitelisted address should fail");
-    
+
     // Balance should be unchanged
     assert_eq!(client.balance_of(&user3), 0);
     assert_eq!(client.balance_of(&user1), 700); // Still has 700 after first transfer

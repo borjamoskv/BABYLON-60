@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 #![allow(unused_imports)]
 
@@ -2971,7 +2972,7 @@ fn test_distribution_end_accrues_final_interval() {
     // Expected: (1_000_000 * 100 * RAY) / 100 = 100_000_000 * RAY / 100 = 1_000_000 * RAY
     let expected_increment = 1_000_000 * RAY;
     let expected_index = RAY + expected_increment;
-    
+
     assert_eq!(
         after.index, expected_index,
         "index should accrue rewards up to distribution_end"

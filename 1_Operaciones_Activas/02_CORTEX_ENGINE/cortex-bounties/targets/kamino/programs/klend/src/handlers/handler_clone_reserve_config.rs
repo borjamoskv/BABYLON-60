@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::ops::{Deref, DerefMut};
 
 use anchor_lang::{prelude::*, Accounts};
@@ -35,7 +36,7 @@ pub struct CloneReserveConfig<'info> {
 
 
 
-   
+
     #[account(
         address = target_reserve.load()?.lending_market,
         constraint = !target_lending_market.load()?.is_immutable() @ LendingError::OperationNotPermittedMarketImmutable
@@ -87,7 +88,7 @@ impl TryFrom<ReserveConfigCustomizationArgs> for ReserveConfigCustomizations {
     type Error = Error;
 
     fn try_from(args: ReserveConfigCustomizationArgs) -> Result<Self> {
-       
+
         fn gated<T: Default + PartialEq>(gate: u8, value: T) -> Result<Option<T>> {
             Ok(if gate == false as u8 {
                 if value != T::default() {
@@ -100,7 +101,7 @@ impl TryFrom<ReserveConfigCustomizationArgs> for ReserveConfigCustomizations {
             })
         }
 
-       
+
         let ReserveConfigCustomizationArgs {
             override_fixed_rate_bps,
             fixed_borrow_rate_bps,

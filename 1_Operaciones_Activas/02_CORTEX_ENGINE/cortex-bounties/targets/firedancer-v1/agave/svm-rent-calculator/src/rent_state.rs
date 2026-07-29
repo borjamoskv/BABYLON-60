@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Account rent state.
 
 /// Rent state of a Solana account.

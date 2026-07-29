@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { emitMetric } from '../../src/transport/metrics'
 
 jest.mock('@chainlink/external-adapter-framework/util', () => ({

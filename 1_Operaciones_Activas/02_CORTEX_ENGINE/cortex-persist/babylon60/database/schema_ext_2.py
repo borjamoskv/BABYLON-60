@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # ─── Signal Bus (L1 Consciousness - Cross-Tool Reactive Signaling) ───
 CREATE_SIGNALS = """
 CREATE TABLE IF NOT EXISTS signals (

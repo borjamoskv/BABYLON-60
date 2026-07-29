@@ -1,6 +1,7 @@
+// C5-REAL EXERGY CERTIFIED
 /**
  * Validation-specific tests for swap calculations
- * 
+ *
  * These tests verify that the helper functions work correctly in the context
  * of the validation test, particularly when dealing with already-capped inputs.
  */
@@ -18,7 +19,7 @@ describe('Validation Test Scenarios', () => {
       // Scenario: Contract receives 100 tokens, but caps it to 10 tokens
       // We want to verify that passing 10 tokens (already capped) produces
       // the same result as passing 100 tokens (which gets capped internally)
-      
+
       const binData: BinData = {
         reserve_x: 0n,
         reserve_y: 1000000000n, // 10 tokens available
@@ -46,7 +47,7 @@ describe('Validation Test Scenarios', () => {
     it('should handle case where contract caps input differently than helper would', () => {
       // This shouldn't happen if formulas match, but let's verify the behavior
       // In practice, if formulas match, the contract and helper should cap to the same value
-      
+
       const binData: BinData = {
         reserve_x: 0n,
         reserve_y: 1000000000n, // 10 tokens
@@ -74,7 +75,7 @@ describe('Validation Test Scenarios', () => {
       // Float math should generally produce slightly higher results due to no rounding
       // until the final floor operation. However, integer math might round up in some cases.
       // The key is: actualSwappedOut should never exceed expectedFloat (exploit check)
-      
+
       const binData: BinData = {
         reserve_x: 1000000000n,
         reserve_y: 50000000000n,
@@ -95,12 +96,12 @@ describe('Validation Test Scenarios', () => {
       // Float result (before floor) should be close to integer result
       // After floor, float result might be <= integer result
       const floatResultFloored = BigInt(Math.floor(floatResult.out_this));
-      
+
       // The difference should be small (due to rounding)
       const diff = intResult.out_this > floatResultFloored
         ? intResult.out_this - floatResultFloored
         : floatResultFloored - intResult.out_this;
-      
+
       // Difference should be small (within 1-2 tokens due to rounding differences)
       expect(Number(diff)).toBeLessThan(10); // Allow small rounding differences
     });
@@ -137,7 +138,7 @@ describe('Validation Test Scenarios', () => {
     it('should handle zero actualSwappedIn (failed swap)', () => {
       // When swap fails, actualSwappedIn = 0
       // Validation should still work (use inputAmount instead)
-      
+
       const binData: BinData = {
         reserve_x: 0n,
         reserve_y: 50000000000n,

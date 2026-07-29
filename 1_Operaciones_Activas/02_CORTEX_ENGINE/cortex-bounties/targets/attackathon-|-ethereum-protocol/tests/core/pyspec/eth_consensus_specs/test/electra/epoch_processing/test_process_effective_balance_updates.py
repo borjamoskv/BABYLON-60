@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from eth_consensus_specs.test.context import spec_state_test, with_electra_and_later
 from eth_consensus_specs.test.phase0.epoch_processing.test_process_effective_balance_updates import (
     run_test_effective_balance_hysteresis,

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 use crate::{a_token, debt_token, interest_rate_strategy, kinetic_router, price_oracle};
@@ -135,7 +136,7 @@ fn test_supply_to_atoken_rejected() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let (kinetic_router, kinetic_router_addr, underlying_addr, a_token_addr, _debt_token_addr) = 
+    let (kinetic_router, kinetic_router_addr, underlying_addr, a_token_addr, _debt_token_addr) =
         setup_pool_with_reserve(&env);
 
     let user = Address::generate(&env);
@@ -168,7 +169,7 @@ fn test_supply_to_debttoken_rejected() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let (kinetic_router, kinetic_router_addr, underlying_addr, _a_token_addr, debt_token_addr) = 
+    let (kinetic_router, kinetic_router_addr, underlying_addr, _a_token_addr, debt_token_addr) =
         setup_pool_with_reserve(&env);
 
     let user = Address::generate(&env);
@@ -200,7 +201,7 @@ fn test_supply_to_normal_user_accepted() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let (kinetic_router, kinetic_router_addr, underlying_addr, _a_token_addr, _debt_token_addr) = 
+    let (kinetic_router, kinetic_router_addr, underlying_addr, _a_token_addr, _debt_token_addr) =
         setup_pool_with_reserve(&env);
 
     let user = Address::generate(&env);
@@ -233,7 +234,7 @@ fn test_withdraw_to_atoken_rejected() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let (kinetic_router, kinetic_router_addr, underlying_addr, a_token_addr, _debt_token_addr) = 
+    let (kinetic_router, kinetic_router_addr, underlying_addr, a_token_addr, _debt_token_addr) =
         setup_pool_with_reserve(&env);
 
     let user = Address::generate(&env);
@@ -267,7 +268,7 @@ fn test_withdraw_to_debttoken_rejected() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let (kinetic_router, kinetic_router_addr, underlying_addr, _a_token_addr, debt_token_addr) = 
+    let (kinetic_router, kinetic_router_addr, underlying_addr, _a_token_addr, debt_token_addr) =
         setup_pool_with_reserve(&env);
 
     let user = Address::generate(&env);
@@ -301,7 +302,7 @@ fn test_borrow_to_atoken_rejected() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let (kinetic_router, kinetic_router_addr, underlying_addr, a_token_addr, _debt_token_addr) = 
+    let (kinetic_router, kinetic_router_addr, underlying_addr, a_token_addr, _debt_token_addr) =
         setup_pool_with_reserve(&env);
 
     let liquidity_provider = Address::generate(&env);
@@ -349,7 +350,7 @@ fn test_borrow_to_debttoken_rejected() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let (kinetic_router, kinetic_router_addr, underlying_addr, _a_token_addr, debt_token_addr) = 
+    let (kinetic_router, kinetic_router_addr, underlying_addr, _a_token_addr, debt_token_addr) =
         setup_pool_with_reserve(&env);
 
     let liquidity_provider = Address::generate(&env);

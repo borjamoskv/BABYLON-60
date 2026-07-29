@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Seed generator for K2 lending operations fuzzer
 //!
 //! This tool generates hand-crafted seed corpus files that help the fuzzer

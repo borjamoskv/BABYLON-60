@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 pub const BASIS_POINTS: u32 = 10_000;
 #[allow(dead_code)]
 pub const WAD: u128 = 1_000_000_000_000_000_000;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! keep track of areas of the validator that are currently active
 use std::sync::atomic::{AtomicUsize, Ordering};
 

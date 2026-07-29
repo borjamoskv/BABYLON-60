@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 module.exports = {
   MAX_UINT16: 2n ** 16n - 1n,
   MAX_UINT32: 2n ** 32n - 1n,

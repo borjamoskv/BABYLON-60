@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 use crate::redstone_adapter;
@@ -7,13 +8,13 @@ use soroban_sdk::{testutils::Address as _, Address, Env, String, Symbol, Vec};
 pub fn create_test_env() -> Env {
     let env = Env::default();
     env.mock_all_auths();
-    
+
     // Set a realistic timestamp (not 0) to match production conditions
     use soroban_sdk::testutils::Ledger;
     env.ledger().with_mut(|li| {
         li.timestamp = 1704067200; // Jan 1, 2024 00:00:00 UTC
     });
-    
+
     env
 }
 

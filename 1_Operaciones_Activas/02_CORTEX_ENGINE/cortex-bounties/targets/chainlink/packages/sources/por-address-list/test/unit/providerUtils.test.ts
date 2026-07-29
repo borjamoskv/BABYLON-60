@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { LoggerFactoryProvider } from '@chainlink/external-adapter-framework/util'
 import { ethers } from 'ethers'
 import { addProvider, getProvider } from '../../src/transport/providerUtils'

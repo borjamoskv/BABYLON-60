@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { TransportDependencies } from '@chainlink/external-adapter-framework/transports'
 import { LoggerFactoryProvider } from '@chainlink/external-adapter-framework/util'
 import { makeStub } from '@chainlink/external-adapter-framework/util/testing-utils'

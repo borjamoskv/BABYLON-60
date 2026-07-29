@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // Helper methods to extract pieces of the shred from the payload without
 // deserializing the entire payload.
 #![deny(clippy::indexing_slicing)]

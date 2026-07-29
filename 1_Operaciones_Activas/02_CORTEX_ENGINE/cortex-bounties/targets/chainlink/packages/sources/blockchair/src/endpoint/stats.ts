@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AxiosResponse, Requester, util, Validator } from '@chainlink/ea-bootstrap'
 import type { ExecuteWithConfig, Config, InputParameters } from '@chainlink/ea-bootstrap'
 import { COINS } from '../config'

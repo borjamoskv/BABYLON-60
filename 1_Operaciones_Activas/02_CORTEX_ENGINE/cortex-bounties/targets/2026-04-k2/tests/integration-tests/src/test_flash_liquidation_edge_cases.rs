@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 //! Edge case tests for two-step liquidation (prepare + execute)
@@ -297,7 +298,7 @@ fn test_flash_liquidation_reserve_data_consistency() {
         collateral_reserve_after.liquidity_index >= collateral_reserve_before.liquidity_index,
         "Liquidity index should not decrease"
     );
-    
+
     assert!(
         debt_reserve_after.variable_borrow_index >= debt_reserve_before.variable_borrow_index,
         "Borrow index should not decrease"
@@ -313,7 +314,7 @@ fn test_flash_liquidation_with_zero_balance_reserves() {
 
     // Setup: User supplies and immediately withdraws from one asset
     // This can leave configuration bits set with zero balance
-    
+
     protocol.kinetic_router.supply(
         &protocol.liquidity_provider,
         &protocol.usdt_asset,

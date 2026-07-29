@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import pytest
 from babylon60.security.memory_firewall import MemoryFirewall, RiskLevel, SecretRedactor
 

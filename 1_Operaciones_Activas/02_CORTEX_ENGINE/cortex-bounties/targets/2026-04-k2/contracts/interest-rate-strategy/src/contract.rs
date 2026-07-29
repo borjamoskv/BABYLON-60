@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::storage;
 use crate::storage::InterestRateParams;
 use crate::validation::validate_interest_rate_params;
@@ -96,7 +97,7 @@ impl InterestRateStrategyContract {
                 params.variable_rate_slope2,
                 excess_utilization_rate_ratio,
             )?;
-            
+
             params.base_variable_borrow_rate
                 .checked_add(params.variable_rate_slope1)
                 .and_then(|v| v.checked_add(slope2_component))
@@ -109,7 +110,7 @@ impl InterestRateStrategyContract {
             };
 
             let slope1_component = ray_mul(&env, params.variable_rate_slope1, utilization_rate_ratio)?;
-            
+
             params.base_variable_borrow_rate
                 .checked_add(slope1_component)
                 .ok_or(KineticRouterError::MathOverflow)?
@@ -122,7 +123,7 @@ impl InterestRateStrategyContract {
             .checked_mul(RAY)
             .and_then(|v| v.checked_div(BASIS_POINTS))
             .ok_or(KineticRouterError::MathOverflow)?;
-        
+
         // Validate reserve_factor_ray <= RAY to prevent underflow
         // This should never happen given the validation above, but defensive check
         if reserve_factor_ray > RAY {
@@ -185,12 +186,12 @@ impl InterestRateStrategyContract {
         validate_interest_rate_params(&new_params)?;
 
         storage::set_interest_rate_params(&env, &new_params);
-        
+
         env.events().publish(
             (soroban_sdk::symbol_short!("rate"), soroban_sdk::symbol_short!("params"), soroban_sdk::symbol_short!("updated")),
             new_params,
         );
-        
+
         Ok(())
     }
 
@@ -208,7 +209,7 @@ impl InterestRateStrategyContract {
     ) -> Result<(), KineticRouterError> {
         storage::validate_admin(&env, &caller)?;
         caller.require_auth();
-        
+
         // Check if there's an existing pending admin and emit cancellation event if so
         if let Ok(existing_pending) = storage::get_pending_admin(&env) {
             use k2_shared::events::AdminProposalCancelledEvent;
@@ -220,9 +221,9 @@ impl InterestRateStrategyContract {
                 },
             );
         }
-        
+
         storage::set_pending_admin(&env, &pending_admin);
-        
+
         // Emit event
         use k2_shared::events::AdminProposedEvent;
         env.events().publish(
@@ -232,7 +233,7 @@ impl InterestRateStrategyContract {
                 pending_admin: pending_admin.clone(),
             },
         );
-        
+
         Ok(())
     }
 
@@ -244,11 +245,11 @@ impl InterestRateStrategyContract {
             return Err(KineticRouterError::InvalidPendingAdmin);
         }
         caller.require_auth();
-        
+
         let previous_admin = storage::get_admin(&env)?;
         storage::set_admin(&env, &caller);
         storage::clear_pending_admin(&env);
-        
+
         // Emit event
         use k2_shared::events::AdminAcceptedEvent;
         env.events().publish(
@@ -258,7 +259,7 @@ impl InterestRateStrategyContract {
                 new_admin: caller.clone(),
             },
         );
-        
+
         Ok(())
     }
 
@@ -267,10 +268,10 @@ impl InterestRateStrategyContract {
     pub fn cancel_admin_proposal(env: Env, caller: Address) -> Result<(), KineticRouterError> {
         storage::validate_admin(&env, &caller)?;
         caller.require_auth();
-        
+
         let cancelled_pending = storage::get_pending_admin(&env)?;
         storage::clear_pending_admin(&env);
-        
+
         // Emit event
         use k2_shared::events::AdminProposalCancelledEvent;
         env.events().publish(
@@ -280,7 +281,7 @@ impl InterestRateStrategyContract {
                 cancelled_pending_admin: cancelled_pending,
             },
         );
-        
+
         Ok(())
     }
 
@@ -312,12 +313,12 @@ impl InterestRateStrategyContract {
         validate_interest_rate_params(&params)?;
 
         storage::set_asset_interest_rate_params(&env, &asset, &params);
-        
+
         env.events().publish(
             (soroban_sdk::symbol_short!("asset"), soroban_sdk::symbol_short!("rate"), soroban_sdk::symbol_short!("params"), soroban_sdk::symbol_short!("updated")),
             (asset.clone(), params),
         );
-        
+
         Ok(())
     }
 

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::cell::RefMut;
 
 use anchor_lang::{
@@ -71,7 +72,7 @@ pub fn borrow_obligation_liquidity_process_impl<'info>(
 
     let remaining_accounts =
         if lending_market.check_permissions(PermissionedOp::BORROW, remaining_accounts.last())? {
-           
+
             &remaining_accounts[..remaining_accounts.len() - 1]
         } else {
             remaining_accounts

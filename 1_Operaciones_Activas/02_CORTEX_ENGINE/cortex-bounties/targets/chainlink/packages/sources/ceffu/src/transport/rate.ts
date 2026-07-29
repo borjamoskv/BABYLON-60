@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterInputError } from '@chainlink/external-adapter-framework/validation/error'
 import { ethers, parseUnits } from 'ethers'
 import abi from '../config/abi.json'

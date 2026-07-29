@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{prelude::*, solana_program::program_option::COption, Accounts};
 use anchor_spl::{
     token::Token,
@@ -34,8 +35,8 @@ pub fn process(
         LendingError::WithdrawTicketIssuanceDisabled,
     );
 
-   
-   
+
+
     lending_operations::refresh_reserve(reserve, clock, None, lending_market.referral_fee_bps)?;
 
     let initial_owner_queued_collateral_vault_balance =
@@ -76,11 +77,11 @@ pub fn process(
         ctx.accounts.reserve_collateral_mint.decimals,
     )?;
 
-   
-   
-   
-   
-   
+
+
+
+
+
     if has_ata_address(
         ctx.accounts.user_destination_liquidity_ta.as_ref(),
         ctx.accounts.owner.key,
@@ -124,13 +125,13 @@ fn extract_progress_callback_custom_accounts(
 fn extract_vault_address_from_kvault_signed_accounts(
     accounts: &EnqueueToWithdraw,
 ) -> Result<Pubkey> {
-   
+
     let Some(vault_account) = &accounts.progress_callback_custom_account_0 else {
         msg!("The used progress callback requires the VaultState as a custom account");
         return err!(LendingError::InvalidWithdrawTicketProgressCallbackConfig);
     };
 
-   
+
     if vault_account.owner != &CORRESPONDING_KAMINO_VAULT_PROGRAM_ID {
         msg!(
             "The VaultState account must belong to {}, but got {}",
@@ -150,7 +151,7 @@ fn extract_vault_address_from_kvault_signed_accounts(
         return err!(LendingError::InvalidWithdrawTicketProgressCallbackConfig);
     }
 
-   
+
     let expected_authority_address = pda::kvault::base_authority(vault_account.key());
     if accounts.owner.key != &expected_authority_address {
         msg!(
@@ -166,7 +167,7 @@ fn extract_vault_address_from_kvault_signed_accounts(
 #[derive(Accounts)]
 pub struct EnqueueToWithdraw<'info> {
 
-   
+
     #[account(mut)]
     pub owner: Signer<'info>,
 
@@ -194,9 +195,9 @@ pub struct EnqueueToWithdraw<'info> {
 
 
 
-   
-   
-   
+
+
+
     #[account(
         token::mint = reserve_liquidity_mint,
         token::authority = owner,
@@ -206,7 +207,7 @@ pub struct EnqueueToWithdraw<'info> {
     )]
     pub user_destination_liquidity_ta: Box<InterfaceAccount<'info, TokenAccount>>,
 
-   
+
     #[account(
         address = reserve.load()?.liquidity.mint_pubkey,
         mint::token_program = reserve.load()?.liquidity.token_program,
@@ -264,8 +265,8 @@ pub struct EnqueueToWithdraw<'info> {
     pub progress_callback_custom_account_0: Option<AccountInfo<'info>>,
 
 
-   
-   
+
+
     pub progress_callback_custom_account_1: Option<AccountInfo<'info>>,
 
     /// CHECK: Sysvar Instruction allowing introspection, fixed address

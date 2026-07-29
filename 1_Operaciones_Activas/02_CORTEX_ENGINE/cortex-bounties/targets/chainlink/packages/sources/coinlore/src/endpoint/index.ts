@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { TInputParameters as GlobalInputParameters } from './global'
 
 export type TInputParameters = GlobalInputParameters

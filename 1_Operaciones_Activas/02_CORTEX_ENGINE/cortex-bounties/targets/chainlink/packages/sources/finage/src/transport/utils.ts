@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { config as adapterSettings } from '../config'
 
 export interface EtfMessage {

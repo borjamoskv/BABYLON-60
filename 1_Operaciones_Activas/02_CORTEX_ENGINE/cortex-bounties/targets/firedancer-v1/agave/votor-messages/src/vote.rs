@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Vote data types for use by clients
 use {
     serde::{Deserialize, Serialize},

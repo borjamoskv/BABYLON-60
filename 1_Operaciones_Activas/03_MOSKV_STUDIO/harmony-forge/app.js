@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // --- HARMONY FORGE // ДЕКОДЕР-9 ---
 
 // Music Theory Tables (21-EDO / 21-TET microtonal framework)
@@ -198,7 +199,7 @@ function applyPreset(type) {
         negativeHarmonyCheckbox.checked = true;
         fractalModeCheckbox.checked = true;
     }
-    
+
     // Sync variables with checkboxes
     enableTrumpet = enableTrumpetCheckbox.checked;
     enableTheremin = enableThereminCheckbox.checked;
@@ -206,9 +207,9 @@ function applyPreset(type) {
     enableDrums = enableDrumsCheckbox.checked;
     isNegativeHarmony = negativeHarmonyCheckbox.checked;
     isFractalMode = fractalModeCheckbox.checked;
-    
+
     updateSliderValues();
-    
+
     if (isPlaying && audioCtx && lowpassNode) {
         updatePadChord(lowpassNode);
     }
@@ -217,19 +218,19 @@ function applyPreset(type) {
 function updateSliderValues() {
     currentBpm = parseInt(tempoSlider.value);
     tempoVal.textContent = currentBpm;
-    
+
     wowFlutterAmount = parseInt(wowFlutterSlider.value) / 100;
     wowFlutterVal.textContent = wowFlutterSlider.value + "%";
-    
+
     tapeWearAmount = parseInt(tapeWearSlider.value) / 100;
     tapeWearVal.textContent = tapeWearSlider.value + "%";
-    
+
     filterCutoff = parseInt(filterCutoffSlider.value);
     filterCutoffVal.textContent = filterCutoff + " Hz";
-    
+
     delayVal.textContent = delaySlider.value + "%";
     reverbVal.textContent = reverbSlider.value + "%";
-    
+
     if (audioCtx) {
         if (delayNode) {
             delayNode.gainNode.gain.setTargetAtTime(parseInt(delaySlider.value) / 100 * 0.5, audioCtx.currentTime, 0.1);
@@ -265,8 +266,8 @@ scaleSelect.addEventListener("change", () => { currentScaleType = scaleSelect.va
 enableTrumpetCheckbox.addEventListener("change", (e) => { enableTrumpet = e.target.checked; });
 enableThereminCheckbox.addEventListener("change", (e) => { enableTheremin = e.target.checked; });
 enableGuitarCheckbox.addEventListener("change", (e) => { enableGuitar = e.target.checked; });
-enableDrumsCheckbox.addEventListener("change", (e) => { 
-    enableDrums = e.target.checked; 
+enableDrumsCheckbox.addEventListener("change", (e) => {
+    enableDrums = e.target.checked;
     if (isPlaying && enableDrums) {
         startDrumSequencer();
     } else if (!enableDrums && drumIntervalId) {
@@ -280,17 +281,17 @@ fractalModeCheckbox.addEventListener("change", (e) => { isFractalMode = e.target
 // Initialize Web Audio API
 function initAudio() {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    
+
     // Master Gain
     masterGain = audioCtx.createGain();
     masterGain.gain.setValueAtTime(0.8, audioCtx.currentTime);
-    
+
     // Filter
     const lowpass = audioCtx.createBiquadFilter();
     lowpass.type = "lowpass";
     lowpass.frequency.setValueAtTime(filterCutoff, audioCtx.currentTime);
     lowpass.Q.setValueAtTime(1, audioCtx.currentTime);
-    
+
     // Analyser
     analyser = audioCtx.createAnalyser();
     analyser.fftSize = 512;
@@ -299,25 +300,25 @@ function initAudio() {
     // Wow & Flutter Master Delay (Doppler tape emulation)
     masterWowFlutterDelay = audioCtx.createDelay(1.0);
     masterWowFlutterDelay.delayTime.setValueAtTime(0.015, audioCtx.currentTime);
-    
+
     wowLfo = audioCtx.createOscillator();
     wowLfo.type = "sine";
     wowLfo.frequency.setValueAtTime(0.55, audioCtx.currentTime);
-    
+
     wowLfoGain = audioCtx.createGain();
     wowLfoGain.gain.setValueAtTime(wowFlutterAmount * 0.003, audioCtx.currentTime);
-    
+
     wowLfo.connect(wowLfoGain);
     wowLfoGain.connect(masterWowFlutterDelay.delayTime);
     wowLfo.start();
-    
+
     flutterLfo = audioCtx.createOscillator();
     flutterLfo.type = "sine";
     flutterLfo.frequency.setValueAtTime(12.5, audioCtx.currentTime);
-    
+
     flutterLfoGain = audioCtx.createGain();
     flutterLfoGain.gain.setValueAtTime(wowFlutterAmount * 0.0006, audioCtx.currentTime);
-    
+
     flutterLfo.connect(flutterLfoGain);
     flutterLfoGain.connect(masterWowFlutterDelay.delayTime);
     flutterLfo.start();
@@ -330,7 +331,7 @@ function initAudio() {
     masterWowFlutterDelay.connect(analyser);
     analyser.connect(masterGain);
     masterGain.connect(audioCtx.destination);
-    
+
     // Procedural tape hiss/noise generator
     setupTapeNoise(lowpass);
 
@@ -349,13 +350,13 @@ function setupFX() {
     // Delay Line
     const delay = audioCtx.createDelay(1.0);
     delay.delayTime.setValueAtTime(0.35, audioCtx.currentTime);
-    
+
     const delayFeedback = audioCtx.createGain();
     delayFeedback.gain.setValueAtTime(0.4, audioCtx.currentTime);
-    
+
     const delayMix = audioCtx.createGain();
     delayMix.gain.setValueAtTime(0.3, audioCtx.currentTime);
-    
+
     // Auto-pan LFO for delay feedback to sweep left/right (ping-pong feeling)
     const delayPanner = audioCtx.createStereoPanner ? audioCtx.createStereoPanner() : null;
     if (delayPanner) {
@@ -367,16 +368,16 @@ function setupFX() {
         delayLfo.connect(delayLfoGain);
         delayLfoGain.connect(delayPanner.pan);
         delayLfo.start();
-        
+
         delay.connect(delayPanner);
         delayPanner.connect(delayFeedback);
     } else {
         delay.connect(delayFeedback);
     }
-    
+
     delayFeedback.connect(delay); // feedback loop
     delay.connect(delayMix);
-    
+
     delayNode = {
         delay: delay,
         gainNode: delayMix,
@@ -394,7 +395,7 @@ function setupFX() {
         d.delayTime.setValueAtTime(t, audioCtx.currentTime);
         const g = audioCtx.createGain();
         g.gain.setValueAtTime(0.78, audioCtx.currentTime);
-        
+
         revInput.connect(d);
         d.connect(g);
         g.connect(d); // feedback
@@ -409,30 +410,30 @@ function setupTapeNoise(destination) {
     const bufferSize = 2 * audioCtx.sampleRate;
     const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
     const output = noiseBuffer.getChannelData(0);
-    
+
     for (let i = 0; i < bufferSize; i++) {
         let white = Math.random() * 2 - 1;
         let crackle = 0;
-        
+
         if (Math.random() < 0.00008) {
             crackle = (Math.random() * 2 - 1) * 0.8;
         }
-        
+
         output[i] = white * 0.05 + crackle;
     }
-    
+
     const noise = audioCtx.createBufferSource();
     noise.buffer = noiseBuffer;
     noise.loop = true;
-    
+
     const noiseFilter = audioCtx.createBiquadFilter();
     noiseFilter.type = "bandpass";
     noiseFilter.frequency.setValueAtTime(400, audioCtx.currentTime);
     noiseFilter.Q.setValueAtTime(0.7, audioCtx.currentTime);
-    
+
     const noiseGain = audioCtx.createGain();
     noiseGain.gain.setValueAtTime(tapeWearAmount * 0.15, audioCtx.currentTime);
-    
+
     noise.connect(noiseFilter);
     noiseFilter.connect(noiseGain);
     noiseGain.connect(destination);
@@ -454,9 +455,9 @@ function getScaleFreq(scaleDegree, octave) {
     const baseFreq = ROOT_FREQS[currentRoot] || 220.00;
     const scale = SCALES[currentScaleType];
     const degreeIndex = scaleDegree % scale.length;
-    
+
     const octaveMultiplier = Math.floor(scaleDegree / scale.length) + (octave - 4);
-    
+
     const stepOffset = scale[degreeIndex] + (21 * octaveMultiplier);
     return getWobblyFreq(baseFreq, stepOffset);
 }
@@ -469,23 +470,23 @@ function triggerSovietPad(freqs, dest) {
     const padGain = audioCtx.createGain();
     padGain.gain.setValueAtTime(0, audioCtx.currentTime);
     padGain.gain.linearRampToValueAtTime(0.20, audioCtx.currentTime + 1.0);
-    
+
     freqs.forEach((freq, idx) => {
         const osc1 = audioCtx.createOscillator();
         const osc2 = audioCtx.createOscillator();
-        
+
         osc1.type = idx % 2 === 0 ? "sawtooth" : "triangle";
         osc2.type = "sawtooth";
-        
+
         osc1.frequency.setValueAtTime(freq - 1.2, audioCtx.currentTime);
         osc2.frequency.setValueAtTime(freq + 1.2, audioCtx.currentTime);
-        
+
         osc1.connect(padGain);
         osc2.connect(padGain);
-        
+
         osc1.start();
         osc2.start();
-        
+
         oscs.push(osc1, osc2);
     });
 
@@ -498,7 +499,7 @@ function triggerSovietPad(freqs, dest) {
             padGain.gain.cancelScheduledValues(audioCtx.currentTime);
             padGain.gain.setValueAtTime(padGain.gain.value, audioCtx.currentTime);
             padGain.gain.linearRampToValueAtTime(0, stopTime);
-            
+
             setTimeout(() => {
                 oscs.forEach(osc => {
                     try { osc.stop(); } catch(e) {}
@@ -583,77 +584,77 @@ function triggerTrumpet(freq, dest) {
     const osc2 = audioCtx.createOscillator();
     const vibrato = audioCtx.createOscillator();
     const vibratoGain = audioCtx.createGain();
-    
+
     osc1.type = "sawtooth";
     osc2.type = "sawtooth";
-    
+
     osc1.frequency.setValueAtTime(freq * 0.98, audioCtx.currentTime);
     osc2.frequency.setValueAtTime(freq * 1.02, audioCtx.currentTime);
-    
+
     vibrato.frequency.setValueAtTime(6.8, audioCtx.currentTime);
     vibratoGain.gain.setValueAtTime(20, audioCtx.currentTime);
     vibrato.connect(vibratoGain);
     vibratoGain.connect(osc1.frequency);
     vibratoGain.connect(osc2.frequency);
-    
+
     const mainGain = audioCtx.createGain();
     mainGain.gain.setValueAtTime(0, audioCtx.currentTime);
     mainGain.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 0.08);
     mainGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.1);
-    
+
     const filter1 = audioCtx.createBiquadFilter();
     const filter2 = audioCtx.createBiquadFilter();
     const filter3 = audioCtx.createBiquadFilter();
-    
+
     filter1.type = "bandpass";
     filter2.type = "bandpass";
     filter3.type = "bandpass";
-    
+
     filter1.frequency.setValueAtTime(650, audioCtx.currentTime);
     filter1.Q.setValueAtTime(10, audioCtx.currentTime);
-    
+
     filter2.frequency.setValueAtTime(1050, audioCtx.currentTime);
     filter2.Q.setValueAtTime(10, audioCtx.currentTime);
-    
+
     filter3.frequency.setValueAtTime(2200, audioCtx.currentTime);
     filter3.Q.setValueAtTime(8, audioCtx.currentTime);
-    
+
     osc1.connect(filter1);
     osc1.connect(filter2);
     osc1.connect(filter3);
-    
+
     osc2.connect(filter1);
     osc2.connect(filter2);
     osc2.connect(filter3);
-    
+
     const filterMix = audioCtx.createGain();
     filter1.connect(filterMix);
     filter2.connect(filterMix);
     filter3.connect(filterMix);
-    
+
     const crunchOsc = audioCtx.createOscillator();
     const crunchGain = audioCtx.createGain();
     crunchOsc.frequency.setValueAtTime(130, audioCtx.currentTime);
     crunchOsc.type = "sawtooth";
-    
+
     const ringMod = audioCtx.createGain();
     ringMod.gain.setValueAtTime(0.4, audioCtx.currentTime);
-    
+
     crunchOsc.connect(crunchGain);
     crunchGain.connect(ringMod.gain);
-    
+
     filterMix.connect(ringMod);
     ringMod.connect(mainGain);
-    
+
     mainGain.connect(dest);
     mainGain.connect(delayNode.delay);
     mainGain.connect(reverbNode);
-    
+
     osc1.start();
     osc2.start();
     vibrato.start();
     crunchOsc.start();
-    
+
     const stopTime = audioCtx.currentTime + 1.2;
     osc1.stop(stopTime);
     osc2.stop(stopTime);
@@ -665,39 +666,39 @@ function triggerTrumpet(freq, dest) {
 let lastThereminFreq = 440;
 function triggerTheremin(freq, dest) {
     if (!enableTheremin) return;
-    
+
     const osc = audioCtx.createOscillator();
     const vibrato = audioCtx.createOscillator();
     const vibratoGain = audioCtx.createGain();
     const gainNode = audioCtx.createGain();
-    
+
     osc.type = "triangle";
-    
+
     const startFreq = lastThereminFreq;
     lastThereminFreq = freq;
-    
+
     osc.frequency.setValueAtTime(startFreq, audioCtx.currentTime);
     osc.frequency.exponentialRampToValueAtTime(freq, audioCtx.currentTime + 0.18);
-    
+
     vibrato.frequency.setValueAtTime(6.2, audioCtx.currentTime);
     vibratoGain.gain.setValueAtTime(30, audioCtx.currentTime);
-    
+
     vibrato.connect(vibratoGain);
     vibratoGain.connect(osc.frequency);
-    
+
     gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
     gainNode.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 0.08);
     gainNode.gain.setTargetAtTime(0, audioCtx.currentTime + 0.08, 0.3);
-    
+
     osc.connect(gainNode);
     gainNode.connect(dest);
-    
+
     gainNode.connect(delayNode.delay);
     gainNode.connect(reverbNode);
-    
+
     osc.start();
     vibrato.start();
-    
+
     const stopTime = audioCtx.currentTime + 1.7;
     osc.stop(stopTime);
     vibrato.stop(stopTime);
@@ -706,52 +707,52 @@ function triggerTheremin(freq, dest) {
 // 6. Sad Guitar
 function triggerGuitar(freq, dest) {
     if (!enableGuitar) return;
-    
+
     const delayTime = 1 / freq;
     const noiseLength = 0.025;
     const bufferSize = audioCtx.sampleRate * noiseLength;
     const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
     const data = noiseBuffer.getChannelData(0);
-    
+
     for (let i = 0; i < bufferSize; i++) {
         data[i] = (Math.random() * 2 - 1) * Math.exp(-5 * i / bufferSize);
     }
-    
+
     const noiseSource = audioCtx.createBufferSource();
     noiseSource.buffer = noiseBuffer;
-    
+
     const noiseGain = audioCtx.createGain();
     noiseGain.gain.setValueAtTime(0.25, audioCtx.currentTime);
-    
+
     const delay = audioCtx.createDelay(1.0);
     delay.delayTime.setValueAtTime(delayTime, audioCtx.currentTime);
-    
+
     const feedback = audioCtx.createGain();
     feedback.gain.setValueAtTime(0.985, audioCtx.currentTime);
-    
+
     const dampFilter = audioCtx.createBiquadFilter();
     dampFilter.type = "lowpass";
     dampFilter.frequency.setValueAtTime(1800, audioCtx.currentTime);
-    
+
     noiseSource.connect(noiseGain);
     noiseGain.connect(delay);
-    
+
     delay.connect(dampFilter);
     dampFilter.connect(feedback);
     feedback.connect(delay);
-    
+
     const outputGain = audioCtx.createGain();
     outputGain.gain.setValueAtTime(1.0, audioCtx.currentTime);
     outputGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.35);
-    
+
     dampFilter.connect(outputGain);
     outputGain.connect(dest);
-    
+
     outputGain.connect(delayNode.delay);
     outputGain.connect(reverbNode);
-    
+
     noiseSource.start();
-    
+
     setTimeout(() => {
         try {
             noiseSource.stop();
@@ -772,13 +773,13 @@ function triggerKick(time) {
     const gain = audioCtx.createGain();
     osc.connect(gain);
     gain.connect(lowpassNode || audioCtx.destination);
-    
+
     osc.frequency.setValueAtTime(150, time);
     osc.frequency.exponentialRampToValueAtTime(0.01, time + 0.15);
-    
+
     gain.gain.setValueAtTime(0.5, time);
     gain.gain.exponentialRampToValueAtTime(0.01, time + 0.15);
-    
+
     osc.start(time);
     osc.stop(time + 0.16);
 }
@@ -791,23 +792,23 @@ function triggerSnare(time) {
     for (let i = 0; i < bufferSize; i++) {
         data[i] = Math.random() * 2 - 1;
     }
-    
+
     const noise = audioCtx.createBufferSource();
     noise.buffer = buffer;
-    
+
     const filter = audioCtx.createBiquadFilter();
     filter.type = "bandpass";
     filter.frequency.value = 1000;
-    
+
     const gain = audioCtx.createGain();
-    
+
     noise.connect(filter);
     filter.connect(gain);
     gain.connect(lowpassNode || audioCtx.destination);
-    
+
     gain.gain.setValueAtTime(0.3, time);
     gain.gain.exponentialRampToValueAtTime(0.01, time + 0.15);
-    
+
     noise.start(time);
     noise.stop(time + 0.16);
 }
@@ -817,45 +818,45 @@ function triggerHiHat(time) {
     const osc = audioCtx.createOscillator();
     const filter = audioCtx.createBiquadFilter();
     const gain = audioCtx.createGain();
-    
+
     osc.type = "triangle";
     osc.frequency.value = 10000;
-    
+
     filter.type = "highpass";
     filter.frequency.value = 7000;
-    
+
     osc.connect(filter);
     filter.connect(gain);
     gain.connect(lowpassNode || audioCtx.destination);
-    
+
     gain.gain.setValueAtTime(0.15, time);
     gain.gain.exponentialRampToValueAtTime(0.01, time + 0.05);
-    
+
     osc.start(time);
     osc.stop(time + 0.06);
 }
 
 function startDrumSequencer() {
     if (drumIntervalId) clearInterval(drumIntervalId);
-    
+
     const tickTimeMs = (60000 / currentBpm) / 4;
     drumIntervalId = setInterval(() => {
         if (!isPlaying || !enableDrums || !audioCtx) return;
-        
+
         const time = audioCtx.currentTime;
         const beat = drumTickCount % 16;
-        
+
         if (beat === 0 || beat === 8) {
             triggerKick(time);
         } else if (beat === 4 || beat === 12) {
             triggerSnare(time);
             triggerKick(time);
         }
-        
+
         if (beat % 2 === 0) {
             triggerHiHat(time);
         }
-        
+
         drumTickCount++;
     }, tickTimeMs);
 }
@@ -866,15 +867,15 @@ let currentPad = null;
 
 function updatePadChord(dest) {
     if (!isPlaying) return;
-    
+
     const scale = SCALES[currentScaleType];
     const baseFreq = ROOT_FREQS[currentRoot] || 220.00;
     const isMinor = currentScaleType.includes("minor") || currentScaleType.includes("dorian") || currentScaleType.includes("phrygian");
     const prog = isMinor ? PROGRESSIONS.minor : PROGRESSIONS.major;
-    
+
     const chordOffsets = prog[activeChordIdx];
     activeChordIdx = (activeChordIdx + 1) % prog.length;
-    
+
     const chordFreqs = chordOffsets.map(offset => {
         const degree = scale[offset % scale.length];
         const totalSteps = degree + 21 * -1;
@@ -884,7 +885,7 @@ function updatePadChord(dest) {
     if (currentPad) {
         currentPad.stop();
     }
-    
+
     currentPad = triggerSovietPad(chordFreqs, dest);
     activePadNotes = chordOffsets;
 }
@@ -898,14 +899,14 @@ class SoundNode {
         this.vx = (Math.random() - 0.5) * 5;
         this.vy = (Math.random() - 0.5) * 5;
         this.radius = 12 + Math.random() * 8;
-        
+
         this.scaleDegree = Math.floor(Math.random() * 10);
         this.lastTriggerTime = 0;
         this.trail = [];
 
         const types = ["pluck", "bell", "trumpet", "theremin", "guitar"];
         this.instrumentType = types[Math.floor(Math.random() * types.length)];
-        
+
         if (this.instrumentType === "pluck") {
             this.color = "rgba(229, 178, 43, 0.75)";
             this.trailColor = "rgba(229, 178, 43, 0.1)";
@@ -1009,7 +1010,7 @@ class SoundNode {
 
     bounceCheck(width, height, dest) {
         let bounced = false;
-        
+
         if (this.x - this.radius < 0) {
             this.x = this.radius;
             this.vx = -this.vx * 0.95;
@@ -1032,7 +1033,7 @@ class SoundNode {
 
         if (bounced && isPlaying && dest) {
             this.lastTriggerTime = Date.now();
-            
+
             let targetDegree = this.scaleDegree;
             if (activePadNotes && Math.random() < 0.7) {
                 const padOffset = activePadNotes[Math.floor(Math.random() * activePadNotes.length)];
@@ -1042,7 +1043,7 @@ class SoundNode {
             const freq = getScaleFreq(targetDegree, 4);
             const highFreq = getScaleFreq(targetDegree, 5);
             const subFreq = getScaleFreq(targetDegree, 3);
-            
+
             if (this.instrumentType === "pluck") {
                 triggerPluck(freq, dest);
             } else if (this.instrumentType === "bell") {
@@ -1078,7 +1079,7 @@ sandboxCanvas.addEventListener("click", (e) => {
     const rect = sandboxCanvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     if (balls.length < 15) {
         balls.push(new SoundNode(x, y));
     }
@@ -1126,10 +1127,10 @@ if (rewBtn) {
         rightReel.classList.add("spinning-reverse-fast");
         leftReel.classList.remove("spinning", "spinning-fast");
         rightReel.classList.remove("spinning", "spinning-fast");
-        
+
         trackingText.textContent = "REWIND TAPE...";
         statusText.textContent = "DECODER REWIND";
-        
+
         let count = 0;
         const interval = setInterval(() => {
             if (tapeCounterSecs > 0) {
@@ -1152,10 +1153,10 @@ if (ffBtn) {
         rightReel.classList.add("spinning-fast");
         leftReel.classList.remove("spinning", "spinning-reverse-fast");
         rightReel.classList.remove("spinning", "spinning-reverse-fast");
-        
+
         trackingText.textContent = "FAST FORWARD...";
         statusText.textContent = "DECODER FF";
-        
+
         let count = 0;
         const interval = setInterval(() => {
             tapeCounterSecs += 8;
@@ -1183,7 +1184,7 @@ if (ejectBtn) {
         trackingText.textContent = "NO TAPE INSIDE";
         tapeCounterSecs = 0;
         updateCounterDisplay();
-        
+
         setTimeout(() => {
             stopReelsAnimation();
         }, 600);
@@ -1241,20 +1242,20 @@ function animate() {
     if (isPlaying) {
         if (analyser) {
             analyser.getByteTimeDomainData(dataArray);
-            
+
             ctxVisualizer.lineWidth = 2;
             ctxVisualizer.strokeStyle = "#00FF66";
             ctxVisualizer.shadowBlur = 4;
             ctxVisualizer.shadowColor = "#00FF66";
-            
+
             ctxVisualizer.beginPath();
             const sliceWidth = visualizerCanvas.width / analyser.frequencyBinCount;
             let x = 0;
-            
+
             for (let i = 0; i < analyser.frequencyBinCount; i++) {
                 const v = dataArray[i] / 128.0;
                 const y = v * visualizerCanvas.height / 2;
-                
+
                 if (i === 0) {
                     ctxVisualizer.moveTo(x, y);
                 } else {
@@ -1272,18 +1273,18 @@ function animate() {
             ctxVisualizer.shadowBlur = 4;
             ctxVisualizer.shadowColor = "#00FF66";
             ctxVisualizer.beginPath();
-            
+
             const time = Date.now() * 0.006;
             const sliceWidth = 2;
             const count = visualizerCanvas.width / sliceWidth;
-            
+
             for (let i = 0; i < count; i++) {
                 const x = i * sliceWidth;
                 const wave1 = Math.sin(i * 0.08 + time) * 16;
                 const wave2 = Math.sin(i * 0.04 - time * 1.3) * 8;
                 const noise = (Math.random() - 0.5) * 3;
                 const y = (visualizerCanvas.height / 2) + wave1 + wave2 + noise;
-                
+
                 if (i === 0) {
                     ctxVisualizer.moveTo(x, y);
                 } else {
@@ -1314,7 +1315,7 @@ function animate() {
             tapeCounterSecs++;
             lastProgressTime = Date.now();
             updateCounterDisplay();
-            
+
             // Progress Bar playhead sync (assuming 120s loop)
             const playheadProgress = document.getElementById("playhead-progress");
             if (playheadProgress) {
@@ -1334,22 +1335,22 @@ playBtn.addEventListener("click", () => {
             autoStartAudio();
             return;
         }
-        
+
         if (audioCtx.state === "suspended") {
             audioCtx.resume();
         }
-        
+
         isPlaying = true;
         playBtn.textContent = "STOP TAPE / СТОП";
         playBtn.style.background = "#E5B22B";
         playBtn.style.boxShadow = "0 4px 0px #A0740A, 0 6px 10px rgba(0,0,0,0.6)";
-        
+
         if (playerPlayBtn) playerPlayBtn.textContent = "⏸";
-        
+
         statusText.textContent = "DECODER SYSTEM ACTIVE // 1989-REAL";
         pulseDot.classList.add("active");
         trackingText.textContent = "PLAYING • SYSTEM OK";
-        
+
         lastProgressTime = Date.now();
         startReelsAnimation();
 
@@ -1363,7 +1364,7 @@ playBtn.addEventListener("click", () => {
         if (enableDrums) {
             startDrumSequencer();
         }
-        
+
     } else {
         if (!audioCtx) {
             isPlaying = false;
@@ -1377,14 +1378,14 @@ playBtn.addEventListener("click", () => {
             stopReelsAnimation();
             return;
         }
-        
+
         isPlaying = false;
         playBtn.textContent = "START TAPE / ПУСК";
         playBtn.style.background = "var(--accent)";
         playBtn.style.boxShadow = "0 4px 0px #700B0B, 0 6px 10px rgba(0,0,0,0.6)";
-        
+
         if (playerPlayBtn) playerPlayBtn.textContent = "▶";
-        
+
         statusText.textContent = "SYSTEM STANDBY";
         pulseDot.classList.remove("active");
         trackingText.textContent = "TAPE PAUSED";
@@ -1399,7 +1400,7 @@ playBtn.addEventListener("click", () => {
             clearInterval(drumIntervalId);
             drumIntervalId = null;
         }
-        
+
         if (audioCtx) {
             audioCtx.suspend();
         }
@@ -1422,7 +1423,7 @@ function autoStartAudio() {
         if (reverbNode) {
             reverbNode.connect(lowpassNode);
         }
-        
+
         // Start Ambient Pad Chord Loops
         updatePadChord(lowpassNode);
         padIntervalId = setInterval(() => {

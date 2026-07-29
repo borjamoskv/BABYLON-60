@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     criterion::{Criterion, Throughput, criterion_group, criterion_main},
     itertools::iproduct,

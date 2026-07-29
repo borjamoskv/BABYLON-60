@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { PoRAddress, PoRTokenAddress } from '@chainlink/external-adapter-framework/adapter/por'
 import { AdapterEndpoint } from '@chainlink/external-adapter-framework/adapter'
 import { InputParameters } from '@chainlink/external-adapter-framework/validation'

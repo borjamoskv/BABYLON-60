@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as graphqlAdapter from '@chainlink/graphql-adapter'
 import { GraphqlAdapterRequest } from '../../types'
 import { AdapterResponse, AdapterRequest, AdapterData } from '@chainlink/ea-bootstrap'

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Instrument } from '../types'
 import { parseDecimalString } from '../utils'
 

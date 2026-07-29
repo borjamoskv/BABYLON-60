@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { ExecuteWithConfig, InputParameters } from '@chainlink/ea-bootstrap'
 import { Validator } from '@chainlink/ea-bootstrap'
 import { Config } from '../config'

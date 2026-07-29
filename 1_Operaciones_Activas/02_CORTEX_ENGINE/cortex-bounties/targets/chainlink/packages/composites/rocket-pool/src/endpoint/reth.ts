@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Requester, Validator } from '@chainlink/ea-bootstrap'
 import { ExecuteWithConfig, InputParameters } from '@chainlink/ea-bootstrap'
 import { getLatestAnswer } from '@chainlink/ea-reference-data-reader'

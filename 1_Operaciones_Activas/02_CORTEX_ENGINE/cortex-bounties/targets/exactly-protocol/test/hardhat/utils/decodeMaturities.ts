@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { INTERVAL } from "./futurePools";
 
 export default (encodedMaturities: bigint) => {

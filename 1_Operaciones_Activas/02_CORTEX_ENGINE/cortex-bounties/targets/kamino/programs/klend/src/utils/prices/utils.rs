@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::{
     fraction::BigFraction,
     utils::{prices::types::Price, Fraction, U128, U256},
@@ -17,9 +18,9 @@ where
 
     let value_bf = BigFraction::from_num(value);
     let price_bf = value_bf / decimal;
-   
-   
-   
+
+
+
     price_bf
         .try_into()
         .expect("Failed to convert Price stored on BigFraction to Fraction")

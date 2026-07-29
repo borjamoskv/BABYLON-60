@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import objectHash from 'object-hash'
 import { getHashOpts } from '../../middleware/cache-key/util'
 import { getEnv } from '../../util'

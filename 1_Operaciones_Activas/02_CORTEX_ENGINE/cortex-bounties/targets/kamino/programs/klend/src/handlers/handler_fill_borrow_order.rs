@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::ops::{Deref, DerefMut};
 
 use anchor_lang::{prelude::*, Accounts};
@@ -28,41 +29,41 @@ pub fn process<'info>(ctx: Context<'_, '_, '_, 'info, FillBorrowOrder<'info>>) -
 }
 
 fn process_impl<'info>(ctx: &Context<'_, '_, '_, 'info, FillBorrowOrder<'info>>) -> Result<()> {
-   
-   
+
+
 
     let accounts = &ctx.accounts.borrow_accounts;
     let remaining_accounts = ctx.remaining_accounts;
 
-   
+
     let obligation = accounts.obligation.load()?;
     let order_remaining_amount = obligation.borrow_order.remaining_debt_amount;
 
-   
+
     let already_borrowed_from_same_reserve = obligation
         .find_liquidity_index_in_borrows(accounts.borrow_reserve.key())
         .is_some();
 
     drop(obligation);
 
-   
+
     let fill_amount = borrow_obligation_liquidity_process_impl(
         &BorrowObligationLiquidity::from(accounts.clone()),
         remaining_accounts,
         BorrowSize::AtMost(order_remaining_amount),
     )?;
 
-   
-   
-   
 
-   
+
+
+
+
     let borrow_reserve = accounts.borrow_reserve.load()?;
     let lending_market = accounts.lending_market.load()?;
     let mut obligation = accounts.obligation.load_mut()?;
     let clock = &Clock::get()?;
 
-   
+
     let borrow_order = &mut obligation.borrow_order;
     let borrow_order_rollover_config = borrow_order.get_rollover_config_for_filled_borrow();
     borrow_order_operations::fill_borrow_order(
@@ -74,7 +75,7 @@ fn process_impl<'info>(ctx: &Context<'_, '_, '_, 'info, FillBorrowOrder<'info>>)
         ctx_event_emitter!(ctx),
     )?;
 
-   
+
     if let Some(borrow_order_rollover_config) = borrow_order_rollover_config {
         borrow_order_operations::propagate_rollover_config_to_borrow(
             lending_market.deref(),
@@ -105,21 +106,21 @@ impl<'info> From<FillBorrowOrderAccounts<'info>> for BorrowObligationLiquidity<'
             instruction_sysvar_account,
         } = accounts;
 
-       
-       
-       
-       
-       
-       
-       
+
+
+
+
+
+
+
         let owner = payer.clone();
 
-       
-       
-       
-       
-       
-       
+
+
+
+
+
+
         Self {
             owner,
             obligation,

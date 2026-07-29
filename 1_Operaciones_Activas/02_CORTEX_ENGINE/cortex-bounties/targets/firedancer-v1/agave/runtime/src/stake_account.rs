@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #[cfg(feature = "frozen-abi")]
 use solana_frozen_abi::abi_example::AbiExample;
 use {

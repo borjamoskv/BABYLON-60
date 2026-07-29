@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 export const MISSIONS = [
   {
     id: 1, title: "Hola Mundo", icon: "🚀", lang: "javascript",

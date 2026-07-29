@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     assert_cmd::prelude::*,
     solana_keypair::{Keypair, write_keypair_file},

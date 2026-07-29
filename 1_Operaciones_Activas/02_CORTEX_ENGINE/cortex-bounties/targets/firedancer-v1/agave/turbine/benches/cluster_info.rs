@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     bencher::{Bencher, benchmark_group, benchmark_main},
     rand::{Rng, rng},

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { makeLogger } from '@chainlink/external-adapter-framework/util'
 import { EventEmitter } from 'events'
 import { BaseEndpointTypes } from '../../endpoint/price'

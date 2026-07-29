@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 //! # Code4rena K2 Audit — PoC Submission Template

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterInputError } from '../../src/lib/modules/error'
 import { Validator } from '../../src/lib/modules/validator'
 import type { AdapterRequest, InputParameters } from '../../src/types'

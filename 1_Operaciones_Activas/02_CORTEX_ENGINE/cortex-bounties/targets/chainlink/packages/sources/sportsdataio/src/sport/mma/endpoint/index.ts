@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { TInputParameters as ScheduleInputParameters } from './schedule'
 import type { TInputParameters as EventInputParameters } from './event'
 import type { TInputParameters as FightInputParameters } from './fight'

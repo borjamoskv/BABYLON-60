@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /**
  * Unit tests for multi-bin quote estimation helpers
  */
@@ -20,7 +21,7 @@ describe('estimateBinsNeeded', () => {
       reserve_y: 1000000n,
     };
     const amountIn = 500000n; // Less than 80% of min reserve (800k)
-    
+
     const result = estimateBinsNeeded(amountIn, activeBin, []);
     expect(result).toBe(1);
   });
@@ -35,7 +36,7 @@ describe('estimateBinsNeeded', () => {
       { reserve_x: 1000000n, reserve_y: 1000000n },
     ];
     const amountIn = 20000000n; // 20M tokens (above 10M threshold)
-    
+
     const result = estimateBinsNeeded(amountIn, activeBin, sampleBins);
     // Should be significantly higher due to 3x safety margin
     expect(result).toBeGreaterThan(10);
@@ -47,7 +48,7 @@ describe('estimateBinsNeeded', () => {
       reserve_y: 1000000n,
     };
     const amountIn = 200000000n; // 200M tokens (above 100M threshold)
-    
+
     const result = estimateBinsNeeded(amountIn, activeBin, []);
     expect(result).toBe(1000); // MAX_BINS_ESTIMATION
   });
@@ -58,7 +59,7 @@ describe('estimateBinsNeeded', () => {
       reserve_y: 1000000n,
     };
     const amountIn = 2000000n; // Exceeds active bin capacity
-    
+
     const result = estimateBinsNeeded(amountIn, activeBin, []);
     expect(result).toBe(1); // Fallback
   });
@@ -76,7 +77,7 @@ describe('getSampleBins', () => {
         [2n, { xBalance: 5000n, yBalance: 5000n }],
       ]),
     };
-    
+
     const result = getSampleBins(poolState, 0n, 2);
     expect(result.length).toBe(4); // Should get 4 bins (skip active)
     expect(result[0].reserve_x).toBe(1000n); // -2
@@ -94,7 +95,7 @@ describe('getSampleBins', () => {
         [1n, { xBalance: 4000n, yBalance: 4000n }],
       ]),
     };
-    
+
     const result = getSampleBins(poolState, 0n, 2);
     expect(result.length).toBe(1); // Only bin 1
     expect(result[0].reserve_x).toBe(4000n);
@@ -115,13 +116,13 @@ describe('calculateMultiBinSwap', () => {
         reserves: { reserve_x: 1000000n, reserve_y: 1000000n },
       },
     ];
-    
+
     const amountIn = 1500000n;
     const feeRateBPS = 30n; // 0.3%
     const swapForY = true; // X→Y
-    
+
     const result = calculateMultiBinSwap(bins, amountIn, feeRateBPS, swapForY);
-    
+
     expect(result.totalOut).toBeGreaterThan(0n);
     expect(result.totalFees).toBeGreaterThan(0n);
     expect(result.executionPath.length).toBeGreaterThan(0);
@@ -141,13 +142,13 @@ describe('calculateMultiBinSwap', () => {
         reserves: { reserve_x: 1000000n, reserve_y: 1000000n },
       },
     ];
-    
+
     const amountIn = 500000n; // Small amount that fits in first bin
     const feeRateBPS = 30n;
     const swapForY = true;
-    
+
     const result = calculateMultiBinSwap(bins, amountIn, feeRateBPS, swapForY);
-    
+
     // Should only use first bin
     expect(result.executionPath.length).toBe(1);
     expect(result.executionPath[0].binId).toBe(0n);
@@ -166,13 +167,13 @@ describe('calculateMultiBinSwap', () => {
         reserves: { reserve_x: 1000000n, reserve_y: 1000000n },
       },
     ];
-    
+
     const amountIn = 500000n;
     const feeRateBPS = 30n;
     const swapForY = true;
-    
+
     const result = calculateMultiBinSwap(bins, amountIn, feeRateBPS, swapForY);
-    
+
     // Should skip empty bin and use second bin
     expect(result.executionPath.length).toBe(1);
     expect(result.executionPath[0].binId).toBe(-1n);

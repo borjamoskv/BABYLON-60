@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::admin;
 use crate::calculation;
 use crate::storage;
@@ -82,7 +83,7 @@ impl LiquidationEngineContract {
         args.push_back(debt_asset.clone().into_val(&env));
         args.push_back(user.clone().into_val(&env));
         args.push_back(debt_to_cover.into_val(&env));
-        args.push_back(_receive_a_token.into_val(&env)); 
+        args.push_back(_receive_a_token.into_val(&env));
 
         let _: () =
             env.invoke_contract(&kinetic_router, &Symbol::new(&env, "liquidation_call"), args);

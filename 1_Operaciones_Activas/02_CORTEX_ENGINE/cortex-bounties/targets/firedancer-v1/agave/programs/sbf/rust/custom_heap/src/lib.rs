@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Example Rust-based SBF that tests out using a custom heap
 
 #![allow(clippy::arithmetic_side_effects)]

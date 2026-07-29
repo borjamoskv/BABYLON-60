@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Instrument } from '../endpoint/sftp'
 
 export const FTSE100INDEX: Instrument = 'FTSE100INDEX'

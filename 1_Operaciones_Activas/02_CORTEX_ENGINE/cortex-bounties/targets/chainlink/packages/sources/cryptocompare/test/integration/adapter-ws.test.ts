@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { mockWebSocketServer } from './fixtures'
 import { WebSocketClassProvider } from '@chainlink/external-adapter-framework/transports'
 import FakeTimers from '@sinonjs/fake-timers'

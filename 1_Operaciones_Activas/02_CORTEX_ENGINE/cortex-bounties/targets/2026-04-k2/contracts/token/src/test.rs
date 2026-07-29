@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 use crate::contract::TokenContractClient;
@@ -27,7 +28,7 @@ fn test_initialize() {
 #[test]
 fn test_mint() {
     let env = Env::default();
-    
+
     let admin = Address::generate(&env);
     let user = Address::generate(&env);
     let name = String::from_str(&env, "USD Coin");
@@ -60,7 +61,7 @@ fn test_mint() {
 fn test_transfer() {
     let env = Env::default();
     env.mock_all_auths();
-    
+
     let admin = Address::generate(&env);
     let user1 = Address::generate(&env);
     let user2 = Address::generate(&env);
@@ -87,7 +88,7 @@ fn test_transfer() {
 fn test_approve_and_transfer_from() {
     let env = Env::default();
     env.mock_all_auths();
-    
+
     let admin = Address::generate(&env);
     let user1 = Address::generate(&env);
     let user2 = Address::generate(&env);

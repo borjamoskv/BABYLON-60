@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 export * from "./account";
 export * from "./address";
 export * from "./bigint-math";

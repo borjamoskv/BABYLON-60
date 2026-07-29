@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from wake.testing import *
 from wake.testing.fuzzing import *
 from pytypes.tests.SignatureCheckerMock import SignatureCheckerMock, ERC1271SignatureChecker

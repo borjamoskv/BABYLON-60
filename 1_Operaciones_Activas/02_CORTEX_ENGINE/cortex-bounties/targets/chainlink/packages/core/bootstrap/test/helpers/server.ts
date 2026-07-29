@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import Fastify, { FastifyInstance } from 'fastify'
 
 const DEFAULT_PORT = 18080

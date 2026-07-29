@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterRequestBody } from '@chainlink/external-adapter-framework/util'
 import BigNumber from 'bignumber.js'
 import nock from 'nock'

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     base64::{Engine, prelude::BASE64_STANDARD},
     serde::{Deserialize, Serialize},

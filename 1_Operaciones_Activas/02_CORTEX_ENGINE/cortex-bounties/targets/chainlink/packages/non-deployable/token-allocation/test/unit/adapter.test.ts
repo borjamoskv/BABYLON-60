@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Requester, BigNumber, AdapterError } from '@chainlink/ea-bootstrap'
 import { assertError } from '@chainlink/ea-test-helpers'
 import type { AdapterRequest } from '@chainlink/ea-bootstrap'

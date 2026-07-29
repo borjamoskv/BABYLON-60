@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Example Rust-based SBF sanity program that prints out the parameters passed to it
 
 #![allow(unreachable_code)]

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The interface for Geyser plugins. A plugin must implement
 //! the GeyserPlugin trait to work with the runtime.
 //! In addition, the dynamic library must export a "C" function _create_plugin which

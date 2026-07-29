@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::babylon_kernel::{AgentClient, CorrectionProposal, DiagnosticTicket};
 use cortex_ledger::memory_store::EpistemicFailure;
 use dialoguer::{theme::ColorfulTheme, Input, Select};

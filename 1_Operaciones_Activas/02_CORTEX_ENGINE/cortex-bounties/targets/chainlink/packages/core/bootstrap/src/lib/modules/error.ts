@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { AdapterErrorResponse } from '../../types'
 import { HttpRequestType } from '../metrics/constants'
 import { getEnv } from '../util'

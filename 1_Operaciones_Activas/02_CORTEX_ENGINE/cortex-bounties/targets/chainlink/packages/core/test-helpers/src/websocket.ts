@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { WebSocketClassProvider } from '@chainlink/ea-bootstrap/src/lib/middleware/ws/recorder'
 import { Server, WebSocket } from 'mock-socket'
 

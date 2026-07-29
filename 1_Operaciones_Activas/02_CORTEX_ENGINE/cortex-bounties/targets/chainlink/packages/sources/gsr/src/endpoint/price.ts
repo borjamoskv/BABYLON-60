@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import {
   CryptoPriceEndpoint,
   DEFAULT_LWBA_ALIASES,

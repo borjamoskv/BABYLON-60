@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { DEFAULT_DELTA_TIME } from '../../src/config'
 import { useFakeTimers } from 'sinon'
 import * as network from '../../src/network'

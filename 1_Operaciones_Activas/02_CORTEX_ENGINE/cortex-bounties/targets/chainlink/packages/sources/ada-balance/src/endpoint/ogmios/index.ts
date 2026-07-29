@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /** File mostly copied from Ogmios Typescript Client library with some updates to allow for specifying custom RPC URLs */
 
 import WebSocket from 'ws'

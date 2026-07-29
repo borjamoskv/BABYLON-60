@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! AccountInfo represents a reference to AccountSharedData in either an AppendVec or the write cache.
 //! AccountInfo is not persisted anywhere between program runs.
 //! AccountInfo is purely runtime state.

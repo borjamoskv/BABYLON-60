@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { stockEndpointInputParametersDefinition } from '@chainlink/external-adapter-framework/adapter/stock'
 import { InputParameters } from '@chainlink/external-adapter-framework/validation'
 import { AdapterInputError } from '@chainlink/external-adapter-framework/validation/error'

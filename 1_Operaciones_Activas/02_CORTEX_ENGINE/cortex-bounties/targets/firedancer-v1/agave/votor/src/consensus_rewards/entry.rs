@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     super::{BuildRewardCertsRespError, BuildRewardCertsRespSucc},
     agave_votor_messages::{

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 CORTEX-BOUNTY CLI — Unified Command Surface
 

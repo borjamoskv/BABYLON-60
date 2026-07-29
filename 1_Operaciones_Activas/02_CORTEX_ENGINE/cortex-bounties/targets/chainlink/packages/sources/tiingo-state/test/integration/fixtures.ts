@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { MockWebsocketServer } from '@chainlink/external-adapter-framework/util/testing-utils'
 
 export const mockWebsocketServer = (URL: string): MockWebsocketServer => {

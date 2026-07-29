@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 //! Integration tests for swap_collateral functionality with budget limits.
@@ -1011,7 +1012,7 @@ fn test_swap_collateral_both_directions() {
 }
 
 /// Test swapping collateral with assets of different prices (simulating XLM-like volatility)
-/// 
+///
 /// This test verifies:
 /// 1. Correct handling of assets with different prices ($1 USDC vs $0.30 "XLM")
 /// 2. Proper collateral value calculations based on price differences
@@ -1026,7 +1027,7 @@ fn test_swap_collateral_different_prices() {
     // Change USDT price to simulate XLM at $0.30 (30% of $1)
     // Oracle uses 14 decimals: $0.30 = 300_000_000_000_000
     let xlm_price = 300_000_000_000_000u128; // $0.30
-    
+
     let usdt_asset_enum = price_oracle::Asset::Stellar(protocol.usdt_asset.clone());
     let expiry = env.ledger().timestamp() + 86400; // 24 hours
     protocol.price_oracle.set_manual_override(
@@ -1070,7 +1071,7 @@ fn test_swap_collateral_different_prices() {
     // Borrow 20 "XLM" worth $6 (20 * $0.30)
     let xlm_borrow = 20_000_000_000u128; // 20 XLM
     let xlm_borrow_value = 6_000_000_000_000_000_000_000u128; // $6 in 18 decimals
-    
+
     protocol.kinetic_router.borrow(
         &protocol.user,
         &protocol.usdt_asset,
@@ -1152,11 +1153,11 @@ fn test_swap_collateral_different_prices() {
 
     println!("\n=== After Swap ===");
     println!("XLM received: {} (${} value)", xlm_received, xlm_received as f64 / 1e7 * 0.3);
-    println!("USDC collateral: {} -> {} (change: {})", 
-        usdc_balance_before, usdc_balance_after, 
+    println!("USDC collateral: {} -> {} (change: {})",
+        usdc_balance_before, usdc_balance_after,
         usdc_balance_before as i128 - usdc_balance_after as i128);
-    println!("XLM collateral: {} -> {} (change: +{})", 
-        xlm_balance_before, xlm_balance_after, 
+    println!("XLM collateral: {} -> {} (change: +{})",
+        xlm_balance_before, xlm_balance_after,
         xlm_balance_after as i128 - xlm_balance_before as i128);
     println!("XLM debt: {} -> {} (should be unchanged)", xlm_debt_before, xlm_debt_after);
     println!("Total collateral base: {} -> {}", account_before.total_collateral_base, account_after.total_collateral_base);
@@ -1202,10 +1203,10 @@ fn test_swap_collateral_different_prices() {
     // 4b. Verify collateral VALUE decreased due to receiving lower-value asset
     // We swapped $30 USDC for ~30 XLM worth ~$9 (30 * $0.30)
     // So total collateral should drop by about $21
-    let collateral_value_drop = account_before.total_collateral_base as i128 - 
+    let collateral_value_drop = account_before.total_collateral_base as i128 -
                                 account_after.total_collateral_base as i128;
     println!("Collateral value drop: ${}", collateral_value_drop as f64 / 1e18);
-    
+
     // The collateral value should have decreased significantly
     // (We lost $30 USDC but only gained ~$9 of XLM at $0.30)
     assert!(
@@ -1254,7 +1255,7 @@ fn test_swap_collateral_low_to_high_price() {
 
     // Set USDT to act like XLM at $0.25
     let xlm_price = 250_000_000_000_000u128; // $0.25
-    
+
     let usdt_asset_enum = price_oracle::Asset::Stellar(protocol.usdt_asset.clone());
     let expiry = env.ledger().timestamp() + 86400; // 24 hours
     protocol.price_oracle.set_manual_override(
@@ -1507,13 +1508,13 @@ fn test_swap_collateral_dex_router_integration() {
 
     // Verify swap occurred via DEX router
     assert!(amount_received >= min_amount_out, "Should receive at least minimum amount");
-    
+
     let usdc_after = protocol.usdc_a_token.balance(&protocol.user);
     let usdt_after = protocol.usdt_a_token.balance(&protocol.user);
 
     // USDC should decrease
     assert!(usdc_after < usdc_before, "USDC collateral should decrease");
-    
+
     // USDT should increase (received from swap)
     assert!(usdt_after > usdt_before, "USDT collateral should increase");
 
@@ -1596,7 +1597,7 @@ fn test_swap_collateral_with_valid_dex_router() {
         &min_amount_out,
         &None, // Use default DEX router
     );
-    
+
     assert!(result.is_ok(), "Swap should succeed with valid DEX router");
 }
 
@@ -1673,7 +1674,7 @@ fn test_swap_collateral_dex_router_different_amounts() {
 
         // Verify DEX router was used (amount received accounts for fees)
         assert!(amount_received >= min_amount_out, "Should receive at least minimum");
-        
+
         // Mock router uses 0.05% DEX fee + 0.30% protocol fee (flash_loan_premium_bps)
         // Combined ~0.35%, so amount_received >= swap_amount * 9960 / 10000
         let expected_min = (*swap_amount * 9960) / 10000;

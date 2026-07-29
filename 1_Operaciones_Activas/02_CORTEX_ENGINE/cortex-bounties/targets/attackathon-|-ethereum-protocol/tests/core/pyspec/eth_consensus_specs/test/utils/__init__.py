@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from tests.infra.yield_generator import vector_test
 
 from .utils import (

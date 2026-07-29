@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::storage;
 use k2_shared::{Asset, KineticRouterError, ReserveConfiguration, UserAccountData, BASIS_POINTS_MULTIPLIER, WAD};
 use soroban_sdk::{Address, Env, IntoVal, Symbol, U256, Vec};
@@ -57,7 +58,7 @@ pub fn calculate_liquidation(
 
     // Get cumulative liquidations for this user in current transaction
     let already_liquidated_this_tx = storage::get_user_liquidated_this_tx(env, &user);
-    
+
     // Calculate remaining liquidatable amount
     let remaining_liquidatable = if already_liquidated_this_tx >= max_liquidatable_debt_total {
         0
@@ -80,7 +81,7 @@ pub fn calculate_liquidation(
     }
 
     let liquidation_bonus_bps = get_liquidation_bonus(env.clone(), collateral_asset.clone())?;
-    
+
     // Safe calculation of liquidation_bonus_percentage using U256
     let bonus_bps_u256 = U256::from_u128(env, liquidation_bonus_bps);
     let bps_mult_u256 = U256::from_u128(env, BASIS_POINTS_MULTIPLIER);
@@ -141,7 +142,7 @@ pub fn get_liquidation_bonus(env: Env, asset: Address) -> Result<u128, KineticRo
 
     // Get liquidation bonus from reserve configuration
     let liquidation_bonus_bps = shared_config.get_liquidation_bonus() as u128;
-    
+
     // Safe multiplication using U256 to prevent overflow
     let bonus_bps_u256 = U256::from_u128(&env, liquidation_bonus_bps);
     let wad_u256 = U256::from_u128(&env, WAD);

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! [`CompletedDataSetsService`] is a hub, that runs different operations when a "completed data
 //! set", also known as a [`Vec<Entry>`], is received by the validator.
 //!

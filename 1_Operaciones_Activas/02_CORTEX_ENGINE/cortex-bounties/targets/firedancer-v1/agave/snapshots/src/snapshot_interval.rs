@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::num::NonZeroU64;
 
 /// The interval in between taking snapshots

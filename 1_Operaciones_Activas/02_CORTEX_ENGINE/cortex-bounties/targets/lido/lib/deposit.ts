@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import ast
 import { bigintToHex } from "bigint-conversion";
 import { BytesLike, getBytes, sha256, zeroPadBytes } from "ethers";

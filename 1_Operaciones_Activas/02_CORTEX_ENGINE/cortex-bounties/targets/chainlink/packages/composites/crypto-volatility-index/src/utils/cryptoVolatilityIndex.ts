@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Logger } from '@chainlink/ea-bootstrap'
 import { getRpcLatestRound } from '@chainlink/ea-reference-data-reader'
 import { getDerivativesData, CurrencyDerivativesData } from './derivativesDataProvider'

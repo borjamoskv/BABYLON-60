@@ -1,6 +1,7 @@
+// C5-REAL EXERGY CERTIFIED
 /**
  * Unit tests for swap calculation helpers
- * 
+ *
  * These tests validate that the TypeScript swap calculation helpers
  * match the expected behavior from pricing.py's _calculate_bin_swap method.
  */
@@ -312,21 +313,21 @@ describe('Swap Calculation Helpers', () => {
       //         Then: fee_rate * 10000 = protocol + provider + variable (BPS total)
       // TypeScript: fee_rate_bps = protocol + provider + variable (BPS total directly)
       // These should be equivalent
-      
+
       const binData: BinData = {
         reserve_x: 1000000000n,
         reserve_y: 50000000000n,
       };
       const binPrice = 5000000000n;
       const remaining = 100000000n;
-      
+
       // Test with 30 BPS total (0.3%)
       const feeRateBPS = 3000n;
       const result = calculateBinSwap(binData, binPrice, remaining, feeRateBPS, true);
-      
+
       // Fees should be: (100000000 * 3000) / 10000 = 30000000
       expect(result.fee_amount).toBe(30000000n);
-      
+
       // Effective input after fees: 100000000 - 30000000 = 70000000
       // Output: (70000000 * 5000000000) / 100000000 = 3500000000 (35 tokens)
       expect(result.out_this).toBe(3500000000n);

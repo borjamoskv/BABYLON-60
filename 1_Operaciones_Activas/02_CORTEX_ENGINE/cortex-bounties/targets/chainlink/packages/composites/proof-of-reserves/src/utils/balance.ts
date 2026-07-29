@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { Account, AdapterContext, AdapterResponse, Config } from '@chainlink/ea-bootstrap'
 import { callAdapter, makeRequestFactory } from '.'
 

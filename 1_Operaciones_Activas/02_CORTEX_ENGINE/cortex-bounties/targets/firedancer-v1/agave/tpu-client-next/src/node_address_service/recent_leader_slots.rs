@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module provides [`RecentLeaderSlots`] to track recent leader slots.
 use {crate::node_address_service::SlotEvent, solana_clock::Slot, std::collections::VecDeque};
 

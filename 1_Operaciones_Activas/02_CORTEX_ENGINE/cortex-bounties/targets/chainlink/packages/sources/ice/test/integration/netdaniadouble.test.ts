@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import querystring from 'node:querystring'
 import { NetDaniaDouble } from './netdania.double'
 import { config } from '../../src/config'

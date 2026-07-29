@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import {
   alice,
   deployer,
@@ -22,7 +23,7 @@ import { txErr, txOk, rovOk } from '@clarigen/test';
 let addBulkLiquidityOutput: { bin: bigint; xAmount: bigint; yAmount: bigint; liquidity: bigint;}[];
 
 describe('DLMM Liquidity Router Functions', () => {
-  
+
   beforeEach(async () => {
     addBulkLiquidityOutput = setupTestEnvironment();
   });
@@ -40,18 +41,18 @@ describe('DLMM Liquidity Router Functions', () => {
         maxXLiquidityFee: 1000000n,
         maxYLiquidityFee: 1000000n,
       }];
-      
+
       const initialXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const initialYBalance = rovOk(mockUsdcToken.getBalance(alice));
-      
+
       const response = txOk(dlmmLiquidityRouter.addLiquidityMulti(
         positions
       ), alice);
-      
+
       const finalXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const finalYBalance = rovOk(mockUsdcToken.getBalance(alice));
       const lpReceived = cvToValue(response.result);
-      
+
       expect(finalXBalance).toBeLessThan(initialXBalance);
       expect(finalYBalance).toBeLessThan(initialYBalance);
       // lpReceived is an array of results, one per position
@@ -86,18 +87,18 @@ describe('DLMM Liquidity Router Functions', () => {
           maxYLiquidityFee: 1000000n,
         }
       ];
-      
+
       const initialXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const initialYBalance = rovOk(mockUsdcToken.getBalance(alice));
-      
+
       const response = txOk(dlmmLiquidityRouter.addLiquidityMulti(
         positions
       ), alice);
-      
+
       const finalXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const finalYBalance = rovOk(mockUsdcToken.getBalance(alice));
       const lpReceived = cvToValue(response.result);
-      
+
       expect(finalXBalance).toBeLessThan(initialXBalance);
       expect(finalYBalance).toBeLessThan(initialYBalance);
       // lpReceived is an array of results, one per position
@@ -142,18 +143,18 @@ describe('DLMM Liquidity Router Functions', () => {
           maxYLiquidityFee: 1000000n,
         }
       ];
-      
+
       const initialXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const initialYBalance = rovOk(mockUsdcToken.getBalance(alice));
-      
+
       const response = txOk(dlmmLiquidityRouter.addLiquidityMulti(
         positions
       ), alice);
-      
+
       const finalXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const finalYBalance = rovOk(mockUsdcToken.getBalance(alice));
       const lpReceived = cvToValue(response.result);
-      
+
       expect(finalXBalance).toBeLessThan(initialXBalance);
       expect(finalYBalance).toBeLessThan(initialYBalance);
       // lpReceived is an array of results, one per position
@@ -187,18 +188,18 @@ describe('DLMM Liquidity Router Functions', () => {
           maxYLiquidityFee: 1000000n,
         }
       ];
-      
+
       const initialXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const initialYBalance = rovOk(mockUsdcToken.getBalance(alice));
-      
+
       const response = txOk(dlmmLiquidityRouter.addLiquidityMulti(
         positions
       ), alice);
-      
+
       const finalXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const finalYBalance = rovOk(mockUsdcToken.getBalance(alice));
       const lpReceived = cvToValue(response.result);
-      
+
       // Should use total amounts: 5000000n BTC and 2500000000n USDC
       expect(finalXBalance).toBeLessThan(initialXBalance);
       expect(finalYBalance).toBeLessThan(initialYBalance);
@@ -220,22 +221,22 @@ describe('DLMM Liquidity Router Functions', () => {
         maxXLiquidityFee: 1000000n,
         maxYLiquidityFee: 1000000n,
       }];
-      
+
       const response = txErr(dlmmLiquidityRouter.addLiquidityMulti(
         positions
       ), alice);
-      
+
       // The error comes from the core contract, not the router
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_MINIMUM_LP_AMOUNT);
     });
 
     it('should revert on empty positions list when adding liquidity', async () => {
       const positions: any[] = [];
-      
+
       const response = txErr(dlmmLiquidityRouter.addLiquidityMulti(
         positions
       ), alice);
-      
+
       // will add specific error when it is set
       expect(cvToValue(response.result)).toBeGreaterThan(0n);
     });
@@ -252,12 +253,12 @@ describe('DLMM Liquidity Router Functions', () => {
         maxXLiquidityFee: 1000000n,
         maxYLiquidityFee: 1000000n,
       }];
-      
+
       // This should fail at the core add-liquidity level with invalid amount
       const response = txErr(dlmmLiquidityRouter.addLiquidityMulti(
         positions
       ), alice);
-      
+
       // The error should propagate from the dlmm-core add-liquidity function
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_INVALID_AMOUNT);
     });
@@ -280,18 +281,18 @@ describe('DLMM Liquidity Router Functions', () => {
           maxYLiquidityFee: 1000000n,
         };
       });
-      
+
       const initialXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const initialYBalance = rovOk(mockUsdcToken.getBalance(alice));
-      
+
       const response = txOk(dlmmLiquidityRouter.addLiquidityMulti(
         positions
       ), alice);
-      
+
       const finalXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const finalYBalance = rovOk(mockUsdcToken.getBalance(alice));
       const lpReceived = cvToValue(response.result);
-      
+
       expect(finalXBalance).toBeLessThan(initialXBalance);
       expect(finalYBalance).toBeLessThan(initialYBalance);
       // lpReceived is an array of results, one per position
@@ -315,13 +316,13 @@ describe('DLMM Liquidity Router Functions', () => {
         maxXLiquidityFee: 1000000n,
         maxYLiquidityFee: 1000000n,
       }];
-      
+
       // In normal circumstances this should succeed
       // ERR_NO_RESULT_DATA would require internal fold failure
       const response = txOk(dlmmLiquidityRouter.addLiquidityMulti(
         positions
       ), alice);
-      
+
       const lpReceived = cvToValue(response.result);
       // result is an array of LP amounts
       expect(Array.isArray(lpReceived)).toBe(true);
@@ -380,18 +381,18 @@ describe('DLMM Liquidity Router Functions', () => {
         minXAmount: 1n,
         minYAmount: 1n,
       }];
-      
+
       const initialXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const initialYBalance = rovOk(mockUsdcToken.getBalance(alice));
-      
+
       const response = txOk(dlmmLiquidityRouter.withdrawLiquidityMulti(
         positions
       ), alice);
-      
+
       const finalXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const finalYBalance = rovOk(mockUsdcToken.getBalance(alice));
       const result = cvToValue(response.result);
-      
+
       // result is an array of {xAmount, yAmount} tuples
       expect(Array.isArray(result)).toBe(true);
       expect(result.length).toBe(1);
@@ -422,18 +423,18 @@ describe('DLMM Liquidity Router Functions', () => {
           minYAmount: 1n,
         }
       ];
-      
+
       const initialXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const initialYBalance = rovOk(mockUsdcToken.getBalance(alice));
-      
+
       const response = txOk(dlmmLiquidityRouter.withdrawLiquidityMulti(
         positions
       ), alice);
-      
+
       const finalXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const finalYBalance = rovOk(mockUsdcToken.getBalance(alice));
       const result = cvToValue(response.result);
-      
+
       // result is an array of {xAmount, yAmount} tuples
       expect(Array.isArray(result)).toBe(true);
       expect(result.length).toBe(2);
@@ -475,18 +476,18 @@ describe('DLMM Liquidity Router Functions', () => {
           minYAmount: 0n, // Bin 1 only has X
         }
       ];
-      
+
       const initialXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const initialYBalance = rovOk(mockUsdcToken.getBalance(alice));
-      
+
       const response = txOk(dlmmLiquidityRouter.withdrawLiquidityMulti(
         positions
       ), alice);
-      
+
       const finalXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const finalYBalance = rovOk(mockUsdcToken.getBalance(alice));
       const result = cvToValue(response.result);
-      
+
       // result is an array of {xAmount, yAmount} tuples
       expect(Array.isArray(result)).toBe(true);
       expect(result.length).toBe(positions.length);
@@ -519,18 +520,18 @@ describe('DLMM Liquidity Router Functions', () => {
         if (!pos.minXAmount) pos.minXAmount = 1n;
         if (!pos.minYAmount) pos.minYAmount = 1n;
       });
-      
+
       const initialXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const initialYBalance = rovOk(mockUsdcToken.getBalance(alice));
-      
+
       const response = txOk(dlmmLiquidityRouter.withdrawLiquidityMulti(
         positions
       ), alice);
-      
+
       const finalXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const finalYBalance = rovOk(mockUsdcToken.getBalance(alice));
       const result = cvToValue(response.result);
-      
+
       // result is an array of {xAmount, yAmount} tuples
       expect(Array.isArray(result)).toBe(true);
       expect(result.length).toBe(positions.length);
@@ -551,11 +552,11 @@ describe('DLMM Liquidity Router Functions', () => {
         minXAmount: 999999999999n, // Unreasonably high minimum
         minYAmount: 1n,
       }];
-      
+
       const response = txErr(dlmmLiquidityRouter.withdrawLiquidityMulti(
         positions
       ), alice);
-      
+
       // The error comes from the core contract, not the router
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_MINIMUM_X_AMOUNT);
     });
@@ -570,11 +571,11 @@ describe('DLMM Liquidity Router Functions', () => {
         minXAmount: 1n,
         minYAmount: 999999999999n, // Unreasonably high minimum
       }];
-      
+
       const response = txErr(dlmmLiquidityRouter.withdrawLiquidityMulti(
         positions
       ), alice);
-      
+
       // The error comes from the core contract, not the router
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_MINIMUM_Y_AMOUNT);
     });
@@ -582,7 +583,7 @@ describe('DLMM Liquidity Router Functions', () => {
     it('should not allow empty positions list when withdrawing liquidity', async () => {
       // this test will fail
       const positions: any[] = [];
-      
+
       const response = txErr(dlmmLiquidityRouter.withdrawLiquidityMulti(
         positions
       ), alice);
@@ -602,12 +603,12 @@ describe('DLMM Liquidity Router Functions', () => {
         minXAmount: 0n,
         minYAmount: 0n,
       }];
-      
+
       // This should fail at the core withdraw-liquidity level with invalid amount
       const response = txErr(dlmmLiquidityRouter.withdrawLiquidityMulti(
         positions
       ), alice);
-      
+
       // The error should propagate from the dlmm-core withdraw-liquidity function
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_INVALID_AMOUNT);
     });
@@ -644,18 +645,18 @@ describe('DLMM Liquidity Router Functions', () => {
           minYAmount: 0n, // Bin 1 only has X
         }
       ];
-      
+
       const initialXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const initialYBalance = rovOk(mockUsdcToken.getBalance(alice));
-      
+
       const response = txOk(dlmmLiquidityRouter.withdrawLiquidityMulti(
         positions
       ), alice);
-      
+
       const finalXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const finalYBalance = rovOk(mockUsdcToken.getBalance(alice));
       const result = cvToValue(response.result);
-      
+
       // result is an array of {xAmount, yAmount} tuples
       expect(Array.isArray(result)).toBe(true);
       expect(result.length).toBe(positions.length);
@@ -690,11 +691,11 @@ describe('DLMM Liquidity Router Functions', () => {
           minYAmount: 0n, // Bin 1 only has X
         }
       ];
-      
+
       const response = txOk(dlmmLiquidityRouter.withdrawLiquidityMulti(
         positions
       ), alice);
-      
+
       const result = cvToValue(response.result);
       expect(Array.isArray(result)).toBe(true);
       expect(result.length).toBe(2);
@@ -721,15 +722,15 @@ describe('DLMM Liquidity Router Functions', () => {
           maxYLiquidityFee: 1000000n,
         }
       ];
-      
+
       const addResponse = txOk(dlmmLiquidityRouter.addLiquidityMulti(
         addPositions
       ), alice);
-      
+
       const lpReceived = cvToValue(addResponse.result);
       expect(Array.isArray(lpReceived)).toBe(true);
       expect(lpReceived[0]).toBeGreaterThan(0n);
-      
+
       // Then withdraw part of the liquidity
       const withdrawPositions = [
         {
@@ -742,18 +743,18 @@ describe('DLMM Liquidity Router Functions', () => {
           minYAmount: 0n, // Don't expect Y tokens since bin 5 is above active
         }
       ];
-      
+
       const initialXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const initialYBalance = rovOk(mockUsdcToken.getBalance(alice));
-      
+
       const withdrawResponse = txOk(dlmmLiquidityRouter.withdrawLiquidityMulti(
         withdrawPositions
       ), alice);
-      
+
       const finalXBalance = rovOk(mockSbtcToken.getBalance(alice));
       const finalYBalance = rovOk(mockUsdcToken.getBalance(alice));
       const result = cvToValue(withdrawResponse.result);
-      
+
       expect(Array.isArray(result)).toBe(true);
       expect(result.length).toBe(1);
       expect(finalXBalance).toBeGreaterThan(initialXBalance);
@@ -778,13 +779,13 @@ describe('DLMM Liquidity Router Functions', () => {
         maxXLiquidityFee: 1000000n,
         maxYLiquidityFee: 1000000n,
       }];
-      
+
       const addResponse = txErr(dlmmLiquidityRouter.addLiquidityMulti(
         addPositions
       ), alice);
-      
+
       expect(cvToValue(addResponse.result)).toBe(errors.dlmmCore.ERR_NO_POOL_DATA);
-      
+
       // Test withdraw liquidity with failing pool
       const withdrawPositions = [{
         poolTrait: mockPool.identifier,
@@ -795,11 +796,11 @@ describe('DLMM Liquidity Router Functions', () => {
         minXAmount: 1n,
         minYAmount: 1n,
       }];
-      
+
       const withdrawResponse = txErr(dlmmLiquidityRouter.withdrawLiquidityMulti(
         withdrawPositions
       ), alice);
-      
+
       // The error comes from the core contract when pool doesn't exist
       expect(cvToValue(withdrawResponse.result)).toBe(errors.dlmmCore.ERR_NO_POOL_DATA);
     });
@@ -821,17 +822,17 @@ describe('DLMM Liquidity Router Functions', () => {
         maxXLiquidityFee: 1000000n,
         maxYLiquidityFee: 1000000n,
       }];
-      
+
       const response = txErr(dlmmLiquidityRouter.addLiquidityMulti(
         addPositions
       ), alice);
-      
+
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_INVALID_X_TOKEN);
     });
 
     it('should fail when adding liquidity with random Y token', async () => {
       const activeBinId = 0n;
-      
+
       // Mint random tokens for testing
       txOk(mockRandomToken.mint(10000000n, alice), deployer);
 
@@ -846,11 +847,11 @@ describe('DLMM Liquidity Router Functions', () => {
         maxXLiquidityFee: 1000000n,
         maxYLiquidityFee: 1000000n,
       }];
-      
+
       const response = txErr(dlmmLiquidityRouter.addLiquidityMulti(
         addPositions
       ), alice);
-      
+
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_INVALID_Y_TOKEN);
     });
 
@@ -879,11 +880,11 @@ describe('DLMM Liquidity Router Functions', () => {
         minXAmount: 1n,
         minYAmount: 1n,
       }];
-      
+
       const response = txErr(dlmmLiquidityRouter.withdrawLiquidityMulti(
         withdrawPositions
       ), alice);
-      
+
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_INVALID_X_TOKEN);
     });
 
@@ -911,11 +912,11 @@ describe('DLMM Liquidity Router Functions', () => {
         minXAmount: 1n,
         minYAmount: 1n,
       }];
-      
+
       const response = txErr(dlmmLiquidityRouter.withdrawLiquidityMulti(
         withdrawPositions
       ), alice);
-      
+
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_INVALID_Y_TOKEN);
     });
   });

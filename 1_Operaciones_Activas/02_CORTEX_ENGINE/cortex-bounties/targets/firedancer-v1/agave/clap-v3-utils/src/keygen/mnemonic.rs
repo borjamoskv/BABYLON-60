@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crate::{ArgConstant, keypair::prompt_passphrase},
     bip39::Language,

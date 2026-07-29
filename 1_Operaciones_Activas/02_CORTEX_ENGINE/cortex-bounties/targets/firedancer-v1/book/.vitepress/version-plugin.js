@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 function getLatestRelease(owner, repo) {
   const url = `https://api.github.com/repos/${owner}/${repo}/releases/latest`;
 

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { GeneratePriceOptions } from '@chainlink/tp-adapter'
 import { ForexPriceEndpoint } from '@chainlink/external-adapter-framework/adapter'
 import { InputParameters } from '@chainlink/external-adapter-framework/validation'

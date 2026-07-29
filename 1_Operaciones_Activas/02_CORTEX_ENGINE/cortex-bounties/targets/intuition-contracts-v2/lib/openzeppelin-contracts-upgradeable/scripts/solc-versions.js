@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { exec } = require('child_process');
 const semver = require('semver');
 const { range } = require('./helpers');

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {super::*, crate::translate_mut};
 
 fn mem_op_consume(invoke_context: &mut InvokeContext, n: u64) -> Result<(), Error> {

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { TypeFromDefinition } from '@chainlink/external-adapter-framework/validation/input-params'
 import type { BaseEndpointTypes } from '../endpoint/market-status'
 

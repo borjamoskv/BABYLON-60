@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{prelude::*, Accounts};
 use anchor_spl::token_interface::{self, Mint, TokenAccount, TokenInterface};
 
@@ -12,7 +13,7 @@ pub fn process(ctx: Context<SeedDepositOnInitReserve>) -> Result<()> {
     let reserve = &mut ctx.accounts.reserve.load_mut()?;
     let market = &ctx.accounts.lending_market.load()?;
 
-   
+
 
     require!(
         !reserve.has_initial_deposit(),
@@ -31,7 +32,7 @@ pub fn process(ctx: Context<SeedDepositOnInitReserve>) -> Result<()> {
     reserve.liquidity.total_available_amount = market.min_initial_deposit_amount;
     reserve.collateral.mint_total_supply = market.min_initial_deposit_amount;
 
-   
+
     token_transfer::deposit_initial_reserve_liquidity_transfer(
         ctx.accounts.initial_liquidity_source.to_account_info(),
         ctx.accounts.reserve_liquidity_supply.to_account_info(),

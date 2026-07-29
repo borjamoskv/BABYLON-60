@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import argparse
 import json
 import time
@@ -139,7 +140,7 @@ def send_round_of_txs(txs: List[Transaction], sock, tpus):
 
 def fund_config_account( funder, lamports, recent_blockhash, range ):
     tx = Transaction(recent_blockhash, None, funder.pubkey(),[set_compute_unit_price(3), set_compute_unit_limit(300_000)])
-    tx = tx.add(create_account(CreateAccountParams(from_pubkey=funder.pubkey(), to_pubkey=config_acc.pubkey(), 
+    tx = tx.add(create_account(CreateAccountParams(from_pubkey=funder.pubkey(), to_pubkey=config_acc.pubkey(),
                                                    lamports=lamports+range, space=16, owner=NANO_TOKEN_ID)))
     zero = 0
     data = zero.to_bytes(length=8, byteorder="little", signed=False) # 0 discrim
@@ -155,15 +156,15 @@ def fund_config_account( funder, lamports, recent_blockhash, range ):
 
 def fund_nano_mint_account( funder, lamports, recent_blockhash, range ):
     tx = Transaction(recent_blockhash, None, funder.pubkey(),[set_compute_unit_price(100), set_compute_unit_limit(300_000)])
-    tx = tx.add(create_account(CreateAccountParams(from_pubkey=funder.pubkey(), to_pubkey=nano_mint.pubkey(), 
+    tx = tx.add(create_account(CreateAccountParams(from_pubkey=funder.pubkey(), to_pubkey=nano_mint.pubkey(),
                                                    lamports=lamports+range, space=64, owner=NANO_TOKEN_ID)))
-    one   = 1 
+    one   = 1
     dec   = 9
     data1 = one.to_bytes(length=8, byteorder="little", signed=False) # 0 discrim
     data2 = bytes(funder.pubkey())
     data3 = dec.to_bytes(length=8, byteorder="little", signed=False)
     data  = data1 + data2 + data3
-    keys  = [ 
+    keys  = [
         AccountMeta(pubkey=nano_mint.pubkey(),  is_signer=False, is_writable=True),
         AccountMeta(pubkey=config_acc.pubkey(), is_signer=False, is_writable=True),
         AccountMeta(pubkey=SYS_PROGRAM_ID,      is_signer=False, is_writable=False),
@@ -178,9 +179,9 @@ def fund_nano_mint_account( funder, lamports, recent_blockhash, range ):
 
 def fund_token_account(funder, lamports, recent_blockhash, is_print, range ):
     tx = Transaction(recent_blockhash, None, funder.pubkey(),[set_compute_unit_price(random.randint(1,8)), set_compute_unit_limit(200_000)])
-    tx = tx.add(create_account(CreateAccountParams(from_pubkey=funder.pubkey(), to_pubkey=fd_mint.pubkey(), 
+    tx = tx.add(create_account(CreateAccountParams(from_pubkey=funder.pubkey(), to_pubkey=fd_mint.pubkey(),
                                                    lamports=lamports+range, space=MINT_LAYOUT.sizeof(), owner=TOKEN_PROGRAM_ID)))
-    
+
 
     params = InitializeMintParams(
         decimals=9,
@@ -189,7 +190,7 @@ def fund_token_account(funder, lamports, recent_blockhash, is_print, range ):
         program_id=TOKEN_PROGRAM_ID
     )
     tx = tx.add(initialize_mint( params ))
-    tx.sign(funder, fd_mint ) 
+    tx.sign(funder, fd_mint )
 
     return tx
 
@@ -206,18 +207,18 @@ def create_accounts_tx(funder, lamports, recent_blockhash, txn_type, accs):
         if txn_type == TXN_TYPE_TOKEN_TRANSFER:
             tx = tx.add(create_associated_token_account(payer=funder.pubkey(), owner=acc.pubkey(), mint=fd_mint.pubkey()))
             ata = get_associated_token_address(acc.pubkey(), fd_mint.pubkey())
-            tx = tx.add( mint_to( MintToParams( mint=fd_mint.pubkey(), 
-                                                dest=ata, 
-                                                mint_authority=funder.pubkey(), 
+            tx = tx.add( mint_to( MintToParams( mint=fd_mint.pubkey(),
+                                                dest=ata,
+                                                mint_authority=funder.pubkey(),
                                                 amount=100,
-                                                program_id=TOKEN_PROGRAM_ID, 
+                                                program_id=TOKEN_PROGRAM_ID,
                                                 signers=[funder.pubkey()] ) ) )
-      
+
         # Nano Token Program Setup *********************************************
         if txn_type == TXN_TYPE_NANO_TOKEN_TRANSFER:
             # Create nano token ATA
             Rent.default().minimum_balance(56)
-           
+
             # First derive the token address using the mint id and the account pubkey
             zero   = 1
             seeds1 = zero.to_bytes(8, byteorder="little", signed=False) # mint
@@ -226,7 +227,7 @@ def create_accounts_tx(funder, lamports, recent_blockhash, txn_type, accs):
             nano_ata, nano_ata_bump = Pubkey.find_program_address( seeds=seeds, program_id=NANO_TOKEN_ID )
             # data sz = owner + mint + bump (32 + 8 + 8 = 48) + 8 = 56
             tag   = 2
-            data1 = tag.to_bytes(8, byteorder="little", signed=False) 
+            data1 = tag.to_bytes(8, byteorder="little", signed=False)
             data2 = bytes(acc.pubkey())
             data3 = seeds1
             data4 = nano_ata_bump.to_bytes(8, byteorder="little", signed=False)
@@ -254,7 +255,7 @@ def create_accounts_tx(funder, lamports, recent_blockhash, txn_type, accs):
             ]
             insn = Instruction(accounts=keys, program_id=NANO_TOKEN_ID, data=data)
             tx.add(insn)
-    tx.sign(funder) 
+    tx.sign(funder)
     return tx
 
 def get_balance_sufficient(lamports, rpc: str, acc):
@@ -330,7 +331,7 @@ def create_accounts(funder, rpc, num_accs, lamports, seed, sock, tpus, txn_type)
         if txn_type == TXN_TYPE_NANO_TOKEN_TRANSFER and not get_account_info(rpc, config_acc.pubkey()):
             recent_blockhash = get_recent_blockhash(rpc)
             txs = pqdm([i for i in range(100)], partial(fund_config_account, funder, lamports, recent_blockhash), desc="fund config", n_jobs=32)
-            send_round_of_txs(txs, sock, tpus) 
+            send_round_of_txs(txs, sock, tpus)
 
         if txn_type == TXN_TYPE_NANO_TOKEN_TRANSFER and not get_account_info(rpc, nano_mint.pubkey()):
             recent_blockhash = get_recent_blockhash(rpc)
@@ -358,7 +359,7 @@ def gen_tx_token_transfer(recent_blockhash, key, acc, cu_price):
   ata = get_associated_token_address(key.pubkey(), fd_mint.pubkey())
   params = SplTransferParams( program_id=TOKEN_PROGRAM_ID,
                               source=ata,
-                              dest=ata, 
+                              dest=ata,
                               owner=key.pubkey(),
                               amount=1 )
   tx = tx.add( spl_transfer(params) )
@@ -379,7 +380,7 @@ def gen_tx_nano_token_transfer(recent_blockhash, src_key, dst_key, src_acc, dst_
   src_nano_ata, _ = Pubkey.find_program_address( seeds=src_seeds, program_id=NANO_TOKEN_ID )
   dst_nano_ata, _ = Pubkey.find_program_address( seeds=dst_seeds, program_id=NANO_TOKEN_ID )
 
-  # Construct the instruction data 
+  # Construct the instruction data
   amt   = 1 # Token `transfer` amount
   # data1 = tag.to_bytes(8, byteorder="little", signed=False)
   data2 = amt.to_bytes(8, byteorder="little", signed=False)

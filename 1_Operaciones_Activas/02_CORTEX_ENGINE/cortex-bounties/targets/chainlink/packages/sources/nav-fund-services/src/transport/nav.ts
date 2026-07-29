@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { BaseEndpointTypes, inputParameters } from '../endpoint/nav'
 import { ACCOUNTING_DATE_KEY, getFund, NAV_PER_SHARE_KEY, NEXT_NAV_PRICE_KEY } from './fund'
 import { getFundDates } from './fund-dates'

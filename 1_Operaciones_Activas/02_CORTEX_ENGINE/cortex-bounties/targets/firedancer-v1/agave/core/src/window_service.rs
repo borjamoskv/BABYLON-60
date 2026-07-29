@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! `window_service` handles the data plane incoming shreds, storing them in
 //!   blockstore and retransmitting where required
 //!

@@ -1,7 +1,8 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 //! Integration tests for flash liquidation functionality.
-//! 
+//!
 //! Tests the router's two-step liquidation process (prepare_liquidation + execute_liquidation).
 
 use crate::gas_tracking::{CPU_LIMIT, MEM_LIMIT, READ_BYTES_LIMIT};
@@ -178,9 +179,9 @@ fn test_flash_liquidation_atomic() {
     println!("Write Entries: {}", liquidation_write_entries);
     println!("Read Bytes: {}", liquidation_read_bytes);
     println!("Write Bytes: {}", liquidation_write_bytes);
-    println!("Limits - CPU: {}, Memory: {}, Read bytes: {}", 
-        CPU_LIMIT, 
-        MEM_LIMIT, 
+    println!("Limits - CPU: {}, Memory: {}, Read bytes: {}",
+        CPU_LIMIT,
+        MEM_LIMIT,
         READ_BYTES_LIMIT);
 
     // Verify CPU and memory stayed within limits (primary budget concerns)
@@ -206,14 +207,14 @@ fn test_flash_liquidation_atomic() {
     let account_data_after = protocol
         .kinetic_router
         .get_user_account_data(&protocol.user);
-    
+
     assert!(
         account_data_after.total_debt_base < account_data_after_crash.total_debt_base,
         "User's debt should decrease after liquidation. Before: {}, After: {}",
         account_data_after_crash.total_debt_base,
         account_data_after.total_debt_base
     );
-    
+
     // Verify debt was repaid
     let user_debt_after = protocol.usdt_debt_token.balance(&protocol.user);
     assert!(

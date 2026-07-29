@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module defines [`SendTransactionStats`] which is used to collect
 //! statistics about relevant network events. This will aggregate
 //! events from all transactions and all leaders. Stats can be reset at

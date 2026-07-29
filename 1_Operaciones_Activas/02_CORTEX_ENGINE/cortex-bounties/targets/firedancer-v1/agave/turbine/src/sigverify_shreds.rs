@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crate::{
         cluster_nodes::{ClusterNodesCache, DATA_PLANE_FANOUT, check_feature_activation},

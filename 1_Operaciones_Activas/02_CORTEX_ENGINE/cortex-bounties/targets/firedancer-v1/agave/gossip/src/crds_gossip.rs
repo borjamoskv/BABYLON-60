@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Crds Gossip.
 //!
 //! This module ties together Crds and the push and pull gossip overlays.  The interface is

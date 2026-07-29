@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::{calculation, storage};
 use k2_shared::*;
 use soroban_sdk::{symbol_short, Address, Env, IntoVal, Symbol, Vec};
@@ -39,11 +40,11 @@ pub fn collect_protocol_reserves(
     // Available liquidity = what should be in the contract (total_supply - total_borrow)
     // This is the amount that suppliers can claim minus what borrowers owe
     // Reserves = actual balance - available liquidity
-    
+
     if total_borrow > total_supply {
         return Err(KineticRouterError::InvalidAmount);
     }
-    
+
     let available_liquidity = total_supply - total_borrow;
     let available_reserves = if underlying_balance > available_liquidity {
         underlying_balance - available_liquidity

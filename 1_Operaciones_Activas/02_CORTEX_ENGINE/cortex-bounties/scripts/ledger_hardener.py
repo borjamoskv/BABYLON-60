@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import json
 import os
 import hashlib
@@ -18,7 +19,7 @@ def harden_ledger():
     # Backup
     with open(LEDGER_PATH, 'r') as f:
         lines = f.readlines()
-    
+
     with open(BACKUP_PATH, 'w') as f:
         f.writelines(lines)
 
@@ -28,11 +29,11 @@ def harden_ledger():
             continue
         try:
             entry = json.loads(line)
-            
+
             # Standardize fields
             target = entry.get('target', entry.get('target_name', 'Unknown'))
             strike_id = entry.get('id', entry.get('issue_id', generate_id(entry)))
-            
+
             hardened = {
                 "id": strike_id,
                 "intent_id": entry.get('intent_id', f"INTENT-{strike_id}"),
@@ -48,7 +49,7 @@ def harden_ledger():
                 "pdr_hash": entry.get('pdr_hash', hashlib.sha256(line.encode()).hexdigest()),
                 "evidence": entry.get('evidence', [])
             }
-            
+
             # Special handling for known targets
             if "K2" in target:
                 hardened["chain_id"] = "stellar-pubnet" if "Stellar" in target else "kinetic-evm"

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { EventBus } = require('./eventBus');
 const { Neo4jStore } = require('./neo4j');
 

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import objectPath from 'object-path'
 import { RequestParams } from '../endpoint/reserves'
 import { FixedPoint, getFixedPointFromResult } from '../utils/fixed-point'

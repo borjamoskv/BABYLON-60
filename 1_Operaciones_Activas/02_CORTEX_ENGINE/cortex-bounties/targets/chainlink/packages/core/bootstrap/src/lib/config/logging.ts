@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // List of default and custom env vars that need to be redacted when logging
 export const configRedactEnvVars = [
   'API_KEY',

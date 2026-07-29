@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from hashlib import sha256
 
 from eth_consensus_specs.test.helpers.constants import (

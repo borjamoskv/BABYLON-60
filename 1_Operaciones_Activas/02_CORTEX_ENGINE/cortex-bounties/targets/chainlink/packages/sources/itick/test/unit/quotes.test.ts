@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { createAdapterResponseFromMessage } from '../../src/transport/quotes'
 
 describe('quotes', () => {

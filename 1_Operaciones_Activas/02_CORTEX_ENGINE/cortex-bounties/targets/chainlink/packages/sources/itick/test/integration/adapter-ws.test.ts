@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { SettingsDefinitionFromConfig } from '@chainlink/external-adapter-framework/config'
 import { WebSocketClassProvider } from '@chainlink/external-adapter-framework/transports'
 import {

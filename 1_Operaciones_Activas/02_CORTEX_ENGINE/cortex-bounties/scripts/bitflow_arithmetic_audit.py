@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import math
 from decimal import getcontext
 
@@ -38,25 +39,25 @@ def calculate_withdraw(amount_to_burn, balance, bin_shares):
 
 def audit_rounding_asymmetry():
     print("--- Auditing Rounding Asymmetry ---")
-    
+
     # Case 1: Minimal Liquidity Addition
     bin_price = 50000000 # 0.5 ratio
     x_add = 1000
     y_add = 0
-    
+
     val = get_liquidity_value(x_add, y_add, bin_price)
     shares = calculate_dlp(val, 0, 0)
-    
+
     print(f"Initial: x={x_add}, y={y_add}, price={bin_price}")
     print(f"Liquidity Value: {val}")
     print(f"Shares Minted: {shares}")
-    
+
     # Case 2: Immediate Withdrawal
     x_out = calculate_withdraw(shares, x_add, shares)
     y_out = calculate_withdraw(shares, y_add, shares)
-    
+
     print(f"Withdraw: x={x_out}, y={y_out}")
-    
+
     if x_out < x_add or y_out < y_add:
         print(f"LOSS DETECTED: x_loss={x_add - x_out}, y_loss={y_add - y_out}")
     else:
@@ -68,28 +69,28 @@ def audit_rounding_asymmetry():
     val_dep = get_liquidity_value(x_dep, 0, bin_price)
     shares_dep = calculate_dlp(val_dep, 0, 0)
     print(f"\nSmall Deposit x={x_dep} -> Shares={shares_dep}")
-    
+
     # If shares_dep is 0, user loses everything.
     # val_dep = 50000000 * 1 = 50,000,000
     # sqrt(50,000,000) = 7071
-    
+
     # Case 4: Rounding Down in Withdraw
     # Deposit 1,000,001. Shares minted.
     # Another user deposits.
     # Total shares increases.
     # Withdraw 1 share.
-    
+
     x_pool = 1000000
     y_pool = 1000000
     total_shares = calculate_dlp(get_liquidity_value(x_pool, y_pool, bin_price), 0, 0)
-    
+
     # User withdraws 1 share
     x_withdraw_1 = calculate_withdraw(1, x_pool, total_shares)
     y_withdraw_1 = calculate_withdraw(1, y_pool, total_shares)
-    
+
     print(f"\nPool: x={x_pool}, y={y_pool}, Total Shares={total_shares}")
     print(f"Withdraw 1 share -> x={x_withdraw_1}, y={y_withdraw_1}")
-    
+
     if x_withdraw_1 == 0 and y_withdraw_1 == 0:
         print("Invariance Violation: User burned 1 share for 0 assets.")
 

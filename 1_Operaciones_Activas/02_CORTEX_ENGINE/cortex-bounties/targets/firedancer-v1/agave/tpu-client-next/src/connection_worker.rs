@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module defines [`ConnectionWorker`] which encapsulates the functionality
 //! needed to handle one connection within the scope of task.
 

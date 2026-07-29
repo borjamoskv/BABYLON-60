@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { config } from '../config'
 import { ethers } from 'ethers'
 import { staderNetworkChainMap } from './utils'

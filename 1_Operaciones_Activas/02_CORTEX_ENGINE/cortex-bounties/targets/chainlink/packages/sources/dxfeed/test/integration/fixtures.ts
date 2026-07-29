@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { MockWebsocketServer } from '@chainlink/external-adapter-framework/util/testing-utils'
 import nock from 'nock'
 export function mockPriceEndpoint(): nock.Scope {

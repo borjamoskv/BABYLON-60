@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { argv } from "process";
 import { readFileSync } from "fs";
 

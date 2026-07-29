@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::storage;
 use k2_shared::{Asset, KineticRouterError, OracleConfig, PriceData, MAX_RESERVES};
 use soroban_sdk::{Address, Env, IntoVal, Map, Symbol, Vec};
@@ -53,7 +54,7 @@ pub fn get_prices_for_assets(
     }
 
     let args = soroban_sdk::vec![env, assets_vec.into_val(env)];
-    
+
     let price_result = env.try_invoke_contract::<Vec<PriceData>, KineticRouterError>(
         &price_oracle_address,
         &Symbol::new(env, "get_asset_prices_vec"),
@@ -74,10 +75,10 @@ pub fn get_prices_for_assets(
     for i in 0..assets.len().min(MAX_RESERVES) {
         let asset = assets.get(i).ok_or(KineticRouterError::ReserveNotFound)?;
         let price_data = prices_vec.get(i).ok_or(KineticRouterError::PriceOracleError)?;
-        
+
         // Validate price freshness for each price in batch (M-07: per-asset threshold)
         validate_price_freshness(env, price_data.timestamp, Some(&asset))?;
-        
+
         price_map.set(asset, price_data.price);
     }
 
@@ -97,7 +98,7 @@ pub fn verify_oracle_price_exists_and_nonzero(
     assets_vec.push_back(asset_type);
 
     let args = soroban_sdk::vec![env, assets_vec.into_val(env)];
-    
+
     let price_result = env.try_invoke_contract::<Vec<PriceData>, KineticRouterError>(
         &price_oracle_address,
         &Symbol::new(env, "get_asset_prices_vec"),

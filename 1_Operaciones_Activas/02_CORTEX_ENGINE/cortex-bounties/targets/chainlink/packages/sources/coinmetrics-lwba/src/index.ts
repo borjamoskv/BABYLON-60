@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { makeConfig } from '@chainlink/coinmetrics-adapter/config'
 import { endpoint } from '@chainlink/coinmetrics-adapter/endpoint/lwba'
 import { expose, ServerInstance } from '@chainlink/external-adapter-framework'

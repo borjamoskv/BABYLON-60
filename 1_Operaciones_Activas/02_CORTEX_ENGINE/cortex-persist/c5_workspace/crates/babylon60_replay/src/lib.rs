@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use babylon60_hardware_stub as hardware;
 use babylon60_chaos::generate_event;
 use babylon60_rs::KernelTrait;

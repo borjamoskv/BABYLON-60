@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as price from './price'
 
 export type TInputParameters = price.TInputParameters

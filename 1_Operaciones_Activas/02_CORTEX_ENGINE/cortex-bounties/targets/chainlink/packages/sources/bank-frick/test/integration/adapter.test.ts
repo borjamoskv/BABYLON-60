@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { config } from '../../src/config'
 import { mockAccountsSuccess, mockAuthorizeSuccess } from './fixtures'
 import {

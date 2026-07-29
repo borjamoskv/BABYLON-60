@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /* A test double for the server side of the NetDania API
  * This should be used in integration tests to simulate the NetDania API.
  * It is used in XmlHttpRequest mocks but should remain agnostic of particular test libraries.

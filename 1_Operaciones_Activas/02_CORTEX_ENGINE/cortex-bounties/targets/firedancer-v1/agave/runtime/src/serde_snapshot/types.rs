@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {solana_accounts_db::accounts_hash::AccountsLtHash, solana_lattice_hash::lt_hash::LtHash};
 
 /// Snapshot serde-safe AccountsLtHash

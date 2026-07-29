@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Contract, JsonRpcProvider } from 'ethers'
 import ABI from '../config/ABI.json'
 import AccessControlledOCR2Aggregator from '../config/AccessControlledOCR2Aggregator.json'

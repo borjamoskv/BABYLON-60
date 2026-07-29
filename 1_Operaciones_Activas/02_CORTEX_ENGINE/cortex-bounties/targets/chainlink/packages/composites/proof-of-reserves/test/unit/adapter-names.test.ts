@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as adaBalance from '@chainlink/ada-balance-adapter'
 import * as amberdata from '@chainlink/amberdata-adapter'
 import { adapter as avalanchePlatform } from '@chainlink/avalanche-platform-adapter'

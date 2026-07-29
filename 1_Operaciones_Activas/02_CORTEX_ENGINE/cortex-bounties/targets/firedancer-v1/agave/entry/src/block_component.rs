@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /// Block components using wincode serialization.
 ///
 /// A `BlockComponent` represents either an entry batch or a special block marker.

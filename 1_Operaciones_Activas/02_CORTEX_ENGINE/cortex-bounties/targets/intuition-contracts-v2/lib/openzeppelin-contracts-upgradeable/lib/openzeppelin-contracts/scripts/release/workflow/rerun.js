@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 module.exports = ({ github, context }) =>
   github.rest.actions.createWorkflowDispatch({
     owner: context.repo.owner,

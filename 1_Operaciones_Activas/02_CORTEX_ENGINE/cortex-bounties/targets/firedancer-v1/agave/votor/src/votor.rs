@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The entrypoint into votor the module responsible for voting, rooting, and notifying
 //! the core to create a new block.
 //! ```text

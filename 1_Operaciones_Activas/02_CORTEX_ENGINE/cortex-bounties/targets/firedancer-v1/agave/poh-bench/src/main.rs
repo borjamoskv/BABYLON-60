@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![allow(clippy::arithmetic_side_effects)]
 #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
 use solana_entry::entry::{self, EntrySlice, create_ticks, init_poh};

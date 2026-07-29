@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `poh_service` module implements a service that records the passing of
 //! "ticks", a measure of time in the PoH stream
 use {

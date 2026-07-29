@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 
 import type { TypedAbiArg, TypedAbiFunction, TypedAbiMap, TypedAbiVariable, Response } from '@clarigen/core';
 
@@ -34,14 +35,14 @@ export const contracts = {
     setYFeesMulti: {"name":"set-y-fees-multi","access":"public","args":[{"name":"pool-traits","type":{"list":{"type":"trait_reference","length":120}}},{"name":"protocol-fees","type":{"list":{"type":"uint128","length":120}}},{"name":"provider-fees","type":{"list":{"type":"uint128","length":120}}}],"outputs":{"type":{"response":{"ok":{"list":{"type":{"response":{"ok":"bool","error":"uint128"}},"length":120}},"error":"none"}}}} as TypedAbiFunction<[poolTraits: TypedAbiArg<string[], "poolTraits">, protocolFees: TypedAbiArg<number | bigint[], "protocolFees">, providerFees: TypedAbiArg<number | bigint[], "providerFees">], Response<Response<boolean, bigint>[], null>>
   },
   "maps": {
-    
+
   },
   "variables": {
-    
+
   },
   constants: {},
   "non_fungible_tokens": [
-    
+
   ],
   "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
   contractName: 'dlmm-core-multi-helper-v-1-1',
@@ -1128,7 +1129,7 @@ dlmmCoreV11: {
   verifiedPoolCodeHashesHelper: Uint8Array.from([])
 },
   "non_fungible_tokens": [
-    
+
   ],
   "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
   contractName: 'dlmm-core-v-1-1',
@@ -1393,7 +1394,7 @@ dlmmLiquidityRouterV11: {
 }, bigint>>
   },
   "maps": {
-    
+
   },
   "variables": {
     ERR_ACTIVE_BIN_TOLERANCE: {
@@ -1524,7 +1525,7 @@ dlmmLiquidityRouterV11: {
   MIN_BIN_ID: -500n
 },
   "non_fungible_tokens": [
-    
+
   ],
   "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
   contractName: 'dlmm-liquidity-router-v-1-1',
@@ -2025,17 +2026,17 @@ dlmmPoolSbtcUsdcV11: {
   },
 dlmmPoolTraitV11: {
   "functions": {
-    
+
   },
   "maps": {
-    
+
   },
   "variables": {
-    
+
   },
   constants: {},
   "non_fungible_tokens": [
-    
+
   ],
   "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
   contractName: 'dlmm-pool-trait-v-1-1',
@@ -2610,24 +2611,24 @@ dlmmStakingSbtcUsdcV11: {
   totalRewardsClaimed: 0n
 },
   "non_fungible_tokens": [
-    
+
   ],
   "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
   contractName: 'dlmm-staking-sbtc-usdc-v-1-1',
   },
 dlmmStakingTraitV11: {
   "functions": {
-    
+
   },
   "maps": {
-    
+
   },
   "variables": {
-    
+
   },
   constants: {},
   "non_fungible_tokens": [
-    
+
   ],
   "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
   contractName: 'dlmm-staking-trait-v-1-1',
@@ -2781,7 +2782,7 @@ dlmmSwapRouterV11: {
 }, bigint>>
   },
   "maps": {
-    
+
   },
   "variables": {
     BIN_INDEX_RANGE: {
@@ -3288,7 +3289,7 @@ dlmmSwapRouterV11: {
   MIN_BIN_ID: -500n
 },
   "non_fungible_tokens": [
-    
+
   ],
   "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
   contractName: 'dlmm-swap-router-v-1-1',
@@ -3734,7 +3735,7 @@ mockRandomToken: {
     getTotalSupply: {"name":"get-total-supply","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>
   },
   "maps": {
-    
+
   },
   "variables": {
     ERR_INVALID_AMOUNT: {
@@ -3821,7 +3822,7 @@ mockRandomToken: {
   tokenUri: 'https://random.token'
 },
   "non_fungible_tokens": [
-    
+
   ],
   "fungible_tokens":[{"name":"random-token"}],"epoch":"Epoch33","clarity_version":"Clarity4",
   contractName: 'mock-random-token',
@@ -3838,7 +3839,7 @@ mockSbtcToken: {
     getTotalSupply: {"name":"get-total-supply","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>
   },
   "maps": {
-    
+
   },
   "variables": {
     contractOwner: {
@@ -3893,7 +3894,7 @@ mockSbtcToken: {
   }
 },
   "non_fungible_tokens": [
-    
+
   ],
   "fungible_tokens":[{"name":"sbtc"}],"epoch":"Epoch33","clarity_version":"Clarity4",
   contractName: 'mock-sbtc-token',
@@ -3910,7 +3911,7 @@ mockUsdcToken: {
     getTotalSupply: {"name":"get-total-supply","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>
   },
   "maps": {
-    
+
   },
   "variables": {
     contractOwner: {
@@ -3965,58 +3966,58 @@ mockUsdcToken: {
   }
 },
   "non_fungible_tokens": [
-    
+
   ],
   "fungible_tokens":[{"name":"usdc"}],"epoch":"Epoch33","clarity_version":"Clarity4",
   contractName: 'mock-usdc-token',
   },
 sip010TraitFtStandardV11: {
   "functions": {
-    
+
   },
   "maps": {
-    
+
   },
   "variables": {
-    
+
   },
   constants: {},
   "non_fungible_tokens": [
-    
+
   ],
   "fungible_tokens":[],"epoch":"Epoch30","clarity_version":"Clarity3",
   contractName: 'sip-010-trait-ft-standard-v-1-1',
   },
 sip013TraitSftStandardV11: {
   "functions": {
-    
+
   },
   "maps": {
-    
+
   },
   "variables": {
-    
+
   },
   constants: {},
   "non_fungible_tokens": [
-    
+
   ],
   "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
   contractName: 'sip-013-trait-sft-standard-v-1-1',
   },
 sip013TransferManyTraitV11: {
   "functions": {
-    
+
   },
   "maps": {
-    
+
   },
   "variables": {
-    
+
   },
   constants: {},
   "non_fungible_tokens": [
-    
+
   ],
   "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
   contractName: 'sip-013-transfer-many-trait-v-1-1',
@@ -4035,7 +4036,7 @@ tokenStxV11: {
     getTotalSupply: {"name":"get-total-supply","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>
   },
   "maps": {
-    
+
   },
   "variables": {
     ERR_INVALID_AMOUNT: {
@@ -4142,7 +4143,7 @@ tokenStxV11: {
   tokenUri: ''
 },
   "non_fungible_tokens": [
-    
+
   ],
   "fungible_tokens":[],"epoch":"Epoch30","clarity_version":"Clarity3",
   contractName: 'token-stx-v-1-1',
@@ -4166,4 +4167,4 @@ export const project = {
   contracts,
   deployments,
 } as const;
-  
+

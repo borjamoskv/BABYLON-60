@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 use k2_shared::{
@@ -36,7 +37,7 @@ impl ReflectorStub {
         };
 
         let timestamp = env.ledger().timestamp();
-        
+
         Some(ReflectorPriceData {
             price: price as i128,  // Convert u128 to i128 for Reflector compatibility
             timestamp,

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { decodeReport, generateAuthHeaders } from '@chainlink/data-streams-sdk'
 import { makeLogger } from '@chainlink/external-adapter-framework/util'
 import { createDataEngineTransport } from '../../src/transport/wsTransportBase'

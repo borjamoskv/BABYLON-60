@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{prelude::*, Accounts};
 use anchor_spl::token_interface::Mint;
 
@@ -84,14 +85,14 @@ pub fn check_obligation_seeds(
             );
         }
         1 => {
-           
+
             let _mint1_check =
                 Mint::try_deserialize(&mut seed1_account.data.borrow().as_ref()).unwrap();
             let _mint2_check =
                 Mint::try_deserialize(&mut seed2_account.data.borrow().as_ref()).unwrap();
         }
         2 => {
-           
+
             let _mint_check =
                 Mint::try_deserialize(&mut seed1_account.data.borrow().as_ref()).unwrap();
             require!(
@@ -100,7 +101,7 @@ pub fn check_obligation_seeds(
             )
         }
         3 => {
-           
+
             let _mint1_check =
                 Mint::try_deserialize(&mut seed1_account.data.borrow().as_ref()).unwrap();
             let _mint2_check =

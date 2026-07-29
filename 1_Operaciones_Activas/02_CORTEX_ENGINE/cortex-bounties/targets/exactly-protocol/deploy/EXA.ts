@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { MerkleTree } from "merkletreejs";
 import type { DeployFunction } from "hardhat-deploy/types";
 import type { EXA, EscrowedEXA } from "../types";

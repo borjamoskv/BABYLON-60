@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env node
 
 // Synchronizes the version in contracts/package.json with the one in package.json.

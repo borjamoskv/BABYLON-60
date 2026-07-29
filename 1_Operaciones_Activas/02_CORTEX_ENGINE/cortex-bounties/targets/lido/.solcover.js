@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 module.exports = {
   istanbulReporter: ["html", "text", "cobertura"],
   // NOTE: those is are all relative paths to the `contracts` directory and does not support regex

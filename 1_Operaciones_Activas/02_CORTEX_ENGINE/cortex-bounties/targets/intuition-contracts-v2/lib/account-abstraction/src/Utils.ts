@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Interface, JsonFragment } from '@ethersproject/abi'
 
 export function getERC165InterfaceID (abi: JsonFragment[]): string {

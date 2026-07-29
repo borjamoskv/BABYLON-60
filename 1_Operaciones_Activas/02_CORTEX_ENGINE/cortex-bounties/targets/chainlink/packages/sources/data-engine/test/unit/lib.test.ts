@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { getCryptoPrice, getDeutscheBoersePrice, getExchangeRate, getRwaPrice } from '../../src/lib'
 
 describe('lib.ts', () => {

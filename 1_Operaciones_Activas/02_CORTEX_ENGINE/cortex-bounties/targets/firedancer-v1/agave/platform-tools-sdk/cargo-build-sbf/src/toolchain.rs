@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crate::{Config, home_dir, utils::spawn},
     bzip2::bufread::BzDecoder,

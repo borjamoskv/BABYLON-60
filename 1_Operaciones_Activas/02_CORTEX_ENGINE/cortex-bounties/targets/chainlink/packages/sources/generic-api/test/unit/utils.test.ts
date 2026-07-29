@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { TypeFromDefinition } from '@chainlink/external-adapter-framework/validation/input-params'
 import { BaseEndpointTypes as SinglePathEndpointTypes } from '../../src/endpoint/http'
 import { BaseEndpointTypes as MultiPathEndpointTypes } from '../../src/endpoint/multi-http'

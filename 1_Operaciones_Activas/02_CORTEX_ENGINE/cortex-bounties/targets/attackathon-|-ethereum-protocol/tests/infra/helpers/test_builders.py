@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """Unit tests for builder helper functions."""
 
 from unittest.mock import MagicMock

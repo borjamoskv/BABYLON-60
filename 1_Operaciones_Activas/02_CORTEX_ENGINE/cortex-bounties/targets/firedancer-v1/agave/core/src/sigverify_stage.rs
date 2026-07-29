@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `sigverify_stage` implements the signature verification stage of the TPU. It
 //! receives a list of lists of packets and outputs the same list, but tags each
 //! top-level list with a list of booleans, telling the next stage whether the

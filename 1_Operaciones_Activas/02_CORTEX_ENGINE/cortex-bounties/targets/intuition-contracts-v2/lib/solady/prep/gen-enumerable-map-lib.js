@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env node
 const { genSectionRegex, readSync, writeAndFmtSync, normalizeNewlines, hexNoPrefix } = require('./common.js');
 
@@ -7,7 +8,7 @@ async function main() {
   let src = readSync(srcPath);
 
   const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
-  
+
   const mapType = (f, t) => capitalize(f) + 'To' + capitalize(t) + 'Map';
 
   const crossForEach = (a, fn) => a.forEach(x => a.forEach(y => fn(x, y)));

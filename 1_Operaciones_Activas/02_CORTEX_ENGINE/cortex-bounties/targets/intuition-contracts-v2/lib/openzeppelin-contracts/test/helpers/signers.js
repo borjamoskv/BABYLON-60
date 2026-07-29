@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { ethers } = require('ethers');
 const { secp256r1 } = require('@noble/curves/p256');
 const { generateKeyPairSync, privateEncrypt } = require('crypto');

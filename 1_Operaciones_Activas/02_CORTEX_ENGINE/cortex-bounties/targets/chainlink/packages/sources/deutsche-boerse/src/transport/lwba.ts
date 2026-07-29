@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { create, fromBinary, toBinary } from '@bufbuild/protobuf'
 import { TransportGenerics } from '@chainlink/external-adapter-framework/transports'
 import { makeLogger } from '@chainlink/external-adapter-framework/util'

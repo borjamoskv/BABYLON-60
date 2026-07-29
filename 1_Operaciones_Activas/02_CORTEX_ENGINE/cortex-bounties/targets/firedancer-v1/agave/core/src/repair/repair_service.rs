@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `repair_service` module implements the tools necessary to generate a thread which
 //! regularly finds missing shreds in the ledger and sends repair requests for those shreds
 use {

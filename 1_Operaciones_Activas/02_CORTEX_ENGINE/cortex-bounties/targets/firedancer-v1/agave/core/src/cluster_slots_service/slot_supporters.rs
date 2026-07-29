@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crate::{consensus::Stake, replay_stage::DUPLICATE_THRESHOLD},
     solana_pubkey::Pubkey,

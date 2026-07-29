@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Example/test program to get the minimum stake delegation via the helper function
 
 #![allow(unreachable_code)]

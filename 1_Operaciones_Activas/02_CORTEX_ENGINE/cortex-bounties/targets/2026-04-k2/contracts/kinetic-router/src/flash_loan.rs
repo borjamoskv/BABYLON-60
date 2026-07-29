@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::storage;
 use k2_shared::*;
 use soroban_sdk::{panic_with_error, token, Address, Bytes, Env, IntoVal, Symbol, Vec};
@@ -116,7 +117,7 @@ pub fn internal_flash_loan_with_reserve_data(
 
     // Check if receiver is the pool itself (internal flash liquidation)
     let pool_address = env.current_contract_address();
-    
+
     // Mark flash loan state (used by update_interest_rates_and_store to skip rate recalc)
     storage::set_flash_loan_active(env, true);
 
@@ -149,7 +150,7 @@ pub fn internal_flash_loan_with_reserve_data(
 
     for i in 0..debts.len() {
         let debt = debts.get(i).ok_or(KineticRouterError::InvalidFlashLoanParams)?;
-        
+
         // OPTIMIZATION: Use pre-fetched reserve data if available
         let reserve_data = if i == 0 && prefetched_reserve.is_some() {
             prefetched_reserve.ok_or(KineticRouterError::ReserveNotFound)?.clone()
@@ -311,7 +312,7 @@ pub fn execute_operation(
     if !storage::is_flash_loan_active(&env) {
         return false;
     }
-    
+
     let pool_address = env.current_contract_address();
 
     if initiator != pool_address {
@@ -332,10 +333,10 @@ pub fn execute_operation(
     };
 
     let result = execute_liquidation_callback(env.clone(), callback_params);
-    
+
     // Always clear params to prevent replay
     storage::remove_liquidation_callback_params(&env);
-    
+
     match result {
         Ok(_) => true,
         Err(_) => false,
@@ -347,7 +348,7 @@ fn execute_liquidation_callback(
     params: LiquidationCallbackParams,
 ) -> Result<(), KineticRouterError> {
     use soroban_sdk::symbol_short;
-    
+
     let pool_address = env.current_contract_address();
 
     // Cache symbols once (reused multiple times)
@@ -357,11 +358,11 @@ fn execute_liquidation_callback(
 
     let debt_reserve_data = &params.debt_reserve_data;
     let collateral_reserve_data = &params.collateral_reserve_data;
-    
+
     if params.debt_to_cover == 0 || params.collateral_to_seize == 0 {
         return Err(KineticRouterError::InvalidAmount);
     }
-    
+
     if params.debt_price == 0 || params.collateral_price == 0 {
         return Err(KineticRouterError::PriceOracleNotFound);
     }
@@ -454,7 +455,7 @@ fn execute_liquidation_callback(
             None,
         )?
     };
-    
+
     let debt_received = u128::try_from(debt_received_i128)
         .map_err(|_| KineticRouterError::InvalidAmount)?;
 

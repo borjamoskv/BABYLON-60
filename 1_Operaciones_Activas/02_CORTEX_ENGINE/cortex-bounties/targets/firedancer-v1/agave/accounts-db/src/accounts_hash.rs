@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use solana_lattice_hash::lt_hash::LtHash;
 
 /// Lattice hash of an account

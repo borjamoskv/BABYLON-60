@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { basename } from "path";
 import { config as hardhatConfig, getChainId, network, tenderly } from "hardhat";
 import type { Deployment } from "hardhat-deploy/types";

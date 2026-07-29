@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 export { cryptoEndpoint as crypto } from './crypto'
 export { cryptoLwbaEndpoint as lwba } from './crypto-lwba'
 export { forexEndpoint as forex } from './forex'

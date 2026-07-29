@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { BaseContract as EthersBaseContract, ContractTransactionReceipt, Interface, LogDescription } from "ethers";
 
 import { HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/signers";

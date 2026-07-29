@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { makeLogger } from '@chainlink/external-adapter-framework/util'
 import { config } from '../config'
 import { BaseEndpointTypes, cryptoInputParams } from '../endpoint/utils'

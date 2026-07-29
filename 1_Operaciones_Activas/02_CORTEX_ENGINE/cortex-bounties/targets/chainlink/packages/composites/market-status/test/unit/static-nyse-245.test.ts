@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { TwentyfourFiveMarketStatus } from '@chainlink/external-adapter-framework/adapter'
 import { TZDate } from '@date-fns/tz'
 import { getStatusFromStaticSchedule } from '../../src/source/static'

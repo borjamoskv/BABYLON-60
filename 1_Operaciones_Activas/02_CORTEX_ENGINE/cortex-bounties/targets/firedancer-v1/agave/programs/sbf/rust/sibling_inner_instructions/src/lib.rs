@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Example Rust-based SBF program that queries sibling instructions
 
 #![allow(clippy::arithmetic_side_effects)]

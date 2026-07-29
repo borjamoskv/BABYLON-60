@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { SingleNumberResultResponse } from '@chainlink/external-adapter-framework/util'
 import { config } from './config'
 import { inputParameters } from './endpoint/price'

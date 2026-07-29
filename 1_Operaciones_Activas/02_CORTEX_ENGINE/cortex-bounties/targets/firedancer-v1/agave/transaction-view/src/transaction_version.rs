@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /// A byte that represents the version of the transaction.
 #[derive(Copy, Clone, Debug, Default)]
 #[repr(u8)]

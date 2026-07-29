@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from generate.types import *
 from generate.codegen import write_codegen
 from generate.strings import generate_string_table, write_string_table

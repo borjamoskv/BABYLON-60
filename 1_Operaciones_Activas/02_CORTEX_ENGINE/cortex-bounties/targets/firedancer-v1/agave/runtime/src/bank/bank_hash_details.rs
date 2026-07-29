@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Container to capture information relevant to computing a bank hash
 
 use {

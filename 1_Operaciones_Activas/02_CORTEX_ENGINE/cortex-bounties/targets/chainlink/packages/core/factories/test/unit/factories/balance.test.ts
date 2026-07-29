@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterError } from '@chainlink/ea-bootstrap'
 import { Account } from '@chainlink/ea-bootstrap'
 import { balance } from '../../../src/index'

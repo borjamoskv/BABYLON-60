@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #[macro_export]
 macro_rules! generate_account_size_test {
     ($name:ident, $test_case:ident) => {

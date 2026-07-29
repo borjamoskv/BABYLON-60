@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # api/database.py
 import os
 import json
@@ -16,7 +17,7 @@ Base = declarative_base()
 
 class User(Base):
     __tablename__ = "users"
-    
+
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     email = Column(String(255), unique=True, nullable=False)
     api_key = Column(String(64), unique=True, nullable=False)
@@ -29,7 +30,7 @@ class User(Base):
 
 class UsageLog(Base):
     __tablename__ = "usage_logs"
-    
+
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     endpoint = Column(String(50), nullable=False)

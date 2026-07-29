@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import fcntl
 import json
 from collections.abc import Generator

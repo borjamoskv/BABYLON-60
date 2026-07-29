@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::balance;
 use crate::storage;
 use crate::storage::{ATokenState, AllowanceData};
@@ -381,7 +382,7 @@ impl ATokenContract {
 
         Ok(true)
     }
-    
+
     /// Burns scaled aTokens and transfers underlying to target in a single call.
     /// Returns (new_user_scaled_balance, new_total_supply_scaled, actual_amount_transferred).
     /// The actual_amount is capped at `amount` to prevent rounding overshoot (WP-C1).
@@ -794,7 +795,7 @@ impl ATokenContract {
             &Symbol::new(env, "handle_action"),
             args,
         );
-        
+
         // Emit event on failure for monitoring
         if result.is_err() {
             env.events().publish(

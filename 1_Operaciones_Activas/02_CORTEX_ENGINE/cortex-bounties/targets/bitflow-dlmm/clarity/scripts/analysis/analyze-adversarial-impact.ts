@@ -1,7 +1,8 @@
+// C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env node
 /**
  * Script to analyze adversarial rounding impact from fuzz test results
- * 
+ *
  * This script:
  * 1. Analyzes rounding bias patterns (does rounding favor pool or users?)
  * 2. Calculates cumulative pool value leakage
@@ -60,17 +61,17 @@ interface AdversarialAnalysisData {
 
 function analyzeBiasPatterns(biasData: RoundingBiasData[]) {
   console.log('=== Rounding Bias Analysis ===\n');
-  
+
   const totalSwaps = biasData.length;
   const userFavored = biasData.filter(b => b.biasDirection === 'user_favored').length;
   const poolFavored = biasData.filter(b => b.biasDirection === 'pool_favored').length;
   const neutral = biasData.filter(b => b.biasDirection === 'neutral').length;
-  
+
   console.log(`Total swaps: ${totalSwaps}`);
   console.log(`  User favored: ${userFavored} (${((userFavored / totalSwaps) * 100).toFixed(1)}%)`);
   console.log(`  Pool favored: ${poolFavored} (${((poolFavored / totalSwaps) * 100).toFixed(1)}%)`);
   console.log(`  Neutral: ${neutral} (${((neutral / totalSwaps) * 100).toFixed(1)}%)\n`);
-  
+
   // Calculate total bias
   const totalBias = biasData.reduce((sum, b) => sum + BigInt(b.biasAmount), 0n);
   const totalBiasPositive = biasData
@@ -79,18 +80,18 @@ function analyzeBiasPatterns(biasData: RoundingBiasData[]) {
   const totalBiasNegative = biasData
     .filter(b => b.biasDirection === 'pool_favored')
     .reduce((sum, b) => sum + BigInt(b.biasAmount), 0n);
-  
+
   console.log(`Total bias: ${totalBias.toString()} tokens`);
   console.log(`  User benefit: ${totalBiasPositive.toString()} tokens`);
   console.log(`  Pool benefit: ${totalBiasNegative.toString()} tokens\n`);
-  
+
   // Find worst cases
   const sortedByBias = [...biasData].sort((a, b) => {
     const aBias = BigInt(a.biasAmount);
     const bBias = BigInt(b.biasAmount);
     return aBias > bBias ? -1 : aBias < bBias ? 1 : 0;
   });
-  
+
   console.log('Top 10 swaps favoring users (by bias amount):');
   sortedByBias
     .filter(b => b.biasDirection === 'user_favored')
@@ -98,7 +99,7 @@ function analyzeBiasPatterns(biasData: RoundingBiasData[]) {
     .forEach((b, i) => {
       console.log(`  ${i + 1}. Tx ${b.txNumber} (${b.functionName}): +${b.biasAmount} tokens (${b.biasPercent.toFixed(6)}%)`);
     });
-  
+
   console.log('\nTop 10 swaps favoring pool (by bias amount):');
   sortedByBias
     .filter(b => b.biasDirection === 'pool_favored')
@@ -106,7 +107,7 @@ function analyzeBiasPatterns(biasData: RoundingBiasData[]) {
     .forEach((b, i) => {
       console.log(`  ${i + 1}. Tx ${b.txNumber} (${b.functionName}): ${b.biasAmount} tokens (${b.biasPercent.toFixed(6)}%)`);
     });
-  
+
   return {
     totalSwaps,
     userFavored,
@@ -120,7 +121,7 @@ function analyzeBiasPatterns(biasData: RoundingBiasData[]) {
 
 function analyzePoolValueLeakage(biasData: RoundingBiasData[]) {
   console.log('\n=== Pool Value Leakage Analysis ===\n');
-  
+
   const totalLeakage = biasData.reduce((sum, b) => sum + BigInt(b.poolValueLeakage), 0n);
   const positiveLeakage = biasData
     .filter(b => BigInt(b.poolValueLeakage) > 0n)
@@ -128,18 +129,18 @@ function analyzePoolValueLeakage(biasData: RoundingBiasData[]) {
   const negativeLeakage = biasData
     .filter(b => BigInt(b.poolValueLeakage) < 0n)
     .reduce((sum, b) => sum + BigInt(b.poolValueLeakage), 0n);
-  
+
   console.log(`Total cumulative leakage: ${totalLeakage.toString()} tokens`);
   console.log(`  Positive (pool gains): ${positiveLeakage.toString()} tokens`);
   console.log(`  Negative (pool loses): ${negativeLeakage.toString()} tokens\n`);
-  
+
   // Find worst cases
   const sortedByLeakage = [...biasData].sort((a, b) => {
     const aLeak = BigInt(a.poolValueLeakage);
     const bLeak = BigInt(b.poolValueLeakage);
     return aLeak < bLeak ? -1 : aLeak > bLeak ? 1 : 0; // Sort negative first (worst for pool)
   });
-  
+
   console.log('Top 10 worst pool value leaks (most negative):');
   sortedByLeakage.slice(0, 10).forEach((b, i) => {
     const leak = BigInt(b.poolValueLeakage);
@@ -148,11 +149,11 @@ function analyzePoolValueLeakage(biasData: RoundingBiasData[]) {
       : 0;
     console.log(`  ${i + 1}. Tx ${b.txNumber} (${b.functionName}): ${leak.toString()} tokens (${leakPercent.toFixed(2)}% of expected)`);
   });
-  
+
   // Calculate average leakage per swap
   const avgLeakage = totalLeakage / BigInt(biasData.length);
   console.log(`\nAverage leakage per swap: ${avgLeakage.toString()} tokens`);
-  
+
   return {
     totalLeakage: totalLeakage.toString(),
     positiveLeakage: positiveLeakage.toString(),
@@ -163,24 +164,24 @@ function analyzePoolValueLeakage(biasData: RoundingBiasData[]) {
 
 function analyzeBalanceConservation(conservationData: BalanceConservationData[]) {
   console.log('\n=== Balance Conservation Analysis ===\n');
-  
+
   const total = conservationData.length;
   const xViolations = conservationData.filter(c => !c.xBalanceConserved).length;
   const yViolations = conservationData.filter(c => !c.yBalanceConserved).length;
   const poolValueViolations = conservationData.filter(c => !c.poolValueConserved).length;
   const lpSupplyViolations = conservationData.filter(c => c.lpSupplyConserved === false).length;
   const anyViolations = conservationData.filter(c => !c.xBalanceConserved || !c.yBalanceConserved || !c.poolValueConserved || c.lpSupplyConserved === false).length;
-  
+
   console.log(`Total swaps checked: ${total}`);
   console.log(`  X balance violations: ${xViolations} (${((xViolations / total) * 100).toFixed(1)}%)`);
   console.log(`  Y balance violations: ${yViolations} (${((yViolations / total) * 100).toFixed(1)}%)`);
   console.log(`  Pool value violations: ${poolValueViolations} (${((poolValueViolations / total) * 100).toFixed(1)}%)`);
   console.log(`  LP supply violations: ${lpSupplyViolations} (${((lpSupplyViolations / total) * 100).toFixed(1)}%)`);
   console.log(`  Any violations: ${anyViolations} (${((anyViolations / total) * 100).toFixed(1)}%)\n`);
-  
+
   // Find worst violations
   const violations = conservationData.filter(c => !c.xBalanceConserved || !c.yBalanceConserved || !c.poolValueConserved);
-  
+
   if (violations.length > 0) {
     console.log('Top 10 worst balance conservation violations:');
     violations
@@ -198,7 +199,7 @@ function analyzeBalanceConservation(conservationData: BalanceConservationData[])
         console.log(`  ${i + 1}. Tx ${v.txNumber} (${v.functionName}): ${errors.join(', ')}`);
       });
   }
-  
+
   // Analyze LP supply violations
   if (lpSupplyViolations > 0) {
     console.log('⚠️  CRITICAL: LP supply violations detected!');
@@ -210,7 +211,7 @@ function analyzeBalanceConservation(conservationData: BalanceConservationData[])
   } else {
     console.log('✅ LP supply remains constant during all swaps (as expected)\n');
   }
-  
+
   return {
     total,
     xViolations,
@@ -240,7 +241,7 @@ function generateReport(
       hasBalanceIssues: conservationStats.anyViolations > 0,
     },
   };
-  
+
   fs.writeFileSync(outputFile, JSON.stringify(report, null, 2), 'utf-8');
   console.log(`\nDetailed report saved to: ${outputFile}`);
 }
@@ -248,43 +249,43 @@ function generateReport(
 function main() {
   console.log('Adversarial Rounding Impact Analysis Script\n');
   console.log('='.repeat(60) + '\n');
-  
+
   // Load adversarial analysis data
   const resultsDir = path.join(__dirname, '../logs/fuzz-test-results');
   if (!fs.existsSync(resultsDir)) {
     console.log('No results directory found. Run tests first.');
     return;
   }
-  
+
   const adversarialFiles = fs.readdirSync(resultsDir)
     .filter(f => f.endsWith('.json') && f.includes('adversarial-analysis'))
     .sort()
     .reverse();
-  
+
   if (adversarialFiles.length === 0) {
     console.log('No adversarial analysis files found. Run tests with adversarial analysis first.');
     return;
   }
-  
+
   const latestFile = path.join(resultsDir, adversarialFiles[0]);
   console.log(`Loading: ${adversarialFiles[0]}\n`);
-  
+
   const data: AdversarialAnalysisData = JSON.parse(fs.readFileSync(latestFile, 'utf-8'));
-  
+
   if (data.roundingBias.length === 0) {
     console.log('No rounding bias data found in file.');
     return;
   }
-  
+
   // Analyze
   const biasStats = analyzeBiasPatterns(data.roundingBias);
   const leakageStats = analyzePoolValueLeakage(data.roundingBias);
   const conservationStats = analyzeBalanceConservation(data.balanceConservation);
-  
+
   // Generate report
   const reportFile = path.join(resultsDir, `adversarial-impact-report-${new Date().toISOString().replace(/[:.]/g, '-')}.json`);
   generateReport(biasStats, leakageStats, conservationStats, reportFile);
-  
+
   // Future Swap Impact Analysis
   console.log('\n=== Future Swap Impact Analysis ===\n');
   console.log('State Propagation:');
@@ -293,26 +294,26 @@ function main() {
   console.log('  - Pool value leakage accumulates over time');
   console.log(`  - Cumulative leakage after ${biasStats.totalSwaps} swaps: ${leakageStats.totalLeakage} tokens`);
   console.log(`  - Average leakage per swap: ${leakageStats.avgLeakage} tokens\n`);
-  
+
   // Summary
   console.log('\n=== Summary ===\n');
   console.log(`Bias: ${biasStats.userFavored > biasStats.poolFavored ? 'Favors users' : biasStats.poolFavored > biasStats.userFavored ? 'Favors pool' : 'Neutral'}`);
   console.log(`Total leakage: ${leakageStats.totalLeakage} tokens`);
   console.log(`Balance violations: ${conservationStats.anyViolations} / ${conservationStats.total}`);
   console.log(`LP supply violations: ${conservationStats.lpSupplyViolations} / ${conservationStats.total}`);
-  
+
   // Assessment
   console.log('\n=== Security Assessment ===\n');
   const isSystematicBias = biasStats.userFavored > biasStats.poolFavored * 2;
   const isSignificantLeakage = BigInt(leakageStats.totalLeakage) < -1000000n;
   const hasBalanceIssues = conservationStats.anyViolations > 0;
   const hasLpIssues = conservationStats.lpSupplyViolations > 0;
-  
+
   console.log(`Systematic bias: ${isSystematicBias ? '⚠️  YES - Rounding systematically favors users' : '✅ NO - Bias is random/neutral'}`);
   console.log(`Significant leakage: ${isSignificantLeakage ? '⚠️  YES - Pool loses significant value' : '✅ NO - Leakage is acceptable'}`);
   console.log(`Balance issues: ${hasBalanceIssues ? '⚠️  YES - Balance conservation violations detected' : '✅ NO - Balances are conserved'}`);
   console.log(`LP supply issues: ${hasLpIssues ? '🚨 CRITICAL - LP supply changed during swaps!' : '✅ NO - LP supply remains constant'}`);
-  
+
   console.log('\n=== Analysis Complete ===');
 }
 

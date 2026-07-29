@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Klend program error codes.
 //!
 //! Anchor custom errors start at offset 6000. Each variant's error code is `6000 + variant index`.

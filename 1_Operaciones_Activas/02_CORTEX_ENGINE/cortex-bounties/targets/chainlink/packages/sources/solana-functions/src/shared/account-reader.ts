@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { BorshCoder, Idl } from '@coral-xyz/anchor'
 import { getProgramDerivedAddress, type Address } from '@solana/addresses'
 import { type Rpc, type SolanaRpcApi } from '@solana/rpc'

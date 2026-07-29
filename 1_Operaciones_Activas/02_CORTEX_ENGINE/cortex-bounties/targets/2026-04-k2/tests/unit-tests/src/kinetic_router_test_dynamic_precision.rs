@@ -1,7 +1,8 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 /// Test suite for FIND-013 remediation: Dynamic Oracle Precision Handling
-/// 
+///
 /// These tests verify that the kinetic router correctly handles oracle prices
 /// with different precision levels (not just hardcoded 14 decimals).
 

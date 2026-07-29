@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { PoRAddress } from '@chainlink/external-adapter-framework/adapter/por'
 import {
   HttpTransport,

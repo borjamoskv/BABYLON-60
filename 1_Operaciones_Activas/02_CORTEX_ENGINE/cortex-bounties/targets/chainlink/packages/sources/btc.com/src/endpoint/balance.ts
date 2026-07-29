@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { balance } from '@chainlink/ea-factories'
 import { Requester, util } from '@chainlink/ea-bootstrap'
 import type { Config, ExecuteFactory, AdapterData, InputParameters } from '@chainlink/ea-bootstrap'

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { create } from '@bufbuild/protobuf'
 import {
   Data_MDEntryPrices_MDEntryType,

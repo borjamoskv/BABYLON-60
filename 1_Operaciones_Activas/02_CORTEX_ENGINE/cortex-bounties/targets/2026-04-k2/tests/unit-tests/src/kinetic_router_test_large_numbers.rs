@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 use crate::{a_token, debt_token, interest_rate_strategy, kinetic_router, price_oracle};
@@ -58,7 +59,7 @@ fn setup_test_environment(env: &Env) -> (Address, Address, Address, Address, Add
         &dex_router,
         &None,
     );
-    
+
     let pool_configurator = Address::generate(env);
     kinetic_router.set_pool_configurator(&pool_configurator);
 
@@ -78,7 +79,7 @@ fn create_reserve_with_cap(
     let token_admin = Address::generate(env);
     let underlying_token = env.register_stellar_asset_contract_v2(token_admin.clone());
     let underlying_addr = underlying_token.address();
-    
+
     // IMPORTANT: Mint tokens BEFORE initializing aToken/debtToken
     // This initializes the Stellar Asset Contract storage (decimals, etc.)
     let stellar_client = token::StellarAssetClient::new(env, &underlying_addr);
@@ -730,7 +731,7 @@ fn test_multiple_users_billion_amounts() {
     assert!(account_data_1.total_collateral_base > 0, "User1 should have collateral");
     assert!(account_data_2.total_collateral_base > 0, "User2 should have collateral");
     assert!(account_data_3.total_collateral_base > 0, "User3 should have collateral");
-    
+
     // Total supply should be 30 billion USDC
     // Verify aggregate calculations work correctly
     assert!(account_data_1.total_collateral_base > 10_000_000_000_000_000_000_000_000u128, "User1 collateral should be > $10B");

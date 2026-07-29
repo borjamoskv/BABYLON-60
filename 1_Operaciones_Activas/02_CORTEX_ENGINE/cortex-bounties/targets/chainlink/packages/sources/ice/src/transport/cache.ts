@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { InstrumentPartialUpdate } from './netdania'
 import { FullPriceUpdate } from './price'
 import { makeLogger } from '@chainlink/external-adapter-framework/util'

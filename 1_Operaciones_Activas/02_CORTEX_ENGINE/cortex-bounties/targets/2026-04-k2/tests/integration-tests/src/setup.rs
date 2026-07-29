@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! # Integration Test Setup Utilities
 //!
 //! Common setup functions for deploying and configuring the K2 protocol
@@ -946,7 +947,7 @@ impl MockSoroswapRouter {
 
         let router_address = env.current_contract_address();
         let token1_client = token::Client::new(&env, &token1);
-        
+
         let router_balance = token1_client.balance(&router_address);
         if router_balance < amount_out {
             panic!("Insufficient router liquidity: need {}, have {}", amount_out, router_balance);
@@ -977,7 +978,7 @@ impl MockSoroswapRouter {
         transfer_args.push_back(router_address.to_val());
         transfer_args.push_back(to.to_val());
         transfer_args.push_back(amount_out.into_val(&env));
-        
+
         let _: () = env.invoke_contract(
             &token1,
             &transfer_symbol,

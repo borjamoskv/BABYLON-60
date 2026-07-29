@@ -1,7 +1,8 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 /// Comprehensive flash loan tests with Soroswap and Aquarius DEX integrations
-/// 
+///
 /// Tests cover:
 /// - Basic flash loan execution
 /// - Multi-asset flash loans

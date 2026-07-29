@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::solana_program;
 use solana_program::{pubkey, pubkey::Pubkey};
 
@@ -129,7 +130,7 @@ pub const MAX_PRICE_DECIMALS_U256: u32 = 36;
 pub const TARGET_PRICE_DECIMALS: u32 = MAX_PRICE_DECIMALS_U256 / 2;
 
 pub fn ten_pow(x: usize) -> u64 {
-   
+
     const POWERS_OF_TEN: [u64; 20] = [
         1,
         10,
@@ -153,12 +154,12 @@ pub fn ten_pow(x: usize) -> u64 {
         10_000_000_000_000_000_000,
     ];
 
-   
+
     if x > 19 {
         panic!("The exponent must be between 0 and 19.");
     }
 
-   
+
     POWERS_OF_TEN[x]
 }
 
@@ -235,9 +236,9 @@ pub const CPI_WHITELISTED_ACCOUNTS: [CpiWhitelistedAccount; 16] = [
 
 pub struct CpiWhitelistedAccount {
     pub program_id: Pubkey,
-   
-   
-   
+
+
+
     pub whitelist_level: usize,
 }
 

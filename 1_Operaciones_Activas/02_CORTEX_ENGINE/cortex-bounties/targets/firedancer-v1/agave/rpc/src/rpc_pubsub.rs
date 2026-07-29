@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `pubsub` module implements a threaded subscription service on client RPC request
 #[cfg(test)]
 use crate::{rpc_pubsub_service, rpc_subscriptions::RpcSubscriptions};

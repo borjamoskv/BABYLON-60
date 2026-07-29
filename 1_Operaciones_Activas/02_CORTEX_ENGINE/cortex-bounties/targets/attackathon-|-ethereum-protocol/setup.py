@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from setuptools import find_packages, setup
 
 # Minimal setup.py for package configuration.

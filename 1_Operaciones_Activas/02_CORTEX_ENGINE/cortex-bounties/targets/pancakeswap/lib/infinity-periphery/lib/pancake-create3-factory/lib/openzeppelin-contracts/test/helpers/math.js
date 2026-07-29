@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 module.exports = {
   // sum of integer / bignumber
   sum: (...args) => args.reduce((acc, n) => acc + n, 0),

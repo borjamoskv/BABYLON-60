@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Requester, util, Config as TypesConfig } from '@chainlink/ea-bootstrap'
 
 export const NAME = 'HARMONY'

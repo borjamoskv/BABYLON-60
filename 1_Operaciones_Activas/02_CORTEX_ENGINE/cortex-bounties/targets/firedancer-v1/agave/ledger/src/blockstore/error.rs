@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The error that can be produced from Blockstore operations.
 
 use {

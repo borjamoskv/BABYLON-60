@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `banking_stage` processes Transaction messages. It is intended to be used
 //! to construct a software pipeline.
 
@@ -885,7 +886,7 @@ pub(crate) fn update_bank_forks_and_poh_recorder_for_new_tpu_bank(
     // if set_bank_res.is_err() {
     //     warn!("Failed to set poh bank, poh service is disconnected");
     // }
-    // tpu_bank.unpause_new_block_production_scheduler();    
+    // tpu_bank.unpause_new_block_production_scheduler();
     poh_recorder.write().unwrap().set_bank(tpu_bank);
 }
 

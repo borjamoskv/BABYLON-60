@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Logger } from '@chainlink/ea-bootstrap'
 import { Decimal } from 'decimal.js'
 import { CurrencyDerivativesData, OptionData } from './derivativesDataProvider'

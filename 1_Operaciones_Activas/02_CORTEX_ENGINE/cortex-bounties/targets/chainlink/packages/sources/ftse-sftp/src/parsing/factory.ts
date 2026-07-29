@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { CSVParser } from './interfaces'
 import { FTSE100Parser } from './ftse100'
 import { RussellDailyValuesParser } from './russell'

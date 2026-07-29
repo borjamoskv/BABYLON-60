@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterData, AdapterRequest, APIEndpoint, Config, Execute } from '@chainlink/ea-bootstrap'
 import { withNormalizedInput } from '../../src/lib/middleware/normalize'
 

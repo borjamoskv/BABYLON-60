@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("katex"));

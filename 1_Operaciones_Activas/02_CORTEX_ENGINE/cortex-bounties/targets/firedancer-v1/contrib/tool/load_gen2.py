@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import argparse
 import json
 import time
@@ -48,7 +49,7 @@ def get_balance(rpc: str, acc: Pubkey) -> int:
     except Exception as e:
       time.sleep(0.1)
       continue
-  
+
 
 def parse_args() -> argparse.Namespace:
   parser = argparse.ArgumentParser()
@@ -130,7 +131,7 @@ def create_accounts(funder, rpc, num_accs, lamports, seed, sock, tpus, txn_type)
     for i in tqdm.trange(num_accs, desc="keypairs"):
         acc = Keypair.from_seed_and_derivation_path(seed, f"m/44'/42'/0'/{i}'")
         accs.append(acc)
-    remaining_accs = set(accs)       
+    remaining_accs = set(accs)
 
     while len(remaining_accs) > 0:
         done_accs = pqdm(remaining_accs, partial(get_balance_sufficient, lamports, rpc), desc="check bal", n_jobs=256)
@@ -160,7 +161,7 @@ def gen_tx_empty(recent_blockhash, key, acc, cu_price: int):
   return tx
 
 def gen_tx_system_transfer(recent_blockhash, key, acc, cu_price):
-  msg = Message.new_with_blockhash([set_compute_unit_price(cu_price), set_compute_unit_limit(300+300+150), 
+  msg = Message.new_with_blockhash([set_compute_unit_price(cu_price), set_compute_unit_limit(300+300+150),
                                     transfer(TransferParams(from_pubkey=acc,to_pubkey=acc,lamports=1))], acc, recent_blockhash)
   # tx = Transaction(recent_blockhash, None, acc, )
   tx = Transaction.populate(msg, [Signature(random.randbytes(64))])
@@ -226,7 +227,7 @@ def fetch_recent_blockhash(rbh, rpc, stop_event) -> None:
       print(recent_blockhash)
     except Exception as e:
       print("bad RBH")
-  
+
 
 def main():
   args = parse_args()
@@ -240,7 +241,7 @@ def main():
   tpus = map(lambda t: t.split(":", 1), args.tpus)
   tpus = list(map(lambda t: (t[0], int(t[1])), tpus))
   print(tpus)
-  
+
   if args.txn_type == "empty":
     txn_type = TXN_TYPE_EMPTY
   elif args.txn_type == "system-transfer":

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { createSolanaRpc, type Rpc, type SolanaRpcApi } from '@solana/rpc'
 export class SolanaRpcFactory {
   private readonly defaultUrl?: string

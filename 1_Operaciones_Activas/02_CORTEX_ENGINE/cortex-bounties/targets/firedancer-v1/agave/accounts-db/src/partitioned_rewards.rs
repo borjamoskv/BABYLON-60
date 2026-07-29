@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Code related to partitioned rewards distribution
 
 /// # stake accounts to store in one block during partitioned reward interval

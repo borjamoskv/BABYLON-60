@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Requester, util, Config } from '@chainlink/ea-bootstrap'
 
 export const NAME = 'CELSIUS_ADDRESS_LIST'

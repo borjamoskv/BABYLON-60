@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {num_derive::FromPrimitive, thiserror::Error};
 
 #[derive(Error, Debug, Clone, FromPrimitive, PartialEq, Eq)]

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use sha2::{Digest, Sha256};
 
 /// Compute the 8-byte Anchor discriminator for a given instruction name.

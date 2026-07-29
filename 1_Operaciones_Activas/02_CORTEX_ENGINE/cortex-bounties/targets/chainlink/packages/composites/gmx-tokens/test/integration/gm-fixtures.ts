@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import nock, { Body, ReplyBody, ReplyFnContext, RequestBodyMatcher } from 'nock'
 import { ChainKey } from '../../src/endpoint/gm-price'
 import { ChainContextFactory } from '../../src/transport/shared/chain'

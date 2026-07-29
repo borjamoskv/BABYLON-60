@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AbiCoder } from 'ethers'
 import { RequestParams } from '../../src/endpoint/calculated-multi-function'
 import { evaluateOperation, validateOperations } from '../../src/utils/operations'

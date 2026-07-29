@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { HttpTransport } from '@chainlink/external-adapter-framework/transports'
 import { makeLogger } from '@chainlink/external-adapter-framework/util'
 import quoteEventSymbols from '../config/quoteSymbols.json'

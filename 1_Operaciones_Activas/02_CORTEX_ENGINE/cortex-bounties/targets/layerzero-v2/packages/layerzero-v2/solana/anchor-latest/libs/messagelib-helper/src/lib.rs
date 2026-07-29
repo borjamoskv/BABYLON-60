@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 pub mod endpoint_verify;
 pub mod packet_v1_codec;
 

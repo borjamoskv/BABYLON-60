@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { mockCryptoSuccess, mockDominanceSuccess } from './fixtures'
 import {
   TestAdapter,

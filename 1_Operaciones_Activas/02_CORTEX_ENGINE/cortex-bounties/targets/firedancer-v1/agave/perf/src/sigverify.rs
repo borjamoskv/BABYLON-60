@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `sigverify` module provides digital signature verification functions.
 //! By default, signatures are verified in parallel using all available CPU
 //! cores.

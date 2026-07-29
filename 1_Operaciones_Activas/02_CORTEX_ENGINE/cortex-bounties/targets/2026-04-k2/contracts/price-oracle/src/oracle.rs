@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use k2_shared::{Asset, PriceData};
 use soroban_sdk::{contracttype, Address, Env, IntoVal, String, Symbol, U256, Vec};
 
@@ -130,13 +131,13 @@ pub fn query_reflector(
         .ok_or(crate::OracleError::OracleQueryFailed)?;
     let config = crate::storage::get_oracle_config(env)?;
     let current_timestamp = env.ledger().timestamp();
-    
+
     // Defensive check: future timestamps indicate corrupted oracle data
     // This prevents underflow panic when subtracting timestamps
     if reflector_price_data.timestamp > current_timestamp {
         return Err(crate::OracleError::PriceTooOld);
     }
-    
+
     if current_timestamp.checked_sub(reflector_price_data.timestamp)
         .ok_or(crate::OracleError::MathOverflow)? > config.price_staleness_threshold
     {
@@ -155,7 +156,7 @@ pub fn query_reflector(
         oracle_decimals,
         config.price_precision,
     )?;
-    
+
     Ok(PriceData {
         price: normalized_price,
         timestamp: reflector_price_data.timestamp,
@@ -174,13 +175,13 @@ pub fn query_fallback_oracle(
         .ok_or(crate::OracleError::OracleQueryFailed)?;
     let config = crate::storage::get_oracle_config(env)?;
     let current_timestamp = env.ledger().timestamp();
-    
+
     // Defensive check: future timestamps indicate corrupted oracle data
     // This prevents underflow panic when subtracting timestamps
     if fallback_price_data.timestamp > current_timestamp {
         return Err(crate::OracleError::PriceTooOld);
     }
-    
+
     if current_timestamp.checked_sub(fallback_price_data.timestamp)
         .ok_or(crate::OracleError::MathOverflow)? > config.price_staleness_threshold
     {
@@ -195,7 +196,7 @@ pub fn query_fallback_oracle(
         oracle_decimals,
         config.price_precision,
     )?;
-    
+
     Ok(PriceData {
         price: normalized_price,
         timestamp: fallback_price_data.timestamp,
@@ -210,7 +211,7 @@ fn normalize_price(
     if source_decimals == target_decimals {
         return Ok(price);
     }
-    
+
     if source_decimals > target_decimals {
         let scale_down = 10_u128.checked_pow(
             source_decimals.checked_sub(target_decimals)

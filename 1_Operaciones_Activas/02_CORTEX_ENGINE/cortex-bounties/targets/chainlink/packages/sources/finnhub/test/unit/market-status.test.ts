@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { MarketStatus } from '@chainlink/external-adapter-framework/adapter'
 import { parseMarketStatus } from '../../src/transport/market-status'
 

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { Idl } from '@coral-xyz/anchor'
 import type { Address } from '@solana/addresses'
 import type { Rpc, SolanaRpcApi } from '@solana/rpc'

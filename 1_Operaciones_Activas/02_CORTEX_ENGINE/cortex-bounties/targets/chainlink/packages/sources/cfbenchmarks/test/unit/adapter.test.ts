@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { getIdFromBaseQuote } from '../../src/endpoint/utils'
 
 describe('getIdFromBaseQuote', () => {

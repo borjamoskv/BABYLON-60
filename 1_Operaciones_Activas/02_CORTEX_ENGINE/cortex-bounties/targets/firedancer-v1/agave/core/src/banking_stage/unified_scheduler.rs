@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module contains any integration code to put the unified scheduler subsystem into the
 //! banking stage, starting from `BankingPacketBatch` ingestion from the sig verify stage and to
 //! `Task` submission to the unified scheduler.

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // (vendored)
 // Source: https://github.com/gmx-io/gmx-synthetics/blob/main/utils/keys.ts
 // Source: https://github.com/gmx-io/gmx-synthetics/blob/main/utils/hash.ts

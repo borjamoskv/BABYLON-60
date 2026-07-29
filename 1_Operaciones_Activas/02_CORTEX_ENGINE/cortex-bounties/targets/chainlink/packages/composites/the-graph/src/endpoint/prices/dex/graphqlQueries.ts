@@ -1,9 +1,10 @@
+// C5-REAL EXERGY CERTIFIED
 export const getTokenQuery = `
     query($symbol: String) {
         tokens(
             where:{
             symbol: $symbol
-            }, 
+            },
             orderBy: tradeVolumeUSD, orderDirection:desc, first: 1
         ) {
         id,

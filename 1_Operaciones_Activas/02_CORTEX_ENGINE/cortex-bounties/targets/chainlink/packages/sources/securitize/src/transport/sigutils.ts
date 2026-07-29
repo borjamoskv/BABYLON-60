@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { makeLogger } from '@chainlink/external-adapter-framework/util'
 import { AdapterError } from '@chainlink/external-adapter-framework/validation/error'
 import { createHash } from 'crypto'

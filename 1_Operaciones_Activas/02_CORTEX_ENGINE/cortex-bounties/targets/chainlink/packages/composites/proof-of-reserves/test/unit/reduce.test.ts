@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterContext, AdapterResponse } from '@chainlink/ea-bootstrap'
 import { makeStub } from '@chainlink/external-adapter-framework/util/testing-utils'
 import { adapter as tokenBalance } from '@chainlink/token-balance-adapter'

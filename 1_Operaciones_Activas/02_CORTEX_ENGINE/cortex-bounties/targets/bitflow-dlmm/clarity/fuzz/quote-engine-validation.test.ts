@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import {
   alice,
   bob,
@@ -73,20 +74,20 @@ class TestConfig {
   static readonly PRICE_SCALE_BPS = 100000000n;
   static readonly MIN_SWAP_AMOUNT = 100n;
   static readonly PERCENTAGE_PRECISION = 10000n;
-  
+
   static readonly SINGLE_BIN_MIN_PERCENT = 0.01; // 1%
   static readonly SINGLE_BIN_MAX_PERCENT = 0.30; // 30%
-  
+
   static readonly MULTI_BIN_MIN_PERCENT = 0.80; // 80%
   static readonly MULTI_BIN_MAX_PERCENT = 1.20; // 120%
   static readonly MULTI_BIN_FALLBACK_MIN = 0.50; // 50%
   static readonly MULTI_BIN_FALLBACK_MAX = 1.00; // 100%
-  
+
   static readonly MULTI_BIN_CAPTURE_RADIUS = 20;
-  
+
   static readonly MIN_INTEGER_MATCH_RATE = 90;
   static readonly MIN_FLOAT_MATCH_RATE = 80;
-  
+
   static readonly INITIAL_BTC_BALANCE = 10000000000n; // 100
   static readonly INITIAL_USDC_BALANCE = 1000000000000n; // 10M
 }
@@ -112,7 +113,7 @@ class PoolStateManager {
 
   /**
    * Capture pool state including multiple bins around the active bin.
-   * 
+   *
    * @param radius - Number of bins to capture on each side of active bin
    */
   static async captureMultiBin(radius: number = TestConfig.MULTI_BIN_CAPTURE_RADIUS): Promise<PoolState> {
@@ -151,27 +152,27 @@ class SwapAmountGenerator {
 
     if (direction === 'x-for-y') {
       if (binData.yBalance === 0n || userBalance === 0n) return null;
-      
+
       // Formula from pricing.py: max_x_amount = ((reserve_y * PRICE_SCALE_BPS + (bin_price - 1)) / bin_price)
       const maxXFromBin = binPrice > 0n
         ? ((binData.yBalance * TestConfig.PRICE_SCALE_BPS + (binPrice - 1n)) / binPrice)
         : 0n;
-      
+
       const maxAmount = userBalance < maxXFromBin ? userBalance : maxXFromBin;
       if (maxAmount < TestConfig.MIN_SWAP_AMOUNT) return null;
-      
+
       const percentage = rng.next() * (TestConfig.SINGLE_BIN_MAX_PERCENT - TestConfig.SINGLE_BIN_MIN_PERCENT) + TestConfig.SINGLE_BIN_MIN_PERCENT;
       const amount = (maxAmount * BigInt(Math.floor(percentage * Number(TestConfig.PERCENTAGE_PRECISION)))) / TestConfig.PERCENTAGE_PRECISION;
       return amount < TestConfig.MIN_SWAP_AMOUNT ? null : amount;
     } else {
       if (binData.xBalance === 0n || userBalance === 0n) return null;
-      
+
       // Formula from pricing.py: max_y_amount = ((reserve_x * bin_price + (PRICE_SCALE_BPS - 1)) / PRICE_SCALE_BPS)
       const maxYFromBin = ((binData.xBalance * binPrice + (TestConfig.PRICE_SCALE_BPS - 1n)) / TestConfig.PRICE_SCALE_BPS);
-      
+
       const maxAmount = userBalance < maxYFromBin ? userBalance : maxYFromBin;
       if (maxAmount < TestConfig.MIN_SWAP_AMOUNT) return null;
-      
+
       const percentage = rng.next() * (TestConfig.SINGLE_BIN_MAX_PERCENT - TestConfig.SINGLE_BIN_MIN_PERCENT) + TestConfig.SINGLE_BIN_MIN_PERCENT;
       const amount = (maxAmount * BigInt(Math.floor(percentage * Number(TestConfig.PERCENTAGE_PRECISION)))) / TestConfig.PERCENTAGE_PRECISION;
       return amount < TestConfig.MIN_SWAP_AMOUNT ? null : amount;
@@ -189,7 +190,7 @@ class SwapAmountGenerator {
 
     // Sample adjacent bins to estimate total available liquidity
     const sampleBins = getSampleBins(poolState, activeBinId, 5);
-    
+
     // Calculate average liquidity across sampled bins
     const avgLiquidity = sampleBins.length > 0
       ? sampleBins.reduce((sum, bin) => {
@@ -197,39 +198,39 @@ class SwapAmountGenerator {
           return sum + minReserve;
         }, 0n) / BigInt(sampleBins.length)
       : 0n;
-    
+
     // Calculate active bin capacity; min == 80% of bin
-    const minReserve = activeBinData.xBalance < activeBinData.yBalance 
-      ? activeBinData.xBalance 
+    const minReserve = activeBinData.xBalance < activeBinData.yBalance
+      ? activeBinData.xBalance
       : activeBinData.yBalance;
     const activeBinCapacity = (minReserve * 80n) / 100n;
-    
+
     // Estimate total liquidity across ~5 bins
     const estimatedTotalLiquidity = avgLiquidity > 0n
       ? activeBinCapacity + (avgLiquidity * 4n) // Active + 4 adjacent bins
       : activeBinCapacity * 2n; // Fallback: assume 2x active bin
-    
+
     // Generate amount; 110-150% of active bin capacity
     // Cap at 50% of total estimated liquidity
     const minAmount = (activeBinCapacity * 110n) / 100n;
     const maxFromActiveRatio = (activeBinCapacity * 150n) / 100n;
     const maxFromTotalLiquidity = (estimatedTotalLiquidity * 50n) / 100n;
-    const maxAmount = maxFromActiveRatio < maxFromTotalLiquidity 
-      ? maxFromActiveRatio 
+    const maxAmount = maxFromActiveRatio < maxFromTotalLiquidity
+      ? maxFromActiveRatio
       : maxFromTotalLiquidity;
-    
+
     // Apply user balance constraint
     const effectiveMax = userBalance < maxAmount ? userBalance : maxAmount;
-    
+
     // Validate bounds
     if (effectiveMax < minAmount || effectiveMax < TestConfig.MIN_SWAP_AMOUNT) {
       return null;
     }
-    
+
     // in range [minAmount, effectiveMax]
     const range = effectiveMax - minAmount;
     const amount = minAmount + (range * BigInt(Math.floor(rng.next() * Number(TestConfig.PERCENTAGE_PRECISION)))) / TestConfig.PERCENTAGE_PRECISION;
-    
+
     return amount < TestConfig.MIN_SWAP_AMOUNT ? null : amount;
   }
 }
@@ -319,7 +320,7 @@ class SwapValidator {
     variableFeeBPS: bigint
   ): SwapValidationResult {
     const feeRateBPS = calculateFeeRateBPS(protocolFeeBPS, providerFeeBPS, variableFeeBPS);
-    
+
     const binData: BinData = {
       reserve_x: poolState.binBalances.get(binId)?.xBalance || 0n,
       reserve_y: poolState.binBalances.get(binId)?.yBalance || 0n,
@@ -327,7 +328,7 @@ class SwapValidator {
 
     const swapForY = direction === 'x-for-y';
     const effectiveInput = actualSwappedIn > 0n ? actualSwappedIn : inputAmount;
-    
+
     const integerResult = calculateBinSwap(binData, binPrice, effectiveInput, feeRateBPS, swapForY);
     const floatResult = calculateBinSwapFloat(
       binData,
@@ -469,39 +470,39 @@ class TestOrchestrator {
     multiBinMode: boolean
   ): Promise<{ success: boolean; bugDetected: boolean }> {
     const useMultiBin = multiBinMode && this.rng.next() < 0.5;
-    
+
     const beforeState = useMultiBin
       ? await PoolStateManager.captureMultiBin()
       : await PoolStateManager.captureSingleBin();
-    
+
     const activeBinId = beforeState.activeBinId;
     const poolData = rovOk(sbtcUsdcPool.getPool());
     const binPrice = rovOk(dlmmCore.getBinPrice(poolData.initialPrice, poolData.binStep, activeBinId));
-    
+
     const user = this.users[this.rng.nextInt(0, this.users.length - 1)];
     const direction: DirectionType = this.rng.next() < 0.5 ? 'x-for-y' : 'y-for-x';
-    
+
     const userXBalance = rovOk(mockSbtcToken.getBalance(user));
     const userYBalance = rovOk(mockUsdcToken.getBalance(user));
     const userBalance = direction === 'x-for-y' ? userXBalance : userYBalance;
-    
+
     const swapAmount = useMultiBin
       ? SwapAmountGenerator.generateMultiBin(this.rng, beforeState, activeBinId, userBalance)
       : SwapAmountGenerator.generateSingleBin(this.rng, beforeState, activeBinId, direction, userBalance, binPrice);
-    
+
     if (!swapAmount || swapAmount === 0n) {
       return { success: false, bugDetected: false };
     }
-    
+
     try {
       const swapResult = useMultiBin
         ? SwapExecutor.executeMultiBin(direction, swapAmount, user)
         : SwapExecutor.executeSingleBin(direction, swapAmount, activeBinId, user);
-      
+
       const protocolFeeBPS = direction === 'x-for-y' ? poolData.xProtocolFee || 0n : poolData.yProtocolFee || 0n;
       const providerFeeBPS = direction === 'x-for-y' ? poolData.xProviderFee || 0n : poolData.yProviderFee || 0n;
       const variableFeeBPS = direction === 'x-for-y' ? poolData.xVariableFee || 0n : poolData.yVariableFee || 0n;
-      
+
       const validation = useMultiBin
         ? await SwapValidator.validateMultiBin(
             txNumber,
@@ -528,17 +529,17 @@ class TestOrchestrator {
             providerFeeBPS,
             variableFeeBPS
           );
-      
+
       validation.swapType = useMultiBin ? 'multi-bin' : 'single-bin';
-      
+
       this.orchestrator.recordResult(validation);
       this.updateStats(validation);
-      
+
       if (validation.bugDetected) {
         this.orchestrator.logError(`BUG DETECTED at tx ${txNumber}`, validation);
         return { success: true, bugDetected: true };
       }
-      
+
       return { success: true, bugDetected: false };
     } catch (e: any) {
         // swap fail
@@ -551,7 +552,7 @@ class TestOrchestrator {
       this.orchestrator.incrementStat('totalSwaps');
       if (result.actualSwappedOut > 0n) this.orchestrator.incrementStat('successfulSwaps');
       else this.orchestrator.incrementStat('failedSwaps');
-      
+
       if (result.integerMatch) this.orchestrator.incrementStat('integerMatches');
       if (result.floatMatch) this.orchestrator.incrementStat('floatMatches');
       if (result.bugDetected) this.orchestrator.incrementStat('bugsDetected');
@@ -560,7 +561,7 @@ class TestOrchestrator {
 
 describe('DLMM Core Quote Engine Validation Fuzz Test', () => {
   let rng: SeededRandom;
-  
+
   const config = getFuzzConfig();
   const NUM_TRANSACTIONS = config.size;
   const RANDOM_SEED = config.seed;
@@ -568,21 +569,21 @@ describe('DLMM Core Quote Engine Validation Fuzz Test', () => {
 
   beforeEach(async () => {
     setupTestEnvironment();
-    
+
     txOk(mockSbtcToken.mint(TestConfig.INITIAL_BTC_BALANCE, alice), deployer);
     txOk(mockUsdcToken.mint(TestConfig.INITIAL_USDC_BALANCE, alice), deployer);
     txOk(mockSbtcToken.mint(TestConfig.INITIAL_BTC_BALANCE, bob), deployer);
     txOk(mockUsdcToken.mint(TestConfig.INITIAL_USDC_BALANCE, bob), deployer);
     txOk(mockSbtcToken.mint(TestConfig.INITIAL_BTC_BALANCE, charlie), deployer);
     txOk(mockUsdcToken.mint(TestConfig.INITIAL_USDC_BALANCE, charlie), deployer);
-    
+
     rng = new SeededRandom(RANDOM_SEED);
   });
 
   it(`should validate swap calculations against quote engine (${NUM_TRANSACTIONS} transactions)`, async () => {
     const orchestrator = new LogManager('quote-engine-validation');
     const testOrchestrator = new TestOrchestrator(orchestrator, rng);
-    
+
     let txNumber = 0;
 
     orchestrator.log(`\n Starting Quote Engine Validation Fuzz Test`);
@@ -592,26 +593,26 @@ describe('DLMM Core Quote Engine Validation Fuzz Test', () => {
 
     for (let i = 0; i < NUM_TRANSACTIONS; i++) {
       txNumber++;
-      
+
       orchestrator.updateProgress(txNumber, NUM_TRANSACTIONS);
-      
+
       const result = await testOrchestrator.runSwapIteration(txNumber, NUM_TRANSACTIONS, MULTI_BIN_MODE);
-      
+
       if (!result.success) {
         txNumber--;
         continue;
       }
     }
-    
+
     orchestrator.finish();
-    
+
     expect(orchestrator.stats.bugsDetected || 0).toBe(0);
-    
+
     const totalSwaps = orchestrator.stats.totalSwaps || 0;
     if (totalSwaps > 0) {
       const integerMatchRate = ((orchestrator.stats.integerMatches || 0) / totalSwaps) * 100;
       const floatMatchRate = ((orchestrator.stats.floatMatches || 0) / totalSwaps) * 100;
-      
+
       expect(integerMatchRate).toBeGreaterThanOrEqual(TestConfig.MIN_INTEGER_MATCH_RATE);
       expect(floatMatchRate).toBeGreaterThanOrEqual(TestConfig.MIN_FLOAT_MATCH_RATE);
     } else {

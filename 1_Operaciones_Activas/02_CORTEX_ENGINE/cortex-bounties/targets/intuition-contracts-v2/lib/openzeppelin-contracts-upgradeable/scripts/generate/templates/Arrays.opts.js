@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const TYPES = [
   { name: 'address', isValueType: true },
   { name: 'bytes32', isValueType: true },

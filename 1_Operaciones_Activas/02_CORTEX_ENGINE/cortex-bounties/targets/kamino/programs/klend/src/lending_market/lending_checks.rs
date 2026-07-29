@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{
     accounts::account_loader::AccountLoader,
     err, error,
@@ -74,13 +75,13 @@ pub fn rollover_fixed_term_borrow_checks(accounts: &RolloverAccounts) -> Result<
     check_reserve_status_and_version(target_borrow_reserve)?;
     check_reserve_emergency_mode(target_borrow_reserve)?;
 
-   
+
     if accounts.source_borrow_reserve.key() != accounts.target_borrow_reserve.key() {
-       
+
         constraints::token_2022::check_only_supported_extensions_on_liquidity_mint(
             &accounts.liquidity_mint.to_account_info(),
         )?;
-       
+
     }
 
     Ok(())
@@ -124,7 +125,7 @@ pub fn withdraw_queued_liquidity_checks(accounts: &WithdrawQueuedLiquidity) -> R
         return err!(LendingError::ReserveDeprecated);
     }
 
-   
+
 
     Ok(())
 }
@@ -141,7 +142,7 @@ pub fn recover_invalid_ticket_collateral_checks(
 
     check_reserve_emergency_mode(withdraw_reserve)?;
 
-   
+
     Ok(())
 }
 
@@ -272,7 +273,7 @@ pub fn redeem_reserve_collateral_checks(accounts: &RedeemReserveCollateralAccoun
         msg!("Reserve collateral supply cannot be used as the source collateral provided");
         return err!(LendingError::InvalidAccountInput);
     }
-   
+
     if reserve.liquidity.supply_vault == accounts.user_destination_liquidity.key() {
         msg!("Reserve liquidity supply cannot be used as the destination liquidity provided");
         return err!(LendingError::InvalidAccountInput);
@@ -352,7 +353,7 @@ pub fn withdraw_obligation_collateral_checks(
         msg!("Reserve version does not match the program version");
         return err!(LendingError::ReserveDeprecated);
     }
-   
+
     if withdraw_reserve.collateral.supply_vault == accounts.user_destination_collateral.key() {
         msg!("Withdraw reserve collateral supply cannot be used as the destination collateral provided");
         return err!(LendingError::InvalidAccountInput);
@@ -394,7 +395,7 @@ pub fn flash_borrow_reserve_liquidity_checks(
         return err!(LendingError::FlashLoansDisabled);
     }
 
-   
+
     constraints::token_2022::check_only_supported_liquidity_token_extensions(
         &ctx.accounts.reserve_liquidity_mint.to_account_info(),
         &ctx.accounts.user_destination_liquidity.to_account_info(),
@@ -514,9 +515,9 @@ pub fn post_transfer_owner_queued_collateral_vault_balance_checks(
     initial_queued_collateral: u64,
     action_type: LendingAction,
 ) -> anchor_lang::Result<()> {
-   
-   
-   
+
+
+
     let pre_transfer_collateral_diff = i128::from(initial_owner_queued_collateral_vault_balance)
         - i128::from(initial_queued_collateral);
     let post_transfer_collateral_diff = i128::from(final_owner_queued_collateral_vault_balance)
@@ -573,10 +574,10 @@ pub fn post_ticket_collateral_recovery_owner_queued_collateral_vault_balance_che
     initial_user_source_collateral_balance: u64,
     amount_transferred_from_vault_to_user: u64,
 ) -> anchor_lang::Result<()> {
-   
-   
-   
-   
+
+
+
+
 
     let expected_owner_queued_collateral_vault_balance =
         initial_owner_queued_collateral_vault_balance - amount_transferred_from_vault_to_user;
@@ -620,21 +621,21 @@ pub fn post_cancel_withdraw_ticket_balance_checks(
     initial_queued_collateral: u64,
     amount_transferred: u64,
 ) -> Result<()> {
-   
+
     require_eq!(
         initial_owner_queued_collateral_vault_balance - amount_transferred,
         final_owner_queued_collateral_vault_balance,
         LendingError::ReserveVaultBalanceMismatch,
     );
 
-   
+
     require_eq!(
         initial_user_destination_collateral_balance + amount_transferred,
         final_user_destination_collateral_balance,
         LendingError::UserTokenBalanceMismatch,
     );
 
-   
+
     require_eq!(
         initial_queued_collateral - amount_transferred,
         final_queued_collateral,
@@ -663,7 +664,7 @@ pub fn rollover_fixed_term_borrow_into_same_reserve_post_checks(
     reserve_after: ReserveAccountingAndBalance,
     obligation_after: ObligationRolloverAccounting,
 ) -> Result<()> {
-   
+
     require_eq!(
         reserve_before.total_available_liquidity_amount,
         reserve_after.total_available_liquidity_amount,
@@ -675,14 +676,14 @@ pub fn rollover_fixed_term_borrow_into_same_reserve_post_checks(
         LendingError::ReserveAccountingMismatch
     );
 
-   
+
     require_eq!(
         reserve_before.vault_balance,
         reserve_after.vault_balance,
         LendingError::ReserveVaultBalanceMismatch,
     );
 
-   
+
     require_eq!(
         obligation_before.source_reserve_borrowed_amount,
         obligation_after.source_reserve_borrowed_amount,
@@ -715,7 +716,7 @@ pub fn rollover_fixed_term_borrow_into_different_reserve_post_checks(
         tokens_to_transfer_over,
     } = rollover_result;
 
-   
+
     require_gte!(
         borrowed_amount,
         repaid_amount,
@@ -727,7 +728,7 @@ pub fn rollover_fixed_term_borrow_into_different_reserve_post_checks(
         LendingError::ReserveAccountingMismatch
     );
 
-   
+
     require_eq!(
         before.source_reserve.borrowed_amount - repaid_amount,
         after.source_reserve.borrowed_amount,
@@ -738,14 +739,14 @@ pub fn rollover_fixed_term_borrow_into_different_reserve_post_checks(
         after.source_reserve.total_available_liquidity_amount,
         LendingError::ReserveAccountingMismatch
     );
-   
+
     require_eq!(
         before.source_reserve.vault_balance + tokens_to_transfer_over,
         after.source_reserve.vault_balance,
         LendingError::ReserveVaultBalanceMismatch,
     );
 
-   
+
     require_eq!(
         before.target_reserve.borrowed_amount + borrowed_amount,
         after.target_reserve.borrowed_amount,
@@ -756,14 +757,14 @@ pub fn rollover_fixed_term_borrow_into_different_reserve_post_checks(
         after.target_reserve.total_available_liquidity_amount,
         LendingError::ReserveAccountingMismatch
     );
-   
+
     require_eq!(
         before.target_reserve.vault_balance - tokens_to_transfer_over,
         after.target_reserve.vault_balance,
         LendingError::ReserveVaultBalanceMismatch,
     );
 
-   
+
     require_eq!(
         before.obligation.source_reserve_borrowed_amount - repaid_amount,
         after.obligation.source_reserve_borrowed_amount,

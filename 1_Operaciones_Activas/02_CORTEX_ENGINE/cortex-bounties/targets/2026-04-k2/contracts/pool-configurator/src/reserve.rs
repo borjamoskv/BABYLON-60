@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use k2_shared::*;
 use soroban_sdk::{panic_with_error, symbol_short, Address, BytesN, Env, IntoVal, String, Vec};
 
@@ -479,14 +480,14 @@ pub fn set_supply_cap(
 ) -> Result<(), KineticRouterError> {
     storage::validate_admin(env, caller)?;
     caller.require_auth();
-    
+
     // Validate supply_cap fits in 64 bits to prevent silent truncation
     // This ensures the stored value matches the input value
     const U64_MAX: u128 = u64::MAX as u128;
     if supply_cap > U64_MAX {
         return Err(KineticRouterError::InvalidAmount);
     }
-    
+
     env.invoke_contract::<Result<(), KineticRouterError>>(
         &storage::get_kinetic_router(env)?,
         &soroban_sdk::Symbol::new(env, "set_reserve_supply_cap"),
@@ -515,14 +516,14 @@ pub fn set_borrow_cap(
 ) -> Result<(), KineticRouterError> {
     storage::validate_admin(env, caller)?;
     caller.require_auth();
-    
+
     // Validate borrow_cap fits in 64 bits to prevent silent truncation
     // This ensures the stored value matches the input value
     const U64_MAX: u128 = u64::MAX as u128;
     if borrow_cap > U64_MAX {
         return Err(KineticRouterError::InvalidAmount);
     }
-    
+
     env.invoke_contract::<Result<(), KineticRouterError>>(
         &storage::get_kinetic_router(env)?,
         &soroban_sdk::Symbol::new(env, "set_reserve_borrow_cap"),
@@ -551,14 +552,14 @@ pub fn set_debt_ceiling(
 ) -> Result<(), KineticRouterError> {
     storage::validate_admin(env, caller)?;
     caller.require_auth();
-    
+
     // Validate debt_ceiling fits in 64 bits to prevent silent truncation
     // Debt ceiling uses the same storage pattern as caps
     const U64_MAX: u128 = u64::MAX as u128;
     if debt_ceiling > U64_MAX {
         return Err(KineticRouterError::InvalidAmount);
     }
-    
+
     env.invoke_contract::<Result<(), KineticRouterError>>(
         &storage::get_kinetic_router(env)?,
         &soroban_sdk::Symbol::new(env, "set_reserve_debt_ceiling"),
@@ -851,21 +852,21 @@ pub fn deploy_and_init_reserve(
             &soroban_sdk::Symbol::new(env, "set_incentives_contract"),
             soroban_sdk::vec![env, kinetic_router_address.clone().into_val(env), incentives.clone().into_val(env)],
         );
-        
+
         match a_token_result {
             Ok(Ok(Ok(()))) => {}
             Ok(Ok(Err(_))) | Ok(Err(_)) | Err(_) => {
                 return Err(KineticRouterError::TokenInitializationFailed);
             }
         }
-        
+
         // Update debt token incentives contract
         let debt_token_result = env.try_invoke_contract::<Result<(), TokenError>, KineticRouterError>(
             &debt_token_address,
             &soroban_sdk::Symbol::new(env, "set_incentives_contract"),
             soroban_sdk::vec![env, kinetic_router_address.clone().into_val(env), incentives.into_val(env)],
         );
-        
+
         match debt_token_result {
             Ok(Ok(Ok(()))) => {}
             Ok(Ok(Err(_))) | Ok(Err(_)) | Err(_) => {

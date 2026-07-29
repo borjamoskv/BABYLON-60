@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use cortex_chaos::generate_event;
 use cortex_hardware_stub as hardware;
 use cortex_ledger::{Block, Ledger, LedgerError};

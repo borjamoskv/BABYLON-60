@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 macro_rules! impl_shred_common {
     () => {
         #[inline]

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crate::recycler::{RecyclerX, Reset},
     rand::{Rng, seq::SliceRandom},

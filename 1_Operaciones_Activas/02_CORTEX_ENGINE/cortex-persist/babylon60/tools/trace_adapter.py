@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """Trace adapter: canonical types for E1 profiler and MetaArbiterKernel.
 
 Provides ExecutionTrace and TraceEvent — the stable boundary between

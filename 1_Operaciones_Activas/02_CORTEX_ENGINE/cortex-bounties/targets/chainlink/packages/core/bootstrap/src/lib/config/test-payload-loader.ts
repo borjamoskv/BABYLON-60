@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import Ajv, { JSONSchemaType } from 'ajv'
 import { logger } from '../modules/logger'
 import path from 'path'

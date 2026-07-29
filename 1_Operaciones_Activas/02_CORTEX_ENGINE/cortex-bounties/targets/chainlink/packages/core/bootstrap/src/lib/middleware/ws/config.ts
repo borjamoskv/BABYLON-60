@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterContext } from '../../../types'
 import { getEnv, parseBool } from '../../util'
 import type { WSConfig } from './types'

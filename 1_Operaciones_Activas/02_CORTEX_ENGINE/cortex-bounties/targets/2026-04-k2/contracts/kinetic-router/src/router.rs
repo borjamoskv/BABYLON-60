@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::{storage, validation};
 use k2_shared::*;
 use soroban_sdk::{contract, contractimpl, panic_with_error, symbol_short, Address, BytesN, Env, IntoVal, Symbol, U256, Vec};
@@ -1164,14 +1165,14 @@ impl KineticRouterContract {
             &env, actual_debt_to_cover,
             current_debt_price.price, oracle_to_wad, debt_decimals_pow,
         )?;
-        
+
         // DEBUG
         // println!("DEBUG: execute_liquidation tracking amount: {}", actual_debt_to_cover_base);
         // let before = storage::get_user_liquidation_amount(&env, &user);
         // println!("DEBUG: amount before: {}", before);
-        
+
         storage::add_user_liquidation_amount(&env, &user, actual_debt_to_cover_base);
-        
+
         // let after = storage::get_user_liquidation_amount(&env, &user);
         // println!("DEBUG: amount after: {}", after);
 

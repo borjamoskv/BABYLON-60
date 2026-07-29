@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{prelude::*, Accounts, Result};
 
 use crate::{
@@ -116,16 +117,16 @@ pub fn process(ctx: Context<RefreshReservesBatch>, skip_price_updates: bool) -> 
 
 #[derive(Accounts)]
 pub struct RefreshReservesBatch {
-   
-   
-   
-   
-   
-   
-   
-   
-   
 
-   
-   
+
+
+
+
+
+
+
+
+
+
+
 }

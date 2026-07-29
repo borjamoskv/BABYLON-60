@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::{
     cmp::Ordering,
     fmt::{self, Display, Formatter},
@@ -295,7 +296,7 @@ impl Obligation {
             return Fraction::ZERO;
         }
 
-       
+
         if withdraw_collateral_ltv_pct == 0 {
             return Fraction::from_bits(obligation_collateral.market_value_sf);
         }
@@ -306,8 +307,8 @@ impl Obligation {
 
 
     pub fn remaining_borrow_value(&self) -> Fraction {
-       
-       
+
+
         Fraction::from_bits(
             self.allowed_borrow_value_sf
                 .saturating_sub(self.borrow_factor_adjusted_debt_value_sf),
@@ -425,14 +426,14 @@ impl Obligation {
     }
 
     pub fn is_active_deposits_empty(&self) -> bool {
-       
-       
+
+
         self.deposits.iter().all(|deposit| !deposit.is_active())
     }
 
     pub fn is_active_borrows_empty(&self) -> bool {
-       
-       
+
+
         self.borrows.iter().all(|borrow| !borrow.is_active())
     }
 
@@ -632,13 +633,13 @@ impl Obligation {
 
 
     pub fn initiate_ownership_transfer(&mut self, pending_owner: Pubkey) -> Result<()> {
-       
+
         if pending_owner == Pubkey::default() {
             xmsg!("Pending owner cannot be the default pubkey");
             return err!(LendingError::ObligationInvalidPendingOwner);
         }
 
-       
+
         if pending_owner == self.owner {
             xmsg!("Pending owner cannot be the current owner");
             return err!(LendingError::ObligationInvalidPendingOwner);
@@ -894,9 +895,9 @@ impl ObligationLiquidity {
         former_cumulative_borrow_rate_bsf: U256,
         new_cumulative_borrow_rate_bsf: U256,
     ) -> Result<u128> {
-       
-       
-       
+
+
+
 
         let amount_sf_u256 = U256::from(amount_sf) * new_cumulative_borrow_rate_bsf
             / former_cumulative_borrow_rate_bsf;
@@ -1008,7 +1009,7 @@ impl ObligationLiquidity {
             return Ok(0);
         }
 
-       
+
         if self.borrowed_amount_sf == 0 {
             return Ok(0);
         }
@@ -1122,10 +1123,10 @@ impl FixedTermBorrowRolloverConfig {
         target_reserve_config: &ReserveConfig,
     ) -> Result<RolloverMode> {
         if source_reserve_config.get_debt_term_seconds().is_some() {
-           
+
             self.resolve_rollover_from_fixed_term_mode(target_reserve_config)
         } else {
-           
+
             self.check_migration_to_fixed_term_possible(target_reserve_config)?;
             Ok(RolloverMode::FromOpenToFixedTerm)
         }
@@ -1136,30 +1137,30 @@ impl FixedTermBorrowRolloverConfig {
         &self,
         target_reserve_config: &ReserveConfig,
     ) -> Result<RolloverMode> {
-       
+
         if !self.is_auto_rollover_enabled() {
             return err!(LendingError::ObligationBorrowRolloverNotEnabledByOwner);
         }
 
-       
+
         let Some(target_debt_term_seconds) = target_reserve_config.get_debt_term_seconds() else {
             return if self.open_term_allowed == false as u8 {
-               
+
                 xmsg!("Owner did not allow rollover into open-term reserve");
                 err!(LendingError::ObligationBorrowRolloverTargetReserveMismatch)
             } else {
-               
+
                 Ok(RolloverMode::FromFixedToOpenTerm)
-               
-               
-               
-               
-               
+
+
+
+
+
             };
         };
 
-       
-       
+
+
         let target_borrow_rate_bps = target_reserve_config.max_borrow_rate_bps();
         if target_borrow_rate_bps > self.max_borrow_rate_bps {
             xmsg!(
@@ -1170,13 +1171,13 @@ impl FixedTermBorrowRolloverConfig {
             return err!(LendingError::ObligationBorrowRolloverTargetReserveMismatch);
         }
 
-       
+
         if self.min_debt_term_seconds == 0 {
             xmsg!("Owner's min_debt_term_seconds is 0 (open-term only), but target is fixed-term");
             return err!(LendingError::ObligationBorrowRolloverTargetReserveMismatch);
         }
 
-       
+
         if target_debt_term_seconds < self.min_debt_term_seconds {
             xmsg!(
                 "Target reserve debt term ({} seconds) is lower than the minimum allowed {} seconds",
@@ -1194,19 +1195,19 @@ impl FixedTermBorrowRolloverConfig {
         &self,
         target_reserve_config: &ReserveConfig,
     ) -> Result<()> {
-       
+
         if !self.is_migration_to_fixed_enabled() {
             xmsg!("Migration to fixed-term is not enabled by owner");
             return err!(LendingError::ObligationBorrowRolloverNotEnabledByOwner);
         }
 
-       
+
         let Some(target_debt_term_seconds) = target_reserve_config.get_debt_term_seconds() else {
             xmsg!("Migration target must be a fixed-term reserve");
             return err!(LendingError::ObligationBorrowRolloverTargetReserveMismatch);
         };
 
-       
+
         let target_borrow_rate_bps = target_reserve_config.max_borrow_rate_bps();
         if target_borrow_rate_bps > self.max_borrow_rate_bps {
             xmsg!(
@@ -1217,15 +1218,15 @@ impl FixedTermBorrowRolloverConfig {
             return err!(LendingError::ObligationBorrowRolloverTargetReserveMismatch);
         }
 
-       
-       
-       
+
+
+
         if self.min_debt_term_seconds == 0 {
             xmsg!("Owner's min_debt_term_seconds is 0 (open-term only), but migration target is fixed-term");
             return err!(LendingError::ObligationBorrowRolloverTargetReserveMismatch);
         }
 
-       
+
         if target_debt_term_seconds < self.min_debt_term_seconds {
             xmsg!(
                 "Target reserve debt term ({} seconds) is lower than the minimum allowed {} seconds",

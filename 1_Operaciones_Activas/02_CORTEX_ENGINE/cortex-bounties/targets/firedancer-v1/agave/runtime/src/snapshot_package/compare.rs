@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     super::{SnapshotArchiveKind, SnapshotKind, SnapshotPackage},
     std::cmp::Ordering::{self, Equal, Greater, Less},

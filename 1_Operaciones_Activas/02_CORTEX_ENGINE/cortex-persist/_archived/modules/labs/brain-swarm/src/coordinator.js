@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const net = require('node:net');
 const crypto = require('node:crypto');
 const { createMessage, MESSAGE_TYPES, NODE_ROLES, encode, safeParse, makeId } = require('./protocol');

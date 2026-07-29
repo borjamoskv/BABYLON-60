@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Deposit liquidity as collateral into an obligation using `ObligationContext`.
 //!
 //! Unlike the simple `deposit_lending` example, this deposits tokens into a

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { ProviderResult } from '@chainlink/external-adapter-framework/util'
 import { AdapterError } from '@chainlink/external-adapter-framework/validation/error'
 import { BaseEndpointTypes } from '../endpoint/quotes'

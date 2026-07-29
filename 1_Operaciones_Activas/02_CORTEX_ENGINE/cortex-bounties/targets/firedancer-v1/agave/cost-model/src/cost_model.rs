@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! 'cost_model` provides service to estimate a transaction's cost
 //! following proposed fee schedule #16984; Relevant cluster cost
 //! measuring is described by #19627

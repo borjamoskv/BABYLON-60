@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """Pydantic V2 schemas for L3 (Prediction) and L4 (Experiment).
 
 Provides strict typing and structural validation for higher-order causal entities.

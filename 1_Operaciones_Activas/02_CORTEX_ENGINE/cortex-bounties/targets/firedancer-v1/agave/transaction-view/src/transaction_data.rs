@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /// Trait for accessing transaction data from an abstract byte container.
 pub trait TransactionData {
     /// Returns a reference to the serialized transaction data.

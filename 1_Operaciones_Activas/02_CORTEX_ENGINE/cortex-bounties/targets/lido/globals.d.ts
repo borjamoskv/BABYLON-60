@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 declare namespace NodeJS {
   export interface ProcessEnv {
     /* internal logging verbosity (used in scratch deploy / integration tests) */

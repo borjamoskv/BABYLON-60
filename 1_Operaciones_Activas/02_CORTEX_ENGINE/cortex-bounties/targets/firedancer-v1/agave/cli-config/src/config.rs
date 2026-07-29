@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::sync::LazyLock;
 // Wallet settings that can be configured for long-term use
 use {

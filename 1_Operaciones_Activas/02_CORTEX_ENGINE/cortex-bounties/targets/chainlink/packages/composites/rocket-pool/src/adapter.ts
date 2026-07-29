@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { APIEndpoint, Builder, ExecuteFactory, ExecuteWithConfig } from '@chainlink/ea-bootstrap'
 import { AdapterRequest } from '@chainlink/ea-bootstrap'
 import { makeConfig, RocketPoolConfig } from './config'

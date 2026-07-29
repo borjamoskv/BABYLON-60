@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! # Resource Analyzer
 //!
 //! Utilities for analyzing Soroban transaction resource consumption.
@@ -22,7 +23,7 @@ impl ResourceSnapshot {
     pub fn capture(env: &Env, label: impl Into<String>) -> Self {
         let cost_estimate = env.cost_estimate();
         let resources = cost_estimate.resources();
-        
+
         Self {
             label: label.into(),
             cpu_insns: cost_estimate.budget().cpu_instruction_cost(),
@@ -33,7 +34,7 @@ impl ResourceSnapshot {
             write_bytes: resources.write_bytes,
         }
     }
-    
+
     /// Calculate the delta between two snapshots
     pub fn delta(&self, previous: &ResourceSnapshot) -> ResourceDelta {
         ResourceDelta {
@@ -72,7 +73,7 @@ impl ResourceDelta {
         println!("   Write Bytes:      +{}", self.write_bytes_delta);
         println!();
     }
-    
+
     /// Estimate the primary cost driver
     pub fn primary_cost_driver(&self) -> &'static str {
         // VM instantiation typically costs 10M+ CPU instructions
@@ -104,17 +105,17 @@ impl ResourceAnalyzer {
             snapshots: Vec::new(),
         }
     }
-    
+
     /// Capture a snapshot at a checkpoint
     pub fn checkpoint(&mut self, env: &Env, label: impl Into<String>) {
         self.snapshots.push(ResourceSnapshot::capture(env, label));
     }
-    
+
     /// Get all snapshots
     pub fn snapshots(&self) -> &[ResourceSnapshot] {
         &self.snapshots
     }
-    
+
     /// Calculate deltas between consecutive snapshots
     pub fn deltas(&self) -> Vec<ResourceDelta> {
         self.snapshots
@@ -122,19 +123,19 @@ impl ResourceAnalyzer {
             .map(|window| window[1].delta(&window[0]))
             .collect()
     }
-    
+
     /// Print a summary report
     pub fn print_report(&self) {
         println!("========================================");
         println!("📈 Resource Analysis Report");
         println!("========================================");
         println!();
-        
+
         if self.snapshots.is_empty() {
             println!("⚠️  No snapshots captured");
             return;
         }
-        
+
         // Print absolute values
         println!("📊 Absolute Resource Usage:");
         println!();
@@ -148,21 +149,21 @@ impl ResourceAnalyzer {
             println!("    Write Bytes:      {}", snapshot.write_bytes);
             println!();
         }
-        
+
         // Print deltas
         if self.snapshots.len() > 1 {
             println!("========================================");
             println!("📊 Resource Deltas (Operation Costs):");
             println!("========================================");
             println!();
-            
+
             for delta in self.deltas() {
                 delta.print();
                 println!("   Primary driver: {}", delta.primary_cost_driver());
                 println!();
             }
         }
-        
+
         // Print summary
         if let (Some(first), Some(last)) = (self.snapshots.first(), self.snapshots.last()) {
             let total_delta = last.delta(first);
@@ -172,43 +173,43 @@ impl ResourceAnalyzer {
             total_delta.print();
         }
     }
-    
+
     /// Print a comparison between two analyzers (e.g., before/after optimization)
     pub fn print_comparison(before: &ResourceAnalyzer, after: &ResourceAnalyzer, label: &str) {
         println!("========================================");
         println!("📊 Resource Comparison: {}", label);
         println!("========================================");
         println!();
-        
+
         if before.snapshots.is_empty() || after.snapshots.is_empty() {
             println!("⚠️  Insufficient data for comparison");
             return;
         }
-        
+
         let before_total = before.snapshots.last().unwrap();
         let after_total = after.snapshots.last().unwrap();
-        
+
         let cpu_diff = after_total.cpu_insns as i128 - before_total.cpu_insns as i128;
         let mem_diff = after_total.mem_bytes as i128 - before_total.mem_bytes as i128;
-        
+
         println!("CPU Instructions:");
         println!("  Before: {}", before_total.cpu_insns);
         println!("  After:  {}", after_total.cpu_insns);
-        println!("  Change: {} ({:.1}%)", 
+        println!("  Change: {} ({:.1}%)",
             cpu_diff,
             (cpu_diff as f64 / before_total.cpu_insns as f64) * 100.0
         );
         println!();
-        
+
         println!("Memory Bytes:");
         println!("  Before: {}", before_total.mem_bytes);
         println!("  After:  {}", after_total.mem_bytes);
-        println!("  Change: {} ({:.1}%)", 
+        println!("  Change: {} ({:.1}%)",
             mem_diff,
             (mem_diff as f64 / before_total.mem_bytes as f64) * 100.0
         );
         println!();
-        
+
         if cpu_diff < 0 {
             println!("✅ Optimization successful: {} CPU instructions saved", -cpu_diff);
         } else if cpu_diff > 0 {
@@ -226,7 +227,7 @@ impl Default for ResourceAnalyzer {
 }
 
 /// Estimate VM instantiation cost by comparing WASM vs Rust registration
-/// 
+///
 /// This is a helper to demonstrate the difference between:
 /// - env.register(Contract, ()) - Rust-only, no VM instantiation
 /// - env.register(contract::WASM, ()) - WASM-backed, includes VM instantiation
@@ -248,7 +249,7 @@ pub struct ResourceAttribution {
 
 impl ResourceAttribution {
     /// Attempt to attribute costs based on heuristics
-    /// 
+    ///
     /// Note: This is approximate since Soroban doesn't provide per-operation traces
     pub fn from_delta(delta: &ResourceDelta) -> Self {
         // Heuristic: VM instantiation typically costs 10M+ CPU instructions
@@ -257,17 +258,17 @@ impl ResourceAttribution {
         } else {
             0
         };
-        
+
         // Heuristic: Storage operations cost ~100k CPU per entry
         let storage_read_cost = (delta.read_entries_delta as u64) * 100_000;
         let storage_write_cost = (delta.write_entries_delta as u64) * 200_000;
-        
+
         // Remaining is computation
         let computation_cost = delta.cpu_insns_delta
             .saturating_sub(vm_cost)
             .saturating_sub(storage_read_cost)
             .saturating_sub(storage_write_cost);
-        
+
         Self {
             vm_instantiation_cost: vm_cost,
             storage_read_cost,
@@ -275,33 +276,33 @@ impl ResourceAttribution {
             computation_cost,
         }
     }
-    
+
     /// Print the attribution breakdown
     pub fn print(&self) {
-        let total = self.vm_instantiation_cost 
-            + self.storage_read_cost 
-            + self.storage_write_cost 
+        let total = self.vm_instantiation_cost
+            + self.storage_read_cost
+            + self.storage_write_cost
             + self.computation_cost;
-        
+
         if total == 0 {
             println!("No resource usage to attribute");
             return;
         }
-        
+
         println!("📊 Resource Attribution:");
-        println!("   VM Instantiation: {} ({:.1}%)", 
+        println!("   VM Instantiation: {} ({:.1}%)",
             self.vm_instantiation_cost,
             (self.vm_instantiation_cost as f64 / total as f64) * 100.0
         );
-        println!("   Storage Reads:    {} ({:.1}%)", 
+        println!("   Storage Reads:    {} ({:.1}%)",
             self.storage_read_cost,
             (self.storage_read_cost as f64 / total as f64) * 100.0
         );
-        println!("   Storage Writes:   {} ({:.1}%)", 
+        println!("   Storage Writes:   {} ({:.1}%)",
             self.storage_write_cost,
             (self.storage_write_cost as f64 / total as f64) * 100.0
         );
-        println!("   Computation:      {} ({:.1}%)", 
+        println!("   Computation:      {} ({:.1}%)",
             self.computation_cost,
             (self.computation_cost as f64 / total as f64) * 100.0
         );
@@ -312,27 +313,27 @@ impl ResourceAttribution {
 mod tests {
     use super::*;
     use soroban_sdk::{contract, contractimpl};
-    
+
     // Minimal contract stub for enabling cost metering in tests
     #[contract]
     struct TestStub;
-    
+
     #[contractimpl]
     impl TestStub {
         pub fn noop(_env: soroban_sdk::Env) {}
     }
-    
+
     #[test]
     fn test_resource_snapshot() {
         let env = Env::default();
         // Register a contract to enable cost metering
         // This is required for cost_estimate() to work
         let _contract_id = env.register(TestStub, ());
-        
+
         let snapshot = ResourceSnapshot::capture(&env, "test");
         assert_eq!(snapshot.label, "test");
     }
-    
+
     #[test]
     fn test_resource_delta() {
         let snap1 = ResourceSnapshot {
@@ -344,7 +345,7 @@ mod tests {
             read_bytes: 100,
             write_bytes: 50,
         };
-        
+
         let snap2 = ResourceSnapshot {
             label: "end".to_string(),
             cpu_insns: 2000,
@@ -354,14 +355,14 @@ mod tests {
             read_bytes: 300,
             write_bytes: 150,
         };
-        
+
         let delta = snap2.delta(&snap1);
         assert_eq!(delta.cpu_insns_delta, 1000);
         assert_eq!(delta.mem_bytes_delta, 300);
         assert_eq!(delta.read_entries_delta, 3);
         assert_eq!(delta.write_entries_delta, 2);
     }
-    
+
     #[test]
     fn test_primary_cost_driver() {
         let delta = ResourceDelta {
@@ -373,7 +374,7 @@ mod tests {
             read_bytes_delta: 100,
             write_bytes_delta: 100,
         };
-        
+
         assert_eq!(delta.primary_cost_driver(), "VM instantiation (ContractCode)");
     }
 }

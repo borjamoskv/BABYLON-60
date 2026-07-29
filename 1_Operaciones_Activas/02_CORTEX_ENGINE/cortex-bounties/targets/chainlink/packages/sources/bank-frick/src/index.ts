@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Adapter } from '@chainlink/external-adapter-framework/adapter'
 import { accountsRestEndpoint } from './endpoint/accounts'
 import { config } from './config'

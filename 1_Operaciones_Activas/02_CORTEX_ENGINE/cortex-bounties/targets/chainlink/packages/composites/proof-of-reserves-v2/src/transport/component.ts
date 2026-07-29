@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterError } from '@chainlink/external-adapter-framework/validation/error'
 import { BaseEndpointTypes, RequestParams } from '../endpoint/reserves'
 import { FixedPoint, add, fixedPointToNumber, toFixedPointWithDecimals } from '../utils/fixed-point'

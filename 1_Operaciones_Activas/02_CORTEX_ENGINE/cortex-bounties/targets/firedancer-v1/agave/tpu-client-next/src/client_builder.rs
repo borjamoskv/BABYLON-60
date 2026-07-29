@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module provides a [`ClientBuilder`] structure that builds [`TransactionSender`] and [`Client`].
 //!
 //! TPU client establishes connections to TPU nodes. To avoid recreating these connections every

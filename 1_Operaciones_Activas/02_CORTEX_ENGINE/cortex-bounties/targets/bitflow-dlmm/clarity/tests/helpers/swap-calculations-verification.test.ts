@@ -1,6 +1,7 @@
+// C5-REAL EXERGY CERTIFIED
 /**
  * Verification tests to ensure helper functions match existing test logic
- * 
+ *
  * These tests compare the helper functions against the calculation logic
  * used in the existing comprehensive fuzz test to ensure consistency.
  */
@@ -220,7 +221,7 @@ describe('Helper Functions Verification', () => {
       // This test verifies that when we pass an already-capped input (like actualSwappedIn
       // from the contract), the helper function produces the same result as if we passed
       // the original input amount.
-      
+
       const binData: BinData = {
         reserve_x: 0n,
         reserve_y: 1000000000n, // 10 tokens available

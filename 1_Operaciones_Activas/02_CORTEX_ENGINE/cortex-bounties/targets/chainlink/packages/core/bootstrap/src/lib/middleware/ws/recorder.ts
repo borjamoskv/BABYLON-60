@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import WebSocket from 'ws'
 
 interface WsMessage {

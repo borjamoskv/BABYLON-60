@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """Cortex swarm — SubagentRunner, AgentRegistry and built-in handlers."""
 
 import asyncio

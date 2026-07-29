@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import {
   alice,
   bob,
@@ -47,24 +48,24 @@ class TestConfig {
   // Bin range for sampling
   static readonly MIN_BIN_SAMPLE = -10;
   static readonly MAX_BIN_SAMPLE = 10;
-  
+
   // Liquidity parameters
   static readonly MAX_LIQUIDITY_FEE = 1000000n;
   static readonly MIN_DLP = 1n;
-  
+
   // Amount generation
   static readonly MIN_SWAP_AMOUNT = 100n;
   static readonly MIN_LIQUIDITY_AMOUNT = 1000n;
-  
+
   // Random Generation Probabilities
   static readonly PROB_SWAP_VERY_SMALL = 0.2; // <0.1%
   static readonly PROB_SWAP_SMALL = 0.3;      // 0.1-1%
   static readonly PROB_SWAP_MEDIUM = 0.3;     // 1-10%
   static readonly PROB_SWAP_LARGE = 0.2;      // 10-30%
-  
+
   // Error Handling
   static readonly MAX_CONSECUTIVE_FAILURES = 100;
-  
+
   // Progress Reporting
   static readonly PROGRESS_BAR_WIDTH = 40;
   static readonly PROGRESS_UPDATE_INTERVAL = 10;
@@ -140,23 +141,23 @@ class AmountGenerator {
 
     if (direction === 'x-for-y') {
       if (binData.yBalance === 0n || userBalance.xToken === 0n) return null;
-      
+
       const maxFromUser = userBalance.xToken;
       const maxFromBin = (binData.yBalance * 80n) / 100n; // 80% buffer
       const maxAmount = maxFromUser < maxFromBin ? maxFromUser : maxFromBin;
-      
+
       if (maxAmount < TestConfig.MIN_SWAP_AMOUNT) return null;
-      
+
       return this.randomizeAmount(maxAmount);
     } else {
       if (binData.xBalance === 0n || userBalance.yToken === 0n) return null;
-      
+
       const maxFromUser = userBalance.yToken;
       const maxFromBin = (binData.xBalance * 80n) / 100n;
       const maxAmount = maxFromUser < maxFromBin ? maxFromUser : maxFromBin;
-      
+
       if (maxAmount < TestConfig.MIN_SWAP_AMOUNT) return null;
-      
+
       return this.randomizeAmount(maxAmount);
     }
   }
@@ -196,7 +197,7 @@ class AmountGenerator {
 
     const percentage = this.rng.next() * 0.7 + 0.2; // 20-90%
     const amount = (lpBalance * BigInt(Math.floor(percentage * 100))) / 100n;
-    
+
     const minAmount = lpBalance > 5000n ? 1000n : (lpBalance * 20n / 100n);
     if (amount < minAmount) {
       return lpBalance >= minAmount ? minAmount : null;
@@ -213,7 +214,7 @@ class AmountGenerator {
 
     const percentage = this.rng.next() * 0.8 + 0.1; // 10-90%
     const amount = (lpBalance * BigInt(Math.floor(percentage * 100))) / 100n;
-    
+
     if (amount < 1n) return null;
     return amount;
   }
@@ -221,7 +222,7 @@ class AmountGenerator {
   private randomizeAmount(maxAmount: bigint, maxPercent: number = 1.0): bigint {
     const rand = this.rng.next();
     let percentage: number;
-    
+
     if (rand < TestConfig.PROB_SWAP_VERY_SMALL) {
       percentage = this.rng.next() * 0.001;
     } else if (rand < TestConfig.PROB_SWAP_VERY_SMALL + TestConfig.PROB_SWAP_SMALL) {
@@ -231,7 +232,7 @@ class AmountGenerator {
     } else {
       percentage = this.rng.next() * (maxPercent - 0.1) + 0.1;
     }
-    
+
     return (maxAmount * BigInt(Math.floor(percentage * 10000))) / 10000n;
   }
 }
@@ -247,7 +248,7 @@ class InvariantChecker {
   ): string[] {
     const issues: string[] = [];
     const binId = params.binId !== undefined ? params.binId : params.sourceBinId;
-    
+
     // Helper to construct state objects
     const getBinState = (state: PoolState, id: bigint): BinState | null => {
       const bin = state.binBalances.get(id);
@@ -256,10 +257,10 @@ class InvariantChecker {
 
     const getUserState = (state: PoolState, u: string, id: bigint): UserState | null => {
       const userBal = state.userBalances.get(u);
-      return userBal ? { 
-        xTokenBalance: userBal.xToken, 
-        yTokenBalance: userBal.yToken, 
-        lpTokenBalance: userBal.lpTokens.get(id) || 0n 
+      return userBal ? {
+        xTokenBalance: userBal.xToken,
+        yTokenBalance: userBal.yToken,
+        lpTokenBalance: userBal.lpTokens.get(id) || 0n
       } : null;
     };
 
@@ -368,10 +369,10 @@ class TestOrchestrator {
         consecutiveFailures = 0;
         this.orchestrator.incrementStat('successfulTransactions');
       }
-      
+
       this.orchestrator.incrementStat('totalTransactions');
       this.orchestrator.recordResult({ ...txResult, txNumber: i });
-      
+
       if (txResult.invariantChecks && txResult.invariantChecks.length > 0) {
         this.orchestrator.incrementStat('invariantViolations', txResult.invariantChecks.length);
         this.orchestrator.logError(`INVARIANT VIOLATION in tx ${i}`, txResult.invariantChecks);
@@ -379,7 +380,7 @@ class TestOrchestrator {
     }
 
     this.orchestrator.finish();
-    
+
     expect(this.orchestrator.stats.invariantViolations || 0).toBe(0);
   }
 
@@ -396,14 +397,14 @@ class TestOrchestrator {
         const activeBinId = beforeState.activeBinId;
         const direction = functionName === 'swap-x-for-y' ? 'x-for-y' : 'y-for-x';
         const amount = this.amountGen.generateSwapAmount(beforeState, activeBinId, direction, caller);
-        
+
         if (!amount) throw new Error("Could not generate valid swap amount");
-        
+
         params = { binId: activeBinId, amount, caller };
         const response = direction === 'x-for-y'
           ? txOk(dlmmCore.swapXForY(sbtcUsdcPool.identifier, mockSbtcToken.identifier, mockUsdcToken.identifier, activeBinId, amount), caller)
           : txOk(dlmmCore.swapYForX(sbtcUsdcPool.identifier, mockSbtcToken.identifier, mockUsdcToken.identifier, activeBinId, amount), caller);
-        
+
         result = cvToValue(response.result);
         if (typeof result === 'bigint' || typeof result === 'number') result = { in: BigInt(result), out: 0n };
         success = true;
@@ -413,7 +414,7 @@ class TestOrchestrator {
         const binOffset = this.rng.nextInt(TestConfig.MIN_BIN_SAMPLE, TestConfig.MAX_BIN_SAMPLE);
         const binId = beforeState.activeBinId + BigInt(binOffset);
         const clampedBinId = binId < MIN_BIN_ID ? MIN_BIN_ID : (binId > MAX_BIN_ID ? MAX_BIN_ID : binId);
-        
+
         const amounts = this.amountGen.generateAddLiquidityAmount(beforeState, clampedBinId, caller);
         if (!amounts) throw new Error("Could not generate liquidity amounts");
 
@@ -423,7 +424,7 @@ class TestOrchestrator {
           amounts.xAmount, amounts.yAmount, TestConfig.MIN_DLP,
           TestConfig.MAX_LIQUIDITY_FEE, TestConfig.MAX_LIQUIDITY_FEE
         ), caller);
-        
+
         result = cvToValue(response.result);
         success = true;
 
@@ -431,7 +432,7 @@ class TestOrchestrator {
         // Withdraw Liquidity implementation
         const userBal = beforeState.userBalances.get(caller);
         if (!userBal || userBal.lpTokens.size === 0) throw new Error("User has no LP tokens");
-        
+
         const binId = this.rng.choice(Array.from(userBal.lpTokens.keys()));
         const amount = this.amountGen.generateWithdrawAmount(beforeState, binId, caller);
         if (!amount) throw new Error("Could not generate withdraw amount");
@@ -440,7 +441,7 @@ class TestOrchestrator {
         const binData = beforeState.binBalances.get(binId);
         let minX = 0n;
         let minY = 0n;
-        
+
         if (binData && binData.xBalance > 0n) {
              minX = 1n;
         } else {
@@ -452,7 +453,7 @@ class TestOrchestrator {
           sbtcUsdcPool.identifier, mockSbtcToken.identifier, mockUsdcToken.identifier, binId,
           amount, minX, minY
         ), caller);
-        
+
         result = cvToValue(response.result);
         success = true;
 
@@ -460,7 +461,7 @@ class TestOrchestrator {
         // Move Liquidity implementation
         const userBal = beforeState.userBalances.get(caller);
         if (!userBal || userBal.lpTokens.size === 0) throw new Error("User has no LP tokens");
-        
+
         const sourceBinId = this.rng.choice(Array.from(userBal.lpTokens.keys()));
         const amount = this.amountGen.generateMoveAmount(beforeState, sourceBinId, caller);
         if (!amount) throw new Error("Could not generate move amount");
@@ -470,12 +471,12 @@ class TestOrchestrator {
         const sourceBin = beforeState.binBalances.get(sourceBinId);
         const hasX = sourceBin && sourceBin.xBalance > 0n;
         const hasY = sourceBin && sourceBin.yBalance > 0n;
-        
+
         let attempts = 0;
         do {
           const offset = this.rng.nextInt(-5, 5);
           const candidate = beforeState.activeBinId + BigInt(offset);
-          
+
           // Compatibility check based on active bin pricing
           if (candidate === beforeState.activeBinId) {
             destBinId = candidate; // Active bin accepts both
@@ -495,7 +496,7 @@ class TestOrchestrator {
           sourceBinId, destBinId, amount, TestConfig.MIN_DLP,
           TestConfig.MAX_LIQUIDITY_FEE, TestConfig.MAX_LIQUIDITY_FEE
         ), caller);
-        
+
         result = cvToValue(response.result);
         success = true;
       }

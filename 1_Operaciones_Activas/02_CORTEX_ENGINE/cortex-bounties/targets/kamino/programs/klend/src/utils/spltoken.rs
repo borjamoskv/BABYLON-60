@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{
     prelude::{AccountInfo, CpiContext},
     Result,
@@ -84,7 +85,7 @@ pub fn burn_with_signer<'info>(
 pub fn is_frozen_default_account_state_extension(mint_account_info: &AccountInfo) -> Result<bool> {
     let mint_data = mint_account_info.data.borrow();
 
-   
+
     if mint_account_info.owner == &anchor_spl::token::spl_token::id() {
         return Ok(false);
     }
@@ -93,7 +94,7 @@ pub fn is_frozen_default_account_state_extension(mint_account_info: &AccountInfo
 
     let extension_types = mint.get_extension_types()?;
 
-   
+
     if !extension_types.contains(&ExtensionType::DefaultAccountState) {
         return Ok(false);
     }

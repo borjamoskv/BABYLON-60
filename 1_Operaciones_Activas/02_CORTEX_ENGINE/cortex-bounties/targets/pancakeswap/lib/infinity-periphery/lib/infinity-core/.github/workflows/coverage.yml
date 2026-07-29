@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 name: coverage
 
 on:
@@ -16,8 +17,8 @@ jobs:
         uses: foundry-rs/foundry-toolchain@v1
         with:
           version: stable
-          
-      # install dependency 
+
+      # install dependency
       - uses: actions/setup-node@v3
         with:
           node-version: 16
@@ -44,7 +45,7 @@ jobs:
             const {data: comments} = await github.rest.issues.listComments({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                issue_number: context.issue.number, 
+                issue_number: context.issue.number,
               })
 
             const botComment = comments.find(comment => comment.user.id === 41898282)

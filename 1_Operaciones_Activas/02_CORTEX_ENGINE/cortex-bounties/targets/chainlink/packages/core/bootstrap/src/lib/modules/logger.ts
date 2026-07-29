@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { uuid } from '../util'
 import pino from 'pino'
 import { cloneDeep } from 'lodash'

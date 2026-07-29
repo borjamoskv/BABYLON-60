@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { WebsocketReverseMappingTransport } from '@chainlink/external-adapter-framework/transports'
 import { makeLogger } from '@chainlink/external-adapter-framework/util'
 import { v4 as uuidv4 } from 'uuid'

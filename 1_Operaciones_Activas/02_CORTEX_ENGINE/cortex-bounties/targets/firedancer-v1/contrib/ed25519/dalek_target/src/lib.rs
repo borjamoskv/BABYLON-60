@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use ed25519_dalek::{Keypair, PublicKey, SecretKey, Signature, Signer};
 use std::ffi::c_int;
 

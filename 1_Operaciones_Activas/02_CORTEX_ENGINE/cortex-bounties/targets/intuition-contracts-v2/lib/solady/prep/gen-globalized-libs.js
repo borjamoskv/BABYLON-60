@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env node
 const { hasAnyPathSequence, readSync, writeSync, forEachWalkSync } = require('./common.js');
 
@@ -11,10 +12,10 @@ async function main() {
     let src = readSync(srcPath);
     const libraryStartMatch = src.match(/library\s+([A-Za-z0-9]+)\s+\{/);
     if (!libraryStartMatch) return;
-    
+
     let structsSrc = '', usings = [];
     src = src.replace(
-      /\s*\/\*\S+?\*\/\s*\/\*\s+STRUCTS?\s+\*\/\s*\/\*\S+?\*\/([\s\S]+?struct\s+[A-Za-z0-9]+\s+\{[\s\S]+?\})+/, 
+      /\s*\/\*\S+?\*\/\s*\/\*\s+STRUCTS?\s+\*\/\s*\/\*\S+?\*\/([\s\S]+?struct\s+[A-Za-z0-9]+\s+\{[\s\S]+?\})+/,
       m => (structsSrc = m, '')
     );
 
@@ -26,9 +27,9 @@ async function main() {
     const dstPath = srcPath.replace(/([A-Za-z0-9]+\.sol)/, 'g/$1');
     console.log(dstPath);
     writeSync(
-      dstPath, 
+      dstPath,
       src.replace(
-        /pragma\s+solidity\s+\^0\.8\.\d+;/, 
+        /pragma\s+solidity\s+\^0\.8\.\d+;/,
         [
           'pragma solidity ^0.8.13;',
           '// This file is auto-generated.',

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { ethers } = require('hardhat');
 
 const { MAX_UINT64 } = require('./constants');

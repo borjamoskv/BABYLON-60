@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const customRules = require('./scripts/solhint-custom');
 
 console.log('Using custom rules:', JSON.stringify(customRules, null, 2));

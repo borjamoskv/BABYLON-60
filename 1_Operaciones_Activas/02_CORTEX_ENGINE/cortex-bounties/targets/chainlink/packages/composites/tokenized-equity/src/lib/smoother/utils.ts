@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { parseUnits } from 'ethers'
 
 export const PRECISION = 18 // Keep 18 decimals when converting number to bigint

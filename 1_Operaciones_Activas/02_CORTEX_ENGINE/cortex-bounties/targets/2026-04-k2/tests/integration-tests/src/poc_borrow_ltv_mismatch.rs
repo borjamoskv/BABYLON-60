@@ -1,10 +1,11 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 //! Test for FIND-043: Borrow-limit inconsistency fix
-//! 
+//!
 //! Verifies that available_borrows_base is calculated correctly as:
 //! (collateral * LTV) - debt
-//! 
+//!
 
 use crate::setup::{create_test_env_with_budget_limits, deploy_test_protocol_two_assets};
 
@@ -63,9 +64,9 @@ fn poc_borrow_exceeds_ltv_due_to_available_formula() {
     // Verify correct formula: (100 * 0.80) - 60 = 20 available
     let expected_max_debt = data_after.total_collateral_base * 8000 / 10000;
     let expected_available = expected_max_debt.saturating_sub(data_after.total_debt_base);
-    
+
     assert_eq!(
-        data_after.available_borrows_base, 
+        data_after.available_borrows_base,
         expected_available,
         "available_borrows_base should be (collateral * LTV) - debt"
     );
@@ -84,7 +85,7 @@ fn poc_borrow_exceeds_ltv_due_to_available_formula() {
     // Attempt borrow between correct and wrong limits (should fail)
     let amount_between = (expected_available + wrong_available) / 2;
     let amount_in_asset_units = (amount_between * 10_000_000) / 1_000_000_000_000_000_000;
-    
+
     if amount_in_asset_units > 0 {
         let result = protocol.kinetic_router.try_borrow(
             &protocol.user,

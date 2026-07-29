@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::{
     fmt::Display,
     ops::{Range, RangeInclusive},
@@ -169,7 +170,7 @@ pub fn check_orders_supported_after_user_operation(obligation: &mut Obligation) 
         .iter()
         .any(|order| !order.is_supported_by(obligation));
     if has_unsupported_orders {
-       
+
         let unsupported_orders = obligation
             .obligation_orders
             .iter()
@@ -192,7 +193,7 @@ pub fn check_orders_supported_after_user_operation(obligation: &mut Obligation) 
 pub fn remove_all_orders(obligation: &mut Obligation) -> bool {
     let mut had_orders = false;
     for order in obligation.obligation_orders.iter_mut() {
-       
+
         if order != &ObligationOrder::default() {
             *order = ObligationOrder::default();
             had_orders = true;
@@ -251,7 +252,7 @@ pub fn set_order_on_obligation(
 impl ConditionType {
     pub fn is_supported_by(&self, obligation: &Obligation) -> bool {
         match self {
-            Self::Never => true,                            
+            Self::Never => true,
             Self::UserLtvAbove | Self::UserLtvBelow => true,
             Self::DebtCollPriceRatioAbove | Self::DebtCollPriceRatioBelow => {
                 obligation.is_single_debt_single_coll()
@@ -333,7 +334,7 @@ fn validate_order(order: ObligationOrder) -> Result<()> {
                 msg!("A void order should be entirely zeroed; got {:?}", order);
                 return err!(LendingError::InvalidOrderConfiguration);
             }
-           
+
             return Ok(());
         }
         Ok(ConditionType::LiquidationLtvCloserThan) => {
@@ -428,9 +429,9 @@ fn evaluate_order_condition(
             evaluate_stop_loss(
                 price_ratio,
                 order.condition_threshold(),
-               
-               
-               
+
+
+
                 price_ratio * obligation.unhealthy_loan_to_value() / obligation.loan_to_value(),
             )
         }
@@ -458,13 +459,13 @@ fn evaluate_stop_loss(
         return None;
     }
     let normalized_distance_towards_liquidation = if condition_threshold >= liquidation_threshold {
-       
-       
-       
-       
+
+
+
+
         Fraction::ONE
     } else {
-       
+
         let current_distance = current_value - condition_threshold;
         let maximum_distance = liquidation_threshold - condition_threshold;
         current_distance / maximum_distance

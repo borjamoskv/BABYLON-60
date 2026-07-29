@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { omit } from 'lodash'
 import { WarmupExecutePayload, WarmupSubscribedPayload } from './actions'
 import { get } from './config'

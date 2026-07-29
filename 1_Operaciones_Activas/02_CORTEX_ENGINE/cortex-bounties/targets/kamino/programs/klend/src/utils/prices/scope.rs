@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::{cell::Ref, convert::TryInto};
 
 use anchor_lang::{__private::bytemuck, prelude::*, Discriminator};
@@ -65,7 +66,7 @@ fn get_price_account<'a>(scope_price_account: &'a AccountInfo) -> Result<Ref<'a,
 
     let disc_bytes = &data[0..8];
     if disc_bytes != ScopePrices::discriminator() {
-       
+
         return Err(LendingError::CouldNotDeserializeScope.into());
     }
 
@@ -83,7 +84,7 @@ fn get_price_usd(
         msg!("Scope chain is not initialized properly");
         return err!(LendingError::PriceNotValid);
     }
-   
+
     let price_chain_raw = tokens_chain.map(|token_id| get_base_price(scope_prices, token_id));
 
     let chain_len = price_chain_raw.iter().take_while(|v| v.is_some()).count();
@@ -93,7 +94,7 @@ fn get_price_usd(
         return err!(LendingError::NoPriceFound);
     }
 
-   
+
     if chain_len == 1 {
         let price = price_chain_raw[0].unwrap();
         let price_load = Box::new(move || Ok(price_to_fraction(price.0)));

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from eth_consensus_specs.test.helpers.block import get_state_and_beacon_parent_root_at_slot
 from eth_consensus_specs.test.helpers.keys import privkeys
 from eth_consensus_specs.utils import bls

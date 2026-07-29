@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /// A helper for calculating a stake-weighted timestamp estimate from a set of timestamps and epoch
 /// stake.
 use {

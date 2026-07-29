@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from typing import Any
 
 from eth_consensus_specs.utils.ssz.ssz_impl import hash_tree_root

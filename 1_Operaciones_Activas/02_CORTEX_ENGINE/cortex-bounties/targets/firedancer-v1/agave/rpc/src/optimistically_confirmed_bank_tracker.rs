@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `optimistically_confirmed_bank_tracker` module implements a threaded service to track the
 //! most recent optimistically confirmed bank for use in rpc services, and triggers gossip
 //! subscription notifications.

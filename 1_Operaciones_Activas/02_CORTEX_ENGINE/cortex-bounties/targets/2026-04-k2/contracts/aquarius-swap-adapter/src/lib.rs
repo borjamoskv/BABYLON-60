@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![no_std]
 use soroban_sdk::{contract, contractimpl, contracttype, contracterror, symbol_short, token, Address, Env, IntoVal, Symbol, Vec};
 use soroban_sdk::auth::{ContractContext, InvokerContractAuthEntry, SubContractInvocation};
@@ -51,32 +52,32 @@ impl AquariusSwapAdapter {
     }
 
     /// Initialize adapter with Aquarius router address
-    /// 
+    ///
     /// # Arguments
     /// * `admin` - Admin address (can update router)
     /// * `aquarius_router` - Aquarius router contract address
     pub fn initialize(_env: Env, _admin: Address, _aquarius_router: Address) -> Result<(), Error> {
         panic!("AQUARIUS_ADAPTER_ALREADY_INITIALIZED_AT_CONSTRUCTOR");
     }
-    
+
     /// Update Aquarius router address (admin only)
     pub fn set_router(env: Env, caller: Address, aquarius_router: Address) -> Result<(), Error> {
         caller.require_auth();
-        
+
         let admin: Address = env.storage().instance()
             .get(&DataKey::Admin)
             .ok_or(Error::NotInitialized)?;
-        
+
         if caller != admin {
             return Err(Error::Unauthorized);
         }
-        
+
         env.storage().instance().set(&DataKey::Router, &aquarius_router);
         env.storage().instance().extend_ttl(TTL_THRESHOLD, TTL_EXTENSION);
-        
+
         Ok(())
     }
-    
+
     /// Get current Aquarius router address
     pub fn get_router(env: Env) -> Result<Address, Error> {
         let result = env.storage().instance()
@@ -87,13 +88,13 @@ impl AquariusSwapAdapter {
         }
         result
     }
-    
+
     /// Register a pool for a token pair (admin only)
-    /// 
+    ///
     /// # Arguments
     /// * `caller` - Must be admin
     /// * `token_a` - First token
-    /// * `token_b` - Second token  
+    /// * `token_b` - Second token
     /// * `pool_address` - Pool contract address from Aquarius
     pub fn register_pool(
         env: Env,
@@ -103,33 +104,33 @@ impl AquariusSwapAdapter {
         pool_address: Address,
     ) -> Result<(), Error> {
         caller.require_auth();
-        
+
         let admin: Address = env.storage().instance()
             .get(&DataKey::Admin)
             .ok_or(Error::NotInitialized)?;
-        
+
         env.storage().instance().extend_ttl(TTL_THRESHOLD, TTL_EXTENSION);
-        
+
         if caller != admin {
             return Err(Error::Unauthorized);
         }
-        
+
         // Store with sorted tokens
         let (token0, token1) = if token_a < token_b {
             (token_a, token_b)
         } else {
             (token_b, token_a)
         };
-        
+
         let key = DataKey::PoolAddress(token0, token1);
         env.storage().persistent().set(&key, &pool_address);
         env.storage()
             .persistent()
             .extend_ttl(&key, TTL_THRESHOLD, TTL_EXTENSION);
-        
+
         Ok(())
     }
-    
+
     /// Get pool address for a token pair
     fn get_pool_address(env: &Env, token_a: &Address, token_b: &Address) -> Result<Address, Error> {
         let (token0, token1) = if token_a < token_b {
@@ -137,7 +138,7 @@ impl AquariusSwapAdapter {
         } else {
             (token_b.clone(), token_a.clone())
         };
-        
+
         let key = DataKey::PoolAddress(token0, token1);
         if env.storage().persistent().has(&key) {
             env.storage()
@@ -149,9 +150,9 @@ impl AquariusSwapAdapter {
             .get(&key)
             .ok_or(Error::NotInitialized)
     }
-    
+
     /// Get token indices for pool swap (0 or 1 based on pool's actual token order)
-    /// 
+    ///
     /// Queries the pool to get its actual token order, then calculates indices
     /// based on which token is at which position in the pool.
     fn get_token_indices(
@@ -166,19 +167,19 @@ impl AquariusSwapAdapter {
             &Symbol::new(env, "get_tokens"),
             soroban_sdk::vec![env],
         );
-        
+
         let tokens = match tokens_result {
             Ok(Ok(t)) => t,
             Ok(Err(_)) | Err(_) => return Err(Error::SwapFailed),
         };
-        
+
         if tokens.len() != 2 {
             return Err(Error::SwapFailed);
         }
-        
+
         let token_a = tokens.get(0).ok_or(Error::InvalidAmount)?;
         let token_b = tokens.get(1).ok_or(Error::InvalidAmount)?;
-        
+
         // Find indices based on pool's actual token order
         let in_idx = if *from_token == token_a {
             0
@@ -187,7 +188,7 @@ impl AquariusSwapAdapter {
         } else {
             return Err(Error::SwapFailed); // from_token not in pool
         };
-        
+
         let out_idx = if *to_token == token_a {
             0
         } else if *to_token == token_b {
@@ -195,22 +196,22 @@ impl AquariusSwapAdapter {
         } else {
             return Err(Error::SwapFailed); // to_token not in pool
         };
-        
+
         Ok((in_idx, out_idx))
     }
-    
+
     /// Execute swap via Aquarius (K2 standard interface)
-    /// 
+    ///
     /// This is called by K2 contracts. It translates K2's simple interface
     /// to Aquarius's specific requirements (sorted tokens, pool_index, etc.)
-    /// 
+    ///
     /// # Arguments
     /// * `from_token` - Token to swap from
     /// * `to_token` - Token to swap to
     /// * `amount_in` - Amount to swap
     /// * `min_amount_out` - Minimum acceptable output (slippage protection)
     /// * `recipient` - Address to receive output tokens
-    /// 
+    ///
     /// # Returns
     /// * Actual amount of tokens received
     pub fn execute_swap(
@@ -224,19 +225,19 @@ impl AquariusSwapAdapter {
         if amount_in == 0 {
             return Err(Error::InvalidAmount);
         }
-        
+
         // Get pool address directly (no router needed)
         let pool_address = Self::get_pool_address(&env, &from_token, &to_token)?;
         let adapter_address = env.current_contract_address();
-        
+
         // Get token indices based on pool's actual token order (pool expects 0 or 1)
         let (in_idx, out_idx) = Self::get_token_indices(&env, &pool_address, &from_token, &to_token)?;
-        
+
         // Pre-authorize the pool swap call and token transfer
         // Pool.swap() calls user.require_auth(), so we need to authorize the adapter
         // Pool will also call: token.transfer(adapter, pool, amount_in)
         let mut auth_entries = soroban_sdk::vec![&env];
-        
+
         // Authorize pool swap call (pool checks adapter_address.require_auth())
         auth_entries.push_back(InvokerContractAuthEntry::Contract(SubContractInvocation {
             context: ContractContext {
@@ -253,7 +254,7 @@ impl AquariusSwapAdapter {
             },
             sub_invocations: Vec::new(&env),
         }));
-        
+
         // Authorize token transfer that pool.swap() will initiate
         auth_entries.push_back(InvokerContractAuthEntry::Contract(SubContractInvocation {
             context: ContractContext {
@@ -268,9 +269,9 @@ impl AquariusSwapAdapter {
             },
             sub_invocations: Vec::new(&env),
         }));
-        
+
         env.authorize_as_current_contract(auth_entries);
-        
+
         // Call pool directly (not router) - avoids nested require_auth() issues
         // Pool signature: swap(user, in_idx, out_idx, in_amount, out_min)
         let swap_result = env.try_invoke_contract::<u128, Error>(
@@ -285,16 +286,16 @@ impl AquariusSwapAdapter {
                 min_amount_out.into_val(&env),
             ],
         );
-        
+
         let amount_out = match swap_result {
             Ok(Ok(amt)) => amt,
             Ok(Err(_)) | Err(_) => return Err(Error::SwapFailed),
         };
-        
+
         if amount_out < min_amount_out {
             return Err(Error::SwapFailed);
         }
-        
+
         // Transfer output tokens from adapter to recipient
         // Flow: K2 -> adapter (input) -> Pool swap -> adapter (output) -> K2 (output)
         env.authorize_as_current_contract(soroban_sdk::vec![
@@ -313,23 +314,23 @@ impl AquariusSwapAdapter {
                 sub_invocations: Vec::new(&env),
             }),
         ]);
-        
+
         token::Client::new(&env, &to_token).transfer(
             &adapter_address,
             &recipient,
             &safe_u128_to_i128(&env, amount_out)?
         );
-        
+
         Ok(amount_out)
     }
-    
+
     /// Get swap quote from Aquarius (for view functions)
-    /// 
+    ///
     /// # Arguments
     /// * `from_token` - Token to swap from
     /// * `to_token` - Token to swap to
     /// * `amount_in` - Amount to get quote for
-    /// 
+    ///
     /// # Returns
     /// * Expected output amount
     pub fn get_quote(
@@ -341,13 +342,13 @@ impl AquariusSwapAdapter {
         if amount_in == 0 {
             return Err(Error::InvalidAmount);
         }
-        
+
         // Get pool address directly
         let pool_address = Self::get_pool_address(&env, &from_token, &to_token)?;
-        
+
         // Get token indices based on pool's actual token order
         let (in_idx, out_idx) = Self::get_token_indices(&env, &pool_address, &from_token, &to_token)?;
-        
+
         // Call pool's estimate_swap directly
         // Pool signature: estimate_swap(in_idx, out_idx, in_amount)
         let quote_result = env.try_invoke_contract::<u128, Error>(
@@ -360,12 +361,12 @@ impl AquariusSwapAdapter {
                 amount_in.into_val(&env),
             ],
         );
-        
+
         let amount_out = match quote_result {
             Ok(Ok(amt)) => amt,
             Ok(Err(_)) | Err(_) => return Err(Error::SwapFailed),
         };
-        
+
         Ok(amount_out)
     }
 }

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 use crate::kinetic_router;
@@ -12,16 +13,16 @@ use soroban_sdk::{
 fn test_flash_loan_premium() {
     let env = Env::default();
     env.mock_all_auths();
-    
+
     let admin = Address::generate(&env);
     let emergency_admin = Address::generate(&env);
     let protocol = deploy_full_protocol(&env, &admin, &emergency_admin);
-    
+
     let kinetic_router_client = kinetic_router::Client::new(&env, &protocol.kinetic_router);
-    
+
     let premium = kinetic_router_client.get_flash_loan_premium();
     let max_premium = kinetic_router_client.get_flash_loan_premium_max();
-    
+
     assert_eq!(premium, 30, "Default premium should be 30 basis points (0.3%)");
     assert!(premium <= max_premium, "Premium should not exceed max premium. Premium: {}, Max: {}", premium, max_premium);
     assert!(premium <= 10000, "Premium should be valid basis points (max 100%). Premium: {}", premium);
@@ -31,19 +32,19 @@ fn test_flash_loan_premium() {
 fn test_flash_loan_premium_max() {
     let env = Env::default();
     env.mock_all_auths();
-    
+
     let admin = Address::generate(&env);
     let emergency_admin = Address::generate(&env);
     let protocol = deploy_full_protocol(&env, &admin, &emergency_admin);
-    
+
     let kinetic_router_client = kinetic_router::Client::new(&env, &protocol.kinetic_router);
-    
+
     let max_premium = kinetic_router_client.get_flash_loan_premium_max();
-    
+
     assert_eq!(max_premium, 100, "Default max premium should be 100 basis points (1%)");
     assert!(max_premium > 0, "Max premium should be positive");
     assert!(max_premium <= 10000, "Max premium should be valid basis points (max 100%). Max: {}", max_premium);
-    
+
     let current_premium = kinetic_router_client.get_flash_loan_premium();
     assert!(current_premium <= max_premium, "Current premium should not exceed max. Premium: {}, Max: {}", current_premium, max_premium);
 }
@@ -52,29 +53,29 @@ fn test_flash_loan_premium_max() {
 fn test_set_flash_loan_premium() {
     let env = Env::default();
     env.mock_all_auths();
-    
+
     let admin = Address::generate(&env);
     let emergency_admin = Address::generate(&env);
     let protocol = deploy_full_protocol(&env, &admin, &emergency_admin);
-    
+
     let kinetic_router_client = kinetic_router::Client::new(&env, &protocol.kinetic_router);
-    
+
     let max_premium = kinetic_router_client.get_flash_loan_premium_max();
     let initial_premium = kinetic_router_client.get_flash_loan_premium();
-    
+
     let new_premium = 50u128;
     assert!(new_premium <= max_premium, "Test premium should be within max");
-    
+
     kinetic_router_client.set_flash_loan_premium(&new_premium);
-    
+
     let current_premium = kinetic_router_client.get_flash_loan_premium();
     assert_eq!(current_premium, new_premium, "Premium should be updated exactly. Expected: {}, Got: {}", new_premium, current_premium);
     assert_ne!(current_premium, initial_premium, "Premium should have changed from initial value");
-    
+
     kinetic_router_client.set_flash_loan_premium(&max_premium);
     let premium_at_max = kinetic_router_client.get_flash_loan_premium();
     assert_eq!(premium_at_max, max_premium, "Should be able to set premium to max. Expected: {}, Got: {}", max_premium, premium_at_max);
-    
+
     kinetic_router_client.set_flash_loan_premium(&0u128);
     let premium_zero = kinetic_router_client.get_flash_loan_premium();
     assert_eq!(premium_zero, 0, "Should be able to set premium to zero");
@@ -84,21 +85,21 @@ fn test_set_flash_loan_premium() {
 fn test_set_flash_loan_premium_above_max_fails() {
     let env = Env::default();
     env.mock_all_auths();
-    
+
     let admin = Address::generate(&env);
     let emergency_admin = Address::generate(&env);
     let protocol = deploy_full_protocol(&env, &admin, &emergency_admin);
-    
+
     let kinetic_router_client = kinetic_router::Client::new(&env, &protocol.kinetic_router);
-    
+
     let max_premium = kinetic_router_client.get_flash_loan_premium_max();
     let initial_premium = kinetic_router_client.get_flash_loan_premium();
-    
+
     let invalid_premium = max_premium + 1;
     let result = kinetic_router_client.try_set_flash_loan_premium(&invalid_premium);
-    
+
     assert!(result.is_err(), "Setting premium above max should fail. Attempted: {}, Max: {}", invalid_premium, max_premium);
-    
+
     let current_premium = kinetic_router_client.get_flash_loan_premium();
     assert_eq!(current_premium, initial_premium, "Premium should remain unchanged after failed attempt. Expected: {}, Got: {}", initial_premium, current_premium);
 }
@@ -107,27 +108,27 @@ fn test_set_flash_loan_premium_above_max_fails() {
 fn test_set_flash_loan_premium_max() {
     let env = Env::default();
     env.mock_all_auths();
-    
+
     let admin = Address::generate(&env);
     let emergency_admin = Address::generate(&env);
     let protocol = deploy_full_protocol(&env, &admin, &emergency_admin);
-    
+
     let kinetic_router_client = kinetic_router::Client::new(&env, &protocol.kinetic_router);
-    
+
     let initial_max = kinetic_router_client.get_flash_loan_premium_max();
     assert_eq!(initial_max, 100, "Initial max should be 100 bps");
-    
+
     let new_max_premium = 200u128;
     kinetic_router_client.set_flash_loan_premium_max(&new_max_premium);
-    
+
     let current_max = kinetic_router_client.get_flash_loan_premium_max();
     assert_eq!(current_max, new_max_premium, "Max premium should be updated exactly. Expected: {}, Got: {}", new_max_premium, current_max);
     assert_ne!(current_max, initial_max, "Max should have changed from initial value");
-    
+
     kinetic_router_client.set_flash_loan_premium(&new_max_premium);
     let premium_at_new_max = kinetic_router_client.get_flash_loan_premium();
     assert_eq!(premium_at_new_max, new_max_premium, "Should be able to set premium to new max. Expected: {}, Got: {}", new_max_premium, premium_at_new_max);
-    
+
     let result = kinetic_router_client.try_set_flash_loan_premium(&(new_max_premium + 1));
     assert!(result.is_err(), "Setting premium above new max should fail");
 }

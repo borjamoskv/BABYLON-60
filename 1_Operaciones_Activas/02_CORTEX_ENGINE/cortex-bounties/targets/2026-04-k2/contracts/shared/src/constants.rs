@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 pub const PRICE_PRECISION: u32 = 14;
 pub const WAD_PRECISION: u32 = 18;
 pub const LTV_PRECISION: u128 = 1_000_000_000_000_000_000;
@@ -81,11 +82,11 @@ pub const MAX_PRICE_STALENESS_THRESHOLD: u64 = 86400;
 pub const MIN_PRICE_STALENESS_THRESHOLD: u64 = 60;
 
 /// Circuit breaker threshold: maximum allowed price change between consecutive queries.
-/// 
+///
 /// Default: 2000 basis points (20%). Protects against oracle failures and manipulation
 /// attacks that could cause extreme price jumps leading to incorrect liquidations.
 /// Set to 0 to disable circuit breaker entirely.
-/// 
+///
 pub const DEFAULT_MAX_PRICE_CHANGE_BPS: u32 = 2000;
 
 pub const DEFAULT_ORACLE_CONFIG: OracleConfig = OracleConfig {

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { expose, ServerInstance } from '@chainlink/external-adapter-framework'
 import { PriceAdapter } from '@chainlink/external-adapter-framework/adapter'
 import { cryptoEndpoint, cryptoLwbaEndpoint } from './endpoint'

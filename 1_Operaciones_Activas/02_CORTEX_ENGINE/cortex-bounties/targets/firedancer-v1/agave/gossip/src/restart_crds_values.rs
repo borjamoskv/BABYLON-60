@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crate::crds_data::{new_rand_timestamp, sanitize_wallclock},
     bv::BitVec,

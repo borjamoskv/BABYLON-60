@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // This bench attempts to justify the value of `solana_core::poh_service::NUM_HASHES_PER_BATCH`
 
 #![feature(test)]

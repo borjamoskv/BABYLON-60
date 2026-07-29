@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Shared invariant checks for K2 fuzz testing.
 //!
 //! This module provides reusable invariant assertions that can be used across

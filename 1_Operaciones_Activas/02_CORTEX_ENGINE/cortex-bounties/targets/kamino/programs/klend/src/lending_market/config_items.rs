@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::{
     fmt::{Debug, Display},
     marker::PhantomData,
@@ -198,7 +199,7 @@ impl<'h, H> ConfigItemUpdater<'h, H, (), (), (), (), ()> {
             getter,
             setter,
             validator: accept_anything,
-            renderer: write_debug,     
+            renderer: write_debug,
             value_type_phantom: PhantomData,
         }
     }

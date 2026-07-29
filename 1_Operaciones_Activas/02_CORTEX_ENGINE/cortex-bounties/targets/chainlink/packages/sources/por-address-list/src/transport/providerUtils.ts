@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { makeLogger } from '@chainlink/external-adapter-framework/util'
 import { AdapterInputError } from '@chainlink/external-adapter-framework/validation/error'
 import { ethers } from 'ethers'

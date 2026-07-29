@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::{calculation, storage, validation};
 use k2_shared::*;
 use soroban_sdk::{contracterror, panic_with_error, symbol_short, Address, Env, IntoVal, Map, Symbol, U256, Vec};
@@ -26,7 +27,7 @@ pub(crate) fn validate_close_factor(
     };
 
     let previously_liquidated = storage::get_user_liquidation_amount(env, user);
-    
+
     // Initial debt = current debt + amount already liquidated in this ledger
     let initial_debt_base = individual_debt_base
         .checked_add(previously_liquidated)
@@ -170,11 +171,11 @@ fn internal_liquidation_call(
     let mut known_prices = Map::new(env);
     known_prices.set(collateral_asset.clone(), collateral_price);
     known_prices.set(debt_asset.clone(), debt_price);
-    
+
     let mut known_reserves = Map::new(env);
     known_reserves.set(collateral_asset.clone(), updated_collateral_reserve_data.clone());
     known_reserves.set(debt_asset.clone(), updated_debt_reserve_data.clone());
-    
+
     // NEW-03
     let oracle_to_wad = crate::calculation::get_oracle_precision_factor(env)?;
 
@@ -583,7 +584,7 @@ fn internal_liquidation_call(
     let mut remaining_debt_balance = debt_balance
         .checked_sub(debt_to_cover_i128)
         .ok_or(KineticRouterError::MathOverflow)?;
-    
+
     // H-02: Post-burn bad debt socialization.
     // When collateral_cap_triggered, ALL remaining debt is unrecoverable (no collateral left
     // for another liquidation). Socialize unconditionally — threshold is irrelevant here.

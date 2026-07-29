@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 
 # Example usage:  solana -um block 123456789 --output json-compact | src/discof/replay/rdisp_format_block_for_test.py > /tmp/123456789.bin &&  build/native/gcc/unit-test/test_rdisp --block-file /tmp/123456789.bin

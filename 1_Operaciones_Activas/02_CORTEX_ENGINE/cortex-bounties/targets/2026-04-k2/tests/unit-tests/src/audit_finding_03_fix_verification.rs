@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! # FINDING-03 FIX VERIFICATION
 //!
 //! These tests verify that the fix for FINDING-03 is working correctly.
@@ -24,7 +25,7 @@ mod tests {
         // One above max safe should return error
         let overflow_value = max_safe + 1;
         let overflow_result = wad_to_ray(overflow_value);
-        
+
         assert!(overflow_result.is_err(), "Overflow should return error");
         assert_eq!(
             overflow_result.unwrap_err(),
@@ -43,7 +44,7 @@ mod tests {
     fn test_ray_to_wad_returns_error_on_overflow() {
         let large_ray = u128::MAX;
         let result = ray_to_wad(large_ray);
-        
+
         assert!(result.is_err(), "Large RAY value should return error");
         assert_eq!(
             result.unwrap_err(),
@@ -65,7 +66,7 @@ mod tests {
         let percentage = 8000u128; // 80%
 
         let result = percent_mul(overflow_value, percentage);
-        
+
         assert!(result.is_err(), "Overflow should return error");
         assert_eq!(
             result.unwrap_err(),
@@ -87,7 +88,7 @@ mod tests {
         let percentage = 5000u128; // 50%
 
         let result = percent_div(large_value, percentage);
-        
+
         assert!(result.is_err(), "Overflow should return error");
         assert_eq!(
             result.unwrap_err(),
@@ -109,7 +110,7 @@ mod tests {
         let current_ts = SECONDS_PER_YEAR;
 
         let result = calculate_linear_interest(extreme_rate, last_ts, current_ts);
-        
+
         assert!(result.is_err(), "Extreme rate should return error");
         assert_eq!(
             result.unwrap_err(),
@@ -128,7 +129,7 @@ mod tests {
     #[test]
     fn test_compound_interest_returns_error_on_overflow() {
         let env = Env::default();
-        
+
         // Extreme rate that causes overflow in the Taylor series terms
         // The second term: (exp * exp_minus_one * base_power_two) / 2
         // With large exp and rate, this overflows
@@ -136,7 +137,7 @@ mod tests {
         let exp = 100 * SECONDS_PER_YEAR; // 100 years
 
         let result = calculate_compound_interest(&env, extreme_rate, 0, exp);
-        
+
         assert!(result.is_err(), "Compound interest overflow should return error");
         assert_eq!(
             result.unwrap_err(),
@@ -155,13 +156,13 @@ mod tests {
     #[test]
     fn test_ray_mul_returns_error_on_overflow() {
         let env = Env::default();
-        
+
         // Values that cause U256 result to exceed u128::MAX
         let huge_a = u128::MAX;
         let huge_b = u128::MAX;
 
         let result = ray_mul(&env, huge_a, huge_b);
-        
+
         assert!(result.is_err(), "Ray mul overflow should return error");
         assert_eq!(
             result.unwrap_err(),
@@ -179,13 +180,13 @@ mod tests {
     #[test]
     fn test_ray_div_returns_error_on_overflow() {
         let env = Env::default();
-        
+
         // Values that cause U256 result to exceed u128::MAX
         let huge_a = u128::MAX;
         let small_b = 1;
 
         let result = ray_div(&env, huge_a, small_b);
-        
+
         assert!(result.is_err(), "Ray div overflow should return error");
         assert_eq!(
             result.unwrap_err(),
@@ -203,13 +204,13 @@ mod tests {
     #[test]
     fn test_wad_mul_returns_error_on_overflow() {
         let env = Env::default();
-        
+
         // Values that cause U256 result to exceed u128::MAX
         let huge_a = u128::MAX;
         let huge_b = u128::MAX;
 
         let result = wad_mul(&env, huge_a, huge_b);
-        
+
         assert!(result.is_err(), "Wad mul overflow should return error");
         assert_eq!(
             result.unwrap_err(),
@@ -227,13 +228,13 @@ mod tests {
     #[test]
     fn test_wad_div_returns_error_on_overflow() {
         let env = Env::default();
-        
+
         // Values that cause U256 result to exceed u128::MAX
         let huge_a = u128::MAX;
         let small_b = 1;
 
         let result = wad_div(&env, huge_a, small_b);
-        
+
         assert!(result.is_err(), "Wad div overflow should return error");
         assert_eq!(
             result.unwrap_err(),
@@ -284,7 +285,7 @@ mod tests {
         // Step 1: Interest calculation with extreme rate
         let bad_rate = u128::MAX / 50;
         let interest_result = calculate_linear_interest(bad_rate, 0, SECONDS_PER_YEAR);
-        
+
         // Should return error, not u128::MAX
         assert!(interest_result.is_err(), "Step 1: Should return error");
         assert_eq!(
@@ -295,14 +296,14 @@ mod tests {
         // Step 2: Simulate the full propagation chain that would corrupt state
         // In production code, this would use ? operator and propagate the error
         let old_index = RAY;
-        
+
         // This simulates: ray_mul(old_index, interest_result?)
         // The ? would propagate the error, preventing ray_mul from ever executing
         let index_update_result = match interest_result {
             Ok(interest) => ray_mul(&env, old_index, interest),
             Err(e) => Err(e), // Error propagates, ray_mul never called
         };
-        
+
         assert!(index_update_result.is_err(), "Step 2: Index update should fail");
         assert_eq!(
             index_update_result.unwrap_err(),
@@ -312,12 +313,12 @@ mod tests {
         // Step 3: Simulate balance calculation that would use corrupted index
         // This would be: ray_mul(user_scaled_balance, new_index?)
         let user_scaled_balance = WAD * 1_000_000; // 1M tokens
-        
+
         let balance_result = match index_update_result {
             Ok(new_index) => ray_mul(&env, user_scaled_balance, new_index),
             Err(e) => Err(e), // Error propagates, balance never calculated
         };
-        
+
         assert!(balance_result.is_err(), "Step 3: Balance calculation should fail");
         assert_eq!(
             balance_result.unwrap_err(),
@@ -431,7 +432,7 @@ mod tests {
     fn test_percent_operations_boundary() {
         // Test percent_mul at exact boundary
         let boundary_value = u128::MAX / 10000;
-        
+
         // Just below overflow should work
         let safe_result = percent_mul(boundary_value, 9999);
         assert!(safe_result.is_ok(), "Just below boundary should work");

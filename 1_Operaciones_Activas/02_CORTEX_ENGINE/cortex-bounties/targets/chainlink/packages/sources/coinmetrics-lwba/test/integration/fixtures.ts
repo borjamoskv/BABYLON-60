@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { WsCryptoLwbaSuccessResponse } from '@chainlink/coinmetrics-adapter/transport/lwba'
 import { MockWebsocketServer } from '@chainlink/external-adapter-framework/util/testing-utils'
 

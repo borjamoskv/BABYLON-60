@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { WebsocketReverseMappingTransport } from '@chainlink/external-adapter-framework/transports/websocket'
 import { UkEtfEndpointTypes } from '../endpoint/utils'
 import { EtfMessage, makeEtfWsMessage, makeEtfWsUrl, parseEtfWsMessage } from './utils'

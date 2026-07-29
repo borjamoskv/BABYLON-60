@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Utility to deduplicate batches of incoming network packets.
 
 use {

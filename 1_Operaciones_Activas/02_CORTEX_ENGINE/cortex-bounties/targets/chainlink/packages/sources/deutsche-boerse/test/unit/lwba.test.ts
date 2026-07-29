@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { create, fromBinary, toBinary, type MessageInitShape } from '@bufbuild/protobuf'
 import { anyPack, type Any } from '@bufbuild/protobuf/wkt'
 import { LoggerFactoryProvider } from '@chainlink/external-adapter-framework/util'

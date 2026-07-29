@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const protocolEnvironmentVariables = [
   { envKey: 'WBTC_ADAPTER_URL', value: 'wbtc' },
   { envKey: 'CELSIUS_ADDRESS_LIST_ADAPTER_URL', value: 'celsius_address_list' },

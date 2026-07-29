@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // Placeholder for internal replay utilities.
 // Tests are located in the tests/ directory.
 use sha2::{Sha256, Digest};

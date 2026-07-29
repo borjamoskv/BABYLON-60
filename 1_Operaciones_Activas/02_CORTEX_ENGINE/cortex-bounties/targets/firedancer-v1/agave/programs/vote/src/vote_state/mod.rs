@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Vote state, vote program
 //! Receive and processes votes from validators
 

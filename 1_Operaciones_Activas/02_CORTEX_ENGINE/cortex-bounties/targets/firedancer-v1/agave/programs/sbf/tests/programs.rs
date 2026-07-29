@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(any(feature = "sbf_c", feature = "sbf_rust"))]
 #![allow(clippy::clone_on_copy)]
 #![allow(clippy::needless_range_loop)]

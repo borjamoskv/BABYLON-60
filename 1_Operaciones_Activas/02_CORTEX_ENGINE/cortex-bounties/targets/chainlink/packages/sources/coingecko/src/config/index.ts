@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterConfig } from '@chainlink/external-adapter-framework/config'
 
 export const DEFAULT_API_ENDPOINT = 'https://api.coingecko.com/api/v3'

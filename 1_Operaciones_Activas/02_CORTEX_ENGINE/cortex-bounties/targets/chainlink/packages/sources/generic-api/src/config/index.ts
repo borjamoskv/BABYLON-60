@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterConfig } from '@chainlink/external-adapter-framework/config'
 import { AdapterInputError } from '@chainlink/external-adapter-framework/validation/error'
 

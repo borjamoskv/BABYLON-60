@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { BrainNode } = require('./worker');
 const { SwarmCoordinator } = require('./coordinator');
 const { launchLocalSwarm } = require('./swarm');

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /// Specifies the complete (requested) contents of a single row of a table.
 /// Rows which exceed 256MiB in size cannot be read in full.
 #[derive(Clone, PartialEq, ::prost::Message)]

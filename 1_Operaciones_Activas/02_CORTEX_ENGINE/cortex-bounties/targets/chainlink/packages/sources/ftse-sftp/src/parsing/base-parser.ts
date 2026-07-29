@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Options, parse } from 'csv-parse/sync'
 import { CSVParser, ParsedData } from './interfaces'
 

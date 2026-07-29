@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{
     prelude::*,
     solana_program::sysvar::{instructions::Instructions as SysInstructions, SysvarId},
@@ -85,7 +86,7 @@ fn process_impl(
 
 #[derive(Accounts)]
 pub struct SocializeLoss<'info> {
-   
+
     pub lending_market_owner: Signer<'info>,
 
     #[account(mut,

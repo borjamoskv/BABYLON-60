@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crate::snapshot_package::{
         SnapshotPackage, are_snapshot_packages_the_same_kind, cmp_snapshot_packages_by_priority,

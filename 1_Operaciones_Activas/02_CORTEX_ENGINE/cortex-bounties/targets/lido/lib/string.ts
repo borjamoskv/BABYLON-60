@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { BigNumberish, hexlify, randomBytes } from "ethers";
 
 export function de0x(hex: string) {

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as client from 'prom-client'
 
 export const ws_connection_active = new client.Gauge({

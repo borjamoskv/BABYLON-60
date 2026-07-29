@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import nock from 'nock'
 
 const MERKLE_PATH = '/v1/asset-verifier/merkle-tree/current-root'

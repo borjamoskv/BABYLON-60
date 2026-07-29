@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // === JS Runner — Web Worker based execution ===
 
 let _worker = null;

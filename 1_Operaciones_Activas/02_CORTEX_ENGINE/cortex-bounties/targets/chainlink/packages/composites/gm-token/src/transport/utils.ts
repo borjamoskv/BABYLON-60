@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import Decimal from 'decimal.js'
 
 // The signed prices represent the price of one unit of the token using a value with 30 decimals of precision.

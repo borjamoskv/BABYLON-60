@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env node
 
 // This script snapshots the bytecode and ABI for the `hardhat/common-contracts.js` script.

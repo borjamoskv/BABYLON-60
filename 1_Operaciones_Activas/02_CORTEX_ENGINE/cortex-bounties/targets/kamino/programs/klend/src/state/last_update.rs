@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::cmp::Ordering;
 
 use anchor_lang::{prelude::*, solana_program::clock::Slot, Result};
@@ -41,7 +42,7 @@ impl PriceStatusFlags {
 
     pub const NONE: PriceStatusFlags = PriceStatusFlags::empty();
 
-   
+
 
     pub const LIQUIDATION_CHECKS: PriceStatusFlags = PriceStatusFlags::PRICE_LOADED
         .union(PriceStatusFlags::PRICE_AGE_CHECKED)
@@ -105,7 +106,7 @@ impl LastUpdate {
 
 
     pub fn is_stale(&self, slot: Slot, min_price_status: PriceStatusFlags) -> Result<bool> {
-       
+
         let is_price_status_ok = self.get_price_status().contains(min_price_status);
         Ok(self.stale != (false as u8)
             || self.slots_elapsed(slot)? >= STALE_AFTER_SLOTS_ELAPSED

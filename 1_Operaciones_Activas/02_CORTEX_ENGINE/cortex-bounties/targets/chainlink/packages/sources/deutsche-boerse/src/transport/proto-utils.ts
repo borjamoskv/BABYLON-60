@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import Decimal from 'decimal.js'
 import {
   Data_MDEntryPrices_MDEntryType,

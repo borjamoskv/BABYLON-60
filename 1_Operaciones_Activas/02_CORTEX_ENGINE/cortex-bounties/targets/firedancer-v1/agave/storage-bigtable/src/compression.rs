@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     enum_iterator::{Sequence, all},
     std::io::{self, BufReader, Read, Write},

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /// Measure this expression
 ///
 /// Use `measure_time!()` when you have an expression that you want to measure.  `measure_time!()` will start

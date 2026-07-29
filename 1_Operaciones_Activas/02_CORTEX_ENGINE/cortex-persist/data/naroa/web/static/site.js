@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 (function(){
   var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -67,7 +68,7 @@
     var closeLb=function(){lb.classList.remove('is-active');};
     lb.addEventListener('click',function(e){if(e.target===lb||e.target===lbClose)closeLb()});
     document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb()});
-    
+
     document.querySelectorAll('.card img, .work__figure img').forEach(function(img){
       img.addEventListener('click',function(e){
         e.preventDefault();

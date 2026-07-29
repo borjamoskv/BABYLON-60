@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # Ref:
 # - https://github.com/ethereum/research/blob/8f084630528ba33d92b2bc05edf5338dd193c6f1/trusted_setup/trusted_setup.py
 # - https://github.com/asn-d6/kzgverify

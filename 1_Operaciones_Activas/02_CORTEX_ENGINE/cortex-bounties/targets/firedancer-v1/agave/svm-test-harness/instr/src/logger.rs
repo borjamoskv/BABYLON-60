@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Logging utils.
 
 /// Initialize a test logger with default error filter.

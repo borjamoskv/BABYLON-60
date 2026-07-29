@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { PUBKEY_LENGTH_HEX, SIGNATURE_LENGTH_HEX } from "./constants";
 import { de0x } from "./string";
 

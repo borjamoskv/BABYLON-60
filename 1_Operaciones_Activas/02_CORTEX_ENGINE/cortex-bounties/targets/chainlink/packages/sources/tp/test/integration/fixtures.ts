@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { MockWebsocketServer } from '@chainlink/external-adapter-framework/util/testing-utils'
 
 export const mockConnectionTime = new Date('2023-03-08T02:30:00.000Z')

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(feature = "agave-unstable-api")]
 // Activate some of the Rust 2024 lints to make the future migration easier.
 #![warn(if_let_rescope)]

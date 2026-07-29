@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{prelude::*, Accounts};
 use anchor_spl::{
     token::Token,
@@ -102,7 +103,7 @@ pub struct RecoverInvalidTicketCollateral<'info> {
 
 
 
-   
+
     #[account(mut,
         token::mint = reserve_collateral_mint,
         token::authority = withdraw_ticket.load()?.owner,

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """Engine determinism tests: verify cortex/engine produces stable, reproducible outputs.
 
 Covers:

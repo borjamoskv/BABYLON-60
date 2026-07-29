@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 use crate::{pool_configurator, kinetic_router};
@@ -39,7 +40,7 @@ fn initialize_pool_configurator(
     let mock_kinetic_router = create_mock_kinetic_router(env);
 
     client.initialize(admin, &mock_kinetic_router, oracle);
-    
+
     // Note: initialize() sets emergency_admin to the same as pool_admin
     // The _emergency_admin parameter is kept for backwards compatibility but not used
 
@@ -185,7 +186,7 @@ fn test_set_supply_cap_success() {
     // Set supply cap - should succeed with mock kinetic router
     let new_supply_cap = 500_000_000_000;
     let result = client.try_set_supply_cap(&admin, &underlying_asset, &new_supply_cap);
-    
+
     // Verify the call succeeded (mock allows all calls to succeed)
     assert!(result.is_ok(), "Setting supply cap should succeed");
 }
@@ -203,7 +204,7 @@ fn test_set_borrow_cap_success() {
     // Set borrow cap - should succeed with mock kinetic router
     let new_borrow_cap = 1_000_000_000_000;
     let result = client.try_set_borrow_cap(&admin, &underlying_asset, &new_borrow_cap);
-    
+
     // Verify the call succeeded (mock allows all calls to succeed)
     assert!(result.is_ok(), "Setting borrow cap should succeed");
 }
@@ -267,7 +268,7 @@ fn test_set_supply_cap_to_zero() {
     // Set supply cap to 0 to remove/disable cap
     let new_supply_cap = 0;
     let result = client.try_set_supply_cap(&admin, &underlying_asset, &new_supply_cap);
-    
+
     // Verify the call succeeded - zero value should be allowed
     assert!(result.is_ok(), "Setting supply cap to 0 (unlimited) should succeed");
 }
@@ -285,7 +286,7 @@ fn test_set_borrow_cap_to_zero() {
     // Set borrow cap to 0 to remove/disable cap
     let new_borrow_cap = 0;
     let result = client.try_set_borrow_cap(&admin, &underlying_asset, &new_borrow_cap);
-    
+
     // Verify the call succeeded - zero value should be allowed
     assert!(result.is_ok(), "Setting borrow cap to 0 (unlimited) should succeed");
 }
@@ -305,17 +306,17 @@ fn test_cap_functions_accept_valid_values() {
     // Test that cap functions accept valid values
     let supply_result = client.try_set_supply_cap(&admin, &test_asset, &test_supply_cap);
     let borrow_result = client.try_set_borrow_cap(&admin, &test_asset, &test_borrow_cap);
-    
+
     assert!(supply_result.is_ok(), "Setting supply cap should succeed");
     assert!(borrow_result.is_ok(), "Setting borrow cap should succeed");
-    
+
     // Test that caps can be updated to different values
     let new_supply_cap = 750_000_000_000;
     let new_borrow_cap = 1_500_000_000_000;
-    
+
     let update_supply_result = client.try_set_supply_cap(&admin, &test_asset, &new_supply_cap);
     let update_borrow_result = client.try_set_borrow_cap(&admin, &test_asset, &new_borrow_cap);
-    
+
     assert!(update_supply_result.is_ok(), "Updating supply cap should succeed");
     assert!(update_borrow_result.is_ok(), "Updating borrow cap should succeed");
 }
@@ -617,7 +618,7 @@ fn test_set_debt_token_wasm_hash_success() {
     );
 
     assert!(result.is_err(), "Deployment should fail without actual WASM");
-    
+
     // Verify it fails at deployment stage, not hash check
     match result {
         Err(Ok(pool_configurator::KineticRouterError::WASMHashNotSet)) => {
@@ -1084,7 +1085,7 @@ fn test_wasm_hash_storage_persistence() {
         debt_hash1.to_array(),
         "aToken and debtToken hashes must be different"
     );
-    
+
     // Verify hash byte arrays have expected values
     let a_hash_array = a_token_hash1.to_array();
     let debt_hash_array = debt_hash1.to_array();
@@ -1162,7 +1163,7 @@ fn test_wasm_hash_can_be_updated() {
         hash2.to_array(),
         "hash1 and hash2 must be different"
     );
-    
+
     // Verify hash2 has expected values (was updated)
     let hash2_array = hash2.to_array();
     assert_eq!(hash2_array[0], 0xFF, "hash2 should have 0xFF at index 0");
@@ -1495,11 +1496,11 @@ fn test_configure_reserve_as_collateral_rejects_equal_values() {
     let liquidation_threshold = 7500u32;
     assert_eq!(ltv, liquidation_threshold, "Values must be equal to test rejection");
     assert!(!(liquidation_threshold > ltv), "liquidation_threshold should not be greater");
-    
+
     let result = client.try_configure_reserve_as_collateral(&admin, &asset, &ltv, &liquidation_threshold, &500);
-    
+
     assert!(result.is_err(), "Equal LTV and liquidation threshold should be rejected");
-    
+
     match result {
         Err(Ok(pool_configurator::KineticRouterError::InvalidAmount)) => {}
         _ => panic!("Expected InvalidAmount error, got: {:?}", result),
@@ -1521,10 +1522,10 @@ fn test_configure_reserve_as_collateral_rejects_insufficient_buffer() {
     assert_eq!(buffer, 49, "Buffer should be exactly 49 bps");
     assert!(buffer < 50, "Buffer must be below 50 bps minimum");
     assert!(liquidation_threshold > ltv, "liquidation_threshold is greater but buffer insufficient");
-    
+
     let result = client.try_configure_reserve_as_collateral(&admin, &asset, &ltv, &liquidation_threshold, &500);
     assert!(result.is_err(), "Buffer below 50 bps minimum should be rejected");
-    
+
     match result {
         Err(Ok(pool_configurator::KineticRouterError::InvalidAmount)) => {}
         _ => panic!("Expected InvalidAmount error, got: {:?}", result),
@@ -1545,10 +1546,10 @@ fn test_configure_reserve_as_collateral_accepts_minimum_buffer() {
     let buffer = liquidation_threshold - ltv;
     assert_eq!(buffer, 50, "Buffer should be exactly 50 bps (minimum)");
     assert!(liquidation_threshold > ltv, "liquidation_threshold must be strictly greater than ltv");
-    
+
     let result = client.try_configure_reserve_as_collateral(&admin, &asset, &ltv, &liquidation_threshold, &500);
     assert!(result.is_ok(), "Minimum 50 bps buffer should be accepted");
-    
+
     // Verify configuration was accepted (no error means success)
     assert!(result.is_ok(), "Configuration should succeed with valid buffer");
 }
@@ -1571,7 +1572,7 @@ fn test_init_reserve_rejects_equal_values() {
     let liquidation_threshold = 7500u32;
     assert_eq!(ltv, liquidation_threshold, "Values are equal - should be rejected");
     assert!(!(liquidation_threshold > ltv), "liquidation_threshold should not be greater");
-    
+
     let params = pool_configurator::InitReserveParams {
         decimals: 7,
         ltv,
@@ -1594,7 +1595,7 @@ fn test_init_reserve_rejects_equal_values() {
         &params,
     );
     assert!(result.is_err(), "Equal LTV and liquidation threshold should be rejected");
-    
+
     match result {
         Err(Ok(pool_configurator::KineticRouterError::InvalidAmount)) => {}
         _ => panic!("Expected InvalidAmount error, got: {:?}", result),
@@ -1621,7 +1622,7 @@ fn test_init_reserve_rejects_insufficient_buffer() {
     assert_eq!(buffer, 49, "Buffer should be exactly 49 bps (below minimum)");
     assert!(buffer < 50, "Buffer must be below 50 bps minimum to test rejection");
     assert!(liquidation_threshold > ltv, "liquidation_threshold is greater but buffer insufficient");
-    
+
     let params = pool_configurator::InitReserveParams {
         decimals: 7,
         ltv,
@@ -1644,7 +1645,7 @@ fn test_init_reserve_rejects_insufficient_buffer() {
         &params,
     );
     assert!(result.is_err(), "Buffer below 50 bps minimum should be rejected");
-    
+
     match result {
         Err(Ok(pool_configurator::KineticRouterError::InvalidAmount)) => {}
         _ => panic!("Expected InvalidAmount error, got: {:?}", result),

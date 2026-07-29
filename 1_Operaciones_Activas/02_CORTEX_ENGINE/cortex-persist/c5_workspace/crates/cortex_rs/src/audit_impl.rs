@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::babylon_kernel::{AuditLogger, AuditEntry};
 use std::io::Write;
 
@@ -13,7 +14,7 @@ impl AuditLogger for Ledger {
             .append(true)
             .open(&self.log_path)
             .unwrap();
-            
+
         writeln!(file, "{}", serialized).unwrap();
     }
 }

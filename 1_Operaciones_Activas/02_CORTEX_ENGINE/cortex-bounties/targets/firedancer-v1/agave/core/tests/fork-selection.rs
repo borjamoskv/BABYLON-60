@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Fork Selection Simulation
 //!
 //! Description of the algorithm can be found in [Managing Forks](https://docs.anza.xyz/consensus/managing-forks).

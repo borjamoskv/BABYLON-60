@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 use crate::price_oracle;
@@ -10,16 +11,16 @@ use crate::price_oracle_test_stub::ReflectorStub;
 
 pub fn create_test_env() -> Env {
     use soroban_sdk::testutils::Ledger;
-    
+
     let env = Env::default();
     env.mock_all_auths();
-    
+
     // Set a realistic timestamp (not 0) to match production conditions
     // Timestamp 0 can cause edge cases in time-based calculations
     env.ledger().with_mut(|li| {
         li.timestamp = 1704067200; // Jan 1, 2024 00:00:00 UTC
     });
-    
+
     env
 }
 
@@ -521,7 +522,7 @@ fn test_asset_type_handling() {
     // Test Stellar asset
     let stellar_asset = OracleAsset::Stellar(Address::generate(&env));
     client.add_asset(&admin, &stellar_asset);
-    
+
     let stellar_price = client.get_asset_price(&stellar_asset);
     assert_eq!(stellar_price, TEST_PRICE_DEFAULT);
 
@@ -645,7 +646,7 @@ fn test_circuit_breaker_normal_price_change_allowed() {
     // Change price by 10% (within 20% threshold)
     let new_price = 1_100_000_000_000_000u128; // $1.10 (10% increase)
     client.set_manual_override(&admin, &asset, &Some(new_price), &Some(env.ledger().timestamp() + 86400));
-    
+
     // Should succeed - 10% change is within 20% threshold
     let price = client.get_asset_price(&asset);
     assert_eq!(price, new_price);
@@ -671,7 +672,7 @@ fn test_circuit_breaker_large_price_change_rejected() {
     // Circuit breaker is applied during set_manual_override
     let large_price = 1_250_000_000_000_000u128; // $1.25 (25% increase)
     let result = client.try_set_manual_override(&admin, &asset, &Some(large_price), &Some(env.ledger().timestamp() + 86400));
-    
+
     // Should fail with PriceChangeTooLarge error during set
     assert!(result.is_err());
 }
@@ -696,7 +697,7 @@ fn test_circuit_breaker_price_decrease_rejected() {
     // Circuit breaker is applied during set_manual_override
     let low_price = 750_000_000_000_000u128; // $0.75 (25% decrease)
     let result = client.try_set_manual_override(&admin, &asset, &Some(low_price), &Some(env.ledger().timestamp() + 86400));
-    
+
     // Should fail with PriceChangeTooLarge error during set
     assert!(result.is_err());
 }
@@ -725,7 +726,7 @@ fn test_circuit_breaker_disabled_allows_any_change() {
     // Try extreme price change (1000% increase)
     let extreme_price = 10_000_000_000_000_000u128; // $10.00 (1000% increase)
     client.set_manual_override(&admin, &asset, &Some(extreme_price), &Some(env.ledger().timestamp() + 86400));
-    
+
     // Should succeed - circuit breaker is disabled
     let price = client.get_asset_price(&asset);
     assert_eq!(price, extreme_price);
@@ -959,10 +960,10 @@ fn test_oracle_reflector_precision_query() {
     let (admin, _, _) = create_test_addresses(&env);
     let oracle_id = initialize_oracle(&env, &admin);
     let client = price_oracle::Client::new(&env, &oracle_id);
-    
+
     let config = client.get_oracle_config();
     assert_eq!(config.price_precision, 14u32, "Default Reflector precision should be 14 decimals");
-    
+
     let reflector_contract = client.get_reflector_contract();
     assert!(reflector_contract.is_some(), "Reflector contract must be configured");
 }
@@ -1079,7 +1080,7 @@ fn test_get_price_from_custom_oracle() {
 
     // Get price - should use custom oracle
     let price = client.get_asset_price(&asset);
-    
+
     // CustomOracleStub returns 100_000_000 with 8 decimals (1.00)
     // Price oracle normalizes to 14 decimals (default reflector precision)
     // 100_000_000 * 10^(14-8) = 100_000_000 * 10^6 = 100_000_000_000_000
@@ -1096,7 +1097,7 @@ fn test_get_price_from_configurable_custom_oracle() {
     // Register and deploy the configurable custom oracle stub
     let custom_oracle_id = env.register(ConfigurableCustomOracleStub, ());
     let custom_client = ConfigurableCustomOracleStubClient::new(&env, &custom_oracle_id);
-    
+
     // Set price to 50_000_000_000 with 8 decimals (500.00 USD)
     custom_client.init(&500_00000000_u128, &8_u32);
 
@@ -1108,7 +1109,7 @@ fn test_get_price_from_configurable_custom_oracle() {
 
     // Get price
     let price = client.get_asset_price(&asset);
-    
+
     // Should be normalized to 14 decimals
     // 50_000_000_000 * 10^(14-8) = 50_000_000_000 * 10^6 = 50_000_000_000_000_000
     assert!(price > 0, "Price should be positive from configurable oracle");
@@ -1147,7 +1148,7 @@ fn test_custom_oracle_with_different_decimals() {
 
     let custom_oracle_id = env.register(ConfigurableCustomOracleStub, ());
     let custom_client = ConfigurableCustomOracleStubClient::new(&env, &custom_oracle_id);
-    
+
     // Set price with 18 decimals (like some DeFi oracles)
     // 1.5 with 18 decimals = 1_500_000_000_000_000_000
     custom_client.init(&1_500_000_000_000_000_000_u128, &18_u32);
@@ -1158,7 +1159,7 @@ fn test_custom_oracle_with_different_decimals() {
     client.set_custom_oracle(&admin, &asset, &Some(custom_oracle_id), &Some(3600), &None);
 
     let price = client.get_asset_price(&asset);
-    
+
     // Should normalize from 18 decimals to 14 decimals
     // 1_500_000_000_000_000_000 / 10^(18-14) = 1_500_000_000_000_000_000 / 10^4 = 150_000_000_000_000
     assert!(price > 0, "Price should be normalized from 18 decimals");

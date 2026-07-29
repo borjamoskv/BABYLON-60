@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 use crate::interest_rate_strategy;
 use k2_shared::*;
@@ -556,20 +557,20 @@ fn test_two_step_admin_transfer_success() {
 
     // Step 1: Propose new admin
     client.propose_admin(&admin, &user1);
-    
+
     // Verify pending admin
     let pending = client.get_pending_admin();
     assert_eq!(pending, user1);
-    
+
     // Verify current admin unchanged
     assert_eq!(client.admin(), admin);
-    
+
     // Step 2: Accept admin
     client.accept_admin(&user1);
-    
+
     // Verify admin transferred
     assert_eq!(client.admin(), user1);
-    
+
     // Verify new admin can update parameters
     client.update_interest_rate_params(
         &user1,
@@ -578,7 +579,7 @@ fn test_two_step_admin_transfer_success() {
         &(80_000_000_000_000_000_000u128),
         &(800_000_000_000_000_000_000_000_000u128),
     );
-    
+
     assert_eq!(
         client.get_base_variable_borrow_rate(),
         3_000_000_000_000_000_000u128
@@ -607,7 +608,7 @@ fn test_accept_admin_invalid_pending() {
 
     // Propose user1 as admin
     client.propose_admin(&admin, &user1);
-    
+
     // Try to accept with wrong address
     client.accept_admin(&user2);
 }
@@ -621,13 +622,13 @@ fn test_cancel_admin_proposal() {
 
     // Propose admin
     client.propose_admin(&admin, &user1);
-    
+
     // Cancel proposal
     client.cancel_admin_proposal(&admin);
-    
+
     // Verify admin unchanged
     assert_eq!(client.admin(), admin);
-    
+
     // Verify no pending admin
     let result = client.try_get_pending_admin();
     assert!(result.is_err());

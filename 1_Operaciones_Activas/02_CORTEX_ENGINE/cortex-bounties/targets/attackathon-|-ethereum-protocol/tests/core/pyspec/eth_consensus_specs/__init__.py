@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # See setup.py about usage of VERSION.txt
 import os
 

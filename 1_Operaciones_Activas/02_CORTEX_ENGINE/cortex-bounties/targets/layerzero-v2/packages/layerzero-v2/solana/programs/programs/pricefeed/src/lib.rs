@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::prelude::*;
 pub mod errors;
 pub mod instructions;

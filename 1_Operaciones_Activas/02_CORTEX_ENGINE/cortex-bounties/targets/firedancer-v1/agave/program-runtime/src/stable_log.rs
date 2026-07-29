@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Stable program log messages
 //!
 //! The format of these log messages should not be modified to avoid breaking downstream consumers

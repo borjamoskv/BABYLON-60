@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { timeout, TimeoutError } from 'promise-timeout'
 import {
   createClient,

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import requests
 import time
 
@@ -59,7 +60,7 @@ for slot in leader_slots:
         print("enter")
         time.sleep(5)
         response = requests.post(api_endpoint, json=json_data)
-    if "error" in response.json(): 
+    if "error" in response.json():
         missed_leaders.append(slot)
     else:
         made_leaders.append(slot)
@@ -99,7 +100,7 @@ for slot in missed_leaders:
 
 
 skip_rate = float(len(missed_leaders))/len(leader_slots)
-adjusted_skip_rate = float(len(true_skipped_slots))/(len(made_leaders) + len(true_skipped_slots)) 
+adjusted_skip_rate = float(len(true_skipped_slots))/(len(made_leaders) + len(true_skipped_slots))
 
 print("skip rate: " + str(skip_rate))
 print("offline factored skip rate: " + str(adjusted_skip_rate))
@@ -107,4 +108,4 @@ print("made leaders count: " + str(len(made_leaders)))
 print("true skipped leaders count: " + str(len(true_skipped_slots)))
 print("true skipped slots: " + str(true_skipped_slots))
 print("skipped slots: " + str(missed_leaders))
-print("made leaders: " + str(made_leaders))    
+print("made leaders: " + str(made_leaders))

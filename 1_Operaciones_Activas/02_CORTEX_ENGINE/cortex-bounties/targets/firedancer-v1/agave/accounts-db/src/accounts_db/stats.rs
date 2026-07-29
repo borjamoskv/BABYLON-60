@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crate::{accounts_index::AccountsIndexRootsStats, append_vec::APPEND_VEC_STATS},
     solana_time_utils::AtomicInterval,

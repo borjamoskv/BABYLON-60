@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{
     prelude::*,
     solana_program::sysvar::{instructions::Instructions as SysInstructions, SysvarId},
@@ -110,13 +111,13 @@ fn process_impl(
     let remaining_accounts = if lending_market
         .check_permissions(PermissionedOp::LIQUIDATE, remaining_accounts.last())?
     {
-       
+
         &remaining_accounts[..remaining_accounts.len() - 1]
     } else {
         remaining_accounts
     };
 
-   
+
 
     let max_allowed_ltv_override_pct_opt =
         if accounts.liquidator.key() == obligation.owner && max_allowed_ltv_override_percent > 0 {
@@ -203,7 +204,7 @@ fn process_impl(
             accounts.withdraw_reserve_liquidity_mint.decimals,
         )?;
 
-       
+
         token_interface::transfer_checked(
             CpiContext::new(
                 accounts.withdraw_liquidity_token_program.to_account_info(),

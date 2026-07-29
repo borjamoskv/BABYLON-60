@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import eth_consensus_specs.test.helpers.rewards as rewards_helpers
 from eth_consensus_specs.test.context import spec_state_test, with_all_phases, with_phases
 from eth_consensus_specs.test.helpers.constants import PHASE0

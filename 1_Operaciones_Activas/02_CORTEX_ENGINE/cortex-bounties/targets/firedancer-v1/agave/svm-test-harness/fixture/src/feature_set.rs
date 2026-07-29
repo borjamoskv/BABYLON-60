@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Feature set conversions for protobuf support.
 
 #![cfg(feature = "fuzz")]

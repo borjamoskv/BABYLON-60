@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { AdapterResponse } from '@chainlink/ea-bootstrap'
 import { Logger, util, Validator } from '@chainlink/ea-bootstrap'
 import { utils } from 'ethers'

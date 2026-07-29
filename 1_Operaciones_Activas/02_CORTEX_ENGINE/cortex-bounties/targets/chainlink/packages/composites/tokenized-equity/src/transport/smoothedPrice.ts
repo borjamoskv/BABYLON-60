@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Requester } from '@chainlink/external-adapter-framework/util/requester'
 import { Smoother } from '../endpoint/common'
 import { calculateSecondsFromTransition } from '../lib/session/session'

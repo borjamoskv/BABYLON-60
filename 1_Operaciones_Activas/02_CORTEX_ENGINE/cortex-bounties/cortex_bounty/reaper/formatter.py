@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 REAPER — Platform-Specific Report Formatter
 

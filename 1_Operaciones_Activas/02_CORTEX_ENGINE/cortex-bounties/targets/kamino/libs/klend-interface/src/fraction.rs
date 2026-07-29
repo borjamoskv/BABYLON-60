@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Fixed-point fraction type matching the on-chain representation.
 //!
 //! All on-chain fields ending in `_sf` (e.g. `market_price_sf`, `borrowed_amount_sf`)

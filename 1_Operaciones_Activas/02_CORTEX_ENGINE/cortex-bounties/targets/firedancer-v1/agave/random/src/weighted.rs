@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crate::range::UniformU64Sampler,
     rand::{Rng, distr::weighted::Error},

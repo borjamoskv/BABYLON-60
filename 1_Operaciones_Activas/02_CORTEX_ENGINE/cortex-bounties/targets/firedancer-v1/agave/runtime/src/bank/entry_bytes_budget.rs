@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::sync::atomic::{AtomicU64, Ordering};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

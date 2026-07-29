@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { CHAIN_DELTA, ExtendedConfig, Networks, makeConfig } from '../../src/config'
 import * as starkware from '../../src/starkware'
 import * as network from '../../src/network'

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module defines [`ConnectionWorkersScheduler`] which sends transactions
 //! to the upcoming leaders.
 

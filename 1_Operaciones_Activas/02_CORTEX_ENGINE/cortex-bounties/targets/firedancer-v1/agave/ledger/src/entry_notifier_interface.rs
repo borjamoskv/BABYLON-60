@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {solana_clock::Slot, solana_entry::entry::EntrySummary, std::sync::Arc};
 
 pub trait EntryNotifier {

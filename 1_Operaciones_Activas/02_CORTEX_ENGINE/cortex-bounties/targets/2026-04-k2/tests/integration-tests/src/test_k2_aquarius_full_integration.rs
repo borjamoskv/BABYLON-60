@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 //! Full integration tests for K2 + Aquarius DEX
@@ -711,7 +712,7 @@ fn test_multiple_swaps_with_aquarius() {
         let user_usdc_after = protocol.usdc_a_token.balance(&protocol.user);
         let user_usdt_after = protocol.usdt_a_token.balance(&protocol.user);
 
-        println!("Swap {}: USDC {} -> {}, USDT {} -> {}", 
+        println!("Swap {}: USDC {} -> {}, USDT {} -> {}",
             i, user_usdc_before, user_usdc_after, user_usdt_before, user_usdt_after);
 
         assert!(user_usdc_after < user_usdc_before, "USDC should decrease");

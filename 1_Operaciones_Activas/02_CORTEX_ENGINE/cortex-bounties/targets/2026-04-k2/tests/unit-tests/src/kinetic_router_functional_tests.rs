@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 use crate::{kinetic_router, price_oracle};
@@ -50,7 +51,7 @@ fn initialize_kinetic_router(env: &Env, admin: &Address, emergency_admin: &Addre
     let dex_router = Address::generate(env);
 
     client.initialize(admin, emergency_admin, &oracle_addr, &treasury, &dex_router, &None);
-    
+
     let pool_configurator = Address::generate(env);
     client.set_pool_configurator(&pool_configurator);
 
@@ -336,7 +337,7 @@ fn test_init_reserve_rejects_equal_ltv_and_liquidation_threshold() {
     // Strong assertion: verify values are equal before calling
     assert_eq!(params.ltv, params.liquidation_threshold, "Values must be equal to test rejection");
     assert!(!(params.liquidation_threshold > params.ltv), "liquidation_threshold should not be greater");
-    
+
     let result = client.try_init_reserve(
         &pool_configurator,
         &underlying_asset,
@@ -347,12 +348,12 @@ fn test_init_reserve_rejects_equal_ltv_and_liquidation_threshold() {
         &params,
     );
     assert!(result.is_err(), "Equal LTV and liquidation threshold should be rejected");
-    
+
     match result {
         Err(Ok(kinetic_router::KineticRouterError::InvalidAmount)) => {}
         _ => panic!("Expected InvalidAmount error, got: {:?}", result),
     }
-    
+
     // Verify reserve was not created
     let reserve_result = client.try_get_reserve_data(&underlying_asset);
     assert!(reserve_result.is_err(), "Reserve should not exist after failed initialization");
@@ -393,7 +394,7 @@ fn test_init_reserve_rejects_insufficient_buffer() {
     assert_eq!(buffer, 49, "Buffer should be exactly 49 bps (below minimum)");
     assert!(buffer < 50, "Buffer must be below 50 bps minimum");
     assert!(params.liquidation_threshold > params.ltv, "liquidation_threshold is greater but buffer insufficient");
-    
+
     let result = client.try_init_reserve(
         &pool_configurator,
         &underlying_asset,
@@ -404,12 +405,12 @@ fn test_init_reserve_rejects_insufficient_buffer() {
         &params,
     );
     assert!(result.is_err(), "Buffer below 50 bps minimum should be rejected");
-    
+
     match result {
         Err(Ok(kinetic_router::KineticRouterError::InvalidAmount)) => {}
         _ => panic!("Expected InvalidAmount error, got: {:?}", result),
     }
-    
+
     // Verify reserve was not created
     let reserve_result = client.try_get_reserve_data(&underlying_asset);
     assert!(reserve_result.is_err(), "Reserve should not exist after failed initialization");
@@ -450,7 +451,7 @@ fn test_init_reserve_accepts_minimum_buffer() {
     assert_eq!(buffer, 50, "Buffer should be exactly 50 bps (minimum)");
     assert!(buffer >= 50, "Buffer must meet minimum requirement");
     assert!(params.liquidation_threshold > params.ltv, "liquidation_threshold must be strictly greater");
-    
+
     let result = client.try_init_reserve(
         &pool_configurator,
         &underlying_asset,
@@ -461,13 +462,13 @@ fn test_init_reserve_accepts_minimum_buffer() {
         &params,
     );
     assert!(result.is_ok(), "Minimum 50 bps buffer should be accepted");
-    
+
     // Verify reserve was actually created with correct configuration
     let reserve_data = client.get_reserve_data(&underlying_asset);
     let config = convert_config(&reserve_data.configuration);
     assert_eq!(config.get_ltv() as u32, params.ltv, "LTV should match");
     assert_eq!(config.get_liquidation_threshold() as u32, params.liquidation_threshold, "Liquidation threshold should match");
-    
+
     // Verify buffer is maintained in stored configuration
     let stored_ltv = config.get_ltv() as u32;
     let stored_liquidation_threshold = config.get_liquidation_threshold() as u32;

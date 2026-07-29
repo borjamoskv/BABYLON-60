@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { CryptoPriceEndpoint } from '@chainlink/external-adapter-framework/adapter'
 import { TransportRoutes } from '@chainlink/external-adapter-framework/transports'
 import { buildCryptoHttpTransport, buildWebsocketTransport } from '../transport/utils'

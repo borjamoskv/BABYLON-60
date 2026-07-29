@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 use crate::{a_token, debt_token, interest_rate_strategy, kinetic_router, price_oracle};
@@ -79,7 +80,7 @@ fn setup_test_environment(env: &Env) -> (
         &dex_router,
         &None,
     );
-    
+
     let pool_configurator = Address::generate(env);
     kinetic_router.set_pool_configurator(&pool_configurator);
 
@@ -220,7 +221,7 @@ fn test_withdraw_blocked_multiple_attempts_would_drop_hf_below_one() {
     // Let's try withdrawing $200: HF = (800 * 0.85) / 750 = 680/750 = 0.907 < 1.0
     let withdraw_amount = 2_000_000_000_000u128; // 200 tokens
     let result = kinetic_router.try_withdraw(&user, &underlying_addr, &withdraw_amount, &user);
-    
+
     assert!(
         result.is_err(),
         "Withdrawal MUST fail when it would drop HF below 1.0 - this is the bug we're fixing!"
@@ -235,14 +236,14 @@ fn test_withdraw_blocked_multiple_attempts_would_drop_hf_below_one() {
         ),
         _ => panic!("Expected HealthFactorTooLow error"),
     }
-    
+
     // Verify HF is still > 1.0 (withdrawal was correctly blocked, position unchanged)
     let account_data_after_blocked = kinetic_router.get_user_account_data(&user);
     assert!(
         account_data_after_blocked.health_factor > WAD,
         "Health factor should still be above 1.0 (withdrawal was correctly blocked)"
     );
-    
+
     // Try MULTIPLE withdrawal attempts - this tests the "multiple times" aspect of the bug
     // Even after one failed withdrawal, another attempt should also fail
     let withdraw_amount_2 = 1_500_000_000_000u128; // 150 tokens (also would drop HF < 1.0)
@@ -251,7 +252,7 @@ fn test_withdraw_blocked_multiple_attempts_would_drop_hf_below_one() {
         result_2.is_err(),
         "Second withdrawal attempt should also fail when it would drop HF below 1.0"
     );
-    
+
     // Try a third time with a smaller amount that would still drop HF < 1.0
     let withdraw_amount_3 = 1_200_000_000_000u128; // 120 tokens
     let result_3 = kinetic_router.try_withdraw(&user, &underlying_addr, &withdraw_amount_3, &user);
@@ -259,7 +260,7 @@ fn test_withdraw_blocked_multiple_attempts_would_drop_hf_below_one() {
         result_3.is_err(),
         "Third withdrawal attempt should also fail when it would drop HF below 1.0"
     );
-    
+
     // Verify HF is still > 1.0 after all blocked attempts
     let account_data_final = kinetic_router.get_user_account_data(&user);
     assert!(
@@ -292,46 +293,46 @@ fn test_withdraw_blocked_when_hf_below_one() {
     let account_data_before_borrow = kinetic_router.get_user_account_data(&user);
     let _available_borrows = account_data_before_borrow.available_borrows_base;
     let _current_hf = account_data_before_borrow.health_factor;
-    
+
     // Try borrowing a very small amount first to see what happens
     // Borrow 10% of collateral value = 100 tokens = 1_000_000_000_000
     // This should definitely be safe: HF = 850/100 = 8.5 > 1.0
     let borrow_amount = 1_000_000_000_000u128; // 10% of collateral
     let borrow_result = kinetic_router.try_borrow(&user, &underlying_addr, &borrow_amount, &1u32, &0u32, &user);
-    
+
     // If even 10% is blocked, there's a bug in borrow validation
     if borrow_result.is_err() {
         panic!("Borrowing 10% of collateral should be allowed, but got error: {:?}", borrow_result.unwrap_err());
     }
-    
+
     kinetic_router.borrow(&user, &underlying_addr, &borrow_amount, &1u32, &0u32, &user);
-    
+
     // Verify HF > 1.0 initially
     let account_data_initial = kinetic_router.get_user_account_data(&user);
     assert!(
         account_data_initial.health_factor > WAD,
         "Health factor should be above 1.0 after borrowing 50%"
     );
-    
+
     // Verify HF > 1.0 initially
     let account_data_initial = kinetic_router.get_user_account_data(&user);
     assert!(
         account_data_initial.health_factor > WAD,
         "Health factor should be above 1.0 after borrowing 10%"
     );
-    
+
     // Withdraw a small amount that's allowed
     // Withdraw $100: HF = (900 * 0.85) / 100 = 765/100 = 7.65 > 1.0 (should be allowed)
     let withdraw_safe = 1_000_000_000_000u128; // 100 tokens
     kinetic_router.withdraw(&user, &underlying_addr, &withdraw_safe, &user);
-    
+
     // Verify HF is still > 1.0 after safe withdrawal
     let account_data_after_safe = kinetic_router.get_user_account_data(&user);
     assert!(
         account_data_after_safe.health_factor > WAD,
         "Health factor should still be above 1.0 after withdrawing $100"
     );
-    
+
     // Now try to withdraw $800 more: HF = (100 * 0.85) / 100 = 85/100 = 0.85 < 1.0 (should be blocked)
     let withdraw_amount = 8_000_000_000_000u128; // 800 tokens
     let result = kinetic_router.try_withdraw(&user, &underlying_addr, &withdraw_amount, &user);
@@ -349,7 +350,7 @@ fn test_withdraw_blocked_when_hf_below_one() {
         ),
         _ => panic!("Expected HealthFactorTooLow error"),
     }
-    
+
     // Now verify current HF is still > 1.0 (position is safe, withdrawal was correctly blocked)
     let account_data_final = kinetic_router.get_user_account_data(&user);
     assert!(
@@ -480,7 +481,7 @@ fn test_borrow_blocked_when_hf_below_one() {
         account_data_initial.health_factor > WAD,
         "Health factor should be above 1.0 after borrowing 70%"
     );
-    
+
     // Try to borrow more that would drop HF below 1.0
     // Current: $1000 collateral, $700 debt, HF = 850/700 = 1.214
     // To get HF < 1.0: (1000 * 0.85) / new_debt < 1.0
@@ -507,7 +508,7 @@ fn test_borrow_blocked_when_hf_below_one() {
         Err(Ok(kinetic_router::KineticRouterError::InsufficientCollateral)) => {}
         _ => panic!("Expected HealthFactorTooLow or InsufficientCollateral error, got: {:?}", result),
     }
-    
+
     // Verify HF is still > 1.0 (borrow was correctly blocked)
     let account_data_after = kinetic_router.get_user_account_data(&user);
     assert!(
@@ -681,21 +682,21 @@ fn test_withdraw_at_exact_hf_threshold() {
     // HF = (1000 * 0.85) / 700 = 850/700 = 1.214 > 1.0
     let borrow_amount = 7_000_000_000_000u128; // 700 tokens (70% LTV)
     kinetic_router.borrow(&user, &underlying_addr, &borrow_amount, &1u32, &0u32, &user);
-    
+
     // Verify HF > 1.0
     let account_data_initial = kinetic_router.get_user_account_data(&user);
     assert!(
         account_data_initial.health_factor > WAD,
         "Health factor should be above 1.0"
     );
-    
+
     // Withdraw enough to get HF close to 1.0
     // Withdraw $200: HF = (800 * 0.85) / 700 = 680/700 = 0.971 < 1.0
     // Actually, let's withdraw less to get HF just above 1.0
     // Withdraw $150: HF = (850 * 0.85) / 700 = 722.5/700 = 1.032 > 1.0
     let withdraw_to_near_threshold = 1_500_000_000_000u128; // 150 tokens
     kinetic_router.withdraw(&user, &underlying_addr, &withdraw_to_near_threshold, &user);
-    
+
     // Verify HF is still > 1.0 but close to threshold
     let account_data = kinetic_router.get_user_account_data(&user);
     assert!(
@@ -716,7 +717,7 @@ fn test_withdraw_at_exact_hf_threshold() {
         result.is_err(),
         "Withdrawal should fail when it would drop HF below 1.0"
     );
-    
+
     // Verify error
     match result {
         Err(Ok(err)) => assert_eq!(

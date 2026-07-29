@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 export type GraphqlAdapterRequest = {
   query: string
   variables: {

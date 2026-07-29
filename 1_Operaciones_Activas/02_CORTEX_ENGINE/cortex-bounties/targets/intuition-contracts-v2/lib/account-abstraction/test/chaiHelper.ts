@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // remap "eql" function to work nicely with EVM values.
 
 // cleanup "Result" object (returned on web3/ethers calls)

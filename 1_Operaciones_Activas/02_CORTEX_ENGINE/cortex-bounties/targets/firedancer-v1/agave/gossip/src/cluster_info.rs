@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `cluster_info` module defines a data structure that is shared by all the nodes in the network over
 //! a gossip control plane.  The goal is to share small bits of off-chain information and detect and
 //! repair partitions.

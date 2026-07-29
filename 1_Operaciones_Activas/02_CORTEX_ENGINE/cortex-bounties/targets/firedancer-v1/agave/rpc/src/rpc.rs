@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `rpc` module implements the Solana RPC interface.
 #[cfg(feature = "dev-context-only-utils")]
 use solana_runtime::installed_scheduler_pool::BankWithScheduler;

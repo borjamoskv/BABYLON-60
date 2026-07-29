@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `validator` module hosts all the validator microservices.
 pub use solana_perf::report_target_features;
 use {

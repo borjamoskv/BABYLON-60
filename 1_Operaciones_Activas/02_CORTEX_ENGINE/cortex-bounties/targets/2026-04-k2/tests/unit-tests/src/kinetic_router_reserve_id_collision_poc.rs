@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 //! PoC: dropping a reserve causes `RESERVES_COUNT` (list length) to decrease,
@@ -239,10 +240,10 @@ fn test_reserve_id_monotonic_after_drop() {
     );
 
     let reserve_c = router.get_reserve_data(&underlying_c);
-    
+
     // FIXED: Reserve C should get ID 2 (monotonic), not reuse ID 1
     assert_eq!(reserve_c.id, 2, "Reserve IDs must be monotonic and never reused");
-    
+
     // Reserve B should still have ID 1
     let reserve_b_after = router.get_reserve_data(&underlying_b);
     assert_eq!(reserve_b_after.id, 1, "Existing reserve IDs must not change");

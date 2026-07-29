@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Builder, ExecuteWithConfig } from '@chainlink/ea-bootstrap'
 import type { Config, ExecuteFactory, AdapterRequest, APIEndpoint } from '@chainlink/ea-bootstrap'
 import { makeConfig } from './config'

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::*;
 use anchor_lang::prelude::*;
 use endpoint::{cpi::accounts::Verify, instructions::VerifyParams, ConstructCPIContext};

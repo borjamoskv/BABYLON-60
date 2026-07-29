@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use libc::{in_addr, sockaddr_in, socket, AF_INET, IPPROTO_UDP, SOCK_DGRAM};
 use std::ffi::c_char;
 use std::io::Write;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 use crate::redstone_adapter;
@@ -65,17 +66,17 @@ fn test_redstone_adapter_price_oracle_integration() {
     let (_contract_id, redstone_adapter) = setup_redstone_adapter_with_signers(&env, &admin, 2);
     let stored_admin = redstone_adapter.get_admin();
     assert_eq!(stored_admin, admin, "Admin must match initialized value");
-    
+
     let threshold = redstone_adapter.get_signer_threshold();
     assert_eq!(threshold, 2, "Threshold must be 2");
-    
+
     let signers = redstone_adapter.get_signers();
     assert_eq!(signers.len(), 3, "Must have 3 signers configured");
 
     let eth_asset_address = Address::generate(&env);
     let eth_asset = RedStoneAsset::Stellar(eth_asset_address.clone());
     let eth_feed_id = String::from_str(&env, "ETH");
-    
+
     redstone_adapter.set_asset_feed_mapping(&admin, &eth_asset, &eth_feed_id);
     let stored_feed_id = redstone_adapter.get_feed_id(&eth_asset);
     assert!(stored_feed_id.is_some(), "Feed ID mapping must be set");
@@ -87,26 +88,26 @@ fn test_redstone_adapter_price_oracle_integration() {
     let feed_ids = Vec::from_array(&env, [eth_feed_id.clone()]);
     let payload = hex_to_bytes(&env, ETH_PRIMARY_3SIG_HEX);
     let result = redstone_adapter.try_write_prices(&updater, &feed_ids, &payload);
-    
+
     if result.is_ok() {
         // Verify price is stored and scaled correctly
         let price_data = redstone_adapter.lastprice(&eth_asset);
         if price_data.is_some() {
             let price = price_data.unwrap();
-            
+
             // Verify price is non-zero and valid
             assert!(price.price > 0, "Price must be positive");
             assert!(price.timestamp > 0, "Timestamp must be positive");
-            
+
             // Verify read_prices returns the same value
             let read_prices_result = redstone_adapter.read_prices(&feed_ids);
             assert_eq!(read_prices_result.len(), 1, "Must return 1 price");
         }
     }
-    
+
     let decimals = redstone_adapter.decimals();
     assert_eq!(decimals, 14, "Decimals must be 14 for Reflector compatibility");
-    
+
     let base = redstone_adapter.base();
     match base {
         RedStoneAsset::Other(_) => {
@@ -131,7 +132,7 @@ fn test_redstone_kinetic_router_collateral_valuation() {
 
     let price_oracle_id = env.register(crate::price_oracle::WASM, ());
     let price_oracle = crate::price_oracle::Client::new(&env, &price_oracle_id);
-    
+
     let mock_reflector = env.register(crate::setup::ReflectorStub, ());
     let base_currency = Address::generate(&env);
     let native_xlm = Address::generate(&env);
@@ -175,9 +176,9 @@ fn test_redstone_kinetic_router_collateral_valuation() {
     let feed_ids = Vec::from_array(&env, [eth_feed_id.clone()]);
     let payload = hex_to_bytes(&env, ETH_PRIMARY_3SIG_HEX);
     let write_result = redstone_adapter.try_write_prices(&updater, &feed_ids, &payload);
-    
+
     let expected_scaled_price = 250_000_000_000_000_000i128;
-    
+
     if write_result.is_ok() {
         let price_data = redstone_adapter.lastprice(&eth_asset);
         if let Some(stored_price) = price_data {
@@ -189,7 +190,7 @@ fn test_redstone_kinetic_router_collateral_valuation() {
     let oracle_asset = price_oracle::Asset::Stellar(eth_asset_address.clone());
     price_oracle.add_asset(&admin, &oracle_asset);
     price_oracle.set_asset_enabled(&admin, &oracle_asset, &true);
-    
+
     let override_expiry = env.ledger().timestamp() + 604_800;
     price_oracle.set_manual_override(&admin, &oracle_asset, &Some(expected_scaled_price as u128), &Some(override_expiry));
     let oracle_price = price_oracle.get_asset_price(&oracle_asset);
@@ -277,22 +278,22 @@ fn test_redstone_kinetic_router_collateral_valuation() {
     kinetic_router.supply(&user, &eth_asset_address, &user_supply_amount, &user, &0);
 
     let account_data_after_supply = kinetic_router.get_user_account_data(&user);
-    
+
     let expected_collateral_base = 125_000_000_000_000_000_000_000u128;
-    
+
     assert!(
         account_data_after_supply.total_collateral_base > 0,
         "User must have collateral after supply. Got: {}",
         account_data_after_supply.total_collateral_base
     );
-    
+
     let tolerance = expected_collateral_base / 1000;
     let diff = if account_data_after_supply.total_collateral_base > expected_collateral_base {
         account_data_after_supply.total_collateral_base - expected_collateral_base
     } else {
         expected_collateral_base - account_data_after_supply.total_collateral_base
     };
-    
+
     assert!(
         diff <= tolerance,
         "Collateral value must match expected. Expected: {}, Got: {}, Diff: {}",
@@ -303,13 +304,13 @@ fn test_redstone_kinetic_router_collateral_valuation() {
 
     let expected_available_borrows = 100_000_000_000_000_000_000_000u128;
     let borrows_tolerance = expected_available_borrows / 1000; // 0.1%
-    
+
     let borrows_diff = if account_data_after_supply.available_borrows_base > expected_available_borrows {
         account_data_after_supply.available_borrows_base - expected_available_borrows
     } else {
         expected_available_borrows - account_data_after_supply.available_borrows_base
     };
-    
+
     assert!(
         borrows_diff <= borrows_tolerance,
         "Available borrows must be ~$100,000 (80% LTV). Expected: {}, Got: {}, Diff: {}",
@@ -323,22 +324,22 @@ fn test_redstone_kinetic_router_collateral_valuation() {
         "Health factor must be >= 1 WAD with no debt. Got: {}",
         account_data_after_supply.health_factor
     );
-    
+
     assert_eq!(
         account_data_after_supply.total_debt_base, 0u128,
         "Total debt must be 0. Got: {}",
         account_data_after_supply.total_debt_base
     );
-    
+
     assert_eq!(
         account_data_after_supply.ltv, 8000u128,
         "Configured LTV must be 8000 (80%). Got: {}",
         account_data_after_supply.ltv
     );
-    
+
     let new_scaled_price = 300_000_000_000_000_000i128;
     let _ = redstone_adapter.try_write_prices(&updater, &feed_ids, &payload);
-    
+
     price_oracle.set_manual_override(&admin, &oracle_asset, &Some(new_scaled_price as u128), &Some(override_expiry));
     let updated_oracle_price = price_oracle.get_asset_price(&oracle_asset);
     assert_eq!(
@@ -346,50 +347,50 @@ fn test_redstone_kinetic_router_collateral_valuation() {
         "Oracle must return updated price. Expected: {}, Got: {}",
         new_scaled_price, updated_oracle_price
     );
-    
+
     let account_data_after_price_change = kinetic_router.get_user_account_data(&user);
-    
+
     let new_expected_collateral = 150_000_000_000_000_000_000_000u128;
-    
+
     let new_diff = if account_data_after_price_change.total_collateral_base > new_expected_collateral {
         account_data_after_price_change.total_collateral_base - new_expected_collateral
     } else {
         new_expected_collateral - account_data_after_price_change.total_collateral_base
     };
-    
+
     assert!(
         new_diff <= new_expected_collateral / 1000,
         "Collateral value must reflect price increase. Expected: {}, Got: {}",
         new_expected_collateral,
         account_data_after_price_change.total_collateral_base
     );
-    
+
     let new_expected_borrows = 120_000_000_000_000_000_000_000u128;
     let new_borrows_tolerance = new_expected_borrows / 1000;
-    
+
     let new_borrows_diff = if account_data_after_price_change.available_borrows_base > new_expected_borrows {
         account_data_after_price_change.available_borrows_base - new_expected_borrows
     } else {
         new_expected_borrows - account_data_after_price_change.available_borrows_base
     };
-    
+
     assert!(
         new_borrows_diff <= new_borrows_tolerance,
         "Available borrows must be ~$120,000 after price increase. Expected: {}, Got: {}",
         new_expected_borrows,
         account_data_after_price_change.available_borrows_base
     );
-    
+
     let borrows_increase = account_data_after_price_change.available_borrows_base - account_data_after_supply.available_borrows_base;
     let expected_increase = expected_available_borrows / 5;
     let increase_tolerance = expected_increase / 10;
-    
+
     let increase_diff = if borrows_increase > expected_increase {
         borrows_increase - expected_increase
     } else {
         expected_increase - borrows_increase
     };
-    
+
     assert!(
         increase_diff <= increase_tolerance,
         "Borrows increase must be ~$20,000 (20%). Expected increase: {}, Actual increase: {}",
@@ -437,7 +438,7 @@ fn test_redstone_multi_asset_price_updates() {
     let feed_ids = Vec::from_array(&env, [eth_feed.clone()]);
     let payload = hex_to_bytes(&env, ETH_PRIMARY_3SIG_HEX);
     let result = redstone_adapter.try_write_prices(&updater, &feed_ids, &payload);
-    
+
     if result.is_ok() {
         let eth_price_data = redstone_adapter.lastprice(&RedStoneAsset::Stellar(eth_asset.clone()));
         if eth_price_data.is_some() {
@@ -445,7 +446,7 @@ fn test_redstone_multi_asset_price_updates() {
             assert!(eth_price > 0, "ETH price must be positive");
         }
     }
-    
+
 }
 
 #[test]
@@ -472,7 +473,7 @@ fn test_redstone_price_staleness_detection() {
     let feed_ids = Vec::from_array(&env, [eth_feed.clone()]);
     let payload = hex_to_bytes(&env, ETH_PRIMARY_3SIG_HEX);
     let result = redstone_adapter.try_write_prices(&updater, &feed_ids, &payload);
-    
+
     if result.is_err() {
         return;
     }
@@ -485,7 +486,7 @@ fn test_redstone_price_staleness_detection() {
 
     // Advance time by 3599 seconds (just under 1 hour)
     advance_ledger(&env, 3599);
-    
+
     // Price should still be valid
     let price_data_fresh = redstone_adapter.lastprice(&RedStoneAsset::Stellar(eth_asset.clone()));
     assert!(
@@ -495,7 +496,7 @@ fn test_redstone_price_staleness_detection() {
 
     // Advance time by 2 more seconds (now over 1 hour)
     advance_ledger(&env, 2);
-    
+
     // Price should now be stale
     let price_data_stale = redstone_adapter.lastprice(&RedStoneAsset::Stellar(eth_asset.clone()));
     assert!(
@@ -528,7 +529,7 @@ fn test_redstone_signer_threshold_enforcement() {
     // Verify signers are configured
     let signers = redstone_adapter.get_signers();
     assert_eq!(signers.len(), 3, "Must have 3 signers configured");
-    
+
     // Verify each signer exists and is retrievable
     for i in 0..signers.len() {
         assert!(signers.get(i).is_some(), "Signer {} must exist", i);
@@ -541,7 +542,7 @@ fn test_redstone_signer_threshold_enforcement() {
     // Test: Threshold cannot exceed number of signers
     let result_too_high = redstone_adapter.try_set_signer_threshold(&admin, &4u32);
     assert!(result_too_high.is_err(), "Setting threshold to 4 (> 3 signers) must fail");
-    
+
     // Test: Threshold of 5 also fails
     let result_five = redstone_adapter.try_set_signer_threshold(&admin, &5u32);
     assert!(result_five.is_err(), "Setting threshold to 5 must fail");
@@ -564,10 +565,10 @@ fn test_redstone_signer_threshold_enforcement() {
     let new_signer_bytes = hex_to_bytesn20(PRIMARY_SIGNERS[3]);
     let new_signer = BytesN::<20>::from_array(&env, &new_signer_bytes);
     redstone_adapter.add_signer(&admin, &new_signer);
-    
+
     let updated_signers = redstone_adapter.get_signers();
     assert_eq!(updated_signers.len(), 4, "Must have 4 signers after addition");
-    
+
     // Now threshold of 4 should be valid
     redstone_adapter.set_signer_threshold(&admin, &4u32);
     assert_eq!(
@@ -579,10 +580,10 @@ fn test_redstone_signer_threshold_enforcement() {
     // First reduce threshold so removal is valid
     redstone_adapter.set_signer_threshold(&admin, &3u32);
     redstone_adapter.remove_signer(&admin, &new_signer);
-    
+
     let final_signers = redstone_adapter.get_signers();
     assert_eq!(final_signers.len(), 3, "Must have 3 signers after removal");
-    
+
     // Verify threshold is still valid
     assert_eq!(
         redstone_adapter.get_signer_threshold(), 3u32,
@@ -602,7 +603,7 @@ fn test_redstone_unauthorized_add_signer() {
     // Attacker tries to add signer - must fail
     let signer_bytes = hex_to_bytesn20(PRIMARY_SIGNERS[3]);
     let signer = BytesN::<20>::from_array(&env, &signer_bytes);
-    
+
     env.set_auths(&[]);
     redstone_adapter.add_signer(&attacker, &signer);
 }
@@ -619,7 +620,7 @@ fn test_redstone_unauthorized_remove_signer() {
     // Attacker tries to remove an existing signer - must fail
     let signer_bytes = hex_to_bytesn20(PRIMARY_SIGNERS[0]);
     let signer = BytesN::<20>::from_array(&env, &signer_bytes);
-    
+
     env.set_auths(&[]);
     redstone_adapter.remove_signer(&attacker, &signer);
 }
@@ -650,7 +651,7 @@ fn test_redstone_unauthorized_set_feed_mapping() {
     // Attacker tries to set feed mapping - must fail
     let asset = Address::generate(&env);
     let feed_id = String::from_str(&env, "ATTACK");
-    
+
     env.set_auths(&[]);
     redstone_adapter.set_asset_feed_mapping(&attacker, &RedStoneAsset::Stellar(asset), &feed_id);
 }
@@ -737,7 +738,7 @@ fn test_redstone_admin_transfer() {
 
     // Verify initial admin
     assert_eq!(redstone_adapter.get_admin(), admin, "Initial admin must match");
-    
+
     // Verify no pending admin initially
     assert!(
         redstone_adapter.get_pending_admin().is_none(),
@@ -746,12 +747,12 @@ fn test_redstone_admin_transfer() {
 
     // Admin proposes new admin
     redstone_adapter.propose_admin(&admin, &new_admin);
-    
+
     // Verify pending admin is set
     let pending = redstone_adapter.get_pending_admin();
     assert!(pending.is_some(), "Pending admin must be set after proposal");
     assert_eq!(pending.unwrap(), new_admin, "Pending admin must match proposed");
-    
+
     // Verify current admin is unchanged
     assert_eq!(redstone_adapter.get_admin(), admin, "Current admin must not change until acceptance");
 
@@ -761,10 +762,10 @@ fn test_redstone_admin_transfer() {
 
     // New admin accepts
     redstone_adapter.accept_admin(&new_admin);
-    
+
     // Verify admin is transferred
     assert_eq!(redstone_adapter.get_admin(), new_admin, "Admin must be transferred to new admin");
-    
+
     // Verify pending admin is cleared
     assert!(
         redstone_adapter.get_pending_admin().is_none(),
@@ -797,16 +798,16 @@ fn test_redstone_admin_transfer_cancellation() {
 
     // Admin cancels the proposal
     redstone_adapter.cancel_admin_proposal(&admin);
-    
+
     // Verify pending admin is cleared
     assert!(
         redstone_adapter.get_pending_admin().is_none(),
         "Pending admin must be cleared after cancellation"
     );
-    
+
     // Verify original admin is still admin
     assert_eq!(redstone_adapter.get_admin(), admin, "Original admin must remain admin");
-    
+
     // Verify new_admin cannot accept (no pending proposal)
     let accept_result = redstone_adapter.try_accept_admin(&new_admin);
     assert!(accept_result.is_err(), "Cannot accept when no pending proposal exists");
@@ -827,7 +828,7 @@ fn test_redstone_decimal_conversion_accuracy() {
     let feed_ids = Vec::from_array(&env, [feed_id.clone()]);
     let payload = hex_to_bytes(&env, ETH_PRIMARY_3SIG_HEX);
     let result = redstone_adapter.try_write_prices(&updater, &feed_ids, &payload);
-    
+
     if result.is_ok() {
         let price_data = redstone_adapter.lastprice(&RedStoneAsset::Stellar(asset.clone()));
         if price_data.is_some() {
@@ -841,13 +842,13 @@ fn test_redstone_decimal_conversion_accuracy() {
 fn test_redstone_adapter_decimals_configuration() {
     let env = create_test_env();
     let admin = Address::generate(&env);
-    
+
     let contract_id = env.register(redstone_adapter::WASM, ());
     let client = redstone_adapter::Client::new(&env, &contract_id);
-    
+
     let decimals_8 = 8u32;
     client.initialize(&admin, &decimals_8, &31_536_000);
-    
+
     let reported_decimals = client.decimals();
     assert_eq!(reported_decimals, decimals_8, "Decimals must match configured value. Expected: {}, Got: {}", decimals_8, reported_decimals);
 }
@@ -856,19 +857,19 @@ fn test_redstone_adapter_decimals_configuration() {
 fn test_redstone_adapter_different_decimals() {
     let env = create_test_env();
     let admin = Address::generate(&env);
-    
+
     let test_cases = vec![
         (8u32, "8 decimals (BTC-style)"),
         (14u32, "14 decimals (Reflector default)"),
         (18u32, "18 decimals (ETH-style)"),
     ];
-    
+
     for (decimals, description) in test_cases {
         let contract_id = env.register(redstone_adapter::WASM, ());
         let client = redstone_adapter::Client::new(&env, &contract_id);
-        
+
         client.initialize(&admin, &decimals, &31_536_000);
-        
+
         let reported_decimals = client.decimals();
         assert_eq!(
             reported_decimals, decimals,

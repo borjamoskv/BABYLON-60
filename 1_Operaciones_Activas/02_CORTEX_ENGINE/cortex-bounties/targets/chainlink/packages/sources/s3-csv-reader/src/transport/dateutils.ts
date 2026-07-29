@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { format, subDays } from 'date-fns'
 
 export function getFormattedDateStrings(

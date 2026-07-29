@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { filterDuplicates, validateAddresses } from '../../src/utils/addressValidator'
 
 describe('Validates Ethereum addresses and filters duplicates', () => {

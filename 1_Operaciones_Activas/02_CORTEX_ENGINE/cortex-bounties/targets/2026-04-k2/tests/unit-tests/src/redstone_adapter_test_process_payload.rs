@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 use crate::redstone_adapter;
@@ -21,12 +22,12 @@ const PRIMARY_SIGNERS: [&str; 5] = [
 pub fn create_test_env() -> Env {
     let env = Env::default();
     env.mock_all_auths();
-    
+
     use soroban_sdk::testutils::Ledger;
     env.ledger().with_mut(|li| {
         li.timestamp = 1704067200; // Jan 1, 2024
     });
-    
+
     env
 }
 
@@ -49,14 +50,14 @@ pub fn initialize_adapter_with_signers(env: &Env, admin: &Address) -> Address {
 
     // Initialize adapter
     client.initialize(admin, &8, &3600);
-    
+
     // Add PRIMARY signers
     for signer_hex in &PRIMARY_SIGNERS[0..3] {
         let signer_bytes = hex_to_bytesn20(signer_hex);
         let signer = BytesN::<20>::from_array(env, &signer_bytes);
         client.add_signer(admin, &signer);
     }
-    
+
     // Set threshold to 2 (require 2 out of 3 signers)
     client.set_signer_threshold(admin, &2u32);
 
@@ -71,16 +72,16 @@ pub fn initialize_adapter_with_signers(env: &Env, admin: &Address) -> Address {
 fn test_add_signer() {
     let env = create_test_env();
     let admin = Address::generate(&env);
-    
+
     let contract_id = env.register(redstone_adapter::WASM, ());
     let client = redstone_adapter::Client::new(&env, &contract_id);
     client.initialize(&admin, &8, &3600);
-    
+
     let signer_bytes = hex_to_bytesn20(PRIMARY_SIGNERS[0]);
     let signer = BytesN::<20>::from_array(&env, &signer_bytes);
-    
+
     client.add_signer(&admin, &signer);
-    
+
     let signers = client.get_signers();
     assert_eq!(signers.len(), 1);
     assert_eq!(signers.get(0).unwrap(), signer);
@@ -91,14 +92,14 @@ fn test_add_signer() {
 fn test_add_duplicate_signer() {
     let env = create_test_env();
     let admin = Address::generate(&env);
-    
+
     let contract_id = env.register(redstone_adapter::WASM, ());
     let client = redstone_adapter::Client::new(&env, &contract_id);
     client.initialize(&admin, &8, &3600);
-    
+
     let signer_bytes = hex_to_bytesn20(PRIMARY_SIGNERS[0]);
     let signer = BytesN::<20>::from_array(&env, &signer_bytes);
-    
+
     client.add_signer(&admin, &signer);
     client.add_signer(&admin, &signer); // Should panic
 }
@@ -107,11 +108,11 @@ fn test_add_duplicate_signer() {
 fn test_remove_signer() {
     let env = create_test_env();
     let admin = Address::generate(&env);
-    
+
     let contract_id = env.register(redstone_adapter::WASM, ());
     let client = redstone_adapter::Client::new(&env, &contract_id);
     client.initialize(&admin, &8, &3600);
-    
+
     // Add 2 signers so we can remove one without violating threshold
     for signer_hex in &PRIMARY_SIGNERS[0..2] {
         let signer_bytes = hex_to_bytesn20(signer_hex);
@@ -119,7 +120,7 @@ fn test_remove_signer() {
         client.add_signer(&admin, &signer);
     }
     assert_eq!(client.get_signers().len(), 2);
-    
+
     // Remove one signer
     let signer_bytes = hex_to_bytesn20(PRIMARY_SIGNERS[0]);
     let signer = BytesN::<20>::from_array(&env, &signer_bytes);
@@ -132,21 +133,21 @@ fn test_remove_signer() {
 fn test_remove_nonexistent_signer() {
     let env = create_test_env();
     let admin = Address::generate(&env);
-    
+
     let contract_id = env.register(redstone_adapter::WASM, ());
     let client = redstone_adapter::Client::new(&env, &contract_id);
     client.initialize(&admin, &8, &3600);
-    
+
     // Add 2 signers so threshold check passes (default threshold is 1)
     for signer_hex in &PRIMARY_SIGNERS[1..3] {
         let signer_bytes = hex_to_bytesn20(signer_hex);
         client.add_signer(&admin, &BytesN::<20>::from_array(&env, &signer_bytes));
     }
-    
+
     // Try to remove a different signer that doesn't exist
     let signer_bytes = hex_to_bytesn20(PRIMARY_SIGNERS[0]);
     let signer = BytesN::<20>::from_array(&env, &signer_bytes);
-    
+
     client.remove_signer(&admin, &signer); // Should panic with SignerNotFound
 }
 
@@ -154,18 +155,18 @@ fn test_remove_nonexistent_signer() {
 fn test_set_signer_threshold() {
     let env = create_test_env();
     let admin = Address::generate(&env);
-    
+
     let contract_id = env.register(redstone_adapter::WASM, ());
     let client = redstone_adapter::Client::new(&env, &contract_id);
     client.initialize(&admin, &8, &3600);
-    
+
     // Add 3 signers
     for signer_hex in &PRIMARY_SIGNERS[0..3] {
         let signer_bytes = hex_to_bytesn20(signer_hex);
         let signer = BytesN::<20>::from_array(&env, &signer_bytes);
         client.add_signer(&admin, &signer);
     }
-    
+
     // Set threshold to 2
     client.set_signer_threshold(&admin, &2u32);
     assert_eq!(client.get_signer_threshold(), 2u32);
@@ -176,11 +177,11 @@ fn test_set_signer_threshold() {
 fn test_set_threshold_zero() {
     let env = create_test_env();
     let admin = Address::generate(&env);
-    
+
     let contract_id = env.register(redstone_adapter::WASM, ());
     let client = redstone_adapter::Client::new(&env, &contract_id);
     client.initialize(&admin, &8, &3600);
-    
+
     client.set_signer_threshold(&admin, &0u32); // Should panic
 }
 
@@ -189,18 +190,18 @@ fn test_set_threshold_zero() {
 fn test_set_threshold_too_high() {
     let env = create_test_env();
     let admin = Address::generate(&env);
-    
+
     let contract_id = env.register(redstone_adapter::WASM, ());
     let client = redstone_adapter::Client::new(&env, &contract_id);
     client.initialize(&admin, &8, &3600);
-    
+
     // Add 2 signers
     for signer_hex in &PRIMARY_SIGNERS[0..2] {
         let signer_bytes = hex_to_bytesn20(signer_hex);
         let signer = BytesN::<20>::from_array(&env, &signer_bytes);
         client.add_signer(&admin, &signer);
     }
-    
+
     // Try to set threshold to 3 (more than available signers)
     client.set_signer_threshold(&admin, &3u32); // Should panic
 }
@@ -211,14 +212,14 @@ fn test_unauthorized_add_signer() {
     let env = create_test_env();
     let admin = Address::generate(&env);
     let attacker = Address::generate(&env);
-    
+
     let contract_id = env.register(redstone_adapter::WASM, ());
     let client = redstone_adapter::Client::new(&env, &contract_id);
     client.initialize(&admin, &8, &3600);
-    
+
     let signer_bytes = hex_to_bytesn20(PRIMARY_SIGNERS[0]);
     let signer = BytesN::<20>::from_array(&env, &signer_bytes);
-    
+
     env.set_auths(&[]);
     client.add_signer(&attacker, &signer); // Should panic
 }
@@ -232,25 +233,25 @@ fn test_process_payload_valid() {
     let env = create_test_env();
     let admin = Address::generate(&env);
     let updater = Address::generate(&env);
-    
+
     let adapter = initialize_adapter_with_signers(&env, &admin);
     let client = redstone_adapter::Client::new(&env, &adapter);
-    
+
     // Set up asset mapping
     let eth_asset = Asset::Stellar(Address::generate(&env));
     let eth_feed = String::from_str(&env, "ETH");
     client.set_asset_feed_mapping(&admin, &eth_asset, &eth_feed);
-    
+
     // Process RedStone payload
     let payload = hex_to_bytes(&env, ETH_PRIMARY_3SIG_HEX);
     let feed_ids = Vec::from_array(&env, [eth_feed.clone()]);
-    
+
     // Note: This will fail in actual execution because the timestamp in the payload
     // is from 2024 and our test env is also from 2024, causing staleness issues.
     // In production, payloads would be fresh from RedStone oracles.
     // This test validates the API structure.
     let result = client.try_process_payload(&updater, &payload, &feed_ids);
-    
+
     // The result will be an error due to timestamp issues, but the function signature is correct
     assert!(result.is_err() || result.is_ok());
 }
@@ -261,15 +262,15 @@ fn test_process_payload_no_signers() {
     let env = create_test_env();
     let admin = Address::generate(&env);
     let updater = Address::generate(&env);
-    
+
     let contract_id = env.register(redstone_adapter::WASM, ());
     let client = redstone_adapter::Client::new(&env, &contract_id);
     client.initialize(&admin, &8, &3600);
-    
+
     // Try to process without configuring signers
     let payload = hex_to_bytes(&env, ETH_PRIMARY_3SIG_HEX);
     let feed_ids = Vec::from_array(&env, [String::from_str(&env, "ETH")]);
-    
+
     client.process_payload(&updater, &payload, &feed_ids); // Should panic
 }
 
@@ -282,15 +283,15 @@ fn test_legacy_write_prices_still_works() {
     let env = create_test_env();
     let admin = Address::generate(&env);
     let updater = Address::generate(&env);
-    
+
     let contract_id = env.register(redstone_adapter::WASM, ());
     let client = redstone_adapter::Client::new(&env, &contract_id);
     client.initialize(&admin, &8, &3600);
-    
+
     // Legacy function now requires RedStone payload
     let feed_ids = Vec::from_array(&env, [String::from_str(&env, "ETH")]);
     let payload = Bytes::new(&env); // Empty payload for test
-    
+
     // Note: This will fail without proper RedStone payload
     let _ = client.try_write_prices(&updater, &feed_ids, &payload);
 }
@@ -304,16 +305,16 @@ fn test_lastprice_after_legacy_write() {
     let env = create_test_env();
     let admin = Address::generate(&env);
     let updater = Address::generate(&env);
-    
+
     let contract_id = env.register(redstone_adapter::WASM, ());
     let client = redstone_adapter::Client::new(&env, &contract_id);
     client.initialize(&admin, &8, &3600);
-    
+
     // Set up asset mapping
     let eth_asset = Asset::Stellar(Address::generate(&env));
     let eth_feed = String::from_str(&env, "ETH");
     client.set_asset_feed_mapping(&admin, &eth_asset, &eth_feed);
-    
+
     // Without writing price, should return None
     let price_data = client.lastprice(&eth_asset);
     assert!(price_data.is_none());
@@ -329,14 +330,14 @@ fn test_no_feeds_updated_reverts() {
     let env = create_test_env();
     let admin = Address::generate(&env);
     let updater = Address::generate(&env);
-    
+
     let adapter = initialize_adapter_with_signers(&env, &admin);
     let client = redstone_adapter::Client::new(&env, &adapter);
-    
+
     // Request a feed that doesn't exist in the payload
     let feed_ids = Vec::from_array(&env, [String::from_str(&env, "NONEXISTENT")]);
     let payload = hex_to_bytes(&env, ETH_PRIMARY_3SIG_HEX);
-    
+
     // Should revert - RedStone SDK will fail if requested feed IDs don't match payload
     client.process_payload(&updater, &payload, &feed_ids);
 }
@@ -346,25 +347,25 @@ fn test_no_feeds_updated_reverts() {
 fn test_remove_signer_blocked_when_at_threshold() {
     let env = create_test_env();
     let admin = Address::generate(&env);
-    
+
     let contract_id = env.register(redstone_adapter::WASM, ());
     let client = redstone_adapter::Client::new(&env, &contract_id);
     client.initialize(&admin, &8, &3600);
-    
+
     // Add 2 signers
     for signer_hex in &PRIMARY_SIGNERS[0..2] {
         let signer_bytes = hex_to_bytesn20(signer_hex);
         let signer = BytesN::<20>::from_array(&env, &signer_bytes);
         client.add_signer(&admin, &signer);
     }
-    
+
     // Verify we have 2 signers
     assert_eq!(client.get_signers().len(), 2, "Should have 2 signers");
-    
+
     // Set threshold to 2
     client.set_signer_threshold(&admin, &2u32);
     assert_eq!(client.get_signer_threshold(), 2, "Threshold should be 2");
-    
+
     // Try to remove a signer - should fail because removal would leave signers.len() < threshold
     let signer_bytes = hex_to_bytesn20(PRIMARY_SIGNERS[0]);
     let signer = BytesN::<20>::from_array(&env, &signer_bytes);
@@ -376,10 +377,10 @@ fn test_remove_signer_blocked_when_at_threshold() {
 fn test_initialize_with_zero_max_price_age() {
     let env = create_test_env();
     let admin = Address::generate(&env);
-    
+
     let contract_id = env.register(redstone_adapter::WASM, ());
     let client = redstone_adapter::Client::new(&env, &contract_id);
-    
+
     // Try to initialize with max_price_age = 0 - should fail
     client.initialize(&admin, &8, &0u64); // This will panic with error #28
 }
@@ -389,11 +390,11 @@ fn test_initialize_with_zero_max_price_age() {
 fn test_set_max_price_age_below_minimum() {
     let env = create_test_env();
     let admin = Address::generate(&env);
-    
+
     let contract_id = env.register(redstone_adapter::WASM, ());
     let client = redstone_adapter::Client::new(&env, &contract_id);
     client.initialize(&admin, &8, &3600);
-    
+
     // Try to set max_price_age to 59 seconds (below 60s minimum)
     client.set_max_price_age(&admin, &59u64); // This will panic with error #28
 }
@@ -402,14 +403,14 @@ fn test_set_max_price_age_below_minimum() {
 fn test_set_max_price_age_at_minimum() {
     let env = create_test_env();
     let admin = Address::generate(&env);
-    
+
     let contract_id = env.register(redstone_adapter::WASM, ());
     let client = redstone_adapter::Client::new(&env, &contract_id);
     client.initialize(&admin, &8, &3600);
-    
+
     // Set max_price_age to exactly 60 seconds (minimum threshold) - should succeed
     client.set_max_price_age(&admin, &60u64);
-    
+
     // Test passes if no panic occurs, confirming the minimum boundary is accepted
 }
 
@@ -418,21 +419,21 @@ fn test_process_payload_returns_updated_feeds() {
     let env = create_test_env();
     let admin = Address::generate(&env);
     let updater = Address::generate(&env);
-    
+
     let adapter = initialize_adapter_with_signers(&env, &admin);
     let client = redstone_adapter::Client::new(&env, &adapter);
-    
+
     // Set up asset mapping
     let eth_asset = Asset::Stellar(Address::generate(&env));
     let eth_feed = String::from_str(&env, "ETH");
     client.set_asset_feed_mapping(&admin, &eth_asset, &eth_feed);
-    
+
     // Process RedStone payload
     let payload = hex_to_bytes(&env, ETH_PRIMARY_3SIG_HEX);
     let feed_ids = Vec::from_array(&env, [eth_feed.clone()]);
-    
+
     let result = client.try_process_payload(&updater, &payload, &feed_ids);
-    
+
     // If successful, verify the return value structure
     if let Ok(soroban_result) = result {
         assert!(soroban_result.is_ok(), "Should return Ok");
@@ -448,25 +449,25 @@ fn test_read_prices_uses_package_timestamp() {
     let env = create_test_env();
     let admin = Address::generate(&env);
     let updater = Address::generate(&env);
-    
+
     let adapter = initialize_adapter_with_signers(&env, &admin);
     let client = redstone_adapter::Client::new(&env, &adapter);
-    
+
     // Set short max_price_age for testing
     client.set_max_price_age(&admin, &60u64);
-    
+
     let eth_feed = String::from_str(&env, "ETH");
     let feed_ids = Vec::from_array(&env, [eth_feed.clone()]);
     let payload = hex_to_bytes(&env, ETH_PRIMARY_3SIG_HEX);
-    
+
     // Note: The payload may have a timestamp that's stale relative to test env ledger time
     let write_result = client.try_write_prices(&updater, &feed_ids, &payload);
-    
+
     // Verify that freshness checks are based on package_timestamp (from payload)
     // not ledger write time, which prevents replay of old-but-signed prices
     if write_result.is_ok() {
         let read_result = client.try_read_prices(&feed_ids);
-        
+
         if read_result.is_err() {
             // Error indicates package_timestamp was checked for staleness
             let err_msg = format!("{:?}", read_result.unwrap_err());
@@ -487,23 +488,23 @@ fn test_lastprice_returns_package_timestamp() {
     let env = create_test_env();
     let admin = Address::generate(&env);
     let updater = Address::generate(&env);
-    
+
     let adapter = initialize_adapter_with_signers(&env, &admin);
     let client = redstone_adapter::Client::new(&env, &adapter);
-    
+
     let eth_asset = Asset::Stellar(Address::generate(&env));
     let eth_feed = String::from_str(&env, "ETH");
     client.set_asset_feed_mapping(&admin, &eth_asset, &eth_feed);
-    
+
     let payload = hex_to_bytes(&env, ETH_PRIMARY_3SIG_HEX);
     let feed_ids = Vec::from_array(&env, [eth_feed.clone()]);
-    
+
     // Write prices and verify lastprice returns package_timestamp
     let write_result = client.try_write_prices(&updater, &feed_ids, &payload);
-    
+
     if write_result.is_ok() {
         let price_data = client.lastprice(&eth_asset);
-        
+
         if let Some(data) = price_data {
             // Verify timestamp is the package_timestamp from the signed payload,
             // not the ledger timestamp when the price was written to storage

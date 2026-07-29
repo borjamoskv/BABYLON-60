@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::storage;
 use k2_shared::*;
 use soroban_sdk::{symbol_short, panic_with_error, Address, BytesN, Env, IntoVal, Symbol};
@@ -164,7 +165,7 @@ pub fn set_reserve_supply_cap(
     let mut reserve_data = storage::get_reserve_data(&env, &asset)?;
     reserve_data.configuration.set_supply_cap(supply_cap);
     storage::set_reserve_data(&env, &asset, &reserve_data);
-    
+
     const EVENT_SET_CAP: Symbol = symbol_short!("set_cap");
     const EVENT_SUPPLY: Symbol = symbol_short!("supply");
     env.events()
@@ -191,7 +192,7 @@ pub fn set_reserve_borrow_cap(
     let mut reserve_data = storage::get_reserve_data(&env, &asset)?;
     reserve_data.configuration.set_borrow_cap(borrow_cap);
     storage::set_reserve_data(&env, &asset, &reserve_data);
-    
+
     const EVENT_SET_CAP: Symbol = symbol_short!("set_cap");
     const EVENT_BORROW: Symbol = symbol_short!("borrow");
     env.events()
@@ -210,16 +211,16 @@ pub fn set_reserve_debt_ceiling(
 
     // Verify reserve exists
     storage::get_reserve_data(&env, &asset)?;
-    
+
     // Validate debt_ceiling fits in 64 bits to prevent silent truncation
     // Debt ceiling uses the same storage pattern as caps
     const U64_MAX: u128 = u64::MAX as u128;
     if debt_ceiling > U64_MAX {
         return Err(KineticRouterError::InvalidAmount);
     }
-    
+
     storage::set_reserve_debt_ceiling(&env, &asset, debt_ceiling);
-    
+
     const EVENT_SET_CAP: Symbol = symbol_short!("set_cap");
     const EVENT_DEBT_CEIL: Symbol = symbol_short!("debt_ceil");
     env.events()

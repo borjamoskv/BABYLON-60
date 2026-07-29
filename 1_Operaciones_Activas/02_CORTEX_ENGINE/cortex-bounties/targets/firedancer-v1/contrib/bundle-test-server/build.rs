@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 fn main() -> Result<(), std::io::Error> {
     const PROTOC_ENVAR: &str = "PROTOC";
     if std::env::var(PROTOC_ENVAR).is_err() {

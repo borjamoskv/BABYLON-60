@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { DEFAULT_API_ENDPOINT, PRO_API_ENDPOINT } from '../config'
 import { BaseEndpointTypes, CoinsResponse } from '../endpoint/coins'
 import { HttpTransport } from '@chainlink/external-adapter-framework/transports'

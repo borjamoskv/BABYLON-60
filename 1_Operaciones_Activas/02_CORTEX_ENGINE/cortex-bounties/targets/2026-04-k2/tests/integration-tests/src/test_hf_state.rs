@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 //! Integration tests for O(1) Health Factor state management.
@@ -19,7 +20,7 @@ fn assert_hf_match(o1_hf: u128, on_hf: u128, tolerance_bps: u128, context: &str)
     if o1_hf == u128::MAX && on_hf == u128::MAX {
         return;
     }
-    
+
     // Handle case where one is MAX
     if o1_hf == u128::MAX || on_hf == u128::MAX {
         // If O(N) shows no debt but O(1) shows debt, that's a mismatch
@@ -27,14 +28,14 @@ fn assert_hf_match(o1_hf: u128, on_hf: u128, tolerance_bps: u128, context: &str)
         println!("⚠️  {} - HF mismatch (one is MAX): O1={}, ON={}", context, o1_hf, on_hf);
         return;
     }
-    
+
     // Calculate relative difference in basis points
     let diff = if o1_hf > on_hf { o1_hf - on_hf } else { on_hf - o1_hf };
     let avg = (o1_hf + on_hf) / 2;
     let diff_bps = if avg > 0 { (diff * 10000) / avg } else { 0 };
-    
+
     println!("{} - O1 HF: {}, O(N) HF: {}, diff: {} bps", context, o1_hf, on_hf, diff_bps);
-    
+
     assert!(
         diff_bps <= tolerance_bps,
         "{} - HF mismatch too large: O1={}, ON={}, diff={} bps > {} bps tolerance",
@@ -139,10 +140,10 @@ fn test_hf_o1_update_on_borrow() {
     // Compare O(1) HF with O(N) HF
     let hf_o1 = protocol.kinetic_router.get_hf_o1(&protocol.user);
     let account_data = protocol.kinetic_router.get_user_account_data(&protocol.user);
-    
+
     // Allow 5% tolerance since O(1) state may have slight timing differences
     assert_hf_match(hf_o1, account_data.health_factor, 500, "After borrow");
-    
+
     // Both should show healthy position (HF > 1.0)
     assert!(hf_o1 >= WAD, "O(1) HF should be >= 1.0");
     assert!(account_data.health_factor >= WAD, "O(N) HF should be >= 1.0");
@@ -207,7 +208,7 @@ fn test_hf_o1_update_on_repay_and_gc() {
     let state_after_repay = protocol.kinetic_router.get_user_hf_state(&protocol.user).unwrap();
     println!("After repay:");
     println!("  total_debt_base: {}", state_after_repay.total_debt_base);
-    
+
     // Debt should be 0 or very close (interest accrual)
     assert!(
         state_after_repay.total_debt_base < 1_000_000, // Allow tiny dust
@@ -449,7 +450,7 @@ fn test_hf_o1_swap_collateral() {
         state_before.total_collateral_base - state_after.total_collateral_base
     };
     let collateral_diff_pct = (collateral_diff * 100) / state_before.total_collateral_base;
-    
+
     assert!(
         collateral_diff_pct <= 10,
         "Collateral change should be < 10% for stablecoin swap, got {}%",
@@ -467,7 +468,7 @@ fn test_hf_o1_swap_collateral() {
     } else {
         0
     };
-    
+
     assert!(
         debt_diff_pct <= 1,
         "Debt should change < 1% during swap, got {}%",
@@ -505,7 +506,7 @@ fn test_available_borrows_o1() {
     // After supply, should have borrow capacity
     let borrows_after_supply = protocol.kinetic_router.get_available_borrows_o1(&protocol.user);
     let on_data = protocol.kinetic_router.get_user_account_data(&protocol.user);
-    
+
     println!("After supply:");
     println!("  O(1) available borrows: {}", borrows_after_supply);
     println!("  O(N) available borrows: {}", on_data.available_borrows_base);
@@ -534,7 +535,7 @@ fn test_available_borrows_o1() {
     // Available borrows should decrease
     let borrows_after_borrow = protocol.kinetic_router.get_available_borrows_o1(&protocol.user);
     let on_data_2 = protocol.kinetic_router.get_user_account_data(&protocol.user);
-    
+
     println!("\nAfter borrow:");
     println!("  O(1) available borrows: {}", borrows_after_borrow);
     println!("  O(N) available borrows: {}", on_data_2.available_borrows_base);

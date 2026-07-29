@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Shared types for K2 fuzz testing
 //!
 //! This module contains types used by both the fuzz targets and the seed generator.

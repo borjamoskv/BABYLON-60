@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from eth_consensus_specs.test.context import always_bls, spec_state_test, with_gloas_and_later
 from eth_consensus_specs.test.helpers.deposits import (
     make_withdrawal_credentials,

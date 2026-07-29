@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import nock from 'nock'
 import { ErrorResponseAsset, SuccessResponseAsset, TEST_URL } from './testConfig'
 

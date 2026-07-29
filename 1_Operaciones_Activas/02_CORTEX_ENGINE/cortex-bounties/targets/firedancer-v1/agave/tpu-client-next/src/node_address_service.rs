@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module provides [`NodeAddressService`] structure that implements [`LeaderUpdater`] trait to
 //! track upcoming leaders and maintains an up-to-date mapping of leader id to TPU socket address.
 //!

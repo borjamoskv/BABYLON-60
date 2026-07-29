@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 function chunk(array, size = 1) {
   return Array.range(Math.ceil(array.length / size)).map(i => array.slice(i * size, i * size + size));
 }

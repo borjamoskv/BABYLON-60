@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `shred_fetch_stage` pulls shreds from UDP sockets and sends it to a channel.
 
 use {

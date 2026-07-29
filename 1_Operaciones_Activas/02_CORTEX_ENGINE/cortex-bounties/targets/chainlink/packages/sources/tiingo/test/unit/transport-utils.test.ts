@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as configModule from '../../src/config'
 import { wsMessageContent, wsSelectUrl } from '../../src/transport/utils'
 

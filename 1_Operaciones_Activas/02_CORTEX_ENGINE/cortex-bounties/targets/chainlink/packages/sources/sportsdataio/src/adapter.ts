@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Requester, Validator, AdapterInputError, InputParameters } from '@chainlink/ea-bootstrap'
 import { Config, ExecuteWithConfig, ExecuteFactory } from '@chainlink/ea-bootstrap'
 import { makeConfig, DEFAULT_SPORT } from './config'

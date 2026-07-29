@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { ethers } = require('ethers');
 
 const Enum = (...options) => Object.fromEntries(options.map((key, i) => [key, BigInt(i)]));

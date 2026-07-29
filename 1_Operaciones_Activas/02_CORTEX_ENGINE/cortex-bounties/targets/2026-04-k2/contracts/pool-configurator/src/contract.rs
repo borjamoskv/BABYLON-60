@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::oracle;
 use crate::reserve;
 use crate::storage;
@@ -471,7 +472,7 @@ impl PoolConfiguratorContract {
     ) -> Result<(), KineticRouterError> {
         storage::validate_admin(&env, &caller)?;
         caller.require_auth();
-        
+
         // Check if there's an existing pending admin and emit cancellation event if so
         if let Ok(existing_pending) = storage::get_pending_pool_admin(&env) {
             use k2_shared::events::AdminProposalCancelledEvent;
@@ -483,9 +484,9 @@ impl PoolConfiguratorContract {
                 },
             );
         }
-        
+
         storage::set_pending_pool_admin(&env, &pending_admin);
-        
+
         // Emit event
         use k2_shared::events::AdminProposedEvent;
         env.events().publish(
@@ -495,7 +496,7 @@ impl PoolConfiguratorContract {
                 pending_admin: pending_admin.clone(),
             },
         );
-        
+
         Ok(())
     }
 
@@ -514,12 +515,12 @@ impl PoolConfiguratorContract {
             return Err(KineticRouterError::InvalidPendingAdmin);
         }
         caller.require_auth();
-        
+
         let previous_admin = storage::get_pool_admin(&env)?;
         storage::set_pool_admin(&env, &caller);
         crate::upgrade::initialize_admin(&env, &caller);
         storage::clear_pending_pool_admin(&env);
-        
+
         // Emit event
         use k2_shared::events::AdminAcceptedEvent;
         env.events().publish(
@@ -529,7 +530,7 @@ impl PoolConfiguratorContract {
                 new_admin: caller.clone(),
             },
         );
-        
+
         Ok(())
     }
 
@@ -545,10 +546,10 @@ impl PoolConfiguratorContract {
     pub fn cancel_admin_proposal(env: Env, caller: Address) -> Result<(), KineticRouterError> {
         storage::validate_admin(&env, &caller)?;
         caller.require_auth();
-        
+
         let cancelled_pending = storage::get_pending_pool_admin(&env)?;
         storage::clear_pending_pool_admin(&env);
-        
+
         // Emit event
         use k2_shared::events::AdminProposalCancelledEvent;
         env.events().publish(
@@ -558,7 +559,7 @@ impl PoolConfiguratorContract {
                 cancelled_pending_admin: cancelled_pending,
             },
         );
-        
+
         Ok(())
     }
 

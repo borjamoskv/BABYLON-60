@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /// ClusterSlots object holds information about which validators have confirmed which slots
 /// via EpochSlots mechanism. Periodically, EpochSlots get sent into here via update method.
 /// The ClusterSlots datastructure maintains a shadow copy of the stake info for current and

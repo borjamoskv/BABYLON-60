@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `blockstore_cleanup_service` drops older ledger data to limit disk space usage.
 //! The service works by counting the number of live data shreds in the ledger; this
 //! can be done quickly and should have a fairly stable correlation to actual bytes.

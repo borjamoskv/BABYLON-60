@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { BigNumber } from 'ethers'
 import { BIP32Factory } from 'bip32'
 import * as ellipticCurveCryptography from '@bitcoinerlab/secp256k1'

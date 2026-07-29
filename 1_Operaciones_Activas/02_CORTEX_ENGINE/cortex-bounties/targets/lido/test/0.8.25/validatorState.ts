@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 export type BlockHeader = {
   slot: number;
   proposerIndex: string;

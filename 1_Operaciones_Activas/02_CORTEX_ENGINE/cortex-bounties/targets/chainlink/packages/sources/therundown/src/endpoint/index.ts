@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { TInputParameters as TotalScoreInputParameters } from './totalScore'
 import type { TInputParameters as EventInputParameters } from './events'
 import type { TInputParameters as EventsInputParameters } from './event'

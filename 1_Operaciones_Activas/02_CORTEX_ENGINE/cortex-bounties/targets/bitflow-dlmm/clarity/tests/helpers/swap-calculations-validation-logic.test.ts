@@ -1,6 +1,7 @@
+// C5-REAL EXERGY CERTIFIED
 /**
  * Tests to verify the validation logic handles all scenarios correctly
- * 
+ *
  * These tests verify that the validation test logic correctly compares
  * contract output with quote engine calculations.
  */
@@ -18,7 +19,7 @@ describe('Validation Logic Tests', () => {
       // Scenario: Contract receives 100 tokens, caps to 10 tokens
       // Validation test passes actualSwappedIn = 10 (already capped)
       // Helper function should produce same result as if we passed 100 (which gets capped)
-      
+
       const binData: BinData = {
         reserve_x: 0n,
         reserve_y: 1000000000n, // 10 tokens available
@@ -39,14 +40,14 @@ describe('Validation Logic Tests', () => {
 
       // If actualSwappedIn <= helperCappedInput, helper should use actualSwappedIn as-is
       // If actualSwappedIn > helperCappedInput, something is wrong (contract capped differently)
-      
+
       // For validation: we expect actualSwappedIn to be <= helperCappedInput
       // (contract and helper should cap to same value if formulas match)
       expect(actualSwappedIn).toBeLessThanOrEqual(helperCappedInput);
-      
+
       // Helper should use actualSwappedIn (since it's <= max)
       expect(resultWithCapped.in_effective).toBe(actualSwappedIn);
-      
+
       // Output should be calculated correctly based on actualSwappedIn
       expect(resultWithCapped.out_this).toBeGreaterThan(0n);
     });
@@ -63,13 +64,13 @@ describe('Validation Logic Tests', () => {
       // Calculate what max would be
       const maxXAmount = ((binData.reserve_y * 100000000n) + (binPrice - 1n)) / binPrice;
       const updatedMaxXAmount = (maxXAmount * 10000n) / (10000n - feeRateBPS);
-      
+
       // Contract caps to exactly this amount
       const actualSwappedIn = updatedMaxXAmount;
 
       // Helper should use this amount as-is (it's already at max)
       const result = calculateBinSwap(binData, binPrice, actualSwappedIn, feeRateBPS, true);
-      
+
       expect(result.in_effective).toBe(actualSwappedIn);
       expect(result.out_this).toBeGreaterThan(0n);
     });
@@ -171,7 +172,7 @@ describe('Validation Logic Tests', () => {
       // No fees, so output should be higher
       expect(result.fee_amount).toBe(0n);
       expect(result.out_this).toBeGreaterThan(0n);
-      
+
       // Compare with fees
       const resultWithFees = calculateBinSwap(binData, binPrice, inputAmount, 4000n, true);
       expect(result.out_this).toBeGreaterThan(resultWithFees.out_this);

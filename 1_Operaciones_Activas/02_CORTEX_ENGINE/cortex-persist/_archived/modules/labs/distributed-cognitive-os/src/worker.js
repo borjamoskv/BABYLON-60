@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const http = require('node:http');
 const crypto = require('node:crypto');
 const { EventEmitter } = require('node:events');

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! A nonblocking [`RpcSender`] used for unit testing [`RpcClient`](crate::rpc_client::RpcClient).
 
 use {

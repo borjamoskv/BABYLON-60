@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { EndpointContext } from '@chainlink/external-adapter-framework/adapter'
 import { TransportDependencies } from '@chainlink/external-adapter-framework/transports'

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { TInputParameters as PriceInputParameters } from './price'
 import type { TInputParameters as RatioInputParameters } from './ratio'
 import type { TInputParameters as SushiInputParameters } from './sushi'

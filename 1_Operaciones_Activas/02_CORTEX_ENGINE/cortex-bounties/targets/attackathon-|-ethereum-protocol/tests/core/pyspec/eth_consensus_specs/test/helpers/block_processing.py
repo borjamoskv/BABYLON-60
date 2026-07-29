@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 def for_ops(state, operations, fn) -> None:
     for operation in operations:
         fn(state, operation)

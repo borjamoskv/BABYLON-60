@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Test program that reads account pointers directly from the program input.
 
 #![allow(clippy::arithmetic_side_effects)]

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `TransactionStatusService` receives executed transactions and creates
 //! transaction metadata objects to persist into the Blockstore and optionally
 //! broadcast over geyser. The service also records block metadata for any

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """E1 Profiler — offline thermodynamic observability for Cortex traces.
 
 Usage (CLI):

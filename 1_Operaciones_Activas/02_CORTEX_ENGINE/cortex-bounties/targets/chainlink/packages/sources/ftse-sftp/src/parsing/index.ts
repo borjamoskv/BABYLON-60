@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 export { CSVParser, ParsedData } from './interfaces'
 export { BaseCSVParser } from './base-parser'
 export { FTSE100Parser, FTSE100Data } from './ftse100'

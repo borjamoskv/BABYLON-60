@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use libfuzzer_sys::arbitrary::{Arbitrary, Unstructured};
 use crate::common::constants::*;
 
@@ -227,17 +228,17 @@ impl SimulatedState {
             _ => {}
         }
     }
-    
+
     /// Total collateral value for a user (simplified: sum across assets)
     fn total_collateral_value(&self, user: usize) -> u128 {
         self.collateral[user].iter().sum()
     }
-    
+
     /// Total debt for a user
     fn total_debt(&self, user: usize) -> u128 {
         self.debt[user].iter().sum()
     }
-    
+
     /// Approximate health factor (collateral / debt ratio)
     /// Returns 1000 (representing HF=1.0) as baseline, >1000 = healthy
     fn health_factor(&self, user: usize) -> u128 {
@@ -250,7 +251,7 @@ impl SimulatedState {
         let collateral = self.total_collateral_value(user);
         (collateral * 7500 / debt).min(100_000)
     }
-    
+
     /// Check if user can safely withdraw amount without becoming unhealthy
     #[allow(dead_code)]
     fn can_safely_withdraw(&self, user: usize, asset: usize, amount: u128) -> bool {
@@ -262,52 +263,52 @@ impl SimulatedState {
         // Need remaining collateral * 0.75 > debt (HF > 1.0)
         remaining_collateral * 7500 > debt * 10000
     }
-    
+
     /// Check if user has meaningful collateral
     fn has_collateral(&self, user: usize) -> bool {
         self.collateral[user].iter().any(|&c| c > DUST_THRESHOLD)
     }
-    
+
     /// Check if user has debt
     fn has_debt(&self, user: usize) -> bool {
         self.debt[user].iter().any(|&d| d > 0)
     }
-    
+
     /// Check if any user has collateral
     fn any_collateral(&self) -> bool {
         (0..8).any(|u| self.has_collateral(u))
     }
-    
+
     /// Check if any user has debt
     fn any_debt(&self) -> bool {
         (0..8).any(|u| self.has_debt(u))
     }
-    
+
     /// Get user with most collateral for an asset
     fn best_user_for_withdraw(&self, asset: usize) -> u8 {
         (0..8).max_by_key(|&u| self.collateral[u][asset]).unwrap_or(0) as u8
     }
-    
+
     /// Get user with most debt for an asset
     fn best_user_for_repay(&self, asset: usize) -> u8 {
         (0..8).max_by_key(|&u| self.debt[u][asset]).unwrap_or(0) as u8
     }
-    
+
     /// Get user with most collateral overall (best for borrowing)
     fn best_user_for_borrow(&self) -> u8 {
         (0..8).max_by_key(|&u| self.total_collateral_value(u)).unwrap_or(0) as u8
     }
-    
+
     /// Get asset with most liquidity (best for flash loans)
     fn best_asset_for_flashloan(&self) -> u8 {
         (0..4).max_by_key(|&a| self.pool_liquidity[a]).unwrap_or(0) as u8
     }
-    
+
     /// Check if pool has liquidity for an asset
     fn has_liquidity(&self, asset: usize) -> bool {
         self.pool_liquidity[asset] > DUST_THRESHOLD
     }
-    
+
     /// Get user with lowest health factor (best liquidation target)
     /// Returns user with HF closest to 1.0 (most likely to be liquidatable after price change)
     fn best_user_for_liquidation(&self) -> Option<u8> {
@@ -316,7 +317,7 @@ impl SimulatedState {
             .min_by_key(|&u| self.health_factor(u))
             .map(|u| u as u8)
     }
-    
+
     /// Check if any user has low health factor (close to liquidatable)
     fn has_low_health_user(&self) -> bool {
         (0..8).any(|u| {
@@ -338,27 +339,27 @@ impl<'a> Arbitrary<'a> for Input {
         let num_ops = u.int_in_range(5..=25)?;
         let mut operations = Vec::with_capacity(num_ops);
         let mut state = SimulatedState::default();
-        
+
         for i in 0..num_ops {
             let op = generate_stateful_operation(u, &state, i, num_ops)?;
             state.update(&op);
             operations.push(op);
         }
-        
+
         let asset_configs = [
             generate_asset_config(u)?,
             generate_asset_config(u)?,
             generate_asset_config(u)?,
             generate_asset_config(u)?,
         ];
-        
+
         let initial_prices = [
             u.int_in_range(MIN_PRICE..=MAX_PRICE)?,
             u.int_in_range(MIN_PRICE..=MAX_PRICE)?,
             u.int_in_range(MIN_PRICE..=MAX_PRICE)?,
             u.int_in_range(MIN_PRICE..=MAX_PRICE)?,
         ];
-        
+
         Ok(Input { operations, asset_configs, initial_prices })
     }
 }
@@ -374,16 +375,16 @@ fn generate_stateful_operation(
     if op_index < 3 {
         return generate_supply_operation(u, state);
     }
-    
+
     let phase = (op_index * 100) / total_ops;
     let has_collateral = state.any_collateral();
     let has_debt = state.any_debt();
     let has_liquidity = (0..4).any(|a| state.has_liquidity(a));
-    
+
     // Build weighted category list based on phase and state
     let mut categories: Vec<(OperationCategory, u8)> = Vec::new();
     let has_low_health = state.has_low_health_user();
-    
+
     match phase {
         0..=30 => {
             // Early phase: aggressively build state
@@ -440,20 +441,20 @@ fn generate_stateful_operation(
             categories.push((OperationCategory::Admin, 1));
         }
     }
-    
+
     // Fallback if no categories (shouldn't happen, but safety)
     if categories.is_empty() {
         categories.push((OperationCategory::Supply, 1));
     }
-    
+
     // Calculate total weight
     let total_weight: u8 = categories.iter().map(|(_, w)| w).sum();
-    
+
     // Pick randomly based on weights
     let roll = u.int_in_range(0..=(total_weight.saturating_sub(1) as u32))? as u8;
     let mut cumulative = 0u8;
     let mut selected = OperationCategory::Supply;
-    
+
     for (cat, weight) in &categories {
         cumulative = cumulative.saturating_add(*weight);
         if roll < cumulative {
@@ -461,7 +462,7 @@ fn generate_stateful_operation(
             break;
         }
     }
-    
+
     generate_operation_for_category(u, selected, state)
 }
 
@@ -486,7 +487,7 @@ fn generate_supply_operation(u: &mut Unstructured, state: &SimulatedState) -> li
     let user_idx = (0..8u8)
         .max_by_key(|&uid| state.underlying[uid as usize][asset_idx as usize])
         .unwrap_or_else(|| u.int_in_range(0..=7).unwrap_or(0));
-    
+
     match u.int_in_range(0..=4)? {
         0..=3 => Ok(Operation::Supply {
             user_idx,
@@ -509,18 +510,18 @@ fn generate_operation_for_category(
 ) -> libfuzzer_sys::arbitrary::Result<Operation> {
     match category {
         OperationCategory::Supply => generate_supply_operation(u, state),
-        
+
         OperationCategory::Withdraw => {
             let asset_idx = u.int_in_range(0..=3)?;
             // Pick user with most collateral for this asset
             let user_idx = state.best_user_for_withdraw(asset_idx as usize);
             let user = user_idx as usize;
             let asset = asset_idx as usize;
-            
+
             // Calculate safe withdrawal percentage based on health factor
             let has_debt = state.has_debt(user);
             let collateral = state.collateral[user][asset];
-            
+
             // If user has debt, limit withdrawal to maintain health factor
             let max_percent = if has_debt && collateral > 0 {
                 // Calculate max safe withdrawal: keep HF > 1.2 after withdrawal
@@ -533,7 +534,7 @@ fn generate_operation_for_category(
             } else {
                 90 // No debt, can withdraw most
             };
-            
+
             match u.int_in_range(0..=2)? {
                 0 => Ok(Operation::Withdraw {
                     user_idx,
@@ -554,7 +555,7 @@ fn generate_operation_for_category(
                 }),
             }
         }
-        
+
         OperationCategory::Borrow => {
             // Pick user with most collateral (best for borrowing)
             let user_idx = state.best_user_for_borrow();
@@ -563,7 +564,7 @@ fn generate_operation_for_category(
             // Check user's health to decide how aggressive to borrow
             let user_hf = state.health_factor(user_idx as usize);
             let max_borrow_pct = if user_hf > 20000 { 40 } else { 25 }; // More conservative if HF is lower
-            
+
             match u.int_in_range(0..=2)? {
                 0..=1 => Ok(Operation::Borrow {
                     user_idx,
@@ -578,7 +579,7 @@ fn generate_operation_for_category(
                 }),
             }
         }
-        
+
         OperationCategory::Repay => {
             // Find an asset where someone actually has debt
             let asset_idx = (0..4u8)
@@ -590,7 +591,7 @@ fn generate_operation_for_category(
             // Check if user has underlying tokens to repay with
             let user = user_idx as usize;
             let has_funds = state.underlying[user][asset_idx as usize] > DUST_THRESHOLD;
-            
+
             match u.int_in_range(0..=2)? {
                 0..=1 if has_funds => Ok(Operation::Repay {
                     user_idx,
@@ -609,14 +610,14 @@ fn generate_operation_for_category(
                 }),
             }
         }
-        
+
         OperationCategory::Liquidation => {
             // Liquidator needs underlying tokens, pick one with balance
             let liquidator_idx = u.int_in_range(0..=7)?;
             // Target user with lowest health factor (most likely liquidatable)
             let user_idx = state.best_user_for_liquidation()
                 .unwrap_or_else(|| u.int_in_range(0..=7).unwrap_or(0));
-            
+
             // Pick collateral and debt assets that the target user actually has
             let user = user_idx as usize;
             let collateral_idx = (0..4u8)
@@ -627,11 +628,11 @@ fn generate_operation_for_category(
                 .filter(|&a| state.debt[user][a as usize] > 0)
                 .next()
                 .unwrap_or_else(|| u.int_in_range(0..=3).unwrap_or(0));
-            
+
             // Favor CreateAndLiquidate (which sets up unhealthy position) if user isn't already unhealthy
             let hf = state.health_factor(user);
             let favor_create = hf > 10000; // HF > 1.0, user is healthy
-            
+
             match u.int_in_range(0..=5)? {
                 0 if !favor_create => Ok(Operation::Liquidate {
                     liquidator_idx,
@@ -666,7 +667,7 @@ fn generate_operation_for_category(
                 }),
             }
         }
-        
+
         OperationCategory::FlashLoan => {
             let receiver_type = generate_receiver_type(u)?;
             // Pick asset with most liquidity
@@ -686,7 +687,7 @@ fn generate_operation_for_category(
                 }),
             }
         }
-        
+
         OperationCategory::Oracle => {
             match u.int_in_range(0..=4)? {
                 0..=1 => Ok(Operation::PriceChange {
@@ -701,7 +702,7 @@ fn generate_operation_for_category(
                 _ => Ok(Operation::OracleStale { asset_idx: u.int_in_range(0..=3)? }),
             }
         }
-        
+
         OperationCategory::Environmental => {
             match u.int_in_range(0..=5)? {
                 0..=2 => Ok(Operation::TimeWarp {
@@ -721,7 +722,7 @@ fn generate_operation_for_category(
                 _ => Ok(Operation::CollectProtocolReserves { asset_idx: u.int_in_range(0..=3)? }),
             }
         }
-        
+
         OperationCategory::EdgeCase => {
             match u.int_in_range(0..=7)? {
                 0 => Ok(Operation::ZeroAmountSupply {
@@ -761,7 +762,7 @@ fn generate_operation_for_category(
                 }),
             }
         }
-        
+
         OperationCategory::Adversarial => {
             match u.int_in_range(0..=6)? {
                 0 => Ok(Operation::RapidSupplyWithdraw {
@@ -800,7 +801,7 @@ fn generate_operation_for_category(
                 }),
             }
         }
-        
+
         OperationCategory::Admin => {
             match u.int_in_range(0..=5)? {
                 0 => {
@@ -855,16 +856,16 @@ fn generate_asset_config(u: &mut Unstructured) -> libfuzzer_sys::arbitrary::Resu
     let liquidation_threshold = u.int_in_range(ltv + 500..=9000)?;
     let liquidation_bonus = u.int_in_range(100..=1500)?;
     let reserve_factor = u.int_in_range(0..=3000)?;
-    
+
     let base_rate = u.int_in_range(0..=RAY / 100)?;
     let slope1 = u.int_in_range(RAY / 100..=RAY / 10)?;
     let slope2 = u.int_in_range(RAY / 10..=RAY)?;
     let optimal_utilization = u.int_in_range(RAY / 2..=RAY * 9 / 10)?;
-    
+
     let supply_cap = if u.arbitrary()? { u.int_in_range(1000..=1_000_000)? } else { 0 };
     let borrow_cap = if u.arbitrary()? { u.int_in_range(500..=500_000)? } else { 0 };
     let flashloan_enabled = u.arbitrary()?;
-    
+
     Ok(AssetConfig {
         ltv,
         liquidation_threshold,

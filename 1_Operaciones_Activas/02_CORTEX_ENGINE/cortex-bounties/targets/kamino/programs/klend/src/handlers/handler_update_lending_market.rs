@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::fmt::Debug;
 
 use anchor_lang::{prelude::*, Accounts};
@@ -187,8 +188,8 @@ pub fn process(
                 .validating(validations::check_bool)
                 .set(&value)?;
 
-           
-           
+
+
             if market.is_borrow_order_execution_enabled() && market.min_borrow_order_fill_value == 0
             {
                 msg!("Cannot enable borrow order execution before configuring min_borrow_order_fill_value");
@@ -215,8 +216,8 @@ pub fn process(
                 .validating(validations::check_bool)
                 .set(&value)?;
 
-           
-           
+
+
             if market.is_withdraw_ticket_redemption_enabled()
                 && market.min_withdraw_queued_liquidity_value == 0
             {
@@ -233,8 +234,8 @@ pub fn process(
             config_items::for_named_field!(&mut market.fixed_term_rollover_window_duration_seconds)
                 .set(&value)?;
 
-           
-           
+
+
             if market.fixed_term_rollover_window_duration_seconds > 0
                 && market.min_partial_rollover_value == 0
             {
@@ -246,8 +247,8 @@ pub fn process(
             config_items::for_named_field!(&mut market.open_term_rollover_window_duration_seconds)
                 .set(&value)?;
 
-           
-           
+
+
             if market.open_term_rollover_window_duration_seconds > 0
                 && market.min_partial_rollover_value == 0
             {
@@ -273,8 +274,8 @@ pub fn process(
             .validating(validations::check_bool)
             .set(&value)?;
 
-           
-           
+
+
             if market.obligation_borrow_migration_to_fixed_execution_enabled == true as u8
                 && market.min_partial_rollover_value == 0
             {
@@ -307,7 +308,7 @@ pub fn process(
 }
 
 fn validate_new_elevation_group(elevation_group: &ElevationGroup) -> Result<()> {
-   
+
     if elevation_group.id > MAX_NUM_ELEVATION_GROUPS {
         return err!(LendingError::InvalidElevationGroupConfig);
     }
@@ -317,7 +318,7 @@ fn validate_new_elevation_group(elevation_group: &ElevationGroup) -> Result<()> 
         return err!(LendingError::InvalidElevationGroupConfig);
     }
 
-   
+
     if elevation_group.liquidation_threshold_pct >= 100
         || elevation_group.ltv_pct >= 100
         || elevation_group.ltv_pct > elevation_group.liquidation_threshold_pct
@@ -333,8 +334,8 @@ fn validate_new_elevation_group(elevation_group: &ElevationGroup) -> Result<()> 
         return err!(LendingError::InvalidElevationGroupConfig);
     }
 
-   
-   
+
+
     if Fraction::from_percent(elevation_group.liquidation_threshold_pct)
         + Fraction::from_percent(elevation_group.liquidation_threshold_pct)
             * Fraction::from_bps(elevation_group.max_liquidation_bonus_bps)
@@ -379,7 +380,7 @@ pub fn is_allowed_to_update_lending_market(
     }
     if market.emergency_council == signer &&
         mode == UpdateLendingMarketMode::UpdateEmergencyMode &&
-       
+
         value[0] == true as u8
     {
         return Ok(true);

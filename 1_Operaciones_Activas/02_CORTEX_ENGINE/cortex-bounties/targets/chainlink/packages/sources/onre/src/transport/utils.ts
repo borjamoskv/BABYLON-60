@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { FundNavDataWithTimestamp } from './nav'
 
 export function parseDateToTimestamp(dateString: string): number | null {

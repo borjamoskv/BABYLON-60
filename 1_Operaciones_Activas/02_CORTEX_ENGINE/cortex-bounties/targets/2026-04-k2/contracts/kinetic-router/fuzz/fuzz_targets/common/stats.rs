@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::sync::atomic::{AtomicU64, Ordering};
 use crate::common::operations::Operation;
 
@@ -121,13 +122,13 @@ impl OperationStats {
             successful_ops: AtomicU64::new(0),
         }
     }
-    
+
     pub fn record_operation(&self, op: &Operation, success: bool) {
         self.total_ops.fetch_add(1, Ordering::Relaxed);
         if success {
             self.successful_ops.fetch_add(1, Ordering::Relaxed);
         }
-        
+
         match op {
             Operation::Supply { .. } => self.supply.fetch_add(1, Ordering::Relaxed),
             Operation::SupplyOnBehalf { .. } => self.supply_on_behalf.fetch_add(1, Ordering::Relaxed),
@@ -151,7 +152,7 @@ impl OperationStats {
             Operation::CreateAndLiquidate { .. } => self.create_and_liquidate.fetch_add(1, Ordering::Relaxed),
             Operation::FlashLoan { .. } => self.flash_loan.fetch_add(1, Ordering::Relaxed),
             Operation::MultiAssetFlashLoan { .. } => self.multi_asset_flash_loan.fetch_add(1, Ordering::Relaxed),
-            Operation::ZeroAmountSupply { .. } | Operation::ZeroAmountBorrow { .. } | 
+            Operation::ZeroAmountSupply { .. } | Operation::ZeroAmountBorrow { .. } |
             Operation::ZeroAmountWithdraw { .. } | Operation::ZeroAmountRepay { .. } => {
                 self.zero_amount_ops.fetch_add(1, Ordering::Relaxed)
             },
@@ -203,20 +204,20 @@ impl OperationStats {
             },
         };
     }
-    
+
     /// Print statistics summary (call at end of fuzzing or periodically)
     pub fn print_summary(&self) {
         let total = self.total_ops.load(Ordering::Relaxed);
         let successful = self.successful_ops.load(Ordering::Relaxed);
-        
+
         if total == 0 {
             return;
         }
-        
+
         eprintln!("\n========== FUZZER OPERATION STATISTICS ==========");
         eprintln!("Total operations: {} ({}% success rate)", total, successful * 100 / total);
         eprintln!();
-        
+
         eprintln!("--- Core Operations ---");
         self.print_stat("Supply", self.supply.load(Ordering::Relaxed), total);
         self.print_stat("SupplyOnBehalf", self.supply_on_behalf.load(Ordering::Relaxed), total);
@@ -225,7 +226,7 @@ impl OperationStats {
         self.print_stat("Borrow", self.borrow.load(Ordering::Relaxed), total);
         self.print_stat("Repay", self.repay.load(Ordering::Relaxed), total);
         self.print_stat("RepayAll", self.repay_all.load(Ordering::Relaxed), total);
-        
+
         eprintln!("\n--- Liquidation Operations ---");
         self.print_stat("Liquidate", self.liquidate.load(Ordering::Relaxed), total);
         self.print_stat("LiquidateReceiveAToken", self.liquidate_receive_a_token.load(Ordering::Relaxed), total);
@@ -235,24 +236,24 @@ impl OperationStats {
         self.print_stat("CreateAndLiquidate", self.create_and_liquidate.load(Ordering::Relaxed), total);
         self.print_stat("MultiAssetLiquidation", self.multi_asset_liquidation.load(Ordering::Relaxed), total);
         self.print_stat("SelfLiquidationAttempt", self.self_liquidation_attempt.load(Ordering::Relaxed), total);
-        
+
         eprintln!("\n--- Flash Loan Operations ---");
         self.print_stat("FlashLoan", self.flash_loan.load(Ordering::Relaxed), total);
         self.print_stat("MultiAssetFlashLoan", self.multi_asset_flash_loan.load(Ordering::Relaxed), total);
         self.print_stat("FlashLoanWhilePaused", self.flash_loan_while_paused.load(Ordering::Relaxed), total);
-        
+
         eprintln!("\n--- Edge Cases ---");
         self.print_stat("ZeroAmountOps", self.zero_amount_ops.load(Ordering::Relaxed), total);
         self.print_stat("DustOps", self.dust_ops.load(Ordering::Relaxed), total);
         self.print_stat("MaxAmountOps", self.max_amount_ops.load(Ordering::Relaxed), total);
-        
+
         eprintln!("\n--- Oracle Operations ---");
         self.print_stat("PriceChange", self.price_change.load(Ordering::Relaxed), total);
         self.print_stat("PriceToZero", self.price_to_zero.load(Ordering::Relaxed), total);
         self.print_stat("PriceToMax", self.price_to_max.load(Ordering::Relaxed), total);
         self.print_stat("OracleStale", self.oracle_stale.load(Ordering::Relaxed), total);
         self.print_stat("PriceVolatility", self.price_volatility.load(Ordering::Relaxed), total);
-        
+
         eprintln!("\n--- Adversarial Patterns ---");
         self.print_stat("RapidSupplyWithdraw", self.rapid_supply_withdraw.load(Ordering::Relaxed), total);
         self.print_stat("RapidBorrowRepay", self.rapid_borrow_repay.load(Ordering::Relaxed), total);
@@ -262,7 +263,7 @@ impl OperationStats {
         self.print_stat("DonationAttack", self.donation_attack.load(Ordering::Relaxed), total);
         self.print_stat("BadDebtScenario", self.bad_debt_scenario.load(Ordering::Relaxed), total);
         self.print_stat("DangerousSequences", self.dangerous_sequences.load(Ordering::Relaxed), total);
-        
+
         eprintln!("\n--- Admin Operations ---");
         self.print_stat("UpdateReserveConfig", self.update_reserve_config.load(Ordering::Relaxed), total);
         self.print_stat("UpdateRateStrategy", self.update_rate_strategy.load(Ordering::Relaxed), total);
@@ -270,22 +271,22 @@ impl OperationStats {
         self.print_stat("SetCaps", self.set_caps.load(Ordering::Relaxed), total);
         self.print_stat("WhitelistBlacklist", self.whitelist_blacklist.load(Ordering::Relaxed), total);
         self.print_stat("AdminTransfer", self.admin_transfer.load(Ordering::Relaxed), total);
-        
+
         eprintln!("\n--- Environmental ---");
         self.print_stat("TimeWarp", self.time_warp.load(Ordering::Relaxed), total);
         self.print_stat("ExtremeTimeWarp", self.extreme_time_warp.load(Ordering::Relaxed), total);
         self.print_stat("PauseProtocol", self.pause_protocol.load(Ordering::Relaxed), total);
         self.print_stat("UnpauseProtocol", self.unpause_protocol.load(Ordering::Relaxed), total);
-        
+
         eprintln!("\n--- Other ---");
         self.print_stat("SwapCollateral", self.swap_collateral.load(Ordering::Relaxed), total);
         self.print_stat("TransferAToken", self.transfer_a_token.load(Ordering::Relaxed), total);
         self.print_stat("DrainLiquidity", self.drain_liquidity.load(Ordering::Relaxed), total);
         self.print_stat("MaxUtilization", self.max_utilization.load(Ordering::Relaxed), total);
-        
+
         eprintln!("==================================================\n");
     }
-    
+
     fn print_stat(&self, name: &str, count: u64, total: u64) {
         if count > 0 {
             let pct = count * 100 / total;
@@ -364,7 +365,7 @@ impl InvariantStats {
             dust_accumulation: AtomicU64::new(0),
         }
     }
-    
+
     pub fn record(&self, invariant: InvariantType) {
         match invariant {
             InvariantType::OperationInvariants => self.operation_invariants.fetch_add(1, Ordering::Relaxed),
@@ -397,10 +398,10 @@ impl InvariantStats {
             InvariantType::DustAccumulation => self.dust_accumulation.fetch_add(1, Ordering::Relaxed),
         };
     }
-    
+
     pub fn print_summary(&self) {
         eprintln!("\n========== INVARIANT EXECUTION STATISTICS ==========");
-        
+
         eprintln!("\n--- Core Invariants (every operation) ---");
         self.print_invariant("OperationInvariants", self.operation_invariants.load(Ordering::Relaxed));
         self.print_invariant("ProtocolInvariants", self.protocol_invariants.load(Ordering::Relaxed));
@@ -412,25 +413,25 @@ impl InvariantStats {
         self.print_invariant("AccruedTreasuryMonotonicity", self.accrued_treasury_monotonicity.load(Ordering::Relaxed));
         self.print_invariant("DebtCeilingInvariants", self.debt_ceiling_invariants.load(Ordering::Relaxed));
         self.print_invariant("ReserveFactorInvariants", self.reserve_factor_invariants.load(Ordering::Relaxed));
-        
+
         eprintln!("\n--- Time-Dependent Invariants ---");
         self.print_invariant("InterestInvariants", self.interest_invariants.load(Ordering::Relaxed));
         self.print_invariant("InterestMath", self.interest_math.load(Ordering::Relaxed));
         self.print_invariant("FeeCalculationInvariants", self.fee_calculation_invariants.load(Ordering::Relaxed));
-        
+
         eprintln!("\n--- Flash Loan Invariants ---");
         self.print_invariant("FlashLoanPremium", self.flash_loan_premium.load(Ordering::Relaxed));
         self.print_invariant("FlashLoanRepayment", self.flash_loan_repayment.load(Ordering::Relaxed));
-        
+
         eprintln!("\n--- Liquidation Invariants ---");
         self.print_invariant("LiquidationFairness", self.liquidation_fairness.load(Ordering::Relaxed));
-        
+
         eprintln!("\n--- Economic Exploit Detection ---");
         self.print_invariant("NoRateManipulation", self.no_rate_manipulation.load(Ordering::Relaxed));
         self.print_invariant("OracleSanity", self.oracle_sanity.load(Ordering::Relaxed));
         self.print_invariant("NoValueExtraction", self.no_value_extraction.load(Ordering::Relaxed));
         self.print_invariant("AdminCannotSteal", self.admin_cannot_steal.load(Ordering::Relaxed));
-        
+
         eprintln!("\n--- Final/Configuration Invariants ---");
         self.print_invariant("FinalInvariants", self.final_invariants.load(Ordering::Relaxed));
         self.print_invariant("CumulativeRounding", self.cumulative_rounding.load(Ordering::Relaxed));
@@ -440,7 +441,7 @@ impl InvariantStats {
         self.print_invariant("ParameterBounds", self.parameter_bounds.load(Ordering::Relaxed));
         self.print_invariant("FailedOperationUnchanged", self.failed_operation_unchanged.load(Ordering::Relaxed));
         self.print_invariant("DustAccumulation", self.dust_accumulation.load(Ordering::Relaxed));
-        
+
         // Flag any invariants that weren't executed
         eprintln!("\n--- COVERAGE WARNINGS ---");
         let mut all_covered = true;
@@ -459,10 +460,10 @@ impl InvariantStats {
         if all_covered {
             eprintln!("  All invariants were executed at least once!");
         }
-        
+
         eprintln!("=====================================================\n");
     }
-    
+
     fn print_invariant(&self, name: &str, count: u64) {
         let status = if count == 0 { "NEVER RUN" } else { "" };
         eprintln!("  {:35} {:>10} {}", name, count, status);

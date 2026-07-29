@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { createAction, nanoid } from '@reduxjs/toolkit'
 import {
   AnyAction,

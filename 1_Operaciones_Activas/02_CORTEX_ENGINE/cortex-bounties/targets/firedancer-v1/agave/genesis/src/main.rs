@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! A command-line executable for generating the chain's genesis config.
 #![allow(clippy::arithmetic_side_effects)]
 

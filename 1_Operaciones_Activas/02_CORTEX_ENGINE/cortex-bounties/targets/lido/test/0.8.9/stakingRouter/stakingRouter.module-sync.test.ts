@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { bigintToHex, bufToHex } from "bigint-conversion";
 import { expect } from "chai";
 import { hexlify, randomBytes } from "ethers";

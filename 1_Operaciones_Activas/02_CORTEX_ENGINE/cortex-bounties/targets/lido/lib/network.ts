@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { ethers } from "hardhat";
 
 export async function getNetworkName(): Promise<string> {

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { mockForexResponse } from './fixtures'
 import {
   TestAdapter,

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { CensorList } from '../../src/lib/config/logging'
 import { censor, censorLog } from '../../src/lib/modules/logger'
 import { buildCensorList } from '../../src/lib/util'

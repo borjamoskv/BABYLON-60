@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """Tests for E1Profiler.
 
 All tests are self-contained: no live engine, no database, no network.

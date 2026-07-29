@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::error::TreasuryError;
 use k2_shared::upgradeable;
 use soroban_sdk::{contracttype, Address, Env, Map, Vec};
@@ -68,7 +69,7 @@ pub fn get_balance(env: &Env, asset: &Address) -> u128 {
 /// subtract_balance() for safer operations that check for overflow/underflow.
 pub fn set_balance(env: &Env, asset: &Address, amount: u128) -> Result<(), TreasuryError> {
     let key = PersistentKey::Balance(asset.clone());
-    
+
     // Update balance
     if amount == 0 {
         // Remove balance entry if zero
@@ -141,7 +142,7 @@ pub fn get_all_balances(env: &Env) -> Result<Map<Address, u128>, TreasuryError> 
     } else {
         Vec::new(env)
     };
-    
+
     let mut balances = Map::new(env);
     for i in 0..asset_list.len() {
         if let Some(asset) = asset_list.get(i) {
@@ -168,7 +169,7 @@ fn add_to_asset_list(env: &Env, asset: &Address) -> Result<(), TreasuryError> {
     } else {
         Vec::new(env)
     };
-    
+
     // Check if asset is already in list
     let mut found = false;
     for i in 0..asset_list.len() {
@@ -177,7 +178,7 @@ fn add_to_asset_list(env: &Env, asset: &Address) -> Result<(), TreasuryError> {
             break;
         }
     }
-    
+
     if !found {
         asset_list.push_back(asset.clone());
         env.storage().persistent().set(&key, &asset_list);
@@ -194,7 +195,7 @@ fn remove_from_asset_list(env: &Env, asset: &Address) {
     if !env.storage().persistent().has(&key) {
         return;
     }
-    
+
     env.storage()
         .persistent()
         .extend_ttl(&key, TTL_THRESHOLD, TTL_EXTENSION);
@@ -202,7 +203,7 @@ fn remove_from_asset_list(env: &Env, asset: &Address) {
         Some(list) => list,
         None => return,
     };
-    
+
     let mut new_list = Vec::new(env);
     for i in 0..asset_list.len() {
         if let Some(a) = asset_list.get(i) {
@@ -211,7 +212,7 @@ fn remove_from_asset_list(env: &Env, asset: &Address) {
             }
         }
     }
-    
+
     if new_list.len() == 0 {
         env.storage().persistent().remove(&key);
     } else {

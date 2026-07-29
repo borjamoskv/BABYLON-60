@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module provides [`LeaderUpdater`] trait.
 //!
 //! Currently, the main purpose of [`LeaderUpdater`] is to abstract over leader

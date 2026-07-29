@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { combineReducers, createReducer } from '@reduxjs/toolkit'
 import { sortedFilter } from '../../util'
 import { makeId } from '../rate-limit'

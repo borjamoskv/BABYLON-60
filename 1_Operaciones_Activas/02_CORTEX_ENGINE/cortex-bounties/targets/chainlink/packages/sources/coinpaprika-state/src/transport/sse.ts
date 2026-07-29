@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /**
  * SSE parser for chunked lines and event emission
  */

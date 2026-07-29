@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { buildTable, TableText, TextRow } from '../shared/tableUtils'
 
 export const paramHeaders: TextRow = [

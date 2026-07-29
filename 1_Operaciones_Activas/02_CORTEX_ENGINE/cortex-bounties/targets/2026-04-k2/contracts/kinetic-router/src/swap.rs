@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::calculation;
 use crate::storage;
 use crate::validation;
@@ -144,7 +145,7 @@ pub fn swap_collateral(
     // Step 3: Execute swap via DEX or custom handler
     let swap_config = storage::get_swap_config(&env);
     let sym_transfer = symbol_short!("transfer");
-    
+
     // WP-C1: Use actual_amount (capped by aToken) for DEX swap, not raw user-provided amount
     let actual_amount_i128 = safe_u128_to_i128(&env, actual_amount);
     let to_amount_received_i128 = if let Some(handler) = swap_handler {

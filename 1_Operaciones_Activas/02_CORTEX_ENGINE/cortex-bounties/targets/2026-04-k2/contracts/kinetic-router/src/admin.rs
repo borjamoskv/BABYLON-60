@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![allow(dead_code)]
 //! This module contains administrative functions for the Kinetic Router contract.
 //! These functions are intended to be called by the contract admin to configure protocol parameters
@@ -20,7 +21,7 @@ pub fn set_flash_loan_premium(env: Env, premium_bps: u128) -> Result<(), Kinetic
 
     let old_premium = storage::get_flash_loan_premium(&env);
     storage::set_flash_loan_premium(&env, premium_bps);
-    
+
     env.events().publish(
         (symbol_short!("fl_prem"), symbol_short!("updated")),
         events::FlashLoanPremiumUpdatedEvent {
@@ -28,7 +29,7 @@ pub fn set_flash_loan_premium(env: Env, premium_bps: u128) -> Result<(), Kinetic
             new_premium_bps: premium_bps,
         },
     );
-    
+
     Ok(())
 }
 
@@ -120,7 +121,7 @@ pub fn set_treasury(env: Env, treasury: Address) -> Result<(), KineticRouterErro
 
     let old_treasury = storage::get_treasury(&env);
     storage::set_treasury(&env, &treasury);
-    
+
     env.events().publish(
         (symbol_short!("treasury"), symbol_short!("updated")),
         events::TreasuryUpdatedEvent {
@@ -128,7 +129,7 @@ pub fn set_treasury(env: Env, treasury: Address) -> Result<(), KineticRouterErro
             new_treasury: treasury,
         },
     );
-    
+
     Ok(())
 }
 
@@ -185,14 +186,14 @@ pub fn pause(env: Env) -> Result<(), KineticRouterError> {
     emergency_admin.require_auth();
 
     storage::set_paused(&env, true);
-    
+
     env.events().publish(
         (symbol_short!("paused"),),
         events::ProtocolPausedEvent {
             paused_by: emergency_admin,
         },
     );
-    
+
     Ok(())
 }
 
@@ -202,7 +203,7 @@ pub fn unpause(env: Env) -> Result<(), KineticRouterError> {
     admin.require_auth();
 
     storage::set_paused(&env, false);
-    
+
     let admin_addr = admin.clone();
     env.events().publish(
         (symbol_short!("unpaused"),),
@@ -210,7 +211,7 @@ pub fn unpause(env: Env) -> Result<(), KineticRouterError> {
             unpaused_by: admin_addr,
         },
     );
-    
+
     Ok(())
 }
 

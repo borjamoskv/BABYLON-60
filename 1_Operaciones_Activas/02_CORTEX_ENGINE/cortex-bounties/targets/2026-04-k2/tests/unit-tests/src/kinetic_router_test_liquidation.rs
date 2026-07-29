@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 use crate::kinetic_router;
@@ -44,7 +45,7 @@ fn test_liquidation_health_factor_healthy() {
     assert!(pool_id != Address::generate(&env));
 }
 
-// NOTE: test_atomic_flash_liquidation_parameters removed - atomic_flash_liquidation 
+// NOTE: test_atomic_flash_liquidation_parameters removed - atomic_flash_liquidation
 // is now in standalone k2-liquidator contract
 
 #[test]
@@ -197,7 +198,7 @@ fn test_liquidation_blocked_when_hf_greater_than_one() {
         &dex_router,
         &None,
     );
-    
+
     let pool_configurator = Address::generate(&env);
     kinetic_router.set_pool_configurator(&pool_configurator);
 

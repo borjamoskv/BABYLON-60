@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as client from 'prom-client'
 import * as metrics from '../../../src/lib/metrics'
 import { AdapterError } from '../../../src/lib/modules/error'

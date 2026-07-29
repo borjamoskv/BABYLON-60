@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crate::{args::StakeArgs, commands::Error},
     solana_rpc_client::rpc_client::RpcClient,

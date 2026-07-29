@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from eth_consensus_specs.test.context import spec_state_test, with_all_phases
 from eth_consensus_specs.test.helpers.block import (
     build_empty_block_for_next_slot,

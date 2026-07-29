@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use rustls::{NamedGroup, crypto::CryptoProvider};
 
 pub fn crypto_provider() -> CryptoProvider {

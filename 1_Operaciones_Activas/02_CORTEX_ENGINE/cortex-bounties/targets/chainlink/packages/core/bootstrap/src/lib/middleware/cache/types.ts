@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { AdapterResponse } from '../../../types'
 import type * as local from './local'
 import type * as redis from './redis'

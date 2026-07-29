@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #[cfg(target_arch = "x86")]
 use core::arch::x86::{__cpuid, __cpuid_count, __get_cpuid_max, CpuidResult};
 #[cfg(target_arch = "x86_64")]

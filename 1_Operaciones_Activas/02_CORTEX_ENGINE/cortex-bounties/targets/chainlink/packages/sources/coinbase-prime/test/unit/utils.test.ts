@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { getApiKeys } from '../../src/transport/utils'
 import { config } from '../../src/config'
 import { AdapterInputError } from '@chainlink/external-adapter-framework/validation/error'

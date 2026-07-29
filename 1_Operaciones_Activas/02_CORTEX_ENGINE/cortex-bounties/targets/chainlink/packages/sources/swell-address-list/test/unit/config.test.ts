@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { setEnvVariables } from '@chainlink/ea-test-helpers'
 import * as adapter from '../../src'
 

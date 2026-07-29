@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { Repo } from './repo'
 
 export function intersect(list1: string[], list2: string[]): string[] {

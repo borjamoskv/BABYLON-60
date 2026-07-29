@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 //! Integration tests for official RedStone adapter + feed wrapper architecture
@@ -128,7 +129,7 @@ fn test_redstone_wrapper_price_query() {
 
     // Note: In production, RedStone price pusher writes prices to adapter
     // Then wrapper reads from adapter and converts format for K2 Price Oracle
-    
+
     // Query price (will return None without real data)
     let btc_asset = k2_shared::Asset::Stellar(Address::generate(&env));
     let price_data = wrapper_client.lastprice(&btc_asset);

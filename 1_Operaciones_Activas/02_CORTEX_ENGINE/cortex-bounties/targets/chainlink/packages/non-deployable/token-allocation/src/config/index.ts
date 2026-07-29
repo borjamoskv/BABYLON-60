@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as Amberdata from '@chainlink/amberdata-adapter'
 import { adapter as CFBenchmarks } from '@chainlink/cfbenchmarks-adapter'
 import * as CoinApi from '@chainlink/coinapi-adapter'

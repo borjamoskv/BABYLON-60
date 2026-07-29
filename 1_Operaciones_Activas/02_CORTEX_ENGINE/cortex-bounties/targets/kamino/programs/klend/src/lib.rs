@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![allow(clippy::result_large_err)]
 #![allow(deprecated)] //Needed as anchor will use the deprecated functions automatically
 
@@ -35,10 +36,10 @@ solana_security_txt::security_txt! {
 pub mod kamino_lending {
     use super::*;
 
-   
+
     pub fn init_lending_market(
         ctx: Context<InitLendingMarket>,
-       
+
         quote_currency: [u8; 32],
     ) -> Result<()> {
         handler_init_lending_market::process(ctx, quote_currency)
@@ -111,7 +112,7 @@ pub mod kamino_lending {
         handler_mark_obligation_for_deleveraging::process(ctx, autodeleverage_target_ltv_pct)
     }
 
-   
+
     #[access_control(emergency_mode_disabled(&ctx.accounts.lending_market))]
     pub fn refresh_reserve(ctx: Context<RefreshReserve>) -> Result<()> {
         handler_refresh_reserve::process(ctx)
@@ -459,7 +460,7 @@ pub mod kamino_lending {
         handler_fill_borrow_order::process(ctx)
     }
 
-   
+
     pub fn initiate_obligation_ownership_transfer(
         ctx: Context<InitiateObligationOwnershipTransfer>,
         new_owner: Pubkey,

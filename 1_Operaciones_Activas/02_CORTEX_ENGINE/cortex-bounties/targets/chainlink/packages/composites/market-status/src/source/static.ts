@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { MarketStatusResult } from '../transport/base-market-status'
 import { getStatus as staticIceEuropeEnergy } from './static-ice-europe-energy'
 import { getStatus as staticJpxStatus } from './static-jpx'

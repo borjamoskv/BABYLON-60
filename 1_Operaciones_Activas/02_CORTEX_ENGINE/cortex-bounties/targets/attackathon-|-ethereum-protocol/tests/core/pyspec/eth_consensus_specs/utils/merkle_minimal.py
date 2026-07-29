@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from math import log2
 
 from eth_consensus_specs.utils.hash_function import hash

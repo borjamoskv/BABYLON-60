@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 use crate::incentives;
@@ -77,7 +78,7 @@ fn test_distribution_end_accrues_final_interval() {
     // Expected: (1_000_000 * 100 * RAY) / 100 = 100_000_000 * RAY / 100 = 1_000_000 * RAY
     let expected_increment = 1_000_000 * RAY;
     let expected_index = RAY + expected_increment;
-    
+
     assert_eq!(
         after.index, expected_index,
         "index should accrue rewards up to distribution_end"
@@ -145,7 +146,7 @@ fn test_distribution_end_partial_interval() {
     let after = client.get_asset_reward_index(&token, &reward_token, &0u32);
     let additional_increment = 500_000 * RAY; // 50 more seconds
     let expected_final = RAY + expected_mid_increment + additional_increment;
-    
+
     assert_eq!(
         after.index, expected_final,
         "index should accrue for partial interval up to distribution_end"

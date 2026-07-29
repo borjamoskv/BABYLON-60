@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as grpc from '@grpc/grpc-js'
 import { StreamAggregatedStatePriceResponseV1 } from '@kaiko-data/sdk-node/sdk/stream/aggregated_state_price_v1/response_pb'
 

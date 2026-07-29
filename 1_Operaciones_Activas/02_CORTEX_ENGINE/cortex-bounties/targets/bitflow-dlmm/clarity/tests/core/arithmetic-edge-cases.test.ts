@@ -1,6 +1,7 @@
+// C5-REAL EXERGY CERTIFIED
 /**
  * Arithmetic Edge Case Tests
- * 
+ *
  * Tests for overflow, underflow, and division by zero scenarios
  * across all DLMM operations.
  */
@@ -33,13 +34,13 @@ import {
 import { MAX_BIN_ID, MIN_BIN_ID } from "../../fuzz/utils";
 
 describe('Arithmetic Edge Cases', () => {
-  
+
   beforeEach(async () => {
     setupTestEnvironment();
   });
 
   describe('Bin ID Boundary Tests', () => {
-    
+
     it('should handle get-unsigned-bin-id with valid minimum bin ID', async () => {
       const binId = MIN_BIN_ID; // -500
       const result = rovOk(dlmmCore.getUnsignedBinId(binId));
@@ -79,7 +80,7 @@ describe('Arithmetic Edge Cases', () => {
     it('should fail swap with invalid bin ID below minimum', async () => {
       const binId = MIN_BIN_ID - 1n; // -501
       const xAmount = 1000000n;
-      
+
       try {
         txErr(dlmmCore.swapXForY(
           sbtcUsdcPool.identifier,
@@ -99,7 +100,7 @@ describe('Arithmetic Edge Cases', () => {
     it('should fail swap with invalid bin ID above maximum', async () => {
       const binId = MAX_BIN_ID + 1n; // 501
       const xAmount = 1000000n;
-      
+
       const response = txErr(dlmmCore.swapXForY(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -107,25 +108,25 @@ describe('Arithmetic Edge Cases', () => {
         binId,
         xAmount
       ), alice);
-      
+
       // Should return an error
       expect(response).toBeDefined();
     });
   });
 
   describe('Division by Zero Tests', () => {
-    
+
     it('should fail withdraw-liquidity from bin with zero totalSupply', async () => {
       const binId = 10n; // Bin with no liquidity
       const liquidityBalance = rovOk(sbtcUsdcPool.getTotalSupply(
         rovOk(dlmmCore.getUnsignedBinId(binId))
       ));
       expect(liquidityBalance).toBe(0n); // Verify no liquidity exists
-      
+
       const amountToWithdraw = 1000000n;
       const minXAmount = 1n;
       const minYAmount = 1n;
-      
+
       const response = txErr(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -135,7 +136,7 @@ describe('Arithmetic Edge Cases', () => {
         minXAmount,
         minYAmount
       ), alice);
-      
+
       // Should return ERR_NO_BIN_SHARES (division by zero protection)
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_NO_BIN_SHARES);
     });
@@ -145,7 +146,7 @@ describe('Arithmetic Edge Cases', () => {
       const xAmount = 0n
       const yAmount = 1n
       const minDlp = 1n;
-      
+
       const response = txErr(dlmmCore.addLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -163,11 +164,11 @@ describe('Arithmetic Edge Cases', () => {
   });
 
   describe('Very Small Value Tests', () => {
-    
+
     it('should handle swap with minimum amount (1)', async () => {
       const binId = 0n;
       const yAmount = 1n;
-      
+
       const response = txOk(dlmmCore.swapYForX(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -175,7 +176,7 @@ describe('Arithmetic Edge Cases', () => {
         binId,
         yAmount
       ), alice);
-      
+
       expect(response).toBeDefined();
       expect(cvToValue(response.result)["out"]).toBe(0n); // exchange rate causes a donation swap
     });
@@ -186,12 +187,12 @@ describe('Arithmetic Edge Cases', () => {
         rovOk(dlmmCore.getUnsignedBinId(binId)),
         alice
       ));
-      
+
       if (liquidityBalance > 0n) {
         const amountToWithdraw = 1n; // Minimum amount
         const minXAmount = 0n;
         const minYAmount = 0n;
-        
+
         const response = txErr(dlmmCore.withdrawLiquidity(
           sbtcUsdcPool.identifier,
           mockSbtcToken.identifier,
@@ -201,7 +202,7 @@ describe('Arithmetic Edge Cases', () => {
           minXAmount,
           minYAmount
         ), alice);
-        
+
         // Should handle gracefully (might fail if amount too small)
         expect(response).toBeDefined();
       }
@@ -209,11 +210,11 @@ describe('Arithmetic Edge Cases', () => {
   });
 
   describe('Very Large Value Tests', () => {
-    
+
     it('should handle swap with very large amount (contract should cap)', async () => {
       const binId = 0n;
       const xAmount = generateVeryLargeAmount(); // Near u128 max
-      
+
       // Contract should cap the amount to maximum allowed
       const response = txOk(dlmmCore.swapXForY(
         sbtcUsdcPool.identifier,
@@ -222,7 +223,7 @@ describe('Arithmetic Edge Cases', () => {
         binId,
         xAmount
       ), alice);
-      
+
       const swapResult = cvToValue(response.result);
       // Should succeed with capped amount
       expect(swapResult.in).toBeGreaterThan(0n);
@@ -234,7 +235,7 @@ describe('Arithmetic Edge Cases', () => {
       const xAmount = 1000000000000000n;
       const yAmount = 50000000000000000n;
       const minDlp = 1n;
-      
+
       txOk(mockSbtcToken.mint(xAmount, alice), deployer);
       txOk(mockUsdcToken.mint(yAmount, alice), deployer);
 
@@ -250,18 +251,18 @@ describe('Arithmetic Edge Cases', () => {
         xAmount / 1000n,
         yAmount / 1000n
       ), alice);
-      
+
       const liquidityReceived = cvToValue(response.result);
       expect(liquidityReceived).toBeGreaterThan(0n);
     });
   });
 
   describe('Zero Amount Tests', () => {
-    
+
     it('should fail swap with zero amount', async () => {
       const binId = 0n;
       const xAmount = 0n;
-      
+
       const response = txErr(dlmmCore.swapXForY(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -269,7 +270,7 @@ describe('Arithmetic Edge Cases', () => {
         binId,
         xAmount
       ), alice);
-      
+
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_INVALID_AMOUNT);
     });
 
@@ -278,7 +279,7 @@ describe('Arithmetic Edge Cases', () => {
       const xAmount = 0n;
       const yAmount = 0n;
       const minDlp = 1n;
-      
+
       const response = txErr(dlmmCore.addLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -290,7 +291,7 @@ describe('Arithmetic Edge Cases', () => {
         1000000n,
         1000000n
       ), alice);
-      
+
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_INVALID_AMOUNT);
     });
 
@@ -299,7 +300,7 @@ describe('Arithmetic Edge Cases', () => {
       const amountToWithdraw = 0n;
       const minXAmount = 0n;
       const minYAmount = 0n;
-      
+
       const response = txErr(dlmmCore.withdrawLiquidity(
         sbtcUsdcPool.identifier,
         mockSbtcToken.identifier,
@@ -309,7 +310,7 @@ describe('Arithmetic Edge Cases', () => {
         minXAmount,
         minYAmount
       ), alice);
-      
+
       expect(cvToValue(response.result)).toBe(errors.dlmmCore.ERR_INVALID_AMOUNT);
     });
   });

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // Algorithm by @kalanyuz and @eshaqiri
 import { parseUnits } from 'ethers'
 import { deScale, PRECISION, scale } from './utils'

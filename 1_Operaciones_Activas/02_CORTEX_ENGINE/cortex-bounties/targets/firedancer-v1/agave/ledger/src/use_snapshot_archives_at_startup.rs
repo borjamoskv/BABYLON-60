@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use strum::{Display, EnumString, IntoStaticStr, VariantNames};
 
 /// When should snapshot archives be used at startup?

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { DataResponse, Requester, Value } from '@chainlink/ea-bootstrap'
 import { balance } from '@chainlink/ea-factories'
 import { Config, ExecuteFactory } from '@chainlink/ea-bootstrap'

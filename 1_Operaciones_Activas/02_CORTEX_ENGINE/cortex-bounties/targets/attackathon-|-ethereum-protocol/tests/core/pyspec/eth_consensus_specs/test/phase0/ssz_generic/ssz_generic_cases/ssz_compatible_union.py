@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from itertools import permutations
 from random import Random
 

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { EndpointContext, MarketStatus } from '@chainlink/external-adapter-framework/adapter'
 import { makeLogger } from '@chainlink/external-adapter-framework/util'
 import type { MultiMarketStatusEndpointTypes } from '../endpoint/multi-market-status'

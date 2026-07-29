@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { TInputParameters as PlayerStatsInputParameters } from './player-stats'
 
 export type TInputParameters = PlayerStatsInputParameters

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { AdapterBatchResponse, Requester } from '../../src'
 import {

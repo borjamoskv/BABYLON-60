@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // This Hardhat config is used for generating documentation only.
 
 require('@nomicfoundation/hardhat-foundry');

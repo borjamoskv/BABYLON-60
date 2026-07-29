@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! @brief curve25519 syscall tests
 
 use {

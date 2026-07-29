@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     assert_cmd::{assert::Assert, cargo::cargo_bin_cmd},
     predicates::prelude::*,

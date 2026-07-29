@@ -1,10 +1,11 @@
+// C5-REAL EXERGY CERTIFIED
 /**
  * Swap calculation helpers matching pricing.py _calculate_bin_swap API
- * 
+ *
  * This module provides functions that replicate the exact logic from
  * pricing.py's _calculate_bin_swap method, ensuring consistency between
  * the Python quote engine and TypeScript test validation.
- * 
+ *
  * Reference: pricing.py lines 904-973
  */
 
@@ -32,9 +33,9 @@ export interface SwapCalculationResultFloat {
 
 /**
  * Calculate swap amounts for a single bin using Clarity DLMM math.
- * 
+ *
  * This function matches pricing.py's _calculate_bin_swap method exactly.
- * 
+ *
  * @param bin_data - Bin data with reserves
  * @param bin_price - Bin price (as BigInt, scaled by PRICE_SCALE_BPS)
  * @param remaining - Remaining amount to swap
@@ -126,10 +127,10 @@ export function calculateBinSwap(
 
 /**
  * Calculate swap amounts using float math (for comparison with quote engine).
- * 
+ *
  * This function provides the "ideal" float-based calculation that the quote engine
  * uses, which we compare against to detect rounding errors and exploits.
- * 
+ *
  * @param bin_data - Bin data with reserves
  * @param bin_price - Bin price (as number, scaled by PRICE_SCALE_BPS)
  * @param remaining - Remaining amount to swap
@@ -210,9 +211,9 @@ export function calculateBinSwapFloat(
 
 /**
  * Calculate fee rate in BPS from protocol, provider, and variable fees.
- * 
+ *
  * This matches pricing.py's calculate_fee_rate method.
- * 
+ *
  * @param protocol_fee_bps - Protocol fee in basis points
  * @param provider_fee_bps - Provider fee in basis points
  * @param variable_fee_bps - Variable fee in basis points

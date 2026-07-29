@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{prelude::*, Accounts};
 use anchor_spl::token_interface::{self, Mint, TokenAccount, TokenInterface};
 
@@ -39,7 +40,7 @@ pub fn process<'info>(
 fn process_impl(accounts: &RolloverAccounts) -> Result<bool> {
     lending_checks::rollover_fixed_term_borrow_checks(accounts)?;
 
-   
+
     let market_address = accounts.lending_market.key();
     let market = &accounts.lending_market.load()?;
     let obligation = &mut accounts.obligation.load_mut()?;
@@ -48,7 +49,7 @@ fn process_impl(accounts: &RolloverAccounts) -> Result<bool> {
     let source_borrow_reserve = &mut accounts.source_borrow_reserve.load_mut()?;
     let clock = &Clock::get()?;
 
-   
+
     let source_reserve_before = capture_reserve_accounting_and_balance(
         source_borrow_reserve,
         &accounts.source_borrow_reserve_liquidity,
@@ -60,7 +61,7 @@ fn process_impl(accounts: &RolloverAccounts) -> Result<bool> {
     )?;
 
     if source_borrow_reserve_address == target_borrow_reserve_address {
-       
+
         lending_operations::rollover_borrow_into_same_reserve(
             market,
             source_borrow_reserve_address,
@@ -69,9 +70,9 @@ fn process_impl(accounts: &RolloverAccounts) -> Result<bool> {
             clock,
         )?;
 
-       
 
-       
+
+
         let source_reserve_after = capture_reserve_accounting_and_balance(
             source_borrow_reserve,
             &accounts.source_borrow_reserve_liquidity,
@@ -82,7 +83,7 @@ fn process_impl(accounts: &RolloverAccounts) -> Result<bool> {
             target_borrow_reserve_address,
         )?;
 
-       
+
         lending_checks::rollover_fixed_term_borrow_into_same_reserve_post_checks(
             source_reserve_before,
             obligation_before,
@@ -93,16 +94,16 @@ fn process_impl(accounts: &RolloverAccounts) -> Result<bool> {
         return Ok(false);
     }
 
-   
+
     let target_borrow_reserve = &mut accounts.target_borrow_reserve.load_mut()?;
 
-   
+
     let target_reserve_before = capture_reserve_accounting_and_balance(
         target_borrow_reserve,
         &accounts.target_borrow_reserve_liquidity,
     )?;
 
-   
+
     let rollover_result = lending_operations::rollover_borrow_into_different_reserve(
         market,
         source_borrow_reserve_address,
@@ -113,14 +114,14 @@ fn process_impl(accounts: &RolloverAccounts) -> Result<bool> {
         clock,
     )?;
 
-   
+
     let FixedTermRolloverResult {
-        repaid_amount: _,  
+        repaid_amount: _,
         borrowed_amount: _,
         tokens_to_transfer_over,
     } = &rollover_result;
 
-   
+
     let authority_signer_seeds = gen_signer_seeds!(market_address.as_ref(), market.bump_seed as u8);
     token_transfer::borrow_obligation_liquidity_transfer(
         accounts.token_program.to_account_info(),
@@ -133,7 +134,7 @@ fn process_impl(accounts: &RolloverAccounts) -> Result<bool> {
         accounts.liquidity_mint.decimals,
     )?;
 
-   
+
     let source_reserve_after = capture_reserve_accounting_and_balance(
         source_borrow_reserve,
         &accounts.source_borrow_reserve_liquidity,
@@ -148,7 +149,7 @@ fn process_impl(accounts: &RolloverAccounts) -> Result<bool> {
         target_borrow_reserve_address,
     )?;
 
-   
+
     lending_checks::rollover_fixed_term_borrow_into_different_reserve_post_checks(
         lending_checks::RolloverAccountingAndBalances {
             source_reserve: source_reserve_before,

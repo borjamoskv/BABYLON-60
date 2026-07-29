@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as JSONRPC from '@chainlink/json-rpc-adapter'
 import type { ExecuteWithConfig } from '@chainlink/ea-bootstrap'
 import { Validator, Requester, AdapterDataProviderError, util } from '@chainlink/ea-bootstrap'

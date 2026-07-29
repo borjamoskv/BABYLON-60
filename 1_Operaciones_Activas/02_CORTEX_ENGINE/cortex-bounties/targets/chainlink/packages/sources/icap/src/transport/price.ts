@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import Decimal from 'decimal.js'
 import { WebSocketTransport } from '@chainlink/external-adapter-framework/transports/websocket'
 import { makeLogger, ProviderResult } from '@chainlink/external-adapter-framework/util'

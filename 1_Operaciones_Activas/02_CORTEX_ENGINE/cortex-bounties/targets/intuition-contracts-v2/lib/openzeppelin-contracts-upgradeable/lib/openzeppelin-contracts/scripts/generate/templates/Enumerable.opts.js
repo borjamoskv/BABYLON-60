@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { capitalize, mapValues } = require('../../helpers');
 
 const typeDescr = ({ type, size = 0, memory = false }) => {

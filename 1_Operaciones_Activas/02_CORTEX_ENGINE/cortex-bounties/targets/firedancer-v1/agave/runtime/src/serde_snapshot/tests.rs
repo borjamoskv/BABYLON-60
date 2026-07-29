@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #[cfg(test)]
 mod serde_snapshot_tests {
     use {

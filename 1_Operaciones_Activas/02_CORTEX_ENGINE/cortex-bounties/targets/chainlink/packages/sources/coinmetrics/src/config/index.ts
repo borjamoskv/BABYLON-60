@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // Quote values are used to find a dynamic property in the DP response, in the form of ReferenceRate{quote}
 
 import { AdapterConfig } from '@chainlink/external-adapter-framework/config'

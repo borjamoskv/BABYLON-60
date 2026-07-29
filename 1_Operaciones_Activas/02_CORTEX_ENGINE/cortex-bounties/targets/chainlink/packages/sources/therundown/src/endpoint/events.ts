@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterInputError, Requester, util, Validator } from '@chainlink/ea-bootstrap'
 import {
   AxiosRequestConfig,

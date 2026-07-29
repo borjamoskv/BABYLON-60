@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // This file contains helper methods that other EA can use directly to call this EA
 import { Requester } from '@chainlink/external-adapter-framework/util/requester'
 import { AdapterError } from '@chainlink/external-adapter-framework/validation/error'

@@ -1,6 +1,7 @@
+// C5-REAL EXERGY CERTIFIED
 /**
  * Helper functions for generating edge case values for testing
- * 
+ *
  * These functions generate values that are likely to trigger arithmetic
  * edge cases: overflow, underflow, division by zero, etc.
  */
@@ -104,7 +105,7 @@ export function generateBiasedRandomValue(
   bias: 'small' | 'large' | 'normal' | 'mixed' = 'mixed'
 ): bigint {
   const range = max - min;
-  
+
   if (bias === 'small') {
     // Bias toward small values (first 10% of range)
     const smallMax = min + range / 10n;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![allow(non_camel_case_types)]
 
 use rand::Rng;

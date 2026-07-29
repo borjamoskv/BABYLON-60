@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Config as DefaultConfig } from '@chainlink/ea-bootstrap'
 import { DexSubgraph } from '../types'
 import { uniswapSubgraph } from '../endpoint/prices/dex'

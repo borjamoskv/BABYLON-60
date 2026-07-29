@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crate::streamer::ChannelSend,
     crossbeam_channel::{Receiver, SendError, Sender, TryRecvError, TrySendError, bounded},

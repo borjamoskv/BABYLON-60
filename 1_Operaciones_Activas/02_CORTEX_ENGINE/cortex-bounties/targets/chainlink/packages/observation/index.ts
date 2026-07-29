@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import axios from 'axios'
 import fs from 'fs'
 import { config } from './config'

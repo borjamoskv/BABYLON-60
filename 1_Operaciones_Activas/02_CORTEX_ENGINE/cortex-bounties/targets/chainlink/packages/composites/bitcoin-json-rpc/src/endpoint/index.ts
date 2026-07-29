@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { TInputParameters as getblockchaininfoInputParameters } from './getblockchaininfo'
 import type { TInputParameters as scantxoutsetInputParameters } from './scantxoutset'
 

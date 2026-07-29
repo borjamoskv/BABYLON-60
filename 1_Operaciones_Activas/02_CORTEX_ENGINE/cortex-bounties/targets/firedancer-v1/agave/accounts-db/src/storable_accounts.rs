@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! trait for abstracting underlying storage of pubkey and account pairs to be written
 use {
     crate::{

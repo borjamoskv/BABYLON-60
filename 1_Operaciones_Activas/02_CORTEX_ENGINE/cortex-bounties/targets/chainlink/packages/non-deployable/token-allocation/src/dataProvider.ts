@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterConnectionError, Requester, Logger } from '@chainlink/ea-bootstrap'
 import type { AxiosRequestConfig } from '@chainlink/ea-bootstrap'
 import { ResponsePayload, GetPrices } from './types'

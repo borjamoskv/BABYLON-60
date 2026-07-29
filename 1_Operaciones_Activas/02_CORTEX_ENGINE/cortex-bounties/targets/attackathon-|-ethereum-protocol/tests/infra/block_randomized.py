@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Implementation of the randomized block test generator.
 

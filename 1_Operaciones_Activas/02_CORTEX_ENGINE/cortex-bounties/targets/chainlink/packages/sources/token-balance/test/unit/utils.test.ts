@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { deferredPromise } from '@chainlink/external-adapter-framework/util'
 import { ethers } from 'ethers'
 import EACAggregatorProxy from '../../src/config/EACAggregatorProxy.json'

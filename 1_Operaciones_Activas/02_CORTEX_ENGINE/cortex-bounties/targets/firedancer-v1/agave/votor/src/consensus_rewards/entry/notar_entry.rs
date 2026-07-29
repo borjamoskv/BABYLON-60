@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Module for [`NotarEntry`] which is used to track observed notar votes for building a [`NotarRewardCertificate`].
 //! The struct handles different validators voting for different block ids and ensures that a given validator does not vote for multiple block ids.
 

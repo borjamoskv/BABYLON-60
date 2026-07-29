@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { GroupRunner } from '@chainlink/external-adapter-framework/util/group-runner'
 import { ethers } from 'ethers'
 import { PoRAddress } from '@chainlink/external-adapter-framework/adapter/por'

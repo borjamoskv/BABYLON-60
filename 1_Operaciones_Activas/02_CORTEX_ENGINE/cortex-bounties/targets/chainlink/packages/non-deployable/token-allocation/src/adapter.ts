@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Builder } from '@chainlink/ea-bootstrap'
 import type { AdapterRequest, APIEndpoint, ConfigFactory } from '@chainlink/ea-bootstrap'
 import { adaptersV2, adaptersV3, makeConfig as makeUpstreamConfig } from './config'

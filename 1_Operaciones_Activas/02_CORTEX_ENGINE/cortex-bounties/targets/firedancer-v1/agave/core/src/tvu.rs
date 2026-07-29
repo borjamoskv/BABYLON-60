@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `tvu` module implements the Transaction Validation Unit, a multi-stage transaction
 //! validation pipeline in software.
 

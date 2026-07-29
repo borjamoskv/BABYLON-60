@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """Example: Cortex-Persist as auditable memory backend for a LangChain chain.
 
 import logging

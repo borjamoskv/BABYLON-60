@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import CryptoJS from 'crypto-js'
 import { getRequestHeaders } from '../../src/transport/authentication'
 

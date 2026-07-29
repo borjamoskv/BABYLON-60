@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 export const mockTokenAllocationResponse = {
   jobRunID: '1',
   providerStatusCode: 200,

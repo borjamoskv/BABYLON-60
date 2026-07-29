@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::events;
 use crate::storage;
 use crate::error::TreasuryError;
@@ -89,7 +90,7 @@ impl TreasuryContract {
         let required_balance = internal_balance
             .checked_add(amount)
             .ok_or(TreasuryError::InvalidAmount)?;
-        
+
         if actual_balance_u128 < required_balance {
             return Err(TreasuryError::TransferFailed);
         }
@@ -119,7 +120,7 @@ impl TreasuryContract {
         if !storage::is_initialized(&env) {
             return Err(TreasuryError::NotInitialized);
         }
-        
+
         // Require admin authorization to sync balance
         let admin = upgradeable::admin::get_admin(&env).map_err(|_| TreasuryError::NotInitialized)?;
         admin.require_auth();

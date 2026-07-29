@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { calculateDaSupply } from '../../src/lib/da-supply'
 import { Instrument } from '../../src/types'
 

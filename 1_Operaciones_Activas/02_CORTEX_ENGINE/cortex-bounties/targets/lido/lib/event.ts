@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { ContractTransactionReceipt, EventLog, Interface, Log, LogDescription } from "ethers";
 
 import { LogDescriptionExtended } from "lib/protocol/types";

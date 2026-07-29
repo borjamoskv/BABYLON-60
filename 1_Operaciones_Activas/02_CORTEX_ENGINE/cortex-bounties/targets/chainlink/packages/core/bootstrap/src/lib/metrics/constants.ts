@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 export enum HttpRequestType {
   CACHE_HIT = 'cacheHit',
   DATA_PROVIDER_HIT = 'dataProviderHit',

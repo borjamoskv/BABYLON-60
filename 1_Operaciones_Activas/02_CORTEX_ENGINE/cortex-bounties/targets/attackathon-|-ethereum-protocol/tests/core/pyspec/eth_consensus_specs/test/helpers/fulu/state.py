@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 def initialize_proposer_lookahead(spec, state):
     current_epoch = spec.get_current_epoch(state)
     lookahead = []

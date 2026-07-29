@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterResponse, Execute } from '../../src/types'
 import axios from 'axios'
 import { expose } from '../../src'

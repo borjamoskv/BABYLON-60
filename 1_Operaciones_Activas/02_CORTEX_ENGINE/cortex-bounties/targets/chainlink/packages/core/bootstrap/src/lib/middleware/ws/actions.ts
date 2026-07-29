@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { AdapterContext, AdapterRequest, WSHandler, UnknownWSMessage } from '../../../types'
 import { createAction } from '@reduxjs/toolkit'
 import type { WebSocketSubject } from 'rxjs/webSocket'

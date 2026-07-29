@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module contains [`TokenBucket`], which provides ability to limit
 //! rate of certain events, while allowing bursts through.
 //! [`KeyedRateLimiter`] allows to rate-limit multiple keyed items, such

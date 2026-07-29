@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { marketStatusEndpointInputParametersDefinition } from '@chainlink/external-adapter-framework/adapter'
 import { TypeFromDefinition } from '@chainlink/external-adapter-framework/validation/input-params'
 

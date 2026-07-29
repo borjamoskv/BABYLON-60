@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // === Python Runner — Pyodide lazy-loaded ===
 
 let pyodideInstance = null;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(feature = "spinner")]
 //! Spinner creator.
 //! This module is wrapped by the `spinner` feature, which is on by default.

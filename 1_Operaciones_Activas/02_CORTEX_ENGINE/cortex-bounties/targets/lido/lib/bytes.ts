@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { bigintToHex } from "bigint-conversion";
 import { BigNumberish, BytesLike } from "ethers";
 

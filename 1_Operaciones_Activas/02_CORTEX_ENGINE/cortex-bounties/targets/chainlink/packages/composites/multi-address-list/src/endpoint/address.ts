@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { walletParameters as anchorageParams } from '@chainlink/anchorage-adapter'
 import { walletParameters as bitGoParams } from '@chainlink/bitgo-adapter'
 import { walletParameters as coinbasePrimeParams } from '@chainlink/coinbase-prime-adapter'

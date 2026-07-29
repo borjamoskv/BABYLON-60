@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import pytest
 import ast
 from babylon60.guards.homoglyph import cassandra_validate_identifiers, SecurityViolation

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /// UNISWAP V4 HOOK COLLECTOR — BABYLON60
 /// Asimilado de Uniswap/v4-core | Ley Ω₄ (Soberanía Arquitectónica)
 /// Escucha eventos Initialize (nuevos pools) y Swap de PoolManager V4.

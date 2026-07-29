@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `rpc_service` module implements the Solana JSON RPC service.
 
 use {

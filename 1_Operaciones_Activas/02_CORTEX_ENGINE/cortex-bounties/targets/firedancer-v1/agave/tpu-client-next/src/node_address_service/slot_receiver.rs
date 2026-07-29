@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This module provides [`SlotReceiver`] structure.
 use {solana_clock::Slot, thiserror::Error, tokio::sync::watch};
 

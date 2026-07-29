@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::{
     cell::{Ref, RefMut},
     collections::BTreeSet,
@@ -68,7 +69,7 @@ impl<'info, T: ZeroCopy + Owner> FatAccountLoader<'info, T> {
         if data.len() < T::discriminator().len() {
             return Err(ErrorCode::AccountDiscriminatorNotFound.into());
         }
-       
+
         if data[0..8] != T::discriminator() {
             return Err(ErrorCode::AccountDiscriminatorMismatch.into());
         }
@@ -109,8 +110,8 @@ impl<'info, T: ZeroCopy + Owner> FatAccountLoader<'info, T> {
 
 
     pub fn load_mut(&self) -> Result<RefMut<T>> {
-       
-       
+
+
         if !self.acc_info.is_writable {
             return Err(ErrorCode::AccountNotMutable.into());
         }
@@ -132,15 +133,15 @@ impl<'info, T: ZeroCopy + Owner> FatAccountLoader<'info, T> {
 
 
     pub fn load_init(&self) -> Result<RefMut<T>> {
-       
-       
+
+
         if !self.acc_info.is_writable {
             return Err(ErrorCode::AccountNotMutable.into());
         }
 
         let data = self.acc_info.try_borrow_mut_data()?;
 
-       
+
         let mut disc_bytes = [0u8; 8];
         disc_bytes.copy_from_slice(&data[..8]);
         let discriminator = u64::from_le_bytes(disc_bytes);

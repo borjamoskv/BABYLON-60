@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { makeExecute, endpointSelector } from './adapter'
 import { expose } from '@chainlink/ea-bootstrap'
 import { NAME, makeConfig } from './config'

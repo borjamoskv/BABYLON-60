@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { BaseEndpointTypes, inputParameters } from './crypto'
 import { AdapterRequest } from '@chainlink/external-adapter-framework/util'
 import {

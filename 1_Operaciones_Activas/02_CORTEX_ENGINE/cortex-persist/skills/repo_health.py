@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 skills/repo_health.py - RepoHealth skill: Event V1 wrapper for repo_health_changed.py logic.
 
@@ -71,7 +72,7 @@ class RepoHealthSkill:
             files_arg = event.payload.get("files", [])
             all_arg = event.payload.get("all", False)
             include_untracked = event.payload.get("include_untracked", False)
-            
+
             try:
                 if files_arg:
                     files = [Path(item) for item in files_arg]
@@ -79,7 +80,7 @@ class RepoHealthSkill:
                     files = _rh_module._all_repo_files()
                 else:
                     files = _rh_module._changed_files_from_git(include_untracked=include_untracked)
-                    
+
                 targets = [path for path in files if path.exists() and path.is_file()]
             except Exception as exc:  # noqa: BLE001
                 return {
@@ -90,9 +91,9 @@ class RepoHealthSkill:
                     "detail": None,
                     "trace_id": trace_id,
                 }
-                
+
             issues = []
-            
+
             for path in targets:
                 try:
                     marker_lines = _rh_module._text_contains_conflict_markers(path)
@@ -120,7 +121,7 @@ class RepoHealthSkill:
                     })
 
             status = "ok" if not issues else "blocked"
-            
+
             return {
                 "command": command,
                 "status": status,

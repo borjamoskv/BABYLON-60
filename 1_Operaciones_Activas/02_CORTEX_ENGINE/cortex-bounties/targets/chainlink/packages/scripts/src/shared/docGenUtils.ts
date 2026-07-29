@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { cat, ShellString } from 'shelljs'
 import { FileData, JsonObject } from './docGenTypes'
 

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { EmptyObject } from 'redux'
 import { stub, SinonStub } from 'sinon'
 import { Heartbeats } from '../../../src/lib/middleware/rate-limit/reducer'

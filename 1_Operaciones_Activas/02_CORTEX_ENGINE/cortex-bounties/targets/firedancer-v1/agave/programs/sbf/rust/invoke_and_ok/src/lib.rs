@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Invokes an instruction and return ok no matter what, the instruction invoked
 //! uses the instruction data provided and all the accounts
 

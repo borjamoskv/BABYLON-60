@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const format = require('../format-lines');
 const { range } = require('../../helpers');
 
@@ -25,17 +26,17 @@ const errors = `\
    * @dev Value doesn't fit in an uint of \`bits\` size.
    */
   error SafeCastOverflowedUintDowncast(uint8 bits, uint256 value);
-  
+
   /**
    * @dev An int value doesn't fit in an uint of \`bits\` size.
    */
   error SafeCastOverflowedIntToUint(int256 value);
-  
+
   /**
    * @dev Value doesn't fit in an int of \`bits\` size.
    */
   error SafeCastOverflowedIntDowncast(uint8 bits, int256 value);
-  
+
   /**
    * @dev An uint value doesn't fit in an int of \`bits\` size.
    */

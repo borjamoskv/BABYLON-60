@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Example SBF program using Poseidon syscall
 
 use {

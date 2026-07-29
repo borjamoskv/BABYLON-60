@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! @brief Example Rust-based BPF program that exercises the sol_remaining_compute_units syscall
 
 use {

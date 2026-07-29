@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // FIREDANCER: Allow special_module_name linter here to prevent warnings
 // about the gross hack we did below, which minimizes merge conflicts.
 #![allow(special_module_name)]

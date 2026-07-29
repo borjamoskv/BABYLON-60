@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { clock } = require('../../helpers/time');
 
 function shouldBehaveLikeEIP6372(mode = 'blocknumber') {

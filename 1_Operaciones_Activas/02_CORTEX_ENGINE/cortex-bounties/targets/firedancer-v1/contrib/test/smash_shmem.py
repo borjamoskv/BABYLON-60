@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """Overwrite every file under a shared-memory directory with random or zero bytes."""
 

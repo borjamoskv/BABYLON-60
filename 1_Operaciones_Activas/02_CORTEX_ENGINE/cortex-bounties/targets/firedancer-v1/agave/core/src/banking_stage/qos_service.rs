@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Quality of service for block producer.
 //! Provides logic and functions to allow a Leader to prioritize
 //! how transactions are included in blocks, and optimize those blocks.

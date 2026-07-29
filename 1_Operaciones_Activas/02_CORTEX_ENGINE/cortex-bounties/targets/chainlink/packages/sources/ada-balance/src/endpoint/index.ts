@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { TInputParameters as BalanceInputParameters } from './balance'
 
 export type TInputParameters = BalanceInputParameters

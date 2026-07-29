@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 use crate::a_token;
@@ -171,7 +172,7 @@ fn initialize_contract(env: &Env, admin: &Address) -> (Address, Address) {
 
     // Create a mock pool contract that implements is_whitelisted_for_reserve
     let mock_pool = env.register(MockPool, ());
-    
+
     let underlying_asset = Address::generate(env);
     let name = String::from_str(env, "Test aToken");
     let symbol = String::from_str(env, "aTEST");
@@ -188,7 +189,7 @@ fn initialize_contract_with_mock_token(env: &Env, admin: &Address) -> (Address, 
 
     // Create a mock pool contract that implements is_whitelisted_for_reserve
     let mock_pool = env.register(MockPool, ());
-    
+
     let underlying_asset = env.register(MockUnderlyingToken, ());
     let name = String::from_str(env, "Test aToken");
     let symbol = String::from_str(env, "aTEST");
@@ -375,7 +376,7 @@ fn test_transfer_whitelist_enforcement() {
     // Transfer to non-whitelisted user3 should fail
     let result = client.try_transfer(&user1, &user3, &200i128);
     assert!(result.is_err(), "Transfer to non-whitelisted address should fail");
-    
+
     // Balance should be unchanged
     assert_eq!(client.balance_of(&user3), 0);
     assert_eq!(client.balance_of(&user1), 700); // Still has 700 after first transfer
@@ -983,9 +984,9 @@ fn test_transfer_from_requires_holder_auth_poc() {
     // This should succeed after the fix - spender auth + allowance is sufficient
     // Before the fix, this would fail because transfer() requires from.require_auth()
     let result = client.try_transfer_from(&spender, &holder, &recipient, &transfer_amount);
-    
+
     assert!(result.is_ok(), "transfer_from should succeed with only spender auth when allowance is set");
-    
+
     // Verify transfer succeeded
     assert_eq!(client.allowance(&holder, &spender), approve_amount - transfer_amount);
     assert_eq!(client.balance_of(&holder), mint_amount as i128 - transfer_amount);

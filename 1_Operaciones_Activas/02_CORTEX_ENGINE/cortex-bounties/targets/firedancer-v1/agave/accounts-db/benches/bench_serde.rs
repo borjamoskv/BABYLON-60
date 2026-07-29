@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     criterion::{BatchSize, BenchmarkId, Criterion, Throughput, criterion_group, criterion_main},
     serde::{Deserialize, Serialize},

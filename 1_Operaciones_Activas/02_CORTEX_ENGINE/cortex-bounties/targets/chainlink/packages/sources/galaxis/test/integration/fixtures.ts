@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import nock from 'nock'
 
 export const MOCK_BOOLEAN_ONLY_GALAXIS_API_RESP = {

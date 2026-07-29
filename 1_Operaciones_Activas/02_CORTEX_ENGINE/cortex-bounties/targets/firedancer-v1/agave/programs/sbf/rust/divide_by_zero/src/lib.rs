@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Example/test program to trigger vm error by dividing by zero
 
 #![feature(asm_experimental_arch)]

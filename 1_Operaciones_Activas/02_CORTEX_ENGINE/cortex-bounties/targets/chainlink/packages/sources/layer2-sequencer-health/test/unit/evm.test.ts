@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AxiosResponse, Requester } from '@chainlink/ea-bootstrap'
 import { useFakeTimers } from 'sinon'
 import { ExtendedConfig, makeConfig, Networks } from '../../src/config'

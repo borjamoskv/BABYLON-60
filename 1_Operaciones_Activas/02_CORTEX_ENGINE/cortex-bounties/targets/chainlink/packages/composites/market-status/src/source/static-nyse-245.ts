@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { TwentyfourFiveMarketStatus } from '@chainlink/external-adapter-framework/adapter'
 import { isWeekendNow } from '@chainlink/external-adapter-framework/validation/market-status'
 import { TZDate } from '@date-fns/tz'

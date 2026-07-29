@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from random import Random
 
 from eth_consensus_specs.debug.random_value import get_random_ssz_object, RandomizationMode

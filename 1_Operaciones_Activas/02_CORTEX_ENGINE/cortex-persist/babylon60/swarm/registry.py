@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 cortex/swarm/registry.py - AgentRegistry for Swarm V2.
 

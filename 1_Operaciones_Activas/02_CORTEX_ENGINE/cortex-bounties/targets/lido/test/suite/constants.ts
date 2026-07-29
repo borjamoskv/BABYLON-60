@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 export const ONE_HOUR = 60n * 60n;
 export const ONE_DAY = 24n * 60n * 60n;
 export const MAX_BASIS_POINTS = 100_00n;

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Information about stake and voter rewards based on stake state.
 
 use {

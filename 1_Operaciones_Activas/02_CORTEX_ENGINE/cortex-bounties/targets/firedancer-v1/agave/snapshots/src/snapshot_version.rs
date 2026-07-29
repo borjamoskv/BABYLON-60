@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::{fmt, str::FromStr};
 
 const VERSION_STRING_V1_2_0: &str = "1.2.0";

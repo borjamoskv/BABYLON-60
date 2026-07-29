@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { TransportRoutes } from '@chainlink/external-adapter-framework/transports'
 import { StockEndpoint } from '@chainlink/external-adapter-framework/adapter/stock'
 import overrides from '../config/overrides.json'

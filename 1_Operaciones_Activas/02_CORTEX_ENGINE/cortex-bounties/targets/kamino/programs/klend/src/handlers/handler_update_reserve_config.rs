@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::ops::Deref;
 
 use anchor_lang::{prelude::*, Accounts};
@@ -57,7 +58,7 @@ pub fn process(
         );
         msg!("WARNING! Skipping validation of the config");
     } else {
-       
+
         lending_operations::utils::validate_reserve_config_integrity(
             &reserve.config,
             &market,
@@ -65,7 +66,7 @@ pub fn process(
         )?;
     }
 
-   
+
     if reserve_usage_was_blocked && !reserve.is_usage_blocked() {
         require_keys_eq!(
             market.lending_market_owner,

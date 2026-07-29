@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #[cfg(test)]
 mod test_msg_codec {
     use anchor_lang::prelude::Pubkey;

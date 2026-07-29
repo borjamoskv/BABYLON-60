@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use alloy::primitives::{Address, Bytes};
 use alloy::sol;
 
@@ -7,7 +8,7 @@ sol! {
     /// Equivalente al `function strike(address, bytes) payable` en Huff.
     #[derive(Debug)]
     function strike(address target_dex, bytes calldata payload);
-    
+
     /// Estructura modelo para el swap_data de Aerodrome (v3)
     #[derive(Debug)]
     struct AerodromeExactInputParams {

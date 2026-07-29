@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # CORTEX ENGINE FACADE
 # Auto-generated to maintain compatibility after structural mitosis.
 from typing import TYPE_CHECKING

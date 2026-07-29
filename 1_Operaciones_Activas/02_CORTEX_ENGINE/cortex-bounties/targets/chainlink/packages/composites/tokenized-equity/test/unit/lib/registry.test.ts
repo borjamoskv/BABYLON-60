@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { JsonRpcProvider } from 'ethers'
 import { getRegistryData } from '../../../src/lib/registry'
 

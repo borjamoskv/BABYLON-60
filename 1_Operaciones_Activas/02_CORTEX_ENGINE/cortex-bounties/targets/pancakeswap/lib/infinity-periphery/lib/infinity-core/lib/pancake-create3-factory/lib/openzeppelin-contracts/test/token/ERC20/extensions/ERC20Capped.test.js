@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { ether } = require('@openzeppelin/test-helpers');
 const { shouldBehaveLikeERC20Capped } = require('./ERC20Capped.behavior');
 const { expectRevertCustomError } = require('../../../helpers/customError');

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     bincode::{deserialize, serialize},
     crossbeam_channel::{Receiver, Sender, unbounded},

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { BaseEndpointTypes } from '../endpoint/crypto'
 import { WebSocketTransport } from '@chainlink/external-adapter-framework/transports'
 import { makeLogger, sleep } from '@chainlink/external-adapter-framework/util'

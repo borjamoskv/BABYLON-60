@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {super::*, solana_pubkey::Pubkey};
 
 pub(in crate::parse_token) fn parse_initialize_permanent_delegate_instruction(

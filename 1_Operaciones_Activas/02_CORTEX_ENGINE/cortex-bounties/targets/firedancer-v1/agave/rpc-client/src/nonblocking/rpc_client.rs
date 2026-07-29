@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Communication with a Solana node over RPC asynchronously .
 //!
 //! Software that interacts with the Solana blockchain, whether querying its

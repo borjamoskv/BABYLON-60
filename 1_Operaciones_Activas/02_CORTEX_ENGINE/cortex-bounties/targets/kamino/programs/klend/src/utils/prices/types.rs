@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::prelude::*;
 
 use crate::utils::{prices::utils::ten_pow, Fraction, U256};
@@ -16,7 +17,7 @@ where
 
     pub value: T,
 
-   
+
     pub exp: u32,
 }
 
@@ -37,12 +38,12 @@ where
         let exp = self.exp;
 
         let value_256 = if exp > target_exp {
-           
+
             let diff = exp - target_exp;
             let factor = ten_pow(diff).into();
             value.checked_div(factor)
         } else {
-           
+
             let diff = target_exp - exp;
             let factor = ten_pow(diff).into();
             value.checked_mul(factor)

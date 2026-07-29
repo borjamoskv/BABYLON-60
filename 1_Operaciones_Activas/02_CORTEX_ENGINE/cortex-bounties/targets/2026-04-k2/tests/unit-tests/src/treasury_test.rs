@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 use crate::treasury;
@@ -98,7 +99,7 @@ fn test_initialize() {
     let different_admin = Address::generate(&env);
 
     client.initialize(&admin);
-    
+
     // Verify admin persists across calls
     assert_eq!(client.get_admin(), admin);
 }
@@ -249,10 +250,10 @@ fn test_withdraw() {
 
     // Withdraw should succeed and decrease balance
     client.withdraw(&admin, &token, &500u128, &recipient);
-    
+
     // Verify balance decreased correctly
     assert_eq!(client.get_balance(&token), 500u128);
-    
+
     // Verify recipient received tokens
     let token_client = token::Client::new(&env, &token);
     assert_eq!(token_client.balance(&recipient), 500);
@@ -280,7 +281,7 @@ fn test_withdraw_insufficient_balance() {
     // Try to withdraw more than available
     let result = client.try_withdraw(&admin, &token, &200u128, &recipient);
     assert_eq!(result, Err(Ok(treasury::TreasuryError::InsufficientBalance)));
-    
+
     // Verify balance unchanged after failed withdrawal
     assert_eq!(client.get_balance(&token), 100u128);
 }
@@ -307,10 +308,10 @@ fn test_withdraw_unauthorized() {
     // Verify unauthorized address cannot withdraw
     let result = client.try_withdraw(&unauthorized, &token, &500u128, &recipient);
     assert_eq!(result, Err(Ok(treasury::TreasuryError::Unauthorized)));
-    
+
     // Verify balance unchanged after unauthorized attempt
     assert_eq!(client.get_balance(&token), 1000u128);
-    
+
     // Verify admin can still withdraw
     client.withdraw(&admin, &token, &500u128, &recipient);
     assert_eq!(client.get_balance(&token), 500u128);
@@ -359,14 +360,14 @@ fn test_get_all_balances() {
     client.deposit(&admin, &token2, &2000u128, &admin);
 
     let balances = client.get_all_balances();
-    
+
     // Verify correct balances
     assert_eq!(balances.get(token1.clone()).unwrap(), 1000u128);
     assert_eq!(balances.get(token2.clone()).unwrap(), 2000u128);
-    
+
     // Verify token3 is not in the map (or has zero balance)
     assert_eq!(balances.get(token3.clone()).unwrap_or(0), 0u128);
-    
+
     // Verify map size
     assert_eq!(balances.len(), 2);
 }

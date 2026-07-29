@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `gossip_service` module implements the network control plane.
 
 use {

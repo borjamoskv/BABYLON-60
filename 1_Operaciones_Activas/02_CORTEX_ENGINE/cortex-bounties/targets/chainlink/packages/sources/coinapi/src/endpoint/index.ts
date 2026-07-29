@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { TInputParameters as CryptoInputParameters } from './crypto'
 import type { TInputParameters as AssetsInputParameters } from './assets'
 

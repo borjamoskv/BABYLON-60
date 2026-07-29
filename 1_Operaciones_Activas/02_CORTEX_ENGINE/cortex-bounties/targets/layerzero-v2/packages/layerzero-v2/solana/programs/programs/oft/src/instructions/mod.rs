@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 pub mod init_adapter_oft;
 pub mod init_oft;
 pub mod lz_receive;

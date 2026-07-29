@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Repay borrowed liquidity on an obligation.
 //!
 //! Pass [`klend_interface::MAX_AMOUNT`] as the amount to repay the full debt.

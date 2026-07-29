@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { calculateAttesterSupply } from '../../src/lib/attester-supply'
 import { AttesterResponse } from '../../src/types'
 

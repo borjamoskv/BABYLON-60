@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 //! Integration tests for 2-step flash liquidation (prepare + execute)
@@ -81,7 +82,7 @@ fn test_prepare_execute_liquidation_basic() {
 
     // TX1: Prepare liquidation
     println!("\n=== Testing prepare_liquidation ===");
-    
+
     let auth = protocol.kinetic_router.prepare_liquidation(
         &protocol.liquidator,
         &protocol.user,
@@ -105,7 +106,7 @@ fn test_prepare_execute_liquidation_basic() {
 
     // TX2: Execute liquidation
     println!("\n=== Testing execute_liquidation ===");
-    
+
     let deadline = env.ledger().timestamp() + 300;
     protocol.kinetic_router.execute_liquidation(
         &protocol.liquidator,
@@ -233,7 +234,7 @@ fn test_prepare_liquidation_expiry() {
     // Testing time-based expiry requires advancing ledger timestamp which
     // is not straightforward in soroban-sdk tests. The expiry logic is
     // validated in the contract code itself.
-    
+
     println!("✅ Prepare liquidation authorization stored successfully");
     println!("   (Expiry enforcement tested via contract logic)");
 }

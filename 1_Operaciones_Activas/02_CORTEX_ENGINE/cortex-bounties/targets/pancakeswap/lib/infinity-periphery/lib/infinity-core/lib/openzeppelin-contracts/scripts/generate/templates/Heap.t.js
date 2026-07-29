@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const format = require('../format-lines');
 const { TYPES } = require('./Heap.opts');
 

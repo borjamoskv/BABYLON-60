@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { WebsocketTransportGenerics } from '@chainlink/external-adapter-framework/transports'
 import { WebSocketTransport } from '@chainlink/external-adapter-framework/transports'
 import { LoggerFactoryProvider } from '@chainlink/external-adapter-framework/util'

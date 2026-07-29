@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { randomBytes } from "ethers";
 
 import { IStakingModule } from "typechain-types";

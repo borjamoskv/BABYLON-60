@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { AdapterData, AdapterRequest, BigNumberish } from '../../../types'
 import { omit } from 'lodash'
 import { AnyAction } from 'redux'

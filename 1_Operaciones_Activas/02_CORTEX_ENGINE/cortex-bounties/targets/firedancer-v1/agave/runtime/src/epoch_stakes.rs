@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use {
     crate::stakes::{DeserializableStakes, SerdeStakesToStakeFormat, Stakes},
     serde::{Deserialize, Serialize},

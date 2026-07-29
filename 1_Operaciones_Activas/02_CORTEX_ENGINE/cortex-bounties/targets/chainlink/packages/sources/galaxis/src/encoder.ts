@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Logger } from '@chainlink/ea-bootstrap'
 import { ByteArray } from '@ethercards/ec-util'
 import { ethers } from 'ethers'

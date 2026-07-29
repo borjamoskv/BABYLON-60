@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const format = require('../format-lines');
 const { OPTS } = require('./Checkpoints.opts.js');
 
@@ -37,7 +38,7 @@ struct ${opts.checkpointTypeName} {
  * @dev Pushes a (\`key\`, \`value\`) pair into a ${opts.historyTypeName} so that it is stored as the checkpoint.
  *
  * Returns previous value and new value.
- * 
+ *
  * IMPORTANT: Never accept \`key\` as a user input, since an arbitrary \`type(${opts.keyTypeName}).max\` key set will disable the
  * library.
  */

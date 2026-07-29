@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::{calculation, storage, validation};
 use k2_shared::*;
 use soroban_sdk::{panic_with_error, symbol_short, Address, Env, IntoVal, Symbol, Vec};
@@ -40,7 +41,7 @@ pub fn supply(
     if on_behalf_of == updated_reserve_data.a_token_address {
         panic_with_error!(&env, OperationError::RecipientIsAToken);
     }
-    
+
     // Prevent supply to debt token contract
     if on_behalf_of == updated_reserve_data.debt_token_address {
         panic_with_error!(&env, OperationError::RecipientIsDebtToken);
@@ -96,7 +97,7 @@ pub fn supply(
     if is_first_supply {
         let mut user_config = storage::get_user_configuration(&env, &on_behalf_of);
         let reserve_id = k2_shared::safe_reserve_id(&env, updated_reserve_data.id);
-        
+
         // Check if this is a new reserve position (not already using as collateral)
         if !user_config.is_using_as_collateral(reserve_id) {
             let active_count = user_config.count_active_reserves();
@@ -104,7 +105,7 @@ pub fn supply(
                 panic_with_error!(&env, UserReserveError::MaxUserReservesExceeded);
             }
         }
-        
+
         crate::price::verify_oracle_price_exists_and_nonzero(&env, &asset)?;
         user_config.set_using_as_collateral(reserve_id, true);
         storage::set_user_configuration(&env, &on_behalf_of, &user_config);
@@ -158,7 +159,7 @@ pub fn withdraw(
     if to == updated_reserve_data.a_token_address {
         panic_with_error!(&env, OperationError::RecipientIsAToken);
     }
-    
+
     // Prevent withdrawals to debt token contract
     if to == updated_reserve_data.debt_token_address {
         panic_with_error!(&env, OperationError::RecipientIsDebtToken);
@@ -317,7 +318,7 @@ pub fn borrow(
     if on_behalf_of == updated_reserve_data.a_token_address {
         panic_with_error!(&env, OperationError::RecipientIsAToken);
     }
-    
+
     // Prevent borrowing to debt token contract
     if on_behalf_of == updated_reserve_data.debt_token_address {
         panic_with_error!(&env, OperationError::RecipientIsDebtToken);
@@ -415,7 +416,7 @@ pub fn borrow(
 
     let mut user_config = storage::get_user_configuration(&env, &on_behalf_of);
     let reserve_id = k2_shared::safe_reserve_id(&env, updated_reserve_data.id);
-    
+
     // Check if this is a new reserve position (not already borrowing from this reserve)
     if !user_config.is_borrowing(reserve_id) {
         // Enforce MAX_USER_RESERVES limit to prevent reserve fragmentation attacks
@@ -424,7 +425,7 @@ pub fn borrow(
             panic_with_error!(&env, UserReserveError::MaxUserReservesExceeded);
         }
     }
-    
+
     user_config.set_borrowing(reserve_id, true);
     storage::set_user_configuration(&env, &on_behalf_of, &user_config);
 

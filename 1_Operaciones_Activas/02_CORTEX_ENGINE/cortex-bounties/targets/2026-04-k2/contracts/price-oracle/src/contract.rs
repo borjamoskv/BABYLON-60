@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use crate::oracle;
 use crate::storage;
 use k2_shared::{upgradeable::admin, *};
@@ -107,7 +108,7 @@ impl PriceOracleContract {
 
     /// Sets a manual price override for emergency situations.
     /// Requires an expiry timestamp to prevent permanent mispricing.
-    /// 
+    ///
     /// # Arguments
     /// * `caller` - Admin address (must be authorized)
     /// * `asset` - Asset to override price for
@@ -125,12 +126,12 @@ impl PriceOracleContract {
 
         let mut config = storage::get_asset_config(&env, &asset)
             .ok_or(OracleError::AssetNotWhitelisted)?;
-        
+
         // If setting a price, expiry timestamp is required
         if let Some(new_price) = price {
             let expiry = expiry_timestamp.ok_or(OracleError::InvalidCalculation)?;
             let current_time = env.ledger().timestamp();
-            
+
             // Validate expiry is in the future
             if expiry <= current_time {
                 return Err(OracleError::InvalidCalculation);
@@ -141,11 +142,11 @@ impl PriceOracleContract {
             if (expiry - current_time) > MAX_MANUAL_OVERRIDE_DURATION {
                 return Err(OracleError::OverrideDurationTooLong);
             }
-            
+
             // Validate price change against circuit breaker before setting override
             let oracle_config = storage::get_oracle_config(&env)?;
             Self::validate_price_change(&env, &asset, &new_price, &oracle_config)?;
-            
+
             config.manual_override_price = Some(new_price);
             config.override_expiry_timestamp = Some(expiry);
             // H-01: Store the observation timestamp so downstream staleness checks work
@@ -160,7 +161,7 @@ impl PriceOracleContract {
             // M-07
             storage::clear_last_price(&env, &asset);
         }
-        
+
         storage::set_asset_config(&env, &asset, &config);
 
         env.events().publish(
@@ -198,15 +199,15 @@ impl PriceOracleContract {
         admin::require_admin(&env, &caller).map_err(|_| OracleError::Unauthorized)?;
         caller.require_auth();
         storage::set_reflector_contract(&env, &new_contract);
-        
+
         let reflector_precision = oracle::query_reflector_decimals(&env, &new_contract)?;
         storage::set_reflector_precision(&env, reflector_precision);
-        
+
         env.events().publish(
             (symbol_short!("oracle"), symbol_short!("address"), symbol_short!("set")),
             new_contract,
         );
-        
+
         Ok(())
     }
 
@@ -259,10 +260,10 @@ impl PriceOracleContract {
     ) -> Result<(), OracleError> {
         admin::require_admin(&env, &caller).map_err(|_| OracleError::Unauthorized)?;
         caller.require_auth();
-        
+
         // Clone for event emission
         let fallback_contract_clone = fallback_contract.clone();
-        
+
         if let Some(fallback) = fallback_contract {
             storage::set_fallback_oracle(&env, &fallback);
         } else {
@@ -272,12 +273,12 @@ impl PriceOracleContract {
                 .set(&storage::InstanceKey::FallbackOracle, &Option::<Address>::None);
             env.storage().instance().extend_ttl(storage::TTL_THRESHOLD, storage::TTL_EXTENSION);
         }
-        
+
         env.events().publish(
             (symbol_short!("fallback"), symbol_short!("oracle"), symbol_short!("set")),
             fallback_contract_clone,
         );
-        
+
         Ok(())
     }
 
@@ -610,7 +611,7 @@ impl PriceOracleContract {
     }
 
     /// Reset circuit breaker for a specific asset (admin only).
-    /// 
+    ///
     /// Clears the stored last known price, allowing the next price query to bypass
     /// the circuit breaker check. Use this when legitimate large price movements
     /// occur (e.g., major market events, token migrations, or oracle upgrades).
@@ -622,7 +623,7 @@ impl PriceOracleContract {
     }
 
     /// Reset circuit breaker for all assets (admin only).
-    /// 
+    ///
     /// Emergency function to clear all stored last known prices. Use sparingly
     /// and only when necessary, as it temporarily disables circuit breaker protection
     /// for all assets until new prices are queried.
@@ -638,7 +639,7 @@ impl PriceOracleContract {
     }
 
     /// Get last known price for an asset (for debugging and monitoring).
-    /// 
+    ///
     /// Returns the stored price used for circuit breaker validation, or None
     /// if no price has been recorded yet for this asset.
     pub fn get_last_price(env: Env, asset: Asset) -> Option<u128> {
@@ -803,7 +804,7 @@ impl PriceOracleContract {
     }
 
     /// Validates that price data is recent enough to be trustworthy.
-    /// 
+    ///
     /// Rejects prices older than `price_staleness_threshold` to ensure calculations
     /// use current market data. Also rejects future timestamps as a defensive check
     /// against corrupted oracle data.
@@ -813,32 +814,32 @@ impl PriceOracleContract {
         oracle_config: &k2_shared::OracleConfig,
     ) -> Result<(), OracleError> {
         let current_timestamp = env.ledger().timestamp();
-        
+
         // Defensive check: future timestamps indicate corrupted oracle data
         if price_data.timestamp > current_timestamp {
             return Err(OracleError::PriceTooOld);
         }
-        
+
         // Stale prices can cause incorrect calculations, so reject if too old
         let age = current_timestamp - price_data.timestamp;
         if age > oracle_config.price_staleness_threshold {
             return Err(OracleError::PriceTooOld);
         }
-        
+
         Ok(())
     }
 
     /// Circuit breaker: validates price changes are within acceptable bounds.
-    /// 
+    ///
     /// Rejects prices that deviate more than `max_price_change_bps` from the last known
     /// price to protect against:
     /// - Oracle failures causing extreme price spikes/drops
     /// - Flash crashes triggering incorrect liquidations
     /// - Price manipulation attacks
-    /// 
+    ///
     /// Returns `PriceChangeTooLarge` if threshold exceeded. Admin can reset via
     /// `reset_circuit_breaker()` for legitimate large movements (market events, migrations).
-    /// 
+    ///
     /// Edge cases handled:
     /// - First query (no last price): always allowed
     /// - Zero last price: treated as uninitialized, allowed
@@ -872,7 +873,7 @@ impl PriceOracleContract {
             }
         }
         // First query: no baseline exists yet, so any price is acceptable
-        
+
         Ok(())
     }
 }

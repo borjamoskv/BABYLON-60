@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """Helper functions for builder registry management in tests."""
 
 

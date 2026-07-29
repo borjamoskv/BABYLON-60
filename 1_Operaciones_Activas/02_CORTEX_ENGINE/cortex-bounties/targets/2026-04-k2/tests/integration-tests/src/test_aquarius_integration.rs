@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 
 //! Integration tests for aquarius-swap-adapter using REAL Aquarius AMM contracts
@@ -381,7 +382,7 @@ fn test_real_aquarius_slippage_protection() {
 
 // ============================================================================
 // Adapter Integration with Real Aquarius
-// 
+//
 // NOTE ON TEST DESIGN:
 // These adapter tests are ignored because of a fundamental Soroban test limitation:
 // - Aquarius pool calls `user.require_auth()` on the swap user
@@ -635,11 +636,11 @@ fn test_adapter_transfers_output_to_recipient() {
 
     // Verify adapter consumed input tokens
     assert_eq!(token0_client.balance(&adapter_id), 0);
-    
+
     // CRITICAL: Verify K2 router received output tokens (not adapter)
     assert_eq!(token1_client.balance(&k2_router), amount_out as i128);
     assert_eq!(token1_client.balance(&adapter_id), 0); // Adapter should be empty
-    
+
     // Verify reasonable output amount (0.3% fee)
     assert!(amount_out >= 9_800_0000000);
 }
@@ -694,7 +695,7 @@ fn test_adapter_with_bidirectional_swaps_to_recipient() {
         &9_000_0000000,
         &k2_router,
     );
-    
+
     assert_eq!(token1_client.balance(&k2_router), amount_out_1 as i128);
     assert_eq!(token1_client.balance(&adapter_id), 0);
 
@@ -707,10 +708,10 @@ fn test_adapter_with_bidirectional_swaps_to_recipient() {
         &4_000_0000000,
         &k2_router,
     );
-    
+
     assert_eq!(token0_client.balance(&k2_router), amount_out_2 as i128);
     assert_eq!(token0_client.balance(&adapter_id), 0);
-    
+
     // Verify both swaps succeeded with reasonable amounts
     assert!(amount_out_1 >= 9_800_0000000);
     assert!(amount_out_2 >= 4_900_0000000);

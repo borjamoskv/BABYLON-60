@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { ethers } from "hardhat";
 import { writeFile } from "fs/promises";
 import type { RewardsController } from "../types";

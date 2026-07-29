@@ -1,6 +1,7 @@
+// C5-REAL EXERGY CERTIFIED
 /**
  * Concrete example tests to verify calculations match expected results
- * 
+ *
  * These tests use concrete, realistic values to verify the calculations
  * produce the expected results.
  */
@@ -20,7 +21,7 @@ describe('Concrete Example Tests', () => {
       // - Price: 50,000 USDC per BTC
       // - User wants to swap 0.1 BTC for USDC
       // - Fees: 0.3% (30 BPS)
-      
+
       const binData: BinData = {
         reserve_x: 1000000000n, // 10 BTC (8 decimals)
         reserve_y: 50000000000000n, // 500,000 USDC (8 decimals)
@@ -116,17 +117,17 @@ describe('Concrete Example Tests', () => {
       };
       const binPrice = 5000000000n;
       const inputAmount = 100000000n;
-      
+
       // Test various fee rates
       const feeRates = [0n, 10n, 30n, 100n, 1000n, 3000n]; // 0%, 0.1%, 0.3%, 1%, 10%, 30%
 
       for (const feeRateBPS of feeRates) {
         const result = calculateBinSwap(binData, binPrice, inputAmount, feeRateBPS, true);
-        
+
         // Fees should increase with fee rate
         expect(result.fee_amount).toBeGreaterThanOrEqual(0n);
         expect(result.fee_amount).toBeLessThanOrEqual(inputAmount);
-        
+
         // Output should decrease as fees increase
         if (feeRateBPS > 0n) {
           const resultNoFees = calculateBinSwap(binData, binPrice, inputAmount, 0n, true);
@@ -211,12 +212,12 @@ describe('Concrete Example Tests', () => {
       // Integer math uses ceiling rounding, float math doesn't
       // So float result might be slightly different
       const floatFloored = BigInt(Math.floor(floatResult.out_this));
-      
+
       // Results should be close but may differ slightly due to ceiling rounding in integer math
       const diff = intResult.out_this > floatFloored
         ? intResult.out_this - floatFloored
         : floatFloored - intResult.out_this;
-      
+
       expect(Number(diff)).toBeLessThan(10); // Small difference allowed
     });
   });

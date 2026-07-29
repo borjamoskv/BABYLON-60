@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{prelude::*, Accounts};
 use anchor_spl::token_interface::{Mint, TokenAccount};
 use solana_program::sysvar::{instructions::Instructions as SysInstructions, SysvarId};
@@ -19,12 +20,12 @@ pub fn process(
     let obligation = &mut ctx.accounts.obligation.load_mut()?;
     let clock = Clock::get()?;
 
-   
-   
-   
-   
-   
-   
+
+
+
+
+
+
 
     require_gte!(
         obligation.borrow_order.remaining_debt_amount,
@@ -64,12 +65,12 @@ pub struct SetBorrowOrder<'info> {
 
 
 
-   
-   
-   
-   
-   
-   
+
+
+
+
+
+
     #[account(
         token::mint = debt_liquidity_mint,
         token::authority = owner,
@@ -80,7 +81,7 @@ pub struct SetBorrowOrder<'info> {
 
 
 
-   
+
     #[account(
         address = reserve.load()?.liquidity.mint_pubkey,
         mint::token_program = reserve.load()?.liquidity.token_program,
@@ -106,7 +107,7 @@ impl BorrowOrderConfigArgs {
 
     pub fn with_accounts(self, accounts: &SetBorrowOrder) -> Option<BorrowOrderConfig> {
         if self == Default::default() {
-           
+
             return None;
         }
         let Self {

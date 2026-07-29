@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 type MaxColChars = number[]
 export type TableText = string[][]
 export type TextRow = string[]

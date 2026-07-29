@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from .dispatcher import ApexDispatcher, apex_dispatcher
 from .registry import ApexPrimitive, OuroborosInvariant, apex_registry
 

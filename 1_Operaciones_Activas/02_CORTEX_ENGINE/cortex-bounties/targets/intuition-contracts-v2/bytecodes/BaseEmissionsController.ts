@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { Hex } from 'viem'
 
 export const BaseEmissionsControllerBytecode: Hex =

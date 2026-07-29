@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { makeStub } from '@chainlink/external-adapter-framework/util/testing-utils'
 import { ethers } from 'ethers'
 import EACAggregatorProxy from '../../src//config/EACAggregatorProxy.json'

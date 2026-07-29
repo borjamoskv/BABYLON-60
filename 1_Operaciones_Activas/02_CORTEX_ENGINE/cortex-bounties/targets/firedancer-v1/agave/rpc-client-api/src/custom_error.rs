@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Implementation defined RPC server errors
 use {
     crate::response::RpcSimulateTransactionResult,

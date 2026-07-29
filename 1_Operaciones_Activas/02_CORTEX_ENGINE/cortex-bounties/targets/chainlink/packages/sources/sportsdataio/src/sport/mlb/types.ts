@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // This is just a subset of what is returned
 export interface GameResponse {
   GameID: number

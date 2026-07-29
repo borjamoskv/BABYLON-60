@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Address, Cell, Contract, ContractProvider, SendMode, Sender, beginCell, contractAddress } from '@ton/core'
 
 export interface UnitTestConfig {}

@@ -1,20 +1,21 @@
+// C5-REAL EXERGY CERTIFIED
 /**
  * Accompanying JavaScript library for Solady.
  *
  * To install:
- * 
+ *
  * ```
  * npm install solady
  * ```
  *
  * Module exports:
- * 
+ *
  * - `LibZip`
  *   - `flzCompress(data)`: Compresses hex encoded data with FastLZ.
  *   - `flzDecompress(data)`: Decompresses hex encoded data with FastLZ.
  *   - `cdCompress(data)`: Compresses hex encoded calldata.
  *   - `cdDecompress(data)`: Decompresses hex encoded calldata.
- *   
+ *
  * - `ERC1967Factory`
  *   - `address`: Canonical address of Solady's ERC1967Factory.
  *   - `abi`: ABI of Solady's ERC1967Factory.

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Decimal } from 'decimal.js'
 import moment from 'moment'
 import { CurrencyDerivativesData, OptionData } from '../../src/utils/derivativesDataProvider'

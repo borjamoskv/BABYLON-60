@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { ProviderResult } from '@chainlink/external-adapter-framework/util'
 import { BaseEndpointTypes } from '../endpoint/stock'
 

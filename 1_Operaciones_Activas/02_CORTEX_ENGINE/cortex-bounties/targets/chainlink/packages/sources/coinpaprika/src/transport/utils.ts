@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { BaseEndpointTypes, cryptoInputParameters } from '../endpoint/utils'
 import {
   HttpTransport,

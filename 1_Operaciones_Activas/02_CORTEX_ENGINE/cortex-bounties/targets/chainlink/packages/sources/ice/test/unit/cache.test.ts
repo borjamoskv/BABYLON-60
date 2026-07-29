@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { LoggerFactory, LoggerFactoryProvider } from '@chainlink/external-adapter-framework/util'
 import fs from 'fs'
 import { LocalPriceCache } from '../../src/transport/cache'

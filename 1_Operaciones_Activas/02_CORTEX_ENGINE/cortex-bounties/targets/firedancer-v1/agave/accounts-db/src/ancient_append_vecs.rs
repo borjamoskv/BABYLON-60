@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! helpers for squashing append vecs into ancient append vecs
 //! an ancient append vec is:
 //! 1. a slot that is older than an epoch old

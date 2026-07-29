@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use std::{
     cmp::{max, min},
     ops::{Add, Div, Mul},
@@ -157,7 +158,7 @@ impl Reserve {
         self.config = *params.config;
     }
 
-   
+
 
 
     pub fn current_borrow_rate(&self) -> Result<Fraction> {
@@ -171,10 +172,10 @@ impl Reserve {
 
     pub fn borrow_factor_f(&self, is_in_elevation_group: bool) -> Fraction {
         if is_in_elevation_group {
-           
+
             Fraction::ONE
         } else {
-           
+
             self.config.get_borrow_factor()
         }
     }
@@ -207,7 +208,7 @@ impl Reserve {
 
 
     pub fn freely_available_liquidity_amount(&self) -> u64 {
-       
+
         self.liquidity
             .total_available_amount
             .saturating_sub(self.queued_liquidity_amount())
@@ -267,7 +268,7 @@ impl Reserve {
             let floored_collateral_for_liquidity =
                 exchange_rate.liquidity_to_collateral(available_liquidity);
             exchange_rate.collateral_to_liquidity(floored_collateral_for_liquidity)
-           
+
         }
     }
 
@@ -317,19 +318,19 @@ impl Reserve {
         &self,
         timestamp: u64,
     ) -> Result<u64> {
-       
+
         let sufficient_liquidity_limit = self.freely_available_liquidity_amount();
         if sufficient_liquidity_limit == 0 {
             return err!(LendingError::InsufficientLiquidity);
         }
 
-       
+
         let borrow_capacity_limit = self.remaining_borrow_capacity().to_floor();
         if borrow_capacity_limit == 0 {
             return err!(LendingError::BorrowLimitExceeded);
         }
 
-       
+
         let remaining_borrow_limit_outside_elevation_group = self
             .config
             .borrow_limit_outside_elevation_group
@@ -338,16 +339,16 @@ impl Reserve {
             return err!(LendingError::ElevationGroupBorrowLimitExceeded);
         }
 
-       
+
         let utilization_rate_limit = if let Some(max_borrowing_utilization_rate) =
             self.config.max_borrowing_utilization_rate()
         {
             let utilization_limit_borrow_amount =
                 self.liquidity.total_supply() * max_borrowing_utilization_rate;
-           
-           
-           
-           
+
+
+
+
             utilization_limit_borrow_amount
                 .saturating_sub(self.liquidity.total_borrow())
                 .saturating_sub(Fraction::DELTA)
@@ -360,14 +361,14 @@ impl Reserve {
             return err!(LendingError::BorrowingAboveUtilizationRateDisabled);
         }
 
-       
+
         let withdrawal_caps_limit =
             remaining_withdrawal_caps_amount(&self.config.debt_withdrawal_cap, timestamp);
         if withdrawal_caps_limit == 0 {
             return err!(LendingError::WithdrawalCapReached);
         }
 
-       
+
         Ok([
             sufficient_liquidity_limit,
             borrow_capacity_limit,
@@ -396,12 +397,12 @@ impl Reserve {
         &self,
         liquidity_amount: u64,
     ) -> Result<DepositLiquidityResult> {
-       
+
         let collateral_amount = self
             .collateral_exchange_rate()
             .liquidity_to_collateral(liquidity_amount);
 
-       
+
         let liquidity_amount_to_deposit = self
             .collateral_exchange_rate()
             .collateral_to_liquidity_ceil(collateral_amount);
@@ -445,9 +446,9 @@ impl Reserve {
         } else {
             self.withdraw_freely_available(liquidity_amount)?;
         }
-       
-       
-       
+
+
+
         self.collateral.burn(collateral_amount)?;
 
         Ok(liquidity_amount)
@@ -569,7 +570,7 @@ impl Reserve {
             if self.liquidity.deposit_limit_crossed_timestamp == 0 {
                 self.liquidity.deposit_limit_crossed_timestamp = timestamp;
             }
-           
+
         } else {
             self.liquidity.deposit_limit_crossed_timestamp = 0;
         }
@@ -581,7 +582,7 @@ impl Reserve {
             if self.liquidity.borrow_limit_crossed_timestamp == 0 {
                 self.liquidity.borrow_limit_crossed_timestamp = timestamp;
             }
-           
+
         } else {
             self.liquidity.borrow_limit_crossed_timestamp = 0;
         }
@@ -640,11 +641,11 @@ impl Reserve {
                     has_referrer,
                     borrow_factor_f,
                 );
-               
-               
-               
-               
-               
+
+
+
+
+
                 if borrow_exact_result == err!(LendingError::BorrowTooLarge)
                     || borrow_exact_result == err!(LendingError::BorrowLimitExceeded)
                     || borrow_exact_result == err!(LendingError::InsufficientLiquidity)
@@ -1089,7 +1090,7 @@ impl ReserveLiquidity {
     pub fn utilization_rate(&self) -> Fraction {
         let total_supply = self.total_supply();
         if total_supply == Fraction::ZERO {
-           
+
             return Fraction::ZERO;
         }
         Fraction::from_bits(self.borrowed_amount_sf) / total_supply
@@ -1103,7 +1104,7 @@ impl ReserveLiquidity {
 
 
 
-   
+
     pub fn liquidity_amount_to_market_value(&self, liquidity_amount: Fraction) -> Fraction {
         let mint_factor_sf = u128::from(self.mint_factor()) * FRACTION_ONE_SCALED;
         liquidity_amount.full_mul_int_ratio(self.market_price_sf, mint_factor_sf)
@@ -1132,17 +1133,17 @@ impl ReserveLiquidity {
         protocol_take_rate: Fraction,
         referral_rate: Fraction,
     ) -> LendingResult<()> {
-       
+
         let previous_cumulative_borrow_rate = BigFraction::from(self.cumulative_borrow_rate_bsf);
         let previous_debt_f = Fraction::from_bits(self.borrowed_amount_sf);
         let acc_protocol_fees_f = Fraction::from_bits(self.accumulated_protocol_fees_sf);
 
-       
+
         let compounded_interest_rate = approximate_compounded_interest(
             current_borrow_rate + host_fixed_interest_rate,
             slots_elapsed,
         );
-       
+
         let compounded_fixed_rate =
             approximate_compounded_interest(host_fixed_interest_rate, slots_elapsed);
 
@@ -1151,17 +1152,17 @@ impl ReserveLiquidity {
 
         let new_debt_f = previous_debt_f * compounded_interest_rate;
 
-       
-       
 
-       
-       
 
-       
-       
 
-       
-       
+
+
+
+
+
+
+
+
 
         let fixed_host_fee = (previous_debt_f * compounded_fixed_rate) - previous_debt_f;
         let net_new_variable_debt_f = new_debt_f - previous_debt_f - fixed_host_fee;
@@ -1173,7 +1174,7 @@ impl ReserveLiquidity {
         let new_acc_protocol_fees_f =
             acc_protocol_fees_f + fixed_host_fee + variable_protocol_fee_f - max_referrers_fees_f;
 
-       
+
         self.cumulative_borrow_rate_bsf = new_cumulative_borrow_rate.into();
         self.pending_referrer_fees_sf += max_referrers_fees_f.to_bits();
         self.accumulated_protocol_fees_sf = new_acc_protocol_fees_f.to_bits();
@@ -1345,8 +1346,8 @@ impl CollateralExchangeRate {
         (BigFraction::from(collateral_amount) * BigFraction::from(self.liquidity)
             / self.collateral_supply)
             .try_into()
-           
-           
+
+
             .expect("fraction_collateral_to_liquidity: liquidity_amount overflow")
     }
 
@@ -1366,8 +1367,8 @@ impl CollateralExchangeRate {
     pub fn fraction_liquidity_to_collateral(&self, liquidity_amount: Fraction) -> Fraction {
         (BigFraction::from(liquidity_amount) * self.collateral_supply / self.liquidity)
             .try_into()
-           
-           
+
+
             .expect("fraction_liquidity_to_collateral: collateral_amount overflow")
     }
 
@@ -1389,8 +1390,8 @@ impl CollateralExchangeRate {
         (BigFraction::from(liquidity_amount) * self.collateral_supply)
             .div_ceil(self.liquidity)
             .try_into()
-           
-           
+
+
             .expect("fraction_liquidity_to_collateral_ceil: collateral_amount overflow")
     }
 
@@ -1399,8 +1400,8 @@ impl CollateralExchangeRate {
         (BigFraction::from_num(self.collateral_supply * u128::from(liquidity_amount))
             / self.liquidity)
             .try_into()
-           
-           
+
+
             .expect("liquidity_to_collateral_fraction: collateral_amount overflow")
     }
 
@@ -1408,8 +1409,8 @@ impl CollateralExchangeRate {
     pub fn liquidity_to_collateral(&self, liquidity_amount: u64) -> u64 {
         let collateral_f = self.liquidity_to_collateral_fraction(liquidity_amount);
         collateral_f.try_to_floor().unwrap_or_else(|| {
-           
-           
+
+
             #[cfg(target_os = "solana")]
             panic!(
                 "liquidity_to_collateral: collateral_amount overflow, collateral_f_scaled: {}",
@@ -1662,7 +1663,7 @@ impl ReserveConfig {
         source: &ReserveConfig,
         customizations: ReserveConfigCustomizations,
     ) -> Self {
-       
+
         let &ReserveConfig {
             status: _,
             padding_deprecated_asset_tier: _,
@@ -1685,7 +1686,7 @@ impl ReserveConfig {
             borrow_rate_curve,
             borrow_factor_pct,
             deposit_limit: _,
-            borrow_limit: _, 
+            borrow_limit: _,
             token_info,
             deposit_withdrawal_cap,
             debt_withdrawal_cap,
@@ -1702,7 +1703,7 @@ impl ReserveConfig {
             early_repay_remaining_interest_pct,
         } = source;
 
-       
+
         let ReserveConfigCustomizations {
             overridden_fixed_rate_bps,
             overridden_debt_term_seconds,
@@ -1711,7 +1712,7 @@ impl ReserveConfig {
 
         Self {
             status: ReserveStatus::Hidden.into(),
-            padding_deprecated_asset_tier: 0,    
+            padding_deprecated_asset_tier: 0,
             host_fixed_interest_rate_bps,
             min_deleveraging_bonus_bps,
             block_ctoken_usage,
@@ -1733,7 +1734,7 @@ impl ReserveConfig {
                 .unwrap_or(borrow_rate_curve),
             borrow_factor_pct,
             deposit_limit: 0,
-            borrow_limit: 0, 
+            borrow_limit: 0,
             token_info,
             deposit_withdrawal_cap,
             debt_withdrawal_cap,
@@ -1883,7 +1884,7 @@ mod serde_reserve_fees {
                                     return Err(de::Error::duplicate_field("flash_loan_fee"));
                                 }
 
-                               
+
 
                                 let flash_loan_fee_str: Option<String> = map.next_value()?;
                                 match flash_loan_fee_str.as_deref() {
@@ -2009,9 +2010,9 @@ impl ReserveFees {
             let minimum_fee = 1u64;
 
             let origination_fee_amount = match fee_calculation {
-               
+
                 FeeCalculation::Exclusive => amount.mul(origination_fee_rate),
-               
+
                 FeeCalculation::Inclusive => {
                     let origination_fee_rate =
                         origination_fee_rate.div(origination_fee_rate.add(Fraction::ONE));
@@ -2027,7 +2028,7 @@ impl ReserveFees {
 
             let origination_fee: u64 = origination_fee_f.to_round();
             let referral_fee = if need_to_assess_referral_fee {
-               
+
                 if referral_fee_bps == 10_000 {
                     origination_fee
                 } else {
@@ -2095,7 +2096,7 @@ pub fn approximate_compounded_interest(rate: Fraction, elapsed_slots: u64) -> Fr
     }
 
     let exp: u128 = elapsed_slots.into();
-   
+
     let exp_minus_one = exp.wrapping_sub(1);
     let exp_minus_two = exp.wrapping_sub(2);
 

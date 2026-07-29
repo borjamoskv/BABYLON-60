@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as util from '../../../src/lib/metrics/util'
 import type { AdapterData, AdapterRequest } from '../../../src/types'
 

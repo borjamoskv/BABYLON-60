@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 name: Setup
 description: Runs basic commands to bootstrap yarn and install dependencies
 inputs:
@@ -64,7 +65,7 @@ runs:
       run: |
         if [ "${{ inputs.check-cache }}" = "true" ]; then
           yarn install --immutable --check-cache
-        else 
+        else
           yarn install --immutable
         fi
       shell: bash
@@ -132,8 +133,8 @@ runs:
                   ) or (
                     (.path | "packages" + .[1:]) as $location
                       | $changed_locations
-                      | any($location == .) 
-                  ) 
+                      | any($location == .)
+                  )
                 )
             ]' packages/tsconfig.json \
           > packages/tsconfig.tmp.json

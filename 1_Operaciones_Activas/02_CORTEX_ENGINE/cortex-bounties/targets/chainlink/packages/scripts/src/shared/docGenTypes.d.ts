@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { InputParameters } from '@chainlink/ea-bootstrap'
 import { Transport } from '@chainlink/external-adapter-framework/transports'
 

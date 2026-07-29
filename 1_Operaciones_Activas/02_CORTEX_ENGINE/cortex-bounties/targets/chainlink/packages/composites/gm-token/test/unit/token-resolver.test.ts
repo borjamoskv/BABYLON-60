@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { Requester } from '@chainlink/external-adapter-framework/util/requester'
 import { TokenResolver, type TokenMeta } from '../../src/transport/token-resolver'
 

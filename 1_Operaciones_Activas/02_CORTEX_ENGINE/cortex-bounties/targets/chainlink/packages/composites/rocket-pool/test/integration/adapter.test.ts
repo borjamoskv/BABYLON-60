@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterRequest, FastifyInstance } from '@chainlink/ea-bootstrap'
 import { AddressInfo } from 'net'
 import nock from 'nock'

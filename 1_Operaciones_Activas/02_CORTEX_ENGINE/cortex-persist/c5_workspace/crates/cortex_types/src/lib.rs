@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 

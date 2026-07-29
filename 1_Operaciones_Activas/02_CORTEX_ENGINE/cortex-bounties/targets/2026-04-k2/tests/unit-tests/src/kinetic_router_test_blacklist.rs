@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 #![cfg(test)]
 //! Blacklist tests
 //!
@@ -35,7 +36,7 @@ fn initialize_kinetic_router(env: &Env, admin: &Address, emergency_admin: &Addre
     let dex_router = Address::generate(env);
 
     client.initialize(admin, emergency_admin, &price_oracle, &treasury, &dex_router, &None);
-    
+
     let pool_configurator = Address::generate(env);
     client.set_pool_configurator(&pool_configurator);
 
@@ -124,7 +125,7 @@ fn test_set_reserve_blacklist_as_non_admin_fails() {
 
     // Clear auth mocking to test unauthorized access
     env.mock_auths(&[]);
-    
+
     let result = client.try_set_reserve_blacklist(&asset, &blacklist);
     assert!(result.is_err(), "Non-admin should not be able to set blacklist");
 

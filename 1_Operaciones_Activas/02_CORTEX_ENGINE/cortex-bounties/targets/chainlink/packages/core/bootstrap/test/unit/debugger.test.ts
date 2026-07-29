@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AdapterRequest, AdapterResponse } from '@chainlink/ea-bootstrap'
 import { withDebug } from '../../src/lib/middleware/debugger'
 import { isDebug } from '../../src/lib/util'

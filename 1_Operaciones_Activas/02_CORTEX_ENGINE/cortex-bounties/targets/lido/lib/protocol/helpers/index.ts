@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 export { depositAndReportValidators, ensureStakeLimit, unpauseStaking } from "./staking";
 
 export { finalizeWQViaElVault, finalizeWQViaSubmit, unpauseWithdrawalQueue } from "./withdrawal";

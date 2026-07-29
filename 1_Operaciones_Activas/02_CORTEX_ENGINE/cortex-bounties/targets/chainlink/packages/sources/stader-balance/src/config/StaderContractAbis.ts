@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { ethers } from 'ethers'
 
 export const StaderPoolFactoryContract_ABI: ethers.ContractInterface = [

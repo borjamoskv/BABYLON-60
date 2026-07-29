@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { HttpTransport } from '@chainlink/external-adapter-framework/transports'
 import { BaseEndpointTypes } from '../endpoint/aptos-df-reader'
 import { buildAptosViewRequest, ErrorObj, RequestObj } from '../utils/aptos-common'

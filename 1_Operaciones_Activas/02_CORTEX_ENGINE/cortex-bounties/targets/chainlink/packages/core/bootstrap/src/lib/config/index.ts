@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { baseEnvDefaults, getRandomRequiredEnv, getRandomEnv, getEnv, parseBool } from '../util'
 import type { Config, DefaultConfig } from '../../types'
 import { logger } from '../modules/logger'

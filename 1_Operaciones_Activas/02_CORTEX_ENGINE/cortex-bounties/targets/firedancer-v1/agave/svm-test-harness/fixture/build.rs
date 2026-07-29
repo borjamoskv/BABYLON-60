@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Only compile protobuf files when the fuzz feature is enabled.
     #[cfg(feature = "fuzz")]

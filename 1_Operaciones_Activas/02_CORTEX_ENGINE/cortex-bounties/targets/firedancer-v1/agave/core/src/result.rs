@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! The `result` module exposes a Result type that propagates one of many different Error types.
 
 use {solana_gossip::gossip_error::GossipError, solana_ledger::blockstore, thiserror::Error};

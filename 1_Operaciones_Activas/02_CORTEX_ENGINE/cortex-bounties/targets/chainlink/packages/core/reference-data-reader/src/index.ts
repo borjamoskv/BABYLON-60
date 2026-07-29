@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import abi from '@chainlink/contracts/abi/v0.8/AggregatorV2V3Interface.json'
 import { AdapterConfigError, AdapterDataProviderError, Logger, util } from '@chainlink/ea-bootstrap'
 import { BigNumber, ethers } from 'ethers'

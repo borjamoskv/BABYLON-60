@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! `LogTransactionService` requests confirmed blocks, analyses transactions submitted by bench-tps,
 //! and saves log files in csv format.
 

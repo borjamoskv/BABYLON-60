@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use hex_literal::hex;
 
 // Test Case: PAIRING_IDENTITY

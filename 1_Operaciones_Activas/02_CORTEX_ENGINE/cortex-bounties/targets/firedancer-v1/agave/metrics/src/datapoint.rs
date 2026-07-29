@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! This file defines a set of macros for reporting metrics.
 //!
 //! To report a metric, simply calling one of the following datapoint macros

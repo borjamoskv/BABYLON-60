@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use anchor_lang::{
     err,
     prelude::{AccountLoader, Context},
@@ -58,11 +59,11 @@ pub mod token_2022 {
 
     const SUPPORTED_LIQUIDITY_ACCOUNT_TOKEN_EXTENSIONS: &[ExtensionType] = &[
         ExtensionType::ConfidentialTransferFeeAmount,
-        ExtensionType::ConfidentialTransferAccount,  
-        ExtensionType::TransferFeeAmount,            
-        ExtensionType::TransferHookAccount,          
-        ExtensionType::PausableAccount,              
-        ExtensionType::ImmutableOwner,               
+        ExtensionType::ConfidentialTransferAccount,
+        ExtensionType::TransferFeeAmount,
+        ExtensionType::TransferHookAccount,
+        ExtensionType::PausableAccount,
+        ExtensionType::ImmutableOwner,
     ];
 
 
@@ -199,7 +200,7 @@ pub mod token_2022 {
                     return err!(LendingError::UnsupportedTokenExtension);
                 }
                 if token_acc_ext.closable().is_err() {
-                   
+
                     xmsg!(
                         "Pending and available balance must be zero for token accounts, got {:?}",
                         token_acc_ext

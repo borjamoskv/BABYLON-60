@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from collections import namedtuple
 from collections.abc import Iterable
 from glob import glob

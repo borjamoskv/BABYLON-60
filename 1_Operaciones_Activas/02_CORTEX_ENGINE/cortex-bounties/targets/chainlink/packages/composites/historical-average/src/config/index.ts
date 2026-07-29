@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { adapter as CoinMarketCap } from '@chainlink/coinmarketcap-adapter'
 import { Requester, util } from '@chainlink/ea-bootstrap'
 import { Config as DefaultConfig } from '@chainlink/ea-bootstrap'

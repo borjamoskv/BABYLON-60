@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from ..constants import ALTAIR, OPTIMIZED_BLS_AGGREGATE_PUBKEYS
 from .base import BaseSpecBuilder
 

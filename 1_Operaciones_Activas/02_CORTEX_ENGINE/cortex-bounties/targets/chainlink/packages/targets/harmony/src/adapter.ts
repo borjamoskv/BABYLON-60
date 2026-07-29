@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { InputParameters, Requester, Validator } from '@chainlink/ea-bootstrap'
 import { ExecuteWithConfig, ExecuteFactory } from '@chainlink/ea-bootstrap'
 import { Harmony } from '@harmony-js/core'

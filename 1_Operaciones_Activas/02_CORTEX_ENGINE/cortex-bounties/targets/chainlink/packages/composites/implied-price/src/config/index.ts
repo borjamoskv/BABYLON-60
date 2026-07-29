@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { Requester } from '@chainlink/ea-bootstrap'
 import type { Config } from '@chainlink/ea-bootstrap'
 
