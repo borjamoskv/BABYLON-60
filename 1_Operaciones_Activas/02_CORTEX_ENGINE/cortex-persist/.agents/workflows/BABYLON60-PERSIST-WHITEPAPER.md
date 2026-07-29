@@ -24,7 +24,30 @@ description: "Babylon60-Persist Whitepaper v1.1.1 — Infraestructura de goberna
 **C5-REAL Production Specification v1.1.1** — 2026-07-29
 *Status:* PyPI Production/Stable (`cortex-persist v1.1.1`) | Rust Core: `cortex_rs` PyO3 Substrate | TLA+ Formally Verified
 
-> **Normative Bridge:** Este documento define la especificación C5-REAL de producción de Babylon60-Persist. Cualquier interpretación técnica a nivel de requisitos normativos DEBE referirse al RFC-BABYLON60-NATIVE-AI v0.1, las especificaciones TLA+ (`CortexByzantineKernel.tla`) y la ontología axiomática de `docs/AXIOMS.md`.
+---
+
+## 0.1 PUENTE NORMATIVO & MATRIZ DE TRAZABILIDAD CAUSAL (NORMATIVE BRIDGE)
+
+> **Normative Bridge Directive:** Este Whitepaper actúa como la especificación descriptiva de producción de Babylon60-Persist. La interpretación normativa de invariantes, restricciones de ingeniería y requisitos formales se rige strictly por la siguiente jerarquía C5-REAL:
+> 1. **Contrato Normativo de Requisitos:** [`RFC-BABYLON60-NATIVE-AI v0.1`](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-persist/.agents/workflows/RFC-BABYLON60-NATIVE-AI.md) (Clasificación RFC 2119: **MUST**, **SHOULD**, **TARGET**, **EXPERIMENTAL**).
+> 2. **Especificación de Verificación Formal:** Modelos TLA+ (`CortexByzantineKernel.tla`, `CortexIntegrityKernel.tla`, `CortexSagaTrustBoundaries.tla`).
+> 3. **Ontología Axiomática & Invariantes de Kernel:** [`docs/AXIOMS.md`](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-persist/docs/AXIOMS.md) y Directivas P0 de [`AGENTS.md`](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-persist/AGENTS.md).
+> 4. **Matriz de Falsación Empírica:** Pruebas y diagnósticos C5-REAL (`ship_gate.py` & audit logs).
+
+### Matriz de Trazabilidad Causal del Puente Normativo
+
+| Subsistema Whitepaper | Nivel RFC 2119 | Referencia RFC Normativo | Especificación TLA+ / Código | Invariante / Axioma Ancla | Estado de Falsación Empírica |
+|:---|:---:|:---|:---|:---|:---|
+| **BeliefObject Schema** | **MUST** | `RFC v0.1 §6` | `belief_object.py` | AX-054 (Taxonomía Provenance) | **VERIFICADO** (Schema inmutable) |
+| **Ignición Determinista (SHM/IPC)** | **MUST** | `RFC v0.1 §5` (Ω9) | `zenoh_crdt.py` | Ω9 (Synchronous Init) | **VERIFICADO** (No race condition) |
+| **Integridad & Taint Engine** | **MUST** | `RFC v0.1 §7` | `taint_engine.py` / Trigger SQL | CORTEX-TAINT Token | **ALERTA** (Trigger C ignora env var bypass) |
+| **Consenso LogOP & Anti-Sybil** | **MUST** | `RFC v0.1 §9` (Ω1b) | `consensus/manager.py` | Ω1b (Model Weight Diversity) | **REFUTADO** (Falta check de arquitectura de modelo) |
+| **ATMS Dependency Propagation** | **MUST** | `RFC v0.1 §8` | `engine/logic/atms.py` | AX-052 (Epistemological Compiler) | **REFUTADO** (Sin fallback Python si falta Rust PyO3) |
+| **Veto Epistémico ($\epsilon_{\min}$)** | **MUST** | `RFC v0.1 §9` | `ConsensusManager` | $\epsilon_{\min} = 10^{-6}$ Floor | **VERIFICADO** (Saturantes no nulos) |
+| **Memory Scheduler Equation** | **MUST** | `RFC v0.1 §10` | `memory/scheduler.py` | Ecuación Tensorial Risk | **REFUTADO** (Risk no colapsa a 0; div zero clamp $10^6$) |
+| **Sparse Merkle Tree (SMT)** | **MUST** | `RFC v0.1 §7` | `ledger/merkle.py` | $O(\log N)$ Lineage Attestation | **REFUTADO** (Binary Merkle Tree compacto, no SMT-256) |
+| **Hot Resume IPC (<10ms)** | **TARGET** | `RFC v0.1 §12` | `iceoryx2` / `cortex_rs` | SLO <4.2ms Argon2id | **REFUTADO** (FFI `hash_password` desincronizado) |
+| **Prohibición de LWW Pure** | **MUST NOT** | `RFC v0.1 §15` | `hlc.py` / `crdt.py` | Mono-clock LWW Banned | **VERIFICADO** (HLC Causal Monotonic) |
 
 ---
 

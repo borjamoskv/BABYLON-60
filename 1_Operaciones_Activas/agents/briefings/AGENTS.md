@@ -222,3 +222,6 @@
 
 - **Ω175 · NEGATIVE EVIDENCE INVARIANT (ANTI-ABSENCE FALLACY):**
   Queda estrictamente prohibido concluir que un componente, mecanismo o ruta es "inexistente", "imposible" o ha sido "eliminado" basándose exclusivamente en su no observación durante una iteración experimental. La falta de detonación empírica solo autoriza a clasificar la ruta como **"No observada"** o **"No alcanzada bajo las condiciones del experimento"**. La ausencia de observación no constituye evidencia de ausencia.
+
+- **Ω176 · MAP-TERRITORY FALLACY INVARIANT (ANTI-PROCEDURAL SLOP):**
+  Queda estrictamente prohibido dar por finalizada la resolución de un fallo de infraestructura o configuración (ej. secretos faltantes) limitándose a actualizar un archivo de instrucciones (`SKILL.md`) o añadir un "check de pre-vuelo". Actualizar el manual de vuelo (el mapa) no arregla el motor (el territorio). El agente DEBE ejecutar físicamente la mutación en el entorno activo (inyectar el secreto, reparar el estado) antes de declarar el éxito, la resolución o la maximización de exergía. Celebrar la documentación de un error sin colapsarlo empíricamente es Green Theater (Anergía pura).
