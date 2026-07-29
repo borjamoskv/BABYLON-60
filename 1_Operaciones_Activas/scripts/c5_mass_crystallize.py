@@ -12,7 +12,7 @@ def get_comment_syntax(ext: str) -> str:
 def crystallize_files() -> None:
     root = Path(".")
     extensions = {".py", ".go", ".rs", ".js", ".ts", ".yml"}
-    exclude_dirs = {".venv", "node_modules", ".git", "target", "dist", "build"}
+    exclude_dirs = {".venv", "node_modules", ".git", "target", "dist", "build", ".build"}
 
     mutated = 0
 
