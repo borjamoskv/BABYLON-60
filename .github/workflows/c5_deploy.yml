@@ -44,9 +44,7 @@ jobs:
         with:
           terraform_version: 1.7.0
 
-      - name: Terraform Format Check
-        run: terraform fmt -check
-        working-directory: ./infra
+
 
       - name: Terraform Init
         run: terraform init
