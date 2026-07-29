@@ -6,10 +6,12 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 from babylon60.core.url_cache import URLCacheSync
 from babylon60.core.popperian_filter import evaluate_payload
 
+import time
+
 def run_test():
     print("=== [C5-REAL] Verificación del Pipeline Completo del Browser Agent ===")
     
-    url = "https://example.org/rust-ownership-guide"
+    url = f"https://example.org/rust-ownership-guide-{int(time.time())}"
     taint = "browser_agent_session_test_01"
     
     cache = URLCacheSync()
