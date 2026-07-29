@@ -1,0 +1,14 @@
+Claim: Root directory Anergy (loose scripts, DBs, and datasets) has been structurally
+  purged and archived, restoring 00_WORKSPACE.md hierarchy invariant.
+Proof:
+  Base: sha3_256::cortex_taint
+  Range:
+  - 12
+  - 12
+  Confidence: C5-REAL
+Operator: borjamoskv
+System_Level: C5-REAL
+Anergy_Files_Purged: 12
+Anergy_Bytes_Purged: 26361
+Cortex_Taint: 44c6a19e4a3d5095ee9dc1124d5c5bab0da12e12efacada64682e981d8798e8e
+Timestamp: '2026-07-29T19:54:47.720889+00:00'
