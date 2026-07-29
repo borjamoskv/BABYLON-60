@@ -74,7 +74,7 @@ def main():
         
         # Verify INV_C5_15 visually
         print("\n[AUDIT] OP_RETURN Script Check:")
-        print(f"Expected OP_RETURN Hex Prefix : 6a20")
+        print("Expected OP_RETURN Hex Prefix : 6a20")
         print(f"Included Commitment (32-byte) : {merkle_root}")
         
         if f"6a20{merkle_root}" in raw_tx:

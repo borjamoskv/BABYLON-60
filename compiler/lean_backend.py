@@ -3,8 +3,24 @@ import os
 
 def parse_ir(file_path):
     with open(file_path, "r") as f:
-        lines = [l.strip() for l in f if l.strip()]
+        lines = [line.strip() for line in f if line.strip()]
     return lines
+
+def format_lean_axiom(parts):
+    tag = parts[0]
+    handlers = {
+        "Event": lambda p: f"axiom ev_tick_{p[1]} : Nat := {p[2]}",
+        "HappensBefore": lambda p: f"axiom causal_{p[1]}_{p[2]} : ev_tick_{p[1]} ≤ ev_tick_{p[2]}",
+        "Assign": lambda p: f"axiom assign_{p[3]} : Val := {p[2]}",
+        "Add": lambda p: f"axiom add_{p[3]} : Val := {p[2]}",
+        "Sub": lambda p: f"axiom sub_{p[3]} : Val := {p[2]}",
+        "Spawn": lambda p: f"axiom spawn_{p[2]} : String := \"{p[1]}\"",
+        "Block": lambda p: f"axiom await_{p[2]} : String := \"{p[1]}\"",
+        "Wait": lambda p: f"axiom after_{p[2]} : Nat := {p[1]}",
+        "Emit": lambda p: f"axiom emit_{p[2]} : String := \"{p[1]}\"",
+    }
+    handler = handlers.get(tag)
+    return handler(parts) if handler else None
 
 def translate_to_lean(ir_lines):
     lean_code = [
@@ -22,31 +38,15 @@ def translate_to_lean(ir_lines):
     ]
 
     for line in ir_lines:
-        line = line.strip("()")
-        parts = line.split()
-        if not parts:
+        if "sorry" in line or "admit" in line:
+            lean_code.append(f"-- TAINT_UNPROVEN: Ghost Guard detected in IR line '{line}'")
             continue
-        
-        tag = parts[0]
-        if tag == "Event":
-            lean_code.append(f"axiom ev_tick_{parts[1]} : Nat := {parts[2]}")
-        elif tag == "HappensBefore":
-            lean_code.append(f"axiom causal_{parts[1]}_{parts[2]} : ev_tick_{parts[1]} ≤ ev_tick_{parts[2]}")
-        elif tag == "Assign":
-            # Assign R1 601 EV_0
-            lean_code.append(f"axiom assign_{parts[3]} : Val := {parts[2]}")
-        elif tag == "Add":
-            lean_code.append(f"axiom add_{parts[3]} : Val := {parts[2]}")
-        elif tag == "Sub":
-            lean_code.append(f"axiom sub_{parts[3]} : Val := {parts[2]}")
-        elif tag == "Spawn":
-            lean_code.append(f"axiom spawn_{parts[2]} : String := \"{parts[1]}\"")
-        elif tag == "Block":
-            lean_code.append(f"axiom await_{parts[2]} : String := \"{parts[1]}\"")
-        elif tag == "Wait":
-            lean_code.append(f"axiom after_{parts[2]} : Nat := {parts[1]}")
-        elif tag == "Emit":
-            lean_code.append(f"axiom emit_{parts[2]} : String := \"{parts[1]}\"")
+
+        parts = line.strip("()").split()
+        if parts:
+            axiom = format_lean_axiom(parts)
+            if axiom:
+                lean_code.append(axiom)
 
     lean_code.append("")
     lean_code.append("end Babylon60")

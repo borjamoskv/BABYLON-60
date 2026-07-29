@@ -23,7 +23,7 @@ def run_stress():
     iterations = 10000
     hashes = set()
     
-    print(f"[C5-REAL] Initiating BABYLON-60 3.0 Stress Test...")
+    print("[C5-REAL] Initiating BABYLON-60 3.0 Stress Test...")
     print(f"[C5-REAL] Target Iterations: {iterations}")
     
     tracemalloc.start()

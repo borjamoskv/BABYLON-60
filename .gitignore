@@ -1,4 +1,36 @@
+# Build Targets & Binaries
 /target
+b60_kernel
 babylon60
+*.b60
+
+# Environment & Secrets (Crucial Security Invariant)
+.env
+.env.*
+*.pem
+*.key
+*.token
+*.secret
+*.p12
+*.crt
+
+# Virtual Environments & Caches
 __pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Node / Web Build Assets
+node_modules/
+web/node_modules/
+web/dist/
+.wrangler/
+web/.wrangler/
+
+# Temporary Artifacts & System Files
 proof_artifact.json
+fuzz_test_*.b60
+test_*.b60
+.DS_Store
+*.log

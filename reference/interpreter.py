@@ -3,18 +3,20 @@
 
 import sys
 import hashlib
-from dataclasses import dataclass, field
-from typing import List, Dict, Set, Optional
+from dataclasses import dataclass
+from typing import List, Dict
 
 def parse_b60_digit(token):
-    if token == '-': return 0
+    if token == '-':
+        return 0
     tens = token.count('<')
     ones = token.count('Y') + token.count('v') + token.count('T')
     return tens * 10 + ones
 
 def parse_b60_number(b60_str):
     inner = b60_str.strip('[]').strip()
-    if not inner: return 0
+    if not inner:
+        return 0
     places = inner.split()
     total = 0
     power = len(places) - 1
@@ -24,7 +26,8 @@ def parse_b60_number(b60_str):
     return total
 
 def format_b60(val):
-    if val == 0: return "[-]"
+    if val == 0:
+        return "[-]"
     places = []
     while val > 0:
         places.append(val % 60)

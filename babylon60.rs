@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 use std::collections::{HashMap, VecDeque};
 use std::env;
 use std::fs;
@@ -407,7 +408,7 @@ fn main() {
 
 // 11. Immutable Artifact Export
 fn export_artifact_bundle(ledger: &DAGLedger) {
-    use std::io::Write;
+    
     use sha2::{Sha256, Digest}; // INV_C5_15: 32-byte raw L1 anchor
 
     let mut canonical_lines = Vec::new();

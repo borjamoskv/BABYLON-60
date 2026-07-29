@@ -5,12 +5,14 @@ import { GoalMode } from './components/GoalMode';
 import { SwarmOverview } from './components/SwarmOverview';
 import { ScheduledTasks } from './components/ScheduledTasks';
 import { FinancialPlugins } from './components/FinancialPlugins';
+import { LandingPage } from './components/LandingPage';
 import './App.css';
 
 type View = 'dashboard' | 'goal' | 'swarm' | 'scheduled' | 'plugins';
 
 function App() {
   const [currentView, setCurrentView] = useState<View>('dashboard');
+  const [isLanding, setIsLanding] = useState(true);
 
   const renderView = () => {
     switch (currentView) {
@@ -22,6 +24,10 @@ function App() {
       default: return <Dashboard />;
     }
   };
+
+  if (isLanding) {
+    return <LandingPage onEnter={() => setIsLanding(false)} />;
+  }
 
   return (
     <div className="dashboard-layout">

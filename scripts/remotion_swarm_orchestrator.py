@@ -6,7 +6,6 @@ Enforces:
   - INV_BFT_04: Non-silent collision fail-fast on frame payload mismatch.
 """
 
-import sys
 import hashlib
 import dataclasses
 from typing import List, Dict

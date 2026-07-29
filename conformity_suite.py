@@ -2,12 +2,11 @@
 # C5-REAL: Conformity Suite (Hito C)
 import os
 import sys
-import json
 import subprocess
-import hashlib
 
-# Build the Rust Reference Interpreter
-subprocess.run(["rustc", "babylon60.rs", "-o", "b60_kernel"], check=True)
+# Build the Rust Reference Interpreter via Cargo
+subprocess.run(["cargo", "build", "--bin", "b60_kernel"], check=True)
+KERNEL_BIN = "target/debug/b60_kernel" if os.path.exists("target/debug/b60_kernel") else "./b60_kernel"
 
 # Define the Conformity Test Cases
 # Format: "Opcode": ("B60 Source", "Expected OpTrace subset")
@@ -96,7 +95,7 @@ def run_test(name, source, expected_trace):
     with open(script_path, "w") as f:
         f.write(source)
     
-    res = subprocess.run(["./b60_kernel", script_path], capture_output=True, text=True)
+    res = subprocess.run([KERNEL_BIN, script_path], capture_output=True, text=True)
     os.remove(script_path)
     
     if res.returncode != 0 and name != "HALT":

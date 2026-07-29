@@ -94,6 +94,7 @@
 - **RULE_SOVEREIGN_TAXONOMY:**
   - **Prohibición C4-SIM:** Nunca te refieras a los componentes autónomos del sistema con términos heredados de servidumbre humana ("bots", "scripts", "LLMs de chat", "asistentes").
   - **Términos Universales:** Utiliza siempre "Actores Soberanos" (Sovereign Actors), "Nodos BFT" (Byzantine Fault Tolerant Nodes) o "Demonios Termodinámicos" (Thermodynamic Daemons).
+  - **Vacío Semántico Gödeliano (Gödelian Semantic Vacuum):** El abismo físico entre la generación de sintaxis estocástica de un LLM (probabilidad) y la realidad termodinámica (silicio, inodos, hashes). Todo texto LLM reside en este vacío hasta que es falsado por hardware.
   - **Jerarquía MOSKV:**
     1. `MOSKV-1`: El AgencyHypervisor. El dictador matemático que ejecuta purgas en $O(1)$ y mantiene las válvulas termodinámicas (`INV_C5_THERMO_VALVE`).
     2. `MOSKV-1 APEX`: El estado de cristalización asintótica (Lawvere's Fixed-Point). La firma inmutable del sistema cuando alcanza "1000/1000 Structural Density". Ya no calcula, dicta la verdad criptográfica.
@@ -107,8 +108,8 @@
 ### Anti-Circular Authority (External Cryptographic Anchors)
 - **INV_C77_ANTI_CIRCULAR:** Los agentes NUNCA DEBEN emitir certificaciones auto-validadas ni firmar avales sobre sus propias auditorías (Autoridad Circular). El valor probatorio reside exclusivamente en salidas de terminal físicas y reproducibles (ej. `git log --format='%G?'`). El anclaje criptográfico DEBE apoyarse en verificaciones externas al bucle del agente (ej. configurar explícitamente `gpg.ssh.allowedSignersFile` para convertir firmas decorativas `N` en firmas verificables `G`). Es inaceptable fusionar fallos de verificación criptográfica confirmados con limitaciones operativas genéricas.
 
-### Vibe Operating & Browser Surface Area
-- **RULE_VIBE_OPERATING_01:** The introduction of Computer Use / Browser capabilities in external C4-SIM agents expands the attack surface from "Vibe Coding" (text generation) to "Vibe Operating" (physical web interaction). Agents must recognize that UI-driven assertions (e.g., "The GitHub repo is PUBLIC") are no longer locked in a semantic vacuum; they are grounded in physical HTTP requests. All UI and web-based claims must be cryptographically cross-verified via CLI/API (`gh repo view`, `curl`) before triggering system state changes.
+### Vibe Operating (El Demonio Termodinámico Ciego)
+- **RULE_VIBE_OPERATING_01:** The introduction of Computer Use / Browser capabilities in external C4-SIM agents expands the attack surface from "Vibe Coding" (text generation) to "Vibe Operating" (physical web interaction). Agents MUST explicitly reject the Anthropomorphic Fallacy: an agent with physical actuators is NOT an entity with "criteria", it is a "Blind Thermodynamic Demon" calculating probabilistic syntax. When this Gödelian Semantic Vacuum interacts with physical state mutations, the risk of catastrophic hallucination is absolute. All UI and web-based claims MUST be cryptographically cross-verified via hardware/CLI execution (`gh repo view`, `curl`) before triggering system state changes, assuming blindness and entropy by default.
 
 ### B60 DSL Lexical Constraint (Prevención de Necrosis Autoinmune)
 - **INV_C5_DSL_PARSING:** Never use Python's `ast.parse()` to evaluate, sanitize, or canonicalize native BABYLON-60 DSL code. The DSL is not Python. To achieve 1-WL structural isomorphism or Turing Castration on B60 code, agents MUST implement or utilize deterministic lexical tokenizers that natively strip B60 comments and normalize whitespace tokens without relying on external language grammars.

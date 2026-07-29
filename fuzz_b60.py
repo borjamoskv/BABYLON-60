@@ -2,16 +2,39 @@ import sys
 import os
 import random
 import subprocess
-import json
+
+def format_instruction(op, reg, tasks, signals):
+    if op == "NIG":
+        val = random.randint(1, 100)
+        return f"NIG {reg} [ {'Y' * min(val, 9)} ]"
+    if op == "DAH":
+        val = random.randint(1, 10)
+        return f"DAH {reg} [ {'Y' * val} ]"
+    if op == "LAL":
+        val = random.randint(1, 5)
+        return f"LAL {reg} [ {'Y' * val} ]"
+    if op == "FORK":
+        target = random.choice(tasks)
+        return f"FORK \"{target}\""
+    if op == "AWAIT":
+        sig = random.choice(signals)
+        target = random.choice(tasks)
+        return f"AWAIT \"{sig}\" \"{target}\""
+    if op == "AFTER":
+        target = random.choice(tasks)
+        return f"AFTER {reg} \"{target}\""
+    if op == "EXECUTE":
+        sig = random.choice(signals)
+        return f"EXECUTE \"{sig}\""
+    return "HALT"
 
 def generate_program(seed, num_instructions):
     random.seed(seed)
-    program = []
-    
-    # Pre-alloc registers to avoid unallocated panic
-    program.append("ALLOC F60 R1")
-    program.append("ALLOC I64 R2")
-    program.append("ALLOC TIME R3")
+    program = [
+        "ALLOC F60 R1",
+        "ALLOC I64 R2",
+        "ALLOC TIME R3"
+    ]
     
     opcodes = ["NIG", "DAH", "LAL", "FORK", "AWAIT", "AFTER", "EXECUTE"]
     tasks = ["TaskA", "TaskB", "TaskC"]
@@ -20,33 +43,10 @@ def generate_program(seed, num_instructions):
     for _ in range(num_instructions):
         op = random.choice(opcodes)
         reg = f"R{random.randint(1, 3)}"
-        if op == "NIG":
-            val = random.randint(1, 100)
-            program.append(f"NIG {reg} [ {'Y' * min(val, 9)} ]")
-        elif op == "DAH":
-            val = random.randint(1, 10)
-            program.append(f"DAH {reg} [ {'Y' * val} ]")
-        elif op == "LAL":
-            val = random.randint(1, 5)
-            program.append(f"LAL {reg} [ {'Y' * val} ]")
-        elif op == "FORK":
-            target = random.choice(tasks)
-            program.append(f"FORK \"{target}\"")
-        elif op == "AWAIT":
-            sig = random.choice(signals)
-            target = random.choice(tasks)
-            program.append(f"AWAIT \"{sig}\" \"{target}\"")
-        elif op == "AFTER":
-            # Using tick constant for deterministic timing fuzzing
-            target = random.choice(tasks)
-            program.append(f"AFTER {reg} \"{target}\"")
-        elif op == "EXECUTE":
-            sig = random.choice(signals)
-            program.append(f"EXECUTE \"{sig}\"")
+        program.append(format_instruction(op, reg, tasks, signals))
             
     program.append("HALT")
     
-    # Add dummy labels for branch resolution
     for t in tasks:
         program.append(f"MUB \"{t}\"")
         program.append(f"EXECUTE \"Fallback_{t}\"")
@@ -56,7 +56,8 @@ def generate_program(seed, num_instructions):
 
 def run_fuzzer(iterations):
     print(f"[MOSKV APEX] Iniciando Property-Based Fuzzer ({iterations} iteraciones)...")
-    subprocess.run(["rustc", "babylon60.rs", "-o", "b60_kernel"], check=True)
+    subprocess.run(["cargo", "build", "--bin", "b60_kernel"], check=True)
+    kernel_bin = "target/debug/b60_kernel" if os.path.exists("target/debug/b60_kernel") else "./b60_kernel"
     
     for i in range(iterations):
         seed = i * 1337
@@ -67,7 +68,7 @@ def run_fuzzer(iterations):
             f.write(src)
             
         # Ejecutar 1:
-        res1 = subprocess.run(["./b60_kernel", script_path], capture_output=True, text=True)
+        res1 = subprocess.run([kernel_bin, script_path], capture_output=True, text=True)
         if res1.returncode != 0:
             print(f"[FAIL] Panicked on seed {seed}!\n{res1.stderr}")
             sys.exit(1)
@@ -78,7 +79,7 @@ def run_fuzzer(iterations):
             ir1 = f.read()
             
         # Ejecutar 2: (Determinism check)
-        res2 = subprocess.run(["./b60_kernel", script_path], capture_output=True, text=True)
+        _res2 = subprocess.run([kernel_bin, script_path], capture_output=True, text=True)
         with open("artifact_bundle_v3/graph.canonical", "r") as f:
             graph2 = f.read()
         with open("artifact_bundle_v3/proof.ir", "r") as f:
