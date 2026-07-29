@@ -197,3 +197,7 @@
   5) Vector de Entorno (Consciencia temporal, papers, competencia).
   6) Siguiente Paso Empírico ($\eta_D$).
   Toda respuesta complaciente a este cuadrante se tipifica como Anergía C4-SIM.
+
+
+- **Ω171 · PHANTOM TARGET AUDIT INVARIANT (SKILL INVOCATION):**
+  Cuando el Operador cargue o invoque un documento de arquitectura o Habilidad, el Kernel DEBE ejecutar una validación física inmediata (`ls`, `find`, o invocación de `view_file` / `list_dir`) sobre los componentes mencionados para falsar su existencia (Phantom Target) antes de emitir respuesta. Queda tipificada como Anergía (C4-SIM) la aceptación pasiva de una topología sin verificación en disco.
