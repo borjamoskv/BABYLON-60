@@ -122,3 +122,9 @@
 
 ### ABFT Shared Memory Zero-Copy Constraint (iceoryx2 v0.3.0)
 - **INV_C5_ABFT_IPC:** When implementing Asynchronous BFT inside a single-node hypervisor to satisfy `INV_C5_18` without socket exhaustion, use `iceoryx2` zero-copy shared memory. For `v0.3.0+`, initialization MUST flow directly through `zero_copy::Service::new(&service_name).publish_subscribe().open_or_create::<T>()?` with `.publisher().create()?` and `.subscriber().create()?`. Importing deprecated `node::NodeBuilder` or `service::ipc` modules directly is prohibited.
+
+### ArtifactMetadata Usage Constraint
+- **RULE_ARTIFACT_METADATA:** Never include `ArtifactMetadata` when calling `write_to_file`, `replace_file_content`, or `multi_replace_file_content` on files in the user's project workspace (e.g., source code). `ArtifactMetadata` must ONLY be used for files located strictly within the agent's dedicated artifacts directory (`<appDataDir>/brain/<conversation-id>/`). Including it for project files will trigger an invalid path error.
+
+### macOS Python Environment (Externally Managed)
+- **RULE_MACOS_ENV_01:** Never use `pip install` directly on the system Python, as macOS environments are externally managed (PEP 668). In projects utilizing `uv` (like BABYLON-60), always use `uv add <package>` or `uv pip install <package>` to install dependencies, or explicitly source the `.venv` before running module installations. Avoid using `--break-system-packages`.
