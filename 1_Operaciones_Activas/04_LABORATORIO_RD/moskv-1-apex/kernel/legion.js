@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { Worker } = require('worker_threads');
 const path = require('path');
 const { EventBus } = require('./event-bus.js');
@@ -22,7 +23,7 @@ async function executeOuroborosLegion() {
     const totalWorkers = SQUADS.length * CENTURIA_THREADS_PER_SQUAD;
 
     console.log(`[OUROBOROS-∞] Spawning ${totalWorkers} Physical Thread Workers across 5 Squads...`);
-    
+
     // Listen for Apoptosis Purge to kill the swarm if thermodynamics fail
     eventBus.on('L4_APOPTOSIS_PURGE', (data) => {
         console.error(`\n[SWARM-COMMAND] APOPTOSIS RECEIVED: ${data.reason}. Collapsing Centuria Matrix...`);

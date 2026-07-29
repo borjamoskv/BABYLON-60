@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { useRef, useCallback } from "react";
 
 // Deep Topological Hash computation for DOM nodes (Zero-Allocation Exergy Optimized)

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { MetadataRoute } from 'next';
 
 const BASE_URL = 'https://cortexpersist.dev';

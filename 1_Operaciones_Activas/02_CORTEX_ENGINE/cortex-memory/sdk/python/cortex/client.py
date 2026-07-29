@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import requests
 class CortexClient:
     def __init__(self, base_url="http://localhost:8009"):

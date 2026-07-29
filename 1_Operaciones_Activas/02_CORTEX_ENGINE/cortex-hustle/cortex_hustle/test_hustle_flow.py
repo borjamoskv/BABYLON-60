@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import asyncio
 import os
 
@@ -11,10 +12,10 @@ from cortex_hustle.engine import HustleEngine
 
 async def main():
     print("=== Testing APEX Sovereign Trend-Forge ===")
-    
+
     # Initialize engine
     hustler = HustleEngine()
-    
+
     # Let's mock the LLM calls to prevent burning API quota during local test,
     # or let's run it with a simple mock query to verify the engine pipeline works.
     # We can override call_llm temporarily to return mock responses.
@@ -53,12 +54,12 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
         return ""
 
     hustler.call_llm = mock_call_llm
-    
+
     # Run scan & forge
     print("1. Running scan & forge cycle...")
     results = await hustler.scan_and_forge(keywords=["smart contract security"])
     print(f"Results: {results}")
-    
+
     # Assertions
     assert len(results) > 0, "No opportunities processed"
     forged_slug = results[0]["slug"]
@@ -75,19 +76,19 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
     rows = cursor.fetchall()
     assert len(rows) > 0, "Fact was not written to database!"
     print(f"✓ Stored opportunity fact in DB: {rows[0]}")
-    
+
     # Clean up generated file so we keep the git tree clean
     if expected_file.exists():
         expected_file.unlink()
         print("✓ Cleaned up generated test page file")
-        
+
     # Delete from DB
     cursor.execute("DELETE FROM facts WHERE project = 'LockerGuard AI'")
     cursor.execute("DELETE FROM ledger_events WHERE payload_json LIKE '%LockerGuard AI%'")
     conn.commit()
     conn.close()
     print("✓ Cleaned up test database facts")
-    
+
     print("\n=== All Trend-Forge local unit tests PASSED! ===")
 
 if __name__ == "__main__":

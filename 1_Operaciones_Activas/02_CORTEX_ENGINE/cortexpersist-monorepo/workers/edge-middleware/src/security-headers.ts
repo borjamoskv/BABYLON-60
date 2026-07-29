@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /**
  * Injects security headers on every response.
  * CSP is per-domain to allow domain-specific origins.

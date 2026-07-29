@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const { BrainRegion } = require('./brain-region');
 const neo4j = require('neo4j-driver');
 
@@ -11,7 +12,7 @@ class MetacognitionEngine extends BrainRegion {
 
     async boot() {
         await super.boot();
-        
+
         try {
             this.driver = neo4j.driver(
                 process.env.NEO4J_URI || 'bolt://localhost:7687',
@@ -47,13 +48,13 @@ class MetacognitionEngine extends BrainRegion {
         if (!this.isInMemory && this.driver) {
             const session = this.driver.session();
             try {
-                const result = await session.executeRead(tx => 
+                const result = await session.executeRead(tx =>
                     tx.run('MATCH (n:MemoryNode) RETURN count(n) AS total, avg(n.entropy) AS avgEntropy')
                 );
                 const total = result.records[0].get('total').toNumber();
                 const avgEntropy = result.records[0].get('avgEntropy') || 0;
                 console.log(`[Metacognition] Graph Audit -> Nodes: ${total} | Avg Entropy: ${avgEntropy}`);
-                
+
                 // If the graph is too chaotic, trigger a global alert
                 if (avgEntropy > 0.8) {
                     await this.emit('cortex.entropy.critical', { avgEntropy, total });

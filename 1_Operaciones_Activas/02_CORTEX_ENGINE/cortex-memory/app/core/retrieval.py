@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from app.core.db import get_connection
 def search_memories(user_id, embedding, limit=5):
     conn = get_connection()

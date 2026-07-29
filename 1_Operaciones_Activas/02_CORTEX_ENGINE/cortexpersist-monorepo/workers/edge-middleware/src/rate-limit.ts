@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { CortexEnv } from './types';
 
 const RATE_LIMIT_WINDOW_S = 60;

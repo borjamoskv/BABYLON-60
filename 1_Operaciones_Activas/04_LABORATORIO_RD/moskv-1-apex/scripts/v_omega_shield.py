@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 import os
 import sys
@@ -64,19 +65,19 @@ def audit_connections(kill_violators=False):
         parts = line.split()
         if len(parts) < 9:
             continue
-        
+
         command = parts[0]
         pid = int(parts[1])
         connection_type = parts[4] # IPv4 or IPv6
         name = parts[8] # e.g. 127.0.0.1:4222 or *:53 or 104.18.23.41:443
-        
+
         # Extract IP/Host and Port
         match = re.match(r"^(.*?):(\d+|\*)$", name)
         if not match:
             continue
-        
+
         ip_host, port = match.groups()
-        
+
         # Check if local loopback or allowed network pattern
         is_whitelisted = False
         if ip_host == "*" or ip_host == "localhost":
@@ -86,12 +87,12 @@ def audit_connections(kill_violators=False):
                 if re.match(pattern, ip_host):
                     is_whitelisted = True
                     break
-        
+
         # Check if process itself is explicitly whitelisted for external calls
         if not is_whitelisted:
             if command.lower() in WHITELIST_PROCESSES:
                 is_whitelisted = True
-        
+
         if not is_whitelisted:
             violations += 1
             print(f"[V-OMEGA] VIOLATION: Process '{command}' (PID: {pid}) connected to '{name}' is not whitelisted.")
@@ -104,7 +105,7 @@ def audit_connections(kill_violators=False):
                     pass
                 except PermissionError:
                     print(f"[V-OMEGA] Error: Insufficient permissions to terminate PID {pid}.", file=sys.stderr)
-                    
+
     return violations
 
 if __name__ == "__main__":

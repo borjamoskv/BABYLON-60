@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use axum::{
     body::Body,
     http::{Response, StatusCode},
@@ -27,13 +28,13 @@ impl UpstreamProxy {
             Ok(resp) => {
                 let status = resp.status();
                 let bytes = resp.bytes().await.unwrap_or_default();
-                
+
                 let mut response = Response::builder()
                     .status(status);
-                
+
                 // Mapeo básico de headers de respuesta
                 response = response.header("content-type", "application/json");
-                
+
                 Ok(response.body(Body::from(bytes)).unwrap())
             }
             Err(e) => {

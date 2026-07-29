@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! Auto-generated from F# Domain Kernel via Causal Isomorphism Transpiler
 //! Trilingual Regime: Type definitions and poset stubs for strike_rs
 //! Author: borjamoskv

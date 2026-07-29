@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { AuditFinding } from './types';
 import { CortexClient } from './client';
 import type { CortexConfig } from './types';

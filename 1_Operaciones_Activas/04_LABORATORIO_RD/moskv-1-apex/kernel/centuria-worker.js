@@ -1,12 +1,13 @@
+// C5-REAL EXERGY CERTIFIED
 const { parentPort, workerData } = require('worker_threads');
 const { BrainRegion } = require('./brain-region');
 
 async function runCenturia() {
     const { regionName, specialistsCount } = workerData;
     const region = new BrainRegion(regionName);
-    
+
     await region.boot();
-    
+
     // Announce readiness to the main orchestrator
     parentPort.postMessage({ type: 'READY', regionName });
 
@@ -21,14 +22,14 @@ async function runCenturia() {
                     const emitTask = region.emit('cortex.entropy.high', {
                         entropy: entropyVal,
                         specialistId: `${regionName}-Spec-${j}`,
-                        content: { 
-                            directive: 'STRUCTURAL_MUTATION', 
-                            vector: [Math.random(), Math.random()] 
+                        content: {
+                            directive: 'STRUCTURAL_MUTATION',
+                            vector: [Math.random(), Math.random()]
                         }
                     });
                     promises.push(emitTask);
                 }
-                
+
                 // Wait for all emissions to finish
                 await Promise.all(promises);
                 console.log(`[${regionName}] All emissions complete. Posting DONE.`);

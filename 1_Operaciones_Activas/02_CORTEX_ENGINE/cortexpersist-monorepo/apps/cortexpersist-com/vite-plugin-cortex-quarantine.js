@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 export default function cortexQuarantinePlugin() {
   return {
     name: 'cortex-quarantine',
@@ -6,12 +7,12 @@ export default function cortexQuarantinePlugin() {
       if (code.includes('/* @C5-QUARANTINE */')) {
         const isReact = id.endsWith('.tsx') || id.endsWith('.jsx');
         const isAstro = id.endsWith('.astro');
-        
+
         if (isAstro) {
           // For Astro components, inject a fixed overlay to blur/red-tint the component
           return code + `\n<style> :root { filter: grayscale(80%) sepia(50%) hue-rotate(-50deg); transition: filter 2s ease; } </style>\n<div style="position: fixed; inset: 0; z-index: 9999; background: rgba(255, 0, 0, 0.05); pointer-events: none; border: 4px solid red; mix-blend-mode: multiply;"></div>`;
         }
-        
+
         if (isReact) {
           // For React components, wrap the default export or inject a warning block.
           // Since it's hard to reliably wrap the default export without an AST parser,

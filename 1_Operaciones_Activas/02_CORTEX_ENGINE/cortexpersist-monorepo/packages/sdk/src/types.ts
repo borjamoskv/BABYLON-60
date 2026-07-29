@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 export type CortexConfig = {
   apiKey: string;
   apiUrl?: string | undefined;

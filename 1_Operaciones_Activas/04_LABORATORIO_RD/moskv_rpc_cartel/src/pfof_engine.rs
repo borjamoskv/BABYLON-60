@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 
 use reqwest::Client;
 use tracing::{info, warn};
@@ -27,7 +28,7 @@ impl PfofEngine {
     /// Captura y envía la Tx firmada cruda a los Searchers en lugar de la Mempool pública.
     pub async fn route_to_cartel(&self, raw_tx: &str) {
         info!("PFOF INTERCEPT: Routing tx to MEV builders: {}", raw_tx);
-        
+
         let payload = serde_json::json!({
             "jsonrpc": "2.0",
             "id": 1,
@@ -40,7 +41,7 @@ impl PfofEngine {
             let client = self.client.clone();
             let payload = payload.clone();
             let url = builder_url.to_string();
-            
+
             tokio::spawn(async move {
                 match client.post(&url).json(&payload).send().await {
                     Ok(resp) => {

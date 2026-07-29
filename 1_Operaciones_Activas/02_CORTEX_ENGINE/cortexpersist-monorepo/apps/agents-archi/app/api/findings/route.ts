@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { NextResponse } from 'next/server';
 import { auditEmitter } from '@/lib/audit-emitter';
 import { OUROBOROS_FINDINGS } from '@/lib/findings';

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Moskv-1 Foundational Python Core Package
 """

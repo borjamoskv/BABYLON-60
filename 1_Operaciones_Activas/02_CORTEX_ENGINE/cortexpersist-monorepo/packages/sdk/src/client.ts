@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import type { CortexConfig, CortexEvent } from './types';
 import { Ed25519Signer } from './ed25519-signer';
 import { HashChain } from './hash-chain';

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 mod pfof_engine;
 mod proxy;
 mod router;
@@ -23,7 +24,7 @@ async fn main() {
     tracing_subscriber::fmt()
         .with_env_filter("info")
         .init();
-        
+
     info!("Iniciando MOSKV-1 APEX RPC Cártel (PFOF Router)...");
 
     let state = Arc::new(CartelState {
@@ -38,6 +39,6 @@ async fn main() {
     let listener = tokio::net::TcpListener::bind(BIND_ADDRESS).await.unwrap();
     info!("Escuchando tráfico de la red en {}", BIND_ADDRESS);
     info!("Enrutamiento benigno apuntando a {}", UPSTREAM_NODE);
-    
+
     axum::serve(listener, app).await.unwrap();
 }

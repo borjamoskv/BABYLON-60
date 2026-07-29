@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /**
  * Canonical redirect rules — enforces:
  * - www -> non-www (all domains)

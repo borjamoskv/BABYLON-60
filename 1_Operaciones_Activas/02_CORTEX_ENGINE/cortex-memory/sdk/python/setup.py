@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from setuptools import setup
 setup(
     name="cortex-sdk",

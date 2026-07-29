@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { etc, sign, getPublicKey } from '@noble/ed25519';
 import { sha512 } from '@noble/hashes/sha512';
 

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // @cortex/sdk — CortexPersist SDK
 export { CortexClient } from './client';
 export { AuditEmitter } from './audit-emitter';

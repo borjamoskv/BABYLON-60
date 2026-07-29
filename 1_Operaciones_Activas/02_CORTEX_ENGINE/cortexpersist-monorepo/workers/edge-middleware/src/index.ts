@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { handleCanonicalRedirects } from './canonical';
 import { injectSecurityHeaders } from './security-headers';
 import { injectTelemetryHeaders } from './telemetry';

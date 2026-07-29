@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 require('dotenv').config();
 const neo4j = require('neo4j-driver');
 
@@ -10,7 +11,7 @@ async function initializeGraph() {
 
     try {
         console.log('[Neo4j Init] Bootstrapping constraints and indexes...');
-        
+
         const constraints = [
             'CREATE CONSTRAINT memory_node_id IF NOT EXISTS FOR (m:MemoryNode) REQUIRE m.id IS UNIQUE',
             'CREATE CONSTRAINT brain_region_name IF NOT EXISTS FOR (r:BrainRegion) REQUIRE r.name IS UNIQUE',

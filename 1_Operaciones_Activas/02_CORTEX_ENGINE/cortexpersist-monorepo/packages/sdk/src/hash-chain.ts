@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { sha256 } from '@noble/hashes/sha256';
 import type { HashBlock } from './types';
 

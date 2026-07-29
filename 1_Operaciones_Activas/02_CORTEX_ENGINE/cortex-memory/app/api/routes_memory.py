@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from fastapi import APIRouter
 from app.services.memory_service import add_memory, query_memory, list_memories, query_memory_detailed
 router = APIRouter()
@@ -30,15 +31,15 @@ def chat(payload: dict):
     agent_id = payload.get("agent_id", "copilot_v1")
     message = payload.get("message", "")
     use_memory = payload.get("use_memory", True)
-    
+
     retrieved_memories = []
     if use_memory:
         retrieved_memories = query_memory_detailed(user_id, agent_id, message)
-    
+
     # Core mock logic to generate response based on memories
     response_text = ""
     msg_lower = message.lower()
-    
+
     if not use_memory:
         response_text = "I recommend starting with a simple FastAPI skeleton. (No memory context was provided to me, so I don't know your background or project preferences.)"
     else:
@@ -46,7 +47,7 @@ def chat(payload: dict):
         has_infra = any("infra" in m["content"].lower() or "systems" in m["content"].lower() for m in retrieved_memories)
         has_python = any("python" in m["content"].lower() or "rust" in m["content"].lower() for m in retrieved_memories)
         has_dislike = any("dislike" in m["content"].lower() or "long setup" in m["content"].lower() for m in retrieved_memories)
-        
+
         if "project" in msg_lower or "build" in msg_lower or "languages" in msg_lower or "prefer" in msg_lower:
             if has_infra or has_python:
                 response_text = "Based on your background as a senior infrastructure engineer and preference for Python/Rust, you should focus on building high-performance lock-free distributed systems and vector database indexing engines (using pgvector)."
@@ -83,7 +84,7 @@ def chat(payload: dict):
         stored_content = message
         if msg_lower.startswith("remember that "):
             stored_content = message[14:]
-        
+
         # Check if already exists to avoid duplicates
         existing = list_memories(user_id, agent_id)
         if not any(stored_content.lower() in ext["content"].lower() for ext in existing):

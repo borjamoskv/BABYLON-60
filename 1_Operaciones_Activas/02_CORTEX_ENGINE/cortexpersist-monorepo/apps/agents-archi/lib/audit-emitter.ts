@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { AuditEmitter } from '@cortex/sdk';
 
 const apiKey = process.env.CORTEX_API_KEY || 'dummy-build-key';

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as THREE from 'three';
 import gsap from 'gsap';
 
@@ -13,7 +14,7 @@ let followerX = 0, followerY = 0;
 window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    
+
     // Direct position for the tiny dot
     gsap.set(cursor, { x: mouseX, y: mouseY });
 });
@@ -90,7 +91,7 @@ const fragmentShader = `
 
     void main() {
         vec2 p = vUv;
-        
+
         // Liquid Zoom effect
         vec2 uv1 = p + (p - 0.5) * progress * 0.3;
         vec2 uv2 = p + (p - 0.5) * (1.0 - progress) * 0.3;
@@ -124,7 +125,7 @@ loadTextures().then(loadedTextures => {
 
     // Create a plane covering the entire screen
     const geometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
-    
+
     material = new THREE.ShaderMaterial({
         vertexShader,
         fragmentShader,
@@ -140,7 +141,7 @@ loadTextures().then(loadedTextures => {
 
     // Event listener for scroll to trigger transitions
     window.addEventListener('wheel', handleScroll);
-    
+
     // Optional: touch support
     let touchStartY = 0;
     window.addEventListener('touchstart', e => touchStartY = e.touches[0].clientY);
@@ -162,10 +163,10 @@ function handleScroll(e) {
 function nextSlide() {
     if (isAnimating || currentIndex === textures.length - 1) return;
     isAnimating = true;
-    
+
     let nextIndex = currentIndex + 1;
     material.uniforms.tex2.value = textures[nextIndex];
-    
+
     gsap.to(material.uniforms.progress, {
         value: 1,
         duration: 1.5,
@@ -182,14 +183,14 @@ function nextSlide() {
 function prevSlide() {
     if (isAnimating || currentIndex === 0) return;
     isAnimating = true;
-    
+
     let prevIndex = currentIndex - 1;
-    // To reverse, we swap the logic or just load the prev into tex2 
-    // and animate progress from 1 to 0. 
+    // To reverse, we swap the logic or just load the prev into tex2
+    // and animate progress from 1 to 0.
     material.uniforms.tex2.value = textures[currentIndex];
     material.uniforms.tex1.value = textures[prevIndex];
     material.uniforms.progress.value = 1;
-    
+
     gsap.to(material.uniforms.progress, {
         value: 0,
         duration: 1.5,

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // Shared UI components across all CortexPersist apps
 export { CortexBadge } from './components/CortexBadge';
 export { OuroborosBadge } from './components/OuroborosBadge';

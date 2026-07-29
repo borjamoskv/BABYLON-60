@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from app.core.db import get_connection
 from app.core.embeddings import embed
 def add_memory(user_id, agent_id, content):

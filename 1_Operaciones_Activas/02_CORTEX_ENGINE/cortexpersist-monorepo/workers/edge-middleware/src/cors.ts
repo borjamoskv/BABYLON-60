@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 const ALLOWED_ORIGINS = new Set([
   'https://cortexpersist.com',
   'https://cortexpersist.dev',

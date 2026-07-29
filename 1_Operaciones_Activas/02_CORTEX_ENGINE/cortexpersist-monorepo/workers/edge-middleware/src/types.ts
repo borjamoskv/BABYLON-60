@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 export interface CortexEnv {
   CORTEX_KV: KVNamespace;
   CORTEX_ENV: string;
