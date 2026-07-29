@@ -27,7 +27,11 @@
     "upgrade": "remotion upgrade",
     "lint": "eslint src && tsc"
   },
-  "sideEffects": [
+    "sideEffects": [
     "*.css"
-  ]
+  ],
+  "overrides": {
+    "brace-expansion": "^5.0.8",
+    "@eslint/plugin-kit": "^0.3.4"
+  }
 }

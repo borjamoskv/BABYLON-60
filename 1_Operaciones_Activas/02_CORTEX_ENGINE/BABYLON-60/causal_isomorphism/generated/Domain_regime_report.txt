@@ -3,9 +3,9 @@
 ║     Trilingual Regime: F# → {Solidity, Rust}              ║
 ╚══════════════════════════════════════════════════════════════╝
 
-Source:    /Users/borjafernandezangulo/BABYLON-60/domain_kernel/IRPAutomata.fs
-Hash:      e9f78b444ca42f825e69780b3cf86b652c2f770e29502badb3588bafdb0f5803
-Timestamp: 2026-07-27T14:57:55.269103+00:00
+Source:    /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/domain_kernel/IRPAutomata.fs
+Hash:      929ab702fd9d004c12c33991116c6bc11a2d796dfe9d5f0fbc593b48b11a7137
+Timestamp: 2026-07-29T18:54:31.321534+00:00
 Status:    ❌ REGIME VIOLATIONS DETECTED
 
 ── IR Module ──
@@ -56,5 +56,5 @@ Permitted functions:
   ✅ getPath
   ✅ runVerificationSuite
 
-Solidity output: /Users/borjafernandezangulo/BABYLON-60/causal_isomorphism/generated/DomainAnchor.sol
-Rust output:     /Users/borjafernandezangulo/BABYLON-60/causal_isomorphism/generated/domain.rs
+Solidity output: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/causal_isomorphism/generated/DomainAnchor.sol
+Rust output:     /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/causal_isomorphism/generated/domain.rs

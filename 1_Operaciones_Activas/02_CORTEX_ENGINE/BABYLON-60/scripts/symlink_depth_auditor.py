@@ -12,7 +12,9 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).parents[1]
 
-def audit_symlinks(root: Path = REPO_ROOT) -> list[tuple[Path, str]]:
+def audit_symlinks(root: Path | None = None) -> list[tuple[Path, str]]:
+    if root is None:
+        root = REPO_ROOT
     violations = []
     for path in root.rglob("*"):
         if path.is_symlink():
@@ -29,7 +31,7 @@ def audit_symlinks(root: Path = REPO_ROOT) -> list[tuple[Path, str]]:
 
 def main() -> int:
     print("🔍 Auditing Symbolic Link Depths (INV_C5_12)...")
-    violations = audit_symlinks()
+    violations = audit_symlinks(REPO_ROOT)
     if violations:
         print(f"🔴 Found {len(violations)} INV_C5_12 violations:", file=sys.stderr)
         for path, target in violations:
