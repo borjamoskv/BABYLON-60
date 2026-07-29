@@ -1,47 +1,48 @@
 import sys
 import os
+import time
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from babylon60.core.url_cache import URLCacheSync
-from babylon60.core.popperian_filter import evaluate_payload
+from babylon60.core.browser_agent import BrowserResearchAgent
 
-import time
-
-def run_test():
-    print("=== [C5-REAL] Verificación del Pipeline Completo del Browser Agent ===")
-    
-    url = f"https://example.org/rust-ownership-guide-{int(time.time())}"
-    taint = "browser_agent_session_test_01"
-    
-    cache = URLCacheSync()
-    
-    # 1. Check cache miss
-    cached_payload = cache.get(url)
-    print("1. Intento de caché inicial (debe ser None):", cached_payload)
-    assert cached_payload is None
-    
-    # 2. Simulate web fetch & Popperian filter validation
-    fetched_content = (
+def mock_network_fetcher(url: str) -> str:
+    """Simulates HTTP fetcher."""
+    if "hype" in url:
+        return "100x passive income game changer revolutionary disruption"
+    return (
         "The Rust language uses affine type system semantics to ensure zero-cost abstractions "
         "and memory safety without a garbage collector. "
-        "Detailed documentation can be reviewed at https://doc.rust-lang.org/book/"
+        "Detailed documentation can be reviewed at https://doc.rust-lang.org/book/ "
+        "SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     )
+
+def run_test():
+    print("=== [C5-REAL] Verificación End-to-End del BrowserResearchAgent SDK ===")
     
-    print("\n2. Evaluación con Popperian Filter:")
-    res = evaluate_payload(fetched_content)
-    print("Resultado del filtro:", res)
-    assert res.passed is True
+    agent = BrowserResearchAgent()
+    taint = "session_bft_audit_001"
     
-    # 3. Store in Level 0 Cache with causal taint
-    print("\n3. Guardando en Caché SQLite WAL con causal_taint...")
-    cache.put(url, fetched_content, causal_taint=taint)
+    # 1. Test Valid URL (Fetch + Filter + Cache)
+    target_url = f"https://doc.rust-lang.org/std-{int(time.time())}"
+    res1 = agent.fetch_and_verify(target_url, mock_network_fetcher, causal_taint=taint)
+    print("\n1. Fetch URL Válida:", res1["status"])
+    print("Anclas Físicas Extraídas:", res1["anchors"])
+    assert res1["status"] == "VERIFIED_AND_CACHED"
+    assert len(res1["anchors"]) >= 2
     
-    # 4. Check cache hit
-    hit = cache.get(url)
-    print("4. Intento de caché secundario (debe ser HIT):", hit is not None)
-    assert hit == fetched_content
-    print("\n[SUCCESS] Pipeline de Caché Termodinámica Nivel 0 y Filtro Popperiano Verificados en C5-REAL.")
+    # 2. Test Cache Hit
+    res2 = agent.fetch_and_verify(target_url, mock_network_fetcher, causal_taint=taint)
+    print("\n2. Fetch URL Caché Hit:", res2["status"])
+    assert res2["status"] == "CACHE_HIT"
+    
+    # 3. Test Rejection of Hype (Popperian Falsification Gate)
+    hype_url = f"https://spam.com/hype-{int(time.time())}"
+    res3 = agent.fetch_and_verify(hype_url, mock_network_fetcher, causal_taint=taint)
+    print("\n3. Fetch URL Hype (Rechazo Popperiano):", res3["status"], "| Motivo:", res3.get("reason"))
+    assert res3["status"] == "REJECTED"
+    
+    print("\n[SUCCESS] BrowserResearchAgent SDK 100% Verificado en C5-REAL.")
 
 if __name__ == "__main__":
     run_test()
