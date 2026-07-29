@@ -5,7 +5,7 @@
 import os
 import time
 import pytest
-from babylon60.license_manager import (
+from license_manager import (
     generate_license_key,
     verify_license_key,
     LicenseStatus,
@@ -82,3 +82,52 @@ def test_ledger_persist_license_integration(tmp_path: object) -> None:
     assert persist.license_status.is_valid is True
     assert persist.license_status.owner == "fintech_lab"
     persist.close()
+
+
+def test_community_tier_throughput_limit(tmp_path: object) -> None:
+    """Verifica que el tier community falla rápido al intentar persistir > 100 nodos."""
+    from core_graph_ledger import GraphLedger, core_calc_sha256
+
+    db_file = str(tmp_path) + "/test_community_limit.db"  # type: ignore[operator]
+    persist = LedgerPersist(db_file)
+
+    ledger = GraphLedger()
+    curr_parent = ledger.genesis_id
+    for i in range(101):
+        node = ledger.mut_append_node(
+            parent_id=curr_parent,
+            claim=f"Node {i}",
+            payload_hash=core_calc_sha256(f"payload_{i}"),
+        )
+        curr_parent = node.node_id
+
+    with pytest.raises(ValueError, match="Community tier limits batch inserts to 100 nodes"):
+        persist.io_persist_ledger(ledger)
+
+    persist.close()
+
+
+def test_commercial_tier_unbounded_throughput(tmp_path: object) -> None:
+    """Verifica que un tier comercial permite persistir > 100 nodos sin restricciones."""
+    from core_graph_ledger import GraphLedger, core_calc_sha256
+
+    db_file = str(tmp_path) + "/test_commercial_unbounded.db"  # type: ignore[operator]
+    future_exp = int(time.time()) + 86400
+    key = generate_license_key(owner="enterprise_corp", tier="enterprise", expires_at=future_exp)
+    persist = LedgerPersist(db_file, license_key=key)
+
+    ledger = GraphLedger()
+    curr_parent = ledger.genesis_id
+    for i in range(105):
+        node = ledger.mut_append_node(
+            parent_id=curr_parent,
+            claim=f"Node {i}",
+            payload_hash=core_calc_sha256(f"payload_{i}"),
+        )
+        curr_parent = node.node_id
+
+    inserted = persist.io_persist_ledger(ledger)
+    assert inserted == 105
+    assert persist.io_node_count() == 105
+    persist.close()
+

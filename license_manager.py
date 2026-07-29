@@ -1,15 +1,106 @@
 # license_manager.py
-# Root alias re-exporting from babylon60.license_manager
-from babylon60.license_manager import (
-    LICENSE_SECRET_SALT,
-    LicenseStatus,
-    generate_license_key,
-    verify_license_key,
-)
+# Verification Protocol: Cryptographic / HMAC License Manager for Cortex Persist
+# Authorship: Telmo Dinámico de Moskv (borjamoskv)
 
-__all__ = [
-    "LICENSE_SECRET_SALT",
-    "LicenseStatus",
-    "generate_license_key",
-    "verify_license_key",
-]
+import os
+import hmac
+import hashlib
+import time
+from typing import NamedTuple
+
+# Secret salt for verifying structural hash of commercial keys
+LICENSE_SECRET_SALT: bytes = b"BABYLON60_CORTEX_PERSIST_SOVEREIGN_SECRET_2026"
+
+
+class LicenseStatus(NamedTuple):
+    is_valid: bool
+    tier: str
+    owner: str
+    expires_at: int
+    message: str
+
+
+def generate_license_key(owner: str, tier: str, expires_at: int) -> str:
+    """
+    Pre: non-empty owner, valid tier str, future unix timestamp
+    Exec: Generate HMAC-SHA256 signature payload formatted as owner:tier:expires_at:signature
+    Post: returns deterministic license key string
+    """
+    assert len(owner) > 0, "Fail-fast: owner cannot be empty"
+    assert tier in ("pro", "enterprise"), f"Fail-fast: invalid tier '{tier}'"
+    assert expires_at > 0, "Fail-fast: expires_at must be positive int"
+
+    payload = f"{owner}:{tier}:{expires_at}"
+    sig = hmac.new(LICENSE_SECRET_SALT, payload.encode("utf-8"), hashlib.sha256).hexdigest()[:16]
+    return f"{payload}:{sig}"
+
+
+def verify_license_key(key: str | None = None) -> LicenseStatus:
+    """
+    Pre: key string or None (if None, reads CORTEX_LICENSE_KEY env var)
+    Exec: validate structural integrity and HMAC signature
+    Post: returns LicenseStatus tuple
+    """
+    if key is None:
+        key = os.getenv("CORTEX_LICENSE_KEY", "").strip()
+
+    if not key:
+        return LicenseStatus(
+            is_valid=False,
+            tier="community",
+            owner="sovereign_community",
+            expires_at=0,
+            message="Operating under Sovereign Community License (Free/Non-commercial).",
+        )
+
+    parts = key.split(":")
+    if len(parts) != 4:
+        return LicenseStatus(
+            is_valid=False,
+            tier="invalid",
+            owner="unknown",
+            expires_at=0,
+            message="Fail-fast: Invalid license key structure.",
+        )
+
+    owner, tier, exp_str, sig = parts
+    try:
+        expires_at = int(exp_str)
+    except ValueError:
+        return LicenseStatus(
+            is_valid=False,
+            tier="invalid",
+            owner="unknown",
+            expires_at=0,
+            message="Fail-fast: Invalid license expiration format.",
+        )
+
+    payload = f"{owner}:{tier}:{exp_str}"
+    expected_sig = hmac.new(LICENSE_SECRET_SALT, payload.encode("utf-8"), hashlib.sha256).hexdigest()[:16]
+
+    if not hmac.compare_digest(sig, expected_sig):
+        return LicenseStatus(
+            is_valid=False,
+            tier="invalid",
+            owner=owner,
+            expires_at=expires_at,
+            message="Fail-fast: Invalid cryptographic signature for license key.",
+        )
+
+    current_time = int(time.time())
+    if expires_at < current_time:
+        return LicenseStatus(
+            is_valid=False,
+            tier=tier,
+            owner=owner,
+            expires_at=expires_at,
+            message=f"License expired at unix timestamp {expires_at}.",
+        )
+
+    return LicenseStatus(
+        is_valid=True,
+        tier=tier,
+        owner=owner,
+        expires_at=expires_at,
+        message=f"Valid commercial license verified for {owner} [{tier.upper()}].",
+    )
