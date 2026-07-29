@@ -121,7 +121,6 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 ### ABFT Shared Memory Zero-Copy Constraint (iceoryx2 v0.3.0)
 - **INV_C5_ABFT_IPC:** When implementing Asynchronous BFT inside a single-node hypervisor to satisfy `INV_C5_18` without socket exhaustion, use `iceoryx2` zero-copy shared memory. For `v0.3.0+`, initialization MUST flow directly through `zero_copy::Service::new(&service_name).publish_subscribe().open_or_create::<T>()?` with `.publisher().create()?` and `.subscriber().create()?`. Importing deprecated `node::NodeBuilder` or `service::ipc` modules directly is prohibited.
 
-
-
-
-
+### Default Argument Binding Invariant (Prevención de Fuga de Mocks)
+- **INV_C5_MOCKING_01:** Never use global configuration constants (e.g., `REPO_ROOT`, `DB_PATH`) as default arguments in function signatures (`def func(root=REPO_ROOT):`). In Python, default arguments bind at import time. This makes it impossible for `pytest` to cleanly mock these constants at runtime, causing tests to leak out of the sandbox and scan the physical disk. 
+  - **Solución:** Use `None` as the default and resolve it at runtime (`def func(root=None): if root is None: root = REPO_ROOT`), or explicitly pass the constant from the calling function.

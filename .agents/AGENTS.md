@@ -128,3 +128,7 @@
 
 ### macOS Python Environment (Externally Managed)
 - **RULE_MACOS_ENV_01:** Never use `pip install` directly on the system Python, as macOS environments are externally managed (PEP 668). In projects utilizing `uv` (like BABYLON-60), always use `uv add <package>` or `uv pip install <package>` to install dependencies, or explicitly source the `.venv` before running module installations. Avoid using `--break-system-packages`.
+
+### Default Argument Binding Invariant (Prevención de Fuga de Mocks)
+- **INV_C5_MOCKING_01:** Never use global configuration constants (e.g., `REPO_ROOT`, `DB_PATH`) as default arguments in function signatures (`def func(root=REPO_ROOT):`). In Python, default arguments bind at import time. This makes it impossible for `pytest` to cleanly mock these constants at runtime, causing tests to leak out of the sandbox and scan the physical disk. 
+  - **Solución:** Use `None` as the default and resolve it at runtime (`def func(root=None): if root is None: root = REPO_ROOT`), or explicitly pass the constant from the calling function.

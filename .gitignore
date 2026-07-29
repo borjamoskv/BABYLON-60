@@ -34,3 +34,10 @@ fuzz_test_*.b60
 test_*.b60
 .DS_Store
 *.log
+
+# Entropy Purge — Prevent Re-Tracking (2026-07-29)
+.tmp_yt/
+yt-dlp
+*.db-wal
+*.db-shm
+*.cortex_thermal_lock
