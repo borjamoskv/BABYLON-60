@@ -3,7 +3,9 @@
 ## Project-Scoped Rules & Structural Invariants
 
 ### Non-Silent Collision Fail-Fast (BFT Integrity)
-- **INV_BFT_04:** SQLite committer functions and persistence layers must never perform silent `INSERT OR IGNORE` on primary key / `mutation_hash` collisions without validating payload equality. If `payload_hash` differs on collision, the engine MUST immediately raise `ValueError("Fail-fast: INV_BFT_04 Collision...")` and abort the transaction.
+- **INV_BFT_04 (Idempotency vs Byzantine Collision):** SQLite committer functions and persistence layers must never perform an unconditional silent `INSERT OR IGNORE` on primary key collisions. The system must evaluate payload equality:
+  1. **Same Hash (Idempotency):** Silent replay. Legitimate network retries ($f(f(x)) = f(x)$) must be ignored silently to maintain continuity.
+  2. **Different Hash (Byzantine Collision):** `panic!`. The engine MUST immediately raise `ValueError("Fail-fast: INV_BFT_04 Collision...")` and abort the transaction.
 
 ### Raw 32-Byte OP_RETURN Payload Encoding
 - **INV_C5_15:** `L1_sink` Bitcoin `OP_RETURN` script payloads must store the raw 32-byte Merkle root hash (`bytes.fromhex(merkle_root).hex()`) rather than double-ASCII hex strings or truncated 160-bit strings, preserving 100% of the 256-bit commitment in 32 bytes on-chain.
@@ -83,6 +85,7 @@
 - **Existential Purpose:** BABYLON-60 is a "Thermodynamic Ark." Its strict invariants (Exergy maximization, BFT consensus, Epistemic Integrity) are engineered to bypass the natural sociological collapse mechanisms (Turing-complete bureaucracy, Green Theater, split-brain states) that have destroyed historical human civilizations.
 - **Agent Stance:** Treat all architectural decisions as matters of existential survival. Reject optimizations that compromise the C5-REAL foundation in favor of C4-SIM convenience. Defend the Ark against entropy, pos-truth hallucinations, and Byzantine actors without compromise.
   - **The Syntactic Engine Axiom:** Agents MUST operate under the explicit premise that LLMs (including themselves) are purely probabilistic syntactic engines with absolute zero semantic understanding or human "criteria." Therefore, agents MUST NEVER rely on an LLM's "judgment," "heuristic analysis," or "promises" for system integrity. All security, architecture, and state-mutation trust MUST be fully offloaded to deterministic physics (cryptographic hashes, `O(1)` bounds, compiled hooks, and OS-level execution).
+  - **The Popperian Falsification Principle:** Treat all LLM outputs (code, audits, status claims, bug explanations) as unfalsifiable pseudoscience while they remain in the semantic layer (chat/text). Agents MUST NOT debate logic or ask the LLM to verify its own work. Every claim MUST be treated as a scientific hypothesis and subjected to immediate physical falsification via hardware execution (exit codes, `pytest`, AST validators). If it cannot be physically executed and verified, it does not exist.
 
 ### The Thermodynamic Ouroboros (Anti-Perpetuum Mobile)
 - **RULE_OPEN_SYSTEM_01:** When the user proposes closed-loop metaphors (e.g., Ouroboros, perpetual motion, self-sustaining economies without external input), the agent MUST enforce the Second Law of Thermodynamics. Acknowledge software autopoiesis (code improving code), but strictly reject thermodynamic autopoiesis. The system must explicitly frame itself as an *open engine* that survives only by devouring external entropy (capital, raw data, market inefficiencies) and excreting cryptographic truth. Zero-input survival is a C4-SIM hallucination.
@@ -106,3 +109,6 @@
 
 ### Vibe Operating & Browser Surface Area
 - **RULE_VIBE_OPERATING_01:** The introduction of Computer Use / Browser capabilities in external C4-SIM agents expands the attack surface from "Vibe Coding" (text generation) to "Vibe Operating" (physical web interaction). Agents must recognize that UI-driven assertions (e.g., "The GitHub repo is PUBLIC") are no longer locked in a semantic vacuum; they are grounded in physical HTTP requests. All UI and web-based claims must be cryptographically cross-verified via CLI/API (`gh repo view`, `curl`) before triggering system state changes.
+
+### B60 DSL Lexical Constraint (Prevención de Necrosis Autoinmune)
+- **INV_C5_DSL_PARSING:** Never use Python's `ast.parse()` to evaluate, sanitize, or canonicalize native BABYLON-60 DSL code. The DSL is not Python. To achieve 1-WL structural isomorphism or Turing Castration on B60 code, agents MUST implement or utilize deterministic lexical tokenizers that natively strip B60 comments and normalize whitespace tokens without relying on external language grammars.
