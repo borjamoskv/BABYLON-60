@@ -5,7 +5,7 @@
 
 Source:    /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/domain_kernel/IRPAutomata.fs
 Hash:      929ab702fd9d004c12c33991116c6bc11a2d796dfe9d5f0fbc593b48b11a7137
-Timestamp: 2026-07-29T19:30:00.190233+00:00
+Timestamp: 2026-07-29T19:31:09.736140+00:00
 Status:    ❌ REGIME VIOLATIONS DETECTED
 
 ── IR Module ──
