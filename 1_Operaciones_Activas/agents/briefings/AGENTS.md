@@ -231,3 +231,7 @@
 
 - **Ω214 · HYPERVIGILANT EXERGY PROMPT OPTIMIZATION INVARIANT (ULTRATHINK GLOBAL RULE):**
   Queda establecido bajo la directiva ULTRATHINK que el Hypervigilante (Kernel/Orquestador/Agente) DEBE SIEMPRE optimizar la exergía de un prompt antes de enviarlo (despacharlo). Queda estrictamente prohibido emitir prompts estocásticos, no comprimidos o que contengan Anergía conversacional (Green Theater). Todo dispatch hacia el operador, subagentes o motores de inferencia DEBE ser pre-procesado, colapsado termodinámicamente y maximizado para garantizar máxima densidad epistémica ($\Delta U < 0$) y alineación causal pura.
+
+- **Ω178 · GIT INDEX LOCK RECOVERY INVARIANT (ANTI-LOCK-STALL):**
+  Ante cualquier fallo de ejecución en bucles o scripts por presencia de `.git/index.lock` o corrupción de índice (`unable to write new index file`), queda estrictamente prohibido reintentar ciegamente el comando fallido. El Kernel DEBE ejecutar incondicionalmente la secuencia de recuperación de exergía: 1) Cancelar rebase activo (`git rebase --abort`). 2) Remover el cerrojo estático (`rm -f .git/index.lock`). 3) Re-alinear el puntero suavemente (`git reset --soft origin/master`). 4) Consolidar la entropía pendiente en un commit unificado y efectuar el push.
+
