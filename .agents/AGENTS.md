@@ -11,7 +11,7 @@
 - **INV_C5_15:** `L1_sink` Bitcoin `OP_RETURN` script payloads must store the raw 32-byte Merkle root hash (`bytes.fromhex(merkle_root).hex()`) rather than double-ASCII hex strings or truncated 160-bit strings, preserving 100% of the 256-bit commitment in 32 bytes on-chain.
 
 ### Sovereign Dual-Licensing Invariant
-- **INV_C5_17:** Every component, service, model, database, app, and subagent workflow in the BABYLON-60 ecosystem MUST be 100% free, open-source, and sovereign for individuals, independent developers, and non-commercial usage.
+- **INV_C5_17:** Every component, service, model, database, app, and subagent workflow in the BABYLON-60 ecosystem MUST be 100% free, open-source, and sovereign for individuals, independent developers, and non-commercial usage. Sovereign Community mode enforces thermodynamic throughput limits (e.g. batch inserts capped at N <= 100 nodes in LedgerPersist). Commercial/Enterprise exploitation requires explicit commercial licensing verified via HMAC CORTEX_LICENSE_KEY (license_manager.py), unlocking unbounded BFT throughput.
 
 ### Zero-Worktree Swarm Scaling (Prevención de ENOSPC)
 - **INV_C5_18:** For large parallel agent swarms ($N \ge 10$), creating physical disk Git Worktrees that consume storage and trigger ENOSPC is strictly prohibited. Swarm scaling must use in-memory AgencyHypervisor multi-tenant handles and single-writer BFT actors.

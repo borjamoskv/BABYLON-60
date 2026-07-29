@@ -112,7 +112,7 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 - **POLISHER_INVARIANT:** Any commit automatically rewritten by the polisher daemon must log a `polisher_success` event in the ledger with a monotonic `lamport_t`. Failure to log must abort the push.
 
 ### Sovereign Dual-Licensing Invariant (Gratis para la Comunidad, Licencia para Corporaciones)
-- **INV_C5_17:** Every component, service, model, database, app (including BabylonMail), and subagent workflow in the BABYLON-60 ecosystem MUST be 100% free, open-source, and sovereign for individuals, independent developers, and non-commercial usage. Commercial, corporate, or enterprise exploitation by mega-corporations is strictly restricted and requires explicit commercial licensing, enterprise agreements, and contributions back to the sovereign ecosystem.
+- **INV_C5_17:** Every component, service, model, database, app (including BabylonMail), and subagent workflow in the BABYLON-60 ecosystem MUST be 100% free, open-source, and sovereign for individuals, independent developers, and non-commercial usage. Sovereign Community mode enforces thermodynamic throughput limits (e.g. batch inserts capped at N <= 100 nodes in LedgerPersist). Commercial, corporate, or enterprise exploitation requires explicit commercial licensing verified via HMAC CORTEX_LICENSE_KEY (license_manager.py), unlocking unbounded BFT throughput.
 
 
 ### Zero-Worktree Swarm Scaling (Prevención de ENOSPC)
