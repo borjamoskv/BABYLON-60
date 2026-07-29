@@ -118,6 +118,10 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 ### Epistemic Integrity in Ledger Attestation
 - **INV_INGESTA_08:** Una atestación con tasa de confirmación 100% se marca UNBACKED por construcción. El verificador debe poder perder. La atestación sin evidencia citable (cadenas verbatim extraídas de la fuente primaria) es aserción con adorno. No se admite teatro de simulación: C4-SIM jamás debe presentarse como C5-REAL.
 
+### ABFT Shared Memory Zero-Copy Constraint (iceoryx2 v0.3.0)
+- **INV_C5_ABFT_IPC:** When implementing Asynchronous BFT inside a single-node hypervisor to satisfy `INV_C5_18` without socket exhaustion, use `iceoryx2` zero-copy shared memory. For `v0.3.0+`, initialization MUST flow directly through `zero_copy::Service::new(&service_name).publish_subscribe().open_or_create::<T>()?` with `.publisher().create()?` and `.subscriber().create()?`. Importing deprecated `node::NodeBuilder` or `service::ipc` modules directly is prohibited.
+
+
 
 
 

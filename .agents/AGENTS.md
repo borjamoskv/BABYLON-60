@@ -120,5 +120,5 @@
 ### LogOP Absolute Veto Invariant (Anti-Polarization)
 - **INV_BFT_LOGOP:** When aggregating heuristic probabilities from a Bayesian Swarm (multiple BFT agents), the system MUST use Logarithmic Opinion Pooling (LogOP, geometric weighted mean) rather than Linear Pooling. This ensures a strict mathematical topological boundary: if any expert assigns a strict $P=0$ to a hypothesis (an Absolute Veto based on falsification), the aggregate pool mathematically collapses to $0$, overriding any Byzantine "tyranny of the masses" attempting to force a hallucinated consensus.
 
-### ABFT Shared Memory NodeBuilder Constraint (iceoryx2)
-- **INV_C5_ABFT_IPC:** When implementing Asynchronous BFT inside a single-node hypervisor to satisfy `INV_C5_18` without socket exhaustion, use `iceoryx2` zero-copy shared memory. Note that for `v0.3.0+`, initialization MUST flow through `NodeBuilder::new().create::<ipc::Service>()?.service_builder(...)`. Statically instantiating services directly is deprecated and will fail type checks.
+### ABFT Shared Memory Zero-Copy Constraint (iceoryx2 v0.3.0)
+- **INV_C5_ABFT_IPC:** When implementing Asynchronous BFT inside a single-node hypervisor to satisfy `INV_C5_18` without socket exhaustion, use `iceoryx2` zero-copy shared memory. For `v0.3.0+`, initialization MUST flow directly through `zero_copy::Service::new(&service_name).publish_subscribe().open_or_create::<T>()?` with `.publisher().create()?` and `.subscriber().create()?`. Importing deprecated `node::NodeBuilder` or `service::ipc` modules directly is prohibited.
