@@ -46,7 +46,7 @@ def _execute_sync(source_code: str, global_ctx: dict) -> dict:
         raise SecurityViolationException(f"AST Syntax Error: {e}") from e
 
     # Compilation
-    compiled_code = compile(tree, filename="<jit_ast>", mode="exec")
+    _ = compile(tree, filename="<jit_ast>", mode="exec")
 
     # Isolated Execution Environment
     local_env: dict[str, Any] = {}

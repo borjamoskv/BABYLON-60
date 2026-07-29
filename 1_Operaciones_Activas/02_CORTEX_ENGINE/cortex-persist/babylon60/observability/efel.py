@@ -1,6 +1,7 @@
 # [C5-REAL] Exergy-Maximized
 from collections.abc import Callable
 from dataclasses import dataclass
+from decimal import Decimal
 from typing import Any
 
 import numpy as np
@@ -100,4 +101,4 @@ def efel_priority(
         task_stats.exergy_mean - variance_penalty - (1.0 - semantic_risk) * semantic_weight
     ) / (task_stats.runtime_mean + 1e-6)
 
-    return float(score * task_stats.confidence)
+    return Decimal(str(score * task_stats.confidence))

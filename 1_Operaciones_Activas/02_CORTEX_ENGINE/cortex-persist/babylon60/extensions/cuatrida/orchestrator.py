@@ -4,6 +4,7 @@ import logging
 import subprocess
 import time
 from datetime import datetime, timezone
+from decimal import Decimal
 from pathlib import Path
 from typing import Any
 
@@ -96,7 +97,7 @@ class CuatridaOrchestrator:
         Dimension C: The Consul of Honor checks for 130/100 standards.
         """
         scan_result = self.mejoralo.scan(project, path)
-        self.metrics.aesthetic_honor = float(scan_result.score)
+        self.metrics.aesthetic_honor = Decimal(str(scan_result.score))
         is_honorable = scan_result.score >= 90
         await self.log_decision(
             project=project,

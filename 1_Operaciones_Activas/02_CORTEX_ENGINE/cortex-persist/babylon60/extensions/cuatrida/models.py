@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from decimal import Decimal
 from enum import Enum
 from typing import Any
 
@@ -24,7 +25,7 @@ class CuatridaMetrics:
     decision_count: int = 0
 
     # Dimension C: Aesthetic Sovereignty
-    aesthetic_honor: float = 100.0  # MEJORAlo score baseline
+    aesthetic_honor: Decimal = Decimal("100.0")  # MEJORAlo score baseline
     entropy_density: float = 0.0
 
     # Dimension D: Ethical Management

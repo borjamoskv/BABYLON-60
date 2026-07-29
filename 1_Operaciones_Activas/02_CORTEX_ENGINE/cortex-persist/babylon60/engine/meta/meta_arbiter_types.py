@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import time
 from dataclasses import dataclass, field
+from decimal import Decimal
 from enum import Enum, auto
 from typing import Any
 
@@ -55,7 +56,7 @@ class ConflictPair:
 
     layer_a: LayerID
     layer_b: LayerID
-    divergence: float  # |score_a - score_b|
+    divergence: Decimal  # |score_a - score_b|
     description: str
 
 

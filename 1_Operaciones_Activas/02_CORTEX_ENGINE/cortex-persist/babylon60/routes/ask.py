@@ -17,6 +17,7 @@ Gracefully returns 503 if no LLM provider is configured.
 
 import json
 import logging
+from decimal import Decimal
 
 from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse, StreamingResponse
@@ -286,7 +287,7 @@ async def ask_stream(
     async def event_generator():
         # First send the sources as a metadata event (optional but useful)
         sources_data = [
-            {"id": r.fact_id, "score": float(r.score), "project": r.project} for r in results
+            {"id": r.fact_id, "score": Decimal(str(r.score)), "project": r.project} for r in results
         ]
         yield f"data: {json.dumps({'type': 'sources', 'data': sources_data})}\n\n"
 

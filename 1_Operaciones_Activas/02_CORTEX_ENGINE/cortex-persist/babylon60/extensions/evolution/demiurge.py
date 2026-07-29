@@ -91,9 +91,10 @@ class DemiurgeCompiler:
                     "code": generated_code,
                 }
 
-            import subprocess
-            import tempfile
             import os
+            import subprocess
+            import sys
+            import tempfile
 
             wrapped_code = generated_code + "\n\nimport asyncio\nif 'execute_skill' in locals():\n    print(asyncio.run(execute_skill()))\nelse:\n    print('__MISSING_EXECUTE_SKILL__')\n"
 
@@ -148,40 +149,31 @@ class DemiurgeCompiler:
             # Phase 6: Run the skill
             result = stdout
 
-                # Assign a base utility score
-                utility = 0.9 if execution_time < 2.0 else 0.6
+            # Assign a base utility score
+            utility = 0.9 if execution_time < 2.0 else 0.6
 
-                # Phase 7-9: Crystallization (Ledger persistence)
-                await self.engine.store(
-                    project=project_scope,
-                    fact_type="demiurge:bridge",
-                    content=f"Successfully forged and executed skill for: {intent}",
-                    tags=["demiurge", "skill", "autopoiesis", "bridge"],
-                    source="agent:demiurge",
-                    meta={
-                        "code": generated_code,
-                        "execution_time": execution_time,
-                        "result": str(result),
-                        "utility": utility,
-                    },
-                )
-
-                return {
-                    "status": "SUCCESS",
-                    "result": result,
-                    "time": execution_time,
+            # Phase 7-9: Crystallization (Ledger persistence)
+            await self.engine.store(
+                project=project_scope,
+                fact_type="demiurge:bridge",
+                content=f"Successfully forged and executed skill for: {intent}",
+                tags=["demiurge", "skill", "autopoiesis", "bridge"],
+                source="agent:demiurge",
+                meta={
+                    "code": generated_code,
+                    "execution_time": execution_time,
+                    "result": str(result),
                     "utility": utility,
-                    "code": generated_code,
-                }
+                },
+            )
 
-            except (ValueError, TypeError, OSError, KeyError) as run_err:
-                await self._record_ghost(intent, generated_code, str(run_err), 0.2)
-                return {
-                    "status": "FAILED",
-                    "reason": f"Runtime Exception: {run_err}",
-                    "utility": 0.2,
-                    "code": generated_code,
-                }
+            return {
+                "status": "SUCCESS",
+                "result": result,
+                "time": execution_time,
+                "utility": utility,
+                "code": generated_code,
+            }
 
         except Exception as e:  # noqa: BLE001
             logger.debug("Ghost recorded: %s", intent[:30])

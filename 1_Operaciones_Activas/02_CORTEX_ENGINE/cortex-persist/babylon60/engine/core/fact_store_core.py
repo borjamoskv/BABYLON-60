@@ -9,6 +9,7 @@ from __future__ import annotations
 import json
 import logging
 import sqlite3
+from decimal import Decimal
 from typing import Any
 
 import aiosqlite
@@ -298,7 +299,7 @@ async def _build_fact_payload(
     add("source", source)
     add("confidence", confidence)
     add("confidence_rank", c_rank)
-    add("consensus_score", float(meta.get("consensus_score", 1.0)))
+    add("consensus_score", Decimal(str(meta.get("consensus_score", "1.0"))))
     if "parent_id" in facts_columns:
         add("parent_id", parent_decision_id)
     elif "parent_decision_id" in facts_columns:

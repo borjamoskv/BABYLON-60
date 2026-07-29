@@ -3,7 +3,8 @@
 import logging
 import sqlite3
 from collections.abc import Mapping
-from typing import Any, Protocol, cast
+from decimal import Decimal, Protocol, cast
+from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel, Field
@@ -244,7 +245,7 @@ async def list_all_facts(
                 or str(fact_data.get("created_at", "")),
                 tx_id=str(fact_data.get("tx_id")) if fact_data.get("tx_id") is not None else None,
                 hash=fact_data.get("hash"),
-                consensus_score=float(fact_data.get("consensus_score", 1.0)),
+                consensus_score=Decimal(str(fact_data.get("consensus_score", "1.0"))),
             )
         )
     return response
@@ -516,7 +517,7 @@ async def get_fact_by_id(
         updated_at=str(fact_data.get("updated_at", "")),
         tx_id=str(fact_data.get("tx_id")) if fact_data.get("tx_id") is not None else None,
         hash=fact_data.get("hash"),
-        consensus_score=float(fact_data.get("consensus_score", 1.0)),
+        consensus_score=Decimal(str(fact_data.get("consensus_score", "1.0"))),
     )
 
 

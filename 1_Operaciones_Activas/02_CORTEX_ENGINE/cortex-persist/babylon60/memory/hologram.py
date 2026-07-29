@@ -13,6 +13,7 @@ import asyncio
 import json
 import logging
 import time
+from decimal import Decimal
 from typing import TYPE_CHECKING, Any
 
 from babylon60.compat.optional import np  # lazy: pip install cortex-persist[compute]
@@ -206,7 +207,7 @@ class HolographicMemory:
 
         results = []
         for subset_idx in top_k_subset_idx:
-            sc = float(final_scores_arr[subset_idx])
+            sc = Decimal(str(final_scores_arr[subset_idx]))
             if sc <= 0.0:
                 break
 

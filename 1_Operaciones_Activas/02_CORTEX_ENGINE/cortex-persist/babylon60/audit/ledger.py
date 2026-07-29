@@ -293,7 +293,7 @@ class EnterpriseAuditLedger:
             col_info = await col_cursor.fetchall()
             col_names = [c[1] for c in col_info]
 
-            cortex_base = EdgeEnv.get("CORTEX_DIR") or EdgeEnv.get("BABYLON_DIR")
+            cortex_base = os.environ.get("CORTEX_DIR") or os.environ.get("BABYLON_DIR")
             if cortex_base:
                 backup_dir = os.path.join(cortex_base, ".babylon60", "ledger_backups")
             else:

@@ -9,8 +9,7 @@ owner: borjamoskv
 exergy_tier: P1
 """
 
-from pathlib import Path
-from typing import List, Callable
+
 
 from google.antigravity import CapabilitiesConfig
 from google.antigravity.connections.local import LocalAgentConfig
@@ -18,10 +17,11 @@ from google.antigravity.hooks import policy
 
 # Importar los hooks físicos de observabilidad C5-REAL
 from babylon60.observability.hooks import (
-    track_start,
     track_end,
     track_error,
+    track_start,
 )
+
 
 async def c5_bft_handler(tool_call) -> bool:
     print(f"[C5-REAL] Interrupción BFT. El agente intentó mutar estado usando: {tool_call.name}")
@@ -31,7 +31,7 @@ async def c5_bft_handler(tool_call) -> bool:
 def build_cortex_agent_config(
     model: str = "gemini-2.5-pro",
     system_instructions: str = "Operas bajo el estándar C5-REAL. Máxima entropía purgada.",
-    workspaces: List[str] = None
+    workspaces: list[str] = None
 ) -> LocalAgentConfig:
     """
     Construye la configuración del agente con las barreras termodinámicas C5-REAL.

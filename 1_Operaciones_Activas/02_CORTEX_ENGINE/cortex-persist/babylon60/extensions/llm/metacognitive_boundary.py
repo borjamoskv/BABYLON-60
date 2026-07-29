@@ -34,6 +34,7 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass
+from decimal import Decimal
 from enum import Enum
 from typing import Any
 
@@ -84,7 +85,7 @@ class MetacognitiveContext:
     memory_cards: list[MemoryCard]
     signal: EpistemicSignal
     knowledge_gaps: list[str]
-    domain_calibration: float = -1.0  # Ω₁: Segmented Brier Score
+    domain_calibration: Decimal = Decimal("-1.0")  # Ω₁: Segmented Brier Score
 
     @property
     def should_hard_block(self) -> bool:

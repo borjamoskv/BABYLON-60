@@ -11,6 +11,7 @@ import logging
 import os
 import re
 from collections import deque
+from decimal import Decimal
 from typing import Any
 
 logger = logging.getLogger("babylon60.guards.prompt_security")
@@ -289,7 +290,7 @@ class PromptSecurityGuard:
 
         # Bounded score
         raw_score = (0.3 * overlap) + (0.7 * semantic)
-        current_score = float(max(0.0, min(1.0, raw_score)))
+        current_score = Decimal(str(max(0.0, min(1.0, raw_score))))
         self.history_scores.append(current_score)
 
         rolling_avg = sum(self.history_scores) / len(self.history_scores)

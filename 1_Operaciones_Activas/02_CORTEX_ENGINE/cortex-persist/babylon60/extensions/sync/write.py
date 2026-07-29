@@ -180,7 +180,7 @@ async def _writeback_system(engine: CortexEngine, result: WritebackResult) -> No
         )
         k_rows = await cursor.fetchall()
 
-        knowledge_list: list[Any] = []
+        knowledge_list: list = []
         for row in k_rows:
             meta = _decrypt_json(row[4])
             knowledge_list.append(
@@ -201,7 +201,7 @@ async def _writeback_system(engine: CortexEngine, result: WritebackResult) -> No
         )
         d_rows = await cursor.fetchall()
 
-        decisions_list: list[Any] = []
+        decisions_list: list = []
         for row in d_rows:
             meta = _decrypt_json(row[1])
             decisions_list.append(

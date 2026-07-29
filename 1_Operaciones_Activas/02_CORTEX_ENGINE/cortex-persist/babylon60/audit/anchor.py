@@ -97,7 +97,7 @@ class RekorAnchor:
     async def anchor(self, audit_id: str, timestamp: str) -> str:
         """Submit entry hash to Rekor and return rekor:<uuid> reference."""
         try:
-            client = await self._get_client()
+            await self._get_client()
             # RekorClient.log_entry requires signature and public key;
             # those are not available at the anchor layer alone.
             # This is a stub — full integration requires passing signature

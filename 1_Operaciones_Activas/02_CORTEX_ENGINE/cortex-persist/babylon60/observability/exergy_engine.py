@@ -5,6 +5,7 @@ import statistics
 import threading
 import time
 from dataclasses import asdict, dataclass
+from decimal import Decimal
 from typing import Any
 
 import numpy as np
@@ -358,7 +359,7 @@ class ExergyEngine:
             wf = record.get("workflow")
             if not isinstance(wf, str):
                 continue
-            exergy = float(record.get("exergy_score") or 0.0)
+            exergy = Decimal(str(record.get("exergy_score") or "0.0"))
             genes = self.genomes.get(wf, [])
 
             for gene in genes:

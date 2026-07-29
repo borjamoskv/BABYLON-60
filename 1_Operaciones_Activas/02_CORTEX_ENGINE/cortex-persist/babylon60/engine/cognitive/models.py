@@ -1,6 +1,7 @@
 # [C5-REAL] Exergy-Maximized
 import json
 from dataclasses import dataclass, field
+from decimal import Decimal
 from typing import Any
 
 __all__ = ["Fact", "row_to_fact"]
@@ -26,13 +27,13 @@ class Fact:
     confidence: str = "C3"
     quadrant: str = "ACTIVE"
     storage_tier: str = "HOT"
-    exergy_score: float = 1.0
+    exergy_score: Decimal = Decimal("1.0")
     category: str = "general"
     parent_id: int | str | None = None
     parent_decision_id: int | str | None = None
     relation_type: str | None = None
-    yield_score: float = 1.0
-    consensus_score: float = 1.0
+    yield_score: Decimal = Decimal("1.0")
+    consensus_score: Decimal = Decimal("1.0")
     tx_id: int | None = None
     semantic_status: str | None = None
     semantic_error: str | None = None
@@ -96,9 +97,9 @@ def _parse_json_blob(raw: object, fallback: object) -> object:
     return fallback
 
 
-def _to_float(value: object, default: float) -> float:
+def _to_decimal(value: object, default: Decimal) -> Decimal:
     try:
-        return float(value) if value is not None else default  # pyright: ignore
+        return Decimal(str(value)) if value is not None else default  # pyright: ignore
     except (TypeError, ValueError):
         return default
 
@@ -118,13 +119,13 @@ def _extract_full_layout(row: list, res: dict) -> None:
             "is_quarantined": bool(row[14]),
             "quadrant": row[17] or "ACTIVE",
             "storage_tier": row[18] or "HOT",
-            "exergy_score": _to_float(row[19], 1.0),
+            "exergy_score": _to_decimal(row[19], Decimal("1.0")),
             "category": row[20] or "general",
             "semantic_status": row[21],
             "semantic_error": row[22],
             "parent_id": row[23],
             "relation_type": row[24],
-            "yield_score": _to_float(row[25], 1.0),
+            "yield_score": _to_decimal(row[25], Decimal("1.0")),
             "tags_raw": row[26],
         }
     )
@@ -146,11 +147,11 @@ def _extract_rich_layout(row: list, res: dict) -> None:
             "is_quarantined": bool(row[15]),
             "quadrant": row[16] or "ACTIVE",
             "storage_tier": row[17] or "HOT",
-            "exergy_score": _to_float(row[18], 1.0),
+            "exergy_score": _to_decimal(row[18], Decimal("1.0")),
             "category": row[19] or "general",
             "parent_id": row[20],
             "relation_type": row[21],
-            "yield_score": _to_float(row[22], 1.0),
+            "yield_score": _to_decimal(row[22], Decimal("1.0")),
         }
     )
 
@@ -323,13 +324,13 @@ def row_to_fact(row: tuple) -> Fact:
         confidence=v["confidence"] or meta.get("confidence", "C3"),
         quadrant=meta.get("quadrant", v["quadrant"]),
         storage_tier=meta.get("storage_tier", v["storage_tier"]),
-        exergy_score=_to_float(meta.get("exergy_score"), v["exergy_score"]),
+        exergy_score=_to_decimal(meta.get("exergy_score"), v["exergy_score"]),
         category=meta.get("category", v["category"]),
         parent_id=pid,
         parent_decision_id=meta.get("parent_decision_id", pid),
         relation_type=v["relation_type"] or meta.get("relation_type"),
-        yield_score=_to_float(meta.get("yield_score"), v["yield_score"]),
-        consensus_score=_to_float(meta.get("consensus_score"), 1.0),
+        yield_score=_to_decimal(meta.get("yield_score"), v["yield_score"]),
+        consensus_score=_to_decimal(meta.get("consensus_score"), Decimal("1.0")),
         tx_id=meta.get("tx_id") if isinstance(meta.get("tx_id"), int) else None,
         semantic_status=meta.get("semantic_status", v["semantic_status"]),
         semantic_error=meta.get("semantic_error", v["semantic_error"]),

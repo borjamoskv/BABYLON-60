@@ -6,8 +6,8 @@ Translates Python AST into semantic constraints for the Z3 verifier.
 Identifies potential invariant violations at the architectural level.
 """
 
-import re
 import logging
+import re
 from typing import Any
 
 logger = logging.getLogger("babylon60.verification.extractor")

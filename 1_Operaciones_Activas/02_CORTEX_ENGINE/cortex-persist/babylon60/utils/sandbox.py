@@ -241,10 +241,10 @@ for _k, _v in namespace.items():
         continue
     try:
         json.dumps(_v)
-    except Exception:
+    except Exception:  # noqa: BLE001
         try:
             payload[_k] = repr(_v)[:_MAX_REPR]
-        except Exception:
+        except Exception:  # noqa: BLE001
             payload[_k] = "<unrepresentable>"
         coerced.append(_k)
     else:

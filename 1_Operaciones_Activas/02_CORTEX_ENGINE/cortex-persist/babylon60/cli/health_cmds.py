@@ -8,6 +8,7 @@ Thin CLI wrapper; all logic lives in babylon60.extensions.health.
 from __future__ import annotations
 
 import threading
+from decimal import Decimal
 
 import click
 
@@ -216,7 +217,7 @@ def history(db_path: str | None, limit: int) -> None:
 
     for rec in records:
         try:
-            score_val = float(rec.get("score", 0))  # type: ignore
+            score_val = Decimal(str(rec.get("score", "0.0")))  # type: ignore
         except (TypeError, ValueError):
             score_val = 0.0
 
