@@ -21,6 +21,9 @@ env:
   REGION: europe-west1
   WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
   SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+  TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
+  TF_VAR_bft_db_password: ${{ secrets.BFT_DB_PASSWORD }}
+  TF_VAR_cortex_bft_key: ${{ secrets.CORTEX_BFT_KEY }}
 
 jobs:
   terraform-plan:
