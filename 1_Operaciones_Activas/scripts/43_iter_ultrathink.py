@@ -125,10 +125,19 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
 
             # 5. Git Sentinel: Guardar cambios en el ledger
             print("[ITERA-ULTRATHINK] Git Sentinel: Sellar estado en el ledger...")
-            subprocess.run(
-                ["git", "add", "mundo_f_ledger.yml", "02_CORTEX_ENGINE/cortex/compiled_theorem.py"],
-                check=True,
-            )
+            git_add_args = ["git", "add", "mundo_f_ledger.yml", "02_CORTEX_ENGINE/cortex/compiled_theorem.py"]
+            for attempt in range(3):
+                res = subprocess.run(git_add_args)
+                if res.returncode == 0:
+                    break
+                if os.path.exists(".git/index.lock"):
+                    try:
+                        os.remove(".git/index.lock")
+                    except OSError:
+                        pass
+                time.sleep(0.1)
+            else:
+                subprocess.run(git_add_args, check=True)
             staged_check = subprocess.run(["git", "diff", "--cached", "--quiet"])
             if staged_check.returncode != 0:
                 subprocess.run(
@@ -154,7 +163,17 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
                 if os.path.exists(compiled_path):
                     os.remove(compiled_path)
                     # Sellar la purga en git
-                    subprocess.run(["git", "add", "02_CORTEX_ENGINE/cortex/compiled_theorem.py"], check=True)
+                    purge_args = ["git", "add", "02_CORTEX_ENGINE/cortex/compiled_theorem.py"]
+                    for attempt in range(3):
+                        res = subprocess.run(purge_args)
+                        if res.returncode == 0:
+                            break
+                        if os.path.exists(".git/index.lock"):
+                            try:
+                                os.remove(".git/index.lock")
+                            except OSError:
+                                pass
+                        time.sleep(0.1)
                     purge_staged = subprocess.run(["git", "diff", "--cached", "--quiet"])
                     if purge_staged.returncode != 0:
                         subprocess.run(
