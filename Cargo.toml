@@ -5,6 +5,7 @@ members = [
     "proof_ir",
     "runtime",
     "fuzz",
+    "strike_rs",
 ]
 resolver = "2"
 
