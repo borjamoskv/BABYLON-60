@@ -23,12 +23,14 @@ def run_test():
     agent = BrowserResearchAgent()
     taint = "session_bft_audit_001"
     
-    # 1. Test Valid URL (Fetch + Filter + Cache)
+    # 1. Test Valid URL (Fetch + Filter + Cache + Attestation)
     target_url = f"https://doc.rust-lang.org/std-{int(time.time())}"
     res1 = agent.fetch_and_verify(target_url, mock_network_fetcher, causal_taint=taint)
     print("\n1. Fetch URL Válida:", res1["status"])
     print("Anclas Físicas Extraídas:", res1["anchors"])
-    assert res1["status"] == "VERIFIED_AND_CACHED"
+    print("BFT Attestation (Lamport t):", res1["bft_attestation"])
+    assert res1["status"] == "VERIFIED_AND_ATTESTED"
+    assert res1["bft_attestation"]["lamport_t"] > 0
     assert len(res1["anchors"]) >= 2
     
     # 2. Test Cache Hit
