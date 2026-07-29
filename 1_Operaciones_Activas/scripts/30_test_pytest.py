@@ -22,8 +22,10 @@ def main() -> None:
     cmd = [venv_pytest] if os.path.exists(venv_pytest) else ["pytest"]
 
     try:
-        # Sincronización requerida por Ω29
-        subprocess.run(["uv", "sync", "--all-extras"], cwd=PROJECT_ROOT, check=True)
+        # Sincronización requerida por Ω29 (si uv está disponible)
+        import shutil
+        if shutil.which("uv"):
+            subprocess.run(["uv", "sync", "--all-extras"], cwd=PROJECT_ROOT, check=True)
 
         subprocess.run(cmd, cwd=PROJECT_ROOT, check=True)
         elapsed = time.perf_counter() - start_time
