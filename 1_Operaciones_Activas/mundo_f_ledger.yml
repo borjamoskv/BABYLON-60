@@ -109749,3 +109749,1203 @@ Metrics:
   VNode_Sandbox: vnode-0
 Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
 ---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:32.842279+00:00
+Payload_Hash_SHA3_256: 5a99c5caa74b860be3c513e9b3ea72acf5c12c7a967b7943559b1a713deee351
+Metrics:
+  Shannon_Entropy: 5.1511
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:33.011838+00:00
+Payload_Hash_SHA3_256: c574368c0888330b6e7022d0492d7c3685d123b1301313615e8869048c637bf9
+Metrics:
+  Shannon_Entropy: 5.1332
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:33.175366+00:00
+Payload_Hash_SHA3_256: 9e47f894f82492066eaf8f1184769a1a817b33da457cb81100426ac4c38d4a9f
+Metrics:
+  Shannon_Entropy: 5.1658
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:33.345027+00:00
+Payload_Hash_SHA3_256: 064294ddaf6f04a007623c9c77fe7f9f93066f98e1e1248457db5886ee2b7216
+Metrics:
+  Shannon_Entropy: 5.1632
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:33.512019+00:00
+Payload_Hash_SHA3_256: e8a0e71a5aff466fdacb7e2ced016351dd5b805eb9a3e5097ecd5a975ce9c6a1
+Metrics:
+  Shannon_Entropy: 5.1349
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:33.676559+00:00
+Payload_Hash_SHA3_256: e0e0faed7499329e8c4932e68d6f84b76e707b67f02c11cb8345b14031bfc544
+Metrics:
+  Shannon_Entropy: 5.1654
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:33.843930+00:00
+Payload_Hash_SHA3_256: 47d2760d2ce09c46df3192227aab5bda4a26e404c5fca351886a58bc56c9811a
+Metrics:
+  Shannon_Entropy: 5.1663
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:34.011454+00:00
+Payload_Hash_SHA3_256: ab7eb4e8c1a9755f5b31bb08dc79182631208cd1de58274bbce5564282332ace
+Metrics:
+  Shannon_Entropy: 5.1670
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:34.356123+00:00
+Payload_Hash_SHA3_256: 33038a49f088f611f2733d3bf03bae9ebb5bbb6738893cd50dac2c5169a91f87
+Metrics:
+  Shannon_Entropy: 5.1564
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:34.542593+00:00
+Payload_Hash_SHA3_256: 0c396c36cdb92a98bb529ba7efaf9f75ed70e9653cf490d4c9f86388909c4871
+Metrics:
+  Shannon_Entropy: 5.1667
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:34.725346+00:00
+Payload_Hash_SHA3_256: fced44b631ac917e34c6c0bdbc7e413eb4e50f600355c619415a4f1ea52222c6
+Metrics:
+  Shannon_Entropy: 5.1577
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:34.902400+00:00
+Payload_Hash_SHA3_256: 8b580a782709b1eaad371df38a2b81fb25df8d06abd069b0bda68a26c2b6c5a9
+Metrics:
+  Shannon_Entropy: 5.1534
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:35.075370+00:00
+Payload_Hash_SHA3_256: 4020bb92b68ba17667eaffcd000d667d32d6fb0b0dc21e83d9afa0972ed9c51a
+Metrics:
+  Shannon_Entropy: 5.1622
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:35.246454+00:00
+Payload_Hash_SHA3_256: 27145e8a4e9c3efed30604563893ef0a27f99761a8270800650126ce107778a4
+Metrics:
+  Shannon_Entropy: 5.1673
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:35.417075+00:00
+Payload_Hash_SHA3_256: 68ec22051981610c89c11e51e46b0a8e1875d696cf4ad406cb178a6a72470127
+Metrics:
+  Shannon_Entropy: 5.1598
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:35.587787+00:00
+Payload_Hash_SHA3_256: 4a586408c5b3907ae0a1f5a0fed4895951068db18028c4869d0ae915afee2fe3
+Metrics:
+  Shannon_Entropy: 5.1488
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:35.895244+00:00
+Payload_Hash_SHA3_256: 5a03ce26d8491cc5adb646f1c8e66f296213adfb1e81a970e8ca808a890e2b23
+Metrics:
+  Shannon_Entropy: 5.1686
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:36.069862+00:00
+Payload_Hash_SHA3_256: 4154b8178ba9ab717fad2905ec8f7b4c2b9d62413e84112d2437b60bb4a2ad31
+Metrics:
+  Shannon_Entropy: 5.1616
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:36.233430+00:00
+Payload_Hash_SHA3_256: 9343b27ad153d97ea13328966acce355b8cb0bcd5ff1815840499029086c16da
+Metrics:
+  Shannon_Entropy: 5.1653
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:36.401368+00:00
+Payload_Hash_SHA3_256: f67fe80989623b33387640a89bafa0194fe73cc2434b642d1a084119ddfe7dde
+Metrics:
+  Shannon_Entropy: 5.1641
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:36.567407+00:00
+Payload_Hash_SHA3_256: 9b093fb4113bd435df40fe2ea605d0bb2420580aef866fb20a3ff4e8d12c9926
+Metrics:
+  Shannon_Entropy: 5.1728
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:36.737431+00:00
+Payload_Hash_SHA3_256: a7df4de829c0b1d68fee340aaf7dab40bcdab788cf2d0188a167b9da94ed329a
+Metrics:
+  Shannon_Entropy: 5.1728
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:36.903598+00:00
+Payload_Hash_SHA3_256: 38e597869f5202110a9b42930f4f0dda0196e7dd1d998584b7e96fb99c27651a
+Metrics:
+  Shannon_Entropy: 5.1641
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:37.074675+00:00
+Payload_Hash_SHA3_256: cc832151334588bd97f10b2188fdf18532305645de6fd4c84f47d362e36f5565
+Metrics:
+  Shannon_Entropy: 5.1694
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:37.381877+00:00
+Payload_Hash_SHA3_256: 7e813609f7caf412ced356bb8b1bb13de97e25a9735abaddddcbdde726737de0
+Metrics:
+  Shannon_Entropy: 5.1493
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:37.552406+00:00
+Payload_Hash_SHA3_256: afb1c1fffae607bdc92e0e93f27c4cb63949e67cd6728122784a9926e04d022b
+Metrics:
+  Shannon_Entropy: 5.1593
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:37.726920+00:00
+Payload_Hash_SHA3_256: 2b91cfc0a997357c4a0c9953a81802290b27660c969abde006023c33f6c5eacc
+Metrics:
+  Shannon_Entropy: 5.1695
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:37.885602+00:00
+Payload_Hash_SHA3_256: ca24526ba7febd1df44407126aa6481abebcc881b224901c037f6d2320ddcb87
+Metrics:
+  Shannon_Entropy: 5.1695
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:38.036937+00:00
+Payload_Hash_SHA3_256: 93a276f259493f0be47218af6f287b203bd7686012ec035e14a3539fcf4f3fb6
+Metrics:
+  Shannon_Entropy: 5.1824
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:38.187949+00:00
+Payload_Hash_SHA3_256: ef35b8a11c74f70e8d9df01f8b4bca4f040f945f5de88b55ffcd1778a5ebfd08
+Metrics:
+  Shannon_Entropy: 5.1572
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:38.338770+00:00
+Payload_Hash_SHA3_256: 1debdcf28eae1aa8f7444f3a29c41ab5796d401c4e4514dc48f11bae1394eb5f
+Metrics:
+  Shannon_Entropy: 5.1607
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:38.488860+00:00
+Payload_Hash_SHA3_256: ae843b08dbd80a3b5f04dc5fea2dbbd00452c2f385173bb13dc9ba292a7acea1
+Metrics:
+  Shannon_Entropy: 5.1748
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:38.757726+00:00
+Payload_Hash_SHA3_256: e4360d23981dbba06d3216d786fb1cd37aa18688e2f9e97b2cee81689d7a22b2
+Metrics:
+  Shannon_Entropy: 5.1566
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:38.912056+00:00
+Payload_Hash_SHA3_256: 9941a6e5de2df928819ab6439e74ae9fc9aa609634c74c04d5c5c995b204d360
+Metrics:
+  Shannon_Entropy: 5.1716
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:39.065194+00:00
+Payload_Hash_SHA3_256: b874eeb33e1e7261ae97bb29a0abd80bbaa5290235ac012dcb805de741cd5e89
+Metrics:
+  Shannon_Entropy: 5.1745
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:39.236317+00:00
+Payload_Hash_SHA3_256: 66b5a9f2bfca0dbd7d31cab87c08f87e8dfa7d43848ae27cff1f341803715be1
+Metrics:
+  Shannon_Entropy: 5.1744
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:39.393771+00:00
+Payload_Hash_SHA3_256: 72aefbac2aca7059a92639e42d5850eb6d3932a5cf4fc10e1c4c4abfebdf116f
+Metrics:
+  Shannon_Entropy: 5.1756
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:39.543182+00:00
+Payload_Hash_SHA3_256: f3d5a3130811ceaf35233932c75b48fbd3cc562f7c7c6e275a424e5decb152c8
+Metrics:
+  Shannon_Entropy: 5.1627
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:39.694387+00:00
+Payload_Hash_SHA3_256: 1093c1614b366f15e43077a6a49a77d9e3b5073fc91e2c83dd6687ca23c0bdd0
+Metrics:
+  Shannon_Entropy: 5.1713
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:39.848817+00:00
+Payload_Hash_SHA3_256: 7808ee8fa059c686c50f7431ac9c0e78711bd8c2ccf396e881980e420af045b8
+Metrics:
+  Shannon_Entropy: 5.1801
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:40.112634+00:00
+Payload_Hash_SHA3_256: 849768366a76dc9057b5342c513cef07b40a2d86e7c7e72ef171d0e3f50a676f
+Metrics:
+  Shannon_Entropy: 5.1684
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:40.264564+00:00
+Payload_Hash_SHA3_256: 99d52a1cb6cd36bdd193b6c83eb402df72043793da114bf7126adcef3b392323
+Metrics:
+  Shannon_Entropy: 5.1716
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:40.415334+00:00
+Payload_Hash_SHA3_256: e08fd9976c1f18c77fb0a01291382dd4245e6ac20b320921221ad7fbf92260ad
+Metrics:
+  Shannon_Entropy: 5.1663
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:40.568412+00:00
+Payload_Hash_SHA3_256: 1d543a32f0ebf1a33f8e0e8e3d022041e4d13299ff1607b8f7afab07adcd41dd
+Metrics:
+  Shannon_Entropy: 5.1771
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:40.718685+00:00
+Payload_Hash_SHA3_256: 1d20f6136743e8905b0adfddc705f50b0860806b3d6ffcb6b80b04378cf28ae5
+Metrics:
+  Shannon_Entropy: 5.1635
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:40.875265+00:00
+Payload_Hash_SHA3_256: 3e5af38246d02ba97930e2e3d4ba400c40120481c5505921f435360e5aca9ee2
+Metrics:
+  Shannon_Entropy: 5.1696
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:41.029007+00:00
+Payload_Hash_SHA3_256: 80eea1239dee62efac8eac620c26775003efe4f85b7fac426bcedebfc7634d4e
+Metrics:
+  Shannon_Entropy: 5.1827
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:41.178767+00:00
+Payload_Hash_SHA3_256: 8a2d1283672ae335a82b990b72a169098593e9c9b21d9c877a9644a001c83248
+Metrics:
+  Shannon_Entropy: 5.1782
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:41.448157+00:00
+Payload_Hash_SHA3_256: 212bbb598a331328e59b65a03f5ab72623837205342a981e3a49614610c89a5f
+Metrics:
+  Shannon_Entropy: 5.1833
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:41.599579+00:00
+Payload_Hash_SHA3_256: 2fa54587dca715da44fc1db36185a4773c746e5a29fc56352070cd9cd71e554d
+Metrics:
+  Shannon_Entropy: 5.1706
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:41.750578+00:00
+Payload_Hash_SHA3_256: 044f59a6f0c7f4421ed2d358ffb9154fb9fef950e26360621958d604d4f76cc2
+Metrics:
+  Shannon_Entropy: 5.1770
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:41.908799+00:00
+Payload_Hash_SHA3_256: df370788eda5043862d95249e70be9137895833ffc96cd6bc733f3dbf76e3054
+Metrics:
+  Shannon_Entropy: 5.1653
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:42.079617+00:00
+Payload_Hash_SHA3_256: fd95e9d8ae431301e97dc99c4afc423f0d77295c489e887a04cc9bf7653db3da
+Metrics:
+  Shannon_Entropy: 5.1585
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:42.247260+00:00
+Payload_Hash_SHA3_256: 72d8ce9568a4e525a09cd1dc1d765982c0e866fbea071e286826347fc4b24ad8
+Metrics:
+  Shannon_Entropy: 5.1648
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:42.406616+00:00
+Payload_Hash_SHA3_256: 4b8404e4357fe78ee69ef2c8467d43f977467f5d12acba87f6a24e3aa6c52420
+Metrics:
+  Shannon_Entropy: 5.1641
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:42.557551+00:00
+Payload_Hash_SHA3_256: 25a9bb7c2cf7e6c4ce256535c7230606c1851b2f6701f24fa157542860e5de2c
+Metrics:
+  Shannon_Entropy: 5.1589
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:42.904525+00:00
+Payload_Hash_SHA3_256: c6b03916b1f4980f6798dd481335e4914229364414707b03a9e354f379ac5542
+Metrics:
+  Shannon_Entropy: 5.1685
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:43.060610+00:00
+Payload_Hash_SHA3_256: e459563c92d85c2029cbd56f0bc5505a4308cf61d0dcce826ba67d7c6218b344
+Metrics:
+  Shannon_Entropy: 5.1791
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:43.216337+00:00
+Payload_Hash_SHA3_256: bff8a6bbce5c44dd91af41b8c634bd044ed5c48e727e12598b194550eaa36cf4
+Metrics:
+  Shannon_Entropy: 5.1622
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:43.392730+00:00
+Payload_Hash_SHA3_256: 8f0924dfcef18177616ae00cbc8917d873f967bbb51621dc71ae1e4977d4e8cd
+Metrics:
+  Shannon_Entropy: 5.1649
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:43.585977+00:00
+Payload_Hash_SHA3_256: aa88197f5041e7700bdff59ba09f154d336d1ea99ed3c83e36d994c661a06158
+Metrics:
+  Shannon_Entropy: 5.1591
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:43.742542+00:00
+Payload_Hash_SHA3_256: 65f877eb227e15270f0cb514322509f5f2fc3f2b1e9b981d72238028158d3200
+Metrics:
+  Shannon_Entropy: 5.1624
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:43.894821+00:00
+Payload_Hash_SHA3_256: 7d84a8a30413b6bda92718cece0262436d641abdee3fe900697b25d60450c04d
+Metrics:
+  Shannon_Entropy: 5.1867
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:44.046179+00:00
+Payload_Hash_SHA3_256: 2c1ce9fd0c2ddca7763a7d0b101893b96c31357b2a942db266a69d1998b11600
+Metrics:
+  Shannon_Entropy: 5.1847
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:44.315296+00:00
+Payload_Hash_SHA3_256: 7e81900feda828233bb106ea2dec969dd3e12b5aed1571152afa952fae07af6f
+Metrics:
+  Shannon_Entropy: 5.1686
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:44.465775+00:00
+Payload_Hash_SHA3_256: 0b7142035d509fe2dd12fa6a666cd0542b1c8836955e220ffe0b7ecec17c5079
+Metrics:
+  Shannon_Entropy: 5.1706
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:44.616357+00:00
+Payload_Hash_SHA3_256: ecc22d2829f27d41cd4d6e87473bc5ba2ae5ed7c33df93852ddb1e03512404a3
+Metrics:
+  Shannon_Entropy: 5.1790
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:44.766971+00:00
+Payload_Hash_SHA3_256: 13d2887ae19561c120d2c049da373d1b10dfa680ad15cd64f69c34fcc6ae9425
+Metrics:
+  Shannon_Entropy: 5.1672
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:44.920111+00:00
+Payload_Hash_SHA3_256: 239ebe9fd2dce37b4142f5e5a37dcfa4ddefcd9beb8c08fe2533f2afdc533eee
+Metrics:
+  Shannon_Entropy: 5.1837
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:45.073210+00:00
+Payload_Hash_SHA3_256: ea6e9ceffb97a8fb77300298f9a73dac006f0d38110046078dc97dd8635194a1
+Metrics:
+  Shannon_Entropy: 5.1639
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:45.228992+00:00
+Payload_Hash_SHA3_256: 86eb8d7ddfdd75aab80ffa1ea1c4e86271b9573d184cfffc84672af908e54a40
+Metrics:
+  Shannon_Entropy: 5.1500
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:45.383750+00:00
+Payload_Hash_SHA3_256: 1678486f58fb519e0665745b129b2d92cbefd4fbff0e9b0471a14ec50fe2b248
+Metrics:
+  Shannon_Entropy: 5.1757
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:45.658031+00:00
+Payload_Hash_SHA3_256: ec87323772b5583098ab478eccadc37f0a163d171e4846bdeec4d5fdd0845101
+Metrics:
+  Shannon_Entropy: 5.1643
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:45.809007+00:00
+Payload_Hash_SHA3_256: 4edd7ccb1fc37be44a2ca91491b8d0b67c5d898284b3fde991bbbc68f3d9bb31
+Metrics:
+  Shannon_Entropy: 5.1736
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:45.960092+00:00
+Payload_Hash_SHA3_256: cd74422c99d270fbdb5328b85fce445b1024475d4943985e263de0e01436b6fa
+Metrics:
+  Shannon_Entropy: 5.1748
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:46.104952+00:00
+Payload_Hash_SHA3_256: 0ecc27ff0f7def376d6f32e306f8864a1804f7e2752ae078a2da1118e7ae8124
+Metrics:
+  Shannon_Entropy: 5.1641
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:46.256525+00:00
+Payload_Hash_SHA3_256: 7cc23b20088a2e59c373b59be4b7842e123b6291312fe44b851d137b4e845473
+Metrics:
+  Shannon_Entropy: 5.1658
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:46.411276+00:00
+Payload_Hash_SHA3_256: 080b216a1fcfeb6796d3583d28c031da3245082ad0789d0c2e53e05b0f17ceeb
+Metrics:
+  Shannon_Entropy: 5.1836
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:46.571241+00:00
+Payload_Hash_SHA3_256: fd2173f313f88cba6ce1050fa6d0936da403f75993000830214fe3d1aba11686
+Metrics:
+  Shannon_Entropy: 5.1737
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:46.736816+00:00
+Payload_Hash_SHA3_256: ba6a0cd42e0115d80499a86c776b8b83f59f694c059816b7283943bcc1df3313
+Metrics:
+  Shannon_Entropy: 5.1556
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:47.016184+00:00
+Payload_Hash_SHA3_256: 1335bf1bf0457ba3d650415da1e5ceed76bb5b8b6c28489d8683d2372994e0d8
+Metrics:
+  Shannon_Entropy: 5.1535
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:47.167097+00:00
+Payload_Hash_SHA3_256: 805566e46ab30a4c156a41fdd61aa86ac67f2f537d65b96ab299d2b72ce000a1
+Metrics:
+  Shannon_Entropy: 5.1630
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:47.317572+00:00
+Payload_Hash_SHA3_256: 4db1b18d44d2b03113e540da784bb3098aa4567dc9497cb2960da54d8aeb9f50
+Metrics:
+  Shannon_Entropy: 5.1738
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:47.469172+00:00
+Payload_Hash_SHA3_256: d2dad66e9d1369e243433c32afe0e7a207e281cd9019bc6039990362fa4e689c
+Metrics:
+  Shannon_Entropy: 5.1724
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:47.622811+00:00
+Payload_Hash_SHA3_256: 277c5cd5361a1ecd8fdc5a6862812de001f1d236654fa1cf8b9522eafa8d54ba
+Metrics:
+  Shannon_Entropy: 5.1647
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:47.775131+00:00
+Payload_Hash_SHA3_256: 72f5557d52f74d65a43a39e52dcc6d7e43b6c080a16455caf1440560a5d0361f
+Metrics:
+  Shannon_Entropy: 5.1752
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:47.924894+00:00
+Payload_Hash_SHA3_256: a83ff4725cf35e7a9d4f1cc5bf67a3b1fc5d6f34b1d3885b85e73dba06723316
+Metrics:
+  Shannon_Entropy: 5.1888
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:48.075732+00:00
+Payload_Hash_SHA3_256: 015b2bb7776d54e3464e6ba33555668de58c6620759563319c2f517f2e1b7de3
+Metrics:
+  Shannon_Entropy: 5.1726
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:48.345698+00:00
+Payload_Hash_SHA3_256: 21a2354ff67e5e5644aacf38a7baac62c3104683920dfc0fee5d5d8b14edea1d
+Metrics:
+  Shannon_Entropy: 5.1792
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:48.497280+00:00
+Payload_Hash_SHA3_256: 6124d0556b913175acbe026d56a3bada3e1252363c4a63de7001d87a153433ef
+Metrics:
+  Shannon_Entropy: 5.1825
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:48.668017+00:00
+Payload_Hash_SHA3_256: 306d3546cdbcea72f05219ecb66a2b9c8ef94ce87701309b1821052c585280fc
+Metrics:
+  Shannon_Entropy: 5.1728
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:48.832146+00:00
+Payload_Hash_SHA3_256: 539fa6b511c0d4a2ef06389100f1d067d4ff70e666973d397904dcb05beab3dd
+Metrics:
+  Shannon_Entropy: 5.1670
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:48.991795+00:00
+Payload_Hash_SHA3_256: ea56a6c4a01a66235daf6cd1af6919faeb798256b0f4c1e8fcd6c0af763f8403
+Metrics:
+  Shannon_Entropy: 5.1658
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:49.145799+00:00
+Payload_Hash_SHA3_256: addae888aed0ca7a5161e6b6dc886a26b9683511e2c7d6c22b4afeb197701ece
+Metrics:
+  Shannon_Entropy: 5.1824
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:49.301693+00:00
+Payload_Hash_SHA3_256: 197d2926498d71db52ea4c6211349e4bdbeab1b04976e0801927b05e2d17ed4e
+Metrics:
+  Shannon_Entropy: 5.1758
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:49.458261+00:00
+Payload_Hash_SHA3_256: ae24cdd7f2a2ef055a192e51ec4ae9001a90a980c79020cf812cafe3d31aae5f
+Metrics:
+  Shannon_Entropy: 5.1821
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:49.734965+00:00
+Payload_Hash_SHA3_256: 7ad378e82c3ade293ad33063cf5e0ff71d5d22801d0d920673383a5d4d003663
+Metrics:
+  Shannon_Entropy: 5.1870
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:49.890601+00:00
+Payload_Hash_SHA3_256: 8c5ae686d5e08097d1fa0f1f7d9ee3d857dd17a41344d02bf0347f5e92b7cdd3
+Metrics:
+  Shannon_Entropy: 5.1671
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:50.046896+00:00
+Payload_Hash_SHA3_256: f9fb6d41356fb30651f353ab58666c94cb0671a11b1f63e53b1003925239abfb
+Metrics:
+  Shannon_Entropy: 5.1690
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-29T19:37:50.204347+00:00
+Payload_Hash_SHA3_256: 60bc6b86abce1874bab0201a454de1bde7ff5f87101ac6438e5ac22636a0b84b
+Metrics:
+  Shannon_Entropy: 5.1547
+  Exergy_Ratio: 10.0000
+  AST_Nodes: 82
+  Pruned_Branches: 0
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
+---
