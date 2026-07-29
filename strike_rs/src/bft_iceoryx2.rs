@@ -5,8 +5,6 @@
 //! Byzantine Fault Tolerance without ENOSPC or socket starvation.
 
 use iceoryx2::prelude::*;
-use iceoryx2::node::NodeBuilder;
-use iceoryx2::service::ipc;
 use std::time::Duration;
 
 #[derive(Debug)]
@@ -20,19 +18,16 @@ pub struct BftMessage {
 }
 
 pub fn run_abft_publisher_poc(service_name_str: &str) -> Result<(), Box<dyn std::error::Error>> {
-    let node = NodeBuilder::new().create::<ipc::Service>()?;
     let service_name = ServiceName::new(service_name_str)?;
 
-    // Create a pub-sub service
-    let service = node.service_builder(&service_name)
-        .publish_subscribe::<BftMessage>()
-        .open_or_create()?;
+    let service = zero_copy::Service::new(&service_name)
+        .publish_subscribe()
+        .open_or_create::<BftMessage>()?;
 
-    let publisher = service.publisher_builder().create()?;
+    let publisher = service.publisher().create()?;
 
-    // Send a BFT Proposal
-    let mut sample = publisher.loan_uninit()?;
-    sample.write_payload(BftMessage {
+    let sample = publisher.loan_uninit()?;
+    let sample = sample.write_payload(BftMessage {
         sender_id: 1,
         view: 0,
         seq_num: 1,
@@ -47,17 +42,15 @@ pub fn run_abft_publisher_poc(service_name_str: &str) -> Result<(), Box<dyn std:
 }
 
 pub fn run_abft_subscriber_poc(service_name_str: &str) -> Result<(), Box<dyn std::error::Error>> {
-    let node = NodeBuilder::new().create::<ipc::Service>()?;
     let service_name = ServiceName::new(service_name_str)?;
 
-    let service = node.service_builder(&service_name)
-        .publish_subscribe::<BftMessage>()
-        .open_or_create()?;
+    let service = zero_copy::Service::new(&service_name)
+        .publish_subscribe()
+        .open_or_create::<BftMessage>()?;
 
-    let subscriber = service.subscriber_builder().create()?;
+    let subscriber = service.subscriber().create()?;
 
     println!("Listening for BFT Messages...");
-    // Poll for messages in this PoC
     for _ in 0..10 {
         if let Some(sample) = subscriber.receive()? {
             println!(
