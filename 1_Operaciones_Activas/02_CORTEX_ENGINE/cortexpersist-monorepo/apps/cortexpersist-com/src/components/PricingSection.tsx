@@ -1,8 +1,15 @@
-// C5-REAL EXERGY CERTIFIED
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Locale, translations, detectLocale } from '../lib/i18n';
 
-export default function PricingSection() {
+export default function PricingSection({ locale }: { locale?: Locale }) {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('annual');
+  const [activeLocale, setActiveLocale] = useState<Locale>('en');
+
+  useEffect(() => {
+    setActiveLocale(locale || detectLocale());
+  }, [locale]);
+
+  const t = translations[activeLocale] || translations.en;
 
   const openCheckout = (planName: string, price: string) => {
     if (typeof window !== 'undefined') {
@@ -32,10 +39,10 @@ export default function PricingSection() {
           ⚡ COMMERCIAL EXERGY TRANSDUCTION
         </div>
         <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 800, color: '#FFF', margin: '0 0 1rem' }}>
-          Sovereign Tiers & Commercial Licensing
+          {t.pricingTitle}
         </h2>
         <p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '1.1rem', maxWidth: '650px', margin: '0 auto' }}>
-          Free and 100% Open Source for independent developers. Mandatory commercial licensing and compliance for enterprise deployments (Invariant INV_C5_17).
+          {t.pricingSub}
         </p>
 
         {/* Toggle billing cycle */}
@@ -61,7 +68,7 @@ export default function PricingSection() {
               fontSize: '0.85rem'
             }}
           >
-            Monthly Billing
+            {t.monthly}
           </button>
           <button
             onClick={() => setBillingCycle('annual')}
@@ -76,7 +83,7 @@ export default function PricingSection() {
               fontSize: '0.85rem'
             }}
           >
-            Annual Billing (20% Off)
+            {t.annual}
           </button>
         </div>
       </div>
@@ -102,12 +109,12 @@ export default function PricingSection() {
             <div style={{ fontSize: '0.8rem', color: '#00E676', fontFamily: 'monospace', fontWeight: 700, marginBottom: '0.5rem' }}>
               SOVEREIGN OPEN SOURCE
             </div>
-            <h3 style={{ fontSize: '1.8rem', color: '#FFF', margin: '0 0 1rem' }}>Community</h3>
+            <h3 style={{ fontSize: '1.8rem', color: '#FFF', margin: '0 0 1rem' }}>{t.communityTitle}</h3>
             <div style={{ fontSize: '3rem', fontWeight: 900, color: '#FFF', marginBottom: '1.5rem' }}>
               $0 <span style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.5)', fontWeight: 400 }}>/ forever</span>
             </div>
             <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', lineHeight: '1.5', marginBottom: '2rem' }}>
-              For indie developers and non-commercial projects. Complete local autonomy with zero cloud dependency.
+              {t.communityDesc}
             </p>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, color: 'rgba(255,255,255,0.8)', fontSize: '0.9rem', display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <li>✓ Individual Free License</li>
@@ -132,7 +139,7 @@ export default function PricingSection() {
               marginTop: '2.5rem'
             }}
           >
-            Explore GitHub
+            {t.communityCta}
           </a>
         </div>
 
@@ -161,18 +168,18 @@ export default function PricingSection() {
             fontWeight: 800,
             letterSpacing: '0.1em'
           }}>
-            MOST POPULAR
+            {t.mostPopular}
           </div>
           <div>
             <div style={{ fontSize: '0.8rem', color: '#2B3BE5', fontFamily: 'monospace', fontWeight: 700, marginBottom: '0.5rem' }}>
               COMMERCIAL AGENT TEAMS
             </div>
-            <h3 style={{ fontSize: '1.8rem', color: '#FFF', margin: '0 0 1rem' }}>Pro Team</h3>
+            <h3 style={{ fontSize: '1.8rem', color: '#FFF', margin: '0 0 1rem' }}>{t.proTitle}</h3>
             <div style={{ fontSize: '3rem', fontWeight: 900, color: '#FFF', marginBottom: '1.5rem' }}>
               {billingCycle === 'annual' ? '$39' : '$49'} <span style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.5)', fontWeight: 400 }}>/ mo / agent</span>
             </div>
             <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', lineHeight: '1.5', marginBottom: '2rem' }}>
-              For startups and production teams running autonomous agents requiring tamper-evident auditing and SLA performance.
+              {t.proDesc}
             </p>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, color: '#FFF', fontSize: '0.9rem', display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <li>✓ Up to 10 Autonomous Agents</li>
@@ -198,7 +205,7 @@ export default function PricingSection() {
               boxShadow: '0 0 20px rgba(43, 59, 229, 0.5)'
             }}
           >
-            Get Pro License ➔
+            {t.proCta}
           </button>
         </div>
 
@@ -216,12 +223,12 @@ export default function PricingSection() {
             <div style={{ fontSize: '0.8rem', color: '#FF9F1C', fontFamily: 'monospace', fontWeight: 700, marginBottom: '0.5rem' }}>
               EU AI ACT COMPLIANCE
             </div>
-            <h3 style={{ fontSize: '1.8rem', color: '#FFF', margin: '0 0 1rem' }}>Enterprise Sovereign</h3>
+            <h3 style={{ fontSize: '1.8rem', color: '#FFF', margin: '0 0 1rem' }}>{t.enterpriseTitle}</h3>
             <div style={{ fontSize: '3rem', fontWeight: 900, color: '#FFF', marginBottom: '1.5rem' }}>
               $1,499 <span style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.5)', fontWeight: 400 }}>/ mo</span>
             </div>
             <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', lineHeight: '1.5', marginBottom: '2rem' }}>
-              For large enterprise organizations requiring dedicated Private Cloud isolation (GCP/AWS WIF) and legal compliance certification.
+              {t.enterpriseDesc}
             </p>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, color: 'rgba(255,255,255,0.8)', fontSize: '0.9rem', display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <li>✓ Dedicated GCP / WIF Allocation</li>
@@ -246,7 +253,7 @@ export default function PricingSection() {
               marginTop: '2.5rem'
             }}
           >
-            Contact Enterprise ➔
+            {t.enterpriseCta}
           </button>
         </div>
       </div>
