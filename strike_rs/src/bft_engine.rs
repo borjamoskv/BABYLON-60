@@ -42,6 +42,7 @@ pub struct BftNode {
 pub struct BftAsyncEngine {
     pub concurrency_limit: usize,
     nodes: HashMap<String, BftNode>,
+    pub telemetry_tx: Option<tokio::sync::broadcast::Sender<(String, u64, f64, Vec<u8>)>>,
 }
 
 impl BftAsyncEngine {
@@ -49,6 +50,7 @@ impl BftAsyncEngine {
         Self {
             concurrency_limit,
             nodes: HashMap::new(),
+            telemetry_tx: None,
         }
     }
 
@@ -109,6 +111,7 @@ impl BftAsyncEngine {
             let n_map_task = notify_map.clone();
 
             let atms_ref = atms.clone();
+            let telemetry_tx_task = self.telemetry_tx.clone();
 
             let task = tokio::spawn(async move {
                 // Zero-cost asynchronous wait (No polling, no CPU burn)
@@ -157,7 +160,16 @@ impl BftAsyncEngine {
 
                 {
                     let mut m = mem.write().await;
-                    m.put(&node.id, proof);
+                    m.put(&node.id, proof.clone());
+                }
+
+                // AI Telemetry Broadcast
+                if let Some(tx) = &telemetry_tx_task {
+                    // Calculamos una entropía local simulada usando el hash truncado
+                    let local_exergy = 0.9999 - (node.latency_ms as f64 * 0.0001);
+                    let seq = { mem.read().await.len() as u64 };
+                    let bytes_proof = proof.as_bytes().to_vec();
+                    let _ = tx.send((proof, seq, local_exergy, bytes_proof));
                 }
 
                 // O(1) Wakeup: Awake all dependent children instantly
