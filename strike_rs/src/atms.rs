@@ -46,51 +46,49 @@ pub type NodeId = usize;
 
 /// An Environment: a conjunction of assumptions. Ordered & hashable so it can
 /// live in sets and be compared canonically.
-#[derive(Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Default)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Default)]
 pub struct Environment {
-    assumptions: BTreeSet<AssumptionId>,
+    mask: u128,
 }
 
 impl Environment {
     pub fn empty() -> Self {
-        Environment {
-            assumptions: BTreeSet::new(),
-        }
+        Environment { mask: 0 }
     }
 
     pub fn singleton(a: AssumptionId) -> Self {
-        let mut s = BTreeSet::new();
-        s.insert(a);
-        Environment { assumptions: s }
+        assert!(a < 128, "ATMS Assumption limit (128) exceeded for O(1) backtracking");
+        Environment { mask: 1 << a }
     }
 
     pub fn from_assumptions<I: IntoIterator<Item = AssumptionId>>(it: I) -> Self {
-        Environment {
-            assumptions: it.into_iter().collect(),
+        let mut mask = 0;
+        for a in it {
+            assert!(a < 128, "ATMS Assumption limit (128) exceeded for O(1) backtracking");
+            mask |= 1 << a;
         }
+        Environment { mask }
     }
 
     /// Self ⊆ other (self is at least as weak an assumption set).
     pub fn is_subset(&self, other: &Environment) -> bool {
-        self.assumptions.is_subset(&other.assumptions)
+        (self.mask & other.mask) == self.mask
     }
 
     pub fn union(&self, other: &Environment) -> Environment {
-        Environment {
-            assumptions: self.assumptions.union(&other.assumptions).copied().collect(),
-        }
+        Environment { mask: self.mask | other.mask }
     }
 
     pub fn len(&self) -> usize {
-        self.assumptions.len()
+        self.mask.count_ones() as usize
     }
 
     pub fn is_empty(&self) -> bool {
-        self.assumptions.is_empty()
+        self.mask == 0
     }
 
     pub fn assumptions(&self) -> impl Iterator<Item = AssumptionId> + '_ {
-        self.assumptions.iter().copied()
+        (0..128).filter(move |&i| (self.mask & (1 << i)) != 0)
     }
 }
 

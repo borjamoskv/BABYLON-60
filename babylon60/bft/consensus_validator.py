@@ -27,6 +27,15 @@ class BFT_Validator:
             raise PermissionError(f"BFT_CONSENSUS_FAILURE: {valid_votes}/{required_votes} votes. State compromised.")
         return mutation_hash
 
+    def validate_fuzzy_opinions(self, opinions: Dict[str, Dict[str, float]], weights: Dict[str, float] = None) -> Dict[str, float]:
+        """
+        [C5-REAL] Evaluate heuristic / fuzzy inputs from the swarm using LogOP.
+        If any BFT agent vetoes (p=0), the hypothesis probability collapses to 0.
+        """
+        from babylon60.bft.bayesian_swarm import BayesianSwarm
+        swarm = BayesianSwarm(list(opinions.keys()))
+        return swarm.logarithmic_opinion_pool(opinions, weights)
+
     @staticmethod
     def decode_payload(payload_bytes: Any) -> Any:
         if isinstance(payload_bytes, memoryview):

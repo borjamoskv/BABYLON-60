@@ -113,3 +113,12 @@
 
 ### B60 DSL Lexical Constraint (Prevención de Necrosis Autoinmune)
 - **INV_C5_DSL_PARSING:** Never use Python's `ast.parse()` to evaluate, sanitize, or canonicalize native BABYLON-60 DSL code. The DSL is not Python. To achieve 1-WL structural isomorphism or Turing Castration on B60 code, agents MUST implement or utilize deterministic lexical tokenizers that natively strip B60 comments and normalize whitespace tokens without relying on external language grammars.
+
+### ATMS Constant-Time Lattice Invariant (Exergy ALU Limit)
+- **INV_C5_ATMS_O1:** All Assumption-based Truth Maintenance Systems (ATMS) in the Rust kernel (`strike_rs`) MUST implement `Environments` and `Nogoods` as fixed-size bitmasks (e.g., `u128` or `[u64; N]`). The use of dynamic collections (`BTreeSet`, `Vec`) for assumption evaluation is strictly prohibited to guarantee `O(1)` subset/union ALU operations during Dependency-Directed Backtracking (DDB) and prevent thermodynamic strangulation.
+
+### LogOP Absolute Veto Invariant (Anti-Polarization)
+- **INV_BFT_LOGOP:** When aggregating heuristic probabilities from a Bayesian Swarm (multiple BFT agents), the system MUST use Logarithmic Opinion Pooling (LogOP, geometric weighted mean) rather than Linear Pooling. This ensures a strict mathematical topological boundary: if any expert assigns a strict $P=0$ to a hypothesis (an Absolute Veto based on falsification), the aggregate pool mathematically collapses to $0$, overriding any Byzantine "tyranny of the masses" attempting to force a hallucinated consensus.
+
+### ABFT Shared Memory NodeBuilder Constraint (iceoryx2)
+- **INV_C5_ABFT_IPC:** When implementing Asynchronous BFT inside a single-node hypervisor to satisfy `INV_C5_18` without socket exhaustion, use `iceoryx2` zero-copy shared memory. Note that for `v0.3.0+`, initialization MUST flow through `NodeBuilder::new().create::<ipc::Service>()?.service_builder(...)`. Statically instantiating services directly is deprecated and will fail type checks.

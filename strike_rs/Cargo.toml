@@ -35,3 +35,7 @@ extension-module = ["pyo3/extension-module"]
 [build-dependencies]
 tonic-build = { version = "0.12", features = ["prost"] }
 
+[dependencies.iceoryx2]
+version = "0.3.0"
+
+[workspace]
