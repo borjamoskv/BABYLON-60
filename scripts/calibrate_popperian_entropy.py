@@ -70,7 +70,7 @@ def run_calibration():
     calibrated_min = round(max(1.5, t_mean - 3 * t_std), 2)
     calibrated_max = round(min(6.5, t_mean + 3 * t_std), 2)
     
-    print(f"\n[CALIBRACIÓN FINAL] Umbrales Óptimos C5-REAL:")
+    print("\n[CALIBRACIÓN FINAL] Umbrales Óptimos C5-REAL:")
     print(f"MIN_ENTROPY = {calibrated_min}")
     print(f"MAX_ENTROPY = {calibrated_max}")
     

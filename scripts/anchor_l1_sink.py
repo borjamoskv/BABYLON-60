@@ -16,8 +16,8 @@ from pathlib import Path
 ROOT_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT_DIR))
 
-from babylon60.crypto.rfc3161 import RFC3161Client
-from babylon60.crypto.identity import L0IdentityForge
+from babylon60.crypto.rfc3161 import RFC3161Client  # noqa: E402
+from babylon60.crypto.identity import L0IdentityForge  # noqa: E402
 
 def anchor_l1_sink() -> None:
     l1_dir = ROOT_DIR / "L1_sink"
@@ -31,9 +31,9 @@ def anchor_l1_sink() -> None:
     forge = L0IdentityForge(storage_dir=ROOT_DIR / ".babylon60" / "identity")
     passphrase = "MOSKV1_SOVEREIGN_L1_ANCHOR_KEY"
     try:
-        identity = forge.load_identity(passphrase)
+        _ = forge.load_identity(passphrase)
     except Exception:
-        identity = forge.forge_identity(passphrase)
+        _ = forge.forge_identity(passphrase)
 
     for json_file in sorted(l1_dir.glob("*.json")):
         try:

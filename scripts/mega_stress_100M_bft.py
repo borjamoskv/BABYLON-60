@@ -12,6 +12,7 @@ Authorship: Borja Moskv (borjamoskv)
 from __future__ import annotations
 
 import logging
+from typing import Any
 import sys
 import time
 from pathlib import Path
@@ -19,7 +20,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
-from babylon60.bft.cortex_persist_ledger import CortexPersistLedger, CortexEvent
+from babylon60.bft.cortex_persist_ledger import CortexPersistLedger, CortexEvent  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("mega_stress_100M")

@@ -14,9 +14,9 @@ from pathlib import Path
 ROOT_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT_DIR))
 
-from babylon60.bft.ledger_actor import BFTLedgerActor
-from babylon60.core.hypervisor import AgencyHypervisor
-from babylon60.core.landauer import LandauerEvictionEngine
+from babylon60.bft.ledger_actor import BFTLedgerActor  # noqa: E402
+from babylon60.core.hypervisor import AgencyHypervisor  # noqa: E402
+from babylon60.core.landauer import LandauerEvictionEngine  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("legion_100_swarm")
@@ -71,14 +71,14 @@ async def run_legion_100() -> None:
         db_path.with_suffix(".db-wal").unlink(missing_ok=True)
         db_path.with_suffix(".db-shm").unlink(missing_ok=True)
 
-    print(f"\n============================================================")
-    print(f" LEGION 100 SWARM EXECUTION COMPLETE")
-    print(f"============================================================")
-    print(f" Active Tenants Registered : 100 (Zero-Worktree / In-Memory)")
+    print("\n============================================================")
+    print(" LEGION 100 SWARM EXECUTION COMPLETE")
+    print("============================================================")
+    print(" Active Tenants Registered : 100 (Zero-Worktree / In-Memory)")
     print(f" Successful BFT Mutations  : {successful_projections}")
     print(f" Total Execution Latency  : {elapsed:.4f}s")
-    print(f" Invariant Integrity      : INV_C5_18 & INV_BFT_02 VERIFIED")
-    print(f"============================================================\n")
+    print(" Invariant Integrity      : INV_C5_18 & INV_BFT_02 VERIFIED")
+    print("============================================================\n")
 
 
 if __name__ == "__main__":

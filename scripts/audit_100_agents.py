@@ -78,7 +78,6 @@ def audit_and_normalize_all_agents():
             # Normalizar claves superiores
             if "capabilities" not in data or not isinstance(data["capabilities"], list):
                 intent = data.get("intent", "general_reasoning")
-                tools = data.get("tools", ["cortex_persister"])
                 data["capabilities"] = [f"{intent}_execution", "sovereign_reasoning", "bft_attestation"]
                 needs_save = True
                 

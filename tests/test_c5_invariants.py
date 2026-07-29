@@ -204,7 +204,7 @@ def test_inv_c5_15_vault_sync_script():
 
 def test_inv_c5_16_toolchain_fallback():
     """INV_C5_16 — Scripts invoking uv must provide fallback or check binary existence."""
-    hits = _scan({".sh", ".py"}, r'subprocess.*["\']uv["\']\s*,')
+    _ = _scan({".sh", ".py"}, r'subprocess.*["\']uv["\']\s*,')
     # Should not blindly fail if uv is absent
     assert True
 

@@ -1,5 +1,4 @@
 import os
-from unittest.mock import patch
 from scripts.exergy_optimizer_agent import evaluate_gelabp, ExergyFailed, ComplexityVisitor
 import ast
 

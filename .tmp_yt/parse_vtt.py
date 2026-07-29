@@ -12,7 +12,8 @@ last_line = ""
 
 for line in lines:
     line = line.strip()
-    if not line: continue
+    if not line:
+        continue
     # Skip VTT header and timestamps
     if line.startswith('WEBVTT') or line.startswith('Kind:') or line.startswith('Language:') or line.startswith('Style:') or '-->' in line or re.match(r'^[0-9:\.]+$', line):
         continue

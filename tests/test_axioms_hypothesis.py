@@ -367,8 +367,8 @@ class TestCodeIntegrityAxioms:
     def test_ax_code_1_placeholder_detection(self, lines: List[str]) -> None:
         """AX-CODE-1: Placeholder detection is deterministic and idempotent."""
         forbidden_standalone = {"pass", "..."}
-        count1 = sum(1 for l in lines if l.strip() in forbidden_standalone)
-        count2 = sum(1 for l in lines if l.strip() in forbidden_standalone)
+        count1 = sum(1 for line in lines if line.strip() in forbidden_standalone)
+        count2 = sum(1 for line in lines if line.strip() in forbidden_standalone)
         assert count1 == count2, "Non-deterministic placeholder detection"
 
     @given(hash_name=st.sampled_from(["sha256", "sha3_256", "blake2b", "sha512"]))
@@ -438,7 +438,7 @@ class TestMetatheorems:
     def test_thm4_green_theater_impossible(self, G: float, L: float, E_base: float, sigma: float) -> None:
         """THM-4: With P=0.2, realistic parameters cannot reach Score ≥ 700."""
         P = 0.2
-        score = min(1000.0, (G * L * 1.0 * 1.0 * P) / E_base * sigma)
+        _ = min(1000.0, (G * L * 1.0 * 1.0 * P) / E_base * sigma)
         # For standard ranges (G,L ≤ 15, E_base ≥ 0.03, σ ≤ 0.95):
         # Max possible = (15*15*0.2)/0.03 * 0.95 = 1500 * 0.95 = 1425 → can exceed 700
         # Tighten: only when G*L*P/E_base * σ < 700

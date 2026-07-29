@@ -1,5 +1,4 @@
 import re
-import sys
 
 def parse_vtt(filepath):
     with open(filepath, 'r', encoding='utf-8') as f:
@@ -19,7 +18,8 @@ def parse_vtt(filepath):
     
     for line in lines:
         line = line.strip()
-        if not line: continue
+        if not line:
+            continue
         # VTT from YouTube often duplicates words as they are spoken. 
         # A simple deduplication of consecutive identical lines:
         if cleaned_lines and cleaned_lines[-1] == line:

@@ -2,8 +2,7 @@
 Unit tests for babylon60.commands.grill_you
 """
 
-import pytest
-from babylon60.commands.grill_you import run_grill_you, GrillYouEngine, GrillYouReport
+from babylon60.commands.grill_you import run_grill_you, GrillYouReport
 
 
 def test_grill_you_execution():

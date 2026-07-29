@@ -22,16 +22,16 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
-from babylon60.bft.cortex_persist_ledger import CortexPersistLedger, CortexEvent
+from babylon60.bft.cortex_persist_ledger import CortexPersistLedger, CortexEvent  # noqa: E402
 
 MAIL_DIR = Path.home() / ".babylon60" / "babylonmail"
+account_file = MAIL_DIR / "account.json"
 MAIL_DB_PATH = MAIL_DIR / "mail_ledger.db"
 
 def get_ledger() -> CortexPersistLedger:
     return CortexPersistLedger(MAIL_DB_PATH)
 
 def cmd_status():
-    account_file = MAIL_DIR / "account.json"
     if not account_file.exists():
         user = os.environ.get("USER", "borja")
         profile = {
@@ -64,7 +64,6 @@ def cmd_status():
 
 def cmd_send(to: str, subject: str, body: str):
     ledger = get_ledger()
-    account_file = MAIL_DIR / "account.json"
     user = os.environ.get("USER", "borja")
     from_email = f"{user}@babylon60.com"
 

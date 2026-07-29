@@ -17,7 +17,6 @@ from urllib.parse import urlparse
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from babylon60.database.core import connect_sync
 
 # We will read from exergy_agent_ledger.db which is created in ~/.babylon60/exergy_agent_ledger.db
 DB_PATH = Path.home() / ".babylon60/exergy_agent_ledger.db"

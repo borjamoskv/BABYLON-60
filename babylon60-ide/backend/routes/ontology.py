@@ -54,7 +54,7 @@ def _human_size(size: int) -> str:
     return f"{size:.1f} TB"
 
 
-import re
+import re  # noqa: E402
 
 
 def _resolve_db(name: str) -> Path:

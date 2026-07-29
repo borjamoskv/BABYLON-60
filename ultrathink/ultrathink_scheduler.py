@@ -12,6 +12,7 @@ import os
 import logging
 import time
 from pathlib import Path
+import typing
 
 try:
     from prometheus_client import start_http_server, Gauge, Counter, Histogram
@@ -38,7 +39,7 @@ class ConsensusEngineStub:
         _ = payload
 
 
-from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
+from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Prometheus metrics
@@ -74,8 +75,8 @@ log = logging.getLogger("ultrathink.scheduler")
 
 
 async def propose_with_backoff(
-    actor: Any,
-    payload: Any,
+    actor: typing.Any,
+    payload: typing.Any,
     task_id: int,
 ) -> bool:
     """Create a :class:`LedgerEvent` or propose payload and append it to the BFT actor.
