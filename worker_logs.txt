@@ -1,0 +1,496 @@
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] Worker daemon iniciado.
+2026-07-29 22:55:08 [INFO] SwarmWorker - Backend: Kimi Cloud en https://api.moonshot.cn/v1
+2026-07-29 22:55:08 [INFO] SwarmWorker - Concurrency (Redis Tasks): 100
+2026-07-29 22:55:08 [INFO] SwarmWorker - Subprocess Semaphore (Max FDs): 20
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/kextutil
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/bzcat
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/dbicadmin
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/ex
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/perlbug
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/modelmanagerdump
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/footprint
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/lsappinfo
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/db_load
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/piconv
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/read
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/snmpusm
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/execsnoop
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/pagesize
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/lp
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/searchdiagnose
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/base64
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/ptargrep
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/jar
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/h2ph
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/readlink
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/opensnoop
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/rake
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/rvim
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/jcmd
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/dmc
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/vimtutor
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/iperf3-darwin
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/prove
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/gencat
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/mdutil
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/afhash
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/filtercalltree
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/jrunscript
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/headerdoc2html
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/crlrefresh
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/pagestuff
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/dbilogstrip
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/colrm
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/mcxrefresh
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/podchecker
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/znew
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/codecctl
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/stapler
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/snmpvacm
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/sandbox-exec
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/sftp
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/wc
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/jps
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/rsync
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/osacompile
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/shasum
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/IOMFB_FDR_Loader
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/pico
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/thermal
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/delv
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/gzcat
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/hdxml2manxml
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/java
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/lpq
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/xcdebug
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/resolveLinks
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/mpsgraphtool
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/comm
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/bundle
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/gzip
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/zipcloak
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/git-upload-archive
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/xml2-config
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/encode_keychange
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/traptoemail
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/gcc
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/smbutil
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/diff
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/stdbuf
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/ri
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/agvtool
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/cksum
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/segedit
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/zipnote
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/ptar
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/printf
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/soelim
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/AssetCacheTetheratorUtil
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/column
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/trash
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/ldapexop
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/ippfind
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/groups
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/dwarfdump
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/ppdc
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/rs
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/spfd
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/config_data
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/slogin
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/latency
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/lsm
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/xar
+2026-07-29 22:55:08 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/db_codegen
+2026-07-29 22:55:09 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/dns-sd
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-08] Error processing 8bcf8e63-93be-4889-a016-4e593359f506: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-01] Error processing ceef0ad0-7a21-4ca5-98c1-7b0fe0875958: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-10] Error processing 69fca734-fc66-4a95-b74f-419e7c182a9f: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-04] Error processing 8133f4fb-3f07-4813-be4b-e77c4394083b: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-05] Error processing 22dcbade-9bdd-479b-bdee-b77f4d91f297: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-03] Error processing 9d19d081-bed4-469e-b695-85f325bd3e40: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-11] Error processing 9f69b787-91fd-450b-bd9f-5a901c85f42e: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-15] Error processing 0f7c7d00-904c-4882-bff8-a9927c5c1f62: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-06] Error processing c6455dcf-d237-4e8c-b45a-477057fbedae: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-02] Error processing fb83dd65-1ef0-4d69-a8e4-67ec2036077b: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-13] Error processing 09999121-65cb-40a4-9d6c-5ad182261729: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-07] Error processing cdf91895-4b80-4d9a-9df3-edc0f3d14edf: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-19] Error processing bd120fe9-29c5-48f7-9396-970f9a140c17: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-17] Error processing f13670e6-1f0f-4d06-8e1c-e0985653ae6d: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-43] Error processing ef8f3bec-7172-486f-b568-a1de57891c56: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-47] Error processing 09eb2aaa-4241-401a-a1f8-79d33676422f: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-48] Error processing 244ca5dd-a61c-49e8-b025-64bcfb1645d3: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-14] Error processing 03c8d7c5-3933-457f-be55-4b206000c91b: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-50] Error processing 9092f91d-b4cc-4395-8424-1a5b346da775: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-49] Error processing 1a24ee74-67b2-4fb5-962a-4700ccd699af: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-22] Error processing 21a337dc-5bff-4cb2-a153-6f24c2d1a7ba: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-16] Error processing 06db12e3-ab9d-4257-8b2f-4b2fa5dfc9d7: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-09] Error processing 9d0ebfee-08bb-4400-91ea-b692529b59e3: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-24] Error processing 255cd0c5-bf75-46db-9db1-7d7a76e2cff9: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-28] Error processing d4fb3aa0-d074-47cd-b329-ab92b54999c3: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-18] Error processing d64983b9-59d7-41c3-a935-1455163a45da: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-12] Error processing e1f50c9e-0689-48fe-bdda-fa6e863e81f0: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-56] Error processing 224eb425-7612-4f9c-ad79-b9499506312f: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-21] Error processing d8591182-e7b8-48ac-9b62-574b08efd766: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-51] Error processing a28d2934-e636-4367-9f9b-fc2754eb81f1: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-23] Error processing 58956330-fab9-4f18-9216-4777662484aa: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-20] Error processing 96d403e1-045f-47ca-a157-afbb294559cc: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-29] Error processing 6877f2c7-75b3-4ff7-8677-7ced63298b23: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-31] Error processing 8520cacd-daa8-4793-a81c-df0565806c45: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-58] Error processing ca2f9550-90a3-4a37-80d2-69f5e9ab8ec1: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-42] Error processing 242cea13-f8f5-482a-98ec-65b9d3826308: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [ERROR] SwarmWorker - [agent-pod-9985-worker-30] Error processing 352d37d5-87dc-4ca9-8c2e-0a1f99d90ebd: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:10 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-54] Error processing cf98b5ef-ae67-426d-ab1c-84044ce7b1a0: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-55] Error processing e33da6e7-e63c-42ab-a4d7-862ae76119f6: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-26] Error processing ea9ffa62-8de5-4965-8e69-aee03a31e130: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-27] Error processing 1d6efb5e-7e9c-4217-b6ca-427a82986b45: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-40] Error processing e94efdde-f8a4-46f1-aa3e-c2a09e54d4c4: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-25] Error processing 8b5deb5f-baaa-4231-b4f2-11f885aceecc: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-52] Error processing 1df8d510-e008-4ad2-96f1-5807500c773e: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-38] Error processing eb92facb-2ee1-462c-8af8-577359016ed8: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-63] Error processing dae0b1d4-31d5-4dec-9d28-87d3bd755239: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-36] Error processing b4f57aa1-48ec-4e88-9934-ed0a9777345d: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-57] Error processing 30712c1c-8d0c-4415-93da-d10d57961906: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-62] Error processing 94e10e73-6b1b-44ac-9c71-87c34b6b5f3e: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-41] Error processing 2053d7ce-3f8e-4207-a695-8a2b2710a443: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-34] Error processing e50e526e-792d-4461-b563-e464b1126cf8: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-35] Error processing e1d20024-217b-4eb6-92a4-638a12d25099: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-60] Error processing c4ab46d6-f8e7-4381-9fed-6298a15d0997: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-37] Error processing b50cb5a6-f51e-4863-aaae-012c8f56351f: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-64] Error processing ab19660a-40ac-497d-954f-7655b196bac2: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-39] Error processing d1484ff9-07f2-4dc3-a39b-70c3950502b3: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-45] Error processing 4902794e-c80e-491d-9577-c0ebc0ff9b25: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-53] Error processing a57f63a5-566c-4607-9e54-1f9f18c4e97c: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-44] Error processing 9c4eb862-51e6-4f04-80ac-63faff8f3b3c: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-61] Error processing 8509c96a-08a4-47d6-9f14-b2149be642d4: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-33] Error processing 4290e4c2-96fd-4b26-abcc-fcafa5ceeaac: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-66] Error processing 8936f35f-4f39-47a4-9bad-3459766b7b6b: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-32] Error processing 8ad5a973-4825-4be1-8094-2f759fa97f66: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-77] Error processing 54489163-a76c-4c35-bbd3-ed915112aa23: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-59] Error processing 818945ba-6ebd-47d7-aa6d-77f605a6e6e2: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-65] Error processing a4199183-1332-4b32-8634-642aef0acf2b: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-46] Error processing e26d4a9b-473f-4d24-a1d3-aeab3d43b596: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-72] Error processing eb40db3e-887c-4b8e-bf38-310c65e846ce: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-75] Error processing f3daeb26-6b48-4cd2-aa9c-3d1621bc8b3c: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-71] Error processing dfbc8913-7b43-410e-88f4-e57d98ac3526: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-73] Error processing f6f72964-ccdc-4f67-9924-5ea5a8e80034: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-76] Error processing 08e1c3ff-a92f-4463-9375-261fadc5e5d6: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-74] Error processing e12d3372-1af4-490d-8dba-77fb06dddb99: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-70] Error processing 21f4daf9-c3d6-4312-9966-20a544442fff: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-69] Error processing 1e86954f-2dcb-4916-9ca7-469c8a6d1c04: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-68] Error processing f787016b-e055-4bc7-9451-e19c698031d5: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-98] Error processing 156f03b2-6091-41ee-aba0-d8b19df4054e: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:11 [ERROR] SwarmWorker - [agent-pod-9985-worker-100] Error processing 6ffdae11-0cb6-41e5-8796-8f7b160b94c4: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:11 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-99] Error processing 566e7085-c58b-4bcf-892f-cdce1d622fe3: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-95] Error processing f6eb8d69-2412-409e-86aa-b2d718b3c836: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-97] Error processing c020c44b-9e29-4313-b32d-d6196e009b2e: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-67] Error processing d238961a-1cb4-4c17-b6a0-1bec4e932abd: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-96] Error processing a4bd6197-0d25-47b4-9f3a-7b5ad8374cb4: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-93] Error processing fcff2db6-385d-49f5-a6c7-26181c74ce2c: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-94] Error processing 8dea8da6-3219-4d35-8c58-e2187f1fda55: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-90] Error processing e32d9d1f-216a-4b7f-a417-19aa236f6339: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-92] Error processing 07828d94-35d2-4b1c-9d9c-c52de8d5c3ca: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-91] Error processing fc749cd3-e7e2-4b35-abd7-9d762940c610: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-87] Error processing ad2e8725-1513-4c37-aa96-cf4cab141134: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-88] Error processing a8baa1b4-8dbf-4a04-85b4-89410f2bcb2d: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-85] Error processing 8b562455-4f7e-4dda-aeed-e992c550f92e: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-89] Error processing a8030fcf-41a6-4218-9804-9e84fa9656c1: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-86] Error processing cbfbe790-3f11-43f1-85fe-825fd803c609: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/tab2space
+2026-07-29 22:55:12 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/avconvert
+2026-07-29 22:55:12 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/jhsdb
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-82] Error processing bab2ccaf-eea5-4341-ba54-ee13f7cf2e31: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-81] Error processing 686a3713-8c6b-4fdf-9151-4e056e1aa862: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-78] Error processing 1eac050f-f5ae-418c-a97a-bf3a53873d44: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-79] Error processing 2cbc1d61-0912-4e5e-930f-ac560d22b4d7: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-80] Error processing bd6f5a49-9b06-4769-a317-a508d8309c79: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-84] Error processing 7671955c-fcf1-4bbc-86c3-7b32d0de7ac7: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-83] Error processing c9e460af-cf58-4284-88cf-c28ebc0c0bae: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/unzipsfx
+2026-07-29 22:55:12 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/treereg
+2026-07-29 22:55:12 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/usdcat
+2026-07-29 22:55:12 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/whatis
+2026-07-29 22:55:12 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/csreq
+2026-07-29 22:55:12 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/gperf
+2026-07-29 22:55:12 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/iconutil
+2026-07-29 22:55:12 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/avbcapture
+2026-07-29 22:55:12 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/lwp-dump
+2026-07-29 22:55:12 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/tail
+2026-07-29 22:55:12 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/zipsplit
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-10] Error processing 55a08c73-b516-4843-bd11-fac6d5d3411d: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-08] Error processing d1ae52df-3994-4667-8815-cb19aa4ef397: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/whois
+2026-07-29 22:55:12 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/nsupdate
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/ldapdelete
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-01] Error processing a45dc802-25a8-409a-b7f3-41a0e156e6e8: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/crc32
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [ERROR] SwarmWorker - [agent-pod-9985-worker-05] Error processing 92bf231f-7ea5-4ca3-9bcc-47526ce85eda: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:12 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/grep
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:12 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-04] Error processing 1cc71c4b-2e4a-4b38-a240-8a16a917dc4e: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-03] Error processing c329458c-c30a-45ed-b040-4f72e083e6a7: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/script
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/usdcrush
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/b64decode
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/more
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/vtool
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/cal
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/afplay
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/tkmib
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/ncinit
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/pl2pm
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/ldapwhoami
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-13] Error processing 8c837c6e-81a8-49f7-9899-a6c312e7617c: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-06] Error processing b708db9b-7e74-475e-bd01-b9416928021a: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/afktool
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/time
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/ssh-agent
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-11] Error processing 35316bd3-b84c-4bad-b6c6-68bbe7bd2561: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/gcore
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/xed
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/javap
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/uuname
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-15] Error processing 53428877-abc3-41b5-af54-9c0031f6fcd5: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/pr
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/env
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/javaws
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/head
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/dsymutil
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-02] Error processing 4aec363b-6838-41c4-a85c-9ea009cd6c77: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/clear
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/manpath
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-19] Error processing 89cf441c-ab82-4821-99bb-927efb9afee3: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/units
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/apropos
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-17] Error processing 713ed708-6eeb-4b34-839f-2134ec2e831c: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/SplitForks
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/kgetcred
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/rev
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/curl-config
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-47] Error processing 2a901e49-3731-4af7-8b9e-79ec55b393a0: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-43] Error processing 090ccc59-a75f-4495-a458-b15455c742f8: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/uniq
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-14] Error processing 3892b80b-945e-4b26-bd82-9f67ae10fd2b: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/tclsh
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-50] Error processing 5150bcfd-8109-4f86-b039-de2423914c7a: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/shazam
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/productsign
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/defaults
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/tic
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-48] Error processing ef7770b4-5518-4a9f-afd7-08efc868c7e7: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/uulog
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/zip
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/wdutil
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/curl
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-09] Error processing 95fa9688-fbbc-41cc-8243-975cf597b562: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/atrm
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/servertool
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/db_verify
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/agentxtrap
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-49] Error processing f93961b5-7659-4463-835f-de33e6dbd18a: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/newgrp
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-51] Error processing 57f30f8f-40c2-4432-bfe9-dee82b8a3993: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-21] Error processing ea7c5e59-3457-4674-92ea-4f0634c94030: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/rpcgen
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/timerfires
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-18] Error processing 6f70dd3e-82db-4fdd-81c6-a9c350c4e3b6: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-16] Error processing eb916b15-94d6-4821-8b6f-5ca6117d311e: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/perlthanks
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-12] Error processing 75045689-349a-4afe-8fd9-da0c05842c0c: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/swcutil
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/snmpnetstat
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-23] Error processing 4128bf2f-76f5-4209-8bb8-495fde54c99a: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/lastcomm
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/getconf
+2026-07-29 22:55:13 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/kpasswd
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-20] Error processing 7159d207-af84-4da8-9e6a-437b343a6733: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:13 [ERROR] SwarmWorker - [agent-pod-9985-worker-56] Error processing cc0550de-34ba-498c-ae60-4e7700c4c86b: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [ERROR] SwarmWorker - [agent-pod-9985-worker-31] Error processing 14f0ab11-c65e-41e9-893f-b661fef68c92: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/dbiproxy
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/dist_package_tool
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/vis
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [ERROR] SwarmWorker - [agent-pod-9985-worker-30] Error processing 5da68447-abc6-4dee-ac34-c3f32f853b3f: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/ipcrm
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [ERROR] SwarmWorker - [agent-pod-9985-worker-42] Error processing bacd7fca-6ad7-441b-bd77-714c7b887488: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [ERROR] SwarmWorker - [agent-pod-9985-worker-58] Error processing 394a745b-8b41-499b-9f19-1a6f319668f6: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/bputil
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [ERROR] SwarmWorker - [agent-pod-9985-worker-55] Error processing 3781be2a-b6f2-43b7-b43e-50f5e97867d1: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/net-snmp-config
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/otool
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/patch
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/killall
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [ERROR] SwarmWorker - [agent-pod-9985-worker-27] Error processing 05cb7084-abb1-4efe-a56f-39adb8e468a4: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/tailspin
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [ERROR] SwarmWorker - [agent-pod-9985-worker-22] Error processing 39a6c71e-8591-4d22-b45b-f63a7c1a5cc0: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [ERROR] SwarmWorker - [agent-pod-9985-worker-29] Error processing 21a690c2-00d9-4dfe-9c37-d9d851843745: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [ERROR] SwarmWorker - [agent-pod-9985-worker-40] Error processing 09a7768a-5a0d-40a8-8cdd-0e7bcd9fe789: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/su
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/ul
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/compression_tool
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/tkcon
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [ERROR] SwarmWorker - [agent-pod-9985-worker-25] Error processing c5e976c0-4a26-4020-9af1-a8ffbb9474bf: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [ERROR] SwarmWorker - [agent-pod-9985-worker-52] Error processing b51f4a04-f055-4c8f-9deb-b66af245dccc: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [ERROR] SwarmWorker - [agent-pod-9985-worker-26] Error processing 20fb2073-0a9a-44ab-9577-8bc4defb6528: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/ssh
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [ERROR] SwarmWorker - [agent-pod-9985-worker-63] Error processing 13aa1d59-592a-4020-8e79-83016f38dc5d: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/kdestroy
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [ERROR] SwarmWorker - [agent-pod-9985-worker-28] Error processing 7f3d5d29-ab05-488b-ba56-3b16f3b8bfda: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/snmpgetnext
+2026-07-29 22:55:14 [ERROR] SwarmWorker - [agent-pod-9985-worker-57] Error processing cc022a5f-4a1e-429b-a78c-614bf6718b45: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/type
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/xsubpp
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/tidy
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [ERROR] SwarmWorker - [agent-pod-9985-worker-54] Error processing 8dd306b6-87a7-4319-ad3f-d63923eb1669: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [ERROR] SwarmWorker - [agent-pod-9985-worker-36] Error processing c1683657-9a0a-43f7-b7d2-7dd02f3d59a2: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [ERROR] SwarmWorker - [agent-pod-9985-worker-38] Error processing 0ac11486-dca8-4d19-a699-13dda4336132: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [ERROR] SwarmWorker - [agent-pod-9985-worker-35] Error processing f64cce8c-ec60-4bae-b58f-06265ca204a5: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}. Requeuing.
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/tftp
+2026-07-29 22:55:14 [INFO] httpx - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/assetutil
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/AssetCacheLocatorUtil
+2026-07-29 22:55:14 [INFO] SwarmWorker - [agent-pod-9985] ⚙️ Executing Topologic Scan on /usr/bin/orbd
