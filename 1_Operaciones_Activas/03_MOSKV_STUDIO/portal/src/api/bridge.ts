@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { GrpcWebFetchTransport } from "@protobuf-ts/grpcweb-transport";
 import { ExergyBridgeClient } from "./c5_exergy.client";
 import { useC5Store } from "../store/c5_zustand_store";
@@ -20,7 +21,7 @@ export function startExergyStream() {
     const call = client.streamLedger(request);
 
     // Hydration listener
-    call.responses.onMessage((message) => {
+    call.responses.onMessage((message: any) => {
         // En un caso real, aquí validaríamos la prueba criptográfica.
         useC5Store.getState()._hydrateFromKernel({
             blockHash: message.blockHash,
@@ -37,7 +38,7 @@ export function startExergyStream() {
         setTimeout(startExergyStream, 5000);
     });
 
-    call.responses.onError((error) => {
+    call.responses.onError((error: any) => {
         console.error("[C5-REAL] Exergy stream error:", error);
     });
 }

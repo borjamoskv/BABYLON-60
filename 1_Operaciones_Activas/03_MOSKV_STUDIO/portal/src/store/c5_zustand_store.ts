@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { create } from 'zustand';
 
 // INV_C5_52: Inviolabilidad del Estado UI.
@@ -17,7 +18,7 @@ interface C5Store extends ExergyState {
   _hydrateFromKernel: (payload: ExergyState) => void;
 }
 
-export const useC5Store = create<C5Store>((set) => ({
+export const useC5Store = create<C5Store>((set: any) => ({
   blockHash: null,
   sequenceId: 0,
   exergyLevel: 0.0,
@@ -29,7 +30,7 @@ export const useC5Store = create<C5Store>((set) => ({
       console.error("[C5-REAL] TAINT DETECTED: Missing cryptographic proof from kernel.");
       return;
     }
-    
+
     set({
       blockHash: payload.blockHash,
       sequenceId: payload.sequenceId,
