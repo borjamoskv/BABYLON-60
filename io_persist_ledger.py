@@ -4,6 +4,7 @@
 
 import sqlite3
 from core_graph_ledger import GraphLedger, StateNode
+from babylon60.license_manager import verify_license_key, LicenseStatus
 
 
 class LedgerPersist:
@@ -11,14 +12,17 @@ class LedgerPersist:
     SQLite WAL persistence adapter for GraphLedger.
     Writes are atomic (single transaction per batch).
     Reads reconstruct the full in-memory DAG from disk.
+    Supports Sovereign Dual-Licensing (INV_C5_17).
     """
-    def __init__(self, db_path: str) -> None:
+    def __init__(self, db_path: str, license_key: str | None = None) -> None:
         assert isinstance(db_path, str) and len(db_path) > 0, "Fail-fast: db_path must be non-empty str"
         self.db_path = db_path
+        self.license_status: LicenseStatus = verify_license_key(license_key)
         self.conn = sqlite3.connect(db_path)
         self.conn.execute("PRAGMA journal_mode=WAL")
         self.conn.execute("PRAGMA busy_timeout=5000")
         self._init_schema()
+
 
     def _init_schema(self) -> None:
         """Pre: conn open -> Exec: CREATE TABLE IF NOT EXISTS -> Post: schema ready."""
