@@ -394,9 +394,43 @@ class ASTSandbox:
             import os
             import subprocess
             import tempfile
+            import json
+
+            wrapper = f"""
+import sys
+import json
+
+safe_builtins = {{
+    "abs": abs, "all": all, "any": any, "bin": bin, "bool": bool, "chr": chr,
+    "dict": dict, "divmod": divmod, "enumerate": enumerate, "filter": filter,
+    "float": float, "format": format, "frozenset": frozenset, "hash": hash,
+    "hex": hex, "int": int, "isinstance": isinstance, "issubclass": issubclass,
+    "iter": iter, "len": len, "list": list, "map": map, "max": max, "min": min,
+    "next": next, "oct": oct, "ord": ord, "pow": pow, "print": print,
+    "range": range, "repr": repr, "reversed": reversed, "round": round,
+    "set": set, "slice": slice, "sorted": sorted, "str": str, "sum": sum,
+    "tuple": tuple, "zip": zip, "True": True, "False": False, "None": None,
+}}
+
+namespace = {{"__builtins__": safe_builtins}}
+code = {repr(code)}
+
+try:
+    exec(code, namespace)
+except Exception as e:
+    print(f"{{type(e).__name__}}: {{e}}", file=sys.stderr)
+    sys.exit(1)
+
+user_vars = {{k: v for k, v in namespace.items() if not k.startswith("_") and k != "__builtins__"}}
+print("\\n---EXEC_RESULT_VARS---")
+try:
+    print(json.dumps(user_vars, default=str))
+except Exception:
+    print("{{}}")
+"""
 
             with tempfile.NamedTemporaryFile("w", suffix=".py", delete=False) as f:
-                f.write(code)
+                f.write(wrapper)
                 f_name = f.name
 
             try:
@@ -416,9 +450,23 @@ class ASTSandbox:
                     out, err = proc.communicate()
                     raise TimeoutError(f"Execution exceeded {self._timeout}s (Zombie Purged)")
 
-                captured.write(out)
                 if proc.returncode != 0:
                     raise RuntimeError(err or out)
+
+                out_str = out
+                vars_json = "{}"
+                if "---EXEC_RESULT_VARS---" in out_str:
+                    parts = out_str.split("---EXEC_RESULT_VARS---")
+                    out_str = parts[0]
+                    vars_json = parts[1].strip()
+
+                try:
+                    namespace = json.loads(vars_json)
+                except Exception:
+                    namespace = {}
+
+                captured.write(out_str)
+
             finally:
                 try:
                     os.remove(f_name)
@@ -432,7 +480,7 @@ class ASTSandbox:
                 stdout=captured.getvalue(),
                 duration_ms=(_time.monotonic() - start) * 1000,
             )
-        except (ValueError, TypeError, OSError, KeyError) as e:
+        except (ValueError, TypeError, OSError, KeyError, RuntimeError) as e:
             return ExecResult(
                 success=False,
                 error=f"{type(e).__name__}: {e}",
@@ -443,11 +491,7 @@ class ASTSandbox:
             sys.stdout = old_stdout
 
         duration = (_time.monotonic() - start) * 1000
-
-        # Filter namespace to user-defined names only
-        user_vars = {
-            k: v for k, v in namespace.items() if not k.startswith("_") and k != "__builtins__"
-        }
+        user_vars = namespace
 
         return ExecResult(
             success=True,
