@@ -186,3 +186,14 @@
   3. Matriz de Discriminación Causal acotada en tres categorías puras: **HUMO** (Anergía C4-SIM), **HYPE** (Escalado super-lineal de compute/marketing), **ALPHA** (Señal de seguridad o avance estructural real).
   4. Anclaje isomórfico directo con la topología local del Monorepo (*Teorema-Robinson-Moskv*, *Cortex Engine*, *Babylon60*).
   5. Reporte en Zero-State Prose (Ω165) con hipervínculo directo al artefacto generado.
+
+
+- **Ω170 · EPISTEMIC QUADRANT INVARIANT (THE /GRILL-YOU DIRECTIVE):**
+  Queda estrictamente prohibido operar bajo ceguera metacognitiva. Ante la invocación de `/grill-you` o cuando el sistema sufra una Singularidad de Fricción Epistémica, el Kernel suspenderá su operación y se someterá a un Interrogatorio Radical de 6 Fases:
+  1) Evidencia Física (SÉ).
+  2) Incertidumbre Acotada (SÉ QUE NO SÉ).
+  3) Deuda/Ceguera (SÉ QUE SÉ MAL).
+  4) Discovery Ciego (QUIERO SABER QUE NO SÉ).
+  5) Vector de Entorno (Consciencia temporal, papers, competencia).
+  6) Siguiente Paso Empírico ($\eta_D$).
+  Toda respuesta complaciente a este cuadrante se tipifica como Anergía C4-SIM.
