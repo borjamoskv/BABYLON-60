@@ -140,7 +140,7 @@ class StripeBillingGateway:
         Returns:
             Parsed webhook event object dictionary.
         """
-        if self.is_mock or stripe is None or signature.startswith("mock_"):
+        if self.is_mock or stripe is None:
             # Simple mock payload bypass (useful for E2E testing)
             import json
 

@@ -17,8 +17,6 @@ def audit_symlinks(root: Path | None = None) -> list[tuple[Path, str]]:
         root = REPO_ROOT
     violations = []
     for path in root.rglob("*"):
-        if "node_modules" in path.parts or ".git" in path.parts:
-            continue
         if path.is_symlink():
             target = os.readlink(path)
             # If symlink points to sibling project (relative path starting with ..)

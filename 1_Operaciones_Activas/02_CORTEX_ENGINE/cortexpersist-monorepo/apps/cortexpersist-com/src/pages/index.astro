@@ -7,19 +7,18 @@ import PricingSection from '@/components/PricingSection';
 import SwarmTelemetryLog from '@/components/SwarmTelemetryLog';
 import ManualCollisionInjector from '@/components/ManualCollisionInjector';
 import LanguagePicker from '@/components/LanguagePicker';
-import ComplianceCheck from '@/components/ComplianceCheck';
 ---
 
-<Layout
+<Layout 
   title="BABYLON 60 — Trust Infrastructure & EU AI Act Compliance for Autonomous AI"
   description="Sovereign memory & immutability substrate for AI agent teams. EU AI Act compliance, cryptographic lineage, and <5ms latency."
 >
   <main style="min-height: 100vh; background: #030303; color: #e0e0e0; font-family: system-ui, -apple-system, sans-serif;">
-
+    
     {/* Urgency Banner with Language Picker */}
     <div style="background: linear-gradient(90deg, #FF5252, #FF9F1C); color: #000; font-weight: 700; display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 1.5rem; font-size: 0.85rem; font-family: monospace;">
       <div>
-        ⚠️ EU AI ACT ENFORCEMENT (AUGUST 2026): Non-compliant AI systems face fines up to €30M. <a href="#compliance" style="color: #000; underline: true; margin-left: 0.5rem;">Run 60s Compliance Audit →</a>
+        ⚠️ EU AI ACT ENFORCEMENT (AUGUST 2026): Non-compliant AI systems face fines up to €30M. <a href="#pricing" style="color: #000; underline: true; margin-left: 0.5rem;">Explore Enterprise Compliance Tiers →</a>
       </div>
       <LanguagePicker client:only="react" />
     </div>
@@ -50,11 +49,6 @@ import ComplianceCheck from '@/components/ComplianceCheck';
       <div id="quickstart">
         <QuickstartSnippet client:only="react" />
       </div>
-    </section>
-
-    {/* Interactive Compliance Audit Tool */}
-    <section id="compliance" style="padding: 4rem 2rem; max-width: 1000px; margin: 0 auto;">
-      <ComplianceCheck client:only="react" />
     </section>
 
     {/* Live Telemetry Section */}

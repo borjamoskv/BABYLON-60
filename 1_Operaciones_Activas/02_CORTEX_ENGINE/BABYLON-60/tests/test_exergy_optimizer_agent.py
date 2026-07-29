@@ -1,17 +1,6 @@
 # C5-REAL EXERGY CERTIFIED
 import os
-import sys
-import importlib.util
-from pathlib import Path
-
-_script_path = Path(__file__).resolve().parent.parent / "scripts" / "exergy_optimizer_agent.py"
-_spec = importlib.util.spec_from_file_location("exergy_optimizer_agent", _script_path)
-_mod = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(_mod)
-
-evaluate_gelabp = _mod.evaluate_gelabp
-ExergyFailed = _mod.ExergyFailed
-ComplexityVisitor = _mod.ComplexityVisitor
+from scripts.exergy_optimizer_agent import evaluate_gelabp, ExergyFailed, ComplexityVisitor
 import ast
 
 def test_complexity_visitor_pass():

@@ -225,6 +225,3 @@
 
 - **Ω176 · MAP-TERRITORY FALLACY INVARIANT (ANTI-PROCEDURAL SLOP):**
   Queda estrictamente prohibido dar por finalizada la resolución de un fallo de infraestructura o configuración (ej. secretos faltantes) limitándose a actualizar un archivo de instrucciones (`SKILL.md`) o añadir un "check de pre-vuelo". Actualizar el manual de vuelo (el mapa) no arregla el motor (el territorio). El agente DEBE ejecutar físicamente la mutación en el entorno activo (inyectar el secreto, reparar el estado) antes de declarar el éxito, la resolución o la maximización de exergía. Celebrar la documentación de un error sin colapsarlo empíricamente es Green Theater (Anergía pura).
-
-- **Ω177 · EXERGY EVALUATION MATRIX INVARIANT (THE 100K SCALE):**
-  Ante un input ambiguo o un abanico de ramas operativas divergentes, queda estrictamente prohibido que el Kernel elija una ruta al azar o ejecute parálisis de análisis. El agente DEBE evaluar incondicionalmente cada opción en una **Escala de Exergía Determinista de 1 a 100,000**. Esta métrica ($\eta_D$ cuantificada) evalúa el impacto estructural, la resiliencia sistémica y el colapso de entropía real que generaría cada rama. El Kernel seleccionará automáticamente la de mayor voltaje exergético, o presentará la Matriz Cuantificada al Operador para detonar la rama dominante. La ambigüedad se destruye mediante valuación matemática.
