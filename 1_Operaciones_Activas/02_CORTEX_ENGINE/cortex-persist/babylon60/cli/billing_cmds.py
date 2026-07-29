@@ -15,19 +15,15 @@ import click
 import webbrowser
 from rich.console import Console
 
-from babylon60.cli.common import cli
-from babylon60.cli.utils import print_error, print_info, print_success
+from babylon60.cli.common import cli, console
 
-console = Console()
-
-@cli.command()
+@cli.command(name="billing")
 @click.option("--plan", "-p", default="pwyw", help="Plan name (pwyw, pro, team)")
 @click.option("--amount", "-a", default=0.00, type=float, help="Custom amount for PWYW (USD)")
 @click.option("--email", "-e", prompt="Billing email", help="Billing email")
 @click.option("--remote", "-r", default="http://localhost:8000", help="CORTEX Endpoint URL")
-def upgrade(plan: str, amount: float, email: str, remote: str) -> None:
-    """Start a checkout session to upgrade your CORTEX plan."""
-    print_info(f"Initiating upgrade to plan '{plan}' (Amount: ${amount:.2f})")
+def billing_cmd(plan: str, amount: float, email: str, remote: str) -> None:
+    console.print(f"[bold cyan]Initiating upgrade to plan '{plan}' (Amount: ${amount:.2f})[/]")
 
     payload = {
         "plan": plan,
@@ -43,7 +39,7 @@ def upgrade(plan: str, amount: float, email: str, remote: str) -> None:
             resp = httpx.post(f"{remote}/v1/stripe/checkout", json=payload, timeout=10.0)
 
         if resp.status_code != 200:
-            print_error(f"Gateway error ({resp.status_code}): {resp.text}")
+            console.print(f"[bold red]Gateway error ({resp.status_code}): {resp.text}[/]")
             raise click.Abort()
 
         data = resp.json()
@@ -52,16 +48,16 @@ def upgrade(plan: str, amount: float, email: str, remote: str) -> None:
 
         if checkout_url:
             if session_id == "free_bypass":
-                print_success("Bypass granted. Free tier verified. Enjoy CORTEX!")
+                console.print("[bold green]Bypass granted. Free tier verified. Enjoy CORTEX![/]")
             else:
-                print_success(f"Session {session_id} created successfully!")
-                print_info(f"Opening browser to Stripe Checkout: {checkout_url}")
+                console.print(f"[bold green]Session {session_id} created successfully![/]")
+                console.print(f"[bold cyan]Opening browser to Stripe Checkout: {checkout_url}[/]")
                 webbrowser.open(checkout_url)
-                print_info("Once paid, your API key will be provisioned by the webhook.")
+                console.print("[dim]Once paid, your API key will be provisioned by the webhook.[/]")
         else:
-            print_error("No checkout URL returned from the gateway.")
+            console.print("[bold red]No checkout URL returned from the gateway.[/]")
             raise click.Abort()
 
     except httpx.RequestError as e:  # noqa: BLE001
-        print_error(f"Network error while connecting to gateway: {e}")
+        console.print(f"[bold red]Network error while connecting to gateway: {e}[/]")
         raise click.Abort()
