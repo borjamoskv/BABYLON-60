@@ -102,7 +102,7 @@ def _compute_entry_hash_wrapper(
 class BFTLedgerActor:
     def __init__(self, db_path: Path) -> None:
         self._db_path = db_path
-        self._queue: asyncio.Queue[tuple[LedgerEvent, asyncio.Future[Dict[str, Any]]]] = asyncio.Queue()
+        self._queue: asyncio.Queue[tuple[LedgerEvent, asyncio.Future[Dict[str, Any]]]] = asyncio.Queue(maxsize=1024)
         self._task: Optional[asyncio.Task[None]] = None
 
     async def start(self) -> None:

@@ -33,7 +33,13 @@ def ship_kinetic_collapse(ast_state: str, taint_hash: str) -> None:
     with sqlite3.connect(db_path, timeout=5.0) as conn:
         conn.execute('PRAGMA journal_mode = WAL;')
         conn.execute('CREATE TABLE IF NOT EXISTS master_ledger (hash TEXT UNIQUE, payload TEXT)')
-        conn.execute('INSERT OR IGNORE INTO master_ledger (hash, payload) VALUES (?, ?)', (taint_hash, ast_state))
+        try:
+            conn.execute('INSERT INTO master_ledger (hash, payload) VALUES (?, ?)', (taint_hash, ast_state))
+        except sqlite3.IntegrityError:
+            cursor = conn.execute('SELECT payload FROM master_ledger WHERE hash = ?', (taint_hash,))
+            existing = cursor.fetchone()
+            if existing and existing[0] != ast_state:
+                raise ValueError("Fail-fast: INV_BFT_04 Collision...")
         conn.commit()
     print('    --> [DB WAL] Registro persistido atómicamente.')
     tag_name: str = f'SHIP-{int(time.time())}'

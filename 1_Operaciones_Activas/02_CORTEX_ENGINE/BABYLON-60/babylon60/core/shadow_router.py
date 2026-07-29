@@ -39,7 +39,7 @@ class ShadowRouter:
             )
         self._commitment_key = key_material.encode("utf-8")
         self.signer = signer
-        self.shadow_queue: asyncio.Queue[Dict[str, Any]] = asyncio.Queue()
+        self.shadow_queue: asyncio.Queue[Dict[str, Any]] = asyncio.Queue(maxsize=1024)
 
     def _commit(self, data: bytes) -> str:
         return f"hmac-sha256:{hmac.new(self._commitment_key, data, hashlib.sha256).hexdigest()}"
