@@ -1,6 +1,23 @@
 # C5-REAL EXERGY CERTIFIED
+import sys
+import importlib.util
+import types
+from pathlib import Path
 from unittest.mock import patch, MagicMock
-from scripts.pre_push_ledger_guard import verify_exergy, verify_invariants, main
+
+_script_path = Path(__file__).resolve().parent.parent / "scripts" / "pre_push_ledger_guard.py"
+_spec = importlib.util.spec_from_file_location("scripts.pre_push_ledger_guard", _script_path)
+_mod = importlib.util.module_from_spec(_spec)
+
+if "scripts" not in sys.modules:
+    sys.modules["scripts"] = types.ModuleType("scripts")
+sys.modules["scripts.pre_push_ledger_guard"] = _mod
+_spec.loader.exec_module(_mod)
+
+verify_exergy = _mod.verify_exergy
+verify_invariants = _mod.verify_invariants
+verify_symlink_depth = _mod.verify_symlink_depth
+main = _mod.main
 
 def test_verify_exergy_pass():
     with patch("scripts.pre_push_ledger_guard.run_exergy_optimizer", return_value=True):
