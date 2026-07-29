@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import "./App.css";
 import primitivesDataRaw from "./data/primitives.json";
-import { useC5Store } from "./store/c5_zustand_store";
 
 interface Primitive {
   id: string;
@@ -26,7 +25,6 @@ const primitivesData: Primitive[] = primitivesDataRaw as Primitive[];
 function App() {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [searchTerm, setSearchTerm] = useState("");
-  const c5State = useC5Store();
 
   const filteredPrimitives = primitivesData.filter(
     (p: Primitive) =>
@@ -140,32 +138,6 @@ function App() {
                   style={{ color: "var(--text-primary)" }}
                 >
                   896 Nodos
-                </div>
-              </div>
-
-              {/* C5-REAL EXERGY LIVE STREAM CARD */}
-              <div className="card glass-panel" style={{ gridColumn: "span 3", border: "1px solid var(--status-exergy)" }}>
-                <div className="card-header">
-                  <Activity size={24} color="var(--status-exergy)" />
-                  <h3 className="card-title" style={{ color: "var(--status-exergy)" }}>C5-REAL Exergy Stream (Live)</h3>
-                </div>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "1rem" }}>
-                  <div>
-                    <p className="metric-label">Sequence ID</p>
-                    <div className="mono" style={{ fontSize: "1.5rem" }}>#{c5State.sequenceId}</div>
-                  </div>
-                  <div>
-                    <p className="metric-label">Block Hash (Tonic Rust)</p>
-                    <div className="mono" style={{ color: "var(--text-primary)", fontSize: "1.2rem" }}>
-                      {c5State.blockHash || "Awaiting Kernel Sync..."}
-                    </div>
-                  </div>
-                  <div>
-                    <p className="metric-label">Exergy Level</p>
-                    <div className="mono" style={{ color: "var(--status-exergy)", fontSize: "1.5rem" }}>
-                      {c5State.exergyLevel.toFixed(5)}
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
