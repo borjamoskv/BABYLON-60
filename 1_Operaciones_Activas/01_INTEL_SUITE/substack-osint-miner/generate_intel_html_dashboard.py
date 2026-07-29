@@ -4,7 +4,6 @@ Generate Interactive HTML Dashboard for Mined Substack Data
 """
 
 import json
-import os
 import sys
 
 def generate_html(json_file_path: str, output_html_path: str):

@@ -90,10 +90,10 @@ def _execute_sync(source_code: str, global_ctx: dict) -> dict:
     exec_globals["__builtins__"] = safe_builtins
 
     import json
-    import tempfile
+    import os
     import subprocess
     import sys
-    import os
+    import tempfile
 
     # Chaos Monad: Isolated Edge Execution
     wrapped_code = f"{source_code}\n\nimport json\n__res = {{k: v for k, v in locals().items() if not k.startswith('_') and isinstance(v, (str, int, float, bool, list, dict, type(None)))}}\nprint(json.dumps(__res))\n"

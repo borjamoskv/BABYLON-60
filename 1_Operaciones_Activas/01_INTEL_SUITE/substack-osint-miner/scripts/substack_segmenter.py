@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # C5-REAL EXERGY CERTIFIED - SUBSTACK SUBSCRIBER SEGMENTATION & DELIVERABILITY ENGINE
-import sys
 import os
 import json
 import re
@@ -147,7 +146,7 @@ def main():
 
     if args.subject or args.body:
         score, reasons = engine.audit_spam_risk(args.subject, args.body)
-        print(f"\n--- DELIVERABILITY & SPAM AUDIT ---")
+        print("\n--- DELIVERABILITY & SPAM AUDIT ---")
         print(f"Spam Risk Score: {score}/100 ({'HIGH RISK' if score >= 40 else 'SAFE'})")
         if reasons:
             print("Risk Factors:")
@@ -166,7 +165,7 @@ def main():
         email_list = [e.strip() for e in raw_text.replace("\n", ",").split(",") if e.strip()]
         res = engine.process_emails(email_list, args.outdir)
 
-        print(f"\n--- SEGMENTATION RESULTS ---")
+        print("\n--- SEGMENTATION RESULTS ---")
         print(f"Total Evaluated: {res['total_input']}")
         print(f"Valid Syntax: {res['valid_count']}")
         print(f"Invalid Syntax: {res['invalid_count']}")

@@ -1,5 +1,4 @@
 # C5-REAL EXERGY CERTIFIED
-import os
 from PIL import Image, ImageDraw, ImageFont
 
 # Create a transparent image the size of the video (1280x720)

@@ -4,9 +4,9 @@ import sys
 import dns.resolver
 
 def audit_domain(domain="babylon60.com"):
-    print(f"==================================================")
+    print("==================================================")
     print(f" 🛡️  AUDITORÍA DE PROTECCIÓN DNS: {domain}")
-    print(f"==================================================")
+    print("==================================================")
 
     # 1. MX
     print("\n1. REGISTROS MX (Recepción):")
@@ -41,7 +41,7 @@ def audit_domain(domain="babylon60.com"):
         dmarc = dns.resolver.resolve(f"_dmarc.{domain}", "TXT")
         for r in dmarc:
             print(f"   🟢 DMARC ACTIVO: {r.to_text()}")
-    except Exception as e:
+    except Exception:
         print(f"   🔴 FALTANTE (CRÍTICO): No existe registro _dmarc.{domain}")
         print("      👉 Debe crearse un TXT en _dmarc con valor: v=DMARC1; p=none; rua=mailto:borja@babylon60.com;")
 

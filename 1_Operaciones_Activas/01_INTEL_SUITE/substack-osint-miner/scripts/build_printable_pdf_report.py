@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 # C5-REAL EXERGY CERTIFIED - PRINTABLE REPORT & PDF BUILDER
-import json
-import os
 
 def generate_html_report():
     html_content = """<!DOCTYPE html>

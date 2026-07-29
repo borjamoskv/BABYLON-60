@@ -1,6 +1,5 @@
 # C5-REAL EXERGY CERTIFIED
 import pytest
-import asyncio
 import os
 import sys
 import importlib.util

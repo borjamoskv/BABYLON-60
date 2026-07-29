@@ -7,14 +7,14 @@ Rules: Ω160 (Hysteresis), Ω202 (Kimi K3), Ω205 (ULTRATHINK), Ω206 (Epistemic
 
 import asyncio
 import logging
-from typing import Dict, Any, List, Literal
+from typing import Dict, Any, Literal
 from pydantic import BaseModel, Field
 from fastapi import APIRouter, HTTPException
 
 try:
     from babylon60.bft.ledger_actor import LedgerEvent
 except (ImportError, ModuleNotFoundError):
-    from dataclasses import dataclass, field
+    from dataclasses import dataclass
     @dataclass
     class LedgerEvent:
         stream: str

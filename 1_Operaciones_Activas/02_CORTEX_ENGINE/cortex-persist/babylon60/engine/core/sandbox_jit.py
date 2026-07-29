@@ -110,10 +110,10 @@ class SandboxJIT:
         # 3. Ejecutar AST en Subproceso Aislado (Mónada de Caos)
         try:
             import json
-            import tempfile
+            import os
             import subprocess
             import sys
-            import os
+            import tempfile
 
             source = ast.unparse(tree)
             wrapped = f"{source}\n\nimport json\n__res = {{k: v for k, v in locals().items() if not k.startswith('_') and isinstance(v, (str, int, float, bool, list, dict, type(None)))}}\nprint(json.dumps(__res))\n"

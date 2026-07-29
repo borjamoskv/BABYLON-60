@@ -3,8 +3,6 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 from pathlib import Path
 from typing import Any, Dict
-import os
-import asyncio
 
 from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
 

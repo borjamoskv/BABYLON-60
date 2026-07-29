@@ -19,6 +19,9 @@
     - **Cero Rutas Absolutas Huérfanas**: Prohibido hardcodear rutas de sistema local (ej. `/Users/<user>/...`). Siempre utilizar `os.path.expanduser("~")`, discovery relativo a `MONOREPO_ROOT` o variables de entorno con fallback (ej. `os.environ.get("VAR", default)`).
     - **Autocuración SQLite / BFT (`memory_store`)**: Al inicializar conexiones a bases de datos SQLite persistentes (`sqlite3.connect`), se DEBE verificar y crear automáticamente el directorio padre en tiempo de ejecución con `os.makedirs(os.path.dirname(os.path.abspath(db_path)), exist_ok=True)`.
 
+## INVARIANTE C7.7 DE CONFIANZA MATEMÁTICA (TRUST ANCHOR)
+11. **RULE_C77_BFT_TRUST_ANCHOR:** Queda prohibida la "Circular Authority" (el sistema confiando ciegamente en sí mismo para validarse). Toda regresión algorítmica de validación BFT o auditoría AI recursiva DEBE anclarse a un axioma criptográfico inmutable (ej. `0xDEADBEEF`) externo al loop, previniendo bucles infinitos de auto-evaluación.
+
 ## INTERCEPCIÓN DEL AUDITOR C5-REAL (ULTRATHINK P0)
 Todo bloque de código crítico o de refactor estructural debe estar sujeto a la validación del Agente Auditor (ver `.agents/auditor_c5_real.md`). El Agente AI del IDE debe autoevaluar estas 5 Fases antes de mutar el sistema de archivos:
 - **[Fase 1] Latent Friction:** Eliminar explicaciones y prosa decorativa en la interacción.

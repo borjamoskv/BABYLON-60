@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # C5-REAL EXERGY CERTIFIED - INDIVIDUAL CREATOR DOSSIER GENERATOR (UNO POR UNO)
 import json
-import os
-import re
 
 def build_individual_dossiers():
     with open("output/subscriber_analysis.json", "r", encoding="utf-8") as f:
@@ -72,23 +70,23 @@ def build_individual_dossiers():
 
     # Export HTML Interactive Dossier
     html_path = "output/dossier_creadores_uno_por_uno.html"
-    html_content = f"""<!DOCTYPE html>
+    html_content = """<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Dossier Creadores Uno por Uno - Substack OSINT</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body {{ font-family: 'Inter', sans-serif; background: #0d1117; color: #c9d1d9; padding: 30px; margin: 0; }}
-        .container {{ max-width: 1000px; margin: 0 auto; }}
-        h1 {{ color: #58a6ff; border-bottom: 2px solid #30363d; padding-bottom: 10px; }}
-        .search-box {{ width: 100%; padding: 12px; font-size: 1rem; border-radius: 6px; border: 1px solid #30363d; background: #161b22; color: #fff; margin-bottom: 25px; box-sizing: border-box; }}
-        .card {{ background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }}
-        .card-header {{ display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #21262d; padding-bottom: 10px; margin-bottom: 10px; }}
-        .card-title {{ font-size: 1.2rem; font-weight: 700; color: #ffffff; }}
-        .badge {{ background: #238636; color: #fff; padding: 3px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; }}
-        .meta {{ font-size: 0.9rem; color: #8b949e; margin-bottom: 8px; }}
-        .strategy {{ background: rgba(56, 139, 253, 0.15); border-left: 3px solid #58a6ff; padding: 10px 15px; border-radius: 0 4px 4px 0; font-size: 0.9rem; margin-top: 10px; }}
+        body { font-family: 'Inter', sans-serif; background: #0d1117; color: #c9d1d9; padding: 30px; margin: 0; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        h1 { color: #58a6ff; border-bottom: 2px solid #30363d; padding-bottom: 10px; }
+        .search-box { width: 100%; padding: 12px; font-size: 1rem; border-radius: 6px; border: 1px solid #30363d; background: #161b22; color: #fff; margin-bottom: 25px; box-sizing: border-box; }
+        .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #21262d; padding-bottom: 10px; margin-bottom: 10px; }
+        .card-title { font-size: 1.2rem; font-weight: 700; color: #ffffff; }
+        .badge { background: #238636; color: #fff; padding: 3px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; }
+        .meta { font-size: 0.9rem; color: #8b949e; margin-bottom: 8px; }
+        .strategy { background: rgba(56, 139, 253, 0.15); border-left: 3px solid #58a6ff; padding: 10px 15px; border-radius: 0 4px 4px 0; font-size: 0.9rem; margin-top: 10px; }
     </style>
 </head>
 <body>

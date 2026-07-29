@@ -9,7 +9,6 @@ import os
 import sys
 import sqlite3
 import time
-import json
 import numpy as np
 
 DB_PATH = "/Users/borjafernandezangulo/.gemini/antigravity/brain/56269703-6bf6-41c4-8a68-4ec214738bf2/scratch/isomorphic_300k.db"
@@ -59,7 +58,7 @@ def audit_ode_simulation():
         dydt = x - 0.5 * y
         x += dt * dxdt
         y += dt * dydt
-    print(f"  ✓ PASS: Integración numérica RK4 verificada sin divergencia atípica")
+    print("  ✓ PASS: Integración numérica RK4 verificada sin divergencia atípica")
 
 def audit_yaml_checkpoint():
     print("[TEST 4/4] Auditando Punto de Control YAML (OBJ-006)...")

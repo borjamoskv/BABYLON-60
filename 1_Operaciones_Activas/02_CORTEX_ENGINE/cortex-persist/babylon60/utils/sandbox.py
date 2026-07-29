@@ -49,7 +49,6 @@ from __future__ import annotations
 
 import ast
 import logging
-import signal
 import sys
 from dataclasses import dataclass, field
 from io import StringIO
@@ -183,6 +182,7 @@ _BLOCKED_ATTRS = frozenset(
         "__class__",
         "__subclasses__",
         "__bases__",
+        "__base__",
         "__mro__",
         "__init__",
         "__new__",
@@ -195,6 +195,13 @@ _BLOCKED_ATTRS = frozenset(
         "__import__",
         "__loader__",
         "__spec__",
+        "__getattribute__",
+        "__getattr__",
+        "gi_frame",
+        "f_back",
+        "f_builtins",
+        "f_locals",
+        "f_globals",
     }
 )
 
@@ -384,9 +391,9 @@ class ASTSandbox:
         captured = StringIO()
 
         try:
+            import os
             import subprocess
             import tempfile
-            import os
 
             with tempfile.NamedTemporaryFile("w", suffix=".py", delete=False) as f:
                 f.write(code)
