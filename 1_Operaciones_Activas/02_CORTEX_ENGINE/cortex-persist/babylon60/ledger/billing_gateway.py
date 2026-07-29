@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 """
 Billing Schema Integrity Gateway.
@@ -42,14 +43,14 @@ class BillingIntegrityGateway:
         self, event_type: str, payload: dict[str, Any], actor: str = "stripe"
     ) -> str:
         """Append an event to the ledger with 'pending' status."""
-        event_id = f"evt_{uuid.uuid4().hex}"
+        event_id = payload.get("id") or f"evt_{uuid.uuid4().hex}"
         payload_json = json.dumps(payload)
         ts = datetime.fromtimestamp(time.time(), tz=timezone.utc).isoformat()
 
         async with connect_async_ctx(self.db_path) as conn:
             await conn.execute(
                 """
-                INSERT INTO ledger_events (event_id, ts, tool, actor, action, payload_json, semantic_status)
+                INSERT OR IGNORE INTO ledger_events (event_id, ts, tool, actor, action, payload_json, semantic_status)
                 VALUES (?, ?, ?, ?, ?, ?, 'pending')
                 """,
                 (event_id, ts, "billing_gateway", actor, event_type, payload_json),
