@@ -39,6 +39,11 @@ class ReplayKernel:
     Solo producen propuestas.
 
     Este kernel decide qué propuesta entra al ledger.
+
+    Single-Writer Rule (INV_BFT_02):
+    Todas las mutaciones de estado hacia la base de datos de producción deben ser
+    canalizadas a través del BFTLedgerActor soberano. La base de datos pasada en `db`
+    a ReplayKernel corresponde únicamente al almacén aislado de propuestas (model_proposals).
     """
 
     def __init__(self, db: Any, policy_version: str):

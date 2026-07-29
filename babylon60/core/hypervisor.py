@@ -25,7 +25,7 @@ class TenantScope:
     tenant_id: str
     created_at: float
     metadata: Dict[str, Any] = field(default_factory=dict)
-    event_queue: asyncio.Queue[Dict[str, Any]] = field(default_factory=asyncio.Queue)
+    event_queue: asyncio.Queue[Dict[str, Any]] = field(default_factory=lambda: asyncio.Queue(maxsize=4096))
     active: bool = True
 
 

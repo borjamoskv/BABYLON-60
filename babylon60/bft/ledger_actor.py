@@ -101,13 +101,16 @@ def _compute_entry_hash_wrapper(
 class BFTLedgerActor:
     def __init__(self, db_path: Path) -> None:
         self._db_path = db_path
-        self._queue: asyncio.Queue[tuple[LedgerEvent, asyncio.Future[Dict[str, Any]]]] = asyncio.Queue()
+        self._queue: asyncio.Queue[tuple[LedgerEvent, asyncio.Future[Dict[str, Any]]]] = asyncio.Queue(maxsize=4096)
         self._task: Optional[asyncio.Task[None]] = None
+        self._stop_event: asyncio.Event = asyncio.Event()
 
     async def start(self) -> None:
+        self._stop_event.clear()
         self._task = asyncio.create_task(self._worker())
 
     async def stop(self) -> None:
+        self._stop_event.set()
         if self._task and not self._task.done():
             await asyncio.gather(self._queue.join(), return_exceptions=True)
             self._task.cancel()
@@ -194,16 +197,20 @@ class BFTLedgerActor:
             await db.execute("PRAGMA foreign_keys=ON")
             await db.execute("PRAGMA busy_timeout=5000")
             await self._init_db(db)
-            while True:
+            while not self._stop_event.is_set():
                 await asyncio.sleep(0)
-                get_res = await asyncio.gather(self._queue.get(), return_exceptions=True)
-                if isinstance(get_res[0], asyncio.CancelledError):
+                try:
+                    event_tuple = await asyncio.wait_for(self._queue.get(), timeout=1.0)
+                except asyncio.TimeoutError:
+                    continue
+                except asyncio.CancelledError:
                     break
-                if isinstance(get_res[0], BaseException):
+                except BaseException as exc:
                     # INV_C5_07 (falla ruidosa): el fallo mata al WORKER y aflora en el
                     # supervisor (Zombie Actor Prevention en append()); cero auto-necrosis.
-                    raise RuntimeError("FAIL-FAST: General Exception intercepted on queue get.") from get_res[0]
-                event, future = get_res[0]
+                    raise RuntimeError("FAIL-FAST: General Exception intercepted on queue get.") from exc
+
+                event, future = event_tuple
                 process_res = await asyncio.gather(self._process(db, event, future), return_exceptions=True)
                 if isinstance(process_res[0], ValueError):
                     if not future.done():
@@ -233,9 +240,13 @@ class BFTLedgerActor:
         self, db: aiosqlite.Connection, event_id: str, event: LedgerEvent, stored_payload: str, created_at: str
     ) -> tuple[int, str]:
         await db.execute("BEGIN IMMEDIATE")
-        cursor = await db.execute("SELECT seq, entry_hash FROM ledger_entries WHERE event_id = ?", (event_id,))
+        cursor = await db.execute("SELECT seq, entry_hash, payload_json FROM ledger_entries WHERE event_id = ?", (event_id,))
         row = await cursor.fetchone()
         if row:
+            existing_payload = str(row[2])
+            if existing_payload != stored_payload:
+                await db.execute("ROLLBACK")
+                raise ValueError(f"Fail-fast: INV_BFT_04 Collision on event_id {event_id}: payload mismatch")
             await db.execute("COMMIT")
             return int(row[0]), str(row[1])
         cursor = await db.execute(
@@ -265,10 +276,13 @@ class BFTLedgerActor:
         )
         db_row = await cursor.fetchone()
         if db_row is None:
-            cursor = await db.execute("SELECT seq, entry_hash FROM ledger_entries WHERE event_id = ?", (event_id,))
+            cursor = await db.execute("SELECT seq, entry_hash, payload_json FROM ledger_entries WHERE event_id = ?", (event_id,))
             db_row = await cursor.fetchone()
             if db_row is None:
                 raise RuntimeError("Insertion failed: event_id not persisted and not found")
+            if str(db_row[2]) != stored_payload:
+                await db.execute("ROLLBACK")
+                raise ValueError(f"Fail-fast: INV_BFT_04 Collision on event_id {event_id}: payload mismatch")
         await db.execute("COMMIT")
         return int(db_row[0]), str(db_row[1])
 

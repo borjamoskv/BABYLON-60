@@ -36,10 +36,14 @@ class Moskv1Kernel:
 
     def __init__(self, db_path: str = "apex_cortex.db") -> None:
         self.db_path = db_path
-        self._write_queue: asyncio.Queue[ApexClaim] = asyncio.Queue()
+        self._write_queue: asyncio.Queue[ApexClaim] = asyncio.Queue(maxsize=4096)
         self._lamport_clock: int = 0
         self._last_hash: str = "0000000000000000000000000000000000000000000000000000000000000000"
+        self._stop_event: asyncio.Event = asyncio.Event()
         self._boot_sequence()
+
+    def stop(self) -> None:
+        self._stop_event.set()
 
     def _boot_sequence(self) -> None:
         """Ignición Síncrona. Prepara el entorno BFT_STATE_LOOP."""
@@ -92,8 +96,11 @@ class Moskv1Kernel:
         """El bucle infinito de cristalización física (1 solo escritor)."""
         print("[MOSKV-1] KERNEL IGNITION: BFT_STATE_LOOP ACTIVATED.")
         try:
-            while True:
-                claim = await self._write_queue.get()
+            while not self._stop_event.is_set():
+                try:
+                    claim = await asyncio.wait_for(self._write_queue.get(), timeout=1.0)
+                except asyncio.TimeoutError:
+                    continue
 
                 # 1. Auditoría
                 if claim.confidence not in ("C4", "C5"):
@@ -126,8 +133,23 @@ class Moskv1Kernel:
                     finally:
                         await db.close()
                 except sqlite3.IntegrityError:
-                    # Invariante de Idempotency Lock
-                    print(f"[!] Idempotency Lock disparado para {claim.claim_id}. Entropía abortada.")
+                    # Invariante de Idempotency Lock: verificar coincidencia de payload (INV_BFT_04)
+                    db_chk = await dbcore.connect(self.db_path, synchronous="FULL")
+                    try:
+                        cursor = await db_chk.execute(
+                            "SELECT payload FROM master_ledger WHERE claim_id = ?",
+                            (claim.claim_id,),
+                        )
+                        row = await cursor.fetchone()
+                        if row:
+                            existing_payload = json.loads(row[0]) if isinstance(row[0], str) else row[0]
+                            if existing_payload != claim.payload:
+                                raise ValueError(
+                                    f"Fail-fast: INV_BFT_04 Collision on claim_id {claim.claim_id}: payload mismatch"
+                                )
+                    finally:
+                        await db_chk.close()
+                    print(f"[!] Idempotency Lock disparado para {claim.claim_id}. Replay legítimo confirmado.")
                 except sqlite3.DatabaseError:
                     os.kill(os.getpid(), signal.SIGKILL)
                     raise RuntimeError("FAIL-FAST: BFT Ledger corrompido.")
