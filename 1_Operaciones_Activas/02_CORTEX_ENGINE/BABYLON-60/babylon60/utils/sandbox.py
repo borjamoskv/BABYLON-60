@@ -19,9 +19,10 @@ Architecture::
     code → ASTSandbox.safe_exec(code, timeout=5) → ExecResult
                ↓
         1. AST validation (whitelist check)
-        2. Restricted globals (no builtins abuse)
-        3. Timeout via signal.alarm
-        4. Capture stdout/stderr
+        2. Isolated child process (empty env, own session)
+        3. Restricted globals inside that child
+        4. Timeout via SIGKILL on the child's process group
+        5. Capture stdout/stderr
 
 Security model:
 - **Deny by default**: Only whitelisted AST node types allowed
@@ -29,7 +30,18 @@ Security model:
 - **No exec/eval**: Metaprogramming blocked
 - **No dunder access**: __class__, __subclasses__, etc. blocked
 - **No file I/O**: open, Path, os calls blocked
+- **Process isolation**: Code runs in a child that never inherits the
+  parent namespace, so an interpreter-level escape does not reach us
+- **Out-of-band results**: The namespace comes back through a private
+  temp file, never through stdout. Sandboxed code owns stdout and could
+  otherwise print a forged payload and overwrite its own results.
 - **Timeout**: Infinite loops killed after N seconds
+
+Result contract:
+``ExecResult.output`` crosses a process boundary, so values are JSON
+round-tripped. Anything not JSON-representable (functions, sets, dicts
+with non-string keys) is coerced to its ``repr`` and its name is listed
+in ``ExecResult.coerced_vars``. Nothing is dropped silently.
 
 Usage::
 
@@ -49,10 +61,10 @@ from __future__ import annotations
 
 import ast
 import logging
-import signal
 import sys
 from dataclasses import dataclass, field
 from io import StringIO
+from string import Template
 
 __all__ = ["ASTSandbox", "ExecResult", "SandboxVerdict"]
 
@@ -174,8 +186,73 @@ _BLOCKED_NAMES = frozenset(
         "classmethod",
         "staticmethod",
         "property",
+        # Bare-name form of the builtins mapping. Already denied as an
+        # attribute; without this a plain `x = __builtins__` slipped through
+        # and handed out a live reference to the restricted builtins dict.
+        "__builtins__",
     }
 )
+
+# Builtins exposed to sandboxed code. Single source of truth: the child
+# process rebuilds its namespace from these names, so the parent and the
+# child can never drift apart.
+_SAFE_BUILTIN_NAMES = (
+    "abs", "all", "any", "bin", "bool", "chr", "dict", "divmod",
+    "enumerate", "filter", "float", "format", "frozenset", "hash", "hex",
+    "int", "isinstance", "issubclass", "iter", "len", "list", "map", "max",
+    "min", "next", "oct", "ord", "pow", "print", "range", "repr",
+    "reversed", "round", "set", "slice", "sorted", "str", "sum", "tuple",
+    "zip",
+)
+
+# Private channel marker the child uses to hand the namespace back. Kept
+# off stdout on purpose — see the module docstring.
+_MAX_COERCED_REPR = 4096
+
+# Source of the child process. ``string.Template`` (``$name``) is used instead
+# of str.format/f-strings so the Python braces below need no escaping.
+_WRAPPER_TEMPLATE = Template("""\
+import builtins
+import json
+import sys
+
+_NAMES = $names
+_CODE = $code
+_RESULT_PATH = $result_path
+_MAX_REPR = $max_repr
+
+safe_builtins = {n: getattr(builtins, n) for n in _NAMES}
+safe_builtins["True"] = True
+safe_builtins["False"] = False
+safe_builtins["None"] = None
+
+namespace = {"__builtins__": safe_builtins}
+
+try:
+    exec(_CODE, namespace)
+except BaseException as exc:
+    print("%s: %s" % (type(exc).__name__, exc), file=sys.stderr)
+    sys.exit(1)
+
+payload = {}
+coerced = []
+for _k, _v in namespace.items():
+    if _k.startswith("_") or _k == "__builtins__":
+        continue
+    try:
+        json.dumps(_v)
+    except Exception:
+        try:
+            payload[_k] = repr(_v)[:_MAX_REPR]
+        except Exception:
+            payload[_k] = "<unrepresentable>"
+        coerced.append(_k)
+    else:
+        payload[_k] = _v
+
+with open(_RESULT_PATH, "w", encoding="utf-8") as _fh:
+    json.dump({"vars": payload, "coerced": coerced}, _fh)
+""")
 
 # Blocked attribute patterns (dunder)
 _BLOCKED_ATTRS = frozenset(
@@ -183,6 +260,7 @@ _BLOCKED_ATTRS = frozenset(
         "__class__",
         "__subclasses__",
         "__bases__",
+        "__base__",
         "__mro__",
         "__init__",
         "__new__",
@@ -195,6 +273,13 @@ _BLOCKED_ATTRS = frozenset(
         "__import__",
         "__loader__",
         "__spec__",
+        "__getattribute__",
+        "__getattr__",
+        "gi_frame",
+        "f_back",
+        "f_builtins",
+        "f_locals",
+        "f_globals",
     }
 )
 
@@ -218,13 +303,19 @@ class SandboxVerdict:
 
 @dataclass()
 class ExecResult:
-    """Result of sandboxed execution."""
+    """Result of sandboxed execution.
+
+    ``output`` is JSON round-tripped across the process boundary. Names
+    whose values could not survive that trip are coerced to ``repr`` and
+    listed in ``coerced_vars`` — never dropped without saying so.
+    """
 
     success: bool
     output: dict[str, object] = field(default_factory=dict)
     stdout: str = ""
     error: str | None = None
     duration_ms: float = 0.0
+    coerced_vars: tuple[str, ...] = ()
 
 
 # ─── AST Sandbox ─────────────────────────────────────────────────────
@@ -329,79 +420,79 @@ class ASTSandbox:
                 error=f"Validation failed: {'; '.join(verdict.violations)}",
             )
 
-        # Step 2: Prepare restricted namespace
-        safe_builtins = {
-            "abs": abs,
-            "all": all,
-            "any": any,
-            "bin": bin,
-            "bool": bool,
-            "chr": chr,
-            "dict": dict,
-            "divmod": divmod,
-            "enumerate": enumerate,
-            "filter": filter,
-            "float": float,
-            "format": format,
-            "frozenset": frozenset,
-            "hash": hash,
-            "hex": hex,
-            "int": int,
-            "isinstance": isinstance,
-            "issubclass": issubclass,
-            "iter": iter,
-            "len": len,
-            "list": list,
-            "map": map,
-            "max": max,
-            "min": min,
-            "next": next,
-            "oct": oct,
-            "ord": ord,
-            "pow": pow,
-            "print": print,
-            "range": range,
-            "repr": repr,
-            "reversed": reversed,
-            "round": round,
-            "set": set,
-            "slice": slice,
-            "sorted": sorted,
-            "str": str,
-            "sum": sum,
-            "tuple": tuple,
-            "zip": zip,
-            "True": True,
-            "False": False,
-            "None": None,
-        }
-
-        namespace: dict[str, object] = {"__builtins__": safe_builtins}
-
-        # Step 3: Execute with timeout
+        # Step 2: Execute in an isolated child process.
+        # The restricted namespace is built inside that child from
+        # _SAFE_BUILTIN_NAMES; nothing from this process is inherited.
         start = _time.monotonic()
-        old_stdout = sys.stdout
         captured = StringIO()
 
+        f_name: str | None = None
+        result_path: str | None = None
+
         try:
-            sys.stdout = captured
+            import json
+            import os
+            import subprocess
+            import tempfile
 
-            # Set timeout (Unix only; no-op on Windows)
-            if hasattr(signal, "SIGALRM"):
+            # Private result channel. Sandboxed code cannot reach it: it has
+            # no imports and no `open`, and the wrapper source is not visible
+            # from inside the restricted namespace.
+            res_fd, result_path = tempfile.mkstemp(suffix=".json", prefix="sbx_res_")
+            os.close(res_fd)
 
-                def _timeout_handler(signum, frame):
-                    raise TimeoutError(f"Execution exceeded {self._timeout}s")
+            wrapper = _WRAPPER_TEMPLATE.substitute(
+                names=repr(_SAFE_BUILTIN_NAMES),
+                code=repr(code),
+                result_path=repr(result_path),
+                max_repr=_MAX_COERCED_REPR,
+            )
 
-                old_handler = signal.signal(signal.SIGALRM, _timeout_handler)
-                signal.alarm(self._timeout)
+            with tempfile.NamedTemporaryFile(
+                "w", suffix=".py", prefix="sbx_", delete=False
+            ) as f:
+                f.write(wrapper)
+                f_name = f.name
+
+            import signal
+
+            proc = subprocess.Popen(
+                [sys.executable, "-I", f_name],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                env={},
+                start_new_session=True,
+            )
+            try:
+                out, err = proc.communicate(timeout=self._timeout)
+            except subprocess.TimeoutExpired:
+                os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+                out, err = proc.communicate()
+                raise TimeoutError(
+                    f"Execution exceeded {self._timeout}s (Zombie Purged)"
+                )
+
+            if proc.returncode != 0:
+                raise RuntimeError(err or out)
+
+            # stdout is entirely the user's. Results arrive out-of-band, so
+            # nothing printed here can forge or erase them.
+            captured.write(out)
 
             try:
-                # nosec B102 - guarded by AST whitelist + timeout + restricted builtins
-                exec(compile(code, "<sandbox>", "exec"), namespace)  # nosec B102 - exec() in sandboxed namespace - explicit design decision for REPL
-            finally:
-                if hasattr(signal, "SIGALRM"):
-                    signal.alarm(0)
-                    signal.signal(signal.SIGALRM, old_handler)
+                with open(result_path, encoding="utf-8") as fh:
+                    payload = json.load(fh)
+            except (OSError, ValueError) as exc:
+                raise RuntimeError(f"Result channel unreadable: {exc}") from exc
+
+            if not isinstance(payload, dict) or not isinstance(
+                payload.get("vars"), dict
+            ):
+                raise RuntimeError("Result channel returned a malformed payload")
+
+            user_vars: dict[str, object] = payload["vars"]
+            coerced = tuple(payload.get("coerced", ()))
 
         except TimeoutError as e:
             return ExecResult(
@@ -410,7 +501,7 @@ class ASTSandbox:
                 stdout=captured.getvalue(),
                 duration_ms=(_time.monotonic() - start) * 1000,
             )
-        except (ValueError, TypeError, OSError, KeyError) as e:
+        except (ValueError, TypeError, OSError, KeyError, RuntimeError) as e:
             return ExecResult(
                 success=False,
                 error=f"{type(e).__name__}: {e}",
@@ -418,18 +509,19 @@ class ASTSandbox:
                 duration_ms=(_time.monotonic() - start) * 1000,
             )
         finally:
-            sys.stdout = old_stdout
-
-        duration = (_time.monotonic() - start) * 1000
-
-        # Filter namespace to user-defined names only
-        user_vars = {k: v for k, v in namespace.items() if not k.startswith("_") and k != "__builtins__"}
+            for _path in (f_name, result_path):
+                if _path:
+                    try:
+                        os.remove(_path)
+                    except OSError:
+                        pass
 
         return ExecResult(
             success=True,
             output=user_vars,
             stdout=captured.getvalue(),
-            duration_ms=duration,
+            duration_ms=(_time.monotonic() - start) * 1000,
+            coerced_vars=coerced,
         )
 
     @staticmethod

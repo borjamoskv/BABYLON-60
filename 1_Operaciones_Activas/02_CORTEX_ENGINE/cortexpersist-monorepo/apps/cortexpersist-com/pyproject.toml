@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 [project]
 name = "cortex-persist-workspace"
 version = "0.0.1"
@@ -6,18 +7,11 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "cortex-persist",
-    "cortex-persist-langchain"
-]
-
-[tool.uv.workspace]
-members = [
-    "packages/cortex-persist-python",
-    "packages/cortex-persist-langchain-python"
 ]
 
 [tool.uv.sources]
-cortex-persist = { workspace = true }
-cortex-persist-langchain = { workspace = true }
+cortex-persist = { path = "../../../cortex-persist" }
+
 
 [tool.pytest.ini_options]
 testpaths = [

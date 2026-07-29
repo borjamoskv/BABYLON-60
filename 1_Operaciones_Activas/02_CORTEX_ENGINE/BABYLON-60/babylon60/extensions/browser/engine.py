@@ -39,6 +39,7 @@ class BrowserEngine:
                 "--disable-blink-features=AutomationControlled",
                 "--hide-scrollbars",
                 "--mute-audio",
+                "--disable-gpu",  # C5-REAL Tahoe Mitigation (Ω138)
             ],
         )
         if not self._browser:

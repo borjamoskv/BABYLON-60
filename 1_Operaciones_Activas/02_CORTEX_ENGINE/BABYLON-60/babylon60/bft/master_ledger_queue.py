@@ -21,7 +21,7 @@ logger = logging.getLogger("babylon60.bft.master_ledger")
 class MasterLedgerQueue:
     def __init__(self, db_path: str):
         self.db_path = db_path
-        self.queue: asyncio.Queue[tuple[str, tuple[Any, ...]] | None] = asyncio.Queue()
+        self.queue: asyncio.Queue[tuple[str, tuple[Any, ...]] | None] = asyncio.Queue(maxsize=1024)
         self.db: aiosqlite.Connection | None = None
         self._writer_task: asyncio.Task[Any] | None = None
         self._writer_failure: BaseException | None = None

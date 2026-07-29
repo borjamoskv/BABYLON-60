@@ -51,7 +51,7 @@
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.70.0",
     "react-resizable-panels": "^4.2.2",
-    "react-router": "^7.6.1",
+    "react-router": "^8.3.0",
     "recharts": "^2.15.4",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",
@@ -77,5 +77,9 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^8.1.5"
+  },
+  "overrides": {
+    "brace-expansion": "^5.0.8",
+    "react-router": "^8.3.0"
   }
 }

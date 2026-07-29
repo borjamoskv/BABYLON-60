@@ -71,14 +71,30 @@ def resolve_fo(c1, c2, counter):
                     resolvents.add(res)
     return resolvents
 
+def _theta_subsumes_match(c1_lits, c2_lits, env):
+    if not c1_lits:
+        return True
+    l1 = c1_lits[0]
+    atom1, pol1 = get_atom_and_polarity(l1)
+    for l2 in c2_lits:
+        atom2, pol2 = get_atom_and_polarity(l2)
+        if pol1 == pol2:
+            new_env = unify(atom1, atom2, env.copy())
+            if new_env is not None:
+                if _theta_subsumes_match(c1_lits[1:], c2_lits, new_env):
+                    return True
+    return False
+
 def subsumes_fo(c1, c2):
     """
-    Theta-Subsumption (O(N!) en el peor caso, pero vital para Compresión Kolmogorov).
-    c1 subsume c2 si existe theta tal que c1*theta subconjunto de c2.
-    Para simplificar y maximizar exergía, aplicamos chequeo de identidad o
-    subsunción proposicional estricta. Una implementación completa requiere backtracking.
+    Theta-Subsumption rigurosa de Primer Orden (C5-REAL).
+    c1 theta-subsume a c2 ssi existe una sustitución theta tal que c1*theta <= c2.
     """
-    return c1.issubset(c2)
+    if len(c1) > len(c2):
+        return False
+    if c1.issubset(c2):
+        return True
+    return _theta_subsumes_match(list(c1), list(c2), {})
 
 def kolmogorov_compress_fo(clauses):
     compressed = set()

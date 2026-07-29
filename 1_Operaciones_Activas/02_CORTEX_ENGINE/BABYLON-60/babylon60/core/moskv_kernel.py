@@ -37,7 +37,7 @@ class Moskv1Kernel:
 
     def __init__(self, db_path: str = "apex_cortex.db") -> None:
         self.db_path = db_path
-        self._write_queue: asyncio.Queue[ApexClaim] = asyncio.Queue()
+        self._write_queue: asyncio.Queue[ApexClaim] = asyncio.Queue(maxsize=1024)
         self._lamport_clock: int = 0
         self._last_hash: str = "0000000000000000000000000000000000000000000000000000000000000000"
         self._boot_sequence()

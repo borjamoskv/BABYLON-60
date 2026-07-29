@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 CORTEX-SCRAPER v1.0 — Sovereign Bounty Reconnaissance Engine
@@ -72,7 +73,7 @@ async def scrape_with_playwright(url: str, wait_ms: int = 3000) -> str:
     from playwright.async_api import async_playwright
 
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True)
+        browser = await p.chromium.launch(headless=True, args=["--disable-gpu"])
         context = await browser.new_context(
             user_agent=USER_AGENT,
             viewport={"width": 1440, "height": 900},

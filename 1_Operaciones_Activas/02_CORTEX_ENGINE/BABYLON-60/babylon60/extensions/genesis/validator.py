@@ -87,7 +87,7 @@ class GenesisValidator:
         return errors
 
     def _check_python_syntax(self, files: list[str]) -> list[str]:
-        """Parse all .py files with ast to check syntax validity."""
+        """Check syntax validity using compile() without exposing AST (INV_C5_DSL_PARSING)."""
         errors: list[str] = []
         for filepath in files:
             path = Path(filepath)
@@ -96,7 +96,7 @@ class GenesisValidator:
 
             try:
                 source = path.read_text(encoding="utf-8")
-                ast.parse(source, filename=filepath)
+                compile(source, filename=filepath, mode="exec")
             except SyntaxError as e:
                 errors.append(f"Syntax error in {path.name}: {e.msg} (line {e.lineno})")
             except OSError as e:

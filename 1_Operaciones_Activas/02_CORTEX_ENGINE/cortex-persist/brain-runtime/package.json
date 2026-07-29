@@ -9,7 +9,7 @@
     "demo": "node src/index.js --demo"
   },
   "dependencies": {
-    "brain.js": "^2.0.0-beta.24",
+    "brain.js": "^1.6.1",
     "neo4j-driver": "^5.27.0"
   },
   "engines": {

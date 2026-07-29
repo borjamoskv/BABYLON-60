@@ -25,7 +25,7 @@ async def run_automata():
             contexts = browser.contexts
             if not contexts:
                 logger.error(
-                    "No se encontraron contextos de navegador. Abre Chrome con el flag --remote-debugging-port=9222"
+                    "No se encontraron contextos de navegador. Abre Chrome con el flag --remote-debugging-port=9222 --disable-gpu"
                 )
                 return
 
