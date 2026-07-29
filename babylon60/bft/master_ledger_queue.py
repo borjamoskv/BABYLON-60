@@ -27,6 +27,7 @@ class MasterLedgerQueue:
 
     async def initialize(self) -> None:
         self.db = await database_core.connect(self.db_path, synchronous="FULL")
+        self._stop_event = asyncio.Event()
         self._writer_task = asyncio.create_task(self._single_writer_loop())
         self._writer_task.add_done_callback(self._on_writer_done)
         logger.info(f"BFT Master Ledger Queue initialized on {self.db_path} [WAL + synchronous=FULL]")
@@ -43,7 +44,7 @@ class MasterLedgerQueue:
     async def _single_writer_loop(self) -> None:
         if self.db is None:
             raise RuntimeError("Database not initialized")
-        while True:
+        while not self._stop_event.is_set():
             await asyncio.sleep(0)
             batch: list[tuple[str, tuple[Any, ...]]] = []
             while not self.queue.empty() and len(batch) < 500:
@@ -61,7 +62,10 @@ class MasterLedgerQueue:
                 for _ in batch:
                     self.queue.task_done()
             else:
-                payload = await self.queue.get()
+                try:
+                    payload = await asyncio.wait_for(self.queue.get(), timeout=1.0)
+                except asyncio.TimeoutError:
+                    continue
                 if payload is None:
                     self.queue.task_done()
                     return
@@ -77,6 +81,8 @@ class MasterLedgerQueue:
         await self.queue.put((query, parameters))
 
     async def shutdown(self) -> None:
+        if hasattr(self, "_stop_event"):
+            self._stop_event.set()
         try:
             await self.queue.put(None)
             if self._writer_task and not self._writer_task.done():

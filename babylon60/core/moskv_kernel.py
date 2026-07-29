@@ -92,68 +92,77 @@ class Moskv1Kernel:
         data = f"{claim.prev_hash}:{json.dumps(claim.payload, sort_keys=True)}:{claim.lamport_t}"
         return hashlib.sha3_256(data.encode("utf-8")).hexdigest()
 
+    async def _next_claim(self) -> Optional[ApexClaim]:
+        try:
+            return await asyncio.wait_for(self._write_queue.get(), timeout=1.0)
+        except asyncio.TimeoutError:
+            return None
+
+    async def _verify_idempotency_collision(self, claim: ApexClaim) -> None:
+        db_chk = await dbcore.connect(self.db_path, synchronous="FULL")
+        try:
+            cursor = await db_chk.execute(
+                "SELECT payload FROM master_ledger WHERE claim_id = ?",
+                (claim.claim_id,),
+            )
+            row = await cursor.fetchone()
+            if row:
+                existing_payload = json.loads(row[0]) if isinstance(row[0], str) else row[0]
+                if existing_payload != claim.payload:
+                    raise ValueError(
+                        f"Fail-fast: INV_BFT_04 Collision on claim_id {claim.claim_id}: payload mismatch"
+                    )
+        finally:
+            await db_chk.close()
+
+    async def _insert_claim_db(self, claim: ApexClaim, current_hash: str, taint_signature: str) -> None:
+        db = await dbcore.connect(self.db_path, synchronous="FULL")
+        try:
+            await db.execute(
+                "INSERT INTO master_ledger (claim_id, payload, prev_hash, current_hash, cortex_taint, lamport_t) VALUES (?, ?, ?, ?, ?, ?)",
+                (
+                    claim.claim_id,
+                    json.dumps(claim.payload),
+                    claim.prev_hash,
+                    current_hash,
+                    taint_signature,
+                    claim.lamport_t,
+                ),
+            )
+            self._last_hash = current_hash
+            print(f"[+] Cristalizado: {claim.claim_id} -> {current_hash[:8]}")
+        finally:
+            await db.close()
+
+    async def _process_claim(self, claim: ApexClaim) -> None:
+        if claim.confidence not in ("C4", "C5"):
+            print(f"[-] Anergía detectada en {claim.claim_id}. Purgando.")
+            return
+
+        current_hash = self._compute_hash(claim)
+        taint_signature = (
+            f"[CORTEX-TAINT:borjamoskv:bft_loop:{datetime.now(timezone.utc).isoformat()}:{current_hash[:16]}]"
+        )
+
+        try:
+            await self._insert_claim_db(claim, current_hash, taint_signature)
+        except sqlite3.IntegrityError:
+            await self._verify_idempotency_collision(claim)
+            print(f"[!] Idempotency Lock disparado para {claim.claim_id}. Replay legítimo confirmado.")
+        except sqlite3.DatabaseError:
+            os.kill(os.getpid(), signal.SIGKILL)
+            raise RuntimeError("FAIL-FAST: BFT Ledger corrompido.")
+
     async def bft_state_loop(self) -> None:
-        """El bucle infinito de cristalización física (1 solo escritor)."""
+        """El bucle acotado de cristalización física (1 solo escritor)."""
         print("[MOSKV-1] KERNEL IGNITION: BFT_STATE_LOOP ACTIVATED.")
         try:
             while not self._stop_event.is_set():
-                try:
-                    claim = await asyncio.wait_for(self._write_queue.get(), timeout=1.0)
-                except asyncio.TimeoutError:
+                claim = await self._next_claim()
+                if claim is None:
                     continue
 
-                # 1. Auditoría
-                if claim.confidence not in ("C4", "C5"):
-                    print(f"[-] Anergía detectada en {claim.claim_id}. Purgando.")
-                    self._write_queue.task_done()
-                    continue
-
-                # 2. Mutación Atómica
-                current_hash = self._compute_hash(claim)
-                taint_signature = (
-                    f"[CORTEX-TAINT:borjamoskv:bft_loop:{datetime.now(timezone.utc).isoformat()}:{current_hash[:16]}]"
-                )
-
-                try:
-                    db = await dbcore.connect(self.db_path, synchronous="FULL")
-                    try:
-                        await db.execute(
-                            "INSERT INTO master_ledger (claim_id, payload, prev_hash, current_hash, cortex_taint, lamport_t) VALUES (?, ?, ?, ?, ?, ?)",
-                            (
-                                claim.claim_id,
-                                json.dumps(claim.payload),
-                                claim.prev_hash,
-                                current_hash,
-                                taint_signature,
-                                claim.lamport_t,
-                            ),
-                        )
-                        self._last_hash = current_hash
-                        print(f"[+] Cristalizado: {claim.claim_id} -> {current_hash[:8]}")
-                    finally:
-                        await db.close()
-                except sqlite3.IntegrityError:
-                    # Invariante de Idempotency Lock: verificar coincidencia de payload (INV_BFT_04)
-                    db_chk = await dbcore.connect(self.db_path, synchronous="FULL")
-                    try:
-                        cursor = await db_chk.execute(
-                            "SELECT payload FROM master_ledger WHERE claim_id = ?",
-                            (claim.claim_id,),
-                        )
-                        row = await cursor.fetchone()
-                        if row:
-                            existing_payload = json.loads(row[0]) if isinstance(row[0], str) else row[0]
-                            if existing_payload != claim.payload:
-                                raise ValueError(
-                                    f"Fail-fast: INV_BFT_04 Collision on claim_id {claim.claim_id}: payload mismatch"
-                                )
-                    finally:
-                        await db_chk.close()
-                    print(f"[!] Idempotency Lock disparado para {claim.claim_id}. Replay legítimo confirmado.")
-                except sqlite3.DatabaseError:
-                    os.kill(os.getpid(), signal.SIGKILL)
-                    raise RuntimeError("FAIL-FAST: BFT Ledger corrompido.")
-
+                await self._process_claim(claim)
                 self._write_queue.task_done()
         except asyncio.CancelledError:
             print("[MOSKV-1] KERNEL SHUTDOWN: SIGTERM RECIBIDO.")

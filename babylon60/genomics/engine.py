@@ -57,6 +57,26 @@ class GenomicEvaluationEngine:
         )
 
     @staticmethod
+    def _is_tcw_motif(v: GenomicVariantRecord, trinucleotide_context: dict[str, str] | None = None) -> bool:
+        var_key = f"{v.chrom}:{v.pos_1based}"
+        motif = ""
+        if trinucleotide_context and var_key in trinucleotide_context:
+            motif = trinucleotide_context[var_key].upper()
+        elif "trinucleotide_context" in v.metadata:
+            motif = str(v.metadata["trinucleotide_context"]).upper()
+        else:
+            is_c_mutation = (v.ref_allele == "C" and v.alt_allele in ("T", "G")) or (
+                v.ref_allele == "G" and v.alt_allele in ("A", "C")
+            )
+            return is_c_mutation and bool(v.metadata.get("apobec_motif", False))
+
+        if len(motif) == 3 and motif[1] == "C" and motif[2] in ("A", "T"):
+            return v.ref_allele == "C" and v.alt_allele in ("T", "G")
+        if len(motif) == 3 and motif[1] == "G" and motif[0] in ("A", "T"):
+            return v.ref_allele == "G" and v.alt_allele in ("A", "C")
+        return False
+
+    @staticmethod
     def evaluate_apobec_enrichment(
         variants: list[GenomicVariantRecord], trinucleotide_context: dict[str, str] | None = None
     ) -> APOBECEnrichmentResult:
@@ -80,29 +100,7 @@ class GenomicEvaluationEngine:
                 details={"reason": "No somatic SNVs present in cohort"},
             )
 
-        tcw_muts = 0
-        for idx, v in enumerate(snvs):
-            var_key = f"{v.chrom}:{v.pos_1based}"
-            motif = ""
-            if trinucleotide_context and var_key in trinucleotide_context:
-                motif = trinucleotide_context[var_key].upper()
-            elif "trinucleotide_context" in v.metadata:
-                motif = str(v.metadata["trinucleotide_context"]).upper()
-            else:
-                # Fallback check if alt allele is C->T or C->G and metadata flags APOBEC
-                if (v.ref_allele == "C" and v.alt_allele in ("T", "G")) or (
-                    v.ref_allele == "G" and v.alt_allele in ("A", "C")
-                ):
-                    if v.metadata.get("apobec_motif", False):
-                        tcw_muts += 1
-                continue
-
-            if len(motif) == 3 and motif[1] == "C" and motif[2] in ("A", "T"):
-                if v.ref_allele == "C" and v.alt_allele in ("T", "G"):
-                    tcw_muts += 1
-            elif len(motif) == 3 and motif[1] == "G" and motif[0] in ("A", "T"):
-                if v.ref_allele == "G" and v.alt_allele in ("A", "C"):
-                    tcw_muts += 1
+        tcw_muts = sum(1 for v in snvs if GenomicEvaluationEngine._is_tcw_motif(v, trinucleotide_context))
 
         # Enrichment ratio calculation: observed fraction of TCW mutations relative to expected random baseline (~16%)
         observed_fraction = float(tcw_muts) / float(total_snvs)

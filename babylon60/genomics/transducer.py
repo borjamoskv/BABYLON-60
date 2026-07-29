@@ -94,6 +94,31 @@ class GenomicStateTransducer:
         }
 
     @classmethod
+    def _process_ecdna_records(
+        cls, ecdna_records: list[dict[str, Any]], state_matrix: dict[str, int]
+    ) -> list[ECDNAAmpliconResult]:
+        if not isinstance(ecdna_records, list):
+            raise TypeError("[C5-FAIL] ecdna_records must be a list of dictionaries.")
+        ecdna_results: list[ECDNAAmpliconResult] = []
+        for rec in ecdna_records:
+            amp_res = GenomicEvaluationEngine.evaluate_ecdna_amplicon(
+                amplicon_id=str(rec["amplicon_id"]),
+                oncogenes=list(rec["oncogenes"]),
+                copy_number=int(rec["copy_number"]),
+                circular_confirmed=bool(rec["circular_confirmed"]),
+                rna_fold_change=float(rec["rna_fold_change"]),
+            )
+            ecdna_results.append(amp_res)
+            if amp_res.transcriptional_leverage >= 5.0 or amp_res.copy_number >= 10:
+                state_matrix["ONC-154"] = 1  # ecDNA oncogene amplification node
+                for g in amp_res.oncogenes:
+                    gene_upper = g.upper()
+                    node = cls.GENE_TO_PRIMITIVE_MAP.get(gene_upper)
+                    if node:
+                        state_matrix[node] = 1
+        return ecdna_results
+
+    @classmethod
     def transduce_full_profile(
         cls,
         params: FullProfileParams | None = None,
@@ -141,23 +166,7 @@ class GenomicStateTransducer:
         # Evaluate ecDNA Amplicons
         ecdna_results: list[ECDNAAmpliconResult] = []
         if params.ecdna_records:
-            if not isinstance(params.ecdna_records, list):
-                raise TypeError("[C5-FAIL] ecdna_records must be a list of dictionaries.")
-            for rec in params.ecdna_records:
-                amp_res = GenomicEvaluationEngine.evaluate_ecdna_amplicon(
-                    amplicon_id=str(rec["amplicon_id"]),
-                    oncogenes=list(rec["oncogenes"]),
-                    copy_number=int(rec["copy_number"]),
-                    circular_confirmed=bool(rec["circular_confirmed"]),
-                    rna_fold_change=float(rec["rna_fold_change"]),
-                )
-                ecdna_results.append(amp_res)
-                if amp_res.transcriptional_leverage >= 5.0 or amp_res.copy_number >= 10:
-                    state_matrix["ONC-154"] = 1  # ecDNA oncogene amplification node
-                    for g in amp_res.oncogenes:
-                        gene_upper = g.upper()
-                        if gene_upper in cls.GENE_TO_PRIMITIVE_MAP:
-                            state_matrix[cls.GENE_TO_PRIMITIVE_MAP[gene_upper]] = 1
+            ecdna_results = cls._process_ecdna_records(params.ecdna_records, state_matrix)
 
         return {
             "state_matrix": state_matrix,

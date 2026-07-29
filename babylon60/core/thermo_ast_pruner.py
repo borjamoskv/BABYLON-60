@@ -45,28 +45,30 @@ class AnergiaPurger(ast.NodeTransformer):
                 self.injected_kill = True
         return self.generic_visit(node)
 
+    def _find_import_flags(self, body: list[ast.stmt]) -> tuple[int, bool, bool]:
+        insert_idx = 0
+        has_os = False
+        has_signal = False
+        for idx, child in enumerate(body):
+            if isinstance(child, ast.ImportFrom) and child.module == "__future__":
+                insert_idx = idx + 1
+            if isinstance(child, ast.Import):
+                names = [na.name for na in child.names]
+                if "os" in names:
+                    has_os = True
+                if "signal" in names:
+                    has_signal = True
+        return insert_idx, has_os, has_signal
+
     def visit_Module(self, node: ast.Module) -> ast.Module:
         visited = self.generic_visit(node)
         assert isinstance(visited, ast.Module)
         if self.injected_kill:
-            import_os = ast.Import(names=[ast.alias(name="os", asname=None)])
-            import_signal = ast.Import(names=[ast.alias(name="signal", asname=None)])
-            insert_idx = 0
-            has_os = False
-            has_signal = False
-            for idx, child in enumerate(visited.body):
-                if isinstance(child, ast.ImportFrom) and child.module == "__future__":
-                    insert_idx = idx + 1
-                if isinstance(child, ast.Import):
-                    for name_alias in child.names:
-                        if name_alias.name == "os":
-                            has_os = True
-                        if name_alias.name == "signal":
-                            has_signal = True
+            insert_idx, has_os, has_signal = self._find_import_flags(visited.body)
             if not has_signal:
-                visited.body.insert(insert_idx, import_signal)
+                visited.body.insert(insert_idx, ast.Import(names=[ast.alias(name="signal", asname=None)]))
             if not has_os:
-                visited.body.insert(insert_idx, import_os)
+                visited.body.insert(insert_idx, ast.Import(names=[ast.alias(name="os", asname=None)]))
         return visited
 
 

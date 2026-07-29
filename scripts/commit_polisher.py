@@ -49,14 +49,25 @@ def _run_strict_reviewer() -> int:
 def _rewrite_commits() -> None:
     subprocess.run([sys.executable, "scripts/rewrite_commits.py"], cwd=REPO_ROOT, check=True)
 
+running = True
+
+def _handle_signal(sig: int, frame: Any) -> None:
+    global running
+    running = False
+
 def main() -> None:
+    global running
     if not (REPO_ROOT / ".git").exists():
         print("⚠️  Not a git repository", file=sys.stderr)
         sys.exit(1)
 
+    import signal
+    signal.signal(signal.SIGINT, _handle_signal)
+    signal.signal(signal.SIGTERM, _handle_signal)
+
     last_seen = _latest_commit_hash()
     last_change = time.time()
-    while True:
+    while running:
         time.sleep(POLL_INTERVAL)
         current = _latest_commit_hash()
         if current != last_seen:
