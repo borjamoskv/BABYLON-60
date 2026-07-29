@@ -201,8 +201,12 @@ class NoiseAnnihilatorAgent:
     def process_claim(self, raw_entropy: str) -> "Result[str, str]":
         """
         Procesa un payload crudo desde la Mónada de Caos.
+        Normaliza mediante Unicode NFKC para neutralizar ataques de homóglifos.
         Retorna Ok(Exergía) si sobrevive los tres filtros, Err(Razón) si es ruido.
         """
+        import unicodedata
+        raw_entropy = unicodedata.normalize("NFKC", raw_entropy)
+
         ent_res = self._entropy.evaluate(raw_entropy)
         if not ent_res.is_ok:
             return Result.Err(ent_res.unwrap_err())

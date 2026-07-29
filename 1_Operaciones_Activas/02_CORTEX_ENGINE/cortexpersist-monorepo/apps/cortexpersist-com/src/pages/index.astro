@@ -2,71 +2,63 @@
 import Layout from '../layouts/Layout.astro';
 import { CrossDomainCTA } from '@cortex/ui';
 
-import AttractorMatrix from '@/components/AttractorMatrix';
-import ParticleGrid from '@/components/ParticleGrid';
-import ThermodynamicVectorSpace from '@/components/ThermodynamicVectorSpace';
+import QuickstartSnippet from '@/components/QuickstartSnippet';
+import PricingSection from '@/components/PricingSection';
 import SwarmTelemetryLog from '@/components/SwarmTelemetryLog';
 import ManualCollisionInjector from '@/components/ManualCollisionInjector';
 ---
 
-<Layout 
-  title="CortexPersist — Trust Infrastructure for AI Agents"
-  description="Cryptographically anchored persistent state for AI agents. Ed25519 signing, Merkle anchoring, hash chain integrity."
+<Layout
+  title="BABYLON 60 — Trust Infrastructure & EU AI Act Compliance for Autonomous AI"
+  description="Sovereign memory & immutability substrate for AI agent teams. EU AI Act compliance, cryptographic lineage, and <5ms latency."
 >
-  <main style="min-height: 100vh; background: #030303; color: #e0e0e0;">
-    <section style="padding: 4rem 2rem 2rem; text-align: center; font-family: monospace;">
-      <h1 style="font-size: 1.1rem; font-weight: bold; letter-spacing: 0.2em; color: #00ff88;">
-        CORTEX PERSIST
-      </h1>
-      <p style="color: #555; font-size: 0.8rem; margin-top: 0.5rem; letter-spacing: 0.1em; margin-bottom: 1.5rem;">
-        Trust infrastructure for AI agents · Ω₂ Entropic Asymmetry
-      </p>
-      <CrossDomainCTA client:load href="https://agents.archi?ref=cortexpersist-com" target="_blank">
-        Forensic Records Ledger
-      </CrossDomainCTA>
+  <main style="min-height: 100vh; background: #030303; color: #e0e0e0; font-family: system-ui, -apple-system, sans-serif;">
 
-      <div style="margin: 2rem auto 0; max-width: 860px; text-align: left; background: #0a0a0a; border: 1px solid #1f2937; border-left: 3px solid #2b3be5; padding: 1.25rem 1.5rem; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-          <span style="font-size: 0.7rem; font-weight: bold; color: #2b3be5; letter-spacing: 0.15em;">ONTO-17 · KINETIC TRANSDUCTION</span>
-          <span style="font-size: 0.65rem; color: #00ff88; background: rgba(0,255,136,0.1); padding: 0.2rem 0.5rem; border-radius: 2px;">C5-REAL VERIFIED</span>
-        </div>
-        <h2 style="font-size: 0.95rem; font-weight: bold; color: #f3f4f6; margin-bottom: 0.5rem; letter-spacing: 0.05em;">
-          Claude Science & the Thermodynamic Law of Research Compression
-        </h2>
-        <p style="font-size: 0.78rem; color: #9ca3af; line-height: 1.6; margin-bottom: 0.8rem;">
-          Accelerating hypothesis generation via MCTS workbenches collapses the initial thinking loop but transfers total systemic entropy to the institutional validation boundary. Without <strong style="color: #e5e7eb;">Verified Inheritance</strong> from a cryptographic memory membrane (<code style="color: #00ff88; font-size: 0.75rem;">strike-rs BLAKE3</code>), unverified intermediate states propagate Epistemic Drift across scientific pipelines.
-        </p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.75rem; font-size: 0.72rem; color: #d1d5db; border-top: 1px solid #1f2937; padding-top: 0.75rem;">
-          <div>
-            <span style="color: #60a5fa; font-weight: bold;">[LOGOS] Fast-Loop Generation</span><br/>
-            Stateless reasoning engines (Claude Science / Fable 5) operating as high-speed candidate ALUs.
-          </div>
-          <div>
-            <span style="color: #34d399; font-weight: bold;">[ETHOS] BLAKE3 Taint Anchoring</span><br/>
-            Continuous drift detection, structural F# invariant checks, and immutable Merkle auditing under EU AI Act mandates.
-          </div>
-        </div>
+    {/* Urgency Banner */}
+    <div style="background: linear-gradient(90deg, #FF5252, #FF9F1C); color: #000; font-weight: 700; text-align: center; padding: 0.6rem 1rem; font-size: 0.85rem; font-family: monospace;">
+      ⚠️ EU AI ACT ENFORCEMENT (AUGUST 2026): Non-compliant AI systems face fines up to €30M. <a href="#pricing" style="color: #000; underline: true; margin-left: 0.5rem;">Explore Enterprise Compliance Tiers →</a>
+    </div>
+
+    {/* Hero Section */}
+    <section style="padding: 5rem 2rem 3rem; text-align: center; max-width: 1000px; margin: 0 auto;">
+      <div style="display: inline-block; padding: 0.4rem 1rem; background: rgba(43, 59, 229, 0.15); border: 1px solid rgba(43, 59, 229, 0.4); border-radius: 999px; color: #60a5fa; font-family: monospace; font-size: 0.8rem; font-weight: 600; margin-bottom: 1.5rem;">
+        ⚡ B2B SaaS & Enterprise Sovereign Engine
+      </div>
+      <h1 style="font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; color: #FFFFFF; margin-bottom: 1.5rem;">
+        Prove your AI agents' integrity <span style="color: #2B3BE5;">in &lt;5ms</span>.
+      </h1>
+      <p style="font-size: 1.25rem; color: rgba(255,255,255,0.7); max-width: 750px; margin: 0 auto 2.5rem; line-height: 1.6;">
+        BABYLON 60 is the deterministic memory substrate with Ed25519/SHA3-256 cryptographic signatures for autonomous agent teams. Zero cloud lock-in, 100% auditable.
+      </p>
+
+      {/* Hero CTAs */}
+      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 4rem;">
+        <a href="#pricing" style="background: #2B3BE5; color: #fff; padding: 1rem 2.2rem; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1.1rem; boxShadow: 0 0 25px rgba(43,59,229,0.5);">
+          Get Pro License ($49/mo)
+        </a>
+        <a href="#quickstart" style="background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 1rem 2.2rem; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1.1rem;">
+          Quickstart SDK (30s)
+        </a>
+      </div>
+
+      {/* Quickstart Component */}
+      <div id="quickstart">
+        <QuickstartSnippet client:only="react" />
       </div>
     </section>
 
-    <section style="padding: 0 2rem 2rem;">
-      <AttractorMatrix client:only="react" />
-    </section>
-
-    <section style="padding: 0 2rem 2rem;">
-      <ThermodynamicVectorSpace client:only="react" />
-    </section>
-
-    <section style="padding: 0 2rem 2rem;">
-      <ParticleGrid client:only="react" count={600} />
-    </section>
-
-    <section style="padding: 0 2rem 2rem;">
+    {/* Live Telemetry Section */}
+    <section style="padding: 4rem 2rem; max-width: 1000px; margin: 0 auto;">
       <SwarmTelemetryLog client:only="react" />
     </section>
 
-    <section style="padding: 0 2rem 4rem;">
+    {/* Pricing & Commercial Section */}
+    <PricingSection client:only="react" />
+
+    {/* Manual Collision Test (Interactive Proof) */}
+    <section style="padding: 2rem 2rem 5rem; max-width: 1000px; margin: 0 auto;">
       <ManualCollisionInjector client:only="react" />
     </section>
+
   </main>
 </Layout>
