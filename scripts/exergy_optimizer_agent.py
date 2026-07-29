@@ -206,7 +206,7 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
                             msg = f"CRITICAL: Algebraic Limit Exceeded (Nesting Depth = {visitor.max_depth} > 4) in {filepath}."
                             reasons_failed.append(msg)
                             reasons_e.append(msg)
-                    except Exception:
+                    except (SyntaxError, FileNotFoundError):
                         pass  # Ignore parse errors for partial diffs or deleted files
         else:
             # If tests/checks are added, register autoloop credit

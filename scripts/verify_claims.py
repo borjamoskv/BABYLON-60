@@ -113,7 +113,7 @@ def fetch(url: str, timeout: int = 25) -> tuple[str, str]:
                                capture_output=True, timeout=60)
             if p.returncode == 0 and p.stdout:
                 return p.stdout.decode("utf-8", "replace"), "pdf"
-        except Exception:
+        except (subprocess.TimeoutExpired, subprocess.CalledProcessError, FileNotFoundError):
             pass
         return "", "pdf-no-extract"
     txt = raw.decode("utf-8", "replace")

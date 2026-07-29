@@ -32,7 +32,7 @@ def anchor_l1_sink() -> None:
     passphrase = "MOSKV1_SOVEREIGN_L1_ANCHOR_KEY"
     try:
         _ = forge.load_identity(passphrase)
-    except Exception:
+    except ValueError:
         _ = forge.forge_identity(passphrase)
 
     for json_file in sorted(l1_dir.glob("*.json")):

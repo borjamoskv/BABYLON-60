@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
+from starlette.websockets import WebSocketState
 
 router = APIRouter(tags=["telemetry"])
 
@@ -105,7 +106,7 @@ async def telemetry_ws(websocket: WebSocket) -> None:
     """Live telemetry WebSocket — pushes snapshot every 2 seconds."""
     await websocket.accept()
     try:
-        while True:
+        while websocket.client_state == WebSocketState.CONNECTED:
             snapshot = _collect_snapshot()
             await websocket.send_text(json.dumps(snapshot))
             await asyncio.sleep(2)

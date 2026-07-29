@@ -161,15 +161,29 @@ impl MasterLedger {
 
         let obligations_json = serde_json::to_string(&js.statement.obligations)
             .map_err(|e| rusqlite::Error::ToSqlConversionFailure(Box::new(e)))?;
-        tx.execute(
-            "INSERT OR IGNORE INTO statements (statement_hash, content, modality, obligations_json) VALUES (?1, ?2, ?3, ?4)",
+        let stmt_res = tx.execute(
+            "INSERT INTO statements (statement_hash, content, modality, obligations_json) VALUES (?1, ?2, ?3, ?4)",
             params![
                 statement_hash,
                 js.statement.content,
                 format!("{:?}", js.statement.modality),
                 obligations_json
             ],
-        )?;
+        );
+        if let Err(e) = stmt_res {
+            let existing_opt: rusqlite::Result<String> = tx.query_row(
+                "SELECT content FROM statements WHERE statement_hash = ?1",
+                params![statement_hash],
+                |row| row.get(0),
+            );
+            if let Ok(existing) = existing_opt {
+                if existing != js.statement.content {
+                    panic!("Fail-fast: INV_BFT_04 Collision for statement_hash {}", statement_hash);
+                }
+            } else {
+                return Err(e);
+            }
+        }
 
         let variant = match &js.justification {
             Justification::FormalProof{..} => "FormalProof",
@@ -182,10 +196,24 @@ impl MasterLedger {
             Justification::Axiom{..} => "Axiom",
         };
 
-        tx.execute(
-            "INSERT OR IGNORE INTO justifications (justification_hash, variant, payload_json) VALUES (?1, ?2, ?3)",
+        let just_res = tx.execute(
+            "INSERT INTO justifications (justification_hash, variant, payload_json) VALUES (?1, ?2, ?3)",
             params![justification_hash, variant, payload_json],
-        )?;
+        );
+        if let Err(e) = just_res {
+            let existing_opt: rusqlite::Result<String> = tx.query_row(
+                "SELECT payload_json FROM justifications WHERE justification_hash = ?1",
+                params![justification_hash],
+                |row| row.get(0),
+            );
+            if let Ok(existing) = existing_opt {
+                if existing != *payload_json {
+                    panic!("Fail-fast: INV_BFT_04 Collision for justification_hash {}", justification_hash);
+                }
+            } else {
+                return Err(e);
+            }
+        }
 
         tx.execute(
             "INSERT INTO ledger_assertions (id, statement_hash, justification_hash, environment_id, lamport_t, prev_hash, cortex_taint) 
