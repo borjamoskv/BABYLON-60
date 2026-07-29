@@ -65,8 +65,11 @@ pub async fn start_bridge(addr: &str) -> Result<(), Box<dyn std::error::Error>> 
 
     println!("[C5-REAL] Starting gRPC Exergy Bridge on {}", addr);
 
+    let service = tonic_web::enable(ExergyBridgeServer::new(bridge));
+
     Server::builder()
-        .add_service(ExergyBridgeServer::new(bridge))
+        .accept_http1(true) // Required for tonic-web to accept HTTP/1.1 requests
+        .add_service(service)
         .serve(addr)
         .await?;
 

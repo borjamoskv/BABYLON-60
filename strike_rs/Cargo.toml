@@ -22,10 +22,16 @@ serde = { version = "1.0.228", features = ["derive"] }
 tokio = { version = "1.40", features = ["full"] }
 futures = "0.3.30"
 async-trait = "0.1.81"
+tonic-web = "0.12"
+prost = "0.13"
+tonic = "0.12"
 
 [dev-dependencies]
 proptest = "1.6.0"
 
 [features]
 extension-module = ["pyo3/extension-module"]
+
+[build-dependencies]
+tonic-build = { version = "0.12", features = ["prost"] }
 
