@@ -181,7 +181,7 @@ python3 03_codigo.py
     except OSError as e:
         fail_fast(f"Failed to write manifest atomically: {e}")
 
-    print(f"[CORTEX-TAINT] Scaffolding completado: {lab_dir}")
+    print(f"Scaffolding completado: {lab_dir}")
     print(f"Manifest Hash: {sha3_256_hash(json.dumps(manifest))}")
     print(f"Post Draft: {draft_path}")
 

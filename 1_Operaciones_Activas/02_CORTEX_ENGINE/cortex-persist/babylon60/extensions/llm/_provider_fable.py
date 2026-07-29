@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # [C5-REAL] Exergy-Maximized
 # This file is part of CORTEX. Apache-2.0.
 # Reverse-Engineered Fable 5 Agentic Adapter
@@ -53,7 +54,7 @@ async def execute_fable_native(
             "model": model_name,
             "max_tokens": max_tokens,
             "temperature": temperature,
-            "system": f"{system_prompt}\n\n[CORTEX-TAINT]: {taint_marker}",
+            "system": f"{system_prompt}\n\n{taint_marker}",
             "messages": [{"role": "user", "content": prompt}],
         }
 

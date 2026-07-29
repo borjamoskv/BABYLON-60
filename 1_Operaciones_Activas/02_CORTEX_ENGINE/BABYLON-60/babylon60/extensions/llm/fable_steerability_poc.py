@@ -44,8 +44,8 @@ async def capture_fable_payload(*args, **kwargs):
     system_prompt = request_json.get("system", "")
     assert "DO NOT USE PYTHON 2" in system_prompt, "System prompt lacks negative constraint!"
 
-    # Validation 2: CORTEX-TAINT is present
-    assert "[CORTEX-TAINT]" in system_prompt, "Taint marker missing!"
+    # Validation 2: Taint marker is present
+    assert "taint:" in system_prompt, "Taint marker missing!"
 
     # Validation 3: tool_choice is forced to 'auto' for steerability
     assert request_json.get("tool_choice", {}).get("type") == "auto", (
