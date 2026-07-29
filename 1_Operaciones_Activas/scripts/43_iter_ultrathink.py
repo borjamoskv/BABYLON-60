@@ -24,6 +24,20 @@ def get_ledger_hash() -> str | None:
     except FileNotFoundError:
         return None
 
+def run_git_with_retry(args: list[str]) -> None:
+    for attempt in range(5):
+        res = subprocess.run(args)
+        if res.returncode == 0:
+            return
+        if os.path.exists(".git/index.lock"):
+            try:
+                os.remove(".git/index.lock")
+            except OSError:
+                pass
+        time.sleep(0.2)
+    subprocess.run(args, check=True)
+
+
 def run_itera_ultrathink(cycles: int = 16) -> None:
     print(f"=== CORTEX-OMEGA: IGNICIÓN BUCLE ITERA ULTRATHINK ({cycles} CICLOS) ===")
     start_time = time.time()
@@ -126,21 +140,10 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
             # 5. Git Sentinel: Guardar cambios en el ledger
             print("[ITERA-ULTRATHINK] Git Sentinel: Sellar estado en el ledger...")
             git_add_args = ["git", "add", "mundo_f_ledger.yml", "02_CORTEX_ENGINE/cortex/compiled_theorem.py"]
-            for attempt in range(3):
-                res = subprocess.run(git_add_args)
-                if res.returncode == 0:
-                    break
-                if os.path.exists(".git/index.lock"):
-                    try:
-                        os.remove(".git/index.lock")
-                    except OSError:
-                        pass
-                time.sleep(0.1)
-            else:
-                subprocess.run(git_add_args, check=True)
+            run_git_with_retry(git_add_args)
             staged_check = subprocess.run(["git", "diff", "--cached", "--quiet"])
             if staged_check.returncode != 0:
-                subprocess.run(
+                run_git_with_retry(
                     [
                         "git",
                         "-c",
@@ -149,8 +152,7 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
                         "-m",
                         f"chore(cortex): [ITERA] BFT State Collapse Cycle {cycle_num} - Hash: {theorem.code_hash[:8]}",
                         "--no-verify",
-                    ],
-                    check=True,
+                    ]
                 )
 
             last_hash = current_hash
@@ -164,19 +166,10 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
                     os.remove(compiled_path)
                     # Sellar la purga en git
                     purge_args = ["git", "add", "02_CORTEX_ENGINE/cortex/compiled_theorem.py"]
-                    for attempt in range(3):
-                        res = subprocess.run(purge_args)
-                        if res.returncode == 0:
-                            break
-                        if os.path.exists(".git/index.lock"):
-                            try:
-                                os.remove(".git/index.lock")
-                            except OSError:
-                                pass
-                        time.sleep(0.1)
+                    run_git_with_retry(purge_args)
                     purge_staged = subprocess.run(["git", "diff", "--cached", "--quiet"])
                     if purge_staged.returncode != 0:
-                        subprocess.run(
+                        run_git_with_retry(
                             [
                                 "git",
                                 "-c",
@@ -185,8 +178,7 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
                                 "-m",
                                 f"chore(cortex): [PURGE] Octal Anergy Purge at Cycle {cycle_num}",
                                 "--no-verify",
-                            ],
-                            check=True,
+                            ]
                         )
                 print("[ITERA-ULTRATHINK] [OCTAL PURGE] Purga completada. Espacio de trabajo ordenado.")
 
