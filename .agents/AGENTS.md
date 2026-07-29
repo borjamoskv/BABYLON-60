@@ -135,3 +135,10 @@
 ### Default Argument Binding Invariant (Prevención de Fuga de Mocks)
 - **INV_C5_MOCKING_01:** Never use global configuration constants (e.g., `REPO_ROOT`, `DB_PATH`) as default arguments in function signatures (`def func(root=REPO_ROOT):`). In Python, default arguments bind at import time. This makes it impossible for `pytest` to cleanly mock these constants at runtime, causing tests to leak out of the sandbox and scan the physical disk. 
   - **Solución:** Use `None` as the default and resolve it at runtime (`def func(root=None): if root is None: root = REPO_ROOT`), or explicitly pass the constant from the calling function.
+
+### Explicit Goal Termination Invariant
+- **INV_GOAL_TERMINATION:** Cuando el agente opera bajo el modo `/goal` o tareas de fondo de larga duración, tan pronto como todos los entregables de `task.md` estén físicamente verificados, el agente DEBE incluir explícitamente el token `<!-- GOAL_COMPLETE -->` (o `<!-- GOAL_CANCELLED -->` si fue abortado) en su respuesta final. Prohibido intentar cerrar el turno sin la etiqueta de completado.
+
+### Empirical Remote Push Verification Invariant
+- **INV_C5_REAL_PUSH:** Ningún paso de sincronización remota (`git push`) puede marcarse como completado en `task.md` o presentar evidencia C5-REAL si el comando devuelve un código de salida distinto de 0 o un fallo de permisos. Los fallos remotos deben registrarse explícitamente como fallos o fallbacks locales no sincronizados.
+
