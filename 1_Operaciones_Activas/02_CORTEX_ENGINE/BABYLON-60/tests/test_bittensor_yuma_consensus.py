@@ -10,13 +10,20 @@ Ontology Level: C5-REAL (Physical assertion of Yuma invariants and WAL persisten
 """
 
 import os
+import sys
 import sqlite3
-from scripts.bittensor_yuma_consensus_c5 import (
-    compute_yuma_consensus,
-    simulate_subnet_emission,
-    simulate_subnet_epochs,
-    simulate_adversarial_matrix,
-)
+import importlib.util
+from pathlib import Path
+
+_script_path = Path(__file__).resolve().parent.parent / "scripts" / "bittensor_yuma_consensus_c5.py"
+_spec = importlib.util.spec_from_file_location("bittensor_yuma_consensus_c5", _script_path)
+_mod = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_mod)
+
+compute_yuma_consensus = _mod.compute_yuma_consensus
+simulate_subnet_emission = _mod.simulate_subnet_emission
+simulate_subnet_epochs = _mod.simulate_subnet_epochs
+simulate_adversarial_matrix = _mod.simulate_adversarial_matrix
 
 
 def test_compute_yuma_consensus_clipping_sybil():
