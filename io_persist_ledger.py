@@ -42,6 +42,13 @@ class LedgerPersist:
         Exec: INSERT OR IGNORE each node into SQLite (idempotent)
         Post: returns count of newly persisted nodes
         """
+        # INV_C5_17: Sovereign Dual-Licensing Throughput Limit
+        if self.license_status.tier == "community" and len(ledger.nodes) > 100:
+            raise ValueError(
+                "Fail-fast: Community tier limits batch inserts to 100 nodes. "
+                "Acquire a Commercial License for unbounded BFT high-throughput."
+            )
+
         cursor = self.conn.cursor()
         inserted = 0
         for node in ledger.nodes.values():
