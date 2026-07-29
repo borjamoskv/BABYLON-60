@@ -15,6 +15,7 @@ from fastapi.responses import JSONResponse
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from babylon60.extensions.metering.quotas import QuotaEnforcer
+from babylon60.extensions.metering.shedding import StatefulLoadShedder
 from babylon60.extensions.metering.tracker import UsageTracker
 
 __all__ = ["MeteringMiddleware"]
@@ -45,6 +46,7 @@ class MeteringMiddleware(BaseHTTPMiddleware):
         super().__init__(app)
         self._tracker = tracker or UsageTracker()
         self._enforcer = QuotaEnforcer(self._tracker)
+        self._shedder = StatefulLoadShedder()
 
     async def dispatch(self, request: Request, call_next):
         path = request.url.path
@@ -65,8 +67,26 @@ class MeteringMiddleware(BaseHTTPMiddleware):
         # ── Quota Check ──
         if plan_quota is not None:
             check = self._enforcer.check_with_quota(tenant_id, plan_quota)
+            plan_info = {"rate_limit": plan_quota.rate_limit}
         else:
             check = self._enforcer.check(tenant_id, plan)
+            plan_info = self._enforcer.get_plan_info(plan)
+
+        # ── Stateful Load Shedding (Ω160) ──
+        if not self._shedder.check(tenant_id, plan_info["rate_limit"]):
+            logger.warning("Load Shedding activated: tenant=%s plan=%s", tenant_id, plan)
+            return JSONResponse(
+                status_code=429,
+                content={
+                    "error": "stateful_load_shedding",
+                    "detail": "System under high load. Request shed to preserve exergy.",
+                },
+                headers={
+                    "X-Load-State": "shedding",
+                    "Retry-After": "5",
+                },
+            )
+
         if not check.allowed:
             logger.warning(
                 "Quota exceeded: tenant=%s plan=%s used=%d limit=%d",
@@ -88,9 +108,7 @@ class MeteringMiddleware(BaseHTTPMiddleware):
                     "reset_at": check.reset_at,
                 },
                 headers={
-                    "X-RateLimit-Limit": str(check.limit),
-                    "X-RateLimit-Remaining": "0",
-                    "X-RateLimit-Reset": check.reset_at,
+                    "X-Load-State": "quota_exceeded",
                     "Retry-After": "86400",
                 },
             )
@@ -115,9 +133,7 @@ class MeteringMiddleware(BaseHTTPMiddleware):
 
         # ── Inject Usage Headers ──
         if check.limit > 0:
-            response.headers["X-RateLimit-Limit"] = str(check.limit)
-            response.headers["X-RateLimit-Remaining"] = str(max(0, check.remaining - 1))
-            response.headers["X-RateLimit-Reset"] = check.reset_at
+            response.headers["X-Load-State"] = "ok"
 
         return response
 

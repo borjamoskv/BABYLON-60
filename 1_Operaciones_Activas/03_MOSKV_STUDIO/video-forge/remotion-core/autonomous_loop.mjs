@@ -27,9 +27,15 @@ async function runAutonomousLoop() {
   console.log(`[MOSKV-STUDIO] Renderizado completado en: ${outPath}`);
 
   // Paso 3: Subida a YouTube (Simulación API/Orquestación)
-  console.log('[MOSKV-STUDIO] [3/3] Desplegando en YouTube (Simulación Autónoma)...');
-  // Aquí se invocaría la API de Google / YouTube v3 con el auth de OAuth2
-  // await execFileAsync('python3', ['scripts/youtube_uploader.py', '--file', outPath]);
+  console.log('[MOSKV-STUDIO] [3/3] Desplegando en YouTube (Automatización C5-REAL)...');
+
+  // Ejecutamos el transductor en Python
+  // Nota: Requiere entorno con google-api-python-client
+  await execFileAsync('python3', [
+    'scripts/youtube_uploader.py',
+    '--file', outPath,
+    '--title', 'BABYLON-60: The Sovereign Agentic Engine'
+  ]);
 
   console.log('[MOSKV-STUDIO] ✅ Ciclo Autónomo Completado. Exergía extraída.');
 }
