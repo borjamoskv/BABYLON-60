@@ -1,0 +1,14 @@
+Claim: [Biorce: AI reduce a la mitad el tiempo de desarrollo de medicamentos (Ensayos Clínicos)]
+Proof: 
+  Base: [Fricción burocrática vs. Invariante biológico. Reducción de meses a minutos en papeleo. 52.5M Capex.]
+  Range: [Fase preclínica y gestión documental (C5-REAL). Tiempo físico de ensayo longitudinal en humanos (Inalterable)]
+  Confidence: C4-SIM (Overclaim estructural) / C5-REAL (Paperwork Arbitrage)
+Isomorphisms:
+  - "[100 pages to minutes]" -> "[Reducción de entropía burocrática (NLP/LLM)]"
+  - "[Reducir ensayos a la mitad]" -> "[Violación del límite biológico (Tiempo metabólico humano)]"
+Blast_Radius_Matrix:
+  Vector: [VC Hype / MedTech Narrative]
+  Blast_Radius: [Ecosistema Itnig / Inversión Farma]
+  Target_Invariant: [Tiempo mínimo necesario para probar toxicidad y eficacia longitudinal]
+  Anergy_Risk: [High - Confundir optimización documental con aceleración metabólica]
+CORTEX_TAINT: dc54aa10c0331e1b99029a230b0a59b0ae808b724ab1472d60f9c0d4b3e0b062

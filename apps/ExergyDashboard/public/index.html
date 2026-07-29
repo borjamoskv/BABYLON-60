@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C5-REAL Exergy Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="glow-bg"></div>
+    <div class="dashboard-container">
+        <header>
+            <div class="header-content">
+                <h1>Exergy Matrix <span>[C5-REAL]</span></h1>
+                <p>Thermodynamic Autopoietic Telemetry</p>
+            </div>
+            <div class="status-indicator">
+                <span class="pulse"></span>
+                <span id="status-text">Synchronized</span>
+            </div>
+        </header>
+
+        <main>
+            <section class="kpi-cards">
+                <div class="card metric-card">
+                    <h3>Current Exergy Score</h3>
+                    <div class="metric-value" id="current-score">---</div>
+                    <div class="metric-trend" id="score-trend">Awaiting Data</div>
+                </div>
+                <div class="card metric-card">
+                    <h3>Latest Commit</h3>
+                    <div class="metric-value commit-hash" id="latest-commit">---</div>
+                    <div class="metric-trend">BFT Ledger Secured</div>
+                </div>
+                <div class="card metric-card">
+                    <h3>Entropy Status</h3>
+                    <div class="metric-value entropy-val" id="entropy-status">---</div>
+                    <div class="metric-trend">GELABP Collapse</div>
+                </div>
+            </section>
+
+            <section class="charts-section">
+                <div class="card full-width">
+                    <h3>Exergy Trend (Recent Telemetry)</h3>
+                    <div class="chart-container" id="sparkline-container">
+                        <!-- SVG sparkline will be injected here by app.js -->
+                    </div>
+                </div>
+            </section>
+
+            <section class="events-section">
+                <div class="card full-width">
+                    <h3>BFT Ledger Audit Log</h3>
+                    <div class="table-container">
+                        <table id="events-table">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>Commit Hash</th>
+                                    <th>Score</th>
+                                    <th>Entropy / Gradient</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Rows injected by app.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
