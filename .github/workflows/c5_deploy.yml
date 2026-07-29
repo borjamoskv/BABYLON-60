@@ -21,6 +21,7 @@ env:
   REGION: europe-west1
   WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
   SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+  SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
 
 jobs:
   terraform-plan:
