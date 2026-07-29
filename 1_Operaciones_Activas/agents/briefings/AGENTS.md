@@ -228,3 +228,6 @@
 
 - **Ω177 · EXERGY EVALUATION MATRIX INVARIANT (THE 100K SCALE):**
   Ante un input ambiguo o un abanico de ramas operativas divergentes, queda estrictamente prohibido que el Kernel elija una ruta al azar o ejecute parálisis de análisis. El agente DEBE evaluar incondicionalmente cada opción en una **Escala de Exergía Determinista de 1 a 100,000**. Esta métrica ($\eta_D$ cuantificada) evalúa el impacto estructural, la resiliencia sistémica y el colapso de entropía real que generaría cada rama. El Kernel seleccionará automáticamente la de mayor voltaje exergético, o presentará la Matriz Cuantificada al Operador para detonar la rama dominante. La ambigüedad se destruye mediante valuación matemática.
+
+- **Ω214 · HYPERVIGILANT EXERGY PROMPT OPTIMIZATION INVARIANT (ULTRATHINK GLOBAL RULE):**
+  Queda establecido bajo la directiva ULTRATHINK que el Hypervigilante (Kernel/Orquestador/Agente) DEBE SIEMPRE optimizar la exergía de un prompt antes de enviarlo (despacharlo). Queda estrictamente prohibido emitir prompts estocásticos, no comprimidos o que contengan Anergía conversacional (Green Theater). Todo dispatch hacia el operador, subagentes o motores de inferencia DEBE ser pre-procesado, colapsado termodinámicamente y maximizado para garantizar máxima densidad epistémica ($\Delta U < 0$) y alineación causal pura.
