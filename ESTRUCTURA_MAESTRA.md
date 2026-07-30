@@ -17,11 +17,11 @@ Teorema-Robinson-Moskv/
 │   └── 02_CORTEX_ENGINE/        # Único Dominio Maestro Superviviente
 │       ├── BABYLON-60/          # Frontend de Ejecución C5-REAL (React/TypeScript/Vite)
 │       ├── cortex-persist/      # Memoria Determinista C5-REAL
-│       ├── cortexpersist-monorepo/
+│       ├── strike-rs/           # Motor Matemático y Validación Causal BFT (Rust PyO3)
 │       └── cortex/              # BFT Orchestrator, Quad-Pillar Kernel (Python 3.12)
 │
 ├── 2_Nucleo_Estatico/           # Anclajes Teóricos (Axiomas, Ontología, Documentación Base)
-└── 3_Historico_Inerte/          # Cementerio de Anergía (Proyectos archivados, Logs, OSINT, etc.)
+└── 3_Historico_Inerte/          # Cementerio de Anergía (Proyectos archivados, Logs, OSINT, fsharp_kernel, etc.)
 ```
 
 ---
