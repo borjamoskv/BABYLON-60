@@ -40,4 +40,5 @@ def thermal_stress_test(num_threads=100):
         print("[FATAL] El stub no resiste. Violación de BFT detectada.")
 
 if __name__ == "__main__":
-    thermal_stress_test(50)  # 50 parallel threads
+    thermal_stress_test(100)  # 100 parallel threads
+

@@ -30,13 +30,22 @@ def get_ledger_hash(iteration, value):
     raw = f"mcts_{iteration:04d}_v{value:.2f}_0xDEADBEEF"
     return hashlib.sha256(raw.encode()).hexdigest()[:16]
 
-def select(node):
+def select(node, current_iter, max_iters):
+    # Thermodynamic Decay (Simulated Annealing)
+    # Exploration constant 'c' decays as iterations progress
+    progress = current_iter / max_iters if max_iters > 0 else 1
+    c_temp = 2.0 * math.exp(-3.0 * progress)
+
     while node.children:
-        node = max(node.children, key=lambda n: n.ucb1())
+        node = max(node.children, key=lambda n: n.ucb1(c=c_temp))
     return node
 
 def expand(node):
-    branches = random.randint(2, 5)
+    # Progressive Widening (Adaptive Expansion)
+    # Expand more branches based on the visit confidence of the parent
+    parent_visits = node.parent.visits if node.parent else 1
+    branches = min(12, max(2, int(2.0 * (parent_visits ** 0.4))))
+
     for _ in range(branches):
         child_state = node.state + random.random()
         node.children.append(MCTSNode(child_state, parent=node))
@@ -63,6 +72,10 @@ def simulate(node):
 
         total_entropy += norm_err + lang_ent + h_score
 
+        # Early Stopping (Exergy Optimization)
+        if abs(math.tanh(total_entropy)) > 0.99:
+            break
+
     # Recompensa normalizada devuelta por el subyacente
     return abs(math.tanh(total_entropy))
 
@@ -79,7 +92,7 @@ def run_itera_ultrathink(iterations):
     root = MCTSNode(state=0.0)
 
     for i in range(1, iterations + 1):
-        leaf = select(root)
+        leaf = select(root, i, iterations)
         if leaf.visits > 0:
             leaf = expand(leaf)
 
