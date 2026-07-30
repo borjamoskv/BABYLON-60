@@ -3,6 +3,28 @@ import sqlite3
 import uuid
 import datetime
 import hashlib
+import subprocess
+
+def run_ultrathink_pipeline():
+    """Execute the full ULTRATHINK 5‑phase pipeline before the Ouroboros BFT run."""
+    subprocess.run([
+        "python3",
+        "1_Operaciones_Activas/scripts/58_thermodynamic_wallpaper_ultrathink.py",
+    ], check=True)
+    subprocess.run([
+        "CORTEX_BRAIN_DIR=/Users/borjafernandezangulo/.gemini/antigravity/brain",
+        "python3",
+        "1_Operaciones_Activas/scripts/51_autoconsolidate.py",
+    ], shell=True, check=True)
+    subprocess.run([
+        "python3",
+        "1_Operaciones_Activas/scripts/c7_recursive_self_audit_bft.py",
+    ], check=True)
+    subprocess.run([
+        "python3",
+        "1_Operaciones_Activas/scripts/43_iter_ultrathink.py",
+        "100",
+    ], check=True)
 
 def execute_ouroboros_100_nodes():
     db_path = '/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-persist/cortex_ledger.db'
