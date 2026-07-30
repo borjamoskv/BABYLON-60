@@ -1,0 +1,70 @@
+/* C5-REAL EXERGY CERTIFIED */
+/* Micro-animations and Keyframes */
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px var(--accent-glow);
+  }
+  50% {
+    box-shadow: 0 0 30px var(--accent-glow), 0 0 10px var(--accent-primary);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s infinite ease-in-out;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes bft-scroll {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+.bft-feed-container {
+  overflow: hidden;
+  position: relative;
+  height: 300px;
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}
+
+.bft-feed-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  animation: bft-scroll 20s linear infinite;
+}
+
+.bft-item {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-success);
+  opacity: 0.8;
+  padding: 0.5rem;
+  border-left: 2px solid var(--accent-success);
+  background: rgba(0, 255, 102, 0.05);
+}
+
+/* Delay utilities */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
