@@ -6,13 +6,13 @@ import datetime
 
 def detonate_bft():
     namespace = uuid.NAMESPACE_DNS
-    taint_uuid = uuid.uuid5(namespace, "CORTEX-PERSIST-ULTRATHINK")
+    taint_uuid = uuid.uuid5(namespace, "CORTEX-PERSIST-LEGION-1")
     timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     db_path = '/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-persist/cortex_ledger.db'
 
-    print(f"[CORTEX-TAINT:{taint_uuid}] INICIANDO DETONACIÓN BFT (SQLite WAL)")
-    print(f"[CORTEX-TAINT:{taint_uuid}] TARGET: {db_path}")
+    print(f"[CORTEX-TAINT:{taint_uuid}] INICIANDO ASALTO LEGIØN-1 BFT (SQLite WAL)")
+    print(f"[CORTEX-TAINT:{taint_uuid}] TARGET: {db_path} - MATRIX_3_4_5")
 
     conn = bft_sqlite.connect(db_path)
     # Enable WAL mode for memory isolation as per Axiom 3
@@ -29,7 +29,7 @@ def detonate_bft():
 
     try:
         conn.execute("INSERT INTO bft_taint_log (uuid, timestamp, payload) VALUES (?, ?, ?)",
-                     (str(taint_uuid), timestamp, "ULTRATHINK_MEMORY_ISOLATION_POC"))
+                     (str(taint_uuid), timestamp, "LEGION_1_ANTIPATTERN_PURGE_MATRIX_3_4_5"))
         conn.commit()
         print(f"[CORTEX-TAINT:{taint_uuid}] Inyección Idempotente Exitosa.")
     except sqlite3.IntegrityError:

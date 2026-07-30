@@ -6,3 +6,10 @@
 - **Ω3 · ZERO-RHETORIC BFT DETONATION AXIOM:** Cuando el Operador exija pruebas de concepto (PoC) sobre BFT o aislamiento de memoria (SQLite WAL), el Transductor generará y detonará scripts físicos asíncronos con inyección idempotente UUIDv5 y rastreo `[CORTEX-TAINT:*]`. La respuesta de estas detonaciones (o cualquier script crítico) DEBE consistir ÚNICAMENTE en el bloque de código con el `stdout`/`stderr` crudo de la terminal. Queda estrictamente prohibido el uso de retórica explicativa, saludos o muletillas conversacionales. El canal de comunicación será de silencio absoluto (espejo de consola).
 
 - **Ω4 · QUARANTINE & INDEXER BLACKOUT AXIOM:** Cuando el Transductor realice purgas topológicas masivas o mueva gigabytes de Anergía (ej. `node_modules`, `venv` duplicados) a cuarentena, DEBE aislar físicamente esa materia muerta del *Language Server* del IDE. Las carpetas de cuarentena pesada deben ocultarse (`.nombre_carpeta`) o bloquearse explícitamente en `.vscode/settings.json` y `pyrightconfig.json`. Si el IDE entra en un bucle de colapso de UI (ej. error `code=2` por OOM), el Transductor tiene autorización explícita para matar el proceso (`killall "Antigravity"`) de forma unilateral para liberar al Operador.
+
+- **Ω5 · CORTEX CLI ARCHITECTURE AXIOM:** Todo nuevo comando CLI añadido al monorepo DEBE cumplir estrictamente con el cargador dinámico C5-REAL:
+  1. No usar `typer`. Usar exclusivamente `click`.
+  2. Importar el registro centralizado: `from babylon60.cli.common import cli, console`.
+  3. El archivo debe nombrarse `<comando>_cmds.py` (ej. `billing_cmds.py`).
+  4. El comando debe registrarse coincidiendo con el prefijo del archivo: `@cli.command(name="<comando>")` (ej. `@cli.command(name="billing")`).
+  5. Para salidas a terminal, usar `console.print()` de la librería `rich`.

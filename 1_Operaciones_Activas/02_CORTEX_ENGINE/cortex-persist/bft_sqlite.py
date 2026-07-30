@@ -5,11 +5,11 @@ import random
 
 class BFTConnection:
     """Wrapper C5-REAL para SQLite con Exponential Backoff and Jitter."""
-    def __init__(self, db_path, max_retries=15, base_delay=0.02, timeout=5.0):
+    def __init__(self, db_path, max_retries=15, base_delay=0.02, timeout=0.0):
         self.db_path = db_path
         self.max_retries = max_retries
         self.base_delay = base_delay
-        # Conexión nativa inicial
+        # Conexión nativa inicial (timeout=0.0 fuerza Fail-Fast para el Backoff)
         self.conn = sqlite3.connect(db_path, timeout=timeout)
 
     def _execute_with_backoff(self, operation, *args, **kwargs):
@@ -42,5 +42,5 @@ class BFTConnection:
     def close(self):
         self.conn.close()
 
-def connect(db_path, max_retries=15, base_delay=0.01, timeout=5.0):
+def connect(db_path, max_retries=15, base_delay=0.01, timeout=0.0):
     return BFTConnection(db_path, max_retries, base_delay, timeout)

@@ -77,7 +77,10 @@ def simulate(node):
             break
 
     # Recompensa normalizada devuelta por el subyacente
-    return abs(math.tanh(total_entropy))
+    reward = abs(math.tanh(total_entropy))
+    if reward == 0.0:
+        raise ValueError("[FATAL] Inanición Termodinámica detectada. El hardware no está disipando entropía (Anergía pura).")
+    return reward
 
 def backpropagate(node, reward):
     while node is not None:
