@@ -1,7 +1,0 @@
-{
- "requests": [{
-  "from": "FRAX",
-  "to": "USD",
-  "transport": "rest"
- }]
-}

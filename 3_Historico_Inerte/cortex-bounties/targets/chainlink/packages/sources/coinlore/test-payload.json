@@ -1,6 +1,0 @@
-{
- "requests": [{
-  "endpoint": "globalmarketcap",
-  "to": "USD"
- }]
-}

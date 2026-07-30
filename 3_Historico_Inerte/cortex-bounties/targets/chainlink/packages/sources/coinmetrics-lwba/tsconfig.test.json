@@ -1,9 +1,0 @@
-{
-  "extends": "../../tsconfig.base.json",
-  "include": ["src/**/*", "**/test", "src/**/*.json"],
-  "compilerOptions": {
-    "noEmit": false,
-    "moduleResolution": "node16",
-    "module": "node16"
-  }
-}

@@ -1,6 +1,0 @@
-// C5-REAL EXERGY CERTIFIED
-#[derive(serde::Deserialize, Debug)]
-pub struct RpcErrorObject {
-    pub code: i64,
-    pub message: String,
-}

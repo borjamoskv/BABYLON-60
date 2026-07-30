@@ -1,1 +1,0 @@
-# cortex_math_lean

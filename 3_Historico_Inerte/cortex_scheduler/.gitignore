@@ -1,6 +1,0 @@
-*.db
-*.db-wal
-*.db-shm
-*.log
-__pycache__/
-.pytest_cache/

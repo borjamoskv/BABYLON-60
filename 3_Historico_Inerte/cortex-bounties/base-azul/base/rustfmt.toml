@@ -1,7 +1,0 @@
-# C5-REAL EXERGY CERTIFIED
-style_edition = "2024"
-imports_granularity = "Crate"
-group_imports = "StdExternalCrate"
-use_small_heuristics = "Max"
-trailing_comma = "Vertical"
-use_field_init_shorthand = true

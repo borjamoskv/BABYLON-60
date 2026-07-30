@@ -1,8 +1,0 @@
-# C5-REAL EXERGY CERTIFIED
-name: asymmetric-research/fd-dev-queries
-version: 0.0.1
-extractor: cpp
-warnOnImplicitThis: true
-dependencies:
-  codeql/cpp-all: "*"
-  asymmetric-research/fd-codeql-lib: "*"

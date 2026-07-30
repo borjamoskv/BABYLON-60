@@ -1,3 +1,0 @@
-yarn compile
-yarn lint-staged
-yarn typecheck

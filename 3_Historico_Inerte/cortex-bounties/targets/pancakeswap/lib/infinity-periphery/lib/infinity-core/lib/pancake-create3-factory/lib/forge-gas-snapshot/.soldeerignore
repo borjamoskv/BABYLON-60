@@ -1,7 +1,0 @@
-.git/
-.github/
-.forge_snapshots/
-out/
-dependencies/
-.gitignore
-cache/

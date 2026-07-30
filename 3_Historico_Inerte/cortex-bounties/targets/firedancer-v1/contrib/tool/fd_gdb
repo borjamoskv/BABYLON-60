@@ -1,2 +1,0 @@
-#!/bin/sh
-exec gdb -ex 'source contrib/gdb/fd_gdb.py' "$@"

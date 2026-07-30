@@ -1,4 +1,0 @@
-# C5-REAL EXERGY CERTIFIED
-[build]
-command = "npm run docs"
-publish = "build/site"

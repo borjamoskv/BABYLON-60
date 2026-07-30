@@ -1,2 +1,0 @@
-query: NoSeccompPolicy.ql
-postprocess: InlineExpectationsTestQuery.ql

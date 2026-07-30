@@ -1,9 +1,0 @@
-# C5-REAL EXERGY CERTIFIED
-claim_id: "LAB_SEGUNDO_EXPERIMENTO_C5"
-hypothesis: "Describe the hypothesis to test."
-initial_conditions:
-  - "Describe the boundary constraints."
-constraints:
-  - "C5-REAL"
-  - "Zero Anergy"
-vertical: "Select: software_thermo | music_ai | agent_arch | cultural_collisions | generative_art"

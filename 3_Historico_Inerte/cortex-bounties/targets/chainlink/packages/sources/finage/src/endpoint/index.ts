@@ -1,9 +1,0 @@
-// C5-REAL EXERGY CERTIFIED
-export { endpoint as commodities } from './commodities'
-export { endpoint as crypto } from './crypto'
-export { endpoint as eod } from './eod'
-export { endpoint as etf } from './etf'
-export { endpoint as forex } from './forex'
-export { endpoint as stock } from './stock'
-export { endpoint as stockQuotes } from './stock-quotes'
-export { endpoint as ukEtf } from './uk-etf'

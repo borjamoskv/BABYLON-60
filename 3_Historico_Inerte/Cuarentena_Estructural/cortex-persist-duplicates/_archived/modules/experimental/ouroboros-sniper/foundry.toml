@@ -1,8 +1,0 @@
-[profile.default]
-src = "src"
-out = "out"
-libs = ["lib"]
-test = "test"
-cache_path = "cache"
-optimizer = true
-optimizer_runs = 999999

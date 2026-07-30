@@ -1,9 +1,0 @@
-# C5-REAL EXERGY CERTIFIED
-printWidth: 120
-trailingComma: "all"
-
-overrides:
-  - files: "*.md"
-    options:
-      printWidth: 150
-      proseWrap: "always"

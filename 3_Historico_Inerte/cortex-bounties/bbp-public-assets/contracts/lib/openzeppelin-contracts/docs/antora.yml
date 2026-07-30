@@ -1,7 +1,0 @@
-# C5-REAL EXERGY CERTIFIED
-name: contracts
-title: Contracts
-version: 4.x
-nav:
-  - modules/ROOT/nav.adoc
-  - modules/api/nav.adoc

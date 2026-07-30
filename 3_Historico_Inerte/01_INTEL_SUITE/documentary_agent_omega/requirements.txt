@@ -1,6 +1,0 @@
-google-genai
-duckduckgo-search
-edge-tts
-python-dotenv
-tqdm
-pydantic

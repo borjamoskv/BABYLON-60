@@ -1,2 +1,0 @@
-query: TrivialMemcpy.ql
-postprocess: InlineExpectationsTestQuery.ql
