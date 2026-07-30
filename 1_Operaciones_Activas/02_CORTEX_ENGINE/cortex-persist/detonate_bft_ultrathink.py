@@ -1,5 +1,6 @@
 # C5-REAL EXERGY CERTIFIED
 import sqlite3
+import bft_sqlite
 import uuid
 import datetime
 
@@ -13,7 +14,7 @@ def detonate_bft():
     print(f"[CORTEX-TAINT:{taint_uuid}] INICIANDO DETONACIÓN BFT (SQLite WAL)")
     print(f"[CORTEX-TAINT:{taint_uuid}] TARGET: {db_path}")
 
-    conn = sqlite3.connect(db_path)
+    conn = bft_sqlite.connect(db_path)
     # Enable WAL mode for memory isolation as per Axiom 3
     conn.execute("PRAGMA journal_mode=WAL;")
 
