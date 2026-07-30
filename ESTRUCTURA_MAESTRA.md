@@ -1,34 +1,35 @@
-# ESTRUCTURA MAESTRA DEL TEOREMA DE ROBINSON-MOSKV
+<!-- C5-REAL EXERGY CERTIFIED -->
+# ESTRUCTURA MAESTRA DEL TEOREMA DE ROBINSON-MOSKV (C5-REAL ABSOLUTE CORE)
 
-Esta es la arquitectura consolidada de produccion del proyecto. Todos los 35+ modulos dispersos han sido asimilados y reestructurados en **4 Dominios Maestros** bajo la capa `1_Operaciones_Activas`.
+Esta es la arquitectura final de extrema exergía del proyecto. Tras una operación de purga termodinámica, el repositorio ha quedado reducido y enfocado **exclusivamente** en soportar los 2 ejes fundamentales del sistema: **CORTEX-PERSIST** y **BABYLON60**. Todo proyecto satélite, forja, OSINT o interfaz secundaria ha sido archivado.
 
 ---
 
-## 🏛️ Estructura de Dominios
+## 🏛️ Topología del Repositorio (Doble Eje)
 
 ```
 Teorema-Robinson-Moskv/
-├── intel-suite -> 1_Operaciones_Activas/01_INTEL_SUITE (Symlink)
+├── BABYLON-60 -> 1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60 (Symlink)
 ├── cortex-engine -> 1_Operaciones_Activas/02_CORTEX_ENGINE (Symlink)
-├── moskv-studio -> 1_Operaciones_Activas/03_MOSKV_STUDIO (Symlink)
-├── laboratorio-rd -> 1_Operaciones_Activas/04_LABORATORIO_RD (Symlink)
 │
-├── 0_Buzon_Entrada/
+├── 0_Buzon_Entrada/             # Entradas temporales y payloads entrantes (efímero)
 ├── 1_Operaciones_Activas/
-│   ├── 01_INTEL_SUITE/          # Producto OSINT & Inteligencia Documental (SaaS/B2B)
-│   ├── 02_CORTEX_ENGINE/        # Motor de IA, Memoria Determinista (cortex-persist) y Ultrathink
-│   ├── 03_MOSKV_STUDIO/         # App de escritorio (Tauri/Vite) y Forjas de Contenido Multimedia
-│   └── 04_LABORATORIO_RD/       # Compilador Moskv84, Simulación y R&D Avanzado
+│   └── 02_CORTEX_ENGINE/        # Único Dominio Maestro Superviviente
+│       ├── BABYLON-60/          # Frontend de Ejecución C5-REAL (React/TypeScript/Vite)
+│       ├── cortex-persist/      # Memoria Determinista C5-REAL
+│       ├── cortexpersist-monorepo/
+│       └── cortex/              # BFT Orchestrator, Quad-Pillar Kernel (Python 3.12)
 │
-├── 2_Nucleo_Estatico/
-└── 3_Historico_Inerte/
+├── 2_Nucleo_Estatico/           # Anclajes Teóricos (Axiomas, Ontología, Documentación Base)
+└── 3_Historico_Inerte/          # Cementerio de Anergía (Proyectos archivados, Logs, OSINT, etc.)
 ```
 
 ---
 
-## 🚀 Puertos de Entrada Rápidos
+## 🚀 Puertos de Entrada C5-REAL
 
-1. **`01_INTEL_SUITE/`**: `substack-osint-miner`, `documentary_agent_omega`, `substack-anti-mafia-extension`.
-2. **`02_CORTEX_ENGINE/`**: `BABYLON-60` (`ultrathink`), `cortex-persist`, `cortex-routing-bunker`, `cortex_sentinel`.
-3. **`03_MOSKV_STUDIO/`**: `src-tauri`, `cortex-web`, `video-forge`, `twin-forge`, `harmony-forge`.
-4. **`04_LABORATORIO_RD/`**: `moskv-1-apex`, `moskv84-compiler`, `strike-rs`.
+La superficie de operaciones se limita a:
+
+1. **`cortex/`**: Núcleo principal de Python. Responsable del orquestador BFT y las simulaciones C5-REAL.
+2. **`BABYLON-60/`**: Interfaz de despliegue ideada para interactuar sin teatro (anti-green-theater).
+3. **`cortex-persist/`**: Estructuras físicas del ledger y bases de conocimiento inmutable.
