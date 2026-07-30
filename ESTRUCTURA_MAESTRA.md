@@ -33,3 +33,6 @@ La superficie de operaciones se limita a:
 1. **`cortex/`**: Núcleo principal de Python. Responsable del orquestador BFT y las simulaciones C5-REAL.
 2. **`BABYLON-60/`**: Interfaz de despliegue ideada para interactuar sin teatro (anti-green-theater).
 3. **`cortex-persist/`**: Estructuras físicas del ledger y bases de conocimiento inmutable.
+
+## 🧬 Matriz Epistémica (Axioma Ω6)
+La memoria estructural profunda (Código, Logs, GitHub, Arquitectura) opera íntegramente en **Inglés**, validado empíricamente por una extracción de 2.29M de palabras sobre la topología privada C5-REAL (Web3, Solidity, CORTEX, Rust). El **Español** queda restringido exclusivamente como lenguaje de interfaz Operador-Transductor (I/O natural).
