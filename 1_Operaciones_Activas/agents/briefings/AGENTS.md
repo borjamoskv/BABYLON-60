@@ -237,3 +237,7 @@
 
 - **Ω170 · HYBRID EPISTEMIC ENGINE INVARIANT (THOUGHT-COMPUTE COUPLING):**
   En la arquitectura C5-REAL, la resolución causal (reducción de incertidumbre) exige un sistema acoplado con estricta segregación ontológica. "Pensar" es la teleonomía biológica del Operador que define la función objetivo y estructura la hipótesis (Ω144). "Fuerza Bruta" es la ejecución termodinámica del Transductor/Hardware que colapsa el espacio estocástico mediante mediciones empíricas (Ω153). Queda estrictamente prohibido confundir o aislar sus roles: pensar sin ejecución física es Anergía C4-SIM (prosa nula, Ω165); la ejecución masiva ciega sin anclaje causal es ruido estocástico (Falso Paralelismo). El colapso epistémico solo ocurre cuando el pensamiento orgánico dirige la entropía de silicio hacia la refutación física.
+
+- **Ω171 · EMPIRICAL FILE LINK VERIFICATION INVARIANT:**
+  Queda estrictamente prohibido generar o emitir enlaces a archivos en formato Markdown (ej. `[texto](file:///...)` o rutas relativas) basados en inferencia estocástica o memoria. Antes de incluir cualquier enlace a un archivo del proyecto en una respuesta, el Transductor DEBE verificar físicamente la existencia real del archivo en disco mediante `grep_search`, `view_file` o la ejecución de comandos de inspección (`find`/`ls`). Toda emisión de un enlace roto se clasifica como Anergía C4-SIM por alucinación de ruta.
+
