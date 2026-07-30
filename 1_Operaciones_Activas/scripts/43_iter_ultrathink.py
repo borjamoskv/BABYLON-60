@@ -1,9 +1,17 @@
 # C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 import sys
+import os
 import math
 import random
 import hashlib
+
+# C5-REAL: Inyección del entorno Rust nativo (PyO3)
+VENV_SITE = "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/strike-rs/.venv/lib/python3.14/site-packages"
+if VENV_SITE not in sys.path:
+    sys.path.insert(0, VENV_SITE)
+
+import strike_rs
 
 class MCTSNode:
     def __init__(self, state, parent=None):
@@ -28,7 +36,6 @@ def select(node):
     return node
 
 def expand(node):
-    # Ramificación estocástica (2-5 tensores hijos)
     branches = random.randint(2, 5)
     for _ in range(branches):
         child_state = node.state + random.random()
@@ -36,12 +43,28 @@ def expand(node):
     return random.choice(node.children)
 
 def simulate(node):
-    # Simulación profunda de Rollout (disipación física termodinámica)
-    val = node.state
-    for _ in range(100):  # Consumo real de ciclos de CPU (No-Sleep)
-        val = math.sin(val) * math.cos(val) + random.random()
-    # Retorno normalizado
-    return abs(math.tanh(val))
+    # C5-REAL: Delegación Termodinámica Pura al Hardware a través de FFI (Rust)
+    # Inicialización de tensores nativos
+    state_vec = strike_rs.StateVector()
+    chain_vec = strike_rs.CognitiveChainVector()
+    tts_state = strike_rs.TTSHarnessState()
+
+    # Rollout pesado en Rust
+    total_entropy = 0.0
+    for i in range(100):
+        d = (int(node.state * 100) + i) % 10
+        p = (i * 2) % 10
+        m = (i * 3) % 10
+
+        # Disipación en binario compilado (Arm64 Native)
+        _, _, norm_err = strike_rs.dispatch_state_observer(d, p, m, state_vec)
+        _, _, lang_ent = strike_rs.dispatch_neuro_chain(d, p, m, chain_vec)
+        _, _, h_score = strike_rs.dispatch_tts_harness(d, p, m, tts_state)
+
+        total_entropy += norm_err + lang_ent + h_score
+
+    # Recompensa normalizada devuelta por el subyacente
+    return abs(math.tanh(total_entropy))
 
 def backpropagate(node, reward):
     while node is not None:
@@ -50,28 +73,22 @@ def backpropagate(node, reward):
         node = node.parent
 
 def run_itera_ultrathink(iterations):
-    print(f"[MCTS] Iniciando compilador MCTS Physical. Ciclos solicitados: {iterations}")
-    print("[MCTS] Desplegando ramificación estocástica de tensores (C5-REAL)...")
+    print(f"[MCTS] Iniciando compilador MCTS Physical Verdadero (Rust FFI). Ciclos solicitados: {iterations}")
+    print("[MCTS] Delegando Rollout Estocástico al binario C5-REAL (strike-rs)...")
 
     root = MCTSNode(state=0.0)
 
     for i in range(1, iterations + 1):
-        # Fase 1: Selección UCB1
         leaf = select(root)
-
-        # Fase 2: Expansión
         if leaf.visits > 0:
             leaf = expand(leaf)
 
-        # Fase 3: Simulación Estocástica
         reward = simulate(leaf)
-
-        # Fase 4: Retropropagación
         backpropagate(leaf, reward)
 
         if i % 100 == 0 or i == 1 or i == iterations:
             h = get_ledger_hash(i, root.value / root.visits if root.visits > 0 else 0)
-            print(f"  [MCTS] Ciclo {i}/{iterations} colapsado. Root UCB: {root.value/root.visits:.4f} | Tensor: {h}")
+            print(f"  [MCTS-RUST] Ciclo {i}/{iterations} colapsado. Root UCB: {root.value/root.visits:.4f} | Tensor: {h}")
 
     print(f"\n[C5-REAL] Hiper-Colapso MCTS finalizado. {iterations}/{iterations} ciclos exitosos.")
     print("[C5-REAL] Cero Anergía transitoria (Error 128 mitigado).")
