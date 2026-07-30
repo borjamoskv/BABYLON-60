@@ -1,50 +1,14 @@
 {
-  "git.enabled": false,
-  "git.untrackedChanges": "hidden",
-  "git.autorefresh": false,
-  "git.decorations.enabled": false,
-  "telemetry.telemetryLevel": "off",
-  "remote.autoForwardPorts": false,
-  "remote.tunnels.access.preventSleep": false,
-  "terminal.integrated.enablePersistentSessions": false,
-  "extensions.autoUpdate": false,
-  "extensions.autoCheckUpdates": false,
   "files.watcherExclude": {
+    "**/3_Historico_Inerte/**": true,
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
-    "**/node_modules/**": true,
-    "**/.venv/**": true,
-    "**/target/**": true,
-    "**/.cortex/**": true,
-    "**/__pycache__/**": true,
-    "**/.ruff_cache/**": true,
-    "**/.mypy_cache/**": true,
-    "**/.pytest_cache/**": true,
-    "**/.vite/**": true,
-    "**/out/**": true,
-    "**/dist/**": true,
-    "**/bin/**": true,
-    "**/obj/**": true,
-    "**/scratch/**/*.log": true,
-    "**/*.db": true
+    "**/node_modules/*/**": true
   },
   "search.exclude": {
-    "**/.git/objects/**": true,
-    "**/.git/subtree-cache/**": true,
-    "**/node_modules/**": true,
-    "**/.venv/**": true,
-    "**/target/**": true,
-    "**/.cortex/**": true,
-    "**/__pycache__/**": true,
-    "**/.ruff_cache/**": true,
-    "**/.mypy_cache/**": true,
-    "**/.pytest_cache/**": true,
-    "**/.vite/**": true,
-    "**/out/**": true,
-    "**/dist/**": true,
-    "**/bin/**": true,
-    "**/obj/**": true,
-    "**/scratch/**/*.log": true,
-    "**/*.db": true
-  }
+    "**/3_Historico_Inerte/**": true
+  },
+  "python.analysis.exclude": [
+    "3_Historico_Inerte"
+  ]
 }
