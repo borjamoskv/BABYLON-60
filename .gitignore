@@ -108,4 +108,6 @@ venv/
 
 # Historical inactive data isolation
 3_Historico_Inerte/
+.*_Historico_Inerte/
+
 
