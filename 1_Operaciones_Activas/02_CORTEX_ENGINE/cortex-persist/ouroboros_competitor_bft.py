@@ -39,7 +39,7 @@ def execute_ouroboros_100_nodes():
         top_hash = max(set(batch_hashes), key=batch_hashes.count)
         consensus_ratio = batch_hashes.count(top_hash) / node_batch_size
 
-        taint_uuid = str(uuid.uuid5(uuid.NAMESPACE_DNS, f"OUROBOROS-NODE-BATCH-{idx}"))
+        taint_uuid = str(uuid.uuid5(uuid.NAMESPACE_DNS, f"OUROBOROS-NODE-BATCH-{idx}-{datetime.datetime.now(datetime.timezone.utc).isoformat()}"))
         timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
         payload = f"[COMPETITOR:{target['name']}] Vector: {target['vector']} | Vulnerabilidad: {target['weakness']} | Consensus: {consensus_ratio:.2f}"
 
