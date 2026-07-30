@@ -323,6 +323,17 @@ def get_agent(agent_id: str) -> AgentCatalogEntry | None:
     """Retrieve an agent catalog entry by ID."""
     return AgentCatalogLoader().get(agent_id)
 
+def get_agent_by_name(name: str) -> AgentCatalogEntry | None:
+    """Retrieve an agent catalog entry by its name instead of ID."""
+    registry = AgentCatalogLoader()
+    if not registry._loaded:
+        registry.load_all()
+    normalized = name.casefold()
+    for agent in registry._agents.values():
+        if agent.name.casefold() == normalized:
+            return agent
+    return None
+
 
 # Backward-compatibility alias for older imports. Prefer AgentCatalogEntry.
 AgentDefinition = AgentCatalogEntry

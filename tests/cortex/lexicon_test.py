@@ -27,7 +27,7 @@ def test_lexicon_load_invariants():
 def test_lookup_invariant_function():
     inv_178 = lookup_invariant("Ω178")
     assert inv_178 is not None
-    assert "KOLMOGOROV PROOF ENGINE INVARIANT" in inv_178
+    assert "GIT INDEX LOCK RECOVERY" in inv_178
 
 def test_lexicon_term_search():
     engine = LexiconEngine()
