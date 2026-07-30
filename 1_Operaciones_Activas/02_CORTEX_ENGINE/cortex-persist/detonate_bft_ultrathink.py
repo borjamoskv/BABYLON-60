@@ -27,9 +27,27 @@ def detonate_bft():
         )
     """)
 
+    # C5-REAL Invariant: Append-only Ledger (No DELETE)
+    conn.execute("""
+        CREATE TRIGGER IF NOT EXISTS trg_bft_taint_log_no_delete
+        BEFORE DELETE ON bft_taint_log
+        BEGIN
+            SELECT RAISE(ABORT, 'C5-REAL: BFT Taint Log is Append-Only. Entropy purge rejected.');
+        END;
+    """)
+
+    # C5-REAL Invariant: Immutable Ledger (No UPDATE)
+    conn.execute("""
+        CREATE TRIGGER IF NOT EXISTS trg_bft_taint_log_no_update
+        BEFORE UPDATE ON bft_taint_log
+        BEGIN
+            SELECT RAISE(ABORT, 'C5-REAL: BFT Taint Log entries are immutable. State mutation rejected.');
+        END;
+    """)
+
     try:
         conn.execute("INSERT INTO bft_taint_log (uuid, timestamp, payload) VALUES (?, ?, ?)",
-                     (str(taint_uuid), timestamp, "LEGION_1_ANTIPATTERN_PURGE_MATRIX_3_4_5"))
+                     (str(taint_uuid), timestamp, "LEGION_1_ANTIPATTERN_PURGE_MATRIX_3_4_5_GOAL_ULTRATHINK_SIGUE"))
         conn.commit()
         print(f"[CORTEX-TAINT:{taint_uuid}] Inyección Idempotente Exitosa.")
     except sqlite3.IntegrityError:
