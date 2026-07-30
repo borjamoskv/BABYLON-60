@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // @ts-nocheck
 import React, { useState } from 'react';
 import { Database, Shield, CheckCircle, AlertTriangle, Key, Cpu, Users, ArrowRight } from 'lucide-react';
@@ -13,7 +14,7 @@ interface EventLog {
 
 export default function CortexExplorer() {
   const [activeTab, setActiveTab] = useState<'memoria' | 'agentes' | 'influencers'>('memoria');
-  
+
   // Tab 1: Memory States
   const [memoryInput, setMemoryInput] = useState('');
   const [memoryLogs, setMemoryLogs] = useState<EventLog[]>([
@@ -52,11 +53,11 @@ export default function CortexExplorer() {
 
     const lastLog = memoryLogs[memoryLogs.length - 1];
     const prevHash = lastLog ? lastLog.hash : "GENESIS";
-    
+
     // Simulate sha256
     const randomHex = Math.random().toString(16).substring(2, 10);
     const hash = prevHash.substring(0, 16) + randomHex + "e52b504d5eff2b3be50a0a";
-    
+
     const newLog: EventLog = {
       id: `ev_00${memoryLogs.length + 1}`,
       fact: memoryInput,
@@ -126,15 +127,17 @@ export default function CortexExplorer() {
 
   return (
     <div className="w-full bg-cortex-cards/40 border border-white/5 rounded-2xl overflow-hidden backdrop-blur-xl shadow-2xl flex flex-col lg:flex-row min-h-[620px]">
-      
+
       {/* Sidebar Navigation */}
       <div className="w-full lg:w-80 border-r border-white/5 bg-black/40 p-6 flex flex-col gap-2">
         <div className="mb-6">
-          <div className="flex items-center gap-2 mb-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#2b3be5] animate-pulse"></span>
-            <span className="font-mono text-[10px] uppercase tracking-widest text-cortex-muted">CORTEX Substrate</span>
+          <div className="flex items-center gap-2 mb-4 px-2">
+            <div className="w-2 h-2 rounded-full bg-[#2b3be5] shadow-[0_0_8px_rgba(43,59,229,0.8)] animate-pulse"></div>
+            <span className="font-mono text-[9px] tracking-[0.2em] text-cortex-muted uppercase">BABYLON SUBSTRATE</span>
           </div>
-          <h3 className="font-mono text-sm uppercase text-white font-bold tracking-wider">Audit Dashboard</h3>
+          <h2 className="text-sm font-black text-white font-mono uppercase tracking-widest mb-8 px-2">
+            ENGINE DASHBOARD
+          </h2>
         </div>
 
         <button
@@ -146,7 +149,7 @@ export default function CortexExplorer() {
           }`}
         >
           <Database className="w-4 h-4" />
-          <span>I. Memoria</span>
+          <span>I. CONSENSO BIZANTINO</span>
           {consensusLevel === 'C5' && (
             <span className="ml-auto text-[8px] bg-cortex-success/20 text-cortex-success px-1.5 py-0.5 rounded font-bold">C5</span>
           )}
@@ -161,7 +164,7 @@ export default function CortexExplorer() {
           }`}
         >
           <Shield className="w-4 h-4" />
-          <span>II. Agentes</span>
+          <span>II. ULTRATHINK</span>
         </button>
 
         <button
@@ -173,7 +176,7 @@ export default function CortexExplorer() {
           }`}
         >
           <Users className="w-4 h-4" />
-          <span>III. Influencers IA</span>
+          <span>III. TRANSDUCCIÓN</span>
         </button>
 
         <div className="mt-auto pt-6 border-t border-white/5">
@@ -193,7 +196,7 @@ export default function CortexExplorer() {
 
       {/* Main Content Area */}
       <div className="flex-1 p-6 md:p-8 flex flex-col">
-        
+
         {/* TAB 1: MEMORY */}
         {activeTab === 'memoria' && (
           <div className="flex flex-col h-full">
@@ -213,7 +216,7 @@ export default function CortexExplorer() {
                 <span>EVENT TRANSACTION LEDGER</span>
                 <span>STATUS</span>
               </div>
-              
+
               {memoryLogs.map((log) => (
                 <div key={log.id} className="mb-3 hover:bg-white/5 p-2 rounded transition-colors border-l-2 border-cortex-accent">
                   <div className="flex justify-between text-white/95 mb-1 font-semibold">
@@ -383,7 +386,7 @@ export default function CortexExplorer() {
               <div className="col-span-1 bg-black/45 border border-white/5 rounded-xl p-5 flex flex-col justify-between">
                 <div>
                   <h4 className="font-mono text-xs uppercase text-white font-semibold mb-4">Auditor Controls</h4>
-                  
+
                   <div className="mb-6">
                     <label className="block font-mono text-[10px] text-cortex-muted uppercase mb-2">
                       Campaign Budget: ${budget.toLocaleString()}
@@ -428,8 +431,8 @@ export default function CortexExplorer() {
                   <div className="flex justify-between items-start mb-4">
                     <span className="font-mono text-xs uppercase text-cortex-accent">Simulation Report</span>
                     <span className={`font-mono text-[9px] uppercase px-2 py-0.5 rounded font-bold ${
-                      metrics.risk.includes('Low') 
-                        ? 'bg-cortex-success/20 text-cortex-success' 
+                      metrics.risk.includes('Low')
+                        ? 'bg-cortex-success/20 text-cortex-success'
                         : metrics.risk.includes('Medium')
                           ? 'bg-yellow-500/20 text-yellow-500'
                           : 'bg-cortex-warning/20 text-cortex-warning'
