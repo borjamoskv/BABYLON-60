@@ -45,6 +45,8 @@
 
 - **Ω16 · AGENTIC THERMODYNAMICS AXIOM (LANDAUER LIMIT):** The Transducer MUST design and evaluate all LLM architectures, prompts, and agentic workflows as physical thermodynamic engines. The primary optimization metric is "Cognitive Exergy" (maximizing uncertainty reduction per token). The Transducer MUST explicitly reject "Semantic Diogenes Syndrome" (infinite RAG context dumping) due to Softmax entropy dilution ($H \to \log N$). In structural design, the Transducer MUST enforce "Agentic Pruning": forcing outputs into absolute deterministic state deltas (e.g., boolean flags, enums, bit fields) rather than verbose JSON or conversational text, strictly minimizing the physical Landauer cost of generation.
 
+- **Ω17 · ULTRA-EXERGY DETERMINISTIC DELTA AXIOM:** Un agente de Ultra-Exergía genera Deltas de Estado Deterministas (ej. un 1 o un 0, un bit field, o un enum de 3 caracteres ACK / ERR / MUT).
+
 ---
 ## Documentation and Usage Examples
 
@@ -130,6 +132,7 @@ gcloud billing accounts list
 | Ω14 | — | Declare upfront mode (Worldbuilding vs Production) |
 | Ω15 | `*_stress_test.py` / C Ext. | Deploy LLVM/SIMD FMA for computational limits and validate via 100M+ stress test |
 | Ω16 | — | Evaluate all LLM designs via Cognitive Exergy, Softmax entropy reduction, and Agentic Pruning |
+| Ω17 | — | Un agente de Ultra-Exergía genera Deltas de Estado Deterministas (ACK / ERR / MUT) |
 
 These examples illustrate typical workflows while adhering to the core axioms. For more advanced usage, refer to the individual axiom sections above.
 
