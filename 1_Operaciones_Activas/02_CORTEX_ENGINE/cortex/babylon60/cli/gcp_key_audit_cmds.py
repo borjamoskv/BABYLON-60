@@ -7,11 +7,12 @@ import click
 from babylon60.cli.common import cli, console
 from rich.table import Table
 from rich.panel import Panel
+from cortex.primitives.bash_primitive import BashCommand
 
 def run_gcloud_json(args: List[str]) -> Any:
     cmd = ["gcloud"] + args + ["--format=json"]
     try:
-        res = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        res = BashCommand(binary=cmd[0], args=tuple(cmd[1:])).execute()
         return json.loads(res.stdout)
     except subprocess.CalledProcessError as e:
         console.print(f"[bold red]Error al ejecutar gcloud:[/bold red] {e.stderr}")
@@ -60,7 +61,7 @@ def gcp_key_audit(project: str, restrict_uid: str, api_service: str):
 
     # 1. Determinar proyecto
     if not project:
-        res = subprocess.run(["gcloud", "config", "get-value", "project"], capture_output=True, text=True)
+        res = BashCommand(binary="gcloud", args=("config", "get-value", "project")).execute()
         project = res.stdout.strip()
         if not project or project == "(unset)":
             console.print("[bold red]Error:[/bold red] No hay proyecto GCP configurado y no se pasó --project.")
@@ -74,7 +75,7 @@ def gcp_key_audit(project: str, restrict_uid: str, api_service: str):
             f"--project={project}",
             f"--api-target=service={api_service}"
         ]
-        res = subprocess.run(cmd, capture_output=True, text=True)
+        res = BashCommand(binary=cmd[0], args=tuple(cmd[1:])).execute()
         if res.returncode == 0:
             console.print(f"[bold green]✓ Éxito:[/bold green] Restricción API '{api_service}' aplicada correctamente a {restrict_uid}.")
         else:

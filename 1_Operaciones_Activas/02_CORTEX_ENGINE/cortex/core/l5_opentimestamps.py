@@ -1,7 +1,7 @@
 # C5-REAL EXERGY CERTIFIED
 import asyncio
 from pathlib import Path
-import subprocess
+from cortex.primitives.bash_primitive import BashCommand
 
 class BlockchainAnchor:
     """
@@ -35,12 +35,10 @@ class BlockchainAnchor:
                 data_file.write_text(entry_hash)
 
                 # Invocación directa a la CLI ots (aislada del event loop)
-                subprocess.run(
-                    ["ots", "stamp", str(data_file)],
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL,
-                    check=True
-                )
+                BashCommand(
+                    binary="ots",
+                    args=("stamp", str(data_file))
+                ).execute()
 
                 ots_generated = self.storage_dir / f"{entry_hash}.txt.ots"
                 if ots_generated.exists():

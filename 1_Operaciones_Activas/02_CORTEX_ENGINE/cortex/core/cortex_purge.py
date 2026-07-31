@@ -25,6 +25,8 @@ import time
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
 
+from cortex.primitives.bash_primitive import BashCommand
+
 logger = logging.getLogger("cortex_purge")
 if not logger.handlers:
     handler = logging.StreamHandler()
@@ -40,13 +42,14 @@ def run_ruff_fix() -> bool:
     """Executes Ruff static analysis cleanups across workspace."""
     logger.info("⚡ [LANDAUER-PURGE] Executing Ruff cleanups...")
     try:
-        res = subprocess.run(
-            ["ruff", "check", ".", "--fix"],
+        res = BashCommand(
+            binary="ruff",
+            args=("check", ".", "--fix"),
             cwd=PROJECT_ROOT,
             capture_output=True,
             text=True,
             check=True,
-        )
+        ).execute()
         logger.info(res.stdout)
         return True
     except (subprocess.CalledProcessError, FileNotFoundError) as e:
@@ -92,9 +95,14 @@ def write_purge_to_ledger(payload: str, agent_id: str = "landauer_purge_c5") -> 
 def audit_and_purge_orphans() -> Tuple[int, List[str]]:
     """Audits and terminates orphan high-CPU thrashing threads (PPID=1, %CPU > 50.0)."""
     logger.info("⚡ [LANDAUER-PURGE] Auditing orphan process thrashing (TDAH Purge)...")
-    cmd = ["ps", "-eo", "pid,ppid,pcpu,command"]
     try:
-        result = subprocess.run(cmd, check=True, capture_output=True, text=True)
+        result = BashCommand(
+            binary="ps",
+            args=("-eo", "pid,ppid,pcpu,command"),
+            check=True,
+            capture_output=True,
+            text=True,
+        ).execute()
     except subprocess.CalledProcessError as e:
         logger.error(f"Error running ps: {e}")
         return 0, []
@@ -169,46 +177,50 @@ def obliterate_repo_entropy(repo_path: str) -> int:
     """Performs git gc, branch pruning, and python cache removal for a single repo."""
     purged_bytes = 0
     try:
-        subprocess.run(
-            ["git", "fetch", "--all", "--prune"],
+        BashCommand(
+            binary="git",
+            args=("fetch", "--all", "--prune"),
             cwd=repo_path,
             check=True,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
-        )
+        ).execute()
     except (subprocess.CalledProcessError, FileNotFoundError):
         pass
 
     try:
-        res = subprocess.run(
-            ["git", "branch", "-vv"],
+        res = BashCommand(
+            binary="git",
+            args=("branch", "-vv"),
             cwd=repo_path,
             capture_output=True,
             text=True,
             check=True,
-        )
+        ).execute()
         for line in res.stdout.splitlines():
             if ": gone]" in line:
                 branch_name = line.split()[0]
                 if branch_name.startswith("*"):
                     branch_name = branch_name[1:].strip()
-                subprocess.run(
-                    ["git", "branch", "-D", branch_name],
+                BashCommand(
+                    binary="git",
+                    args=("branch", "-D", branch_name),
                     cwd=repo_path,
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL,
-                )
+                ).execute()
     except (subprocess.CalledProcessError, FileNotFoundError):
         pass
 
     try:
-        subprocess.run(
-            ["git", "gc", "--aggressive", "--prune=now"],
+        BashCommand(
+            binary="git",
+            args=("gc", "--aggressive", "--prune=now"),
             cwd=repo_path,
             check=True,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
-        )
+        ).execute()
     except (subprocess.CalledProcessError, FileNotFoundError):
         pass
 

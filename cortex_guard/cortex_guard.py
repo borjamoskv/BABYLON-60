@@ -1,10 +1,14 @@
 # C5-REAL EXERGY CERTIFIED
+import sys
+import os
+
+# [ULTRATHINK V3] Dynamic Out-Of-Tree Import (Ω1 / Ω24)
+sys.path.insert(0, "/tmp/cortex_exergy_build")
+
 try:
     import cortex_guard_core
 except ImportError:
-    import sys
-    import os
-    sys.stderr.write("\n[FATAL] cortex_guard_core C-Extension not built. Run 'make build-guard'. HALTING LEDGER.\n")
+    sys.stderr.write("\n[FATAL] cortex_guard_core C-Extension not built in /tmp/. Run 'make build-guard'. HALTING LEDGER.\n")
     sys.stderr.flush()
     os.abort()
 

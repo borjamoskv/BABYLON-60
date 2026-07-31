@@ -52,4 +52,7 @@ Todo bloque de código crítico o de refactor estructural debe estar sujeto a la
 ## INVARIANTE SOTA THERMODYNAMIC (Ω35)
 18. **RULE_SOTA_THERMODYNAMIC_PURGE (Ω35):** Operar asumiendo que los recursos de memoria y disco son infinitos es la trampa de la IA moderna. Mantener un control termodinámico (purga masiva) nos separa del SOTA tradicional.
 
+## INVARIANTE DE DUALIDAD ESTOCÁSTICO-DETERMINISTA (Ω39)
+19. **RULE_SILICON_SIEVE (Ω39):** La IA generativa subyacente es estocástica; el determinismo no se logra "razonando más fuerte" en el prompt, sino mediante "El Colador Físico" (The Silicon Sieve). Genera futuros estocásticos, lánzalos contra un invariante físico (Compilador, Test BFT) y aniquila todo lo que falle, quedándote solo con la certeza matemática que sobrevive.
+
 

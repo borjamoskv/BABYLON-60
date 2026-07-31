@@ -1,5 +1,5 @@
 import os
-import subprocess
+from cortex.primitives.bash_primitive import BashCommand
 
 ROOT_DIR = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv"
 IGNORE_DIRS = {
@@ -89,12 +89,13 @@ def main() -> None:
 
     if mutated_files > 0:
         print(f"Colapsando {mutated_files} archivos en el Ledger Git...")
-        subprocess.run(["git", "add", "."], cwd=ROOT_DIR)
-        subprocess.run(
-            ["git", "commit", "-m", f"chore(cortex): maximizar exergia en {mutated_files} archivos (C5-REAL A->Z)"],
+        BashCommand(binary="git", args=("add", "."), cwd=ROOT_DIR).execute()
+        BashCommand(
+            binary="git",
+            args=("commit", "-m", f"chore(cortex): maximizar exergia en {mutated_files} archivos (C5-REAL A->Z)"),
             cwd=ROOT_DIR,
-        )
-        res = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT_DIR, capture_output=True, text=True)
+        ).execute()
+        res = BashCommand(binary="git", args=("rev-parse", "HEAD"), cwd=ROOT_DIR).execute()
         print(f"Ledger Hash: {res.stdout.strip()}")
     else:
         print("Cero entropía detectada. Exergía al máximo.")

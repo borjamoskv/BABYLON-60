@@ -4,8 +4,8 @@ C5-REAL Sandbox Isolation Engine
 Encapsula la ejecución de código generado por el Swarm para evitar necrosis estructural en `main`.
 """
 
-import subprocess
 from typing import Dict, Any
+from cortex.primitives.bash_primitive import BashCommand
 
 class VesicularSandbox:
     """Implementa aislamiento termodinámico mediante contenedores efímeros (eBPF / gVisor)."""
@@ -38,17 +38,25 @@ class VesicularSandbox:
         ]
 
         try:
-            result = subprocess.run(command, capture_output=True, text=True, timeout=self.timeout / 1000)
+            cmd = BashCommand(
+                binary=command[0],
+                args=tuple(command[1:]),
+                check=False,
+                timeout=self.timeout / 1000
+            )
+            result = cmd.execute()
             return {
-                "status": "PASS" if result.returncode == 0 else "FAIL",
+                "status": "PASS" if result.success else "FAIL",
                 "stdout": result.stdout,
                 "stderr": result.stderr,
             }
-        except subprocess.TimeoutExpired:
-            return {
-                "status": "TIMEOUT",
-                "error": "Ejecución excedió el límite termodinámico.",
-            }
+        except RuntimeError as e:
+            if "Timeout" in str(e):
+                return {
+                    "status": "TIMEOUT",
+                    "error": "Ejecución excedió el límite termodinámico.",
+                }
+            raise
         except FileNotFoundError:
             return {
                 "status": "PASS",

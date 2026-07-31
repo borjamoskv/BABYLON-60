@@ -1,8 +1,8 @@
 # C5-REAL EXERGY CERTIFIED
 """GCP Billing & Identity Diagnostic Commands (Axiom Ω5 & Ω9 Compliant)."""
 import json
-import subprocess
 import click
+from cortex.primitives.bash_primitive import BashCommand
 from babylon60.cli.common import cli, console
 
 @cli.command(name="billing")
@@ -13,10 +13,10 @@ def billing(account: str | None):
 
     if account:
         console.print(f"[yellow]■ Setting active gcloud account to:[/yellow] {account}")
-        subprocess.run(["gcloud", "config", "set", "account", account], check=False)
+        BashCommand(binary="gcloud", args=("config", "set", "account", account), check=False).execute()
 
     console.print("\n[bold green]■ Checking gcloud Auth List...[/bold green]")
-    auth_proc = subprocess.run(["gcloud", "auth", "list", "--format=json"], capture_output=True, text=True)
+    auth_proc = BashCommand(binary="gcloud", args=("auth", "list", "--format=json"), check=False).execute()
     if auth_proc.returncode == 0 and auth_proc.stdout.strip():
         try:
             accounts = json.loads(auth_proc.stdout)
@@ -29,7 +29,7 @@ def billing(account: str | None):
         console.print(f"[bold red]Auth Check Failed:[/bold red] {auth_proc.stderr}")
 
     console.print("\n[bold green]■ Checking GCP Billing Accounts & Direct Resolution URLs...[/bold green]")
-    billing_proc = subprocess.run(["gcloud", "billing", "accounts", "list", "--format=json"], capture_output=True, text=True)
+    billing_proc = BashCommand(binary="gcloud", args=("billing", "accounts", "list", "--format=json"), check=False).execute()
     if billing_proc.returncode == 0 and billing_proc.stdout.strip():
         try:
             b_accounts = json.loads(billing_proc.stdout)

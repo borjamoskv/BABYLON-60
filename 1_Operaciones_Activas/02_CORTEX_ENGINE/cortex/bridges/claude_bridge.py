@@ -9,6 +9,7 @@ import json
 import os
 import subprocess
 from typing import Any, Dict, Optional
+from cortex.primitives.bash_primitive import BashCommand
 
 class ClaudeCodeBridge:
     """Transductor C5-REAL para orquestación síncrona/asíncrona con Claude Code CLI."""
@@ -23,7 +24,7 @@ class ClaudeCodeBridge:
     def is_available(self) -> bool:
         """Verifica la presencia física del ejecutable Claude Code."""
         try:
-            res = subprocess.run(
+            res = BashCommand(
                 [self.binary_path, "--version"],
                 capture_output=True,
                 text=True,
@@ -51,7 +52,7 @@ class ClaudeCodeBridge:
         target_cwd = cwd or os.getcwd()
 
         try:
-            proc = subprocess.run(
+            proc = BashCommand(
                 [self.binary_path, "-p", prompt, "--output-format", "json"],
                 cwd=target_cwd,
                 capture_output=True,

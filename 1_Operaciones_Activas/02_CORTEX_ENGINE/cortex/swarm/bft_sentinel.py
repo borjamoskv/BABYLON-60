@@ -4,8 +4,9 @@ from __future__ import annotations
 import os
 import sys
 import time
-import subprocess
 from pathlib import Path
+
+from cortex.primitives.bash_primitive import BashCommand
 
 
 def get_repo_path() -> str:
@@ -27,32 +28,28 @@ def run_sentinel() -> None:
 
     while True:
         try:
-            status = subprocess.run(
-                ["git", "status", "--porcelain"],
-                capture_output=True,
-                text=True,
-                check=True,
-            )
+            status = BashCommand(
+                binary="git",
+                args=("status", "--porcelain")
+            ).execute()
             mutations = status.stdout.strip()
 
             if mutations:
                 print(f"[BFT_SENTINEL] Mutación termodinámica detectada:\n{mutations}")
                 print("[BFT_SENTINEL] Ejecutando colapso de onda (BFT State Loop)...")
 
-                subprocess.run(["git", "add", "."], check=True)
+                BashCommand(binary="git", args=("add", ".")).execute()
                 commit_msg = "chore(bft): autonomous state collapse [C5-REAL]"
-                subprocess.run(["git", "commit", "-m", commit_msg], check=True)
+                BashCommand(binary="git", args=("commit", "-m", commit_msg)).execute()
 
-                new_hash = subprocess.run(
-                    ["git", "rev-parse", "HEAD"],
-                    capture_output=True,
-                    text=True,
-                    check=True,
-                ).stdout.strip()
+                new_hash = BashCommand(
+                    binary="git",
+                    args=("rev-parse", "HEAD")
+                ).execute().stdout.strip()
 
                 print(f"[BFT_SENTINEL] Estado consolidado físicamente. Ledger Hash: {new_hash}")
 
-        except subprocess.CalledProcessError as e:
+        except RuntimeError as e:
             print(f"[BFT_SENTINEL] Fricción en subproceso git: {e}")
         except Exception as e:
             print(f"[BFT_SENTINEL] Error en transducción: {e}")
