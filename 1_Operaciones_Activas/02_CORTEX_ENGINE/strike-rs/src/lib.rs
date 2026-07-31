@@ -1,6 +1,8 @@
 // C5-REAL EXERGY CERTIFIED
 use pyo3::prelude::*;
 
+pub mod simd_score_1m;
+
 // ==========================================
 // STATIC ONTOLOGY DICTIONARIES (STRING MAPPINGS)
 // ==========================================
