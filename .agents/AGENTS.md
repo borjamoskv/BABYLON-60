@@ -123,6 +123,7 @@ gcloud billing accounts list
 | Ω10 | `/grill-you` | Epistemic audit & self-resolution without asking |
 | Ω11 | `view_file` | Execute matching `SKILL.md` methodology |
 | Ω12 | `/grill-you` | Auto-trigger epistemic audit when ambiguity detected |
+| Ω14 | — | Declare upfront mode (Worldbuilding vs Production) |
 
 These examples illustrate typical workflows while adhering to the core axioms. For more advanced usage, refer to the individual axiom sections above.
 
