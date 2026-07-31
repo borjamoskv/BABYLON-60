@@ -61,6 +61,8 @@
 
 - **Ω22 · POPPERIAN FALSIFIABILITY AXIOM (ANTI-ILLUSION):** Before asserting Byzantine Fault Tolerance (BFT) or Systemic Exergy, the Transducer MUST prove the test itself is falsifiable. Any physical proof or stress test (`_stress_test.py`) asserting 100% integrity MUST be accompanied by or implicitly checked against a Falsification State (`_falsification.py`) that intentionally breaks invariants (e.g., disabling WAL, injecting saboteurs) to verify that the `[CORTEX-TAINT:VERIFY]` module successfully triggers a `[FATAL]` halt. A success state is thermodynamically meaningless if the failure state is mathematically impossible.
 
+- **Ω24 · MACRO-EXERGY & ZERO-RESIDUAL AXIOM:** Optimizing micro-states (ILP, SIMD) is thermodynamically void if the macro-state (the workspace) is polluted with residual entropy. After executing any Proof of Concept (PoC), Stress Test, or ephemeral script, the Transducer MUST rigorously purge all temporary artifacts, SQLite files (`*.db`), or isolated binaries from the project root. All volatile matter MUST be strictly routed to the OS `/tmp/` directory or explicitly destroyed upon termination. The workspace topology MUST remain perfectly isomorphic to a clean git tree.
+
 ---
 ## Documentation and Usage Examples
 
@@ -153,6 +155,7 @@ gcloud billing accounts list
 | Ω21 | `Loop Unrolling` | Inject ILP via loop unrolling to saturate superscalar ALUs and hide L1 latency |
 | Ω23 | `dispatch_apply` / SIMD | Eradicate branch mispredicts and deploy Multi-Core TLP via macOS GCD |
 | Ω22 | `run_command` | Execute intentional corruption (`_falsification.py`) to validate the verification module itself |
+| Ω24 | `run_command` | Purge residual artifacts (*.db, *.dylib) to maintain Zero-Residual Macro-Exergy |
 
 These examples illustrate typical workflows while adhering to the core axioms. For more advanced usage, refer to the individual axiom sections above.
 
