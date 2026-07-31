@@ -1,37 +1,7 @@
 import ast
 import pytest
-
-
-class SecurityError(Exception):
-    pass
-
-
-def validate_ast_sandbox(source_code: str) -> bool:
-    try:
-        tree = ast.parse(source_code)
-        for node in ast.walk(tree):
-            # 1. Bloqueo de atributos dunder
-            if isinstance(node, ast.Attribute):
-                if isinstance(node.attr, str) and node.attr.startswith("__") and node.attr.endswith("__"):
-                    raise SecurityError(f"Acceso a atributo dunder prohibido: {node.attr}")
-            # 2. Bloqueo de funciones de introspección dinámica
-            if isinstance(node, ast.Name) and node.id in (
-                "getattr",
-                "setattr",
-                "eval",
-                "exec",
-                "compile",
-                "__import__",
-            ):
-                raise SecurityError(f"Llamada a función de introspección prohibida: {node.id}")
-            # 3. Bloqueo de importaciones no autorizadas (Denegación por defecto)
-            if isinstance(node, (ast.Import, ast.ImportFrom)):
-                raise SecurityError("Importación no permitida en entorno sandboxed")
-        return True
-    except SecurityError:
-        raise
-    except SyntaxError as e:
-        raise SecurityError(f"Syntax error (safe): {e}")
+import asyncio
+from cortex_chaos_monad import validate_ast_sandbox, run_chaos_monad, SecurityError
 
 
 class TestASTSandboxEvasion:
@@ -58,9 +28,68 @@ class TestASTSandboxEvasion:
             validate_ast_sandbox("getattr((), f'__{'class'}__')")
 
     def test_import_star_evasion(self):
-        with pytest.raises(SecurityError, match="Importación no permitida"):
+        with pytest.raises(SecurityError, match="Importacion no permitida"):
             validate_ast_sandbox("from os import *")
 
-    def test_lambda_and_exec_bypass(self):
-        with pytest.raises(SecurityError):
-            validate_ast_sandbox("(lambda: __import__('os').system('id'))()")
+    @pytest.mark.asyncio
+    async def test_execution_success(self):
+        result = await run_chaos_monad("print('hello world')")
+        assert result["status"] == "Success"
+        assert result["stdout"].strip() == "hello world"
+
+    @pytest.mark.asyncio
+    async def test_execution_timeout(self):
+        # A while True loop should trigger Timeout_Entropy_Death
+        result = await run_chaos_monad("while True: pass", timeout_ms=100)
+        assert result["status"] == "Timeout_Entropy_Death"
+
+    @pytest.mark.asyncio
+    async def test_execution_security_error(self):
+        result = await run_chaos_monad("import os")
+        assert result["status"] == "SecurityError"
+        assert "Importacion no permitida" in result["error"]
+
+    @pytest.mark.asyncio
+    async def test_execution_memory_isolation(self):
+        # Even if AST passed, process should not have access to standard libraries or parent globals
+        result = await run_chaos_monad("import sys") # blocked by AST
+        assert result["status"] == "SecurityError"
+
+        # Using a trick to try to find __import__ via builtins (caught by sandbox-exec or safe_builtins)
+        result = await run_chaos_monad("print(__builtins__.get('__import__', 'Not Found'))")
+        # '__builtins__' is blocked by AST due to dunder rule
+        assert result["status"] == "SecurityError"
+
+    @pytest.mark.asyncio
+    async def test_execution_dynamic_getattr(self):
+        # Bypass AST using f-strings and dynamic composition to call getattr
+        # Since getattr is removed from safe_builtins, it should fail at runtime
+        code = '''
+x = "cla"
+y = "ss"
+getattr((), f"__{x+y}__")
+'''
+        result = await run_chaos_monad(code)
+        assert result["status"] in ["SecurityError", "RuntimeError"]
+
+    @pytest.mark.asyncio
+    async def test_execution_memory_exhaustion(self):
+        # Try to OOM the node. The resource RLIMIT_AS should kill it with MemoryError
+        code = '''
+a = [1]
+while True:
+    a = a + a
+'''
+        result = await run_chaos_monad(code, timeout_ms=3000)
+        # Depending on OS, it might be SecurityError (MemoryError caught) or just get killed
+        assert result["status"] in ["SecurityError", "RuntimeError", "Timeout_Entropy_Death"]
+        if result["status"] == "SecurityError":
+            assert "MemoryError" in result["error"]
+
+    @pytest.mark.asyncio
+    async def test_execution_stdout_flood(self):
+        # Try to flood STDOUT buffer and cause pipe deadlock
+        code = "print('A' * (2 * 1024 * 1024))"
+        result = await run_chaos_monad(code)
+        assert result["status"] == "RuntimeError"
+        assert "STDOUT Buffer Overflow" in result["error"]

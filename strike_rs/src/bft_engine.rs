@@ -350,7 +350,7 @@ mod tests {
 
         let params = ExergyParams { g: 12.0, l: 12.0, a: 1.0, b: 1.0, p: 1.0, e_base: 0.04 };
         let res = engine.run_dag(mem.clone(), params, "").await;
-        assert!(res.is_ok());
+        assert!(res.is_ok(), "Test failed: {:?}", res);
 
         let m = mem.read().await;
         assert_eq!(m.len(), 150);

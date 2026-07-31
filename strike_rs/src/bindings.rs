@@ -12,6 +12,8 @@ use crate::gelabp_calc::ExergyParams;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
+use crate::hypervisor::{ZeroCopyPublisher, spawn_writer_daemon};
+
 #[pyclass]
 pub struct CortexKernel {
     ledger: MasterLedger,
@@ -146,11 +148,38 @@ impl CortexKernel {
     }
 }
 
+#[pyclass(unsendable)]
+pub struct AgencyHypervisor {
+    publisher: ZeroCopyPublisher,
+}
+
+#[pymethods]
+impl AgencyHypervisor {
+    #[new]
+    pub fn new(service_name: &str) -> PyResult<Self> {
+        let publisher = ZeroCopyPublisher::new(service_name)
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to init zero-copy publisher: {}", e)))?;
+        Ok(Self { publisher })
+    }
+
+    pub fn publish_node(&self, payload_hash_hex: &str) -> PyResult<()> {
+        self.publisher.publish_node(payload_hash_hex)
+            .map_err(|e| PyRuntimeError::new_err(format!("Publish failed: {}", e)))
+    }
+
+    #[staticmethod]
+    pub fn start_writer_daemon(service_name: &str, db_path: &str) -> PyResult<()> {
+        spawn_writer_daemon(service_name, db_path);
+        Ok(())
+    }
+}
+
 /// A Python module implemented in Rust.
 #[pymodule]
 fn strike_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<CortexKernel>()?;
     m.add_class::<BftSwarmEngine>()?;
+    m.add_class::<AgencyHypervisor>()?;
     Ok(())
 }
 

@@ -127,3 +127,8 @@ ignore_missing_imports = true
 [[tool.mypy.overrides]]
 module = ["babylon60.extensions.*"]
 follow_imports = "skip"
+
+[dependency-groups]
+dev = [
+    "hypothesis>=6.163.0",
+]

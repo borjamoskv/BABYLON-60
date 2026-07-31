@@ -14,10 +14,11 @@ class LedgerPersist:
     Reads reconstruct the full in-memory DAG from disk.
     Supports Sovereign Dual-Licensing (INV_C5_17).
     """
-    def __init__(self, db_path: str, license_key: str | None = None) -> None:
+    def __init__(self, db_path: str, license_key: str | None = None, ha_cluster=None) -> None:
         assert isinstance(db_path, str) and len(db_path) > 0, "Fail-fast: db_path must be non-empty str"
         self.db_path = db_path
         self.license_status: LicenseStatus = verify_license_key(license_key)
+        self.ha_cluster = ha_cluster
         self.conn = sqlite3.connect(db_path)
         self.conn.execute("PRAGMA journal_mode=WAL")
         self.conn.execute("PRAGMA busy_timeout=5000")
@@ -48,6 +49,14 @@ class LedgerPersist:
                 "Fail-fast: Community tier limits batch inserts to 100 nodes. "
                 "Acquire a Commercial License for unbounded BFT high-throughput."
             )
+
+        # INV_C5_18 / ABFT IPC: Fast path using Zero-Copy memory
+        if self.ha_cluster is not None and getattr(self.ha_cluster, "is_active", False):
+            inserted = 0
+            for node in ledger.nodes.values():
+                self.ha_cluster.publish_node(node.node_id, node.payload_hash)
+                inserted += 1
+            return inserted
 
         cursor = self.conn.cursor()
         inserted = 0

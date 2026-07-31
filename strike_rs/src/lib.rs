@@ -13,6 +13,7 @@ pub mod kda_memory;
 pub mod bft_engine;
 pub mod gelabp_calc;
 pub mod bft_iceoryx2;
+pub mod hypervisor;
 
 /// Motor de Taint C5-REAL (Causal Poset)
 /// Garantiza ejecución de coste cero en el Fast-Loop y verifica Kahn's Invariant (INV-GCM-003).
