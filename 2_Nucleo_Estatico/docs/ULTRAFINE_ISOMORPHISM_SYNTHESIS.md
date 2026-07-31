@@ -134,6 +134,16 @@ Recent experimental literature confirms the deep physical and formal convergence
 4. **Photonic/Memristive Autopoietic Weight Remodeling (Falsifiable Test 4):**
    In a non-von Neumann photonic-memristive hardware array, executing active autopoietic weight modification ($\Phi: B \to \mathrm{Hom}(A,B)$ via optical phase feedback without external backpropagation steps) will reduce thermal dissipation per parameter update below the $\Delta Q = kT \ln 2$ Landauer bound threshold relative to digital IEEE 754 matrix multiplication, while exhibiting zero catastrophic forgetting under continuous environmental drift.
 
+5. **Photonic Interferometric Phase-Shift Attention Collapse (Falsifiable Test 5):**
+   Under physical environmental perturbations (thermal gradients, magnetic polarization shifts in optical PGKET hardware), Softmax score degradation will strictly obey wave interference fringe loss functions ($\cos(\Delta \phi)$ phase-shift) rather than floating-point IEEE 754 roundoff error distributions.
+
+6. **Memristive Senescence & (M,R) Metabolic Failure (Falsifiable Test 6):**
+   If voltage pulse rates or information throughput drop below the thermodynamic entropy dissipation cost required to maintain the Prigogine structure, memristive conductance matrix drift will follow the non-invertibility of a Lax monoidal functor. The resulting "memristive senescence" is physically irreversible, proving a true physical arrow of time unlike synthetic $L_2$ weight decay.
+
+7. **Heterodyne Beat Frequencies & Image Band Generation in Attention (Falsifiable Test 7):**
+   Injecting a latent continuous carrier frequency across sequence tokens causes the $Q \cdot K^T$ matrix multiplication to act as a physical heterodyne mixer, generating sum/difference beat frequencies and image bands directly measurable in the attention weight spectrum.
+
+
 ---
 
 ## 9. CONCLUSION & EXERGY VERDICT
