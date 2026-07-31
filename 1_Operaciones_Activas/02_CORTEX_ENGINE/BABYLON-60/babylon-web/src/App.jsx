@@ -37,13 +37,15 @@ function App() {
   const runWasmHyperEval = () => {
     try {
       const t0 = performance.now();
-      const engine = new WasmScoreEngine(120000);
-      const results = engine.evaluate_batch(1, 120000, 144);
+      const LIMIT = 1200000; // 1.2 Millones (Escala Exergética)
+      const engine = new WasmScoreEngine(LIMIT);
+      const results = engine.evaluate_batch(1, LIMIT, 144);
       const t1 = performance.now();
 
       setWasmBenchmark({
         timeMs: (t1 - t0).toFixed(2),
-        sampleScore: results[41].toFixed(2) // Score of 42
+        sampleScore: results[41].toFixed(2), // Score of 42
+        total: LIMIT
       });
     } catch (err) {
       console.error("WASM Eval Error:", err);
@@ -380,7 +382,7 @@ function App() {
 
               {/* Quick Access Buttons */}
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-                {[1, 2, 7, 42, 127, 1024, 7919, 46368, 120000].map(n => (
+                {[1, 2, 7, 42, 127, 1024, 7919, 46368, 120000, 1200000].map(n => (
                   <button
                     key={n}
                     className="btn btn-outline"
@@ -397,17 +399,17 @@ function App() {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
                   <span className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--accent-primary)' }}>WASM SIMD ENGINE</span>
                   <button className="btn btn-primary" style={{ padding: '0.3rem 0.6rem', fontSize: '0.75rem' }} onClick={runWasmHyperEval}>
-                    ⚡ Run 120K (C5-REAL)
+                    ⚡ Run 1.2M (C5-REAL)
                   </button>
                 </div>
                 {wasmBenchmark && (
                   <div className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                    <span style={{ color: 'var(--accent-success)' }}>{wasmBenchmark.timeMs}ms</span> | Score(42)={wasmBenchmark.sampleScore}
+                    <span style={{ color: 'var(--accent-success)' }}>{wasmBenchmark.timeMs}ms</span> | {wasmBenchmark.total.toLocaleString()} Ops | Score(42)={wasmBenchmark.sampleScore}
                   </div>
                 )}
                 {!wasmBenchmark && (
                   <div className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                    Eval 120,000 ints in physical DOM.
+                    Eval 1.2 Millones ints in physical DOM.
                   </div>
                 )}
               </div>
