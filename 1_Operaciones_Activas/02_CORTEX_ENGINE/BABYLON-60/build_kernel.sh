@@ -1,30 +1,22 @@
-#!/usr/bin/env bash
-# C5-REAL EXERGY CERTIFIED BUILD SCRIPT FOR BABYLON-60 DOMAIN KERNEL
-set -eo pipefail
+# C5-REAL EXERGY CERTIFIED
+#!/bin/bash
+set -e
 
-echo "=========================================="
-echo "■ BABYLON-60 DOMAIN KERNEL BUILD & AUDIT"
-echo "=========================================="
+echo "[C5-REAL] Initiating Transducer Build (F# Domain Kernel -> Vite Isomorphic UI)"
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-KERNEL_DIR="${SCRIPT_DIR}/domain_kernel"
-WEB_DIR="${SCRIPT_DIR}/babylon-web"
+cd "$(dirname "$0")"
+ROOT_DIR=$(pwd)
 
-echo "➜ [1/3] Validating F# Domain Kernel (.NET SDK)..."
-if command -v dotnet &> /dev/null; then
-    (cd "${KERNEL_DIR}" && dotnet build --configuration Release)
-    echo "✔ F# Domain Kernel compiled successfully."
-else
-    echo "⚠ dotnet SDK not found in path. Skipping native .NET compilation step."
-fi
+echo "[1/3] Restoring .NET tools in domain_kernel..."
+cd domain_kernel
+dotnet tool restore
 
-echo "➜ [2/3] Building babylon-web Frontend (React 19 + Vite 8)..."
-if command -v npm &> /dev/null; then
-    (cd "${WEB_DIR}" && npm run build)
-    echo "✔ babylon-web built successfully."
-else
-    echo "❌ npm not found."
-    exit 1
-fi
+echo "[2/3] Transducing F# to TypeScript via Fable..."
+dotnet fable Babylon60.Domain.fsproj --outDir ../babylon-web/src/domain --lang TypeScript
 
-echo "➜ [3/3] Build & Verification Complete."
+echo "[3/3] Building Babylon Web UI (Vite)..."
+cd ../babylon-web
+npm install
+npm run build
+
+echo "[OK] Axiom Ω25 Fulfilled. C5-REAL Transduction Complete."

@@ -1,21 +1,35 @@
 // C5-REAL EXERGY CERTIFIED
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
-  Gravity,
-  MembraneState,
-  applyThermalStress,
-  commitBoundary,
-  validateAndAppendNode,
-  GENESIS_ID,
-  sha256Hex
-} from './irpKernel';
+  IRPAutomata_Gravity_C2_FriccionComputacional,
+  IRPAutomata_Gravity_C3_FluctuacionTermica,
+  IRPAutomata_Gravity_C4_DegradacionGeometrica,
+  IRPAutomata_Gravity_C5_ColapsoOntologico,
+  IRPAutomata_MembraneState_Stable,
+  IRPAutomata_applyThermalStress,
+  IRPAutomata_commitBoundary,
+  LedgerValidation_validateAndAppend,
+  LedgerValidation_genesisLedger
+} from './domain/IRPAutomata';
+
+// Web Crypto helper decoupled from F# Kernel
+async function sha256Hex(message) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
 import init, { WasmScoreEngine } from 'cortex-wasm';
 
 function App() {
-  // Isomorphic IRP Membrane State (Direct F# Domain Kernel Execution)
-  const [kernelState, setKernelState] = useState(MembraneState.Stable(0.01));
-  const [ledgerMap, setLedgerMap] = useState(new Map());
-  const [lastParentId, setLastParentId] = useState(GENESIS_ID);
+  // Sync Queue Ref (Zero-Overhead background telemetry)
+  const syncQueueRef = useRef([]);
+  const [cloudSyncStatus, setCloudSyncStatus] = useState('IDLE');
+  // Isomorphic IRP Membrane State (Fable Transduced)
+  const [kernelState, setKernelState] = useState(IRPAutomata_MembraneState_Stable(0.01));
+  const [ledgerState, setLedgerState] = useState(LedgerValidation_genesisLedger());
+  const [lastParentId, setLastParentId] = useState(LedgerValidation_genesisLedger().GenesisId);
 
   const [bftLogs, setBftLogs] = useState([
     { id: 1, hash: '0x8f3a...d91c', status: 'STATUS:OK|ENTROPY:0.0100', timestamp: '08:08:12' },
@@ -29,9 +43,42 @@ function App() {
   const [scoreLoading, setScoreLoading] = useState(false);
   const [wasmBenchmark, setWasmBenchmark] = useState(null);
 
-  // Initialize WASM
+  // Initialize WASM and BFT Async Sync Loop
   useEffect(() => {
     init().catch(err => console.error("WASM Init Error:", err));
+
+    // Zero-overhead background telemetry (Axiom Ω10)
+    const intervalId = setInterval(async () => {
+      if (syncQueueRef.current.length === 0) {
+        setCloudSyncStatus('IDLE');
+        return;
+      }
+
+      setCloudSyncStatus('SYNCING...');
+      const batch = [...syncQueueRef.current];
+      syncQueueRef.current = []; // clear queue immediately
+
+      try {
+        const res = await fetch('http://127.0.0.1:8787/seal', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ logs: batch })
+        });
+        if (res.ok) {
+          setCloudSyncStatus(`SEALED (${batch.length})`);
+          setTimeout(() => setCloudSyncStatus('IDLE'), 2000);
+        } else {
+          setCloudSyncStatus('ERROR: CLOUD');
+          syncQueueRef.current = [...batch, ...syncQueueRef.current]; // restore failed items
+        }
+      } catch (err) {
+        console.error("Cloudflare Notary Sync Error:", err);
+        setCloudSyncStatus('OFFLINE');
+        syncQueueRef.current = [...batch, ...syncQueueRef.current]; // restore on network error
+      }
+    }, 5000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   const runWasmHyperEval = () => {
@@ -42,10 +89,13 @@ function App() {
       const results = engine.evaluate_batch(1, LIMIT, 144);
       const t1 = performance.now();
 
+      const opsPerSec = (LIMIT / ((t1 - t0) / 1000)).toFixed(0);
+
       setWasmBenchmark({
         timeMs: (t1 - t0).toFixed(2),
         sampleScore: results[41].toFixed(2), // Score of 42
-        total: LIMIT
+        total: LIMIT,
+        opsPerSec
       });
     } catch (err) {
       console.error("WASM Eval Error:", err);
@@ -82,51 +132,77 @@ function App() {
   };
 
   const applyStress = async (gravityKey) => {
-    if (kernelState.type === 'Apoptosis') {
+    const currentStateName = kernelState.cases()[kernelState.tag];
+    if (currentStateName === 'Apoptosis') {
       alert('IRP MEMBRANE IN APOPTOSIS — Irreversible state (Axiom Ω22). Reset required.');
       return;
     }
 
-    const gravity = Gravity[gravityKey];
-    const nextState = applyThermalStress(kernelState, gravity);
+    let gravity;
+    if (gravityKey === 'C2_FriccionComputacional') gravity = IRPAutomata_Gravity_C2_FriccionComputacional();
+    else if (gravityKey === 'C3_FluctuacionTermica') gravity = IRPAutomata_Gravity_C3_FluctuacionTermica();
+    else if (gravityKey === 'C4_DegradacionGeometrica') gravity = IRPAutomata_Gravity_C4_DegradacionGeometrica();
+    else if (gravityKey === 'C5_ColapsoOntologico') gravity = IRPAutomata_Gravity_C5_ColapsoOntologico();
+
+    const nextState = IRPAutomata_applyThermalStress(kernelState, gravity);
     setKernelState(nextState);
 
-    const boundaryMsg = commitBoundary(nextState);
+    const boundaryMsg = IRPAutomata_commitBoundary(nextState);
+    const nextStateName = nextState.cases()[nextState.tag];
 
     // Cryptographic SHA-256 Ledger Append
     try {
       const payloadHash = await sha256Hex(`PAYLOAD:${Date.now()}:${boundaryMsg}`);
-      const { newNodesMap, newNode } = await validateAndAppendNode(
-        ledgerMap,
+      const rawContent = `${lastParentId}:CLAIM:${nextStateName}:${payloadHash}`;
+      const nodeId = await sha256Hex(rawContent);
+
+      const result = LedgerValidation_validateAndAppend(
+        ledgerState,
         lastParentId,
-        `CLAIM:${nextState.type}`,
-        payloadHash
+        `CLAIM:${nextStateName}`,
+        payloadHash,
+        nodeId
       );
 
-      setLedgerMap(newNodesMap);
-      setLastParentId(newNode.nodeId);
+      // Fable Result DU: tag 0 is Ok, 1 is Error
+      if (result.tag === 0) {
+        const [newLedgerState, newNode] = result.fields[0];
+        setLedgerState(newLedgerState);
+        setLastParentId(newNode.NodeId);
 
-      const logItem = {
-        id: Date.now(),
-        hash: `0x${newNode.nodeId.substring(0, 6)}...${newNode.nodeId.substring(58)}`,
-        status: boundaryMsg,
-        timestamp: newNode.timestamp
-      };
-      setBftLogs(prev => [logItem, ...prev.slice(0, 7)]);
+        const logItem = {
+          id: Date.now(),
+          hash: `0x${newNode.NodeId.substring(0, 6)}...${newNode.NodeId.substring(58)}`,
+          status: boundaryMsg,
+          timestamp: new Date().toLocaleTimeString()
+        };
+        setBftLogs(prev => [logItem, ...prev.slice(0, 7)]);
+
+        // Push to Cloudflare Async Sync Queue
+        syncQueueRef.current.push({
+          nodeId: newNode.NodeId,
+          parentId: lastParentId,
+          payloadHash,
+          status: boundaryMsg
+        });
+
+      } else {
+        console.error("Ledger Validation Error (F# Kernel rejected mutation):", result.fields[0]);
+      }
     } catch (err) {
       console.error('Ledger Append Exception:', err);
     }
   };
 
   const resetMembrane = () => {
-    setKernelState(MembraneState.Stable(0.01));
+    setKernelState(IRPAutomata_MembraneState_Stable(0.01));
   };
 
   const exportBFTReceipt = async () => {
     const receipt = {
       issuer: "BABYLON-60 C5-REAL Node",
       timestamp: new Date().toISOString(),
-      membraneState: kernelState,
+      membraneState: kernelState.cases()[kernelState.tag],
       lastBftRoot: lastParentId,
       bftLogs: bftLogs
     };
@@ -150,6 +226,23 @@ function App() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   };
+
+  const currentStateName = kernelState.cases()[kernelState.tag];
+  let stateColor = 'var(--accent-primary)';
+  let stateBg = 'rgba(43, 59, 229, 0.1)';
+  if (currentStateName === 'Stable') {
+    stateColor = 'var(--accent-success)';
+    stateBg = 'rgba(0, 255, 102, 0.1)';
+  } else if (currentStateName === 'Apoptosis') {
+    stateColor = 'var(--accent-secondary)';
+    stateBg = 'rgba(255, 0, 85, 0.2)';
+  } else if (currentStateName === 'Rollback') {
+    stateColor = 'var(--accent-primary)';
+    stateBg = 'rgba(43, 59, 229, 0.2)';
+  } else {
+    stateColor = 'var(--text-main)';
+    stateBg = 'rgba(255, 255, 255, 0.1)';
+  }
 
 
   return (
@@ -212,40 +305,41 @@ function App() {
 
           <div className="grid-3">
             {/* Membrane State Display */}
-            <div className="glass-panel" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div className="glass-panel animate-fade-in-up" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span className="text-mono" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>MEMBRANE STATE</span>
                 <span className="text-mono" style={{
                   padding: '0.2rem 0.6rem',
                   borderRadius: '4px',
                   fontSize: '0.8rem',
-                  backgroundColor: kernelState.type === 'Stable' ? 'rgba(0, 255, 102, 0.1)' : kernelState.type === 'Apoptosis' ? 'rgba(255, 0, 85, 0.2)' : 'rgba(43, 59, 229, 0.2)',
-                  color: kernelState.type === 'Stable' ? 'var(--accent-success)' : kernelState.type === 'Apoptosis' ? 'var(--accent-secondary)' : 'var(--accent-primary)',
-                  border: `1px solid ${kernelState.type === 'Stable' ? 'var(--accent-success)' : kernelState.type === 'Apoptosis' ? 'var(--accent-secondary)' : 'var(--accent-primary)'}`
+                  backgroundColor: stateBg,
+                  color: stateColor,
+                  border: `1px solid ${stateColor}`,
+                  boxShadow: `0 0 10px ${stateBg}`
                 }}>
-                  {kernelState.type}
+                  {currentStateName}
                 </span>
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem' }}>
                   <span>Entropy Level (e):</span>
-                  <span className="text-mono">{kernelState.entropyLevel !== undefined ? kernelState.entropyLevel.toFixed(4) : '0.0000'}</span>
+                  <span className="text-mono">{currentStateName === 'Stable' ? kernelState.fields[0].toFixed(4) : '0.0000'}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem' }}>
                   <span>Variance (v):</span>
-                  <span className="text-mono">{kernelState.variance !== undefined ? kernelState.variance.toFixed(4) : '0.0000'}</span>
+                  <span className="text-mono">{currentStateName === 'Smoothing' ? kernelState.fields[0].toFixed(4) : '0.0000'}</span>
                 </div>
-                {kernelState.targetHash && (
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--accent-primary)' }}>
+                {currentStateName === 'Rollback' && (
+                  <div className="animate-fade-in-up" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--accent-primary)' }}>
                     <span>Target Hash:</span>
-                    <span className="text-mono">{kernelState.targetHash}</span>
+                    <span className="text-mono">{kernelState.fields[0]}</span>
                   </div>
                 )}
-                {kernelState.taintLog && (
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--accent-secondary)' }}>
+                {currentStateName === 'Apoptosis' && (
+                  <div className="animate-fade-in-up" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--accent-secondary)' }}>
                     <span>Taint Log:</span>
-                    <span className="text-mono">{kernelState.taintLog}</span>
+                    <span className="text-mono">{kernelState.fields[0]}</span>
                   </div>
                 )}
               </div>
@@ -274,6 +368,16 @@ function App() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                 <span className="text-mono" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>BFT LEDGER EVENT FEED (SHA-256)</span>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <span className="text-mono" style={{
+                    fontSize: '0.75rem',
+                    padding: '0.2rem 0.5rem',
+                    borderRadius: '4px',
+                    border: '1px solid',
+                    borderColor: cloudSyncStatus === 'OFFLINE' ? 'var(--accent-secondary)' : cloudSyncStatus.startsWith('SEALED') ? 'var(--accent-success)' : cloudSyncStatus === 'SYNCING...' ? 'var(--accent-primary)' : 'var(--text-muted)',
+                    color: cloudSyncStatus === 'OFFLINE' ? 'var(--accent-secondary)' : cloudSyncStatus.startsWith('SEALED') ? 'var(--accent-success)' : cloudSyncStatus === 'SYNCING...' ? 'var(--accent-primary)' : 'var(--text-muted)',
+                  }}>
+                    CLOUD: {cloudSyncStatus}
+                  </span>
                   <span className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--accent-success)' }}>LIVE MERKLE ROOTS</span>
                   <button className="btn btn-outline" style={{ padding: '0.3rem 0.8rem', fontSize: '0.8rem' }} onClick={exportBFTReceipt}>
                     ↓ ZK Receipt
@@ -282,7 +386,7 @@ function App() {
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                {bftLogs.map(log => (
+                {bftLogs.map((log, index) => (
                   <div key={log.id} style={{
                     display: 'flex',
                     justify: 'space-between',
@@ -292,7 +396,9 @@ function App() {
                     borderLeft: `3px solid ${log.status.includes('APOPTOSIS') ? 'var(--accent-secondary)' : log.status.includes('ROLLBACK') ? 'var(--accent-primary)' : 'var(--accent-success)'}`,
                     borderRadius: '4px',
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '0.85rem'
+                    fontSize: '0.85rem',
+                    animation: index === 0 ? 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite' : 'none',
+                    opacity: 1 - (index * 0.12)
                   }}>
                     <span style={{ color: 'var(--accent-primary)' }}>{log.hash}</span>
                     <span style={{ color: 'var(--text-main)' }}>{log.status}</span>
@@ -365,6 +471,7 @@ function App() {
                       width: `${scoreResult.score}%`,
                       height: '100%',
                       background: scoreResult.score > 60 ? 'var(--accent-success)' : scoreResult.score > 40 ? 'var(--accent-primary)' : 'var(--accent-secondary)',
+                      boxShadow: `0 0 15px ${scoreResult.score > 60 ? 'var(--accent-success)' : scoreResult.score > 40 ? 'var(--accent-primary)' : 'var(--accent-secondary)'}`,
                       borderRadius: '4px',
                       transition: 'width 0.4s ease'
                     }} />
@@ -399,17 +506,19 @@ function App() {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
                   <span className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--accent-primary)' }}>WASM SIMD ENGINE</span>
                   <button className="btn btn-primary" style={{ padding: '0.3rem 0.6rem', fontSize: '0.75rem' }} onClick={runWasmHyperEval}>
-                    ⚡ Run 1.2M (C5-REAL)
+                    ⚡ Detonate 1.2M (Rust)
                   </button>
                 </div>
                 {wasmBenchmark && (
-                  <div className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                    <span style={{ color: 'var(--accent-success)' }}>{wasmBenchmark.timeMs}ms</span> | {wasmBenchmark.total.toLocaleString()} Ops | Score(42)={wasmBenchmark.sampleScore}
+                  <div className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                    <div><span style={{ color: 'var(--accent-success)' }}>{wasmBenchmark.timeMs}ms</span> | {wasmBenchmark.total.toLocaleString()} Nodes</div>
+                    <div style={{ color: 'var(--accent-primary)', fontWeight: 'bold' }}>{(wasmBenchmark.opsPerSec / 1000000).toFixed(2)}M Ops/sec</div>
+                    <div>Score(42) = {wasmBenchmark.sampleScore}</div>
                   </div>
                 )}
                 {!wasmBenchmark && (
                   <div className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                    Eval 1.2 Millones ints in physical DOM.
+                    Eval 1.2M nodes in Native Rust WASM.
                   </div>
                 )}
               </div>

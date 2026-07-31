@@ -137,6 +137,10 @@
           "projectReferences": {}
         }
       },
+      "restoreLockProperties": {
+        "restorePackagesWithLockFile": "false",
+        "nuGetLockFilePath": "Fable.lock"
+      },
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",

@@ -1,0 +1,10 @@
+# C5-REAL EXERGY CERTIFIED
+name = "babylon60-notary"
+main = "src/index.ts"
+compatibility_date = "2024-03-20"
+compatibility_flags = [ "nodejs_compat" ]
+
+[[d1_databases]]
+binding = "BFT_DB"
+database_name = "bft_ledger_db"
+database_id = "00000000-0000-0000-0000-000000000000" # Placeholder for local dev
