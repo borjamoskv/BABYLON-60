@@ -323,7 +323,7 @@ impl Atms {
             if lbl.is_empty() {
                 return Vec::new(); // an unsupported antecedent kills the support
             }
-            let mut next = Vec::new();
+            let mut next = Vec::with_capacity(acc.len() * lbl.len());
             for base in &acc {
                 for e in lbl {
                     let u = base.union(e);
@@ -344,15 +344,12 @@ impl Atms {
         if !self.is_consistent(&env) {
             return false;
         }
-        let lbl = &self.nodes[node].label;
-        if lbl.iter().any(|e| e.is_subset(&env)) {
+        if self.nodes[node].label.iter().any(|e| e.is_subset(&env)) {
             return false; // env is subsumed → not minimal
         }
         // drop existing supersets of env, then add env
-        let mut new_label: Vec<Environment> =
-            lbl.iter().filter(|e| !env.is_subset(e)).cloned().collect();
-        new_label.push(env);
-        self.nodes[node].label = new_label;
+        self.nodes[node].label.retain(|e| !env.is_subset(e));
+        self.nodes[node].label.push(env);
         true
     }
 
@@ -382,21 +379,13 @@ impl Atms {
 
 /// Reduce a set of environments to its minimal antichain: dedup, then drop any
 /// environment that has a proper subset also present.
-fn minimize(envs: Vec<Environment>) -> Vec<Environment> {
-    let mut uniq: Vec<Environment> = Vec::new();
+fn minimize(mut envs: Vec<Environment>) -> Vec<Environment> {
+    envs.sort_unstable_by_key(|e| (e.len(), e.mask));
+    envs.dedup();
+    let mut result: Vec<Environment> = Vec::with_capacity(envs.len());
     for e in envs {
-        if !uniq.contains(&e) {
-            uniq.push(e);
-        }
-    }
-    let mut result: Vec<Environment> = Vec::new();
-    for (i, e) in uniq.iter().enumerate() {
-        let has_proper_subset = uniq
-            .iter()
-            .enumerate()
-            .any(|(k, o)| k != i && o.is_subset(e) && o != e);
-        if !has_proper_subset {
-            result.push(e.clone());
+        if !result.iter().any(|r| r.is_subset(&e)) {
+            result.push(e);
         }
     }
     result
