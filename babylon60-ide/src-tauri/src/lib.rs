@@ -4,16 +4,33 @@ pub mod ledger;
 pub mod context;
 pub mod inference;
 
-use std::sync::Mutex;
+use std::sync::{Arc, Mutex};
 use tauri::State;
 use serde_json::Value;
 use ledger::{CortexLedger, CortexEvent};
 use kernel::{VectorEntry, DispatchResult};
 use lexicon::{Domain, Primitive, Modifier};
 use inference::{InferenceResult, run_local_inference, check_local_status};
+use iceoryx2::prelude::*;
+use iceoryx2::service::zero_copy::Service;
+use once_cell::sync::OnceCell;
 
 struct AppState {
     ledger: Mutex<CortexLedger>,
+    ipc: Arc<Service>,
+}
+
+static IPC_SERVICE: OnceCell<Arc<Service>> = OnceCell::new();
+
+fn init_ipc() -> Arc<Service> {
+    let service_name = ServiceName::new("babylon60_ipc").unwrap();
+    let service = Service::new(&service_name)
+        .publish_subscribe()
+        .open_or_create::<Vec<u8>>()
+        .expect("Failed to create iceoryx2 IPC service");
+    let arc_service = Arc::new(service);
+    IPC_SERVICE.set(arc_service.clone()).ok();
+    arc_service
 }
 
 // ═══════════════════════════════════════════════════════
@@ -68,6 +85,7 @@ fn dispatch_vector(domain: Domain, primitive: Primitive, modifier: Modifier) -> 
 pub fn run() {
     let db_path = "cortex.db";
     let ledger_instance = CortexLedger::new(db_path).expect("Failed to initialize CortexLedger");
+    let ipc_handle = init_ipc();
 
     // [ AXIOMA: NOMENCLATURE_IS_STRUCTURE ] — init_kernel boots 3D semantic + 4D tensor
     kernel::init_kernel();
@@ -82,6 +100,7 @@ pub fn run() {
         .plugin(tauri_plugin_log::Builder::new().build())
         .manage(AppState {
             ledger: Mutex::new(ledger_instance),
+            ipc: ipc_handle,
         })
         .manage(ctx_state)
         .invoke_handler(tauri::generate_handler![
@@ -104,4 +123,3 @@ pub fn run() {
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
-
