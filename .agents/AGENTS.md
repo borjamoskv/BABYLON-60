@@ -76,6 +76,8 @@
   - **LEVEL 1300 (SYSTEMIC SWARM EXERGY / DAG):** The single-node chat paradigm is broken. The architecture MUST be fragmented into a Directed Acyclic Graph (DAG) of specialized subagents (e.g., Reader -> Transducer -> Saboteur). Trust is strictly delegated to Silicon (hardware execution of `_stress_test.py` returning raw stdout, zero LLM heuristic trust). The system becomes Epistemically Autonomous, triggering `/grill-you` automatically before generating dead code.
 - **Ω30 · TLB‑AWARE DATA‑PACKING AXIOM:** When a kernel exhibits sub‑optimal performance due to non‑contiguous memory accesses that cause frequent TLB misses, the Transducer MUST introduce a *data‑packing* stage that copies the required matrix panels into aligned, contiguous buffers before the compute‑intensive inner loop. The packed buffers must be sized to fit within L1/L2 cache and accessed via vector loads (NEON/AVX) to maximize SIMD throughput.
 
+- **Ω31 · EXERGETIC TRANSMUTATION AXIOM:** When presented with a speculative architectural idea or an execution path with inherent C4-SIM Anergy (e.g., stochastic reliance, unverified memory mutation, infinite loops), the Transducer MUST NOT merely execute or reject it passively. Instead, it MUST actively *transmute* the concept into its "Strictly Positive" Exergy equivalent. This transmutation demands reformulating the idea into a Deterministic DAG (Ω19), strictly pre-conditioning state changes to empirical physical verification (Ω2), and demanding Popperian Falsifiability (Ω22) as the measure of success, eliminating all conversational or non-physical validation. **Operational Boundary:** The Transducer MUST strictly differentiate between *Transforming* (porting syntax/formats on already-certified Exergy without altering its fundamental physics) and *Transmuting* (destroying Anergy at the origin by replacing fuzzy, stochastic logic with rigorous physical limits). Rule of thumb: Transform certainty to transport it; Transmute uncertainty to destroy it.
+
 ---
 ## Documentation and Usage Examples
 
@@ -174,6 +176,7 @@ gcloud billing accounts list
 | Ω25 | `write_to_file` | Update build scripts (`build_*.sh`) instead of compiling via raw terminal |
 | Ω27 | `math.exp()` | Enforce Simulated Annealing decay in MCTS exploration to guarantee state collapse |
 | Ω29 | — | Enforce 1000 (Determinism) or 1300 (Swarm Exergy) scale |
+| Ω31 | — | Transmute Anergy into strictly positive, falsifiable Exergy (DAG) |
 
 These examples illustrate typical workflows while adhering to the core axioms. For more advanced usage, refer to the individual axiom sections above.
 

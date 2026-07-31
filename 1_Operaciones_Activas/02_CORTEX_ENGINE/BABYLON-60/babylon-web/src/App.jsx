@@ -97,6 +97,35 @@ function App() {
     setKernelState(MembraneState.Stable(0.01));
   };
 
+  const exportBFTReceipt = async () => {
+    const receipt = {
+      issuer: "BABYLON-60 C5-REAL Node",
+      timestamp: new Date().toISOString(),
+      membraneState: kernelState,
+      lastBftRoot: lastParentId,
+      bftLogs: bftLogs
+    };
+
+    // Create a deterministic hash of the receipt to prove integrity
+    const receiptString = JSON.stringify(receipt, null, 2);
+    const receiptHash = await sha256Hex(receiptString);
+
+    const finalReceipt = {
+      ...receipt,
+      cryptographicSeal: receiptHash
+    };
+
+    const blob = new Blob([JSON.stringify(finalReceipt, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `bft-receipt-${Date.now()}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
 
   return (
     <>
@@ -219,7 +248,12 @@ function App() {
             <div className="glass-panel" style={{ padding: '2rem', gridColumn: 'span 2' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                 <span className="text-mono" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>BFT LEDGER EVENT FEED (SHA-256)</span>
-                <span className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--accent-success)' }}>LIVE MERKLE ROOTS</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <span className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--accent-success)' }}>LIVE MERKLE ROOTS</span>
+                  <button className="btn btn-outline" style={{ padding: '0.3rem 0.8rem', fontSize: '0.8rem' }} onClick={exportBFTReceipt}>
+                    ↓ ZK Receipt
+                  </button>
+                </div>
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
