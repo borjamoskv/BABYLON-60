@@ -1,70 +1,67 @@
 // C5-REAL EXERGY CERTIFIED
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import {
+  Gravity,
+  MembraneState,
+  applyThermalStress,
+  commitBoundary,
+  validateAndAppendNode,
+  GENESIS_ID,
+  sha256Hex
+} from './irpKernel';
 
 function App() {
-  // IRP Membrane State Simulator (Engineered from IRPAutomata.fs)
-  const [entropy, setEntropy] = useState(0.01);
-  const [membraneState, setMembraneState] = useState('Stable');
-  const [variance, setVariance] = useState(0.0);
+  // Isomorphic IRP Membrane State (Direct F# Domain Kernel Execution)
+  const [kernelState, setKernelState] = useState(MembraneState.Stable(0.01));
+  const [ledgerMap, setLedgerMap] = useState(new Map());
+  const [lastParentId, setLastParentId] = useState(GENESIS_ID);
+
   const [bftLogs, setBftLogs] = useState([
     { id: 1, hash: '0x8f3a...d91c', status: 'STATUS:OK|ENTROPY:0.0100', timestamp: '08:08:12' },
-    { id: 2, hash: '0x4e12...b84f', status: 'STATUS:OK|ENTROPY:0.0200', timestamp: '08:08:25' },
-    { id: 3, hash: '0xc7a9...f30e', status: 'STATUS:SMOOTHING|VARIANCE:0.1500', timestamp: '08:08:38' }
+    { id: 2, hash: '0x4e12...b84f', status: 'STATUS:OK|ENTROPY:0.0200', timestamp: '08:08:25' }
   ]);
 
-  const applyStress = (gravityType) => {
-    let nextEntropy = entropy;
-    let nextState = membraneState;
-    let nextVariance = variance;
-    let statusMsg = '';
-
-    if (membraneState === 'Apoptosis') {
-      alert('IRP MEMBRANE IN APOPTOSIS — Irreversible state. Reset required.');
+  const applyStress = async (gravityKey) => {
+    if (kernelState.type === 'Apoptosis') {
+      alert('IRP MEMBRANE IN APOPTOSIS — Irreversible state (Axiom Ω22). Reset required.');
       return;
     }
 
-    switch (gravityType) {
-      case 'C2':
-        nextEntropy = parseFloat((entropy + 0.01).toFixed(4));
-        nextState = 'Stable';
-        statusMsg = `STATUS:OK|ENTROPY:${nextEntropy.toFixed(4)}`;
-        break;
-      case 'C3':
-        nextVariance = parseFloat((variance + 0.15).toFixed(4));
-        nextEntropy = parseFloat((entropy * 1.5).toFixed(4));
-        nextState = 'Smoothing';
-        statusMsg = `STATUS:SMOOTHING|VARIANCE:${nextVariance.toFixed(4)}`;
-        break;
-      case 'C4':
-        nextState = 'Rollback';
-        statusMsg = 'STATUS:ROLLBACK|HASH:LATEST_BFT_CHECKPOINT';
-        break;
-      case 'C5':
-        nextState = 'Apoptosis';
-        statusMsg = 'STATUS:APOPTOSIS|TAINT:C5_REAL_TRUNCATED';
-        break;
-      default:
-        break;
+    const gravity = Gravity[gravityKey];
+    const nextState = applyThermalStress(kernelState, gravity);
+    setKernelState(nextState);
+
+    const boundaryMsg = commitBoundary(nextState);
+
+    // Cryptographic SHA-256 Ledger Append
+    try {
+      const payloadHash = await sha256Hex(`PAYLOAD:${Date.now()}:${boundaryMsg}`);
+      const { newNodesMap, newNode } = await validateAndAppendNode(
+        ledgerMap,
+        lastParentId,
+        `CLAIM:${nextState.type}`,
+        payloadHash
+      );
+
+      setLedgerMap(newNodesMap);
+      setLastParentId(newNode.nodeId);
+
+      const logItem = {
+        id: Date.now(),
+        hash: `0x${newNode.nodeId.substring(0, 6)}...${newNode.nodeId.substring(58)}`,
+        status: boundaryMsg,
+        timestamp: newNode.timestamp
+      };
+      setBftLogs(prev => [logItem, ...prev.slice(0, 7)]);
+    } catch (err) {
+      console.error('Ledger Append Exception:', err);
     }
-
-    setEntropy(nextEntropy);
-    setMembraneState(nextState);
-    setVariance(nextVariance);
-
-    const newLog = {
-      id: Date.now(),
-      hash: `0x${Math.random().toString(16).substring(2, 6)}...${Math.random().toString(16).substring(2, 6)}`,
-      status: statusMsg,
-      timestamp: new Date().toLocaleTimeString()
-    };
-    setBftLogs(prev => [newLog, ...prev.slice(0, 7)]);
   };
 
   const resetMembrane = () => {
-    setEntropy(0.01);
-    setMembraneState('Stable');
-    setVariance(0.0);
+    setKernelState(MembraneState.Stable(0.01));
   };
+
 
   return (
     <>
@@ -132,36 +129,48 @@ function App() {
                   padding: '0.2rem 0.6rem',
                   borderRadius: '4px',
                   fontSize: '0.8rem',
-                  backgroundColor: membraneState === 'Stable' ? 'rgba(0, 255, 102, 0.1)' : membraneState === 'Apoptosis' ? 'rgba(255, 0, 85, 0.2)' : 'rgba(43, 59, 229, 0.2)',
-                  color: membraneState === 'Stable' ? 'var(--accent-success)' : membraneState === 'Apoptosis' ? 'var(--accent-secondary)' : 'var(--accent-primary)',
-                  border: `1px solid ${membraneState === 'Stable' ? 'var(--accent-success)' : membraneState === 'Apoptosis' ? 'var(--accent-secondary)' : 'var(--accent-primary)'}`
+                  backgroundColor: kernelState.type === 'Stable' ? 'rgba(0, 255, 102, 0.1)' : kernelState.type === 'Apoptosis' ? 'rgba(255, 0, 85, 0.2)' : 'rgba(43, 59, 229, 0.2)',
+                  color: kernelState.type === 'Stable' ? 'var(--accent-success)' : kernelState.type === 'Apoptosis' ? 'var(--accent-secondary)' : 'var(--accent-primary)',
+                  border: `1px solid ${kernelState.type === 'Stable' ? 'var(--accent-success)' : kernelState.type === 'Apoptosis' ? 'var(--accent-secondary)' : 'var(--accent-primary)'}`
                 }}>
-                  {membraneState}
+                  {kernelState.type}
                 </span>
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem' }}>
                   <span>Entropy Level (e):</span>
-                  <span className="text-mono">{entropy.toFixed(4)}</span>
+                  <span className="text-mono">{kernelState.entropyLevel !== undefined ? kernelState.entropyLevel.toFixed(4) : '0.0000'}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem' }}>
                   <span>Variance (v):</span>
-                  <span className="text-mono">{variance.toFixed(4)}</span>
+                  <span className="text-mono">{kernelState.variance !== undefined ? kernelState.variance.toFixed(4) : '0.0000'}</span>
                 </div>
+                {kernelState.targetHash && (
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--accent-primary)' }}>
+                    <span>Target Hash:</span>
+                    <span className="text-mono">{kernelState.targetHash}</span>
+                  </div>
+                )}
+                {kernelState.taintLog && (
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--accent-secondary)' }}>
+                    <span>Taint Log:</span>
+                    <span className="text-mono">{kernelState.taintLog}</span>
+                  </div>
+                )}
               </div>
 
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '1rem' }}>
-                <button className="btn btn-outline" style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem' }} onClick={() => applyStress('C2')}>
+                <button className="btn btn-outline" style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem' }} onClick={() => applyStress('C2_FriccionComputacional')}>
                   + C2 Fricción
                 </button>
-                <button className="btn btn-outline" style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem' }} onClick={() => applyStress('C3')}>
+                <button className="btn btn-outline" style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem' }} onClick={() => applyStress('C3_FluctuacionTermica')}>
                   + C3 Fluctuación
                 </button>
-                <button className="btn btn-outline" style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem', borderColor: 'var(--accent-primary)' }} onClick={() => applyStress('C4')}>
+                <button className="btn btn-outline" style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem', borderColor: 'var(--accent-primary)' }} onClick={() => applyStress('C4_DegradacionGeometrica')}>
                   ⚡ C4 Rollback
                 </button>
-                <button className="btn btn-outline" style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem', borderColor: 'var(--accent-secondary)', color: 'var(--accent-secondary)' }} onClick={() => applyStress('C5')}>
+                <button className="btn btn-outline" style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem', borderColor: 'var(--accent-secondary)', color: 'var(--accent-secondary)' }} onClick={() => applyStress('C5_ColapsoOntologico')}>
                   💥 C5 Colapso
                 </button>
                 <button className="btn btn-outline" style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem', marginTop: '0.5rem', width: '100%' }} onClick={resetMembrane}>
