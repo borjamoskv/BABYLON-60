@@ -271,8 +271,10 @@ impl BftAsyncEngine {
 
     fn topological_sort(&self) -> Result<Vec<String>, String> {
         let mut in_degree = HashMap::new();
+        let mut children_map: HashMap<String, Vec<String>> = HashMap::new();
         for k in self.nodes.keys() {
             in_degree.insert(k.clone(), 0);
+            children_map.insert(k.clone(), Vec::new());
         }
 
         for node in self.nodes.values() {
@@ -280,6 +282,7 @@ impl BftAsyncEngine {
                 if !self.nodes.contains_key(dep) {
                     return Err(format!("Dependency {} not found for node {}", dep, node.id));
                 }
+                children_map.get_mut(dep).unwrap().push(node.id.clone());
                 *in_degree.get_mut(&node.id).unwrap() += 1;
             }
         }
@@ -294,14 +297,12 @@ impl BftAsyncEngine {
         let mut sorted = Vec::new();
         while let Some(n) = queue.pop() {
             sorted.push(n.clone());
-            // Since this is a simple topological sort and nodes only know their deps (parents),
-            // we have to find children.
-            for child in self.nodes.values() {
-                if child.deps.contains(&n) {
-                    let d = in_degree.get_mut(&child.id).unwrap();
+            if let Some(children) = children_map.get(&n) {
+                for child_id in children {
+                    let d = in_degree.get_mut(child_id).unwrap();
                     *d -= 1;
                     if *d == 0 {
-                        queue.push(child.id.clone());
+                        queue.push(child_id.clone());
                     }
                 }
             }

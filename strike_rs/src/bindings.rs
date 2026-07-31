@@ -162,14 +162,15 @@ impl AgencyHypervisor {
         Ok(Self { publisher })
     }
 
-    pub fn publish_node(&self, payload_hash_hex: &str) -> PyResult<()> {
-        self.publisher.publish_node(payload_hash_hex)
+    pub fn publish_node(&self, sender_id: u64, view: u64, seq_num: u64, payload_hash_hex: &str) -> PyResult<()> {
+        self.publisher.publish_node(sender_id, view, seq_num, payload_hash_hex)
             .map_err(|e| PyRuntimeError::new_err(format!("Publish failed: {}", e)))
     }
 
     #[staticmethod]
-    pub fn start_writer_daemon(service_name: &str, db_path: &str) -> PyResult<()> {
-        spawn_writer_daemon(service_name, db_path);
+    pub fn start_writer_daemon(service_name: &str, _db_path: &str) -> PyResult<()> {
+        let stop_signal = std::sync::Arc::new(std::sync::atomic::AtomicBool::new(false));
+        spawn_writer_daemon(service_name, stop_signal, None);
         Ok(())
     }
 }
