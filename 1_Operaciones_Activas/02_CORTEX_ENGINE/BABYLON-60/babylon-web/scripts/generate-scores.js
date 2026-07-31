@@ -11,6 +11,7 @@ import {
   countDivisors,
   fibonacciArrayUpTo,
   fibonacciDistance,
+  precomputePerfectPowers,
   computeScore
 } from '../src/scoreEngine.js';
 
@@ -58,13 +59,18 @@ for (let i = min; i <= max; i++) {
 }
 console.log(`  ✔ ${fibArray.length} Fibonacci numbers indexed. Max distance: ${maxFibDist}`);
 
+// 4.5 Pre-compute perfect powers
+console.log('➜ [3.5/5] Building perfect powers index...');
+const perfectPowersSet = precomputePerfectPowers(max);
+console.log(`  ✔ ${perfectPowersSet.size} perfect powers indexed.`);
+
 // 5. Generate all scores
 console.log('➜ [4/5] Generating scores...');
 const t0 = performance.now();
 
 const scores = new Float32Array(max - min + 1);
 for (let i = min; i <= max; i++) {
-  scores[i - min] = computeScore(i, primes, maxDivisors, fibArray, maxFibDist, config);
+  scores[i - min] = computeScore(i, primes, maxDivisors, fibArray, maxFibDist, perfectPowersSet, config);
 }
 
 const t1 = performance.now();

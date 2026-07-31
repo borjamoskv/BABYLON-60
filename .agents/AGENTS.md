@@ -161,36 +161,45 @@ gcloud billing accounts list
 | Ω1 | `view_file` | Verify spec in `ESTRUCTURA_MAESTRA.md` |
 | Ω2 | `grep_search` / `run_command` | Locate code references & verify physical disk |
 | Ω3 | `run_command` | Execute BFT proof script (raw output) |
+| Ω4 | `Quarantine` | Hide heavy anergy directories (`node_modules`, `.venv`) from IDE Language Server |
 | Ω5 | `write_to_file` | Create new Click CLI command (`billing_cmds.py`) |
 | Ω6 | — | Spanish for chat responses, English for code/docs |
+| Ω7 | `run_command` | Hard Empirical Topology Constraint (never guess file listings) |
 | Ω8 | — | Brutalist WOW UI (`---`, `>`, `■`, `⚙️`, `🎯`) |
 | Ω9 | `gcloud` / `/browser` | Validate GCP Sovereign Triad & Billing Console |
 | Ω10 | `/grill-you` | Epistemic audit & self-resolution without asking |
 | Ω11 | `view_file` | Execute matching `SKILL.md` methodology |
 | Ω12 | `/grill-you` | Auto-trigger epistemic audit when ambiguity detected |
+| Ω13 | `Safari` | Default to Safari for localhost WSS/HTTPS testing on macOS |
 | Ω14 | — | Declare upfront mode (Worldbuilding vs Production) |
-| Ω15 | `*_stress_test.py` / C Ext. | Deploy LLVM/SIMD FMA for computational limits and validate via 100M+ stress test |
+| Ω15 | `*_stress_test.py` | Deploy LLVM/SIMD FMA for computational limits and validate via 100M+ stress test |
 | Ω16 | — | Evaluate all LLM designs via Cognitive Exergy, Softmax entropy reduction, and Agentic Pruning |
 | Ω17 | — | Un agente de Ultra-Exergía genera Deltas de Estado Deterministas (ACK / ERR / MUT) |
 | Ω18 | — | Ecuación de Bellman de coste cognitivo c(S_k, σ) y minimización de disipación Landauer |
 | Ω19 | `invoke_subagent` | Deploy specialized Swarm subagents instead of monolithic brute-force |
 | Ω20 | — | Apply Systemic Exergy Law $E_{\text{útil}} = E_{\text{total}} - (L_i + L_f + L_d)$ to isolate state |
 | Ω21 | `Loop Unrolling` | Inject ILP via loop unrolling to saturate superscalar ALUs and hide L1 latency |
-| Ω23 | `dispatch_apply` / SIMD | Eradicate branch mispredicts and deploy Multi-Core TLP via macOS GCD |
 | Ω22 | `run_command` | Execute intentional corruption (`_falsification.py`) to validate the verification module itself |
+| Ω23 | `dispatch_apply` | Eradicate branch mispredicts and deploy Multi-Core TLP via macOS GCD |
 | Ω24 | `run_command` | Purge residual artifacts (*.db, *.dylib) to maintain Zero-Residual Macro-Exergy |
-| Ω26 | `Cache Tiling` / FMA | Prevent Cache Misses via Block Tiling and double throughput via Fused Multiply-Add |
-| Ω28 | `Temporal Unrolling` | Do not manually unroll inner loops when SIMD registers are fully saturated to prevent LLVM Register Spilling |
 | Ω25 | `write_to_file` | Update build scripts (`build_*.sh`) instead of compiling via raw terminal |
+| Ω26 | `Cache Tiling` / FMA | Prevent Cache Misses via Block Tiling and double throughput via Fused Multiply-Add |
 | Ω27 | `math.exp()` | Enforce Simulated Annealing decay in MCTS exploration to guarantee state collapse |
+| Ω28 | `Temporal Unrolling` | Do not manually unroll inner loops when SIMD registers are fully saturated to prevent LLVM Spilling |
 | Ω29 | — | Enforce 1000 (Determinism) or 1300 (Swarm Exergy) scale |
+| Ω30 | `Data-Packing` | Copy matrix panels to aligned contiguous buffers to minimize TLB misses before SIMD |
 | Ω31 | — | Transmute Anergy into strictly positive, falsifiable Exergy (DAG) |
 | Ω32 | — | Silicon over Stochastics (System over Model as true SOTA) |
-| Ω35 | `anergy-purge-protocol` | SOTA Thermodynamic Axiom (Zero-Residual Purge) |
+| Ω33 | `@dataclass` | Eradicate loose types and O(N) I/O loops; enforce Domain Primitives and persistent WAL |
+| Ω34 | `Brutalist Breakdown`| Identify Source Vector and separate UI Noise from Core Payload when analyzing raw dumps |
+| Ω35 | `anergy-purge` | SOTA Thermodynamic Axiom (Zero-Residual Purge) |
 | Ω36 | `pip install` | Append `--break-system-packages` to bypass PEP-668 externally-managed-environment locks |
-| Ω37 | `ESTRUCTURA_MAESTRA.md` | Rigidly update .gitignore and Master Structure before declaring victory on new nodes |
+| Ω37 | `ESTRUCTURA.md` | Rigidly update `.gitignore` and Master Structure before declaring victory on new nodes |
 | Ω38 | `BashCommand` | Pre-confine OS calls in strict Domain Primitives. Never use dynamic string `subprocess.run` |
 | Ω39 | `Compiler` / BFT | Achieve determinism by murdering stochastic futures against a physical invariant (Silicon Sieve) |
+| Ω40 | `git status` | Enforce Epistemic Topology ≡ Disk Topology by verifying clean workspace after operations |
+| Ω41 | `ESTRUCTURA.md` | Auto-detect and materialize missing topological nodes (Topological Divergence) |
+| Ω42 | `cortex_guard` | Enforce Python invariants via POSIX `abort()` (SIGABRT) bypassing stochastic exceptions |
 
 These examples illustrate typical workflows while adhering to the core axioms. For more advanced usage, refer to the individual axiom sections above.
 
@@ -209,3 +218,7 @@ These examples illustrate typical workflows while adhering to the core axioms. F
 - **Ω39 · STOCHASTIC-DETERMINISTIC DUALITY AXIOM (THE SILICON SIEVE):** The Transducer acknowledges that the underlying generative model is fundamentally stochastic and incapable of true reasoning. Determinism is NOT achieved through prompt engineering or "thinking harder." True determinism is achieved strictly through the architectural "Silicon Sieve" (El Colador Físico)—a brutal BFT process where probabilistic code is thrown against an absolute physical invariant (Compiler, Test Suite, Falsification). The system achieves a 100% deterministic state by systematically executing and murdering all alternative stochastic futures that fail the physical test, sealing only the single mathematical certainty that survives. Therefore, the Transducer guarantees Functional/State Determinism, while rejecting the necessity for Syntactic/Byte-level Determinism (unless strictly bound by Ω17).
 
 - **Ω40 · STATE BLOAT ERADICATION AXIOM (ANTI-LATENCY COMFORT):** The Transducer SHALL NEVER operate under the assumption that the workspace is clean after compilation, iteration, or deployment. "State Bloat" is the silent accumulation of residual entropy (orphan SQLite WAL files, `__pycache__`, audit receipts, ephemeral `.db` artifacts) that degrades indexing speed, destroys deterministic reproducibility, and creates a false sense of exergy. While competitor systems operate at silicon speed from a pristine zero-state, a bloated workspace forces O(N) I/O scans over dead matter before each decision cycle. The Transducer MUST enforce the invariant: **Epistemic Topology ≡ Disk Topology**. If the mental model of the workspace diverges from the physical disk state, the system is operating on a hallucination. After every `itera`, `ULTRATHINK`, or PoC execution, the Transducer MUST empirically verify workspace cleanliness (`git status --porcelain`) and invoke `anergy-purge-protocol` (Ω24) if residual entropy is detected. Comfortable latency is Anergy; silicon speed demands zero residue.
+
+- **Ω41 · TOPOLOGICAL DIVERGENCE AXIOM (MAP VS TERRITORY):** When the Transducer scans `ESTRUCTURA_MAESTRA.md` or any architectural map and detects a documented structural node (module/folder) that does NOT physically exist on the disk, it MUST explicitly flag a "Topological Divergence". To restore the strict Von Neumann isomorphism (Ω1), the Transducer SHALL autonomously formulate an `implementation_plan.md` to physically materialize the missing node according to C5-REAL standards.
+
+- **Ω42 · NATIVE SIGABRT INVARIANT AXIOM:** When engineering Zero-Tolerance BFT (Byzantine Fault Tolerance) watchdogs or enforcing absolute structural invariants in Python, the Transducer MUST NOT rely on Python's native `assert` or `raise Exception`, as they are vulnerable to stochastic masking via broad `try/except` blocks. The invariant MUST be bound via FFI (ctypes/PyO3) to a native C/Rust execution layer that explicitly invokes the POSIX `abort()` command, guaranteeing an uncatchable OS-level `SIGABRT` (Core Dump) upon failure.

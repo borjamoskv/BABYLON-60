@@ -35,24 +35,21 @@ export function countDivisors(n) {
 }
 
 /**
- * Popcount — number of set bits in binary representation
+ * Popcount SWAR (SIMD Within A Register) — O(1) bitwise set-bits count
  */
 export function popcount(n) {
-  let count = 0;
-  let v = n;
-  while (v) {
-    count += v & 1;
-    v >>>= 1;
-  }
-  return count;
+  n = n - ((n >>> 1) & 0x55555555);
+  n = (n & 0x33333333) + ((n >>> 2) & 0x33333333);
+  return (((n + (n >>> 4)) & 0x0f0f0f0f) * 0x01010101) >>> 24;
 }
 
 /**
- * Bit length of n
+ * Bit length of n (Hardware Intrinsic Optimization O(1))
+ * Compila a instrucción BSR / LZCNT a nivel de silicio
  */
 export function bitLength(n) {
   if (n <= 0) return 1;
-  return Math.floor(Math.log2(n)) + 1;
+  return 32 - Math.clz32(n);
 }
 
 /**
@@ -95,20 +92,20 @@ export function fibonacciDistance(n, fibArray) {
 }
 
 /**
- * Check if n is a perfect power (square, cube, etc.)
+ * Thermodynamic Collapse: Precompute perfect powers up to max O(1) lookup
+ * Eradicates Math.pow and loops from the hot path.
  */
-export function isPerfectPower(n) {
-  if (n <= 1) return false;
-  for (let exp = 2; exp <= Math.log2(n); exp++) {
-    const root = Math.round(Math.pow(n, 1 / exp));
-    // Check root and neighbors due to floating point
-    for (const candidate of [root - 1, root, root + 1]) {
-      if (candidate >= 2 && Math.pow(candidate, exp) === n) {
-        return true;
-      }
+export function precomputePerfectPowers(max) {
+  const pp = new Set();
+  const maxBase = Math.floor(Math.sqrt(max));
+  for (let b = 2; b <= maxBase; b++) {
+    let power = b * b;
+    while (power <= max) {
+      pp.add(power);
+      power *= b;
     }
   }
-  return false;
+  return pp;
 }
 
 /**
@@ -118,10 +115,11 @@ export function isPerfectPower(n) {
  * @param {number} maxDivisors - Max divisor count in range (for normalization)
  * @param {number[]} fibArray - Sorted Fibonacci numbers
  * @param {number} maxFibDist - Max Fibonacci distance in range (for normalization)
+ * @param {Set} perfectPowersSet - Precomputed Hash Set of perfect powers
  * @param {object} config - Score configuration
  * @returns {number} Score 0-100
  */
-export function computeScore(n, primes, maxDivisors, fibArray, maxFibDist, config) {
+export function computeScore(n, primes, maxDivisors, fibArray, maxFibDist, perfectPowersSet, config) {
   const criteria = config.criteria;
   let score = 0;
   let totalWeight = 0;
@@ -157,9 +155,9 @@ export function computeScore(n, primes, maxDivisors, fibArray, maxFibDist, confi
     totalWeight += criteria.fibonacciProximity.weight;
   }
 
-  // 5. Perfect Power (binary bonus)
+  // 5. Perfect Power (binary bonus via O(1) Hash Set)
   if (criteria.perfectPower.enabled) {
-    const ppScore = isPerfectPower(n) ? 1.0 : 0.0;
+    const ppScore = perfectPowersSet.has(n) ? 1.0 : 0.0;
     score += ppScore * criteria.perfectPower.weight;
     totalWeight += criteria.perfectPower.weight;
   }

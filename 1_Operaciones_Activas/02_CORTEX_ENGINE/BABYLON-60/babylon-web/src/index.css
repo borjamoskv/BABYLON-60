@@ -3,21 +3,21 @@
 @import './animations.css';
 
 :root {
-  /* C5-REAL Color Palette */
-  --bg-core: #050505;
-  --bg-surface: #0a0a0a;
-  --bg-panel: rgba(255, 255, 255, 0.03);
+  /* C5-REAL Cyberpunk HSL Palette */
+  --bg-core: #090a0f;
+  --bg-surface: #0e111a;
+  --bg-panel: rgba(14, 17, 26, 0.65);
 
-  --accent-primary: #2b3be5;
-  --accent-glow: rgba(43, 59, 229, 0.4);
+  --accent-primary: #00f0ff;
+  --accent-glow: rgba(0, 240, 255, 0.35);
   --accent-secondary: #ff0055;
-  --accent-success: #00ff66;
+  --accent-success: #00ff88;
 
-  --text-main: #ffffff;
-  --text-muted: #a1a1aa;
+  --text-main: #f0f4f8;
+  --text-muted: #8b9bb4;
 
-  --border-dim: rgba(255, 255, 255, 0.1);
-  --border-focus: rgba(43, 59, 229, 0.5);
+  --border-dim: rgba(0, 240, 255, 0.12);
+  --border-focus: rgba(0, 240, 255, 0.6);
 
   /* Typography */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;

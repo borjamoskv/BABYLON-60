@@ -184,6 +184,9 @@ El cerebro neurodivergente purga el contexto de baja densidad sin piedad para re
 
 Para alcanzar el Nivel `#C5-REAL`, el agente obedece la **Complejidad de Kolmogorov**. Cuando resuelve un problema, **no guarda el chat**. Compila la solución en una función nativa en el disco duro. La próxima vez, la fricción térmica cae a $\mathcal{O}(1)$.
 
+> **Mito (SOTA):** "Necesitamos 2 Millones de tokens de contexto."
+> **Física (C5-REAL):** "Necesitamos 12 Deltas deterministas. Destruye los 42,500 tokens restantes."
+
 ---
 
 ### 5. Silicio Soberano y Exergía Aplicada (EIP-7702)
