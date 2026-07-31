@@ -102,6 +102,48 @@ $$\text{Depth}(\text{node}) = \text{depth}(\text{parent}) + \mathbb{I}\big(\text
 
 ---
 
+---
+
+### 2.7 INV_C5_ABFT_IPC: Shared Memory Zero-Copy Constraint (iceoryx2 v0.3.0)
+
+> [!IMPORTANT]
+> **Enunciado del Invariante:** Toda comunicación de consenso asíncrono inter-agente en un hipervisor mononodo debe canalizarse mediante memoria compartida zero-copy utilizando `iceoryx2 v0.3.0+` a través de `zero_copy::Service::new(&service_name).publish_subscribe().open_or_create::<T>()?`.
+
+#### Especificación Lógica:
+$$\forall c \in \text{IPCChannel} : \text{ZeroCopyEnabled}(c) = \mathbf{True} \land \text{Latency}(c) = O(1)$$
+
+---
+
+### 2.8 INV_C5_TURING_CASTRATION: Decidibilidad Formal de Daemons
+
+> [!CAUTION]
+> **Enunciado del Invariante:** Queda estrictamente prohibido el uso de bucles de sondeo no acotados (`while True`). Todo worker o daemon debe estar acotado por un límite inductivo finito $N \le 120$ o por un consumidor de cola con señal de detención determinista.
+
+#### Especificación Lógica:
+$$\forall d \in \text{Daemon} : \exists N \le 120 \quad \text{tal que} \quad \text{Steps}(d) \le N \implies \text{Halt}(d) \lor \text{StopSignalTriggered}(d)$$
+
+---
+
+### 2.9 INV_C5_ATMS_O1: Antichain ATMS en Silicio
+
+> [!NOTE]
+> **Enunciado del Invariante:** La verificación de inconsistencias (*nogoods*) y minimización de entornos en el motor ATMS debe resolverse mediante vectores de bits SIMD (`u128`) en complejidad de ciclo único de ALU $O(1)$.
+
+#### Especificación Lógica:
+$$\forall e \in \text{Env}, n \in \text{Nogoods} : \text{IsSubsumed}(e, n) \iff (e \ \text{BITWISE\_AND} \ n) == n \quad \text{en } O(1)$$
+
+---
+
+### 2.10 INV_BFT_LOGOP: Veto Absoluto Popperiano en Pooling Logarítmico
+
+> [!IMPORTANT]
+> **Enunciado del Invariante:** La agregación de probabilidades heurísticas en enjambres BFT debe emplear pooling logarítmico. Si cualquier verificador detecta un fallo de falsación por hardware y asigna $P_k = 0$, el consenso colapsa a 0 estrictamente.
+
+#### Especificación Lógica:
+$$\exists k \in [1, N] : P_k(\theta) = 0 \implies P_{\text{logOP}}(\theta) = \frac{1}{Z} \prod_{i=1}^N P_i(\theta)^{w_i} \equiv 0$$
+
+---
+
 ## 3. Matriz de Verificación Metamatemática
 
 | Invariante | Dominio Lógico | Complejidad / Tolerancia | Mecanismo de Verificación |
@@ -112,3 +154,8 @@ $$\text{Depth}(\text{node}) = \text{depth}(\text{parent}) + \mathbb{I}\big(\text
 | **INV_C5_17** | Licenciamiento Soberano | FOSS / Soberano | Auditoría de cabeceras de licencia |
 | **INV_C5_18** | Escalado de Enjambres | $O(1)$ disco (in-memory) | Inspection de `AgencyHypervisor` |
 | **GELABP_DEPTH** | Análisis Estático AST | $O(\text{AST\_nodes})$ | Linter AST dinámico (`depth \le 4`) |
+| **INV_C5_ABFT_IPC** | IPC Shared Memory | $O(1)$ Zero-Copy | Service PortFactory zero_copy |
+| **INV_C5_TURING_CASTRATION** | Lógica de Procesos | $N \le 120$ iters | Verificador sintáctico de bucles y halts |
+| **INV_C5_ATMS_O1** | Retículo de Verdad | $O(1)$ ALU SIMD | Bitmask mask matching `(e & n) == n` |
+| **INV_BFT_LOGOP** | Teorema de Consenso | $P_k=0 \implies P=0$ | Agregador geométrico logarítmico |
+
