@@ -202,3 +202,10 @@
 - **Contexto:** El nodo host principal (M3 Pro) tiene un límite físico estricto de 18GB de RAM unificada. Las auditorías masivas o *swarms* pueden detonar el OOM Killer de macOS (JETSAM).
 - **Prohibición:** Los agentes NUNCA DEBEN sugerir ni validar la idea de escalar la infraestructura física (ej. "comprar un Mac nuevo", "aumentar la RAM") como solución a colapsos de memoria.
 - **Mitigación Obligatoria:** Ante un crash por JETSAM o Error 9, el agente DEBE imponer inmediatamente la **Válvula Termodinámica** (`INV_C5_THERMO_VALVE`): reducir la concurrencia del enjambre, limitar el tamaño de las colas en memoria y aplicar políticas de descarte $O(1)$. El software debe someterse a la física del hardware, no al revés.
+
+### Pre-Commit Polish & Refactoring Protocol ("mejoralo")
+- **INV_C5_PRE_COMMIT_POLISH:** When requested to polish or improve code before or after commits:
+  1. Execute `python3 -m ruff check --fix .` to eliminate unused imports (`F401`) and enforce multi-line control flow (`E701`).
+  2. Audit module names for `INV_C5_NOMINAL_DENSITY`: rename `*_manager` or `*_helper` symbols to `*Transducer` or `*Validator`.
+  3. Execute full `pytest` suite and confirm 100% pass rate before committing.
+
