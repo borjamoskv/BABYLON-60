@@ -1,5 +1,8 @@
 {
   "exclude": [
-    "3_Historico_Inerte"
+    "3_Historico_Inerte",
+    "**/node_modules",
+    "**/.venv",
+    "**/.uv_python"
   ]
 }

@@ -3,12 +3,21 @@
     "**/3_Historico_Inerte/**": true,
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
-    "**/node_modules/*/**": true
+    "**/node_modules/**": true,
+    "**/.venv/**": true,
+    "**/.uv_python/**": true,
+    "**/__pycache__/**": true
   },
   "search.exclude": {
-    "**/3_Historico_Inerte/**": true
+    "**/3_Historico_Inerte/**": true,
+    "**/node_modules/**": true,
+    "**/.venv/**": true,
+    "**/.uv_python/**": true
   },
   "python.analysis.exclude": [
-    "3_Historico_Inerte"
+    "3_Historico_Inerte",
+    "**/node_modules",
+    "**/.venv",
+    "**/.uv_python"
   ]
 }

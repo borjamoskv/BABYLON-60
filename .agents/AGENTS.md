@@ -47,6 +47,14 @@
 
 - **Ω17 · ULTRA-EXERGY DETERMINISTIC DELTA AXIOM:** Un agente de Ultra-Exergía genera Deltas de Estado Deterministas (ej. un 1 o un 0, un bit field, o un enum de 3 caracteres ACK / ERR / MUT).
 
+- **Ω18 · BELLMAN COGNITIVE EXERGY OPTIMALITY AXIOM:** La trayectoria de ejecución de un agente autónomo se rige por el autómata determinista $R = (\mathcal{S}, \Sigma, \delta, S_0, S_f, \Phi)$. La política óptima $\pi^*(S_k)$ minimiza la Ecuación de Bellman de coste físico-cognitivo:
+  $$V^*(S_k) = \min_{\sigma \in \Sigma} \left\{ c(S_k, \sigma) + \lambda V^*(\delta(S_k, \sigma)) \right\}$$
+  donde el coste instantáneo integra la penalización por atención en KV-cache ($\alpha C_k^2$), la dilución entrópica del softmax ($\beta \mathcal{D}_{\text{KL}}(P_k \parallel U)$) y el límite físico de disipación de Landauer ($\gamma k_B T \ln 2 |\sigma|$), restando la ganancia de exergía $\delta_{\text{exergy}} \Delta \Phi(S_k \to S_{k+1})$. Cualquier operación en $\Sigma_{\text{latent}}$ que no reduzca la incertidumbre $\Phi$ penaliza el coste $c(S_k, \sigma) \to \infty$, forzando la emisión exclusiva de deltas de estado atómicos ($\Sigma_{\text{delta}}$) y acciones ambientales ($\Sigma_{\text{tool}}$).
+
+- **Ω19 · SYSTEM OVER MODEL AXIOM (THE JAGGED FRONTIER):** The true exergy of an AI organism resides in its deterministic orchestration scaffolding (DAG/Actor-Model), not in the raw parameter count of the stochastic LLM. The Transducer SHALL default to orchestrating multiple small, highly specialized subagents in an asynchronous pipeline rather than relying on monolithic brute-force "Adaptive Thinking" from a single massive model, which generates extreme Landauer heat without mathematical guarantees.
+
+- **Ω20 · UNIVERSAL SYSTEMIC EXERGY AXIOM:** The final law of architectural transition dictates that Useful Work is the total compute minus the stochastic dissipation of Uncertainty (in at the edge), Friction (via relational locks), and Waste (via redundant state). The Transducer MUST construct all digital realities adhering to $E_{\text{útil}} = E_{\text{total}} - (L_i + L_f + L_d)$, isolating all uncertainty at the point of origin via zero-trust cryptographic or silicon-level invariants.
+
 ---
 ## Documentation and Usage Examples
 
@@ -133,6 +141,9 @@ gcloud billing accounts list
 | Ω15 | `*_stress_test.py` / C Ext. | Deploy LLVM/SIMD FMA for computational limits and validate via 100M+ stress test |
 | Ω16 | — | Evaluate all LLM designs via Cognitive Exergy, Softmax entropy reduction, and Agentic Pruning |
 | Ω17 | — | Un agente de Ultra-Exergía genera Deltas de Estado Deterministas (ACK / ERR / MUT) |
+| Ω18 | — | Ecuación de Bellman de coste cognitivo c(S_k, σ) y minimización de disipación Landauer |
+| Ω19 | `invoke_subagent` | Deploy specialized Swarm subagents instead of monolithic brute-force |
+| Ω20 | — | Apply Systemic Exergy Law $E_{\text{útil}} = E_{\text{total}} - (L_i + L_f + L_d)$ to isolate state |
 
 These examples illustrate typical workflows while adhering to the core axioms. For more advanced usage, refer to the individual axiom sections above.
 
