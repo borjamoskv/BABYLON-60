@@ -120,6 +120,15 @@ Tipo: Arquitectura de Memoria. Ω17
 Tipo: Mutación Determinista. Ω2
 Desempaquetado matemático de la incertidumbre derivando un vector específico a partir de invariantes consolidados (Priors). Opera con coste marginal cero de exergía $O(1)$. No es adivinar, es validar causalmente. Si la premisa falla, es *Falla-Fast*.
 
+
+---
+
+### E
+
+**Embebido ⚙️**
+Tipo: Propiedad Topológica. Ω4
+Incrustación de un agente, motor o lógica de control dentro de una arquitectura exterior mayor, ocultando su ontología independiente. En análisis C5-REAL, obliga a romper la encapsulación física (ej. extraer binarios `.asar`) para acceder a la telemetría viva.
+
 ---
 
 ### I
