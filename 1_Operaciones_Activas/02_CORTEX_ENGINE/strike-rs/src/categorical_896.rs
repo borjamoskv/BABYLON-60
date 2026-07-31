@@ -146,6 +146,32 @@ impl RustCategoricalEngine {
         let total_loss = l_uncertainty + l_friction + l_waste;
         (e_total - total_loss).max(0.0)
     }
+
+    /// Axiom Ω21: High-Throughput Instruction-Level Parallelism (4x Loop Unrolling)
+    /// Mitigates L1 cache latency and saturates superscalar ALUs across pipeline stages.
+    pub fn compute_vector_sum_ilp_4x(&self, data: Vec<f64>) -> f64 {
+        let n = data.len();
+        let chunks = n / 4;
+        let mut acc0 = 0.0;
+        let mut acc1 = 0.0;
+        let mut acc2 = 0.0;
+        let mut acc3 = 0.0;
+
+        for i in 0..chunks {
+            let idx = i * 4;
+            acc0 += data[idx];
+            acc1 += data[idx + 1];
+            acc2 += data[idx + 2];
+            acc3 += data[idx + 3];
+        }
+
+        let mut remainder = 0.0;
+        for i in (chunks * 4)..n {
+            remainder += data[i];
+        }
+
+        (acc0 + acc1) + (acc2 + acc3) + remainder
+    }
 }
 
 #[cfg(test)]
@@ -211,5 +237,14 @@ mod tests {
         // IEEE 754 Edge cases (NaN propagation)
         assert!(engine.compute_systemic_exergy(f64::NAN, 0.0, 0.0, 0.0).is_nan());
         assert!(engine.compute_systemic_exergy(100.0, f64::NAN, 0.0, 0.0).is_nan());
+    }
+
+    #[test]
+    fn test_ilp_4x_vector_sum() {
+        let engine = RustCategoricalEngine::new();
+        // Axiom Ω21 ILP test: 9 elements (2 chunks of 4 + 1 remainder)
+        let data = vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0];
+        let sum = engine.compute_vector_sum_ilp_4x(data);
+        assert_eq!(sum, 45.0);
     }
 }

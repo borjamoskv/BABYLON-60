@@ -1,0 +1,32 @@
+# C5-REAL EXERGY CERTIFIED
+[package]
+name = "verifiable_inference_engine"
+version = "0.1.0"
+edition = "2021"
+authors = ["Teorema Robinson-Moskv Team <dev@robinson-moskv.org>"]
+description = "Verifiable Inference Suite: Rust FFI Bridge & ZK-SNARK Circuit Proofs (BN254 R1CS & LogUp)"
+
+[lib]
+name = "verifiable_inference_engine"
+crate-type = ["cdylib", "staticlib", "rlib"]
+
+[dependencies]
+ark-bn254 = "0.4.0"
+ark-ff = "0.4.0"
+ark-ec = "0.4.0"
+ark-relations = "0.4.0"
+ark-std = "0.4.0"
+ark-serialize = "0.4.0"
+thiserror = "1.0"
+rand_chacha = "0.3"
+sha2 = "0.10"
+libc = "0.2"
+
+[build-dependencies]
+cc = "1.0"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
