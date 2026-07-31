@@ -157,3 +157,10 @@
 ### Tauri v2 Workspace & Binary Target Invariant
 - **INV_C5_TAURI_WORKSPACE:** In monorepos using a root Cargo workspace manifest (`Cargo.toml`), any nested Tauri application (e.g., `babylon60-ide/src-tauri`) MUST be explicitly registered in `workspace.members` of the root manifest. Additionally, the nested Tauri package MUST contain both a `[lib]` and a `src/main.rs` binary entrypoint calling `app_lib::run()`; otherwise `cargo run` and `tauri dev` will abort with `error: a bin target must be available`.
 
+### Cargo Native Library Links Unification Invariant
+- **INV_C5_CARGO_LINKS:** In Cargo workspace monorepos containing C/C++ native library bindings (e.g. `rusqlite` linking `sqlite3` or `pyo3` linking `python`), all member packages MUST share identical dependency versions to prevent `package links to native library conflicts` during workspace-wide builds (`cargo check --workspace`).
+
+### Nested Workspace Header Prohibition
+- **INV_C5_SINGLE_WORKSPACE:** Sub-package `Cargo.toml` manifests declared inside `workspace.members` of the root manifest MUST NOT define a `[workspace]` table header. Workspace-wide membership must be declared exclusively in the root `Cargo.toml`.
+
+
