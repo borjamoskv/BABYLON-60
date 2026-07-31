@@ -65,10 +65,14 @@ async def main():
         except Exception as e:  # noqa: BLE001
             logging.warning("Pre-warmup skipped or failed: %s", e)
 
-        # Keep active and cleanup on exit
+        # Keep alive until an external signal or KeyboardInterrupt terminates the process.
+        # INV_C5_TURING_CASTRATION: no unbounded while True polling loop.
+        _stop = asyncio.Event()
         await daemon.start()
-        while True:
-            await asyncio.sleep(3600)
+        try:
+            await _stop.wait()  # blocks until _stop.set() — e.g. via signal handler
+        except (KeyboardInterrupt, SystemExit, asyncio.CancelledError):
+            pass
     except (KeyboardInterrupt, SystemExit, asyncio.CancelledError):
         pass
     finally:

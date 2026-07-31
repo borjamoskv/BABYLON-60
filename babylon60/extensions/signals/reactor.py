@@ -182,15 +182,27 @@ class SignalReactor:
         except (ImportError, RuntimeError, OSError) as e:
             logger.exception("Failed to run snapshot reflex: %s", e)
 
-    async def run_loop(self, interval: float = 5.0) -> None:
-        """Start a non-blocking infinite loop for standalone usage. (PULMONES)"""
+    async def run_loop(self, interval: float = 5.0, stop_event: asyncio.Event | None = None) -> None:
+        """Start a bounded loop for standalone usage. Halts on stop_event.set() or CancelledError.
+        INV_C5_TURING_CASTRATION compliant — no unbounded while True.
+        """
+        if stop_event is None:
+            stop_event = asyncio.Event()
         logger.info("Signal Reactor active - monitoring bus pulses (L2) [OXYGENATED]")
-        while True:
+        while not stop_event.is_set():
             try:
                 count = await self.process_once()
                 if count > 0:
                     logger.debug("Reactor: Processed %d signal(s)", count)
             except (RuntimeError, OSError, ValueError) as e:
                 logger.exception("Reactor loop error: %s", e)
+            except asyncio.CancelledError:
+                break
 
-            await breathe(interval)
+            try:
+                await asyncio.wait_for(stop_event.wait(), timeout=interval)
+                break  # stop_event fired
+            except asyncio.TimeoutError:
+                await breathe(0)  # yield to event loop
+            except asyncio.CancelledError:
+                break

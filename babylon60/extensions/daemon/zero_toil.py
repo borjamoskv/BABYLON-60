@@ -120,9 +120,17 @@ class ZeroToilDaemon:
         except Exception as e:  # noqa: BLE001
             logger.error(f"[ZERO-TOIL] Error al verificar task.md: {e}")
 
-    async def loop(self):
-        """Bucle principal asíncrono."""
+    async def loop(self, stop_event: asyncio.Event | None = None) -> None:
+        """Bucle principal asíncrono. Terminates deterministically on stop_event.set()."""
+        if stop_event is None:
+            stop_event = asyncio.Event()
         logger.info("[ZERO-TOIL] Iniciando loop de asimilación autónoma.")
-        while True:
+        while not stop_event.is_set():
             await self._check_task_collapse()
-            await asyncio.sleep(10)
+            try:
+                await asyncio.wait_for(stop_event.wait(), timeout=10)
+                break  # stop_event fired
+            except asyncio.TimeoutError:
+                pass  # normal cadence
+            except asyncio.CancelledError:
+                break

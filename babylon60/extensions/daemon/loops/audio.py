@@ -10,8 +10,11 @@ from babylon60.extensions.daemon.utils import run_osascript
 logger = logging.getLogger("babylon60_extensions.daemon.loops.audio")
 
 
-async def audio_mixer_loop(state):
-    while True:
+async def audio_mixer_loop(state, stop_event: asyncio.Event | None = None):
+    """Poll macOS audio state. Terminates when stop_event is set or task is cancelled."""
+    if stop_event is None:
+        stop_event = asyncio.Event()
+    while not stop_event.is_set():
         try:
             found_active = False
             for app_name in ["Spotify", "Music"]:
@@ -41,6 +44,12 @@ async def audio_mixer_loop(state):
             if res:
                 state.daemons["audio_mixer"]["master"] = int(res)
 
+        except asyncio.CancelledError:
+            break
         except (OSError, ValueError) as exc:
             logger.debug("Audio mixer poll error: %s", exc)
-        await asyncio.sleep(5)
+        try:
+            await asyncio.wait_for(stop_event.wait(), timeout=5)
+            break  # stop_event fired during sleep
+        except asyncio.TimeoutError:
+            pass  # normal poll cadence
