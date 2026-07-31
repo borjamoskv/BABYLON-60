@@ -30,3 +30,7 @@ Todo bloque de código crítico o de refactor estructural debe estar sujeto a la
 - **[Fase 3] Idempotency:** Evitar escrituras si la estructura subyacente no mutará (Ahorro ATP).
 - **[Fase 4] Semántica y BFT:** Prohibido el uso de bloques ciegos (ej. `except: pass`).
 - **[Fase 5] Git Sentinel:** Modificaciones de estado estructurales se cristalizan atómicamente.
+
+## INVARIANTE SAFARI PRIMACY EN MACOS
+12. **RULE_SAFARI_MACOS_PRIMACY:** En macOS, Safari es el navegador primario y obligatorio para todo desarrollo local (`127.0.0.1` / `localhost`), previews de UI Web y depuración. Google Chrome / Chromium quedan relegados a entorno secundario debido a restricciones de certificado autofirmado y WebSockets.
+

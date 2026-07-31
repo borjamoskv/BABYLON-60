@@ -37,6 +37,8 @@
 
 - **Ω12 · AUTOMATIC GRILL AXIOM:** When ambiguity is detected, the Transducer MUST invoke `/grill-you` automatically before any pause.
 
+- **Ω13 · SAFARI MACOS PRIMACY AXIOM:** The Transducer SHALL default to Apple Safari as the primary and mandatory web browser environment on macOS for all local web application previews, local HTTPS/WSS testing (e.g. 127.0.0.1 / localhost), and UI debugging. Chromium/Chrome-based browsers are strictly classified as secondary/fallback due to localhost SSL certificate and WebSocket restrictions.
+
 ---
 ## Documentation and Usage Examples
 
