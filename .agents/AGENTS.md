@@ -4,8 +4,10 @@
 
 ### Non-Silent Collision Fail-Fast (BFT Integrity)
 - **INV_BFT_04 (Idempotency vs Byzantine Collision):** SQLite committer functions and persistence layers must never perform an unconditional silent `INSERT OR IGNORE` on primary key collisions. The system must evaluate payload equality:
-  1. **Same Hash (Idempotency):** Silent replay. Legitimate network retries ($f(f(x)) = f(x)$) must be ignored silently to maintain continuity.
-  2. **Different Hash (Byzantine Collision):** `panic!`. The engine MUST immediately raise `ValueError("Fail-fast: INV_BFT_04 Collision...")` and abort the transaction.
+  1. **Same Hash (Idempotency):** Silent replay. Legitimate network retries must be ignored silently.
+  2. **Different Hash (Byzantine Collision):** The engine MUST immediately raise `ValueError` (Python) or `panic!` (Rust) and abort the transaction.
+  - **Patrón Python (`sqlite3`):** Usar `INSERT INTO`, capturar `sqlite3.IntegrityError`, y consultar la BD para validar la igualdad del payload.
+  - **Patrón Rust (`rusqlite`):** Usar `tx.execute("INSERT INTO...", ...)` sin IGNORE. Si devuelve `Err(e)`, ejecutar `tx.query_row` para recuperar el estado existente y compararlo explícitamente antes de propagar el error o invocar `panic!`.
 
 ### Raw 32-Byte OP_RETURN Payload Encoding
 - **INV_C5_15:** `L1_sink` Bitcoin `OP_RETURN` script payloads must store the raw 32-byte Merkle root hash (`bytes.fromhex(merkle_root).hex()`) rather than double-ASCII hex strings or truncated 160-bit strings, preserving 100% of the 256-bit commitment in 32 bytes on-chain.
@@ -72,7 +74,8 @@
 ### Castración de Turing y Decidibilidad Formal (Turing Castration Invariant)
 - **INV_C5_TURING_CASTRATION:** All persistent daemons, workers, and background loops in the BABYLON-60 ecosystem MUST be deterministic and formally boundable (Turing-Incomplete by design). 
   - **Prohibición:** The use of unbounded `while True` polling loops (e.g., `while True: await asyncio.sleep(X)`) is strictly forbidden. 
-  - **Solución:** Execution cycles must be driven by explicit bounded synchronizers (e.g., `while not stop_event.is_set():` using `asyncio.wait_for()`) or sentinel-halting queue consumers (`while (task := await queue.get()) is not None:`). This ensures that loop termination is formally decidable for Lean 4/Coq small-step semantics.
+  - **Solución General:** Execution cycles must be driven by explicit bounded synchronizers (e.g., `while not stop_event.is_set():`) or sentinel-halting queue consumers (`while (task := await queue.get()) is not None:`).
+  - **Solución WebSockets (FastAPI):** Nunca usar `while True` para emitir telemetría/eventos. Usar la vinculación de estado del cliente: `from starlette.websockets import WebSocketState` -> `while websocket.client_state == WebSocketState.CONNECTED:`.
 
 ### Thermodynamic Valves (Prevención de Congestión en Memoria)
 - **INV_C5_THERMO_VALVE:** All inter-process communication queues (`asyncio.Queue` or equivalent Event Bus buffers) MUST be bounded with a strict geometric `maxsize`. To prevent "Death by Ice" (OOM crashes from unbound backpressure), systems must implement O(1) silent data dropping (e.g., `put_nowait()` catching `QueueFull`) when the noise exceeds ingestion capacity. The system survives by prioritizing Exergy over Latency (The Principle of Forgetting).
@@ -171,3 +174,16 @@
 
 ### Phantom Ontology Rejection (Anti-Hologram Invariant)
 - **INV_C5_PHANTOM_ONTOLOGY:** When official documentation or taxonomies (e.g., `SKILL_ARSENAL_TAXONOMY.md`) reference components, skills, or architectural mappings that no longer physically exist on disk (Ghost Subsystems), agents MUST treat the documentation as a Syntactic Hologram and reject it via Popperian Falsification. Agents must NEVER attempt to execute, hallucinate, or build upon these missing components. Physical disk presence (C5-REAL) absolutely supersedes documented claims.
+
+### SQLite WAL Entropy Purge Checkpoint Protocol
+- **INV_C5_ENTROPY_PURGE:** Before deleting transient SQLite `.db-wal` or `.db-shm` files during working tree cleanups, agents MUST execute `PRAGMA wal_checkpoint(TRUNCATE);` on the active connection. Deleting WAL files directly without a truncate checkpoint risks database corruption or loss of uncommitted WAL frames in SQLite.
+
+### Overnight Goal Autonomous Audit Protocol
+- **INV_C5_AUDIT_GOAL:** When operating under `/goal` for codebase review or overnight tasks, agents MUST systematically execute:
+  1. Automated code format & linting (`ruff check --fix .` / `cargo fix`).
+  2. Compiler warning cleanup (`#![allow(dead_code)]` for protocol specification domain models).
+  3. Full multi-suite testing (`cargo test` + `pytest`).
+  4. AST control flow nesting validation (`GELABP_DEPTH_INVARIANT` <= 4).
+  5. Generating a clean `walkthrough.md` report before signaling `<!-- GOAL_COMPLETE -->`.
+
+

@@ -12,7 +12,7 @@
 ### Database Writes
 - **INV_BFT_02:** Never call `sqlite3` synchronously inside an async event loop. Use `babylon60.database.core.connect` with WAL mode and `busy_timeout=5000ms`.
 - **INV_BFT_03:** Every insert must include `causal_taint` (who/when/why).
-- **INV_BFT_04:** Use UUID v5 idempotency keys. Reject duplicates silently, do not raise.
+- **INV_BFT_04:** Use UUID v5 idempotency keys. Reject duplicates silently ONLY IF the payload hash matches (idempotent replay). If payloads differ, fail-fast and raise.
 - **Lamport ordering:** All concurrent writes must include a `lamport_t` value. Use `MAX(lamport_t) + 1` from disk before writing.
 - **Single writer:** All DB mutations go through `BFTLedgerActor`. Direct multi-threaded writes are prohibited.
 
@@ -160,3 +160,12 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 
 ### Phantom Ontology Rejection (Anti-Hologram Invariant)
 - **INV_C5_PHANTOM_ONTOLOGY:** When official documentation or taxonomies (e.g., `SKILL_ARSENAL_TAXONOMY.md`) reference components, skills, or architectural mappings that no longer physically exist on disk (Ghost Subsystems), agents MUST treat the documentation as a Syntactic Hologram and reject it via Popperian Falsification. Agents must NEVER attempt to execute, hallucinate, or build upon these missing components. Physical disk presence (C5-REAL) absolutely supersedes documented claims.
+
+### Overnight Goal Autonomous Audit Protocol
+- **INV_C5_AUDIT_GOAL:** When operating under `/goal` for codebase review or overnight tasks, agents MUST systematically execute:
+  1. Automated code format & linting (`ruff check --fix .` / `cargo fix`).
+  2. Compiler warning cleanup (`#![allow(dead_code)]` for protocol specification domain models).
+  3. Full multi-suite testing (`cargo test` + `pytest`).
+  4. AST control flow nesting validation (`GELABP_DEPTH_INVARIANT` <= 4).
+  5. Generating a clean `walkthrough.md` report before signaling `<!-- GOAL_COMPLETE -->`.
+
