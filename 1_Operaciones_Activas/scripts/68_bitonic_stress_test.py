@@ -10,7 +10,7 @@ def run_stress_test():
     # 1. Compilar al vuelo para evitar fricción (Exergía termodinámica)
     print("--- ⚙️ FORJANDO SILICIO ARM NEON (CLANG) ---")
     compile_cmd = (
-        "clang -O3 -mcpu=apple-m1 -fvectorize -funroll-loops "
+        "clang -O3 -mcpu=apple-m1 -fvectorize -funroll-loops -fblocks "
         "-dynamiclib -o 1_Operaciones_Activas/scripts/libbitonic_neon.dylib "
         "1_Operaciones_Activas/scripts/68_bitonic_sort_ultra_exergy.c"
     )

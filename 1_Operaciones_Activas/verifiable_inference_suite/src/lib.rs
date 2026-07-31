@@ -8,8 +8,9 @@ pub mod ffi;
 pub mod zk_snark;
 
 pub use ffi::{
-    create_bn254_r1cs_proof, primitive_results_t, prove_and_verify_zk_logup,
-    run_verifiable_primitives, verify_bn254_r1cs_proof,
+    calculate_landauer_energy, create_bn254_r1cs_proof, execute_10_primitives,
+    primitive_results_t, project_standard_part, prove_and_verify_zk_logup,
+    run_batch_primitives_loop, run_verifiable_primitives, verify_bn254_r1cs_proof,
 };
 pub use zk_snark::*;
 

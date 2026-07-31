@@ -31,6 +31,21 @@ extern "C" {
         len: usize,
         out: *mut primitive_results_t,
     );
+
+    pub fn primitive_pi_landauer_neon(
+        a: *const f32,
+        b: *const f32,
+        len: usize,
+        temp_kelvin: f64,
+    ) -> f64;
+
+    pub fn primitive_pi_st_neon(
+        a: *const f32,
+        b: *const f32,
+        len: usize,
+        eps: f32,
+        out_st: *mut f32,
+    ) -> f32;
 }
 
 /// Run C SIMD 10-primitive batch pipeline via FFI.
@@ -47,6 +62,64 @@ pub unsafe extern "C" fn run_verifiable_primitives(
     }
     execute_10_primitives_neon(input_a, input_b, len, out);
     0
+}
+
+/// Direct C FFI export for batch execution of 10 primitives.
+#[no_mangle]
+pub unsafe extern "C" fn execute_10_primitives(
+    a: *const f32,
+    b: *const f32,
+    len: usize,
+    out: *mut primitive_results_t,
+) -> i32 {
+    run_verifiable_primitives(a, b, len, out)
+}
+
+/// Execute SIMD 10-primitive batch pipeline for N iterations in a fast native loop.
+#[no_mangle]
+pub unsafe extern "C" fn run_batch_primitives_loop(
+    input_a: *const f32,
+    input_b: *const f32,
+    len: usize,
+    iterations: usize,
+    out: *mut primitive_results_t,
+) -> i32 {
+    if input_a.is_null() || input_b.is_null() || out.is_null() || len == 0 || iterations == 0 {
+        return -1;
+    }
+    for _ in 0..iterations {
+        execute_10_primitives_neon(input_a, input_b, len, out);
+    }
+    0
+}
+
+/// Calculate Landauer thermodynamic energy dissipation via C SIMD FFI: E_min = k_B * T * ln(2) * \sum |A_i - B_i|
+#[no_mangle]
+pub unsafe extern "C" fn calculate_landauer_energy(
+    a: *const f32,
+    b: *const f32,
+    len: usize,
+    temp_kelvin: f64,
+) -> f64 {
+    if a.is_null() || b.is_null() || len == 0 {
+        return 0.0;
+    }
+    primitive_pi_landauer_neon(a, b, len, temp_kelvin)
+}
+
+/// Project standard part map st(x) dissipating infinitesimal noise \epsilon \in \mu(0)
+#[no_mangle]
+pub unsafe extern "C" fn project_standard_part(
+    a: *const f32,
+    b: *const f32,
+    len: usize,
+    eps: f32,
+    out_st: *mut f32,
+) -> f32 {
+    if a.is_null() || len == 0 {
+        return 0.0;
+    }
+    primitive_pi_st_neon(a, b, len, eps, out_st)
 }
 
 /// Prove and verify ZK LogUp fractional lookup argument from binary witness data.
