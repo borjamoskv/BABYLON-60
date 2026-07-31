@@ -2,7 +2,7 @@
 # Axioma Ω24: Zero-Residual Macro-Exergy (Build to /tmp/)
 
 CC = clang
-CFLAGS = -O3 -mcpu=apple-m1 -fvectorize -funroll-loops -fblocks -dynamiclib
+CFLAGS = -O3 -mcpu=native -fvectorize -funroll-loops -fblocks -dynamiclib
 BUILD_DIR = /tmp/exergy_builds
 
 # Fuentes

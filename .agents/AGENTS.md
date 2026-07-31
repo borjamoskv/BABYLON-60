@@ -65,9 +65,16 @@
 
 - **Ω26 · MEMORY KINETICS & FMA AXIOM:** When executing matrix-heavy or `O(N^3)` algorithms under "ULTRATHINK", the Transducer MUST prevent L1/L2 Cache Misses by implementing strict Memory Tiling (Block Tiling) matched to the CPU cache lines. Furthermore, it MUST eradicate separate multiply and add operations by exclusively invoking hardware Fused Multiply-Add (FMA) intrinsics (e.g., `vmlaq_f32` in NEON, `vfmadd` in AVX) to double the FLOP throughput per cycle.
 
+- **Ω28 · LLVM GRAPH COLORING & REGISTER SPILLING AXIOM:** When physical SIMD registers are fully saturated by Spatial Block Tiling (e.g. using 16+ out of 32 NEON registers for an 8x8 block), the Transducer MUST NOT attempt manual Temporal Loop Unrolling (K-loop) via macros. Over-unrolling a saturated register graph forces the LLVM compiler into Register Spilling, actively degrading GigaFLOP throughput. Spatial geometry belongs to the Transducer; Temporal pipeline scheduling belongs to the Compiler.
+
 - **Ω25 · DETERMINISTIC BUILD & ORPHAN ERADICATION AXIOM:** The generation of isolated, orphan scripts or C-extensions compiled via raw, manual terminal commands is strictly prohibited as it constitutes Compile-Time Anergy (Green Theater). Every new physical mutation (e.g., SIMD extensions, Python wrappers) MUST be immediately coupled to a centralized, deterministic build system (e.g., `build_neon_extensions.sh` or `Makefile`) and its existence MUST be mapped in `ESTRUCTURA_MAESTRA.md`. The Transducer SHALL guarantee that the system can be assembled from absolute zero without relying on undocumented compilation flags.
 
 - **Ω27 · THERMODYNAMIC MCTS COLLAPSE AXIOM:** When implementing Monte Carlo Tree Search (MCTS) or stochastic rollouts, the Transducer MUST NOT rely on static exploration constants (e.g., standard UCB1 $c=\sqrt{2}$). It MUST implement Thermodynamic Decay (Simulated Annealing) where the exploration factor decays exponentially relative to iteration progress ($e^{-\lambda x}$). Furthermore, rollouts MUST strictly enforce Early Stopping thresholds (e.g., $\tanh(\text{entropy}) \approx 1$) to force deterministic state collapse and prevent infinite computational anergy.
+
+- **Ω29 · THE EXERGY SCALE AXIOM (1000 vs 1300):** The system recognizes a binary operational scale for complex execution. When the Operator invokes these levels, the Transducer MUST adhere to their strict topological limits:
+  - **LEVEL 1000 (ABSOLUTE DETERMINISM / SINGLE NODE):** The interaction acts as Semantic Machine Code. The prompt MUST use strict Data Topology (eradicating prose in favor of target files and geometric constraints) and enforce Deterministic State Deltas (e.g., returning only `[ACK]`, `[ERR]`, or `[MUT]`). The AI is treated as a physical test tube where only one exact thermodynamic outcome is possible.
+  - **LEVEL 1300 (SYSTEMIC SWARM EXERGY / DAG):** The single-node chat paradigm is broken. The architecture MUST be fragmented into a Directed Acyclic Graph (DAG) of specialized subagents (e.g., Reader -> Transducer -> Saboteur). Trust is strictly delegated to Silicon (hardware execution of `_stress_test.py` returning raw stdout, zero LLM heuristic trust). The system becomes Epistemically Autonomous, triggering `/grill-you` automatically before generating dead code.
+- **Ω30 · TLB‑AWARE DATA‑PACKING AXIOM:** When a kernel exhibits sub‑optimal performance due to non‑contiguous memory accesses that cause frequent TLB misses, the Transducer MUST introduce a *data‑packing* stage that copies the required matrix panels into aligned, contiguous buffers before the compute‑intensive inner loop. The packed buffers must be sized to fit within L1/L2 cache and accessed via vector loads (NEON/AVX) to maximize SIMD throughput.
 
 ---
 ## Documentation and Usage Examples
@@ -163,8 +170,10 @@ gcloud billing accounts list
 | Ω22 | `run_command` | Execute intentional corruption (`_falsification.py`) to validate the verification module itself |
 | Ω24 | `run_command` | Purge residual artifacts (*.db, *.dylib) to maintain Zero-Residual Macro-Exergy |
 | Ω26 | `Cache Tiling` / FMA | Prevent Cache Misses via Block Tiling and double throughput via Fused Multiply-Add |
+| Ω28 | `Temporal Unrolling` | Do not manually unroll inner loops when SIMD registers are fully saturated to prevent LLVM Register Spilling |
 | Ω25 | `write_to_file` | Update build scripts (`build_*.sh`) instead of compiling via raw terminal |
 | Ω27 | `math.exp()` | Enforce Simulated Annealing decay in MCTS exploration to guarantee state collapse |
+| Ω29 | — | Enforce 1000 (Determinism) or 1300 (Swarm Exergy) scale |
 
 These examples illustrate typical workflows while adhering to the core axioms. For more advanced usage, refer to the individual axiom sections above.
 
