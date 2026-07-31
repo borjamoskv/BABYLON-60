@@ -111,3 +111,6 @@ venv/
 .*_Historico_Inerte/
 
 
+
+# Compiled native extensions (Axioma Ω24)
+*.dylib
