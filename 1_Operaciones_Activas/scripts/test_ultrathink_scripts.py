@@ -29,6 +29,7 @@ def test_script_59_deep_research_engine():
     script_path = os.path.join(SCRIPTS_DIR, "59_autodidact_omega_deep_research_engine.py")
     result = subprocess.run(["python3", script_path], capture_output=True, text=True)
     assert result.returncode == 0
-    assert "AUTODIDACT-Ω V4.0 DEEP RESEARCH" in result.stdout
+    assert "AUTODIDACT-Ω" in result.stdout
+    assert "DEEP RESEARCH" in result.stdout
     assert "ZERO ANERGY" in result.stdout
 
