@@ -14,23 +14,26 @@ echo "============================================================"
 # Optimizaciones extremas para arquitectura ARM64 (Loop Unrolling, Fast Math)
 CFLAGS="-O3 -mcpu=apple-m1 -ffast-math -dynamiclib"
 
-# 1. Hamming Weight / Popcount (ILP 4x)
-if [ -f "65_popcount_ultra_exergy.c" ]; then
-    echo "[*] Compilando libpopcount_neon.dylib (4.2+ BOPs)..."
-    clang $CFLAGS -o libpopcount_neon.dylib 65_popcount_ultra_exergy.c
-fi
+compile_extension() {
+    local src_file=$1
+    local out_file=$2
+    if [ -f "$src_file" ]; then
+        echo "[*] Compilando $out_file..."
+        clang $CFLAGS -o "$out_file" "$src_file"
+    fi
+}
 
-# 2. Xorshift PRNG (ILP 8x)
-if [ -f "67_xorshift_ultra_exergy.c" ]; then
-    echo "[*] Compilando libxorshift_neon.dylib (4.0+ BOPs)..."
-    clang $CFLAGS -o libxorshift_neon.dylib 67_xorshift_ultra_exergy.c
-fi
+# 1. Primitivas SIMD Generales
+compile_extension "64_cortex_primitives_simd.c" "libcortex_primitives_simd.dylib"
 
-# 3. Fast Inverse Square Root (si aplica a futuro como librería aislada)
-# if [ -f "63_q_rsqrt.c" ]; then
-#     clang $CFLAGS -o libq_rsqrt.dylib 63_q_rsqrt.c
-# fi
+# 2. Operaciones Matemáticas (ULTRATHINK)
+compile_extension "61_q_rsqrt_neon.c" "libq_rsqrt_neon.dylib"
+compile_extension "61_q_rsqrt_neon_fma.c" "libq_rsqrt_neon_fma.dylib"
+compile_extension "65_popcount_ultra_exergy.c" "libpopcount_neon.dylib"
+compile_extension "67_xorshift_ultra_exergy.c" "libxorshift_neon.dylib"
+compile_extension "68_bitonic_sort_ultra_exergy.c" "libbitonic_neon.dylib"
+compile_extension "69_gemm_ultra_exergy.c" "libgemm_ultra_exergy.dylib"
 
 echo "============================================================"
-echo "  [OK] MUTACIONES DE HARDWARE ENSAMBLADAS CON ÉXITO"
+echo "  [OK] TODAS LAS MUTACIONES DE HARDWARE HAN SIDO ENSAMBLADAS"
 echo "============================================================"
