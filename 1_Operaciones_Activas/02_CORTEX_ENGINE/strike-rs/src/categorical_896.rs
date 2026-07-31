@@ -131,10 +131,20 @@ impl RustCategoricalEngine {
     }
 
     /// Fast calculation of Landauer energy dissipation bound in Joules
+    /// Fast calculation of Landauer energy dissipation bound in Joules
     pub fn compute_landauer_limit_joules_fast(&self, entropy_bits: f64, temp_k: f64) -> f64 {
         let k_b = 1.380649e-23;
         let ln_2 = std::f64::consts::LN_2;
         entropy_bits * k_b * temp_k * ln_2
+    }
+
+    /// Universal Systemic Exergy Law (Axiom Ω20): E_useful = E_total - (L_uncertainty + L_friction + L_waste)
+    pub fn compute_systemic_exergy(&self, e_total: f64, l_uncertainty: f64, l_friction: f64, l_waste: f64) -> f64 {
+        if e_total.is_nan() || l_uncertainty.is_nan() || l_friction.is_nan() || l_waste.is_nan() {
+            return f64::NAN;
+        }
+        let total_loss = l_uncertainty + l_friction + l_waste;
+        (e_total - total_loss).max(0.0)
     }
 }
 
@@ -184,5 +194,22 @@ mod tests {
 
         let e = engine.compute_landauer_limit_joules_fast(1.0, 298.15);
         assert!(e > 0.0);
+    }
+
+    #[test]
+    fn test_systemic_exergy_and_ieee754_boundaries() {
+        let engine = RustCategoricalEngine::new();
+
+        // Axiom Ω20 computation
+        let exergy = engine.compute_systemic_exergy(100.0, 10.0, 5.0, 2.0);
+        assert_eq!(exergy, 83.0);
+
+        // Clamped at 0.0 when losses exceed total energy
+        let overflow_loss = engine.compute_systemic_exergy(10.0, 50.0, 20.0, 5.0);
+        assert_eq!(overflow_loss, 0.0);
+
+        // IEEE 754 Edge cases (NaN propagation)
+        assert!(engine.compute_systemic_exergy(f64::NAN, 0.0, 0.0, 0.0).is_nan());
+        assert!(engine.compute_systemic_exergy(100.0, f64::NAN, 0.0, 0.0).is_nan());
     }
 }
