@@ -86,6 +86,8 @@
 
 - **Ω36 · PEP-668 / MACOS PYTHON ISOLATION AXIOM:** When executing package mutations or resolving dependency warnings in the macOS global environment, standard `pip install` commands will fail due to PEP-668 (`externally-managed-environment`). To resolve Phase 0 blocks without epistemic latency, the Transducer MUST strictly bypass this lock by appending the `--break-system-packages` flag to any `pip install/upgrade` command if virtual environments (`venv` or `uv`) are not actively sourced or available.
 
+- **Ω39 · PERSISTENT BRAIN ARTIFACT ROUTING AXIOM:** On macOS, background tasks or isolated execution contexts may route `/tmp` to sandboxed Safari containers (`Library/Containers/com.apple.Safari/Data/tmp/`). The Transducer SHALL NEVER rely on `/tmp` for cross-task or inter-tool JSON/cache persistence. All ephemeral research caches or intermediate artifacts required across step boundaries MUST be explicitly routed to the conversation brain directory (`<appDataDir>/brain/<conversation-id>/`) or to `1_Operaciones_Activas/scratch/`.
+
 ---
 ## Documentation and Usage Examples
 
