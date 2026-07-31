@@ -149,7 +149,13 @@
 - **INV_C5_RUST_DEBUG_01:** When a Rust test fails with an opaque `assertion failed: res.is_ok()` panic, agents MUST NOT guess the underlying cause. The agent MUST immediately modify the test source code to print the inner error payload (e.g., changing `assert!(res.is_ok());` to `assert!(res.is_ok(), "Test failed: {:?}", res);`) and re-run the test to extract the exact deterministic failure before proceeding with any logical fixes.
 
 ### Stale Thermal Lock Cleanup Protocol
-- **INV_C5_22_CLEANUP:** When encountering a `Thermodynamic Hysteresis Active: Another swarm holds the lock (INV_C5_22)` error during `strike_rs` BFT engine tests, it indicates a stale lock left behind by a previously panicked test. Agents MUST execute `rm -f .cortex_thermal_lock strike_rs/.cortex_thermal_lock` to purge the orphaned lock before re-running the test suite.
+- **INV_C5_22_CLEANUP:** When encountering a `Thermodynamic Hysteresis Active: Another swarm holds the lock (INV_C5_22)` error during `strike_rs` BFT engine tests, it indicates a stale lock left behind by a previously panicked test or OOM crash. Agents MUST execute `rm -f .cortex_thermal_lock strike_rs/.cortex_thermal_lock *.db.lock` to purge the orphaned locks before re-running the test suite.
+
+### GELABP Zero-Latency Collapse Invariant
+- **INV_C5_29_GELABP_ZERO_LATENCY:** In stress testing, synthetic nodes must inject a minimum virtual latency (e.g. `latency_ms = 1`). If all nodes execute in exactly `0` ms, `node_sum_ms` equals `0.0`, causing the GELABP `speedup` multiplier to mathematically collapse to `0.0`. This triggers a false-positive Thermodynamic Collapse (Score = 0.00).
+
+### Global RwLock Thermodynamic Limit
+- **INV_C5_30_GLOBAL_RWLOCK_LIMIT:** Spawning more than 100,000 concurrent Tokio futures that attempt to acquire `.write().await` on a single global `RwLock` (e.g., `KdaMemoryBuffer.put`) creates extreme lock contention. This artificially spikes `wall_ms` (Entropy) and guarantees a legitimate GELABP Thermodynamic Collapse (Score < 700). Tests exceeding 100K nodes must either accept the intentional Rollback or refactor the architecture to use batched writes / MPSC channels.
 
 ### Tauri State & iceoryx2 Send/Sync Invariant
 - **INV_C5_TAURI_IPC:** When embedding `iceoryx2::service::zero_copy::Service` or `PortFactory` inside Tauri `AppState` (`tauri::State<AppState>`), POSIX shared memory locks containing raw pointers (`*const c_void`) will break standard `Send + Sync` auto-traits on macOS. Agents MUST wrap the handle in a dedicated newtype struct (e.g. `pub struct IpcHandle(pub Arc<PortFactory<Service, Vec<u8>>>);`) and explicitly implement `unsafe impl Send for IpcHandle {}` and `unsafe impl Sync for IpcHandle {}` to satisfy Tauri's state concurrency bounds.
@@ -163,4 +169,5 @@
 ### Nested Workspace Header Prohibition
 - **INV_C5_SINGLE_WORKSPACE:** Sub-package `Cargo.toml` manifests declared inside `workspace.members` of the root manifest MUST NOT define a `[workspace]` table header. Workspace-wide membership must be declared exclusively in the root `Cargo.toml`.
 
-
+### Phantom Ontology Rejection (Anti-Hologram Invariant)
+- **INV_C5_PHANTOM_ONTOLOGY:** When official documentation or taxonomies (e.g., `SKILL_ARSENAL_TAXONOMY.md`) reference components, skills, or architectural mappings that no longer physically exist on disk (Ghost Subsystems), agents MUST treat the documentation as a Syntactic Hologram and reject it via Popperian Falsification. Agents must NEVER attempt to execute, hallucinate, or build upon these missing components. Physical disk presence (C5-REAL) absolutely supersedes documented claims.
