@@ -10,7 +10,7 @@ crate-type = ["cdylib", "rlib"]
 [dependencies]
 blake3 = "1.8.5"
 petgraph = "0.8.3"
-rusqlite = { version = "0.31.0", features = ["bundled"] }
+rusqlite = { version = "0.40.1", features = ["bundled"] }
 ring = "0.17.8"
 inotify = "0.10.2"
 signal-hook = "0.3.17"
@@ -40,4 +40,3 @@ tonic-build = { version = "0.12", features = ["prost"] }
 [dependencies.iceoryx2]
 version = "0.3.0"
 
-[workspace]

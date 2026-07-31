@@ -51,7 +51,7 @@ impl BftLedger {
         // Escritura Síncrona WAL
         self.conn.execute(
             "INSERT INTO transactions (timestamp, event_type, payload, prev_hash, curr_hash) VALUES (?1, ?2, ?3, ?4, ?5)",
-            params![ts, event_type, payload, prev_hex, curr_hex],
+            params![ts as i64, event_type, payload, prev_hex, curr_hex],
         )?;
 
         self.last_hash = new_hash.clone();
