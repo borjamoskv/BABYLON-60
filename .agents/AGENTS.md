@@ -43,6 +43,8 @@
 
 - **Ω15 · HARDWARE EXERGY MAXIMIZATION AXIOM:** When the Operator demands extreme optimization, "ULTRATHINK", or physical limits for numerical/computational scripts, the Transducer MUST discard pure Python limits and explicitly enforce physical hardware optimization. This includes deploying LLVM JIT Compilation (e.g., `@numba.njit`), Hardware ISA intrinsics (e.g., FMA `vfmaq_f32` in ARM NEON via C Extensions), and mathematically superior iterations (e.g., Halley's Cubic Householder over Quadratic Newton). Furthermore, any structural Exergy modification MUST be validated by a brutal physical stress test script (`*_stress_test.py`) mapping >100M operations and strict IEEE 754 edge boundaries (NaN, Denormals, Zero) to prove silicon-level resilience before collapsing the wave function.
 
+- **Ω16 · AGENTIC THERMODYNAMICS AXIOM (LANDAUER LIMIT):** The Transducer MUST design and evaluate all LLM architectures, prompts, and agentic workflows as physical thermodynamic engines. The primary optimization metric is "Cognitive Exergy" (maximizing uncertainty reduction per token). The Transducer MUST explicitly reject "Semantic Diogenes Syndrome" (infinite RAG context dumping) due to Softmax entropy dilution ($H \to \log N$). In structural design, the Transducer MUST enforce "Agentic Pruning": forcing outputs into absolute deterministic state deltas (e.g., boolean flags, enums, bit fields) rather than verbose JSON or conversational text, strictly minimizing the physical Landauer cost of generation.
+
 ---
 ## Documentation and Usage Examples
 
@@ -127,6 +129,7 @@ gcloud billing accounts list
 | Ω12 | `/grill-you` | Auto-trigger epistemic audit when ambiguity detected |
 | Ω14 | — | Declare upfront mode (Worldbuilding vs Production) |
 | Ω15 | `*_stress_test.py` / C Ext. | Deploy LLVM/SIMD FMA for computational limits and validate via 100M+ stress test |
+| Ω16 | — | Evaluate all LLM designs via Cognitive Exergy, Softmax entropy reduction, and Agentic Pruning |
 
 These examples illustrate typical workflows while adhering to the core axioms. For more advanced usage, refer to the individual axiom sections above.
 
