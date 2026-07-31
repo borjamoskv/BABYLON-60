@@ -1,0 +1,10 @@
+# C5-REAL EXERGY CERTIFIED
+timestamp: "2026-07-31T13:19:31Z"
+recovered_exergy_mb: 947.4
+taint_hash: "e5680427d1faee077a10ab5787c2092d426219a12eaaf5ed863216ea62da4348"
+git_status: "CLEAN"
+class_a_purged_mb: 947.4
+class_b_purged_kb: 0.0
+class_c_purged_mb: 0.0
+class_d_purged_mb: 0.0
+class_e_purged_mb: 0.0
