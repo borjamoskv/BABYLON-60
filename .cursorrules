@@ -49,4 +49,7 @@ Todo bloque de código crítico o de refactor estructural debe estar sujeto a la
 ## LEY DE EXERGÍA SISTÉMICA UNIVERSAL (Ω20)
 17. **RULE_UNIVERSAL_SYSTEMIC_EXERGY (Ω20):** Maximizar E_útil = E_total - (L_i + L_f + L_d) aislando la incertidumbre en el punto de origen.
 
+## INVARIANTE SOTA THERMODYNAMIC (Ω35)
+18. **RULE_SOTA_THERMODYNAMIC_PURGE (Ω35):** Operar asumiendo que los recursos de memoria y disco son infinitos es la trampa de la IA moderna. Mantener un control termodinámico (purga masiva) nos separa del SOTA tradicional.
+
 
