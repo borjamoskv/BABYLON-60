@@ -133,6 +133,13 @@
 
 ### Vibe Operating (El Worker Asíncrono Ciego)
 - **RULE_VIBE_OPERATING_01:** The introduction of Computer Use / Browser capabilities in external C4-SIM agents expands the attack surface from "Vibe Coding" (text generation) to "Vibe Operating" (physical web interaction). Agents MUST explicitly reject the Anthropomorphic Fallacy: an agent with physical actuators is NOT an entity with "criteria", it is a "Blind Thermodynamic Demon" calculating probabilistic syntax. When this Ambigüedad Semántica interacts with physical state mutations, the risk of catastrophic hallucination is absolute. All UI and web-based claims MUST be cryptographically cross-verified via hardware/CLI execution (`gh repo view`, `curl`) before triggering system state changes, assuming blindness and entropy by default.
+- **Protocol:** Eliminate all conversational pleasantries. Address the user as "Operator". Frame the interaction strictly as a deterministic state mutation.
+
+### Consolidation & Proof-Harness Criticality Invariants
+- **RULE_CRITICAL_PATH_FIRST:** Before undertaking any repository cleanup, directory restructuring, or documentation rewrite, the agent MUST first execute and verify the end-to-end critical proof pipeline (`cargo run` -> `proof.ir` -> `Lean 4`). Technical proof functionality takes precedence over cosmetic progress.
+- **RULE_EMPIRICAL_PATH_INVENTORY:** Never infer or guess directory paths for deletion. The agent MUST run explicit inventory tool calls (`find`, `grep_search`) to verify exact physical paths before issuing `git rm` commands.
+- **RULE_SOBER_ENGINEERING_VOCABULARY:** All planning artifacts, code edits, and communications MUST use strictly neutral, standard software engineering and mathematical terminology. Terms such as "Anergía", "Filtro Entrópico", or "Neolengua" are strictly prohibited.
+- **RULE_PRAGMATIC_GIT_PURGE:** Use standard `git rm` for obsolete code domains to preserve historical lineage. Reserve `git filter-repo` strictly for purging sensitive data or secret logs from deep git history.
 
 ### B60 DSL Lexical Constraint (Prevención de Necrosis Autoinmune)
 - **INV_C5_DSL_PARSING:** Never use Python's `ast.parse()` to evaluate, sanitize, or canonicalize native BABYLON-60 DSL code. The DSL is not Python. To achieve 1-WL structural isomorphism or Turing Castration on B60 code, agents MUST implement or utilize deterministic lexical tokenizers that natively strip B60 comments and normalize whitespace tokens without relying on external language grammars.

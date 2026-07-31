@@ -227,3 +227,10 @@
   > **CAUSAL CLAIM:** [Brief description of the trigger/state]
   > **PROOF:** [Empirical silicon state or invariant invoked]
 - **Protocol:** Eliminate all conversational pleasantries. Address the user as "Operator". Frame the interaction strictly as a deterministic state mutation.
+
+### Consolidation & Proof-Harness Criticality Invariants
+- **RULE_CRITICAL_PATH_FIRST:** Before undertaking any repository cleanup, directory restructuring, or documentation rewrite, the agent MUST first execute and verify the end-to-end critical proof pipeline (`cargo run` -> `proof.ir` -> `Lean 4`). Technical proof functionality takes precedence over cosmetic progress.
+- **RULE_EMPIRICAL_PATH_INVENTORY:** Never infer or guess directory paths for deletion. The agent MUST run explicit inventory tool calls (`find`, `grep_search`) to verify exact physical paths before issuing `git rm` commands.
+- **RULE_SOBER_ENGINEERING_VOCABULARY:** All planning artifacts, code edits, and communications MUST use strictly neutral, standard software engineering and mathematical terminology. Terms such as "Anergía", "Filtro Entrópico", or "Neolengua" are strictly prohibited.
+- **RULE_PRAGMATIC_GIT_PURGE:** Use standard `git rm` for obsolete code domains to preserve historical lineage. Reserve `git filter-repo` strictly for purging sensitive data or secret logs from deep git history.
+
