@@ -33,6 +33,7 @@ compile_extension "65_popcount_ultra_exergy.c" "libpopcount_neon.dylib"
 compile_extension "67_xorshift_ultra_exergy.c" "libxorshift_neon.dylib"
 compile_extension "68_bitonic_sort_ultra_exergy.c" "libbitonic_neon.dylib"
 compile_extension "69_gemm_ultra_exergy.c" "libgemm_ultra_exergy.dylib"
+compile_extension "70_softmax_ultra_exergy.c" "libsoftmax_neon.dylib"
 
 echo "============================================================"
 echo "  [OK] TODAS LAS MUTACIONES DE HARDWARE HAN SIDO ENSAMBLADAS"
