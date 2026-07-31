@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """CORTEX Metering - Metering Middleware.
 
 Intercepts /v1/* API requests to track usage per authenticated tenant

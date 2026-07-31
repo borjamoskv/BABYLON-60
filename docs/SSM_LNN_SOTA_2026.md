@@ -1,4 +1,4 @@
-# CORTEX-TAINT:borjamoskv:sota_architecture_review:2026-07-18
+# Ledger Asíncrono-TAINT:borjamoskv:sota_architecture_review:2026-07-18
 Claim: El paradigma "Scale is all you need" (Transformers) ha sido fracturado en 2026 por arquitecturas de inferencia de tiempo continuo y recurrencia subcuadrática.
 Proof: { Base: [Mamba-3, LFM2.5], Range: [Edge, Cloud], Confidence: [C5] }
 

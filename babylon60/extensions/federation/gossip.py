@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Multi-node Federation Gossip Protocol (Sovereign Swarm).
 

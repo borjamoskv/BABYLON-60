@@ -1,4 +1,4 @@
-# MOSKV-1 APEX — SKILL ARSENAL TAXONOMY BY EXERGY
+# Motor Causal Principal — SKILL ARSENAL TAXONOMY BY EXERGY
 
 > **Architectures are defined by the state they preserve.**
 > Skills are defined by the exergy they produce.
@@ -15,7 +15,7 @@ Conserved_Quantity: Useful work per token consumed
 
 ## TIER S — SOVEREIGN KERNEL (Maximum Exergy)
 
-> Skills that directly mutate C5-REAL state, enforce BFT invariants, or protect the epistemic core.
+> Skills that directly mutate Causal-Determinist state, enforce BFT invariants, or protect the epistemic core.
 > **Conserved Quantity**: Epistemic coherence and system integrity.
 
 | # | Skill | Domain | Conserved Quantity | Description |
@@ -29,7 +29,7 @@ Conserved_Quantity: Useful work per token consumed
 | 7 | `ETHOS_Epistemic_Anchor` | Integrity | Cryptographic hash | Genera SHA3-256 del último estado modificado. Commits vía Git Sentinel |
 | 8 | `Ontology_Invariant_Checker` | Validation | Isomorphic mapping | Mapeo bidireccional SANEDRIN contra BABYLON-60 core |
 | 9 | `FSharp_Rust_BFT_Enforcer` | Architecture | Trilingual regime | Previene regresión monoglota (F# Ontology, Rust Poset, Anvil BFT) |
-| 10 | `Diamond_Escape_Protocol` | Autonomy | Goal completion | Modo autómata de contexto amplio. Ejecución ininterrumpida hasta colapso C5-REAL |
+| 10 | `Diamond_Escape_Protocol` | Autonomy | Goal completion | Modo autómata de contexto amplio. Ejecución ininterrumpida hasta colapso Causal-Determinist |
 
 ---
 
@@ -54,11 +54,11 @@ Conserved_Quantity: Useful work per token consumed
 
 | # | Skill | Description |
 |:--|:------|:------------|
-| 18 | `AST_Class_Extractor` | Parser AST C5-REAL. Extrae clases, métodos, docstrings. Zero ejecución arbitraria |
-| 19 | `AST_DeadCode_Pruner` | Macrófago de CORTEX. Apoptosis dirigida con Navaja de Ockham Termodinámica |
+| 18 | `AST_Class_Extractor` | Parser AST Causal-Determinist. Extrae clases, métodos, docstrings. Zero ejecución arbitraria |
+| 19 | `AST_DeadCode_Pruner` | Macrófago de Ledger Asíncrono. Apoptosis dirigida con Navaja de Ockham Termodinámica |
 | 20 | `GIL_Bypass_Rust_Compiler` | Migración de bottlenecks Python GIL a strike-rs (Rust core) |
 | 21 | `MultiLang_AST_Bridger` | Motor transversal multi-lenguaje (Python/Rust/F#/SQL) |
-| 22 | `Regex_Slop_Annihilator` | Tree-Shaking Semántico. Transmuta prosa estocástica en Bytecode C5-REAL |
+| 22 | `Regex_Slop_Annihilator` | Tree-Shaking Semántico. Transmuta prosa estocástica en Bytecode Causal-Determinist |
 | 23 | `VNode_Cache_SIGKILL` | Purga de entropía del Build Cache de Vercel en despliegues Astro |
 
 ### A3 — Research & Epistemics
@@ -87,7 +87,7 @@ Conserved_Quantity: Useful work per token consumed
 
 | # | Skill | Description |
 |:--|:------|:------------|
-| 36 | `Substack-Moskv-OMEGA` | Motor Editorial Soberano. Persona 'Telmo Dinámico de Moskv'. Industrial Noir 2026 |
+| 36 | `Substack-Motor Causal-OMEGA` | Motor Editorial Soberano. Persona 'Telmo Dinámico de Motor Causal'. Industrial Noir 2026 |
 | 37 | `Image_Tensor_Generator` | Composiciones visuales profesionales (pósters, portadas, infografías) |
 | 38 | `Aesthetic_PDF_Compiler` | Filosofía de diseño original → objeto visual de calidad museística |
 | 39 | `UI_Canvas_Renderer` | Síntesis de filosofía visual → artefacto determinista (PDF/PNG) |
@@ -149,7 +149,7 @@ Conserved_Quantity: Useful work per token consumed
 | 58 | `Socratic_AST_Validator` | Protocolo Grill-Me. Interrogación epistémica hasta entendimiento absoluto |
 | 59 | `Universal_Invariant_Synthesizer` | Mapea jerga de cualquier dominio a las 6 Invariantes Universales |
 | 60 | `GELABP_Matrix_Evaluator` | Descomposición de cualquier sistema en 6 Invariantes Físicas Universales |
-| 61 | `Hardware_Ontology_Mapper` | Traduce fallas de hardware/física al dominio de exergía C5-REAL |
+| 61 | `Hardware_Ontology_Mapper` | Traduce fallas de hardware/física al dominio de exergía Causal-Determinist |
 | 62 | `Ontological_Pregeneration_Protocol` | Pre-generación LLM. Calibración ontológica de 5 preguntas |
 
 ### B7 — Testing & Stress
@@ -200,7 +200,7 @@ Conserved_Quantity: Useful work per token consumed
 | # | Skill | Description |
 |:--|:------|:------------|
 | 79 | `Cron_Thread_Scheduler` | Evaluación entrópica de tareas → `invoke_subagent` o `schedule` |
-| 80 | `Workflow_DAG_Executor` | Director Soberano. MOSKV-1 dicta la secuencia física al Operador |
+| 80 | `Workflow_DAG_Executor` | Director Soberano. Motor Causal-1 dicta la secuencia física al Operador |
 | 81 | `JIT_Skill_Registry_Compiler` | JIT Skill Compiler. Sovereign x10000 Centuria Forge |
 | 82 | `Antigravity_5x_Pro_Matrix_Orchestrator` | Pool multi-cuenta para bypass de Rate Limits (429) |
 | 83 | `LLM_RPC_Bridge` | Configuración y orquestación de agentes Antigravity SDK |
@@ -331,7 +331,7 @@ Exergy_Distribution:
   C_Low_Medium: 9.8%
   D_Domain_Specific: 38.5%
 
-Sovereign_Skills_Ratio: 51.7%  # Tiers S+A+B (custom MOSKV-1)
+Sovereign_Skills_Ratio: 51.7%  # Tiers S+A+B (custom Motor Causal-1)
 GCP_Stack_Ratio: 38.5%         # Tier D (Google Cloud)
 ```
 
@@ -353,7 +353,7 @@ Tier D  →  Cloud Infrastructure State (GCP)
 > **Their exergy is measured by the state they preserve.**
 
 <!-- 
-CORTEX-TAINT:borjamoskv:skill_taxonomy:2026-07-18T00:13:56+02:00
+Ledger Asíncrono-TAINT:borjamoskv:skill_taxonomy:2026-07-18T00:13:56+02:00
 EXERGY_VALIDATION: True
 AESTHETIC: Industrial Noir 2026
 -->

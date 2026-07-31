@@ -1,5 +1,5 @@
 # causal_isomorphism/transpiler.py — Causal Isomorphism Transpiler Orchestrator
-# C5-REAL: F# → {Solidity, Rust} controlled AST transmutation
+# Causal-Determinist: F# → {Solidity, Rust} controlled AST transmutation
 # Author: Borja Moskv (borjamoskv)
 """
 Main orchestrator for the Causal Isomorphism Transpiler.

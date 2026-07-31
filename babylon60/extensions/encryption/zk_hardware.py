@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Zero-Knowledge Encryption Shield (Hardware Key Backed).
 
@@ -35,7 +35,7 @@ class ZeroKnowledgeShield:
     def __init__(self, hardware_key_material: bytes | None = None):
         """
         Initialize the ZK Shield.
-        In a C5-REAL production environment, `hardware_key_material` is derived
+        In a Causal-Determinist production environment, `hardware_key_material` is derived
         directly from a TPM/Secure Enclave or a YubiKey.
         """
         if ChaCha20Poly1305 is None:

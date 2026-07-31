@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """CORTEX - Default Trigger Registry.
 
 Factory functions that register the 8 default CORTEX trigger conditions

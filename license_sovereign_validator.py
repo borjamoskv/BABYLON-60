@@ -1,4 +1,4 @@
-# C5-REAL: LICENSE SOVEREIGN VALIDATOR
+# Causal-Determinist: LICENSE SOVEREIGN VALIDATOR
 # =================================================================================
 # Verification Protocol: Cryptographic / HMAC License Transducer for Cortex Persist
 # Domain Transducer Primitive: [720-895]

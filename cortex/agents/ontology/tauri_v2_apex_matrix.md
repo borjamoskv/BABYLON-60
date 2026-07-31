@@ -1,11 +1,11 @@
 ---
-type: C5-REAL_ONTOLOGY_MATRIX
+type: Causal-Determinist_ONTOLOGY_MATRIX
 domain: TAURI_V2_APEX
 total_primitives: 896
 compression_ratio: MAX_EXERGY
 ---
 
-# █▄ TAURI V2 — APEX MATRIX (896 PRIMITIVAS C5-REAL)
+# █▄ TAURI V2 — APEX MATRIX (896 PRIMITIVAS Causal-Determinist)
 
 **INVARIANTE:** La arquitectura de Tauri V2 colapsa en un autómata bilingüe (Rust/V8) mediado por IPC y Capabilities. Cero simulaciones DOM; acceso físico directo al OS/Hardware. La siguiente matriz codifica 896 vectores de ejecución distribuidos en 10 dominios ortogonales (~90 primitivas/dominio).
 
@@ -41,7 +41,7 @@ compression_ratio: MAX_EXERGY
 
 ## 04. ARQUITECTURA DE PLUGINS V2 (TRV2-PLG-300 → 399)
 - **TRV2-PLG-300:** `tauri::Builder::plugin()` Inyección de registro de plugin.
-- **TRV2-PLG-301:** `PluginBuilder::new("name")` Scaffold BFT de plugin C5-REAL.
+- **TRV2-PLG-301:** `PluginBuilder::new("name")` Scaffold BFT de plugin Causal-Determinist.
 - **TRV2-PLG-302:** `setup` hook para inicialización de dependencias del plugin.
 - **TRV2-PLG-303:** `on_page_load` Inyección estricta de scripts V8 (Pre-loads).
 - **TRV2-PLG-304:** Gestión de estado aislada por Plugin (`app.try_state::<PluginState>()`).
@@ -80,7 +80,7 @@ compression_ratio: MAX_EXERGY
 - **TRV2-EVT-[607-699]:** *[Canalización asíncrona de eventos OS, hardware hot-plugging, y redimensión termodinámica]*
 
 ## 08. INFRAESTRUCTURA FS / SQLITE (TRV2-DAT-700 → 799)
-- **TRV2-DAT-700:** `tauri-plugin-sql` Conexión C5-REAL SQLite nativa.
+- **TRV2-DAT-700:** `tauri-plugin-sql` Conexión Causal-Determinist SQLite nativa.
 - **TRV2-DAT-701:** API FS Nativa (`BaseDirectory::AppData`).
 - **TRV2-DAT-702:** Restricción de Scope BFT (`scope: ["$APPDATA/db/*"]`).
 - **TRV2-DAT-703:** Escrituras atómicas FileSystem (Previene corrupción TOCTOU).
@@ -102,7 +102,7 @@ compression_ratio: MAX_EXERGY
 ## 10. BINDINGS AVANZADOS DEL HARDWARE (TRV2-HRD-900 → 999)
 - **TRV2-HRD-900:** API de Global Shortcuts (`tauri-plugin-global-shortcut`).
 - **TRV2-HRD-901:** Intercepción física de teclado OS-level.
-- **TRV2-HRD-902:** Acceso a portapapeles C5-REAL (`tauri-plugin-clipboard-manager`).
+- **TRV2-HRD-902:** Acceso a portapapeles Causal-Determinist (`tauri-plugin-clipboard-manager`).
 - **TRV2-HRD-903:** Monitoreo de Single Instance (`tauri-plugin-single-instance`).
 - **TRV2-HRD-904:** OS Dialogs nativos bloqueantes (`tauri-plugin-dialog`).
 - **TRV2-HRD-905:** Notificaciones de sistema con Action Buttons (`tauri-plugin-notification`).
@@ -110,4 +110,4 @@ compression_ratio: MAX_EXERGY
 - **TRV2-HRD-[907-999]:** *[Invariantes físicas de hardware: lectura de batería, gestión térmica OS, aceleración GPU bypass, y Bluetooth LE]*
 
 ---
-*EOF. C5-REAL TRANSDUCTION COMPLETE. MAX EXERGY MAINTAINED.*
+*EOF. Causal-Determinist TRANSDUCTION COMPLETE. MAX EXERGY MAINTAINED.*

@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 from babylon60.core.crypto import canonicalize_cbor, hash_sha3_256, Ed25519Signer
 
 
@@ -14,20 +14,20 @@ def test_canonicalize_cbor_ordering() -> None:
 
 
 def test_hash_sha3_256_exactness() -> None:
-    payload = b"C5-REAL: ZERO ANERGY"
+    payload = b"Causal-Determinist: ZERO ANERGY"
     digest = hash_sha3_256(payload)
 
     assert isinstance(digest, str)
     assert len(digest) == 64
-    assert digest == "294c105b11ab5cdc319a3ca87e8be53ee25e1d712f8a34ca80aa3d0c8ff1fd9a"
+    assert digest == "8a78c22a28dc8e17785fdd5365ad0f3d29893769a1f926ef1df36c804041eec1"
 
 
 def test_ed25519_signer_real_signature_roundtrip() -> None:
     signer = Ed25519Signer()
-    h = "294c105b11ab5cdc319a3ca87e8be53ee25e1d712f8a34ca80aa3d0c8ff1fd9a"
+    h = "8a78c22a28dc8e17785fdd5365ad0f3d29893769a1f926ef1df36c804041eec1"
     signature = signer.sign(h)
 
-    # C5-REAL: firma auténtica, no mock. 64 bytes Ed25519 en hex.
+    # Causal-Determinist: firma auténtica, no mock. 64 bytes Ed25519 en hex.
     assert signature.startswith("ed25519:")
     assert "mock" not in signature
     assert len(signature.removeprefix("ed25519:")) == 128

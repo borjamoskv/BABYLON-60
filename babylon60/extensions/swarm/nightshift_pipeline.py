@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """NightShift Pipeline (Autonomous Crystal Generation).
 
 Wires target discovery (KnowledgeRadar) with the AUTODIDACT-Ω crystallization

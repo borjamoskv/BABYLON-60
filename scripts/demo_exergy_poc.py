@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-[C5-REAL] Exergy Optimizer Agent Proof of Concept.
+[Causal-Determinist] Exergy Optimizer Agent Proof of Concept.
 Simulates high-entropy vs. high-exergy code changes and evaluates them using the GELABP framework.
 """
 import sys
@@ -45,7 +45,7 @@ def print_banner(title: str):
     print("=" * 60)
 
 def run_poc():
-    print_banner("C5-REAL Exergy Agent Proof of Concept")
+    print_banner("Causal-Determinist Exergy Agent Proof of Concept")
     
     # Test Scenario 1: Bad code (leak + broad exception + weak pattern)
     print_banner("Scenario 1: Code Mutation containing High Entropy")

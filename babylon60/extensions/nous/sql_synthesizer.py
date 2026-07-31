@@ -1,7 +1,7 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """NOUS SQL Synthesizer - Transforms AST into executable MigrationOperations
 
-Reality Level: C5-REAL
+Reality Level: Causal-Determinist
 """
 
 from .models import MigrationOperation, NousAST

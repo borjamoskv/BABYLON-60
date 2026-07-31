@@ -4,7 +4,7 @@ use std::env;
 use std::fs;
 
 // =====================================================================
-// BABYLON-60: Formal Infrastructure for Verifiable Science (v3.0.0-C5-REAL)
+// BABYLON-60: Formal Infrastructure for Verifiable Science (v3.0.0-Causal-Determinist)
 // =====================================================================
 
 #[derive(Clone, Debug, PartialEq)]
@@ -401,7 +401,7 @@ fn main() {
         queue.push_back(co);
     }
 
-    println!("[MOSKV APEX] C5-REAL Execution Completed.");
+    println!("[MOSKV APEX] Causal-Determinist Execution Completed.");
     println!("[Proof] Proof obligations generated.");
     export_artifact_bundle(&ledger);
 }

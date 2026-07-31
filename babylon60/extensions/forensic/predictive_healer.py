@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Predictive Healer - Proactive Failure Prevention for Level 5+6.
 
 Analyzes telemetry trends to predict failures BEFORE they happen
@@ -10,7 +10,7 @@ Detection methods:
     3. Seasonal pattern matching (recurring failures at intervals?)
     4. Cortisol momentum (endocrine stress accumulating?)
 
-Reality Level: C5-REAL
+Reality Level: Causal-Determinist
 """
 
 from __future__ import annotations

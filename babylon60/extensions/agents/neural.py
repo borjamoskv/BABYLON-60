@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Neural-Bandwidth Sync (Zero-Latency Intent Ingestion).
 

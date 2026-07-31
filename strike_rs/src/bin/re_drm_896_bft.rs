@@ -1,7 +1,7 @@
-// C5-REAL: 896 RE_DRM PRIMITIVES RUST BFT CONSENSUS ENGINE
+// Causal-Determinist: 896 RE_DRM PRIMITIVES RUST BFT CONSENSUS ENGINE
 // =================================================================================
-// SYS_ID: MOSKV-1 APEX ULTRATHINK P0 (Trilingual C5-REAL Iteration)
-// REALITY_LEVEL: C5-REAL (Rust Taint Verification / BLAKE3 Poset / WAL Persistence)
+// SYS_ID: MOSKV-1 APEX ULTRATHINK P0 (Trilingual Causal-Determinist Iteration)
+// REALITY_LEVEL: Causal-Determinist (Rust Taint Verification / BLAKE3 Poset / WAL Persistence)
 //
 // Transducción y verificación empírica nativa en Rust del arsenal de 896 Primitivas
 // de Ingeniería Inversa, Descompilación y Evasión de DRM.
@@ -110,9 +110,9 @@ fn verify_primitive_p2p(abs_idx: usize, domain_idx: usize, vector_idx: usize, in
     let pid_g = primitive_id.clone();
     let handle_g = thread::spawn(move || node_gamma.execute_re_drm_primitive(&pid_g, domain_name, vector_name, abs_idx).1);
 
-    let hash_a = handle_a.join().expect("[C5-REAL] FATAL: Alpha thread panicked in RE/DRM execution");
-    let hash_b = handle_b.join().expect("[C5-REAL] FATAL: Beta thread panicked in RE/DRM execution");
-    let hash_g = handle_g.join().expect("[C5-REAL] FATAL: Gamma thread panicked in RE/DRM execution");
+    let hash_a = handle_a.join().expect("[Causal-Determinist] FATAL: Alpha thread panicked in RE/DRM execution");
+    let hash_b = handle_b.join().expect("[Causal-Determinist] FATAL: Beta thread panicked in RE/DRM execution");
+    let hash_g = handle_g.join().expect("[Causal-Determinist] FATAL: Gamma thread panicked in RE/DRM execution");
 
     let verdict: String;
     let quorum: String;
@@ -128,7 +128,7 @@ fn verify_primitive_p2p(abs_idx: usize, domain_idx: usize, vector_idx: usize, in
         quorum = "0/3".to_string();
     }
 
-    let timestamp_sec = SystemTime::now().duration_since(UNIX_EPOCH).expect("[C5-REAL] FATAL: Time went backwards").as_secs_f64();
+    let timestamp_sec = SystemTime::now().duration_since(UNIX_EPOCH).expect("[Causal-Determinist] FATAL: Time went backwards").as_secs_f64();
     
     // Construct local CORTEX-TAINT using BLAKE3 Hash-chain representation
     let raw_taint = format!(
@@ -180,12 +180,12 @@ fn init_db(db_path: &Path) -> Result<Connection, rusqlite::Error> {
 }
 
 fn main() {
-    println!("[C5-REAL] Initiating RE/DRM P2P BFT consensus check...");
+    println!("[Causal-Determinist] Initiating RE/DRM P2P BFT consensus check...");
     let start_time = SystemTime::now();
 
     // Resolve db path to the dedicated ledger
     let db_path = Path::new("cortex/agents/ontology/re_drm_bft_ledger.db");
-    let mut conn = init_db(db_path).expect("[C5-REAL] FATAL: Error opening RE/DRM WAL SQLite Ledger");
+    let mut conn = init_db(db_path).expect("[Causal-Determinist] FATAL: Error opening RE/DRM WAL SQLite Ledger");
 
     let results = Arc::new(Mutex::new(Vec::with_capacity(896)));
     let mut handles = Vec::with_capacity(20);
@@ -229,19 +229,19 @@ fn main() {
             }
             
             // Verify topological correctness (acyclic check)
-            assert!(taint_engine.verify_kahn_invariant().is_ok(), "[C5-REAL] FATAL: Taint Poset cycles detected inside RE/DRM execution flow");
+            assert!(taint_engine.verify_kahn_invariant().is_ok(), "[Causal-Determinist] FATAL: Taint Poset cycles detected inside RE/DRM execution flow");
             
-            let mut guard = results_clone.lock().expect("[C5-REAL] FATAL: Mutex poisoned in RE/DRM domain thread");
+            let mut guard = results_clone.lock().expect("[Causal-Determinist] FATAL: Mutex poisoned in RE/DRM domain thread");
             guard.extend(domain_results);
         });
         handles.push(handle);
     }
 
     for handle in handles {
-        handle.join().expect("[C5-REAL] FATAL: RE/DRM Domain thread panicked");
+        handle.join().expect("[Causal-Determinist] FATAL: RE/DRM Domain thread panicked");
     }
 
-    let mut results_vec = Arc::try_unwrap(results).expect("[C5-REAL] FATAL: Arc still has multiple owners").into_inner().expect("[C5-REAL] FATAL: Mutex poisoned in RE/DRM finalization");
+    let mut results_vec = Arc::try_unwrap(results).expect("[Causal-Determinist] FATAL: Arc still has multiple owners").into_inner().expect("[Causal-Determinist] FATAL: Mutex poisoned in RE/DRM finalization");
     results_vec.sort_by(|a, b| a.primitive_id.cmp(&b.primitive_id));
 
     let mut total_verified = 0;
@@ -249,14 +249,14 @@ fn main() {
     let mut quorum_2of3 = 0;
 
     {
-        let tx = conn.transaction().expect("[C5-REAL] FATAL: Error beginning WAL Transaction");
+        let tx = conn.transaction().expect("[Causal-Determinist] FATAL: Error beginning WAL Transaction");
         {
             let mut stmt = tx.prepare(
                 "INSERT OR REPLACE INTO re_drm_p2p_ledger (
                     primitive_id, domain_id, vector_id, peer_alpha_hash, peer_beta_hash,
                     peer_gamma_hash, consensus_verdict, quorum_match, cortex_taint, timestamp_unix
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-            ).expect("[C5-REAL] FATAL: Error preparing SQL Statement");
+            ).expect("[Causal-Determinist] FATAL: Error preparing SQL Statement");
 
             for res in &results_vec {
                 if res.quorum_match == "3/3" || res.quorum_match == "2/3" {
@@ -270,14 +270,14 @@ fn main() {
                 stmt.execute(rusqlite::params![
                     res.primitive_id, res.domain_id, res.vector_id, res.peer_alpha_hash, res.peer_beta_hash,
                     res.peer_gamma_hash, res.consensus_verd, res.quorum_match, res.cortex_taint, res.timestamp_unix
-                ]).expect("[C5-REAL] FATAL: Error during SQL WAL insert");
+                ]).expect("[Causal-Determinist] FATAL: Error during SQL WAL insert");
             }
         }
-        tx.commit().expect("[C5-REAL] FATAL: Error committing WAL transaction");
+        tx.commit().expect("[Causal-Determinist] FATAL: Error committing WAL transaction");
     }
 
-    let elapsed = start_time.elapsed().expect("[C5-REAL] FATAL: Start time exceeded").as_micros() as f64 / 1000.0;
-    println!("[C5-REAL] RE/DRM Empirical verification completed: {}/896 primitives in {:.2} ms.", total_verified, elapsed);
+    let elapsed = start_time.elapsed().expect("[Causal-Determinist] FATAL: Start time exceeded").as_micros() as f64 / 1000.0;
+    println!("[Causal-Determinist] RE/DRM Empirical verification completed: {}/896 primitives in {:.2} ms.", total_verified, elapsed);
     println!("          Quorum 3/3 (Unanimous): {} | Quorum 2/3 (BFT Tolerant): {}", quorum_3of3, quorum_2of3);
 
     if total_verified == 896 {

@@ -1,4 +1,4 @@
-# BABYLON-60: Formal Infrastructure for Verifiable Science (v3.0.0-C5-REAL)
+# BABYLON-60: Formal Infrastructure for Verifiable Science (v3.0.0-Causal-Determinist)
 
 > [!IMPORTANT]
 > **Evolución Arquitectónica (Score: 910/1000):** BABYLON-60 trasciende al dominio de Scheduler de Enjambre (Swarm Clock). Se elimina la ambigüedad simulada. Se establece una semántica estricta de tiempo nativo, suspensión asíncrona de corrutinas (Stackless), y contratos de eventos idempotentes. 
@@ -6,7 +6,7 @@
 ## 1. El "Killer Feature": Dominio Temporal Nativo y Unidades
 El compilador ya no adivina el tiempo. La unidad temporal debe declararse explícitamente, anclando el valor base-60 a una magnitud del mundo físico o del ciclo de CPU.
 
-- **Unidades CORTEX:** `UNIT.HOUR`, `UNIT.MINUTE`, `UNIT.SECOND`, `UNIT.TICK` (Resolución Planck de CORTEX: 1ms).
+- **Unidades Ledger Asíncrono:** `UNIT.HOUR`, `UNIT.MINUTE`, `UNIT.SECOND`, `UNIT.TICK` (Resolución Planck de Ledger Asíncrono: 1ms).
 - Sintaxis: `NIG R0 [ YY ] UNIT.HOUR`
 
 ## 2. Modelo de Fracciones Exactas (F60)
@@ -19,7 +19,7 @@ Se erradica el concepto de `thread::sleep` bloqueante lineal.
 
 | Opcode | Semántica Operacional |
 | :--- | :--- |
-| `AFTER R L` | Congela el Program Counter (PC) actual. Extrae un *Snapshot* de registros y lo mueve al *Event Heap*. Registra un `Timer` en el Scheduler OS de CORTEX. El hilo nativo se libera (Yield). Al vencer el Timer, restaura el Snapshot y encola la reanudación en el Label `L`. |
+| `AFTER R L` | Congela el Program Counter (PC) actual. Extrae un *Snapshot* de registros y lo mueve al *Event Heap*. Registra un `Timer` en el Scheduler OS de Ledger Asíncrono. El hilo nativo se libera (Yield). Al vencer el Timer, restaura el Snapshot y encola la reanudación en el Label `L`. |
 | `FORK L` | Bifurcación Asíncrona. Clona el frame actual (Registros y PC) y lo despacha como una nueva corrutina independiente arrancando en el Label `L`. Permite N-Timers paralelos. |
 | `EXECUTE S`| Evento Asíncrono Fire-and-Forget (Idempotente). `S` es un identificador (Symbol) que se añade a la cola del Ledger principal. |
 | `AWAIT S L`| (Nuevo) Emite el evento `S` y suspende la corrutina actual hasta que el Ledger devuelva un `ACK` de completitud. Reanuda en `L`. |

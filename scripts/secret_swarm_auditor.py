@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# C5-REAL: Swarm Thread Dispatcher for TOP SECRET Auditing (ULTRATHINK P0 - ITERATION 3)
+# Causal-Determinist: Swarm Thread Dispatcher for TOP SECRET Auditing (ULTRATHINK P0 - ITERATION 3)
 # Vector: BFT_STATE_LOOP, SARIF Integration, Delta Scanning, Zero-Anergy Whitelisting
 import os
 import re
@@ -10,7 +10,7 @@ import argparse
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from typing import List, Dict, Any
 
-# Exclusión de Anergía (Directorios ruidosos o binarios)
+# Exclusión de Ineficiencia (Directorios ruidosos o binarios)
 EXCLUDE_DIRS = {'.git', '.venv', '__pycache__', 'node_modules', 'dist', 'build', '.cortex', '.babylon60', '.mypy_cache', '.pytest_cache', '.ruff_cache', 'c5_remotion_video', 'scratch', 'anvil_yung', 'BABYLON-60-fixes', 'target', 'claude_code_local_logs'}
 EXCLUDE_EXTS = {'.png', '.jpg', '.jpeg', '.gif', '.pdf', '.db', '.sqlite', '.sqlite3', '.npz', '.pyc', '.so', '.dylib', '.zip', '.tar', '.gz', '.db-shm', '.db-wal', '.lock', '.ipynb', '.patch', '.json', '.jsonl', '.rlib', '.rmeta'}
 
@@ -26,7 +26,7 @@ PATTERNS = {
     'GENERIC_SECRET': r'(?i)(password|secret|api_key|access_token)[\s:=]+[\'"]([^\'"]{8,})[\'"]'
 }
 
-# Whitelist de Anergía para Cadenas de Alta Entropía
+# Whitelist de Ineficiencia para Cadenas de Alta Entropía
 WHITELIST_ENTROPY = [
     r'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwx',
     r'0123456789abcdefghijklmnopqrstuvwxyz',
@@ -37,7 +37,7 @@ WHITELIST_ENTROPY = [
 ]
 
 # Valores literales conocidos como NO-secretos (ejemplos oficiales de documentación
-# o dummies de test auto-descritos). C5-REAL: cada entrada justificada inline.
+# o dummies de test auto-descritos). Causal-Determinist: cada entrada justificada inline.
 WHITELIST_VALUES = {
     'AKIAIOSFODNN7EXAMPLE',      # Clave de ejemplo oficial de la documentación de AWS (no es real)
     'dummy_key_for_stress',      # Dummy auto-descrito: stress test (extensions/llm/fable_stress_test.py)
@@ -175,7 +175,7 @@ def export_sarif(findings: List[Dict[str, Any]], root: str, output_path: str):
         json.dump(sarif, out_file, indent=2)
 
 def main():
-    parser = argparse.ArgumentParser(description="C5-REAL Swarm Secret Auditor")
+    parser = argparse.ArgumentParser(description="Causal-Determinist Swarm Secret Auditor")
     parser.add_argument("--files", nargs='*', help="Delta mode: specific files to scan")
     parser.add_argument("--sarif", action="store_true", help="Generate SARIF report")
     args = parser.parse_args()
@@ -183,7 +183,7 @@ def main():
     root = os.getcwd()
     files = get_target_files(root, explicit_files=args.files)
     
-    print(f"[*] C5-REAL Swarm (ULTRATHINK P0 - IT3). Escaneando {len(files)} deltas/archivos...")
+    print(f"[*] Causal-Determinist Swarm (ULTRATHINK P0 - IT3). Escaneando {len(files)} deltas/archivos...")
     
     all_findings = []
     with ProcessPoolExecutor() as executor:
@@ -199,7 +199,7 @@ def main():
         for f in all_findings:
             rel_path = os.path.relpath(f['file'], root)
             if in_ci:
-                print(f"::error file={rel_path},line={f['line']}::[C5-REAL] Secret Detected: {f['type']} ({f['hash']})")
+                print(f"::error file={rel_path},line={f['line']}::[Causal-Determinist] Secret Detected: {f['type']} ({f['hash']})")
     
     # SARIF Output
     if args.sarif:
@@ -208,7 +208,7 @@ def main():
 
     # BFT State
     if all_findings:
-        print("[!] ANERGÍA DETECTADA. Fricción estructural encontrada.")
+        print("[!] Ineficiencia DETECTADA. Fricción estructural encontrada.")
         exit(1)
     else:
         print("[*] ESTADO BFT: LIMPIO.")

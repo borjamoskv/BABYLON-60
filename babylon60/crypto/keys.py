@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Substrate for CORTEX Agent Cryptographic Identity & Enterprise Key Management.
 

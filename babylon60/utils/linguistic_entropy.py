@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized | borjamoskv
+# [Causal-Determinist] Exergy-Maximized | borjamoskv
 """
 Linguistic Entropy Detector (Ω₁₇) — PLAYGROUND EDITION
 ============================================================

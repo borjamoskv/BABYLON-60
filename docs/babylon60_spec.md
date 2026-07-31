@@ -1,6 +1,6 @@
-# BABYLON-60 Formal Specification (v2.5.1-C5-REAL)
+# BABYLON-60 Formal Specification (v2.5.1-Causal-Determinist)
 
-> **C5-REAL Axiom:** Language does not communicate; it compiles. This formal specification defines the operational semantics, the abstract machine, the invariants, and the failure model of BABYLON-60, allowing a proof assistant (Lean 4 / Coq) to reason about the exported artifacts without ambiguity.
+> **Causal-Determinist Axiom:** Language does not communicate; it compiles. This formal specification defines the operational semantics, the abstract machine, the invariants, and the failure model of BABYLON-60, allowing a proof assistant (Lean 4 / Coq) to reason about the exported artifacts without ambiguity.
 
 ---
 

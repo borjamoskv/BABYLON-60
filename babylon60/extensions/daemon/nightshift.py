@@ -13,7 +13,7 @@ logger = logging.getLogger("NightShift")
 
 class NightShiftDaemon:
     """
-    [C5-REAL] NightShift Thermodynamic Expulsion Daemon (Suntsitu).
+    [Causal-Determinist] NightShift Thermodynamic Expulsion Daemon (Suntsitu).
     Sweeps episodic memory (transcripts) and compresses it into dense Axioms.
     """
 
@@ -43,7 +43,7 @@ class NightShiftDaemon:
                     elif step.get("type") == "PLANNER_RESPONSE":
                         # Extract tools used or hashes
                         content = step.get("content", "")
-                        if "Git Sentinel Hash:" in content or "C5-REAL" in content:
+                        if "Git Sentinel Hash:" in content or "Causal-Determinist" in content:
                             raw_events.append(f"[KERNEL] {content[:300]}")
                 except (ValueError, TypeError, OSError, KeyError):
                     pass
@@ -84,4 +84,4 @@ if __name__ == "__main__":
 
     daemon = NightShiftDaemon(args.transcript)
     axiom_path = daemon.execute_purge()
-    logging.getLogger(__name__).info(f"\\n[C5-REAL] NightShift successful. Structural Invariant: {axiom_path}")
+    logging.getLogger(__name__).info(f"\\n[Causal-Determinist] NightShift successful. Structural Invariant: {axiom_path}")

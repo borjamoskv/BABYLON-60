@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 # Proof of Concept: Claude Fable 5 Agentic Orchestration
 import asyncio
 import logging

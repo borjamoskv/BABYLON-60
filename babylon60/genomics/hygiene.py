@@ -1,5 +1,5 @@
 """
-C5-REAL Coordinate Hygiene and Sequence Integrity Validator.
+Causal-Determinist Coordinate Hygiene and Sequence Integrity Validator.
 Enforces FASTA_SMILES_Parser guidelines, BED (0-based half-open) vs VCF (1-based closed) exact conversions,
 and cryptographic SHA3-256 / BLAKE2b hashing (Rule Ω24) without weak crypto.
 """
@@ -64,7 +64,7 @@ class GenomeCoordinateHygiene:
 
 class FASTASequenceValidator:
     """
-    Validates FASTA nucleotide sequences and calculates cryptographic SHA3-256 signatures for exact C5-REAL provenance.
+    Validates FASTA nucleotide sequences and calculates cryptographic SHA3-256 signatures for exact Causal-Determinist provenance.
     """
 
     IUPAC_NUCLEOTIDES: set[str] = set("ACGTNURYKMSWBDHV")

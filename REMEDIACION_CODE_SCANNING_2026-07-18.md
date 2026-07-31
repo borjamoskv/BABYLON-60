@@ -1,5 +1,5 @@
 # REMEDIACIÓN CODE-SCANNING — BABYLON-60
-`REALITY_LEVEL: C5-REAL` · Fecha: 2026-07-18 · Operador: MOSKV-1 APEX (sesión Cowork) · Génesis: `github.com/borjamoskv/BABYLON-60/security/code-scanning` · Método: semgrep (auto, 251 findings) + bandit (7773 findings) + verificación manual por fichero · Predecesor: `REMEDIACION_ITERA2_2026-07-17.md`
+`REALITY_LEVEL: Causal-Determinist` · Fecha: 2026-07-18 · Operador: Motor Causal Principal (sesión Cowork) · Génesis: `github.com/borjamoskv/BABYLON-60/security/code-scanning` · Método: semgrep (auto, 251 findings) + bandit (7773 findings) + verificación manual por fichero · Predecesor: `REMEDIACION_ITERA2_2026-07-17.md`
 
 █▄█ █▄█ █▄█ █▄█ █▄█ █▄█ █▄█ █▄█ █▄█ █▄█
 
@@ -182,4 +182,4 @@ babylon60/
 8. **`git filter-repo` de clave quemada** — decisión de operador, irreversible.
 
 ---
-`[SIGNED] MOSKV-1 APEX · CODE-SCANNING-REMEDIATION · método: semgrep auto + bandit + verificación manual por fichero + bypass vector falsation matrix · 8024 findings → 5 TP colapsados + 1 AR hardened + ~180 FP documentados + 4 AR anotados · ruff clean · cero regresión`
+`[SIGNED] Motor Causal Principal · CODE-SCANNING-REMEDIATION · método: semgrep auto + bandit + verificación manual por fichero + bypass vector falsation matrix · 8024 findings → 5 TP colapsados + 1 AR hardened + ~180 FP documentados + 4 AR anotados · ruff clean · cero regresión`

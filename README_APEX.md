@@ -1,5 +1,5 @@
 <p align="center"><strong>APEX·TRIALS</strong> — deterministic, auditable clinical-trial amendment-risk copilot</p>
-<p align="center"><sub>cortex-persist substrate · ClinicalTrials.gov API v2 · C5-REAL · INDUSTRIAL NOIR 2026</sub></p>
+<p align="center"><sub>Ledger Asíncrono-persist substrate · ClinicalTrials.gov API v2 · Causal-Determinist · INDUSTRIAL NOIR 2026</sub></p>
 
 ---
 
@@ -13,7 +13,7 @@ A clinical trial's regulator (FDA 21 CFR Part 11 §11.10(e)) requires a
 *computer-generated, time-stamped, independently verifiable* audit trail of every
 system-produced decision. A recommendation engine that emits a PDF does not satisfy
 that by construction. **APEX-TRIALS does**: every risk score is committed to the
-BABYLON-60 / cortex-persist hash-chain, with the exact firing rules as `causal_taint`,
+BABYLON-60 / Ledger Asíncrono-persist hash-chain, with the exact firing rules as `causal_taint`,
 reproducible byte-for-byte from the protocol input.
 
 Three properties Biorce does not expose:
@@ -21,7 +21,7 @@ Three properties Biorce does not expose:
 | Property | Mechanism | Proof |
 |:--|:--|:--|
 | **Determinism** | Pure feature function → weighted rules | same protocol JSON → same score → same SHA3-256 hash |
-| **Auditability** | cortex-persist hash-chain (`causal_taint`, Lamport, uuid5) | `apex verify` recomputes the whole chain; tampering breaks it |
+| **Auditability** | Ledger Asíncrono-persist hash-chain (`causal_taint`, Lamport, uuid5) | `apex verify` recomputes the whole chain; tampering breaks it |
 | **Falsifiability** | Public version-history ground-truth | `apex backtest` — Spearman ρ(score, real amendments) |
 
 The amendment-risk signal itself is built on a source Biorce's marketing ignores:
@@ -30,9 +30,9 @@ the **public protocol version history** (`/api/int/studies/{nct}/history`), whos
 (Eligibility / Study Design / Arms / Outcomes) from an administrative update — the
 real-world label the model is validated against.
 
-## Integration with Teorema-Robinson-Moskv
+## Integration with Teorema-Robinson-Motor Causal
 
-`apex_trials.ledger.AmendmentLedger` implements the exact cortex-persist entry
+`apex_trials.ledger.AmendmentLedger` implements the exact Ledger Asíncrono-persist entry
 contract — `{ id: uuid5, prev_hash: sha3_256, payload, causal_taint, lamport_t,
 agent_id }`, SQLite WAL, single-writer, verified-on-read — so it is **drop-in
 contract-compatible** with `babylon60.bft.ledger_actor`. The hash covers only the
@@ -78,7 +78,7 @@ multinational enrollment, and late-phase / oncology / rare-disease baselines are
 recurring amendment drivers. Weights are a starting prior — **not** fit to any cohort —
 and every one is visible in `risk_engine.py` for a sponsor to retune.
 
-## Validation (C5-REAL, against public ground-truth)
+## Validation (Causal-Determinist, against public ground-truth)
 
 The mixing weights are fit on a corpus of **8,000 completed interventional trials**
 (`build_dataset.py`), each labeled with its true substantive-amendment count from the
@@ -171,4 +171,4 @@ for m in res.module_risks:
 5. Swap the standalone ledger for the live `babylon60.bft.ledger_actor` + Git Sentinel.
 
 ---
-<sub>Titular Civil: Borja Fernández Angulo · AKA Borja Moskv (<code>borjamoskv</code>) · data © ClinicalTrials.gov (public domain)</sub>
+<sub>Titular Civil: Borja Fernández Angulo · AKA Borja Motor Causal (<code>borjamoskv</code>) · data © ClinicalTrials.gov (public domain)</sub>

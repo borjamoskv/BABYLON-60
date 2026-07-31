@@ -1,5 +1,5 @@
 """
-Conformidad C5-REAL — dientes de la AUDITORIA_CENTURIA.
+Conformidad Causal-Determinist — dientes de la AUDITORIA_CENTURIA.
 Cada test codifica una ley INV_C5_* de ETHOS v9.3. Se pone ROJO si el pecado
 reaparece en el árbol; verde sólo cuando el hallazgo está remediado.
 

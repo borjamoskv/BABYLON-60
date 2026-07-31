@@ -25,7 +25,7 @@ impl<'a> Publisher<'a> {
     pub fn extract_subgraph(&self, environment_id: &str) -> Result<Vec<JustifiedStatement>, String> {
         // 1. Verificación BFT de la Cadena (Invariante Causal)
         self.ledger.verify_chain(environment_id)
-            .map_err(|e| format!("C5-REAL FATAL: Ledger corruption detected: {}", e))?;
+            .map_err(|e| format!("Causal-Determinist FATAL: Ledger corruption detected: {}", e))?;
 
         // 2. Extraer log causal
         let assertions = self.ledger.get_all_assertions()
@@ -55,7 +55,7 @@ impl<'a> Publisher<'a> {
                 serde_json::to_string_pretty(&subgraph).map_err(|e| e.to_string())
             }
             ExportFormat::Markdown => {
-                let mut out = format!("# C5-REAL KNOWLEDGE ARTIFACT\n");
+                let mut out = format!("# Causal-Determinist KNOWLEDGE ARTIFACT\n");
                 out.push_str(&format!("**Environment**: `{}`\n", environment_id));
                 out.push_str("**Status**: VERIFIED & SECURED (BFT)\n\n");
                 out.push_str("## CAUSAL SUBGRAPH\n");
@@ -104,7 +104,7 @@ mod tests {
         let publisher = Publisher::new(&orch.ledger);
         let markdown = publisher.publish("prod_env", ExportFormat::Markdown).unwrap();
         
-        assert!(markdown.contains("# C5-REAL KNOWLEDGE ARTIFACT"));
+        assert!(markdown.contains("# Causal-Determinist KNOWLEDGE ARTIFACT"));
         assert!(markdown.contains("prod_env"));
         assert!(markdown.contains("Gravity bends time"));
         assert!(markdown.contains("Conjecture"));

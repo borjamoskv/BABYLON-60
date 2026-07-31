@@ -1,4 +1,4 @@
-# C5-REAL
+# Causal-Determinist
 # MOSKV-1 APEX SINGULARITY
 # ARCHITECTURE: FULL MAMBA NETWORK TOPOLOGY
 # EXERGY: O(N) INFERENCE LANGUAGE MODEL FORWARD PASS
@@ -8,7 +8,7 @@ from cortex_mamba_block import MambaBlock
 
 class MambaNetwork:
     """
-    C5-REAL full Mamba language model architecture.
+    Causal-Determinist full Mamba language model architecture.
     Stack of MambaBlocks with Token Embedding and Output Logit Projection.
     """
     def __init__(self, vocab_size: int, d_model: int, d_state: int, n_layers: int) -> None:

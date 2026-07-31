@@ -1,6 +1,6 @@
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    println!("[C5-REAL POC] Inicializando Motor BFT...");
+    println!("[Causal-Determinist POC] Inicializando Motor BFT...");
     
     let (_tx, rx) = tokio::sync::broadcast::channel(100);
     // Iniciar el puente gRPC-Web en el puerto 50051

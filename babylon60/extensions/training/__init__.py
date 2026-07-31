@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 # Author: borjamoskv
 """
 CORTEX Training Extension — MOSKV-1 Cognitive Kernel Pipeline.

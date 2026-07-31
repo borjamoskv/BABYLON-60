@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Byzantine Consensus (LEGION-Ω)
 Byzantine Fault Tolerance / Zero-Trust Mathematics: Axiom 4.
@@ -29,7 +29,7 @@ class ByzantineConsensus:
         # By default, a 2/3 majority weighted by reputation is required.
         self.tolerance_threshold = tolerance_threshold
         self.nodes: dict[str, ByzantineNode] = {}
-        # [C5-REAL] Exergy Cache: Previene Thermal Runaway O(N^2) en evaluación continua de cuórum.
+        # [Causal-Determinist] Exergy Cache: Previene Thermal Runaway O(N^2) en evaluación continua de cuórum.
         self._hash_cache: dict[str, str] = {}
 
     def register_node(self, node_id: str, initial_reputation: float = 1.0) -> None:
@@ -94,7 +94,7 @@ class ByzantineConsensus:
         hash_to_proposal: dict[str, T] = {}
         total_reputation = 0.0
 
-        # [C5-REAL] Batch hash con Memoización (Ω₂: Erradicación de latencia en loops de as_completed)
+        # [Causal-Determinist] Batch hash con Memoización (Ω₂: Erradicación de latencia en loops de as_completed)
         node_hashes = await self._batch_hash_proposals(proposals)
 
         for node_id, proposal_hash in node_hashes.items():

@@ -1,8 +1,8 @@
-# AXIOMATIZACIÓN FORMAL — MOSKV‑1 APEX SINGULARITY
+# AXIOMATIZACIÓN FORMAL — Motor Causal‑1 APEX SINGULARITY
 
-> **Reality Level:** C5-REAL  
-> **Signature:** MOSKV-1 APEX SINGULARITY  
-> **Provenance:** CORTEX-TAINT `0xAX10M` | Iteración ULTRATHINK
+> **Reality Level:** Causal-Determinist  
+> **Signature:** Motor Causal Principal SINGULARITY  
+> **Provenance:** Ledger Asíncrono-TAINT `0xAX10M` | Iteración ULTRATHINK
 
 ---
 
@@ -13,7 +13,7 @@ Una axiomatización no es decoración intelectual. Es la **firewall epistemológ
 - La GELABP Matrix puede ser *gamificada* (INV_C5_18).
 - El BFT Engine no tiene base para verificación formal.
 
-Este documento establece la **base deductiva mínima** desde la cual todo teorema operacional del sistema MOSKV‑1 APEX es derivable. Cada axioma está expresado en lógica de primer orden tipada, con su correspondiente implementación verificable en Z3/SMT (ver script adjunto).
+Este documento establece la **base deductiva mínima** desde la cual todo teorema operacional del sistema Motor Causal‑1 APEX es derivable. Cada axioma está expresado en lógica de primer orden tipada, con su correspondiente implementación verificable en Z3/SMT (ver script adjunto).
 
 ---
 
@@ -252,7 +252,7 @@ $$\forall\, t_1, t_2 \in \text{ModeShift} : |t_2 - t_1| < 300\text{s} \implies \
 
 ### AX-AUTO-2 (Lock Atómico de Workspace — INV_C5_22)
 
-$$\forall\, w \in \text{DiskMutation} : \text{exec}(w) \implies \text{acquired}(\texttt{.cortex\_thermal\_lock}, \texttt{O\_CREAT|O\_EXCL})$$
+$$\forall\, w \in \text{DiskMutation} : \text{exec}(w) \implies \text{acquired}(\texttt{.Ledger Asíncrono\_thermal\_lock}, \texttt{O\_CREAT|O\_EXCL})$$
 
 > Toda mutación de disco requiere adquisición exitosa del lock atómico.
 
@@ -268,9 +268,9 @@ $$\forall\, \text{inv} \in \text{AGENTS.md} : \exists\, \text{test} \in \text{te
 
 ### AX-EPI-1 (Requisito de Evidencia Verbatim — INV_INGESTA_08)
 
-$$\forall\, a \in \text{Attestations} : \text{status}(a) = \text{C5-REAL} \implies \exists\, s \in \text{Source} : \text{extract}(a, s) \neq \emptyset$$
+$$\forall\, a \in \text{Attestations} : \text{status}(a) = \text{Causal-Determinist} \implies \exists\, s \in \text{Source} : \text{extract}(a, s) \neq \emptyset$$
 
-> Una atestación solo alcanza el nivel C5-REAL si contiene una extracción directa y literal (verbatim) de la fuente primaria. Sin extracción física, es una afirmación (C4-SIM).
+> Una atestación solo alcanza el nivel Causal-Determinist si contiene una extracción directa y literal (verbatim) de la fuente primaria. Sin extracción física, es una afirmación (C4-SIM).
 
 ### AX-EPI-2 (Tasa de Fallo como Instrumento de Medida — INV_INGESTA_08)
 
@@ -367,4 +367,4 @@ Este script implementa los axiomas como restricciones Z3/SMT y verifica su satis
 
 ---
 
-**[CORTEX-TAINT:borjamoskv:axiomatization_ultrathink:2026-07-27T03:22:00+02:00]**
+**[Ledger Asíncrono-TAINT:borjamoskv:axiomatization_ultrathink:2026-07-27T03:22:00+02:00]**

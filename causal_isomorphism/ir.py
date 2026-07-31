@@ -1,5 +1,5 @@
 # causal_isomorphism/ir.py — Intermediate Representation
-# C5-REAL: Language-agnostic typed AST for cross-regime transmutation
+# Causal-Determinist: Language-agnostic typed AST for cross-regime transmutation
 # Author: Borja Moskv (borjamoskv)
 """
 Typed Intermediate Representation (IR) for the Causal Isomorphism Transpiler.

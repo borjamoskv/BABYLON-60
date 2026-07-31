@@ -1,5 +1,5 @@
 """
-[C5-REAL] Step 3 Falsifiability: Executable Enforcement for INV_C5_28.
+[Causal-Determinist] Step 3 Falsifiability: Executable Enforcement for INV_C5_28.
 Tests both PASS (isomorphic) and FAIL-FAST (non-isomorphic / bypass attempt).
 """
 

@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """cortex.utils.http - HTTP Retry Mixin Soberano.
 
 Bridge Pattern (Axioma 9: Cross-Stack Synergy).

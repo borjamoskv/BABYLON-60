@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Strategy Genome - Code-as-Data Foundation for L7 Autopoiesis.
 
 A StrategyGenome is a serializable dict that encodes:
@@ -15,7 +15,7 @@ This is Python's answer to Lisp's code-as-data:
 The genome is the unit of evolution. Everything the agent IS
 can be serialized, mutated, measured, and selected.
 
-Reality Level: C5-REAL
+Reality Level: Causal-Determinist
 """
 
 from __future__ import annotations

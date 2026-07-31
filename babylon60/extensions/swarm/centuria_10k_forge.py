@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 LEGION-10k (Centuria² Forge)
 Deploys 10,000 sovereign agents via Asyncio to demonstrate zero-Anergy scaling.

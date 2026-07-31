@@ -18,7 +18,7 @@ ISOMORFISMOS_PATH = os.path.expandvars(os.environ.get('CORTEX_ISOMORFISMOS_PATH'
 def bootstrap_cortex() -> None:
     print('[CORTEX] Iniciando bootstrap de persistencia de base de datos...')
     if not VAULT_KEY:
-        print('\x1b[1;31m[CORTEX APOPTOSIS]\x1b[0m CORTEX_VAULT_KEY is missing. C5-REAL Fail-Fast.', file=sys.stderr)
+        print('\x1b[1;31m[CORTEX APOPTOSIS]\x1b[0m CORTEX_VAULT_KEY is missing. Causal-Determinist Fail-Fast.', file=sys.stderr)
         sys.exit(1)
     master_ledger = os.path.join(_BASE, 'bft', 'master_ledger.db')
     if os.path.exists(master_ledger) or os.path.exists(DB_PATH):
@@ -26,7 +26,7 @@ def bootstrap_cortex() -> None:
         sys.exit(1)
     for path in [MATRIZ_PATH, ISOMORFISMOS_PATH]:
         if not os.path.exists(path):
-            print(f'\x1b[1;31m[CORTEX APOPTOSIS]\x1b[0m Essential Config Missing: {path}. C5-REAL Fail-Fast.', file=sys.stderr)
+            print(f'\x1b[1;31m[CORTEX APOPTOSIS]\x1b[0m Essential Config Missing: {path}. Causal-Determinist Fail-Fast.', file=sys.stderr)
             sys.exit(1)
     fernet = Fernet(VAULT_KEY)
     with open(MATRIZ_PATH, 'rb') as f:

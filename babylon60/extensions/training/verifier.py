@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 # Author: borjamoskv
 # License: Apache-2.0
 """

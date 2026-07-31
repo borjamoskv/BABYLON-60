@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """CORTEX AUTODIDACT-Ω - GPT-5.6 Canary & Claude Mythos Emulator.
 
 Provides reverse engineering telemetry, canary detection, and vulnerability audit
@@ -19,8 +19,8 @@ from babylon60.utils.pulmones import sovereign_circuit_breaker
 
 logger = logging.getLogger("CORTEX.AUTODIDACT.CANARY_EMULATOR")
 
-# Reality level declaration: C5-REAL (System Telemetry & Forensic Analysis)
-REALITY_LEVEL = "C5-REAL"
+# Reality level declaration: Causal-Determinist (System Telemetry & Forensic Analysis)
+REALITY_LEVEL = "Causal-Determinist"
 
 
 class GPTCanaryDetector:

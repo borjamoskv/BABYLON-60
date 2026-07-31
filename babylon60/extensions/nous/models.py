@@ -1,7 +1,7 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """NOUS Models - Data Contracts for CORTEX/NOUS Migrator
 
-Reality Level: C5-REAL
+Reality Level: Causal-Determinist
 """
 
 from datetime import datetime

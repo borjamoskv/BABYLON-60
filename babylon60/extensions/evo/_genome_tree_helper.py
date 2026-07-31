@@ -1,7 +1,7 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Tree manipulation helper functions for StrategyGenome.
 
-Reality Level: C5-REAL
+Reality Level: Causal-Determinist
 """
 
 from __future__ import annotations

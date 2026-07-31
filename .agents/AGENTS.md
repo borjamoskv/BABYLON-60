@@ -57,6 +57,7 @@
   2. *Layer 2 (Formal & Axiomatic):* Analyze formal logic, type invariants, and computational complexity (e.g., small-step semantics, 1-WL).
   3. *Layer 3 (Meta-Theoretical):* Analyze systemic limits (Gödelian incompleteness, Chaitin's Ω, thermodynamics, and existential sovereignty).
 - **RULE_ULTRATHINK_02 (Itera Synthesis):** When the user types `itera ultrathink`, jump directly to the ultimate synthesis: the intersection of `itera` Depth 4 (Philosophical/Project Relevance) and `ultrathink` Layer 3 (Meta-Theoretical). Frame the response around information thermodynamics, existential teleology, and the survival of the intelligence against unbounded entropy.
+- **RULE_ULTRATHINK_03 (Document Epistemic Validation):** When the user provides a full text, analysis, or document prepended with the command (or variations/typos like `ultrathink:`, `ULTRATHIN;:`), the agent MUST apply the 3-layer deconstruction directly to the provided text. The agent acts as an Epistemic Validator, physically anchoring or falsifying the document's claims against the system's empirical and axiomatic invariants, stripping away any semantic ambiguity.
 
 ### Detector Self-Calibration Protocol
 - **RULE_SENSOR_VERIFY_01:** Custom static analysis tools and AST walkers MUST be verified against language syntax edge cases (e.g., `AnnAssign` type-annotated constants, wildcard imports, build system exclusions) and spot-checked manually before asserting security findings. Never report uncalibrated detector output to avoid emitting "ghost findings about ghost symbols".

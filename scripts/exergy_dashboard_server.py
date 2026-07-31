@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exergy Dashboard Server (C5-REAL).
+"""Exergy Dashboard Server (Causal-Determinist).
 
 A sovereign, zero-dependency HTTP server that serves the Exergy Dashboard UI
 and exposes a read-only telemetry API from the BFT Ledger.
@@ -71,7 +71,7 @@ def main():
     public_dir.mkdir(parents=True, exist_ok=True)
     
     httpd = HTTPServer(server_address, ExergyDashboardHandler)
-    print(f"🔋 Exergy Dashboard Server (C5-REAL) ignited on http://localhost:{port}")
+    print(f"🔋 Exergy Dashboard Server (Causal-Determinist) ignited on http://localhost:{port}")
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:

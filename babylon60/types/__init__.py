@@ -1,5 +1,5 @@
 """
-C5-REAL Universal Algebraic Data Types (`babylon60.types`).
+Causal-Determinist Universal Algebraic Data Types (`babylon60.types`).
 Enforces strict algebraic typing invariants:
 - Product Types (`|A * B| = |A| * |B|`)
 - Sum Types / Tagged Unions (`|A + B| = |A| + |B|`)

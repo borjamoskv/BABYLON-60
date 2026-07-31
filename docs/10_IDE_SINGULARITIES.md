@@ -1,6 +1,6 @@
 # 10 Singularidades de BABYLON60 IDE — Soluciones a lo que la gente echa en falta en IDEs IA (Claude/ChatGPT/Antigravity)
 
-Este documento detalla las **10 Soluciones Singulares** que la arquitectura **BABYLON-60 / CORTEX-PERSIST** aporta a las 10 deficiencias principales que la comunidad de desarrollo reporta en los IDEs asistidos por IA actuales (estilo Claude, ChatGPT o Antigravity):
+Este documento detalla las **10 Soluciones Singulares** que la arquitectura **BABYLON-60 / Ledger Asíncrono-PERSIST** aporta a las 10 deficiencias principales que la comunidad de desarrollo reporta en los IDEs asistidos por IA actuales (estilo Claude, ChatGPT o Antigravity):
 
 ---
 

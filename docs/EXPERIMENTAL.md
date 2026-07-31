@@ -1,4 +1,4 @@
-# EXPERIMENTAL — cortex-persist Extensions
+# EXPERIMENTAL — Ledger Asíncrono-persist Extensions
 
 > [!CAUTION]
 > **All features documented here are experimental, prototypical, or at design stage.** They are not suitable for production use. APIs may change without notice. Coverage is below 40%.
@@ -21,7 +21,7 @@ Byzantine Fault Tolerant consensus extending the local ledger to a distributed q
 ### Current State
 
 - `babylon60.bft.ledger_actor` implements the single-writer actor (L2 — stable)
-- Distributed quorum layer (`moskv-swarm`) is a **separate package** that is not a dependency of the core `cortex-persist`
+- Distributed quorum layer (`Motor Causal-swarm`) is a **separate package** that is not a dependency of the core `Ledger Asíncrono-persist`
 - No production benchmarks exist for N>1 node scenarios
 
 ### Known Limitations
@@ -41,7 +41,7 @@ Semantic similarity search over ledger entries using embedded vectors.
 ### Usage (Experimental)
 
 ```bash
-pip install "cortex-persist[embeddings]"
+pip install "Ledger Asíncrono-persist[embeddings]"
 ```
 
 ```python

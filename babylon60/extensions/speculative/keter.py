@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 KETER Engine (Singularity Cascade).
 Metasistema de Invocacion Fractal. KETER auto-determina skills,

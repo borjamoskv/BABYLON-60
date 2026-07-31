@@ -12,7 +12,7 @@ logger = logging.getLogger("Cortex.SubstackCDP")
 
 class SubstackPublisherBot:
     """
-    [C5-REAL] Inyector de estado en Substack vía Playwright CDP.
+    [Causal-Determinist] Inyector de estado en Substack vía Playwright CDP.
     """
 
     def __init__(self, cdp_url="http://localhost:9222"):
@@ -111,7 +111,7 @@ class SubstackPublisherBot:
                     markdown_content,
                 )
 
-                logger.info("[C5-REAL] Ensayo inyectado en Substack.")
+                logger.info("[Causal-Determinist] Ensayo inyectado en Substack.")
 
                 # Guardar Borrador (Substack lo auto-guarda, pero forzamos por si acaso)
                 logger.info(
@@ -123,7 +123,7 @@ class SubstackPublisherBot:
 
         except Exception as e:  # noqa: BLE001
             logger.error("Fallo crítico en CDP Inyector: %s", e)
-            raise RuntimeError("C5-REAL Publisher Bot Failed") from e
+            raise RuntimeError("Causal-Determinist Publisher Bot Failed") from e
 
 
 if __name__ == "__main__":

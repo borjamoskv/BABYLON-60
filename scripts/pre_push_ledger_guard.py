@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Ledger-Aware Pre-Push Guard.
 
-Verifies C5-REAL invariants before git push:
+Verifies Causal-Determinist invariants before git push:
 1. ExergyScore >= 950.0 via babylon60.utils.hygiene.run_exergy_optimizer()
 2. Autopoietic invariant alignment via scripts/autodetect_invariants.py
 3. Monotonic Lamport ordering in Cortex ledger
@@ -54,14 +54,14 @@ def verify_symlink_depth() -> bool:
         return False
 
 def main() -> int:
-    print("🛡️ Igniting C5-REAL Pre-Push Ledger Guard...")
+    print("🛡️ Igniting Causal-Determinist Pre-Push Ledger Guard...")
     if not verify_exergy():
         return 1
     if not verify_invariants():
         return 1
     if not verify_symlink_depth():
         return 1
-    print("✅ All Pre-Push Invariants Verified (C5-REAL). Proceeding with push.")
+    print("✅ All Pre-Push Invariants Verified (Causal-Determinist). Proceeding with push.")
     return 0
 
 

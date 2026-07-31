@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-C5-REAL SOVEREIGN CONSOLIDATION PROTOCOL — BABYLON-60 MEMORY VAULT
+Causal-Determinist SOVEREIGN CONSOLIDATION PROTOCOL — BABYLON-60 MEMORY VAULT
 Orchestrates the crystallization of all 21 unconsolidated sessions from babylon_unconsolidated_report.md
-and local agent logs into the C5-REAL Memory Vault (`cortex_memory.db` & Master Ledger).
+and local agent logs into the Causal-Determinist Memory Vault (`cortex_memory.db` & Master Ledger).
 Enforces Rule Ω1 (WAL/busy_timeout) and Rule Ω11 (CORTEX-TAINT signature).
 """
 
@@ -21,7 +21,7 @@ UNCONSOLIDATED_SESSIONS = [
     ("114f02dc-e0e0-42cc-95f9-877713f80142", "2026-07-17T22:28:43Z", "Physics -> First Principles / Axiomatization Kernel Language"),
     ("3024dfb5-801b-4dae-a081-0a8e19b7dde1", "2026-07-17T22:38:07Z", "REGLA GLOBAL Y LOCAL: ejes de ataque maximizan gradiente reducción"),
     ("421a81bc-9912-401f-b112-881a20a11200", "2026-07-17T23:01:10Z", "ATMS fixpoint & Kleer 1986 nogoods trace replay"),
-    ("551f08ea-0012-491b-a912-781123901a01", "2026-07-17T23:15:20Z", "Tauri v2 IPC bridge verification & C5-REAL zero network check"),
+    ("551f08ea-0012-491b-a912-781123901a01", "2026-07-17T23:15:20Z", "Tauri v2 IPC bridge verification & Causal-Determinist zero network check"),
     ("661a91bb-1123-40a1-8b12-90112488a012", "2026-07-17T23:28:40Z", "MLX local training LoRA vRAM safeguards & batch size checks"),
     ("771a02cc-2234-41b2-9c13-01223599b123", "2026-07-17T23:45:10Z", "DeFi Bytecode Scraper quantitative exergy scanning"),
     ("881b13dd-3345-42c3-ad14-12334600c234", "2026-07-18T00:05:30Z", "Git Sentinel auto-commit without GPG sign fallback check"),
@@ -47,7 +47,7 @@ def compute_sha3(text: str) -> str:
 
 
 def consolidate_vault() -> None:
-    print("[*] C5-REAL: Bootstrapping and connecting to Memory Vault (`cortex_memory.db`)...")
+    print("[*] Causal-Determinist: Bootstrapping and connecting to Memory Vault (`cortex_memory.db`)...")
     conn = sqlite3.connect(DB_PATH, timeout=5.0)
     conn.execute("PRAGMA journal_mode = WAL;")
     conn.execute("PRAGMA busy_timeout = 5000;")
@@ -112,7 +112,7 @@ def consolidate_vault() -> None:
         cursor.execute("""
             INSERT OR REPLACE INTO L3_inference_cache (query_hash, active_mode, retrieved_nodes, applied_isomorphisms, trace_payload, hits)
             VALUES (?, ?, ?, ?, ?, ?)
-        """, (sha3_hash, "CONSOLIDATION_ULTRA", node_id, "C5-REAL-VAULT-SYNC", trace_json, 1))
+        """, (sha3_hash, "CONSOLIDATION_ULTRA", node_id, "Causal-Determinist-VAULT-SYNC", trace_json, 1))
 
         # Record consolidation
         cursor.execute("""
@@ -125,7 +125,7 @@ def consolidate_vault() -> None:
     conn.commit()
     conn.close()
 
-    print(f"[+] C5-REAL: Successfully consolidated {consolidated_count} sessions into Memory Vault.")
+    print(f"[+] Causal-Determinist: Successfully consolidated {consolidated_count} sessions into Memory Vault.")
     print(f"[+] Memory Vault DB at: {DB_PATH}")
 
 

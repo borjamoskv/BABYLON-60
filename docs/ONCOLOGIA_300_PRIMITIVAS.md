@@ -1,5 +1,5 @@
 # 300 Primitivas de Oncologia Molecular
-### Ontologia CORTEX / BABYLON-60 -- bloques fundamentales que la investigacion del cancer estudia y ataca
+### Ontologia Ledger Asíncrono / BABYLON-60 -- bloques fundamentales que la investigacion del cancer estudia y ataca
 
 *Generado deterministicamente | 300 primitivas | escala de confianza C5-established | fuente unica: `scripts/gen_oncology_primitives.py`*
 
@@ -7,7 +7,7 @@
 
 > *NOTICE.* NOTICE. This is a KNOWLEDGE ONTOLOGY of cancer molecular biology and its therapeutic targets. It is NOT a cure, NOT a treatment protocol and NOT medical advice. No single primitive nor the whole set 'cures cancer'. Cancer is 200+ distinct diseases; diagnosis and treatment are clinical and individualized. Consult qualified healthcare professionals.
 
-Autoria artistica/arquitectonica del sustrato (AKA): **Borja Moskv** (`borjamoskv`).
+Autoria artistica/arquitectonica del sustrato (AKA): **Borja Motor Causal** (`borjamoskv`).
 
 ---
 

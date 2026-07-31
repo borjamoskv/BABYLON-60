@@ -1,5 +1,5 @@
 """
-C5-REAL: Artist Cortex Engine
+Causal-Determinist: Artist Cortex Engine
 Orchestrates aesthetic embeddings and thermodynamic artifact metrics using sqlite-vec.
 """
 
@@ -31,7 +31,7 @@ class ArtistCortexEngine:
         self.conn.row_factory = sqlite3.Row
 
     def apply_migrations(self, sql_paths: list[str]):
-        """Executes the foundational C5-REAL migrations."""
+        """Executes the foundational Causal-Determinist migrations."""
         cursor = self.conn.cursor()
         for path in sql_paths:
             with open(path, encoding="utf-8") as f:

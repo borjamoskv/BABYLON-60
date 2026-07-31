@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """MOSKV-Aether - Planner Agent.
 
 Reads repo structure and emits a structured implementation plan.

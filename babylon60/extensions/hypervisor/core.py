@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """CORTEX Hypervisor - Core Orchestrator.
 
 The AgencyHypervisor is the singleton that mediates between the simple

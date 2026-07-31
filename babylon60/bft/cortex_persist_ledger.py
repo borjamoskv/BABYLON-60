@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 CORTEX PERSIST LEDGER — ULTRATHINK Cryptographic BFT Ledger
 ============================================================
@@ -376,7 +376,7 @@ class CortexPersistLedger:
 
     def get_state_attestation(self) -> Dict[str, Any]:
         """
-        Retorna un manifiesto de atestación del estado actual del ledger (C5-REAL).
+        Retorna un manifiesto de atestación del estado actual del ledger (Causal-Determinist).
         """
         with self._get_connection() as conn:
             cursor = conn.cursor()

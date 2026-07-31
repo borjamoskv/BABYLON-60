@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# tests/test_causal_isomorphism.py — C5-REAL Verification Suite
+# tests/test_causal_isomorphism.py — Causal-Determinist Verification Suite
 # Author: Borja Moskv (borjamoskv)
 """
 Verification suite for the Causal Isomorphism Transpiler.
@@ -577,7 +577,7 @@ def main() -> int:
     print(f"Results: {passed}/{total} passed, {failed} failed")
 
     if failed == 0:
-        print("✅ ALL TESTS PASSED — C5-REAL VERIFIED")
+        print("✅ ALL TESTS PASSED — Causal-Determinist VERIFIED")
     else:
         print("❌ FAILURES DETECTED")
 

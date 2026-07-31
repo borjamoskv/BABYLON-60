@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Sigstore Rekor Transparency Log Client.
 Provides external cryptographic anchoring (P1) for the Sovereign Ledger.

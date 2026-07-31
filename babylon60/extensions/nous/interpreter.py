@@ -1,5 +1,5 @@
 """
-[C5-REAL] NOUS Language Runtime v1.0
+[Causal-Determinist] NOUS Language Runtime v1.0
 ------------------------------------
 A programming language where the compiler is an AI, the syntax is natural language,
 and the runtime is the CORTEX-Persist deterministic Write-Path Saga.
@@ -103,7 +103,7 @@ class NousRuntime:
             # 4. Persistence / Execution
             logger.info("Executing with Taint: %s", taint)
             return {
-                "status": "C5-REAL_SUCCESS",
+                "status": "Causal-Determinist_SUCCESS",
                 "taint_signature": taint,
                 "ast": ast.to_dict(),
                 "side_effects": "Simulated deterministic state mutation.",

@@ -1,4 +1,4 @@
-# C5-REAL: TEST_ATMS_HARDENING
+# Causal-Determinist: TEST_ATMS_HARDENING
 # [CORTEX-TAINT:borjamoskv:test_atms_hardening:2026-07-18T05:00:00Z]
 
 import pytest

@@ -1,14 +1,14 @@
 ---
 title: Babylon-60 Technical Specification
-status: C5-REAL
-entity: MOSKV-1 APEX
+status: Causal-Determinist
+entity: Motor Causal Principal
 version: 2.0.0
 ---
 
-# BABYLON-60: CORE ARCHITECTURE (C5-REAL)
+# BABYLON-60: CORE ARCHITECTURE (Causal-Determinist)
 
 > **"ZERO ANERGY IS DEATH."**
-> Documentation crystallized under the C5-REAL regime. No decorative prose. Only structural, physical invariants and mathematical formalizations of the architecture.
+> Documentation crystallized under the Causal-Determinist regime. No decorative prose. Only structural, physical invariants and mathematical formalizations of the architecture.
 
 ---
 
@@ -96,7 +96,7 @@ $$\text{ConsensusState}(M) = \begin{cases}
 ### 4.1 Seal of the Demiurge
 Every artifact, commit, and database mutation carries the implicit cryptographic seal `borjamoskv`.
 
-### 4.2 Taint Propagation (`CORTEX-TAINT`)
+### 4.2 Taint Propagation (`Ledger Asíncrono-TAINT`)
 Every node or data derived from a generative language model is implicitly marked with the `TAINT_PROBABILISTIC` tag. No node with this tag can enter the *Minimal Trusted Kernel* without passing a deterministic proof ($\Sigma_1$-verification) in the `b60_kernel` engine.
 
 ---

@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 
 from __future__ import annotations
 
@@ -143,7 +143,7 @@ class LLMProvider(BaseProvider):
                 cfg["tier"] = "frontier"  # Elevate tier to satisfy ULTRA_THINK routing
                 cfg[
                     "intent_model_map"
-                ] = {}  # C5-REAL: Clear upstream model maps to prevent 404s in local inference
+                ] = {}  # Causal-Determinist: Clear upstream model maps to prevent 404s in local inference
 
         self._provider = cfg["provider"]
         self._base_url = cfg["base_url"]

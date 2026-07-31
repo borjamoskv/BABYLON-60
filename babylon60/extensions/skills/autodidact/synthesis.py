@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """CORTEX AUTODIDACT-Ω - Sovereign Synthesis Pipeline.
 
 Cristaliza radiación entrópica en Cristales Cognitivos usando el

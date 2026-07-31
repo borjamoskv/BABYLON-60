@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """MOSKV-Aether - CLI commands.
 
 Registered as `cortex aether` subcommand group.

@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """MOSKV-1 - Tesseract Core Manifold.
 
 The main orchestrator loop simulating 4D cognitive wave collapse.

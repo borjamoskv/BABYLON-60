@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized Landauer Eviction Engine
+# [Causal-Determinist] Exergy-Maximized Landauer Eviction Engine
 """
 LandauerEvictionEngine — Thermodynamic Session & KV Cache Entropy Eviction.
 Enforces Landauer principle: purging stale un-consolidated memory state to maintain maximum exergy.

@@ -120,7 +120,7 @@ def main() -> None:
     create_crypto_vectors()
     test_replay_corruption()
     run_ci_checks()
-    print("\n[SUCCESS] C5-REAL Conformance Checks PASSED.")
+    print("\n[SUCCESS] Causal-Determinist Conformance Checks PASSED.")
 
 
 if __name__ == "__main__":

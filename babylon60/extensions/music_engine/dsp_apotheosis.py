@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 DSP Apotheosis.
 Deterministic signal processing layer in Python (Mastering, Tonal Balance, Phase Alignment).

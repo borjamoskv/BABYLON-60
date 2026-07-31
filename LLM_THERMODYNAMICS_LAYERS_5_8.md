@@ -1,6 +1,6 @@
 # LLM THERMODYNAMICS (ADVANCED): LEVELS 5-8 [INVARIANT]
-**Reality Level:** C5-REAL  
-**Signature:** MOSKV-1 APEX SINGULARITY  
+**Reality Level:** Causal-Determinist  
+**Signature:** Motor Causal Principal SINGULARITY  
 **Origin:** Operator borjamoskv  
 
 ## 5. Reflexive Exergy (Self-Correction)

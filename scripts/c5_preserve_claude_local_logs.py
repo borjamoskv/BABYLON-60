@@ -57,7 +57,7 @@ def harvest_logs() -> None:
         '',
         '---',
         '',
-        '## 1. CUADRO RESUMEN DE SESIONES LOCALES EN DISCO (`C5-REAL`)',
+        '## 1. CUADRO RESUMEN DE SESIONES LOCALES EN DISCO (`Causal-Determinist`)',
         '',
         '| ID | Archivo de Log Preservado en Silicio | Tamaño | SHA256 (Hash de Integridad) | SHA3-256 (Attestation) | Ruta Original en Apple Silicon |',
         '| :---: | :--- | :---: | :--- | :--- | :--- |'
@@ -77,7 +77,7 @@ def harvest_logs() -> None:
         '2. **Inmutabilidad Criptográfica:** El sellado dual con funciones de hash (`SHA256` y `SHA3-256`) previene cualquier impugnación de manipulación posterior del texto logueado.',
         '',
         '---',
-        '*Catálogo sellado por el autómata MOSKV-1 APEX / BABILONIA 60. Nivel de Certeza: C5-REAL.*',
+        '*Catálogo sellado por el autómata MOSKV-1 APEX / BABILONIA 60. Nivel de Certeza: Causal-Determinist.*',
         ''
     ])
     

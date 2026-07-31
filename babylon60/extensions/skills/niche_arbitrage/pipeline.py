@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 from babylon60.extensions.scraper.engine import ScraperEngine
 from babylon60.extensions.scraper.models import ExtractionStrategy, ScrapeRequest, ScrapeResult
 

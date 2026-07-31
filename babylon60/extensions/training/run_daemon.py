@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 # Author: borjamoskv
 """
 from babylon60.extensions.training.moskv1_core import MOSKV1Core

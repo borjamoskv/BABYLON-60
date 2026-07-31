@@ -6,7 +6,7 @@ use tokio::sync::RwLock;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    println!("[C5-REAL] Initializing True BFT Engine & Telemetry Broadcast...");
+    println!("[Causal-Determinist] Initializing True BFT Engine & Telemetry Broadcast...");
 
     // Create the AI Telemetry channel (100 capacity)
     let (tx, rx) = tokio::sync::broadcast::channel(100);
@@ -23,7 +23,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             let mem = Arc::new(RwLock::new(KdaMemoryBuffer::new(500)));
             let params = ExergyParams { g: 12.0, l: 12.0, a: 1.0, b: 1.0, p: 1.0, e_base: 0.04 };
 
-            println!("[C5-REAL] Executing DAG Collapse Cycle...");
+            println!("[Causal-Determinist] Executing DAG Collapse Cycle...");
             
             // Execute the DAG
             let _ = engine.run_dag(mem.clone(), params, "").await;
@@ -34,7 +34,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     });
 
     // Start the gRPC Bridge, passing the receiver
-    println!("[C5-REAL] Starting gRPC Exergy Bridge on 127.0.0.1:50051...");
+    println!("[Causal-Determinist] Starting gRPC Exergy Bridge on 127.0.0.1:50051...");
     strike_rs::sync_bridge::start_bridge("127.0.0.1:50051", rx).await?;
 
     Ok(())

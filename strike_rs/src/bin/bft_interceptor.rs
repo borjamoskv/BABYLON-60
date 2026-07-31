@@ -82,7 +82,7 @@ impl BftLedger {
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    println!("█▄ [C5-REAL] AGENT CODE BFT INTERCEPTOR (HARDENED MCTS)");
+    println!("█▄ [Causal-Determinist] AGENT CODE BFT INTERCEPTOR (HARDENED MCTS)");
 
     let ledger_path = "agent_bft_ledger.db";
     let conn = Connection::open(ledger_path)?;
@@ -102,10 +102,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Recuperar estado previo (simulado como Genesis para esta corrida)
     let genesis = vec![0u8; 32];
     
-    // Generar clave HMAC desde entorno (en prod/c5-real vendría de HSM o env obligatorio)
+    // Generar clave HMAC desde entorno (en prod/Causal-Determinist vendría de HSM o env obligatorio)
     let env_key = std::env::var("CORTEX_BFT_KEY")
         .or_else(|_| std::env::var("CORTEX_VAULT_KEY"))
-        .expect("FATAL: CORTEX_BFT_KEY or CORTEX_VAULT_KEY env var required for C5-REAL BFT HMAC signing. Zero static fallback permitted.");
+        .expect("FATAL: CORTEX_BFT_KEY or CORTEX_VAULT_KEY env var required for Causal-Determinist BFT HMAC signing. Zero static fallback permitted.");
     let key = hmac::Key::new(hmac::HMAC_SHA256, env_key.as_bytes());
 
     let ledger = Arc::new(Mutex::new(BftLedger {
@@ -185,7 +185,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     if let Ok(mut l) = ledger.lock() {
         let root = l.compute_merkle_root();
         let _ = l.insert("CLOSURE_SEAL", &format!("ROOT:{}", root));
-        println!("█▄ [C5-REAL] CIERRE CAUSAL EJECUTADO");
+        println!("█▄ [Causal-Determinist] CIERRE CAUSAL EJECUTADO");
         println!("MERKLE ROOT: {}", root);
     }
 

@@ -42,7 +42,7 @@ impl Orchestrator {
 
         // Cierre del Bucle: Verificar (⊨)
         if !verify(&js) {
-            return Err("C5-REAL FATAL: Oracle provided an unverified justification".into());
+            return Err("Causal-Determinist FATAL: Oracle provided an unverified justification".into());
         }
 
         // Persistencia (Vector A)
@@ -72,7 +72,7 @@ impl Orchestrator {
         };
 
         if !verify(&js) {
-            return Err("C5-REAL FATAL: Observation violates obligations".into());
+            return Err("Causal-Determinist FATAL: Observation violates obligations".into());
         }
 
         let _id = self.ledger.assert_knowledge(&js, environment_id)

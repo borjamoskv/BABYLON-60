@@ -1,4 +1,4 @@
-# MOSKV-1 APEX: NETWORK TOPOLOGY AND ALIGNMENT IN ONCOLOGY
+# Motor Causal Principal: NETWORK TOPOLOGY AND ALIGNMENT IN ONCOLOGY
 # PATH: docs/isomorfismos_cancer.md
 
 > **"Exact isomorphism (VF2) is mathematically pristine but biologically fragile. Intratumoral heterogeneity demands Probabilistic Isomorphisms and Soft Graph Matching via Latent Embeddings."**
@@ -24,7 +24,7 @@ Instead of searching for a bijective edge mapping, we project the topology onto 
 ## 3. MODULARITY AND CONTROL THEOREM
 - **Communities (Leiden / Louvain):** Segment the graph into dense sub-modules (isolable biological processes).
 - **Structural Control Theory:** In directed networks, the set of **Driver Nodes** is computed using Maximum Bipartite Matching. 
-- **C5-REAL Friction:** The vulnerability (DepMap) of a Driver Node must be empirically cross-referenced; topological centrality does not guarantee *druggability* if the protein lacks allosteric pockets.
+- **Causal-Determinist Friction:** The vulnerability (DepMap) of a Driver Node must be empirically cross-referenced; topological centrality does not guarantee *druggability* if the protein lacks allosteric pockets.
 
 ## 4. KINETIC ALIGNMENT PIPELINE
 1. **Ingestion:** `scanpy` -> Adjacency matrix (WGCNA).

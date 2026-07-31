@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Memory Scanner - Extracts frequency distributions from CORTEX SQLite.
 
 Async bridge between the CortexEngine and the pure-math Shannon analyzer.

@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Sovereign Telemetry Sidecar (The AST Oracle / Mind Reader).
 
 Exports:

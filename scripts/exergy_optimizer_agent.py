@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-[C5-REAL] Exergy Optimizer Agent.
+[Causal-Determinist] Exergy Optimizer Agent.
 Parses changes, evaluates them using the GELABP thermodynamic framework,
 implements strict algebraic typing, and determines when memory consolidation is required.
 """
@@ -283,7 +283,7 @@ def check_consolidation_need() -> ConsolidationDecision:
     return Stable(last_timestamp=time.time())
 
 def main() -> None:
-    print("🔋 Igniting C5-REAL Exergy Optimizer Agent...")
+    print("🔋 Igniting Causal-Determinist Exergy Optimizer Agent...")
     init_db()
     
     diff = get_git_diff()
@@ -324,7 +324,7 @@ def main() -> None:
     
     verdict_yaml = f"""# GELABP MATRIX O-COLLAPSE
 Target: "Teorema-Robinson-Moskv"
-Confidence: C5-REAL
+Confidence: Causal-Determinist
 ExergyScore: {verdict.score.value:.1f}/1000.0
 
 # INVARIANTES ESTRUCTURALES

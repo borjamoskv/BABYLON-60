@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Centauro Engine (LEGION-Ω)
 Orchestration engine for the Sovereign Swarm. Implements Byzantine Consensus
@@ -70,7 +70,7 @@ class VirtualAgent:
     """A sovereign agent for the Centauro Swarm.
 
     Operates in two modes:
-    - C5-REAL: when ``router`` is injected, dispatches to CortexLLMRouter.execute_resilient()
+    - Causal-Determinist: when ``router`` is injected, dispatches to CortexLLMRouter.execute_resilient()
     - C4-SIM:  when ``router`` is None (default), uses deterministic mock for testing.
     """
 
@@ -89,9 +89,9 @@ class VirtualAgent:
         self.formation: str | None = None
 
     async def execute(self, task_idx: str, prompt: str) -> str:
-        """Execute a task. C5-REAL when router is set, C4-SIM otherwise."""
+        """Execute a task. Causal-Determinist when router is set, C4-SIM otherwise."""
         if self._router is not None:
-            # ── C5-REAL path ──────────────────────────────────────────
+            # ── Causal-Determinist path ──────────────────────────────────────────
             # [K1] FAIL-FAST: No try/except masking. Execution failure must crash the node
             # and be handled by the Byzantine Consensus (as a faulty node).
             from babylon60.extensions.llm._models import CortexPrompt, IntentProfile
@@ -123,7 +123,7 @@ class VirtualAgent:
             # Result is Ok(str) | Err(str)
             if hasattr(result, "err") and result.err is not None:
                 raise RuntimeError(
-                    f"C5-REAL Execution Failed for VirtualAgent {self.agent_id}: {result.err}"
+                    f"Causal-Determinist Execution Failed for VirtualAgent {self.agent_id}: {result.err}"
                 )
 
             if hasattr(result, "ok") and result.ok is not None:
@@ -186,7 +186,7 @@ class CentauroEngine:
             agent_id = f"legionnaire_{len(self.agents) + 1}"
             specialty = self._get_specialty(i, formation)
 
-            # [C5-REAL] Distillation Bias Sybil Prevention (Ω1b)
+            # [Causal-Determinist] Distillation Bias Sybil Prevention (Ω1b)
             import copy
 
             orthogonal_router = self.router
@@ -229,7 +229,7 @@ class CentauroEngine:
         """
         proposals: dict[str, str] = {}
 
-        # C5-REAL Concurrency Protection Gate (99.99% Resilience)
+        # Causal-Determinist Concurrency Protection Gate (99.99% Resilience)
         is_local = True
         if self.router is not None:
             try:

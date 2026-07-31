@@ -21,7 +21,7 @@ except ImportError:
 
 class LuhmannAutopoiesisSimulation:
     """
-    C5-REAL Simulation of a Closed Autopoietic System (Spanish Bureaucracy / RETA)
+    Causal-Determinist Simulation of a Closed Autopoietic System (Spanish Bureaucracy / RETA)
     interacting with a noisy Environment (Spanish Citizenry) via Structural Coupling.
     """
     def __init__(self, seed: int = 42, steps: int = 500) -> None:

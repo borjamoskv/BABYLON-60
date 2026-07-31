@@ -66,7 +66,7 @@ async def run_automata():
                 await target_page.mouse.wheel(0, 1000)
                 await asyncio.sleep(2)
             else:
-                logger.info("[C5-REAL] Nodos sin seguir detectados: %s", len(buttons_to_click))
+                logger.info("[Causal-Determinist] Nodos sin seguir detectados: %s", len(buttons_to_click))
 
                 for i, button in enumerate(buttons_to_click):
                     try:

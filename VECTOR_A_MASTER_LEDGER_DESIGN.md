@@ -1,11 +1,11 @@
 # VECTOR A — Master Ledger & ATMS Persistence · Diseño
 
-> Estado: **CONSTRUIDO — C5-REAL (2026-07-18).** `ledger.rs` compila y pasa tests.
+> Estado: **CONSTRUIDO — Causal-Determinist (2026-07-18).** `ledger.rs` compila y pasa tests.
 > Prueba: `cargo clippy --all-targets -- -D warnings` limpio + `cargo test` 37/37
-> verde (rustc 1.95, edition 2024). Condición de promoción C4-SIM→C5-REAL satisfecha.
+> verde (rustc 1.95, edition 2024). Condición de promoción C4-SIM→Causal-Determinist satisfecha.
 > BFT real (réplicas + consenso) permanece trabajo futuro (§1).
 
-## 0. Qué YA es C5-REAL (esta iteración)
+## 0. Qué YA es Causal-Determinist (esta iteración)
 
 - `omega0.rs` endurecido (H1/H2/H3) — 11 unit + 7 leyes proptest verdes.
 - `atms.rs` — runtime ATMS in-memory (Environments/Labels/Nogoods/DDB) — 9 unit + 4 leyes proptest verdes.
@@ -17,7 +17,7 @@ El briefing pide "BFT-SQLite". Precisión termodinámica: SQLite en un solo nodo
 **no puede** ser Byzantine-Fault-*Tolerant* — la tolerancia bizantina exige N≥3f+1
 réplicas y consenso. Lo que sí es alcanzable y valioso en un nodo es:
 
-- **Append-only tamper-EVIDENT** (cadena BLAKE3 CORTEX-TAINT): cualquier edición
+- **Append-only tamper-EVIDENT** (cadena BLAKE3 Ledger Asíncrono-TAINT): cualquier edición
   de una fila rompe el hash de todas las filas posteriores → detectable en O(n).
 - **Linealizable** vía WAL + escritor único (el Orchestrator del Vector B).
 - **Idempotente** vía direccionamiento por contenido (INSERT OR IGNORE).
@@ -52,7 +52,7 @@ CREATE TABLE belief (
   id           INTEGER PRIMARY KEY AUTOINCREMENT,
   stmt_id      TEXT NOT NULL REFERENCES statement(id),
   just_id      TEXT NOT NULL REFERENCES justification(id),
-  parent_taint TEXT NOT NULL,             -- CORTEX-TAINT de la fila previa
+  parent_taint TEXT NOT NULL,             -- Ledger Asíncrono-TAINT de la fila previa
   cortex_taint TEXT NOT NULL UNIQUE,      -- blake3(parent_taint ‖ canonical(row))
   created_at   INTEGER NOT NULL,          -- unix ms (inyectado por el runtime, no por el kernel)
   UNIQUE(stmt_id, just_id)                -- idempotencia
@@ -90,7 +90,7 @@ CREATE TABLE support (
 );
 ```
 
-## 3. Invariante CORTEX-TAINT (el eslabón causal)
+## 3. Invariante Ledger Asíncrono-TAINT (el eslabón causal)
 
 Reusa `TaintEngine` (lib.rs, BLAKE3 + toposort de Kahn). Cada fila que muta disco:
 
@@ -122,7 +122,7 @@ impl Ledger {
 }
 ```
 
-## 5. Tests que lo harían C5-REAL (obligatorios antes de cantar victoria)
+## 5. Tests que lo harían Causal-Determinist (obligatorios antes de cantar victoria)
 
 1. `append` es idempotente: dos `append_belief` del mismo (S,J) → 1 fila, mismo taint.
 2. `verify_chain` verde tras N appends; y ROJO si se muta una fila a mano (tamper).

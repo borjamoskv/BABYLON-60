@@ -1,6 +1,6 @@
 """
 BABYLON60 IDE — Sovereign Local Inference API routes (Ollama / MLX / Mamba).
-Enforces C5-REAL Zero-Network Policy.
+Enforces Causal-Determinist Zero-Network Policy.
 """
 
 from __future__ import annotations
@@ -36,16 +36,16 @@ def validate_and_sanitize_loopback_url(url: str) -> str:
         if domain in lower:
             raise HTTPException(
                 status_code=403,
-                detail=f"C5-REAL VIOLATION: Zero-Network Policy breached. External endpoint '{domain}' is strictly forbidden."
+                detail=f"Causal-Determinist VIOLATION: Zero-Network Policy breached. External endpoint '{domain}' is strictly forbidden."
             )
     parsed = urllib.parse.urlparse(lower)
     if parsed.scheme and parsed.scheme not in ("http", "https"):
-        raise HTTPException(status_code=403, detail="C5-REAL VIOLATION: Invalid URL scheme. Scheme must be http.")
+        raise HTTPException(status_code=403, detail="Causal-Determinist VIOLATION: Invalid URL scheme. Scheme must be http.")
     hostname = parsed.hostname
     if not hostname or hostname not in ALLOWED_LOOPBACK_HOSTS:
         raise HTTPException(
             status_code=403,
-            detail=f"C5-REAL VIOLATION: Endpoint '{url}' must be confined to loopback (127.0.0.1 / localhost)."
+            detail=f"Causal-Determinist VIOLATION: Endpoint '{url}' must be confined to loopback (127.0.0.1 / localhost)."
         )
     port = parsed.port if parsed.port is not None else 11434
     if not (1 <= port <= 65535):
@@ -63,7 +63,7 @@ def generate_local(req: InferenceRequest) -> dict[str, Any]:
         "messages": [
             {
                 "role": "system",
-                "content": "You are MOSKV-1 APEX, a sovereign C5-REAL execution kernel operating on local Apple Silicon."
+                "content": "You are MOSKV-1 APEX, a sovereign Causal-Determinist execution kernel operating on local Apple Silicon."
             },
             {
                 "role": "user",
@@ -157,7 +157,7 @@ def generate_mamba(req: MambaInferenceRequest) -> dict[str, Any]:
 
         # JIT Initialization of lightweight Mamba Engine
         tokenizer = BPETokenizer()
-        tokenizer.train("Lorem ipsum dolor sit amet. Babylon-60 is a C5-REAL sovereign kernel and Mamba network.", num_merges=10)
+        tokenizer.train("Lorem ipsum dolor sit amet. Babylon-60 is a Causal-Determinist sovereign kernel and Mamba network.", num_merges=10)
         network = MambaNetwork(vocab_size=len(tokenizer.vocab), d_model=16, d_state=8, n_layers=2)
         ledger = GraphLedger()
         engine = MambaLedgerEngine(tokenizer, network, ledger)

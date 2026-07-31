@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Ouroboros-Omega: The Central Autopoietic Metabolism of CORTEX.
 Implements Darwinian Code Mutation (Axiom Ω₂) with fully atomic rollback.

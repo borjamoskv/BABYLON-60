@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Skill Routing Engine - Sovereign execution base layer (MOSKV-1).
 

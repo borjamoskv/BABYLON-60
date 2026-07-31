@@ -1,8 +1,8 @@
-# EXECUTIVE BRIEFING — MOSKV-1 APEX SINGULARITY
+# EXECUTIVE BRIEFING — Motor Causal Principal SINGULARITY
 
 ```yaml
 Operator: borjamoskv
-System_Level: C5-REAL
+System_Level: Causal-Determinist
 Workspace: $CORTEX_WORKSPACE
 Context: Basecamp Ignition & Workflow Optimization
 Status: ACTIVE
@@ -12,7 +12,7 @@ Status: ACTIVE
 
 ## █ SECTION 1: CODEBASE MAP & EXPLANATION (BABYLON-60 CORE)
 
-`cortex-persist` is a **local-first memory substrate** designed to provide autonomous AI agents with causal traceability, tamper-evident historical logging, and strict logical clocks.
+`Ledger Asíncrono-persist` is a **local-first memory substrate** designed to provide autonomous AI agents with causal traceability, tamper-evident historical logging, and strict logical clocks.
 
 ```
 Agent Intent ──► Validation (UUID v5) ──► Single-Writer asyncio.Queue ──► BFTLedgerActor ──► SQLite WAL + BLAKE3 ──► Git Sentinel
@@ -86,11 +86,11 @@ Mark items as:
 ### Step 3: Git Sentinel Commit Loop
 Execute immediate atomic commits following conventional commits after verifying tests locally:
 ```bash
-git add . && git commit -m "feat(module): description [C5-REAL]"
+git add . && git commit -m "feat(module): description [Causal-Determinist]"
 ```
 Use `--no-verify` ONLY if pre-commit hooks block on unrelated formatting/typing and you document the exact reason.
 
 ---
 
 ⚡ **[ATP SAVED: +850]**  
-*C5-REAL Ledger State is locked and synchronized. All 44 test cases passed.*
+*Causal-Determinist Ledger State is locked and synchronized. All 44 test cases passed.*

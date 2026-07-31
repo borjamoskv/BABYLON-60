@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Secure Keychain integration.
 Never stores the CORTEX_MASTER_KEY in plain text (KDF-0 Invariant).
@@ -110,14 +110,14 @@ def _unwrap_key(blob_b64: str, passphrase: bytes) -> bytes | None:
     # Legacy Fallback (Migration on-the-fly)
     if len(blob) == _AES_KEY_LENGTH:
         logger.warning(
-            "[C5-REAL] Detected Legacy Plaintext Base64 Master Key. Auto-migrating to Argon2id Wrapped Key..."
+            "[Causal-Determinist] Detected Legacy Plaintext Base64 Master Key. Auto-migrating to Argon2id Wrapped Key..."
         )
         wrapped_b64 = _wrap_key(blob, passphrase)
 
         if keyring is not None and not os.environ.get("CORTEX_TESTING"):
             try:
                 keyring.set_password(SERVICE_NAME, KEY_NAME, wrapped_b64)
-                logger.info("[C5-REAL] Successfully vaulted migrated L0 Master Key via KDF-0.")
+                logger.info("[Causal-Determinist] Successfully vaulted migrated L0 Master Key via KDF-0.")
             except _keyring_error_types as e:
                 logger.warning("Could not auto-migrate key to OS Keychain: %s", e)
         else:
@@ -178,7 +178,7 @@ def generate_and_store_master_key() -> str:
 
     try:
         keyring.set_password(SERVICE_NAME, KEY_NAME, wrapped_b64)
-        logger.info("[C5-REAL] Successfully vaulted new wrapped CORTEX_MASTER_KEY in OS Keychain via KDF-0.")
+        logger.info("[Causal-Determinist] Successfully vaulted new wrapped CORTEX_MASTER_KEY in OS Keychain via KDF-0.")
     except _keyring_error_types as e:
         logger.error(
             "Could not store key in Keychain (%s). "

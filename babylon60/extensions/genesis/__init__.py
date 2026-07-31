@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """CORTEX Genesis - A System That Creates Systems.
 
 Public API for the Genesis module. Import the engine,

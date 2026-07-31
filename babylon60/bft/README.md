@@ -4,9 +4,9 @@
 
 Este directorio contiene la implementación del Master Ledger de `BABYLON-60`. 
 
-## Nomenclatura Honesta (C5-REAL)
+## Nomenclatura Honesta (Causal-Determinist)
 Aunque el directorio se llame `bft/`, la arquitectura operativa actual **NO utiliza consenso BFT (PBFT/Raft) en vivo**. 
-Implementar un quórum $N \ge 3f+1$ para el estado actual del repositorio supondría una inyección de anergía injustificable, ya que el desacuerdo pre-ejecución no es catastrófico.
+Implementar un quórum $N \ge 3f+1$ para el estado actual del repositorio supondría una inyección de Ineficiencia injustificable, ya que el desacuerdo pre-ejecución no es catastrófico.
 
 Por lo tanto, la arquitectura opera en **Escalón 3 (Testigo Externo)**:
 1. El archivo `master_ledger.db` es un Log local inmutable, Tamper-Evident, gestionado por un Actor de hilo único (`CP-local single-writer`).

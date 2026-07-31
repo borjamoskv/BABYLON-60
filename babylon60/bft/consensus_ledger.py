@@ -1,4 +1,4 @@
-# [C5-REAL] BFT consensus ledger — Fachada Causal.
+# [Causal-Determinist] BFT consensus ledger — Fachada Causal.
 # Redirige el flujo $\Omega = C \circ V \circ T \circ O$.
 # Delega la Verificación (V) a BFT_Validator y el Commit (C) a BFT_Committer.
 from typing import Dict, Optional
@@ -39,7 +39,7 @@ if __name__ == "__main__":
     import sys
     db_path = "master_ledger.db"
     audit_mode = "--audit-mode" in sys.argv
-    print(f"[*] [C5-REAL] BFT Ledger Audit: db_path={db_path}, audit_mode={audit_mode}")
+    print(f"[*] [Causal-Determinist] BFT Ledger Audit: db_path={db_path}, audit_mode={audit_mode}")
     ledger = BFT_Ledger(db_path)
     if audit_mode:
         if ledger.audit_integrity():

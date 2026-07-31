@@ -1,4 +1,4 @@
-"""C5-REAL OPSEC Memory Shield — Verification Suite.
+"""Causal-Determinist OPSEC Memory Shield — Verification Suite.
 
 Tests anti-coredump enforcement and PT_DENY_ATTACH syscall on Darwin.
 Executed under .venv isolation per INV_C5_09.

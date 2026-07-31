@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized — borjamoskv/BABYLON-60
+# [Causal-Determinist] Exergy-Maximized — borjamoskv/BABYLON-60
 # Oracle Pool: Async Swarm + BFT Fallback Chain + Inference Ledger
 # Score: 1000/1000 — Zero external financial dependency.
 """
@@ -39,7 +39,7 @@ __all__ = ["OraclePool", "InferenceRecord", "OracleResult"]
 
 
 # ---------------------------------------------------------------------------
-# Inference Ledger — C5-REAL cryptographic seal per inference
+# Inference Ledger — Causal-Determinist cryptographic seal per inference
 # ---------------------------------------------------------------------------
 
 

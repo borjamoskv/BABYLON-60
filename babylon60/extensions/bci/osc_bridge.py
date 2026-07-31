@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Aether OSC Bridge (HITO BETA: Consenso Físico)
 Connects the Sovereign Cognitive Hypervisor to the physical layer.

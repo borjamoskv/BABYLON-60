@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """CORTEX Genesis - Post-Creation Validator.
 
 Validates that a generated system is structurally sound:

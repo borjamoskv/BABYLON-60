@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 
 from babylon60.extensions.genesis.renderers.api import _render_fastapi_route
 from babylon60.extensions.genesis.renderers.cli import _render_cli_command

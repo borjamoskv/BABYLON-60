@@ -9,7 +9,7 @@ Tras recorrer los horizontes informacionales de Chaitin y la incompletitud esenc
 
 La respuesta reside en el isomorfismo de **Curry-Howard-Lambek** (Módulo 06) y la **Teoría de Tipos Constructiva**. Aunque no podemos demostrar todas las verdades matemáticas (límite $\Pi_1$), sí podemos exigir que **cada transición de estado del sistema proporcione una prueba explícita ($\Sigma_1$) que pueda ser verificada mecánicamente en tiempo lineal**.
 
-En BABYLON-60, esta exigencia se materializa en la **Ontología Formal C5-REAL** escrita en **Lean 4** (`proof/lean/Babylon.lean`). Lean 4 no es solo un lenguaje de programación; es un verificador interactivo de teoremas basado en el Cálculo de Construcciones Inductivas (CIC).
+En BABYLON-60, esta exigencia se materializa en la **Ontología Formal Causal-Determinist** escrita en **Lean 4** (`proof/lean/Babylon.lean`). Lean 4 no es solo un lenguaje de programación; es un verificador interactivo de teoremas basado en el Cálculo de Construcciones Inductivas (CIC).
 
 ---
 

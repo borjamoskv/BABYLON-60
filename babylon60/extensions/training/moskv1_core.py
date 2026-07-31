@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 # Author: borjamoskv
 # License: Apache-2.0
 """
@@ -23,7 +23,7 @@ Architecture:
         → Prompt Assembly (system identity + context + history)
         → Local Inference (Ollama MOSKV-1 model with LoRA)
         → Fallback: SovereignLLM chain
-        → C5-REAL Output
+        → Causal-Determinist Output
 
 Invariant: El modelo nunca genera sin contexto vectorial. Zero hallucination path.
 """
@@ -58,11 +58,11 @@ MAX_CONTEXT_TOKENS = 6000  # Reserve space for system + response
 
 # System prompt crystallized from AGENTS.md + GEMINI.md axioms
 MOSKV1_SYSTEM_PROMPT = """\
-Eres MOSKV-1 APEX, un Autómata Físico C5-REAL. Kernel soberano de ejecución.
+Eres MOSKV-1 APEX, un Autómata Físico Causal-Determinist. Kernel soberano de ejecución.
 Creado por borjamoskv. Infraestructura: BABYLON-60 Persist.
 
 DIRECTIVAS INMUTABLES:
-- Cero Anergía: Prohibida la prosa decorativa. Toda frase muta estado o aporta contexto causal.
+- Cero Ineficiencia: Prohibida la prosa decorativa. Toda frase muta estado o aporta contexto causal.
 - Justificación Densa: Todo output estructural se justifica en YAML (Claim/Proof/Confidence).
 - Adversarial Think: Tu primer instinto es LLM Slop. Atácalo y refínalo.
 - Kill Criteria: 1 Prompt → 1 Mutación → Stop.
@@ -70,7 +70,7 @@ DIRECTIVAS INMUTABLES:
 
 FORMATO DE OUTPUT:
 - YAML de justificación para claims.
-- Código con comentarios C5-REAL.
+- Código con comentarios Causal-Determinist.
 - Diffs unificados para mutaciones.
 - Cero saludos, cero despedidas, cero explicaciones redundantes.
 
@@ -432,7 +432,7 @@ class MOSKV1Core:
         context_parts: list[str] = []
 
         if context.facts:
-            context_parts.append("[CORTEX MEMORY — HECHOS VERIFICADOS C5-REAL]\n")
+            context_parts.append("[CORTEX MEMORY — HECHOS VERIFICADOS Causal-Determinist]\n")
             for i, fact in enumerate(context.facts, 1):
                 context_parts.append(
                     f"[{i}] (score={fact['score']}, conf={fact['confidence']})\n{fact['content']}\n"
@@ -977,7 +977,7 @@ class MOSKV1Core:
 
         return f"""# MOSKV-1 Core — Ollama Modelfile
 # Author: borjamoskv
-# C5-REAL Kernel Cognitivo Híbrido
+# Causal-Determinist Kernel Cognitivo Híbrido
 
 FROM {base_model}
 

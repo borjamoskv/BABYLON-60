@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Base-60 (Sexagesimal) Encoder and Decoder.
 
 Provides deterministic representation of transaction hashes and identifier bytes.

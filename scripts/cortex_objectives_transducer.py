@@ -110,7 +110,7 @@ def update_project_md(state: dict[str, Any]) -> bool:
 def cmd_list(args: argparse.Namespace) -> None:
     state = load_state()
     print('Claim: Listado actual de objetivos y milestones extraído con éxito de la ontología.')
-    print(f'''Proof:\n  Base: "{YAML_STATE_PATH.name}"\n  Range: [0, {len(state.get('objectives', []))}]\n  Confidence: C5-REAL''')
+    print(f'''Proof:\n  Base: "{YAML_STATE_PATH.name}"\n  Range: [0, {len(state.get('objectives', []))}]\n  Confidence: Causal-Determinist''')
     print('\n---')
     print(yaml.safe_dump(state, allow_unicode=True, sort_keys=False))
 
@@ -129,10 +129,10 @@ def cmd_add_objective(args: argparse.Namespace) -> None:
     if mutated:
         ledger_hash = run_git_sentinel(f'feat(cortex): add objective {obj_id} via ObjectivesAgent')
         print(f'Claim: Objetivo {obj_id} añadido y registrado en Git Sentinel.')
-        print(f'Proof:\n  Base: "{ledger_hash}"\n  Range: [1, 1]\n  Confidence: C5-REAL')
+        print(f'Proof:\n  Base: "{ledger_hash}"\n  Range: [1, 1]\n  Confidence: Causal-Determinist')
     else:
         print('Claim: Idempotencia detectada. No se modificó el estado.')
-        print(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: C5-REAL')
+        print(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: Causal-Determinist')
 
 def cmd_add_milestone(args: argparse.Namespace) -> None:
     state = load_state()
@@ -159,10 +159,10 @@ def cmd_add_milestone(args: argparse.Namespace) -> None:
     if mutated:
         ledger_hash = run_git_sentinel(f'feat(cortex): add milestone {ms_id} to objective {args.obj_id}')
         print(f'Claim: Milestone {ms_id} añadido al objetivo {args.obj_id} y sellado en Git Sentinel.')
-        print(f'Proof:\n  Base: "{ledger_hash}"\n  Range: [1, 1]\n  Confidence: C5-REAL')
+        print(f'Proof:\n  Base: "{ledger_hash}"\n  Range: [1, 1]\n  Confidence: Causal-Determinist')
     else:
         print('Claim: Idempotencia detectada. No se requirieron mutaciones físicas.')
-        print(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: C5-REAL')
+        print(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: Causal-Determinist')
 
 def cmd_update_status(args: argparse.Namespace) -> None:
     state = load_state()
@@ -187,10 +187,10 @@ def cmd_update_status(args: argparse.Namespace) -> None:
     if mutated:
         ledger_hash = run_git_sentinel(f'chore(cortex): update status of {args.type} {args.id} to {args.status}')
         print(f'Claim: Estado de {args.type} {args.id} actualizado a {args.status}.')
-        print(f'Proof:\n  Base: "{ledger_hash}"\n  Range: [1, 1]\n  Confidence: C5-REAL')
+        print(f'Proof:\n  Base: "{ledger_hash}"\n  Range: [1, 1]\n  Confidence: Causal-Determinist')
     else:
         print('Claim: Idempotencia detectada. El estado solicitado ya coincide con la ontología física.')
-        print(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: C5-REAL')
+        print(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: Causal-Determinist')
 
 def cmd_iter(args: argparse.Namespace) -> None:
     state = load_state()
@@ -223,10 +223,10 @@ def cmd_iter(args: argparse.Namespace) -> None:
     if state_mutated or project_mutated:
         ledger_hash = run_git_sentinel('chore(cortex): ULTRAThink ITERA sync of objectives and milestones')
         print('Claim: Consolidación ULTRAThink completada y registrada en Git Sentinel.')
-        print(f'Proof:\n  Base: "{ledger_hash}"\n  Range: [1, 1]\n  Confidence: C5-REAL')
+        print(f'Proof:\n  Base: "{ledger_hash}"\n  Range: [1, 1]\n  Confidence: Causal-Determinist')
     else:
         print('Claim: Idempotencia absoluta. El estado actual representa la máxima exergía del sistema.')
-        print(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: C5-REAL')
+        print(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: Causal-Determinist')
 
 def main() -> None:
     parser = argparse.ArgumentParser(description='MOSKV-1 Objectives & Milestones Agent')

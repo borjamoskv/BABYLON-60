@@ -30,7 +30,7 @@ The interface utilizes a curated palette derived from YInMn Blue, optimized to p
   * `--lapis-bright: #7080FF` (Highlight accent).
   * `--lapis-glow: rgba(59, 77, 255, 0.22)`.
   * `--gold: #F59E0B` (Warning/Ledger state badge).
-  * `--verify: #10B981` (C5-REAL verification green).
+  * `--verify: #10B981` (Causal-Determinist verification green).
   * `--break: #EF4444` (Assertion failure / compile breakage red).
 
 ---
@@ -97,7 +97,7 @@ Accessible via **`⌘ 8`** or by clicking the diamond icon (`◈`) in the sideba
 
 ### 🧩 Core UX Features
 * **Click-to-Load Preset Templates**: Includes 3 ready-made presets below the prompt label:
-  * `⚡ Robinson Theorem`: Fills prompt with: *"Explain the core of the Robinson-Moskv theorem"*
+  * `⚡ Robinson Theorem`: Fills prompt with: *"Explain the core of the Robinson-Motor Causal theorem"*
   * `🛡 Attest Ledger`: Fills prompt with: *"Attest current ledger transaction status"*
   * `◈ Self-Audit`: Fills prompt with: *"Run self-audit loop on active workspace"*
 * **Fast Submit Keybinding**: Pressing **`Enter`** in the prompt textarea triggers immediate prompt execution. Pressing **`Shift + Enter`** inserts a standard newline.
@@ -111,7 +111,7 @@ Accessible via **`⌘ 8`** or by clicking the diamond icon (`◈`) in the sideba
 BABYLON·60 is compiled into a standalone desktop application using **Tauri v2** and **Rust**.
 
 ### ⚙️ Build Requirements
-* The Tauri configuration is stored in [babylon60-ide/src-tauri/tauri.conf.json](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/babylon60-ide/src-tauri/tauri.conf.json).
+* The Tauri configuration is stored in [babylon60-ide/src-tauri/tauri.conf.json](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Motor Causal/babylon60-ide/src-tauri/tauri.conf.json).
 * A unique bundle identifier is required: `"identifier": "com.babylon60.ide"`.
 * System icons must be generated from the square source image `public/logo_icon.jpg` using the Tauri CLI:
   ```bash

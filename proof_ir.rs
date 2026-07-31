@@ -1,5 +1,5 @@
 // =====================================================================
-// BABYLON-60: C5-REAL Proof Intermediate Representation (IR)
+// BABYLON-60: Causal-Determinist Proof Intermediate Representation (IR)
 // =====================================================================
 use std::collections::HashMap;
 

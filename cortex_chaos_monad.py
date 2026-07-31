@@ -122,6 +122,19 @@ print("---JSON_OUTPUT_MARKER---")
 print(json.dumps(result))
 """
 
+def _purge_zombies(process: asyncio.subprocess.Process) -> None:
+    """Purge process group to prevent zombies (INV_C5_CHAOS_MONAD)."""
+    if sys.platform != "win32":
+        try:
+            os.killpg(os.getpgid(process.pid), signal.SIGKILL)
+        except (ProcessLookupError, PermissionError):
+            try:
+                process.kill()
+            except Exception:
+                pass
+    else:
+        process.kill()
+
 async def run_chaos_monad(source_code: str, timeout_ms: int = 1000, use_seatbelt: bool = False) -> MonadResult:
     """
     Executes dynamic code in a strict subprocess sandbox.
@@ -160,31 +173,13 @@ async def run_chaos_monad(source_code: str, timeout_ms: int = 1000, use_seatbelt
                 timeout=timeout_ms / 1000.0
             )
         except asyncio.TimeoutError:
-            # Turing-Sandbox Chaos Isolation (La Mónada de Caos)
-            if sys.platform != "win32":
-                try:
-                    os.killpg(os.getpgid(process.pid), signal.SIGKILL)
-                except (ProcessLookupError, PermissionError):
-                    try:
-                        process.kill()
-                    except Exception:
-                        pass
-            else:
-                process.kill()
+            # Turing-Sandbox Chaos Isolation (La Sandbox Aislado)
+            _purge_zombies(process)
             return {"status": "Timeout_Entropy_Death", "stdout": "", "error": "Execution exceeded timeout"}
     finally:
         # Guarantee no zombie processes or runaway processes remain
         if process.returncode is None:
-            if sys.platform != "win32":
-                try:
-                    os.killpg(os.getpgid(process.pid), signal.SIGKILL)
-                except (ProcessLookupError, PermissionError):
-                    try:
-                        process.kill()
-                    except Exception:
-                        pass
-            else:
-                process.kill()
+            _purge_zombies(process)
             try:
                 await process.wait()
             except Exception:

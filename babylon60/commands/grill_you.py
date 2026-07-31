@@ -64,7 +64,7 @@ class GrillYouEngine:
 
 
     def run(self) -> GrillYouReport:
-        logger.info(f"C5-REAL GRILL-YOU INITIATED: Autonomous Self-Interview on '{self.topic}'")
+        logger.info(f"Causal-Determinist GRILL-YOU INITIATED: Autonomous Self-Interview on '{self.topic}'")
         now = time.time()
 
         # Decision 1: Memory & State Sync Isolation
@@ -102,7 +102,7 @@ class GrillYouEngine:
                 "Silent Exception Suppression",
             ],
             selected_option="Fail-Fast Graceful Degradation & Landauer Eviction",
-            rationale="Evita la auto-necrosis (INV_C5_07) y purga anergía de memoria en tiempo real (INV_C5_52).",
+            rationale="Evita la auto-necrosis (INV_C5_07) y purga Ineficiencia de memoria en tiempo real (INV_C5_52).",
             target_invariant="INV_C5_52",
         )
 
@@ -127,5 +127,5 @@ def run_grill_you(topic: str = "AgencyHypervisor Multi-Tenant Engine") -> GrillY
 
 if __name__ == "__main__":
     report = run_grill_you()
-    print("█▄ C5-REAL GRILL-YOU AUTONOMOUS REPORT\n")
+    print("█▄ Causal-Determinist GRILL-YOU AUTONOMOUS REPORT\n")
     print(report.to_yaml())

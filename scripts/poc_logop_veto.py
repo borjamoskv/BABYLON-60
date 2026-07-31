@@ -7,7 +7,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 from babylon60.bft.bayesian_swarm import BayesianSwarm
 
 def run_poc():
-    print("=== [C5-REAL] PoC: Logarithmic Opinion Pooling (LogOP) Veto ===")
+    print("=== [Causal-Determinist] PoC: Logarithmic Opinion Pooling (LogOP) Veto ===")
     
     # Simulate a Swarm of 3 Agents (Experts)
     swarm = BayesianSwarm(["Agent_Alpha", "Agent_Beta", "Agent_Gamma"])

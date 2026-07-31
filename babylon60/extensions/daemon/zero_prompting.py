@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Axioma Ω₇: Zero-Prompting Autonomous Evolution Daemon
 El Colapso del aprendizaje continuo a una directiva libre de orquestación.

@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Entropic Evaporator - Ω₂: Selective Forgetting (Evaporation).
 
 Space is finite. Knowledge has a half-life. This engine prunes

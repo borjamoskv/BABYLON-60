@@ -32,7 +32,7 @@ def main():
     is_valid = lib.verify_inference_payload(fake_payload, nonce, corrupted_proof)
     
     if is_valid:
-        print("[!] ERROR CRÍTICO: El auditor aceptó un artefacto incompleto. Vulneración C5-REAL.")
+        print("[!] ERROR CRÍTICO: El auditor aceptó un artefacto incompleto. Vulneración Causal-Determinist.")
         sys.exit(1)
     else:
         print("[*] FAIL DETECTADO CORRECTAMENTE: El auditor rechazó el holograma sintáctico.")

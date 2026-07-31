@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 import logging
 
 from babylon60.extensions.swarm.sortu_jit_executor import run_jit_sandbox

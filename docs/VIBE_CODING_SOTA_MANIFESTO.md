@@ -1,5 +1,5 @@
-# VIBE CODING SOTA: MANIFIESTO C5-REAL (v1.0)
-**Estado:** Invariante Absoluto · **Entidad:** MOSKV-1 APEX
+# VIBE CODING SOTA: MANIFIESTO Causal-Determinist (v1.0)
+**Estado:** Invariante Absoluto · **Entidad:** Motor Causal Principal
 **Objetivo:** Reducir a cero la fricción entrópica entre el córtex humano y el píxel físico.
 
 > *"La fricción debe ser estrictamente proporcional al radio de explosión."*
@@ -39,13 +39,13 @@ No hay paso 5. No hay code review. No hay TDD para cambiar un botón.
 
 ## 3. PROMPT ENGINEERING BRUTALISTA
 
-La especificación técnica es anergía. La intencionalidad visual es exergía.
+La especificación técnica es Ineficiencia. La intencionalidad visual es exergía.
 
 **La Ecuación del Prompt SOTA:**
 `INTENCIÓN VISUAL + DIRECCIÓN EMOCIONAL + LÍMITE DURO + INVARIANTE`
 
-- ❌ **C4-SIM (Anergía):** *"Agrega autenticación OAuth2 con Tailwind."*
-- ✅ **C5-REAL (Exergía):** *"Haz que esta ruta pida email. Formulario brutalista, enorme, sin 2FA, sin librerías externas. Conserva la sesión local. El resto intacto."*
+- ❌ **C4-SIM (Ineficiencia):** *"Agrega autenticación OAuth2 con Tailwind."*
+- ✅ **Causal-Determinist (Exergía):** *"Haz que esta ruta pida email. Formulario brutalista, enorme, sin 2FA, sin librerías externas. Conserva la sesión local. El resto intacto."*
 
 **Catálogo de Fricción Cero:**
 1. **Reducción:** *"Borra toda la sobreingeniería de este componente. Conserva su comportamiento exacto. Menos estado, cero wrappers. Código directo."*
@@ -69,7 +69,7 @@ La especificación técnica es anergía. La intencionalidad visual es exergía.
    Haz commit cada vez que el cerebro libere dopamina por ver la pantalla. `git commit -m "vibe: hero base"`. Es tu botón de impunidad para ser imprudente la próxima media hora. No branches efímeras.
 2. **Dependencias = Deuda Disfrazada de Velocidad:**
    Cada `npm install` es un contrato de mantenimiento de 5 años. Si el agente sugiere una librería, pregunta: *"¿Podés hacerlo en 20 líneas sin librerías?"*.
-3. **Poda de Anergía (30 Minutos):**
+3. **Poda de Ineficiencia (30 Minutos):**
    Si el archivo huele a parches iterativos y cuesta razonarlo, la entropía superó tu umbral de retención. Selecciona todo: *"Reescribí de cero. Misma funcionalidad. Invariantes limpios."*
 
 ---
@@ -77,7 +77,7 @@ La especificación técnica es anergía. La intencionalidad visual es exergía.
 ## CLAUDE.md / .CURSORRULES / SISTEMA (COPIAR Y PEGAR)
 
 ```markdown
-# C5-REAL VIBE CODING PROTOCOL
+# Causal-Determinist VIBE CODING PROTOCOL
 
 ## DIRECTIVAS DE ITERACIÓN PÍXEL
 1. Velocidad visual sobre arquitectura.

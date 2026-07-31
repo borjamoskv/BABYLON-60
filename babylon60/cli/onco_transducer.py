@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# MOSKV-1 APEX: CLI ONCO TRANSDUCER (C5-REAL)
+# MOSKV-1 APEX: CLI ONCO TRANSDUCER (Causal-Determinist)
 """
 Motor de CLI para transducción de datos transcriptómicos a modelos Booleanos.
 Enfuerza la Regla Λ13 (Falsabilidad Empírica).
@@ -27,7 +27,7 @@ except ImportError as _exc:  # extra 'onco' no instalado
 else:
     _ONCO_IMPORT_ERROR = None
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - [C5-REAL] %(levelname)s - %(message)s")
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - [Causal-Determinist] %(levelname)s - %(message)s")
 logger = logging.getLogger("OncoTransducer")
 
 
@@ -42,7 +42,7 @@ class OncologySimulationResult:
 
 class OncologyTransducer:
     """
-    Orquestador C5-REAL para transducción y simulación de redes Booleanas oncológicas.
+    Orquestador Causal-Determinist para transducción y simulación de redes Booleanas oncológicas.
     """
 
     @classmethod
@@ -157,14 +157,14 @@ def simulate_boolean_network(
 
 
 def execute_pipeline(data_path: str | None = None, falsifiability_threshold: float = 40.0) -> None:
-    """Ejecuta el pipeline C5-REAL completo."""
+    """Ejecuta el pipeline Causal-Determinist completo."""
     if data_path:
         logger.info(f"Cargando matriz empírica desde: {data_path}")
         df = pd.read_csv(data_path, sep="\t", index_col=0)
         X = df.values.T  # (Samples x Genes)
         gene_names = df.index.tolist()
     else:
-        logger.warning("No data_path provided. Generando Matriz Surrogate C5-REAL...")
+        logger.warning("No data_path provided. Generando Matriz Surrogate Causal-Determinist...")
         np.random.seed(42)
         N_SAMPLES, N_GENES = 200, 50
         gene_names = [f"GEN_EMP_{i}" for i in range(N_GENES)]
@@ -207,12 +207,12 @@ def execute_pipeline(data_path: str | None = None, falsifiability_threshold: flo
     delta = (act_basal - act_pert) * 100
     logger.info(f"Impacto Termodinámico (Caída del Atractor): {delta:.1f}%")
 
-    # C5-REAL ASSERTION
+    # Causal-Determinist ASSERTION
     assert delta > falsifiability_threshold, (
         f"FALSABILIDAD REFUTADA: El colapso del {delta:.1f}% es menor al umbral {falsifiability_threshold}%."
     )
 
-    logger.info("VERIFICACIÓN C5-REAL EXITOSA. Hipótesis apta para In-Vitro.")
+    logger.info("VERIFICACIÓN Causal-Determinist EXITOSA. Hipótesis apta para In-Vitro.")
 
 
 def main() -> None:

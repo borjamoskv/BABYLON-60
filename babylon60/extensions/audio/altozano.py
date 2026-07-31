@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """CORTEX v6+ - Agente Altozano OMEGA
 
 Harmonic Deconstructor and Psychoacoustic Analyzer.
@@ -24,7 +24,7 @@ class AltozanoAnalyzer:
 
     def __init__(self):
         if not librosa:
-            logger.critical("[Altozano] librosa is not installed. C5-REAL analysis impossible.")
+            logger.critical("[Altozano] librosa is not installed. Causal-Determinist analysis impossible.")
             raise RuntimeError("Missing librosa. Install with: pip install 'cortex-persist[audio]'")
 
         # Map chroma indices to note names (0 = C, 1 = C#, etc.)

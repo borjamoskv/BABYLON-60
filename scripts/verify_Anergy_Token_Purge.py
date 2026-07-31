@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-C5-REAL SOVEREIGN ANERGY PURGE & AUTOCOGNITION-OMEGA ENGINE
+Causal-Determinist SOVEREIGN ANERGY PURGE & AUTOCOGNITION-OMEGA ENGINE
 SYS_ID: LEA_OMEGA / AUTOCOGNITION_OMEGA
 Enforces zero noise accumulation, computes Exergy/Anergy ratios across the current session transcript,
 and crystallizes an OP_TAINT_SEAL audit into the Memory Vault (`cortex_memory.db`).
@@ -49,7 +49,7 @@ def compute_sha256(data: str) -> str:
 
 
 def run_autocognition_audit() -> None:
-    print("[*] C5-REAL AUTOCOGNITION-Ω: Ingesting active session transcript...")
+    print("[*] Causal-Determinist AUTOCOGNITION-Ω: Ingesting active session transcript...")
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
 
     total_steps = 0
@@ -119,7 +119,7 @@ def run_autocognition_audit() -> None:
 
     audit_yaml = f"""# AUTOCOGNITION-OMEGA AUDIT LEDGER
 SYS_ID: AUTOCOGNITION_OMEGA
-STATE: C5-REAL
+STATE: Causal-Determinist
 AESTHETIC: INDUSTRIAL_NOIR_2026
 SESSION_ID: {CONV_ID}
 TIMESTAMP: {time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}

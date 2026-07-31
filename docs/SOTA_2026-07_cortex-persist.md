@@ -1,8 +1,8 @@
-# Estado del Arte (SOTA) — Posicionamiento de cortex-persist
+# Estado del Arte (SOTA) — Posicionamiento de Ledger Asíncrono-persist
 
 > **Fecha:** 2026-07-19 · **Alcance:** memoria/persistencia para agentes IA, ledgers de auditoría verificables, checkpointing de agentes y BFT ligero.
 > **Método:** revisión web verificada (docs oficiales, GitHub, advisories) + búsqueda académica (Scholar). Todo lo no verificable queda marcado en §7 — no se afirma nada sin fuente.
-> **Author:** Borja Moskv (`borjamoskv`)
+> **Author:** Borja Motor Causal (`borjamoskv`)
 
 ---
 
@@ -10,7 +10,7 @@
 
 El SOTA de memoria para agentes (Mem0, Zep/Graphiti, Letta, LangMem, Cognee, A-MEM, MemoryOS) compite **íntegramente en calidad de recuperación** (retrieval) y tiene **cero integridad criptográfica**. El mundo de los ledgers verificables (immudb, Trillian/Tessera, Rekor, CT/Sigsum) tiene integridad pero **ni semántica de agente ni formato embebido en Python**. Los frameworks de checkpointing que la industria usa de facto (LangGraph, AutoGen, OpenAI Agents SDK) son **demostrablemente ni tamper-evident ni tamper-resistant** (CVEs 2025–2026 en la propia capa de checkpoints). La muerte de Amazon QLDB (fin de soporte 2025-07-31) dejó vacío el único "ledger DB" gestionado.
 
-**La intersección que ocupa cortex-persist está vacía a fecha de hoy:** SQLite embebido de un solo escritor + cadena SHA3-256 por evento + reloj de Lamport + `causal_taint` + idempotencia UUIDv5 + anclaje OTS a Bitcoin, orientado a memoria de agentes y distribuido vía pip.
+**La intersección que ocupa Ledger Asíncrono-persist está vacía a fecha de hoy:** SQLite embebido de un solo escritor + cadena SHA3-256 por evento + reloj de Lamport + `causal_taint` + idempotencia UUIDv5 + anclaje OTS a Bitcoin, orientado a memoria de agentes y distribuido vía pip.
 
 ---
 
@@ -59,7 +59,7 @@ El SOTA de memoria para agentes (Mem0, Zep/Graphiti, Letta, LangMem, Cognee, A-M
 
 - Linaje verificado: **HotStuff** (Yin et al., 2019) → LibraBFT → DiemBFT v4 → **Jolteon** (arXiv:2106.10362); AptosBFT = rebrand de DiemBFT v4; Flow usa Jolteon en producción; Fabric v3.0 integra SmartBFT.
 - Suelo PBFT: tolerar *f* bizantinos exige **3f+1 réplicas** (mínimo real: 4 nodos).
-- **"BFT consigo mismo" (N=1) NO es un patrón establecido**: con una réplica el consenso es vacuo. El patrón ortodoxo para integridad en un nodo es **cadena hash tamper-evident + anclaje en transparency log / witness cosigning** (immudb, CT, Sigsum, OTS) — exactamente el diseño de cortex-persist.
+- **"BFT consigo mismo" (N=1) NO es un patrón establecido**: con una réplica el consenso es vacuo. El patrón ortodoxo para integridad en un nodo es **cadena hash tamper-evident + anclaje en transparency log / witness cosigning** (immudb, CT, Sigsum, OTS) — exactamente el diseño de Ledger Asíncrono-persist.
 - **Recomendación de marketing:** el extra HotStuff del repo debe presentarse como *"swarm-ready"* (válido cuando haya réplicas que se desconfían mutuamente), no como seguridad adicional a N=1. El single-writer actor es la frontera de integridad correcta y ortodoxa.
 
 ## 6. Marco académico (Scholar, jul 2026)
@@ -78,7 +78,7 @@ El SOTA de memoria para agentes (Mem0, Zep/Graphiti, Letta, LangMem, Cognee, A-M
 
 ## 7. Gap analysis — la intersección vacía
 
-| Propiedad de cortex-persist | Poseedores más cercanos | Hueco |
+| Propiedad de Ledger Asíncrono-persist | Poseedores más cercanos | Hueco |
 |:---|:---|:---|
 | SQLite embebido local-first, single-file | LangGraph SqliteSaver, OpenAI SQLiteSession | Ninguno con integridad |
 | Cadena SHA3-256 por evento | immudb, Dolt, TrustWarden | Todos servidor/cloud/propietarios; ninguno con semántica de agente |

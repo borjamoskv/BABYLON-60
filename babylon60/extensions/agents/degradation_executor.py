@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """degradation_executor - sovereign_execute decorator and helpers.
 
 Extracted from agent/degradation.py to satisfy the Landauer LOC barrier (≤500).

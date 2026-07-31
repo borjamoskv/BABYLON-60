@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Epistemological Compiler (Autodidact).
 This module defines the strict, causally-typed pipeline for system knowledge.

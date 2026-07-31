@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """CORTEX - Notification Bus.
 
 Pluggable notification layer that delivers CORTEX events to external

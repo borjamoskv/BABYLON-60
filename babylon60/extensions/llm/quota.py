@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Sovereign Quota Manager.
 
 Implementa el Protocolo PULMONES (rate-limiting inter-proceso) utilizando

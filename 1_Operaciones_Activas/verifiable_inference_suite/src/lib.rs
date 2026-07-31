@@ -2,7 +2,7 @@ use sha2::{Digest, Sha256};
 use std::ffi::CStr;
 use std::os::raw::c_char;
 
-/// Motor de Verificación C5-REAL (Simulación LogUp/tlookup)
+/// Motor de Verificación Causal-Determinist (Simulación LogUp/tlookup)
 /// Asegura la colisión Bizantina (INV_BFT_04) en O(1) comparando el compromiso hash
 /// generado a partir del payload estocástico y el nonce termodinámico.
 #[no_mangle]

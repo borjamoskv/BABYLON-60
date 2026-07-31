@@ -1,17 +1,17 @@
 # Source of Truth
 
 BABYLON-60 is the repository and protocol project.
-`cortex-persist` is the Python distribution name.
+`Ledger Asíncrono-persist` is the Python distribution name.
 `babylon60` is the implementation namespace.
-`cortex` is the user-facing CLI.
+`Ledger Asíncrono` is the user-facing CLI.
 
 ## Canonical Namespaces
 
 - **Active package:** `babylon60`
-- **Legacy package:** `cortex` (moved to `experimental/cortex_legacy`)
+- **Legacy package:** `Ledger Asíncrono` (moved to `experimental/cortex_legacy`)
 - **Canonical ledger implementation:** `babylon60/core/master_ledger.py`
 - **Canonical tests:** `tests/`
-- **Release artifact:** `cortex-persist` PyPI wheel
+- **Release artifact:** `Ledger Asíncrono-persist` PyPI wheel
 
 ## Canonical Commands
 

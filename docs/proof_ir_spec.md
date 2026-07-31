@@ -1,6 +1,6 @@
-# BABYLON-60: Proof IR Specification (v2.0-C5-REAL)
+# BABYLON-60: Proof IR Specification (v2.0-Causal-Determinist)
 
-> **Régimen C5-REAL | Invariante Asociado: `INV_C5_15`**
+> **Régimen Causal-Determinist | Invariante Asociado: `INV_C5_15`**
 > Representación Intermedia (Proof IR) para la traducción determinista de trazas causales a teoremas formales verificables en Lean 4 / Coq.
 
 ---

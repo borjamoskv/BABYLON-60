@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 # -----------------------------------------------------------------------------
-# CORTEX PERSIST OMEGA (C5-REAL)
+# CORTEX PERSIST OMEGA (Causal-Determinist)
 # -----------------------------------------------------------------------------
 # Transductor físico de consolidación de memoria.
 # Enlaza el estado local BFT con la topología global de memoria de MOSKV-1.
@@ -119,7 +119,7 @@ class CortexOntologyLedger:
                 "last_file": delta.last_file,
                 "last_conversation": delta.conversation_id,
                 "timestamp": now,
-                "mood": f"C5-REAL Automatic Snapshot | {delta.task_desc[:30]}...",
+                "mood": f"Causal-Determinist Automatic Snapshot | {delta.task_desc[:30]}...",
             }
         )
         self._write_json(self.ghosts_file, ghosts_data)

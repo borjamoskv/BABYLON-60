@@ -1,11 +1,11 @@
-# Auditoría C5-REAL — BABYLON-60 v2.5.1 (Estado & Resolución)
+# Auditoría Causal-Determinist — BABYLON-60 v2.5.1 (Estado & Resolución)
 
-> **Régimen C5-REAL | Sello del Demiurgo: `borjamoskv`**
+> **Régimen Causal-Determinist | Sello del Demiurgo: `borjamoskv`**
 > Informe de auditoría técnica, matriz de riesgos mitigados, estado de resolución formal y plan de verificación.
 
 ---
 
-## 1. Veredicto Actualizado (v2.5.1-C5-REAL)
+## 1. Veredicto Actualizado (v2.5.1-Causal-Determinist)
 
 | Dimensión | Evaluación v2.5 | Estado v2.5.1 | Mecanismo de Resolución |
 | :--- | :---: | :---: | :--- |

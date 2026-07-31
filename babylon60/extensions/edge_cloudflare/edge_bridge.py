@@ -1,7 +1,7 @@
 """
 CORTEX-NATIVE: Edge Cloudflare Bridge
 Synchronizes the local Master Ledger with the Cloudflare D1/Hyperdrive Edge nodes.
-Execution: C5-REAL
+Execution: Causal-Determinist
 """
 
 import asyncio
@@ -22,7 +22,7 @@ class CloudflareEdgeBridge:
         if self.database_id:
             self.base_url += f"/{self.database_id}/query"
         self._client = httpx.AsyncClient(timeout=10.0)
-        logger.info("[C5-REAL] Cloudflare Edge Bridge Initialized")
+        logger.info("[Causal-Determinist] Cloudflare Edge Bridge Initialized")
 
     async def close(self):
         """Close the underlying HTTPX client."""
@@ -51,7 +51,7 @@ class CloudflareEdgeBridge:
             response.raise_for_status()
             data = response.json()
             if data.get("success"):
-                logger.debug("[C5-REAL] Edge D1 sync successful for taint %s", taint)
+                logger.debug("[Causal-Determinist] Edge D1 sync successful for taint %s", taint)
                 return True
             else:
                 logger.error("Edge D1 sync failed: %s", data.get("errors"))

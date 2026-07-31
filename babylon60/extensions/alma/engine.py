@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 ALMA: The Sovereign Bio-Digital Soul.
 Core Engine for mapping real-world system telemetry and memory events into

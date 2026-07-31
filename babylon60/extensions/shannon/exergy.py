@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Exergy Scoring - Axiom Ω₁₃ Shannon Upgrade.
 
 Measures useful extractable work, not just entropy or volume.

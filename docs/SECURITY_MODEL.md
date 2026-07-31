@@ -1,8 +1,8 @@
-# SECURITY MODEL — cortex-persist
+# SECURITY MODEL — Ledger Asíncrono-persist
 
 ## Scope
 
-This document defines the **threat model**, **security boundaries**, and **explicit guarantees** of the cortex-persist ledger.
+This document defines the **threat model**, **security boundaries**, and **explicit guarantees** of the Ledger Asíncrono-persist ledger.
 
 ---
 
@@ -83,7 +83,7 @@ A broken chain returns the exact entry index and both the expected and actual ha
 
 - Each tenant/workspace uses an isolated `.db` file.
 - No shared tables exist between tenants.
-- The central `cortex.db` (if present from BABYLON-60 legacy) is **read-only** and must not be written to by agent SDK calls. Use sidecar databases (`nexus_anchors.db`, `master_ledger.db`) for all mutations.
+- The central `Ledger Asíncrono.db` (if present from BABYLON-60 legacy) is **read-only** and must not be written to by agent SDK calls. Use sidecar databases (`nexus_anchors.db`, `master_ledger.db`) for all mutations.
 
 ---
 

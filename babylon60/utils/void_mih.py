@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 CORTEX - VOID-MIH (Multi-Index Hashing) Engine.
 

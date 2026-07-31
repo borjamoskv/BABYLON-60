@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Consolidación BFT (Erradicación del Antipatrón de Dispersión SQLite)
 ====================================================================
@@ -49,7 +49,7 @@ def _purge_db_file(db_path: Path) -> bool:
 
 
 def consolidate_dbs() -> None:
-    print(f"🟢 Iniciando Consolidación BFT C5-REAL hacia {CENTRAL_DIR}")
+    print(f"🟢 Iniciando Consolidación BFT Causal-Determinist hacia {CENTRAL_DIR}")
     CENTRAL_DIR.mkdir(parents=True, exist_ok=True)
 
     db_paths = [

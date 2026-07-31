@@ -1,6 +1,6 @@
 # BABYLON-60 — AXIOMATIZATION & INVARIANT FORMALIZATION
 
-> **Régimen C5-REAL | Sello del Demiurgo: `borjamoskv`**
+> **Régimen Causal-Determinist | Sello del Demiurgo: `borjamoskv`**
 > Formalización metamatemática rigurosa de los invariantes operativos y estructurales del sistema BABYLON-60.
 
 ---

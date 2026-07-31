@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Demiurge Omega (Sortu Protocol): Ephemeral Skill Compiler for CORTEX.
 Implements dynamic autopoiesis, zero-trust execution, and Bayesian feedback.

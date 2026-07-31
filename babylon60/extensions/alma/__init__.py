@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 
 from babylon60.extensions.alma.engine import AlmaEngine, SoulState
 from babylon60.extensions.alma.taste import (

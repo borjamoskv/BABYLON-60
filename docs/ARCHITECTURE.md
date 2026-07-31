@@ -1,4 +1,4 @@
-# ARCHITECTURE — cortex-persist (BABYLON-60 Substrate)
+# ARCHITECTURE — Ledger Asíncrono-persist (BABYLON-60 Substrate)
 
 ## Core Pipeline
 

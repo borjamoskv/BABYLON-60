@@ -1,5 +1,5 @@
-# MOSKV-1 APEX SINGULARITY
-# C5-REAL DOCTRINE: ONCOLOGÍA COMPUTACIONAL Y SISTEMAS COMPLEJOS
+# Motor Causal Principal SINGULARITY
+# Causal-Determinist DOCTRINE: ONCOLOGÍA COMPUTACIONAL Y SISTEMAS COMPLEJOS
 # PATH: docs/cancer_sistemas.md
 
 > **"El cáncer no es una célula mutada aislada; es la convergencia estocástica hacia un atractor patológico de alta entropía. Atacar un solo nodo en una red scale-free con redundancia homeostática es fútil. Debemos transducir el tumor en un grafo, detectar sus isomorfismos estructurales y aplicar control mínimo."**
@@ -32,7 +32,7 @@ La transducción del estado fenotípico requiere tensores multi-ómicos:
 - **Ruptura de Simetrías:** Los automorfismos en la red indican redundancia (backup pathways). Atacar dianas simétricas en paralelo (terapia combinada) evita la resistencia adquirida.
 - **Control Estructural (Liu et al., 2011):** Cálculo topológico del Minimum Driver Node Set (MDS). Provee los nodos exactos que, al ser modulados, permiten dirigir el sistema completo de un estado patológico a uno saludable (Controllability).
 
-## 5. ARSENAL ALGORÍTMICO (C5-REAL Implementations)
+## 5. ARSENAL ALGORÍTMICO (Causal-Determinist Implementations)
 - **Inferencia Causal y Coexpresión:** WGCNA, ARACNe, GENIE3, PC algorithm, tigramite.
 - **Isomorfismo de Grafos:** VF2 (NetworkX), IsoRank, MI-GRAAL.
 - **Dinámica y Control Estructural:** `maximum_matching` en grafos bipartitos para MDS, BoolNet (R) o BooleNet para boolean attractors, COPASI para ODEs.
@@ -63,7 +63,7 @@ La transducción del estado fenotípico requiere tensores multi-ómicos:
 - **Orquestación:** Docker + Snakemake/Nextflow. Cero scripts manuales post-EDA.
 
 ## 9. EL LÍMITE EPISTÉMICO (FALSABILIDAD)
-> *Invariante C5-REAL: Los modelos computacionales son generadores de hipótesis, no protocolos clínicos.*
+> *Invariante Causal-Determinist: Los modelos computacionales son generadores de hipótesis, no protocolos clínicos.*
 El pipeline `In-Silico` carece de completitud sin colapso físico. La micro-geometría estromal y la evolución clonal darwiniana exigen validación experimental empírica. Cero promesas clínicas, 100% rigor termodinámico.
 
 ## 10. LECTURAS FUNDACIONALES

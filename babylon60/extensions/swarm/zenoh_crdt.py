@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """CORTEX v6+ - Semantic CRDTs over Zenoh.
 
 Replaces asynchronous stochastic merges with deterministic CRDT operations
@@ -15,7 +15,7 @@ try:
     import zenoh
 except ImportError:
     raise RuntimeError(
-        "[C5-REAL] FATAL: zenoh-python native bindings required. "
+        "[Causal-Determinist] FATAL: zenoh-python native bindings required. "
         "Asyncio emulation has been permanently purged for zero-copy determinism."
     )
 
@@ -51,7 +51,7 @@ class ZenohCRDTBridge:
             logger.critical(
                 "[ZenohBridge] Native Zenoh connection failed: %s. Cannot fall back.", e
             )
-            raise RuntimeError(f"[C5-REAL] Zenoh Fabric initialization failed: {e}")
+            raise RuntimeError(f"[Causal-Determinist] Zenoh Fabric initialization failed: {e}")
 
     def _zenoh_callback(self, sample: Any) -> None:
         """Callback for incoming Zenoh messages. Zero-copy extraction."""
@@ -124,5 +124,5 @@ class ZenohCRDTBridge:
         logger.debug("[ZenohBridge] Published mutation to Zenoh fabric: ***id")
 
 
-# Global C5-REAL Bridge Instance
+# Global Causal-Determinist Bridge Instance
 zenoh_bridge = ZenohCRDTBridge()

@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 IMMUNITAS-Ω Chaos Engineering.
 Generalized 'Logic-Bomb' pattern for external dependencies.

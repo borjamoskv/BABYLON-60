@@ -1,5 +1,5 @@
 # causal_isomorphism/regime_validator.py — Trilingual Regime Boundary Enforcer
-# C5-REAL: Validates that emitted code respects the regime
+# Causal-Determinist: Validates that emitted code respects the regime
 # Author: Borja Moskv (borjamoskv)
 """
 Validates that IR modules and emitted code respect the Trilingual Regime:

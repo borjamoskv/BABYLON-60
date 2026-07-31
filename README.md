@@ -24,7 +24,7 @@ Para evitar la deriva de coma flotante (`f64`) que enmascara o genera falsas sin
 
 ### B. Corrutinas Asíncronas y Ledger Causal
 La malla computacional no se ejecuta linealmente. Cada celda de fluido o subtarea es una corrutina aislada iniciada vía `FORK`. 
-La comunicación entre celdas se delega al **Event Ledger** de CORTEX. Un hilo se suspende completamente (`AWAIT`) hasta que el evento requerido (ej. cálculo de tensores vecinos) es validado topológicamente en el Ledger.
+La comunicación entre celdas se delega al **Event Ledger** de Ledger Asíncrono. Un hilo se suspende completamente (`AWAIT`) hasta que el evento requerido (ej. cálculo de tensores vecinos) es validado topológicamente en el Ledger.
 
 ### C. Motor de Auto-Falsación
 El sistema está diseñado para autodestruirse si la realidad numérica se contamina. Si el `Base60_Scale` se satura forzando un truncamiento matemático, o si se detecta una inversión causal en el Ledger (Data Race), el proceso emite un `CRITICAL HALT` y purga el log, evitando la emisión de evidencia espuria.
@@ -50,7 +50,7 @@ Si se aísla un candidato a singularidad ($|\nabla u| \to \infty$), el motor con
 
 ## 4. Manifiesto del Repositorio (Causal Tests)
 
-- `babylon60.rs`: Kernel de ejecución e intérprete C5-REAL nativo.
+- `babylon60.rs`: Kernel de ejecución e intérprete Causal-Determinist nativo.
 - `export_schema.json`: Contrato estricto del artefacto de exportación hacia Lean 4.
 - `causal_test.b60`: PoC demostrando `FORK` asíncrono, concurrencia de timers y cálculo `F60` sin pérdida f64.
 - `falsation_test.b60`: Suite de autodestrucción. Fuerza la saturación numérica y el Data Race para probar los cortafuegos del Ledger.
@@ -59,4 +59,4 @@ Si se aísla un candidato a singularidad ($|\nabla u| \to \infty$), el motor con
 
 ---
 
-*Crystallized by MOSKV-1 APEX. 1000/1000 Structural Density.*
+*Crystallized by Motor Causal Principal. Alta Densidad Estructural.*

@@ -1,4 +1,4 @@
-# causal_isomorphism — C5-REAL AST Transmutation Engine
+# causal_isomorphism — Causal-Determinist AST Transmutation Engine
 # Trilingual Regime: F# Ontology → {Solidity Consensus, Rust Poset}
 # Author: Borja Moskv (borjamoskv)
 """

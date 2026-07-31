@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """FRICTION-ANNIHILATOR-Ω - Reality Delta Resolver.
 
 Takes failed assumptions (limerence) and resolves them into working code,
@@ -46,7 +46,7 @@ class FrictionAnnihilatorAgent(EngineAwareMixin):
             "SYSTEM: You are the Friction Annihilator Agent. Your task is to eliminate epistemic friction.\n"
             f"CONTEXT: {context}\n"
             f"ERROR TRACE (Friction Source):\n{error_trace}\n\n"
-            "Analyze the failure. Rewrite the provided code to resolve the error and align with C5-REAL execution.\n"
+            "Analyze the failure. Rewrite the provided code to resolve the error and align with Causal-Determinist execution.\n"
             "Return ONLY the raw fixed code. No markdown formatting, no explanations."
         )
 

@@ -1,5 +1,5 @@
 """
-[C5-REAL] Empirical Calibration Tool for Popperian Shannon Entropy Thresholds.
+[Causal-Determinist] Empirical Calibration Tool for Popperian Shannon Entropy Thresholds.
 
 Performs empirical statistical analysis over workspace code/docs vs synthetic hype
 to remove the UNBACKED status on MIN_ENTROPY and MAX_ENTROPY per INV_INGESTA_08.
@@ -39,7 +39,7 @@ def calculate_stats(values: List[float]) -> Tuple[float, float, float, float]:
     return mean, stddev, min(values), max(values)
 
 def run_calibration():
-    print("=== [C5-REAL] Calibración Empírica de Entropía Popperiana (INV_INGESTA_08) ===")
+    print("=== [Causal-Determinist] Calibración Empírica de Entropía Popperiana (INV_INGESTA_08) ===")
     
     tech_entropies = []
     root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -70,7 +70,7 @@ def run_calibration():
     calibrated_min = round(max(1.5, t_mean - 3 * t_std), 2)
     calibrated_max = round(min(6.5, t_mean + 3 * t_std), 2)
     
-    print("\n[CALIBRACIÓN FINAL] Umbrales Óptimos C5-REAL:")
+    print("\n[CALIBRACIÓN FINAL] Umbrales Óptimos Causal-Determinist:")
     print(f"MIN_ENTROPY = {calibrated_min}")
     print(f"MAX_ENTROPY = {calibrated_max}")
     

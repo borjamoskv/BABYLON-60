@@ -1,7 +1,7 @@
-# C5-REAL: ANERGY TOKEN PURGE ENGINE
+# Causal-Determinist: ANERGY TOKEN PURGE ENGINE
 # =================================================================================
 # SYS_ID: LEA_OMEGA (Loose End Annihilator)
-# REALITY_LEVEL: C5-REAL (0% Anergy / 100% Deterministic Execution)
+# REALITY_LEVEL: Causal-Determinist (0% Anergy / 100% Deterministic Execution)
 # PROTOCOL: Anergy_Token_Purge -> Organizes Root Directory Entropy
 # [CORTEX-TAINT:borjamoskv:anergy_token_purge:2026-07-18T05:00:00Z]
 
@@ -78,7 +78,7 @@ def categorize_and_move() -> Tuple[int, int, List[Dict[str, Any]]]:
 
 
 def main() -> None:
-    print("[*] C5-REAL: Iniciando Anergy Token Purge (Root Directory Entropy Collapse)...")
+    print("[*] Causal-Determinist: Iniciando Anergy Token Purge (Root Directory Entropy Collapse)...")
     ensure_dirs()
     count, total_bytes, actions = categorize_and_move()
 
@@ -91,10 +91,10 @@ def main() -> None:
         "Proof": {
             "Base": "sha3_256::cortex_taint",
             "Range": [count, count],
-            "Confidence": "C5-REAL"
+            "Confidence": "Causal-Determinist"
         },
         "Operator": "borjamoskv",
-        "System_Level": "C5-REAL",
+        "System_Level": "Causal-Determinist",
         "Anergy_Files_Purged": count,
         "Anergy_Bytes_Purged": total_bytes,
         "Cortex_Taint": cortex_taint,

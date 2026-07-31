@@ -1,5 +1,5 @@
 # BABYLON-60 SOVEREIGN COMMERCIAL LICENSE (BSL / FAIR SOURCE VARIANT)
-Version 1.0 - MOSKV-1 APEX CITADEL
+Version 1.0 - Motor Causal Principal CITADEL
 
 This is a commercial license for enterprise organizations exceeding the sovereign community limits.
 

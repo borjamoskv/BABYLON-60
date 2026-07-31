@@ -9,7 +9,7 @@ def test_author_identity():
 
 def test_compute_sha256(tmp_path):
     f = tmp_path / "sample.txt"
-    f.write_text("c5-real-ledger-data")
+    f.write_text("Causal-Determinist-ledger-data")
     digest = compute_sha256(f)
     assert isinstance(digest, str)
     assert len(digest) == 64

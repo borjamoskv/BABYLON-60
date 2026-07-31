@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 # cortex/evolution/psi_sap.py
 """
 ψSAP (Symbolic Action Principle) - Lagrangian Meta-Framework.

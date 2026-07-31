@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 IMMUNE-SYSTEM-v1 Arbiter.
 The Epistemic Arbitrator (Ωv3) - "Justice between perceptions."

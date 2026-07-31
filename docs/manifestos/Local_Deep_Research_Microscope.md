@@ -277,7 +277,7 @@ Everything beyond that boundary belongs to a different class of machines.
 > **Storage → Persistence → Memory → Belief → Epistemic Dynamics → Cognition**
 
 <!-- 
-CORTEX-TAINT:borjamoskv:substck_manifesto_v3:2026-07-18T00:12:17+02:00
+Ledger Asíncrono-TAINT:borjamoskv:substck_manifesto_v3:2026-07-18T00:12:17+02:00
 EXERGY_VALIDATION: True
 AESTHETIC: Industrial Noir 2026
 -->

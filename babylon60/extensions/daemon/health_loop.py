@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Health monitoring loop for moskv-daemon.
 
 Uses sealed Grade enum for comparisons. TrendDetector for drift.

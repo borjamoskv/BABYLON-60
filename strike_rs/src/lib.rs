@@ -15,7 +15,7 @@ pub mod gelabp_calc;
 pub mod bft_iceoryx2;
 pub mod hypervisor;
 
-/// Motor de Taint C5-REAL (Causal Poset)
+/// Motor de Taint Causal-Determinist (Causal Poset)
 /// Garantiza ejecución de coste cero en el Fast-Loop y verifica Kahn's Invariant (INV-GCM-003).
 
 #[derive(Debug, Clone, PartialEq)]
@@ -48,7 +48,7 @@ impl TaintEngine {
         }
     }
 
-    /// Inyecta un nodo en el Causal Poset. Cero-Anergía y cero Box::leak.
+    /// Inyecta un nodo en el Causal Poset. Cero-Ineficiencia y cero Box::leak.
     pub fn add_node(&mut self, id: &str, payload: &[u8]) -> petgraph::graph::NodeIndex {
         self.graph.add_node(CausalNode {
             id: id.to_string(),
@@ -107,7 +107,7 @@ mod tests {
         engine.add_edge(n1, n2); // A -> B
 
         assert!(engine.verify_kahn_invariant().is_ok());
-        let taint = engine.compute_cortex_taint().expect("[C5-REAL] FATAL: Taint computation failed in test");
+        let taint = engine.compute_cortex_taint().expect("[Causal-Determinist] FATAL: Taint computation failed in test");
         assert!(taint.starts_with("TAINT:C5_REAL_RUST:"));
     }
 

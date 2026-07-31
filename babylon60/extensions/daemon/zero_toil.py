@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """CORTEX v6+ - Zero-Toil Autonomous Assimilation Daemon.
 
 Erradica la entropía operacional mediante:

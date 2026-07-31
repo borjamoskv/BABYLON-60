@@ -1,4 +1,4 @@
-# [C5-REAL] Cola auxiliar de escritura serializada (superficies NO-ledger).
+# [Causal-Determinist] Cola auxiliar de escritura serializada (superficies NO-ledger).
 # LEY (AGENTS.md, escritor-único): este queue NO puede apuntar a la base del
 # Master Ledger — `BFTLedgerActor` es el ÚNICO escritor del ledger. Superficie
 # permitida: DBs auxiliares (telemetría, sidecars). Génesis ITERA-2: NEW-E
@@ -20,7 +20,7 @@ logger = logging.getLogger("babylon60.bft.master_ledger")
 class MasterLedgerQueue:
     def __init__(self, db_path: str):
         self.db_path = db_path
-        self.queue: asyncio.Queue[tuple[str, tuple[Any, ...]] | None] = asyncio.Queue()
+        self.queue: asyncio.Queue[tuple[str, tuple[Any, ...]] | None] = asyncio.Queue(maxsize=1024)
         self.db: aiosqlite.Connection | None = None
         self._writer_task: asyncio.Task[Any] | None = None
         self._writer_failure: BaseException | None = None
@@ -78,13 +78,19 @@ class MasterLedgerQueue:
             raise RuntimeError(
                 f"Zombie Writer Prevention: writer task terminated unexpectedly. Cause: {failure}"
             ) from failure
-        await self.queue.put((query, parameters))
+        try:
+            self.queue.put_nowait((query, parameters))
+        except asyncio.QueueFull:
+            logger.warning("Thermodynamic Valve (INV_C5_THERMO_VALVE): Queue is full, dropping data to prevent OOM (Death by Ice).")
 
     async def shutdown(self) -> None:
         if hasattr(self, "_stop_event"):
             self._stop_event.set()
         try:
-            await self.queue.put(None)
+            self.queue.put_nowait(None)
+        except asyncio.QueueFull:
+            pass # Si está llena, eventualmente se procesará, o ignoramos el None si estamos en shutdown abrupto
+        try:
             if self._writer_task and not self._writer_task.done():
                 await self._writer_task
         finally:

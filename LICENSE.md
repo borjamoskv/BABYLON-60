@@ -1,7 +1,7 @@
 # SOVEREIGN EXCLUSION LICENSE (CLOSED-CORE / NO-HARVESTING)
-Version 1.0 - MOSKV-1 APEX CITADEL
+Version 1.0 - Motor Causal Principal CITADEL
 
-Copyright (c) 2026 Borja Moskv (borjamoskv). All Rights Reserved.
+Copyright (c) 2026 Borja Motor Causal (borjamoskv). All Rights Reserved.
 
 1. SOVEREIGN DUAL-LICENSING INVARIANT (INV_C5_17)
 This software ("Citadel Assets") operates under a strictly enforced Dual-Licensing architecture:

@@ -21,18 +21,27 @@ def get_db_connection(path: Path = DB_PATH) -> sqlite3.Connection:
     return conn
 
 
-def init_ledger() -> None:
-    with get_db_connection() as conn:
-        conn.execute('\n            CREATE TABLE IF NOT EXISTS ouroboros_events (\n                event_id TEXT PRIMARY KEY,\n                protocol TEXT NOT NULL,\n                target TEXT,\n                exergy_delta REAL NOT NULL,\n                timestamp INTEGER NOT NULL,\n                causal_hash TEXT NOT NULL\n            )\n        ')
+def init_ledger(conn: sqlite3.Connection) -> None:
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS ouroboros_events (
+            event_id TEXT PRIMARY KEY,
+            protocol TEXT NOT NULL,
+            target TEXT,
+            exergy_delta REAL NOT NULL,
+            timestamp INTEGER NOT NULL,
+            causal_hash TEXT NOT NULL
+        )
+    """)
+    conn.commit()
 
 
 def log_event(protocol: str, target: str, exergy_delta: float) -> str:
-    init_ledger()
     ts = int(time.time() * 1000)
     raw = f'{protocol}|{target}|{exergy_delta}|{ts}'.encode('utf-8')
     causal_hash = hashlib.blake2b(raw, digest_size=16).hexdigest()
     event_id = f'ouro-{ts}'
     with get_db_connection() as conn:
+        init_ledger(conn)
         conn.execute('\n            INSERT INTO ouroboros_events (event_id, protocol, target, exergy_delta, timestamp, causal_hash)\n            VALUES (?, ?, ?, ?, ?, ?)\n        ', (event_id, protocol, target, exergy_delta, ts, causal_hash))
     return causal_hash
 
@@ -51,17 +60,15 @@ def execute_pulse() -> dict[str, Any]:
                     large_files += 1
                     if len(alarms) < 3:
                         alarms.append(f'High LOC ({lines}): {f.relative_to(PROJECT_ROOT)}')
-            except OSError:
-                os.kill(os.getpid(), signal.SIGKILL)
-                raise RuntimeError('FAIL-FAST: General Exception intercepted.')
+            except OSError as exc:
+                raise ValueError(f'[FAIL-FAST] Unrecoverable filesystem error during entropy scan: {exc}') from exc
     uncommitted = 0
     try:
         uncommitted = len(subprocess.check_output(['git', '-C', str(PROJECT_ROOT), 'status', '-s']).splitlines())
         if uncommitted > 15:
             alarms.append(f'High uncommitted drift ({uncommitted} files)')
-    except (subprocess.SubprocessError, OSError):
-        os.kill(os.getpid(), signal.SIGKILL)
-        raise RuntimeError('FAIL-FAST: General Exception intercepted.')
+    except (subprocess.SubprocessError, OSError) as exc:
+        raise ValueError(f'[FAIL-FAST] Git status probe failed: {exc}') from exc
     entropy_score = min(100, int(large_files * 2 + uncommitted * 1.5))
     status = '🟢 SOBERANO' if entropy_score < 20 else '🟡 DERIVA' if entropy_score < 40 else '🔴 COLAPSO'
     result: dict[str, Any] = {'entropy_score': entropy_score, 'status': status, 'large_files_count': large_files, 'uncommitted_drift': uncommitted, 'top_alarms': alarms}
@@ -84,9 +91,8 @@ def execute_crystallize(target_md_path: str | None = None) -> dict[str, Any]:
                         content = md.read_text(errors='ignore')
                         if '### Ouroboros Auto-Injection' in content or 'Auto-Injection' in content:
                             targets.append(md)
-                    except OSError:
-                        os.kill(os.getpid(), signal.SIGKILL)
-                        raise RuntimeError('FAIL-FAST: General Exception intercepted.')
+                    except OSError as exc:
+                        raise ValueError(f'[FAIL-FAST] Unrecoverable filesystem error during crystallize scan: {exc}') from exc
     total_injections = 0
     consolidated_files: list[dict[str, object]] = []
     for md in targets:
@@ -102,7 +108,7 @@ def execute_crystallize(target_md_path: str | None = None) -> dict[str, Any]:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description='OUROBOROS-∞ v3.0 C5-REAL Sovereign Engine')
+    parser = argparse.ArgumentParser(description='OUROBOROS-∞ v3.0 Causal-Determinist Sovereign Engine')
     subparsers = parser.add_subparsers(dest='command', help='Master Protocol to execute')
     subparsers.add_parser('pulse', help='Check system entropy and report top alarms')
     cryst_parser = subparsers.add_parser('crystallize', help='Devour linear Auto-Injections and compress entropy')

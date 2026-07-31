@@ -272,7 +272,7 @@ async def async_main() -> None:
     if matrix["Score"] < 700.0:
         LOGGER.error("Exergy score below threshold – aborting")
         sys.exit(1)
-    LOGGER.info("[SUCCESS] Iteración 2 completada sin anergía")
+    LOGGER.info("[SUCCESS] Iteración 2 completada sin Ineficiencia")
 
 if __name__ == "__main__":
     asyncio.run(async_main())

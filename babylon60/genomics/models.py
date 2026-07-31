@@ -1,5 +1,5 @@
 """
-C5-REAL Strict Data Models for the Genome Transducer Engine.
+Causal-Determinist Strict Data Models for the Genome Transducer Engine.
 Enforces typed invariants (Rule Ω17), exact causality tracking, and zero-anergy data representation.
 """
 

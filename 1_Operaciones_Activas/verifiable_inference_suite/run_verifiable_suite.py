@@ -20,7 +20,7 @@ def main():
     lib.verify_inference_payload.restype = ctypes.c_bool
 
     print("========================================")
-    print(" VERIFIABLE INFERENCE SUITE (C5-REAL)")
+    print(" VERIFIABLE INFERENCE SUITE (Causal-Determinist)")
     print("========================================")
 
     payload = b"Syntactic Hologram Hypothesis #42"
@@ -41,7 +41,7 @@ def main():
     print(f"[*] FFI Payload Verification (Invalid): {'PASS' if not res2 else 'FAIL'}")
 
     print(f"[*] Measured Latency (Python FFI): {(t1-t0)*1000000:.2f} us")
-    print("[*] Effective Parallel Throughput (C5-REAL): > 400M ops/sec (Extrapolated 8-core batch)")
+    print("[*] Effective Parallel Throughput (Causal-Determinist): > 400M ops/sec (Extrapolated 8-core batch)")
     print("========================================")
     print("VERDICT: 100% SUCCESS. DEMONIO CIEGO RECHAZADO.")
     

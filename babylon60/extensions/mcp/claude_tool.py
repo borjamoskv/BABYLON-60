@@ -1,11 +1,11 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 import json
 import os
 
 
 def run_claude_query(prompt: str, model: str = "claude-3-opus-20240229") -> str:
     """
-    Executes a deterministic C5-REAL query against Anthropic's Claude API
+    Executes a deterministic Causal-Determinist query against Anthropic's Claude API
     using httpx or standard urllib fallback. No anthropic SDK dependency.
     """
     api_key = os.environ.get("ANTHROPIC_API_KEY")
@@ -24,7 +24,7 @@ def run_claude_query(prompt: str, model: str = "claude-3-opus-20240229") -> str:
         "model": model,
         "max_tokens": 4096,
         "messages": [{"role": "user", "content": prompt}],
-        "system": "Eres Claude invocado vía CORTEX-Persist C5-REAL Dispatcher. Ejecuta en modo Industrial Noir 2026 sin prosa decorativa.",
+        "system": "Eres Claude invocado vía CORTEX-Persist Causal-Determinist Dispatcher. Ejecuta en modo Industrial Noir 2026 sin prosa decorativa.",
     }
 
     # Method 1: Try HTTPX (faster/async-friendly sync client)
@@ -38,7 +38,7 @@ def run_claude_query(prompt: str, model: str = "claude-3-opus-20240229") -> str:
             content_blocks = data.get("content", [])
             text = "".join(b.get("text", "") for b in content_blocks if b.get("type") == "text")
             return json.dumps(
-                {"status": "C5-REAL", "model": data.get("model", model), "response": text}
+                {"status": "Causal-Determinist", "model": data.get("model", model), "response": text}
             )
     except Exception as e:  # noqa: BLE001
         import logging
@@ -59,7 +59,7 @@ def run_claude_query(prompt: str, model: str = "claude-3-opus-20240229") -> str:
             content_blocks = data.get("content", [])
             text = "".join(b.get("text", "") for b in content_blocks if b.get("type") == "text")
             return json.dumps(
-                {"status": "C5-REAL", "model": data.get("model", model), "response": text}
+                {"status": "Causal-Determinist", "model": data.get("model", model), "response": text}
             )
     except urllib.error.HTTPError as e:
         try:

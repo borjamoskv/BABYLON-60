@@ -1,4 +1,4 @@
-"""C5-REAL OPSEC Memory Shield — Process Isolation Layer.
+"""Causal-Determinist OPSEC Memory Shield — Process Isolation Layer.
 
 Prevents coredump exfiltration and debugger attachment on Darwin (macOS).
 Must be imported as the FIRST module in any cryptographic or BFT entry point.

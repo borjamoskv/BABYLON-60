@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """CORTEX v6+ - Thermodynamic Apoptosis Daemon.
 
 Enforces structural entropy reduction (Context Rot eradication).

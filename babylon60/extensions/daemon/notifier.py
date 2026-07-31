@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Cross-platform notifications for MOSKV-1 daemon.
 
 Dispatches to the native notification system:

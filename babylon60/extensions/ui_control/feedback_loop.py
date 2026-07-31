@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 UIFeedbackLoop - Perception-Action Feedback Loop.
 
@@ -43,7 +43,7 @@ class UIFeedbackLoop:
     def perform_native_ocr(self, image_path: str) -> list[dict[str, Any]]:
         """
         Runs native macOS Apple Vision OCR (VNRecognizeTextRequest).
-        Zero-dependency, high-speed, local C5-REAL text extraction.
+        Zero-dependency, high-speed, local Causal-Determinist text extraction.
         """
         if not Vision or not NSURL:
             logger.warning("Vision framework or Cocoa NSURL not available. Bypassing local OCR.")

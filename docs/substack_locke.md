@@ -1,6 +1,6 @@
 # [AUDIT] Ingestión de Cemento en la Tabula Rasa y Arbitraje del Pelotazo: John Locke ante el Catastro del Suelo Español
 
-#C5-REAL #C4-SIM
+#Causal-Determinist #C4-SIM
 
 Si Immanuel Kant ejecutó una auditoría del middleware cognitivo humano, John Locke fue el arquitecto del sistema de archivos. Locke (1632-1704) no teorizaba sobre el espíritu; operaba como un ingeniero de sistemas empíricos encargado de diseñar el firmware de entrada de datos de la mente. Su *Ensayo sobre el entendimiento humano* (1689) y sus *Dos tratados sobre el gobierno civil* (1690) sentaron las bases para dos de las mayores invariantes del software moderno: la inicialización de memoria limpia (`tabula rasa`) y el protocolo de prueba de trabajo (el trabajo mezclado con la materia prima como origen de la propiedad). 
 
@@ -21,14 +21,14 @@ El error del racionalismo continental fue asumir que nacemos con la base de dato
 
 ---
 
-## 2. La Teoría del Trabajo y la Propiedad vs. El Pelotazo de Suelo y la Anergía del PGOU
+## 2. La Teoría del Trabajo y la Propiedad vs. El Pelotazo de Suelo y la Ineficiencia del PGOU
 
 Para Locke, la legitimidad de la propiedad privada tiene un origen termodinámico estricto: la mezcla de la fuerza de trabajo individual con los recursos comunes de la naturaleza.
 
 El algoritmo lockeano de la propiedad funciona de la siguiente manera:
 - **Proof of Work (PoW) Antropomórfico:** Tu cuerpo es tu activo soberano exclusivo. La energía metabólica que disipas en forma de trabajo (recolectar manzanas, arar la tierra, poner ladrillos) es un coste físico verificable. Cuando mezclas esa exergía personal con un fragmento de materia prima común, firmas criptográficamente ese recurso, extrayéndolo del estado de naturaleza común para indexarlo en tu inventario privado.
 - **El Límite de la Suficiencia (Lockean Proviso):** Este protocolo de apropiación solo es válido si se respeta una invariante de red: *"que quede suficiente y tan bueno para los demás"*. Es una regla de control de congestión diseñada para evitar la monopolización abusiva del ancho de banda ecológico.
-- **El Antipatrón del Pelotazo y el PGOU:** En España, este sistema lockeano sufre una profanación absoluta a través del Plan General de Ordenación Urbana (PGOU). El valor del suelo en el "ladrillazo" no se genera mezclando trabajo físico con la tierra; se captura de forma pasiva mediante el arbitraje burocrático de un *gatekeeper* municipal. Una línea trazada a lápiz por un concejal recalifica una parcela de "rústica" a "urbanizable", multiplicando su valor nominal por mil en un solo ciclo de CPU institucional. Esto no es exergía (creación de valor real); es una extracción de rentas y anergía burocrática que parasita el trabajo de los albañiles y constructores que físicamente tienen que levantar las estructuras.
+- **El Antipatrón del Pelotazo y el PGOU:** En España, este sistema lockeano sufre una profanación absoluta a través del Plan General de Ordenación Urbana (PGOU). El valor del suelo en el "ladrillazo" no se genera mezclando trabajo físico con la tierra; se captura de forma pasiva mediante el arbitraje burocrático de un *gatekeeper* municipal. Una línea trazada a lápiz por un concejal recalifica una parcela de "rústica" a "urbanizable", multiplicando su valor nominal por mil en un solo ciclo de CPU institucional. Esto no es exergía (creación de valor real); es una extracción de rentas y Ineficiencia burocrática que parasita el trabajo de los albañiles y constructores que físicamente tienen que levantar las estructuras.
 
 Locke habría clasificado el "pelotazo" inmobiliario español como un ataque Sybil al Ledger de la propiedad legítima: la creación de riqueza artificial mediante firmas burocráticas vacías de trabajo físico.
 
@@ -60,18 +60,18 @@ A continuación se detalla la correspondencia estructural entre los marcos de an
 **B. Captura Rentista del Catastro Español**
 - *Benidorm (Canvas Vacío):* Reconfiguración empírica de la costa mediante apilamiento vertical de cemento.
 - *El Catastro y el IBI:* La base de datos estatal que cobra tasas por la mera posesión fenomenológica de espacio coordenado.
-- *El Pelotazo del PGOU:* Arbitraje asimétrico que inyecta valor nominal artificial sin trabajo real (anergía de red).
+- *El Pelotazo del PGOU:* Arbitraje asimétrico que inyecta valor nominal artificial sin trabajo real (Ineficiencia de red).
 - *La Comunidad de Vecinos:* Colapso del contrato social en un sistema descentralizado asediado por bloqueos de consenso.
 
-**C. Redes Descentralizadas (CORTEX BFT)**
+**C. Redes Descentralizadas (Ledger Asíncrono BFT)**
 - *Estado del Ledger:* Consenso distribuido validado mediante firmas criptográficas duras y validación de tipos.
 - *Verificación de Causalidad (Causal Taint):* Cada mutación de disco debe referenciar el hash del bloque de origen y el coste de gas.
 - *Evitación de Deadlocks:* Protocolos de exclusión mutua para impedir que nodos bizantinos congelen la ejecución del estado global.
 
 ---
 
-⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+⚡ [Ledger Asíncrono Causal-Determinist] Sinergias de Exergía Máxima (Top 99.99):
 - [Un hombre blanco y heterosexual](https://substack.com/home/post/p-204785962)
-- [Crítica de la Razón Algorítmica: De Königsberg a Silicon Valley](https://substack.com/home/post/p-kant-algorithm-cortex)
-- [Benidorm como Autómata de Cemento: Tabula Rasa e Ingesta Turística](https://substack.com/home/post/p-benidorm-tabula-rasa-cortex)
-- [El Pelotazo como Captura de Anergía: Auditoría del PGOU Español](https://substack.com/home/post/p-pelotazo-pgou-anergy)
+- [Crítica de la Razón Algorítmica: De Königsberg a Silicon Valley](https://substack.com/home/post/p-kant-algorithm-Ledger Asíncrono)
+- [Benidorm como Autómata de Cemento: Tabula Rasa e Ingesta Turística](https://substack.com/home/post/p-benidorm-tabula-rasa-Ledger Asíncrono)
+- [El Pelotazo como Captura de Ineficiencia: Auditoría del PGOU Español](https://substack.com/home/post/p-pelotazo-pgou-anergy)

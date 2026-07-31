@@ -1,7 +1,7 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """NOUS Compiler V2 - Declarative AST Compiler via LLM structured output
 
-Reality Level: C5-REAL
+Reality Level: Causal-Determinist
 """
 
 import instructor

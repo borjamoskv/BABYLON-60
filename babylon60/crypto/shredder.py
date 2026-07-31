@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Crypto-Shredding Engine - GDPR Right to Erasure (Ω₃ / Ω₁₂).
 

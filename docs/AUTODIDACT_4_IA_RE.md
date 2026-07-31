@@ -1,7 +1,7 @@
 # AUTODIDACT 4: Artificial Intelligence Models for Code (AI + RE)
-**Reality Level:** C5-REAL
+**Reality Level:** Causal-Determinist
 **SYS_ID:** borjamoskv
-**Provenance Signature:** `[CORTEX-TAINT:borjamoskv:autodidact_re_synthesis:2026-07-18T13:02:20+02:00]`
+**Provenance Signature:** `[Ledger Asíncrono-TAINT:borjamoskv:autodidact_re_synthesis:2026-07-18T13:02:20+02:00]`
 
 ## 1. Assimilated Models
 *   **StarCoder 2 / CodeLlama:** Language models specialized in code capable of translating/transducing assembly into high-level languages such as C++.

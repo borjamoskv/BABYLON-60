@@ -2,7 +2,7 @@ import threading
 
 from babylon60.crypto.hash_registry import cortex_hash
 
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Fiat Oracle Sidecar (Operation Citadel).
 Monitors financial transactions (Simulated/Bunq) and pushes facts to the ledger.

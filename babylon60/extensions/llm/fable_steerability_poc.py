@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 # Proof of Concept: Steerability & Negative Constraints (Fable 5)
 import asyncio
 import logging
@@ -67,7 +67,7 @@ async def capture_fable_payload(*args, **kwargs):
 
 
 async def run_steerability_poc():
-    logging.getLogger(__name__).info("[*] Initiating C5-REAL Steerability PoC (Fable 5 Constraint Override)")
+    logging.getLogger(__name__).info("[*] Initiating Causal-Determinist Steerability PoC (Fable 5 Constraint Override)")
 
     api_key = "dummy_key_for_steerability"
     prompt = "Write a script in Python 2.7 to parse a text file."

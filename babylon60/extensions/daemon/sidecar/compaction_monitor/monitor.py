@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """monitor.py
 
 MemoryPressureMonitor - Compaction Sidecar, Nivel 130/100.

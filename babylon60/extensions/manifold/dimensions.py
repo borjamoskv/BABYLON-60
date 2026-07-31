@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """MOSKV-1 - Tesseract Dimensions Adapters.
 
 Wraps Aether agents (Planner, Executor, Critic, Tester) into

@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 ReplayEngine: Deterministic reconstruction of any past execution.
 Consults the EnterpriseAuditLedger and yields a strictly ordered,

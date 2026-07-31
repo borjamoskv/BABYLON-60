@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """SAP Entity Mapper.
 
 Transforms SAP OData entities into CORTEX facts and back.

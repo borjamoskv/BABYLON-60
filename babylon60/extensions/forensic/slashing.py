@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Sovereign Slashing Primitive (Axiom Ω₃) - CORTEX Persist.
 Defines the penalty hooks for reputation destruction.

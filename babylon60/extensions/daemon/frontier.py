@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Frontier Daemon (R&D & Metabolism)
 The engine that ensures CORTEX is always at the bleeding edge.

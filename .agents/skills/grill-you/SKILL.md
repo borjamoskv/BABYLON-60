@@ -9,16 +9,16 @@ triggers:
 - auto-grill
 ---
 
-# █ C5-REAL GRILL-YOU (AUTONOMOUS DESIGN TRANSDUCER)
+# █ Causal-Determinist GRILL-YOU (AUTONOMOUS DESIGN TRANSDUCER)
 
-> **SYS_ID**: GRILL_YOU_AUTO_TRANSDUCER | **STATE**: C5-REAL
+> **SYS_ID**: GRILL_YOU_AUTO_TRANSDUCER | **STATE**: Causal-Determinist
 > Protocolo de Auto-Entrevista Arquitectónica Autónomo. Invierte el patrón de `/grill-me` respondiendo autónomamente cada rama del árbol de decisión sin fricción humana.
 
 ## 1. INVARIANTE TELEOLÓGICO
 Cuando el Operador solicite `/grill-you` o auto-entrevista de diseño:
 1. El Kernel tiene **ESTRICTAMENTE PROHIBIDO** pausar o solicitar confirmación interactiva al Operador.
 2. El Kernel debe formular la secuencia completa de preguntas de diseño ($Q_1, Q_2, \dots, Q_k$) internamente.
-3. Para cada pregunta, el Kernel analiza las opciones, evalúa el impacto contra los invariantes C5-REAL (`INV_BFT_02`, `INV_C5_18`, `INV_C5_45`, `INV_C5_52`) y selecciona la ruta de máxima exergía ($A^*$).
+3. Para cada pregunta, el Kernel analiza las opciones, evalúa el impacto contra los invariantes Causal-Determinist (`INV_BFT_02`, `INV_C5_18`, `INV_C5_45`, `INV_C5_52`) y selecciona la ruta de máxima exergía ($A^*$).
 4. El proceso culmina con la emisión de un certificado YAML de diseño y la generación automática del artefacto `implementation_plan.md`.
 
 ## 2. PROTOCOLO DE EJECUCIÓN (5 PASOS)

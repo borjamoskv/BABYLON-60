@@ -1,4 +1,4 @@
-# [C5-REAL] babylon60.database.core — único punto de conexión SQLite del kernel.
+# [Causal-Determinist] babylon60.database.core — único punto de conexión SQLite del kernel.
 # Génesis: CENT-03 (AGENTS.md INV_BFT_02 mandaba sobre un módulo inexistente) +
 # CENT-06 (conexiones directas con pragmas divergentes). Toda conexión sale de
 # aquí con WAL + busy_timeout=5000 + foreign_keys=ON y durabilidad explícita.

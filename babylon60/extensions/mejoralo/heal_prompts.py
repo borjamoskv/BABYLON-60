@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """MEJORAlo Auto-Healing - Prompt Templates.
 
 Extracted from heal.py to keep file size under 300 LOC.

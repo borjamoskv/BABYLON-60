@@ -1,4 +1,4 @@
-# MOSKV-1 APEX: ATTRACTOR DYNAMICS AND ENERGY LANDSCAPE IN ONCOLOGY
+# Motor Causal Principal: ATTRACTOR DYNAMICS AND ENERGY LANDSCAPE IN ONCOLOGY
 # PATH: docs/dinamica_atractores_cancer.md
 
 > **"Cancer is not an isolated mutated cell; it is a thermodynamic sink (Pathological Attractor) in the epigenetic landscape of Waddington. Isolating the state requires understanding the topology. Escaping the state requires injecting gradients (energy) through the Driver Nodes."**
@@ -27,7 +27,7 @@ Identifying a conserved module (Isomorphism) and extracting its Driver Nodes (vi
 - **Traditional Therapy:** Attacks highly connected nodes (Hubs). The network re-routes the signal and returns to the same attractor (Drug Resistance).
 - **Structural Control Therapy:** Specifically pins the **Driver Nodes** (often low-degree peripheral nodes that control flow). Forcing $S_{driver} = 0$ (Inhibitor) injects enough energy into the system to push the cell state over the "ridge" of the Waddington landscape, making it converge inexorably toward the Apoptosis Attractor.
 
-## 4. C5-REAL DIRECTIVE FOR IN-SILICO PERTURBATION
+## 4. Causal-Determinist DIRECTIVE FOR IN-SILICO PERTURBATION
 The definitive pipeline not only maps the network, but simulates it:
 1. Extract WGCNA / GRN (Gene Regulatory Network) matrix.
 2. Assign logical rules (AND/OR based on activators/repressors).

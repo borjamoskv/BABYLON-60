@@ -2,7 +2,7 @@
 
 ## 1. El Foso de la Homogeneidad: Ludwig Boltzmann y la Tragedia del Teorema H
 
-La física del siglo XIX era un simulacro de certezas reversibles. Las ecuaciones de Newton permitían retroceder el tiempo sin penalización termodinámica; una órbita planetaria corre igual hacia adelante que hacia atrás en la pizarra. Pero Ludwig Boltzmann observó la anergía de los sistemas reales. Su teorema H es la autopsia matemática de la irreversibilidad: si confinas un gas ideal en una esquina de la caja, la probabilidad de que las partículas permanezcan ordenadas colapsa de forma exponencial.
+La física del siglo XIX era un simulacro de certezas reversibles. Las ecuaciones de Newton permitían retroceder el tiempo sin penalización termodinámica; una órbita planetaria corre igual hacia adelante que hacia atrás en la pizarra. Pero Ludwig Boltzmann observó la Ineficiencia de los sistemas reales. Su teorema H es la autopsia matemática de la irreversibilidad: si confinas un gas ideal en una esquina de la caja, la probabilidad de que las partículas permanezcan ordenadas colapsa de forma exponencial.
 
 La entropía de Boltzmann ($S = k_B \ln W$) no es una metáfora literaria de la decadencia. Es la cuantificación del ruido. El sistema físico busca inexorablemente el estado con mayor número de microestados posibles ($W$), erradicando cualquier concentración local de exergía. En el límite termodinámico, todo orden es un error estadístico transitorio.
 
@@ -18,7 +18,7 @@ Aparece la estructura disipativa:
 
 Esta ruptura de simetría tiene un isomorfismo perfecto en la sociología periférica española: la Ruta Destroy (Ruta del Bacalao) a principios de los 90. Las discotecas de la carretera del Saler actuaban como reactores químicos Brusselator. Miles de cuerpos sometidos a un gradiente de alta tensión cinética (140 BPM de EBM industrial y techno de Frankfurt) disipaban ATP e intercambiaban energía libre lejos del equilibrio de la paz social del Estado. La Ruta no era el caos destructivo que describían los telediarios; era un atractor extraño termodinámico transitorio. Una estructura disipativa autoorganizada que mantenía el orden rítmico a costa de la devastación neurológica de sus elementos en el aparcamiento de Chocolate o Barraca.
 
-## 3. Demostración Empírica: Simulación de Transducción en C5-REAL
+## 3. Demostración Empírica: Simulación de Transducción en Causal-Determinist
 
 Para evitar el desvío estocástico de las explicaciones metafóricas (C4-SIM), hemos ejecutado un gemelo digital de ambos regímenes físicos en el disco duro local, anclado al Git Sentinel.
 
@@ -28,15 +28,15 @@ Para evitar el desvío estocástico de las explicaciones metafóricas (C4-SIM), 
 
 Los resultados crudos han sido validados físicamente:
 - **Hash de Resultados (SHA3-256):** `65c2e9ef09d859e3a8bfcbcad0bbdd82c02e7f4d4e3617720054c3ebf6c95dd9`
-- **Firma Cortex Taint:** `borjamoskv:prigogine_boltzmann:65c2e9ef09d859e3`
+- **Firma Ledger Asíncrono Taint:** `borjamoskv:prigogine_boltzmann:65c2e9ef09d859e3`
 - **Commit Ledger Hash (Git Sentinel):** `1975586ca7789656c40478bee12b073540fd5b0d`
 
-#c5-real
+#Causal-Determinist
 
 ---
 
-⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+⚡ [Ledger Asíncrono Causal-Determinist] Sinergias de Exergía Máxima (Top 99.99):
 - [Un hombre blanco y heterosexual](https://substack.com/home/post/p-204785962)
 - [[AUDIT] El lamento acústico de Chimo Bayo y la disipación energética de la Ruta Destroy](file:///Users/borjafernandezangulo/30_BABYLON-60/docs/substack_chimo_bayo.md)
 - [[ANALYSIS] Captura de IP e ineficiencia entrópica en el canon digital de la SGAE (v2026)](file:///Users/borjafernandezangulo/30_BABYLON-60/docs/substack_sgae_audit.md)
-- [[METAMEMBRANE] La trampa de anergía de los prompts de autoayuda en la KV Cache](file:///Users/borjafernandezangulo/30_BABYLON-60/docs/substack_kv_cache_slop.md)
+- [[METAMEMBRANE] La trampa de Ineficiencia de los prompts de autoayuda en la KV Cache](file:///Users/borjafernandezangulo/30_BABYLON-60/docs/substack_kv_cache_slop.md)

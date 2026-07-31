@@ -1,9 +1,9 @@
-# [C4-SIM] Transitioning to C5-REAL
+# [C4-SIM] Transitioning to Causal-Determinist
 """
 Intelligent Tutoring System (ITS)
 
 Operates at the epistemic limit. Measures semantic divergence between stochastic student input
-and the target theorem using LLMs (C4-SIM). Crystallization to C5-REAL requires AST/formal verification.
+and the target theorem using LLMs (C4-SIM). Crystallization to Causal-Determinist requires AST/formal verification.
 """
 
 from typing import Any
@@ -20,7 +20,7 @@ class TutorAgent:
     ) -> dict:
         """
         Evaluate student's semantic divergence.
-        If ast_validation is True, attempts to bridge C4-SIM to C5-REAL via structural assertions.
+        If ast_validation is True, attempts to bridge C4-SIM to Causal-Determinist via structural assertions.
         """
         # C4-SIM: Probabilistic evaluation of semantic divergence
         prompt = f"Evaluate the divergence between student input: '{student_input}' and target theorem: '{target_theorem}'."
@@ -32,11 +32,11 @@ class TutorAgent:
             "formal_validation": None,
         }
 
-        # Bridge to C5-REAL
+        # Bridge to Causal-Determinist
         if ast_validation:
             grader = ASTGrader()
             is_valid = grader.evaluate(student_input)
             result["formal_validation"] = "Approved" if is_valid else "Apoptosis"
-            result["epistemic_level"] = "C5-REAL" if is_valid else "C4-SIM (Failed Validation)"
+            result["epistemic_level"] = "Causal-Determinist" if is_valid else "C4-SIM (Failed Validation)"
 
         return result

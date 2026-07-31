@@ -1,7 +1,7 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """NOUS Runtime - Intent-driven migration execution and dry-run engine
 
-Reality Level: C5-REAL
+Reality Level: Causal-Determinist
 """
 
 import hashlib
@@ -29,7 +29,7 @@ class NousRuntime:
         Executes a dry-run of the AST using the DryRunEngine.
         """
 
-        logger.info("🛡️ [NOUS] Starting C5-REAL dry-run for %s", ast.metadata.version)
+        logger.info("🛡️ [NOUS] Starting Causal-Determinist dry-run for %s", ast.metadata.version)
 
         operations = SQLSynthesizer.synthesize(ast)
         return await self.dry_run_engine.simulate(operations)
@@ -43,7 +43,7 @@ class NousRuntime:
 
         if not dry_run_result or not dry_run_result.ok:
             raise ValueError(
-                "❌ [NOUS] C5-REAL constraint: Cannot execute migration without a successful dry run."
+                "❌ [NOUS] Causal-Determinist constraint: Cannot execute migration without a successful dry run."
             )
 
         # 1. Crystallize Taint
@@ -61,7 +61,7 @@ class NousRuntime:
             dry_run_hash=dry_run_hash,
             predicted_state_hash=predicted_state_hash,
             timestamp=datetime.now(timezone.utc),
-            signature="ed25519-c5-real-signature",
+            signature="ed25519-Causal-Determinist-signature",
         )
         logger.info("🔒 [NOUS] Migration Taint crystallized: %s", taint.signature)
 
