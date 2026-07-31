@@ -34,6 +34,7 @@ The operational surface is limited to:
 2. **`BABYLON-60/`**: Deployment interface designed to interact without theater (anti-green-theater).
 3. **`cortex-persist/`**: Physical structures of the ledger and immutable knowledge bases.
 4. **`1_Operaciones_Activas/scripts/`**: Active operational scripts (`43_iter_ultrathink.py`, `58_...`) and the **C5-REAL SIMD/NEON Engine**. Contains physical C extensions (`libpopcount_neon`, `libxorshift_neon`, `libbitonic_neon`, `libgemm_neon`) built deterministically via `Makefile` to `/tmp/exergy_builds/` (Ω24, Ω25), driving hardware-level exergy maximization (ILP 8x, TLP GCD) and deterministic entropy ingestion.
+5. **`cortex_guard/`**: ULTRATHINK Zero-Tolerance Dependency Vanguard. Native C-Extension enforcing kernel-level BFT and POSIX compliance (SIGABRT) across all orchestrator environments.
 
 ## 🧬 Epistemic Matrix (Axiom Ω6)
 The deep structural memory (Code, Logs, GitHub, Architecture) operates entirely in **English**, empirically validated by a 2.29M word extraction over the private C5-REAL topology (Web3, Solidity, CORTEX, Rust). **Spanish** is strictly restricted exclusively as the Operator-Transducer interface language (Natural I/O).

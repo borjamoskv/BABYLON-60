@@ -26,3 +26,8 @@ sync:
 
 audit:
 	@python3 /Users/borjafernandezangulo/.gemini/antigravity/scratch/legion_100_agents_audit.py
+
+build-guard:
+	@echo "[ULTRATHINK] Compiling Native C-Extension OUT-OF-TREE (/tmp/cortex_exergy_build)..."
+	@mkdir -p /tmp/cortex_exergy_build
+	@cd cortex_guard && python3 setup.py build_ext --build-lib /tmp/cortex_exergy_build --build-temp /tmp/cortex_exergy_build/temp

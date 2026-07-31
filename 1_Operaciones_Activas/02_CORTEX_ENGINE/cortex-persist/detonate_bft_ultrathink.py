@@ -47,7 +47,7 @@ def detonate_bft():
 
     try:
         conn.execute("INSERT INTO bft_taint_log (uuid, timestamp, payload) VALUES (?, ?, ?)",
-                     (str(taint_uuid), timestamp, "ENHANCE_MOSKV1_C5REAL_ARCHITECTURE_REPORT"))
+                     (str(taint_uuid), timestamp, "AUDITORIA_TOPOLOGICA"))
         conn.commit()
         print(f"[CORTEX-TAINT:{taint_uuid}] Inyección Idempotente Exitosa.")
     except sqlite3.IntegrityError:
