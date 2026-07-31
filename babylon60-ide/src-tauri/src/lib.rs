@@ -13,24 +13,33 @@ use lexicon::{Domain, Primitive, Modifier};
 use inference::{InferenceResult, run_local_inference, check_local_status};
 use iceoryx2::prelude::*;
 use iceoryx2::service::zero_copy::Service;
+use iceoryx2::service::Service as ServiceTrait;
 use once_cell::sync::OnceCell;
+
+use iceoryx2::service::port_factory::publish_subscribe::PortFactory;
+
+#[derive(Clone)]
+pub struct IpcHandle(pub Arc<PortFactory<Service, Vec<u8>>>);
+
+unsafe impl Send for IpcHandle {}
+unsafe impl Sync for IpcHandle {}
 
 struct AppState {
     ledger: Mutex<CortexLedger>,
-    ipc: Arc<Service>,
+    ipc: IpcHandle,
 }
 
-static IPC_SERVICE: OnceCell<Arc<Service>> = OnceCell::new();
+static IPC_SERVICE: OnceCell<IpcHandle> = OnceCell::new();
 
-fn init_ipc() -> Arc<Service> {
+fn init_ipc() -> IpcHandle {
     let service_name = ServiceName::new("babylon60_ipc").unwrap();
-    let service = Service::new(&service_name)
+    let service_factory = Service::new(&service_name)
         .publish_subscribe()
         .open_or_create::<Vec<u8>>()
         .expect("Failed to create iceoryx2 IPC service");
-    let arc_service = Arc::new(service);
-    IPC_SERVICE.set(arc_service.clone()).ok();
-    arc_service
+    let handle = IpcHandle(Arc::new(service_factory));
+    IPC_SERVICE.set(handle.clone()).ok();
+    handle
 }
 
 // ═══════════════════════════════════════════════════════
