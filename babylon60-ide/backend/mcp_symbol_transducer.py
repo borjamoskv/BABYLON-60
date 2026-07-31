@@ -48,7 +48,7 @@ def query_ledger(query_type, param):
 def main():
     # Estructura simple de RPC para integraciones de IDE agénticos
     if len(sys.argv) < 3:
-        print(json.dumps({"error": "Usage: mcp_symbol_helper.py [search|get_details] [param]"}))
+        print(json.dumps({"error": "Usage: mcp_symbol_transducer.py [search|get_details] [param]"}))
         sys.exit(1)
         
     command = sys.argv[1]

@@ -1,11 +1,11 @@
-# test_license_manager.py
-# Empirical falsification for Sovereign Dual-Licensing (INV_C5_17) & License Manager
+# test_license_sovereign_validator.py
+# Empirical falsification for Sovereign Dual-Licensing (INV_C5_17) & License Transducer
 # Authorship: Telmo Dinámico de Moskv (borjamoskv)
 
 import os
 import time
 import pytest
-from license_manager import (
+from license_sovereign_validator import (
     generate_license_key,
     verify_license_key,
     LicenseStatus,
@@ -130,4 +130,3 @@ def test_commercial_tier_unbounded_throughput(tmp_path: object) -> None:
     assert inserted == 105
     assert persist.io_node_count() == 105
     persist.close()
-

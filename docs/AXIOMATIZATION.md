@@ -127,10 +127,11 @@ $$\forall d \in \text{Daemon} : \exists N \le 120 \quad \text{tal que} \quad \te
 ### 2.9 INV_C5_ATMS_O1: Antichain ATMS en Silicio
 
 > [!NOTE]
-> **Enunciado del Invariante:** La verificación de inconsistencias (*nogoods*) y minimización de entornos en el motor ATMS debe resolverse mediante vectores de bits SIMD (`u128`) en complejidad de ciclo único de ALU $O(1)$.
+> **Enunciado del Invariante:** La verificación de inconsistencias (*nogoods*) y minimización de entornos en el motor ATMS debe resolverse mediante vectores de bits SIMD (`u128`) en complejidad de ciclo único de ALU $O(1)$. Adicionalmente, la reducción a anticadenas mínimas DEBE operar por ordenamiento topológico (popcount) en $O(N \log N)$, prohibiendo iteraciones de subsunción anidadas $O(N^2)$.
 
 #### Especificación Lógica:
 $$\forall e \in \text{Env}, n \in \text{Nogoods} : \text{IsSubsumed}(e, n) \iff (e \ \text{BITWISE\_AND} \ n) == n \quad \text{en } O(1)$$
+$$\forall E \in \mathcal{P}(\text{Env}) : \text{minimize}(E) \implies \text{SortByKey}(e \mapsto \text{popcount}(e)) \quad \text{en } O(N \log N)$$
 
 ---
 
@@ -156,6 +157,6 @@ $$\exists k \in [1, N] : P_k(\theta) = 0 \implies P_{\text{logOP}}(\theta) = \fr
 | **GELABP_DEPTH** | Análisis Estático AST | $O(\text{AST\_nodes})$ | Linter AST dinámico (`depth \le 4`) |
 | **INV_C5_ABFT_IPC** | IPC Shared Memory | $O(1)$ Zero-Copy | Service PortFactory zero_copy |
 | **INV_C5_TURING_CASTRATION** | Lógica de Procesos | $N \le 120$ iters | Verificador sintáctico de bucles y halts |
-| **INV_C5_ATMS_O1** | Retículo de Verdad | $O(1)$ ALU SIMD | Bitmask mask matching `(e & n) == n` |
+| **INV_C5_ATMS_O1** | Retículo de Verdad | $O(N \log N)$ ALU | Bitmask subsumption & popcount sort |
 | **INV_BFT_LOGOP** | Teorema de Consenso | $P_k=0 \implies P=0$ | Agregador geométrico logarítmico |
 

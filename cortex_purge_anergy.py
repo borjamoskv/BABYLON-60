@@ -35,7 +35,8 @@ PROTECTED_FILES = {
     "pyproject.toml", "uv.lock", "cortex_purge_anergy.py",
     "cortex_ssm_mamba_core.py", "cortex_mamba_block.py", "cortex_mamba_network.py",
     "cortex_mamba_inference.py", "cortex_bpe_tokenizer.py", "core_graph_ledger.py",
-    "io_persist_ledger.py", "net_mamba_ledger_engine.py", "index.html"
+    "io_persist_ledger.py", "net_mamba_ledger_engine.py", "index.html",
+    "license_sovereign_validator.py", "cortex_chaos_monad.py"
 }
 
 def ensure_dirs() -> None:

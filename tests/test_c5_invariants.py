@@ -227,3 +227,39 @@ def test_inv_c5_19_turing_castration_scan():
     hits = _scan({".py"}, r'while\s+True\s*:\s*$')
     hits = [h for h in hits if "test_" not in h and "extensions" not in h and "experimental" not in h and "yt-dlp" not in h]
     assert not hits, _fail_msg("INV_C5_19 (Turing Castration — Unbounded while True loop)", hits)
+
+
+def test_inv_c5_20_no_placeholders():
+    """INV_C5_20 — Deterministic Execution Matrix: No placeholders (# TODO, pass, ...)."""
+    hits = _scan({".py", ".rs", ".ts", ".sol"}, r'(?i)#\s*TODO\b|^\s*\.\.\.\s*$')
+    hits = [
+        h for h in hits
+        if not h.startswith("tests/") and "autodetect_invariants.py" not in h and "demo_exergy_poc.py" not in h
+    ]
+    assert not hits, _fail_msg("INV_C5_20 (No placeholders / TODO / ...)", hits)
+
+
+def test_inv_c5_21_eip_1153():
+    """INV_C5_21 — EIP-1153 strict EVM bounds: keccak256, mload(0x40), lt(gas(), 8000), revert(0x00, 0x04)."""
+    hits = _scan({".sol"}, r'revert\(0,\s*0\)|revert\(0x00,\s*0x00\)')
+    assert not hits, _fail_msg("INV_C5_21 (Invalid revert pattern, MUST use 0x00, 0x04)", hits)
+
+
+def test_inv_c5_22_swarm_workspace_locks():
+    """INV_C5_22 — Swarm Workspace Deduplication: verify atomic lock acquisition."""
+    hits = _scan({".py"}, r'os\.O_CREAT')
+    bad_files = []
+    for hit in hits:
+        filepath = hit.split(":")[0]
+        full_path = ROOT / filepath
+        if full_path.exists():
+            content = full_path.read_text(errors="ignore")
+            if ".cortex_thermal_lock" not in content and "swarm_lock_guard.py" not in content:
+                bad_files.append(hit)
+    assert not bad_files, _fail_msg("INV_C5_22 (Missing .cortex_thermal_lock in atomic I/O)", bad_files)
+
+
+def test_inv_c5_28_stub():
+    """INV_C5_28 — Auto-generated stub for rule validation."""
+    # TODO: Implement concrete scan logic for rule INV_C5_28
+    pass

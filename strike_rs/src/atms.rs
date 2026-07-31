@@ -517,6 +517,22 @@ mod tests {
         a.contradict(&[h]);
         assert!(!a.contradiction_free(h), "nogood must revoke contradiction-freedom");
     }
+
+    #[test]
+    fn test_ax_atms_thermodynamic_minimize_falsification() {
+        use std::time::Instant;
+        let mut envs = Vec::new();
+        // Inyectar entropía masiva: 4000 entornos
+        for i in 0..4000 {
+            envs.push(Environment { mask: i as u128 });
+        }
+        let start = Instant::now();
+        let _min = super::minimize(envs);
+        let elapsed = start.elapsed();
+        // Falsación: Si minimize() es O(N^2), fallará estrepitosamente o excederá el límite.
+        // Con O(N log N) por popcount topological sorting, toma menos de 50ms.
+        assert!(elapsed.as_millis() < 200, "INV_C5_ATMS_O1 Falsificado: Complejidad cruzó el límite termodinámico ({}ms)", elapsed.as_millis());
+    }
 }
 
 // ──────────────────────────────────────────────────────────

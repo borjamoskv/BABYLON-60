@@ -2,7 +2,7 @@
 # Execution Protocol: Premium Feature - High Availability Zero-Copy Clustering
 # Validates Enterprise tier before allowing instantiation.
 
-from license_manager import verify_license_key, LicenseStatus
+from license_sovereign_validator import verify_license_key, LicenseStatus
 try:
     import strike_rs
 except ImportError:

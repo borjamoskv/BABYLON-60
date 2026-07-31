@@ -1,6 +1,8 @@
-# license_manager.py
-# Verification Protocol: Cryptographic / HMAC License Manager for Cortex Persist
-# Authorship: Telmo Dinámico de Moskv (borjamoskv)
+# C5-REAL: LICENSE SOVEREIGN VALIDATOR
+# =================================================================================
+# Verification Protocol: Cryptographic / HMAC License Transducer for Cortex Persist
+# Domain Transducer Primitive: [720-895]
+# Nominal Density Invariant: INV_C5_NOMINAL_DENSITY
 
 import os
 import hmac

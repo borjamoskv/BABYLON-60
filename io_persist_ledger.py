@@ -4,7 +4,7 @@
 
 import sqlite3
 from core_graph_ledger import GraphLedger, StateNode
-from license_manager import verify_license_key, LicenseStatus
+from license_sovereign_validator import verify_license_key, LicenseStatus
 
 
 class LedgerPersist:

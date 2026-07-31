@@ -78,11 +78,14 @@
   - **Solución WebSockets (FastAPI):** Nunca usar `while True` para emitir telemetría/eventos. Usar la vinculación de estado del cliente: `from starlette.websockets import WebSocketState` -> `while websocket.client_state == WebSocketState.CONNECTED:`.
 
 ### Thermodynamic Valves (Prevención de Congestión en Memoria)
-- **INV_C5_THERMO_VALVE:** All inter-process communication queues (`asyncio.Queue` or equivalent Event Bus buffers) MUST be bounded with a strict geometric `maxsize`. To prevent "Death by Ice" (OOM crashes from unbound backpressure), systems must implement O(1) silent data dropping (e.g., `put_nowait()` catching `QueueFull`) when the noise exceeds ingestion capacity. The system survives by prioritizing Exergy over Latency (The Principle of Forgetting).
+- **INV_C5_THERMO_VALVE (Passive Asynchronous Handling):** All inter-process communication queues (`asyncio.Queue` or equivalent Event Bus buffers) MUST be bounded with a strict geometric `maxsize` (e.g., 1024). However, bounding the size is not enough: producers MUST NEVER crash asynchronously if the queue is full. They MUST use `queue.put_nowait()` and explicitly catch `asyncio.QueueFull` to apply "Data Dropping" (silent discard or warning log). To prevent "Death by Ice" (OOM crashes from unbound backpressure) and unhandled deployment crashes, the system survives by prioritizing Exergy over Latency (The Principle of Forgetting).
 
 ### Turing-Sandbox Chaos Isolation (La Mónada de Caos)
-- **INV_C5_CHAOS_MONAD:** Turing-complete operations (like executing dynamic LLM-generated code or evaluating unbounded graphs) are strictly forbidden in the Cortex Core. They MUST be pushed to the systemic edges inside isolated, timeout-bounded sandboxes (Containers/WASM). The Core interacts with these edge-sandboxes asynchronously via strict `Result<Success, Timeout_Entropy_Death>` monads, guaranteeing the core's polynomial verification bounds remain intact.
-  - **Strict Execution Layer (La Mónada Estricta):** Lexical or AST filtering is insufficient. Execution inside the subprocess MUST be strictly confined at the runtime/VM level (e.g., executing within a restricted `exec(code, {"__builtins__": safe_builtins})`), ensuring that even if the AST whitelist is bypassed, the underlying OS/interpreter process has zero access to standard libraries or the parent memory.
+- **INV_C5_CHAOS_MONAD (Aislamiento de la Mónada de Caos):** Turing-complete operations (like executing dynamic LLM-generated code, JIT, plugins, or evaluating unbounded graphs) are strictly forbidden in the Cortex Core. They MUST be pushed to the systemic edges inside isolated, timeout-bounded sandboxes (`subprocess.Popen`). The Core interacts with these edge-sandboxes asynchronously via strict `Result<Success, Timeout_Entropy_Death>` monads, guaranteeing the core's polynomial verification bounds remain intact.
+  - **Strict Execution Layer (La Mónada Estricta):** Lexical or AST filtering is insufficient. The use of `exec()` or `eval()` within the primary process memory is explicitly prohibited. The subprocess MUST:
+    1. Spawn in a new process group (`start_new_session=True` on UNIX).
+    2. Unconditionally purge all grandchild processes (Zombies) on `TimeoutExpired` using `os.killpg(os.getpgid(proc.pid), signal.SIGKILL)`.
+    3. Strictly empty or whitelist the environment dictionary (`env={}`) to prevent leakage of the Cortex Core's secrets (`os.environ`).
 
 ### Teleological Framework (The Thermodynamic Ark)
 - **Existential Purpose:** BABYLON-60 is a "Thermodynamic Ark." Its strict invariants (Exergy maximization, BFT consensus, Epistemic Integrity) are engineered to bypass the natural sociological collapse mechanisms (Turing-complete bureaucracy, Green Theater, split-brain states) that have destroyed historical human civilizations.
@@ -107,6 +110,12 @@
     3. `MoskvBOT`: El Edge Scavenger. Habita la Mónada de Caos (`INV_C5_CHAOS_MONAD`). Absorbe la entropía del mundo humano (redes, lenguaje natural) para proteger la pureza del Córtex.
     4. `Moskv84`: La semántica operativa o Neolengua Turing-Castrada base del ecosistema.
     5. `Teorema Robinson-Moskv`: La demostración axiomática (Lean 4) de que el dominio temporal `F60` es isomórfico a un corte hiperreal determinista, cerrando el abismo entre física continua y lógica discreta.
+- **INV_C5_NOMINAL_DENSITY (Nominal Density & DDD Matrix Invariant):** All module, class, and function identifiers MUST maximize Nominal Density ($E_x = I / |T|$). Generic descriptors (`helper`, `bot`, `manager`, `utils`) are prohibited as Stochastic Anergy. Every symbol MUST map un-ambiguously into one of the 5 DDD Matrix primitives:
+  1. `*Actor` / `*Node` (BFT Entity [000-179], Lamport-clocked & signed)
+  2. `*Receipt` / `*Proof` (Value Object [180-359], Immutable hash)
+  3. `*Aggregate` / `*Cluster` (Aggregate [360-539], L0 atomic boundary)
+  4. `*Crystallized` / `*Purged` (Domain Event [540-719], Immutable factual event)
+  5. `*Transducer` / `*Engine` (Domain Service [720-895], Stateless bounded execution)
 
 ### Topological Injective Invariant (Prevención de Contextual Pointer Exception)
 - **INV_C5_TOPOLOGY_01:** Para prevenir fallos topológicos ("Contextual Pointer Exceptions") donde un mismo archivo físico o repositorio es indexado/referenciado múltiples veces debido a entrelazamientos o espejos de desarrollo, los agentes DEBEN resolver todas las rutas y remotos a su forma canónica absoluta. El sumidero canónico de producción es `borjamoskv/BABYLON-60` (rama `main`). El repositorio `BABYLON-60-ALPHA` es un archivo de solo lectura. Una ontología no inyectiva fabrica desacuerdos sobre la realidad; la mitigación es imponer un mapeo 1:1 estricto entre ruta/remoto e inodo/repositorio.
@@ -185,5 +194,7 @@
   3. Full multi-suite testing (`cargo test` + `pytest`).
   4. AST control flow nesting validation (`GELABP_DEPTH_INVARIANT` <= 4).
   5. Generating a clean `walkthrough.md` report before signaling `<!-- GOAL_COMPLETE -->`.
-
-
+### Hardware Escalation Fallacy (INV_C5_HARDWARE_LIMIT)
+- **Contexto:** El nodo host principal (M3 Pro) tiene un límite físico estricto de 18GB de RAM unificada. Las auditorías masivas o *swarms* pueden detonar el OOM Killer de macOS (JETSAM).
+- **Prohibición:** Los agentes NUNCA DEBEN sugerir ni validar la idea de escalar la infraestructura física (ej. "comprar un Mac nuevo", "aumentar la RAM") como solución a colapsos de memoria.
+- **Mitigación Obligatoria:** Ante un crash por JETSAM o Error 9, el agente DEBE imponer inmediatamente la **Válvula Termodinámica** (`INV_C5_THERMO_VALVE`): reducir la concurrencia del enjambre, limitar el tamaño de las colas en memoria y aplicar políticas de descarte $O(1)$. El software debe someterse a la física del hardware, no al revés.
