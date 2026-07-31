@@ -9,7 +9,25 @@ import os
 import math
 
 def load_softmax_engine():
-    lib_path = os.path.join(os.path.dirname(__file__), "libsoftmax_neon.dylib")
+    tmp_path = "/tmp/exergy_builds/libsoftmax_neon.dylib"
+    local_path = os.path.join(os.path.dirname(__file__), "libsoftmax_neon.dylib")
+
+    lib_path = None
+    if os.path.exists(tmp_path):
+        lib_path = tmp_path
+    elif os.path.exists(local_path):
+        lib_path = local_path
+    else:
+        # Compilación determinista vía Makefile (Axioma Ω25)
+        scripts_dir = os.path.dirname(__file__)
+        os.system(f"make -C {scripts_dir} > /dev/null 2>&1")
+        if os.path.exists(tmp_path):
+            lib_path = tmp_path
+        elif os.path.exists(local_path):
+            lib_path = local_path
+        else:
+            raise FileNotFoundError("libsoftmax_neon.dylib no encontrada ni compilable vía Makefile")
+
     lib = ctypes.CDLL(lib_path)
 
     # void fast_softmax_neon(float *__restrict__ data, size_t rows, size_t cols)

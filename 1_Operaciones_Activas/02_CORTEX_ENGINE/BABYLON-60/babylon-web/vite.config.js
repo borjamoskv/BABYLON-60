@@ -17,8 +17,6 @@ export default defineConfig({
       }
     },
     // Target modern browsers / Safari on macOS (Ω13)
-    target: 'esnext',
-    // Minify with esbuild for speed & small bundle
-    minify: 'esbuild'
+    target: 'esnext'
   }
 })

@@ -1,0 +1,14 @@
+/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/domain_kernel/bin/Release/net10.0/Babylon60.Domain.deps.json
+/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/domain_kernel/bin/Release/net10.0/Babylon60.Domain.dll
+/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/domain_kernel/bin/Release/net10.0/Babylon60.Domain.pdb
+/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/domain_kernel/bin/Release/net10.0/Babylon60.Domain.xml
+/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/domain_kernel/obj/Release/net10.0/Babylon60.Domain.fsproj.AssemblyReference.cache
+/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/domain_kernel/obj/Release/net10.0/Babylon60.Domain.AssemblyInfoInputs.cache
+/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/domain_kernel/obj/Release/net10.0/Babylon60.Domain.AssemblyInfo.fs
+/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/domain_kernel/obj/Release/net10.0/Babylon60.Domain.fsproj.CoreCompileInputs.cache
+/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/domain_kernel/obj/Release/net10.0/Babylon60.Domain.sourcelink.json
+/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/domain_kernel/obj/Release/net10.0/Babylon60.Domain.dll
+/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/domain_kernel/obj/Release/net10.0/refint/Babylon60.Domain.dll
+/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/domain_kernel/obj/Release/net10.0/Babylon60.Domain.xml
+/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/domain_kernel/obj/Release/net10.0/Babylon60.Domain.pdb
+/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/domain_kernel/obj/Release/net10.0/ref/Babylon60.Domain.dll
