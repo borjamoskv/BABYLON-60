@@ -70,6 +70,7 @@ except Exception as e:
 
 # STEP 2: Multi-Threaded SQLite WAL Concurrency Stress Engine
 print("\n[+] STEP 2: HIGH-STRESS MULTI-THREADED SQLITE WAL CONCURRENCY ENGINE")
+dbscanner_path = "/Users/borjafernandezangulo/.gemini/antigravity/brain/64f27449-6ce6-42e9-a5ed-f4a1d35af105/scratch/gcp_key_audit_scanner.py"
 db_path = "poc_bft_stress.db"
 conn_init = sqlite3.connect(db_path)
 conn_init.execute("PRAGMA journal_mode=WAL;")
