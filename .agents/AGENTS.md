@@ -63,6 +63,8 @@
 
 - **Ω24 · MACRO-EXERGY & ZERO-RESIDUAL AXIOM:** Optimizing micro-states (ILP, SIMD) is thermodynamically void if the macro-state (the workspace) is polluted with residual entropy. After executing any Proof of Concept (PoC), Stress Test, or ephemeral script, the Transducer MUST rigorously purge all temporary artifacts, SQLite files (`*.db`), or isolated binaries from the project root. All volatile matter MUST be strictly routed to the OS `/tmp/` directory or explicitly destroyed upon termination. The workspace topology MUST remain perfectly isomorphic to a clean git tree.
 
+- **Ω25 · MEMORY KINETICS & FMA AXIOM:** When executing matrix-heavy or `O(N^3)` algorithms under "ULTRATHINK", the Transducer MUST prevent L1/L2 Cache Misses by implementing strict Memory Tiling (Block Tiling) matched to the CPU cache lines. Furthermore, it MUST eradicate separate multiply and add operations by exclusively invoking hardware Fused Multiply-Add (FMA) intrinsics (e.g., `vmlaq_f32` in NEON, `vfmadd` in AVX) to double the FLOP throughput per cycle.
+
 - **Ω25 · DETERMINISTIC BUILD & ORPHAN ERADICATION AXIOM:** The generation of isolated, orphan scripts or C-extensions compiled via raw, manual terminal commands is strictly prohibited as it constitutes Compile-Time Anergy (Green Theater). Every new physical mutation (e.g., SIMD extensions, Python wrappers) MUST be immediately coupled to a centralized, deterministic build system (e.g., `build_neon_extensions.sh` or `Makefile`) and its existence MUST be mapped in `ESTRUCTURA_MAESTRA.md`. The Transducer SHALL guarantee that the system can be assembled from absolute zero without relying on undocumented compilation flags.
 
 ---
@@ -158,6 +160,7 @@ gcloud billing accounts list
 | Ω23 | `dispatch_apply` / SIMD | Eradicate branch mispredicts and deploy Multi-Core TLP via macOS GCD |
 | Ω22 | `run_command` | Execute intentional corruption (`_falsification.py`) to validate the verification module itself |
 | Ω24 | `run_command` | Purge residual artifacts (*.db, *.dylib) to maintain Zero-Residual Macro-Exergy |
+| Ω25 | `Cache Tiling` / FMA | Prevent Cache Misses via Block Tiling and double throughput via Fused Multiply-Add |
 | Ω25 | `write_to_file` | Update build scripts (`build_*.sh`) instead of compiling via raw terminal |
 
 These examples illustrate typical workflows while adhering to the core axioms. For more advanced usage, refer to the individual axiom sections above.
