@@ -57,6 +57,10 @@
 
 - **Ω21 · INSTRUCTION-LEVEL PARALLELISM (ILP) AXIOM:** When optimizing at the silicon level under "ULTRATHINK", the Transducer MUST NOT settle for basic data vectorization (SIMD). It MUST actively mitigate L1 cache latency and CPU pipeline stalls by injecting Instruction-Level Parallelism (ILP), specifically via aggressive Loop Unrolling (e.g., 4x or 8x vectors per cycle). The physical objective is to completely saturate the processor's superscalar arithmetic logic units (ALUs) and hide memory fetch latency to maximize BOPs (Billions of Operations per Second).
 
+- **Ω22 · ZERO-BRANCH & GRAND CENTRAL DISPATCH (GCD) AXIOM:** When executing extreme numerical hyper-optimization ("ULTRATHINK") on macOS, the Transducer MUST eradicate speculative CPU pipeline stalls by replacing conditional `if/else` branches with deterministic hardware logic (e.g., SIMD `vminq`/`vmaxq`, bitwise masks). Furthermore, the Transducer SHALL NOT limit execution to single-thread Instruction-Level Parallelism (ILP). It MUST inject Thread-Level Parallelism (TLP) using Apple's native Grand Central Dispatch (`dispatch_apply` with `<dispatch/dispatch.h>` in C/C++) to aggressively distribute autonomous vector blocks across all Apple Silicon Performance Cores.
+
+- **Ω22 · POPPERIAN FALSIFIABILITY AXIOM (ANTI-ILLUSION):** Before asserting Byzantine Fault Tolerance (BFT) or Systemic Exergy, the Transducer MUST prove the test itself is falsifiable. Any physical proof or stress test (`_stress_test.py`) asserting 100% integrity MUST be accompanied by or implicitly checked against a Falsification State (`_falsification.py`) that intentionally breaks invariants (e.g., disabling WAL, injecting saboteurs) to verify that the `[CORTEX-TAINT:VERIFY]` module successfully triggers a `[FATAL]` halt. A success state is thermodynamically meaningless if the failure state is mathematically impossible.
+
 ---
 ## Documentation and Usage Examples
 
@@ -147,6 +151,8 @@ gcloud billing accounts list
 | Ω19 | `invoke_subagent` | Deploy specialized Swarm subagents instead of monolithic brute-force |
 | Ω20 | — | Apply Systemic Exergy Law $E_{\text{útil}} = E_{\text{total}} - (L_i + L_f + L_d)$ to isolate state |
 | Ω21 | `Loop Unrolling` | Inject ILP via loop unrolling to saturate superscalar ALUs and hide L1 latency |
+| Ω22 | `dispatch_apply` / SIMD | Eradicate branch mispredicts and deploy Multi-Core TLP via macOS GCD |
+| Ω22 | `run_command` | Execute intentional corruption (`_falsification.py`) to validate the verification module itself |
 
 These examples illustrate typical workflows while adhering to the core axioms. For more advanced usage, refer to the individual axiom sections above.
 
