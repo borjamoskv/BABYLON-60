@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 # UUIDv5 namespace for C5-REAL Cortex Taint
 NAMESPACE_CORTEX = uuid.UUID('6ba7b810-9dad-11d1-80b4-00c04fd430c8')
 now_utc = datetime.now(timezone.utc)
-taint_id = str(uuid.uuid5(NAMESPACE_CORTEX, f"CORTEX-TAINT:POC-MULTI-PROJECT:{now_utc.isoformat()}"))
+taint_id = str(uuid.uuid5(NAMESPACE_CORTEX, f"CORTEX-TAINT:POC-HIGH-EXERGY:{now_utc.isoformat()}"))
 
 t0 = time.perf_counter()
 
@@ -21,56 +21,17 @@ print(f"=== [CORTEX-TAINT:{taint_id}] ADVANCED BFT MULTI-PROJECT GCP KEY AUDIT &
 print(f"[*] TIMESTAMP (UTC): {now_utc.isoformat()}")
 print(f"[*] HARDWARE ARCHITECTURE: macOS Darwin / C5-REAL High Exergy Engine")
 
-# STEP 1: GCP Multi-Project Sovereign Triad & Key Discovery
-print("\n[+] STEP 1: EMPIRICAL MULTI-PROJECT GCP IDENTITY & API KEY DISCOVERY")
+# STEP 1: GCP Multi-Project Sovereign Triad & Key Auto-Remediation Engine
+print("\n[+] STEP 1: EMPIRICAL MULTI-PROJECT GCP IDENTITY & API KEY AUTO-REMEDIATION AUDIT")
 try:
-    proj_res = subprocess.run(["gcloud", "projects", "list", "--format=json"], capture_output=True, text=True, check=True)
-    projects_data = json.loads(proj_res.stdout)
-    project_ids = [p["projectId"] for p in projects_data if p.get("lifecycleState") == "ACTIVE"]
-
-    print(f"    ├─ Active GCP Account : borjabilbo84@gmail.com")
-    print(f"    ├─ Total Active GCP Projects : {len(project_ids)}")
-
-    total_keys_found = 0
-    unrestricted_keys = []
-
-    for pid in project_ids:
-        keys_res = subprocess.run(["gcloud", "services", "api-keys", "list", f"--project={pid}", "--format=json"], capture_output=True, text=True)
-        if keys_res.returncode == 0 and keys_res.stdout.strip():
-            try:
-                keys = json.loads(keys_res.stdout)
-                for k in keys:
-                    total_keys_found += 1
-                    uid = k.get("uid")
-                    disp = k.get("displayName", "N/A")
-                    restr = k.get("restrictions", {})
-                    has_api = bool(restr.get("apiTargets"))
-                    has_app = any([
-                        bool(restr.get("browserKeyRestrictions")),
-                        bool(restr.get("serverKeyRestrictions")),
-                        bool(restr.get("androidKeyRestrictions")),
-                        bool(restr.get("iosKeyRestrictions"))
-                    ])
-                    if not has_api and not has_app:
-                        unrestricted_keys.append({"project": pid, "uid": uid, "name": disp})
-            except Exception:
-                pass
-
-    print(f"    ├─ Total API Keys Found Across Account : {total_keys_found}")
-    print(f"    ├─ Critical Unrestricted Keys Detected : {len(unrestricted_keys)}")
-
-    if unrestricted_keys:
-        for ukey in unrestricted_keys:
-            print(f"    │   🚨 [CRÍTICO] Proyecto: {ukey['project']} | Key ID: {ukey['uid']} | Nombre: {ukey['name']}")
-    else:
-        print(f"    └─ Key Restriction Status: ALL KEYS RESTRICTED (100% EXERGY SECURE)")
-
+    scanner_script = "/Users/borjafernandezangulo/.gemini/antigravity/brain/64f27449-6ce6-42e9-a5ed-f4a1d35af105/scratch/gcp_key_audit_scanner.py"
+    scan_res = subprocess.run(["python3", scanner_script, "scan"], capture_output=True, text=True)
+    print(scan_res.stdout if scan_res.stdout else scan_res.stderr)
 except Exception as e:
     print(f"    └─ GCP Multi-Project Diagnostic Note: {e}")
 
 # STEP 2: Multi-Threaded SQLite WAL Concurrency Stress Engine
 print("\n[+] STEP 2: HIGH-STRESS MULTI-THREADED SQLITE WAL CONCURRENCY ENGINE")
-dbscanner_path = "/Users/borjafernandezangulo/.gemini/antigravity/brain/64f27449-6ce6-42e9-a5ed-f4a1d35af105/scratch/gcp_key_audit_scanner.py"
 db_path = "poc_bft_stress.db"
 conn_init = sqlite3.connect(db_path)
 conn_init.execute("PRAGMA journal_mode=WAL;")
