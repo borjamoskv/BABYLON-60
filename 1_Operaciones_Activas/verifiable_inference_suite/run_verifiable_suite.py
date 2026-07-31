@@ -8,8 +8,10 @@ def get_lib_path():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     dylib_path = os.path.join(base_dir, "target", "release", "libverifiable_inference_engine.dylib")
     so_path = os.path.join(base_dir, "target", "release", "libverifiable_inference_engine.so")
-    if os.path.exists(dylib_path): return dylib_path
-    if os.path.exists(so_path): return so_path
+    if os.path.exists(dylib_path):
+        return dylib_path
+    if os.path.exists(so_path):
+        return so_path
     raise FileNotFoundError("Verifiable Inference Engine not found. Run cargo build --release")
 
 def main():

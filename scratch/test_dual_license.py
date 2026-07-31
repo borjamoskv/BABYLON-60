@@ -1,5 +1,5 @@
 import os
-from core_graph_ledger import GraphLedger, StateNode
+from core_graph_ledger import GraphLedger
 from io_persist_ledger import LedgerPersist
 from babylon60.license_manager import generate_license_key
 import time

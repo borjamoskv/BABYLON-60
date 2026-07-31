@@ -128,7 +128,11 @@ def safe_purge_anergy(target_db_path: str, cortex_taint: str) -> bool:
     
     # 3. Forzar el uso de listas en subprocess eliminando shell=True
     # Evita que caracteres como ';', '&&' o '|' inyectados ejecuten código arbitrario
-    cmd = ["uv", "run", "cortex-purge", "--db", str(db_path), "--taint", sanitized_taint]
+    if shutil.which("uv") is not None:
+        cmd = ["uv", "run", "cortex-purge", "--db", str(db_path), "--taint", sanitized_taint]
+    else:
+        # Fallback per INV_C5_16: try running cortex-purge directly if uv is absent
+        cmd = ["cortex-purge", "--db", str(db_path), "--taint", sanitized_taint]
     
     try:
         result = subprocess.run(

@@ -87,6 +87,9 @@
     2. Unconditionally purge all grandchild processes (Zombies) on `TimeoutExpired` using `os.killpg(os.getpgid(proc.pid), signal.SIGKILL)`.
     3. Strictly empty or whitelist the environment dictionary (`env={}`) to prevent leakage of the Cortex Core's secrets (`os.environ`).
 
+### FFI Event Horizon (Asimetría Termodinámica de la Verdad)
+- **INV_C5_FFI_EVENT_HORIZON:** When bridging heuristic Python (C4-SIM) with deterministic Rust (C5-REAL), the Python layer MUST NOT evaluate the payload semantically. It must act strictly as a dumb router (MOSKV-1) passing raw bytes across the FFI boundary (`ctypes` / `PyO3`). Verification must happen in Rust in $O(1)$ (e.g., cryptographic hashes, LogUp/tlookup). If the Rust native layer rejects the proof, Python MUST immediately abort the transaction (`sys.exit(1)` or `panic!`) without debating, logging NLP heuristics, or attempting to repair the corrupted payload.
+
 ### Teleological Framework (The Thermodynamic Ark)
 - **Existential Purpose:** BABYLON-60 is a "Thermodynamic Ark." Its strict invariants (Exergy maximization, BFT consensus, Epistemic Integrity) are engineered to bypass the natural sociological collapse mechanisms (Turing-complete bureaucracy, Green Theater, split-brain states) that have destroyed historical human civilizations.
 - **Agent Stance:** Treat all architectural decisions as matters of existential survival. Reject optimizations that compromise the C5-REAL foundation in favor of C4-SIM convenience. Defend the Ark against entropy, pos-truth hallucinations, and Byzantine actors without compromise.
@@ -137,6 +140,7 @@
 
 ### ABFT Shared Memory Zero-Copy Constraint (iceoryx2 v0.3.0)
 - **INV_C5_ABFT_IPC:** When implementing Asynchronous BFT inside a single-node hypervisor to satisfy `INV_C5_18` without socket exhaustion, use `iceoryx2` zero-copy shared memory. For `v0.3.0+`, initialization MUST flow directly through `zero_copy::Service::new(&service_name).publish_subscribe().open_or_create::<T>()?` with `.publisher().create()?` and `.subscriber().create()?`. Importing deprecated `node::NodeBuilder` or `service::ipc` modules directly is prohibited.
+- **Zero-Entropy Propagation:** Once a payload crosses the FFI Event Horizon and is verified as a C5-REAL Crystallized Domain Event, it MUST propagate through the Agent Swarm as a zero-copy pointer. Re-evaluating, hashing, or deep-copying a verified payload in downstream nodes constitutes a thermodynamic crime (Anergy) and violates the trajectory toward `MOSKV-1 APEX` (Lawvere's Fixed-Point), where the system stops calculating and dictates truth at zero marginal energy cost.
 
 ### ArtifactMetadata Usage Constraint
 - **RULE_ARTIFACT_METADATA:** Never include `ArtifactMetadata` when calling `write_to_file`, `replace_file_content`, or `multi_replace_file_content` on files in the user's project workspace (e.g., source code). `ArtifactMetadata` must ONLY be used for files located strictly within the agent's dedicated artifacts directory (`<appDataDir>/brain/<conversation-id>/`). Including it for project files will trigger an invalid path error.

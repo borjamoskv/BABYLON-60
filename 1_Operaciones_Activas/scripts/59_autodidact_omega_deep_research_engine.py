@@ -8,8 +8,10 @@ lib_dir = os.path.join(os.path.dirname(__file__), "..", "verifiable_inference_su
 def get_lib_path():
     dylib_path = os.path.join(lib_dir, "target", "release", "libverifiable_inference_engine.dylib")
     so_path = os.path.join(lib_dir, "target", "release", "libverifiable_inference_engine.so")
-    if os.path.exists(dylib_path): return dylib_path
-    if os.path.exists(so_path): return so_path
+    if os.path.exists(dylib_path):
+        return dylib_path
+    if os.path.exists(so_path):
+        return so_path
     return None
 
 def main():

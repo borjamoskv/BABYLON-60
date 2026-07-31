@@ -1,6 +1,6 @@
 import os
 import time
-from core_graph_ledger import GraphLedger, StateNode
+from core_graph_ledger import GraphLedger
 from io_persist_ledger import LedgerPersist
 from premium_features.ha_cluster import HighAvailabilityCluster
 from license_manager import generate_license_key

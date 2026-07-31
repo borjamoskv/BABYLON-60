@@ -259,7 +259,24 @@ def test_inv_c5_22_swarm_workspace_locks():
     assert not bad_files, _fail_msg("INV_C5_22 (Missing .cortex_thermal_lock in atomic I/O)", bad_files)
 
 
-def test_inv_c5_28_stub():
-    """INV_C5_28 — Auto-generated stub for rule validation."""
-    # TODO: Implement concrete scan logic for rule INV_C5_28
-    pass
+def test_inv_c5_28_weisfeiler_lehman_prefilter() -> None:
+    """INV_C5_28 — Any structural graph comparison MUST execute 1-WL pre-filtering before exact matching."""
+    # Ensure the PoC script exists and implements the check
+    poc_path = ROOT / "scripts" / "poc_graph_isomorphism_wl.py"
+    assert poc_path.exists(), "INV_C5_28: scripts/poc_graph_isomorphism_wl.py is missing"
+
+    # Scan for exact matching functions (e.g. vf2_isomorphism, is_isomorphic) in python codebase
+    # and ensure they either import the WL prefilter or have 'wl' / 'weisfeiler' check referenced.
+    hits = _scan({".py"}, r"is_isomorphic\(")
+    hits = [h for h in hits if "test_" not in h and "poc_graph_isomorphism_wl" not in h]
+    
+    bad_hits = []
+    for hit in hits:
+        filepath = hit.split(":")[0]
+        full_path = ROOT / filepath
+        if full_path.exists():
+            content = full_path.read_text(errors="ignore")
+            if "weisfeiler" not in content.lower() and "wl" not in content.lower():
+                bad_hits.append(hit)
+                
+    assert not bad_hits, _fail_msg("INV_C5_28 (Graph Isomorphism WL Pre-Filter)", bad_hits)

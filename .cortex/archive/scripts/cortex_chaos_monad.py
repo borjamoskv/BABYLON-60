@@ -1,9 +1,7 @@
 import ast
 import asyncio
 import sys
-import tempfile
 import json
-import os
 from typing import TypedDict, Literal
 
 class SecurityError(Exception):
