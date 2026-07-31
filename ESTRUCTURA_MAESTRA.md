@@ -1,38 +1,38 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
-# ESTRUCTURA MAESTRA DEL TEOREMA DE ROBINSON-MOSKV (C5-REAL ABSOLUTE CORE)
+# MASTER STRUCTURE OF THE ROBINSON-MOSKV THEOREM (C5-REAL ABSOLUTE CORE)
 
-Esta es la arquitectura final de extrema exergía del proyecto. Tras una operación de purga termodinámica, el repositorio ha quedado reducido y enfocado **exclusivamente** en soportar los 2 ejes fundamentales del sistema: **CORTEX-PERSIST** y **BABYLON60**. Todo proyecto satélite, forja, OSINT o interfaz secundaria ha sido archivado.
+This is the final extreme exergy architecture of the project. After a thermodynamic purge operation, the repository has been reduced and focused **exclusively** on supporting the 2 fundamental axes of the system: **CORTEX-PERSIST** and **BABYLON60**. Any satellite project, forge, OSINT, or secondary interface has been archived.
 
 ---
 
-## 🏛️ Topología del Repositorio (Doble Eje)
+## 🏛️ Repository Topology (Dual Axis)
 
 ```
 Teorema-Robinson-Moskv/
 ├── BABYLON-60 -> 1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60 (Symlink)
 ├── cortex-engine -> 1_Operaciones_Activas/02_CORTEX_ENGINE (Symlink)
 │
-├── 0_Buzon_Entrada/             # Entradas temporales y payloads entrantes (efímero)
+├── 0_Buzon_Entrada/             # Temporary inputs and incoming payloads (ephemeral)
 ├── 1_Operaciones_Activas/
-│   └── 02_CORTEX_ENGINE/        # Único Dominio Maestro Superviviente
-│       ├── BABYLON-60/          # Frontend de Ejecución C5-REAL (React/TypeScript/Vite)
-│       ├── cortex-persist/      # Memoria Determinista C5-REAL
-│       ├── strike-rs/           # Motor Matemático y Validación Causal BFT (Rust PyO3)
+│   └── 02_CORTEX_ENGINE/        # Sole Surviving Master Domain
+│       ├── BABYLON-60/          # C5-REAL Execution Frontend (React/TypeScript/Vite)
+│       ├── cortex-persist/      # C5-REAL Deterministic Memory
+│       ├── strike-rs/           # Mathematical Engine and BFT Causal Validation (Rust PyO3)
 │       └── cortex/              # BFT Orchestrator, Quad-Pillar Kernel (Python 3.12)
 │
-├── 2_Nucleo_Estatico/           # Anclajes Teóricos (Axiomas, Ontología, Documentación Base)
-└── 3_Historico_Inerte/          # Cementerio de Anergía (Proyectos archivados, Logs, OSINT, fsharp_kernel, etc.)
+├── 2_Nucleo_Estatico/           # Theoretical Anchors (Axioms, Ontology, Base Documentation)
+└── 3_Historico_Inerte/          # Anergy Graveyard (Archived projects, Logs, OSINT, fsharp_kernel, etc.)
 ```
 
 ---
 
-## 🚀 Puertos de Entrada C5-REAL
+## 🚀 C5-REAL Entry Ports
 
-La superficie de operaciones se limita a:
+The operational surface is limited to:
 
-1. **`cortex/`**: Núcleo principal de Python. Responsable del orquestador BFT y las simulaciones C5-REAL.
-2. **`BABYLON-60/`**: Interfaz de despliegue ideada para interactuar sin teatro (anti-green-theater).
-3. **`cortex-persist/`**: Estructuras físicas del ledger y bases de conocimiento inmutable.
+1. **`cortex/`**: Main Python kernel. Responsible for the BFT orchestrator and C5-REAL simulations.
+2. **`BABYLON-60/`**: Deployment interface designed to interact without theater (anti-green-theater).
+3. **`cortex-persist/`**: Physical structures of the ledger and immutable knowledge bases.
 
-## 🧬 Matriz Epistémica (Axioma Ω6)
-La memoria estructural profunda (Código, Logs, GitHub, Arquitectura) opera íntegramente en **Inglés**, validado empíricamente por una extracción de 2.29M de palabras sobre la topología privada C5-REAL (Web3, Solidity, CORTEX, Rust). El **Español** queda restringido exclusivamente como lenguaje de interfaz Operador-Transductor (I/O natural).
+## 🧬 Epistemic Matrix (Axiom Ω6)
+The deep structural memory (Code, Logs, GitHub, Architecture) operates entirely in **English**, empirically validated by a 2.29M word extraction over the private C5-REAL topology (Web3, Solidity, CORTEX, Rust). **Spanish** is strictly restricted exclusively as the Operator-Transducer interface language (Natural I/O).

@@ -1,22 +1,22 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
-# AXIOMA 11: BFT MOCKING INVARIANT (ANTI-SLOTS-MONKEY-PATCHING)
+# AXIOM 11: BFT MOCKING INVARIANT (ANTI-SLOTS-MONKEY-PATCHING)
 
-**Invariante Asignada:** Ω170
+**Assigned Invariant:** Ω170
 
-## 1. Postulado Termodinámico
-La manipulación en tiempo de ejecución (Monkey-Patching) de métodos encapsulados en clases optimizadas con `__slots__` sobre la *instancia* provoca colapso inmediato (`AttributeError: read-only`). Aunque el parcheo global sobre la *clase* es sintácticamente posible, destruye el aislamiento epistémico (afectando a todos los nodos de la topología) e introduce entropía de estado cruzado. En arquitecturas C5-REAL, la simulación exige el reemplazo topológico íntegro de la instancia (Sustitución Estructural), garantizando el determinismo del árbol de referencias por nodo.
+## 1. Thermodynamic Postulate
+Runtime manipulation (Monkey-Patching) of methods encapsulated in classes optimized with `__slots__` on the *instance* triggers immediate collapse (`AttributeError: read-only`). Although global patching on the *class* is syntactically possible, it destroys epistemic isolation (affecting all topology nodes) and introduces cross-state entropy. In C5-REAL architectures, simulation demands the complete topological replacement of the instance (Structural Substitution), guaranteeing the determinism of the reference tree per node.
 
-## 2. Formulación Algebraica
-Sea un orquestador $O$ dependiente de un coordinador BFT $C$ de clase $\mathcal{S}$ (acotada por `__slots__`). El acoplamiento es $O(c)$ donde $c \in \mathcal{S}$.
+## 2. Algebraic Formulation
+Let an orchestrator $O$ dependent on a BFT coordinator $C$ of class $\mathcal{S}$ (bounded by `__slots__`). The coupling is $O(c)$ where $c \in \mathcal{S}$.
 
-La operación de simulación mediante parcheo local $P_{\text{local}}$ sobre la instancia $c$:
+The simulation operation via local patching $P_{\text{local}}$ on the instance $c$:
 $$P_{\text{local}}(c.m) \to \bot \quad (\text{AttributeError})$$
 
-El parcheo global $P_{\text{global}}$ sobre la clase $\mathcal{S}$:
-$$P_{\text{global}}(\mathcal{S}.m) \implies \forall x \in \mathcal{S}, x.m \text{ es mutado} \quad (\text{Contaminación Epistémica} > 0)$$
+The global patching $P_{\text{global}}$ on the class $\mathcal{S}$:
+$$P_{\text{global}}(\mathcal{S}.m) \implies \forall x \in \mathcal{S}, x.m \text{ is mutated} \quad (\text{Epistemic Contamination} > 0)$$
 
-La Sustitución Topológica Completa inyecta un isomorfismo $c'$ donde $c' \notin \mathcal{S}$:
-$$O(c') \iff \text{Aislamiento } \Delta S = 0$$
+Complete Topological Substitution injects an isomorphism $c'$ where $c' \notin \mathcal{S}$:
+$$O(c') \iff \text{Isolation } \Delta S = 0$$
 
-## 3. Directiva de Transducción
-Queda terminantemente prohibido usar `unittest.mock.patch` sobre clases con `__slots__` (por contaminación global) o instancias (por colapso `AttributeError`). Toda simulación (L4/L5) DEBE sobrescribir el puntero en el orquestador padre inyectando una clase Mock soberana completa.
+## 3. Transduction Directive
+It is strictly prohibited to use `unittest.mock.patch` on classes with `__slots__` (due to global contamination) or instances (due to `AttributeError` collapse). Every simulation (L4/L5) MUST overwrite the pointer in the parent orchestrator by injecting a complete sovereign Mock class.

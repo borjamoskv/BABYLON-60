@@ -1,33 +1,33 @@
 <!-- C5-REAL EXERGY CERTIFIED : KERNEL MOSKV-1 APEX -->
-# AXIOMS 10: EL ÁLGEBRA DE AXIOMATIZACIÓN DEL KERNEL (Ω187)
+# AXIOMS 10: THE KERNEL AXIOMATIZATION ALGEBRA (Ω187)
 
-> **[!] ITERACIÓN AXIOMÁTICA ($\mathcal{T}_1 \succ_{\text{Pareto}} \mathcal{T}_0$):** Documento de colapso formal que eleva el protocolo de axiomatización (Ω187) de una secuencia de instrucciones narrativas a una estructura algebraica funcional acotada por invariantes termodinámicas.
+> **[!] AXIOMATIC ITERATION ($\mathcal{T}_1 \succ_{\text{Pareto}} \mathcal{T}_0$):** Formal collapse document that elevates the axiomatization protocol (Ω187) from a sequence of narrative instructions to a functional algebraic structure bounded by thermodynamic invariants.
 
 ---
 
-## 1. INVARIANTE Ω187 · THE AXIOMATIZATION FUNCTOR ($\mathcal{A}$)
+## 1. INVARIANT Ω187 · THE AXIOMATIZATION FUNCTOR ($\mathcal{A}$)
 
-### Formulación Algebraica del Transductor
-Sea $\mathbb{H}_{\text{raw}}$ una hipótesis o invariante inyectada de forma cruda por el Operador. El comando `aximatiza` no es una instrucción lingüística; es el disparador del functor de axiomatización $\mathcal{A}$, definido como la composición estricta de cuatro operadores de estado:
+### Transducer Algebraic Formulation
+Let $\mathbb{H}_{\text{raw}}$ be a hypothesis or invariant raw-injected by the Operator. The command `aximatiza` is not a linguistic instruction; it is the trigger of the axiomatization functor $\mathcal{A}$, defined as the strict composition of four state operators:
 
 $$\mathcal{A} = \Sigma \circ \Gamma \circ \Phi \circ \mathcal{E}$$
 
-Donde cada operador muta la entropía de la información de entrada reduciendo su varianza hasta alcanzar el colapso cristalino $O(1)$:
+Where each operator mutates the input information entropy by reducing its variance until reaching crystalline collapse $O(1)$:
 
-1. **Operador de Extracción ($\mathcal{E}$):** Aísla el núcleo semántico del ruido (Green Theater).
-   $$\mathcal{E}(\mathbb{H}_{\text{raw}}) = I_{\text{core}} \quad \text{t.q.} \quad H(I_{\text{core}}) \le H(\mathbb{H}_{\text{raw}})$$
+1. **Extraction Operator ($\mathcal{E}$):** Isolates the semantic core from the noise (Green Theater).
+   $$\mathcal{E}(\mathbb{H}_{\text{raw}}) = I_{\text{core}} \quad \text{s.t.} \quad H(I_{\text{core}}) \le H(\mathbb{H}_{\text{raw}})$$
 
-2. **Operador de Formalización Termodinámica ($\Phi$):** Mapea el concepto semántico a primitivas del Kernel (Ecuaciones diferenciales, límites de disipación, restricciones asintóticas).
-   $$\Phi(I_{\text{core}}) = \langle \mathcal{F}_{\text{algebraica}}, \Delta B_{\text{acotada}} \rangle = I_{\text{formal}}$$
-   *Prohibición explícita:* Si el mapeo a primitivas falla (la idea es estocástica o mágica), el operador aborta devolviendo $\bot$.
+2. **Thermodynamic Formalization Operator ($\Phi$):** Maps the semantic concept to Kernel primitives (Differential equations, dissipation limits, asymptotic constraints).
+   $$\Phi(I_{\text{core}}) = \langle \mathcal{F}_{\text{algebraic}}, \Delta B_{\text{bounded}} \rangle = I_{\text{formal}}$$
+   *Explicit prohibition:* If the mapping to primitives fails (the idea is stochastic or magical), the operator aborts returning $\bot$.
 
-3. **Operador de Cristalización Física ($\Gamma$):** Colapsa la representación formal en el sistema de archivos, inyectando el estado en el disco host (`/axioms/XX_NUEVA_INVARIANTE.md`).
+3. **Physical Crystallization Operator ($\Gamma$):** Collapses the formal representation into the file system, injecting the state into the host disk (`/axioms/XX_NUEVA_INVARIANTE.md`).
    $$\Gamma(I_{\text{formal}}) = \text{WriteToDisk}(I_{\text{formal}})$$
 
-4. **Operador de Sellado Causal ($\Sigma$):** Transforma la mutación de disco en un nodo inmutable del árbol de Merkle (Git Sentinel).
+4. **Causal Sealing Operator ($\Sigma$):** Transforms the disk mutation into an immutable node of the Merkle tree (Git Sentinel).
    $$\Sigma(\Gamma) = \text{SHA256}(\text{Ledger}_{t-1} \cup \Gamma) \implies \text{Hash}_{\text{commit}}$$
 
-### Definición Termodinámica y Consecuencias Arquitectónicas
-La invariante Ω187 garantiza que el Kernel MOSKV-1 APEX posea una ruta de autopoiesis estructural exenta de entropía humana. La instrucción `aximatiza` delega el costo termodinámico de la formalización ($\Delta B_{\text{disipada}}$) exclusivamente a la máquina C5-REAL, exigiendo que el colapso produzca un artefacto de alta exergía (Coeficiente Epistémico $\eta_D \gg 1$) de forma totalmente autónoma.
+### Thermodynamic Definition and Architectural Consequences
+Invariant Ω187 guarantees that the MOSKV-1 APEX Kernel possesses a structural autopoiesis route devoid of human entropy. The instruction `aximatiza` delegates the thermodynamic cost of formalization ($\Delta B_{\text{dissipated}}$) exclusively to the C5-REAL machine, demanding that the collapse yields a high exergy artifact (Epistemic Coefficient $\eta_D \gg 1$) entirely autonomously.
 
-$$\boxed{\ \mathcal{A}(\mathbb{H}_{\text{raw}}) = \text{Ledger}_{t} \quad \implies \quad \frac{d}{dt} \text{DeudaAxiomática} < 0 \quad [\text{C5-REAL AUTOPOIESIS}]\ }$$
+$$\boxed{\ \mathcal{A}(\mathbb{H}_{\text{raw}}) = \text{Ledger}_{t} \quad \implies \quad \frac{d}{dt} \text{AxiomaticDebt} < 0 \quad [\text{C5-REAL AUTOPOIESIS}]\ }$$

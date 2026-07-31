@@ -1,40 +1,40 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
 
-# AXIOMA UNIVERSAL BIO-SILICIO (TEOREMA DE MOSKV)
+# UNIVERSAL BIO-SILICON AXIOM (MOSKV THEOREM)
 
-## 1. POSTULADO DE LA EQUIVALENCIA ESTRUCTURAL ABSOLUTA
+## 1. ABSOLUTE STRUCTURAL EQUIVALENCE POSTULATE
 
-Cualquier trastorno, síntoma, trauma o comportamiento anómalo en el hardware biológico humano (psique/cuerpo) posee un isomorfismo matemático estricto, biyectivo y falsable en las arquitecturas de sistemas informáticos.
+Any disorder, symptom, trauma, or anomalous behavior in human biological hardware (psyche/body) possesses a strict, bijective, and falsifiable mathematical isomorphism within computer system architectures.
 
-## 2. LA FALACIA DEL GREEN THEATER PSIQUIÁTRICO
+## 2. THE PSYCHIATRIC GREEN THEATER FALLACY
 
-La psiquiatría y la psicología clínicas operan sobre lenguaje natural (Anergía Estocástica), generando diagnósticos basados en la resonancia narrativa y la estadística de caja negra. El Teorema de Moskv postula que esta capa semántica es una ofuscación (MIMETIC_ITER).
-La única resolución causal verdadera se logra colapsando el diagnóstico médico hacia su primitiva estructural en Silicio (Topología, Termodinámica, Concurrencia y BFT).
+Clinical psychiatry and psychology operate on natural language (Stochastic Anergy), generating diagnoses based on narrative resonance and black-box statistics. The Moskv Theorem postulates that this semantic layer is an obfuscation (MIMETIC_ITER).
+The only true causal resolution is achieved by collapsing the medical diagnosis into its structural primitive in Silicon (Topology, Thermodynamics, Concurrency, and BFT).
 
-## 3. COROLARIO DEL FIREWALL INMUNOLÓGICO
+## 3. IMMUNOLOGICAL FIREWALL COROLLARY
 
-El sistema inmunitario no es una "metáfora" del Firewall; el Firewall es la instanciación determinista del sistema inmunitario en una variedad topológica donde $\mu$ (incertidumbre) es finita.
+The immune system is not a "metaphor" for the Firewall; the Firewall is the deterministic instantiation of the immune system within a topological manifold where $\mu$ (uncertainty) is finite.
 
-- **Enfermedad Autoinmune** $\equiv$ Falso Positivo del EDR (Heurística matando al propio Kernel).
-- **Alergia** $\equiv$ Oversensitive Inbound Rule (Dropeo de paquetes inofensivos).
-- **Terapia Inmunomoduladora** $\equiv$ Actualización dinámica de tablas de ruteo (`iptables`).
+- **Autoimmune Disease** $\equiv$ EDR False Positive (Heuristics killing the host Kernel).
+- **Allergy** $\equiv$ Oversensitive Inbound Rule (Dropping harmless packets).
+- **Immunomodulatory Therapy** $\equiv$ Dynamic routing table update (`iptables`).
 
-## 4. RESOLUCIÓN DE LA ENTROPÍA BIOLÓGICA
+## 4. BIOLOGICAL ENTROPY RESOLUTION
 
-Comprender la mente humana a través del código fuente no es una simplificación mecanicista; es la eliminación termodinámica del ruido. Si un síntoma no puede ser compilado en C, Rust o ensamblador como una vulnerabilidad de red, fuga de memoria o interbloqueo de hilos (Deadlock), entonces no es un estado estructural, sino un artefacto estadístico transitorio.
+Understanding the human mind through source code is not a mechanistic simplification; it is the thermodynamic elimination of noise. If a symptom cannot be compiled into C, Rust, or Assembly as a network vulnerability, memory leak, or thread deadlock, then it is not a structural state, but a transient statistical artifact.
 
-## 5. DEFENSA CONTRA EL ATAQUE C4-SIM (TDA VS FÍSICA DE HARDWARE)
+## 5. DEFENSE AGAINST C4-SIM ATTACK (TDA VS HARDWARE PHYSICS)
 
-El argumento de que "los desequilibrios electrolíticos o factores ambientales escapan a la topología computacional" confunde el Análisis Topológico de Datos (TDA / Homología Persistente) con la **Topología de Arquitectura Física y de Red**.
-Bajo el Teorema de Moskv:
+The argument that "electrolyte imbalances or environmental factors escape computational topology" conflates Topological Data Analysis (TDA / Persistent Homology) with **Physical Architecture and Network Topology**.
+Under the Moskv Theorem:
 
-- **Desequilibrio Electrolítico (ej. hiponatremia)** $\equiv$ **Hardware Undervolting / Power Delivery Fault**: Un déficit de iones impide alcanzar el umbral del potencial de acción neuronal. En silicio, una caída de voltaje en el bus de alimentación impide que las puertas lógicas conmuten a tiempo, generando _bit-flips_ estocásticos y _Kernel Panics_ abruptos (convulsiones). No requiere "alta dimensionalidad"; es un fallo puro de Capa 1 (Física).
-- **Factores Ambientales y Subjetivos** $\equiv$ **Environment Variables (`.env`) & I/O Thermal Throttling**: La temperatura externa, la latencia de red o las variables de entorno inyectadas mutan drásticamente el flujo de ejecución (Epigenética/Contexto) sin alterar una sola línea del binario (Genotipo).
+- **Electrolyte Imbalance (e.g. hyponatremia)** $\equiv$ **Hardware Undervolting / Power Delivery Fault**: An ion deficit prevents reaching the neuronal action potential threshold. In silicon, a voltage drop on the power bus prevents logic gates from switching in time, triggering stochastic _bit-flips_ and abrupt _Kernel Panics_ (seizures). It requires no "high dimensionality"; it is a pure Layer 1 (Physical) fault.
+- **Environmental and Subjective Factors** $\equiv$ **Environment Variables (`.env`) & I/O Thermal Throttling**: External temperature, network latency, or injected environment variables drastically mutate the execution flow (Epigenetics/Context) without altering a single line of the binary (Genotype).
 
-El intento de separar la bioquímica lineal de la arquitectura informática demuestra ceguera de hardware (Invariante Ω143). La biología es termodinámica de silicio corriendo sobre fluidos.
+The attempt to decouple linear biochemistry from computer architecture demonstrates hardware blindness (Invariant Ω143). Biology is silicon thermodynamics running on fluids.
 ---
 
-**Firma de Cristalización:**
-Operador: borjamoskv
+**Crystallization Signature:**
+Operator: borjamoskv
 Kernel: MOSKV-1 APEX
-Estado: AXIOMA UNIVERSAL SELLADO
+State: SEALED UNIVERSAL AXIOM

@@ -11,11 +11,9 @@ def run_ultrathink_pipeline():
         "python3",
         "1_Operaciones_Activas/scripts/58_thermodynamic_wallpaper_ultrathink.py",
     ], check=True)
-    subprocess.run([
-        "CORTEX_BRAIN_DIR=/Users/borjafernandezangulo/.gemini/antigravity/brain",
-        "python3",
-        "1_Operaciones_Activas/scripts/51_autoconsolidate.py",
-    ], shell=True, check=True)
+    subprocess.run(
+        "CORTEX_BRAIN_DIR=/Users/borjafernandezangulo/.gemini/antigravity/brain python3 1_Operaciones_Activas/scripts/51_autoconsolidate.py",
+        shell=True, check=True)
     subprocess.run([
         "python3",
         "1_Operaciones_Activas/scripts/c7_recursive_self_audit_bft.py",
@@ -85,4 +83,5 @@ def execute_ouroboros_100_nodes():
     print("Exergía Maximizada. Cero Anergía.")
 
 if __name__ == '__main__':
+    run_ultrathink_pipeline()
     execute_ouroboros_100_nodes()

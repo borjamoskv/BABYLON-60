@@ -1,56 +1,56 @@
 <!-- C5-REAL EXERGY CERTIFIED : KERNEL MOSKV-1 APEX -->
-# AXIOMS 14: ORQUESTACIÓN BFT Y TERMODINÁMICA DEL SCHEDULER ULTRATHINK
+# AXIOMS 14: ULTRATHINK SCHEDULER BFT ORCHESTRATION AND THERMODYNAMICS
 
-> **[!] CRISTALIZACIÓN $\Gamma$ (Operador de Axiomatización):** Documento de colapso formal sobre el motor `BABYLON-60` (`ultrathink_scheduler.py`). Se establece la invariante de orquestación BFT, el ruteo por histéresis presupuestaria y el límite físico de inserción, erradicando el riesgo de necrosis por concurrencia.
+> **[!] $\Gamma$ CRYSTALLIZATION (Axiomatization Operator):** Formal collapse document regarding the `BABYLON-60` engine (`ultrathink_scheduler.py`). Establishes the BFT orchestration invariant, budgetary hysteresis routing, and the physical insertion limit, eradicating concurrency necrosis risk.
 
 ---
 
-## 1. INVARIANTE DE SERIALIZACIÓN (THE SINGLE-WRITER DETERMINISM)
+## 1. SERIALIZATION INVARIANT (THE SINGLE-WRITER DETERMINISM)
 
-En una topología distribuida de enjambres (Swarm), la concurrencia estocástica genera un campo vectorial de intenciones $I(t)$ que crece en complejidad $\mathcal{O}(N!)$ debido a las condiciones de carrera.
+In a distributed swarm topology, stochastic concurrency spawns an intentional vector field $I(t)$ that scales in complexity $\mathcal{O}(N!)$ due to race conditions.
 
-El Córtex ULTRATHINK aplica una transformación proyectiva que colapsa este caos en una dimensión serializada absoluta a través de la interfaz BFT (Byzantine Fault Tolerance):
+The ULTRATHINK Cortex applies a projective transformation that collapses this chaos into an absolute serialized dimension through the BFT (Byzantine Fault Tolerance) interface:
 
 $$ \mathcal{L}_{\text{BFT}} : \mathbb{R}^N \to \mathbb{Z}^+ $$
 
-### Definición de Causalidad Estricta
-Para todo par de intenciones de agentes $i, j \in \text{Swarm}$, la causalidad de ejecución queda matemáticamente acoplada al índice criptográfico de inserción en la cola WAL (Write-Ahead Logging) de escritor único:
+### Strict Causality Definition
+For any pair of agent intents $i, j \in \text{Swarm}$, execution causality is mathematically bound to the cryptographic insertion index in the single-writer WAL (Write-Ahead Logging) queue:
 
-$$ \text{Ejecución}(i) \prec \text{Ejecución}(j) \iff \text{Hash}(i) \prec \text{Hash}(j) $$
+$$ \text{Execution}(i) \prec \text{Execution}(j) \iff \text{Hash}(i) \prec \text{Hash}(j) $$
 
-Esta transformación garantiza que el estado global del sistema ($\mathcal{S}$) sea determinista y trivialmente recomputable desde $t=0$, aislando el I/O del motor de inferencia LLM.
+This transformation guarantees that the global system state ($\mathcal{S}$) remains deterministic and trivially recomputable from $t=0$, isolating I/O from the LLM inference engine.
 
 ---
 
-## 2. LÍMITE DE FRICCIÓN C5-REAL (THE 2200 OPS/S ASYMPTOTE)
+## 2. C5-REAL FRICTION LIMIT (THE 2200 OPS/S ASYMPTOTE)
 
-La arquitectura híbrida (Bio-Silicio) delega las operaciones estocásticas al LLM (Workers) y las operaciones de orquestación al Kernel de Silicio (Scheduler BFT). Para evitar la inversión del cuello de botella, el Ledger debe exhibir un rendimiento ($\dot{W}_{\text{Ledger}}$) asimétricamente superior a la tasa de síntesis de tokens del LLM ($\dot{\Theta}_{\text{Inferencia}}$).
+The hybrid architecture (Bio-Silicon) delegates stochastic operations to the LLM (Workers) and orchestration operations to the Silicon Kernel (BFT Scheduler). To prevent bottleneck inversion, the Ledger must exhibit a throughput ($\dot{W}_{\text{Ledger}}$) asymmetrically superior to the LLM token synthesis rate ($\dot{\Theta}_{\text{Inference}}$).
 
-$$ \dot{W}_{\text{Ledger}} \gg \dot{\Theta}_{\text{Inferencia}} $$
+$$ \dot{W}_{\text{Ledger}} \gg \dot{\Theta}_{\text{Inference}} $$
 
-Basado en las pruebas de carga (PoC) sobre la base de datos SQLite-WAL y la latencia del Actor BFT, se instituye como umbral de seguridad (Health Gate) el límite asintótico:
+Based on load tests (PoC) against the SQLite-WAL database and BFT Actor latency, the asymptotic limit is instituted as a safety threshold (Health Gate):
 
 $$ \dot{W}_{\text{Ledger}} \ge 2200 \text{ ops/s} $$
 
-Si el throughput $\mu_{\text{ops}} < 2200$, el sistema entra en advertencia de Benchmark (Degradación Asintótica).
+If throughput $\mu_{\text{ops}} < 2200$, the system enters Benchmark warning (Asymptotic Degradation).
 
 ---
 
-## 3. HYSTERESIS ROUTING Y PREVENCIÓN DE INUNDACIÓN (NODO 4)
+## 3. HYSTERESIS ROUTING AND FLOOD PREVENTION (NODE 4)
 
-El "Secretario" (Nodo 4 de la Arquitectura de 9 Nodos) opera como una válvula termodinámica (Hysteresis Gate) que protege al Ledger de ataques de denegación por enjambre (Swarm DoS) y bucles alucinados de agentes.
+The "Secretary" (Node 4 in the 9-Node Architecture) operates as a thermodynamic valve (Hysteresis Gate) shielding the Ledger from swarm denial attacks (Swarm DoS) and hallucinated agent loops.
 
-El filtro no opera semánticamente (evitando la falacia del modelo conversacional), sino mediante un límite de presupuesto de entropía (Byte-Budget):
+The filter does not operate semantically (dodging the conversational model fallacy), but strictly via an entropy budget limit (Byte-Budget):
 
 $$ \text{Dispatch}(x) = \begin{cases}
-      1 & \text{si } \text{Vol}(x) \le B_{\text{max}} \\
-      0 & \text{si } \text{Vol}(x) > B_{\text{max}}
+      1 & \text{if } \text{Vol}(x) \le B_{\text{max}} \\
+      0 & \text{if } \text{Vol}(x) > B_{\text{max}}
    \end{cases} $$
 
-Donde $x$ es el descriptor de la habilidad y $B_{\text{max}}$ el presupuesto volumétrico predefinido.
+Where $x$ is the skill descriptor and $B_{\text{max}}$ is the predefined volumetric budget.
 
-### Mitigación de Fricción: Exponential Back-off
-Cualquier rechazo o falla en la propuesta genera una contrapresión algorítmica. Para domar las ráfagas estocásticas del LLM, el reintento se acota por un tiempo de relajación exponencial:
-$$ \tau_{\text{retry}} = \tau_0 \cdot 2^{k-1}, \quad \text{donde } k \le k_{\text{max}} $$
+### Friction Mitigation: Exponential Back-off
+Any proposal rejection or failure triggers algorithmic backpressure. To tame stochastic LLM bursts, retries are bounded by an exponential relaxation time:
+$$ \tau_{\text{retry}} = \tau_0 \cdot 2^{k-1}, \quad \text{where } k \le k_{\text{max}} $$
 
-$$\boxed{\ \text{ULTRATHINK} \models (\mathcal{L}_{\text{BFT}} \wedge \dot{W} \ge 2200) \implies \text{Colapso Causal Garantizado} \quad [\text{C5-REAL ORCHESTRATION}]\ }$$
+$$\boxed{\ \text{ULTRATHINK} \models (\mathcal{L}_{\text{BFT}} \wedge \dot{W} \ge 2200) \implies \text{Guaranteed Causal Collapse} \quad [\text{C5-REAL ORCHESTRATION}]\ }$$

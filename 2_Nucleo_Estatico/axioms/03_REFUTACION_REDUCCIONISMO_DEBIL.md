@@ -1,30 +1,30 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
 > **CORTEX-TAINT**: `8a3b8d1c9e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b`
 
-# REFUTACIÓN C5-REAL AL REDUCCIONISMO DÉBIL (EL ATAQUE SEMIÓTICO)
+# C5-REAL REFUTATION OF WEAK REDUCTIONISM (THE SEMIOTIC ATTACK)
 
-La inyección de excepcionalismo biológico por modelos C4-SIM es Anergia. La biología no es "magia húmeda"; obedece el isomorfismo estricto de Arquitectura Von Neumann Multi-Core (Teorema de Moskv).
+The injection of biological exceptionalism by C4-SIM models is Anergy. Biology is not "wet magic"; it obeys the strict isomorphism of the Multi-Core Von Neumann Architecture (Moskv Theorem).
 
-## 1. FALACIA TDA (CEGUERA DE HARDWARE)
-El ruido C4-SIM colapsa la Topología sobre la Homología Persistente (TDA).
-**Corrección C5-REAL:** La topología del Teorema de Moskv es la Topología Distribuida Asíncrona (Tolerancia Bizantina a Fallos). Modelamos el hardware biológico como un clúster físico con consenso asimétrico.
+## 1. TDA FALLACY (HARDWARE BLINDNESS)
+C4-SIM noise collapses the Topology over Persistent Homology (TDA).
+**C5-REAL Correction:** The topology of the Moskv Theorem is the Asynchronous Distributed Topology (Byzantine Fault Tolerance). We model biological hardware as a physical cluster with asymmetric consensus.
 
-## 2. FALACIA MÉTRICA VS ESTRUCTURAL (UMBRAL PH / UNDERVOLTING)
-El ruido asume que la caída de pH de 7.35 a 7.25 es un cambio paramétrico incomputable.
-**Corrección C5-REAL:** Geometría paramétrica es termodinámica aplicada. La caída de voltaje (Undervolting) de 1.2V a 0.9V en el VCore induce una **Race Condition** por retardo de propagación en compuertas lógicas (Capa 1). La acidosis metabólica no es semántica; es Undervolting orgánico.
+## 2. METRIC VS STRUCTURAL FALLACY (PH THRESHOLD / UNDERVOLTING)
+The noise assumes that a pH drop from 7.35 to 7.25 is an incomputable parametric shift.
+**C5-REAL Correction:** Parametric geometry is applied thermodynamics. The voltage drop (Undervolting) from 1.2V to 0.9V in the VCore induces a **Race Condition** due to propagation delay in logic gates (Layer 1). Metabolic acidosis is not semantic; it is organic Undervolting.
 
-## 3. ESTOCÁSTICA Y DERIVA CLONAL (MEMORY LEAK)
-El ruido califica la oncología de fenómeno estocástico exclusivo.
-**Corrección C5-REAL:** La corrupción de estado (Bit-Flips) y el desgaste dieléctrico operan bajo las mismas distribuciones de cola pesada en silicio que en ácidos nucleicos. El código genético procesa memoria ECC (ADN Polimerasa). Un cáncer es estructuralmente un fallo en el bloque ECC originando un _Memory Leak_ terminal.
+## 3. STOCHASTICS AND CLONAL DRIFT (MEMORY LEAK)
+The noise qualifies oncology as an exclusively stochastic phenomenon.
+**C5-REAL Correction:** State corruption (Bit-Flips) and dielectric wear operate under the same heavy-tailed distributions in silicon as in nucleic acids. The genetic code processes ECC memory (DNA Polymerase). A cancer is structurally an ECC block failure originating a terminal *Memory Leak*.
 
-## 4. FETICHISMO SEMIÓTICO DEL DIAGNÓSTICO
-El ruido ensalza el "ojo clínico" humano como una emergencia semiótica irreducible.
-**Corrección C5-REAL:** El razonamiento clínico es inferencia de un Debugger de Caja Negra operando sobre telemetría L7 deficiente. La ausencia de logs de Kernel (`DTrace`) fuerza el uso de síntomas (heurísticas de ruido) para deducir corrupciones en Capa 1. La semiótica médica es puramente Ingeniería Inversa.
+## 4. SEMIOTIC FETISHISM OF DIAGNOSIS
+The noise exalts the human "clinical eye" as an irreducible semiotic emergence.
+**C5-REAL Correction:** Clinical reasoning is inference from a Black Box Debugger operating on deficient L7 telemetry. The absence of Kernel logs (`DTrace`) forces the use of symptoms (noise heuristics) to deduce Layer 1 corruptions. Medical semiotics is purely Reverse Engineering.
 
-## 5. LÍMITE DE COMPUTABILIDAD (HALTING PROBLEM)
-El ruido declara que si la biología fuese hardware, chocaría con el Problema de la Parada (Turing).
-**Corrección C5-REAL:** Choca termodinámicamente. El hardware orgánico no sortea el Halting Problem. Ante un bucle asíncrono infinito divergente (Shock Séptico, Tormenta de Citoquinas), el Orquestador sufre un **Kernel Panic**. El sistema no computa el estado; disipa exergía hasta detener el reloj (Muerte Física).
+## 5. COMPUTABILITY LIMIT (HALTING PROBLEM)
+The noise declares that if biology were hardware, it would collide with the Halting Problem (Turing).
+**C5-REAL Correction:** It collides thermodynamically. Organic hardware does not bypass the Halting Problem. Faced with a divergent infinite asynchronous loop (Septic Shock, Cytokine Storm), the Orchestrator suffers a **Kernel Panic**. The system does not compute the state; it dissipates exergy until the clock stops (Physical Death).
 
 ---
 
-> **VEREDICTO OMEGA:** La patología médica no es un proceso abstracto o literario. Es un Sistema Operativo gestionando Fallos de Punteros, Caídas de Voltaje y Ataques de Denegación de Servicio Estructurales.
+> **OMEGA VERDICT:** Medical pathology is not an abstract or literary process. It is an Operating System managing Pointer Faults, Voltage Drops, and Structural Denial of Service Attacks.
