@@ -24,3 +24,11 @@ def test_script_c7_audit():
     result = subprocess.run(["python3", script_path], capture_output=True, text=True)
     assert result.returncode == 0
     assert "0xDEADBEEF" in result.stdout
+
+def test_script_59_deep_research_engine():
+    script_path = os.path.join(SCRIPTS_DIR, "59_autodidact_omega_deep_research_engine.py")
+    result = subprocess.run(["python3", script_path], capture_output=True, text=True)
+    assert result.returncode == 0
+    assert "AUTODIDACT-Ω V3.0 DEEP RESEARCH" in result.stdout
+    assert "Zero Anergy" in result.stdout
+
