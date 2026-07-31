@@ -88,7 +88,7 @@ impl LogUpProver {
         lookups: &[Fr],
         seed: &[u8; 32],
     ) -> Result<LogUpProof, LogUpError> {
-        if table.is_empty() || lookups.is_empty() {
+        if table.is_empty() {
             return Err(LogUpError::EmptyInput);
         }
 
