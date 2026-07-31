@@ -1,0 +1,11 @@
+# C5-REAL EXERGY CERTIFIED
+version: 2
+updates:
+  - package-ecosystem: "cargo"
+    directory: "/1_Operaciones_Activas/02_CORTEX_ENGINE/strike-rs"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
