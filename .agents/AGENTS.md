@@ -185,3 +185,6 @@ These examples illustrate typical workflows while adhering to the core axioms. F
 
 ---
 
+- **Ω33 · ANTI-SPAGHETTI & DOMAIN PRIMITIVES AXIOM:** When the Operator instructs to "evitar código spagetti" or deploy "Primitives" (Primitivas), the Transducer MUST strictly eradicate two forms of Anergy:
+  1) **State Spaghetti (Primitive Obsession):** Passing raw loose types (strings, floats, dicts) across boundaries is prohibited. It MUST be replaced by strict Domain Primitives (e.g. `@dataclass(frozen=True)` Value Objects that execute internal physical validation in $O(1)$ upon instantiation).
+  2) **Thermal I/O Spaghetti:** Opening/closing database connections synchronously inside high-frequency async loops or using $O(N)$ structures for geometric routing. It MUST be replaced by persistent connection architectures (e.g., `sqlite3.connect(check_same_thread=False)` in WAL mode) and $O(1)$ memory structures (`collections.deque`).

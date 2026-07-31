@@ -3,7 +3,7 @@ import asyncio
 import sqlite3
 import time
 from typing import Dict, Tuple, Set
-
+from collections import deque
 # C5-REAL NEUROMORPHIC PRIMITIVES (V2 - STDP & LEAKY INTEGRATE-AND-FIRE)
 # Bypass Von Neumann CPU/Memory segregation. Memory (SQLite WAL) dictates routing weights in real-time.
 
@@ -18,81 +18,73 @@ class STDPMemristor:
         self.synapse_id = f"{pre_id}_{post_id}"
         self.pre_id = pre_id
         self.post_id = post_id
+        # Mantenemos una conexión persistente para evitar latencia térmica (Spaghetti I/O)
+        self._conn = sqlite3.connect(self.db_path, timeout=10.0, check_same_thread=False)
         self._init_db()
 
     def _init_db(self) -> None:
-        conn = sqlite3.connect(self.db_path, timeout=10.0)
+        self._conn.execute("PRAGMA busy_timeout=5000;")
         try:
-            conn.execute("PRAGMA busy_timeout=5000;")
-            try:
-                conn.execute("PRAGMA journal_mode=WAL;")
-            except sqlite3.OperationalError:
-                pass
-            with conn:
-                conn.execute("""
-                    CREATE TABLE IF NOT EXISTS memristor_weights (
-                        synapse_id TEXT PRIMARY KEY,
-                        weight REAL NOT NULL,
-                        last_pre_spike_ts REAL,
-                        last_post_spike_ts REAL
-                    )
-                """)
-                conn.execute(
-                    "INSERT OR IGNORE INTO memristor_weights VALUES (?, 1.0, 0.0, 0.0)",
-                    (self.synapse_id,),
+            self._conn.execute("PRAGMA journal_mode=WAL;")
+        except sqlite3.OperationalError:
+            pass
+        with self._conn:
+            self._conn.execute("""
+                CREATE TABLE IF NOT EXISTS memristor_weights (
+                    synapse_id TEXT PRIMARY KEY,
+                    weight REAL NOT NULL,
+                    last_pre_spike_ts REAL,
+                    last_post_spike_ts REAL
                 )
-        finally:
-            conn.close()
+            """)
+            self._conn.execute(
+                "INSERT OR IGNORE INTO memristor_weights VALUES (?, 1.0, 0.0, 0.0)",
+                (self.synapse_id,),
+            )
+
+    def __del__(self):
+        if hasattr(self, '_conn'):
+            self._conn.close()
 
     def register_pre_spike(self) -> float:
         """Registra el pulso de la neurona origen y calcula STDP si la destino disparó recientemente."""
         now = time.time()
-        conn = sqlite3.connect(self.db_path, timeout=10.0)
-        try:
-            conn.execute("PRAGMA busy_timeout=5000;")
-            with conn:
-                cur = conn.execute(
-                    "SELECT weight, last_post_spike_ts FROM memristor_weights WHERE synapse_id = ?",
-                    (self.synapse_id,),
-                )
-                weight, last_post_ts = cur.fetchone()
+        with self._conn:
+            cur = self._conn.execute(
+                "SELECT weight, last_post_spike_ts FROM memristor_weights WHERE synapse_id = ?",
+                (self.synapse_id,),
+            )
+            weight, last_post_ts = cur.fetchone()
 
-                # STDP Asimétrico: Si PRE dispara DESPUÉS de POST, la causalidad es inversa -> Atrofia (LTD)
-                if last_post_ts > 0 and (now - last_post_ts) < 1.0:
-                    weight = max(0.1, weight - 0.2)  # Depresión a largo plazo
+            # STDP Asimétrico: Si PRE dispara DESPUÉS de POST, la causalidad es inversa -> Atrofia (LTD)
+            if last_post_ts > 0 and (now - last_post_ts) < 1.0:
+                weight = max(0.1, weight - 0.2)  # Depresión a largo plazo
 
-                conn.execute(
-                    "UPDATE memristor_weights SET weight = ?, last_pre_spike_ts = ? WHERE synapse_id = ?",
-                    (weight, now, self.synapse_id),
-                )
-                return float(weight)
-        finally:
-            conn.close()
+            self._conn.execute(
+                "UPDATE memristor_weights SET weight = ?, last_pre_spike_ts = ? WHERE synapse_id = ?",
+                (weight, now, self.synapse_id),
+            )
+            return float(weight)
 
     def register_post_spike(self) -> float:
         """Registra el pulso de la neurona destino y calcula STDP si la origen disparó recientemente."""
         now = time.time()
-        conn = sqlite3.connect(self.db_path, timeout=10.0)
-        try:
-            conn.execute("PRAGMA busy_timeout=5000;")
-            with conn:
-                cur = conn.execute(
-                    "SELECT weight, last_pre_spike_ts FROM memristor_weights WHERE synapse_id = ?",
-                    (self.synapse_id,),
-                )
-                weight, last_pre_ts = cur.fetchone()
+        with self._conn:
+            cur = self._conn.execute(
+                "SELECT weight, last_pre_spike_ts FROM memristor_weights WHERE synapse_id = ?",
+                (self.synapse_id,),
+            )
+            weight, last_pre_ts = cur.fetchone()
 
-                # STDP Asimétrico: Si POST dispara DESPUÉS de PRE, la causalidad es correcta -> Fortalecimiento (LTP)
-                if last_pre_ts > 0 and (now - last_pre_ts) < 1.0:
-                    weight += 0.5  # Potenciación a largo plazo
+            # STDP Asimétrico: Si POST dispara DESPUÉS de PRE, la causalidad es correcta -> Fortalecimiento (LTP)
+            if last_pre_ts > 0 and (now - last_pre_ts) < 1.0:
+                weight += 0.5  # Potenciación a largo plazo
 
-                conn.execute(
-                    "UPDATE memristor_weights SET weight = ?, last_post_spike_ts = ? WHERE synapse_id = ?",
-                    (weight, now, self.synapse_id),
-                )
-                return float(weight)
-        finally:
-            conn.close()
+            self._conn.execute(
+                "UPDATE memristor_weights SET weight = ?, last_post_spike_ts = ? WHERE synapse_id = ?",
+                (weight, now, self.synapse_id),
+            )
+            return float(weight)
 
 class LeakySpikingNode:
     """
@@ -170,11 +162,11 @@ class SelfHealingMesh:
         if start_node in self.dead_nodes or end_node in self.dead_nodes:
             return []
 
-        queue = [[start_node]]
+        queue = deque([[start_node]])
         visited = {start_node}
 
         while queue:
-            path = queue.pop(0)
+            path = queue.popleft()
             curr = path[-1]
             if curr == end_node:
                 return path
