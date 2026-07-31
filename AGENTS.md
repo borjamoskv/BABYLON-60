@@ -134,3 +134,10 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 ### Empirical Remote Push Verification Invariant
 - **INV_C5_REAL_PUSH:** Ningún paso de sincronización remota (`git push`) puede marcarse como completado en `task.md` o presentar evidencia C5-REAL si el comando devuelve un código de salida distinto de 0 o un fallo de permisos. Los fallos remotos deben registrarse explícitamente como fallos o fallbacks locales no sincronizados.
 
+### Tauri State & iceoryx2 Send/Sync Invariant
+- **INV_C5_TAURI_IPC:** When embedding `iceoryx2::service::zero_copy::Service` or `PortFactory` inside Tauri `AppState` (`tauri::State<AppState>`), POSIX shared memory locks containing raw pointers (`*const c_void`) will break standard `Send + Sync` auto-traits on macOS. Agents MUST wrap the handle in a dedicated newtype struct (e.g. `pub struct IpcHandle(pub Arc<PortFactory<Service, Vec<u8>>>);`) and explicitly implement `unsafe impl Send for IpcHandle {}` and `unsafe impl Sync for IpcHandle {}` to satisfy Tauri's state concurrency bounds.
+
+### Tauri v2 Workspace & Binary Target Invariant
+- **INV_C5_TAURI_WORKSPACE:** In monorepos using a root Cargo workspace manifest (`Cargo.toml`), any nested Tauri application (e.g., `babylon60-ide/src-tauri`) MUST be explicitly registered in `workspace.members` of the root manifest. Additionally, the nested Tauri package MUST contain both a `[lib]` and a `src/main.rs` binary entrypoint calling `app_lib::run()`; otherwise `cargo run` and `tauri dev` will abort with `error: a bin target must be available`.
+
+

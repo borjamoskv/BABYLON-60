@@ -150,3 +150,10 @@
 
 ### Stale Thermal Lock Cleanup Protocol
 - **INV_C5_22_CLEANUP:** When encountering a `Thermodynamic Hysteresis Active: Another swarm holds the lock (INV_C5_22)` error during `strike_rs` BFT engine tests, it indicates a stale lock left behind by a previously panicked test. Agents MUST execute `rm -f .cortex_thermal_lock strike_rs/.cortex_thermal_lock` to purge the orphaned lock before re-running the test suite.
+
+### Tauri State & iceoryx2 Send/Sync Invariant
+- **INV_C5_TAURI_IPC:** When embedding `iceoryx2::service::zero_copy::Service` or `PortFactory` inside Tauri `AppState` (`tauri::State<AppState>`), POSIX shared memory locks containing raw pointers (`*const c_void`) will break standard `Send + Sync` auto-traits on macOS. Agents MUST wrap the handle in a dedicated newtype struct (e.g. `pub struct IpcHandle(pub Arc<PortFactory<Service, Vec<u8>>>);`) and explicitly implement `unsafe impl Send for IpcHandle {}` and `unsafe impl Sync for IpcHandle {}` to satisfy Tauri's state concurrency bounds.
+
+### Tauri v2 Workspace & Binary Target Invariant
+- **INV_C5_TAURI_WORKSPACE:** In monorepos using a root Cargo workspace manifest (`Cargo.toml`), any nested Tauri application (e.g., `babylon60-ide/src-tauri`) MUST be explicitly registered in `workspace.members` of the root manifest. Additionally, the nested Tauri package MUST contain both a `[lib]` and a `src/main.rs` binary entrypoint calling `app_lib::run()`; otherwise `cargo run` and `tauri dev` will abort with `error: a bin target must be available`.
+
