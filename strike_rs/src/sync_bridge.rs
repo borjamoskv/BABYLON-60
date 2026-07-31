@@ -14,10 +14,8 @@ pub mod c5real {
 use c5real::exergy_bridge_server::{ExergyBridge, ExergyBridgeServer};
 use c5real::{ExergyState, ExergyAck, LedgerRequest};
 
-#[derive(Debug, Default)]
 pub struct C5ExergyService {
-    // Referencia al Core BFT Ledger
-    // pub ledger: Arc<tokio::sync::RwLock<crate::ledger::BftLedger>>,
+    pub telemetry_rx: tokio::sync::Mutex<tokio::sync::broadcast::Receiver<(String, u64, f64, Vec<u8>)>>,
 }
 
 #[tonic::async_trait]
@@ -29,7 +27,6 @@ impl ExergyBridge for C5ExergyService {
         let state = request.into_inner();
         println!("[C5-REAL] Incoming Exergy Sync: {}", state.block_hash);
 
-        // Verificación criptográfica delegada al Kernel
         let ack = ExergyAck {
             verified: true,
             error_code: String::from("NONE"),
@@ -43,25 +40,46 @@ impl ExergyBridge for C5ExergyService {
         &self,
         _request: Request<LedgerRequest>,
     ) -> Result<Response<Self::StreamLedgerStream>, Status> {
-        let (tx, rx) = tokio::sync::mpsc::channel(4);
+        let (tx, rx) = tokio::sync::mpsc::channel(100);
+        
+        let mut bcast_rx = {
+            let mut guard = self.telemetry_rx.lock().await;
+            guard.resubscribe()
+        };
 
         tokio::spawn(async move {
-            let sample_state = ExergyState {
-                block_hash: "0x0000_A1B2_C3D4_F5E6".to_string(),
-                sequence_id: 1,
-                exergy_level: 0.9998,
-                cryptographic_proof: vec![0xCA, 0xFE, 0xBA, 0xBE],
-            };
-            tx.send(Ok(sample_state)).await.unwrap();
+            loop {
+                match bcast_rx.recv().await {
+                    Ok((hash, seq, exergy, proof)) => {
+                        let state = ExergyState {
+                            block_hash: hash,
+                            sequence_id: seq,
+                            exergy_level: exergy,
+                            cryptographic_proof: proof,
+                        };
+                        if tx.send(Ok(state)).await.is_err() {
+                            break;
+                        }
+                    }
+                    Err(tokio::sync::broadcast::error::RecvError::Lagged(_)) => {
+                        continue;
+                    }
+                    Err(tokio::sync::broadcast::error::RecvError::Closed) => {
+                        break;
+                    }
+                }
+            }
         });
 
         Ok(Response::new(tokio_stream::wrappers::ReceiverStream::new(rx)))
     }
 }
 
-pub async fn start_bridge(addr: &str) -> Result<(), Box<dyn std::error::Error>> {
+pub async fn start_bridge(addr: &str, telemetry_rx: tokio::sync::broadcast::Receiver<(String, u64, f64, Vec<u8>)>) -> Result<(), Box<dyn std::error::Error>> {
     let addr = addr.parse()?;
-    let bridge = C5ExergyService::default();
+    let bridge = C5ExergyService {
+        telemetry_rx: tokio::sync::Mutex::new(telemetry_rx),
+    };
 
     println!("[C5-REAL] Starting gRPC Exergy Bridge on {}", addr);
 

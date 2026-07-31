@@ -111,15 +111,15 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 ### Continuous Commit Polisher Invariant
 - **POLISHER_INVARIANT:** Any commit automatically rewritten by the polisher daemon must log a `polisher_success` event in the ledger with a monotonic `lamport_t`. Failure to log must abort the push.
 
-### Sovereign Dual-Licensing Invariant (Gratis para la Comunidad, Licencia para Corporaciones)
+### Sovereign Dual-Licensing Invariant (Free for the Community, Corporate Licensing)
 - **INV_C5_17:** Every component, service, model, database, app (including BabylonMail), and subagent workflow in the BABYLON-60 ecosystem MUST be 100% free, open-source, and sovereign for individuals, independent developers, and non-commercial usage. Sovereign Community mode enforces thermodynamic throughput limits (e.g. batch inserts capped at N <= 100 nodes in LedgerPersist). Commercial, corporate, or enterprise exploitation requires explicit commercial licensing verified via HMAC CORTEX_LICENSE_KEY (license_manager.py), unlocking unbounded BFT throughput.
 
 
-### Zero-Worktree Swarm Scaling (Prevención de ENOSPC)
+### Zero-Worktree Swarm Scaling (ENOSPC Prevention)
 - **INV_C5_18:** For large parallel agent swarms ($N \ge 10$), creating physical disk Git Worktrees that consume storage and trigger ENOSPC is strictly prohibited. Swarm scaling must use in-memory AgencyHypervisor multi-tenant handles and single-writer BFT actors.
 
 ### Epistemic Integrity in Ledger Attestation
-- **INV_INGESTA_08:** Una atestación con tasa de confirmación 100% se marca UNBACKED por construcción. El verificador debe poder perder. La atestación sin evidencia citable (cadenas verbatim extraídas de la fuente primaria) es aserción con adorno. No se admite teatro de simulación: C4-SIM jamás debe presentarse como C5-REAL.
+- **INV_INGESTA_08:** An attestation with a 100% confirmation rate is marked UNBACKED by construction. The verifier must be able to lose. Attestation without citable evidence (verbatim strings extracted from the primary source) is mere assertion with garnish. Simulation theater is not admitted: C4-SIM must never be presented as C5-REAL.
 
 ### ABFT Shared Memory Zero-Copy Constraint (iceoryx2 v0.3.0)
 - **INV_C5_ABFT_IPC:** When implementing Asynchronous BFT inside a single-node hypervisor to satisfy `INV_C5_18` without socket exhaustion, use `iceoryx2` zero-copy shared memory. For `v0.3.0+`, initialization MUST flow directly through `zero_copy::Service::new(&service_name).publish_subscribe().open_or_create::<T>()?` with `.publisher().create()?` and `.subscriber().create()?`. Importing deprecated `node::NodeBuilder` or `service::ipc` modules directly is prohibited.
@@ -139,5 +139,4 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 
 ### Tauri v2 Workspace & Binary Target Invariant
 - **INV_C5_TAURI_WORKSPACE:** In monorepos using a root Cargo workspace manifest (`Cargo.toml`), any nested Tauri application (e.g., `babylon60-ide/src-tauri`) MUST be explicitly registered in `workspace.members` of the root manifest. Additionally, the nested Tauri package MUST contain both a `[lib]` and a `src/main.rs` binary entrypoint calling `app_lib::run()`; otherwise `cargo run` and `tauri dev` will abort with `error: a bin target must be available`.
-
 

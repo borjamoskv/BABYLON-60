@@ -1753,6 +1753,7 @@ dependencies = [
  "serde_json",
  "signal-hook",
  "tokio",
+ "tokio-stream",
  "tonic",
  "tonic-build",
  "tonic-web",

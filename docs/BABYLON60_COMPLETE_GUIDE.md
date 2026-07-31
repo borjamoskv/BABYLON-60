@@ -39,7 +39,7 @@ The interface utilizes a curated palette derived from YInMn Blue, optimized to p
 
 The frontend implements two discrete cognitive modes to accommodate different developer neurologies, toggled dynamically via **`⌘⇧E`** or the status bar switch.
 
-### ◐ MODE 2E (Doble Excepcionalidad / ADHD + AACC)
+### ◐ MODE 2E (Dual Exceptionality / ADHD + Giftedness)
 Designed for developers requiring continuous peripheral feedback and flow state guards:
 * **Ambient Tachometer**: A 3px top-screen bar that reflects agent state in real-time (`indexing` = breathing blue, `working` = scanning cobalt, `alert` = fast breathing gold, `done` = fading green).
 * **Icon-Only Spine**: Sidebar navigation is icon-only to eliminate text-label noise. Labels are revealed as tooltips or hover effects.

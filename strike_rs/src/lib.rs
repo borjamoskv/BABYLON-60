@@ -123,3 +123,4 @@ mod tests {
         assert_eq!(engine.verify_kahn_invariant(), Err(TaintError::CycleDetected));
     }
 }
+pub mod sync_bridge;
