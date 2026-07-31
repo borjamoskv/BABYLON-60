@@ -33,20 +33,24 @@ if __name__ == "__main__":
     print("[C5-REAL] Motor Xorshift PRNG SIMD Cargado Exitosamente.")
 
     # Test básico
-    out_data = (ctypes.c_uint64 * 8)()
-    initial_seeds = (ctypes.c_uint64 * 8)(
+    out_data = (ctypes.c_uint64 * 16)()
+    initial_seeds = (ctypes.c_uint64 * 16)(
         0xDEADBEEFCAFEBABE, 0x1234567890ABCDEF,
         0xFACEFEEDDEADBEEF, 0x0987654321FEDCBA,
         0x1111222233334444, 0x5555666677778888,
-        0x9999AAAABBBBCCCC, 0xDDDDEEEEFFFF0000
+        0x9999AAAABBBBCCCC, 0xDDDDEEEEFFFF0000,
+        0x0000111122223333, 0x4444555566667777,
+        0x88889999AAAABBBB, 0xCCCCDDDDEEEEFFFF,
+        0xAABBCCDDEEFF0011, 0x2233445566778899,
+        0x0F0F0F0F0F0F0F0F, 0x5A5A5A5A5A5A5A5A
     )
 
     print("\nEjecutando Xorshift64 Clásico...")
-    lib.xorshift_array_classic(out_data, 8, initial_seeds[0])
+    lib.xorshift_array_classic(out_data, 16, initial_seeds[0])
     print(f"Resultados: {[hex(x) for x in out_data]}")
 
-    print("\nEjecutando ARM NEON (Loop Unrolling 4x)...")
-    lib.xorshift_array_neon(out_data, 8, initial_seeds)
+    print("\nEjecutando ARM NEON (Loop Unrolling 8x)...")
+    lib.xorshift_array_neon(out_data, 16, initial_seeds)
     print(f"Resultados: {[hex(x) for x in out_data]}")
 
     print("\nValidación Completada. Iniciar Stress Test de 100M para auditar BOPs.")

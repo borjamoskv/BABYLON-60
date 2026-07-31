@@ -43,11 +43,15 @@ def main():
     out = np.empty(N, dtype=np.uint64)
     out_ptr = out.ctypes.data_as(ctypes.POINTER(ctypes.c_uint64))
 
-    initial_seeds = (ctypes.c_uint64 * 8)(
+    initial_seeds = (ctypes.c_uint64 * 16)(
         0xDEADBEEFCAFEBABE, 0x1234567890ABCDEF,
         0xFACEFEEDDEADBEEF, 0x0987654321FEDCBA,
         0x1111222233334444, 0x5555666677778888,
-        0x9999AAAABBBBCCCC, 0xDDDDEEEEFFFF0000
+        0x9999AAAABBBBCCCC, 0xDDDDEEEEFFFF0000,
+        0x0000111122223333, 0x4444555566667777,
+        0x88889999AAAABBBB, 0xCCCCDDDDEEEEFFFF,
+        0xAABBCCDDEEFF0011, 0x2233445566778899,
+        0x0F0F0F0F0F0F0F0F, 0x5A5A5A5A5A5A5A5A
     )
 
     print("[*] Tensores alineados. Calentando caché...")
@@ -72,8 +76,8 @@ def main():
     print(f"Tiempo      : {elapsed_classic:.4f} s")
     print(f"Throughput  : {bops_classic:.2f} Billion Ops/sec")
 
-    # --- 3. ARM NEON SIMD (Loop Unrolling 4x) ---
-    print("\n--- 3. ARM NEON SIMD (ILP 4x: 512 bits / ciclo) ---")
+    # --- 3. ARM NEON SIMD (Loop Unrolling 8x) ---
+    print("\n--- 3. ARM NEON SIMD (ILP 8x: 1024 bits / ciclo) ---")
     out.fill(0)
 
     start = time.perf_counter()

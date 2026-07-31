@@ -283,8 +283,9 @@ mod tests {
         system.add_constraint(
             LinearCombination::new(vec![(2, Fr::from(2u64))]),
             LinearCombination::new(vec![(3, Fr::from(4u64))]),
-            LinearCombination::new(vec![(1, Fr::from(24u64))]),
+            LinearCombination::new(vec![(1, Fr::from(1u64))]),
         );
+        // (2*w[2]) * (4*w[3]) = (2*3) * (4*4) = 6 * 16 = 96 = 1 * w[1] (where w[1] = 96)
         let witness = vec![Fr::from(1u64), Fr::from(96u64), Fr::from(3u64), Fr::from(4u64)];
         let proof = BN254R1CSProver::create_proof(&system, &witness, &[7u8; 32]).unwrap();
 
