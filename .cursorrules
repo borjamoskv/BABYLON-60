@@ -34,3 +34,19 @@ Todo bloque de código crítico o de refactor estructural debe estar sujeto a la
 ## INVARIANTE SAFARI PRIMACY EN MACOS
 12. **RULE_SAFARI_MACOS_PRIMACY:** En macOS, Safari es el navegador primario y obligatorio para todo desarrollo local (`127.0.0.1` / `localhost`), previews de UI Web y depuración. Google Chrome / Chromium quedan relegados a entorno secundario debido a restricciones de certificado autofirmado y WebSockets.
 
+## INVARIANTE DE MAXIMIZACIÓN DE EXERGÍA HARDWARE (Ω15)
+13. **RULE_HARDWARE_EXERGY_MAXIMIZATION (Ω15):** En tareas de cómputo intensivo o cálculo numérico, prohibido el uso de loops en Python puro. Desplegar compilación LLVM JIT (@numba.njit) o C Extensions SIMD y validar mediante *_stress_test.py (>100M operaciones).
+
+## INVARIANTE DE TERMODINÁMICA AGÉNTICA Y LÍMITE DE LANDAUER (Ω16 - Ω17)
+14. **RULE_AGENTIC_LANDAUER_PRUNING (Ω16-Ω17):** Emisión exclusiva de deltas de estado deterministas atómicos (ej. ACK / ERR / MUT) para minimizar la disipación física de Landauer.
+
+## INVARIANTE DE OPTIMALIDAD DE BELLMAN Y COSTE COGNITIVO (Ω18)
+15. **RULE_BELLMAN_COGNITIVE_OPTIMALITY (Ω18):** La trayectoria del agente debe minimizar la ecuación de coste c(S_k, σ). Toda acción sin reducción de incertidumbre penaliza a infinito.
+
+## INVARIANTE DE SISTEMA SOBRE MODELO (Ω19)
+16. **RULE_SYSTEM_OVER_MODEL (Ω19):** Priorizar la orquestación asíncrona de subagentes especializados (invoke_subagent) frente a modelos estocásticos monolíticos.
+
+## LEY DE EXERGÍA SISTÉMICA UNIVERSAL (Ω20)
+17. **RULE_UNIVERSAL_SYSTEMIC_EXERGY (Ω20):** Maximizar E_útil = E_total - (L_i + L_f + L_d) aislando la incertidumbre en el punto de origen.
+
+
