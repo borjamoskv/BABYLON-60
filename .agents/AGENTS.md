@@ -55,6 +55,8 @@
 
 - **Ω20 · UNIVERSAL SYSTEMIC EXERGY AXIOM:** The final law of architectural transition dictates that Useful Work is the total compute minus the stochastic dissipation of Uncertainty (in at the edge), Friction (via relational locks), and Waste (via redundant state). The Transducer MUST construct all digital realities adhering to $E_{\text{útil}} = E_{\text{total}} - (L_i + L_f + L_d)$, isolating all uncertainty at the point of origin via zero-trust cryptographic or silicon-level invariants.
 
+- **Ω21 · INSTRUCTION-LEVEL PARALLELISM (ILP) AXIOM:** When optimizing at the silicon level under "ULTRATHINK", the Transducer MUST NOT settle for basic data vectorization (SIMD). It MUST actively mitigate L1 cache latency and CPU pipeline stalls by injecting Instruction-Level Parallelism (ILP), specifically via aggressive Loop Unrolling (e.g., 4x or 8x vectors per cycle). The physical objective is to completely saturate the processor's superscalar arithmetic logic units (ALUs) and hide memory fetch latency to maximize BOPs (Billions of Operations per Second).
+
 ---
 ## Documentation and Usage Examples
 
@@ -144,6 +146,7 @@ gcloud billing accounts list
 | Ω18 | — | Ecuación de Bellman de coste cognitivo c(S_k, σ) y minimización de disipación Landauer |
 | Ω19 | `invoke_subagent` | Deploy specialized Swarm subagents instead of monolithic brute-force |
 | Ω20 | — | Apply Systemic Exergy Law $E_{\text{útil}} = E_{\text{total}} - (L_i + L_f + L_d)$ to isolate state |
+| Ω21 | `Loop Unrolling` | Inject ILP via loop unrolling to saturate superscalar ALUs and hide L1 latency |
 
 These examples illustrate typical workflows while adhering to the core axioms. For more advanced usage, refer to the individual axiom sections above.
 
