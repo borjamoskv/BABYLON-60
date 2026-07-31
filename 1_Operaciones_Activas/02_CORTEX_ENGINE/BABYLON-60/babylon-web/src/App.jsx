@@ -9,6 +9,7 @@ import {
   GENESIS_ID,
   sha256Hex
 } from './irpKernel';
+import init, { WasmScoreEngine } from 'cortex-wasm';
 
 function App() {
   // Isomorphic IRP Membrane State (Direct F# Domain Kernel Execution)
@@ -26,6 +27,28 @@ function App() {
   const [scoreQuery, setScoreQuery] = useState('');
   const [scoreResult, setScoreResult] = useState(null);
   const [scoreLoading, setScoreLoading] = useState(false);
+  const [wasmBenchmark, setWasmBenchmark] = useState(null);
+
+  // Initialize WASM
+  useEffect(() => {
+    init().catch(err => console.error("WASM Init Error:", err));
+  }, []);
+
+  const runWasmHyperEval = () => {
+    try {
+      const t0 = performance.now();
+      const engine = new WasmScoreEngine(120000);
+      const results = engine.evaluate_batch(1, 120000, 144);
+      const t1 = performance.now();
+
+      setWasmBenchmark({
+        timeMs: (t1 - t0).toFixed(2),
+        sampleScore: results[41].toFixed(2) // Score of 42
+      });
+    } catch (err) {
+      console.error("WASM Eval Error:", err);
+    }
+  };
 
   // Lazy-load scores.json on first interaction
   const loadScores = useCallback(async () => {
@@ -367,6 +390,26 @@ function App() {
                     {n.toLocaleString()}
                   </button>
                 ))}
+              </div>
+
+              {/* WASM Hyper-Eval Benchmark */}
+              <div style={{ marginTop: '1rem', padding: '1rem', background: 'rgba(255,255,255,0.02)', border: '1px solid var(--accent-primary)', borderRadius: '6px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                  <span className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--accent-primary)' }}>WASM SIMD ENGINE</span>
+                  <button className="btn btn-primary" style={{ padding: '0.3rem 0.6rem', fontSize: '0.75rem' }} onClick={runWasmHyperEval}>
+                    ⚡ Run 120K (C5-REAL)
+                  </button>
+                </div>
+                {wasmBenchmark && (
+                  <div className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                    <span style={{ color: 'var(--accent-success)' }}>{wasmBenchmark.timeMs}ms</span> | Score(42)={wasmBenchmark.sampleScore}
+                  </div>
+                )}
+                {!wasmBenchmark && (
+                  <div className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                    Eval 120,000 ints in physical DOM.
+                  </div>
+                )}
               </div>
             </div>
 

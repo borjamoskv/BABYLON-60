@@ -35,11 +35,11 @@ def generate_saboteur_vectors() -> list[tuple[str, str]]:
 |---|---|---|---|
 | 01 | Fake Paper 1 | Author A | None |
 ## Sección 3: Matriz de Primitivas Causal-Ontológicas (Desglose Exhaustivo 4x4)
-- **Primitivas de Estructura (\(\Pi_{{struct}}\)):** x
-- **Puntos de Colisión (\(\Pi_{{col}}\)):** y
-- **Invariantes (\(\Omega_{{inv}}\)):** z
+- **Primitivas de Estructura (\\(\\Pi_{{struct}}\\)):** x
+- **Puntos de Colisión (\\(\\Pi_{{col}}\\)):** y
+- **Invariantes (\\(\\Omega_{{inv}}\\)):** z
 - **Anti-Patrones:** w
-## Sección 4: Invariantes del Sistema ($\Omega$-Invariants) Ω152
+## Sección 4: Invariantes del Sistema ($\\Omega$-Invariants) Ω152
 ## Sección 5: Espacio Negativo (Anti-Patrones Descalificados)
 ## Sección 6: Resonancia Axiomática
 \\[ x^2 \\]
@@ -51,11 +51,11 @@ def generate_saboteur_vectors() -> list[tuple[str, str]]:
 ## Sección 2: Matriz Extendida de Fuentes
 {base_table}
 ## Sección 3: Matriz de Primitivas Causal-Ontológicas (Desglose Exhaustivo 4x4)
-- **Primitivas de Estructura (\(\Pi_{{struct}}\)):** x
-- **Puntos de Colisión (\(\Pi_{{col}}\)):** y
-- **Invariantes (\(\Omega_{{inv}}\)):** z
+- **Primitivas de Estructura (\\(\\Pi_{{struct}}\\)):** x
+- **Puntos de Colisión (\\(\\Pi_{{col}}\\)):** y
+- **Invariantes (\\(\\Omega_{{inv}}\\)):** z
 - **Anti-Patrones:** w
-## Sección 4: Invariantes del Sistema ($\Omega$-Invariants) Ω152
+## Sección 4: Invariantes del Sistema ($\\Omega$-Invariants) Ω152
 ## Sección 5: Espacio Negativo (Anti-Patrones Descalificados)
 ## Sección 6: Resonancia Axiomática
 \\[ x^2 \\]
@@ -68,7 +68,7 @@ def generate_saboteur_vectors() -> list[tuple[str, str]]:
 {base_table}
 ## Sección 3: Matriz de Primitivas Causal-Ontológicas (Desglose Exhaustivo 4x4)
 Just some random text without the exact sub-dimension keys.
-## Sección 4: Invariantes del Sistema ($\Omega$-Invariants) Ω152
+## Sección 4: Invariantes del Sistema ($\\Omega$-Invariants) Ω152
 ## Sección 5: Espacio Negativo (Anti-Patrones Descalificados)
 ## Sección 6: Resonancia Axiomática
 \\[ x^2 \\]
@@ -80,11 +80,11 @@ Just some random text without the exact sub-dimension keys.
 ## Sección 2: Matriz Extendida de Fuentes
 {base_table}
 ## Sección 3: Matriz de Primitivas Causal-Ontológicas (Desglose Exhaustivo 4x4)
-- **Primitivas de Estructura (\(\Pi_{{struct}}\)):** x
-- **Puntos de Colisión (\(\Pi_{{col}}\)):** y
-- **Invariantes (\(\Omega_{{inv}}\)):** z
+- **Primitivas de Estructura (\\(\\Pi_{{struct}}\\)):** x
+- **Puntos de Colisión (\\(\\Pi_{{col}}\\)):** y
+- **Invariantes (\\(\\Omega_{{inv}}\\)):** z
 - **Anti-Patrones:** w
-## Sección 4: Invariantes del Sistema ($\Omega$-Invariants)
+## Sección 4: Invariantes del Sistema ($\\Omega$-Invariants)
 No specific invariants mentioned here.
 ## Sección 5: Espacio Negativo (Anti-Patrones Descalificados)
 ## Sección 6: Resonancia Axiomática
@@ -97,13 +97,14 @@ No specific invariants mentioned here.
 ## Sección 2: Matriz Extendida de Fuentes
 {base_table}
 ## Sección 3: Matriz de Primitivas Causal-Ontológicas (Desglose Exhaustivo 4x4)
-- **Primitivas de Estructura (\(\Pi_{{struct}}\)):** x
-- **Puntos de Colisión (\(\Pi_{{col}}\)):** y
-- **Invariantes (\(\Omega_{{inv}}\)):** z
+- **Primitivas de Estructura (Pi_struct):** x
+- **Puntos de Colisión (Pi_col):** y
+- **Invariantes (Omega_inv):** z
 - **Anti-Patrones:** w
-## Sección 4: Invariantes del Sistema ($\Omega$-Invariants) Ω152
+## Sección 4: Invariantes del Sistema (Omega-Invariants) Ω152
 ## Sección 5: Espacio Negativo (Anti-Patrones Descalificados)
 ## Sección 6: Resonancia Axiomática
+No math formulas here.
 """
 
     return [
