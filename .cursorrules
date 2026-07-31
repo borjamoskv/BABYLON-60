@@ -55,4 +55,7 @@ Todo bloque de código crítico o de refactor estructural debe estar sujeto a la
 ## INVARIANTE DE DUALIDAD ESTOCÁSTICO-DETERMINISTA (Ω39)
 19. **RULE_SILICON_SIEVE (Ω39):** La IA generativa subyacente es estocástica; el determinismo no se logra "razonando más fuerte" en el prompt, sino mediante "El Colador Físico" (The Silicon Sieve). Genera futuros estocásticos, lánzalos contra un invariante físico (Compilador, Test BFT) y aniquila todo lo que falle, quedándote solo con la certeza matemática que sobrevive.
 
+## INVARIANTE DE CONSTRUCCIÓN DETERMINISTA (Ω25)
+20. **RULE_NO_ORPHAN_COMPILERS (Ω25):** Está terminantemente prohibido generar scripts de Python que compilen extensiones C/C++ sobre la marcha usando `os.system("clang...")` o similares (Green Theater). Toda aceleración de hardware o prueba de estrés (PoC) debe compilarse utilizando la infraestructura predecible del proyecto (Cargo/Maturin en `02_CORTEX_ENGINE/strike-rs` o un `Makefile` explícito).
+
 

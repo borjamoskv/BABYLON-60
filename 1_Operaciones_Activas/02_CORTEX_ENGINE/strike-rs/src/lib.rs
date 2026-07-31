@@ -381,6 +381,7 @@ use arm64_re::{dispatch_arm64_re, Arm64ReMatrix};
 // ==========================================
 
 pub mod categorical_896;
+pub mod silicon_sieve;
 
 #[pymodule]
 fn strike_rs(_py: Python, m: &Bound<'_, PyModule>) -> PyResult<()> {
@@ -393,6 +394,7 @@ fn strike_rs(_py: Python, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(dispatch_neuro_chain, m)?)?;
     m.add_function(wrap_pyfunction!(dispatch_tts_harness, m)?)?;
     m.add_function(wrap_pyfunction!(dispatch_arm64_re, m)?)?;
+    m.add_function(wrap_pyfunction!(silicon_sieve::run_silicon_sieve, m)?)?;
     Ok(())
 }
 

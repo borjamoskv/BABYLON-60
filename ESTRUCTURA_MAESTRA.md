@@ -17,7 +17,8 @@ Teorema-Robinson-Moskv/
 │   └── 02_CORTEX_ENGINE/        # Sole Surviving Master Domain
 │       ├── BABYLON-60/          # C5-REAL Execution Frontend (React/TypeScript/Vite)
 │       ├── cortex-persist/      # C5-REAL Deterministic Memory
-│       ├── strike-rs/           # Mathematical Engine and BFT Causal Validation (Rust PyO3)
+│       ├── strike-rs/           # Mathematical Engine, BFT Causal Validation, and Silicon Sieve (Ω39)
+│       ├── verify_sieve.py      # BFT/TLP Verification Script for Silicon Sieve
 │       └── cortex/              # BFT Orchestrator, Quad-Pillar Kernel (Python 3.12)
 │
 ├── 2_Nucleo_Estatico/           # Theoretical Anchors (Axioms, Ontology, Base Documentation)

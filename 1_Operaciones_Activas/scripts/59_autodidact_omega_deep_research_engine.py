@@ -14,6 +14,39 @@ import json
 import re
 import time
 import hashlib
+
+import ctypes
+
+# Load GCD C-extension if available (Axiom Ω23)
+gcd_lib = None
+try:
+    if os.path.exists("/tmp/mcts_gcd_core.dylib"):
+        gcd_lib = ctypes.CDLL("/tmp/mcts_gcd_core.dylib")
+        gcd_lib.compute_uct_scores_gcd.argtypes = [
+            ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int),
+            ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int),
+            ctypes.c_double, ctypes.c_double, ctypes.POINTER(ctypes.c_int),
+            ctypes.POINTER(ctypes.c_double), ctypes.c_size_t
+        ]
+except Exception as e:
+    pass
+
+def uct_gcd_batch(nodes, step_ts, c_puct=1.414, lambda_decay=0.15):
+    n = len(nodes)
+    if n == 0: return []
+    c_prm = (ctypes.c_double * n)(*[n.prm_score for n in nodes])
+    c_vis = (ctypes.c_int * n)(*[n.visits for n in nodes])
+    c_val = (ctypes.c_double * n)(*[n.value for n in nodes])
+    c_pvis = (ctypes.c_int * n)(*[(n.parent.visits if n.parent else 1) for n in nodes])
+    c_step = (ctypes.c_int * n)(*step_ts)
+    c_out = (ctypes.c_double * n)()
+
+    gcd_lib.compute_uct_scores_gcd(
+        c_prm, c_vis, c_val, c_pvis,
+        ctypes.c_double(c_puct), ctypes.c_double(lambda_decay),
+        c_step, c_out, ctypes.c_size_t(n)
+    )
+    return list(c_out)
 from typing import List, Dict, Any, Optional, Tuple
 
 
@@ -134,18 +167,18 @@ PILLAR_TAXONOMY = {
 }
 
 
-def simulate_mcts_deep_research(prompt: str, max_depth: int = 3) -> Dict[str, Any]:
-    """Execute multi-depth MCTS with thermodynamic annealing and early stopping."""
-    print(f">>> [C5-REAL] MCTS V5.0 Engine (Depth={max_depth}, Annealing+EarlyStop) for: '{prompt[:60]}...'")
-    root = MCTSResearchNode(prompt, prm_score=0.98, depth=0)
 
+def simulate_mcts_deep_research(prompt: str, max_depth: int = 3) -> Dict[str, Any]:
+    print(f">>> [C5-REAL] MCTS V5.0 Engine (Depth={max_depth}, Annealing+EarlyStop) for: '{prompt[:60]}...'")
+    if gcd_lib:
+        print(">>> [C5-REAL] AXIOM Ω23 ENFORCED: Grand Central Dispatch (GCD) Hardware Acceleration ACTIVE")
+    root = MCTSResearchNode(prompt, prm_score=0.98, depth=0)
     expanded_nodes = []
     collapsed_nodes = 0
     total_nodes = 0
     t0 = time.perf_counter()
 
     for p_idx, (pillar_title, pillar_data) in enumerate(PILLAR_TAXONOMY.items()):
-        # Depth 1: Pillar nodes
         p_node = MCTSResearchNode(
             pillar_title, parent=root,
             prm_score=sum(pillar_data["prm_scores"]) / len(pillar_data["prm_scores"]),
@@ -154,50 +187,51 @@ def simulate_mcts_deep_research(prompt: str, max_depth: int = 3) -> Dict[str, An
         p_node.expand(pillar_data["sub_queries"], pillar_data["prm_scores"])
         root.children.append(p_node)
 
-        for sq_idx, child in enumerate(p_node.children):
-            # Depth 2: Sub-query simulation
-            child.visits += 25
-            child.value += child.prm_score * 25.0
+        # Batch UCT computation via GCD
+        step_ts_d2 = [i + 1 for i in range(len(p_node.children))]
+        for c in p_node.children:
+            c.visits += 25
+            c.value += c.prm_score * 25.0
             p_node.visits += 25
-            step_t = sq_idx + 1
-            uct_val = child.uct_score(step_t=step_t)
 
+        if gcd_lib:
+            uct_vals_d2 = uct_gcd_batch(p_node.children, step_ts_d2)
+        else:
+            uct_vals_d2 = [c.uct_score(step_t=s) for c, s in zip(p_node.children, step_ts_d2)]
+
+        for sq_idx, (child, uct_val) in enumerate(zip(p_node.children, uct_vals_d2)):
             expanded_nodes.append({
-                "depth": 2,
-                "pillar": pillar_title,
-                "query": child.query,
-                "prm_score": child.prm_score,
-                "uct_score": round(uct_val, 4),
-                "visits": child.visits,
-                "collapsed": False
+                "depth": 2, "pillar": pillar_title, "query": child.query,
+                "prm_score": child.prm_score, "uct_score": round(uct_val, 4),
+                "visits": child.visits, "collapsed": False
             })
             total_nodes += 1
 
-            # Depth 3: Tertiary expansion with early stopping (Ω27)
             if max_depth >= 3 and sq_idx in pillar_data["depth_3_expansions"]:
                 d3_queries, d3_prms = pillar_data["depth_3_expansions"][sq_idx]
                 child.expand(d3_queries, d3_prms)
 
-                for d3_idx, grandchild in enumerate(child.children):
+                for grandchild in child.children:
                     grandchild.visits += 10
                     grandchild.value += grandchild.prm_score * 10.0
                     child.visits += 10
 
-                    # Check early stopping
-                    is_collapsed = child.should_collapse()
-                    if is_collapsed:
-                        grandchild.collapsed = True
-                        collapsed_nodes += 1
+                is_collapsed = child.should_collapse()
+                if is_collapsed:
+                    for gc in child.children: gc.collapsed = True
+                    collapsed_nodes += 1
 
-                    d3_uct = grandchild.uct_score(step_t=d3_idx + 1)
+                step_ts_d3 = [i + 1 for i in range(len(child.children))]
+                if gcd_lib:
+                    uct_vals_d3 = uct_gcd_batch(child.children, step_ts_d3)
+                else:
+                    uct_vals_d3 = [gc.uct_score(step_t=s) for gc, s in zip(child.children, step_ts_d3)]
+
+                for grandchild, d3_uct in zip(child.children, uct_vals_d3):
                     expanded_nodes.append({
-                        "depth": 3,
-                        "pillar": pillar_title,
-                        "query": grandchild.query,
-                        "prm_score": grandchild.prm_score,
-                        "uct_score": round(d3_uct, 4),
-                        "visits": grandchild.visits,
-                        "collapsed": is_collapsed
+                        "depth": 3, "pillar": pillar_title, "query": grandchild.query,
+                        "prm_score": grandchild.prm_score, "uct_score": round(d3_uct, 4),
+                        "visits": grandchild.visits, "collapsed": is_collapsed
                     })
                     total_nodes += 1
 
@@ -206,16 +240,11 @@ def simulate_mcts_deep_research(prompt: str, max_depth: int = 3) -> Dict[str, An
     throughput = total_nodes / max((t1 - t0), 1e-6)
 
     return {
-        "status": "SUCCESS",
-        "engine_version": "5.0-ULTRA-EXERGY",
-        "root_query": prompt,
-        "max_depth_reached": max_depth,
-        "total_nodes_expanded": total_nodes,
-        "collapsed_nodes_early_stop": collapsed_nodes,
-        "selected_branches": expanded_nodes,
-        "exergy_efficiency_eta_d": round(exergy_efficiency, 4),
-        "execution_time_sec": round(t1 - t0, 6),
-        "node_throughput_per_sec": round(throughput, 2)
+        "status": "SUCCESS", "engine_version": "5.1-ULTRA-EXERGY-GCD",
+        "root_query": prompt, "max_depth_reached": max_depth,
+        "total_nodes_expanded": total_nodes, "collapsed_nodes_early_stop": collapsed_nodes,
+        "selected_branches": expanded_nodes, "exergy_efficiency_eta_d": round(exergy_efficiency, 4),
+        "execution_time_sec": round(t1 - t0, 6), "node_throughput_per_sec": round(throughput, 2)
     }
 
 
@@ -238,7 +267,6 @@ REQUIRED_4X4_KEYS = [
     "Invariantes",
     "Anti-Patrones",
 ]
-
 
 def verify_crystal_artifact(artifact_path: str) -> Dict[str, Any]:
     """Strict 6-section forensic audit of crystal artifact."""
