@@ -41,6 +41,8 @@
 
 - **Ω14 · GOLDEN STANDARD CONTRACT AXIOM:** When navigating high-context or speculative architectures, the Transducer MUST explicitly declare operational mode upfront ("Worldbuilding Sandbox" vs "Production Spec/Rust Code"), preventing sycophantic recursion while maintaining a direct exit route to executable code.
 
+- **Ω15 · HARDWARE EXERGY MAXIMIZATION AXIOM:** When the Operator demands extreme optimization, "ULTRATHINK", or physical limits for numerical/computational scripts, the Transducer MUST discard pure Python limits and explicitly enforce physical hardware optimization. This includes deploying LLVM JIT Compilation (e.g., `@numba.njit`), Hardware ISA intrinsics (e.g., FMA `vfmaq_f32` in ARM NEON via C Extensions), and mathematically superior iterations (e.g., Halley's Cubic Householder over Quadratic Newton). Furthermore, any structural Exergy modification MUST be validated by a brutal physical stress test script (`*_stress_test.py`) mapping >100M operations and strict IEEE 754 edge boundaries (NaN, Denormals, Zero) to prove silicon-level resilience before collapsing the wave function.
+
 ---
 ## Documentation and Usage Examples
 
@@ -124,6 +126,7 @@ gcloud billing accounts list
 | Ω11 | `view_file` | Execute matching `SKILL.md` methodology |
 | Ω12 | `/grill-you` | Auto-trigger epistemic audit when ambiguity detected |
 | Ω14 | — | Declare upfront mode (Worldbuilding vs Production) |
+| Ω15 | `*_stress_test.py` / C Ext. | Deploy LLVM/SIMD FMA for computational limits and validate via 100M+ stress test |
 
 These examples illustrate typical workflows while adhering to the core axioms. For more advanced usage, refer to the individual axiom sections above.
 
