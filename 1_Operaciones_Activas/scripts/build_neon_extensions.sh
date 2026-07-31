@@ -27,7 +27,7 @@ compile_extension() {
 compile_extension "64_cortex_primitives_simd.c" "libcortex_primitives_simd.dylib"
 
 # 2. Operaciones Matemáticas (ULTRATHINK)
-compile_extension "61_q_rsqrt_neon.c" "libq_rsqrt_neon.dylib"
+compile_extension "61_q_rsqrt_neon_fma.c" "libq_rsqrt_neon.dylib"
 compile_extension "61_q_rsqrt_neon_fma.c" "libq_rsqrt_neon_fma.dylib"
 compile_extension "65_popcount_ultra_exergy.c" "libpopcount_neon.dylib"
 compile_extension "67_xorshift_ultra_exergy.c" "libxorshift_neon.dylib"

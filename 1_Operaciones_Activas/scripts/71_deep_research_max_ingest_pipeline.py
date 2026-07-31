@@ -409,10 +409,10 @@ def phase5_cutoff(ranked: List[Dict], threshold: float = 0.15) -> Tuple[List[Dic
 
     # Distribution by pillar
     print("\n  Exergy distribution by pillar:")
-    pillar_counts = Counter(p.get("best_pillar", "Unknown") for p in exergy)
+    pillar_counts = Counter(str(p.get("best_pillar") or "Unclassified") for p in exergy)
     for pil, count in pillar_counts.most_common():
         bar = "█" * (count // 2)
-        print(f"    {pil:40s} {count:3d} {bar}")
+        print(f"    {str(pil):40s} {count:3d} {bar}")
 
     return exergy, anergy, cutoff_idx
 
@@ -481,7 +481,7 @@ if __name__ == "__main__":
     print("  Axioms: Ω2, Ω15, Ω16, Ω22, Ω35")
     print("=" * 80)
 
-    output_dir = "/tmp"
+    output_dir = "/Users/borjafernandezangulo/.gemini/antigravity/brain/8357a892-77ba-4ceb-babd-a58c1ea97f9a"
 
     # Check for cached results to avoid re-fetching
     cache_path = os.path.join(output_dir, "deep_research_raw_cache.json")

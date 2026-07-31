@@ -6,7 +6,7 @@ CFLAGS = -O3 -mcpu=apple-m1 -ffast-math -dynamiclib
 BUILD_DIR = /tmp/exergy_builds
 
 # Fuentes
-SRC_Q_RSQRT     = 61_q_rsqrt_neon.c
+SRC_Q_RSQRT     = 61_q_rsqrt_neon_fma.c
 SRC_Q_RSQRT_FMA = 61_q_rsqrt_neon_fma.c
 SRC_PRIMITIVES  = 64_cortex_primitives_simd.c
 SRC_POPCOUNT    = 65_popcount_ultra_exergy.c
