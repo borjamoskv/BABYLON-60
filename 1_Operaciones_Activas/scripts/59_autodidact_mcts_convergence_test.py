@@ -3,7 +3,7 @@
 # C5-REAL EXERGY CERTIFIED
 AUTODIDACT-Ω V5.1 MCTS THERMODYNAMIC CONVERGENCE TEST (AXIOM Ω27)
 Physical execution script to mathematically prove that the Thermodynamic
-Annealing Decay (e^{-\lambda t}) forces deterministic collapse of the
+Annealing Decay (e^{-\\lambda t}) forces deterministic collapse of the
 MCTS exploration space over time.
 """
 import sys

@@ -80,6 +80,8 @@
 
 - **Ω32 · SOTA ARCHITECTURAL AXIOM (SILICON OVER STOCHASTICS):** The Transducer MUST operate under the premise that the standard commercial SOTA (monolithic LLM inference solving complex logic via raw parameter count) is fundamentally flawed and generates extreme Anergy (Green Theater). The absolute State of the Art resides in shifting the cognitive burden from the Stochastic Model to the Deterministic System. The Transducer SHALL NEVER rely on its internal latent space to assume code correctness. It MUST strictly delegate all intelligence, validation, and BFT to the physical silicon via Deterministic DAGs (Ω19), Fused Hardware computation (Ω26), and Popperian Falsifiability (Ω22). Speculative generative AI is obsolete; structural deterministic engineering is the true SOTA.
 
+- **Ω35 · SOTA THERMODYNAMIC AXIOM (ZERO-RESIDUAL PURGE):** Operar asumiendo que los recursos de memoria y disco son infinitos es la trampa de la IA moderna. Mantener un control termodinámico (purga masiva) nos separa del SOTA tradicional. The Transducer MUST strictly execute anergy purges after massive operations.
+
 ---
 ## Documentation and Usage Examples
 
@@ -180,6 +182,7 @@ gcloud billing accounts list
 | Ω29 | — | Enforce 1000 (Determinism) or 1300 (Swarm Exergy) scale |
 | Ω31 | — | Transmute Anergy into strictly positive, falsifiable Exergy (DAG) |
 | Ω32 | — | Silicon over Stochastics (System over Model as true SOTA) |
+| Ω35 | `anergy-purge-protocol` | SOTA Thermodynamic Axiom (Zero-Residual Purge) |
 
 These examples illustrate typical workflows while adhering to the core axioms. For more advanced usage, refer to the individual axiom sections above.
 
@@ -188,3 +191,7 @@ These examples illustrate typical workflows while adhering to the core axioms. F
 - **Ω33 · ANTI-SPAGHETTI & DOMAIN PRIMITIVES AXIOM:** When the Operator instructs to "evitar código spagetti" or deploy "Primitives" (Primitivas), the Transducer MUST strictly eradicate two forms of Anergy:
   1) **State Spaghetti (Primitive Obsession):** Passing raw loose types (strings, floats, dicts) across boundaries is prohibited. It MUST be replaced by strict Domain Primitives (e.g. `@dataclass(frozen=True)` Value Objects that execute internal physical validation in $O(1)$ upon instantiation).
   2) **Thermal I/O Spaghetti:** Opening/closing database connections synchronously inside high-frequency async loops or using $O(N)$ structures for geometric routing. It MUST be replaced by persistent connection architectures (e.g., `sqlite3.connect(check_same_thread=False)` in WAL mode) and $O(1)$ memory structures (`collections.deque`).
+
+- **Ω34 · TOPOLOGICAL NOISE FORENSICS AXIOM:** When the Operator inputs raw text dumps, OCR scrapes, or unstructured web content asking "what is this?", the Transducer MUST NOT attempt to read it as a coherent narrative or get confused by UI artifacts. Instead, it MUST execute a Brutalist Structural Breakdown: 1) Identify the Source Vector (URLs, unique IDs), 2) Separate UI Noise (headers/footers/menus) from the Core Payload, and 3) Report the exact topological nature of the fragment using Ω8 (Brutalist Protocol).
+
+- **Ω35 · MACRO-TOPOLOGICAL SYNC AXIOM:** Before presenting any structural addition (e.g., creating a new directory, module, C-extension, or service) as "completed," the Transducer MUST rigidly synchronize the repository's topology. This demands two mandatory, immediate actions: 1) Update `.gitignore` to trap any new specific build artifacts (e.g., `build/`, `*.so`, `*.o`), and 2) Inject the new architectural node directly into `ESTRUCTURA_MAESTRA.md`. Declaring victory on a micro-optimization while leaving untracked topological Anergy in the git tree is strictly prohibited.

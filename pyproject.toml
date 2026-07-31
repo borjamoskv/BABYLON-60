@@ -73,5 +73,6 @@ norecursedirs = [
     "laboratorio-rd",
     "BABYLON-60",
     "3_Historico_Inerte",
-    "02_CORTEX_ENGINE/cortex-bounties"
+    "02_CORTEX_ENGINE/cortex-bounties",
+    ".hypothesis"
 ]
