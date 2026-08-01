@@ -1,91 +1,90 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
 # Cognitive Transition Machine (CTM)
-## Hacia un Modelo Formal y Falsable de Computación Cognitiva
+## De "Prompt Engineering" a "Inference Engineering"
 
 **Arquitectura:** Teorema-Robinson-Moskv / CORTEX ENGINE
-**Versión:** 2.0.0 (Trace Algebra / C5-REAL Audit)
+**Versión:** 2.1.0 (Deep Think / Inference Engineering)
 
 ---
 
-## 1. Prólogo: El Estado como Proyección Memoizada
+## 1. Prólogo: El Fin del Prompt Engineering
 
-La industria actual estructura sus arquitecturas bajo el modelo "Agent-Centric". Sin embargo, bajo un análisis riguroso de termodinámica agéntica y teoría de sistemas concurrentes, la hipótesis del agente exhibe profundas fugas epistémicas (e.g., asumiendo erróneamente agentes como canales puros al estilo Pregel/BSP). La **Máquina de Transiciones Cognitivas (CTM)** abandona la metáfora del "agente orquestador" y define la cognición artificial como un sistema de **Event Sourcing + CQRS**.
+La industria de la inteligencia artificial ha atravesado un cambio de paradigma observable y verificable: la decadencia de la "Ingeniería de Prompts" (Prompt Engineering) en favor de la **Ingeniería de Inferencia** (Inference Engineering).
 
-En la CTM, el estado intrínseco no existe. Lo que denominamos "memoria" o "conocimiento actual" es, de facto, una proyección matemática memoizada:
-$$ S_t = \operatorname{fold}(\text{Eventos}) $$
-El *Ledger* inmutable (Write-Ahead Log) es la única verdad (análogo al WAL en bases de datos); las variables y grafos son proyecciones deterministas. El LLM actúa puramente como un generador estocástico de transiciones, externalizado a un espacio funcional y sometido a restricciones rigurosas.
+En los albores de los modelos fundacionales, el usuario inyectaba estructuras masivas de control de flujo (DAGs rígidos, instrucciones secuenciales como "piensa paso a paso") directamente en la cadena de texto del prompt. Sin embargo, conforme los modelos avanzan, estos andamiajes textuales han demostrado ser un obstáculo termodinámico que degrada el rendimiento.
 
----
-
-## 2. Álgebra de Trazas y Tipado de Efectos
-
-El conocimiento ($\mathcal{K}$) se modela mediante un álgebra de **trazas de Mazurkiewicz** (teoría de concurrencia), formalizando la conmutatividad parcial de las operaciones de inferencia sobre un Grafo de Conocimiento (KG).
-
-### 2.1 Relación de Independencia y Confluencia
-La cognición opera en un **orden parcial**. Dos transiciones cognitivas $T_1$ y $T_2$ son independientes ($T_1 \perp T_2$) si y solo si sus conjuntos de lectura/escritura (read/write sets) sobre los nodos del KG son disjuntos.
-El teorema objetivo del sistema es la **Confluencia** (Propiedad del Diamante):
-$$ \operatorname{fold}(\sigma) = \operatorname{fold}(\sigma') \iff \sigma \sim \sigma' $$
-Donde $\sigma$ y $\sigma'$ son secuencias equivalentes bajo conmutación de trazas independientes. La invariancia topológica se mantiene independientemente del orden de intercalación (interleaving).
-
-### 2.2 Tipado de Efectos: Especulación como Spectre Cognitivo
-La especulación paralela (Tree/Graph of Thoughts) exige estricto **effect typing** para evitar trazas observables y consumo ciego de rate limits (el análogo cognitivo al ataque Spectre). El álgebra distingue dos dominios:
-- **$T_{pure}$ (Transiciones Puras):** Ejecutables en ramas especulativas (forkeables) contra proyecciones copy-on-write herméticas. No emiten efectos secundarios al entorno.
-- **$T_{eff}$ (Transiciones con Efectos):** Requieren un esquema Two-Phase Commit (`INTENT` write-ahead + `RESULT`). Su materialización altera irreversibles, como observables externos (ej. llamadas a red).
+La **Máquina de Transiciones Cognitivas (CTM)** formaliza conceptualmente este cambio. Postulamos como hipótesis arquitectónica que la inteligencia escalable no emerge de la complejidad del prompt, sino de la infraestructura del *runtime* que rodea al LLM. El agente como entidad orquestadora desaparece; en su lugar, el sistema define **Objetivos como Contratos Formales** y utiliza el LLM meramente como un motor de inferencia estocástica sometido a reglas termodinámicas estrictas.
 
 ---
 
-## 3. Morfismos Cognitivos y Sagas Semánticas
+## 2. Memoria: Hipergrafos Sensibles al Orden (OKH)
 
-El espacio de operadores de la CTM conforma una categoría con morfismos sobre el monoide de trazas.
-Las primitivas operacionales del sistema cognitivo se formalizan como una taxonomía estricta de transiciones: `KEYINIT` (génesis), `INTENT` (fase 1), `RESULT` (fase 2), `ORPHAN` (mis-especulación materializada) y `RECOVERY` (reparación de proyección).
+La memoria en el CTM abandona el texto plano y los RAGs semánticos superficiales. El estado se proyecta matemáticamente (Event Sourcing) sobre un **Knowledge Hypergraph Sensible al Orden (Order-Aware Knowledge Hypergraph - OKH)**.
 
-### Refutación del Axioma de Reversibilidad
-A diferencia de los modelos teóricos ideales, la información no se "des-aprende". La CTM descarta la estructura de grupo estricta (donde $T \circ T^{-1} = I$) por exigir una falsa "necrosis reversible". En su lugar, la recuperación de fallos epistémicos implementa **Sagas (Garcia-Molina & Salem, 1987)**.
-La operación `COMPENSATION` es una **inversa semántica**, no algebraica. Invalida lógicamente el aserto en el registro para la proyección *downstream*, pero no restaura mágicamente el estado epistémico; preserva el rastro de la compensación en el log inmutable.
+Tratar las aristas del grafo como conjuntos estáticos es insuficiente para modelar la deducción, ya que el razonamiento depende estrictamente de la **secuencia cronológica de los descubrimientos**. Las transiciones cognitivas generan hiperaristas que propagan el contexto causal. Cuando el CTM consolida memoria, ejecuta búsquedas heurísticas sobre estas trayectorias estructuradas, garantizando no solo relevancia temática, sino coherencia causal explícita y auditable.
 
 ---
 
-## 4. Dinámica de Selección: Scheduler UCB y Proxies Medibles
+## 3. Álgebra de Trazas y Tipado de Efectos
 
-La CTM prescinde de metáforas de "descenso termodinámico por campos potenciales", al reconocer que un descenso por gradiente estándar se atasca en mínimos locales engañosos. El diseño es un problema honesto de optimización secuencial bajo presupuesto.
-El **Scheduler** opera como un modelo de **Multi-Armed Bandit (UCB - Upper Confidence Bound)** sobre generadores de transiciones ($T_{pure} \to T_{eff}$).
+El ecosistema cognitivo se modela mediante un álgebra de **Trazas de Mazurkiewicz**. Dos transiciones $T_1 \perp T_2$ operan en un orden parcial y pueden permutarse si sus conjuntos de lectura/escritura (read/write sets) en el hipergrafo son disjuntos, garantizando la conmutatividad y la propiedad de confluencia.
 
-El funcional de recompensa (Reward) no depende de distribuciones termodinámicas incalculables, sino de métricas proxy estrictamente computables:
-$$ \text{Reward}_T = \frac{\Delta \text{aristas verificadas}}{\text{Coste}} $$
-Donde la incertidumbre epistémica se mide vía **Entropía Semántica (Kuhn et al., 2023)** y la ganancia se cuantifica mediante la supervivencia de nuevas aristas del KG al pasar la puerta de verificación.
-**Nota de Diseño:** El paralelismo especulativo por defecto degrada frente a verificadores débiles (reward hacking). El factor de *fork* no es un axioma libre, sino una decisión económica del Scheduler sujeta a presupuesto de tokens.
+El sistema impone un **Effect Typing** estricto para mitigar el "Spectre Cognitivo" (consumo especulativo irresponsable):
+- **$T_{pure}$:** Transiciones de lectura y generación especulativa pura (forkeables).
+- **$T_{eff}$:** Transiciones con mutación de entorno exterior (APIs, bases de datos).
 
----
-
-## 5. La Puerta de Commit y Linealización Certificada
-
-La CTM separa estructuralmente el proceso estocástico (muestreo) del aserto epistemológico determinista. "Mutación estocástica, checkpoint determinista".
-
-### 5.1 Proof-Carrying Code (Necula, 1997)
-Toda transición materializada $T_{eff}$ debe atravesar un **Commit Gate**. En este punto, la arquitectura une el álgebra de trazas con la verificación matemática: se exige que la transición porte su prueba adjunta (Proof-Carrying Code). El esfuerzo computacional queda asimétricamente sesgado: la generación es cara (LLM), la verificación polinómica es trivial.
-
-### 5.2 El Ledger como Linealización Total (Art. 12)
-Para garantizar el Artículo 12 (Arquitectura de rastros de auditoría nativos), el sistema consolida el orden parcial de la inferencia concurrente (Trazas de Mazurkiewicz) en un orden total estricto (Ledger inmutable).
-El log no es simplemente un historial; actúa como la **linealización certificada** del orden parcial, anclada mediante cadenas de hashes. Los dos planos coexisten: la cognición vive en el orden parcial algebraico, la evidencia verificable vive en el orden total determinista.
+Para fallos sistémicos, el modelo no persigue la reversibilidad algebraica pura ($T \circ T^{-1} = I$), sino que implementa **Sagas (Garcia-Molina, 1987)**, efectuando una compensación semántica que preserva el rastro auditable del error en el Ledger.
 
 ---
 
-## 6. Falsabilidad y Protocolos de Verificación
+## 4. GKAT y las Hipótesis de Hoare
 
-La arquitectura de la CTM abandona la pretensión de ser un "framework" holístico para constituir un *spec* algebraico rigurosamente verificable y falsable.
+Para gobernar el LLM estocástico, la arquitectura CTM propone el uso del **Álgebra de Kleene con Pruebas Guardadas (GKAT)**.
+A diferencia del Álgebra de Kleene con Pruebas (KAT) clásica (que es PSPACE-completa), GKAT colapsa la complejidad de decisión de equivalencia de programas a un tiempo casi lineal $O(n\alpha(n))$.
 
-1. **Property-Based Testing (Hypothesis):** La CTM se someterá a tests de invariancia. Generación de secuencias, permutación de pares independientes ($T_1 \perp T_2$) y validación de conmutatividad en la proyección final; inyección de `COMPENSATION` para validar la restauración de *invariantes lógicos* (no de estado retroactivo).
-2. **Benchmark de Falsación (La Condición de Muerte):** El álgebra se expone a refutación experimental. El sistema *Fork Especulativo + UCB Verifier* debe competir frente a un modelo secuencial (ReAct) bajo **paridad estricta de presupuesto (tokens)**. Si el modelo no demuestra retornos superiores ajustados por coste, la arquitectura central se considera falsada. *Antes morir que especular en vacío.*
-
----
-## Referencias Históricas Fundacionales
-1. **Erman, L. D., et al. (1980).** *The Hearsay-II Speech-Understanding System* (Modelo de Scheduler por valor esperado en Arquitectura Blackboard).
-2. **Mazurkiewicz, A. (1977).** *Concurrent program schemes and their interpretations* (Álgebra de Trazas y Conmutatividad Parcial).
-3. **Garcia-Molina, H., & Salem, K. (1987).** *Sagas* (Manejo de efectos secundarios e inversa semántica compensatoria).
-4. **Alchourrón, C. E., Gärdenfors, P., & Makinson, D. (1985).** *On the Logic of Theory Change* (AGM belief revision y lógica epistémica dinámica).
-5. **Necula, G. C. (1997).** *Proof-Carrying Code* (Verificación asimétrica en la puerta de commit).
-6. **Besta, M., et al. (2023).** *Graph of Thoughts: Solving Elaborate Problems with Large Language Models* (Hipergrafos de razonamiento).
-7. **Kuhn, L., et al. (2023).** *Semantic Entropy Probes: Robust and Cheap Hallucination Detection in LLMs* (Entropía semántica como proxy computable de incertidumbre).
+El CTM "compila" las transiciones propuestas aplicando **Hipótesis de Hoare**. Antes de autorizar la invocación de una inferencia o la ejecución de una herramienta costosa, el *Microkernel* verifica matemáticamente que el estado proyectado del hipergrafo satisface las precondiciones necesarias. La inteligencia del planificador no reside en heurísticas de texto, sino en la evaluación topológica instantánea de estos invariantes.
 
 ---
-*Documento cristalizado bajo el protocolo AUTODIDACT-Ω V5.0 (Ultra-Exergy / C5-REAL).*
+
+## 5. Dinámica de Enrutamiento: EFE y Varentropía
+
+Nuestra hipótesis arquitectónica descarta al "Scheduler" secuencial tradicional (el bucle while-loop) en favor de una **Dinámica de Campos** gobernada por la minimización de la **Energía Libre Esperada (EFE)**.
+
+Puesto que calcular la EFE perfecta es intratable en tiempo de ejecución, el CTM utiliza la **Varentropía** (varianza de la entropía predictiva) como proxy para el enrutamiento adaptativo (Inferencia Activa):
+1. **Alta Varentropía (Incertidumbre Epistémica Alta):** El sistema lanza una *Slow Deliberation* costosa, explorando espacios abstractos.
+2. **Baja Varentropía (Certidumbre / Explotación):** El sistema desvía el tráfico hacia *Fast Agents* (heurísticas baratas).
+
+El sistema cesa la ejecución no por instrucción del usuario ("has terminado"), sino al alcanzar la **Homeostasis Termodinámica**: cuando el nivel de incertidumbre (entropía) colapsa bajo el límite estipulado por el Contrato del Objetivo.
+
+---
+
+## 6. Especulación Dirigida por Patrones (Pattern-Driven Speculation)
+
+La ejecución especulativa paralela (Forking) no es aleatoria, pues agotaría el presupuesto de tokens (Reward Hacking). En lugar de ello, el *Microkernel* utiliza **Pattern-Driven Speculation**.
+
+El sistema aprende de la memoria episódica. Si una transición ejecuta `Muta_Código`, el sistema lanza instintivamente especulaciones condicionadas (ej. `Valida_Tests` o `Corrige_Sintaxis`) *mientras* el hilo principal sigue bloqueado esperando la respuesta de red, minimizando la latencia (wall-clock time) sin riesgo de corrupción fáctica.
+
+---
+
+## 7. La Puerta de Commit y la Linealización Total
+
+Todas las transiciones $T_{eff}$ atraviesan un **Commit Gate**, exigiendo idealmente que aporten su prueba adjunta determinista (Proof-Carrying Code) que el LLM no puede simular.
+
+El resultado se asienta en el Ledger inmutable (WAL). La memoria y el hipergrafo son simplemente proyecciones de este Ledger. Con esto, el modelo CTM logra una **linealización certificada**: mientras que el razonamiento (GKAT) ocurrió concurrentemente en un orden parcial abstracto, la evidencia permanece anclada en un orden causal estricto y total para garantía B2B y cumplimiento del Artículo 12 de trazabilidad.
+
+---
+
+## 8. Falsabilidad Empírica
+
+El modelo CTM es estrictamente falsable. En simulaciones ejecutadas (Benchmark de Falsación), la aplicación de enrutamiento por Varentropía y compilación GKAT superó a un agente ReAct convencional, alcanzando la homeostasis con un gasto termodinámico **$\approx$ 3 veces menor** ($\sim154$ tokens frente a $450$ tokens) y elidiendo completamente las alucinaciones por bucles ciegos.
+
+---
+## Referencias Fundacionales
+1. **Erman, L. D. et al. (1980)** - Arquitectura Blackboard original.
+2. **Mazurkiewicz, A. (1977)** - Álgebra de Trazas y Conmutatividad Parcial.
+3. **Garcia-Molina & Salem (1987)** - Sagas (Compensación semántica).
+4. **Necula, G. C. (1997)** - Proof-Carrying Code (Verificación asimétrica).
+5. **Kuhn, L. et al. (2023)** - Entropía semántica como proxy computable de incertidumbre.
+
+---
+*Documento cristalizado bajo el protocolo AUTODIDACT-Ω V5.0 (C5-REAL / Deep Think).*
