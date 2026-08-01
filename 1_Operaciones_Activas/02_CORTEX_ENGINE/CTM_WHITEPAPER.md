@@ -1,95 +1,91 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
 # Cognitive Transition Machine (CTM)
-## Hacia una Teoría Física y Modelo Formal de Computación Cognitiva
+## Hacia un Modelo Formal y Falsable de Computación Cognitiva
 
 **Arquitectura:** Teorema-Robinson-Moskv / CORTEX ENGINE
-**Versión:** 1.2.0 (BFT / ZK-Thermodynamics / Ultra-Exergy)
+**Versión:** 2.0.0 (Trace Algebra / C5-REAL Audit)
 
 ---
 
-## 1. Prólogo: De la Metáfora Arquitectónica al Modelo Físico
+## 1. Prólogo: El Estado como Proyección Memoizada
 
-La industria actual estructura sus arquitecturas bajo el modelo "Agent-Centric", que puede definirse computacionalmente como una transición de estados mutables $f: S_t \to S_{t+1}$, donde un "Agente" actúa como unidad de razonamiento y el LLM opera como el orquestador principal.
+La industria actual estructura sus arquitecturas bajo el modelo "Agent-Centric". Sin embargo, bajo un análisis riguroso de termodinámica agéntica y teoría de sistemas concurrentes, la hipótesis del agente exhibe profundas fugas epistémicas (e.g., asumiendo erróneamente agentes como canales puros al estilo Pregel/BSP). La **Máquina de Transiciones Cognitivas (CTM)** abandona la metáfora del "agente orquestador" y define la cognición artificial como un sistema de **Event Sourcing + CQRS**.
 
-Este documento formaliza un enfoque alternativo y fundamental: la **Máquina de Transiciones Cognitivas (CTM)**. La CTM no es un "framework" ni una simple mejora arquitectónica, sino un **modelo físico y matemático de la cognición artificial**. En este modelo:
-
-1. El conocimiento no "se almacena", evoluciona. El sistema no transiciona entre estados, sino que se modela como una transformación sobre una variedad (manifold) de conocimiento: $\Gamma: \mathcal{K} \to \mathcal{K}$.
-2. El LLM ya no es el orquestador. Se reduce a una **Compute Primitive** (primitiva de cómputo), sujeta a restricciones termodinámicas estrictas. Su única función es implementar operadores sobre el espacio de conocimiento.
-3. El estado mutable desaparece. La memoria no es un repositorio, sino una proyección matemática generada dinámicamente a partir de un historial de eventos inmutable y criptográficamente anclado (ZDR / ZKPROV).
-4. Los objetivos no "se ejecutan", definen una **función potencial** sobre la que el sistema desciende termodinámicamente.
+En la CTM, el estado intrínseco no existe. Lo que denominamos "memoria" o "conocimiento actual" es, de facto, una proyección matemática memoizada:
+$$ S_t = \operatorname{fold}(\text{Eventos}) $$
+El *Ledger* inmutable (Write-Ahead Log) es la única verdad (análogo al WAL en bases de datos); las variables y grafos son proyecciones deterministas. El LLM actúa puramente como un generador estocástico de transiciones, externalizado a un espacio funcional y sometido a restricciones rigurosas.
 
 ---
 
-## 2. Definición Formal de la CTM
+## 2. Álgebra de Trazas y Tipado de Efectos
 
-Una **Máquina de Transiciones Cognitivas (CTM)** se define como un sistema dinámico formalizado por la tupla:
-$$ \mathcal{M} = \langle \mathcal{K}, \Phi, \mathcal{O}, U, L, \mathcal{U} \rangle $$
+El conocimiento ($\mathcal{K}$) se modela mediante un álgebra de **trazas de Mazurkiewicz** (teoría de concurrencia), formalizando la conmutatividad parcial de las operaciones de inferencia sobre un Grafo de Conocimiento (KG).
 
-Donde:
-- **$\mathcal{K}$ (Knowledge Phase Space):** El Espacio de Fases del Conocimiento, definido como una variedad con métrica y conexión afín $(\mathcal{K}, g, \nabla)$.
-- **$\Phi$ (Potential Function):** Función escalar $\Phi: \mathcal{K} \to \mathbb{R}$ que el sistema busca minimizar.
-- **$\mathcal{O}$ (Cognitive Morphisms):** Conjunto de operadores algebraicos (morfismos en una categoría) sobre $\mathcal{K}$.
-- **$U$ (Utility Functional):** Funcional $U[T; K]$ que evalúa la viabilidad termodinámica de una transición.
-- **$L$ (Ledger):** Registro inmutable de causalidad (BFT / PBFT Causal Consensus) que persiste la trayectoria.
-- **$\mathcal{U}$ (Evolution Operator):** El verdadero "Kernel", responsable de seleccionar la trayectoria óptima.
+### 2.1 Relación de Independencia y Confluencia
+La cognición opera en un **orden parcial**. Dos transiciones cognitivas $T_1$ y $T_2$ son independientes ($T_1 \perp T_2$) si y solo si sus conjuntos de lectura/escritura (read/write sets) sobre los nodos del KG son disjuntos.
+El teorema objetivo del sistema es la **Confluencia** (Propiedad del Diamante):
+$$ \operatorname{fold}(\sigma) = \operatorname{fold}(\sigma') \iff \sigma \sim \sigma' $$
+Donde $\sigma$ y $\sigma'$ son secuencias equivalentes bajo conmutación de trazas independientes. La invariancia topológica se mantiene independientemente del orden de intercalación (interleaving).
 
-### 2.1 Knowledge Phase Space y el Límite de Bekenstein: $(\mathcal{K}, g, \nabla)$
-Para que una derivada cognitiva como $\frac{dK}{dt}$ tenga sentido estricto, $\mathcal{K}$ debe ser un espacio diferenciable: $\mathcal{K} = (V, E, \mu)$.
-
-El conocimiento opera en un **espacio de fases** dinámico $K = (x, p)$, donde cada elemento posee una "posición" $x$ (concepto, dependencias estructurales) y un "momento" $p$ (confianza, verificabilidad).
-Físicamente, el volumen de información o entropía latente en cualquier subregión de $\mathcal{K}$ está estrictamente acotado por el **Límite de Bekenstein** holográfico. Este espacio está dotado de una métrica $g$ que define distancias reales de información y una conexión afín $\nabla$ que permite trazar trayectorias de razonamiento.
-
-### 2.2 El Sustrato Inmutable (ZKPROV) y la Proyección del Estado
-En la CTM, el "estado actual" no existe intrínsecamente. El Ledger $L$ es la realidad absoluta, operando mediante **BFT Causal Consensus** y **ZKPROV** (Zero-Knowledge Provenance) para asegurar un linaje inmutable.
-El estado aparente $\hat{S}_t$ en un instante $t$ se define puramente como una proyección determinista $P$ sobre el historial:
-$$ \hat{S}_t = P(L_t) $$
-Bajo este paradigma, la memoria nunca se consulta (`Retrieve`); se proyecta de forma análoga a una GPU renderizando geometría sobre el plano del problema, aplicando de facto el principio de **Zero Data Retention (ZDR)** y sanitización criptográfica.
+### 2.2 Tipado de Efectos: Especulación como Spectre Cognitivo
+La especulación paralela (Tree/Graph of Thoughts) exige estricto **effect typing** para evitar trazas observables y consumo ciego de rate limits (el análogo cognitivo al ataque Spectre). El álgebra distingue dos dominios:
+- **$T_{pure}$ (Transiciones Puras):** Ejecutables en ramas especulativas (forkeables) contra proyecciones copy-on-write herméticas. No emiten efectos secundarios al entorno.
+- **$T_{eff}$ (Transiciones con Efectos):** Requieren un esquema Two-Phase Commit (`INTENT` write-ahead + `RESULT`). Su materialización altera irreversibles, como observables externos (ej. llamadas a red).
 
 ---
 
-## 3. Álgebra de Operadores Cognitivos (COA) y Aritmetización
+## 3. Morfismos Cognitivos y Sagas Semánticas
 
-La CTM razona aplicando un álgebra estricta de morfismos cognitivos. El sistema se construye como una categoría donde los operadores actúan como morfismos que transforman el espacio de fases $\mathcal{K}$.
+El espacio de operadores de la CTM conforma una categoría con morfismos sobre el monoide de trazas.
+Las primitivas operacionales del sistema cognitivo se formalizan como una taxonomía estricta de transiciones: `KEYINIT` (génesis), `INTENT` (fase 1), `RESULT` (fase 2), `ORPHAN` (mis-especulación materializada) y `RECOVERY` (reparación de proyección).
 
-Sea $k \in \mathcal{K}$:
-
-- **$Verify: \mathcal{K} \to \mathcal{K}$:** Atestación criptográfica estricta. Ya no es una heurística; se fundamenta en arquitecturas de **zkLLM / zkGPT Gate Arithmetization** (LogUp, tlookup) y **zkWASM / SP1 / RISC Zero**, anclando la inferencia a hardware biométrico y esquemas de *polynomial commitments* (ej. KZG).
-- **$Refute: \mathcal{K} \to \mathcal{K}$:** Inversión de un aserto, alterando la topología de la variedad.
-- **$Merge: \mathcal{K} \times \mathcal{K} \to \mathcal{K}$:** Síntesis morfismática de dos puntos en el espacio mediante estructuras de datos autenticadas (ej. uniones en vSQL).
-- **$Decompose: \mathcal{K} \to \mathcal{K}^n$:** Fragmentación analítica, reduciendo la entropía local.
-- **$Generalize: \mathcal{K} \to \mathcal{K}$:** Traslación ascensional en el eje de especificidad topológica.
-
-### Propiedades Algebraicas
-1. **Idempotencia:** $Verify(Verify(k)) \equiv Verify(k)$. Reejecutar una atestación validada criptográficamente (ej. generar un proof repetido) no altera la termodinámica del sistema.
-2. **Reversibilidad Estructural:** Toda aplicación de morfismos admite una trayectoria inversa de operadores para su refutación sistemática ($\neg k_{t+1}$), preservando la inmutabilidad de $L$.
-3. **Componibilidad:** Las transiciones conforman cadenas de morfismos algebraicamente válidas.
+### Refutación del Axioma de Reversibilidad
+A diferencia de los modelos teóricos ideales, la información no se "des-aprende". La CTM descarta la estructura de grupo estricta (donde $T \circ T^{-1} = I$) por exigir una falsa "necrosis reversible". En su lugar, la recuperación de fallos epistémicos implementa **Sagas (Garcia-Molina & Salem, 1987)**.
+La operación `COMPENSATION` es una **inversa semántica**, no algebraica. Invalida lógicamente el aserto en el registro para la proyección *downstream*, pero no restaura mágicamente el estado epistémico; preserva el rastro de la compensación en el log inmutable.
 
 ---
 
-## 4. Dinámica de Optimización Termodinámica
+## 4. Dinámica de Selección: Scheduler UCB y Proxies Medibles
 
-El *Planner* o *Scheduler* tradicional desaparece por completo, reemplazado por la resolución continua de un **problema de optimización variacional** gobernado por el operador de evolución $\mathcal{U}$.
+La CTM prescinde de metáforas de "descenso termodinámico por campos potenciales", al reconocer que un descenso por gradiente estándar se atasca en mínimos locales engañosos. El diseño es un problema honesto de optimización secuencial bajo presupuesto.
+El **Scheduler** opera como un modelo de **Multi-Armed Bandit (UCB - Upper Confidence Bound)** sobre generadores de transiciones ($T_{pure} \to T_{eff}$).
 
-El Kernel desciende por el potencial $\Phi(K)$ seleccionando la transición (trayectoria) $T$ que maximiza el funcional de utilidad $U$ en el punto actual $K$:
-
-$$ \underset{T}{\operatorname{argmax}} \, U[T; K] = \Delta I_T - C_T - R_T - S_T $$
-
-Donde la CTM formaliza estos términos físicamente:
-- $\Delta I_T$: Incremento de información verificable en $\mathcal{K}$.
-- $C_T$: Coste energético computacional de la *Compute Primitive*. En el límite físico, gobernado intrínsecamente por la **Disipación de Energía de Landauer ($k_B T \ln 2$)**.
-- $R_T$: Riesgo probabilístico (incertidumbre en la medición de la trayectoria).
-- $S_T$: Entropía termodinámica residual, modelada bajo la equivalencia entropía-información del **Motor de Szilard** (observar y colapsar hipótesis irremediablemente consume exergía).
-
-### 4.1 Geodésicas en el Espacio de Fases
-Dada la métrica $g$ y la conexión $\nabla$, el razonamiento es exactamente el cálculo de la **geodésica más corta** entre el conocimiento inicial $K_0$ y el atractor mínimo de $\Phi$. El paralelismo especulativo es el mecanismo físico del Kernel para sondear la curvatura local de $\mathcal{K}$ y colapsar la superposición cuántica sobre la trayectoria de menor disipación energética (similar a arquitecturas de *adiabatic logic circuits*).
+El funcional de recompensa (Reward) no depende de distribuciones termodinámicas incalculables, sino de métricas proxy estrictamente computables:
+$$ \text{Reward}_T = \frac{\Delta \text{aristas verificadas}}{\text{Coste}} $$
+Donde la incertidumbre epistémica se mide vía **Entropía Semántica (Kuhn et al., 2023)** y la ganancia se cuantifica mediante la supervivencia de nuevas aristas del KG al pasar la puerta de verificación.
+**Nota de Diseño:** El paralelismo especulativo por defecto degrada frente a verificadores débiles (reward hacking). El factor de *fork* no es un axioma libre, sino una decisión económica del Scheduler sujeta a presupuesto de tokens.
 
 ---
 
-## 5. Homeostasis y Convergencia Dinámica
+## 5. La Puerta de Commit y Linealización Certificada
 
-La CTM converge de forma natural cuando alcanza su límite térmico en el mínimo del potencial $\Phi$.
+La CTM separa estructuralmente el proceso estocástico (muestreo) del aserto epistemológico determinista. "Mutación estocástica, checkpoint determinista".
 
-La ejecución cesa cuando el sistema entra en **Homeostasis**. En este punto gravitatorio, la derivada temporal en el espacio de fases se anula ($\frac{dK}{dt} \approx 0$) y el retorno marginal de aplicar cualquier morfismo de inferencia adicional de $\mathcal{O}$ es estrictamente inferior al coste fundamental de borrar un bit de información estipulado por el límite de Landauer ($U[T; K] \le k_B T \ln 2$). Al cumplirse esta desigualdad variacional, la CTM sella el diferencial termodinámico, emite la certificación criptográfica final al Ledger $L$ por consenso BFT, y detiene su evolución.
+### 5.1 Proof-Carrying Code (Necula, 1997)
+Toda transición materializada $T_{eff}$ debe atravesar un **Commit Gate**. En este punto, la arquitectura une el álgebra de trazas con la verificación matemática: se exige que la transición porte su prueba adjunta (Proof-Carrying Code). El esfuerzo computacional queda asimétricamente sesgado: la generación es cara (LLM), la verificación polinómica es trivial.
+
+### 5.2 El Ledger como Linealización Total (Art. 12)
+Para garantizar el Artículo 12 (Arquitectura de rastros de auditoría nativos), el sistema consolida el orden parcial de la inferencia concurrente (Trazas de Mazurkiewicz) en un orden total estricto (Ledger inmutable).
+El log no es simplemente un historial; actúa como la **linealización certificada** del orden parcial, anclada mediante cadenas de hashes. Los dos planos coexisten: la cognición vive en el orden parcial algebraico, la evidencia verificable vive en el orden total determinista.
+
+---
+
+## 6. Falsabilidad y Protocolos de Verificación
+
+La arquitectura de la CTM abandona la pretensión de ser un "framework" holístico para constituir un *spec* algebraico rigurosamente verificable y falsable.
+
+1. **Property-Based Testing (Hypothesis):** La CTM se someterá a tests de invariancia. Generación de secuencias, permutación de pares independientes ($T_1 \perp T_2$) y validación de conmutatividad en la proyección final; inyección de `COMPENSATION` para validar la restauración de *invariantes lógicos* (no de estado retroactivo).
+2. **Benchmark de Falsación (La Condición de Muerte):** El álgebra se expone a refutación experimental. El sistema *Fork Especulativo + UCB Verifier* debe competir frente a un modelo secuencial (ReAct) bajo **paridad estricta de presupuesto (tokens)**. Si el modelo no demuestra retornos superiores ajustados por coste, la arquitectura central se considera falsada. *Antes morir que especular en vacío.*
+
+---
+## Referencias Históricas Fundacionales
+1. **Erman, L. D., et al. (1980).** *The Hearsay-II Speech-Understanding System* (Modelo de Scheduler por valor esperado en Arquitectura Blackboard).
+2. **Mazurkiewicz, A. (1977).** *Concurrent program schemes and their interpretations* (Álgebra de Trazas y Conmutatividad Parcial).
+3. **Garcia-Molina, H., & Salem, K. (1987).** *Sagas* (Manejo de efectos secundarios e inversa semántica compensatoria).
+4. **Alchourrón, C. E., Gärdenfors, P., & Makinson, D. (1985).** *On the Logic of Theory Change* (AGM belief revision y lógica epistémica dinámica).
+5. **Necula, G. C. (1997).** *Proof-Carrying Code* (Verificación asimétrica en la puerta de commit).
+6. **Besta, M., et al. (2023).** *Graph of Thoughts: Solving Elaborate Problems with Large Language Models* (Hipergrafos de razonamiento).
+7. **Kuhn, L., et al. (2023).** *Semantic Entropy Probes: Robust and Cheap Hallucination Detection in LLMs* (Entropía semántica como proxy computable de incertidumbre).
 
 ---
 *Documento cristalizado bajo el protocolo AUTODIDACT-Ω V5.0 (Ultra-Exergy / C5-REAL).*
