@@ -6,7 +6,7 @@ import datetime
 
 def detonate_bft():
     namespace = uuid.NAMESPACE_DNS
-    taint_uuid = uuid.uuid5(namespace, "[CORTEX-TAINT:ULTRATHINK]")
+    taint_uuid = uuid.uuid5(namespace, "[CORTEX-TAINT:ULTRATHINK:ITERA]")
     timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     db_path = '/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-persist/cortex_ledger.db'
