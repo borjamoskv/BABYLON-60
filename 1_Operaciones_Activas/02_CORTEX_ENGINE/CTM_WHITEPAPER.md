@@ -3,7 +3,7 @@
 ## De "Prompt Engineering" a "Inference Engineering"
 
 **Arquitectura:** Teorema-Robinson-Moskv / CORTEX ENGINE
-**Versión:** 2.1.0 (Deep Think / Inference Engineering)
+**Versión:** 2.3.0 (C5-REAL / Epistemic Security Patched)
 
 ---
 
@@ -44,6 +44,8 @@ A diferencia del Álgebra de Kleene con Pruebas (KAT) clásica (que es PSPACE-co
 
 El CTM "compila" las transiciones propuestas aplicando **Hipótesis de Hoare**. Antes de autorizar la invocación de una inferencia o la ejecución de una herramienta costosa, el *Microkernel* verifica matemáticamente que el estado proyectado del hipergrafo satisface las precondiciones necesarias. La inteligencia del planificador no reside en heurísticas de texto, sino en la evaluación topológica instantánea de estos invariantes.
 
+**Degradación a Exploración de Markov (Graceful Degradation):** En entornos abiertos y no predecibles donde las precondiciones de GKAT fallan por incertidumbre (`UnknownPrecondition`), el motor no sufre *brittle failure*. Suspende las transiciones con efectos ($T_{eff}$) y delega el control a *Sub-agentes Estocásticos Confinados* de pura lectura, cuya única función es descubrir nuevas aristas hasta que el modelo lógico logre volver a compilarse.
+
 ---
 
 ## 5. Dinámica de Enrutamiento: EFE y Varentropía
@@ -53,6 +55,8 @@ Nuestra hipótesis arquitectónica descarta al "Scheduler" secuencial tradiciona
 Puesto que calcular la EFE perfecta es intratable en tiempo de ejecución, el CTM utiliza la **Varentropía** (varianza de la entropía predictiva) como proxy para el enrutamiento adaptativo (Inferencia Activa):
 1. **Alta Varentropía (Incertidumbre Epistémica Alta):** El sistema lanza una *Slow Deliberation* costosa, explorando espacios abstractos.
 2. **Baja Varentropía (Certidumbre / Explotación):** El sistema desvía el tráfico hacia *Fast Agents* (heurísticas baratas).
+
+**Epistemic Cross-Examination (Anclaje Ontológico):** La Varentropía es ciega a las alucinaciones arrogantes. Para parchear esto, si el modelo propone una transición $T_{eff}$ irreversible con baja varentropía, el *Decision Kernel* intercepta la orden exigiendo un `[Knowledge Proof]`. Forzamos al modelo a fundamentar su orden en una arista verificada del Hipergrafo, cortando la ejecución de "alucinaciones confiadas".
 
 El sistema cesa la ejecución no por instrucción del usuario ("has terminado"), sino al alcanzar la **Homeostasis Termodinámica**: cuando el nivel de incertidumbre (entropía) colapsa bajo el límite estipulado por el Contrato del Objetivo.
 
@@ -69,6 +73,8 @@ El sistema aprende de la memoria episódica. Si una transición ejecuta `Muta_C�
 ## 7. La Puerta de Commit y la Linealización Total
 
 Todas las transiciones $T_{eff}$ atraviesan un **Commit Gate**, exigiendo idealmente que aporten su prueba adjunta determinista (Proof-Carrying Code) que el LLM no puede simular.
+
+**Semantic Invariant Gates:** Para evitar el *Garbage-In, Crypto-Out*, la firma de un recibo criptográfico es precedida por una verificación semántica estática. El *Execution Kernel* evalúa el AST generado contra aserciones inmutables (Ej: "Mutar 'Users' requiere Nivel 0"). Si la regla se viola, la rama es huérfanada (`ORPHAN`) antes del cifrado.
 
 El resultado se asienta en el Ledger inmutable (WAL). La memoria y el hipergrafo son simplemente proyecciones de este Ledger. Con esto, el modelo CTM logra una **linealización certificada**: mientras que el razonamiento (GKAT) ocurrió concurrentemente en un orden parcial abstracto, la evidencia permanece anclada en un orden causal estricto y total para garantía B2B y cumplimiento del Artículo 12 de trazabilidad.
 
