@@ -23,7 +23,6 @@
 //! rlib as the kernel and compiles anywhere the kernel does.
 
 use crate::omega0::{Justification, JustifiedStatement, verify};
-use std::collections::BTreeSet;
 
 #[derive(Debug, PartialEq, Eq)]
 pub enum AtmsError {
@@ -85,6 +84,15 @@ impl Environment {
 
     pub fn is_empty(&self) -> bool {
         self.mask == 0
+    }
+
+    pub fn contains(&self, a: &AssumptionId) -> bool {
+        let idx = *a;
+        if idx < 128 {
+            (self.mask & (1 << idx)) != 0
+        } else {
+            false
+        }
     }
 
     pub fn assumptions(&self) -> impl Iterator<Item = AssumptionId> + '_ {
@@ -245,12 +253,10 @@ impl Atms {
 
     /// DDB: the assumptions implicated in `env`'s inconsistency. A solver
     /// retracts one of THESE (dependency-directed), not the most recent choice.
-    pub fn culprits(&self, env: &Environment) -> BTreeSet<AssumptionId> {
-        let mut c = BTreeSet::new();
+    pub fn culprits(&self, env: &Environment) -> Environment {
+        let mut c = Environment::empty();
         for ng in self.minimal_conflicts(env) {
-            for a in ng.assumptions() {
-                c.insert(a);
-            }
+            c = c.union(&ng);
         }
         c
     }

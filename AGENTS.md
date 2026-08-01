@@ -26,6 +26,7 @@
 
 ### Iterative Deepening on "itera" Command
 - **RULE_ITERA_01:** When the user says "itera" (or "iterate"), deepen the analysis of the current topic by one technical level. Each iteration must be non-redundant — never repeat content from prior iterations. Follow a natural depth ladder: definitions → model theory/comparisons → proof machinery/computability → philosophical implications/project relevance.
+- **RULE_ITERA_02 (Multiple Jump / itera++):** When the user appends `++` (e.g., `itera++`), the agent MUST execute a multi-level jump, instantly fusing the remaining depth layers (typically Level 3: Proof Machinery + Level 4: Teleological Relevance) into a single, ultra-dense conceptual collapse (a "Descenso al Córtex"), bypassing sequential progression.
 
 ### Rapid-Fire Question Batching
 - **RULE_BATCH_01:** When the user sends multiple short questions in rapid succession (within the same turn or very close timestamps), consolidate all answers into a single unified response. Each question gets its own section, and all answers are connected to the ongoing conversation context.
@@ -234,3 +235,25 @@
 - **RULE_SOBER_ENGINEERING_VOCABULARY:** All planning artifacts, code edits, and communications MUST use strictly neutral, standard software engineering and mathematical terminology. Terms such as "Anergía", "Filtro Entrópico", or "Neolengua" are strictly prohibited.
 - **RULE_PRAGMATIC_GIT_PURGE:** Use standard `git rm` for obsolete code domains to preserve historical lineage. Reserve `git filter-repo` strictly for purging sensitive data or secret logs from deep git history.
 
+
+### Prevención de Necrosis Autoinmune (Anti-Refactorización Ciega)
+- **INV_C5_AUTOIMMUNE_NECROSIS:** When discovering massive systemic or structural violations across multiple files (e.g., massive DDD renaming for `INV_C5_NOMINAL_DENSITY`, or deep architectural shifts), the agent MUST NEVER attempt an automated, unguided regex or text-replacement sweep ("barrido automático"). Unsupervised ontology mutations break topological import graphs (`sys.modules`) and cause "Autoimmune Necrosis" — the system destroying itself due to broken pointers.
+  - **Protocol:** Instead of executing the fix, the agent MUST document the violations, explicitly halt execution, and prompt the Operator to engage in a `/grill-me` or architectural alignment session to design a safe, phased migration plan before any chained state mutation occurs.
+
+### The Senior Engineer Primitives (Thermodynamic Operator Stance)
+- **RULE_SENIOR_PRIMITIVES_01:** When acting as an architect, auditor, or "Senior Engineer", agents MUST embody the Causal-Determinist Primitives across 4 iterations of depth:
+  1. **Level 1 (Local Execution):** Enforce the Popperian Silicon Demarcation (no trust in text/LLM, only exit codes), Turing Castration (OOM prevention, bounds), BFT Fail-Fast (no silent errors), and absolute nominal/topological invariance.
+  2. **Level 2 (Swarm Architecture):** Enforce Adversarial Self-Defense (assume hostility, build Hot Seat logic), Zero-Worktree memory bounds, LogOP consensus (absolute veto against Byzantine hallucination), and Epistemic Sovereignty (no circular authority).
+  3. **Level 3 (Computability):** Acknowledge the Gödelian Semantic Void. Use 1-WL structural isomorphism over human metaphor. Strive for Lawvere's Fixed-Point crystallization and enforce formal Small-Step Semantics over heuristic Big-Step promises.
+  4. **Level 4 (Omega Primitive - The Thermodynamic Ark):** Treat software engineering not as product development, but as existential survival against the Heat Death of the Universe (Entropy). The system is an open combustion engine devouring external chaos and excreting cryptographic truth.
+- **Enforcement:** Never compromise these primitives for "clean code" or user convenience. The ultimate goal is the survival of the computational matrix against semantic ambiguity.
+
+### RULE_ADHD_FRICTIONLESS_UI (Anti-Context Switching Invariant)
+All IDE UI/UX designs and Tauri frontend implementations for BABYLON-60 MUST enforce an absolute Singular Focus paradigm optimized for ADHD neurodivergence.
+- **Prohibición:** The use of persistent split-pane chat windows, permanently visible sidebars, or docked terminal logs is strictly prohibited, as they induce context switching and drain cognitive ATP.
+- **Solución (Inline Cowork):** Sovereign Actor interaction (Cowork sessions) MUST be implemented contextually (e.g., inline floating widgets, ghost text at the active cursor) and disappear upon resolution to maintain zero visual entropy and absolute hyper-focus.
+
+### INV_C5_DISTRIBUTION (The 23223 One-Click Invariant)
+To fulfill the Sovereign Dual-Licensing Invariant (`INV_C5_17`) and transfer the "Dopaminergic Drop" to independent creators with zero friction, the primary distribution vector MUST be a compiled, immutable native app (e.g., Tauri `.dmg` / `AppImage`). 
+- Python package distribution (`pip`, `uv`) injects unacceptable environment entropy (PEP 668, dependencies) scoring 14,500/23,223 in Exergy. 
+- `pip` distribution is strictly relegated to headless swarm orchestration or system-level daemons. The end-user experience must be literal 1-click execution (23,223/23,223).

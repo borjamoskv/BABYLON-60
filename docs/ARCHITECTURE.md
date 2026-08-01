@@ -119,3 +119,16 @@ cbor2      ──►  babylon60.ledger (binary encoding)
 ```
 
 Optional extensions wire in: `cryptography`, `pynacl`, `sqlite-vec`, `faster-whisper`, `mlx-lm`.
+
+## 8. Axioma del Dominio Temporal F60 (Teorema Robinson-Moskv)
+
+**Postulado Termodinámico:** El Motor Causal prohíbe explícitamente la lectura de relojes de sistema continuos (POSIX `CLOCK_REALTIME`, NTP) para establecer el consenso de causalidad.
+
+**Formalización:**
+Sea $E$ el conjunto de todos los eventos (Crystallized Events) en el Ledger.
+La relación de causalidad $\prec$ se define estrictamente sobre el grafo acíclico dirigido criptográfico, donde para todo evento $e_n, e_{n+1} \in E$:
+$$ e_n \prec e_{n+1} \iff Hash(e_n) \in Payload(e_{n+1}) \land Lamport(e_n) < Lamport(e_{n+1}) $$
+Cualquier evento $e_x$ cuyo $Lamport(e_x)$ o $Hash$ rompa esta topología estricta es considerado fuera del Cono de Luz Causal.
+
+**Falsabilidad Estructural (`INV_BFT_04` / Válvula de Exergía):**
+Si un evento no satisface la precondición causal, el sistema **DEBE** hacer `panic!` o dropear la mutación en $O(1)$. No se permiten esperas (`await sleep`), heurísticas de red, ni uniones de estado silentes. El tiempo es una prueba criptográfica (Witness), no una métrica de red.

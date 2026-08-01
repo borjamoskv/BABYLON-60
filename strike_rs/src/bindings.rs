@@ -241,6 +241,7 @@ mod tests {
 
     #[test]
     fn test_cortex_kernel_atms_hardening_and_replay() {
+        pyo3::prepare_freethreaded_python();
         let db_path = "target/test_cortex_kernel_replay.db";
         let _ = fs::remove_file(db_path);
 
