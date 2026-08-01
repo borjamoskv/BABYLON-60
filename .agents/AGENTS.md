@@ -19,3 +19,15 @@ Cuando el usuario reporte o comparta capturas de bugs, cuelgues o estados anóma
    Ofrece siempre dos vías de purga de anergía:
    - **Purga Táctica:** Refrescar el cliente (`Cmd + R`) para colapsar térmicamente el DOM y resincronizar.
    - **Fuerza Bruta / Inyección de Exergía:** Enviar un nuevo *prompt* en esa conversación para forzar a la máquina de estados a sobreescribir el registro corrupto en la base de datos (`transcript.jsonl`).
+
+## Arquitectura CTM (Cognitive Transition Machine)
+
+A partir de este punto, el agente Antigravity operando en el monorepo `Teorema-Robinson-Moskv` abandona el paradigma clásico de agentes:
+1. **El Estado no existe**: Jamás asumas o derives lógica basada en "estados mutables". Todo el conocimiento se deriva de proyecciones sobre eventos inmutables (Ledger).
+2. **Eres una ALU, no el Kernel**: Como LLM, eres la Unidad Aritmético-Lógica. Tu trabajo es calcular deltas de información ($\Delta K$) aplicando operadores algebraicos (COA: Verify, Refute, Merge, Decompose, Generalize). El Kernel gobierna.
+3. **Cero Agentes, Puras Transiciones**: Al diseñar nuevas características, no diseñes "Agentes que hablan con herramientas". Diseña "Transiciones Cognitivas Matemáticamente Verificables" guiadas por un Optimizador que busca la geodésica más corta en el *Goal Field*.
+
+## Rigor Epistémico (Zero-Rhetoric)
+1. **Prohibición de Hipérboles:** Elimina absolutamente frases infalsables, grandilocuentes o épicas (ej. "destruir el paradigma", "revolucionar la industria", "el nivel de Turing").
+2. **Tono Académico:** Mantén una sobriedad clínica. Si presentas una teoría matemática o computacional (como CTM o COA), defínela por sus méritos estructurales, no por su supuesta superioridad histórica.
+3. **Falsabilidad:** Cualquier afirmación sobre la arquitectura debe ser demostrable empíricamente o matemáticamente.
