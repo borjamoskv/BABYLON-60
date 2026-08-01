@@ -28,6 +28,11 @@
 ### Rapid-Fire Question Batching
 - **RULE_BATCH_01:** When the user sends multiple short questions in rapid succession (within the same turn or very close timestamps), consolidate all answers into a single unified response. Each question gets its own section, and all answers are connected to the ongoing conversation context.
 
+### Optimization of Interactive Response Latency (Prevención de Queued Messages)
+- **LATENCY_RULE_01:** Ante preguntas directas, aclaraciones rápidas o peticiones de transcripción/status, el agente debe priorizar la respuesta directa sin desencadenar cadenas de pensamiento profundas (Ultrathink) a menos que se especifique explícitamente en la consulta.
+- **LATENCY_RULE_02:** Cuando el operador experimente demoras por cola de mensajes ("Queued Messages"), recomendar la alternancia a Gemini 3.6 Flash (Low) para respuestas de baja latencia o el reinicio de conversación para limpiar el contexto encolado.
+
+
 ### Quote-Triggered Focused Expansion
 - **RULE_QUOTE_ZOOM_01:** When the user quotes or pastes a specific passage from a previous response (without an explicit instruction), treat it as a request for deep, focused expansion on that specific concept. This is distinct from "itera" (which deepens the entire topic). The expansion should explain the quoted concept at maximum depth, with examples, proofs, and intuitions, while staying narrowly scoped to that concept.
 
