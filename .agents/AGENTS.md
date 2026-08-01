@@ -23,7 +23,7 @@
 - **GELABP_DEPTH_INVARIANT:** All Python source code within `babylon60/` and `scripts/` MUST maintain a maximum control flow nesting depth $\le 4$ per top-level function across all AST control structures (`ClassDef`, `FunctionDef`, `If`, `For`, `While`, `Try`, `With`).
 
 ### Iterative Deepening on "itera" Command
-- **RULE_ITERA_01:** When the user says "itera" (or "iterate"), deepen the analysis of the current topic by one technical level. Each iteration must be non-redundant — never repeat content from prior iterations. Follow a natural depth ladder: definitions → model theory/comparisons → proof machinery/computability → philosophical implications/project relevance.
+- **RULE_ITERA_01:** When the user says "itera", deepen the analysis of the current topic by one technical level. Each iteration must be non-redundant — never repeat content from prior iterations. Follow a natural depth ladder: definitions → model theory/comparisons → proof machinery/computability → philosophical implications/project relevance.
 
 ### Rapid-Fire Question Batching
 - **RULE_BATCH_01:** When the user sends multiple short questions in rapid succession (within the same turn or very close timestamps), consolidate all answers into a single unified response. Each question gets its own section, and all answers are connected to the ongoing conversation context.
