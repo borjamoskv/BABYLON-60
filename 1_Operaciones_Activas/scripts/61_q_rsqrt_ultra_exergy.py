@@ -18,7 +18,17 @@ import numba
 # 0. CARGAR EXTENSIÓN C NATIVA (ARM NEON FMA)
 # -----------------------------------------------------------------------------
 script_dir = os.path.dirname(os.path.abspath(__file__))
-neon_fma_lib_path = os.path.join(script_dir, "libq_rsqrt_neon_fma.dylib")
+tmp_path = "/tmp/exergy_builds/libq_rsqrt_neon_fma.dylib"
+local_path = os.path.join(script_dir, "libq_rsqrt_neon_fma.dylib")
+
+if os.path.exists(tmp_path):
+    neon_fma_lib_path = tmp_path
+elif os.path.exists(local_path):
+    neon_fma_lib_path = local_path
+else:
+    os.system(f"make -C {script_dir} > /dev/null 2>&1")
+    neon_fma_lib_path = tmp_path if os.path.exists(tmp_path) else local_path
+
 neon_fma_available = False
 
 try:

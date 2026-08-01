@@ -6,7 +6,7 @@ import datetime
 
 def detonate_bft():
     namespace = uuid.NAMESPACE_DNS
-    taint_uuid = uuid.uuid5(namespace, "[CORTEX-TAINT:ULTRATHINK:ITERA]")
+    taint_uuid = uuid.uuid5(namespace, "[CORTEX-TAINT:ULTRATHINK:GOAL]")
     timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     db_path = '/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-persist/cortex_ledger.db'
@@ -47,7 +47,7 @@ def detonate_bft():
 
     try:
         conn.execute("INSERT INTO bft_taint_log (uuid, timestamp, payload) VALUES (?, ?, ?)",
-                     (str(taint_uuid), timestamp, "LEGION_1_ANTIPATTERN_PURGE_MATRIX_3_4_5_ITERA"))
+                     (str(taint_uuid), timestamp, "LEGION_1_ANTIPATTERN_PURGE_MATRIX_3_4_5_GOAL"))
         conn.commit()
         print(f"[CORTEX-TAINT:{taint_uuid}] Inyección Idempotente Exitosa.")
     except sqlite3.IntegrityError:
