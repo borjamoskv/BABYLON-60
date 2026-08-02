@@ -7,13 +7,13 @@
 
 ---
 
-## 1. Prólogo: El Fin del Prompt Engineering
+## 1. Prólogo: El Primer Runtime Abierto de Inferencia
 
-La industria de la inteligencia artificial ha atravesado un cambio de paradigma observable y verificable: la decadencia de la "Ingeniería de Prompts" (Prompt Engineering) en favor de la **Ingeniería de Inferencia** (Inference Engineering).
+La industria de la inteligencia artificial está saturada de frameworks de agentes que encadenan prompts y actúan bajo la metáfora de un "sistema operativo". Casi todo el campo ha apostado a la verificación de las "tripas" del modelo: zkML prueba el *forward pass* (con latencias inasumibles), TOPLOC se compromete con los estados ocultos, y DiFR con los logits post-Gumbel. Estas apuestas fallan frente a modelos opacos que cambian semanalmente, evaporando cualquier garantía.
 
-En los albores de los modelos fundacionales, el usuario inyectaba estructuras masivas de control de flujo (DAGs rígidos, instrucciones secuenciales como "piensa paso a paso") directamente en la cadena de texto del prompt. Sin embargo, conforme los modelos avanzan, estos andamiajes textuales han demostrado ser un obstáculo termodinámico que degrada el rendimiento.
+La **Máquina de Transiciones Cognitivas (CTM) / C5-REAL** abandona la carrera por las "tripas". Se posiciona estrictamente como el **primer runtime abierto de inferencia medible y verificable a nivel de observables**. Transformamos el cambio de modelo en una variable cuantificable: ¿se cumplió la post-condición?, ¿a qué coste?, ¿con qué varianza?
 
-La **Máquina de Transiciones Cognitivas (CTM)** formaliza conceptualmente este cambio. Postulamos como hipótesis arquitectónica que la inteligencia escalable no emerge de la complejidad del prompt, sino de la infraestructura del *runtime* que rodea al LLM. El agente como entidad orquestadora desaparece; en su lugar, el sistema define **Objetivos como Contratos Formales** y utiliza el LLM meramente como un motor de inferencia estocástica sometido a reglas termodinámicas estrictas.
+Al igual que MLPerf sobrevivió a generaciones de hardware por no apostar a la microarquitectura, el CTM es un armazón de medición neutral. El agente como entidad orquestadora desaparece; en su lugar, la arquitectura se define por lo que prohíbe: una **frontera estricta de llamadas al sistema ($T_{eff}$)** que utiliza el LLM meramente como un motor estocástico sometido a reglas termodinámicas y criptográficas.
 
 ---
 
@@ -37,14 +37,15 @@ Para fallos sistémicos, el modelo no persigue la reversibilidad algebraica pura
 
 ---
 
-## 4. GKAT y las Hipótesis de Hoare
+## 4. CF-GKAT y las Hipótesis de Hoare
 
-Para gobernar el LLM estocástico, la arquitectura CTM propone el uso del **Álgebra de Kleene con Pruebas Guardadas (GKAT)**.
-A diferencia del Álgebra de Kleene con Pruebas (KAT) clásica (que es PSPACE-completa), GKAT colapsa la complejidad de decisión de equivalencia de programas a un tiempo casi lineal $O(n\alpha(n))$.
+Para gobernar el LLM estocástico, la arquitectura inicial basada en el Álgebra de Kleene con Pruebas Guardadas (GKAT) era insuficiente. GKAT excluye *goto*, *break* y *return* (Kozen–Tseng 2008), lo cual impide modelar flujos de agentes reales. Por ello, el CTM adopta el **Álgebra de Kleene con Pruebas Guardadas y Flujo de Control (CF-GKAT)** implementado nativamente en Rust.
 
-El CTM "compila" las transiciones propuestas aplicando **Hipótesis de Hoare**. Antes de autorizar la invocación de una inferencia o la ejecución de una herramienta costosa, el *Microkernel* verifica matemáticamente que el estado proyectado del hipergrafo satisface las precondiciones necesarias. La inteligencia del planificador no reside en heurísticas de texto, sino en la evaluación topológica instantánea de estos invariantes.
+La aseveración de que la complejidad de decisión colapsa a "tiempo casi lineal" se acota estrictamente a la Proposición 5.11 (el problema general sigue siendo co-NP-difícil en PSPACE), y su completitud se condiciona al axioma de unicidad, sospechoso de falsedad empírica desde 2021. A pesar de esto, CF-GKAT permite que el CTM "compile" transiciones estocásticas aplicando **Hipótesis de Hoare**.
 
-**Degradación a Exploración de Markov (Graceful Degradation):** En entornos abiertos y no predecibles donde las precondiciones de GKAT fallan por incertidumbre (`UnknownPrecondition`), el motor no sufre *brittle failure*. Suspende las transiciones con efectos ($T_{eff}$) y delega el control a *Sub-agentes Estocásticos Confinados* de pura lectura, cuya única función es descubrir nuevas aristas hasta que el modelo lógico logre volver a compilarse.
+Antes de autorizar una inferencia costosa, el *Microkernel* (basado en un stack híbrido Rust/Python para acoplarse a probadores ZK como SP1 o RISC Zero en Rust, evitando que 23.000 líneas del VCGen engorden la base de confianza) verifica matemáticamente las precondiciones.
+
+**Degradación a Exploración de Markov:** Cuando las precondiciones de CF-GKAT fallan por incertidumbre (`UnknownPrecondition`), el motor suspende las transiciones con efectos ($T_{eff}$) y delega el control a *Sub-agentes Estocásticos Confinados* puramente exploratorios.
 
 ---
 
@@ -52,13 +53,12 @@ El CTM "compila" las transiciones propuestas aplicando **Hipótesis de Hoare**. 
 
 Nuestra hipótesis arquitectónica descarta al "Scheduler" secuencial tradicional (el bucle while-loop) en favor de una **Dinámica de Campos** gobernada por la minimización de la **Energía Libre Esperada (EFE)**.
 
-Puesto que calcular la EFE perfecta es intratable en tiempo de ejecución, el CTM utiliza la **Varentropía** (varianza de la entropía predictiva) como proxy para el enrutamiento adaptativo (Inferencia Activa):
-1. **Alta Varentropía (Incertidumbre Epistémica Alta):** El sistema lanza una *Slow Deliberation* costosa, explorando espacios abstractos.
-2. **Baja Varentropía (Certidumbre / Explotación):** El sistema desvía el tráfico hacia *Fast Agents* (heurísticas baratas).
+Puesto que calcular la EFE perfecta es intratable en tiempo de ejecución, el CTM introduce la medición de **Varentropía** (varianza de la entropía predictiva). Lejos de depender de heurísticas manuales y folklore no validado (como la rama LEHV o *entropix*, que carecen de papers), el CTM presenta la varentropía como una **contribución novedosa y evaluada independientemente**, cuya magnitud matemática es sólida en teoría de la información y totalmente independiente de la entropía escalar.
 
-**Epistemic Cross-Examination (Anclaje Ontológico):** La Varentropía es ciega a las alucinaciones arrogantes. Para parchear esto, si el modelo propone una transición $T_{eff}$ irreversible con baja varentropía, el *Decision Kernel* intercepta la orden exigiendo un `[Knowledge Proof]`. Forzamos al modelo a fundamentar su orden en una arista verificada del Hipergrafo, cortando la ejecución de "alucinaciones confiadas".
+1. **Alta Varentropía:** El sistema lanza una *Slow Deliberation* costosa, explorando espacios abstractos.
+2. **Baja Varentropía:** El sistema desvía el tráfico hacia *Fast Agents* (heurísticas baratas).
 
-El sistema cesa la ejecución no por instrucción del usuario ("has terminado"), sino al alcanzar la **Homeostasis Termodinámica**: cuando el nivel de incertidumbre (entropía) colapsa bajo el límite estipulado por el Contrato del Objetivo.
+**Epistemic Cross-Examination:** Si el modelo propone una transición $T_{eff}$ irreversible con baja varentropía, el *Decision Kernel* intercepta la orden exigiendo un `[Knowledge Proof]` fundamentado en el Hipergrafo, cortando las "alucinaciones arrogantes". El sistema alcanza la homeostasis cuando este nivel de incertidumbre colapsa bajo los presupuestos estipulados.
 
 ---
 
@@ -70,19 +70,29 @@ El sistema aprende de la memoria episódica. Si una transición ejecuta `Muta_C�
 
 ---
 
-## 7. La Puerta de Commit y la Linealización Total
+## 7. La Puerta de Commit (SCITT) y la Frontera Arquitectónica
 
-Todas las transiciones $T_{eff}$ atraviesan un **Commit Gate**, exigiendo idealmente que aporten su prueba adjunta determinista (Proof-Carrying Code) que el LLM no puede simular.
+El marco del sistema operativo se define por su frontera de llamadas al sistema. En C5-REAL / CTM, esta frontera es $T_{eff}$. Todo efecto (mutación, red, estado) exige pasar por un **Commit Gate**.
 
-**Semantic Invariant Gates:** Para evitar el *Garbage-In, Crypto-Out*, la firma de un recibo criptográfico es precedida por una verificación semántica estática. El *Execution Kernel* evalúa el AST generado contra aserciones inmutables (Ej: "Mutar 'Users' requiere Nivel 0"). Si la regla se viola, la rama es huérfanada (`ORPHAN`) antes del cifrado.
+Lejos de reinventar la rueda del recibo criptográfico, el CTM implementa el estándar oficializado de la IETF: **SCITT (RFC 9943 y RFC 9942)**. Estos definen exactamente el Commit Gate y el Ledger necesarios, con políticas de registro, pruebas de inclusión y carga desacoplada. Construir un formato propio sería un error gravísimo.
 
-El resultado se asienta en el Ledger inmutable (WAL). La memoria y el hipergrafo son simplemente proyecciones de este Ledger. Con esto, el modelo CTM logra una **linealización certificada**: mientras que el razonamiento (GKAT) ocurrió concurrentemente en un orden parcial abstracto, la evidencia permanece anclada en un orden causal estricto y total para garantía B2B y cumplimiento del Artículo 12 de trazabilidad.
+**Primitivas Duales de Bloqueo:** Para atravesar el Commit Gate SCITT, el *Execution Kernel* impone dos primitivas bloqueantes ausentes en los runtimes actuales:
+1. **Verificación:** "¿Puede consolidarse esto semánticamente?" (Evitando *Garbage-In, Crypto-Out* mediante evaluación AST inmutable).
+2. **Presupuestos:** "¿A qué precio y coste de inferencia?"
+
+El resultado se asienta en el Ledger SCITT inmutable. La memoria y el hipergrafo son proyecciones de este Ledger, logrando una **linealización certificada**: el razonamiento concurrente (CF-GKAT) queda anclado en un orden causal total y auditable.
 
 ---
 
-## 8. Falsabilidad Empírica
+## 8. Especificación del Banco de Pruebas Neutral
 
-El modelo CTM es estrictamente falsable. En simulaciones ejecutadas (Benchmark de Falsación), la aplicación de enrutamiento por Varentropía y compilación GKAT superó a un agente ReAct convencional, alcanzando la homeostasis con un gasto termodinámico **$\approx$ 3 veces menor** ($\sim154$ tokens frente a $450$ tokens) y elidiendo completamente las alucinaciones por bucles ciegos.
+El modelo CTM se somete a estricta falsabilidad empírica bajo un armazón de medición independiente. Publicar un benchmark propio donde C5-REAL gana no tiene credibilidad epistémica.
+
+El entorno de pruebas opera como un **instrumento neutral** capaz de ejecutar `LangGraph`, un bucle pelado del `Agents SDK` y el propio `C5-REAL` sobre los mismos contratos formales. El campo actual carece de un estándar de varianza; el runtime impone rigor estadístico:
+- Abandono de la norma $pass@1$ en favor del reporte sistemático de **$pass^k$** (similar a $\tau^2$-bench).
+- Implementación de serie del **error estándar** para la medición estocástica (al nivel de Inspect AI).
+
+Entregar teoría sin medición es un error. Demostrar el alcance de un sistema end-to-end (de extremo a extremo sobre la frontera $T_{eff}$) con métricas sobre esta varianza es el primer hito defendible del runtime abierto.
 
 ---
 ## Referencias Fundacionales

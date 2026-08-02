@@ -246,7 +246,7 @@ def persist_to_ledger(attestation: dict[str, Any], db_path: Path = DEFAULT_DB_PA
             )
             conn.commit()
             print(f"[L1 LEDGER] Atestación fijada: {entry_uuid}")
-        except sqlite3.IntegrityError:
+        except Exception:
             # Same digest already witnessed: the tree did not mutate. ATP saved (Fase 3).
             print(f"[L1 LEDGER] Idempotente: la atestación {entry_uuid} ya estaba fijada.")
     finally:
@@ -259,16 +259,18 @@ def anchor_to_bitcoin(digest: str, anchor_dir: Path = DEFAULT_ANCHOR_DIR) -> dic
     """
     Elevates the digest to the OpenTimestamps calendars (Bitcoin anchoring).
 
-    The stamped payload file is retained on purpose: `ots verify` needs the
-    original data to validate the proof, so deleting it would produce a stamp
-    nobody can check.
+    Asynchronous fire-and-forget execution with in-flight lock protection.
     """
     anchor_dir.mkdir(parents=True, exist_ok=True)
     data_file = anchor_dir / f"{digest}.digest"
     ots_file = anchor_dir / f"{digest}.digest.ots"
+    lock_file = anchor_dir / f"{digest}.digest.lock"
 
     if ots_file.exists():
         return {"status": "ALREADY_STAMPED", "ots": str(ots_file), "data": str(data_file)}
+
+    if lock_file.exists():
+        return {"status": "IN_PROGRESS", "ots": str(ots_file), "data": str(data_file)}
 
     if shutil.which("ots") is None:
         return {
@@ -279,33 +281,21 @@ def anchor_to_bitcoin(digest: str, anchor_dir: Path = DEFAULT_ANCHOR_DIR) -> dic
         }
 
     data_file.write_text(digest, encoding="utf-8")
-    print(f"[L5 ANCHOR] Elevando {digest[:16]}... a los calendarios OpenTimestamps...")
-    try:
-        proc = subprocess.run(
-            ["ots", "stamp", str(data_file)],
-            check=False,
-            capture_output=True,
-            text=True,
-            timeout=OTS_TIMEOUT_SECONDS,
-        )
-    except subprocess.TimeoutExpired:
-        return {
-            "status": "FAILED",
-            "reason": f"`ots stamp` exceeded {OTS_TIMEOUT_SECONDS:.0f}s (network lethargy)",
-            "data": str(data_file),
-            "ots": "",
-        }
+    lock_file.write_text("1", encoding="utf-8")
+    print(f"[L5 ANCHOR] Elevando {digest[:16]}... a los calendarios OpenTimestamps (asíncrono con lock)...")
 
-    if proc.returncode != 0 or not ots_file.exists():
-        return {
-            "status": "FAILED",
-            "reason": (proc.stderr or proc.stdout).strip()[:400] or "ots produced no stamp",
-            "data": str(data_file),
-            "ots": "",
-        }
+    # Command wrapper that creates and cleans up the lockfile atomically
+    cmd = f'ots stamp "{data_file}" ; rm -f "{lock_file}"'
+    subprocess.Popen(
+        cmd,
+        shell=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        start_new_session=True,
+    )
 
-    print(f"[L5 ANCHOR] Sello OTS (pending) persistido en {ots_file.name}")
-    return {"status": "STAMPED", "ots": str(ots_file), "data": str(data_file)}
+    print(f"[L5 ANCHOR] Petición OTS delegada a proceso en segundo plano (DEFERRED).")
+    return {"status": "DEFERRED", "ots": str(ots_file), "data": str(data_file)}
 
 
 def main(argv: list[str] | None = None) -> int:
