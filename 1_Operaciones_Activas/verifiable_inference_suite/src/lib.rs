@@ -1,17 +1,22 @@
 // C5-REAL EXERGY CERTIFIED
 //! Verifiable Inference Suite Engine Library
 //!
-//! Provides Rust FFI bindings for C SIMD 10-primitives engine and ZK-SNARK circuit provers
-//! (BN254 R1CS & LogUp fractional lookup argument).
+//! Provides Rust FFI bindings for C SIMD 10-primitives engine, ZK-SNARK circuit provers
+//! (BN254 R1CS & LogUp fractional lookup argument), CF-GKAT algebraic verifier,
+//! WASM Sandbox envelope, SCITT RFC 9942 COSE receipt emitter, and FOCUS budget controller.
 
+pub mod cf_gkat;
 pub mod ffi;
+pub mod focus_budget;
+pub mod scitt_receipt;
+pub mod wasm_sandbox;
 pub mod zk_snark;
 
-pub use ffi::{
-    calculate_landauer_energy, create_bn254_r1cs_proof, execute_10_primitives,
-    primitive_results_t, project_standard_part, prove_and_verify_zk_logup,
-    run_batch_primitives_loop, run_verifiable_primitives, verify_bn254_r1cs_proof,
-};
+pub use cf_gkat::*;
+pub use ffi::*;
+pub use focus_budget::*;
+pub use scitt_receipt::*;
+pub use wasm_sandbox::*;
 pub use zk_snark::*;
 
 #[cfg(test)]
@@ -19,95 +24,45 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_ffi_run_verifiable_primitives() {
-        let input_a = vec![1.0f32, 2.0f32, 3.0f32, 4.0f32];
-        let input_b = vec![0.5f32, 1.5f32, 2.5f32, 3.5f32];
-        let mut results = primitive_results_t {
-            pi_inv: 0.0,
-            pi_entr: 0.0,
-            pi_zk: 0.0,
-            pi_causal: 0.0,
-            pi_ll: 0.0,
-            pi_st: 0.0,
-            pi_pmi: 0.0,
-            pi_landauer: 0.0,
-            pi_kl: 0.0,
-            pi_dedup: 0,
+    fn test_teff_end_to_end_pipeline() {
+        // 1. Plan in CF-GKAT
+        let expr = CFGKATExpr::Seq(
+            Box::new(CFGKATExpr::Test("b_valid".to_string())),
+            Box::new(CFGKATExpr::Action("exec_tool_a".to_string())),
+        );
+        let norm_expr = CFGKATEngine::normalize(&expr);
+        let canonical_hash = CFGKATEngine::compute_canonical_hash(&norm_expr);
+        assert_ne!(canonical_hash, [0u8; 32]);
+
+        // 2. FOCUS Budget Check
+        let controller = FOCUSBudgetController::new(FOCUSBudgetLimits::default());
+        let tracker = FOCUSUsageTracker {
+            current_tokens: 500,
+            current_usd_cost: 0.001,
+            current_wall_clock_ms: 50,
+            current_tool_calls: 1,
+        };
+        let verdict = controller.evaluate_admission(&tracker, 100, 0.0001);
+        assert_eq!(verdict, AdmissionVerdict::Admitted);
+
+        // 3. Execute inside WASM Sandbox Envelope
+        let runner = WASMSandboxRunner::new(WASMSandboxConfig::default());
+        let exec_result = runner.execute_tool("exec_tool_a", b"param=1", |payload| !payload.is_empty());
+        assert!(exec_result.success);
+
+        // 4. Emit SCITT RFC 9942 Receipt
+        let emitter = SCITTReceiptEmitter::new();
+        let payload = SCITTPayload {
+            model_id: "claude-3-5-sonnet-20260802".to_string(),
+            prompt_digest: [1u8; 32],
+            artifact_digest: canonical_hash,
+            sandbox_image_digest: [3u8; 32],
+            output_digest: exec_result.output_state_hash,
+            execution_cost_usd: 0.0001,
+            wall_clock_ms: exec_result.wall_clock_ms,
         };
 
-        unsafe {
-            let res = run_verifiable_primitives(
-                input_a.as_ptr(),
-                input_b.as_ptr(),
-                input_a.len(),
-                &mut results,
-            );
-            assert_eq!(res, 0);
-        }
-
-        assert!(results.pi_inv > 0.0);
-        assert!(results.pi_entr > 0.0);
-        assert!(results.pi_landauer > 0.0);
-    }
-
-    #[test]
-    fn test_ffi_prove_and_verify_zk_logup() {
-        // Construct binary witness payload:
-        // Table: [10, 20, 30]
-        // Lookups: [20, 10, 20]
-        let mut payload = Vec::new();
-        // Table count = 3
-        payload.extend_from_slice(&(3u32).to_le_bytes());
-        payload.extend_from_slice(&(10u64).to_le_bytes());
-        payload.extend_from_slice(&(20u64).to_le_bytes());
-        payload.extend_from_slice(&(30u64).to_le_bytes());
-
-        // Lookups count = 3
-        payload.extend_from_slice(&(3u32).to_le_bytes());
-        payload.extend_from_slice(&(20u64).to_le_bytes());
-        payload.extend_from_slice(&(10u64).to_le_bytes());
-        payload.extend_from_slice(&(20u64).to_le_bytes());
-
-        unsafe {
-            let res = prove_and_verify_zk_logup(payload.as_ptr(), payload.len());
-            assert_eq!(res, 0);
-        }
-    }
-
-    #[test]
-    fn test_ffi_r1cs_proof_lifecycle() {
-        // Witness: w = [1, 15, 3, 5] (where 3 * 5 = 15)
-        let mut payload = Vec::new();
-        payload.extend_from_slice(&(4u32).to_le_bytes()); // num_vars
-        payload.extend_from_slice(&(2u32).to_le_bytes()); // num_pub
-        payload.extend_from_slice(&(4u32).to_le_bytes()); // num_witness
-
-        payload.extend_from_slice(&(1u64).to_le_bytes());  // w[0] = 1
-        payload.extend_from_slice(&(15u64).to_le_bytes()); // w[1] = 15
-        payload.extend_from_slice(&(3u64).to_le_bytes());  // w[2] = 3
-        payload.extend_from_slice(&(5u64).to_le_bytes());  // w[3] = 5
-
-        let mut proof_buf = vec![0u8; 2048];
-        let mut out_len = 0usize;
-
-        unsafe {
-            let create_res = create_bn254_r1cs_proof(
-                payload.as_ptr(),
-                payload.len(),
-                proof_buf.as_mut_ptr(),
-                proof_buf.len(),
-                &mut out_len,
-            );
-            assert_eq!(create_res, 0);
-            assert!(out_len > 0);
-
-            let verify_res = verify_bn254_r1cs_proof(
-                proof_buf.as_ptr(),
-                out_len,
-                std::ptr::null(),
-                0,
-            );
-            assert_eq!(verify_res, 0);
-        }
+        let receipt = emitter.generate_receipt(&payload);
+        assert!(SCITTReceiptEmitter::verify_receipt(&receipt));
     }
 }

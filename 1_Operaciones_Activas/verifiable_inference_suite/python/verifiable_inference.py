@@ -362,3 +362,70 @@ class VerifiableInferenceEngine:
         payload_bytes = (ctypes.c_uint8 * len(payload)).from_buffer_copy(payload)
         res = self._prove_and_verify_zk_logup(payload_bytes, len(payload))
         return res == 0
+
+    def run_teff_transition(
+        self,
+        tool_name: str,
+        param: bytes = b"",
+        est_tokens: int = 100,
+        est_cost_usd: float = 0.0001,
+    ) -> "TeffResult":
+        """Executes full Teff end-to-end transition pipeline via Rust FFI."""
+        if hasattr(self._lib, "run_teff_transition"):
+            self._run_teff_transition = self._lib.run_teff_transition
+            self._run_teff_transition.argtypes = [
+                ctypes.c_char_p,
+                ctypes.POINTER(ctypes.c_uint8),
+                ctypes.c_size_t,
+                ctypes.c_size_t,
+                ctypes.c_double,
+                ctypes.POINTER(TeffResult),
+            ]
+            self._run_teff_transition.restype = ctypes.c_int
+
+            tool_b = tool_name.encode("utf-8")
+            param_arr = (ctypes.c_uint8 * len(param)).from_buffer_copy(param) if param else None
+            out_res = TeffResult()
+
+            res = self._run_teff_transition(
+                tool_b,
+                param_arr if param_arr else None,
+                len(param),
+                est_tokens,
+                est_cost_usd,
+                ctypes.byref(out_res),
+            )
+            if res != 0:
+                raise RuntimeError(f"run_teff_transition failed with status code {res}")
+            return out_res
+        else:
+            raise NotImplementedError("run_teff_transition symbol not exported in loaded FFI library")
+
+
+class TeffResult(ctypes.Structure):
+    """C-compatible result struct for Teff transition execution."""
+    _fields_ = [
+        ("success", ctypes.c_int),
+        ("wall_clock_ms", ctypes.c_uint64),
+        ("gkat_latency_us", ctypes.c_uint64),
+        ("sandbox_latency_us", ctypes.c_uint64),
+        ("scitt_latency_us", ctypes.c_uint64),
+        ("total_overhead_us", ctypes.c_uint64),
+        ("canonical_hash", ctypes.c_uint8 * 32),
+        ("scitt_statement_digest", ctypes.c_uint8 * 32),
+        ("scitt_merkle_root", ctypes.c_uint8 * 32),
+    ]
+
+    def to_dict(self) -> dict:
+        return {
+            "success": bool(self.success),
+            "wall_clock_ms": int(self.wall_clock_ms),
+            "gkat_latency_us": int(self.gkat_latency_us),
+            "sandbox_latency_us": int(self.sandbox_latency_us),
+            "scitt_latency_us": int(self.scitt_latency_us),
+            "total_overhead_us": int(self.total_overhead_us),
+            "canonical_hash": bytes(self.canonical_hash).hex(),
+            "scitt_statement_digest": bytes(self.scitt_statement_digest).hex(),
+            "scitt_merkle_root": bytes(self.scitt_merkle_root).hex(),
+        }
+

@@ -299,3 +299,118 @@ pub unsafe extern "C" fn verify_bn254_r1cs_proof(
         1
     }
 }
+
+/// C FFI result representation for Teff transition execution
+#[repr(C)]
+#[derive(Debug, Clone, Copy)]
+pub struct teff_result_t {
+    pub success: i32,
+    pub wall_clock_ms: u64,
+    pub gkat_latency_us: u64,
+    pub sandbox_latency_us: u64,
+    pub scitt_latency_us: u64,
+    pub total_overhead_us: u64,
+    pub canonical_hash: [u8; 32],
+    pub scitt_statement_digest: [u8; 32],
+    pub scitt_merkle_root: [u8; 32],
+}
+
+/// Run full Teff end-to-end transition pipeline via FFI.
+/// Evaluates CF-GKAT normalization, FOCUS budget check, WASM sandbox isolation,
+/// and SCITT RFC 9942 receipt emission.
+#[no_mangle]
+pub unsafe extern "C" fn run_teff_transition(
+    tool_name_ptr: *const std::ffi::c_char,
+    param_ptr: *const u8,
+    param_len: usize,
+    est_tokens: usize,
+    est_cost_usd: f64,
+    out_result: *mut teff_result_t,
+) -> i32 {
+    if tool_name_ptr.is_null() || out_result.is_null() {
+        return -1;
+    }
+
+    let t0 = std::time::Instant::now();
+
+    let tool_name = match std::ffi::CStr::from_ptr(tool_name_ptr).to_str() {
+        Ok(s) => s,
+        Err(_) => return -1,
+    };
+
+    let param_bytes = if param_ptr.is_null() || param_len == 0 {
+        &[]
+    } else {
+        slice::from_raw_parts(param_ptr, param_len)
+    };
+
+    // 1. CF-GKAT Normalization
+    let t_gkat0 = std::time::Instant::now();
+    let expr = crate::cf_gkat::CFGKATExpr::Seq(
+        Box::new(crate::cf_gkat::CFGKATExpr::Test("b_valid".to_string())),
+        Box::new(crate::cf_gkat::CFGKATExpr::Action(tool_name.to_string())),
+    );
+    let norm = crate::cf_gkat::CFGKATEngine::normalize(&expr);
+    let canonical_hash = crate::cf_gkat::CFGKATEngine::compute_canonical_hash(&norm);
+    let gkat_latency_us = t_gkat0.elapsed().as_micros() as u64;
+
+    // 2. FOCUS Budget Evaluation
+    let controller = crate::focus_budget::FOCUSBudgetController::new(
+        crate::focus_budget::FOCUSBudgetLimits::default(),
+    );
+    let tracker = crate::focus_budget::FOCUSUsageTracker {
+        current_tokens: 1_000,
+        current_usd_cost: 0.01,
+        current_wall_clock_ms: 100,
+        current_tool_calls: 2,
+    };
+
+    let verdict = controller.evaluate_admission(&tracker, est_tokens, est_cost_usd);
+    if verdict != crate::focus_budget::AdmissionVerdict::Admitted {
+        return -2; // Budget rejected
+    }
+
+    // 3. WASM Sandbox Execution
+    let t_sand0 = std::time::Instant::now();
+    let runner = crate::wasm_sandbox::WASMSandboxRunner::new(
+        crate::wasm_sandbox::WASMSandboxConfig::default(),
+    );
+    let exec_res = runner.execute_tool(tool_name, param_bytes, |out| !out.is_empty());
+    let sandbox_latency_us = t_sand0.elapsed().as_micros() as u64;
+
+    if !exec_res.success {
+        return -3; // Sandbox failure
+    }
+
+    // 4. SCITT Receipt Generation
+    let t_scitt0 = std::time::Instant::now();
+    let emitter = crate::scitt_receipt::SCITTReceiptEmitter::new();
+    let payload = crate::scitt_receipt::SCITTPayload {
+        model_id: "claude-3-5-sonnet-20260802".to_string(),
+        prompt_digest: [1u8; 32],
+        artifact_digest: canonical_hash,
+        sandbox_image_digest: [2u8; 32],
+        output_digest: exec_res.output_state_hash,
+        execution_cost_usd: est_cost_usd,
+        wall_clock_ms: exec_res.wall_clock_ms,
+    };
+    let receipt = emitter.generate_receipt(&payload);
+    let scitt_latency_us = t_scitt0.elapsed().as_micros() as u64;
+
+    let total_overhead_us = t0.elapsed().as_micros() as u64;
+
+    (*out_result) = teff_result_t {
+        success: 1,
+        wall_clock_ms: exec_res.wall_clock_ms,
+        gkat_latency_us,
+        sandbox_latency_us,
+        scitt_latency_us,
+        total_overhead_us,
+        canonical_hash,
+        scitt_statement_digest: receipt.statement_digest,
+        scitt_merkle_root: receipt.merkle_root,
+    };
+
+    0
+}
+

@@ -4,7 +4,7 @@ name = "verifiable_inference_engine"
 version = "0.1.0"
 edition = "2021"
 authors = ["Teorema Robinson-Moskv Team <dev@robinson-moskv.org>"]
-description = "Verifiable Inference Suite: Rust FFI Bridge & ZK-SNARK Circuit Proofs (BN254 R1CS & LogUp)"
+description = "Verifiable Inference Suite: Rust FFI Bridge, CF-GKAT, WASM Sandbox, SCITT RFC 9942 & ZK-SNARK Circuit Proofs"
 
 [lib]
 name = "verifiable_inference_engine"
@@ -18,8 +18,10 @@ ark-relations = "0.4.0"
 ark-std = "0.4.0"
 ark-serialize = "0.4.0"
 thiserror = "1.0"
+rand = "0.8"
 rand_chacha = "0.3"
 sha2 = "0.10"
+ed25519-dalek = "2.1"
 libc = "0.2"
 
 [build-dependencies]
