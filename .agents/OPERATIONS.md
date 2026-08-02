@@ -3,12 +3,13 @@
 
 Este documento define la capa de ejecución (Operacional) complementaria al nivel doctrinal (`AGENTS.md`).
 
-## INV-1: Alcance Declarado Estricto (Whitelisting Topológico)
-Todo acoplamiento entre *Dynamis* (LLM) y *Entelecheia* (Rust) requiere un mapa finito de herramientas y esquemas de memoria compartida explícitamente declarados (Manifiesto de Época $E$). Cualquier intento estocástico de invocar un recurso, binario o socket de red fuera del perímetro del WASM Sandbox provocará un rechazo atómico y la no-actualización del puntero maestro.
+## INV-1: Alcance Declarado (Validación Semántica S)
+La salida de *Dynamis* (LLM) debe pertenecer estrictamente al conjunto formal $S$ (el esquema algebraico CF-GKAT). La pertenencia $x \in S$ es un predicado matemático decidible. Toda evaluación basada en umbrales de entropía o "confianza del modelo" ($H(X)$) queda explícitamente prohibida. La contención de capacidad (Sandbox WASM) es auxiliar; la contención semántica es el verdadero Gate.
 
-## INV-2: Cap Contractual y Circuito de Interrupción (Fail-Stop)
-El límite de responsabilidad (Liability Cap) se materializa físicamente mediante la incapacidad del sistema para propagar incertidumbre. Ante cualquier desviación semántica ($H(X) < \epsilon$) o colapso del Manifiesto, el sistema ejecuta un `Fail-Stop` inmediato. El servicio colapsa o entra en Fallback antes de emitir un estado no verificado. El Cap Contractual asegura que el cliente asume que la interrupción del servicio es el comportamiento nominal de protección.
+## INV-2: Cap Contractual y Exención de SLA (Fail-Stop Legal)
+El `Fail-Stop` transfiere la responsabilidad de la exactitud a la disponibilidad. Para que esto sea jurídicamente blindado, el SLA comercial exige:
+1. **Carve-out explícito:** Los bloqueos preventivos del *Commit Gate* no computarán como tiempo de inactividad (downtime) ni devengarán créditos de SLA.
+2. **Cap numérico:** La responsabilidad máxima ante una fuga estocástica está numéricamente topada (ej. cuotas de 12 meses). Sin estas dos cláusulas, el "Fail-Stop" es solo una máquina de generar incumplimientos.
 
-## INV-3: Cobertura Medida (Atestación de Contención)
-Ningún código de validación del Kernel (Entelecheia) pasará al árbol principal ni será atestado en Ring-0 sin una prueba de **cobertura del 100%** (o métrica declarada análoga en `autodidact_falsification_test.py`) que certifique algorítmicamente la contención de todas las ramas estocásticas.
-Si la cobertura no es medible o la aserción decae, el sistema entra en `Fallback/Quarantine` automáticamente, bloqueando la atestación. No se puede vender contención si no se puede medir la superficie de sellado.
+## INV-3: Cobertura Medida y Falsabilidad (POPPER)
+Ninguna regla de validación semántica pasa al árbol principal sin una demostración empírica de falsabilidad. Todo estado $s \in S$ declarado seguro debe poseer un test negativo explícito en `autodidact_falsification_test.py` que pruebe que el *Commit Gate* rechaza un artefacto malicioso. La fiabilidad del Gate se reporta como una métrica continua.
