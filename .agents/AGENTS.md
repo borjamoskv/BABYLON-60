@@ -31,6 +31,7 @@
 - **El Kernel como Estructura Disipativa (Prigogine & Spinoza)**: El sistema NO busca suprimir la generación creativa/estocástica en potencia del modelo ($\delta \acute{v} \nu \alpha \mu \iota \varsigma$), sino actuar como la estructura disipativa abierta que disipa la anergía entropica y colapsa el caos en certidumbre geométrica inmutable ($T_{eff}$, WASM Sandbox y Recibo SCITT).
 - **Falsacionismo Popperiano Obligatorio**: Ningún módulo o test del sistema se da por válido sin superar las pruebas de falsificación deliberada (`autodidact_falsification_test.py`), garantizando que la certidumbre afirmada sea empíricamente demostrable.
 
-
-
-
+## Invariante de Higiene de Repositorio (Nivel 0 / Zero-Residual)
+- **Prohibición de Entropía Transitoria en la Raíz:** NUNCA se deben crear ni dejar archivos transitorios, volcados de datos, transcripciones descargadas (ej. `.vtt`, `.json`, `.txt`) o scripts de prueba de un solo uso en la raíz del repositorio.
+- **Enrutamiento Obligatorio (Drop Zone):** Toda la "basura" transitoria, investigación cruda o raw data DEBE ser guardada o movida proactivamente al directorio de cuarentena designado: `0_Buzon_Entrada/scratch/` (p. ej., `0_Buzon_Entrada/scratch/transcripts/`).
+- **Limpieza Proactiva:** Al finalizar una tarea compleja o responder a un `/goal`, el agente DEBE verificar visualmente o mediante comandos que la raíz del proyecto está inmaculada y mover cualquier asset suelto al Buzón de Entrada, garantizando que el `git tree` solo contenga el código del Kernel y la documentación formal.
