@@ -1,6 +1,6 @@
 // C5-REAL EXERGY CERTIFIED
-import { AbsoluteFill, Composition, staticFile, Loop, OffthreadVideo, Audio, Sequence, useCurrentFrame } from "remotion";
-import React, { useMemo } from "react";
+import { AbsoluteFill, Composition, staticFile, Loop, OffthreadVideo, Audio, useCurrentFrame } from "remotion";
+import React from "react";
 
 export const MyComposition = () => {
   // 2:31 = 151 seconds. 151 * 30 = 4530 frames.
@@ -33,15 +33,6 @@ export const MyComponent: React.FC = () => {
   const glowColor = `rgba(255, 20, 100, ${kickPulse * 0.85})`;
   const borderWidth = Math.round(kickPulse * 16);
 
-  // Generate Array of Kick Drum Hit Timestamps
-  const kickBeats = useMemo(() => {
-    const beats: number[] = [];
-    for (let f = 0; f < 4530; f += beatInterval) {
-      beats.push(f);
-    }
-    return beats;
-  }, [beatInterval]);
-
   return (
     <AbsoluteFill style={{ backgroundColor: "black", overflow: "hidden" }}>
       {/* Video Loop with Bass-Reactive Zoom and Neon Border Flash */}
@@ -63,12 +54,8 @@ export const MyComponent: React.FC = () => {
         </Loop>
       </div>
 
-      {/* Rhythmic Kick Drum Audio Overlay */}
-      {kickBeats.map((startFrame) => (
-        <Sequence key={startFrame} from={startFrame} durationInFrames={beatInterval}>
-          <Audio src={staticFile("kick.wav")} volume={0.85} />
-        </Sequence>
-      ))}
+      {/* Optimized Single Continuous Kick Track Audio Overlay */}
+      <Audio src={staticFile("kick_track.wav")} volume={0.9} />
     </AbsoluteFill>
   );
 };
