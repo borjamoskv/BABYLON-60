@@ -48,3 +48,6 @@ yt-dlp
 *.db
 *.db-wal
 *.db-shm
+
+# Added by Antigravity C5-REAL Audit
+.vercel
