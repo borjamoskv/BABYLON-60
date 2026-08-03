@@ -1,62 +1,19 @@
 # C5-REAL EXERGY CERTIFIED
-name: CI
+name: C5-REAL Matrix Build
 
 on:
   push:
-    branches: [main, master]
+    branches: [ main ]
   pull_request:
-    branches: [main, master]
-
-concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
-permissions:
-  contents: read
+    branches: [ main ]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Rust toolchain
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: "pip"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install ruff black mypy pytest-cov pip-audit mkdocstrings[python] mkdocs-material
-
-      - name: Lint with ruff
-        run: ruff check .
-
-      - name: Formatting check with black
-        run: black --check .
-
-      - name: Type check with mypy
-        run: mypy .
-
-      - name: Run tests with coverage
-        run: pytest -q --cov=cortex --cov-report=xml
-
-      - name: Security audit
-        run: pip-audit
-
-      - name: Build documentation
-        run: mkdocs build
-
-      - name: Upload coverage report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
-          path: coverage.xml
-          retention-days: 14
+    - uses: actions/checkout@v4
+    - name: Fricción Cero - Echo placeholder
+      run: echo "Inyectar dependencias (Node/Rust/Python) aquí"

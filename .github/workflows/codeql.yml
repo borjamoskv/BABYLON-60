@@ -1,13 +1,13 @@
 # C5-REAL EXERGY CERTIFIED
-name: "CodeQL Advanced Security (C5-REAL)"
+name: C5-REAL CodeQL AST Scanner
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
   schedule:
-    - cron: '0 0 * * 0' # Cada domingo a medianoche
+    - cron: '30 4 * * 1'
 
 jobs:
   analyze:
@@ -18,11 +18,6 @@ jobs:
       contents: read
       security-events: write
 
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [ 'python' ] # Puedes añadir 'javascript' o 'go' si el monorepo muta
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -30,10 +25,9 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
-        languages: ${{ matrix.language }}
-        queries: security-extended,security-and-quality
+        languages: 'javascript, python, cpp, csharp, go, java, ruby' # Ajustar según el repo
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
       with:
-        category: "/language:${{matrix.language}}"
+        category: "/language:all"

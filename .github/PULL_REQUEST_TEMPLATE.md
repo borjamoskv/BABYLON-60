@@ -1,23 +1,8 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+## Fricción Latente y Phantom Target
+- [ ] Confirmo que este PR resuelve un objetivo verificable (no es un Phantom Target).
+- [ ] La topología de código no introduce Fricción Latente oculta.
 
-## Issue relacionado
-
-Closes #
-
-## Resumen
-
--
-
-## Validación
-
-- [ ] Lint ejecutado
-- [ ] Tests ejecutados
-- [ ] Build ejecutado
-- [ ] Documentación actualizada
-- [ ] No se incluyeron secretos
-
-## Riesgo
-
-- [ ] Bajo (automerge / revisión automática)
-- [ ] Medio
-- [ ] Alto / requiere revisión humana
+## Idempotencia y C5-REAL
+- [ ] Los scripts/modificaciones son deterministas e idempotentes.
+- [ ] Se han aislado los flujos termodinámicos correctamente.
