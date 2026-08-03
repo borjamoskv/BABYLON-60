@@ -1,2 +1,1 @@
-# Archivo de ignorado para git blame (BABYLON-60 C5-REAL Standard)
-# Commit hashes de formateo masivo
+# Añadir aquí los hashes de los commits de formateo masivo (Prettier, Rustfmt) para ignorarlos en git blame.
