@@ -114,3 +114,6 @@ venv/
 
 # Compiled native extensions (Axioma Ω24)
 *.dylib
+
+# Added by Antigravity C5-REAL Audit
+.vercel
