@@ -17,6 +17,7 @@ import uuid
 import json
 import logging
 import asyncio
+import random
 
 # Anergy Block: Reject execution if imported in a DAG flow
 if __name__ != "__main__":
@@ -60,26 +61,30 @@ async def transition_operator(ledger: CognitiveTransitionLedger, mcts: SwarmMCTS
     context = ledger.project_context(node_id)
     
     # 2. Speculation / Inference
-    # (Here we would yield to the Inference Kernel / LLM)
-    entropy_simulated = 0.2 # Placeholder
+    # Simulate an LLM call delay
+    await asyncio.sleep(random.uniform(0.01, 0.1))
+    
+    # Inject stochastic entropy to simulate real semantic drift
+    entropy_simulated = random.uniform(0.5, 3.2)
     
     # 3. Thermodynamic Decay Check (Omega 27 - Early Stopping)
     if math.tanh(entropy_simulated) > 0.99:
-        logging.warning(f"[{node_id}] Collapse: Entropy overflow.")
+        logging.warning(f"[{node_id}] Collapse: Entropy overflow (tanh({entropy_simulated:.2f}) > 0.99). Branch Pruned.")
         return
         
     # 4. Result Commit
     effect = {"status": "SUCCESS_DELTA_I_LE_0", "entropy_loss": entropy_simulated}
     ledger.append_result(node_id, effect)
+    logging.info(f"[{node_id}] Transition Committed. (Entropy: {entropy_simulated:.2f})")
     
 async def orchestrate_legion_10k():
     ledger = CognitiveTransitionLedger()
     mcts = SwarmMCTS()
     
-    TARGET_NODES = 10000
-    BATCH_SIZE = 500
+    TARGET_NODES = 50
+    BATCH_SIZE = 10
     
-    logging.info(f"🚀 Igniting Legion {TARGET_NODES} (CTA Swarm MCTS)")
+    logging.info(f"🚀 Igniting Simulation Legion {TARGET_NODES} (CTA Swarm MCTS)")
     
     for batch_start in range(0, TARGET_NODES, BATCH_SIZE):
         batch_end = min(batch_start + BATCH_SIZE, TARGET_NODES)
