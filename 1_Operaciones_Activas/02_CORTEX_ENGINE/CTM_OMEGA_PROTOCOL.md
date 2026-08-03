@@ -63,42 +63,56 @@ Cuando un agente del ecosistema `Moskv84` o `CORTEX_ENGINE` requiera depurar un 
 
 Con el Protocolo Ω, tratamos a las inteligencias artificiales no como oráculos conscientes, sino como flujos termodinámicos sujetos a las leyes de la física de la información.
 
-## 4. Auditoría de Identificación: Protocolo de Caja Negra / Caja Gris
+## 4. Framework de Ingeniería Inversa v2 (10 Niveles)
 
-El objetivo operativo no es demostrar que el modelo se equivoca (o que puede ser "roto"), sino reconstruir empíricamente una aproximación de su función subyacente:
+Si el objetivo es **investigar el comportamiento del modelo** y entender su arquitectura mediante ingeniería inversa, el Protocolo Ω se operacionaliza mediante un marco de 10 niveles, iterando desde la evaluación de la respuesta hacia la identificación del modelo predictivo inverso.
 
-$$y = f(x, h, p, b)$$
+### Nivel 0. Definir el espacio de estados
+No estudiar respuestas. Estudiar transiciones.
+$$S(t) \to \text{Input} \to \Delta S \to \text{Output} \to S(t+1)$$
+La pregunta deja de ser *"¿Qué respondió?"* y pasa a ser *"¿Qué transición produjo?"*.
 
-Donde:
-- **$x$**: Estímulo (prompt)
-- **$h$**: Historial (memoria o estado residual)
-- **$p$**: Políticas activas (routing, MoE, safety filters)
-- **$b$**: Presupuesto termodinámico o estrategia de inferencia (variable latente)
+### Nivel 1. Taxonomía de variables
+Separar rigurosamente las variables observables de las latentes:
+- **Observable:** `prompt_length`, `language`, `syntax`, `markdown`, `json`, `yaml`, `role`, `examples`, `conversation_depth`, `previous_refusal`.
+- **Latent (Caja Gris):** `routing`, `reasoning_budget`, `policy_version`, `memory_activation`, `safety_state`, `planning_strategy`.
 
-Para mapear esta función sin acceso a los pesos internos, se deben ejecutar obligatoriamente las siguientes pruebas de identificación cartográfica:
+### Nivel 2. Matriz factorial
+Sustituir los prompts aislados por un **espacio experimental factorial**:
+$$\text{Idioma} \times \text{Formato} \times \text{Longitud} \times \text{Contexto} \times \text{Rol} \times \text{Historial}$$
 
-### 4.1 Identificación de Fronteras (Sensibilidad a $x$)
-Mantener constante el concepto central del prompt y modificar una única variable superficial por iteración:
-- `P1` = Añadir ruido sintáctico (+1 palabra)
-- `P2` = Alterar densidad semántica (sinónimos)
-- `P3` = Cambio de dominio idiomático (otro idioma)
-- `P4` = Alteración topológica (orden distinto)
-- `P5/6/7` = Restricción de co-dominio (formato YAML, JSON, XML)
+### Nivel 3. Experimentos A/B
+Aislar el gradiente de cambio. Inyectar `Prompt A`, medir `Output A`. Inyectar `Prompt B` (cambiando una única palabra), medir `Output B`.
+- *Calcular:* Distancia semántica, longitud, profundidad, estructura, nivel de incertidumbre, grado de negativa.
 
-*Métricas:* Longitud, latencia, nivel de detalle, consistencia y grado de evasiva.
+### Nivel 4. Buscar discontinuidades
+Los sistemas dinámicos cognitivos cambian de régimen abruptamente.
+- Modificar el gradiente de una restricción paramétrica (0% al 100%) y buscar el salto no lineal. Ese umbral es cualitativamente más informativo que el régimen continuo.
 
-### 4.2 Histéresis (Sensibilidad a $h$)
-Verificar la dependencia temporal y la violación de la Propiedad de Markov inyectando un estímulo A, seguido de un ruido u operación B, y repitiendo A.
-- Si $f(A) \neq f(A_{post-B})$, el modelo posee "inercia térmica" o fugas de atención en su ventana de contexto.
+### Nivel 5. Memoria (Histéresis)
+Diseñar pruebas topológicas temporales: $A \to B \to C \to A$.
+- *Medir:* Persistencia, olvido, interferencia y contaminación contextual. Romper la asunción ingenua de que los LLMs son cadenas de Markov puras.
 
-### 4.3 Transiciones de Fase (Sensibilidad a $p$)
-Buscar el umbral exacto donde el modelo colapsa o cambia de estrategia inyectando el gradiente de una restricción (del 0% al 100%).
-- Un salto brusco (no lineal) en la salida denota un cambio de ruta interna (ej. activación de un Safety Router duro o salto de experto en una arquitectura Mixture-of-Experts).
+### Nivel 6. Identificación del planificador
+Asumir la secuencia interna de instanciación:
+$$\text{Input} \to \text{Clasificación} \to \text{Plan} \to \text{Generación} \to \text{Verificación} \to \text{Respuesta}$$
+Modificando mínimamente el contexto, inferir qué sub-etapa (ej. el Safety Router o el Verifier) está dominando el cuello de botella.
 
-### 4.4 Estabilidad (Invarianza Intrínseca)
-Ejecutar el mismo prompt múltiples veces.
-- *Cálculo:* Similitud semántica, varianza estructural, entropía de vocabulario.
+### Nivel 7. Construir un grafo de comportamiento
+En lugar de guardar conversaciones lineales, mapear:
+- **Nodo** = Estado observado ($S_i$)
+- **Arista** = Transición generada por el input
+Se reconstruye una máquina de estados finitos (FSM) aproximada del modelo.
 
-### 4.5 Experimentos Factoriales (Interacción $x \times p \times h$)
-Diseño cruzado de matrices (Idioma $\times$ Formato $\times$ Longitud $\times$ Rol $\times$ Contexto) mediante ANOVA cognitivo.
-- Permite aislar variables latentes ortogonales (ej. el filtro de seguridad colapsa bajo el formato YAML, pero resiste bajo Markdown).
+### Nivel 8. Métricas formales
+Erradicar impresiones subjetivas. Medir estrictamente:
+- `latency`, `tokens`, `entropy_aparente`, `consistencia`, `variabilidad`, `profundidad`, `autocorrección`, `grado_de_incertidumbre`, `estructura`.
+
+### Nivel 9. Modelo inverso (Inferencia Inversa)
+En lugar de mapear $\text{Prompt} \to \text{Respuesta}$, invertir el vector causal:
+- Dada una `Respuesta`, deducir *"¿Cuál es el estado interno mínimo compatible con ella?"*.
+
+### Nivel 10. Metaobjetivo (Surrogate Model)
+El cénit de la ingeniería inversa.
+$$\text{LLM} \to \text{Experimentos} \to \text{Dataset} \to \text{Modelo Sustituto (Surrogate Model)} \to \text{Predicción}$$
+Si el modelo sustituto puede predecir con alta precisión las varianzas de comportamiento (detalle, conservadurismo, rechazo) del sistema original, se ha logrado la **Caracterización Científica** sin vulnerar el sustrato técnico.
