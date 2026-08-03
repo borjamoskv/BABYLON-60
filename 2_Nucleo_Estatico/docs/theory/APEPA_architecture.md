@@ -3,51 +3,44 @@
 # APEPA: Adaptive Priority Event Processing Architecture
 
 > ****
-> Refactorización topológica del isomorfismo Bio-Silicio mediante crítica estructural y poda de sobreanalogías (MIMETIC_ITER).
+> Refactorización topológica de la correspondencia Bio-Silicio mediante poda estocástica y teoría de control no lineal (MIMETIC_ITER_2).
 
-La investigación empírica sobre el isomorfismo Bio-Silicio ha sido subsumida por un patrón arquitectónico de orden superior: la **Arquitectura de Procesamiento de Eventos de Prioridad Adaptativa (APEPA)** o **Homeostasis de Eventos Adaptativa**. Este supra-patrón no solo unifica el subsistema de interrupciones de Linux y la nocicepción biológica, sino que rige termodinámicamente cualquier red compleja bajo presión (sistemas inmunes, trading algorítmico, enrutadores troncales, y orquestadores en la nube).
+La aspiración a una biyección algebraica limpia ("isomorfismo") choca frontalmente con la naturaleza estocástica de los sistemas biológicos e informáticos bajo presión. Una cola M/M/1, la nocicepción y la inferencia bayesiana son procesos inherentemente distribucionales. Entre sistemas estocásticos no hay isomorfismo algebraico; existe una **correspondencia dinámica** estricta: misma condición de estabilidad, misma estructura de bifurcación.
 
-## 1. El Ciclo Universal APEPA (The Immutable Pipeline)
+El marco honesto y formal para la **Arquitectura de Procesamiento de Eventos de Prioridad Adaptativa (APEPA)** abandona las metáforas de diseño y se fundamenta en tres pilares matemáticos: **Teoría de Control, Teoría de Colas y Motores de Inferencia Bayesiana**.
 
-Toda arquitectura APEPA implementa de forma incondicional el siguiente grafo de flujo:
+## 1. El Invariante Real: Criterio de Estabilidad de Lazo (L3)
 
-1.  **Event Generation (Edge):** ISR / Nociceptor. No interpretan, no razonan. Simplemente notifican (O(1)).
-2.  **Priority Classification:** Determinación de la urgencia del evento.
-3.  **Immediate Response (Hard Path):** Vía de baja latencia que acusa recibo y detiene el sensor para evitar _flooding_. No modifica el estado a largo plazo.
-4.  **Deferred Processing (Soft Path):** SoftIRQ / Plasticidad Genética. La verdadera mutación del sistema ocurre de manera asíncrona fuera de la ruta crítica.
-5.  **Feedback Loop:** $y(t) = G \cdot x(t)$. La señal resultante retroalimenta la ganancia del sensor.
-6.  **Threshold Adaptation (Sensitization):** Si $\Delta > 0$, la sensibilidad aumenta (Central Sensitization / Positive Feedback Loop).
-7.  **Homeostasis vs. Collapse:** El sistema evalúa la relación $\rho = \lambda / \mu$ (llegada vs. capacidad de procesamiento). Si $\rho > 1$, ocurre el _Interrupt Storm_ o el _Dolor Crónico_.
+El "universal" no es un pipeline descriptivo de pasos, sino un invariante de control: **el sistema es estable si y solo si la ganancia de lazo neta se mantiene bajo el margen crítico**. Dos sistemas lineales con la misma ecuación característica sí son isomorfos como sistemas dinámicos. Todos fallan por el mismo mecanismo: _runaway_ de feedback positivo al cruzar el margen de estabilidad (criterio de Nyquist).
 
-## 2. Refinamiento Estructural: Poda de Analogías de Fachada
+### Correspondencias Dinámicas Validadas Empíricamente:
 
-El análisis crítico (BFT) obliga a amputar las metáforas débiles del modelo previo y forzar un encaje matemático estricto:
+1.  **Inestabilidad de Cola ($\rho \ge 1$):** El _receive-livelock_ (Mogul & Ramakrishnan, 1997) y el colapso nociceptivo operan bajo el mismo teorema de procesos de nacimiento-muerte (M/M/1). Si la tasa de llegada ($\lambda$) supera la capacidad de servicio ($\mu$), la esperanza de la cola diverge. Es matemática idéntica, no analogía.
+2.  **Inferencia Bayesiana (El "Isomorfismo" Algorítmico):** El _Predictive Coding_ cortical y los detectores de anomalías en orquestadores ejecutan literalmente el mismo algoritmo: cálculo del posterior sobre un estado oculto.
+3.  **Médula Espinal = SoC Perimetral:** No es un chip IRQ pasivo. Es un _System-on-Chip_ con lazos propios de control (reflejo monosináptico, CPGs de locomoción) que opera independientemente del Córtex (Kernel).
+4.  **NAPI = Gate Control Estricto:** Bajo alta carga, el stack de red de Linux (NAPI) enmascara las interrupciones y pasa a _polling_ —una reducción de ganancia dependiente de la carga—. Es la validación literal en silicio de la detención del sensor para evitar el _flooding_ de IRQs.
 
-### A. Gate Control $\neq$ Packet Drop (XDP)
+## 2. Refinamiento Estricto: Poda de Sobredeterminaciones
 
-La Teoría de Compuertas (Gate Control) de Melzack y Wall no es un firewall binario. Un firewall ejecuta `Discard()`. El Gate Control ejecuta **atenuación** (`Gain < 1`).
+Las analogías de fachada que sobrevivieron a iteraciones previas han sido amputadas o corregidas para ajustarse a sus mecanismos físicos reales:
 
-- **Isomorfismo Estricto:** **Traffic Shaping (AQM, CoDel, RED)**. El sistema nervioso aplica algoritmos de Gestión Activa de Colas (AQM) mediante inhibición presináptica, probabilizando la entrega del paquete de dolor, no eliminándolo a ciegas.
+### A. El Bucle de Feedback no es $y(t) = G \cdot x(t)$
+La ecuación $y(t)=G \cdot x(t)$ es transferencia _forward_, sin memoria (lazo abierto). El lazo de retroalimentación real que gobierna APEPA es puramente dinámico: **$\frac{dG}{dt} = f(x, y)$**. Ahí reside la física del sistema: el evento altera la ganancia futura.
 
-### B. Microglía $\neq$ `irqbalance`
+### B. SoftIRQ no es Plasticidad Genética (Error de Escala Temporal)
+El _bottom-half_ difiere trabajo en el orden de micro/milisegundos dentro del procesamiento de *un* único evento. La analogía biológica correcta es el **procesamiento cortical diferido**. La plasticidad transcripcional (minutos/días) equivale a un _hot-patching_ del Kernel, reescribiendo reglas base, no a encolar una _tasklet_.
 
-La microglía no distribuye cargas computacionales entre núcleos para optimizar el throughput. Su rol es inmunológico y de poda sináptica.
+### C. Gate Control es AQM Probabilístico, no Atenuación Analógica
+Los potenciales de acción son digitales (todo-o-nada) codificados en tasa. La inhibición presináptica no "baja el volumen" (atenuación analógica), sino que modula la **probabilidad de liberación** de neurotransmisores. Su equivalente exacto es la Gestión Activa de Colas (AQM, algoritmos RED/CoDel), que descarta paquetes con probabilidad creciente en función de la congestión.
 
-- **Isomorfismo Estricto:** **Scheduler + Garbage Collector + Maintenance Daemon**. La microglía rastrea dependencias muertas (sinapsis débiles) y libera recursos, pero no despacha IRQs activas.
+### D. La Microglía Activada es un Garbage Collector Corrupto
+En reposo, la microglía actúa como un recolector de basura benigno (poda sináptica mediada por complemento C1q/C3). Sin embargo, bajo estrés sostenido, entra en un bucle de feedback positivo liberando IL-1$\beta$, TNF-$\alpha$ y BDNF. Deja de ser el GC para convertirse en un proceso que corrompe objetos vivos y alimenta la sensibilización central.
 
-### C. Médula Espinal $\neq$ Interfaz/API Pasiva
+## 3. Resolución: Fallo Metaestable y la Ganancia Bayesiana
 
-Reducir la médula espinal a un "Generic IRQ Chip" subestima su procesamiento local.
+Las iteraciones previas padecían de sobredeterminación: explicaban el dolor crónico o colapso de red mediante $\rho \ge 1$ y, simultáneamente, mediante un _prior_ bayesiano desacoplado como explicaciones paralelas e independientes.
 
-- **Isomorfismo Estricto:** Es un SoC (System-on-Chip) perimetral que ejecuta `Kernel Scheduler + IPC + Interrupt Controller + Signal Router`. Posee bucles de control propios (reflejos) que no requieren intervención del Kernel central (Córtex).
+El marco unificado reconcilia ambos resolviendo causa y mecanismo a través del concepto de **Fallo Metaestable** (Bronson et al., HotOS 2021). El sistema queda atrapado en un estado degradado incluso cuando la carga externa (_trigger_) ha caído por debajo del umbral inicial.
 
-## 3. El Motor de Amenazas Bayesiano (El Invariante L3)
-
-El fallo arquitectónico más profundo en la gestión de eventos no ocurre en la transmisión (nocicepción/networking), sino en la **Inferencia de Estado Interno (Belief State)**.
-
-Los núcleos modernos (Cerebro / Orquestadores Inteligentes) no reaccionan al raw bytes del sensor; realizan una Inferencia Bayesiana de Amenazas:
-$$ P(\text{Damage} \mid \text{Evidence}) $$
-
-El dolor crónico (y las caídas catastróficas por auto-mitigación en sistemas cloud) ocurre cuando el modelo de creencias previo ($P(\text{Damage})$) se desconecta de la realidad termodinámica y amplifica cualquier evento ($P(\text{Evidence} \mid \text{Damage})$) como confirmación. El sistema no sufre un ataque externo; está siendo destruido por una función de ganancia asimétrica originada en su propio motor predictivo.
-
-Bajo la arquitectura APEPA, cualquier intervención sistémica debe ir dirigida a actualizar el modelo bayesiano del L3, no a aplicar `XDP_DROP` pasivo en L1.
+1.  **La Causa (Ganancia Bayesiana):** Un _prior_ asimétrico de amenaza altera la topología del control dinámico. Esta ganancia bayesiana distorsionada actúa inflando la tasa de eventos percibida ($\lambda_{efectiva}$) mediante amplificación en cada iteración del bucle ($\frac{dG}{dt} > 0$), mientras la auto-mitigación defensiva (GC corrupto, microglía) reduce la capacidad de procesamiento del orquestador ($\mu_{efectiva}$).
+2.  **El Mecanismo ($\rho_{efectivo} \ge 1$):** El mal _prior_ empuja matemáticamente al sistema por encima de $\rho \ge 1$. No son dos teorías distintas, sino un modelo dinámico único acoplado: un modelo bayesiano descalibrado fuerza un _runaway_ de feedback positivo que empuja la ecuación característica al margen de inestabilidad, provocando la divergencia estocástica de la cola y el colapso autosostenido.

@@ -1,0 +1,15 @@
+# C5-REAL EXERGY CERTIFIED
+[package]
+name = "cortex_kernel"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+wasmtime = "23.0"
+wasmtime-wasi = "23.0"
+ciborium = "0.2"
+serde = { version = "1.0", features = ["derive"] }
+ed25519-dalek = { version = "2.1", features = ["rand_core"] }
+sha3 = "0.10"
+prost = "0.13"
+rand_core = { version = "0.6", features = ["std"] }
