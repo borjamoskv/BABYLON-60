@@ -259,7 +259,7 @@ impl BftAsyncEngine {
             ).map_err(|e| format!("SQLite Pragma Error: {}", e))?;
 
             let m = memory.read().await;
-            let mut tx = conn.unchecked_transaction().map_err(|e| format!("TX Error: {}", e))?;
+            let tx = conn.unchecked_transaction().map_err(|e| format!("TX Error: {}", e))?;
             {
                 let mut stmt = tx.prepare_cached("INSERT OR REPLACE INTO cortex_memory_bft (node_id, proof) VALUES (?1, ?2)")
                     .map_err(|e| format!("Prepare Error: {}", e))?;

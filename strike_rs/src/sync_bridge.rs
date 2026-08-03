@@ -2,7 +2,6 @@
 // Exporta la estructura del Ledger BFT a través de canales gRPC/Tonic.
 
 use tonic::{transport::Server, Request, Response, Status};
-use std::sync::Arc;
 
 // Invariantes Causal-Determinist: INV_BFT_02, INV_C5_18
 // (El schema real se compila desde c5_exergy.proto vía prost/tonic-build en build.rs)
@@ -43,7 +42,7 @@ impl ExergyBridge for C5ExergyService {
         let (tx, rx) = tokio::sync::mpsc::channel(100);
         
         let mut bcast_rx = {
-            let mut guard = self.telemetry_rx.lock().await;
+            let guard = self.telemetry_rx.lock().await;
             guard.resubscribe()
         };
 

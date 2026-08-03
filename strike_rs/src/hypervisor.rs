@@ -8,7 +8,7 @@
 //! - INV_C5_TURING_CASTRATION: Deterministic, bounded execution loops (No infinite polling).
 
 use iceoryx2::prelude::*;
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -78,6 +78,7 @@ pub struct SwarmTenant {
 /// Agency Hypervisor Kernel Core in Rust
 pub struct SwarmHypervisor {
     tenants: Arc<Mutex<HashMap<String, SwarmTenant>>>,
+    #[allow(dead_code)]
     publisher: Option<ZeroCopyPublisher>,
 }
 
