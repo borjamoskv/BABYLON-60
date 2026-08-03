@@ -192,32 +192,40 @@ def cmd_update_status(args: argparse.Namespace) -> None:
         print('Claim: Idempotencia detectada. El estado solicitado ya coincide con la ontología física.')
         print(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: Causal-Determinist')
 
+def _update_milestone_commit(m: dict[str, Any]) -> None:
+    if m.get('status') == 'DONE' or not m.get('commit_hash'):
+        return
+    h = m.get('commit_hash')
+    try:
+        res = subprocess.run(['git', 'cat-file', '-t', h], cwd=WORKSPACE_DIR, capture_output=True, text=True)
+        if res.returncode == 0 and res.stdout.strip() == 'commit':
+            m['status'] = 'DONE'
+    except (subprocess.SubprocessError, OSError):
+        os.kill(os.getpid(), signal.SIGKILL)
+        raise RuntimeError('FAIL-FAST: General Exception intercepted.')
+
+
+def _update_objective_exergy(o: dict[str, Any]) -> None:
+    total_ms = len(o.get('milestones', []))
+    done_ms = 0
+    for m in o.get('milestones', []):
+        _update_milestone_commit(m)
+        if m.get('status') == 'DONE':
+            done_ms += 1
+    if total_ms > 0:
+        new_exergy = round(done_ms / total_ms, 2)
+        if o.get('exergy_score') != new_exergy:
+            o['exergy_score'] = new_exergy
+        if done_ms == total_ms and o.get('status') != 'DONE':
+            o['status'] = 'DONE'
+        elif done_ms < total_ms and o.get('status') == 'DONE':
+            o['status'] = 'IN_PROGRESS'
+
+
 def cmd_iter(args: argparse.Namespace) -> None:
     state = load_state()
     for o in state.get('objectives', []):
-        total_ms = len(o.get('milestones', []))
-        done_ms = 0
-        for m in o.get('milestones', []):
-            if m.get('status') != 'DONE' and m.get('commit_hash'):
-                h = m.get('commit_hash')
-                try:
-                    res = subprocess.run(['git', 'cat-file', '-t', h], cwd=WORKSPACE_DIR, capture_output=True, text=True)
-                    if res.returncode == 0 and res.stdout.strip() == 'commit':
-                        m['status'] = 'DONE'
-                except (subprocess.SubprocessError, OSError):
-                    os.kill(os.getpid(), signal.SIGKILL)
-                    raise RuntimeError('FAIL-FAST: General Exception intercepted.')
-            if m.get('status') == 'DONE':
-                done_ms += 1
-        if total_ms > 0:
-            new_exergy = done_ms / total_ms
-            new_exergy = round(new_exergy, 2)
-            if o.get('exergy_score') != new_exergy:
-                o['exergy_score'] = new_exergy
-            if done_ms == total_ms and o.get('status') != 'DONE':
-                o['status'] = 'DONE'
-            elif done_ms < total_ms and o.get('status') == 'DONE':
-                o['status'] = 'IN_PROGRESS'
+        _update_objective_exergy(o)
     project_mutated = update_project_md(state)
     state_mutated = save_state(state)
     if state_mutated or project_mutated:
@@ -227,6 +235,7 @@ def cmd_iter(args: argparse.Namespace) -> None:
     else:
         print('Claim: Idempotencia absoluta. El estado actual representa la máxima exergía del sistema.')
         print(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: Causal-Determinist')
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description='MOSKV-1 Objectives & Milestones Agent')
@@ -247,15 +256,18 @@ def main() -> None:
     p_upd_status.add_argument('--status', choices=['PENDING', 'IN_PROGRESS', 'DONE'], required=True)
     subparsers.add_parser('iter')
     args = parser.parse_args()
-    if args.command == 'list':
-        cmd_list(args)
-    elif args.command == 'add-objective':
-        cmd_add_objective(args)
-    elif args.command == 'add-milestone':
-        cmd_add_milestone(args)
-    elif args.command == 'update-status':
-        cmd_update_status(args)
-    elif args.command == 'iter':
-        cmd_iter(args)
+
+    commands = {
+        'list': cmd_list,
+        'add-objective': cmd_add_objective,
+        'add-milestone': cmd_add_milestone,
+        'update-status': cmd_update_status,
+        'iter': cmd_iter,
+    }
+    handler = commands.get(args.command)
+    if handler:
+        handler(args)
+
+
 if __name__ == '__main__':
     main()
