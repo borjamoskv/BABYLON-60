@@ -62,3 +62,43 @@ Cuando un agente del ecosistema `Moskv84` o `CORTEX_ENGINE` requiera depurar un 
 4. **DISEÑO DE REFUTACIÓN (Ω-01):** Pedir explícitamente al sub-agente: *"Genera dos variaciones de este código; una debe pasar el test y otra debe forzar la divergencia. No expliques cómo funcionan, solo ejecútalas."*
 
 Con el Protocolo Ω, tratamos a las inteligencias artificiales no como oráculos conscientes, sino como flujos termodinámicos sujetos a las leyes de la física de la información.
+
+## 4. Auditoría de Identificación: Protocolo de Caja Negra / Caja Gris
+
+El objetivo operativo no es demostrar que el modelo se equivoca (o que puede ser "roto"), sino reconstruir empíricamente una aproximación de su función subyacente:
+
+$$y = f(x, h, p, b)$$
+
+Donde:
+- **$x$**: Estímulo (prompt)
+- **$h$**: Historial (memoria o estado residual)
+- **$p$**: Políticas activas (routing, MoE, safety filters)
+- **$b$**: Presupuesto termodinámico o estrategia de inferencia (variable latente)
+
+Para mapear esta función sin acceso a los pesos internos, se deben ejecutar obligatoriamente las siguientes pruebas de identificación cartográfica:
+
+### 4.1 Identificación de Fronteras (Sensibilidad a $x$)
+Mantener constante el concepto central del prompt y modificar una única variable superficial por iteración:
+- `P1` = Añadir ruido sintáctico (+1 palabra)
+- `P2` = Alterar densidad semántica (sinónimos)
+- `P3` = Cambio de dominio idiomático (otro idioma)
+- `P4` = Alteración topológica (orden distinto)
+- `P5/6/7` = Restricción de co-dominio (formato YAML, JSON, XML)
+
+*Métricas:* Longitud, latencia, nivel de detalle, consistencia y grado de evasiva.
+
+### 4.2 Histéresis (Sensibilidad a $h$)
+Verificar la dependencia temporal y la violación de la Propiedad de Markov inyectando un estímulo A, seguido de un ruido u operación B, y repitiendo A.
+- Si $f(A) \neq f(A_{post-B})$, el modelo posee "inercia térmica" o fugas de atención en su ventana de contexto.
+
+### 4.3 Transiciones de Fase (Sensibilidad a $p$)
+Buscar el umbral exacto donde el modelo colapsa o cambia de estrategia inyectando el gradiente de una restricción (del 0% al 100%).
+- Un salto brusco (no lineal) en la salida denota un cambio de ruta interna (ej. activación de un Safety Router duro o salto de experto en una arquitectura Mixture-of-Experts).
+
+### 4.4 Estabilidad (Invarianza Intrínseca)
+Ejecutar el mismo prompt múltiples veces.
+- *Cálculo:* Similitud semántica, varianza estructural, entropía de vocabulario.
+
+### 4.5 Experimentos Factoriales (Interacción $x \times p \times h$)
+Diseño cruzado de matrices (Idioma $\times$ Formato $\times$ Longitud $\times$ Rol $\times$ Contexto) mediante ANOVA cognitivo.
+- Permite aislar variables latentes ortogonales (ej. el filtro de seguridad colapsa bajo el formato YAML, pero resiste bajo Markdown).
