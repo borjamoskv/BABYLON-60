@@ -243,6 +243,7 @@ mod tests {
     fn test_cortex_kernel_atms_hardening_and_replay() {
         pyo3::prepare_freethreaded_python();
         let db_path = "target/test_cortex_kernel_replay.db";
+        let _ = std::fs::create_dir_all("target");
         let _ = fs::remove_file(db_path);
 
         {
@@ -254,8 +255,8 @@ mod tests {
             assert!(!id1.is_empty() && id1.contains('-'), "Expected UUID assertion ID");
 
             // Verify belief in ATMS
-            assert!(kernel.is_believed("Water is H2O").unwrap());
-            assert!(kernel.contradiction_free("Water is H2O").unwrap());
+            assert!(kernel.is_believed("Water is H2O").expect("Failed to check belief state for Water is H2O"));
+            assert!(kernel.contradiction_free("Water is H2O").expect("Failed to check contradiction state for Water is H2O"));
 
             // Assert contradiction (nogood) against a conjecture hypothesis
             let taint_nogood = kernel.contradict_knowledge("Alien hypothesis X", "env_master")
