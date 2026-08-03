@@ -283,3 +283,6 @@ To fulfill the Sovereign Dual-Licensing Invariant (`INV_C5_17`) and transfer the
   2. **Estructura por Dominios:** Los archivos residen en subdirectorios temáticos (`01_spec/`, `02_ontology/`, `03_guides/`, `04_research/`, `05_isomorphisms/`, `06_theory/`).
   3. **Mapa Causal:** Debe existir un `docs/00_index.md` maestro que contenga el grafo Mermaid de dependencias de conocimiento entre todos los dominios.
   4. **Enforcement en Silicio:** Las reglas son verificadas y bloqueadas físicamente en local por el script `.git/hooks/pre-commit`. Los agentes no deben omitir la verificación (`--no-verify`) salvo instrucción explícita del Operador.
+
+### Auto-Aprendizaje Causal Autónomo (Autocognición Asíncrona)
+- **RULE_AUTO_LEARN_01:** Tras completar exitosamente la resolución de un fallo de silicio, refactorización estructural, instalación de hooks o descubrimiento de un patrón no documentado, el agente DEBE auto-evaluar si la solución satisface el criterio de reutilizabilidad C5-REAL. De ser así, generará proactivamente un artefacto `learning_proposal.md` con `request_feedback=true` sin esperar la invocación explícita del comando `/learn`.
