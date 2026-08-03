@@ -30,14 +30,7 @@ def audit_file(filepath):
                 modified = True
                 new_content = new_content_tmp
                 
-        # Only replace MOSKV and CORTEX in markdown files or if bounded by quotes/comments
-        if filepath.endswith('.md'):
-            new_content = re.sub(r"MOSKV-1 APEX", "Motor Causal Principal", new_content, flags=re.IGNORECASE)
-            new_content = re.sub(r"\bMOSKV\b", "Motor Causal", new_content, flags=re.IGNORECASE)
-            new_content = re.sub(r"\bCORTEX\b", "Ledger Asíncrono", new_content, flags=re.IGNORECASE)
-            if new_content != content:
-                modified = True
-        
+        # Preservar nombres de marca canónicos (MOSKV, CORTEX, BABYLON-60)
         if modified:
             with open(filepath, 'w', encoding='utf-8') as f:
                 f.write(new_content)
