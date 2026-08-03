@@ -38,6 +38,8 @@ test_*.b60
 # Entropy Purge — Prevent Re-Tracking (2026-07-29)
 .tmp_yt/
 yt-dlp
+*.db
 *.db-wal
 *.db-shm
+*.sqlite
 *.cortex_thermal_lock
