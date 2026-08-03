@@ -286,3 +286,13 @@ To fulfill the Sovereign Dual-Licensing Invariant (`INV_C5_17`) and transfer the
 
 ### Auto-Aprendizaje Causal Autónomo (Autocognición Asíncrona)
 - **RULE_AUTO_LEARN_01:** Tras completar exitosamente la resolución de un fallo de silicio, refactorización estructural, instalación de hooks o descubrimiento de un patrón no documentado, el agente DEBE auto-evaluar si la solución satisface el criterio de reutilizabilidad C5-REAL. De ser así, generará proactivamente un artefacto `learning_proposal.md` con `request_feedback=true` sin esperar la invocación explícita del comando `/learn`.
+
+
+<RULE[babylon_60_architecture]>
+## Contexto del Ecosistema BABYLON-60
+- **Naturaleza del Proyecto:** BABYLON-60 es un entorno agéntico avanzado basado en principios termodinámicos (purga de anergía, optimización de exergía) y control de enjambres (Swarm Commanders).
+- **Integración WhatsApp (wa-nexus):** El sistema interactúa con pasarelas de WhatsApp (ej. bugs de spam o testing se reflejan ahí).
+- **Transductor Nativo (moskv_native_host):** Se utiliza `moskv_native_host.py` como puente IPC (Native Messaging) entre el navegador (Chrome/Firefox) y el Motor Causal para inyectar comandos de generación (ej. audio/IA) en estados cristalizados (`READY`).
+- **Comportamiento del Agente:** Al trabajar en este workspace, asume siempre este marco arquitectónico e integra la terminología técnica del usuario (transductores, cristalización de estados, anergía/exergía, enjambres) en tus análisis y soluciones.
+</RULE[babylon_60_architecture]>
+

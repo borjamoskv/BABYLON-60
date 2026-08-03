@@ -43,3 +43,8 @@ yt-dlp
 *.db-shm
 *.sqlite
 *.cortex_thermal_lock
+
+# Databases
+*.db
+*.db-wal
+*.db-shm

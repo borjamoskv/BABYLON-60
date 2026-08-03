@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Moskv-FX-Scavenger",
+  "version": "1.0",
+  "description": "Causal-Determinist Transducer for Google Labs FX (BABYLON-60)",
+  "permissions": [
+    "nativeMessaging",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "*://labs.google/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

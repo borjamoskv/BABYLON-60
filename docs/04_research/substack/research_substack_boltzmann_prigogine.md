@@ -38,5 +38,5 @@ Los resultados crudos han sido validados físicamente:
 ⚡ [Ledger Asíncrono Causal-Determinist] Sinergias de Exergía Máxima (Top 99.99):
 - [Un hombre blanco y heterosexual](https://substack.com/home/post/p-204785962)
 - [[AUDIT] El lamento acústico de Chimo Bayo y la disipación energética de la Ruta Destroy](file:///Users/borjafernandezangulo/30_BABYLON-60/docs/substack_chimo_bayo.md)
-- [[ANALYSIS] Captura de IP e ineficiencia entrópica en el canon digital de la SGAE (v2026)](file:///Users/borjafernandezangulo/30_BABYLON-60/docs/substack_sgae_audit.md)
+- [[ANALYSIS] Captura de IP e Ineficiencia entrópica en el canon digital de la SGAE (v2026)](file:///Users/borjafernandezangulo/30_BABYLON-60/docs/substack_sgae_audit.md)
 - [[METAMEMBRANE] La trampa de Ineficiencia de los prompts de autoayuda en la KV Cache](file:///Users/borjafernandezangulo/30_BABYLON-60/docs/substack_kv_cache_slop.md)
