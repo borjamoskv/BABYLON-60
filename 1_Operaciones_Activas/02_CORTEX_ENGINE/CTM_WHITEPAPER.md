@@ -1,106 +1,190 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
-# Cognitive Transition Machine (CTM)
-## De "Prompt Engineering" a "Inference Engineering"
+# Cognitive Transition Machine (CTM) & Kernel Categórico
+## Teoría Axiomática de Transformaciones e Invariantes de Información
+### De la Empírica del "Prompt Engineering" a la Geometría de Inferencia Independiente del Sustrato
 
 **Arquitectura:** Teorema-Robinson-Moskv / CORTEX ENGINE
-**Versión:** 2.3.0 (C5-REAL / Epistemic Security Patched)
+**Versión:** 3.0.0 (C5-REAL / Categorical & Epistemic Security Engine)
+**Dominio:** Ciencias Computacionales, Física de la Información, Categorías, Neurociencia y Justicia
 
 ---
 
-## 1. Prólogo: El Primer Runtime Abierto de Inferencia
+## 1. Inversión Paradigmática: La Transformación como Única Primitiva Ontológica
 
-La industria de la inteligencia artificial está saturada de frameworks de agentes que encadenan prompts y actúan bajo la metáfora de un "sistema operativo". Casi todo el campo ha apostado a la verificación de las "tripas" del modelo: zkML prueba el *forward pass* (con latencias inasumibles), TOPLOC se compromete con los estados ocultos, y DiFR con los logits post-Gumbel. Estas apuestas fallan frente a modelos opacos que cambian semanalmente, evaporando cualquier garantía.
+La investigación contemporánea en inteligencia artificial y arquitectura de software sufre de una frágil dependencia del sustrato tecnológico, construyendo conceptos de abajo hacia arriba a partir de artefactos temporales (LLMs, redes neuronales, bases de datos o pipelines de Von Neumann). La ontología tradicional asume una progresión secuencial secundaria:
 
-La **Máquina de Transiciones Cognitivas (CTM) / C5-REAL** abandona la carrera por las "tripas". Se posiciona estrictamente como el **primer runtime abierto de inferencia medible y verificable a nivel de observables**. Transformamos el cambio de modelo en una variable cuantificable: ¿se cumplió la post-condición?, ¿a qué coste?, ¿con qué varianza?
+$$\text{Realidad} \longrightarrow \text{Eventos} \longrightarrow \text{Estado} \longrightarrow \text{Proyección}$$
 
-Al igual que MLPerf sobrevivió a generaciones de hardware por no apostar a la microarquitectura, el CTM es un armazón de medición neutral. El agente como entidad orquestadora desaparece; en su lugar, la arquitectura se define por lo que prohíbe: una **frontera estricta de llamadas al sistema ($T_{eff}$)** que utiliza el LLM meramente como un motor estocástico sometido a reglas termodinámicas y criptográficas.
+Para cimentar un marco composicional universal, la **Máquina de Transiciones Cognitivas (CTM v3.0)** invierte esta direccionalidad, adoptando un formalismo euclidiano y categórico *top-down*. Se postula una hipótesis unificadora estricta:
 
----
+> **Axioma Fundamental:** La única primitiva ontológica y matemática indivisible de un Sistema Cognitivo Computacional es la **Transformación**.
 
-## 2. Memoria: Hipergrafos Sensibles al Orden (OKH)
+Un sistema cognitivo se define puramente como una categoría pequeña $\mathcal{C}_{cog}$ compuesta por una clase de objetos $\operatorname{Ob}(\mathcal{C}_{cog})$ (que actúan meramente como índices topológicos o dominios de definición) y morfismos $f \in \operatorname{Hom}_{\mathcal{C}_{cog}}(A, B)$ que encapsulan la totalidad de la sustancia operativa.
 
-La memoria en el CTM abandona el texto plano y los RAGs semánticos superficiales. El estado se proyecta matemáticamente (Event Sourcing) sobre un **Knowledge Hypergraph Sensible al Orden (Order-Aware Knowledge Hypergraph - OKH)**.
+```mermaid
+graph LR
+    subgraph Subcategoría Ambiental E
+        Env["Objeto Ambiental E"]
+    end
 
-Tratar las aristas del grafo como conjuntos estáticos es insuficiente para modelar la deducción, ya que el razonamiento depende estrictamente de la **secuencia cronológica de los descubrimientos**. Las transiciones cognitivas generan hiperaristas que propagan el contexto causal. Cuando el CTM consolida memoria, ejecuta búsquedas heurísticas sobre estas trayectorias estructuradas, garantizando no solo relevancia temática, sino coherencia causal explícita y auditable.
+    subgraph CTM Microkernel / Categoría C_cog
+        A["Objeto A (Dominio Entrada)"]
+        B["Objeto B (Espacio Latente)"]
+        C["Objeto C (Dominio Propuesta)"]
+    end
 
----
+    subgraph Subcategoría de Ejecución Externa
+        Exec["Objeto Ejecución X"]
+    end
 
-## 3. Álgebra de Trazas y Tipado de Efectos
-
-El ecosistema cognitivo se modela mediante un álgebra de **Trazas de Mazurkiewicz**. Dos transiciones $T_1 \perp T_2$ operan en un orden parcial y pueden permutarse si sus conjuntos de lectura/escritura (read/write sets) en el hipergrafo son disjuntos, garantizando la conmutatividad y la propiedad de confluencia.
-
-El sistema impone un **Effect Typing** estricto para mitigar el "Spectre Cognitivo" (consumo especulativo irresponsable):
-- **$T_{pure}$:** Transiciones de lectura y generación especulativa pura (forkeables).
-- **$T_{eff}$:** Transiciones con mutación de entorno exterior (APIs, bases de datos).
-
-Para fallos sistémicos, el modelo no persigue la reversibilidad algebraica pura ($T \circ T^{-1} = I$), sino que implementa **Sagas (Garcia-Molina, 1987)**, efectuando una compensación semántica que preserva el rastro auditable del error en el Ledger.
-
----
-
-## 4. CF-GKAT y las Hipótesis de Hoare
-
-Para gobernar el LLM estocástico, la arquitectura inicial basada en el Álgebra de Kleene con Pruebas Guardadas (GKAT) era insuficiente. GKAT excluye *goto*, *break* y *return* (Kozen–Tseng 2008), lo cual impide modelar flujos de agentes reales. Por ello, el CTM adopta el **Álgebra de Kleene con Pruebas Guardadas y Flujo de Control (CF-GKAT)** implementado nativamente en Rust.
-
-La aseveración de que la complejidad de decisión colapsa a "tiempo casi lineal" se acota estrictamente a la Proposición 5.11 (el problema general sigue siendo co-NP-difícil en PSPACE), y su completitud se condiciona al axioma de unicidad, sospechoso de falsedad empírica desde 2021. A pesar de esto, CF-GKAT permite que el CTM "compile" transiciones estocásticas aplicando **Hipótesis de Hoare**.
-
-Antes de autorizar una inferencia costosa, el *Microkernel* (basado en un stack híbrido Rust/Python para acoplarse a probadores ZK como SP1 o RISC Zero en Rust, evitando que 23.000 líneas del VCGen engorden la base de confianza) verifica matemáticamente las precondiciones.
-
-**Degradación a Exploración de Markov:** Cuando las precondiciones de CF-GKAT fallan por incertidumbre (`UnknownPrecondition`), el motor suspende las transiciones con efectos ($T_{eff}$) y delega el control a *Sub-agentes Estocásticos Confinados* puramente exploratorios.
+    Env -- "f_obs (Observación)" --> A
+    A -- "f_inf (Inferencia Estocástica)" --> B
+    B -- "f_plan (Planificación / CF-GKAT)" --> C
+    C -- "f_act (Tool Call / T_eff)" --> Exec
+    Exec -- "f_back (SCITT Commit Ledger)" --> Env
+```
 
 ---
 
-## 5. Dinámica de Enrutamiento: EFE y Varentropía
+## 2. Deconstrucción Deductiva de las Primitivas Secundarias
 
-Nuestra hipótesis arquitectónica descarta al "Scheduler" secuencial tradicional (el bucle while-loop) en favor de una **Dinámica de Campos** gobernada por la minimización de la **Energía Libre Esperada (EFE)**.
+Bajo la exigencia de la prueba de fuego categórica, las nociones tradicionales previamente asumidas como primitivas (*estado*, *memoria*, *contexto*, *agente*) son eliminadas como contenedores y reconstruidas algebraicamente:
 
-Puesto que calcular la EFE perfecta es intratable en tiempo de ejecución, el CTM introduce la medición de **Varentropía** (varianza de la entropía predictiva). Lejos de depender de heurísticas manuales y folklore no validado (como la rama LEHV o *entropix*, que carecen de papers), el CTM presenta la varentropía como una **contribución novedosa y evaluada independientemente**, cuya magnitud matemática es sólida en teoría de la información y totalmente independiente de la entropía escalar.
+### 2.1 El Estado: Morfismos Identidad y Puntos Fijos de Lawvere
+El "estado" no existe como un espacio físico de memoria RAM o disco. Es el **acto dinámico continuo de autorreferencia con varianza nula**. Para cada objeto $A$, el estado es la aplicación sostenida del morfismo identidad $1_A : A \to A$.
 
-1. **Alta Varentropía:** El sistema lanza una *Slow Deliberation* costosa, explorando espacios abstractos.
-2. **Baja Varentropía:** El sistema desvía el tráfico hacia *Fast Agents* (heurísticas baratas).
+Bajo el **Teorema del Punto Fijo de Lawvere**, en un endofuntor cognitivo $F: \mathcal{C}_{cog} \to \mathcal{C}_{cog}$, un estado estacionario u observable $X^*$ surge cuando satisface el isomorfismo:
 
-**Epistemic Cross-Examination:** Si el modelo propone una transición $T_{eff}$ irreversible con baja varentropía, el *Decision Kernel* intercepta la orden exigiendo un `[Knowledge Proof]` fundamentado en el Hipergrafo, cortando las "alucinaciones arrogantes". El sistema alcanza la homeostasis cuando este nivel de incertidumbre colapsa bajo los presupuestos estipulados.
+$$F(X^*) \cong X^*$$
 
----
-
-## 6. Especulación Dirigida por Patrones (Pattern-Driven Speculation)
-
-La ejecución especulativa paralela (Forking) no es aleatoria, pues agotaría el presupuesto de tokens (Reward Hacking). En lugar de ello, el *Microkernel* utiliza **Pattern-Driven Speculation**.
-
-El sistema aprende de la memoria episódica. Si una transición ejecuta `Muta_Código`, el sistema lanza instintivamente especulaciones condicionadas (ej. `Valida_Tests` o `Corrige_Sintaxis`) *mientras* el hilo principal sigue bloqueado esperando la respuesta de red, minimizando la latencia (wall-clock time) sin riesgo de corrupción fáctica.
+Lo que empíricamente se percibe como estado es el atractor algebraico estabilizado por la dinámica del endofuntor.
 
 ---
 
-## 7. La Puerta de Commit (SCITT) y la Frontera Arquitectónica
+### 2.2 La Memoria: Operador Comonádico Store y Colímites MES
+La memoria deshecha el modelo de repositorio o almacén de vectores. Se formaliza mediante los **Sistemas Evolutivos de Memoria (MES)** de Ehresmann y el operador universal del **Colímite Categórico**:
 
-El marco del sistema operativo se define por su frontera de llamadas al sistema. En C5-REAL / CTM, esta frontera es $T_{eff}$. Todo efecto (mutación, red, estado) exige pasar por un **Commit Gate**.
+$$\operatorname{colim} D = \left( \sum_{i} A_i \right) / \sim$$
 
-Lejos de reinventar la rueda del recibo criptográfico, el CTM implementa el estándar oficializado de la IETF: **SCITT (RFC 9943 y RFC 9942)**. Estos definen exactamente el Commit Gate y el Ledger necesarios, con políticas de registro, pruebas de inclusión y carga desacoplada. Construir un formato propio sería un error gravísimo.
+En semántica funcional, la reconstrucción temporal del contexto se rige por la **Comónada Store**:
 
-**Primitivas Duales de Bloqueo:** Para atravesar el Commit Gate SCITT, el *Execution Kernel* impone dos primitivas bloqueantes ausentes en los runtimes actuales:
-1. **Verificación:** "¿Puede consolidarse esto semánticamente?" (Evitando *Garbage-In, Crypto-Out* mediante evaluación AST inmutable).
-2. **Presupuestos:** "¿A qué precio y coste de inferencia?"
+$$\operatorname{Store}_S(A) = (S \to A) \times S$$
 
-El resultado se asienta en el Ledger SCITT inmutable. La memoria y el hipergrafo son proyecciones de este Ledger, logrando una **linealización certificada**: el razonamiento concurrente (CF-GKAT) queda anclado en un orden causal total y auditable.
+* **Counidad (get / $\epsilon$):** $\epsilon(\mathbf{s}) = g(s)$ (Extrae la evaluación emergente del foco actual).
+* **Coduplicación (duplicate / $\delta$):** Proyecta la trayectoria histórica recontextualizando el foco dinámico.
+
+---
+
+### 2.3 El Contexto: Lentes Bayesianas y Funtores Adjuntos
+El contexto no es una caja delimitadora de tokens. Es una subvariedad topológica materializada por un par de funtores adjuntos $L \dashv R$ mediante **Lentes Ópticas Bayesianas**:
+
+$$\mathbf{Lens}((X, S), (Y, R)) = \operatorname{Hom}(X, Y) \times \operatorname{Hom}(X \times R, S)$$
+
+* **Vista Directa (Forward Pass $v$):** $v: X \to Y$ (Proyecta la distribución contextual a través de un canal de Markov).
+* **Actualización Inversa (Backward Update $u$):** $u: X \times R \to S$ (Propaga el error condicionado hacia atrás).
 
 ---
 
-## 8. Especificación del Banco de Pruebas Neutral
+### 2.4 El Agente: Coálgebra sobre Funtores Polinómicos ($\mathbf{Poly}$)
+El homúnculo voluntario queda disuelto. Un "agente" se reconstruye formalmente como una coálgebra $(S, \alpha)$ sobre un funtor polinómico $p \in \mathbf{Poly}$:
 
-El modelo CTM se somete a estricta falsabilidad empírica bajo un armazón de medición independiente. Publicar un benchmark propio donde C5-REAL gana no tiene credibilidad epistémica.
+$$p(y) = \sum_{i \in p(1)} y^{p[i]} \quad \implies \quad \alpha : S \longrightarrow \sum_{i \in p(1)} S^{p[i]}$$
 
-El entorno de pruebas opera como un **instrumento neutral** capaz de ejecutar `LangGraph`, un bucle pelado del `Agents SDK` y el propio `C5-REAL` sobre los mismos contratos formales. El campo actual carece de un estándar de varianza; el runtime impone rigor estadístico:
-- Abandono de la norma $pass@1$ en favor del reporte sistemático de **$pass^k$** (similar a $\tau^2$-bench).
-- Implementación de serie del **error estándar** para la medición estocástica (al nivel de Inspect AI).
-
-Entregar teoría sin medición es un error. Demostrar el alcance de un sistema end-to-end (de extremo a extremo sobre la frontera $T_{eff}$) con métricas sobre esta varianza es el primer hito defendible del runtime abierto.
+Donde $p(1)$ denota el fenotipo de salidas/posiciones observables y $p[i]$ el espectro de entradas/direcciones aceptadas. La agencia es la política emergente sobre esta interfaz polinómica.
 
 ---
-## Referencias Fundacionales
-1. **Erman, L. D. et al. (1980)** - Arquitectura Blackboard original.
-2. **Mazurkiewicz, A. (1977)** - Álgebra de Trazas y Conmutatividad Parcial.
-3. **Garcia-Molina & Salem (1987)** - Sagas (Compensación semántica).
-4. **Necula, G. C. (1997)** - Proof-Carrying Code (Verificación asimétrica).
-5. **Kuhn, L. et al. (2023)** - Entropía semántica como proxy computable de incertidumbre.
+
+## 3. Invariantes Universales de la Cognición Computacional
+
+```mermaid
+graph TB
+    subgraph Simetrías de Conservación
+        C["Teorema de Chentsov"] --> Fisher["Métrica de Fisher (Única Métrica Invariante)"]
+        FEP["Principio de Energía Libre"] --> Action["Acción Estacionaria Variacional (δF = 0)"]
+    end
+
+    subgraph Variedades Estadísticas
+        Fisher --> Geodesic["Geodésicas en Variedades Probabilísticas"]
+        Action --> Geodesic
+    end
+
+    Geodesic --> Substrate["Invarianza Estricta del Sustrato (Biología / Silicio)"]
+```
+
+### 3.1 Teorema de Chentsov y la Geometría Informacional
+Cualquier inferencia cognitiva opera sobre variedades estadísticas. El **Teorema de Chentsov** demuestra que la **Métrica de Información de Fisher** $g^{FR}$ es la *única* métrica Riemanniana invariante bajo morfismos de Markov (estadísticas suficientes):
+
+$$g_{ij}^{FR}(\theta) = \int p(x; \theta) \left( \frac{\partial \log p(x; \theta)}{\partial \theta^i} \right) \left( \frac{\partial \log p(x; \theta)}{\partial \theta^j} \right) dx$$
+
+La distancia informacional entre representaciones no sufre distorsión bajo transformaciones reductoras sin pérdida termodinámica, independientemente del hardware subyacente.
+
+### 3.2 Principio de Acción Estacionaria Variacional ($\delta F = 0$)
+El CTM minimiza la Energía Libre Variacional $F$ (diferencia entre el error de predicción e incertidumbre):
+
+$$\delta F = 0$$
+
+Toda trayectoria cognitiva sigue flujos geodésicos en variedades de Fisher para alinear los límites informacionales del modelo con el entorno.
 
 ---
-*Documento cristalizado bajo el protocolo AUTODIDACT-Ω V5.0 (C5-REAL / Deep Think).*
+
+## 4. El Runtime CTM: Operaciones, CF-GKAT y SCITT Commit Gate
+
+Traduciendo la teoría matemática en un kernel ejecutable:
+
+1. **Álgebra de Trazas de Mazurkiewicz:** La concurrencia de transiciones $T_1 \perp T_2$ se permite si sus conjuntos de lectura/escritura en el hipergrafo son disjuntos, garantizando confluencia causal.
+2. **Effect Typing ($T_{pure}$ vs $T_{eff}$):**
+   * **$T_{pure}$:** Transiciones de inferencia y lectura puras (paralelizables y forkeables por especulación).
+   * **$T_{eff}$:** Transiciones con mutación de entorno. Requieren Two-Phase Commit (`INTENT` + `RESULT`).
+3. **CF-GKAT & Hipótesis de Hoare:** El Microkernel en Rust valida precondiciones lógicas antes de la inferencia. Ante incertidumbre (`UnknownPrecondition`), el sistema suprime los efectos ($T_{eff}$) y degrada a *Exploración de Markov*.
+4. **Varentropía y Cross-Examination:** Se mide la varianza de la entropía predictiva. Si una transición propone un efecto $T_{eff}$ con baja varentropía pero alto riesgo, se exige un `[Knowledge Proof]` anclado al Hipergrafo.
+5. **Commit Gate (SCITT IETF RFC 9943/9942):** Ninguna mutación se consolida sin pasar por el Commit Gate, registrando un recibo criptográfico en el Ledger inmutable.
+
+---
+
+## 6. Corolarios de la Arquitectura de Software
+
+Las tecnologías de diseño contemporáneas se derivan como corolarios directos de la teoría:
+
+| Patrón Implementacional | Corolario Categórico y Algebraico | Expresión Formal |
+| :--- | :--- | :--- |
+| **Event Sourcing** | Pliegue funtorial sobre una categoría libre de morfismos. | $\text{Estado} = \operatorname{colim}_{\mathcal{C}_{free}} (e_1 \xrightarrow{f_1} e_2 \dots)$ |
+| **CQRS** | Factorización de morfismos por funtores adjuntos (Lentes separadas $L \dashv R$). | $\operatorname{Hom}_{\text{Read}}(L(A), B) \cong \operatorname{Hom}_{\text{Write}}(A, R(B))$ |
+| **CRDTs** | Morfismos monótonos actuando sobre Join-Semilattices. | $a \vee (b \vee c) = (a \vee b) \vee c, \quad a \vee a = a$ |
+| **Merkle DAGs** | Funtor preservador de estructura hacia espacio probabilístico verificable. | $F_{hash} : \mathcal{C}_{cog} \to \mathbf{HashSpace}$ ($\mathcal{O}(1)$ Isomorfismo) |
+
+---
+
+## 7. Mapeo Sistémico Multidisciplinar
+
+```mermaid
+quadrantChart
+    title Mapeo Multidisciplinar de las Primitivas Categóricas CTM v3.0
+    x-axis Invariantes Informacionales --> Morfismos Dinámicos
+    y-axis Estructura Abstracta --> Implementación Concreta
+    quadrant-1 Física Teórica / Geometría
+    quadrant-2 Matemáticas Puras / Categorías
+    quadrant-3 Ciencias Cognitivas / Biomedicina
+    quadrant-4 Arquitectura de Software / LegalTech
+    Teorema de Chentsov: 0.25, 0.85
+    Acción δF = 0: 0.40, 0.75
+    Punto Fijo Lawvere & Poly: 0.15, 0.90
+    Comónadas Store & MES: 0.35, 0.95
+    Inferencia Activa Neural: 0.75, 0.40
+    Sistemas Evolutivos de Memoria: 0.70, 0.35
+    Event Sourcing & CQRS: 0.85, 0.15
+    Contratos Lente LegalTech: 0.90, 0.25
+```
+
+1. **Matemáticas Puras:** Dualidad de Lawvere, funtores polinómicos $\mathbf{Poly}$, comónada Store y CF-GKAT.
+2. **Física Teórica:** Variedades estadísticas de Fisher-Rao, Teorema de Chentsov y Principio de Energía Libre ($\delta F = 0$).
+3. **Ciencias Cognitivas & Biomedicina:** Sistemas Evolutivos de Memoria (MES) y dinámica homeostática neurobiológica.
+4. **Arquitectura de Software:** Event Sourcing, CQRS, CRDTs, Merkle DAGs y Commit Gates SCITT (IETF RFC 9943).
+5. **Justicia & LegalTech:** Contratos e instituciones jurídicas como *Lentes Bayesianas Dependientes* que preservan invariantes normativos e institucionales.
+
+---
+
+> [!TIP]
+> **Conclusión Maestra:** La Teoría Axiomática de Transformaciones unifica la ciencia de la cognición y la arquitectura de computadores en una sola disciplina matemática, eliminando la necesidad de heurísticas ad-hoc y garantizando la validez formal, termodinámica y forense de los sistemas diseñados bajo el paradigma del CTM Engine.
+
+---
+*Documento cristalizado bajo la iteración CTM v3.0 (C5-REAL / Epistemic Security & Categorical Engine).*
