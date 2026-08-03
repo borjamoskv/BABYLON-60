@@ -60,57 +60,61 @@ def is_whitelisted(line: str) -> bool:
             return True
     return False
 
+def _scan_line_for_patterns(filepath: str, line_no: int, line: str) -> List[Dict[str, Any]]:
+    findings: List[Dict[str, Any]] = []
+    for p_name, p_regex in PATTERNS.items():
+        for match in re.finditer(p_regex, line):
+            secret_val = match.group(2) if p_name == 'GENERIC_SECRET' else match.group(0)
+            if secret_val in WHITELIST_VALUES:
+                continue
+            secret_hash = hashlib.sha3_256(secret_val.encode()).hexdigest()[:16]
+            masked = secret_val[:4] + "..." + secret_val[-4:] if len(secret_val) > 8 else "***"
+            findings.append({
+                'file': filepath,
+                'line': line_no,
+                'type': p_name,
+                'masked_value': masked,
+                'hash': secret_hash,
+                'entropy': None
+            })
+    return findings
+
+
+def _scan_line_for_entropy(filepath: str, line_no: int, line: str) -> List[Dict[str, Any]]:
+    findings: List[Dict[str, Any]] = []
+    if is_whitelisted(line):
+        return findings
+    for w in re.findall(r'\b[a-zA-Z0-9+/=]{20,}\b', line):
+        ent = shannon_entropy(w)
+        if ent > 4.8:
+            secret_hash = hashlib.sha3_256(w.encode()).hexdigest()[:16]
+            masked = w[:4] + "..." + w[-4:]
+            findings.append({
+                'file': filepath,
+                'line': line_no,
+                'type': 'HIGH_ENTROPY_STRING',
+                'entropy': round(ent, 2),
+                'masked_value': masked,
+                'hash': secret_hash
+            })
+    return findings
+
+
 def scan_file(filepath: str) -> List[Dict[str, Any]]:
     findings: List[Dict[str, Any]] = []
-    # Auto-evasión
     if "secret_swarm_auditor.py" in filepath or not os.path.isfile(filepath):
         return findings
 
     try:
         with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
             lines = f.readlines()
-        
         for i, line in enumerate(lines):
-            # Check Patterns
-            for p_name, p_regex in PATTERNS.items():
-                for match in re.finditer(p_regex, line):
-                    secret_val = match.group(0)
-                    if p_name == 'GENERIC_SECRET':
-                        secret_val = match.group(2)
-                    if secret_val in WHITELIST_VALUES:
-                        continue
-                    
-                    secret_hash = hashlib.sha3_256(secret_val.encode()).hexdigest()[:16]
-                    masked = secret_val[:4] + "..." + secret_val[-4:] if len(secret_val) > 8 else "***"
-                    
-                    findings.append({
-                        'file': filepath,
-                        'line': i + 1,
-                        'type': p_name,
-                        'masked_value': masked,
-                        'hash': secret_hash,
-                        'entropy': None
-                    })
-
-            # Check Entropy
-            if not is_whitelisted(line):
-                words = re.findall(r'\b[a-zA-Z0-9+/=]{20,}\b', line)
-                for w in words:
-                    ent = shannon_entropy(w)
-                    if ent > 4.8:
-                        secret_hash = hashlib.sha3_256(w.encode()).hexdigest()[:16]
-                        masked = w[:4] + "..." + w[-4:]
-                        findings.append({
-                            'file': filepath,
-                            'line': i + 1,
-                            'type': 'HIGH_ENTROPY_STRING',
-                            'entropy': round(ent, 2),
-                            'masked_value': masked,
-                            'hash': secret_hash
-                        })
+            line_no = i + 1
+            findings.extend(_scan_line_for_patterns(filepath, line_no, line))
+            findings.extend(_scan_line_for_entropy(filepath, line_no, line))
     except (UnicodeDecodeError, OSError):
-        _ = None
-        
+        pass
+
     return findings
 
 def get_target_files(root_dir: str, explicit_files: List[str] | None = None) -> List[str]:

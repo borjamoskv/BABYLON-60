@@ -48,60 +48,74 @@ def compute_sha256(data: str) -> str:
     return hashlib.sha256(data.encode("utf-8")).hexdigest()
 
 
-def run_autocognition_audit() -> None:
-    print("[*] Causal-Determinist AUTOCOGNITION-Ω: Ingesting active session transcript...")
-    AUDIT_DIR.mkdir(parents=True, exist_ok=True)
+def _process_transcript_step(step: dict) -> tuple[int, int, int, list[str], int]:
+    tool_errs = 1 if step.get("status") == "ERROR" else 0
+    struct_toks = 0
+    narr_toks = 0
+    cmds: list[str] = []
+    repeats = 0
 
+    content = step.get("content", "")
+    if isinstance(content, str) and content:
+        words = len(content.split())
+        approx_tokens = int(words * 1.33)
+        code_blocks = re.findall(r"```[\s\S]*?```", content)
+        yaml_claims = re.findall(r"Claim:[\s\S]*?Proof:[\s\S]*?\}", content)
+        table_rows = [r for r in content.splitlines() if r.strip().startswith("|")]
+        struct_chars = sum(len(b) for b in code_blocks) + sum(len(y) for y in yaml_claims) + sum(len(t) for t in table_rows)
+        struct_words = struct_chars / 5.0
+        struct_toks = min(approx_tokens, int(struct_words * 1.33))
+        narr_toks = approx_tokens - struct_toks
+
+    for call in step.get("tool_calls", []):
+        if call.get("toolName") == "run_command":
+            cmd = call.get("arguments", {}).get("CommandLine", "").strip()
+            if cmd:
+                cmds.append(cmd)
+
+    return tool_errs, struct_toks, narr_toks, cmds, repeats
+
+
+def _read_transcript_metrics() -> tuple[int, int, int, int, list[str], int, int]:
     total_steps = 0
     total_tokens = 0
     structured_tokens = 0
     narrative_tokens = 0
-    commands_executed = []
+    commands_executed: list[str] = []
     repeat_commands = 0
     tool_errors = 0
 
-    if TRANSCRIPT_PATH.exists():
-        with open(TRANSCRIPT_PATH, "r", encoding="utf-8") as f:
-            for line in f:
-                if not line.strip():
-                    continue
-                total_steps += 1
-                try:
-                    step = json.loads(line)
-                except json.JSONDecodeError:
-                    continue
+    if not TRANSCRIPT_PATH.exists():
+        return total_steps, total_tokens, structured_tokens, narrative_tokens, commands_executed, repeat_commands, tool_errors
 
-                status = step.get("status", "")
-                if status == "ERROR":
-                    tool_errors += 1
+    with open(TRANSCRIPT_PATH, "r", encoding="utf-8") as f:
+        for line in f:
+            if not line.strip():
+                continue
+            total_steps += 1
+            try:
+                step = json.loads(line)
+            except json.JSONDecodeError:
+                continue
 
-                content = step.get("content", "")
-                if isinstance(content, str) and content:
-                    words = len(content.split())
-                    approx_tokens = int(words * 1.33)
-                    total_tokens += approx_tokens
+            errs, s_toks, n_toks, cmds, _ = _process_transcript_step(step)
+            tool_errors += errs
+            structured_tokens += s_toks
+            narrative_tokens += n_toks
+            total_tokens += (s_toks + n_toks)
+            for cmd in cmds:
+                if cmd in commands_executed:
+                    repeat_commands += 1
+                commands_executed.append(cmd)
 
-                    # Measure structured density (YAML, Markdown blocks, tables, code)
-                    code_blocks = re.findall(r"```[\s\S]*?```", content)
-                    yaml_claims = re.findall(r"Claim:[\s\S]*?Proof:[\s\S]*?\}", content)
-                    table_rows = [r for r in content.splitlines() if r.strip().startswith("|")]
+    return total_steps, total_tokens, structured_tokens, narrative_tokens, commands_executed, repeat_commands, tool_errors
 
-                    struct_chars = sum(len(b) for b in code_blocks) + sum(len(y) for y in yaml_claims) + sum(len(t) for t in table_rows)
-                    struct_words = struct_chars / 5.0
-                    struct_tokens = min(approx_tokens, int(struct_words * 1.33))
-                    
-                    structured_tokens += struct_tokens
-                    narrative_tokens += (approx_tokens - struct_tokens)
 
-                # Track commands to detect command repeats
-                for call in step.get("tool_calls", []):
-                    if call.get("toolName") == "run_command":
-                        args = call.get("arguments", {})
-                        cmd = args.get("CommandLine", "").strip()
-                        if cmd:
-                            if cmd in commands_executed:
-                                repeat_commands += 1
-                            commands_executed.append(cmd)
+def run_autocognition_audit() -> None:
+    print("[*] Causal-Determinist AUTOCOGNITION-Ω: Ingesting active session transcript...")
+    AUDIT_DIR.mkdir(parents=True, exist_ok=True)
+
+    total_steps, total_tokens, structured_tokens, narrative_tokens, commands_executed, repeat_commands, tool_errors = _read_transcript_metrics()
 
     exergy_ratio = round((structured_tokens / total_tokens), 4) if total_tokens > 0 else 1.0
     anergy_ratio = round((narrative_tokens / total_tokens), 4) if total_tokens > 0 else 0.0

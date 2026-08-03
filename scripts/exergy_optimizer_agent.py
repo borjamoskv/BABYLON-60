@@ -117,12 +117,56 @@ def get_git_diff() -> str:
     except subprocess.SubprocessError:
         return ""
 
+def _analyze_added_lines(added_lines: List[str], header: str) -> Tuple[float, int, List[str], List[str]]:
+    e_pts = 0.0
+    l_pts = 0
+    reasons_e = []
+    reasons_l = []
+    for line in added_lines:
+        if re.search(r'except\s+Exception\b|except\s*:', line):
+            e_pts += 4.0
+            reasons_e.append("Broad exception caught (INV_C5_07 violation).")
+        if re.search(r'(SECRET|PRIVATE_KEY|MASTER_LEDGER_KEY)\s*[:=]\s*["\']\w', line, re.IGNORECASE):
+            e_pts += 8.0
+            reasons_e.append("Hardcoded key pattern found (INV_C5_02 violation).")
+        if re.search(r'hashlib\.(md5|sha1)\b', line):
+            e_pts += 5.0
+            reasons_e.append("Weak hashing primitives (MD5/SHA1) (INV_C5_03 violation).")
+        if re.search(r'bytes\((sk|sk\.public_key)\)', line):
+            l_pts += 3
+            reasons_l.append("PyNaCl bytes serialization aligned with INV_C5_10.")
+        if "readlink" in line or "is_symlink" in line:
+            l_pts += 2
+            reasons_l.append("Nexus package symlink validation (INV_C5_12).")
+    return e_pts, l_pts, reasons_e, reasons_l
+
+
+def _check_ast_complexity(header: str) -> Tuple[float, List[str]]:
+    m = re.search(r'b/([^\s]+)', header)
+    if not m:
+        return 0.0, []
+    filepath = m.group(1)
+    if not filepath.endswith('.py'):
+        return 0.0, []
+    try:
+        with open(filepath, 'r') as f:
+            tree = ast.parse(f.read())
+        visitor = ComplexityVisitor()
+        visitor.visit(tree)
+        if visitor.max_depth > 4:
+            msg = f"CRITICAL: Algebraic Limit Exceeded (Nesting Depth = {visitor.max_depth} > 4) in {filepath}."
+            return 500.0, [msg]
+    except (SyntaxError, FileNotFoundError):
+        pass
+    return 0.0, []
+
+
 def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
     """
     Thermodynamic analysis of the diff.
     Returns either ExergyPassed or ExergyFailed based on algebraic rules.
     """
-    g_points = 5  # default
+    g_points = 5
     e_points = 1.0
     l_points = 5
     a_points = 5
@@ -136,7 +180,6 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
     added = 0
     removed = 0
     
-    # Split the diff by file to analyze scope-specific additions
     files_diffs = diff_text.split("diff --git ")
     for file_diff in files_diffs:
         if not file_diff.strip():
@@ -144,7 +187,6 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
         lines = file_diff.splitlines()
         header = lines[0] if lines else ""
         
-        # Exclude self, tests, and demo files from strict pattern checks
         is_excluded = any(x in header for x in [
             "demo_exergy_poc.py", 
             "exergy_optimizer_agent.py", 
@@ -158,61 +200,20 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
         removed += len(removed_lines)
         
         if not is_excluded:
-            for line in added_lines:
-                # 1. Broad exceptions (INV_C5_07)
-                if re.search(r'except\s+Exception\b|except\s*:', line):
-                    print(f"DEBUG Match in {header}: {line}")
-                    e_points += 4.0
-                    msg = "Broad exception caught (INV_C5_07 violation)."
-                    reasons_e.append(msg)
-                    reasons_failed.append(msg)
-                    
-                # 2. Hardcoded secrets (INV_C5_02)
-                if re.search(r'(SECRET|PRIVATE_KEY|MASTER_LEDGER_KEY)\s*[:=]\s*["\']\w', line, re.IGNORECASE):
-                    e_points += 8.0
-                    msg = "Hardcoded key pattern found (INV_C5_02 violation)."
-                    reasons_e.append(msg)
-                    reasons_failed.append(msg)
-                    
-                # 3. Weak hashes (INV_C5_03)
-                if re.search(r'hashlib\.(md5|sha1)\b', line):
-                    e_points += 5.0
-                    msg = "Weak hashing primitives (MD5/SHA1) (INV_C5_03 violation)."
-                    reasons_e.append(msg)
-                    reasons_failed.append(msg)
+            e_add, l_add, r_e, r_l = _analyze_added_lines(added_lines, header)
+            e_points += e_add
+            l_points += l_add
+            reasons_e.extend(r_e)
+            reasons_l.extend(r_l)
+            reasons_failed.extend(r_e)
 
-                # 4. Typing/Strict conversions (INV_C5_10)
-                if re.search(r'bytes\((sk|sk\.public_key)\)', line):
-                    l_points += 3
-                    reasons_l.append("PyNaCl bytes serialization aligned with INV_C5_10.")
-
-                # 5. Relative symlink checks (INV_C5_12)
-                if "readlink" in line or "is_symlink" in line:
-                    l_points += 2
-                    reasons_l.append("Nexus package symlink validation (INV_C5_12).")
-            
-            # AST Complexity Limit Check (Límites Algébricos y Complejidad)
-            m = re.search(r'b/([^\s]+)', header)
-            if m:
-                filepath = m.group(1)
-                if filepath.endswith('.py'):
-                    try:
-                        with open(filepath, 'r') as f:
-                            tree = ast.parse(f.read())
-                        visitor = ComplexityVisitor()
-                        visitor.visit(tree)
-                        if visitor.max_depth > 4:
-                            e_points += 500.0
-                            msg = f"CRITICAL: Algebraic Limit Exceeded (Nesting Depth = {visitor.max_depth} > 4) in {filepath}."
-                            reasons_failed.append(msg)
-                            reasons_e.append(msg)
-                    except (SyntaxError, FileNotFoundError):
-                        pass  # Ignore parse errors for partial diffs or deleted files
-        else:
-            # If tests/checks are added, register autoloop credit
-            if any("test" in ln or "invariant" in ln for ln in added_lines):
-                a_points += 4
-                reasons_a.append("Autopoietic alignment of invariants (INV_C5_13).")
+            e_ast, r_ast = _check_ast_complexity(header)
+            e_points += e_ast
+            reasons_e.extend(r_ast)
+            reasons_failed.extend(r_ast)
+        elif any("test" in ln or "invariant" in ln for ln in added_lines):
+            a_points += 4
+            reasons_a.append("Autopoietic alignment of invariants (INV_C5_13).")
         
     if added > 100 and removed < 5:
         e_points += 1.5
@@ -239,6 +240,31 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
         
     return ExergyPassed(score=score, gelabp=gelabp, prov_hash="")
 
+def _extract_conv_id_from_file(filepath: Path) -> Optional[str]:
+    try:
+        content = filepath.read_text(encoding="utf-8")
+        if not content.startswith("---"):
+            return None
+        parts = content.split("---", 2)
+        if len(parts) < 3:
+            return None
+        m = re.search(r'conversation_id:\s*["\']?([0-9a-f\-]+)["\']?', parts[1])
+        return m.group(1).strip() if m else None
+    except OSError:
+        return None
+
+
+def _get_consolidated_ids() -> Set[str]:
+    consolidated_ids: Set[str] = set()
+    if not VAULT_DIR.exists():
+        return consolidated_ids
+    for f in VAULT_DIR.glob("*.md"):
+        cid = _extract_conv_id_from_file(f)
+        if cid:
+            consolidated_ids.add(cid)
+    return consolidated_ids
+
+
 def check_consolidation_need() -> ConsolidationDecision:
     """
     Checks brain folders and memory vault files to determine if consolidation is required.
@@ -246,20 +272,7 @@ def check_consolidation_need() -> ConsolidationDecision:
     if not BRAIN_DIR.exists():
         return Stable(last_timestamp=time.time())
         
-    consolidated_ids: Set[str] = set()
-    if VAULT_DIR.exists():
-        for f in VAULT_DIR.glob("*.md"):
-            try:
-                content = f.read_text(encoding="utf-8")
-                if content.startswith("---"):
-                    parts = content.split("---", 2)
-                    if len(parts) >= 3:
-                        m = re.search(r'conversation_id:\s*["\']?([0-9a-f\-]+)["\']?', parts[1])
-                        if m:
-                            consolidated_ids.add(m.group(1).strip())
-            except OSError:
-                continue
-
+    consolidated_ids = _get_consolidated_ids()
     unconsolidated_count = 0
     uuid_pattern = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
     
@@ -267,10 +280,7 @@ def check_consolidation_need() -> ConsolidationDecision:
         for entry in BRAIN_DIR.iterdir():
             if entry.is_dir() and uuid_pattern.match(entry.name):
                 conv_id = entry.name
-                if conv_id in consolidated_ids:
-                    continue
-                transcript = entry / ".system_generated/logs/transcript.jsonl"
-                if transcript.exists():
+                if conv_id not in consolidated_ids and (entry / ".system_generated/logs/transcript.jsonl").exists():
                     unconsolidated_count += 1
     except OSError:
         pass

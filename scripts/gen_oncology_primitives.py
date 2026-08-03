@@ -121,6 +121,25 @@ def write_if_changed(path: str, content: str) -> None:
     with open(path, 'w', encoding='utf-8') as f:
         f.write(content)
 
+def _format_genomic_mechanics(genomic_mechanics: dict[str, Any]) -> list[str]:
+    lines = ["      genomic_mechanics:"]
+    for k_mech, v_mech in genomic_mechanics.items():
+        if isinstance(v_mech, dict):
+            lines.append(f"        {k_mech}:")
+            for sub_k, sub_v in v_mech.items():
+                val_str = repr(sub_v) if not isinstance(sub_v, str) else q(sub_v)
+                lines.append(f"          {sub_k}: {val_str}")
+        elif isinstance(v_mech, list):
+            lines.append(f"        {k_mech}:")
+            for item in v_mech:
+                val_str = repr(item) if not isinstance(item, str) else q(item)
+                lines.append(f"          - {val_str}")
+        else:
+            val_str = repr(v_mech) if not isinstance(v_mech, str) else q(v_mech)
+            lines.append(f"        {k_mech}: {val_str}")
+    return lines
+
+
 def emit_yaml(recs: list[dict[str, Any]], path: str) -> None:
     lines = []
     lines.append('# CORTEX / BABYLON-60 :: Oncology Molecular Primitives Ontology')
@@ -153,18 +172,7 @@ def emit_yaml(recs: list[dict[str, Any]], path: str) -> None:
         lines.append(f"      reference: {q(r['reference'])}")
         lines.append(f"      confidence: {r['confidence']}")
         if 'genomic_mechanics' in r:
-            lines.append("      genomic_mechanics:")
-            for k_mech, v_mech in r['genomic_mechanics'].items():
-                if isinstance(v_mech, dict):
-                    lines.append(f"        {k_mech}:")
-                    for sub_k, sub_v in v_mech.items():
-                        lines.append(f"          {sub_k}: {repr(sub_v) if not isinstance(sub_v, str) else q(sub_v)}")
-                elif isinstance(v_mech, list):
-                    lines.append(f"        {k_mech}:")
-                    for item in v_mech:
-                        lines.append(f"          - {repr(item) if not isinstance(item, str) else q(item)}")
-                else:
-                    lines.append(f"        {k_mech}: {repr(v_mech) if not isinstance(v_mech, str) else q(v_mech)}")
+            lines.extend(_format_genomic_mechanics(r['genomic_mechanics']))
     write_if_changed(path, '\n'.join(lines) + '\n')
 
 def emit_python(recs: list[dict[str, Any]], path: str) -> None:

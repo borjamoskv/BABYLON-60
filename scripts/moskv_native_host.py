@@ -7,64 +7,97 @@ Protocol Specifications:
 - 32-bit unsigned little-endian integer length prefix (<I)
 - Max payload bound: 1 MiB (1,048,576 bytes)
 - Bounded sentinel-halting read loop (INV_C5_TURING_CASTRATION)
+- SHA-256 Cryptographic Payload Commitments (INV_C5_15)
 """
 
+import argparse
+import hashlib
 import json
 import logging
+import signal
 import struct
 import sys
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, BinaryIO, Optional
 
-MAX_PAYLOAD_BYTES = 1024 * 1024  # 1 MiB Chrome Native Messaging ceiling
+DEFAULT_MAX_PAYLOAD_BYTES = 1024 * 1024  # 1 MiB Chrome Native Messaging ceiling
+RUNNING = True
 
 
-def setup_logger() -> logging.Logger:
+def signal_handler(signum: int, _frame: Any) -> None:
+    """Handle termination signals gracefully (INV_C5_TURING_CASTRATION)."""
+    global RUNNING
+    RUNNING = False
+    logger = logging.getLogger("moskv_native_host")
+    logger.info("Signal %d received. Halting Native Host Transducer...", signum)
+
+
+def setup_logger(log_file: Optional[Path] = None) -> logging.Logger:
     """Initialize file logger (stdout is strictly reserved for binary IPC)."""
-    log_dir = Path.home() / "80_LOGS"
-    if not log_dir.exists():
-        log_dir = Path("/tmp")
-    log_path = log_dir / "moskv_native_host.log"
+    if log_file is None:
+        log_dir = Path.home() / "80_LOGS"
+        if not log_dir.exists():
+            log_dir = Path("/tmp")
+        log_file = log_dir / "moskv_native_host.log"
 
     logger = logging.getLogger("moskv_native_host")
     logger.setLevel(logging.INFO)
     if not logger.handlers:
-        handler = logging.FileHandler(log_path, encoding="utf-8")
+        handler = logging.FileHandler(log_file, encoding="utf-8")
         handler.setFormatter(logging.Formatter("[%(asctime)s] %(levelname)s: %(message)s"))
         logger.addHandler(handler)
     return logger
 
 
-def read_message_frame() -> Optional[dict[str, Any]]:
+def calculate_payload_commitment(raw_bytes: bytes) -> str:
+    """Compute 256-bit SHA-256 cryptographic payload hash (INV_C5_15)."""
+    return hashlib.sha256(raw_bytes).hexdigest()
+
+
+def read_message_frame(
+    stream: Optional[BinaryIO] = None,
+    max_bytes: int = DEFAULT_MAX_PAYLOAD_BYTES,
+) -> Optional[dict[str, Any]]:
     """Read a single binary framed message from stdin using Chrome Native IPC protocol."""
+    if stream is None:
+        stream = sys.stdin.buffer
+
     try:
-        header = sys.stdin.buffer.read(4)
+        header = stream.read(4)
         if len(header) < 4:
             return None
 
         (payload_length,) = struct.unpack("<I", header)
-        if payload_length > MAX_PAYLOAD_BYTES:
-            raise ValueError(f"Payload length {payload_length} exceeds max bound {MAX_PAYLOAD_BYTES}")
+        if payload_length > max_bytes:
+            raise ValueError(f"Payload length {payload_length} exceeds max bound {max_bytes}")
 
-        raw_payload = sys.stdin.buffer.read(payload_length)
+        raw_payload = stream.read(payload_length)
         if len(raw_payload) < payload_length:
             raise EOFError("Truncated binary payload stream")
 
-        return json.loads(raw_payload.decode("utf-8"))
+        commitment = calculate_payload_commitment(raw_payload)
+        payload = json.loads(raw_payload.decode("utf-8"))
+        payload["_sha256_commitment"] = commitment
+        return payload
     except (struct.error, json.JSONDecodeError, ValueError, EOFError) as exc:
         logger = logging.getLogger("moskv_native_host")
         logger.error("IPC Frame Unpacking Error: %s", exc)
         return None
 
 
-def send_message_frame(payload: dict[str, Any]) -> bool:
+def send_message_frame(payload: dict[str, Any], stream: Optional[BinaryIO] = None) -> bool:
     """Send a framed binary message to stdout using 32-bit LE length prefix."""
+    if stream is None:
+        stream = sys.stdout.buffer
+
     try:
-        encoded = json.dumps(payload).encode("utf-8")
+        # Exclude internal commitment from outgoing wire format if present
+        wire_payload = {k: v for k, v in payload.items() if not k.startswith("_")}
+        encoded = json.dumps(wire_payload).encode("utf-8")
         length_prefix = struct.pack("<I", len(encoded))
-        sys.stdout.buffer.write(length_prefix)
-        sys.stdout.buffer.write(encoded)
-        sys.stdout.buffer.flush()
+        stream.write(length_prefix)
+        stream.write(encoded)
+        stream.flush()
         return True
     except Exception as exc:
         logger = logging.getLogger("moskv_native_host")
@@ -75,7 +108,8 @@ def send_message_frame(payload: dict[str, Any]) -> bool:
 def process_extension_event(msg: dict[str, Any], logger: logging.Logger) -> None:
     """Dispatch extension event to Motor Causal handler."""
     status = msg.get("status")
-    logger.info("Ingested Extension Event [status=%s]", status)
+    commitment = msg.get("_sha256_commitment", "unknown")[:12]
+    logger.info("Ingested Extension Event [status=%s, hash=%s]", status, commitment)
 
     if status == "READY":
         logger.info("Extension operational state READY. Emitting GENERATE command...")
@@ -94,16 +128,28 @@ def process_extension_event(msg: dict[str, Any], logger: logging.Logger) -> None
         logger.warning("Unrecognized event payload status: %s", status)
 
 
+def parse_args() -> argparse.Namespace:
+    """Parse CLI arguments for Native Host Transducer."""
+    parser = argparse.ArgumentParser(description="MOSKV Native Host Transducer (Chrome Native Messaging IPC)")
+    parser.add_argument("--log-file", type=Path, default=None, help="Path to log file")
+    parser.add_argument("--max-bytes", type=int, default=DEFAULT_MAX_PAYLOAD_BYTES, help="Max IPC payload bound")
+    return parser.parse_args()
+
+
 def main() -> None:
     """Native Messaging Transducer loop (Turing-Incomplete sentinel halting)."""
-    logger = setup_logger()
-    logger.info("Initializing Motor Causal Native Host Transducer...")
+    args = parse_args()
+    logger = setup_logger(args.log_file)
+    logger.info("Initializing Motor Causal Native Host Transducer (max_bytes=%d)...", args.max_bytes)
 
-    # Bounded sentinel loop: terminates when stdin closes or framed read returns None
-    while (msg := read_message_frame()) is not None:
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+
+    # Bounded sentinel loop: terminates on EOF, None read, or signal halt
+    while RUNNING and (msg := read_message_frame(max_bytes=args.max_bytes)) is not None:
         process_extension_event(msg, logger)
 
-    logger.info("Native Host Transducer terminated gracefully (EOF received).")
+    logger.info("Native Host Transducer terminated gracefully.")
 
 
 if __name__ == "__main__":
