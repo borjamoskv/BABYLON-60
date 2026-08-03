@@ -7,6 +7,53 @@
 
 ---
 
+## 0. Axiomática Categórica de Identificación
+
+### 0.1 Principio de Identificación de Sistemas Parcialmente Observables
+Sea $S$ un sistema cuya implementación interna no es directamente observable.
+El conocimiento disponible sobre $S$ está constituido únicamente por el conjunto de experimentos ejecutados y sus resultados reproducibles.
+Formalmente,
+$$K(S) = \{(e_i, y_i)\}_{i=1}^n$$
+donde $e_i$ es un experimento e $y_i$ es una observación reproducible.
+No se asume ninguna propiedad interna de $S$ salvo aquellas que sean consecuencia lógica de dichas observaciones.
+
+### 0.2 Principio de No Identificabilidad
+Sea $I$ el espacio de implementaciones posibles y $O$ el espacio de observaciones.
+Existe una aplicación $F: I \to O$ que relaciona implementaciones con comportamientos observables.
+No se presupone que $F$ sea inyectiva. Por tanto, $F(i_1) = F(i_2)$ no implica $i_1 = i_2$.
+Toda afirmación sobre la implementación pertenece al espacio de hipótesis y requiere evidencia adicional.
+
+### 0.3 Definición de Hipótesis
+Una hipótesis no es una implementación. Es un subconjunto $H \subseteq I$ compatible con las observaciones actuales.
+El conocimiento consiste en reducir $|H|$. Nunca en seleccionar arbitrariamente un elemento de $H$.
+
+### 0.4 Axioma de Identificabilidad Limitada
+Dado un conjunto de operadores experimentales $E$, existen sistemas distintos que permanecen indistinguibles bajo toda secuencia finita de experimentos pertenecientes a $E$.
+Consecuencia: El mejor resultado posible puede ser reducir el espacio de hipótesis hasta una clase de equivalencia irreducible con los instrumentos disponibles, no aislar una única implementación.
+
+### 0.5 Objetivo Experimental y Utilidad
+Sea $U(e)$ la utilidad de un experimento:
+$$U(e) = \frac{\mathbb{E}[\Delta I(e)] \cdot R(e)}{C(e) \cdot N(e)}$$
+donde:
+- $\Delta I$: reducción esperada de incertidumbre.
+- $R$: reproducibilidad estimada.
+- $C$: coste.
+- $N$: sensibilidad al ruido.
+
+El siguiente experimento óptimo será $e^* = \arg\max U(e)$.
+
+### 0.6 Algoritmo General
+```text
+H ← hipótesis compatibles
+repeat
+    e ← SelectExperiment(H)
+    y ← Execute(e)
+    H ← Update(H,y)
+until StopCriterion(H)
+```
+
+---
+
 ## 1. El Salto Paradigmático: De la Introspección a la Identificación de Sistemas
 
 El **Protocolo Ω** resuelve el axioma fatal en la evaluación de arquitecturas cognitivas estocásticas (LLMs): **la ilusión de la introspección**.
