@@ -260,7 +260,9 @@ Las tecnologías de diseño contemporáneas se derivan como corolarios funtorial
 
 ## 7. Falsabilidad Popperiana de la Teoría
 
-Ninguna teoría científica merece el nombre de tal si no especifica las condiciones bajo las cuales queda refutada. La presente teoría es falsable por los siguientes contraejemplos potenciales:
+Ninguna teoría científica merece el nombre de tal si no especifica las condiciones bajo las cuales queda refutada. La presente teoría es falsable empíricamente, y delega su verificación metodológica al **[Protocolo Ω (Identificación Experimental de Sistemas Cognitivos)](CTM_OMEGA_PROTOCOL.md)**, el cual abandona la introspección hermenéutica en favor del diseño de experimentos paramétricos.
+
+La teoría es falsable por los siguientes contraejemplos potenciales evaluados a través del Protocolo Ω:
 
 | Predicción Falsable | Refutación Empírica que la Destruiría |
 | :--- | :--- |
