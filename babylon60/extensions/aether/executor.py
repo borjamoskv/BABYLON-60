@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """MOSKV-Aether - Executor Agent.
 
 Iterative tool-calling loop. Parses <tool_call> XML from LLM output

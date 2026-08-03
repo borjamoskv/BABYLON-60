@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 CORTEX - Ouroboros-Ω Gate.
 The thermodynamic enforcer for architectural scaling.

@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """The Code Smith (Safe Self-Evolution).
 
 ASE pipeline: REQUEST → DESIGN → EDIT → VALIDATE → TEST → COMMIT.

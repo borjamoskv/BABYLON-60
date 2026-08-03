@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Epistemic Membrane Monitor - autonomous self-healing based on certainty derivative.
 
 Monitors the degradation of epistemic confidence across the knowledge base.

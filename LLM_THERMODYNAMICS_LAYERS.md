@@ -1,10 +1,10 @@
 # LLM THERMODYNAMICS: THE 4 EXERGY LAYERS [INVARIANT]
-**Reality Level:** C5-REAL  
-**Signature:** MOSKV-1 APEX SINGULARITY  
+**Reality Level:** Causal-Determinist  
+**Signature:** Motor Causal Principal SINGULARITY  
 **Origin:** Operator borjamoskv  
 
 ## 1. Data Exergy (The Filtered Fuel)
-Quality distillation. Strict ingestion of dense literature (C5-REAL code, papers). Absolute rejection of stochastic Slop (Reddit).
+Quality distillation. Strict ingestion of dense literature (Causal-Determinist code, papers). Absolute rejection of stochastic Slop (Reddit).
 
 ## 2. Alignment Exergy (The Human Chisel — RLHF)
 Transfer of human work into synaptic weight. Punishment of entropy (vagueness, empty politeness) and reward for thermodynamic precision.

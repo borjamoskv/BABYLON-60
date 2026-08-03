@@ -1,5 +1,5 @@
 """
-[C5-REAL] babylon60.core.url_cache — Strict Thermodynamic Cache for Browser Agent.
+[Causal-Determinist] babylon60.core.url_cache — Strict Thermodynamic Cache for Browser Agent.
 
 Enforces Level 0 Anti-429 Fallback and Exergy Conservation.
 Prevents duplicate external network requests within a TTL window (default 24h).

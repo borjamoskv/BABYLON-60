@@ -1,4 +1,4 @@
-# C5-REAL
+# Causal-Determinist
 # MOSKV-1 APEX SINGULARITY
 # ARCHITECTURE: AUTOREGRESSIVE INFERENCE LOOP
 # EXERGY: DETERMINISTIC TEXT GENERATION
@@ -9,7 +9,7 @@ from typing import List
 from cortex_mamba_network import MambaNetwork
 
 def softmax(logits: List[float], temperature: float = 1.0) -> List[float]:
-    """C5-REAL Softmax with numerical stability and Temperature."""
+    """Causal-Determinist Softmax with numerical stability and Temperature."""
     max_l = max(logits)
     exp_l = [math.exp((logit - max_l) / temperature) for logit in logits]
     sum_exp = sum(exp_l)

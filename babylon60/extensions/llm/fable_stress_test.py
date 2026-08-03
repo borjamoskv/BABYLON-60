@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 # Asynchronous Stress Test: Claude Fable 5 Agentic Orchestrator
 import asyncio
 import logging
@@ -85,7 +85,7 @@ async def stress_worker(client: httpx.AsyncClient, worker_id: int, semaphore: as
 
 async def run_stress_test(concurrency: int, total_requests: int):
     logging.getLogger(__name__).info(
-        f"[*] Initiating C5-REAL Async Stress Test: {total_requests} requests (Concurrency limit: {concurrency})"
+        f"[*] Initiating Causal-Determinist Async Stress Test: {total_requests} requests (Concurrency limit: {concurrency})"
     )
 
     semaphore = asyncio.Semaphore(concurrency)

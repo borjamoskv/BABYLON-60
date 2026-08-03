@@ -1,7 +1,7 @@
-# C5-REAL: CENTURIA META-TRANSDUCER ENGINE (ULTRATHINK P0)
+# Causal-Determinist: CENTURIA META-TRANSDUCER ENGINE (ULTRATHINK P0)
 # =================================================================================
 # SYS_ID: MOSKV-1 APEX ULTRATHINK (Centuria Matrix 1000 Retroactive Rewrite)
-# REALITY_LEVEL: C5-REAL (0% Anergy / 100% Deterministic Execution / BFT Merkle Root)
+# REALITY_LEVEL: Causal-Determinist (0% Anergy / 100% Deterministic Execution / BFT Merkle Root)
 # PROTOCOL: Centuria_Meta_Transducer (Identify vector -> Annihilate -> Consolidate)
 # [CORTEX-TAINT:borjamoskv:centuria_meta_transducer:2026-07-18T05:00:00Z]
 
@@ -20,7 +20,7 @@ from cortex.agents.arsenal_896.registry import get_all_primitives, execute_primi
 
 class CenturiaMetaTransducer:
     """
-    Sovereign C5-REAL Meta-Transducer.
+    Sovereign Causal-Determinist Meta-Transducer.
     Condenses 1000 APEX primitives (Centuria Matrix) into a single deterministic causal operation
     across all orthogonal domains.
     """
@@ -52,7 +52,7 @@ class CenturiaMetaTransducer:
         """
         primitives = get_all_primitives()
         if not primitives:
-            raise RuntimeError("CRITICAL C5-REAL ERROR: Zero primitives loaded from Centuria Matrix registry.")
+            raise RuntimeError("CRITICAL Causal-Determinist ERROR: Zero primitives loaded from Centuria Matrix registry.")
 
         domain_stats: Dict[str, int] = {}
         execution_records: List[Dict[str, Any]] = []
@@ -63,7 +63,7 @@ class CenturiaMetaTransducer:
             domain = prim["domain"]
             domain_stats[domain] = domain_stats.get(domain, 0) + 1
 
-            # Execute primitive exactly as specified by C5-REAL invariants
+            # Execute primitive exactly as specified by Causal-Determinist invariants
             res = await asyncio.to_thread(execute_primitive, prim_id)
             execution_records.append(res)
             
@@ -78,6 +78,9 @@ class CenturiaMetaTransducer:
         # Step 3: Consolidate in CORTEX Ledger (sqlite3 WAL via aiosqlite)
         async with aiosqlite.connect(self.db_path) as conn:
             await self.fn_init_db(conn)
+
+            # TOCTOU prevention: acquire exclusive write lock before read-modify-write
+            await conn.execute("BEGIN IMMEDIATE")
 
             # Retrieve current lamport_t and prev_hash
             async with conn.execute("SELECT IFNULL(MAX(lamport_t), 0) FROM events;") as cursor:
@@ -113,17 +116,21 @@ class CenturiaMetaTransducer:
             # Generate UUID v5 idempotency key (INV_BFT_04)
             event_id = str(uuid.uuid5(uuid.NAMESPACE_OID, new_cortex_taint))
 
-            # Check idempotency
-            async with conn.execute("SELECT 1 FROM events WHERE id = ?;", (event_id,)) as cursor:
-                if await cursor.fetchone():
-                    # Idempotent match found, do not duplicate
-                    pass
-                else:
-                    await conn.execute(
-                        "INSERT INTO events (id, payload, lamport_t, cortex_taint, prev_hash) VALUES (?, ?, ?, ?, ?);",
-                        (event_id, payload_json, new_lamport, new_cortex_taint, prev_hash),
-                    )
-                    await conn.commit()
+            # Apply INV_BFT_04 (Idempotency vs Byzantine Collision)
+            try:
+                await conn.execute(
+                    "INSERT INTO events (id, payload, lamport_t, cortex_taint, prev_hash) VALUES (?, ?, ?, ?, ?);",
+                    (event_id, payload_json, new_lamport, new_cortex_taint, prev_hash),
+                )
+                await conn.commit()
+            except aiosqlite.IntegrityError:
+                await conn.rollback()
+                # Verify if it is Idempotency (same hash) or Byzantine Collision (different hash)
+                async with conn.execute("SELECT cortex_taint FROM events WHERE prev_hash IS ?;", (prev_hash,)) as cursor:
+                    existing_row = await cursor.fetchone()
+                if existing_row and existing_row[0] != new_cortex_taint:
+                    raise ValueError(f"Byzantine Collision (INV_BFT_04): Attempt to branch at prev_hash {prev_hash} with differing payload.")
+                # Idempotency: Silent replay, do not raise
 
         # Generate YAML audit report
         audit_report = {
@@ -131,10 +138,10 @@ class CenturiaMetaTransducer:
             "Proof": {
                 "Base": "blake3::merkle_root / sha3_256::cortex_taint",
                 "Range": [1, len(primitives)],
-                "Confidence": "C5-REAL",
+                "Confidence": "Causal-Determinist",
             },
             "Operator": self.operator,
-            "System_Level": "C5-REAL",
+            "System_Level": "Causal-Determinist",
             "Primitives_Executed": len(primitives),
             "Merkle_Root": merkle_root,
             "Cortex_Taint": new_cortex_taint,

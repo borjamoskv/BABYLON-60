@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 from __future__ import annotations
 
 from typing import Any, Dict
@@ -23,7 +23,7 @@ class ShadowRouter:
     """
     Router de sombra con recibos proof-of-route.
 
-    C5-REAL: los commitments son HMAC con clave inyectada por el operador
+    Causal-Determinist: los commitments son HMAC con clave inyectada por el operador
     (CORTEX_SHADOW_HMAC_KEY o CORTEX_MASTER_KEY). Cero fallback estático.
     La ejecución es simulada (C4-SIM) y se declara como tal en los payloads:
     ningún campo fabrica procedencia que no existe.

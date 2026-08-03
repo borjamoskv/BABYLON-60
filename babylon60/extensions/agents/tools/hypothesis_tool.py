@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Hypothesis Engine Tool for DIABLO-Ω.
 
 Custom agent tool for the R&D Cognitive Cycle. Persists

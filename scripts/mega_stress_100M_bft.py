@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized Stress Test Engine
+# [Causal-Determinist] Exergy-Maximized Stress Test Engine
 """
 100,000,000 STRESS TEST ENGINE — CORTEX PERSIST BFT LEDGER
 ===========================================================
@@ -60,7 +60,7 @@ def run_stress_chunk(ledger: CortexPersistLedger, chunk_size: int, chunk_idx: in
     }
 
 def main():
-    logger.info("⚡ [MEGA STRESS 100M] Iniciando Suite de Estrés Masivo C5-REAL...")
+    logger.info("⚡ [MEGA STRESS 100M] Iniciando Suite de Estrés Masivo Causal-Determinist...")
     
     if DB_STRESS_PATH.exists():
         for ext in ["", "-wal", "-shm"]:
@@ -71,7 +71,7 @@ def main():
     ledger = CortexPersistLedger(DB_STRESS_PATH)
     
     # 1. Estrés de Rendimiento y Rendimiento por Chunks
-    TOTAL_TARGET = 100_000 # Benchmark representativo C5-REAL en caliente
+    TOTAL_TARGET = 100_000 # Benchmark representativo Causal-Determinist en caliente
     CHUNK_SIZE = 10_000
     num_chunks = TOTAL_TARGET // CHUNK_SIZE
     
@@ -116,7 +116,7 @@ def main():
             f.unlink()
             
     print("\n" + "="*60)
-    print("🏆 C5-REAL 100M STRESS BENCHMARK SUMMARY")
+    print("🏆 Causal-Determinist 100M STRESS BENCHMARK SUMMARY")
     print(f"Total Transactions Processed : {TOTAL_TARGET:,}")
     print(f"Total Execution Time         : {total_elapsed:.4f} s")
     print(f"Average Throughput           : {avg_throughput:,.2f} tx/s")

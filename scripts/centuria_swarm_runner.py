@@ -87,7 +87,7 @@ async def main():
         logger.info(f"✅ Executed {len(results)} ULTRATHINK agent tasks in parallel with 0 Worktree Disk Overhead!")
         
         completed_count = sum(1 for r in results if r["status"] == "ALIVE_COMPLETED")
-        logger.info(f"🏆 C5-REAL Attestation: {completed_count}/100 agentes ULTRATHINK finalizados exitosamente.")
+        logger.info(f"🏆 Causal-Determinist Attestation: {completed_count}/100 agentes ULTRATHINK finalizados exitosamente.")
         
     finally:
         await actor.stop()

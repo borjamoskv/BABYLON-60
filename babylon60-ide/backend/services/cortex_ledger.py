@@ -146,11 +146,16 @@ def append_event(
             conn.execute("COMMIT")
         except sqlite3.IntegrityError:
             conn.execute("ROLLBACK")
-            # INV_BFT_04: duplicate idempotency key — reject silently, return existing.
+            # INV_BFT_04: verify idempotency vs byzantine collision
             existing = conn.execute(
                 "SELECT * FROM cortex_events WHERE event_id = ?", (event_id,)
             ).fetchone()
             if existing:
+                if existing["current_hash"] != current_hash:
+                    raise ValueError(
+                        f"[INV_BFT_04] Byzantine Collision: event_id {event_id} exists "
+                        f"with hash {existing['current_hash']} but new payload produces {current_hash}"
+                    )
                 return _row_to_event(existing)
             raise
 

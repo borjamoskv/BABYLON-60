@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized Zero-Anergy Binary Inter-Agent IPC
+# [Causal-Determinist] Exergy-Maximized Zero-Anergy Binary Inter-Agent IPC
 """
 ZERO-ANERGY BINARY INTER-AGENT IPC & TRANSDUCER
 ===============================================
@@ -21,7 +21,7 @@ VERSION = 1
 
 def pack_agent_message(sender: str, recipient: str, payload: Dict[str, Any], lamport_t: int) -> bytes:
     """
-    Empaqueta un mensaje inter-agente en formato binario compacto C5-REAL.
+    Empaqueta un mensaje inter-agente en formato binario compacto Causal-Determinist.
     Fricción de parseo mínima usando CBOR puro en lugar de JSON.
     """
     payload_raw = cbor2.dumps(payload)

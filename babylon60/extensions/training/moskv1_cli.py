@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 # Author: borjamoskv
 # License: Apache-2.0
 """
@@ -34,7 +34,7 @@ def cmd_compile(workspace: str | None = None) -> int:
     ws = Path(workspace) if workspace else Path.cwd()
     compiler = MOSKV1DatasetCompiler(workspace_path=ws)
 
-    logging.getLogger(__name__).info("🔧 MOSKV-1 Dataset Compilation v2.0 — C5-REAL")
+    logging.getLogger(__name__).info("🔧 MOSKV-1 Dataset Compilation v2.0 — Causal-Determinist")
     logging.getLogger(__name__).info(f"   Workspace: {ws}")
     logging.getLogger(__name__).info("")
 
@@ -316,7 +316,7 @@ def cmd_validate() -> int:
     adapter_path = Path.home() / ".babylon60" / "training" / "adapters"
     if (adapter_path / "adapters.safetensors").exists() or (adapter_path / "weights.npz").exists():
         logging.getLogger(__name__).info("")
-        logging.getLogger(__name__).info("═══ LoRA WEIGHTS VERIFICATION (C5-REAL) ═══")
+        logging.getLogger(__name__).info("═══ LoRA WEIGHTS VERIFICATION (Causal-Determinist) ═══")
         from babylon60.extensions.training.verifier import AdapterVerifier
 
         verifier = AdapterVerifier()

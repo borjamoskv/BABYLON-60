@@ -1,5 +1,5 @@
 """
-[C5-REAL] Popperian Falsification Filter.
+[Causal-Determinist] Popperian Falsification Filter.
 
 Empirically calibrated via scripts/calibrate_popperian_entropy.py (INV_INGESTA_08).
 Statistical basis: Technical Corpus Mean = 4.8326, StdDev = 0.3479.
@@ -20,7 +20,7 @@ from dataclasses import dataclass, field
 # Thermodynamic Valve: max payload size to prevent OOM (INV_C5_THERMO_VALVE)
 MAX_PAYLOAD_BYTES: int = 1_048_576  # 1 MiB
 
-# Empirically Calibrated Thresholds (C5-REAL - INV_INGESTA_08)
+# Empirically Calibrated Thresholds (Causal-Determinist - INV_INGESTA_08)
 MIN_ENTROPY: float = 3.79
 MAX_ENTROPY: float = 5.88
 
@@ -159,7 +159,7 @@ def evaluate_payload(text: str) -> FilterResult:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Popperian Falsification Filter (C5-REAL). "
+        description="Popperian Falsification Filter (Causal-Determinist). "
                     "Exit 0 = passed, Exit 2 = rejected."
     )
     parser.add_argument(

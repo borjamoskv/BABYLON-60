@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """AGY2 Planner Injector Monitor.
 
 Detects AGY2 planning mode execution (implementation_plan.md) and
@@ -128,7 +128,7 @@ class AGY2PlannerMonitor:
                 return False
 
             # Format injection
-            injection = "\n\n## 🧠 CORTEX Semantic Context (Auto-Injected by C5-REAL)\n\n"
+            injection = "\n\n## 🧠 CORTEX Semantic Context (Auto-Injected by Causal-Determinist)\n\n"
             injection += "> [!NOTE]\n> The following verified facts were retrieved from CORTEX Memory regarding your goal.\n\n"
 
             for fact in results:

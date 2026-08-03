@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Hydra Chaos Engine (Audit Stream L1 Siege).
 
 Orchestrates simulated failures on external dependencies (Redis, APIs, etc.)

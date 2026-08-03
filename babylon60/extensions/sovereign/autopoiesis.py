@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 # cortex/sovereign/autopoiesis.py
 """Autopoiesis module for Sovereign Agentic Intelligence.
 

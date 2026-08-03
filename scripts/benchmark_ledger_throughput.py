@@ -14,7 +14,7 @@ async def run_benchmark(iterations: int = 10000) -> None:
     actor: BFTLedgerActor = BFTLedgerActor(db_path)
     await actor.start()
 
-    print(f"⚡ [C5-REAL] Ignición de Benchmark: {iterations} transacciones WAL")
+    print(f"⚡ [Causal-Determinist] Ignición de Benchmark: {iterations} transacciones WAL")
 
     start_time: float = time.perf_counter()
 

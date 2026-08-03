@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 macOS Security Control Domain
 Audits and verifies 6 critical subsystems: Gatekeeper, SIP, FileVault, Firewall, XProtect, Ports.
@@ -26,7 +26,7 @@ class SecurityState:
 
 
 class SecurityControl:
-    """C5-REAL Security Auditor for macOS.
+    """Causal-Determinist Security Auditor for macOS.
 
     Verifies physical system state by interacting directly with macOS
     security binaries and parsing system plists.

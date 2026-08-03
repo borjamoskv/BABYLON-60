@@ -1,5 +1,5 @@
 use c5real::exergy_bridge_client::ExergyBridgeClient;
-use c5real::{LedgerRequest, ExergyState};
+use c5real::LedgerRequest;
 use std::io::Write;
 use std::time::Instant;
 

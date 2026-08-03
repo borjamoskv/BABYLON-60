@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """MOSKV-Aether - Main AetherAgent orchestrator.
 
 Orchestrates the 4-agent loop:

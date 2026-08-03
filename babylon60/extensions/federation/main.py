@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Federated Engine (Tenant Sharding).
 
 Routes operations to per-tenant .db files. Each shard is a full CortexEngine.

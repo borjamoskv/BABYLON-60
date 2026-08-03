@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Sovereign Dashboard - FastAPI endpoints.
 
 Exposes the sovereign power level, dimension breakdown, security

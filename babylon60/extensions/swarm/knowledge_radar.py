@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Knowledge Radar (NightShift Target Discovery).
 
 Discovers crystallization targets from 3 sovereign sources:

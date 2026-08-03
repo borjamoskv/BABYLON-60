@@ -99,7 +99,7 @@ def main() -> None:
         print(f"\n[CRITICAL ALERT] {report['violations_found']} OPSEC/C2/Plaintext violations detected!")
         sys.exit(1)
     else:
-        print('\n[SUCCESS] C5-REAL OPSEC Audit Clean. Zero plaintext secrets or unverified relays detected.')
+        print('\n[SUCCESS] Causal-Determinist OPSEC Audit Clean. Zero plaintext secrets or unverified relays detected.')
         sys.exit(0)
 
 

@@ -1,5 +1,5 @@
 """
-C5-REAL Genomics Transducer Package (`babylon60.genomics`).
+Causal-Determinist Genomics Transducer Package (`babylon60.genomics`).
 Provides quantitative biomarker evaluation (TMB, APOBEC, HRD, ecDNA), coordinate hygiene,
 sequence validation, and state transduction into the 300-primitive oncological Boolean network.
 """

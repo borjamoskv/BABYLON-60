@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 from typing import Any
 
 from llama_index.core.callbacks.base_handler import (
@@ -16,7 +16,7 @@ from babylon60.engine import CortexEngine
 
 class ExergyFilter(BaseNodePostprocessor):
     """
-    C5-REAL Exergy Filter for RAG nodes.
+    Causal-Determinist Exergy Filter for RAG nodes.
     Aniquila la entropía (nodos basura) antes de que contaminen la inferencia.
     "Elegir es CERRAR puertas."
     """
@@ -39,7 +39,7 @@ class ExergyFilter(BaseNodePostprocessor):
 
 class CortexIndexCallback(BaseCallbackHandler):
     """
-    C5-REAL Cryptographic tracing of LlamaIndex RAG retrieval paths.
+    Causal-Determinist Cryptographic tracing of LlamaIndex RAG retrieval paths.
     """
 
     def __init__(self, engine: CortexEngine, agent_id: str):

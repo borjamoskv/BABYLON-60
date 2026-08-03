@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Obsidian Vault Export.
 
 Exports the entire CORTEX memory as an interconnected Obsidian vault.

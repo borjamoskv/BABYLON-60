@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 from datetime import datetime
 
 from pydantic import BaseModel, Field

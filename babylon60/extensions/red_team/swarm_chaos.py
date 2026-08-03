@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 import asyncio
 import logging
 import random
@@ -61,15 +61,19 @@ class RedTeamSwarm:
         logger.info("Red Team Swarm: %s survived chaos injection.", target_func.__name__)
         return False
 
-    async def chaos_loop(self, interval_seconds: int = 3600):
+    async def chaos_loop(self, interval_seconds: int = 3600, stop_event: asyncio.Event | None = None):
         """
-        Infinite loop of random failure injections (The Ouroboros Nightmare).
+        Bounded chaos injection loop (The Castrated Ouroboros).
 
         Ω₅: Stress is fuel. The system requires constant siege to evolve.
+        Terminates deterministically on stop_event.set() or asyncio.CancelledError.
+        INV_C5_TURING_CASTRATION compliant.
         """
-        logger.info("🦾 [RED-TEAM] Chaos Swarm Ignited. Starting Ouroboros Loop (Ω₅).")
+        if stop_event is None:
+            stop_event = asyncio.Event()
+        logger.info("🦾 [RED-TEAM] Chaos Swarm Ignited. Starting Bounded Chaos Loop (Ω₅).")
 
-        while True:
+        while not stop_event.is_set():
             self._chaos_count += 1
             targets = self.discovery.discover()
 
@@ -108,4 +112,10 @@ class RedTeamSwarm:
             jitter = random.uniform(0.8, 1.2)
             sleep_time = interval_seconds * jitter
             logger.info("🦾 [RED-TEAM] Retreating. Next siege in %.1f seconds.", sleep_time)
-            await asyncio.sleep(sleep_time)
+            try:
+                await asyncio.wait_for(stop_event.wait(), timeout=sleep_time)
+                break  # stop_event fired during inter-siege sleep
+            except asyncio.TimeoutError:
+                pass  # normal inter-siege cadence
+            except asyncio.CancelledError:
+                break

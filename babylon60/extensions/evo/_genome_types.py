@@ -1,7 +1,7 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """FitnessRecord, Lineage, MutationType, and StrategyGenome definition.
 
-Reality Level: C5-REAL
+Reality Level: Causal-Determinist
 """
 
 from __future__ import annotations

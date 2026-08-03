@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """SAP OData Client.
 
 Async HTTP client for SAP OData V2 services.

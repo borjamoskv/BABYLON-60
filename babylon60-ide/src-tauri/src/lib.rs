@@ -26,6 +26,7 @@ unsafe impl Sync for IpcHandle {}
 
 struct AppState {
     ledger: Mutex<CortexLedger>,
+    #[allow(dead_code)]
     ipc: IpcHandle,
 }
 

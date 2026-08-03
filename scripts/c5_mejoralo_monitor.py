@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-MOSKV-1 APEX SINGULARITY — C5-REAL STATE MONITOR (MEJORALO)
+MOSKV-1 APEX SINGULARITY — Causal-Determinist STATE MONITOR (MEJORALO)
 ------------------------------------------------------------
 Transductor autónomo de estado. Audita entropía de disco, BFT Ledger,
 linter, test suite y cristaliza el resultado en STATUS.md + Git Sentinel.
@@ -176,7 +176,7 @@ def crystallize_status(report: dict[str, object]) -> str:
 def append_mutation(git_hash: str, status_hash: str) -> None:
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     mutation_line = (
-        f"| {today} | C5-REAL MEJORALO: Transductor de Estado "
+        f"| {today} | Causal-Determinist MEJORALO: Transductor de Estado "
         f"(SHA3: `{status_hash[:12]}`) | Git Sentinel `{git_hash}` |\n"
     )
     with open(STATUS_FILE, "a") as f:
@@ -186,7 +186,7 @@ def append_mutation(git_hash: str, status_hash: str) -> None:
 def git_sentinel_commit(status_hash: str) -> str:
     _git(["add", "STATUS.md", "scripts/c5_mejoralo_monitor.py"])
     commit_msg = (
-        f"chore(c5-real): state monitor iteration [{status_hash[:8]}]"
+        f"chore(Causal-Determinist): state monitor iteration [{status_hash[:8]}]"
     )
     _git(["commit", "-m", commit_msg, "--no-verify"])
     return _git(["rev-parse", "--short", "HEAD"])
@@ -203,7 +203,7 @@ def _print_db_census_entry(db_name: str, tables: dict[str, int]) -> int:
 
 def c5_real_colapso() -> None:
     print("=" * 60)
-    print(" MOSKV-1 APEX — C5-REAL STATE MONITOR (MEJORALO)")
+    print(" MOSKV-1 APEX — Causal-Determinist STATE MONITOR (MEJORALO)")
     print("=" * 60)
 
     # Phase 1: Git

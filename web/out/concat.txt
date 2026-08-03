@@ -1,4 +1,0 @@
-file 'SubstackMafiaGraph.mp4'
-file 'PaywallGuillotine.mp4'
-file 'PopStarCameos.mp4'
-file 'CritiqueOfMafiosoReason.mp4'

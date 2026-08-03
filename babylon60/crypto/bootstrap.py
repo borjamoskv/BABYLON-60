@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 CORTEX-PERSIST Bootstrap Module.
 Generates Ed25519 identity and auto-signs the GENESIS block.
@@ -45,7 +45,7 @@ class IdentityBootstrap:
         if count > 0:
             return  # Already bootstrapped
 
-        logger.info("C5-REAL: Bootstrapping CORTEX-PERSIST Genesis block...")
+        logger.info("Causal-Determinist: Bootstrapping CORTEX-PERSIST Genesis block...")
         private_key, priv_pem, pub_pem = IdentityBootstrap.generate_identity()
 
         await conn.execute("""
@@ -91,4 +91,4 @@ class IdentityBootstrap:
             ),
         )
         await conn.commit()
-        logger.info("C5-REAL: Genesis block successfully injected.")
+        logger.info("Causal-Determinist: Genesis block successfully injected.")

@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Cryptographic Provider Architecture.
 Decouples and centralizes hashing, signatures, key derivation, and randomness

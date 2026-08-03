@@ -271,13 +271,13 @@ class AxiomVerifier:
     # === EPISTEMIC AXIOMS ===
 
     def verify_epi_verbatim_requirement(self, attestations: List[Dict[str, str]]) -> None:
-        """AX-EPI-1: C5-REAL attestations must have non-empty verbatim extracts."""
+        """AX-EPI-1: Causal-Determinist attestations must have non-empty verbatim extracts."""
         violations = []
         for a in attestations:
-            if a.get("status") == "C5-REAL" and not a.get("extract"):
-                violations.append(f"Attestation {a.get('id')} claims C5-REAL without verbatim extract")
+            if a.get("status") == "Causal-Determinist" and not a.get("extract"):
+                violations.append(f"Attestation {a.get('id')} claims Causal-Determinist without verbatim extract")
         self.record("AX-EPI-1 (Requisito de Evidencia Verbatim)", len(violations) == 0,
-                     f"Violations: {violations}" if violations else "All C5-REAL attestations hold verbatim evidence")
+                     f"Violations: {violations}" if violations else "All Causal-Determinist attestations hold verbatim evidence")
 
     def verify_epi_success_rate_degradation(self, success_rate: float, attestations: List[Dict[str, str]]) -> None:
         """AX-EPI-2: 100% success rate forces UNBACKED status."""
@@ -439,9 +439,9 @@ def main() -> None:
     v.verify_thermal_hysteresis([0.0, 400.0, 800.0])
 
     # Epistemic Axioms (Falsification Check)
-    # Escenario válido: Tasa de éxito < 1.0, atestación C5-REAL incluye extracto verbatim.
+    # Escenario válido: Tasa de éxito < 1.0, atestación Causal-Determinist incluye extracto verbatim.
     valid_attestations = [
-        {"id": "A1", "status": "C5-REAL", "extract": "15% bugs detectable"},
+        {"id": "A1", "status": "Causal-Determinist", "extract": "15% bugs detectable"},
         {"id": "A2", "status": "REJECTED", "extract": ""}
     ]
     v.verify_epi_verbatim_requirement(valid_attestations)

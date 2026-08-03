@@ -1,5 +1,5 @@
 """
-C5-REAL Genomic Evaluation Engine.
+Causal-Determinist Genomic Evaluation Engine.
 Performs quantitative calculations for Tumor Mutational Burden (TMB), APOBEC Mutational Signature enrichment,
 Homologous Recombination Deficiency (HRD), and ecDNA Transcriptional Leverage.
 """
@@ -17,7 +17,7 @@ from .models import (
 
 class GenomicEvaluationEngine:
     """
-    Deterministic C5-REAL mathematical engine for oncological genomic biomarker calculation.
+    Deterministic Causal-Determinist mathematical engine for oncological genomic biomarker calculation.
     """
 
     @staticmethod

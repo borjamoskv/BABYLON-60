@@ -18,7 +18,7 @@ def mock_network_fetcher(url: str) -> str:
     )
 
 def run_test():
-    print("=== [C5-REAL] Verificación End-to-End del BrowserResearchAgent SDK ===")
+    print("=== [Causal-Determinist] Verificación End-to-End del BrowserResearchAgent SDK ===")
     
     agent = BrowserResearchAgent()
     taint = "session_bft_audit_001"
@@ -44,7 +44,7 @@ def run_test():
     print("\n3. Fetch URL Hype (Rechazo Popperiano):", res3["status"], "| Motivo:", res3.get("reason"))
     assert res3["status"] == "REJECTED"
     
-    print("\n[SUCCESS] BrowserResearchAgent SDK 100% Verificado en C5-REAL.")
+    print("\n[SUCCESS] BrowserResearchAgent SDK 100% Verificado en Causal-Determinist.")
 
 if __name__ == "__main__":
     run_test()

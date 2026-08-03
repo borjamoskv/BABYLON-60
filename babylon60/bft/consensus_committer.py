@@ -1,4 +1,4 @@
-# [C5-REAL] BFT consensus committer — Operador ortogonal (C) puro.
+# [Causal-Determinist] BFT consensus committer — Operador ortogonal (C) puro.
 # No valida matemáticamente. Solo muta disco y persiste ledger (WAL).
 import sqlite3
 from typing import Any, Dict

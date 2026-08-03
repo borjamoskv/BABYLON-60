@@ -1,6 +1,6 @@
 import asyncio
 
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 import logging
 from typing import TYPE_CHECKING, Optional
 

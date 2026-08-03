@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """GitHub Real-Time Auditor Daemon (CodeQL & Issues).
 
 Pollea asíncronamente el API de GitHub (vía CLI `gh`) para buscar Alertas de Code Scanning
@@ -20,7 +20,7 @@ logger = logging.getLogger("babylon60_extensions.swarm.github_auditor")
 
 
 class GitHubAuditorDaemon:
-    """Real-time C5-REAL Daemon for mitigating GitHub Issues & CodeQL alerts."""
+    """Real-time Causal-Determinist Daemon for mitigating GitHub Issues & CodeQL alerts."""
 
     def __init__(
         self, owner: str, repo: str, poll_interval_s: int = 60, tenant_id: str = "default"
@@ -92,7 +92,7 @@ class GitHubAuditorDaemon:
             result_code = await swarm.refactor_file(file_path=file_path, findings=[finding_str])
 
             if result_code:
-                # Escribimos el AST mutado (C5-REAL)
+                # Escribimos el AST mutado (Causal-Determinist)
                 file_path.write_text(result_code, encoding="utf-8")
                 logger.info("✅ [AUDITOR] AST Mutado para CodeQL #%s.", alert_num)
 
@@ -126,7 +126,7 @@ class GitHubAuditorDaemon:
             logger.warning("⚠️ [SENTINEL] No hubo mutación o falló el commit.")
 
     async def daemon_loop(self) -> None:
-        """Bucle en tiempo real C5-REAL."""
+        """Bucle en tiempo real Causal-Determinist."""
         logger.info(
             "👁️‍🗨️ [AUDITOR] Ouroboros Real-Time Auditor activado (%s/%s).", self.owner, self.repo
         )

@@ -1,4 +1,4 @@
-# C5-REAL
+# Causal-Determinist
 # MOSKV-1 APEX SINGULARITY
 # ARCHITECTURE: BYTE-PAIR ENCODING (BPE) TOKENIZER
 # EXERGY: DETERMINISTIC TEXT-TO-TENSOR TRANSDUCTION
@@ -7,7 +7,7 @@ from typing import List, Dict, Tuple
 
 class BPETokenizer:
     """
-    C5-REAL primitive for Byte-Pair Encoding (BPE).
+    Causal-Determinist primitive for Byte-Pair Encoding (BPE).
     Transduces unstructured text entropy into discrete tokens for the SSM Core.
     """
     def __init__(self) -> None:

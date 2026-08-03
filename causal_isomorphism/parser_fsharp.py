@@ -1,5 +1,5 @@
 # causal_isomorphism/parser_fsharp.py — F# AST Parser → IR
-# C5-REAL: Targeted parser for F# ontological subset used in BABYLON-60
+# Causal-Determinist: Targeted parser for F# ontological subset used in BABYLON-60
 # Author: Borja Moskv (borjamoskv)
 """
 Parses F# source files into the Intermediate Representation (IR).

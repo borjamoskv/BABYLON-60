@@ -17,7 +17,7 @@ def test_base60_integer():
 
 
 def test_base60_bytes():
-    b = b"C5-REAL"
+    b = b"Causal-Determinist"
     encoded = base60.bytes_to_base60(b)
     decoded = base60.base60_to_bytes(encoded, len(b))
     assert decoded == b

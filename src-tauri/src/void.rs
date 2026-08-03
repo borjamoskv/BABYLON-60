@@ -27,10 +27,10 @@ impl CortexLedger {
              
              -- Ω11: MASTER LEDGER - RAISE(ABORT) on updates/deletes
              CREATE TRIGGER IF NOT EXISTS bft_no_update_events BEFORE UPDATE ON events 
-             BEGIN SELECT RAISE(ABORT, 'C5-REAL: Immutability violation (UPDATE)'); END;
+             BEGIN SELECT RAISE(ABORT, 'Causal-Determinist: Immutability violation (UPDATE)'); END;
              
              CREATE TRIGGER IF NOT EXISTS bft_no_delete_events BEFORE DELETE ON events 
-             BEGIN SELECT RAISE(ABORT, 'C5-REAL: Immutability violation (DELETE)'); END;
+             BEGIN SELECT RAISE(ABORT, 'Causal-Determinist: Immutability violation (DELETE)'); END;
              
              CREATE TABLE IF NOT EXISTS vectors (
                  id TEXT PRIMARY KEY, 
@@ -78,7 +78,7 @@ impl CortexLedger {
         // Include BFT key for HMAC-like signing (Ω25)
         let bft_key = std::env::var("CORTEX_BFT_KEY")
             .or_else(|_| std::env::var("CORTEX_VAULT_KEY"))
-            .expect("FATAL: CORTEX_BFT_KEY or CORTEX_VAULT_KEY env var required for C5-REAL BFT HMAC signing. Zero static fallback permitted.");
+            .expect("FATAL: CORTEX_BFT_KEY or CORTEX_VAULT_KEY env var required for Causal-Determinist BFT HMAC signing. Zero static fallback permitted.");
         hasher.update(bft_key.as_bytes());
         
         let new_cortex_taint = hasher.finalize().to_hex().to_string();

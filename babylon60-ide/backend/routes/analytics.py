@@ -7,7 +7,7 @@ Exergía real computada sobre `ledger_entries`:
   determinista, sin dependencias, NO neuronal) sobre payload+taint+tipo.
   Es el "por qué macro": recuperar el evento donde se anotó una decisión.
 
-Honestidad C5-REAL: esto NO es recuperación semántica por embeddings
+Honestidad Causal-Determinist: esto NO es recuperación semántica por embeddings
 (eso requiere sqlite-vec + un modelo, trabajo abierto en STATUS.md). Es
 ranking léxico exacto y reproducible.
 """

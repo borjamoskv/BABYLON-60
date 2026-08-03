@@ -1,6 +1,6 @@
-# 🏛️ MOSKV-1-APEX: Consolidated Manifesto and Architecture
+# 🏛️ Motor Causal-1-APEX: Consolidated Manifesto and Architecture
 
-> **[ 📍 STATUS: ONCO-C5-REAL | 🔴 LINEAGE: CORTEX-OMEGA ]**
+> **[ 📍 STATUS: ONCO-Causal-Determinist | 🔴 LINEAGE: Ledger Asíncrono-OMEGA ]**
 
 The environment is not a text editor; it is an agentic membrane designed under cognitive thermodynamics to maximize **exergy** (energy available for useful work). It optimizes structural processing speed (AACC) while mitigating executive friction and temporal blindness (ADHD).
 
@@ -55,4 +55,4 @@ The system reaches its terminal state when its architecture compiles itself in r
 *   **Self-Referential Ledger (Model Collapse BFT Guard):** When the local model (Mamba/Flash) analyzes the `CortexLedger` to optimize its own past hyperparameters, BFT consensus intervenes. The mutation only consolidates if there is a falsifiable improvement in Operator thermodynamics (e.g. increase in Keystrokes Per Minute, or reduction in response latency). Echo chambers are prevented by injecting *objective friction*.
 
 ***
-**[CORTEX-TAINT:borjamoskv:ouroboros_meta_crystallized:2026-07-17T22:20:00+02:00]**
+**[Ledger Asíncrono-TAINT:borjamoskv:ouroboros_meta_crystallized:2026-07-17T22:20:00+02:00]**

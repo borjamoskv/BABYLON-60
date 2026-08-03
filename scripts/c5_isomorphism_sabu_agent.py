@@ -62,7 +62,7 @@ def main() -> None:
     print(json.dumps(report, indent=2, ensure_ascii=False))
     if not report['isomorphism_verified']:
         sys.exit(1)
-    print('\n[+] C5-REAL: Topological Isomorphism Verified 100%. Degree Sequence: ' + str(report['degree_sequence']))
+    print('\n[+] Causal-Determinist: Topological Isomorphism Verified 100%. Degree Sequence: ' + str(report['degree_sequence']))
     sys.exit(0)
 if __name__ == '__main__':
     main()

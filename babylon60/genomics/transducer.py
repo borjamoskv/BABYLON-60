@@ -1,5 +1,5 @@
 """
-C5-REAL Genomic State Transducer.
+Causal-Determinist Genomic State Transducer.
 Bridges quantitative genomic biomarker results (TMB, APOBEC, HRD, ecDNA, SNVs/INDELs)
 into the deterministic 300-primitive Boolean network state matrix (`simulate_boolean_network`).
 """
@@ -133,7 +133,7 @@ class GenomicStateTransducer:
     ) -> dict[str, Any]:
         """
         Transduces a complete multi-scale genomic profile (SNVs, INDELs, LOH, WGD, ecDNA amplicons)
-        into an integrated C5-REAL state profile for simulation.
+        into an integrated Causal-Determinist state profile for simulation.
         Accepts either a FullProfileParams dataclass instance or explicit keyword arguments.
         """
         if params is None:

@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized AgencyHypervisor Core
+# [Causal-Determinist] Exergy-Maximized AgencyHypervisor Core
 """
 AgencyHypervisor — Multi-Tenant Agent Scope & Event Projection Engine.
 Enforces INV_C5_18 (Zero-Worktree Swarm Scaling) & INV_BFT_02 (Single-Writer BFT Actor).

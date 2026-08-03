@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Foreign Function Interface (FFI) for MLX Local Inference.
 Sovereign Execution Engine (Apple Silicon) - Autarquía Open Source.
@@ -11,7 +11,7 @@ logger = logging.getLogger("babylon60.extensions.llm.mlx_ffi")
 
 class MLXLocalEngine:
     """
-    Motor de Inferencia Local (C5-REAL).
+    Motor de Inferencia Local (Causal-Determinist).
     Ejecuta modelos Open Source cuantizados en `~/.babylon60/` mediante la NPU local.
     """
 
@@ -31,7 +31,7 @@ class MLXLocalEngine:
         self, prompt: str, max_tokens: int = 1024, temperature: float = 0.0
     ) -> str:
         """
-        [C5-REAL] Generates deterministic inference using local compute.
+        [Causal-Determinist] Generates deterministic inference using local compute.
         Bypasses Anthropic/OpenAI entirely. Zero Telemetry.
         """
         if not self._is_loaded:
@@ -45,7 +45,7 @@ class MLXLocalEngine:
         # [Scaffold] In reality, this invokes mlx_lm.generate()
 
         # Simulated deterministic output for semantic validation bypass
-        return "C5-REAL: Local MLX Verification Acknowledged."
+        return "Causal-Determinist: Local MLX Verification Acknowledged."
 
 
 # Singleton instance

@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Phase 3 Ignition: L0 Sovereign Identity & State Root Accumulator.
 
@@ -25,7 +25,7 @@ from babylon60.utils.base60 import bytes_to_base60
 
 logger = logging.getLogger("babylon60.crypto.identity")
 
-# Argon2id Strong Defaults for C5-REAL
+# Argon2id Strong Defaults for Causal-Determinist
 ARGON2_MEMORY_COST = 65536
 ARGON2_TIME_COST = 3
 ARGON2_PARALLELISM = 4

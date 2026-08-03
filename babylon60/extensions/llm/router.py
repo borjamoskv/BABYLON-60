@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """LLM Router.
 
 Enrutador resiliente con routing determinista por intención.

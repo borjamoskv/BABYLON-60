@@ -1,10 +1,9 @@
-// BABYLON-60: C5-REAL Exergy Synchronization Bridge
+// BABYLON-60: Causal-Determinist Exergy Synchronization Bridge
 // Exporta la estructura del Ledger BFT a través de canales gRPC/Tonic.
 
 use tonic::{transport::Server, Request, Response, Status};
-use std::sync::Arc;
 
-// Invariantes C5-REAL: INV_BFT_02, INV_C5_18
+// Invariantes Causal-Determinist: INV_BFT_02, INV_C5_18
 // (El schema real se compila desde c5_exergy.proto vía prost/tonic-build en build.rs)
 
 pub mod c5real {
@@ -25,7 +24,7 @@ impl ExergyBridge for C5ExergyService {
         request: Request<ExergyState>,
     ) -> Result<Response<ExergyAck>, Status> {
         let state = request.into_inner();
-        println!("[C5-REAL] Incoming Exergy Sync: {}", state.block_hash);
+        println!("[Causal-Determinist] Incoming Exergy Sync: {}", state.block_hash);
 
         let ack = ExergyAck {
             verified: true,
@@ -43,7 +42,7 @@ impl ExergyBridge for C5ExergyService {
         let (tx, rx) = tokio::sync::mpsc::channel(100);
         
         let mut bcast_rx = {
-            let mut guard = self.telemetry_rx.lock().await;
+            let guard = self.telemetry_rx.lock().await;
             guard.resubscribe()
         };
 
@@ -81,7 +80,7 @@ pub async fn start_bridge(addr: &str, telemetry_rx: tokio::sync::broadcast::Rece
         telemetry_rx: tokio::sync::Mutex::new(telemetry_rx),
     };
 
-    println!("[C5-REAL] Starting gRPC Exergy Bridge on {}", addr);
+    println!("[Causal-Determinist] Starting gRPC Exergy Bridge on {}", addr);
 
     let service = tonic_web::enable(ExergyBridgeServer::new(bridge));
 

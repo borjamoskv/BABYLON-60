@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 # cortex/evolution/strategies.py
 """Improvement Strategies for the Continuous Improvement Engine.
 

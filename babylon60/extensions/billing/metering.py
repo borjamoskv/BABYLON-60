@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """CORTEX Billing Core - Causal Metering & Economic Entropy Engine.
 
 Tracks compute units (SSU), calculates execution costs based on failure type,

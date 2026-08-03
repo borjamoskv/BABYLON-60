@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-C5-REAL BITTENSOR (TAO) YUMA CONSENSUS & EXERGY TRANSDUCER
+Causal-Determinist BITTENSOR (TAO) YUMA CONSENSUS & EXERGY TRANSDUCER
 ==========================================================
 Entity: MOSKV-1 APEX
 Operator: borjamoskv
-Ontology Level: C5-REAL (Physical execution over matrix weight tensors & SHA3-256 state ledger)
+Ontology Level: Causal-Determinist (Physical execution over matrix weight tensors & SHA3-256 state ledger)
 
 Mathematical Invariants:
   - W in [0,1]^{V x M} : Row-normalized Weight Matrix from V Validators to M Miners
@@ -283,7 +283,7 @@ if __name__ == "__main__":
     emission = simulate_subnet_emission(1.0, ranks, dividends)
     
     output = {
-        "ontology_level": "C5-REAL",
+        "ontology_level": "Causal-Determinist",
         "entity": "MOSKV-1 APEX",
         "timestamp_hash": state_hash,
         "multi_epoch_simulation": {

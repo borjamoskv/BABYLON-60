@@ -52,7 +52,7 @@ def main() -> None:
     ast_invariant: str = logos_transducer(12.516666666666667)
     taint_signature: str = ethos_attestation(ast_invariant, lamport=42)
     ship_kinetic_collapse(ast_invariant, taint_signature)
-    print('\n[+] SECUENCIA COMPLETADA: CERO ANERGÍA ESTOCÁSTICA.')
+    print('\n[+] SECUENCIA COMPLETADA: CERO Ineficiencia ESTOCÁSTICA.')
 
 
 if __name__ == '__main__':

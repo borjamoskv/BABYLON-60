@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """CORTEX Policy Engine - Bellman Value Function.
 
 Converts CORTEX memory into a prioritized action queue using

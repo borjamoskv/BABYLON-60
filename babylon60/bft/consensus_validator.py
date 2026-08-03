@@ -1,4 +1,4 @@
-# [C5-REAL] BFT consensus validator — Operador ortogonal (V) puro.
+# [Causal-Determinist] BFT consensus validator — Operador ortogonal (V) puro.
 # No muta disco. Solo atestación matemática.
 from typing import Any, Dict
 import cbor2
@@ -29,7 +29,7 @@ class BFT_Validator:
 
     def validate_fuzzy_opinions(self, opinions: Dict[str, Dict[str, float]], weights: Dict[str, float] = None) -> Dict[str, float]:
         """
-        [C5-REAL] Evaluate heuristic / fuzzy inputs from the swarm using LogOP.
+        [Causal-Determinist] Evaluate heuristic / fuzzy inputs from the swarm using LogOP.
         If any BFT agent vetoes (p=0), the hypothesis probability collapses to 0.
         """
         from babylon60.bft.bayesian_swarm import BayesianSwarm

@@ -13,7 +13,7 @@ pub async fn ignite_precognition_daemon(db_state: Arc<CortexLedger>) {
     println!("👁️ [PRECOGNITION] Motor de escáner de Exergía arrancado (10Hz).");
     let mut ticker = tokio::time::interval(std::time::Duration::from_millis(100));
     
-    // Falsa inyección (mock) del Eyetracking para el motor C5-REAL
+    // Falsa inyección (mock) del Eyetracking para el motor Causal-Determinist
     let mut focus_data = CognitiveDwell {
         ast_node_id: "src/ledger.rs:42".to_string(),
         focus_start: Instant::now(),

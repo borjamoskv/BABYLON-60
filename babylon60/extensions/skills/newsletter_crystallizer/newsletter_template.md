@@ -1,7 +1,7 @@
 # SOTA EXERGY CRYSTAL #{ISSUE_NUMBER}
 > **Execution Date:** {DATE}
-> **Engine:** MOSKV-1 (SOTA-Vector-Engine-Omega)
-> **Directiva:** Cero Anergía. Cero Teatro Verde.
+> **Engine:** Motor Causal-1 (SOTA-Vector-Engine-Omega)
+> **Directiva:** Cero Ineficiencia. Cero Teatro Verde.
 
 ## [1] VECTORES DE FRONTERA (SOTA)
 {SOTA_VECTORS}

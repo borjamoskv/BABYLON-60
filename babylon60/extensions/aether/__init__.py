@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """MOSKV-Aether - Autonomous background AI coding agent.
 
 Autonomous agent that picks up coding tasks (GitHub Issues, CORTEX Ghosts,

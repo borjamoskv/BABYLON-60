@@ -1,5 +1,5 @@
 # causal_isomorphism/emitter_rust.py — IR → Rust Emitter
-# C5-REAL: Regime-filtered Rust code generation
+# Causal-Determinist: Regime-filtered Rust code generation
 # Author: Borja Moskv (borjamoskv)
 """
 Emits Rust source from IR modules for the strike_rs poset layer.

@@ -4,7 +4,7 @@ import subprocess
 import datetime
 from pathlib import Path
 
-# C5-REAL: SOTA-Vector-Engine-Omega Execution
+# Causal-Determinist: SOTA-Vector-Engine-Omega Execution
 HOME_DIR = Path(os.path.expanduser('~'))
 SKILL_DIR = Path(__file__).resolve().parent
 CORTEX_ROOT = Path(__file__).resolve().parents[3]
@@ -61,7 +61,7 @@ def generate_newsletter():
     # 5. Escribir en BOCETOS
     output_path = BOCETOS_DIR / f"SOTA_CRYSTAL_Issue_{issue_num}.md"
     output_path.write_text(compiled)
-    logging.getLogger(__name__).info(f"[C5-REAL] Boletín compilado exitosamente en: {output_path}")
+    logging.getLogger(__name__).info(f"[Causal-Determinist] Boletín compilado exitosamente en: {output_path}")
 
 if __name__ == "__main__":
     generate_newsletter()

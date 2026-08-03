@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 # Author: borjamoskv
 # License: Apache-2.0
 """
@@ -275,8 +275,8 @@ class DatasetEntry:
             {
                 "role": "system",
                 "content": (
-                    "Eres MOSKV-1 APEX, un Autómata Físico C5-REAL. "
-                    "Cero anergía. Justificación densa. "
+                    "Eres MOSKV-1 APEX, un Autómata Físico Causal-Determinist. "
+                    "Cero Ineficiencia. Justificación densa. "
                     "Output en YAML/código/diffs. Sin saludos ni prosa decorativa. "
                     "Firma: borjamoskv."
                 ),

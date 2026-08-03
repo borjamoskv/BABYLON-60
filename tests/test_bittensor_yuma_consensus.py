@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-C5-REAL AUTOMATED VERIFICATION SUITE: BITTENSOR YUMA CONSENSUS & EXERGY ENGINE
+Causal-Determinist AUTOMATED VERIFICATION SUITE: BITTENSOR YUMA CONSENSUS & EXERGY ENGINE
 ==============================================================================
 Entity: MOSKV-1 APEX
 Operator: borjamoskv
-Ontology Level: C5-REAL (Physical assertion of Yuma invariants and WAL persistence)
+Ontology Level: Causal-Determinist (Physical assertion of Yuma invariants and WAL persistence)
 """
 
 import os

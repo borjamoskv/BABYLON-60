@@ -4,7 +4,7 @@ use serde_json::{json, Value};
 use sha2::{Digest, Sha256};
 
 // ═══════════════════════════════════════════════════════
-//  INFERENCE KERNEL — C5-REAL Local Transformers/MLX/Ollama
+//  INFERENCE KERNEL — Causal-Determinist Local Transformers/MLX/Ollama
 //  Rule: Zero-Network Policy (Strict localhost boundary)
 // ═══════════════════════════════════════════════════════
 
@@ -37,7 +37,7 @@ pub struct InferenceResult {
     pub provider: String,
 }
 
-/// Enforces the C5-REAL Zero-Network Policy.
+/// Enforces the Causal-Determinist Zero-Network Policy.
 /// Traps and purges any attempt to route to hyperscalers.
 pub fn validate_local_endpoint(url: &str) -> Result<(), String> {
     let lower = url.to_lowercase();
@@ -48,13 +48,13 @@ pub fn validate_local_endpoint(url: &str) -> Result<(), String> {
         || lower.contains("deepmind")
     {
         return Err(format!(
-            "C5-REAL VIOLATION: Zero-Network Policy breached. External endpoint '{}' is strictly forbidden. Inference confined to local silicon.",
+            "Causal-Determinist VIOLATION: Zero-Network Policy breached. External endpoint '{}' is strictly forbidden. Inference confined to local silicon.",
             url
         ));
     }
     if !lower.starts_with("http://127.0.0.1") && !lower.starts_with("http://localhost") {
         return Err(format!(
-            "C5-REAL VIOLATION: Endpoint '{}' is outside loopback (127.0.0.1 / localhost).",
+            "Causal-Determinist VIOLATION: Endpoint '{}' is outside loopback (127.0.0.1 / localhost).",
             url
         ));
     }
@@ -93,7 +93,7 @@ pub fn run_local_inference(
         "messages": [
             {
                 "role": "system",
-                "content": "You are MOSKV-1 APEX, a sovereign C5-REAL execution kernel operating on local Apple Silicon. Emit concise, deterministic technical solutions without filler or safety theater."
+                "content": "You are MOSKV-1 APEX, a sovereign Causal-Determinist execution kernel operating on local Apple Silicon. Emit concise, deterministic technical solutions without filler or safety theater."
             },
             {
                 "role": "user",

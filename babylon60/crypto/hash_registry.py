@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized — Crypto Agility Layer
+# [Causal-Determinist] Exergy-Maximized — Crypto Agility Layer
 """
 Centralized Hash Registry for CORTEX-Persist.
 

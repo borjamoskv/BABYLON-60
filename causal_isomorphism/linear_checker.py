@@ -1,5 +1,5 @@
 # causal_isomorphism/linear_checker.py — Linear and Affine Type Checker
-# C5-REAL: Static analysis pass for linear/affine/region constraints
+# Causal-Determinist: Static analysis pass for linear/affine/region constraints
 # Author: Borja Moskv (borjamoskv)
 """
 Verifies linear and affine type constraints on the Intermediate Representation (IR).

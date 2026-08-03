@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 babylon60.mcp — Sovereign MCP Server Package
 =============================================

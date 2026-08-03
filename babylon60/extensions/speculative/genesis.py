@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Agent Genesis - L7 Factory for Spawning New Agent Types.
 
 The Genesis engine creates entirely new agent types from evolved genomes.
@@ -13,7 +13,7 @@ The Genesis engine does NOT use exec() or eval() on raw strings.
 All agent creation flows through the ISA builder's type-safe DSL,
 ensuring structural validity at construction time.
 
-Reality Level: C5-REAL
+Reality Level: Causal-Determinist
 """
 
 from __future__ import annotations

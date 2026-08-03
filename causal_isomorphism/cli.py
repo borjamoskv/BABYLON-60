@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # causal_isomorphism/cli.py — CLI Entry Point
-# C5-REAL: Command-line interface for the Causal Isomorphism Transpiler
+# Causal-Determinist: Command-line interface for the Causal Isomorphism Transpiler
 # Author: Borja Moskv (borjamoskv)
 """
 CLI for the Causal Isomorphism Transpiler.

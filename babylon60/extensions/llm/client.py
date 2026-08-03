@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Sovereign LLM HTTP Client.
 
 Replaces Langchain with a deterministic, lightweight httpx client
@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 
 class SovereignLLMClient:
-    """A deterministic C5-REAL HTTP client for LLM inference."""
+    """A deterministic Causal-Determinist HTTP client for LLM inference."""
 
     def __init__(
         self,

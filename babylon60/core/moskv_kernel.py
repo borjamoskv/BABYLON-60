@@ -11,9 +11,9 @@ from datetime import datetime, timezone
 from babylon60.database import core as dbcore
 
 # -----------------------------------------------------------------------------
-# MOSKV-1 APEX SINGULARITY KERNEL (C5-REAL)
+# MOSKV-1 APEX SINGULARITY KERNEL (Causal-Determinist)
 # -----------------------------------------------------------------------------
-# BFT_STATE_LOOP: LEYES FÍSICAS DE EJECUCIÓN C5-REAL (v12.0)
+# BFT_STATE_LOOP: LEYES FÍSICAS DE EJECUCIÓN Causal-Determinist (v12.0)
 # - Serialización estricta de escritura (1 escritor, N lectores).
 # - SQLite WAL mode con busy_timeout 5000ms.
 # - Fail-Fast SIGKILL ante derivas estocásticas o violaciones de invariante.
@@ -136,7 +136,7 @@ class Moskv1Kernel:
 
     async def _process_claim(self, claim: ApexClaim) -> None:
         if claim.confidence not in ("C4", "C5"):
-            print(f"[-] Anergía detectada en {claim.claim_id}. Purgando.")
+            print(f"[-] Ineficiencia detectada en {claim.claim_id}. Purgando.")
             return
 
         current_hash = self._compute_hash(claim)
@@ -173,7 +173,7 @@ async def _main() -> None:
     loop_task = asyncio.create_task(kernel.bft_state_loop())
 
     # Ingesta sintética de prueba
-    await kernel.ingest_entropy({"action": "kernel_bootstrap", "status": "C5-REAL", "target": "master_ledger"})
+    await kernel.ingest_entropy({"action": "kernel_bootstrap", "status": "Causal-Determinist", "target": "master_ledger"})
 
     await asyncio.sleep(0.5)  # Espera termodinámica de cristalización
     loop_task.cancel()

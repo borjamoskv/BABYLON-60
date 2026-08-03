@@ -26,7 +26,7 @@ def main() -> None:
         "word": word,
         "character": char,
         "count": count,
-        "reality_level": "C5-REAL",
+        "reality_level": "Causal-Determinist",
         "verifier": "Physical CPU Core",
     }
     canonical_payload = jcs_canonicalize(payload)

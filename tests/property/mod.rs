@@ -5,7 +5,7 @@ use num_bigint::BigInt;
 // Ideally, `runtime::F60` is public, but for now we define a mock F60 to show the property tests 
 // working in isolation if `runtime` crate is not directly available, or we use `runtime::F60` if it is.
 // Since we don't have the full AST of `runtime::F60` exposed here, we will write the exact property 
-// test structure that ensures C5-REAL invariants.
+// test structure that ensures Causal-Determinist invariants.
 
 #[derive(Clone, Debug, PartialEq)]
 pub struct F60Mock {

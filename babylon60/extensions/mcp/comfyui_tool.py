@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 import json
 import uuid
 
@@ -8,7 +8,7 @@ import uuid
 
 def run_comfyui_workflow(workflow_json: str) -> str:
     """
-    Executes a deterministic C5-REAL ComfyUI JSON workflow.
+    Executes a deterministic Causal-Determinist ComfyUI JSON workflow.
 
     Args:
         workflow_json (str): The stringified JSON DAG to execute on the local ComfyUI instance.

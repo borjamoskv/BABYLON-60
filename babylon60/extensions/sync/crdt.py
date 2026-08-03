@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 CRDT Merge Engine - Conflict-Free Replication for Agent Swarms (Ω₃ / Ω₁₂).
 

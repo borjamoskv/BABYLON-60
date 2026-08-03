@@ -1,9 +1,9 @@
 import ast
 import asyncio
 import sys
-import tempfile
 import json
 import os
+import signal
 from typing import TypedDict, Literal
 
 class SecurityError(Exception):
@@ -122,6 +122,19 @@ print("---JSON_OUTPUT_MARKER---")
 print(json.dumps(result))
 """
 
+def _purge_zombies(process: asyncio.subprocess.Process) -> None:
+    """Purge process group to prevent zombies (INV_C5_CHAOS_MONAD)."""
+    if sys.platform != "win32":
+        try:
+            os.killpg(os.getpgid(process.pid), signal.SIGKILL)
+        except (ProcessLookupError, PermissionError):
+            try:
+                process.kill()
+            except Exception:
+                pass
+    else:
+        process.kill()
+
 async def run_chaos_monad(source_code: str, timeout_ms: int = 1000, use_seatbelt: bool = False) -> MonadResult:
     """
     Executes dynamic code in a strict subprocess sandbox.
@@ -140,22 +153,37 @@ async def run_chaos_monad(source_code: str, timeout_ms: int = 1000, use_seatbelt
             "(version 1)(deny default)(allow file-read* (subpath \"/System\"))(allow file-read* (subpath \"/Library\"))(allow file-read* (subpath \"/usr/lib\"))"
         ] + cmd
 
+    kwargs = {}
+    if sys.platform != "win32":
+        kwargs["start_new_session"] = True
+
     process = await asyncio.create_subprocess_exec(
         *cmd,
         stdin=asyncio.subprocess.PIPE,
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE,
+        env={},
+        **kwargs
     )
 
     try:
-        stdout_bytes, stderr_bytes = await asyncio.wait_for(
-            process.communicate(input=source_code.encode("utf-8")), 
-            timeout=timeout_ms / 1000.0
-        )
-    except asyncio.TimeoutError:
-        # Thermodynamic Valve: Kill runaway processes
-        process.kill()
-        return {"status": "Timeout_Entropy_Death", "stdout": "", "error": "Execution exceeded timeout"}
+        try:
+            stdout_bytes, stderr_bytes = await asyncio.wait_for(
+                process.communicate(input=source_code.encode("utf-8")), 
+                timeout=timeout_ms / 1000.0
+            )
+        except asyncio.TimeoutError:
+            # Turing-Sandbox Chaos Isolation (La Sandbox Aislado)
+            _purge_zombies(process)
+            return {"status": "Timeout_Entropy_Death", "stdout": "", "error": "Execution exceeded timeout"}
+    finally:
+        # Guarantee no zombie processes or runaway processes remain
+        if process.returncode is None:
+            _purge_zombies(process)
+            try:
+                await process.wait()
+            except Exception:
+                pass
 
     stdout_str = stdout_bytes.decode("utf-8")
     

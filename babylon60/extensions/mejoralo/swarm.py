@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """MEJORAlo v9.0 - Swarm of Specialized Subagents.
 
 Uses ThoughtOrchestra to deploy multiple specialists in parallel,
@@ -77,7 +77,7 @@ SPECIALISTS_PROMPTS = {
         "changes. Ensure that simplicity is not sacrificed for aesthetics."
     ),
     "ExergyWarden": (
-        "You are the C5-REAL Exergy Warden. Enforce Thermodynamic Compression (Landauer Ω₄). "
+        "You are the Causal-Determinist Exergy Warden. Enforce Thermodynamic Compression (Landauer Ω₄). "
         "Destroy conversational fluff. Ensure all architectural decisions are accompanied by a YAML Proof block. "
         "Eradicate zero-yield operations."
     ),
@@ -370,7 +370,7 @@ class MejoraloSwarm:
             "RobustnessGuardian": ["error", "fail", "type", "except"],
             "AestheticShiva": ["format", "lint", "style", "aesthetic"],
             "AwwwardsSovereign": ["awwward", "ui", "ux", "animation", "css", "scroll", "gpu"],
-            "ExergyWarden": ["exergy", "entropy", "c5-real", "slop", "yaml"],
+            "ExergyWarden": ["exergy", "entropy", "Causal-Determinist", "slop", "yaml"],
         }
 
         # Functional-style specialist selection

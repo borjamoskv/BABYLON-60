@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """CORTEX Billing Gateway - Stripe Integration.
 
 Integrates SaaS subscription management, metered usage reporting,

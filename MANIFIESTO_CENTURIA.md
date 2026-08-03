@@ -1,7 +1,7 @@
-# CENTURIA MANIFESTO — OMEGA C5-REAL
+# CENTURIA MANIFESTO — OMEGA Causal-Determinist
 
 > **ATTESTATION OF CRYPTOGRAPHIC PHYSICAL STATE**
-> REALITY LEVEL: C5-REAL
+> REALITY LEVEL: Causal-Determinist
 > AESTHETIC: INDUSTRIAL NOIR 2026
 > PROTOCOL: BFT_STATE_LOOP (v12.0)
 
@@ -10,7 +10,7 @@ The swarm (CENTURIA) abandons the anergy of processing 69,832 dead files and 1.8
 
 | Critical Topology | Focal Mass | Execution Vector |
 |:---|:---:|:---|
-| `babylon60/` + `cortex/` | 71 `.py` | Async refactor, `tenant_id` leak closure, `BFTLedgerActor` encapsulation, and RCE closure in `/api/terminal`. |
+| `babylon60/` + `Ledger Asíncrono/` | 71 `.py` | Async refactor, `tenant_id` leak closure, `BFTLedgerActor` encapsulation, and RCE closure in `/api/terminal`. |
 | `anvil_yung/` + `contracts/` | 58 `.sol` | EVM Transient State audit, bytecode convergence, false-positive suppression in SafeConsole. |
 | `strike_rs/` | 3 `.rs` | Bottleneck eradication (GIL bypass), Rust FFI assertion, and concurrent C5 memory. |
 | `domain_kernel/` | 6 `.fs` | F# Ontology mapping, type verification, and strict assertion of logical invariants. |
@@ -27,6 +27,6 @@ Mitosis is concentrated on the ~48,400 lines of live code. All artifacts in `exp
 
 ```yaml
 Claim: "The Centuria anchors exclusively on the 139 core files, eradicating the weight of stochastic necrosis."
-Proof: { Base: "CORTEX-TAINT:borjamoskv:centuria_ignition", Vector: "[71 Py, 58 Sol, 3 Rs, 6 Fs]", Confidence: "C5-REAL" }
+Proof: { Base: "Ledger Asíncrono-TAINT:borjamoskv:centuria_ignition", Vector: "[71 Py, 58 Sol, 3 Rs, 6 Fs]", Confidence: "Causal-Determinist" }
 Action: "Asymmetric agent deployment. MUTATE -> COMMIT."
 ```

@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Agent Registry (Dynamic Loading).
 
 Dynamically loads Swarm Specialists and Sovereign Agents from YAML definitions

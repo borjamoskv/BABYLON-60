@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 # SPDX-License-Identifier: Apache-2.0
 """Cadastral Perimeter Check - Sovereign Territorial Radar.
 

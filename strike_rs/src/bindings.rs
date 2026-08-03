@@ -63,7 +63,7 @@ impl CortexKernel {
         })
     }
 
-    /// Inyecta conocimiento en el Kernel (C5-REAL SQLite WAL + ATMS)
+    /// Inyecta conocimiento en el Kernel (Causal-Determinist SQLite WAL + ATMS)
     pub fn assert_knowledge(&mut self, content: &str, sensor: &str, environment_id: &str) -> PyResult<String> {
         let js = JustifiedStatement {
             statement: Statement {
@@ -79,7 +79,7 @@ impl CortexKernel {
 
         // Master Ledger (SQLite)
         let taint = self.ledger.assert_knowledge(&js, environment_id)
-            .map_err(|e| PyRuntimeError::new_err(format!("C5-REAL FATAL: Ledger error: {}", e)))?;
+            .map_err(|e| PyRuntimeError::new_err(format!("Causal-Determinist FATAL: Ledger error: {}", e)))?;
         
         // ATMS Memory
         self.atms.install(&js);
@@ -100,11 +100,11 @@ impl CortexKernel {
         };
         // Ensure statement is recorded in Master Ledger so nogood replay can find it
         self.ledger.assert_knowledge(&js, environment_id)
-            .map_err(|e| PyRuntimeError::new_err(format!("C5-REAL FATAL: Ledger error asserting knowledge for nogood: {}", e)))?;
+            .map_err(|e| PyRuntimeError::new_err(format!("Causal-Determinist FATAL: Ledger error asserting knowledge for nogood: {}", e)))?;
 
         let statement_hash = MasterLedger::hash_statement(&stmt);
         let taint = self.ledger.assert_nogood(&statement_hash, environment_id)
-            .map_err(|e| PyRuntimeError::new_err(format!("C5-REAL FATAL: Ledger error asserting nogood: {}", e)))?;
+            .map_err(|e| PyRuntimeError::new_err(format!("Causal-Determinist FATAL: Ledger error asserting nogood: {}", e)))?;
             
         let node_id = if let Some(node_id) = self.atms.find_node_by_datum(content) {
             node_id
@@ -241,24 +241,26 @@ mod tests {
 
     #[test]
     fn test_cortex_kernel_atms_hardening_and_replay() {
+        pyo3::prepare_freethreaded_python();
         let db_path = "target/test_cortex_kernel_replay.db";
+        let _ = std::fs::create_dir_all("target");
         let _ = fs::remove_file(db_path);
 
         {
-            let mut kernel = CortexKernel::new(db_path).expect("[C5-REAL] FATAL: Failed to initialize CortexKernel");
+            let mut kernel = CortexKernel::new(db_path).expect("[Causal-Determinist] FATAL: Failed to initialize CortexKernel");
 
             // Assert empirical knowledge (Observation -> Premise in ATMS)
             let id1 = kernel.assert_knowledge("Water is H2O", "sensor_a", "env_master")
-                .expect("[C5-REAL] FATAL: assert_knowledge failed");
+                .expect("[Causal-Determinist] FATAL: assert_knowledge failed");
             assert!(!id1.is_empty() && id1.contains('-'), "Expected UUID assertion ID");
 
             // Verify belief in ATMS
-            assert!(kernel.is_believed("Water is H2O").unwrap());
-            assert!(kernel.contradiction_free("Water is H2O").unwrap());
+            assert!(kernel.is_believed("Water is H2O").expect("Failed to check belief state for Water is H2O"));
+            assert!(kernel.contradiction_free("Water is H2O").expect("Failed to check contradiction state for Water is H2O"));
 
             // Assert contradiction (nogood) against a conjecture hypothesis
             let taint_nogood = kernel.contradict_knowledge("Alien hypothesis X", "env_master")
-                .expect("[C5-REAL] FATAL: contradict_knowledge failed");
+                .expect("[Causal-Determinist] FATAL: contradict_knowledge failed");
             assert!(taint_nogood.contains(":NOGOOD:"));
 
             // Verify DDB contradiction propagation pruned the label of the contradicted conjecture
@@ -269,7 +271,7 @@ mod tests {
 
         // Reopen new kernel instance from same disk DB and verify exact state replay
         {
-            let kernel_replayed = CortexKernel::new(db_path).expect("[C5-REAL] FATAL: Failed to reopen CortexKernel");
+            let kernel_replayed = CortexKernel::new(db_path).expect("[Causal-Determinist] FATAL: Failed to reopen CortexKernel");
             assert!(kernel_replayed.is_believed("Water is H2O").unwrap(), "Replayed uncontradicted premise must be believed");
             assert!(kernel_replayed.contradiction_free("Water is H2O").unwrap());
             assert!(!kernel_replayed.is_believed("Alien hypothesis X").unwrap(), "Replayed contradicted hypothesis must remain pruned");

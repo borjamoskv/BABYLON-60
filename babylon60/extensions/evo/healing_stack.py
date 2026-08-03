@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Unified Self-Healing Stack v2 - L5 + L6 + Predictive + Persistent.
 
 Upgrades from v1:
@@ -15,7 +15,7 @@ Upgrades from v1:
                     ↓ (tunings)
     PERSIST: SAVE → LOAD → RESTORE
 
-Reality Level: C5-REAL
+Reality Level: Causal-Determinist
 """
 
 from __future__ import annotations

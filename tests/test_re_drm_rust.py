@@ -1,4 +1,4 @@
-# C5-REAL: TEST_RE_DRM_RUST
+# Causal-Determinist: TEST_RE_DRM_RUST
 # [CORTEX-TAINT:borjamoskv:test_re_drm_rust:2026-07-17T18:22:00Z]
 
 import os
@@ -67,7 +67,7 @@ def test_re_drm_rust_bft_verification():
     assert unanimous + tolerant == 896, "All 896 entries must be resolved under quorums"
 
     conn.close()
-    print("[+] Test successfully verified C5-REAL integration.")
+    print("[+] Test successfully verified Causal-Determinist integration.")
 
 
 if __name__ == "__main__":

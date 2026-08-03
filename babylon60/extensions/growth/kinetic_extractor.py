@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Kinetic Notes Extractor - Endogenous Growth Engine
 Applies Thermodynamic Context Compression (Landauer's Principle) to long-form
@@ -204,7 +204,7 @@ if __name__ == "__main__":
             # Await ledger queue flush
             await ledger.close()
             logging.getLogger(__name__).info(
-                f"[C5-REAL] Extracted, Tainted and Ledger-Audited {saved_count} High-Exergy Notes to {args.outdir}/"
+                f"[Causal-Determinist] Extracted, Tainted and Ledger-Audited {saved_count} High-Exergy Notes to {args.outdir}/"
             )
 
     asyncio.run(main())

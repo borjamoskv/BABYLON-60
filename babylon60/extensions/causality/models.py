@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Causality data models - Taint status, confidence ordering, fact nodes.
 
 Tri-state taint (CLEAN/SUSPECT/TAINTED) prevents binary overshoot:

@@ -1,92 +1,53 @@
-import { useState } from 'react';
-import { LayoutDashboard, Target, Users, CalendarClock, Blocks, Settings } from 'lucide-react';
-import { Dashboard } from './components/Dashboard';
-import { GoalMode } from './components/GoalMode';
-import { SwarmOverview } from './components/SwarmOverview';
-import { ScheduledTasks } from './components/ScheduledTasks';
-import { FinancialPlugins } from './components/FinancialPlugins';
-import { LandingPage } from './components/LandingPage';
-import './App.css';
-
-type View = 'dashboard' | 'goal' | 'swarm' | 'scheduled' | 'plugins';
+import { useEffect, useState } from 'react'
+import { Canvas } from './ui/Canvas'
+import { mountProject } from './io/fs-access'
+import { checkCortexStatus } from './cortex/lm-bridge'
 
 function App() {
-  const [currentView, setCurrentView] = useState<View>('dashboard');
-  const [isLanding, setIsLanding] = useState(true);
+  const [cortexOnline, setCortexOnline] = useState(false);
+  const [fsMounted, setFsMounted] = useState(false);
 
-  const renderView = () => {
-    switch (currentView) {
-      case 'dashboard': return <Dashboard />;
-      case 'goal': return <GoalMode />;
-      case 'swarm': return <SwarmOverview />;
-      case 'scheduled': return <ScheduledTasks />;
-      case 'plugins': return <FinancialPlugins />;
-      default: return <Dashboard />;
-    }
-  };
-
-  if (isLanding) {
-    return <LandingPage onEnter={() => setIsLanding(false)} />;
-  }
+  useEffect(() => {
+    // Check Cortex (LM Studio) status on load
+    checkCortexStatus().then(setCortexOnline);
+    
+    // Keyboard shortcut for mounting FS
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.metaKey && e.key === 'o') {
+        e.preventDefault();
+        mountProject().then(handle => {
+          if (handle) setFsMounted(true);
+        });
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
-    <div className="dashboard-layout">
-      {/* Sidebar Navigation */}
-      <nav className="sidebar">
-        <div className="brand">
-          <h1>BABYLON-60</h1>
+    <div className="flex flex-col h-screen w-screen bg-[#0a0a0a] overflow-hidden">
+      {/* Main Canvas - ADHD Mode */}
+      <div className="flex-1">
+        <Canvas />
+      </div>
+
+      {/* Subtle Status Bar */}
+      <div className="h-6 bg-[#0f0f0f] border-t border-[#1a1a1a] flex items-center justify-between px-4 text-xs font-mono text-slate-500">
+        <div className="flex gap-4">
+          <span>BABYLON-60</span>
+          <span className={fsMounted ? 'text-green-500' : ''}>
+            FS {fsMounted ? '●' : '○'}
+          </span>
+          <span className={cortexOnline ? 'text-amber-500' : ''}>
+            CORTEX {cortexOnline ? '●' : '○'}
+          </span>
         </div>
-        
-        <div className="nav-links" style={{ flex: 1 }}>
-          <a 
-            className={`nav-item ${currentView === 'dashboard' ? 'active' : ''}`}
-            onClick={() => setCurrentView('dashboard')}
-          >
-            <LayoutDashboard className="nav-icon" /> Dashboard
-          </a>
-          
-          <a 
-            className={`nav-item ${currentView === 'goal' ? 'active' : ''}`}
-            onClick={() => setCurrentView('goal')}
-          >
-            <Target className="nav-icon" /> Goal Mode
-          </a>
-
-          <a 
-            className={`nav-item ${currentView === 'swarm' ? 'active' : ''}`}
-            onClick={() => setCurrentView('swarm')}
-          >
-            <Users className="nav-icon" /> Swarm Orchestrator
-          </a>
-
-          <a 
-            className={`nav-item ${currentView === 'scheduled' ? 'active' : ''}`}
-            onClick={() => setCurrentView('scheduled')}
-          >
-            <CalendarClock className="nav-icon" /> Scheduled Tasks
-          </a>
-
-          <a 
-            className={`nav-item ${currentView === 'plugins' ? 'active' : ''}`}
-            onClick={() => setCurrentView('plugins')}
-          >
-            <Blocks className="nav-icon" /> Financial Plugins
-          </a>
+        <div>
+          <span>WASM ●</span>
         </div>
-
-        <div className="nav-links">
-          <a className="nav-item">
-            <Settings className="nav-icon" /> Settings
-          </a>
-        </div>
-      </nav>
-
-      {/* Main Content Area */}
-      <main className="main-content">
-        {renderView()}
-      </main>
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

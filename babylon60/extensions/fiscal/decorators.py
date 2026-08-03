@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 import functools
 import inspect
 import logging
@@ -38,7 +38,7 @@ def seal_decision(fact_type: str, client_id_kwarg: str = "client_id"):
                 if isinstance(v, str | int | float | bool)
             ]
 
-            # 3. Forge the TaxFact payload (C5-REAL integration)
+            # 3. Forge the TaxFact payload (Causal-Determinist integration)
             try:
                 from babylon60.cli.common import get_engine
                 from babylon60.events.loop import sovereign_run

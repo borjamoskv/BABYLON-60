@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized — verificación de remediación shadow_router
+# [Causal-Determinist] Exergy-Maximized — verificación de remediación shadow_router
 import asyncio
 import json
 

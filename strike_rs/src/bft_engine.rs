@@ -3,9 +3,9 @@ use crate::gelabp_calc::{compute_score, ExergyParams};
 use crate::atms::Atms;
 use crate::omega0::{Statement, Modality, Justification, JustifiedStatement};
 use blake3::Hasher;
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 use std::sync::Arc;
-use tokio::sync::{Mutex, RwLock, Semaphore, Notify};
+use tokio::sync::{RwLock, Semaphore, Notify};
 use rusqlite::{Connection, OpenFlags};
 use std::time::Instant;
 use std::fs::{self, OpenOptions};
@@ -61,7 +61,11 @@ impl BftAsyncEngine {
     /// Ejecuta el pipeline topológico respetando las dependencias.
     /// Si la termodinámica falla (Score < 700) aborta y hace Rollback (Ultrathink).
     pub async fn run_dag(&self, memory: Arc<RwLock<KdaMemoryBuffer>>, params: ExergyParams, db_path: &str) -> Result<(), String> {
-        let lock_path = if db_path.is_empty() { ".cortex_thermal_lock".to_string() } else { format!("{}.lock", db_path) };
+        let lock_path = if db_path.is_empty() {
+            format!("/tmp/.cortex_thermal_lock_{}_{}.lock", std::process::id(), std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap_or_default().as_nanos())
+        } else {
+            format!("{}.lock", db_path)
+        };
         let _thermal_lock = ThermalLock::acquire(&lock_path)?;
 
         let start_wall = Instant::now();
@@ -255,7 +259,7 @@ impl BftAsyncEngine {
             ).map_err(|e| format!("SQLite Pragma Error: {}", e))?;
 
             let m = memory.read().await;
-            let mut tx = conn.unchecked_transaction().map_err(|e| format!("TX Error: {}", e))?;
+            let tx = conn.unchecked_transaction().map_err(|e| format!("TX Error: {}", e))?;
             {
                 let mut stmt = tx.prepare_cached("INSERT OR REPLACE INTO cortex_memory_bft (node_id, proof) VALUES (?1, ?2)")
                     .map_err(|e| format!("Prepare Error: {}", e))?;

@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Conflict Resolution Protocol (LEGION-Ω).
 
 4-tier escalation: Triangulation → Weighted Vote → Architect → Heuristic Deadlock.

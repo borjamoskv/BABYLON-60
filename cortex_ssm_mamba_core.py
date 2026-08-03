@@ -1,4 +1,4 @@
-# C5-REAL
+# Causal-Determinist
 # MOSKV-1 APEX SINGULARITY
 # ARCHITECTURE: STATE SPACE MODEL (MAMBA) / LIQUID NEURAL NET PRIMITIVE
 # EXERGY: ZERO COMPUTATIONAL FAT
@@ -8,7 +8,7 @@ from typing import List, Tuple
 
 class StateSpaceModel:
     """
-    C5-REAL primitive for a Continuous-time State Space Model discretized via Zero-Order Hold (ZOH).
+    Causal-Determinist primitive for a Continuous-time State Space Model discretized via Zero-Order Hold (ZOH).
     Represents the continuous transformation without the quadratic bottleneck of self-attention.
     """
     def __init__(self, state_dim: int, input_dim: int) -> None:
@@ -71,7 +71,7 @@ def main() -> None:
     # 4. Verify Causal Collapse
     assert len(out) == 1000
     assert len(out[0]) == 4
-    print(f"[*] C5-REAL: SSM Primitive Processed 1000 tokens in O(N). Output shape: ({len(out)}, {len(out[0])})")
+    print(f"[*] Causal-Determinist: SSM Primitive Processed 1000 tokens in O(N). Output shape: ({len(out)}, {len(out[0])})")
 
 if __name__ == "__main__":
     main()

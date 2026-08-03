@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 from __future__ import annotations
 
 from babylon60.extensions.llm._oracle_pool import (

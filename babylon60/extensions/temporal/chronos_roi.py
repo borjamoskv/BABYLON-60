@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 CHRONOS-1 ROI Engine (Sovereign Efficiency Quantification).
 

@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """CORTEX Billing Core - Data Models.
 
 Defines the transactional and causal billing structures, as well as failure taxonomy.

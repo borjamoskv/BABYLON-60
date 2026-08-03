@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 T-Cell Daemon: IHELP / David Dominguez Anergy Purge
 
@@ -219,7 +219,7 @@ class IHelpPurgeDaemon:
         finally:
             await conn.close()
 
-        # Emit to Master Ledger (C5-REAL Proof of Work)
+        # Emit to Master Ledger (Causal-Determinist Proof of Work)
         audit_trail: dict[str, Any] = {
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "action": "PHAGOCYTOSIS",

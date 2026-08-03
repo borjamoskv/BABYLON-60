@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 # cortex/evolution/lnn.py
 """
 Lagrangian Neural Networks (LNN) for Evolutionary Policy - ψSAP Implementation.
@@ -7,7 +7,7 @@ Operationalizes the Neural Least-Action (NLA) principle:
     d/dt (∂L/∂q̇) = ∂L/q
 
 Where L is the Symbolic Lagrangian L_ψ.
-Integrates directly with the UltrathinkPhysicsEngine to enforce C5-REAL thermodynamic constraints.
+Integrates directly with the UltrathinkPhysicsEngine to enforce Causal-Determinist thermodynamic constraints.
 """
 
 from __future__ import annotations

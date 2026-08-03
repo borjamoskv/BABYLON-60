@@ -1,5 +1,5 @@
 # causal_isomorphism/emitter_solidity.py — IR → Solidity Emitter
-# C5-REAL: Regime-filtered Solidity code generation
+# Causal-Determinist: Regime-filtered Solidity code generation
 # Author: Borja Moskv (borjamoskv)
 """
 Emits Solidity 0.8.19+ contracts from IR modules.

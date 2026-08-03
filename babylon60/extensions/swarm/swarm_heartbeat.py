@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Distributed Swarm Heartbeat (Ω₃ Byzantine Default).
 
 Every daemon thread emits periodic proof-of-life. A reaper detects silent

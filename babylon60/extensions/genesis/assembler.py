@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """CORTEX Genesis - System Assembler.
 
 Materializes SystemSpecs into real files on disk.

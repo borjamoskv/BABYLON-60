@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Autonomous Training Daemon (Sleep Cycle).
 Tracks daily session trajectories, triggers Test-Time Training (TTT),

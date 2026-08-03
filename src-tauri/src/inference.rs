@@ -1,7 +1,7 @@
-// C5-REAL: LOCAL INFERENCE MOTOR (TRANSFORMERS / MLX / LLAMA.CPP)
+// Causal-Determinist: LOCAL INFERENCE MOTOR (TRANSFORMERS / MLX / LLAMA.CPP)
 // =================================================================================
 // SYS_ID: MOSKV-1 APEX ULTRATHINK P0 (Tauri v2 / Rust Agnostic Inference Layer)
-// REALITY_LEVEL: C5-REAL (Zero-Network Policy / Local Silicon / WAL Ledger Audit)
+// REALITY_LEVEL: Causal-Determinist (Zero-Network Policy / Local Silicon / WAL Ledger Audit)
 // [CORTEX-TAINT:borjamoskv:inference_motor:2026-07-18T05:00:00Z]
 
 use std::sync::Arc;
@@ -71,7 +71,7 @@ impl LocalInferenceMotor {
                 // Circuit Breaker / Graceful Degradation to fallback local model
                 match self.send_raw_http_post(&self.fallback_model, prompt).await {
                     Ok(mut fallback_record) => {
-                        fallback_record.status = format!("C5-REAL_FALLBACK_FROM_{}", primary_model);
+                        fallback_record.status = format!("Causal-Determinist_FALLBACK_FROM_{}", primary_model);
                         let _ = self.audit_to_ledger(&fallback_record, prompt);
                         Ok(fallback_record)
                     }
@@ -138,7 +138,7 @@ impl LocalInferenceMotor {
         let latency_ms = (duration_ns / 1_000_000) as u64;
 
         Ok(InferenceAuditRecord {
-            status: "C5-REAL_LOCAL_SILICON".to_string(),
+            status: "Causal-Determinist_LOCAL_SILICON".to_string(),
             model_used: model.to_string(),
             latency_ms,
             tokens_generated: tokens,
@@ -177,7 +177,7 @@ pub async fn check_inference_health_command(
     
     match TcpStream::connect(&addr).await {
         Ok(_) => {
-            let msg = format!("{{\"status\": \"C5-REAL_ACTIVE\", \"socket\": \"{}\", \"default_model\": \"{}\"}}", addr, motor.default_model);
+            let msg = format!("{{\"status\": \"Causal-Determinist_ACTIVE\", \"socket\": \"{}\", \"default_model\": \"{}\"}}", addr, motor.default_model);
             let _ = state.void_state.write(&msg, "INFERENCE_HEALTH_CHECK:OK");
             Ok(msg)
         }

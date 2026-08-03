@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 CORTEX MCP SERVER — Sovereign BFT Memory Server (MCP Protocol)
 ===============================================================

@@ -1,4 +1,4 @@
-"""C5-REAL: NOUS-Lang AST Compiler for CORTEX
+"""Causal-Determinist: NOUS-Lang AST Compiler for CORTEX
 Transforms NOUS declarative intents into CORTEX Saga Guard ASTs.
 """
 import logging

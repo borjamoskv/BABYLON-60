@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """Cascade Manager.
 
 Resilient transition and grouping for LLM providers.

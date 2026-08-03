@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 import logging
 import uuid
 from datetime import datetime, timezone
@@ -53,7 +53,7 @@ class TaaSMarketplace:
         base_cost = 10.0
         if req.sla.requires_zk_proof:
             base_cost += 25.0
-        if req.sla.confidence_level == "C5-REAL":
+        if req.sla.confidence_level == "Causal-Determinist":
             base_cost *= 2.0
 
         est_time = 500 if req.sla.requires_zk_proof else 50
@@ -68,7 +68,7 @@ class TaaSMarketplace:
 
         # Simulate job execution on the swarm
         # In a real environment, this delegates to SwarmManager or AS-OS Kernel
-        # Here we mock the deterministic C5-REAL execution
+        # Here we mock the deterministic Causal-Determinist execution
 
         proof_payload = None
         if req.sla.requires_zk_proof:

@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 Evolutionary Epistemology (IMMUNITAS-Ω)
 Tactical Falsification (Karl Popper): Axiom 15 Operational Falsification.

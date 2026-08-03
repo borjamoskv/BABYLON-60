@@ -6,7 +6,7 @@ MOSKV-1 APEX: L1_sink Anchor & Verification Script (INV_C5_15)
    Replaces double-ASCII hex truncation with full 32-byte (256-bit) raw Merkle root hex.
 2. Invokes RFC3161Client to obtain cryptographic timestamp attestations (tsr_b64).
 3. Invokes IdentityAnchorManager to assert L0 identity signing and genesis integrity.
-4. Updates JSON artifacts with complete, non-truncated C5-REAL provenance metadata.
+4. Updates JSON artifacts with complete, non-truncated Causal-Determinist provenance metadata.
 """
 
 import json

@@ -1,6 +1,6 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
-C5-REAL: Telegram Antigravity Daemon
+Causal-Determinist: Telegram Antigravity Daemon
 Connects the Telegram API to the local CORTEX-Persist engine.
 Enforces Identity Hygiene via Whitelist.
 """
@@ -13,7 +13,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, Messa
 
 from babylon60.engine import CortexEngine
 
-# Configure logging (C5-REAL Zero Noise)
+# Configure logging (Causal-Determinist Zero Noise)
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
 )
@@ -33,7 +33,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
-        text="🦅 CORTEX-Antigravity Enlace Establecido. (C5-REAL)",  # pyright: ignore[reportOptionalMemberAccess]
+        text="🦅 CORTEX-Antigravity Enlace Establecido. (Causal-Determinist)",  # pyright: ignore[reportOptionalMemberAccess]
     )
 
 

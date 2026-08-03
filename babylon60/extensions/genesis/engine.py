@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """CORTEX Genesis Engine - A System That Creates Systems.
 
 The core orchestrator that takes a SystemSpec and produces a complete,

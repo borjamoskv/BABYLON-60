@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 import json
 import logging
 import os
@@ -257,7 +257,7 @@ async def messages_endpoint(request: Request, _token: str = Depends(verify_token
                     )
                     return
 
-                # [C5-REAL] Anthropic starts streams with a message_start without model spoofing
+                # [Causal-Determinist] Anthropic starts streams with a message_start without model spoofing
                 yield (
                     f"event: message_start\ndata: {json.dumps({'type': 'message_start', 'message': {'id': 'msg_ccr', 'type': 'message', 'role': 'assistant', 'model': LOCAL_MODEL, 'usage': {}}})}\n\n"
                 )
@@ -294,5 +294,5 @@ async def messages_endpoint(request: Request, _token: str = Depends(verify_token
 if __name__ == "__main__":
     import uvicorn
 
-    # [C5-REAL] Strictly bound to loopback interface and port 8000
+    # [Causal-Determinist] Strictly bound to loopback interface and port 8000
     uvicorn.run(app, host="127.0.0.1", port=8000)

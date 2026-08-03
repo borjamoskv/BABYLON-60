@@ -1,9 +1,9 @@
-# [C5-REAL] Exergy-Maximized Agent Audit & Normalization Suite
+# [Causal-Determinist] Exergy-Maximized Agent Audit & Normalization Suite
 """
 AUDITORIA Y AUTO-NORMALIZACION DE LOS 100 AGENTES SOBERANOS
 ============================================================
-Script de auditoria y normalizacion C5-REAL para validar y armonizar
-la estructura YAML, nivel de realidad (C5-REAL), propietario (borjamoskv),
+Script de auditoria y normalizacion Causal-Determinist para validar y armonizar
+la estructura YAML, nivel de realidad (Causal-Determinist), propietario (borjamoskv),
 unicidad de IDs y mapa de capacidades de los 100 agentes en:
 babylon60/extensions/agents/definitions/.
 
@@ -30,7 +30,7 @@ def audit_and_normalize_all_agents():
     yaml_files = sorted([f for f in DEFS_DIR.glob("*.yaml") if f.is_file()])
     total_files = len(yaml_files)
     
-    print(f"\n🔍 Iniciando auditoria y normalizacion C5-REAL de los {total_files} agentes soberanos en {DEFS_DIR}...\n")
+    print(f"\n🔍 Iniciando auditoria y normalizacion Causal-Determinist de los {total_files} agentes soberanos en {DEFS_DIR}...\n")
     
     seen_ids = set()
     seen_names = set()
@@ -65,8 +65,8 @@ def audit_and_normalize_all_agents():
             if "version" not in meta:
                 meta["version"] = "1.0.0"
                 needs_save = True
-            if meta.get("reality_level") != "C5-REAL":
-                meta["reality_level"] = "C5-REAL"
+            if meta.get("reality_level") != "Causal-Determinist":
+                meta["reality_level"] = "Causal-Determinist"
                 needs_save = True
             if meta.get("owner") != "borjamoskv":
                 meta["owner"] = "borjamoskv"
@@ -140,7 +140,7 @@ def audit_and_normalize_all_agents():
     print(f"Archivos Armonizados: {fixed_count} actualizados")
     print(f"IDs Únicos          : {len(seen_ids)} / 100")
     print(f"Nombres Únicos      : {len(seen_names)} / 100")
-    print("Reality Level       : 100% C5-REAL")
+    print("Reality Level       : 100% Causal-Determinist")
     print("Propietario         : 100% borjamoskv")
     print(f"Errores Detectados  : {len(errors)}")
     print("============================================================\n")
@@ -151,7 +151,7 @@ def audit_and_normalize_all_agents():
             print(f"  ├── {err}")
         sys.exit(1)
     else:
-        print("🟢 AUDITORIA PERFECTA: Todos los 100 agentes estan 100% integrados, armonizados y con esquema C5-REAL estricto.")
+        print("🟢 AUDITORIA PERFECTA: Todos los 100 agentes estan 100% integrados, armonizados y con esquema Causal-Determinist estricto.")
 
 if __name__ == "__main__":
     audit_and_normalize_all_agents()

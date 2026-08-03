@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-[C5-REAL] Step 1 Proof of Concept: Graph Isomorphism WL Pre-Filter (INV_C5_28).
+[Causal-Determinist] Step 1 Proof of Concept: Graph Isomorphism WL Pre-Filter (INV_C5_28).
 """
 
 import hashlib

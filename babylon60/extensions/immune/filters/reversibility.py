@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 F1 - REVERSIBILITY ANALYZER: AX-IV: The Blast Radius (Ω₂).
 """

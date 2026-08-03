@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 import json
 import logging
 import urllib.error
@@ -9,7 +9,7 @@ logger = logging.getLogger("babylon60.llm.raw_client")
 
 class RawLLMClient:
     """
-    C5-REAL Zero-Entropy LLM Client.
+    Causal-Determinist Zero-Entropy LLM Client.
     Direct HTTP communication via urllib to bypass LangChain bloat.
     """
 

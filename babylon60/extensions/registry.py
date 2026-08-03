@@ -1,4 +1,4 @@
-# [C5-REAL] Exergy-Maximized
+# [Causal-Determinist] Exergy-Maximized
 """
 CORTEX Extension Registry & Tier System
 Author: Borja Moskv
@@ -97,10 +97,10 @@ def verify_extension_import(fullname: str) -> None:
                 return
             _warned_extensions.add(ext_name)
 
-            # Under strict C5-REAL, we warn clearly or raise depending on a strict flag
+            # Under strict Causal-Determinist, we warn clearly or raise depending on a strict flag
             strict = os.environ.get("CORTEX_STRICT_EXTENSIONS", "0") == "1"
             msg = (
-                f"[C5-REAL] WARNING: Importing experimental extension '{ext_name}' "
+                f"[Causal-Determinist] WARNING: Importing experimental extension '{ext_name}' "
                 f"without CORTEX_EXPERIMENTAL_EXTENSIONS=1 env var context."
             )
             if strict:
