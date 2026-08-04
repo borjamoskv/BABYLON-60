@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # MOSKV-1 APEX: CLI ONCO TRANSDUCER (Causal-Determinist)
 """
 Motor de CLI para transducción de datos transcriptómicos a modelos Booleanos.

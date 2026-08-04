@@ -12,6 +12,7 @@ from typing import Dict, Any, Tuple
 
 class LicenseValidationError(Exception):
     """Raised when a CORTEX_LICENSE_KEY is invalid, revoked, or expired."""
+
     pass
 
 
@@ -24,9 +25,7 @@ class HybridLicenseVerifier:
     HEARTBEAT_WINDOW_SECONDS = 604800  # 7 days
 
     @classmethod
-    def generate_license_payload(
-        cls, client_org: str, node_id: str, expires_timestamp: int
-    ) -> Dict[str, Any]:
+    def generate_license_payload(cls, client_org: str, node_id: str, expires_timestamp: int) -> Dict[str, Any]:
         """Generates a raw license data structure and payload commitment signature."""
         data_str = f"{client_org}|{node_id}|{expires_timestamp}"
         signature = hashlib.sha256(f"SOVEREIGN_KEY_SIG:{data_str}".encode()).hexdigest()
@@ -40,9 +39,7 @@ class HybridLicenseVerifier:
         }
 
     @classmethod
-    def verify_license_offline(
-        cls, license_key_json: str, current_node_id: str
-    ) -> Tuple[bool, Dict[str, Any]]:
+    def verify_license_offline(cls, license_key_json: str, current_node_id: str) -> Tuple[bool, Dict[str, Any]]:
         """
         Performs offline verification of the CORTEX_LICENSE_KEY.
         Does not require network connection.
@@ -71,9 +68,7 @@ class HybridLicenseVerifier:
         return True, data
 
     @classmethod
-    def check_heartbeat_attestation(
-        cls, last_heartbeat_timestamp: int
-    ) -> Tuple[bool, str]:
+    def check_heartbeat_attestation(cls, last_heartbeat_timestamp: int) -> Tuple[bool, str]:
         """
         Verifies asynchronous 7-day heartbeat window.
         Returns (is_valid, status_message).

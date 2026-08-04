@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 BABYLON60 IDE — CortexLedger (event-sourced, hash-chained).
 
@@ -116,9 +120,7 @@ def append_event(
         # (single-writer invariant enforced at the SQLite layer).
         conn.execute("BEGIN IMMEDIATE")
         try:
-            row = conn.execute(
-                "SELECT current_hash FROM cortex_events ORDER BY seq DESC LIMIT 1"
-            ).fetchone()
+            row = conn.execute("SELECT current_hash FROM cortex_events ORDER BY seq DESC LIMIT 1").fetchone()
             parent_hash = row["current_hash"] if row else _ZERO_HASH
 
             created_at = int(time.time() * 1000)
@@ -147,9 +149,7 @@ def append_event(
         except sqlite3.IntegrityError:
             conn.execute("ROLLBACK")
             # INV_BFT_04: verify idempotency vs byzantine collision
-            existing = conn.execute(
-                "SELECT * FROM cortex_events WHERE event_id = ?", (event_id,)
-            ).fetchone()
+            existing = conn.execute("SELECT * FROM cortex_events WHERE event_id = ?", (event_id,)).fetchone()
             if existing:
                 if existing["current_hash"] != current_hash:
                     raise ValueError(
@@ -159,9 +159,7 @@ def append_event(
                 return _row_to_event(existing)
             raise
 
-        inserted = conn.execute(
-            "SELECT * FROM cortex_events WHERE event_id = ?", (event_id,)
-        ).fetchone()
+        inserted = conn.execute("SELECT * FROM cortex_events WHERE event_id = ?", (event_id,)).fetchone()
         return _row_to_event(inserted)
     finally:
         conn.close()
@@ -200,9 +198,7 @@ def claim(project_root: Path, key: str) -> bool:
     False if already claimed. Backs at-most-once execution (closes TOCTOU)."""
     conn = _connect(_ledger_path(project_root))
     try:
-        conn.execute(
-            "CREATE TABLE IF NOT EXISTS cortex_claims (key TEXT PRIMARY KEY, ts INTEGER NOT NULL)"
-        )
+        conn.execute("CREATE TABLE IF NOT EXISTS cortex_claims (key TEXT PRIMARY KEY, ts INTEGER NOT NULL)")
         conn.execute("BEGIN IMMEDIATE")
         try:
             conn.execute(

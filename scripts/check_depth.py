@@ -1,5 +1,10 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 import ast
 import os
+
 
 class DepthVisitor(ast.NodeVisitor):
     def __init__(self):
@@ -16,8 +21,9 @@ class DepthVisitor(ast.NodeVisitor):
         else:
             super().generic_visit(node)
 
+
 def check_file(path):
-    with open(path, 'r', encoding='utf-8') as f:
+    with open(path, "r", encoding="utf-8") as f:
         try:
             tree = ast.parse(f.read(), filename=path)
         except Exception:
@@ -32,9 +38,11 @@ def check_file(path):
             if visitor.max_depth > 4:
                 print(f"{path}: Function {node.name} has depth {visitor.max_depth}")
 
-for root_dir in ['babylon60', 'scripts']:
-    if not os.path.exists(root_dir): continue
+
+for root_dir in ["babylon60", "scripts"]:
+    if not os.path.exists(root_dir):
+        continue
     for dirpath, _, filenames in os.walk(root_dir):
         for f in filenames:
-            if f.endswith('.py'):
+            if f.endswith(".py"):
                 check_file(os.path.join(dirpath, f))

@@ -1,4 +1,8 @@
-//! VECTOR B & C: Scheduler, Orchestrator & Oracle Interface
+// ============================================================================
+// BABYLON-60 v4.0 Sovereign Hardened
+// █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+// ============================================================================
+//! VECTOR B & C: Scheduler, Orchestrator & Attestor Interface
 //! 
 //! Orchestrates the ATMS, MasterLedger, and external LLMs (Oracles).
 //! Encapsulates stochastic entropy ($S_{in}$) into `Justification::Conjecture`.
@@ -7,9 +11,9 @@ use crate::atms::{Atms, NodeId};
 use crate::ledger::MasterLedger;
 use crate::omega0::{Statement, JustifiedStatement, Justification, verify};
 
-/// Vector C: La Interfaz de Oráculo (Integración LLM)
+/// Vector C: La Interfaz de Atestador (Integración LLM)
 /// The trait boundary for external stochastic generators.
-pub trait Oracle {
+pub trait Attestor {
     /// Generates a heuristic justification (usually `Conjecture`) for a goal statement.
     fn query(&self, goal: &Statement) -> Justification;
 }
@@ -18,22 +22,22 @@ pub trait Oracle {
 pub struct Orchestrator {
     pub atms: Atms,
     pub ledger: MasterLedger,
-    oracle: Box<dyn Oracle>,
+    attestor: Box<dyn Attestor>,
 }
 
 impl Orchestrator {
-    pub fn new(ledger: MasterLedger, oracle: Box<dyn Oracle>) -> Self {
+    pub fn new(ledger: MasterLedger, attestor: Box<dyn Attestor>) -> Self {
         Self {
             atms: Atms::new(),
             ledger,
-            oracle,
+            attestor,
         }
     }
 
     /// Ignición: Convierte un intent en un Proof Search y lo asienta.
     pub fn resolve_intent(&mut self, goal: &Statement, environment_id: &str) -> Result<NodeId, String> {
-        // Delegación al Oráculo para contener la entropía estocástica
-        let justification = self.oracle.query(goal);
+        // Delegación al Atestador para contener la entropía estocástica
+        let justification = self.attestor.query(goal);
         
         let js = JustifiedStatement {
             statement: goal.clone(),
@@ -42,7 +46,7 @@ impl Orchestrator {
 
         // Cierre del Bucle: Verificar (⊨)
         if !verify(&js) {
-            return Err("Causal-Determinist FATAL: Oracle provided an unverified justification".into());
+            return Err("Causal-Determinist FATAL: Attestor provided an unverified justification".into());
         }
 
         // Persistencia (Vector A)
@@ -90,7 +94,7 @@ mod tests {
     use crate::omega0::Modality;
 
     struct DummyOracle;
-    impl Oracle for DummyOracle {
+    impl Attestor for DummyOracle {
         fn query(&self, _goal: &Statement) -> Justification {
             Justification::Conjecture
         }
@@ -99,8 +103,8 @@ mod tests {
     #[test]
     fn test_orchestrator_resolve_intent() {
         let ledger = MasterLedger::new(":memory:").unwrap();
-        let oracle = Box::new(DummyOracle);
-        let mut orch = Orchestrator::new(ledger, oracle);
+        let attestor = Box::new(DummyOracle);
+        let mut orch = Orchestrator::new(ledger, attestor);
 
         let goal = Statement {
             content: "P = NP".into(),
@@ -118,8 +122,8 @@ mod tests {
     #[test]
     fn test_orchestrator_inject_observation() {
         let ledger = MasterLedger::new(":memory:").unwrap();
-        let oracle = Box::new(DummyOracle);
-        let mut orch = Orchestrator::new(ledger, oracle);
+        let attestor = Box::new(DummyOracle);
+        let mut orch = Orchestrator::new(ledger, attestor);
 
         let fact = Statement {
             content: "CPU Temp > 90C".into(),

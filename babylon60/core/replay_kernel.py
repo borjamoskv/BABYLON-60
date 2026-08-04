@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 import json
 import hashlib
 import time
@@ -187,4 +191,3 @@ class ReplayKernel:
 
         if event["parent_hash"] is None:
             raise EpistemicHalt("Evento sin parent_hash")
-

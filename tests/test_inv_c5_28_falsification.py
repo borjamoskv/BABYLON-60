@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 [Causal-Determinist] Step 3 Falsifiability: Executable Enforcement for INV_C5_28.
 Tests both PASS (isomorphic) and FAIL-FAST (non-isomorphic / bypass attempt).
@@ -33,6 +37,7 @@ def test_inv_c5_28_non_isomorphic_fail_fast() -> None:
 
 def test_inv_c5_28_bypass_attempt_raises_error() -> None:
     """Falsification enforcement: Direct execution without WL check must raise ValueError."""
+
     def guarded_vf2_matching(g1: dict, g2: dict, prefiltered_wl: bool = False) -> bool:
         if not prefiltered_wl:
             raise ValueError("INV_C5_28 Violation: WL Pre-Filter Bypass Attempted")

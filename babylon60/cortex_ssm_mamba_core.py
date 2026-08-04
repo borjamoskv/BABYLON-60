@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # Causal-Determinist
 # MOSKV-1 APEX SINGULARITY
 # ARCHITECTURE: STATE SPACE MODEL (MAMBA) / LIQUID NEURAL NET PRIMITIVE
@@ -6,11 +10,13 @@
 import math
 from typing import List, Tuple
 
+
 class StateSpaceModel:
     """
     Causal-Determinist primitive for a Continuous-time State Space Model discretized via Zero-Order Hold (ZOH).
     Represents the continuous transformation without the quadratic bottleneck of self-attention.
     """
+
     def __init__(self, state_dim: int, input_dim: int) -> None:
         self.state_dim = state_dim
         self.input_dim = input_dim
@@ -19,7 +25,7 @@ class StateSpaceModel:
         self.B: List[List[float]] = [[0.1 for _ in range(input_dim)] for _ in range(state_dim)]
         self.C: List[List[float]] = [[1.0 if i == j else 0.0 for j in range(state_dim)] for i in range(input_dim)]
         self.D: List[List[float]] = [[0.0 for _ in range(input_dim)] for _ in range(input_dim)]
-        self.delta: float = 0.01 # Discretization step
+        self.delta: float = 0.01  # Discretization step
 
     def _matrix_vector_mul(self, mat: List[List[float]], vec: List[float]) -> List[float]:
         res = [0.0] * len(mat)
@@ -36,7 +42,10 @@ class StateSpaceModel:
         A_bar = exp(Delta * A) ~= I + Delta * A
         B_bar = (exp(Delta * A) - I) * A^-1 * B ~= Delta * B
         """
-        A_bar = [[(1.0 if i == j else 0.0) + self.delta * self.A[i][j] for j in range(self.state_dim)] for i in range(self.state_dim)]
+        A_bar = [
+            [(1.0 if i == j else 0.0) + self.delta * self.A[i][j] for j in range(self.state_dim)]
+            for i in range(self.state_dim)
+        ]
         B_bar = [[self.delta * self.B[i][j] for j in range(self.input_dim)] for i in range(self.state_dim)]
         return A_bar, B_bar
 
@@ -58,20 +67,24 @@ class StateSpaceModel:
 
         return output_seq
 
+
 def main() -> None:
     # 1. Instantiate the Mamba/SSM core primitive
     model = StateSpaceModel(state_dim=16, input_dim=4)
-    
+
     # 2. Sequence of 1000 tokens (simulated as 4-dimensional vectors)
     sequence: List[List[float]] = [[math.sin(i * 0.1), math.cos(i * 0.1), 0.5, -0.5] for i in range(1000)]
-    
+
     # 3. O(N) Forward Pass Execution
     out = model.forward(sequence)
-    
+
     # 4. Verify Causal Collapse
     assert len(out) == 1000
     assert len(out[0]) == 4
-    print(f"[*] Causal-Determinist: SSM Primitive Processed 1000 tokens in O(N). Output shape: ({len(out)}, {len(out[0])})")
+    print(
+        f"[*] Causal-Determinist: SSM Primitive Processed 1000 tokens in O(N). Output shape: ({len(out)}, {len(out[0])})"
+    )
+
 
 if __name__ == "__main__":
     main()

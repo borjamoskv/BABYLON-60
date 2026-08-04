@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 BABYLON60 IDE — Read-only database connection pool.
 INV_BFT_02 compliant: WAL + busy_timeout=5000 + query_only=ON.

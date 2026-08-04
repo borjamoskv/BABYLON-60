@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 BABYLON60 IDE — Ontology/Database browser API routes.
 Auto-discovers .db files and exposes read-only table browsing.

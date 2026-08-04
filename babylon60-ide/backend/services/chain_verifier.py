@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 BABYLON60 IDE — Hash-chain integrity verifier.
 Wraps the BFT ledger verification logic for the IDE frontend.

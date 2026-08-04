@@ -215,7 +215,15 @@ class CortexPersistLedger:
             "status": "C5_PERMANENT",
         }
 
-    def _process_batch_event(self, ev: CortexEvent, cursor: sqlite3.Cursor, last_lamport: int, prev_hash: str, current_seq: int, timestamp: str) -> dict[str, Any]:
+    def _process_batch_event(
+        self,
+        ev: CortexEvent,
+        cursor: sqlite3.Cursor,
+        last_lamport: int,
+        prev_hash: str,
+        current_seq: int,
+        timestamp: str,
+    ) -> dict[str, Any]:
         if not ev.cortex_taint:
             raise ValueError("INV_BFT_03: cortex_taint es obligatorio")
 
@@ -226,7 +234,14 @@ class CortexPersistLedger:
         cursor.execute("SELECT seq, entry_hash, lamport_t FROM cortex_ledger WHERE event_id = ?", (event_id,))
         dup = cursor.fetchone()
         if dup:
-            return {"seq": dup[0], "event_id": event_id, "entry_hash": dup[1], "lamport_t": dup[2], "status": "DUPLICATE_IGNORED", "row": None}
+            return {
+                "seq": dup[0],
+                "event_id": event_id,
+                "entry_hash": dup[1],
+                "lamport_t": dup[2],
+                "status": "DUPLICATE_IGNORED",
+                "row": None,
+            }
 
         last_lamport += 1
         current_seq += 1
@@ -242,10 +257,36 @@ class CortexPersistLedger:
             timestamp=timestamp,
         )
 
-        row = (event_id, ev.event_type, payload_json, ev.cortex_taint, ev.agent_id, ev.domain, last_lamport, prev_hash, entry_hash, timestamp)
-        return {"seq": current_seq, "event_id": event_id, "entry_hash": entry_hash, "lamport_t": last_lamport, "status": "C5_PERMANENT", "row": row}
+        row = (
+            event_id,
+            ev.event_type,
+            payload_json,
+            ev.cortex_taint,
+            ev.agent_id,
+            ev.domain,
+            last_lamport,
+            prev_hash,
+            entry_hash,
+            timestamp,
+        )
+        return {
+            "seq": current_seq,
+            "event_id": event_id,
+            "entry_hash": entry_hash,
+            "lamport_t": last_lamport,
+            "status": "C5_PERMANENT",
+            "row": row,
+        }
 
-    def _build_batch_rows(self, events: list[CortexEvent], cursor: sqlite3.Cursor, last_lamport: int, prev_hash: str, current_seq: int, timestamp: str) -> tuple[list[dict[str, Any]], list[tuple]]:
+    def _build_batch_rows(
+        self,
+        events: list[CortexEvent],
+        cursor: sqlite3.Cursor,
+        last_lamport: int,
+        prev_hash: str,
+        current_seq: int,
+        timestamp: str,
+    ) -> tuple[list[dict[str, Any]], list[tuple]]:
         results = []
         rows_to_insert = []
         for ev in events:
@@ -284,7 +325,9 @@ class CortexPersistLedger:
             prev_hash = last_row[1] if (last_row and last_row[1] is not None) else ZERO_HASH_256
             current_seq = last_row[2] if (last_row and last_row[2] is not None) else 0
 
-            results, rows_to_insert = self._build_batch_rows(events, cursor, last_lamport, prev_hash, current_seq, timestamp)
+            results, rows_to_insert = self._build_batch_rows(
+                events, cursor, last_lamport, prev_hash, current_seq, timestamp
+            )
 
             if rows_to_insert:
                 cursor.executemany(
@@ -294,7 +337,7 @@ class CortexPersistLedger:
                         agent_id, domain, lamport_t, prev_hash, entry_hash, timestamp
                     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
-                    rows_to_insert
+                    rows_to_insert,
                 )
 
             conn.commit()
@@ -335,7 +378,9 @@ class CortexPersistLedger:
         """
         with self._get_connection() as conn:
             cursor = conn.cursor()
-            cursor.execute("SELECT seq, event_id, event_type, payload_json, cortex_taint, lamport_t, prev_hash, entry_hash, timestamp FROM cortex_ledger ORDER BY seq ASC")
+            cursor.execute(
+                "SELECT seq, event_id, event_type, payload_json, cortex_taint, lamport_t, prev_hash, entry_hash, timestamp FROM cortex_ledger ORDER BY seq ASC"
+            )
             rows = cursor.fetchall()
 
         prev_hash = ZERO_HASH_256
@@ -394,4 +439,3 @@ class CortexPersistLedger:
             "integrity_verified": is_valid,
             "attested_at": datetime.now(timezone.utc).isoformat(),
         }
-

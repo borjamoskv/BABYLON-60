@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 import re
 from pathlib import Path
 
@@ -31,7 +35,10 @@ def _crystallize_session(entry: Path, consolidated: set[str]) -> bool:
         return False
 
     vfile = VAULT_DIR / f"b60_crystallized_{cid}.md"
-    vfile.write_text(f'---\nconversation_id: "{cid}"\nstatus: "crystallized"\n---\nCrystallized into memory vault.\n', encoding="utf-8")
+    vfile.write_text(
+        f'---\nconversation_id: "{cid}"\nstatus: "crystallized"\n---\nCrystallized into memory vault.\n',
+        encoding="utf-8",
+    )
     return True
 
 
@@ -44,4 +51,3 @@ def sync() -> None:
 
 if __name__ == "__main__":
     sync()
-

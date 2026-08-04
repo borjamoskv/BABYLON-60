@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 # This file is part of CORTEX.
 # Licensed under the Apache License, Version 2.0.
@@ -93,7 +97,7 @@ MODE_SYSTEM_PROMPTS: dict[str, str] = {
         "You receive a DiagnosisMatrix (AST analysis: complexity, call graph, dead code, entropy) "
         "and source code. Your task: generate P0 vulnerability hypotheses with surgical precision. "
         "For each finding, output: severity (critical/high/medium/low), vector_type (precision, "
-        "reentrancy, access_control, oracle, logic, overflow, race_condition), hypothesis (one "
+        "reentrancy, access_control, attestor, logic, overflow, race_condition), hypothesis (one "
         "sentence), code_evidence (exact line references), and confidence (C1-C5). "
         "Use extended chain-of-thought to reason through state transitions and invariant violations. "
         "Output valid JSON array. Zero speculation without code evidence. Ω₁ (Byzantine Guard) active."

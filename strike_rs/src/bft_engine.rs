@@ -1,3 +1,7 @@
+// ============================================================================
+// BABYLON-60 v4.0 Sovereign Hardened
+// █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+// ============================================================================
 use crate::kda_memory::KdaMemoryBuffer;
 use crate::gelabp_calc::{compute_score, ExergyParams};
 use crate::atms::Atms;

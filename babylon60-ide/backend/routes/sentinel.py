@@ -77,31 +77,41 @@ def sentinel_status() -> dict[str, Any]:
     # ── Lineage warnings (RECALCAR repo actual + intuir repo incorrecto) ──
     warnings: list[dict[str, str]] = []
     if not is_git:
-        warnings.append({
-            "level": "red",
-            "msg": f"'{repo_name}' no es un repo git — sin Git Sentinel no hay ledger de mutaciones.",
-        })
+        warnings.append(
+            {
+                "level": "red",
+                "msg": f"'{repo_name}' no es un repo git — sin Git Sentinel no hay ledger de mutaciones.",
+            }
+        )
     if repo_name != CANONICAL_REPO_NAME:
-        warnings.append({
-            "level": "red",
-            "msg": f"REPO INCORRECTO: estás en '{repo_name}', el linaje canónico es '{CANONICAL_REPO_NAME}'.",
-        })
+        warnings.append(
+            {
+                "level": "red",
+                "msg": f"REPO INCORRECTO: estás en '{repo_name}', el linaje canónico es '{CANONICAL_REPO_NAME}'.",
+            }
+        )
     if branch and branch != CANONICAL_BRANCH:
-        warnings.append({
-            "level": "amber",
-            "msg": f"Rama '{branch}' ≠ '{CANONICAL_BRANCH}' (canónica). Verifica antes de mutar.",
-        })
+        warnings.append(
+            {
+                "level": "amber",
+                "msg": f"Rama '{branch}' ≠ '{CANONICAL_BRANCH}' (canónica). Verifica antes de mutar.",
+            }
+        )
     for r in remotes:
         if DEAD_FORK_MARKER in r["url"]:
-            warnings.append({
-                "level": "red",
-                "msg": f"Remoto '{r['name']}' apunta al fork muerto {DEAD_FORK_MARKER} (historia no relacionada, claves expuestas). Linaje NO canónico.",
-            })
+            warnings.append(
+                {
+                    "level": "red",
+                    "msg": f"Remoto '{r['name']}' apunta al fork muerto {DEAD_FORK_MARKER} (historia no relacionada, claves expuestas). Linaje NO canónico.",
+                }
+            )
     if remotes and not any(DEAD_FORK_MARKER in r["url"] for r in remotes):
-        warnings.append({
-            "level": "amber",
-            "msg": "Hay remoto configurado. P0 (STATUS.md) exige linaje local sin remoto hasta rotar claves.",
-        })
+        warnings.append(
+            {
+                "level": "amber",
+                "msg": "Hay remoto configurado. P0 (STATUS.md) exige linaje local sin remoto hasta rotar claves.",
+            }
+        )
 
     return {
         "repo_root": str(root),
@@ -127,6 +137,7 @@ def sentinel_status() -> dict[str, Any]:
 def get_exergy_history() -> dict[str, Any]:
     """Retrieve exergy audit history from the SQLite ledger."""
     import sqlite3
+
     db_path = Path(os.path.expanduser("~")) / ".babylon60" / "exergy_agent_ledger.db"
     if not db_path.exists():
         return {"history": []}
@@ -134,23 +145,27 @@ def get_exergy_history() -> dict[str, Any]:
         conn = sqlite3.connect(str(db_path), timeout=5.0)
         conn.execute("PRAGMA journal_mode=WAL;")
         cursor = conn.cursor()
-        cursor.execute("SELECT timestamp, commit_hash, exergy_score, gradient, entropy, leverage, autoloop, bottleneck, verdict_yaml FROM ledger ORDER BY id DESC")
+        cursor.execute(
+            "SELECT timestamp, commit_hash, exergy_score, gradient, entropy, leverage, autoloop, bottleneck, verdict_yaml FROM ledger ORDER BY id DESC"
+        )
         rows = cursor.fetchall()
         conn.close()
-        
+
         history = []
         for r in rows:
-            history.append({
-                "timestamp": r[0],
-                "commit_hash": r[1],
-                "exergy_score": r[2],
-                "gradient": r[3],
-                "entropy": r[4],
-                "leverage": r[5],
-                "autoloop": r[6],
-                "bottleneck": r[7],
-                "verdict_yaml": r[8]
-            })
+            history.append(
+                {
+                    "timestamp": r[0],
+                    "commit_hash": r[1],
+                    "exergy_score": r[2],
+                    "gradient": r[3],
+                    "entropy": r[4],
+                    "leverage": r[5],
+                    "autoloop": r[6],
+                    "bottleneck": r[7],
+                    "verdict_yaml": r[8],
+                }
+            )
         return {"history": history}
     except sqlite3.Error as e:
         return {"error": str(e), "history": []}

@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 Prueba de Concepto (PoC) Autónoma: Extracción Causal de Google Labs FX.
 Esta es una implementación estricta (Demonio Ciego) que interactúa con la FSM de MusicFX
@@ -19,8 +23,10 @@ import urllib.request
 import urllib.parse
 from urllib.error import HTTPError
 
+
 def log(msg):
     print(f"[Moskv-PoC] {msg}")
+
 
 def _submit_task(base_url, headers, prompt):
     project_id = "00000000-0000-0000-0000-000000000000"
@@ -31,19 +37,19 @@ def _submit_task(base_url, headers, prompt):
                 "projectId": project_id,
                 "tool": "MUSIC_FX",
                 "prompt": prompt,
-                "parameters": {"duration": 30, "loop": False}
+                "parameters": {"duration": 30, "loop": False},
             }
         }
     }
     req = urllib.request.Request(
         f"{base_url}/generation.createMediaTask?batch=1",
-        data=json.dumps(payload).encode('utf-8'),
+        data=json.dumps(payload).encode("utf-8"),
         headers=headers,
-        method="POST"
+        method="POST",
     )
     try:
         with urllib.request.urlopen(req) as response:
-            res_data = json.loads(response.read().decode('utf-8'))
+            res_data = json.loads(response.read().decode("utf-8"))
             return res_data[0]["result"]["data"]["json"]["taskId"]
     except HTTPError as e:
         log(f"Colapso Termodinámico (Submitting). HTTP {e.code}: {e.read().decode('utf-8')}")
@@ -56,13 +62,11 @@ def _submit_task(base_url, headers, prompt):
 def _poll_single(base_url, headers, task_id):
     query_input = urllib.parse.quote(json.dumps({"0": {"json": {"taskId": task_id}}}))
     poll_req = urllib.request.Request(
-        f"{base_url}/generation.getTaskStatus?batch=1&input={query_input}",
-        headers=headers,
-        method="GET"
+        f"{base_url}/generation.getTaskStatus?batch=1&input={query_input}", headers=headers, method="GET"
     )
     try:
         with urllib.request.urlopen(poll_req) as poll_res:
-            poll_data = json.loads(poll_res.read().decode('utf-8'))
+            poll_data = json.loads(poll_res.read().decode("utf-8"))
             return poll_data[0]["result"]["data"]["json"]
     except HTTPError as e:
         log(f"Error de red temporal: {e.code}. Reintentando...")
@@ -75,13 +79,13 @@ def run_fsm(bearer_token, cookie_str, prompt):
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
         "Content-Type": "application/json",
         "Authorization": bearer_token,
-        "Cookie": cookie_str
+        "Cookie": cookie_str,
     }
     task_id = _submit_task(base_url, headers, prompt)
     log(f"Transición EXITOSA -> QUEUED. TaskID: {task_id}")
     log("Iniciando Transición POLLING (Bucle acotado a 90s)")
     start_time = time.time()
-    
+
     while time.time() - start_time < 90:
         status_json = _poll_single(base_url, headers, task_id)
         if status_json:
@@ -98,20 +102,21 @@ def run_fsm(bearer_token, cookie_str, prompt):
     log("Error: Límite de entropía de Chaitin superado (Timeout).")
     sys.exit(1)
 
+
 if __name__ == "__main__":
-    print("="*60)
+    print("=" * 60)
     print("  MOSKV-FX-SCAVENGER - PRUEBA DE CONCEPTO STANDALONE")
-    print("="*60)
-    
+    print("=" * 60)
+
     try:
         bearer = input("Introduce Header Authorization (ej. 'Bearer ya29...'): ").strip()
         cookies = input("Introduce Header Cookie (ej. 'SAPISID=...; __Secure-1PSID=...'): ").strip()
         prompt = input("Introduce tu prompt musical: ").strip()
-        
+
         if not bearer or not cookies or not prompt:
             log("Faltan parámetros axiomáticos. Abortando.")
             sys.exit(1)
-            
+
         run_fsm(bearer, cookies, prompt)
     except KeyboardInterrupt:
         log("Ejecución colapsada por el Operador.")

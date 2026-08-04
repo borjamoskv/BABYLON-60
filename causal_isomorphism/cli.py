@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # causal_isomorphism/cli.py — CLI Entry Point
 # Causal-Determinist: Command-line interface for the Causal Isomorphism Transpiler
 # Author: Borja Moskv (borjamoskv)
@@ -10,6 +14,7 @@ Usage:
     python -m causal_isomorphism.cli validate domain_kernel/IRPAutomata.fs
     python -m causal_isomorphism.cli inspect domain_kernel/IRPAutomata.fs
 """
+
 from __future__ import annotations
 
 import argparse

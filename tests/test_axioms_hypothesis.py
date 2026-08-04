@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 MOSKV-1 APEX — Property-Based Axiom Test Suite (pytest + hypothesis)
 Generates random DAGs, memory states, exergy parameters and concurrency
@@ -69,6 +73,7 @@ def exergy_params_strategy(draw: st.DrawFn) -> Dict[str, float]:
 # I. DAG STRUCTURAL AXIOMS
 # ============================================================================
 
+
 class TestDAGAxioms:
     """Property-based tests for AX-DAG-1 through AX-DAG-5."""
 
@@ -135,6 +140,7 @@ class TestDAGAxioms:
 # ============================================================================
 # II. KDA MEMORY AXIOMS
 # ============================================================================
+
 
 class TestKDAMemoryAxioms:
     """Property-based tests for AX-KDA-1 through AX-KDA-6."""
@@ -219,6 +225,7 @@ class TestKDAMemoryAxioms:
 # III. BFT ENGINE AXIOMS
 # ============================================================================
 
+
 class TestBFTAxioms:
     """Property-based tests for AX-BFT-1 through AX-BFT-5."""
 
@@ -288,10 +295,15 @@ class TestBFTAxioms:
 # IV. EXERGY / GELABP AXIOMS
 # ============================================================================
 
+
 class TestExergyAxioms:
     """Property-based tests for AX-EX-1 through AX-EX-7."""
 
-    @given(params=exergy_params_strategy(), wall_ms=st.floats(min_value=0.01, max_value=1000.0, allow_nan=False, allow_infinity=False), speedup=st.floats(min_value=0.01, max_value=10.0, allow_nan=False, allow_infinity=False))
+    @given(
+        params=exergy_params_strategy(),
+        wall_ms=st.floats(min_value=0.01, max_value=1000.0, allow_nan=False, allow_infinity=False),
+        speedup=st.floats(min_value=0.01, max_value=10.0, allow_nan=False, allow_infinity=False),
+    )
     @settings(max_examples=500, suppress_health_check=[HealthCheck.too_slow])
     def test_ax_ex_1_formula(self, params: Dict[str, float], wall_ms: float, speedup: float) -> None:
         """AX-EX-1: Score = min(1000, (G*L*A*B*P)/E * speedup)."""
@@ -300,7 +312,10 @@ class TestExergyAxioms:
         score = min(1000.0, raw * speedup)
         assert 0.0 <= score <= 1000.0, f"Score out of bounds: {score}"
 
-    @given(E_base=st.floats(min_value=0.001, max_value=10.0, allow_nan=False, allow_infinity=False), wall_ms=st.floats(min_value=0.0, max_value=10000.0, allow_nan=False, allow_infinity=False))
+    @given(
+        E_base=st.floats(min_value=0.001, max_value=10.0, allow_nan=False, allow_infinity=False),
+        wall_ms=st.floats(min_value=0.0, max_value=10000.0, allow_nan=False, allow_infinity=False),
+    )
     @settings(max_examples=500, suppress_health_check=[HealthCheck.too_slow])
     def test_ax_ex_2_entropy_floor(self, E_base: float, wall_ms: float) -> None:
         """AX-EX-2: E >= E_base > 0."""
@@ -327,7 +342,11 @@ class TestExergyAxioms:
         Mp = 0.8 if entries > 0.8 * capacity else 1.0
         assert abs(Mp - expected_Mp) < 1e-9, f"Mp={Mp}, expected={expected_Mp}"
 
-    @given(params=exergy_params_strategy(), wall_ms=st.floats(min_value=0.01, max_value=1000.0, allow_nan=False, allow_infinity=False), speedup=st.floats(min_value=0.01, max_value=10.0, allow_nan=False, allow_infinity=False))
+    @given(
+        params=exergy_params_strategy(),
+        wall_ms=st.floats(min_value=0.01, max_value=1000.0, allow_nan=False, allow_infinity=False),
+        speedup=st.floats(min_value=0.01, max_value=10.0, allow_nan=False, allow_infinity=False),
+    )
     @settings(max_examples=500, suppress_health_check=[HealthCheck.too_slow])
     def test_ax_ex_6_upper_bound(self, params: Dict[str, float], wall_ms: float, speedup: float) -> None:
         """AX-EX-6: Score <= 1000 always."""
@@ -336,7 +355,11 @@ class TestExergyAxioms:
         score = min(1000.0, raw * speedup)
         assert score <= 1000.0, f"Score exceeded upper bound: {score}"
 
-    @given(params=exergy_params_strategy(), wall_ms=st.floats(min_value=0.01, max_value=1000.0, allow_nan=False, allow_infinity=False), speedup=st.floats(min_value=0.01, max_value=10.0, allow_nan=False, allow_infinity=False))
+    @given(
+        params=exergy_params_strategy(),
+        wall_ms=st.floats(min_value=0.01, max_value=1000.0, allow_nan=False, allow_infinity=False),
+        speedup=st.floats(min_value=0.01, max_value=10.0, allow_nan=False, allow_infinity=False),
+    )
     @settings(max_examples=500, suppress_health_check=[HealthCheck.too_slow])
     def test_ax_ex_5_threshold_semantics(self, params: Dict[str, float], wall_ms: float, speedup: float) -> None:
         """AX-EX-5: Score < 700 implies abort must be triggered."""
@@ -352,6 +375,7 @@ class TestExergyAxioms:
 # ============================================================================
 # V. CODE INTEGRITY AXIOMS
 # ============================================================================
+
 
 class TestCodeIntegrityAxioms:
     """Property-based tests for AX-CODE-1 through AX-CODE-5."""
@@ -383,6 +407,7 @@ class TestCodeIntegrityAxioms:
 # VI. AUTOPOIETIC AXIOMS
 # ============================================================================
 
+
 class TestAutopoieticAxioms:
     """Property-based tests for AX-AUTO-1 through AX-AUTO-3."""
 
@@ -412,6 +437,7 @@ class TestAutopoieticAxioms:
 # ============================================================================
 # VII. METATHEOREMS (Derived properties)
 # ============================================================================
+
 
 class TestMetatheorems:
     """Property-based tests for THM-1 through THM-5."""
@@ -467,6 +493,7 @@ class TestMetatheorems:
     @settings(max_examples=200, suppress_health_check=[HealthCheck.too_slow])
     def test_thm1_determinism(self, dag: List[Tuple[str, FrozenSet[str], float]]) -> None:
         """THM-1: Two topological traversals of the same DAG produce identical execution orders."""
+
         def topo_sort(nodes: List[Tuple[str, FrozenSet[str], float]]) -> List[str]:
             deps_map = {nid: set(deps) for nid, deps, _ in nodes}
             completed: Set[str] = set()
@@ -493,7 +520,7 @@ class TestMetatheorems:
 
         # Simulate partial execution that modifies memory
         memory = dict(original)
-        for nid, _, _ in dag[:len(dag) // 2]:
+        for nid, _, _ in dag[: len(dag) // 2]:
             key_hash = sha256(nid.encode()).hexdigest()[:16]
             memory[key_hash] = "executed"
 

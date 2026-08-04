@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 # cortex/evolution/db_persistence.py
 """Database Persistence for Evolution State - Long-Term Memory Consolidation.

@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """Exergy optimizer helper.
 
 Runs the exergy optimizer agent, extracts the numeric score and
@@ -35,16 +39,16 @@ def _run_agent() -> float:
         return float(data.get("score", 0.0))
     except (json.JSONDecodeError, TypeError, ValueError, KeyError):
         import re
+
         match = re.search(r"ExergyScore:\s*([0-9.]+)", proc.stdout)
         if match:
             return float(match.group(1))
         raise RuntimeError(f"Unable to parse exergy output from stdout: {proc.stdout[:200]}")
 
 
-
-
 def _record_event(score: float) -> None:
     """Persist the exergy check in the Cortex ledger."""
+
     async def _inner():
         actor = BFTLedgerActor(Path("cortex.db"))
         await actor.start()
@@ -63,10 +67,10 @@ def _record_event(score: float) -> None:
             await actor.append(event)
         finally:
             await actor.stop()
+
     import asyncio
+
     asyncio.run(_inner())
-
-
 
 
 def run_exergy_optimizer() -> bool:

@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 [Causal-Determinist] Popperian Falsification Filter.
 
@@ -48,16 +52,18 @@ HYPE_PATTERNS: list[str] = [
     r"scale\s+to\s+(the\s+)?moon",
 ]
 
-HYPE_REGEX = re.compile(r'\b(' + '|'.join(HYPE_PATTERNS) + r')\b', re.IGNORECASE)
+HYPE_REGEX = re.compile(r"\b(" + "|".join(HYPE_PATTERNS) + r")\b", re.IGNORECASE)
 
 # Physical Anchors (URL, SHA256 hex, Ethereum address)
-ANCHOR_REGEX = re.compile(r'(https?://[^\s]+|[a-f0-9]{64}|0x[a-f0-9]{40})', re.IGNORECASE)
+ANCHOR_REGEX = re.compile(r"(https?://[^\s]+|[a-f0-9]{64}|0x[a-f0-9]{40})", re.IGNORECASE)
 
 # --- Data Structures ---
+
 
 @dataclass(frozen=True)
 class FilterResult:
     """Structured result from the Popperian Filter for BFT DDB routing."""
+
     passed: bool
     reason: str
     entropy: float
@@ -66,6 +72,7 @@ class FilterResult:
 
 
 # --- Core Functions ---
+
 
 def normalize_unicode(text: str) -> str:
     """
@@ -159,13 +166,9 @@ def evaluate_payload(text: str) -> FilterResult:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Popperian Falsification Filter (Causal-Determinist). "
-                    "Exit 0 = passed, Exit 2 = rejected."
+        description="Popperian Falsification Filter (Causal-Determinist). Exit 0 = passed, Exit 2 = rejected."
     )
-    parser.add_argument(
-        "file", nargs="?",
-        help="File to evaluate (reads from stdin if not provided)"
-    )
+    parser.add_argument("file", nargs="?", help="File to evaluate (reads from stdin if not provided)")
     args = parser.parse_args()
 
     if args.file:

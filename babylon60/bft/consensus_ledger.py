@@ -1,9 +1,14 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] BFT consensus ledger — Fachada Causal.
 # Redirige el flujo $\Omega = C \circ V \circ T \circ O$.
 # Delega la Verificación (V) a BFT_Validator y el Commit (C) a BFT_Committer.
 from typing import Dict, Optional
 from babylon60.bft.consensus_validator import BFT_Validator
 from babylon60.bft.consensus_committer import BFT_Committer, StateMutation
+
 
 class BFT_Ledger:
     def __init__(self, db_path: str = "master_ledger.db", node_keys: Optional[Dict[str, str]] = None) -> None:
@@ -35,8 +40,10 @@ class BFT_Ledger:
 
         return corrupted == 0
 
+
 if __name__ == "__main__":
     import sys
+
     db_path = "master_ledger.db"
     audit_mode = "--audit-mode" in sys.argv
     print(f"[*] [Causal-Determinist] BFT Ledger Audit: db_path={db_path}, audit_mode={audit_mode}")

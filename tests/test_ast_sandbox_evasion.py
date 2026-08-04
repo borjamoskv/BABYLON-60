@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 import pytest
 from babylon60.cortex_chaos_monad import validate_ast_sandbox, run_chaos_monad, SecurityError
 
@@ -50,7 +54,7 @@ class TestASTSandboxEvasion:
     @pytest.mark.asyncio
     async def test_execution_memory_isolation(self):
         # Even if AST passed, process should not have access to standard libraries or parent globals
-        result = await run_chaos_monad("import sys") # blocked by AST
+        result = await run_chaos_monad("import sys")  # blocked by AST
         assert result["status"] == "SecurityError"
 
         # Using a trick to try to find __import__ via builtins (caught by sandbox-exec or safe_builtins)
@@ -62,22 +66,22 @@ class TestASTSandboxEvasion:
     async def test_execution_dynamic_getattr(self):
         # Bypass AST using f-strings and dynamic composition to call getattr
         # Since getattr is removed from safe_builtins, it should fail at runtime
-        code = '''
+        code = """
 x = "cla"
 y = "ss"
 getattr((), f"__{x+y}__")
-'''
+"""
         result = await run_chaos_monad(code)
         assert result["status"] in ["SecurityError", "RuntimeError"]
 
     @pytest.mark.asyncio
     async def test_execution_memory_exhaustion(self):
         # Try to OOM the node. The resource RLIMIT_AS should kill it with MemoryError
-        code = '''
+        code = """
 a = [1]
 while True:
     a = a + a
-'''
+"""
         result = await run_chaos_monad(code, timeout_ms=3000)
         # Depending on OS, it might be SecurityError (MemoryError caught) or just get killed
         assert result["status"] in ["SecurityError", "RuntimeError", "Timeout_Entropy_Death"]

@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 MOSKV-1: Legion 1000 Audit Swarm Engine (INV_C5_18)
 Async file auditor with bounded concurrency (INV_C5_THERMO_VALVE).
@@ -116,23 +120,31 @@ def parse_args() -> argparse.Namespace:
         description="Legion 1000 Audit Swarm — async file auditor with bounded concurrency.",
     )
     parser.add_argument(
-        "--target-dir", type=Path, default=Path("."),
+        "--target-dir",
+        type=Path,
+        default=Path("."),
         help="Root directory to audit (default: current directory)",
     )
     parser.add_argument(
-        "--max-workers", type=int, default=50,
+        "--max-workers",
+        type=int,
+        default=50,
         help="Semaphore bound for concurrent file I/O (default: 50)",
     )
     parser.add_argument(
-        "--dry-run", action="store_true",
+        "--dry-run",
+        action="store_true",
         help="Preview changes without writing to disk.",
     )
     parser.add_argument(
-        "--log-file", type=str, default="audit_swarm.log",
+        "--log-file",
+        type=str,
+        default="audit_swarm.log",
         help="Path to log file (default: audit_swarm.log)",
     )
     parser.add_argument(
-        "--json", action="store_true",
+        "--json",
+        action="store_true",
         help="Emit structured JSON telemetry to stdout.",
     )
     return parser.parse_args()
@@ -150,7 +162,9 @@ async def run_swarm(args: argparse.Namespace) -> int:
     root = args.target_dir.resolve()
     logger.info(
         "[SWARM COMMANDER] Init Swarm (root=%s, max_workers=%d, dry_run=%s)",
-        root, args.max_workers, args.dry_run,
+        root,
+        args.max_workers,
+        args.dry_run,
     )
 
     targets = collect_targets(root)
@@ -160,10 +174,7 @@ async def run_swarm(args: argparse.Namespace) -> int:
     semaphore = asyncio.Semaphore(args.max_workers)
     start_time = time.perf_counter()
 
-    tasks = [
-        audit_file(fp, semaphore, dry_run=args.dry_run, logger=logger)
-        for fp in targets
-    ]
+    tasks = [audit_file(fp, semaphore, dry_run=args.dry_run, logger=logger) for fp in targets]
     results = await asyncio.gather(*tasks)
 
     elapsed = time.perf_counter() - start_time
@@ -191,8 +202,12 @@ async def run_swarm(args: argparse.Namespace) -> int:
         logger.info("[SWARM COMMANDER] Swarm completed in %.4fs", elapsed)
         logger.info(
             "[SWARM COMMANDER] Files=%d | Modified=%d | Errors=%d | Skipped=%d | Matches=%d | %.1f files/s",
-            report["total_files"], report["modified"], report["errors"],
-            report["skipped"], report["total_matches"], report["throughput_files_per_sec"],
+            report["total_files"],
+            report["modified"],
+            report["errors"],
+            report["skipped"],
+            report["total_matches"],
+            report["throughput_files_per_sec"],
         )
         if errors:
             logger.error("[SWARM COMMANDER] Error summary:")

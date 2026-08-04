@@ -40,8 +40,16 @@ class EUAIActComplianceExporter:
 
         if isinstance(val, str):
             # Redact API keys, bearer tokens, secret patterns, and private keys inline
-            val = re.sub(r"(?i)(api[_-]?key|secret|token|password|bearer|pk_)[=:\s]+[A-Za-z0-9_\-\.]{8,}", r"\1=[REDACTED_AUDIT_SAFE]", val)
-            val = re.sub(r"-----BEGIN [A-Z ]+ PRIVATE KEY-----[\s\S]+?-----END [A-Z ]+ PRIVATE KEY-----", "[REDACTED_PRIVATE_KEY]", val)
+            val = re.sub(
+                r"(?i)(api[_-]?key|secret|token|password|bearer|pk_)[=:\s]+[A-Za-z0-9_\-\.]{8,}",
+                r"\1=[REDACTED_AUDIT_SAFE]",
+                val,
+            )
+            val = re.sub(
+                r"-----BEGIN [A-Z ]+ PRIVATE KEY-----[\s\S]+?-----END [A-Z ]+ PRIVATE KEY-----",
+                "[REDACTED_PRIVATE_KEY]",
+                val,
+            )
             val = re.sub(r"akia[0-9a-z]{16}", "[REDACTED_AWS_AKIA]", val, flags=re.IGNORECASE)
             return val
         elif isinstance(val, dict):
@@ -72,9 +80,7 @@ class EUAIActComplianceExporter:
             }
         return self.redact_sensitive_data(data)
 
-    def generate_certificate(
-        self, system_id: str, operator_name: str, locale: str = "es"
-    ) -> Dict[str, Any]:
+    def generate_certificate(self, system_id: str, operator_name: str, locale: str = "es") -> Dict[str, Any]:
         """Generates a structured compliance certificate localized for target locale/country."""
         t = get_translation(locale)
         manifest = self.load_manifest()
@@ -139,27 +145,25 @@ class EUAIActComplianceExporter:
             },
         }
 
-    def export_markdown_report(
-        self, cert: Dict[str, Any], output_filepath: str, locale: str = "es"
-    ) -> str:
+    def export_markdown_report(self, cert: Dict[str, Any], output_filepath: str, locale: str = "es") -> str:
         """Exports localized certificate into human-readable Markdown format for regulators/auditors."""
         t = get_translation(locale)
 
-        md = f"""# {cert['title']}
-**{t['compliance_standard']}**  
-**Autoridad de Supervisión:** `{cert['supervisory_authority']}`  
-**ID Certificado:** `{cert['certificate_id']}`  
-**Sistema:** `{cert['system_identifier']}` | **Operador:** `{cert['operator']}`  
-**Emisión:** `{cert['issued_at']}` | **Estado de Cuarentena:** `{cert['quarantine_status']}`  
+        md = f"""# {cert["title"]}
+**{t["compliance_standard"]}**  
+**Autoridad de Supervisión:** `{cert["supervisory_authority"]}`  
+**ID Certificado:** `{cert["certificate_id"]}`  
+**Sistema:** `{cert["system_identifier"]}` | **Operador:** `{cert["operator"]}`  
+**Emisión:** `{cert["issued_at"]}` | **Estado de Cuarentena:** `{cert["quarantine_status"]}`  
 
 ---
 
-## {t['executive_summary_title']}
+## {t["executive_summary_title"]}
 
-{t['executive_summary_text']}
+{t["executive_summary_text"]}
 
-- **Global Merkle Root:** `{cert['global_merkle_root']}`
-- **Firma Digital (Fingerprint):** `{cert['cryptographic_attestation']['fingerprint']}`
+- **Global Merkle Root:** `{cert["global_merkle_root"]}`
+- **Firma Digital (Fingerprint):** `{cert["cryptographic_attestation"]["fingerprint"]}`
 
 ---
 
@@ -167,15 +171,15 @@ class EUAIActComplianceExporter:
 
 | Requisito / Artículo | Mecanismo Técnico BABYLON-60 v4.0 | Estado | Hash de Evidencia |
 | :--- | :--- | :--- | :--- |
-| **{cert['articles_compliance']['Article_9_Risk_Management']['title']}** | {cert['articles_compliance']['Article_9_Risk_Management']['mechanism']} | ✅ {cert['articles_compliance']['Article_9_Risk_Management']['status']} | `{cert['articles_compliance']['Article_9_Risk_Management']['evidence_hash'][:16]}...` |
-| **{cert['articles_compliance']['Article_10_Data_Governance']['title']}** | {cert['articles_compliance']['Article_10_Data_Governance']['mechanism']} | ✅ {cert['articles_compliance']['Article_10_Data_Governance']['status']} | `{cert['articles_compliance']['Article_10_Data_Governance']['evidence_hash'][:16]}...` |
-| **{cert['articles_compliance']['Article_11_Technical_Documentation']['title']}** | {cert['articles_compliance']['Article_11_Technical_Documentation']['mechanism']} | ✅ {cert['articles_compliance']['Article_11_Technical_Documentation']['status']} | `{cert['articles_compliance']['Article_11_Technical_Documentation']['evidence_hash'][:16]}...` |
-| **{cert['articles_compliance']['Article_12_Record_Keeping_Logging']['title']}** | {cert['articles_compliance']['Article_12_Record_Keeping_Logging']['mechanism']} | ✅ {cert['articles_compliance']['Article_12_Record_Keeping_Logging']['status']} | `{cert['articles_compliance']['Article_12_Record_Keeping_Logging']['evidence_hash'][:16]}...` |
-| **{cert['articles_compliance']['Article_14_Human_Oversight']['title']}** | {cert['articles_compliance']['Article_14_Human_Oversight']['mechanism']} | ✅ {cert['articles_compliance']['Article_14_Human_Oversight']['status']} | `{cert['articles_compliance']['Article_14_Human_Oversight']['evidence_hash'][:16]}...` |
+| **{cert["articles_compliance"]["Article_9_Risk_Management"]["title"]}** | {cert["articles_compliance"]["Article_9_Risk_Management"]["mechanism"]} | ✅ {cert["articles_compliance"]["Article_9_Risk_Management"]["status"]} | `{cert["articles_compliance"]["Article_9_Risk_Management"]["evidence_hash"][:16]}...` |
+| **{cert["articles_compliance"]["Article_10_Data_Governance"]["title"]}** | {cert["articles_compliance"]["Article_10_Data_Governance"]["mechanism"]} | ✅ {cert["articles_compliance"]["Article_10_Data_Governance"]["status"]} | `{cert["articles_compliance"]["Article_10_Data_Governance"]["evidence_hash"][:16]}...` |
+| **{cert["articles_compliance"]["Article_11_Technical_Documentation"]["title"]}** | {cert["articles_compliance"]["Article_11_Technical_Documentation"]["mechanism"]} | ✅ {cert["articles_compliance"]["Article_11_Technical_Documentation"]["status"]} | `{cert["articles_compliance"]["Article_11_Technical_Documentation"]["evidence_hash"][:16]}...` |
+| **{cert["articles_compliance"]["Article_12_Record_Keeping_Logging"]["title"]}** | {cert["articles_compliance"]["Article_12_Record_Keeping_Logging"]["mechanism"]} | ✅ {cert["articles_compliance"]["Article_12_Record_Keeping_Logging"]["status"]} | `{cert["articles_compliance"]["Article_12_Record_Keeping_Logging"]["evidence_hash"][:16]}...` |
+| **{cert["articles_compliance"]["Article_14_Human_Oversight"]["title"]}** | {cert["articles_compliance"]["Article_14_Human_Oversight"]["mechanism"]} | ✅ {cert["articles_compliance"]["Article_14_Human_Oversight"]["status"]} | `{cert["articles_compliance"]["Article_14_Human_Oversight"]["evidence_hash"][:16]}...` |
 
 ---
 
-<sub>BABYLON-60 v4.0 C5-REAL Compliance Transducer — {cert['supervisory_authority']}</sub>
+<sub>BABYLON-60 v4.0 C5-REAL Compliance Transducer — {cert["supervisory_authority"]}</sub>
 """
         os.makedirs(os.path.dirname(output_filepath), exist_ok=True)
         with open(output_filepath, "w", encoding="utf-8") as f:

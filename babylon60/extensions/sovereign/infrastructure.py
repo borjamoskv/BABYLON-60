@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 """
 CORTEX v7.8 "MAILING" - Sovereign Infrastructure (脉灵 - 国家主权架构).

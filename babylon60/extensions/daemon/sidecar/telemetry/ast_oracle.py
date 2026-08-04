@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 """SOVEREIGN AST ORACLE (CORTEX Sidecar v6 Telemetry)
 El Lector de Mentes Asíncrono.
@@ -79,7 +83,7 @@ class _ASTEventHandler(FileSystemEventHandler):
 
 
 class ASTOracle:
-    """Sovereign AST Oracle.
+    """Sovereign AST Attestor.
 
     Hooks into the filesystem via kernel-level events (watchdog),
     extracts Abstract Syntax Trees of modified files,
@@ -99,7 +103,7 @@ class ASTOracle:
         self._observer: Observer | None = None
 
     async def start(self) -> None:
-        """Invokes the Oracle's eye with kernel-level filesystem hooks."""
+        """Invokes the Attestor's eye with kernel-level filesystem hooks."""
         self._running = True
         logger.info("👁️ AST ORACLE ONLINE. Sovereign Surveillance on: %s", self.watch_dir)
 
@@ -124,7 +128,7 @@ class ASTOracle:
             await asyncio.sleep(self.poll_interval)
 
     async def stop(self) -> None:
-        """Closes the Oracle's eye and detaches filesystem hooks."""
+        """Closes the Attestor's eye and detaches filesystem hooks."""
         self._running = False
         if self._observer:
             self._observer.stop()
@@ -219,7 +223,7 @@ class ASTOracle:
 
         content = (
             f"El Humano alteró la estructura atómica de `{path.name}`.\n"
-            f"Firma del Oráculo: {intent}\n"
+            f"Firma del Atestador: {intent}\n"
             f"Gravedad: {severity}"
         )
 
@@ -233,7 +237,7 @@ class ASTOracle:
                 content=content,
                 fact_type="human_mutation",
                 meta={
-                    "oracle": "ast_diff_v2",
+                    "attestor": "ast_diff_v2",
                     "file_target": str(path),
                     "mutations": mutations,
                     "severity": severity,
@@ -245,4 +249,4 @@ class ASTOracle:
                 severity,
             )
         except (OSError, ValueError, RuntimeError) as e:
-            logger.error("AST Oracle Injection failed on %s: %s", path.name, e)
+            logger.error("AST Attestor Injection failed on %s: %s", path.name, e)

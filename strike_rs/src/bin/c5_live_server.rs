@@ -1,3 +1,7 @@
+// ============================================================================
+// BABYLON-60 v4.0 Sovereign Hardened
+// █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+// ============================================================================
 use strike_rs::bft_engine::BftAsyncEngine;
 use strike_rs::kda_memory::KdaMemoryBuffer;
 use strike_rs::gelabp_calc::ExergyParams;

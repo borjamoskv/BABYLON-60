@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 
 import asyncio
@@ -101,7 +105,7 @@ class ApotheosisAuditsMixin:
             if getattr(self, "_oracle", None) is None:
                 # Get reference to the optimized engine cache if it exists
                 cache_ref = getattr(self._cortex, "_cache", None)
-                # Pass L1 reference so Oracle reads real access frequency data,
+                # Pass L1 reference so Attestor reads real access frequency data,
                 # not the transaction-count approximation ghost (Ω₁ + Ω₂).
                 self._oracle = ForgettingOracle(
                     self._cortex,

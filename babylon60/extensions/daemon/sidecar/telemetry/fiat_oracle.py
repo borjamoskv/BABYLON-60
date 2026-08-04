@@ -1,10 +1,14 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 import threading
 
 from babylon60.crypto.hash_registry import cortex_hash
 
 # [Causal-Determinist] Exergy-Maximized
 """
-Fiat Oracle Sidecar (Operation Citadel).
+Fiat Attestor Sidecar (Operation Citadel).
 Monitors financial transactions (Simulated/Bunq) and pushes facts to the ledger.
 Sovereign Standard (130/100): Zero-Trust inputs, Backoff, Persistent Queues, Idempotency.
 """
@@ -140,7 +144,7 @@ class FiatOracle:
         )
 
         meta = {
-            "oracle": "fiat_oracle_v1.3.0",
+            "attestor": "fiat_oracle_v1.3.0",
             "amount": amount,
             "currency": currency,
             "provider": "bunq",

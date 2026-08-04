@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """Continuous Commit Polisher Daemon.
 
 Monitors the Git repository, rewrites commits to meet Conventional‑Commit
@@ -21,9 +25,11 @@ REPO_ROOT = Path(__file__).parents[1]
 POLL_INTERVAL = 5  # seconds
 DEBOUNCE_TIME = 10  # seconds after last commit before processing
 
+
 def _latest_commit_hash() -> str:
     result = subprocess.run(["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, capture_output=True, text=True, check=True)
     return result.stdout.strip()
+
 
 def _record_event(event_type: str, payload: dict) -> None:
     async def _inner():
@@ -40,21 +46,28 @@ def _record_event(event_type: str, payload: dict) -> None:
                 source_pk=str(uuid.uuid4()),
             )
             await actor.append(event)
+
     import asyncio
+
     asyncio.run(_inner())
+
 
 def _run_strict_reviewer() -> int:
     proc = subprocess.run([sys.executable, "-m", "babylon60.commands.strict_reviewer"], cwd=REPO_ROOT)
     return proc.returncode
 
+
 def _rewrite_commits() -> None:
     subprocess.run([sys.executable, "scripts/rewrite_commits.py"], cwd=REPO_ROOT, check=True)
 
+
 running = True
+
 
 def _handle_signal(sig: int, frame: Any) -> None:
     global running
     running = False
+
 
 def main() -> None:
     global running
@@ -63,6 +76,7 @@ def main() -> None:
         sys.exit(1)
 
     import signal
+
     signal.signal(signal.SIGINT, _handle_signal)
     signal.signal(signal.SIGTERM, _handle_signal)
 
@@ -92,6 +106,7 @@ def main() -> None:
                 continue
             _record_event("polisher_success", {"commit": _latest_commit_hash()})
             last_change = time.time()
+
 
 if __name__ == "__main__":
     main()

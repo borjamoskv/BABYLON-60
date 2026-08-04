@@ -1,3 +1,7 @@
+// ============================================================================
+// BABYLON-60 v4.0 Sovereign Hardened
+// █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+// ============================================================================
 use rusqlite::{Connection, Result, params};
 use serde::{Deserialize, Serialize};
 use sha2::{Sha256, Digest};

@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 import json
 import hashlib
 import time
@@ -16,6 +20,7 @@ CREATE TABLE IF NOT EXISTS bft_attestations (
     created_at INTEGER NOT NULL
 );
 """
+
 
 class BrowserResearchAgent:
     """
@@ -50,7 +55,7 @@ class BrowserResearchAgent:
             INSERT INTO bft_attestations (attestation_id, url_hash, payload_sha256, anchors_json, lamport_t, causal_taint, created_at)
             VALUES (?, ?, ?, ?, ?, ?, ?)
             """,
-            (attestation_id, url_hash, payload_sha256, json.dumps(anchors), lamport_t, causal_taint, now)
+            (attestation_id, url_hash, payload_sha256, json.dumps(anchors), lamport_t, causal_taint, now),
         )
 
         return {

@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 # SPDX-License-Identifier: Apache-2.0
 """Fact TTL Policy - Reconciles 'Persist Everything' with 'Entropy = Death'.

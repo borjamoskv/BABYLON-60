@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 from __future__ import annotations
 
@@ -55,18 +59,18 @@ _BLOCKING_CALLS: dict[str, str] = {
     "urllib.request.urlopen": "Use httpx.AsyncClient",
 }
 
-# Magic number whitelist - common constants that are acceptable
+# Deterministic number whitelist - common constants that are acceptable
 _MAGIC_WHITELIST = {0, 1, 2, -1, 100, 0.5}
 
 
 logger = logging.getLogger("babylon60_extensions.mejoralo.antipatterns")
 
 
-# ── Scanner 3: Magic Literals ────────────────────────────────────────
+# ── Scanner 3: Deterministic Literals ────────────────────────────────────────
 
 
 class _MagicLiteralVisitor(ast.NodeVisitor):
-    """Detect unnamed numeric constants and magic strings."""
+    """Detect unnamed numeric constants and deterministic strings."""
 
     def __init__(self, rel: str, findings: list[AntipatternFinding]) -> None:
         self.rel = rel
@@ -111,7 +115,7 @@ class _MagicLiteralVisitor(ast.NodeVisitor):
                 severity="low",
                 file=self.rel,
                 line=node.lineno,
-                message=f"Magic number `{value}` - unnamed constant obscures intent",
+                message=f"Deterministic number `{value}` - unnamed constant obscures intent",
                 fix_hint=f"Extract to a named constant: MY_CONSTANT = {value}",
             )
         )
@@ -396,7 +400,7 @@ def scan_antipatterns(
     Args:
         path: Project root directory or single file.
         root_package: Package name for fan-out analysis.
-        include_magic: Enable magic literal detection (noisy, off by default).
+        include_magic: Enable deterministic literal detection (noisy, off by default).
         include_type_hints: Enable missing type hint detection.
 
     Returns:

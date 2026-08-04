@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 MOSKV-1 APEX – Iteración 2 del PoC
 Versión avanzada con:
@@ -40,15 +44,9 @@ DEFAULT_CONFIG = {
     "memory_capacity": 128,
     "concurrency_limit": 4,
     "objective": "Iterative high‑exergy transduction pipeline",
-    "exergy_params": {
-        "G": 10.0,
-        "L": 9.5,
-        "A": 1.0,
-        "B": 1.0,
-        "P": 1.0,
-        "entropy_base": 0.05
-    }
+    "exergy_params": {"G": 10.0, "L": 9.5, "A": 1.0, "B": 1.0, "P": 1.0, "entropy_base": 0.05},
 }
+
 
 def load_config(path: str) -> dict:
     """Load JSON config, falling back to defaults if missing or malformed."""
@@ -64,12 +62,14 @@ def load_config(path: str) -> dict:
         LOGGER.error("Failed to parse config %s: %s – using defaults", path, exc)
         return DEFAULT_CONFIG
 
+
 # ---------------------------------------------------------------------------
 # KDA Memory – bounded, versioned, async safe
 # ---------------------------------------------------------------------------
 @dataclass
 class KDAMemoryBuffer:
     """Bounded O(1) memory with delta‑versioning and async lock protection."""
+
     max_capacity: int = 128
     memory_map: Dict[str, str] = field(default_factory=dict)
     delta_versions: Dict[str, int] = field(default_factory=dict)
@@ -100,6 +100,7 @@ class KDAMemoryBuffer:
                 return self.memory_map[key_hash], self.delta_versions[key_hash]
             return None
 
+
 # ---------------------------------------------------------------------------
 # Async DAG node definition with optional per‑node latency penalty
 # ---------------------------------------------------------------------------
@@ -114,6 +115,7 @@ class AsyncDAGNode:
     completed: bool = False
     result_hash: Optional[str] = None
     exec_time_ms: float = 0.0
+
 
 # ---------------------------------------------------------------------------
 # Planner – generates a richer DAG with optional branching
@@ -168,6 +170,7 @@ class KimiK3AsyncPlanner:
         )
         return [n1, n2, n3, n4, n5, n6]
 
+
 # ---------------------------------------------------------------------------
 # Worker pool – async execution with optional simulated latency
 # ---------------------------------------------------------------------------
@@ -192,6 +195,7 @@ class AsyncWorkerPool:
             LOGGER.debug("Executed %s – proof %s (v%d)", node.node_id, proof[:12], version)
             return True
 
+
 # ---------------------------------------------------------------------------
 # BFT engine – resolves DAG respecting dependencies, fails fast on errors
 # ---------------------------------------------------------------------------
@@ -214,6 +218,7 @@ class BFTAsyncEngine:
                 completed.add(node.node_id)
                 del pending[node.node_id]
         return nodes
+
 
 # ---------------------------------------------------------------------------
 # Advanced GELABP matrix – accounting per‑node latency and concurrency boost
@@ -239,6 +244,7 @@ class AdvancedGELABPMatrix:
             "BottleneckFactor": bottleneck_factor,
         }
 
+
 # ---------------------------------------------------------------------------
 # Main async routine – orchestrates planning, execution, and evaluation
 # ---------------------------------------------------------------------------
@@ -263,16 +269,31 @@ async def async_main() -> None:
         val = await kda.read_delta(n.node_id)
         proof, ver = val if val else ("MISSING", 0)
         deps = f"deps={list(n.dependencies)}" if n.dependencies else "root"
-        LOGGER.info("%s (%s) [%s] → Proof %s (v%d) – exec %.3f ms", n.node_id, n.action_type, deps, proof[:12], ver, n.exec_time_ms)
+        LOGGER.info(
+            "%s (%s) [%s] → Proof %s (v%d) – exec %.3f ms",
+            n.node_id,
+            n.action_type,
+            deps,
+            proof[:12],
+            ver,
+            n.exec_time_ms,
+        )
     # Exergy evaluation
     matrix = AdvancedGELABPMatrix.compute(executed_nodes, wall_ms, cfg["exergy_params"])
     LOGGER.info("--- THERMODYNAMIC GELABP MATRIX ---")
-    LOGGER.info("WallClock: %.2f ms | NodeSum: %.2f ms | Speedup: %.2fx | Entropy: %.4f | Score: %.2f/1000", 
-                matrix["WallClockMs"], matrix["NodeSumMs"], matrix["Speedup"], matrix["Entropy"], matrix["Score"])
+    LOGGER.info(
+        "WallClock: %.2f ms | NodeSum: %.2f ms | Speedup: %.2fx | Entropy: %.4f | Score: %.2f/1000",
+        matrix["WallClockMs"],
+        matrix["NodeSumMs"],
+        matrix["Speedup"],
+        matrix["Entropy"],
+        matrix["Score"],
+    )
     if matrix["Score"] < 700.0:
         LOGGER.error("Exergy score below threshold – aborting")
         sys.exit(1)
     LOGGER.info("[SUCCESS] Iteración 2 completada sin Ineficiencia")
+
 
 if __name__ == "__main__":
     asyncio.run(async_main())

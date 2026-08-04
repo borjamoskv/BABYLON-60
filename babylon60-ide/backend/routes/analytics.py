@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 BABYLON60 IDE — Ledger analytics + lexical search (eje DETERMINAR).
 
@@ -47,9 +51,7 @@ def _find_ledger_db(root: Path) -> Path | None:
     for db_file in root.glob("*.db"):
         try:
             conn = connect_readonly(db_file)
-            has = conn.execute(
-                "SELECT name FROM sqlite_master WHERE type='table' AND name='ledger_entries'"
-            ).fetchone()
+            has = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='ledger_entries'").fetchone()
             conn.close()
             if has:
                 return db_file
@@ -109,9 +111,7 @@ def ledger_analytics() -> dict[str, Any]:
             "contiguous": bool(expected) and lam_distinct == expected,
         }
 
-        span = conn.execute(
-            "SELECT MIN(created_at) AS first, MAX(created_at) AS last FROM ledger_entries"
-        ).fetchone()
+        span = conn.execute("SELECT MIN(created_at) AS first, MAX(created_at) AS last FROM ledger_entries").fetchone()
 
         return {
             "db_path": db_path.name,

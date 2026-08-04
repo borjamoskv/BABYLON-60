@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 BABYLON60 IDE — Ledger API routes.
 Endpoints for browsing and verifying the BFT hash-chain ledger.
@@ -33,9 +37,7 @@ def _find_ledger_db(project_root: Path) -> Path | None:
     for db_file in sorted(project_root.glob("*.db")):
         try:
             with contextlib.closing(connect_readonly(db_file)) as conn:
-                cursor = conn.execute(
-                    "SELECT name FROM sqlite_master WHERE type='table' AND name='ledger_entries'"
-                )
+                cursor = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='ledger_entries'")
                 if cursor.fetchone():
                     return db_file
         except sqlite3.DatabaseError:

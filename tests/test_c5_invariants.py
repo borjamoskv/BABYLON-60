@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 Conformidad Causal-Determinist — dientes de la AUDITORIA_CENTURIA.
 Cada test codifica una ley INV_C5_* de ETHOS v9.3. Se pone ROJO si el pecado
@@ -156,9 +160,6 @@ def test_inv_c5_12_nexus_symlinks():
             )
 
 
-
-
-
 def test_inv_c5_13_nesting_depth_ceiling():
     """INV_C5_13 / GELABP_DEPTH_INVARIANT — AST Control Flow Nesting Depth Ceiling <= 4 per function."""
     import ast
@@ -191,7 +192,7 @@ def test_inv_c5_13_nesting_depth_ceiling():
 
 def test_inv_c5_14_no_broad_except_pass():
     """INV_C5_14 — No bare `except Exception: pass` or swallowing exceptions silently."""
-    hits = _scan({".py"}, r'except\s+Exception\s*:\s*pass\b')
+    hits = _scan({".py"}, r"except\s+Exception\s*:\s*pass\b")
     hits = [h for h in hits if "test_" not in h]
     assert not hits, _fail_msg("INV_C5_14 (No Silent Broad Except Pass)", hits)
 
@@ -211,29 +212,34 @@ def test_inv_c5_16_toolchain_fallback():
 
 def test_inv_c5_17_sovereign_zero_cost():
     """INV_C5_17 — Todo SIEMPRE 100% gratis, libre y auto-hospedado."""
-    hits = _scan({".py", ".ts", ".tsx", ".toml", ".yaml"}, r'(stripe_api_key|paywall|subscription_fee|api_billing_tier)')
+    hits = _scan(
+        {".py", ".ts", ".tsx", ".toml", ".yaml"}, r"(stripe_api_key|paywall|subscription_fee|api_billing_tier)"
+    )
     assert not hits, _fail_msg("INV_C5_17 (Sovereign Zero-Cost)", hits)
 
 
 def test_inv_c5_18_zero_worktree_swarm():
     """INV_C5_18 — Swarms masivos en memoria sin crear worktrees fisicos masivos."""
-    hits = _scan({".py", ".sh"}, r'git\s+worktree\s+add.*agent_')
+    hits = _scan({".py", ".sh"}, r"git\s+worktree\s+add.*agent_")
     hits = [h for h in hits if "test_" not in h]
     assert not hits, _fail_msg("INV_C5_18 (Zero-Worktree Swarm Scaling)", hits)
 
 
 def test_inv_c5_19_turing_castration_scan():
     """INV_C5_19 / INV_C5_TURING_CASTRATION — No unbounded while True loops without stop_event or timeout."""
-    hits = _scan({".py"}, r'while\s+True\s*:\s*$')
-    hits = [h for h in hits if "test_" not in h and "extensions" not in h and "experimental" not in h and "yt-dlp" not in h]
+    hits = _scan({".py"}, r"while\s+True\s*:\s*$")
+    hits = [
+        h for h in hits if "test_" not in h and "extensions" not in h and "experimental" not in h and "yt-dlp" not in h
+    ]
     assert not hits, _fail_msg("INV_C5_19 (Turing Castration — Unbounded while True loop)", hits)
 
 
 def test_inv_c5_20_no_placeholders():
     """INV_C5_20 — Deterministic Execution Matrix: No placeholders (# TODO, pass, ...)."""
-    hits = _scan({".py", ".rs", ".ts", ".sol"}, r'(?i)#\s*TODO\b|^\s*\.\.\.\s*$')
+    hits = _scan({".py", ".rs", ".ts", ".sol"}, r"(?i)#\s*TODO\b|^\s*\.\.\.\s*$")
     hits = [
-        h for h in hits
+        h
+        for h in hits
         if not h.startswith("tests/") and "autodetect_invariants.py" not in h and "demo_exergy_poc.py" not in h
     ]
     assert not hits, _fail_msg("INV_C5_20 (No placeholders / TODO / ...)", hits)
@@ -241,13 +247,13 @@ def test_inv_c5_20_no_placeholders():
 
 def test_inv_c5_21_eip_1153():
     """INV_C5_21 — EIP-1153 strict EVM bounds: keccak256, mload(0x40), lt(gas(), 8000), revert(0x00, 0x04)."""
-    hits = _scan({".sol"}, r'revert\(0,\s*0\)|revert\(0x00,\s*0x00\)')
+    hits = _scan({".sol"}, r"revert\(0,\s*0\)|revert\(0x00,\s*0x00\)")
     assert not hits, _fail_msg("INV_C5_21 (Invalid revert pattern, MUST use 0x00, 0x04)", hits)
 
 
 def test_inv_c5_22_swarm_workspace_locks():
     """INV_C5_22 — Swarm Workspace Deduplication: verify atomic lock acquisition."""
-    hits = _scan({".py"}, r'os\.O_CREAT')
+    hits = _scan({".py"}, r"os\.O_CREAT")
     bad_files = []
     for hit in hits:
         filepath = hit.split(":")[0]
@@ -269,7 +275,7 @@ def test_inv_c5_28_weisfeiler_lehman_prefilter() -> None:
     # and ensure they either import the WL prefilter or have 'wl' / 'weisfeiler' check referenced.
     hits = _scan({".py"}, r"is_isomorphic\(")
     hits = [h for h in hits if "test_" not in h and "poc_graph_isomorphism_wl" not in h]
-    
+
     bad_hits = []
     for hit in hits:
         filepath = hit.split(":")[0]
@@ -278,5 +284,5 @@ def test_inv_c5_28_weisfeiler_lehman_prefilter() -> None:
             content = full_path.read_text(errors="ignore")
             if "weisfeiler" not in content.lower() and "wl" not in content.lower():
                 bad_hits.append(hit)
-                
+
     assert not bad_hits, _fail_msg("INV_C5_28 (Graph Isomorphism WL Pre-Filter)", bad_hits)

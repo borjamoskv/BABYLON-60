@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 import sys
 import time
 import sqlite3
@@ -13,23 +17,25 @@ except ImportError as e:
     print(f"[!] Error importando strike_rs nativo: {e}")
     sys.exit(1)
 
+
 def print_header(title):
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print(f" ☢️  {title}")
-    print("="*70)
+    print("=" * 70)
+
 
 def simulate_policy(name, latency_ms, topology, payload_override=None):
     print(f"\n[*] INYECTANDO POLÍTICA: {name}")
     print(f"    - Latencia Burocrática: {latency_ms}ms")
     print(f"    - Topología: {topology}")
-    
+
     engine = strike_rs.BftSwarmEngine(50, 1000)
-    
+
     for i in range(100):
         node_id = f"tx_{name}_{i}"
         deps = []
         payload_str = f"Inversión de Infraestructura #{i} (Exergía Validada)"
-        
+
         # Override a specific node with a fallacy
         if payload_override and i == 42:
             payload_str = payload_override
@@ -38,10 +44,10 @@ def simulate_policy(name, latency_ms, topology, payload_override=None):
         if topology == "Secuencial (Burocracia)":
             if i > 0:
                 deps.append(f"tx_{name}_{i - 1}")
-        else: # Wide DAG
+        else:  # Wide DAG
             if i > 0:
                 deps.append(f"tx_{name}_0")
-                
+
         engine.add_node(node_id, deps, payload_str, latency_ms, False)
 
     start_t = time.perf_counter()
@@ -57,8 +63,10 @@ def simulate_policy(name, latency_ms, topology, payload_override=None):
         print("\n[!] RECHAZO SISTÉMICO DE LA MATRIZ:")
         print(f"    > {e}")
 
+
 def run_collision_agent(name):
     simulate_policy(name, 2, "Asíncrono (Alta Velocidad)")
+
 
 def main():
     print("\n\n")
@@ -81,7 +89,9 @@ def main():
     print("Narrativa: Una política rápida, pero basada en una premisa falsa que viola")
     print("           las leyes de conservación (Nogood del ATMS).")
     time.sleep(1)
-    simulate_policy("Bicicleta_Financiera", 2, "Asíncrono (Alta Velocidad)", payload_override="Emision de Leliqs sin Respaldo")
+    simulate_policy(
+        "Bicicleta_Financiera", 2, "Asíncrono (Alta Velocidad)", payload_override="Emision de Leliqs sin Respaldo"
+    )
     time.sleep(2)
 
     # 3. Hysteresis Extractivista (OS-Lock Abort)
@@ -89,7 +99,7 @@ def main():
     print("Narrativa: Dos fondos buitre atacan los activos de la base de datos simultáneamente.")
     print("           El Sistema Operativo usará O_CREAT|O_EXCL para causar un Fail-Fast físico.")
     time.sleep(1)
-    
+
     p1 = multiprocessing.Process(target=run_collision_agent, args=("Fondo_Buitre_A",))
     p2 = multiprocessing.Process(target=run_collision_agent, args=("Fondo_Buitre_B",))
     p1.start()
@@ -116,6 +126,7 @@ def main():
         print(f"[!] Error leyendo SQLite: {e}")
 
     print("\n\n>>> FIN DE LA SIMULACIÓN <<<")
+
 
 if __name__ == "__main__":
     main()

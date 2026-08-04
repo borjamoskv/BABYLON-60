@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """Symlink Depth Auditor (INV_C5_12 Enforcer).
 
 Checks all symbolic links in the repository to ensure relative symlinks
@@ -10,6 +14,7 @@ import os
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).parents[1]
+
 
 def audit_symlinks(root: Path = REPO_ROOT) -> list[tuple[Path, str]]:
     violations = []
@@ -26,6 +31,7 @@ def audit_symlinks(root: Path = REPO_ROOT) -> list[tuple[Path, str]]:
                     violations.append((path, target))
     return violations
 
+
 def main() -> int:
     print("🔍 Auditing Symbolic Link Depths (INV_C5_12)...")
     violations = audit_symlinks(REPO_ROOT)
@@ -36,6 +42,7 @@ def main() -> int:
         return 1
     print("🟢 All symbolic links conform to INV_C5_12 depth standard.")
     return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())

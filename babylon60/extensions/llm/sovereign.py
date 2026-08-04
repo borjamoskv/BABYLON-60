@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 # This file is part of CORTEX.
 # Licensed under the Apache License, Version 2.0.
@@ -7,7 +11,7 @@
 """SovereignLLM: Zero-Trust LLM Access.
 
 The antidote to Axiom 4 violations. A self-contained LLM interface
-that NEVER depends on a single external oracle. It chains through every
+that NEVER depends on a single external attestor. It chains through every
 available provider before declaring failure, and includes a pure-local
 template fallback that requires ZERO connectivity.
 
@@ -120,7 +124,7 @@ _LOCAL_PRIORITY: list[str] = [
 
 
 class SovereignLLM:
-    """Zero-Trust LLM access. Never depends on a single oracle.
+    """Zero-Trust LLM access. Never depends on a single attestor.
 
     Axiom 4 compliant: if the tunnel falls, the mission survives.
 

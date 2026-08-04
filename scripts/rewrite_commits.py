@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """Rewrite commit history to enforce Conventional Commits and BFT metadata.
 
 The script performs:
@@ -20,9 +24,11 @@ from babylon60.database.core import connect
 from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
 from babylon60.utils.hygiene import run_exergy_optimizer
 
+
 def _ensure_main():
     subprocess.run(["git", "checkout", "main"], check=True)
     subprocess.run(["git", "reset", "--hard", "origin/main"], check=True)
+
 
 def _create_callback():
     callback = """
@@ -40,22 +46,29 @@ def message_callback(message, metadata):
     new_msg = f"{typ}: {subject}\n\nCausal‑Taint: borjamoskv\nLamport‑T: {metadata['commit_timestamp']}"
     return new_msg
 """
-    with open('msg_callback.py', 'w') as f:
+    with open("msg_callback.py", "w") as f:
         f.write(callback)
 
+
 def _run_filter_repo():
-    subprocess.run([
-        "git", "filter-repo",
-        "--force",
-        "--message-callback", "msg_callback.message_callback",
-    ], check=True)
+    subprocess.run(
+        [
+            "git",
+            "filter-repo",
+            "--force",
+            "--message-callback",
+            "msg_callback.message_callback",
+        ],
+        check=True,
+    )
+
 
 async def _record_events():
-    async with connect('cortex.db') as conn:
+    async with connect("cortex.db") as conn:
         actor = BFTLedgerActor(conn)
         out = subprocess.check_output(["git", "log", "--pretty=%H %P"], text=True)
         for line in out.splitlines():
-            new_sha, parents = line.split(' ', 1)
+            new_sha, parents = line.split(" ", 1)
             payload = {"new_sha": new_sha, "parents": parents}
             event = LedgerEvent(
                 stream="audit",
@@ -69,15 +82,18 @@ async def _record_events():
             )
             await actor.append(event)
 
+
 def main():
     _ensure_main()
     _create_callback()
     _run_filter_repo()
     import asyncio
+
     asyncio.run(_record_events())
     if not run_exergy_optimizer():
         sys.exit("Exergy score too low – aborting rewrite")
     subprocess.run(["git", "push", "origin", "main", "--force"], check=True)
+
 
 if __name__ == "__main__":
     main()

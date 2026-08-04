@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 # This file is part of CORTEX.
 # Licensed under the Apache License, Version 2.0.
@@ -228,7 +232,7 @@ class P0VulnerabilityExtractor:
             "Generate vulnerability hypotheses as a JSON array. Each element must have:\n"
             '- "severity": "critical" | "high" | "medium" | "low"\n'
             '- "vector_type": one of "precision", "reentrancy", "access_control", '
-            '"oracle", "logic", "overflow", "race_condition", "injection", "state_corruption"\n'
+            '"attestor", "logic", "overflow", "race_condition", "injection", "state_corruption"\n'
             '- "hypothesis": one sentence describing the vulnerability\n'
             '- "code_evidence": exact function name and line description\n'
             '- "confidence": "C3-Hypothetical" (unverified) or "C4-Strong" (structurally confirmed)\n'

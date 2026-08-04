@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 """MEJORAlo Auto-Healing - Prompt Templates.
 
@@ -52,7 +56,7 @@ Hallazgos persistentes (han sobrevivido iteraciones previas):
 OBLIGACIONES:
 1. Reescribe completamente las funciones problemáticas
 2. Extrae helpers cuando la complejidad ciclomática > 5
-3. Convierte todos los magic numbers en constantes nombradas
+3. Convierte todos los deterministic numbers en constantes nombradas
 4. Early returns SIEMPRE, nunca else después de return
 5. Type hints en CADA parámetro y retorno, sin excepción
 6. Docstrings concisas y en inglés para toda función pública

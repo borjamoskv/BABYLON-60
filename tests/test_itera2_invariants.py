@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] ITERA-2 — Falsación de INV_BFT_02 (database.core), INV_C5_04 (votos reales),
 # INV_C5_07 (cero necrosis en audit/queue) e INV_C5_03 (arco de atestación SHA3-256).
 # Génesis: AUDITORIA_CENTURIA CENT-03/06/10/14 + NEW-E + ETHOS §3.

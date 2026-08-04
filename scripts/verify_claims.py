@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 verify_claims.py — Verificación paralela del informe de arbitraje contra
 fuentes primarias.
@@ -31,9 +35,9 @@ CTX.verify_mode = ssl.CERT_NONE
 @dataclass
 class Claim:
     id: str
-    claim: str            # afirmación del informe
-    urls: list[str]       # fuentes primarias candidatas
-    probes: list[str]     # regex que confirmarían la cifra
+    claim: str  # afirmación del informe
+    urls: list[str]  # fuentes primarias candidatas
+    probes: list[str]  # regex que confirmarían la cifra
     status: str = "PENDIENTE"
     found: str = ""
     src: str = ""
@@ -42,63 +46,86 @@ class Claim:
 
 
 CLAIMS = [
-    Claim("FABLE_PY",
-          "Fable 4 (2023) añadió target Python; menos maduro que JS",
-          ["https://raw.githubusercontent.com/fable-compiler/Fable/main/CHANGELOG.md",
-           "https://raw.githubusercontent.com/fable-compiler/Fable/main/README.md"],
-          [r"(?i)##?\s*4\.0\.0.*?20(2[2-5])", r"(?i)python", r"(?i)rust|dart|typescript"]),
-
-    Claim("ANDROID_MEM",
-          "Android: vulnerabilidades de memoria 76% (2019) → 24% (2024)",
-          ["https://security.googleblog.com/2024/09/eliminating-memory-safety-vulnerabilities-Android.html",
-           "https://security.googleblog.com/2022/12/memory-safe-languages-in-android-13.html"],
-          [r"76\s*%", r"24\s*%", r"(?i)memory[- ]safety vulnerabilit"]),
-
-    Claim("MSFT_70",
-          "Microsoft: ~70% de CVEs son memory safety (BlueHat IL 2019)",
-          ["https://msrc.microsoft.com/blog/2019/07/a-proactive-approach-to-more-secure-code/",
-           "https://raw.githubusercontent.com/microsoft/MSRC-Security-Research/master/presentations/2019_02_BlueHatIL/2019_01%20-%20BlueHatIL%20-%20Trends%2C%20challenge%2C%20and%20shifts%20in%20software%20vulnerability%20mitigation.pdf"],
-          [r"~?\s*70\s*%", r"(?i)memory safety"]),
-
-    Claim("GAO_15",
-          "Gao/Bird/Barr ICSE 2017: ~15% de bugs JS detectables por tipos",
-          ["https://www0.cs.ucl.ac.uk/staff/e.barr/pub/typestudy.pdf",
-           "https://ttendency.cs.ucl.ac.uk/projects/type_study/documents/type_study.pdf"],
-          [r"15\s*%", r"(?i)detectable", r"(?i)flow|typescript"]),
-
-    Claim("TAKIKAWA",
-          "Takikawa POPL 2016: sound gradual typing con ralentizaciones catastróficas",
-          ["https://www2.ccs.neu.edu/racket/pubs/popl16-tfgnvf.pdf"],
-          [r"(?i)\b\d{1,3}x\b", r"(?i)overhead", r"(?i)sound gradual typing"]),
-
-    Claim("BERGER_REPRO",
-          "Berger TOPLAS 2019: la replicación desmonta Ray et al. FSE 2014",
-          ["https://arxiv.org/abs/1901.10220"],
-          [r"(?i)reproduc", r"(?i)(small|little|not|fail|weak).{0,40}(effect|significan|evidence)"]),
-
-    Claim("QIN_PLDI20",
-          "Qin et al. PLDI 2020: Rust no previene deadlocks ni bugs lógicos",
-          ["https://arxiv.org/abs/2003.03296",
-           "https://songlh.github.io/paper/rust-study.pdf"],
-          [r"(?i)deadlock", r"(?i)unsafe", r"(?i)blocking bug|concurrency bug"]),
-
-    Claim("AIACT_ART12",
-          "EU AI Act Art. 12 exige registro automático de eventos (logs)",
-          ["https://artificialintelligenceact.eu/article/12/"],
-          [r"(?i)automatic(ally)? record", r"(?i)\blogs?\b", r"(?i)traceability",
-           r"(?i)compile|type system|static typing"]),
-
-    Claim("SCHNEIER_LOG",
-          "Schneier&Kelsey: logs seguros protegen entradas PREVIAS al compromiso",
-          ["https://www.schneier.com/wp-content/uploads/2016/02/paper-secure-logs.pdf",
-           "https://www.schneier.com/academic/paperfiles/paper-auditlogs.pdf"],
-          [r"(?i)before.{0,30}compromis", r"(?i)forward", r"(?i)cannot.{0,40}(read|alter|undetect)"]),
-
-    Claim("PY_TYPES_WILD",
-          "Rak-amnouykit et al.: baja cobertura de anotaciones en Python real",
-          ["https://arxiv.org/abs/2011.06413",
-           "https://www.cs.rpi.edu/~milanova/docs/dls2020.pdf"],
-          [r"\b\d{1,2}(\.\d)?\s*%", r"(?i)mypy", r"(?i)pytype", r"(?i)disagree"]),
+    Claim(
+        "FABLE_PY",
+        "Fable 4 (2023) añadió target Python; menos maduro que JS",
+        [
+            "https://raw.githubusercontent.com/fable-compiler/Fable/main/CHANGELOG.md",
+            "https://raw.githubusercontent.com/fable-compiler/Fable/main/README.md",
+        ],
+        [r"(?i)##?\s*4\.0\.0.*?20(2[2-5])", r"(?i)python", r"(?i)rust|dart|typescript"],
+    ),
+    Claim(
+        "ANDROID_MEM",
+        "Android: vulnerabilidades de memoria 76% (2019) → 24% (2024)",
+        [
+            "https://security.googleblog.com/2024/09/eliminating-memory-safety-vulnerabilities-Android.html",
+            "https://security.googleblog.com/2022/12/memory-safe-languages-in-android-13.html",
+        ],
+        [r"76\s*%", r"24\s*%", r"(?i)memory[- ]safety vulnerabilit"],
+    ),
+    Claim(
+        "MSFT_70",
+        "Microsoft: ~70% de CVEs son memory safety (BlueHat IL 2019)",
+        [
+            "https://msrc.microsoft.com/blog/2019/07/a-proactive-approach-to-more-secure-code/",
+            "https://raw.githubusercontent.com/microsoft/MSRC-Security-Research/master/presentations/2019_02_BlueHatIL/2019_01%20-%20BlueHatIL%20-%20Trends%2C%20challenge%2C%20and%20shifts%20in%20software%20vulnerability%20mitigation.pdf",
+        ],
+        [r"~?\s*70\s*%", r"(?i)memory safety"],
+    ),
+    Claim(
+        "GAO_15",
+        "Gao/Bird/Barr ICSE 2017: ~15% de bugs JS detectables por tipos",
+        [
+            "https://www0.cs.ucl.ac.uk/staff/e.barr/pub/typestudy.pdf",
+            "https://ttendency.cs.ucl.ac.uk/projects/type_study/documents/type_study.pdf",
+        ],
+        [r"15\s*%", r"(?i)detectable", r"(?i)flow|typescript"],
+    ),
+    Claim(
+        "TAKIKAWA",
+        "Takikawa POPL 2016: sound gradual typing con ralentizaciones catastróficas",
+        ["https://www2.ccs.neu.edu/racket/pubs/popl16-tfgnvf.pdf"],
+        [r"(?i)\b\d{1,3}x\b", r"(?i)overhead", r"(?i)sound gradual typing"],
+    ),
+    Claim(
+        "BERGER_REPRO",
+        "Berger TOPLAS 2019: la replicación desmonta Ray et al. FSE 2014",
+        ["https://arxiv.org/abs/1901.10220"],
+        [r"(?i)reproduc", r"(?i)(small|little|not|fail|weak).{0,40}(effect|significan|evidence)"],
+    ),
+    Claim(
+        "QIN_PLDI20",
+        "Qin et al. PLDI 2020: Rust no previene deadlocks ni bugs lógicos",
+        ["https://arxiv.org/abs/2003.03296", "https://songlh.github.io/paper/rust-study.pdf"],
+        [r"(?i)deadlock", r"(?i)unsafe", r"(?i)blocking bug|concurrency bug"],
+    ),
+    Claim(
+        "AIACT_ART12",
+        "EU AI Act Art. 12 exige registro automático de eventos (logs)",
+        ["https://artificialintelligenceact.eu/article/12/"],
+        [
+            r"(?i)automatic(ally)? record",
+            r"(?i)\blogs?\b",
+            r"(?i)traceability",
+            r"(?i)compile|type system|static typing",
+        ],
+    ),
+    Claim(
+        "SCHNEIER_LOG",
+        "Schneier&Kelsey: logs seguros protegen entradas PREVIAS al compromiso",
+        [
+            "https://www.schneier.com/wp-content/uploads/2016/02/paper-secure-logs.pdf",
+            "https://www.schneier.com/academic/paperfiles/paper-auditlogs.pdf",
+        ],
+        [r"(?i)before.{0,30}compromis", r"(?i)forward", r"(?i)cannot.{0,40}(read|alter|undetect)"],
+    ),
+    Claim(
+        "PY_TYPES_WILD",
+        "Rak-amnouykit et al.: baja cobertura de anotaciones en Python real",
+        ["https://arxiv.org/abs/2011.06413", "https://www.cs.rpi.edu/~milanova/docs/dls2020.pdf"],
+        [r"\b\d{1,2}(\.\d)?\s*%", r"(?i)mypy", r"(?i)pytype", r"(?i)disagree"],
+    ),
 ]
 
 
@@ -109,8 +136,8 @@ def fetch(url: str, timeout: int = 25) -> tuple[str, str]:
     if raw[:4] == b"%PDF":
         try:
             import subprocess
-            p = subprocess.run(["pdftotext", "-", "-"], input=raw,
-                               capture_output=True, timeout=60)
+
+            p = subprocess.run(["pdftotext", "-", "-"], input=raw, capture_output=True, timeout=60)
             if p.returncode == 0 and p.stdout:
                 return p.stdout.decode("utf-8", "replace"), "pdf"
         except (subprocess.TimeoutExpired, subprocess.CalledProcessError, FileNotFoundError):
@@ -138,7 +165,7 @@ def check(c: Claim) -> dict:
             m = re.search(p, txt)
             if m:
                 i = max(0, m.start() - 90)
-                hits.append(re.sub(r"\s+", " ", txt[i:m.end() + 90]).strip())
+                hits.append(re.sub(r"\s+", " ", txt[i : m.end() + 90]).strip())
         c.src = url
         if len(hits) >= max(2, len(c.probes) // 2):
             c.status = "CONFIRMADO"

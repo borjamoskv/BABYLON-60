@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """Ledger-Aware Pre-Push Guard.
 
 Verifies Causal-Determinist invariants before git push:
@@ -14,6 +18,7 @@ from babylon60.utils.hygiene import run_exergy_optimizer
 
 REPO_ROOT = Path(__file__).parents[1]
 
+
 def verify_exergy() -> bool:
     print("🔋 Verifying Exergy Score (>= 950.0)...")
     ok = run_exergy_optimizer()
@@ -22,6 +27,7 @@ def verify_exergy() -> bool:
     else:
         print("  🔴 Exergy Score below threshold! Aborting push.", file=sys.stderr)
     return ok
+
 
 def verify_invariants() -> bool:
     print("🔍 Verifying Autopoietic Invariants alignment...")
@@ -38,6 +44,7 @@ def verify_invariants() -> bool:
         print(f"  🔴 Invariant alignment failed:\n{res.stdout}\n{res.stderr}", file=sys.stderr)
         return False
 
+
 def verify_symlink_depth() -> bool:
     print("🔗 Verifying Symlink Depth Invariant (INV_C5_12)...")
     res = subprocess.run(
@@ -52,6 +59,7 @@ def verify_symlink_depth() -> bool:
     else:
         print(f"  🔴 Symlink depth verification failed:\n{res.stdout}\n{res.stderr}", file=sys.stderr)
         return False
+
 
 def main() -> int:
     print("🛡️ Igniting Causal-Determinist Pre-Push Ledger Guard...")

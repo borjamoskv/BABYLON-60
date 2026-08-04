@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 """
 Consolidación BFT (Erradicación del Antipatrón de Dispersión SQLite)
@@ -16,13 +20,8 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CENTRAL_DIR = Path.home() / ".babylon60" / "dbs"
 
-MASTER_LEDGERS = {
-    "cortex.db",
-    "master_ledger.db",
-    "cortex_memory.db",
-    "ultrathink_ledger.db",
-    "telemetry.db"
-}
+MASTER_LEDGERS = {"cortex.db", "master_ledger.db", "cortex_memory.db", "ultrathink_ledger.db", "telemetry.db"}
+
 
 def _process_master_db(db_path: Path, name: str) -> bool:
     dest = CENTRAL_DIR / name
@@ -53,7 +52,8 @@ def consolidate_dbs() -> None:
     CENTRAL_DIR.mkdir(parents=True, exist_ok=True)
 
     db_paths = [
-        p for p in REPO_ROOT.rglob("*.db")
+        p
+        for p in REPO_ROOT.rglob("*.db")
         if not any(part in ("venv", ".venv", ".git", "__pycache__") for part in p.parts)
     ]
 
@@ -69,13 +69,14 @@ def consolidate_dbs() -> None:
 
         if _purge_db_file(db_path):
             purged += 1
-            
+
     print("\n============================================================")
     print(" CONSOLIDACIÓN COMPLETADA")
     print("============================================================")
     print(f" Ledgers Maestros movidos a ~/.babylon60/dbs/ : {moved}")
     print(f" Bases de datos de entropía local purgadas      : {purged}")
     print("============================================================\n")
+
 
 if __name__ == "__main__":
     consolidate_dbs()

@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 MOSKV-1 APEX — Axiom Verifier (Z3/SMT-free Pure-Python Implementation)
 Verifies the formal axioms defined in docs/AXIOMATIZATION_MOSKV1.md
@@ -46,6 +50,7 @@ class ExergyParamsSpec:
 # Axiom Verification Functions
 # ---------------------------------------------------------------------------
 
+
 class AxiomVerifier:
     """Exhaustive axiom verification engine for MOSKV-1 APEX."""
 
@@ -61,8 +66,7 @@ class AxiomVerifier:
         """AX-DAG-1: All node IDs must be unique."""
         ids = [n.node_id for n in nodes]
         unique = len(ids) == len(set(ids))
-        self.record("AX-DAG-1 (Unicidad de Identidad)", unique,
-                     f"{len(ids)} nodes, {len(set(ids))} unique IDs")
+        self.record("AX-DAG-1 (Unicidad de Identidad)", unique, f"{len(ids)} nodes, {len(set(ids))} unique IDs")
 
     def verify_dag_acyclicity(self, nodes: List[NodeSpec]) -> None:
         """AX-DAG-2: No cyclic dependencies exist."""
@@ -90,14 +94,14 @@ class AxiomVerifier:
             if nid not in visited:
                 dfs(nid)
 
-        self.record("AX-DAG-2 (Aciclicidad Estricta)", not has_cycle,
-                     "Cycle detected" if has_cycle else "DAG is acyclic")
+        self.record(
+            "AX-DAG-2 (Aciclicidad Estricta)", not has_cycle, "Cycle detected" if has_cycle else "DAG is acyclic"
+        )
 
     def verify_dag_roots_exist(self, nodes: List[NodeSpec]) -> None:
         """AX-DAG-3: At least one root node (no dependencies) exists."""
         roots = [n for n in nodes if len(n.deps) == 0]
-        self.record("AX-DAG-3 (Existencia de Raíces)", len(roots) > 0,
-                     f"{len(roots)} root node(s) found")
+        self.record("AX-DAG-3 (Existencia de Raíces)", len(roots) > 0, f"{len(roots)} root node(s) found")
 
     def verify_dag_closure(self, nodes: List[NodeSpec]) -> None:
         """AX-DAG-4: All referenced dependencies exist as nodes in the DAG."""
@@ -107,50 +111,57 @@ class AxiomVerifier:
             for d in n.deps:
                 if d not in all_ids:
                     missing.add(d)
-        self.record("AX-DAG-4 (Clausura de Dependencias)", len(missing) == 0,
-                     f"Missing deps: {missing}" if missing else "All deps resolved")
+        self.record(
+            "AX-DAG-4 (Clausura de Dependencias)",
+            len(missing) == 0,
+            f"Missing deps: {missing}" if missing else "All deps resolved",
+        )
 
     # === KDA MEMORY AXIOMS ===
 
     def verify_kda_bounded(self, mem: MemorySpec) -> None:
         """AX-KDA-1: entries <= capacity."""
         ok = mem.entries <= mem.capacity
-        self.record("AX-KDA-1 (Acotamiento Estricto)", ok,
-                     f"entries={mem.entries}, capacity={mem.capacity}")
+        self.record("AX-KDA-1 (Acotamiento Estricto)", ok, f"entries={mem.entries}, capacity={mem.capacity}")
 
-    def verify_kda_version_monotonic(self, versions_before: Dict[str, int],
-                                      versions_after: Dict[str, int]) -> None:
+    def verify_kda_version_monotonic(self, versions_before: Dict[str, int], versions_after: Dict[str, int]) -> None:
         """AX-KDA-2: Versions only increase."""
         violations = []
         for k, v_after in versions_after.items():
             v_before = versions_before.get(k, 0)
             if v_after < v_before:
                 violations.append(f"{k}: {v_before} -> {v_after}")
-        self.record("AX-KDA-2 (Monotonía de Versiones)", len(violations) == 0,
-                     f"Violations: {violations}" if violations else "All versions monotonic")
+        self.record(
+            "AX-KDA-2 (Monotonía de Versiones)",
+            len(violations) == 0,
+            f"Violations: {violations}" if violations else "All versions monotonic",
+        )
 
-    def verify_kda_eviction_determinism(self, frequencies: Dict[str, int],
-                                         evicted_key: Optional[str]) -> None:
+    def verify_kda_eviction_determinism(self, frequencies: Dict[str, int], evicted_key: Optional[str]) -> None:
         """AX-KDA-3: Evicted key has minimum frequency."""
         if evicted_key is None:
             self.record("AX-KDA-3 (Determinismo de Evicción)", True, "No eviction occurred")
             return
         min_freq = min(frequencies.values())
         ok = frequencies.get(evicted_key, float("inf")) == min_freq
-        self.record("AX-KDA-3 (Determinismo de Evicción)", ok,
-                     f"Evicted {evicted_key} (freq={frequencies.get(evicted_key)}), min_freq={min_freq}")
+        self.record(
+            "AX-KDA-3 (Determinismo de Evicción)",
+            ok,
+            f"Evicted {evicted_key} (freq={frequencies.get(evicted_key)}), min_freq={min_freq}",
+        )
 
-    def verify_kda_snapshot_isomorphism(self, original: Dict[str, str],
-                                         restored: Dict[str, str]) -> None:
+    def verify_kda_snapshot_isomorphism(self, original: Dict[str, str], restored: Dict[str, str]) -> None:
         """AX-KDA-5: restore(snapshot(m)) ≡ m."""
         ok = original == restored
-        self.record("AX-KDA-5 (Isomorfismo Snapshot-Restore)", ok,
-                     f"original={len(original)} keys, restored={len(restored)} keys")
+        self.record(
+            "AX-KDA-5 (Isomorfismo Snapshot-Restore)",
+            ok,
+            f"original={len(original)} keys, restored={len(restored)} keys",
+        )
 
     # === BFT AXIOMS ===
 
-    def verify_bft_topological_order(self, execution_order: List[str],
-                                      deps_map: Dict[str, FrozenSet[str]]) -> None:
+    def verify_bft_topological_order(self, execution_order: List[str], deps_map: Dict[str, FrozenSet[str]]) -> None:
         """AX-BFT-1: A node executes only after all its dependencies."""
         executed: Set[str] = set()
         violations = []
@@ -160,65 +171,67 @@ class AxiomVerifier:
             if unmet:
                 violations.append(f"{nid} executed before deps {unmet}")
             executed.add(nid)
-        self.record("AX-BFT-1 (Ejecución Topológica)", len(violations) == 0,
-                     f"Violations: {violations}" if violations else "Topological order valid")
+        self.record(
+            "AX-BFT-1 (Ejecución Topológica)",
+            len(violations) == 0,
+            f"Violations: {violations}" if violations else "Topological order valid",
+        )
 
-    def verify_bft_concurrency_bound(self, concurrent_counts: List[int],
-                                      limit: int) -> None:
+    def verify_bft_concurrency_bound(self, concurrent_counts: List[int], limit: int) -> None:
         """AX-BFT-4: Active tasks never exceed concurrency limit."""
         max_concurrent = max(concurrent_counts) if concurrent_counts else 0
         ok = max_concurrent <= limit
-        self.record("AX-BFT-4 (Concurrencia Acotada)", ok,
-                     f"max_concurrent={max_concurrent}, limit={limit}")
+        self.record("AX-BFT-4 (Concurrencia Acotada)", ok, f"max_concurrent={max_concurrent}, limit={limit}")
 
     # === EXERGY AXIOMS ===
 
-    def verify_exergy_formula(self, G: float, L: float, A: float, B: float,
-                               P: float, E: float, speedup: float,
-                               computed_score: float) -> None:
+    def verify_exergy_formula(
+        self, G: float, L: float, A: float, B: float, P: float, E: float, speedup: float, computed_score: float
+    ) -> None:
         """AX-EX-1: Score = min(1000, (G*L'*A*B*P)/E * speedup)."""
         expected = min(1000.0, (G * L * A * B * P) / E * speedup)
         ok = abs(computed_score - expected) < 0.01
-        self.record("AX-EX-1 (Fórmula Canónica)", ok,
-                     f"computed={computed_score:.2f}, expected={expected:.2f}")
+        self.record("AX-EX-1 (Fórmula Canónica)", ok, f"computed={computed_score:.2f}, expected={expected:.2f}")
 
     def verify_entropy_floor(self, E: float, E_base: float) -> None:
         """AX-EX-2: E >= E_base > 0."""
         ok = E >= E_base > 0
-        self.record("AX-EX-2 (Cota Inferior de Entropía)", ok,
-                     f"E={E}, E_base={E_base}")
+        self.record("AX-EX-2 (Cota Inferior de Entropía)", ok, f"E={E}, E_base={E_base}")
 
     def verify_bottleneck_penalty(self, nodes: List[NodeSpec], B: float) -> None:
         """AX-EX-3: B = 0.5 if any node latency > 0.5ms."""
         has_high_latency = any(n.latency_ms > 0.5 for n in nodes)
         expected_B = 0.5 if has_high_latency else 1.0
         ok = abs(B - expected_B) < 0.001
-        self.record("AX-EX-3 (Penalización Bottleneck)", ok,
-                     f"B={B}, expected={expected_B}, high_latency_nodes={has_high_latency}")
+        self.record(
+            "AX-EX-3 (Penalización Bottleneck)",
+            ok,
+            f"B={B}, expected={expected_B}, high_latency_nodes={has_high_latency}",
+        )
 
     def verify_memory_penalty(self, entries: int, capacity: int, Mp: float) -> None:
         """AX-EX-4: Mp = 0.8 if entries > 0.8 * capacity."""
         expected_Mp = 0.8 if entries > 0.8 * capacity else 1.0
         ok = abs(Mp - expected_Mp) < 0.001
-        self.record("AX-EX-4 (Penalización de Memoria)", ok,
-                     f"Mp={Mp}, expected={expected_Mp}, entries={entries}, cap={capacity}")
+        self.record(
+            "AX-EX-4 (Penalización de Memoria)",
+            ok,
+            f"Mp={Mp}, expected={expected_Mp}, entries={entries}, cap={capacity}",
+        )
 
     def verify_score_threshold(self, score: float, aborted: bool) -> None:
         """AX-EX-5: Score < 700 → abort."""
         if score < 700:
             ok = aborted
-            self.record("AX-EX-5 (Umbral de Viabilidad)", ok,
-                         f"Score={score:.2f} < 700, aborted={aborted}")
+            self.record("AX-EX-5 (Umbral de Viabilidad)", ok, f"Score={score:.2f} < 700, aborted={aborted}")
         else:
             ok = not aborted
-            self.record("AX-EX-5 (Umbral de Viabilidad)", ok,
-                         f"Score={score:.2f} >= 700, aborted={aborted}")
+            self.record("AX-EX-5 (Umbral de Viabilidad)", ok, f"Score={score:.2f} >= 700, aborted={aborted}")
 
     def verify_score_upper_bound(self, score: float) -> None:
         """AX-EX-6: Score <= 1000."""
         ok = score <= 1000.0
-        self.record("AX-EX-6 (Cota Superior Cerrada)", ok,
-                     f"Score={score:.2f}")
+        self.record("AX-EX-6 (Cota Superior Cerrada)", ok, f"Score={score:.2f}")
 
     # === CODE INTEGRITY AXIOMS ===
 
@@ -247,14 +260,20 @@ class AxiomVerifier:
                             break
                     if not in_string:
                         violations.append(f"L{i}: contains '{token}'")
-        self.record("AX-CODE-1 (Zero-Placeholder)", len(violations) == 0,
-                     f"Violations: {violations[:5]}" if violations else "Clean source")
+        self.record(
+            "AX-CODE-1 (Zero-Placeholder)",
+            len(violations) == 0,
+            f"Violations: {violations[:5]}" if violations else "Clean source",
+        )
 
     def verify_sqlite_timeout(self, connect_calls: List[Dict[str, str]]) -> None:
         """AX-CODE-3: All sqlite3.connect calls include timeout=."""
         violations = [c for c in connect_calls if "timeout" not in c]
-        self.record("AX-CODE-3 (SQLite Timeout)", len(violations) == 0,
-                     f"{len(violations)} connections without timeout" if violations else "All connections have timeout")
+        self.record(
+            "AX-CODE-3 (SQLite Timeout)",
+            len(violations) == 0,
+            f"{len(violations)} connections without timeout" if violations else "All connections have timeout",
+        )
 
     # === AUTOPOIETIC AXIOMS ===
 
@@ -264,9 +283,12 @@ class AxiomVerifier:
         for i in range(1, len(shifts)):
             delta = shifts[i] - shifts[i - 1]
             if delta < 300.0:
-                violations.append(f"shift[{i-1}]→shift[{i}]: {delta:.1f}s < 300s")
-        self.record("AX-AUTO-1 (Histéresis Térmica)", len(violations) == 0,
-                     f"Violations: {violations}" if violations else "Hysteresis respected")
+                violations.append(f"shift[{i - 1}]→shift[{i}]: {delta:.1f}s < 300s")
+        self.record(
+            "AX-AUTO-1 (Histéresis Térmica)",
+            len(violations) == 0,
+            f"Violations: {violations}" if violations else "Hysteresis respected",
+        )
 
     # === EPISTEMIC AXIOMS ===
 
@@ -276,8 +298,11 @@ class AxiomVerifier:
         for a in attestations:
             if a.get("status") == "Causal-Determinist" and not a.get("extract"):
                 violations.append(f"Attestation {a.get('id')} claims Causal-Determinist without verbatim extract")
-        self.record("AX-EPI-1 (Requisito de Evidencia Verbatim)", len(violations) == 0,
-                     f"Violations: {violations}" if violations else "All Causal-Determinist attestations hold verbatim evidence")
+        self.record(
+            "AX-EPI-1 (Requisito de Evidencia Verbatim)",
+            len(violations) == 0,
+            f"Violations: {violations}" if violations else "All Causal-Determinist attestations hold verbatim evidence",
+        )
 
     def verify_epi_success_rate_degradation(self, success_rate: float, attestations: List[Dict[str, str]]) -> None:
         """AX-EPI-2: 100% success rate forces UNBACKED status."""
@@ -285,9 +310,16 @@ class AxiomVerifier:
         if success_rate == 1.0:
             for a in attestations:
                 if a.get("status") != "UNBACKED":
-                    violations.append(f"Attestation {a.get('id')} has status {a.get('status')} despite 100% success rate")
-        self.record("AX-EPI-2 (Degradación por Tasa de Confirmación)", len(violations) == 0,
-                     f"Violations: {violations}" if violations else "Verifier failure rate correctly aligns with attestation status")
+                    violations.append(
+                        f"Attestation {a.get('id')} has status {a.get('status')} despite 100% success rate"
+                    )
+        self.record(
+            "AX-EPI-2 (Degradación por Tasa de Confirmación)",
+            len(violations) == 0,
+            f"Violations: {violations}"
+            if violations
+            else "Verifier failure rate correctly aligns with attestation status",
+        )
 
     # === METATHEOREMS ===
 
@@ -304,8 +336,7 @@ class AxiomVerifier:
             score = min(1000.0, (G * L * A * B * P) / E_base * sigma)
             if score < 700:
                 all_pass = False
-        self.record("THM-3 (Cota Inferior de Score)", all_pass,
-                     f"Tested {len(test_cases)} parameter combinations")
+        self.record("THM-3 (Cota Inferior de Score)", all_pass, f"Tested {len(test_cases)} parameter combinations")
 
     def verify_thm4_green_theater_impossible(self) -> None:
         """THM-4: With P=0.2 and realistic σ (<0.97), Score < 700."""
@@ -320,14 +351,20 @@ class AxiomVerifier:
             score = min(1000.0, (G * L * 1.0 * B * P) / E_base * sigma)
             if score >= 700:
                 all_fail = False
-        self.record("THM-4 (Imposibilidad Green Theater)", all_fail,
-                     f"Tested {len(test_cases)} parameter combinations with P=0.2")
+        self.record(
+            "THM-4 (Imposibilidad Green Theater)",
+            all_fail,
+            f"Tested {len(test_cases)} parameter combinations with P=0.2",
+        )
 
     def verify_thm5_no_eviction(self, N: int, K: int) -> None:
         """THM-5: If N ≤ K, no eviction occurs."""
         ok = N <= K
-        self.record("THM-5 (Convergencia de Memoria)", ok,
-                     f"N={N} nodes, K={K} capacity → {'no eviction' if ok else 'eviction possible'}")
+        self.record(
+            "THM-5 (Convergencia de Memoria)",
+            ok,
+            f"N={N} nodes, K={K} capacity → {'no eviction' if ok else 'eviction possible'}",
+        )
 
     # === REPORT ===
 
@@ -384,9 +421,12 @@ def main() -> None:
     v.verify_dag_closure(nodes)
 
     # KDA Memory Axioms (simulated state)
-    mem = MemorySpec(capacity=512, entries=12,
-                     versions={f"{base}_n{i}": 1 for i in range(1, 13)},
-                     frequencies={f"{base}_n{i}": 2 for i in range(1, 13)})
+    mem = MemorySpec(
+        capacity=512,
+        entries=12,
+        versions={f"{base}_n{i}": 1 for i in range(1, 13)},
+        frequencies={f"{base}_n{i}": 2 for i in range(1, 13)},
+    )
     v.verify_kda_bounded(mem)
 
     versions_before = {f"{base}_n1": 1, f"{base}_n2": 1}
@@ -394,8 +434,7 @@ def main() -> None:
     v.verify_kda_version_monotonic(versions_before, versions_after)
 
     v.verify_kda_eviction_determinism(
-        frequencies={f"{base}_n1": 5, f"{base}_n2": 1, f"{base}_n3": 3},
-        evicted_key=f"{base}_n2"
+        frequencies={f"{base}_n1": 5, f"{base}_n2": 1, f"{base}_n3": 3}, evicted_key=f"{base}_n2"
     )
 
     original_map = {"k1": "v1", "k2": "v2"}
@@ -430,10 +469,12 @@ def main() -> None:
         own_lines = f.readlines()
     v.verify_no_placeholders(own_lines)
 
-    v.verify_sqlite_timeout([
-        {"call": "sqlite3.connect(db, timeout=5.0)", "timeout": "5.0"},
-        {"call": "sqlite3.connect(db, timeout=10.0)", "timeout": "10.0"},
-    ])
+    v.verify_sqlite_timeout(
+        [
+            {"call": "sqlite3.connect(db, timeout=5.0)", "timeout": "5.0"},
+            {"call": "sqlite3.connect(db, timeout=10.0)", "timeout": "10.0"},
+        ]
+    )
 
     # Autopoietic Axioms
     v.verify_thermal_hysteresis([0.0, 400.0, 800.0])
@@ -442,15 +483,13 @@ def main() -> None:
     # Escenario válido: Tasa de éxito < 1.0, atestación Causal-Determinist incluye extracto verbatim.
     valid_attestations = [
         {"id": "A1", "status": "Causal-Determinist", "extract": "15% bugs detectable"},
-        {"id": "A2", "status": "REJECTED", "extract": ""}
+        {"id": "A2", "status": "REJECTED", "extract": ""},
     ]
     v.verify_epi_verbatim_requirement(valid_attestations)
     v.verify_epi_success_rate_degradation(0.5, valid_attestations)
 
     # Escenario de falsabilización controlado: Tasa 1.0 obliga a degradar a UNBACKED.
-    theater_attestations = [
-        {"id": "A3", "status": "UNBACKED", "extract": ""}
-    ]
+    theater_attestations = [{"id": "A3", "status": "UNBACKED", "extract": ""}]
     v.verify_epi_success_rate_degradation(1.0, theater_attestations)
 
     # Metatheorems

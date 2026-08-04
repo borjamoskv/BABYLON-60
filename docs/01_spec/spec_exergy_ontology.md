@@ -52,7 +52,7 @@ La semántica define cómo las operaciones alteran el estado del sistema. Para m
   * ❌ *Pasiva*: "Esta función revisa si el usuario tiene saldo y luego actualiza la base de datos."
   * ✅ *Causal*: `Pre: user_id en DB -> Exec: tx_deduct(balance) -> Post: ledger_hash actualizado || raise InsufficientFunds`
 
-### B. Isomorfismo Intención-Ejecución (Zero Magic)
+### B. Isomorfismo Intención-Ejecución (Zero Deterministic)
 * **Regla**: No debe existir disparidad entre el nombre de un símbolo y su efecto termodinámico en el hardware. Si una función se llama `get_user()`, es **estrictamente de solo lectura (`pure/idempotent`)**. Si realiza llamadas a red o escrituras en caché, debe llamarse `io_fetch_user_cached()`.
 
 ### C. Falsabilidad Inmediata (Fail-Fast Boundary)

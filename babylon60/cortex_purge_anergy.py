@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # Causal-Determinist: ANERGY TOKEN PURGE ENGINE
 # =================================================================================
 # SYS_ID: LEA_OMEGA (Loose End Annihilator)
@@ -25,23 +29,50 @@ AUDIT_YAML = os.path.join(PROJECT_ROOT, "cortex", "audits", "anergy_purge_audit.
 
 # Do not move these protected root files (Invariant Core)
 PROTECTED_FILES = {
-    ".coderabbit.yaml", ".gitattributes", ".gitignore", ".gitmodules",
-    "AGENTS.md", "Anergy_Audit.yml", "COLLAPSE_P0.sh", "Dockerfile", 
-    "ETHOS.md", "LEARN_SHIP_ITERATE_INVARIANT.md", "LICENSE.md", 
-    "LLM_THERMODYNAMICS_LAYERS.md", "LLM_THERMODYNAMICS_LAYERS_5_8.md", 
-    "MANIFIESTO_CENTURIA.md", "MOSKV_1_APEX_BLUEPRINT.md", "Makefile", 
-    "PROJECT.md", "README.md", "README_APEX.md", "SECURITY.md", 
-    "STATUS.md", "TEXTBOOK_EXERGY_INVARIANT.md", "VECTOR_A_MASTER_LEDGER_DESIGN.md", 
-    "pyproject.toml", "uv.lock", "cortex_purge_anergy.py",
-    "cortex_ssm_mamba_core.py", "cortex_mamba_block.py", "cortex_mamba_network.py",
-    "cortex_mamba_inference.py", "cortex_bpe_tokenizer.py", "core_graph_ledger.py",
-    "io_persist_ledger.py", "net_mamba_ledger_engine.py", "index.html",
-    "license_sovereign_validator.py", "cortex_chaos_monad.py"
+    ".coderabbit.yaml",
+    ".gitattributes",
+    ".gitignore",
+    ".gitmodules",
+    "AGENTS.md",
+    "Anergy_Audit.yml",
+    "COLLAPSE_P0.sh",
+    "Dockerfile",
+    "ETHOS.md",
+    "LEARN_SHIP_ITERATE_INVARIANT.md",
+    "LICENSE.md",
+    "LLM_THERMODYNAMICS_LAYERS.md",
+    "LLM_THERMODYNAMICS_LAYERS_5_8.md",
+    "MANIFIESTO_CENTURIA.md",
+    "MOSKV_1_APEX_BLUEPRINT.md",
+    "Makefile",
+    "PROJECT.md",
+    "README.md",
+    "README_APEX.md",
+    "SECURITY.md",
+    "STATUS.md",
+    "TEXTBOOK_EXERGY_INVARIANT.md",
+    "VECTOR_A_MASTER_LEDGER_DESIGN.md",
+    "pyproject.toml",
+    "uv.lock",
+    "cortex_purge_anergy.py",
+    "cortex_ssm_mamba_core.py",
+    "cortex_mamba_block.py",
+    "cortex_mamba_network.py",
+    "cortex_mamba_inference.py",
+    "cortex_bpe_tokenizer.py",
+    "core_graph_ledger.py",
+    "io_persist_ledger.py",
+    "net_mamba_ledger_engine.py",
+    "index.html",
+    "license_sovereign_validator.py",
+    "cortex_chaos_monad.py",
 }
+
 
 def ensure_dirs() -> None:
     for d in [ARCHIVE_SCRIPTS, ARCHIVE_DATA, ARCHIVE_DBS]:
         os.makedirs(d, exist_ok=True)
+
 
 def _get_target_dir(item: str) -> str | None:
     if item.endswith(".py"):
@@ -88,17 +119,13 @@ def main() -> None:
 
     audit_report = {
         "Claim": "Root directory Anergy (loose scripts, DBs, and datasets) has been structurally purged and archived, restoring 00_WORKSPACE.md hierarchy invariant.",
-        "Proof": {
-            "Base": "sha3_256::cortex_taint",
-            "Range": [count, count],
-            "Confidence": "Causal-Determinist"
-        },
+        "Proof": {"Base": "sha3_256::cortex_taint", "Range": [count, count], "Confidence": "Causal-Determinist"},
         "Operator": "borjamoskv",
         "System_Level": "Causal-Determinist",
         "Anergy_Files_Purged": count,
         "Anergy_Bytes_Purged": total_bytes,
         "Cortex_Taint": cortex_taint,
-        "Timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat()
+        "Timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
     }
 
     os.makedirs(os.path.dirname(AUDIT_YAML), exist_ok=True)
@@ -113,6 +140,7 @@ def main() -> None:
 class BFTCausalInvariantError(Exception):
     """BFT Causal Invariant Exception for Anergy Purge Engine."""
 
+
 def safe_purge_anergy(target_db_path: str, cortex_taint: str) -> bool:
     """
     Versión segura y auditada para purgar la anergia del ledger.
@@ -122,10 +150,10 @@ def safe_purge_anergy(target_db_path: str, cortex_taint: str) -> bool:
     db_path = Path(target_db_path).resolve()
     if not db_path.exists() or db_path.suffix != ".db":
         raise FileNotFoundError(f"Ruta de base de datos inválida o insegura: {target_db_path}")
-        
+
     # 2. Sanitizar el taint de la IA usando shlex
     sanitized_taint = shlex.quote(cortex_taint)
-    
+
     # 3. Forzar el uso de listas en subprocess eliminando shell=True
     # Evita que caracteres como ';', '&&' o '|' inyectados ejecuten código arbitrario
     if shutil.which("uv") is not None:
@@ -133,18 +161,19 @@ def safe_purge_anergy(target_db_path: str, cortex_taint: str) -> bool:
     else:
         # Fallback per INV_C5_16: try running cortex-purge directly if uv is absent
         cmd = ["cortex-purge", "--db", str(db_path), "--taint", sanitized_taint]
-    
+
     try:
         result = subprocess.run(
-            cmd, 
-            capture_output=True, 
-            text=True, 
+            cmd,
+            capture_output=True,
+            text=True,
             check=True,
-            env={**os.environ, "CORTEX_ISOLATION": "1"} # Mantener aislamiento per-tenant
+            env={**os.environ, "CORTEX_ISOLATION": "1"},  # Mantener aislamiento per-tenant
         )
         return "PURGE_SUCCESS" in result.stdout
     except subprocess.CalledProcessError as e:
         raise BFTCausalInvariantError(f"Fallo crítico en la purga: {e.stderr}")
+
 
 if __name__ == "__main__":
     main()

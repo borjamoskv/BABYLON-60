@@ -1,3 +1,7 @@
+// ============================================================================
+// BABYLON-60 v4.0 Sovereign Hardened
+// █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+// ============================================================================
 #![allow(unsafe_op_in_unsafe_fn)]
 use pyo3::prelude::*;
 use pyo3::exceptions::PyRuntimeError;

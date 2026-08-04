@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # causal_isomorphism/transpiler.py — Causal Isomorphism Transpiler Orchestrator
 # Causal-Determinist: F# → {Solidity, Rust} controlled AST transmutation
 # Author: Borja Moskv (borjamoskv)
@@ -14,6 +18,7 @@ Pipeline:
 This module ties together parser, validator, and emitters into a single
 deterministic pipeline invocation.
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -34,6 +39,7 @@ from causal_isomorphism.regime_validator import (
 @dataclass
 class TranspilationResult:
     """Complete result of a transpilation run."""
+
     source_file: str
     ir_module: IRModule
     solidity_output: str
@@ -103,6 +109,7 @@ class CausalIsomorphismTranspiler:
             output_dir=Path("causal_isomorphism/generated/"),
         )
     """
+
     parser: FSharpParser = field(default_factory=FSharpParser)
     validator: RegimeValidator = field(default_factory=RegimeValidator)
     sol_emitter: SolidityEmitter = field(default_factory=SolidityEmitter)
@@ -217,5 +224,6 @@ class CausalIsomorphismTranspiler:
     def _to_snake(name: str) -> str:
         """Convert PascalCase to snake_case."""
         import re
+
         s1 = re.sub(r"(.)([A-Z][a-z]+)", r"\1_\2", name)
         return re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", s1).lower()

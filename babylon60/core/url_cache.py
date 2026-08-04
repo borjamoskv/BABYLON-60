@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 [Causal-Determinist] babylon60.core.url_cache — Strict Thermodynamic Cache for Browser Agent.
 
@@ -27,9 +31,11 @@ CREATE TABLE IF NOT EXISTS url_cache (
 );
 """
 
+
 def hash_url(url: str) -> str:
     """Computes deterministic SHA256 hash of a normalized URL."""
     return hashlib.sha256(url.strip().encode("utf-8")).hexdigest()
+
 
 class URLCacheSync:
     """Synchronous URL Cache interface for CLI tools and scripts."""
@@ -42,14 +48,11 @@ class URLCacheSync:
         """Retrieve cached payload if not expired."""
         u_hash = hash_url(url)
         cursor = self.conn.cursor()
-        cursor.execute(
-            "SELECT payload, created_at FROM url_cache WHERE url_hash = ?",
-            (u_hash,)
-        )
+        cursor.execute("SELECT payload, created_at FROM url_cache WHERE url_hash = ?", (u_hash,))
         row = cursor.fetchone()
         if not row:
             return None
-        
+
         payload, created_at = row
         if time.time() - created_at > max_age_seconds:
             # Expired cache entry
@@ -60,7 +63,7 @@ class URLCacheSync:
         """Store payload with causal_taint audit metadata (INV_BFT_03)."""
         if not causal_taint:
             raise ValueError("INV_BFT_03: causal_taint is mandatory for writes.")
-            
+
         u_hash = hash_url(url)
         now = int(time.time())
         self.conn.execute(
@@ -68,8 +71,9 @@ class URLCacheSync:
             INSERT OR REPLACE INTO url_cache (url_hash, url, payload, created_at, causal_taint)
             VALUES (?, ?, ?, ?, ?)
             """,
-            (u_hash, url, payload, now, causal_taint)
+            (u_hash, url, payload, now, causal_taint),
         )
+
 
 class URLCacheAsync:
     """Async URL Cache interface for event loops."""
@@ -86,8 +90,7 @@ class URLCacheAsync:
         try:
             await self._init_db(conn)
             async with conn.execute(
-                "SELECT payload, created_at FROM url_cache WHERE url_hash = ?",
-                (u_hash,)
+                "SELECT payload, created_at FROM url_cache WHERE url_hash = ?", (u_hash,)
             ) as cursor:
                 row = await cursor.fetchone()
                 if not row:
@@ -112,7 +115,7 @@ class URLCacheAsync:
                 INSERT OR REPLACE INTO url_cache (url_hash, url, payload, created_at, causal_taint)
                 VALUES (?, ?, ?, ?, ?)
                 """,
-                (u_hash, url, payload, now, causal_taint)
+                (u_hash, url, payload, now, causal_taint),
             )
         finally:
             await conn.close()

@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Falsación determinista de INV_C5_05 (verificador vivo) e INV_C5_07 (falla ruidosa).
 # Génesis: AUDITORIA_CENTURIA §11.2 NEW-B (verify_chain roto bajo cifrado) + NEW-C (SIGKILL auto-necrosis).
 from __future__ import annotations

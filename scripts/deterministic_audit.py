@@ -10,24 +10,28 @@ import json
 from typing import List, Dict, Any
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TARGET_EXTENSIONS = {'.py', '.rs', '.lean', '.md'}
+TARGET_EXTENSIONS = {".py", ".rs", ".lean", ".md"}
 
 MYTHOLOGICAL_TERMS = [
-    r'\bmagia\b', r'\bmagical\b', r'\bmagic\b', 
-    r'\boráculo\b', r'\boracle\b', 
-    r'\bBFT\s*Local\b',
+    r"\bmagia\b",
+    r"\bmagical\b",
+    r"\bmagic\b",
+    r"\boráculo\b",
+    r"\boracle\b",
+    r"\bBFT\s*Local\b",
 ]
+
 
 def check_ast_nesting(filepath: str) -> List[Dict[str, Any]]:
     violations = []
     try:
-        with open(filepath, 'r', encoding='utf-8') as f:
+        with open(filepath, "r", encoding="utf-8") as f:
             source = f.read()
         tree = ast.parse(source)
     except SyntaxError:
-        return [{'type': 'SyntaxError', 'line': 0}]
+        return [{"type": "SyntaxError", "line": 0}]
     except Exception as e:
-        return [{'type': 'ASTReadError', 'details': str(e)}]
+        return [{"type": "ASTReadError", "details": str(e)}]
 
     class NestingVisitor(ast.NodeVisitor):
         def __init__(self):
@@ -36,14 +40,19 @@ def check_ast_nesting(filepath: str) -> List[Dict[str, Any]]:
             self.violations = []
 
         def generic_visit(self, node):
-            increases_depth = isinstance(node, (ast.If, ast.For, ast.While, ast.Try, ast.With, ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+            increases_depth = isinstance(
+                node,
+                (ast.If, ast.For, ast.While, ast.Try, ast.With, ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef),
+            )
             if increases_depth:
                 self.current_depth += 1
                 if self.current_depth > 4:
-                    self.violations.append({'type': 'NestingViolation', 'depth': self.current_depth, 'line': getattr(node, 'lineno', 0)})
-            
+                    self.violations.append(
+                        {"type": "NestingViolation", "depth": self.current_depth, "line": getattr(node, "lineno", 0)}
+                    )
+
             super().generic_visit(node)
-            
+
             if increases_depth:
                 self.current_depth -= 1
 
@@ -51,41 +60,45 @@ def check_ast_nesting(filepath: str) -> List[Dict[str, Any]]:
     visitor.visit(tree)
     return visitor.violations
 
+
 def scan_file(filepath: str) -> Dict[str, Any]:
     issues = []
-    
+
     try:
-        with open(filepath, 'r', encoding='utf-8') as f:
+        with open(filepath, "r", encoding="utf-8") as f:
             content = f.read()
             lines = content.splitlines()
     except Exception as e:
-        return {'file': filepath, 'error': f"Failed to read: {e}"}
+        return {"file": filepath, "error": f"Failed to read: {e}"}
 
     # Check mythological terms
     for term in MYTHOLOGICAL_TERMS:
         regex = re.compile(term, re.IGNORECASE)
         for i, line in enumerate(lines):
             if regex.search(line):
-                issues.append({'type': 'MythologicalTerm', 'term': term, 'line': i + 1, 'content': line.strip()})
+                issues.append({"type": "MythologicalTerm", "term": term, "line": i + 1, "content": line.strip()})
 
     # Check headers (very basic heuristic)
-    if filepath.endswith('.py') or filepath.endswith('.rs'):
-        if not any('BABYLON-60' in line for line in lines[:10]):
-             issues.append({'type': 'MissingHeader', 'line': 1, 'details': 'No BABYLON-60 header found in first 10 lines.'})
+    if filepath.endswith(".py") or filepath.endswith(".rs"):
+        if not any("BABYLON-60" in line for line in lines[:10]):
+            issues.append(
+                {"type": "MissingHeader", "line": 1, "details": "No BABYLON-60 header found in first 10 lines."}
+            )
 
     # Check AST Nesting for python
-    if filepath.endswith('.py'):
+    if filepath.endswith(".py"):
         ast_issues = check_ast_nesting(filepath)
         issues.extend(ast_issues)
 
     if issues:
-        return {'file': filepath, 'issues': issues}
+        return {"file": filepath, "issues": issues}
     return {}
+
 
 def main():
     report = []
-    ignore_dirs = {'.git', '.venv', '__pycache__', 'target', '.pytest_cache', '.ruff_cache', 'scratch'}
-    
+    ignore_dirs = {".git", ".venv", "__pycache__", "target", ".pytest_cache", ".ruff_cache", "scratch"}
+
     for root, dirs, files in os.walk(REPO_ROOT):
         dirs[:] = [d for d in dirs if d not in ignore_dirs]
         for file in files:
@@ -95,16 +108,17 @@ def main():
                 result = scan_file(filepath)
                 if result:
                     report.append(result)
-                    
-    scratch_dir = os.path.join(REPO_ROOT, 'scratch')
+
+    scratch_dir = os.path.join(REPO_ROOT, "scratch")
     os.makedirs(scratch_dir, exist_ok=True)
-    report_path = os.path.join(scratch_dir, 'audit_report.json')
-    
-    with open(report_path, 'w', encoding='utf-8') as f:
+    report_path = os.path.join(scratch_dir, "audit_report.json")
+
+    with open(report_path, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2, ensure_ascii=False)
-        
+
     print(f"Audit complete. Found {len(report)} files with issues.")
     print(f"Report written to {report_path}")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

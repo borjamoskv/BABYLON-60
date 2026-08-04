@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # causal_isomorphism/emitter_solidity.py — IR → Solidity Emitter
 # Causal-Determinist: Regime-filtered Solidity code generation
 # Author: Borja Moskv (borjamoskv)
@@ -17,6 +21,7 @@ REGIME ENFORCEMENT:
 The emitter generates contracts that anchor ontological state on-chain
 without computing the physics of state transitions.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -78,6 +83,7 @@ class SolidityEmitter:
     Enforces the Trilingual Regime by filtering out functions
     classified as PHYSICS_COMPUTATION or POSET_OPERATION.
     """
+
     indent: int = 0
     lines: list[str] = field(default_factory=list)
     _emitted_enums: set[str] = field(default_factory=set)
@@ -218,10 +224,12 @@ class SolidityEmitter:
 
         for union in module.unions:
             if not union.is_simple_enum:
-                self._line(f"event {union.name}Committed("
-                           f"{union.name}Tag indexed prevTag, "
-                           f"{union.name}Tag indexed newTag, "
-                           f"uint256 latentSteps);")
+                self._line(
+                    f"event {union.name}Committed("
+                    f"{union.name}Tag indexed prevTag, "
+                    f"{union.name}Tag indexed newTag, "
+                    f"uint256 latentSteps);"
+                )
 
         self._line("event StateAnchored(string prevHead, string newHead, uint256 steps);")
         self._line("event ApoptosisLogged(string taint, string reason);")
@@ -285,7 +293,7 @@ class SolidityEmitter:
             self._line("// Commit boundary — anchor the computed state")
             self._line("string memory prev = currentHead;")
             self._line("// State mutation anchored here")
-            self._line('emit StateAnchored(prev, currentHead, latentSteps);')
+            self._line("emit StateAnchored(prev, currentHead, latentSteps);")
 
         self.indent -= 1
         self._line("}")

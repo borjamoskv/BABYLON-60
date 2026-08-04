@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 Causal-Determinist Genomic Evaluation Engine.
 Performs quantitative calculations for Tumor Mutational Burden (TMB), APOBEC Mutational Signature enrichment,

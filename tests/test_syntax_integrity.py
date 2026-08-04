@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """INV_SYNTAX_INTEGRITY: every tracked Python module must compile.
 
 Fail-fast invariant: a single SyntaxError anywhere in the tracked tree

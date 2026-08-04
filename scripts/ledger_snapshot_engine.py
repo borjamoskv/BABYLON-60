@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """Incremental Ledger Snapshot Engine.
 
 Creates deterministic snapshots of cortex.db, computes SHA-256 manifests,
@@ -22,6 +26,7 @@ SNAPSHOT_DIR = REPO_ROOT / "audit" / "snapshots"
 DB_PATH = REPO_ROOT / "cortex.db"
 AUTHOR = "Telmo Dinámico de Moskv (borjamoskv)"
 
+
 def compute_sha256(filepath: Path) -> str:
     h = hashlib.sha256()
     with open(filepath, "rb") as f:
@@ -29,9 +34,11 @@ def compute_sha256(filepath: Path) -> str:
             h.update(chunk)
     return h.hexdigest()
 
+
 def get_latest_commit() -> str:
     res = subprocess.run(["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, capture_output=True, text=True)
     return res.stdout.strip() if res.returncode == 0 else "unknown"
+
 
 def create_snapshot() -> Path:
     SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
@@ -66,6 +73,7 @@ def create_snapshot() -> Path:
 
     return manifest_path
 
+
 async def record_snapshot_event(manifest_path: Path) -> None:
     with open(manifest_path) as f:
         data = json.load(f)
@@ -87,13 +95,16 @@ async def record_snapshot_event(manifest_path: Path) -> None:
     finally:
         await actor.stop()
 
+
 def main() -> int:
     print(f"📸 Igniting Ledger Snapshot Engine by {AUTHOR}...")
     manifest_path = create_snapshot()
     import asyncio
+
     asyncio.run(record_snapshot_event(manifest_path))
     print(f"🟢 Ledger snapshot created successfully: {manifest_path.name}")
     return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())

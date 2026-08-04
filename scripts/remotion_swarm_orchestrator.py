@@ -11,8 +11,9 @@ import dataclasses
 from typing import List, Dict
 
 TOTAL_FRAMES = 72000  # 20 minutos @ 60 FPS
-SWARM_SIZE = 10000    # 10,000 Agentes
+SWARM_SIZE = 10000  # 10,000 Agentes
 FRAMES_PER_AGENT = TOTAL_FRAMES / SWARM_SIZE  # 7.2 frames por agente
+
 
 @dataclasses.dataclass
 class FrameChunkPayload:
@@ -21,8 +22,10 @@ class FrameChunkPayload:
     end_frame: int
     payload_hash: str
 
+
 class AgencyHypervisor:
     """Virtual In-memory Swarm Orchestrator for Remotion Parallel Rendering."""
+
     def __init__(self, swarm_size: int):
         self.swarm_size = swarm_size
         self.frame_registry: Dict[int, str] = {}  # frame_idx -> payload_hash
@@ -32,7 +35,7 @@ class AgencyHypervisor:
         for i in range(self.swarm_size):
             start = int(i * FRAMES_PER_AGENT)
             end = int((i + 1) * FRAMES_PER_AGENT)
-            chunks.append({"agent_id": f"agent_actor_{i+1:05d}", "start": start, "end": end})
+            chunks.append({"agent_id": f"agent_actor_{i + 1:05d}", "start": start, "end": end})
         return chunks
 
     def commit_frame_payload(self, frame_idx: int, payload_hash: str) -> None:
@@ -46,21 +49,25 @@ class AgencyHypervisor:
                 )
         self.frame_registry[frame_idx] = payload_hash
 
+
 def simulate_swarm_render():
     hypervisor = AgencyHypervisor(SWARM_SIZE)
     chunks = hypervisor.allocate_chunks()
-    
+
     print(f"[BABYLON-60 SWARM] Instanciados {SWARM_SIZE} agentes en memoria (INV_C5_18: Zero-Worktree).")
     print(f"[BABYLON-60 SWARM] Particionado: {TOTAL_FRAMES} frames ({FRAMES_PER_AGENT} frames/agente).")
-    
+
     # Simulación de renderizado paralelo por agentes
     for chunk in chunks[:10]:  # Muestra inicial
         agent_id = chunk["agent_id"]
         for f in range(chunk["start"], chunk["end"]):
             p_hash = hashlib.sha256(f"frame_{f}_{agent_id}".encode()).hexdigest()
             hypervisor.commit_frame_payload(f, p_hash)
-            
-    print(f"[BABYLON-60 SWARM] Verificación BFT limpia (INV_BFT_04). {len(hypervisor.frame_registry)} frames probados sin colisión.")
+
+    print(
+        f"[BABYLON-60 SWARM] Verificación BFT limpia (INV_BFT_04). {len(hypervisor.frame_registry)} frames probados sin colisión."
+    )
+
 
 if __name__ == "__main__":
     simulate_swarm_render()

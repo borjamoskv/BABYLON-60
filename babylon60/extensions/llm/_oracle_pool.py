@@ -1,5 +1,5 @@
 # [Causal-Determinist] Exergy-Maximized — borjamoskv/BABYLON-60
-# Oracle Pool: Async Swarm + BFT Fallback Chain + Inference Ledger
+# Attestor Pool: Async Swarm + BFT Fallback Chain + Inference Ledger
 # Score: 1000/1000 — Zero external financial dependency.
 """
 OraclePool — Sovereign Async Inference Engine.
@@ -45,7 +45,7 @@ __all__ = ["OraclePool", "InferenceRecord", "OracleResult"]
 
 @dataclass(frozen=True)
 class InferenceRecord:
-    """Cryptographic attestation of a single oracle inference.
+    """Cryptographic attestation of a single attestor inference.
 
     Satisfies Write-Path Contract §4: every output is tainted + sealed.
     Persisted to babylon60/audit/ledger.py on commit.
@@ -130,7 +130,7 @@ def _emit_to_audit(record: InferenceRecord) -> None:
 
 @dataclass
 class OracleResult:
-    """Output of a single oracle call, including cryptographic attestation."""
+    """Output of a single attestor call, including cryptographic attestation."""
 
     text: str
     record: InferenceRecord
@@ -174,7 +174,7 @@ class _NodeHealth:
 
 
 class OraclePool:
-    """Sovereign Async Oracle Pool — 1000/1000 exergy score.
+    """Sovereign Async Attestor Pool — 1000/1000 exergy score.
 
     Features:
         - asyncio.TaskGroup parallel batch dispatch (≥10x throughput vs serial)
@@ -233,7 +233,7 @@ class OraclePool:
         temperature: float = 0.0,
         max_tokens: int = 2048,
     ) -> OracleResult:
-        """Single async oracle call with BFT fallback + ledger seal."""
+        """Single async attestor call with BFT fallback + ledger seal."""
         return await self._dispatch(prompt, system, temperature, max_tokens)
 
     async def batch(
@@ -263,7 +263,7 @@ class OraclePool:
         return [t.result() for t in tasks]
 
     def snapshot(self) -> dict[str, Any]:
-        """Observable health state of all oracle nodes."""
+        """Observable health state of all attestor nodes."""
         return {
             name: {
                 "healthy": h.is_healthy(),
@@ -396,7 +396,7 @@ def build_sovereign_pool(
     primary_model: str = "deepseek-r1:7b",
     fallback_configs: list[dict[str, str]] | None = None,
 ) -> OraclePool:
-    """Build the sovereign 1000/1000 oracle pool.
+    """Build the sovereign 1000/1000 attestor pool.
 
     Default BFT chain:
         Primary:   ollama/deepseek-r1:7b   (local, zero cost, zero network)

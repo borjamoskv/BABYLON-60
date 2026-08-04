@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] BFT consensus committer — Operador ortogonal (C) puro.
 # No valida matemáticamente. Solo muta disco y persiste ledger (WAL).
 import sqlite3
@@ -6,6 +10,7 @@ from dataclasses import dataclass
 from babylon60.database import core as database_core
 from babylon60.core.crypto import canonicalize_cbor
 
+
 @dataclass(frozen=True)
 class StateMutation:
     agent_id: str
@@ -13,6 +18,7 @@ class StateMutation:
     timestamp: float
     signature: str
     causal_taint: str = "BFT_Consensus_Init"
+
 
 class BFT_Committer:
     def __init__(self, db_path: str = "master_ledger.db") -> None:
@@ -52,7 +58,9 @@ class BFT_Committer:
             cursor.execute("SELECT payload FROM state_log WHERE mutation_hash = ?", (mutation_hash,))
             row = cursor.fetchone()
             if row and row[0] != cbor_payload:
-                raise ValueError(f"Fail-fast: INV_BFT_04 Collision for mutation_hash {mutation_hash}. Differing payload detected.")
+                raise ValueError(
+                    f"Fail-fast: INV_BFT_04 Collision for mutation_hash {mutation_hash}. Differing payload detected."
+                )
             return True
 
     def get_audit_rows(self):

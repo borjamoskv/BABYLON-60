@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 INV_BFT_04 / Thermodynamic Valve Extension
 Bayesian Swarm module with Logarithmic Opinion Pooling (LogOP).
@@ -7,6 +11,7 @@ Faithful to Gelfand & Dey.
 from typing import List, Dict
 import math
 
+
 class BayesianSwarm:
     def __init__(self, agents: List[str]):
         """
@@ -15,16 +20,14 @@ class BayesianSwarm:
         self.agents = agents
 
     def logarithmic_opinion_pool(
-        self,
-        opinions: Dict[str, Dict[str, float]],
-        weights: Dict[str, float] = None
+        self, opinions: Dict[str, Dict[str, float]], weights: Dict[str, float] = None
     ) -> Dict[str, float]:
         """
         Computes the Logarithmic Opinion Pool (LogOP) of multiple categorical distributions.
-        
+
         opinions: Dict mapping agent_id -> Dict[hypothesis -> probability]
         weights: Optional dict mapping agent_id -> weight. Defaults to uniform weights.
-        
+
         Returns a normalized categorical distribution Dict[hypothesis -> probability].
         """
         if not opinions:
@@ -41,18 +44,18 @@ class BayesianSwarm:
             hypotheses.update(dist.keys())
 
         aggregated_unnormalized = {}
-        
+
         for hyp in hypotheses:
             log_sum = 0.0
             vetoed = False
             for agent, dist in opinions.items():
                 p = dist.get(hyp, 0.0)
                 w = weights.get(agent, 0.0)
-                
+
                 if p <= 0.0:
                     vetoed = True
-                    break # Veto absolute (LogOP property)
-                
+                    break  # Veto absolute (LogOP property)
+
                 # Geometric weighted component in logarithmic domain to prevent underflow
                 p_clamped = max(p, 1e-300)
                 try:
@@ -64,7 +67,7 @@ class BayesianSwarm:
                 except ValueError:
                     vetoed = True
                     break
-            
+
             if vetoed:
                 aggregated_unnormalized[hyp] = 0.0
             else:

@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 Unit tests for Native Messaging Transducer (scripts/moskv_native_host.py).
 Tests IPC frame reading, 32-bit LE packing, payload commitment, size limits, and event dispatch.

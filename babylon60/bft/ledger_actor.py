@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 from __future__ import annotations
 import os
 import asyncio
@@ -240,7 +244,9 @@ class BFTLedgerActor:
         self, db: aiosqlite.Connection, event_id: str, event: LedgerEvent, stored_payload: str, created_at: str
     ) -> tuple[int, str]:
         await db.execute("BEGIN IMMEDIATE")
-        cursor = await db.execute("SELECT seq, entry_hash, payload_json FROM ledger_entries WHERE event_id = ?", (event_id,))
+        cursor = await db.execute(
+            "SELECT seq, entry_hash, payload_json FROM ledger_entries WHERE event_id = ?", (event_id,)
+        )
         row = await cursor.fetchone()
         if row:
             existing_payload = str(row[2])
@@ -276,7 +282,9 @@ class BFTLedgerActor:
         )
         db_row = await cursor.fetchone()
         if db_row is None:
-            cursor = await db.execute("SELECT seq, entry_hash, payload_json FROM ledger_entries WHERE event_id = ?", (event_id,))
+            cursor = await db.execute(
+                "SELECT seq, entry_hash, payload_json FROM ledger_entries WHERE event_id = ?", (event_id,)
+            )
             db_row = await cursor.fetchone()
             if db_row is None:
                 raise RuntimeError("Insertion failed: event_id not persisted and not found")

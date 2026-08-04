@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 Causal-Determinist Strict Data Models for the Genome Transducer Engine.
 Enforces typed invariants (Rule Ω17), exact causality tracking, and zero-anergy data representation.

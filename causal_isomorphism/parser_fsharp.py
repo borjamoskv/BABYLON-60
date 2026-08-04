@@ -13,6 +13,7 @@ ontological subset used in BABYLON-60's Domain Kernel:
 
 The parser operates as a line-by-line state machine with context tracking.
 """
+
 from __future__ import annotations
 
 import re
@@ -112,6 +113,7 @@ class ParserState(Enum):
 @dataclass
 class ParserContext:
     """Tracks nested parsing context."""
+
     state: ParserState = ParserState.TOP_LEVEL
     current_module: IRModule | None = None
     current_union: IRDiscriminatedUnion | None = None
@@ -146,7 +148,9 @@ def _classify_function(name: str, params: list[IRParam], body_lines: list[str]) 
 
     # Check body for state mutation indicators
     body_text = " ".join(body_lines)
-    if "match" in body_text and any("Stable" in b or "Smoothing" in b or "Rollback" in b or "Apoptosis" in b for b in body_lines):
+    if "match" in body_text and any(
+        "Stable" in b or "Smoothing" in b or "Rollback" in b or "Apoptosis" in b for b in body_lines
+    ):
         return FunctionClassification.STATE_TRANSITION
 
     return FunctionClassification.PURE_QUERY
@@ -272,7 +276,7 @@ class FSharpParser:
             union_name = union_inline_match.group(1)
             self._ctx.current_union = IRDiscriminatedUnion(name=union_name)
             # Parse the first case from this line
-            rest = line[line.index("|"):]
+            rest = line[line.index("|") :]
             self._parse_union_case(rest)
             return idx
 
@@ -331,7 +335,7 @@ class FSharpParser:
             # Collect function body lines
             body_lines: list[str] = []
             fn_indent = _get_indent(line)
-            rest_of_line = line[line.index("=") + 1:].strip()
+            rest_of_line = line[line.index("=") + 1 :].strip()
             if rest_of_line:
                 body_lines.append(rest_of_line)
 
@@ -383,18 +387,14 @@ class FSharpParser:
             case_name = of_match.group(1)
             payload_str = of_match.group(2).strip()
             fields = self._parse_payload_fields(payload_str)
-            self._ctx.current_union.cases.append(
-                IRUnionCase(name=case_name, payload_fields=fields)
-            )
+            self._ctx.current_union.cases.append(IRUnionCase(name=case_name, payload_fields=fields))
             return
 
         # Bare case: CaseName
         bare_match = re.match(r"(\w+)", content)
         if bare_match:
             case_name = bare_match.group(1)
-            self._ctx.current_union.cases.append(
-                IRUnionCase(name=case_name)
-            )
+            self._ctx.current_union.cases.append(IRUnionCase(name=case_name))
 
     def _parse_payload_fields(self, payload_str: str) -> list[tuple[str, IRType]]:
         """Parse union case payload: field1: type1 * field2: type2."""
@@ -474,7 +474,7 @@ class FSharpParser:
 
                     # Check for inline body (after ->)
                     arrow_idx = stripped.index("->")
-                    after_arrow = stripped[arrow_idx + 2:].strip()
+                    after_arrow = stripped[arrow_idx + 2 :].strip()
                     if after_arrow:
                         current_arm_body = [after_arrow]
                     continue
@@ -526,10 +526,7 @@ class FSharpParser:
         if sprintf_match:
             fmt = sprintf_match.group(1)
             args_str = sprintf_match.group(2)
-            args = [
-                IRExpr(kind=IRExprKind.VARIABLE, variable_name=a.strip())
-                for a in args_str.split() if a.strip()
-            ]
+            args = [IRExpr(kind=IRExprKind.VARIABLE, variable_name=a.strip()) for a in args_str.split() if a.strip()]
             return IRExpr(
                 kind=IRExprKind.STRING_FORMAT,
                 format_string=fmt,
@@ -544,7 +541,8 @@ class FSharpParser:
             args_raw = ctor_match.group(2).strip()
             args = [
                 IRExpr(kind=IRExprKind.VARIABLE, variable_name=a.strip().strip('"'))
-                for a in re.split(r"\s+", args_raw) if a.strip()
+                for a in re.split(r"\s+", args_raw)
+                if a.strip()
             ]
             return IRExpr(
                 kind=IRExprKind.CONSTRUCTOR,

@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 """
 BABYLONMAIL CLI & SUBAGENT INTERFACE
@@ -28,8 +32,10 @@ MAIL_DIR = Path.home() / ".babylon60" / "babylonmail"
 account_file = MAIL_DIR / "account.json"
 MAIL_DB_PATH = MAIL_DIR / "mail_ledger.db"
 
+
 def get_ledger() -> CortexPersistLedger:
     return CortexPersistLedger(MAIL_DB_PATH)
+
 
 def cmd_status():
     if not account_file.exists():
@@ -40,7 +46,7 @@ def cmd_status():
             "domain": "babylon60.com",
             "created_at": datetime.now(timezone.utc).isoformat(),
             "key_fingerprint": "ed25519:7536b90af4baa146ac60d719982be602081bd18d",
-            "is_active": True
+            "is_active": True,
         }
         MAIL_DIR.mkdir(parents=True, exist_ok=True)
         with open(account_file, "w") as f:
@@ -52,15 +58,16 @@ def cmd_status():
     ledger = get_ledger()
     attestation = ledger.get_state_attestation()
 
-    print("\n" + "="*50)
+    print("\n" + "=" * 50)
     print("📧 BABYLONMAIL SOBERANO (@babylon60.com)")
-    print("="*50)
+    print("=" * 50)
     print(f"Cuenta Actual  : {profile.get('email')}")
     print(f"Estado DB      : 🟢 {MAIL_DB_PATH}")
     print(f"Total Correos  : {attestation['total_entries']}")
     print(f"Merkle Root    : {attestation['merkle_root'][:16]}...")
     print(f"Firma Keypair  : {profile.get('key_fingerprint')}")
-    print("="*50 + "\n")
+    print("=" * 50 + "\n")
+
 
 def cmd_send(to: str, subject: str, body: str):
     ledger = get_ledger()
@@ -72,31 +79,31 @@ def cmd_send(to: str, subject: str, body: str):
         "to": to,
         "subject": subject,
         "body": body,
-        "timestamp": datetime.now(timezone.utc).isoformat()
+        "timestamp": datetime.now(timezone.utc).isoformat(),
     }
 
-    event = CortexEvent(
-        event_type="BABYLON_MAIL_SENT",
-        payload=payload,
-        cortex_taint=f"{user}:babylon_mail_cli:send"
-    )
+    event = CortexEvent(event_type="BABYLON_MAIL_SENT", payload=payload, cortex_taint=f"{user}:babylon_mail_cli:send")
 
     ack = ledger.append_event(event)
     print(f"🟢 [SENT] Correo enviado a {to} | BFT Seq: {ack['seq']} | Hash: {ack['entry_hash'][:12]}...")
+
 
 def cmd_list():
     ledger = get_ledger()
     with ledger._get_connection() as conn:
         cursor = conn.cursor()
-        cursor.execute("SELECT seq, payload_json, timestamp FROM cortex_ledger WHERE event_type = 'BABYLON_MAIL_SENT' ORDER BY seq DESC")
+        cursor.execute(
+            "SELECT seq, payload_json, timestamp FROM cortex_ledger WHERE event_type = 'BABYLON_MAIL_SENT' ORDER BY seq DESC"
+        )
         rows = cursor.fetchall()
 
-    print(f"\n📥 BANDEJA DE CORREO (@babylon60.com) — {len(rows)} mensajes\n" + "-"*60)
+    print(f"\n📥 BANDEJA DE CORREO (@babylon60.com) — {len(rows)} mensajes\n" + "-" * 60)
     for seq, payload_json, ts in rows:
         data = json.loads(payload_json)
         print(f"[{seq:04d}] {ts[:19]} | DE: {data.get('from')} -> PARA: {data.get('to')}")
         print(f"       Asunto: {data.get('subject')}")
         print("-" * 60)
+
 
 def main():
     parser = argparse.ArgumentParser(description="BabylonMail Sovereign CLI")
@@ -120,6 +127,7 @@ def main():
         cmd_list()
     else:
         cmd_status()
+
 
 if __name__ == "__main__":
     main()

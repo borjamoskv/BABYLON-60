@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """Causal-Determinist OPSEC Memory Shield — Verification Suite.
 
 Tests anti-coredump enforcement and PT_DENY_ATTACH syscall on Darwin.

@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 
 from __future__ import annotations
@@ -121,7 +125,7 @@ def init_external_oracles(
     file_config: dict[str, Any],
     resolved_sites: list[str],
 ) -> None:
-    """Initialize external monitors and oracle integrations."""
+    """Initialize external monitors and attestor integrations."""
     daemon.signal_monitor = SignalMonitor(
         db_path=file_config.get("db_path", str(CORTEX_DB)),
         engine=daemon._shared_engine,

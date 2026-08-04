@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 import json
 import logging
@@ -112,7 +116,7 @@ class CuatridaOrchestrator:
 
     async def oracle_ritual(self, project: str, intent: str, cost_tokens: int) -> float:
         """
-        Dimension D: The Oracle Ritual.
+        Dimension D: The Attestor Ritual.
         Calculates 'Computational Respect' based on intent utility vs cost.
         """
         self.metrics.oracle_invocations += 1
@@ -122,7 +126,7 @@ class CuatridaOrchestrator:
         ) / 2
         await self.log_decision(
             project=project,
-            intent=f"Oracle Invocation: {intent}",
+            intent=f"Attestor Invocation: {intent}",
             dimension=Dimension.ETHICAL_MANAGEMENT,
             metadata={
                 "cost_tokens": cost_tokens,
@@ -130,7 +134,7 @@ class CuatridaOrchestrator:
                 "cumulative_respect": self.metrics.computational_respect,
             },
         )
-        logger.info("Oracle Ritual Completed. Respect: %.2f", self.metrics.computational_respect)
+        logger.info("Attestor Ritual Completed. Respect: %.2f", self.metrics.computational_respect)
         return self.metrics.computational_respect
 
     async def zero_friction_sync(self, project: str) -> dict[str, Any]:

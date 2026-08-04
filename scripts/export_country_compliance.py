@@ -14,6 +14,7 @@ Usage:
 import argparse
 import sys
 import os
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from babylon60.compliance_exporter import EUAIActComplianceExporter
@@ -21,36 +22,24 @@ from babylon60.attestation import MerkleCausalAnchor
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="BABYLON-60 Multi-Country Regulatory Compliance Exporter"
-    )
+    parser = argparse.ArgumentParser(description="BABYLON-60 Multi-Country Regulatory Compliance Exporter")
     parser.add_argument(
         "--locale",
         default="es",
         choices=["es", "en", "de", "fr", "it"],
         help="Target country/locale code (es=Spain, en=US/Global, de=Germany, fr=France, it=Italy)",
     )
-    parser.add_argument(
-        "--system-id", default="BABYLON-60-AGENT-01", help="Target system identifier"
-    )
+    parser.add_argument("--system-id", default="BABYLON-60-AGENT-01", help="Target system identifier")
     parser.add_argument("--operator", default="ENTERPRISE_OPERATOR", help="Operator entity name")
-    parser.add_argument(
-        "--bundle-path", default="artifact_bundle_v3", help="Path to artifact bundle"
-    )
+    parser.add_argument("--bundle-path", default="artifact_bundle_v3", help="Path to artifact bundle")
     parser.add_argument("--output", help="Output markdown report filepath")
 
     args = parser.parse_args()
 
     exporter = EUAIActComplianceExporter(artifact_bundle_path=args.bundle_path)
-    cert = exporter.generate_certificate(
-        system_id=args.system_id, operator_name=args.operator, locale=args.locale
-    )
+    cert = exporter.generate_certificate(system_id=args.system_id, operator_name=args.operator, locale=args.locale)
 
-    out_path = (
-        args.output
-        if args.output
-        else f"docs/audits/COMPLIANCE_CERTIFICATE_{args.locale.upper()}.md"
-    )
+    out_path = args.output if args.output else f"docs/audits/COMPLIANCE_CERTIFICATE_{args.locale.upper()}.md"
     saved_file = exporter.export_markdown_report(cert, out_path, locale=args.locale)
 
     anchor = MerkleCausalAnchor()

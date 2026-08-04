@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 """
 CORTEX MCP SERVER — Sovereign BFT Memory Server (MCP Protocol)
@@ -178,6 +182,7 @@ RESOURCES: list[dict[str, Any]] = [
 # ===========================================================================
 # MCP Server Core
 # ===========================================================================
+
 
 class CortexMCPServer:
     """
@@ -373,15 +378,17 @@ class CortexMCPServer:
 
         entries = []
         for row in rows:
-            entries.append({
-                "seq": row[0],
-                "event_type": row[1],
-                "payload": json.loads(row[2]),
-                "cortex_taint": row[3],
-                "lamport_t": row[4],
-                "entry_hash": row[5][:24] + "...",
-                "timestamp": row[6],
-            })
+            entries.append(
+                {
+                    "seq": row[0],
+                    "event_type": row[1],
+                    "payload": json.loads(row[2]),
+                    "cortex_taint": row[3],
+                    "lamport_t": row[4],
+                    "entry_hash": row[5][:24] + "...",
+                    "timestamp": row[6],
+                }
+            )
 
         text = json.dumps({"total_returned": len(entries), "entries": entries}, indent=2)
         return {"content": [{"type": "text", "text": text}], "isError": False}
@@ -483,13 +490,16 @@ class CortexMCPServer:
 # CLI entrypoint
 # ===========================================================================
 
+
 def main() -> None:
     """Entry point for `python -m babylon60.mcp.cortex_mcp_server`."""
     import argparse
 
     parser = argparse.ArgumentParser(description="CORTEX MCP Server — Sovereign BFT Memory")
     parser.add_argument("--ledger", type=str, default=str(DEFAULT_LEDGER_PATH), help="Path to BFT ledger DB")
-    parser.add_argument("--mail-ledger", type=str, default=str(DEFAULT_MAIL_LEDGER_PATH), help="Path to BabylonMail ledger DB")
+    parser.add_argument(
+        "--mail-ledger", type=str, default=str(DEFAULT_MAIL_LEDGER_PATH), help="Path to BabylonMail ledger DB"
+    )
     args = parser.parse_args()
 
     server = CortexMCPServer(

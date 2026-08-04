@@ -1,3 +1,7 @@
+// ============================================================================
+// BABYLON-60 v4.0 Sovereign Hardened
+// █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+// ============================================================================
 //! ATMS — Assumption-based Truth Maintenance System (runtime layer of Ω₀)
 //!
 //! Faithful to de Kleer 1986, "An Assumption-based TMS" (Artificial

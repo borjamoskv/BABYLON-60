@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # causal_isomorphism/linear_checker.py — Linear and Affine Type Checker
 # Causal-Determinist: Static analysis pass for linear/affine/region constraints
 # Author: Borja Moskv (borjamoskv)
@@ -19,6 +23,7 @@ Consuming operations:
   - Returning it.
   - Using it in binary operations.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -77,7 +82,9 @@ class LinearTypeChecker:
             return f"{next(iter(usages))}"
         return f"{sorted(list(usages))} across paths"
 
-    def _check_param_violation(self, func_name: str, param_name: str, usages: set[int], is_linear: bool, is_affine: bool) -> LinearViolation | None:
+    def _check_param_violation(
+        self, func_name: str, param_name: str, usages: set[int], is_linear: bool, is_affine: bool
+    ) -> LinearViolation | None:
         if is_linear and usages != {1}:
             found_str = self._format_usage_str(usages)
             return LinearViolation(
@@ -135,8 +142,10 @@ class LinearTypeChecker:
 
             case IRExprKind.MATCH:
                 # Count in match expression itself
-                match_expr_usages = self._get_usage_paths(param_name, expr.match_expr) if expr.match_expr is not None else {0}
-                
+                match_expr_usages = (
+                    self._get_usage_paths(param_name, expr.match_expr) if expr.match_expr is not None else {0}
+                )
+
                 # Match arms represent bifurcations, so we collect the union of usages in all arms
                 arm_usages: set[int] = set()
                 for arm in expr.match_arms:
@@ -145,10 +154,10 @@ class LinearTypeChecker:
                         arm_usages.add(0)
                     else:
                         arm_usages.update(self._get_usage_paths(param_name, arm.body))
-                
+
                 if not arm_usages:
                     arm_usages = {0}
-                
+
                 return self._add_sets(match_expr_usages, arm_usages)
 
             case IRExprKind.BLOCK:

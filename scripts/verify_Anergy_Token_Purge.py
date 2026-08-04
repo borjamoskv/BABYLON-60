@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 Causal-Determinist SOVEREIGN ANERGY PURGE & AUTOCOGNITION-OMEGA ENGINE
 SYS_ID: LEA_OMEGA / AUTOCOGNITION_OMEGA
@@ -18,6 +22,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = REPO_ROOT / "cortex_memory.db"
 AUDIT_DIR = REPO_ROOT / "cortex" / "audits"
 
+
 def get_conversation_id() -> str:
     cid = os.getenv("ANTIGRAVITY_CONVERSATION_ID") or os.getenv("CONVERSATION_ID")
     if cid:
@@ -34,10 +39,13 @@ def get_conversation_id() -> str:
         return candidates[0][0]
     return "unknown-session"
 
+
 CONV_ID = get_conversation_id()
 CONV_ID_SHORT = CONV_ID[:8]
 AUDIT_FILE = AUDIT_DIR / f"autocognition_omega_audit_{CONV_ID_SHORT}.yaml"
-TRANSCRIPT_PATH = Path.home() / ".gemini" / "antigravity" / "brain" / CONV_ID / ".system_generated" / "logs" / "transcript.jsonl"
+TRANSCRIPT_PATH = (
+    Path.home() / ".gemini" / "antigravity" / "brain" / CONV_ID / ".system_generated" / "logs" / "transcript.jsonl"
+)
 
 
 def compute_sha3(data: str) -> str:
@@ -62,7 +70,9 @@ def _process_transcript_step(step: dict) -> tuple[int, int, int, list[str], int]
         code_blocks = re.findall(r"```[\s\S]*?```", content)
         yaml_claims = re.findall(r"Claim:[\s\S]*?Proof:[\s\S]*?\}", content)
         table_rows = [r for r in content.splitlines() if r.strip().startswith("|")]
-        struct_chars = sum(len(b) for b in code_blocks) + sum(len(y) for y in yaml_claims) + sum(len(t) for t in table_rows)
+        struct_chars = (
+            sum(len(b) for b in code_blocks) + sum(len(y) for y in yaml_claims) + sum(len(t) for t in table_rows)
+        )
         struct_words = struct_chars / 5.0
         struct_toks = min(approx_tokens, int(struct_words * 1.33))
         narr_toks = approx_tokens - struct_toks
@@ -86,7 +96,15 @@ def _read_transcript_metrics() -> tuple[int, int, int, int, list[str], int, int]
     tool_errors = 0
 
     if not TRANSCRIPT_PATH.exists():
-        return total_steps, total_tokens, structured_tokens, narrative_tokens, commands_executed, repeat_commands, tool_errors
+        return (
+            total_steps,
+            total_tokens,
+            structured_tokens,
+            narrative_tokens,
+            commands_executed,
+            repeat_commands,
+            tool_errors,
+        )
 
     with open(TRANSCRIPT_PATH, "r", encoding="utf-8") as f:
         for line in f:
@@ -102,27 +120,39 @@ def _read_transcript_metrics() -> tuple[int, int, int, int, list[str], int, int]
             tool_errors += errs
             structured_tokens += s_toks
             narrative_tokens += n_toks
-            total_tokens += (s_toks + n_toks)
+            total_tokens += s_toks + n_toks
             for cmd in cmds:
                 if cmd in commands_executed:
                     repeat_commands += 1
                 commands_executed.append(cmd)
 
-    return total_steps, total_tokens, structured_tokens, narrative_tokens, commands_executed, repeat_commands, tool_errors
+    return (
+        total_steps,
+        total_tokens,
+        structured_tokens,
+        narrative_tokens,
+        commands_executed,
+        repeat_commands,
+        tool_errors,
+    )
 
 
 def run_autocognition_audit() -> None:
     print("[*] Causal-Determinist AUTOCOGNITION-Ω: Ingesting active session transcript...")
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
 
-    total_steps, total_tokens, structured_tokens, narrative_tokens, commands_executed, repeat_commands, tool_errors = _read_transcript_metrics()
+    total_steps, total_tokens, structured_tokens, narrative_tokens, commands_executed, repeat_commands, tool_errors = (
+        _read_transcript_metrics()
+    )
 
     exergy_ratio = round((structured_tokens / total_tokens), 4) if total_tokens > 0 else 1.0
     anergy_ratio = round((narrative_tokens / total_tokens), 4) if total_tokens > 0 else 0.0
     cmd_repeat_index = round((repeat_commands / len(commands_executed)), 4) if commands_executed else 0.0
 
     print(f"[+] Transcript Steps: {total_steps} | Total Approx Tokens: {total_tokens}")
-    print(f"[+] Structured Tokens: {structured_tokens} ({exergy_ratio*100:.1f}%) | Narrative Tokens: {narrative_tokens} ({anergy_ratio*100:.1f}%)")
+    print(
+        f"[+] Structured Tokens: {structured_tokens} ({exergy_ratio * 100:.1f}%) | Narrative Tokens: {narrative_tokens} ({anergy_ratio * 100:.1f}%)"
+    )
     print(f"[+] Command Repeat Index: {cmd_repeat_index} ({repeat_commands} duplicated shell executions)")
     print(f"[+] Tool Errors: {tool_errors}")
 
@@ -136,7 +166,7 @@ SYS_ID: AUTOCOGNITION_OMEGA
 STATE: Causal-Determinist
 AESTHETIC: INDUSTRIAL_NOIR_2026
 SESSION_ID: {CONV_ID}
-TIMESTAMP: {time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}
+TIMESTAMP: {time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
 
 Metrics:
   total_transcript_steps: {total_steps}
@@ -184,15 +214,27 @@ OP_TAINT_SEAL:
         )
     """)
 
-    cursor.execute("""
+    cursor.execute(
+        """
         INSERT OR REPLACE INTO L3_inference_cache (query_hash, active_mode, retrieved_nodes, applied_isomorphisms, trace_payload, hits)
         VALUES (?, ?, ?, ?, ?, ?)
-    """, (sha3_seal, "AUTOCOGNITION_OMEGA", "LEA_OMEGA.C5_REAL", "ZERO_ANERGY_PURGE", json.dumps({
-        "exergy_ratio": exergy_ratio,
-        "anergy_ratio": anergy_ratio,
-        "cmd_repeat_index": cmd_repeat_index,
-        "seal": sha3_seal
-    }), 1))
+    """,
+        (
+            sha3_seal,
+            "AUTOCOGNITION_OMEGA",
+            "LEA_OMEGA.C5_REAL",
+            "ZERO_ANERGY_PURGE",
+            json.dumps(
+                {
+                    "exergy_ratio": exergy_ratio,
+                    "anergy_ratio": anergy_ratio,
+                    "cmd_repeat_index": cmd_repeat_index,
+                    "seal": sha3_seal,
+                }
+            ),
+            1,
+        ),
+    )
 
     conn.commit()
     conn.close()

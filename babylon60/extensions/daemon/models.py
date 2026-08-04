@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 
 from __future__ import annotations
@@ -244,7 +248,7 @@ class TombstoneAlert:
 
 @dataclass
 class TrendsAlert:
-    """Alert for a new trending topic detected by the Trends Oracle."""
+    """Alert for a new trending topic detected by the Trends Attestor."""
 
     keyword: str
     traffic_volume: str

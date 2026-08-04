@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Cola auxiliar de escritura serializada (superficies NO-ledger).
 # LEY (AGENTS.md, escritor-único): este queue NO puede apuntar a la base del
 # Master Ledger — `BFTLedgerActor` es el ÚNICO escritor del ledger. Superficie
@@ -81,7 +85,9 @@ class MasterLedgerQueue:
         try:
             self.queue.put_nowait((query, parameters))
         except asyncio.QueueFull:
-            logger.warning("Thermodynamic Valve (INV_C5_THERMO_VALVE): Queue is full, dropping data to prevent OOM (Death by Ice).")
+            logger.warning(
+                "Thermodynamic Valve (INV_C5_THERMO_VALVE): Queue is full, dropping data to prevent OOM (Death by Ice)."
+            )
 
     async def shutdown(self) -> None:
         if hasattr(self, "_stop_event"):
@@ -89,7 +95,7 @@ class MasterLedgerQueue:
         try:
             self.queue.put_nowait(None)
         except asyncio.QueueFull:
-            pass # Si está llena, eventualmente se procesará, o ignoramos el None si estamos en shutdown abrupto
+            pass  # Si está llena, eventualmente se procesará, o ignoramos el None si estamos en shutdown abrupto
         try:
             if self._writer_task and not self._writer_task.done():
                 await self._writer_task

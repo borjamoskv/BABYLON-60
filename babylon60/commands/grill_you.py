@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 babylon60/commands/grill_you.py — Autonomous Self-Interview & Design Transducer
 Vector: INV_C5_43 (Native Slash Commands) & grill-you Skill
@@ -34,19 +38,19 @@ class GrillYouReport:
 
     def to_yaml(self) -> str:
         decisions_str = "\n".join(
-            f"  - question: \"{d.question}\"\n"
-            f"    selected: \"{d.selected_option}\"\n"
-            f"    rationale: \"{d.rationale}\"\n"
-            f"    invariant: \"{d.target_invariant}\""
+            f'  - question: "{d.question}"\n'
+            f'    selected: "{d.selected_option}"\n'
+            f'    rationale: "{d.rationale}"\n'
+            f'    invariant: "{d.target_invariant}"'
             for d in self.decisions
         )
         return (
             "Claim: Auto-entrevista de arquitectura (/grill-you) completada de forma autónoma sin fricción.\n"
             "Proof:\n"
-            f"  Topic: \"{self.topic}\"\n"
+            f'  Topic: "{self.topic}"\n'
             f"  Timestamp: {int(self.timestamp)}\n"
             f"  ExergyScore: {self.exergy_score}/1000.0\n"
-            f"  CORTEX_TAINT: \"{self.taint_hash}\"\n"
+            f'  CORTEX_TAINT: "{self.taint_hash}"\n'
             "Decisions:\n"
             f"{decisions_str}\n"
         )
@@ -61,7 +65,6 @@ class GrillYouEngine:
     def __init__(self, topic: str = "AgencyHypervisor Multi-Tenant Engine") -> None:
         self.topic = topic
         self.repo_root = Path(__file__).resolve().parent.parent.parent
-
 
     def run(self) -> GrillYouReport:
         logger.info(f"Causal-Determinist GRILL-YOU INITIATED: Autonomous Self-Interview on '{self.topic}'")

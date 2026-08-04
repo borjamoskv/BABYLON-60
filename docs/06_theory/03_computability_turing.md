@@ -49,7 +49,7 @@ Undecidability is not a binary phenomenon. There exists an **infinite hierarchy*
 
 ### Definition
 
-$A \le_T B$ ("$A$ is Turing-reducible to $B$") if there exists an algorithm that decides $A$ when given access to an oracle for $B$.
+$A \le_T B$ ("$A$ is Turing-reducible to $B$") if there exists an algorithm that decides $A$ when given access to an attestor for $B$.
 
 ### The Arithmetic Hierarchy of Degrees
 

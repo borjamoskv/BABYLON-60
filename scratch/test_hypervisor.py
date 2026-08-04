@@ -5,6 +5,7 @@ from io_persist_ledger import LedgerPersist
 from premium_features.ha_cluster import HighAvailabilityCluster
 from license_manager import generate_license_key
 
+
 def test_hypervisor_zero_copy():
     db_path = "scratch/test_hypervisor.db"
     if os.path.exists(db_path):
@@ -33,18 +34,20 @@ def test_hypervisor_zero_copy():
     graph = GraphLedger()
     last_id = graph.genesis_id
     for i in range(10):
-        node = graph.mut_append_node(last_id, f"claim_{i}", "0"*64)
+        node = graph.mut_append_node(last_id, f"claim_{i}", "0" * 64)
         last_id = node.node_id
 
     # 6. Publish via ABFT memory bus (O(1) fast path)
     inserted = ledger.io_persist_ledger(graph)
-    
+
     assert inserted == 10
     print("SUCCESS: Zero-Copy ABFT Swarm execution successful. Nodes published to iceoryx2.")
+
 
 if __name__ == "__main__":
     print("Starting test...")
     test_hypervisor_zero_copy()
     print("Finished test, exiting...")
     import sys
+
     sys.exit(0)

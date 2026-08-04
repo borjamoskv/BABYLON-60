@@ -1,3 +1,7 @@
+// ============================================================================
+// BABYLON-60 v4.0 Sovereign Hardened
+// █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+// ============================================================================
 //! Auto-generated from F# Domain Kernel via Causal Isomorphism Transpiler
 //! Trilingual Regime: Type definitions and poset stubs for strike_rs
 //! Author: borjamoskv

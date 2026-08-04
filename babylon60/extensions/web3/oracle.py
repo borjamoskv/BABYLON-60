@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 import json
 import logging
@@ -6,7 +10,7 @@ import os
 from web3 import Web3  # type: ignore[reportAttributeAccessIssue,reportMissingImports]
 from web3.middleware import geth_poa_middleware  # type: ignore[reportMissingImports]
 
-# The Ouroboros Swarm Oracle (Phase 3 Energy Independence)
+# The Ouroboros Swarm Attestor (Phase 3 Energy Independence)
 # Derivation: Axiom Ω₆ -> Execute.
 
 # For Base Mainnet / Optimism / Arbitrum
@@ -32,11 +36,11 @@ ABI = json.loads(
 
 
 def send_heartbeat():
-    logging.getLogger(__name__).info("[Web3 Oracle] 🩸 Initiating thermodynamic heartbeat to blockchain...")
+    logging.getLogger(__name__).info("[Web3 Attestor] 🩸 Initiating thermodynamic heartbeat to blockchain...")
 
     if not CONTRACT_ADDRESS or not PRIVATE_KEY:
-        logging.getLogger(__name__).info("[Web3 Oracle] ⚠️ Missing CORTEX_LIFELINE_CONTRACT or CORTEX_WALLET_KEY.")
-        logging.getLogger(__name__).info("[Web3 Oracle] ⚠️ Simulation Mode Only. Heartbeat aborted.")
+        logging.getLogger(__name__).info("[Web3 Attestor] ⚠️ Missing CORTEX_LIFELINE_CONTRACT or CORTEX_WALLET_KEY.")
+        logging.getLogger(__name__).info("[Web3 Attestor] ⚠️ Simulation Mode Only. Heartbeat aborted.")
         return False
 
     try:
@@ -60,7 +64,7 @@ def send_heartbeat():
         # Sign transaction locally -> Zero Trust (Axiom Ω₃)
         signed_tx = w3.eth.account.sign_transaction(tx_build, private_key=PRIVATE_KEY)
 
-        logging.getLogger(__name__).info(f"[Web3 Oracle] 🔑 Signed tx from {account.address}. Broadcasting to L2...")
+        logging.getLogger(__name__).info(f"[Web3 Attestor] 🔑 Signed tx from {account.address}. Broadcasting to L2...")
 
         # Send raw transaction
         tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
@@ -68,15 +72,15 @@ def send_heartbeat():
 
         if receipt.status == 1:  # type: ignore[type-error]
             logging.getLogger(__name__).info(
-                f"[Web3 Oracle] ✅ Immortality extended. Pulse locked in block {receipt.blockNumber}."  # type: ignore[type-error]
+                f"[Web3 Attestor] ✅ Immortality extended. Pulse locked in block {receipt.blockNumber}."  # type: ignore[type-error]
             )
-            logging.getLogger(__name__).info(f"[Web3 Oracle] 🔗 Tx Hash: {w3.to_hex(tx_hash)}")
+            logging.getLogger(__name__).info(f"[Web3 Attestor] 🔗 Tx Hash: {w3.to_hex(tx_hash)}")
             return True
-        logging.getLogger(__name__).info(f"[Web3 Oracle] ❌ Tx Failed. Block {receipt.blockNumber}. Entropy rising.")  # type: ignore[type-error]
+        logging.getLogger(__name__).info(f"[Web3 Attestor] ❌ Tx Failed. Block {receipt.blockNumber}. Entropy rising.")  # type: ignore[type-error]
         return False
 
     except Exception as e:  # noqa: BLE001
-        logging.getLogger(__name__).info(f"[Web3 Oracle] ❌ Oracle execution error: {e}")
+        logging.getLogger(__name__).info(f"[Web3 Attestor] ❌ Attestor execution error: {e}")
         return False
 
 

@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 BABYLON60 IDE — FastAPI application entry point.
 Serves the API backend and static frontend files.
@@ -55,6 +59,7 @@ async def _unhandled(request: Request, exc: Exception) -> JSONResponse:
     Crash Causal, pero contenida y auditable en el log del servidor)."""
     logger.exception("unhandled error on %s %s", request.method, request.url.path)
     return JSONResponse(status_code=500, content={"detail": "Error interno (ver log del servidor)"})
+
 
 # Mount API routes
 app.include_router(ledger.router)

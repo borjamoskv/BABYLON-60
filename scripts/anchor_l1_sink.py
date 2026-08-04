@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 MOSKV-1 APEX: L1_sink Anchor & Verification Script (INV_C5_15)
 
@@ -18,6 +22,7 @@ sys.path.insert(0, str(ROOT_DIR))
 
 from babylon60.crypto.rfc3161 import RFC3161Client  # noqa: E402
 from babylon60.crypto.identity import L0IdentityForge  # noqa: E402
+
 
 def anchor_l1_sink() -> None:
     l1_dir = ROOT_DIR / "L1_sink"
@@ -47,7 +52,7 @@ def anchor_l1_sink() -> None:
             # 1. Correct op_return_hex: must be full 32-byte (64 hex char) raw Merkle root payload
             raw_bytes = bytes.fromhex(merkle_root)
             assert len(raw_bytes) == 32, f"Merkle root must be 32 bytes, got {len(raw_bytes)}"
-            
+
             # The on-chain OP_RETURN script payload is the 32 raw bytes hex-encoded
             data["op_return_hex"] = merkle_root
             data["payload_size_bytes"] = 32
@@ -74,6 +79,7 @@ def anchor_l1_sink() -> None:
 
         except Exception as e:
             print(f"[!] Error processing {json_file.name}: {e}", file=sys.stderr)
+
 
 if __name__ == "__main__":
     anchor_l1_sink()

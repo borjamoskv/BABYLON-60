@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 Causal-Determinist Execution Engine: THE ULTIMATE DETERMINANT (V3 - SINGULARITY)
 =================================================================================
@@ -33,11 +37,12 @@ from typing import Dict, List, Optional, Set, Tuple
 
 class FFIEventHorizonRouter:
     """INV_C5_FFI_EVENT_HORIZON: Strict byte-passing router to Rust (Simulated)."""
+
     @staticmethod
     def route_payload_to_rust(raw_bytes: bytes) -> bool:
         """
         Simulates bridging to Rust. If Rust rejects the payload, Python MUST immediately abort
-        the process without heuristic NLP logging. 
+        the process without heuristic NLP logging.
         """
         if not isinstance(raw_bytes, bytes):
             # Asimetría Termodinámica: Python aborta instantáneamente.
@@ -49,7 +54,8 @@ class FFIEventHorizonRouter:
 
 class ATMSConstantLattice:
     """INV_C5_ATMS_O1: Fixed-size 128-bit bitmask assumption lattice for O(1) Nogood resolution."""
-    __slots__ = ('nogoods_mask',)
+
+    __slots__ = ("nogoods_mask",)
 
     def __init__(self) -> None:
         self.nogoods_mask: List[int] = []
@@ -80,7 +86,7 @@ class ASTReflectionGuardTransducer:
         for node in ast.walk(tree):
             if isinstance(node, ast.Attribute) and node.attr in cls.DANGEROUS_BUILTINS:
                 return False
-            
+
             # RULE_SENSOR_VERIFY_01: Check Assignments and Annotated Assignments (e.g., X: str = "eval")
             if isinstance(node, (ast.Assign, ast.AnnAssign)):
                 if isinstance(node.value, ast.Constant) and isinstance(node.value.value, str):
@@ -99,7 +105,8 @@ class ASTReflectionGuardTransducer:
 
 class L1BitcoinCommitmentReceipt:
     """INV_C5_15: Raw 32-byte Merkle root commitment payload (OP_RETURN)."""
-    __slots__ = ('raw_32byte_hash', 'hex_payload')
+
+    __slots__ = ("raw_32byte_hash", "hex_payload")
 
     def __init__(self, merkle_root_hex: str) -> None:
         raw_bytes = bytes.fromhex(merkle_root_hex)
@@ -111,7 +118,8 @@ class L1BitcoinCommitmentReceipt:
 
 class DeterministicEntropyProof:
     """Value Object [180-359]: Immutable cryptographic proof hash with ATMS & L1 Sink."""
-    __slots__ = ('payload_hash', 'lamport_clock', 'wl_color_hash', 'logop_score', 'l1_commitment', 'env_mask')
+
+    __slots__ = ("payload_hash", "lamport_clock", "wl_color_hash", "logop_score", "l1_commitment", "env_mask")
 
     def __init__(
         self,
@@ -120,7 +128,7 @@ class DeterministicEntropyProof:
         wl_color_hash: str,
         logop_score: float,
         l1_commitment: L1BitcoinCommitmentReceipt,
-        env_mask: int
+        env_mask: int,
     ) -> None:
         self.payload_hash: str = payload_hash
         self.lamport_clock: int = lamport_clock
@@ -132,7 +140,8 @@ class DeterministicEntropyProof:
 
 class StateCrystallized:
     """Domain Event [540-719]: Immutable factual state mutation event."""
-    __slots__ = ('sequence_id', 'proof', 'timestamp')
+
+    __slots__ = ("sequence_id", "proof", "timestamp")
 
     def __init__(self, sequence_id: int, proof: DeterministicEntropyProof, timestamp: float) -> None:
         self.sequence_id: int = sequence_id
@@ -165,7 +174,7 @@ class ThermodynamicVetoTransducer:
         """INV_BFT_LOGOP: Logarithmic Opinion Pooling with strict P=0 Absolute Veto boundary."""
         if not probabilities or any(p <= 0.0 for p in probabilities):
             return 0.0
-        
+
         sum_w = sum(weights)
         norm_weights = [w / sum_w for w in weights]
         log_sum = sum(w * math.log(p) for p, w in zip(probabilities, norm_weights))
@@ -214,7 +223,15 @@ class CausalStateActor:
             try:
                 cursor = conn.execute(
                     "INSERT INTO master_ledger (taint_hash, payload_hash, lamport_clock, wl_color_hash, logop_score, l1_op_return, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                    (taint_hash, proof.payload_hash, self.lamport_clock, proof.wl_color_hash, proof.logop_score, proof.l1_commitment.raw_32byte_hash, now)
+                    (
+                        taint_hash,
+                        proof.payload_hash,
+                        self.lamport_clock,
+                        proof.wl_color_hash,
+                        proof.logop_score,
+                        proof.l1_commitment.raw_32byte_hash,
+                        now,
+                    ),
                 )
                 seq_id = cursor.lastrowid
                 conn.commit()
@@ -230,11 +247,7 @@ class CausalStateActor:
 async def execute_chaos_monad_sandbox(cmd: List[str], timeout_s: float = 2.0) -> Optional[str]:
     """INV_C5_CHAOS_MONAD: Isolated subprocess group execution with SIGKILL purge on timeout."""
     proc = await asyncio.create_subprocess_exec(
-        *cmd,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        preexec_fn=os.setsid,
-        env={}
+        *cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, preexec_fn=os.setsid, env={}
     )
     try:
         stdout, _ = await asyncio.wait_for(proc.communicate(), timeout=timeout_s)
@@ -279,7 +292,7 @@ async def run_causal_loop(stop_event: asyncio.Event, db_path: str) -> None:
         wl_color_hash=wl_hash,
         logop_score=logop_val,
         l1_commitment=l1_sink,
-        env_mask=0b010  # Valid mask (doesn't trigger Nogood 0b101)
+        env_mask=0b010,  # Valid mask (doesn't trigger Nogood 0b101)
     )
 
     try:
@@ -291,7 +304,9 @@ async def run_causal_loop(stop_event: asyncio.Event, db_path: str) -> None:
         try:
             item = await asyncio.wait_for(queue.get(), timeout=0.1)
             crystallized = actor.commit_state(item)
-            print(f"[+] V3 (SINGULARITY) CRYSTALLIZATION SUCCESS: Seq={crystallized.sequence_id} | WL_Hash={crystallized.proof.wl_color_hash[:16]} | OP_RETURN_32B={crystallized.proof.l1_commitment.hex_payload[:16]}...")
+            print(
+                f"[+] V3 (SINGULARITY) CRYSTALLIZATION SUCCESS: Seq={crystallized.sequence_id} | WL_Hash={crystallized.proof.wl_color_hash[:16]} | OP_RETURN_32B={crystallized.proof.l1_commitment.hex_payload[:16]}..."
+            )
             stop_event.set()
         except asyncio.TimeoutError:
             break
@@ -301,7 +316,7 @@ def main() -> None:
     db_file = os.path.join(os.path.dirname(__file__), "..", "scratch", "ultimate_causal_ledger_v3.db")
     os.makedirs(os.path.dirname(db_file), exist_ok=True)
     stop_event = asyncio.Event()
-    
+
     print("--- INICIANDO MOTOR Causal-DeterministA ULTIMATE DETERMINANT V3 (SINGULARITY) ---")
     asyncio.run(run_causal_loop(stop_event, db_file))
     print("[+] EJECUCION COMPLETADA: 11 INVARIANTES C5 FALSIFICADOS Y CRISTALIZADOS EN SILICIO.")

@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 """
 CHRONOS-1 ROI Engine (Sovereign Efficiency Quantification).
@@ -209,7 +213,7 @@ class ChronosROI:
             cost=round(cost, 4),
         )
 
-    # ── Observability Loop (NEW - closes the blind oracle gap) ──────
+    # ── Observability Loop (NEW - closes the blind attestor gap) ──────
 
     async def persist_report(
         self,

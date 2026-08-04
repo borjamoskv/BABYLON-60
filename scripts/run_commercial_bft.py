@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 import sys
 import time
 import sqlite3
@@ -11,6 +15,7 @@ except ImportError as e:
     print(f"[!] Error importando strike_rs nativo: {e}")
     sys.exit(1)
 
+
 def run_swarm(pass_name):
     print(f"\n[*] Iniciando {pass_name} (Hyper-Exergy: 2ms)")
     engine = strike_rs.BftSwarmEngine(50, 1000)
@@ -19,9 +24,9 @@ def run_swarm(pass_name):
         deps = []
         payload_str = f"Payload {i}"
         latency_ms = 2
-        
+
         if pass_name == "COGNITIVE_PASS" and i == 42:
-            payload_str = "Infinite Fiat Issuance" # Trampa lógica inyectada
+            payload_str = "Infinite Fiat Issuance"  # Trampa lógica inyectada
 
         if pass_name == "CHAOS_PASS":
             if i > 0:
@@ -41,17 +46,18 @@ def run_swarm(pass_name):
     except Exception as e:
         print(f"[!] BFT ROLLBACK ({pass_name}): {e}")
 
+
 def main():
     print("==================================================")
     print("  MOSKV-1 APEX: MULTI-SWARM HYSTERESIS COLLISION")
     print("==================================================")
-    
+
     # PASS 1: Chaos Engineering (Sequential, to fail GELABP)
     run_swarm("CHAOS_PASS")
-    
+
     # PASS 2: Hyper-Exergy (Wide DAG, 2ms, to succeed)
     run_swarm("EXERGY_PASS")
-    
+
     # PASS 3: Cognitive Rollback (Wide DAG, 2ms, Logical Impossibility)
     run_swarm("COGNITIVE_PASS")
 
@@ -63,7 +69,7 @@ def main():
         cursor.execute("SELECT COUNT(*) FROM cortex_memory_bft;")
         count = cursor.fetchone()[0]
         print(f"[+] Validación DB: {count} registros BFT consolidados en disco.")
-        
+
         cursor.execute("SELECT node_id, proof FROM cortex_memory_bft LIMIT 1;")
         sample = cursor.fetchone()
         if sample:
@@ -72,6 +78,7 @@ def main():
         print(f"[!] Error leyendo SQLite: {e}")
 
     print("==================================================")
+
 
 if __name__ == "__main__":
     main()

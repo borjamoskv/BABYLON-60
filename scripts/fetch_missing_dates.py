@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """fetch_missing_dates.py — batch update dataset.json with enrollment_velocity.
 
 Queries ClinicalTrials.gov API v2 in batches of 200 to fetch dates and computes
 the enrollment velocity for each of the 8,000 trials in dataset.json.
 """
+
 from __future__ import annotations
 
 import json
@@ -40,10 +45,7 @@ def _calculate_duration_months(start_str: str | None, completion_str: str | None
 
 
 def _get_api(url: str) -> dict[str, Any]:
-    req = urllib.request.Request(
-        url,
-        headers={"Accept": "application/json", "User-Agent": USER_AGENT}
-    )
+    req = urllib.request.Request(url, headers={"Accept": "application/json", "User-Agent": USER_AGENT})
     last_err: Exception | None = None
     for attempt in range(3):
         try:
@@ -51,7 +53,7 @@ def _get_api(url: str) -> dict[str, Any]:
                 return json.loads(r.read().decode("utf-8"))
         except (urllib.error.URLError, TimeoutError, OSError) as exc:
             last_err = exc
-            time.sleep(1.0 * (2 ** attempt))
+            time.sleep(1.0 * (2**attempt))
     raise RuntimeError(f"Failed to fetch {url}: {last_err}")
 
 
@@ -69,14 +71,14 @@ def main() -> None:
 
     # Query in batches of 200
     for i in range(0, len(ncts), 200):
-        batch = ncts[i:i + 200]
+        batch = ncts[i : i + 200]
         params = {
             "filter.ids": ",".join(batch),
             "fields": "NCTId,StartDateStruct,CompletionDateStruct,PrimaryCompletionDateStruct",
             "pageSize": "200",
         }
         url = f"{V2}?{urllib.parse.urlencode(params)}"
-        print(f"Fetching batch {i//200 + 1}/{len(ncts)//200 + 1}...", flush=True)
+        print(f"Fetching batch {i // 200 + 1}/{len(ncts) // 200 + 1}...", flush=True)
         try:
             data = _get_api(url)
             for st in data.get("studies", []):

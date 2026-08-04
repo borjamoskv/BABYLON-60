@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 MOSKV-1 APEX: Native Messaging Transducer (INV_C5_18 / INV_C5_THERMO_VALVE)
 Bridge between WebExtension IPC (Chrome/Firefox Native Messaging) and Motor Causal Core.
@@ -113,11 +117,13 @@ def process_extension_event(msg: dict[str, Any], logger: logging.Logger) -> None
 
     if status == "READY":
         logger.info("Extension operational state READY. Emitting GENERATE command...")
-        send_message_frame({
-            "cmd": "GENERATE",
-            "prompt": "Synthwave dark ambient with heavy bass, 120bpm",
-            "exergy_target": 1000.0,
-        })
+        send_message_frame(
+            {
+                "cmd": "GENERATE",
+                "prompt": "Synthwave dark ambient with heavy bass, 120bpm",
+                "exergy_target": 1000.0,
+            }
+        )
     elif status == "CRYSTALLIZED":
         url = msg.get("url", "unknown")
         logger.info("Thermodynamic Success: Domain state crystallized. Artifact URL: %s", url)

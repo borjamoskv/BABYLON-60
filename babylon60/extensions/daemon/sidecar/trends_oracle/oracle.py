@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 import asyncio
 import logging
@@ -121,7 +125,7 @@ class TrendsOracle:
             threading.Event().wait(15.0)  # noqa: TID251 # Threaded sync loop  # noqa: TID251 # Threaded sync loop
 
     def stop(self) -> None:
-        """Gracefully stop the oracle loop."""
+        """Gracefully stop the attestor loop."""
         self.running = False
 
     # -------------------------------------------------------------
@@ -243,7 +247,7 @@ class TrendsOracle:
             "geo": geo_str,
             "trend_type": trend_type,
             "category": category,
-            "source": "oracle:trends",
+            "source": "attestor:trends",
         }
 
         content = f"Trending Search [{trend_type}]: {keyword} ({geo_str})"

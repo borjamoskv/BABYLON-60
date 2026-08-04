@@ -11,6 +11,7 @@ from typing import List, Tuple, Dict, Any
 
 class SerializationBoundaryError(ValueError):
     """Raised when F60 to GPU tensor conversion violates bounds or fails checksum verification."""
+
     pass
 
 
@@ -25,9 +26,7 @@ class SerializationBoundary:
     MAX_BOUND = 1e30
 
     @classmethod
-    def convert_f60_to_float_buffer(
-        cls, f60_values: List[Tuple[int, int]]
-    ) -> Tuple[bytes, str]:
+    def convert_f60_to_float_buffer(cls, f60_values: List[Tuple[int, int]]) -> Tuple[bytes, str]:
         """
         Converts a list of F60 tuples (numerator, scale_base60) to a packed f32 binary buffer.
         Validates bounds and returns (packed_bytes, sha256_checksum).
@@ -43,7 +42,7 @@ class SerializationBoundary:
         """
         floats = []
         for num, scale in f60_values:
-            denom = 60 ** scale if scale > 0 else 1
+            denom = 60**scale if scale > 0 else 1
             val = float(num) / float(denom)
 
             if val < cls.MIN_BOUND or val > cls.MAX_BOUND:

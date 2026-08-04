@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] babylon60.database.core — único punto de conexión SQLite del kernel.
 # Génesis: CENT-03 (AGENTS.md INV_BFT_02 mandaba sobre un módulo inexistente) +
 # CENT-06 (conexiones directas con pragmas divergentes). Toda conexión sale de
@@ -56,4 +60,3 @@ def connect_sync(db_path: str | Path, *, synchronous: str = "FULL") -> sqlite3.C
     conn.execute("PRAGMA foreign_keys=ON")
     conn.execute(f"PRAGMA busy_timeout={_BUSY_TIMEOUT_MS}")
     return conn
-

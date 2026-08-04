@@ -1,3 +1,7 @@
+// ============================================================================
+// BABYLON-60 v4.0 Sovereign Hardened
+// █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+// ============================================================================
 //! VECTOR D: SDK / Extracción (El Límite Físico)
 //! 
 //! Capa de I/O que transfiere un subgrafo verificado del ATMS (Hereditary Harrop)
@@ -77,10 +81,10 @@ impl<'a> Publisher<'a> {
 mod tests {
     use super::*;
     use crate::omega0::{Modality, Statement, Justification};
-    use crate::orchestrator::{Orchestrator, Oracle};
+    use crate::orchestrator::{Orchestrator, Attestor};
 
     struct DummyOracle;
-    impl Oracle for DummyOracle {
+    impl Attestor for DummyOracle {
         fn query(&self, _goal: &Statement) -> Justification {
             Justification::Conjecture
         }
@@ -89,8 +93,8 @@ mod tests {
     #[test]
     fn test_publish_markdown() {
         let ledger = MasterLedger::new(":memory:").unwrap();
-        let oracle = Box::new(DummyOracle);
-        let mut orch = Orchestrator::new(ledger, oracle);
+        let attestor = Box::new(DummyOracle);
+        let mut orch = Orchestrator::new(ledger, attestor);
 
         let goal = Statement {
             content: "Gravity bends time".into(),
@@ -113,8 +117,8 @@ mod tests {
     #[test]
     fn test_publish_json() {
         let ledger = MasterLedger::new(":memory:").unwrap();
-        let oracle = Box::new(DummyOracle);
-        let mut orch = Orchestrator::new(ledger, oracle);
+        let attestor = Box::new(DummyOracle);
+        let mut orch = Orchestrator::new(ledger, attestor);
 
         let goal = Statement {
             content: "Energy is conserved".into(),

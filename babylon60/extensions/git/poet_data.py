@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 """
 CORTEX Commit Poet Engine Data - LORCA-Ω
@@ -160,7 +164,7 @@ TEMPLATES: dict[str, list[str]] = {
         "construct the {scope} byzantine fault detector",
         "erect the {scope} perimeter defense grid",
         "simulate {scope} under adversarial conditions",
-        "calibrate the {scope} truth oracle",
+        "calibrate the {scope} truth attestor",
         "arm the {scope} tripwire network",
         "subject {scope} to sovereign audit",
         "validate the {scope} invariant fortress",

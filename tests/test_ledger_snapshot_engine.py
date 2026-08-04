@@ -1,11 +1,17 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 import json
 import sqlite3
 from unittest.mock import patch
 from scripts.ledger_snapshot_engine import compute_sha256, create_snapshot, main, AUTHOR
 
+
 def test_author_identity():
     assert "Telmo Dinámico de Moskv" in AUTHOR
     assert "borjamoskv" in AUTHOR
+
 
 def test_compute_sha256(tmp_path):
     f = tmp_path / "sample.txt"
@@ -13,6 +19,7 @@ def test_compute_sha256(tmp_path):
     digest = compute_sha256(f)
     assert isinstance(digest, str)
     assert len(digest) == 64
+
 
 def test_create_snapshot(tmp_path):
     db_file = tmp_path / "cortex.db"
@@ -22,8 +29,10 @@ def test_create_snapshot(tmp_path):
     conn.close()
 
     snap_dir = tmp_path / "audit" / "snapshots"
-    with patch("scripts.ledger_snapshot_engine.DB_PATH", db_file), \
-         patch("scripts.ledger_snapshot_engine.SNAPSHOT_DIR", snap_dir):
+    with (
+        patch("scripts.ledger_snapshot_engine.DB_PATH", db_file),
+        patch("scripts.ledger_snapshot_engine.SNAPSHOT_DIR", snap_dir),
+    ):
         manifest_path = create_snapshot()
         assert manifest_path.exists()
         with open(manifest_path) as mf:
@@ -31,6 +40,7 @@ def test_create_snapshot(tmp_path):
             assert data["author"] == AUTHOR
             assert "sha256" in data
             assert (snap_dir / data["snapshot_file"]).exists()
+
 
 def test_main_success(tmp_path):
     snap_dir = tmp_path / "audit" / "snapshots"
@@ -40,7 +50,9 @@ def test_main_success(tmp_path):
     async def mock_record(manifest_path):
         pass
 
-    with patch("scripts.ledger_snapshot_engine.DB_PATH", db_file), \
-         patch("scripts.ledger_snapshot_engine.SNAPSHOT_DIR", snap_dir), \
-         patch("scripts.ledger_snapshot_engine.record_snapshot_event", side_effect=mock_record):
+    with (
+        patch("scripts.ledger_snapshot_engine.DB_PATH", db_file),
+        patch("scripts.ledger_snapshot_engine.SNAPSHOT_DIR", snap_dir),
+        patch("scripts.ledger_snapshot_engine.record_snapshot_event", side_effect=mock_record),
+    ):
         assert main() == 0

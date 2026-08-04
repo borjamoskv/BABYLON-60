@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 import asyncio
 import logging
@@ -158,14 +162,14 @@ class EventLoopMixin:
         if self.ast_oracle:
             tasks.append(
                 asyncio.create_task(
-                    self._run_lifecycle_daemon_async(self.ast_oracle, "AST Oracle", "👁️"),
+                    self._run_lifecycle_daemon_async(self.ast_oracle, "AST Attestor", "👁️"),
                     name="ASTOracle",
                 )
             )
         if getattr(self, "iot_oracle", None):
             tasks.append(
                 asyncio.create_task(
-                    self._run_lifecycle_daemon_async(self.iot_oracle, "IoT Oracle", "📡"),
+                    self._run_lifecycle_daemon_async(self.iot_oracle, "IoT Attestor", "📡"),
                     name="IoTOracle",
                 )
             )
@@ -213,7 +217,7 @@ class EventLoopMixin:
         if getattr(self, "sentinel_oracle", None):
             tasks.append(
                 asyncio.create_task(
-                    self._run_loop_daemon_async(self.sentinel_oracle, "Sentinel Oracle", "🛡️"),
+                    self._run_loop_daemon_async(self.sentinel_oracle, "Sentinel Attestor", "🛡️"),
                     name="SentinelOracle",
                 )
             )

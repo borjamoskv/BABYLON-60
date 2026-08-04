@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 import asyncio
 import logging
 import os
@@ -49,16 +53,16 @@ class SubstackPublisherBot:
                 # Detección de Auth Wall
                 if "login" in page.url or await page.locator("input[name='email']").count() > 0:
                     logger.warning(
-                        "Sesión caducada. Desplegando bypass Autodidact (IMAP Magic Link)..."
+                        "Sesión caducada. Desplegando bypass Autodidact (IMAP Deterministic Link)..."
                     )
 
-                    # Pedir Magic Link
+                    # Pedir Deterministic Link
                     if await page.locator("input[name='email']").count() > 0:
                         email_input = os.getenv("CORTEX_EMAIL_USER")
                         await page.fill("input[name='email']", email_input)
                         await page.click("button:has-text('Email me a login link')")
                         logger.info(
-                            "Petición de Magic Link enviada. Esperando 10 segundos a que llegue..."
+                            "Petición de Deterministic Link enviada. Esperando 10 segundos a que llegue..."
                         )
                         await asyncio.sleep(10)
 
@@ -67,11 +71,11 @@ class SubstackPublisherBot:
                     magic_link = extractor.extract_latest_magic_link()
 
                     if not magic_link:
-                        logger.error("No se pudo obtener el Magic Link. Misión abortada.")
+                        logger.error("No se pudo obtener el Deterministic Link. Misión abortada.")
                         await browser.close()
                         return
 
-                    logger.info("Inyectando Magic Link...")
+                    logger.info("Inyectando Deterministic Link...")
                     await page.goto(magic_link)
                     await page.wait_for_load_state("networkidle")
 

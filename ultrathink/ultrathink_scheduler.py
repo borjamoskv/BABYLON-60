@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # ultrathink_scheduler.py — Async scheduler with BFTLedgerActor and Prometheus metrics
 
 """Scheduler for ULTRATHINK swarm.
@@ -17,20 +21,25 @@ import typing
 try:
     from prometheus_client import start_http_server, Gauge, Counter, Histogram
 except ImportError:
+
     def start_http_server(*args, **kwargs):
         _ = (args, kwargs)
 
     class DummyMetric:
         def __init__(self, *args, **kwargs):
             _ = (args, kwargs)
+
         def set(self, *args, **kwargs):
             _ = (args, kwargs)
+
         def inc(self, *args, **kwargs):
             _ = (args, kwargs)
+
         def observe(self, *args, **kwargs):
             _ = (args, kwargs)
 
     Gauge = Counter = Histogram = DummyMetric
+
 
 class ConsensusEngineStub:
     """Base stub for consensus engines in ULTRATHINK scheduler."""
@@ -151,10 +160,7 @@ async def main() -> None:
     SCHEDULER_QUEUE_SIZE.set(total_tasks)
 
     t0 = time.monotonic()
-    tasks = [
-        asyncio.create_task(propose_with_backoff(actor, payloads[i], i))
-        for i in range(total_tasks)
-    ]
+    tasks = [asyncio.create_task(propose_with_backoff(actor, payloads[i], i)) for i in range(total_tasks)]
     results = await asyncio.gather(*tasks)
     successes = sum(1 for r in results if r)
 

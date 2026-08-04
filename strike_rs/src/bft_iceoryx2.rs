@@ -1,3 +1,7 @@
+// ============================================================================
+// BABYLON-60 v4.0 Sovereign Hardened
+// █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+// ============================================================================
 //! Asynchronous BFT Consensus over Shared Memory using iceoryx2.
 //! 
 //! INV_C5_18: Zero-Worktree Swarm Scaling.

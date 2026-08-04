@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 import ast
 import asyncio
 import sys
@@ -6,13 +10,16 @@ import os
 import signal
 from typing import TypedDict, Literal
 
+
 class SecurityError(Exception):
     pass
+
 
 class MonadResult(TypedDict):
     status: Literal["Success", "Timeout_Entropy_Death", "SecurityError", "RuntimeError"]
     stdout: str
     error: str
+
 
 def validate_ast_sandbox(source_code: str) -> bool:
     """
@@ -21,42 +28,52 @@ def validate_ast_sandbox(source_code: str) -> bool:
     """
     try:
         tree = ast.parse(source_code)
-        
-        reflection_funcs = {"getattr", "setattr", "delattr", "__getattribute__", "eval", "exec", "compile", "__import__"}
-        
+
+        reflection_funcs = {
+            "getattr",
+            "setattr",
+            "delattr",
+            "__getattribute__",
+            "eval",
+            "exec",
+            "compile",
+            "__import__",
+        }
+
         for node in ast.walk(tree):
             # 1. Block Dunder Attributes (Direct access)
             if isinstance(node, ast.Attribute):
                 if isinstance(node.attr, str) and node.attr.startswith("__") and node.attr.endswith("__"):
                     raise SecurityError(f"Acceso a atributo dunder prohibido: {node.attr}")
-            
+
             # 2. Block direct call to reflection functions
             if isinstance(node, ast.Name) and node.id in reflection_funcs:
                 raise SecurityError(f"Llamada a funcion de introspeccion prohibida: {node.id}")
-            
+
             # 3. RULE_AST_REFLECT_01: Block string literals containing dunders or reflection func names
             if isinstance(node, ast.Constant) and isinstance(node.value, str):
                 if node.value.startswith("__") and node.value.endswith("__"):
                     raise SecurityError(f"Constante literal con patron dunder prohibida: {node.value}")
                 if node.value in reflection_funcs:
                     raise SecurityError(f"Constante literal con nombre de introspeccion prohibida: {node.value}")
-                        
+
             # 4. Block f-strings containing dunders or reflections (Constant parts)
             # F-strings evaluate to ast.JoinedStr with ast.Constant parts and ast.FormattedValue parts
             if isinstance(node, ast.JoinedStr):
                 # The constants inside f-strings are caught by the ast.Constant check above,
                 # but let's be extra safe and evaluate concatenated string if possible.
                 pass
-                
+
             # 5. Block imports
             if isinstance(node, (ast.Import, ast.ImportFrom)):
                 raise SecurityError("Importacion no permitida en entorno sandboxed")
-                
+
         return True
     except SecurityError:
         raise
     except SyntaxError as e:
         raise SecurityError(f"Syntax error (safe): {e}")
+
 
 _SUBPROCESS_WRAPPER = """
 import sys
@@ -121,6 +138,7 @@ print("---JSON_OUTPUT_MARKER---")
 print(json.dumps(result))
 """
 
+
 def _purge_zombies(process: asyncio.subprocess.Process) -> None:
     """Purge process group to prevent zombies (INV_C5_CHAOS_MONAD)."""
     if sys.platform != "win32":
@@ -133,6 +151,7 @@ def _purge_zombies(process: asyncio.subprocess.Process) -> None:
                 pass
     else:
         process.kill()
+
 
 async def run_chaos_monad(source_code: str, timeout_ms: int = 1000, use_seatbelt: bool = False) -> MonadResult:
     """
@@ -148,8 +167,9 @@ async def run_chaos_monad(source_code: str, timeout_ms: int = 1000, use_seatbelt
     cmd = [sys.executable, "-I", "-c", _SUBPROCESS_WRAPPER]
     if use_seatbelt and sys.platform == "darwin":
         cmd = [
-            "sandbox-exec", "-p",
-            "(version 1)(deny default)(allow file-read* (subpath \"/System\"))(allow file-read* (subpath \"/Library\"))(allow file-read* (subpath \"/usr/lib\"))"
+            "sandbox-exec",
+            "-p",
+            '(version 1)(deny default)(allow file-read* (subpath "/System"))(allow file-read* (subpath "/Library"))(allow file-read* (subpath "/usr/lib"))',
         ] + cmd
 
     kwargs = {}
@@ -162,14 +182,13 @@ async def run_chaos_monad(source_code: str, timeout_ms: int = 1000, use_seatbelt
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE,
         env={},
-        **kwargs
+        **kwargs,
     )
 
     try:
         try:
             stdout_bytes, stderr_bytes = await asyncio.wait_for(
-                process.communicate(input=source_code.encode("utf-8")), 
-                timeout=timeout_ms / 1000.0
+                process.communicate(input=source_code.encode("utf-8")), timeout=timeout_ms / 1000.0
             )
         except asyncio.TimeoutError:
             # Turing-Sandbox Chaos Isolation (La Sandbox Aislado)
@@ -185,13 +204,13 @@ async def run_chaos_monad(source_code: str, timeout_ms: int = 1000, use_seatbelt
                 pass
 
     stdout_str = stdout_bytes.decode("utf-8")
-    
+
     if "---JSON_OUTPUT_MARKER---" in stdout_str:
         parts = stdout_str.split("---JSON_OUTPUT_MARKER---")
         try:
             return json.loads(parts[1].strip())
         except json.JSONDecodeError:
             return {"status": "RuntimeError", "stdout": parts[0], "error": "Failed to decode JSON from subprocess"}
-    
+
     stderr_str = stderr_bytes.decode("utf-8")
     return {"status": "RuntimeError", "stdout": stdout_str, "error": stderr_str}

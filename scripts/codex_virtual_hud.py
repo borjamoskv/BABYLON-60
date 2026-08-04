@@ -1,9 +1,14 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 import threading
 from textual.app import App, ComposeResult
 from textual.widgets import Static, Header, Footer
 from textual.containers import Horizontal
 from textual.reactive import reactive
 from pynput import keyboard
+
 
 class AgentStatusWidget(Static):
     agent_id = reactive("AGENT_01")
@@ -15,10 +20,11 @@ class AgentStatusWidget(Static):
             "🟢 DONE": "green",
             "🟠 YIELD": "yellow",
             "🔴 PANIC": "red",
-            "⚪ IDLE": "white"
+            "⚪ IDLE": "white",
         }
         color = color_map.get(self.status, "white")
         return f"[{color}]{self.agent_id}\n\n{self.status}[/{color}]"
+
 
 class CodexVirtualHUD(App):
     CSS = """
@@ -38,10 +44,10 @@ class CodexVirtualHUD(App):
         text-style: bold;
     }
     """
-    
+
     thermal_depth = reactive(1)
     active_agent_idx = reactive(0)
-    
+
     def compose(self) -> ComposeResult:
         yield Header(show_clock=True)
         yield Static(id="thermal_status")
@@ -54,7 +60,7 @@ class CodexVirtualHUD(App):
     def on_mount(self) -> None:
         self.update_thermal_status()
         self.highlight_active_agent()
-        
+
         # Start the global pynput listener in a background thread
         self.start_global_listener()
 
@@ -67,7 +73,7 @@ class CodexVirtualHUD(App):
         if self.thermal_depth > 1:
             self.thermal_depth -= 1
         self.update_thermal_status()
-        
+
     def switch_agent(self):
         self.active_agent_idx = (self.active_agent_idx + 1) % 3
         self.highlight_active_agent()
@@ -99,15 +105,18 @@ class CodexVirtualHUD(App):
 
         def run_listener():
             # These global hotkeys require macOS Accessibility Permissions when run outside of active terminal
-            with keyboard.GlobalHotKeys({
-                '<shift>+<alt>+<up>': on_activate_dial_up,
-                '<shift>+<alt>+<down>': on_activate_dial_down,
-                '<alt>+j': on_activate_joystick
-            }) as listener:
+            with keyboard.GlobalHotKeys(
+                {
+                    "<shift>+<alt>+<up>": on_activate_dial_up,
+                    "<shift>+<alt>+<down>": on_activate_dial_down,
+                    "<alt>+j": on_activate_joystick,
+                }
+            ) as listener:
                 listener.join()
-                
+
         t = threading.Thread(target=run_listener, daemon=True)
         t.start()
+
 
 if __name__ == "__main__":
     app = CodexVirtualHUD()

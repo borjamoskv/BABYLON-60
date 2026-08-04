@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 import asyncio
 import os
 import signal
@@ -109,9 +113,7 @@ class Moskv1Kernel:
             if row:
                 existing_payload = json.loads(row[0]) if isinstance(row[0], str) else row[0]
                 if existing_payload != claim.payload:
-                    raise ValueError(
-                        f"Fail-fast: INV_BFT_04 Collision on claim_id {claim.claim_id}: payload mismatch"
-                    )
+                    raise ValueError(f"Fail-fast: INV_BFT_04 Collision on claim_id {claim.claim_id}: payload mismatch")
         finally:
             await db_chk.close()
 
@@ -173,7 +175,9 @@ async def _main() -> None:
     loop_task = asyncio.create_task(kernel.bft_state_loop())
 
     # Ingesta sintética de prueba
-    await kernel.ingest_entropy({"action": "kernel_bootstrap", "status": "Causal-Determinist", "target": "master_ledger"})
+    await kernel.ingest_entropy(
+        {"action": "kernel_bootstrap", "status": "Causal-Determinist", "target": "master_ledger"}
+    )
 
     await asyncio.sleep(0.5)  # Espera termodinámica de cristalización
     loop_task.cancel()

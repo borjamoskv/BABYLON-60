@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] BFT consensus validator — Operador ortogonal (V) puro.
 # No muta disco. Solo atestación matemática.
 from typing import Any, Dict
@@ -6,6 +10,7 @@ import json
 from babylon60.core.crypto import canonicalize_cbor, hash_sha3_256, verify_ed25519
 
 _UNDECODABLE = object()
+
 
 class BFT_Validator:
     def __init__(self, node_keys: Dict[str, str]):
@@ -27,12 +32,15 @@ class BFT_Validator:
             raise PermissionError(f"BFT_CONSENSUS_FAILURE: {valid_votes}/{required_votes} votes. State compromised.")
         return mutation_hash
 
-    def validate_fuzzy_opinions(self, opinions: Dict[str, Dict[str, float]], weights: Dict[str, float] = None) -> Dict[str, float]:
+    def validate_fuzzy_opinions(
+        self, opinions: Dict[str, Dict[str, float]], weights: Dict[str, float] = None
+    ) -> Dict[str, float]:
         """
         [Causal-Determinist] Evaluate heuristic / fuzzy inputs from the swarm using LogOP.
         If any BFT agent vetoes (p=0), the hypothesis probability collapses to 0.
         """
         from babylon60.bft.bayesian_swarm import BayesianSwarm
+
         swarm = BayesianSwarm(list(opinions.keys()))
         return swarm.logarithmic_opinion_pool(opinions, weights)
 

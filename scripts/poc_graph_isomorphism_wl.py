@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 """
 [Causal-Determinist] Step 1 Proof of Concept: Graph Isomorphism WL Pre-Filter (INV_C5_28).
 """
 
 import hashlib
+
 
 def weisfeiler_lehman_hash(adj: dict[int, list[int]], iterations: int = 3) -> str:
     """Computes 1-WL color refinement hash for graph adjacency dictionary."""
@@ -19,6 +24,7 @@ def weisfeiler_lehman_hash(adj: dict[int, list[int]], iterations: int = 3) -> st
     canonical = ",".join(sorted(colors.values()))
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
+
 def verify_isomorphism(g1: dict[int, list[int]], g2: dict[int, list[int]]) -> bool:
     """INV_C5_28: Must perform O(V+E) WL pre-filtering before exact matching."""
     h1 = weisfeiler_lehman_hash(g1)
@@ -29,11 +35,12 @@ def verify_isomorphism(g1: dict[int, list[int]], g2: dict[int, list[int]]) -> bo
     # If WL hashes match, proceed to exact mapping (simplified degree check for PoC)
     return sorted(len(v) for v in g1.values()) == sorted(len(v) for v in g2.values())
 
+
 if __name__ == "__main__":
     # Isomorphic graphs (Triangle + edge)
     g_a = {0: [1, 2], 1: [0, 2, 3], 2: [0, 1], 3: [1]}
     g_b = {10: [11, 12], 11: [10, 12, 13], 12: [10, 11], 13: [11]}
-    
+
     # Non-isomorphic graph (Star)
     g_c = {0: [1, 2, 3], 1: [0], 2: [0], 3: [0]}
 

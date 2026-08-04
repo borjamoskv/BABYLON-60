@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 from babylon60.extensions.scraper.engine import ScraperEngine
 from babylon60.extensions.scraper.models import ExtractionStrategy, ScrapeRequest, ScrapeResult

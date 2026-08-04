@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 import os
 
 MAPPINGS = {
@@ -21,7 +25,6 @@ MAPPINGS = {
     "babylon60/utils/void_mih.py": "babylon60/transducers/void_mih.py",
     "babylon60/utils/void_vec.py": "babylon60/transducers/void_vec.py",
     "babylon60/utils/landauer.py": "babylon60/transducers/landauer.py",
-
     # Extensions
     "babylon60/extensions/swarm/manager.py": "babylon60/extensions/swarm/swarm_engine.py",
     "babylon60/extensions/llm/manager.py": "babylon60/extensions/llm/llm_transducer.py",
@@ -42,18 +45,20 @@ for d in ["babylon60/primitives", "babylon60/transducers"]:
 for old_path, new_path in MAPPINGS.items():
     if not os.path.exists(old_path):
         continue
-    
+
     # 1. Move file
     os.rename(old_path, new_path)
-    
+
     # 2. Convert old path to import module
     # "babylon60/primitives/result.py" -> "babylon60.primitives.result"
     new_module = new_path.replace("/", ".").replace(".py", "")
-    
+
     # 3. Create Facade
     with open(old_path, "w") as f:
         f.write("import warnings\n")
-        f.write(f"warnings.warn('Módulo deprecado (INV_C5_NOMINAL_DENSITY). Usar {new_module} en su lugar.', DeprecationWarning, stacklevel=2)\n")
+        f.write(
+            f"warnings.warn('Módulo deprecado (INV_C5_NOMINAL_DENSITY). Usar {new_module} en su lugar.', DeprecationWarning, stacklevel=2)\n"
+        )
         f.write(f"from {new_module} import *\n")
 
 print("Façade injection completed.")
