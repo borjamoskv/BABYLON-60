@@ -84,17 +84,11 @@ Built-in exporter generating audit-ready certificates for national supervisory a
 | **Vision** | [Foundational Manifesto v4.0](./docs/00_MANIFESTO.md) | Core thesis, 4 moat pillars, commercial ROI, and Engineer's Oath |
 | **Research** | [EU AI Act Compliance Whitepaper](./docs/04_research/eu_ai_act_compliance_whitepaper.md) | Comprehensive mapping for Articles 9, 10, 11, 12, 13 & 14 of EU Reg 2024/1689 |
 | **Research** | [Technical Whitepaper v1.0](./docs/WHITEPAPER.md) | Formal paper: F60, Merkle DAG Ledger, Self-Falsification Engine, Proof IR |
-| **Strategy** | [Pitch Deck v4.0 (11 Slides)](./docs/PITCH_DECK.md) | B2B Executive presentation & Seed investment due diligence ($3M–$5M) |
-| **Strategy** | [Valuation Strategy](./docs/VALUATION_STRATEGY.md) | Market valuation analysis ($8M – $400M) based on IP & infrastructure |
 | **Guides** | [Enterprise Quickstart](./docs/03_guides/QUICKSTART_ENTERPRISE.md) | 5-minute DevOps onboarding guide for Docker Compose & Kubernetes/Helm |
 | **Guides** | [Tutorial: Hello Causal World](./docs/03_guides/tutorial_hello_causal.md) | Step-by-step tutorial contrasting BABYLON-60 vs Python/asyncio |
 | **Guides** | [Tonnetz Harmonic Audit Guide](./docs/03_guides/tonnetz_audit_guide.md) | Human oversight (Art. 14) via Neo-Riemannian spatial harmonic graph |
 | **Security** | [Threat Model & Mitigations v4.0](./docs/02_ontology/security_threat_model_v4.md) | Phase II Threat Model: Cryptographic redaction, Grace Period & Bounds |
 | **Specification**| [Formal Specification v4.0](./SPECIFICATION.md) | Complete operational semantics, B60 ISA, Proof IR, P2P Topology |
-| **GTM & Sales** | [PoC Spec (7 Shadow Days)](./docs/05_gtm/forensic_quarantine_poc_spec.md) | Read-only Proof of Concept specification for CISOs |
-| **GTM & Sales** | [CISO Cold Email Playbook](./docs/05_gtm/ciso_cold_email_playbook.md) | B2B prospecting templates in Spanish, English, and German |
-| **GTM & Sales** | [Hero Video Script & Show HN](./docs/05_gtm/hero_video_script_and_show_hn.md) | Timecoded 60s demo video script & Hacker News launch post |
-| **GTM & Sales** | [VC Data Room Manifest](./docs/05_gtm/vc_data_room_manifest.md) | Structured virtual due diligence index for Tier-1 VC funds |
 
 ---
 

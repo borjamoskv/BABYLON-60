@@ -82,17 +82,11 @@ Exportador integrado que genera certificados auditables para las autoridades de 
 | **Visión** | [Manifiesto Fundacional v4.0](./docs/00_MANIFESTO.md) | Tesis central, los 4 pilares del foso tecnológico, el ROI comercial y el Juramento del Ingeniero |
 | **Investigación** | [EU AI Act Compliance Whitepaper](./docs/04_research/eu_ai_act_compliance_whitepaper.md) | Mapeo detallado para los Artículos 9, 10, 11, 12, 13 y 14 del Reglamento UE 2024/1689 |
 | **Investigación** | [Technical Whitepaper v1.0](./docs/WHITEPAPER.md) | Paper formal: F60, Ledger Merkle DAG, Self-Falsification Engine, Proof IR |
-| **Estrategia** | [Pitch Deck v4.0 (11 Slides)](./docs/PITCH_DECK.md) | Presentación ejecutiva B2B y due diligence de inversión Seed ($3M–$5M) |
-| **Estrategia** | [Estrategia de Valoración](./docs/VALUATION_STRATEGY.md) | Análisis de valoración de mercado ($8M – $400M) basado en IP e infraestructura |
 | **Guías** | [Quickstart Enterprise](./docs/03_guides/QUICKSTART_ENTERPRISE.md) | Guía de onboarding DevOps en 5 mins para Docker Compose y Kubernetes/Helm |
 | **Guías** | [Tutorial: Hola Mundo Causal](./docs/03_guides/tutorial_hello_causal.md) | Guía paso a paso contrastando BABYLON-60 vs Python/asyncio |
 | **Guías** | [Guía Auditoría Armónica Tonnetz](./docs/03_guides/tonnetz_audit_guide.md) | Supervisión humana (Art. 14) vía red armónica espacial Neo-Riemanniana |
 | **Seguridad** | [Threat Model & Mitigations v4.0](./docs/02_ontology/security_threat_model_v4.md) | Modelo de amenazas Fase II: Redacción criptográfica, Grace Period y Bounds |
 | **Especificación**| [Especificación Formal v4.0](./SPECIFICATION.md) | Semántica operacional completa, ISA B60, Proof IR, Topology P2P |
-| **GTM & Ventas** | [PoC Spec (7 Días Sombra)](./docs/05_gtm/forensic_quarantine_poc_spec.md) | Especificación de Prueba de Concepto en modo lectura para CISOs |
-| **GTM & Ventas** | [CISO Cold Email Playbook](./docs/05_gtm/ciso_cold_email_playbook.md) | Plantillas de prospección B2B en Español, Inglés y Alemán |
-| **GTM & Ventas** | [Hero Video Script & Show HN](./docs/05_gtm/hero_video_script_and_show_hn.md) | Guión timecode del video demo de 60s y post de lanzamiento Hacker News |
-| **GTM & Ventas** | [VC Data Room Manifest](./docs/05_gtm/vc_data_room_manifest.md) | Índice estructurado de due diligence virtual para fondos Tier-1 |
 
 ---
 

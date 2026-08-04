@@ -8,7 +8,7 @@ Esta iteración transforma las vulnerabilidades detectadas en características d
 
 # BABYLON-60 v4.0: ITERACIÓN "SOVEREIGN HARDENED"
 
-**Objetivo de la Iteración:** Pasar de un "Kernel de Investigación" a una "Infraestructura de Grado Militar/Financiero" lista para pasar una Due Diligence de Palantir, Anthropic o el Banco Central Europeo.
+**Objetivo de la Iteración:** Pasar de un "Kernel de Investigación" a una "Infraestructura de Grado Militar/Financiero" lista para pasar una Due Diligence técnica y regulatoria estricta.
 
 ## 1. REFACTORIZACIÓN CRÍTICA (Fixing the Red Flags)
 
