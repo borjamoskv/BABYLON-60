@@ -199,10 +199,10 @@ class OpenRouterInferenceRequest(BaseModel):
     api_key: str | None = Field(default=None, description="OpenRouter API Key (optional if set in env)")
     temperature: float = Field(default=0.2, ge=0.0, le=2.0)
     max_tokens: int = Field(default=1024, ge=1, le=8192)
-    fable5_deterministic_mode: bool = Field(default=False, description="Force Fable 5 Deterministic Opus Fallback")
+    mythos5_deterministic_mode: bool = Field(default=False, description="Forzar degradación determinista MOSKV-5 a Opus/Sonnet")
 
 
-class Fable5DegradationAnalysis(BaseModel):
+class Mythos5DegradationAnalysis(BaseModel):
     is_degraded: bool
     determinism_score: float
     original_model: str
@@ -211,12 +211,12 @@ class Fable5DegradationAnalysis(BaseModel):
     rationale: str
 
 
-def evaluate_fable5_deterministic_degradation(
+def evaluate_mythos5_deterministic_degradation(
     prompt: str, requested_model: str, temperature: float, force_degrade: bool = False
-) -> Fable5DegradationAnalysis:
-    """Fable 5 Deterministic Fallback Evaluator.
-    When strict determinism (T=0.0, AST syntax, formal proofs, or explicit degradation flag) is required,
-    degrades speculative high-temperature models to Opus 4.8 / Claude 3.5 Sonnet at T=0.0 for zero-jitter execution.
+) -> Mythos5DegradationAnalysis:
+    """Evaluador de Degradación Determinista MOSKV-5 MYTHOS.
+    Cuando se requiere determinismo estricto (T=0.0, sintaxis AST, pruebas formales o bandera explícita),
+    degrada modelos especulativos a Opus 4.8 / Claude 3.5 Sonnet a T=0.0 para ejecución verificable sin jitter.
     """
     lower = prompt.lower()
     
@@ -237,29 +237,29 @@ def evaluate_fable5_deterministic_degradation(
         det_score += 0.50
 
     if det_score >= 0.55 or force_degrade or temperature == 0.0:
-        degraded_target = "anthropic/claude-3.5-sonnet"  # Opus / Sonnet SOTA deterministic anchor
-        return Fable5DegradationAnalysis(
+        degraded_target = "anthropic/claude-3.5-sonnet"  # Ancla determinista Opus / Sonnet SOTA
+        return Mythos5DegradationAnalysis(
             is_degraded=True,
             determinism_score=round(min(1.0, det_score), 2),
             original_model=requested_model,
             degraded_model=degraded_target,
             forced_temperature=0.0,
-            rationale=f"Fable 5 Deterministic Policy Triggered (Score: {round(det_score, 2)}). Degraded from {requested_model} to Opus/Sonnet 3.5 at T=0.0 for zero-jitter verifiable output.",
+            rationale=f"Política de Determinismo MOSKV-5 MYTHOS Activada (Score: {round(det_score, 2)}). Degradado desde {requested_model} a Opus/Sonnet 3.5 a T=0.0 para salida verificable sin varianza.",
         )
 
-    return Fable5DegradationAnalysis(
+    return Mythos5DegradationAnalysis(
         is_degraded=False,
         determinism_score=round(det_score, 2),
         original_model=requested_model,
         degraded_model=requested_model,
         forced_temperature=temperature,
-        rationale="Standard Fable 5 speculative execution within acceptable entropy bounds.",
+        rationale="Ejecución especulativa MOSKV-5 dentro de límites de entropía aceptables.",
     )
 
 
 DEFAULT_OPENROUTER_MODELS = [
     "auto_sota",
-    "fable-5-mythos",
+    "moskv-5-mythos",
     "anthropic/claude-3.5-sonnet",
     "deepseek/deepseek-r1",
     "google/gemini-2.5-flash",
@@ -268,6 +268,7 @@ DEFAULT_OPENROUTER_MODELS = [
     "mistralai/mistral-large-2411",
     "qwen/qwen-2.5-coder-32b-instruct",
 ]
+
 
 
 
@@ -362,12 +363,12 @@ def generate_openrouter(req: OpenRouterInferenceRequest) -> dict[str, Any]:
             "fallback_model": route_analysis.fallback_model,
         }
 
-    # Evaluate Fable 5 Deterministic Degradation Policy
-    fable5_eval = evaluate_fable5_deterministic_degradation(
-        req.prompt, selected_model, req.temperature, force_degrade=req.fable5_deterministic_mode
+    # Evaluate MOSKV-5 MYTHOS Deterministic Degradation Policy
+    mythos5_eval = evaluate_mythos5_deterministic_degradation(
+        req.prompt, selected_model, req.temperature, force_degrade=req.mythos5_deterministic_mode
     )
-    final_model = fable5_eval.degraded_model if fable5_eval.is_degraded else selected_model
-    final_temp = fable5_eval.forced_temperature if fable5_eval.is_degraded else req.temperature
+    final_model = mythos5_eval.degraded_model if mythos5_eval.is_degraded else selected_model
+    final_temp = mythos5_eval.forced_temperature if mythos5_eval.is_degraded else req.temperature
 
     endpoint = "https://openrouter.ai/api/v1/chat/completions"
     payload = {
@@ -382,7 +383,6 @@ def generate_openrouter(req: OpenRouterInferenceRequest) -> dict[str, Any]:
         "temperature": final_temp,
         "max_tokens": req.max_tokens,
     }
-
 
     headers = {
         "Authorization": f"Bearer {api_key.strip()}",
@@ -426,15 +426,16 @@ def generate_openrouter(req: OpenRouterInferenceRequest) -> dict[str, Any]:
         "sha256": sha256,
         "provider": "OPENROUTER_NATIVE_API",
         "sota_route": route_info,
-        "fable5_degradation": {
-            "is_degraded": fable5_eval.is_degraded,
-            "determinism_score": fable5_eval.determinism_score,
-            "original_model": fable5_eval.original_model,
-            "degraded_model": fable5_eval.degraded_model,
-            "forced_temperature": fable5_eval.forced_temperature,
-            "rationale": fable5_eval.rationale,
+        "mythos5_degradation": {
+            "is_degraded": mythos5_eval.is_degraded,
+            "determinism_score": mythos5_eval.determinism_score,
+            "original_model": mythos5_eval.original_model,
+            "degraded_model": mythos5_eval.degraded_model,
+            "forced_temperature": mythos5_eval.forced_temperature,
+            "rationale": mythos5_eval.rationale,
         },
     }
+
 
 
 
