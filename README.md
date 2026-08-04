@@ -96,6 +96,43 @@ Exportador integrado que genera certificados auditables para las autoridades de 
 
 ---
 
+## 🕹️ Integración de Agentes y Consola de Mando (Antigravity & WA-Nexus)
+
+BABYLON-60 no es solo un kernel pasivo; se acopla directamente a tu stack de IA favorito para dotarlo de autonomía determinista, "Deep Research" (AUTODIDACT-Ω) y ejecución forzada a cero fricción (ULTRATHINK).
+
+### 1. Inyección en LLMs (Model Context Protocol)
+El kernel es agnóstico y expone su arsenal de herramientas locales mediante el estándar MCP (`cortex_mcp_server.py`):
+- **Para Claude Code (Anthropic) y Cursor/Codex (OpenAI):** Soporte MCP nativo. Añade el servidor local en los *settings* (o usa `claude mcp add`) y tu IA heredará instantáneamente el escudo WORM Quarantine y la capacidad de ejecutar acciones físicas en tu máquina.
+- **Para ChatGPT (Web):** Exporta el arsenal de BABYLON-60 en formato JSON *OpenAPI*, crea un Custom GPT e inyéctale el esquema para operar el kernel desde la web.
+
+### 2. Pasarela de Intervención (WA-Nexus)
+Controla tus enjambres desde WhatsApp sin necesidad de estar frente al PC.
+- **Mensajes Privados (DMs):** Intervención *Event-Driven* instantánea. Escribe a la IA y responderá sin fricción.
+- **Grupos:** Requiere el disparador `Moskv-1` al inicio del mensaje para forzar una interrupción de hardware y saltar el polling defensivo de 5 minutos.
+- **Asistencia del Kernel:** Escribe `Moskv-tips` para recibir píldoras de sabiduría arquitectónica y buenas prácticas operativas.
+
+### 3. Cheat Sheet: Directivas Termodinámicas y Slash Commands
+Comandos ejecutables desde la interfaz del agente (Antigravity) para gobernar el enjambre:
+
+- **⚡ Slash Commands:**
+  - `/goal [tarea]` $\to$ Activa la ejecución masiva. El agente refactoriza o investiga sin descanso hasta cumplir el objetivo.
+  - `/learn` $\to$ Cristaliza el contexto actual en memoria permanente. La IA lo integrará en su ADN para futuros despliegues.
+  - `/schedule` $\to$ Programa un Cron Job agéntico (ej. auditar la red cada hora).
+  - `/grill-me` $\to$ Modo Inquisidor. Entrevista iterativa para validar arquitecturas antes de escribir código.
+
+- **🔥 Triggers Termodinámicos (Zero-Friction):**
+  - `ULTRATHINK` $\to$ Obliga al modelo a colapsar su inferencia en código físico. Elimina la entropía generativa ("parloteo").
+  - `purga anergia` $\to$ Protocolo de limpieza determinista para erradicar archivos zombie o código muerto.
+  - `deep research` $\to$ Dispara el motor AUTODIDACT-Ω para investigación web ultra-profunda.
+
+### 4. Setup *Zero-Friction* en Windows 10
+Si no dispones de un entorno UNIX nativo (macOS/Linux), BABYLON-60 se despliega en Windows sin tocar variables de entorno:
+1. Instala **Python 3.12** desde la **Microsoft Store** (autoconfigura el PATH).
+2. Abre PowerShell / cmd y ejecuta: `pip install cortex-persist`.
+3. Lanza la demo interactiva: `python -m babylon60.run_hero_demo`.
+
+---
+
 ## 🗂️ Mapa del Monorepo
 
 ```
