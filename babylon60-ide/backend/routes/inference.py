@@ -420,13 +420,22 @@ def generate_openrouter(req: OpenRouterInferenceRequest) -> dict[str, Any]:
 
     return {
         "text": text,
-        "model": selected_model,
+        "model": final_model,
         "tps": tps,
         "latency_ms": latency_ms,
         "sha256": sha256,
         "provider": "OPENROUTER_NATIVE_API",
         "sota_route": route_info,
+        "fable5_degradation": {
+            "is_degraded": fable5_eval.is_degraded,
+            "determinism_score": fable5_eval.determinism_score,
+            "original_model": fable5_eval.original_model,
+            "degraded_model": fable5_eval.degraded_model,
+            "forced_temperature": fable5_eval.forced_temperature,
+            "rationale": fable5_eval.rationale,
+        },
     }
+
 
 
 
