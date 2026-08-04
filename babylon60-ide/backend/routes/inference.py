@@ -310,7 +310,7 @@ def generate_openrouter(req: OpenRouterInferenceRequest) -> dict[str, Any]:
         "messages": [
             {
                 "role": "system",
-                "content": "You are MOSKV-1 APEX operating over OpenRouter native cloud socket. Provide high-density, rigorous technical outputs.",
+                "content": "Eres MOSKV-1 APEX operando sobre el socket nativo en la nube de OpenRouter. Proporciona soluciones técnicas rigurosas, deterministas y de alta densidad en español por defecto.",
             },
             {"role": "user", "content": req.prompt},
         ],
@@ -470,7 +470,7 @@ def stream_openrouter(req: OpenRouterInferenceRequest):
         "messages": [
             {
                 "role": "system",
-                "content": "You are MOSKV-1 APEX operating over OpenRouter native cloud socket. Provide high-density, rigorous technical outputs.",
+                "content": "Eres MOSKV-1 APEX operando sobre el socket nativo en la nube de OpenRouter. Proporciona respuestas técnicas de alta densidad, rigurosas y deterministas en español por defecto.",
             },
             {"role": "user", "content": req.prompt},
         ],

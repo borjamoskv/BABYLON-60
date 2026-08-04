@@ -1915,8 +1915,8 @@ async function runLedgerSearch(q) {
 async function renderInferencePage(container) {
   onRouteEnter('inference');
   setFocusHeader({
-    breadcrumb: setBreadcrumb('BABYLON·60', 'Inference — SOTA HYBRID ROUTER & SILICON'),
-    actions: `<button class="btn" id="btn-infer-refresh" style="font-size:0.62rem">↺ Refresh Status</button>`,
+    breadcrumb: setBreadcrumb('BABYLON·60', 'Inferencia — RUTEO SOTA HÍBRIDO Y SILICIO (ES)'),
+    actions: `<button class="btn" id="btn-infer-refresh" style="font-size:0.62rem">↺ Actualizar Estado</button>`,
   });
 
   const savedOpenRouterKey = localStorage.getItem('babylon_openrouter_key') || '';
@@ -1924,25 +1924,26 @@ async function renderInferencePage(container) {
   container.innerHTML = `
     <div class="stats-grid" style="margin-bottom:14px">
       <div class="stat-card">
-        <div class="stat-label">Inference Engine Status</div>
-        <div class="stat-value break" id="infer-status-val">Probing...</div>
-        <div class="stat-sub" id="infer-status-sub">Checking endpoints...</div>
+        <div class="stat-label">Estado del Motor de Inferencia</div>
+        <div class="stat-value break" id="infer-status-val">Comprobando...</div>
+        <div class="stat-sub" id="infer-status-sub">Verificando endpoints...</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Active Provider</div>
-        <div class="stat-value lapis" id="infer-provider-badge" style="font-size:0.8rem">OPENROUTER NATIVE</div>
-        <div class="stat-sub" id="infer-provider-sub">SOTA Intelligent Routing</div>
+        <div class="stat-label">Proveedor Activo</div>
+        <div class="stat-value lapis" id="infer-provider-badge" style="font-size:0.8rem">OPENROUTER NATIVO</div>
+        <div class="stat-sub" id="infer-provider-sub">Ruta Inteligente SOTA</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Last Generation Metrics</div>
+        <div class="stat-label">Métricas de Última Generación</div>
         <div class="stat-value gold" id="infer-speed-val">— tps</div>
-        <div class="stat-sub" id="infer-latency-sub">— ms latency</div>
+        <div class="stat-sub" id="infer-latency-sub">— ms latencia</div>
       </div>
     </div>
 
     <div class="card slide-in" style="margin-bottom:14px">
       <div class="card-title" style="margin-bottom:12px;display:flex;justify-content:space-between;align-items:center">
-        <span>Inference Parameters & SOTA Router</span>
+        <span>Parámetros de Inferencia y Ruteador SOTA</span>
+
         <span class="badge" style="font-size:0.56rem;color:var(--gold);border:1px solid var(--gold);padding:2px 6px;border-radius:3px">SOTA INTELLIGENT ROUTER V4</span>
       </div>
       
