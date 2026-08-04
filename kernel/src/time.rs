@@ -2,7 +2,6 @@
 // BABYLON-60 v4.0 Sovereign Hardened
 // █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 // ============================================================================
-use core::fmt;
 
 /// Instruction cycle counter within the VM. Strictly monotonic.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]

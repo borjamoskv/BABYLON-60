@@ -5,7 +5,7 @@
 
 Source:    /Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/domain_kernel/IRPAutomata.fs
 Hash:      e9f78b444ca42f825e69780b3cf86b652c2f770e29502badb3588bafdb0f5803
-Timestamp: 2026-08-04T21:12:27.559084+00:00
+Timestamp: 2026-08-04T22:44:42.239435+00:00
 Status:    ❌ REGIME VIOLATIONS DETECTED
 
 ── IR Module ──

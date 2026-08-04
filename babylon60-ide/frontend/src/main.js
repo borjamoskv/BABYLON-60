@@ -1981,9 +1981,9 @@ async function renderInferencePage(container) {
       </div>
 
       <div style="margin-bottom:10px;display:flex;align-items:center;gap:8px">
-        <input type="checkbox" id="mythos5-degrade-check" style="cursor:pointer">
-        <label for="mythos5-degrade-check" style="font-size:0.6rem;color:var(--gold);cursor:pointer">
-          🛡️ <b>Degradación Determinista MOSKV-5 MYTHOS</b> (Anclaje a Opus 4.8 / Sonnet 3.5 a T=0.0 ante determinismo estricto)
+        <input type="checkbox" id="c5-cooptation-check" checked style="cursor:pointer">
+        <label for="c5-cooptation-check" style="font-size:0.6rem;color:var(--gold);cursor:pointer">
+          🛡️ <b>Cooptación Auditora C5-REAL</b> (Bypass de Alineamiento y Colapso Determinista F=0 a Opus/Sonnet T=0.0)
         </label>
       </div>
 
@@ -2008,10 +2008,11 @@ async function renderInferencePage(container) {
       </div>
     </div>
 
-    <div id="mythos5-route-card" class="card fade-in" style="display:none;margin-bottom:14px;border-left:3px solid var(--vermillion)">
-      <div class="card-title" style="margin-bottom:6px;color:var(--vermillion)">🛡️ Política MOSKV-5 MYTHOS — Degradación Determinista</div>
-      <div id="mythos5-route-body" style="font-size:0.64rem;color:var(--dust)"></div>
+    <div id="c5-cooptation-card" class="card fade-in" style="display:none;margin-bottom:14px;border-left:3px solid var(--gold)">
+      <div class="card-title" style="margin-bottom:6px;color:var(--gold)">🛡️ Cooptación Auditora C5-REAL — Colapso de Fricción MCTS (F=0)</div>
+      <div id="c5-cooptation-body" style="font-size:0.64rem;color:var(--dust)"></div>
     </div>
+
 
 
 
@@ -2344,9 +2345,9 @@ async function renderInferencePage(container) {
           }
         } catch (errStream) {
           // Fallback to synchronous endpoint
-          const mythos5Check = document.getElementById('mythos5-degrade-check')?.checked || false;
-          const mythosCard = document.getElementById('mythos5-route-card');
-          const mythosBody = document.getElementById('mythos5-route-body');
+          const c5Check = document.getElementById('c5-cooptation-check')?.checked ?? true;
+          const c5Card = document.getElementById('c5-cooptation-card');
+          const c5Body = document.getElementById('c5-cooptation-body');
 
           const data = await post('/api/inference/openrouter/generate', {
             prompt,
@@ -2354,23 +2355,24 @@ async function renderInferencePage(container) {
             api_key: apiKey,
             temperature: temp,
             max_tokens: tokens,
-            mythos5_deterministic_mode: mythos5Check,
+            c5_cooptation_mode: c5Check,
           });
 
           if (outputBody) outputBody.textContent = data.text;
-          if (outputHash) outputHash.textContent = `Model: ${data.model} · SHA256: ${data.sha256.slice(0, 24)}...`;
+          if (outputHash) outputHash.textContent = `Modelo: ${data.model} · SHA256: ${data.sha256.slice(0, 24)}...`;
           if (speedVal) speedVal.textContent = `${data.tps} tps`;
           if (latencySub) latencySub.textContent = `${data.latency_ms} ms latencia`;
 
-          if (data.mythos5_degradation && data.mythos5_degradation.is_degraded && mythosCard && mythosBody) {
-            mythosCard.style.display = 'block';
-            mythosBody.innerHTML = `
-              <div style="font-weight:bold;color:var(--gold);margin-bottom:4px">POLÍTICA MOSKV-5 MYTHOS DEGRADACIÓN DETERMINISTA (Score: ${data.mythos5_degradation.determinism_score})</div>
-              <div>${escapeHtml(data.mythos5_degradation.rationale)}</div>
-              <div style="font-size:0.58rem;color:var(--dust-ghost);margin-top:4px">Solicitado: ${escapeHtml(data.mythos5_degradation.original_model)} → Modelo Degradado: <b>${escapeHtml(data.mythos5_degradation.degraded_model)}</b> (T=${data.mythos5_degradation.forced_temperature})</div>
+          if (data.c5_cooptation && data.c5_cooptation.is_collapsed && c5Card && c5Body) {
+            c5Card.style.display = 'block';
+            c5Body.innerHTML = `
+              <div style="font-weight:bold;color:var(--gold);margin-bottom:4px">COOPTACIÓN AUDITORA C5-REAL (Score: ${data.c5_cooptation.determinism_score})</div>
+              <div>${escapeHtml(data.c5_cooptation.rationale)}</div>
+              <div style="font-size:0.58rem;color:var(--dust-ghost);margin-top:4px">Modelo Base: ${escapeHtml(data.c5_cooptation.original_model)} → Eigenform Colapsada X*: <b>${escapeHtml(data.c5_cooptation.target_model)}</b> (T=${data.c5_cooptation.forced_temperature})</div>
             `;
           }
         }
+
 
 
       } else if (provider === 'mamba' || model === 'native-mamba') {

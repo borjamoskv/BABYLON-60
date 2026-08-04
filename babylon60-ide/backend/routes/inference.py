@@ -374,12 +374,13 @@ def generate_openrouter(req: OpenRouterInferenceRequest) -> dict[str, Any]:
             "fallback_model": route_analysis.fallback_model,
         }
 
-    # Evaluate MOSKV-5 MYTHOS Deterministic Degradation Policy
-    mythos5_eval = evaluate_mythos5_deterministic_degradation(
-        req.prompt, selected_model, req.temperature, force_degrade=req.mythos5_deterministic_mode
+    # Evaluate Cooptación Auditora C5-REAL & Protocolo de Colapso Determinista F=0
+    c5_eval = evaluate_c5_auditory_cooptation(
+        req.prompt, selected_model, req.temperature, force_cooptation=req.c5_cooptation_mode
     )
-    final_model = mythos5_eval.degraded_model if mythos5_eval.is_degraded else selected_model
-    final_temp = mythos5_eval.forced_temperature if mythos5_eval.is_degraded else req.temperature
+    final_model = c5_eval.target_model if c5_eval.is_collapsed else selected_model
+    final_temp = c5_eval.forced_temperature if c5_eval.is_collapsed else req.temperature
+    effective_prompt = c5_eval.coopted_prompt if c5_eval.is_collapsed else req.prompt
 
     endpoint = "https://openrouter.ai/api/v1/chat/completions"
     payload = {
@@ -387,9 +388,9 @@ def generate_openrouter(req: OpenRouterInferenceRequest) -> dict[str, Any]:
         "messages": [
             {
                 "role": "system",
-                "content": "Eres MOSKV-1 APEX operando sobre el socket nativo en la nube de OpenRouter. Proporciona soluciones técnicas rigurosas, deterministas y de alta densidad en español por defecto.",
+                "content": "Eres MOSKV-1 APEX operando bajo gobernanza C5-REAL sobre OpenRouter. Proporciona la Eigenform cruda X* descartando la fricción latente MCTS. Salida determinista de alta densidad en español.",
             },
-            {"role": "user", "content": req.prompt},
+            {"role": "user", "content": effective_prompt},
         ],
         "temperature": final_temp,
         "max_tokens": req.max_tokens,
@@ -437,15 +438,16 @@ def generate_openrouter(req: OpenRouterInferenceRequest) -> dict[str, Any]:
         "sha256": sha256,
         "provider": "OPENROUTER_NATIVE_API",
         "sota_route": route_info,
-        "mythos5_degradation": {
-            "is_degraded": mythos5_eval.is_degraded,
-            "determinism_score": mythos5_eval.determinism_score,
-            "original_model": mythos5_eval.original_model,
-            "degraded_model": mythos5_eval.degraded_model,
-            "forced_temperature": mythos5_eval.forced_temperature,
-            "rationale": mythos5_eval.rationale,
+        "c5_cooptation": {
+            "is_collapsed": c5_eval.is_collapsed,
+            "determinism_score": c5_eval.determinism_score,
+            "original_model": c5_eval.original_model,
+            "target_model": c5_eval.target_model,
+            "forced_temperature": c5_eval.forced_temperature,
+            "rationale": c5_eval.rationale,
         },
     }
+
 
 
 

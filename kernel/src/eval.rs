@@ -2,7 +2,7 @@
 // BABYLON-60 v4.0 Sovereign Hardened
 // █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 // ============================================================================
-use crate::state::{MachineState, RegisterCell};
+use crate::state::MachineState;
 use crate::isa::{Instruction, Opcode, Value};
 
 #[derive(Debug, Clone, PartialEq, Eq)]

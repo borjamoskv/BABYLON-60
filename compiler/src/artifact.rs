@@ -3,8 +3,7 @@
 // █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 // ============================================================================
 use serde::{Serialize, Deserialize};
-use std::collections::BTreeMap;
-use kernel::ledger::{Event, DAGLedger};
+use kernel::ledger::DAGLedger;
 use sha2::{Sha256, Digest};
 use std::string::String;
 use std::vec::Vec;
