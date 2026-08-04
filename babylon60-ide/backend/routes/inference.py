@@ -393,3 +393,54 @@ def models_openrouter() -> dict[str, Any]:
     """Return default and fetched OpenRouter models."""
     return {"models": DEFAULT_OPENROUTER_MODELS}
 
+
+class CompareRequest(BaseModel):
+    prompt: str = Field(..., description="Prompt to run across both models")
+    model_a: str = Field(default="anthropic/claude-3.5-sonnet")
+    model_b: str = Field(default="deepseek/deepseek-r1")
+    api_key: str | None = Field(default=None)
+    temperature: float = Field(default=0.2, ge=0.0, le=2.0)
+    max_tokens: int = Field(default=1024, ge=1, le=8192)
+
+
+@openrouter_router.post("/compare")
+def compare_openrouter_models(req: CompareRequest) -> dict[str, Any]:
+    """Run dual-model parallel comparison ("SOTA Battle Arena") over OpenRouter."""
+    from concurrent.futures import ThreadPoolExecutor
+
+    req_a = OpenRouterInferenceRequest(
+        prompt=req.prompt,
+        model=req.model_a,
+        api_key=req.api_key,
+        temperature=req.temperature,
+        max_tokens=req.max_tokens,
+    )
+    req_b = OpenRouterInferenceRequest(
+        prompt=req.prompt,
+        model=req.model_b,
+        api_key=req.api_key,
+        temperature=req.temperature,
+        max_tokens=req.max_tokens,
+    )
+
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        future_a = executor.submit(generate_openrouter, req_a)
+        future_b = executor.submit(generate_openrouter, req_b)
+        res_a = future_a.result()
+        res_b = future_b.result()
+
+    faster = req.model_a if res_a["latency_ms"] <= res_b["latency_ms"] else req.model_b
+    latency_delta = abs(res_a["latency_ms"] - res_b["latency_ms"])
+    tps_delta = round(abs(res_a["tps"] - res_b["tps"]), 2)
+
+    return {
+        "model_a_result": res_a,
+        "model_b_result": res_b,
+        "comparison": {
+            "faster_model": faster,
+            "latency_delta_ms": latency_delta,
+            "tps_delta": tps_delta,
+        },
+    }
+
+

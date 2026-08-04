@@ -1992,7 +1992,10 @@ async function renderInferencePage(container) {
       </div>
 
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-        <button class="btn" id="btn-sota-classify" style="font-size:0.62rem">🔍 Pre-Analyze SOTA Route</button>
+        <div style="display:flex;gap:8px">
+          <button class="btn" id="btn-sota-classify" style="font-size:0.62rem">🔍 Pre-Analyze SOTA Route</button>
+          <button class="btn" id="btn-sota-compare" style="font-size:0.62rem;color:var(--gold);border-color:var(--gold)">⚔️ Dual-Model Compare Arena</button>
+        </div>
         <button class="btn btn-primary" id="btn-run-inference">⚡ Generate Output</button>
       </div>
     </div>
@@ -2002,6 +2005,11 @@ async function renderInferencePage(container) {
       <div id="sota-route-body" style="font-size:0.66rem;color:var(--dust)"></div>
     </div>
 
+    <div id="sota-compare-card" class="card fade-in" style="display:none;margin-bottom:14px">
+      <div class="card-title" style="margin-bottom:10px;color:var(--lapis)">⚔️ SOTA Battle Arena — Parallel Dual-Model Benchmark</div>
+      <div id="sota-compare-body" style="display:grid;grid-template-columns:1fr 1fr;gap:12px"></div>
+    </div>
+
     <div id="infer-output-card" class="card fade-in" style="display:none;margin-bottom:14px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
         <div class="card-title">Output Integrity & Payload</div>
@@ -2009,6 +2017,7 @@ async function renderInferencePage(container) {
       </div>
       <pre id="infer-output-body" style="font-family:var(--mono);font-size:0.68rem;background:var(--bitumen);padding:14px;border:1px solid var(--edge);border-radius:2px;white-space:pre-wrap;margin:0;max-height:400px;overflow-y:auto;color:var(--dust)"></pre>
     </div>
+
 
     <div id="mamba-trace-card" class="card fade-in" style="display:none">
       <div class="card-title" style="margin-bottom:10px">Mamba GraphLedger Trace</div>
@@ -2146,6 +2155,61 @@ async function renderInferencePage(container) {
       if (routeBody) routeBody.textContent = `Classifier error: ${err.message}`;
     }
   });
+
+  // Dual-Model SOTA Arena Compare Button
+  document.getElementById('btn-sota-compare')?.addEventListener('click', async () => {
+    const prompt = document.getElementById('infer-prompt-input')?.value?.trim();
+    const apiKey = document.getElementById('openrouter-key-input')?.value?.trim();
+    const temp = parseFloat(document.getElementById('infer-temp-input')?.value || '0.2');
+    const compareCard = document.getElementById('sota-compare-card');
+    const compareBody = document.getElementById('sota-compare-body');
+
+    if (!prompt) return;
+
+    setTachometer('working');
+    if (compareCard) compareCard.style.display = 'block';
+    if (compareBody) compareBody.innerHTML = '<div style="grid-column:span 2;color:var(--dust-dim)">Executing parallel dual-model benchmark (Claude 3.5 Sonnet vs DeepSeek R1)...</div>';
+
+    try {
+      const data = await post('/api/inference/openrouter/compare', {
+        prompt,
+        model_a: 'anthropic/claude-3.5-sonnet',
+        model_b: 'deepseek/deepseek-r1',
+        api_key: apiKey,
+        temperature: temp,
+        max_tokens: 512,
+      });
+
+      const resA = data.model_a_result;
+      const resB = data.model_b_result;
+      const comp = data.comparison;
+
+      if (compareBody) {
+        compareBody.innerHTML = `
+          <div style="background:var(--bitumen);padding:12px;border:1px solid var(--edge);border-radius:3px">
+            <div style="font-size:0.68rem;font-weight:bold;color:var(--lapis);margin-bottom:4px">MODEL A: ${escapeHtml(resA.model)}</div>
+            <div style="font-size:0.56rem;color:var(--dust-ghost);margin-bottom:8px">${resA.tps} tps · ${resA.latency_ms} ms · ${resA.sha256.slice(0, 16)}...</div>
+            <pre style="font-family:var(--mono);font-size:0.62rem;white-space:pre-wrap;color:var(--dust);max-height:240px;overflow-y:auto;margin:0">${escapeHtml(resA.text)}</pre>
+          </div>
+
+          <div style="background:var(--bitumen);padding:12px;border:1px solid var(--edge);border-radius:3px">
+            <div style="font-size:0.68rem;font-weight:bold;color:var(--gold);margin-bottom:4px">MODEL B: ${escapeHtml(resB.model)}</div>
+            <div style="font-size:0.56rem;color:var(--dust-ghost);margin-bottom:8px">${resB.tps} tps · ${resB.latency_ms} ms · ${resB.sha256.slice(0, 16)}...</div>
+            <pre style="font-family:var(--mono);font-size:0.62rem;white-space:pre-wrap;color:var(--dust);max-height:240px;overflow-y:auto;margin:0">${escapeHtml(resB.text)}</pre>
+          </div>
+
+          <div style="grid-column:span 2;font-size:0.6rem;color:var(--gold);background:rgba(245,158,11,0.08);padding:8px;border-radius:3px">
+            🏆 <b>Faster Model:</b> ${escapeHtml(comp.faster_model)} (${comp.latency_delta_ms} ms delta) · ⚡ <b>TPS Delta:</b> ${comp.tps_delta} tps
+          </div>
+        `;
+      }
+    } catch (err) {
+      if (compareBody) compareBody.innerHTML = `<div style="grid-column:span 2;color:var(--vermillion)">Compare Arena Error: ${escapeHtml(err.message)}</div>`;
+    } finally {
+      setTachometer('idle');
+    }
+  });
+
 
   // Run Inference Execution
   document.getElementById('btn-run-inference')?.addEventListener('click', async () => {
