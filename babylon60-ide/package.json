@@ -1,0 +1,15 @@
+{
+  "name": "babylon60-ide-root",
+  "version": "0.4.0",
+  "private": true,
+  "description": "BABYLON60 IDE — Sovereign Hardened Multiplatform IDE",
+  "scripts": {
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "build:mac": "./scripts/build_multiplatform.sh mac",
+    "build:win": "./scripts/build_multiplatform.sh windows",
+    "build:android": "./scripts/build_multiplatform.sh android",
+    "build:ios": "./scripts/build_multiplatform.sh ios",
+    "build:all": "./scripts/build_multiplatform.sh all"
+  }
+}
