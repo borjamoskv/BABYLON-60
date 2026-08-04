@@ -12,7 +12,7 @@ resolver = "2"
 
 [package]
 name = "babylon60_root"
-version = "3.0.0"
+version = "4.0.0"
 edition = "2021"
 license = "LicenseRef-Sovereign-Exclusion"
 description = "Formal Infrastructure and BFT Deterministic Kernel for Verifiable Science (BABYLON-60)"
