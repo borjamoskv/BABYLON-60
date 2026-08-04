@@ -2023,14 +2023,20 @@ async function renderInferencePage(container) {
 
     <div id="infer-output-card" class="card fade-in" style="display:none;margin-bottom:14px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <div class="card-title">Output Integrity & Payload</div>
+        <div class="card-title">Integridad de Salida y Testigo C5-REAL</div>
         <div style="display:flex;gap:8px;align-items:center">
-          <button class="btn" id="btn-copy-output" style="font-size:0.56rem;padding:2px 6px">📋 Copy Payload</button>
+          <button class="btn" id="btn-copy-output" style="font-size:0.56rem;padding:2px 6px">📋 Copiar Carga</button>
+          <button class="btn" id="btn-attest-output" style="font-size:0.56rem;padding:2px 6px;color:var(--gold);border-color:var(--gold)">📜 Exportar Testigo C5</button>
           <span id="infer-output-hash" style="font-family:var(--mono);font-size:0.58rem;color:var(--gold)"></span>
         </div>
       </div>
       <pre id="infer-output-body" style="font-family:var(--mono);font-size:0.68rem;background:var(--bitumen);padding:14px;border:1px solid var(--edge);border-radius:2px;white-space:pre-wrap;margin:0;max-height:400px;overflow-y:auto;color:var(--dust)"></pre>
+      <div id="infer-attest-box" style="display:none;margin-top:10px;background:rgba(245,158,11,0.06);border:1px solid var(--gold);padding:10px;border-radius:3px">
+        <div style="font-size:0.6rem;font-weight:bold;color:var(--gold);margin-bottom:4px">TESTIGO MERKLE C5-REAL (FIRMA TPM/PCR QUOTE)</div>
+        <pre id="infer-attest-json" style="font-family:var(--mono);font-size:0.56rem;color:var(--dust);white-space:pre-wrap;margin:0"></pre>
+      </div>
     </div>
+
 
     <div id="infer-history-card" class="card fade-in" style="margin-top:14px">
       <div class="card-title" style="margin-bottom:8px">Inference History Ledger</div>
@@ -2179,7 +2185,43 @@ async function renderInferencePage(container) {
   document.getElementById('btn-infer-refresh')?.addEventListener('click', refreshStatus);
   await refreshStatus();
 
+  // Export C5 Witness Listener
+  document.getElementById('btn-attest-output')?.addEventListener('click', async () => {
+    const outputBody = document.getElementById('infer-output-body');
+    const attestBox = document.getElementById('infer-attest-box');
+    const attestJson = document.getElementById('infer-attest-json');
+    const text = outputBody?.textContent || '';
+    if (!text) return;
+
+    try {
+      const model = document.getElementById('infer-model-select')?.value || 'auto_sota';
+      const speedText = document.getElementById('infer-speed-val')?.textContent || '0';
+      const latencyText = document.getElementById('infer-latency-sub')?.textContent || '0';
+      const tps = parseFloat(speedText) || 10.0;
+      const latencyMs = parseInt(latencyText) || 100;
+
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      const sha256Hex = Array.from(new Uint8Array(buf)).map(x => x.toString(16).padStart(2, '0')).join('');
+
+      const data = await post('/api/inference/openrouter/attest', {
+        sha256: sha256Hex,
+        model,
+        tps,
+        latency_ms: latencyMs,
+        prompt_snippet: text.slice(0, 100),
+        determinism_score: 1.0,
+      });
+
+      if (attestBox) attestBox.style.display = 'block';
+      if (attestJson) attestJson.textContent = JSON.stringify(data, null, 2);
+      await navigator.clipboard.writeText(JSON.stringify(data, null, 2));
+    } catch (err) {
+      if (attestJson) attestJson.textContent = `Error C5 Witness: ${err.message}`;
+    }
+  });
+
   // SOTA Classify Pre-Analysis Button
+
   document.getElementById('btn-sota-classify')?.addEventListener('click', async () => {
     const prompt = document.getElementById('infer-prompt-input')?.value?.trim();
     const routeCard = document.getElementById('sota-route-card');

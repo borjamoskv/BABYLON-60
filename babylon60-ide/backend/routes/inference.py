@@ -88,7 +88,7 @@ def generate_local(req: InferenceRequest) -> dict[str, Any]:
         )
         with urllib.request.urlopen(req_obj, timeout=30.0) as resp:
             resp_data = json.loads(resp.read().decode("utf-8"))
-    except Exception as e:
+    except (urllib.error.URLError, urllib.error.HTTPError, OSError, TimeoutError, ValueError) as e:
         raise HTTPException(status_code=503, detail=f"Local silicon inference socket failed at {endpoint}: {str(e)}")
 
     latency_ms = int((time.perf_counter() - start_time) * 1000)
@@ -182,7 +182,7 @@ def generate_mamba(req: MambaInferenceRequest) -> dict[str, Any]:
             "provider": "NATIVE_MAMBA_SSM_LEDGER_ENGINE",
             "vocab_size": len(tokenizer.vocab),
         }
-    except Exception as e:
+    except (RuntimeError, ValueError, AttributeError, ImportError, KeyError) as e:
         raise HTTPException(status_code=500, detail=f"Native Mamba inference failed: {str(e)}")
 
 
@@ -416,7 +416,7 @@ def generate_openrouter(req: OpenRouterInferenceRequest) -> dict[str, Any]:
     except urllib.error.HTTPError as e:
         err_body = e.read().decode("utf-8") if e.fp else str(e)
         raise HTTPException(status_code=e.code, detail=f"OpenRouter API Error: {err_body}")
-    except Exception as e:
+    except (urllib.error.URLError, OSError, TimeoutError, ValueError) as e:
         raise HTTPException(status_code=503, detail=f"OpenRouter network call failed: {str(e)}")
 
     latency_ms = int((time.perf_counter() - start_time) * 1000)
@@ -483,16 +483,8 @@ def attest_inference(req: AttestRequest) -> dict[str, Any]:
 
 @openrouter_router.get("/status")
 def status_openrouter(api_key: str | None = None) -> dict[str, Any]:
-
-
-
-
-
-
-
-@openrouter_router.get("/status")
-def status_openrouter(api_key: str | None = None) -> dict[str, Any]:
     """Check OpenRouter status and verify API key presence."""
+
     import os
 
     key = api_key or os.environ.get("OPENROUTER_API_KEY")
@@ -612,33 +604,93 @@ def stream_openrouter(req: OpenRouterInferenceRequest):
         "X-Title": "BABYLON-60 IDE",
     }
 
-    def sse_generator():
-        try:
-            req_obj = urllib.request.Request(
-                endpoint,
-                data=json.dumps(payload).encode("utf-8"),
-                headers=headers,
-                method="POST",
-            )
-            with urllib.request.urlopen(req_obj, timeout=60.0) as resp:
-                for line in resp:
-                    decoded = line.decode("utf-8").strip()
-                    if decoded.startswith("data: "):
-                        raw_data = decoded[6:]
-                        if raw_data == "[DONE]":
-                            yield f"data: {json.dumps({'done': True, 'model': selected_model})}\n\n"
-                            break
-                        try:
-                            chunk_json = json.loads(raw_data)
-                            delta = chunk_json["choices"][0]["delta"].get("content", "")
-                            if delta:
-                                yield f"data: {json.dumps({'token': delta, 'model': selected_model})}\n\n"
-                        except (json.JSONDecodeError, KeyError, IndexError):
-                            continue
-        except Exception as err:
-            yield f"data: {json.dumps({'error': str(err)})}\n\n"
+def _parse_sse_token(raw_data: str, selected_model: str) -> tuple[str | None, bool]:
+    """Parse raw SSE payload string into JSON event. Returns (sse_string, is_done)."""
+    if raw_data == "[DONE]":
+        return f"data: {json.dumps({'done': True, 'model': selected_model})}\n\n", True
+    try:
+        chunk_json = json.loads(raw_data)
+        delta = chunk_json["choices"][0]["delta"].get("content", "")
+        if delta:
+            return f"data: {json.dumps({'token': delta, 'model': selected_model})}\n\n", False
+    except (json.JSONDecodeError, KeyError, IndexError):
+        pass
+    return None, False
 
-    return StreamingResponse(sse_generator(), media_type="text/event-stream")
+
+def _process_sse_line(line: bytes, selected_model: str) -> tuple[str | None, bool]:
+    decoded = line.decode("utf-8").strip()
+    if not decoded.startswith("data: "):
+        return None, False
+    return _parse_sse_token(decoded[6:], selected_model)
+
+
+def _make_sse_generator(endpoint: str, payload: dict[str, Any], headers: dict[str, str], selected_model: str):
+    """Generator function yielding SSE events with max nesting depth <= 3."""
+    req_obj = urllib.request.Request(
+        endpoint,
+        data=json.dumps(payload).encode("utf-8"),
+        headers=headers,
+        method="POST",
+    )
+    try:
+        resp = urllib.request.urlopen(req_obj, timeout=60.0)
+    except (urllib.error.URLError, urllib.error.HTTPError, OSError, TimeoutError, ValueError) as err:
+        yield f"data: {json.dumps({'error': str(err)})}\n\n"
+        return
+
+    with resp:
+        for line in resp:
+            sse_str, is_done = _process_sse_line(line, selected_model)
+            if sse_str:
+                yield sse_str
+            if is_done:
+                break
+
+
+@openrouter_router.post("/stream")
+def stream_openrouter(req: OpenRouterInferenceRequest):
+    """Stream native inference tokens from OpenRouter via Server-Sent Events (SSE)."""
+    import os
+
+    api_key = req.api_key or os.environ.get("OPENROUTER_API_KEY")
+    if not api_key:
+        raise HTTPException(
+            status_code=401,
+            detail="OpenRouter API Key missing. Please provide key in request or set OPENROUTER_API_KEY environment variable.",
+        )
+
+    selected_model = req.model
+    if req.model.lower() in ("auto_sota", "auto", "sota"):
+        route_analysis = classify_prompt_and_select_sota_model(req.prompt)
+        selected_model = route_analysis.target_model
+
+    endpoint = "https://openrouter.ai/api/v1/chat/completions"
+    payload = {
+        "model": selected_model,
+        "messages": [
+            {
+                "role": "system",
+                "content": "Eres MOSKV-1 APEX operando sobre el socket nativo en la nube de OpenRouter. Proporciona respuestas técnicas de alta densidad, rigurosas y deterministas en español por defecto.",
+            },
+            {"role": "user", "content": req.prompt},
+        ],
+        "temperature": req.temperature,
+        "max_tokens": req.max_tokens,
+        "stream": True,
+    }
+
+    headers = {
+        "Authorization": f"Bearer {api_key.strip()}",
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://babylon60.dev",
+        "X-Title": "BABYLON-60 IDE",
+    }
+
+    return StreamingResponse(
+        _make_sse_generator(endpoint, payload, headers, selected_model),
+        media_type="text/event-stream",
+    )
 
 
 

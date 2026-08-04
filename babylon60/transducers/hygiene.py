@@ -24,10 +24,10 @@ OPTIMIZER_SCRIPT = "scripts/exergy_optimizer_agent.py"
 
 
 def _run_agent() -> float:
-    """Execute the optimizer and parse its output."""
+    repo_root = Path(__file__).resolve().parents[2]
     proc = subprocess.run(
         [sys.executable, OPTIMIZER_SCRIPT],
-        cwd="/Users/borjafernandezangulo/30_BABYLON-60",
+        cwd=repo_root,
         capture_output=True,
         text=True,
         check=False,

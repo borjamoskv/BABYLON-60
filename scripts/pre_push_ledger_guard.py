@@ -14,7 +14,7 @@ Verifies Causal-Determinist invariants before git push:
 import sys
 import subprocess
 from pathlib import Path
-from babylon60.utils.hygiene import run_exergy_optimizer
+from babylon60.transducers.hygiene import run_exergy_optimizer
 
 REPO_ROOT = Path(__file__).parents[1]
 

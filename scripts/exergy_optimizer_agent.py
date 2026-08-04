@@ -338,7 +338,7 @@ def main() -> None:
     prov_payload = f"{timestamp}:{commit_hash}:{verdict.score.value}".encode("utf-8")
     digest = hashlib.sha3_256(prov_payload).digest()
 
-    from babylon60.utils.base60 import bytes_to_base60
+    from babylon60.primitives.base60 import bytes_to_base60
 
     prov_hash = bytes_to_base60(digest)
 

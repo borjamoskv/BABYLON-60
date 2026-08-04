@@ -16,6 +16,8 @@ import sys
 def main():
     root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     agents_file = os.path.join(root_dir, ".agents", "AGENTS.md")
+    if not os.path.exists(agents_file):
+        agents_file = os.path.join(root_dir, "AGENTS.md")
     test_file = os.path.join(root_dir, "tests", "test_c5_invariants.py")
 
     if not os.path.exists(agents_file):

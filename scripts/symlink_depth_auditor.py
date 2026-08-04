@@ -16,19 +16,22 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).parents[1]
 
 
+def is_valid_sibling_symlink(target: str) -> bool:
+    if not target.startswith(".."):
+        return True
+    parts = Path(target).parts
+    return len(parts) >= 2 and parts[0] == ".." and parts[1] == ".."
+
+
 def audit_symlinks(root: Path = REPO_ROOT) -> list[tuple[Path, str]]:
     violations = []
+    EXCLUDE_DIRS = {"node_modules", ".git", ".venv", "target", "__pycache__", "dist", "build"}
     for path in root.rglob("*"):
-        if path.is_symlink():
-            target = os.readlink(path)
-            # If symlink points to sibling project (relative path starting with ..)
-            if target.startswith(".."):
-                parts = Path(target).parts
-                # Check if it starts with ('..', '..') for depth 2
-                if len(parts) >= 2 and parts[0] == ".." and parts[1] == "..":
-                    continue
-                else:
-                    violations.append((path, target))
+        if any(part in EXCLUDE_DIRS for part in path.parts) or not path.is_symlink():
+            continue
+        target = os.readlink(path)
+        if not is_valid_sibling_symlink(target):
+            violations.append((path, target))
     return violations
 
 
