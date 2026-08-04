@@ -279,11 +279,6 @@ DEFAULT_OPENROUTER_MODELS = [
     "qwen/qwen-2.5-coder-32b-instruct",
 ]
 
-    "meta-llama/llama-3.3-70b-instruct",
-    "openai/gpt-4o-mini",
-    "mistralai/mistral-large-2411",
-    "qwen/qwen-2.5-coder-32b-instruct",
-]
 
 
 
