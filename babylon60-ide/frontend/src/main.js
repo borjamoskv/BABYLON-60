@@ -1979,12 +1979,12 @@ async function renderInferencePage(container) {
         </div>
       </div>
 
-      <div id="openrouter-key-section" style="margin-bottom:12px">
-        <label style="font-size:0.58rem;color:var(--dust-dim);display:block;margin-bottom:4px">OpenRouter API Key</label>
-        <div style="display:flex;gap:8px">
-          <input class="input" type="password" id="openrouter-key-input" placeholder="sk-or-v1-..." value="${escapeHtml(savedOpenRouterKey)}" style="flex:1;font-family:var(--mono)">
-          <button class="btn" id="btn-save-openrouter-key" style="font-size:0.62rem">💾 Save Key</button>
-        </div>
+      <div style="margin-bottom:8px;display:flex;align-items:center;gap:8px">
+        <span style="font-size:0.58rem;color:var(--dust-dim)">Quick SOTA Presets:</span>
+        <button class="btn" id="preset-code" style="font-size:0.56rem;padding:2px 6px">⚙️ Rust AST</button>
+        <button class="btn" id="preset-math" style="font-size:0.56rem;padding:2px 6px">📐 Proof / Math</button>
+        <button class="btn" id="preset-fast" style="font-size:0.56rem;padding:2px 6px">⚡ Fast Summary</button>
+        <button class="btn" id="preset-legal" style="font-size:0.56rem;padding:2px 6px">⚖️ LegalTech Audit</button>
       </div>
 
       <div class="code-editor" style="margin-bottom:12px">
@@ -2013,10 +2013,21 @@ async function renderInferencePage(container) {
     <div id="infer-output-card" class="card fade-in" style="display:none;margin-bottom:14px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
         <div class="card-title">Output Integrity & Payload</div>
-        <span id="infer-output-hash" style="font-family:var(--mono);font-size:0.58rem;color:var(--gold)"></span>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="btn" id="btn-copy-output" style="font-size:0.56rem;padding:2px 6px">📋 Copy Payload</button>
+          <span id="infer-output-hash" style="font-family:var(--mono);font-size:0.58rem;color:var(--gold)"></span>
+        </div>
       </div>
       <pre id="infer-output-body" style="font-family:var(--mono);font-size:0.68rem;background:var(--bitumen);padding:14px;border:1px solid var(--edge);border-radius:2px;white-space:pre-wrap;margin:0;max-height:400px;overflow-y:auto;color:var(--dust)"></pre>
     </div>
+
+    <div id="infer-history-card" class="card fade-in" style="margin-top:14px">
+      <div class="card-title" style="margin-bottom:8px">Inference History Ledger</div>
+      <div id="infer-history-list" style="display:flex;flex-direction:column;gap:6px;max-height:200px;overflow-y:auto">
+        <div style="font-size:0.6rem;color:var(--dust-ghost)">No recent generations logged in session.</div>
+      </div>
+    </div>
+
 
 
     <div id="mamba-trace-card" class="card fade-in" style="display:none">
@@ -2024,6 +2035,34 @@ async function renderInferencePage(container) {
       <div id="mamba-trace-body"></div>
     </div>
   `;
+
+  // Bind Presets
+  const promptInput = document.getElementById('infer-prompt-input');
+  document.getElementById('preset-code')?.addEventListener('click', () => {
+    if (promptInput) promptInput.value = 'pub fn verify_bft_merkle_root(root: [u8; 32], leaf: [u8; 32], proof: &[[u8; 32]]) -> bool';
+  });
+  document.getElementById('preset-math')?.addEventListener('click', () => {
+    if (promptInput) promptInput.value = 'Demuestra la invariante del Manto de Markov biológico y la coálgebra terminal para la Eigenform.';
+  });
+  document.getElementById('preset-fast')?.addEventListener('click', () => {
+    if (promptInput) promptInput.value = 'Hola, resume la arquitectura de BABYLON-60 en 2 frases concisas.';
+  });
+  document.getElementById('preset-legal')?.addEventListener('click', () => {
+    if (promptInput) promptInput.value = 'Audita este contrato inteligente bajo el marco C5-REAL para detectar anergía y riesgos causales.';
+  });
+
+  // Copy Payload
+  document.getElementById('btn-copy-output')?.addEventListener('click', () => {
+    const text = document.getElementById('infer-output-body')?.textContent || '';
+    if (text) {
+      navigator.clipboard.writeText(text);
+      const btn = document.getElementById('btn-copy-output');
+      if (btn) {
+        btn.textContent = '✔ Copied!';
+        setTimeout(() => { btn.textContent = '📋 Copy Payload'; }, 2000);
+      }
+    }
+  });
 
   // Bind key save
   document.getElementById('btn-save-openrouter-key')?.addEventListener('click', () => {
@@ -2035,6 +2074,7 @@ async function renderInferencePage(container) {
       statusVal.className = val ? 'stat-value verify' : 'stat-value break';
     }
   });
+
 
   // Handle provider UI switches
   const providerSelect = document.getElementById('infer-provider-select');
