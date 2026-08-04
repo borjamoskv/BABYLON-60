@@ -35,12 +35,11 @@ def validate_ast_sandbox(source_code: str) -> bool:
                 raise SecurityError(f"Llamada a funcion de introspeccion prohibida: {node.id}")
             
             # 3. RULE_AST_REFLECT_01: Block string literals containing dunders or reflection func names
-            if isinstance(node, ast.Constant):
-                if isinstance(node.value, str):
-                    if node.value.startswith("__") and node.value.endswith("__"):
-                        raise SecurityError(f"Constante literal con patron dunder prohibida: {node.value}")
-                    if node.value in reflection_funcs:
-                        raise SecurityError(f"Constante literal con nombre de introspeccion prohibida: {node.value}")
+            if isinstance(node, ast.Constant) and isinstance(node.value, str):
+                if node.value.startswith("__") and node.value.endswith("__"):
+                    raise SecurityError(f"Constante literal con patron dunder prohibida: {node.value}")
+                if node.value in reflection_funcs:
+                    raise SecurityError(f"Constante literal con nombre de introspeccion prohibida: {node.value}")
                         
             # 4. Block f-strings containing dunders or reflections (Constant parts)
             # F-strings evaluate to ast.JoinedStr with ast.Constant parts and ast.FormattedValue parts

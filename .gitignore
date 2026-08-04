@@ -1,7 +1,7 @@
 # Build Targets & Binaries
 /target
 b60_kernel
-babylon60
+*.egg-info/
 
 # B60 Programs: track canonical, ignore generated
 fuzz_test_*.b60

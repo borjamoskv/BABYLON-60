@@ -1,5 +1,5 @@
 import pytest
-from cortex_chaos_monad import validate_ast_sandbox, run_chaos_monad, SecurityError
+from babylon60.cortex_chaos_monad import validate_ast_sandbox, run_chaos_monad, SecurityError
 
 
 class TestASTSandboxEvasion:

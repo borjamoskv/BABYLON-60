@@ -1,6 +1,0 @@
-[console_scripts]
-apex = apex_trials.cli:main
-cortex-attest = babylon60.cli.llm_attest:main
-cortex-bridge = babylon60.cli.bridge:main
-cortex-char-attest = babylon60.cli.attest_character_count:main
-cortex-onco = babylon60.cli.onco_transducer:main

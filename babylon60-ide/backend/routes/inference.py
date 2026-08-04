@@ -151,7 +151,7 @@ def generate_mamba(req: MambaInferenceRequest) -> dict[str, Any]:
             sys.path.insert(0, parent_dir)
 
         from core_graph_ledger import GraphLedger
-        from cortex_bpe_tokenizer import BPETokenizer
+        from babylon60.cortex_bpe_tokenizer import BPETokenizer
         from cortex_mamba_network import MambaNetwork
         from net_mamba_ledger_engine import MambaLedgerEngine
 
