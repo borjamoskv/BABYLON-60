@@ -210,3 +210,113 @@ pub fn check_local_status() -> Result<Value, String> {
         "models": []
     }))
 }
+
+/// Synchronous native OpenRouter cloud inference via curl.
+pub fn run_openrouter_inference(
+    prompt: &str,
+    model: Option<String>,
+    api_key: Option<String>,
+    temperature: Option<f32>,
+) -> Result<InferenceResult, String> {
+    let key = api_key
+        .or_else(|| std::env::var("OPENROUTER_API_KEY").ok())
+        .ok_or_else(|| "OpenRouter API Key is missing. Set OPENROUTER_API_KEY env or provide key.".to_string())?;
+
+    let model_id = model.unwrap_or_else(|| "anthropic/claude-3.5-sonnet".to_string());
+    let temp = temperature.unwrap_or(0.2);
+
+    let payload = json!({
+        "model": model_id,
+        "messages": [
+            {
+                "role": "system",
+                "content": "You are MOSKV-1 APEX operating over OpenRouter native cloud socket. Provide high-density, rigorous technical outputs."
+            },
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        "temperature": temp,
+        "max_tokens": 1024
+    });
+
+    let auth_header = format!("Authorization: Bearer {}", key.trim());
+    let start_time = Instant::now();
+
+    let client = std::process::Command::new("curl")
+        .arg("-s")
+        .arg("-X")
+        .arg("POST")
+        .arg("https://openrouter.ai/api/v1/chat/completions")
+        .arg("-H")
+        .arg("Content-Type: application/json")
+        .arg("-H")
+        .arg(&auth_header)
+        .arg("-H")
+        .arg("HTTP-Referer: https://babylon60.dev")
+        .arg("-H")
+        .arg("X-Title: BABYLON-60 IDE")
+        .arg("-d")
+        .arg(payload.to_string())
+        .output()
+        .map_err(|e| format!("Failed to dispatch curl request to OpenRouter: {}", e))?;
+
+    if !client.status.success() {
+        let err_msg = String::from_utf8_lossy(&client.stderr);
+        return Err(format!("OpenRouter request failed: {}", err_msg));
+    }
+
+    let raw_resp = String::from_utf8_lossy(&client.stdout);
+    let json_resp: Value = serde_json::from_str(&raw_resp).map_err(|e| {
+        format!("Failed to parse JSON response from OpenRouter: {} | Raw: {}", e, raw_resp.chars().take(200).collect::<String>())
+    })?;
+
+    if let Some(err) = json_resp.get("error") {
+        return Err(format!("OpenRouter API error: {}", err));
+    }
+
+    let text = json_resp["choices"][0]["message"]["content"]
+        .as_str()
+        .unwrap_or("")
+        .to_string();
+
+    let latency_ms = start_time.elapsed().as_millis();
+    let token_count = text.split_whitespace().count().max(1) as f64 * 1.33;
+    let tps = if latency_ms > 0 {
+        token_count / (latency_ms as f64 / 1000.0)
+    } else {
+        0.0
+    };
+
+    let sha256 = compute_hash(&text);
+
+    Ok(InferenceResult {
+        text,
+        model: model_id,
+        tps,
+        latency_ms,
+        sha256,
+        provider: "OPENROUTER_NATIVE_RUST".to_string(),
+    })
+}
+
+pub fn check_openrouter_status(api_key: Option<String>) -> Result<Value, String> {
+    let key = api_key.or_else(|| std::env::var("OPENROUTER_API_KEY").ok());
+    if key.is_none() {
+        return Ok(json!({
+            "status": "KEY_REQUIRED",
+            "provider": "OpenRouter Native Cloud",
+            "endpoint": "https://openrouter.ai/api/v1",
+            "models": ["auto_sota", "anthropic/claude-3.5-sonnet", "deepseek/deepseek-r1", "google/gemini-2.5-flash", "meta-llama/llama-3.3-70b-instruct"]
+        }));
+    }
+
+    Ok(json!({
+        "status": "ONLINE",
+        "provider": "OpenRouter Native Cloud",
+        "endpoint": "https://openrouter.ai/api/v1",
+        "models": ["auto_sota", "anthropic/claude-3.5-sonnet", "deepseek/deepseek-r1", "google/gemini-2.5-flash", "meta-llama/llama-3.3-70b-instruct"]
+    }))
+}
+

@@ -14,7 +14,7 @@ use serde_json::Value;
 use ledger::{CortexLedger, CortexEvent};
 use kernel::{VectorEntry, DispatchResult};
 use lexicon::{Domain, Primitive, Modifier};
-use inference::{InferenceResult, run_local_inference, check_local_status};
+use inference::{InferenceResult, run_local_inference, check_local_status, run_openrouter_inference, check_openrouter_status};
 use iceoryx2::prelude::*;
 use iceoryx2::service::zero_copy::Service;
 use iceoryx2::service::Service as ServiceTrait;
@@ -73,13 +73,19 @@ fn local_infer_sync(prompt: String, model: Option<String>, base_url: Option<Stri
 }
 
 #[tauri::command]
-fn get_local_inference_status() -> Result<Value, String> {
-    check_local_status()
+fn openrouter_infer_sync(prompt: String, model: Option<String>, api_key: Option<String>, temperature: Option<f32>) -> Result<InferenceResult, String> {
+    run_openrouter_inference(&prompt, model, api_key, temperature)
+}
+
+#[tauri::command]
+fn get_openrouter_inference_status(api_key: Option<String>) -> Result<Value, String> {
+    check_openrouter_status(api_key)
 }
 
 // ═══════════════════════════════════════════════════════
 //  KINETIC BIND RAW — Ontology IPC Bridge
 // ═══════════════════════════════════════════════════════
+
 
 #[tauri::command]
 fn list_ontology_vectors() -> Vec<VectorEntry> {
@@ -122,7 +128,10 @@ pub fn run() {
             append_ledger_event,
             local_infer_sync,
             get_local_inference_status,
+            openrouter_infer_sync,
+            get_openrouter_inference_status,
             list_ontology_vectors,
+
             dispatch_vector,
             kernel::dispatch,
             kernel::list_vectors,
