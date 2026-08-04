@@ -1,5 +1,7 @@
 # BABYLON-60 v4.0 (Sovereign Hardened)
 
+[🌐 Read in English](README.md)
+
 **Infraestructura de Capa 0 para Agentes de IA Verificables & Cumplimiento Regulatorio del EU AI Act**
 
 [![Version](https://img.shields.io/badge/Version-4.0.0--Sovereign--Hardened-black?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)

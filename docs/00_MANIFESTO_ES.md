@@ -1,5 +1,7 @@
 # 📜 MANIFIESTO FUNDACIONAL: BABYLON-60
 
+[🌐 Read in English](00_MANIFESTO.md)
+
 **Versión:** 4.0 Sovereign Hardened | **Autor:** Borja Moskv  
 *"El Substrato de Ejecución Verificable para la Era de la Agencia Autónoma"*
 

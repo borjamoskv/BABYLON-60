@@ -46,7 +46,7 @@ BABYLON-60 is engineered to be the invisible yet indispensable infrastructure of
 - **Phase 2:** Global expansion and standardization of the *Causal Mesh Attestation* protocol.
 - **Phase 3:** Native integration of BABYLON-60 as the undisputed "Layer 0" infrastructure for global agentic swarm deployments.
 
---ter-
+---
 
 ### V. THE ENGINEER'S OATH
 

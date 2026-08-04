@@ -19,7 +19,7 @@ Esta iteración transforma las vulnerabilidades detectadas en características d
     *   El agente se "congela" (Zombie State), pero el historial se vuelve **WORM (Write Once, Read Many)**.
     *   **Valor de Monetización:** Ahora puedes vender el "Modo Caja Negra" a aerolíneas y hospitales. El sistema garantiza que, incluso si el agente "enloquece", la evidencia forense es intocable.
 
-### B. De "Causal Mesh Attestation" a "Causal Mesh Attestation"
+### B. De "BFT Local" a "Causal Mesh Attestation"
 *   **El Problema (v3.0):** Decir "BFT" en un sistema local-first era técnicamente inexacto.
 *   **La Solución (v4.0):** Se renombra la arquitectura a **Causal Mesh Attestation (CMA)**.
     *   El ledger local sigue siendo un *Merkle-Causal Chain*.
