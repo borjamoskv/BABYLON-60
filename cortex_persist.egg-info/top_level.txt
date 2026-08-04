@@ -1,3 +1,2 @@
-apex_trials
 babylon60
 babylon60-ide

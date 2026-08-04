@@ -2,7 +2,10 @@
 /target
 b60_kernel
 babylon60
-*.b60
+
+# B60 Programs: track canonical, ignore generated
+fuzz_test_*.b60
+test_*.b60
 
 # Environment & Secrets (Crucial Security Invariant)
 .env
@@ -30,12 +33,10 @@ web/.wrangler/
 
 # Temporary Artifacts & System Files
 proof_artifact.json
-fuzz_test_*.b60
-test_*.b60
 .DS_Store
 *.log
 
-# Entropy Purge — Prevent Re-Tracking (2026-07-29)
+# Entropy Purge — Prevent Re-Tracking
 .tmp_yt/
 yt-dlp
 *.db
@@ -44,10 +45,6 @@ yt-dlp
 *.sqlite
 *.cortex_thermal_lock
 
-# Databases
-*.db
-*.db-wal
-*.db-shm
-
 # Added by Antigravity C5-REAL Audit
 .vercel
+

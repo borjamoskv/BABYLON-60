@@ -63,11 +63,14 @@ Si una corrutina detecta $|\nabla u| \to \infty$ (Finite-Time Blowup), emite un 
 - **Trazas F60:** Evaluación exacta de energía y vorticidad cinética en cada epoch.
 - **Hash de Causalidad:** SHA-256 del árbol de dependencias (`AWAIT` operations) que condujo a ese estado.
 
-### 5.2. Criterio de Falsación (Falsation Criteria)
-Un run o snapshot es **descartado automáticamente** y denegado para Lean 4 si ocurre alguno de los siguientes fallos:
+### 5.2. Criterio de Falsación y Congelación Forense WORM (Quarantine Policy)
+Un run o snapshot es **interceptado y congelado inmediatamente bajo política WORM (Write Once Read Many)** si ocurre alguno de los siguientes fallos:
 - **Inestabilidad Numérica:** Si un `F60` satura su `Base60_Scale` obligando a truncación (La aritmética ha dejado de ser exacta).
 - **Pérdida de Causalidad:** Un evento `EXECUTE` se procesó fuera de orden temporal respecto a sus dependencias `AWAIT`.
-- **Inconsistencia de Replay:** Re-ejecutar el mismo seed desde `DUB` genera un Hash de Causalidad divergente. 
+- **Inconsistencia de Replay:** Re-ejecutar el mismo seed desde `DUB` genera un Hash de Causalidad divergente.
+
+> [!IMPORTANT]
+> **Forensic Integrity Guarantee:** Bajo la arquitectura v3.0.0, un `CRITICAL HALT` **NUNCA destruye ni purga el log de auditoría**. El estado execution DAG queda sellado criptográficamente en `artifact_bundle_v3/quarantine/` bajo hash WORM inmutable, preservando la cadena de custodia completa para análisis forense e inspección por auditores externos.
 
 ### 5.3. Proof Handoff (Asimilación Formal)
 El log determinista resultante se traduce a sintaxis verificable para inyección en el Theorem Prover:
@@ -153,3 +156,35 @@ The Proof IR contains exclusively:
 - `Lemma`: Auto-generated proof requirements for the backend.
 - `Obligation`: Tasks delegated to the external prover.
 - `Witness`: Evidence of singularity or state collapse.
+
+## 17. Merkle-Causal Ledger & Multi-Node BFT Topology
+
+### 17.1 Local-First Execution: Merkle-Causal DAG
+In single-node / local-first mode, BABYLON-60 operates as a **Merkle-Causal Local DAG Ledger**. Each execution event is anchored to its parent events via cryptographic hashes (SHA-256), establishing a tamper-evident, append-only log with deterministic replay guarantees (`replay_hash`).
+
+### 17.2 Distributed Extension: P2P Mesh BFT Consensus ($3f+1$)
+When deployed across multi-node enterprise environments (e.g., distributed agent fleets), BABYLON-60 activates its **P2P Mesh Consensus Layer**. In this mode:
+- Local Merkle DAG states are broadcasted to validator nodes.
+- A Byzantine Fault Tolerant (BFT) consensus protocol validates state transitions across $3f+1$ nodes.
+- Quorum certificates are appended to the `artifact_bundle_v3/` manifest for cross-organizational auditability.
+
+## 18. F60 Scope & Hardware Boundary
+
+### 18.1 Dedicated Substrate
+`F60` (Base60 Rational Arithmetic) is used **EXCLUSIVELY for the Scheduler, Temporal Control Flow, Register Allocations, and Ledger Metadata**. 
+
+### 18.2 Zero-Overhead GPU Tensor Boundary
+Neural network inference tensors (embeddings, weights, activations) operate natively in standard GPU silicon hardware format (`bf16`, `fp8`, `f32`) within external model engines (e.g., Ollama, MLX, PyTorch). BABYLON-60 does not perform Base60 conversions on GPU tensor buffers, guaranteeing zero latency overhead during neural network forward passes while enforcing sexagesimal exactness on the agent's causal control graph.
+
+## 19. Oracle Attestation & Hardware Security Anchoring (TEE / TPM 2.0)
+
+### 19.1 Solving the Oracle Gap
+Lean 4 formally verifies the internal causal consistency of the scheduler and ledger DAG. To bridge the "Oracle Gap" (ensuring external LLM outputs or API responses were not spoofed prior to ledger entry), BABYLON-60 incorporates an **Oracle Attestation Layer**:
+- External payload inputs must be accompanied by cryptographic signatures from authenticated data providers or trusted enclaves.
+- Lean 4 verifies the signature chain as an explicit proof obligation (`Lemma ExternalAttestationValid`).
+
+### 19.2 TPM 2.0 / TEE Hardware Seals (EU AI Act Compliance)
+To satisfy the legal non-repudiation requirements of Article 12 of the EU AI Act:
+- The global execution hash (`graph_hash`) is anchored directly to a local **Trusted Platform Module (TPM 2.0)** or **Trusted Execution Environment (Intel SGX / AMD SEV / AWS Nitro Enclave)**.
+- Local system administrators are cryptographically incapable of modifying recorded execution logs without invalidating the hardware-signed PCR (Platform Configuration Register) quotes.
+

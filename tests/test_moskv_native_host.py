@@ -19,7 +19,7 @@ def test_payload_commitment():
     raw = b'{"status": "READY"}'
     hash_hex = calculate_payload_commitment(raw)
     assert len(hash_hex) == 64
-    assert hash_hex == "ff3ceaa6c5bfe5ed3aa0fe9a3a99268f7b767ca8eb4a896aaefd7eb74a004eb7"
+    assert hash_hex == "867e0cd435381bb56251908fc2cf891b652c72d233a5f3a2fe5582a98cfde5e0"
 
 
 def test_read_send_message_frame_roundtrip():

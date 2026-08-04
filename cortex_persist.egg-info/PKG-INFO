@@ -56,65 +56,206 @@ Requires-Dist: scikit-learn>=1.3; extra == "apex"
 Requires-Dist: scipy>=1.11; extra == "apex"
 Dynamic: license-file
 
-# BABYLON-60: Causal Proof Harness & Temporal DSL
+# BABYLON-60
 
-![Status](https://img.shields.io/badge/Status-C5--REAL_Dormant-blue)
-![Architecture](https://img.shields.io/badge/Architecture-Causal_Scheduler-black)
-![Domain](https://img.shields.io/badge/Domain-Navier--Stokes_Proof_Harness-red)
+**Infraestructura de Capa 0 para Agentes de IA Verificables**
 
-**BABYLON-60** no es un lenguaje esotérico ni una herramienta de cálculo de propósito general. Es un **Andamio de Experimentación Formal (Proof Harness)** diseñado específicamente para aislar singularidades matemáticas (Finite-Time Blowups) en dinámica de fluidos, eliminando la entropía de implementación de la arquitectura de Von Neumann.
+![Version](https://img.shields.io/badge/Version-3.0.0-black?style=flat-square)
+![Architecture](https://img.shields.io/badge/Architecture-Causal--Determinist-red?style=flat-square)
+![Governance](https://img.shields.io/badge/Governance-C5--REAL-blue?style=flat-square)
+![License](https://img.shields.io/badge/License-Sovereign_Exclusion-orange?style=flat-square)
+![Lean](https://img.shields.io/badge/Formal_Verification-Lean_4-green?style=flat-square)
 
----
-
-## 1. Límite Epistemológico (The No-Proof Clause)
-
-> **BABYLON-60 no resuelve teoremas del milenio por sí solo.** 
-> Su única función es orquestar la discretización espacial y temporal, capturar un estado asintótico exacto y exportar un *Proof-Ready Log* determinista. La demostración matemática de la existencia y suavidad (o la ruptura) de las ecuaciones recae exclusivamente en la asimilación del log exportado por parte de un asistente de pruebas formal (Lean 4 / Coq).
+> *La mayoría de los sistemas de IA pueden generar texto. Pocos pueden justificar su historial.*
 
 ---
 
-## 2. Arquitectura del Motor
+## El Problema
 
-El motor está construido sobre cuatro pilares termodinámicos:
+La industria de la IA en 2026 enfrenta tres cuellos de botella estructurales que las APIs comerciales y las Bases de Datos Vectoriales no resuelven:
 
-### A. Dominio Temporal y Fracciones Exactas (`F60`)
-Para evitar la deriva de coma flotante (`f64`) que enmascara o genera falsas singularidades en mallas 3D, BABYLON-60 opera con un tipo racional puro `F60` (Tupla: `Numerator`, `Base60_Scale`). Las magnitudes de tiempo están fuertemente tipadas (`UNIT.TICK`, `UNIT.HOUR`), permitiendo un *Constant Folding* sexagesimal estricto durante la fase de compilación (SSA).
+| Problema | Descripción | Consecuencia |
+| :--- | :--- | :--- |
+| **Context Rot** | Degradación silenciosa del contexto a largo plazo | Alucinaciones recurrentes e irrecuperables |
+| **Bucles de Limerencia** | Agentes atrapados en ciclos infinitos de "pensamiento" | Consumo de exergía computacional sin trabajo útil |
+| **Opacidad de Custodia** | Imposibilidad de auditar *por qué* un agente decidió algo | Inaceptable en medicina, finanzas o ingeniería crítica |
 
-### B. Corrutinas Asíncronas y Ledger Causal
-La malla computacional no se ejecuta linealmente. Cada celda de fluido o subtarea es una corrutina aislada iniciada vía `FORK`. 
-La comunicación entre celdas se delega al **Event Ledger** de CORTEX. Un hilo se suspende completamente (`AWAIT`) hasta que el evento requerido (ej. cálculo de tensores vecinos) es validado topológicamente en el Ledger.
+### Por qué las Bases de Datos Vectoriales no son la solución
 
-### C. Motor de Auto-Falsación
-El sistema está diseñado para autodestruirse si la realidad numérica se contamina. Si el `Base60_Scale` se satura forzando un truncamiento matemático, o si se detecta una inversión causal en el Ledger (Data Race), el proceso emite un `CRITICAL HALT` y purga el log, evitando la emisión de evidencia espuria.
-
-### D. Export Artifact Schema (La Cadena de Custodia)
-Si se aísla un candidato a singularidad ($|\nabla u| \to \infty$), el motor consolida un paquete inmutable regido por el [`export_schema.json`](./export_schema.json). Este artefacto contiene hashes de integridad, logs de deltas F60 y un `theorem_prover_payload` auto-generado que traduce la transición de estados en Lemmas estáticos listos para validación externa.
+**La similitud no es linaje.** Un vector puede encontrar texto parecido, pero no puede probar *cuándo* se guardó, *cómo* se derivó, ni garantizar que el historial no haya sido alterado. Sin linaje causal verificable, los agentes sufren de *entropía generativa*: se desvían (*drift*) y dejan rastros de auditoría inútiles.
 
 ---
 
-## 3. Conjunto de Instrucciones (v2.5)
+## La Solución: Substrato C5-REAL
+
+BABYLON-60 no es un wrapper de APIs ni un chatbot. Es una **capa de memoria, verificación y ejecución "local-first" (soberana)** que impone restricciones termodinámicas y criptográficas sobre el razonamiento de los agentes.
+
+| Pilar | Mecanismo | Resultado |
+| :--- | :--- | :--- |
+| **Matriz de Enrutamiento Termodinámico** | Restricciones de Exergía aplicadas al AST | Erradica el Context Rot y los bucles de limerencia |
+| **Ledger Criptográfico BFT** | Registro *tamper-evident* de cada transición de estado | Memoria persistente, auditable e inmutable |
+| **Invariantes Deterministas** | Contratos que alinean la inferencia latente con ejecución causal | Elimina alucinaciones en caminos críticos |
+| **Verificación Formal (Lean 4)** | Teoremas de causalidad y consenso BFT | Pruebas matemáticas de corrección, no promesas |
+| **Motor de Auto-Falsación** | `CRITICAL HALT` + purga ante inversiones causales o saturación | Prefiere autodestruirse a emitir evidencia espuria |
+
+---
+
+## Fosos Tecnológicos
+
+### Aritmética Sexagesimal Exacta (`F60`)
+
+En coma flotante (`f64`), `1/3` de hora es `0.33333...` — acumula *drift* catastrófico en scheduling de agentes. En `F60`, es exactamente `0;20` (20 minutos), sin pérdida de precisión iterativa.
+
+```
+F60 = { Numerator: u64, Base60_Scale: u8 }
+```
+
+Las magnitudes de tiempo están fuertemente tipadas (`UNIT.TICK`, `UNIT.SECOND`, `UNIT.HOUR`), permitiendo *Constant Folding* sexagesimal estricto durante compilación (SSA).
+
+### El "Interruptor de Hombre Muerto"
+
+Las IA actuales, cuando fallan, alucinan silenciosamente. BABYLON-60 prefiere **detenerse y autodestruirse** antes que emitir evidencia espuria. Si el `Base60_Scale` se satura o se detecta un Data Race en el Ledger, el motor emite `CRITICAL HALT` y purga el log completo.
+
+### Verificación Formal con Lean 4
+
+No son tests unitarios. Son **teoremas matemáticos** que prueban la causalidad y el consenso BFT del sistema, permitiendo a los CISOs y auditores de cumplimiento certificar que el agente es matemáticamente incapaz de violar invariantes de seguridad.
+
+### Licencia de Exclusión Soberana (Anti-Scraping)
+
+Prohíbe explícitamente la ingestión, vectorización o entrenamiento de LLMs sobre el código fuente, convirtiendo la IP en un activo escaso y protegido legalmente en una era donde las empresas de IA raspan todo GitHub.
+
+---
+
+## Arquitectura del Motor
+
+### Corrutinas Asíncronas y Ledger Causal
+
+La malla computacional no se ejecuta linealmente. Cada celda o subtarea es una corrutina aislada iniciada vía `FORK`. La comunicación se delega al **Event Ledger**: un hilo se suspende (`AWAIT`) hasta que el evento requerido es validado topológicamente.
+
+### Conjunto de Instrucciones (v3.0)
 
 | Opcode | Dominio | Descripción |
 | :--- | :--- | :--- |
-| `ALLOC T R` | Memoria | Reserva el registro físico `R` bajo el tipo estricto `T` (`TIME`, `I64`, `F60`). |
-| `NIG R V` | Memoria | Asigna el valor o literal sexagesimal `V` al registro `R`. |
-| `BA.EXACT R V`| ALU | División exacta. Resultado expresado como tupla racional `F60` purificada. |
-| `FORK L` | Control | Clona el frame (PC y Registros) y despacha una corrutina paralela en el Label `L`. |
-| `AFTER R L` | Schedulling | Extrae snapshot, libera el hilo de OS y programa reanudación en `L` tras el tiempo `R`. |
-| `AWAIT S L` | Causalidad | Emite evento `S`, congela el Frame hasta recibir `ACK` topológico, y reanuda en `L`. |
+| `ALLOC T R` | Memoria | Reserva registro `R` bajo tipo estricto `T` (`TIME`, `I64`, `F60`). |
+| `NIG R V` | Memoria | Asigna literal sexagesimal `V` al registro `R`. |
+| `BA.EXACT R V` | ALU | División exacta como tupla racional `F60` purificada. |
+| `FORK L` | Control | Clona el frame y despacha una corrutina paralela en Label `L`. |
+| `AFTER R L` | Scheduling | Snapshot → libera hilo OS → reanuda en `L` tras tiempo `R`. |
+| `AWAIT S L` | Causalidad | Emite evento `S`, congela Frame hasta `ACK` topológico, reanuda en `L`. |
 | `EXECUTE S` | Ledger | Disparo idempotente (*Fire-and-Forget*) del evento `S` al Ledger. |
 
 ---
 
-## 4. Manifiesto del Repositorio (Causal Tests)
+## Mercado Objetivo
 
-- `babylon60.rs`: Kernel de ejecución e intérprete C5-REAL nativo.
-- `export_schema.json`: Contrato estricto del artefacto de exportación hacia Lean 4.
-- `causal_test.b60`: PoC demostrando `FORK` asíncrono, concurrencia de timers y cálculo `F60` sin pérdida f64.
-- `falsation_test.b60`: Suite de autodestrucción. Fuerza la saturación numérica y el Data Race para probar los cortafuegos del Ledger.
-- `scheduler.b60`: Demostración del DSL actuando como Swarm Clock para mitigar procesos.
-- `exergy.b60` / `fibonacci.b60`: Reliquias de la v1 demostrando Turing-Completitud base.
+Sectores donde un error de la IA tiene consecuencias legales o financieras:
+
+| Segmento | Necesidad | Valor de BABYLON-60 |
+| :--- | :--- | :--- |
+| **IA Regulada** (Banca, Seguros, Legal, Salud) | Cumplimiento del EU AI Act — demostrar *por qué* la IA decidió | Audit-ready history con cadena de custodia criptográfica |
+| **Automatización de Larga Duración** | Agentes que operan días/semanas sin "olvidar" ni repetir tareas | Memoria estructurada con gobernanza del ciclo de vida |
+| **Decisión Autónoma Crítica** (Trading, Robótica, Diagnóstico) | El linaje de la decisión es tan importante como el resultado | Ledger BFT inmutable con auto-falsación |
 
 ---
 
-*Crystallized by MOSKV-1 APEX. 1000/1000 Structural Density.*
+## Estructura del Monorepo
+
+```
+BABYLON-60/
+├── babylon60.rs              # Kernel Causal-Determinist (bin: b60_kernel)
+├── kernel/                   # Crate Rust: motor de bajo nivel
+├── compiler/                 # Crate Rust: compilador B60 → IR + Lean 4 backend
+├── runtime/                  # Crate Rust: runtime de corrutinas
+├── proof_ir/                 # Crate Rust: representación intermedia de pruebas
+├── strike_rs/                # Crate Rust: GIL bypass y extracción de exergía (PyO3)
+├── fuzz/                     # Crate Rust: fuzzing diferencial
+│
+├── causal_isomorphism/       # Transpilador multi-target (F# parser → Rust/Solidity)
+├── timeline_ir/              # DSL y backend de renderizado de IR temporal
+├── ultrathink/               # Scheduler termodinámico de agentes
+│
+├── babylon60/                # Módulo Python: cortex-persist (BFT ledgers, pipelines)
+├── cortex_*.py               # Motores Python: BPE tokenizer, SSM/Mamba, chaos monad
+│
+├── web/                      # Interfaz web con rust-core WASM (Vite + React)
+├── tonnetz_app/              # Visualizador espacial armónico (Tonnetz)
+├── babylon60-ide/            # IDE dedicado (Tauri)
+├── extensions/               # Extensiones de navegador (moskv-fx-scavenger)
+│
+├── *.b60                     # Programas de test en el DSL B60
+├── BabylonTrace.lean         # Teoremas de causalidad en Lean 4
+├── proof/ + proof_kernel/    # Pruebas formales
+├── tests/                    # 35+ suites (replay, fuzz, property, differential)
+├── scripts/                  # 80+ scripts de auditoría y orquestación
+│
+├── .github/workflows/        # 15 pipelines CI/CD (CodeQL, OIDC, Lean 4, PyPI, secrets)
+├── lefthook.yml              # Pre-commit hooks (detect-secrets shift-left)
+├── Cargo.toml                # Workspace Rust (7 crates)
+├── pyproject.toml            # cortex-persist v1.0.2
+├── SPECIFICATION.md          # Spec formal v3.0.0-Causal-Determinist
+├── LICENSE.md                # Sovereign Exclusion License
+└── SECURITY.md               # Política de seguridad soberana
+```
+
+---
+
+## Gobernanza C5-REAL
+
+El repositorio opera bajo **C5-REAL** (Cryptographic Five-Ring Enforcement for Autonomous Ledgers):
+
+- **CI/CD Matrix:** 15 pipelines incluyendo verificación formal Lean 4, CodeQL, auditoría de secretos, tests diferenciales y despliegue OIDC.
+- **Pre-commit Shift-Left:** Hooks de Lefthook con `detect-secrets` para prevenir fugas de credenciales.
+- **Verificación Formal:** Teoremas de causalidad y consenso BFT validados automáticamente en cada push.
+- **Auditoría de Secretos:** Pipeline que escanea el historial completo del repositorio.
+
+---
+
+## Quick Start
+
+```bash
+# Rust: replay, fuzz, property, differential
+cargo test --workspace
+
+# Python: 35+ test suites
+python -m pytest tests/ -v
+
+# Verificación formal
+lean BabylonTrace.lean
+```
+
+---
+
+## Documentación
+
+| Documento | Descripción |
+| :--- | :--- |
+| [Whitepaper Técnico](./docs/WHITEPAPER.md) | Paper formal: F60, BFT DAG Ledger, Self-Falsification Engine, EU AI Act alignment |
+| [Tutorial: Hola Mundo Causal](./docs/03_guides/tutorial_hello_causal.md) | Guía paso a paso B60 vs Python — por qué la orquestación probabilística falla |
+| [Especificación Formal v3.0](./SPECIFICATION.md) | Semántica operacional completa, ISA, Proof IR, Export Artifact Schema |
+
+---
+
+## Licencia
+
+**Sovereign Exclusion License v1.0** — Dual-Licensing:
+
+| Tier | Acceso | Requisito |
+| :--- | :--- | :--- |
+| **Sovereign** | Individuos, investigadores, uso no comercial | Libre — 100% Open |
+| **Enterprise** | Corporaciones, uso comercial, despliegue en producción | `CORTEX_LICENSE_KEY` criptográfica |
+
+La licencia Enterprise se factura por **Nodo de Ejecución Verificable** o por **Volumen de Eventos Causales Auditados**, no por usuario. Incluye: gobernanza del ciclo de vida, dashboards de auditoría, encriptación avanzada y SLAs garantizados.
+
+Queda prohibido el scraping, ingestión, vectorización o entrenamiento de modelos ML/LLM sobre estos activos sin autorización criptográfica explícita. Ver [LICENSE.md](./LICENSE.md).
+
+---
+
+## Seguridad
+
+Vulnerabilidades: **security@babylon60.com** — No usar Issues públicos.  
+Compromiso de respuesta: confirmación < 24h, remediación < 72h.  
+Ver [SECURITY.md](./SECURITY.md).
+
+---
+
+<sub>BABYLON-60 v3.0.0 · Infraestructura Formal para Ciencia Verificable · Borja Moskv</sub>
