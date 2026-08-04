@@ -73,6 +73,11 @@ fn local_infer_sync(prompt: String, model: Option<String>, base_url: Option<Stri
 }
 
 #[tauri::command]
+fn get_local_inference_status() -> Result<Value, String> {
+    check_local_status()
+}
+
+#[tauri::command]
 fn openrouter_infer_sync(prompt: String, model: Option<String>, api_key: Option<String>, temperature: Option<f32>) -> Result<InferenceResult, String> {
     run_openrouter_inference(&prompt, model, api_key, temperature)
 }
@@ -81,6 +86,7 @@ fn openrouter_infer_sync(prompt: String, model: Option<String>, api_key: Option<
 fn get_openrouter_inference_status(api_key: Option<String>) -> Result<Value, String> {
     check_openrouter_status(api_key)
 }
+
 
 // ═══════════════════════════════════════════════════════
 //  KINETIC BIND RAW — Ontology IPC Bridge
