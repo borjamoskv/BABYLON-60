@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: cortex-persist
-Version: 1.0.2
+Version: 4.0.0
 Summary: CORTEX C5-REAL execution kernel (BABYLON-60): BFT ledgers, onco-transducer, exergy pipelines
 Author: Borja Moskv (borjamoskv)
 Project-URL: Repository, https://github.com/borjamoskv/BABYLON-60
@@ -93,10 +93,10 @@ BABYLON-60 no es un wrapper de APIs ni un chatbot. Es una **capa de memoria, ver
 | Pilar | Mecanismo | Resultado |
 | :--- | :--- | :--- |
 | **Matriz de Enrutamiento Termodinámico** | Restricciones de Exergía aplicadas al AST | Erradica el Context Rot y los bucles de limerencia |
-| **Ledger Criptográfico BFT** | Registro *tamper-evident* de cada transición de estado | Memoria persistente, auditable e inmutable |
+| **Ledger Merkle-Causal (BFT Mesh)** | Registro *tamper-evident* local con extensión BFT P2P | Memoria persistente, auditable e inmutable |
 | **Invariantes Deterministas** | Contratos que alinean la inferencia latente con ejecución causal | Elimina alucinaciones en caminos críticos |
-| **Verificación Formal (Lean 4)** | Teoremas de causalidad y consenso BFT | Pruebas matemáticas de corrección, no promesas |
-| **Motor de Auto-Falsación** | `CRITICAL HALT` + purga ante inversiones causales o saturación | Prefiere autodestruirse a emitir evidencia espuria |
+| **Verificación Formal (Lean 4)** | Teoremas de causalidad y atestación de Oráculo | Pruebas matemáticas de corrección, no promesas |
+| **Congelación Forense WORM** | `CRITICAL HALT` + Sello WORM inmutable ante anomalías | Cero pérdida de historial para auditorías |
 
 ---
 
@@ -110,15 +110,15 @@ En coma flotante (`f64`), `1/3` de hora es `0.33333...` — acumula *drift* cata
 F60 = { Numerator: u64, Base60_Scale: u8 }
 ```
 
-Las magnitudes de tiempo están fuertemente tipadas (`UNIT.TICK`, `UNIT.SECOND`, `UNIT.HOUR`), permitiendo *Constant Folding* sexagesimal estricto durante compilación (SSA).
+`F60` se aplica estrictamente al **Scheduler, Control de Flujo y Metadatos del Ledger**, manteniendo los tensores de inferencia GPU (`bf16`/`fp8`) a velocidad nativa sin peaje de conversión.
 
-### El "Interruptor de Hombre Muerto"
+### Congelación Forense WORM (Write Once Read Many)
 
-Las IA actuales, cuando fallan, alucinan silenciosamente. BABYLON-60 prefiere **detenerse y autodestruirse** antes que emitir evidencia espuria. Si el `Base60_Scale` se satura o se detecta un Data Race en el Ledger, el motor emite `CRITICAL HALT` y purga el log completo.
+Las IA actuales, cuando fallan, alucinan silenciosamente o destruyen sus trazas. BABYLON-60 aplica un **Congelamiento Criptográfico Inmutable (WORM Quarantine)**: ante cualquier anomalía o saturación, el motor emite `CRITICAL HALT` y congela el estado en `artifact_bundle_v3/quarantine/` sin purgar una sola línea de evidencia forense.
 
-### Verificación Formal con Lean 4
+### Verificación Formal con Lean 4 + Atestación TPM 2.0
 
-No son tests unitarios. Son **teoremas matemáticos** que prueban la causalidad y el consenso BFT del sistema, permitiendo a los CISOs y auditores de cumplimiento certificar que el agente es matemáticamente incapaz de violar invariantes de seguridad.
+No son tests unitarios. Son **teoremas matemáticos** que prueban la causalidad y atestación del sistema, vinculando los hashes de ejecución a un enclave seguro hardware (TPM 2.0 / TEE) para garantía legal frente al EU AI Act (Art. 12).
 
 ### Licencia de Exclusión Soberana (Anti-Scraping)
 

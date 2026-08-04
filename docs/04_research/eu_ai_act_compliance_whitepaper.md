@@ -1,108 +1,139 @@
-# BABYLON-60 v4.0: EU AI Act Regulatory Compliance Whitepaper
+# El Determinismo Causal como Cumplimiento: Arquitectura BABYLON-60 v4.0 para Sistemas de IA de Alto Riesgo
 
-**Framework Architecture Mapping for High-Risk AI Systems under Regulation (EU) 2024/1689**
+**Whitepaper Técnico y Normativo sobre la Resolución de los Artículos 9, 10, 11, 12, 13 y 14 del EU AI Act (Reglamento UE 2024/1689)**
 
-> Borja Moskv · babylon60.com · August 2026 · Sovereign Exclusion License v1.0
-
----
-
-## Executive Summary
-
-The European Union Artificial Intelligence Act (Regulation EU 2024/1689) imposes strict regulatory requirements on High-Risk AI Systems operating within the EU market. Compliance failures carry penalties up to **€35,000,000 or 7% of total worldwide annual turnover**.
-
-Traditional LLM agent orchestration stacks (LangChain, AutoGen, CrewAI, Vector DBs) fail key statutory obligations — specifically regarding automatic logging (Art. 12), technical documentation (Art. 11), risk management (Art. 9), and data lineage (Art. 10). 
-
-**BABYLON-60 v4.0 Sovereign Hardened** provides a systems-level compliance substrate that automatically generates audit-ready cryptographic evidence satisfying Articles 9, 10, 11, 12, and 14 by construction.
+> Borja Moskv · babylon60.com · Agosto 2026 · Licencia Sovereign Exclusion v1.0
 
 ---
 
-## Statutory Mapping Matrix
+## 1. RESUMEN EJECUTIVO (Executive Summary)
 
-| EU AI Act Article | Legal Requirement | BABYLON-60 v4.0 Technical Substrate | Compliance Status |
-| :--- | :--- | :--- | :--- |
-| **Article 9** | Risk Management System | Thermodynamic AST Exergy Pruner + Self-Falsification Engine | **COMPLIANT** |
-| **Article 10** | Data & Data Governance | F60 Typed Memory + Causal Lineage DAG (Similarity != Lineage) | **COMPLIANT** |
-| **Article 11** | Technical Documentation | Proof IR → Lean 4 Theorem Prover Auto-Export (`proof.ir`) | **COMPLIANT** |
-| **Article 12** | Record-Keeping / Logging | Merkle-Causal DAG Ledger + WORM Cryptographic Quarantine Seal | **COMPLIANT** |
-| **Article 14** | Human Oversight | Neo-Riemannian Tonnetz Harmonic Audit Visualizer (`tonnetz_app/`) | **COMPLIANT** |
+### 1.1 El Problema: La Incompatibilidad de la IA Probabilística con la Ley
+El despliegue corporativo de Agentes de IA Autónomos en 2026 ha chocado frontalmente con el marco regulatorio global. Los modelos de lenguaje (LLMs) operan mediante inferencia probabilística sobre tensores flotantes —son cajas negras impredecibles. Cuando un agente toma una decisión financiera, médica o legal, no puede justificar **por qué** la tomó ni demostrar que su historial no ha sido manipulado.
 
----
+### 1.2 La Solución: Encapsulamiento Causal y Substrato de Verificación
+BABYLON-60 v4.0 no intenta alterar la ética o la aleatoriedad latente del LLM. En su lugar, encapsula el agente dentro de un **Substrato de Ejecución Verificable (Local-First Kernel)** en Rust que impone restricciones termodinámicas, aritmética sexagesimal exacta (`F60`) y verificación formal en Lean 4.
 
-## 1. Article 9: Risk Management & Limerence Loop Prevention
-
-### 1.1 Statutory Text
-*High-risk AI systems shall establish, implement, document and maintain a risk management system throughout their entire lifecycle to identify, estimate, and evaluate foreseeable risks.*
-
-### 1.2 The BABYLON-60 Mechanism
-- **Thermodynamic AST Pruner:** Each reasoning path in the agent's AST is assigned an exergy budget ($E$). Non-productive paths that fail to emit state transitions in the DAG Ledger consume exergy without producing work and are pruned via biological apoptosis.
-- **Dead Man's Switch (Self-Falsification):** If Base60 scale saturation or temporal race conditions occur, execution is halted immediately (`CRITICAL HALT`) before spurious outputs enter production.
+### 1.3 El Resultado: Inmunidad Legal y "Caja Negra" Aeronáutica
+Si el agente falla, entra en bucles de limerencia o sufre un intento de inyección de prompt, el sistema **no destruye la evidencia ni alucina en silencio**. En su lugar, ejecuta un `CRITICAL HALT` con **Cuarentena Forense WORM (Write Once Read Many)**, congelando el estado y emitiendo un certificado auditable anclado a hardware TPM 2.0 / TEE en menos de 24 horas.
 
 ---
 
-## 2. Article 10: Data Governance & Lineage (Similarity ≠ Lineage)
+## 2. EL MURO REGULATORIO: EL FIN DE LOS AGENTES OPACOS
 
-### 2.1 Statutory Text
-*High-risk AI systems shall be developed based on training, validation and testing data sets that meet quality criteria, including data provenance and lineage documentation.*
+### 2.1 El Coste de la Opacidad
+Bajo el **EU AI Act (Reglamento UE 2024/1689)**, desplegar un sistema de IA de alto riesgo sin trazabilidad ni gobernanza conlleva multas administrativas de hasta **€35.000.000 o el 7% de la facturación global anual** de la empresa (lo que sea mayor).
 
-### 2.2 The BABYLON-60 Mechanism
-- Vector databases retrieve text based on cosine similarity, which provides zero legal proof of when a memory was stored or how it was derived.
-- BABYLON-60 enforces **Typed Memory (`F60`) and Merkle Causal Lineage**: every decision node is linked to parent event IDs in a directed acyclic graph. Audit queries retrieve the exact DAG path from genesis to decision.
+### 2.2 Por qué los Enfoques Actuales Fallan ante un Auditor
 
----
-
-## 3. Article 11: Technical Documentation & Lean 4 Verification
-
-### 3.1 Statutory Text
-*The technical documentation of a high-risk AI system shall be drawn up before that system is placed on the market or put into service and shall be kept up-to date.*
-
-### 3.2 The BABYLON-60 Mechanism
-- The compiler automatically translates `.b60` execution traces into a formal **Proof Intermediate Representation (`proof.ir`)**.
-- The `proof.ir` is dispatched to the Lean 4 theorem prover backend, generating static mathematical assertions (`BabylonTrace.lean`). Compliance documentation is generated automatically by theorem proving, eliminating manual compliance drafting.
+| Enfoque Tradicional | Fallo Técnico / Legal | Consecuencia Regulatoria |
+| :--- | :--- | :--- |
+| **Prompt Engineering & System Prompts** | Vulnerables a Prompt Injection y Jailbreaks. No son barreras deterministas. | Rechazado bajo el Art. 9 (Gestión de Riesgos) |
+| **Bases de Datos Vectoriales (RAG)** | Almacenan *similitud coseno*, no *linaje causal*. No prueban integridad temporal. | Rechazado bajo el Art. 10 (Gobernanza de Datos) |
+| **Logs en Texto Plano / JSON** | Modificables por administradores locales o procesos comprometidos. | Rechazado bajo el Art. 12 (Conservación de Registros) |
+| **Guardrails de Software en Python** | Latencia elevada y riesgo de sobrepaso por GIL de Python. | Inviable para alta frecuencia y tiempo real |
 
 ---
 
-## 4. Article 12: Record-Keeping, Automatic Logging & WORM Quarantine
+## 3. ARQUITECTURA BABYLON-60 v4.0: INGENIERÍA DE LA CONFIANZA
 
-### 4.1 Statutory Text
-*High-risk AI systems shall technically allow for the automatic recording of events ('logs') over their lifecycle, ensuring a level of traceability appropriate to the intended purpose.*
+### 3.1 El Dominio Temporal `F60` (Precisión Absoluta)
+Para erradicar la deriva de coma flotante (`f64`) que corrompe el orden de los eventos en agendas de ejecución larga, BABYLON-60 opera con una tupla racional sexagesimal pura:
 
-### 4.2 The BABYLON-60 Mechanism: WORM Cryptographic Quarantine
-- **No Log Purging:** Unlike vulnerable systems that wipe logs on crash, BABYLON-60 v4.0 enforces a **WORM (Write Once Read Many) Cryptographic Quarantine**.
-- When an anomaly or halt occurs, the execution state is frozen and sealed in `artifact_bundle_v3/quarantine/` with a Sha256 Merkle root and TPM 2.0 / TEE hardware quote signature (`HardwareEnclave: TPM_2_0_HARDWARE_SEALED`). Local administrators cannot delete or modify the evidence.
+$$\text{F60} = \{ \text{Numerator: u64}, \text{Base60\_Scale: u8} \}$$
 
----
+`1/3` de hora se representa como `0;20` (20 minutos exactos). La causalidad temporal se mantiene matemáticamente inalterable ($\Delta t = 0$ drift), permitiendo certificar el orden relativo exacto de las operaciones ante tribunales y auditores.
 
-## 5. Article 14: Human Oversight & Harmonic Audit (`tonnetz_app/`)
+### 3.2 Verificación Formal con Lean 4
+El compilador de BABYLON-60 traduce las trazas de ejecución `.b60` a una Representación Intermedia de Pruebas (`proof.ir`). Este archivo alimenta automáticamente al demostrador de teoremas **Lean 4**, generando lemas formales estáticos (`BabylonTrace.lean`). La documentación técnica exige prueba matemática, no declaraciones de intención.
 
-### 5.1 Statutory Text
-*High-risk AI systems shall be designed and developed in such a way that they can be effectively overseen by natural persons during the period in which they are in use.*
-
-### 5.2 The BABYLON-60 Mechanism
-- The monorepo includes `tonnetz_app/`, a Neo-Riemannian Tonnetz visualizer that maps agent decision states into tonal harmonic space.
-- Human supervisors can visually inspect agent state transitions: harmonic consonances represent stable reasoning, while pitch disonances visually highlight hallucination or context rot before execution decisions are committed.
+### 3.3 El Motor de Exergía (`strike_rs`)
+Mediante PyO3 y la eliminación del Global Interpreter Lock (GIL) de Python, el kernel en Rust inspecciona el consumo de exergía computacional del agente en microsegundos, podando ramas ineficientes antes de que consuman recursos o entren en bucles.
 
 ---
 
-## 6. Automated Compliance Pipeline (`compliance_exporter/`)
+## 4. MAPEO TÉCNICO-NORMATIVO (MATRIZ DE CUMPLIMIENTO)
 
-BABYLON-60 v4.0 ships with a built-in compliance exporter:
-
-```python
-from babylon60.compliance_exporter import EUAIActComplianceExporter
-from babylon60.attestation import MerkleCausalAnchor
-
-# 1. Generate compliance certificate
-exporter = EUAIActComplianceExporter("artifact_bundle_v3")
-cert = exporter.generate_certificate("agent_finance_01", "EU_Bank_Corp")
-
-# 2. Anchor to Hardware TPM 2.0
-anchor = MerkleCausalAnchor(tpm_pcr_index=10)
-quote = anchor.generate_hardware_pcr_quote(cert["global_merkle_root"])
-
-# 3. Export audit-ready Markdown report for EU regulators
-exporter.export_markdown_report(cert, "docs/audits/EU_AI_ACT_CERTIFICATE.md")
+```
+                       EU AI ACT STATUTORY MAPPING
+┌──────────────────────────────────────────────────────────────────────────┐
+│ Art. 9:  Gestión de Riesgos   ──>  Thermodynamic Pruner + Dead Man Switch│
+│ Art. 10: Gobernanza de Datos  ──>  F60 Typed Memory + Merkle Lineage DAG │
+│ Art. 11: Doc. Técnica         ──>  Lean 4 Proof IR Auto-Export           │
+│ Art. 12: Conservación de Logs ──>  Merkle-Causal Ledger + WORM Quarantine│
+│ Art. 13: Transparencia        ──>  Timeline IR + Standard Export Schema  │
+│ Art. 14: Control Humano       ──>  Tonnetz App Harmonic Audit Visualizer  │
+└──────────────────────────────────────────────────────────────────────────┘
 ```
 
+### 4.1 Artículo 9: Sistema de Gestión de Riesgos
+- **Exigencia Legal:** Implementar un sistema continuo de evaluación y mitigación de riesgos durante todo el ciclo de vida.
+- **Solución B60 v4.0:** **Motor de Auto-Falsación y Cuarentena Forense (WORM)**. Si el agente entra en un bucle de limerencia o sufre inestabilidad numérica, el kernel dispara `CRITICAL HALT`, congela la memoria y sella el estado. El riesgo se contiene físicamente antes de causar daño externo.
+
+### 4.2 Artículo 10: Gobernanza de Datos y Linaje
+- **Exigencia Legal:** Trazabilidad completa de la procedencia y linaje de los datos consumidos y generados.
+- **Solución B60 v4.0:** **Tipado Estricto (`ALLOC T R`) y DAG de Causalidad Merkle**. Ningún dato entra en la memoria del agente sin estar firmado y tipado. Cada nodo de decisión contiene los IDs hash de sus eventos padres.
+
+### 4.3 Artículo 11: Documentación Técnica
+- **Exigencia Legal:** Elaboración y actualización de documentación técnica detallada previa a la comercialización.
+- **Solución B60 v4.0:** **Auto-Exportación de Proof IR (`proof.ir`) a Lean 4**. La documentación técnica no se escribe a mano; la genera el compilador como teoremas matemáticos verificables en Lean 4.
+
+### 4.4 Artículo 12: Conservación de Registros (Logging Automático)
+- **Exigencia Legal:** Registro automático de eventos durante el funcionamiento del sistema para garantizar trazabilidad.
+- **Solución B60 v4.0:** **Ledger Merkle-Causal + Anclaje Hardware TPM 2.0 / TEE**. Los eventos se encadenan mediante firmas SHA-256 inmutables y se anclan al registro PCR de un chip TPM 2.0 / enclave SGX local. Los administradores del servidor no pueden alterar los registros.
+
+### 4.5 Artículo 13: Transparencia y Provisión de Información
+- **Exigencia Legal:** Diseño transparente que permita a los usuarios interpretar las salidas del sistema.
+- **Solución B60 v4.0:** **Timeline IR Export**. Exportación estandarizada en formato JSON/YAML (`export_schema.json`) de la secuencia exacta de opcodes y decisiones causales.
+
+### 4.6 Artículo 14: Control Humano (Human Oversight)
+- **Exigencia Legal:** Garantizar que los sistemas puedan ser supervisados e intervenidos eficazmente por personas físicas.
+- **Solución B60 v4.0:** **Visualizador Armónico Tonnetz (`tonnetz_app/`)**. Interfaz basada en redes de afinidad tonal Neo-Riemannianas que proyecta el estado del agente en un plano geométrico 2D. La disonancia armónica (rojo) alerta a los supervisores humanos sobre desviaciones o alucinaciones antes de que se ejecute la acción.
+
 ---
 
-<sub>BABYLON-60 v4.0 Sovereign Hardened · EU AI Act Compliance Whitepaper · Borja Moskv</sub>
+## 5. PROTOCOLO DE ATENUACIÓN DE DAÑOS (DAMAGE CONTROL)
+
+Ante un incidente en producción (ej. un intento de inyección de prompt o un fallo de red), BABYLON-60 v4.0 ejecuta un protocolo determinista en 4 pasos:
+
+```
+[1. Detección] ──> [2. CRITICAL HALT] ──> [3. WORM Quarantine] ──> [4. Certificate Export]
+ Runtime Check       State Freeze          Hardware Sealed           PDF/JSON < 24h
+```
+
+1. **Detección Causal:** El Fuzzing diferencial o el Runtime Inspector detecta una inconsistencia en el DAG.
+2. **Congelación Causal (`CRITICAL HALT`):** Se congela la corrutina en estado Zombie. Se bloquea cualquier llamada a API externa.
+3. **Cuarentena Forense WORM:** El historial completo se sella en `artifact_bundle_v3/quarantine/` bajo firma TPM 2.0. Cero datos destruidos.
+4. **Exportación de Cumplimiento:** El módulo `compliance_exporter` genera un paquete firmado en JSON/Markdown listo para ser entregado a la Autoridad de Supervisión de IA en menos de 24 horas.
+
+---
+
+## 6. MODELO DE DESPLIEGUE Y LICENCIAMIENTO ENTERPRISE
+
+### 6.1 Despliegue Híbrido Soberano (Local-First)
+El cliente instala el kernel de BABYLON-60 en su propia infraestructura (*on-premise*, nube privada o enclaves seguros). Los datos sensibles **nunca abandonan el perímetro del cliente**.
+
+### 6.2 La Licencia Enterprise (`CORTEX_LICENSE_KEY`)
+- **Sovereign Tier (Open Core):** Gratuito para desarrolladores e investigación.
+- **Enterprise Tier:** Licencia comercial requerida para despliegues en producción. Se factura por **Nodo de Ejecución Verificable** o **Volumen de Eventos Causales Auditados**.
+
+### 6.3 Análisis de Retorno de Inversión (ROI)
+
+$$\text{ROI} = \frac{\text{Multa Evitada (hasta 7\% Facturación)} + \text{Coste de Auditoría Ahorrado}}{\text{Licencia Enterprise } \text{CORTEX\_LICENSE\_KEY}}$$
+
+Para una institución financiera con €500M de facturación, el riesgo máximo evitado supera los €35M. El coste de la licencia Enterprise representa una fracción inferior al 1% del riesgo mitigado.
+
+---
+
+## 7. CONCLUSIÓN Y LLAMADA A LA ACCIÓN
+
+En 2027, la IA opaca y no auditable estará excluida del mercado corporativo regulado. BABYLON-60 v4.0 Sovereign Hardened convierte el cumplimiento normativo en una ventaja de ingeniería determinista.
+
+**Solicite una Prueba de Concepto (PoC) de Cuarentena Forense:**
+- **Email:** enterprise@babylon60.com
+- **Web:** [babylon60.com](https://babylon60.com)
+- **Repositorio:** [github.com/borjamoskv/BABYLON-60](https://github.com/borjamoskv/BABYLON-60)
+
+---
+
+<sub>© 2026 Borja Moskv. Sovereign Exclusion License v1.0. Todos los derechos reservados.</sub>

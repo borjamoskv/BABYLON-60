@@ -17,6 +17,8 @@ babylon60-ide/backend/routes/telemetry.py
 babylon60-ide/backend/services/chain_verifier.py
 babylon60-ide/backend/services/cortex_ledger.py
 babylon60-ide/backend/services/db_pool.py
+babylon60/attestation/__init__.py
+babylon60/attestation/merkle_anchor.py
 babylon60/bft/bayesian_swarm.py
 babylon60/bft/consensus_committer.py
 babylon60/bft/consensus_ledger.py
@@ -32,6 +34,8 @@ babylon60/cli/onco_transducer.py
 babylon60/commands/grill_you.py
 babylon60/commands/strict_reviewer.py
 babylon60/compiler/lean_backend.py
+babylon60/compliance_exporter/__init__.py
+babylon60/compliance_exporter/eu_ai_act.py
 babylon60/core/browser_agent.py
 babylon60/core/c5_memory_shield.py
 babylon60/core/cortex_persist.py
@@ -101,6 +105,7 @@ tests/test_c5_invariants.py
 tests/test_c5_memory_shield.py
 tests/test_causal_isomorphism.py
 tests/test_commit_polisher.py
+tests/test_compliance_and_attestation.py
 tests/test_cortex_bpe_tokenizer.py
 tests/test_cortex_mcp_server.py
 tests/test_cortex_ssm_mamba.py
