@@ -2343,19 +2343,34 @@ async function renderInferencePage(container) {
           }
         } catch (errStream) {
           // Fallback to synchronous endpoint
+          const fable5Check = document.getElementById('fable5-degrade-check')?.checked || false;
+          const fableCard = document.getElementById('fable5-route-card');
+          const fableBody = document.getElementById('fable5-route-body');
+
           const data = await post('/api/inference/openrouter/generate', {
             prompt,
             model,
             api_key: apiKey,
             temperature: temp,
             max_tokens: tokens,
+            fable5_deterministic_mode: fable5Check,
           });
 
           if (outputBody) outputBody.textContent = data.text;
           if (outputHash) outputHash.textContent = `Model: ${data.model} · SHA256: ${data.sha256.slice(0, 24)}...`;
           if (speedVal) speedVal.textContent = `${data.tps} tps`;
-          if (latencySub) latencySub.textContent = `${data.latency_ms} ms latency`;
+          if (latencySub) latencySub.textContent = `${data.latency_ms} ms latencia`;
+
+          if (data.fable5_degradation && data.fable5_degradation.is_degraded && fableCard && fableBody) {
+            fableCard.style.display = 'block';
+            fableBody.innerHTML = `
+              <div style="font-weight:bold;color:var(--gold);margin-bottom:4px">POLÍTICA FABLE 5 DEGRADACIÓN DETERMINISTA (Score: ${data.fable5_degradation.determinism_score})</div>
+              <div>${escapeHtml(data.fable5_degradation.rationale)}</div>
+              <div style="font-size:0.58rem;color:var(--dust-ghost);margin-top:4px">Solicitado: ${escapeHtml(data.fable5_degradation.original_model)} → Modelo Degradado: <b>${escapeHtml(data.fable5_degradation.degraded_model)}</b> (T=${data.fable5_degradation.forced_temperature})</div>
+            `;
+          }
         }
+
       } else if (provider === 'mamba' || model === 'native-mamba') {
 
         const data = await post('/api/inference/local/mamba/generate', {
