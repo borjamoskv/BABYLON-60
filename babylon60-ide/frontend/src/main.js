@@ -1971,40 +1971,48 @@ async function renderInferencePage(container) {
         </div>
 
         <div style="width:100px">
-          <label style="font-size:0.58rem;color:var(--dust-dim);display:block;margin-bottom:4px">Temperature</label>
+          <label style="font-size:0.58rem;color:var(--dust-dim);display:block;margin-bottom:4px">Temperatura</label>
           <input class="input" type="number" id="infer-temp-input" value="0.2" min="0.0" max="2.0" step="0.1" style="width:100%">
         </div>
         <div style="width:100px">
-          <label style="font-size:0.58rem;color:var(--dust-dim);display:block;margin-bottom:4px">Max Tokens</label>
+          <label style="font-size:0.58rem;color:var(--dust-dim);display:block;margin-bottom:4px">Tokens Máximos</label>
           <input class="input" type="number" id="infer-tokens-input" value="1024" min="1" max="8192" style="width:100%">
         </div>
       </div>
 
+      <div style="margin-bottom:10px;display:flex;align-items:center;gap:8px">
+        <input type="checkbox" id="fable5-degrade-check" style="cursor:pointer">
+        <label for="fable5-degrade-check" style="font-size:0.6rem;color:var(--gold);cursor:pointer">
+          🛡️ <b>Degradación Determinista Fable 5</b> (Forzar degradación a Opus 4.8 / Sonnet 3.5 a T=0.0 si requiere determinismo estricto)
+        </label>
+      </div>
+
       <div style="margin-bottom:8px;display:flex;align-items:center;gap:8px">
-        <span style="font-size:0.58rem;color:var(--dust-dim)">Quick SOTA Presets:</span>
+        <span style="font-size:0.58rem;color:var(--dust-dim)">Preajustes Rápidos SOTA:</span>
         <button class="btn" id="preset-code" style="font-size:0.56rem;padding:2px 6px">⚙️ Rust AST</button>
-        <button class="btn" id="preset-math" style="font-size:0.56rem;padding:2px 6px">📐 Proof / Math</button>
-        <button class="btn" id="preset-fast" style="font-size:0.56rem;padding:2px 6px">⚡ Fast Summary</button>
-        <button class="btn" id="preset-legal" style="font-size:0.56rem;padding:2px 6px">⚖️ LegalTech Audit</button>
+        <button class="btn" id="preset-math" style="font-size:0.56rem;padding:2px 6px">📐 Demostración / Math</button>
+        <button class="btn" id="preset-fast" style="font-size:0.56rem;padding:2px 6px">⚡ Resumen Rápido</button>
+        <button class="btn" id="preset-legal" style="font-size:0.56rem;padding:2px 6px">⚖️ Auditoría LegalTech</button>
       </div>
 
       <div class="code-editor" style="margin-bottom:12px">
-        <textarea id="infer-prompt-input" placeholder="Type prompt here... (e.g. Write a Rust function for BFT Merkle verification OR derive entropy limits for Landauer bound)" spellcheck="false" style="height:120px"></textarea>
+        <textarea id="infer-prompt-input" placeholder="Escribe tu consulta aquí... (ej. Implementa una función en Rust para verificación Merkle BFT u obtén la cota de entropía de Landauer)" spellcheck="false" style="height:120px"></textarea>
       </div>
 
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
         <div style="display:flex;gap:8px">
-          <button class="btn" id="btn-sota-classify" style="font-size:0.62rem">🔍 Pre-Analyze SOTA Route</button>
-          <button class="btn" id="btn-sota-compare" style="font-size:0.62rem;color:var(--gold);border-color:var(--gold)">⚔️ Dual-Model Compare Arena</button>
+          <button class="btn" id="btn-sota-classify" style="font-size:0.62rem">🔍 Pre-Analizar Ruta SOTA</button>
+          <button class="btn" id="btn-sota-compare" style="font-size:0.62rem;color:var(--gold);border-color:var(--gold)">⚔️ Arena de Comparación Dual</button>
         </div>
-        <button class="btn btn-primary" id="btn-run-inference">⚡ Generate Output</button>
+        <button class="btn btn-primary" id="btn-run-inference">⚡ Generar Salida</button>
       </div>
     </div>
 
-    <div id="sota-route-card" class="card fade-in" style="display:none;margin-bottom:14px;border-left:3px solid var(--gold)">
-      <div class="card-title" style="margin-bottom:6px;color:var(--gold)">🎯 SOTA Intelligent Routing Decision</div>
-      <div id="sota-route-body" style="font-size:0.66rem;color:var(--dust)"></div>
+    <div id="fable5-route-card" class="card fade-in" style="display:none;margin-bottom:14px;border-left:3px solid var(--vermillion)">
+      <div class="card-title" style="margin-bottom:6px;color:var(--vermillion)">🛡️ Fable 5 Deterministic Degradation Policy</div>
+      <div id="fable5-route-body" style="font-size:0.64rem;color:var(--dust)"></div>
     </div>
+
 
     <div id="sota-compare-card" class="card fade-in" style="display:none;margin-bottom:14px">
       <div class="card-title" style="margin-bottom:10px;color:var(--lapis)">⚔️ SOTA Battle Arena — Parallel Dual-Model Benchmark</div>
