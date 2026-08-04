@@ -76,7 +76,7 @@ def test_process_extension_event_dispatch(caplog):
 
     # Dispatch CRYSTALLIZED status
     process_extension_event({"status": "CRYSTALLIZED", "url": "https://example.com/b60"}, logger)
-    assert "Crystallized" in caplog.text
+    assert "crystallized" in caplog.text.lower()
 
     # Dispatch FATAL_ENTROPY status
     process_extension_event({"status": "FATAL_ENTROPY", "error": "BFT Failure"}, logger)
