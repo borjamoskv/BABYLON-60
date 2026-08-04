@@ -233,12 +233,12 @@ def classify_prompt_and_select_sota_model(prompt: str) -> SOTARouteAnalysis:
     reasoning_score = sum(1 for token in reasoning_tokens if token in lower)
     fast_score = sum(1 for token in fast_tokens if token in lower)
 
-    if code_score >= 2 or "```" in lower:
+    if code_score >= 1 or "```" in lower:
         return SOTARouteAnalysis(
             category="CODING_SOTA",
             target_model="anthropic/claude-3.5-sonnet",
-            confidence=min(0.98, 0.70 + code_score * 0.08),
-            rationale="High code density detected. Auto-routing to Claude 3.5 Sonnet for SOTA AST compilation & refactoring.",
+            confidence=min(0.98, 0.75 + code_score * 0.08),
+            rationale="Code construct/AST syntax detected. Auto-routing to Claude 3.5 Sonnet for SOTA compilation & refactoring.",
             fallback_model="qwen/qwen-2.5-coder-32b-instruct",
         )
     elif reasoning_score >= 1 or "demuestra" in lower or "axiomatiza" in lower:
@@ -249,6 +249,7 @@ def classify_prompt_and_select_sota_model(prompt: str) -> SOTARouteAnalysis:
             rationale="Formal mathematical/deductive reasoning detected. Auto-routing to DeepSeek R1 for deep chain-of-thought verification.",
             fallback_model="anthropic/claude-3.5-sonnet",
         )
+
     elif fast_score >= 1 or len(prompt) < 120:
         return SOTARouteAnalysis(
             category="LATENCY_SOTA",
