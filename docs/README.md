@@ -6,6 +6,9 @@ Welcome to the central documentation index for **BABYLON-60 v4.0**.
 
 ## 📂 Navigation Index
 
+### 📜 Manifiesto & Visión
+- [Manifiesto Fundacional v4.0](./00_MANIFESTO.md): La tesis central, los 4 pilares del foso tecnológico, modelo de negocio y el Juramento del Ingeniero.
+
 ### 📄 Core Specifications & Papers
 - [Formal Specification v4.0](../SPECIFICATION.md): Operational semantics, ISA, F60 exact arithmetic, Proof IR, P2P BFT Topology.
 - [Technical Whitepaper v1.0](./WHITEPAPER.md): Deep tech paper covering F60, Merkle DAG Ledger, Self-Falsification Engine.

@@ -79,6 +79,7 @@ Exportador integrado que genera certificados auditables para las autoridades de 
 
 | Dominio | Documento | Descripción |
 | :--- | :--- | :--- |
+| **Visión** | [Manifiesto Fundacional v4.0](./docs/00_MANIFESTO.md) | Tesis central, los 4 pilares del foso tecnológico, el ROI comercial y el Juramento del Ingeniero |
 | **Investigación** | [EU AI Act Compliance Whitepaper](./docs/04_research/eu_ai_act_compliance_whitepaper.md) | Mapeo detallado para los Artículos 9, 10, 11, 12, 13 y 14 del Reglamento UE 2024/1689 |
 | **Investigación** | [Technical Whitepaper v1.0](./docs/WHITEPAPER.md) | Paper formal: F60, Ledger Merkle DAG, Self-Falsification Engine, Proof IR |
 | **Estrategia** | [Pitch Deck v4.0 (11 Slides)](./docs/PITCH_DECK.md) | Presentación ejecutiva B2B y due diligence de inversión Seed ($3M–$5M) |
