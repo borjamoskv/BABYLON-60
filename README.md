@@ -1,6 +1,8 @@
 # BABYLON-60 v4.0 (Sovereign Hardened)
 
-**Infraestructura de Capa 0 para Agentes de IA Verificables & Cumplimiento Regulatorio del EU AI Act**
+[🌐 Leer en Español](README_ES.md)
+
+**Layer 0 Infrastructure for Verifiable AI Agents & EU AI Act Regulatory Compliance**
 
 [![Version](https://img.shields.io/badge/Version-4.0.0--Sovereign--Hardened-black?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
 [![Security Rating](https://img.shields.io/badge/Security_Rating-A%2B-brightgreen?style=for-the-badge)](./docs/02_ontology/security_threat_model_v4.md)
@@ -9,13 +11,13 @@
 [![Governance](https://img.shields.io/badge/Governance-C5--REAL-blue?style=for-the-badge)](./SECURITY.md)
 [![License](https://img.shields.io/badge/License-Sovereign_Exclusion_v1.0-orange?style=for-the-badge)](./LICENSE.md)
 
-> *"La mayoría de los sistemas de IA pueden generar texto. Pocos pueden justificar su historial."*
+> *"Most AI systems can generate text. Few can justify their lineage."*
 
 ---
 
-## ⚡ Demo Ejecutable en Vivo (5 Segundos)
+## ⚡ Live Executable Demo (5 Seconds)
 
-Prueba el kernel en vivo, la sanitización criptográfica, la fallback por caída de red y la generación automática de certificados para la **AESIA (España)**, **BSI (Alemania)** y **Oficina de IA de la UE** ejecutando:
+Test the live kernel, cryptographic sanitization, network failure fallback, and automated certificate generation for **AESIA (Spain)**, **BSI (Germany)**, and the **EU AI Office** by running:
 
 ```bash
 python3 scripts/run_hero_demo.py
@@ -23,159 +25,159 @@ python3 scripts/run_hero_demo.py
 
 ---
 
-## 🎯 El Problema: Por qué las Bases de Datos Vectoriales no son la Solución
+## 🎯 The Problem: Why Vector Databases Are Not the Solution
 
-En 2026, desplegar agentes de IA en banca, salud o defensa con bases de datos vectoriales (Pinecone, Milvus, Weaviate) crea un **pasivo legal inaceptable**:
+In 2026, deploying AI agents in banking, healthcare, or defense using vector databases (Pinecone, Milvus, Weaviate) creates an **unacceptable legal liability**:
 
-| Lo que hace un Vector DB / Guardrail | Lo que exige un Auditor del EU AI Act | Consecuencia Legal |
+| What Vector DBs / Guardrails Do | What an EU AI Act Auditor Requires | Legal Consequence |
 | :--- | :--- | :--- |
-| Encuentra texto semánticamente parecido | Prueba de fecha/hora de almacenamiento | Rechazado bajo Art. 10 (Gobernanza) |
-| Devuelve los $K$ vecinos más cercanos | Cadena causal: qué datos produjeron esta decisión | Rechazado bajo Art. 9 (Gestión de Riesgos) |
-| Filtra prompts probabilísticamente | Garantía inalterable de que el log no fue manipulado | Multas de hasta **€35M o 7% facturación** (Art. 12) |
+| Find semantically similar text | Proof of storage date/timestamp | Rejected under Art. 10 (Governance) |
+| Return $K$-nearest neighbors | Causal chain: what data produced this decision | Rejected under Art. 9 (Risk Management) |
+| Filter prompts probabilistically | Immutable guarantee that log was untampered | Fines up to **€35M or 7% turnover** (Art. 12) |
 
-**La similitud no es linaje.** Sin linaje causal verificable, los agentes sufren de *entropía generativa*: se desvían (*drift*) y dejan registros inútiles en un tribunal.
+**Similarity is not lineage.** Without verifiable causal lineage, agents suffer from *generative entropy*: they drift and leave logs inadmissible in court.
 
 ---
 
-## 🛡️ La Solución: Substrato BABYLON-60 v4.0
+## 🛡️ The Solution: BABYLON-60 v4.0 Substrate
 
-BABYLON-60 es una **capa de gobernanza y ejecución "local-first" en Rust y Lean 4** que encapsula cualquier stack de agentes (LangChain, AutoGen, CrewAI, Ollama) bajo restricciones termodinámicas y criptográficas:
+BABYLON-60 is a **"local-first" governance and execution layer written in Rust and Lean 4** that encapsulates any agent stack (LangChain, AutoGen, CrewAI, Ollama) under thermodynamic and cryptographic constraints:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│    Agentes & Orquestadores (LangChain / AutoGen / CrewAI)   │
+│    Agents & Orchestrators (LangChain / AutoGen / CrewAI)    │
 ├─────────────────────────────────────────────────────────────┤
-│    LLMs Latentes (OpenAI / Claude / Mamba / Ollama)         │
+│    Latent LLMs (OpenAI / Claude / Mamba / Ollama)           │
 ├─────────────────────────────────────────────────────────────┤
 │  ██ BABYLON-60 v4.0 SOVEREIGN HARDENED ██                   │
-│  - Scheduler Sexagesimal Exacto F60 (0;20 exact)            │
-│  - Ledger Merkle-Causal DAG (Tamper-Evident)                │
-│  - Cuarentena Forense WORM (Write Once Read Many)           │
-│  - Exporter EU AI Act i18n (AESIA / BSI / CNIL)             │
+│  - Exact Sexagesimal Scheduler F60 (0;20 exact)             │
+│  - Merkle-Causal DAG Ledger (Tamper-Evident)                │
+│  - WORM Forensic Quarantine (Write Once Read Many)          │
+│  - EU AI Act i18n Exporter (AESIA / BSI / CNIL)             │
 ├─────────────────────────────────────────────────────────────┤
-│  Enclave Seguro Hardware (TPM 2.0 / TEE / GPU bf16 Native)  │
+│  Hardware Secure Enclave (TPM 2.0 / TEE / Native GPU bf16)  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 💎 Fosos Tecnológicos (Moats)
+## 💎 Moats & Technology Pillars
 
-### 1. Aritmética Sexagesimal Exacta (`F60`)
-En `f64`, $1/3$ de hora es `0.33333...` — acumula *drift* catastrófico. En `F60`, es exactamente `0;20` (20 minutos exactos, cero *drift*). `F60` se aplica al **Scheduler y Ledger**, mientras los tensores GPU corren a velocidad nativa `bf16`.
+### 1. Exact Sexagesimal Arithmetic (`F60`)
+In `f64`, $1/3$ of an hour is `0.33333...` — accumulating catastrophic drift. In `F60`, it is exactly `0;20` (20 exact minutes, zero drift). `F60` governs the **Scheduler and Ledger**, while GPU tensors execute at native `bf16` speed.
 
-### 2. Congelación Forense WORM (Write Once Read Many)
-Las IA tradicionales alucinan o purgan logs al fallar. BABYLON-60 aplica un **Congelamiento Criptográfico Inmutable**: ante cualquier anomalía, el motor dispara `CRITICAL HALT` y congela el estado en `artifact_bundle_v3/quarantine/` firmado por hardware TPM 2.0. **Cero destrucción de evidencia.**
+### 2. Forensic WORM Quarantine (Write Once Read Many)
+Traditional AIs hallucinate or purge logs upon failure. BABYLON-60 applies an **Immutable Cryptographic Freeze**: upon any anomaly, the engine triggers a `CRITICAL HALT` and freezes state into `artifact_bundle_v3/quarantine/` signed by TPM 2.0 hardware. **Zero destruction of evidence.**
 
-### 3. Verificación Formal con Lean 4
-Teoremas matemáticos estáticos (`proof.ir` $\to$ `BabylonTrace.lean`) que demuestran que el kernel es matemáticamente incapaz de violar invariantes causales.
+### 3. Formal Verification with Lean 4
+Static mathematical theorems (`proof.ir` $\to$ `BabylonTrace.lean`) proving the kernel is mathematically incapable of violating causal invariants.
 
-### 4. Certificación Multilingüe Automática (`compliance_exporter`)
-Exportador integrado que genera certificados auditables para las autoridades de supervisión nacionales (AESIA en España, BSI en Alemania, CNIL en Francia, NIST en EE. UU.).
+### 4. Automated Multilingual Certification (`compliance_exporter`)
+Built-in exporter generating audit-ready certificates for national supervisory authorities (AESIA in Spain, BSI in Germany, CNIL in France, NIST in the US).
 
 ---
 
-## 📚 Matriz Directoria de Documentación
+## 📚 Documentation Directory Matrix
 
-| Dominio | Documento | Descripción |
+| Domain | Document | Description |
 | :--- | :--- | :--- |
-| **Visión** | [Manifiesto Fundacional v4.0](./docs/00_MANIFESTO.md) | Tesis central, los 4 pilares del foso tecnológico, el ROI comercial y el Juramento del Ingeniero |
-| **Investigación** | [EU AI Act Compliance Whitepaper](./docs/04_research/eu_ai_act_compliance_whitepaper.md) | Mapeo detallado para los Artículos 9, 10, 11, 12, 13 y 14 del Reglamento UE 2024/1689 |
-| **Investigación** | [Technical Whitepaper v1.0](./docs/WHITEPAPER.md) | Paper formal: F60, Ledger Merkle DAG, Self-Falsification Engine, Proof IR |
-| **Estrategia** | [Pitch Deck v4.0 (11 Slides)](./docs/PITCH_DECK.md) | Presentación ejecutiva B2B y due diligence de inversión Seed ($3M–$5M) |
-| **Estrategia** | [Estrategia de Valoración](./docs/VALUATION_STRATEGY.md) | Análisis de valoración de mercado ($8M – $400M) basado en IP e infraestructura |
-| **Guías** | [Quickstart Enterprise](./docs/03_guides/QUICKSTART_ENTERPRISE.md) | Guía de onboarding DevOps en 5 mins para Docker Compose y Kubernetes/Helm |
-| **Guías** | [Tutorial: Hola Mundo Causal](./docs/03_guides/tutorial_hello_causal.md) | Guía paso a paso contrastando BABYLON-60 vs Python/asyncio |
-| **Guías** | [Guía Auditoría Armónica Tonnetz](./docs/03_guides/tonnetz_audit_guide.md) | Supervisión humana (Art. 14) vía red armónica espacial Neo-Riemanniana |
-| **Seguridad** | [Threat Model & Mitigations v4.0](./docs/02_ontology/security_threat_model_v4.md) | Modelo de amenazas Fase II: Redacción criptográfica, Grace Period y Bounds |
-| **Especificación**| [Especificación Formal v4.0](./SPECIFICATION.md) | Semántica operacional completa, ISA B60, Proof IR, Topology P2P |
-| **GTM & Ventas** | [PoC Spec (7 Días Sombra)](./docs/05_gtm/forensic_quarantine_poc_spec.md) | Especificación de Prueba de Concepto en modo lectura para CISOs |
-| **GTM & Ventas** | [CISO Cold Email Playbook](./docs/05_gtm/ciso_cold_email_playbook.md) | Plantillas de prospección B2B en Español, Inglés y Alemán |
-| **GTM & Ventas** | [Hero Video Script & Show HN](./docs/05_gtm/hero_video_script_and_show_hn.md) | Guión timecode del video demo de 60s y post de lanzamiento Hacker News |
-| **GTM & Ventas** | [VC Data Room Manifest](./docs/05_gtm/vc_data_room_manifest.md) | Índice estructurado de due diligence virtual para fondos Tier-1 |
+| **Vision** | [Foundational Manifesto v4.0](./docs/00_MANIFESTO.md) | Core thesis, 4 moat pillars, commercial ROI, and Engineer's Oath |
+| **Research** | [EU AI Act Compliance Whitepaper](./docs/04_research/eu_ai_act_compliance_whitepaper.md) | Comprehensive mapping for Articles 9, 10, 11, 12, 13 & 14 of EU Reg 2024/1689 |
+| **Research** | [Technical Whitepaper v1.0](./docs/WHITEPAPER.md) | Formal paper: F60, Merkle DAG Ledger, Self-Falsification Engine, Proof IR |
+| **Strategy** | [Pitch Deck v4.0 (11 Slides)](./docs/PITCH_DECK.md) | B2B Executive presentation & Seed investment due diligence ($3M–$5M) |
+| **Strategy** | [Valuation Strategy](./docs/VALUATION_STRATEGY.md) | Market valuation analysis ($8M – $400M) based on IP & infrastructure |
+| **Guides** | [Enterprise Quickstart](./docs/03_guides/QUICKSTART_ENTERPRISE.md) | 5-minute DevOps onboarding guide for Docker Compose & Kubernetes/Helm |
+| **Guides** | [Tutorial: Hello Causal World](./docs/03_guides/tutorial_hello_causal.md) | Step-by-step tutorial contrasting BABYLON-60 vs Python/asyncio |
+| **Guides** | [Tonnetz Harmonic Audit Guide](./docs/03_guides/tonnetz_audit_guide.md) | Human oversight (Art. 14) via Neo-Riemannian spatial harmonic graph |
+| **Security** | [Threat Model & Mitigations v4.0](./docs/02_ontology/security_threat_model_v4.md) | Phase II Threat Model: Cryptographic redaction, Grace Period & Bounds |
+| **Specification**| [Formal Specification v4.0](./SPECIFICATION.md) | Complete operational semantics, B60 ISA, Proof IR, P2P Topology |
+| **GTM & Sales** | [PoC Spec (7 Shadow Days)](./docs/05_gtm/forensic_quarantine_poc_spec.md) | Read-only Proof of Concept specification for CISOs |
+| **GTM & Sales** | [CISO Cold Email Playbook](./docs/05_gtm/ciso_cold_email_playbook.md) | B2B prospecting templates in Spanish, English, and German |
+| **GTM & Sales** | [Hero Video Script & Show HN](./docs/05_gtm/hero_video_script_and_show_hn.md) | Timecoded 60s demo video script & Hacker News launch post |
+| **GTM & Sales** | [VC Data Room Manifest](./docs/05_gtm/vc_data_room_manifest.md) | Structured virtual due diligence index for Tier-1 VC funds |
 
 ---
 
-## 🕹️ Integración de Agentes y Consola de Mando (Antigravity & WA-Nexus)
+## 🕹️ Agent Integration & Command Console (Antigravity & WA-Nexus)
 
-BABYLON-60 no es solo un kernel pasivo; se acopla directamente a tu stack de IA favorito para dotarlo de autonomía determinista, "Deep Research" (AUTODIDACT-Ω) y ejecución forzada a cero fricción (ULTRATHINK).
+BABYLON-60 is not just a passive kernel; it interfaces directly with your preferred AI stack to provide deterministic autonomy, "Deep Research" (AUTODIDACT-Ω), and zero-friction forced execution (ULTRATHINK).
 
-### 1. Inyección en LLMs (Model Context Protocol)
-El kernel es agnóstico y expone su arsenal de herramientas locales mediante el estándar MCP (`cortex_mcp_server.py`):
-- **Para Claude Code (Anthropic) y Cursor/Codex (OpenAI):** Soporte MCP nativo. Añade el servidor local en los *settings* (o usa `claude mcp add`) y tu IA heredará instantáneamente el escudo WORM Quarantine y la capacidad de ejecutar acciones físicas en tu máquina.
-- **Para ChatGPT (Web):** Exporta el arsenal de BABYLON-60 en formato JSON *OpenAPI*, crea un Custom GPT e inyéctale el esquema para operar el kernel desde la web.
+### 1. LLM Injection (Model Context Protocol)
+The kernel is agnostic and exposes its local tool arsenal via the MCP standard (`cortex_mcp_server.py`):
+- **For Claude Code (Anthropic) & Cursor/Codex (OpenAI):** Native MCP support. Add the local server in settings (or use `claude mcp add`) and your AI immediately inherits WORM Quarantine shielding and local physical execution capabilities.
+- **For ChatGPT (Web):** Export BABYLON-60's toolset in *OpenAPI* JSON format, create a Custom GPT, and inject the schema to operate the kernel over the web.
 
-### 2. Pasarela de Intervención (WA-Nexus)
-Controla tus enjambres desde WhatsApp sin necesidad de estar frente al PC.
-- **Mensajes Privados (DMs):** Intervención *Event-Driven* instantánea. Escribe a la IA y responderá sin fricción.
-- **Grupos:** Requiere el disparador `Moskv-1` al inicio del mensaje para forzar una interrupción de hardware y saltar el polling defensivo de 5 minutos.
-- **Asistencia del Kernel:** Escribe `Moskv-tips` para recibir píldoras de sabiduría arquitectónica y buenas prácticas operativas.
+### 2. Intervention Gateway (WA-Nexus)
+Control your agent swarms from WhatsApp without standing in front of your PC.
+- **Direct Messages (DMs):** Instant event-driven intervention. Message the AI and it responds frictionlessly.
+- **Group Chats:** Requires the `Moskv-1` trigger at the start of the message to force a hardware interrupt and bypass defensive 5-minute polling.
+- **Kernel Assistance:** Type `Moskv-tips` to receive architectural guidance and operational best practices.
 
-### 3. Cheat Sheet: Directivas Termodinámicas y Slash Commands
-Comandos ejecutables desde la interfaz del agente (Antigravity) para gobernar el enjambre:
+### 3. Cheat Sheet: Thermodynamic Directives & Slash Commands
+Executable commands from the agent interface (Antigravity) to govern the swarm:
 
 - **⚡ Slash Commands:**
-  - `/goal [tarea]` $\to$ Activa la ejecución masiva. El agente refactoriza o investiga sin descanso hasta cumplir el objetivo.
-  - `/learn` $\to$ Cristaliza el contexto actual en memoria permanente. La IA lo integrará en su ADN para futuros despliegues.
-  - `/schedule` $\to$ Programa un Cron Job agéntico (ej. auditar la red cada hora).
-  - `/grill-me` $\to$ Modo Inquisidor. Entrevista iterativa para validar arquitecturas antes de escribir código.
+  - `/goal [task]` $\to$ Triggers continuous execution. The agent refactors or researches relentlessly until goal completion.
+  - `/learn` $\to$ Crystallizes current context into permanent memory for future deployments.
+  - `/schedule` $\to$ Schedules an agentic Cron Job (e.g., audit network every hour).
+  - `/grill-me` $\to$ Inquisitor mode. Iterative interview to validate architecture before code generation.
 
-- **🔥 Triggers Termodinámicos (Zero-Friction):**
-  - `ULTRATHINK` $\to$ Obliga al modelo a colapsar su inferencia en código físico. Elimina la entropía generativa ("parloteo").
-  - `purga anergia` $\to$ Protocolo de limpieza determinista para erradicar archivos zombie o código muerto.
-  - `deep research` $\to$ Dispara el motor AUTODIDACT-Ω para investigación web ultra-profunda.
+- **🔥 Thermodynamic Triggers (Zero-Friction):**
+  - `ULTRATHINK` $\to$ Forces model inference to collapse into physical code, eliminating generative entropy ("chatter").
+  - `purga anergia` $\to$ Deterministic cleanup protocol to eradicate zombie files and dead code.
+  - `deep research` $\to$ Triggers the AUTODIDACT-Ω engine for ultra-deep web research.
 
-### 4. Setup *Zero-Friction* en Windows 10
-Si no dispones de un entorno UNIX nativo (macOS/Linux), BABYLON-60 se despliega en Windows sin tocar variables de entorno:
-1. Instala **Python 3.12** desde la **Microsoft Store** (autoconfigura el PATH).
-2. Abre PowerShell / cmd y ejecuta: `pip install cortex-persist`.
-3. Lanza la demo interactiva: `python -m babylon60.run_hero_demo`.
+### 4. Zero-Friction Setup on Windows 10
+If you lack a native UNIX environment (macOS/Linux), BABYLON-60 deploys on Windows without modifying environment variables:
+1. Install **Python 3.12** from the **Microsoft Store** (auto-configures PATH).
+2. Open PowerShell / cmd and run: `pip install cortex-persist`.
+3. Launch interactive demo: `python -m babylon60.run_hero_demo`.
 
 ---
 
-## 🗂️ Mapa del Monorepo
+## 🗂️ Monorepo Map
 
 ```
 BABYLON-60/
-├── babylon60.rs              # Kernel Causal-Determinist (bin: b60_kernel)
-├── kernel/                   # Crate Rust: motor de bajo nivel y Cuarentena WORM
-├── attestation/              # Crate Rust: anclaje PCR TPM 2.0 y notariado P2P
-├── compiler/                 # Crate Rust: compilador B60 → IR + Lean 4 backend
-├── runtime/                  # Crate Rust: runtime de corrutinas
-├── proof_ir/                 # Crate Rust: representación intermedia de pruebas
-├── strike_rs/                # Crate Rust: GIL bypass y extracción de exergía (PyO3)
-├── fuzz/                     # Crate Rust: fuzzing diferencial
+├── babylon60.rs              # Causal-Deterministic Kernel (bin: b60_kernel)
+├── kernel/                   # Rust Crate: Low-level engine & WORM Quarantine
+├── attestation/              # Rust Crate: TPM 2.0 PCR anchoring & P2P notary
+├── compiler/                 # Rust Crate: B60 → IR compiler + Lean 4 backend
+├── runtime/                  # Rust Crate: Coroutine runtime
+├── proof_ir/                 # Rust Crate: Proof intermediate representation
+├── strike_rs/                # Rust Crate: GIL bypass & exergy extraction (PyO3)
+├── fuzz/                     # Rust Crate: Differential fuzzing
 │
-├── babylon60/                # Paquete Python principal (cortex-persist)
-│   ├── compliance_exporter/  # Generador i18n de certificados EU AI Act (ES, EN, DE, FR, IT)
-│   ├── attestation/          # Anclaje Merkle PCR Quote TPM 2.0 y notariado P2P
-│   └── primitives/           # Serialization Boundary F60 → GPU bf16 con checksum SHA-256
+├── babylon60/                # Primary Python Package (cortex-persist)
+│   ├── compliance_exporter/  # i18n EU AI Act certificate generator (ES, EN, DE, FR, IT)
+│   ├── attestation/          # Merkle PCR Quote TPM 2.0 anchoring & P2P notary
+│   └── primitives/           # F60 → GPU bf16 Serialization Boundary with SHA-256 checksum
 │
-├── causal_isomorphism/       # Transpilador F# → Rust/Solidity
-├── timeline_ir/              # Backend de renderizado de IR temporal
+├── causal_isomorphism/       # F# → Rust/Solidity Transpiler
+├── timeline_ir/              # Temporal IR rendering backend
 │
-├── web/                      # Interfaz web React + WASM
-├── tonnetz_app/              # Visualizador espacial armónico Neo-Riemanniano (Art. 14)
-├── babylon60-ide/            # IDE dedicado en Tauri
+├── web/                      # React + WASM web interface
+├── tonnetz_app/              # Neo-Riemannian harmonic spatial visualizer (Art. 14)
+├── babylon60-ide/            # Dedicated Tauri IDE
 │
-├── hello_causal.b60          # Programa ejecutable de demostración DSL
-├── BabylonTrace.lean         # Teoremas de causalidad verificados en Lean 4
-├── tests/                    # 301 tests automatizados (pytest + cargo test)
-├── scripts/                  # Herramientas CLI (run_hero_demo.py, export_country_compliance.py)
+├── hello_causal.b60          # DSL demonstration executable program
+├── BabylonTrace.lean         # Lean 4 verified causality theorems
+├── tests/                    # 301 automated tests (pytest + cargo test)
+├── scripts/                  # CLI tools (run_hero_demo.py, export_country_compliance.py)
 │
-├── docs/                     # Portal completo de documentación y GTM (01-05)
-│   ├── 01_spec/              # ESPECIFICACIÓN Y ARQUITECTURA
-│   ├── 02_ontology/          # ONTOLOGÍA Y MODELO DE AMENAZAS V4
-│   ├── 03_guides/            # TUTORIALES Y QUICKSTART ENTERPRISE
-│   ├── 04_research/          # WHITEPAPERS TÉCNICOS Y NORMATIVOS
-│   ├── 05_gtm/               # PLAYBOOK DE VENTAS, PITCH DECK Y VC DATA ROOM
-│   └── audits/               # MUESTRAS DE CERTIFICADOS DE CUMPLIMIENTO (ES, EN, DE, FR, IT)
+├── docs/                     # Full documentation & GTM portal (01-05)
+│   ├── 01_spec/              # SPECIFICATION AND ARCHITECTURE
+│   ├── 02_ontology/          # ONTOLOGY AND THREAT MODEL V4
+│   ├── 03_guides/            # TUTORIALS AND ENTERPRISE QUICKSTART
+│   ├── 04_research/          # TECHNICAL AND REGULATORY WHITEPAPERS
+│   ├── 05_gtm/               # SALES PLAYBOOK, PITCH DECK AND VC DATA ROOM
+│   └── audits/               # COMPLIANCE CERTIFICATE SAMPLES (ES, EN, DE, FR, IT)
 │
-├── Cargo.toml                # Workspace Rust v4.0.0
+├── Cargo.toml                # Rust Workspace v4.0.0
 ├── pyproject.toml            # cortex-persist v4.0.0
-├── SPECIFICATION.md          # Especificación formal v4.0
+├── SPECIFICATION.md          # Formal Specification v4.0
 ├── LICENSE.md                # Sovereign Exclusion License v1.0
-└── SECURITY.md               # Política de seguridad soberana
+└── SECURITY.md               # Sovereign Security Policy
 ```
 
 ---
@@ -183,43 +185,43 @@ BABYLON-60/
 ## 🛠️ Quick Start
 
 ```bash
-# 1. Ejecutar Demo Interactiva Hero en Vivo
+# 1. Run Interactive Hero Demo Live
 python3 scripts/run_hero_demo.py
 
-# 2. Generar Certificado de Cumplimiento para España (AESIA)
+# 2. Export Compliance Certificate for Spain (AESIA)
 python3 scripts/export_country_compliance.py --locale es --output docs/audits/CERTIFICADO_ES.md
 
-# 3. Ejecutar Suite de Tests (301 Tests)
+# 3. Run Test Suite (301 Tests)
 uv run pytest tests/ -v
 
-# 4. Compilar Workspace Rust
+# 4. Build & Test Rust Workspace
 cargo test --workspace
 
-# 5. Verificación Formal en Lean 4
+# 5. Formal Verification in Lean 4
 lean BabylonTrace.lean
 ```
 
 ---
 
-## 📜 Licencia
+## 📜 License
 
-**Sovereign Exclusion License v1.0** — Modelo de Licencia Dual:
+**Sovereign Exclusion License v1.0** — Dual Licensing Model:
 
-| Tier | Acceso | Requisito |
+| Tier | Access | Requirement |
 | :--- | :--- | :--- |
-| **Sovereign** | Individuos, investigadores, uso no comercial | Libre — 100% Open Core |
-| **Enterprise** | Corporaciones, uso comercial, producción | `CORTEX_LICENSE_KEY` criptográfica |
+| **Sovereign** | Individuals, researchers, non-commercial use | Free — 100% Open Core |
+| **Enterprise** | Corporations, commercial use, production | Cryptographic `CORTEX_LICENSE_KEY` |
 
-Ver detalles en [LICENSE.md](./LICENSE.md) y [COMMERCIAL_LICENSE.md](./docs/COMMERCIAL_LICENSE.md).
-
----
-
-## 🔒 Seguridad
-
-Para reportar vulnerabilidades: **security@babylon60.com** (No usar GitHub Issues públicos).  
-Compromiso de respuesta: confirmación < 24h, remediación < 72h.  
-Ver [SECURITY.md](./SECURITY.md) y [Threat Model v4.0](./docs/02_ontology/security_threat_model_v4.md).
+See details in [LICENSE.md](./LICENSE.md) and [COMMERCIAL_LICENSE.md](./docs/COMMERCIAL_LICENSE.md).
 
 ---
 
-<sub>BABYLON-60 v4.0.0 Sovereign Hardened · Infraestructura de Capa 0 para Agentes de IA Verificables · Borja Moskv</sub>
+## 🔒 Security
+
+To report security vulnerabilities: **security@babylon60.com** (Do not use public GitHub Issues).  
+SLA Commitment: acknowledgement < 24h, remediation < 72h.  
+See [SECURITY.md](./SECURITY.md) and [Threat Model v4.0](./docs/02_ontology/security_threat_model_v4.md).
+
+---
+
+<sub>BABYLON-60 v4.0.0 Sovereign Hardened · Layer 0 Infrastructure for Verifiable AI Agents · Borja Moskv</sub>

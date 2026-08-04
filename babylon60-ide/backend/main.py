@@ -70,6 +70,7 @@ app.include_router(sentinel.router)
 app.include_router(delegation.router)
 app.include_router(telemetry.router)
 app.include_router(inference.router)
+app.include_router(inference.openrouter_router)
 
 
 @app.get("/api/health")
