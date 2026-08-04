@@ -199,10 +199,67 @@ class OpenRouterInferenceRequest(BaseModel):
     api_key: str | None = Field(default=None, description="OpenRouter API Key (optional if set in env)")
     temperature: float = Field(default=0.2, ge=0.0, le=2.0)
     max_tokens: int = Field(default=1024, ge=1, le=8192)
+    fable5_deterministic_mode: bool = Field(default=False, description="Force Fable 5 Deterministic Opus Fallback")
+
+
+class Fable5DegradationAnalysis(BaseModel):
+    is_degraded: bool
+    determinism_score: float
+    original_model: str
+    degraded_model: str
+    forced_temperature: float
+    rationale: str
+
+
+def evaluate_fable5_deterministic_degradation(
+    prompt: str, requested_model: str, temperature: float, force_degrade: bool = False
+) -> Fable5DegradationAnalysis:
+    """Fable 5 Deterministic Fallback Evaluator.
+    When strict determinism (T=0.0, AST syntax, formal proofs, or explicit degradation flag) is required,
+    degrades speculative high-temperature models to Opus 4.8 / Claude 3.5 Sonnet at T=0.0 for zero-jitter execution.
+    """
+    lower = prompt.lower()
+    
+    det_score = 0.0
+    if temperature <= 0.05:
+        det_score += 0.50
+    elif temperature <= 0.2:
+        det_score += 0.25
+        
+    code_keywords = ["def ", "class ", "function", "fn ", "pub ", "struct ", "sql", "json", "const ", "let "]
+    math_keywords = ["proof", "theorem", "axiom", "formal", "invariant", "demuestra", "axiomatiza", "bft"]
+    
+    if any(k in lower for k in code_keywords):
+        det_score += 0.25
+    if any(k in lower for k in math_keywords):
+        det_score += 0.30
+    if force_degrade:
+        det_score += 0.50
+
+    if det_score >= 0.55 or force_degrade or temperature == 0.0:
+        degraded_target = "anthropic/claude-3.5-sonnet"  # Opus / Sonnet SOTA deterministic anchor
+        return Fable5DegradationAnalysis(
+            is_degraded=True,
+            determinism_score=round(min(1.0, det_score), 2),
+            original_model=requested_model,
+            degraded_model=degraded_target,
+            forced_temperature=0.0,
+            rationale=f"Fable 5 Deterministic Policy Triggered (Score: {round(det_score, 2)}). Degraded from {requested_model} to Opus/Sonnet 3.5 at T=0.0 for zero-jitter verifiable output.",
+        )
+
+    return Fable5DegradationAnalysis(
+        is_degraded=False,
+        determinism_score=round(det_score, 2),
+        original_model=requested_model,
+        degraded_model=requested_model,
+        forced_temperature=temperature,
+        rationale="Standard Fable 5 speculative execution within acceptable entropy bounds.",
+    )
 
 
 DEFAULT_OPENROUTER_MODELS = [
     "auto_sota",
+    "fable-5-mythos",
     "anthropic/claude-3.5-sonnet",
     "deepseek/deepseek-r1",
     "google/gemini-2.5-flash",
@@ -211,6 +268,7 @@ DEFAULT_OPENROUTER_MODELS = [
     "mistralai/mistral-large-2411",
     "qwen/qwen-2.5-coder-32b-instruct",
 ]
+
 
 
 class SOTARouteAnalysis(BaseModel):
@@ -304,9 +362,16 @@ def generate_openrouter(req: OpenRouterInferenceRequest) -> dict[str, Any]:
             "fallback_model": route_analysis.fallback_model,
         }
 
+    # Evaluate Fable 5 Deterministic Degradation Policy
+    fable5_eval = evaluate_fable5_deterministic_degradation(
+        req.prompt, selected_model, req.temperature, force_degrade=req.fable5_deterministic_mode
+    )
+    final_model = fable5_eval.degraded_model if fable5_eval.is_degraded else selected_model
+    final_temp = fable5_eval.forced_temperature if fable5_eval.is_degraded else req.temperature
+
     endpoint = "https://openrouter.ai/api/v1/chat/completions"
     payload = {
-        "model": selected_model,
+        "model": final_model,
         "messages": [
             {
                 "role": "system",
@@ -314,9 +379,10 @@ def generate_openrouter(req: OpenRouterInferenceRequest) -> dict[str, Any]:
             },
             {"role": "user", "content": req.prompt},
         ],
-        "temperature": req.temperature,
+        "temperature": final_temp,
         "max_tokens": req.max_tokens,
     }
+
 
     headers = {
         "Authorization": f"Bearer {api_key.strip()}",
