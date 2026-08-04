@@ -2280,30 +2280,75 @@ async function renderInferencePage(container) {
 
     try {
       if (provider === 'openrouter') {
-        const data = await post('/api/inference/openrouter/generate', {
-          prompt,
-          model,
-          api_key: apiKey,
-          temperature: temp,
-          max_tokens: tokens,
-        });
+        const startTime = performance.now();
+        let fullText = '';
+        let targetModel = model;
 
-        if (outputBody) outputBody.textContent = data.text;
-        if (outputHash) outputHash.textContent = `Model: ${data.model} · SHA256: ${data.sha256.slice(0, 24)}...`;
-        if (speedVal) speedVal.textContent = `${data.tps} tps`;
-        if (latencySub) latencySub.textContent = `${data.latency_ms} ms latency`;
+        try {
+          const streamResp = await fetch('/api/inference/openrouter/stream', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              prompt,
+              model,
+              api_key: apiKey,
+              temperature: temp,
+              max_tokens: tokens,
+            }),
+          });
 
-        if (data.sota_route && routeCard && routeBody) {
-          routeCard.style.display = 'block';
-          routeBody.innerHTML = `
-            <div style="display:flex;gap:12px;margin-bottom:6px;align-items:center">
-              <span style="font-weight:bold;color:var(--gold)">Auto SOTA Route: ${escapeHtml(data.sota_route.category)}</span>
-              <span style="color:var(--dust-dim)">Target Model: <b style="color:var(--lapis)">${escapeHtml(data.sota_route.target_model)}</b></span>
-            </div>
-            <div>${escapeHtml(data.sota_route.rationale)}</div>
-          `;
+          if (streamResp.ok && streamResp.body) {
+            const reader = streamResp.body.getReader();
+            const decoder = new TextDecoder();
+            if (outputBody) outputBody.textContent = '';
+
+            while (true) {
+              const { value, done } = await reader.read();
+              if (done) break;
+              const chunk = decoder.decode(value, { stream: true });
+              const lines = chunk.split('\n');
+
+              for (const line of lines) {
+                if (line.startsWith('data: ')) {
+                  try {
+                    const parsed = JSON.parse(line.slice(6));
+                    if (parsed.token) {
+                      fullText += parsed.token;
+                      if (outputBody) outputBody.textContent = fullText;
+                    }
+                    if (parsed.model) targetModel = parsed.model;
+                  } catch (e) {}
+                }
+              }
+            }
+
+            const latencyMs = Math.round(performance.now() - startTime);
+            const tokenCount = Math.max(1, fullText.split(/\s+/).length) * 1.33;
+            const tps = Math.round((tokenCount / (latencyMs / 1000.0)) * 100) / 100;
+
+            if (outputHash) outputHash.textContent = `Model: ${targetModel} · Streaming SSE · TPS: ${tps}`;
+            if (speedVal) speedVal.textContent = `${tps} tps`;
+            if (latencySub) latencySub.textContent = `${latencyMs} ms latency`;
+          } else {
+            throw new Error(streamResp.statusText);
+          }
+        } catch (errStream) {
+          // Fallback to synchronous endpoint
+          const data = await post('/api/inference/openrouter/generate', {
+            prompt,
+            model,
+            api_key: apiKey,
+            temperature: temp,
+            max_tokens: tokens,
+          });
+
+          if (outputBody) outputBody.textContent = data.text;
+          if (outputHash) outputHash.textContent = `Model: ${data.model} · SHA256: ${data.sha256.slice(0, 24)}...`;
+          if (speedVal) speedVal.textContent = `${data.tps} tps`;
+          if (latencySub) latencySub.textContent = `${data.latency_ms} ms latency`;
         }
       } else if (provider === 'mamba' || model === 'native-mamba') {
+
         const data = await post('/api/inference/local/mamba/generate', {
           prompt,
           max_tokens: Math.min(tokens, 100),

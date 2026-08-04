@@ -444,3 +444,75 @@ def compare_openrouter_models(req: CompareRequest) -> dict[str, Any]:
     }
 
 
+from fastapi.responses import StreamingResponse
+
+
+@openrouter_router.post("/stream")
+def stream_openrouter(req: OpenRouterInferenceRequest):
+    """Stream native inference tokens from OpenRouter via Server-Sent Events (SSE)."""
+    import os
+
+    api_key = req.api_key or os.environ.get("OPENROUTER_API_KEY")
+    if not api_key:
+        raise HTTPException(
+            status_code=401,
+            detail="OpenRouter API Key missing. Please provide key in request or set OPENROUTER_API_KEY environment variable.",
+        )
+
+    selected_model = req.model
+    if req.model.lower() in ("auto_sota", "auto", "sota"):
+        route_analysis = classify_prompt_and_select_sota_model(req.prompt)
+        selected_model = route_analysis.target_model
+
+    endpoint = "https://openrouter.ai/api/v1/chat/completions"
+    payload = {
+        "model": selected_model,
+        "messages": [
+            {
+                "role": "system",
+                "content": "You are MOSKV-1 APEX operating over OpenRouter native cloud socket. Provide high-density, rigorous technical outputs.",
+            },
+            {"role": "user", "content": req.prompt},
+        ],
+        "temperature": req.temperature,
+        "max_tokens": req.max_tokens,
+        "stream": True,
+    }
+
+    headers = {
+        "Authorization": f"Bearer {api_key.strip()}",
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://babylon60.dev",
+        "X-Title": "BABYLON-60 IDE",
+    }
+
+    def sse_generator():
+        try:
+            req_obj = urllib.request.Request(
+                endpoint,
+                data=json.dumps(payload).encode("utf-8"),
+                headers=headers,
+                method="POST",
+            )
+            with urllib.request.urlopen(req_obj, timeout=60.0) as resp:
+                for line in resp:
+                    decoded = line.decode("utf-8").strip()
+                    if decoded.startswith("data: "):
+                        raw_data = decoded[6:]
+                        if raw_data == "[DONE]":
+                            yield f"data: {json.dumps({'done': True, 'model': selected_model})}\n\n"
+                            break
+                        try:
+                            chunk_json = json.loads(raw_data)
+                            delta = chunk_json["choices"][0]["delta"].get("content", "")
+                            if delta:
+                                yield f"data: {json.dumps({'token': delta, 'model': selected_model})}\n\n"
+                        except (json.JSONDecodeError, KeyError, IndexError):
+                            continue
+        except Exception as err:
+            yield f"data: {json.dumps({'error': str(err)})}\n\n"
+
+    return StreamingResponse(sse_generator(), media_type="text/event-stream")
+
+
+
