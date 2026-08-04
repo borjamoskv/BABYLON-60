@@ -1915,21 +1915,23 @@ async function runLedgerSearch(q) {
 async function renderInferencePage(container) {
   onRouteEnter('inference');
   setFocusHeader({
-    breadcrumb: setBreadcrumb('BABYLON·60', 'Local Inference — SOVEREIGN SILICON'),
+    breadcrumb: setBreadcrumb('BABYLON·60', 'Inference — SOTA HYBRID ROUTER & SILICON'),
     actions: `<button class="btn" id="btn-infer-refresh" style="font-size:0.62rem">↺ Refresh Status</button>`,
   });
+
+  const savedOpenRouterKey = localStorage.getItem('babylon_openrouter_key') || '';
 
   container.innerHTML = `
     <div class="stats-grid" style="margin-bottom:14px">
       <div class="stat-card">
-        <div class="stat-label">Local Daemon Status</div>
+        <div class="stat-label">Inference Engine Status</div>
         <div class="stat-value break" id="infer-status-val">Probing...</div>
-        <div class="stat-sub" id="infer-status-sub">Checking loopback...</div>
+        <div class="stat-sub" id="infer-status-sub">Checking endpoints...</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Model Provider</div>
-        <div class="stat-value lapis" style="font-size:0.8rem">LOCAL SILICON</div>
-        <div class="stat-sub">Zero-Network Confined</div>
+        <div class="stat-label">Active Provider</div>
+        <div class="stat-value lapis" id="infer-provider-badge" style="font-size:0.8rem">OPENROUTER NATIVE</div>
+        <div class="stat-sub" id="infer-provider-sub">SOTA Intelligent Routing</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Last Generation Metrics</div>
@@ -1939,39 +1941,70 @@ async function renderInferencePage(container) {
     </div>
 
     <div class="card slide-in" style="margin-bottom:14px">
-      <div class="card-title" style="margin-bottom:8px">Local Generation Parameters</div>
+      <div class="card-title" style="margin-bottom:12px;display:flex;justify-content:space-between;align-items:center">
+        <span>Inference Parameters & SOTA Router</span>
+        <span class="badge" style="font-size:0.56rem;color:var(--gold);border:1px solid var(--gold);padding:2px 6px;border-radius:3px">SOTA INTELLIGENT ROUTER V4</span>
+      </div>
       
       <div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap">
-        <div style="flex:1;min-width:200px">
-          <label style="font-size:0.58rem;color:var(--dust-dim);display:block;margin-bottom:4px">Target Model</label>
-          <select class="select" id="infer-model-select" style="width:100%">
-            <option value="qwen2.5-coder:32b">qwen2.5-coder:32b (Ollama/MLX default)</option>
-            <option value="native-mamba">Native Mamba SSM (Integrated GraphLedger)</option>
+        <div style="width:220px">
+          <label style="font-size:0.58rem;color:var(--dust-dim);display:block;margin-bottom:4px">Provider Engine</label>
+          <select class="select" id="infer-provider-select" style="width:100%">
+            <option value="openrouter" selected>OPENROUTER (Native Cloud SOTA)</option>
+            <option value="local">LOCAL SILICON (Ollama / MLX)</option>
+            <option value="mamba">NATIVE MAMBA SSM (GraphLedger)</option>
           </select>
         </div>
-        <div style="width:120px">
+
+        <div style="flex:1;min-width:220px">
+          <label style="font-size:0.58rem;color:var(--dust-dim);display:block;margin-bottom:4px">Target Model</label>
+          <select class="select" id="infer-model-select" style="width:100%">
+            <option value="auto_sota" selected>🎯 AUTO_SOTA (Intelligent Prompt Classifier)</option>
+            <option value="anthropic/claude-3.5-sonnet">Claude 3.5 Sonnet (Coding / Logic SOTA)</option>
+            <option value="deepseek/deepseek-r1">DeepSeek R1 (Deep Chain-of-Thought)</option>
+            <option value="google/gemini-2.5-flash">Gemini 2.5 Flash (Ultra-Low Latency)</option>
+            <option value="meta-llama/llama-3.3-70b-instruct">Llama 3.3 70B Instruct</option>
+            <option value="openai/gpt-4o-mini">GPT-4o Mini</option>
+            <option value="qwen/qwen-2.5-coder-32b-instruct">Qwen 2.5 Coder 32B</option>
+          </select>
+        </div>
+
+        <div style="width:100px">
           <label style="font-size:0.58rem;color:var(--dust-dim);display:block;margin-bottom:4px">Temperature</label>
           <input class="input" type="number" id="infer-temp-input" value="0.2" min="0.0" max="2.0" step="0.1" style="width:100%">
         </div>
-        <div style="width:120px">
+        <div style="width:100px">
           <label style="font-size:0.58rem;color:var(--dust-dim);display:block;margin-bottom:4px">Max Tokens</label>
           <input class="input" type="number" id="infer-tokens-input" value="1024" min="1" max="8192" style="width:100%">
         </div>
       </div>
 
-      <div class="code-editor" style="margin-bottom:12px">
-        <textarea id="infer-prompt-input" placeholder="Type prompt here... (e.g. Write a brief explanation of BFT consensus in 2 sentences)" spellcheck="false" style="height:120px"></textarea>
+      <div id="openrouter-key-section" style="margin-bottom:12px">
+        <label style="font-size:0.58rem;color:var(--dust-dim);display:block;margin-bottom:4px">OpenRouter API Key</label>
+        <div style="display:flex;gap:8px">
+          <input class="input" type="password" id="openrouter-key-input" placeholder="sk-or-v1-..." value="${escapeHtml(savedOpenRouterKey)}" style="flex:1;font-family:var(--mono)">
+          <button class="btn" id="btn-save-openrouter-key" style="font-size:0.62rem">💾 Save Key</button>
+        </div>
       </div>
 
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <span style="font-size:0.58rem;color:var(--dust-ghost)">Confined to loopback (127.0.0.1 / localhost)</span>
+      <div class="code-editor" style="margin-bottom:12px">
+        <textarea id="infer-prompt-input" placeholder="Type prompt here... (e.g. Write a Rust function for BFT Merkle verification OR derive entropy limits for Landauer bound)" spellcheck="false" style="height:120px"></textarea>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <button class="btn" id="btn-sota-classify" style="font-size:0.62rem">🔍 Pre-Analyze SOTA Route</button>
         <button class="btn btn-primary" id="btn-run-inference">⚡ Generate Output</button>
       </div>
     </div>
 
+    <div id="sota-route-card" class="card fade-in" style="display:none;margin-bottom:14px;border-left:3px solid var(--gold)">
+      <div class="card-title" style="margin-bottom:6px;color:var(--gold)">🎯 SOTA Intelligent Routing Decision</div>
+      <div id="sota-route-body" style="font-size:0.66rem;color:var(--dust)"></div>
+    </div>
+
     <div id="infer-output-card" class="card fade-in" style="display:none;margin-bottom:14px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <div class="card-title">Output Integrity</div>
+        <div class="card-title">Output Integrity & Payload</div>
         <span id="infer-output-hash" style="font-family:var(--mono);font-size:0.58rem;color:var(--gold)"></span>
       </div>
       <pre id="infer-output-body" style="font-family:var(--mono);font-size:0.68rem;background:var(--bitumen);padding:14px;border:1px solid var(--edge);border-radius:2px;white-space:pre-wrap;margin:0;max-height:400px;overflow-y:auto;color:var(--dust)"></pre>
@@ -1983,47 +2016,145 @@ async function renderInferencePage(container) {
     </div>
   `;
 
-  // Bind actions
+  // Bind key save
+  document.getElementById('btn-save-openrouter-key')?.addEventListener('click', () => {
+    const val = document.getElementById('openrouter-key-input')?.value?.trim() || '';
+    localStorage.setItem('babylon_openrouter_key', val);
+    const statusVal = document.getElementById('infer-status-val');
+    if (statusVal) {
+      statusVal.textContent = val ? 'KEY SAVED' : 'KEY CLEARED';
+      statusVal.className = val ? 'stat-value verify' : 'stat-value break';
+    }
+  });
+
+  // Handle provider UI switches
+  const providerSelect = document.getElementById('infer-provider-select');
+  const openrouterKeySection = document.getElementById('openrouter-key-section');
+  const modelSelect = document.getElementById('infer-model-select');
+  const providerBadge = document.getElementById('infer-provider-badge');
+  const providerSub = document.getElementById('infer-provider-sub');
+
+  const onProviderChange = () => {
+    const prov = providerSelect?.value;
+    if (prov === 'openrouter') {
+      if (openrouterKeySection) openrouterKeySection.style.display = 'block';
+      if (providerBadge) providerBadge.textContent = 'OPENROUTER NATIVE';
+      if (providerSub) providerSub.textContent = 'SOTA Intelligent Cloud Routing';
+      if (modelSelect) {
+        modelSelect.innerHTML = `
+          <option value="auto_sota" selected>🎯 AUTO_SOTA (Intelligent Prompt Classifier)</option>
+          <option value="anthropic/claude-3.5-sonnet">Claude 3.5 Sonnet (Coding / Logic SOTA)</option>
+          <option value="deepseek/deepseek-r1">DeepSeek R1 (Deep Chain-of-Thought)</option>
+          <option value="google/gemini-2.5-flash">Gemini 2.5 Flash (Ultra-Low Latency)</option>
+          <option value="meta-llama/llama-3.3-70b-instruct">Llama 3.3 70B Instruct</option>
+          <option value="openai/gpt-4o-mini">GPT-4o Mini</option>
+          <option value="qwen/qwen-2.5-coder-32b-instruct">Qwen 2.5 Coder 32B</option>
+        `;
+      }
+    } else if (prov === 'mamba') {
+      if (openrouterKeySection) openrouterKeySection.style.display = 'none';
+      if (providerBadge) providerBadge.textContent = 'MAMBA SSM';
+      if (providerSub) providerSub.textContent = 'GraphLedger Integrated';
+      if (modelSelect) {
+        modelSelect.innerHTML = `<option value="native-mamba" selected>Native Mamba SSM</option>`;
+      }
+    } else {
+      if (openrouterKeySection) openrouterKeySection.style.display = 'none';
+      if (providerBadge) providerBadge.textContent = 'LOCAL SILICON';
+      if (providerSub) providerSub.textContent = 'Zero-Network Confined';
+      if (modelSelect) {
+        modelSelect.innerHTML = `<option value="qwen2.5-coder:32b" selected>qwen2.5-coder:32b (Ollama/MLX default)</option>`;
+      }
+    }
+  };
+
+  providerSelect?.addEventListener('change', onProviderChange);
+  onProviderChange();
+
+  // Refresh status handler
   const refreshStatus = async () => {
     const statusVal = document.getElementById('infer-status-val');
     const statusSub = document.getElementById('infer-status-sub');
-    const modelSelect = document.getElementById('infer-model-select');
-    if (!statusVal || !statusSub || !modelSelect) return;
+    const prov = providerSelect?.value;
+    if (!statusVal || !statusSub) return;
 
-    try {
-      const data = await get('/api/inference/local/status');
-      if (data.status === 'ONLINE') {
-        statusVal.textContent = 'ONLINE';
-        statusVal.className = 'stat-value verify';
-        statusSub.textContent = `Running at ${data.endpoint}`;
-        
-        // Retain selection, but populate other models
-        const prevVal = modelSelect.value;
-        modelSelect.innerHTML = `<option value="native-mamba" ${prevVal === 'native-mamba' ? 'selected' : ''}>Native Mamba SSM (Integrated GraphLedger)</option>`;
-        (data.models || []).forEach(m => {
-          modelSelect.innerHTML += `<option value="${escapeHtml(m)}" ${prevVal === m ? 'selected' : ''}>${escapeHtml(m)}</option>`;
-        });
-      } else {
-        statusVal.textContent = 'OFFLINE';
+    if (prov === 'openrouter') {
+      const apiKey = document.getElementById('openrouter-key-input')?.value?.trim();
+      try {
+        const data = await get(`/api/inference/openrouter/status?api_key=${encodeURIComponent(apiKey || '')}`);
+        if (data.status === 'ONLINE') {
+          statusVal.textContent = 'ONLINE';
+          statusVal.className = 'stat-value verify';
+          statusSub.textContent = data.message;
+        } else {
+          statusVal.textContent = 'KEY REQUIRED';
+          statusVal.className = 'stat-value break';
+          statusSub.textContent = 'Enter API Key to activate OpenRouter SOTA';
+        }
+      } catch (err) {
+        statusVal.textContent = 'API ERROR';
         statusVal.className = 'stat-value break';
-        statusSub.textContent = `Daemon offline at ${data.endpoint}`;
+        statusSub.textContent = err.message;
       }
-    } catch (err) {
-      statusVal.textContent = 'ERROR';
-      statusVal.className = 'stat-value break';
-      statusSub.textContent = err.message;
+    } else {
+      try {
+        const data = await get('/api/inference/local/status');
+        if (data.status === 'ONLINE') {
+          statusVal.textContent = 'ONLINE';
+          statusVal.className = 'stat-value verify';
+          statusSub.textContent = `Running at ${data.endpoint}`;
+        } else {
+          statusVal.textContent = 'OFFLINE';
+          statusVal.className = 'stat-value break';
+          statusSub.textContent = `Local daemon offline at ${data.endpoint}`;
+        }
+      } catch (err) {
+        statusVal.textContent = 'ERROR';
+        statusVal.className = 'stat-value break';
+        statusSub.textContent = err.message;
+      }
     }
   };
 
   document.getElementById('btn-infer-refresh')?.addEventListener('click', refreshStatus);
   await refreshStatus();
 
-  // Run Inference
+  // SOTA Classify Pre-Analysis Button
+  document.getElementById('btn-sota-classify')?.addEventListener('click', async () => {
+    const prompt = document.getElementById('infer-prompt-input')?.value?.trim();
+    const routeCard = document.getElementById('sota-route-card');
+    const routeBody = document.getElementById('sota-route-body');
+    if (!prompt) return;
+
+    if (routeCard) routeCard.style.display = 'block';
+    if (routeBody) routeBody.textContent = 'Analyzing prompt AST & semantics...';
+
+    try {
+      const data = await post('/api/inference/openrouter/classify', { prompt });
+      if (routeBody) {
+        routeBody.innerHTML = `
+          <div style="display:flex;gap:12px;margin-bottom:6px;align-items:center">
+            <span style="font-weight:bold;color:var(--gold)">Category: ${escapeHtml(data.category)}</span>
+            <span style="color:var(--dust-dim)">Target Model: <b style="color:var(--lapis)">${escapeHtml(data.target_model)}</b></span>
+            <span style="color:var(--dust-ghost)">Confidence: ${(data.confidence * 100).toFixed(0)}%</span>
+          </div>
+          <div>${escapeHtml(data.rationale)}</div>
+          <div style="font-size:0.58rem;color:var(--dust-ghost);margin-top:4px">Fallback: ${escapeHtml(data.fallback_model)}</div>
+        `;
+      }
+    } catch (err) {
+      if (routeBody) routeBody.textContent = `Classifier error: ${err.message}`;
+    }
+  });
+
+  // Run Inference Execution
   document.getElementById('btn-run-inference')?.addEventListener('click', async () => {
     const prompt = document.getElementById('infer-prompt-input')?.value?.trim();
-    const model = document.getElementById('infer-model-select')?.value;
+    const provider = providerSelect?.value;
+    const model = modelSelect?.value;
     const temp = parseFloat(document.getElementById('infer-temp-input')?.value || '0.2');
     const tokens = parseInt(document.getElementById('infer-tokens-input')?.value || '1024');
+    const apiKey = document.getElementById('openrouter-key-input')?.value?.trim();
 
     if (!prompt) return;
 
@@ -2031,6 +2162,8 @@ async function renderInferencePage(container) {
     const outputCard = document.getElementById('infer-output-card');
     const outputBody = document.getElementById('infer-output-body');
     const outputHash = document.getElementById('infer-output-hash');
+    const routeCard = document.getElementById('sota-route-card');
+    const routeBody = document.getElementById('sota-route-body');
     const mambaCard = document.getElementById('mamba-trace-card');
     const mambaBody = document.getElementById('mamba-trace-body');
     const speedVal = document.getElementById('infer-speed-val');
@@ -2042,12 +2175,36 @@ async function renderInferencePage(container) {
     if (mambaCard) mambaCard.style.display = 'none';
 
     try {
-      if (model === 'native-mamba') {
+      if (provider === 'openrouter') {
+        const data = await post('/api/inference/openrouter/generate', {
+          prompt,
+          model,
+          api_key: apiKey,
+          temperature: temp,
+          max_tokens: tokens,
+        });
+
+        if (outputBody) outputBody.textContent = data.text;
+        if (outputHash) outputHash.textContent = `Model: ${data.model} · SHA256: ${data.sha256.slice(0, 24)}...`;
+        if (speedVal) speedVal.textContent = `${data.tps} tps`;
+        if (latencySub) latencySub.textContent = `${data.latency_ms} ms latency`;
+
+        if (data.sota_route && routeCard && routeBody) {
+          routeCard.style.display = 'block';
+          routeBody.innerHTML = `
+            <div style="display:flex;gap:12px;margin-bottom:6px;align-items:center">
+              <span style="font-weight:bold;color:var(--gold)">Auto SOTA Route: ${escapeHtml(data.sota_route.category)}</span>
+              <span style="color:var(--dust-dim)">Target Model: <b style="color:var(--lapis)">${escapeHtml(data.sota_route.target_model)}</b></span>
+            </div>
+            <div>${escapeHtml(data.sota_route.rationale)}</div>
+          `;
+        }
+      } else if (provider === 'mamba' || model === 'native-mamba') {
         const data = await post('/api/inference/local/mamba/generate', {
           prompt,
-          max_tokens: Math.min(tokens, 100) // Mamba SSM generation cap for lightweight demo
+          max_tokens: Math.min(tokens, 100),
         });
-        
+
         if (outputBody) outputBody.textContent = data.text;
         if (outputHash) outputHash.textContent = `Provider: ${data.provider} · Vocab: ${data.vocab_size}`;
         if (speedVal) speedVal.textContent = 'N/A';
@@ -2075,7 +2232,7 @@ async function renderInferencePage(container) {
           prompt,
           model,
           temperature: temp,
-          max_tokens: tokens
+          max_tokens: tokens,
         });
 
         if (outputBody) outputBody.textContent = data.text;
@@ -2090,3 +2247,4 @@ async function renderInferencePage(container) {
     }
   });
 }
+
