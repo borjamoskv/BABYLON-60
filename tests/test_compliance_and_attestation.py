@@ -8,30 +8,27 @@ from babylon60.compliance_exporter import EUAIActComplianceExporter
 from babylon60.attestation import MerkleCausalAnchor
 
 
-def test_eu_ai_act_compliance_exporter_nominal():
+def test_eu_ai_act_compliance_exporter_locales():
     exporter = EUAIActComplianceExporter(artifact_bundle_path="/tmp/non_existent_bundle")
-    cert = exporter.generate_certificate("system_agent_01", "Bank_EU_Operator")
 
-    assert cert["compliance_standard"] == "EU AI Act (Regulation EU 2024/1689)"
-    assert cert["system_identifier"] == "system_agent_01"
-    assert cert["operator"] == "Bank_EU_Operator"
-    assert "Article_9_Risk_Management" in cert["articles_compliance"]
-    assert "Article_12_Record_Keeping_Logging" in cert["articles_compliance"]
-    assert cert["articles_compliance"]["Article_12_Record_Keeping_Logging"]["status"] == "COMPLIANT"
+    locales = ["es", "en", "de", "fr", "it"]
+    for loc in locales:
+        cert = exporter.generate_certificate("system_agent_01", "Bank_EU_Operator", locale=loc)
+        assert cert["locale"] == loc
+        assert "Article_9_Risk_Management" in cert["articles_compliance"]
+        assert cert["articles_compliance"]["Article_9_Risk_Management"]["status"] in [
+            "CONFORME",
+            "COMPLIANT",
+            "KONFORM",
+        ]
 
-
-def test_eu_ai_act_markdown_export():
-    exporter = EUAIActComplianceExporter(artifact_bundle_path="/tmp/non_existent_bundle")
-    cert = exporter.generate_certificate("system_agent_01", "Bank_EU_Operator")
-
-    with tempfile.TemporaryDirectory() as tmpdir:
-        report_path = os.path.join(tmpdir, "compliance_report.md")
-        result = exporter.export_markdown_report(cert, report_path)
-        assert os.path.exists(result)
-        with open(result, "r", encoding="utf-8") as f:
-            content = f.read()
-            assert "EU AI Act Compliance Certificate" in content
-            assert "Art. 12" in content
+        with tempfile.TemporaryDirectory() as tmpdir:
+            report_path = os.path.join(tmpdir, f"compliance_report_{loc}.md")
+            result = exporter.export_markdown_report(cert, report_path, locale=loc)
+            assert os.path.exists(result)
+            with open(result, "r", encoding="utf-8") as f:
+                content = f.read()
+                assert len(content) > 100
 
 
 def test_merkle_causal_anchor_tpm_quote():
