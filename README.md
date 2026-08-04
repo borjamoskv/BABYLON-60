@@ -1,203 +1,187 @@
-# BABYLON-60
+# BABYLON-60 v4.0 (Sovereign Hardened)
 
-**Infraestructura de Capa 0 para Agentes de IA Verificables**
+**Infraestructura de Capa 0 para Agentes de IA Verificables & Cumplimiento Regulatorio del EU AI Act**
 
-![Version](https://img.shields.io/badge/Version-3.0.0-black?style=flat-square)
-![Architecture](https://img.shields.io/badge/Architecture-Causal--Determinist-red?style=flat-square)
-![Governance](https://img.shields.io/badge/Governance-C5--REAL-blue?style=flat-square)
-![License](https://img.shields.io/badge/License-Sovereign_Exclusion-orange?style=flat-square)
-![Lean](https://img.shields.io/badge/Formal_Verification-Lean_4-green?style=flat-square)
+[![Version](https://img.shields.io/badge/Version-4.0.0--Sovereign--Hardened-black?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+[![Security Rating](https://img.shields.io/badge/Security_Rating-A%2B-brightgreen?style=for-the-badge)](./docs/02_ontology/security_threat_model_v4.md)
+[![EU AI Act](https://img.shields.io/badge/EU_AI_Act-Articles_9--14_Compliant-purple?style=for-the-badge)](./docs/04_research/eu_ai_act_compliance_whitepaper.md)
+[![Formal Verification](https://img.shields.io/badge/Lean_4-Verified-green?style=for-the-badge)](./BabylonTrace.lean)
+[![Governance](https://img.shields.io/badge/Governance-C5--REAL-blue?style=for-the-badge)](./SECURITY.md)
+[![License](https://img.shields.io/badge/License-Sovereign_Exclusion_v1.0-orange?style=for-the-badge)](./LICENSE.md)
 
-> *La mayoría de los sistemas de IA pueden generar texto. Pocos pueden justificar su historial.*
-
----
-
-## El Problema
-
-La industria de la IA en 2026 enfrenta tres cuellos de botella estructurales que las APIs comerciales y las Bases de Datos Vectoriales no resuelven:
-
-| Problema | Descripción | Consecuencia |
-| :--- | :--- | :--- |
-| **Context Rot** | Degradación silenciosa del contexto a largo plazo | Alucinaciones recurrentes e irrecuperables |
-| **Bucles de Limerencia** | Agentes atrapados en ciclos infinitos de "pensamiento" | Consumo de exergía computacional sin trabajo útil |
-| **Opacidad de Custodia** | Imposibilidad de auditar *por qué* un agente decidió algo | Inaceptable en medicina, finanzas o ingeniería crítica |
-
-### Por qué las Bases de Datos Vectoriales no son la solución
-
-**La similitud no es linaje.** Un vector puede encontrar texto parecido, pero no puede probar *cuándo* se guardó, *cómo* se derivó, ni garantizar que el historial no haya sido alterado. Sin linaje causal verificable, los agentes sufren de *entropía generativa*: se desvían (*drift*) y dejan rastros de auditoría inútiles.
+> *"La mayoría de los sistemas de IA pueden generar texto. Pocos pueden justificar su historial."*
 
 ---
 
-## La Solución: Substrato C5-REAL
+## ⚡ Demo Ejecutable en Vivo (5 Segundos)
 
-BABYLON-60 no es un wrapper de APIs ni un chatbot. Es una **capa de memoria, verificación y ejecución "local-first" (soberana)** que impone restricciones termodinámicas y criptográficas sobre el razonamiento de los agentes.
+Prueba el kernel en vivo, la sanitización criptográfica, la fallback por caída de red y la generación automática de certificados para la **AESIA (España)**, **BSI (Alemania)** y **Oficina de IA de la UE** ejecutando:
 
-| Pilar | Mecanismo | Resultado |
-| :--- | :--- | :--- |
-| **Matriz de Enrutamiento Termodinámico** | Restricciones de Exergía aplicadas al AST | Erradica el Context Rot y los bucles de limerencia |
-| **Ledger Merkle-Causal (BFT Mesh)** | Registro *tamper-evident* local con extensión BFT P2P | Memoria persistente, auditable e inmutable |
-| **Invariantes Deterministas** | Contratos que alinean la inferencia latente con ejecución causal | Elimina alucinaciones en caminos críticos |
-| **Verificación Formal (Lean 4)** | Teoremas de causalidad y atestación de Oráculo | Pruebas matemáticas de corrección, no promesas |
-| **Congelación Forense WORM** | `CRITICAL HALT` + Sello WORM inmutable ante anomalías | Cero pérdida de historial para auditorías |
-
----
-
-## Fosos Tecnológicos
-
-### Aritmética Sexagesimal Exacta (`F60`)
-
-En coma flotante (`f64`), `1/3` de hora es `0.33333...` — acumula *drift* catastrófico en scheduling de agentes. En `F60`, es exactamente `0;20` (20 minutos), sin pérdida de precisión iterativa.
-
-```
-F60 = { Numerator: u64, Base60_Scale: u8 }
+```bash
+python3 scripts/run_hero_demo.py
 ```
 
-`F60` se aplica estrictamente al **Scheduler, Control de Flujo y Metadatos del Ledger**, manteniendo los tensores de inferencia GPU (`bf16`/`fp8`) a velocidad nativa sin peaje de conversión.
-
-### Congelación Forense WORM (Write Once Read Many)
-
-Las IA actuales, cuando fallan, alucinan silenciosamente o destruyen sus trazas. BABYLON-60 aplica un **Congelamiento Criptográfico Inmutable (WORM Quarantine)**: ante cualquier anomalía o saturación, el motor emite `CRITICAL HALT` y congela el estado en `artifact_bundle_v3/quarantine/` sin purgar una sola línea de evidencia forense.
-
-### Verificación Formal con Lean 4 + Atestación TPM 2.0
-
-No son tests unitarios. Son **teoremas matemáticos** que prueban la causalidad y atestación del sistema, vinculando los hashes de ejecución a un enclave seguro hardware (TPM 2.0 / TEE) para garantía legal frente al EU AI Act (Art. 12).
-
-### Licencia de Exclusión Soberana (Anti-Scraping)
-
-Prohíbe explícitamente la ingestión, vectorización o entrenamiento de LLMs sobre el código fuente, convirtiendo la IP en un activo escaso y protegido legalmente en una era donde las empresas de IA raspan todo GitHub.
-
 ---
 
-## Arquitectura del Motor
+## 🎯 El Problema: Por qué las Bases de Datos Vectoriales no son la Solución
 
-### Corrutinas Asíncronas y Ledger Causal
+En 2026, desplegar agentes de IA en banca, salud o defensa con bases de datos vectoriales (Pinecone, Milvus, Weaviate) crea un **pasivo legal inaceptable**:
 
-La malla computacional no se ejecuta linealmente. Cada celda o subtarea es una corrutina aislada iniciada vía `FORK`. La comunicación se delega al **Event Ledger**: un hilo se suspende (`AWAIT`) hasta que el evento requerido es validado topológicamente.
-
-### Conjunto de Instrucciones (v3.0)
-
-| Opcode | Dominio | Descripción |
+| Lo que hace un Vector DB / Guardrail | Lo que exige un Auditor del EU AI Act | Consecuencia Legal |
 | :--- | :--- | :--- |
-| `ALLOC T R` | Memoria | Reserva registro `R` bajo tipo estricto `T` (`TIME`, `I64`, `F60`). |
-| `NIG R V` | Memoria | Asigna literal sexagesimal `V` al registro `R`. |
-| `BA.EXACT R V` | ALU | División exacta como tupla racional `F60` purificada. |
-| `FORK L` | Control | Clona el frame y despacha una corrutina paralela en Label `L`. |
-| `AFTER R L` | Scheduling | Snapshot → libera hilo OS → reanuda en `L` tras tiempo `R`. |
-| `AWAIT S L` | Causalidad | Emite evento `S`, congela Frame hasta `ACK` topológico, reanuda en `L`. |
-| `EXECUTE S` | Ledger | Disparo idempotente (*Fire-and-Forget*) del evento `S` al Ledger. |
+| Encuentra texto semánticamente parecido | Prueba de fecha/hora de almacenamiento | Rechazado bajo Art. 10 (Gobernanza) |
+| Devuelve los $K$ vecinos más cercanos | Cadena causal: qué datos produjeron esta decisión | Rechazado bajo Art. 9 (Gestión de Riesgos) |
+| Filtra prompts probabilísticamente | Garantía inalterable de que el log no fue manipulado | Multas de hasta **€35M o 7% facturación** (Art. 12) |
+
+**La similitud no es linaje.** Sin linaje causal verificable, los agentes sufren de *entropía generativa*: se desvían (*drift*) y dejan registros inútiles en un tribunal.
 
 ---
 
-## Mercado Objetivo
+## 🛡️ La Solución: Substrato BABYLON-60 v4.0
 
-Sectores donde un error de la IA tiene consecuencias legales o financieras:
+BABYLON-60 es una **capa de gobernanza y ejecución "local-first" en Rust y Lean 4** que encapsula cualquier stack de agentes (LangChain, AutoGen, CrewAI, Ollama) bajo restricciones termodinámicas y criptográficas:
 
-| Segmento | Necesidad | Valor de BABYLON-60 |
+```
+┌─────────────────────────────────────────────────────────────┐
+│    Agentes & Orquestadores (LangChain / AutoGen / CrewAI)   │
+├─────────────────────────────────────────────────────────────┤
+│    LLMs Latentes (OpenAI / Claude / Mamba / Ollama)         │
+├─────────────────────────────────────────────────────────────┤
+│  ██ BABYLON-60 v4.0 SOVEREIGN HARDENED ██                   │
+│  - Scheduler Sexagesimal Exacto F60 (0;20 exact)            │
+│  - Ledger Merkle-Causal DAG (Tamper-Evident)                │
+│  - Cuarentena Forense WORM (Write Once Read Many)           │
+│  - Exporter EU AI Act i18n (AESIA / BSI / CNIL)             │
+├─────────────────────────────────────────────────────────────┤
+│  Enclave Seguro Hardware (TPM 2.0 / TEE / GPU bf16 Native)  │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 💎 Fosos Tecnológicos (Moats)
+
+### 1. Aritmética Sexagesimal Exacta (`F60`)
+En `f64`, $1/3$ de hora es `0.33333...` — acumula *drift* catastrófico. En `F60`, es exactamente `0;20` (20 minutos exactos, cero *drift*). `F60` se aplica al **Scheduler y Ledger**, mientras los tensores GPU corren a velocidad nativa `bf16`.
+
+### 2. Congelación Forense WORM (Write Once Read Many)
+Las IA tradicionales alucinan o purgan logs al fallar. BABYLON-60 aplica un **Congelamiento Criptográfico Inmutable**: ante cualquier anomalía, el motor dispara `CRITICAL HALT` y congela el estado en `artifact_bundle_v3/quarantine/` firmado por hardware TPM 2.0. **Cero destrucción de evidencia.**
+
+### 3. Verificación Formal con Lean 4
+Teoremas matemáticos estáticos (`proof.ir` $\to$ `BabylonTrace.lean`) que demuestran que el kernel es matemáticamente incapaz de violar invariantes causales.
+
+### 4. Certificación Multilingüe Automática (`compliance_exporter`)
+Exportador integrado que genera certificados auditables para las autoridades de supervisión nacionales (AESIA en España, BSI en Alemania, CNIL en Francia, NIST en EE. UU.).
+
+---
+
+## 📚 Matriz Directoria de Documentación
+
+| Dominio | Documento | Descripción |
 | :--- | :--- | :--- |
-| **IA Regulada** (Banca, Seguros, Legal, Salud) | Cumplimiento del EU AI Act — demostrar *por qué* la IA decidió | Audit-ready history con cadena de custodia criptográfica |
-| **Automatización de Larga Duración** | Agentes que operan días/semanas sin "olvidar" ni repetir tareas | Memoria estructurada con gobernanza del ciclo de vida |
-| **Decisión Autónoma Crítica** (Trading, Robótica, Diagnóstico) | El linaje de la decisión es tan importante como el resultado | Ledger BFT inmutable con auto-falsación |
+| **Investigación** | [EU AI Act Compliance Whitepaper](./docs/04_research/eu_ai_act_compliance_whitepaper.md) | Mapeo detallado para los Artículos 9, 10, 11, 12, 13 y 14 del Reglamento UE 2024/1689 |
+| **Investigación** | [Technical Whitepaper v1.0](./docs/WHITEPAPER.md) | Paper formal: F60, Ledger Merkle DAG, Self-Falsification Engine, Proof IR |
+| **Estrategia** | [Pitch Deck v4.0 (11 Slides)](./docs/PITCH_DECK.md) | Presentación ejecutiva B2B y due diligence de inversión Seed ($3M–$5M) |
+| **Estrategia** | [Estrategia de Valoración](./docs/VALUATION_STRATEGY.md) | Análisis de valoración de mercado ($8M – $400M) basado en IP e infraestructura |
+| **Guías** | [Quickstart Enterprise](./docs/03_guides/QUICKSTART_ENTERPRISE.md) | Guía de onboarding DevOps en 5 mins para Docker Compose y Kubernetes/Helm |
+| **Guías** | [Tutorial: Hola Mundo Causal](./docs/03_guides/tutorial_hello_causal.md) | Guía paso a paso contrastando BABYLON-60 vs Python/asyncio |
+| **Guías** | [Guía Auditoría Armónica Tonnetz](./docs/03_guides/tonnetz_audit_guide.md) | Supervisión humana (Art. 14) vía red armónica espacial Neo-Riemanniana |
+| **Seguridad** | [Threat Model & Mitigations v4.0](./docs/02_ontology/security_threat_model_v4.md) | Modelo de amenazas Fase II: Redacción criptográfica, Grace Period y Bounds |
+| **Especificación**| [Especificación Formal v4.0](./SPECIFICATION.md) | Semántica operacional completa, ISA B60, Proof IR, Topology P2P |
+| **GTM & Ventas** | [PoC Spec (7 Días Sombra)](./docs/05_gtm/forensic_quarantine_poc_spec.md) | Especificación de Prueba de Concepto en modo lectura para CISOs |
+| **GTM & Ventas** | [CISO Cold Email Playbook](./docs/05_gtm/ciso_cold_email_playbook.md) | Plantillas de prospección B2B en Español, Inglés y Alemán |
+| **GTM & Ventas** | [Hero Video Script & Show HN](./docs/05_gtm/hero_video_script_and_show_hn.md) | Guión timecode del video demo de 60s y post de lanzamiento Hacker News |
+| **GTM & Ventas** | [VC Data Room Manifest](./docs/05_gtm/vc_data_room_manifest.md) | Índice estructurado de due diligence virtual para fondos Tier-1 |
 
 ---
 
-## Estructura del Monorepo
+## 🗂️ Mapa del Monorepo
 
 ```
 BABYLON-60/
 ├── babylon60.rs              # Kernel Causal-Determinist (bin: b60_kernel)
-├── kernel/                   # Crate Rust: motor de bajo nivel
+├── kernel/                   # Crate Rust: motor de bajo nivel y Cuarentena WORM
+├── attestation/              # Crate Rust: anclaje PCR TPM 2.0 y notariado P2P
 ├── compiler/                 # Crate Rust: compilador B60 → IR + Lean 4 backend
 ├── runtime/                  # Crate Rust: runtime de corrutinas
 ├── proof_ir/                 # Crate Rust: representación intermedia de pruebas
 ├── strike_rs/                # Crate Rust: GIL bypass y extracción de exergía (PyO3)
 ├── fuzz/                     # Crate Rust: fuzzing diferencial
 │
-├── causal_isomorphism/       # Transpilador multi-target (F# parser → Rust/Solidity)
-├── timeline_ir/              # DSL y backend de renderizado de IR temporal
-├── ultrathink/               # Scheduler termodinámico de agentes
+├── babylon60/                # Paquete Python principal (cortex-persist)
+│   ├── compliance_exporter/  # Generador i18n de certificados EU AI Act (ES, EN, DE, FR, IT)
+│   ├── attestation/          # Anclaje Merkle PCR Quote TPM 2.0 y notariado P2P
+│   └── primitives/           # Serialization Boundary F60 → GPU bf16 con checksum SHA-256
 │
-├── babylon60/                # Módulo Python: cortex-persist (BFT ledgers, pipelines)
-├── cortex_*.py               # Motores Python: BPE tokenizer, SSM/Mamba, chaos monad
+├── causal_isomorphism/       # Transpilador F# → Rust/Solidity
+├── timeline_ir/              # Backend de renderizado de IR temporal
 │
-├── web/                      # Interfaz web con rust-core WASM (Vite + React)
-├── tonnetz_app/              # Visualizador espacial armónico (Tonnetz)
-├── babylon60-ide/            # IDE dedicado (Tauri)
-├── extensions/               # Extensiones de navegador (moskv-fx-scavenger)
+├── web/                      # Interfaz web React + WASM
+├── tonnetz_app/              # Visualizador espacial armónico Neo-Riemanniano (Art. 14)
+├── babylon60-ide/            # IDE dedicado en Tauri
 │
-├── *.b60                     # Programas de test en el DSL B60
-├── BabylonTrace.lean         # Teoremas de causalidad en Lean 4
-├── proof/ + proof_kernel/    # Pruebas formales
-├── tests/                    # 35+ suites (replay, fuzz, property, differential)
-├── scripts/                  # 80+ scripts de auditoría y orquestación
+├── hello_causal.b60          # Programa ejecutable de demostración DSL
+├── BabylonTrace.lean         # Teoremas de causalidad verificados en Lean 4
+├── tests/                    # 301 tests automatizados (pytest + cargo test)
+├── scripts/                  # Herramientas CLI (run_hero_demo.py, export_country_compliance.py)
 │
-├── .github/workflows/        # 15 pipelines CI/CD (CodeQL, OIDC, Lean 4, PyPI, secrets)
-├── lefthook.yml              # Pre-commit hooks (detect-secrets shift-left)
-├── Cargo.toml                # Workspace Rust (7 crates)
-├── pyproject.toml            # cortex-persist v1.0.2
-├── SPECIFICATION.md          # Spec formal v3.0.0-Causal-Determinist
-├── LICENSE.md                # Sovereign Exclusion License
+├── docs/                     # Portal completo de documentación y GTM (01-05)
+│   ├── 01_spec/              # ESPECIFICACIÓN Y ARQUITECTURA
+│   ├── 02_ontology/          # ONTOLOGÍA Y MODELO DE AMENAZAS V4
+│   ├── 03_guides/            # TUTORIALES Y QUICKSTART ENTERPRISE
+│   ├── 04_research/          # WHITEPAPERS TÉCNICOS Y NORMATIVOS
+│   ├── 05_gtm/               # PLAYBOOK DE VENTAS, PITCH DECK Y VC DATA ROOM
+│   └── audits/               # MUESTRAS DE CERTIFICADOS DE CUMPLIMIENTO (ES, EN, DE, FR, IT)
+│
+├── Cargo.toml                # Workspace Rust v4.0.0
+├── pyproject.toml            # cortex-persist v4.0.0
+├── SPECIFICATION.md          # Especificación formal v4.0
+├── LICENSE.md                # Sovereign Exclusion License v1.0
 └── SECURITY.md               # Política de seguridad soberana
 ```
 
 ---
 
-## Gobernanza C5-REAL
-
-El repositorio opera bajo **C5-REAL** (Cryptographic Five-Ring Enforcement for Autonomous Ledgers):
-
-- **CI/CD Matrix:** 15 pipelines incluyendo verificación formal Lean 4, CodeQL, auditoría de secretos, tests diferenciales y despliegue OIDC.
-- **Pre-commit Shift-Left:** Hooks de Lefthook con `detect-secrets` para prevenir fugas de credenciales.
-- **Verificación Formal:** Teoremas de causalidad y consenso BFT validados automáticamente en cada push.
-- **Auditoría de Secretos:** Pipeline que escanea el historial completo del repositorio.
-
----
-
-## Quick Start
+## 🛠️ Quick Start
 
 ```bash
-# Rust: replay, fuzz, property, differential
+# 1. Ejecutar Demo Interactiva Hero en Vivo
+python3 scripts/run_hero_demo.py
+
+# 2. Generar Certificado de Cumplimiento para España (AESIA)
+python3 scripts/export_country_compliance.py --locale es --output docs/audits/CERTIFICADO_ES.md
+
+# 3. Ejecutar Suite de Tests (301 Tests)
+uv run pytest tests/ -v
+
+# 4. Compilar Workspace Rust
 cargo test --workspace
 
-# Python: 35+ test suites
-python -m pytest tests/ -v
-
-# Verificación formal
+# 5. Verificación Formal en Lean 4
 lean BabylonTrace.lean
 ```
 
 ---
 
-## Documentación
+## 📜 Licencia
 
-| Documento | Descripción |
-| :--- | :--- |
-| [Whitepaper Técnico](./docs/WHITEPAPER.md) | Paper formal: F60, BFT DAG Ledger, Self-Falsification Engine, EU AI Act alignment |
-| [Tutorial: Hola Mundo Causal](./docs/03_guides/tutorial_hello_causal.md) | Guía paso a paso B60 vs Python — por qué la orquestación probabilística falla |
-| [Especificación Formal v3.0](./SPECIFICATION.md) | Semántica operacional completa, ISA, Proof IR, Export Artifact Schema |
-
----
-
-## Licencia
-
-**Sovereign Exclusion License v1.0** — Dual-Licensing:
+**Sovereign Exclusion License v1.0** — Modelo de Licencia Dual:
 
 | Tier | Acceso | Requisito |
 | :--- | :--- | :--- |
-| **Sovereign** | Individuos, investigadores, uso no comercial | Libre — 100% Open |
-| **Enterprise** | Corporaciones, uso comercial, despliegue en producción | `CORTEX_LICENSE_KEY` criptográfica |
+| **Sovereign** | Individuos, investigadores, uso no comercial | Libre — 100% Open Core |
+| **Enterprise** | Corporaciones, uso comercial, producción | `CORTEX_LICENSE_KEY` criptográfica |
 
-La licencia Enterprise se factura por **Nodo de Ejecución Verificable** o por **Volumen de Eventos Causales Auditados**, no por usuario. Incluye: gobernanza del ciclo de vida, dashboards de auditoría, encriptación avanzada y SLAs garantizados.
-
-Queda prohibido el scraping, ingestión, vectorización o entrenamiento de modelos ML/LLM sobre estos activos sin autorización criptográfica explícita. Ver [LICENSE.md](./LICENSE.md).
+Ver detalles en [LICENSE.md](./LICENSE.md) y [COMMERCIAL_LICENSE.md](./docs/COMMERCIAL_LICENSE.md).
 
 ---
 
-## Seguridad
+## 🔒 Seguridad
 
-Vulnerabilidades: **security@babylon60.com** — No usar Issues públicos.  
+Para reportar vulnerabilidades: **security@babylon60.com** (No usar GitHub Issues públicos).  
 Compromiso de respuesta: confirmación < 24h, remediación < 72h.  
-Ver [SECURITY.md](./SECURITY.md).
+Ver [SECURITY.md](./SECURITY.md) y [Threat Model v4.0](./docs/02_ontology/security_threat_model_v4.md).
 
 ---
 
-<sub>BABYLON-60 v3.0.0 · Infraestructura Formal para Ciencia Verificable · Borja Moskv</sub>
+<sub>BABYLON-60 v4.0.0 Sovereign Hardened · Infraestructura de Capa 0 para Agentes de IA Verificables · Borja Moskv</sub>
