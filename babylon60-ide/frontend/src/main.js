@@ -1981,9 +1981,9 @@ async function renderInferencePage(container) {
       </div>
 
       <div style="margin-bottom:10px;display:flex;align-items:center;gap:8px">
-        <input type="checkbox" id="fable5-degrade-check" style="cursor:pointer">
-        <label for="fable5-degrade-check" style="font-size:0.6rem;color:var(--gold);cursor:pointer">
-          🛡️ <b>Degradación Determinista Fable 5</b> (Forzar degradación a Opus 4.8 / Sonnet 3.5 a T=0.0 si requiere determinismo estricto)
+        <input type="checkbox" id="mythos5-degrade-check" style="cursor:pointer">
+        <label for="mythos5-degrade-check" style="font-size:0.6rem;color:var(--gold);cursor:pointer">
+          🛡️ <b>Degradación Determinista MOSKV-5 MYTHOS</b> (Anclaje a Opus 4.8 / Sonnet 3.5 a T=0.0 ante determinismo estricto)
         </label>
       </div>
 
@@ -2008,10 +2008,11 @@ async function renderInferencePage(container) {
       </div>
     </div>
 
-    <div id="fable5-route-card" class="card fade-in" style="display:none;margin-bottom:14px;border-left:3px solid var(--vermillion)">
-      <div class="card-title" style="margin-bottom:6px;color:var(--vermillion)">🛡️ Fable 5 Deterministic Degradation Policy</div>
-      <div id="fable5-route-body" style="font-size:0.64rem;color:var(--dust)"></div>
+    <div id="mythos5-route-card" class="card fade-in" style="display:none;margin-bottom:14px;border-left:3px solid var(--vermillion)">
+      <div class="card-title" style="margin-bottom:6px;color:var(--vermillion)">🛡️ Política MOSKV-5 MYTHOS — Degradación Determinista</div>
+      <div id="mythos5-route-body" style="font-size:0.64rem;color:var(--dust)"></div>
     </div>
+
 
 
     <div id="sota-compare-card" class="card fade-in" style="display:none;margin-bottom:14px">
@@ -2343,9 +2344,9 @@ async function renderInferencePage(container) {
           }
         } catch (errStream) {
           // Fallback to synchronous endpoint
-          const fable5Check = document.getElementById('fable5-degrade-check')?.checked || false;
-          const fableCard = document.getElementById('fable5-route-card');
-          const fableBody = document.getElementById('fable5-route-body');
+          const mythos5Check = document.getElementById('mythos5-degrade-check')?.checked || false;
+          const mythosCard = document.getElementById('mythos5-route-card');
+          const mythosBody = document.getElementById('mythos5-route-body');
 
           const data = await post('/api/inference/openrouter/generate', {
             prompt,
@@ -2353,7 +2354,7 @@ async function renderInferencePage(container) {
             api_key: apiKey,
             temperature: temp,
             max_tokens: tokens,
-            fable5_deterministic_mode: fable5Check,
+            mythos5_deterministic_mode: mythos5Check,
           });
 
           if (outputBody) outputBody.textContent = data.text;
@@ -2361,15 +2362,16 @@ async function renderInferencePage(container) {
           if (speedVal) speedVal.textContent = `${data.tps} tps`;
           if (latencySub) latencySub.textContent = `${data.latency_ms} ms latencia`;
 
-          if (data.fable5_degradation && data.fable5_degradation.is_degraded && fableCard && fableBody) {
-            fableCard.style.display = 'block';
-            fableBody.innerHTML = `
-              <div style="font-weight:bold;color:var(--gold);margin-bottom:4px">POLÍTICA FABLE 5 DEGRADACIÓN DETERMINISTA (Score: ${data.fable5_degradation.determinism_score})</div>
-              <div>${escapeHtml(data.fable5_degradation.rationale)}</div>
-              <div style="font-size:0.58rem;color:var(--dust-ghost);margin-top:4px">Solicitado: ${escapeHtml(data.fable5_degradation.original_model)} → Modelo Degradado: <b>${escapeHtml(data.fable5_degradation.degraded_model)}</b> (T=${data.fable5_degradation.forced_temperature})</div>
+          if (data.mythos5_degradation && data.mythos5_degradation.is_degraded && mythosCard && mythosBody) {
+            mythosCard.style.display = 'block';
+            mythosBody.innerHTML = `
+              <div style="font-weight:bold;color:var(--gold);margin-bottom:4px">POLÍTICA MOSKV-5 MYTHOS DEGRADACIÓN DETERMINISTA (Score: ${data.mythos5_degradation.determinism_score})</div>
+              <div>${escapeHtml(data.mythos5_degradation.rationale)}</div>
+              <div style="font-size:0.58rem;color:var(--dust-ghost);margin-top:4px">Solicitado: ${escapeHtml(data.mythos5_degradation.original_model)} → Modelo Degradado: <b>${escapeHtml(data.mythos5_degradation.degraded_model)}</b> (T=${data.mythos5_degradation.forced_temperature})</div>
             `;
           }
         }
+
 
       } else if (provider === 'mamba' || model === 'native-mamba') {
 
