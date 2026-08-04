@@ -38,13 +38,13 @@ Our monetization engine leverages regulatory risk asymmetry:
 
 ---
 
-### IV. THE EXIT STRATEGY
+### IV. THE VISION & ROADMAP
 
 BABYLON-60 is engineered to be the invisible yet indispensable infrastructure of the next decade:
 
-- **Phase 1 (Seed - $3M-$5M):** Validation with Design Partners across European banking and healthcare.
-- **Phase 2 (Series A - $20M+):** Global expansion and standardization of the *Causal Mesh Attestation* protocol.
-- **Phase 3 (Strategic Acquisition - $150M - $300M+):** Acquisition by tech giants in urgent need of securing agent fleets (Palantir, Anthropic, Microsoft, or Defense contractors like Lockheed Martin) who will acquire our IP to integrate it as "Layer 0" of their ecosystems.
+- **Phase 1:** Technical validation and regulatory auditing with Design Partners across European banking and healthcare.
+- **Phase 2:** Global expansion and standardization of the *Causal Mesh Attestation* protocol.
+- **Phase 3:** Native integration of BABYLON-60 as the undisputed "Layer 0" infrastructure for global agentic swarm deployments.
 
 ---
 

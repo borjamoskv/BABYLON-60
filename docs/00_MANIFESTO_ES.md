@@ -36,13 +36,13 @@ Nuestro motor de monetización se basa en la asimetría del riesgo regulatorio:
 
 ---
 
-### IV. LA ESTRATEGIA DE SALIDA (THE EXIT)
+### IV. LA VISIÓN Y EL ROADMAP
 
 BABYLON-60 está diseñado para ser la infraestructura invisible pero indispensable de la próxima década:
 
-- **Fase 1 (Seed - $3M-$5M):** Validación con "Design Partners" en la banca y salud europeas.
-- **Fase 2 (Serie A - $20M+):** Expansión global y estandarización del protocolo de *Causal Mesh Attestation*.
-- **Fase 3 (Adquisición Estratégica - $150M - $300M+):** Ser adquiridos por los gigantes que necesitan desesperadamente asegurar sus flotas de agentes (Palantir, Anthropic, Microsoft, o contratistas de Defensa como Lockheed Martin) que comprarán nuestra IP para integrarla como la "Capa 0" de sus ecosistemas.
+- **Fase 1:** Validación técnica y auditoría regulatoria con "Design Partners" en la banca y salud europeas.
+- **Fase 2:** Expansión global y estandarización del protocolo de *Causal Mesh Attestation*.
+- **Fase 3:** Integración nativa de BABYLON-60 como la indiscutible "Capa 0" de infraestructura para despliegues de enjambres agénticos a nivel mundial.
 
 ---
 
