@@ -167,6 +167,16 @@ lean BabylonTrace.lean
 
 ---
 
+## Documentación
+
+| Documento | Descripción |
+| :--- | :--- |
+| [Whitepaper Técnico](./docs/WHITEPAPER.md) | Paper formal: F60, BFT DAG Ledger, Self-Falsification Engine, EU AI Act alignment |
+| [Tutorial: Hola Mundo Causal](./docs/03_guides/tutorial_hello_causal.md) | Guía paso a paso B60 vs Python — por qué la orquestación probabilística falla |
+| [Especificación Formal v3.0](./SPECIFICATION.md) | Semántica operacional completa, ISA, Proof IR, Export Artifact Schema |
+
+---
+
 ## Licencia
 
 **Sovereign Exclusion License v1.0** — Dual-Licensing:
