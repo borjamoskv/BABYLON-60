@@ -158,7 +158,11 @@ BABYLON-60/
 │
 ├── web/                      # React + WASM web interface
 ├── tonnetz_app/              # Neo-Riemannian harmonic spatial visualizer (Art. 14)
-├── babylon60-ide/            # Dedicated Tauri IDE
+├── babylon60-ide/            # Dedicated Sovereign Tauri v2 IDE (macOS, Windows, Android, iOS, Linux)
+│   ├── backend/              # FastAPI bridge (OpenRouter Native + AUTO_SOTA Classifier + Dual-Model Arena)
+│   ├── frontend/             # Industrial Noir React/Vite UI with SOTA Router & Live Telemetry
+│   ├── src-tauri/            # Multi-Platform Rust IPC kernel with Iceoryx2 zero-copy
+│   └── scripts/              # Cross-platform build pipeline (`build_multiplatform.sh`)
 │
 ├── hello_causal.b60          # DSL demonstration executable program
 ├── BabylonTrace.lean         # Lean 4 verified causality theorems
@@ -197,7 +201,14 @@ uv run pytest tests/ -v
 # 4. Build & Test Rust Workspace
 cargo test --workspace
 
-# 5. Formal Verification in Lean 4
+# 5. BABYLON IDE v0.4.0 (Multi-Platform Desktop & Mobile Installables)
+cd babylon60-ide
+npm run dev           # Launch Development IDE
+npm run build:mac     # Build macOS Universal Binary (.dmg / .app)
+npm run build:win     # Build Windows Installer (.msi / .exe NSIS)
+npm run build:android # Build Android Package (.apk / .aab)
+npm run build:ios     # Build iOS Application (.app / .ipa)
+
 lean BabylonTrace.lean
 ```
 
