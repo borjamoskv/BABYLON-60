@@ -24,7 +24,7 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
-        languages: 'javascript, python, cpp, csharp, go, java, ruby' # Ajustar según el repo
+        languages: 'javascript, python' # Ajustado al repo (F#/Rust requieren extractores custom o no están soportados)
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
