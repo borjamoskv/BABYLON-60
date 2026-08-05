@@ -23,6 +23,13 @@ dependencies = [
     "urllib3>=2.0",
     "requests>=2.30",
     "pip-audit>=2.10.1",
+    "click",
+    "pyaudio",
+    "pynacl",
+    "posthog",
+    "cryptography",
+    "playwright",
+    "numba",
 ]
 
 [dependency-groups]

@@ -126,7 +126,7 @@ class C5LLMRouter:
                 if pool.slots:
                     target_model = model if model.startswith("gemini") else "gemini-1.5-pro"
                     return pool.dispatch_generate_content(prompt, model=target_model)
-            except (RuntimeError, OSError, ValueError) as e:
+            except (RuntimeError, OSError, ValueError, ImportError) as e:
                 errors.append(f"Gemini Pro Multi-Account Pool falló: {e}")
 
         # 4. Cascada a GitHub Models (Developer Free Tier)
