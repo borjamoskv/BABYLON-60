@@ -1,0 +1,39 @@
+# .github/workflows/release_distribution.yml
+name: Release & Global Distribution
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  id-token: write  # Required for OIDC Trusted Publishing to PyPI
+  contents: read
+
+jobs:
+  publish-pypi:
+    name: Publish Python Package to PyPI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python & UV
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install UV
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+      - name: Build Package
+        run: uv build
+      - name: Publish to PyPI (OIDC)
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+  publish-crates:
+    name: Publish Rust Crates to Crates.io
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Cargo Login
+        run: cargo login ${{ secrets.CARGO_REGISTRY_TOKEN }}
+      - name: Publish Workspace (b60_kernel, cortex-persist)
+        run: cargo publish --workspace --allow-dirty

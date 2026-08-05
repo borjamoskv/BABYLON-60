@@ -1,0 +1,45 @@
+DUB
+# ============================================================
+# HELLO CAUSAL WORLD — Tu primer programa BABYLON-60
+# ============================================================
+# Este programa demuestra los 3 pilares del motor:
+# 1. Aritmética exacta F60 (sin drift de coma flotante)
+# 2. Concurrencia causal (FORK + AWAIT, no race conditions)
+# 3. Registro inmutable en el Ledger BFT
+
+# --- PASO 1: ARITMÉTICA EXACTA ---
+# Dividir 1 hora entre 3. En f64: 0.33333... (drift).
+# En F60: exactamente 0;20 = 20 minutos. Cero pérdida.
+ALLOC F60 R0
+ALLOC I64 R1
+NIG R0 [ Y ] UNIT.HOUR
+NIG R1 [ YYY ]
+BA.EXACT R0 R1
+SAR.B60 R0
+
+# --- PASO 2: CONCURRENCIA CAUSAL ---
+# Dos agentes con dependencia explícita.
+# B solo puede ejecutarse DESPUÉS de que A complete.
+FORK AGENT_A
+FORK AGENT_B
+EXECUTE "ORCHESTRATION_STARTED"
+HALT
+
+MUB AGENT_A
+ALLOC TIME R2
+NIG R2 [ Y ] UNIT.SECOND
+AFTER R2 AGENT_A_DONE
+
+MUB AGENT_A_DONE
+EXECUTE "AGENT_A_COMPLETED"
+HALT
+
+MUB AGENT_B
+# AWAIT congela esta corrutina hasta que el Ledger confirme
+# que "AGENT_A_COMPLETED" existe en el DAG.
+# Si el scheduler lo ejecuta antes → CRITICAL HALT.
+AWAIT "AGENT_A_COMPLETED" AGENT_B_PROCEED
+
+MUB AGENT_B_PROCEED
+EXECUTE "AGENT_B_COMPLETED_AFTER_A"
+HALT

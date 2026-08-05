@@ -1,0 +1,53 @@
+# Build Targets & Binaries
+/target
+b60_kernel
+*.egg-info/
+
+# B60 Programs: track canonical, ignore generated
+fuzz_test_*.b60
+test_*.b60
+
+# Environment & Secrets (Crucial Security Invariant)
+.env
+.env.*
+*.pem
+*.key
+*.token
+*.secret
+*.p12
+*.crt
+
+# Virtual Environments & Caches
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Node / Web Build Assets
+node_modules/
+web/node_modules/
+web/dist/
+.wrangler/
+web/.wrangler/
+
+# Temporary Artifacts & System Files
+proof_artifact.json
+.DS_Store
+*.log
+
+# Entropy Purge — Prevent Re-Tracking
+.tmp_yt/
+yt-dlp
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.cortex_thermal_lock
+
+# Added by Antigravity C5-REAL Audit
+.vercel
+
+docs/PITCH_DECK.md
+docs/VALUATION_STRATEGY.md
+docs/05_gtm/

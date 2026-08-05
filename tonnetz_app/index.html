@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TONNETZ - Generador Armónico</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Window Controls Header -->
+        <header class="app-header">
+            <div class="window-controls">
+                <div class="control-dot close"></div>
+                <div class="control-dot minimize"></div>
+                <div class="control-dot maximize"></div>
+            </div>
+            <div class="app-title">TONNETZ</div>
+            <div class="seed-container">
+                <span class="seed-label">SEMILLA</span>
+                <input type="text" class="seed-input" value="BILBAO-60">
+                <button class="icon-button">↻</button>
+            </div>
+            <button class="generate-btn">Generar</button>
+        </header>
+
+        <main class="app-body">
+            <!-- Left Sidebar: Controls -->
+            <aside class="sidebar">
+                <section class="control-section">
+                    <h3>TONALIDAD</h3>
+                    <div class="dropdown">
+                        <select>
+                            <option>A</option>
+                            <option>C</option>
+                            <option>E</option>
+                        </select>
+                    </div>
+                    <div class="segmented-control">
+                        <button class="segment active">Mayor</button>
+                        <button class="segment">Menor</button>
+                    </div>
+                </section>
+
+                <section class="control-section">
+                    <h3>FORMA</h3>
+                    <div class="dropdown">
+                        <select>
+                            <option>techno : A A B A B C B A C</option>
+                            <option>house : A B A C A B</option>
+                        </select>
+                    </div>
+                </section>
+
+                <section class="control-section">
+                    <h3>PARÁMETROS</h3>
+                    
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <label>Compases</label>
+                            <span>32</span>
+                        </div>
+                        <input type="range" min="8" max="128" value="32" class="slider">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <label>Tempo</label>
+                            <span>132 BPM</span>
+                        </div>
+                        <input type="range" min="60" max="200" value="132" class="slider">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <label>Densidad</label>
+                            <span>0.62</span>
+                        </div>
+                        <input type="range" min="0" max="1" step="0.01" value="0.62" class="slider">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <label>Tensión cromática</label>
+                            <span>0.35</span>
+                        </div>
+                        <input type="range" min="0" max="1" step="0.01" value="0.35" class="slider">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <label>Ritmo armónico</label>
+                            <span>0.50 ac/cp</span>
+                        </div>
+                        <input type="range" min="0" max="2" step="0.01" value="0.50" class="slider">
+                    </div>
+                </section>
+
+                <section class="control-section export-section">
+                    <h3>EXPORTAR</h3>
+                    <button class="export-btn">MIDI multipista (.mid)</button>
+                    <button class="export-btn active-export">Mezcla (.wav)</button>
+                    <button class="export-btn">Stems separados (.zip)</button>
+                    
+                    <div class="stats-box">
+                        <div class="stat-row"><span>eventos</span> <span>728</span></div>
+                        <div class="stat-row"><span>huella</span> <span class="mono">C7C2EE68</span></div>
+                        <button class="verify-btn">Verificar reproducibilidad</button>
+                    </div>
+                </section>
+            </aside>
+
+            <!-- Main Content Area -->
+            <div class="main-content">
+                <!-- Tonnetz Grid Visualization -->
+                <div class="panel tonnetz-panel">
+                    <div class="panel-header">
+                        <h3>RETÍCULA TONNETZ</h3>
+                        <span class="panel-meta">GRUPO .P, I, R</span>
+                        <span class="panel-meta right">Am<br><small>origen</small></span>
+                    </div>
+                    <div class="canvas-container" id="tonnetz-container">
+                        <!-- SVG will be injected here via JS -->
+                    </div>
+                </div>
+
+                <div class="bottom-panels">
+                    <!-- Euclidean Rings -->
+                    <div class="panel rings-panel">
+                        <div class="panel-header">
+                            <h3>ANILLOS EUCLIDIANOS</h3>
+                        </div>
+                        <div class="canvas-container">
+                            <canvas id="euclidean-canvas"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Timeline/Arrangement -->
+                    <div class="panel arrangement-panel">
+                        <div class="panel-header">
+                            <h3>ARREGLO</h3>
+                        </div>
+                        <div class="canvas-container">
+                            <canvas id="arrangement-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <button class="play-btn">▶</button>
+            <div class="status-info">compás 7/32 &nbsp;&nbsp; 132 BPM &nbsp;&nbsp; sección I</div>
+            <div class="footer-meta mono">I B P L T H A L P R T A I T I &nbsp;&nbsp;&nbsp; 58.2 s</div>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

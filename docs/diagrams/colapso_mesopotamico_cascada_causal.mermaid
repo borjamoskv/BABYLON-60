@@ -1,0 +1,30 @@
+%% Grafo de acoplamiento (HIPOTETICO) - colapso del sur mesopotamico
+%% Direccion de arista: el fallo de A acelera el de B.
+%% Rojo = driver (variable lenta que fija el reloj). Naranja = amplificador.
+flowchart TD
+    classDef driver fill:#c0392b,stroke:#7b241c,color:#ffffff,font-weight:bold
+    classDef amp fill:#e67e22,stroke:#a04000,color:#ffffff,font-weight:bold
+    classDef norm fill:#2c3e50,stroke:#1a242f,color:#ffffff
+
+    I10["I10 · salinizacion<br/>saddle-node / tipping<br/>DRIVER (variable lenta)"]:::driver
+    I02["I02 · base60 / redundancia<br/>percolacion<br/>AMPLIFICADOR"]:::amp
+    I01["I01 · red hidraulica<br/>percolacion / conductancia"]:::norm
+    I08["I08 · templo / integrador<br/>vaciado de reserva"]:::norm
+    I09["I09 · canon / herencia<br/>estado absorbente"]:::norm
+    I07["I07 · Hammurabi / feedback<br/>Hopf"]:::norm
+    I03["I03 · cuneiforme / codigo<br/>catastrofe de error"]:::norm
+    I05["I05 · omina / prediccion<br/>prior obsoleto"]:::norm
+    I06["I06 · astronomia / ciclos<br/>desincronizacion (Kuramoto)"]:::norm
+
+    I10 -->|rendimiento baja| I08
+    I10 -->|anegamiento / silt| I01
+    I10 -->|monocultivo| I02
+    I02 -->|amplifica fragilidad| I10
+    I01 -->|no llega el recurso| I08
+    I08 -->|hambruna| I09
+    I08 -->|orden desbordado| I07
+    I03 -->|priores corruptos| I05
+    I06 -->|calendario mal fechado| I05
+
+    %% Cascada historica observada: I10 -> I08 -> I02 -> I01 -> I09
+    %% (sur sumerio, 3er milenio a.C. -> desplazamiento del centro al norte)

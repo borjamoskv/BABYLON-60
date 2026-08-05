@@ -1,0 +1,48 @@
+[workspace]
+members = [
+    "kernel",
+    "compiler",
+    "proof_ir",
+    "runtime",
+    "fuzz",
+    "strike_rs",
+    "babylon60-ide/src-tauri",
+]
+resolver = "2"
+
+[package]
+name = "babylon60_root"
+version = "4.0.0"
+edition = "2021"
+license = "LicenseRef-Sovereign-Exclusion"
+description = "Formal Infrastructure and BFT Deterministic Kernel for Verifiable Science (BABYLON-60)"
+repository = "https://github.com/borjamoskv/BABYLON-60"
+readme = "README.md"
+authors = ["BABYLON-60 Contributors"]
+
+[[bin]]
+name = "b60_kernel"
+path = "babylon60.rs"
+
+[[test]]
+name = "replay"
+path = "tests/replay/mod.rs"
+
+[[test]]
+name = "fuzz"
+path = "tests/fuzz/mod.rs"
+
+[[test]]
+name = "property"
+path = "tests/property/mod.rs"
+
+[[test]]
+name = "differential"
+path = "tests/differential/mod.rs"
+
+[dependencies]
+sha2 = "0.10"
+
+[dev-dependencies]
+proptest = "1.0"
+num-bigint = "0.4"

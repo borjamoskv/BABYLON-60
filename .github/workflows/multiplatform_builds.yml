@@ -1,0 +1,95 @@
+name: BABYLON-60 IDE — Multiplatform Release Matrix
+
+on:
+  push:
+    tags:
+      - 'v*'
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-desktop:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: 'macos-latest'
+            args: '--target universal-apple-darwin'
+          - platform: 'windows-latest'
+            args: ''
+          - platform: 'ubuntu-22.04'
+            args: ''
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+
+      - name: Install Linux dependencies (Ubuntu)
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+
+      - name: Build Web Frontend
+        run: |
+          cd babylon60-ide/frontend
+          npm install
+          npm run build
+
+      - name: Build Tauri Desktop Installable
+        uses: tauri-apps/tauri-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          projectPath: ./babylon60-ide
+          tagName: v0.4.0
+          releaseName: 'BABYLON60 IDE v0.4.0 Sovereign Release'
+          releaseBody: 'Installable packages for macOS (.dmg), Windows (.msi / .exe), and Linux (.AppImage).'
+          releaseDraft: false
+          prerelease: false
+          args: ${{ matrix.args }}
+
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Android NDK
+        uses: nvida/setup-android@v3
+
+      - name: Setup Node.js & Rust
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Rust Android Targets
+        run: |
+          rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android
+
+      - name: Build Frontend & Android APK
+        run: |
+          cd babylon60-ide/frontend
+          npm install && npm run build
+          cd ../src-tauri
+          npx @tauri-apps/cli android init || true
+          npx @tauri-apps/cli android build --apk

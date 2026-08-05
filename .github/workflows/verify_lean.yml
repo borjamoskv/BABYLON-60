@@ -1,0 +1,41 @@
+name: Verify Lean Proofs (C5-REAL)
+
+# Verificación mecánica del teorema causal (proof/lean/Babylon.lean).
+# `lake build` type-checkea cada prueba; si alguna no cierra, el job FALLA.
+# Anti-teatro: la corrección del teorema se demuestra en cada push, no se afirma.
+
+on:
+  push:
+    paths:
+      - 'proof/lean/**'
+      - '.github/workflows/verify_lean.yml'
+  pull_request:
+    paths:
+      - 'proof/lean/**'
+      - '.github/workflows/verify_lean.yml'
+
+jobs:
+  verify-lean:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: proof/lean
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache elan + toolchains
+        uses: actions/cache@v4
+        with:
+          path: ~/.elan
+          key: elan-${{ runner.os }}-${{ hashFiles('proof/lean/lean-toolchain') }}
+
+      - name: Install elan (Lean toolchain manager)
+        run: |
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o elan-init.sh
+            sh elan-init.sh -y --default-toolchain none
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Build & verify proofs (fail-fast on unclosed goals)
+        run: lake build

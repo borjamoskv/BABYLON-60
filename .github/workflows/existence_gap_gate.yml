@@ -1,0 +1,75 @@
+name: Existence Gap Gate (pre-SAST)
+
+# Etapa C5-REAL previa al análisis estático.
+# SAST busca patrones en texto; esta etapa busca huecos de existencia:
+# imports que no resuelven ni en el filesystem ni en el registro de paquetes.
+# Un módulo alucinado pasa ruff, pasa mypy (ignore_missing_imports) y pasa
+# CodeQL. Sólo lo detecta contrastar el grafo de dependencias contra la realidad.
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: existence-gap-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  existence-gap:
+    name: Resolución empírica del grafo de imports
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Escanear huecos de existencia
+        id: scan
+        run: |
+          python3 tools/existence_gap.py . \
+            --json existence-gap.json \
+            --fail-on alto \
+            | tee existence-gap.txt
+
+      # El paso anterior corta el job si hay bloqueantes; estos dos siempre corren.
+      - name: Publicar informe
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: existence-gap-report
+          path: |
+            existence-gap.json
+            existence-gap.txt
+          retention-days: 30
+
+      - name: Resumen en el job
+        if: always()
+        run: |
+          {
+            echo '## Auditoría de huecos de existencia'
+            echo
+            echo 'Imports contrastados contra filesystem + manifiesto + PyPI/npm.'
+            echo
+            echo '```'
+            head -c 60000 existence-gap.txt 2>/dev/null || echo 'sin informe'
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  sast:
+    name: SAST (bloqueado por la etapa de existencia)
+    needs: existence-gap
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Grafo de imports verificado. Encadena aquí codeql.yml / semgrep."

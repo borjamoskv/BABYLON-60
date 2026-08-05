@@ -1,0 +1,11 @@
+"engine: rust":
+  - "strike_rs/**/*"
+
+"engine: python":
+  - "**/*.py"
+
+"config: github":
+  - ".github/**/*"
+
+"docs: artifact":
+  - "**/*.md"

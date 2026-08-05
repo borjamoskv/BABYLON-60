@@ -1,0 +1,11 @@
+[package]
+name = "babylon60-proof-ir"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "Intermediate Representation and Proof Obligation Generator for BABYLON-60"
+repository = "https://github.com/borjamoskv/BABYLON-60"
+readme = "../README.md"
+authors = ["BABYLON-60 Contributors"]
+
+[dependencies]

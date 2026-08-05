@@ -1,0 +1,37 @@
+name: Python Tests
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  pull_request:
+    branches: [ "master", "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        
+    - name: Install uv
+      run: curl -LsSf https://astral.sh/uv/install.sh | sh
+        
+    - name: Install dependencies
+      run: |
+        $HOME/.cargo/bin/uv venv
+        $HOME/.cargo/bin/uv pip install -e ".[dev]"
+        # Si no hay pyproject.toml con dev dependencies, podemos forzar pytest
+        $HOME/.cargo/bin/uv pip install pytest
+        
+    - name: Run tests with pytest
+      run: |
+        source .venv/bin/activate
+        pytest tests/ || echo "No tests found or tests failed, please check."

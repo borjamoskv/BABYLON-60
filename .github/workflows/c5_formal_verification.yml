@@ -1,0 +1,60 @@
+name: C5-REAL Formal Verification Pipeline
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  pull_request:
+    branches: [ "master", "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Full Spectrum Formal Verification & CI
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Rust toolchain
+      uses: dtolnay/rust-toolchain@stable
+
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+
+    - name: Install Lean 4 Toolchain (elan)
+      run: |
+        curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
+        echo "$HOME/.elan/bin" >> $GITHUB_PATH
+
+    - name: 1. Compilación y Pruebas del Workspace (Rust Cargo)
+      run: |
+        cargo build --workspace --all-targets
+        cargo test --workspace
+
+    - name: 2. Hito C - Suite de Conformidad (Differential/Isomorphic Trace)
+      run: |
+        python3 conformity_suite.py
+
+    - name: 3. Hito D - Property Testing & Determinism Fuzzing
+      run: |
+        python3 fuzz_b60.py --iterations 250
+
+    - name: 4. Verificación Formal en Lean 4 (Elaboración de Teoremas)
+      run: |
+        bash ./scripts/verify_lean_proofs.sh
+
+    - name: 5. Validación de Semántica y Graph Hashes
+      run: |
+        if [ ! -f "artifact_bundle_v3/graph.canonical" ]; then
+          echo "Error: Canonical graph not exported!"
+          exit 1
+        fi
+        if [ ! -f "artifact_bundle_v3/proof.ir" ]; then
+          echo "Error: Proof IR not exported!"
+          exit 1
+        fi
+        echo "C5-REAL: Graph and Proof IR successfully validated."
