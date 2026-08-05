@@ -35,4 +35,11 @@ contract ApoptosisAnchorTest is Test {
         assertEq(anchor.currentHead(), taint);
         assertEq(anchor.latentSteps(), 0);
     }
+
+    function test_UnauthorizedCallerReverts() public {
+        address unauthorized = address(0xDEAD);
+        vm.prank(unauthorized);
+        vm.expectRevert("UNAUTHORIZED_ANCHOR_CALLER");
+        anchor.logApoptosis("TAINT_ATTACK", "ATTACK_REASON");
+    }
 }

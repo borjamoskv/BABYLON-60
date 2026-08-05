@@ -6,16 +6,23 @@ pragma solidity ^0.8.19;
 contract ApoptosisAnchor {
     string public currentHead;
     uint256 public latentSteps;
+    address public immutable authority;
     
     event MembraneStateCommitted(string prevHead, string newHead, uint256 latentSteps);
     event ApoptosisLogged(string taint, string reason);
     
+    modifier onlyAuthority() {
+        require(msg.sender == authority, "UNAUTHORIZED_ANCHOR_CALLER");
+        _;
+    }
+    
     constructor(string memory genesisHash) {
         currentHead = genesisHash;
         latentSteps = 0;
+        authority = msg.sender;
     }
     
-    function commitState(string calldata inputHash, string calldata outputHash, uint256 steps) external {
+    function commitState(string calldata inputHash, string calldata outputHash, uint256 steps) external onlyAuthority {
         require(keccak256(abi.encodePacked(currentHead)) == keccak256(abi.encodePacked(inputHash)), "BFT_FORK_DETECTED: Input hash does not match current head");
         
         string memory prev = currentHead;
@@ -25,7 +32,7 @@ contract ApoptosisAnchor {
         emit MembraneStateCommitted(prev, currentHead, latentSteps);
     }
     
-    function logApoptosis(string calldata taintLog, string calldata reason) external {
+    function logApoptosis(string calldata taintLog, string calldata reason) external onlyAuthority {
         currentHead = taintLog;
         latentSteps = 0; // Truncation
         emit ApoptosisLogged(taintLog, reason);

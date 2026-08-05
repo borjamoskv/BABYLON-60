@@ -14,7 +14,7 @@ mod tests {
         
         let py_res = Command::new("python3")
             .arg("reference/interpreter.py")
-            .arg("causal_test.b60")
+            .arg("examples/causal_test.b60")
             .output();
             
         let kernel_bin = if std::path::Path::new("target/debug/b60_kernel").exists() {
@@ -23,7 +23,7 @@ mod tests {
             "./b60_kernel"
         };
         let rs_res = Command::new(kernel_bin)
-            .arg("causal_test.b60")
+            .arg("examples/causal_test.b60")
             .output();
             
         use sha2::{Sha256, Digest};

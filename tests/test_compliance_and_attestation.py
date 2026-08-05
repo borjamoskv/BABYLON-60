@@ -9,18 +9,28 @@ from babylon60.attestation import MerkleCausalAnchor
 
 
 def test_eu_ai_act_compliance_exporter_locales():
-    exporter = EUAIActComplianceExporter(artifact_bundle_path="/tmp/non_existent_bundle")
+    import pytest
 
-    locales = ["es", "en", "de", "fr", "it"]
-    for loc in locales:
-        cert = exporter.generate_certificate("system_agent_01", "Bank_EU_Operator", locale=loc)
-        assert cert["locale"] == loc
-        assert "Article_9_Risk_Management" in cert["articles_compliance"]
-        assert cert["articles_compliance"]["Article_9_Risk_Management"]["status"] in [
-            "CONFORME",
-            "COMPLIANT",
-            "KONFORM",
-        ]
+    exporter_fail = EUAIActComplianceExporter(artifact_bundle_path="/tmp/non_existent_bundle_12345")
+    with pytest.raises(FileNotFoundError):
+        exporter_fail.generate_certificate("system_agent_01", "Bank_EU_Operator")
+
+    with tempfile.TemporaryDirectory() as bundle_dir:
+        manifest_path = os.path.join(bundle_dir, "manifest.json")
+        with open(manifest_path, "w", encoding="utf-8") as f:
+            f.write('{"global_hash": "a1b2c3d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890"}')
+
+        exporter = EUAIActComplianceExporter(artifact_bundle_path=bundle_dir)
+        locales = ["es", "en", "de", "fr", "it"]
+        for loc in locales:
+            cert = exporter.generate_certificate("system_agent_01", "Bank_EU_Operator", locale=loc)
+            assert cert["locale"] == loc
+            assert "Article_9_Risk_Management" in cert["articles_compliance"]
+            assert cert["articles_compliance"]["Article_9_Risk_Management"]["status"] in [
+                "CONFORME",
+                "COMPLIANT",
+                "KONFORM",
+            ]
 
         with tempfile.TemporaryDirectory() as tmpdir:
             report_path = os.path.join(tmpdir, f"compliance_report_{loc}.md")

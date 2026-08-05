@@ -73,11 +73,10 @@ class EUAIActComplianceExporter:
                 data = json.load(f)
                 data["_is_quarantine"] = False
         else:
-            data = {
-                "version": "4.0-synthetic",
-                "global_hash": "0000000000000000000000000000000000000000000000000000000000000000",
-                "_is_quarantine": False,
-            }
+            raise FileNotFoundError(
+                f"No valid artifact bundle or manifest found at '{self.bundle_path}'. "
+                "Compliance certificates cannot be generated without an audited evidence bundle."
+            )
         return self.redact_sensitive_data(data)
 
     def generate_certificate(self, system_id: str, operator_name: str, locale: str = "es") -> Dict[str, Any]:
@@ -95,6 +94,11 @@ class EUAIActComplianceExporter:
 
         status_str = t["quarantine_sealed"] if is_quarantined else t["quarantine_nominal"]
 
+        status_pass = t["status_pass"]
+        status_halt = "CRITICAL_HALT_NON_COMPLIANT" if not is_quarantined else "QUARANTINE_NON_COMPLIANT"
+        art9_status = status_pass if not is_quarantined else status_halt
+        art12_status = status_pass if not is_quarantined else status_halt
+
         return {
             "title": t["title"],
             "locale": locale,
@@ -109,31 +113,31 @@ class EUAIActComplianceExporter:
             "articles_compliance": {
                 "Article_9_Risk_Management": {
                     "title": t["article_titles"]["Article_9"],
-                    "status": t["status_pass"],
+                    "status": art9_status,
                     "mechanism": t["mechanisms"]["Article_9"],
                     "evidence_hash": hashlib.sha256(f"ART9:{global_hash}".encode()).hexdigest(),
                 },
                 "Article_10_Data_Governance": {
                     "title": t["article_titles"]["Article_10"],
-                    "status": t["status_pass"],
+                    "status": status_pass,
                     "mechanism": t["mechanisms"]["Article_10"],
                     "evidence_hash": hashlib.sha256(f"ART10:{global_hash}".encode()).hexdigest(),
                 },
                 "Article_11_Technical_Documentation": {
                     "title": t["article_titles"]["Article_11"],
-                    "status": t["status_pass"],
+                    "status": status_pass,
                     "mechanism": t["mechanisms"]["Article_11"],
                     "evidence_hash": hashlib.sha256(f"ART11:{global_hash}".encode()).hexdigest(),
                 },
                 "Article_12_Record_Keeping_Logging": {
                     "title": t["article_titles"]["Article_12"],
-                    "status": t["status_pass"],
+                    "status": art12_status,
                     "mechanism": t["mechanisms"]["Article_12"],
                     "evidence_hash": hashlib.sha256(f"ART12:{global_hash}".encode()).hexdigest(),
                 },
                 "Article_14_Human_Oversight": {
                     "title": t["article_titles"]["Article_14"],
-                    "status": t["status_pass"],
+                    "status": status_pass,
                     "mechanism": t["mechanisms"]["Article_14"],
                     "evidence_hash": hashlib.sha256(f"ART14:{global_hash}".encode()).hexdigest(),
                 },

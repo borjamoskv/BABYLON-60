@@ -35,9 +35,15 @@ class SovereignASTVisitor(ast.NodeVisitor):
 
     def visit_Call(self, node):
         if isinstance(node.func, ast.Name):
-            if node.func.id in ["open", "eval", "exec", "input", "breakpoint", "__import__"]:
+            if node.func.id in ["open", "eval", "exec", "input", "breakpoint", "__import__", "getattr", "setattr", "delattr"]:
                 raise SecurityViolationException(f"Forbidden call: {node.func.id}")
         self.generic_visit(node)
+
+    def visit_Attribute(self, node):
+        if node.attr.startswith("_"):
+            raise SecurityViolationException(f"Forbidden dunder/private attribute access: {node.attr}")
+        self.generic_visit(node)
+
 
 
 def _execute_sync(source_code: str, global_ctx: dict) -> dict:

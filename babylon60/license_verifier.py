@@ -61,6 +61,9 @@ class HybridLicenseVerifier:
         if sig != expected_sig:
             raise LicenseValidationError("License Signature Verification Failed! Key tampered or invalid.")
 
+        if current_node_id and node_id != current_node_id:
+            raise LicenseValidationError(f"License node binding failure! License issued for node '{node_id}', but current node is '{current_node_id}'.")
+
         now = int(time.time())
         if now > expires_at:
             raise LicenseValidationError(f"License Expired at timestamp {expires_at}")

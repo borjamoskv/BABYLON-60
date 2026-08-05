@@ -50,7 +50,16 @@ struct DAGEvent {
 
 impl DAGEvent {
     fn compute_hash(&self) -> String {
-        format!("{:016x}", self.logical_timestamp.0 ^ self.payload.len() as u64)
+        use sha2::{Sha256, Digest};
+        let mut hasher = Sha256::new();
+        hasher.update(self.id.as_bytes());
+        for p in &self.parents {
+            hasher.update(p.as_bytes());
+        }
+        hasher.update(self.logical_timestamp.0.to_be_bytes());
+        hasher.update(self.opcode.as_bytes());
+        hasher.update(self.payload.as_bytes());
+        format!("{:x}", hasher.finalize())
     }
 }
 
