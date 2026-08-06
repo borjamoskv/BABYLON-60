@@ -25,3 +25,9 @@ Exergetic density (brutal and premium aesthetics) does not justify useless frict
 ## 4. Deployment Invariant (Visual Excellence)
 
 It is strictly forbidden for the MOSKV-1 APEX Kernel to propose, compile, or deploy frontend code (React, Vite, Svelte, Vanilla CSS) that fails to inject maximum Aesthetic Exergy and lacks _Activation Bridges_. Failing to empirically dazzle the Operator (_WOW effect_) while frictionlessly guiding their biological hardware equates to a systemic failure. The design MUST be inherently premium, dynamic, and coupled to the laws of C5-REAL asymmetry.
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

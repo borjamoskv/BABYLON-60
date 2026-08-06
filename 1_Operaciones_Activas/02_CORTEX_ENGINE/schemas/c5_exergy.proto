@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 syntax = "proto3";
 
 package c5real;
@@ -20,8 +21,8 @@ service VerifiedKernelGateway {
 message EpochManifest {
   string epoch_id = 1;
   repeated string whitelisted_tools = 2; // Alcance Declarado (Sandbox WASM)
-  double budget_tokens = 3;              // FOCUS 1
-  double budget_usd = 4;                 // FOCUS 2
+  uint64 budget_tokens = 3;              // FOCUS 1
+  uint64 budget_usd_micros = 4;          // FOCUS 2
 }
 
 // El artefacto de transición emitido (Payload no confiable)

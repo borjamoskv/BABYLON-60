@@ -84,7 +84,7 @@ function App() {
   const runWasmHyperEval = () => {
     try {
       const t0 = performance.now();
-      const LIMIT = 1200000; // 1.2 Millones (Escala Exergética)
+      const LIMIT = 120000; // 120k (Escala Exergética)
       const engine = new WasmScoreEngine(LIMIT);
       const results = engine.evaluate_batch(1, LIMIT, 144);
       const t1 = performance.now();
@@ -489,7 +489,7 @@ function App() {
 
               {/* Quick Access Buttons */}
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-                {[1, 2, 7, 42, 127, 1024, 7919, 46368, 120000, 1200000].map(n => (
+                {[1, 2, 7, 42, 127, 1024, 7919, 46368, 120000].map(n => (
                   <button
                     key={n}
                     className="btn btn-outline"
@@ -506,7 +506,7 @@ function App() {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
                   <span className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--accent-primary)' }}>WASM SIMD ENGINE</span>
                   <button className="btn btn-primary" style={{ padding: '0.3rem 0.6rem', fontSize: '0.75rem' }} onClick={runWasmHyperEval}>
-                    ⚡ Detonate 1.2M (Rust)
+                    ⚡ Detonate 120K (Rust)
                   </button>
                 </div>
                 {wasmBenchmark && (
@@ -518,7 +518,7 @@ function App() {
                 )}
                 {!wasmBenchmark && (
                   <div className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                    Eval 1.2M nodes in Native Rust WASM.
+                    Eval 120K nodes in Native Rust WASM.
                   </div>
                 )}
               </div>

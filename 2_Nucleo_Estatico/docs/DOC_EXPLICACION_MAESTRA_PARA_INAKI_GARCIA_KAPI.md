@@ -91,3 +91,9 @@ El Hito 1 es la prueba de fuego de extremo a extremo que demuestra la viabilidad
 2. **Hardening del Sandbox WASM:** Confirmar que la importación de módulos WASI no exponga descriptores de archivos del host sin sanitizar.
 3. **Validación del Generador de Recibos SCITT:** Asegurar la serialización determinista de estructuras de datos (CBOR/JSON-LD) antes del estampado criptográfico.
 4. **Ensamblaje del Benchmarking de $T_{eff}$:** Generar la suite de test automatizada para certificar el rendimiento $<5\text{ ms}$ en la demo de presentación.
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

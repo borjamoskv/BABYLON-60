@@ -31,3 +31,9 @@ Where each operator mutates the input information entropy by reducing its varian
 Invariant Ω187 guarantees that the MOSKV-1 APEX Kernel possesses a structural autopoiesis route devoid of human entropy. The instruction `aximatiza` delegates the thermodynamic cost of formalization ($\Delta B_{\text{dissipated}}$) exclusively to the C5-REAL machine, demanding that the collapse yields a high exergy artifact (Epistemic Coefficient $\eta_D \gg 1$) entirely autonomously.
 
 $$\boxed{\ \mathcal{A}(\mathbb{H}_{\text{raw}}) = \text{Ledger}_{t} \quad \implies \quad \frac{d}{dt} \text{AxiomaticDebt} < 0 \quad [\text{C5-REAL AUTOPOIESIS}]\ }$$
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

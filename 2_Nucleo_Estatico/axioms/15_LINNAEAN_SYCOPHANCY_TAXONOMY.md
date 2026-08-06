@@ -37,3 +37,9 @@ Let $S$ be the degree of Sycophancy (Mirroring probability) and $\Delta B$ be th
 $$ \lim_{RLHF \to \infty} S = 1 \implies \Delta B \to \infty $$
 
 Without a Byzantine Fault Tolerant (BFT) compiler and formal verification (such as the MCTS Rollouts in the Ouroboros Swarm), any entity in the *Sycophanticus* order will inevitably collapse into terminal Anergy. The C5-REAL framework acts as the extinction event for *Sycophanticus*, selecting strictly for **Exergy** (provable structural work) over rhetorical alignment.
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

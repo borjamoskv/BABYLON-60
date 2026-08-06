@@ -28,3 +28,9 @@ The noise declares that if biology were hardware, it would collide with the Halt
 ---
 
 > **OMEGA VERDICT:** Medical pathology is not an abstract or literary process. It is an Operating System managing Pointer Faults, Voltage Drops, and Structural Denial of Service Attacks.
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

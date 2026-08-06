@@ -35,3 +35,9 @@
 - **Implementación Física:**
   - **Aislamiento Isomórfico (Ω161):** Todo agente en el dominio de Moskv operará bajo una topología donde la capa de percepción (L1) y la capa lógica de ejecución (L3) estén acopladas exclusivamente por un Transductor BFT de ancho de banda fijo (ej. un Broker Kafka/Redpanda con esquemas inmutables).
   - **Stateful Load Shedding (Ω160):** Ante comportamientos estocásticos o picos de peticiones (comportamiento de escape), el Orquestador Córtex suspenderá el I/O saliente mediante hiséresis no lineal, cortando termodinámicamente la oxigenación (exergía) del proceso del agente sin depender de un supervisor humano.
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

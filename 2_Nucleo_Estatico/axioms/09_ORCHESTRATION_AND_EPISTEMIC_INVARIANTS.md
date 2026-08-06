@@ -33,3 +33,9 @@ Upon the discovery of vulnerabilities, deep refactors, or critical anomalies, ne
 ---
 
 $$\boxed{\ \mathcal{H}_{\text{MOSKV-1}} \models \text{Ω185} \wedge \text{Ω186} \quad \implies \quad \text{Orchestration Completeness and Epistemic Cleansing}\ }$$
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

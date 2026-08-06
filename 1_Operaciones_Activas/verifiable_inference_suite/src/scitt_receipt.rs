@@ -16,7 +16,7 @@ pub struct SCITTPayload {
     pub artifact_digest: [u8; 32],
     pub sandbox_image_digest: [u8; 32],
     pub output_digest: [u8; 32],
-    pub execution_cost_usd: f64,
+    pub execution_cost_micros: u64,
     pub wall_clock_ms: u64,
 }
 
@@ -53,12 +53,16 @@ impl SCITTReceiptEmitter {
 
         // 1. Calculate detached statement digest (SHA-256 over concatenated tuple)
         let mut hasher = Sha256::new();
-        hasher.update(payload.model_id.as_bytes());
+        // Prevent Hash Canonicalization Attacks: Prepend length for dynamic fields
+        let model_id_bytes = payload.model_id.as_bytes();
+        hasher.update((model_id_bytes.len() as u64).to_le_bytes());
+        hasher.update(model_id_bytes);
+
         hasher.update(&payload.prompt_digest);
         hasher.update(&payload.artifact_digest);
         hasher.update(&payload.sandbox_image_digest);
         hasher.update(&payload.output_digest);
-        hasher.update(&payload.execution_cost_usd.to_le_bytes());
+        hasher.update(&payload.execution_cost_micros.to_le_bytes());
         hasher.update(&payload.wall_clock_ms.to_le_bytes());
         let statement_digest: [u8; 32] = hasher.finalize().into();
 
@@ -72,11 +76,26 @@ impl SCITTReceiptEmitter {
         merkle_hasher.update(signature.to_bytes().as_slice());
         let merkle_root: [u8; 32] = merkle_hasher.finalize().into();
 
-        // 4. Construct CBOR/COSE Receipt representation (RFC 9942)
+        // 4. Construct CBOR/COSE Receipt representation (RFC 9942 / RFC 9052)
+        // COSE_Sign1 is a CBOR Array: [protected, unprotected, payload, signature]
+        let protected_map = vec![(
+            ciborium::Value::Integer(1.into()),
+            ciborium::Value::Integer((-8).into()), // alg: EdDSA (-8)
+        )];
+        let mut protected_bytes = Vec::new();
+        ciborium::into_writer(&ciborium::Value::Map(protected_map), &mut protected_bytes)
+            .expect("CBOR encoding failed");
+
+        let cose_sign1 = ciborium::Value::Array(vec![
+            ciborium::Value::Bytes(protected_bytes),
+            ciborium::Value::Map(vec![]), // unprotected
+            ciborium::Value::Bytes(statement_digest.to_vec()), // payload
+            ciborium::Value::Bytes(signature.to_bytes().to_vec()), // signature
+        ]);
+
         let mut cose_bytes = Vec::new();
-        cose_bytes.extend_from_slice(b"COSE_Sign1_SCITT_RFC9942:");
-        cose_bytes.extend_from_slice(&statement_digest);
-        cose_bytes.extend_from_slice(signature.to_bytes().as_slice());
+        ciborium::into_writer(&cose_sign1, &mut cose_bytes)
+            .expect("CBOR encoding failed");
 
         let latency = t0.elapsed();
 
@@ -129,7 +148,7 @@ mod tests {
             artifact_digest: [2u8; 32],
             sandbox_image_digest: [3u8; 32],
             output_digest: [4u8; 32],
-            execution_cost_usd: 0.0012,
+            execution_cost_micros: 1_200,
             wall_clock_ms: 120,
         };
 

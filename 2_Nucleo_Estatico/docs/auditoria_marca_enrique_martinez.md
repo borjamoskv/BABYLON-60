@@ -148,3 +148,9 @@ El análisis cruzado de la presencia digital de Enrique Martínez Bermejo y los 
 - [Un hombre blanco y heterosexual](https://substack.com/home/post/p-204785962)
 - [La Gran Necrosis Ontológica: Por qué lo llamas simulación cuando quieres decir Ciencia](file:///Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/docs/la_gran_necrosis_ontologica.md)
 - [La Auditoría del Feed: Termodinámica de la Atención en un Mercado de Personalidades Recurrentes](file:///Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/laboratory/primer_experimento_c5/post_auditoria_del_feed.md)
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

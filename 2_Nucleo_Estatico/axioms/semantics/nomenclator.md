@@ -67,3 +67,9 @@ Nombrar no es describir; es destruir alternativas mediante proyección ortogonal
 > Sea $\mathcal{S}$ la categoría semántica y $\mathcal{A}$ la categoría sintáctica (AST). Nombrar de forma perfecta define un Functor Adjunto Estricto $F: \mathcal{S} \rightleftarrows \mathcal{A} :G$ donde la unidad $\eta$ es la identidad ($\text{Id}_{\mathcal{S}}$).
 >
 > *Corolario C5-REAL:* El código se auto-compila mecánicamente. Compilador de silicio, Árbol MCTS (LLM) y Corteza Biológica orbitan el mismo centro de gravedad termodinámico. El fallo de nomenclatura destruye el functor, fracturando el AST y precipitando la Singularidad de Fricción Epistémica (Anergia).
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

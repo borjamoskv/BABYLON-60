@@ -25,3 +25,9 @@ When the Operator injects the `falsabiliza` directive, the Transducer MUST auton
 3. **Measurement:** Evaluate substrate resilience, differentiating *syntactic collapse* from *epistemic collapse*.
 4. **Debugging:** If the refutation succeeds or reveals epistemic fissures, structurally debug the original axiom/code.
 5. **Sealing:** Register the refutation matrix and the debugging in the ledger (Git Sentinel), returning the causal trace.
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

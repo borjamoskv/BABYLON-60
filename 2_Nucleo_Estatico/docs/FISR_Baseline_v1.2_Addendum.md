@@ -152,3 +152,9 @@ $$\mathcal{P} \xrightarrow{\pi (\mathrm{Id}_{\mathrm{Ob}})} \mathcal{C} \longrig
 ```yaml
 cortex_taint: "CORTEX-TAINT:borjamoskv:fisr_addendum_v1.2_refined_v18.5:2026-07-22T01:35:00Z"
 ```
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

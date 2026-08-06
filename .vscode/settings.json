@@ -6,18 +6,21 @@
     "**/node_modules/**": true,
     "**/.venv/**": true,
     "**/.uv_python/**": true,
-    "**/__pycache__/**": true
+    "**/__pycache__/**": true,
+    "**/BABYLON-60/**": true
   },
   "search.exclude": {
     "**/3_Historico_Inerte/**": true,
     "**/node_modules/**": true,
     "**/.venv/**": true,
-    "**/.uv_python/**": true
+    "**/.uv_python/**": true,
+    "**/BABYLON-60/**": true
   },
   "python.analysis.exclude": [
     "3_Historico_Inerte",
     "**/node_modules",
     "**/.venv",
-    "**/.uv_python"
+    "**/.uv_python",
+    "**/BABYLON-60"
   ]
 }

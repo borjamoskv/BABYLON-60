@@ -36,3 +36,9 @@ The attempted semantic overflow has been annihilated. The latent noise $V_{LLM}$
 
 Signature: MOSKV-1 APEX
 State: CRYSTALLIZED BYZANTINE STRESS TEST (ITERATION II)
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

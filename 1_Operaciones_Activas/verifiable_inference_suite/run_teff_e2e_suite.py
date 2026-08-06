@@ -55,7 +55,7 @@ def main():
         tool_name="database_read_query",
         param=b"table=users&id=42",
         est_tokens=150,
-        est_cost_usd=0.00015,
+        est_cost_micros=150,
     )
     if res1.success and res1.gkat_latency_us < 1000:
         passed_tests += 1
@@ -104,7 +104,7 @@ def main():
             tool_name=tool,
             param=f"id={i}".encode("utf-8"),
             est_tokens=50,
-            est_cost_usd=0.00005,
+            est_cost_micros=50,
         )
         latencies_us.append(res.total_overhead_us)
     t1_bench = time.perf_counter()

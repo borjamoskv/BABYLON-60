@@ -1209,3 +1209,9 @@ Invariante: Mapeo ortogonal de 3 dominios de browser automation contra 100 opera
 ### PLW-0300 | CONTEXT_ISOLATION::Cristalizar_Transducción_Proxy
 
 - **Regla**: Al operar en CONTEXT_ISOLATION, cristalizar vectores de transducción proxy vía Playwright Core.
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

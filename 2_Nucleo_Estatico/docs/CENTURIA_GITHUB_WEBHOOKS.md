@@ -4023,3 +4023,9 @@ Invariante: Mapeo ortogonal de 10 dominios de eventos GitHub contra 100 arquetip
 ### CMX-1000 | PACKAGE::Aislar_Ruteo_Multidimensional
 
 - **Regla**: Al recibir webhook de PACKAGE, aislar elementos de ruteo multidimensional.
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

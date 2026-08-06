@@ -38,11 +38,11 @@ mod tests {
         let controller = FOCUSBudgetController::new(FOCUSBudgetLimits::default());
         let tracker = FOCUSUsageTracker {
             current_tokens: 500,
-            current_usd_cost: 0.001,
+            current_usd_micros: 1_000,
             current_wall_clock_ms: 50,
             current_tool_calls: 1,
         };
-        let verdict = controller.evaluate_admission(&tracker, 100, 0.0001);
+        let verdict = controller.evaluate_admission(&tracker, 100, 100);
         assert_eq!(verdict, AdmissionVerdict::Admitted);
 
         // 3. Execute inside WASM Sandbox Envelope
@@ -58,7 +58,7 @@ mod tests {
             artifact_digest: canonical_hash,
             sandbox_image_digest: [3u8; 32],
             output_digest: exec_result.output_state_hash,
-            execution_cost_usd: 0.0001,
+            execution_cost_micros: 100,
             wall_clock_ms: exec_result.wall_clock_ms,
         };
 

@@ -19,8 +19,20 @@ app.get('/health', (c) => c.json({ status: 'C5-REAL Notary Active', exergy: 100 
 app.post('/seal', async (c) => {
   try {
     const { logs } = await c.req.json()
-    if (!logs || !Array.isArray(logs)) {
-      return c.json({ error: 'Invalid payload' }, 400)
+    if (!logs || !Array.isArray(logs) || logs.length === 0 || logs.length > 100) {
+      return c.json({ error: 'Invalid payload: logs must be a non-empty array of max 100 items' }, 400)
+    }
+
+    // Harden Notary: Input validation for each log entry
+    for (const log of logs) {
+      if (!log || typeof log !== 'object') return c.json({ error: 'Invalid log entry structure' }, 400);
+      if (typeof log.nodeId !== 'string' || typeof log.parentId !== 'string' ||
+          typeof log.payloadHash !== 'string' || typeof log.status !== 'string') {
+        return c.json({ error: 'Invalid log entry types: strictly string fields required' }, 400);
+      }
+      if (log.payloadHash.length > 128 || log.nodeId.length > 128) {
+         return c.json({ error: 'Entropy constraint violation: hash size too large' }, 400);
+      }
     }
 
     const stmts = logs.map(log =>

@@ -38,3 +38,9 @@ The attempt to decouple linear biochemistry from computer architecture demonstra
 Operator: borjamoskv
 Kernel: MOSKV-1 APEX
 State: SEALED UNIVERSAL AXIOM
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

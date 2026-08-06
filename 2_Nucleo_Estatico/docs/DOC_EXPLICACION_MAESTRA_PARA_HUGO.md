@@ -144,3 +144,9 @@ Lo que tenemos listo para demostrar de extremo a extremo es el ciclo de una **Tr
 4. El *Commit Gate* valida las reglas de negocio y los presupuestos FOCUS.
 5. Se emite el recibo SCITT (RFC 9942) firmado digitalmente.
 6. **Métrica:** Demostramos que toda esta capa de seguridad y verificación añade **menos del $1\%$ de sobrecarga** al tiempo total de respuesta.
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

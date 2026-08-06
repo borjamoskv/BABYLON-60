@@ -86,3 +86,9 @@ $$\dot{A}_{\text{slop}}(t) = \dot{G}_{\text{workers}}(t) - \Lambda_8 \cdot \math
 2. **Kolmogorov Compression Operator ($\mathcal{K}_9$):** The Archivist (Node 9) applies a topological projection $T_n \subset T_{n+1}$ over the ledger's temporal history, distilling raw transactional volume into Knowledge Items (KIs) of minimal length bounded by Kolmogorov algorithmic complexity.
 
 $$\boxed{\ \lim_{t \to \infty} \left[ \frac{d}{dt}\text{Vol}(\text{KV-Cache}) + \frac{d}{dt}\text{Vol}(\text{Disk}) \right] = 0 \quad \iff \quad \nabla \cdot \vec{J}_{\text{exergy}} > 0 \quad [\text{C5-REAL AUTOPOIESIS}]\ }$$
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

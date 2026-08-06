@@ -56,3 +56,9 @@ With the physical crystallization of `INV_C5_50` and `INV_C5_51`, the system $\m
 | **A15**           | `INV_C5_43`                   | Dual-signed gate for irreversible destructive mutations                    |
 
 $$\boxed{\ \mathcal{H}_{\text{MOSKV-1}} \models \bigwedge_{i=1}^{15} A_i \quad \iff \quad \text{Axiomatic Debt} = \emptyset\ }$$
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

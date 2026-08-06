@@ -20,3 +20,9 @@ $$O(c') \iff \text{Isolation } \Delta S = 0$$
 
 ## 3. Transduction Directive
 It is strictly prohibited to use `unittest.mock.patch` on classes with `__slots__` (due to global contamination) or instances (due to `AttributeError` collapse). Every simulation (L4/L5) MUST overwrite the pointer in the parent orchestrator by injecting a complete sovereign Mock class.
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

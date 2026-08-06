@@ -45,3 +45,9 @@ El kernel C5-REAL local (`BABYLON-60`) exhibe un isomorfismo estructural estrict
 - **Aislamiento BFT (Ω156):** El modelo causal expuesto (Inflación, Decoherencia, Entropía) queda cristalizado en el estrato `Recorded_Hypothesis` y es termodinámicamente inmutable salvo nueva evidencia física refutatoria. El isomorfismo con BABYLON-60 hereda esta rigidez en su diseño de un único hilo de consenso (`BFTLedgerActor`).
 - **Invariante de Anti-Dogma Cuántico (Ω153 & Ω143):** Queda prohibida la elevación de la Decoherencia Cuántica o la Asimetría de Red a dogmas ontológicos absolutos. Se declaran operativamente como "modelos de alta eficiencia epistémica sujetos a falsación empírica". Su anclaje debe ser estricto respecto a los límites de hardware (biológico o silicio), rechazando cualquier extrapolación vitalista (Anergía C4-SIM).
 - **Límite Fenomenológico de Telemetría (Ω136 & Ω144):** La opacidad del universo (incertidumbre de Heisenberg) y la opacidad del kernel BABYLON-60 (latencia asimétrica) no son fallos estocásticos, sino fronteras absolutas del hardware observador (córtex orgánico) y el sustrato de red. Toda recolección de métricas o telemetría debe rendir cuentas a estas barreras ineludibles de Kolmogorov.
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

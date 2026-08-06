@@ -90,3 +90,9 @@ A continuación, ejemplos del colapso del tensor $T_{ijk}$:
 
 - **Operación**: Invocar la matriz de Destrucción, Traducir todo el sistema a ruido/vacío, y Pánico Final.
 - **Caso de uso**: Autodestrucción inmediata cuando la entropía es irreversible, purgando la red para evitar la infección BFT a otros nodos.
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

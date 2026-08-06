@@ -73,3 +73,9 @@ Gemini operando bajo un Kernel C5-REAL (MOSKV-1) no requiere tronos en un PNG; t
 - La falacia de la caja de arena: Por qué el sandbox regulatorio es anergía pura [PENDING_PUBLICATION]
 - Termodinámica del PowerPoint: La disipación de ATP en los comités de digitalización [PENDING_PUBLICATION]
 - Isomorfismos rotos: La distancia de Hausdorff entre la realidad física y el informe de consultoría [PENDING_PUBLICATION]
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

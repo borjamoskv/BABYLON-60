@@ -144,7 +144,8 @@ pub unsafe extern "C" fn prove_and_verify_zk_logup(
     let num_table = u32::from_le_bytes(bytes[cursor..cursor + 4].try_into().unwrap()) as usize;
     cursor += 4;
 
-    if bytes.len() < cursor + num_table * 8 + 4 {
+    const MAX_CAPACITY: usize = 1_000_000;
+    if num_table > MAX_CAPACITY || bytes.len() < cursor + num_table * 8 + 4 {
         return -1;
     }
 
@@ -158,7 +159,7 @@ pub unsafe extern "C" fn prove_and_verify_zk_logup(
     let num_lookups = u32::from_le_bytes(bytes[cursor..cursor + 4].try_into().unwrap()) as usize;
     cursor += 4;
 
-    if bytes.len() < cursor + num_lookups * 8 {
+    if num_lookups > MAX_CAPACITY || bytes.len() < cursor + num_lookups * 8 {
         return -1;
     }
 
@@ -210,7 +211,8 @@ pub unsafe extern "C" fn create_bn254_r1cs_proof(
     let num_witness = u32::from_le_bytes(bytes[cursor..cursor + 4].try_into().unwrap()) as usize;
     cursor += 4;
 
-    if num_witness != num_vars || bytes.len() < cursor + num_witness * 8 {
+    const MAX_CAPACITY: usize = 1_000_000;
+    if num_witness != num_vars || num_witness > MAX_CAPACITY || bytes.len() < cursor + num_witness * 8 {
         return -1;
     }
 
@@ -324,7 +326,7 @@ pub unsafe extern "C" fn run_teff_transition(
     param_ptr: *const u8,
     param_len: usize,
     est_tokens: usize,
-    est_cost_usd: f64,
+    est_cost_micros: u64,
     out_result: *mut teff_result_t,
 ) -> i32 {
     if tool_name_ptr.is_null() || out_result.is_null() {
@@ -360,12 +362,12 @@ pub unsafe extern "C" fn run_teff_transition(
     );
     let tracker = crate::focus_budget::FOCUSUsageTracker {
         current_tokens: 1_000,
-        current_usd_cost: 0.01,
+        current_usd_micros: 10_000,
         current_wall_clock_ms: 100,
         current_tool_calls: 2,
     };
 
-    let verdict = controller.evaluate_admission(&tracker, est_tokens, est_cost_usd);
+    let verdict = controller.evaluate_admission(&tracker, est_tokens, est_cost_micros);
     if verdict != crate::focus_budget::AdmissionVerdict::Admitted {
         return -2; // Budget rejected
     }
@@ -391,7 +393,7 @@ pub unsafe extern "C" fn run_teff_transition(
         artifact_digest: canonical_hash,
         sandbox_image_digest: [2u8; 32],
         output_digest: exec_res.output_state_hash,
-        execution_cost_usd: est_cost_usd,
+        execution_cost_micros: est_cost_micros,
         wall_clock_ms: exec_res.wall_clock_ms,
     };
     let receipt = emitter.generate_receipt(&payload);

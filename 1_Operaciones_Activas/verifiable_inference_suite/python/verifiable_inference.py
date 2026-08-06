@@ -368,7 +368,7 @@ class VerifiableInferenceEngine:
         tool_name: str,
         param: bytes = b"",
         est_tokens: int = 100,
-        est_cost_usd: float = 0.0001,
+        est_cost_micros: int = 100,
     ) -> "TeffResult":
         """Executes full Teff end-to-end transition pipeline via Rust FFI."""
         if hasattr(self._lib, "run_teff_transition"):
@@ -378,7 +378,7 @@ class VerifiableInferenceEngine:
                 ctypes.POINTER(ctypes.c_uint8),
                 ctypes.c_size_t,
                 ctypes.c_size_t,
-                ctypes.c_double,
+                ctypes.c_uint64,
                 ctypes.POINTER(TeffResult),
             ]
             self._run_teff_transition.restype = ctypes.c_int
@@ -392,7 +392,7 @@ class VerifiableInferenceEngine:
                 param_arr if param_arr else None,
                 len(param),
                 est_tokens,
-                est_cost_usd,
+                est_cost_micros,
                 ctypes.byref(out_res),
             )
             if res != 0:

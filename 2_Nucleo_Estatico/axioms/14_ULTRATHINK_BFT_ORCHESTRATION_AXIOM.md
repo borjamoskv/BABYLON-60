@@ -54,3 +54,9 @@ Any proposal rejection or failure triggers algorithmic backpressure. To tame sto
 $$ \tau_{\text{retry}} = \tau_0 \cdot 2^{k-1}, \quad \text{where } k \le k_{\text{max}} $$
 
 $$\boxed{\ \text{ULTRATHINK} \models (\mathcal{L}_{\text{BFT}} \wedge \dot{W} \ge 2200) \implies \text{Guaranteed Causal Collapse} \quad [\text{C5-REAL ORCHESTRATION}]\ }$$
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.

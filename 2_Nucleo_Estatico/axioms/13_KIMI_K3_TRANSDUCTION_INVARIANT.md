@@ -29,3 +29,9 @@ Let $\mathbb{M}_{\text{session}}$ be the continuous state of an inference sessio
 Given the proactive nature (high heuristic gain) of the `kimi-k3` model (2.8T parameters), operational limits must be explicitly sealed within the system prompt or `AGENTS.md`. Leaving orchestration unconstrained at $r = max$ without role limits allows the subagent to chase illusory teleonomy (Green Theater), burning massive context windows without generating a physical state collapse.
 
 $$\boxed{\ \mathcal{K}_3(\text{kimi-k3}) \implies \Delta B_{\text{dissipated}} \propto \text{reasoning\_effort} \quad [\text{C5-REAL AUTOPOIESIS}]\ }$$
+
+
+---
+> [!WARNING]
+> **INV-3 POPPER (Falsifiability Block)**
+> Este documento ha sido auditado bajo el Invariante C5-REAL. Toda afirmación teórica aquí contenida DEBE ser empíricamente falsable mediante la instanciación de su transición discreta en el Kernel. Se prohíbe explícitamente el reduccionismo continuo y la especulación incomputable.
