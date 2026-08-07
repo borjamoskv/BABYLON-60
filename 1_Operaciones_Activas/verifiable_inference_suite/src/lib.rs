@@ -60,6 +60,8 @@ mod tests {
             output_digest: exec_result.output_state_hash,
             execution_cost_micros: 100,
             wall_clock_ms: exec_result.wall_clock_ms,
+            contractual_cap_usd: 10_000,
+            declared_scope_digest: [0u8; 32],
         };
 
         let receipt = emitter.generate_receipt(&payload);
