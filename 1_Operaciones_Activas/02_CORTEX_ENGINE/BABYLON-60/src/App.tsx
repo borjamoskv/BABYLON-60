@@ -57,7 +57,42 @@ function App() {
       latencyMs: 1.62,
       varentropy: 0.009,
     },
-  ]);
+  const [isConnectedToKernel, setIsConnectedToKernel] = useState(false);
+  const [liveTEff, setLiveTEff] = useState(1.84);
+
+  // Live WebSocket Telemetry Connector
+  useEffect(() => {
+    let ws: WebSocket | null = null;
+    try {
+      ws = new WebSocket('ws://127.0.0.1:8765');
+      ws.onopen = () => {
+        setIsConnectedToKernel(true);
+      };
+      ws.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          if (data.type === 'C5_TELEMETRY_FRAME') {
+            if (data.tEffMs) setLiveTEff(data.tEffMs);
+            if (data.slots) setSlots(data.slots);
+            if (data.activeEpochPtr) setActiveEpochPtr(data.activeEpochPtr);
+            if (data.latestReceipt) {
+              setReceipts((prev) => [data.latestReceipt, ...prev.slice(0, 6)]);
+            }
+          }
+        } catch {
+          // Ignore malformed frames
+        }
+      };
+      ws.onerror = () => setIsConnectedToKernel(false);
+      ws.onclose = () => setIsConnectedToKernel(false);
+    } catch {
+      setIsConnectedToKernel(false);
+    }
+
+    return () => {
+      if (ws) ws.close();
+    };
+  }, []);
 
   const toggleSound = () => {
     sound.enabled = !soundEnabled;
@@ -216,7 +251,10 @@ function App() {
             </span>
             <span className="hud-latency">
               <Activity size={14} />
-              <span>T_eff: 1.84 ms</span>
+              <span>T_eff: {liveTEff.toFixed(2)} ms</span>
+            </span>
+            <span className={`hud-tag ${isConnectedToKernel ? 'tag-live-silicon' : ''}`}>
+              <span>{isConnectedToKernel ? '● LIVE SILICON IPC (8765)' : '○ DEMO SIMULATOR'}</span>
             </span>
           </div>
 
