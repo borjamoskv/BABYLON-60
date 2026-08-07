@@ -422,6 +422,7 @@ dependencies = [
  "ciborium",
  "coset",
  "ed25519-dalek",
+ "libc",
  "prost 0.13.5",
  "rand_core 0.6.4",
  "serde",
