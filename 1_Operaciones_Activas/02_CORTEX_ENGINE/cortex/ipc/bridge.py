@@ -27,23 +27,30 @@ class CortexIPCBridge:
     """
     def __init__(self, lib_path: str = None):
         if lib_path is None:
-            # Resolviendo la ruta relativa a 02_CORTEX_ENGINE/cortex-persist/kernel_rs/target/debug
             current_dir = os.path.dirname(os.path.abspath(__file__)) # cortex/ipc
             cortex_dir = os.path.dirname(current_dir)                # cortex
             engine_dir = os.path.dirname(cortex_dir)                 # 02_CORTEX_ENGINE
-            target_debug = os.path.join(engine_dir, "cortex-persist", "kernel_rs", "target", "debug")
+            ops_dir = os.path.dirname(engine_dir)                    # 1_Operaciones_Activas
+            workspace_dir = os.path.dirname(ops_dir)                 # Teorema-Robinson-Moskv
 
+            target_debug_local = os.path.join(engine_dir, "cortex-persist", "kernel_rs", "target", "debug")
+            target_debug_global = os.path.join(workspace_dir, "target", "debug")
+
+            search_paths = [target_debug_local, target_debug_global]
             found = False
-            if os.path.exists(target_debug):
-                for f in os.listdir(target_debug):
-                    if f.startswith("libcortex_kernel") and (f.endswith(".dylib") or f.endswith(".so")):
-                        lib_path = os.path.join(target_debug, f)
-                        found = True
-                        break
+
+            for path in search_paths:
+                if os.path.exists(path):
+                    for f in os.listdir(path):
+                        if f.startswith("libcortex_kernel") and (f.endswith(".dylib") or f.endswith(".so") or f.endswith(".dll")):
+                            lib_path = os.path.join(path, f)
+                            found = True
+                            break
+                if found:
+                    break
 
             if not found:
-                files = os.listdir(target_debug) if os.path.exists(target_debug) else []
-                raise FileNotFoundError(f"[C5-REAL] Kernel BFT no encontrado en {target_debug}. Archivos presentes: {files}")
+                raise FileNotFoundError(f"[C5-REAL] Kernel BFT no encontrado en workspace. Rutas buscadas: {search_paths}")
 
         self.lib = ctypes.CDLL(lib_path)
 
