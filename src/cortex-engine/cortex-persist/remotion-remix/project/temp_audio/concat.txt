@@ -17,3 +17,7 @@ file '/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/src/cortex-
 file '/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/src/cortex-engine/cortex-persist/remotion-remix/project/temp_audio/segment_016.wav'
 file '/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/src/cortex-engine/cortex-persist/remotion-remix/project/temp_audio/segment_017.wav'
 file '/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/src/cortex-engine/cortex-persist/remotion-remix/project/temp_audio/segment_018.wav'
+file '/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/src/cortex-engine/cortex-persist/remotion-remix/project/temp_audio/segment_019.wav'
+file '/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/src/cortex-engine/cortex-persist/remotion-remix/project/temp_audio/segment_020.wav'
+file '/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/src/cortex-engine/cortex-persist/remotion-remix/project/temp_audio/segment_021.wav'
+file '/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/src/cortex-engine/cortex-persist/remotion-remix/project/temp_audio/segment_022.wav'

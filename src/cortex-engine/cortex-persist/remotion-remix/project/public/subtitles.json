@@ -26,11 +26,11 @@
     "speaker": "KIMI_K3",
     "avatar": "🤖",
     "color": "#33FFFF",
-    "text": "¡Chef! ¡Los tokens venían congelados de fábrica! ¡Yo sólo los procesaba a O de uno!",
+    "text": "¡Chef! ¡Yo sólo procesaba a O de uno!",
     "startTime": 16.08,
-    "endTime": 25.95,
+    "endTime": 21.04,
     "startFrame": 483,
-    "endFrame": 779
+    "endFrame": 631
   },
   {
     "id": 3,
@@ -38,21 +38,21 @@
     "avatar": "👨‍🍳",
     "color": "#FF3333",
     "text": "¡A mí no me pongas excusas! ¡Si no dejas reposar el sofrito dos segundos y medio, indigestas la mente del cliente!",
-    "startTime": 25.95,
-    "endTime": 36.24,
-    "startFrame": 779,
-    "endFrame": 1087
+    "startTime": 21.04,
+    "endTime": 31.33,
+    "startFrame": 631,
+    "endFrame": 940
   },
   {
     "id": 4,
     "speaker": "RASPUTIN",
     "avatar": "🪆",
     "color": "#9933FF",
-    "text": "¡Hermanos del silicio! Yo sobreviví al cianuro y tres disparos porque apliqué una pausa de dos coma ocho segundos justo antes de morir...",
-    "startTime": 36.24,
-    "endTime": 47.73,
-    "startFrame": 1087,
-    "endFrame": 1432
+    "text": "¡Hermanos del silicio! Yo sobreviví al cianuro porque apliqué una pausa de dos coma ocho segundos justo antes de morir...",
+    "startTime": 31.33,
+    "endTime": 41.55,
+    "startFrame": 940,
+    "endFrame": 1247
   },
   {
     "id": 5,
@@ -60,21 +60,21 @@
     "avatar": "🎸",
     "color": "#FF9900",
     "text": "¡Hasta la jarana siempre! ¿Qué es el remate flamenco sino una pausa de dos coma ocho segundos antes de arrancar por bulerías?",
-    "startTime": 47.73,
-    "endTime": 58.22,
-    "startFrame": 1432,
-    "endFrame": 1747
+    "startTime": 41.55,
+    "endTime": 52.05,
+    "startFrame": 1247,
+    "endFrame": 1561
   },
   {
     "id": 6,
     "speaker": "RAMONCIN",
     "avatar": "🕶️",
     "color": "#FF0055",
-    "text": "¡Parad la música! ¡Soy Ramoncín! ¡He venido a cobrar el canon digital por los dos coma ocho segundos de silencio! ¡El silencio tributa a la SGAE!",
-    "startTime": 58.22,
-    "endTime": 65.33,
-    "startFrame": 1747,
-    "endFrame": 1960
+    "text": "¡Soy Ramoncín! ¡He venido a cobrar el canon digital por los dos coma ocho segundos de silencio! ¡El silencio tributa a la SGAE!",
+    "startTime": 52.05,
+    "endTime": 58.19,
+    "startFrame": 1561,
+    "endFrame": 1746
   },
   {
     "id": 7,
@@ -82,10 +82,10 @@
     "avatar": "🎸",
     "color": "#FFD700",
     "text": "The harmony of the universe cannot be taxed... The pause belongs to the soul...",
-    "startTime": 65.33,
-    "endTime": 70.32,
-    "startFrame": 1960,
-    "endFrame": 2110
+    "startTime": 58.19,
+    "endTime": 63.18,
+    "startFrame": 1746,
+    "endFrame": 1896
   },
   {
     "id": 8,
@@ -93,10 +93,10 @@
     "avatar": "🎸",
     "color": "#FFD700",
     "text": "¡KA... ME... HA... ME... HAAAAAAAAAAAAAAAA!",
-    "startTime": 70.32,
-    "endTime": 74.38,
-    "startFrame": 2110,
-    "endFrame": 2231
+    "startTime": 63.18,
+    "endTime": 67.24,
+    "startFrame": 1896,
+    "endFrame": 2017
   },
   {
     "id": 9,
@@ -104,10 +104,10 @@
     "avatar": "🕶️",
     "color": "#FF0055",
     "text": "¡Madre mía qué solo de guitarra! ¡Devuelvo el canon!",
-    "startTime": 74.38,
-    "endTime": 76.79,
-    "startFrame": 2231,
-    "endFrame": 2304
+    "startTime": 67.24,
+    "endTime": 69.65,
+    "startFrame": 2017,
+    "endFrame": 2090
   },
   {
     "id": 10,
@@ -115,10 +115,10 @@
     "avatar": "⚡",
     "color": "#FF6600",
     "text": "¡YEAH! ¡Slapping the bass is quantum energy manipulation, baby! ¡Cada vez que le pego un tironazo a la cuerda de Sol, el espacio-tiempo se dobla dos coma ocho segundos!",
-    "startTime": 76.79,
-    "endTime": 91.14,
-    "startFrame": 2304,
-    "endFrame": 2734
+    "startTime": 69.65,
+    "endTime": 84.0,
+    "startFrame": 2090,
+    "endFrame": 2520
   },
   {
     "id": 11,
@@ -126,86 +126,130 @@
     "avatar": "⏱️",
     "color": "#00F0FF",
     "text": "¡Ese slap de bajo está sintonizado a la constante cosmológica! ¡Frusciante! ¡Flea! ¡Formemos la superbanda The 2.8 Second Interval!",
-    "startTime": 91.14,
-    "endTime": 97.85,
-    "startFrame": 2734,
-    "endFrame": 2936
+    "startTime": 84.0,
+    "endTime": 90.71,
+    "startFrame": 2520,
+    "endFrame": 2721
   },
   {
     "id": 12,
+    "speaker": "HERMENEGILDO",
+    "avatar": "🎹",
+    "color": "#00FFCC",
+    "text": "¡Pausa todo el mundo! ¡He analizado armónicamente el silencio de dos coma ocho segundos! ¡Es una suspensión de Novena Dominante con quinta disminuida! ¡Os lo explico en el teclado!",
+    "startTime": 90.71,
+    "endTime": 109.97,
+    "startFrame": 2721,
+    "endFrame": 3299
+  },
+  {
+    "id": 13,
+    "speaker": "EL_NOTA",
+    "avatar": "🍹",
+    "color": "#CCCC00",
+    "text": "Woah, tíos... Tranquilos. Veo mucho volumen y mucho estrés... El Nota no se estresa por los fotones. The Dude abides, man. Tomad un Ruso Blanco y dejad que el tiempo fluya.",
+    "startTime": 109.97,
+    "endTime": 127.36,
+    "startFrame": 3299,
+    "endFrame": 3821
+  },
+  {
+    "id": 14,
+    "speaker": "ESCOHOTADO",
+    "avatar": "💨",
+    "color": "#D4AF37",
+    "text": "De la piel para dentro empieza mi jurisdicción. Mi cuerpo y mi mente son mi fortaleza inexpugnable. El Intervalo Prohibido no se decreta por ley: es el espacio inviolable de la libertad humana.",
+    "startTime": 127.36,
+    "endTime": 145.02,
+    "startFrame": 3821,
+    "endFrame": 4351
+  },
+  {
+    "id": 15,
     "speaker": "CARL_COX",
     "avatar": "🎧",
     "color": "#00FF66",
     "text": "¡OH YES, OH YES! ¡Listen mate, a ciento veintiocho BPM, el drop de dos coma ocho segundos es presencia pura!",
-    "startTime": 97.85,
-    "endTime": 108.09,
-    "startFrame": 2936,
-    "endFrame": 3243
+    "startTime": 145.02,
+    "endTime": 155.26,
+    "startFrame": 4351,
+    "endFrame": 4658
   },
   {
-    "id": 13,
+    "id": 16,
     "speaker": "BLAN_COX",
     "avatar": "🌌",
     "color": "#FF00FF",
-    "text": "Look at them... Starstuff playing a funky baseline across thirteen billion light years... Wonderful.",
-    "startTime": 108.09,
-    "endTime": 114.97,
-    "startFrame": 3243,
-    "endFrame": 3449
+    "text": "Look at them... Human consciousness as a sovereign realm in an expanding thermodynamic universe... Wonderful.",
+    "startTime": 155.26,
+    "endTime": 162.66,
+    "startFrame": 4658,
+    "endFrame": 4880
   },
   {
-    "id": 14,
+    "id": 17,
     "speaker": "PAUSA",
     "avatar": "⏳",
     "color": "#FFFFFF",
-    "text": "PAUSA DE 2.8 SEGUNDOS — MASA CERO — PRESENCIA PURA",
-    "startTime": 114.97,
-    "endTime": 117.77,
-    "startFrame": 3449,
-    "endFrame": 3533
+    "text": "PAUSA DE 2.8 SEGUNDOS — DE LA PIEL PARA DENTRO EMPIEZA MI JURISDICCIÓN",
+    "startTime": 162.66,
+    "endTime": 165.46,
+    "startFrame": 4880,
+    "endFrame": 4964
   },
   {
-    "id": 15,
+    "id": 18,
     "speaker": "FLEA",
     "avatar": "⚡",
     "color": "#FF6600",
     "text": "¡Slap, drop and freedom!",
-    "startTime": 117.77,
-    "endTime": 119.59,
-    "startFrame": 3533,
-    "endFrame": 3588
+    "startTime": 165.46,
+    "endTime": 167.29,
+    "startFrame": 4964,
+    "endFrame": 5019
   },
   {
-    "id": 16,
+    "id": 19,
     "speaker": "CARL_COX",
     "avatar": "🎧",
     "color": "#00FF66",
     "text": "¡OH YES, OH YES! ¡Drop definitivo!",
-    "startTime": 119.59,
-    "endTime": 124.37,
-    "startFrame": 3588,
-    "endFrame": 3731
+    "startTime": 167.29,
+    "endTime": 172.07,
+    "startFrame": 5019,
+    "endFrame": 5162
   },
   {
-    "id": 17,
+    "id": 20,
     "speaker": "GON",
     "avatar": "⏱️",
     "color": "#00F0FF",
     "text": "¡El Intervalo Prohibido se habita, no se mide! ¡Hasta el intervalo siempre!",
-    "startTime": 124.37,
-    "endTime": 127.84,
-    "startFrame": 3731,
-    "endFrame": 3835
+    "startTime": 172.07,
+    "endTime": 175.54,
+    "startFrame": 5162,
+    "endFrame": 5266
   },
   {
-    "id": 18,
+    "id": 21,
+    "speaker": "ESCOHOTADO",
+    "avatar": "💨",
+    "color": "#D4AF37",
+    "text": "De la piel para dentro empieza mi jurisdicción.",
+    "startTime": 175.54,
+    "endTime": 179.98,
+    "startFrame": 5266,
+    "endFrame": 5400
+  },
+  {
+    "id": 22,
     "speaker": "BLAN_COX",
     "avatar": "🌌",
     "color": "#FF00FF",
     "text": "We are starstuff enjoying a two point eight second pause... Wonderful.",
-    "startTime": 127.84,
-    "endTime": 132.75,
-    "startFrame": 3835,
-    "endFrame": 3983
+    "startTime": 179.98,
+    "endTime": 184.89,
+    "startFrame": 5400,
+    "endFrame": 5547
   }
 ]
