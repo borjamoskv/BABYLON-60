@@ -1,5 +1,4 @@
 // C5-REAL EXERGY CERTIFIED
-import React from 'react';
 
 export interface EpochSlot {
   id: number;
@@ -15,7 +14,7 @@ interface Props {
   fallbackEpochPtr: number;
 }
 
-export const RingBufferVisualizer: React.FC<Props> = ({ slots, activeEpochPtr, fallbackEpochPtr }) => {
+export const RingBufferVisualizer = ({ slots, activeEpochPtr, fallbackEpochPtr }: Props) => {
   return (
     <div className="ring-buffer-container">
       <div className="section-title">

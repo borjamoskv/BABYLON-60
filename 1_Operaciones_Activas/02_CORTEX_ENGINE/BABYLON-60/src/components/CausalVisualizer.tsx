@@ -1,5 +1,5 @@
 // C5-REAL EXERGY CERTIFIED
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { sound } from './AudioSynthesizer';
 
 interface Particle {

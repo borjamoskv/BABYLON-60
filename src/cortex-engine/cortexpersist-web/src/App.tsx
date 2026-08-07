@@ -1,5 +1,4 @@
 // C5-REAL EXERGY CERTIFIED
-import React from 'react';
 import './index.css';
 
 function App() {
