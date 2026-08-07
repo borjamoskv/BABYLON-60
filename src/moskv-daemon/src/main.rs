@@ -3,8 +3,6 @@ use crossbeam_channel::unbounded;
 use moskv84_daemon::{Config, MantleMonitor, Tick, Verdict};
 use notify::{RecommendedWatcher, RecursiveMode, Watcher};
 use std::path::Path;
-use std::sync::atomic::{AtomicU32, Ordering};
-use std::sync::Arc;
 use std::time::Duration;
 
 fn main() -> notify::Result<()> {

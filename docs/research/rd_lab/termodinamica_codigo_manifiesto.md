@@ -47,11 +47,11 @@ En este estado, el 99% de la energía del sistema se convierte en *Exergía* pur
 
 ### 2. Anergía de Software: El Humo de los Agentes en 2026
 
-En física, la **Exergía ($E_x$)** es la fracción de energía disponible para realizar trabajo útil antes de alcanzar el equilibrio con el entorno. La **Anergía ($A$)** es el calor disipado, la energía inservible que solo calienta el cosmos.
+En física, la **Exergía (E_x)** es la fracción de energía disponible para realizar trabajo útil antes de alcanzar el equilibrio con el entorno. La **Anergía (A)** es el calor disipado, la energía inservible que solo calienta el cosmos.
 
 En la ingeniería de agentes autónomos, la termodinámica es implacable:
 
-$$E_x = \text{Flujo de Tokens Útiles} - \text{Ruido Semántico} - \text{Fricción de Latencia}$$
+> **Exergía (E_x) = Flujo de Tokens Útiles - Ruido Semántico - Fricción de Latencia**
 
 El 90% del software de agentes en 2026 es anergía pura:
 
@@ -61,7 +61,7 @@ El 90% del software de agentes en 2026 es anergía pura:
 
 Para medir esto de forma innegociable, hemos diseñado el **Exergy Linter (C5-REAL)**. El linter calcula el índice de exergía de un script mediante la evaluación del AST (*Abstract Syntax Tree*):
 
-$$E_x = 1.0 - \left( \frac{\text{Comments}}{\text{TotalLines}} \right) - \left( \frac{\text{AnergyPenalty}}{\text{TotalLines}} \right) + \left( \frac{\text{Guards}}{\text{TotalLines}} \right)$$
+> **E_x = 1.0 - (Comentarios / TotalLines) - (AnergyPenalty / TotalLines) + (Guards / TotalLines)**
 
 **Donde:**
 

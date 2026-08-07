@@ -27,18 +27,24 @@ class CortexIPCBridge:
     """
     def __init__(self, lib_path: str = None):
         if lib_path is None:
-            current_dir = os.path.dirname(os.path.abspath(__file__)) # cortex/ipc
-            cortex_dir = os.path.dirname(current_dir)                # cortex
-            engine_dir = os.path.dirname(cortex_dir)                 # 02_CORTEX_ENGINE
-            ops_dir = os.path.dirname(engine_dir)                    # 1_Operaciones_Activas
-            workspace_dir = os.path.dirname(ops_dir)                 # Teorema-Robinson-Moskv
+            # Búsqueda ascendente determinista hacia la raíz del repositorio (donde reside Cargo.toml o .git)
+            curr = os.path.abspath(__file__)
+            workspace_dir = None
+            for _ in range(6):
+                curr = os.path.dirname(curr)
+                if os.path.exists(os.path.join(curr, "Cargo.toml")) or os.path.exists(os.path.join(curr, ".git")):
+                    workspace_dir = curr
+                    break
 
-            target_debug_local = os.path.join(engine_dir, "cortex-persist", "kernel_rs", "target", "debug")
-            target_debug_global = os.path.join(workspace_dir, "target", "debug")
+            search_paths = []
+            if workspace_dir:
+                search_paths.append(os.path.join(workspace_dir, "target", "debug"))
+                search_paths.append(os.path.join(workspace_dir, "target", "release"))
 
-            search_paths = [target_debug_local, target_debug_global]
+            # Paths de fallback
+            search_paths.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "cortex-persist", "kernel_rs", "target", "debug")))
+
             found = False
-
             for path in search_paths:
                 if os.path.exists(path):
                     for f in os.listdir(path):

@@ -34,7 +34,7 @@ This Agreement establishes the operational, regulatory, and legal framework unde
 
 ## 2. Invariant INV-1: Declared Scope & Deterministic Invariance
 
-1. **Declared Scope ($S$):** The Provider guarantees that any model output evaluated by the C5-REAL Ring-0 Kernel will adhere strictly to the formal grammatical, relational, and business constraints declared in the Master Policy File.
+1. **Declared Scope (S):** The Provider guarantees that any model output evaluated by the C5-REAL Ring-0 Kernel will adhere strictly to the formal grammatical, relational, and business constraints declared in the Master Policy File.
 2. **Deterministic Attestation:** Every state transition passed to the execution environment is signed using an Ed25519 cryptographic receipt compliant with the IETF SCITT standard and recorded in the local tamper-evident ledger.
 3. **Phenomenological Agnosticism:** The Provider makes no claims regarding internal machine cognition. Operational certainty is enforced purely at the boundary layer through algebraic bisimulation and standard-part transfer.
 
@@ -45,7 +45,7 @@ This Agreement establishes the operational, regulatory, and legal framework unde
 1. **Liability Cap:** The Provider's total aggregate liability arising out of or related to this Agreement shall be strictly capped at **100% of the Annual Recurring Revenue (ARR)** paid by the Customer during the preceding twelve (12) months.
 2. **SLA Exemption for Stochastic Halts:**
    - Under Article 15 of the EU AI Act, high-risk systems must prevent anomalous or hallucinatory behavior.
-   - When the Ring-0 Entropy Sentinel detects a statistical variance spike ($\text{Var}(H) > \epsilon$), it executes an immediate **Atomic Fail-Stop (CAS Epistemic Halt)** in $< 1\text{ ms}$.
+   - When the Ring-0 Entropy Sentinel detects a statistical variance spike (Var(H) > ε), it executes an immediate **Atomic Fail-Stop (CAS Epistemic Halt)** in < 1 ms.
    - **Legal Protection:** Such safety-induced halts are classified as *Preventive Regulatory Compliance Events* and are expressly excluded from system downtime calculations under the 99.99% Availability SLA.
 
 ---
@@ -61,10 +61,10 @@ This Agreement establishes the operational, regulatory, and legal framework unde
 
 | Performance Metric | Target SLA | Guaranteed Boundary |
 | :--- | :---: | :---: |
-| **Effective Latency ($T_{eff}$)** | $< 2.0\text{ ms}$ | $< 5.0\text{ ms}$ (Hard Limit) |
-| **Reproducibility Coefficient ($\rho$)** | $100\%$ | $\rho \ge 0.95$ (Bootstrap $N \ge 100$) |
-| **Fail-Stop Quarantine Latency** | $< 100\ \mu\text{s}$ | Sub-millisecond CAS |
-| **Marginal Cloud Cost to Customer** | **$0.00 / Tx** | Local Silicon Bound |
+| **Effective Latency (T_eff)** | < 2.0 ms | < 5.0 ms (Hard Limit) |
+| **Reproducibility Coefficient (ρ)** | 100% | ρ ≥ 0.95 (Bootstrap N ≥ 100) |
+| **Fail-Stop Quarantine Latency** | < 100 µs | Sub-millisecond CAS |
+| **Marginal Cloud Cost to Customer** | **€0.00 / Tx** | Local Silicon Bound |
 
 ---
 

@@ -22,12 +22,12 @@ El repositorio ha sido defragmentado y purgado de toda Anergía estructural. Ope
 ## DEPLOYMENT
 
 ```bash
-# Entorno CORTEX (Python)
-cd 1_Operaciones_Activas/02_CORTEX_ENGINE/cortex
+# Entorno CORTEX Engine
+cd src/cortex-engine
 uv sync
 
 # Entorno BABYLON60 (Frontend)
-cd 1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60
+cd src/babylon-60
 npm install
 ```
 
@@ -35,7 +35,7 @@ npm install
 
 ```bash
 # Iniciar IDE Babylon60
-npm run dev
+cd src/babylon-60 && npm run dev
 
 # Tests CORTEX
 pytest
@@ -48,11 +48,10 @@ ruff check
 
 | Stratum        | Path                                                        | Function                              |
 | :------------- | :---------------------------------------------------------- | :------------------------------------ |
-| Cortex Core    | `1_Operaciones_Activas/02_CORTEX_ENGINE/cortex/`            | BFT Orchestration & Cognitive Engines |
-| Cortex Persist | `1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-persist/`    | Ledger físico y memoria               |
-| UI Frontend    | `1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/`        | Babylon60 IDE (Vite/TS)               |
-| Teoría Estática| `2_Nucleo_Estatico/`                                        | Axiomas, Invariantes y Ontología      |
-| Archivo Inerte | `3_Historico_Inerte/`                                       | Proyectos satélite archivados         |
+| Cortex Core    | `src/cortex-engine/cortex/`                                 | BFT Orchestration & Cognitive Engines |
+| Cortex Persist | `src/cortex-engine/cortex-persist/`                         | Physical Ledger & Persistence Memory  |
+| UI Frontend    | `src/babylon-60/`                                           | Babylon60 IDE (Vite/TS/React)         |
+| Kernel Daemon  | `src/moskv-daemon/`                                         | Ring-0 Bare-Metal Rust Kernel         |
 
 ## 🌌 MONOREPO CARTOGRAPHY · 300 DISPARATE STARS MATRIX
 

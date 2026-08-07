@@ -173,8 +173,8 @@ use std::fmt;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ProvenanceTier {
-    Tier0_GroundTruth,
-    Tier1_Quarantine,
+    Tier0GroundTruth,
+    Tier1Quarantine,
 }
 
 #[derive(Debug, Clone, PartialEq)]
@@ -201,7 +201,7 @@ impl KnowledgeNode {
     pub fn promote_to_tier_0(self) -> Result<KnowledgeNode, EpistemicHalt> {
         if self.anergy_ratio < 0.2 {
             Ok(KnowledgeNode {
-                tier: ProvenanceTier::Tier0_GroundTruth,
+                tier: ProvenanceTier::Tier0GroundTruth,
                 hash: self.hash,
                 anergy_ratio: self.anergy_ratio,
             })

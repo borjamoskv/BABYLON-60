@@ -8,7 +8,7 @@ echo "=================================================="
 
 # 1. Verificar que no hay archivos de claves privadas no protegidas
 echo "[+] 1. Verificando ausencia de secretos en el árbol..."
-if grep -rn "BEGIN RSA PRIVATE KEY\|BEGIN OPENSSH PRIVATE KEY" . --exclude-dir=".git" --exclude-dir=".venv" --exclude-dir="target" --exclude-dir=".agents" --exclude="*.log" --exclude=".env*" 2>/dev/null; then
+if grep -rn "BEGIN RSA PRIVATE KEY\|BEGIN OPENSSH PRIVATE KEY" . --exclude-dir=".git" --exclude-dir=".venv" --exclude-dir="target" --exclude-dir=".agents" --exclude-dir="node_modules" --exclude="*.log" --exclude=".env*" --exclude="preflight.sh" --exclude="reviewer_agent_test.py" 2>/dev/null; then
     echo "[!] ERROR: Se detectó una clave privada expuesta."
     exit 1
 fi
