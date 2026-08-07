@@ -166,6 +166,57 @@ pub struct Tick {
 }
 
 // ---------------------------------------------------------------------------
+// AST: Dual-Tier Provenance Ledger (Generado por Qwen 3.8-Max / Exergía = 1.0)
+// ---------------------------------------------------------------------------
+
+use std::fmt;
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ProvenanceTier {
+    Tier0_GroundTruth,
+    Tier1_Quarantine,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+pub struct EpistemicHalt {
+    pub reason: String,
+}
+
+impl fmt::Display for EpistemicHalt {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "EpistemicHalt: {}", self.reason)
+    }
+}
+
+impl std::error::Error for EpistemicHalt {}
+
+#[derive(Debug, Clone)]
+pub struct KnowledgeNode {
+    pub tier: ProvenanceTier,
+    pub hash: [u8; 32],
+    pub anergy_ratio: f64,
+}
+
+impl KnowledgeNode {
+    pub fn promote_to_tier_0(self) -> Result<KnowledgeNode, EpistemicHalt> {
+        if self.anergy_ratio < 0.2 {
+            Ok(KnowledgeNode {
+                tier: ProvenanceTier::Tier0_GroundTruth,
+                hash: self.hash,
+                anergy_ratio: self.anergy_ratio,
+            })
+        } else {
+            Err(EpistemicHalt {
+                reason: format!(
+                    "Anergy ratio {} exceeds threshold 0.2; promotion denied",
+                    self.anergy_ratio
+                ),
+            })
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
 // El monitor
 // ---------------------------------------------------------------------------
 

@@ -4,6 +4,18 @@ use ciborium::into_writer;
 use sha3::{Sha3_256, Digest};
 use ed25519_dalek::{SigningKey, Signer, Signature};
 use std::collections::BTreeMap;
+use coset::{CoseSign1Builder, HeaderBuilder, CborSerializable};
+
+#[derive(Debug)]
+pub struct EpistemicHalt {
+    pub reason: String,
+}
+
+impl From<String> for EpistemicHalt {
+    fn from(reason: String) -> Self {
+        EpistemicHalt { reason }
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct TransitionRecord {
@@ -116,11 +128,41 @@ impl TransitionRecord {
         Ok(hasher.finalize().to_vec())
     }
 
-    /// Genera la cabecera protegida COSE_Sign1 y firma el payload
-    pub fn sign_scitt(&self, key: &SigningKey) -> Result<Signature, ciborium::ser::Error<std::io::Error>> {
-        let digest = self.compute_leaf_digest()?;
-        // Aquí se ensamblaría el Sig_structure formal de COSE.
-        // Firmamos el leaf_digest para completar el recibo criptográfico.
-        Ok(key.sign(&digest))
+    /// Genera la cabecera protegida COSE_Sign1 y firma el payload (Fail-Stop)
+    pub fn sign_scitt(&self, key: &SigningKey) -> Result<coset::CoseSign1, EpistemicHalt> {
+        // 1. Serialización CBOR determinista del payload (el TransitionRecord)
+        let payload = self.to_cbor_deterministic()
+            .map_err(|e| EpistemicHalt::from(format!("CBOR serialization failed: {}", e)))?;
+
+        // 2. Construcción de headers protegidos (RFC 9052)
+        let protected = HeaderBuilder::new()
+            .alg(coset::iana::Algorithm::EdDSA)
+            .build();
+
+        // 3. Construcción explícita de Sig_structure según RFC 9052 Section 4.4:
+        // Sig_structure = ["Signature1", protected_headers_cbor, external_aad, payload]
+        let sig_structure = coset::sig_structure_data(
+            coset::SignatureContext::CoseSign1,
+            &protected,
+            None,           // No unprotected headers en Sign1
+            b"",            // External AAD vacío (SCITT default)
+            &payload,
+        );
+
+        // 4. Firma Ed25519 sobre la Sig_structure CBOR serializada, NO sobre payload raw
+        let signature = key.sign(&sig_structure);
+
+        let cose_sign1 = CoseSign1Builder::new()
+            .protected(protected)
+            .payload(payload)
+            .signature(signature.to_bytes().to_vec())
+            .build();
+
+        // 5. Validación fail-stop de salida
+        cose_sign1
+            .to_cbor_vec()
+            .map_err(|e| EpistemicHalt::from(format!("COSE Sign1 serialization validation failed: {}", e)))?;
+
+        Ok(cose_sign1)
     }
 }

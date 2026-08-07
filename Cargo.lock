@@ -420,6 +420,7 @@ name = "cortex_kernel"
 version = "0.1.0"
 dependencies = [
  "ciborium",
+ "coset",
  "ed25519-dalek",
  "prost 0.13.5",
  "rand_core 0.6.4",
