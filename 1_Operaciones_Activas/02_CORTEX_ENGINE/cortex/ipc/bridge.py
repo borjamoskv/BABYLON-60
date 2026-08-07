@@ -27,15 +27,23 @@ class CortexIPCBridge:
     """
     def __init__(self, lib_path: str = None):
         if lib_path is None:
-            ext = ".dylib" if platform.system() == "Darwin" else ".so"
             # Resolviendo la ruta relativa a 02_CORTEX_ENGINE/cortex-persist/kernel_rs/target/debug
             current_dir = os.path.dirname(os.path.abspath(__file__)) # cortex/ipc
             cortex_dir = os.path.dirname(current_dir)                # cortex
             engine_dir = os.path.dirname(cortex_dir)                 # 02_CORTEX_ENGINE
-            lib_path = os.path.join(engine_dir, "cortex-persist", "kernel_rs", "target", "debug", f"libcortex_kernel{ext}")
+            target_debug = os.path.join(engine_dir, "cortex-persist", "kernel_rs", "target", "debug")
 
-        if not os.path.exists(lib_path):
-            raise FileNotFoundError(f"[C5-REAL] Kernel BFT no encontrado en: {lib_path}. Ejecuta 'cargo build' primero.")
+            found = False
+            if os.path.exists(target_debug):
+                for f in os.listdir(target_debug):
+                    if f.startswith("libcortex_kernel") and (f.endswith(".dylib") or f.endswith(".so")):
+                        lib_path = os.path.join(target_debug, f)
+                        found = True
+                        break
+
+            if not found:
+                files = os.listdir(target_debug) if os.path.exists(target_debug) else []
+                raise FileNotFoundError(f"[C5-REAL] Kernel BFT no encontrado en {target_debug}. Archivos presentes: {files}")
 
         self.lib = ctypes.CDLL(lib_path)
 
