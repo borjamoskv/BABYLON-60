@@ -12,26 +12,74 @@ TEMP_DIR = os.path.join(PROJECT_DIR, "temp_audio")
 os.makedirs(PUBLIC_DIR, exist_ok=True)
 os.makedirs(TEMP_DIR, exist_ok=True)
 
+# Hilarious character voice configs with specialized FFmpeg audio effects!
 VOICE_CONFIGS = {
-    "GON": {"voice": "Mónica", "rate": 200, "color": "#00F0FF", "avatar": "⏱️"},
-    "CHICOTE": {"voice": "Rocko", "rate": 210, "color": "#FF3333", "avatar": "👨‍🍳"},
-    "RASPUTIN": {"voice": "Grandpa", "rate": 150, "color": "#9933FF", "avatar": "🪆"},
-    "CHE_JARANA": {"voice": "Eddy", "rate": 190, "color": "#FF9900", "avatar": "🎸"},
-    "CARL_COX": {"voice": "Reed", "rate": 200, "color": "#00FF66", "avatar": "🎧"},
-    "BLAN_COX": {"voice": "Flo", "rate": 160, "color": "#FF00FF", "avatar": "🌌"},
-    "FRUSCIANTE": {"voice": "Reed", "rate": 150, "color": "#FFD700", "avatar": "🎸"},
-    "FLEA": {"voice": "Rocko", "rate": 220, "color": "#FF6600", "avatar": "⚡"},
-    "RAMONCIN": {"voice": "Jorge", "rate": 200, "color": "#FF0055", "avatar": "🕶️"},
-    "HERMENEGILDO": {"voice": "Flo", "rate": 190, "color": "#00FFCC", "avatar": "🎹"},
-    "EL_NOTA": {"voice": "Reed", "rate": 140, "color": "#CCCC00", "avatar": "🍹"},
-    "ESCOHOTADO": {"voice": "Grandpa", "rate": 145, "color": "#D4AF37", "avatar": "💨"},
-    "DR_POPPEL": {"voice": "Paulina", "rate": 180, "color": "#FFFF00", "avatar": "🔬"},
-    "DON_SANTIAGO": {"voice": "Grandma", "rate": 140, "color": "#CC9966", "avatar": "🥖"},
-    "KIMI_K3": {"voice": "Shelley", "rate": 210, "color": "#33FFFF", "avatar": "🤖"},
-    "PAUSA": {"type": "silence", "duration": 2.8, "color": "#FFFFFF", "avatar": "⏳"}
+    "GON": {
+        "voice": "Mónica", "rate": 200, "color": "#00F0FF", "avatar": "⏱️",
+        "filter": "asetrate=44100*1.15,atempo=0.88"
+    },
+    "CHICOTE": {
+        "voice": "Rocko", "rate": 210, "color": "#FF3333", "avatar": "👨‍🍳",
+        "filter": "asetrate=44100*0.88,atempo=1.25,equalizer=f=100:width_type=h:width=200:g=8"
+    },
+    "RASPUTIN": {
+        "voice": "Grandpa", "rate": 150, "color": "#9933FF", "avatar": "🪆",
+        "filter": "asetrate=44100*0.75,atempo=1.35,aecho=0.8:0.9:800:0.4"
+    },
+    "CHE_JARANA": {
+        "voice": "Eddy", "rate": 190, "color": "#FF9900", "avatar": "🎸",
+        "filter": "asetrate=44100*1.15,atempo=0.9,chorus=0.7:0.9:55:0.4:0.25:2"
+    },
+    "CARL_COX": {
+        "voice": "Reed", "rate": 200, "color": "#00FF66", "avatar": "🎧",
+        "filter": "asetrate=44100*1.1,atempo=0.95,aecho=0.8:0.88:60:0.4"
+    },
+    "BLAN_COX": {
+        "voice": "Flo", "rate": 160, "color": "#FF00FF", "avatar": "🌌",
+        "filter": "aecho=0.8:0.88:300:0.3,equalizer=f=3000:width_type=h:width=1000:g=5"
+    },
+    "FRUSCIANTE": {
+        "voice": "Reed", "rate": 150, "color": "#FFD700", "avatar": "🎸",
+        "filter": "aphaser=in_gain=0.8:out_gain=0.9:delay=4:decay=0.5:speed=1.5,volume=2.0"
+    },
+    "FLEA": {
+        "voice": "Rocko", "rate": 220, "color": "#FF6600", "avatar": "⚡",
+        "filter": "asetrate=44100*1.3,atempo=0.82,equalizer=f=250:width_type=h:width=100:g=6"
+    },
+    "RAMONCIN": {
+        "voice": "Jorge", "rate": 200, "color": "#FF0055", "avatar": "🕶️",
+        "filter": "asetrate=44100*1.4,atempo=0.75,equalizer=f=2000:width_type=h:width=500:g=10"
+    },
+    "HERMENEGILDO": {
+        "voice": "Flo", "rate": 190, "color": "#00FFCC", "avatar": "🎹",
+        "filter": "asetrate=44100*1.2,atempo=0.88"
+    },
+    "EL_NOTA": {
+        "voice": "Reed", "rate": 140, "color": "#CCCC00", "avatar": "🍹",
+        "filter": "asetrate=44100*0.82,atempo=1.2,aecho=0.8:0.7:40:0.2"
+    },
+    "ESCOHOTADO": {
+        "voice": "Grandpa", "rate": 145, "color": "#D4AF37", "avatar": "💨",
+        "filter": "asetrate=44100*0.78,atempo=1.3,equalizer=f=80:width_type=h:width=100:g=7"
+    },
+    "DR_POPPEL": {
+        "voice": "Paulina", "rate": 180, "color": "#FFFF00", "avatar": "🔬",
+        "filter": "asetrate=44100*1.2,atempo=0.85"
+    },
+    "DON_SANTIAGO": {
+        "voice": "Grandma", "rate": 140, "color": "#CC9966", "avatar": "🥖",
+        "filter": "asetrate=44100*0.85,atempo=1.18"
+    },
+    "KIMI_K3": {
+        "voice": "Shelley", "rate": 210, "color": "#33FFFF", "avatar": "🤖",
+        "filter": "asetrate=44100*1.6,atempo=0.72,flanger=delay=5:depth=10"
+    },
+    "PAUSA": {
+        "type": "silence", "duration": 2.8, "color": "#FFFFFF", "avatar": "⏳",
+        "filter": None
+    }
 }
 
-# Dialogue Script Part 2 (The Sequel: La Rebelión de los Fotones)
 DIALOGUE_SEQUEL = [
     ("GON", "¡Alerta general! ¡El Sindicato de la Hipervelocidad ha bloqueado la pausa de dos coma ocho segundos en toda la galaxia!"),
     ("CHICOTE", "¡Pero bueno! ¡¿Pero qué es esta marranada galáctica?! ¡Nos están metiendo petabytes de spam directamente en la corteza cerebral!"),
@@ -65,7 +113,7 @@ def generate_speech(dialogue_list, output_name):
     current_time = 0.0
     fps = 30
 
-    print(f"Generating audio tracks for {output_name}...")
+    print(f"Generating hilarious character audio tracks for {output_name}...")
 
     for idx, (speaker, text) in enumerate(dialogue_list):
         cfg = VOICE_CONFIGS[speaker]
@@ -81,12 +129,16 @@ def generate_speech(dialogue_list, output_name):
         else:
             voice = cfg["voice"]
             rate = cfg["rate"]
+            audio_filter = cfg["filter"]
             aiff_file = os.path.join(TEMP_DIR, f"temp_{output_name}_{idx:03d}.aiff")
 
+            # macOS say
             subprocess.run(["say", "-v", voice, "-r", str(rate), "-o", aiff_file, text], check=True)
 
+            # Convert to standard wav 44100Hz with hilarious character FFmpeg filter!
             cmd = [
                 "ffmpeg", "-y", "-i", aiff_file,
+                "-af", audio_filter,
                 "-ar", "44100", "-ac", "1", "-acodec", "pcm_s16le", out_file
             ]
             subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
