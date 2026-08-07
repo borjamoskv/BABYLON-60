@@ -118,7 +118,7 @@ def generate_speech(dialogue_list, output_name):
     current_time = 0.0
     fps = 30
 
-    print(f"[SWARM ENGINE] Generating hilarious audio tracks for {output_name}...")
+    print(f"[HI-FI AUDIO ENGINE] Generating character tracks for {output_name}...")
 
     for idx, (speaker, text) in enumerate(dialogue_list):
         cfg = VOICE_CONFIGS[speaker]
@@ -172,19 +172,35 @@ def generate_speech(dialogue_list, output_name):
         for p in playlist_files:
             f.write(f"file '{p}'\n")
 
-    master_wav = os.path.join(PUBLIC_DIR, f"{output_name}_master.wav")
-    print(f"[SWARM ENGINE] Concatenating {output_name} master audio track...")
+    raw_dialogue_wav = os.path.join(TEMP_DIR, f"{output_name}_raw_dialogue.wav")
+    print(f"[HI-FI AUDIO ENGINE] Concatenating dialogue track...")
     subprocess.run([
         "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", concat_list_path,
-        "-c", "copy", master_wav
+        "-c", "copy", raw_dialogue_wav
     ], check=True)
+
+    master_wav = os.path.join(PUBLIC_DIR, f"{output_name}_master.wav")
+    kick_track = os.path.join(PUBLIC_DIR, "kick_track.wav")
+
+    # High-Fidelity Musical Mix: Combine voice dialogue + techno kick background track + broadcast mastering!
+    print(f"[HI-FI AUDIO ENGINE] Mixing dialogue with techno beat & mastering...")
+    if os.path.exists(kick_track):
+        mix_cmd = [
+            "ffmpeg", "-y", "-i", raw_dialogue_wav, "-stream_loop", "-1", "-i", kick_track,
+            "-filter_complex",
+            "[1:a]volume=0.25[bg];[0:a][bg]amix=inputs=2:duration=first:dropout_transition=2,volume=1.6,equalizer=f=60:width_type=h:width=100:g=4,equalizer=f=12000:width_type=h:width=2000:g=3[aout]",
+            "-map", "[aout]", "-acodec", "pcm_s16le", master_wav
+        ]
+        subprocess.run(mix_cmd, check=True)
+    else:
+        shutil.copyfile(raw_dialogue_wav, master_wav)
 
     sub_path = os.path.join(PUBLIC_DIR, f"{output_name}_subtitles.json")
     with open(sub_path, "w", encoding="utf-8") as f:
         json.dump(subtitles, f, indent=2, ensure_ascii=False)
 
     total_frames = int(round(current_time * fps))
-    print(f"[SWARM ENGINE] DONE {output_name}! Duration: {current_time:.2f}s ({total_frames} frames at 30 fps)")
+    print(f"[HI-FI AUDIO ENGINE] DONE {output_name}! Duration: {current_time:.2f}s ({total_frames} frames at 30 fps)")
 
 if __name__ == "__main__":
-    generate_speech(DIALOGUE_SEQUEL, "sequel")
+    generate_speech(DIALOGUE_EXTENDED, "sequel")
