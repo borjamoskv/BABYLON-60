@@ -6,4 +6,4 @@ src = "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/src/cortex
 dst = "/Users/borjafernandezangulo/.gemini/antigravity-ide/brain/11cd28f8-e5b6-4aa4-bf11-21bdff31c4d2/out_intervalo_prohibido_2.mp4"
 
 shutil.copyfile(src, dst)
-print("Copied successfully to artifacts dir:", dst)
+print("Stereo MP4 video updated in artifacts dir:", dst)
