@@ -18,6 +18,8 @@ pub struct SCITTPayload {
     pub output_digest: [u8; 32],
     pub execution_cost_micros: u64,
     pub wall_clock_ms: u64,
+    pub contractual_cap_usd: u64,
+    pub declared_scope_digest: [u8; 32],
 }
 
 #[derive(Debug, Clone)]
@@ -64,6 +66,8 @@ impl SCITTReceiptEmitter {
         hasher.update(&payload.output_digest);
         hasher.update(&payload.execution_cost_micros.to_le_bytes());
         hasher.update(&payload.wall_clock_ms.to_le_bytes());
+        hasher.update(&payload.contractual_cap_usd.to_le_bytes());
+        hasher.update(&payload.declared_scope_digest);
         let statement_digest: [u8; 32] = hasher.finalize().into();
 
         // 2. Sign statement digest using Ed25519 (RFC 9942 COSE Sign1)
@@ -150,6 +154,8 @@ mod tests {
             output_digest: [4u8; 32],
             execution_cost_micros: 1_200,
             wall_clock_ms: 120,
+            contractual_cap_usd: 10_000,
+            declared_scope_digest: [5u8; 32],
         };
 
         let receipt = emitter.generate_receipt(&payload);
