@@ -28,9 +28,11 @@ class CortexIPCBridge:
     def __init__(self, lib_path: str = None):
         if lib_path is None:
             ext = ".dylib" if platform.system() == "Darwin" else ".so"
-            # Default path to the Rust workspace target dir
-            base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-            lib_path = os.path.join(base_dir, "target", "debug", f"libcortex_kernel{ext}")
+            # Resolviendo la ruta relativa a 02_CORTEX_ENGINE/cortex-persist/kernel_rs/target/debug
+            current_dir = os.path.dirname(os.path.abspath(__file__)) # cortex/ipc
+            cortex_dir = os.path.dirname(current_dir)                # cortex
+            engine_dir = os.path.dirname(cortex_dir)                 # 02_CORTEX_ENGINE
+            lib_path = os.path.join(engine_dir, "cortex-persist", "kernel_rs", "target", "debug", f"libcortex_kernel{ext}")
 
         if not os.path.exists(lib_path):
             raise FileNotFoundError(f"[C5-REAL] Kernel BFT no encontrado en: {lib_path}. Ejecuta 'cargo build' primero.")
