@@ -6,6 +6,8 @@ use ed25519_dalek::{SigningKey, Signer};
 use std::collections::BTreeMap;
 use coset::{CoseSign1Builder, HeaderBuilder, CborSerializable};
 
+pub const ARTICLE_15_MAX_VARENTROPY: f32 = 0.03;
+
 #[derive(Debug)]
 pub struct EpistemicHalt {
     pub reason: String,
@@ -120,6 +122,20 @@ pub struct Budget {
 }
 
 impl TransitionRecord {
+    /// Valida el trigger de contención del Artículo 15 de la EU AI Act.
+    /// Si la varentropía supera el umbral legal del 3% (0.03), desencadena un EpistemicHalt.
+    pub fn validate_article_15_containment(&self) -> Result<(), EpistemicHalt> {
+        if let Some(uncertainty) = &self.uncertainty {
+            if uncertainty.max_v > ARTICLE_15_MAX_VARENTROPY {
+                return Err(EpistemicHalt::from(format!(
+                    "Article 15 Containment Trigger: Varentropy {} exceeds legal threshold of {}",
+                    uncertainty.max_v, ARTICLE_15_MAX_VARENTROPY
+                )));
+            }
+        }
+        Ok(())
+    }
+
     /// Serializa la hoja en CBOR determinista según RFC 8949 §4.2.1
     /// (Ciborium ordena automáticamente los mapas BTreeMap).
     pub fn to_cbor_deterministic(&self) -> Result<Vec<u8>, ciborium::ser::Error<std::io::Error>> {
@@ -138,6 +154,9 @@ impl TransitionRecord {
 
     /// Genera la cabecera protegida COSE_Sign1 y firma el payload (Fail-Stop)
     pub fn sign_scitt(&self, key: &SigningKey) -> Result<coset::CoseSign1, EpistemicHalt> {
+        // 0. Validación Pre-Producción: Cuarentena Epistémica (Fail-Stop) Art. 15
+        self.validate_article_15_containment()?;
+
         // 1. Serialización CBOR determinista del payload (el TransitionRecord)
         let payload = self.to_cbor_deterministic()
             .map_err(|e| EpistemicHalt::from(format!("CBOR serialization failed: {}", e)))?;

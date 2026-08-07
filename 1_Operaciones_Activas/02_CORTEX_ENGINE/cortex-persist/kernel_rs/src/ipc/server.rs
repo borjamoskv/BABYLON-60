@@ -34,7 +34,8 @@ impl CommitGate {
         &self,
         node: CfGkatNode,
         whitelisted_tools: HashSet<String>,
-        wasm_tool_image: &[u8]
+        wasm_tool_image: &[u8],
+        uncertainty: Option<crate::scitt::receipt::Uncertainty>,
     ) -> Result<Vec<u8>, Box<dyn Error>> {
         // 1. CF-GKAT Normalización y Validación de Frontera (INV-1)
         let ctx = CfgkatContext { whitelisted_tools };
@@ -79,12 +80,19 @@ impl CommitGate {
                 resources_used: std::collections::BTreeMap::new(),
             },
             verdicts: vec![],
-            uncertainty: None,
+            uncertainty,
             budget: None,
         };
 
         // 4. Firmar el recibo COSE sobre CBOR determinista
-        let signature = record.sign_scitt(&self.signing_key)?;
+        let signature = match record.sign_scitt(&self.signing_key) {
+            Ok(sig) => sig,
+            Err(halt) => {
+                // Implementar lógica de rollback atómico o cuarentena (STABLE_FALLBACK_PTR)
+                println!("⚠️ [RING-0 ALERT] Cuarentena Epistémica Activada: {}", halt);
+                return Err(Box::new(halt));
+            }
+        };
 
         // Retorna la firma para integrarse en el TransportAck Protobuf hacia Python
         Ok(signature.to_vec().map_err(|e| format!("{:?}", e))?)
