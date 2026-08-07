@@ -1,0 +1,9 @@
+# C5-REAL EXERGY CERTIFIED
+[package]
+name = "moskv84_daemon"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+crossbeam-channel = "0.5.16"
+notify = "8.2.0"
