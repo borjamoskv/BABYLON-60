@@ -365,6 +365,7 @@ pub unsafe extern "C" fn run_teff_transition(
         current_usd_micros: 10_000,
         current_wall_clock_ms: 100,
         current_tool_calls: 2,
+        current_landauer_nats: 0.0,
     };
 
     let verdict = controller.evaluate_admission(&tracker, est_tokens, est_cost_micros);
