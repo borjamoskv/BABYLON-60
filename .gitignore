@@ -109,11 +109,15 @@ venv/
 # Historical inactive data isolation
 3_Historico_Inerte/
 .*_Historico_Inerte/
-
-
+99_ARCHIVO_INERTE/
+99_CUARENTENA_TERMICA/
 
 # Compiled native extensions (Axioma Ω24)
 *.dylib
+*.so
+target/
+*.rmeta
+*.rlib
 
 # Added by Antigravity C5-REAL Audit
 .vercel
