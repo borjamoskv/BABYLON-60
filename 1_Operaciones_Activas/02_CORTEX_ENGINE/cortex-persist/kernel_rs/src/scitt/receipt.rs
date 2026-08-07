@@ -149,7 +149,7 @@ impl TransitionRecord {
 
         // 3. FIRMA CORREGIDA: Construir CoseSign1Builder PRIMERO sin firma
         // Esto maneja internamente la estructura Sig_structure (RFC 9052)
-        let mut cose_sign1_builder = CoseSign1Builder::new()
+        let cose_sign1_builder = CoseSign1Builder::new()
             .protected(protected)
             .payload(payload);
 
