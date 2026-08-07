@@ -61,38 +61,48 @@ export const CausalVisualizer = ({
     let shockwaves: Shockwave[] = [];
 
     const resize = () => {
-      canvas.width = canvas.parentElement?.clientWidth || window.innerWidth;
-      canvas.height = canvas.parentElement?.clientHeight || window.innerHeight;
+      const parent = canvas.parentElement;
+      if (!parent) return;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = parent.clientWidth * dpr;
+      canvas.height = parent.clientHeight * dpr;
+      ctx.scale(dpr, dpr);
     };
 
     window.addEventListener('resize', resize);
     resize();
 
-    const getShieldX = () => canvas.width * 0.65;
+    const getDisplayWidth = () => canvas.width / (window.devicePixelRatio || 1);
+    const getDisplayHeight = () => canvas.height / (window.devicePixelRatio || 1);
+    const getShieldX = () => getDisplayWidth() * 0.62;
 
-    const createParticle = (forceRed: boolean = false, customX?: number, customY?: number): Particle => {
+    const createParticle = (
+      forceRed: boolean = false,
+      customX?: number,
+      customY?: number
+    ): Particle => {
       const shieldX = getShieldX();
-      const startX = customX !== undefined ? customX : Math.random() * (shieldX * 0.5);
-      const startY = customY !== undefined ? customY : Math.random() * canvas.height;
-      const isRed = forceRed || Math.random() > 0.1;
+      const startX = customX !== undefined ? customX : Math.random() * (shieldX * 0.45);
+      const startY = customY !== undefined ? customY : Math.random() * getDisplayHeight();
+      const isRed = forceRed || Math.random() > 0.12;
 
       return {
         x: startX,
         y: startY,
-        vx: (Math.random() * 2.5 + 1.5) * (forceRed ? 1.5 : 1),
-        vy: (Math.random() - 0.5) * (forceRed ? 4 : 2),
-        radius: Math.random() * 2 + 2,
+        vx: (Math.random() * 2.8 + 1.8) * (forceRed ? 1.8 : 1.1),
+        vy: (Math.random() - 0.5) * (forceRed ? 4.5 : 2.2),
+        radius: Math.random() * 2.5 + 2,
         isPurged: false,
         isValidated: false,
         color: isRed ? '#FF003C' : '#FFAA00',
         alpha: 1.0,
         tail: [],
-        entropyLevel: Math.random() * 0.8 + 0.2,
+        entropyLevel: Math.random() * 0.85 + 0.15,
       };
     };
 
     // Initialize initial pool
-    for (let i = 0; i < 180; i++) {
+    for (let i = 0; i < 160; i++) {
       particles.push(createParticle());
     }
 
@@ -101,191 +111,203 @@ export const CausalVisualizer = ({
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
-      // Spawn burst of red stochastic tokens
-      for (let i = 0; i < 20; i++) {
+      // Spawn burst of stochastic tokens at click
+      for (let i = 0; i < 24; i++) {
         particles.push(createParticle(true, x, y));
       }
+
+      shockwaves.push({
+        x,
+        y,
+        radius: 5,
+        maxRadius: 60,
+        alpha: 1.0,
+        color: '#FF003C',
+      });
+
       sound.playPurge();
     };
 
     canvas.addEventListener('click', handleClick);
 
     const draw = () => {
+      const width = getDisplayWidth();
+      const height = getDisplayHeight();
       const shieldX = getShieldX();
 
-      // Atmospheric Fade
-      ctx.fillStyle = 'rgba(5, 5, 5, 0.25)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Atmospheric Fade with subtle trail retention
+      ctx.fillStyle = 'rgba(3, 3, 5, 0.28)';
+      ctx.fillRect(0, 0, width, height);
 
-      // Draw Grid Matrix Background
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
+      // Grid Matrix Background
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.025)';
       ctx.lineWidth = 1;
-      const step = 40;
-      for (let x = 0; x < canvas.width; x += step) {
+      const step = 45;
+      for (let x = 0; x < width; x += step) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
-        ctx.lineTo(x, canvas.height);
+        ctx.lineTo(x, height);
         ctx.stroke();
       }
-      for (let y = 0; y < canvas.height; y += step) {
+      for (let y = 0; y < height; y += step) {
         ctx.beginPath();
         ctx.moveTo(0, y);
-        ctx.lineTo(canvas.width, y);
+        ctx.lineTo(width, y);
         ctx.stroke();
       }
+
+      // Region Boundaries and Aesthetic Labels
+      ctx.font = '10px "JetBrains Mono", monospace';
+      ctx.fillStyle = 'rgba(255, 0, 60, 0.4)';
+      ctx.fillText('DYNAMIS // STOCHASTIC STREAM (POTENCIA)', 24, 28);
+
+      ctx.fillStyle = isFailStopRef.current
+        ? 'rgba(255, 0, 60, 0.8)'
+        : 'rgba(0, 255, 65, 0.7)';
+      ctx.fillText(
+        isFailStopRef.current
+          ? 'RING-0 QUARANTINE HALT (CAS)'
+          : 'ENTELECHEIA // DETERMINISTIC CANONICAL (ACTO)',
+        shieldX + 24,
+        28
+      );
 
       // Draw C5-REAL Kernel Boundary (Shield)
       const shieldColor = isFailStopRef.current ? '#FF003C' : '#00FF41';
 
       ctx.save();
+      ctx.strokeStyle = shieldColor;
+      ctx.lineWidth = isFailStopRef.current ? 4 : 2.5;
+      ctx.shadowColor = shieldColor;
+      ctx.shadowBlur = isFailStopRef.current ? 25 : 15;
+
       ctx.beginPath();
       ctx.moveTo(shieldX, 0);
-      ctx.lineTo(shieldX, canvas.height);
-      ctx.strokeStyle = shieldColor;
-      ctx.lineWidth = isFailStopRef.current ? 4 : 2;
-      ctx.shadowBlur = isFailStopRef.current ? 25 : 15;
-      ctx.shadowColor = shieldColor;
+      ctx.lineTo(shieldX, height);
       ctx.stroke();
 
-      // Draw Boundary Chevron Markers
-      for (let y = 30; y < canvas.height; y += 60) {
-        ctx.beginPath();
-        ctx.arc(shieldX, y, 3, 0, Math.PI * 2);
-        ctx.fillStyle = shieldColor;
-        ctx.fill();
-      }
+      // Pulsing Ring-0 Core Node on the Shield
+      const pulseY = (Math.sin(Date.now() * 0.003) * 0.4 + 0.5) * height;
+      ctx.fillStyle = shieldColor;
+      ctx.beginPath();
+      ctx.arc(shieldX, pulseY, isFailStopRef.current ? 7 : 5, 0, Math.PI * 2);
+      ctx.fill();
       ctx.restore();
 
-      // If attack is active, spawn aggressive swarms
-      if (isAttackRef.current && Math.random() > 0.4) {
-        particles.push(createParticle(true, 0, Math.random() * canvas.height));
+      // Spawn new particles continuously
+      const spawnCount = isAttackRef.current ? 7 : 2;
+      for (let i = 0; i < spawnCount; i++) {
+        particles.push(createParticle(isAttackRef.current));
       }
 
       // Update & Draw Shockwaves
-      shockwaves = shockwaves.filter((sw) => {
+      shockwaves = shockwaves.filter((sw) => sw.alpha > 0.02);
+      shockwaves.forEach((sw) => {
         sw.radius += 2.5;
-        sw.alpha -= 0.03;
-
-        if (sw.alpha <= 0) return false;
+        sw.alpha *= 0.93;
 
         ctx.save();
-        ctx.beginPath();
-        ctx.arc(sw.x, sw.y, sw.radius, 0, Math.PI * 2);
         ctx.strokeStyle = sw.color;
         ctx.lineWidth = 2;
-        ctx.globalAlpha = Math.max(0, sw.alpha);
-        ctx.shadowBlur = 10;
+        ctx.globalAlpha = sw.alpha;
         ctx.shadowColor = sw.color;
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(sw.x, sw.y, sw.radius, 0, Math.PI * 2);
         ctx.stroke();
         ctx.restore();
-
-        return true;
       });
 
       // Update & Draw Particles
+      particles = particles.filter((p) => p.alpha > 0.02 && p.x < width + 50 && p.y > -50 && p.y < height + 50);
+
       particles.forEach((p) => {
-        // Save tail
+        // Record trail
         p.tail.push({ x: p.x, y: p.y });
-        if (p.tail.length > 6) p.tail.shift();
+        if (p.tail.length > 5) p.tail.shift();
 
-        p.x += p.vx;
-        p.y += p.vy;
-
-        // Collision Check with Ring-0 Barrier
-        if (!p.isPurged && !p.isValidated && p.x >= shieldX - 4) {
-          if (isFailStopRef.current) {
-            // FAIL-STOP: 100% REJECTION
-            p.vx = -Math.abs(p.vx) * 1.2;
-            p.vy = (Math.random() - 0.5) * 6;
+        // Check Shield Collision
+        if (!p.isPurged && !p.isValidated && p.x >= shieldX) {
+          if (isFailStopRef.current || p.color === '#FF003C' || p.entropyLevel > 0.3) {
+            // PURGE / DISPERSE (Fail-Stop)
             p.isPurged = true;
+            p.vx = -Math.abs(p.vx) * 0.7 - Math.random() * 2;
+            p.vy = (Math.random() - 0.5) * 6;
             p.color = '#FF003C';
-            shockwaves.push({
-              x: shieldX,
-              y: p.y,
-              radius: 4,
-              maxRadius: 35,
-              alpha: 0.9,
-              color: '#FF003C',
-            });
-            sound.playPurge();
-            onParticlePurged?.();
-          } else {
-            // Standard Deterministic Gate: 85% purge, 15% validate
-            const isCompliant = Math.random() <= 0.15;
-            if (isCompliant) {
-              p.isValidated = true;
-              p.x = shieldX + 2;
-              p.vx = 5.5; // Acceleration of validated state
-              p.vy = (Math.random() - 0.5) * 0.5;
-              p.color = '#00FF41';
-              shockwaves.push({
-                x: shieldX,
-                y: p.y,
-                radius: 4,
-                maxRadius: 25,
-                alpha: 0.8,
-                color: '#00FF41',
-              });
-              sound.playValidate();
-              onParticleValidated?.();
-            } else {
-              p.isPurged = true;
-              p.vx = -Math.abs(p.vx) * 0.7;
-              p.vy = (Math.random() - 0.5) * 5;
-              p.color = '#FF003C';
+
+            // Shockwave on collision
+            if (Math.random() > 0.6) {
               shockwaves.push({
                 x: shieldX,
                 y: p.y,
                 radius: 3,
-                maxRadius: 20,
-                alpha: 0.6,
+                maxRadius: 25,
+                alpha: 0.8,
                 color: '#FF003C',
               });
               sound.playPurge();
-              onParticlePurged?.();
             }
+            onParticlePurged?.();
+          } else {
+            // VALIDATED / ATTESTED (Robinson-Łoś standard part st(x))
+            p.isValidated = true;
+            p.color = '#00FF41';
+            p.vx = Math.abs(p.vx) * 1.3 + 1;
+            p.vy *= 0.3; // Laminar smooth trajectory
+
+            shockwaves.push({
+              x: shieldX,
+              y: p.y,
+              radius: 4,
+              maxRadius: 30,
+              alpha: 0.9,
+              color: '#00FF41',
+            });
+
+            sound.playValidate();
+            onParticleValidated?.();
           }
         }
 
-        // Draw particle tail
+        // Particle Physics
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.isPurged) {
+          p.alpha *= 0.94; // Fast fade out
+        }
+
+        // Draw Motion Trail
         if (p.tail.length > 1) {
           ctx.save();
+          ctx.strokeStyle = p.color;
+          ctx.lineWidth = p.radius * 0.7;
+          ctx.globalAlpha = p.alpha * 0.35;
           ctx.beginPath();
           ctx.moveTo(p.tail[0].x, p.tail[0].y);
-          for (let i = 1; i < p.tail.length; i++) {
-            ctx.lineTo(p.tail[i].x, p.tail[i].y);
+          for (let t = 1; t < p.tail.length; t++) {
+            ctx.lineTo(p.tail[t].x, p.tail[t].y);
           }
-          ctx.strokeStyle = p.color;
-          ctx.globalAlpha = p.isValidated ? 0.4 : 0.15;
-          ctx.lineWidth = p.radius * 0.8;
           ctx.stroke();
           ctx.restore();
         }
 
-        // Draw Particle Body
+        // Draw Particle Core
         ctx.save();
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
-        ctx.shadowBlur = p.isValidated ? 12 : p.isPurged ? 0 : 8;
+        ctx.globalAlpha = p.alpha;
         ctx.shadowColor = p.color;
-        ctx.fill();
+        ctx.shadowBlur = p.isValidated ? 12 : 6;
 
-        // Draw geometric ring for validated crystal tokens
+        ctx.beginPath();
         if (p.isValidated) {
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius + 3, 0, Math.PI * 2);
-          ctx.strokeStyle = 'rgba(0, 255, 65, 0.4)';
-          ctx.lineWidth = 1;
-          ctx.stroke();
+          // Attested Crystal Diamond shape
+          ctx.rect(p.x - p.radius, p.y - p.radius, p.radius * 2, p.radius * 2);
+        } else {
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         }
+        ctx.fill();
         ctx.restore();
-
-        // Recycle particle
-        if (p.x > canvas.width || p.x < 0 || p.y > canvas.height || p.y < 0) {
-          const np = createParticle();
-          Object.assign(p, np);
-        }
       });
 
       animationFrameId = requestAnimationFrame(draw);
@@ -301,11 +323,10 @@ export const CausalVisualizer = ({
   }, [onParticlePurged, onParticleValidated]);
 
   return (
-    <div className="visualizer-wrapper">
-      <canvas ref={canvasRef} className="visualizer-container" />
-      <div className="canvas-watermark">
-        <span>LEFT: STOCHASTIC POTENTIAL DYNAMIS (H(X))</span>
-        <span>RIGHT: CANONICAL ENTELECHEIA (RING-0 DETERMINISM)</span>
+    <div className="causal-canvas-container">
+      <canvas ref={canvasRef} className="causal-canvas" />
+      <div className="canvas-overlay-guide">
+        <span className="guide-text">CLICK CANVAS TO INJECT STOCHASTIC COLLISION</span>
       </div>
     </div>
   );
