@@ -5,14 +5,14 @@ import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 export const BackgroundCanvas: React.FC<{ activeColor?: string }> = ({ activeColor = "#00F0FF" }) => {
   const frame = useCurrentFrame();
 
-  // Subtle pulsing grid & radial glow
   const glowOpacity = interpolate(
     Math.sin(frame / 15),
     [-1, 1],
-    [0.15, 0.45]
+    [0.2, 0.55]
   );
 
-  const rotateDeg = (frame * 0.2) % 360;
+  const rotateDeg = (frame * 0.4) % 360;
+  const pulseScale = interpolate(Math.sin(frame * 0.08), [-1, 1], [0.95, 1.08]);
 
   return (
     <AbsoluteFill
@@ -30,26 +30,40 @@ export const BackgroundCanvas: React.FC<{ activeColor?: string }> = ({ activeCol
           position: "absolute",
           inset: "-50%",
           backgroundImage: `
-            linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px)
+            linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px)
           `,
           backgroundSize: "60px 60px",
-          transform: `rotate(${rotateDeg * 0.1}deg)`,
-          opacity: 0.3,
+          transform: `rotate(${rotateDeg * 0.05}deg)`,
+          opacity: 0.35,
         }}
       />
 
-      {/* Reactive Radial Glow based on Speaker Color */}
+      {/* Sagittarius A* Black Hole Event Horizon Ring */}
       <div
         style={{
           position: "absolute",
-          width: "800px",
-          height: "800px",
+          width: "600px",
+          height: "600px",
+          borderRadius: "50%",
+          border: `3px stroke ${activeColor}`,
+          boxShadow: `0 0 80px ${activeColor}, inset 0 0 60px ${activeColor}`,
+          transform: `scale(${pulseScale}) rotate(${rotateDeg}deg)`,
+          opacity: 0.45,
+          filter: "blur(4px)",
+        }}
+      />
+
+      {/* Reactive Deep Space Radial Glow */}
+      <div
+        style={{
+          position: "absolute",
+          width: "900px",
+          height: "900px",
           borderRadius: "50%",
           background: `radial-gradient(circle, ${activeColor} 0%, transparent 70%)`,
           opacity: glowOpacity,
-          filter: "blur(90px)",
-          transition: "background 0.5s ease",
+          filter: "blur(100px)",
         }}
       />
     </AbsoluteFill>
