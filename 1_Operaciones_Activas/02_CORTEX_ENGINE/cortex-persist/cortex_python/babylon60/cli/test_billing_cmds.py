@@ -1,7 +1,7 @@
 # C5-REAL EXERGY CERTIFIED
-"""Unit tests for babylon60.cli.billing_cmds (Axiom Ω5 & Ω9)."""
+"""Unit tests for cortex_persist.cli.billing_cmds (Axiom Ω5 & Ω9)."""
 from click.testing import CliRunner
-from babylon60.cli.billing_cmds import billing
+from cortex_persist.cli.billing_cmds import billing
 
 def test_billing_cmd_execution():
     """Verify that the billing CLI command invokes and produces Brutalist output."""

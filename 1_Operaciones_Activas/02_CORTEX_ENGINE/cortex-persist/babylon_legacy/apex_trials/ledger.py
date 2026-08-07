@@ -5,7 +5,7 @@ Mirrors the BABYLON-60 / cortex-persist BFT ledger entry contract:
 
     { id: uuid5, prev_hash: sha3_256-hex, payload, causal_taint, lamport_t, agent_id }
 
-Guarantees (identical to `babylon60.bft.ledger_actor`):
+Guarantees (identical to `cortex_persist.bft.ledger_actor`):
   - Integrity  : SHA3-256 hash-chain (prev_hash linkage), verified on read.
   - Provenance : causal_taint (agent:reason) mandatory on every write.
   - Ordering   : Lamport logical clock, MAX(lamport_t)+1 from disk.
@@ -23,7 +23,7 @@ sidecar column — this satisfies 21 CFR Part 11 provenance without breaking
 reproducibility.
 
 This module is standalone (no external deps) and contract-compatible with
-`babylon60.bft.ledger_actor`: swap `AmendmentLedger.append` for the
+`cortex_persist.bft.ledger_actor`: swap `AmendmentLedger.append` for the
 `BFTLedgerActor` queue writer with no schema change.
 
 Author: Borja Moskv (borjamoskv). Reality level: C5-REAL.
@@ -45,7 +45,7 @@ from typing import Any
 
 import aiosqlite
 
-from babylon60.bft.ledger_actor import BFTCausalInvariantError, BFTLedgerActor, LedgerEvent
+from cortex_persist.bft.ledger_actor import BFTCausalInvariantError, BFTLedgerActor, LedgerEvent
 
 # Fixed namespace so UUID v5 idempotency keys are stable across machines/runs.
 CORTEX_NAMESPACE: uuid.UUID = uuid.uuid5(uuid.NAMESPACE_URL, "moskv://apex-trials/ledger/v1")
@@ -120,7 +120,7 @@ class ChainVerification:
 
 
 class AmendmentLedger:
-    """Single-writer, BFT-backed ledger wrapper for babylon60.bft.ledger_actor."""
+    """Single-writer, BFT-backed ledger wrapper for cortex_persist.bft.ledger_actor."""
 
     def __init__(self, db_path: str | Path = "master_ledger.db") -> None:
         self.db_path = Path(db_path)
@@ -303,7 +303,7 @@ class AmendmentLedger:
 
 
 class BabylonBFTLedgerAdapter:
-    """Adapter wrapping `babylon60.bft.ledger_actor.BFTLedgerActor` for synchronous Copilot calls.
+    """Adapter wrapping `cortex_persist.bft.ledger_actor.BFTLedgerActor` for synchronous Copilot calls.
 
     Transforms `append(payload, causal_taint)` into async/sync `BFTLedgerActor.append(LedgerEvent(...))`
     and returns the underlying future or proxy record from the live BFT quorum.
@@ -319,9 +319,9 @@ class BabylonBFTLedgerAdapter:
         agent_id: str = DEFAULT_AGENT_ID,
     ) -> Any:
         try:
-            from babylon60.bft.ledger_actor import LedgerEvent
+            from cortex_persist.bft.ledger_actor import LedgerEvent
         except ImportError as exc:
-            raise RuntimeError("babylon60 not installed or accessible for BFTLedgerActor") from exc
+            raise RuntimeError("cortex_persist not installed or accessible for BFTLedgerActor") from exc
 
         entity_id = str(payload.get("nct_id", uuid.uuid4()))
         event = LedgerEvent(

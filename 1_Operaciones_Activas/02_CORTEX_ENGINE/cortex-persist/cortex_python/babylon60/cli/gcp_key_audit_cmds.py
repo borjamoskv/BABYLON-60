@@ -4,7 +4,7 @@ import json
 import subprocess
 from typing import Dict, List, Any
 import click
-from babylon60.cli.common import cli, console
+from cortex_persist.cli.common import cli, console
 from rich.table import Table
 from rich.panel import Panel
 from cortex.primitives.bash_primitive import BashCommand

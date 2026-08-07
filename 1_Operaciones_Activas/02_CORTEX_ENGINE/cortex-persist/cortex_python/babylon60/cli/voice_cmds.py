@@ -1,9 +1,9 @@
 # C5-REAL EXERGY CERTIFIED
 """CLI Commands for Voice Transducer."""
 import click
-from babylon60.cli.common import cli, console
-from babylon60.voice.daemon import VoiceDaemon
-from babylon60.voice.transducer import AcousticTransducer
+from cortex_persist.cli.common import cli, console
+from cortex_persist.voice.daemon import VoiceDaemon
+from cortex_persist.voice.transducer import AcousticTransducer
 
 @cli.command(name="voice-listen")
 def voice_listen():

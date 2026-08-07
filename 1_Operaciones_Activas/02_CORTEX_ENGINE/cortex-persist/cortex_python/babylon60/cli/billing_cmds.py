@@ -3,7 +3,7 @@
 import json
 import click
 from cortex.primitives.bash_primitive import BashCommand
-from babylon60.cli.common import cli, console
+from cortex_persist.cli.common import cli, console
 
 @cli.command(name="billing")
 @click.option("--account", default=None, help="GCP Account email to set as active before checking")

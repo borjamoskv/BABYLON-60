@@ -1,8 +1,8 @@
 # C5-REAL EXERGY CERTIFIED
 """Cognitive Compaction CLI Commands."""
 import click
-from babylon60.cli.common import cli, console
-from babylon60.memory.compactor import CognitiveCompactor
+from cortex_persist.cli.common import cli, console
+from cortex_persist.memory.compactor import CognitiveCompactor
 
 @cli.command(name="memory-compact")
 @click.option("--dry-run", is_flag=True, help="Simulate compaction without mutating disk.")

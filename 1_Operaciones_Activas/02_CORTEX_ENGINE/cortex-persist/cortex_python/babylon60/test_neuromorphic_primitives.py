@@ -3,7 +3,7 @@ import asyncio
 import os
 import time
 import pytest
-from cortex.babylon60.neuromorphic_primitives import SelfHealingMesh
+from cortex.cortex_persist.neuromorphic_primitives import SelfHealingMesh
 
 @pytest.mark.anyio
 async def test_neuromorphic_v2() -> None:
