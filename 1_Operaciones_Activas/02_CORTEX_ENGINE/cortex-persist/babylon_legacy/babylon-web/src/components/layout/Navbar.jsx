@@ -1,7 +1,7 @@
 // C5-REAL EXERGY CERTIFIED
 import React from 'react';
 
-export function Navbar() {
+export function Navbar({ onOpenDeploy }) {
   return (
     <nav style={{ padding: '2rem 0', borderBottom: '1px solid var(--border-dim)' }}>
       <div className="container flex-center" style={{ justifyContent: 'space-between' }}>
@@ -12,7 +12,7 @@ export function Navbar() {
           <a href="#kernel-sim" style={{ marginRight: '2rem', fontSize: '0.9rem' }}>Kernel Simulator</a>
           <a href="#score-explorer" style={{ marginRight: '2rem', fontSize: '0.9rem' }}>Score Explorer</a>
           <a href="#compliance" style={{ marginRight: '2rem', fontSize: '0.9rem' }}>EU AI Act Compliance</a>
-          <button className="btn btn-primary" onClick={() => alert('C5-REAL Substrate Deployment Requested — Initializing Node Credentials.')}>
+          <button className="btn btn-primary" onClick={onOpenDeploy}>
             Deploy C5-REAL
           </button>
         </div>

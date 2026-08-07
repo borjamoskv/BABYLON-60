@@ -15,6 +15,8 @@ import {
 import { useCloudflareSync } from './hooks/useCloudflareSync';
 
 import { Navbar } from './components/layout/Navbar';
+import { Footer } from './components/layout/Footer';
+import { DeployModal } from './components/modals/DeployModal';
 import { Hero } from './components/landing/Hero';
 import { ValueProps } from './components/landing/ValueProps';
 import { IRPMembrane } from './components/simulator/IRPMembrane';
@@ -33,6 +35,7 @@ async function sha256Hex(message) {
 
 function App() {
   const { cloudSyncStatus, pushToSyncQueue } = useCloudflareSync();
+  const [isDeployOpen, setIsDeployOpen] = useState(false);
 
   // Lifted Isomorphic IRP Membrane State
   const [kernelState, setKernelState] = useState(IRPAutomata_MembraneState_Stable(0.01));
@@ -113,7 +116,7 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar onOpenDeploy={() => setIsDeployOpen(true)} />
 
       <main className="container" style={{ paddingTop: '6rem', paddingBottom: '8rem' }}>
         <Hero />
@@ -151,6 +154,13 @@ function App() {
 
         <ValueProps />
       </main>
+
+      <Footer />
+
+      <DeployModal
+        isOpen={isDeployOpen}
+        onClose={() => setIsDeployOpen(false)}
+      />
     </>
   );
 }
