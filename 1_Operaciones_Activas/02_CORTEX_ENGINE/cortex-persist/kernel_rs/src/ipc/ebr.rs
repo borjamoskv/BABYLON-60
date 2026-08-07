@@ -85,6 +85,10 @@ pub enum HaltReason {
     NullPointer = 2,
     /// Fallback ptr es nulo durante rollback.
     FallbackUnavailable = 3,
+    /// Vector de estado excede el límite del contrato.
+    GeometricCapExceeded = 4,
+    /// Fricción estructural en la trazabilidad inyectada.
+    TraceChainViolation = 5,
 }
 
 /// Error epistémico con contexto de diagnóstico.
@@ -179,6 +183,45 @@ impl EpochState {
                 reason: HaltReason::DigestMismatch,
             });
         }
+
+        // Paso 1.5: Validación Geométrica y de Cap Contractual (C5-REAL V3)
+        // Mapeo determinista de entropía (digest) a espacio vectorial 64-bit.
+        let mut coords = [0u64; 4];
+        let payload_bytes = manifest.payload;
+        for i in 0..4 {
+            let start = i * 8;
+            let mut b = [0u8; 8];
+            b.copy_from_slice(&payload_bytes[start..start + 8]);
+            coords[i] = u64::from_le_bytes(b);
+        }
+        let vector = crate::ipc::compliance::Vector::<4>(coords);
+
+        // Límite termodinámico contractually-bound (ej. MAX L2 NORM)
+        const CAP_LIMIT: u64 = 1_000_000;
+        let bounded_input = match crate::ipc::compliance::verify_cap::<4, CAP_LIMIT>(vector) {
+            Some(v) => v,
+            None => {
+                manifest.set_status(ManifestStatus::Quarantine);
+                return Err(EpistemicHalt {
+                    failed_epoch: candidate_epoch,
+                    reason: HaltReason::GeometricCapExceeded,
+                });
+            }
+        };
+
+        // Resolución estructural del Invariante C5-REAL SOC 2
+        let trace_tail = crate::ipc::compliance::TraceCons {
+            head: candidate_epoch,
+            tail: crate::ipc::compliance::TraceNil,
+        };
+        let linear_payload = crate::ipc::compliance::LinearPayload::new(vector);
+
+        // Ejecución en tiempo de compilación/cero anergía del Kernel
+        let _receipt = crate::ipc::compliance::Kernel::<4, CAP_LIMIT>::execute(
+            linear_payload,
+            bounded_input,
+            trace_tail,
+        );
 
         // Paso 2: Señalar estado intermedio Validating.
         // Observadores pueden detectar que este manifiesto está siendo evaluado.
