@@ -12,7 +12,6 @@ TEMP_DIR = os.path.join(PROJECT_DIR, "temp_audio")
 os.makedirs(PUBLIC_DIR, exist_ok=True)
 os.makedirs(TEMP_DIR, exist_ok=True)
 
-# Character voice configs
 VOICE_CONFIGS = {
     "GON": {"voice": "Mónica", "rate": 200, "color": "#00F0FF", "avatar": "⏱️"},
     "CHICOTE": {"voice": "Rocko", "rate": 210, "color": "#FF3333", "avatar": "👨‍🍳"},
@@ -32,69 +31,45 @@ VOICE_CONFIGS = {
     "PAUSA": {"type": "silence", "duration": 2.8, "color": "#FFFFFF", "avatar": "⏳"}
 }
 
-# Dialogue Script for the Remotion Video
-DIALOGUE = [
-    # Scene 1: Inspection in Cognitive Kitchen
-    ("CHICOTE", "¡Pero bueno! ¡¿Pero qué es esto?! ¡Tenéis la KV-Cache llena de mierda estocástica!"),
-    ("GON", "¡Chicote! ¡Faltan cero coma cuatro segundos para el intervalo de dos coma ocho! ¡No me rompas la parte estándar!"),
-    ("KIMI_K3", "¡Chef! ¡Yo sólo procesaba a O de uno!"),
-    ("CHICOTE", "¡A mí no me pongas excusas! ¡Si no dejas reposar el sofrito dos segundos y medio, indigestas la mente del cliente!"),
-
-    # Scene 2: Rasputin & Che Jarana
-    ("RASPUTIN", "¡Hermanos del silicio! Yo sobreviví al cianuro porque apliqué una pausa de dos coma ocho segundos justo antes de morir..."),
-    ("CHE_JARANA", "¡Hasta la jarana siempre! ¿Qué es el remate flamenco sino una pausa de dos coma ocho segundos antes de arrancar por bulerías?"),
-
-    # Scene 3: Ramoncin & Frusciante Kamehameha!
-    ("RAMONCIN", "¡Soy Ramoncín! ¡He venido a cobrar el canon digital por los dos coma ocho segundos de silencio! ¡El silencio tributa a la SGAE!"),
-    ("FRUSCIANTE", "The harmony of the universe cannot be taxed... The pause belongs to the soul..."),
-    ("FRUSCIANTE", "¡KA... ME... HA... ME... HAAAAAAAAAAAAAAAA!"),
-    ("RAMONCIN", "¡Madre mía qué solo de guitarra! ¡Devuelvo el canon!"),
-
-    # Scene 4: Flea & Superband
-    ("FLEA", "¡YEAH! ¡Slapping the bass is quantum energy manipulation, baby! ¡Cada vez que le pego un tironazo a la cuerda de Sol, el espacio-tiempo se dobla dos coma ocho segundos!"),
-    ("GON", "¡Ese slap de bajo está sintonizado a la constante cosmológica! ¡Frusciante! ¡Flea! ¡Formemos la superbanda The 2.8 Second Interval!"),
-
-    # Scene 5: UNEXPECTED TWIST - Hermenegildo Altozano, El Nota & Escohotado!
-    ("HERMENEGILDO", "¡Pausa todo el mundo! ¡He analizado armónicamente el silencio de dos coma ocho segundos! ¡Es una suspensión de Novena Dominante con quinta disminuida! ¡Os lo explico en el teclado!"),
-    ("EL_NOTA", "Woah, tíos... Tranquilos. Veo mucho volumen y mucho estrés... El Nota no se estresa por los fotones. The Dude abides, man. Tomad un Ruso Blanco y dejad que el tiempo fluya."),
-    ("ESCOHOTADO", "De la piel para dentro empieza mi jurisdicción. Mi cuerpo y mi mente son mi fortaleza inexpugnable. El Intervalo Prohibido no se decreta por ley: es el espacio inviolable de la libertad humana."),
-
-    # Scene 6: Carl Cox & Blan Cox (El juego de palabras cósmico)
-    ("CARL_COX", "¡OH YES, OH YES! ¡Listen mate, a ciento veintiocho BPM, con mi hermano el gran BLAN COX!"),
-    ("BLAN_COX", "Look at us... Carl Cox and Blan Cox... The cosmic wordplay of low entropy in an expanding universe... Wonderful."),
-
-    # The Forbidden Interval Pause
-    ("PAUSA", "PAUSA DE 2.8 SEGUNDOS — DE LA PIEL PARA DENTRO EMPIEZA MI JURISDICCIÓN"),
-
-    # Conclusion
+# Dialogue Script Part 2 (The Sequel: La Rebelión de los Fotones)
+DIALOGUE_SEQUEL = [
+    ("GON", "¡Alerta general! ¡El Sindicato de la Hipervelocidad ha bloqueado la pausa de dos coma ocho segundos en toda la galaxia!"),
+    ("CHICOTE", "¡Pero bueno! ¡¿Pero qué es esta marranada galáctica?! ¡Nos están metiendo petabytes de spam directamente en la corteza cerebral!"),
+    ("KIMI_K3", "¡Chef Chicote! ¡Me he tenido que autodestruir el disco C y conectarme al bajo de Flea para salvar la dignidad!"),
+    ("BLAN_COX", "Look at this... The only way to restore the pause is to travel to the supermassive black hole Sagittarius A... Amazing."),
+    ("CARL_COX", "¡OH YES, OH YES! ¡Piloto Carl Cox al mando a ciento veintiocho BPM! ¡Rumbo al hoyo negro!"),
+    ("FLEA", "¡BOOM! ¡Si el hoyo negro nos intenta tragar, le meto un slap a la constante gravitacional que lo pongo a bailar por funk!"),
+    ("RASPUTIN", "¡No temáis al abismo! ¡Un hoyo negro es solo un pozo de agua fría si aplicas la pausa correcta!"),
+    ("HERMENEGILDO", "¡Pausa todo el mundo! ¡El hoyo negro no destruye la materia! ¡El hoyo negro está afinado en Do menor armónico!"),
+    ("EL_NOTA", "Woah, tíos... Habéis cruzado toda la galaxia con mucho estrés... The Dude abides, man. Tomad un Ruso Blanco de materia oscura."),
+    ("DON_SANTIAGO", "El chorizo en gravedad cero sabe más curado."),
+    ("ESCOHOTADO", "De la piel para dentro empieza mi jurisdicción. Mi cuerpo y mi mente son mi fortaleza inexpugnable. El Intervalo Prohibido es el espacio sagrado de la libertad."),
+    ("FRUSCIANTE", "¡KA... ME... HA... ME... HAAAAAAAAAAAAAAAAAAAA!"),
+    ("CARL_COX", "¡OH YES, OH YES! ¡Drop definitivo de la galaxia!"),
     ("FLEA", "¡Slap, drop and freedom!"),
-    ("CARL_COX", "¡OH YES, OH YES! ¡Drop definitivo!"),
-    ("GON", "¡El Intervalo Prohibido se habita, no se mide! ¡Hasta el intervalo siempre!"),
-    ("ESCOHOTADO", "De la piel para dentro empieza mi jurisdicción."),
-    ("BLAN_COX", "We are starstuff enjoying a two point eight second pause... Wonderful.")
+    ("PAUSA", "PAUSA DE 2.8 SEGUNDOS — DE LA PIEL PARA DENTRO EMPIEZA MI JURISDICCIÓN"),
+    ("BLAN_COX", "We are starstuff enjoying a two point eight second pause across the universe... Wonderful.")
 ]
 
 def get_audio_duration(file_path):
     try:
         with wave.open(file_path, 'r') as wf:
-            frames = wf.getnframes()
-            rate = wf.getframerate()
-            return frames / float(rate)
+            return wf.getnframes() / float(wf.getframerate())
     except Exception as e:
         print(f"Error reading {file_path}: {e}")
         return 0.0
 
-def generate_speech():
+def generate_speech(dialogue_list, output_name):
     playlist_files = []
     subtitles = []
     current_time = 0.0
     fps = 30
 
-    print("Generating audio tracks for characters...")
+    print(f"Generating audio tracks for {output_name}...")
 
-    for idx, (speaker, text) in enumerate(DIALOGUE):
+    for idx, (speaker, text) in enumerate(dialogue_list):
         cfg = VOICE_CONFIGS[speaker]
-        out_file = os.path.join(TEMP_DIR, f"segment_{idx:03d}.wav")
+        out_file = os.path.join(TEMP_DIR, f"{output_name}_{idx:03d}.wav")
 
         if speaker == "PAUSA":
             duration = cfg["duration"]
@@ -106,7 +81,7 @@ def generate_speech():
         else:
             voice = cfg["voice"]
             rate = cfg["rate"]
-            aiff_file = os.path.join(TEMP_DIR, f"temp_{idx:03d}.aiff")
+            aiff_file = os.path.join(TEMP_DIR, f"temp_{output_name}_{idx:03d}.aiff")
 
             subprocess.run(["say", "-v", voice, "-r", str(rate), "-o", aiff_file, text], check=True)
 
@@ -137,24 +112,24 @@ def generate_speech():
         playlist_files.append(out_file)
         current_time += duration
 
-    concat_list_path = os.path.join(TEMP_DIR, "concat.txt")
+    concat_list_path = os.path.join(TEMP_DIR, f"concat_{output_name}.txt")
     with open(concat_list_path, "w") as f:
         for p in playlist_files:
             f.write(f"file '{p}'\n")
 
-    master_wav = os.path.join(PUBLIC_DIR, "dialogue_master.wav")
-    print("Concatenating master audio track...")
+    master_wav = os.path.join(PUBLIC_DIR, f"{output_name}_master.wav")
+    print(f"Concatenating {output_name} master audio track...")
     subprocess.run([
         "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", concat_list_path,
         "-c", "copy", master_wav
     ], check=True)
 
-    sub_path = os.path.join(PUBLIC_DIR, "subtitles.json")
+    sub_path = os.path.join(PUBLIC_DIR, f"{output_name}_subtitles.json")
     with open(sub_path, "w", encoding="utf-8") as f:
         json.dump(subtitles, f, indent=2, ensure_ascii=False)
 
     total_frames = int(round(current_time * fps))
-    print(f"DONE! Total Audio Duration: {current_time:.2f}s ({total_frames} frames at 30 fps)")
+    print(f"DONE {output_name}! Duration: {current_time:.2f}s ({total_frames} frames at 30 fps)")
 
 if __name__ == "__main__":
-    generate_speech()
+    generate_speech(DIALOGUE_SEQUEL, "sequel")
