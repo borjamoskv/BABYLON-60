@@ -1,15 +1,16 @@
 // C5-REAL EXERGY CERTIFIED
 // ffi_bridge.rs — Implementación axiomáticamente verificable
+#![allow(unsafe_op_in_unsafe_fn)]
 use std::os::raw::{c_int, c_void};
 use std::ptr;
 use std::sync::atomic::Ordering;
 
-use crate::ipc::ebr::{EpochState, SharedManifest};
+use crate::ipc::ebr::EpochState;
 
 pub const SHARED_STATE_SIZE: usize = std::mem::size_of::<EpochState>();
 
 /// AXIOMA 3: Mapeo sin inicialización. Estado es ⊥ hasta initialize_epoch_state.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn init_shared_memory(fd: c_int) -> *mut EpochState {
     let addr = libc::mmap(
         ptr::null_mut(),
@@ -27,7 +28,7 @@ pub unsafe extern "C" fn init_shared_memory(fd: c_int) -> *mut EpochState {
 }
 
 /// AXIOMA 3: Constructor in-place determinista sobre memoria externa.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn initialize_epoch_state(ptr: *mut EpochState) {
     if ptr.is_null() { return; }
     (*ptr).active_epoch_ptr.store(ptr::null_mut(), Ordering::Release);
@@ -37,7 +38,7 @@ pub unsafe extern "C" fn initialize_epoch_state(ptr: *mut EpochState) {
 
 /// AXIOMA 2 + AXIOMA 7: Lectura con Acquire fence, sin efectos secundarios.
 /// Retorna 1 si válido, 0 si nulo. Valores por copia, no por puntero expuesto.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn read_active_epoch_safe(
     state: *const EpochState,
     out_epoch_id: *mut u64,
@@ -60,7 +61,7 @@ pub unsafe extern "C" fn read_active_epoch_safe(
 }
 
 /// AXIOMA 4: Liberación solo válida en mismo espacio de direcciones.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn destroy_shared_memory(ptr: *mut EpochState) {
     if !ptr.is_null() {
         libc::munmap(ptr as *mut c_void, SHARED_STATE_SIZE);
