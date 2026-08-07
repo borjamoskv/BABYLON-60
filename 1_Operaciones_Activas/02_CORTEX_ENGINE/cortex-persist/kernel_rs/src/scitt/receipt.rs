@@ -11,6 +11,14 @@ pub struct EpistemicHalt {
     pub reason: String,
 }
 
+impl std::fmt::Display for EpistemicHalt {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "EpistemicHalt: {}", self.reason)
+    }
+}
+
+impl std::error::Error for EpistemicHalt {}
+
 impl From<String> for EpistemicHalt {
     fn from(reason: String) -> Self {
         EpistemicHalt { reason }
@@ -136,7 +144,7 @@ impl TransitionRecord {
 
         // 2. Construcción de headers protegidos (RFC 9052)
         let protected = HeaderBuilder::new()
-            .alg(coset::iana::Algorithm::EdDSA)
+            .algorithm(coset::iana::Algorithm::EdDSA)
             .build();
 
         // 3. Construcción explícita de Sig_structure según RFC 9052 Section 4.4:
@@ -160,8 +168,8 @@ impl TransitionRecord {
 
         // 5. Validación fail-stop de salida
         cose_sign1
-            .to_cbor_vec()
-            .map_err(|e| EpistemicHalt::from(format!("COSE Sign1 serialization validation failed: {}", e)))?;
+            .to_vec()
+            .map_err(|e| EpistemicHalt::from(format!("COSE Sign1 serialization validation failed: {:?}", e)))?;
 
         Ok(cose_sign1)
     }

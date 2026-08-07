@@ -86,6 +86,6 @@ impl CommitGate {
         let signature = record.sign_scitt(&self.signing_key)?;
 
         // Retorna la firma para integrarse en el TransportAck Protobuf hacia Python
-        Ok(signature.to_bytes().to_vec())
+        Ok(signature.to_vec().map_err(|e| format!("{:?}", e))?)
     }
 }
