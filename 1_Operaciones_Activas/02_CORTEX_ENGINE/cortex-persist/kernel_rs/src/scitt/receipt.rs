@@ -147,32 +147,26 @@ impl TransitionRecord {
             .algorithm(coset::iana::Algorithm::EdDSA)
             .build();
 
-        let protected_header = coset::ProtectedHeader {
-            original_data: None,
-            header: protected.clone(),
-        };
-
-        // 3. Construcción explícita de Sig_structure según RFC 9052 Section 4.4:
-        // Sig_structure = ["Signature1", protected_headers_cbor, external_aad, payload]
-        let sig_structure = coset::sig_structure_data(
-            coset::SignatureContext::CoseSign1,
-            protected_header,
-            None,           // No unprotected headers en Sign1
-            b"",            // External AAD vacío (SCITT default)
-            &payload,
-        );
-
-        // 4. Firma Ed25519 sobre la Sig_structure CBOR serializada, NO sobre payload raw
-        let signature = key.sign(&sig_structure);
-
-        let cose_sign1 = CoseSign1Builder::new()
+        // 3. FIRMA CORREGIDA: Construir CoseSign1Builder PRIMERO sin firma
+        // Esto maneja internamente la estructura Sig_structure (RFC 9052)
+        let mut cose_sign1_builder = CoseSign1Builder::new()
             .protected(protected)
-            .payload(payload)
-            .signature(signature.to_bytes().to_vec())
+            .payload(payload);
+
+        // 4. Firmar sobre la estructura canónica Sig_structure
+        let cose_sign1 = cose_sign1_builder
+            .try_create_signature(
+                &[], // Empty AAD
+                |sig_structure| {
+                    Ok::<_, std::convert::Infallible>(key.sign(sig_structure).to_bytes().to_vec())
+                },
+            )
+            .map_err(|_| EpistemicHalt::from("Signature creation failed".to_string()))?
             .build();
 
         // 5. Validación fail-stop de salida
         cose_sign1
+            .clone()
             .to_vec()
             .map_err(|e| EpistemicHalt::from(format!("COSE Sign1 serialization validation failed: {:?}", e)))?;
 
