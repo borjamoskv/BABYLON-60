@@ -2,6 +2,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import wasm from 'vite-plugin-wasm'
+import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -9,6 +10,11 @@ export default defineConfig({
     react(),
     wasm()
   ],
+  resolve: {
+    alias: {
+      'cortex-wasm': path.resolve(__dirname, '../../../cortex-wasm/pkg/cortex_wasm.js')
+    }
+  },
   build: {
     // Enable aggressive tree‑shaking and manual chunking for vendor libs
     rollupOptions: {
