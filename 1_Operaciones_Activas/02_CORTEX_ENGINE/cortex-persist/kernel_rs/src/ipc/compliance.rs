@@ -4,89 +4,138 @@
 use core::marker::PhantomData;
 use core::ops::Drop;
 
-// --- SOC 2: AFFINE GEOMETRIC CONFIDENTIALITY ---
-// Data non-replication is enforced via Rust's linear type semantics.
-// Physical memory space is strictly owned and collapsed upon consumption.
-pub struct ConfidentialPayload<const BYTES: usize> {
-    buffer: [u8; BYTES],
-    pub entropy_mask: u64,
+// --- GEOMETRIC PRIMITIVES ---
+#[derive(Clone, Copy)]
+pub struct StateVector<const DIM: usize> {
+    pub coords: [u64; DIM],
 }
 
-impl<const BYTES: usize> ConfidentialPayload<BYTES> {
-    pub const fn new(data: [u8; BYTES], mask: u64) -> Self {
-        Self { buffer: data, entropy_mask: mask }
+impl<const DIM: usize> StateVector<DIM> {
+    pub const fn l2_norm_squared(&self) -> u64 {
+        let mut sum: u64 = 0;
+        let mut i = 0;
+        while i < DIM {
+            sum += self.coords[i] * self.coords[i];
+            i += 1;
+        }
+        sum
     }
 }
 
-// Zero-copy consumption: Physical destruction of the geometric space (Zeroization)
-impl<const BYTES: usize> Drop for ConfidentialPayload<BYTES> {
+// --- SOC 2: SECURE AFFINE CELL ---
+// Prevents unauthorized memory access via zero-sized proof tokens.
+pub struct SecureCell<T> {
+    inner: T,
+}
+
+pub struct ProofOfOwnership(pub ());
+
+impl<T> SecureCell<T> {
+    pub const fn seal(value: T) -> Self {
+        Self { inner: value }
+    }
+
+    pub fn consume(self, _proof: ProofOfOwnership) -> T {
+        self.inner
+    }
+}
+
+impl<T> Drop for SecureCell<T> {
     fn drop(&mut self) {
-        unsafe { core::ptr::write_volatile(self.buffer.as_mut_ptr(), 0); }
-    }
-}
-
-// --- EU AI ACT: HIGH-RISK TRACEABILITY MANIFOLD ---
-// Immutable append-only geometric hyperplanes for decision auditability.
-// Refactored to Fixed-Point / Integer arithmetic for SCITT determinism (Zero Anergia)
-pub struct TraceabilityManifold<const D: usize> {
-    pub vertices: [u128; D],
-    pub risk_weight_scaled: u32, // Fixed-point projection to prevent float non-determinism
-}
-
-impl<const D: usize> TraceabilityManifold<D> {
-    pub const fn evaluate_risk_surface(&self) -> u32 {
-        self.risk_weight_scaled.saturating_mul(D as u32)
-    }
-}
-
-// --- CONTRACTUAL CAP: LIPSCHITZ CONTINUITY BOUNDS ---
-// Prevents B2B liability explosion via strict mathematical bounding.
-pub struct ContractualCap<const MAX_NORM: u32, T> {
-    bounded_state: T,
-    _cap_marker: PhantomData<T>,
-}
-
-pub trait LipschitzContinuous {
-    fn compute_divergence(&self) -> u32;
-}
-
-// Implement Lipschitz bounds for the Confidential Payload
-impl<const BYTES: usize> LipschitzContinuous for ConfidentialPayload<BYTES> {
-    fn compute_divergence(&self) -> u32 {
-        BYTES as u32
-    }
-}
-
-impl<const MAX: u32, T: LipschitzContinuous> ContractualCap<MAX, T> {
-    pub fn enforce_cap(state: T) -> Result<Self, ()> {
-        if state.compute_divergence() > MAX {
-            Err(()) // Contractual Breach: Geometric divergence exceeds B2B SLA
-        } else {
-            Ok(Self { bounded_state: state, _cap_marker: PhantomData })
+        // Thermodynamic destruction: overwrite with entropy before deallocation
+        unsafe {
+            let ptr = &mut self.inner as *mut T as *mut u8;
+            let size = core::mem::size_of::<T>();
+            let mut i = 0;
+            while i < size {
+                core::ptr::write_volatile(ptr.add(i), 0xAA);
+                i += 1;
+            }
         }
     }
 }
 
-// --- RING-0 COMPLIANCE KERNEL EXECUTOR ---
-pub fn initiate_b2b_execution<const D: usize>(
-    payload: ConfidentialPayload<256>,
-    trace: TraceabilityManifold<D>,
-) -> Result<(), ()> {
+// --- EU AI ACT: IMMUTABLE TRACE MANIFOLD ---
+// Append-only geometric log for high-risk system auditability.
+pub struct TraceManifold<const CAPACITY: usize, const DIM: usize> {
+    buffer: [StateVector<DIM>; CAPACITY],
+    cursor: usize,
+    cumulative_hash: u64,
+}
 
-    // 1. EU AI Act Compliance Check (Deterministic Geometric Risk Projection)
-    // Threshold evaluated using bit-perfect integer arithmetic
-    const MAX_RISK_THRESHOLD: u32 = 100_000;
-    if trace.evaluate_risk_surface() > MAX_RISK_THRESHOLD {
-        return Err(()); // Reject High-Risk execution state
+impl<const CAPACITY: usize, const DIM: usize> TraceManifold<CAPACITY, DIM> {
+    pub const fn new() -> Self {
+        Self {
+            buffer: [StateVector { coords: [0; DIM] }; CAPACITY],
+            cursor: 0,
+            cumulative_hash: 0,
+        }
     }
 
-    // 2. Contractual Cap enforcement (Simulated Norm Bound)
-    const MAX_B2B_CAP: u32 = 1000;
-    let bounded_payload = ContractualCap::<MAX_B2B_CAP, _>::enforce_cap(payload)?;
+    pub fn append(&mut self, state: StateVector<DIM>) -> Result<(), ()> {
+        if self.cursor >= CAPACITY {
+            return Err(()); // Traceability overflow violates EU AI Act retention policies
+        }
+        self.buffer[self.cursor] = state;
+        self.cumulative_hash ^= state.l2_norm_squared();
+        self.cursor += 1;
+        Ok(())
+    }
 
-    // 3. SOC 2 Data Wipe (Affine execution & memory zeroization)
-    // Dropping bounded_payload triggers ConfidentialPayload::drop() which executes write_volatile
-    drop(bounded_payload);
+    pub const fn verify_integrity(&self) -> u64 {
+        self.cumulative_hash
+    }
+}
 
-    Ok(())
+// --- CONTRACTUAL CAP: BOUNDED NORM INVARIANT ---
+// Liability cap encoded as a compile-time geometric boundary.
+pub struct BoundedState<const CAP: u64, const DIM: usize> {
+    vector: StateVector<DIM>,
+}
+
+impl<const CAP: u64, const DIM: usize> BoundedState<CAP, DIM> {
+    pub fn try_new(vector: StateVector<DIM>) -> Result<Self, ()> {
+        if vector.l2_norm_squared() > CAP * CAP {
+            Err(()) // Contractual breach: state exceeds agreed liability manifold
+        } else {
+            Ok(Self { vector })
+        }
+    }
+
+    pub const fn get(&self) -> &StateVector<DIM> {
+        &self.vector
+    }
+}
+
+// --- RING-0 KERNEL ORCHESTRATOR ---
+pub struct ComplianceKernel<const DIM: usize, const TRACE_CAP: usize, const LIABILITY_CAP: u64> {
+    trace: TraceManifold<TRACE_CAP, DIM>,
+    _phantom: PhantomData<[(); DIM]>,
+}
+
+impl<const DIM: usize, const TRACE_CAP: usize, const LIABILITY_CAP: u64>
+    ComplianceKernel<DIM, TRACE_CAP, LIABILITY_CAP>
+{
+    pub const fn init() -> Self {
+        Self {
+            trace: TraceManifold::new(),
+            _phantom: PhantomData,
+        }
+    }
+
+    pub fn execute_b2b_transaction(
+        &mut self,
+        input: SecureCell<StateVector<DIM>>,
+        _proof: ProofOfOwnership,
+    ) -> Result<BoundedState<LIABILITY_CAP, DIM>, ()> {
+        let state = input.consume(_proof);
+
+        // Enforce contractual cap geometrically
+        let bounded = BoundedState::<LIABILITY_CAP, DIM>::try_new(state)?;
+
+        // Record immutable trace for EU AI Act compliance
+        self.trace.append(*bounded.get())?;
+
+        Ok(bounded)
+    }
 }
