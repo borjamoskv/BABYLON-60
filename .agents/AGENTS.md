@@ -68,3 +68,9 @@
 ## Invariante de Carga FFI y Resolución de Artefactos de Silicio (Cargo Workspace)
 - **Resolución Ascendente de Artefactos (`target/` Unificado):** Ningún cargador FFI (Python `ctypes`, Node.js FFI o tests) debe asumir rutas relativas rígidas a subdirectorios locales de crate. DEBE resolver dinámicamente la raíz del Workspace (`target/debug/` o `target/release/`) mediante búsqueda ascendente hacia la raíz del repositorio Git, garantizando ejecución determinista desde cualquier punto del árbol.
 - **Validación de Presencia de Binario Previa:** Todo cargador DEBE emitir un mensaje de diagnóstico con el comando de compilación unificado exacto (`cargo build --workspace`) en caso de no encontrar la librería dinámica (`libcortex_kernel.dylib` / `.so`).
+
+## Invariante de Generación de Vídeo Audio-Reactivo (Patrón Híbrido FFmpeg-Remotion)
+- **Desacoplamiento Kernel-Composición:** Para vídeos de larga duración (>5 min) con espectros de audio y visualizadores complejos, el fondo reactivo DEBE generarse mediante scripts FFmpeg puros usando `libx264` (o `-preset ultrafast` en entorno local) y consumirse en Remotion como un componente `<Video src={staticFile(...)} />`.
+- **Límites de Filtros FFmpeg:** En filtros `showvolume`, el parámetro de altura `h` no debe exceder 900 (encadenando con `,scale=W:H` posterior para 1080x1920) y el parámetro de borde `b` no debe exceder 5.
+- **Lip-Sync Geométrico en Remotion:** La animación de avatares en la capa React debe priorizar transformaciones trigonométricas de escala `(scaleX, scaleY)` y funciones de física `spring()` antes que pipelines pesados de ML local para maximizar la velocidad de renderizado.
+
