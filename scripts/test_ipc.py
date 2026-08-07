@@ -19,6 +19,11 @@ def run_falsification_test():
             epoch, ts = orch.get_active_epoch()
             print(f"[TEST] Epoch Inicial Leído: {epoch} (Timestamp: {ts})")
             print("[TEST] ¡Falsación superada! El puente FFI funciona en Ring-0.")
+
+            print("[TEST] Solicitando Anclaje L5 (OpenTimestamps)...")
+            payload = {"action": "c5_real_falsification_test", "metrics": {"anergy": 0}}
+            anchor_receipt = orch.stamp_active_epoch(payload)
+            print(f"[TEST] Recibo L5: {anchor_receipt}")
     except Exception as e:
         print(f"[TEST ERROR] Fallo en la falsación IPC: {e}")
         sys.exit(1)
