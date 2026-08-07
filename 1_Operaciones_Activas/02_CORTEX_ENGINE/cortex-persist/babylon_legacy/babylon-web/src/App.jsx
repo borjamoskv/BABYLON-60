@@ -19,6 +19,7 @@ import { Hero } from './components/landing/Hero';
 import { ValueProps } from './components/landing/ValueProps';
 import { IRPMembrane } from './components/simulator/IRPMembrane';
 import { BFTLedger } from './components/simulator/BFTLedger';
+import { CUSUMMonitorPanel } from './components/simulator/CUSUMMonitorPanel';
 import { ScoreExplorer } from './components/explorer/ScoreExplorer';
 
 // Web Crypto helper decoupled from F# Kernel
@@ -139,6 +140,9 @@ function App() {
               bftLogs={bftLogs}
               kernelState={kernelState}
               lastParentId={lastParentId}
+            />
+            <CUSUMMonitorPanel
+              kernelState={kernelState}
             />
           </div>
         </section>

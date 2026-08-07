@@ -23,9 +23,9 @@ export function Hero() {
         <a href="#kernel-sim" className="btn btn-primary animate-pulse-glow" style={{ padding: '1rem 3rem', fontSize: '1.1rem' }}>
           Inspect IRP Kernel
         </a>
-        <button className="btn btn-outline" style={{ padding: '1rem 3rem', fontSize: '1.1rem' }} onClick={() => window.open('https://github.com/borjamoskv/Teorema-Robinson-Moskv', '_blank')}>
+        <a href="#compliance" className="btn btn-outline" style={{ padding: '1rem 3rem', fontSize: '1.1rem' }}>
           Read the Axioms
-        </button>
+        </a>
       </div>
     </div>
   );

@@ -3,12 +3,12 @@ import React from 'react';
 
 export function ValueProps() {
   return (
-    <section style={{ marginTop: '8rem' }}>
+    <section id="compliance" style={{ marginTop: '8rem' }}>
       <div className="grid-3">
         <div className="glass-panel" style={{ padding: '2rem' }}>
           <h3 className="text-mono" style={{ color: 'var(--accent-primary)', marginBottom: '1rem' }}>01. Local-First</h3>
           <p style={{ color: 'var(--text-muted)' }}>
-            Your agents run locally. All embeddings and memory reside in your SQLite database. BABYLON-60 never reads your raw data.
+            Your agents run locally. All embeddings and memory reside in your SQLite database. BABYLON60 never reads your raw data.
           </p>
         </div>
 
