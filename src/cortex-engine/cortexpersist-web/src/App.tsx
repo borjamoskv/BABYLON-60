@@ -32,11 +32,11 @@ function App() {
           <div className="terminal-window">
             <div className="code-line">
               <span className="prompt">$&gt;</span>
-              <span className="command">npm install cortex-persist</span>
+              <span className="command">pip install cortex-persist</span>
             </div>
             <div className="code-line">
               <span className="prompt">$&gt;</span>
-              <span className="command">cortex init --bft-nodes=100</span>
+              <span className="command">python3 -m cortex init --bft-nodes=100</span>
             </div>
             <div className="code-line">
               <span className="prompt" style={{color: '#888'}}># [CORTEX-TAINT:OK] Ledger isolated successfully.</span>
