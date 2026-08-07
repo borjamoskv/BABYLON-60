@@ -1,19 +1,67 @@
 # C5-REAL EXERGY CERTIFIED
-name: C5-REAL Matrix Build
+name: C5-REAL Matrix CI & Falsification Gate
 
 on:
   push:
-    branches: [ main ]
+    branches: [main, master]
   pull_request:
-    branches: [ main ]
+    branches: [main, master]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build:
+  rust-and-popper-gate:
+    name: "Rust Kernel & Popperian Falsification Gate (INV-3)"
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, macos-latest]
+        python-version: ["3.11", "3.12"]
+
     steps:
-    - uses: actions/checkout@v4
-    - name: Fricción Cero - Echo placeholder
-      run: echo "Inyectar dependencias (Node/Rust/Python) aquí"
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Rust Toolchain (2024 Edition)
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cargo Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip"
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install pytest pytest-cov
+
+      - name: Check Rust Kernel Workspace Compilation
+        run: cargo check --workspace
+
+      - name: Build Rust Kernel Dynamic Library (.dylib / .so)
+        run: cargo build -p cortex_kernel
+
+      - name: Execute C5-REAL Popperian Falsification Suite (INV-3)
+        run: |
+          python3 scripts/verify_popper_coverage.py
+
+      - name: Execute IPC FFI Integration Test
+        run: |
+          PYTHONPATH=src/cortex-engine python3 scripts/test_ipc.py

@@ -1,5 +1,5 @@
 # C5-REAL EXERGY CERTIFIED
-name: Python Tests
+name: Python Tests & Popperian Verification
 
 on:
   push:
@@ -22,11 +22,21 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
+    - name: Set up Rust toolchain
+      uses: dtolnay/rust-toolchain@stable
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        pip install pytest
 
-    - name: Run tests with pytest
+    - name: Build Kernel
+      run: cargo build -p cortex_kernel
+
+    - name: Run Popperian Falsification Gate
+      run: python3 scripts/verify_popper_coverage.py
+
+    - name: Run compliance suite tests
       run: |
-        pytest tests/
+        PYTHONPATH=src/cortex-engine pytest tests/

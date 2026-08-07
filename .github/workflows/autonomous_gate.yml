@@ -1,5 +1,5 @@
 # C5-REAL EXERGY CERTIFIED
-name: Autonomous Security Gate
+name: Autonomous Security & Falsification Gate
 
 on:
   pull_request:
@@ -29,14 +29,17 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
-          pip install bandit
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install bandit pytest pytest-cov
 
-      - name: Run automated tests
-        run: pytest --cov=cortex --cov-report=xml
+      - name: Build Rust Kernel
+        run: cargo build -p cortex_kernel
 
-      - name: Security lint (Bandit)
-        run: bandit -r cortex -f json -o bandit.json || true
+      - name: Run Empirical Popperian Coverage (INV-3)
+        run: python3 scripts/verify_popper_coverage.py
+
+      - name: Security Lint (Bandit)
+        run: bandit -r src/cortex-engine -f json -o bandit.json || true
 
       - name: Upload Bandit report
         if: always()
