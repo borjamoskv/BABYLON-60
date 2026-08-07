@@ -1,0 +1,178 @@
+[
+  {
+    "id": 0,
+    "speaker": "GON",
+    "avatar": "⏱️",
+    "color": "#00F0FF",
+    "text": "¡Alerta general! ¡El Sindicato de la Hipervelocidad ha bloqueado la pausa de dos coma ocho segundos en toda la galaxia!",
+    "startTime": 0.0,
+    "endTime": 5.33,
+    "startFrame": 0,
+    "endFrame": 160
+  },
+  {
+    "id": 1,
+    "speaker": "CHICOTE",
+    "avatar": "👨‍🍳",
+    "color": "#FF3333",
+    "text": "¡Pero bueno! ¡¿Pero qué es esta marranada galáctica?! ¡Nos están metiendo petabytes de spam directamente en la corteza cerebral!",
+    "startTime": 5.33,
+    "endTime": 18.92,
+    "startFrame": 160,
+    "endFrame": 568
+  },
+  {
+    "id": 2,
+    "speaker": "KIMI_K3",
+    "avatar": "🤖",
+    "color": "#33FFFF",
+    "text": "¡Chef Chicote! ¡Me he tenido que autodestruir el disco C y conectarme al bajo de Flea para salvar la dignidad!",
+    "startTime": 18.92,
+    "endTime": 28.18,
+    "startFrame": 568,
+    "endFrame": 846
+  },
+  {
+    "id": 3,
+    "speaker": "BLAN_COX",
+    "avatar": "🌌",
+    "color": "#FF00FF",
+    "text": "Look at this... The only way to restore the pause is to travel to the supermassive black hole Sagittarius A... Amazing.",
+    "startTime": 28.18,
+    "endTime": 36.63,
+    "startFrame": 846,
+    "endFrame": 1099
+  },
+  {
+    "id": 4,
+    "speaker": "CARL_COX",
+    "avatar": "🎧",
+    "color": "#00FF66",
+    "text": "¡OH YES, OH YES! ¡Piloto Carl Cox al mando a ciento veintiocho BPM! ¡Rumbo al hoyo negro!",
+    "startTime": 36.63,
+    "endTime": 47.91,
+    "startFrame": 1099,
+    "endFrame": 1437
+  },
+  {
+    "id": 5,
+    "speaker": "FLEA",
+    "avatar": "⚡",
+    "color": "#FF6600",
+    "text": "¡BOOM! ¡Si el hoyo negro nos intenta tragar, le meto un slap a la constante gravitacional que lo pongo a bailar por funk!",
+    "startTime": 47.91,
+    "endTime": 57.63,
+    "startFrame": 1437,
+    "endFrame": 1729
+  },
+  {
+    "id": 6,
+    "speaker": "RASPUTIN",
+    "avatar": "🪆",
+    "color": "#9933FF",
+    "text": "¡No temáis al abismo! ¡Un hoyo negro es solo un pozo de agua fría si aplicas la pausa correcta!",
+    "startTime": 57.63,
+    "endTime": 68.54,
+    "startFrame": 1729,
+    "endFrame": 2056
+  },
+  {
+    "id": 7,
+    "speaker": "HERMENEGILDO",
+    "avatar": "🎹",
+    "color": "#00FFCC",
+    "text": "¡Pausa todo el mundo! ¡El hoyo negro no destruye la materia! ¡El hoyo negro está afinado en Do menor armónico!",
+    "startTime": 68.54,
+    "endTime": 80.91,
+    "startFrame": 2056,
+    "endFrame": 2427
+  },
+  {
+    "id": 8,
+    "speaker": "EL_NOTA",
+    "avatar": "🍹",
+    "color": "#CCCC00",
+    "text": "Woah, tíos... Habéis cruzado toda la galaxia con mucho estrés... The Dude abides, man. Tomad un Ruso Blanco de materia oscura.",
+    "startTime": 80.91,
+    "endTime": 93.35,
+    "startFrame": 2427,
+    "endFrame": 2801
+  },
+  {
+    "id": 9,
+    "speaker": "DON_SANTIAGO",
+    "avatar": "🥖",
+    "color": "#CC9966",
+    "text": "El chorizo en gravedad cero sabe más curado.",
+    "startTime": 93.35,
+    "endTime": 97.72,
+    "startFrame": 2801,
+    "endFrame": 2932
+  },
+  {
+    "id": 10,
+    "speaker": "ESCOHOTADO",
+    "avatar": "💨",
+    "color": "#D4AF37",
+    "text": "De la piel para dentro empieza mi jurisdicción. Mi cuerpo y mi mente son mi fortaleza inexpugnable. El Intervalo Prohibido es el espacio sagrado de la libertad.",
+    "startTime": 97.72,
+    "endTime": 112.4,
+    "startFrame": 2932,
+    "endFrame": 3372
+  },
+  {
+    "id": 11,
+    "speaker": "FRUSCIANTE",
+    "avatar": "🎸",
+    "color": "#FFD700",
+    "text": "¡KA... ME... HA... ME... HAAAAAAAAAAAAAAAAAAAA!",
+    "startTime": 112.4,
+    "endTime": 116.78,
+    "startFrame": 3372,
+    "endFrame": 3503
+  },
+  {
+    "id": 12,
+    "speaker": "CARL_COX",
+    "avatar": "🎧",
+    "color": "#00FF66",
+    "text": "¡OH YES, OH YES! ¡Drop definitivo de la galaxia!",
+    "startTime": 116.78,
+    "endTime": 122.47,
+    "startFrame": 3503,
+    "endFrame": 3674
+  },
+  {
+    "id": 13,
+    "speaker": "FLEA",
+    "avatar": "⚡",
+    "color": "#FF6600",
+    "text": "¡Slap, drop and freedom!",
+    "startTime": 122.47,
+    "endTime": 124.3,
+    "startFrame": 3674,
+    "endFrame": 3729
+  },
+  {
+    "id": 14,
+    "speaker": "PAUSA",
+    "avatar": "⏳",
+    "color": "#FFFFFF",
+    "text": "PAUSA DE 2.8 SEGUNDOS — DE LA PIEL PARA DENTRO EMPIEZA MI JURISDICCIÓN",
+    "startTime": 124.3,
+    "endTime": 127.1,
+    "startFrame": 3729,
+    "endFrame": 3813
+  },
+  {
+    "id": 15,
+    "speaker": "BLAN_COX",
+    "avatar": "🌌",
+    "color": "#FF00FF",
+    "text": "We are starstuff enjoying a two point eight second pause across the universe... Wonderful.",
+    "startTime": 127.1,
+    "endTime": 133.13,
+    "startFrame": 3813,
+    "endFrame": 3994
+  }
+]

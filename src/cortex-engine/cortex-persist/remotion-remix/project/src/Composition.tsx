@@ -7,18 +7,18 @@ import { SubtitleCard } from "./components/SubtitleCard";
 import { TimerWidget } from "./components/TimerWidget";
 import { MemeOverlay } from "./components/MemeOverlay";
 import { SubtitleItem } from "./types";
-import subtitleData from "../public/subtitles.json";
+import sequelSubtitleData from "../public/sequel_subtitles.json";
 
-const subtitles = subtitleData as SubtitleItem[];
+const subtitles = sequelSubtitleData as SubtitleItem[];
 
 const lastSubtitle = subtitles[subtitles.length - 1];
-export const TOTAL_DURATION_FRAMES = Math.max(5547, lastSubtitle ? lastSubtitle.endFrame + 30 : 5600);
+export const TOTAL_DURATION_FRAMES = Math.max(3600, lastSubtitle ? lastSubtitle.endFrame + 30 : 3800);
 
-export const IntervaloProhibidoRoot: React.FC = () => {
+export const IntervaloProhibidoSequelRoot: React.FC = () => {
   return (
     <Composition
-      id="IntervaloProhibidoVideo"
-      component={IntervaloProhibidoComposition}
+      id="IntervaloProhibido2"
+      component={IntervaloProhibidoSequelComposition}
       durationInFrames={TOTAL_DURATION_FRAMES}
       fps={30}
       width={1080}
@@ -27,7 +27,7 @@ export const IntervaloProhibidoRoot: React.FC = () => {
   );
 };
 
-export const IntervaloProhibidoComposition: React.FC = () => {
+export const IntervaloProhibidoSequelComposition: React.FC = () => {
   const frame = useCurrentFrame();
 
   const activeSub = subtitles.find(
@@ -75,7 +75,7 @@ export const IntervaloProhibidoComposition: React.FC = () => {
               textShadow: "0 0 25px #00F0FF",
             }}
           >
-            EL INTERVALO PROHIBIDO
+            EL INTERVALO PROHIBIDO 2
           </div>
           <div
             style={{
@@ -86,7 +86,7 @@ export const IntervaloProhibidoComposition: React.FC = () => {
               fontFamily: "system-ui, sans-serif",
             }}
           >
-            MEME EDITION — DE LA PIEL PARA DENTRO
+            LA REBELIÓN DE LOS FOTONES // SAGITTARIUS A*
           </div>
         </div>
 
@@ -117,8 +117,8 @@ export const IntervaloProhibidoComposition: React.FC = () => {
         </div>
       </div>
 
-      {/* Master Dialogue Audio Track */}
-      <Audio src={staticFile("dialogue_master.wav")} volume={1.0} />
+      {/* Sequel Master Audio Track */}
+      <Audio src={staticFile("sequel_master.wav")} volume={1.0} />
     </AbsoluteFill>
   );
 };
