@@ -4,14 +4,14 @@ import os
 import json
 import subprocess
 import math
-import sys
 from PIL import Image, ImageDraw
 
 PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 PUBLIC_DIR = os.path.join(PROJECT_DIR, "public")
 SUBTITLES_FILE = os.path.join(PUBLIC_DIR, "sequel_subtitles.json")
 AUDIO_FILE = os.path.join(PUBLIC_DIR, "sequel_master.wav")
-OUTPUT_FILE = os.path.join(PROJECT_DIR, "out_intervalo_prohibido_2.mp4")
+OUTPUT_FILE = os.path.join(PUBLIC_DIR, "out_intervalo_prohibido_2.mp4")
+ROOT_OUTPUT = os.path.join(PROJECT_DIR, "out_intervalo_prohibido_2.mp4")
 
 with open(SUBTITLES_FILE, "r", encoding="utf-8") as f:
     subtitles = json.load(f)
@@ -66,6 +66,7 @@ cmd = [
     OUTPUT_FILE
 ]
 
+print("Iniciando compilador streaming en memoria...")
 proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
 
 for frame_idx in range(0, total_frames, 2):
@@ -108,6 +109,13 @@ for frame_idx in range(0, total_frames, 2):
 
 proc.stdin.close()
 proc.wait()
+
+# Copy to root if possible
+try:
+    import shutil
+    shutil.copyfile(OUTPUT_FILE, ROOT_OUTPUT)
+except Exception:
+    pass
 
 print("=== RECREACIÓN COMPLETA DEL VÍDEO EN MEMORIA FINALIZADA ===")
 print("Vídeo maestro creado en:", OUTPUT_FILE)
