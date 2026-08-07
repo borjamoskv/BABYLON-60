@@ -17,7 +17,7 @@ interface Props {
   onSelectReceipt?: (receipt: ScittReceipt) => void;
 }
 
-export const ReceiptStream: React.FC<Props> = ({ receipts, onSelectReceipt }) => {
+export const ReceiptStream = ({ receipts, onSelectReceipt }: Props) => {
   return (
     <div className="receipt-stream-panel">
       <div className="section-title">

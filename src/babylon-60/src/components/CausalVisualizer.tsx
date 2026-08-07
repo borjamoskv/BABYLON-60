@@ -32,12 +32,12 @@ interface Props {
   onParticleValidated?: () => void;
 }
 
-export const CausalVisualizer: React.FC<Props> = ({
+export const CausalVisualizer = ({
   isAttackActive,
   isFailStopActive,
   onParticlePurged,
   onParticleValidated,
-}) => {
+}: Props) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isAttackRef = useRef(isAttackActive);
   const isFailStopRef = useRef(isFailStopActive);
