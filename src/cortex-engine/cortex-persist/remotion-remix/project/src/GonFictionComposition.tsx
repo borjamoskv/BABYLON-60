@@ -17,6 +17,20 @@ export const GonFictionComposition: React.FC = () => {
 
   const isSilence = activeSub === null || activeSub.speaker === "PAUSA";
 
+  // Global Video Progress Bar (0 to 100%)
+  const globalProgress = interpolate(frame, [0, GON_FICTION_DURATION_FRAMES], [0, 100], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  // Local Subtitle/Sentence Progress Bar (0 to 100%)
+  const subProgress = activeSub
+    ? interpolate(frame, [activeSub.startFrame, activeSub.endFrame], [0, 100], {
+        extrapolateLeft: "clamp",
+        extrapolateRight: "clamp",
+      })
+    : 0;
+
   // Hyper-kinetic trig/spring animations for mouth & avatar physics
   const isSpeaking = !isSilence;
   const mouthScaleY = isSpeaking ? 1.0 + 0.4 * Math.abs(Math.sin(frame * 0.9)) : 0.8;
@@ -26,8 +40,8 @@ export const GonFictionComposition: React.FC = () => {
 
   // Character-based screen shake (Chicote & Flea generate intense kinetic jitter)
   const isHypedCharacter = activeSub && (activeSub.speaker === "CHICOTE" || activeSub.speaker === "FLEA" || activeSub.speaker === "FRUSCIANTE");
-  const jitterX = isSpeaking && isHypedCharacter ? (Math.sin(frame * 1.5) * 6) : 0;
-  const jitterY = isSpeaking && isHypedCharacter ? (Math.cos(frame * 1.8) * 6) : 0;
+  const jitterX = isSpeaking && isHypedCharacter ? Math.sin(frame * 1.5) * 6 : 0;
+  const jitterY = isSpeaking && isHypedCharacter ? Math.cos(frame * 1.8) * 6 : 0;
 
   // Spring animation for entrance when speaker changes
   const speakerEntrance = spring({
@@ -79,7 +93,29 @@ export const GonFictionComposition: React.FC = () => {
         }}
       />
 
-      {/* 3. ARCADE HUD (TOP HEADER) */}
+      {/* 3. TOP GLOBAL PROGRESS TIMER BAR (Arcade Time Bar) */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "8px",
+          backgroundColor: "rgba(255,255,255,0.1)",
+          zIndex: 20,
+        }}
+      >
+        <div
+          style={{
+            height: "100%",
+            width: `${globalProgress}%`,
+            background: "linear-gradient(90deg, #00F0FF, #FF00FF, #FFD300)",
+            boxShadow: "0 0 12px #00F0FF",
+          }}
+        />
+      </div>
+
+      {/* 4. ARCADE HUD (TOP HEADER) */}
       <div
         style={{
           position: "absolute",
@@ -107,7 +143,7 @@ export const GonFictionComposition: React.FC = () => {
         </div>
       </div>
 
-      {/* 4. SUBTITLE / DIALOGUE & AVATAR LAYER */}
+      {/* 5. SUBTITLE / DIALOGUE & AVATAR LAYER */}
       <div
         style={{
           position: "absolute",
@@ -187,7 +223,7 @@ export const GonFictionComposition: React.FC = () => {
               👾 {activeSub.speaker}
             </div>
 
-            {/* TEXT DIALOGUE BOX (ARCADE DIALOGUE STYLE) */}
+            {/* TEXT DIALOGUE BOX WITH LOCAL SENTENCE TIMER BAR */}
             <div
               style={{
                 width: "100%",
@@ -199,7 +235,9 @@ export const GonFictionComposition: React.FC = () => {
                 boxSizing: "border-box",
                 display: "flex",
                 flexDirection: "column",
-                gap: "16px",
+                gap: "20px",
+                position: "relative",
+                overflow: "hidden",
               }}
             >
               <div
@@ -215,11 +253,31 @@ export const GonFictionComposition: React.FC = () => {
               >
                 "{activeSub.text}"
               </div>
+
+              {/* Sentence Progress / Timer Bar */}
+              <div
+                style={{
+                  width: "100%",
+                  height: "6px",
+                  backgroundColor: "rgba(255,255,255,0.1)",
+                  borderRadius: "3px",
+                  overflow: "hidden",
+                }}
+              >
+                <div
+                  style={{
+                    height: "100%",
+                    width: `${subProgress}%`,
+                    backgroundColor: activeSub.color,
+                    boxShadow: `0 0 10px ${activeSub.color}`,
+                  }}
+                />
+              </div>
             </div>
           </div>
         )}
 
-        {/* PAUSE / SILENCE DISPLAY */}
+        {/* PAUSE / SILENCE DISPLAY WITH TIMER COUNTDOWN BAR */}
         {isSilence && (
           <div
             style={{
@@ -232,14 +290,36 @@ export const GonFictionComposition: React.FC = () => {
               letterSpacing: "3px",
               textShadow: "0 0 10px #FFD300",
               marginBottom: "100px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "12px",
             }}
           >
-            ⏳ PAUSA ONTOLÓGICA EN BILBAO LA VIEJA...
+            <div>⏳ PAUSA ONTOLÓGICA EN BILBAO LA VIEJA...</div>
+            <div
+              style={{
+                width: "250px",
+                height: "6px",
+                backgroundColor: "rgba(255,211,0,0.2)",
+                borderRadius: "3px",
+                overflow: "hidden",
+              }}
+            >
+              <div
+                style={{
+                  height: "100%",
+                  width: `${subProgress}%`,
+                  backgroundColor: "#FFD300",
+                  boxShadow: "0 0 8px #FFD300",
+                }}
+              />
+            </div>
           </div>
         )}
       </div>
 
-      {/* 5. REACT EQUALIZER BARS (BOTTOM ACCENT) */}
+      {/* 6. REACT EQUALIZER BARS (BOTTOM ACCENT) */}
       <div
         style={{
           position: "absolute",
@@ -275,7 +355,7 @@ export const GonFictionComposition: React.FC = () => {
         })}
       </div>
 
-      {/* 6. FOOTER / SYSTEM STATUS */}
+      {/* 7. FOOTER / SYSTEM STATUS */}
       <div
         style={{
           position: "absolute",
@@ -294,7 +374,7 @@ export const GonFictionComposition: React.FC = () => {
         <div>BILBO ZAHARRA // 8-BIT NES EDITION</div>
       </div>
 
-      {/* 7. MASTER AUDIO TRACK */}
+      {/* 8. MASTER AUDIO TRACK */}
       <Audio src={staticFile("gon_fiction_master.wav")} volume={1.0} />
     </AbsoluteFill>
   );
