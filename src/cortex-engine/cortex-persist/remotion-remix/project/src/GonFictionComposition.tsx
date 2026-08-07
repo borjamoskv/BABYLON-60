@@ -19,37 +19,60 @@ export const GonFictionComposition: React.FC = () => {
 
   // Hyper-kinetic trig/spring animations for mouth & avatar physics
   const isSpeaking = !isSilence;
-  const mouthScaleY = isSpeaking ? 1.0 + 0.35 * Math.abs(Math.sin(frame * 0.9)) : 0.8;
+  const mouthScaleY = isSpeaking ? 1.0 + 0.4 * Math.abs(Math.sin(frame * 0.9)) : 0.8;
   const mouthScaleX = isSpeaking ? 1.0 + 0.15 * Math.cos(frame * 0.7) : 1.0;
-  const headRotation = isSpeaking ? Math.sin(frame * 0.4) * 6 : 0;
-  const pulseAura = isSpeaking ? 20 + 15 * Math.abs(Math.sin(frame * 0.8)) : 10;
+  const headRotation = isSpeaking ? Math.sin(frame * 0.45) * 8 : 0;
+  const pulseAura = isSpeaking ? 25 + 15 * Math.abs(Math.sin(frame * 0.8)) : 10;
+
+  // Character-based screen shake (Chicote & Flea generate intense kinetic jitter)
+  const isHypedCharacter = activeSub && (activeSub.speaker === "CHICOTE" || activeSub.speaker === "FLEA" || activeSub.speaker === "FRUSCIANTE");
+  const jitterX = isSpeaking && isHypedCharacter ? (Math.sin(frame * 1.5) * 6) : 0;
+  const jitterY = isSpeaking && isHypedCharacter ? (Math.cos(frame * 1.8) * 6) : 0;
 
   // Spring animation for entrance when speaker changes
-  const activeSubIndex = activeSub ? activeSub.id : 0;
   const speakerEntrance = spring({
     fps: 30,
     frame: activeSub ? frame - activeSub.startFrame : 0,
     config: { damping: 12, stiffness: 180 },
   });
 
-  // Calculate HUD stats
+  // Dynamic Location HUD Mapping based on subtitle index
+  const getLocation = (id: number) => {
+    if (id <= 6) return "📍 MUELLE DE MARZANA";
+    if (id <= 14) return "📍 CALLE SAN FRANCISCO";
+    if (id <= 20) return "📍 TABERNA KERNEL // RING-0";
+    if (id <= 27) return "📍 PUENTE DE LA SALVE";
+    if (id <= 32) return "📍 URGENCIAS BILBI";
+    if (id <= 37) return "📍 CASCO VIEJO DE BILBAO";
+    return "📍 PUENTE SAN ANTÓN // ESTACIÓN FINAL";
+  };
+
+  const currentLocation = activeSub ? getLocation(activeSub.id) : "📍 BILBAO LA VIEJA";
   const score = Math.floor(frame * 12.5);
   const healthBars = "♥♥♥♥♥";
 
   return (
-    <AbsoluteFill style={{ backgroundColor: "#020005", overflow: "hidden", fontFamily: "'Press Start 2P', monospace, sans-serif" }}>
+    <AbsoluteFill
+      style={{
+        backgroundColor: "#020005",
+        overflow: "hidden",
+        fontFamily: "'Press Start 2P', monospace, sans-serif",
+        transform: `translate(${jitterX}px, ${jitterY}px)`,
+      }}
+    >
       {/* 1. BACKGROUND: FFmpeg Kinetic 8-Bit Render */}
       <Video
         src={staticFile("out_gon_fiction_8bit.mp4")}
         style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }}
       />
 
-      {/* 2. CRT SCANLINES & VIGNETTE OVERLAY (React CSS) */}
+      {/* 2. CRT SCANLINES & VIGNETTE OVERLAY */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background: "linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03))",
+          background:
+            "linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03))",
           backgroundSize: "100% 4px, 6px 100%",
           pointerEvents: "none",
           zIndex: 5,
@@ -67,7 +90,7 @@ export const GonFictionComposition: React.FC = () => {
           justifyContent: "space-between",
           alignItems: "center",
           color: "#00F0FF",
-          fontSize: "22px",
+          fontSize: "20px",
           textShadow: "3px 3px 0px #000, 0 0 10px #00F0FF",
           zIndex: 10,
         }}
@@ -75,6 +98,7 @@ export const GonFictionComposition: React.FC = () => {
         <div>
           <span style={{ color: "#FFD300" }}>P1:</span> GON & CHICOTE
         </div>
+        <div style={{ color: "#FF6600", fontSize: "16px" }}>{currentLocation}</div>
         <div>
           <span style={{ color: "#FF0055" }}>LIFE:</span> <span style={{ color: "#FF3333" }}>{healthBars}</span>
         </div>
@@ -123,11 +147,11 @@ export const GonFictionComposition: React.FC = () => {
               <div
                 style={{
                   position: "absolute",
-                  width: "160px",
-                  height: "160px",
+                  width: "170px",
+                  height: "170px",
                   borderRadius: "50%",
                   backgroundColor: activeSub.color,
-                  opacity: 0.35,
+                  opacity: 0.4,
                   filter: `blur(${pulseAura}px)`,
                 }}
               />
@@ -148,7 +172,7 @@ export const GonFictionComposition: React.FC = () => {
             {/* SPEAKER NAME BADGE */}
             <div
               style={{
-                fontSize: "32px",
+                fontSize: "30px",
                 fontWeight: 900,
                 color: activeSub.color,
                 backgroundColor: "#000000D0",
@@ -167,7 +191,7 @@ export const GonFictionComposition: React.FC = () => {
             <div
               style={{
                 width: "100%",
-                backgroundColor: "rgba(5, 5, 15, 0.92)",
+                backgroundColor: "rgba(5, 5, 15, 0.94)",
                 border: `4px solid ${activeSub.color}`,
                 borderRadius: "16px",
                 padding: "36px 40px",
@@ -206,7 +230,6 @@ export const GonFictionComposition: React.FC = () => {
               color: "#FFD300",
               fontSize: "24px",
               letterSpacing: "3px",
-              animation: "blink 1s infinite",
               textShadow: "0 0 10px #FFD300",
               marginBottom: "100px",
             }}
@@ -216,18 +239,54 @@ export const GonFictionComposition: React.FC = () => {
         )}
       </div>
 
-      {/* 5. FOOTER / SYSTEM STATUS */}
+      {/* 5. REACT EQUALIZER BARS (BOTTOM ACCENT) */}
       <div
         style={{
           position: "absolute",
-          bottom: "30px",
+          bottom: "60px",
+          left: "40px",
+          right: "40px",
+          height: "30px",
+          display: "flex",
+          gap: "8px",
+          alignItems: "flex-end",
+          justifyContent: "center",
+          zIndex: 10,
+        }}
+      >
+        {Array.from({ length: 32 }).map((_, i) => {
+          const barHeight = isSpeaking
+            ? Math.max(10, Math.sin(frame * 0.3 + i * 0.4) * 28 + 15)
+            : 4;
+          const barColor = activeSub ? activeSub.color : "#00F0FF";
+          return (
+            <div
+              key={i}
+              style={{
+                width: "18px",
+                height: `${barHeight}px`,
+                backgroundColor: barColor,
+                boxShadow: `0 0 8px ${barColor}`,
+                borderRadius: "3px",
+                transition: "height 60ms ease-out",
+              }}
+            />
+          );
+        })}
+      </div>
+
+      {/* 6. FOOTER / SYSTEM STATUS */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: "20px",
           left: "40px",
           right: "40px",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          color: "rgba(255, 255, 255, 0.5)",
-          fontSize: "14px",
+          color: "rgba(255, 255, 255, 0.4)",
+          fontSize: "12px",
           zIndex: 10,
         }}
       >
@@ -235,7 +294,7 @@ export const GonFictionComposition: React.FC = () => {
         <div>BILBO ZAHARRA // 8-BIT NES EDITION</div>
       </div>
 
-      {/* 6. MASTER AUDIO TRACK */}
+      {/* 7. MASTER AUDIO TRACK */}
       <Audio src={staticFile("gon_fiction_master.wav")} volume={1.0} />
     </AbsoluteFill>
   );
