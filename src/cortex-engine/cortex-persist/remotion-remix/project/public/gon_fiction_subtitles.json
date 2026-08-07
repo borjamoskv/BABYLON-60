@@ -6,9 +6,9 @@
     "color": "#00F0FF",
     "text": "¡Chicote, hermano! ¡Siente la curvatura del espacio-tiempo bilbaíno! ¡Las baldosas de Bilbao no son de cemento, son tensores de memoria compartida sin lock! ¡Estamos flotando sobre la ría, tú!",
     "startTime": 0.0,
-    "endTime": 5.65,
+    "endTime": 7.64,
     "startFrame": 0,
-    "endFrame": 170
+    "endFrame": 229
   },
   {
     "id": 1,
@@ -16,10 +16,10 @@
     "avatar": "👨‍🍳",
     "color": "#FF3333",
     "text": "¡¿Qué flotando ni qué niño muerto, Gon?! ¡Apreta los pedales que nos comemos el contenedor del reciclaje! ¡Pero bueno! ¡¿Y tú qué te has tomado en el bar de la esquina?! ¡Tienes las pupilas como platos de chuletón!",
-    "startTime": 5.65,
-    "endTime": 11.91,
-    "startFrame": 170,
-    "endFrame": 357
+    "startTime": 7.64,
+    "endTime": 16.98,
+    "startFrame": 229,
+    "endFrame": 509
   },
   {
     "id": 2,
@@ -27,10 +27,10 @@
     "avatar": "🚲",
     "color": "#00F0FF",
     "text": "¡Un cartón de C5-REAL, Chicote! ¿Ves la luz neón ultravioleta? ¿Sabes cómo le llaman al Royale con Queso en Bilbao La Vieja?",
-    "startTime": 11.91,
-    "endTime": 15.5,
-    "startFrame": 357,
-    "endFrame": 465
+    "startTime": 16.98,
+    "endTime": 22.01,
+    "startFrame": 509,
+    "endFrame": 660
   },
   {
     "id": 3,
@@ -38,10 +38,10 @@
     "avatar": "👨‍🍳",
     "color": "#FF3333",
     "text": "¡¿Cómo le van a llamar?! ¡Pintxo de tortilla con queso de Idiazabal y un vaso de txakoli! ¡Pero frena, culebra, que nos matamos en el puente San Antón!",
-    "startTime": 15.5,
-    "endTime": 19.95,
-    "startFrame": 465,
-    "endFrame": 599
+    "startTime": 22.01,
+    "endTime": 28.8,
+    "startFrame": 660,
+    "endFrame": 864
   },
   {
     "id": 4,
@@ -49,10 +49,10 @@
     "avatar": "🚲",
     "color": "#00F0FF",
     "text": "¡No le llaman así! Le llaman El Pintxo con Dropout Estocástico. Porque en vez de cebolla lleva entropía, y cuando le das un bocado no sabes si estás comiendo patata o una alucinación de GPT-4.",
-    "startTime": 19.95,
-    "endTime": 25.28,
-    "startFrame": 599,
-    "endFrame": 758
+    "startTime": 28.8,
+    "endTime": 36.02,
+    "startFrame": 864,
+    "endFrame": 1081
   },
   {
     "id": 5,
@@ -60,21 +60,21 @@
     "avatar": "👨‍🍳",
     "color": "#FF3333",
     "text": "¡Aúpa ahivalahostia! ¡Pero qué marranada de cocina es esa! ¡Servidores de IA llenos de churrete y aceite refrito de tres semanas! ¡Si le meto una auditoría a la red neuronal me la cierran los inspectores de Osakidetza!",
-    "startTime": 25.28,
-    "endTime": 31.79,
-    "startFrame": 758,
-    "endFrame": 954
+    "startTime": 36.02,
+    "endTime": 45.7,
+    "startFrame": 1081,
+    "endFrame": 1371
   },
   {
     "id": 6,
     "speaker": "PAUSA",
     "avatar": "⏳",
     "color": "#FFFFFF",
-    "text": "PAUSA DE 3.2 SEGUNDOS EN EL MUELLE DE MARZANA",
-    "startTime": 31.79,
-    "endTime": 34.99,
-    "startFrame": 954,
-    "endFrame": 1050
+    "text": "PAUSA DE 4 SEGUNDOS EN EL MUELLE DE MARZANA",
+    "startTime": 45.7,
+    "endTime": 49.7,
+    "startFrame": 1371,
+    "endFrame": 1491
   },
   {
     "id": 7,
@@ -82,10 +82,10 @@
     "avatar": "🕶️",
     "color": "#FF0055",
     "text": "¡Alto ahí en ese tándem! ¡Por el artículo 14 de la SGAE y la junta de usuarios de Bilbao La Vieja, cada pedaleada en esta calle paga canon por fricción sonora!",
-    "startTime": 34.99,
-    "endTime": 39.48,
-    "startFrame": 1050,
-    "endFrame": 1184
+    "startTime": 49.7,
+    "endTime": 55.53,
+    "startFrame": 1491,
+    "endFrame": 1666
   },
   {
     "id": 8,
@@ -93,10 +93,10 @@
     "avatar": "🎧",
     "color": "#00FF66",
     "text": "¡OH YES, OH YES! ¡Piloto Carl Cox saliendo del pub Caos a ciento veintiocho BPM! ¡Ramoncín, tío, ponme ese maletín en el plato de la derecha que le tiro un pitch bend!",
-    "startTime": 39.48,
-    "endTime": 50.6,
-    "startFrame": 1184,
-    "endFrame": 1518
+    "startTime": 55.53,
+    "endTime": 70.49,
+    "startFrame": 1666,
+    "endFrame": 2115
   },
   {
     "id": 9,
@@ -104,10 +104,10 @@
     "avatar": "🕶️",
     "color": "#FF0055",
     "text": "¡Ni pitch bend ni leches! ¡Dentro de este maletín está la Pausa de dos coma ocho segundos! ¡El único silencio de todo Bilbao que no tributa al Ayuntamiento!",
-    "startTime": 50.6,
-    "endTime": 54.89,
-    "startFrame": 1518,
-    "endFrame": 1647
+    "startTime": 70.49,
+    "endTime": 76.1,
+    "startFrame": 2115,
+    "endFrame": 2283
   },
   {
     "id": 10,
@@ -115,10 +115,10 @@
     "avatar": "⚡",
     "color": "#FF6600",
     "text": "¡Slap en la jeta del recaudador! ¡Tiro un bajo funk que hace saltar el radar de velocidad del puente de La Salve!",
-    "startTime": 54.89,
-    "endTime": 60.84,
-    "startFrame": 1647,
-    "endFrame": 1825
+    "startTime": 76.1,
+    "endTime": 84.55,
+    "startFrame": 2283,
+    "endFrame": 2537
   },
   {
     "id": 11,
@@ -126,10 +126,10 @@
     "avatar": "🕶️",
     "color": "#FF0055",
     "text": "¡Ese bajo me debe cuatro euros con cincuenta de derechos de autor! ¡Entregad el maletín!",
-    "startTime": 60.84,
-    "endTime": 63.2,
-    "startFrame": 1825,
-    "endFrame": 1896
+    "startTime": 84.55,
+    "endTime": 87.85,
+    "startFrame": 2537,
+    "endFrame": 2636
   },
   {
     "id": 12,
@@ -137,10 +137,10 @@
     "avatar": "🚲",
     "color": "#00F0FF",
     "text": "¡Ramoncín, mírame a los ojos! ¡No hay maletín! ¡El maletín es una proyección holográfica en el espacio de Hilbert! ¡Mira cómo brilla en violeta ultravioleta!",
-    "startTime": 63.2,
-    "endTime": 67.76,
-    "startFrame": 1896,
-    "endFrame": 2033
+    "startTime": 87.85,
+    "endTime": 94.1,
+    "startFrame": 2636,
+    "endFrame": 2823
   },
   {
     "id": 13,
@@ -148,10 +148,10 @@
     "avatar": "👨‍🍳",
     "color": "#FF3333",
     "text": "¡Gon, no le filosofees al de la SGAE y dale fuerte a la cadena que nos engancha la chapa!",
-    "startTime": 67.76,
-    "endTime": 70.45,
-    "startFrame": 2033,
-    "endFrame": 2114
+    "startTime": 94.1,
+    "endTime": 98.39,
+    "startFrame": 2823,
+    "endFrame": 2952
   },
   {
     "id": 14,
@@ -159,10 +159,10 @@
     "avatar": "⏳",
     "color": "#FFFFFF",
     "text": "PAUSA DRAMÁTICA EN LA CALLE SAN FRANCISCO",
-    "startTime": 70.45,
-    "endTime": 73.65,
-    "startFrame": 2114,
-    "endFrame": 2210
+    "startTime": 98.39,
+    "endTime": 102.39,
+    "startFrame": 2952,
+    "endFrame": 3072
   },
   {
     "id": 15,
@@ -170,10 +170,10 @@
     "avatar": "💨",
     "color": "#D4AF37",
     "text": "Escuchadme bien, muchachos del tándem... De la piel para dentro empieza mi jurisdicción. Y el camino del vasco justo está rodeado por todas partes por la iniquidad del algoritmo y la tiranía del chuletón quemado.",
-    "startTime": 73.65,
-    "endTime": 85.31,
-    "startFrame": 2210,
-    "endFrame": 2559
+    "startTime": 102.39,
+    "endTime": 121.31,
+    "startFrame": 3072,
+    "endFrame": 3639
   },
   {
     "id": 16,
@@ -181,10 +181,10 @@
     "avatar": "⏳",
     "color": "#FFFFFF",
     "text": "PAUSA ONTOLÓGICA DE ESCOHOTADO",
-    "startTime": 85.31,
-    "endTime": 88.51,
-    "startFrame": 2559,
-    "endFrame": 2655
+    "startTime": 121.31,
+    "endTime": 125.31,
+    "startFrame": 3639,
+    "endFrame": 3759
   },
   {
     "id": 17,
@@ -192,10 +192,10 @@
     "avatar": "💨",
     "color": "#D4AF37",
     "text": "Bendito sea aquel que en nombre de la libertad química y la buena voluntad conduce su bicicleta sin frenos por las cuestas de Bilbao La Vieja. Porque él es el verdadero guardián de su conciencia y el descubridor del Límite de Landauer.",
-    "startTime": 88.51,
-    "endTime": 100.42,
-    "startFrame": 2655,
-    "endFrame": 3013
+    "startTime": 125.31,
+    "endTime": 144.59,
+    "startFrame": 3759,
+    "endFrame": 4338
   },
   {
     "id": 18,
@@ -203,10 +203,10 @@
     "avatar": "💨",
     "color": "#D4AF37",
     "text": "Y ejecutaré sobre los servidores de la nube una gran venganza con compuertas deterministas en Ring-Zero... Y sabrán que mi nombre es C5-REAL cuando ponga mi pausa inmutable sobre su entropía.",
-    "startTime": 100.42,
-    "endTime": 110.71,
-    "startFrame": 3013,
-    "endFrame": 3321
+    "startTime": 144.59,
+    "endTime": 161.33,
+    "startFrame": 4338,
+    "endFrame": 4840
   },
   {
     "id": 19,
@@ -214,10 +214,10 @@
     "avatar": "🤖",
     "color": "#33FFFF",
     "text": "¡Alerta! ¡Alerta! ¡El procesador gráfico de la taberna se está derritiendo! ¡Borja, deja de compilar C5-REAL en paralelo que me saltan los plomos del local!",
-    "startTime": 110.71,
-    "endTime": 120.87,
-    "startFrame": 3321,
-    "endFrame": 3626
+    "startTime": 161.33,
+    "endTime": 175.76,
+    "startFrame": 4840,
+    "endFrame": 5273
   },
   {
     "id": 20,
@@ -225,10 +225,10 @@
     "avatar": "👨‍🍳",
     "color": "#FF3333",
     "text": "¡¿Qué plomos ni qué leches?! ¡Tira de la palanca de emergencia de la cocina!",
-    "startTime": 120.87,
-    "endTime": 123.02,
-    "startFrame": 3626,
-    "endFrame": 3691
+    "startTime": 175.76,
+    "endTime": 179.29,
+    "startFrame": 5273,
+    "endFrame": 5379
   },
   {
     "id": 21,
@@ -236,10 +236,10 @@
     "avatar": "⏳",
     "color": "#FFFFFF",
     "text": "PAUSA KERNEL DE Ring-0",
-    "startTime": 123.02,
-    "endTime": 126.22,
-    "startFrame": 3691,
-    "endFrame": 3787
+    "startTime": 179.29,
+    "endTime": 183.29,
+    "startFrame": 5379,
+    "endFrame": 5499
   },
   {
     "id": 22,
@@ -247,10 +247,10 @@
     "avatar": "🎧",
     "color": "#00FF66",
     "text": "¡OH YES! ¡Bienvenidos al concurso de twist de Bilbao La Vieja! ¡El premio es una ración de rabas y dos coma ocho segundos de paz mental!",
-    "startTime": 126.22,
-    "endTime": 135.19,
-    "startFrame": 3787,
-    "endFrame": 4056
+    "startTime": 183.29,
+    "endTime": 195.47,
+    "startFrame": 5499,
+    "endFrame": 5864
   },
   {
     "id": 23,
@@ -258,10 +258,10 @@
     "avatar": "🌌",
     "color": "#FF00FF",
     "text": "Look at the estuary... The water of Bilbao carrying atoms of ancient stars past the Guggenheim... The cosmic rhythm of low entropy in Biscay... Amazing.",
-    "startTime": 135.19,
-    "endTime": 148.2,
-    "startFrame": 4056,
-    "endFrame": 4446
+    "startTime": 195.47,
+    "endTime": 213.66,
+    "startFrame": 5864,
+    "endFrame": 6410
   },
   {
     "id": 24,
@@ -269,10 +269,10 @@
     "avatar": "🎸",
     "color": "#FFD700",
     "text": "¡Solo de guitarra en quinta dimensión sobre el puente! ¡KA... ME... HA... ME... HAAAAAAAAAAAAAAAAAAAA!",
-    "startTime": 148.2,
-    "endTime": 160.71,
-    "startFrame": 4446,
-    "endFrame": 4821
+    "startTime": 213.66,
+    "endTime": 230.7,
+    "startFrame": 6410,
+    "endFrame": 6921
   },
   {
     "id": 25,
@@ -280,10 +280,10 @@
     "avatar": "🎹",
     "color": "#00FFCC",
     "text": "¡Un momento armónico! ¡Ese acorde de Frusciante no es un Do menor! ¡Es un acorde de novena menor bilbaína con quinta disminuida! ¡El mismo acorde que tocaba Kepa Junkira en la trikitixa!",
-    "startTime": 160.71,
-    "endTime": 172.39,
-    "startFrame": 4821,
-    "endFrame": 5172
+    "startTime": 230.7,
+    "endTime": 246.67,
+    "startFrame": 6921,
+    "endFrame": 7400
   },
   {
     "id": 26,
@@ -291,10 +291,10 @@
     "avatar": "🎧",
     "color": "#00FF66",
     "text": "¡OH YES! ¡Kepa Junkira a ciento veintiocho BPM! ¡Eso es techno barroco, hermano!",
-    "startTime": 172.39,
-    "endTime": 179.45,
-    "startFrame": 5172,
-    "endFrame": 5383
+    "startTime": 246.67,
+    "endTime": 256.36,
+    "startFrame": 7400,
+    "endFrame": 7691
   },
   {
     "id": 27,
@@ -302,10 +302,10 @@
     "avatar": "⚡",
     "color": "#FF6600",
     "text": "¡Slap, drop and freedom across Bilbao La Vieja!",
-    "startTime": 179.45,
-    "endTime": 181.53,
-    "startFrame": 5383,
-    "endFrame": 5446
+    "startTime": 256.36,
+    "endTime": 259.68,
+    "startFrame": 7691,
+    "endFrame": 7790
   },
   {
     "id": 28,
@@ -313,10 +313,10 @@
     "avatar": "🍹",
     "color": "#CCCC00",
     "text": "Tranquilo, hermano... El Nota se está tomando un Kalimotxo con crema de Ruso Blanco aquí en chancletas. Veo a Gon pasar en tándem a doscientos kilómetros por hora y me parece de puta madre. The Dude abides, txikitero.",
-    "startTime": 181.53,
-    "endTime": 194.24,
-    "startFrame": 5446,
-    "endFrame": 5827
+    "startTime": 259.68,
+    "endTime": 278.74,
+    "startFrame": 7790,
+    "endFrame": 8362
   },
   {
     "id": 29,
@@ -324,10 +324,10 @@
     "avatar": "🥖",
     "color": "#CC9966",
     "text": "El chorizo de pueblo curado con el salitre de la ría de Bilbao coge un punto que ni la alta cocina del Arzak.",
-    "startTime": 194.24,
-    "endTime": 200.14,
-    "startFrame": 5827,
-    "endFrame": 6004
+    "startTime": 278.74,
+    "endTime": 287.87,
+    "startFrame": 8362,
+    "endFrame": 8636
   },
   {
     "id": 30,
@@ -335,10 +335,10 @@
     "avatar": "⏳",
     "color": "#FFFFFF",
     "text": "PAUSA DE PINTXO DE TORTILLA",
-    "startTime": 200.14,
-    "endTime": 203.34,
-    "startFrame": 6004,
-    "endFrame": 6100
+    "startTime": 287.87,
+    "endTime": 291.87,
+    "startFrame": 8636,
+    "endFrame": 8756
   },
   {
     "id": 31,
@@ -346,10 +346,10 @@
     "avatar": "🤖",
     "color": "#33FFFF",
     "text": "¡Colapso térmico! ¡Demasiada información en el prompt! ¡Se me están cruzando los cables con la receta del bacalao al pil-pil!",
-    "startTime": 203.34,
-    "endTime": 211.19,
-    "startFrame": 6100,
-    "endFrame": 6336
+    "startTime": 291.87,
+    "endTime": 303.12,
+    "startFrame": 8756,
+    "endFrame": 9094
   },
   {
     "id": 32,
@@ -357,10 +357,10 @@
     "avatar": "🔬",
     "color": "#FFFF00",
     "text": "¡Abrid paso! ¡Soy la doctora Poppel! ¡Le vamos a meter una inyección de dos coma ocho segundos de pausa determinista pura en la CPU!",
-    "startTime": 211.19,
-    "endTime": 215.93,
-    "startFrame": 6336,
-    "endFrame": 6478
+    "startTime": 303.12,
+    "endTime": 309.32,
+    "startFrame": 9094,
+    "endFrame": 9280
   },
   {
     "id": 33,
@@ -368,10 +368,10 @@
     "avatar": "👨‍🍳",
     "color": "#FF3333",
     "text": "¡Inyéctale un vaso de caldo de gallina de caserío, doctora! ¡Eso levanta a un procesador Intel de la tercera generación!",
-    "startTime": 215.93,
-    "endTime": 219.64,
-    "startFrame": 6478,
-    "endFrame": 6589
+    "startTime": 309.32,
+    "endTime": 315.05,
+    "startFrame": 9280,
+    "endFrame": 9452
   },
   {
     "id": 34,
@@ -379,10 +379,10 @@
     "avatar": "🚲",
     "color": "#00F0FF",
     "text": "¡No, no, no! ¡Inyectale la matriz de rotación de YInMn Blue! ¡Mira cómo brilla en el spectrum!",
-    "startTime": 219.64,
-    "endTime": 222.6,
-    "startFrame": 6589,
-    "endFrame": 6678
+    "startTime": 315.05,
+    "endTime": 319.29,
+    "startFrame": 9452,
+    "endFrame": 9579
   },
   {
     "id": 35,
@@ -390,10 +390,10 @@
     "avatar": "⏳",
     "color": "#FFFFFF",
     "text": "PAUSA MÉDICA DE URGENCIA",
-    "startTime": 222.6,
-    "endTime": 225.8,
-    "startFrame": 6678,
-    "endFrame": 6774
+    "startTime": 319.29,
+    "endTime": 323.29,
+    "startFrame": 9579,
+    "endFrame": 9699
   },
   {
     "id": 36,
@@ -401,10 +401,10 @@
     "avatar": "🔬",
     "color": "#FFFF00",
     "text": "¡UNA! ¡DOS! ¡TRES! ¡INYECCIÓN KERNEL!",
-    "startTime": 225.8,
-    "endTime": 227.49,
-    "startFrame": 6774,
-    "endFrame": 6825
+    "startTime": 323.29,
+    "endTime": 325.83,
+    "startFrame": 9699,
+    "endFrame": 9775
   },
   {
     "id": 37,
@@ -412,10 +412,10 @@
     "avatar": "🤖",
     "color": "#33FFFF",
     "text": "¡BIP BIP BOOP! ¡Reinicio completado! ¡He visto el futuro de la informática y son seis mil euros de subvención del Gobierno Vasco!",
-    "startTime": 227.49,
-    "endTime": 235.47,
-    "startFrame": 6825,
-    "endFrame": 7064
+    "startTime": 325.83,
+    "endTime": 337.27,
+    "startFrame": 9775,
+    "endFrame": 10118
   },
   {
     "id": 38,
@@ -423,10 +423,10 @@
     "avatar": "👨‍🍳",
     "color": "#FF3333",
     "text": "¡Toma ya! ¡Eso sí que es un buen reset! ¡Mejor que mi receta de fabada reconstituyente!",
-    "startTime": 235.47,
-    "endTime": 238.21,
-    "startFrame": 7064,
-    "endFrame": 7146
+    "startTime": 337.27,
+    "endTime": 341.64,
+    "startFrame": 10118,
+    "endFrame": 10249
   },
   {
     "id": 39,
@@ -434,10 +434,10 @@
     "avatar": "🥖",
     "color": "#CC9966",
     "text": "Este chorizo no es un chorizo cualquiera, chaval. Lo guardó mi padre en el bolsillo de la gabardina durante la inundación del ochenta y tres en Bilbao.",
-    "startTime": 238.21,
-    "endTime": 246.31,
-    "startFrame": 7146,
-    "endFrame": 7389
+    "startTime": 341.64,
+    "endTime": 354.0,
+    "startFrame": 10249,
+    "endFrame": 10620
   },
   {
     "id": 40,
@@ -445,10 +445,10 @@
     "avatar": "🥖",
     "color": "#CC9966",
     "text": "Cinco años estuvo el chorizo metido en una caja de madera de roble sin perder la grasa. ¿Sabéis por qué? Porque estaba en el Intervalo Prohibido. Cero degradación, cero entropía.",
-    "startTime": 246.31,
-    "endTime": 257.7,
-    "startFrame": 7389,
-    "endFrame": 7731
+    "startTime": 354.0,
+    "endTime": 371.16,
+    "startFrame": 10620,
+    "endFrame": 11135
   },
   {
     "id": 41,
@@ -456,10 +456,10 @@
     "avatar": "🪆",
     "color": "#9933FF",
     "text": "¡Yo sobreviví a las aguas heladas del Nevá comiendo este chorizo con vodka! ¡Un embutido vasco-siberiano no conoce la muerte!",
-    "startTime": 257.7,
-    "endTime": 266.69,
-    "startFrame": 7731,
-    "endFrame": 8001
+    "startTime": 371.16,
+    "endTime": 385.55,
+    "startFrame": 11135,
+    "endFrame": 11566
   },
   {
     "id": 42,
@@ -467,10 +467,10 @@
     "avatar": "🕶️",
     "color": "#FF0055",
     "text": "¡Ese chorizo no ha pagado el impuesto de actividades económicas de 1984! ¡Decomisado!",
-    "startTime": 266.69,
-    "endTime": 269.8,
-    "startFrame": 8001,
-    "endFrame": 8094
+    "startTime": 385.55,
+    "endTime": 389.74,
+    "startFrame": 11566,
+    "endFrame": 11692
   },
   {
     "id": 43,
@@ -478,10 +478,10 @@
     "avatar": "⚡",
     "color": "#FF6600",
     "text": "¡Slap de bajo a la SGAE! ¡Ese chorizo es libre como el viento de Iparralde!",
-    "startTime": 269.8,
-    "endTime": 274.43,
-    "startFrame": 8094,
-    "endFrame": 8233
+    "startTime": 389.74,
+    "endTime": 396.45,
+    "startFrame": 11692,
+    "endFrame": 11893
   },
   {
     "id": 44,
@@ -489,10 +489,10 @@
     "avatar": "⏳",
     "color": "#FFFFFF",
     "text": "PAUSA DEL CHORIZO DE SALAMANCA",
-    "startTime": 274.43,
-    "endTime": 277.63,
-    "startFrame": 8233,
-    "endFrame": 8329
+    "startTime": 396.45,
+    "endTime": 400.45,
+    "startFrame": 11893,
+    "endFrame": 12013
   },
   {
     "id": 45,
@@ -500,10 +500,10 @@
     "avatar": "🚲",
     "color": "#00F0FF",
     "text": "Chicote... Se está pasando el tripi. Y te digo una cosa: el mundo se ve más claro cuando frenas dos coma ocho segundos.",
-    "startTime": 277.63,
-    "endTime": 281.03,
-    "startFrame": 8329,
-    "endFrame": 8431
+    "startTime": 400.45,
+    "endTime": 405.23,
+    "startFrame": 12013,
+    "endFrame": 12157
   },
   {
     "id": 46,
@@ -511,10 +511,10 @@
     "avatar": "👨‍🍳",
     "color": "#FF3333",
     "text": "¡Pues menos mal que te das cuenta, majo! ¡Que me tienes las piernas que parecen dos morcillas de Burgos de tanto pedalear!",
-    "startTime": 281.03,
-    "endTime": 284.47,
-    "startFrame": 8431,
-    "endFrame": 8534
+    "startTime": 405.23,
+    "endTime": 410.59,
+    "startFrame": 12157,
+    "endFrame": 12318
   },
   {
     "id": 47,
@@ -522,10 +522,10 @@
     "avatar": "🚲",
     "color": "#00F0FF",
     "text": "Vamos a montar una taberna en Bilbao La Vieja. Sin pantallas, sin IAs estocásticas, sin prompts. Solo buena cocina, vino de año y dos coma ocho segundos de silencio entre cada frase.",
-    "startTime": 284.47,
-    "endTime": 290.04,
-    "startFrame": 8534,
-    "endFrame": 8701
+    "startTime": 410.59,
+    "endTime": 418.12,
+    "startFrame": 12318,
+    "endFrame": 12543
   },
   {
     "id": 48,
@@ -533,10 +533,10 @@
     "avatar": "👨‍🍳",
     "color": "#FF3333",
     "text": "¡Eso sí que es un negocio con fundamento! ¡Ahivalahostia, Gon! ¡Cuenta conmigo y con mi sartén de hierro fundido!",
-    "startTime": 290.04,
-    "endTime": 293.5,
-    "startFrame": 8701,
-    "endFrame": 8805
+    "startTime": 418.12,
+    "endTime": 423.48,
+    "startFrame": 12543,
+    "endFrame": 12705
   },
   {
     "id": 49,
@@ -544,10 +544,10 @@
     "avatar": "💨",
     "color": "#D4AF37",
     "text": "De la piel para dentro empieza mi jurisdicción. Y en Bilbao La Vieja... la jurisdicción es sagrada.",
-    "startTime": 293.5,
-    "endTime": 299.3,
-    "startFrame": 8805,
-    "endFrame": 8979
+    "startTime": 423.48,
+    "endTime": 433.15,
+    "startFrame": 12705,
+    "endFrame": 12995
   },
   {
     "id": 50,
@@ -555,10 +555,10 @@
     "avatar": "⏳",
     "color": "#FFFFFF",
     "text": "PAUSA SAGRADA FINAL",
-    "startTime": 299.3,
-    "endTime": 302.5,
-    "startFrame": 8979,
-    "endFrame": 9075
+    "startTime": 433.15,
+    "endTime": 437.15,
+    "startFrame": 12995,
+    "endFrame": 13115
   },
   {
     "id": 51,
@@ -566,10 +566,10 @@
     "avatar": "🌌",
     "color": "#FF00FF",
     "text": "We are just Basque starstuff riding a tandem across the multiverse... Wonderful.",
-    "startTime": 302.5,
-    "endTime": 309.43,
-    "startFrame": 9075,
-    "endFrame": 9283
+    "startTime": 437.15,
+    "endTime": 447.01,
+    "startFrame": 13115,
+    "endFrame": 13410
   },
   {
     "id": 52,
@@ -577,9 +577,9 @@
     "avatar": "🚲",
     "color": "#00F0FF",
     "text": "¡GON FICTION! ¡Hasta el intervalo siempre, Aúpa Bilbao!",
-    "startTime": 309.43,
-    "endTime": 311.21,
-    "startFrame": 9283,
-    "endFrame": 9336
+    "startTime": 447.01,
+    "endTime": 449.77,
+    "startFrame": 13410,
+    "endFrame": 13493
   }
 ]
