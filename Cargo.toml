@@ -1,0 +1,23 @@
+# C5-REAL EXERGY CERTIFIED
+[workspace]
+resolver = "2"
+members = [
+    "1_Operaciones_Activas/02_CORTEX_ENGINE/kernel",
+    "1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-wasm",
+    "1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-persist/kernel_rs",
+    "1_Operaciones_Activas/02_CORTEX_ENGINE/strike-rs",
+    "1_Operaciones_Activas/moskv84_daemon",
+    "1_Operaciones_Activas/verifiable_inference_suite"
+]
+
+# Perfil para desarrollo rápido (Alineado con el C5-REAL)
+[profile.dev]
+opt-level = 0
+debug = true
+
+# Perfil C5-REAL para despliegue
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+panic = "abort" # Invariante Fail-Stop: no hacer unrolling de stack en errores críticos
