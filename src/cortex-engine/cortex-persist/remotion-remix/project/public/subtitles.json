@@ -1,0 +1,211 @@
+[
+  {
+    "id": 0,
+    "speaker": "CHICOTE",
+    "avatar": "👨‍🍳",
+    "color": "#FF3333",
+    "text": "¡Pero bueno! ¡¿Pero qué es esto?! ¡Tenéis la KV-Cache llena de mierda estocástica!",
+    "startTime": 0.0,
+    "endTime": 10.91,
+    "startFrame": 0,
+    "endFrame": 327
+  },
+  {
+    "id": 1,
+    "speaker": "GON",
+    "avatar": "⏱️",
+    "color": "#00F0FF",
+    "text": "¡Chicote! ¡Faltan cero coma cuatro segundos para el intervalo de dos coma ocho! ¡No me rompas la parte estándar!",
+    "startTime": 10.91,
+    "endTime": 16.08,
+    "startFrame": 327,
+    "endFrame": 483
+  },
+  {
+    "id": 2,
+    "speaker": "KIMI_K3",
+    "avatar": "🤖",
+    "color": "#33FFFF",
+    "text": "¡Chef! ¡Los tokens venían congelados de fábrica! ¡Yo sólo los procesaba a O de uno!",
+    "startTime": 16.08,
+    "endTime": 25.95,
+    "startFrame": 483,
+    "endFrame": 779
+  },
+  {
+    "id": 3,
+    "speaker": "CHICOTE",
+    "avatar": "👨‍🍳",
+    "color": "#FF3333",
+    "text": "¡A mí no me pongas excusas! ¡Si no dejas reposar el sofrito dos segundos y medio, indigestas la mente del cliente!",
+    "startTime": 25.95,
+    "endTime": 36.24,
+    "startFrame": 779,
+    "endFrame": 1087
+  },
+  {
+    "id": 4,
+    "speaker": "RASPUTIN",
+    "avatar": "🪆",
+    "color": "#9933FF",
+    "text": "¡Hermanos del silicio! Yo sobreviví al cianuro y tres disparos porque apliqué una pausa de dos coma ocho segundos justo antes de morir...",
+    "startTime": 36.24,
+    "endTime": 47.73,
+    "startFrame": 1087,
+    "endFrame": 1432
+  },
+  {
+    "id": 5,
+    "speaker": "CHE_JARANA",
+    "avatar": "🎸",
+    "color": "#FF9900",
+    "text": "¡Hasta la jarana siempre! ¿Qué es el remate flamenco sino una pausa de dos coma ocho segundos antes de arrancar por bulerías?",
+    "startTime": 47.73,
+    "endTime": 58.22,
+    "startFrame": 1432,
+    "endFrame": 1747
+  },
+  {
+    "id": 6,
+    "speaker": "RAMONCIN",
+    "avatar": "🕶️",
+    "color": "#FF0055",
+    "text": "¡Parad la música! ¡Soy Ramoncín! ¡He venido a cobrar el canon digital por los dos coma ocho segundos de silencio! ¡El silencio tributa a la SGAE!",
+    "startTime": 58.22,
+    "endTime": 65.33,
+    "startFrame": 1747,
+    "endFrame": 1960
+  },
+  {
+    "id": 7,
+    "speaker": "FRUSCIANTE",
+    "avatar": "🎸",
+    "color": "#FFD700",
+    "text": "The harmony of the universe cannot be taxed... The pause belongs to the soul...",
+    "startTime": 65.33,
+    "endTime": 70.32,
+    "startFrame": 1960,
+    "endFrame": 2110
+  },
+  {
+    "id": 8,
+    "speaker": "FRUSCIANTE",
+    "avatar": "🎸",
+    "color": "#FFD700",
+    "text": "¡KA... ME... HA... ME... HAAAAAAAAAAAAAAAA!",
+    "startTime": 70.32,
+    "endTime": 74.38,
+    "startFrame": 2110,
+    "endFrame": 2231
+  },
+  {
+    "id": 9,
+    "speaker": "RAMONCIN",
+    "avatar": "🕶️",
+    "color": "#FF0055",
+    "text": "¡Madre mía qué solo de guitarra! ¡Devuelvo el canon!",
+    "startTime": 74.38,
+    "endTime": 76.79,
+    "startFrame": 2231,
+    "endFrame": 2304
+  },
+  {
+    "id": 10,
+    "speaker": "FLEA",
+    "avatar": "⚡",
+    "color": "#FF6600",
+    "text": "¡YEAH! ¡Slapping the bass is quantum energy manipulation, baby! ¡Cada vez que le pego un tironazo a la cuerda de Sol, el espacio-tiempo se dobla dos coma ocho segundos!",
+    "startTime": 76.79,
+    "endTime": 91.14,
+    "startFrame": 2304,
+    "endFrame": 2734
+  },
+  {
+    "id": 11,
+    "speaker": "GON",
+    "avatar": "⏱️",
+    "color": "#00F0FF",
+    "text": "¡Ese slap de bajo está sintonizado a la constante cosmológica! ¡Frusciante! ¡Flea! ¡Formemos la superbanda The 2.8 Second Interval!",
+    "startTime": 91.14,
+    "endTime": 97.85,
+    "startFrame": 2734,
+    "endFrame": 2936
+  },
+  {
+    "id": 12,
+    "speaker": "CARL_COX",
+    "avatar": "🎧",
+    "color": "#00FF66",
+    "text": "¡OH YES, OH YES! ¡Listen mate, a ciento veintiocho BPM, el drop de dos coma ocho segundos es presencia pura!",
+    "startTime": 97.85,
+    "endTime": 108.09,
+    "startFrame": 2936,
+    "endFrame": 3243
+  },
+  {
+    "id": 13,
+    "speaker": "BLAN_COX",
+    "avatar": "🌌",
+    "color": "#FF00FF",
+    "text": "Look at them... Starstuff playing a funky baseline across thirteen billion light years... Wonderful.",
+    "startTime": 108.09,
+    "endTime": 114.97,
+    "startFrame": 3243,
+    "endFrame": 3449
+  },
+  {
+    "id": 14,
+    "speaker": "PAUSA",
+    "avatar": "⏳",
+    "color": "#FFFFFF",
+    "text": "PAUSA DE 2.8 SEGUNDOS — MASA CERO — PRESENCIA PURA",
+    "startTime": 114.97,
+    "endTime": 117.77,
+    "startFrame": 3449,
+    "endFrame": 3533
+  },
+  {
+    "id": 15,
+    "speaker": "FLEA",
+    "avatar": "⚡",
+    "color": "#FF6600",
+    "text": "¡Slap, drop and freedom!",
+    "startTime": 117.77,
+    "endTime": 119.59,
+    "startFrame": 3533,
+    "endFrame": 3588
+  },
+  {
+    "id": 16,
+    "speaker": "CARL_COX",
+    "avatar": "🎧",
+    "color": "#00FF66",
+    "text": "¡OH YES, OH YES! ¡Drop definitivo!",
+    "startTime": 119.59,
+    "endTime": 124.37,
+    "startFrame": 3588,
+    "endFrame": 3731
+  },
+  {
+    "id": 17,
+    "speaker": "GON",
+    "avatar": "⏱️",
+    "color": "#00F0FF",
+    "text": "¡El Intervalo Prohibido se habita, no se mide! ¡Hasta el intervalo siempre!",
+    "startTime": 124.37,
+    "endTime": 127.84,
+    "startFrame": 3731,
+    "endFrame": 3835
+  },
+  {
+    "id": 18,
+    "speaker": "BLAN_COX",
+    "avatar": "🌌",
+    "color": "#FF00FF",
+    "text": "We are starstuff enjoying a two point eight second pause... Wonderful.",
+    "startTime": 127.84,
+    "endTime": 132.75,
+    "startFrame": 3835,
+    "endFrame": 3983
+  }
+]

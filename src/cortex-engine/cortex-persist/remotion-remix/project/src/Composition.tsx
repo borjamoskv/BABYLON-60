@@ -1,61 +1,122 @@
 // C5-REAL EXERGY CERTIFIED
-import { AbsoluteFill, Composition, staticFile, Loop, OffthreadVideo, Audio, useCurrentFrame } from "remotion";
 import React from "react";
+import { AbsoluteFill, Composition, Audio, staticFile, useCurrentFrame } from "remotion";
+import { BackgroundCanvas } from "./components/BackgroundCanvas";
+import { AudioSpectrum } from "./components/AudioSpectrum";
+import { SubtitleCard } from "./components/SubtitleCard";
+import { TimerWidget } from "./components/TimerWidget";
+import { SubtitleItem } from "./types";
+import subtitleData from "../public/subtitles.json";
 
-export const MyComposition = () => {
-  // 2:31 = 151 seconds. 151 * 30 = 4530 frames.
+const subtitles = subtitleData as SubtitleItem[];
+
+// Calculate total duration in frames dynamically from subtitles
+const lastSubtitle = subtitles[subtitles.length - 1];
+export const TOTAL_DURATION_FRAMES = Math.max(3983, lastSubtitle ? lastSubtitle.endFrame + 30 : 4000);
+
+export const IntervaloProhibidoRoot: React.FC = () => {
   return (
     <Composition
-      id="MyComp"
-      component={MyComponent}
-      durationInFrames={4530}
+      id="IntervaloProhibidoVideo"
+      component={IntervaloProhibidoComposition}
+      durationInFrames={TOTAL_DURATION_FRAMES}
       fps={30}
-      width={720}
-      height={1280}
+      width={1080}
+      height={1920}
     />
   );
 };
 
-export const MyComponent: React.FC = () => {
+export const IntervaloProhibidoComposition: React.FC = () => {
   const frame = useCurrentFrame();
 
-  // Source video duration (~60s)
-  const sourceDurationInFrames = 1802;
+  // Find active subtitle item for current frame
+  const activeSub = subtitles.find(
+    (s) => frame >= s.startFrame && frame <= s.endFrame
+  ) || subtitles[0];
 
-  // 120 BPM -> 1 beat every 15 frames at 30 fps
-  const beatInterval = 15;
-
-  // Calculate visual kick pulse (sharp attack, exponential decay)
-  const frameInBeat = frame % beatInterval;
-  const kickPulse = Math.max(0, 1 - frameInBeat / 7);
-
-  const scale = 1 + kickPulse * 0.045;
-  const glowColor = `rgba(255, 20, 100, ${kickPulse * 0.85})`;
-  const borderWidth = Math.round(kickPulse * 16);
+  const isSilence = activeSub.speaker === "PAUSA";
+  const activeColor = activeSub ? activeSub.color : "#00F0FF";
 
   return (
-    <AbsoluteFill style={{ backgroundColor: "black", overflow: "hidden" }}>
-      {/* Video Loop with Bass-Reactive Zoom and Neon Border Flash */}
+    <AbsoluteFill style={{ backgroundColor: "#080911", overflow: "hidden" }}>
+      {/* Background Visualizer */}
+      <BackgroundCanvas activeColor={activeColor} />
+
+      {/* Main Content Area */}
       <div
         style={{
-          width: "100%",
-          height: "100%",
-          transform: `scale(${scale})`,
+          position: "absolute",
+          inset: 0,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "100px 40px",
           boxSizing: "border-box",
-          border: `${borderWidth}px solid ${glowColor}`,
-          boxShadow: `inset 0 0 40px ${glowColor}`,
+          zIndex: 10,
         }}
       >
-        <Loop durationInFrames={sourceDurationInFrames}>
-          <OffthreadVideo
-            src={staticFile('source_video.mp4')}
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          />
-        </Loop>
+        {/* Header Title */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "8px",
+          }}
+        >
+          <div
+            style={{
+              fontSize: "36px",
+              fontWeight: 900,
+              color: "#00F0FF",
+              letterSpacing: "6px",
+              fontFamily: "Inter, system-ui, sans-serif",
+              textShadow: "0 0 25px #00F0FF",
+            }}
+          >
+            EL INTERVALO PROHIBIDO
+          </div>
+          <div
+            style={{
+              fontSize: "18px",
+              fontWeight: 600,
+              color: "rgba(255, 255, 255, 0.7)",
+              letterSpacing: "3px",
+              fontFamily: "system-ui, sans-serif",
+            }}
+          >
+            LA CORTEX DE 2.8 SEGUNDOS
+          </div>
+        </div>
+
+        {/* Center Dynamic Component: Subtitle Card or Timer Widget */}
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flex: 1,
+            margin: "40px 0",
+          }}
+        >
+          {isSilence ? (
+            <TimerWidget item={activeSub} />
+          ) : (
+            <SubtitleCard item={activeSub} />
+          )}
+        </div>
+
+        {/* Bottom Audio Spectrum Visualizer */}
+        <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "20px" }}>
+          <AudioSpectrum activeColor={activeColor} isSilence={isSilence} />
+        </div>
       </div>
 
-      {/* Optimized Single Continuous Kick Track Audio Overlay */}
-      <Audio src={staticFile("kick_track.wav")} volume={0.9} />
+      {/* Master Dialogue Audio Track */}
+      <Audio src={staticFile("dialogue_master.wav")} volume={1.0} />
     </AbsoluteFill>
   );
 };
