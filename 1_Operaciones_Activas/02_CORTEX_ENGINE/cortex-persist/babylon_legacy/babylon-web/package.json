@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "cortex-wasm": "file:../../../../cortex-engine/cortex-wasm/pkg",
+    "cortex-wasm": "file:../../../cortex-wasm/pkg",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "vite-plugin-wasm": "^3.6.0"
