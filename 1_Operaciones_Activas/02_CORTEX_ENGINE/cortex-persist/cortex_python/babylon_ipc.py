@@ -1,138 +1,108 @@
 # C5-REAL EXERGY CERTIFIED
 import ctypes
-import ctypes.util
-import mmap
 import os
-import tempfile
-from typing import Optional
+import time
+from typing import Callable, Optional, Tuple
 
+# Definiciones de estructura bit-exactas para x86_64 System V ABI
 
 class SharedManifest(ctypes.Structure):
-    """Réplica bit-exacta de #[repr(C, align(8))] SharedManifest en Rust."""
+    """
+    Réplica exacta de SharedManifest en Rust.
+    Layout: payload(32) + status(1) + pad(7) + epoch(8) + ts(8) = 56 bytes.
+    """
     _fields_ = [
-        ("payload", ctypes.c_uint8 * 32),       # offset 0, size 32
-        ("status_flag", ctypes.c_uint8),         # offset 32, size 1
-        ("_pad", ctypes.c_uint8 * 7),            # offset 33, padding a 8-byte boundary
-        ("epoch_id", ctypes.c_uint64),           # offset 40, size 8
-        ("timestamp_ns", ctypes.c_uint64),       # offset 48, size 8
+        ("payload", ctypes.c_uint8 * 32),
+        ("status_flag", ctypes.c_uint8),
+        ("_padding", ctypes.c_uint8 * 7),  # Padding explícito para alineación de 8 bytes
+        ("epoch_id", ctypes.c_uint64),
+        ("timestamp_ns", ctypes.c_uint64),
     ]
-    _pack_ = 1  # Sin padding adicional de ctypes; nuestro padding manual es exacto
-
-
-# Verificación estática de tamaño y alineación
-assert ctypes.sizeof(SharedManifest) == 56, f"SharedManifest size mismatch: {ctypes.sizeof(SharedManifest)}"
-
 
 class EpochState(ctypes.Structure):
-    """Réplica bit-exacta de EpochState en Rust."""
+    """
+    Réplica exacta de EpochState en Rust.
+    Layout: active_ptr(8) + fallback_ptr(8) + counter(8) = 24 bytes.
+    """
     _fields_ = [
-        ("active_epoch_ptr", ctypes.c_void_p),      # offset 0, AtomicPtr → puntero nativo
-        ("stable_fallback_ptr", ctypes.c_void_p),   # offset 8, AtomicPtr → puntero nativo
-        ("global_epoch_counter", ctypes.c_uint64),  # offset 16, AtomicU64
+        ("active_epoch_ptr", ctypes.c_void_p),
+        ("stable_fallback_ptr", ctypes.c_void_p),
+        ("global_epoch_counter", ctypes.c_uint64),
     ]
 
-
-assert ctypes.sizeof(EpochState) == 24, f"EpochState size mismatch: {ctypes.sizeof(EpochState)}"
+# Validaciones de compilación estática
+assert ctypes.sizeof(SharedManifest) == 56, "ABI Mismatch: SharedManifest"
+assert ctypes.sizeof(EpochState) == 24, "ABI Mismatch: EpochState"
 
 
 class BabylonIPC:
-    """Capa de interoperabilidad lock-free Python↔Rust vía memoria compartida."""
+    """Interfaz lock-free para observación de estado EBR desde Python."""
 
-    SHARED_MEM_SIZE = 24  # sizeof(EpochState)
+    def __init__(self, lib_path: str):
+        self._lib = ctypes.CDLL(lib_path)
 
-    def __init__(self, rust_lib_path: str):
-        self._lib = ctypes.CDLL(rust_lib_path)
-
-        # Configurar firmas FFI
+        # Configuración estricta de tipos FFI
         self._lib.init_shared_memory.argtypes = [ctypes.c_int]
         self._lib.init_shared_memory.restype = ctypes.c_void_p
 
         self._lib.destroy_shared_memory.argtypes = [ctypes.c_void_p]
         self._lib.destroy_shared_memory.restype = None
 
-        self._state_ptr: Optional[int] = None
-        self._mm: Optional[mmap.mmap] = None
-        self._fd: Optional[int] = None
+        self._state_addr: Optional[int] = None
 
     def attach(self, fd: int) -> bool:
-        """Mapea memoria compartida desde FD y obtiene puntero a EpochState."""
-        result = self._lib.init_shared_memory(fd)
-        if not result:
+        """Vincula el FD de memoria compartida y obtiene acceso directo."""
+        ptr = self._lib.init_shared_memory(fd)
+        if not ptr:
             return False
-        self._state_ptr = result
-        self._fd = fd
+        self._state_addr = ptr
         return True
 
-    def attach_temp(self) -> bool:
-        """Crea archivo temporal de memoria compartida para testing."""
-        tmp = tempfile.NamedTemporaryFile(delete=False)
-        tmp.write(b'\x00' * self.SHARED_MEM_SIZE)
-        tmp.flush()
-        tmp.close()
-
-        fd = os.open(tmp.name, os.O_RDWR)
-        success = self.attach(fd)
-        if not success:
-            os.close(fd)
-            os.unlink(tmp.name)
-            return False
-        return True
-
-    def read_active_epoch_id(self) -> Optional[int]:
-        """Lectura lock-free del epoch_id activo.
-
-        En x86_64, la lectura de un puntero alineado de 8 bytes es atómica
-        por hardware. La lectura del campo epoch_id subyacente también es
-        atómica. Esto proporciona semántica equivalente a Acquire para
-        observación desde Python sin fences explícitos.
+    def read_active_epoch(self) -> Optional[Tuple[int, int]]:
         """
-        if self._state_ptr is None:
+        Lectura lock-free del par (epoch_id, timestamp_ns).
+        Retorna None si no hay época activa.
+
+        Nota: En x86_64, la lectura de c_void_p alineado es atómica.
+        La consistencia se garantiza por el protocolo Release/Acquire de Rust.
+        """
+        if self._state_addr is None:
             return None
 
-        # Leer puntero activo directamente desde memoria compartida
-        # c_void_p en ctypes lee 8 bytes alineados de forma atómica en x86_64
-        state = EpochState.from_address(self._state_ptr)
-        manifest_ptr = state.active_epoch_ptr
+        # Acceso directo a memoria compartida sin copia
+        state = EpochState.from_address(self._state_addr)
 
+        manifest_ptr = state.active_epoch_ptr
         if manifest_ptr is None or manifest_ptr == 0:
             return None
 
-        # Dereferenciar puntero al SharedManifest y leer epoch_id
+        # Dereferencia segura asumiendo validez garantizada por EBR
         manifest = SharedManifest.from_address(manifest_ptr)
-        return manifest.epoch_id
+        return (manifest.epoch_id, manifest.timestamp_ns)
 
-    def observe_loop(self, callback, poll_interval_ns: int = 1_000_000):
-        """Bucle de observación lock-free que invoca callback cuando cambia epoch_id.
-
-        Args:
-            callback: Función llamada con (new_epoch_id, timestamp_ns) en cada cambio.
-            poll_interval_ns: Intervalo de sondeo en nanosegundos (usado como sleep aproximado).
+    def observe(self, callback: Callable[[int, int], None], interval_s: float = 0.001):
         """
-        last_epoch: Optional[int] = None
-        sleep_sec = poll_interval_ns / 1_000_000_000
+        Bucle de sondeo de baja latencia para cambios de época.
+        Diseñado para correr en un hilo dedicado de monitoreo.
+        """
+        last_epoch = -1
 
         while True:
-            current = self.read_active_epoch_id()
-            if current is not None and current != last_epoch:
-                # Leer timestamp asociado a la nueva época
-                state = EpochState.from_address(self._state_ptr)
-                manifest = SharedManifest.from_address(state.active_epoch_ptr)
-                ts = manifest.timestamp_ns
-                callback(current, ts)
-                last_epoch = current
+            result = self.read_active_epoch()
+            if result:
+                eid, ts = result
+                if eid != last_epoch:
+                    callback(eid, ts)
+                    last_epoch = eid
 
-            # Busy-wait mitigado: en producción usar eventfd/futex
-            import time
-            time.sleep(sleep_sec)
+            # Sleep híbrido para reducir consumo CPU manteniendo reactividad
+            time.sleep(interval_s)
 
     def detach(self):
-        """Desmapea memoria compartida y libera recursos."""
-        if self._state_ptr is not None:
-            self._lib.destroy_shared_memory(self._state_ptr)
-            self._state_ptr = None
-        if self._fd is not None:
-            os.close(self._fd)
-            self._fd = None
+        """Limpieza de recursos FFI."""
+        if self._state_addr:
+            self._lib.destroy_shared_memory(self._state_addr)
+            self._state_addr = None
 
     def __enter__(self):
         return self
