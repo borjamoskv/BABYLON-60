@@ -78,8 +78,10 @@ def render_ultra_reactive_8bit_video():
         ),
         "-map", "[vout]",
         "-map", "[aout]",
-        "-c:v", "h264_videotoolbox",
-        "-b:v", "8M",
+        "-c:v", "libx264",
+        "-preset", "fast",
+        "-crf", "18",
+        "-threads", "16",
         "-c:a", "aac",
         "-b:a", "320k",
         "-ac", "2",
@@ -87,24 +89,8 @@ def render_ultra_reactive_8bit_video():
         OUTPUT_VIDEO
     ]
 
-    try:
-        subprocess.run(cmd, check=True)
-        print(f"[KINETIC 8-BIT ENGINE] ✅ RENDER COMPLETE -> {OUTPUT_VIDEO}")
-    except subprocess.CalledProcessError:
-        print(f"[KINETIC 8-BIT ENGINE] Fallback to libx264 16 threads...")
-        cmd[cmd.index("h264_videotoolbox")] = "libx264"
-        cmd.insert(cmd.index("libx264") + 1, "-preset")
-        cmd.insert(cmd.index("libx264") + 2, "fast")
-        cmd.insert(cmd.index("libx264") + 3, "-crf")
-        cmd.insert(cmd.index("libx264") + 4, "18")
-        cmd.insert(cmd.index("libx264") + 5, "-threads")
-        cmd.insert(cmd.index("libx264") + 6, "16")
-        if "-b:v" in cmd:
-            idx = cmd.index("-b:v")
-            cmd.pop(idx)
-            cmd.pop(idx)
-        subprocess.run(cmd, check=True)
-        print(f"[KINETIC 8-BIT ENGINE] ✅ RENDER COMPLETE -> {OUTPUT_VIDEO}")
+    subprocess.run(cmd, check=True)
+    print(f"[KINETIC 8-BIT ENGINE] ✅ RENDER COMPLETE -> {OUTPUT_VIDEO}")
 
 if __name__ == "__main__":
     render_ultra_reactive_8bit_video()
