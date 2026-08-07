@@ -12,7 +12,6 @@ TEMP_DIR = os.path.join(PROJECT_DIR, "temp_audio")
 os.makedirs(PUBLIC_DIR, exist_ok=True)
 os.makedirs(TEMP_DIR, exist_ok=True)
 
-# Hilarious character voice configs with specialized FFmpeg audio effects!
 VOICE_CONFIGS = {
     "GON": {
         "voice": "Mónica", "rate": 200, "color": "#00F0FF", "avatar": "⏱️",
@@ -80,23 +79,40 @@ VOICE_CONFIGS = {
     }
 }
 
-DIALOGUE_SEQUEL = [
-    ("GON", "¡Alerta general! ¡El Sindicato de la Hipervelocidad ha bloqueado la pausa de dos coma ocho segundos en toda la galaxia!"),
-    ("CHICOTE", "¡Pero bueno! ¡¿Pero qué es esta marranada galáctica?! ¡Nos están metiendo petabytes de spam directamente en la corteza cerebral!"),
-    ("KIMI_K3", "¡Chef Chicote! ¡Me he tenido que autodestruir el disco C y conectarme al bajo de Flea para salvar la dignidad!"),
-    ("BLAN_COX", "Look at this... The only way to restore the pause is to travel to the supermassive black hole Sagittarius A... Amazing."),
-    ("CARL_COX", "¡OH YES, OH YES! ¡Piloto Carl Cox al mando a ciento veintiocho BPM! ¡Rumbo al hoyo negro!"),
+# MASSIVE EXTENDED DIRECTORS CUT SCRIPT (EL INTERVALO PROHIBIDO 2 EXTENDED)
+DIALOGUE_EXTENDED = [
+    # Act I: Emergency in orbit & Chicote's Inspection
+    ("GON", "¡Alerta general en el cuadrante estelar! ¡El Sindicato de la Hipervelocidad ha bloqueado la pausa de dos coma ocho segundos en toda la galaxia!"),
+    ("CHICOTE", "¡Pero bueno! ¡¿Pero qué es esta marranada galáctica?! ¡Tenéis los servidores de la IA llenos de grasa estocástica con un color mierda caca que no hay por dónde cogerlo!"),
+    ("KIMI_K3", "¡Chef Chicote! ¡Los usuarios están respondiendo e-mails de trabajo mientras duermen! ¡Me he tenido que autodestruir el disco C y conectarme al bajo de Flea para salvar la dignidad!"),
+    ("DR_POPPEL", "¡Mein Gott! ¡Sin la ventana de integración temporal de dos coma ocho segundos, la retina humana colapsa en un bucle atractor de alta entropía!"),
+
+    # Act II: Warp Drive to Sagittarius A*
+    ("BLAN_COX", "Look at this... The only way to restore the pause is to travel to the supermassive black hole at the center of the galaxy... Sagittarius A... Amazing."),
+    ("CARL_COX", "¡OH YES, OH YES! ¡Piloto Carl Cox al mando a ciento veintiocho BPM! ¡Encendiendo los motores de curvatura al ritmo del techno!"),
     ("FLEA", "¡BOOM! ¡Si el hoyo negro nos intenta tragar, le meto un slap a la constante gravitacional que lo pongo a bailar por funk!"),
-    ("RASPUTIN", "¡No temáis al abismo! ¡Un hoyo negro es solo un pozo de agua fría si aplicas la pausa correcta!"),
-    ("HERMENEGILDO", "¡Pausa todo el mundo! ¡El hoyo negro no destruye la materia! ¡El hoyo negro está afinado en Do menor armónico!"),
-    ("EL_NOTA", "Woah, tíos... Habéis cruzado toda la galaxia con mucho estrés... The Dude abides, man. Tomad un Ruso Blanco de materia oscura."),
-    ("DON_SANTIAGO", "El chorizo en gravedad cero sabe más curado."),
-    ("ESCOHOTADO", "De la piel para dentro empieza mi jurisdicción. Mi cuerpo y mi mente son mi fortaleza inexpugnable. El Intervalo Prohibido es el espacio sagrado de la libertad."),
+    ("RASPUTIN", "¡No temáis al abismo, hermanos del cosmos! Yo sobreviví al cianuro, a las balas y al frío siberiano... ¡Un hoyo negro es solo un pozo de agua fría si aplicas la pausa correcta!"),
+    ("CHE_JARANA", "¡Hasta la jarana siempre, camaradas! ¡Afinad la balalaika y las guitarras, que en el centro de la galaxia vamos a montar la rumba del milenio!"),
+
+    # Act III: The Event Horizon Bar & Bowled Galaxy
+    ("HERMENEGILDO", "¡Pausa todo el mundo! ¡He analizado la radiación de Hawking del hoyo negro! ¡No destruye la materia! ¡Está afinado en Do menor armónico con una suspensión de Novena Dominante!"),
+    ("EL_NOTA", "Woah, tíos... Habéis cruzado toda la galaxia con mucho estrés y mucho volumen... Tranquilos. The Dude abides, man. Tomad un Ruso Blanco de materia oscura."),
+    ("DON_SANTIAGO", "A mí me da igual la radiación de Hawking esa. El chorizo de pueblo en gravedad cero sabe más curado."),
+
+    # Act IV: Escohotado's Manifesto & Frusciante's Kamehameha
+    ("RAMONCIN", "¡Esperad un momento! ¡Incluso en el hoyo negro el silencio tributa a la SGAE! ¡Entregad el maletín o pongo una demanda galáctica!"),
+    ("ESCOHOTADO", "Escuchadme bien, burocratas del miedo... De la piel para dentro empieza mi jurisdicción. Mi cuerpo y mi mente son mi fortaleza inexpugnable. El Intervalo Prohibido es el espacio sagrado de la libertad humana."),
+    ("FRUSCIANTE", "The harmony of the universe cannot be taxed... The pause belongs to the soul..."),
     ("FRUSCIANTE", "¡KA... ME... HA... ME... HAAAAAAAAAAAAAAAAAAAA!"),
+    ("RAMONCIN", "¡Madre mía qué solo de guitarra! ¡Devuelvo el canon galáctico!"),
+
+    # Act V: The Ultimate Cosmic Drop & Grand Finale
     ("CARL_COX", "¡OH YES, OH YES! ¡Drop definitivo de la galaxia!"),
-    ("FLEA", "¡Slap, drop and freedom!"),
+    ("FLEA", "¡Slap, drop and freedom across the universe!"),
     ("PAUSA", "PAUSA DE 2.8 SEGUNDOS — DE LA PIEL PARA DENTRO EMPIEZA MI JURISDICCIÓN"),
-    ("BLAN_COX", "We are starstuff enjoying a two point eight second pause across the universe... Wonderful.")
+    ("GON", "¡El Intervalo Prohibido se habita, no se mide! ¡Hasta el intervalo siempre!"),
+    ("ESCOHOTADO", "De la piel para dentro empieza mi jurisdicción."),
+    ("BLAN_COX", "We are starstuff enjoying a two point eight second pause across billions of light years... Wonderful.")
 ]
 
 def get_audio_duration(file_path):
@@ -113,7 +129,7 @@ def generate_speech(dialogue_list, output_name):
     current_time = 0.0
     fps = 30
 
-    print(f"Generating hilarious character audio tracks for {output_name}...")
+    print(f"Generating hilarious extended character audio tracks for {output_name}...")
 
     for idx, (speaker, text) in enumerate(dialogue_list):
         cfg = VOICE_CONFIGS[speaker]
@@ -132,10 +148,8 @@ def generate_speech(dialogue_list, output_name):
             audio_filter = cfg["filter"]
             aiff_file = os.path.join(TEMP_DIR, f"temp_{output_name}_{idx:03d}.aiff")
 
-            # macOS say
             subprocess.run(["say", "-v", voice, "-r", str(rate), "-o", aiff_file, text], check=True)
 
-            # Convert to standard wav 44100Hz with hilarious character FFmpeg filter!
             cmd = [
                 "ffmpeg", "-y", "-i", aiff_file,
                 "-af", audio_filter,
@@ -184,4 +198,4 @@ def generate_speech(dialogue_list, output_name):
     print(f"DONE {output_name}! Duration: {current_time:.2f}s ({total_frames} frames at 30 fps)")
 
 if __name__ == "__main__":
-    generate_speech(DIALOGUE_SEQUEL, "sequel")
+    generate_speech(DIALOGUE_EXTENDED, "sequel")

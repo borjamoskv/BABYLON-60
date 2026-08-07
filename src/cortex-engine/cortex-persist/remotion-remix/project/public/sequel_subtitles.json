@@ -6,9 +6,9 @@
     "color": "#00F0FF",
     "text": "¡Alerta general! ¡El Sindicato de la Hipervelocidad ha bloqueado la pausa de dos coma ocho segundos en toda la galaxia!",
     "startTime": 0.0,
-    "endTime": 5.33,
+    "endTime": 2.6,
     "startFrame": 0,
-    "endFrame": 160
+    "endFrame": 78
   },
   {
     "id": 1,
@@ -16,10 +16,10 @@
     "avatar": "👨‍🍳",
     "color": "#FF3333",
     "text": "¡Pero bueno! ¡¿Pero qué es esta marranada galáctica?! ¡Nos están metiendo petabytes de spam directamente en la corteza cerebral!",
-    "startTime": 5.33,
-    "endTime": 18.92,
-    "startFrame": 160,
-    "endFrame": 568
+    "startTime": 2.6,
+    "endTime": 8.77,
+    "startFrame": 78,
+    "endFrame": 263
   },
   {
     "id": 2,
@@ -27,10 +27,10 @@
     "avatar": "🤖",
     "color": "#33FFFF",
     "text": "¡Chef Chicote! ¡Me he tenido que autodestruir el disco C y conectarme al bajo de Flea para salvar la dignidad!",
-    "startTime": 18.92,
-    "endTime": 28.18,
-    "startFrame": 568,
-    "endFrame": 846
+    "startTime": 8.77,
+    "endTime": 12.74,
+    "startFrame": 263,
+    "endFrame": 382
   },
   {
     "id": 3,
@@ -38,10 +38,10 @@
     "avatar": "🌌",
     "color": "#FF00FF",
     "text": "Look at this... The only way to restore the pause is to travel to the supermassive black hole Sagittarius A... Amazing.",
-    "startTime": 28.18,
-    "endTime": 36.63,
-    "startFrame": 846,
-    "endFrame": 1099
+    "startTime": 12.74,
+    "endTime": 21.48,
+    "startFrame": 382,
+    "endFrame": 644
   },
   {
     "id": 4,
@@ -49,10 +49,10 @@
     "avatar": "🎧",
     "color": "#00FF66",
     "text": "¡OH YES, OH YES! ¡Piloto Carl Cox al mando a ciento veintiocho BPM! ¡Rumbo al hoyo negro!",
-    "startTime": 36.63,
-    "endTime": 47.91,
-    "startFrame": 1099,
-    "endFrame": 1437
+    "startTime": 21.48,
+    "endTime": 26.92,
+    "startFrame": 644,
+    "endFrame": 807
   },
   {
     "id": 5,
@@ -60,10 +60,10 @@
     "avatar": "⚡",
     "color": "#FF6600",
     "text": "¡BOOM! ¡Si el hoyo negro nos intenta tragar, le meto un slap a la constante gravitacional que lo pongo a bailar por funk!",
-    "startTime": 47.91,
-    "endTime": 57.63,
-    "startFrame": 1437,
-    "endFrame": 1729
+    "startTime": 26.92,
+    "endTime": 31.43,
+    "startFrame": 807,
+    "endFrame": 943
   },
   {
     "id": 6,
@@ -71,10 +71,10 @@
     "avatar": "🪆",
     "color": "#9933FF",
     "text": "¡No temáis al abismo! ¡Un hoyo negro es solo un pozo de agua fría si aplicas la pausa correcta!",
-    "startTime": 57.63,
-    "endTime": 68.54,
-    "startFrame": 1729,
-    "endFrame": 2056
+    "startTime": 31.43,
+    "endTime": 37.6,
+    "startFrame": 943,
+    "endFrame": 1128
   },
   {
     "id": 7,
@@ -82,10 +82,10 @@
     "avatar": "🎹",
     "color": "#00FFCC",
     "text": "¡Pausa todo el mundo! ¡El hoyo negro no destruye la materia! ¡El hoyo negro está afinado en Do menor armónico!",
-    "startTime": 68.54,
-    "endTime": 80.91,
-    "startFrame": 2056,
-    "endFrame": 2427
+    "startTime": 37.6,
+    "endTime": 43.4,
+    "startFrame": 1128,
+    "endFrame": 1302
   },
   {
     "id": 8,
@@ -93,10 +93,10 @@
     "avatar": "🍹",
     "color": "#CCCC00",
     "text": "Woah, tíos... Habéis cruzado toda la galaxia con mucho estrés... The Dude abides, man. Tomad un Ruso Blanco de materia oscura.",
-    "startTime": 80.91,
-    "endTime": 93.35,
-    "startFrame": 2427,
-    "endFrame": 2801
+    "startTime": 43.4,
+    "endTime": 49.75,
+    "startFrame": 1302,
+    "endFrame": 1492
   },
   {
     "id": 9,
@@ -104,10 +104,10 @@
     "avatar": "🥖",
     "color": "#CC9966",
     "text": "El chorizo en gravedad cero sabe más curado.",
-    "startTime": 93.35,
-    "endTime": 97.72,
-    "startFrame": 2801,
-    "endFrame": 2932
+    "startTime": 49.75,
+    "endTime": 51.9,
+    "startFrame": 1492,
+    "endFrame": 1557
   },
   {
     "id": 10,
@@ -115,10 +115,10 @@
     "avatar": "💨",
     "color": "#D4AF37",
     "text": "De la piel para dentro empieza mi jurisdicción. Mi cuerpo y mi mente son mi fortaleza inexpugnable. El Intervalo Prohibido es el espacio sagrado de la libertad.",
-    "startTime": 97.72,
-    "endTime": 112.4,
-    "startFrame": 2932,
-    "endFrame": 3372
+    "startTime": 51.9,
+    "endTime": 59.13,
+    "startFrame": 1557,
+    "endFrame": 1774
   },
   {
     "id": 11,
@@ -126,10 +126,10 @@
     "avatar": "🎸",
     "color": "#FFD700",
     "text": "¡KA... ME... HA... ME... HAAAAAAAAAAAAAAAAAAAA!",
-    "startTime": 112.4,
-    "endTime": 116.78,
-    "startFrame": 3372,
-    "endFrame": 3503
+    "startTime": 59.13,
+    "endTime": 63.5,
+    "startFrame": 1774,
+    "endFrame": 1905
   },
   {
     "id": 12,
@@ -137,10 +137,10 @@
     "avatar": "🎧",
     "color": "#00FF66",
     "text": "¡OH YES, OH YES! ¡Drop definitivo de la galaxia!",
-    "startTime": 116.78,
-    "endTime": 122.47,
-    "startFrame": 3503,
-    "endFrame": 3674
+    "startTime": 63.5,
+    "endTime": 66.26,
+    "startFrame": 1905,
+    "endFrame": 1988
   },
   {
     "id": 13,
@@ -148,10 +148,10 @@
     "avatar": "⚡",
     "color": "#FF6600",
     "text": "¡Slap, drop and freedom!",
-    "startTime": 122.47,
-    "endTime": 124.3,
-    "startFrame": 3674,
-    "endFrame": 3729
+    "startTime": 66.26,
+    "endTime": 67.07,
+    "startFrame": 1988,
+    "endFrame": 2012
   },
   {
     "id": 14,
@@ -159,10 +159,10 @@
     "avatar": "⏳",
     "color": "#FFFFFF",
     "text": "PAUSA DE 2.8 SEGUNDOS — DE LA PIEL PARA DENTRO EMPIEZA MI JURISDICCIÓN",
-    "startTime": 124.3,
-    "endTime": 127.1,
-    "startFrame": 3729,
-    "endFrame": 3813
+    "startTime": 67.07,
+    "endTime": 69.87,
+    "startFrame": 2012,
+    "endFrame": 2096
   },
   {
     "id": 15,
@@ -170,9 +170,9 @@
     "avatar": "🌌",
     "color": "#FF00FF",
     "text": "We are starstuff enjoying a two point eight second pause across the universe... Wonderful.",
-    "startTime": 127.1,
-    "endTime": 133.13,
-    "startFrame": 3813,
-    "endFrame": 3994
+    "startTime": 69.87,
+    "endTime": 76.2,
+    "startFrame": 2096,
+    "endFrame": 2286
   }
 ]
