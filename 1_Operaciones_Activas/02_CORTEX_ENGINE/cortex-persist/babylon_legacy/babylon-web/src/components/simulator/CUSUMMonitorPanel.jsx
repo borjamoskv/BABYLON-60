@@ -35,7 +35,7 @@ export function CUSUMMonitorPanel({ kernelState }) {
   return (
     <div className="glass-panel animate-fade-in-up" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <span className="text-mono" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>CUSUM ENTROPY SENTINEL</span>
+        <span className="text-mono" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>ARTICLE 15 CUSUM SENTINEL</span>
         <span className="text-mono" style={{
           padding: '0.2rem 0.6rem',
           borderRadius: '4px',
@@ -62,7 +62,7 @@ export function CUSUMMonitorPanel({ kernelState }) {
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem' }}>
           <span>Page CUSUM (z):</span>
           <span className="text-mono" style={{ color: cusumSigma > 3.0 ? 'var(--accent-secondary)' : 'var(--text-main)' }}>
-            {cusumSigma.toFixed(2)} σ·tick
+            {cusumSigma.toFixed(2)} σ·tick (Threshold: 3.0)
           </span>
         </div>
 
@@ -73,7 +73,7 @@ export function CUSUMMonitorPanel({ kernelState }) {
       </div>
 
       <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: '1.4', marginTop: '0.5rem' }}>
-        <span style={{ color: 'var(--accent-primary)' }}>● Ring-0 Rule:</span> Lock-free Epoch Reclamation (EBR) & Double-Pointer Quarantine active.
+        <span style={{ color: 'var(--accent-primary)' }}>● Ring-0 Rule:</span> Lock-free EBR active. Failsafe boundary at 3% varentropy.
       </div>
     </div>
   );
