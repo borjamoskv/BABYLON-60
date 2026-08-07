@@ -21,6 +21,9 @@ El repositorio ha sido defragmentado y purgado de toda Anergía estructural. Ope
 
 ## DEPLOYMENT
 
+> [!CAUTION]
+> **⚠️ ADVERTENCIA DE SEGURIDAD**: El único paquete oficial es `cortex-persist`. Verifique siempre la huella digital (SHA-256) en nuestra documentación oficial. No instale variantes como `cortex_persist` o `babylon60-kernel` que podrían ser intentos de typosquatting y contener código malicioso.
+
 ```bash
 # Entorno CORTEX Engine
 cd src/cortex-engine
