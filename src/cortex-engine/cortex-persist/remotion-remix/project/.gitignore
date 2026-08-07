@@ -1,7 +1,8 @@
+# Remotion & Temp Files
 node_modules
-dist
-.DS_Store
-.env
-
-# Ignore the output video from Git but not videos you import into src/.
-out
+.remotion
+temp_audio/
+*.aiff
+*.mp4
+dist/
+out/
