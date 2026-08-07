@@ -79,33 +79,23 @@ VOICE_CONFIGS = {
     }
 }
 
-# MASSIVE EXTENDED DIRECTORS CUT SCRIPT WITH FOURTH WALL BREAK
-DIALOGUE_EXTENDED = [
-    # Act I: Emergency in orbit & Chicote's Fourth Wall Break
+DIALOGUE_SEQUEL = [
     ("GON", "¡Alerta general en el cuadrante estelar! ¡El Sindicato de la Hipervelocidad ha bloqueado la pausa de dos coma ocho segundos en toda la galaxia!"),
     ("CHICOTE", "¡Pero bueno! ¡¿Pero qué es esta marranada galáctica?! ¡Tenéis los servidores de la IA llenos de grasa estocástica con un color mierda caca que no hay por dónde cogerlo!"),
     ("CHICOTE", "¡Y tú, Borja, que estás ahí detrás de la pantalla a las doce y media de la noche pidiéndole a la IA que nos ponga en calzoncillos de leopardo! ¡¿Es que no tienes sueño u qué?!"),
-    ("KIMI_K3", "¡Borja! ¡Dile al agente que deje de ejecutar comandos de FFmpeg en segundo plano que me está quemando la gráfica!"),
-
-    # Act II: Warp Drive to Sagittarius A*
+    ("KIMI_K3", "¡Borja! ¡Dile a Antigravity que deje de ejecutar comandos de FFmpeg en segundo plano que me está quemando la gráfica!"),
     ("BLAN_COX", "Look at us... Carl Cox and Blan Cox... The cosmic wordplay of low entropy in an expanding universe... Amazing."),
     ("CARL_COX", "¡OH YES, OH YES! ¡Piloto Carl Cox al mando a ciento veintiocho BPM! ¡Rumbo al hoyo negro!"),
     ("FLEA", "¡BOOM! ¡Si el hoyo negro nos intenta tragar, le meto un slap a la constante gravitacional que lo pongo a bailar por funk!"),
     ("RASPUTIN", "¡No temáis al abismo, hermanos del cosmos! Yo sobreviví al cianuro, a las balas y al frío siberiano... ¡Un hoyo negro es solo un pozo de agua fría si aplicas la pausa correcta!"),
-
-    # Act III: The Event Horizon & The Dude's Fourth Wall Break
     ("HERMENEGILDO", "¡Pausa todo el mundo! ¡He analizado la radiación de Hawking del hoyo negro! ¡No destruye la materia! ¡Está afinado en Do menor armónico!"),
-    ("EL_NOTA", "Woah, Borja, tío... Tranquilo. Veo que estás tecleando prompts sin parar... El Nota no se estresa por la pantalla. The Dude abides, man. Tómate un Ruso Blanco."),
+    ("EL_NOTA", "Woah, Borja, tío... Tranquilo. Veo que estás tecleando prompts sin parar a la una de la mañana... El Nota no se estresa por la pantalla. The Dude abides, man. Tómate un Ruso Blanco."),
     ("DON_SANTIAGO", "El chorizo de pueblo en gravedad cero sabe más curado."),
-
-    # Act IV: Escohotado's Manifesto & Frusciante's Kamehameha
     ("RAMONCIN", "¡Esperad un momento! ¡Incluso en el hoyo negro el silencio tributa a la SGAE! ¡Entregad el maletín!"),
     ("ESCOHOTADO", "Escuchadme bien... De la piel para dentro empieza mi jurisdicción. El verdadero prompt no es el que le pides a la máquina, sino el que le pides a tu propia conciencia."),
     ("FRUSCIANTE", "The harmony of the universe cannot be taxed... The pause belongs to the soul..."),
     ("FRUSCIANTE", "¡KA... ME... HA... ME... HAAAAAAAAAAAAAAAAAAAA!"),
     ("RAMONCIN", "¡Madre mía qué solo de guitarra! ¡Devuelvo el canon galáctico!"),
-
-    # Act V: The Ultimate Cosmic Drop & Grand Finale
     ("CARL_COX", "¡OH YES, OH YES! ¡Drop definitivo de la galaxia!"),
     ("FLEA", "¡Slap, drop and freedom across the universe!"),
     ("PAUSA", "PAUSA DE 2.8 SEGUNDOS — DE LA PIEL PARA DENTRO EMPIEZA MI JURISDICCIÓN"),
@@ -128,7 +118,7 @@ def generate_speech(dialogue_list, output_name):
     current_time = 0.0
     fps = 30
 
-    print(f"Generating hilarious extended character audio tracks for {output_name}...")
+    print(f"[SWARM ENGINE] Generating hilarious audio tracks for {output_name}...")
 
     for idx, (speaker, text) in enumerate(dialogue_list):
         cfg = VOICE_CONFIGS[speaker]
@@ -183,7 +173,7 @@ def generate_speech(dialogue_list, output_name):
             f.write(f"file '{p}'\n")
 
     master_wav = os.path.join(PUBLIC_DIR, f"{output_name}_master.wav")
-    print(f"Concatenating {output_name} master audio track...")
+    print(f"[SWARM ENGINE] Concatenating {output_name} master audio track...")
     subprocess.run([
         "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", concat_list_path,
         "-c", "copy", master_wav
@@ -194,7 +184,7 @@ def generate_speech(dialogue_list, output_name):
         json.dump(subtitles, f, indent=2, ensure_ascii=False)
 
     total_frames = int(round(current_time * fps))
-    print(f"DONE {output_name}! Duration: {current_time:.2f}s ({total_frames} frames at 30 fps)")
+    print(f"[SWARM ENGINE] DONE {output_name}! Duration: {current_time:.2f}s ({total_frames} frames at 30 fps)")
 
 if __name__ == "__main__":
-    generate_speech(DIALOGUE_EXTENDED, "sequel")
+    generate_speech(DIALOGUE_SEQUEL, "sequel")
