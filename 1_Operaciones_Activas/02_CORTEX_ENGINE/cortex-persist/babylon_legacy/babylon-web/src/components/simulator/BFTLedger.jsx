@@ -14,7 +14,7 @@ export function BFTLedger({ cloudSyncStatus, bftLogs, kernelState, lastParentId 
 
   const exportBFTReceipt = async () => {
     const receipt = {
-      issuer: "BABYLON-60 C5-REAL Node",
+      issuer: "BABYLON60 C5-REAL Node",
       timestamp: new Date().toISOString(),
       membraneState: kernelState.cases()[kernelState.tag],
       lastBftRoot: lastParentId,
