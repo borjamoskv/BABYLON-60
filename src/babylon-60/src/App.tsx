@@ -75,7 +75,7 @@ function App() {
             if (data.slots) setSlots(data.slots);
             if (data.activeEpochPtr) setActiveEpochPtr(data.activeEpochPtr);
             if (data.latestReceipt) {
-              setReceipts((prev) => [data.latestReceipt, ...prev.slice(0, 6)]);
+              setReceipts((prev: ScittReceipt[]) => [data.latestReceipt, ...prev.slice(0, 6)]);
             }
           }
         } catch {
@@ -99,11 +99,11 @@ function App() {
   };
 
   const handleParticlePurged = useCallback(() => {
-    setPurgedCount((prev) => prev + 1);
+    setPurgedCount((prev: number) => prev + 1);
   }, []);
 
   const handleParticleValidated = useCallback(() => {
-    setValidatedCount((prev) => prev + 1);
+    setValidatedCount((prev: number) => prev + 1);
 
     // Append mock SCITT receipt periodically
     const randHex = Math.random().toString(16).substring(2, 10);
@@ -117,7 +117,7 @@ function App() {
       varentropy: 0.008 + Math.random() * 0.015,
     };
 
-    setReceipts((prev) => [newReceipt, ...prev.slice(0, 7)]);
+    setReceipts((prev: ScittReceipt[]) => [newReceipt, ...prev.slice(0, 7)]);
   }, []);
 
   // Fail-Stop Toggle / Quarantine CAS Execution
@@ -127,8 +127,8 @@ function App() {
       sound.playAlarm();
 
       // Simulate Double-Pointer Sentinel CAS to Fallback Slot
-      setSlots((prev) =>
-        prev.map((s) => {
+      setSlots((prev: EpochSlot[]) =>
+        prev.map((s: EpochSlot) => {
           if (s.id === activeEpochPtr) {
             return { ...s, status: '6 Quarantine', readers: 0 };
           }
@@ -146,7 +146,7 @@ function App() {
         latencyMs: 0.08,
         varentropy: 0.085,
       };
-      setReceipts((prev) => [alertReceipt, ...prev.slice(0, 7)]);
+      setReceipts((prev: ScittReceipt[]) => [alertReceipt, ...prev.slice(0, 7)]);
     } else {
       // Restore normal operation
       setIsFailStopActive(false);
