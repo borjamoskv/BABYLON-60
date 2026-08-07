@@ -36,8 +36,8 @@ def render_ultra_reactive_8bit_video():
             "[vis_audio]showwaves=s=1080x250:mode=cline:colors=0x7B00FF|0x3C69E7:rate=30[waves2]; "
 
             # 5. Real-time Stereo VU Volume Meters (Side Audio Bars) - Thicker
-            "[vis_audio]showvolume=s=80x1920:b=6:c=0x00F0FF:v=1:f=0.9[vu_left]; "
-            "[vis_audio]showvolume=s=80x1920:b=6:c=0xFF00FF:v=1:f=0.9[vu_right]; "
+            "[vis_audio]showvolume=w=80:h=1920:b=6:c=0x00F0FF:v=1:f=0.9[vu_left]; "
+            "[vis_audio]showvolume=w=80:h=1920:b=6:c=0xFF00FF:v=1:f=0.9[vu_right]; "
 
             # Color Accent Lines (Neon)
             "color=c=0x2E5090:s=1080x8:r=30[yinmn_line]; "
