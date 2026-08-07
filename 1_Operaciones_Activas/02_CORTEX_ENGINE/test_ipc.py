@@ -2,8 +2,11 @@
 import sys
 import os
 
-# Asegurar que el modulo cortex esté en el PYTHONPATH
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# Asegurar que el modulo cortex esté en el PYTHONPATH (apuntando a 02_CORTEX_ENGINE)
+current_dir = os.path.dirname(os.path.abspath(__file__)) # scripts
+parent_dir = os.path.dirname(current_dir) # 1_Operaciones_Activas
+engine_dir = os.path.join(parent_dir, "02_CORTEX_ENGINE")
+sys.path.insert(0, engine_dir)
 
 from cortex.core.orchestrator import CortexOrchestrator
 
