@@ -395,6 +395,8 @@ pub unsafe extern "C" fn run_teff_transition(
         output_digest: exec_res.output_state_hash,
         execution_cost_micros: est_cost_micros,
         wall_clock_ms: exec_res.wall_clock_ms,
+        contractual_cap_usd: 10_000,
+        declared_scope_digest: [0u8; 32],
     };
     let receipt = emitter.generate_receipt(&payload);
     let scitt_latency_us = t_scitt0.elapsed().as_micros() as u64;
