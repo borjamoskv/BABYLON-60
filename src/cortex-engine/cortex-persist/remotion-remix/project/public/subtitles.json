@@ -169,21 +169,21 @@
     "speaker": "CARL_COX",
     "avatar": "🎧",
     "color": "#00FF66",
-    "text": "¡OH YES, OH YES! ¡Listen mate, a ciento veintiocho BPM, el drop de dos coma ocho segundos es presencia pura!",
+    "text": "¡OH YES, OH YES! ¡Listen mate, a ciento veintiocho BPM, con mi hermano el gran BLAN COX!",
     "startTime": 145.02,
-    "endTime": 155.26,
+    "endTime": 154.15,
     "startFrame": 4351,
-    "endFrame": 4658
+    "endFrame": 4625
   },
   {
     "id": 16,
     "speaker": "BLAN_COX",
     "avatar": "🌌",
     "color": "#FF00FF",
-    "text": "Look at them... Human consciousness as a sovereign realm in an expanding thermodynamic universe... Wonderful.",
-    "startTime": 155.26,
+    "text": "Look at us... Carl Cox and Blan Cox... The cosmic wordplay of low entropy in an expanding universe... Wonderful.",
+    "startTime": 154.15,
     "endTime": 162.66,
-    "startFrame": 4658,
+    "startFrame": 4625,
     "endFrame": 4880
   },
   {
