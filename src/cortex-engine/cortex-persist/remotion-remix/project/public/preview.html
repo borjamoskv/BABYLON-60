@@ -1,0 +1,282 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EL INTERVALO PROHIBIDO 2 — REMOTION WEB PLAYER</title>
+  <style>
+    :root {
+      --bg: #080911;
+      --accent: #00F0FF;
+      --card-bg: rgba(18, 20, 32, 0.92);
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg);
+      color: #ffffff;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .player-container {
+      width: 480px;
+      height: 853px;
+      background: #080911;
+      border: 3px solid var(--accent);
+      border-radius: 28px;
+      box-shadow: 0 0 50px rgba(0, 240, 255, 0.4);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 30px 20px;
+      box-sizing: border-box;
+    }
+    .header {
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 3px;
+      color: var(--accent);
+      text-shadow: 0 0 15px var(--accent);
+    }
+    .header p {
+      margin: 4px 0 0 0;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.6);
+    }
+    .meme-card-area {
+      width: 100%;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .meme-svg-box {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .subtitle-card {
+      width: 100%;
+      min-height: 180px;
+      background: var(--card-bg);
+      border: 2px solid var(--accent);
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      box-sizing: border-box;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .speaker-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      background: rgba(0, 240, 255, 0.15);
+      border: 1px solid var(--accent);
+      margin-bottom: 10px;
+    }
+    .speaker-badge .avatar {
+      font-size: 20px;
+    }
+    .speaker-badge .name {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 1.5px;
+    }
+    .subtitle-text {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.4;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    }
+    .spectrum-bar-container {
+      width: 100%;
+      height: 60px;
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+    }
+    .spectrum-bar {
+      flex: 1;
+      background-color: var(--accent);
+      border-radius: 3px 3px 0 0;
+      box-shadow: 0 0 8px var(--accent);
+      height: 20%;
+      transition: height 0.05s ease;
+    }
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+    button {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: 800;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 20px var(--accent);
+      transition: transform 0.2s ease;
+    }
+    button:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="player-container" id="player">
+    <div class="header">
+      <h1>EL INTERVALO PROHIBIDO 2</h1>
+      <p>LA REBELIÓN DE LOS FOTONES // REMOTION WEB PLAYER</p>
+    </div>
+
+    <!-- Meme Overlay Card -->
+    <div class="meme-card-area" id="memeArea">
+      <div class="meme-svg-box" id="memeSvgBox"></div>
+    </div>
+
+    <!-- Subtitle Card -->
+    <div class="subtitle-card" id="subtitleCard">
+      <div class="speaker-badge" id="badge">
+        <span class="avatar" id="avatarIcon">⏱️</span>
+        <span class="name" id="speakerName">GON</span>
+      </div>
+      <div class="subtitle-text" id="subText">
+        Cargando línea de tiempo...
+      </div>
+    </div>
+
+    <!-- Audio Spectrum -->
+    <div class="spectrum-bar-container" id="spectrum">
+      <!-- 24 Audio Spectrum Bars -->
+      <script>
+        for(let i=0; i<24; i++) {
+          document.write('<div class="spectrum-bar"></div>');
+        }
+      </script>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="playBtn">▶ REPRODUCIR VÍDEO</button>
+    <audio id="masterAudio" src="sequel_master.wav"></audio>
+  </div>
+
+  <script>
+    let subtitles = [];
+    const audio = document.getElementById("masterAudio");
+    const playBtn = document.getElementById("playBtn");
+    const subText = document.getElementById("subText");
+    const speakerName = document.getElementById("speakerName");
+    const avatarIcon = document.getElementById("avatarIcon");
+    const subtitleCard = document.getElementById("subtitleCard");
+    const badge = document.getElementById("badge");
+    const memeSvgBox = document.getElementById("memeSvgBox");
+    const bars = document.querySelectorAll(".spectrum-bar");
+
+    const CHARACTER_MEMES = {
+      GON: { title: "GON — COMANDANTE DE LA FLOTA", icon: "⏱️", color: "#00F0FF", sub: "¡DOS COMA OCHO SEGUNDOS SOBERANOS!" },
+      CHICOTE: { title: "ALBERTO CHICOTE AUDITANDO LA IA", icon: "👨‍🍳", color: "#FF3333", sub: "¡GRASA ESTOCÁSTICA COLOR MIERDA CACA!" },
+      RASPUTIN: { title: "RASPUTÍN NAVEGANDO HOYOS NEGROS", icon: "🪆", color: "#9933FF", sub: "¡UN HOYO NEGRO ES SOLO UN POZO FRÍO!" },
+      CHE_JARANA: { title: "EL CHE JARANA // RUMBA GALÁCTICA", icon: "🎸", color: "#FF9900", sub: "¡HASTA LA JARANA SIEMPRE, CAMARADAS!" },
+      CARL_COX: { title: "CARL COX AT THE DECKS (128 BPM)", icon: "🎧", color: "#00FF66", sub: "¡OH YES, OH YES! ¡RUMBO AL HOYO NEGRO!" },
+      BLAN_COX: { title: "BLAN COX // EL INTERVALO CÓSMICO", icon: "🌌", color: "#FF00FF", sub: "WE ARE STARSTUFF ENJOYING A PAUSE..." },
+      FRUSCIANTE: { title: "JOHN FRUSCIANTE // KAMEHAMEHA SOLO", icon: "🎸", color: "#FFD700", sub: "¡KA... ME... HA... ME... HAAAAAAAAAAAAAAAA!" },
+      FLEA: { title: "FLEA EN LEOPARDO // SLAP BASS 432Hz", icon: "⚡", "color": "#FF6600", sub: "¡SLAP, DROP AND FREEDOM ACROSS THE UNIVERSE!" },
+      RAMONCIN: { title: "RAMONCÍN // CANON SGAE GALÁCTICO", icon: "🕶️", color: "#FF0055", sub: "¡DEVUELVO EL CANON GALÁCTICO!" },
+      HERMENEGILDO: { title: "HERMENEGILDO ALTOZANO // DO MENOR", icon: "🎹", color: "#00FFCC", sub: "¡ESTÁ AFINADO EN DO MENOR ARMÓNICO!" },
+      EL_NOTA: { title: "EL NOTA (THE DUDE) // RUSOS BLANCOS", icon: "🍹", color: "#CCCC00", sub: "THE DUDE ABIDES, MAN. TÓMATE UN RUSO BLANCO." },
+      ESCOHOTADO: { title: "ANTONIO ESCOHOTADO // MANIFIESTO", icon: "💨", color: "#D4AF37", sub: "DE LA PIEL PARA DENTRO EMPIEZA MI JURISDICCIÓN." },
+      DR_POPPEL: { title: "DR. ERNST PÖPPEL // VENTANA 2.8s", icon: "🔬", color: "#FFFF00", sub: "¡VENTANA DE INTEGRACIÓN TEMPORAL DE 2.8s!" },
+      DON_SANTIAGO: { title: "DON SANTIAGO // CECINA EN GRAVEDAD CERO", icon: "🥖", color: "#CC9966", sub: "EL CHORIZO EN GRAVEDAD CERO SABE MÁS CURADO." },
+      KIMI_K3: { title: "KIMI-K3 APEX // IA EN HUMO", icon: "🤖", color: "#33FFFF", sub: "¡ME HE TENIDO QUE AUTODESTRUIR EL DISCO C:!" },
+      PAUSA: { title: "PAUSA SOBERANA DE 2.8 SEGUNDOS", icon: "⏳", color: "#FFFFFF", sub: "DE LA PIEL PARA DENTRO EMPIEZA MI JURISDICCIÓN" }
+    };
+
+    fetch("sequel_subtitles.json")
+      .then(res => res.json())
+      .then(data => {
+        subtitles = data;
+        updateUI(0);
+      });
+
+    playBtn.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play();
+        playBtn.innerText = "⏸ PAUSAR VÍDEO";
+      } else {
+        audio.pause();
+        playBtn.innerText = "▶ REPRODUCIR VÍDEO";
+      }
+    });
+
+    audio.addEventListener("timeupdate", () => {
+      const currentTime = audio.currentTime;
+      updateUI(currentTime);
+      animateSpectrum();
+    });
+
+    function updateUI(time) {
+      if (!subtitles.length) return;
+      const sub = subtitles.find(s => time >= s.startTime && time <= s.endTime) || subtitles[0];
+
+      subText.innerText = sub.text;
+      speakerName.innerText = sub.speaker.replace("_", " ");
+      avatarIcon.innerText = sub.avatar;
+
+      const charInfo = CHARACTER_MEMES[sub.speaker] || CHARACTER_MEMES["GON"];
+      const themeColor = charInfo.color;
+
+      document.documentElement.style.setProperty("--accent", themeColor);
+      subtitleCard.style.borderColor = themeColor;
+      subtitleCard.style.boxShadow = `0 0 35px ${themeColor}66`;
+      badge.style.borderColor = themeColor;
+      badge.style.backgroundColor = `${themeColor}22`;
+
+      // Render Dynamic Meme Card SVG inside memeSvgBox
+      memeSvgBox.innerHTML = `
+        <svg width="100%" height="100%" viewBox="0 0 600 360" style="border-radius: 16px; filter: drop-shadow(0 0 20px ${themeColor}AA);">
+          <rect width="600" height="360" fill="#121624" rx="20" stroke="${themeColor}" stroke-width="4"/>
+          <circle cx="300" cy="140" r="60" fill="${themeColor}" fill-opacity="0.2" stroke="${themeColor}" stroke-width="3"/>
+          <text x="300" y="160" font-size="55" text-anchor="middle">${charInfo.icon}</text>
+          <text x="300" y="50" font-family="sans-serif" font-size="20" font-weight="900" fill="#FFFFFF" text-anchor="middle">${charInfo.title}</text>
+          <rect x="30" y="230" width="540" height="90" fill="rgba(0,0,0,0.7)" rx="12" stroke="${themeColor}" stroke-width="2"/>
+          <text x="300" y="280" font-family="sans-serif" font-size="18" font-weight="900" fill="#FFFF00" text-anchor="middle">${charInfo.sub}</text>
+        </svg>
+      `;
+    }
+
+    function animateSpectrum() {
+      if (audio.paused) return;
+      bars.forEach((bar, i) => {
+        const val = Math.sin(audio.currentTime * 10 + i) * 40 + 50;
+        bar.style.height = `${val}%`;
+      });
+    }
+  </script>
+</body>
+</html>
