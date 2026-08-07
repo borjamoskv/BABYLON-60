@@ -3,6 +3,7 @@ use std::error::Error;
 use std::collections::HashSet;
 use ed25519_dalek::SigningKey;
 use rand_core::OsRng;
+use coset::CborSerializable;
 
 use crate::cfgkat::interpreter::{CfGkatNode, CfgkatContext, normalize_and_validate};
 use crate::sandbox::wasi_env::SandboxEnv;

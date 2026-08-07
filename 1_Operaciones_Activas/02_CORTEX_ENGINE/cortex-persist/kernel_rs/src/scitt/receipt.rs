@@ -2,7 +2,7 @@
 use serde::{Deserialize, Serialize};
 use ciborium::into_writer;
 use sha3::{Sha3_256, Digest};
-use ed25519_dalek::{SigningKey, Signer, Signature};
+use ed25519_dalek::{SigningKey, Signer};
 use std::collections::BTreeMap;
 use coset::{CoseSign1Builder, HeaderBuilder, CborSerializable};
 
@@ -147,11 +147,16 @@ impl TransitionRecord {
             .algorithm(coset::iana::Algorithm::EdDSA)
             .build();
 
+        let protected_header = coset::ProtectedHeader {
+            original_data: None,
+            header: protected.clone(),
+        };
+
         // 3. Construcción explícita de Sig_structure según RFC 9052 Section 4.4:
         // Sig_structure = ["Signature1", protected_headers_cbor, external_aad, payload]
         let sig_structure = coset::sig_structure_data(
             coset::SignatureContext::CoseSign1,
-            &protected,
+            protected_header,
             None,           // No unprotected headers en Sign1
             b"",            // External AAD vacío (SCITT default)
             &payload,
