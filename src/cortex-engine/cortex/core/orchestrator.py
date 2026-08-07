@@ -6,6 +6,7 @@ import time
 from typing import Optional
 
 from cortex.ipc.bridge import CortexIPCBridge, EpochState
+from cortex.core.l5_anchor import InferenceL5Anchor
 
 class CortexOrchestrator:
     """
@@ -19,6 +20,7 @@ class CortexOrchestrator:
         self._shm_file = None
         self._fd = None
         self.is_active = False
+        self.l5_anchor = InferenceL5Anchor()
 
     def boot_kernel_memory(self):
         """
@@ -47,6 +49,14 @@ class CortexOrchestrator:
         if not self.is_active:
             raise RuntimeError("Orquestador apagado. No se puede leer epoch.")
         return self.bridge.read_active_epoch_safe(self.epoch_state_ptr)
+
+    def stamp_active_epoch(self, payload: dict) -> dict:
+        """Sella criptográficamente la inferencia activa en OpenTimestamps."""
+        if not self.is_active:
+            raise RuntimeError("Orquestador apagado. No se puede atestar epoch.")
+
+        epoch, ts = self.get_active_epoch()
+        return self.l5_anchor.anchor_inference(epoch, ts, payload)
 
     def shutdown(self):
         """Consume y purga termodinámicamente la conexión."""
