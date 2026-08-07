@@ -1,6 +1,6 @@
 // C5-REAL EXERGY CERTIFIED
 use std::ptr;
-use std::sync::atomic::{AtomicPtr, AtomicU64, AtomicU8, Ordering};
+use std::sync::atomic::{AtomicPtr, AtomicU64, AtomicU8, AtomicUsize, Ordering};
 
 /// Estados del SharedManifest para el protocolo EBR.
 #[repr(u8)]
@@ -22,6 +22,10 @@ pub struct SharedManifest {
     pub payload: [u8; 32],
     /// Bandera de estado atómica para transiciones lock-free.
     pub status_flag: AtomicU8,
+    /// Contador atómico de lectores concurrentes (EBR drain guard).
+    /// Un slot en estado Retired solo puede transicionar a Idle
+    /// cuando este contador alcanza exactamente 0.
+    pub active_readers: AtomicUsize,
     /// Identificador secuencial de época para anclaje SCITT.
     pub epoch_id: u64,
     /// Timestamp nanosecondal para anclaje SCITT.
@@ -35,6 +39,8 @@ impl SharedManifest {
             payload: [0u8; 32],
             // AtomicU8::new es const-safe y no requiere sincronización adicional
             status_flag: AtomicU8::new(ManifestStatus::Idle as u8),
+            // EBR: inicializar sin lectores activos
+            active_readers: AtomicUsize::new(0),
             epoch_id,
             timestamp_ns,
         }
@@ -71,6 +77,26 @@ impl SharedManifest {
         }
         acc == 0
     }
+
+    /// Registra un lector concurrente (incrementa el contador atómico).
+    /// Debe invocarse antes de leer datos del manifiesto en un hilo consumidor.
+    #[inline]
+    pub fn acquire_reader(&self) {
+        self.active_readers.fetch_add(1, Ordering::Acquire);
+    }
+
+    /// Libera un lector concurrente (decrementa el contador atómico).
+    /// Debe invocarse tras finalizar la lectura del manifiesto.
+    #[inline]
+    pub fn release_reader(&self) {
+        self.active_readers.fetch_sub(1, Ordering::Release);
+    }
+
+    /// Consulta el número de lectores activos sin modificar el contador.
+    #[inline]
+    pub fn reader_count(&self) -> usize {
+        self.active_readers.load(Ordering::Acquire)
+    }
 }
 
 /// Razón específica de fallo epistémico.
@@ -89,6 +115,8 @@ pub enum HaltReason {
     GeometricCapExceeded = 4,
     /// Fricción estructural en la trazabilidad inyectada.
     TraceChainViolation = 5,
+    /// Slot Retired aún tiene lectores activos (EBR drain guard).
+    ActiveReadersNotDrained = 6,
 }
 
 /// Error epistémico con contexto de diagnóstico.
@@ -251,11 +279,16 @@ impl EpochState {
                 manifest.set_status(ManifestStatus::Active);
 
                 // EBR: marcar manifiesto anterior como Retired.
-                // No se libera memoria aquí; el recolector de épocas lo hará
-                // cuando ningún lector mantenga referencia a esta época.
+                // Verificar que no hay lectores activos antes de retirar.
+                // Si hay lectores, el slot permanece Active hasta que drenen.
                 if !current_active.is_null() {
                     let old = unsafe { &*current_active };
-                    old.set_status(ManifestStatus::Retired);
+                    if old.reader_count() == 0 {
+                        old.set_status(ManifestStatus::Retired);
+                    }
+                    // Si reader_count > 0, el slot permanece Active
+                    // y será retirado por el próximo commit_transition
+                    // cuando los lectores hayan drenado.
                 }
 
                 Ok(candidate_epoch)
