@@ -2,7 +2,7 @@
 use std::ptr;
 use std::sync::atomic::{AtomicPtr, AtomicU64, AtomicU8, Ordering};
 
-/// Estados posibles del SharedManifest para EBR.
+/// Estados del SharedManifest para el protocolo EBR.
 #[repr(u8)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ManifestStatus {
@@ -14,8 +14,8 @@ pub enum ManifestStatus {
     Quarantine = 5,
 }
 
-/// Manifiesto compartido entre Python y Rust con layout C garantizado.
-/// #[repr(C, align(8))] asegura compatibilidad ABI y alineación para atomics en 64-bit.
+/// Manifiesto compartido Python↔Rust con layout C y alineación de 64 bits.
+/// #[repr(C, align(8))] es obligatorio para ABI estable y atomics correctos en x86_64/aarch64.
 #[repr(C, align(8))]
 pub struct SharedManifest {
     /// Resumen criptográfico SHA-256 (32 bytes).
@@ -29,11 +29,11 @@ pub struct SharedManifest {
 }
 
 impl SharedManifest {
-    /// Crea un nuevo manifiesto en estado Idle.
+    /// Construye un manifiesto en estado Idle con campos inicializados.
     pub fn new(epoch_id: u64, timestamp_ns: u64) -> Self {
         Self {
             payload: [0u8; 32],
-            // Inicialización atómica sin bloqueos
+            // AtomicU8::new es const-safe y no requiere sincronización adicional
             status_flag: AtomicU8::new(ManifestStatus::Idle as u8),
             epoch_id,
             timestamp_ns,
@@ -41,8 +41,8 @@ impl SharedManifest {
     }
 
     /// Lectura atómica del estado con semántica Acquire.
-    // Acquire: garantiza que lecturas subsiguientes no se reordenen antes de esta carga,
-    // estableciendo un borde happens-before con el Release del escritor.
+    // Acquire establece borde happens-before: todas las escrituras previas
+    // al Release correspondiente son visibles tras esta carga.
     pub fn get_status(&self) -> ManifestStatus {
         match self.status_flag.load(Ordering::Acquire) {
             0 => ManifestStatus::Idle,
@@ -51,19 +51,43 @@ impl SharedManifest {
             3 => ManifestStatus::Active,
             4 => ManifestStatus::Retired,
             5 => ManifestStatus::Quarantine,
-            _ => ManifestStatus::Quarantine, // Defensa: valor corrupto → cuarentena
+            _ => ManifestStatus::Quarantine, // Valor corrupto → defensa por cuarentena
         }
     }
 
     /// Escritura atómica del estado con semántica Release.
-    // Release: garantiza que escrituras previas a esta tienda sean visibles
-    // para cualquier hilo que posteriormente haga Acquire sobre este campo.
+    // Release garantiza que todas las escrituras anteriores a esta tienda
+    // sean visibles para cualquier hilo que haga Acquire sobre este campo.
     pub fn set_status(&self, status: ManifestStatus) {
         self.status_flag.store(status as u8, Ordering::Release);
     }
+
+    /// Verifica el digest contra un valor esperado en tiempo constante.
+    // Evita timing attacks: siempre recorre los 32 bytes sin early-exit.
+    pub fn verify_digest(&self, expected: &[u8; 32]) -> bool {
+        let mut acc: u8 = 0;
+        for i in 0..32 {
+            acc |= self.payload[i] ^ expected[i];
+        }
+        acc == 0
+    }
 }
 
-/// Error epistémico: violación de consistencia detectada durante transición.
+/// Razón específica de fallo epistémico.
+#[repr(u8)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum HaltReason {
+    /// Digest SHA-256 no coincide.
+    DigestMismatch = 0,
+    /// CAS falló por contención concurrente.
+    CasContention = 1,
+    /// Puntero nulo proporcionado como candidato.
+    NullPointer = 2,
+    /// Fallback ptr es nulo durante rollback.
+    FallbackUnavailable = 3,
+}
+
+/// Error epistémico con contexto de diagnóstico.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct EpistemicHalt {
     /// Epoch ID del manifiesto que causó el halt.
@@ -72,32 +96,20 @@ pub struct EpistemicHalt {
     pub reason: HaltReason,
 }
 
-/// Razones específicas para EpistemicHalt.
-#[repr(u8)]
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum HaltReason {
-    /// Digest SHA-256 no coincide con el esperado.
-    DigestMismatch = 0,
-    /// CAS falló por contención concurrente.
-    CasContention = 1,
-    /// Puntero nulo proporcionado.
-    NullPointer = 2,
-}
-
 /// Estado global de épocas con punteros atómicos para EBR lock-free.
 pub struct EpochState {
     /// Puntero al manifiesto actualmente activo.
-    // AtomicPtr<SharedManifest>: operaciones atómicas de puntero nativas en 64-bit.
+    // AtomicPtr: operaciones atómicas nativas de puntero en arquitecturas 64-bit.
     pub active_epoch_ptr: AtomicPtr<SharedManifest>,
     /// Puntero al manifiesto estable de respaldo para rollback inmediato.
     pub stable_fallback_ptr: AtomicPtr<SharedManifest>,
-    /// Contador global de épocas para asignación monotónica.
-    // AtomicU64: contador lock-free para generación de epoch_id.
+    /// Contador global monotónico de épocas.
+    // AtomicU64: asignación lock-free de epoch_id sin contención significativa.
     pub global_epoch_counter: AtomicU64,
 }
 
 impl EpochState {
-    /// Crea un nuevo EpochState con punteros nulos y contador en cero.
+    /// Crea un EpochState no inicializado (punteros nulos, contador en 0).
     pub fn new() -> Self {
         Self {
             active_epoch_ptr: AtomicPtr::new(ptr::null_mut()),
@@ -106,40 +118,46 @@ impl EpochState {
         }
     }
 
-    /// Inicializa los punteros con manifiestos preexistentes.
+    /// Inicializa punteros y contador con valores preexistentes.
     /// # Safety
-    /// Los punteros deben ser válidos, alineados a 8 bytes, y residir en
-    /// memoria compartida mapeada correctamente entre Python y Rust via mmap.
+    /// - `active` y `fallback` deben ser válidos, no nulos, alineados a 8 bytes.
+    /// - Deben residir en memoria compartida mapeada vía mmap entre Python y Rust.
+    /// - El llamador garantiza exclusividad durante la inicialización.
     pub unsafe fn init(
         &self,
         active: *mut SharedManifest,
         fallback: *mut SharedManifest,
         initial_epoch: u64,
     ) {
-        // Release: publica los punteros después de que la memoria esté lista
+        // Release: publica punteros solo después de que la memoria esté completamente lista.
+        // Cualquier lector con Acquire posterior verá el estado completo.
         self.active_epoch_ptr.store(active, Ordering::Release);
         self.stable_fallback_ptr.store(fallback, Ordering::Release);
         self.global_epoch_counter.store(initial_epoch, Ordering::Release);
     }
 
     /// Asigna el siguiente epoch_id de forma atómica y monotónica.
-    // Relaxed es suficiente aquí: solo necesitamos unicidad, no ordenamiento
-    // respecto a otras operaciones de memoria.
+    // Relaxed: solo necesitamos unicidad global, no ordenamiento respecto
+    // a otras operaciones de memoria. fetch_add es lock-free en 64-bit.
     pub fn next_epoch_id(&self) -> u64 {
         self.global_epoch_counter.fetch_add(1, Ordering::Relaxed) + 1
     }
 
-    /// Ejecuta una transición atómica de época con validación, CAS y rollback.
+    /// Transición atómica de época con validación, CAS estricto y rollback.
     ///
-    /// Retorna Ok(new_epoch_id) si el CAS tiene éxito.
-    /// Retorna Err(EpistemicHalt) con razón específica si falla,
-    /// ejecutando rollback instantáneo al fallback y marcando cuarentena.
+    /// # Safety
+    /// `new_manifest` debe ser puntero válido a SharedManifest en memoria compartida,
+    /// alineado a 8 bytes, y no debe ser liberado mientras esta función ejecuta.
+    ///
+    /// Retorna Ok(epoch_id) si CAS tiene éxito y la época queda activa.
+    /// Retorna Err(EpistemicHalt) si falla validación o CAS, con rollback
+    /// instantáneo al fallback y marcado de cuarentena en el candidato fallido.
     pub fn commit_transition(
         &self,
         new_manifest: *mut SharedManifest,
         expected_digest: &[u8; 32],
     ) -> Result<u64, EpistemicHalt> {
-        // Validación de puntero nulo antes de cualquier acceso
+        // Validación temprana de puntero nulo
         if new_manifest.is_null() {
             return Err(EpistemicHalt {
                 failed_epoch: 0,
@@ -147,20 +165,13 @@ impl EpochState {
             });
         }
 
-        // SAFETY: El llamador garantiza que new_manifest apunta a memoria válida
-        // dentro del segmento compartido y está correctamente alineado.
+        // SAFETY: contrato del llamador garantiza validez del puntero
         let manifest = unsafe { &*new_manifest };
         let candidate_epoch = manifest.epoch_id;
 
-        // Paso 1: Validación criptográfica del digest SHA-256.
-        // Comparación constante en tiempo para evitar timing attacks.
-        let mut mismatch = false;
-        for i in 0..32 {
-            if manifest.payload[i] != expected_digest[i] {
-                mismatch = true;
-            }
-        }
-        if mismatch {
+        // Paso 1: Validación criptográfica en tiempo constante.
+        // verify_digest usa XOR acumulativo sin branches para evitar timing leaks.
+        if !manifest.verify_digest(expected_digest) {
             // Digest inválido → cuarentena inmediata, sin intentar CAS
             manifest.set_status(ManifestStatus::Quarantine);
             return Err(EpistemicHalt {
@@ -169,24 +180,22 @@ impl EpochState {
             });
         }
 
-        // Paso 2: Transicionar a estado Validating antes del CAS.
-        // Esto señala a observadores que este manifiesto está siendo evaluado.
+        // Paso 2: Señalar estado intermedio Validating.
+        // Observadores pueden detectar que este manifiesto está siendo evaluado.
         manifest.set_status(ManifestStatus::Validating);
 
-        // Paso 3: Leer el puntero activo actual.
-        // Acquire: sincroniza con el Release del último writer exitoso,
-        // asegurando que vemos el estado completo del manifiesto activo.
+        // Paso 3: Leer puntero activo actual con Acquire.
+        // Sincroniza con el Release del último writer exitoso, asegurando
+        // visibilidad completa del manifiesto activo previo.
         let current_active = self.active_epoch_ptr.load(Ordering::Acquire);
 
-        // Paso 4: Compare-Exchange estricto para rotar la época.
-        // Success ordering = AcqRel:
-        //   - Release: publica todas las escrituras al nuevo manifiesto
-        //     (payload, epoch_id, timestamp_ns, status=Validating)
-        //     ANTES de que el puntero sea visible globalmente.
-        //   - Acquire: tras éxito, adquiere visibilidad completa del nuevo estado.
-        // Failure ordering = Acquire:
-        //   - En fallo, necesitamos leer consistentemente el valor real
-        //     para diagnóstico o reintento futuro.
+        // Paso 4: Compare-Exchange estricto para rotar época.
+        // Success = AcqRel:
+        //   Release: publica escrituras al nuevo manifiesto (payload, epoch_id,
+        //            timestamp_ns, status=Validating) ANTES de hacer visible el puntero.
+        //   Acquire: tras éxito, adquiere visibilidad del nuevo estado publicado.
+        // Failure = Acquire:
+        //   Lectura consistente del valor real para diagnóstico o reintento.
         match self.active_epoch_ptr.compare_exchange(
             current_active,
             new_manifest,
@@ -194,10 +203,12 @@ impl EpochState {
             Ordering::Acquire,
         ) {
             Ok(_) => {
-                // CAS exitoso: promover a Active
+                // CAS exitoso: promover candidato a Active
                 manifest.set_status(ManifestStatus::Active);
 
-                // Marcar el manifiesto anterior como Retired (EBR: no liberar aún)
+                // EBR: marcar manifiesto anterior como Retired.
+                // No se libera memoria aquí; el recolector de épocas lo hará
+                // cuando ningún lector mantenga referencia a esta época.
                 if !current_active.is_null() {
                     let old = unsafe { &*current_active };
                     old.set_status(ManifestStatus::Retired);
@@ -206,18 +217,26 @@ impl EpochState {
                 Ok(candidate_epoch)
             }
             Err(_actual) => {
-                // CAS falló: contención concurrente detectada.
+                // CAS falló: otro hilo/proceso modificó ACTIVE_EPOCH_PTR.
                 // Rollback estricto al STABLE_FALLBACK_PTR.
 
-                // Cargar fallback con Acquire para asegurar consistencia
                 let fallback = self.stable_fallback_ptr.load(Ordering::Acquire);
 
+                // Si fallback también es nulo, el sistema está en estado irrecuperable
+                if fallback.is_null() {
+                    manifest.set_status(ManifestStatus::Quarantine);
+                    return Err(EpistemicHalt {
+                        failed_epoch: candidate_epoch,
+                        reason: HaltReason::FallbackUnavailable,
+                    });
+                }
+
                 // Restaurar puntero activo al fallback estable.
-                // Release: garantiza que el fallback sea visible antes de
-                // que cualquier lector posterior observe este cambio.
+                // Release: garantiza que el fallback sea completamente visible
+                // antes de que cualquier lector posterior observe este cambio.
                 self.active_epoch_ptr.store(fallback, Ordering::Release);
 
-                // Cuarentena del manifiesto candidato fallido
+                // Cuarentena del candidato fallido: nunca será promovido
                 manifest.set_status(ManifestStatus::Quarantine);
 
                 Err(EpistemicHalt {
@@ -229,16 +248,40 @@ impl EpochState {
     }
 
     /// Lee el epoch_id del manifiesto activo actual de forma segura.
-    /// Retorna None si no hay manifiesto activo.
-    // Acquire en la carga del puntero + Acquire en la lectura del campo
-    // establece cadena happens-before completa hasta el escritor original.
+    /// Retorna None si no hay manifiesto activo (puntero nulo).
+    // Cadena Acquire: carga del puntero + lectura del campo establece
+    // happens-before completo hasta el escritor original del manifiesto.
     pub fn current_epoch_id(&self) -> Option<u64> {
         let ptr = self.active_epoch_ptr.load(Ordering::Acquire);
         if ptr.is_null() {
             None
         } else {
-            // SAFETY: puntero no nulo obtenido vía Acquire es válido
+            // SAFETY: puntero no nulo obtenido vía Acquire es válido y legible
             Some(unsafe { (*ptr).epoch_id })
+        }
+    }
+
+    /// Lee el timestamp_ns del manifiesto activo actual de forma segura.
+    /// Retorna None si no hay manifiesto activo.
+    pub fn current_timestamp_ns(&self) -> Option<u64> {
+        let ptr = self.active_epoch_ptr.load(Ordering::Acquire);
+        if ptr.is_null() {
+            None
+        } else {
+            // SAFETY: mismo contrato que current_epoch_id
+            Some(unsafe { (*ptr).timestamp_ns })
+        }
+    }
+
+    /// Verifica si el manifiesto activo tiene un estado específico.
+    /// Útil para monitoreo externo sin modificar estado.
+    pub fn is_active_status(&self, expected: ManifestStatus) -> bool {
+        let ptr = self.active_epoch_ptr.load(Ordering::Acquire);
+        if ptr.is_null() {
+            false
+        } else {
+            // SAFETY: puntero válido vía Acquire
+            unsafe { (*ptr).get_status() == expected }
         }
     }
 }
