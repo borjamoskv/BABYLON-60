@@ -6,7 +6,29 @@ use ed25519_dalek::{SigningKey, Signer};
 use std::collections::BTreeMap;
 use coset::{CoseSign1Builder, HeaderBuilder, CborSerializable};
 
-pub const ARTICLE_15_MAX_VARENTROPY: f32 = 0.03;
+/// Aritmética de Punto Fijo 32.32 (u64).
+/// Los 32 bits superiores representan la parte entera.
+/// Los 32 bits inferiores representan la parte fraccional.
+/// Ejemplo: 0.03 → 0.03 × 2^32 = 128_849_018 (0x07AE_147A)
+/// Esto garantiza reproducibilidad bit-perfect determinista en todas
+/// las arquitecturas (x86_64, aarch64, WASM) sin depender de IEEE 754.
+pub type Fixed32_32 = u64;
+
+/// Constante de umbral legal del Artículo 15 EU AI Act.
+/// Representa 0.03 (3%) en aritmética de punto fijo 32.32.
+/// 0.03 × 2^32 = 128_849_018
+pub const ARTICLE_15_MAX_VARENTROPY: Fixed32_32 = 128_849_018;
+
+/// Factor de escala para conversión de flotantes a punto fijo 32.32.
+pub const FIXED_32_32_SCALE: u64 = 1u64 << 32;
+
+/// Convierte un valor f64 a Fixed32_32 para ingesta desde Python.
+/// Esta función SOLO se invoca en la frontera FFI; internamente
+/// todo el Kernel opera exclusivamente con u64.
+#[inline]
+pub fn f64_to_fixed(val: f64) -> Fixed32_32 {
+    (val * FIXED_32_32_SCALE as f64) as u64
+}
 
 #[derive(Debug)]
 pub struct EpistemicHalt {
@@ -61,8 +83,10 @@ pub struct ModelInfo {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct SamplingInfo {
-    pub temperature: f32,
-    pub top_p: f32,
+    /// Temperatura de muestreo en punto fijo 32.32 (ej. 0.7 → 3_006_477_107).
+    pub temperature: Fixed32_32,
+    /// Top-p (nucleus sampling) en punto fijo 32.32 (ej. 0.95 → 4_080_218_931).
+    pub top_p: Fixed32_32,
     pub top_k: u32,
     pub seed: Option<u64>,
 }
@@ -107,9 +131,13 @@ pub struct Verdict {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Uncertainty {
-    pub h: f32, // Entropy
-    pub v: f32, // Varentropy
-    pub max_v: f32,
+    /// Entropía de Shannon H(X) en punto fijo 32.32.
+    pub h: Fixed32_32,
+    /// Varentropía Var(H) en punto fijo 32.32.
+    pub v: Fixed32_32,
+    /// Máxima varentropía observada en la ventana de inferencia (punto fijo 32.32).
+    pub max_v: Fixed32_32,
+    /// Índice del token donde se observó la máxima varentropía.
     pub max_v_token_idx: u32,
 }
 
@@ -124,11 +152,13 @@ pub struct Budget {
 impl TransitionRecord {
     /// Valida el trigger de contención del Artículo 15 de la EU AI Act.
     /// Si la varentropía supera el umbral legal del 3% (0.03), desencadena un EpistemicHalt.
+    /// Valida el trigger de contención del Artículo 15 de la EU AI Act.
+    /// Comparación determinista en aritmética de punto fijo u64 (cero IEEE 754).
     pub fn validate_article_15_containment(&self) -> Result<(), EpistemicHalt> {
         if let Some(uncertainty) = &self.uncertainty {
             if uncertainty.max_v > ARTICLE_15_MAX_VARENTROPY {
                 return Err(EpistemicHalt::from(format!(
-                    "Article 15 Containment Trigger: Varentropy {} exceeds legal threshold of {}",
+                    "Article 15 Containment Trigger: Varentropy 0x{:016X} exceeds legal threshold 0x{:016X}",
                     uncertainty.max_v, ARTICLE_15_MAX_VARENTROPY
                 )));
             }
