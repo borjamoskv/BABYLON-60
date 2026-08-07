@@ -41,6 +41,7 @@ mod tests {
             current_usd_micros: 1_000,
             current_wall_clock_ms: 50,
             current_tool_calls: 1,
+            current_landauer_nats: 0.0,
         };
         let verdict = controller.evaluate_admission(&tracker, 100, 100);
         assert_eq!(verdict, AdmissionVerdict::Admitted);
