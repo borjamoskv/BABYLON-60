@@ -11,16 +11,16 @@ function App() {
         <h1>BABYLON-60<br/>Runtime</h1>
 
         <div className="metric-group">
-          <div className="metric-label">Verificación de Contrato (EU AI Act)</div>
+          <div className="metric-label">Contract Verification (EU AI Act)</div>
           <div className="metric-value green">
             <Shield size={20} />
             OK / SCITT
           </div>
-          <div className="status-badge">Fail-Stop Garantizado</div>
+          <div className="status-badge">Guaranteed Fail-Stop</div>
         </div>
 
         <div className="metric-group">
-          <div className="metric-label">Reproducibilidad Consolidada</div>
+          <div className="metric-label">Consolidated Reproducibility</div>
           <div className="metric-value">
             <Lock size={20} color="#00FF41" />
             100%
@@ -28,24 +28,24 @@ function App() {
         </div>
 
         <div className="metric-group">
-          <div className="metric-label">Coste Marginal Cloud</div>
+          <div className="metric-label">Marginal Cloud Cost</div>
           <div className="metric-value">
             <Cpu size={20} />
-            0.00 €
+            $0.00
           </div>
           <div style={{fontSize: '10px', color: '#888', marginTop: '4px'}}>
-            Ejecución Local / Edge
+            Local / Edge Sovereign Runtime
           </div>
         </div>
 
         <div className="metric-group" style={{marginTop: 'auto'}}>
-          <div className="metric-label">Entropía Estocástica Promedio</div>
+          <div className="metric-label">Average Stochastic Entropy</div>
           <div className="metric-value red">
             <Activity size={20} />
             H(X) &gt; ε
           </div>
           <div style={{fontSize: '10px', color: '#888', marginTop: '4px'}}>
-            Purgada en Ring-0
+            Purged at Ring-0 Boundary
           </div>
         </div>
       </aside>

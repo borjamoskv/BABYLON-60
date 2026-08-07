@@ -9,6 +9,7 @@
 ## Invariante de Compilación y Calidad Pre-Atestación
 - **Validación Estricta de Sintaxis Antes de Commits**: NINGÚN archivo de script o módulo (Python, Rust, TypeScript) debe ser atestado o enviado a `git commit` sin haber ejecutado primero una prueba empírica de sintaxis o compilación silenciosa (`py_compile`, `cargo check`, `tsc --noEmit`).
 - **Verificación Post-Edición**: Tras realizar ediciones multilínea sobre archivos de backend o infraestructura, el agente DEBE ejecutar la validación del compilador antes de dar la tarea por concluida.
+- **Conformidad Rust 2024 en Puentes FFI/IPC**: Todo atributo de exportación C debe emplear la sintaxis `#[unsafe(no_mangle)]`, y cualquier operación con punteros crudos o llamadas `libc` (`mmap`, `munmap`) dentro de funciones `unsafe fn` DEBE encapsularse en bloques `unsafe { ... }` para cumplir el lint `unsafe_op_in_unsafe_fn`.
 
 ## Invariante IPC: Protocolo de Manifiesto Atómico en Memoria Compartida (Atomic Manifest & Lock-Free EBR)
 - **Desacoplamiento Síncrono Kernel-Policy Engine**: La comunicación de estado y modelos entre Python y Rust DEBE realizarse mediante una región de memoria compartida reservada (Header + Ring Buffer de Slots), eliminando llamadas de red/sockets síncronos en el bucle crítico de ejecución.
