@@ -1,24 +1,16 @@
 // C5-REAL EXERGY CERTIFIED
+// ffi_bridge.rs — Implementación axiomáticamente verificable
 use std::os::raw::{c_int, c_void};
 use std::ptr;
+use std::sync::atomic::Ordering;
 
-// Asumiendo que ebr.rs está en el mismo crate y exporta estos tipos.
 use crate::ipc::ebr::{EpochState, SharedManifest};
 
-/// Tamaño exacto del segmento de control requerido.
 pub const SHARED_STATE_SIZE: usize = std::mem::size_of::<EpochState>();
 
-/// Inicializa el acceso al estado compartido vía File Descriptor.
-/// Mapea el FD en el espacio de direcciones actual y retorna un puntero tipado.
-///
-/// # Safety
-/// - `fd` debe ser un descriptor de archivo válido apuntando a memoria compartida.
-/// - El tamaño del objeto subyacente al FD debe ser >= SHARED_STATE_SIZE.
-/// - El llamador es responsable de asegurar que la memoria esté correctamente inicializada
-///   antes de usar los punteros atómicos (o usar init() posteriormente).
+/// AXIOMA 3: Mapeo sin inicialización. Estado es ⊥ hasta initialize_epoch_state.
 #[no_mangle]
 pub unsafe extern "C" fn init_shared_memory(fd: c_int) -> *mut EpochState {
-    // Mapeo compartido: cambios visibles instantáneamente entre hilos/procesos mapeados
     let addr = libc::mmap(
         ptr::null_mut(),
         SHARED_STATE_SIZE,
@@ -27,21 +19,47 @@ pub unsafe extern "C" fn init_shared_memory(fd: c_int) -> *mut EpochState {
         fd,
         0,
     );
-
     if addr == libc::MAP_FAILED {
         return ptr::null_mut();
     }
-
-    // Verificación de alineación crítica para atomics de 64 bits
-    debug_assert_eq!(addr as usize % 8, 0, "mmap returned unaligned address");
-
+    debug_assert_eq!(addr as usize % 8, 0); // AXIOMA 1: alineación
     addr as *mut EpochState
 }
 
-/// Libera el mapeo de memoria compartida.
-/// # Safety
-/// - `ptr` debe haber sido obtenido vía init_shared_memory.
-/// - Ningún otro hilo debe estar accediendo a esta memoria tras la llamada.
+/// AXIOMA 3: Constructor in-place determinista sobre memoria externa.
+#[no_mangle]
+pub unsafe extern "C" fn initialize_epoch_state(ptr: *mut EpochState) {
+    if ptr.is_null() { return; }
+    (*ptr).active_epoch_ptr.store(ptr::null_mut(), Ordering::Release);
+    (*ptr).stable_fallback_ptr.store(ptr::null_mut(), Ordering::Release);
+    (*ptr).global_epoch_counter.store(0, Ordering::Release);
+}
+
+/// AXIOMA 2 + AXIOMA 7: Lectura con Acquire fence, sin efectos secundarios.
+/// Retorna 1 si válido, 0 si nulo. Valores por copia, no por puntero expuesto.
+#[no_mangle]
+pub unsafe extern "C" fn read_active_epoch_safe(
+    state: *const EpochState,
+    out_epoch_id: *mut u64,
+    out_timestamp_ns: *mut u64,
+) -> i32 {
+    if state.is_null() || out_epoch_id.is_null() || out_timestamp_ns.is_null() {
+        return 0;
+    }
+    // AXIOMA 2: Acquire garantiza happens-before en TODAS las arquitecturas
+    let manifest_ptr = (*state).active_epoch_ptr.load(Ordering::Acquire);
+    if manifest_ptr.is_null() {
+        *out_epoch_id = 0;
+        *out_timestamp_ns = 0;
+        return 0;
+    }
+    // AXIOMA 7: Solo lecturas, ninguna escritura
+    *out_epoch_id = (*manifest_ptr).epoch_id;
+    *out_timestamp_ns = (*manifest_ptr).timestamp_ns;
+    1
+}
+
+/// AXIOMA 4: Liberación solo válida en mismo espacio de direcciones.
 #[no_mangle]
 pub unsafe extern "C" fn destroy_shared_memory(ptr: *mut EpochState) {
     if !ptr.is_null() {
