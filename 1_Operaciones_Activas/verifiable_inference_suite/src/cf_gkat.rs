@@ -55,6 +55,10 @@ impl CFGKATEngine {
                     (left, CFGKATExpr::Skip) => left,
                     (CFGKATExpr::Return, _) => CFGKATExpr::Return,
                     (CFGKATExpr::Break, _) => CFGKATExpr::Break,
+                    (CFGKATExpr::Goto(lbl), _) => CFGKATExpr::Goto(lbl),
+                    (CFGKATExpr::Seq(a, b), right) => {
+                        Self::normalize(&CFGKATExpr::Seq(a, Box::new(CFGKATExpr::Seq(b, Box::new(right)))))
+                    }
                     (left, right) => CFGKATExpr::Seq(Box::new(left), Box::new(right)),
                 }
             }
@@ -128,5 +132,38 @@ mod tests {
         );
         let norm = CFGKATEngine::normalize(&expr);
         assert_eq!(norm, CFGKATExpr::Return);
+    }
+
+    #[test]
+    fn test_cfgkat_goto_dead_code_elimination() {
+        let expr = CFGKATExpr::Seq(
+            Box::new(CFGKATExpr::Goto("LABEL_END".to_string())),
+            Box::new(CFGKATExpr::Action("unreachable".to_string())),
+        );
+        let norm = CFGKATEngine::normalize(&expr);
+        assert_eq!(norm, CFGKATExpr::Goto("LABEL_END".to_string()));
+    }
+
+    #[test]
+    fn test_cfgkat_seq_associativity_equivalence() {
+        // (a ; b) ; c
+        let expr1 = CFGKATExpr::Seq(
+            Box::new(CFGKATExpr::Seq(
+                Box::new(CFGKATExpr::Action("a".to_string())),
+                Box::new(CFGKATExpr::Action("b".to_string())),
+            )),
+            Box::new(CFGKATExpr::Action("c".to_string())),
+        );
+
+        // a ; (b ; c)
+        let expr2 = CFGKATExpr::Seq(
+            Box::new(CFGKATExpr::Action("a".to_string())),
+            Box::new(CFGKATExpr::Seq(
+                Box::new(CFGKATExpr::Action("b".to_string())),
+                Box::new(CFGKATExpr::Action("c".to_string())),
+            )),
+        );
+
+        assert!(CFGKATEngine::is_equivalent(&expr1, &expr2));
     }
 }
