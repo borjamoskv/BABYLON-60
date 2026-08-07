@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { CausalVisualizer } from './components/CausalVisualizer';
 import { RingBufferVisualizer, EpochSlot } from './components/RingBufferVisualizer';
 import { ReceiptStream, ScittReceipt } from './components/ReceiptStream';
-import { sound } from './AudioSynthesizer';
+import { sound } from './components/AudioSynthesizer';
 import {
   Shield,
   Activity,

@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { CausalVisualizer } from './components/CausalVisualizer';
 import { RingBufferVisualizer, EpochSlot } from './components/RingBufferVisualizer';
 import { ReceiptStream, ScittReceipt } from './components/ReceiptStream';
-import { sound } from './AudioSynthesizer';
+import { sound } from './components/AudioSynthesizer';
 import {
   Shield,
   Activity,
@@ -13,9 +13,7 @@ import {
   VolumeX,
   Flame,
   AlertOctagon,
-  RefreshCw,
   Layers,
-  FileCheck2,
 } from 'lucide-react';
 
 const INITIAL_SLOTS: EpochSlot[] = [
@@ -57,6 +55,7 @@ function App() {
       latencyMs: 1.62,
       varentropy: 0.009,
     },
+  ]);
   const [isConnectedToKernel, setIsConnectedToKernel] = useState(false);
   const [liveTEff, setLiveTEff] = useState(1.84);
 
