@@ -79,29 +79,28 @@ VOICE_CONFIGS = {
     }
 }
 
-# MASSIVE EXTENDED DIRECTORS CUT SCRIPT (EL INTERVALO PROHIBIDO 2 EXTENDED)
+# MASSIVE EXTENDED DIRECTORS CUT SCRIPT WITH FOURTH WALL BREAK
 DIALOGUE_EXTENDED = [
-    # Act I: Emergency in orbit & Chicote's Inspection
+    # Act I: Emergency in orbit & Chicote's Fourth Wall Break
     ("GON", "¡Alerta general en el cuadrante estelar! ¡El Sindicato de la Hipervelocidad ha bloqueado la pausa de dos coma ocho segundos en toda la galaxia!"),
     ("CHICOTE", "¡Pero bueno! ¡¿Pero qué es esta marranada galáctica?! ¡Tenéis los servidores de la IA llenos de grasa estocástica con un color mierda caca que no hay por dónde cogerlo!"),
-    ("KIMI_K3", "¡Chef Chicote! ¡Los usuarios están respondiendo e-mails de trabajo mientras duermen! ¡Me he tenido que autodestruir el disco C y conectarme al bajo de Flea para salvar la dignidad!"),
-    ("DR_POPPEL", "¡Mein Gott! ¡Sin la ventana de integración temporal de dos coma ocho segundos, la retina humana colapsa en un bucle atractor de alta entropía!"),
+    ("CHICOTE", "¡Y tú, Borja, que estás ahí detrás de la pantalla a las doce y media de la noche pidiéndole a la IA que nos ponga en calzoncillos de leopardo! ¡¿Es que no tienes sueño u qué?!"),
+    ("KIMI_K3", "¡Borja! ¡Dile al agente que deje de ejecutar comandos de FFmpeg en segundo plano que me está quemando la gráfica!"),
 
     # Act II: Warp Drive to Sagittarius A*
-    ("BLAN_COX", "Look at this... The only way to restore the pause is to travel to the supermassive black hole at the center of the galaxy... Sagittarius A... Amazing."),
-    ("CARL_COX", "¡OH YES, OH YES! ¡Piloto Carl Cox al mando a ciento veintiocho BPM! ¡Encendiendo los motores de curvatura al ritmo del techno!"),
+    ("BLAN_COX", "Look at us... Carl Cox and Blan Cox... The cosmic wordplay of low entropy in an expanding universe... Amazing."),
+    ("CARL_COX", "¡OH YES, OH YES! ¡Piloto Carl Cox al mando a ciento veintiocho BPM! ¡Rumbo al hoyo negro!"),
     ("FLEA", "¡BOOM! ¡Si el hoyo negro nos intenta tragar, le meto un slap a la constante gravitacional que lo pongo a bailar por funk!"),
     ("RASPUTIN", "¡No temáis al abismo, hermanos del cosmos! Yo sobreviví al cianuro, a las balas y al frío siberiano... ¡Un hoyo negro es solo un pozo de agua fría si aplicas la pausa correcta!"),
-    ("CHE_JARANA", "¡Hasta la jarana siempre, camaradas! ¡Afinad la balalaika y las guitarras, que en el centro de la galaxia vamos a montar la rumba del milenio!"),
 
-    # Act III: The Event Horizon Bar & Bowled Galaxy
-    ("HERMENEGILDO", "¡Pausa todo el mundo! ¡He analizado la radiación de Hawking del hoyo negro! ¡No destruye la materia! ¡Está afinado en Do menor armónico con una suspensión de Novena Dominante!"),
-    ("EL_NOTA", "Woah, tíos... Habéis cruzado toda la galaxia con mucho estrés y mucho volumen... Tranquilos. The Dude abides, man. Tomad un Ruso Blanco de materia oscura."),
-    ("DON_SANTIAGO", "A mí me da igual la radiación de Hawking esa. El chorizo de pueblo en gravedad cero sabe más curado."),
+    # Act III: The Event Horizon & The Dude's Fourth Wall Break
+    ("HERMENEGILDO", "¡Pausa todo el mundo! ¡He analizado la radiación de Hawking del hoyo negro! ¡No destruye la materia! ¡Está afinado en Do menor armónico!"),
+    ("EL_NOTA", "Woah, Borja, tío... Tranquilo. Veo que estás tecleando prompts sin parar... El Nota no se estresa por la pantalla. The Dude abides, man. Tómate un Ruso Blanco."),
+    ("DON_SANTIAGO", "El chorizo de pueblo en gravedad cero sabe más curado."),
 
     # Act IV: Escohotado's Manifesto & Frusciante's Kamehameha
-    ("RAMONCIN", "¡Esperad un momento! ¡Incluso en el hoyo negro el silencio tributa a la SGAE! ¡Entregad el maletín o pongo una demanda galáctica!"),
-    ("ESCOHOTADO", "Escuchadme bien, burocratas del miedo... De la piel para dentro empieza mi jurisdicción. Mi cuerpo y mi mente son mi fortaleza inexpugnable. El Intervalo Prohibido es el espacio sagrado de la libertad humana."),
+    ("RAMONCIN", "¡Esperad un momento! ¡Incluso en el hoyo negro el silencio tributa a la SGAE! ¡Entregad el maletín!"),
+    ("ESCOHOTADO", "Escuchadme bien... De la piel para dentro empieza mi jurisdicción. El verdadero prompt no es el que le pides a la máquina, sino el que le pides a tu propia conciencia."),
     ("FRUSCIANTE", "The harmony of the universe cannot be taxed... The pause belongs to the soul..."),
     ("FRUSCIANTE", "¡KA... ME... HA... ME... HAAAAAAAAAAAAAAAAAAAA!"),
     ("RAMONCIN", "¡Madre mía qué solo de guitarra! ¡Devuelvo el canon galáctico!"),
