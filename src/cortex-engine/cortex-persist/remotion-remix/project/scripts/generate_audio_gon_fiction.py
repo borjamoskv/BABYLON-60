@@ -14,70 +14,70 @@ TEMP_DIR = os.path.join(PROJECT_DIR, "temp_audio_gon_fiction")
 os.makedirs(PUBLIC_DIR, exist_ok=True)
 os.makedirs(TEMP_DIR, exist_ok=True)
 
-# CALM, RELAXED & HUMANIZED VOICE CONFIGS (TTS Rate: 85-105 WPM, atempo <= 0.88)
+# ULTRA-RELAXED SLOW PACED HUMAN VOICE CONFIGS (TTS Rate: 60-75 WPM, atempo 0.60-0.75)
 VOICE_CONFIGS = {
     "GON": {
-        "voice": "Mónica", "rate": 95, "color": "#00F0FF", "avatar": "🚲",
-        "filter": "asetrate=44100*1.05,atempo=0.85"
+        "voice": "Mónica", "rate": 70, "color": "#00F0FF", "avatar": "🚲",
+        "filter": "atempo=0.68"
     },
     "CHICOTE": {
-        "voice": "Jorge", "rate": 90, "color": "#FF3333", "avatar": "👨‍🍳",
-        "filter": "asetrate=44100*0.82,atempo=0.88,equalizer=f=100:width_type=h:width=200:g=6"
+        "voice": "Jorge", "rate": 65, "color": "#FF3333", "avatar": "👨‍🍳",
+        "filter": "atempo=0.70,equalizer=f=100:width_type=h:width=200:g=6"
     },
     "RASPUTIN": {
-        "voice": "Grandpa", "rate": 80, "color": "#9933FF", "avatar": "🪆",
-        "filter": "asetrate=44100*0.75,atempo=0.88,aecho=0.8:0.9:800:0.4"
+        "voice": "Grandpa", "rate": 60, "color": "#9933FF", "avatar": "🪆",
+        "filter": "atempo=0.70,aecho=0.8:0.9:800:0.4"
     },
     "CHE_JARANA": {
-        "voice": "Eddy", "rate": 90, "color": "#FF9900", "avatar": "🎸",
-        "filter": "asetrate=44100*1.05,atempo=0.85,chorus=0.7:0.9:55:0.4:0.25:2"
+        "voice": "Eddy", "rate": 65, "color": "#FF9900", "avatar": "🎸",
+        "filter": "atempo=0.70,chorus=0.7:0.9:55:0.4:0.25:2"
     },
     "CARL_COX": {
-        "voice": "Reed", "rate": 95, "color": "#00FF66", "avatar": "🎧",
-        "filter": "asetrate=44100*1.02,atempo=0.88,aecho=0.8:0.88:60:0.4"
+        "voice": "Reed", "rate": 70, "color": "#00FF66", "avatar": "🎧",
+        "filter": "atempo=0.72,aecho=0.8:0.88:60:0.4"
     },
     "BLAN_COX": {
-        "voice": "Flo", "rate": 85, "color": "#FF00FF", "avatar": "🌌",
-        "filter": "atempo=0.82,aecho=0.8:0.88:300:0.3,equalizer=f=3000:width_type=h:width=1000:g=4"
+        "voice": "Flo", "rate": 60, "color": "#FF00FF", "avatar": "🌌",
+        "filter": "atempo=0.65,aecho=0.8:0.88:300:0.3,equalizer=f=3000:width_type=h:width=1000:g=4"
     },
     "FRUSCIANTE": {
-        "voice": "Reed", "rate": 90, "color": "#FFD700", "avatar": "🎸",
-        "filter": "atempo=0.85,aphaser=in_gain=0.8:out_gain=0.9:delay=4:decay=0.5:speed=1.5,volume=1.8"
+        "voice": "Reed", "rate": 65, "color": "#FFD700", "avatar": "🎸",
+        "filter": "atempo=0.68,aphaser=in_gain=0.8:out_gain=0.9:delay=4:decay=0.5:speed=1.5,volume=1.8"
     },
     "FLEA": {
-        "voice": "Rocko", "rate": 100, "color": "#FF6600", "avatar": "⚡",
-        "filter": "asetrate=44100*1.1,atempo=0.82,equalizer=f=250:width_type=h:width=100:g=5"
+        "voice": "Rocko", "rate": 70, "color": "#FF6600", "avatar": "⚡",
+        "filter": "atempo=0.70,equalizer=f=250:width_type=h:width=100:g=5"
     },
     "RAMONCIN": {
-        "voice": "Jorge", "rate": 90, "color": "#FF0055", "avatar": "🕶️",
-        "filter": "asetrate=44100*1.15,atempo=0.80,equalizer=f=2000:width_type=h:width=500:g=8"
+        "voice": "Jorge", "rate": 65, "color": "#FF0055", "avatar": "🕶️",
+        "filter": "atempo=0.68,equalizer=f=2000:width_type=h:width=500:g=8"
     },
     "HERMENEGILDO": {
-        "voice": "Flo", "rate": 90, "color": "#00FFCC", "avatar": "🎹",
-        "filter": "asetrate=44100*1.08,atempo=0.85"
+        "voice": "Flo", "rate": 65, "color": "#00FFCC", "avatar": "🎹",
+        "filter": "atempo=0.70"
     },
     "EL_NOTA": {
-        "voice": "Reed", "rate": 78, "color": "#CCCC00", "avatar": "🍹",
-        "filter": "asetrate=44100*0.82,atempo=0.85,aecho=0.8:0.7:40:0.2"
+        "voice": "Reed", "rate": 55, "color": "#CCCC00", "avatar": "🍹",
+        "filter": "atempo=0.65,aecho=0.8:0.7:40:0.2"
     },
     "ESCOHOTADO": {
-        "voice": "Grandpa", "rate": 75, "color": "#D4AF37", "avatar": "💨",
-        "filter": "asetrate=44100*0.78,atempo=0.88,equalizer=f=80:width_type=h:width=100:g=7"
+        "voice": "Grandpa", "rate": 55, "color": "#D4AF37", "avatar": "💨",
+        "filter": "atempo=0.65,equalizer=f=80:width_type=h:width=100:g=7"
     },
     "DR_POPPEL": {
-        "voice": "Paulina", "rate": 95, "color": "#FFFF00", "avatar": "🔬",
-        "filter": "asetrate=44100*1.08,atempo=0.85"
+        "voice": "Paulina", "rate": 70, "color": "#FFFF00", "avatar": "🔬",
+        "filter": "atempo=0.70"
     },
     "DON_SANTIAGO": {
-        "voice": "Grandma", "rate": 80, "color": "#CC9966", "avatar": "🥖",
-        "filter": "asetrate=44100*0.82,atempo=0.88"
+        "voice": "Grandma", "rate": 60, "color": "#CC9966", "avatar": "🥖",
+        "filter": "atempo=0.68"
     },
     "KIMI_K3": {
-        "voice": "Shelley", "rate": 95, "color": "#33FFFF", "avatar": "🤖",
-        "filter": "asetrate=44100*1.2,atempo=0.78,flanger=delay=5:depth=10"
+        "voice": "Shelley", "rate": 70, "color": "#33FFFF", "avatar": "🤖",
+        "filter": "atempo=0.68,flanger=delay=5:depth=10"
     },
     "PAUSA": {
-        "type": "silence", "duration": 4.0, "color": "#FFFFFF", "avatar": "⏳",
+        "type": "silence", "duration": 5.0, "color": "#FFFFFF", "avatar": "⏳",
         "filter": None
     }
 }
@@ -90,7 +90,7 @@ DIALOGUE_GON_FICTION = [
     ("CHICOTE", "¡¿Cómo le van a llamar?! ¡Pintxo de tortilla con queso de Idiazabal y un vaso de txakoli! ¡Pero frena, culebra, que nos matamos en el puente San Antón!"),
     ("GON", "¡No le llaman así! Le llaman El Pintxo con Dropout Estocástico. Porque en vez de cebolla lleva entropía, y cuando le das un bocado no sabes si estás comiendo patata o una alucinación de GPT-4."),
     ("CHICOTE", "¡Aúpa ahivalahostia! ¡Pero qué marranada de cocina es esa! ¡Servidores de IA llenos de churrete y aceite refrito de tres semanas! ¡Si le meto una auditoría a la red neuronal me la cierran los inspectores de Osakidetza!"),
-    ("PAUSA", "PAUSA DE 4 SEGUNDOS EN EL MUELLE DE MARZANA"),
+    ("PAUSA", "PAUSA DE 5 SEGUNDOS EN EL MUELLE DE MARZANA"),
 
     # ACT II
     ("RAMONCIN", "¡Alto ahí en ese tándem! ¡Por el artículo 14 de la SGAE y la junta de usuarios de Bilbao La Vieja, cada pedaleada en esta calle paga canon por fricción sonora!"),
@@ -154,7 +154,6 @@ DIALOGUE_GON_FICTION = [
 def process_single_dialogue(args):
     idx, speaker, text, output_name = args
     cfg = VOICE_CONFIGS[speaker]
-    raw_file = os.path.join(TEMP_DIR, f"raw_{output_name}_{idx:03d}.wav")
     out_file = os.path.join(TEMP_DIR, f"{output_name}_{idx:03d}.wav")
 
     if speaker == "PAUSA":
@@ -170,13 +169,13 @@ def process_single_dialogue(args):
         audio_filter = cfg["filter"]
         aiff_file = os.path.join(TEMP_DIR, f"temp_{output_name}_{idx:03d}.aiff")
 
-        # Synthesize with slow, humanized speech rate
+        # Synthesize with ultra-slow rates (55-75 WPM)
         subprocess.run(["say", "-v", voice, "-r", str(rate), "-o", aiff_file, text], check=True)
 
-        # Apply FFmpeg filter AND add 0.5s silence padding at the end of every sentence
+        # Apply slowing audio filter AND add 1.2s silence padding after EVERY sentence
         cmd = [
             "ffmpeg", "-y", "-i", aiff_file,
-            "-af", f"{audio_filter},apad=pad_dur=0.5",
+            "-af", f"{audio_filter},apad=pad_dur=1.2",
             "-ar", "44100", "-ac", "1", "-acodec", "pcm_s16le", out_file
         ]
         subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
@@ -189,7 +188,7 @@ def process_single_dialogue(args):
     return (idx, speaker, cfg, text, out_file, duration)
 
 def generate_speech_parallel(dialogue_list, output_name):
-    print(f"[RELAXED AUDIO ENGINE] Generating CALM & NATURAL dialogues with 16 workers...")
+    print(f"[ULTRA-SLOW AUDIO ENGINE] Synthesizing EXTRA-CALM & SLOW dialogues (rate 60-75 + 1.2s padding)...")
 
     tasks = [(idx, speaker, text, output_name) for idx, (speaker, text) in enumerate(dialogue_list)]
 
@@ -228,7 +227,7 @@ def generate_speech_parallel(dialogue_list, output_name):
             f.write(f"file '{p}'\n")
 
     raw_dialogue_wav = os.path.join(TEMP_DIR, f"{output_name}_raw_dialogue.wav")
-    print(f"[RELAXED AUDIO ENGINE] Concatenating dialogue tracks...")
+    print(f"[ULTRA-SLOW AUDIO ENGINE] Concatenating dialogue tracks...")
     subprocess.run([
         "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", concat_list_path,
         "-c", "copy", raw_dialogue_wav
@@ -237,12 +236,12 @@ def generate_speech_parallel(dialogue_list, output_name):
     master_wav = os.path.join(PUBLIC_DIR, f"{output_name}_master.wav")
     kick_track = os.path.join(PUBLIC_DIR, "kick_track.wav")
 
-    print(f"[RELAXED AUDIO ENGINE] Mixing dialogue with background music & mastering...")
+    print(f"[ULTRA-SLOW AUDIO ENGINE] Mixing dialogue with background music & mastering...")
     if os.path.exists(kick_track):
         mix_cmd = [
             "ffmpeg", "-y", "-i", raw_dialogue_wav, "-stream_loop", "-1", "-i", kick_track,
             "-filter_complex",
-            "[1:a]volume=0.15[bg];[0:a][bg]amix=inputs=2:duration=first:dropout_transition=2,volume=1.8,equalizer=f=60:width_type=h:width=100:g=4,equalizer=f=12000:width_type=h:width=2000:g=3[aout]",
+            "[1:a]volume=0.12[bg];[0:a][bg]amix=inputs=2:duration=first:dropout_transition=2,volume=1.8,equalizer=f=60:width_type=h:width=100:g=4,equalizer=f=12000:width_type=h:width=2000:g=3[aout]",
             "-map", "[aout]", "-acodec", "pcm_s16le", master_wav
         ]
         subprocess.run(mix_cmd, check=True)
@@ -254,7 +253,7 @@ def generate_speech_parallel(dialogue_list, output_name):
         json.dump(subtitles, f, indent=2, ensure_ascii=False)
 
     total_frames = int(round(current_time * fps))
-    print(f"[RELAXED AUDIO ENGINE] ✅ COMPLETED {output_name}! Duration: {current_time:.2f}s ({total_frames} frames at 30 fps)")
+    print(f"[ULTRA-SLOW AUDIO ENGINE] ✅ COMPLETED {output_name}! Duration: {current_time:.2f}s ({total_frames} frames at 30 fps)")
 
 if __name__ == "__main__":
     generate_speech_parallel(DIALOGUE_GON_FICTION, "gon_fiction")
