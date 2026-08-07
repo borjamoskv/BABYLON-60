@@ -1,6 +1,5 @@
 // C5-REAL EXERGY CERTIFIED
 import { useEffect, useRef } from 'react';
-import { sound } from './AudioSynthesizer';
 
 interface Particle {
   x: number;
@@ -125,7 +124,6 @@ export const CausalVisualizer = ({
         color: '#FF003C',
       });
 
-      sound.playPurge();
     };
 
     canvas.addEventListener('click', handleClick);
@@ -245,8 +243,7 @@ export const CausalVisualizer = ({
                 alpha: 0.8,
                 color: '#FF003C',
               });
-              sound.playPurge();
-            }
+                    }
             onParticlePurged?.();
           } else {
             // VALIDATED / ATTESTED (Robinson-Łoś standard part st(x))
@@ -264,7 +261,6 @@ export const CausalVisualizer = ({
               color: '#00FF41',
             });
 
-            sound.playValidate();
             onParticleValidated?.();
           }
         }

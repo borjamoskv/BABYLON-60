@@ -11,7 +11,6 @@ import {
   Lock,
   Filter,
 } from 'lucide-react';
-import { sound } from './AudioSynthesizer';
 
 export interface ScittReceipt {
   id: string;
@@ -37,7 +36,6 @@ export const ReceiptStream = ({ receipts }: Props) => {
 
   const handleCopy = (text: string, id: string) => {
     navigator.clipboard.writeText(text);
-    sound.playCopy();
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 1500);
   };
@@ -63,7 +61,6 @@ export const ReceiptStream = ({ receipts }: Props) => {
       <div className="receipt-filter-bar">
         <button
           onClick={() => {
-            sound.playClick();
             setFilter('ALL');
           }}
           className={`filter-btn ${filter === 'ALL' ? 'filter-active' : ''}`}
@@ -72,7 +69,6 @@ export const ReceiptStream = ({ receipts }: Props) => {
         </button>
         <button
           onClick={() => {
-            sound.playClick();
             setFilter('ATTESTED');
           }}
           className={`filter-btn filter-green ${filter === 'ATTESTED' ? 'filter-active' : ''}`}
@@ -81,7 +77,6 @@ export const ReceiptStream = ({ receipts }: Props) => {
         </button>
         <button
           onClick={() => {
-            sound.playClick();
             setFilter('HALTED');
           }}
           className={`filter-btn filter-red ${filter === 'HALTED' ? 'filter-active' : ''}`}
@@ -98,8 +93,7 @@ export const ReceiptStream = ({ receipts }: Props) => {
             <div
               key={r.id}
               onClick={() => {
-                sound.playClick();
-                setSelectedReceipt(r);
+                    setSelectedReceipt(r);
               }}
               className={`receipt-card ${isAttested ? 'receipt-attested' : 'receipt-halted'}`}
             >
@@ -142,8 +136,7 @@ export const ReceiptStream = ({ receipts }: Props) => {
               </div>
               <button
                 onClick={() => {
-                  sound.playClick();
-                  setSelectedReceipt(null);
+                        setSelectedReceipt(null);
                 }}
                 className="btn-close-modal"
               >
@@ -236,7 +229,6 @@ export const ReceiptStream = ({ receipts }: Props) => {
               </span>
               <button
                 onClick={() => {
-                  sound.playClick();
                   setSelectedReceipt(null);
                 }}
                 className="btn-modal-action"

@@ -3,14 +3,11 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { CausalVisualizer } from './components/CausalVisualizer';
 import { RingBufferVisualizer, EpochSlot } from './components/RingBufferVisualizer';
 import { ReceiptStream, ScittReceipt } from './components/ReceiptStream';
-import { sound } from './components/AudioSynthesizer';
 import {
   Shield,
   Activity,
   Lock,
   Cpu,
-  Volume2,
-  VolumeX,
   Flame,
   AlertOctagon,
   Layers,
@@ -31,7 +28,6 @@ const INITIAL_SLOTS: EpochSlot[] = [
 ];
 
 function App() {
-  const [soundEnabled, setSoundEnabled] = useState(false);
   const [isAttackActive, setIsAttackActive] = useState(false);
   const [isFailStopActive, setIsFailStopActive] = useState(false);
   const [purgedCount, setPurgedCount] = useState(14892);
@@ -108,11 +104,6 @@ function App() {
     };
   }, []);
 
-  const toggleSound = () => {
-    sound.enabled = !soundEnabled;
-    setSoundEnabled(!soundEnabled);
-    if (!soundEnabled) sound.playValidate();
-  };
 
   const handleParticlePurged = useCallback(() => {
     setPurgedCount((prev: number) => prev + 1);
@@ -149,7 +140,6 @@ function App() {
     if (!isFailStopActive) {
       setIsFailStopActive(true);
       setCurrentVarentropy(0.085); // Spike above 3.0% threshold
-      sound.playAlarm();
 
       // Simulate Double-Pointer Sentinel CAS to Fallback Slot
       setSlots((prev: EpochSlot[]) =>
@@ -180,18 +170,15 @@ function App() {
       setSlots(INITIAL_SLOTS);
       setActiveEpochPtr(1);
       setFallbackEpochPtr(2);
-      sound.playValidate();
     }
   };
 
   const toggleAttack = () => {
-    sound.playClick();
     setIsAttackActive(!isAttackActive);
   };
 
   // Epoch Advance Transition (E -> E+1)
   const advanceEpoch = () => {
-    sound.playEpochAdvance();
     const nextEpoch = currentEpoch + 1;
     setCurrentEpoch(nextEpoch);
 
@@ -246,8 +233,6 @@ function App() {
         triggerFailStop();
       } else if (e.key.toLowerCase() === 'e') {
         advanceEpoch();
-      } else if (e.key.toLowerCase() === 'm') {
-        toggleSound();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -359,14 +344,6 @@ function App() {
 
         {/* Sidebar Footer */}
         <div className="sidebar-footer">
-          <button onClick={toggleSound} className="btn-icon">
-            {soundEnabled ? (
-              <Volume2 size={15} color="#00FF41" />
-            ) : (
-              <VolumeX size={15} color="#888" />
-            )}
-            <span>{soundEnabled ? 'Synthesizer: ON (M)' : 'Audio: MUTED (M)'}</span>
-          </button>
           <div className="exergy-indicator">
             <Zap size={11} color="#00FF41" />
             <span>Exergy Scale: 23,000 J/bit</span>
