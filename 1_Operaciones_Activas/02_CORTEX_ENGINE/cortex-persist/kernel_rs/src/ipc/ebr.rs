@@ -211,7 +211,8 @@ impl EpochState {
 
         // Resolución estructural del Invariante C5-REAL SOC 2
         let trace_tail = crate::ipc::compliance::TraceCons {
-            head: candidate_epoch,
+            state: vector,
+            hash: candidate_epoch,
             tail: crate::ipc::compliance::TraceNil,
         };
         let linear_payload = crate::ipc::compliance::LinearPayload::new(vector);
