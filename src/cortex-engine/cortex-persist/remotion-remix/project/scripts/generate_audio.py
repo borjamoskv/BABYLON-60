@@ -59,9 +59,9 @@ DIALOGUE = [
     ("EL_NOTA", "Woah, tíos... Tranquilos. Veo mucho volumen y mucho estrés... El Nota no se estresa por los fotones. The Dude abides, man. Tomad un Ruso Blanco y dejad que el tiempo fluya."),
     ("ESCOHOTADO", "De la piel para dentro empieza mi jurisdicción. Mi cuerpo y mi mente son mi fortaleza inexpugnable. El Intervalo Prohibido no se decreta por ley: es el espacio inviolable de la libertad humana."),
 
-    # Scene 6: Carl Cox & Blan Cox
-    ("CARL_COX", "¡OH YES, OH YES! ¡Listen mate, a ciento veintiocho BPM, el drop de dos coma ocho segundos es presencia pura!"),
-    ("BLAN_COX", "Look at them... Human consciousness as a sovereign realm in an expanding thermodynamic universe... Wonderful."),
+    # Scene 6: Carl Cox & Blan Cox (El juego de palabras cósmico)
+    ("CARL_COX", "¡OH YES, OH YES! ¡Listen mate, a ciento veintiocho BPM, con mi hermano el gran BLAN COX!"),
+    ("BLAN_COX", "Look at us... Carl Cox and Blan Cox... The cosmic wordplay of low entropy in an expanding universe... Wonderful."),
 
     # The Forbidden Interval Pause
     ("PAUSA", "PAUSA DE 2.8 SEGUNDOS — DE LA PIEL PARA DENTRO EMPIEZA MI JURISDICCIÓN"),

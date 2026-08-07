@@ -5,14 +5,14 @@ import { BackgroundCanvas } from "./components/BackgroundCanvas";
 import { AudioSpectrum } from "./components/AudioSpectrum";
 import { SubtitleCard } from "./components/SubtitleCard";
 import { TimerWidget } from "./components/TimerWidget";
+import { MemeOverlay } from "./components/MemeOverlay";
 import { SubtitleItem } from "./types";
 import subtitleData from "../public/subtitles.json";
 
 const subtitles = subtitleData as SubtitleItem[];
 
-// Calculate total duration in frames dynamically from subtitles
 const lastSubtitle = subtitles[subtitles.length - 1];
-export const TOTAL_DURATION_FRAMES = Math.max(3983, lastSubtitle ? lastSubtitle.endFrame + 30 : 4000);
+export const TOTAL_DURATION_FRAMES = Math.max(5547, lastSubtitle ? lastSubtitle.endFrame + 30 : 5600);
 
 export const IntervaloProhibidoRoot: React.FC = () => {
   return (
@@ -30,7 +30,6 @@ export const IntervaloProhibidoRoot: React.FC = () => {
 export const IntervaloProhibidoComposition: React.FC = () => {
   const frame = useCurrentFrame();
 
-  // Find active subtitle item for current frame
   const activeSub = subtitles.find(
     (s) => frame >= s.startFrame && frame <= s.endFrame
   ) || subtitles[0];
@@ -52,7 +51,7 @@ export const IntervaloProhibidoComposition: React.FC = () => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "100px 40px",
+          padding: "80px 40px",
           boxSizing: "border-box",
           zIndex: 10,
         }}
@@ -68,7 +67,7 @@ export const IntervaloProhibidoComposition: React.FC = () => {
         >
           <div
             style={{
-              fontSize: "36px",
+              fontSize: "38px",
               fontWeight: 900,
               color: "#00F0FF",
               letterSpacing: "6px",
@@ -87,9 +86,12 @@ export const IntervaloProhibidoComposition: React.FC = () => {
               fontFamily: "system-ui, sans-serif",
             }}
           >
-            LA CORTEX DE 2.8 SEGUNDOS
+            MEME EDITION — DE LA PIEL PARA DENTRO
           </div>
         </div>
+
+        {/* Meme Card Display */}
+        <MemeOverlay activeSub={activeSub} />
 
         {/* Center Dynamic Component: Subtitle Card or Timer Widget */}
         <div
@@ -99,7 +101,7 @@ export const IntervaloProhibidoComposition: React.FC = () => {
             alignItems: "center",
             justifyContent: "center",
             flex: 1,
-            margin: "40px 0",
+            margin: "20px 0",
           }}
         >
           {isSilence ? (

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#441100"/>
+      <stop offset="100%" stop-color="#110500"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background Card -->
+  <rect width="800" height="600" fill="url(#bg)" rx="24"/>
+  <rect x="16" y="16" width="768" height="568" fill="none" stroke="#FF6600" stroke-width="6" rx="16" filter="url(#glow)"/>
+
+  <!-- Icon Badge -->
+  <circle cx="400" cy="220" r="90" fill="#FF6600" fill-opacity="0.15" stroke="#FF6600" stroke-width="4"/>
+  <text x="400" y="245" font-size="80" text-anchor="middle">⚡🐆</text>
+
+  <!-- Top Title -->
+  <text x="400" y="90" font-family="Impact, Arial Black, sans-serif" font-size="42" font-weight="900" fill="#FFFFFF" text-anchor="middle" stroke="#000" stroke-width="2">
+    FLEA EN CALZONCILLOS DE LEOPARDO
+  </text>
+
+  <!-- Subtitle Quote -->
+  <text x="400" y="440" font-family="Impact, Arial Black, sans-serif" font-size="32" font-weight="900" fill="#FFFF00" text-anchor="middle" stroke="#000" stroke-width="2">
+    SLAPPING THE BASS IS QUANTUM MANIPULATION!
+  </text>
+  <text x="400" y="490" font-family="Impact, Arial Black, sans-serif" font-size="32" font-weight="900" fill="#FFFF00" text-anchor="middle" stroke="#000" stroke-width="2">
+
+  </text>
+
+  <!-- Footer Tag -->
+  <text x="400" y="550" font-family="monospace" font-size="16" fill="#FF6600" text-anchor="middle" letter-spacing="3">
+    EL INTERVALO PROHIBIDO // 2.8s
+  </text>
+</svg>
