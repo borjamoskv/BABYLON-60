@@ -107,6 +107,7 @@ class ByteEntropyScanner:
         overlay_bytes = 0
         eof_detected = False
         eof_offset = -1
+        overlay_format = "NONE"
 
         if detected_format == "PDF":
             last_eof = content.rfind(EOF_MARKERS["PDF"])
@@ -114,14 +115,26 @@ class ByteEntropyScanner:
                 eof_detected = True
                 eof_offset = last_eof + len(EOF_MARKERS["PDF"])
                 # Permitir saltos de línea finales (\r, \n)
-                trailing = content[eof_offset:].strip(b"\r\n\t ")
+                trailing = content[eof_offset:].lstrip(b"\r\n\t ")
                 overlay_bytes = len(trailing)
+                if overlay_bytes > 0:
+                    # Inspección recursiva del payload aislado
+                    for fmt, sig in MAGIC_SIGNATURES.items():
+                        if trailing.startswith(sig):
+                            overlay_format = fmt
+                            break
         elif detected_format == "PNG":
             iend_idx = content.find(EOF_MARKERS["PNG"])
             if iend_idx != -1:
                 eof_detected = True
                 eof_offset = iend_idx + len(EOF_MARKERS["PNG"])
-                overlay_bytes = len(content[eof_offset:])
+                trailing = content[eof_offset:].lstrip(b"\r\n\t ")
+                overlay_bytes = len(trailing)
+                if overlay_bytes > 0:
+                    for fmt, sig in MAGIC_SIGNATURES.items():
+                        if trailing.startswith(sig):
+                            overlay_format = fmt
+                            break
 
         return {
             "filepath": filepath,
@@ -135,6 +148,7 @@ class ByteEntropyScanner:
             "eof_detected": eof_detected,
             "eof_offset": eof_offset,
             "overlay_bytes_detected": overlay_bytes,
+            "overlay_format_detected": overlay_format,
             "has_anomaly": (overlay_bytes > 0) or (global_entropy > 7.8 and detected_format not in ["ZIP/DOCX", "GZIP"])
         }
 
