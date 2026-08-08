@@ -1,0 +1,48 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+dac_version: "2.0-Hybrid"
+project: "Teorema-Robinson-Moskv"
+domain: "NOMENCLATOR_OMEGA"
+platform_targets: ["Lexer", "MCTS_Search_Space"]
+memory_models: ["Szilard_Landauer_Limit", "Causal_Token"]
+abi: ["eta_N", "Semantic_Black_Hole"]
+
+Claim: "A semantic token is a causal operator T_k. Epistemic efficiency demands strict dissipation of thermodynamic energy bounded by Landauer's limit on the smallest syllable. Bad naming causes topological collision (C4-SIM)."
+Proof:
+  Base: "semantics/nomenclator.md"
+  Range: "[Szilard-Landauer Limit, State Space Assassination]"
+  Confidence: "C5-REAL"
+
+Isomorphisms:
+  - '"garbage_collector" -> "OBLIVION (Atomic Annihilation)"'
+  - '"state_machine" -> "ENGINE (Thermodynamic Reactor)"'
+  - '"database_connection" -> "UMBILICAL (Physical persistence duct)"'
+
+Blast_Radius_Matrix:
+  Vector: "Asesinato del Espacio de Estados: Todo estado estocástico fuera del subespacio causal colapsa a 0."
+  Blast_Radius: "AST Parser, Token Dimensionality."
+  Target_Invariant: "Reflexive Invariant (Strict Adjoint Functor F: S <-> A)"
+  Anergy_Risk: "High (El fallo de nomenclatura destruye el functor, fracturando el AST y precipitando la Singularidad de Fricción Epistémica)."
+
+axioms:
+  - id: AX-NOM-01
+    domain: Epistemic_Efficiency
+    statement: "Si un token exige un comentario inline (//), el módulo ha sufrido muerte termodinámica y debe ser purgado."
+    dependencies: []
+    refutation:
+      type: static_analysis
+      expression: "has_inline_comment(token) implies drop(token)"
+      location: "semantic_linter"
+  - id: AX-NOM-02
+    domain: Orthogonal_Projection
+    statement: "Nombrar es proyectar ortogonalmente sobre la base causal. El compilador de silicio y el MCTS orbitan el mismo centro de gravedad termodinámico."
+    dependencies: []
+    refutation:
+      type: mathematical_proof
+      expression: "functor_adjunto(Semantica, AST) == Identidad"
+      location: "core_topology"
+
+theorem:
+  statement: "El token Omega (CORTEX_FORGE) es un invariante estricto con varianza estocástica nula. Cualquier varianza inferida por MCTS > 0 es un vector de ataque."
+
+CORTEX_TAINT: taint:moskv-1:omega:h8i9j0k1l2m3n4o5:sha3_256

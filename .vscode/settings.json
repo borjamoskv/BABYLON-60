@@ -38,5 +38,8 @@
     "**/target"
   ],
   "rust-analyzer.cargo.allTargets": true,
-  "rust-analyzer.check.command": "check"
+  "rust-analyzer.check.command": "check",
+  "files.associations": {
+    "*.pl": "prolog"
+  }
 }
