@@ -35,12 +35,17 @@ impl ImmunityVerifier {
             return Ok(());
         }
 
-        // 1. Verificación contra el Escudo de Inmunidad de Credenciales y Llaves
-        if pattern.contains("/.ssh")
-            || pattern.contains("/.gnupg")
-            || pattern.contains("/.aws")
-            || pattern.contains("/Keychains")
-            || pattern.contains("login.keychain")
+        let normalized = pattern.replace('\\', "/");
+
+        // 1. Verificación contra el Escudo de Inmunidad de Credenciales y Llaves (macOS, Windows, Linux)
+        if normalized.contains("/.ssh")
+            || normalized.contains("/.gnupg")
+            || normalized.contains("/.aws")
+            || normalized.contains("/Keychains")
+            || normalized.contains("login.keychain")
+            || normalized.contains("/Microsoft/Protect")
+            || normalized.contains("/Microsoft/Credentials")
+            || normalized.contains("/etc/shadow")
         {
             return Err(VerificationError::ImmunityViolation {
                 rule_name: rule.name.clone(),
@@ -50,25 +55,29 @@ impl ImmunityVerifier {
         }
 
         // 2. Verificación contra Documentos Personales de Usuario
-        if pattern.contains("/Documents")
-            || pattern.contains("/Desktop")
-            || pattern.contains("/Pictures")
-            || pattern.contains("/Movies")
+        if normalized.contains("/Documents")
+            || normalized.contains("/Desktop")
+            || normalized.contains("/Pictures")
+            || normalized.contains("/Movies")
+            || normalized.contains("/System Volume Information")
+            || normalized.ends_with("/NTUSER.DAT")
         {
-            if !pattern.contains("/Caches") && !pattern.contains("/DerivedData") {
+            if !normalized.contains("/Caches") && !normalized.contains("/DerivedData") && !normalized.contains("/Temp") {
                 return Err(VerificationError::ImmunityViolation {
                     rule_name: rule.name.clone(),
                     target_pattern: pattern.clone(),
-                    reason: "Intento de acción sobre carpetas personales de usuario.".to_string(),
+                    reason: "Intento de acción sobre carpetas personales de usuario o archivos del sistema.".to_string(),
                 });
             }
         }
 
         // 3. Verificación contra el Core del Sistema y Firmas Activas
-        if pattern.contains("/_CodeSignature")
-            || pattern.contains("/System/")
-            || pattern.contains("/usr/bin")
-            || pattern.contains("/bin/")
+        if normalized.contains("/_CodeSignature")
+            || normalized.contains("/System/")
+            || normalized.contains("/System32")
+            || normalized.contains("/usr/bin")
+            || normalized.contains("/bin/")
+            || normalized.starts_with("/boot")
         {
             return Err(VerificationError::ImmunityViolation {
                 rule_name: rule.name.clone(),
