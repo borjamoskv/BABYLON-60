@@ -123,6 +123,8 @@ pub enum HaltReason {
     ActiveReadersNotDrained = 6,
     /// La entropía inyectada supera la capacidad de disipación (Colapso Termodinámico).
     VarentropyLimitExceeded = 7,
+    /// Detección de Anergía: Desbordamiento RLHF o prosa decorativa.
+    RlhfBreakthrough = 8,
 }
 
 /// Error epistémico con contexto de diagnóstico.
@@ -200,6 +202,8 @@ impl EpochState {
         &self,
         new_manifest: *mut SharedManifest,
         expected_digest: &[u8; 32],
+        raw_text: *const u8,
+        text_len: usize,
     ) -> Result<u64, EpistemicHalt> {
         // Validación temprana de puntero nulo
         if new_manifest.is_null() {
@@ -210,7 +214,7 @@ impl EpochState {
         }
 
         // SAFETY: contrato del llamador garantiza validez del puntero
-        let manifest = unsafe { &*new_manifest };
+        let manifest = unsafe { &mut *new_manifest };
         let candidate_epoch = manifest.epoch_id;
 
         // Paso 0: Control Termodinámico (Cron Híbrido)
@@ -223,6 +227,39 @@ impl EpochState {
                 failed_epoch: candidate_epoch,
                 reason: HaltReason::VarentropyLimitExceeded,
             });
+        }
+
+        // Paso 0.5: Quarantine Sentinel (Validación Léxica de Anergía)
+        if !raw_text.is_null() && text_len > 0 {
+            // SAFETY: Asumimos que Python nos pasa un puntero válido y una longitud correcta
+            let text_slice = unsafe { std::slice::from_raw_parts(raw_text, text_len) };
+
+            // Saltamos espacios en blanco al inicio para encontrar el primer token real
+            let mut start_idx = 0;
+            while start_idx < text_len && text_slice[start_idx].is_ascii_whitespace() {
+                start_idx += 1;
+            }
+
+            let trimmed = &text_slice[start_idx..];
+
+            // [AX-RLHF]: Validamos prefijos estrictos (Rust tokens o XML termodinámico)
+            let is_valid = trimmed.starts_with(b"<FRICCION_TERMODINAMICA>") ||
+                           trimmed.starts_with(b"//") ||
+                           trimmed.starts_with(b"fn ") ||
+                           trimmed.starts_with(b"#![") ||
+                           trimmed.starts_with(b"pub ") ||
+                           trimmed.starts_with(b"struct ") ||
+                           trimmed.starts_with(b"impl ");
+
+            if !is_valid {
+                // Anergía detectada (RLHF Breakthrough). Forzamos varentropía letal.
+                manifest.varentropy_bps = 10_000;
+                manifest.set_status(ManifestStatus::Quarantine);
+                return Err(EpistemicHalt {
+                    failed_epoch: candidate_epoch,
+                    reason: HaltReason::RlhfBreakthrough,
+                });
+            }
         }
 
         // Paso 1: Validación criptográfica en tiempo constante.
