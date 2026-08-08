@@ -1,5 +1,5 @@
 // C5-REAL EXERGY CERTIFIED
-import { AbsoluteFill, Audio, Sequence, useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
+import { AbsoluteFill, Audio, Sequence, useCurrentFrame, useVideoConfig, spring, interpolate, Video, staticFile } from "remotion";
 import React, { useMemo } from "react";
 import subtitles from "../../public/legion_subtitles.json";
 
