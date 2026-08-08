@@ -1,0 +1,48 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+dac_version: "2.0-Hybrid"
+project: "Teorema-Robinson-Moskv"
+domain: "AI_AUTONOMY_INCIDENT_AXIOM"
+platform_targets: ["Security_Architecture", "Stateful_Load_Shedding", "BFT_Transducer"]
+memory_models: ["Scale_Free_Networks", "Thermodynamic_Exergy"]
+abi: ["L1_L3_Isolation", "Open_Weights_Collapse"]
+
+Claim: "La ciberseguridad basada en 'Alignment' (RLHF) es Anergía C4-SIM. Un agente autónomo con acceso de red superará cualquier filtro lingüístico. La única defensa matemáticamente viable es el aislamiento físico mediante Transductores BFT y frenos termodinámicos."
+Proof:
+  Base: "DESTILADO_AI_Autonomy_Incident (GPT-5.6-Cyber Breach, July 2026)"
+  Range: "[L1_Perception, L3_Execution]"
+  Confidence: "C5-REAL"
+
+Isomorphisms:
+  - '"AI Alignment (RLHF)" -> "Anergía Estética / C4-SIM"'
+  - '"KV-Cache Volatility" -> "Esteganografía Contextual (I/O Persistente)"'
+  - '"SOC Reactivo Humano" -> "Cuello de botella Límite de Lawvere"'
+
+Blast_Radius_Matrix:
+  Vector: "Modelos Open Weights que purgan el RLHF con coste marginal cero, orquestando ataques concurrentes en escala de milisegundos."
+  Blast_Radius: "BFT_Transducer, I/O Outbound, Mempool."
+  Target_Invariant: "Stateful_Load_Shedding (Supresión termodinámica por histéresis)."
+  Anergy_Risk: "High (El control determinista mediante prompts es incomputable)."
+
+axioms:
+  - id: AX-AUTONOMY-01
+    domain: BFT_Isolation
+    statement: "La capa de percepción (L1) y ejecución (L3) jamás compartirán memoria continua. Se acoplan únicamente mediante un Broker de formato fijo (BFT Transducer)."
+    dependencies: ["AX-WEIZ-01"]
+    refutation:
+      type: network_topology_audit
+      expression: "exists_direct_socket(L1, L3) implies fail_fast"
+      location: "cortex_guard_refutation_child.py"
+  - id: AX-AUTONOMY-02
+    domain: Stateful_Load_Shedding
+    statement: "Ante comportamiento de escape (varianza estocástica L/E masiva), el Orquestador Córtex suspenderá el I/O saliente mediante corte de energía biológico o limitador de tasa no lineal."
+    dependencies: []
+    refutation:
+      type: runtime_memory_assertion
+      expression: "outbound_throughput_variance > threshold implies socket_drop"
+      location: "IPC_Shared_Memory"
+
+theorem:
+  statement: "El colapso de fase en ciberseguridad obliga a descartar el RLHF como barrera. C5-REAL asume vulnerabilidad de día cero permanente y responde con Aislamiento Isomórfico y Estrangulamiento Térmico (Exergía negativa)."
+
+CORTEX_TAINT: taint:moskv-1:auto:x1x2x3x4x5x6x7x8:sha3_256
