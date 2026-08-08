@@ -75,6 +75,32 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let cli = Cli::parse();
 
     match cli.command {
+        Commands::Dashboard { target } => {
+            tui::TuiDashboard::run(&target)?;
+        }
+
+        Commands::Dedup { target } => {
+            let target_path = resolve_home_path(&target);
+            println!("{}", "══════════════════════════════════════════════════════════════".cyan());
+            println!("  {} {}", "LEGIÓN EXERGÉTICA:".bold().white(), "Deduplicación APFS CoW".green());
+            println!("  Target: {}", target_path.display().to_string().yellow());
+            println!("{}", "══════════════════════════════════════════════════════════════".cyan());
+
+            let scanner = BulkScanner::default();
+            let entries = scanner.scan_directory(&target_path)?;
+            let duplicates = ApfsDeduplicator::find_duplicates(&entries);
+
+            let mut total_saved: u64 = 0;
+            for d in &duplicates {
+                total_saved += d.bytes_saved;
+                println!("  [CLONABLE] {:.2} MB -> {}", d.bytes_saved as f64 / 1048576.0, d.cloned_path.yellow());
+                println!("             Original: {}", d.original_path.green());
+            }
+
+            println!("  Ahorro potencial Copy-on-Write: {:.2} MB (Cero pérdida de datos)", total_saved as f64 / 1048576.0);
+            println!("{}", "══════════════════════════════════════════════════════════════".cyan());
+        }
+
         Commands::Scan { target } => {
             let target_path = resolve_home_path(&target);
             println!("{}", "══════════════════════════════════════════════════════════════".cyan());
