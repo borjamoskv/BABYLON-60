@@ -12,11 +12,16 @@ pub const SHARED_STATE_SIZE: usize = std::mem::size_of::<EpochState>();
 /// AXIOMA 3: Mapeo sin inicialización. Estado es ⊥ hasta initialize_epoch_state.
 #[unsafe(no_mangle)]
 pub unsafe extern "C" fn init_shared_memory(fd: c_int) -> *mut EpochState {
+    let flags = if fd < 0 {
+        libc::MAP_SHARED | libc::MAP_ANONYMOUS
+    } else {
+        libc::MAP_SHARED
+    };
     let addr = libc::mmap(
         ptr::null_mut(),
         SHARED_STATE_SIZE,
         libc::PROT_READ | libc::PROT_WRITE,
-        libc::MAP_SHARED,
+        flags,
         fd,
         0,
     );
