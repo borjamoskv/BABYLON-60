@@ -85,8 +85,8 @@ def render_ultra_reactive_8bit_video():
             "[bg][spec]overlay=0:1200[v1]; "
             "[v1][waves]overlay=0:560[v2]; "
 
-            # 4. WordArt style text overlay bouncing around
-            "[v2]drawtext=text='C5-REAL':fontcolor=yellow:fontsize=160:x='(w-tw)/2+(w-tw)/3*sin(t*1.5)':y='200+(h-th)/8*cos(t*2.1)':borderw=15:bordercolor=red:box=1:boxcolor=blue@0.8:boxborderw=10[v3]; "
+            # 4. Remove drawtext (not supported in this ffmpeg build), just pass v2 to v3
+            "[v2]copy[v3]; "
 
             # 5. Cheap public access TV VHS look (oversaturated, noisy, chromatic aberration)
             "[v3]noise=alls=15:allf=t+u[v4]; "            # Heavy VHS grain
