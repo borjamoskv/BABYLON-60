@@ -67,3 +67,25 @@ pub unsafe extern "C" fn destroy_shared_memory(ptr: *mut EpochState) {
         libc::munmap(ptr as *mut c_void, SHARED_STATE_SIZE);
     }
 }
+
+/// AXIOMA 3: Transición atómica expuesta a Python. Devuelve epoch_id o -HaltReason.
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn commit_epoch_transition(
+    state: *const EpochState,
+    manifest: *mut crate::ipc::ebr::SharedManifest,
+    digest: *const u8,
+    raw_text: *const u8,
+    text_len: usize,
+) -> i64 {
+    if state.is_null() || manifest.is_null() || digest.is_null() {
+        return -2; // HaltReason::NullPointer
+    }
+
+    let expected_digest = &*(digest as *const [u8; 32]);
+    let epoch_state = &*state;
+
+    match epoch_state.commit_transition(manifest, expected_digest, raw_text, text_len) {
+        Ok(epoch_id) => epoch_id as i64,
+        Err(halt) => -(halt.reason as i64),
+    }
+}
