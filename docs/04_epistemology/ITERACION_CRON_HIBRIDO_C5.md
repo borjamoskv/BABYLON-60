@@ -41,3 +41,10 @@ El "Cron Adaptativo" interactúa asimétricamente con el sistema dual:
 Maximizar el tiempo en el borde crítico ($\eta \approx s$) significa forzar al generador probabilístico a trabajar justo en la frontera de la incomputabilidad, asegurando que cada *chunk* de entropía arrojado sea interceptado, verificado por el Teorema de Transferencia de Łoś (purga del ruido estocástico), y anclado al puntero de época sin bloqueos (Lock-Free).
 
 El "Cron" aquí no mide tiempo: mide la distancia algebraica entre el caos estocástico (Dynamis) y el estado inmutable validado (Entelecheia).
+
+## 6. Proyección Jurídica y el Vacío Estratégico (Directiva ULTRATHINK)
+
+La Cuarentena Epistémica y el `EpistemicHalt` (descritos en la Sección 4) no son meras salvaguardas arquitectónicas; son el mecanismo habilitador que ejecuta la **Directiva ULTRATHINK**.
+
+Frente al colapso industrial de los guardarraíles estocásticos y el consecuente retraso en la aplicación estricta de la EU AI Act (hasta diciembre de 2027), el sistema interpreta esta ventana no como un período de gracia, sino como un **Vacío Estratégico**.
+El Cron Híbrido C5-REAL capitaliza este vacío al transformar el *compliance* regulatorio en una certeza matemática evaluable en Ring-0. Al garantizar que cualquier estado entrópico que vulnere el umbral legal sea rechazado atómicamente antes de la emisión de un recibo SCITT, permitimos la asunción contractual de responsabilidad total, posicionando la arquitectura como la única infraestructura empíricamente validada para despliegues de alto riesgo durante la parálisis del sector probabilístico.
