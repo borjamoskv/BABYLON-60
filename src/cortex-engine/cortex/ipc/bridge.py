@@ -8,7 +8,9 @@ class SharedManifest(ctypes.Structure):
     _fields_ = [
         ("payload", ctypes.c_uint8 * 32),
         ("status_flag", ctypes.c_uint8),
-        ("_padding", ctypes.c_uint8 * 7),
+        ("_pad0", ctypes.c_uint8 * 3),
+        ("varentropy_bps", ctypes.c_uint32),
+        ("active_readers", ctypes.c_size_t),
         ("epoch_id", ctypes.c_uint64),
         ("timestamp_ns", ctypes.c_uint64),
     ]
