@@ -25,55 +25,66 @@ pub struct ExergyEvaluator;
 impl ExergyEvaluator {
     /// Lista de Inmunidad Absoluta: NUNCA se tocan estos archivos/directorios bajo ninguna circunstancia
     pub fn is_strictly_immune(path: &Path) -> bool {
-        let path_str = path.to_string_lossy();
+        // Normalizar separadores para compatibilidad Windows/Unix
+        let normalized = path_str.replace('\\', "/");
 
-        // 1. Inmunidad de Credenciales y Llaves
-        if path_str.contains("/.ssh")
-            || path_str.contains("/.gnupg")
-            || path_str.contains("/.aws")
-            || path_str.contains("/Keychains")
-            || path_str.contains("/login.keychain")
+        // 1. Inmunidad de Credenciales y Llaves (macOS, Windows, Linux)
+        if normalized.contains("/.ssh")
+            || normalized.contains("/.gnupg")
+            || normalized.contains("/.aws")
+            || normalized.contains("/Keychains")
+            || normalized.contains("/login.keychain")
+            || normalized.contains("/Microsoft/Protect")
+            || normalized.contains("/Microsoft/Credentials")
+            || normalized.contains("/etc/shadow")
+            || normalized.contains("/etc/sudoers")
         {
             return true;
         }
 
         // 2. Inmunidad de Documentos y Datos de Usuario Personales
-        if path_str.contains("/Documents/")
-            || path_str.contains("/Desktop/")
-            || path_str.contains("/Pictures/")
-            || path_str.contains("/Movies/")
-            || path_str.contains("/Music/Logic")
-            || path_str.contains("/Music/Ableton")
+        if normalized.contains("/Documents/")
+            || normalized.contains("/Desktop/")
+            || normalized.contains("/Pictures/")
+            || normalized.contains("/Movies/")
+            || normalized.contains("/Music/Logic")
+            || normalized.contains("/Music/Ableton")
+            || normalized.contains("/System Volume Information")
+            || normalized.contains("/System32")
+            || normalized.ends_with("/NTUSER.DAT")
+            || normalized.starts_with("/boot")
+            || normalized.starts_with("/proc")
+            || normalized.starts_with("/sys")
         {
             // Solo se permite si es una subcarpeta explícita de cache interna
-            if !path_str.contains("/Caches/") && !path_str.contains("/DerivedData/") {
+            if !normalized.contains("/Caches/") && !normalized.contains("/DerivedData/") && !normalized.contains("/Temp/") {
                 return true;
             }
         }
 
         // 3. Inmunidad de Configuración del Sistema y Shells
-        if path_str.ends_with("/.zshrc")
-            || path_str.ends_with("/.bashrc")
-            || path_str.ends_with("/.gitconfig")
-            || path_str.contains("/.git/objects")
-            || path_str.contains("/.git/refs")
+        if normalized.ends_with("/.zshrc")
+            || normalized.ends_with("/.bashrc")
+            || normalized.ends_with("/.gitconfig")
+            || normalized.contains("/.git/objects")
+            || normalized.contains("/.git/refs")
         {
             return true;
         }
 
         // 4. Inmunidad de Bases de Datos de Sesión y Logins
-        if path_str.ends_with("/Cookies")
-            || path_str.ends_with("/Cookies.binarycookies")
-            || path_str.contains("/Local Storage/")
-            || path_str.contains("/Session Storage/")
-            || path_str.contains("/IndexedDB/")
-            || path_str.ends_with(".keychain-db")
+        if normalized.ends_with("/Cookies")
+            || normalized.ends_with("/Cookies.binarycookies")
+            || normalized.contains("/Local Storage/")
+            || normalized.contains("/Session Storage/")
+            || normalized.contains("/IndexedDB/")
+            || normalized.ends_with(".keychain-db")
         {
             return true;
         }
 
-        // 5. Inmunidad de Paquetes Firmados por Apple / Third Party (.app bundles activos)
-        if path_str.contains("/_CodeSignature") || path_str.contains("/Contents/MacOS/") {
+        // 5. Inmunidad de Paquetes Firmados / Ejecutables protegidos
+        if normalized.contains("/_CodeSignature") || normalized.contains("/Contents/MacOS/") {
             return true;
         }
 
