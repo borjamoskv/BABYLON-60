@@ -152,6 +152,67 @@ class ByteEntropyScanner:
             "has_anomaly": (overlay_bytes > 0) or (global_entropy > 7.8 and detected_format not in ["ZIP/DOCX", "GZIP"])
         }
 
+    def scan_bytes(self, content: bytes, label: str = "<memory>") -> Dict[str, Any]:
+        """
+        Análisis in-memory de un slice de bytes arbitrario (Zero-Disk I/O).
+        Usado para la disección recursiva de payloads aislados del overlay.
+        """
+        file_size = len(content)
+        if file_size == 0:
+            return {
+                "filepath": label,
+                "file_size": 0,
+                "global_entropy": 0.0,
+                "max_window_entropy": 0.0,
+                "detected_format": "EMPTY",
+                "magic_matched": False,
+                "high_entropy_blocks_count": 0,
+                "total_windows_scanned": 0,
+                "eof_detected": False,
+                "eof_offset": -1,
+                "overlay_bytes_detected": 0,
+                "overlay_format_detected": "NONE",
+                "has_anomaly": False,
+            }
+
+        global_entropy = calculate_shannon_entropy(content)
+
+        detected_format = "UNKNOWN"
+        magic_match = False
+        for fmt, sig in MAGIC_SIGNATURES.items():
+            if content.startswith(sig):
+                detected_format = fmt
+                magic_match = True
+                break
+
+        high_entropy_regions = 0
+        max_entropy = 0.0
+        windows_scanned = 0
+        for offset in range(0, max(1, file_size - self.window_size + 1), self.step_size):
+            chunk = content[offset : offset + self.window_size]
+            entropy = calculate_shannon_entropy(chunk)
+            if entropy > max_entropy:
+                max_entropy = entropy
+            if entropy > 7.5:
+                high_entropy_regions += 1
+            windows_scanned += 1
+
+        return {
+            "filepath": label,
+            "file_size": file_size,
+            "global_entropy": round(global_entropy, 4),
+            "max_window_entropy": round(max_entropy, 4),
+            "detected_format": detected_format,
+            "magic_matched": magic_match,
+            "high_entropy_blocks_count": high_entropy_regions,
+            "total_windows_scanned": windows_scanned,
+            "eof_detected": False,
+            "eof_offset": -1,
+            "overlay_bytes_detected": 0,
+            "overlay_format_detected": "NONE",
+            "has_anomaly": global_entropy > 7.8 and detected_format not in ["ZIP/DOCX", "GZIP"],
+        }
+
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Uso: python3 entropy_byte_scanner.py <archivo>")
