@@ -5,9 +5,11 @@ use colored::*;
 use std::path::{Path, PathBuf};
 use std::fs;
 
+mod tui;
+
 use legion_core::{MerkleTree, ScittReceipt};
 use legion_core::scitt::hex;
-use legion_apfs::{BulkScanner, SnapshotAuditor};
+use legion_apfs::{BulkScanner, SnapshotAuditor, ApfsDeduplicator};
 use legion_exergy::{ExergyEvaluator, RiskLevel};
 use legion_healer::{LaunchServicesHealer, DnsHealer, SafeTrash};
 use legion_lang::{Lexer, Parser as XrgParser, Compiler, VirtualMachine, VmAction};
@@ -24,8 +26,18 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
+    /// Dashboard interactivo en tiempo real (Ratatui TUI)
+    Dashboard {
+        #[arg(default_value = "~/Library/Caches")]
+        target: String,
+    },
     /// Escaneo masivo APFS con evaluación termodinámica de exergía
     Scan {
+        #[arg(default_value = "~/Library/Caches")]
+        target: String,
+    },
+    /// Deduplicación nativa APFS mediante Copy-on-Write (clonefile(2))
+    Dedup {
         #[arg(default_value = "~/Library/Caches")]
         target: String,
     },
