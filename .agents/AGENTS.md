@@ -80,3 +80,18 @@
 
 ## Invariante de Representación Visual (Concepto de "MEME")
 - **MEMEs como Metáforas de Alta Densidad**: Cuando el usuario solicite un "MEME", no busca humor básico de internet. Un MEME en este contexto es una **visualización conceptual densa** (a menudo generada sintéticamente) que superpone conceptos abstractos (ej. física teórica, neurofisiología, fórmulas matemáticas) sobre escenarios cotidianos, dramáticos o estéticos (cyberpunk, dark academia). El objetivo visual siempre es ilustrar un principio sistémico profundo (ej. un niño pidiendo un tiempo muerto por exceso de ratio Theta/Beta).
+
+## Invariante de Interrogación y Falsificación para Modelos Deep Research (Ultrathink Protocol)
+- **Estructura Pentapartita Obligatoria**: Toda directiva enviada a modelos de razonamiento profundo o investigación avanzada (Qwen Max Deep Research, o1/o3, Claude Opus Thinking) DEBE estructurarse en 5 ejes:
+  1. *Tribunal Epistémico*: Mandato de espacio de estados estrictamente discreto, Monoides no invertibles y bisimulación observacional.
+  2. *Especificación de Silicio y C-ABI*: Inyección explícita del struct de memoria (`SharedManifest` de 64 bytes) con sus offsets hexadecimales exactos (`0x00` a `0x38`) para forzar análisis a nivel de compilador.
+  3. *Concurrencia Débil y Ordenamiento de Memoria*: Exigencia de prueba de carreras (ABA, drenaje de `Active_Readers`) comparando modelos de memoria relajados (`aarch64` Acquire/Release) contra TSO (`x86_64`).
+  4. *Termodinámica de Landauer y Exergía*: Ecuación formal de disipación de anergía en el paso de potencia estocástica (*Dynamis*) a estado canónico discreto (*Entelecheia*).
+  5. *Transmutación Jurídico-Causal*: Vinculación con los Arts. 15 y 28 de la EU AI Act y la neutralización de la presunción de causalidad/defecto de la Directiva Europea 2024/2853/EU.
+
+## Invariante de Argumentación ante el Sanedrín (Comités de Decisión, Socios y Enterprise)
+- **Estructura de Respuesta en Tres Capas**: Ante interpelaciones de consejos de administración, comités de sabios (*Sanedrín*) o decisores técnicos:
+  - *Capa 1 (Discurso Directo)*: Cierre ejecutivo en <2 minutos enfocado exclusivamente en los 4 Vectores de Valor que un CIO/Consejo firma (Legalidad sin cárcel, Quién paga la multa, Margen >95% sin factura AWS, y SLA T_eff < 5 ms).
+  - *Capa 2 (Matriz de Contención)*: Neutralización determinista de las 4 objeciones críticas (alucinaciones, guardarraíles por software, sobrecoste de nube, y miedo a romper producción al actualizar modelos).
+  - *Capa 3 (Artillería de Foso)*: Despliegue de evidencia empírica irrefutable (C-ABI 64B, Lock-free EBR, cobertura Popperiana ρ = 1.00000 sobre 10,000 gates y cero dependencias de recolección de basura).
+
