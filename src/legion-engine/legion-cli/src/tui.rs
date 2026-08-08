@@ -20,6 +20,7 @@ use legion_apfs::{BulkScanner, FileMetadataEntry, SnapshotAuditor, ApfsDeduplica
 use legion_exergy::{ExergyEvaluator, RiskLevel};
 use legion_healer::{DnsHealer, LaunchServicesHealer};
 use legion_core::MerkleTree;
+use legion_core::scitt::hex;
 
 pub struct AppState {
     pub current_tab: usize,
@@ -251,10 +252,10 @@ impl TuiDashboard {
             };
 
             Row::new(vec![
-                format!("{:.2} KB", e.size_bytes as f64 / 1024.0),
-                risk_str.to_string(),
-                e.path.file_name().unwrap_or_default().to_string_lossy().to_string(),
-                score.explanation,
+                Span::raw(format!("{:.2} KB", e.size_bytes as f64 / 1024.0)),
+                Span::styled(risk_str, Style::default().fg(color).add_modifier(Modifier::BOLD)),
+                Span::raw(e.path.file_name().unwrap_or_default().to_string_lossy().to_string()),
+                Span::raw(score.explanation),
             ]).style(style)
         }).collect();
 
