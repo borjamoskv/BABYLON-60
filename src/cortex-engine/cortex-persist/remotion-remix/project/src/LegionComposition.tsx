@@ -1,5 +1,5 @@
 // C5-REAL EXERGY CERTIFIED
-import { AbsoluteFill, Audio, Sequence, useCurrentFrame, useVideoConfig, spring, interpolate, Video, staticFile } from "remotion";
+import { AbsoluteFill, Audio, useCurrentFrame, useVideoConfig, spring, interpolate, Video, staticFile } from "remotion";
 import React, { useMemo } from "react";
 import subtitles from "../../public/legion_subtitles.json";
 
@@ -147,7 +147,7 @@ export const LegionComposition: React.FC = () => {
 
   // Find the currently active subtitle
   const activeSub = useMemo(() => {
-    return subtitles.find((s) => frame >= s.startFrame && frame < s.endFrame);
+    return subtitles.find((s: any) => frame >= s.startFrame && frame < s.endFrame);
   }, [frame]);
 
   // Gentle pulsing for the header
@@ -176,5 +176,5 @@ export const LegionComposition: React.FC = () => {
 
 // Compute the total duration directly from subtitles data
 export const LEGION_DURATION_FRAMES = subtitles.length > 0
-  ? Math.max(...subtitles.map(s => s.endFrame)) + 30
+  ? Math.max(...subtitles.map((s: any) => s.endFrame)) + 30
   : 3000;
