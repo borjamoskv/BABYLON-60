@@ -1,1 +1,1 @@
-{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/audiosynthesizer.ts","./src/components/causalvisualizer.tsx","./src/components/receiptstream.tsx","./src/components/ringbuffervisualizer.tsx"],"errors":true,"version":"6.0.3"}
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/audiosynthesizer.ts","./src/components/causalvisualizer.tsx","./src/components/receiptstream.tsx","./src/components/ringbuffervisualizer.tsx"],"version":"6.0.3"}

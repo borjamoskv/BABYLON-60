@@ -1,5 +1,5 @@
 // C5-REAL EXERGY CERTIFIED
-import React from 'react';
+
 import { CheckCircle2, ShieldAlert, Cpu } from 'lucide-react';
 
 export interface ScittReceipt {
