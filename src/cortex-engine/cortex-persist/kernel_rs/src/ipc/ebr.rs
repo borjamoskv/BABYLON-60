@@ -1,6 +1,6 @@
 // C5-REAL EXERGY CERTIFIED
 use std::ptr;
-use std::sync::atomic::{AtomicPtr, AtomicU64, AtomicU8, AtomicUsize, Ordering};
+use std::sync::atomic::{AtomicPtr, AtomicU64, AtomicU8, Ordering};
 
 /// Estados del SharedManifest para el protocolo EBR.
 #[repr(u8)]

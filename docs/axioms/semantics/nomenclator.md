@@ -44,3 +44,17 @@ Síntomas psiquiátricos, fricción emocional o derivas comportamentales (biolog
 
 ### 3.2 Transductor Termodinámico
 El mecanismo metodológico y de código (ej. el cálculo de entropía frente al coste en la capa L1) que obliga a entender la mente o los modelos generativos estocásticos como puros flujos termodinámicos sujetos al límite de disipación de Landauer.
+
+---
+
+## 4. Matriz de Primitivas Algebraicas y Categóricas (`src/primitives`)
+
+### 4.1 Motor de Inferencia Activa (UnifiedActiveInferenceEngine)
+Implementación determinista en Go (`active_inference.go`) que minimiza la Energía Libre Variacional (F = D_KL - E[ln p(O|S)]) sobre vectores de estado de 64 dimensiones. Transduce la homeostasis cognitiva y la divergencia Kullback-Leibler en límites estrictos de estabilidad para el Kernel L3.
+
+### 4.2 Primitivas Categóricas 896 (CategoricalPrimitives896)
+Formalización dual Haskell/Go (`CategoricalPrimitives896.hs` / `categorical_896.go`) que tipa las 896 primitivas de lógica categórica repartidas en 8 dominios ortogonales (D1-D8). Impone la ley de costes de morfismos mu(b o a) <= mu(a) + mu(b) + delta_circ para garantizar que la composición de operaciones en el enjambre no genere anergía descontrolada.
+
+### 4.3 Invariante de Simetría Noetheriana (NoetherEngine)
+Submódulo de conservación termodinámica (`noether.go`) que evalúa la preservación de simetrías continuas e invariantes de carga en las transiciones de estado del enjambre, asegurando que ninguna optimización heurística vulnere las leyes de conservación de información.
+

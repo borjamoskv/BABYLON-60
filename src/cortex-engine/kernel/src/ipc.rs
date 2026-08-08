@@ -33,12 +33,15 @@ impl StateSlot {
 }
 
 /// Manifiesto compartido en Ring-0. Punteros apuntan a slots estáticos, nunca a heap.
-#[repr(C)]
+/// Alineado estrictamente a 64 bytes para evitar false-sharing (Zero-Split Cache-Line).
+#[repr(C, align(64))]
 pub struct SharedManifest {
-    /// Slot actualmente visible para lectores. Actualizado vía CAS Release.
+    /// Slot actualmente visible para lectores. Actualizado vía CAS Release. (0x00 - 0x07)
     pub active_epoch_ptr: AtomicPtr<StateSlot>,
-    /// Slot de respaldo conocido-bueno. Objetivo de reversión atómica en caso letal.
+    /// Slot de respaldo conocido-bueno. Objetivo de reversión atómica en caso letal. (0x08 - 0x0F)
     pub stable_fallback_ptr: AtomicPtr<StateSlot>,
+    /// Padding explícito para completar exactamente 64 bytes (0x10 - 0x3F)
+    pub _pad: [u8; 48],
 }
 
 impl SharedManifest {
@@ -46,6 +49,7 @@ impl SharedManifest {
         SharedManifest {
             active_epoch_ptr: AtomicPtr::new(ptr::null_mut()),
             stable_fallback_ptr: AtomicPtr::new(ptr::null_mut()),
+            _pad: [0; 48],
         }
     }
 }
