@@ -10,3 +10,4 @@ description = "Bulk APFS scanner con getattrlistbulk(2) a 64KB y auditor de snap
 legion-core = { path = "../legion-core" }
 libc = "0.2"
 serde = { version = "1.0", features = ["derive"] }
+sha3 = "0.10"
