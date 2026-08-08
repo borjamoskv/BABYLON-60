@@ -158,11 +158,9 @@ export const LegionComposition: React.FC = () => {
   );
 
   return (
-    <AbsoluteFill style={{ backgroundColor: "transparent" }}>
-      {/*
-        The background is rendered separately via FFmpeg to get true 1080p60 SOTA vectorscopes,
-        so in Remotion we leave it transparent. If we render both together, we use a <Video> tag.
-      */}
+    <AbsoluteFill style={{ backgroundColor: "black" }}>
+      <Video src={staticFile("out_sota_legion.mp4")} />
+
       <AbsoluteFill>
         <div style={{ ...HeaderBar, opacity: headerPulse }}>
           <div style={C5Logo}>C5-REAL LEGION</div>
