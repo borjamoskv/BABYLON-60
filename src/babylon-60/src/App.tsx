@@ -34,7 +34,7 @@ function App() {
     { id: 7, status: '0 Idle', epochId: 0, readers: 0, hash: '' },
   ]);
 
-  const [mockReceipts, setMockReceipts] = useState<ScittReceipt[]>([
+  const [mockReceipts] = useState<ScittReceipt[]>([
     { id: 'REC-1042', timestamp: new Date().toISOString(), epoch: 1042, digest: '0x8899aabbccddeeff...', status: 'ATTESTED', latencyMs: 1.84, varentropy: 0.012 },
     { id: 'REC-1041', timestamp: new Date().toISOString(), epoch: 1041, digest: '0xdef4567890abcdef...', status: 'ATTESTED', latencyMs: 1.91, varentropy: 0.015 },
     { id: 'REC-1040', timestamp: new Date().toISOString(), epoch: 1040, digest: '0xabc1234567890abc...', status: 'HALTED_FAIL_STOP', latencyMs: 4.12, varentropy: 0.089 },
