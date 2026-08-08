@@ -56,12 +56,19 @@ class VerifiableInferenceEngine:
 
     def __init__(self, lib_path: Optional[str] = None):
         if lib_path is None:
-            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            candidates = [
-                os.path.join(base_dir, "target", "release", "libverifiable_inference_engine.dylib"),
-                os.path.join(base_dir, "target", "release", "libverifiable_inference_engine.so"),
-                os.path.join(base_dir, "target", "release", "verifiable_inference_engine.dll"),
-            ]
+            # Ascending search for workspace target/release and target/debug
+            current = os.path.abspath(__file__)
+            candidates = []
+            while current and current != os.path.dirname(current):
+                target_rel = os.path.join(current, "target", "release")
+                target_deb = os.path.join(current, "target", "debug")
+                for d in [target_rel, target_deb]:
+                    candidates.extend([
+                        os.path.join(d, "libverifiable_inference_engine.dylib"),
+                        os.path.join(d, "libverifiable_inference_engine.so"),
+                        os.path.join(d, "verifiable_inference_engine.dll"),
+                    ])
+                current = os.path.dirname(current)
             for candidate in candidates:
                 if os.path.exists(candidate):
                     lib_path = candidate
@@ -69,7 +76,7 @@ class VerifiableInferenceEngine:
             if lib_path is None:
                 raise FileNotFoundError(
                     "Compiled libverifiable_inference_engine dynamic library not found. "
-                    "Run `cargo build --release` first."
+                    "Run `cargo build --release -p verifiable_inference_engine` first."
                 )
 
         self.lib_path = lib_path
