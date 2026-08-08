@@ -1627,6 +1627,7 @@ dependencies = [
  "legion-core",
  "libc",
  "serde",
+ "sha3",
 ]
 
 [[package]]
@@ -1682,6 +1683,8 @@ dependencies = [
 name = "legion-lang"
 version = "0.1.0"
 dependencies = [
+ "clap",
+ "colored",
  "legion-apfs",
  "legion-core",
  "legion-exergy",
