@@ -39,7 +39,7 @@ def lock_holder():
         conn.execute("BEGIN EXCLUSIVE;")
         time.sleep(2)
         conn.rollback()
-    except:
+    except Exception:
         pass
     finally:
         conn.close()

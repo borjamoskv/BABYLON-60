@@ -154,7 +154,7 @@ async def main():
         "127.0.0.1",
         8765
     )
-    print(f"[C5-REAL] Telemetry Sidecar listening on ws://127.0.0.1:8765 and http://127.0.0.1:8765")
+    print("[C5-REAL] Telemetry Sidecar listening on ws://127.0.0.1:8765 and http://127.0.0.1:8765")
     async with server:
         await server.serve_forever()
 

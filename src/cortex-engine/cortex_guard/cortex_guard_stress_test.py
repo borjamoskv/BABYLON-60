@@ -1,5 +1,4 @@
 # C5-REAL EXERGY CERTIFIED
-import sys
 from cortex_guard import verify_dependencies
 
 def main():

@@ -1,6 +1,5 @@
 # C5-REAL EXERGY CERTIFIED
 from dataclasses import dataclass
-from typing import Any
 
 # DOMAIN PRIMITIVES (VALUE OBJECTS)
 # Purgar Primitive Obsession. Todo estado que fluya por el sistema debe estar tipado y validado en O(1).

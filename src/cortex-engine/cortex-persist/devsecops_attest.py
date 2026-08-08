@@ -33,7 +33,6 @@ import json
 import os
 import re
 import shutil
-import sqlite3
 import subprocess
 import sys
 import uuid
@@ -294,7 +293,7 @@ def anchor_to_bitcoin(digest: str, anchor_dir: Path = DEFAULT_ANCHOR_DIR) -> dic
         start_new_session=True,
     )
 
-    print(f"[L5 ANCHOR] Petición OTS delegada a proceso en segundo plano (DEFERRED).")
+    print("[L5 ANCHOR] Petición OTS delegada a proceso en segundo plano (DEFERRED).")
     return {"status": "DEFERRED", "ots": str(ots_file), "data": str(data_file)}
 
 

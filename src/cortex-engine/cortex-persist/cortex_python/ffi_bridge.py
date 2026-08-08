@@ -50,8 +50,8 @@ class C5RealFFIBridge:
             lib_path = os.path.join(workspace_root, "target", "debug", "libcortex_kernel.dylib")
             if not os.path.exists(lib_path):
                 raise FileNotFoundError(
-                    f"No se encuentra libcortex_kernel.dylib. \n"
-                    f"Por favor, compila el kernel de Rust antes de iniciar el puente FFI."
+                    "No se encuentra libcortex_kernel.dylib. \n"
+                    "Por favor, compila el kernel de Rust antes de iniciar el puente FFI."
                 )
 
         self.lib = ctypes.CDLL(lib_path)

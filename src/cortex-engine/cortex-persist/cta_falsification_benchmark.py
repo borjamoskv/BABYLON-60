@@ -1,9 +1,8 @@
 # C5-REAL EXERGY CERTIFIED
 import time
-import math
 import random
 import hashlib
-from typing import List, Dict, Any, Optional
+from typing import List, Optional
 
 # ==============================================================================
 # CORTEX ENGINE - CTA FALSIFICATION BENCHMARK HARNESS (V2.1 - Crypto Receipts)
@@ -190,7 +189,7 @@ def run_falsification_benchmark():
         "termination_entropy": 0.3
     }
 
-    print(f"========== BENCHMARK C5-REAL (CRYPTO COMMIT GATE) ==========")
+    print("========== BENCHMARK C5-REAL (CRYPTO COMMIT GATE) ==========")
 
     react_ledger = TokenLedger(BUDGET)
     react_agent = ReActAgent(react_ledger)
@@ -200,12 +199,12 @@ def run_falsification_benchmark():
     ctm_kernel = CTMMicrokernel(ctm_ledger)
     ctm_kernel.run(GOAL_CONTRACT)
 
-    print(f"\n========== VEREDICTO DE EXERGÍA ==========")
+    print("\n========== VEREDICTO DE EXERGÍA ==========")
     print(f"ReAct Baseline  -> Tokens Gastados: {react_ledger.spent}/{BUDGET}")
     print(f"CTA Microkernel -> Tokens Gastados: {ctm_ledger.spent}/{BUDGET}")
     print(f"Bloques inmutables en Ledger CTM: {len(ctm_kernel.crypto_ledger.chain)}")
     print(f"Último Hash del Estado CTM: {ctm_kernel.crypto_ledger.latest_hash}")
-    print(f"============================================================")
+    print("============================================================")
 
 if __name__ == "__main__":
     run_falsification_benchmark()

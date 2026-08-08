@@ -9,7 +9,7 @@ detección de magic bytes y detección de overlay data post-EOF.
 import math
 import os
 import sys
-from typing import Dict, List, Tuple, Any
+from typing import Dict, List, Any
 
 # Magic signatures conocidas (Magic Bytes)
 MAGIC_SIGNATURES: Dict[str, bytes] = {

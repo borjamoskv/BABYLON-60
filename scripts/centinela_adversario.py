@@ -5,7 +5,7 @@ import time
 import ctypes
 import hashlib
 import threading
-from typing import List, Dict
+from typing import Dict
 
 # Assuming the script is run from the root of the project
 workspace_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))

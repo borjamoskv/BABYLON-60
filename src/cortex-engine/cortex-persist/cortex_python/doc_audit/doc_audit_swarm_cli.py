@@ -71,15 +71,15 @@ class DocAuditSwarmOrchestrator:
 
         # 1. Capa 3: Ejecución de Scripts Bare-Metal
         if verbose:
-            print(f"[*] Fase 1: Escaneando estructura binaria y mapa de entropía H(X)...")
+            print("[*] Fase 1: Escaneando estructura binaria y mapa de entropía H(X)...")
         entropy_res = self.byte_scanner.scan_file(filepath)
 
         if verbose:
-            print(f"[*] Fase 2: Descomprimiendo streams zlib y analizando árboles de objetos...")
+            print("[*] Fase 2: Descomprimiendo streams zlib y analizando árboles de objetos...")
         stream_res = self.stream_parser.parse_file(filepath)
 
         if verbose:
-            print(f"[*] Fase 3: Inspeccionando metadatos crudos XMP y esteganografía tipográfica...")
+            print("[*] Fase 3: Inspeccionando metadatos crudos XMP y esteganografía tipográfica...")
         stego_res = self.metadata_extractor.inspect_file(filepath)
 
         raw_diagnostics = {
@@ -116,12 +116,12 @@ class DocAuditSwarmOrchestrator:
 
         # 2. Capa 8: Filtro Adversarial del Red Team Subagent
         if verbose:
-            print(f"[*] Fase 4: Ejecutando verificación cruzada adversarial (Red Team Subagent)...")
+            print("[*] Fase 4: Ejecutando verificación cruzada adversarial (Red Team Subagent)...")
         red_team_res = self.red_team.verify_findings(raw_diagnostics)
 
         # 3. Emisión de Atestación Criptográfica SCITT L5
         if verbose:
-            print(f"[*] Fase 5: Construyendo Árbol Merkle SHA3-256 y emitiendo Certificado SCITT...")
+            print("[*] Fase 5: Construyendo Árbol Merkle SHA3-256 y emitiendo Certificado SCITT...")
         scitt_receipt = self.scitt_prover.generate_attestation(
             filepath=filepath,
             entropy_results=entropy_res,

@@ -1,7 +1,5 @@
 # C5-REAL EXERGY CERTIFIED
 """Cognitive Compactor Protocol (ZERO-DIOGENES)"""
-import os
-import time
 
 class CognitiveCompactor:
     def __init__(self, target_dir=".codebase-memory", threshold_tokens=10000):

@@ -7,11 +7,10 @@ de transiciones discretas, calculando el coeficiente de correlación rho >= 0.95
 """
 
 import time
-import math
 import random
 import hashlib
 import json
-from typing import Dict, Any, List
+from typing import Dict, Any
 
 def simulate_transition_gate(input_token_entropy: float, is_adversarial: bool) -> Dict[str, Any]:
     """

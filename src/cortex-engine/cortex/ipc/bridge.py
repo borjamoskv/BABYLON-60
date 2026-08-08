@@ -1,7 +1,6 @@
 # C5-REAL EXERGY CERTIFIED
 import ctypes
 import os
-import platform
 
 class SharedManifest(ctypes.Structure):
     _pack_ = 8

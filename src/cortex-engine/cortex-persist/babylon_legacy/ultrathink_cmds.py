@@ -1,6 +1,5 @@
 # C5-REAL EXERGY CERTIFIED
 from cortex_persist.cli.common import cli, console
-import click
 import subprocess
 
 @cli.command(name="ultrathink")

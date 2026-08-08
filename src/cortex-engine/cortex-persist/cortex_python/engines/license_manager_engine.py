@@ -14,7 +14,7 @@ import sqlite3
 import time
 from enum import Enum
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, Optional, Tuple
 
 # ---------------------------------------------------------------------------
 # Ω23: Dynamic Resolution of Paths
@@ -275,7 +275,7 @@ class LicenseManagerEngine:
                 (event_id, lic_id, tier_val, feature, ts, status, phash),
             )
             conn.commit()
-        except sqlite3.IntegrityError as err:
+        except sqlite3.IntegrityError:
             # Ω_BFT_04: Fail-fast si la colisión tiene payload inconsistente
             pass
         finally:
