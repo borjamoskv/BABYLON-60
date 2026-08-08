@@ -597,3 +597,131 @@ body, html {
   50% { opacity: 0.5; }
   100% { opacity: 1; }
 }
+/* MINIMALIST COMPONENTS */
+.workspace-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  height: calc(100vh - 100px);
+  padding: 20px;
+}
+.panel-container {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.chat-window, .idea-valuator {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.chat-header, .valuator-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #00FF41;
+  font-family: 'Space Mono', monospace;
+  font-weight: bold;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.chat-message {
+  padding: 10px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  font-family: monospace;
+}
+.chat-message.assistant {
+  background: rgba(0, 255, 65, 0.1);
+  border-left: 2px solid #00FF41;
+}
+.chat-role {
+  color: #00FF41;
+  font-weight: bold;
+  margin-right: 8px;
+}
+.chat-input-area {
+  display: flex;
+  gap: 10px;
+}
+.chat-input, .valuator-input {
+  flex: 1;
+  background: #111;
+  border: 1px solid #333;
+  color: #00FF41;
+  padding: 10px;
+  border-radius: 4px;
+  font-family: 'Space Mono', monospace;
+}
+.chat-send-btn, .valuator-btn {
+  background: #00FF41;
+  color: #000;
+  border: none;
+  padding: 0 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.valuator-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.valuator-result {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.score-display {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Space Mono', monospace;
+  font-size: 1.5rem;
+}
+.score-value {
+  color: #00FF41;
+  font-weight: bold;
+}
+.score-value.max-score {
+  color: #FFD700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+.progress-bar-bg {
+  width: 100%;
+  height: 20px;
+  background: #222;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00FF41, #FFD700);
+  transition: width 0.05s linear;
+}
+.max-reached-alert {
+  text-align: center;
+  color: #FFD700;
+  font-weight: bold;
+  margin-top: 10px;
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
