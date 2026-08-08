@@ -95,3 +95,9 @@
   - *Capa 2 (Matriz de Contención)*: Neutralización determinista de las 4 objeciones críticas (alucinaciones, guardarraíles por software, sobrecoste de nube, y miedo a romper producción al actualizar modelos).
   - *Capa 3 (Artillería de Foso)*: Despliegue de evidencia empírica irrefutable (C-ABI 64B, Lock-free EBR, cobertura Popperiana ρ = 1.00000 sobre 10,000 gates y cero dependencias de recolección de basura).
 
+## Invariante de Coherencia de Línea de Caché de Silicio (Zero-Split Cache-Line Coherence)
+- **Alineación Exacta a 64 Bytes**: Toda estructura de memoria compartida entre procesos o capas FFI (`SharedManifest`) DEBE estar tipada con `#[repr(C, align(64))]` y un tamaño exacto de 64 bytes (`0x00` a `0x3F`).
+- **Prohibición de Cache-Line Splitting y False Sharing**: Ningún campo atómico de control (`status_flag`, `active_readers`, `epoch_id`) puede cruzar la frontera de una línea de caché L1/L2 física. Esto garantiza que las operaciones `CAS` y `fetch_sub` sean atómicas a nivel de bus de memoria sin bloqueos de bus lentos (*bus locks*) ni lecturas desgarradas (*torn reads*).
+- **Conformidad Formal con Modelos de Memoria (ARM DDI 0487H & Intel Vol 3A)**: En arquitecturas ARMv8/ARMv9 con ordenamiento de memoria débil (*relaxed memory ordering*), las transiciones de estado de slots DEBEN utilizar explícitamente semántica `Acquire/Release` con barreras de memoria completas (`dmb ish`) para evitar que el pipeline out-of-order reordene escrituras de payload antes del commit del digest SHA-256.
+
+
