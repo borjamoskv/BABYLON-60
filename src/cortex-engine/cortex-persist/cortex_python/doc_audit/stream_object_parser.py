@@ -1,5 +1,5 @@
 # C5-REAL EXERGY CERTIFIED
-#!/usr/bin/env python3
+# C5-REAL EXERGY CERTIFIED
 """
 Low-Level Stream & Object Parser (C5-REAL Agentic Engine)
 Análisis de objetos binarios, descompresión zlib/FlateDecode en tiempo real,

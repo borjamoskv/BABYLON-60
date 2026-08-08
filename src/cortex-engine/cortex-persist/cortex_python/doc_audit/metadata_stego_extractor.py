@@ -1,5 +1,5 @@
 # C5-REAL EXERGY CERTIFIED
-#!/usr/bin/env python3
+# C5-REAL EXERGY CERTIFIED
 """
 Low-Level Metadata & Steganography Extractor (C5-REAL Agentic Engine)
 Extracción de metadatos XMP / Info Dictionaries, detección de caracteres invisibles

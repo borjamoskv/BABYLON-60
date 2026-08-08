@@ -1,5 +1,5 @@
 # C5-REAL EXERGY CERTIFIED
-#!/usr/bin/env python3
+# C5-REAL EXERGY CERTIFIED
 """
 Low-Level SCITT & Merkle Prover (C5-REAL Agentic Engine)
 Construcción del árbol Merkle SHA3-256 sobre bloques binarios y emisión

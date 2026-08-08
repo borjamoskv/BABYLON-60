@@ -1,5 +1,5 @@
 # C5-REAL EXERGY CERTIFIED
-#!/usr/bin/env python3
+# C5-REAL EXERGY CERTIFIED
 """
 Low-Level Byte & Entropy Scanner (C5-REAL Agentic Engine)
 Análisis de estructura de bytes, cálculo de Entropía de Shannon H(X) por sliding window,

@@ -1,5 +1,5 @@
 # C5-REAL EXERGY CERTIFIED
-#!/usr/bin/env python3
+# C5-REAL EXERGY CERTIFIED
 """
 Master Swarm Orchestrator: Low-Level Document Audit Engine (C5-REAL)
 Integra el Tensor de Rendimiento Agéntico Evolucionado (10 Iteraciones Meta-Cognitivas):
