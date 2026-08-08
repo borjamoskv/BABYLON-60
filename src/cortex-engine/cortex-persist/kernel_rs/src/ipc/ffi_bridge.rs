@@ -91,7 +91,7 @@ pub unsafe extern "C" fn commit_epoch_transition(
 
     match epoch_state.commit_transition(manifest, expected_digest, raw_text, text_len) {
         Ok(epoch_id) => epoch_id as i64,
-        Err(halt) => -(halt.reason as i64),
+        Err(halt) => -1 - (halt.reason as i64),
     }
 }
 
