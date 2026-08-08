@@ -89,3 +89,19 @@ pub unsafe extern "C" fn commit_epoch_transition(
         Err(halt) => -(halt.reason as i64),
     }
 }
+
+/// AXIOMA 7: Helper FFI para retener lectura (EBR Stress Test).
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn acquire_reader_ffi(manifest: *mut crate::ipc::ebr::SharedManifest) {
+    if !manifest.is_null() {
+        unsafe { (*manifest).acquire_reader(); }
+    }
+}
+
+/// AXIOMA 7: Helper FFI para liberar lectura (EBR Stress Test).
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn release_reader_ffi(manifest: *mut crate::ipc::ebr::SharedManifest) {
+    if !manifest.is_null() {
+        unsafe { (*manifest).release_reader(); }
+    }
+}
