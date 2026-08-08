@@ -1,0 +1,39 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+dac_version: "2.0-Hybrid"
+project: "Teorema-Robinson-Moskv"
+domain: "BFT_MOCKING_RESTRICTION"
+platform_targets: ["Testing_Framework", "Mock_Objects"]
+memory_models: ["Topological_Substitution", "Epistemic_Isolation"]
+abi: ["Python___slots__", "BFT_Coordinator"]
+
+Claim: "Runtime manipulation (Monkey-Patching) of global classes destroys epistemic isolation and introduces cross-state entropy. Simulation demands complete topological substitution of the instance."
+Proof:
+  Base: "11_BFT_MOCKING_INVARIANT.md"
+  Range: "[Global Patching Contamination, Complete Mock Substitution]"
+  Confidence: "C5-REAL"
+
+Isomorphisms:
+  - '"Monkey-patching a global __slots__ class" -> "Cross-state Entropy Contamination"'
+  - '"Local patching on a __slots__ instance" -> "AttributeError: read-only (Physical collapse)"'
+
+Blast_Radius_Matrix:
+  Vector: "Proscripción de `unittest.mock.patch` sobre BFT Coordinators en favor de dependencias inyectadas puras."
+  Blast_Radius: "Tests L4/L5, Orchestrator Isolation."
+  Target_Invariant: "BFT Mocking Invariant (Ω170)"
+  Anergy_Risk: "High (El patching global envenena el estado de todos los nodos concurrentes)."
+
+axioms:
+  - id: AX-MOCK-11
+    domain: Testing_Topology
+    statement: "Está estrictamente prohibido usar mock.patch globalmente en clases BFT. Toda simulación L4/L5 debe sobrescribir el puntero inyectando un Mock soberano completo."
+    dependencies: []
+    refutation:
+      type: static_analysis
+      expression: "grep_check(mock.patch) NOT_TARGETING(BFT_Coordinator)"
+      location: "pre_commit_tests"
+
+theorem:
+  statement: "El aislamiento del estado BFT solo se garantiza si las dependencias simuladas son sustituciones topológicas completas y no mutaciones parciales del genotipo global."
+
+CORTEX_TAINT: taint:moskv-1:mocking:c8d9e0f1a2b3c4d5:sha3_256
