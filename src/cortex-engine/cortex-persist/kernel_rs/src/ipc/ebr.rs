@@ -22,6 +22,9 @@ pub struct SharedManifest {
     pub payload: [u8; 32],
     /// Bandera de estado atómica para transiciones lock-free.
     pub status_flag: AtomicU8,
+    /// Entropía biológica inyectada (Varentropía CUSUM) en Basis Points (bps).
+    /// Alineada usando 3 bytes de padding. Mantiene C-ABI de 64 bytes totales.
+    pub varentropy_bps: u32,
     /// Contador atómico de lectores concurrentes (EBR drain guard).
     /// Un slot en estado Retired solo puede transicionar a Idle
     /// cuando este contador alcanza exactamente 0.
@@ -39,6 +42,7 @@ impl SharedManifest {
             payload: [0u8; 32],
             // AtomicU8::new es const-safe y no requiere sincronización adicional
             status_flag: AtomicU8::new(ManifestStatus::Idle as u8),
+            varentropy_bps: 0,
             // EBR: inicializar sin lectores activos
             active_readers: AtomicUsize::new(0),
             epoch_id,
@@ -117,6 +121,8 @@ pub enum HaltReason {
     TraceChainViolation = 5,
     /// Slot Retired aún tiene lectores activos (EBR drain guard).
     ActiveReadersNotDrained = 6,
+    /// La entropía inyectada supera la capacidad de disipación (Colapso Termodinámico).
+    VarentropyLimitExceeded = 7,
 }
 
 /// Error epistémico con contexto de diagnóstico.
@@ -200,6 +206,18 @@ impl EpochState {
         // SAFETY: contrato del llamador garantiza validez del puntero
         let manifest = unsafe { &*new_manifest };
         let candidate_epoch = manifest.epoch_id;
+
+        // Paso 0: Control Termodinámico (Cron Híbrido)
+        // Límite s_Si fijado contractualmente en 3.00% (300 bps) de Varentropía CUSUM.
+        const MAX_VARENTROPY_BPS: u32 = 300;
+        if manifest.varentropy_bps > MAX_VARENTROPY_BPS {
+            // Riesgo de Model Collapse: cuarentena y EpistemicHalt
+            manifest.set_status(ManifestStatus::Quarantine);
+            return Err(EpistemicHalt {
+                failed_epoch: candidate_epoch,
+                reason: HaltReason::VarentropyLimitExceeded,
+            });
+        }
 
         // Paso 1: Validación criptográfica en tiempo constante.
         // verify_digest usa XOR acumulativo sin branches para evitar timing leaks.
