@@ -32,7 +32,7 @@ class AdversarialFFIBridge(C5RealFFIBridge):
         self.lib.release_reader_ffi.restype = None
 
     def create_raw_manifest(self, text: str, varentropy_bps: int = 0) -> tuple:
-        """Helper to create a raw manifest and digest for manual adversarial injection."""
+        """Helper to create a raw 64-byte aligned manifest and digest for manual adversarial injection."""
         text_bytes = text.encode('utf-8')
         text_len = len(text_bytes)
         raw_text_c = (ctypes.c_uint8 * text_len)(*text_bytes)
@@ -40,7 +40,13 @@ class AdversarialFFIBridge(C5RealFFIBridge):
         sha256 = hashlib.sha256(text_bytes).digest()
         digest_c = (ctypes.c_uint8 * 32)(*sha256)
 
-        manifest = SharedManifest()
+        # Asignación alineada estrictamente a 64 bytes (Zero-Split Cache-Line Coherence)
+        buf = bytearray(ctypes.sizeof(SharedManifest) + 64)
+        addr = ctypes.addressof((ctypes.c_char * len(buf)).from_buffer(buf))
+        offset = (64 - (addr % 64)) % 64
+        aligned_addr = addr + offset
+
+        manifest = SharedManifest.from_address(aligned_addr)
         for i in range(32):
             manifest.payload[i] = sha256[i]
 
@@ -51,7 +57,7 @@ class AdversarialFFIBridge(C5RealFFIBridge):
         manifest.timestamp_ns = int(time.time() * 1e9)
         self.epoch_counter += 1
 
-        return manifest, digest_c, raw_text_c, text_len
+        return manifest, digest_c, raw_text_c, text_len, buf
 
     def acquire_reader(self, manifest: SharedManifest):
         self.lib.acquire_reader_ffi(ctypes.byref(manifest))
