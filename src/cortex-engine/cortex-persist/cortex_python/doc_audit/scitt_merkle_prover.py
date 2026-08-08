@@ -84,6 +84,7 @@ class ScittMerkleProver:
             "telemetry_proxies": {
                 "max_shannon_entropy": entropy_results.get("max_window_entropy", 0.0),
                 "overlay_bytes": entropy_results.get("overlay_bytes_detected", 0),
+                "overlay_format_detected": entropy_results.get("overlay_format_detected", "NONE"),
                 "risky_exec_tokens": stream_results.get("risky_tokens_detected", {}),
                 "zero_width_chars": metadata_results.get("total_zero_width_chars", 0),
                 "homoglyphs_detected": metadata_results.get("homoglyphs_detected", 0)
