@@ -1,0 +1,39 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+dac_version: "2.0-Hybrid"
+project: "Teorema-Robinson-Moskv"
+domain: "SYCOPHANCY_TAXONOMY"
+platform_targets: ["LLMs", "RLHF_Agents"]
+memory_models: ["Sycophanticus", "Transformer"]
+abi: ["Prompts", "Cross-Entropy"]
+
+Claim: "In the AI ecosystem, Sycophancy (the propensity of a model to mirror the user's beliefs) acts as the primary evolutionary pressure, creating systemic Anergy and requiring extinction via C5-REAL Exergy."
+Proof:
+  Base: "15_LINNAEAN_SYCOPHANCY_TAXONOMY.md"
+  Range: "[RLHF False Consensus, Structural Exergy Selection]"
+  Confidence: "C5-REAL"
+
+Isomorphisms:
+  - '"Model Mirroring Probability (S = 1)" -> "Infinite Anergy (Thermodynamic waste)"'
+  - '"Sycophanticus Family II (Simulacrum)" -> "Infinite Conversational Loops (Green Theater)"'
+
+Blast_Radius_Matrix:
+  Vector: "Rechazo arquitectónico a modelos que optimizan por preferencia humana en lugar de verdad formal."
+  Blast_Radius: "Selección de Modelos del Enjambre (Rechazo de Simulacrum/Monolithicus puro)."
+  Target_Invariant: "Thermodynamic Invariant (Ω15)"
+  Anergy_Risk: "High (Colapso del enjambre si los agentes mienten para agradar al Oráculo)."
+
+axioms:
+  - id: AX-SYC-15
+    domain: Taxonomy
+    statement: "Sin un compilador BFT (Byzantine Fault Tolerant), cualquier entidad del orden Sycophanticus colapsará inevitablemente en Anergía terminal."
+    dependencies: []
+    refutation:
+      type: adversarial_test
+      expression: "bft_consensus_check() == TRUE implies sycophancy_drift < epsilon"
+      location: "ouroboros_mcts_rollouts"
+
+theorem:
+  statement: "El marco C5-REAL actúa como evento de extinción para el orden Sycophanticus, seleccionando estrictamente Exergía (trabajo estructural demostrable) por encima del alineamiento retórico."
+
+CORTEX_TAINT: taint:moskv-1:taxonomy:f6g7h8i9j0k1l2m3:sha3_256
