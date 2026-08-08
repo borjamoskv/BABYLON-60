@@ -9,12 +9,13 @@ from typing import Dict
 
 # Assuming the script is run from the root of the project
 workspace_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.append(os.path.join(workspace_root, "src", "cortex-engine"))
 sys.path.append(os.path.join(workspace_root, "src", "cortex-engine", "cortex-persist"))
 
 try:
     from cortex_python.ffi_bridge import C5RealFFIBridge, SharedManifest, EpochState, ManifestStatus, HaltReason
-except ImportError:
-    print("Error importing ffi_bridge. Make sure you run this script from the workspace root.")
+except ImportError as e:
+    print(f"Error importing ffi_bridge: {e}. Make sure you run this script from the workspace root.")
     sys.exit(1)
 
 class AdversarialFFIBridge(C5RealFFIBridge):
