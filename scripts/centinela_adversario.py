@@ -47,6 +47,7 @@ class AdversarialFFIBridge(C5RealFFIBridge):
         aligned_addr = addr + offset
 
         manifest = SharedManifest.from_address(aligned_addr)
+        manifest._buf = buf
         for i in range(32):
             manifest.payload[i] = sha256[i]
 
@@ -57,7 +58,7 @@ class AdversarialFFIBridge(C5RealFFIBridge):
         manifest.timestamp_ns = int(time.time() * 1e9)
         self.epoch_counter += 1
 
-        return manifest, digest_c, raw_text_c, text_len, buf
+        return manifest, digest_c, raw_text_c, text_len
 
     def acquire_reader(self, manifest: SharedManifest):
         self.lib.acquire_reader_ffi(ctypes.byref(manifest))

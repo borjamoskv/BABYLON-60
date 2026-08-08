@@ -106,8 +106,13 @@ class C5RealFFIBridge:
         sha256 = hashlib.sha256(text_bytes).digest()
         digest_c = (ctypes.c_uint8 * 32)(*sha256)
 
-        # 3. Preparar el SharedManifest candidato
-        manifest = SharedManifest()
+        # 3. Preparar el SharedManifest candidato alineado estrictamente a 64 bytes
+        buf = bytearray(ctypes.sizeof(SharedManifest) + 64)
+        addr = ctypes.addressof((ctypes.c_char * len(buf)).from_buffer(buf))
+        offset = (64 - (addr % 64)) % 64
+        aligned_addr = addr + offset
+
+        manifest = SharedManifest.from_address(aligned_addr)
         for i in range(32):
             manifest.payload[i] = sha256[i]
 
