@@ -17,133 +17,139 @@ export const GonFictionComposition: React.FC = () => {
 
   const isSilence = activeSub === null || activeSub.speaker === "PAUSA";
 
-  // Global Video Progress Bar (0 to 100%)
+  // Global Video Progress Bar (0 to 100%) - Tacky red bar at the bottom
   const globalProgress = interpolate(frame, [0, GON_FICTION_DURATION_FRAMES], [0, 100], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
 
-  // Local Subtitle/Sentence Progress Bar (0 to 100%)
-  const subProgress = activeSub
-    ? interpolate(frame, [activeSub.startFrame, activeSub.endFrame], [0, 100], {
-        extrapolateLeft: "clamp",
-        extrapolateRight: "clamp",
-      })
-    : 0;
-
   // Hyper-kinetic trig/spring animations for mouth & avatar physics
   const isSpeaking = !isSilence;
-  const mouthScaleY = isSpeaking ? 1.0 + 0.4 * Math.abs(Math.sin(frame * 0.9)) : 0.8;
-  const mouthScaleX = isSpeaking ? 1.0 + 0.15 * Math.cos(frame * 0.7) : 1.0;
-  const headRotation = isSpeaking ? Math.sin(frame * 0.45) * 8 : 0;
-  const pulseAura = isSpeaking ? 25 + 15 * Math.abs(Math.sin(frame * 0.8)) : 10;
 
-  // Character-based screen shake (Chicote & Flea generate intense kinetic jitter)
-  const isHypedCharacter = activeSub && (activeSub.speaker === "CHICOTE" || activeSub.speaker === "FLEA" || activeSub.speaker === "FRUSCIANTE");
-  const jitterX = isSpeaking && isHypedCharacter ? Math.sin(frame * 1.5) * 6 : 0;
-  const jitterY = isSpeaking && isHypedCharacter ? Math.cos(frame * 1.8) * 6 : 0;
+  // Cutre MS Paint bouncing
+  const bounceY = isSpeaking ? Math.abs(Math.sin(frame * 0.8)) * -60 : 0;
+  const squishX = isSpeaking ? 1.0 + Math.cos(frame * 1.5) * 0.2 : 1.0;
+  const headRotation = isSpeaking ? Math.sin(frame * 0.5) * 20 : 0;
 
   // Spring animation for entrance when speaker changes
   const speakerEntrance = spring({
     fps: 30,
     frame: activeSub ? frame - activeSub.startFrame : 0,
-    config: { damping: 12, stiffness: 180 },
+    config: { damping: 8, stiffness: 100 }, // Bouncier!
   });
-
-  // Dynamic Location HUD Mapping based on subtitle index
-  const getLocation = (id: number) => {
-    if (id <= 6) return "📍 MUELLE DE MARZANA";
-    if (id <= 14) return "📍 CALLE SAN FRANCISCO";
-    if (id <= 20) return "📍 TABERNA KERNEL // RING-0";
-    if (id <= 27) return "📍 PUENTE DE LA SALVE";
-    if (id <= 32) return "📍 URGENCIAS BILBI";
-    if (id <= 37) return "📍 CASCO VIEJO DE BILBAO";
-    return "📍 PUENTE SAN ANTÓN // ESTACIÓN FINAL";
-  };
-
-  const currentLocation = activeSub ? getLocation(activeSub.id) : "📍 BILBAO LA VIEJA";
-  const score = Math.floor(frame * 12.5);
-  const healthBars = "♥♥♥♥♥";
 
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: "#020005",
+        backgroundColor: "#FF00FF", // Magenta fallback
         overflow: "hidden",
-        fontFamily: "'Press Start 2P', monospace, sans-serif",
-        transform: `translate(${jitterX}px, ${jitterY}px)`,
+        fontFamily: "'Comic Sans MS', Impact, sans-serif", // CHANANTE FONT
       }}
     >
-      {/* 1. BACKGROUND: FFmpeg Kinetic 8-Bit Render */}
+      {/* 1. BACKGROUND: FFmpeg Chanante Render */}
       <Video
         src={staticFile("out_gon_fiction_8bit.mp4")}
-        style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }}
+        style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.9 }}
       />
 
-      {/* 2. CRT SCANLINES & VIGNETTE OVERLAY */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03))",
-          backgroundSize: "100% 4px, 6px 100%",
-          pointerEvents: "none",
-          zIndex: 5,
-        }}
-      />
-
-      {/* 3. TOP GLOBAL PROGRESS TIMER BAR (Arcade Time Bar) */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: "8px",
-          backgroundColor: "rgba(255,255,255,0.1)",
-          zIndex: 20,
-        }}
-      >
-        <div
-          style={{
-            height: "100%",
-            width: `${globalProgress}%`,
-            background: "linear-gradient(90deg, #00F0FF, #FF00FF, #FFD300)",
-            boxShadow: "0 0 12px #00F0FF",
-          }}
-        />
-      </div>
-
-      {/* 4. ARCADE HUD (TOP HEADER) */}
+      {/* 2. CHEAP TV CHANNEL LOGO (Top Right) */}
       <div
         style={{
           position: "absolute",
           top: "40px",
-          left: "40px",
           right: "40px",
           display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          color: "#00F0FF",
-          fontSize: "20px",
-          textShadow: "3px 3px 0px #000, 0 0 10px #00F0FF",
+          flexDirection: "column",
+          alignItems: "flex-end",
           zIndex: 10,
         }}
       >
-        <div>
-          <span style={{ color: "#FFD300" }}>P1:</span> GON & CHICOTE
-        </div>
-        <div style={{ color: "#FF6600", fontSize: "16px" }}>{currentLocation}</div>
-        <div>
-          <span style={{ color: "#FF0055" }}>LIFE:</span> <span style={{ color: "#FF3333" }}>{healthBars}</span>
-        </div>
-        <div>
-          <span style={{ color: "#00FF66" }}>SCORE:</span> {score.toString().padStart(6, "0")}
+        <div
+          style={{
+            backgroundColor: "blue",
+            color: "yellow",
+            padding: "10px 20px",
+            fontSize: "36px",
+            fontWeight: "bold",
+            borderRadius: "50%",
+            border: "8px solid red",
+            transform: `rotate(${Math.sin(frame * 0.1) * 10}deg)`,
+            boxShadow: "10px 10px 0px black"
+          }}
+        >
+          TELE<br/>BILBO
         </div>
       </div>
 
-      {/* 5. SUBTITLE / DIALOGUE & AVATAR LAYER */}
+      {/* 2.5 NEWS TICKER CUTRE CHANANTE */}
+      <div
+        style={{
+          position: "absolute",
+          top: "160px",
+          left: 0,
+          right: 0,
+          backgroundColor: "yellow",
+          borderTop: "6px solid black",
+          borderBottom: "6px solid black",
+          color: "black",
+          fontSize: "40px",
+          fontWeight: "bold",
+          padding: "5px 0",
+          overflow: "hidden",
+          whiteSpace: "nowrap",
+          zIndex: 15,
+          boxShadow: "0 10px 0px black",
+        }}
+      >
+        <div
+          style={{
+            transform: `translateX(${(frame * -10) % 3000 + 1080}px)`,
+          }}
+        >
+          ÚLTIMA HORA: EL KERNEL SE HA IDO DE BARETOS... AY VA QUÉ CHORRAZO... SE BUSCA GAMBITERO POR BILBAO LA VIEJA... ERES UN REGULERO... HIJO DE P. HAY QUE DECIRLO MÁS... A TOPE DE POWER...
+        </div>
+      </div>
+
+      {/* 2.6 RANDOM FLOATING CHANANTE TEXT (Aparece y desaparece estroboscópicamente) */}
+      {Math.sin(frame * 0.2) > 0.8 && (
+        <div
+          style={{
+            position: "absolute",
+            top: `${Math.abs(Math.sin(frame * 0.1)) * 50 + 20}%`,
+            left: `${Math.abs(Math.cos(frame * 0.15)) * 50 + 10}%`,
+            color: "#00FF00",
+            fontSize: "80px",
+            fontFamily: "Impact, sans-serif",
+            WebkitTextStroke: "4px black",
+            textShadow: "8px 8px 0px black",
+            transform: `rotate(${Math.sin(frame * 0.5) * 45}deg)`,
+            zIndex: 12,
+          }}
+        >
+          ¡A TOPE DE POWER!
+        </div>
+      )}
+
+      {Math.cos(frame * 0.15) > 0.9 && (
+        <div
+          style={{
+            position: "absolute",
+            top: `${Math.abs(Math.cos(frame * 0.2)) * 60 + 10}%`,
+            right: `${Math.abs(Math.sin(frame * 0.1)) * 40 + 10}%`,
+            color: "magenta",
+            fontSize: "90px",
+            fontFamily: "'Comic Sans MS', sans-serif",
+            WebkitTextStroke: "3px white",
+            textShadow: "5px 5px 0px black",
+            transform: `rotate(${Math.cos(frame * 0.4) * -30}deg)`,
+            zIndex: 12,
+          }}
+        >
+          BOCACHANCO
+        </div>
+      )}
+
+      {/* 3. SUBTITLE / DIALOGUE & AVATAR LAYER */}
       <div
         style={{
           position: "absolute",
@@ -152,7 +158,7 @@ export const GonFictionComposition: React.FC = () => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "flex-end",
-          padding: "80px 40px 140px 40px",
+          padding: "80px 40px 180px 40px",
           boxSizing: "border-box",
           zIndex: 10,
         }}
@@ -163,41 +169,27 @@ export const GonFictionComposition: React.FC = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: "24px",
+              gap: "10px",
               width: "100%",
               transform: `scale(${speakerEntrance})`,
               opacity: interpolate(speakerEntrance, [0, 1], [0, 1]),
             }}
           >
-            {/* AVATAR WITH DYNAMIC LIP SYNC PHYSICS */}
+            {/* CHEAP AVATAR BOUNCING */}
             <div
               style={{
                 position: "relative",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                transform: `rotate(${headRotation}deg)`,
+                transform: `translateY(${bounceY}px) rotate(${headRotation}deg) scaleX(${squishX})`,
               }}
             >
-              {/* Pulsing Aura */}
-              <div
-                style={{
-                  position: "absolute",
-                  width: "170px",
-                  height: "170px",
-                  borderRadius: "50%",
-                  backgroundColor: activeSub.color,
-                  opacity: 0.4,
-                  filter: `blur(${pulseAura}px)`,
-                }}
-              />
-
               {/* Avatar Emoji Container */}
               <div
                 style={{
-                  fontSize: "130px",
-                  transform: `scale(${mouthScaleX}, ${mouthScaleY})`,
-                  filter: `drop-shadow(0px 10px 25px ${activeSub.color})`,
+                  fontSize: "180px",
+                  filter: `drop-shadow(15px 15px 0px black)`,
                   zIndex: 2,
                 }}
               >
@@ -205,176 +197,92 @@ export const GonFictionComposition: React.FC = () => {
               </div>
             </div>
 
-            {/* SPEAKER NAME BADGE */}
+            {/* SPEAKER NAME BADGE (Comic Sans, absurd colors) */}
             <div
               style={{
-                fontSize: "30px",
-                fontWeight: 900,
-                color: activeSub.color,
-                backgroundColor: "#000000D0",
-                padding: "12px 28px",
-                borderRadius: "8px",
-                border: `3px solid ${activeSub.color}`,
-                boxShadow: `0 0 20px ${activeSub.color}80, inset 0 0 10px ${activeSub.color}40`,
-                letterSpacing: "4px",
-                textTransform: "uppercase",
+                fontSize: "40px",
+                fontWeight: "bold",
+                color: "white",
+                backgroundColor: activeSub.color,
+                padding: "10px 30px",
+                border: "6px solid black",
+                boxShadow: "8px 8px 0px black",
+                transform: "rotate(-3deg)",
+                marginBottom: "20px",
               }}
             >
-              👾 {activeSub.speaker}
+              {activeSub.speaker}
             </div>
 
-            {/* TEXT DIALOGUE BOX WITH LOCAL SENTENCE TIMER BAR */}
+            {/* TEXT DIALOGUE BOX (Impact Meme Style) */}
             <div
               style={{
-                width: "100%",
-                backgroundColor: "rgba(5, 5, 15, 0.94)",
-                border: `4px solid ${activeSub.color}`,
-                borderRadius: "16px",
-                padding: "36px 40px",
-                boxShadow: `0 0 35px ${activeSub.color}60, inset 0 0 15px rgba(255,255,255,0.05)`,
-                boxSizing: "border-box",
-                display: "flex",
-                flexDirection: "column",
-                gap: "20px",
-                position: "relative",
-                overflow: "hidden",
+                width: "90%",
+                textAlign: "center",
               }}
             >
               <div
                 style={{
-                  fontSize: "44px",
-                  lineHeight: "1.4",
-                  color: "#FFFFFF",
-                  fontFamily: "Inter, system-ui, sans-serif",
-                  fontWeight: 800,
-                  textAlign: "center",
-                  textShadow: "0 4px 10px rgba(0,0,0,0.9)",
+                  fontSize: "65px",
+                  lineHeight: "1.2",
+                  color: "yellow",
+                  fontFamily: "Impact, sans-serif",
+                  textTransform: "uppercase",
+                  WebkitTextStroke: "4px black",
+                  textShadow: "6px 6px 0px black",
                 }}
               >
-                "{activeSub.text}"
-              </div>
-
-              {/* Sentence Progress / Timer Bar */}
-              <div
-                style={{
-                  width: "100%",
-                  height: "6px",
-                  backgroundColor: "rgba(255,255,255,0.1)",
-                  borderRadius: "3px",
-                  overflow: "hidden",
-                }}
-              >
-                <div
-                  style={{
-                    height: "100%",
-                    width: `${subProgress}%`,
-                    backgroundColor: activeSub.color,
-                    boxShadow: `0 0 10px ${activeSub.color}`,
-                  }}
-                />
+                {activeSub.text}
               </div>
             </div>
           </div>
         )}
 
-        {/* PAUSE / SILENCE DISPLAY WITH TIMER COUNTDOWN BAR */}
+        {/* PAUSE / SILENCE DISPLAY */}
         {isSilence && (
           <div
             style={{
-              backgroundColor: "rgba(0,0,0,0.85)",
-              border: "3px dashed #FFD300",
-              padding: "24px 40px",
-              borderRadius: "12px",
-              color: "#FFD300",
-              fontSize: "24px",
-              letterSpacing: "3px",
-              textShadow: "0 0 10px #FFD300",
-              marginBottom: "100px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "12px",
+              backgroundColor: "magenta",
+              border: "10px dotted yellow",
+              padding: "40px 60px",
+              color: "white",
+              fontSize: "50px",
+              fontFamily: "Comic Sans MS, sans-serif",
+              fontWeight: "bold",
+              textShadow: "4px 4px 0px black",
+              boxShadow: "15px 15px 0px black",
+              marginBottom: "150px",
+              transform: `rotate(${Math.sin(frame * 0.2) * 5}deg)`,
             }}
           >
-            <div>⏳ PAUSA ONTOLÓGICA EN BILBAO LA VIEJA...</div>
-            <div
-              style={{
-                width: "250px",
-                height: "6px",
-                backgroundColor: "rgba(255,211,0,0.2)",
-                borderRadius: "3px",
-                overflow: "hidden",
-              }}
-            >
-              <div
-                style={{
-                  height: "100%",
-                  width: `${subProgress}%`,
-                  backgroundColor: "#FFD300",
-                  boxShadow: "0 0 8px #FFD300",
-                }}
-              />
-            </div>
+            ESPERA UN REGULÍN...
           </div>
         )}
       </div>
 
-      {/* 6. REACT EQUALIZER BARS (BOTTOM ACCENT) */}
+      {/* 4. TACKY BOTTOM PROGRESS BAR */}
       <div
         style={{
           position: "absolute",
-          bottom: "60px",
-          left: "40px",
-          right: "40px",
-          height: "30px",
-          display: "flex",
-          gap: "8px",
-          alignItems: "flex-end",
-          justifyContent: "center",
-          zIndex: 10,
+          bottom: "30px",
+          left: "20px",
+          right: "20px",
+          height: "20px",
+          backgroundColor: "white",
+          border: "4px solid black",
+          zIndex: 20,
         }}
       >
-        {Array.from({ length: 32 }).map((_, i) => {
-          const barHeight = isSpeaking
-            ? Math.max(10, Math.sin(frame * 0.3 + i * 0.4) * 28 + 15)
-            : 4;
-          const barColor = activeSub ? activeSub.color : "#00F0FF";
-          return (
-            <div
-              key={i}
-              style={{
-                width: "18px",
-                height: `${barHeight}px`,
-                backgroundColor: barColor,
-                boxShadow: `0 0 8px ${barColor}`,
-                borderRadius: "3px",
-                transition: "height 60ms ease-out",
-              }}
-            />
-          );
-        })}
+        <div
+          style={{
+            height: "100%",
+            width: `${globalProgress}%`,
+            backgroundColor: "red",
+          }}
+        />
       </div>
 
-      {/* 7. FOOTER / SYSTEM STATUS */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: "20px",
-          left: "40px",
-          right: "40px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          color: "rgba(255, 255, 255, 0.4)",
-          fontSize: "12px",
-          zIndex: 10,
-        }}
-      >
-        <div>C5-REAL KERNEL: ACTIVE</div>
-        <div>BILBO ZAHARRA // 8-BIT NES EDITION</div>
-      </div>
-
-      {/* 8. MASTER AUDIO TRACK */}
+      {/* 5. MASTER AUDIO TRACK */}
       <Audio src={staticFile("gon_fiction_master.wav")} volume={1.0} />
     </AbsoluteFill>
   );

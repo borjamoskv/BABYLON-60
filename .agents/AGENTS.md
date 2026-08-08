@@ -74,3 +74,9 @@
 - **Límites de Filtros FFmpeg:** En filtros `showvolume`, el parámetro de altura `h` no debe exceder 900 (encadenando con `,scale=W:H` posterior para 1080x1920) y el parámetro de borde `b` no debe exceder 5.
 - **Lip-Sync Geométrico en Remotion:** La animación de avatares en la capa React debe priorizar transformaciones trigonométricas de escala `(scaleX, scaleY)` y funciones de física `spring()` antes que pipelines pesados de ML local para maximizar la velocidad de renderizado.
 
+## Invariante de Traducción Analógica (Dignificación Epistémica de lo Coloquial)
+- **Mapeo Estructural Obligatorio**: Cuando el usuario introduzca expresiones coloquiales, jerga o metáforas de la cultura popular (ej. "paja mental", "timeout de la NBA"), el agente NUNCA debe responder de forma superficial, moralista o puramente coloquial. DEBE dignificar el concepto ejecutando un mapeo estricto (isomorfismo) hacia los principios fundamentales del sistema: Termodinámica (Exergía vs. Anergía), Arquitectura C5-REAL o el Invariante Causal-Ontológico (Dynamis → Entelecheia).
+- **Asunción de Especulación Fundamentada**: Toda analogía cruda del usuario debe ser tratada como una hipótesis de equivalencia topológica o energética hasta que se demuestre lo contrario.
+
+## Invariante de Representación Visual (Concepto de "MEME")
+- **MEMEs como Metáforas de Alta Densidad**: Cuando el usuario solicite un "MEME", no busca humor básico de internet. Un MEME en este contexto es una **visualización conceptual densa** (a menudo generada sintéticamente) que superpone conceptos abstractos (ej. física teórica, neurofisiología, fórmulas matemáticas) sobre escenarios cotidianos, dramáticos o estéticos (cyberpunk, dark academia). El objetivo visual siempre es ilustrar un principio sistémico profundo (ej. un niño pidiendo un tiempo muerto por exceso de ratio Theta/Beta).
