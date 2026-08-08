@@ -25,7 +25,7 @@ pub struct ExergyEvaluator;
 impl ExergyEvaluator {
     /// Lista de Inmunidad Absoluta: NUNCA se tocan estos archivos/directorios bajo ninguna circunstancia
     pub fn is_strictly_immune(path: &Path) -> bool {
-        // Normalizar separadores para compatibilidad Windows/Unix
+        let path_str = path.to_string_lossy();
         let normalized = path_str.replace('\\', "/");
 
         // 1. Inmunidad de Credenciales y Llaves (macOS, Windows, Linux)
