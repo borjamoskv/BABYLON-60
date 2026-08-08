@@ -69,12 +69,12 @@ def main():
     # --------------------------------------------------------------------------
     print("\n--- PHASE 2: WASM SANDBOX (WASI 0.3) ISOLATION & STATE HASHING ---")
     total_tests += 1
-    if res1.sandbox_latency_us > 0 and bytes(res1.scitt_statement_digest) != b"\x00" * 32:
+    if res1.success and res1.sandbox_latency_us >= 0 and bytes(res1.scitt_statement_digest) != b"\x00" * 32:
         passed_tests += 1
-        print(f"  ■ WASM Sandbox Isolation: Executed in {res1.wall_clock_ms} ms | "
+        print(f"  ■ WASM Sandbox Isolation: Executed in {res1.wall_clock_ms} ms (Latency: {res1.sandbox_latency_us} µs) | "
               f"Output Hash: {bytes(res1.scitt_statement_digest).hex()[:16]}... [PASS]")
     else:
-        print(f"  ❌ WASM Sandbox failed")
+        print(f"  ❌ WASM Sandbox failed: {res1.to_dict()}")
 
     # --------------------------------------------------------------------------
     # PHASE 3: SCITT RFC 9942 Signed Receipt & Merkle Audit Path
