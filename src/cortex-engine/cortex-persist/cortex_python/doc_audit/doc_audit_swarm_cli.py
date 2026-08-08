@@ -14,7 +14,7 @@ import json
 import os
 import sys
 import time
-from typing import Dict, Any
+from typing import Dict, List, Any
 
 from .entropy_byte_scanner import ByteEntropyScanner
 from .stream_object_parser import StreamObjectParser
@@ -87,6 +87,32 @@ class DocAuditSwarmOrchestrator:
             "stream": stream_res,
             "stego": stego_res
         }
+
+        # 1.5 Capa 3.1: Enrutamiento Recursivo del Overlay Payload (Iteración 3)
+        overlay_audit = None
+        overlay_fmt = entropy_res.get("overlay_format_detected", "NONE")
+        if overlay_fmt != "NONE" and entropy_res.get("overlay_bytes_detected", 0) > 0:
+            if verbose:
+                print(f"[*] Fase 3.1: Payload parásito detectado ({overlay_fmt}). "
+                      f"Extrayendo {entropy_res['overlay_bytes_detected']} bytes "
+                      f"para disección recursiva in-memory (Zero-Disk I/O)...")
+            # Extraer el slice del overlay directamente de la memoria del archivo
+            with open(filepath, "rb") as f:
+                full_content = f.read()
+            eof_offset = entropy_res.get("eof_offset", -1)
+            if eof_offset > 0:
+                overlay_slice = full_content[eof_offset:].lstrip(b"\r\n\t ")
+                # Análisis recursivo in-memory del payload aislado
+                overlay_entropy = self.byte_scanner.scan_bytes(
+                    overlay_slice,
+                    label=f"<overlay:{overlay_fmt}>"
+                )
+                overlay_audit = {
+                    "overlay_format": overlay_fmt,
+                    "overlay_size_bytes": len(overlay_slice),
+                    "overlay_entropy_analysis": overlay_entropy,
+                }
+            raw_diagnostics["overlay_recursive_audit"] = overlay_audit
 
         # 2. Capa 8: Filtro Adversarial del Red Team Subagent
         if verbose:
