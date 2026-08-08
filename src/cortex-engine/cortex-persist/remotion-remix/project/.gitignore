@@ -1,8 +1,0 @@
-# Remotion & Temp Files
-node_modules
-.remotion
-temp_audio/
-*.aiff
-*.mp4
-dist/
-out/

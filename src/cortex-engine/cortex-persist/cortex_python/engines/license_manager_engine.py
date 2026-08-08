@@ -131,7 +131,7 @@ class LicenseManagerEngine:
         conn = sqlite3.connect(str(self.db_path), timeout=5.0)
         conn.execute("PRAGMA journal_mode = WAL;")
         conn.execute("PRAGMA busy_timeout = 5000;")
-        
+
         # Tabla principal de auditoría de licencias
         conn.execute("""
             CREATE TABLE IF NOT EXISTS license_audit_ledger (
