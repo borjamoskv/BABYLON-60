@@ -126,6 +126,12 @@ pub enum HaltReason {
 }
 
 /// Error epistémico con contexto de diagnóstico.
+///
+/// **Directiva ULTRATHINK / EU AI Act Compliance:**
+/// Este struct materializa el Fail-Stop Contractual en Ring-0. Al emitir
+/// un `EpistemicHalt`, el Kernel ejecuta una Cuarentena Epistémica atómica,
+/// garantizando que ningún estado probabilístico tóxico alcance la firma SCITT.
+/// Es el mecanismo físico que habilita la asunción de responsabilidad durante el Vacío Estratégico.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct EpistemicHalt {
     /// Epoch ID del manifiesto que causó el halt.
