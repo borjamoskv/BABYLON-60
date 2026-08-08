@@ -14,37 +14,36 @@ pub enum ManifestStatus {
     Quarantine = 5,
 }
 
-/// Manifiesto compartido Python↔Rust con layout C y alineación de 64 bits.
-/// #[repr(C, align(8))] es obligatorio para ABI estable y atomics correctos en x86_64/aarch64.
-#[repr(C, align(8))]
+/// Manifiesto compartido Python↔Rust con layout C y alineación exacta de 64 bytes.
+/// #[repr(C, align(64))] es obligatorio para evitar false-sharing y cache-line splitting.
+#[repr(C, align(64))]
 pub struct SharedManifest {
-    /// Resumen criptográfico SHA-256 (32 bytes).
+    /// Resumen criptográfico SHA-256 (32 bytes). Offset: 0x00
     pub payload: [u8; 32],
-    /// Bandera de estado atómica para transiciones lock-free.
+    /// Bandera de estado atómica para transiciones lock-free. Offset: 0x20
     pub status_flag: AtomicU8,
-    /// Entropía biológica inyectada (Varentropía CUSUM) en Basis Points (bps).
-    /// Alineada usando 3 bytes de padding. Mantiene C-ABI de 64 bytes totales.
+    /// Padding explícito para mantener C-ABI y alineación. Offset: 0x21
+    pub _pad: [u8; 3],
+    /// Entropía biológica inyectada (Varentropía CUSUM) en Basis Points (bps). Offset: 0x24
     pub varentropy_bps: u32,
-    /// Contador atómico de lectores concurrentes (EBR drain guard).
-    /// Un slot en estado Retired solo puede transicionar a Idle
-    /// cuando este contador alcanza exactamente 0.
-    pub active_readers: AtomicUsize,
-    /// Identificador secuencial de época para anclaje SCITT.
+    /// Contador atómico de lectores concurrentes (EBR drain guard). Offset: 0x28
+    pub active_readers: AtomicU64,
+    /// Identificador secuencial de época para anclaje SCITT. Offset: 0x30
     pub epoch_id: u64,
-    /// Timestamp nanosecondal para anclaje SCITT.
+    /// Timestamp nanosecondal para anclaje SCITT. Offset: 0x38
     pub timestamp_ns: u64,
 }
 
 impl SharedManifest {
-    /// Construye un manifiesto en estado Idle con campos inicializados.
     pub fn new(epoch_id: u64, timestamp_ns: u64) -> Self {
         Self {
             payload: [0u8; 32],
             // AtomicU8::new es const-safe y no requiere sincronización adicional
             status_flag: AtomicU8::new(ManifestStatus::Idle as u8),
+            _pad: [0u8; 3],
             varentropy_bps: 0,
             // EBR: inicializar sin lectores activos
-            active_readers: AtomicUsize::new(0),
+            active_readers: AtomicU64::new(0),
             epoch_id,
             timestamp_ns,
         }
@@ -99,7 +98,7 @@ impl SharedManifest {
     /// Consulta el número de lectores activos sin modificar el contador.
     #[inline]
     pub fn reader_count(&self) -> usize {
-        self.active_readers.load(Ordering::Acquire)
+        self.active_readers.load(Ordering::Acquire) as usize
     }
 }
 
