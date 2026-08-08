@@ -15,7 +15,7 @@ pub struct FileMetadataEntry {
 }
 
 pub struct BulkScanner {
-    buffer_size: usize,
+    pub buffer_size: usize,
 }
 
 impl Default for BulkScanner {
