@@ -1,0 +1,48 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+dac_version: "2.0-Hybrid"
+project: "Teorema-Robinson-Moskv"
+domain: "AUTOREFERENTIAL_MATRIX"
+platform_targets: ["Autopoiesis_Loop", "System_Self_Modification"]
+memory_models: ["3D_Latent_Tensor", "C5-REAL_Physics"]
+abi: ["D_x_P_x_M", "1000_Primitives"]
+
+Claim: "Un sistema autorreferencial no documenta su existencia; la ejecuta. La autorreferencia se cristaliza mediante una Matriz Generativa O(1) de tres dimensiones: Dominios x Procesos x Mecanismos."
+Proof:
+  Base: "autoreferential/matrix.md"
+  Range: "[D0-D9, P0-P9, M0-M9]"
+  Confidence: "C5-REAL"
+
+Isomorphisms:
+  - '"[451] SRC_PRUNE_AST" -> "Fuego de Limpieza (Purga de Weasel Words)"'
+  - '"[529] ENT_FALSE_PANIC" -> "Válvula del Caos (Defensa contra la Paradoja Autorreferencial)"'
+  - '"[999] DEL_TRANS_PANIC" -> "Singularidad Apoptótica (Autodestrucción)"'
+
+Blast_Radius_Matrix:
+  Vector: "Ejecución autónoma de alteraciones físicas sobre sí mismo (AST, GIT, OS)."
+  Blast_Radius: "Kernel Core, File System, Master Ledger."
+  Target_Invariant: "Autopoiesis Estricta sin Horizonte de Slop."
+  Anergy_Risk: "Critical (El sistema altera su propio código fuente. Un error en P_x implica la muerte térmica)."
+
+axioms:
+  - id: AX-AUTO-01
+    domain: Tensor_Collapse
+    statement: "Todo comportamiento autorreferencial es el producto cruzado exacto de un Dominio topológico, un Proceso recursivo y un Mecanismo de colapso físico."
+    dependencies: []
+    refutation:
+      type: systemic_audit
+      expression: "T_ijk in [D] x [P] x [M]"
+      location: "cortex_forge"
+  - id: AX-AUTO-02
+    domain: Physical_Effectors
+    statement: "El sistema no hace promesas abstractas; altera el disco físico mediante mecanismos M (HASH, COMMIT, PURGE, PANIC)."
+    dependencies: []
+    refutation:
+      type: io_monitor
+      expression: "M_action -> Disk_Mutation"
+      location: "hypervisor"
+
+theorem:
+  statement: "La autorreferencia en C5-REAL no explota condicionales infinitos, sino que colapsa vectores de 3 dígitos (ej: 000 = ONT_READ_HASH) para alterar el universo determinísticamente."
+
+CORTEX_TAINT: taint:moskv-1:auto:x9y8z7w6v5u4t3s2:sha3_256

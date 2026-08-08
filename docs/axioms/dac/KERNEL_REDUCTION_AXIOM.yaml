@@ -1,0 +1,48 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+dac_version: "2.0-Hybrid"
+project: "Teorema-Robinson-Moskv"
+domain: "KERNEL_REDUCTION_AXIOM"
+platform_targets: ["Architecture", "Systemic_Refactoring"]
+memory_models: ["Minimal_Core_Calculus", "Kolmogorov_Complexity"]
+abi: ["Generators", "Initial_Object_0"]
+
+Claim: "Todo dominio formal posee un objeto inicial — un kernel irreducible — del cual toda estructura derivada emerge por composición morfísmica. Nombrar bien es identificar el kernel K(D)."
+Proof:
+  Base: "autoreferential/KERNEL_REDUCTION_AXIOM.md"
+  Range: "[Category Theory Initial Objects, Minimal Sufficient Representation]"
+  Confidence: "C5-REAL"
+
+Isomorphisms:
+  - '"Física" -> "Lagrangiano / Acción Mínima"'
+  - '"Teoría de la Información" -> "Kolmogorov K(x)"'
+  - '"Golden Axiom" -> "KRA (vía Lema de Yoneda)"'
+
+Blast_Radius_Matrix:
+  Vector: "Reducción forzosa antes de expansión. La complejidad es derivada, no primitiva."
+  Blast_Radius: "Architecture Sprawl, Token Entropy."
+  Target_Invariant: "Propiedad Universal (KRA) - Existencia única de isomorfismos generativos."
+  Anergy_Risk: "High (Si el modelo no puede expresarse como composición finita desde su kernel, el modelo contiene anergía)."
+
+axioms:
+  - id: AX-KRA-01
+    domain: Reduccion_Mandatoria
+    statement: "Toda intervención sobre un dominio desconocido comienza por la identificación de su kernel, no por la acumulación estocástica de ejemplos."
+    dependencies: []
+    refutation:
+      type: methodological_audit
+      expression: "len(generadores) < len(derivados)"
+      location: "architectural_review"
+  - id: AX-KRA-02
+    domain: Kolmogorov_Judge
+    statement: "La calidad de toda representación se mide por su distancia a K(x). Todo token que exceda K(x) es anergía pura."
+    dependencies: []
+    refutation:
+      type: static_analysis
+      expression: "AST_Complexity <= O(K(x))"
+      location: "compression_linter"
+
+theorem:
+  statement: "Si el Golden Axiom se respeta, el kernel K(D) colapsa el objeto inicial, y el código 'se escribe solo' porque los morfismos desde el objeto inicial son únicos."
+
+CORTEX_TAINT: taint:moskv-1:kra:f1a2g3h4j5k6l7m8:sha3_256
