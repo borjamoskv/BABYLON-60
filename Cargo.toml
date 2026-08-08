@@ -7,6 +7,11 @@ members = [
     "src/cortex-engine/cortex-persist/kernel_rs",
     "src/cortex-engine/strike-rs",
     "src/moskv-daemon",
+    "src/legion-engine/legion-core",
+    "src/legion-engine/legion-apfs",
+    "src/legion-engine/legion-exergy",
+    "src/legion-engine/legion-healer",
+    "src/legion-engine/legion-cli",
     "tests/compliance-suite"
 ]
 
