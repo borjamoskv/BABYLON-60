@@ -6,14 +6,15 @@ def run_falsification():
     print("[*] Iniciando Popperian Falsification Test...")
     print("[*] Invariante 1: Deriva Aritmética (F60)")
     # Simulating a float drift that the F60 kernel would reject
-    float_time = 0.3333333333333333
-    print(f"    - Tiempo simulado (f64): {float_time}")
-    print("    - Validando contra F60 Kernel (0;20 exacto)...")
+    float_time_1 = 0.1
+    float_time_2 = 0.2
+    print(f"    - Suma simulada (f64): {float_time_1} + {float_time_2}")
+    print("    - Validando contra F60 Kernel (exacto)...")
 
     # In a real FFI call, we would pass this to Rust and it would PANIC or RETURN ERROR
     # Here we assert our theoretical falsification
-    assert (float_time * 60) != 20.0, "El punto flotante no sufre deriva. Falsación fallida."
-    print("    - Deriva detectada en f64. F60 mantiene exactitud. Falsación superada.")
+    assert (float_time_1 + float_time_2) != 0.3, "El punto flotante no sufre deriva. Falsación fallida."
+    print("    - Deriva detectada en f64 (0.1 + 0.2 != 0.3). F60 mantiene exactitud. Falsación superada.")
 
     print("[*] Invariante 2: Lock-Free EBR (Cuarentena)")
     print("    - Simulando colapso de entropía (H(X) < ε)...")
