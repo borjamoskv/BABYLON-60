@@ -104,5 +104,10 @@
 - **Marco de Confiabilidad ISO/IEC JTC 1/SC 42**: Toda atestación de robustez, precisión y ciberseguridad emitida por el runtime DEBE estructurarse conforme a los controles de gobernanza de **ISO/IEC 42001:2023** y las guías de estandarización de **ENISA**.
 - **Neutralización de la Carga de la Prueba (Directiva 2024/2853/EU)**: Frente al régimen de responsabilidad objetiva por productos defectuosos y software de IA, el sistema utiliza los recibos SCITT (Merkle Tree SHA3-256) generados en Ring-0 como **prueba pericial determinista y verificable**, refutando de forma concluyente cualquier presunción legal de defecto o imprevisibilidad estocástica en litigios corporativos.
 
+## Invariante de Isomorfismo Silicio-Semántico (Barreras Hardware & Decidibilidad CF-GKAT)
+- **Isomorfismo de Barrera y Guarda Formal**: Las barreras de memoria en ensamblador (`dmb ishld` / `dmb ish` en ARMv9 y `mfence` / `lock` en x86-64) son el isomorfo físico estricto de las guardas de predicado en el álgebra CF-GKAT. Ninguna transición de estado en el Ring-0 Kernel se ejecuta sin sincronización explícita entre la guarda booleana y la barrera de silicio.
+- **Termodinámica de Borrado de Bits (Landauer Floor)**: El paso irreversible de superposición estocástica a un slot de memoria sellado en `SharedManifest` (64 bytes) disipa exactamente la anergía requerida por el principio de Landauer (ΔQ ≥ k_B · T · ln(2) · ΔI), garantizando ejecución determinista sin fugas de estado ni costes de inferencia residuales.
+
+
 
 
