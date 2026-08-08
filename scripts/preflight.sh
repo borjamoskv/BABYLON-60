@@ -20,6 +20,14 @@ python3 -m py_compile scripts/*.py
 echo "[+] 3. Verificando compilación de Rust..."
 cargo check --workspace
 
+# 4. Verificación de Alineación C-ABI (SharedManifest == 64B)
+echo "[+] 4. Verificando alineación exacta de C-ABI FFI (64 bytes)..."
+python3 -c "import sys; sys.path.insert(0, 'src/cortex-engine'); from cortex.ipc.bridge import SharedManifest; import ctypes; assert ctypes.sizeof(SharedManifest) == 64, 'Desalineación C-ABI detectada en SharedManifest'"
+
+# 5. Escaneo por Enjambre Legión-100 sobre todo el monorepositorio
+echo "[+] 5. Ejecutando escaneo paralelo por la Legión de 100 Agentes..."
+python3 scratch/legion_100_agents_full_monorepo.py
+
 echo "=================================================="
 echo " [✓] Preflight superado. Cero anergía detectada."
 echo "=================================================="
