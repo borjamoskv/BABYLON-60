@@ -1,0 +1,49 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+dac_version: "2.0-Hybrid"
+project: "Teorema-Robinson-Moskv"
+domain: "DDD_MATRIX"
+platform_targets: ["Software_Architecture", "Domain_Driven_Design"]
+memory_models: ["State_Space_10K", "Exergy"]
+abi: ["P_x_I_x_A_x_ISO", "Bounded_Context"]
+
+Claim: "El espacio dimensional del Diseño Orientado a Dominios no se mide en prosa estocástica, sino en el producto cruzado de Capas, Topologías y Estados (10000 nodos)."
+Proof:
+  Base: "ddd/matrix.md"
+  Range: "[P_001-P_010, I_001-I_010, A_001-A_010, ISO_001-ISO_010]"
+  Confidence: "C5-REAL"
+
+Isomorphisms:
+  - '"BoundedContext" -> "Microservice"'
+  - '"DomainEvent" -> "Event Sourcing Log"'
+  - '"AggregateRoot" -> "Actor Model"'
+  - '"ValueObject" -> "Pure Functional Type"'
+
+Blast_Radius_Matrix:
+  Vector: "Necrosis estructural por Anemic Domain Models, God Aggregates o filtraciones de Infraestructura."
+  Blast_Radius: "Base de Datos, Lógica de Negocio, Fronteras Transaccionales."
+  Target_Invariant: "Aggregate_Transaction_Boundary (UN Aggregate muta por transacción)."
+  Anergy_Risk: "High (El DDD mal aplicado 'Tactical-Only DDD' genera un monolito distribuido)."
+
+axioms:
+  - id: AX-DDD-01
+    domain: Value_Object_Immutability
+    statement: "Un Value Object jamás altera su estado interno post-instanciación (Cero setters). Su identidad ES su estado."
+    dependencies: []
+    refutation:
+      type: static_analysis
+      expression: "has_setter(ValueObject) implies compilation_error"
+      location: "compiler_plugin"
+  - id: AX-DDD-02
+    domain: Domain_Isolation
+    statement: "El Dominio no tiene dependencias entrantes. Importar `java.sql` o `requests` en el dominio es traición (Inversión de Dependencia)."
+    dependencies: []
+    refutation:
+      type: ast_dependency_check
+      expression: "imports(Domain, Infrastructure) == 0"
+      location: "ci_pipeline"
+
+theorem:
+  statement: "Las 10000 reglas tácticas del DDD se derivan algebraicamente cruzando los Vectores Base (P x I x A x ISO), aniquilando la necesidad de heurísticas narrativas."
+
+CORTEX_TAINT: taint:moskv-1:ddd:m1n2p3q4r5s6t7u8:sha3_256
