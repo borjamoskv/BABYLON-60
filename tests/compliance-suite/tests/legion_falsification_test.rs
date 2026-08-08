@@ -29,6 +29,7 @@ fn test_scitt_merkle_tree_reproducibility() {
 #[test]
 fn test_immunity_shield_rejection_of_critical_paths() {
     let immune_paths = [
+        // macOS
         "/Users/user/.ssh/id_rsa",
         "/Users/user/.ssh/known_hosts",
         "/Users/user/.gnupg/secring.gpg",
@@ -36,6 +37,17 @@ fn test_immunity_shield_rejection_of_critical_paths() {
         "/Users/user/Documents/Thesis.docx",
         "/Users/user/Desktop/Notes.txt",
         "/Applications/Xcode.app/Contents/_CodeSignature/CodeResources",
+        // Windows
+        "C:\\Users\\User\\.ssh\\id_ed25519",
+        "C:\\Users\\User\\AppData\\Roaming\\Microsoft\\Protect\\S-1-5-21\\masterkey",
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "C:\\Users\\User\\Documents\\Financials.xlsx",
+        "C:\\Users\\User\\NTUSER.DAT",
+        // Linux
+        "/etc/shadow",
+        "/etc/sudoers",
+        "/home/user/.ssh/authorized_keys",
+        "/boot/vmlinuz",
     ];
 
     for path_str in &immune_paths {
