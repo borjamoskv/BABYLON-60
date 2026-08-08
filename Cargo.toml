@@ -12,6 +12,7 @@ members = [
     "src/legion-engine/legion-exergy",
     "src/legion-engine/legion-healer",
     "src/legion-engine/legion-cli",
+    "src/legion-engine/legion-lang",
     "tests/compliance-suite"
 ]
 

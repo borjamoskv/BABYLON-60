@@ -15,6 +15,7 @@ legion-core = { path = "../legion-core" }
 legion-apfs = { path = "../legion-apfs" }
 legion-exergy = { path = "../legion-exergy" }
 legion-healer = { path = "../legion-healer" }
+legion-lang = { path = "../legion-lang" }
 clap = { version = "4.4", features = ["derive"] }
 ratatui = "0.26"
 crossterm = "0.27"

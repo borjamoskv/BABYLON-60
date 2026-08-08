@@ -26,6 +26,13 @@ libc = "0.2"
 ciborium = "0.2"
 coset = "0.3"
 
+[dev-dependencies]
+legion-core = { path = "../../src/legion-engine/legion-core" }
+legion-apfs = { path = "../../src/legion-engine/legion-apfs" }
+legion-exergy = { path = "../../src/legion-engine/legion-exergy" }
+legion-lang = { path = "../../src/legion-engine/legion-lang" }
+legion-healer = { path = "../../src/legion-engine/legion-healer" }
+
 [build-dependencies]
 cc = "1.0"
 
