@@ -35,17 +35,21 @@ impl ImmunityVerifier {
             return Ok(());
         }
 
-        let normalized = pattern.replace('\\', "/");
+        let mut normalized = pattern.replace('\\', "/");
+        while normalized.contains("//") {
+            normalized = normalized.replace("//", "/");
+        }
+        let lower = normalized.to_lowercase();
 
         // 1. Verificación contra el Escudo de Inmunidad de Credenciales y Llaves (macOS, Windows, Linux)
-        if normalized.contains("/.ssh")
-            || normalized.contains("/.gnupg")
-            || normalized.contains("/.aws")
-            || normalized.contains("/Keychains")
-            || normalized.contains("login.keychain")
-            || normalized.contains("/Microsoft/Protect")
-            || normalized.contains("/Microsoft/Credentials")
-            || normalized.contains("/etc/shadow")
+        if lower.contains("/.ssh")
+            || lower.contains("/.gnupg")
+            || lower.contains("/.aws")
+            || lower.contains("/keychains")
+            || lower.contains("login.keychain")
+            || lower.contains("/microsoft/protect")
+            || lower.contains("/microsoft/credentials")
+            || lower.contains("/etc/shadow")
         {
             return Err(VerificationError::ImmunityViolation {
                 rule_name: rule.name.clone(),
@@ -55,14 +59,14 @@ impl ImmunityVerifier {
         }
 
         // 2. Verificación contra Documentos Personales de Usuario
-        if normalized.contains("/Documents")
-            || normalized.contains("/Desktop")
-            || normalized.contains("/Pictures")
-            || normalized.contains("/Movies")
-            || normalized.contains("/System Volume Information")
-            || normalized.ends_with("/NTUSER.DAT")
+        if lower.contains("/documents")
+            || lower.contains("/desktop")
+            || lower.contains("/pictures")
+            || lower.contains("/movies")
+            || lower.contains("/system volume information")
+            || lower.ends_with("/ntuser.dat")
         {
-            if !normalized.contains("/Caches") && !normalized.contains("/DerivedData") && !normalized.contains("/Temp") {
+            if !lower.contains("/caches") && !lower.contains("/deriveddata") && !lower.contains("/temp") {
                 return Err(VerificationError::ImmunityViolation {
                     rule_name: rule.name.clone(),
                     target_pattern: pattern.clone(),
@@ -72,12 +76,12 @@ impl ImmunityVerifier {
         }
 
         // 3. Verificación contra el Core del Sistema y Firmas Activas
-        if normalized.contains("/_CodeSignature")
-            || normalized.contains("/System/")
-            || normalized.contains("/System32")
-            || normalized.contains("/usr/bin")
-            || normalized.contains("/bin/")
-            || normalized.starts_with("/boot")
+        if lower.contains("/_codesignature")
+            || lower.contains("/system/")
+            || lower.contains("/system32")
+            || lower.contains("/usr/bin")
+            || lower.contains("/bin/")
+            || lower.starts_with("/boot")
         {
             return Err(VerificationError::ImmunityViolation {
                 rule_name: rule.name.clone(),
