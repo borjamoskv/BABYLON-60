@@ -1,5 +1,5 @@
 // C5-REAL EXERGY CERTIFIED
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { Target, Zap } from 'lucide-react';
 
 export function IdeaValuator() {
