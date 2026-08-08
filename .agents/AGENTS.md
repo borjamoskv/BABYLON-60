@@ -100,4 +100,9 @@
 - **Prohibición de Cache-Line Splitting y False Sharing**: Ningún campo atómico de control (`status_flag`, `active_readers`, `epoch_id`) puede cruzar la frontera de una línea de caché L1/L2 física. Esto garantiza que las operaciones `CAS` y `fetch_sub` sean atómicas a nivel de bus de memoria sin bloqueos de bus lentos (*bus locks*) ni lecturas desgarradas (*torn reads*).
 - **Conformidad Formal con Modelos de Memoria (ARM DDI 0487H & Intel Vol 3A)**: En arquitecturas ARMv8/ARMv9 con ordenamiento de memoria débil (*relaxed memory ordering*), las transiciones de estado de slots DEBEN utilizar explícitamente semántica `Acquire/Release` con barreras de memoria completas (`dmb ish`) para evitar que el pipeline out-of-order reordene escrituras de payload antes del commit del digest SHA-256.
 
+## Invariante de Mapeo Regulatorio y Estándares Internacionales (ISO/IEC 42001, ENISA & PLD 2024/2853)
+- **Marco de Confiabilidad ISO/IEC JTC 1/SC 42**: Toda atestación de robustez, precisión y ciberseguridad emitida por el runtime DEBE estructurarse conforme a los controles de gobernanza de **ISO/IEC 42001:2023** y las guías de estandarización de **ENISA**.
+- **Neutralización de la Carga de la Prueba (Directiva 2024/2853/EU)**: Frente al régimen de responsabilidad objetiva por productos defectuosos y software de IA, el sistema utiliza los recibos SCITT (Merkle Tree SHA3-256) generados en Ring-0 como **prueba pericial determinista y verificable**, refutando de forma concluyente cualquier presunción legal de defecto o imprevisibilidad estocástica en litigios corporativos.
+
+
 
