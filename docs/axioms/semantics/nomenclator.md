@@ -32,6 +32,9 @@ Técnica experimental por la cual nunca se valida a un agente mediante sus éxit
 ### 2.4 Identificación por Saturación de Entropía
 Técnica observacional para comprimir el comportamiento de un LLM a sus primitivas categóricas mínimas (MDL), forzándolo a proyectar la matriz de covarianzas de su estrategia y desechando el ruido estocástico (metáforas, verbosidad).
 
+### 2.5 Brecha de Certeza (Isomorfismo de Primos Gemelos)
+La asimetría irreductible entre la *Certeza Estadística* (heurísticas probabilísticas, inferencia de LLMs, *Dynamis* al 99.9%) y la *Certeza Formal* (demostración acotada determinista, *Entelecheia*). Establece que la convergencia estocástica, por abrumadora que sea su evidencia empírica, carece de validez ontológica hasta que no es encapsulada por una cota estricta (análogo a la cota de separación de Zhang/Maynard) y validada por el Kernel L3.
+
 ---
 
 ## 3. Equivalencia Bio-Silicio (AX-BIO-SIL-01)
