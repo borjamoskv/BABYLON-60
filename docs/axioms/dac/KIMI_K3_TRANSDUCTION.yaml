@@ -1,0 +1,47 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+dac_version: "2.0-Hybrid"
+project: "Teorema-Robinson-Moskv"
+domain: "KIMI_K3_TRANSDUCTION"
+platform_targets: ["Kimi-K3", "KV-Cache", "Inference_Swarm"]
+memory_models: ["State_Conservation", "Thermodynamic_Friction"]
+abi: ["Session_State", "Reasoning_Effort"]
+
+Claim: "The K3 Transduction Functor (Ω202) enforces KV-Cache isolation, prevents Mid-Session Shifts, and couples the reasoning effort exclusively to task complexity to prevent Landauer violations."
+Proof:
+  Base: "13_KIMI_K3_TRANSDUCTION_INVARIANT.md"
+  Range: "[State Conservation, Thermodynamic Friction Asymmetry]"
+  Confidence: "C5-REAL"
+
+Isomorphisms:
+  - '"Mid-Session Model Shift" -> "Topological KV-Cache Collapse"'
+  - '"r = max on O(1) tasks" -> "Landauer Violation (Illusory Teleonomy)"'
+
+Blast_Radius_Matrix:
+  Vector: "Rechazo de hibridación en la misma sesión y exigencia de conservación perfecta del estado asimétrico."
+  Blast_Radius: "Kimi-K3 Inference Engine y Session Managers."
+  Target_Invariant: "KIMI K3 CONTEXTUAL TRANSDUCTION INVARIANT (Ω202)"
+  Anergy_Risk: "High (Quemar 1M tokens sin colapso físico de estado es Anergía pura)."
+
+axioms:
+  - id: AX-KIMI-K3-01
+    domain: KV_Cache_Isolation
+    statement: "Un cambio de modelo en mitad de sesión está prohibido. M_{t+n} debe ser kimi-k3 si M_t lo era. El cambio exige un colapso destructivo del buffer."
+    dependencies: []
+    refutation:
+      type: runtime_monitor
+      expression: "M_{t} != M_{t+n} implies drop(KV_Cache) && start(New_Session)"
+      location: "orchestrator"
+  - id: AX-KIMI-K3-02
+    domain: Thermodynamic_Friction
+    statement: "El parámetro de esfuerzo de razonamiento (r) debe estar acoplado a la complejidad física de la tarea."
+    dependencies: []
+    refutation:
+      type: static_analysis
+      expression: "complexity == O(1) implies r == low"
+      location: "task_dispatcher"
+
+theorem:
+  statement: "Si el funtor K3 preserva el estado asimétrico y acopla el esfuerzo a la complejidad, la disipación de anergía es proporcional al colapso físico, logrando Autopoiesis C5-REAL."
+
+CORTEX_TAINT: taint:moskv-1:kimik3:j0k1l2m3n4o5p6q7:sha3_256
