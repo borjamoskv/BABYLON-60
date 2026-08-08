@@ -2,6 +2,7 @@
 import "./index.css";
 import { IntervaloProhibidoSequelRoot } from "./Composition";
 import { GonFictionComposition, GON_FICTION_DURATION_FRAMES } from "./GonFictionComposition";
+import { LegionComposition, LEGION_DURATION_FRAMES } from "./LegionComposition";
 import { Composition } from "remotion";
 
 export const RemotionRoot: React.FC = () => {
@@ -12,6 +13,14 @@ export const RemotionRoot: React.FC = () => {
         id="GonFiction8Bit"
         component={GonFictionComposition}
         durationInFrames={GON_FICTION_DURATION_FRAMES}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="LegionSOTA"
+        component={LegionComposition}
+        durationInFrames={LEGION_DURATION_FRAMES}
         fps={30}
         width={1080}
         height={1920}
