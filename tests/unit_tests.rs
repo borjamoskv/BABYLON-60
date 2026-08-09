@@ -195,10 +195,10 @@ fn inv3_aphairesis_bound_min_energy() {
 
 #[test]
 fn inv3_topological_compressor_trait() {
-    use babylon_60::thermodynamics::{TopologicalCompressor, AphairesisBound};
+    use babylon_60::thermodynamics::{TopologicalCompressorFixed, AphairesisBound};
 
     struct TestSheafCompressor;
-    impl TopologicalCompressor for TestSheafCompressor {
+    impl TopologicalCompressorFixed for TestSheafCompressor {
         const EFFECTIVE_BITS_ERASED: f64 = 128.0;
         const KL_DIVERGENCE: f64 = 0.05;
         const DESIGN_TEMP_K: f64 = 300.0;
@@ -212,7 +212,7 @@ fn inv3_topological_compressor_trait() {
 
 #[test]
 fn sheaf_fusion_respects_extended_landauer() {
-    use babylon_60::thermodynamics::{TopologicalCompressor, SheafFusionOperator};
+    use babylon_60::thermodynamics::{TopologicalCompressorFixed, SheafFusionOperator};
 
     let expected = 1.380649e-23 * 320.0 * core::f64::consts::LN_2 * (47.3 + 0.892 / core::f64::consts::LN_2);
     let relative_error = (SheafFusionOperator::MIN_ENERGY_JOULES - expected).abs() / expected;
@@ -229,7 +229,7 @@ fn sheaf_fusion_respects_extended_landauer() {
 #[test]
 fn generated_sheaf_fusion_operator_calibrated() {
     use babylon_60::generated_aphairesis_constants::SheafFusionOperator;
-    use babylon_60::thermodynamics::TopologicalCompressor;
+    use babylon_60::thermodynamics::TopologicalCompressorFixed;
 
     let bound = SheafFusionOperator::aphairesis_bound();
     assert!(bound.min_energy_joules() > 0.0);
@@ -240,7 +240,7 @@ fn generated_sheaf_fusion_operator_calibrated() {
 
 #[test]
 fn measurement_below_bound_is_rejected() {
-    use babylon_60::thermodynamics::{TopologicalCompressor, SheafFusionOperator};
+    use babylon_60::thermodynamics::{TopologicalCompressorFixed, SheafFusionOperator};
     let op = SheafFusionOperator;
     let impossible_measurement = SheafFusionOperator::MIN_ENERGY_JOULES * 0.99;
     
@@ -249,14 +249,14 @@ fn measurement_below_bound_is_rejected() {
 
 #[test]
 fn measurement_at_bound_is_accepted() {
-    use babylon_60::thermodynamics::{TopologicalCompressor, SheafFusionOperator};
+    use babylon_60::thermodynamics::{TopologicalCompressorFixed, SheafFusionOperator};
     let op = SheafFusionOperator;
     assert!(op.validate_measurement(SheafFusionOperator::MIN_ENERGY_JOULES).is_ok());
 }
 
 #[test]
 fn symbolic_message_spsc_layout_and_bound() {
-    use babylon_60::thermodynamics::{TopologicalCompressor, SheafFusionOperator, SymbolicMessage};
+    use babylon_60::thermodynamics::{TopologicalCompressorFixed, SheafFusionOperator, SymbolicMessage};
     use core::mem::size_of;
 
     let payload = [42u8; 48];
