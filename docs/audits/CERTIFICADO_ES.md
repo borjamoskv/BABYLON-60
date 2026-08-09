@@ -1,3 +1,9 @@
+---
+title: Certificado de Cumplimiento Normativo de IA (AESIA)
+status: Causal-Determinist
+version: 4.0.0
+---
+
 # Certificado de Cumplimiento Normativo de IA (BABYLON-60 v4.0)
 **Reglamento de Inteligencia Artificial de la UE (Reglamento UE 2024/1689 / AESIA)**  
 **Autoridad de Supervisión:** `Agencia Española de Supervisión de Inteligencia Artificial (AESIA) / UE`  
