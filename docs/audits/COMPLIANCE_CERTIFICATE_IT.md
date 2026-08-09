@@ -1,4 +1,10 @@
-# Certificato di Conformità Regolatoria IA (BABYLON-60 v4.0)
+---
+title: Certificato di Conformità Normativa IA IT — BABYLON-60 v4.0
+status: Causal-Determinist
+version: 4.0.0
+---
+
+# Certificato di Conformità Normativa IA (BABYLON-60 v4.0)
 **Regolamento Europeo sull'IA (Regolamento UE 2024/1689 / AgID)**  
 **Autoridad de Supervisión:** `Agenzia per l'Italia Digitale (AgID) / Garante Privacy / UE`  
 **ID Certificado:** `EU-AIA-CERT-3012BCBED43A1AF3`  
