@@ -144,10 +144,14 @@ pub const fn to_q16_16_from_x1000(val_x1000: u32) -> Q16_16 {
     ((val_x1000 as u64 * 65536 + 500) / 1000) as Q16_16
 }
 
+/// Cota de Aphairesis para la disipación energética mínima de un sistema.
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct AphairesisBound {
+    /// Bits efectivos borrados en formato Q16.16.
     pub effective_bits_erased_q16: Q16_16,
+    /// Divergencia KL en formato Q16.16.
     pub kl_divergence_q16: Q16_16,
+    /// Temperatura de diseño en Kelvin.
     pub temperature_k: u32,
 }
 
@@ -155,6 +159,7 @@ impl AphairesisBound {
     /// Constante de Boltzmann * ln2 * 1e21 * 2^32 (Q32.32)
     pub const K_B_LN2_ZJ_Q32: u64 = 41102555;
 
+    /// Calcula la energía mínima en zeptojulios para este límite.
     #[inline]
     #[must_use]
     pub const fn min_energy_zeptojoules(&self) -> u64 {
@@ -168,6 +173,7 @@ impl AphairesisBound {
         ((energy_zj_q48 + (1u64 << 47)) >> 48) as u64
     }
 
+    /// Comprueba si una medición de energía en zeptojulios es físicamente válida.
     #[inline]
     #[must_use]
     pub const fn is_physically_valid(&self, measured_energy_zj: u64) -> bool {
@@ -178,16 +184,24 @@ impl AphairesisBound {
 /// Error retornado cuando una medición empírica de energía viola la cota de Landauer extendida.
 #[derive(Debug, Clone, PartialEq)]
 pub struct ThermodynamicViolation {
+    /// Energía mínima esperada en zeptojulios.
     pub expected_min_zj: u64,
+    /// Energía medida en zeptojulios.
     pub actual_zj: u64,
+    /// Ratio de déficit en formato Q16.16.
     pub deficit_ratio_q16: Q16_16,
 }
 
+/// Trait para compresores topológicos con parámetros estáticos en tiempo de compilación.
 pub trait TopologicalCompressorFixed {
+    /// Bits efectivos borrados multiplicados por 1000.
     const EFFECTIVE_BITS_ERASED_X1000: u32;
+    /// Divergencia KL multiplicada por 1000.
     const KL_DIVERGENCE_X1000: u32;
+    /// Temperatura de diseño en Kelvin.
     const DESIGN_TEMP_K: u32;
 
+    /// Cota mínima de energía en zeptojulios calculada en tiempo de compilación.
     const MIN_ENERGY_ZEPTOJOULES: u64 = {
         let bound = AphairesisBound {
             effective_bits_erased_q16: to_q16_16_from_x1000(Self::EFFECTIVE_BITS_ERASED_X1000),
@@ -197,6 +211,7 @@ pub trait TopologicalCompressorFixed {
         bound.min_energy_zeptojoules()
     };
 
+    /// Obtiene la cota de Aphairesis correspondiente a este compresor.
     fn aphairesis_bound() -> AphairesisBound {
         AphairesisBound {
             effective_bits_erased_q16: to_q16_16_from_x1000(Self::EFFECTIVE_BITS_ERASED_X1000),
@@ -205,6 +220,7 @@ pub trait TopologicalCompressorFixed {
         }
     }
 
+    /// Valida si una medición empírica de energía satisface la cota física.
     fn validate_measurement(&self, measured_zj: u64) -> Result<(), ThermodynamicViolation> {
         if measured_zj < Self::MIN_ENERGY_ZEPTOJOULES {
             let deficit = if measured_zj == 0 {
@@ -223,6 +239,7 @@ pub trait TopologicalCompressorFixed {
     }
 }
 
+/// Operador de fusión Sheaf de alta densidad exergética.
 #[derive(Debug, Clone, Copy, Default)]
 pub struct SheafFusionOperator;
 
@@ -232,16 +249,21 @@ impl TopologicalCompressorFixed for SheafFusionOperator {
     const DESIGN_TEMP_K: u32 = 320;
 }
 
+/// Mensaje simbólico alineado en memoria (64 bytes) para colas SPSC de bajo consumo.
 #[repr(C, align(64))]
 #[derive(Debug, Clone, Copy)]
 pub struct SymbolicMessage<C: TopologicalCompressorFixed> {
+    /// Payload binario de 48 bytes.
     pub payload: [u8; 48],
+    /// Cota energética en zeptojulios.
     pub energy_bound_zj: u64,
+    /// Timestamp lógico determinista.
     pub logical_timestamp: u64,
     _phantom: core::marker::PhantomData<C>,
 }
 
 impl<C: TopologicalCompressorFixed> SymbolicMessage<C> {
+    /// Crea un nuevo mensaje simbólico inicializando la cota exergética automáticamente.
     pub fn new(payload: [u8; 48], logical_timestamp: u64) -> Self {
         Self {
             payload,
@@ -252,6 +274,7 @@ impl<C: TopologicalCompressorFixed> SymbolicMessage<C> {
     }
 }
 
+/// Verificación constante del bound check para SheafFusionOperator.
 pub const _SHEAF_FUSION_BOUND_CHECK: u64 = SheafFusionOperator::MIN_ENERGY_ZEPTOJOULES;
 
 const _: () = assert!(
