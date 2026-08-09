@@ -80,6 +80,61 @@ pub struct SharedManifest {
     pub _padding: [u8; 16],
 }
 
+impl SharedManifest {
+    /// Crea una nueva instancia de `SharedManifest` inicializada con estado `RUNNING` (const fn).
+    ///
+    /// ## Ejemplo
+    /// ```rust
+    /// use babylon_60::manifest::SharedManifest;
+    /// static MANIFEST: SharedManifest = SharedManifest::new();
+    /// ```
+    #[must_use]
+    pub const fn new() -> Self {
+        Self {
+            status_flag: AtomicU32::new(RUNNING),
+            seq: AtomicU32::new(0),
+            epoch_id: AtomicU64::new(0),
+            payload_hash: [
+                AtomicU64::new(0),
+                AtomicU64::new(0),
+                AtomicU64::new(0),
+                AtomicU64::new(0),
+            ],
+            _padding: [0u8; 16],
+        }
+    }
+
+    /// Alias de `new()` para inicialización constante en `static`.
+    #[must_use]
+    pub const fn zeroed() -> Self {
+        Self::new()
+    }
+}
+
+impl Default for SharedManifest {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl core::fmt::Debug for SharedManifest {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        let status = self.status_flag.load(core::sync::atomic::Ordering::Relaxed);
+        let seq = self.seq.load(core::sync::atomic::Ordering::Relaxed);
+        let epoch = self.epoch_id.load(core::sync::atomic::Ordering::Relaxed);
+        let h0 = self.payload_hash[0].load(core::sync::atomic::Ordering::Relaxed);
+        let h1 = self.payload_hash[1].load(core::sync::atomic::Ordering::Relaxed);
+        let h2 = self.payload_hash[2].load(core::sync::atomic::Ordering::Relaxed);
+        let h3 = self.payload_hash[3].load(core::sync::atomic::Ordering::Relaxed);
+        f.debug_struct("SharedManifest")
+            .field("status_flag", &format_args!("{:#010X}", status))
+            .field("seq", &seq)
+            .field("epoch_id", &epoch)
+            .field("payload_hash", &[h0, h1, h2, h3])
+            .finish()
+    }
+}
+
 // ---------------------------------------------------------------------------
 // INV-1: verificación estática del layout (tiempo de compilación)
 // ---------------------------------------------------------------------------
@@ -115,6 +170,7 @@ pub enum HaltReason {
 
 impl HaltReason {
     /// Representación textual para el campo `motivo` del recibo COSE_Sign1.
+    #[must_use]
     pub fn as_str(self) -> &'static str {
         match self {
             HaltReason::SeqRetryExhausted  => "SEQ_RETRY_EXHAUSTED",
@@ -125,3 +181,12 @@ impl HaltReason {
         }
     }
 }
+
+impl core::fmt::Display for HaltReason {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        f.write_str(self.as_str())
+    }
+}
+
+#[cfg(feature = "std")]
+impl std::error::Error for HaltReason {}

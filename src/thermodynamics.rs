@@ -70,13 +70,24 @@ const _THERMO_ASSERTS: () = {
 
 /// Verifica que un valor de `seq` es observable (par = Entelecheia).
 /// Los valores impares (Dynamis) no son observables por protocolo.
+///
+/// # Ejemplo
+/// ```
+/// use babylon_60::thermodynamics::{is_entelecheia, is_dynamis, is_valid_writer_transition};
+///
+/// assert!(is_entelecheia(0));
+/// assert!(is_dynamis(1));
+/// assert!(is_valid_writer_transition(0, 2));
+/// ```
 #[inline]
+#[must_use]
 pub const fn is_entelecheia(seq: u32) -> bool {
     seq & 1 == 0
 }
 
 /// Verifica que un valor de `seq` está en potencia (impar = Dynamis).
 #[inline]
+#[must_use]
 pub const fn is_dynamis(seq: u32) -> bool {
     seq & 1 != 0
 }
@@ -84,7 +95,34 @@ pub const fn is_dynamis(seq: u32) -> bool {
 /// Verifica que una transición seq es válida para el escritor único.
 /// par(n) → impar(n+1) → par(n+2): la única secuencia legal.
 #[inline]
+#[must_use]
 pub const fn is_valid_writer_transition(before: u32, after: u32) -> bool {
     // after == before.wrapping_add(2) y after es par
     after.wrapping_sub(before) == 2 && is_entelecheia(after)
 }
+
+// ---------------------------------------------------------------------------
+// Extensiones Axiomáticas PSAFE v3.0: Aphairesis & CALM (INV-3)
+// ---------------------------------------------------------------------------
+
+/// [AX-APHAIRESIS-01]: Cota mínima de disipación entrópica por compresión/eliminación de datos.
+///
+/// Dado un número de bits eliminados $\Delta H = N - M$, calcula la exergía mínima
+/// disipada por el Principio de Landauer en attojoules × 1000 a T=300K:
+/// $$\Delta Q_{\text{aphairesis}} \ge \Delta H \times (k_B \cdot T \cdot \ln 2)$$
+#[inline]
+#[must_use]
+pub const fn aphairesis_entropy_loss_aj_x1000(bits_erased: u64) -> u64 {
+    bits_erased.saturating_mul(LANDAUER_FLOOR_AJ_PER_BIT_X1000)
+}
+
+/// [AX-CALM-01]: Verificación de monotonicidad estricta de época según el Teorema CALM.
+///
+/// Una transición de época $e_1 \to e_2$ es lógicamente monotónica si y solo si $e_2 > e_1$.
+/// Las transiciones monotónicas garantizan la ausencia de coordinación global en hilos distribuidos.
+#[inline]
+#[must_use]
+pub const fn is_calm_monotonic_transition(prev_epoch: u64, new_epoch: u64) -> bool {
+    new_epoch > prev_epoch
+}
+

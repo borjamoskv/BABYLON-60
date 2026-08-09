@@ -112,7 +112,20 @@ fn abort_bare_metal() -> ! {
 /// Los lectores externos pueden usar esta función como guardia rápida
 /// antes de iniciar operaciones. Carga con `Acquire` para observar
 /// cualquier store previo con `Release` (incluido el de `epistemic_halt`).
+///
+/// # Ejemplo
+/// ```
+/// use babylon_60::manifest::{SharedManifest, POISONED};
+/// use babylon_60::halt::is_halted;
+/// use std::sync::atomic::Ordering;
+///
+/// let manifest = SharedManifest::new();
+/// assert!(!is_halted(&manifest));
+/// manifest.status_flag.store(POISONED, Ordering::Release);
+/// assert!(is_halted(&manifest));
+/// ```
 #[inline]
+#[must_use]
 pub fn is_halted(m: &SharedManifest) -> bool {
     m.status_flag.load(Ordering::Acquire) == POISONED
 }

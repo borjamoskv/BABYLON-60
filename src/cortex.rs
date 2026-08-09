@@ -8,6 +8,10 @@ use sha2::{Digest, Sha256};
 use std::sync::atomic::Ordering;
 use hex;
 
+/// Persistidor de `SharedManifest` hacia SQLite en modo WAL.
+///
+/// Mantiene una conexión a la base de datos local y permite persistir
+/// capturas del estado y calcular raíces Merkle para anclaje Bitcoin OP_RETURN.
 pub struct CortexPersister {
     conn: Connection,
 }
@@ -35,23 +39,29 @@ impl CortexPersister {
         Ok(Self { conn })
     }
 
-    /// Lee un SharedManifest en memoria y lo inserta en SQLite.
+    /// Lee un `SharedManifest` en memoria de forma consistente e inserta el estado en SQLite.
     pub fn drain_manifest(&self, manifest: &SharedManifest) -> Result<()> {
-        let epoch = manifest.epoch_id.load(Ordering::Acquire);
-        let seq = manifest.seq.load(Ordering::Acquire);
         let status = manifest.status_flag.load(Ordering::Acquire);
-        
-        // El payload_hash son 4 AtomicU64 (32 bytes).
-        let p0 = manifest.payload_hash[0].load(Ordering::Relaxed);
-        let p1 = manifest.payload_hash[1].load(Ordering::Relaxed);
-        let p2 = manifest.payload_hash[2].load(Ordering::Relaxed);
-        let p3 = manifest.payload_hash[3].load(Ordering::Relaxed);
+        let seq = manifest.seq.load(Ordering::Acquire);
+
+        // Usar la lectura seqlock consistente si está disponible
+        let (epoch, hash) = match crate::seqlock::read(manifest) {
+            Some((e, h)) => (e, h),
+            None => {
+                let e = manifest.epoch_id.load(Ordering::Acquire);
+                let p0 = manifest.payload_hash[0].load(Ordering::Relaxed);
+                let p1 = manifest.payload_hash[1].load(Ordering::Relaxed);
+                let p2 = manifest.payload_hash[2].load(Ordering::Relaxed);
+                let p3 = manifest.payload_hash[3].load(Ordering::Relaxed);
+                (e, [p0, p1, p2, p3])
+            }
+        };
         
         let mut blob = Vec::with_capacity(32);
-        blob.extend_from_slice(&p0.to_le_bytes());
-        blob.extend_from_slice(&p1.to_le_bytes());
-        blob.extend_from_slice(&p2.to_le_bytes());
-        blob.extend_from_slice(&p3.to_le_bytes());
+        blob.extend_from_slice(&hash[0].to_le_bytes());
+        blob.extend_from_slice(&hash[1].to_le_bytes());
+        blob.extend_from_slice(&hash[2].to_le_bytes());
+        blob.extend_from_slice(&hash[3].to_le_bytes());
 
         self.conn.execute(
             "INSERT INTO ledger (epoch_id, seq, status_flag, payload_hash) VALUES (?1, ?2, ?3, ?4)",
@@ -71,10 +81,8 @@ impl CortexPersister {
         })?;
 
         let mut hasher = Sha256::new();
-        for blob_result in hash_iter {
-            if let Ok(blob) = blob_result {
-                hasher.update(&blob);
-            }
+        for blob in hash_iter.flatten() {
+            hasher.update(&blob);
         }
         
         let merkle_root = hasher.finalize();

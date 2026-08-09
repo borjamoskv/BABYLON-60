@@ -194,17 +194,14 @@ pub fn emit_halt_receipt<S: Signer>(
     // ── Protected_Header ──────────────────────────────────────────────────
     // alg = SHAKE256 (−45); en producción separar alg de firma (EdDSA −8)
     // del alg de VDS (SHAKE256 −45).
+    // SCITT-22 §4.2: Protected_Header incluye CWT_Claims (label 15).
+    let cwt_claims = build_cwt_claims();
     let protected = HeaderBuilder::new()
         .algorithm(iana::Algorithm::EdDSA)
         .content_type(CONTENT_TYPE_HALT.to_string())
         .key_id(b"babylon60-halt-key".to_vec())
+        .value(LABEL_CWT_CLAIMS, coset::cbor::value::Value::Bytes(cwt_claims))
         .build();
-
-    // ── CWT_Claims en Protected_Header ────────────────────────────────────
-    // SCITT-22 §4.2: Protected_Header DEBE incluir CWT_Claims (label 15)
-    // con iss(1) y sub(2). coset no expone un setter nativo para label 15;
-    // se inyecta como campo de cabecera extra via rest_headers.
-    let cwt_claims = build_cwt_claims();
 
     // ── Construir COSE_Sign1 ───────────────────────────────────────────────
     let sign1 = CoseSign1Builder::new()
@@ -214,17 +211,7 @@ pub fn emit_halt_receipt<S: Signer>(
         .build();
 
     // Serializar a CBOR Tagged(18, ...)
-    let out = sign1.to_vec().unwrap_or_default();
-
-    // ── Anotar CWT_Claims y receipts en Unprotected_Header ────────────────
-    // En una implementación completa se añadiría receipts(394) con la prueba
-    // de inclusión Merkle de la TSA/SCITT. Aquí se retorna el Signed Statement
-    // sin el Receipt anidado; el Receipt se añade tras el anclaje externo.
-    // Ver: RFC 9942 §3.2 «Embedding Receipts».
-    let _ = cwt_claims; // usado conceptualmente; integrar con coset cuando
-                        // la API de cabeceras extra lo permita sin unsafe.
-
-    out
+    sign1.to_vec().unwrap_or_default()
 }
 
 // ---------------------------------------------------------------------------
