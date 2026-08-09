@@ -146,9 +146,8 @@ def generate_mamba(req: MambaInferenceRequest) -> dict[str, Any]:
         if parent_dir not in sys.path:
             sys.path.insert(0, parent_dir)
 
-        from core_graph_ledger import GraphLedger
         from babylon60.cortex_bpe_tokenizer import BPETokenizer
-        from cortex_mamba_network import MambaNetwork
+        from babylon60.cortex_mamba_network import MambaNetwork
         from net_mamba_ledger_engine import MambaLedgerEngine
 
         # JIT Initialization of lightweight Mamba Engine
