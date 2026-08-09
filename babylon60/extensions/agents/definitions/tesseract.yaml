@@ -2,7 +2,7 @@ metadata:
   cat_id: tesseract
   cat_type: agent
   version: 1.0.0
-  reality_level: C5-REAL
+  reality_level: Causal-Determinist
   owner: borjamoskv
   exergy_tier: P1
 name: TESSERACT-Ω
