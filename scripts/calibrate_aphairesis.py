@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 #!/usr/bin/env python3
 """
 calibrate_aphairesis.py — Generador de constantes axiomáticas para thermodynamics.rs (Capa 2)
@@ -10,7 +14,6 @@ Emite automáticamente `src/generated_aphairesis_constants.rs` con el bloque
 """
 
 import os
-import sys
 import numpy as np
 from scipy.spatial.distance import pdist, squareform
 from scipy.sparse.csgraph import minimum_spanning_tree

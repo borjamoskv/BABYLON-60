@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 #!/usr/bin/env python3
 """
 python_spsc_reader.py — Consumidor Multiproceso Python Zero-Copy (C-ABI FFI)
@@ -7,8 +11,6 @@ en el lado lector (lecturas puras sin invalidación de caché RFO).
 """
 
 import ctypes
-import os
-import sys
 
 # Definición del C-ABI de SharedManifest (64 bytes, align 64)
 class SharedManifestCTypes(ctypes.Structure):

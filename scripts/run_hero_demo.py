@@ -1,3 +1,7 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 #!/usr/bin/env python3
 """
 BABYLON-60 v4.0 Sovereign Hardened — Executable Hero Demo CLI
@@ -20,7 +24,6 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 from babylon60.compliance_exporter import EUAIActComplianceExporter
 from babylon60.attestation import MerkleCausalAnchor
 from babylon60.primitives.serialization_boundary import SerializationBoundary
-from babylon60.license_verifier import HybridLicenseVerifier
 
 
 def print_banner():
