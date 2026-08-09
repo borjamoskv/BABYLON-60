@@ -111,7 +111,9 @@ pub struct SheafFusionOperator;
 impl TopologicalCompressor for SheafFusionOperator {{
     const EFFECTIVE_BITS_ERASED: f64 = {calib_data['effective_bits_erased']:.6f};
     const KL_DIVERGENCE: f64 = {calib_data['kl_divergence']:.6f};
+    const DESIGN_TEMP_K: f64 = {calib_data['design_temp_k']:.1f};
 }}
+
 """
     os.makedirs(os.path.dirname(output_filepath), exist_ok=True)
     with open(output_filepath, "w", encoding="utf-8") as f:
