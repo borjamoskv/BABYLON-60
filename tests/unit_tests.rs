@@ -201,13 +201,60 @@ fn inv3_topological_compressor_trait() {
     impl TopologicalCompressor for TestSheafCompressor {
         const EFFECTIVE_BITS_ERASED: f64 = 128.0;
         const KL_DIVERGENCE: f64 = 0.05;
+        const DESIGN_TEMP_K: f64 = 300.0;
     }
 
-    let bound: AphairesisBound = TestSheafCompressor::aphairesis_bound(300.0);
+    let bound: AphairesisBound = TestSheafCompressor::aphairesis_bound();
     assert_eq!(bound.effective_bits_erased, 128.0);
     assert_eq!(bound.kl_divergence, 0.05);
-    assert!(bound.min_energy_joules() > 0.0);
+    assert!(TestSheafCompressor::MIN_ENERGY_JOULES > 0.0);
 }
+
+#[test]
+fn sheaf_fusion_respects_extended_landauer() {
+    use babylon_60::thermodynamics::{TopologicalCompressor, SheafFusionOperator};
+
+    let expected = 1.380649e-23 * 320.0 * core::f64::consts::LN_2 * (47.3 + 0.892 / core::f64::consts::LN_2);
+    let relative_error = (SheafFusionOperator::MIN_ENERGY_JOULES - expected).abs() / expected;
+    
+    assert!(
+        relative_error < 1e-10,
+        "Axiomatic bound mismatch: got {}, expected {} (rel err: {})",
+        SheafFusionOperator::MIN_ENERGY_JOULES,
+        expected,
+        relative_error
+    );
+}
+
+#[test]
+fn measurement_below_bound_is_rejected() {
+    use babylon_60::thermodynamics::{TopologicalCompressor, SheafFusionOperator};
+    let op = SheafFusionOperator;
+    let impossible_measurement = SheafFusionOperator::MIN_ENERGY_JOULES * 0.99;
+    
+    assert!(op.validate_measurement(impossible_measurement).is_err());
+}
+
+#[test]
+fn measurement_at_bound_is_accepted() {
+    use babylon_60::thermodynamics::{TopologicalCompressor, SheafFusionOperator};
+    let op = SheafFusionOperator;
+    assert!(op.validate_measurement(SheafFusionOperator::MIN_ENERGY_JOULES).is_ok());
+}
+
+#[test]
+fn symbolic_message_spsc_layout_and_bound() {
+    use babylon_60::thermodynamics::{TopologicalCompressor, SheafFusionOperator, SymbolicMessage};
+    use core::mem::size_of;
+
+    let payload = [42u8; 48];
+    let msg = SymbolicMessage::<SheafFusionOperator>::new(payload, 1001);
+
+    assert_eq!(msg.logical_timestamp, 1001);
+    assert_eq!(msg.energy_bound_j, SheafFusionOperator::MIN_ENERGY_JOULES);
+    assert!(size_of::<SymbolicMessage<SheafFusionOperator>>() <= 64);
+}
+
 
 
 
