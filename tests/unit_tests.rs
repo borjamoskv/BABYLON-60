@@ -267,6 +267,24 @@ fn symbolic_message_spsc_layout_and_bound() {
     assert!(size_of::<SymbolicMessage<SheafFusionOperator>>() <= 64);
 }
 
+#[test]
+fn spsc_ring_buffer_push_pop() {
+    use babylon_60::spsc_ring::SpscRingBuffer;
+
+    let ring = SpscRingBuffer::new();
+    let hash = [1u64, 2u64, 3u64, 4u64];
+
+    assert!(ring.pop().is_none());
+    assert!(ring.push(100, &hash));
+
+    let pop_res = ring.pop();
+    assert!(pop_res.is_some());
+    let (epoch, read_hash) = pop_res.unwrap();
+    assert_eq!(epoch, 100);
+    assert_eq!(read_hash, hash);
+}
+
+
 
 
 
