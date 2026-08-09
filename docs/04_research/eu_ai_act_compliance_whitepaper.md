@@ -2,23 +2,31 @@
 title: Determinismo Causal como Cumplimiento — BABYLON-60 y EU AI Act
 status: Causal-Determinist
 version: 4.0.0
+author: Borja Moskv
+jurisdiction: UE (Reglamento UE 2024/1689) / Global
 ---
 
 # El Determinismo Causal como Cumplimiento: Arquitectura BABYLON-60 v4.0 para Sistemas de IA de Alto Riesgo
 
 **Whitepaper Técnico y Normativo sobre la Resolución de los Artículos 9, 10, 11, 12, 13 y 14 del EU AI Act (Reglamento UE 2024/1689)**
 
-> Borja Moskv · babylon60.com · Agosto 2026 · Licencia Sovereign Exclusion v1.0
+> **Autor:** Borja Moskv · babylon60.com · Agosto 2026 · Licencia Sovereign Exclusion v1.0  
+> **Ámbito:** Sistemas de IA Autónomos de Alto Riesgo (Banca, Salud, Infraestructura Crítica, Defensa)
+
+---
+
+> [!IMPORTANT]
+> **Tesis Central:** La rendición de cuentas (*accountability*) en la Era de la Agencia Autónoma no puede basarse en similitud vectorial ni en guardrails probabilísticos. BABYLON-60 v4.0 convierte el cumplimiento regulatorio del **EU AI Act (Reglamento UE 2024/1689)** en un subproducto matemático ineludible mediante determinismo causal, aritmética sexagesimal exacta ($F60$) y verificación formal en Lean 4.
 
 ---
 
 ## 1. RESUMEN EJECUTIVO (Executive Summary)
 
 ### 1.1 El Problema: La Incompatibilidad de la IA Probabilística con la Ley
-El despliegue corporativo de Agentes de IA Autónomos en 2026 ha chocado frontalmente con el marco regulatorio global. Los modelos de lenguaje (LLMs) operan mediante inferencia probabilística sobre tensores flotantes —son cajas negras impredecibles. Cuando un agente toma una decisión financiera, médica o legal, no puede justificar **por qué** la tomó ni demostrar que su historial no ha sido manipulado.
+El despliegue corporativo de Agentes de IA Autónomos en 2026 ha chocado frontalmente con el marco regulatorio global. Los modelos de lenguaje (LLMs) operan mediante inferencia probabilística sobre tensores flotantes ($f64$ / $fp16$) —son cajas negras impredecibles. Cuando un agente toma una decisión financiera, médica o legal, no puede justificar **por qué** la tomó ni demostrar que su historial no ha sido manipulado.
 
 ### 1.2 La Solución: Encapsulamiento Causal y Substrato de Verificación
-BABYLON-60 v4.0 no intenta alterar la ética o la aleatoriedad latente del LLM. En su lugar, encapsula el agente dentro de un **Substrato de Ejecución Verificable (Local-First Kernel)** en Rust que impone restricciones termodinámicas, aritmética sexagesimal exacta (`F60`) y verificación formal en Lean 4.
+BABYLON-60 v4.0 no intenta alterar la aleatoriedad latente del LLM. En su lugar, encapsula el agente dentro de un **Substrato de Ejecución Verificable (Local-First Kernel)** en Rust que impone restricciones termodinámicas, aritmética sexagesimal exacta ($F60$) y verificación formal en Lean 4.
 
 ### 1.3 El Resultado: Inmunidad Legal y "Caja Negra" Aeronáutica
 Si el agente falla, entra en bucles de limerencia o sufre un intento de inyección de prompt, el sistema **no destruye la evidencia ni alucina en silencio**. En su lugar, ejecuta un `CRITICAL HALT` con **Cuarentena Forense WORM (Write Once Read Many)**, congelando el estado y emitiendo un certificado auditable anclado a hardware TPM 2.0 / TEE en menos de 24 horas.
@@ -30,7 +38,7 @@ Si el agente falla, entra en bucles de limerencia o sufre un intento de inyecci�
 ### 2.1 El Coste de la Opacidad
 Bajo el **EU AI Act (Reglamento UE 2024/1689)**, desplegar un sistema de IA de alto riesgo sin trazabilidad ni gobernanza conlleva multas administrativas de hasta **€35.000.000 o el 7% de la facturación global anual** de la empresa (lo que sea mayor).
 
-### 2.2 Por qué los Enfoques Actuales Fallan ante un Auditor
+### 2.2 Comparativa de Enfoques de Gobernanza
 
 | Enfoque Tradicional | Fallo Técnico / Legal | Consecuencia Regulatoria |
 | :--- | :--- | :--- |
@@ -38,25 +46,94 @@ Bajo el **EU AI Act (Reglamento UE 2024/1689)**, desplegar un sistema de IA de a
 | **Bases de Datos Vectoriales (RAG)** | Almacenan *similitud coseno*, no *linaje causal*. No prueban integridad temporal. | Rechazado bajo el Art. 10 (Gobernanza de Datos) |
 | **Logs en Texto Plano / JSON** | Modificables por administradores locales o procesos comprometidos. | Rechazado bajo el Art. 12 (Conservación de Registros) |
 | **Guardrails de Software en Python** | Latencia elevada y riesgo de sobrepaso por GIL de Python. | Inviable para alta frecuencia y tiempo real |
+| **BABYLON-60 v4.0 (Kernel Causal)** | **Linaje inmutable WORM + Aritmética Sexagesimal $F60$ + Demostración Lean 4.** | **✅ CONFORME (Inmunidad Legal)** |
 
 ---
 
 ## 3. ARQUITECTURA BABYLON-60 v4.0: INGENIERÍA DE LA CONFIANZA
 
-### 3.1 El Dominio Temporal `F60` (Precisión Absoluta)
-Para erradicar la deriva de coma flotante (`f64`) que corrompe el orden de los eventos en agendas de ejecución larga, BABYLON-60 opera con una tupla racional sexagesimal pura:
+### 3.1 Flujo Causal de Ejecución
 
-$$\text{F60} = \{ \text{Numerator: u64}, \text{Base60\_Scale: u8} \}$$
+```mermaid
+sequenceDiagram
+    autonumber
+    participant LLM as Agente LLM (Estocástico)
+    participant Kernel as b60_kernel (Rust TCB)
+    participant Ledger as BFT DAG Ledger (WORM)
+    participant TPM as Hardware TPM 2.0 / Enclave
+    participant Lean as Proof Engine (Lean 4)
 
-`1/3` de hora se representa como `0;20` (20 minutos exactos). La causalidad temporal se mantiene matemáticamente inalterable ($\Delta t = 0$ drift), permitiendo certificar el orden relativo exacto de las operaciones ante tribunales y auditores.
+    LLM->>Kernel: Propone Transición de Estado (Intent)
+    Kernel->>Kernel: Valida Aritmética Sexagesimal F60 & Límite de Exergía
+    alt Anomalía o Salto Dissonante Detectado
+        Kernel->>Ledger: Emite CRITICAL HALT + Congelamiento Forense WORM
+        Kernel->>TPM: Cryptographic Evidence Lock Quote
+        Kernel-->>LLM: Proceso Interrumpido (Cuarentena <24h)
+    else Estado Nominal Causal
+        Kernel->>Ledger: Append Event (prev_hash, Lamport_t, signature)
+        Kernel->>Lean: Exporta Proof IR (Lemas Automáticos)
+        Kernel-->>LLM: ACK de Ejecución Verificada
+    end
+```
 
-### 3.2 Verificación Formal con Lean 4
-El compilador de BABYLON-60 traduce las trazas de ejecución `.b60` a una Representación Intermedia de Pruebas (`proof.ir`). Este archivo alimenta automáticamente al demostrador de teoremas **Lean 4**, generando lemas formales estáticos (`BabylonTrace.lean`). La documentación técnica exige prueba matemática, no declaraciones de intención.
+### 3.2 El Dominio Temporal $F60$ (Precisión Absoluta)
+Para erradicar la deriva de coma flotante ($f64$) que corrompe el orden de los eventos en agendas de ejecución larga, BABYLON-60 opera con una tupla racional sexagesimal pura:
 
-### 3.3 El Motor de Exergía (`strike_rs`)
-Mediante PyO3 y la eliminación del Global Interpreter Lock (GIL) de Python, el kernel en Rust inspecciona el consumo de exergía computacional del agente en microsegundos, podando ramas ineficientes antes de que consuman recursos o entren en bucles.
+$$\text{F60} = \left\langle n \in \mathbb{U}64, \; s \in \mathbb{U}8 \right\rangle, \quad v = \frac{n}{60^s}$$
+
+$1/3$ de hora se representa como $\text{F60}(20, 1) = 0;20 = 20\text{ minutos exactos}$. La causalidad temporal se mantiene matemáticamente inalterable ($\Delta t = 0$ drift), permitiendo certificar el orden relativo exacto de las operaciones ante tribunales y auditores.
+
+### 3.3 Verificación Formal con Lean 4
+El compilador de BABYLON-60 traduce las trazas de ejecución `.b60` a una Representación Intermedia de Pruebas (`proof.ir`). Este archivo alimenta automáticamente al demostrador de teoremas **Lean 4**, generando lemas formales estáticos (`BabylonTrace.lean`):
+
+$$\forall e_i, e_j \in \mathcal{E}, \quad e_i \prec e_j \implies \text{Hash}(e_i) \in \text{Parents}(e_j) \;\land\; \text{Lamport}(e_i) < \text{Lamport}(e_j)$$
+
+La documentación técnica exige prueba matemática, no declaraciones de intención.
 
 ---
+
+## 4. MAPEO EXHAUSTIVO DE ARTÍCULOS DE LA LEY (EU AI Act)
+
+### 4.1 Artículo 9: Sistema de Gestión de Riesgos
+> *"Se establecerá, aplicará, documentará y mantendrá un sistema de gestión de riesgos..."*
+
+- **Resolución BABYLON-60:** El podador termodinámico de AST intercepta loops de limerencia y saturaciones numéricas mediante un **Interruptor de Hombre Muerto** (`CRITICAL HALT`).
+
+### 4.2 Artículo 10: Gobernanza de Datos y Linaje
+> *"Los conjuntos de datos de entrenamiento, validación y prueba estarán sujetos a prácticas de gobernanza..."*
+
+- **Resolución BABYLON-60:** Cada entrada consumida por el agente queda encadenada causalmente mediante hashes BLAKE3 inmutables en la estructura DAG.
+
+### 4.3 Artículo 11: Documentación Técnica
+> *"La documentación técnica de un sistema de IA de alto riesgo se elaborará antes de que dicho sistema se comercialice..."*
+
+- **Resolución BABYLON-60:** Generación automática de certificados de auditoría exportables en markdown/PDF con lemas de Lean 4 verificados estáticamente.
+
+### 4.4 Artículo 12: Conservación de Registros (Logging)
+> *"Los sistemas de IA de alto riesgo permitirán el registro automático de eventos (logs) a lo largo de su ciclo de vida..."*
+
+- **Resolución BABYLON-60:** Ledger WORM no manipulable con timestamping monotónico de Lamport y firma criptográfica Ed25519.
+
+### 4.5 Artículo 13: Transparencia y Explicabilidad
+> *"Los sistemas de IA de alto riesgo se diseñarán de modo que su funcionamiento sea suficientemente transparente..."*
+
+- **Resolución BABYLON-60:** Exportación en JSON-LD de la red causal completa de decisiones, permitiendo a cualquier auditor inspeccionar el orden exacto de los acontecimientos.
+
+### 4.6 Artículo 14: Supervisión Humana
+> *"Los sistemas de IA de alto riesgo se diseñarán y desarrollarán de forma que puedan ser supervisados por personas físicas..."*
+
+- **Resolución BABYLON-60:** Integración nativa con la interfaz armónica **Tonnetz**, permitiendo detectar disonancias contextuales geométricamente y congelar la ejecución mediante un solo clic.
+
+---
+
+## 5. CONCLUSIÓN Y HOJA DE RUTA
+
+BABYLON-60 v4.0 transforma el cumplimiento del EU AI Act de un obstáculo regulatorio a una ventaja competitiva infranqueable. Al anclar la ejecución agéntica a principios de física, matemáticas y verificación formal, las empresas obtienen inmunidad legal demostrable ante supervisores como AESIA, BSI y CNIL.
+
+---
+
+<sub>BABYLON-60 v4.0 Whitepaper Técnico · Borja Moskv · Licencia Sovereign Exclusion v1.0</sub>
+
 
 ## 4. MAPEO TÉCNICO-NORMATIVO (MATRIZ DE CUMPLIMIENTO)
 
