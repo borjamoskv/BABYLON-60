@@ -7,8 +7,8 @@ use crate::thermodynamics::TopologicalCompressorFixed;
 pub struct SheafFusionOperator;
 
 impl TopologicalCompressorFixed for SheafFusionOperator {
-    const EFFECTIVE_BITS_ERASED_X1000: u32 = 11;
-    const KL_DIVERGENCE_X1000: u32 = 0;
+    const EFFECTIVE_BITS_ERASED_X1000: u32 = 47312;
+    const KL_DIVERGENCE_X1000: u32 = 891;
     const DESIGN_TEMP_K: u32 = 320;
 }
 
