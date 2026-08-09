@@ -182,6 +182,8 @@ def audit_tests() -> dict[str, int | str]:
 
 
 def crystallize_status(report: dict[str, object]) -> str:
+    if not STATUS_FILE.exists():
+        STATUS_FILE.write_text("# BABYLON-60 Status Ledger\n\n| Date | Action | Git Sentinel |\n| --- | --- | --- |\n", encoding="utf-8")
     with open(STATUS_FILE, "rb") as f:
         status_hash = hashlib.sha3_256(f.read()).hexdigest()
     return status_hash
