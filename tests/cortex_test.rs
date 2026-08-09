@@ -1,9 +1,10 @@
+#![cfg(feature = "cortex-persist")]
+
 use babylon_60::cortex::CortexPersister;
 use babylon_60::manifest::{SharedManifest, RUNNING};
-use std::sync::atomic::{AtomicU32, AtomicU64, Ordering};
-use std::thread;
-use std::time::Instant;
 use std::fs;
+use std::sync::atomic::{AtomicU32, AtomicU64, Ordering};
+use std::time::Instant;
 
 fn new_manifest() -> &'static SharedManifest {
     let m = Box::new(SharedManifest {
