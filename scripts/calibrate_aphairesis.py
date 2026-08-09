@@ -114,6 +114,7 @@ impl TopologicalCompressorFixed for SheafFusionOperator {{
     const DESIGN_TEMP_K: u32 = {int(calib_data['design_temp_k'])};
 }}
 
+
 """
     os.makedirs(os.path.dirname(output_filepath), exist_ok=True)
     with open(output_filepath, "w", encoding="utf-8") as f:
