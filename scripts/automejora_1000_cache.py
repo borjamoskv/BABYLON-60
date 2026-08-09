@@ -7,8 +7,11 @@ import sqlite3
 import sys
 from typing import Any
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from cortex_inference import CACHE_DB_PATH, CortexInferenceEngine  # noqa: E402
+from pathlib import Path
+REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+
+from babylon60.core.cortex_inference import CACHE_DB_PATH, CortexInferenceEngine  # noqa: E402
 
 VOCAB: list[str] = [
     "causar",
