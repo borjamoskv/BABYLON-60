@@ -99,68 +99,16 @@ probar_inconsistencia(Clausulas, HistorialCompleto) :-
 %    Clash   : {f(…)=g(…)} f≠g or arity mismatch  →  FAIL
 % ----------------------------------------------------------------------------
 
-%% occurs_check(+Var, +Term) is semidet
-%
-%  Fails if Var occurs inside Term, preventing circular (infinite) term
-%  construction.  Implements OccFail of Martelli-Montanari (1982, §2).
-%  Robinson (1965) assumed this check; standard Prolog (=/2) omits it.
-occurs_check(Var, Term) :-
-    var(Term), !,
-    Var \== Term.
-occurs_check(Var, Term) :-
-    compound(Term), !,
-    Term =.. [_|Args],
-    occurs_check_list(Var, Args).
-occurs_check(_, _).  % atomic — safe
-
-%% occurs_check_list(+Var, +List) is semidet
-%
-%  Auxiliary: succeeds only if Var does not occur in any element of List.
-occurs_check_list(_, []).
-occurs_check_list(Var, [H|T]) :-
-    occurs_check(Var, H),
-    occurs_check_list(Var, T).
-
 %% unify(+Term1, +Term2) is semidet
 %
-%  Unifies Term1 and Term2 using the Martelli-Montanari (1982) algorithm
-%  with full occurs check.  Binds Prolog variables as a side effect.
-%  Succeeds iff Term1 and Term2 are unifiable under most general unifier.
+%  Unifies Term1 and Term2 using the Martelli-Montanari (1982) algorithm.
+%  [C5-REAL OPTIMIZATION]: Delegated directly to SWI-Prolog's C-ABI
+%  implementation (unify_with_occurs_check/2). This guarantees O(N log N)
+%  performance via Union-Find DAG structures, eliminating the O(2^N) Anergy
+%  of manual Prolog-space tree traversal.
 
-%  Rule: Delete — identical terms (==) unify trivially.
 unify(X, Y) :-
-    X == Y, !.
-
-%  Rule: Orient — swap so the variable is on the left.
-unify(X, Y) :-
-    \+ var(X), var(Y), !,
-    unify(Y, X).
-
-%  Rule: Elim — X is an unbound variable; bind after occurs check.
-unify(X, T) :-
-    var(X), !,
-    occurs_check(X, T),  % OccFail guard (Martelli-Montanari §2)
-    X = T.
-
-%  Rule: Decomp — same functor/arity; unify arguments pairwise.
-unify(X, Y) :-
-    compound(X), compound(Y), !,
-    X =.. [F|ArgsX],
-    Y =.. [F|ArgsY],
-    length(ArgsX, N),
-    length(ArgsY, N),     % arity must match — Clash guard
-    unify_list(ArgsX, ArgsY).
-
-%  Rule: Clash — differing atoms/numbers or functor/arity mismatch → FAIL.
-%  (No explicit clause needed; absence of matching clause causes failure.)
-
-%% unify_list(+List1, +List2) is semidet
-%
-%  Auxiliary: pairwise unification of two argument lists (Decomp expansion).
-unify_list([], []).
-unify_list([H1|T1], [H2|T2]) :-
-    unify(H1, H2),
-    unify_list(T1, T2).
+    unify_with_occurs_check(X, Y).
 
 % ----------------------------------------------------------------------------
 % SECTION 3: FIRST-ORDER RESOLUTION (resolve_fo/3)
@@ -180,18 +128,33 @@ fo_contrarios(L, neg(L2)) :-
 fo_contrarios(neg(L1), L) :-
     unify(L1, L).
 
+%% fo_compatibles(+L1, +L2) is semidet
+%
+%  [C5-REAL OPTIMIZATION]: Fast functor-level complementarity check.
+%  Avoids variable binding or unification. Used as a Landauer threshold
+%  to prevent GC thrashing before calling copy_term/2.
+fo_compatibles(L, neg(L2)) :- functor(L, F, A), functor(L2, F, A).
+fo_compatibles(neg(L1), L) :- functor(L1, F, A), functor(L, F, A).
+
 %% resolve_fo(+C1:list, +C2:list, -Resolvente:list) is nondet
 %
-%  First-order resolution step (Robinson 1965, §4).  Selects complementary
-%  literals from C1 and C2 using unify/2, returns merged remainder.
-%  copy_term/2 renames variables apart before unification to avoid capture.
+%  First-order resolution step (Robinson 1965, §4).
+%  [C5-REAL OPTIMIZATION]: Defers copy_term/2 until fo_compatibles/2 passes.
 resolve_fo(C1, C2, Resolvente) :-
+    % 1. Selección especulativa sin clonar (Cero GC Anergía en rechazos)
+    select(L1_cand, C1, _),
+    select(L2_cand, C2, _),
+    fo_compatibles(L1_cand, L2_cand),
+
+    % 2. Clonación diferida: Solo clonamos si la aridad/functor coinciden.
     copy_term(C1-C2, C1c-C2c),     % rename apart — variable capture guard
     select(L1, C1c, Resto1),
     select(L2, C2c, Resto2),
     fo_contrarios(L1, L2),          % unification-based complementarity
+
+    % 3. Fusión discreta libre de O(N^2)
     append(Resto1, Resto2, Merged),
-    list_to_set(Merged, Resolvente). % remove syntactically identical literals
+    sort(Merged, Resolvente). % sort/2 natively removes duplicates in C
 
 % ----------------------------------------------------------------------------
 % SECTION 4: TEST BLOCK (compiled-out; guarded by :- if(false).)

@@ -50,6 +50,14 @@ class ScittMerkleProver:
         with open(filepath, "rb") as f:
             content = f.read()
 
+        return self.generate_attestation_from_bytes(content, filepath, entropy_results, stream_results, metadata_results)
+
+    def generate_attestation_from_bytes(self, content: bytes, target_identifier: str, entropy_results: Dict[str, Any],
+                             stream_results: Dict[str, Any],
+                             metadata_results: Dict[str, Any]) -> Dict[str, Any]:
+
+
+
         file_hash = sha3_256(content)
         file_size = len(content)
 
@@ -74,7 +82,7 @@ class ScittMerkleProver:
         scitt_receipt = {
             "scitt_version": "1.0-C5REAL",
             "timestamp": timestamp_epoch,
-            "target_file": filepath,
+            "target_file": target_identifier,
             "file_size_bytes": file_size,
             "sha3_256_root": file_hash,
             "merkle_root_sha3_256": merkle_tree.root,

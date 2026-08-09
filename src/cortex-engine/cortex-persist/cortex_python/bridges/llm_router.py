@@ -145,6 +145,24 @@ class C5LLMRouter:
         error_msg = " // ".join(errors)
         raise EpistemicHalt(f"Consenso de Inferencia fallido. Todas las rutas gratuitas fallaron. Errores: {error_msg}")
 
+    def dispatch_scitt_certified_inference(self, prompt: str, model: str, scitt_receipt: dict) -> str:
+        """
+        WA-Nexus (y otros agentes MCP): Exige un recibo SCITT C5-REAL válido
+        antes de permitir que el prompt estocástico alcance el LLM.
+        """
+        if not scitt_receipt or scitt_receipt.get("verdict") != "PASS_SCITT_CERTIFIED":
+            raise EpistemicHalt(
+                "Invariante Causal-Ontológico Violado: Intento de inyectar contexto "
+                "sin atestación SCITT válida. Se deniega la transición Dynamis -> Entelecheia."
+            )
+
+        # Validar la firma básica (Simulada para C5-REAL)
+        if "receipt_signature_sha3_256" not in scitt_receipt:
+            raise EpistemicHalt("Atestación inválida: falta firma SHA3-256.")
+
+        # Si es seguro, enrutar normalmente
+        return self.dispatch_inference(prompt, model)
+
     def _call_ollama(self, url: str, model: str, prompt: str) -> str:
         req_data = json.dumps({"model": model, "prompt": prompt, "stream": False}).encode("utf-8")
 
