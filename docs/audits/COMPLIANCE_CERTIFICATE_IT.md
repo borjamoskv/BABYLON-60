@@ -21,6 +21,26 @@ jurisdiction: IT / UE (Regolamento UE 2024/1689 / AgID)
 
 ---
 
+### Flusso di Validazione dell'Audit (Hardware-Enforced)
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant OP as Operatore Agente
+    participant B60 as Kernel BABYLON-60
+    participant DAG as WORM Merkle-DAG
+    participant TPM as TPM 2.0 Enclave
+    
+    OP->>B60: Richiesta (Clock F60 Sessagesimale)
+    B60->>DAG: Validazione Invarianti & Hash Precedente
+    DAG-->>B60: Stato Causale Confermato (Zero-Entropy)
+    B60->>TPM: Richiesta Firma Crittografica (BLAKE3)
+    TPM-->>B60: Attestazione Hardware Generata
+    B60-->>OP: Output Deterministico + Proof IR
+```
+
+---
+
 ## 1. Architettura di Certificazione Causale-Deterministica
 
 ```mermaid
