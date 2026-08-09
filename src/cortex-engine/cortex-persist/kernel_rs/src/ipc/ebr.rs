@@ -124,6 +124,10 @@ pub enum HaltReason {
     VarentropyLimitExceeded = 7,
     /// Detección de Anergía: Desbordamiento RLHF o prosa decorativa.
     RlhfBreakthrough = 8,
+    /// Colisión Diagramática: Ruptura de coherencia en algebra categórica (D6).
+    CategoricalObstruction = 9,
+    /// Antipatrón Categórico: Falla estructural de tipado detectada (D7).
+    AntipatternViolation = 10,
 }
 
 /// Error epistémico con contexto de diagnóstico.
