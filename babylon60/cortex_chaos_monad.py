@@ -147,7 +147,7 @@ def _purge_zombies(process: asyncio.subprocess.Process) -> None:
         except (ProcessLookupError, PermissionError):
             try:
                 process.kill()
-            except Exception:
+            except (ProcessLookupError, OSError):
                 pass
     else:
         process.kill()
@@ -200,7 +200,7 @@ async def run_chaos_monad(source_code: str, timeout_ms: int = 1000, use_seatbelt
             _purge_zombies(process)
             try:
                 await process.wait()
-            except Exception:
+            except (ProcessLookupError, OSError, asyncio.CancelledError):
                 pass
 
     stdout_str = stdout_bytes.decode("utf-8")
