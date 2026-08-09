@@ -187,7 +187,7 @@ def main() -> None:
             "",
             "---",
             "*Firma Criptográfica:* `Causal-Determinist / MOSKV-1 APEX / BORJAMOSKV`  ",
-            "*Motor de Indexación:* `c5_organize_captures_ultrathink.py`",
+            "*Motor de Indexación:* `c5_organize_captures.py`",
         ]
     )
     write_if_changed(INDEX_FILE, "\n".join(md_lines) + "\n")

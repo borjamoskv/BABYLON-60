@@ -76,7 +76,7 @@ async def sync_memory(engine: CortexEngine) -> SyncResult:
 
     if result.had_changes:
         logger.info(
-            "Sincronización completada: %d hechos nuevos (%d ghosts, %d errores, %d bridges)",
+            "Sincronización completada: %d hechos nuevos (%d ghosts, %d errors, %d bridges)",
             result.total,
             result.ghosts_synced,
             result.errors_synced,
@@ -133,7 +133,7 @@ async def _sync_ghosts(engine: CortexEngine, path: Path, result: SyncResult) -> 
 
 
 async def _sync_mistakes(engine: CortexEngine, path: Path, result: SyncResult) -> None:
-    """Sincroniza mistakes.jsonl - memoria de errores."""
+    """Sincroniza mistakes.jsonl - memoria de errors."""
     existing = await get_existing_contents(engine, None, fact_type="error")
     lines = [
         json.loads(line)

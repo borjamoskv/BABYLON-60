@@ -454,7 +454,7 @@ class ThoughtOrchestra(OrchestraIntrospectionMixin):
 
         ok_count = sum(1 for r in responses if r.ok)
         logger.info(
-            "🎭 Think completado: %.0fms | %d/%d exitosos",
+            "🎭 Think completed: %.0fms | %d/%d exitosos",
             total_ms,
             ok_count,
             len(responses),

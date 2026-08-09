@@ -65,7 +65,7 @@ class IHelpPurgeDaemon:
 
     async def _ensure_agent_registered(self, conn: aiosqlite.Connection, pub_key: str) -> None:
         """
-        Garantiza que la identidad soberana del Daemon esté registrada en la tabla agents.
+        Garantiza que la identidad soberana del Daemon esté registrada en la table agents.
         """
         import sqlite3
 

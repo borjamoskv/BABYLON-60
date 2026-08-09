@@ -21,7 +21,7 @@ from babylon60.engine import CortexEngine
 class ExergyFilter(BaseNodePostprocessor):
     """
     Causal-Determinist Exergy Filter for RAG nodes.
-    Aniquila la entropía (nodos basura) antes de que contaminen la inferencia.
+    Aniquila la entropía (nodes basura) antes de que contaminen la inferencia.
     "Elegir es CERRAR puertas."
     """
 

@@ -118,7 +118,7 @@ class FundingRateScanner:
                     )
 
         result = sorted(opportunities, key=lambda x: x.estimated_apr, reverse=True)
-        log.info("Scan completado: %d oportunidades viables de %d assets", len(result), len(assets))
+        log.info("Scan completed: %d oportunidades viables de %d assets", len(result), len(assets))
         return result
 
     async def _fetch_funding_rates(self, asset: str) -> dict[str, Decimal]:

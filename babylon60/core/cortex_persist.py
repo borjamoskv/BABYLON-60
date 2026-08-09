@@ -154,7 +154,7 @@ class CortexOntologyLedger:
         system_data["last_updated"] = now
         self._write_json(self.system_file, system_data)
 
-        print(f"[+] CORTEX PERSIST: Ontología cristalizada con éxito para {self.project_id}")
+        print(f"[+] CORTEX PERSIST: Ontología cristalizada con success para {self.project_id}")
 
 
 if __name__ == "__main__":

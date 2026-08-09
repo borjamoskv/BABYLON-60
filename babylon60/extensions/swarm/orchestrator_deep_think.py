@@ -37,7 +37,7 @@ class DeepThinkOrchestrator:
     DEEP THINK Protocol (11-Agent Mesh).
 
     Inyecta simultáneamente el contexto Waveform 4D (Spatial 8K + Temporal + Proof + Intention)
-    a los 10 agentes rasos. Cada uno devuelve un vector HDC de decisión.
+    a los 10 agents rasos. Cada uno devuelve un vector HDC de decisión.
     El 11º Astro (MARADONA_10_OMEGA) colapsa la función de onda de los 10 vectores.
     """
 
@@ -63,9 +63,9 @@ class DeepThinkOrchestrator:
 
     async def pulse(self, waveform_context: str, project: str = "SYSTEM") -> str:
         """
-        Inicia un ciclo de Deep Siege. Contexto inyectado a los 11.
+        Initiates un ciclo de Deep Siege. Contexto inyectado a los 11.
         """
-        logger.info("🌊 [DEEP THINK] Iniciando inyección de onda a los 10 Astros.")
+        logger.info("🌊 [DEEP THINK] Initiating inyección de onda a los 10 Astros.")
 
         # 1. Inyección 4D Simultánea con Válvula Termodinámica (Semaphore 3)
         sem = asyncio.Semaphore(3)
@@ -78,7 +78,7 @@ class DeepThinkOrchestrator:
         diagnostics = await self.minds_manager.convergence_pulse()
 
         # 3. Colapso de Función (El 11º Astro)
-        logger.info("⚡ [DEEP THINK] MARADONA_10_OMEGA ejecutando colapso de función.")
+        logger.info("⚡ [DEEP THINK] MARADONA_10_OMEGA executing collapse de función.")
         final_truth = await self._maradona_synthesis(hvs, text_context, diagnostics, project)
 
         return final_truth
@@ -153,7 +153,7 @@ class DeepThinkOrchestrator:
         if not maradona:
             raise RuntimeError("Maradona failed to manifest for Deep Think synthesis.")
 
-        # Realizar el colapso matemático HDC (Umbral por defecto en majority algebra)
+        # Realizar el collapse matemático HDC (Umbral por defecto en majority algebra)
         if len(hvs) > 1:
             collapsed_hv = bundle(*hvs)
         elif len(hvs) == 1:

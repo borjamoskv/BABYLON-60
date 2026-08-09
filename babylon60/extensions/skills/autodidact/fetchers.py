@@ -120,7 +120,7 @@ async def fetch_gidatu_browser(url: str) -> str:
 def _unwrap(res: Any) -> Any:
     """Pulmones envuelve el resultado en un dict con 'status' y 'data'. Lo desempaquetamos."""
     if isinstance(res, dict) and "status" in res and "data" in res:
-        # Es un wrapper de éxito de Circuit Breaker
+        # Es un wrapper de success de Circuit Breaker
         if res["status"] == "success":
             return res.get("data")
     if isinstance(res, dict) and res.get("status") == "queued":

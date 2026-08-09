@@ -7,7 +7,7 @@
 Sovereign Telemetry Gate (RADAR-Ω + KETER-OMEGA)
 ================================================
 Axiom: "Un swarm que no puede trazar probabilísticamente las decisiones
-de sus nodos es una bomba estocástica."
+de sus nodes es una bomba estocástica."
 
 Quality gate - NOT a dashboard.  If the evaluator scores an LLM output
 below threshold, the transaction is aborted *before* it can poison CORTEX

@@ -72,7 +72,7 @@ class GrillYouEngine:
 
         # Decision 1: Memory & State Sync Isolation
         d1 = DesignDecision(
-            question="¿Cuál es la estrategia de aislamiento de memoria para N>=100 agentes concurrentes?",
+            question="¿Cuál es la estrategia de aislamiento de memoria para N>=100 agents concurrentes?",
             options=[
                 "Isolated In-Memory Scope + Single-Writer BFT Actor",
                 "Shared Lock-Free RAM Table",

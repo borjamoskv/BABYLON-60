@@ -223,7 +223,7 @@ class SovereignQuotaManager:
         Args:
             tokens:   Tokens a consumir (1 = 1 API request).
             deadline: Tiempo máximo de espera total en segundos.
-            fast_reject: Si es True, falla inmediatamente en lugar de hacer backoff.
+            fast_reject: Si es True, failure inmediatamente en lugar de hacer backoff.
 
         Returns:
             True si se adquirió la cuota. Levanta QuotaRejectedError si expiró el deadline o si se superó max_waiters.

@@ -41,7 +41,7 @@ class GeminiCacheGateway:
     ) -> str | None:
         """
         Devuelve el URI remoto temporal de Gemini ('cachedContents/uuid'), creándolo si no existe.
-        Si la carga es demasiado pequeña o la API falla, devuelve None para hacer fallback a Inferencia Normal.
+        Si la carga es demasiado pequeña o la API failure, devuelve None para hacer fallback a Inferencia Normal.
         """
         if cache_key in self._local_to_remote:
             # We assume it's still alive without querying to save network latency.

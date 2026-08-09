@@ -210,7 +210,7 @@ class BFTLedgerActor:
                 except asyncio.CancelledError:
                     break
                 except BaseException as exc:
-                    # INV_C5_07 (falla ruidosa): el fallo mata al WORKER y aflora en el
+                    # INV_C5_07 (failure ruidosa): el fallo mata al WORKER y aflora en el
                     # supervisor (Zombie Actor Prevention en append()); cero auto-necrosis.
                     raise RuntimeError("FAIL-FAST: General Exception intercepted on queue get.") from exc
 
@@ -223,7 +223,7 @@ class BFTLedgerActor:
                     if not future.done():
                         future.set_exception(process_res[0])
                     self._queue.task_done()
-                    # INV_C5_07 (falla ruidosa): propagación al supervisor, cero SIGKILL.
+                    # INV_C5_07 (failure ruidosa): propagación al supervisor, cero SIGKILL.
                     raise RuntimeError(
                         f"FAIL-FAST: General Exception intercepted on process: {process_res[0]}"
                     ) from process_res[0]

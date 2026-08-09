@@ -53,7 +53,7 @@ async def daemon_ingesta_soberana(
     target_url: str, intent: str = "Aprender", force_bypass: bool = False
 ) -> dict[str, Any]:
     """Protocolo AUTODIDACT-Ω: Ingesta, Filtrado y Síntesis."""
-    logger.info("🫁 [PULMONES] Iniciando Ingesta: %s (Intent: %s)", target_url, intent)
+    logger.info("🫁 [PULMONES] Initiating Ingesta: %s (Intent: %s)", target_url, intent)
 
     # 1. Adquisición vía Orquestador de Fetchers
     texto_raw = await execute_cognitive_acquisition(intent, target_url)

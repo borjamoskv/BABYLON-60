@@ -115,17 +115,17 @@ class ChronosEngine:
         "high": [
             "Empezar a programar sin diseñar ni escribir especificaciones arquitectónicas (SKILL.md).",
             "Ignorar el desacoplamiento: mezclar interfaz gráfica con llamadas directas a base de datos.",
-            "Asumir que 'el caso feliz siempre ocurre' ignorando errores de red, permisos o asincronía.",
+            "Asumir que 'el caso feliz siempre ocurre' ignorando errors de red, permisos o asincronía.",
         ],
         "god": [
-            "Escribir código altamente acoplado que rompe el enjambre si un agente falla (No Byzantine Fault Tolerance).",
+            "Escribir código altamente acoplado que rompe el enjambre si un agente failure (No Byzantine Fault Tolerance).",
             "Construir sin persistencia. La amnesia en orquestadores complejos es la muerte sistémica.",
             "Saturar el modelo con prompts excesivamente largos sin comprimir primero en un Blackboard pattern.",
         ],
         "impossible": [
             "Desconectar el CHRONOS-1 y perder la métrica de ROI.",
             "Ignorar CORTEX en tareas asintóticas.",
-            "Olvidar compartir tu éxito en modo arrogancia.",
+            "Olvidar compartir tu success en modo arrogancia.",
         ],
     }
 

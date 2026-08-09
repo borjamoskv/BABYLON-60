@@ -11,7 +11,7 @@
 """Thought Orchestra Presets.
 
 Configuración estática del orquestador: modos de pensamiento, prompts de sistema,
-tabla de routing por modo, y configuración por defecto.
+table de routing por modo, y configuración por defecto.
 """
 
 from __future__ import annotations

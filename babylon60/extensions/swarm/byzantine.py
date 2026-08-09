@@ -58,7 +58,7 @@ class ByzantineConsensus:
     def _get_proposal_hash_sync(self, proposal: Any) -> str:
         """
         O(1) Memoized Hashing.
-        Evita el colapso O(N^2) de AST Parses cuando el orquestador evalúa
+        Evita el collapse O(N^2) de AST Parses cuando el orquestador evalúa
         el cuórum bizantino tras cada respuesta de agente en LEGION_10K.
         """
         raw_str = str(proposal)

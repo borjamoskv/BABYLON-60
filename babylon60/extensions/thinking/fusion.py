@@ -255,7 +255,7 @@ class ThoughtFusion:
     # ── Circuit Breaker ──────────────────────────────────────────
 
     async def _judge_safe(self, prompt: str, system: str, **kwargs) -> str | None:
-        """Llama al juez con retries + timeout. Devuelve None si falla."""
+        """Llama al juez con retries + timeout. Devuelve None si failure."""
         # Si no hay juez, fallar rápido
         if self._judge is None:
             return None

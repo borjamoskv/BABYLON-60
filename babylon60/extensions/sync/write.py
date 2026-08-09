@@ -129,7 +129,7 @@ async def export_to_json(engine: CortexEngine) -> WritebackResult:
 
     if result.had_changes:
         logger.info(
-            "Write-back completado: %d archivos actualizados, %d items exportados",
+            "Write-back completed: %d archivos actualizados, %d items exportados",
             result.files_written,
             result.items_exported,
         )
@@ -259,7 +259,7 @@ async def _writeback_mistakes(engine: CortexEngine, result: WritebackResult) -> 
 
     result.files_written += 1
     result.items_exported += len(lines)
-    logger.info("Write-back mistakes: %d errores", len(lines))
+    logger.info("Write-back mistakes: %d errors", len(lines))
 
 
 async def _writeback_bridges(engine: CortexEngine, result: WritebackResult) -> None:

@@ -271,7 +271,7 @@ class GRAMMYOrchestrator:
     async def run_pipeline(self, track: TrackContext) -> TrackContext:
         """Pipeline maestro con LLM + API adapters."""
         logger.info(
-            "--- Iniciando Pipeline de Síntesis para %s ---",
+            "--- Initiating Pipeline de Síntesis para %s ---",
             track.title,
         )
         track.state = TrackState.PRE_PRODUCTION
@@ -300,7 +300,7 @@ class GRAMMYOrchestrator:
         track.state = TrackState.POST_PRODUCTION
         track.gri_score = await self.evaluate_track_gri(track)
         track.state = TrackState.MASTERED
-        logger.info("Pipeline completado. GRI: %s", track.gri_score)
+        logger.info("Pipeline completed. GRI: %s", track.gri_score)
         return track
 
     async def run_pipeline_local(self, track: TrackContext) -> TrackContext:
