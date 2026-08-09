@@ -47,6 +47,8 @@ pub mod thermodynamics;
 pub mod generated_aphairesis_constants;
 /// Módulo de canal lock-free Single-Producer Single-Consumer (SPSC) Zero-Copy.
 pub mod spsc_ring;
+/// Módulo de Telemetría Termodinámica y medición de ciclos de reloj.
+pub mod telemetry;
 
 /// Módulo de interfaz C-ABI (FFI) para integración C/C++.
 pub mod ffi;
