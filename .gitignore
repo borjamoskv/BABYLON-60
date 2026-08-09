@@ -51,3 +51,4 @@ yt-dlp
 docs/PITCH_DECK.md
 docs/VALUATION_STRATEGY.md
 docs/05_gtm/
+tests/sequencer_spsc_harness

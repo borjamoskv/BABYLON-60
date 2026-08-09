@@ -42,6 +42,8 @@ path = "tests/differential/mod.rs"
 
 [dependencies]
 sha2 = "0.10"
+coset = "0.3"
+
 
 [dev-dependencies]
 proptest = "1.0"
