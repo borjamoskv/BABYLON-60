@@ -1,3 +1,9 @@
+---
+title: BABYLON-60 — A Formal Infrastructure for Verifiable AI Agents
+status: Causal-Determinist
+version: 1.0.0
+---
+
 # BABYLON-60: A Formal Infrastructure for Verifiable AI Agents
 
 **Technical Whitepaper v1.0**

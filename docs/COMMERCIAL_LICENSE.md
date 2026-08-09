@@ -1,3 +1,9 @@
+---
+title: BABYLON-60 Commercial License (Enterprise Tier)
+status: Causal-Determinist
+version: 1.0.0
+---
+
 # BABYLON-60 Commercial License (Enterprise Tier)
 
 > **Version 1.0** — Motor Causal Principal CITADEL

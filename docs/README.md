@@ -1,3 +1,9 @@
+---
+title: BABYLON-60 Documentation Hub
+status: Causal-Determinist
+version: 4.0.0
+---
+
 # BABYLON-60 Documentation Hub (v4.0 Sovereign Hardened)
 
 Welcome to the central documentation index for **BABYLON-60 v4.0**.

@@ -34,4 +34,41 @@ theorem writer_step_preserves_entelecheia (s1 s2 : SeqState) :
   intro h
   exact h.2.2
 
+/-- [AX-CALM-01]: CALM Theorem Epoch Monotonicity -/
+def isCalmMonotonic (prev_epoch new_epoch : Nat) : Prop :=
+  new_epoch > prev_epoch
+
+/-- Theorem: Monotonic epoch transition strictly increases epoch -/
+theorem calm_transition_strictly_increasing (e1 e2 : Nat) (h : isCalmMonotonic e1 e2) :
+    e1 < e2 := by
+  exact h
+
+/-- Landauer dissipation floor: bits * landauer_floor_per_bit -/
+def landauerFloor (bits floorPerBit : Nat) : Nat :=
+  bits * floorPerBit
+
+/-- Theorem: Landauer dissipation floor is non-negative for valid inputs -/
+theorem landauer_floor_nonnegative (bits floorPerBit : Nat) :
+    landauerFloor bits floorPerBit ≥ 0 := by
+  exact Nat.zero_le (landauerFloor bits floorPerBit)
+
+/-- Fail-Stop Poison state transitions -/
+inductive KernelState : Type where
+  | Active : SeqState → KernelState
+  | Poisoned : Nat → KernelState
+
+/-- Transition function for fail-stop kernel -/
+def stepKernel (st : KernelState) (halted : Bool) : KernelState :=
+  match st with
+  | KernelState.Poisoned code => KernelState.Poisoned code
+  | KernelState.Active seq =>
+    if halted then KernelState.Poisoned 1
+    else KernelState.Active (seq + 2)
+
+/-- Theorem: Once poisoned, the kernel state remains irreversibly poisoned -/
+theorem poison_state_is_irreversible (code : Nat) (halted : Bool) :
+    stepKernel (KernelState.Poisoned code) halted = KernelState.Poisoned code := by
+  rfl
+
 end Babylon60
+
