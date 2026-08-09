@@ -59,7 +59,7 @@ impl<T, const CAP: usize> SpscRingBuffer<T, CAP> {
     /// Publica un nuevo ítem en el anillo (Productor Único).
     #[inline]
     pub fn push(&self, val: T) -> Result<(), T> {
-        crate::probe_start!();
+        let _probe_start = crate::probe_start!();
         let head = self.head.load(Ordering::Relaxed);
         let tail = self.tail.load(Ordering::Acquire);
 
@@ -74,14 +74,14 @@ impl<T, const CAP: usize> SpscRingBuffer<T, CAP> {
         }
 
         self.head.store(head.wrapping_add(1), Ordering::Release);
-        crate::probe_end!("spsc_push");
+        crate::probe_end!("spsc_push", _probe_start);
         Ok(())
     }
 
     /// Extrae el siguiente ítem del anillo (Consumidor Único).
     #[inline]
     pub fn pop(&self) -> Option<T> {
-        crate::probe_start!();
+        let _probe_start = crate::probe_start!();
         let tail = self.tail.load(Ordering::Relaxed);
         let head = self.head.load(Ordering::Acquire);
 
@@ -96,7 +96,7 @@ impl<T, const CAP: usize> SpscRingBuffer<T, CAP> {
         };
 
         self.tail.store(tail.wrapping_add(1), Ordering::Release);
-        crate::probe_end!("spsc_pop");
+        crate::probe_end!("spsc_pop", _probe_start);
         Some(val)
     }
 }
