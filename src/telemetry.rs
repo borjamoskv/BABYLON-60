@@ -73,19 +73,23 @@ pub fn record_telemetry(probe_id: &'static str, start: u64, end: u64) {
 #[macro_export]
 macro_rules! probe_start {
     () => {
-        #[cfg(feature = "cortex-telemetry")]
-        let __probe_start_cycle = $crate::telemetry::get_cycles();
+        {
+            #[cfg(feature = "cortex-telemetry")]
+            { $crate::telemetry::get_cycles() }
+            #[cfg(not(feature = "cortex-telemetry"))]
+            { 0 }
+        }
     };
 }
 
 /// Cierra la sonda y guarda el registro en el buffer en memoria.
 #[macro_export]
 macro_rules! probe_end {
-    ($id:expr) => {
+    ($id:expr, $start:expr) => {
         #[cfg(feature = "cortex-telemetry")]
         {
             let __probe_end_cycle = $crate::telemetry::get_cycles();
-            $crate::telemetry::record_telemetry($id, __probe_start_cycle, __probe_end_cycle);
+            $crate::telemetry::record_telemetry($id, $start, __probe_end_cycle);
         }
     };
 }
