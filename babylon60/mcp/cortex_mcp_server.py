@@ -8,7 +8,7 @@ CORTEX MCP SERVER — Sovereign BFT Memory Server (MCP Protocol)
 ===============================================================
 Servidor MCP soberano que expone el ledger inmutable CortexPersistLedger,
 las firmas de atestación Merkle Root SHA3-256 y la mensajería BabylonMail
-a clientes externos (Claude Desktop, Cursor, agentes remotos) mediante
+a clientes externos (Claude Desktop, Cursor, agents remotos) mediante
 el protocolo estándar Model Context Protocol (JSON-RPC 2.0 over stdio).
 
 Herramientas expuestas:
@@ -18,7 +18,7 @@ Herramientas expuestas:
   - bft_send_sovereign_mail: Enviar correos autenticados @babylon60.com.
 
 Recursos expuestos:
-  - bft://ledger/status:        Diagnóstico de salud y número de nodos.
+  - bft://ledger/status:        Diagnóstico de salud y número de nodes.
   - bft://merkle/attestation:   Firma de inmutabilidad del estado.
 
 Transporte: stdio (JSON-RPC 2.0) con fallback WebSocket planificado.

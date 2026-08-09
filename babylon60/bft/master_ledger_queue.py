@@ -40,7 +40,7 @@ class MasterLedgerQueue:
         if task.cancelled():
             logger.warning("BFT Single-Writer Loop Cancelled (Apoptosis)")
         elif task.exception():
-            # INV_C5_07 (falla ruidosa): el crash se registra y aflora en el siguiente
+            # INV_C5_07 (failure ruidosa): el crash se registra y aflora en el siguiente
             # submit_transaction (Zombie Writer Prevention). Cero auto-necrosis del proceso.
             self._writer_failure = task.exception()
             logger.critical(f"FAIL-FAST: BFT writer task crashed: {self._writer_failure}")

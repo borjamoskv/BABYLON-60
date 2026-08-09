@@ -1,9 +1,9 @@
 #!/bin/bash
-# install-into-repo.sh
+# install_into_repo.sh
 # KINETIC PREFLIGHT PROTOCOL ENFORCER (C5-REAL)
 
 if [ -z "$1" ]; then
-  echo "Usage: ./install-into-repo.sh <path_to_repo>"
+  echo "Usage: ./install_into_repo.sh <path_to_repo>"
   exit 1
 fi
 

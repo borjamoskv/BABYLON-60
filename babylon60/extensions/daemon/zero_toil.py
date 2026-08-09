@@ -128,7 +128,7 @@ class ZeroToilDaemon:
         """Bucle principal asíncrono. Terminates deterministically on stop_event.set()."""
         if stop_event is None:
             stop_event = asyncio.Event()
-        logger.info("[ZERO-TOIL] Iniciando loop de asimilación autónoma.")
+        logger.info("[ZERO-TOIL] Initiating loop de asimilación autónoma.")
         while not stop_event.is_set():
             await self._check_task_collapse()
             try:

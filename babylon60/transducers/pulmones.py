@@ -148,7 +148,7 @@ def sovereign_circuit_breaker(timeout: float = 10.0, max_retries: int = 2, thres
     Decorador Mágico:
     1. Limita el tiempo de ejecución (asyncio.wait_for).
     2. Corta el circuito si la API destino está caída.
-    3. Si falla tras `max_retries`, cae graciosamente a la cola SQLite (PulmonesQueue).
+    3. Si failure tras `max_retries`, cae graciosamente a la cola SQLite (PulmonesQueue).
     """
     cb = CircuitBreaker(failure_threshold=threshold)
     queue: PulmonesQueue | None = None

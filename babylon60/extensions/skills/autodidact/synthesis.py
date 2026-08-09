@@ -148,7 +148,7 @@ async def distill_sovereign_memo(
 ) -> dict[str, Any]:
     """Cristaliza el ruido térmico de la web en un Cristal Cognitivo a T=0K.
 
-    Usa el CortexLLMRouter para cascade resiliente - si un provider falla,
+    Usa el CortexLLMRouter para cascade resiliente - si un provider failure,
     el siguiente toma el relevo. El intent_directive láser se preserva como
     el diferenciador sobre instruction grounding estándar.
     """

@@ -52,7 +52,7 @@ prefieres construirlo tú cuando ya sea urgente, o instalarlo hoy cuando aún es
 
 [Pausa.]
 
-"¿Con qué frecuencia te piden auditar decisiones de agentes ahora mismo?"\
+"¿Con qué frecuencia te piden auditar decisiones de agents ahora mismo?"\
 """
 
 
@@ -69,8 +69,8 @@ que Mem0 no puede: ¿cómo sabes que ese recuerdo es el original?
 # ─── 3. Open Source Contributor (primera frase falseable) ───────────
 
 PITCH_OS_CONTRIBUTOR = """\
-El WBFT de CORTEX rechaza nodos con reputación-score < 0.6 usando ponderación \
-bayesiana - sin coordinador central. Si crees que eso no escala a 50 nodos, \
+El WBFT de CORTEX rechaza nodes con reputación-score < 0.6 usando ponderación \
+bayesiana - sin coordinador central. Si crees que eso no escala a 50 nodes, \
 lee cortex/consensus/wbft.py línea 147 y dime si estoy equivocado.\
 """
 
@@ -86,7 +86,7 @@ CORTEX hace eso. Sin blockchain, sin cloud obligatorio, sin cambiar \
 lo que ya tienes.
 
 La frase que puedes repetir en el board: \
-"Cada decisión de nuestros agentes tiene una huella matemática que prueba que \
+"Cada decisión de nuestros agents tiene una huella matemática que prueba que \
 no fue modificada. Podemos demostrarlo en dos minutos."\
 """
 
@@ -118,7 +118,7 @@ la primera vez que un regulador europeo se la haga a una empresa sin respuesta.\
 # ─── 7. TOM (The Tracker / El Rastreador) ───────────────────────────
 
 PITCH_TOM = """\
-"Los números no mienten. Las personas sí. Scan completado: 145.230 registros \
+"Los números no mienten. Las personas sí. Scan completed: 145.230 registros \
 procesados. Desviación de Benford detectada en el dígito 5 (χ²=47.82). \
 Siete violaciones de SOD confirmadas. No es una opinión; es el rastro \
 fósil de la transacción."\
@@ -128,7 +128,7 @@ fósil de la transacción."\
 # ─── 8. OLIVER (The Hammer / El Ejecutor) ─────────────────────────────
 
 PITCH_OLIVER = """\
-"No hay hallazgo sin efecto. Si no tiene consecuencia, no es auditoría, \
+"No hay hallazgo sin efecto. Si no tiene consecuencia, no es audit, \
 es teatro. Usuario ZALBA_JGOMEZ bloqueado. Notificación al CEO enviada. \
 Expediente CNMV sellado. La materialidad es de €11.78M. ¿Siguiente objetivo?"\
 """

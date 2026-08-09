@@ -61,7 +61,7 @@ class PulmonesWorker:
 
     async def _resolve_target(self, target_func_path: str):
         """
-        Resuelve dinámicamente el string de la función guardado en SQLite.
+        Resuelve dinámicamente el string de la función saved en SQLite.
         """
         module_path, func_name = target_func_path.rsplit(".", 1)
         module = import_module(module_path)
@@ -73,7 +73,7 @@ class PulmonesWorker:
 
         try:
             func = await self._resolve_target(task["target_func"])
-            logger.info("🔄 Re-ejecutando %s [ID: %s]...", task["target_func"], task_id)
+            logger.info("🔄 Re-executing %s [ID: %s]...", task["target_func"], task_id)
 
             args = payload.get("args", [])
             kwargs = payload.get("kwargs", {})

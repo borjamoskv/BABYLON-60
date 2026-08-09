@@ -73,7 +73,7 @@ class EpistemicMonitor(BaseMonitor[WorkflowAlert]):
                         workflow="/josu",
                         reason=(
                             f"{stats.memories_needing_repair} memorias en estado crítico. "
-                            "Resolución autónoma requerida para evitar colapso."
+                            "Resolución autónoma requerida para evitar collapse."
                         ),
                         confidence="C4🔵",
                         priority=1,
@@ -111,7 +111,7 @@ class EpistemicMonitor(BaseMonitor[WorkflowAlert]):
                         workflow="/ouroboros",
                         reason=(
                             f"[OUROBOROS] Singularidad entrópica detectada ({stale_ratio * 100:.1f}% obsoleta). "
-                            "Iniciando ciclo de mutación autopoietica inminente."
+                            "Initiating ciclo de mutación autopoietica inminente."
                         ),
                         confidence="C5🔴",
                         priority=0,

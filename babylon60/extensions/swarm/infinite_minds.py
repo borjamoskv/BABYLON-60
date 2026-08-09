@@ -161,7 +161,7 @@ class InfiniteMindsManager:
                 return len(active_biases), _edges
 
             # OFF-LOAD: Liberamos el GIL / Event Loop para cálculos matemáticos
-            # (El cálculo de similaridades N^2 bloquea el hilo principal si hay muchos agentes)
+            # (El cálculo de similaridades N^2 bloquea el hilo principal si hay muchos agents)
             active_biases_texts = [m.semantic_bias for m in active_minds]
             loop = asyncio.get_running_loop()
             biases_count, edges_count = await loop.run_in_executor(

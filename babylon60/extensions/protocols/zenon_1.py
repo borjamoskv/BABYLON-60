@@ -175,7 +175,7 @@ class ZenonColapseEngine:
         """
         k_history = detector.history
         if not k_history:
-            raise RuntimeError("Imposible aplicar colapso Zenón sin historial previo.")
+            raise RuntimeError("Imposible aplicar collapse Zenón sin historial previo.")
 
         logger.info(
             "[ZENÓN-1 Colapse] FASE 1: FREEZE ejecutada. Recursión congelada en iteración K."
@@ -236,7 +236,7 @@ if __name__ == "__main__":
             logging.getLogger(__name__).info(f"\\n🚨 COLAPSO ZENÓN (Señal: {exhaustion_error.signal.name})")
             logging.getLogger(__name__).info(f"Razón: {exhaustion_error.message}")
 
-            # Forzar colapso
+            # Forzar collapse
             best_decision = ZenonColapseEngine.colapse(detector)
             logging.getLogger(__name__).info(
                 f"🎯 EJECUCIÓN SOBERANA: Procediendo implacablemente con output de la Iteración {best_decision.iteration_id}"

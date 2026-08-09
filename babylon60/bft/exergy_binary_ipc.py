@@ -8,7 +8,7 @@ ZERO-ANERGY BINARY INTER-AGENT IPC & TRANSDUCER
 ===============================================
 Resuelve la paradoja del costo de parseo de YAML en alta frecuencia.
 Combina la expresividad estática de YAML con la velocidad de transmisión binaria
-zero-copy para comunicación entre los 100 agentes a >100,000 msg/s.
+zero-copy para comunicación entre los 100 agents a >100,000 msg/s.
 
 Authorship: Borja Moskv (borjamoskv)
 """

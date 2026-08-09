@@ -13,7 +13,7 @@ obtener `_post_with_retry()` y `_get_with_retry()` sin reimplementar.
 
 Filosofía:
 - O(1) decisión por intento (no escanea listas ni dicts para retry)
-- Zero-trust: solo reintenta en 429. Todo lo demás falla rápido.
+- Zero-trust: solo reintenta en 429. Todo lo demás failure rápido.
 - Idempotente: los métodos no tienen side-effects entre llamadas.
 - Async by default: el I/O bloqueante es muerte térmica.
 

@@ -51,12 +51,12 @@ class MarketMakerOrchestrator:
         4. Validar Demanda
         5. Decidir Scale / Kill
         """
-        log.info("Iniciando Market Maker Cycle para %d keywords...", len(keywords))
+        log.info("Initiating Market Maker Cycle para %d keywords...", len(keywords))
 
         # Phase 1
         signals = await self.detector.scan(keywords)
         if not signals:
-            log.info("Cycle completado: no se detectó convergencia.")
+            log.info("Cycle completed: no se detectó convergencia.")
             return []
 
         # Phase 2
@@ -106,7 +106,7 @@ class MarketMakerOrchestrator:
             await self._persist_learning(exp)
 
         log.info(
-            "Market Maker Cycle completado. %d experimentos procesados.",
+            "Market Maker Cycle completed. %d experimentos procesados.",
             len(active_experiments),
         )
         return active_experiments

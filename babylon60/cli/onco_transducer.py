@@ -213,7 +213,7 @@ def execute_pipeline(data_path: str | None = None, falsifiability_threshold: flo
 
     # Causal-Determinist ASSERTION
     assert delta > falsifiability_threshold, (
-        f"FALSABILIDAD REFUTADA: El colapso del {delta:.1f}% es menor al umbral {falsifiability_threshold}%."
+        f"FALSABILIDAD REFUTADA: El collapse del {delta:.1f}% es menor al umbral {falsifiability_threshold}%."
     )
 
     logger.info("VERIFICACIÓN Causal-Determinist EXITOSA. Hipótesis apta para In-Vitro.")
@@ -233,7 +233,7 @@ def main() -> None:
     parser.add_argument(
         "--data", type=str, help="Path a la matriz TSV (genes en filas, muestras en columnas).", default=None
     )
-    parser.add_argument("--threshold", type=float, default=40.0, help="Umbral de colapso termodinámico (0-100).")
+    parser.add_argument("--threshold", type=float, default=40.0, help="Umbral de collapse termodinámico (0-100).")
     args = parser.parse_args()
 
     try:

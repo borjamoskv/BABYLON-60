@@ -109,7 +109,7 @@ def categorize_and_move() -> Tuple[int, int, List[Dict[str, Any]]]:
 
 
 def main() -> None:
-    print("[*] Causal-Determinist: Iniciando Anergy Token Purge (Root Directory Entropy Collapse)...")
+    print("[*] Causal-Determinist: Initiating Anergy Token Purge (Root Directory Entropy Collapse)...")
     ensure_dirs()
     count, total_bytes, actions = categorize_and_move()
 
@@ -134,7 +134,7 @@ def main() -> None:
 
     print(f"[+] Purga completada. {count} ficheros movidos ({total_bytes} bytes).")
     print(f"[+] Cortex Taint Hash: {cortex_taint}")
-    print(f"[+] Audit guardado en: {AUDIT_YAML}")
+    print(f"[+] Audit saved en: {AUDIT_YAML}")
 
 
 class BFTCausalInvariantError(Exception):

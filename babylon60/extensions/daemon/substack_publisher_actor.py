@@ -119,7 +119,7 @@ class SubstackPublisherBot:
 
                 # Guardar Borrador (Substack lo auto-guarda, pero forzamos por si acaso)
                 logger.info(
-                    "Estado guardado como Borrador. Pendiente de Aserción Manual para Publish."
+                    "Estado saved como Borrador. Pendiente de Aserción Manual para Publish."
                 )
 
                 await page.close()
