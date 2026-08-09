@@ -43,8 +43,11 @@ pub mod receipt;
 pub mod seqlock;
 /// Módulo de invariantes termodinámicos y bisimulación.
 pub mod thermodynamics;
+/// Módulo de constantes de calibración topológica de Aphairesis auto-generado.
+pub mod generated_aphairesis_constants;
 
 pub use manifest::{HaltReason, SharedManifest, POISONED, RUNNING, MAX_RETRIES};
+
 
 #[cfg(feature = "cortex-persist")]
 pub mod cortex;
