@@ -7,9 +7,8 @@ CORTEX L3 Inference Cache & Engine Adapter
 =========================================
 """
 
-import os
 import sqlite3
-from typing import Dict, Any, List
+from typing import Dict, Any
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
