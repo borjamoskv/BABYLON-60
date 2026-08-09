@@ -4,11 +4,11 @@
 # ============================================================================
 # [Causal-Determinist] Exergy-Maximized Agent Audit & Normalization Suite
 """
-AUDITORIA Y AUTO-NORMALIZACION DE LOS 100 AGENTES SOBERANOS
+AUDIT AND AUTO-NORMALIZATION OF THE 100 SOVEREIGN AGENTS
 ============================================================
-Script de auditoria y normalizacion Causal-Determinist para validar y armonizar
-la estructura YAML, nivel de realidad (Causal-Determinist), propietario (borjamoskv),
-unicidad de IDs y mapa de capacidades de los 100 agentes en:
+Causal-Determinist audit and normalization script to validate and harmonize
+YAML structure, reality level (Causal-Determinist), owner (borjamoskv),
+unique IDs, and capabilities map for all 100 agents in:
 babylon60/extensions/agents/definitions/.
 
 Authorship: Borja Moskv (borjamoskv)
@@ -44,7 +44,7 @@ def audit_and_normalize_all_agents():
     total_files = len(yaml_files)
 
     print(
-        f"\n🔍 Iniciando auditoria y normalizacion Causal-Determinist de los {total_files} agentes soberanos en {DEFS_DIR}...\n"
+        f"\n🔍 Initiating Causal-Determinist audit and normalization of {total_files} sovereign agents in {DEFS_DIR}...\n"
     )
 
     seen_ids = set()
@@ -60,12 +60,12 @@ def audit_and_normalize_all_agents():
                 data = yaml.safe_load(f)
 
             if not isinstance(data, dict):
-                errors.append(f"[{filename}] El contenido no es un objeto YAML/dict valido.")
+                errors.append(f"[{filename}] Content is not a valid YAML dict object.")
                 continue
 
             needs_save = False
 
-            # Normalizar metadata
+            # Normalize metadata
             if "metadata" not in data or not isinstance(data["metadata"], dict):
                 data["metadata"] = {}
                 needs_save = True
@@ -90,7 +90,7 @@ def audit_and_normalize_all_agents():
                 meta["exergy_tier"] = "P1"
                 needs_save = True
 
-            # Normalizar claves superiores
+            # Normalize top keys
             if "capabilities" not in data or not isinstance(data["capabilities"], list):
                 intent = data.get("intent", "general_reasoning")
                 data["capabilities"] = [f"{intent}_execution", "sovereign_reasoning", "bft_attestation"]
@@ -121,17 +121,17 @@ def audit_and_normalize_all_agents():
                     yaml.dump(data, f, sort_keys=False, allow_unicode=True)
                 fixed_count += 1
 
-            # Validacion final de unicidad
+            # Final uniqueness validation
             cat_id = meta.get("cat_id")
             name = data.get("name", cat_id.upper())
 
             if cat_id in seen_ids:
-                errors.append(f"[{filename}] cat_id duplicado: '{cat_id}'")
+                errors.append(f"[{filename}] Duplicate cat_id: '{cat_id}'")
             else:
                 seen_ids.add(cat_id)
 
             if name in seen_names:
-                errors.append(f"[{filename}] Nombre de agente duplicado: '{name}'")
+                errors.append(f"[{filename}] Duplicate agent name: '{name}'")
             else:
                 seen_names.add(name)
 
@@ -147,29 +147,29 @@ def audit_and_normalize_all_agents():
                 }
             )
 
-        except Exception as e:
-            errors.append(f"[{filename}] Error procesando YAML: {e}")
+        except (yaml.YAMLError, OSError, ValueError, KeyError) as e:
+            errors.append(f"[{filename}] Error processing YAML: {e}")
 
     print("============================================================")
-    print("📊 INFORME DE AUDITORIA Y ARMONIZACION — 100 AGENTES SOBERANOS")
+    print("📊 REPORT: AUDIT AND NORMALIZATION — 100 SOVEREIGN AGENTS")
     print("============================================================")
-    print(f"Archivos Auditados  : {total_files} / 100")
-    print(f"Archivos Armonizados: {fixed_count} actualizados")
-    print(f"IDs Únicos          : {len(seen_ids)} / 100")
-    print(f"Nombres Únicos      : {len(seen_names)} / 100")
-    print("Reality Level       : 100% Causal-Determinist")
-    print("Propietario         : 100% borjamoskv")
-    print(f"Errores Detectados  : {len(errors)}")
+    print(f"Audited Files   : {total_files} / 100")
+    print(f"Harmonized Files: {fixed_count} updated")
+    print(f"Unique IDs      : {len(seen_ids)} / 100")
+    print(f"Unique Names    : {len(seen_names)} / 100")
+    print("Reality Level   : 100% Causal-Determinist")
+    print("Owner           : 100% borjamoskv")
+    print(f"Detected Errors : {len(errors)}")
     print("============================================================\n")
 
     if errors:
-        print("🔴 ERRORES RESTANTES:")
+        print("🔴 REMAINING ERRORS:")
         for err in errors:
             print(f"  ├── {err}")
         sys.exit(1)
     else:
         print(
-            "🟢 AUDITORIA PERFECTA: Todos los 100 agentes estan 100% integrados, armonizados y con esquema Causal-Determinist estricto."
+            "🟢 PERFECT AUDIT: All 100 agents are 100% integrated, harmonized, and strictly Causal-Determinist compliant."
         )
 
 

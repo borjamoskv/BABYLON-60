@@ -52,5 +52,23 @@ class CortexInferenceEngine:
             conn.commit()
             return {"query": query, "response": response, "cached": False}
 
+    def execute_batch_inference(self, queries: list[str]) -> list[Dict[str, Any]]:
+        import hashlib
+        records = []
+        results = []
+        for q in queries:
+            q_hash = hashlib.sha3_256(q.encode("utf-8")).hexdigest()
+            resp = f"[CORTEX_INFERENCE_RESPONSE] {q}"
+            records.append((q_hash, q, resp))
+            results.append({"query": q, "response": resp, "cached": False})
+
+        with sqlite3.connect(self.db_path) as conn:
+            conn.executemany(
+                "INSERT OR REPLACE INTO L3_inference_cache (query_hash, query, response) VALUES (?, ?, ?)",
+                records
+            )
+            conn.commit()
+        return results
+
     def close(self) -> None:
         pass
