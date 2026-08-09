@@ -638,10 +638,12 @@ dependencies = [
     { name = "click" },
     { name = "cryptography" },
     { name = "defusedxml" },
+    { name = "httpx" },
     { name = "pydantic" },
     { name = "pynacl" },
     { name = "pynput" },
     { name = "pyyaml" },
+    { name = "starlette" },
     { name = "textual" },
 ]
 
@@ -716,6 +718,7 @@ requires-dist = [
     { name = "fastapi", marker = "extra == 'dev'", specifier = ">=0.110.0" },
     { name = "faster-whisper", marker = "extra == 'voice'", specifier = ">=1.1" },
     { name = "faster-whisper", marker = "extra == 'voice-full'", specifier = ">=1.1" },
+    { name = "httpx", specifier = ">=0.27.0" },
     { name = "kokoro", marker = "extra == 'voice-full'", specifier = ">=0.9" },
     { name = "mlx-lm", marker = "platform_machine == 'arm64' and sys_platform == 'darwin' and extra == 'voice-full'", specifier = ">=0.21" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.8" },
@@ -739,6 +742,7 @@ requires-dist = [
     { name = "scipy", marker = "extra == 'apex'", specifier = ">=1.11" },
     { name = "sounddevice", marker = "extra == 'voice'", specifier = ">=0.4.6" },
     { name = "sounddevice", marker = "extra == 'voice-full'", specifier = ">=0.4.6" },
+    { name = "starlette", specifier = ">=0.36.0" },
     { name = "textual", specifier = ">=0.50.0" },
     { name = "uvicorn", marker = "extra == 'dev'", specifier = ">=0.28.0" },
 ]
