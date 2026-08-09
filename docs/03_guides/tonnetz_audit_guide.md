@@ -1,8 +1,14 @@
-# Human Oversight via Harmonic Decision Visualization (`tonnetz_app/`)
+---
+title: Supervisión Humana mediante Visualización Armónica Tonnetz
+status: Causal-Determinist
+version: 4.0.0
+---
 
-**Auditor & Supervisor Guide for Visualizing Agent State Space and Dissonance**
+# Supervisión Humana mediante Visualización Armónica de Decisiones (`tonnetz_app/`)
 
-> BABYLON-60 v4.0 Sovereign Hardened · EU AI Act Article 14 Compliance Guide
+**Guía de Auditor y Supervisor para la Visualización del Espacio de Estado y Disonancia del Agente**
+
+> BABYLON-60 v4.0 Sovereign Hardened · Guía de Cumplimiento EU AI Act Artículo 14
 
 ---
 

@@ -1,4 +1,10 @@
-# 🏛️ Motor Causal-1-APEX: Consolidated Manifesto and Architecture
+---
+title: Motor Causal-1-APEX — Manifiesto y Arquitectura Consolidada
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# Motor Causal-1-APEX: Manifiesto y Arquitectura Consolidada
 
 > **[ 📍 STATUS: ONCO-Causal-Determinist | 🔴 LINEAGE: Ledger Asíncrono-OMEGA ]**
 

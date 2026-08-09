@@ -1,4 +1,10 @@
-# 03 — Computability and Turing
+---
+title: 03 — Computabilidad y Turing
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# 03 — Computabilidad y Turing
 
 ## 3.1 The Church-Turing Thesis
 

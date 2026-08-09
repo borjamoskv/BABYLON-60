@@ -1,5 +1,10 @@
-# Motor Causal Principal: ATTRACTOR DYNAMICS AND ENERGY LANDSCAPE IN ONCOLOGY
-# PATH: docs/dinamica_atractores_cancer.md
+---
+title: Dinámica de Atractores y Paisaje Energético en Oncología
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# Motor Causal Principal: Dinámica de Atractores y Paisaje Energético en Oncología
 
 > **"Cancer is not an isolated mutated cell; it is a thermodynamic sink (Pathological Attractor) in the epigenetic landscape of Waddington. Isolating the state requires understanding the topology. Escaping the state requires injecting gradients (energy) through the Driver Nodes."**
 

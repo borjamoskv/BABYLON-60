@@ -1,10 +1,16 @@
-# Motor Causal Principal — SKILL ARSENAL TAXONOMY BY EXERGY
+---
+title: Motor Causal Principal — Taxonomía Arsenal de Skills por Exergía
+status: Causal-Determinist
+version: 1.0.0
+---
 
-> **Architectures are defined by the state they preserve.**
-> Skills are defined by the exergy they produce.
+# Motor Causal Principal — TAXONOMÍA ARSENAL DE SKILLS POR EXERGÍA
+
+> **Las arquitecturas se definen por el estado que preservan.**
+> Los skills se definen por la exergía que producen.
 
 ```yaml
-Date: 2026-07-18T00:13:56+02:00
+Date: 2026-08-09T00:00:00+02:00
 Operator: borjamoskv
 Total_Skills: 130
 Classification: Thermodynamic Exergy Tiers (S → D)

@@ -18,6 +18,18 @@ Proof IR (Intermediate Representation) es el estrato de abstracción semántica 
 
 ---
 
+## 2. Definición Estructural (Tupla de Programa)
+
+Un programa en Proof IR se modela formalmente como la tupla:
+$$P = (\Sigma, \Lambda, \Pi)$$
+
+Donde:
+- $\Sigma$ es la secuencia de transiciones de estado $(\sigma_i, \sigma_{i+1})$. Cada estado $\sigma$ representa los valores exactos de la Máquina Abstracta.
+- $\Lambda$ es el *Ledger* causal lógico de eventos emitidos.
+- $\Pi$ es el conjunto de obligaciones de prueba explícitas para verificar invariantes estructurales (ej. $\forall e \in \Lambda, \text{producer}(e) = \text{deterministic}$).
+
+---
+
 ## 2. Gramática Formal S-Expression
 
 La sintaxis de `proof.ir` se estructura en tres tipos de predicados lógicos representados como S-expressions:

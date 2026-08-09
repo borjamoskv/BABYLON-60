@@ -1,5 +1,10 @@
-# Motor Causal Principal: EMPIRICAL SCIENCE AND FALSIFIABILITY IN SYSTEMS ONCOLOGY
-# PATH: docs/falsabilidad_empirica_cancer.md
+---
+title: Ciencia Empírica y Falsabilidad en Oncología de Sistemas
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# Motor Causal Principal: Ciencia Empírica y Falsabilidad en Oncología de Sistemas
 
 > **"A Boolean network without anchor to molecular measurements is topological science fiction (C4-SIM). The prediction of attractor collapse must be subjected to the sieve of real thermodynamics and empirical in-vitro validation."**
 

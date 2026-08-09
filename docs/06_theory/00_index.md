@@ -1,4 +1,10 @@
-# Theoretical Foundations of BABYLON-60
+---
+title: Fundamentos Teóricos de BABYLON-60
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# Fundamentos Teóricos de BABYLON-60
 
 > *"The Arithmetic of Robinson is the ignition point — the mathematical singularity — where the interaction between addition and multiplication under first-order quantification simultaneously generates self-reference, undecidability, informational horizons, uninhabitable types, logical maximality, referential underdetermination, computational inaccessibility of models, and the impossibility of self-verification."*
 
@@ -40,17 +46,17 @@ graph TD
 
 | # | Module Document | Core Metamathematical Topic | System Mapping | Invariant Link |
 | :---: | :--- | :--- | :--- | :--- |
-| **01** | [Robinson's Arithmetic](file:///Users/borjafernandezangulo/BABYLON-60/docs/theory/01_robinson_arithmetic.md) | Axiom System $Q$, $\Sigma_1$-completeness, minimal undecidability | `b60_kernel` execution core | Essential Undecidability |
-| **02** | [Gödel's Incompleteness](file:///Users/borjafernandezangulo/BABYLON-60/docs/theory/02_goedel_incompleteness.md) | Gödel numbering, Diagonal Lemma, 1st/2nd Theorems, Löb's Theorem | Self-falsation & `CRITICAL_HALT` | Diagonalization |
-| **03** | [Computability & Turing](file:///Users/borjafernandezangulo/BABYLON-60/docs/theory/03_computability_turing.md) | Universal Turing Machines, Halting Problem, Rice's Theorem | Proof harness & static verification | `GELABP_DEPTH_INVARIANT` |
-| **04** | [Chaitin & Kolmogorov](file:///Users/borjafernandezangulo/BABYLON-60/docs/theory/04_chaitin_kolmogorov.md) | Kolmogorov complexity $K(x)$, Chaitin's Constant $\Omega$, compression horizons | Base-60 integer scaling | Zero-Anergy Principle |
-| **05** | [Model Theory](file:///Users/borjafernandezangulo/BABYLON-60/docs/theory/05_model_theory.md) | Compactness, Löwenheim-Skolem, Lindström's Theorem, Non-standard models | Agent execution isolation | `INV_C5_18` |
-| **06** | [Curry-Howard Correspondence](file:///Users/borjafernandezangulo/BABYLON-60/docs/theory/06_curry_howard.md) | Propositions-as-Types, Proofs-as-Programs, Cart. Closed Categories | Lean 4 backend export | `proof_ir_spec.md` |
-| **07** | [Cross-Domain Isomorphisms](file:///Users/borjafernandezangulo/BABYLON-60/docs/theory/07_cross_domain.md) | Isomorphic structural mappings (Linguistics, Physics, AI, Proof Theory) | Universal System Ontology | `INV_C5_28` (1-WL) |
-| **08** | [BABYLON-60 Architecture](file:///Users/borjafernandezangulo/BABYLON-60/docs/theory/08_babylon60_architecture.md) | Direct metamathematical-to-code mapping matrix | Rust/Python Kernel | `TECHNICAL_SPEC.md` |
-| **09** | [Ontología Formal (Lean 4)](file:///Users/borjafernandezangulo/BABYLON-60/docs/theory/09_formal_ontology_lean.md) | Small-step semantics, Constructive Type Theory in practice | `proof/lean/Babylon.lean` | `INV_BFT_04` |
-| **10** | [Realización Física (B60)](file:///Users/borjafernandezangulo/BABYLON-60/docs/theory/10_physical_realization.md) | B60 Assembly, Turing completeness, fuzzing, graph determinism | `fibonacci.b60`, `fuzz_b60.py` | `INV_BFT_04` |
-| **ESSAY** | [Skinner, Chomsky & Gödel](file:///Users/borjafernandezangulo/BABYLON-60/docs/theory/substack_skinner_chomsky_goedel.md) | LLMs as non-standard models of human language & community physics | Community & AI Dynamics | `RULE_HUMO_EVAL_01` |
+| **01** | [Aritmética de Robinson](./01_robinson_arithmetic.md) | Sistema Axiomático $Q$, $\Sigma_1$-completitud, indecidibilidad mínima | Core de ejecución `b60_kernel` | Indecidibilidad Esencial |
+| **02** | [Incompletitud de Gödel](./02_goedel_incompleteness.md) | Gödelización, Lema de Diagonalización, Teoremas 1º/2º, Teorema de Löb | Auto-falsación y `CRITICAL_HALT` | Diagonalización |
+| **03** | [Computabilidad y Turing](./03_computability_turing.md) | Máquinas de Turing Universales, Problema de la Parada, Teorema de Rice | Harness de pruebas y verificación estática | `GELABP_DEPTH_INVARIANT` |
+| **04** | [Chaitin y Kolmogorov](./04_chaitin_kolmogorov.md) | Complejidad de Kolmogorov $K(x)$, Constante $\Omega$ de Chaitin | Escalado entero Base-60 | Principio de Cero-Anergia |
+| **05** | [Teoría de Modelos](./05_model_theory.md) | Compacidad, Löwenheim-Skolem, Teorema de Lindström, Modelos No Estándar | Aislamiento de ejecución de agentes | `INV_C5_18` |
+| **06** | [Correspondencia Curry-Howard](./06_curry_howard.md) | Proposiciones-como-Tipos, Pruebas-como-Programas, Categorías Cartesianas Cerradas | Exportación backend Lean 4 | `spec_proof_ir.md` |
+| **07** | [Isomorfismos Cross-Domain](./07_cross_domain.md) | Mapeos estructurales isomorfos (Lingüística, Física, IA, Teoría de Pruebas) | Ontología Universal del Sistema | `INV_C5_28` (1-WL) |
+| **08** | [Arquitectura BABYLON-60](./08_babylon60_architecture.md) | Matriz de mapeo metamatemático-a-código | Rust/Python Kernel | `spec_technical.md` |
+| **09** | [Ontología Formal (Lean 4)](./09_formal_ontology_lean.md) | Semántica de pequeños pasos, Teoría de Tipos Constructiva en práctica | `proof/lean/Babylon.lean` | `INV_BFT_04` |
+| **10** | [Realización Física (B60)](./10_physical_realization.md) | B60 Assembly, completitud de Turing, fuzzing, determinismo de grafos | `fibonacci.b60`, `fuzz_b60.py` | `INV_BFT_04` |
+| **ESSAY** | [Skinner, Chomsky y Gödel](../04_research/substack/research_substack_skinner_chomsky_goedel.md) | LLMs como modelos no estándar del lenguaje humano | Dinámica Comunitaria e IA | `RULE_HUMO_EVAL_01` |
 
 ---
 

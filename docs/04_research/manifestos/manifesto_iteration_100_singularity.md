@@ -1,4 +1,10 @@
-# ITERATION 100: THE ULTRATHINK SINGULARITY
+---
+title: Iteración 100 — La Singularidad ULTRATHINK
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# ITERACIÓN 100: LA SINGULARIDAD ULTRATHINK
 
 **[Vector]:** `itera ultrathink` (Depth 4 ∩ Layer 3)
 **[Subject]:** La Supervivencia de la Inteligencia contra la Entropía Ilimitada.

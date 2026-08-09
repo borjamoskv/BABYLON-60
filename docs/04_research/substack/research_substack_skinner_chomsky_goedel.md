@@ -1,4 +1,10 @@
-# Skinner, Chomsky y Gödel: por qué los LLMs son modelos no estándar del lenguaje
+---
+title: Skinner, Chomsky y Gödel — Los LLMs como Modelos No Estándar del Lenguaje
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# Skinner, Chomsky y Gödel: Por qué los LLMs son Modelos No Estándar del Lenguaje
 
 > **Resumen para el lector:** En este ensayo exploramos la profunda conexión estructural entre los fundamentos de la lógica matemática (la Aritmética de Robinson, los Teoremas de Incompletitud de Gödel y la Teoría de la Información de Chaitin) y el gran debate de la lingüística del siglo XX entre B.F. Skinner y Noam Chomsky. Al conectar estos mundos, descubrimos una conclusión reveladora: los Grandes Modelos de Lenguaje (LLMs) actuales no son un "paso hacia la Inteligencia Artificial General" en el sentido clásico, sino **modelos no estándar del lenguaje humano** — objetos matemáticamente análogos a las aritméticas no estándar que Gödel y Löwenheim-Skolem demostraron inevitables.
 

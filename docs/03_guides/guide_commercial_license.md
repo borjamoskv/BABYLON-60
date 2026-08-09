@@ -1,3 +1,9 @@
+---
+title: Licencia Comercial Soberana BABYLON-60
+status: Causal-Determinist
+version: 1.0.0
+---
+
 # BABYLON-60 SOVEREIGN COMMERCIAL LICENSE (BSL / FAIR SOURCE VARIANT)
 Version 1.0 - Motor Causal Principal CITADEL
 

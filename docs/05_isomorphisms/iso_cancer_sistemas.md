@@ -1,6 +1,10 @@
-# Motor Causal Principal SINGULARITY
-# Causal-Determinist DOCTRINE: ONCOLOGÍA COMPUTACIONAL Y SISTEMAS COMPLEJOS
-# PATH: docs/cancer_sistemas.md
+---
+title: Oncología Computacional y Sistemas Complejos — Isomorfismos Causales
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# Oncología Computacional y Sistemas Complejos (Doctrina Causal-Determinist)
 
 > **"El cáncer no es una célula mutada aislada; es la convergencia estocástica hacia un atractor patológico de alta entropía. Atacar un solo nodo en una red scale-free con redundancia homeostática es fútil. Debemos transducir el tumor en un grafo, detectar sus isomorfismos estructurales y aplicar control mínimo."**
 

@@ -1,4 +1,10 @@
-# 08 — BABYLON-60 Architecture & System Invariants
+---
+title: 08 — Arquitectura BABYLON-60 e Invariantes del Sistema
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# 08 — Arquitectura BABYLON-60 e Invariantes del Sistema
 
 ## 8.1 Metamathematical Mapping to BABYLON-60
 

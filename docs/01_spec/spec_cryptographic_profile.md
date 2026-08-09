@@ -1,29 +1,40 @@
-# BABYLON-60 Cryptographic Profile
+---
+title: Perfil Criptográfico BABYLON-60
+status: Causal-Determinist
+version: 1.0.0
+---
 
-## 1. Official Algorithms
+# Perfil Criptográfico BABYLON-60 (Causal-Determinist)
 
-| Component | Algorithm | Input | Encoding | Version |
+> **Régimen Causal-Determinist**
+> Esta especificación define las primitivas criptográficas, la separación de dominios y las reglas de serialización.
+
+---
+
+## 1. Algoritmos Oficiales
+
+| Componente | Algoritmo | Entrada | Codificación | Versión |
 | :--- | :--- | :--- | :--- | :--- |
-| **Object ID** | SHA3-256 | `type_prefix` + CBOR | Deterministic CBOR | v1 |
-| **Event ID** | SHA3-256 | Canonical event | Deterministic CBOR | v1 |
-| **Chain Root** | SHA3-256 | `previous_root` + `event_ID` | Length-prefixed bytes | v1 |
-| **Merkle Parent** | SHA3-256 | `domain_tag` + `left` + `right`| Fixed binary | v1 |
-| **Timestamp** | Integer (ms) | UTC | Unsigned integer | v1 |
+| **ID de Objeto** | SHA3-256 | `type_prefix` + CBOR | CBOR Determinista | v1 |
+| **ID de Evento** | SHA3-256 | Evento canónico | CBOR Determinista | v1 |
+| **Raíz de Cadena** | SHA3-256 | `previous_root` + `event_ID` | Bytes con prefijo de longitud | v1 |
+| **Padre Merkle** | SHA3-256 | `domain_tag` + `left` + `right` | Binario fijo | v1 |
+| **Marca de Tiempo** | Entero (ms) | UTC | Entero sin signo | v1 |
 
-## 2. Domain Separation Tags
+## 2. Etiquetas de Separación de Dominio
 
-To prevent second-preimage attacks across different contexts, all Merkle tree nodes use a domain tag:
-- **Leaf Node Tag:** `0x00`
-- **Internal Node Tag:** `0x01`
+Para prevenir ataques de segunda preimagen entre diferentes contextos, todos los nodos del árbol de Merkle utilizan una etiqueta de dominio (`domain tag`):
+- **Etiqueta de Nodo Hoja (Leaf):** `0x00`
+- **Etiqueta de Nodo Interno:** `0x01`
 
-## 3. Serialization Rules
+## 3. Reglas de Serialización
 
-Events MUST be serialized using Deterministic CBOR before hashing:
-- Map keys must be sorted strictly by byte value.
-- Integers must be encoded in the smallest possible representation.
-- Strings must be UTF-8.
+Los eventos DEBEN serializarse utilizando CBOR Determinista antes de ser procesados por la función hash:
+- Las claves de los mapas deben ordenarse estrictamente por su valor en bytes.
+- Los enteros deben codificarse en la representación más pequeña posible.
+- Las cadenas de texto deben ser UTF-8.
 
-## 4. Hash Chain vs Merkle Tree
+## 4. Cadena de Hash vs Árbol de Merkle
 
-- **Hash Chain:** Used for linear sequential logging within a single tenant/agent stream. This is the `Chain Root`.
-- **Merkle Tree:** Used for creating global snapshot roots across multiple streams/tenants at specific checkpoints. This uses `Merkle Parent`.
+- **Cadena de Hash (Hash Chain):** Utilizada para el registro secuencial lineal dentro de un único flujo de inquilino/agente. Esto produce la `Raíz de Cadena`.
+- **Árbol de Merkle (Merkle Tree):** Utilizado para crear raíces de snapshots globales que abarcan múltiples flujos/inquilinos en checkpoints específicos. Esto utiliza el `Padre Merkle`.

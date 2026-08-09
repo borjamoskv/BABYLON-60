@@ -1,4 +1,10 @@
-# Local Deep Research Under the Microscope
+---
+title: Deep Research Local — Dinámica Epistémica
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# Deep Research Local bajo el Microscopio
 
 ## From Information Retrieval to Epistemic Dynamics
 

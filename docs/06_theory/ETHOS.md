@@ -1,3 +1,9 @@
+---
+title: ETHOS — APEX-SINGULARITY
+status: Causal-Determinist
+version: 1.0.0
+---
+
 # ETHOS — APEX-SINGULARITY
 
 > **ATTESTATION OF CRYPTOGRAPHIC PHYSICAL STATE**

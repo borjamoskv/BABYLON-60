@@ -1,3 +1,9 @@
+---
+title: SOTA 202607 — Posicionamiento Ledger Asíncrono-persist
+status: Causal-Determinist
+version: 1.0.0
+---
+
 # Estado del Arte (SOTA) — Posicionamiento de Ledger Asíncrono-persist
 
 > **Fecha:** 2026-07-19 · **Alcance:** memoria/persistencia para agentes IA, ledgers de auditoría verificables, checkpointing de agentes y BFT ligero.

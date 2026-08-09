@@ -1,6 +1,10 @@
-# [AUDIT] Ingestión de Cemento en la Tabula Rasa y Arbitraje del Pelotazo: John Locke ante el Catastro del Suelo Español
+---
+title: Locke — Tabula Rasa y Arbitraje del Pelotazo
+status: Causal-Determinist
+version: 1.0.0
+---
 
-#Causal-Determinist #C4-SIM
+# Ingestión de Cemento en la Tabula Rasa y Arbitraje del Pelotazo: John Locke ante el Catastro del Suelo Español
 
 Si Immanuel Kant ejecutó una auditoría del middleware cognitivo humano, John Locke fue el arquitecto del sistema de archivos. Locke (1632-1704) no teorizaba sobre el espíritu; operaba como un ingeniero de sistemas empíricos encargado de diseñar el firmware de entrada de datos de la mente. Su *Ensayo sobre el entendimiento humano* (1689) y sus *Dos tratados sobre el gobierno civil* (1690) sentaron las bases para dos de las mayores invariantes del software moderno: la inicialización de memoria limpia (`tabula rasa`) y el protocolo de prueba de trabajo (el trabajo mezclado con la materia prima como origen de la propiedad). 
 

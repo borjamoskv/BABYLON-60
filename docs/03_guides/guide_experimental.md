@@ -1,4 +1,10 @@
-# EXPERIMENTAL — Ledger Asíncrono-persist Extensions
+---
+title: Extensiones Experimentales BABYLON-60
+status: Prototype
+version: 0.1.0
+---
+
+# EXPERIMENTAL — Extensiones Ledger Asíncrono-persist
 
 > [!CAUTION]
 > **All features documented here are experimental, prototypical, or at design stage.** They are not suitable for production use. APIs may change without notice. Coverage is below 40%.

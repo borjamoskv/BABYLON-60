@@ -1,8 +1,15 @@
+---
+title: Manifiesto Fundacional BABYLON-60
+status: Causal-Determinist
+version: 4.0.0
+author: borjamoskv
+---
+
 # 📜 MANIFIESTO FUNDACIONAL: BABYLON-60
 
 [🌐 Read in English](00_MANIFESTO.md)
 
-**Versión:** 4.0 Sovereign Hardened | **Autor:** Borja Moskv  
+**Versión:** 4.0 Sovereign Hardened | **Autor:** Borja Moskv
 *"El Substrato de Ejecución Verificable para la Era de la Agencia Autónoma"*
 
 ---

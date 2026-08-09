@@ -1,4 +1,12 @@
-> **Modulo Teórico 10 | Proyecto BABYLON-60 | Licencia Soberana (`INV_C5_17`)**
+---
+title: 10 — Realización Física en Silicio (B60)
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# 10 — Realización Física en Silicio (B60)
+
+> **Módulo Teórico 10 | Proyecto BABYLON-60 | Licencia Soberana (`INV_C5_17`)**
 > Realización Física: B60 Assembly, Fuzzing de Propiedades y el Canon Criptográfico.
 
 ---

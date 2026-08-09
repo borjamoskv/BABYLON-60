@@ -1,4 +1,10 @@
-# [AUDIT] Colapso Termodinámico y Orden Lejos del Equilibrio: La Colisión Irreversible de Boltzmann y Prigogine
+---
+title: Boltzmann y Prigogine — Colapso Termodinámico y Orden Lejos del Equilibrio
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# Colapso Termodinámico y Orden Lejos del Equilibrio: La Colisión Irreversible de Boltzmann y Prigogine
 
 ## 1. El Foso de la Homogeneidad: Ludwig Boltzmann y la Tragedia del Teorema H
 

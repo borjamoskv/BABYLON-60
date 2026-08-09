@@ -1,4 +1,10 @@
-# Source of Truth
+---
+title: Fuente de Verdad Canónica del Repositorio
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# Fuente de Verdad Canónica del Repositorio
 
 BABYLON-60 is the repository and protocol project.
 `Ledger Asíncrono-persist` is the Python distribution name.

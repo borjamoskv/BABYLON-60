@@ -1,4 +1,10 @@
-# 07 — Cross-Domain Isomorphisms
+---
+title: 07 — Isomorfismos Cross-Domain
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# 07 — Isomorfismos Cross-Domain
 
 ## 7.1 Overview
 
