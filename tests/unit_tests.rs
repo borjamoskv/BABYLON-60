@@ -231,10 +231,11 @@ fn generated_sheaf_fusion_operator_calibrated() {
     use babylon_60::generated_aphairesis_constants::SheafFusionOperator;
     use babylon_60::thermodynamics::TopologicalCompressor;
 
-    let bound = SheafFusionOperator::aphairesis_bound(320.0);
+    let bound = SheafFusionOperator::aphairesis_bound();
     assert!(bound.min_energy_joules() > 0.0);
     assert!(bound.effective_bits_erased >= 0.0);
 }
+
 
 
 #[test]
