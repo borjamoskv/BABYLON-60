@@ -27,7 +27,6 @@ MYTHOLOGICAL_TERMS = [
 
 
 def check_ast_nesting(filepath: str) -> List[Dict[str, Any]]:
-    violations = []
     try:
         with open(filepath, "r", encoding="utf-8") as f:
             source = f.read()
