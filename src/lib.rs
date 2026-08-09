@@ -16,7 +16,7 @@
 //! `LDAR`/`STLR` on AArch64; to plain MOV on x86).
 //!
 //! ## EU AI Act compliance hooks
-//! [`halt::epistemic_halt`] and [`halt::emit_halt_receipt`] implement the
+//! [`halt::epistemic_halt`] and [`receipt::emit_halt_receipt`] implement the
 //! logging requirements of Art. 12 and the transparency obligations of Art. 50
 //! of Regulation (EU) 2024/1689 ("EU AI Act"). The halt receipt is a
 //! COSE_Sign1 signed statement per RFC 9942 + SCITT-22 with SHAKE256 (−45).
