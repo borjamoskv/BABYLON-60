@@ -13,12 +13,13 @@ import sys
 # Definición del C-ABI de SharedManifest (64 bytes, align 64)
 class SharedManifestCTypes(ctypes.Structure):
     _fields_ = [
-        ("seq", ctypes.c_uint32),
         ("status_flag", ctypes.c_uint32),
+        ("seq", ctypes.c_uint32),
         ("epoch_id", ctypes.c_uint64),
         ("payload_hash", ctypes.c_uint64 * 4),
-        ("halt_receipt_ptr", ctypes.c_uint64),
+        ("_padding", ctypes.c_uint8 * 16),
     ]
+
 
 def verify_manifest_struct_alignment():
     size = ctypes.sizeof(SharedManifestCTypes)
