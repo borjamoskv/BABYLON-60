@@ -137,96 +137,85 @@ pub const fn is_calm_monotonic_transition(prev_epoch: u64, new_epoch: u64) -> bo
 // ---------------------------------------------------------------------------
 
 /// Cota termodinámica extendida para operaciones de compresión/aphairesis en Capa 2.
-///
-/// Invariante: $E_{\text{min}} \ge k_B \cdot T \cdot \ln 2 \cdot \left( \text{effective\_bits} + \frac{D_{\text{KL}}}{\ln 2} \right)$
+pub type Q16_16 = i32;
+
+/// Conversión con redondeo al entero más cercano (no truncamiento)
+pub const fn to_q16_16_from_x1000(val_x1000: u32) -> Q16_16 {
+    ((val_x1000 as u64 * 65536 + 500) / 1000) as Q16_16
+}
+
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct AphairesisBound {
-    /// Bits efectivos eliminados en la compresión (ponderados topológicamente).
-    pub effective_bits_erased: f64,
-    /// Divergencia KL entre la distribución original $P_X$ y la reconstruida desde $Y$.
-    pub kl_divergence: f64,
-    /// Temperatura operativa del silicio en Kelvin.
-    pub temperature_k: f64,
+    pub effective_bits_erased_q16: Q16_16,
+    pub kl_divergence_q16: Q16_16,
+    pub temperature_k: u32,
 }
 
 impl AphairesisBound {
-    /// Constante de Boltzmann ($k_B$) en Joules por Kelvin: $1.380649 \times 10^{-23} \text{ J/K}$.
-    pub const K_B: f64 = 1.380649e-23;
-    /// Logaritmo natural de 2 ($\ln 2$).
-    pub const LN2: f64 = core::f64::consts::LN_2;
+    /// Constante de Boltzmann * ln2 * 1e21 * 2^32 (Q32.32)
+    pub const K_B_LN2_ZJ_Q32: u64 = 41102555;
 
-    /// Retorna la energía mínima en Joules requerida para esta compresión.
-    ///
-    /// $$E_{\text{min}} = k_B \cdot T \cdot \ln 2 \cdot \left( \text{bits} + \frac{D_{\text{KL}}}{\ln 2} \right)$$
     #[inline]
     #[must_use]
-    pub fn min_energy_joules(&self) -> f64 {
-        Self::K_B * self.temperature_k * Self::LN2 * (self.effective_bits_erased + self.kl_divergence / Self::LN2)
+    pub const fn min_energy_zeptojoules(&self) -> u64 {
+        let inv_ln2_q16: i64 = 94548;
+        let kl_over_ln2_q16 = ((self.kl_divergence_q16 as i64 * inv_ln2_q16 + 32768) >> 16) as Q16_16;
+        let total_bits_q16 = self.effective_bits_erased_q16 + kl_over_ln2_q16;
+        
+        let zj_per_bit_q32 = self.temperature_k as u64 * Self::K_B_LN2_ZJ_Q32;
+        
+        let energy_zj_q48 = total_bits_q16 as u64 * zj_per_bit_q32;
+        ((energy_zj_q48 + (1u64 << 47)) >> 48) as u64
     }
 
-    /// Verifica si una medición empírica de energía satisface la cota física.
     #[inline]
     #[must_use]
-    pub fn is_physically_valid(&self, measured_energy_j: f64) -> bool {
-        measured_energy_j >= self.min_energy_joules()
+    pub const fn is_physically_valid(&self, measured_energy_zj: u64) -> bool {
+        measured_energy_zj >= self.min_energy_zeptojoules()
     }
 }
-
-/// Constante de Boltzmann ($k_B$) en Joules por Kelvin: $1.380649 \times 10^{-23} \text{ J/K}$.
-pub const K_BOLTZMANN: f64 = 1.380649e-23;
 
 /// Error retornado cuando una medición empírica de energía viola la cota de Landauer extendida.
 #[derive(Debug, Clone, PartialEq)]
 pub struct ThermodynamicViolation {
-    /// Cota mínima de energía esperada en Joules.
-    pub expected_min: f64,
-    /// Energía medida empíricamente en Joules.
-    pub actual: f64,
-    /// Ratio de déficit ($E_{\text{min}} / E_{\text{actual}}$).
-    pub deficit_ratio: f64,
+    pub expected_min_zj: u64,
+    pub actual_zj: u64,
+    pub deficit_ratio_q16: Q16_16,
 }
 
-/// Trait axiomático que todo operador de compresión topológica (Capa 2) debe implementar.
-///
-/// Obliga a asociar constantes de tiempo de compilación para la pérdida de información,
-/// garantizando que ningún módulo de abstracción opere como una caja negra termodinámica.
-pub trait TopologicalCompressor {
-    /// Bits efectivos eliminados (constante de compilación).
-    const EFFECTIVE_BITS_ERASED: f64;
-    /// Divergencia KL prefijada (constante de compilación).
-    const KL_DIVERGENCE: f64;
-    /// Temperatura nominal de diseño del silicio (K) para este operador.
-    const DESIGN_TEMP_K: f64;
+pub trait TopologicalCompressorFixed {
+    const EFFECTIVE_BITS_ERASED_X1000: u32;
+    const KL_DIVERGENCE_X1000: u32;
+    const DESIGN_TEMP_K: u32;
 
-    /// Cota mínima de energía en Joules, calculada en tiempo de compilación.
-    /// Extensión axiomática de Landauer para aphairesis.
-    const MIN_ENERGY_JOULES: f64 = {
-        let raw = K_BOLTZMANN * Self::DESIGN_TEMP_K * core::f64::consts::LN_2 
-            * (Self::EFFECTIVE_BITS_ERASED + Self::KL_DIVERGENCE / core::f64::consts::LN_2);
-        
-        assert!(raw >= 0.0, "Aphairesis bound violation: negative energy");
-        #[allow(clippy::eq_op)]
-        let is_not_nan = raw == raw;
-        assert!(is_not_nan && raw != f64::INFINITY && raw != f64::NEG_INFINITY, "Aphairesis bound violation: non-finite energy");
-        raw
+    const MIN_ENERGY_ZEPTOJOULES: u64 = {
+        let bound = AphairesisBound {
+            effective_bits_erased_q16: to_q16_16_from_x1000(Self::EFFECTIVE_BITS_ERASED_X1000),
+            kl_divergence_q16: to_q16_16_from_x1000(Self::KL_DIVERGENCE_X1000),
+            temperature_k: Self::DESIGN_TEMP_K,
+        };
+        bound.min_energy_zeptojoules()
     };
 
-    /// Retorna la cota termodinámica de Aphairesis para este compresor.
     fn aphairesis_bound() -> AphairesisBound {
         AphairesisBound {
-            effective_bits_erased: Self::EFFECTIVE_BITS_ERASED,
-            kl_divergence: Self::KL_DIVERGENCE,
+            effective_bits_erased_q16: to_q16_16_from_x1000(Self::EFFECTIVE_BITS_ERASED_X1000),
+            kl_divergence_q16: to_q16_16_from_x1000(Self::KL_DIVERGENCE_X1000),
             temperature_k: Self::DESIGN_TEMP_K,
         }
     }
 
-    /// Verificación en tiempo de ejecución contra medición empírica.
-    fn validate_measurement(&self, measured_j: f64) -> Result<(), ThermodynamicViolation> {
-        if measured_j < Self::MIN_ENERGY_JOULES {
+    fn validate_measurement(&self, measured_zj: u64) -> Result<(), ThermodynamicViolation> {
+        if measured_zj < Self::MIN_ENERGY_ZEPTOJOULES {
+            let deficit = if measured_zj == 0 {
+                Q16_16::MAX
+            } else {
+                ((Self::MIN_ENERGY_ZEPTOJOULES as u128 * 65536) / measured_zj as u128) as Q16_16
+            };
             Err(ThermodynamicViolation {
-                expected_min: Self::MIN_ENERGY_JOULES,
-                actual: measured_j,
-                deficit_ratio: Self::MIN_ENERGY_JOULES / measured_j,
+                expected_min_zj: Self::MIN_ENERGY_ZEPTOJOULES,
+                actual_zj: measured_zj,
+                deficit_ratio_q16: deficit,
             })
         } else {
             Ok(())
@@ -234,53 +223,36 @@ pub trait TopologicalCompressor {
     }
 }
 
-/// Operador de fusión de haces locales en percepción global.
-/// Los valores se derivan del análisis topológico offline del dataset BABYLON-60.
 #[derive(Debug, Clone, Copy, Default)]
 pub struct SheafFusionOperator;
 
-impl TopologicalCompressor for SheafFusionOperator {
-    // 47.3 bits efectivos eliminados por fusión (calculado vía homología persistente)
-    const EFFECTIVE_BITS_ERASED: f64 = 47.3;
-    
-    // KL = 0.892 nats: pérdida aceptable en fusión de secciones locales
-    const KL_DIVERGENCE: f64 = 0.892;
-    
-    // Diseño para dominio térmico de 320K (silicio bajo carga sostenida)
-    const DESIGN_TEMP_K: f64 = 320.0;
+impl TopologicalCompressorFixed for SheafFusionOperator {
+    const EFFECTIVE_BITS_ERASED_X1000: u32 = 47300;
+    const KL_DIVERGENCE_X1000: u32 = 892;
+    const DESIGN_TEMP_K: u32 = 320;
 }
 
-/// Mensaje coordinación-libre en anillo SPSC.
-/// La cota termodinámica viaja CON el dato, no se recalcula.
 #[repr(C, align(64))]
 #[derive(Debug, Clone, Copy)]
-pub struct SymbolicMessage<C: TopologicalCompressor> {
-    /// Payload simbólico monotónico (Capa 3 consumible, 48 bytes)
+pub struct SymbolicMessage<C: TopologicalCompressorFixed> {
     pub payload: [u8; 48],
-    
-    /// Sello termodinámico pre-computado en tiempo de compilación.
-    pub energy_bound_j: f64,
-    
-    /// Timestamp lógico monotónico (no físico) para ordenamiento CALM
+    pub energy_bound_zj: u64,
     pub logical_timestamp: u64,
-    
     _phantom: core::marker::PhantomData<C>,
 }
 
-impl<C: TopologicalCompressor> SymbolicMessage<C> {
-    /// Construye una nueva instancia de `SymbolicMessage` adjuntando la cota de `C::MIN_ENERGY_JOULES`.
+impl<C: TopologicalCompressorFixed> SymbolicMessage<C> {
     pub fn new(payload: [u8; 48], logical_timestamp: u64) -> Self {
         Self {
             payload,
-            energy_bound_j: C::MIN_ENERGY_JOULES,
+            energy_bound_zj: C::MIN_ENERGY_ZEPTOJOULES,
             logical_timestamp,
             _phantom: core::marker::PhantomData,
         }
     }
 }
 
-/// Verificación estática en tiempo de compilación para la cota de energía de `SheafFusionOperator`.
-pub const _SHEAF_FUSION_BOUND_CHECK: f64 = SheafFusionOperator::MIN_ENERGY_JOULES;
+pub const _SHEAF_FUSION_BOUND_CHECK: u64 = SheafFusionOperator::MIN_ENERGY_ZEPTOJOULES;
 
 const _: () = assert!(
     core::mem::size_of::<SymbolicMessage<SheafFusionOperator>>() <= 64,
