@@ -163,6 +163,22 @@ fn inv3_valid_writer_transitions() {
     assert!(!is_valid_writer_transition(2, 2)); // identidad
 }
 
+#[test]
+fn inv3_aphairesis_entropy_loss() {
+    use babylon_60::thermodynamics::aphairesis_entropy_loss_aj_x1000;
+    // Eliminación de 100 bits → 100 * 2870 = 287_000 aJ*1000 (0.287 aJ)
+    assert_eq!(aphairesis_entropy_loss_aj_x1000(100), 287_000);
+}
+
+#[test]
+fn inv3_calm_monotonic_transition() {
+    use babylon_60::thermodynamics::is_calm_monotonic_transition;
+    assert!(is_calm_monotonic_transition(10, 11));
+    assert!(!is_calm_monotonic_transition(10, 10));
+    assert!(!is_calm_monotonic_transition(10, 9));
+}
+
+
 // ═══════════════════════════════════════════════════════════════════════
 // INV-4: Halt — frontera topológica inmutable
 // ═══════════════════════════════════════════════════════════════════════

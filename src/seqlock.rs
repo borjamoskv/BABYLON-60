@@ -48,6 +48,17 @@ use crate::manifest::{SharedManifest, MAX_RETRIES};
 /// 3. Stores Relaxed del hash y epoch (encajonados por la barrera).
 /// 4. `seq.store(s+2, Release)` → `STLR`: par, publicación visible.
 ///
+/// # Ejemplo
+/// ```
+/// use babylon_60::manifest::SharedManifest;
+/// use babylon_60::seqlock::{publish, read};
+///
+/// let manifest = SharedManifest::new();
+/// let hash = [0xA, 0xB, 0xC, 0xD];
+/// publish(&manifest, 42, &hash);
+/// assert_eq!(read(&manifest), Some((42, hash)));
+/// ```
+///
 /// # Safety
 /// Debe ser invocada por **un único hilo escritor** en todo momento.
 /// La invocación concurrente desde múltiples hilos es UB.
@@ -65,8 +76,8 @@ pub fn publish(m: &SharedManifest, epoch: u64, hash: &[u64; 4]) {
 
     // Paso 4: almacenar payload (Relaxed; la barrera del paso 3 y del paso 5
     // encajan correctamente el happens-before con el lector)
-    for i in 0..4 {
-        m.payload_hash[i].store(hash[i], Ordering::Relaxed);
+    for (i, val) in hash.iter().enumerate() {
+        m.payload_hash[i].store(*val, Ordering::Relaxed);
     }
     m.epoch_id.store(epoch, Ordering::Relaxed);
 
@@ -97,6 +108,7 @@ pub fn publish(m: &SharedManifest, epoch: u64, hash: &[u64; 4]) {
 /// **antes** de leer el hash, colapsando la ventana de detección y
 /// produciendo una lectura rasgada indetectable. La barrera es obligatoria.
 #[inline]
+#[must_use]
 pub fn read(m: &SharedManifest) -> Option<(u64, [u64; 4])> {
     for _ in 0..MAX_RETRIES {
         // Paso 1: leer seq con Acquire (LDAR) — establece la mitad
@@ -111,8 +123,8 @@ pub fn read(m: &SharedManifest) -> Option<(u64, [u64; 4])> {
 
         // Paso 3: cargar payload con Relaxed (puro-de-carga; sin RFO)
         let mut h = [0u64; 4];
-        for i in 0..4 {
-            h[i] = m.payload_hash[i].load(Ordering::Relaxed);
+        for (i, slot) in m.payload_hash.iter().enumerate() {
+            h[i] = slot.load(Ordering::Relaxed);
         }
         let e = m.epoch_id.load(Ordering::Relaxed);
 
