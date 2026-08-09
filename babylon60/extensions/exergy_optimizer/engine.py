@@ -10,11 +10,11 @@ from typing import Any
 from babylon60.engine import CortexEngine
 
 from .heal import heal_proj
-from .scan import MejoraloScanner, ScanResult
+from .scan import ExergyOptimizerScanner, ScanResult
 from .utils import detect_stack
 
 
-class MejoraloEngine:
+class ExergyOptimizerEngine:
     """
     MEJORAlo: Continuous Improvement Engine for CORTEX.
     Unifies scanning, healing, and shipping of code improvements.
@@ -22,7 +22,7 @@ class MejoraloEngine:
 
     def __init__(self, engine: CortexEngine):
         self.engine = engine
-        self.scanner = MejoraloScanner()
+        self.scanner = ExergyOptimizerScanner()
 
     def _notify_sync(
         self, name_or_color: str, active: bool = True, flash: bool = False, duration: float = 0.5
@@ -106,7 +106,7 @@ class MejoraloEngine:
     def record_session(
         self, project: str, score_before: int, score_after: int, actions: list[str]
     ) -> int:
-        """Record a Mejoralo session in the fact ledger."""
+        """Record a ExergyOptimizer session in the fact ledger."""
         from .ledger import record_session as ledger_record_session
 
         return ledger_record_session(
@@ -118,7 +118,7 @@ class MejoraloEngine:
         )
 
     def history(self, project: str, limit: int = 10) -> list[dict[str, Any]]:
-        """Retrieve historical Mejoralo sessions for a project."""
+        """Retrieve historical ExergyOptimizer sessions for a project."""
         res = self.engine.recall_sync(
             project=project,
             limit=100,
@@ -129,7 +129,7 @@ class MejoraloEngine:
         for fact in res:
             meta = fact.get("meta", {}) or {}
             tags = meta.get("tags", []) if isinstance(meta, dict) else fact.get("tags", [])
-            if any(t in tags for t in ["mejoralo"]):
+            if any(t in tags for t in ["exergy_optimizer"]):
                 filtered.append(fact)
         return filtered[:limit]
 
@@ -146,7 +146,7 @@ class MejoraloEngine:
         for fact in res:
             meta = fact.get("meta", {}) or {}
             tags = meta.get("tags", []) if isinstance(meta, dict) else fact.get("tags", [])
-            if any(t in tags for t in ["mejoralo", "taint", "scar"]):
+            if any(t in tags for t in ["exergy_optimizer", "taint", "scar"]):
                 filtered.append(fact)
         return filtered[:limit]
 
@@ -165,7 +165,7 @@ class MejoraloEngine:
         for fact in res:
             meta = fact.get("meta", {}) or {}
             tags = meta.get("tags", []) if isinstance(meta, dict) else fact.get("tags", [])
-            if any(t in tags for t in ["mejoralo", "taint", "scar"]):
+            if any(t in tags for t in ["exergy_optimizer", "taint", "scar"]):
                 filtered.append(fact)
         return filtered[:limit]
 
@@ -175,8 +175,8 @@ class MejoraloEngine:
             project=project,
             content=f"[MEJORAlo SCAR] {file_path}: {reason}",
             fact_type="error",
-            tags=["mejoralo", "scar", "investigation"],
-            source="agent:mejoralo",
+            tags=["exergy_optimizer", "scar", "investigation"],
+            source="agent:exergy_optimizer",
             meta={"file_path": file_path, "reason": reason},
         )
 

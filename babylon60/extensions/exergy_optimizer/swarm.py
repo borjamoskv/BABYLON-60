@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 from babylon60.cli.common import console  # pyright: ignore
-from babylon60.extensions.mejoralo.constants import (
+from babylon60.extensions.exergy_optimizer.constants import (
     DEVILS_ADVOCATE_THRESHOLD,
     SWARM_BASE_TEMPERATURE,
     SWARM_DEFAULT_SQUAD_SIZE,
@@ -29,13 +29,13 @@ from babylon60.extensions.mejoralo.constants import (
 )
 
 if TYPE_CHECKING:
-    from babylon60.extensions.mejoralo.engine import MejoraloEngine
+    from babylon60.extensions.exergy_optimizer.engine import ExergyOptimizerEngine
 
 from babylon60.extensions.thinking.fusion import FusionStrategy
 from babylon60.extensions.thinking.orchestra import ThoughtOrchestra
 from babylon60.extensions.thinking.presets import OrchestraConfig, ThinkingMode
 
-logger = logging.getLogger("babylon60_extensions.mejoralo.swarm")
+logger = logging.getLogger("babylon60_extensions.exergy_optimizer.swarm")
 
 # Sovereign Specialists (Level 130/100) - Aligned with kimi-swarm-1
 SPECIALISTS_PROMPTS = {
@@ -88,7 +88,7 @@ SPECIALISTS_PROMPTS = {
 }
 
 
-class MejoraloSwarm:
+class ExergyOptimizerSwarm:
     """Orchestrates a swarm of specialists to refactor a file."""
 
     def __init__(self, level: int = 1):
@@ -107,7 +107,7 @@ class MejoraloSwarm:
         file_path: Path,
         findings: list[str],
         iteration: int = 0,
-        engine: MejoraloEngine | None = None,
+        engine: ExergyOptimizerEngine | None = None,
         project: str | None = None,
     ) -> str | None:
         """Refactor code using surgical AST mode when possible, full-file fallback.

@@ -28,7 +28,7 @@ Este documento detalla las **10 Soluciones Singulares** que la arquitectura **BA
 
 ### 5. Autocuración e Invariant Auto-Alignment (`autodetect_invariants.py`)
 - **Problema en IDEs actuales:** Los agentes rompen tests o generan código desalineado sin detectarlo.
-- **Solución BABYLON-60:** El motor `c5_mejoralo_monitor.py` detecta deriva estructural y auto-alinea los invariantes (`INV_C5_*`) en la suite de pruebas.
+- **Solución BABYLON-60:** El motor `c5_exergy_optimizer_monitor.py` detecta deriva estructural y auto-alinea los invariantes (`INV_C5_*`) en la suite de pruebas.
 
 ### 6. Atestación Criptográfica Merkle Root SHA3-256 en $O(1)$
 - **Problema en IDEs actuales:** Imposibilidad de verificar si el código generado ha sufrido alteraciones o degradaciones silenciosas.

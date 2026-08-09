@@ -9,7 +9,7 @@ Extracted from heal.py to keep file size under 300 LOC.
 Contains the escalating prompt templates used by the healing engine.
 """
 
-from babylon60.extensions.mejoralo.constants import (
+from babylon60.extensions.exergy_optimizer.constants import (
     FILES_PER_ITERATION,
     FILES_PER_ITERATION_DEFAULT,
     HEAL_TEMPERATURES,

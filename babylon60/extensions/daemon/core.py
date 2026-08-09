@@ -87,7 +87,7 @@ class MoskvDaemon(AlertHandlerMixin, HealingMixin, LoopsMixin, ResourceMgrMixin,
     engine_health: Any
     disk_monitor: Any
     evaluation_monitor: Any
-    auto_mejoralo: Any
+    auto_exergy_optimizer: Any
     compaction_monitor: Any
     perception_monitor: Any
     security_monitor: Any
@@ -114,7 +114,7 @@ class MoskvDaemon(AlertHandlerMixin, HealingMixin, LoopsMixin, ResourceMgrMixin,
     scheduler: Any
     watchdog_hub: Any
     callback_api: Any
-    mejoralo_monitor: Any
+    exergy_optimizer_monitor: Any
     ast_debt_monitor: Any
     l2_drain_monitor: Any
     _healed_total: int
@@ -168,7 +168,7 @@ class MoskvDaemon(AlertHandlerMixin, HealingMixin, LoopsMixin, ResourceMgrMixin,
         self._run_monitor(
             status, "evaluation_alerts", self.evaluation_monitor, self._alert_evaluation
         )
-        self._run_monitor(status, "mejoralo_alerts", self.mejoralo_monitor, self._alert_mejoralo)
+        self._run_monitor(status, "exergy_optimizer_alerts", self.exergy_optimizer_monitor, self._alert_exergy_optimizer)
         self._run_monitor(
             status, "compaction_alerts", self.compaction_monitor, self._alert_compaction
         )

@@ -6,7 +6,7 @@
 """
 OMEGA-SINGULARITY: Unified Project Quality Monitor.
 
-Unifies AutonomousMejoraloMonitor and EntropyMonitor into a single,
+Unifies AutonomousExergyOptimizerMonitor and EntropyMonitor into a single,
 zero-redundancy thermodynamic sweep.
 
 Resolves overlap detected in analyze_entropy.py (0.93 -> 0.0).
@@ -18,14 +18,14 @@ import logging
 from pathlib import Path
 from typing import Any
 
-from babylon60.extensions.daemon.models import EntropyAlert, MejoraloAlert
+from babylon60.extensions.daemon.models import EntropyAlert, ExergyOptimizerAlert
 from babylon60.extensions.daemon.monitors.base import IntervalProjectMonitor
-from babylon60.extensions.mejoralo import MejoraloEngine
+from babylon60.extensions.exergy_optimizer import ExergyOptimizerEngine
 
 logger = logging.getLogger("moskv-daemon")
 
 
-class UnifiedMejoraloMonitor(IntervalProjectMonitor[Any]):
+class UnifiedExergyOptimizerMonitor(IntervalProjectMonitor[Any]):
     """Sovereign monitor for project quality and entropy resolution."""
 
     def __init__(
@@ -42,12 +42,12 @@ class UnifiedMejoraloMonitor(IntervalProjectMonitor[Any]):
         self._stats = {"scans": 0, "heals": 0, "errors": 0}
 
     def _check_project(self, project: str, path_str: str) -> list[Any]:
-        """Runs a single scan and returns both Mejoralo and/or Entropy alerts."""
+        """Runs a single scan and returns both ExergyOptimizer and/or Entropy alerts."""
         path = Path(path_str).expanduser().resolve()
         if not path.exists() or not path.is_dir():
             return []
 
-        m = MejoraloEngine(engine=self._engine)
+        m = ExergyOptimizerEngine(engine=self._engine)
         logger.info("🌌 OMEGA-SINGULARITY sweep initiated for %s", project)
 
         # 1. Singular Scan
@@ -82,7 +82,7 @@ class UnifiedMejoraloMonitor(IntervalProjectMonitor[Any]):
 
         # 4. Generate Alerts (backward compatible with DaemonStatus)
         alerts.append(
-            MejoraloAlert(
+            ExergyOptimizerAlert(
                 project=project,
                 score=result.score,
                 dead_code=result.dead_code,

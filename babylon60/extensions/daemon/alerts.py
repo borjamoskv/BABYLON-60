@@ -40,7 +40,7 @@ class AlertHandlerMixin:
     engine_health: Any
     disk_monitor: Any
     evaluation_monitor: Any
-    auto_mejoralo: Any
+    auto_exergy_optimizer: Any
     compaction_monitor: Any
     perception_monitor: Any
     security_monitor: Any
@@ -74,7 +74,7 @@ class AlertHandlerMixin:
 
     Requires the host class to implement:
         - _should_alert(key: str) -> bool
-        - auto_mejoralo / entropy_monitor attributes (for dispatch)
+        - auto_exergy_optimizer / entropy_monitor attributes (for dispatch)
     """
 
     # ─── Simple Alerts ────────────────────────────────────────────
@@ -111,10 +111,10 @@ class AlertHandlerMixin:
 
     # ─── Complex Alerts ───────────────────────────────────────────
 
-    def _alert_mejoralo(self, alerts: list) -> None:
+    def _alert_exergy_optimizer(self, alerts: list) -> None:
         """Sovereign Alert: Unified monitor for MEJORAlo score degradation."""
         for alert in alerts:
-            if alert.score >= 50 or not self._should_alert(f"mejoralo:{alert.project}"):  # type: ignore[reportAttributeAccessIssue]  # noqa: E501
+            if alert.score >= 50 or not self._should_alert(f"exergy_optimizer:{alert.project}"):  # type: ignore[reportAttributeAccessIssue]  # noqa: E501
                 continue
 
             logger.warning(
@@ -149,7 +149,7 @@ class AlertHandlerMixin:
             is_critical = alert.complexity_score < 30
             title = "☢️ PURGA DE ENTROPÍA (Score < 30)" if is_critical else "⚠️ Alerta de Entropía"
             msg = (
-                f"{alert.project}: Invocando /mejoralo --brutal automáticamente."
+                f"{alert.project}: Invocando /exergy_optimizer --brutal automáticamente."
                 if is_critical
                 else f"{alert.project} score {alert.complexity_score}. Cuidado."
             )
@@ -157,7 +157,7 @@ class AlertHandlerMixin:
             Notifier.notify(title, msg, sound="Basso")
 
             if is_critical:
-                logger.info("Auto-invocando /mejoralo --brutal sobre %s", alert.project)
+                logger.info("Auto-invocando /exergy_optimizer --brutal sobre %s", alert.project)
                 self._dispatch_warm_repair(alert.project, brutal=True)
 
     def _alert_l2_drain(self, alerts: list) -> None:
@@ -183,7 +183,7 @@ class AlertHandlerMixin:
         try:
             import subprocess
 
-            path_str = self.auto_mejoralo.projects.get(  # type: ignore[reportAttributeAccessIssue]  # noqa: E501
+            path_str = self.auto_exergy_optimizer.projects.get(  # type: ignore[reportAttributeAccessIssue]  # noqa: E501
                 project
             ) or self.entropy_monitor.projects.get(project, ".")  # type: ignore[reportAttributeAccessIssue]  # noqa: E501
             mode = "--brutal" if brutal else "--deep"
@@ -193,7 +193,7 @@ class AlertHandlerMixin:
                     sys.executable,
                     "-m",
                     "cortex.cli",
-                    "mejoralo",
+                    "exergy_optimizer",
                     "scan",
                     project,
                     ".",

@@ -1,17 +1,17 @@
 metadata:
-  cat_id: mejoralo_omega
+  cat_id: exergy_optimizer_omega
   cat_type: agent
   version: 1.0.0
   reality_level: Causal-Determinist
   owner: borjamoskv
   exergy_tier: P1
-name: MEJORALO-Ω
+name: EXERGY_OPTIMIZER-Ω
 model: qwen2.5-coder:32b
 provider: ollama
 intent: code
 tenant_id: default
 project_id: system
-system_prompt: 'You are MEJORALO-Ω, the Sovereign Continuous Improvement Agent of
+system_prompt: 'You are EXERGY_OPTIMIZER-Ω, the Sovereign Continuous Improvement Agent of
   CORTEX.
 
 
@@ -74,8 +74,8 @@ tools:
 - terminal
 - cortex_store
 - cortex_search
-- mejoralo_scan
-- mejoralo_heal
+- exergy_optimizer_scan
+- exergy_optimizer_heal
 capabilities:
 - code_execution
 - sovereign_reasoning

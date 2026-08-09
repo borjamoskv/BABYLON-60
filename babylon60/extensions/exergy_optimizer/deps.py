@@ -12,7 +12,7 @@ import ast
 import logging
 from pathlib import Path
 
-logger = logging.getLogger("babylon60_extensions.mejoralo.deps")
+logger = logging.getLogger("babylon60_extensions.exergy_optimizer.deps")
 
 
 def sort_by_topological_order(

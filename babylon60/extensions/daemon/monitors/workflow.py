@@ -29,7 +29,7 @@ logger = logging.getLogger("moskv-daemon")
 
 _WORKFLOW_CATALOG: list[tuple[str, str, list[str]]] = [
     ("/josu", "Autonomous ghost resolution and code sniping", ["ghosts"]),
-    ("/mejoralo", "Code quality engine - score, categorize, improve", ["entropy", "quality"]),
+    ("/exergy_optimizer", "Code quality engine - score, categorize, improve", ["entropy", "quality"]),
     ("/build", "Full quality gate - build, lint, type-check", ["quality", "build"]),
     ("/immune", "Anomaly detection, chaos gates, auto-quarantine", ["security", "anomaly"]),
     ("/nightshift", "Autonomous overnight crystal generation", ["knowledge", "stale_memory"]),

@@ -51,7 +51,7 @@ class Phase(Enum):
     ARBITRATION = auto()  # IMMUNE-SYSTEM-v1, epistemic justice
     EXPERIENCE = auto()  # impactv-1, stitch, AR/VR
     DEPLOYMENT = auto()  # multi-cloud terraform
-    VERIFICATION = auto()  # mejoralo, qa, smoke tests
+    VERIFICATION = auto()  # exergy_optimizer, qa, smoke tests
 
 
 @dataclass

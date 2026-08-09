@@ -31,7 +31,7 @@ async def get_power_level() -> dict[str, Any]:
     """Return current sovereign power level."""
     scores = {}
     try:
-        from babylon60.extensions.mejoralo.scan import scan  # real scanner
+        from babylon60.extensions.exergy_optimizer.scan import scan  # real scanner
 
         result = scan("cortex/")  # type: ignore
         # Map scan result dimensions to our Dimension enum

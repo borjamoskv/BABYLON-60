@@ -6,7 +6,7 @@
 """GitHub Real-Time Auditor Daemon (CodeQL & Issues).
 
 Pollea asíncronamente el API de GitHub (vía CLI `gh`) para buscar Alertas de Code Scanning
-e Issues abiertos. Invoca al Enjambre (MejoraloSwarm) aislando la carga termodinámica,
+e Issues abiertos. Invoca al Enjambre (ExergyOptimizerSwarm) aislando la carga termodinámica,
 aplica mutaciones AST y cristaliza (Git Sentinel) cerrando el bucle.
 """
 
@@ -18,7 +18,7 @@ import logging
 from pathlib import Path
 from typing import Any
 
-from babylon60.extensions.mejoralo.swarm import MejoraloSwarm
+from babylon60.extensions.exergy_optimizer.swarm import ExergyOptimizerSwarm
 
 logger = logging.getLogger("babylon60_extensions.swarm.github_auditor")
 
@@ -92,7 +92,7 @@ class GitHubAuditorDaemon:
 
         try:
             # ULTRATHINK P0 Mode (Level 2 Swarm for security)
-            swarm = MejoraloSwarm(level=2)
+            swarm = ExergyOptimizerSwarm(level=2)
             result_code = await swarm.refactor_file(file_path=file_path, findings=[finding_str])
 
             if result_code:

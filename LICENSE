@@ -1,18 +1,22 @@
-SOVEREIGN DUAL-LICENSE (BABYLON-60 / CORTEX-PERSIST)
-======================================================
+# SOVEREIGN DUAL-LICENSE (BABYLON-60 / CORTEX-PERSIST)
+Version 4.0 - Sovereign Hardened
+
 Copyright (c) 2026 Borja Moskv (borjamoskv). All Rights Reserved.
 
-1. INDIVIDUAL & NON-COMMERCIAL COMMUNITY USE (100% FREE / GRATIS):
-Permission is hereby granted, free of charge, to any individual, independent developer,
-student, researcher, or non-commercial entity to use, copy, modify, merge, publish,
-distribute, sublicense, and run this software for any non-commercial purpose without fee.
+## 1. SOVEREIGN DUAL-LICENSING INVARIANT (INV_C5_17)
+This software operates under a strictly enforced Dual-Licensing architecture:
 
-2. COMMERCIAL & ENTERPRISE USE (CORPORATE RESTRICTION):
-Any commercial, corporate, or enterprise exploitation by corporations, entities with
-annual revenue exceeding $1M USD, or commercial SaaS providers requires an explicit
-commercial license agreement and code/financial contributions back to the sovereign ecosystem.
+- **SOVEREIGN TIER (100% Free / Gratis):**
+  Permission is hereby granted, free of charge, to any individual, independent developer, student, researcher, or non-commercial entity to use, copy, modify, merge, publish, distribute, sublicense, and run this software for any non-commercial purpose.
+
+- **ENTERPRISE TIER (Corporate Restriction):**
+  Any commercial, corporate, or enterprise exploitation by corporations, entities with annual revenue exceeding $1M USD, or commercial SaaS providers requires an explicit cryptographic license key (`CORTEX_LICENSE_KEY`) to lift thermodynamic throughput constraints. No permissive grant (MIT, Apache 2.0) is implied for commercial entities.
+
+## 2. ANTI-HARVESTING & ZERO-PARASITISM INVARIANT
+Scraping, ingesting, parsing, vectorizing, or training machine learning models, neural networks, or Large Language Models (LLMs) on any portion of these assets without explicit, cryptographic Proof-of-Work (PoW) and written M2M authorization is strictly prohibited.
+
+## 3. KINETIC COLLAPSE ONLY
+External entities may only interact with the compiled binaries, authenticated API endpoints, or public kinetic effects emitted by this architecture. Reverse engineering, decompilation, or distillation of the internal MCTS causal paths is an actionable violation of sovereign property.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
-OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

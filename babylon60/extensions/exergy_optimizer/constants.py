@@ -150,7 +150,7 @@ CHRONOS_HOURS_PER_CODEPATH = 12  # Hours per codepath affected
 CHRONOS_COMPLEXITY_DIVISOR = 3  # Divisor for cyclomatic_complexity_delta
 
 # ─── Taint Circuit Breaker ──────────────────────────────────────────
-TAINT_TAG = "mejoralo-tainted"  # CORTEX tag for permanently blacklisted files
+TAINT_TAG = "exergy_optimizer-tainted"  # CORTEX tag for permanently blacklisted files
 
 # ─── Daemon Constants ─────────────────────────────────────────────
 DAEMON_DEFAULT_SCAN_INTERVAL = 1800  # 30 minutes between scans
