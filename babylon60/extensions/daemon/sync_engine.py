@@ -61,8 +61,8 @@ class CortexSyncManager:
 
                 return stats
 
-            except Exception:  # noqa: BLE001
-                logger.exception("Sync cycle failed")
+            except (RuntimeError, OSError, ValueError) as err:
+                logger.exception("Sync cycle failed: %s", err)
                 return {"error": "Internal server error"}
 
     async def _merkle_pulse_sync(self) -> SyncResult:

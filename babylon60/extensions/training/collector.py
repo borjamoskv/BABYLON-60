@@ -189,7 +189,7 @@ class TrajectoryCollector:
                     )
                     try:
                         action_input_str = json.dumps(str(action.input))
-                    except Exception:  # noqa: BLE001
+                    except (TypeError, ValueError):
                         action_input_str = '"{}"'
 
                 conversation.append(
