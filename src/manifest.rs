@@ -74,7 +74,7 @@ pub struct SharedManifest {
     /// 0x08 — época monótona. Imposibilita ABA: 2⁶⁴ ÷ 10⁹ ≈ 584 años.
     pub epoch_id: AtomicU64,
     /// 0x10..0x30 — SHAKE256/256 del estado del ledger, como 4×u64 atómicos.
-    /// Misma ABI que [u8;32]. Evita data race en lecturas Relaxed del seqlock.
+    /// Misma ABI que `[u8; 32]`. Evita data race en lecturas Relaxed del seqlock.
     pub payload_hash: [AtomicU64; 4],
     /// 0x30..0x40 — relleno para completar hasta 64 B.
     pub _padding: [u8; 16],
