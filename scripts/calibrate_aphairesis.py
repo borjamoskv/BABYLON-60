@@ -63,7 +63,7 @@ def calibrate_operator(X_raw, Y_compressed, f_reconstruct, design_temp_k=320.0, 
     """
     Calibra el operador de Aphairesis f: X -> Y y emite las constantes de compilación.
     """
-    print(f"[*] Iniciando calibración de Aphairesis (N={len(X_raw)}, T={design_temp_k}K)...")
+    print(f"[*] Initiating calibración de Aphairesis (N={len(X_raw)}, T={design_temp_k}K)...")
     
     # 1. Entropía Topológica de Persistencia
     h_topo_x = compute_0d_persistence_entropy(X_raw)

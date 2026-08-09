@@ -34,7 +34,7 @@ def log(msg):
 
 def _submit_task(base_url, headers, prompt):
     project_id = "00000000-0000-0000-0000-000000000000"
-    log(f"Iniciando Transición SUBMITTING con prompt: '{prompt}'")
+    log(f"Initiating Transición SUBMITTING con prompt: '{prompt}'")
     payload = {
         "0": {
             "json": {
@@ -87,7 +87,7 @@ def run_fsm(bearer_token, cookie_str, prompt):
     }
     task_id = _submit_task(base_url, headers, prompt)
     log(f"Transición EXITOSA -> QUEUED. TaskID: {task_id}")
-    log("Iniciando Transición POLLING (Bucle acotado a 90s)")
+    log("Initiating Transición POLLING (Bucle acotado a 90s)")
     start_time = time.time()
 
     while time.time() - start_time < 90:

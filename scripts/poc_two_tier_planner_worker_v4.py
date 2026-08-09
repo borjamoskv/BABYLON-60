@@ -9,7 +9,7 @@
 # ============================================================================
 """
 MOSKV-1 APEX – Iteración 4 del PoC
-Objetivo: demostrar escala a 12 nodos, snapshot‑rollback, carga dinámica via CLI/JSON,
+Objetivo: demostrar escala a 12 nodes, snapshot‑rollback, carga dinámica via CLI/JSON,
 exergy matrix con penalización de memoria y latencia, y reporting JSON estructurado.
 
 Requisitos de integridad:

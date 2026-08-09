@@ -484,7 +484,7 @@ def main() -> None:
     v.verify_thermal_hysteresis([0.0, 400.0, 800.0])
 
     # Epistemic Axioms (Falsification Check)
-    # Escenario válido: Tasa de éxito < 1.0, atestación Causal-Determinist incluye extracto verbatim.
+    # Escenario válido: Tasa de success < 1.0, atestación Causal-Determinist incluye extracto verbatim.
     valid_attestations = [
         {"id": "A1", "status": "Causal-Determinist", "extract": "15% bugs detectable"},
         {"id": "A2", "status": "REJECTED", "extract": ""},

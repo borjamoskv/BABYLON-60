@@ -8,10 +8,10 @@
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 """
-verify_claims.py — Verificación paralela del informe de arbitraje contra
+verify_claims.py — Verificación paralela del report de arbitraje contra
 fuentes primarias.
 
-El informe llegó con TODAS sus cifras marcadas "[verificar contra la fuente
+El report llegó con TODAS sus cifras marcadas "[verificar contra la fuente
 primaria]". Este script las verifica realmente: fetch HTTP, extracción del
 número reclamado, comparación.
 
@@ -39,7 +39,7 @@ CTX.verify_mode = ssl.CERT_NONE
 @dataclass
 class Claim:
     id: str
-    claim: str  # afirmación del informe
+    claim: str  # afirmación del report
     urls: list[str]  # fuentes primarias candidatas
     probes: list[str]  # regex que confirmarían la cifra
     status: str = "PENDIENTE"
@@ -186,7 +186,7 @@ def check(c: Claim) -> dict:
 
 
 def main() -> int:
-    print("\nVERIFICACIÓN DE CIFRAS · informe de arbitraje contra fuentes primarias")
+    print("\nVERIFICACIÓN DE CIFRAS · report de arbitraje contra fuentes primarias")
     print("=" * 84)
     out = []
     with ThreadPoolExecutor(max_workers=len(CLAIMS)) as ex:
@@ -215,7 +215,7 @@ def main() -> int:
     print("\n" + "=" * 84)
     print("  " + " · ".join(f"{k}={v}" for k, v in sorted(tally.items())))
     json.dump(out, open("verification_report.json", "w"), indent=2, ensure_ascii=False)
-    print("  informe: verification_report.json")
+    print("  report: verification_report.json")
     return 0
 
 

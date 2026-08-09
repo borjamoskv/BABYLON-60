@@ -127,7 +127,7 @@ def update_project_md(state: dict[str, Any]) -> bool:
 
 def cmd_list(args: argparse.Namespace) -> None:
     state = load_state()
-    print("Claim: Listado actual de objetivos y milestones extraído con éxito de la ontología.")
+    print("Claim: Listado actual de objetivos y milestones extraído con success de la ontología.")
     print(
         f'''Proof:\n  Base: "{YAML_STATE_PATH.name}"\n  Range: [0, {len(state.get("objectives", []))}]\n  Confidence: Causal-Determinist'''
     )

@@ -52,7 +52,7 @@ def _purge_db_file(db_path: Path) -> bool:
 
 
 def consolidate_dbs() -> None:
-    print(f"🟢 Iniciando Consolidación BFT Causal-Determinist hacia {CENTRAL_DIR}")
+    print(f"🟢 Initiating Consolidación BFT Causal-Determinist hacia {CENTRAL_DIR}")
     CENTRAL_DIR.mkdir(parents=True, exist_ok=True)
 
     db_paths = [

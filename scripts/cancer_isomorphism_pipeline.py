@@ -53,7 +53,7 @@ def simulate_boolean_network(
 
 
 def main() -> None:
-    print("MOSKV-1 APEX: Iniciando Motor Empírico (WGCNA surrogate) y Aserción de Falsabilidad...")
+    print("MOSKV-1 APEX: Initiating Motor Empírico (WGCNA surrogate) y Aserción de Falsabilidad...")
     np.random.seed(42)
     N_SAMPLES = 200
     N_GENES = 50
@@ -79,7 +79,7 @@ def main() -> None:
     )
 
     drivers_emp = get_structural_driver_nodes(G_empirico)
-    print(f"[CONTROL] Driver Nodes detectados en matriz empírica: {len(drivers_emp)} nodos.")
+    print(f"[CONTROL] Driver Nodes detectados en matriz empírica: {len(drivers_emp)} nodes.")
 
     initial_state = {str(n): 1 for n in G_empirico.nodes()}
     hist_basal, _ = simulate_boolean_network(G_empirico, initial_state, steps=30)
@@ -94,7 +94,7 @@ def main() -> None:
 
     UMBRAL_FALSACION = 40.0
     assert caida_atractor > UMBRAL_FALSACION, (
-        f"[ERROR Causal-Determinist] La intervención teórica solo alcanzó {caida_atractor:.1f}% de colapso. No supera el umbral crítico ({UMBRAL_FALSACION}%). Hipótesis REFUTADA. No derivar a ensayo In-Vitro."
+        f"[ERROR Causal-Determinist] La intervención teórica solo alcanzó {caida_atractor:.1f}% de collapse. No supera el umbral crítico ({UMBRAL_FALSACION}%). Hipótesis REFUTADA. No derivar a ensayo In-Vitro."
     )
     print(
         "[ÉXITO Causal-Determinist] Hipótesis topológica VALIDAD. La intervención supera el umbral termodinámico requerido para someterse a ensayo In-Vitro (CRISPR/Cas9)."

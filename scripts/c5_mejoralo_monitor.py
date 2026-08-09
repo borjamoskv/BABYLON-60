@@ -209,7 +209,7 @@ def git_sentinel_commit(status_hash: str) -> str:
 def _print_db_census_entry(db_name: str, tables: dict[str, int]) -> int:
     if isinstance(tables, dict) and "ERROR" not in tables:
         db_total = sum(tables.values())
-        print(f"  {db_name:30s} → {db_total:>8,} nodos ({len(tables)} tablas)")
+        print(f"  {db_name:30s} → {db_total:>8,} nodes ({len(tables)} tables)")
         return db_total
     print(f"  {db_name:30s} → ERROR")
     return 0
@@ -224,7 +224,7 @@ def c5_real_colapso() -> None:
     git_report = audit_git_entropy()
     print(f"\n[GIT] HEAD: {git_report['head']} | Branch: {git_report['branch']}")
     print(f"[GIT] Commits: {git_report['commits']} | Tag: {git_report['last_tag']}")
-    print(f"[GIT] Entropía: {git_report['dirty_count']} archivos mutados")
+    print(f"[GIT] Entropy: {git_report['dirty_count']} mutated files")
     if isinstance(git_report["dirty_files"], list):
         for f in git_report["dirty_files"][:10]:
             print(f"      ↳ {f}")
@@ -232,19 +232,19 @@ def c5_real_colapso() -> None:
     # Phase 2: BFT Database Census
     db_census = audit_db_census()
     total_nodes = 0
-    print("\n[BFT] Censo de Bases de Datos:")
+    print("\n[BFT] Database Census:")
     for db_name, tables in db_census.items():
         total_nodes += _print_db_census_entry(db_name, tables)
-    print(f"  {'TOTAL':30s} → {total_nodes:>8,} nodos")
+    print(f"  {'TOTAL':30s} → {total_nodes:>8,} nodes")
 
     # Phase 3: Linter
     ruff_report = audit_ruff()
-    print(f"\n[RUFF] Errores: {ruff_report['total_errors']} | Fixable: {ruff_report['fixable']}")
+    print(f"\n[RUFF] Errors: {ruff_report['total_errors']} | Fixable: {ruff_report['fixable']}")
 
     # Phase 4: Tests
     test_report = audit_tests()
     print(
-        f"[TEST] Archivos de test: {test_report['test_files']} | Estado: {test_report['status']} | Passed: {test_report.get('passed', 0)}"
+        f"[TEST] Test Files: {test_report['test_files']} | State: {test_report['status']} | Passed: {test_report.get('passed', 0)}"
     )
 
     # Phase 5: Crystallize
@@ -259,7 +259,7 @@ def c5_real_colapso() -> None:
     print(f"\n[HASH] STATUS.md SHA3-256: {status_hash[:24]}...")
 
     # Phase 6: Mutate STATUS.md + Git Sentinel
-    print("[GIT SENTINEL] Forzando colapso...")
+    print("[GIT SENTINEL] Enforcing state collapse...")
     append_mutation("[PENDING]", status_hash)
     sentinel_hash = git_sentinel_commit(status_hash)
 
@@ -273,9 +273,9 @@ def c5_real_colapso() -> None:
     _git(["commit", "--amend", "--no-edit", "--no-verify"])
     final_hash = _git(["rev-parse", "--short", "HEAD"])
 
-    print(f"[GIT SENTINEL] Colapso: {final_hash}")
+    print(f"[GIT SENTINEL] Collapse: {final_hash}")
     print("=" * 60)
-    print(f" MEJORALO COMPLETADO | {total_nodes:,} nodos BFT | {final_hash}")
+    print(f" MEJORALO COMPLETE | {total_nodes:,} BFT nodes | {final_hash}")
     print("=" * 60)
 
 
