@@ -1,3 +1,9 @@
+---
+title: AI Regulatory Compliance Certificate DE — BABYLON-60 v4.0
+status: Causal-Determinist
+version: 4.0.0
+---
+
 # KI-Konformitätsbescheinigung (BABYLON-60 v4.0)
 **EU-Verordnung über Künstliche Intelligenz (Verordnung EU 2024/1689 / BSI)**  
 **Autoridad de Supervisión:** `Bundesamt für Sicherheit in der Informationstechnik (BSI) / EU AI Office`  

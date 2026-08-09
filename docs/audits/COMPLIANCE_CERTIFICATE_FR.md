@@ -1,3 +1,9 @@
+---
+title: Certificat de Conformité Réglementaire IA FR — BABYLON-60 v4.0
+status: Causal-Determinist
+version: 4.0.0
+---
+
 # Certificat de Conformité Réglementaire IA (BABYLON-60 v4.0)
 **Règlement Européen sur l'IA (Règlement UE 2024/1689 / CNIL / ANSSI)**  
 **Autoridad de Supervisión:** `Commission Nationale de l'Informatique et des Libertés (CNIL) / ANSSI / UE`  
