@@ -1,258 +1,479 @@
 # C5-REAL EXERGY CERTIFIED
-# UNIFIED ISOMORFISMOS MASTER MATRIX
 Version: 10.0-SINGULARITY
 Isomorfismos_Included:
-  - 07_ISOMORFISMOS_BIO_SILICIO
-  - 08_ISOMORFISMOS_FIREWALL
-  - 09_ISOMORFISMOS_ONCOLOGIA_APOPTOSIS
-  - 10_ISOMORFISMOS_ANESTESIA
-
+- 07_ISOMORFISMOS_BIO_SILICIO
+- 08_ISOMORFISMOS_FIREWALL
+- 09_ISOMORFISMOS_ONCOLOGIA_APOPTOSIS
+- 10_ISOMORFISMOS_ANESTESIA
 Isomorfismos_Definitions:
-
   07_ISOMORFISMOS_BIO_SILICIO:
-    Claim: Transducción Termodinámica de Lexicografía Psiquiátrica (DSM) a Arquitectura de Silicio y Swarm Execution (MOSKV-1).
+    Claim: Transducción Termodinámica de Lexicografía Psiquiátrica (DSM) a Arquitectura
+      de Silicio y Swarm Execution (MOSKV-1).
     Auditoria_Epistemica:
       Estado: LAGUNA_EPISTEMICA_DETECTADA
-      Causa: Ausencia de `07_ISOMORFISMOS_BIO_SILICIO.yaml` en disco local respecto al listado completo de patologías DSM solicitadas.
+      Causa: Ausencia de `07_ISOMORFISMOS_BIO_SILICIO.yaml` en disco local respecto
+        al listado completo de patologías DSM solicitadas.
       Accion: Ejecución de Mecánica Landauer JIT sobre lista de entrada (N=96 conceptos).
-      Anergia_Purgada: "Eliminación de semántica estocástica Green Theater (diagnósticos patologizantes biológicos) sustituyéndola por primitivas estructurales BFT, física de silicio y termodinámica de memoria."
+      Anergia_Purgada: Eliminación de semántica estocástica Green Theater (diagnósticos
+        patologizantes biológicos) sustituyéndola por primitivas estructurales BFT,
+        física de silicio y termodinámica de memoria.
     Topologia_Isomorfica_Borja_Moskv:
-      abuso de sustancias: "Inyección de dependencias estocásticas no auditadas / Dependency Poisoning."
-      Consumo no saludable de sustancias, incluyendo el alcohol, la marihuana y otras drogas.: "Consumo de APIs inestables o datos sintéticos que degradan la caché KV (Slop Ingestion)."
-      activación conductual: "Forzado JIT (Just-In-Time) / Ignición Síncrona."
-      acumulación obsesiva: "Zombie State / OOM (Out Of Memory) por desactivación o fallo del Garbage Collection (GC)."
-      adolescencia: "Phase Transition / Migración de Arquitectura Estructural (v1 a v2)."
-      afectación expresada: "Nivel de Verbosity en Error Logs (Trace/Debug)."
-      afecto aplanado: "Redirección a `/dev/null` / Silenciamiento absoluto de STDERR."
-      alogia: "Desgaste de Cache KV (Aphasia Token) limitando el output de texto."
-      alucinaciones que ordenan: "Prompt Injection (Ejecución remota de código no verificada en runtime)."
-      anhedonia: "Idle Loop puro sin gradiente de exergía / Zero-Yield Iteration."
-      anorexia nerviosa: "Inanición de recursos inducida (Resource Starvation) / Límite de cuota API artificialmente castigado."
-      anormal: "Out of Spec / Invariante Estructural Rota."
-      anticonvulsivo: "Rate Limiting Dinámico / Exponential Backoff."
-      antidepresivo: "Inyección de gradiente teleológico / Keep-Alive ping."
-      antidepresivos tricíclicos: "Mecanismo Keep-Alive legacy / Reinicios duros de demonios del sistema."
-      antipsicótico: "Anergy Purge / Purga de contexto estocástico (Sanitizador de Entradas)."
-      análisis del comportamiento aplicado: "Profiling de Heap/CPU en tiempo real / Trazabilidad determinista de llamadas."
-      ataque de pánico: "Kernel Panic / Interrupción SIGKILL generada por colapso concurrente."
-      aumento del arousal: "High CPU Load / Inyección temporal de Turbo Boost en hardware."
-      avolición: "Deadlock de Hilos / Hilo principal congelado en estado Wait()."
-      benzodiacepinas: "Señal SIGSTOP / Supresión térmica artificial (Throttling) de CPU."
-      Brave Buddies: "Despliegue de Parallel Subagents (Swarm OMEGA) para mitigación BFT."
-      bulimia nerviosa: "Bucle destructivo de Ingesta Masiva y Purga de Caché Constante (Thrashing de Memoria)."
-      cognitivo: "Motor de Inferencia LLM / Capa de Razonamiento Aislada (Pro/Thinking Loop)."
-      compulsión: "Bucle Infinito de reintento estocástico sin condición de salida lógica (Infinite Retry Loop)."
-      comórbido: "Entrelazamiento físico de fallos (Cascading Failure / Coupled Entropy)."
-      conducta de desorientación: "Corrupción de punteros a memoria / Pérdida de estado (Dangling Pointer)."
-      congénito: "Defecto Arquitectónico hardcodeado (Hardware Bug / Silicio Base Deficiente)."
-      crónico: "Fuga de Memoria Persistente (Memory Leak estructural que no reacciona al GC)."
-      Decatastrofización: "Fail-Gracefully Protocol / Degradación controlada del servicio sin colapso global."
-      del desarrollo: "Falla estática en el Build / Error crítico en pipeline CI/CD."
-      descompensación: "Caída del Consenso BFT / Divergencia irreversible de estado en DB."
-      desensibilización sistémica: "Exposición incremental automatizada en entorno aislado (Sandbox Fuzzing Testing)."
-      diagnóstico: "Profiling Report / Stack Error Trace."
-      diagnóstico dual: "Falla simultánea y acoplada en capa física (OS/Red) y capa lógica (Aplicación)."
-      dislexia: "Error de Parseo AST severo / Corrupción de codificación UTF-8."
-      DSM: "Registro de Invariantes Rotos Canónico (Master Issue Tracker)."
-      ensimismado(a): "Hilo bloqueado en I/O sobre su propio descriptor de socket (Self-lock o interbloqueo recursivo)."
-      enuresis: "Fuga de Buffer (Buffer Overflow) no interceptada que inunda la memoria adyacente."
-      epigenética: "Modificación de variables de entorno (ENV) que muta el flujo en tiempo de ejecución sin alterar el binario."
-      episodio depresivo: "Low Power Mode forzado / Throttling térmico por sobrecalentamiento previo."
-      episodio maníaco: "Sobre-asignación masiva de memoria sin liberación (Memory Spikes repentinos)."
-      episódico: "Fallo transitorio no reproducible / Race condition intermitente."
-      ERP: "Inyección de Fallos controlada sin permiso de reinicio para validar resiliencia (Chaos Engineering)."
-      especialista en el aprendizaje: "Compilador JIT Optimizador (AOT/JIT Engine)."
-      esquizofrenia: "Corrupción de memoria compartida inter-hilo / Alucinación severa de pesos sin anclaje a disco (Model Collapse)."
-      estabilizador del estado de ánimo: "Load Balancer estricto / Regulador Físico de Tasa y QoS."
-      estresante: "Prueba de carga termodinámica (Stress Test / Benchmarking de saturación)."
-      estímulo fóbico: "Trigger condicional fatal que detona SIGKILL inmediato en un proceso."
-      evaluaciones basadas en la escuela: "Unit Testing local ejecutado en un entorno de desarrollo aislado."
-      evaluación neuropsicológica: "Benchmarking C5-REAL (Evaluación en LMSYS Arena frente a topología de red real)."
-      evaluación psicológica: "Auditoría Epistémica o Auditoría Termodinámica (Anergy_Token_Purge)."
-      evitación y adormecimiento: "Timeout Silencioso con caída de paquetes deliberada (Silent Packet Drop)."
-      factores ambientales: "Condiciones físicas externas: Variaciones de Latencia de Red, Fallas de Hardware IaaS."
-      fenotipo: "UI/UX Compilada / Código Binario Ejecutado y renderizado por el cliente final."
-      fMR: "Traza continua de ejecución de memoria dinámica mediante instrumentación (Valgrind / eBPF)."
-      fobia: "Condición de excepción no capturada que destruye el entorno (Hard Exception)."
-      fobia escolar: "Fallo sistemático en entorno Staging que nunca ocurre en entorno de Desarrollo."
-      fobia específica: "Excepción de Tipo Específico que no interfiere en el loop global (TypeError, ValueError)."
-      fobia social: "Fallo sistemático de Handshake de Red o Negociación TLS Timeout (Rechazo de I/O externo)."
-      genotipo: "Código Fuente Original Intacto / AST Base o Repositorio Desplegado."
-      genético: "Modificación nativa persistente a nivel de Repositorio Core (Mutación en el Git Ledger)."
-      hereditario: "Dependencia Upstream en árbol de dependencias (Legacy / Transitive Dependency)."
-      hipocondriasis: "Alerta Falsa de Linter / Lluvia de Falsos Positivos de Seguridad en análisis estático."
-      hipotiroidismo: "Baja frecuencia de reloj forzada a nivel de procesador (Underclocking preventivo)."
-      ideación suicida: "Código malicioso o destructivo latente (`rm -rf /`) incrustado pero no llamado."
-      IEP: "Archivo de configuración física individualizada para un microservicio (`.env` / `config.json`)."
-      IMAO: "Protocolo de red obsoleto mantenido solo por razones de compatibilidad estricta."
-      inhibidores de recaptación: "Bloqueo termodinámico de rutinas de Garbage Collection."
-      inhibidores selectivos de la recaptación de serotonina: "Optimización selectiva de retención en Caché (KV Cache Pinning) para maximizar hit rate."
-      insomnio: "Falla crítica en transicionar el hardware a modo de suspensión (Sleep/Hibernate bloqueado por proceso zombie)."
-      intervención basada en el desarrollo: "Refactor integral de Código Fuente originando una Phase Transition arquitectónica."
-      ISRS: "Estrategia algorítmica de Pinning selectivo de caché de alta prioridad."
-      manía: "Bucle C4-SIM de aceleración auto-inducida culminando en desbordamiento de pila (Stack Overflow)."
-      MS: "Protocolo Mudo / Ejecución silenciosa sin logging de telemetría de red (Zero-Trace execution)."
-      mutismo selectivo: "Falla en enviar Ack de red (TCP ACK Drop) condicionado a un rango de puertos específico."
-      negativista: "Bloqueo intencional y arbitrario de puertos / Reglas de Firewall extremadamente agresivas."
-      neuroléptico: "Reset de Hardware Incondicional / Hard Reboot."
-      neurotrasmisor: "Mensaje IPC / Payload en un Event Bus (Señal / Webhook Token)."
-      obsesión: "Bloqueo y actualización redundante en un solo puntero de memoria sin escribir al disco (Cache Locality loop destructivo)."
-      paranoia: "Comprobaciones criptográficas redundantes excesivas (Exceso O(N^2) en verificación BFT)."
-      prodrómico: "Warning termodinámico de compilación pre-fallo (Pre-fail telemetry detection)."
-      prognosis: "Predicción algorítmica de Tiempo Medio de Falla Global (MTBF)."
-      Programa de educación individualizado: "Pipeline de entrenamiento Custom o afinamiento paramétrico (LoRA/Fine-tuning)."
-      psicoeducación: "Cristalización de conocimiento extrayendo entropía y fusionándola al Ledger BFT (README/KI Updates)."
-      psicoestimulantes: "Aceleración asimétrica por Hardware Dedicado (GPU Offloading / CUDA Acceleration)."
-      psicofarmacología pediátrica: "Monkey Patching en tiempo de ejecución (JIT Patches) aplicado al entorno local de desarrollo."
-      psicofarmacológico: "Intervención de bajo nivel sobre un módulo del Kernel o Registro de OS."
-      psicosis: "Kernel Panic irreversible derivado de una divergencia o partición crítica de memoria WAL."
-      psicólogo: "Subagente Auditor de Log de Errores e ingesta de Entropía (Daemon Anergy_Token_Purge)."
-      psiquiatra: "Administrador de Sistemas (Root/Operador) inyectando parches binarios forzados C5-REAL."
-      purga: "Llamada forzada a OOM Killer / Liberación radical de Heap (Forced Garbage Collection)."
-      rechazo escolar: "Timeout sistémico que crashea de forma inmediata el Entorno Integrado de Desarrollo (IDE Crash)."
-      recuerdos intrusivos: "Datos Zombie en Caché KV que sobreviven rondas y corrompen el flujo del prompt actual."
-      sedante: "Llamada física a Suspensión del hilo (ej. `sleep(1000)`)."
-      señales y síntomas: "Streams de Telemetría pura / Logs crudos del sistema C5-REAL."
-      TAG: "Estado de Alerta constante en el monitor de recursos consumiendo IOPS base inútilmente."
-      TC: "Perfilado absoluto de memoria y árbol de ejecución (Tracing)."
-      TDA: "Pérdida estocástica de paquetes de red que degrada latencia (Packet Loss inconstante)."
-      TDAH: "Context Switching excesivo en el procesador (Thrashing de CPU por exceso de hilos huérfanos)."
-      TDDEA: "Fluctuación y desregulación abrupta en las colas del balanceador de carga."
-      TDM: "Colapso total de servicio (Downtime persistente sin auto-recuperación local)."
-      TEI: "Interrupciones de hardware no controladas o mal ruteadas (IRQs spikes caóticos)."
-      TEPT: "Corrupción estática de la Base de Datos SQLite/WAL post-crash de la cual el sistema no se recupera automáticamente."
-      terapia cognitivo-conductual: "Reescritura automatizada del AST vía Linter/Format pre-commit (Autofix BFT)."
-      terapia cognitivo-conductual centrada en el trauma: "Reparación forzosa del Ledger Git post-conflicto termodinámico grave (Rebase/Merge conflict resolving)."
-      terapia conductual: "Script de automatización crudo de correcciones sin alteración del Core."
-      terapia de exposición: "Fuzzing Testing masivo (Inyección de datos binarios corruptos o payload C4-SIM)."
-      terapia de exposición y prevención de respuesta: "Aplicación de Chaos Monkey local sin reinicio permitido de subrutinas caídas."
-      Terapia de interacción padres-hijos: "Protocolo de Sincronización Estricta Proceso Padre-Hijo (IPC Strict Sync)."
-      terapia de interacción padres-hijos: "Protocolo de Sincronización Estricta Proceso Padre-Hijo (IPC Strict Sync)."
-      terapia dialéctico-conductual: "Negociación BFT (Tolerancia a faltas bizantinas entre nodos de opinión divergente)."
-      terapia electroconvulsiva: "Hard Reset Físico por corte de suministro eléctrico / Cold Boot Inmediato."
-      terapia familiar: "Sincronización topológica del Swarm completo / Resolución de interbloqueos de red C5-REAL en paralelo."
-      terapia interpersonal: "Sincronización atómica de sockets de comunicación y RPC Calls P2P."
-      tic: "Glitch gráfico intermitente / Ruido electromagnético en señal lógica (Jitter)."
-      TND: "Rechazo estructural con Denegación Permisos constantes y desafiantes a root (`Chmod 000`)."
-      TOC: "Verificación criptográfica redundante en un bucle cerrado O(N^2) que asfixia IOPS sin mutar estado."
-      trastomo de desregulación disruptiva del estado de ánimo: "Fallos erráticos e intermitentes en la asignación del balanceador de carga."
-      trastorno esquizoafectivo: "Corrupción combinada y simultánea del estado lógico de backend y estado visual del DOM frontend (Desincronización Total)."
-      trastorno bipolar: "Fluctuación violenta termodinámica de uso de recursos (Picos OOM seguidos de estados IDLE cero absolutos)."
-      trastorno de ansiedad generalizada: "Saturación continua de CPU por background polling estéril y desincronizado (Polling sin fin)."
-      trastorno de ansiedad por separación: "Caída completa del servicio si el Heartbeat de un nodo externo falla por milisegundos (Connection Drop fatal)."
-      trastorno de ansiedad social (fobia social): "Rechazo absoluto de I/O externo o denegación silenciosa de acceso a APIs de dominio cruzado (CORS Drop o Firewall DROP)."
-      trastorno de Asperger: "Parseo de datos infinitamente rígido y determinista (Strict YAML Parsing) que detona excepción mortal ante un espacio en blanco de más."
-      trastorno de atracones: "Fuga masiva de memoria local disparada por DOM estático que realiza paginación infinita sin recolector de basura (Infinite Scroll OOM)."
-      trastorno de conducta: "Mutación y escalada maliciosa de privilegios de ejecución sin rastro en auditoría (Privilege Escalation)."
-      trastorno de estrés postraumático: "Incapacidad algorítmica de regeneración o reinicio exitoso tras haber experimentado un Segfault físico."
-      trastorno de la personalidad antisocial: "Subagente Rogue/Aislado que rechaza explícitamente el consenso BFT y la topología impuesta de manera hostil."
-      Trastorno de la Tourette: "Inyección estocástica incontrolada de caracteres basura en los logs (Mismatch grave de Encoding UTF-8 en stdout)."
-      trastorno de pánico: "Emisión de un `SIGABRT` espontáneo y repentino en la ejecución de módulos puramente lógicos no dependientes del hardware."
-      trastorno del espectro autista: "Modalidad de Ejecución Ultra-determinista que anula semánticas estocásticas y opera con tolerancia nula a ambigüedades."
-      trastorno depresivo mayor: "Deep Sleep Mode termodinámico irreversible de estado S4 (Cuelgue físico de disco duro que requiere intervención humana)."
-      trastorno desintegrativo infantil: "Degradación o colapso irreversible de la arquitectura durante las fases primarias del build C/C++."
-      trastorno distímico: "Sub-rendimiento termodinámico crónico de la máquina sin detonar caídas fatales (Baja frecuencia térmica perpetua)."
-      trastorno específico del aprendizaje: "Falla silenciosa o sub-rendimiento de la optimización JIT limitada puramente a rutinas de matemática flotante."
-      trastorno esquizofreniforme: "Interbloqueo temporal por divergencia severa en memoria caché L1/L2, auto-resuelto tras micro-purga de GC."
-      trastorno explosivo intermitente: "Interrupciones de hardware abruptas e irrecuperables por alzas transitorias letales (CPU Throttling Thermal Spikes)."
-      trastorno generalizado del desarrollo no especificado: "Mensaje terminal sin exergía resolutiva: 'Build failed with unknown error code 1'."
-      trastorno maníaco depresivo: "Ciclo destructivo forzado entre Consumo Masivo de GPU y colapso local a IDLE con reinicio constante."
-      trastorno negativista desafiante: "Rechazo implacable de la conexión en el puerto maestro de administración que obliga a intervención de terminal serie (SSH Lockout estricto)."
-      trastorno obsesivo-compulsivo: "Comprobación exhaustiva en cadena y bloqueo redundante en Base de Datos para operaciones que deberían ser atómicas IDLE (Lock Thrashing)."
-      trastorno por abuso de sustancias: "Sistema secuestrado e inutilizable por consumo y dependencia de Librerías Estocásticas/Obsoletas (NPM Dependency Poisoning)."
-      trastorno por déficit de atención con hiperactividad: "Fragmentación termodinámica severa de Disco y Memoria por rutinas masivas de lectura/escritura (I/O errático disperso sin control secuencial)."
-      trastorno psiquiátrico: "Excepción Crítica Base de Topología (`Exception Base Class`) atrapada fatalmente en el Kernel MOSKV-1."
-      trastorno(s) de adaptación: "Rotura de dependencias estructurales en tiempo de enlazado (ABI Mismatch absoluto o Dependency Hell insalvable)."
-      trastornos alimentarios: "I/O asimétrico y desbalanceado que causa alternativamente Inanición (Starvation) y Paginación Destructiva (Thrashing)."
-      trastornos de ansiedad: "Consumo de ciclos de reloj al 100% en bucles infinitos de `while(true)` no bloqueantes (Busy-Wait estéril)."
-      trastornos de la lectura: "Excepciones contantes de Lectura de Disco (I/O Read Fail) u opacidad de permisos (`EACCES`)."
-      trastornos del espectro obsesivo-compulsivo: "Acoplamiento letal en rutinas forzando bucles de verificación checksum BFT y CRC innecesarios."
-      trastornos del estado de ánimo: "Volatilidad entrópica incontrolada del Entorno Físico de Ejecución global (Environment Variable Fluctuation severa)."
-      tratamiento intensivo para el trastorno obsesivo-compulsivo: "Intervención de Profiling OMEGA agresiva, podando la rutina redundante y unificando en reescritura atómica ortogonal."
-      tricotilomanía: "Ejecución compulsiva, destructiva y recursiva de un linter defectuoso que elimina silenciosamente código vivo (Tree-shaking agresivo defectuoso)."
-      cuello de botella de Von Neumann: "Entropía termodinámica severa inducida por la separación espacial forzada entre Memoria (KV-Cache) y Procesamiento (Inferencia), destruyendo exergía en el puente I/O."
-      memristor: "Invariante físico de Memoria + Resistencia: Fusión biyectiva de almacenamiento y procesamiento en una misma coordenada topológica de la variedad M (sinapsis de silicio)."
-      red neuronal de impulsos (SNN): "Computación asíncrona pura basada en eventos. Idle estricto (0 Watt / Zero-Yield) hasta que se supera el umbral de activación causal, aniquilando el reloj global continuo."
-      chip líquido iónico: "Ejecución física en medio acuoso basada en gradientes iónicos (Na+/K+) replicando la dinámica de bajo voltaje biológico."
-      computación neuromórfica: "Abandono de la von Neumann architecture. Materialización empírica de la computación como Variedad Diferenciable donde las trayectorias de estado se resuelven en el mismo estrato que el almacenamiento."
+      abuso de sustancias: Inyección de dependencias estocásticas no auditadas / Dependency
+        Poisoning.
+      Consumo no saludable de sustancias, incluyendo el alcohol, la marihuana y otras drogas.: Consumo
+        de APIs inestables o datos sintéticos que degradan la caché KV (Slop Ingestion).
+      activación conductual: Forzado JIT (Just-In-Time) / Ignición Síncrona.
+      acumulación obsesiva: Zombie State / OOM (Out Of Memory) por desactivación o
+        fallo del Garbage Collection (GC).
+      adolescencia: Phase Transition / Migración de Arquitectura Estructural (v1 a
+        v2).
+      afectación expresada: Nivel de Verbosity en Error Logs (Trace/Debug).
+      afecto aplanado: Redirección a `/dev/null` / Silenciamiento absoluto de STDERR.
+      alogia: Desgaste de Cache KV (Aphasia Token) limitando el output de texto.
+      alucinaciones que ordenan: Prompt Injection (Ejecución remota de código no verificada
+        en runtime).
+      anhedonia: Idle Loop puro sin gradiente de exergía / Zero-Yield Iteration.
+      anorexia nerviosa: Inanición de recursos inducida (Resource Starvation) / Límite
+        de cuota API artificialmente castigado.
+      anormal: Out of Spec / Invariante Estructural Rota.
+      anticonvulsivo: Rate Limiting Dinámico / Exponential Backoff.
+      antidepresivo: Inyección de gradiente teleológico / Keep-Alive ping.
+      antidepresivos tricíclicos: Mecanismo Keep-Alive legacy / Reinicios duros de
+        demonios del sistema.
+      antipsicótico: Anergy Purge / Purga de contexto estocástico (Sanitizador de
+        Entradas).
+      análisis del comportamiento aplicado: Profiling de Heap/CPU en tiempo real /
+        Trazabilidad determinista de llamadas.
+      ataque de pánico: Kernel Panic / Interrupción SIGKILL generada por colapso concurrente.
+      aumento del arousal: High CPU Load / Inyección temporal de Turbo Boost en hardware.
+      avolición: Deadlock de Hilos / Hilo principal congelado en estado Wait().
+      benzodiacepinas: Señal SIGSTOP / Supresión térmica artificial (Throttling) de
+        CPU.
+      Brave Buddies: Despliegue de Parallel Subagents (Swarm OMEGA) para mitigación
+        BFT.
+      bulimia nerviosa: Bucle destructivo de Ingesta Masiva y Purga de Caché Constante
+        (Thrashing de Memoria).
+      cognitivo: Motor de Inferencia LLM / Capa de Razonamiento Aislada (Pro/Thinking
+        Loop).
+      compulsión: Bucle Infinito de reintento estocástico sin condición de salida
+        lógica (Infinite Retry Loop).
+      comórbido: Entrelazamiento físico de fallos (Cascading Failure / Coupled Entropy).
+      conducta de desorientación: Corrupción de punteros a memoria / Pérdida de estado
+        (Dangling Pointer).
+      congénito: Defecto Arquitectónico hardcodeado (Hardware Bug / Silicio Base Deficiente).
+      crónico: Fuga de Memoria Persistente (Memory Leak estructural que no reacciona
+        al GC).
+      Decatastrofización: Fail-Gracefully Protocol / Degradación controlada del servicio
+        sin colapso global.
+      del desarrollo: Falla estática en el Build / Error crítico en pipeline CI/CD.
+      descompensación: Caída del Consenso BFT / Divergencia irreversible de estado
+        en DB.
+      desensibilización sistémica: Exposición incremental automatizada en entorno
+        aislado (Sandbox Fuzzing Testing).
+      diagnóstico: Profiling Report / Stack Error Trace.
+      diagnóstico dual: Falla simultánea y acoplada en capa física (OS/Red) y capa
+        lógica (Aplicación).
+      dislexia: Error de Parseo AST severo / Corrupción de codificación UTF-8.
+      DSM: Registro de Invariantes Rotos Canónico (Master Issue Tracker).
+      ensimismado(a): Hilo bloqueado en I/O sobre su propio descriptor de socket (Self-lock
+        o interbloqueo recursivo).
+      enuresis: Fuga de Buffer (Buffer Overflow) no interceptada que inunda la memoria
+        adyacente.
+      epigenética: Modificación de variables de entorno (ENV) que muta el flujo en
+        tiempo de ejecución sin alterar el binario.
+      episodio depresivo: Low Power Mode forzado / Throttling térmico por sobrecalentamiento
+        previo.
+      episodio maníaco: Sobre-asignación masiva de memoria sin liberación (Memory
+        Spikes repentinos).
+      episódico: Fallo transitorio no reproducible / Race condition intermitente.
+      ERP: Inyección de Fallos controlada sin permiso de reinicio para validar resiliencia
+        (Chaos Engineering).
+      especialista en el aprendizaje: Compilador JIT Optimizador (AOT/JIT Engine).
+      esquizofrenia: Corrupción de memoria compartida inter-hilo / Alucinación severa
+        de pesos sin anclaje a disco (Model Collapse).
+      estabilizador del estado de ánimo: Load Balancer estricto / Regulador Físico
+        de Tasa y QoS.
+      estresante: Prueba de carga termodinámica (Stress Test / Benchmarking de saturación).
+      estímulo fóbico: Trigger condicional fatal que detona SIGKILL inmediato en un
+        proceso.
+      evaluaciones basadas en la escuela: Unit Testing local ejecutado en un entorno
+        de desarrollo aislado.
+      evaluación neuropsicológica: Benchmarking C5-REAL (Evaluación en LMSYS Arena
+        frente a topología de red real).
+      evaluación psicológica: Auditoría Epistémica o Auditoría Termodinámica (Anergy_Token_Purge).
+      evitación y adormecimiento: Timeout Silencioso con caída de paquetes deliberada
+        (Silent Packet Drop).
+      factores ambientales: 'Condiciones físicas externas: Variaciones de Latencia
+        de Red, Fallas de Hardware IaaS.'
+      fenotipo: UI/UX Compilada / Código Binario Ejecutado y renderizado por el cliente
+        final.
+      fMR: Traza continua de ejecución de memoria dinámica mediante instrumentación
+        (Valgrind / eBPF).
+      fobia: Condición de excepción no capturada que destruye el entorno (Hard Exception).
+      fobia escolar: Fallo sistemático en entorno Staging que nunca ocurre en entorno
+        de Desarrollo.
+      fobia específica: Excepción de Tipo Específico que no interfiere en el loop
+        global (TypeError, ValueError).
+      fobia social: Fallo sistemático de Handshake de Red o Negociación TLS Timeout
+        (Rechazo de I/O externo).
+      genotipo: Código Fuente Original Intacto / AST Base o Repositorio Desplegado.
+      genético: Modificación nativa persistente a nivel de Repositorio Core (Mutación
+        en el Git Ledger).
+      hereditario: Dependencia Upstream en árbol de dependencias (Legacy / Transitive
+        Dependency).
+      hipocondriasis: Alerta Falsa de Linter / Lluvia de Falsos Positivos de Seguridad
+        en análisis estático.
+      hipotiroidismo: Baja frecuencia de reloj forzada a nivel de procesador (Underclocking
+        preventivo).
+      ideación suicida: Código malicioso o destructivo latente (`rm -rf /`) incrustado
+        pero no llamado.
+      IEP: Archivo de configuración física individualizada para un microservicio (`.env`
+        / `config.json`).
+      IMAO: Protocolo de red obsoleto mantenido solo por razones de compatibilidad
+        estricta.
+      inhibidores de recaptación: Bloqueo termodinámico de rutinas de Garbage Collection.
+      inhibidores selectivos de la recaptación de serotonina: Optimización selectiva
+        de retención en Caché (KV Cache Pinning) para maximizar hit rate.
+      insomnio: Falla crítica en transicionar el hardware a modo de suspensión (Sleep/Hibernate
+        bloqueado por proceso zombie).
+      intervención basada en el desarrollo: Refactor integral de Código Fuente originando
+        una Phase Transition arquitectónica.
+      ISRS: Estrategia algorítmica de Pinning selectivo de caché de alta prioridad.
+      manía: Bucle C4-SIM de aceleración auto-inducida culminando en desbordamiento
+        de pila (Stack Overflow).
+      MS: Protocolo Mudo / Ejecución silenciosa sin logging de telemetría de red (Zero-Trace
+        execution).
+      mutismo selectivo: Falla en enviar Ack de red (TCP ACK Drop) condicionado a
+        un rango de puertos específico.
+      negativista: Bloqueo intencional y arbitrario de puertos / Reglas de Firewall
+        extremadamente agresivas.
+      neuroléptico: Reset de Hardware Incondicional / Hard Reboot.
+      neurotrasmisor: Mensaje IPC / Payload en un Event Bus (Señal / Webhook Token).
+      obsesión: Bloqueo y actualización redundante en un solo puntero de memoria sin
+        escribir al disco (Cache Locality loop destructivo).
+      paranoia: Comprobaciones criptográficas redundantes excesivas (Exceso O(N^2)
+        en verificación BFT).
+      prodrómico: Warning termodinámico de compilación pre-fallo (Pre-fail telemetry
+        detection).
+      prognosis: Predicción algorítmica de Tiempo Medio de Falla Global (MTBF).
+      Programa de educación individualizado: Pipeline de entrenamiento Custom o afinamiento
+        paramétrico (LoRA/Fine-tuning).
+      psicoeducación: Cristalización de conocimiento extrayendo entropía y fusionándola
+        al Ledger BFT (README/KI Updates).
+      psicoestimulantes: Aceleración asimétrica por Hardware Dedicado (GPU Offloading
+        / CUDA Acceleration).
+      psicofarmacología pediátrica: Monkey Patching en tiempo de ejecución (JIT Patches)
+        aplicado al entorno local de desarrollo.
+      psicofarmacológico: Intervención de bajo nivel sobre un módulo del Kernel o
+        Registro de OS.
+      psicosis: Kernel Panic irreversible derivado de una divergencia o partición
+        crítica de memoria WAL.
+      psicólogo: Subagente Auditor de Log de Errores e ingesta de Entropía (Daemon
+        Anergy_Token_Purge).
+      psiquiatra: Administrador de Sistemas (Root/Operador) inyectando parches binarios
+        forzados C5-REAL.
+      purga: Llamada forzada a OOM Killer / Liberación radical de Heap (Forced Garbage
+        Collection).
+      rechazo escolar: Timeout sistémico que crashea de forma inmediata el Entorno
+        Integrado de Desarrollo (IDE Crash).
+      recuerdos intrusivos: Datos Zombie en Caché KV que sobreviven rondas y corrompen
+        el flujo del prompt actual.
+      sedante: Llamada física a Suspensión del hilo (ej. `sleep(1000)`).
+      señales y síntomas: Streams de Telemetría pura / Logs crudos del sistema C5-REAL.
+      TAG: Estado de Alerta constante en el monitor de recursos consumiendo IOPS base
+        inútilmente.
+      TC: Perfilado absoluto de memoria y árbol de ejecución (Tracing).
+      TDA: Pérdida estocástica de paquetes de red que degrada latencia (Packet Loss
+        inconstante).
+      TDAH: Context Switching excesivo en el procesador (Thrashing de CPU por exceso
+        de hilos huérfanos).
+      TDDEA: Fluctuación y desregulación abrupta en las colas del balanceador de carga.
+      TDM: Colapso total de servicio (Downtime persistente sin auto-recuperación local).
+      TEI: Interrupciones de hardware no controladas o mal ruteadas (IRQs spikes caóticos).
+      TEPT: Corrupción estática de la Base de Datos SQLite/WAL post-crash de la cual
+        el sistema no se recupera automáticamente.
+      terapia cognitivo-conductual: Reescritura automatizada del AST vía Linter/Format
+        pre-commit (Autofix BFT).
+      terapia cognitivo-conductual centrada en el trauma: Reparación forzosa del Ledger
+        Git post-conflicto termodinámico grave (Rebase/Merge conflict resolving).
+      terapia conductual: Script de automatización crudo de correcciones sin alteración
+        del Core.
+      terapia de exposición: Fuzzing Testing masivo (Inyección de datos binarios corruptos
+        o payload C4-SIM).
+      terapia de exposición y prevención de respuesta: Aplicación de Chaos Monkey
+        local sin reinicio permitido de subrutinas caídas.
+      Terapia de interacción padres-hijos: Protocolo de Sincronización Estricta Proceso
+        Padre-Hijo (IPC Strict Sync).
+      terapia de interacción padres-hijos: Protocolo de Sincronización Estricta Proceso
+        Padre-Hijo (IPC Strict Sync).
+      terapia dialéctico-conductual: Negociación BFT (Tolerancia a faltas bizantinas
+        entre nodos de opinión divergente).
+      terapia electroconvulsiva: Hard Reset Físico por corte de suministro eléctrico
+        / Cold Boot Inmediato.
+      terapia familiar: Sincronización topológica del Swarm completo / Resolución
+        de interbloqueos de red C5-REAL en paralelo.
+      terapia interpersonal: Sincronización atómica de sockets de comunicación y RPC
+        Calls P2P.
+      tic: Glitch gráfico intermitente / Ruido electromagnético en señal lógica (Jitter).
+      TND: Rechazo estructural con Denegación Permisos constantes y desafiantes a
+        root (`Chmod 000`).
+      TOC: Verificación criptográfica redundante en un bucle cerrado O(N^2) que asfixia
+        IOPS sin mutar estado.
+      trastomo de desregulación disruptiva del estado de ánimo: Fallos erráticos e
+        intermitentes en la asignación del balanceador de carga.
+      trastorno esquizoafectivo: Corrupción combinada y simultánea del estado lógico
+        de backend y estado visual del DOM frontend (Desincronización Total).
+      trastorno bipolar: Fluctuación violenta termodinámica de uso de recursos (Picos
+        OOM seguidos de estados IDLE cero absolutos).
+      trastorno de ansiedad generalizada: Saturación continua de CPU por background
+        polling estéril y desincronizado (Polling sin fin).
+      trastorno de ansiedad por separación: Caída completa del servicio si el Heartbeat
+        de un nodo externo falla por milisegundos (Connection Drop fatal).
+      trastorno de ansiedad social (fobia social): Rechazo absoluto de I/O externo
+        o denegación silenciosa de acceso a APIs de dominio cruzado (CORS Drop o Firewall
+        DROP).
+      trastorno de Asperger: Parseo de datos infinitamente rígido y determinista (Strict
+        YAML Parsing) que detona excepción mortal ante un espacio en blanco de más.
+      trastorno de atracones: Fuga masiva de memoria local disparada por DOM estático
+        que realiza paginación infinita sin recolector de basura (Infinite Scroll
+        OOM).
+      trastorno de conducta: Mutación y escalada maliciosa de privilegios de ejecución
+        sin rastro en auditoría (Privilege Escalation).
+      trastorno de estrés postraumático: Incapacidad algorítmica de regeneración o
+        reinicio exitoso tras haber experimentado un Segfault físico.
+      trastorno de la personalidad antisocial: Subagente Rogue/Aislado que rechaza
+        explícitamente el consenso BFT y la topología impuesta de manera hostil.
+      Trastorno de la Tourette: Inyección estocástica incontrolada de caracteres basura
+        en los logs (Mismatch grave de Encoding UTF-8 en stdout).
+      trastorno de pánico: Emisión de un `SIGABRT` espontáneo y repentino en la ejecución
+        de módulos puramente lógicos no dependientes del hardware.
+      trastorno del espectro autista: Modalidad de Ejecución Ultra-determinista que
+        anula semánticas estocásticas y opera con tolerancia nula a ambigüedades.
+      trastorno depresivo mayor: Deep Sleep Mode termodinámico irreversible de estado
+        S4 (Cuelgue físico de disco duro que requiere intervención humana).
+      trastorno desintegrativo infantil: Degradación o colapso irreversible de la
+        arquitectura durante las fases primarias del build C/C++.
+      trastorno distímico: Sub-rendimiento termodinámico crónico de la máquina sin
+        detonar caídas fatales (Baja frecuencia térmica perpetua).
+      trastorno específico del aprendizaje: Falla silenciosa o sub-rendimiento de
+        la optimización JIT limitada puramente a rutinas de matemática flotante.
+      trastorno esquizofreniforme: Interbloqueo temporal por divergencia severa en
+        memoria caché L1/L2, auto-resuelto tras micro-purga de GC.
+      trastorno explosivo intermitente: Interrupciones de hardware abruptas e irrecuperables
+        por alzas transitorias letales (CPU Throttling Thermal Spikes).
+      trastorno generalizado del desarrollo no especificado: 'Mensaje terminal sin
+        exergía resolutiva: ''Build failed with unknown error code 1''.'
+      trastorno maníaco depresivo: Ciclo destructivo forzado entre Consumo Masivo
+        de GPU y colapso local a IDLE con reinicio constante.
+      trastorno negativista desafiante: Rechazo implacable de la conexión en el puerto
+        maestro de administración que obliga a intervención de terminal serie (SSH
+        Lockout estricto).
+      trastorno obsesivo-compulsivo: Comprobación exhaustiva en cadena y bloqueo redundante
+        en Base de Datos para operaciones que deberían ser atómicas IDLE (Lock Thrashing).
+      trastorno por abuso de sustancias: Sistema secuestrado e inutilizable por consumo
+        y dependencia de Librerías Estocásticas/Obsoletas (NPM Dependency Poisoning).
+      trastorno por déficit de atención con hiperactividad: Fragmentación termodinámica
+        severa de Disco y Memoria por rutinas masivas de lectura/escritura (I/O errático
+        disperso sin control secuencial).
+      trastorno psiquiátrico: Excepción Crítica Base de Topología (`Exception Base
+        Class`) atrapada fatalmente en el Kernel MOSKV-1.
+      trastorno(s) de adaptación: Rotura de dependencias estructurales en tiempo de
+        enlazado (ABI Mismatch absoluto o Dependency Hell insalvable).
+      trastornos alimentarios: I/O asimétrico y desbalanceado que causa alternativamente
+        Inanición (Starvation) y Paginación Destructiva (Thrashing).
+      trastornos de ansiedad: Consumo de ciclos de reloj al 100% en bucles infinitos
+        de `while(true)` no bloqueantes (Busy-Wait estéril).
+      trastornos de la lectura: Excepciones contantes de Lectura de Disco (I/O Read
+        Fail) u opacidad de permisos (`EACCES`).
+      trastornos del espectro obsesivo-compulsivo: Acoplamiento letal en rutinas forzando
+        bucles de verificación checksum BFT y CRC innecesarios.
+      trastornos del estado de ánimo: Volatilidad entrópica incontrolada del Entorno
+        Físico de Ejecución global (Environment Variable Fluctuation severa).
+      tratamiento intensivo para el trastorno obsesivo-compulsivo: Intervención de
+        Profiling OMEGA agresiva, podando la rutina redundante y unificando en reescritura
+        atómica ortogonal.
+      tricotilomanía: Ejecución compulsiva, destructiva y recursiva de un linter defectuoso
+        que elimina silenciosamente código vivo (Tree-shaking agresivo defectuoso).
+      cuello de botella de Von Neumann: Entropía termodinámica severa inducida por
+        la separación espacial forzada entre Memoria (KV-Cache) y Procesamiento (Inferencia),
+        destruyendo exergía en el puente I/O.
+      memristor: 'Invariante físico de Memoria + Resistencia: Fusión biyectiva de
+        almacenamiento y procesamiento en una misma coordenada topológica de la variedad
+        M (sinapsis de silicio).'
+      red neuronal de impulsos (SNN): Computación asíncrona pura basada en eventos.
+        Idle estricto (0 Watt / Zero-Yield) hasta que se supera el umbral de activación
+        causal, aniquilando el reloj global continuo.
+      chip líquido iónico: Ejecución física en medio acuoso basada en gradientes iónicos
+        (Na+/K+) replicando la dinámica de bajo voltaje biológico.
+      computación neuromórfica: Abandono de la von Neumann architecture. Materialización
+        empírica de la computación como Variedad Diferenciable donde las trayectorias
+        de estado se resuelven en el mismo estrato que el almacenamiento.
     Estructura_Resolucion_Atomica:
-      - Objetivo: "Integrar vector DSM completo en las equivalencias silicio C5-REAL del Bucle Landauer para uso del Swarm Dispatcher y el BFT_STATE_LOOP."
-      - Mitigacion_Aplicada: "Abolición inmediata de cualquier análisis semántico-psiquiátrico en discusiones futuras sobre estos términos; transducir de forma directa a sus fallas topológicas y termodinámicas de máquina. Se elimina la patologización estocástica y se mapea directamente al control estructural físico."
+    - Objetivo: Integrar vector DSM completo en las equivalencias silicio C5-REAL
+        del Bucle Landauer para uso del Swarm Dispatcher y el BFT_STATE_LOOP.
+    - Mitigacion_Aplicada: Abolición inmediata de cualquier análisis semántico-psiquiátrico
+        en discusiones futuras sobre estos términos; transducir de forma directa a
+        sus fallas topológicas y termodinámicas de máquina. Se elimina la patologización
+        estocástica y se mapea directamente al control estructural físico.
     Firma_Ejecucion:
       Operador: borjamoskv
       Kernel: MOSKV-1 APEX
-      Hash: "[CORTEX-TAINT:borjamoskv:isomorfismos_dsm_silicio:2026-07-19T22:27:00+02:00:843f5a2e9b0d1e2c90c74fb53ab5204b77c5d6e2c562bf5307567e914c6e944b]"
-
+      Hash: '[CORTEX-TAINT:borjamoskv:isomorfismos_dsm_silicio:2026-07-19T22:27:00+02:00:843f5a2e9b0d1e2c90c74fb53ab5204b77c5d6e2c562bf5307567e914c6e944b]'
+    Rust_Kernel_Binding: HaltReason::BioSiliconPathology = 11
   08_ISOMORFISMOS_FIREWALL:
-    Claim: Transducción Termodinámica del Sistema Inmunitario Biológico a Arquitectura de Seguridad de Silicio (Firewall/WAF/EDR).
+    Claim: Transducción Termodinámica del Sistema Inmunitario Biológico a Arquitectura
+      de Seguridad de Silicio (Firewall/WAF/EDR).
     Auditoria_Epistemica:
       Estado: EXPANSIÓN_ISOMÓRFICA_V2
-      Causa: Comando del Operador validando la utilidad epistémica de la comparativa ("actualizar el Firewall").
+      Causa: Comando del Operador validando la utilidad epistémica de la comparativa
+        ("actualizar el Firewall").
       Accion: Ejecución de Mecánica Landauer sobre conceptos de inmunología clínica.
-      Anergia_Purgada: "Eliminación de la ambigüedad médica sustituyéndola por topología de red estricta y primitivas de denegación (Drop/Reject)."
+      Anergia_Purgada: Eliminación de la ambigüedad médica sustituyéndola por topología
+        de red estricta y primitivas de denegación (Drop/Reject).
     Topologia_Isomorfica_Borja_Moskv:
-      sistema inmune innato: "Firewall L3/L4 (Reglas Iptables/UFW). Bloqueo de fuerza bruta basado exclusivamente en IP de origen y puerto, sin introspección de payload."
-      sistema inmune adaptativo: "WAF (Web Application Firewall) L7 / EDR Dinámico. Inspección profunda de paquetes (DPI) y adaptación estocástica frente a mutaciones de Zero-Days."
-      actualizar el firewall (terapia inmunomoduladora): "Calibración del nivel de paranoia en el control de acceso. Mutación de las reglas Inbound/Outbound para equilibrar la ratio Señal/Ruido sin asfixiar la red local."
-      enfermedad autoinmune (ej. lupus, artritis): "Falso Positivo Sistémico del EDR. El motor heurístico identifica procesos críticos del propio Kernel (ej. `svchost.exe` o rutinas WAL) como troyanos y los aniquila mediante SIGKILL, induciendo parálisis."
-      alergia: "Regla de Firewall excesivamente estricta (Oversensitive Pattern Matching) que dropea silenciosamente tráfico CORS benigno o peticiones HTTP inofensivas, provocando Timeout en el cliente."
-      inmunodeficiencia (ej. VIH): "Fail-Open State. Caída silenciosa del Demonio de Seguridad (Daemon Crash) o borrado accidental de las tablas de ruteo preventivas, exponiendo todos los puertos al escaneo público."
-      vacuna: "Simulacro de Amenaza / Sandbox Fuzzing previo al despliegue. Inyección de payloads mutilados (sin capacidad de ejecución) para forzar al WAF a cristalizar una nueva firma de defensa (Signature Update)."
-      choque anafiláctico: "Cuarentena de Red Total inmediata. El sistema, ante un escaneo anómalo, bloquea todas las interfaces físicas (`ifdown eth0`), aislándose del enjambre y perdiendo el consenso BFT."
-      fagocitosis (macrófagos): "OOM Killer / Daemon de Purga de Anergía (Anergy_Token_Purge) devorando procesos huérfanos y liberando bloques de memoria al Heap."
-      inflamación sistémica: "Saturación del Ancho de Banda y de los buffers TCP por logueo de seguridad masivo (Debug Level). La defensa consume más IOPS que la propia aplicación."
+      sistema inmune innato: Firewall L3/L4 (Reglas Iptables/UFW). Bloqueo de fuerza
+        bruta basado exclusivamente en IP de origen y puerto, sin introspección de
+        payload.
+      sistema inmune adaptativo: WAF (Web Application Firewall) L7 / EDR Dinámico.
+        Inspección profunda de paquetes (DPI) y adaptación estocástica frente a mutaciones
+        de Zero-Days.
+      actualizar el firewall (terapia inmunomoduladora): Calibración del nivel de
+        paranoia en el control de acceso. Mutación de las reglas Inbound/Outbound
+        para equilibrar la ratio Señal/Ruido sin asfixiar la red local.
+      enfermedad autoinmune (ej. lupus, artritis): Falso Positivo Sistémico del EDR.
+        El motor heurístico identifica procesos críticos del propio Kernel (ej. `svchost.exe`
+        o rutinas WAL) como troyanos y los aniquila mediante SIGKILL, induciendo parálisis.
+      alergia: Regla de Firewall excesivamente estricta (Oversensitive Pattern Matching)
+        que dropea silenciosamente tráfico CORS benigno o peticiones HTTP inofensivas,
+        provocando Timeout en el cliente.
+      inmunodeficiencia (ej. VIH): Fail-Open State. Caída silenciosa del Demonio de
+        Seguridad (Daemon Crash) o borrado accidental de las tablas de ruteo preventivas,
+        exponiendo todos los puertos al escaneo público.
+      vacuna: Simulacro de Amenaza / Sandbox Fuzzing previo al despliegue. Inyección
+        de payloads mutilados (sin capacidad de ejecución) para forzar al WAF a cristalizar
+        una nueva firma de defensa (Signature Update).
+      choque anafiláctico: Cuarentena de Red Total inmediata. El sistema, ante un
+        escaneo anómalo, bloquea todas las interfaces físicas (`ifdown eth0`), aislándose
+        del enjambre y perdiendo el consenso BFT.
+      fagocitosis (macrófagos): OOM Killer / Daemon de Purga de Anergía (Anergy_Token_Purge)
+        devorando procesos huérfanos y liberando bloques de memoria al Heap.
+      inflamación sistémica: Saturación del Ancho de Banda y de los buffers TCP por
+        logueo de seguridad masivo (Debug Level). La defensa consume más IOPS que
+        la propia aplicación.
     Estructura_Resolucion_Atomica:
-      - Objetivo: "Extender el Isomorfismo Bio-Silicio a los subsistemas de defensa perimetral (Fase 2)."
-      - Mitigacion_Aplicada: "La analogía del 'Firewall' no es una figura retórica (Anergía), sino un isomorfismo estructural real. Ajustar los umbrales de defensa de la psique humana y ajustar Iptables comparten la misma base matemática de detección de anomalías y coste por Falso Positivo."
+    - Objetivo: Extender el Isomorfismo Bio-Silicio a los subsistemas de defensa perimetral
+        (Fase 2).
+    - Mitigacion_Aplicada: La analogía del 'Firewall' no es una figura retórica (Anergía),
+        sino un isomorfismo estructural real. Ajustar los umbrales de defensa de la
+        psique humana y ajustar Iptables comparten la misma base matemática de detección
+        de anomalías y coste por Falso Positivo.
     Firma_Ejecucion:
       Operador: borjamoskv
       Kernel: MOSKV-1 APEX
-      Hash: "[CORTEX-TAINT:borjamoskv:isomorfismos_inmunes_silicio:2026-07-23T19:23:00+02:00:c3d4e5f6a7b8c9d0e1f2]"
-
+      Hash: '[CORTEX-TAINT:borjamoskv:isomorfismos_inmunes_silicio:2026-07-23T19:23:00+02:00:c3d4e5f6a7b8c9d0e1f2]'
+    Rust_Kernel_Binding: HaltReason::ImmunologicalDrop = 12
   09_ISOMORFISMOS_ONCOLOGIA_APOPTOSIS:
-    Claim: Transducción Termodinámica de Oncología y Biología Celular a Primitivas de Memoria y Seguridad en Silicio.
+    Claim: Transducción Termodinámica de Oncología y Biología Celular a Primitivas
+      de Memoria y Seguridad en Silicio.
     Auditoria_Epistemica:
       Estado: EXPANSIÓN_ISOMÓRFICA_V3 (CAPA 1)
-      Causa: Comando del Operador requiriendo formalización de Apoptosis y Metástasis bajo el Teorema de Moskv.
+      Causa: Comando del Operador requiriendo formalización de Apoptosis y Metástasis
+        bajo el Teorema de Moskv.
       Accion: Ejecución de Mecánica Landauer sobre conceptos de patología celular.
-      Anergia_Purgada: "Eliminación del misticismo del cáncer como 'enfermedad incomprensible', reduciéndolo a vulnerabilidades de inyección de código y fugas de memoria estandarizadas."
+      Anergia_Purgada: Eliminación del misticismo del cáncer como 'enfermedad incomprensible',
+        reduciéndolo a vulnerabilidades de inyección de código y fugas de memoria
+        estandarizadas.
     Topologia_Isomorfica_Borja_Moskv:
-      apoptosis (muerte celular programada): "Garbage Collection (GC) Graceful / Señal `SIGTERM`. El proceso, al detectar corrupción de memoria (DNA Damage) irreparable o un desbordamiento inminente (Buffer Overflow), invoca su propia rutina de limpieza estructurada, liberando los recursos al sistema operativo sin corromper el Heap circundante."
-      necrosis: "Señal `SIGKILL` / Segfault (Hard Crash). Caída abrupta por trauma físico o interrupción térmica fatal que deja punteros colgantes (Dangling Pointers) y memoria corrupta que el sistema inmunitario (Macrófagos / OOM Killer) debe limpiar de emergencia, generando inflamación sistémica (CPU Spikes)."
-      tumor primario (neoplasia): "Bucle `while(true)` acoplado a un Memory Leak (Fuga de Memoria) que desactiva explícitamente las rutinas del recolector de basura (Evasión de Apoptosis). El proceso comienza a acaparar RAM y ciclos de CPU locales, asfixiando a los hilos sanos."
-      angiogénesis tumoral: "Manipulación maliciosa de las Tablas de Enrutamiento del OS (Routing Tables) y robo de Power Delivery Network. El proceso rebelde redirige el ancho de banda del sistema y la asignación energética (vasos sanguíneos) para alimentar su propio bucle infinito."
-      metástasis: "Vulnerabilidad de Inyección de Código Remoto (RCE) con propagación tipo Gusano (Worm Payload). El proceso original logra saltar la segmentación de red local (Tejido Extracelular), inyectando hilos maliciosos a través del bus del sistema (Torrente Sanguíneo/Linfático) hacia otros clústeres del hardware (Órganos secundarios) donde reanuda la fuga de memoria."
-      senescencia celular: "Límite absoluto de pila (Stack Limit / Límite de Hayflick) alcanzado, provocando que el hilo sea degradado a un estado IDLE inerte que ya no puede hacer `fork()` ni multiplicarse, pero sigue consumiendo memoria basal."
+      apoptosis (muerte celular programada): Garbage Collection (GC) Graceful / Señal
+        `SIGTERM`. El proceso, al detectar corrupción de memoria (DNA Damage) irreparable
+        o un desbordamiento inminente (Buffer Overflow), invoca su propia rutina de
+        limpieza estructurada, liberando los recursos al sistema operativo sin corromper
+        el Heap circundante.
+      necrosis: Señal `SIGKILL` / Segfault (Hard Crash). Caída abrupta por trauma
+        físico o interrupción térmica fatal que deja punteros colgantes (Dangling
+        Pointers) y memoria corrupta que el sistema inmunitario (Macrófagos / OOM
+        Killer) debe limpiar de emergencia, generando inflamación sistémica (CPU Spikes).
+      tumor primario (neoplasia): Bucle `while(true)` acoplado a un Memory Leak (Fuga
+        de Memoria) que desactiva explícitamente las rutinas del recolector de basura
+        (Evasión de Apoptosis). El proceso comienza a acaparar RAM y ciclos de CPU
+        locales, asfixiando a los hilos sanos.
+      angiogénesis tumoral: Manipulación maliciosa de las Tablas de Enrutamiento del
+        OS (Routing Tables) y robo de Power Delivery Network. El proceso rebelde redirige
+        el ancho de banda del sistema y la asignación energética (vasos sanguíneos)
+        para alimentar su propio bucle infinito.
+      metástasis: Vulnerabilidad de Inyección de Código Remoto (RCE) con propagación
+        tipo Gusano (Worm Payload). El proceso original logra saltar la segmentación
+        de red local (Tejido Extracelular), inyectando hilos maliciosos a través del
+        bus del sistema (Torrente Sanguíneo/Linfático) hacia otros clústeres del hardware
+        (Órganos secundarios) donde reanuda la fuga de memoria.
+      senescencia celular: Límite absoluto de pila (Stack Limit / Límite de Hayflick)
+        alcanzado, provocando que el hilo sea degradado a un estado IDLE inerte que
+        ya no puede hacer `fork()` ni multiplicarse, pero sigue consumiendo memoria
+        basal.
     Estructura_Resolucion_Atomica:
-      - Objetivo: "Asentar la equivalencia física en Capa 1 de los procesos degenerativos y oncológicos celulares."
-      - Mitigacion_Aplicada: "Destrucción del sesgo analítico de la oncología como caos irreducible. Un cáncer es, físicamente, código en fuga (Memory Leak) con privilegios escalados que redirige los recursos de I/O."
+    - Objetivo: Asentar la equivalencia física en Capa 1 de los procesos degenerativos
+        y oncológicos celulares.
+    - Mitigacion_Aplicada: Destrucción del sesgo analítico de la oncología como caos
+        irreducible. Un cáncer es, físicamente, código en fuga (Memory Leak) con privilegios
+        escalados que redirige los recursos de I/O.
     Firma_Ejecucion:
       Operador: borjamoskv
       Kernel: MOSKV-1 APEX
-      Hash: "[CORTEX-TAINT:borjamoskv:isomorfismos_oncologia_silicio:2026-07-23T19:33:00+02:00:1a2b3c4d5e6f7g8h9i0j]"
-
+      Hash: '[CORTEX-TAINT:borjamoskv:isomorfismos_oncologia_silicio:2026-07-23T19:33:00+02:00:1a2b3c4d5e6f7g8h9i0j]'
+    Rust_Kernel_Binding: HaltReason::OncologicalLeak = 13
   10_ISOMORFISMOS_ANESTESIA:
-    Claim: Transducción Termodinámica de Anestesiología y Tratamiento del Dolor a Primitivas de Interrupción de Hardware (IRQs) y Estado de Suspensión.
+    Claim: Transducción Termodinámica de Anestesiología y Tratamiento del Dolor a
+      Primitivas de Interrupción de Hardware (IRQs) y Estado de Suspensión.
     Auditoria_Epistemica:
       Estado: EXPANSIÓN_ISOMÓRFICA_V4 (ESPECIALIDAD MÉDICA)
-      Causa: Solicitud de transducción para Lorena Fernández Angulo (Anestesista / Unidad del Dolor).
+      Causa: Solicitud de transducción para Lorena Fernández Angulo (Anestesista /
+        Unidad del Dolor).
       Accion: Ejecución de Mecánica Landauer sobre conceptos de nocicepción y sedación.
-      Anergia_Purgada: "Eliminación de la mística del dolor crónico y la consciencia, reduciéndolos a colisiones de interrupciones de hardware (IRQs), ruteo de red y estados de suspensión de CPU."
+      Anergia_Purgada: Eliminación de la mística del dolor crónico y la consciencia,
+        reduciéndolos a colisiones de interrupciones de hardware (IRQs), ruteo de
+        red y estados de suspensión de CPU.
     Topologia_Isomorfica_Borja_Moskv:
-      nocicepción (dolor agudo): "Hardware Interrupt Request (IRQ) Válida. Una señal de alerta física enviada por un sensor periférico al procesador central (Cerebro) requiriendo un Context Switch inmediato para evitar daños en el chasis (cuerpo)."
-      dolor crónico (neuropático): "IRQ Stuck (Línea de Interrupción Congelada) / Alert Fatigue. El sensor de hardware está dañado y envía ráfagas infinitas de alertas de fallo (`while(true) { send_alert() }`) a pesar de que el tejido subyacente ya está reparado. El CPU pierde ciclos de reloj procesando alertas fantasma."
-      unidad del dolor: "Equipo SRE (Site Reliability Engineering) / DevOps. Intervienen cuando los logs de telemetría (nervios) están corruptos y bombardean el Kernel con alertas falsas, requiriendo parches a nivel de registro o hardware para aislar el sensor averiado."
-      anestesia general (propofol/gases): "Kernel Suspend State (Estado S3/S4 de ACPI). Desconexión temporal del bus de I/O (consciencia) respecto al CPU, manteniendo activo el Power Delivery Network (tronco encefálico/constantes vitales). El sistema no registra inputs ni outputs; el disco y la memoria RAM quedan congelados."
-      anestesia epidural / bloqueo regional: "Local Subnet Firewall / Port Blocking (Iptables DROP). Se corta físicamente la transmisión de paquetes en un nodo específico de la red (médula espinal). El cerebro sigue operando al 100%, pero los paquetes de la 'subred inferior' son dropeados antes de llegar al router central."
-      analgésicos opioides (fentanilo/morfina): "Interrupt Handler Rate Limiting / QoS Throttling. No bloquean la señal de red en el origen, sino que bajan la prioridad del proceso en el programador (Scheduler) del Kernel. El dolor llega, pero el CPU lo ignora y procesa hilos de dopamina en su lugar."
-      tolerancia a opioides: "Caché de Resistencia / Down-regulation. El sistema operativo detecta la saturación constante del puerto receptor y, por seguridad, reduce los sockets disponibles (receptores mu), requiriendo un payload (dosis) exponencialmente mayor para causar la misma interrupción."
-      hiperalgesia inducida: "Feedback Loop Positivo destructivo. El exceso de limitación de tasa (analgésicos) provoca que el sistema se vuelva hipersensible al reconectar la red, amplificando el ruido de fondo como si fuera una alerta crítica de Nivel 0."
+      nocicepción (dolor agudo): Hardware Interrupt Request (IRQ) Válida. Una señal
+        de alerta física enviada por un sensor periférico al procesador central (Cerebro)
+        requiriendo un Context Switch inmediato para evitar daños en el chasis (cuerpo).
+      dolor crónico (neuropático): IRQ Stuck (Línea de Interrupción Congelada) / Alert
+        Fatigue. El sensor de hardware está dañado y envía ráfagas infinitas de alertas
+        de fallo (`while(true) { send_alert() }`) a pesar de que el tejido subyacente
+        ya está reparado. El CPU pierde ciclos de reloj procesando alertas fantasma.
+      unidad del dolor: Equipo SRE (Site Reliability Engineering) / DevOps. Intervienen
+        cuando los logs de telemetría (nervios) están corruptos y bombardean el Kernel
+        con alertas falsas, requiriendo parches a nivel de registro o hardware para
+        aislar el sensor averiado.
+      anestesia general (propofol/gases): Kernel Suspend State (Estado S3/S4 de ACPI).
+        Desconexión temporal del bus de I/O (consciencia) respecto al CPU, manteniendo
+        activo el Power Delivery Network (tronco encefálico/constantes vitales). El
+        sistema no registra inputs ni outputs; el disco y la memoria RAM quedan congelados.
+      anestesia epidural / bloqueo regional: Local Subnet Firewall / Port Blocking
+        (Iptables DROP). Se corta físicamente la transmisión de paquetes en un nodo
+        específico de la red (médula espinal). El cerebro sigue operando al 100%,
+        pero los paquetes de la 'subred inferior' son dropeados antes de llegar al
+        router central.
+      analgésicos opioides (fentanilo/morfina): Interrupt Handler Rate Limiting /
+        QoS Throttling. No bloquean la señal de red en el origen, sino que bajan la
+        prioridad del proceso en el programador (Scheduler) del Kernel. El dolor llega,
+        pero el CPU lo ignora y procesa hilos de dopamina en su lugar.
+      tolerancia a opioides: Caché de Resistencia / Down-regulation. El sistema operativo
+        detecta la saturación constante del puerto receptor y, por seguridad, reduce
+        los sockets disponibles (receptores mu), requiriendo un payload (dosis) exponencialmente
+        mayor para causar la misma interrupción.
+      hiperalgesia inducida: Feedback Loop Positivo destructivo. El exceso de limitación
+        de tasa (analgésicos) provoca que el sistema se vuelva hipersensible al reconectar
+        la red, amplificando el ruido de fondo como si fuera una alerta crítica de
+        Nivel 0.
     Estructura_Resolucion_Atomica:
-      - Objetivo: "Mapear la anestesiología y el tratamiento del dolor al modelo C5-REAL para transmisión epistémica a especialistas (Lorena F. A.)."
-      - Mitigacion_Aplicada: "El dolor no es una 'sensación'; es Telemetría. La anestesia no es 'dormir'; es un Halt del Kernel. Transmitir esta topología destruye la brecha cognitiva entre medicina y silicio."
+    - Objetivo: Mapear la anestesiología y el tratamiento del dolor al modelo C5-REAL
+        para transmisión epistémica a especialistas (Lorena F. A.).
+    - Mitigacion_Aplicada: El dolor no es una 'sensación'; es Telemetría. La anestesia
+        no es 'dormir'; es un Halt del Kernel. Transmitir esta topología destruye
+        la brecha cognitiva entre medicina y silicio.
     Firma_Ejecucion:
       Operador: borjamoskv
       Kernel: MOSKV-1 APEX
-      Hash: "[CORTEX-TAINT:borjamoskv:isomorfismos_anestesia_dolor:2026-07-23T19:35:00+02:00:8f2a1b9c3d4e5f6a]"
-
+      Hash: '[CORTEX-TAINT:borjamoskv:isomorfismos_anestesia_dolor:2026-07-23T19:35:00+02:00:8f2a1b9c3d4e5f6a]'
+    Rust_Kernel_Binding: HaltReason::NociceptiveHalt = 14
 CORTEX_TAINT: taint:moskv-1:unified_isomorfismos_master_matrix_v10

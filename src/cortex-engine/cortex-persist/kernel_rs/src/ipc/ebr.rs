@@ -128,6 +128,14 @@ pub enum HaltReason {
     CategoricalObstruction = 9,
     /// Antipatrón Categórico: Falla estructural de tipado detectada (D7).
     AntipatternViolation = 10,
+    /// Patología Estructural Bio-Silicio: Corrupción de memoria, desincronización DOM (DSM).
+    BioSiliconPathology = 11,
+    /// Rechazo Inmunológico / Firewall: Cuarentena total por escaneo anómalo (Anafilaxia).
+    ImmunologicalDrop = 12,
+    /// Fuga Oncológica: Memory Leak masivo o bucle infinito incontrolable (Tumor Primario).
+    OncologicalLeak = 13,
+    /// Interrupción Nociceptiva: IRQ Stuck, avalancha de alertas de telemetría inútiles (Dolor Crónico).
+    NociceptiveHalt = 14,
 }
 
 /// Error epistémico con contexto de diagnóstico.
