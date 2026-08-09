@@ -45,10 +45,16 @@ pub mod seqlock;
 pub mod thermodynamics;
 /// Módulo de constantes de calibración topológica de Aphairesis auto-generado.
 pub mod generated_aphairesis_constants;
+/// Módulo de canal lock-free Single-Producer Single-Consumer (SPSC) Zero-Copy.
+pub mod spsc;
+
+/// Módulo de interfaz C-ABI (FFI) para integración C/C++.
+pub mod ffi;
 
 pub use manifest::{HaltReason, SharedManifest, POISONED, RUNNING, MAX_RETRIES};
-
+pub use spsc::SpscRingBuffer;
 
 #[cfg(feature = "cortex-persist")]
 pub mod cortex;
 pub use seqlock::{publish, read};
+
