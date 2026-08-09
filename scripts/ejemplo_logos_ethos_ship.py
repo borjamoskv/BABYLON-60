@@ -27,7 +27,7 @@ def ethos_attestation(ast_state: str, lamport: int) -> str:
 
 
 def ship_kinetic_collapse(ast_state: str, taint_hash: str) -> None:
-    print("[3] SHIP: Forzando colapso físico (DB WAL + Git Tag)...")
+    print("[3] SHIP: Forzando collapse físico (DB WAL + Git Tag)...")
     import os
 
     root_dir: str = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

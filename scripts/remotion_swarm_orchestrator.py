@@ -58,10 +58,10 @@ def simulate_swarm_render():
     hypervisor = AgencyHypervisor(SWARM_SIZE)
     chunks = hypervisor.allocate_chunks()
 
-    print(f"[BABYLON-60 SWARM] Instanciados {SWARM_SIZE} agentes en memoria (INV_C5_18: Zero-Worktree).")
+    print(f"[BABYLON-60 SWARM] Instanciados {SWARM_SIZE} agents en memoria (INV_C5_18: Zero-Worktree).")
     print(f"[BABYLON-60 SWARM] Particionado: {TOTAL_FRAMES} frames ({FRAMES_PER_AGENT} frames/agente).")
 
-    # Simulación de renderizado paralelo por agentes
+    # Simulación de renderizado paralelo por agents
     for chunk in chunks[:10]:  # Muestra inicial
         agent_id = chunk["agent_id"]
         for f in range(chunk["start"], chunk["end"]):

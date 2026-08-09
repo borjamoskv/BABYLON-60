@@ -16,7 +16,7 @@ MAPPINGS: list[tuple[str, str, str, str]] = [
     (
         "Captura de pantalla 2026-07-14 a las 0.00.30.png",
         "evidencia_04_sesion_inicial_simbiosis_00h00m.png",
-        "Sesión inicial de auditoría arquitectónica en disco soberano (Babilonia 60 / CORTEX-PERSIST).",
+        "Sesión inicial de audit arquitectónica en disco soberano (Babilonia 60 / CORTEX-PERSIST).",
         "00:00:30",
     ),
     (

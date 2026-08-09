@@ -17,7 +17,7 @@ except ImportError as e:
 
 
 def run_swarm(pass_name):
-    print(f"\n[*] Iniciando {pass_name} (Hyper-Exergy: 2ms)")
+    print(f"\n[*] Initiating {pass_name} (Hyper-Exergy: 2ms)")
     engine = strike_rs.BftSwarmEngine(50, 1000)
     for i in range(150):
         node_id = f"tx_arb_{pass_name}_{i}"

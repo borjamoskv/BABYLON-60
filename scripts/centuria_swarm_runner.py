@@ -63,7 +63,7 @@ async def execute_vector_agent(agent_id: int, vector: dict[str, str], actor: BFT
 
 
 async def main():
-    logger.info("⚡ [CENTURIA SWARM RUNNER] Iniciando Orquestación de 100 Agentes ULTRATHINK...")
+    logger.info("⚡ [CENTURIA SWARM RUNNER] Initiating Orquestación de 100 Agentes ULTRATHINK...")
 
     if not SHARDS_FILE.exists():
         logger.error(f"🔴 File not found: {SHARDS_FILE}")
@@ -91,7 +91,7 @@ async def main():
 
         completed_count = sum(1 for r in results if r["status"] == "ALIVE_COMPLETED")
         logger.info(
-            f"🏆 Causal-Determinist Attestation: {completed_count}/100 agentes ULTRATHINK finalizados exitosamente."
+            f"🏆 Causal-Determinist Attestation: {completed_count}/100 agents ULTRATHINK finalizados exitosamente."
         )
 
     finally:

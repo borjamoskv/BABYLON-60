@@ -7,7 +7,7 @@
 BABYLONMAIL CLI & SUBAGENT INTERFACE
 ====================================
 Interfaz CLI de alta exergía para enviar, recibir y auditar correos
-soberanos bajo el dominio @babylon60.com.
+sovereign bajo el dominio @babylon60.com.
 
 Integrado con CortexPersistLedger y firma Ed25519.
 
@@ -110,7 +110,7 @@ def main():
     subparsers = parser.add_subparsers(dest="command")
 
     subparsers.add_parser("status", help="Ver estado de cuenta e inmutabilidad")
-    subparsers.add_parser("list", help="Listar correos soberanos")
+    subparsers.add_parser("list", help="Listar correos sovereign")
 
     send_p = subparsers.add_parser("send", help="Enviar correo soberano")
     send_p.add_argument("--to", required=True, help="Destinatario @babylon60.com")

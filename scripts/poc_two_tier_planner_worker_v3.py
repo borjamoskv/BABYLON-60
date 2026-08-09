@@ -9,7 +9,7 @@
 # ============================================================================
 """
 MOSKV-1 APEX – Iteración 3 del PoC
-Objetivo: demostrar escalabilidad de un DAG asíncrono de 8 nodos, snapshot‑rollback
+Objetivo: demostrar escalabilidad de un DAG asíncrono de 8 nodes, snapshot‑rollback
 seguro, configuración vía CLI/JSON, y cálculo GELABP avanzado con penalización
 por latencia y uso de memoria.
 

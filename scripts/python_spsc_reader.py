@@ -6,7 +6,7 @@
 """
 python_spsc_reader.py — Consumidor Multiproceso Python Zero-Copy (C-ABI FFI)
 
-Demuestra el consumo libre de bloqueos de `SharedManifest` y el colapso de anergía
+Demuestra el consumo libre de bloqueos de `SharedManifest` y el collapse de anergía
 en el lado lector (lecturas puras sin invalidación de caché RFO).
 """
 

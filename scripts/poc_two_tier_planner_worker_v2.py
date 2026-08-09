@@ -14,7 +14,7 @@ Versión avanzada con:
 - Logging estructurado a stdout y archivo
 - Parámetros de concurrencia y capacidad de memoria configurables
 - Métricas de energía por nodo y penalizaciones por latencia
-- Manejo de errores BFT con rollback de estado KDA
+- Manejo de errors BFT con rollback de estado KDA
 - Compatibilidad con pruebas automatizadas sin placeholders
 """
 

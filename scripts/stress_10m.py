@@ -26,7 +26,7 @@ def main():
     sys.stdout.flush()
 
     count = 100_000
-    print(f"[*] Solicitando inyección de {count:,} nodos BFT directamente en la memoria C/Rust...")
+    print(f"[*] Solicitando inyección de {count:,} nodes BFT directamente en la memoria C/Rust...")
     print("[*] Advertencia: Esto consumirá RAM masiva. Preparando Generador DAG Nativo...\n")
 
     engine = strike_rs.BftSwarmEngine(500, count)  # High concurrency limit
@@ -34,7 +34,7 @@ def main():
     db_path = "stress_memory_10m.db"
 
     # We will measure the raw performance of native DAG execution
-    print("[*] Iniciando explosión termodinámica (Zero-Cost Wakeups + Bulk SQLite WAL)...")
+    print("[*] Initiating explosión termodinámica (Zero-Cost Wakeups + Bulk SQLite WAL)...")
     start_t = time.perf_counter()
 
     try:
