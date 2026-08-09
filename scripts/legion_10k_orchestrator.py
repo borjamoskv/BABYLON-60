@@ -65,7 +65,7 @@ async def transition_operator(ledger: CognitiveTransitionLedger, mcts: SwarmMCTS
     node_id = f"N_{node_idx}"
 
     # 1. Projection (Context Framing)
-    context = ledger.project_context(node_id)
+    _context = ledger.project_context(node_id)
 
     # 2. Speculation / Inference
     # Simulate an LLM call delay
