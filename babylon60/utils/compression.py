@@ -9,4 +9,4 @@ warnings.warn(
     DeprecationWarning,
     stacklevel=2,
 )
-from babylon60.transducers.compression import *
+from babylon60.transducers.compression import *  # noqa: E402, F403, F401

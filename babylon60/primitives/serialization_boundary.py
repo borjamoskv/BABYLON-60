@@ -6,7 +6,7 @@ with strict bounds checking and SHA-256 checksum verification (Vector 3 Mitigati
 
 import hashlib
 import struct
-from typing import List, Tuple, Dict, Any
+from typing import List, Tuple
 
 
 class SerializationBoundaryError(ValueError):

@@ -9,4 +9,4 @@ warnings.warn(
     DeprecationWarning,
     stacklevel=2,
 )
-from babylon60.primitives.errors import *
+from babylon60.primitives.errors import *  # noqa: E402, F403, F401

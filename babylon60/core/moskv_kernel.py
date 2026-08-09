@@ -8,7 +8,7 @@ import signal
 import sqlite3
 import hashlib
 import json
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from dataclasses import dataclass
 from datetime import datetime, timezone
 
