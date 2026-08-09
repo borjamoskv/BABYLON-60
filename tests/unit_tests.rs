@@ -227,6 +227,17 @@ fn sheaf_fusion_respects_extended_landauer() {
 }
 
 #[test]
+fn generated_sheaf_fusion_operator_calibrated() {
+    use babylon_60::generated_aphairesis_constants::SheafFusionOperator;
+    use babylon_60::thermodynamics::TopologicalCompressor;
+
+    let bound = SheafFusionOperator::aphairesis_bound(320.0);
+    assert!(bound.min_energy_joules() > 0.0);
+    assert!(bound.effective_bits_erased >= 0.0);
+}
+
+
+#[test]
 fn measurement_below_bound_is_rejected() {
     use babylon_60::thermodynamics::{TopologicalCompressor, SheafFusionOperator};
     let op = SheafFusionOperator;

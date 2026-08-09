@@ -9,4 +9,6 @@ pub struct SheafFusionOperator;
 impl TopologicalCompressor for SheafFusionOperator {
     const EFFECTIVE_BITS_ERASED: f64 = 0.011595;
     const KL_DIVERGENCE: f64 = 0.000000;
+    const DESIGN_TEMP_K: f64 = 320.0;
 }
+
