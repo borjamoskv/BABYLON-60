@@ -169,10 +169,14 @@ impl AphairesisBound {
 /// Constante de Boltzmann ($k_B$) en Joules por Kelvin: $1.380649 \times 10^{-23} \text{ J/K}$.
 pub const K_BOLTZMANN: f64 = 1.380649e-23;
 
+/// Error retornado cuando una medición empírica de energía viola la cota de Landauer extendida.
 #[derive(Debug, Clone, PartialEq)]
 pub struct ThermodynamicViolation {
+    /// Cota mínima de energía esperada en Joules.
     pub expected_min: f64,
+    /// Energía medida empíricamente en Joules.
     pub actual: f64,
+    /// Ratio de déficit ($E_{\text{min}} / E_{\text{actual}}$).
     pub deficit_ratio: f64,
 }
 
@@ -256,6 +260,7 @@ pub struct SymbolicMessage<C: TopologicalCompressor> {
 }
 
 impl<C: TopologicalCompressor> SymbolicMessage<C> {
+    /// Construye una nueva instancia de `SymbolicMessage` adjuntando la cota de `C::MIN_ENERGY_JOULES`.
     pub fn new(payload: [u8; 48], logical_timestamp: u64) -> Self {
         Self {
             payload,
@@ -266,14 +271,14 @@ impl<C: TopologicalCompressor> SymbolicMessage<C> {
     }
 }
 
-// Verificación en tiempo de compilación: esta línea NO compila
-// si los axiomas termodinámicos son inconsistentes.
+/// Verificación estática en tiempo de compilación para la cota de energía de `SheafFusionOperator`.
 pub const _SHEAF_FUSION_BOUND_CHECK: f64 = SheafFusionOperator::MIN_ENERGY_JOULES;
 
 const _: () = assert!(
     core::mem::size_of::<SymbolicMessage<SheafFusionOperator>>() <= 64,
     "SymbolicMessage exceeds cache line: breaks SPSC zero-contention invariant"
 );
+
 
 
 
