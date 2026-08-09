@@ -65,7 +65,7 @@ impl CortexPersister {
 
         self.conn.execute(
             "INSERT INTO ledger (epoch_id, seq, status_flag, payload_hash) VALUES (?1, ?2, ?3, ?4)",
-            params![epoch, seq, status, blob],
+            params![epoch as i64, seq, status, blob],
         )?;
 
         Ok(())
@@ -75,7 +75,7 @@ impl CortexPersister {
     pub fn generate_bitcoin_op_return(&self, limit: usize) -> Result<String> {
         let mut stmt = self.conn.prepare("SELECT payload_hash FROM ledger ORDER BY id DESC LIMIT ?1")?;
         
-        let hash_iter = stmt.query_map([limit], |row| {
+        let hash_iter = stmt.query_map([limit as i64], |row| {
             let blob: Vec<u8> = row.get(0)?;
             Ok(blob)
         })?;
