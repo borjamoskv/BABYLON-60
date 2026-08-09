@@ -59,6 +59,7 @@ __all__ = [
     "TombstoneAlert",
     "TrendsAlert",
     "WorkflowAlert",
+    "AutoAuditAlert",
 ]
 
 # ─── Constants ────────────────────────────────────────────────────────
@@ -87,6 +88,16 @@ class SiteStatus:
     response_ms: float = 0.0
     error: str = ""
     checked_at: str = ""
+
+
+@dataclass
+class AutoAuditAlert:
+    """Automated audit alert for daemon monitor."""
+
+    title: str
+    severity: str
+    details: str = ""
+    timestamp: str = ""
 
 
 @dataclass
