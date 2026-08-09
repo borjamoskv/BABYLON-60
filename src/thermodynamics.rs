@@ -199,7 +199,9 @@ pub trait TopologicalCompressor {
             * (Self::EFFECTIVE_BITS_ERASED + Self::KL_DIVERGENCE / core::f64::consts::LN_2);
         
         assert!(raw >= 0.0, "Aphairesis bound violation: negative energy");
-        assert!(raw.is_finite(), "Aphairesis bound violation: non-finite energy");
+        #[allow(clippy::eq_op)]
+        let is_not_nan = raw == raw;
+        assert!(is_not_nan && raw != f64::INFINITY && raw != f64::NEG_INFINITY, "Aphairesis bound violation: non-finite energy");
         raw
     };
 

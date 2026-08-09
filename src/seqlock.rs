@@ -32,9 +32,40 @@
 //   Cota de envolvimiento: 2⁶⁴ ÷ 10⁹ s⁻¹ ≈ 584.5 años.
 
 use core::sync::atomic::{fence, Ordering};
+#[allow(unused_imports)]
 use core::hint::spin_loop;
 
 use crate::manifest::{SharedManifest, MAX_RETRIES};
+
+// ---------------------------------------------------------------------------
+// Helpers de microarquitectura AArch64 / ARMv9
+// ---------------------------------------------------------------------------
+
+/// Barrera de memoria de lectura-lectura física `dmb ishld` para AArch64.
+#[inline(always)]
+fn memory_barrier_acquire_read() {
+    #[cfg(target_arch = "aarch64")]
+    unsafe {
+        core::arch::asm!("dmb ishld", options(nostack, preserves_flags));
+    }
+    #[cfg(not(target_arch = "aarch64"))]
+    {
+        fence(Ordering::Acquire);
+    }
+}
+
+/// Pista de ahorro de energía y liberación de pipeline CPU (`yield` en AArch64).
+#[inline(always)]
+fn cpu_spin_yield() {
+    #[cfg(target_arch = "aarch64")]
+    unsafe {
+        core::arch::asm!("yield", options(nomem, nostack, preserves_flags));
+    }
+    #[cfg(not(target_arch = "aarch64"))]
+    {
+        spin_loop();
+    }
+}
 
 // ---------------------------------------------------------------------------
 // Escritor (único) — INV-2
@@ -117,7 +148,7 @@ pub fn read(m: &SharedManifest) -> Option<(u64, [u64; 4])> {
 
         // Paso 2: si impar → escritura en curso; spin y reintento
         if s1 & 1 != 0 {
-            spin_loop(); // AArch64: YIELD / WFE hint
+            cpu_spin_yield(); // AArch64: YIELD / WFE hint
             continue;
         }
 
@@ -131,7 +162,7 @@ pub fn read(m: &SharedManifest) -> Option<(u64, [u64; 4])> {
         // Paso 4: barrera Acquire (DMB ISHLD) — impide que la carga de s2
         // se reordene por delante de las cargas Relaxed del hash/epoch.
         // Obligatoria en AArch64; no-op en x86-TSO.
-        fence(Ordering::Acquire); // AArch64: DMB ISHLD
+        memory_barrier_acquire_read();
 
         // Paso 5: verificar consistencia — si seq no cambió, la lectura es válida
         let s2 = m.seq.load(Ordering::Relaxed);
@@ -139,8 +170,9 @@ pub fn read(m: &SharedManifest) -> Option<(u64, [u64; 4])> {
             return Some((e, h));
         }
         // s1 ≠ s2 → escritor intervino; la anergía del retry es acotada
-        spin_loop();
+        cpu_spin_yield();
     }
 
     None // agotados MAX_RETRIES → el llamante debe invocar epistemic_halt
 }
+

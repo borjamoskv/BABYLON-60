@@ -399,3 +399,73 @@ fn inv5_padding_integrity_preserved() {
     // El compiler/CPU no debe haber emitido stores overlap-eados (Store Tearing)
     assert_eq!(m._padding, [0u8; 16], "Store tearing detectado sobre _padding C-ABI");
 }
+
+// ═══════════════════════════════════════════════════════════════════════
+// SPSC Ring Buffer Lock-Free Tests
+// ═══════════════════════════════════════════════════════════════════════
+
+#[test]
+fn test_spsc_ring_buffer_basic_push_pop() {
+    use babylon_60::SpscRingBuffer;
+
+    let ring = SpscRingBuffer::<u64, 8>::new();
+    assert!(ring.is_empty());
+    assert_eq!(ring.len(), 0);
+
+    for i in 0..8 {
+        assert!(ring.push(i * 10).is_ok());
+    }
+
+    assert!(ring.is_full());
+    assert_eq!(ring.len(), 8);
+    assert_eq!(ring.push(999), Err(999));
+
+    for i in 0..8 {
+        assert_eq!(ring.pop(), Some(i * 10));
+    }
+
+    assert!(ring.is_empty());
+    assert_eq!(ring.pop(), None);
+}
+
+#[test]
+fn test_spsc_ring_buffer_concurrent_producer_consumer() {
+    use babylon_60::SpscRingBuffer;
+    use std::sync::Arc;
+    use std::thread;
+
+    let ring = Arc::new(SpscRingBuffer::<u64, 1024>::new());
+    let ring_producer = Arc::clone(&ring);
+    let ring_consumer = Arc::clone(&ring);
+
+    let count = 100_000u64;
+
+    let producer = thread::spawn(move || {
+        for i in 0..count {
+            while ring_producer.push(i).is_err() {
+                std::hint::spin_loop();
+            }
+        }
+    });
+
+    let consumer = thread::spawn(move || {
+        let mut received = Vec::with_capacity(count as usize);
+        while received.len() < count as usize {
+            if let Some(val) = ring_consumer.pop() {
+                received.push(val);
+            } else {
+                std::hint::spin_loop();
+            }
+        }
+        received
+    });
+
+    producer.join().unwrap();
+    let received = consumer.join().unwrap();
+
+    assert_eq!(received.len(), count as usize);
+    for (idx, &val) in received.iter().enumerate() {
+        assert_eq!(val, idx as u64);
+    }
+}
+
