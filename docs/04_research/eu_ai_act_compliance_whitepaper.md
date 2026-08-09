@@ -1,3 +1,9 @@
+---
+title: Determinismo Causal como Cumplimiento — BABYLON-60 y EU AI Act
+status: Causal-Determinist
+version: 4.0.0
+---
+
 # El Determinismo Causal como Cumplimiento: Arquitectura BABYLON-60 v4.0 para Sistemas de IA de Alto Riesgo
 
 **Whitepaper Técnico y Normativo sobre la Resolución de los Artículos 9, 10, 11, 12, 13 y 14 del EU AI Act (Reglamento UE 2024/1689)**

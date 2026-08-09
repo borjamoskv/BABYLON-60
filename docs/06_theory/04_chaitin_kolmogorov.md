@@ -1,4 +1,10 @@
-# 04 — Chaitin, Kolmogorov, and Algorithmic Information Theory
+---
+title: 04 — Chaitin, Kolmogorov y Teoría de Información Algorítmica
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# 04 — Chaitin, Kolmogorov y Teoría de Información Algorítmica
 
 ## 4.1 Kolmogorov Complexity
 

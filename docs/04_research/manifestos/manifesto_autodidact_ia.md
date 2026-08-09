@@ -1,4 +1,10 @@
-# AUTODIDACT 4: Artificial Intelligence Models for Code (AI + RE)
+---
+title: AUTODIDACT 4 — Modelos de IA para Código
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# AUTODIDACT 4: Modelos de Inteligencia Artificial para Código (AI + RE)
 **Reality Level:** Causal-Determinist
 **SYS_ID:** borjamoskv
 **Provenance Signature:** `[Ledger Asíncrono-TAINT:borjamoskv:autodidact_re_synthesis:2026-07-18T13:02:20+02:00]`

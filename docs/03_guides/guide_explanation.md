@@ -1,3 +1,9 @@
+---
+title: BABYLON-60 Executive Briefing
+status: Causal-Determinist
+version: 1.0.0
+---
+
 # EXECUTIVE BRIEFING — Motor Causal Principal SINGULARITY
 
 ```yaml

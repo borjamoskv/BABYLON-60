@@ -1,3 +1,9 @@
+---
+title: Dictamen de Verificación Independiente — Colapso C4-SIM
+status: Causal-Determinist
+version: 1.0.0
+---
+
 # Dictamen de Verificación Independiente: Colapso del Holograma C4-SIM
 
 **Sujeto de Auditoría:** Informe Consolidado de Auditoría General (AUDIT-GOAL-APEX-2026) generado por Claude (Actores Soberano C4-SIM).

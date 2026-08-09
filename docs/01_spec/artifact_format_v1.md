@@ -1,11 +1,17 @@
-# BABYLON-60 Artifact Format v1
+---
+title: Formato de Artefacto BABYLON-60 v1
+status: Causal-Determinist
+version: 1.0.0
+---
 
-## 1. Introduction
-This is the normative specification for the BABYLON-60 Artifact Bundle. Any conforming implementation of the Phase 0 (Runtime Bootstrap) must emit this exact canonical structure. The purpose of this format is to guarantee that identical logical states produce identical hashes, enabling reproducible verification via Lean and Coq.
+# Formato de Artefacto BABYLON-60 v1
 
-## 2. Artifact Bundle Layout
+## 1. Introducción
+Esta es la especificación normativa para el *Artifact Bundle* (Paquete de Artefacto) de BABYLON-60. Cualquier implementación conforme de la Fase 0 (Runtime Bootstrap) debe emitir esta estructura canónica exacta. El propósito de este formato es garantizar que estados lógicos idénticos produzcan hashes idénticos, permitiendo la verificación reproducible vía Lean 4 y Coq.
 
-The Artifact Bundle MUST be a directory (or compressed archive) structured exactly as follows:
+## 2. Disposición del Paquete de Artefacto
+
+El *Artifact Bundle* DEBE ser un directorio (o archivo comprimido) estructurado exactamente de la siguiente manera:
 
 ```text
 Artifact Bundle
@@ -22,27 +28,27 @@ Artifact Bundle
 ```
 
 ### 2.1. manifest.json
-A JSON object indicating the version and structural hashes. It must contain the following keys exactly:
-- `"version"`: MUST be `"1.0"`.
-- `"components"`: Array of paths included in the bundle.
-- `"global_hash"`: The overall hash of the bundle, calculated as the SHA-256 of the concatenated contents of `hashes/bundle.sha256`.
+Un objeto JSON que indica la versión y los hashes estructurales. Debe contener exactamente las siguientes claves:
+- `"version"`: DEBE ser `"1.0"`.
+- `"components"`: Array de rutas incluidas en el bundle.
+- `"global_hash"`: El hash global del bundle, calculado como el SHA-256 de los contenidos concatenados de `hashes/bundle.sha256`.
 
-### 2.2. Canonical Serialization (`graph.canonical`)
-The Ledger DAG MUST be serialized canonically before hashing. The rules for canonical serialization are:
-1. **Topological Sort**: All events in the Ledger MUST be sorted topologically.
-2. **Tie-Breaking**: If two events $E_a$ and $E_b$ have no causal dependency between them, they MUST be sorted lexicographically by their string-encoded event IDs.
-3. **Format**: The `graph.canonical` file contains one event per line. Each line MUST strictly follow this format (UTF-8 encoded):
+### 2.2. Serialización Canónica (`graph.canonical`)
+El DAG del Ledger DEBE ser serializado de forma canónica antes de aplicar el hash. Las reglas son:
+1. **Ordenamiento Topológico**: Todos los eventos en el Ledger DEBEN estar ordenados topológicamente.
+2. **Desempate**: Si dos eventos $E_a$ y $E_b$ no tienen dependencia causal, DEBEN ser ordenados lexicográficamente por sus IDs.
+3. **Formato**: El archivo `graph.canonical` contiene un evento por línea. Cada línea DEBE seguir este formato estricto (UTF-8):
    `{event_id}|{parent1,parent2,...}|{logical_tick}|{payload}|{signature}`
-   Parents MUST be sorted lexicographically.
+   Los padres (parents) DEBEN estar ordenados lexicográficamente.
 
-### 2.3. Proof IR (`proof.ir`)
-This file contains the Intermediate Representation of the execution trace and invariants, stripped of any Lean or Coq-specific syntax. The backend translators will parse this IR to generate native proofs.
+### 2.3. Representación Intermedia (`proof.ir`)
+Este archivo contiene la Representación Intermedia (Proof IR) de la traza de ejecución y sus invariantes, limpia de cualquier sintaxis específica de Lean o Coq. Los traductores backend parsearán este IR para generar pruebas nativas.
 
 ### 2.4. Hashes
-All hashes MUST be SHA-256 encoded in lowercase hexadecimal format.
-- `graph.sha256`: Hash of `graph.canonical`.
-- `trace.sha256`: Hash of `trace.bin`.
-- `bundle.sha256`: A manifest of the hashes of all components.
+Todos los hashes DEBEN ser codificados en SHA-256 en formato hexadecimal en minúsculas.
+- `graph.sha256`: Hash de `graph.canonical`.
+- `trace.sha256`: Hash de `trace.bin`.
+- `bundle.sha256`: Manifiesto de los hashes de todos los componentes.
 
-## 3. Conformity
-An implementation is only considered conformant if the `graph.sha256` produced for a given script matches the reference interpreter bit-for-bit.
+## 3. Conformidad
+Una implementación solo se considera conforme si el `graph.sha256` producido para un script dado coincide bit-a-bit con el intérprete de referencia.

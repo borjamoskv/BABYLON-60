@@ -1,6 +1,6 @@
 # BABYLON-60 — Índice Canónico de Documentación (`docs/`)
 
-> **Última actualización:** 2026-08-03
+> **Última actualización:** 2026-08-09
 > **Convención activa:** `lower_snake_case` con prefijo DDD — enforzado por `.git/hooks/pre-commit`
 > **Invariante:** `INV_C5_NOMINAL_DENSITY` — todo símbolo apunta a una única entidad sin ambigüedad.
 
@@ -50,7 +50,7 @@ graph TD
 | `spec_babylon60.md` | Spec del lenguaje B60 DSL | `06_theory/03_computability_turing.md` | `compiler/` |
 | `spec_proof_ir.md` | Spec del Intermediate Representation de pruebas | `06_theory/06_curry_howard.md` | `proof_kernel/`, `proof_ir/` |
 | `spec_graph_canonical.md` | Spec del grafo canónico de ontología | `axiom_ontology.md` | `domain_kernel/` |
-| `spec_exergy_ontology.md` | Especificación de la métrica de exergía | `axiom_axiomatization_moskv1.md` | `strike_rs/atms.rs` |
+| `spec_exergy_ontology.md` | Especificación de la métrica de exergía | `axiom_axiomatization.md` | `strike_rs/atms.rs` |
 | `spec_cryptographic_profile.md` | Perfil criptográfico del sistema | — | `L1_sink/` |
 | `spec_security_model.md` | Modelo de seguridad y trust boundaries | `spec_cryptographic_profile.md` | `AGENTS.md` |
 | `audit_babylon60_v2.5.md` | Auditoría histórica v2.5 | — | — |
@@ -62,10 +62,10 @@ graph TD
 | Archivo | Contenido | Depende de |
 |:---|:---|:---|
 | `axiom_ontology.md` | Ontología canónica de entidades del sistema | `06_theory/00_index.md` |
-| `axiom_axiomatization.md` | Axiomática base C5-REAL | `06_theory/01_robinson_arithmetic.md` |
-| `axiom_axiomatization_moskv1.md` | Axiomática extendida Moskv-1 Apex | `axiom_axiomatization.md` |
+| `axiom_axiomatization.md` | Axiomática formal completa (C5-REAL + Moskv-1 APEX) | `06_theory/01_robinson_arithmetic.md` |
 | `axiom_oncologia_300_primitivas.md` | 300 primitivas del lenguaje ontológico | `axiom_ontology.md` |
 | `spec_c5_graph_isomorphism.md` | Spec del algoritmo 1-WL de isomorfismo | `06_theory/07_cross_domain.md` |
+| `security_threat_model_v4.md` | Modelo de amenazas y vectores de ataque v4.0 | `spec_cryptographic_profile.md` |
 
 ---
 

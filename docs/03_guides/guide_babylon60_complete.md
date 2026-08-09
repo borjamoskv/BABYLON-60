@@ -1,7 +1,13 @@
-# BABYLON·60 — COMPLETE ARCHITECTURE & DEVELOPER GUIDE
-## v1.1.0 · Sovereign Agentic IDE & Monorepo Ecosystem
+---
+title: BABYLON-60 Guía Completa de Arquitectura y Desarrollo
+status: Causal-Determinist
+version: 1.1.0
+---
 
-This document serves as the absolute single source of truth for the architecture, capabilities, layout, API contracts, and packaging workflow of the **BABYLON·60** ecosystem.
+# BABYLON·60 — GUÍA COMPLETA DE ARQUITECTURA Y DESARROLLO
+## v1.1.0 · IDE Agéntico Soberano & Ecosistema Monorepo
+
+Este documento es la única fuente de verdad absoluta para la arquitectura, capacidades, disposición, contratos de API y workflow de empaquetado del ecosistema **BABYLON·60**.
 
 ---
 

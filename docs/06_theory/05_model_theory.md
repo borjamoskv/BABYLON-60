@@ -1,4 +1,10 @@
-# 05 — Model Theory
+---
+title: 05 — Teoría de Modelos
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# 05 — Teoría de Modelos
 
 ## 5.1 Structures and Models
 

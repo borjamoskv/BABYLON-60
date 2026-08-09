@@ -1,4 +1,10 @@
-# BABYLON-60: Deterministic Synthesis & Rank-Ordered Analysis
+---
+title: BABYLON-60 — Síntesis Determinista y Análisis Ordenado
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# BABYLON-60: Síntesis Determinista y Análisis Ordenado por Rango
 
 ## 1. License Contradictions
 **WARNING:** Found 4 license files. Potential contradiction.

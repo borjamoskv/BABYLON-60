@@ -1,4 +1,10 @@
-# 06 — The Curry-Howard-Lambek Correspondence
+---
+title: 06 — Correspondencia Curry-Howard-Lambek
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# 06 — La Correspondencia Curry-Howard-Lambek
 
 ## 6.1 The Trilateral Isomorphism
 

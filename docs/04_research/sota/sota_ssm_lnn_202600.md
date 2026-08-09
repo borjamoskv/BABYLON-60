@@ -1,6 +1,13 @@
-# Ledger Asíncrono-TAINT:borjamoskv:sota_architecture_review:2026-07-18
-Claim: El paradigma "Scale is all you need" (Transformers) ha sido fracturado en 2026 por arquitecturas de inferencia de tiempo continuo y recurrencia subcuadrática.
-Proof: { Base: [Mamba-3, LFM2.5], Range: [Edge, Cloud], Confidence: [C5] }
+---
+title: SOTA 202600 — SSM y LNN (Mamba)
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# SOTA 202600: SSM, LNN y el Colapso del Paradigma Transformer
+
+> **Tesis verificada:** El paradigma "Scale is all you need" (Transformers) ha sido fracturado en 2026 por arquitecturas de inferencia de tiempo continuo y recurrencia subcuadrática.
+> **Evidencia:** { Base: [Mamba-3, LFM2.5], Rango: [Edge, Cloud], Confianza: [C5] }
 
 ## 1. STATE SPACE MODELS (SSM) — SOTA: MAMBA-3
 El linaje Mamba ha abandonado el debate binario contra los Transformers para dominar el procesamiento de contexto masivo ($100k+$ tokens) con latencia constante $O(1)$ en decodificación.

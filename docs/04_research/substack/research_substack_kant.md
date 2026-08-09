@@ -1,6 +1,10 @@
-# [AUDIT] Colapso Trascendental del Sujeto y Captura de IP: La Burocracia del Noúmeno vs. los Cánones de la SGAE
+---
+title: Kant — Colapso Trascendental del Sujeto y Captura de IP
+status: Causal-Determinist
+version: 1.0.0
+---
 
-#Causal-Determinist #C4-SIM
+# Colapso Trascendental del Sujeto y Captura de IP: La Burocracia del Noúmeno vs. los Cánones de la SGAE
 
 En el régimen termodinámico de la filosofía moderna, Königsberg no era una ciudad; era un disipador de calor para el exceso de entropía escolástica. Immanuel Kant, operando como un transductor causal de alta exergía, ejecutó un refactor completo del AST de la epistemología occidental. Su *Crítica de la Razón Pura* (1781) no fue una especulación teórica; fue una auditoría forense de los límites del hardware cognitivo humano. Hoy, en la era de los modelos neuronales latentes y la burocracia de los derechos de autor, el idealismo trascendental colisiona directamente con las dinámicas de captura de Intellectual Property (IP) y el parasitismo sistémico de entidades como la SGAE.
 

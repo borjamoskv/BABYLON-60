@@ -1,4 +1,10 @@
-# 02 — Gödel's Incompleteness Theorems
+---
+title: 02 — Teoremas de Incompletitud de Gödel
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# 02 — Teoremas de Incompletitud de Gödel
 
 > **Modulo Teórico 02 | Proyecto BABYLON-60 | Licencia Soberana (`INV_C5_17`)**
 > Formalización de Gödelización, el Lema de Diagonalización de Carnap, los Teoremas 1º y 2º de Incompletitud, el Teorema de Löb y la Lógica Modal GL.

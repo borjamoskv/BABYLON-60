@@ -1,3 +1,9 @@
+---
+title: Tutorial Hola Mundo Causal en BABYLON-60
+status: Causal-Determinist
+version: 1.0.0
+---
+
 # Tutorial: Hola Mundo Causal en BABYLON-60
 
 > Guía paso a paso para construir tu primer agente determinista con el DSL B60.

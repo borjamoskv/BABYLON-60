@@ -1,6 +1,12 @@
-# QUICKSTART: Enterprise Onboarding & Sidecar Deployment
+---
+title: BABYLON-60 Enterprise Quickstart
+status: Causal-Determinist
+version: 4.0.0
+---
 
-**DevOps & Infrastructure Guide for Deploying BABYLON-60 v4.0 Sidecar in Read-Only Mode**
+# QUICKSTART: Onboarding Enterprise y Despliegue Sidecar
+
+**Guía DevOps e Infraestructura para Desplegar el Sidecar BABYLON-60 v4.0 en Modo Read-Only**
 
 > BABYLON-60 v4.0 Sovereign Hardened · Enterprise Onboarding Guide
 

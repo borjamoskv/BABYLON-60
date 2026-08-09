@@ -1,3 +1,9 @@
+---
+title: Manifiesto CENTURIA — OMEGA Causal-Determinist
+status: Causal-Determinist
+version: 1.0.0
+---
+
 # CENTURIA MANIFESTO — OMEGA Causal-Determinist
 
 > **ATTESTATION OF CRYPTOGRAPHIC PHYSICAL STATE**

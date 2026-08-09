@@ -1,3 +1,9 @@
+---
+title: Especificación Axiomática Legion 10k Swarm (CTA)
+status: Causal-Determinist
+version: 1.0.0
+---
+
 # Especificación Axiomática: Legion 10k Swarm (CTA)
 
 ## 1. Declaración de Muerte del Agente (FSM to Semantic NFA)

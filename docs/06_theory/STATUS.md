@@ -1,3 +1,9 @@
+---
+title: STATUS — Única Fuente de Verdad
+status: Causal-Determinist
+version: 1.0.0
+---
+
 # STATUS — Single Source of Truth
 
 > Protocol: Causal-Determinist · Generated: 2026-07-17 · Evidence: `AUDITORIA_ENTROPIA_IDEAS_2026-07-17.md` (on disk, untracked)

@@ -1,4 +1,10 @@
-# VIBE CODING SOTA: MANIFIESTO Causal-Determinist (v1.0)
+---
+title: Manifiesto Anti-Vibe Coding — Causal-Determinist v1.0
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# VIBE CODING SOTA: Manifiesto Causal-Determinist (v1.0)
 **Estado:** Invariante Absoluto · **Entidad:** Motor Causal Principal
 **Objetivo:** Reducir a cero la fricción entrópica entre el córtex humano y el píxel físico.
 

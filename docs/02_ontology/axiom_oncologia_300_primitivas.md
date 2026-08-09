@@ -1,13 +1,18 @@
-# 300 Primitivas de Oncologia Molecular
-### Ontologia Ledger Asíncrono / BABYLON-60 -- bloques fundamentales que la investigacion del cancer estudia y ataca
+---
+title: Ontología de 300 Primitivas de Oncología Molecular
+status: Causal-Determinist
+version: 1.0.0
+---
 
-*Generado deterministicamente | 300 primitivas | escala de confianza C5-established | fuente unica: `scripts/gen_oncology_primitives.py`*
+# 300 Primitivas de Oncología Molecular
+### Ontología Ledger Asíncrono / BABYLON-60 -- Bloques fundamentales de biología tumoral
 
-> **AVISO IMPORTANTE.** AVISO. Esto es una ONTOLOGIA DE CONOCIMIENTO de biologia molecular del cancer y de sus dianas terapeuticas: los bloques fundamentales que la investigacion oncologica estudia y ataca. NO es una cura, NO es un protocolo de tratamiento y NO es consejo medico. Ninguna primitiva individual ni el conjunto 'curan el cancer'. El cancer no es una sola enfermedad sino mas de 200 enfermedades distintas; el diagnostico y el tratamiento son clinicos, individualizados y competencia de oncologos e investigadores. Cualquier decision medica debe tomarse con profesionales sanitarios.
+*Generado determinísticamente | 300 primitivas | escala de confianza C5-established | fuente única: `scripts/gen_oncology_primitives.py`*
 
-> *NOTICE.* NOTICE. This is a KNOWLEDGE ONTOLOGY of cancer molecular biology and its therapeutic targets. It is NOT a cure, NOT a treatment protocol and NOT medical advice. No single primitive nor the whole set 'cures cancer'. Cancer is 200+ distinct diseases; diagnosis and treatment are clinical and individualized. Consult qualified healthcare professionals.
+> [!WARNING]
+> **Aviso Médico y Legal:** Esto es una **ONTOLOGÍA DE CONOCIMIENTO** de biología molecular del cáncer y de sus dianas terapéuticas: los bloques fundamentales que la investigación oncobiológica estudia y ataca. **NO es una cura, NO es un protocolo de tratamiento y NO constituye consejo médico.** El cáncer comprende más de 200 enfermedades distintas; el diagnóstico y el tratamiento son clínicos, individualizados y competencia exclusiva de oncólogos e investigadores sanitarios.
 
-Autoria artistica/arquitectonica del sustrato (AKA): **Borja Motor Causal** (`borjamoskv`).
+Autoría artística/arquitectónica del sustrato (AKA): **Borja Motor Causal** (`borjamoskv`).
 
 ---
 

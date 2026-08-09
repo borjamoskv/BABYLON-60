@@ -1,6 +1,8 @@
 ---
 name: cortex-kernel
 description: Manifiesto de invariantes transversales del ecosistema de habilidades CORTEX integrado en BABYLON-60.
+status: Causal-Determinist
+version: 1.0.0
 ---
 
 # CORTEX KERNEL — Invariantes Transversales en BABYLON-60

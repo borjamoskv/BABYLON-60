@@ -1,99 +1,103 @@
-# BABYLON-60 Formal Specification (v2.5.1-Causal-Determinist)
+# BABYLON-60: Especificación Formal (v2.5.1-Causal-Determinist)
 
-> **Causal-Determinist Axiom:** Language does not communicate; it compiles. This formal specification defines the operational semantics, the abstract machine, the invariants, and the failure model of BABYLON-60, allowing a proof assistant (Lean 4 / Coq) to reason about the exported artifacts without ambiguity.
+> **Axioma Causal-Determinist:** El lenguaje no comunica; compila. Esta especificación formal define la semántica operacional, la máquina abstracta, los invariantes y el modelo de fallos de BABYLON-60, permitiendo a un asistente de pruebas (Lean 4 / Coq) razonar sobre los artefactos exportados sin ambigüedad.
 
 ---
 
-## 1. Abstract Machine
+## 1. Máquina Abstracta y Modelo Temporal
 
-The BABYLON-60 engine is formally defined as the 6-tuple:
+El motor BABYLON-60 se define formalmente como el autómata determinista de 6 tuplas:
 
-$$\mathcal{M} = \langle R, H, L, C, Q, T \rangle$$
+$$\Gamma = \langle \mathcal{R}, \mathcal{H}, \mathcal{L}, \mathcal{Q}, C_{\text{log}}, \mathcal{T} \rangle$$
 
 ```
    ┌───────────────────────────────────────────────────────────────────┐
-   │                  Abstract Machine M = ⟨R, H, L, C, Q, T⟩          │
+   │                  Máquina Abstracta Γ                              │
    ├───────────┬───────────┬───────────┬───────────┬───────────┬───────┤
-   │ Registers │   Heap    │  Ledger   │   Clock   │ Scheduler │ Proof │
-   │   R[0..N] │  (Linear) │(Append-   │ (Planck)  │  Queue Q  │Harness│
-   │  (Immutable│           │   Only)   │  C.tick   │           │   T   │
-   │    COW)   │           │           │           │           │       │
+   │ Registros │   Heap    │  Ledger   │   Reloj   │ Cola Q    │ Proof │
+   │   R[0..N] │  (Lineal) │ (Solo     │ (Planck)  │           │Harness│
+   │   (COW)   │           │ Adición)  │  C.tick   │           │   T   │
    └───────────┴───────────┴───────────┴───────────┴───────────┴───────┘
 ```
 
-Where:
-- $R$ (**Registers**): Set of local registers per coroutine $R[0..N]$. They are purely **immutable** and subject to *Copy-on-Write* (COW) during message passing.
-- $H$ (**Heap**): Shared memory structured with **Linear Types**. A resource in the Heap can only have a single active owner (coroutine) at any given instant, eliminating data races by design.
-- $L$ (**Ledger**): Immutable and *append-only* event structure, causally ordered via cryptographic seals.
-- $C$ (**Clock**): Global discrete monotonic clock scaled in `UNIT.TICK` (1ms Planck Resolution).
-- $Q$ (**Coroutine Queue**): Coroutine scheduler queue in states $\{\text{Ready}, \text{Waiting}, \text{Running}, \text{Completed}, \text{Halted}\}$.
-- $T$ (**Trace Export**): Proof Harness accumulator that captures deterministic snapshots after observable transitions for verification in Lean 4.
+Donde:
+- $\mathcal{R}$ (**Registros**): Entorno local por corrutina $\rho : \text{Reg} \to v$. Son puramente inmutables y sujetos a *Copy-on-Write* (COW).
+- $\mathcal{H}$ (**Heap**): Memoria compartida estructurada con **Tipos Lineales**.
+- $\mathcal{L}$ (**Ledger**): Grafo Acíclico Dirigido (DAG) de eventos, ordenado causalmente vía sellos criptográficos.
+- $\mathcal{Q}$ (**Cola**): Cola del planificador particionada en $Q_{\text{ready}}$ y $Q_{\text{suspended}}$.
+- $C_{\text{log}}$ (**Reloj Lógico**): Tick del planificador ($\mathbb{N}$).
+- $\mathcal{T}$ (**Traza**): Acumulador que captura snapshots deterministas tras transiciones observables.
+
+### 1.1 Dominios Temporales
+BABYLON-60 desacopla completamente el tiempo físico de la ejecución causal:
+- **$C_{\text{phys}}$ (Reloj Físico)**: Entropía externa ($\mathbb{N}$ en ns). **Estrictamente prohibido** de influenciar transiciones de estado.
+- **$C_{\text{log}}$ (Reloj Lógico)**: Tick de planificador. Avanza en $+1$ por cada iteración del bucle o instrucción.
+- **$C_{\text{sim}}$ (Época de Simulación)**: Tiempo matemático ($\mathbb{N}$), avanzado por eventos explícitos.
 
 ---
 
-## 2. Numeric Type `F60` and Memory Model
+## 2. Dominio de Tipos y Modelo de Memoria
 
-### 2.1 Exactness and Deterministic Sexagesimal Reduction
+### 2.1 Dominio de Tipos
+El dominio de tipos $\mathbb{T}$ se define estrictamente como:
+$$\tau \in \{I64, TIME, F60, UNALLOCATED\}$$
 
-The `F60` type is mathematically refined to prevent error accumulation and *Numerator Blowup*:
+Los valores $v$ son pares de tipo y datos: $v : \tau \times \mathbb{D}_\tau$, donde:
+- $\mathbb{D}_{I64} = \mathbb{Z}$
+- $\mathbb{D}_{TIME} = \mathbb{N}$ (nanosegundos o ticks)
+- $\mathbb{D}_{F60} = \mathbb{Z} \times \mathbb{N}$ (racionales exactos $N / 60^S$)
 
+### 2.2 Exactitud y Reducción Determinista Sexagesimal (`F60`)
+El tipo `F60` previene la acumulación de errores y el *Blowup del Numerador*:
 $$\text{F60} = \{ N \in \mathbb{Z}, S \in \mathbb{N}_{60} \}$$
-
-$$\text{MathematicalValue}(\text{F60}) = \frac{N}{60^S}$$
-
-#### Deterministic Reduction Operation:
-$$\text{reduce}(N, S) = \left( \frac{N}{\gcd(N, 60^S)}, S - \log_{60}(\gcd(N, 60^S)) \right)$$
+$$\text{ValorMatemático}(\text{F60}) = \frac{N}{60^S}$$
 
 > [!WARNING]
-> **Provable Overflow:** If the memory of $N \in \mathbb{Z}$ exceeds the strict quota (256 bytes per scalar) to prevent memory exhaustion attacks, the virtual machine immediately triggers the `CRITICAL_HALT` failure transition.
-
-### 2.2 Memory Model and Ownership Transfer
-- **Register Immutability:** No instruction mutates a register *in situ*. Every functional evaluation generates a new immutable state.
-- **Copy-on-Write (COW):** In `FORK` operations, the new coroutine inherits a shallow view of $R$ and $H$. The first write clones the corresponding block.
-- **Linear Type Invariant:** Freeing or duplicating a Heap resource without explicit consumption generates a static type verification error at compile time.
+> **Overflow Demostrable:** Si la memoria de $N \in \mathbb{Z}$ excede la cuota estricta (256 bytes por escalar), la máquina virtual dispara la transición de fallo `CRITICAL_HALT`.
 
 ---
 
-## 3. Operational Semantics (Small-Step Semantics)
+## 3. Semántica Operacional (Small-Step Semantics)
 
-The state of an individual coroutine is defined as the 3-tuple:
+Un frame de corrutina es $q = \langle \text{id}, \text{PC}, \rho \rangle$.
+Las transiciones ($\Gamma \vdash op \to \Gamma'$) son atómicas y estrictamente deterministas.
 
-$$\Gamma = (\text{PC}, R, S)$$
-
-### 3.1 Opcode Set and Transition Rules
-
-| Opcode | Semantic Description | Small-Step Transition Rule |
-| :--- | :--- | :--- |
-| `FORK Label` | Forks the current coroutine cloning environment without affecting causality. | $\frac{\Gamma \vdash \text{FORK Label}}{Q' = Q \cup \{ (\text{Label}, R_{\text{cow}}, \text{Ready}) \}, \; \Gamma' = (\text{PC} + 1, R, \text{Running})}$ |
-| `AWAIT Symbol Label` | Emits event to the Ledger and suspends awaiting causal ACK. | $\frac{\Gamma \vdash \text{AWAIT Symbol Label}}{L' = L \cup \{ (C.\text{now}(), \text{Emitted}(\text{Symbol})) \}, \; \Gamma' = (\text{Label}, R, \text{Waiting}(\text{Symbol\_ACK}))}$ |
-| `AFTER R_ticks Label` | Explicitly suspends in discrete time. | $\frac{\Gamma \vdash \text{AFTER } R_{\text{ticks}} \text{ Label}}{Q' = Q \cup \{ (\text{Label}, R, \text{Waiting\_Timer}(C.\text{now}() + R_{\text{ticks}})) \}, \; \Gamma' = (-, R, \text{Suspended})}$ |
-| `HALT` | Immediately halts the coroutine and exports its trace. | $\frac{\Gamma \vdash \text{HALT}}{T' = T \cup \{ \text{Snapshot}(\Gamma) \}, \; \Gamma' = (-, R, \text{Halted})}$ |
+| Opcode | Transición Small-Step |
+| :--- | :--- |
+| `FORK target` | $\frac{\text{target} \in \text{Labels}}{\Gamma, q \vdash \text{FORK}(\text{target}) \to \Gamma[Q_{\text{ready}} \leftarrow Q_{\text{ready}} \cup \{q_{\text{new}}\}], \mathcal{L} \leftarrow \mathcal{L} \cup \{E_{\text{fork}}\}}$ |
+| `AWAIT E` | Si $E \in \mathcal{L}$: $\Gamma, q \vdash \text{AWAIT}(E) \to q[\text{PC} \leftarrow \text{PC}+1]$<br>Si $E \notin \mathcal{L}$: $\Gamma, q \vdash \text{AWAIT}(E) \to \Gamma[Q_{\text{susp}} \leftarrow Q_{\text{susp}} \cup \{q[\text{state} \leftarrow \text{Waiting}(E)]\}]$ |
+| `AFTER ticks` | $\frac{\text{target\_time} = C_{\text{log}} + \text{ticks}}{\Gamma, q \vdash \text{AFTER}(\text{ticks}) \to \Gamma[Q_{\text{susp}} \leftarrow Q_{\text{susp}} \cup \{q[\text{state} \leftarrow \text{WaitingTimer}(\text{target\_time})]\}]$ |
+| `EXECUTE act` | $\frac{E_{\text{exec}} = \text{Event}(\text{act}, \text{parents}=\text{latest}(\mathcal{L}), C_{\text{log}})}{\Gamma, q \vdash \text{EXECUTE}(\text{act}) \to \Gamma[\mathcal{L} \leftarrow \mathcal{L} \cup \{E_{\text{exec}}\}], q[\text{PC} \leftarrow \text{PC}+1]}$ |
+| `HALT` | Inmediatamente detiene la corrutina y exporta su traza a $\mathcal{T}$. |
 
 ---
 
-## 4. System Invariants (Proof Constraints)
+## 4. Invariantes del Sistema y Teorema de BABYLON
 
-These invariants are formally checked by the kernel and any violation triggers an immediate abort:
+Estos invariantes son verificados formalmente por el kernel. Cualquier violación dispara un `CRITICAL_HALT`.
 
-- **I1 (Operational Uniqueness):** No coroutine executes more than one instruction per scalar `UNIT.TICK`, preventing concurrency races.
-- **I2 (Unique Causality):** Each event $e \in L$ possesses a unique cryptographic signature belonging to the registered producer.
-- **I3 (Past Immutability):** The Ledger $L$ is strictly *append-only*. There is no erasure or historical modification opcode.
-- **I4 (Temporal Monotonicity):** The global clock $C$ satisfies strict monotonicity: $C.\text{now}() \le C.\text{next}()$.
-- **I5 (Absence of Anergy):** There is no *Hidden Mutable State*. Every mutation is transparently reflected in $R$, $H$, or $L$.
-- **INV_BFT_04:** Transactions in persistence with `payload_hash` conflict trigger instantaneous `ValueError`.
-- **INV_C5_28:** Every graph comparison executes 1-WL filter before VF2.
+- **I1 (Unicidad Operacional):** Ninguna corrutina ejecuta más de una instrucción por escalar `UNIT.TICK`.
+- **I2 (Causalidad Única):** Cada evento $e \in \mathcal{L}$ posee una firma criptográfica única.
+- **I3 (Inmutabilidad del Pasado):** $\mathcal{L}$ es estrictamente *append-only*.
+- **I4 (Monotonicidad Temporal):** $C.\text{now}() \le C.\text{next}()$.
+- **I5 (Ausencia de Anergía):** Toda mutación se refleja transparentemente en $\mathcal{R}$, $\mathcal{H}$ o $\mathcal{L}$.
+- **`INV_BFT_04`:** Colisiones de `payload_hash` disparan `ValueError` instantáneo.
+- **`INV_C5_28`:** Toda comparación de grafos ejecuta el filtro 1-WL antes de VF2.
+
+### 4.1 Teorema de BABYLON (Isomorfismo Semántico-Operacional)
+
+> **Teorema:** $\forall P \in \mathbb{AST}, \text{Canonical}(\mathcal{L}_{\text{Runtime}(P)}) \equiv \text{ProofIR}(P).\mathcal{L}$
+
+Lemas Auxiliares:
+1. **Determinismo:** $\Gamma \vdash op \to \Gamma'$ y $\Gamma \vdash op \to \Gamma'' \implies \Gamma' = \Gamma''$.
+2. **Independencia Física:** $\forall C_{\text{phys}}, C'_{\text{phys}}, \text{Runtime}(P, C_{\text{phys}}) \equiv \text{Runtime}(P, C'_{\text{phys}})$.
 
 ---
 
-## 5. Formal Failure Model and Lean 4 Export
+## 5. Modelo Formal de Fallos
 
-When an instability condition, causal failure, or invariant violation is detected, the virtual machine follows the rigid sequence:
+Ante cualquier fallo causal o violación de invariante:
 
 ```
 [ CRITICAL HALT ] ──► [ CAUSAL SNAPSHOT ] ──► [ ARTIFACT EXPORT ] ──► [ ABORT PROCESS ]
 ```
-
-1. **CRITICAL HALT:** The violating coroutine's dispatcher is suspended immediately.
-2. **CAUSAL SNAPSHOT:** An immutable SHA-256 digest is extracted from the complete machine state $\mathcal{M} = \langle R, H, L, C, Q, T \rangle$.
-3. **ARTIFACT EXPORT:** The snapshot is serialized into the formal schema `export_schema.json` for subsequent import into the Lean 4 proof assistant (`BabylonTrace.lean`).
-4. **ABORT PROCESS:** Deterministic process termination with non-zero exit code (`EXIT_FAILURE`).

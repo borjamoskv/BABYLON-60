@@ -1,4 +1,10 @@
-# 01 — Robinson's Arithmetic (Q)
+---
+title: 01 — Aritmética de Robinson (Q)
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# 01 — Aritmética de Robinson (Q)
 
 > **Modulo Teórico 01 | Proyecto BABYLON-60 | Licencia Soberana (`INV_C5_17`)**
 > Estudio formal de la Aritmética de Robinson ($Q$), la minimalidad de los 7 axiomas y la génesis de la indecidibilidad esencial.

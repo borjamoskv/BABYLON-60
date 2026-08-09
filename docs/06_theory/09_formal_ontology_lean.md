@@ -1,4 +1,12 @@
-> **Modulo Teórico 09 | Proyecto BABYLON-60 | Licencia Soberana (`INV_C5_17`)**
+---
+title: 09 — Ontología Formal en Lean 4
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# 09 — Ontología Formal en Lean 4
+
+> **Módulo Teórico 09 | Proyecto BABYLON-60 | Licencia Soberana (`INV_C5_17`)**
 > Ontología Formal en Lean 4: El puente constructivo entre la incompletitud metamatemática y la ejecución determinista de la máquina de estados.
 
 ---

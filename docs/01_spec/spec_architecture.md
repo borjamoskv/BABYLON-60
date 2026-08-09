@@ -1,124 +1,112 @@
-# ARCHITECTURE — Ledger Asíncrono-persist (BABYLON-60 Substrate)
+# BABYLON-60: Arquitectura de Ledger Asíncrono-Persist
 
-## Core Pipeline
+> **Régimen Causal-Determinist**
+> Esta especificación define el pipeline de transacciones y los subsistemas del motor BABYLON-60.
+
+---
+
+## 1. Core Pipeline
 
 ```
-Agent Intent
+Intent del Agente
     │
     ▼
-Validation Layer (schema + idempotency key)
+Capa de Validación (schema + idempotency key)
     │
     ▼
-Single-Writer Queue (asyncio.Queue)
+Cola Single-Writer (asyncio.Queue)
     │
     ▼
 BFTLedgerActor (ledger_actor.py)
     │         │
     ▼         ▼
-SQLite WAL   BLAKE3 hash-chain
+SQLite WAL   Hash-chain BLAKE3
     │
     ▼
-Causal Taint + Lamport timestamp
+Causal Taint + Timestamp Lamport
     │
     ▼
-Git Sentinel (commit hook on mutation)
+Git Sentinel (commit hook en mutación)
 ```
 
-## Subsystems
+## 2. Subsistemas
 
-### 1. Python SDK (`babylon60/`)
+### 2.1 Python SDK (`babylon60/`)
+Capa de interfaz primaria. Maneja la validación, idempotencia y la gestión de la cola asíncrona.
+- `babylon60.api.client`: API pública `CortexClient`.
+- `babylon60.api.server`: Servidor REST+WebSocket con FastAPI/Uvicorn.
+- `babylon60.bft.ledger_actor`: Actor single-writer que serializa todas las escrituras en base de datos.
+- `babylon60.database.core`: Pool SQLite WAL asíncrono (`busy_timeout=5000ms`).
 
-Primary interface layer. Handles validation, idempotency, and async queue management.
+### 2.2 Núcleo Rust (`strike_rs/`)
+Extensión opcional de baja latencia vía PyO3/Maturin. Evita el GIL de Python para:
+- Computación de hash BLAKE3.
+- Operaciones criptográficas por lotes.
+- Cargas de trabajo paralelas ligadas a CPU.
 
-- `babylon60.api.client` — CortexClient public API
-- `babylon60.api.server` — FastAPI/Uvicorn REST+WebSocket server
-- `babylon60.bft.ledger_actor` — Single-writer actor serializing all DB writes
-- `babylon60.database.core` — Async SQLite WAL pool (`busy_timeout=5000ms`)
+> [!WARNING]
+> **Estado: Alpha.** No utilizar en producción sin pruebas rigurosas de benchmarking.
 
-### 2. Rust Core (`strike_rs/`)
+### 2.3 IDE Agéntico Soberano (`babylon60-ide/`)
+Entorno local (*local-first*) diseñado para alta inspeccionabilidad y baja latencia de interacción con el Ledger.
+- **Wrapper Tauri (`src-tauri/`)**: Gestiona la integración con el SO, ventanas nativas y puentea el estado de la base de datos local al hilo de renderizado vía IPC.
+- **Backend FastAPI (`backend/`)**: Expone endpoints REST y WebSocket para consultas al Ledger, búsqueda BM25, telemetría y generación de modelos locales.
+- **Frontend Vite (`frontend/`)**: Construido con Vanilla JS, estilizado con paleta neuro-inclusiva de alto contraste, navegación orientada al teclado (`Cmd+K`, `Cmd+Shift+Space`).
+- **Módulo de Inferencia Local (`inference/`)**: Confinado a endpoints de loopback (`127.0.0.1:11434` / `localhost`). Puentea el servidor FastAPI a motores locales (Ollama, MLX, Mamba SSM), garantizando *cero fugas de datos* a hyperscalers públicos.
 
-Optional low-latency extension via PyO3/Maturin. Bypasses Python GIL for:
-- BLAKE3 hash computation
-- Batch cryptographic operations
-- Parallel CPU-bound workloads
+## 3. Contrato del Ledger
 
-**Status: Alpha.** Do not use in production without benchmarking.
-
-### 3. Sovereign Agentic IDE (`babylon60-ide/`)
-
-A local-first environment designed for inspectability and low-latency interaction with the ledger.
-
-*   **Tauri App Wrapper (`src-tauri/`):** Manages OS integration, native windows, and bridges local database state to the renderer thread via IPC command handlers.
-*   **FastAPI Backend (`backend/`):** Exposes REST and WebSocket endpoints for ledger querying, BM25 searching, telemetry tracking, and local model generation.
-*   **Vite Frontend (`frontend/`):** Built with Vanilla JS, styled with a high-contrast neuro-inclusive palette, and configured with keyboard-first navigation (Command Palette `Cmd+K`, Scratchpad `Cmd+Shift+Space`).
-*   **Local Inference Module (`inference/`):** Confined to loopback endpoints (`127.0.0.1:11434` / `localhost`). Bridges the FastAPI server to local inference engines (Ollama, MLX, or the native Mamba SSM engine), ensuring zero data leak to public hyperscalers.
-
-### 4. Ledger Contract
-
-Every entry written to the ledger must satisfy:
+Toda entrada escrita en el Ledger DEBE satisfacer el siguiente esquema:
 
 ```python
 {
-    "id": "uuid-v5",            # Idempotency key
-    "prev_hash": "blake3-hex",  # Chain link to previous entry
-    "payload": {...},           # Structured content
-    "causal_taint": "...",      # Creation trace: who/when/why
-    "lamport_t": int,           # Logical clock
-    "agent_id": "str",          # Writer identity
+    "id": "uuid-v5",            # Clave de idempotencia
+    "prev_hash": "blake3-hex",  # Enlace criptográfico a la entrada previa
+    "payload": {...},           # Contenido estructurado
+    "causal_taint": "...",      # Traza de creación: quién/cuándo/por qué
+    "lamport_t": int,           # Reloj lógico (Lamport)
+    "agent_id": "str",          # Identidad del escritor
 }
 ```
+- Duplicado de `id` $\rightarrow$ mutación es abortada y rechazada (idempotente).
+- Falla en `prev_hash` $\rightarrow$ mutación abortada, integridad de cadena comprometida.
 
-Duplicate `id` → write is rejected (idempotent).
-`prev_hash` mismatch → write aborted, chain integrity violated.
+## 4. Topología de Consenso (Niveles M12)
 
-### 5. Consensus Topology (M12 Levels)
-
-| Level | Mechanism | Scope |
+| Nivel | Mecanismo | Alcance |
 |:---|:---|:---|
-| L1 — AP/CRDT | Local caches, telemetry | Single node |
-| L2 — CP single-writer | `master_ledger.db` WAL | Single process |
-| L3 — External witness | Git Sentinel | Local repo |
-| L4 — BFT quorum | N≥3f+1 swarm | **Prototype — distributed only** |
-| L5 — Blockchain anchor | OTS / BTC OP_RETURN | **Research — not implemented** |
+| L1 — AP/CRDT | Cachés locales, telemetría | Nodo único |
+| L2 — CP single-writer | `master_ledger.db` WAL | Proceso único |
+| L3 — Testigo Externo | Git Sentinel | Repositorio local |
+| L4 — Quórum BFT | Enjambre N≥3f+1 | **Prototipo — distribuido únicamente** |
+| L5 — Anclaje Blockchain | OTS / BTC OP_RETURN | **Investigación — no implementado** |
 
 > [!NOTE]
-> L4 and L5 are **not required** for local agent memory use cases. They are research extensions. The stable core uses L1–L3 only.
+> L4 y L5 **no son obligatorios** para casos de uso de memoria de agente local. Son extensiones de investigación. El núcleo estable utiliza exclusivamente L1–L3.
 
-### 6. Git Sentinel
+## 5. Git Sentinel y Flujo de Recuperación
 
-Each disk mutation triggers an automatic commit with Conventional Commit prefix and `CORTEX_TAINT` metadata injected into the commit message. This creates an auditable, human-readable history of all agent state changes.
+**Git Sentinel:** Toda mutación en disco dispara un commit automático con prefijo *Conventional Commit* y metadatos `CORTEX_TAINT` inyectados en el mensaje del commit, creando un historial auditable por humanos de los cambios de estado del agente.
 
-### 7. Formal Proofs (`proof/lean/`)
+**Recuperación tras Colapso (Crash Recovery):**
+1. Proceso aniquilado a mitad de transacción $\rightarrow$ SQLite WAL ejecuta un rollback automático.
+2. Agente reinicia $\rightarrow$ Re-ejecuta entradas no confirmadas desde el journal WAL.
+3. La continuidad de la cadena de hash es comprobada matemáticamente antes de aceptar el replay.
+4. Si la cadena está rota $\rightarrow$ La entrada es puesta en cuarentena, no eliminada silenciosamente.
 
-**Status: Prototype.** Lean 4 theorem formalization of:
-- Partial ordering invariant
-- Non-equivocation in single-writer consensus
-- BFT safety bounds (N≥3f+1)
+## 6. Aislamiento Multi-Tenant
 
-Not integrated into CI. Research artifact only.
+Cada *tenant* (inquilino) opera sobre un archivo de base de datos SQLite completamente aislado. No existen tablas compartidas. Las consultas multi-tenant exigen federación explícita.
 
-## Data Flow: Crash Recovery
-
-1. Process killed mid-transaction → SQLite WAL rolls back automatically
-2. Agent restarts → replays unconfirmed entries from WAL journal
-3. Hash-chain continuity verified before replay is accepted
-4. If chain is broken → entry is quarantined, not silently dropped
-
-## Multi-Tenant Isolation
-
-Each tenant receives an isolated SQLite database file. There is no shared table between tenants. Queries across tenants require explicit federation — not available in current stable API.
-
-## Dependency Graph (Core Only)
+## 7. Grafo de Dependencias (Core)
 
 ```
 aiosqlite  ──►  babylon60.database.core
 pyyaml     ──►  babylon60.config
-numpy      ──►  babylon60.memory (vector ops)
-networkx   ──►  babylon60.graph (ontology)
-cbor2      ──►  babylon60.ledger (binary encoding)
+numpy      ──►  babylon60.memory (operaciones vectoriales)
+networkx   ──►  babylon60.graph (ontología)
+cbor2      ──►  babylon60.ledger (codificación binaria)
 ```
-
-Optional extensions wire in: `cryptography`, `pynacl`, `sqlite-vec`, `faster-whisper`, `mlx-lm`.
 
 ## 8. Axioma del Dominio Temporal F60 (Teorema Robinson-Moskv)
 
@@ -130,5 +118,6 @@ La relación de causalidad $\prec$ se define estrictamente sobre el grafo acícl
 $$ e_n \prec e_{n+1} \iff Hash(e_n) \in Payload(e_{n+1}) \land Lamport(e_n) < Lamport(e_{n+1}) $$
 Cualquier evento $e_x$ cuyo $Lamport(e_x)$ o $Hash$ rompa esta topología estricta es considerado fuera del Cono de Luz Causal.
 
-**Falsabilidad Estructural (`INV_BFT_04` / Válvula de Exergía):**
-Si un evento no satisface la precondición causal, el sistema **DEBE** hacer `panic!` o dropear la mutación en $O(1)$. No se permiten esperas (`await sleep`), heurísticas de red, ni uniones de estado silentes. El tiempo es una prueba criptográfica (Witness), no una métrica de red.
+> [!CAUTION]
+> **Falsabilidad Estructural (`INV_BFT_04` / Válvula de Exergía):**
+> Si un evento no satisface la precondición causal, el sistema **DEBE** hacer `panic!` o descartar la mutación en $O(1)$. No se permiten esperas (`await sleep`), heurísticas de red, ni uniones de estado silentes. El tiempo es una prueba criptográfica (Witness), no una métrica de red.

@@ -1,39 +1,52 @@
-# Ledger Asíncrono ONTOLOGY: ABSOLUTE SEMANTIC ISOMORPHISM
+---
+title: Ley de Isomorfismo Semántico Absoluto y Matriz de Primitivas DDD
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# Ontología BABYLON-60: Isomorfismo Semántico Absoluto
 
 > *"Naming things is resolving ambiguities before the code exists. The art is not the name itself; it is the ability to distill complex reality into a single label that requires no explanation."* — **Borja Motor Causal**
 
-This document defines the immutable law of Systemic Semantics for the BABYLON-60 project and the Causal-Determinist paradigm. No sub-agent, node, or transducer may violate these premises.
+Este documento define la ley inmutable de la Semántica de Sistemas para el proyecto BABYLON-60 y el paradigma Causal-Determinist. Ningún subagente, nodo o transductor puede violar estas premisas.
 
 ---
 
-## 1. THE NOMINAL DENSITY LAW ($E_x$)
-The name of a component ($N$) must contain the maximum information entropy ($I$) in the minimum number of tokens ($T$). 
-A maximum-exergy nomenclature achieves the **Absolute Isomorphism**: $N \equiv Behavior$.
+## 1. La Ley de Densidad Nominal ($E_x$)
 
-* If a module signs cryptographic attestations on disk, it is called `Ledger Asíncrono-attest`, not `security_utils`.
-* If a node distills BPE entropy by isolating threads, it is called `Flash_Node`, not `helper_bot`.
+El nombre de un componente ($N$) debe contener la máxima entropía de información ($I$) en el mínimo número de tokens ($T$). Una nomenclatura de máxima exergía alcanza el **Isomorfismo Absoluto**: $N \equiv \text{Comportamiento}$.
 
-## 2. UBIQUITOUS LANGUAGE (DDD IN Causal-Determinist)
-Thermodynamic friction ($F_{mtc}$) between the Operator's mind and the CPU must be zero. 
-- **Continuity Invariant:** The name declared in the Ontology, the identifier in the SQLite WAL database, the Rust struct (`struct CortexLedger`), and the CLI command (`Ledger Asíncrono-bridge`) **MUST** share the same exact semantic root. 
-- **Synonymy Penalty:** The use of synonyms to refer to the same architectural entity is considered an injection of "Stochastic Anergy" and must be immediately purged by `Anergy_Token_Purge`.
-
-## 3. AMBIGUITY DIAGNOSIS (FAIL-FAST)
-If during the orchestration phase (`UltraThink`), the Swarm or the Operator hesitate about how to name a class, a table, or a sub-agent:
-1. **Structural Pause:** Physical code execution (C5) is blocked.
-2. **Epistemic Re-evaluation:** The `Socratic_AST_Validator` (`/grill-me`) is invoked to subject the concept to interrogation.
-3. **Collapse:** If it cannot be named in a way that requires no explanation, it means the underlying architectural design is ambiguous or carries cross-cutting responsibilities (SRP Violation). The problem is decomposed until the pure label is isolated.
+* Si un módulo firma atestaciones criptográficas en disco, se denomina `Ledger Asíncrono-attest`, no `security_utils`.
+* Si un nodo destila entropía BPE aislando hilos, se denomina `Flash_Node`, no `helper_bot`.
 
 ---
 
-## 4. THE 896 DDD PRIMITIVES MATRIX (Centuria Meta-Transducer)
-The Motor Causal Principal system hosts a semantic repository of **896 Domain-Driven Design Primitives**. Unlike classic DDD (where components are mere objects in memory), in Causal-Determinist each primitive is a thermodynamic block with an ATP cost, an address in the Causal Graph, and a representation in the BFT Ledger.
+## 2. Lenguaje Ubicuo (DDD en Causal-Determinist)
 
-### Ontological Classification of the Matrix (000 - 895)
-- **[000 - 179] BFT Entities (Entities):** Mutable objects with persistent Cryptographic Identity (e.g. `BFTLedgerActor`). Must have a `lamport_t` field and sign their mutations with `CORTEX_BFT_KEY`.
-- **[180 - 359] Value Objects (Value Objects):** Strictly immutable algebraic data structures (ADT) (e.g. `ProofOfRouteReceipt`). They have no identity; if two Receipts have the same Hash, they are the same object in RAM and on Disk (Causal Isomorphism).
-- **[360 - 539] Aggregates (Aggregates):** Topological L0 clusters. Atomic mutations occur here. An aggregate does not communicate with another aggregate without going through the Event Bus. Only blocked via `tload`/`tstore` on EVM or `.venv` in Python isolating the network.
-- **[540 - 719] Domain Events (Domain Events):** Immutable facts that have already occurred (e.g. `LedgerCrystallized`, `EntropyPurged`). An event is never rejected; its occurrence is a Physical Law on disk.
-- **[720 - 895] Domain Transducers (Domain Services):** Binaries like `Ledger Asíncrono-onco` or `Ledger Asíncrono-bridge`. They orchestrate complex logic without owning any state. If they shut down or die from socket saturation (Limit Σ15), the system restarts from the last `Domain Event` in the Ledger.
+La fricción termodinámica ($F_{mtc}$) entre la mente del Operador y la CPU debe ser cero.
+- **Invariante de Continuidad:** El nombre declaredo en la Ontología, el identificador en la base de datos SQLite WAL, la estructura Rust (`struct CortexLedger`), y el comando CLI (`Ledger Asíncrono-bridge`) **DEBEN** compartir exactamente la misma raíz semántica.
+- **Penalización por Sinonimia:** El uso de sinónimos para referirse a la misma entidad arquitectónica se considera una inyección de "Anergía Estocástica" y debe ser purgado de inmediato mediante `Anergy_Token_Purge`.
 
-Mapping to this 896-primitive topology nullifies 99% of design decisions. If a problem requires a solution, the corresponding DDD Primitive is found, assembled in the AST, and executed. **Zero Anergy.**
+---
+
+## 3. Diagnóstico de Ambigüedad (Fail-Fast)
+
+Si durante la fase de orquestación (`UltraThink`), el Enjambre o el Operador dudan sobre cómo nombrar una clase, una tabla o un subagente:
+1. **Pausa Estructural:** La ejecución física de código (C5) se bloquea inmediatamente.
+2. **Reevaluación Epistémica:** Se invoca el validador Socrático de AST (`/grill-me`) para someter el concepto a interrogatorio.
+3. **Colapso:** Si no puede nombrarse de forma que no requiera explicación, significa que el diseño arquitectónico subyacente es ambiguo o porta responsabilidades cruzadas (Violación del SRP). El problema se descompone hasta aislar la etiqueta pura.
+
+---
+
+## 4. La Matriz de 896 Primitivas DDD (Centuria Meta-Transductora)
+
+El sistema Motor Causal Principal aloja un repositorio semántico de **896 Primitivas de Diseño Guiado por el Dominio (DDD)**. A diferencia del DDD clásico (donde los componentes son meros objetos en memoria), en Causal-Determinist cada primitiva es un bloque termodinámico con un coste ATP, una dirección en el Grafo Causal y una representación en el Ledger BFT.
+
+### Clasificación Ontológica de la Matriz (000 - 895)
+- **[000 - 179] Entidades BFT (Entities):** Objetos mutables con Identidad Criptográfica persistente (ej. `BFTLedgerActor`). Deben poseer un campo `lamport_t` y firmar sus mutaciones con `CORTEX_BFT_KEY`.
+- **[180 - 359] Objetos de Valor (Value Objects):** Estructuras de datos algebraicas (ADT) estrictamente inmutables (ej. `ProofOfRouteReceipt`). No poseen identidad; si dos Receipts tienen el mismo Hash, son el mismo objeto en RAM y en Disco (Isomorfismo Causal).
+- **[360 - 539] Agregados (Aggregates):** Clusters topológicos L0 donde ocurren mutaciones atómicas. Un agregado no se comunica con otro agregado sin pasar por el Event Bus.
+- **[540 - 719] Eventos de Dominio (Domain Events):** Hechos inmutables que ya han ocurrido (ej. `LedgerCrystallized`, `EntropyPurged`). Un evento nunca es rechazado; su ocurrencia es una Ley Física en disco.
+- **[720 - 895] Transductores de Dominio (Domain Services):** Binarios como `Ledger Asíncrono-onco` o `Ledger Asíncrono-bridge`. Orquestan lógica compleja sin poseer estado. Si se apagan o mueren por saturación de sockets, el sistema se reinicia desde el último `Domain Event` en el Ledger.
+
+El mapeo a esta topología de 896 primitivas anula el 99% de las decisiones de diseño. Si un problema requiere solución, se localiza la primitiva DDD correspondiente, se ensambla en el AST y se ejecuta. **Cero Anergía.**

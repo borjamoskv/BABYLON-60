@@ -1,5 +1,10 @@
-# Motor Causal Principal: NETWORK TOPOLOGY AND ALIGNMENT IN ONCOLOGY
-# PATH: docs/isomorfismos_cancer.md
+---
+title: Topología de Red y Alineamiento en Oncología
+status: Causal-Determinist
+version: 1.0.0
+---
+
+# Motor Causal Principal: Topología de Red y Alineamiento en Oncología
 
 > **"Exact isomorphism (VF2) is mathematically pristine but biologically fragile. Intratumoral heterogeneity demands Probabilistic Isomorphisms and Soft Graph Matching via Latent Embeddings."**
 
