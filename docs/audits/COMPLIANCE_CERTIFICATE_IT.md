@@ -85,7 +85,7 @@ graph TD
 | **Art. 12 (Conservazione dei Registri)** | Registrazione WORM inalterabile degli eventi durante tutto il ciclo di vita. | Registro WORM DAG con timestamping Lamport monotonico e firma tramite enclave. | ✅ CONFORME | `c65c9ce3bb20634519283...` |
 | **Art. 13 (Trasparenza)** | Piena spiegabilità dei processi decisionali agenziali. | Grafo delle dipendenze causali esportabile in JSON-LD (Nessuna scatola nera). | ✅ CONFORME | `7a88b1928c89102938475...` |
 | **Art. 14 (Sorveglianza Umana)** | Interfaccia per l'intervento di operatori umani. | Interfaccia Armonica Neo-Riemanniana Tonnetz + congelamento diretto tramite `QUARANTINE`. | ✅ CONFORME | `2b1021f201dafbef84719...` |
-| **Art. 14(4) (Arresto di Emergenza)** | Pulsante di arresto umano istantaneo e sicuro. | Función `babylon60_epistemic_halt` (Fail-stop determinista $O(1)$). | ✅ CONFORME | `8f10b23491ca029837419...` |
+| **Art. 14(4) (Arresto di Emergenza)** | Pulsante di arresto umano istantaneo e sicuro. | Funzione `babylon60_epistemic_halt` (Fail-stop determinista $O(1)$). | ✅ CONFORME | `8f10b23491ca029837419...` |
 | **Art. 15 (Accuratezza e Cybersicurezza)** | Resistenza a manomissioni e attacchi avversari. | Seqlock SPMC puro di carica per AArch64 + isolamento di memoria senza rimescolamento. | ✅ CONFORME | `e4392019b827401928374...` |
 | **Art. 50 (Marcatura e Trasparenza AI)** | Marcatura crittografica e filigrana dei contenuti agenziali. | Iniezione di claim CWT SCITT e anclaggio L1 Bitcoin `OP_RETURN` (`INV_C5_15`). | ✅ CONFORME | `4c810293847581928374a...` |
 
@@ -97,7 +97,7 @@ graph TD
 > **Invariante `INV_BFT_04` (Tolleranza ai Guasti Bizantini):** In caso di collisione di ID di eventi o deviazione nell'esecuzione, il Kernel attiva un arresto critico (`CRITICAL HALT`) e sigilla la memoria in quarantena entro $<24$ ore, impedendo la produzione di prove false.
 
 1. **Aritmetica Sessagesimale Esatta ($F60$):** Eliminazione totale della deriva temporale IEEE-754 ($f64$), garantendo che $1/3 \text{ di ora} = \text{F60}(20, 1) = 20\text{ minuti esatti}$.
-2. **Cota di Landauer Extendida (`AX-LANDAUER-01`):** Invariante termodinamico di disipazione minima $\Delta Q \ge \Xi \cdot k_B T \ln 2$, dove la costante di saturazione exergética è calibrata a $\Xi = 23.000$.
+2. **Limite di Landauer Esteso (`AX-LANDAUER-01`):** Invariante termodinamico di disipazione minima $\Delta Q \ge \Xi \cdot k_B T \ln 2$, dove la costante di saturazione exergética è calibrata a $\Xi = 23.000$.
 3. **Zero-Anergia e Limite Anti-Limerenza:** Profondità di ragionamento limitata ($\le 4$) con potatura automatica dei rami stocastici improduttivi prima del commit di stato.
 4. **Sovranità Local-First:** Zero dipendenza da API esterne o cloud di terze parti durante l'esecuzione dell'audit di governance.
 
