@@ -105,7 +105,7 @@ def test_in_flight_mutability(bridge: AdversarialFFIBridge) -> bool:
 
     result = bridge.lib.commit_epoch_transition(bridge.state_ptr, ctypes.byref(manifest), ctypes.byref(digest_c), raw_text_c, text_len)
 
-    if result < 0 and -result == HaltReason.DIGEST_MISMATCH:
+    if result < 0 and (-1 - result) == HaltReason.DIGEST_MISMATCH:
         print("[+] Éxito: Kernel Entelecheia detectó discrepancia de digest y abortó (CAS Rollback).")
         return True
 
@@ -126,7 +126,7 @@ def test_contention_stress(bridge: AdversarialFFIBridge) -> bool:
         res = bridge.lib.commit_epoch_transition(bridge.state_ptr, ctypes.byref(manifest), ctypes.byref(digest_c), raw_text_c, text_len)
         if res > 0:
             success_count += 1
-        elif res < 0 and -res == HaltReason.CAS_CONTENTION:
+        elif res < 0 and (-1 - res) == HaltReason.CAS_CONTENTION:
             contention_halts += 1
 
     threads = [threading.Thread(target=producer) for _ in range(50)]
@@ -140,10 +140,10 @@ def test_contention_stress(bridge: AdversarialFFIBridge) -> bool:
 
     if t_eff_ms < 5.0 and (success_count + contention_halts) == 50:
         print("[+] Éxito: Contención gestionada bajo < 5ms sin pérdida de datos.")
-        return True
+        return True, t_eff_ms
 
     print("[-] Fallo en prueba de contención.")
-    return False
+    return False, t_eff_ms
 
 
 def test_varentropy_cusum_anomaly(bridge: AdversarialFFIBridge) -> bool:
@@ -153,7 +153,7 @@ def test_varentropy_cusum_anomaly(bridge: AdversarialFFIBridge) -> bool:
 
     result = bridge.lib.commit_epoch_transition(bridge.state_ptr, ctypes.byref(manifest), ctypes.byref(digest_c), raw_text_c, text_len)
 
-    if result < 0 and -result == HaltReason.VARENTROPY_LIMIT_EXCEEDED:
+    if result < 0 and (-1 - result) == HaltReason.VARENTROPY_LIMIT_EXCEEDED:
         print("[+] Éxito: Cuarentena epistémica activada por anomalía de Varentropía (CUSUM).")
         return True
 
@@ -169,7 +169,7 @@ def test_standard_part_map_violation(bridge: AdversarialFFIBridge) -> bool:
 
     result = bridge.lib.commit_epoch_transition(bridge.state_ptr, ctypes.byref(manifest), ctypes.byref(digest_c), raw_text_c, text_len)
 
-    if result < 0 and -result == HaltReason.RLHF_BREAKTHROUGH:
+    if result < 0 and (-1 - result) == HaltReason.RLHF_BREAKTHROUGH:
         print("[+] Éxito: Centinela de Entropía detectó Anergía (RLHF Breakthrough).")
         return True
 
@@ -201,11 +201,10 @@ def main():
 
     results = {}
 
-    t0 = time.time()
     results["Test 1.1"] = test_ebr_retention_stress(bridge)
     results["Test 1.2"] = test_in_flight_mutability(bridge)
-    results["Test 1.3"] = test_contention_stress(bridge)
-    t_eff_ms = (time.time() - t0) * 1000 / 3  # Fake average for the panel
+    t1_3_passed, t_eff_ms = test_contention_stress(bridge)
+    results["Test 1.3"] = t1_3_passed
 
     results["Test 2.1"] = test_varentropy_cusum_anomaly(bridge)
     results["Test 2.2"] = test_standard_part_map_violation(bridge)

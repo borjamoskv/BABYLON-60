@@ -13,7 +13,8 @@ impl<const N: usize> Vector<N> {
         let mut acc = 0u64;
         let mut i = 0;
         while i < N {
-            acc += self.0[i] * self.0[i];
+            let term = self.0[i].saturating_mul(self.0[i]);
+            acc = acc.saturating_add(term);
             i += 1;
         }
         acc
@@ -44,7 +45,8 @@ impl<const N: usize, const LIMIT: u64> BoundedVector<N, LIMIT> {
 pub const fn verify_cap<const N: usize, const LIMIT: u64>(
     vec: Vector<N>
 ) -> Option<BoundedVector<N, LIMIT>> {
-    if vec.norm_sq() <= LIMIT * LIMIT {
+    let limit_sq = LIMIT.saturating_mul(LIMIT);
+    if vec.norm_sq() <= limit_sq {
         Some(BoundedVector { vec, _proof: PhantomData })
     } else {
         None

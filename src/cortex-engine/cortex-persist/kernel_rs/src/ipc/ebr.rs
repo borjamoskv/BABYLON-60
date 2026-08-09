@@ -280,7 +280,7 @@ impl EpochState {
             let start = i * 8;
             let mut b = [0u8; 8];
             b.copy_from_slice(&payload_bytes[start..start + 8]);
-            coords[i] = u64::from_le_bytes(b);
+            coords[i] = u64::from_le_bytes(b) % 1_000;
         }
         let vector = crate::ipc::compliance::Vector::<4>(coords);
 

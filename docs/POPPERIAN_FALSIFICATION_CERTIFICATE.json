@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-08T23:21:55Z",
+  "timestamp": "2026-08-09T04:19:23Z",
   "bootstrap_iterations": 100,
   "total_samples": 10000,
   "rho_coefficient": 1.0,
-  "mean_latency_ms": 1.044,
+  "mean_latency_ms": 1.031,
   "zero_residual_anergy": true,
   "certified": true
 }
