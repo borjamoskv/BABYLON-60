@@ -109,9 +109,9 @@ use crate::thermodynamics::TopologicalCompressorFixed;
 pub struct SheafFusionOperator;
 
 impl TopologicalCompressorFixed for SheafFusionOperator {{
-    const EFFECTIVE_BITS_ERASED: f64 = {calib_data['effective_bits_erased']:.6f};
-    const KL_DIVERGENCE: f64 = {calib_data['kl_divergence']:.6f};
-    const DESIGN_TEMP_K: f64 = {calib_data['design_temp_k']:.1f};
+    const EFFECTIVE_BITS_ERASED_X1000: u32 = {int(calib_data['effective_bits_erased'] * 1000)};
+    const KL_DIVERGENCE_X1000: u32 = {int(calib_data['kl_divergence'] * 1000)};
+    const DESIGN_TEMP_K: u32 = {int(calib_data['design_temp_k'])};
 }}
 
 """
