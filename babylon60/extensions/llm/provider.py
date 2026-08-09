@@ -300,7 +300,7 @@ class LLMProvider(BaseProvider):
             # codeql[py/clear-text-logging-sensitive-data] - Data is safe and does not expose secrets
             try:
                 err_text = e.response.content.decode("utf-8", errors="replace")[:500]
-            except Exception:  # noqa: BLE001
+            except (UnicodeDecodeError, AttributeError):
                 err_text = "<unreadable_response>"
 
             _mask(self._provider)
