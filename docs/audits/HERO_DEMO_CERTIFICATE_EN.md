@@ -1,4 +1,10 @@
-# AI Regulatory Compliance Certificate (BABYLON-60 v4.0)
+---
+title: Hero Demo Compliance Certificate EN — BABYLON-60 v4.0
+status: Causal-Determinist
+version: 4.0.0
+---
+
+# Hero Demo Compliance Certificate (BABYLON-60 v4.0)
 **EU Artificial Intelligence Act (Regulation EU 2024/1689 / NIST AI RMF)**  
 **Autoridad de Supervisión:** `EU AI Office / NIST (USA) / UK AI Safety Institute`  
 **ID Certificado:** `EU-AIA-CERT-E226C2B24316E701`  
