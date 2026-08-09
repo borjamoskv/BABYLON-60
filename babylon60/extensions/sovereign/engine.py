@@ -362,5 +362,16 @@ def main() -> None:
     out("═" * 60 + "\n\n")
 
 
+def discover_skills() -> dict[str, Path]:
+    """Discover available skills across workspace and global configurations."""
+    skills: dict[str, Path] = {}
+    skills_dir = Path.home() / ".gemini" / "config" / "skills"
+    if skills_dir.is_dir():
+        for item in skills_dir.iterdir():
+            if item.is_dir() and (item / "SKILL.md").exists():
+                skills[item.name] = item
+    return skills
+
+
 if __name__ == "__main__":
     main()
