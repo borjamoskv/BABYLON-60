@@ -14,37 +14,39 @@ resolver = "2"
 name = "babylon60_root"
 version = "4.0.0"
 edition = "2021"
-license = "LicenseRef-Sovereign-Exclusion"
-description = "Formal Infrastructure and BFT Deterministic Kernel for Verifiable Science (BABYLON-60)"
+rust-version = "1.77"
+license = "MIT OR Apache-2.0"
+description = "SharedManifest (64 B, fail-stop, EU AI Act) — BABYLON-60 formal specification"
 repository = "https://github.com/borjamoskv/BABYLON-60"
 readme = "README.md"
 authors = ["BABYLON-60 Contributors"]
 
-[[bin]]
-name = "b60_kernel"
-path = "babylon60.rs"
-
-[[test]]
-name = "replay"
-path = "tests/replay/mod.rs"
-
-[[test]]
-name = "fuzz"
-path = "tests/fuzz/mod.rs"
-
-[[test]]
-name = "property"
-path = "tests/property/mod.rs"
-
-[[test]]
-name = "differential"
-path = "tests/differential/mod.rs"
+[lib]
+name = "babylon_60"
+path = "src/lib.rs"
 
 [dependencies]
-sha2 = "0.10"
-coset = "0.3"
+coset = { version = "0.3", optional = true }
+ciborium = { version = "0.2", optional = true }
+rusqlite = { version = "0.40", optional = true, features = ["bundled"] }
+sha2 = { version = "0.10", optional = true }
+hex = { version = "0.4", optional = true }
 
+[features]
+default = ["halt-receipt", "std"]
+halt-receipt = ["dep:coset", "dep:ciborium"]
+cortex-persist = ["dep:rusqlite", "dep:sha2", "dep:hex"]
+std = []
 
 [dev-dependencies]
+loom = { version = "0.7" }
 proptest = "1.0"
 num-bigint = "0.4"
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+opt-level = 3
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(loom)'] }

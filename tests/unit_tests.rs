@@ -178,6 +178,38 @@ fn inv3_calm_monotonic_transition() {
     assert!(!is_calm_monotonic_transition(10, 9));
 }
 
+#[test]
+fn inv3_aphairesis_bound_min_energy() {
+    use babylon_60::thermodynamics::AphairesisBound;
+    let bound = AphairesisBound {
+        effective_bits_erased: 64.0,
+        kl_divergence: 0.1,
+        temperature_k: 300.0,
+    };
+    let min_energy = bound.min_energy_joules();
+    // E_min > 0 y consistente con Landauer (~ 1.83e-19 J)
+    assert!(min_energy > 1e-20);
+    assert!(bound.is_physically_valid(1e-18));
+    assert!(!bound.is_physically_valid(1e-25));
+}
+
+#[test]
+fn inv3_topological_compressor_trait() {
+    use babylon_60::thermodynamics::{TopologicalCompressor, AphairesisBound};
+
+    struct TestSheafCompressor;
+    impl TopologicalCompressor for TestSheafCompressor {
+        const EFFECTIVE_BITS_ERASED: f64 = 128.0;
+        const KL_DIVERGENCE: f64 = 0.05;
+    }
+
+    let bound: AphairesisBound = TestSheafCompressor::aphairesis_bound(300.0);
+    assert_eq!(bound.effective_bits_erased, 128.0);
+    assert_eq!(bound.kl_divergence, 0.05);
+    assert!(bound.min_energy_joules() > 0.0);
+}
+
+
 
 // ═══════════════════════════════════════════════════════════════════════
 // INV-4: Halt — frontera topológica inmutable
