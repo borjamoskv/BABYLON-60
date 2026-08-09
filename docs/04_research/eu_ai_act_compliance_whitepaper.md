@@ -126,15 +126,6 @@ La documentación técnica exige prueba matemática, no declaraciones de intenci
 
 ---
 
-## 5. CONCLUSIÓN Y HOJA DE RUTA
-
-BABYLON-60 v4.0 transforma el cumplimiento del EU AI Act de un obstáculo regulatorio a una ventaja competitiva infranqueable. Al anclar la ejecución agéntica a principios de física, matemáticas y verificación formal, las empresas obtienen inmunidad legal demostrable ante supervisores como AESIA, BSI y CNIL.
-
----
-
-<sub>BABYLON-60 v4.0 Whitepaper Técnico · Borja Moskv · Licencia Sovereign Exclusion v1.0</sub>
-
-
 ## 4. MAPEO TÉCNICO-NORMATIVO (MATRIZ DE CUMPLIMIENTO)
 
 ```
