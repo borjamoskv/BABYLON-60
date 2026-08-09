@@ -268,7 +268,7 @@ async def run_causal_loop(stop_event: asyncio.Event, db_path: str) -> None:
     # 1. AST Sandbox Security Check with RULE_SENSOR_VERIFY_01 AnnAssign calibration
     sample_safe_code = "dangerous_var: str = 'harmless'"
     if not ASTReflectionGuardTransducer.audit_code_ast(sample_safe_code):
-        raise SecurityError("[RULE_AST_REFLECT_01] Violation in code AST inspection.")
+        raise RuntimeError("[RULE_AST_REFLECT_01] Violation in code AST inspection.")
 
     # 2. FFI Event Horizon (Motor Causal-1 Dumb Router)
     raw_payload_bytes = b"C5_MERKLE_ROOT"
