@@ -55,8 +55,8 @@ private:
 #pragma pack(push, 1)
     struct State {
         // En modo KINETIC aisla cabeza y cola. En modo DEGRADADO los comprime.
-        alignas(KineticIsolation ? hardware_destructive_interference_size : 1) std::atomic<std::size_t> head{0};
-        alignas(KineticIsolation ? hardware_destructive_interference_size : 1) std::atomic<std::size_t> tail{0};
+        alignas(KineticIsolation ? hardware_destructive_interference_size : 8) std::atomic<std::size_t> head{0};
+        alignas(KineticIsolation ? hardware_destructive_interference_size : 8) std::atomic<std::size_t> tail{0};
     } state_;
 #pragma pack(pop)
 
