@@ -44,9 +44,9 @@ class ZeroPromptingDaemon:
     async def _observe(self) -> dict[str, Any]:
         """Observes the current thermodynamic and structural state."""
         logger.debug("[ZERO-PROMPTING] [OBSERVE] Reading system state with MEJORAlo...")
-        from babylon60.extensions.mejoralo.engine import MejoraloEngine
+        from babylon60.extensions.exergy_optimizer.engine import ExergyOptimizerEngine
 
-        m_engine = MejoraloEngine(self.engine)
+        m_engine = ExergyOptimizerEngine(self.engine)
         scan_result = await asyncio.to_thread(m_engine.scan, "CORTEX_ZERO", str(self.root))
 
         return {
@@ -79,12 +79,12 @@ class ZeroPromptingDaemon:
         """Executes the Sovereign mutation."""
         logger.debug("[ZERO-PROMPTING] [ACT] Mutating infrastructure...")
         from babylon60.extensions.evolution.ouroboros_omega import OuroborosOmega
-        from babylon60.extensions.mejoralo.engine import MejoraloEngine
+        from babylon60.extensions.exergy_optimizer.engine import ExergyOptimizerEngine
 
         scan_result = state.get("scan_result")
 
         if scan_result and scan_result.score < 95:
-            m_engine = MejoraloEngine(self.engine)
+            m_engine = ExergyOptimizerEngine(self.engine)
             success = await asyncio.to_thread(
                 m_engine.relentless_heal, "CORTEX_ZERO", str(self.root), scan_result
             )

@@ -26,15 +26,15 @@ import logging
 import os
 from pathlib import Path
 
-from babylon60.extensions.mejoralo._scanner_import_graph import (
+from babylon60.extensions.exergy_optimizer._scanner_import_graph import (
     run_graph_scanners as _run_graph_scanners,
 )
-from babylon60.extensions.mejoralo._scanner_visitors import (
+from babylon60.extensions.exergy_optimizer._scanner_visitors import (
     _AsyncIntegrityVisitor,
     _BroadExceptionVisitor,
 )
-from babylon60.extensions.mejoralo.constants import MAX_FUNC_PARAMS, SKIP_DIRS, TOTAL_SCANNER_COUNT
-from babylon60.extensions.mejoralo.models import AntipatternFinding, AntipatternReport
+from babylon60.extensions.exergy_optimizer.constants import MAX_FUNC_PARAMS, SKIP_DIRS, TOTAL_SCANNER_COUNT
+from babylon60.extensions.exergy_optimizer.models import AntipatternFinding, AntipatternReport
 
 __all__ = ["scan_antipatterns"]
 
@@ -63,7 +63,7 @@ _BLOCKING_CALLS: dict[str, str] = {
 _MAGIC_WHITELIST = {0, 1, 2, -1, 100, 0.5}
 
 
-logger = logging.getLogger("babylon60_extensions.mejoralo.antipatterns")
+logger = logging.getLogger("babylon60_extensions.exergy_optimizer.antipatterns")
 
 
 # ── Scanner 3: Deterministic Literals ────────────────────────────────────────
@@ -131,7 +131,7 @@ class _MagicLiteralVisitor(ast.NodeVisitor):
         return False
 
 
-# ── Scanner 4: Import Graph → See cortex/mejoralo/_scanner_import_graph.py ──
+# ── Scanner 4: Import Graph → See cortex/exergy_optimizer/_scanner_import_graph.py ──
 
 
 # ── Scanner 5: Implicit Assumptions ──────────────────────────────────

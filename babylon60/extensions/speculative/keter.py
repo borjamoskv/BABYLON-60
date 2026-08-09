@@ -177,7 +177,7 @@ class FormalVerificationGate(SovereignPhase):
         return payload
 
 
-class MejoraloCrush(SovereignPhase):
+class ExergyOptimizerCrush(SovereignPhase):
     """
     Fase 4: EXORCISMO Y PULIDO (MEJORAlo --brutal).
     """
@@ -252,7 +252,7 @@ class KeterEngine:
             ArchScaffolder(),
             LegionSwarm(),
             FormalVerificationGate(),
-            MejoraloCrush(),
+            ExergyOptimizerCrush(),
         ]
         # Axiom Ω₂: Cross-invocation Thermal Bypass Repository (Persistent)
         # We store it in a predictable location within .cortex
@@ -270,8 +270,8 @@ class KeterEngine:
             return LegionSwarm()
         if "verification" in slug or "vector" in slug:
             return FormalVerificationGate()
-        if "mejoralo" in slug or "crush" in slug:
-            return MejoraloCrush()
+        if "exergy_optimizer" in slug or "crush" in slug:
+            return ExergyOptimizerCrush()
 
         logger.debug("[KETER] No specific phase mapping for %s", slug)
         return None
@@ -377,7 +377,7 @@ class KeterEngine:
                 previous_score = payload.get("score_130_100", 0.0)
 
                 # Skip Shortcut: If we already reached Singularity excellence, bypass the Crush.
-                if previous_score >= 99.0 and isinstance(phase, MejoraloCrush):
+                if previous_score >= 99.0 and isinstance(phase, ExergyOptimizerCrush):
                     if thermal_audit:
                         logger.info(
                             "⏭️ [KETER] Thermal Bypass: Singularity excellence reached. skipping MEJORAlo."
@@ -388,7 +388,7 @@ class KeterEngine:
 
                 # Detection of Static Equilibrium (Redundancy)
                 if (
-                    isinstance(phase, LegionSwarm | MejoraloCrush)
+                    isinstance(phase, LegionSwarm | ExergyOptimizerCrush)
                     and payload.get("final_code") == previous_code
                     and payload.get("score_130_100") == previous_score
                 ):

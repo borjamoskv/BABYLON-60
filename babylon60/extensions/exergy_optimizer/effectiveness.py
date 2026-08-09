@@ -6,7 +6,7 @@
 """MEJORAlo Effectiveness Tracker - quantifies whether CORTEX is actually improving code.
 
 Answers the question: "Is this project getting better over time, or are we just churning?"
-Uses historical session data from the mejoralo ledger to compute trends,
+Uses historical session data from the exergy_optimizer ledger to compute trends,
 decay risk, and stagnation alerts.
 """
 
@@ -18,11 +18,11 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from babylon60.engine import CortexEngine
-from babylon60.extensions.mejoralo.ledger import get_history
+from babylon60.extensions.exergy_optimizer.ledger import get_history
 
 __all__ = ["EffectivenessTracker", "TrendReport"]
 
-logger = logging.getLogger("babylon60_extensions.mejoralo.effectiveness")
+logger = logging.getLogger("babylon60_extensions.exergy_optimizer.effectiveness")
 
 _MIN_SESSIONS_FOR_TREND = 3
 _STAGNATION_WINDOW = 5
@@ -68,7 +68,7 @@ class TrendReport:
 
 
 class EffectivenessTracker:
-    """Analyzes mejoralo session history to measure real effectiveness."""
+    """Analyzes exergy_optimizer session history to measure real effectiveness."""
 
     def __init__(self, engine: CortexEngine):
         self.engine = engine

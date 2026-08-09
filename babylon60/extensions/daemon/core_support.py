@@ -25,7 +25,7 @@ from babylon60.extensions.daemon.monitors import (
     SignalMonitor,
     SiteMonitor,
     TombstoneMonitor,
-    UnifiedMejoraloMonitor,
+    UnifiedExergyOptimizerMonitor,
     WorkflowMonitor,
 )
 from babylon60.extensions.daemon.monitors.ast_oracle import ASTOracleMonitor
@@ -79,15 +79,15 @@ def init_core_monitors(
 
 def init_advanced_monitors(daemon: Any, file_config: dict[str, Any]) -> None:
     """Initialize optimization and analysis monitors."""
-    daemon.mejoralo_monitor = UnifiedMejoraloMonitor(
-        projects=file_config.get("auto_mejoralo_projects", {}),
-        interval_seconds=file_config.get("auto_mejoralo_interval", 1800),
+    daemon.exergy_optimizer_monitor = UnifiedExergyOptimizerMonitor(
+        projects=file_config.get("auto_exergy_optimizer_projects", {}),
+        interval_seconds=file_config.get("auto_exergy_optimizer_interval", 1800),
         threshold=90,
         engine=daemon._shared_engine,
         auto_heal=True,
     )
     daemon.compaction_monitor = CompactionMonitor(
-        projects=list(file_config.get("auto_mejoralo_projects", {}).keys()),
+        projects=list(file_config.get("auto_exergy_optimizer_projects", {}).keys()),
         interval_seconds=file_config.get("compaction_interval", 28800),
         engine=daemon._shared_engine,
     )

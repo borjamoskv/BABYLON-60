@@ -6,7 +6,7 @@
 """
 Sovereign MEJORAlo Ouroboros Daemon.
 
-Replaces loop_mejoralo.sh with a sovereign, cross-platform Python implementation.
+Replaces loop_exergy_optimizer.sh with a sovereign, cross-platform Python implementation.
 Ensures continuous code quality evolution with graceful handling.
 """
 
@@ -21,21 +21,21 @@ from typing import Any
 
 from babylon60.cli import get_engine  # type: ignore[attr-defined]
 from babylon60.extensions.daemon.monitors.canary import CanaryMonitor
-from babylon60.extensions.mejoralo.constants import (
+from babylon60.extensions.exergy_optimizer.constants import (
     DAEMON_DEFAULT_SCAN_INTERVAL,
     DAEMON_DEFAULT_TARGET_SCORE,
     DAEMON_DIM_SCORE_THRESHOLD,
 )
-from babylon60.extensions.mejoralo.engine import MejoraloEngine
+from babylon60.extensions.exergy_optimizer.engine import ExergyOptimizerEngine
 from babylon60.extensions.thinking.fusion import ContextFusion
 from babylon60.telemetry.metrics import MetricsRegistry
 
-logger = logging.getLogger("babylon60_extensions.mejoralo.daemon")
+logger = logging.getLogger("babylon60_extensions.exergy_optimizer.daemon")
 
 STAGNATION_ESCALATION_THRESHOLD = 3
 
 
-class MejoraloDaemon:
+class ExergyOptimizerDaemon:
     """Relentless code quality engine that runs in the background."""
 
     def __init__(
@@ -59,7 +59,7 @@ class MejoraloDaemon:
         self.cortex_engine = get_engine(
             db_path or DEFAULT_DB_PATH,  # type: ignore[type-error]
         )  # type: ignore[reportArgumentType]
-        self.engine = MejoraloEngine(engine=self.cortex_engine)
+        self.engine = ExergyOptimizerEngine(engine=self.cortex_engine)
         self.canary = CanaryMonitor()  # type: ignore[reportCallIssue]
         self.fusion = ContextFusion(self.cortex_engine)
         self._running = False
@@ -98,7 +98,7 @@ class MejoraloDaemon:
             except (RuntimeError, OSError, ValueError) as e:
                 logger.exception("Daemon cycle failure: %s", e)
                 self.metrics.increment(  # type: ignore[reportAttributeAccessIssue]
-                    "mejoralo_daemon_errors",
+                    "exergy_optimizer_daemon_errors",
                 )
 
             elapsed = time.monotonic() - start_time
@@ -201,14 +201,14 @@ class MejoraloDaemon:
             )
 
         if success:
-            self.metrics.inc("mejoralo_heals_total")
+            self.metrics.inc("exergy_optimizer_heals_total")
             await self._ouroboros_absorb()
 
             violations = self.canary.verify()  # type: ignore[reportAttributeAccessIssue]
             if violations:
                 for v in violations:
                     logger.error("🛑 SECURITY REGRESSION DETECTED: %s", v)
-                    self.metrics.inc("mejoralo_security_violations")
+                    self.metrics.inc("exergy_optimizer_security_violations")
         else:
             logger.error("❌ Healing wave failed or stagnated.")
 
@@ -217,7 +217,7 @@ class MejoraloDaemon:
         # Inject historical trend data for informed reasoning
         trend_ctx = ""
         try:
-            from babylon60.extensions.mejoralo.effectiveness import EffectivenessTracker
+            from babylon60.extensions.exergy_optimizer.effectiveness import EffectivenessTracker
 
             tracker = EffectivenessTracker(self.cortex_engine)
             trend = tracker.project_trend(self.project)
@@ -281,7 +281,7 @@ async def run_daemon_cli():
     project = "cortex"
     path = Path.cwd()
 
-    daemon = MejoraloDaemon(project, path)
+    daemon = ExergyOptimizerDaemon(project, path)
     _stop = asyncio.Event()
 
     loop = asyncio.get_running_loop()
@@ -295,7 +295,7 @@ async def run_daemon_cli():
     await _stop.wait()  # block until signal fires - zero CPU
 
 
-async def _shutdown(daemon: MejoraloDaemon, stop_event: asyncio.Event) -> None:
+async def _shutdown(daemon: ExergyOptimizerDaemon, stop_event: asyncio.Event) -> None:
     """Coordinated graceful shutdown for the daemon CLI."""
     await daemon.stop()
     stop_event.set()

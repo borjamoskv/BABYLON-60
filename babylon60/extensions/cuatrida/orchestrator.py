@@ -13,7 +13,7 @@ from typing import Any
 
 from babylon60.engine import CortexEngine as AsyncCortexEngine
 from babylon60.extensions.cuatrida.models import CuatridaMetrics, DecisionNode, Dimension
-from babylon60.extensions.mejoralo.engine import MejoraloEngine
+from babylon60.extensions.exergy_optimizer.engine import ExergyOptimizerEngine
 
 logger = logging.getLogger("babylon60_extensions.cuatrida.orchestrator")
 
@@ -26,7 +26,7 @@ class CuatridaOrchestrator:
 
     def __init__(self, engine: AsyncCortexEngine):
         self.engine = engine
-        self.mejoralo = MejoraloEngine(engine=engine)  # type: ignore[reportArgumentType]
+        self.exergy_optimizer = ExergyOptimizerEngine(engine=engine)  # type: ignore[reportArgumentType]
         self.metrics = CuatridaMetrics()
         self._last_tx_id: int | None = None
 
@@ -99,7 +99,7 @@ class CuatridaOrchestrator:
         """
         Dimension C: The Consul of Honor checks for 130/100 standards.
         """
-        scan_result = self.mejoralo.scan(project, path)
+        scan_result = self.exergy_optimizer.scan(project, path)
         self.metrics.aesthetic_honor = float(scan_result.score)
         is_honorable = scan_result.score >= 90
         await self.log_decision(

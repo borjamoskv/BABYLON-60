@@ -13,7 +13,7 @@ from babylon60.engine.mixins.base import FACT_COLUMNS, FACT_JOIN
 
 __all__ = ["get_history", "get_scars", "record_scar", "record_session"]
 
-logger = logging.getLogger("babylon60_extensions.mejoralo")
+logger = logging.getLogger("babylon60_extensions.exergy_optimizer")
 
 _VERSION = "9.0"
 
@@ -47,9 +47,9 @@ def record_session(
         project=project,
         content=content,
         fact_type="decision",
-        tags=["mejoralo", "audit", f"v{_VERSION}"],
+        tags=["exergy_optimizer", "audit", f"v{_VERSION}"],
         confidence="verified",
-        source="cortex-mejoralo",
+        source="cortex-exergy_optimizer",
         meta={
             "score_before": score_before,
             "score_after": score_after,
@@ -74,7 +74,7 @@ def get_history(engine: CortexEngine, project: str, limit: int = 20) -> list[dic
         rows = conn.execute(
             f"SELECT {FACT_COLUMNS} {FACT_JOIN} "
             "WHERE f.project = ? AND f.fact_type = 'decision' "
-            "AND f.tags LIKE '%mejoralo%' AND f.valid_until IS NULL "
+            "AND f.tags LIKE '%exergy_optimizer%' AND f.valid_until IS NULL "
             "ORDER BY f.id DESC LIMIT ?",
             (project, limit),
         ).fetchall()
@@ -116,9 +116,9 @@ def record_scar(
         project=project,
         content=content,
         fact_type="error",
-        tags=["mejoralo", "scar", f"v{_VERSION}"],
+        tags=["exergy_optimizer", "scar", f"v{_VERSION}"],
         confidence="verified",
-        source="cortex-mejoralo",
+        source="cortex-exergy_optimizer",
         meta={
             "file_path": file_path,
             "error_trace": error_trace,
@@ -138,7 +138,7 @@ def get_scars(
         rows = conn.execute(
             f"SELECT {FACT_COLUMNS} {FACT_JOIN} "
             "WHERE f.project = ? AND f.fact_type = 'error' "
-            "AND f.tags LIKE '%mejoralo%' AND f.valid_until IS NULL "
+            "AND f.tags LIKE '%exergy_optimizer%' AND f.valid_until IS NULL "
             "ORDER BY f.id DESC",
             (project,),
         ).fetchall()

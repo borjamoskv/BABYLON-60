@@ -35,7 +35,7 @@ class LoopsMixin:
     engine_health: Any
     disk_monitor: Any
     evaluation_monitor: Any
-    auto_mejoralo: Any
+    auto_exergy_optimizer: Any
     compaction_monitor: Any
     perception_monitor: Any
     security_monitor: Any

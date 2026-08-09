@@ -23,9 +23,9 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
-    from babylon60.extensions.mejoralo.engine import MejoraloEngine
-from babylon60.extensions.mejoralo.chronos import calculate_chronos_yield
-from babylon60.extensions.mejoralo.constants import (
+    from babylon60.extensions.exergy_optimizer.engine import ExergyOptimizerEngine
+from babylon60.extensions.exergy_optimizer.chronos import calculate_chronos_yield
+from babylon60.extensions.exergy_optimizer.constants import (
     ESCALATION_ITER_L2,
     ESCALATION_ITER_L3,
     HARD_ITERATION_CAP,
@@ -33,15 +33,15 @@ from babylon60.extensions.mejoralo.constants import (
     PYTEST_TIMEOUT_SECONDS,
     STAGNATION_LIMIT,
 )
-from babylon60.extensions.mejoralo.deps import sort_by_topological_order
-from babylon60.extensions.mejoralo.heal_prompts import (
+from babylon60.extensions.exergy_optimizer.deps import sort_by_topological_order
+from babylon60.extensions.exergy_optimizer.heal_prompts import (
     get_files_per_iteration as _get_files_per_iteration,
 )
-from babylon60.extensions.mejoralo.models import ScanResult
-from babylon60.extensions.mejoralo.taint import is_file_tainted, mark_file_tainted
+from babylon60.extensions.exergy_optimizer.models import ScanResult
+from babylon60.extensions.exergy_optimizer.taint import is_file_tainted, mark_file_tainted
 
 __all__ = ["heal_proj", "heal_project"]
-logger = logging.getLogger("babylon60_extensions.mejoralo.heal")
+logger = logging.getLogger("babylon60_extensions.exergy_optimizer.heal")
 
 
 def _extract_issues_from_findings(scan_result: ScanResult) -> dict[str, list[str]]:
@@ -74,16 +74,16 @@ async def _heal_file_async(
     findings: list[str],
     level: int = 1,
     iteration: int = 0,
-    engine: MejoraloEngine | None = None,
+    engine: ExergyOptimizerEngine | None = None,
     project: str | None = None,
 ) -> str | None:
     """Invoke the Sovereign Swarm to refactor a specific file with escalating intensity.
 
     Returns the new code if successful, None otherwise.
     """
-    from babylon60.extensions.mejoralo.swarm import MejoraloSwarm
+    from babylon60.extensions.exergy_optimizer.swarm import ExergyOptimizerSwarm
 
-    swarm = MejoraloSwarm(level=level)
+    swarm = ExergyOptimizerSwarm(level=level)
     return await swarm.refactor_file(
         file_path, findings, iteration=iteration, engine=engine, project=project
     )
@@ -94,7 +94,7 @@ def _calculate_total_complexity(source_code: str) -> int:
         tree = ast.parse(source_code)
     except SyntaxError:
         return 0
-    from babylon60.extensions.mejoralo.scan import _COMPLEXITY_NODES
+    from babylon60.extensions.exergy_optimizer.scan import _COMPLEXITY_NODES
 
     comp = 0
     for node in ast.walk(tree):
@@ -113,7 +113,7 @@ def _apply_and_verify(
     iteration: int,
     console: Any,
     current_score: int,
-    engine: MejoraloEngine | None = None,
+    engine: ExergyOptimizerEngine | None = None,
     project: str | None = None,
 ) -> bool:
     """Apply the already generated refactor, test it, and commit/rollback."""
@@ -160,7 +160,7 @@ def _run_functional_inquisitor(
     original_code: str,
     top_file_rel: str,
     console: Any,
-    engine: MejoraloEngine | None,
+    engine: ExergyOptimizerEngine | None,
     project: str | None,
     abs_path: Path,
 ) -> bool:
@@ -198,7 +198,7 @@ def _run_delta_testing(
     original_code: str,
     abs_path: Path,
     console: Any,
-    engine: MejoraloEngine | None,
+    engine: ExergyOptimizerEngine | None,
     project: str | None,
     level: int = 1,
 ) -> bool:
@@ -263,7 +263,7 @@ def _commit_healed_file(
     current_score: int,
     console: Any,
     complexity_delta: int = 0,
-    engine: MejoraloEngine | None = None,
+    engine: ExergyOptimizerEngine | None = None,
     project: str | None = None,
 ) -> bool:
     try:
@@ -324,7 +324,7 @@ def heal_project(
     path: str | Path,
     target_score: int,
     scan_result: ScanResult,
-    engine: MejoraloEngine | None = None,
+    engine: ExergyOptimizerEngine | None = None,
 ) -> bool:
     """Orchestrate autonomous healing: detect, rewrite, test, commit - RELENTLESSLY."""
     from babylon60.cli.common import console
@@ -366,10 +366,10 @@ def _run_healing_iteration(
     console: Any,
     current_result: ScanResult,
     healed_files: set[str],
-    engine: MejoraloEngine | None = None,
+    engine: ExergyOptimizerEngine | None = None,
 ) -> tuple[bool, ScanResult]:
     """Execute a single multi-file healing pass with re-scan."""
-    from babylon60.extensions.mejoralo.scan import scan
+    from babylon60.extensions.exergy_optimizer.scan import scan
 
     file_issues = _extract_issues_from_findings(current_result)
     if not file_issues:
@@ -501,7 +501,7 @@ def heal_proj(
     path: str | Path,
     target_score: int,
     scan_result: ScanResult,
-    engine: MejoraloEngine | None = None,
+    engine: ExergyOptimizerEngine | None = None,
 ) -> bool:
-    """Wrapper for heal_project to match the expected signature in MejoraloEngine."""
+    """Wrapper for heal_project to match the expected signature in ExergyOptimizerEngine."""
     return heal_project(project, path, target_score, scan_result, engine=engine)

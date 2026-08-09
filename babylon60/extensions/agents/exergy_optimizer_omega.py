@@ -3,12 +3,12 @@
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 # [Causal-Determinist] Exergy-Maximized
-"""MEJORALO-Ω - Sovereign Continuous Script Improvement Agent.
+"""EXERGY_OPTIMIZER-Ω - Sovereign Continuous Script Improvement Agent.
 
 Autonomous agent that runs perpetual Ouroboros cycles:
 Scan 13D → Shannon Prioritization → Swarm Heal → Delta-Test → Absorb.
 
-Differs from MejoraloDaemon by using entropy-based targeting,
+Differs from ExergyOptimizerDaemon by using entropy-based targeting,
 multi-project support, and exponential backoff on stagnation.
 """
 
@@ -22,13 +22,13 @@ from pathlib import Path
 from typing import Any
 
 from babylon60.agents.mixins import EngineAwareMixin
-from babylon60.extensions.mejoralo.constants import (
+from babylon60.extensions.exergy_optimizer.constants import (
     DAEMON_DEFAULT_TARGET_SCORE,
     STAGNATION_LIMIT,
 )
-from babylon60.extensions.mejoralo.models import ScanResult
+from babylon60.extensions.exergy_optimizer.models import ScanResult
 
-logger = logging.getLogger("babylon60_extensions.agents.mejoralo_omega")
+logger = logging.getLogger("babylon60_extensions.agents.exergy_optimizer_omega")
 
 # ── Constants ──────────────────────────────────────────────────────
 DEFAULT_CYCLE_INTERVAL = 120  # seconds between full cycles
@@ -38,7 +38,7 @@ ENTROPY_SCORE_WEIGHT = 0.6  # weight for scan score in priority
 ENTROPY_FINDINGS_WEIGHT = 0.4  # weight for findings count in priority
 
 
-class MejoraloOmegaAgent(EngineAwareMixin):
+class ExergyOptimizerOmegaAgent(EngineAwareMixin):
     """Autonomous continuous improvement agent for scripts and code.
 
     Loads its configuration from the YAML registry and runs
@@ -63,26 +63,26 @@ class MejoraloOmegaAgent(EngineAwareMixin):
         self._score_history: list[int] = []
 
         # Late-init engine (avoids import-time DB lock)
-        self._mejoralo: Any = None
+        self._exergy_optimizer: Any = None
         self._agent_def: Any = None
 
     def _ensure_engine(self) -> None:
-        """Lazy-initialize CortexEngine and MejoraloEngine."""
+        """Lazy-initialize CortexEngine and ExergyOptimizerEngine."""
         if self._engine is not None:
             return
-        from babylon60.extensions.mejoralo.engine import MejoraloEngine
+        from babylon60.extensions.exergy_optimizer.engine import ExergyOptimizerEngine
 
         assert self._engine is not None
-        self._mejoralo = MejoraloEngine(engine=self._engine)
+        self._exergy_optimizer = ExergyOptimizerEngine(engine=self._engine)
 
     def _load_agent_definition(self) -> None:
-        """Load the MEJORALO-Ω definition from the agent registry."""
+        """Load the EXERGY_OPTIMIZER-Ω definition from the agent registry."""
         if self._agent_def is not None:
             return
         try:
             from babylon60.extensions.agents.registry import get_agent
 
-            self._agent_def = get_agent("mejoralo_omega")
+            self._agent_def = get_agent("exergy_optimizer_omega")
             if self._agent_def:
                 logger.info(
                     "🧬 Loaded agent definition: %s (model: %s)",
@@ -103,7 +103,7 @@ class MejoraloOmegaAgent(EngineAwareMixin):
         self._load_agent_definition()
 
         logger.info(
-            "☠️ MEJORALO-Ω activated for '%s' at %s (target: %d)",
+            "☠️ EXERGY_OPTIMIZER-Ω activated for '%s' at %s (target: %d)",
             self.project,
             self.base_path,
             self.target_score,
@@ -126,23 +126,23 @@ class MejoraloOmegaAgent(EngineAwareMixin):
                     logger.debug("Sleeping %.1fs before next cycle...", sleep_time)
                     await asyncio.sleep(sleep_time)
         except asyncio.CancelledError:
-            logger.info("MEJORALO-Ω cancelled gracefully.")
+            logger.info("EXERGY_OPTIMIZER-Ω cancelled gracefully.")
 
         return self._build_summary()
 
     def stop(self) -> None:
         """Signal the agent to stop after the current cycle."""
         self._running = False
-        logger.info("MEJORALO-Ω stop signal received.")
+        logger.info("EXERGY_OPTIMIZER-Ω stop signal received.")
 
     async def _execute_cycle(self) -> None:
         """Single improvement cycle: scan → prioritize → heal → verify → absorb."""
         from babylon60.cli import console  # type: ignore[attr-defined]
 
-        console.rule(f"[cyan]MEJORALO-Ω Cycle {self._cycle_count}")
+        console.rule(f"[cyan]EXERGY_OPTIMIZER-Ω Cycle {self._cycle_count}")
 
         # 1. Scan
-        scan_result = self._mejoralo.scan(self.project, self.base_path)
+        scan_result = self._exergy_optimizer.scan(self.project, self.base_path)
         score_before = scan_result.score
         self._score_history.append(score_before)
 
@@ -170,15 +170,15 @@ class MejoraloOmegaAgent(EngineAwareMixin):
 
         # 3. Heal - escalate level based on stagnation
         level = self._escalation_level()
-        success = self._mejoralo.heal(self.project, self.base_path, self.target_score, scan_result)
+        success = self._exergy_optimizer.heal(self.project, self.base_path, self.target_score, scan_result)
 
         # 4. Verify - re-scan
-        result_after = self._mejoralo.scan(self.project, self.base_path)
+        result_after = self._exergy_optimizer.scan(self.project, self.base_path)
         score_after = result_after.score
         delta = score_after - score_before
 
         # 5. Record + track stagnation
-        self._mejoralo.record_session(
+        self._exergy_optimizer.record_session(
             self.project,
             score_before,
             score_after,
@@ -262,15 +262,15 @@ class MejoraloOmegaAgent(EngineAwareMixin):
                 self._engine.store_sync(
                     project=self.project,
                     content=(
-                        f"MEJORALO-Ω Cycle {self._cycle_count}: "
+                        f"EXERGY_OPTIMIZER-Ω Cycle {self._cycle_count}: "
                         f"Score {score_before} → {score_after} "
                         f"(Δ{score_after - score_before:+d}). "
                         f"Pattern absorbed for entropy prevention."
                     ),
                     fact_type="decision",
-                    source="agent:mejoralo-omega",
+                    source="agent:exergy_optimizer-omega",
                     confidence="C4",
-                    tags=["mejoralo-omega", "ouroboros", "pattern"],
+                    tags=["exergy_optimizer-omega", "ouroboros", "pattern"],
                 )
                 logger.info("🐍 Pattern absorbed to CORTEX ledger.")
         except (OSError, RuntimeError, ValueError) as e:
@@ -279,7 +279,7 @@ class MejoraloOmegaAgent(EngineAwareMixin):
     def _build_summary(self) -> dict[str, Any]:
         """Build a summary of the agent's run."""
         return {
-            "agent": "MEJORALO-Ω",
+            "agent": "EXERGY_OPTIMIZER-Ω",
             "project": self.project,
             "cycles_completed": self._cycle_count,
             "final_score": self._score_history[-1] if self._score_history else None,
@@ -296,8 +296,8 @@ async def run_omega_cli(
     interval: int = DEFAULT_CYCLE_INTERVAL,
     target: int = DAEMON_DEFAULT_TARGET_SCORE,
 ) -> dict[str, Any]:
-    """CLI entry point for MEJORALO-Ω."""
-    agent = MejoraloOmegaAgent(
+    """CLI entry point for EXERGY_OPTIMIZER-Ω."""
+    agent = ExergyOptimizerOmegaAgent(
         project=project,
         base_path=path,
         target_score=target,

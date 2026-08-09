@@ -36,7 +36,7 @@ class AgentDomain(Enum):
     MEMORY = auto()  # Fact storage & recall / cortex core
     EXPERIENCE = auto()  # UI/UX excellence / impactv
     COMMUNICATION = auto()  # Cross-project sync / nexus
-    VERIFICATION = auto()  # Quality assurance / mejoralo
+    VERIFICATION = auto()  # Quality assurance / exergy_optimizer
     SYNERGY = auto()  # Cross-domain meta-agents / singularity
 
 

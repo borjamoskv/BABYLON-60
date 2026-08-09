@@ -16,8 +16,8 @@ import ast
 import os
 from pathlib import Path
 
-from babylon60.extensions.mejoralo.constants import MAX_FAN_OUT, SKIP_DIRS
-from babylon60.extensions.mejoralo.models import AntipatternFinding
+from babylon60.extensions.exergy_optimizer.constants import MAX_FAN_OUT, SKIP_DIRS
+from babylon60.extensions.exergy_optimizer.models import AntipatternFinding
 
 __all__ = [
     "MAX_FAN_OUT",

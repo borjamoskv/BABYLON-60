@@ -15,7 +15,7 @@ import logging
 import os
 from pathlib import Path
 
-from babylon60.extensions.mejoralo.constants import (
+from babylon60.extensions.exergy_optimizer.constants import (
     GHOST_MIN_SUBTREE_SIZE,
     GHOST_PENALTY_PER_FINDING,
     INDENT_NESTING_THRESHOLD,
@@ -33,13 +33,13 @@ from babylon60.extensions.mejoralo.constants import (
     SKIP_DIRS,
     SOVEREIGN_BONUS_FACTOR,
 )
-from babylon60.extensions.mejoralo.models import DimensionResult, ScanResult
-from babylon60.extensions.mejoralo.utils import detect_stack
+from babylon60.extensions.exergy_optimizer.models import DimensionResult, ScanResult
+from babylon60.extensions.exergy_optimizer.utils import detect_stack
 from babylon60.guards.path_guard import is_safe_path
 
 __all__ = ["scan"]
 
-logger = logging.getLogger("babylon60_extensions.mejoralo")
+logger = logging.getLogger("babylon60_extensions.exergy_optimizer")
 
 _WEIGHT_MAP = {"critical": 40, "high": 35, "medium": 15, "low": 10}
 
@@ -568,8 +568,8 @@ def scan(project: str, path: str | Path, deep: bool = False, brutal: bool = Fals
     )
 
 
-class MejoraloScanner:
-    """Wrapper class for the scan function to match MejoraloEngine's expectations."""
+class ExergyOptimizerScanner:
+    """Wrapper class for the scan function to match ExergyOptimizerEngine's expectations."""
 
     def scan_project(
         self, project: str, path: str | Path, deep: bool = False, brutal: bool = False

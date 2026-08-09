@@ -49,7 +49,7 @@ __all__ = [
     "EntropyAlert",
     "EvaluationAlert",
     "GhostAlert",
-    "MejoraloAlert",
+    "ExergyOptimizerAlert",
     "MemoryAlert",
     "NeuralIntentAlert",
     "PerceptionAlert",
@@ -147,7 +147,7 @@ class DiskAlert:
 
 
 @dataclass
-class MejoraloAlert:
+class ExergyOptimizerAlert:
     """MEJORAlo scan result alert for autonomous daemon runs."""
 
     project: str
@@ -313,7 +313,7 @@ class DaemonStatus:
     cert_alerts: list[CertAlert] = field(default_factory=list)
     engine_alerts: list[EngineHealthAlert] = field(default_factory=list)
     disk_alerts: list[DiskAlert] = field(default_factory=list)
-    mejoralo_alerts: list[MejoraloAlert] = field(default_factory=list)
+    exergy_optimizer_alerts: list[ExergyOptimizerAlert] = field(default_factory=list)
     evaluation_alerts: list[EvaluationAlert] = field(default_factory=list)
     entropy_alerts: list[EntropyAlert] = field(default_factory=list)
     ast_alerts: list[ASTAlert] = field(default_factory=list)

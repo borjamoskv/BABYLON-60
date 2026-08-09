@@ -64,7 +64,7 @@ TIER_MAP = {
     "zkortex": "EXPERIMENTAL",
     "manifold": "EXPERIMENTAL",
     "market_maker": "EXPERIMENTAL",
-    "mejoralo": "EXPERIMENTAL",
+    "exergy_optimizer": "EXPERIMENTAL",
     "nous": "EXPERIMENTAL",
     "shannon": "EXPERIMENTAL",
     "substrate": "EXPERIMENTAL",
