@@ -74,8 +74,8 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Setup Android NDK
-        uses: nvida/setup-android@v3
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
 
       - name: Setup Node.js & Rust
         uses: actions/setup-node@v4
