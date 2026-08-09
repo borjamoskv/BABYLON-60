@@ -126,3 +126,64 @@ pub const fn is_calm_monotonic_transition(prev_epoch: u64, new_epoch: u64) -> bo
     new_epoch > prev_epoch
 }
 
+// ---------------------------------------------------------------------------
+// Formalización Axiomática de Cota de Landauer Extendida para Aphairesis (Capa 2)
+// ---------------------------------------------------------------------------
+
+/// Cota termodinámica extendida para operaciones de compresión/aphairesis en Capa 2.
+///
+/// Invariante: $E_{\text{min}} \ge k_B \cdot T \cdot \ln 2 \cdot \left( \text{effective\_bits} + \frac{D_{\text{KL}}}{\ln 2} \right)$
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct AphairesisBound {
+    /// Bits efectivos eliminados en la compresión (ponderados topológicamente).
+    pub effective_bits_erased: f64,
+    /// Divergencia KL entre la distribución original $P_X$ y la reconstruida desde $Y$.
+    pub kl_divergence: f64,
+    /// Temperatura operativa del silicio en Kelvin.
+    pub temperature_k: f64,
+}
+
+impl AphairesisBound {
+    /// Constante de Boltzmann ($k_B$) en Joules por Kelvin: $1.380649 \times 10^{-23} \text{ J/K}$.
+    pub const K_B: f64 = 1.380649e-23;
+    /// Logaritmo natural de 2 ($\ln 2$).
+    pub const LN2: f64 = core::f64::consts::LN_2;
+
+    /// Retorna la energía mínima en Joules requerida para esta compresión.
+    ///
+    /// $$E_{\text{min}} = k_B \cdot T \cdot \ln 2 \cdot \left( \text{bits} + \frac{D_{\text{KL}}}{\ln 2} \right)$$
+    #[inline]
+    #[must_use]
+    pub fn min_energy_joules(&self) -> f64 {
+        Self::K_B * self.temperature_k * Self::LN2 * (self.effective_bits_erased + self.kl_divergence / Self::LN2)
+    }
+
+    /// Verifica si una medición empírica de energía satisface la cota física.
+    #[inline]
+    #[must_use]
+    pub fn is_physically_valid(&self, measured_energy_j: f64) -> bool {
+        measured_energy_j >= self.min_energy_joules()
+    }
+}
+
+/// Trait axiomático que todo operador de compresión topológica (Capa 2) debe implementar.
+///
+/// Obliga a asociar constantes de tiempo de compilación para la pérdida de información,
+/// garantizando que ningún módulo de abstracción opere como una caja negra termodinámica.
+pub trait TopologicalCompressor {
+    /// Bits efectivos eliminados (constante de compilación).
+    const EFFECTIVE_BITS_ERASED: f64;
+    /// Divergencia KL prefijada (constante de compilación).
+    const KL_DIVERGENCE: f64;
+
+    /// Retorna la cota termodinámica de Aphairesis para este compresor a una temperatura dada.
+    fn aphairesis_bound(temperature_k: f64) -> AphairesisBound {
+        AphairesisBound {
+            effective_bits_erased: Self::EFFECTIVE_BITS_ERASED,
+            kl_divergence: Self::KL_DIVERGENCE,
+            temperature_k,
+        }
+    }
+}
+
+
