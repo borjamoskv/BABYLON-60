@@ -5,10 +5,8 @@ and external P2P notary checkpoints with network outage Grace Period protection.
 """
 
 import hashlib
-import json
-import os
 import time
-from typing import Dict, Optional
+from typing import Dict
 
 
 class MerkleCausalAnchor:

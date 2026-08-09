@@ -47,7 +47,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from babylon60.bft.cortex_persist_ledger import CortexEvent, CortexPersistLedger
+from babylon60.bft.cortex_persist_ledger import CortexEvent, CortexPersistLedger  # noqa: E402
 
 logger = logging.getLogger("babylon60.mcp.server")
 

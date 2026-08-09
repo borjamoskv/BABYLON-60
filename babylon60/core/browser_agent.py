@@ -5,7 +5,7 @@
 import json
 import hashlib
 import time
-from typing import Callable, Optional, Dict, Any
+from typing import Callable, Dict, Any
 from babylon60.core.url_cache import URLCacheSync
 from babylon60.core.popperian_filter import evaluate_payload, FilterResult, ANCHOR_REGEX
 
