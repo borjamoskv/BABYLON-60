@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 from babylon60.crypto.hash_registry import cortex_hash
+from babylon60.core.causal_topology import compute_1wl_hash, json_to_graph
 
 __all__ = [
     "AGENT_DIR",
@@ -29,6 +30,7 @@ __all__ = [
     "calculate_fact_diff",
     "db_content_hash",
     "file_hash",
+    "topological_file_hash",
     "get_existing_contents",
     "load_sync_state",
     "save_sync_state",
@@ -125,6 +127,27 @@ def file_hash(path: Path) -> str:
     if not path.exists():
         return ""
     return cortex_hash(path.read_bytes())
+
+
+def topological_file_hash(path: Path) -> str:
+    """Calculates 1-WL topological hash of a JSON/JSONL file to detect structural changes."""
+    if not path.exists():
+        return ""
+    try:
+        content = path.read_text(encoding="utf-8")
+        if not content.strip():
+            return ""
+        
+        if path.suffix == ".jsonl":
+            data = [json.loads(line) for line in content.splitlines() if line.strip()]
+        else:
+            data = json.loads(content)
+            
+        nodes, edges = json_to_graph(data)
+        return compute_1wl_hash(nodes, edges)
+    except Exception as e:
+        logger.warning("Failed to compute topological hash for %s, falling back to byte hash: %s", path, e)
+        return file_hash(path)
 
 
 def atomic_write(path: Path, content: str) -> None:
