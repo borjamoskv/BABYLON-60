@@ -412,18 +412,6 @@ class CortexMCPServer:
                     }
                 ]
             }
-                "server": MCP_SERVER_NAME,
-                "version": MCP_SERVER_VERSION,
-            }
-            return {
-                "contents": [
-                    {
-                        "uri": uri,
-                        "mimeType": "application/json",
-                        "text": json.dumps(result, indent=2),
-                    }
-                ]
-            }
         else:
             return {
                 "contents": [
@@ -536,6 +524,48 @@ class CortexMCPServer:
             f"  BFT Seq: {ack['seq']}\n"
             f"  Hash:    {ack['entry_hash'][:16]}...\n"
             f"  Status:  {ack['status']}"
+        )
+        return {"content": [{"type": "text", "text": text}], "isError": False}
+
+    def _tool_causal_evaluate_task_risk(self, args: dict[str, Any]) -> dict[str, Any]:
+        task_payload = args.get("task_payload", {})
+        risk = self.verification_gate.evaluate_task(task_payload)
+        is_allowed = self.verification_gate.is_allowed(task_payload)
+        text = (
+            f"⚖️ Causal Task Risk Evaluation\n"
+            f"  Evaluated Risk: {risk.name}\n"
+            f"  Execution Allowed: {'🟢 YES' if is_allowed else '🔴 PAUSED (Requires Human Sign-off)'}\n"
+            f"  Action: {task_payload.get('action', 'N/A')}"
+        )
+        return {"content": [{"type": "text", "text": text}], "isError": False}
+
+    def _tool_causal_register_sign_off(self, args: dict[str, Any]) -> dict[str, Any]:
+        execution_id = args["execution_id"]
+        action_name = args["action_name"]
+        decision = args["decision"]
+        risk_str = args.get("risk_level", "CRITICAL").upper()
+        try:
+            risk_level = RiskLevel[risk_str]
+        except KeyError:
+            risk_level = RiskLevel.CRITICAL
+
+        receipt = self.verification_gate.register_sign_off(execution_id, action_name, risk_level, decision)
+        text = (
+            f"📝 Causal Human Sign-off Registered\n"
+            f"  Execution ID: {receipt.execution_id}\n"
+            f"  Action:       {receipt.action_name}\n"
+            f"  Risk Level:   {receipt.risk_level.name}\n"
+            f"  Decision:     {receipt.decision}\n"
+            f"  SHA256 Recpt: {receipt.cryptographic_digest[:16]}...{receipt.cryptographic_digest[-16:]}"
+        )
+        return {"content": [{"type": "text", "text": text}], "isError": False}
+
+    def _tool_causal_verify_ledger(self, args: dict[str, Any]) -> dict[str, Any]:
+        integrity = self.verification_gate.verify_ledger_integrity()
+        text = (
+            f"🔐 Causal Audit Ledger Merkle Integrity Verification\n"
+            f"  Status: {'🟢 VERIFIED OK (SHA-256 Chain Intact)' if integrity else '🔴 CORRUPTED'}\n"
+            f"  Engine: VerificationGate (SCITT Profile)"
         )
         return {"content": [{"type": "text", "text": text}], "isError": False}
 
