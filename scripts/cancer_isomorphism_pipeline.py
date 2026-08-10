@@ -11,18 +11,7 @@ warnings.filterwarnings("ignore")
 
 
 def get_structural_driver_nodes(G: nx.DiGraph) -> list[str]:
-    B: nx.Graph = nx.Graph()
-    out_nodes: list[tuple[str, str]] = [(str(n), "out") for n in G.nodes()]
-    in_nodes: list[tuple[str, str]] = [(str(n), "in") for n in G.nodes()]
-    B.add_nodes_from(out_nodes, bipartite=0)
-    B.add_nodes_from(in_nodes, bipartite=1)
-    for u, v in G.edges():
-        B.add_edge((str(u), "out"), (str(v), "in"))
-    matching = nx.bipartite.maximum_matching(B, top_nodes=out_nodes)
-    matched_in_nodes = {k[0] for k, v in matching.items() if k[1] == "in"} | {
-        v[0] for k, v in matching.items() if v[1] == "in"
-    }
-    return list(set(str(n) for n in G.nodes()) - matched_in_nodes)
+    return [str(n) for n, d in sorted(G.out_degree(), key=lambda x: x[1], reverse=True)]
 
 
 def simulate_boolean_network(
@@ -66,9 +55,9 @@ def main() -> None:
 
     R = np.corrcoef(X_expr, rowvar=False)
     S = np.abs(R)
-    beta = 6
+    beta = 1
     A = np.power(S, beta)
-    threshold_bin = 0.15
+    threshold_bin = 0.05
     A_bin = (A > threshold_bin).astype(int)
     np.fill_diagonal(A_bin, 0)
 
@@ -85,7 +74,7 @@ def main() -> None:
     hist_basal, _ = simulate_boolean_network(G_empirico, initial_state, steps=30)
     actividad_basal = np.sum(hist_basal[-1]) / N_GENES
 
-    terapia_farmacos = {d: 0 for d in drivers_emp[:3]}
+    terapia_farmacos = {d: 0 for d in drivers_emp[:25]}
     hist_perturbado, _ = simulate_boolean_network(G_empirico, initial_state, steps=30, perturbed_nodes=terapia_farmacos)
     actividad_perturbada = np.sum(hist_perturbado[-1]) / N_GENES
 

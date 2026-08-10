@@ -16,6 +16,7 @@ from babylon60.extensions.sync.common import (
     SyncResult,
     calculate_fact_diff,
     file_hash,
+    topological_file_hash,
     get_existing_contents,
     load_sync_state,
     save_sync_state,
@@ -36,17 +37,40 @@ logger = logging.getLogger("babylon60_extensions.sync")
 async def _sync_file(
     engine: CortexEngine,
     path: Path,
-    state_key: str,
+    state_key_prefix: str,
     state: dict,
     sync_fn,
     result: SyncResult,
 ) -> None:
-    """Hash-check a single file and sync it if changed."""
+    """Hash-check a single file using Dual Signature (Merkle, WL) and sync it if changed."""
     try:
-        fhash = file_hash(path)
-        if fhash and fhash != state.get(state_key):
-            await sync_fn(engine, path, result)
-            state[state_key] = fhash
+        current_merkle = file_hash(path)
+        current_wl = topological_file_hash(path)
+        
+        merkle_key = f"{state_key_prefix}_merkle"
+        wl_key = f"{state_key_prefix}_wl"
+        
+        prev_merkle = state.get(merkle_key)
+        prev_wl = state.get(wl_key)
+        
+        # Fable 5 Máx - Matriz de Decisión MerklePulse
+        if current_merkle == prev_merkle and current_wl == prev_wl:
+            return
+            
+        if current_merkle != prev_merkle and current_wl == prev_wl:
+            logger.info("Cambio sintáctico (Merkle≠, WL=) en %s", path.name)
+        elif current_merkle != prev_merkle and current_wl != prev_wl:
+            logger.warning("ALERTA ALTA: Cambio topológico/causal (Merkle≠, WL≠) en %s. Re-derivar.", path.name)
+        elif current_merkle == prev_merkle and current_wl != prev_wl:
+            logger.critical("[FAIL-STOP] Contradicción epistémica en %s: WL cambió pero Merkle no.", path.name)
+            raise RuntimeError(f"[FAIL-STOP] Violación de integridad matemática en {path.name}. WL cambió pero Merkle intacto.")
+            
+        await sync_fn(engine, path, result)
+        
+        state[merkle_key] = current_merkle
+        state[wl_key] = current_wl
+        state[f"{state_key_prefix}_hash"] = current_merkle # Backwards compatibility
+        
     except (sqlite3.Error, json.JSONDecodeError, OSError) as e:
         result.errors.append(f"{path.name}: {e}")
         logger.error("Syncing %s failed: %s", path.name, e)
@@ -61,13 +85,13 @@ async def sync_memory(engine: CortexEngine) -> SyncResult:
         result.errors.append(f"Directorio de memoria no encontrado: {MEMORY_DIR}")
         return result
 
-    await _sync_file(engine, MEMORY_DIR / "ghosts.json", "ghosts_hash", state, _sync_ghosts, result)
-    await _sync_file(engine, MEMORY_DIR / "system.json", "system_hash", state, sync_system, result)
+    await _sync_file(engine, MEMORY_DIR / "ghosts.json", "ghosts", state, _sync_ghosts, result)
+    await _sync_file(engine, MEMORY_DIR / "system.json", "system", state, sync_system, result)
     await _sync_file(
-        engine, MEMORY_DIR / "mistakes.jsonl", "mistakes_hash", state, _sync_mistakes, result
+        engine, MEMORY_DIR / "mistakes.jsonl", "mistakes", state, _sync_mistakes, result
     )
     await _sync_file(
-        engine, MEMORY_DIR / "bridges.jsonl", "bridges_hash", state, _sync_bridges, result
+        engine, MEMORY_DIR / "bridges.jsonl", "bridges", state, _sync_bridges, result
     )
 
     # Guardar estado para la próxima ejecución

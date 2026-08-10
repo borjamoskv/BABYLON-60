@@ -17,8 +17,8 @@ import asyncio
 import logging
 from typing import TYPE_CHECKING, Any
 
-from babylon60.extensions.sync import SyncResult, WritebackResult
-from babylon60.extensions.sync.common import file_hash, load_sync_state
+from babylon60.extensions.sync.common import SyncResult, WritebackResult
+from babylon60.extensions.sync.common import topological_file_hash, load_sync_state
 
 if TYPE_CHECKING:
     from babylon60.engine import CortexEngine
@@ -74,14 +74,24 @@ class CortexSyncManager:
         from babylon60.extensions.sync.common import MEMORY_DIR
 
         persisted_state = load_sync_state()
-        # 1. Detect changes using hashes
+        # 1. Detect changes using hashes (MerklePulse Dual Signature)
         changed_files = []
         for f in ["ghosts.json", "system.json", "mistakes.jsonl", "bridges.jsonl"]:
             path = MEMORY_DIR / f
             if path.exists():
-                current_hash = await loop.run_in_executor(None, file_hash, path)
-                if current_hash != persisted_state.get(f"{path.stem}_hash"):
-                    changed_files.append((f, current_hash))
+                from babylon60.extensions.sync.common import file_hash
+                current_merkle = await loop.run_in_executor(None, file_hash, path)
+                current_wl = await loop.run_in_executor(None, topological_file_hash, path)
+                
+                prev_merkle = persisted_state.get(f"{path.stem}_merkle")
+                prev_wl = persisted_state.get(f"{path.stem}_wl")
+                
+                if current_merkle == prev_merkle and current_wl != prev_wl:
+                    logger.critical("[FAIL-STOP] Contradicción epistémica en %s: WL cambió pero Merkle no.", path.stem)
+                    raise RuntimeError(f"[FAIL-STOP] Violación de integridad matemática en {path.stem}. WL cambió pero Merkle intacto.")
+                
+                if current_merkle != prev_merkle:
+                    changed_files.append((f, current_merkle, current_wl))
 
         if not changed_files:
             logger.debug("MerklePulse: No memory changes detected")
