@@ -62,8 +62,13 @@ async def _sync_file(
         elif current_merkle != prev_merkle and current_wl != prev_wl:
             logger.warning("ALERTA ALTA: Cambio topológico/causal (Merkle≠, WL≠) en %s. Re-derivar.", path.name)
         elif current_merkle == prev_merkle and current_wl != prev_wl:
-            logger.critical("[FAIL-STOP] Contradicción epistémica en %s: WL cambió pero Merkle no.", path.name)
-            raise RuntimeError(f"[FAIL-STOP] Violación de integridad matemática en {path.name}. WL cambió pero Merkle intacto.")
+            from babylon60.extensions.swarm.verification_gate import VerificationGate
+            gate = VerificationGate(str(MEMORY_DIR / "hitl.db"))
+            if gate.check_authorized_bifurcation(time_window_seconds=300.0):
+                logger.warning("[DO-CALCULUS SURGERY ACCEPTED] Topología bifurcada autorizada en %s.", path.name)
+            else:
+                logger.critical("[FAIL-STOP] Contradicción epistémica en %s: WL cambió pero Merkle no.", path.name)
+                raise RuntimeError(f"[FAIL-STOP] Violación de integridad matemática en {path.name}. WL cambió pero Merkle intacto.")
             
         await sync_fn(engine, path, result)
         
