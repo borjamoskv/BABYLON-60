@@ -1,9 +1,9 @@
 # Specification: Causal Human-in-the-Loop (HITL) Governance & Operational Workers
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Status:** Canonical Standard  
-**Governance Invariant:** `RULE[human_in_the_loop_causal_governance]`  
-**Reference PoC:** [scripts/poc_causal_hitl_agent.py](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/poc_causal_hitl_agent.py)  
+**Governance Invariants:** `RULE[human_in_the_loop_causal_governance]`, `RULE[c5_real_invariants]`  
+**Reference Implementation:** [scripts/poc_causal_hitl_agent.py](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/poc_causal_hitl_agent.py)  
 
 ---
 
@@ -24,7 +24,7 @@ Traditional LLM applications rely heavily on **Level 0 Conversational Interfaces
 
 ---
 
-## 3. Mathematical State Transition Model
+## 3. Mathematical State Transition Model & Cryptographic Verification
 
 Let $\mathcal{S}$ be the system state space, $\mathcal{A}$ the set of agent actions, and $\mathcal{A}_{\text{critical}} \subset \mathcal{A}$ the subset of mutative actions requiring operator authorization.
 
@@ -36,22 +36,36 @@ $$\text{State}_{t+1} = \begin{cases}
 \text{ABORTED}(\text{State}_t, \text{reason}) & \text{if } \mathcal{G}_{\text{human}}(a_t, \text{State}_t) = \text{REJECTED}
 \end{cases}$$
 
-### Key Architectural Properties:
-* **Non-Blocking Suspension:** Pausing execution does NOT hold thread execution or consume spinning CPU cycles. The state is serialized to a persistent snapshot buffer.
-* **Audit Ledger Immutability:** Every decision ($\text{APPROVED}$, $\text{REJECTED}$, $\text{PAUSED}$) is appended to an append-only WAL ledger with microsecond timestamps.
+### Cryptographic Tamper-Evident SHA-256 Receipts (SCITT Profile)
+Every state decision ($\text{APPROVED}$, $\text{REJECTED}$, $\text{PAUSED}$) emits a cryptographically linked block in the `audit_ledger`:
+
+$$H_k = \text{SHA256}\Big(\text{exec\_id} \,||\, \text{action} \,||\, \text{criticality} \,||\, \text{decision} \,||\, \text{timestamp} \,||\, H_{k-1}\Big)$$
+
+Where $H_0 = 0^{64}$. Any tampering or retro-active alteration of historical decisions invalidates the Merkle hash chain, failing `verify_ledger_integrity()`.
 
 ---
 
-## 4. Multidisciplinary Domain Applications
+## 4. Key Architectural Properties
+
+1. **Non-Blocking Suspension & Asynchronous Resume:**
+   Pausing execution does NOT hold thread execution or consume CPU cycles. The state payload is serialized to a persistent SQLite WAL snapshot buffer (`state_snapshots`). The execution can be resumed asynchronously from a different shell or process using `worker.resume_execution(execution_id, decision)`.
+2. **Action Criticality Scoping:**
+   - `READ_ONLY`: Autonomous execution without interrupter gates.
+   - `COMPUTE`: Deterministic, reversible computation (previews, simulations).
+   - `MUTATIVE_CRITICAL`: High-impact state mutation requiring operator sign-off.
+
+---
+
+## 5. Multidisciplinary Domain Applications
 
 The operational worker architecture bridges across diverse research and engineering domains:
 
 ### A. Business Operations & Data Processing
-* **Autonomous Task:** Extraction and qualification of inbound records.
+* **Autonomous Task:** Ingestion, enrichment, and qualification of records.
 * **Critical Gate:** Dispatching external communications or committing financial record changes.
 
 ### B. Security & Codebase Auditing
-* **Autonomous Task:** Static analysis, dependency resolution, detection of hallucinated imports via `existence-gap-audit`.
+* **Autonomous Task:** Static analysis, AST parsing, detection of hallucinated imports via `existence-gap-audit`.
 * **Critical Gate:** Applying automated refactoring patches or running destructive git purges.
 
 ### C. Audiovisual & Motion Design Synthesis
@@ -60,26 +74,33 @@ The operational worker architecture bridges across diverse research and engineer
 
 ---
 
-## 5. Reference Implementation & Usage
+## 6. Reference Implementation & Usage
 
-The reference implementation is available in `scripts/poc_causal_hitl_agent.py`.
+The SOTA implementation is available in `scripts/poc_causal_hitl_agent.py`.
 
-### Execution Command:
+### Verification Command:
 ```bash
 python3 scripts/poc_causal_hitl_agent.py
 ```
 
-### Programmatic API Example:
+### Asynchronous Execution & Resume Example:
 ```python
-from scripts.poc_causal_hitl_agent import CausalHitlEngine, OperationalWorkerPoC, ActionCriticality
+from scripts.poc_causal_hitl_agent import CausalHitlEngine, OperationalWorkerPoC, ActionCriticality, AgentState
 
 engine = CausalHitlEngine(db_path="cortex_governance.db")
 worker = OperationalWorkerPoC(
-    execution_id="EXEC-2026-0810-001",
-    domain="Code_Audit_And_Publish",
+    execution_id="EXEC-CRM-2026",
+    domain="Business_CRM_Operations",
     engine=engine
 )
 
-# Plan execution with non-blocking Causal Gate evaluation
-worker.execute_plan(steps, auto_approve_prompt=True)
+# 1. Asynchronous Execution (Pauses safely at MUTATIVE_CRITICAL step)
+status = worker.execute_plan(workflow_steps, async_mode=True)
+
+# 2. Resuming later via operator sign-off decision
+if status == AgentState.PAUSED_AWAITING_SIGN_OFF:
+    worker.resume_execution(decision="APPROVED", steps=workflow_steps)
+
+# 3. Verifying Cryptographic Tamper-Evident Ledger
+assert engine.verify_ledger_integrity() is True
 ```
