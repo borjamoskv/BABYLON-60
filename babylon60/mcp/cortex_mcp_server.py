@@ -48,6 +48,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from babylon60.bft.cortex_persist_ledger import CortexEvent, CortexPersistLedger  # noqa: E402
+from babylon60.extensions.swarm.verification_gate import RiskLevel, VerificationGate  # noqa: E402
 
 logger = logging.getLogger("babylon60.mcp.server")
 
@@ -56,13 +57,14 @@ logger = logging.getLogger("babylon60.mcp.server")
 # ---------------------------------------------------------------------------
 DEFAULT_LEDGER_PATH = Path.home() / ".babylon60" / "mcp_ledger.db"
 DEFAULT_MAIL_LEDGER_PATH = Path.home() / ".babylon60" / "babylonmail" / "mail_ledger.db"
+DEFAULT_CAUSAL_GATE_PATH = Path.home() / ".babylon60" / "causal_gate.db"
 
 # ---------------------------------------------------------------------------
 # MCP Protocol Constants (JSON-RPC 2.0)
 # ---------------------------------------------------------------------------
 JSONRPC_VERSION = "2.0"
 MCP_SERVER_NAME = "cortex-persist-bft"
-MCP_SERVER_VERSION = "1.1.0"
+MCP_SERVER_VERSION = "1.2.0"
 
 # MCP Protocol version
 MCP_PROTOCOL_VERSION = "2025-03-26"
@@ -161,6 +163,65 @@ TOOLS: list[dict[str, Any]] = [
             "required": ["to", "subject", "body"],
         },
     },
+    {
+        "name": "causal_evaluate_task_risk",
+        "description": (
+            "Evaluate the risk level (LOW, MEDIUM, HIGH, CRITICAL) of a proposed "
+            "swarm task payload under Causal Gate governance."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "task_payload": {
+                    "type": "object",
+                    "description": "Task specification containing action, command, or mutability flag.",
+                },
+            },
+            "required": ["task_payload"],
+        },
+    },
+    {
+        "name": "causal_register_sign_off",
+        "description": (
+            "Record an operator sign-off decision (APPROVED/REJECTED) into the SHA-256 "
+            "SCITT tamper-evident audit ledger and return a cryptographic receipt."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "execution_id": {
+                    "type": "string",
+                    "description": "Execution identifier.",
+                },
+                "action_name": {
+                    "type": "string",
+                    "description": "Name of action being authorized.",
+                },
+                "risk_level": {
+                    "type": "string",
+                    "description": "Risk level (LOW, MEDIUM, HIGH, CRITICAL).",
+                    "default": "CRITICAL",
+                },
+                "decision": {
+                    "type": "string",
+                    "description": "Decision status ('APPROVED' or 'REJECTED').",
+                },
+            },
+            "required": ["execution_id", "action_name", "decision"],
+        },
+    },
+    {
+        "name": "causal_verify_ledger",
+        "description": (
+            "Verify the cryptographic SHA-256 Merkle chain integrity of the Causal "
+            "Verification Gate audit ledger."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+        },
+    },
 ]
 
 RESOURCES: list[dict[str, Any]] = [
@@ -174,6 +235,12 @@ RESOURCES: list[dict[str, Any]] = [
         "uri": "bft://merkle/attestation",
         "name": "Merkle Root Attestation",
         "description": "Cryptographic SHA3-256 Merkle Root attestation of the full ledger state for tamper-evidence verification.",
+        "mimeType": "application/json",
+    },
+    {
+        "uri": "bft://causal/ledger",
+        "name": "Causal Gate Audit Ledger Status",
+        "description": "Health and SCITT Merkle chain verification status of the Causal Verification Gate.",
         "mimeType": "application/json",
     },
 ]
