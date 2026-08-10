@@ -13,7 +13,12 @@ import time
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
-__all__ = ["RiskLevel", "AgentState", "CausalSignOffReceipt", "VerificationGate"]
+__all__ = ["RiskLevel", "AgentState", "CausalSignOffReceipt", "VerificationGate", "InterventionChannel"]
+
+
+class InterventionChannel(enum.Enum):
+    SOFT_BAYESIAN = "SOFT_BAYESIAN"   # Update paramétrico, métrica de Fisher preservada, topología WL intacta
+    HARD_SURGERY = "HARD_SURGERY"     # Mutación do-calculus, topología WL bifurcada (requiere reset de MerklePulse)
 
 
 class RiskLevel(enum.Enum):
@@ -37,6 +42,7 @@ class CausalSignOffReceipt:
     execution_id: str
     action_name: str
     risk_level: RiskLevel
+    intervention_channel: InterventionChannel
     decision: str
     timestamp: float
     prev_digest: str
@@ -75,6 +81,7 @@ class VerificationGate:
                     execution_id TEXT NOT NULL,
                     action_name TEXT NOT NULL,
                     risk_level TEXT NOT NULL,
+                    intervention_channel TEXT NOT NULL,
                     decision TEXT NOT NULL,
                     timestamp REAL NOT NULL,
                     prev_digest TEXT NOT NULL,
@@ -121,7 +128,8 @@ class VerificationGate:
         return row is not None and row[0] == "APPROVED"
 
     def register_sign_off(
-        self, execution_id: str, action_name: str, risk_level: RiskLevel, decision: str
+        self, execution_id: str, action_name: str, risk_level: RiskLevel, decision: str,
+        intervention_channel: InterventionChannel = InterventionChannel.SOFT_BAYESIAN
     ) -> CausalSignOffReceipt:
         """
         Record an operator sign-off decision into the SHA-256 SCITT tamper-evident ledger.
@@ -132,25 +140,40 @@ class VerificationGate:
         prev_digest = row[0] if row else "0" * 64
 
         now = time.time()
-        raw_data = f"{execution_id}|{action_name}|{risk_level.name}|{decision}|{now:.6f}|{prev_digest}"
+        raw_data = f"{execution_id}|{action_name}|{risk_level.name}|{intervention_channel.value}|{decision}|{now:.6f}|{prev_digest}"
         digest = hashlib.sha256(raw_data.encode("utf-8")).hexdigest()
 
         with self._conn as conn:
             conn.execute("""
-                INSERT INTO audit_ledger (execution_id, action_name, risk_level, decision, timestamp, prev_digest, cryptographic_digest)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-            """, (execution_id, action_name, risk_level.name, decision, now, prev_digest, digest))
+                INSERT INTO audit_ledger (execution_id, action_name, risk_level, intervention_channel, decision, timestamp, prev_digest, cryptographic_digest)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """, (execution_id, action_name, risk_level.name, intervention_channel.value, decision, now, prev_digest, digest))
             conn.commit()
 
         return CausalSignOffReceipt(
             execution_id=execution_id,
             action_name=action_name,
             risk_level=risk_level,
+            intervention_channel=intervention_channel,
             decision=decision,
             timestamp=now,
             prev_digest=prev_digest,
             cryptographic_digest=digest
         )
+
+    def check_authorized_bifurcation(self, time_window_seconds: float = 300.0) -> bool:
+        """
+        [Frontera 2: Do-Calculus Surgery]
+        Verifica si hay una autorización global y reciente de 'HARD_SURGERY' que justifique
+        una mutación de la topología 1-WL.
+        """
+        threshold = time.time() - time_window_seconds
+        cur = self._conn.cursor()
+        cur.execute(
+            "SELECT 1 FROM audit_ledger WHERE intervention_channel=? AND decision='APPROVED' AND timestamp >= ? LIMIT 1",
+            (InterventionChannel.HARD_SURGERY.value, threshold)
+        )
+        return cur.fetchone() is not None
 
     def save_snapshot(
         self, execution_id: str, domain: str, step: int, status: AgentState,
@@ -198,14 +221,14 @@ class VerificationGate:
         Verify Merkle hash chain integrity across all recorded SCITT audit ledger blocks.
         """
         cur = self._conn.cursor()
-        cur.execute("SELECT execution_id, action_name, risk_level, decision, timestamp, prev_digest, cryptographic_digest FROM audit_ledger ORDER BY id ASC")
+        cur.execute("SELECT execution_id, action_name, risk_level, intervention_channel, decision, timestamp, prev_digest, cryptographic_digest FROM audit_ledger ORDER BY id ASC")
         rows = cur.fetchall()
         expected_prev = "0" * 64
         for r in rows:
-            exec_id, action, risk, dec, ts, prev_d, digest = r
+            exec_id, action, risk, channel, dec, ts, prev_d, digest = r
             if prev_d != expected_prev:
                 return False
-            raw_data = f"{exec_id}|{action}|{risk}|{dec}|{ts:.6f}|{prev_d}"
+            raw_data = f"{exec_id}|{action}|{risk}|{channel}|{dec}|{ts:.6f}|{prev_d}"
             calc_digest = hashlib.sha256(raw_data.encode("utf-8")).hexdigest()
             if calc_digest != digest:
                 return False

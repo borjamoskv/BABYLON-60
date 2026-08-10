@@ -87,8 +87,13 @@ class CortexSyncManager:
                 prev_wl = persisted_state.get(f"{path.stem}_wl")
                 
                 if current_merkle == prev_merkle and current_wl != prev_wl:
-                    logger.critical("[FAIL-STOP] Contradicción epistémica en %s: WL cambió pero Merkle no.", path.stem)
-                    raise RuntimeError(f"[FAIL-STOP] Violación de integridad matemática en {path.stem}. WL cambió pero Merkle intacto.")
+                    from babylon60.extensions.swarm.verification_gate import VerificationGate
+                    gate = VerificationGate(str(MEMORY_DIR / "hitl.db"))
+                    if gate.check_authorized_bifurcation(time_window_seconds=300.0):
+                        logger.warning("[DO-CALCULUS SURGERY ACCEPTED] Topología bifurcada autorizada en %s.", path.stem)
+                    else:
+                        logger.critical("[FAIL-STOP] Contradicción epistémica en %s: WL cambió pero Merkle no.", path.stem)
+                        raise RuntimeError(f"[FAIL-STOP] Violación de integridad matemática en {path.stem}. WL cambió pero Merkle intacto.")
                 
                 if current_merkle != prev_merkle:
                     changed_files.append((f, current_merkle, current_wl))
