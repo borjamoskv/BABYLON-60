@@ -8,6 +8,7 @@ import sys
 import json
 import os
 import signal
+import hashlib
 from typing import TypedDict, Literal
 
 
@@ -15,13 +16,14 @@ class SecurityError(Exception):
     pass
 
 
-class MonadResult(TypedDict):
-    status: Literal["Success", "Timeout_Entropy_Death", "SecurityError", "RuntimeError"]
+class ScittResult(TypedDict):
+    status: Literal["Success", "Falsified", "Timeout_Entropy_Death", "SecurityError", "RuntimeError", "ByzantineFault"]
     stdout: str
     error: str
+    scitt_receipt: dict[str, str]
 
 
-def validate_ast_sandbox(source_code: str) -> bool:
+def validate_ast_sandbox(source_code: str) -> tuple[bool, str]:
     """
     Evaluates AST for forbidden introspection and memory escapes.
     Implements RULE_AST_REFLECT_01: Validates string constants used in reflections.
@@ -52,7 +54,7 @@ def validate_ast_sandbox(source_code: str) -> bool:
 
             # 3. RULE_AST_REFLECT_01: Block string literals containing dunders or reflection func names
             if isinstance(node, ast.Constant) and isinstance(node.value, str):
-                if node.value.startswith("__") and node.value.endswith("__"):
+                if node.value.startswith("__") and node.value.endswith("__") and node.value != "__main__":
                     raise SecurityError(f"Constante literal con patron dunder prohibida: {node.value}")
                 if node.value in reflection_funcs:
                     raise SecurityError(f"Constante literal con nombre de introspeccion prohibida: {node.value}")
@@ -64,11 +66,18 @@ def validate_ast_sandbox(source_code: str) -> bool:
                 # but let's be extra safe and evaluate concatenated string if possible.
                 pass
 
-            # 5. Block imports
-            if isinstance(node, (ast.Import, ast.ImportFrom)):
-                raise SecurityError("Importacion no permitida en entorno sandboxed")
+            # 5. Block imports except whitelist
+            allowed_imports = {"numpy", "networkx", "warnings", "typing"}
+            if isinstance(node, ast.Import):
+                for alias in node.names:
+                    if alias.name.split('.')[0] not in allowed_imports:
+                        raise SecurityError(f"Importacion no permitida: {alias.name}")
+            elif isinstance(node, ast.ImportFrom):
+                if not node.module or node.module.split('.')[0] not in allowed_imports:
+                    raise SecurityError(f"Importacion no permitida: {node.module}")
 
-        return True
+        ast_hash = hashlib.sha256(ast.dump(tree).encode("utf-8")).hexdigest()
+        return True, ast_hash
     except SecurityError:
         raise
     except SyntaxError as e:
@@ -118,10 +127,10 @@ safe_builtins = {
     'oct': oct, 'ord': ord, 'pow': pow, 'print': print, 'range': range,
     'repr': repr, 'reversed': reversed, 'round': round, 'set': set,
     'slice': slice, 'sorted': sorted, 'str': str, 'sum': sum, 'tuple': tuple,
-    'type': type, 'zip': zip
+    'type': type, 'zip': zip, '__import__': __import__
 }
 # Execute within a restricted global scope (La Monada Estricta)
-env = {"__builtins__": safe_builtins}
+env = {"__builtins__": safe_builtins, "__name__": "__main__"}
 
 stdout_capture = BoundedStringIO()
 
@@ -153,15 +162,15 @@ def _purge_zombies(process: asyncio.subprocess.Process) -> None:
         process.kill()
 
 
-async def run_chaos_monad(source_code: str, timeout_ms: int = 1000, use_seatbelt: bool = False) -> MonadResult:
+async def run_chaos_monad(source_code: str, frontier_tick: str = "GENESIS_TICK", timeout_ms: int = 1000, use_seatbelt: bool = False) -> ScittResult:
     """
     Executes dynamic code in a strict subprocess sandbox.
     Returns a strict Monad Result to protect the core from entropy.
     """
     try:
-        validate_ast_sandbox(source_code)
+        is_valid, ast_hash = validate_ast_sandbox(source_code)
     except SecurityError as e:
-        return {"status": "SecurityError", "stdout": "", "error": str(e)}
+        return {"status": "SecurityError", "stdout": "", "error": str(e), "scitt_receipt": {}}
 
     # Spawn subprocess
     cmd = [sys.executable, "-I", "-c", _SUBPROCESS_WRAPPER]
@@ -193,7 +202,7 @@ async def run_chaos_monad(source_code: str, timeout_ms: int = 1000, use_seatbelt
         except asyncio.TimeoutError:
             # Turing-Sandbox Chaos Isolation (La Sandbox Aislado)
             _purge_zombies(process)
-            return {"status": "Timeout_Entropy_Death", "stdout": "", "error": "Execution exceeded timeout"}
+            return {"status": "Timeout_Entropy_Death", "stdout": "", "error": "Execution exceeded timeout", "scitt_receipt": {}}
     finally:
         # Guarantee no zombie processes or runaway processes remain
         if process.returncode is None:
@@ -204,13 +213,37 @@ async def run_chaos_monad(source_code: str, timeout_ms: int = 1000, use_seatbelt
                 pass
 
     stdout_str = stdout_bytes.decode("utf-8")
+    stderr_str = stderr_bytes.decode("utf-8")
+
+    def generate_receipt(final_status: str, out_text: str) -> dict[str, str]:
+        # Emula la firma COSE Sign1 (SCITT) anclando el AST y la frontera
+        payload = f"{frontier_tick}|{ast_hash}|{final_status}|{len(out_text)}"
+        signature = hashlib.sha256(payload.encode("utf-8")).hexdigest()
+        return {
+            "frontier_tick": frontier_tick,
+            "ast_hash": ast_hash,
+            "signature": signature
+        }
 
     if "---JSON_OUTPUT_MARKER---" in stdout_str:
         parts = stdout_str.split("---JSON_OUTPUT_MARKER---")
         try:
-            return json.loads(parts[1].strip())
+            parsed = json.loads(parts[1].strip())
+            status = parsed.get("status", "RuntimeError")
+            error_str = parsed.get("error", "")
+            
+            # Defensa Bizantina: Interceptamos AssertionError del código ejecutado
+            if "AssertionError" in error_str or "AssertionError" in stderr_str:
+                status = "Falsified"
+                
+            receipt = generate_receipt(status, parsed.get("stdout", ""))
+            return {
+                "status": status,
+                "stdout": parsed.get("stdout", ""),
+                "error": error_str,
+                "scitt_receipt": receipt
+            }
         except json.JSONDecodeError:
-            return {"status": "RuntimeError", "stdout": parts[0], "error": "Failed to decode JSON from subprocess"}
+            return {"status": "RuntimeError", "stdout": parts[0], "error": "Failed to decode JSON", "scitt_receipt": {}}
 
-    stderr_str = stderr_bytes.decode("utf-8")
-    return {"status": "RuntimeError", "stdout": stdout_str, "error": stderr_str}
+    return {"status": "RuntimeError", "stdout": stdout_str, "error": stderr_str, "scitt_receipt": {}}
