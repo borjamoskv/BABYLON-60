@@ -26,7 +26,7 @@ def test_mcp_initialize(tmp_path: Path):
 
 
 def test_mcp_tools_list(tmp_path: Path):
-    server = CortexMCPServer(ledger_path=tmp_path / "ledger.db", mail_ledger_path=tmp_path / "mail.db")
+    server = CortexMCPServer(ledger_path=tmp_path / "ledger.db", mail_ledger_path=tmp_path / "mail.db", causal_gate_path=tmp_path / "causal.db")
     request = {"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}}
     response = server.process_request(request)
     assert response is not None
@@ -36,10 +36,13 @@ def test_mcp_tools_list(tmp_path: Path):
     assert "bft_query_ledger" in tool_names
     assert "bft_verify_merkle_root" in tool_names
     assert "bft_send_sovereign_mail" in tool_names
+    assert "causal_evaluate_task_risk" in tool_names
+    assert "causal_register_sign_off" in tool_names
+    assert "causal_verify_ledger" in tool_names
 
 
 def test_mcp_resources_list(tmp_path: Path):
-    server = CortexMCPServer(ledger_path=tmp_path / "ledger.db", mail_ledger_path=tmp_path / "mail.db")
+    server = CortexMCPServer(ledger_path=tmp_path / "ledger.db", mail_ledger_path=tmp_path / "mail.db", causal_gate_path=tmp_path / "causal.db")
     request = {"jsonrpc": "2.0", "id": 3, "method": "resources/list", "params": {}}
     response = server.process_request(request)
     assert response is not None
@@ -47,10 +50,11 @@ def test_mcp_resources_list(tmp_path: Path):
     uris = [r["uri"] for r in resources]
     assert "bft://ledger/status" in uris
     assert "bft://merkle/attestation" in uris
+    assert "bft://causal/ledger" in uris
 
 
 def test_mcp_tool_bft_append_and_query(tmp_path: Path):
-    server = CortexMCPServer(ledger_path=tmp_path / "ledger.db", mail_ledger_path=tmp_path / "mail.db")
+    server = CortexMCPServer(ledger_path=tmp_path / "ledger.db", mail_ledger_path=tmp_path / "mail.db", causal_gate_path=tmp_path / "causal.db")
 
     # Append
     req_append = {
@@ -85,8 +89,68 @@ def test_mcp_tool_bft_append_and_query(tmp_path: Path):
     assert query_data["entries"][0]["event_type"] == "TEST_EVENT"
 
 
+def test_mcp_causal_tools_and_resources(tmp_path: Path):
+    server = CortexMCPServer(ledger_path=tmp_path / "ledger.db", mail_ledger_path=tmp_path / "mail.db", causal_gate_path=tmp_path / "causal.db")
+
+    # 1. Evaluate risk
+    req_eval = {
+        "jsonrpc": "2.0",
+        "id": 10,
+        "method": "tools/call",
+        "params": {
+            "name": "causal_evaluate_task_risk",
+            "arguments": {"task_payload": {"action": "deploy_production"}}
+        }
+    }
+    res_eval = server.process_request(req_eval)
+    assert res_eval is not None
+    assert "CRITICAL" in res_eval["result"]["content"][0]["text"]
+
+    # 2. Register sign-off
+    req_sign = {
+        "jsonrpc": "2.0",
+        "id": 11,
+        "method": "tools/call",
+        "params": {
+            "name": "causal_register_sign_off",
+            "arguments": {
+                "execution_id": "EXEC-MCP-001",
+                "action_name": "deploy_production",
+                "decision": "APPROVED"
+            }
+        }
+    }
+    res_sign = server.process_request(req_sign)
+    assert res_sign is not None
+    assert "SHA256 Recpt" in res_sign["result"]["content"][0]["text"]
+
+    # 3. Verify causal ledger tool
+    req_verify = {
+        "jsonrpc": "2.0",
+        "id": 12,
+        "method": "tools/call",
+        "params": {"name": "causal_verify_ledger", "arguments": {}}
+    }
+    res_verify = server.process_request(req_verify)
+    assert res_verify is not None
+    assert "VERIFIED OK" in res_verify["result"]["content"][0]["text"]
+
+    # 4. Read causal resource
+    req_res = {
+        "jsonrpc": "2.0",
+        "id": 13,
+        "method": "resources/read",
+        "params": {"uri": "bft://causal/ledger"}
+    }
+    res_res = server.process_request(req_res)
+    assert res_res is not None
+    data = json.loads(res_res["result"]["contents"][0]["text"])
+    assert data["causal_gate_status"] == "ACTIVE"
+    assert data["scitt_integrity_verified"] is True
+
+
 def test_mcp_resource_read(tmp_path: Path):
-    server = CortexMCPServer(ledger_path=tmp_path / "ledger.db", mail_ledger_path=tmp_path / "mail.db")
+    server = CortexMCPServer(ledger_path=tmp_path / "ledger.db", mail_ledger_path=tmp_path / "mail.db", causal_gate_path=tmp_path / "causal.db")
     request = {"jsonrpc": "2.0", "id": 6, "method": "resources/read", "params": {"uri": "bft://merkle/attestation"}}
     response = server.process_request(request)
     assert response is not None
