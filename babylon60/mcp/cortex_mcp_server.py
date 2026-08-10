@@ -263,9 +263,11 @@ class CortexMCPServer:
         self,
         ledger_path: Path | str = DEFAULT_LEDGER_PATH,
         mail_ledger_path: Path | str = DEFAULT_MAIL_LEDGER_PATH,
+        causal_gate_path: Path | str = DEFAULT_CAUSAL_GATE_PATH,
     ) -> None:
         self.ledger = CortexPersistLedger(ledger_path)
         self.mail_ledger = CortexPersistLedger(mail_ledger_path)
+        self.verification_gate = VerificationGate(db_path=str(causal_gate_path))
         self._running = False
         self._request_handlers: dict[str, Any] = {
             "initialize": self._handle_initialize,
@@ -343,6 +345,9 @@ class CortexMCPServer:
             "bft_query_ledger": self._tool_query_ledger,
             "bft_verify_merkle_root": self._tool_verify_merkle_root,
             "bft_send_sovereign_mail": self._tool_send_sovereign_mail,
+            "causal_evaluate_task_risk": self._tool_causal_evaluate_task_risk,
+            "causal_register_sign_off": self._tool_causal_register_sign_off,
+            "causal_verify_ledger": self._tool_causal_verify_ledger,
         }
 
         handler = dispatch.get(tool_name)
@@ -378,6 +383,35 @@ class CortexMCPServer:
                 "merkle_root": merkle_root,
                 "integrity_verified": integrity,
                 "attested_at": datetime.now(timezone.utc).isoformat(),
+                "server": MCP_SERVER_NAME,
+                "version": MCP_SERVER_VERSION,
+            }
+            return {
+                "contents": [
+                    {
+                        "uri": uri,
+                        "mimeType": "application/json",
+                        "text": json.dumps(result, indent=2),
+                    }
+                ]
+            }
+        elif uri == "bft://causal/ledger":
+            integrity = self.verification_gate.verify_ledger_integrity()
+            result = {
+                "causal_gate_status": "ACTIVE",
+                "scitt_integrity_verified": integrity,
+                "db_path": str(self.verification_gate.db_path),
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+            }
+            return {
+                "contents": [
+                    {
+                        "uri": uri,
+                        "mimeType": "application/json",
+                        "text": json.dumps(result, indent=2),
+                    }
+                ]
+            }
                 "server": MCP_SERVER_NAME,
                 "version": MCP_SERVER_VERSION,
             }
