@@ -137,13 +137,15 @@ def compute_complexity(metrics: DomainMetrics) -> float:
     # Error pressure: normalized by diminishing returns (log scale)
     error_pressure = math.log1p(metrics.error_count) * 0.8
 
-    # Ghost pressure: debt accumulation
-    ghost_pressure = math.log1p(metrics.ghost_count) * 0.5
+    # C5-REAL Structural Pressure (formerly Ghost Pressure)
+    # Replaces scalar ghost_count with rigorous topological debt.
+    # Higher resistance (lower redundancy) and higher H1 obstruction increase complexity.
+    structural_pressure = (metrics.effective_resistance * 0.01) + (metrics.h1_sheaf_obstruction * 0.5)
 
     # Bridge relief: cross-domain integration reduces complexity
     bridge_relief = min(1.0, metrics.bridge_count * 0.1)
 
-    complexity = health_kl + error_pressure + ghost_pressure - bridge_relief
+    complexity = health_kl + error_pressure + structural_pressure - bridge_relief
     return max(0.0, complexity)
 
 
@@ -178,10 +180,11 @@ def compute_surprise(metrics: DomainMetrics) -> float:
     # Error surprise: each error is an unexpected observation
     error_surprise = metrics.error_count * 0.3
 
-    # Ghost surprise: each ghost is unresolved uncertainty
-    ghost_surprise = metrics.ghost_count * 0.2
+    # C5-REAL Structural Surprise:
+    # Highly negative Forman-Ricci curvature is an unexpected topological bottleneck.
+    structural_surprise = max(0.0, -metrics.min_forman_ricci_curvature * 0.1)
 
-    return health_surprise + error_surprise + ghost_surprise
+    return health_surprise + error_surprise + structural_surprise
 
 
 def compute_free_energy(metrics: DomainMetrics) -> FreeEnergyState:
@@ -232,8 +235,8 @@ def compute_strategy_efe(
     pragmatic = mutation_delta * sovereign_gap
 
     # Epistemic value: strategies that fire in uncertain domains
-    # (high ghost_count, low decision_count) have higher info gain
-    uncertainty = math.log1p(metrics.ghost_count + 1) / (
+    # (high structural debt, low decision_count) have higher info gain
+    uncertainty = (metrics.effective_resistance + metrics.h1_sheaf_obstruction * 10) / (
         math.log1p(metrics.decision_count + 1) + 1e-8
     )
     epistemic = min(2.0, uncertainty * 0.5)
