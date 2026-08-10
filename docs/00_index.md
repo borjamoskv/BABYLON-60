@@ -53,6 +53,7 @@ graph TD
 | `spec_exergy_ontology.md` | Especificación de la métrica de exergía | `axiom_axiomatization.md` | `strike_rs/atms.rs` |
 | `spec_cryptographic_profile.md` | Perfil criptográfico del sistema | — | `L1_sink/` |
 | `spec_security_model.md` | Modelo de seguridad y trust boundaries | `spec_cryptographic_profile.md` | `AGENTS.md` |
+| `spec_causal_hitl_governance.md` | Especificación de Gobernanza Causal HITL y Agentes Operacionales | `AGENTS.md` | `scripts/poc_causal_hitl_agent.py` |
 | `audit_babylon60_v2.5.md` | Auditoría histórica v2.5 | — | — |
 
 ---
