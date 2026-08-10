@@ -282,6 +282,92 @@ const _: () = assert!(
     "SymbolicMessage exceeds cache line: breaks SPSC zero-contention invariant"
 );
 
+// ---------------------------------------------------------------------------
+// Etapa 1: Bridge Functor (Continuo -> Discreto)
+// ---------------------------------------------------------------------------
 
+extern crate alloc;
+use core::cmp::Ordering;
 
+/// Errores del puente. Todos son fail-stop hacia el supervisor.
+#[derive(Debug, Clone)]
+pub enum BridgeError<S> {
+    IsometryViolation { epsilon: S, measured: S },
+    MonotonicityViolation,
+    JoinNonHomomorphic { epsilon: S, defect: S },
+    NaturalityBroken,
+    IntegrityViolation,
+}
 
+pub struct FisherForm<S>(pub alloc::vec::Vec<alloc::vec::Vec<S>>);
+
+pub trait BeliefManifold {
+    type Point: Clone;
+    type Tangent;
+    type Scalar: Copy + PartialOrd;
+
+    fn fisher(&self, at: &Self::Point) -> FisherForm<Self::Scalar>;
+    fn dist_fr(&self, a: &Self::Point, b: &Self::Point) -> Self::Scalar;
+    fn natural_gradient(&self, at: &Self::Point, grad_free_energy: &Self::Tangent) -> Self::Tangent;
+}
+
+pub trait BoundedJoinSemilattice: Clone {
+    fn bottom() -> Self;
+    fn join(&self, other: &Self) -> Self;
+    fn leq(&self, other: &Self) -> bool;
+    fn partial_cmp_lat(&self, other: &Self) -> Option<Ordering> {
+        match (self.leq(other), other.leq(self)) {
+            (true, true)   => Some(Ordering::Equal),
+            (true, false)  => Some(Ordering::Less),
+            (false, true)  => Some(Ordering::Greater),
+            (false, false) => None,
+        }
+    }
+}
+
+pub trait MerkleAuthenticated {
+    type Digest: Eq + Clone;
+    fn digest(&self) -> Self::Digest;
+}
+
+pub trait FisherQuantizer {
+    type Manifold: BeliefManifold;
+    type Lattice: BoundedJoinSemilattice + MerkleAuthenticated;
+    type Residual;
+
+    fn quantize(
+        &self,
+        manifold: &Self::Manifold,
+        x: &<Self::Manifold as BeliefManifold>::Point,
+    ) -> Result<(Self::Lattice, Self::Residual), BridgeError<<Self::Manifold as BeliefManifold>::Scalar>>;
+
+    fn reconstruct(
+        &self,
+        cell: &Self::Lattice,
+        residual: &Self::Residual,
+    ) -> <Self::Manifold as BeliefManifold>::Point;
+}
+
+pub trait BridgeFunctor: FisherQuantizer {
+    const EPSILON: <Self::Manifold as BeliefManifold>::Scalar;
+
+    fn assert_isometry(
+        &self,
+        m: &Self::Manifold,
+        a: &<Self::Manifold as BeliefManifold>::Point,
+        b: &<Self::Manifold as BeliefManifold>::Point,
+    ) -> Result<(), BridgeError<<Self::Manifold as BeliefManifold>::Scalar>>;
+
+    fn assert_join_homomorphism(
+        &self,
+        m: &Self::Manifold,
+        a: &<Self::Manifold as BeliefManifold>::Point,
+        b: &<Self::Manifold as BeliefManifold>::Point,
+    ) -> Result<(), BridgeError<<Self::Manifold as BeliefManifold>::Scalar>>;
+
+    fn assert_naturality(
+        &self,
+        m: &Self::Manifold,
+        x: &<Self::Manifold as BeliefManifold>::Point,
+    ) -> Result<(), BridgeError<<Self::Manifold as BeliefManifold>::Scalar>>;
+}
