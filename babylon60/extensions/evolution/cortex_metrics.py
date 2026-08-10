@@ -115,6 +115,12 @@ class DomainMetrics:
     llm_error_count: int = 0
     avg_llm_latency_ms: float = 0.0
     cascade_depth_avg: float = 0.0
+    
+    # C5-REAL: Triple Rigor (replaces scalar ghost debt)
+    effective_resistance: float = 0.0
+    min_forman_ricci_curvature: float = 0.0
+    h1_sheaf_obstruction: float = 0.0
+    
     _fetched_at: float = field(default_factory=time.time)
 
     # ── Derived Signals ────────────────────────────────────────
@@ -130,11 +136,18 @@ class DomainMetrics:
 
     @property
     def ghost_density(self) -> float:
-        """Normalized ghost load ∈ [0, 1].
+        """Normalized structural debt pressure ∈ [0, 1].
 
-        Technical debt pressure: 0 ghosts → 0.0, 20+ → 1.0.
+        Technical debt pressure based on topological bottlenecks (Forman-Ricci)
+        and global redundancy (Effective Resistance).
         """
-        return min(1.0, self.ghost_count / 20.0)
+        # Negative curvature is a bottleneck. We invert it for pressure.
+        curvature_penalty = max(0.0, -self.min_forman_ricci_curvature / 10.0)
+        # Low resistance = high redundancy. High resistance = fragile graph.
+        resistance_penalty = min(1.0, self.effective_resistance / 100.0)
+        
+        # H1 Obstruction is already [0,1], high obstruction -> high debt.
+        return min(1.0, 0.4 * curvature_penalty + 0.4 * self.h1_sheaf_obstruction + 0.2 * resistance_penalty)
 
     @property
     def bridge_score(self) -> float:
@@ -186,7 +199,7 @@ class DomainMetrics:
             self.bridge_count * 2.0  # Hebbian: cross-project transfer
             + self.decision_count * 0.5  # Crystallised knowledge
             - self.error_count * 1.5  # Anti-Hebbian: failure signal
-            - self.ghost_count * 1.0  # Debt accumulation
+            - (self.ghost_density * 20.0) * 1.0  # Topological structural debt pressure (C5)
             - self.llm_error_count * 2.5  # Ω₃: Critical failure (LLM out)
             - (self.avg_llm_latency_ms / 500.0)  # Latency pressure
         )
@@ -212,6 +225,9 @@ class DomainMetrics:
             "health": round(self.health_score, 2),
             "fitness_delta": round(self.fitness_delta, 2),
             "decision_success_rate": round(self.decision_success_rate, 4),
+            "effective_resistance": round(self.effective_resistance, 2),
+            "min_ricci_curvature": round(self.min_forman_ricci_curvature, 2),
+            "h1_obstruction": round(self.h1_sheaf_obstruction, 4),
         }
 
 
@@ -282,6 +298,34 @@ async def fetch_domain_metrics(
             ) as cur:
                 row = await cur.fetchone()
                 m.ghost_count = row[0] if row else 0
+
+            # ── C5-REAL Topological Metrics (Debt Tensor Demolition) ──
+            try:
+                import networkx as nx
+                from babylon60.core.discrete_curvature import get_structural_debt_triple
+                G = nx.DiGraph()
+                
+                # Fetch bridges to build the topology for these projects
+                # A bridge in Cortex usually has a source and target project.
+                # Since the schema isn't fully explicit here, we approximate the graph 
+                # using the ghosts and facts tied to the projects.
+                async with conn.execute(
+                    f"SELECT id, project FROM facts WHERE project IN ({placeholders}) LIMIT 100",
+                    projects
+                ) as cur:
+                    facts = await cur.fetchall()
+                    for f in facts:
+                        G.add_node(f[0])
+                        G.add_edge(f[1], f[0]) # Project -> Fact dependency
+                        
+                if G.number_of_nodes() > 1:
+                    triple = get_structural_debt_triple(G)
+                    m.effective_resistance = triple["effective_resistance"]
+                    m.min_forman_ricci_curvature = triple["min_forman_ricci_curvature"]
+                    m.h1_sheaf_obstruction = triple["h1_sheaf_obstruction"]
+            except ImportError:
+                # If networkx or numpy is missing, gracefully degrade
+                pass
 
             # ── Last decision recency (phasic salience) ──
             async with conn.execute(
