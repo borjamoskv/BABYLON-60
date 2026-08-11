@@ -2,6 +2,7 @@ import os
 import httpx
 from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
+from swarm_orchestrator import run_swarm_orchestrator
 
 load_dotenv()
 
@@ -51,6 +52,11 @@ async def kimi_audit(file_content: str, criteria: str) -> str:
         {"role": "user", "content": f"Criterios de auditoría:\n{criteria}\n\nCódigo a auditar:\n```\n{file_content}\n```"}
     ]
     return await call_moonshot(messages)
+
+@mcp.tool()
+async def kimi_swarm(prompt: str, p_cores: int = 4, s_threads: int = 1) -> str:
+    """Orquestar un clúster masivo de subagentes para resolver una tarea compleja en paralelo."""
+    return await run_swarm_orchestrator(prompt, p_cores, s_threads)
 
 if __name__ == "__main__":
     # Ejecutamos el servidor MCP utilizando stdio (Zero fricción, no consume puertos locales en background)
