@@ -38,7 +38,7 @@ from babylon60.extensions.skills.taxonomy import (
 )
 
 SKILL_FILENAME = "SKILL.md"
-FRONTMATTER_PATTERN = re.compile(r"^---\s*\n(.*?)\n---", re.DOTALL)
+FRONTMATTER_PATTERN = re.compile(r"^\s*---\s*\n(.*?)\n---", re.DOTALL)
 
 
 # ─── Dataclasses ─────────────────────────────────────────────────────────────
@@ -317,7 +317,7 @@ class SkillRegistry:
     def _parse_skill_file(self, path: Path) -> SkillManifest:
         """Parses a SKILL.md and extracts the YAML frontmatter."""
         content = path.read_text(encoding="utf-8")
-        match = FRONTMATTER_PATTERN.match(content)
+        match = FRONTMATTER_PATTERN.search(content)
         if not match:
             # Skill without frontmatter - name derived from directory
             return SkillManifest(
@@ -326,9 +326,21 @@ class SkillRegistry:
                 description="[no frontmatter]",
             )
 
-        if yaml is None:
-            raise ImportError("pyyaml is required to load YAML frontmatter.")
-        raw = yaml.safe_load(match.group(1)) or {}
+        yaml_text = match.group(1)
+        raw: dict[str, Any] = {}
+        if yaml is not None:
+            try:
+                raw = yaml.safe_load(yaml_text) or {}
+            except YAMLError:
+                # Fallback parser for unquoted prose colons in description
+                raw = {}
+                for line in yaml_text.splitlines():
+                    if ":" in line:
+                        k, v = line.split(":", 1)
+                        key = k.strip()
+                        if key and key not in raw:
+                            raw[key] = v.strip()
+
         return self._build_manifest(path, raw)
 
     def _build_manifest(self, path: Path, raw: dict[str, Any]) -> SkillManifest:
