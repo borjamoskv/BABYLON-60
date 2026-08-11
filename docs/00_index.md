@@ -53,7 +53,8 @@ graph TD
 | `spec_exergy_ontology.md` | Especificación de la métrica de exergía | `axiom_axiomatization.md` | `strike_rs/atms.rs` |
 | `spec_cryptographic_profile.md` | Perfil criptográfico del sistema | — | `L1_sink/` |
 | `spec_security_model.md` | Modelo de seguridad y trust boundaries | `spec_cryptographic_profile.md` | `AGENTS.md` |
-| `spec_causal_hitl_governance.md` | Especificación de Gobernanza Causal HITL y Agentes Operacionales | `AGENTS.md` | `scripts/poc_causal_hitl_agent.py` |
+| `spec_causal_hitl_governance.md` | Especificación de Gobernanza Causal HITL y Agentes Operacionales | `AGENTS.md` | `scripts/c5_demos/poc_causal_hitl_agent.py` |
+| `artifact_format_v1.md` | Especificación del formato estructurado de artefactos | — | `cortex/` |
 | `audit_babylon60_v2.5.md` | Auditoría histórica v2.5 | — | — |
 
 ---
@@ -77,13 +78,23 @@ graph TD
 | `guide_babylon60_complete.md` | Nuevos contribuidores | `spec_architecture.md` |
 | `guide_explanation.md` | Audiencia técnica externa | `axiom_ontology.md` |
 | `guide_experimental.md` | Operadores internos | `spec_technical.md` |
-| `guide_commercial_license.md` | Legal / Partners comerciales | — |
 | `guide_repository_source_of_truth.md` | Todos los agentes | `AGENTS.md` |
 | `guide_skill_arsenal_taxonomy.md` | ✅ VERIFIED — Mapeo completo (39 skills físicas / 143 operadores) | `docs/skills.json` |
+| `tonnetz_audit_guide.md` | Guía de auditoría de topología Tonnetz | `06_theory/` |
+| `tutorial_hello_causal.md` | Tutorial de inicio para programación causal | `spec_architecture.md` |
+| `QUICKSTART_ENTERPRISE.md` | Guía de despliegue rápido Enterprise | `05_gtm/` |
 
 ---
 
 ## 04_research — SOTA · Manifiestos · Substack
+
+### Whitepapers & Arquitectura Swarm
+| Archivo | Tema |
+|:---|:---|
+| `centuria_swarm_architecture.md` | Arquitectura del enjambre Centuria BFT |
+| `legion_222_swarm_topology.md` | Topología de 222 agentes enjambre C5-REAL |
+| `eu_ai_act_compliance_whitepaper.md` | Cumplimiento legal y técnico de la EU AI Act |
+| `evaluacion_falsacion_llm_models_2026.md` | Evaluación popperiana de modelos LLM 2026 |
 
 ### `sota/` — Estado del Arte
 | Archivo | Tema | Cristalizado en |
@@ -115,10 +126,38 @@ graph TD
 
 | Archivo | Contenido |
 |:---|:---|
-| `cancer_sistemas.md` | El cáncer como sistema complejo — isomorfismo base |
-| `isomorfismos_cancer.md` | Mapa de isomorfismos estructurales |
-| `dinamica_atractores_cancer.md` | Dinámica de atractores y bifurcación |
-| `falsabilidad_empirica_cancer.md` | Protocolo de falsación popperiana aplicado |
+| `iso_cancer_sistemas.md` | El cáncer como sistema complejo — isomorfismo base |
+| `iso_isomorfismos_cancer.md` | Mapa de isomorfismos estructurales |
+| `iso_dinamica_atractores_cancer.md` | Dinámica de atractores y bifurcación |
+| `iso_falsabilidad_empirica_cancer.md` | Protocolo de falsación popperiana aplicado |
+
+---
+
+## 05_gtm — Go-To-Market & Estrategia Comercial
+
+| Archivo | Contenido |
+|:---|:---|
+| `PITCH_DECK.md` | Presentación ejecutiva y propuesta de valor C5-REAL |
+| `VALUATION_STRATEGY.md` | Estrategia de valoración y modelo financiero |
+| `vc_data_room_manifest.md` | Manifiesto del Data Room para VCs e inversores |
+| `ciso_cold_email_playbook.md` | Playbook de prospección comercial para CISOs |
+| `enterprise_poc_agreement_term_sheet.md` | Term Sheet estándar para PoC Enterprise |
+| `forensic_quarantine_poc_spec.md` | Especificación de PoC de Cuarentena Forense |
+
+---
+
+## Audits & Compliance — Certificaciones Multilingües
+
+| Archivo | Idioma / Tipo |
+|:---|:---|
+| `audits/CERTIFICADO_ES.md` | Certificado de Auditoría y Cumplimiento (Español) |
+| `audits/COMPLIANCE_CERTIFICATE_EN.md` | Compliance Certificate (English) |
+| `audits/COMPLIANCE_CERTIFICATE_DE.md` | Konformitätszertifikat (Deutsch) |
+| `audits/COMPLIANCE_CERTIFICATE_FR.md` | Certificat de Conformité (Français) |
+| `audits/COMPLIANCE_CERTIFICATE_IT.md` | Certificato di Conformità (Italiano) |
+| `audits/HERO_DEMO_CERTIFICATE_ES.md` | Certificado Hero Demo (Español) |
+| `audits/HERO_DEMO_CERTIFICATE_EN.md` | Hero Demo Certificate (English) |
+| `audits/IP_INVENTION_DISCLOSURE.md` | Declaración e Inventario de Propiedad Intelectual |
 
 ---
 
