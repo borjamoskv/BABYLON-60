@@ -7,6 +7,8 @@ pub mod kernel;
 pub mod ledger;
 pub mod context;
 pub mod inference;
+pub mod ws_server;
+
 
 use std::sync::{Arc, Mutex};
 use tauri::State;
@@ -115,6 +117,13 @@ pub fn run() {
 
     // [ AXIOMA: NOMENCLATURE_IS_STRUCTURE ] — init_kernel boots 3D semantic + 4D tensor
     kernel::init_kernel();
+
+    std::thread::spawn(|| {
+        let rt = tokio::runtime::Runtime::new().unwrap();
+        rt.block_on(async {
+            ws_server::start_server().await;
+        });
+    });
 
     let ctx_db = context::init_db().expect("Failed to initialize cognitive state db");
     let ctx_state = context::ContextState(std::sync::Mutex::new(context::ContextStateInner {

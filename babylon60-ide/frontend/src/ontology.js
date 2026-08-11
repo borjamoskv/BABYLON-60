@@ -1,11 +1,6 @@
 // BABYLON60 IDE — Ontology Bridge (KINETIC BIND RAW)
 // Semantic vector dispatch over Tauri IPC
-import { isTauri } from './api.js';
-
-let invoke = null;
-if (isTauri) {
-  import('@tauri-apps/api/core').then(m => { invoke = m.invoke; }).catch(() => {});
-}
+import { wsInvoke } from './api.js';
 
 // Domain, Primitive, Modifier enums mirrored from Rust lexicon
 export const Domain    = Object.freeze(['SOURCE','MATRIX','PULSE','KINETIC','LOGIC','VECTOR','STORAGE','OSINT','CLOCK','COMPILER']);
@@ -17,9 +12,7 @@ export const Modifier  = Object.freeze(['RAW','ATOMIC','PERSIST','EPHEMERAL','AS
  * @returns {Promise<Array<{path: {domain: string, primitive: string, modifier: string}, index: number, description: string}>>}
  */
 export async function listVectors() {
-  if (isTauri && invoke) {
-    return await invoke('list_ontology_vectors');
-  }
+  return await wsInvoke('list_ontology_vectors');
   const res = await fetch('/api/ontology/vectors');
   if (!res.ok) throw new Error(`Ontology fetch failed: ${res.statusText}`);
   return res.json();
@@ -33,9 +26,7 @@ export async function listVectors() {
  * @returns {Promise<{vector: string, index: number, output: string}>}
  */
 export async function dispatchVector(domain, primitive, modifier) {
-  if (isTauri && invoke) {
-    return await invoke('dispatch_vector', { domain, primitive, modifier });
-  }
+  return await wsInvoke('dispatch_vector', { domain, primitive, modifier });
   const res = await fetch('/api/ontology/dispatch', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

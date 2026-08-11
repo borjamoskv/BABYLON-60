@@ -23,58 +23,47 @@ class ScittResult(TypedDict):
     scitt_receipt: dict[str, str]
 
 
+def _check_ast_node(node: ast.AST, reflection_funcs: set[str], allowed_imports: set[str]) -> None:
+    # 1. Block Dunder Attributes (Direct access)
+    if isinstance(node, ast.Attribute) and isinstance(node.attr, str) and node.attr.startswith("__") and node.attr.endswith("__"):
+        raise SecurityError(f"Acceso a atributo dunder prohibido: {node.attr}")
+
+    # 2. Block direct call to reflection functions
+    if isinstance(node, ast.Name) and node.id in reflection_funcs:
+        raise SecurityError(f"Llamada a funcion de introspeccion prohibida: {node.id}")
+
+    # 3. RULE_AST_REFLECT_01: Block string literals containing dunders or reflection func names
+    if isinstance(node, ast.Constant) and isinstance(node.value, str):
+        val = node.value
+        is_forbidden_dunder = val.startswith("__") and val.endswith("__") and val != "__main__"
+        if is_forbidden_dunder or val in reflection_funcs:
+            raise SecurityError(f"Constante literal prohibida: {val}")
+
+    # 4. Block imports except whitelist
+    if isinstance(node, ast.Import):
+        forbidden = [a.name for a in node.names if a.name.split('.')[0] not in allowed_imports]
+        if forbidden:
+            raise SecurityError(f"Importacion no permitida: {forbidden[0]}")
+
+    if isinstance(node, ast.ImportFrom) and (not node.module or node.module.split('.')[0] not in allowed_imports):
+        raise SecurityError(f"Importacion no permitida: {node.module}")
+
+
 def validate_ast_sandbox(source_code: str) -> tuple[bool, str]:
     """
     Evaluates AST for forbidden introspection and memory escapes.
     Implements RULE_AST_REFLECT_01: Validates string constants used in reflections.
     """
+    reflection_funcs = {
+        "getattr", "setattr", "delattr", "__getattribute__",
+        "eval", "exec", "compile", "__import__",
+    }
+    allowed_imports = {"numpy", "networkx", "warnings", "typing"}
+
     try:
         tree = ast.parse(source_code)
-
-        reflection_funcs = {
-            "getattr",
-            "setattr",
-            "delattr",
-            "__getattribute__",
-            "eval",
-            "exec",
-            "compile",
-            "__import__",
-        }
-
         for node in ast.walk(tree):
-            # 1. Block Dunder Attributes (Direct access)
-            if isinstance(node, ast.Attribute):
-                if isinstance(node.attr, str) and node.attr.startswith("__") and node.attr.endswith("__"):
-                    raise SecurityError(f"Acceso a atributo dunder prohibido: {node.attr}")
-
-            # 2. Block direct call to reflection functions
-            if isinstance(node, ast.Name) and node.id in reflection_funcs:
-                raise SecurityError(f"Llamada a funcion de introspeccion prohibida: {node.id}")
-
-            # 3. RULE_AST_REFLECT_01: Block string literals containing dunders or reflection func names
-            if isinstance(node, ast.Constant) and isinstance(node.value, str):
-                if node.value.startswith("__") and node.value.endswith("__") and node.value != "__main__":
-                    raise SecurityError(f"Constante literal con patron dunder prohibida: {node.value}")
-                if node.value in reflection_funcs:
-                    raise SecurityError(f"Constante literal con nombre de introspeccion prohibida: {node.value}")
-
-            # 4. Block f-strings containing dunders or reflections (Constant parts)
-            # F-strings evaluate to ast.JoinedStr with ast.Constant parts and ast.FormattedValue parts
-            if isinstance(node, ast.JoinedStr):
-                # The constants inside f-strings are caught by the ast.Constant check above,
-                # but let's be extra safe and evaluate concatenated string if possible.
-                pass
-
-            # 5. Block imports except whitelist
-            allowed_imports = {"numpy", "networkx", "warnings", "typing"}
-            if isinstance(node, ast.Import):
-                for alias in node.names:
-                    if alias.name.split('.')[0] not in allowed_imports:
-                        raise SecurityError(f"Importacion no permitida: {alias.name}")
-            elif isinstance(node, ast.ImportFrom):
-                if not node.module or node.module.split('.')[0] not in allowed_imports:
-                    raise SecurityError(f"Importacion no permitida: {node.module}")
+            _check_ast_node(node, reflection_funcs, allowed_imports)
 
         ast_hash = hashlib.sha256(ast.dump(tree).encode("utf-8")).hexdigest()
         return True, ast_hash
