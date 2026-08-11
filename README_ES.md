@@ -77,106 +77,54 @@ Exportador integrado que genera certificados auditables para las autoridades de 
 
 ---
 
-## 📚 Matriz Directoria de Documentación
+## 📚 Arquitectura del Monorepo e Índice de Subproyectos
 
-| Dominio | Documento | Descripción |
+| Módulo del Subproyecto | Documentación README | Enfoque / Tecnología |
 | :--- | :--- | :--- |
-| **Visión** | [Manifiesto Fundacional v4.0](./docs/00_MANIFESTO.md) | Tesis central, los 4 pilares del foso tecnológico, el ROI comercial y el Juramento del Ingeniero |
-| **Investigación** | [EU AI Act Compliance Whitepaper](./docs/04_research/eu_ai_act_compliance_whitepaper.md) | Mapeo detallado para los Artículos 9, 10, 11, 12, 13 y 14 del Reglamento UE 2024/1689 |
-| **Investigación** | [Technical Whitepaper v1.0](./docs/WHITEPAPER.md) | Paper formal: F60, Ledger Merkle DAG, Self-Falsification Engine, Proof IR |
-| **Guías** | [Quickstart Enterprise](./docs/03_guides/QUICKSTART_ENTERPRISE.md) | Guía de onboarding DevOps en 5 mins para Docker Compose y Kubernetes/Helm |
-| **Guías** | [Tutorial: Hola Mundo Causal](./docs/03_guides/tutorial_hello_causal.md) | Guía paso a paso contrastando BABYLON-60 vs Python/asyncio |
-| **Guías** | [Guía Auditoría Armónica Tonnetz](./docs/03_guides/tonnetz_audit_guide.md) | Supervisión humana (Art. 14) vía red armónica espacial Neo-Riemanniana |
-| **Seguridad** | [Threat Model & Mitigations v4.0](./docs/02_ontology/security_threat_model_v4.md) | Modelo de amenazas Fase II: Redacción criptográfica, Grace Period y Bounds |
-| **Especificación**| [Especificación Formal v4.0](./SPECIFICATION.md) | Semántica operacional completa, ISA B60, Proof IR, Topology P2P |
+| **Rust Kernel** | [`kernel/`](./kernel/README.md) | Motor de ejecución `#![no_std]`, scheduler $F_{60}$, cuarentena WORM. |
+| **Cortex Substrate** | [`cortex/`](./cortex/README.md) | Memoria cognitiva Python (`cortex-persist`), SQLite WAL, Servidor MCP. |
+| **Sovereign IDE** | [`babylon60-ide/`](./babylon60-ide/README.md) | IDE Tauri v2 Escritorio/Móvil, backend FastAPI OpenRouter, IPC Iceoryx2. |
+| **Web Telemetry UI** | [`web/`](./web/README.md) | Visualizador de telemetría React 18 + WASM y montado local via FSA API. |
+| **Tonnetz Human Oversight**| [`tonnetz_app/`](./tonnetz_app/README.md) | Visualizador armónico tórico Neo-Riemanniano (EU AI Act Art. 14). |
+| **Causal Attestation** | [`attestation/`](./attestation/README.md) | Notariado hardware TPM 2.0 PCR Quote y anclaje de raíz Merkle. |
+| **DSL Compiler** | [`compiler/`](./compiler/README.md) | Lexer/Parser `.b60`, Bytecode IR B60, emisor de teoremas Lean 4. |
+| **Strike RS Acceleration**| [`strike_rs/`](./strike_rs/README.md) | Bypass nativo del GIL PyO3, memoria compartida Iceoryx2, motor BLAKE3. |
+| **Master Ledger BFT** | [`babylon60/bft/`](./babylon60/bft/README.md) | Log Tamper-Evident Escalón 3 con testigo externo Git Sentinel. |
+| **EVM On-Chain Notary** | [`anvil_yung/`](./anvil_yung/README.md) | Smart contracts Foundry para notariado de raíz Merkle en EVM. |
+| **Causal Transpiler** | [`causal_isomorphism/`](./causal_isomorphism/README.md)| Transpilador funcional F# y verificador de tipos lineales. |
+| **Continuous Timeline IR** | [`timeline_ir/`](./timeline_ir/README.md) | Kernel de simulación de grafos de estado en tiempo continuo ($State(t)$). |
+| **APEX Clinical Copilot** | [`docs/06_theory/`](./docs/06_theory/README_APEX.md) | Copiloto determinista de riesgo de enmiendas en ensayos clínicos. |
+| **Documentation Hub** | [`docs/`](./docs/README.md) | Índice central de especificaciones, whitepapers y playbooks GTM. |
 
 ---
 
 ## 🕹️ Integración de Agentes y Consola de Mando (Antigravity & WA-Nexus)
 
-BABYLON-60 no es solo un kernel pasivo; se acopla directamente a tu stack de IA favorito para dotarlo de autonomía determinista, "Deep Research" (AUTODIDACT-Ω) y ejecución forzada a cero fricción (ULTRATHINK).
+BABYLON-60 se acopla directamente a tu stack de IA favorito para dotarlo de autonomía determinista, "Deep Research" (AUTODIDACT-Ω) y ejecución forzada a cero fricción (ULTRATHINK).
 
 ### 1. Inyección en LLMs (Model Context Protocol)
-El kernel es agnóstico y expone su arsenal de herramientas locales mediante el estándar MCP (`cortex_mcp_server.py`):
-- **Para Claude Code (Anthropic) y Cursor/Codex (OpenAI):** Soporte MCP nativo. Añade el servidor local en los *settings* (o usa `claude mcp add`) y tu IA heredará instantáneamente el escudo WORM Quarantine y la capacidad de ejecutar acciones físicas en tu máquina.
-- **Para ChatGPT (Web):** Exporta el arsenal de BABYLON-60 en formato JSON *OpenAPI*, crea un Custom GPT e inyéctale el esquema para operar el kernel desde la web.
+El kernel expone su arsenal de herramientas locales mediante el estándar MCP (`cortex_mcp_server.py`):
+- **Para Claude Code y Cursor/Codex:** Soporte MCP nativo. Añade el servidor local en los settings para heredar la protección WORM.
+- **Para ChatGPT (Web):** Exporta el arsenal de BABYLON-60 en formato JSON *OpenAPI* para operar el kernel desde la web.
 
 ### 2. Pasarela de Intervención (WA-Nexus)
 Controla tus enjambres desde WhatsApp sin necesidad de estar frente al PC.
-- **Mensajes Privados (DMs):** Intervención *Event-Driven* instantánea. Escribe a la IA y responderá sin fricción.
-- **Grupos:** Requiere el disparador `Moskv-1` al inicio del mensaje para forzar una interrupción de hardware y saltar el polling defensivo de 5 minutos.
-- **Asistencia del Kernel:** Escribe `Moskv-tips` para recibir píldoras de sabiduría arquitectónica y buenas prácticas operativas.
+- **Mensajes Privados (DMs):** Intervención *Event-Driven* instantánea.
+- **Grupos:** Requiere el disparador `Moskv-1` al inicio del mensaje para forzar una interrupción de hardware.
+- **Asistencia del Kernel:** Escribe `Moskv-tips` para recibir consejos arquitectónicos.
 
 ### 3. Cheat Sheet: Directivas Termodinámicas y Slash Commands
-Comandos ejecutables desde la interfaz del agente (Antigravity) para gobernar el enjambre:
 
 - **⚡ Slash Commands:**
-  - `/goal [tarea]` $\to$ Activa la ejecución masiva. El agente refactoriza o investiga sin descanso hasta cumplir el objetivo.
-  - `/learn` $\to$ Cristaliza el contexto actual en memoria permanente. La IA lo integrará en su ADN para futuros despliegues.
+  - `/goal [tarea]` $\to$ Activa la ejecución masiva continua hasta cumplir el objetivo.
+  - `/learn` $\to$ Cristaliza el contexto actual en memoria permanente.
   - `/schedule` $\to$ Programa un Cron Job agéntico (ej. auditar la red cada hora).
-  - `/grill-me` $\to$ Modo Inquisidor. Entrevista iterativa para validar arquitecturas antes de escribir código.
+  - `/grill-me` $\to$ Modo Inquisidor. Entrevista iterativa para validar arquitecturas antes de programar.
 
 - **🔥 Triggers Termodinámicos (Zero-Friction):**
-  - `ULTRATHINK` $\to$ Obliga al modelo a colapsar su inferencia en código físico. Elimina la entropía generativa ("parloteo").
-  - `purga anergia` $\to$ Protocolo de limpieza determinista para erradicar archivos zombie o código muerto.
+  - `ULTRATHINK` $\to$ Obliga al modelo a colapsar su inferencia en código físico, eliminando la entropía generativa.
+  - `purga anergia` $\to$ Protocolo de limpieza determinista para erradicar archivos zombie y código muerto.
   - `deep research` $\to$ Dispara el motor AUTODIDACT-Ω para investigación web ultra-profunda.
-
-### 4. Setup *Zero-Friction* en Windows 10
-Si no dispones de un entorno UNIX nativo (macOS/Linux), BABYLON-60 se despliega en Windows sin tocar variables de entorno:
-1. Instala **Python 3.12** desde la **Microsoft Store** (autoconfigura el PATH).
-2. Abre PowerShell / cmd y ejecuta: `pip install cortex-persist`.
-3. Lanza la demo interactiva: `python -m babylon60.run_hero_demo`.
-
----
-
-## 🗂️ Mapa del Monorepo
-
-```
-BABYLON-60/
-├── babylon60.rs              # Kernel Causal-Determinist (bin: b60_kernel)
-├── kernel/                   # Crate Rust: motor de bajo nivel y Cuarentena WORM
-├── attestation/              # Crate Rust: anclaje PCR TPM 2.0 y notariado P2P
-├── compiler/                 # Crate Rust: compilador B60 → IR + Lean 4 backend
-├── runtime/                  # Crate Rust: runtime de corrutinas
-├── proof_ir/                 # Crate Rust: representación intermedia de pruebas
-├── strike_rs/                # Crate Rust: GIL bypass y extracción de exergía (PyO3)
-├── fuzz/                     # Crate Rust: fuzzing diferencial
-│
-├── babylon60/                # Paquete Python principal (cortex-persist)
-│   ├── compliance_exporter/  # Generador i18n de certificados EU AI Act (ES, EN, DE, FR, IT)
-│   ├── attestation/          # Anclaje Merkle PCR Quote TPM 2.0 y notariado P2P
-│   └── primitives/           # Serialization Boundary F60 → GPU bf16 con checksum SHA-256
-│
-├── causal_isomorphism/       # Transpilador F# → Rust/Solidity
-├── timeline_ir/              # Backend de renderizado de IR temporal
-│
-├── web/                      # Interfaz web React + WASM
-├── tonnetz_app/              # Visualizador espacial armónico Neo-Riemanniano (Art. 14)
-├── babylon60-ide/            # IDE Soberano dedicado en Tauri v2 (macOS, Windows, Android, iOS, Linux)
-│   ├── backend/              # Puente FastAPI (OpenRouter Nativo + Clasificador AUTO_SOTA + Arena de Comparación)
-│   ├── frontend/             # Interfaz Industrial Noir React/Vite con Ruteador SOTA y Telemetría en Vivo
-│   ├── src-tauri/            # Núcleo IPC Rust Multiplataforma con Iceoryx2 zero-copy
-│   └── scripts/              # Pipeline de compilación ejecutable (`build_multiplatform.sh`)
-│
-├── hello_causal.b60          # Programa ejecutable de demostración DSL
-├── BabylonTrace.lean         # Teoremas de causalidad verificados en Lean 4
-├── tests/                    # 301 tests automatizados (pytest + cargo test)
-├── scripts/                  # Herramientas CLI (run_hero_demo.py, export_country_compliance.py)
-│
-├── docs/                     # Portal completo de documentación y GTM (01-05)
-│   ├── 01_spec/              # ESPECIFICACIÓN Y ARQUITECTURA
-│   ├── 02_ontology/          # ONTOLOGÍA Y MODELO DE AMENAZAS V4
-│   ├── 03_guides/            # TUTORIALES Y QUICKSTART ENTERPRISE
-│   ├── 04_research/          # WHITEPAPERS TÉCNICOS Y NORMATIVOS
-│   ├── 05_gtm/               # PLAYBOOK DE VENTAS, PITCH DECK Y VC DATA ROOM
-│   └── audits/               # MUESTRAS DE CERTIFICADOS DE CUMPLIMIENTO (ES, EN, DE, FR, IT)
-│
-├── Cargo.toml                # Workspace Rust v4.0.0
-├── pyproject.toml            # cortex-persist v4.0.0
-├── SPECIFICATION.md          # Especificación formal v4.0
-├── LICENSE.md                # Sovereign Exclusion License v1.0
-└── SECURITY.md               # Política de seguridad soberana
-```
 
 ---
 
@@ -203,9 +151,9 @@ npm run build:win     # Compilar instalador Windows (.msi / .exe NSIS)
 npm run build:android # Compilar paquete Android (.apk / .aab)
 npm run build:ios     # Compilar aplicación iOS (.app / .ipa)
 
+# 6. Verificar Teoremas Formales en Lean 4
 lean BabylonTrace.lean
 ```
-
 
 ---
 
