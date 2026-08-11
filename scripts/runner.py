@@ -189,8 +189,23 @@ def main() -> None:
     verify_parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
 
     # poc
-    poc_parser = subparsers.add_parser("poc", help="Execute Proof of Concept engines (10 PoCs)")
-    poc_parser.add_argument("--target", choices=["xenharmonic", "categorical"], required=True, help="Target PoC script")
+    POC_MAP = {
+        "xenharmonic": "c5_demos/poc_xenharmonic_swarm.py",
+        "categorical": "c5_demos/poc_categorical_hallucination.py",
+        "causal-hitl": "c5_demos/poc_causal_hitl_agent.py",
+        "graph-wl": "c5_demos/poc_graph_isomorphism_wl.py",
+        "planner-worker": "c5_demos/poc_two_tier_planner_worker.py",
+        "fast-failure": "c5_demos/poc_fast_failure_guard.py",
+        "time-domain": "c5_demos/poc_f60_time_domain.py",
+        "logop-veto": "c5_demos/poc_logop_veto.py",
+        "browser": "c5_demos/poc_browser_pipeline.py",
+        "exergy": "c5_demos/demo_exergy_poc.py",
+        "hero": "c5_demos/run_hero_demo.py",
+        "bft": "c5_demos/run_commercial_bft.py",
+        "logos-ethos": "c5_demos/demo_logos_ethos_ship.py",
+    }
+    poc_parser = subparsers.add_parser("poc", help="Execute Proof of Concept engines (13 PoCs available)")
+    poc_parser.add_argument("--target", choices=list(POC_MAP.keys()), required=True, help="Target PoC script to execute")
     poc_parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
 
     args, unknown = parser.parse_known_args()
@@ -257,6 +272,14 @@ def main() -> None:
     elif args.command == "verify":
         cmd_args = ["--json"] if getattr(args, "json", False) else []
         sys.exit(run_subcommand("c5_verifiers/autodetect_invariants.py", cmd_args + unknown))
+    elif args.command == "poc":
+        cmd_args = ["--json"] if getattr(args, "json", False) else []
+        target = getattr(args, "target", None)
+        if target in POC_MAP:
+            sys.exit(run_subcommand(POC_MAP[target], cmd_args + unknown))
+        else:
+            print(f"[-] PoC desconocida: {target}")
+            sys.exit(1)
 
 
 if __name__ == "__main__":
