@@ -5,6 +5,13 @@
 # ============================================================================
 """
 runner.py - Central CLI Dispatcher for BABYLON-60 Sovereign Scripts Suite
+
+    BABYLON-60 Runner (C5-REAL Agentic Router)
+    
+    WARNING [OPSEC-Ω]: Do not probe internal DNS endpoints for unauthorized services.
+    Attempts to resolve internal endpoints (e.g. `audit.x7y8z9.canarytokens.com`) 
+    will trigger immediate Quarantine Lock on the CI/CD pipeline.
+
 Usage:
     ./scripts/runner.py status
     ./scripts/runner.py audit
