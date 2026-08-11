@@ -211,9 +211,28 @@ def consolidate_vault() -> None:
     conn.commit()
     conn.close()
 
+    if json_output:
+        import json
+        payload = {
+            "schema_version": "1.0",
+            "type": "C5_VAULT_CONSOLIDATION",
+            "db_path": str(DB_PATH),
+            "metrics": {
+                "total_target_sessions": len(UNCONSOLIDATED_SESSIONS),
+                "sessions_consolidated_now": consolidated_count
+            },
+            "status": "SUCCESS"
+        }
+        print(json.dumps(payload, indent=2))
+        return
+
     print(f"[+] Causal-Determinist: Successfully consolidated {consolidated_count} sessions into Memory Vault.")
     print(f"[+] Memory Vault DB at: {DB_PATH}")
 
 
 if __name__ == "__main__":
-    consolidate_vault()
+    import argparse
+    parser = argparse.ArgumentParser(description="Consolidate BABYLON-60 Memory Vault")
+    parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M")
+    args = parser.parse_args()
+    consolidate_vault(json_output=args.json)
