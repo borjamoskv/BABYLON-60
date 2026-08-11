@@ -9,7 +9,7 @@
 [![EU AI Act](https://img.shields.io/badge/EU_AI_Act-Articles_9--14_Compliant-purple?style=for-the-badge)](./docs/04_research/eu_ai_act_compliance_whitepaper.md)
 [![Formal Verification](https://img.shields.io/badge/Lean_4-Verified-green?style=for-the-badge)](./BabylonTrace.lean)
 [![Governance](https://img.shields.io/badge/Governance-C5--REAL-blue?style=for-the-badge)](./SECURITY.md)
-[![License](https://img.shields.io/badge/License-Sovereign_Exclusion_v1.0-orange?style=for-the-badge)](./LICENSE.md)
+[![License](https://img.shields.io/badge/License-Sovereign_Exclusion_v1.0-orange?style=for-the-badge)](./LICENSE)
 
 > *"La mayoría de los sistemas de IA pueden generar texto. Pocos pueden justificar su historial."*
 
@@ -166,7 +166,7 @@ lean BabylonTrace.lean
 | **Sovereign** | Individuos, investigadores, uso no comercial | Libre — 100% Open Core |
 | **Enterprise** | Corporaciones, uso comercial, producción | `CORTEX_LICENSE_KEY` criptográfica |
 
-Ver detalles en [LICENSE.md](./LICENSE.md) y [COMMERCIAL_LICENSE.md](./docs/COMMERCIAL_LICENSE.md).
+Ver detalles en [LICENSE](./LICENSE) y [COMMERCIAL_LICENSE.md](./docs/COMMERCIAL_LICENSE.md).
 
 ---
 

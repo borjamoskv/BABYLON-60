@@ -166,7 +166,7 @@ lean BabylonTrace.lean
 | **Sovereign** | Individuals, researchers, non-commercial use | Free — 100% Open Core |
 | **Enterprise** | Corporations, commercial use, production | Cryptographic `CORTEX_LICENSE_KEY` |
 
-See details in [LICENSE.md](./LICENSE.md) and [COMMERCIAL_LICENSE.md](./docs/COMMERCIAL_LICENSE.md).
+See details in [LICENSE](./LICENSE) and [COMMERCIAL_LICENSE.md](./docs/COMMERCIAL_LICENSE.md).
 
 ---
 
