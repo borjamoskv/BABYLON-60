@@ -2,9 +2,18 @@
 
 [![PyPI Version](https://img.shields.io/badge/PyPI-cortex--persist-blue?style=for-the-badge&logo=pypi)](https://pypi.org/project/cortex-persist/)
 [![MCP Server](https://img.shields.io/badge/MCP-Model_Context_Protocol-purple?style=for-the-badge)](../docs/03_guides/cortex_mcp_guide.md)
-[![Python 3.12](https://img.shields.io/badge/Python-3.12%2B-blue?style=for-the-badge&logo=python)](https://www.python.org/)
+[![Epistemology](https://img.shields.io/badge/Epistemology-Store_Comonad-green?style=for-the-badge)](../docs/00_MANIFESTO.md)
 
 **CORTEX** (`cortex-persist`) is the Python persistence and cognitive memory substrate for **BABYLON-60**. It provides multi-agent swarm orchestration (`moskv-swarm`), vector/graph persistent memory (`L1_sink`), and the Model Context Protocol (MCP) server interface (`cortex_mcp_server.py`) for Claude Code, Cursor, and ChatGPT.
+
+---
+
+## 🧮 C5-REAL Epistemological Context: Store Comonad & Colimits
+
+Under the **C5-REAL Epistemological Constitution**:
+- **Memory as a Store Comonad**: Memory is not a static disk container; it is the execution of a **Store Comonad** (`get/set` operators). Remembering is the amalgamation of past trajectories into an emergent **Colimit** without storing static spatial copies.
+- **Context as a Bayesian Lens**: Context is a **Fibrated Projection (Adjoint Functor)**. It acts as a bidirectional optical lens filtering relevant topological submanifolds and propagating error signals without breaking global structural integrity.
+- **Agent as Polynomial Functor Policy**: Swarm agents (`moskv-swarm`) operate as co-algebras on polynomial functor interfaces, minimizing Free Energy Principle (FEP) divergence ($\delta \int F dt = 0$).
 
 ---
 
@@ -47,10 +56,10 @@ python3 -m babylon60.cortex_mcp_server
 cortex/
 ├── agents/             # Autonomous agent role definitions & prompt templates
 ├── infra/              # Low-level SQLite database connectors & WAL triggers
-├── L1_sink/            # Primary persistent storage sink
-└── moskv-swarm/        # Distributed swarm coordination protocols
+├── L1_sink/            # Primary persistent storage sink (Colimit Event Sourcing)
+└── moskv-swarm/        # Distributed swarm coordination protocols (Polynomial Functors)
 ```
 
 ---
 
-<sub>BABYLON-60 Cortex Substrate · Cognitive Memory Engine · Borja Moskv</sub>
+<sub>BABYLON-60 Cortex Substrate · Cognitive Store Comonad & Memory Engine · Borja Moskv</sub>

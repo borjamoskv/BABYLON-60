@@ -2,9 +2,18 @@
 
 [![Compiler](https://img.shields.io/badge/Language-Rust_5.0-orange?style=for-the-badge&logo=rust)](https://www.rust-lang.org/)
 [![Lean 4 Backend](https://img.shields.io/badge/Lean_4-Formal_Proof_Emitter-green?style=for-the-badge)](../BabylonTrace.lean)
-[![Target](https://img.shields.io/badge/Target-B60_Bytecode_IR-blue?style=for-the-badge)]()
+[![Epistemology](https://img.shields.io/badge/Epistemology-C5--REAL_Categories-purple?style=for-the-badge)](../docs/00_MANIFESTO.md)
 
 The **Compiler Module** (`compiler`) transforms high-level `.b60` DSL domain scripts into executable B60 Bytecode Intermediate Representation (IR) containing exact bytecode instructions (`HALT`, `CRITICAL_HALT`, `FORK`, `LOADIMM`) while automatically emitting formal Lean 4 trace theorems for mathematical causality verification.
+
+---
+
+## 🧮 C5-REAL Epistemological Context: Morphisms & Proof Transpilation
+
+In alignment with the **C5-REAL Epistemological Constitution**:
+- **Programs as Free Categories**: A `.b60` script is not a sequence of commands; it is a free category whose statements are **Morphisms** ($A \to B$).
+- **State as Lawvere Fixed Point**: State is evaluated as a Lawvere fixed point ($T(X) \cong X$) verified statically by `static_proofs.rs`.
+- **Proof Emission as Natural Transformation**: `lean_backend.py` acts as a natural transformation mapping the execution category $\mathcal{C}_{\text{B60}}$ to the proof category $\mathcal{C}_{\text{Lean4}}$ (`BabylonTrace.lean`), proving that no state transition violates causal acyclicity.
 
 ---
 
@@ -60,4 +69,4 @@ lean BabylonTrace.lean
 
 ---
 
-<sub>BABYLON-60 Compiler Substrate · Formal Proof Emitter · Borja Moskv</sub>
+<sub>BABYLON-60 Compiler Substrate · C5-REAL Category Theory & Formal Proof Emitter · Borja Moskv</sub>
