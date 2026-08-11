@@ -23,29 +23,33 @@ DB_PATH = REPO_ROOT / "cortex_memory.db"
 AUDIT_DIR = REPO_ROOT / "cortex" / "audits"
 
 
-def get_conversation_id() -> str:
+def get_conversation_id() -> tuple[str, Path]:
     cid = os.getenv("ANTIGRAVITY_CONVERSATION_ID") or os.getenv("CONVERSATION_ID")
-    if cid:
-        return cid
-    brain_dir = Path.home() / ".gemini" / "antigravity" / "brain"
     uuid_pattern = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+    
+    brain_dirs = [
+        Path.home() / ".gemini" / "antigravity-ide" / "brain",
+        Path.home() / ".gemini" / "antigravity" / "brain",
+    ]
+    
     candidates = []
-    if brain_dir.exists():
-        for entry in brain_dir.iterdir():
-            if entry.is_dir() and uuid_pattern.match(entry.name):
-                candidates.append((entry.name, entry.stat().st_mtime))
+    for brain_dir in brain_dirs:
+        if brain_dir.exists():
+            for entry in brain_dir.iterdir():
+                if entry.is_dir() and uuid_pattern.match(entry.name):
+                    candidates.append((entry.name, entry.stat().st_mtime, entry))
     if candidates:
         candidates.sort(key=lambda x: x[1], reverse=True)
-        return candidates[0][0]
-    return "unknown-session"
+        target = candidates[0]
+        return target[0], target[2]
+    return "unknown-session", brain_dirs[0] / "unknown-session"
 
 
-CONV_ID = get_conversation_id()
+CONV_ID, CONV_BRAIN_DIR = get_conversation_id()
 CONV_ID_SHORT = CONV_ID[:8]
 AUDIT_FILE = AUDIT_DIR / f"autocognition_omega_audit_{CONV_ID_SHORT}.yaml"
-TRANSCRIPT_PATH = (
-    Path.home() / ".gemini" / "antigravity" / "brain" / CONV_ID / ".system_generated" / "logs" / "transcript.jsonl"
-)
+TRANSCRIPT_PATH = CONV_BRAIN_DIR / ".system_generated" / "logs" / "transcript.jsonl"
+
 
 
 def compute_sha3(data: str) -> str:

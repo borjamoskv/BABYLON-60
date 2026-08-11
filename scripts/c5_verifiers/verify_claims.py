@@ -23,6 +23,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
+from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import asdict, dataclass, field
 
@@ -210,8 +211,11 @@ def main() -> int:
 
     print("\n" + "=" * 84)
     print("  " + " · ".join(f"{k}={v}" for k, v in sorted(tally.items())))
-    json.dump(out, open("verification_report.json", "w"), indent=2, ensure_ascii=False)
-    print("  report: verification_report.json")
+    audit_dir = Path(__file__).resolve().parent.parent / "cortex" / "audits"
+    audit_dir.mkdir(parents=True, exist_ok=True)
+    out_file = audit_dir / "verification_report.json"
+    json.dump(out, open(out_file, "w"), indent=2, ensure_ascii=False)
+    print(f"  report: {out_file}")
     return 0
 
 

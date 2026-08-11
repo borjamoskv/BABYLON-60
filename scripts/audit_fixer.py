@@ -53,21 +53,16 @@ def fix_file(filepath, issues):
         has_missing_header = any(i["type"] == "MissingHeader" for i in issues)
         if has_missing_header:
             if filepath.endswith(".py"):
-                # Avoid inserting before a shebang or encoding declaration
                 lines = content.split("\n")
-                insert_idx = 0
-                for i, line in enumerate(lines[:5]):
-                    if line.startswith("#!") or "coding:" in line:
-                        insert_idx = i + 1
-
-                content = (
-                    "\n".join(lines[:insert_idx])
-                    + ("" if insert_idx == 0 else "\n")
-                    + HEADER_CONTENT_PY
-                    + "\n".join(lines[insert_idx:])
-                )
+                if lines and lines[0].startswith("#!"):
+                    shebang = lines[0]
+                    rest = "\n".join(lines[1:]).strip()
+                    content = f"{shebang}\n{HEADER_CONTENT_PY}{rest}\n"
+                else:
+                    content = f"#!/usr/bin/env python3\n{HEADER_CONTENT_PY}{content.strip()}\n"
             elif filepath.endswith(".rs"):
                 content = HEADER_CONTENT_RS + content
+
 
         if content != original_content:
             with open(filepath, "w", encoding="utf-8") as f:

@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Any
 
 PROJECT_ROOT: Path = Path(__file__).resolve().parent.parent
-DB_PATH: Path = PROJECT_ROOT / "scripts" / "cib_master_ledger.db"
+DB_PATH: Path = PROJECT_ROOT / "data" / "cib_master_ledger.db"
 CORTEX_DB_PATH: Path = PROJECT_ROOT / "cortex" / "engine" / "nexus_anchors.db"
 
 

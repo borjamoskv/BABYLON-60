@@ -9,7 +9,7 @@ import json
 import os
 
 WORKSPACE: str = os.environ.get("BABYLON_WORKSPACE", os.path.dirname(os.path.abspath(__file__)))
-SHARDS_FILE: str = os.path.join(WORKSPACE, "shards.json")
+SHARDS_FILE: str = os.path.join(os.path.dirname(WORKSPACE), "data", "shards.json")
 
 
 def _extract_node_vectors(fpath: str) -> list[dict[str, str]]:
