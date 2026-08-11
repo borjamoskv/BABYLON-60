@@ -29,7 +29,7 @@ ISOMORFISMOS_PATH = os.path.expandvars(
 )
 
 
-def bootstrap_cortex() -> None:
+def bootstrap_cortex(json_output: bool = False) -> None:
     print("[CORTEX] Initiating bootstrap de persistencia de base de datos...")
     if not VAULT_KEY:
         print(
