@@ -45,7 +45,7 @@ class C5_COLORS:
     GRAY = "\033[38;5;240m"
 
 
-def cmd_status() -> None:
+def cmd_status(json_output: bool = False) -> None:
     py_scripts = [p for p in SCRIPTS_DIR.rglob("*.py") if "__pycache__" not in p.parts]
     sh_scripts = [p for p in SCRIPTS_DIR.rglob("*.sh") if "__pycache__" not in p.parts]
     domains = [p for p in SCRIPTS_DIR.glob("c5_*") if p.is_dir()]
@@ -60,6 +60,20 @@ def cmd_status() -> None:
             pass
 
     pct = (shebang_ok / len(py_scripts) * 100.0) if py_scripts else 0.0
+
+    if json_output:
+        import json
+        payload = {
+            "c5_real_domains": len(domains),
+            "python_scripts": len(py_scripts),
+            "shell_scripts": len(sh_scripts),
+            "total_executables": len(py_scripts) + len(sh_scripts),
+            "shebang_compliance_pct": round(pct, 2),
+            "shebang_ok": shebang_ok
+        }
+        print(json.dumps(payload, indent=2))
+        return
+
     status_color = C5_COLORS.GREEN if pct == 100.0 else C5_COLORS.AMBER
     
     # Calculate padding for shebang line to keep the box aligned
@@ -78,15 +92,12 @@ def cmd_status() -> None:
     print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛{C5_COLORS.RESET}\n")
 
 
-def cmd_list(domain_filter: str | None = None, search_term: str | None = None) -> None:
+def cmd_list(domain_filter: str | None = None, search_term: str | None = None, json_output: bool = False) -> None:
     sys.path.insert(0, str(SCRIPTS_DIR))
     from generate_scripts_readme import collect_data
     data = collect_data()
     
-    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓{C5_COLORS.RESET}")
-    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  {C5_COLORS.BOLD}BABYLON-60{C5_COLORS.RESET} {C5_COLORS.DIM}:: SCRIPT SUITE TAXONOMY LISTING{C5_COLORS.RESET}          {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
-    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛{C5_COLORS.RESET}")
-    
+    filtered_data = {}
     total_matches = 0
     for cat_name, scripts in data["categories"].items():
         if domain_filter and domain_filter.lower() not in cat_name.lower():
@@ -97,15 +108,31 @@ def cmd_list(domain_filter: str | None = None, search_term: str | None = None) -
             if search_term and (search_term.lower() not in s["path"].lower() and search_term.lower() not in s["description"].lower()):
                 continue
             filtered_scripts.append(s)
-
+            
         if filtered_scripts:
-            print(f"\n{C5_COLORS.BOLD}{C5_COLORS.AMBER}► {cat_name}{C5_COLORS.RESET}")
-            print(f"{C5_COLORS.GRAY}  {'─' * 75}{C5_COLORS.RESET}")
-            for s in filtered_scripts:
-                stype = f"{C5_COLORS.CYAN}PY{C5_COLORS.RESET}" if s["type"] == "python" else f"{C5_COLORS.GREEN}SH{C5_COLORS.RESET}"
-                desc = s["description"][:55] + "..." if len(s["description"]) > 55 else s["description"]
-                print(f"  [{stype}] {s['path']:<45} {C5_COLORS.DIM}│{C5_COLORS.RESET} {desc}")
-                total_matches += 1
+            filtered_data[cat_name] = filtered_scripts
+            total_matches += len(filtered_scripts)
+
+    if json_output:
+        import json
+        payload = {
+            "total_matches": total_matches,
+            "categories": filtered_data
+        }
+        print(json.dumps(payload, indent=2))
+        return
+
+    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓{C5_COLORS.RESET}")
+    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  {C5_COLORS.BOLD}BABYLON-60{C5_COLORS.RESET} {C5_COLORS.DIM}:: SCRIPT SUITE TAXONOMY LISTING{C5_COLORS.RESET}          {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
+    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛{C5_COLORS.RESET}")
+    
+    for cat_name, filtered_scripts in filtered_data.items():
+        print(f"\n{C5_COLORS.BOLD}{C5_COLORS.AMBER}► {cat_name}{C5_COLORS.RESET}")
+        print(f"{C5_COLORS.GRAY}  {'─' * 75}{C5_COLORS.RESET}")
+        for s in filtered_scripts:
+            stype = f"{C5_COLORS.CYAN}PY{C5_COLORS.RESET}" if s["type"] == "python" else f"{C5_COLORS.GREEN}SH{C5_COLORS.RESET}"
+            desc = s["description"][:55] + "..." if len(s["description"]) > 55 else s["description"]
+            print(f"  [{stype}] {s['path']:<45} {C5_COLORS.DIM}│{C5_COLORS.RESET} {desc}")
 
     print(f"\n{C5_COLORS.BOLD}{C5_COLORS.CYAN}▶ Total Matched Scripts: {C5_COLORS.GREEN}{total_matches}{C5_COLORS.RESET}\n")
 
@@ -115,7 +142,8 @@ def main() -> None:
     subparsers = parser.add_subparsers(dest="command", help="Available subcommands")
 
     # status
-    subparsers.add_parser("status", help="Show script suite status & health metrics")
+    status_parser = subparsers.add_parser("status", help="Show script suite status & health metrics")
+    status_parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
 
     # audit
     audit_parser = subparsers.add_parser("audit", help="Run AST & anti-pattern quality gate audit")
@@ -149,6 +177,7 @@ def main() -> None:
     list_parser = subparsers.add_parser("list", help="List and search scripts by domain or keyword")
     list_parser.add_argument("--domain", "-d", type=str, default=None, help="Filter by C5 domain name")
     list_parser.add_argument("--search", "-s", type=str, default=None, help="Search script path or description")
+    list_parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
 
     # verify
     verify_parser = subparsers.add_parser("verify", help="Run invariant and axiom verification engine")
@@ -157,11 +186,11 @@ def main() -> None:
     args, unknown = parser.parse_known_args()
 
     if not args.command or args.command == "status":
-        cmd_status()
+        cmd_status(json_output=getattr(args, "json", False))
         return
 
     if args.command == "list":
-        cmd_list(domain_filter=args.domain, search_term=args.search)
+        cmd_list(domain_filter=args.domain, search_term=args.search, json_output=getattr(args, "json", False))
         return
 
     if args.command == "audit":
