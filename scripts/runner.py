@@ -188,6 +188,10 @@ def main() -> None:
     verify_parser = subparsers.add_parser("verify", help="Run invariant and axiom verification engine")
     verify_parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
 
+    # fast-smt
+    fast_smt_parser = subparsers.add_parser("fast-smt", help="Run ultra-fast SMT gate verification (<0.5s)")
+    fast_smt_parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
+
     # poc
     POC_MAP = {
         "xenharmonic": "c5_demos/poc_xenharmonic_swarm.py",
@@ -228,6 +232,8 @@ def main() -> None:
         if getattr(args, "fix", False): cmd_args.append("--fix")
         if getattr(args, "json", False): cmd_args.append("--json")
         sys.exit(run_subcommand("c5_quality_gates/audit_scripts_quality.py", cmd_args + unknown))
+    elif args.command == "fast-smt":
+        sys.exit(run_subcommand("c5_verifiers/fast_smt_gate.py", unknown))
     elif args.command == "preserve":
         sys.exit(run_subcommand("c5_log_custody/c5_preserve_logs.py", ["--provider", args.provider] + unknown))
     elif args.command == "swarm":
