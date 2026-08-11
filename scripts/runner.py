@@ -188,6 +188,11 @@ def main() -> None:
     verify_parser = subparsers.add_parser("verify", help="Run invariant and axiom verification engine")
     verify_parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
 
+    # poc
+    poc_parser = subparsers.add_parser("poc", help="Execute Proof of Concept engines (10 PoCs)")
+    poc_parser.add_argument("--target", choices=["xenharmonic", "categorical"], required=True, help="Target PoC script")
+    poc_parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
+
     args, unknown = parser.parse_known_args()
 
     if not args.command or args.command == "status":
