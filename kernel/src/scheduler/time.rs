@@ -7,7 +7,8 @@
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct LogicalClock(pub u64);
 
-/// Mathematical simulation time (e.g., UNIT.TICK).
+/// Exact Q32.32 Fixed-Point Time representation (F60 domain).
+/// Higher 32 bits represent integer seconds/units, lower 32 bits represent fractional units.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct SimulationClock(pub u64);
 
@@ -17,6 +18,54 @@ impl LogicalClock {
 }
 
 impl SimulationClock {
+    pub const SCALE: u64 = 1 << 32;
+
     pub const fn new(units: u64) -> Self { Self(units) }
+    
+    /// Constructs SimulationClock from whole integer seconds/units.
+    pub const fn from_secs(secs: u64) -> Self {
+        Self(secs.saturating_mul(Self::SCALE))
+    }
+
+    /// Constructs SimulationClock from a raw Q32.32 fixed-point value.
+    pub const fn from_raw(raw: u64) -> Self {
+        Self(raw)
+    }
+
     pub fn advance(self, units: u64) -> Self { Self(self.0.saturating_add(units)) }
+
+    /// Returns the integer part (seconds).
+    pub fn as_secs(self) -> u64 {
+        self.0 / Self::SCALE
+    }
+
+    /// Returns fractional part as a float 0.0..1.0 for non-critical telemetry display.
+    pub fn as_float(self) -> f64 {
+        (self.0 as f64) / (Self::SCALE as f64)
+    }
+
+    /// Adds two fixed point clocks with saturation.
+    pub fn add_fixed(self, rhs: SimulationClock) -> Self {
+        Self(self.0.saturating_add(rhs.0))
+    }
+
+    /// Subtracts two fixed point clocks with saturation.
+    pub fn sub_fixed(self, rhs: SimulationClock) -> Self {
+        Self(self.0.saturating_sub(rhs.0))
+    }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_simulation_clock_fixed_point() {
+        let t1 = SimulationClock::from_secs(10);
+        let t2 = SimulationClock::from_secs(5);
+        let sum = t1.add_fixed(t2);
+        assert_eq!(sum.as_secs(), 15);
+        assert_eq!(sum.sub_fixed(t2).as_secs(), 10);
+    }
+}
+

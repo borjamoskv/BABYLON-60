@@ -1,8 +1,8 @@
+#!/usr/bin/env python3
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
-#!/usr/bin/env python3
 """
 MOSKV-1 APEX: Swarm Workspace Lock Guard (INV_C5_22)
 Enforces atomic lock acquisition (.cortex_thermal_lock) via O_EXCL kernel flags

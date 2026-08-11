@@ -1,6 +1,6 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
 use babylon60_kernel::forensic_quarantine::QuarantineSnapshot;
-use alloc::vec::Vec;
+use babylon60_kernel::scheduler::time::SimulationClock;
 
 extern crate alloc;
 
@@ -23,16 +23,18 @@ fn worm_snapshot_serialization_benchmark(c: &mut Criterion) {
         group.bench_with_input(BenchmarkId::from_parameter(size), size, |b, &s| {
             let memory_dump = vec![0u8; s];
             let causal_hash = [0xABu8; 32];
+            let ts = SimulationClock::from_secs(100);
             b.iter(|| {
                 // Measure the exact latency of freezing the WORM snapshot
                 let cloned_dump = black_box(memory_dump.clone());
-                let snapshot = QuarantineSnapshot::freeze(black_box(causal_hash), cloned_dump);
+                let snapshot = QuarantineSnapshot::freeze(ts, black_box(causal_hash), cloned_dump);
                 black_box(snapshot);
             })
         });
     }
     group.finish();
 }
+
 
 criterion_group!(benches, f60_scheduler_cycle_benchmark, worm_snapshot_serialization_benchmark);
 criterion_main!(benches);

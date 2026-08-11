@@ -292,7 +292,9 @@ SKILL_METADATA = {
 }
 
 
-def optimize_names_and_triggers() -> None:
+import argparse
+
+def optimize_names_and_triggers(dry_run: bool = False, backup: bool = False) -> None:
     updated_count = 0
     for skill_dir in sorted(SKILLS_DIR.iterdir()):
         if not skill_dir.is_dir():
@@ -323,11 +325,25 @@ def optimize_names_and_triggers() -> None:
 
         body = content[match.end():]
         new_content = new_header + body
-        skill_file.write_text(new_content, encoding="utf-8")
+
+        if dry_run:
+            print(f"[DRY-RUN] Would update: {skill_file.name} ({skill_name})")
+        else:
+            if backup:
+                backup_file = skill_dir / "SKILL.md.bak"
+                backup_file.write_text(content, encoding="utf-8")
+            skill_file.write_text(new_content, encoding="utf-8")
         updated_count += 1
 
-    print(f"Successfully updated display names & triggers for {updated_count} physical skills.")
+    mode_str = "Would update" if dry_run else "Successfully updated"
+    print(f"{mode_str} display names & triggers for {updated_count} physical skills.")
 
 
 if __name__ == "__main__":
-    optimize_names_and_triggers()
+    parser = argparse.ArgumentParser(description="Enrich and format skill display names and trigger descriptions.")
+    parser.add_argument("--dry-run", action="store_true", help="Simulate execution without modifying files.")
+    parser.add_argument("--backup", action="store_true", help="Create .bak files before writing changes.")
+    args = parser.parse_args()
+
+    optimize_names_and_triggers(dry_run=args.dry_run, backup=args.backup)
+

@@ -1,8 +1,8 @@
+#!/usr/bin/env python3
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
-#!/usr/bin/env python3
 """
 BABYLON-60 v4.0 Sovereign Hardened — Executable Hero Demo CLI
 Simulates the live 60-second B2B Enterprise / Investor Demo in the terminal:

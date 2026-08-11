@@ -1,10 +1,9 @@
+#!/usr/bin/env python3
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 import json
-import os
-import signal
 import urllib.error
 import urllib.request
 from typing import Any
@@ -22,9 +21,8 @@ def check_wayback(url: str) -> None:
                     print(f"  - Timestamp: {row[1]}, URL: {row[2]}, Status: {row[4]}")
             else:
                 print(f"[✓] No captures found for {url} via Wayback Machine.")
-    except (urllib.error.URLError, json.JSONDecodeError, OSError, ValueError):
-        os.kill(os.getpid(), signal.SIGKILL)
-        raise RuntimeError("FAIL-FAST: General Exception intercepted.")
+    except (urllib.error.URLError, json.JSONDecodeError, OSError, ValueError) as err:
+        print(f"[-] Failed to fetch Wayback capture for {url}: {err}")
 
 
 def main() -> None:
@@ -40,3 +38,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
