@@ -6,7 +6,7 @@
 
 ### A. From "Self-Falsification with Purge" to "Forensic Black Box" (WORM)
 *   **The Problem (v3.0):** The system purged the log upon detecting a causal inversion, allowing an attacker to erase their tracks (DoS vector).
-*   **The Solution (v4.0):** Introduction of the **`forensic_quarantine`** module.
+*   **The Solution (v4.0):** Introduction of the **`forensic_quarantine`** module *(Planned for v4.1 implementation; currently isolated via poison-pill halt in `src/halt.rs`)*.
     *   Upon a `CRITICAL HALT`, the kernel **NO LONGER PURGES**. Instead, it performs a **Cryptographic State Snapshot** and seals it in an isolated memory zone.
     *   The agent is "frozen" (Zombie State), but the history becomes **WORM (Write Once, Read Many)**.
     *   **Monetization Value:** You can now sell the "Black Box Mode" to airlines, hospitals, and financial institutions. The system guarantees that even if the agent acts erratically, the forensic evidence remains untouchable.
