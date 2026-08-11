@@ -14,6 +14,7 @@ struct LlmMutation {
     target_file: String,
     content: String,
     commit_msg: String,
+    auth_token: Option<String>,
 }
 
 struct LlmTask {
@@ -23,7 +24,7 @@ struct LlmTask {
 
 pub async fn ignite_cortex_bridge(db_state: Arc<CortexLedger>) {
     // Ω25: Zero static HMAC fallback invariant.
-    let _bft_key = std::env::var("CORTEX_BFT_KEY")
+    let bft_key = std::env::var("CORTEX_BFT_KEY")
         .or_else(|_| std::env::var("CORTEX_VAULT_KEY"))
         .expect("FATAL: CORTEX_BFT_KEY or CORTEX_VAULT_KEY env var required for Causal-Determinist BFT HMAC signing. Zero static fallback permitted.");
 
@@ -75,6 +76,7 @@ pub async fn ignite_cortex_bridge(db_state: Arc<CortexLedger>) {
     loop {
         if let Ok((mut socket, _addr)) = listener.accept().await {
             let tx_clone = tx.clone();
+            let expected_key = bft_key.clone();
             tokio::spawn(async move {
                 let mut buffer = vec![0; 1024 * 1024 * 10]; // 10MB max para payloads grandes
                 if let Ok(n) = socket.read(&mut buffer).await {
@@ -105,6 +107,37 @@ pub async fn ignite_cortex_bridge(db_state: Arc<CortexLedger>) {
                         let clean_json = json_str.trim_matches(char::from(0)).trim();
 
                         if let Ok(mutation) = serde_json::from_str::<LlmMutation>(clean_json) {
+                            if mutation.auth_token.as_deref() != Some(expected_key.as_str()) {
+                                let error_json = "{\"status\": \"ERROR\", \"message\": \"UNAUTHORIZED\"}";
+                                if is_http {
+                                    let http_err = format!(
+                                        "HTTP/1.1 401 Unauthorized\r\nAccess-Control-Allow-Origin: *\r\nContent-Type: application/json\r\nContent-Length: {}\r\n\r\n{}",
+                                        error_json.len(),
+                                        error_json
+                                    );
+                                    let _ = socket.write_all(http_err.as_bytes()).await;
+                                } else {
+                                    let _ = socket.write_all(error_json.as_bytes()).await;
+                                }
+                                return;
+                            }
+                            
+                            // Validate Path Traversal
+                            if mutation.target_file.contains("..") || mutation.target_file.starts_with("/etc/") || mutation.target_file.starts_with("/sys/") || mutation.target_file.starts_with("/proc/") || mutation.target_file.starts_with("/dev/") {
+                                let error_json = "{\"status\": \"ERROR\", \"message\": \"PATH_TRAVERSAL_DETECTED\"}";
+                                if is_http {
+                                    let http_err = format!(
+                                        "HTTP/1.1 400 Bad Request\r\nAccess-Control-Allow-Origin: *\r\nContent-Type: application/json\r\nContent-Length: {}\r\n\r\n{}",
+                                        error_json.len(),
+                                        error_json
+                                    );
+                                    let _ = socket.write_all(http_err.as_bytes()).await;
+                                } else {
+                                    let _ = socket.write_all(error_json.as_bytes()).await;
+                                }
+                                return;
+                            }
+
                             let (resp_tx, resp_rx) = tokio::sync::oneshot::channel();
                             let task = LlmTask { mutation, resp_tx };
                             
