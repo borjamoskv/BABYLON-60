@@ -94,9 +94,22 @@ def audit_extensions_reachability():
     if len(unused_subdirs) > 15:
         print(f"  ... and {len(unused_subdirs) - 15} more.")
 
-    print("\n======================================================================")
-    print("  RECOMMENDATION: Apoptosis sweep prepared. Run with --purge to prune.")
-    print("======================================================================")
+    do_purge = "--purge" in sys.argv
+    if do_purge:
+        print("\n🔥 EXECUTING APOPTOSIS PURGE (--purge active)...")
+        purged_count = 0
+        import shutil
+        for sub in unused_subdirs:
+            target_dir = EXT_DIR / sub
+            if target_dir.exists():
+                shutil.rmtree(target_dir)
+                purged_count += 1
+        print(f"[✓] APOPTOSIS COMPLETE: {purged_count} unused subdirectories purged.")
+        print(f"[✓] Remaining Active Subdirectories: {len(used_subdirs)} ({', '.join(sorted(used_subdirs))})")
+    else:
+        print("\n======================================================================")
+        print("  RECOMMENDATION: Apoptosis sweep prepared. Run with --purge to prune.")
+        print("======================================================================")
 
 if __name__ == "__main__":
     audit_extensions_reachability()
