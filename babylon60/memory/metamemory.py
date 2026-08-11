@@ -4,12 +4,46 @@
 # ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 
-"""Metamemory monitor sub-system for cognitive Feeling-of-Knowing (FOK)."""
+"""Metamemory monitor sub-system for cognitive Feeling-of-Knowing (FOK) and Epistemic Verdicts."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, List
+from enum import Enum, auto
+from typing import Any, List, Optional
+
+
+class Verdict(str, Enum):
+    """Metacognitive decision verdict on memory retrieval & epistemic status."""
+
+    RESPOND = "respond"
+    SEARCH_MORE = "search_more"
+    CLARIFY = "clarify"
+    ABSTAIN = "abstain"
+
+
+@dataclass
+class MetaJudgment:
+    """Detailed metacognitive judgment of confidence, FOK, and JOL."""
+
+    confidence: float = 0.85
+    fok: float = 0.85
+    jol: float = 0.85
+    tip_of_tongue: bool = False
+    relevance_matches: List[str] = field(default_factory=list)
+
+
+@dataclass
+class MemoryCard:
+    """Structured memory evidence card retrieved from comonadic store."""
+
+    memory_id: str
+    retrieval_confidence: float = 0.90
+    existence_probability: float = 1.0
+    consolidation_status: str = "CONSOLIDATED"
+    repair_needed: bool = False
+    emotional_weight: float = 0.0
+    content: str = ""
 
 
 @dataclass
@@ -44,7 +78,6 @@ class MetamemoryMonitor:
 
         for c in candidates:
             surface = getattr(c, "_fok_surface", getattr(c, "name", "")).lower()
-            # Simple term overlap scoring
             terms = [t for t in intent_lower.split() if len(t) > 2]
             if not terms:
                 score = 0.7
@@ -62,6 +95,17 @@ class MetamemoryMonitor:
             tip_of_tongue=tip_of_tongue,
             relevance_matches=matched,
         )
+
+    def evaluate_epistemic_context(
+        self, intent: str, memory_cards: List[MemoryCard] | None = None
+    ) -> MetaJudgment:
+        """Evaluate epistemic judgment and confidence for a prompt context."""
+        cards = memory_cards or []
+        if not cards:
+            return MetaJudgment(confidence=0.3, fok=0.4, jol=0.3, tip_of_tongue=False)
+
+        avg_conf = sum(c.retrieval_confidence for c in cards) / len(cards)
+        return MetaJudgment(confidence=avg_conf, fok=avg_conf, jol=avg_conf)
 
     def record_outcome(self, intent: str, success: bool) -> None:
         """Update FOK based on execution result."""
