@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BABYLON-60 — iter[1]: Descenso de Energia Libre</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a25;
+    --surface3: #222233;
+    --border: #2a2a3a;
+    --text: #e0e0e8;
+    --text-muted: #8888a0;
+    --critical: #ff3b5c;
+    --high: #ff8c42;
+    --medium: #ffd54f;
+    --low: #66bb6a;
+    --accent: #6c63ff;
+    --accent2: #00d4aa;
+    --done: #00d4aa;
+    --r-color: #6c63ff;
+    --f-color: #ff8c42;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+  .header { text-align: center; padding: 2rem 0 1.5rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+  .header h1 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.3rem; }
+  .header .subtitle { color: var(--text-muted); font-size: 0.9rem; font-family: monospace; }
+
+  /* Live gauges */
+  .live-panel { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2rem; margin-bottom: 2rem; }
+  .gauge-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.3rem 1.5rem; }
+  .gauge-card h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.8rem; }
+  .gauge-row { display: flex; align-items: center; gap: 1rem; }
+  .gauge-bar { flex: 1; height: 10px; background: var(--surface2); border-radius: 5px; overflow: hidden; position: relative; }
+  .gauge-fill { height: 100%; border-radius: 5px; transition: width 0.6s ease; }
+  .gauge-fill.ghost { position: absolute; top: 0; opacity: 0.2; }
+  .gauge-val { font-size: 1.8rem; font-weight: 700; font-family: monospace; min-width: 4.5rem; text-align: right; transition: color 0.3s; }
+  .gauge-delta { font-size: 0.8rem; font-family: monospace; margin-top: 0.4rem; }
+
+  /* Effort counter */
+  .effort-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.3rem 1.5rem; display: flex; flex-direction: column; justify-content: center; }
+  .effort-card h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.5rem; }
+  .effort-nums { display: flex; gap: 1.5rem; align-items: baseline; }
+  .effort-done { font-size: 1.8rem; font-weight: 700; font-family: monospace; color: var(--done); }
+  .effort-total { font-size: 1rem; color: var(--text-muted); font-family: monospace; }
+  .effort-pct { font-size: 0.8rem; color: var(--text-muted); font-family: monospace; margin-top: 0.3rem; }
+
+  /* Trajectory chart */
+  .chart-section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; }
+  .chart-section h2 { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+  .chart-container { position: relative; width: 100%; height: 220px; }
+  canvas { width: 100% !important; height: 100% !important; }
+
+  /* Phase groups */
+  .phase { margin-bottom: 1.8rem; }
+  .phase-header { display: flex; align-items: center; justify-content: space-between; padding: 0.8rem 1rem; background: var(--surface2); border-radius: 8px; margin-bottom: 0.6rem; cursor: pointer; user-select: none; }
+  .phase-header:hover { background: var(--surface3); }
+  .phase-title { font-size: 0.95rem; font-weight: 600; }
+  .phase-meta { display: flex; gap: 1rem; align-items: center; }
+  .phase-tag { font-size: 0.7rem; font-family: monospace; padding: 0.15rem 0.5rem; border-radius: 4px; background: rgba(108,99,255,0.12); color: var(--accent); }
+  .phase-progress { font-size: 0.8rem; font-family: monospace; color: var(--text-muted); }
+
+  /* Action items */
+  .action { display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.7rem 1rem; border-left: 2px solid var(--border); margin-left: 0.5rem; margin-bottom: 0.3rem; transition: border-color 0.3s, opacity 0.3s; cursor: pointer; user-select: none; }
+  .action:hover { background: rgba(255,255,255,0.02); }
+  .action.done { border-left-color: var(--done); opacity: 0.65; }
+  .action .check { width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .action.done .check { border-color: var(--done); background: var(--done); }
+  .action.done .check::after { content: '\2713'; color: var(--bg); font-size: 12px; font-weight: 700; }
+  .action .info { flex: 1; }
+  .action .act-title { font-size: 0.88rem; font-weight: 500; }
+  .action.done .act-title { text-decoration: line-through; }
+  .action .act-file { font-size: 0.75rem; font-family: monospace; color: var(--accent); margin-top: 0.15rem; }
+  .action .act-metrics { display: flex; gap: 0.8rem; margin-top: 0.3rem; }
+  .action .act-m { font-size: 0.7rem; font-family: monospace; padding: 0.1rem 0.4rem; border-radius: 3px; }
+  .act-m.dr { background: rgba(108,99,255,0.12); color: var(--r-color); }
+  .act-m.df { background: rgba(255,140,66,0.12); color: var(--f-color); }
+  .act-m.effort { background: rgba(255,255,255,0.05); color: var(--text-muted); }
+
+  /* Legend */
+  .legend { display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 1.5rem; }
+  .legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: var(--text-muted); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  /* Footer */
+  .footer { text-align: center; padding: 1.5rem 0; border-top: 1px solid var(--border); margin-top: 2rem; color: var(--text-muted); font-size: 0.78rem; }
+  .footer .eq { font-family: monospace; color: var(--accent); margin-top: 0.3rem; }
+
+  @media (max-width: 768px) {
+    .live-panel { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>iter[1]: Descenso de Energia Libre</h1>
+  <div class="subtitle">BABYLON-60 v4.0 | Politica optima: min G = (1-R) + F | Click para marcar completado</div>
+</div>
+
+<div class="live-panel">
+  <div class="gauge-card">
+    <h3>Operador de Reconstruccion R</h3>
+    <div class="gauge-row">
+      <div class="gauge-bar">
+        <div class="gauge-fill ghost" id="r-ghost" style="width:80%; background: var(--r-color);"></div>
+        <div class="gauge-fill" id="r-fill" style="width:14%; background: var(--r-color);"></div>
+      </div>
+      <div class="gauge-val" id="r-val" style="color: var(--critical);">0.14</div>
+    </div>
+    <div class="gauge-delta" id="r-delta" style="color: var(--r-color);">target: 0.80</div>
+  </div>
+  <div class="gauge-card">
+    <h3>Calor Disipado F</h3>
+    <div class="gauge-row">
+      <div class="gauge-bar">
+        <div class="gauge-fill ghost" id="f-ghost" style="width:5%; background: var(--f-color);"></div>
+        <div class="gauge-fill" id="f-fill" style="width:38%; background: var(--f-color);"></div>
+      </div>
+      <div class="gauge-val" id="f-val" style="color: var(--high);">0.38</div>
+    </div>
+    <div class="gauge-delta" id="f-delta" style="color: var(--f-color);">target: 0.05</div>
+  </div>
+  <div class="effort-card">
+    <h3>Esfuerzo Acumulado</h3>
+    <div class="effort-nums">
+      <span class="effort-done" id="effort-done">0h</span>
+      <span class="effort-total">/ <span id="effort-total">0</span>h</span>
+    </div>
+    <div class="effort-pct" id="effort-pct">0% completado</div>
+  </div>
+</div>
+
+<div class="chart-section">
+  <h2>Trayectoria de Energia Libre G = (1-R) + F</h2>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background: var(--r-color);"></div> R (reconstruccion)</div>
+    <div class="legend-item"><div class="legend-dot" style="background: var(--f-color);"></div> F (entropia)</div>
+    <div class="legend-item"><div class="legend-dot" style="background: var(--critical);"></div> G (energia libre)</div>
+  </div>
+  <div class="chart-container">
+    <canvas id="trajectory"></canvas>
+  </div>
+</div>
+
+<div id="phases-container"></div>
+
+<div class="footer">
+  iter[1] — Descenso de energia libre sobre el landscape de BABYLON-60 v4.0<br>
+  <div class="eq">G = (1 - R) + F | dG/dt &lt; 0 en cada paso optimo | R &rarr; 1, F &rarr; 0</div>
+  Motor: Claude Opus 4.6 | 2026-08-11
+</div>
+</div>
+
+<script>
+const PHASES = [
+  {
+    id: 'p0', title: 'Fase 0 — Triage de Emergencia', tag: 'CRITICAL',
+    actions: [
+      { id:'a01', title:'Parchear escritura arbitraria en llm_bridge.rs', file:'src-tauri/src/llm_bridge.rs:44', dr:0.02, df:-0.01, effort:1, desc:'Agregar autenticacion y validacion de ruta al endpoint TCP 6006' },
+      { id:'a02', title:'Eliminar/proteger 14 imports de modulos alucinados', file:'Multiples archivos', dr:0.01, df:-0.04, effort:2, desc:'Registrar nombres defensivamente en PyPI o eliminar los imports para cerrar vector de slopsquatting' },
+      { id:'a03', title:'Alinear licencia: Cargo.toml vs LICENSE', file:'Cargo.toml (x6)', dr:0.01, df:-0.01, effort:0.5, desc:'Cambiar license= en los 6 Cargo.toml a BUSL-1.1 o cambiar LICENSE a MIT/Apache-2.0' },
+      { id:'a04', title:'Eliminar token CARGO_REGISTRY expuesto en CLI', file:'.github/workflows/release_distribution.yml:37', dr:0.00, df:-0.01, effort:0.25, desc:'Usar env var nativa CARGO_REGISTRY_TOKEN en lugar de cargo login en command line' },
+      { id:'a05', title:'Corregir verificacion de firma edge (acepta cualquier string)', file:'babylon60/extensions/edge_cloudflare/edge_bridge.py', dr:0.01, df:-0.01, effort:1, desc:'Implementar HMAC-SHA256 real en lugar de startswith("sig")' },
+      { id:'a06', title:'Corregir fallback de webhook token (usa nombre de variable como valor)', file:'babylon60/extensions/kapso/webhook.py', dr:0.01, df:-0.01, effort:0.5, desc:'Fail-fast si no hay keyring ni env var; no usar el literal del nombre' },
+      { id:'a07', title:'Sanitizar inyeccion de comandos OS en monitor', file:'babylon60/extensions/daemon/sidecar/sentinel_monitor/monitor.py:33', dr:0.01, df:-0.01, effort:1, desc:'Escapar datos de blockchain antes de interpolarlos en osascript/PowerShell' },
+    ]
+  },
+  {
+    id: 'p1', title: 'Fase 1 — Purga de Entropia', tag: 'F ↓↓',
+    actions: [
+      { id:'a11', title:'Eliminar o implementar 361 imports fantasma (103 modulos)', file:'babylon60/**/*.py', dr:0.04, df:-0.08, effort:10, desc:'Para cada modulo: implementar backing real o eliminar imports. Priorizar babylon60.engine (95 refs) y babylon60.memory (50 refs)' },
+      { id:'a12', title:'Reemplazar 4 tests tautologicos con aserciones reales', file:'tests/fuzz/mod.rs, tests/property/mod.rs, test_c5_invariants.py', dr:0.02, df:-0.02, effort:4, desc:'Sustituir assert!(true) y mocks siempre-verdaderos con tests que ejerciten logica real' },
+      { id:'a13', title:'Eliminar archivos auto-generados y SQLite binarios de git', file:'.gitignore, *.db', dr:0.00, df:-0.02, effort:1, desc:'git rm --cached los 6 .db files, agregar *.db a .gitignore, eliminar registros auto-generados' },
+      { id:'a14', title:'Eliminar modulos Rust declarados sin archivo fuente', file:'src-tauri/src/main.rs (ear, silence)', dr:0.01, df:-0.01, effort:0.5, desc:'Remover mod ear; mod silence; o crear los archivos fuente correspondientes' },
+    ]
+  },
+  {
+    id: 'p2', title: 'Fase 2 — Correccion Formal', tag: 'LEAN 4',
+    actions: [
+      { id:'a21', title:'Corregir prueba Lean: determinismo real o reetiquetar como confluencia', file:'proof/lean/Babylon.lean:66', dr:0.06, df:-0.01, effort:20, desc:'b60_small_step_determinism demuestra diamond property. Opcion A: demostrar s1=s2 incondicional. Opcion B: renombrar a confluence y actualizar toda documentacion.' },
+      { id:'a22', title:'Agregar Mathlib a lakefile.toml', file:'proof/lean/lakefile.toml', dr:0.01, df:-0.01, effort:1, desc:'import Mathlib.Data.Rat.Basic no compila sin declarar dependencia en lakefile' },
+      { id:'a23', title:'Implementar parser del compilador (actualmente retorna AST vacio)', file:'compiler/src/parser.rs', dr:0.04, df:-0.01, effort:40, desc:'Parser stub que retorna vec![] — implementar parsing real del ISA de 25 opcodes o eliminar el crate' },
+    ]
+  },
+  {
+    id: 'p3', title: 'Fase 3 — Implementacion de Arquitectura Core', tag: 'R ↑↑',
+    actions: [
+      { id:'a31', title:'Implementar WORM quarantine o eliminar todas las claims', file:'kernel/, SPECIFICATION.md, certificates/', dr:0.10, df:-0.02, effort:80, desc:'Feature central de v4.0 no existe. Implementar snapshots criptograficos en zonas aisladas, o eliminar de SPECIFICATION, README, certificados y whitepaper' },
+      { id:'a32', title:'Implementar TPM 2.0 real o eliminar claims de atestacion hardware', file:'babylon60/attestation/merkle_anchor.py', dr:0.08, df:-0.01, effort:60, desc:'Reemplazar hashlib.sha256("TPM_SIG:...") con tpm2-pytss o go-tpm real. O eliminar de documentacion de cumplimiento.' },
+      { id:'a33', title:'Escribir tests para kernel execution engine', file:'kernel/src/eval.rs, isa.rs, state.rs, ledger.rs, time.rs', dr:0.05, df:-0.01, effort:20, desc:'Zero cobertura en el motor core. Agregar tests unitarios para cada opcode, property tests para step(), y eliminar el arm wildcard _ => {}' },
+      { id:'a34', title:'Implementar targets de fuzzing reales', file:'fuzz/src/lib.rs', dr:0.02, df:-0.00, effort:16, desc:'Reemplazar add(2,2) con targets libfuzzer-sys que ejerciten parsers, deserializadores y handlers de protocolo' },
+      { id:'a35', title:'Agregar tests a implementacion Raft', file:'babylon60/extensions/ha/raft.py', dr:0.02, df:-0.00, effort:12, desc:'Modulo de consenso completo sin ningun test — agregar tests de eleccion, particion de red, log replication' },
+    ]
+  },
+  {
+    id: 'p4', title: 'Fase 4 — Hardening CI/CD y Supply Chain', tag: 'SUPPLY',
+    actions: [
+      { id:'a41', title:'Pinear 19 GitHub Actions a SHA', file:'.github/workflows/*.yml', dr:0.02, df:-0.01, effort:2, desc:'Reemplazar @v3/@v4/@v5 con hashes de commit especificos para prevenir compromiso upstream' },
+      { id:'a42', title:'Multi-stage Dockerfile con usuario non-root', file:'Dockerfile', dr:0.02, df:-0.01, effort:3, desc:'Separar build stage de runtime, crear usuario no-root, eliminar curl|sh con checksums verificados' },
+      { id:'a43', title:'Implementar OIDC deploy (actualmente es echo stub)', file:'.github/workflows/oidc-deploy.yml', dr:0.01, df:-0.01, effort:4, desc:'Reemplazar echo "Intercambiar JWT por STS token aqui" con implementacion real de OIDC token exchange' },
+      { id:'a44', title:'Pinear dependencias Python en compaction_monitor', file:'babylon60/extensions/daemon/sidecar/compaction_monitor/requirements.txt', dr:0.01, df:-0.00, effort:1, desc:'Agregar versiones exactas a todas las dependencias del sidecar de produccion' },
+      { id:'a45', title:'Eliminar permisos OIDC excesivos', file:'.github/workflows/release_distribution.yml', dr:0.01, df:-0.00, effort:0.5, desc:'Remover id-token:write de jobs que usan auth basada en secretos' },
+    ]
+  },
+  {
+    id: 'p5', title: 'Fase 5 — Alineacion Documental', tag: 'TRUST',
+    actions: [
+      { id:'a51', title:'Reescribir certificados de cumplimiento EU AI Act', file:'certificates/, whitepaper/', dr:0.05, df:-0.02, effort:8, desc:'Eliminar o corregir claims que referencien WORM, TPM, ABFT o features no implementados. Art. 12 compliance requiere infraestructura real.' },
+      { id:'a52', title:'Actualizar README para reflejar capacidades reales', file:'README.md, README_ES.md, SPECIFICATION.md', dr:0.03, df:-0.01, effort:4, desc:'Marcar features no implementados como "planned" o eliminarlos. Retirar badge "Investment Grade" hasta que R >= 0.70.' },
+      { id:'a53', title:'Agregar verificacion loom al SPSC ring buffer', file:'src/spsc_ring.rs', dr:0.02, df:-0.00, effort:8, desc:'El seqlock tiene loom pero el SPSC ring buffer no. Agregar verificacion exhaustiva + impl Drop para evitar memory leak.' },
+      { id:'a54', title:'Eliminar secreto HMAC hardcodeado del validador de licencia', file:'babylon60/license_sovereign_validator.py:18', dr:0.01, df:-0.01, effort:2, desc:'Mover LICENSE_SECRET_SALT a variable de entorno o KMS. Salt actual permite forjar licencias.' },
+    ]
+  },
+];
+
+// State
+const state = {};
+let totalEffort = 0;
+PHASES.forEach(p => p.actions.forEach(a => { state[a.id] = false; totalEffort += a.effort; }));
+
+function compute() {
+  let r = 0.14, f = 0.38, effortDone = 0, count = 0, total = 0;
+  PHASES.forEach(p => p.actions.forEach(a => {
+    total++;
+    if (state[a.id]) { r += a.dr; f += a.df; effortDone += a.effort; count++; }
+  }));
+  r = Math.min(1, Math.max(0, r));
+  f = Math.max(0, Math.min(1, f));
+  const g = (1 - r) + f;
+  return { r, f, g, effortDone, count, total };
+}
+
+function getTrajectory() {
+  const points = [{ r:0.14, f:0.38, g:0.14+0.38, effort:0 }]; // g = (1-r)+f at start = 0.86+0.38=1.24
+  let r = 0.14, f = 0.38, effort = 0;
+  // Walk through phases in order, completed first within each
+  PHASES.forEach(p => {
+    p.actions.forEach(a => {
+      r = Math.min(1, Math.max(0, r + a.dr));
+      f = Math.max(0, Math.min(1, f + a.df));
+      effort += a.effort;
+      points.push({ r, f, g: (1-r)+f, effort });
+    });
+  });
+  return points;
+}
+
+function getCurrentPoint() {
+  let r = 0.14, f = 0.38, effort = 0;
+  PHASES.forEach(p => p.actions.forEach(a => {
+    if (state[a.id]) { r += a.dr; f += a.df; effort += a.effort; }
+  }));
+  return { r: Math.min(1,Math.max(0,r)), f: Math.max(0,Math.min(1,f)), effort };
+}
+
+function renderGauges(s) {
+  const rFill = document.getElementById('r-fill');
+  const fFill = document.getElementById('f-fill');
+  const rVal = document.getElementById('r-val');
+  const fVal = document.getElementById('f-val');
+  const rDelta = document.getElementById('r-delta');
+  const fDelta = document.getElementById('f-delta');
+  const effortDone = document.getElementById('effort-done');
+  const effortTotalEl = document.getElementById('effort-total');
+  const effortPct = document.getElementById('effort-pct');
+
+  rFill.style.width = (s.r * 100) + '%';
+  fFill.style.width = (s.f * 100) + '%';
+  rVal.textContent = s.r.toFixed(2);
+  fVal.textContent = s.f.toFixed(2);
+
+  // Color coding
+  rVal.style.color = s.r < 0.3 ? 'var(--critical)' : s.r < 0.6 ? 'var(--high)' : s.r < 0.8 ? 'var(--medium)' : 'var(--done)';
+  fVal.style.color = s.f > 0.3 ? 'var(--high)' : s.f > 0.15 ? 'var(--medium)' : s.f > 0.05 ? 'var(--accent2)' : 'var(--done)';
+
+  const dr = s.r - 0.14;
+  const df = s.f - 0.38;
+  rDelta.textContent = dr === 0 ? 'target: 0.80' : 'ΔR = +' + dr.toFixed(2) + ' (target: 0.80)';
+  fDelta.textContent = df === 0 ? 'target: 0.05' : 'ΔF = ' + df.toFixed(2) + ' (target: 0.05)';
+
+  effortDone.textContent = s.effortDone + 'h';
+  effortTotalEl.textContent = Math.round(totalEffort);
+  effortPct.textContent = Math.round((s.effortDone / totalEffort) * 100) + '% completado | G = ' + s.g.toFixed(2);
+}
+
+function renderPhases() {
+  const container = document.getElementById('phases-container');
+  container.innerHTML = '';
+  PHASES.forEach(phase => {
+    const phaseDiv = document.createElement('div');
+    phaseDiv.className = 'phase';
+
+    const doneCount = phase.actions.filter(a => state[a.id]).length;
+    const phaseEffort = phase.actions.reduce((s,a) => s + a.effort, 0);
+    const phaseDr = phase.actions.reduce((s,a) => s + a.dr, 0);
+    const phaseDf = phase.actions.reduce((s,a) => s + a.df, 0);
+
+    phaseDiv.innerHTML = `
+      <div class="phase-header" data-phase="${phase.id}">
+        <div class="phase-title">${phase.title}</div>
+        <div class="phase-meta">
+          <span class="phase-tag">${phase.tag}</span>
+          <span class="phase-tag">ΔR +${phaseDr.toFixed(2)} | ΔF ${phaseDf.toFixed(2)}</span>
+          <span class="phase-tag">${phaseEffort}h</span>
+          <span class="phase-progress">${doneCount}/${phase.actions.length}</span>
+        </div>
+      </div>
+    `;
+
+    phase.actions.forEach(action => {
+      const actionDiv = document.createElement('div');
+      actionDiv.className = 'action' + (state[action.id] ? ' done' : '');
+      actionDiv.dataset.id = action.id;
+      actionDiv.innerHTML = `
+        <div class="check"></div>
+        <div class="info">
+          <div class="act-title">${action.title}</div>
+          <div class="act-file">${action.file}</div>
+          <div class="act-metrics">
+            <span class="act-m dr">ΔR +${action.dr.toFixed(2)}</span>
+            <span class="act-m df">ΔF ${action.df.toFixed(2)}</span>
+            <span class="act-m effort">${action.effort}h</span>
+          </div>
+        </div>
+      `;
+      actionDiv.addEventListener('click', () => {
+        state[action.id] = !state[action.id];
+        update();
+      });
+      phaseDiv.appendChild(actionDiv);
+    });
+
+    container.appendChild(phaseDiv);
+  });
+}
+
+function drawChart() {
+  const canvas = document.getElementById('trajectory');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  ctx.scale(dpr, dpr);
+
+  const W = rect.width;
+  const H = rect.height;
+  const pad = { top: 20, right: 50, bottom: 30, left: 45 };
+  const plotW = W - pad.left - pad.right;
+  const plotH = H - pad.top - pad.bottom;
+
+  ctx.clearRect(0, 0, W, H);
+
+  const traj = getTrajectory();
+  const maxEffort = traj[traj.length-1].effort;
+
+  function x(effort) { return pad.left + (effort / maxEffort) * plotW; }
+  function y(val) { return pad.top + (1 - val) * plotH; }
+
+  // Grid
+  ctx.strokeStyle = '#1a1a25';
+  ctx.lineWidth = 1;
+  for (let v = 0; v <= 1; v += 0.25) {
+    ctx.beginPath();
+    ctx.moveTo(pad.left, y(v));
+    ctx.lineTo(W - pad.right, y(v));
+    ctx.stroke();
+  }
+
+  // Axis labels
+  ctx.fillStyle = '#555';
+  ctx.font = '11px monospace';
+  ctx.textAlign = 'right';
+  for (let v = 0; v <= 1; v += 0.25) {
+    ctx.fillText(v.toFixed(2), pad.left - 5, y(v) + 4);
+  }
+  ctx.textAlign = 'center';
+  ctx.fillText('0h', x(0), H - 5);
+  ctx.fillText(Math.round(maxEffort) + 'h', x(maxEffort), H - 5);
+  ctx.fillText(Math.round(maxEffort/2) + 'h', x(maxEffort/2), H - 5);
+
+  // Draw R trajectory
+  ctx.strokeStyle = '#6c63ff';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  traj.forEach((p, i) => { i === 0 ? ctx.moveTo(x(p.effort), y(p.r)) : ctx.lineTo(x(p.effort), y(p.r)); });
+  ctx.stroke();
+
+  // Draw F trajectory
+  ctx.strokeStyle = '#ff8c42';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  traj.forEach((p, i) => { i === 0 ? ctx.moveTo(x(p.effort), y(p.f)) : ctx.lineTo(x(p.effort), y(p.f)); });
+  ctx.stroke();
+
+  // Draw G trajectory
+  ctx.strokeStyle = '#ff3b5c';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([4,4]);
+  ctx.beginPath();
+  traj.forEach((p, i) => {
+    const gNorm = Math.min(1, p.g / 1.24); // Normalize G to [0,1]
+    i === 0 ? ctx.moveTo(x(p.effort), y(gNorm)) : ctx.lineTo(x(p.effort), y(gNorm));
+  });
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Current position marker
+  const cur = getCurrentPoint();
+  // R dot
+  ctx.beginPath();
+  ctx.arc(x(cur.effort), y(cur.r), 5, 0, Math.PI*2);
+  ctx.fillStyle = '#6c63ff';
+  ctx.fill();
+  // F dot
+  ctx.beginPath();
+  ctx.arc(x(cur.effort), y(cur.f), 5, 0, Math.PI*2);
+  ctx.fillStyle = '#ff8c42';
+  ctx.fill();
+
+  // Labels at end
+  const lastP = traj[traj.length-1];
+  ctx.font = 'bold 11px monospace';
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#6c63ff';
+  ctx.fillText('R=' + lastP.r.toFixed(2), W - pad.right + 5, y(lastP.r) + 4);
+  ctx.fillStyle = '#ff8c42';
+  ctx.fillText('F=' + lastP.f.toFixed(2), W - pad.right + 5, y(lastP.f) + 4);
+}
+
+function update() {
+  const s = compute();
+  renderGauges(s);
+  renderPhases();
+  drawChart();
+}
+
+// Init
+document.getElementById('effort-total').textContent = Math.round(totalEffort);
+// Check off the ones already done by agent
+['a01', 'a02', 'a03', 'a04', 'a05', 'a06', 'a07', 'a11', 'a12', 'a13', 'a14'].forEach(id => {
+    state[id] = true;
+});
+update();
+window.addEventListener('resize', drawChart);
+</script>
+</body>
+</html>

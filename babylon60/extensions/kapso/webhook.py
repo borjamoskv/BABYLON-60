@@ -39,10 +39,8 @@ async def verify_webhook(request: Request):
         expected_token = os.environ.get("CORTEX_KAPSO_VERIFY_TOKEN")
 
     if not expected_token:
-        logger.warning(
-            "CORTEX_KAPSO_VERIFY_TOKEN no esta configurado en Keyring o variables de entorno. Usando fallback por defecto."
-        )
-        expected_token = "CORTEX_KAPSO_VERIFY_TOKEN"
+        logger.error("CORTEX_KAPSO_VERIFY_TOKEN no esta configurado.")
+        raise HTTPException(status_code=500, detail="Server Configuration Error")
 
     if mode and token:
         if mode == "subscribe" and token == expected_token:

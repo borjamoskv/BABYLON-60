@@ -20,16 +20,10 @@ mod tests {
         ledger_state.insert("MUT_01", original_payload_hash);
         
         // Emulate the SQLite/Committer logic enforcing INV_BFT_04
-        let insert_attempt = ledger_state.get("MUT_01");
-        
         if let Some(existing) = insert_attempt {
-            if *existing != colliding_payload_hash {
-                // Should fail fast and cleanly!
-                // We assert that the system correctly identifies the Byzantine fault.
-                assert!(true, "Byzantine fault correctly detected. Fail-fast engaged.");
-            } else {
-                panic!("Silent INSERT OR IGNORE detected on differing payloads! INV_BFT_04 VIOLATED.");
-            }
+            assert_ne!(*existing, colliding_payload_hash, "Byzantine fault detected: payload hashes must differ on collision");
+        } else {
+            panic!("Expected MUT_01 to exist");
         }
     }
     
@@ -39,15 +33,16 @@ mod tests {
         // to prevent OOM panic attacks from malicious DAH instructions.
         let max_f60_bits = 65536; // e.g. 64KB max precision
         let mut current_bits = 64;
+        let mut exceeded = false;
         
         // Simulating the kernel tracking memory allocations
         for _ in 0..100000 {
             current_bits *= 2; 
             if current_bits > max_f60_bits {
-                assert!(true, "OOM Defense Engaged: F60 precision limit exceeded. Transaction aborted.");
-                return;
+                exceeded = true;
+                break;
             }
         }
-        panic!("Memory bounds defense failed! Fuzzer reached infinite growth.");
+        assert!(exceeded, "Memory bounds defense failed! Fuzzer reached infinite growth.");
     }
 }
