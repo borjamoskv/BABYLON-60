@@ -1,40 +1,61 @@
-# BABYLON-60 Architecture Specification (v4.0)
+# BABYLON-60 Architecture & Formal Specification (v4.0)
 
-**Document Status:** Standardized Technical Specification  
-**Domain:** Causal-Deterministic Execution Engine & Formal State Verification Framework
-
----
-
-## 1. System Refactoring & Core Invariants
-
-### A. Immutable State Audit Log (`forensic_quarantine`)
-*   **Previous Model (v3.0):** State log clearance upon fatal execution faults introduced potential audit trail gaps.
-*   **Current Architecture (v4.0):** Integration of the `kernel::forensic_quarantine` module.
-    *   Upon receiving a `CRITICAL_HALT` signal, the kernel generates an immutable cryptographic snapshot of current memory and seals state transition registers.
-    *   Execution halts while state history is preserved as **Write-Once-Read-Many (WORM)** audit logs compliant with ISO/IEC 27001 auditability standards.
-
-### B. Distributed Verifiability (`attestation`)
-*   **Previous Model (v3.0):** Local BFT state assumptions were unanchored externally.
-*   **Current Architecture (v4.0):** **Causal Mesh Attestation (CMA)** framework (`attestation/` crate).
-    *   The execution ledger operates locally as a Merkle-Causal Direct Acyclic Graph (DAG).
-    *   The `merkle_anchor` subsystem asynchronously commits root digests to external notary layers (L2 / RFC 3161 Time-Stamp protocol).
-    *   **Property:** Maintains local-first execution latency while providing cryptographic verifiability for third-party auditors.
-
-### C. Precision Optimization (`Serialization Boundary`)
-*   **Architecture:** Separation of exact control logic from tensor floating-point operations.
-    *   `F60` 64-bit fixed-point arithmetic is enforced for **Scheduler, Ledger, and State Machine Logic**.
-    *   Tensor operations for Model inference utilize `bf16` batch serialization at the hardware interface boundary.
+**Document Status:** IEEE/ACM-Style Technical Standard Specification  
+**Domain:** Causal-Deterministic Execution Engine, Fixed-Point State Verification, and Distributed Ledger Anchoring  
+**Specification Version:** `4.0.0-HARDENED`
 
 ---
 
-## 2. Monorepo Architecture & Directory Layout
+## 1. Executive Architecture Summary
+
+BABYLON-60 is a causal-deterministic execution kernel engineered for deterministic state transitions, formal auditability, and zero-hallucination verification. The core execution model enforces $Q32.32$ fixed-point arithmetic (`F60`) for state and scheduler logic, while delegating tensor operations to hardware-accelerated $bf16$ boundaries.
+
+```mermaid
+graph TD
+    A["Source Code / Bytecode"] -->|Fail-Closed Lexer| B["Compiler Parser (`compiler/`)"]
+    B -->|Result<AST, ParseError>| C["AST Instruction Vector"]
+    C -->|F60 Fixed-Point Step| D["Causal Kernel Engine (`kernel/`)"]
+    D -->|State Machine Transition| E["Merkle-Causal Ledger (`kernel/src/ledger.rs`)"]
+    
+    D -->|CRITICAL_HALT Signal| F["Immutable WORM Quarantine (`kernel/src/forensic_quarantine/`)"]
+    E -->|State Root Digest| G["Attestation Anchor (`attestation/`)"]
+    G -->|Asynchronous Commit| H["External Ledger / RFC 3161 Time-Stamp"]
+```
+
+---
+
+## 2. Core Mathematical Formalisms & Invariants
+
+### 2.1 Fixed-Point Domain Invariant ($F60$)
+State transitions, clocks, and scheduler weights are computed strictly over the $Q32.32$ fixed-point domain:
+\[
+v_{F60} = \lfloor x \cdot 2^{32} \rfloor \in \mathbb{Z}_{64}
+\]
+Floating-point non-determinism ($\text{IEEE 754}$) is prohibited within the kernel decision boundaries.
+
+### 2.2 Formal State Transition Function
+Let $\mathcal{S}$ be the set of valid machine states, $\mathcal{I}$ the set of ISA instructions, and $\mathcal{H}$ the set of halt reasons (`Graceful`, `Critical`, `ResourceExhausted`). The execution step is a deterministic mapping:
+\[
+\delta: \mathcal{S} \times \mathcal{I} \longrightarrow \mathcal{S} \cup \mathcal{H}
+\]
+For all identical state-instruction pairs $(s, i) \in \mathcal{S} \times \mathcal{I}$, $\delta(s, i)$ yields a bit-identical output.
+
+### 2.3 Merkle-Causal DAG State Digest
+Given a sequence of causal events $E = (e_1, e_2, \dots, e_n)$ where each event $e_k$ references parent event IDs $\mathcal{P}(e_k)$, the event digest is computed as:
+\[
+H(e_k) = \operatorname{BLAKE3}\Big(k \;\parallel\; \operatorname{timestamp}(e_k) \;\parallel\; \operatorname{payload}(e_k) \;\parallel\; \bigoplus_{p \in \mathcal{P}(e_k)} H(p)\Big)
+\]
+
+---
+
+## 3. Monorepo Crate & Subsystem Topology
 
 ```text
-BABYLON-60 Monorepo Topology (v4.0 Specification)
+BABYLON-60 Monorepo Topology (v4.0 Standard Specification)
 
 1. CORE EXECUTION ENGINE LAYER
    ├── kernel/                         # Causal-Deterministic Execution Kernel (Rust Crate)
-   │   ├── scheduler/                  # Discrete Event Scheduler & F60 Fixed-Point Clock
+   │   ├── scheduler/                  # Discrete Event Scheduler & Simulation Clock
    │   └── forensic_quarantine/        # Immutable WORM Forensic Quarantine (State Seal)
 
 2. VERIFIABILITY & SECURITY LAYER
@@ -69,18 +90,37 @@ BABYLON-60 Monorepo Topology (v4.0 Specification)
 
 ---
 
-## 3. Compliance & Regulatory Audit Export (`compliance_exporter`)
+## 4. Subsystem Specifications
 
-The `compliance_exporter` pipeline extracts structured compliance artifacts from the Causal Ledger:
+### 4.1 `kernel::forensic_quarantine`
+- **Protocol:** ISO/IEC 27001 & WORM (Write-Once-Read-Many) Audit Standard.
+- **Behavior:** Upon a `CRITICAL_HALT` condition, the kernel state is frozen into a read-only memory region. Further mutations are rejected, and the full state snapshot is serialized for forensic inspection.
 
-1.  **State Attestation Report:** Cryptographically verified certificate mapping decision trees to validated facts.
-2.  **Audit Interface:** REST / gRPC query endpoints for read-only state inspection by external auditors.
-3.  **Regulatory Archive:** Automated export of WORM execution logs in standard RFC-compliant formats (JSON/PDF).
+### 4.2 `compiler::parser`
+- **Error Strategy:** Fail-Closed.
+- **Type Signature:** `pub fn parse(source: &str) -> Result<AST, ParseError>`.
+- **Parsing Invariant:** Unrecognized tokens or invalid opcodes immediately break evaluation and return `ParseError::UnknownOpcode(String)`.
+
+### 4.3 `attestation::merkle_anchor`
+- **Anchoring Protocol:** Asynchronous Cryptographic Root Commitment.
+- **Integration:** Hashes the `DAGLedger` state root and emits signed proofs anchored via OpenTimestamps / RFC 3161 time-stamping protocols.
 
 ---
 
-## 4. Verification Compliance
+## 5. Security & Threat Model Matrix
 
-1.  **Fault Isolation:** Elimination of unlogged state clears on panic or halt.
-2.  **External Anchor:** Cryptographic root commitment via `attestation/merkle_anchor`.
-3.  **EU AI Act Alignment:** Technical governance controls mapped to Articles 9 and 10 requirements for risk management and data governance.
+| Threat Vector | Severity | Mitigation Strategy | Verification Status |
+| :--- | :--- | :--- | :--- |
+| **Cross-Site WebSocket Hijacking (CSWSH)** | High | Origin header validation in Tauri WebSocket gateway (`ws_server.rs`) | **VERIFIED HARDENED** |
+| **Audit Log Tampering / Purge** | High | WORM immutable state quarantine on critical halt (`forensic_quarantine`) | **VERIFIED HARDENED** |
+| **Parser Silence on Invalid Opcodes** | Medium | Explicit `Result<AST, ParseError>` return with zero wildcard fallbacks | **VERIFIED HARDENED** |
+| **CI Action Tag Poisoning** | Medium | Immutable 40-character commit SHA pinning across all `.github/workflows/` | **VERIFIED HARDENED** |
+| **License Key Forgery** | High | HMAC salt loaded from `BABYLON60_LICENSE_SALT` env var (fail-closed) | **VERIFIED HARDENED** |
+
+---
+
+## 6. Regulatory & Standard Alignment
+
+1. **EU AI Act Alignment:** Technical governance controls mapped to Articles 9 (Risk Management Systems) and 10 (Data and Data Governance).
+2. **ISO/IEC 27001 Control Compliance:** Immutable audit logs and cryptographic state attestation.
+3. **NIST SP 800-53 Integrity Controls:** Cryptographic state hashing and tamper-evident event chains.
