@@ -12,7 +12,7 @@ from typing import Dict, Any
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
-CACHE_DB_PATH = str(ROOT_DIR / "cortex_memory.db")
+CACHE_DB_PATH = str(ROOT_DIR / "data" / "cortex_memory.db")
 
 class CortexInferenceEngine:
     """High-exergy inference engine adapter with L3 memoization."""
