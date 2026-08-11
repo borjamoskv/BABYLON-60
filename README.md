@@ -77,106 +77,54 @@ Built-in exporter generating audit-ready certificates for national supervisory a
 
 ---
 
-## 📚 Documentation Directory Matrix
+## 📚 Monorepo Architecture & Subproject Index
 
-| Domain | Document | Description |
+| Subproject Module | Documentation README | Focus / Technology |
 | :--- | :--- | :--- |
-| **Vision** | [Foundational Manifesto v4.0](./docs/00_MANIFESTO.md) | Core thesis, 4 moat pillars, commercial ROI, and Engineer's Oath |
-| **Research** | [EU AI Act Compliance Whitepaper](./docs/04_research/eu_ai_act_compliance_whitepaper.md) | Comprehensive mapping for Articles 9, 10, 11, 12, 13 & 14 of EU Reg 2024/1689 |
-| **Research** | [Technical Whitepaper v1.0](./docs/WHITEPAPER.md) | Formal paper: F60, Merkle DAG Ledger, Self-Falsification Engine, Proof IR |
-| **Guides** | [Enterprise Quickstart](./docs/03_guides/QUICKSTART_ENTERPRISE.md) | 5-minute DevOps onboarding guide for Docker Compose & Kubernetes/Helm |
-| **Guides** | [Tutorial: Hello Causal World](./docs/03_guides/tutorial_hello_causal.md) | Step-by-step tutorial contrasting BABYLON-60 vs Python/asyncio |
-| **Guides** | [Tonnetz Harmonic Audit Guide](./docs/03_guides/tonnetz_audit_guide.md) | Human oversight (Art. 14) via Neo-Riemannian spatial harmonic graph |
-| **Security** | [Threat Model & Mitigations v4.0](./docs/02_ontology/security_threat_model_v4.md) | Phase II Threat Model: Cryptographic redaction, Grace Period & Bounds |
-| **Specification**| [Formal Specification v4.0](./SPECIFICATION.md) | Complete operational semantics, B60 ISA, Proof IR, P2P Topology |
+| **Rust Kernel** | [`kernel/`](./kernel/README.md) | `#![no_std]` Rust execution engine, $F_{60}$ scheduler, WORM quarantine. |
+| **Cortex Substrate** | [`cortex/`](./cortex/README.md) | Python cognitive memory (`cortex-persist`), SQLite WAL, MCP Server. |
+| **Sovereign IDE** | [`babylon60-ide/`](./babylon60-ide/README.md) | Desktop/Mobile Tauri v2 IDE, FastAPI OpenRouter backend, Iceoryx2 IPC. |
+| **Web Telemetry UI** | [`web/`](./web/README.md) | React 18 + WASM Causal Telemetry visualizer & FSA API mount. |
+| **Tonnetz Human Oversight**| [`tonnetz_app/`](./tonnetz_app/README.md) | Neo-Riemannian toric harmonic graph visualizer (EU AI Act Art. 14). |
+| **Causal Attestation** | [`attestation/`](./attestation/README.md) | TPM 2.0 PCR Quote hardware notary & Merkle DAG state anchoring. |
+| **DSL Compiler** | [`compiler/`](./compiler/README.md) | `.b60` DSL lexer/parser, B60 bytecode IR, Lean 4 proof emitter. |
+| **Strike RS Acceleration**| [`strike_rs/`](./strike_rs/README.md) | PyO3 native GIL bypass, Iceoryx2 shared memory, BLAKE3 taint engine. |
+| **Master Ledger BFT** | [`babylon60/bft/`](./babylon60/bft/README.md) | Escalón 3 Tamper-Evident log with Git Sentinel external witness. |
+| **EVM On-Chain Notary** | [`anvil_yung/`](./anvil_yung/README.md) | Foundry smart contracts for EVM Merkle state root notarization. |
+| **Causal Transpiler** | [`causal_isomorphism/`](./causal_isomorphism/README.md)| Functional F# domain kernel transpiler & linear type checker. |
+| **Continuous Timeline IR** | [`timeline_ir/`](./timeline_ir/README.md) | Continuous-time state graph simulation kernel ($State(t)$). |
+| **APEX Clinical Copilot** | [`docs/06_theory/`](./docs/06_theory/README_APEX.md) | Deterministic clinical-trial protocol amendment-risk copilot. |
+| **Documentation Hub** | [`docs/`](./docs/README.md) | Central index for specifications, whitepapers, GTM playbooks. |
 
 ---
 
 ## 🕹️ Agent Integration & Command Console (Antigravity & WA-Nexus)
 
-BABYLON-60 is not just a passive kernel; it interfaces directly with your preferred AI stack to provide deterministic autonomy, "Deep Research" (AUTODIDACT-Ω), and zero-friction forced execution (ULTRATHINK).
+BABYLON-60 interfaces directly with your preferred AI stack to provide deterministic autonomy, "Deep Research" (AUTODIDACT-Ω), and zero-friction forced execution (ULTRATHINK).
 
 ### 1. LLM Injection (Model Context Protocol)
-The kernel is agnostic and exposes its local tool arsenal via the MCP standard (`cortex_mcp_server.py`):
-- **For Claude Code (Anthropic) & Cursor/Codex (OpenAI):** Native MCP support. Add the local server in settings (or use `claude mcp add`) and your AI immediately inherits WORM Quarantine shielding and local physical execution capabilities.
-- **For ChatGPT (Web):** Export BABYLON-60's toolset in *OpenAPI* JSON format, create a Custom GPT, and inject the schema to operate the kernel over the web.
+The kernel exposes its local tool arsenal via the MCP standard (`cortex_mcp_server.py`):
+- **For Claude Code & Cursor/Codex:** Native MCP support. Add the local server in settings to inherit WORM Quarantine shielding.
+- **For ChatGPT (Web):** Export BABYLON-60's toolset in *OpenAPI* JSON format to operate the kernel over the web.
 
 ### 2. Intervention Gateway (WA-Nexus)
 Control your agent swarms from WhatsApp without standing in front of your PC.
-- **Direct Messages (DMs):** Instant event-driven intervention. Message the AI and it responds frictionlessly.
-- **Group Chats:** Requires the `Moskv-1` trigger at the start of the message to force a hardware interrupt and bypass defensive 5-minute polling.
-- **Kernel Assistance:** Type `Moskv-tips` to receive architectural guidance and operational best practices.
+- **Direct Messages (DMs):** Instant event-driven intervention.
+- **Group Chats:** Requires the `Moskv-1` trigger at the start of the message to force a hardware interrupt.
+- **Kernel Assistance:** Type `Moskv-tips` to receive architectural guidance.
 
 ### 3. Cheat Sheet: Thermodynamic Directives & Slash Commands
-Executable commands from the agent interface (Antigravity) to govern the swarm:
 
 - **⚡ Slash Commands:**
-  - `/goal [task]` $\to$ Triggers continuous execution. The agent refactors or researches relentlessly until goal completion.
-  - `/learn` $\to$ Crystallizes current context into permanent memory for future deployments.
+  - `/goal [task]` $\to$ Triggers continuous execution until goal completion.
+  - `/learn` $\to$ Crystallizes current context into permanent memory.
   - `/schedule` $\to$ Schedules an agentic Cron Job (e.g., audit network every hour).
   - `/grill-me` $\to$ Inquisitor mode. Iterative interview to validate architecture before code generation.
 
 - **🔥 Thermodynamic Triggers (Zero-Friction):**
-  - `ULTRATHINK` $\to$ Forces model inference to collapse into physical code, eliminating generative entropy ("chatter").
+  - `ULTRATHINK` $\to$ Forces model inference to collapse into physical code, eliminating generative entropy.
   - `purga anergia` $\to$ Deterministic cleanup protocol to eradicate zombie files and dead code.
   - `deep research` $\to$ Triggers the AUTODIDACT-Ω engine for ultra-deep web research.
-
-### 4. Zero-Friction Setup on Windows 10
-If you lack a native UNIX environment (macOS/Linux), BABYLON-60 deploys on Windows without modifying environment variables:
-1. Install **Python 3.12** from the **Microsoft Store** (auto-configures PATH).
-2. Open PowerShell / cmd and run: `pip install cortex-persist`.
-3. Launch interactive demo: `python -m babylon60.run_hero_demo`.
-
----
-
-## 🗂️ Monorepo Map
-
-```
-BABYLON-60/
-├── babylon60.rs              # Causal-Deterministic Kernel (bin: b60_kernel)
-├── kernel/                   # Rust Crate: Low-level engine & WORM Quarantine
-├── attestation/              # Rust Crate: TPM 2.0 PCR anchoring & P2P notary
-├── compiler/                 # Rust Crate: B60 → IR compiler + Lean 4 backend
-├── runtime/                  # Rust Crate: Coroutine runtime
-├── proof_ir/                 # Rust Crate: Proof intermediate representation
-├── strike_rs/                # Rust Crate: GIL bypass & exergy extraction (PyO3)
-├── fuzz/                     # Rust Crate: Differential fuzzing
-│
-├── babylon60/                # Primary Python Package (cortex-persist)
-│   ├── compliance_exporter/  # i18n EU AI Act certificate generator (ES, EN, DE, FR, IT)
-│   ├── attestation/          # Merkle PCR Quote TPM 2.0 anchoring & P2P notary
-│   └── primitives/           # F60 → GPU bf16 Serialization Boundary with SHA-256 checksum
-│
-├── causal_isomorphism/       # F# → Rust/Solidity Transpiler
-├── timeline_ir/              # Temporal IR rendering backend
-│
-├── web/                      # React + WASM web interface
-├── tonnetz_app/              # Neo-Riemannian harmonic spatial visualizer (Art. 14)
-├── babylon60-ide/            # Dedicated Sovereign Tauri v2 IDE (macOS, Windows, Android, iOS, Linux)
-│   ├── backend/              # FastAPI bridge (OpenRouter Native + AUTO_SOTA Classifier + Dual-Model Arena)
-│   ├── frontend/             # Industrial Noir React/Vite UI with SOTA Router & Live Telemetry
-│   ├── src-tauri/            # Multi-Platform Rust IPC kernel with Iceoryx2 zero-copy
-│   └── scripts/              # Cross-platform build pipeline (`build_multiplatform.sh`)
-│
-├── hello_causal.b60          # DSL demonstration executable program
-├── BabylonTrace.lean         # Lean 4 verified causality theorems
-├── tests/                    # 301 automated tests (pytest + cargo test)
-├── scripts/                  # CLI tools (run_hero_demo.py, export_country_compliance.py)
-│
-├── docs/                     # Full documentation & GTM portal (01-05)
-│   ├── 01_spec/              # SPECIFICATION AND ARCHITECTURE
-│   ├── 02_ontology/          # ONTOLOGY AND THREAT MODEL V4
-│   ├── 03_guides/            # TUTORIALS AND ENTERPRISE QUICKSTART
-│   ├── 04_research/          # TECHNICAL AND REGULATORY WHITEPAPERS
-│   ├── 05_gtm/               # SALES PLAYBOOK, PITCH DECK AND VC DATA ROOM
-│   └── audits/               # COMPLIANCE CERTIFICATE SAMPLES (ES, EN, DE, FR, IT)
-│
-├── Cargo.toml                # Rust Workspace v4.0.0
-├── pyproject.toml            # cortex-persist v4.0.0
-├── SPECIFICATION.md          # Formal Specification v4.0
-├── LICENSE.md                # Sovereign Exclusion License v1.0
-└── SECURITY.md               # Sovereign Security Policy
-```
 
 ---
 
@@ -203,6 +151,7 @@ npm run build:win     # Build Windows Installer (.msi / .exe NSIS)
 npm run build:android # Build Android Package (.apk / .aab)
 npm run build:ios     # Build iOS Application (.app / .ipa)
 
+# 6. Verify Formal Lean 4 Theorems
 lean BabylonTrace.lean
 ```
 
