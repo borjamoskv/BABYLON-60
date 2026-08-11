@@ -98,7 +98,7 @@ class OpsecSentinelC5:
                 dirs[:] = [d for d in dirs if d not in ignore_dirs]
                 for file in files:
                     fpath = Path(root) / file
-                    if fpath.name == "opsec_sentinel_c5.py" or fpath.stat().st_size > 2 * 1024 * 1024:
+                    if fpath.name in ("opsec_sentinel_c5.py", "fake_aws_credentials", "CANARY_TOKENS.md", "gitleaks.yml") or fpath.stat().st_size > 2 * 1024 * 1024:
                         continue
                     if fpath.suffix in (".pyc", ".db", ".png", ".jpg", ".pdf", ".mp4", ".lock"):
                         continue
