@@ -88,7 +88,7 @@ def main() -> None:
         cmd_args = ["--tenants", str(args.tenants)]
         if args.concurrency:
             cmd_args += ["--concurrency", str(args.concurrency)]
-        sys.exit(run_subcommand("legion_swarm.py", cmd_args + unknown))
+        sys.exit(run_subcommand("c5_legion/legion_swarm.py", cmd_args + unknown))
     elif args.command == "sync":
         sys.exit(run_subcommand("sync_skills_registry.py", unknown))
 
