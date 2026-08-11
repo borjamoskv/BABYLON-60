@@ -32,37 +32,41 @@
 The file structure evolves to reflect the new security maturity and monetization strategy:
 
 ```text
-BABYLON-60/ (v4.0 C5-REAL Sovereign Hardened)
-├── kernel/                   # [CORTEX NÚCLEO] Endofuntor de Puntos Fijos & Invariantes F60
-│   ├── scheduler/            # [IMPLEMENTADO] Orquestador de Corrutinas & Reloj Simulado
-│   └── forensic_quarantine/  # [WORM BLACK BOX] Atractor de Aislamiento Causal (Zombie State)
-│
-├── attestation/              # [ANCLAJE CAUSAL] Lentes y Funtores de Verificabilidad Externa
-│   ├── merkle_anchor/        # [IMPLEMENTED] Anclaje Asíncrono a L2 / Notario Causal
-│   └── oidc_verifier/        # [IMPLEMENTED] Verificador de Identidad Fibrada para el Ledger
-│
-├── compiler/                 # [TRANSDUCTOR CAUSAL - FAIL CLOSED] B60 AST → IR + Lean 4
-├── runtime/                  # [EJECUCIÓN] Operadores Comonádicos de Memoria & Corrutinas
-├── proof_ir/                 # [DEMOSTRACIÓN] IR de Pruebas Formales y Falsabilidad
-├── strike_rs/                # [EXTRACTOR EXERGÍA] Bypass de GIL (PyO3) & Métricas C5
-├── fuzz/                     # [VERIFICACIÓN ADVERSARIAL] Proptests & Robustez de Cuarentena
-│
-├── causal_isomorphism/       # [TRANSPILADOR] Isomorfismos Naturales (F# → Rust/Solidity)
-├── timeline_ir/              # [TOPOLOGÍA] Renderizado de Trayectorias Temporales
-├── ultrathink/               # [TERMODINÁMICA] Scheduler de Mínima Disipación de Landauer
-│
-├── babylon60/                # [PYTHON CORTEX PERSIST] Integración de Modelos de Estado
-│   ├── mamba_engine/         # [IMPLEMENTED] Integración State Space Models (SSM)
-│   └── chaos_monad/          # [MONADA DE ENTROPÍA] Encapsulamiento Estocástico LLM
-│
-├── web/                      # [INTERFAZ] Visualizador de Estados Latentes
-├── tonnetz_app/              # [GEOMETRÍA] Visualizador Armónico de Decisiones
-├── babylon60-ide/            # [IDE TAURI HARDENED] Entorno Soberano (CSWSH Hardened)
-│
-├── BabylonTrace.lean         # [TEOREMAS LEAN 4] Pruebas Formales de Cuarentena & WORM
-├── tests/                    # [BATERÍA DE VERIFICACIÓN] 313 pytest suites pasadas
-├── SPECIFICATION.md          # Especificación Toponómica C5-REAL v4.0
-└── LICENSE                   # Sovereign Dual-License (COMMERCIAL / C5-ENTERPRISE)
+BABYLON-60 Monorepo Topology (v4.0 Standardized Specification)
+
+1. CORE EXECUTION ENGINE LAYER
+   ├── kernel/                         # Causal-Deterministic Execution Kernel (Rust Crate)
+   │   ├── scheduler/                  # Discrete Event Scheduler & F60 Fixed-Point Clock
+   │   └── forensic_quarantine/        # Immutable WORM Forensic Quarantine (State Seal)
+
+2. VERIFIABILITY & SECURITY LAYER
+   ├── attestation/                    # Merkle Root Anchoring & OIDC Identity Cryptography
+   ├── compiler/                       # Fail-Closed Compiler (AST Parser & IR Generator)
+   ├── proof_ir/                       # Formal Verification IR Schema
+   └── fuzz/                           # Proptest & libFuzzer Differential Security Harnesses
+
+3. RUNTIME & INTEROP LAYER
+   ├── runtime/                        # Asynchronous Coroutine Memory & Execution Runtime
+   ├── strike_rs/                      # PyO3 C-Extension (Zero-Copy GIL Bypass Engine)
+   ├── causal_isomorphism/             # Formal AST Transpiler (F# -> Rust / Solidity)
+   ├── timeline_ir/                    # Causal Event Graph & Timeline Renderer
+   └── ultrathink/                     # Dynamic Exergy & Workload Optimizer
+
+4. CORTEX PERSISTENCE & ML LAYER (Python)
+   └── babylon60/                      # Core Python SDK (`cortex-persist`)
+       ├── mamba_engine/               # State Space Models (SSM) Integration
+       └── chaos_monad/                # Encapsulated Stochastic Inference Boundary
+
+5. USER INTERFACE & IDE LAYER
+   ├── web/                            # Web-Based State & Causal Mesh Visualizer
+   ├── tonnetz_app/                    # Harmonic Manifold Decision Visualizer
+   └── babylon60-ide/                  # Desktop Tauri IDE (CSWSH Hardened)
+
+6. FORMAL SPECIFICATION & AUDIT ASSETS
+   ├── BabylonTrace.lean               # Lean 4 Theorem Prover Definitions
+   ├── tests/                          # Automated Pytest Security & Hardening Test Suite (313 Passed)
+   ├── SPECIFICATION.md                # Standardized Architecture Specification
+   └── LICENSE                         # Sovereign Dual-License (Open-Core / Enterprise)
 ```
 
 ---
