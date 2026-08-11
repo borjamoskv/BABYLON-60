@@ -149,7 +149,8 @@ def main() -> None:
     list_parser.add_argument("--search", "-s", type=str, default=None, help="Search script path or description")
 
     # verify
-    subparsers.add_parser("verify", help="Run invariant and axiom verification engine")
+    verify_parser = subparsers.add_parser("verify", help="Run invariant and axiom verification engine")
+    verify_parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
 
     args, unknown = parser.parse_known_args()
 
@@ -191,7 +192,8 @@ def main() -> None:
         cmd_args = ["--json"] if getattr(args, "json", False) else []
         sys.exit(run_subcommand("c5_quality_gates/sync_docs_index.py", cmd_args + unknown))
     elif args.command == "verify":
-        sys.exit(run_subcommand("c5_verifiers/autodetect_invariants.py", unknown))
+        cmd_args = ["--json"] if getattr(args, "json", False) else []
+        sys.exit(run_subcommand("c5_verifiers/autodetect_invariants.py", cmd_args + unknown))
 
 
 if __name__ == "__main__":
