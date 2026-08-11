@@ -5,7 +5,7 @@
 use alloc::vec::Vec;
 use alloc::string::String;
 use alloc::collections::BTreeMap;
-use crate::time::SimulationClock;
+use crate::scheduler::time::SimulationClock;
 
 pub type Hash = [u8; 32];
 pub type EventId = u64;
