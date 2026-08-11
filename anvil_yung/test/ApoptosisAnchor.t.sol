@@ -6,32 +6,32 @@ import "../src/ApoptosisAnchor.sol";
 
 contract ApoptosisAnchorTest is Test {
     ApoptosisAnchor public anchor;
+    bytes32 public constant GENESIS = keccak256("GENESIS");
     
     function setUp() public {
-        anchor = new ApoptosisAnchor("GENESIS");
+        anchor = new ApoptosisAnchor(GENESIS);
     }
     
-    function testFuzz_CommitState(string calldata outputHash, uint256 steps) public {
-        // Enforce basic invariants to prevent revert on empty string or overly massive steps
-        vm.assume(bytes(outputHash).length > 0);
+    function testFuzz_CommitState(bytes32 outputHash, uint256 steps) public {
+        // Enforce basic invariants to prevent overly massive steps
         vm.assume(steps < 1000000);
         
-        string memory prevHead = anchor.currentHead();
+        bytes32 prevHead = anchor.currentHead();
         
         anchor.commitState(prevHead, outputHash, steps);
         
         assertEq(anchor.currentHead(), outputHash);
     }
     
-    function testFuzz_ForkProtection(string calldata invalidInputHash, string calldata outputHash, uint256 steps) public {
-        vm.assume(keccak256(abi.encodePacked(invalidInputHash)) != keccak256(abi.encodePacked(anchor.currentHead())));
+    function testFuzz_ForkProtection(bytes32 invalidInputHash, bytes32 outputHash, uint256 steps) public {
+        vm.assume(invalidInputHash != anchor.currentHead());
         
         vm.expectRevert("BFT_FORK_DETECTED: Input hash does not match current head");
         anchor.commitState(invalidInputHash, outputHash, steps);
     }
     
-    function testFuzz_ApoptosisTruncation(string calldata taint, string calldata reason) public {
-        anchor.logApoptosis(taint, reason);
+    function testFuzz_ApoptosisTruncation(bytes32 taint, string calldata reason, string calldata cid, bytes calldata signature) public {
+        anchor.logApoptosis(taint, reason, cid, signature);
         assertEq(anchor.currentHead(), taint);
         assertEq(anchor.latentSteps(), 0);
     }
@@ -40,6 +40,6 @@ contract ApoptosisAnchorTest is Test {
         address unauthorized = address(0xDEAD);
         vm.prank(unauthorized);
         vm.expectRevert("UNAUTHORIZED_ANCHOR_CALLER");
-        anchor.logApoptosis("TAINT_ATTACK", "ATTACK_REASON");
+        anchor.logApoptosis(keccak256("TAINT"), "ATTACK_REASON", "ipfs://cid", bytes("sig"));
     }
 }
