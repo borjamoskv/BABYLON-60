@@ -177,6 +177,8 @@ _BLOCKED_NAMES = frozenset(
         "classmethod",
         "staticmethod",
         "property",
+        "__getattribute__",
+        "__get__",
     }
 )
 
@@ -198,6 +200,8 @@ _BLOCKED_ATTRS = frozenset(
         "__import__",
         "__loader__",
         "__spec__",
+        "__getattribute__",
+        "__get__",
     }
 )
 

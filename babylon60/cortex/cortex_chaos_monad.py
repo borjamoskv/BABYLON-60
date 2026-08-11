@@ -108,8 +108,16 @@ class BoundedStringIO(StringIO):
 code = sys.stdin.read()
 
 # Stripped down builtins for strict isolation
-# Removed: getattr, hasattr, issubclass, exec, eval, open, __import__, etc.
+# Removed: getattr, hasattr, issubclass, exec, eval, open, etc. Added safe __import__.
+def _safe_import(name, globals=None, locals=None, fromlist=(), level=0):
+    allowed_imports = {"numpy", "networkx", "typing"}
+    base_name = name.split('.')[0]
+    if base_name not in allowed_imports:
+        raise ImportError(f"SecurityError: Import of '{name}' is forbidden by CORTEX Sandbox")
+    return __import__(name, globals, locals, fromlist, level)
+
 safe_builtins = {
+    '__import__': _safe_import,
     'abs': abs, 'all': all, 'any': any, 'ascii': ascii, 'bin': bin,
     'bool': bool, 'bytearray': bytearray, 'bytes': bytes, 'chr': chr,
     'complex': complex, 'dict': dict, 'dir': dir, 'divmod': divmod,

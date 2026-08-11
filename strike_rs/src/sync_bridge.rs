@@ -27,7 +27,7 @@ impl ExergyBridge for C5ExergyService {
         println!("[Causal-Determinist] Incoming Exergy Sync: {}", state.block_hash);
 
         let ack = ExergyAck {
-            verified: true,
+            verified: false, // BFT Causal-Determinist: Require real signature verification
             error_code: String::from("NONE"),
         };
         Ok(Response::new(ack))
