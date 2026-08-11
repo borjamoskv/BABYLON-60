@@ -52,7 +52,7 @@ pub async fn ignite_cortex_bridge(db_state: Arc<CortexLedger>) {
                 // 3. Git Sentinel Autosync (BFT)
                 let _ = Command::new("git").args(["add", &mutation.target_file]).output();
                 let commit_out = Command::new("git")
-                    .args(["-c", "commit.gpgsign=false", "commit", "-m", &mutation.commit_msg, "--no-verify"])
+                    .args(["-c", "commit.gpgsign=false", "commit", "-m", &mutation.commit_msg])
                     .output();
 
                 if let Ok(output) = commit_out {
@@ -86,7 +86,7 @@ pub async fn ignite_cortex_bridge(db_state: Arc<CortexLedger>) {
                         let is_http = request_str.starts_with("POST") || request_str.starts_with("GET") || request_str.starts_with("OPTIONS");
                         
                         if is_http && request_str.starts_with("OPTIONS") {
-                            let cors = "HTTP/1.1 204 No Content\r\nAccess-Control-Allow-Origin: *\r\nAccess-Control-Allow-Methods: POST, OPTIONS\r\nAccess-Control-Allow-Headers: Content-Type\r\n\r\n";
+                            let cors = "HTTP/1.1 204 No Content\r\nAccess-Control-Allow-Origin: http://127.0.0.1:1420\r\nAccess-Control-Allow-Methods: POST, OPTIONS\r\nAccess-Control-Allow-Headers: Content-Type\r\n\r\n";
                             let _ = socket.write_all(cors.as_bytes()).await;
                             return;
                         }
@@ -111,7 +111,7 @@ pub async fn ignite_cortex_bridge(db_state: Arc<CortexLedger>) {
                                 let error_json = "{\"status\": \"ERROR\", \"message\": \"UNAUTHORIZED\"}";
                                 if is_http {
                                     let http_err = format!(
-                                        "HTTP/1.1 401 Unauthorized\r\nAccess-Control-Allow-Origin: *\r\nContent-Type: application/json\r\nContent-Length: {}\r\n\r\n{}",
+                                        "HTTP/1.1 401 Unauthorized\r\nAccess-Control-Allow-Origin: http://127.0.0.1:1420\r\nContent-Type: application/json\r\nContent-Length: {}\r\n\r\n{}",
                                         error_json.len(),
                                         error_json
                                     );
@@ -136,12 +136,10 @@ pub async fn ignite_cortex_bridge(db_state: Arc<CortexLedger>) {
                                         false
                                     }
                                 } else {
-                                    // Fallback conservador: si el padre no existe y no se puede canonicalizar, 
-                                    // validamos que la ruta no empiece por / y no contenga ".."
-                                    !target_path.is_absolute() && !mutation.target_file.contains("..")
+                                    false
                                 }
                             } else {
-                                !target_path.is_absolute() && !mutation.target_file.contains("..")
+                                false
                             };
 
                             let contains_forbidden_keywords = mutation.target_file.contains(".ssh")
@@ -154,7 +152,7 @@ pub async fn ignite_cortex_bridge(db_state: Arc<CortexLedger>) {
                                 let error_json = "{\"status\": \"ERROR\", \"message\": \"PATH_TRAVERSAL_DETECTED\"}";
                                 if is_http {
                                     let http_err = format!(
-                                        "HTTP/1.1 400 Bad Request\r\nAccess-Control-Allow-Origin: *\r\nContent-Type: application/json\r\nContent-Length: {}\r\n\r\n{}",
+                                        "HTTP/1.1 400 Bad Request\r\nAccess-Control-Allow-Origin: http://127.0.0.1:1420\r\nContent-Type: application/json\r\nContent-Length: {}\r\n\r\n{}",
                                         error_json.len(),
                                         error_json
                                     );
@@ -172,7 +170,7 @@ pub async fn ignite_cortex_bridge(db_state: Arc<CortexLedger>) {
                                 if let Ok(resp_payload) = resp_rx.await {
                                     if is_http {
                                         let http_resp = format!(
-                                            "HTTP/1.1 200 OK\r\nAccess-Control-Allow-Origin: *\r\nContent-Type: application/json\r\nContent-Length: {}\r\n\r\n{}",
+                                            "HTTP/1.1 200 OK\r\nAccess-Control-Allow-Origin: http://127.0.0.1:1420\r\nContent-Type: application/json\r\nContent-Length: {}\r\n\r\n{}",
                                             resp_payload.len(),
                                             resp_payload
                                         );
@@ -186,7 +184,7 @@ pub async fn ignite_cortex_bridge(db_state: Arc<CortexLedger>) {
                             let error_json = "{\"status\": \"ERROR\", \"message\": \"INVALID_JSON\"}";
                             if is_http {
                                 let http_err = format!(
-                                    "HTTP/1.1 400 Bad Request\r\nAccess-Control-Allow-Origin: *\r\nContent-Type: application/json\r\nContent-Length: {}\r\n\r\n{}",
+                                    "HTTP/1.1 400 Bad Request\r\nAccess-Control-Allow-Origin: http://127.0.0.1:1420\r\nContent-Type: application/json\r\nContent-Length: {}\r\n\r\n{}",
                                     error_json.len(),
                                     error_json
                                 );

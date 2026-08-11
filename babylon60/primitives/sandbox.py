@@ -302,8 +302,9 @@ class ASTSandbox:
         if isinstance(node, ast.Name) and node.id in _BLOCKED_NAMES:
             violations.append(f"Blocked builtin: '{node.id}'")
 
-        if isinstance(node, ast.Attribute) and node.attr in _BLOCKED_ATTRS:
-            violations.append(f"Blocked attribute: '{node.attr}'")
+        if isinstance(node, ast.Attribute):
+            if node.attr in _BLOCKED_ATTRS or node.attr.startswith("_"):
+                violations.append(f"Blocked attribute: '{node.attr}'")
 
         if isinstance(node, ast.Call):
             func = node.func
