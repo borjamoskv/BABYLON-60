@@ -145,6 +145,8 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | Script | Tipo |
 | :--- | :--- |
 | [`c5_cli/pty_tmux_bridge.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cli/pty_tmux_bridge.sh) | Executable Bash Script |
+| [`c5_deploy/COLLAPSE_P0.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_deploy/COLLAPSE_P0.sh) | Executable Bash Script |
+| [`c5_deploy/deploy.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_deploy/deploy.sh) | Executable Bash Script |
 | [`c5_deploy/deploy_hotstuff.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_deploy/deploy_hotstuff.sh) | Executable Bash Script |
 | [`c5_deploy/publish_crates.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_deploy/publish_crates.sh) | Executable Bash Script |
 | [`c5_setup/install_host.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_setup/install_host.sh) | Executable Bash Script |
