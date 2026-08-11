@@ -64,7 +64,7 @@ def run_full_skills_audit() -> bool:
         ("Swarm Quantum Collapse", "orquestar enjambre swarm quantum collapse", "swarm-quantum-collapse"),
         ("FL Studio MCP DSP", "generar script piano roll FL Studio MIDI", "flstudio-mcp-production"),
         ("Frontier Prompting", "prompting de frontera Qwen Claude", "frontier-prompting"),
-        ("Handoff Protocol", "handoff de contexto y sesion", "handoff"),
+        ("Handoff Protocol", "handoff traspaso de contexto y sesion", "handoff"),
     ]
 
     passed_intents = 0
