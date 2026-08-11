@@ -204,6 +204,7 @@ pub fn emit_halt_receipt_with_timestamp<S: Signer>(
     sign1.to_vec().unwrap_or_default()
 }
 
+/// Emite un recibo COSE Sign1 firmado criptográficamente al producirse una parada (*halt*) en la máquina de estados.
 pub fn emit_halt_receipt<S: Signer>(
     m: &SharedManifest,
     motivo: HaltReason,
@@ -212,6 +213,7 @@ pub fn emit_halt_receipt<S: Signer>(
     let epoch = m.epoch_id.load(Ordering::Acquire);
     emit_halt_receipt_with_timestamp(m, motivo, signer, epoch)
 }
+
 
 // ---------------------------------------------------------------------------
 // Estructuras de verificación y deserialización de recibos COSE_Sign1

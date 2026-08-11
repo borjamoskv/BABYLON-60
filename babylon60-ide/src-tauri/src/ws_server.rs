@@ -5,13 +5,14 @@ use axum::{
     routing::get,
     Router,
 };
-use futures_util::{sink::SinkExt, stream::StreamExt};
+use futures_util::stream::StreamExt;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
 #[derive(Deserialize, Debug)]
 struct RpcRequest {
     command: String,
+    #[allow(dead_code)]
     args: Option<Value>,
 }
 
