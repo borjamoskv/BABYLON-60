@@ -9,7 +9,7 @@ import sys
 import os
 from cryptography.fernet import Fernet
 
-_BASE = os.path.dirname(os.path.abspath(__file__))
+_BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 try:
     from dotenv import load_dotenv
 
@@ -18,7 +18,7 @@ except ImportError:
     _ = None
 VAULT_DIR = os.path.expandvars("$CORTEX_ROOT/20_VAULT")
 VAULT_KEY = os.environ.get("CORTEX_VAULT_KEY")
-DB_PATH = os.path.expandvars(os.environ.get("CORTEX_DB_PATH", os.path.join(_BASE, "cortex_memory.db")))
+DB_PATH = os.path.expandvars(os.environ.get("CORTEX_DB_PATH", os.path.join(_BASE, "data", "cortex_memory.db")))
 MATRIZ_PATH = os.path.expandvars(
     os.environ.get("CORTEX_MATRIZ_PATH", os.path.join(VAULT_DIR, "matriz_1000_primitivas.yaml.enc"))
 )
