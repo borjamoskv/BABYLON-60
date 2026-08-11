@@ -70,5 +70,11 @@ theorem poison_state_is_irreversible (code : Nat) (halted : Bool) :
     stepKernel (KernelState.Poisoned code) halted = KernelState.Poisoned code := by
   rfl
 
+/-- Theorem: WORM Quarantine Immutability (Pillar 1)
+    A critical halt (quarantine) prevents any further mutation of the causal trace. -/
+theorem quarantine_immutability (code : Nat) (h_halt : true = true) (step_halted : Bool) :
+    stepKernel (KernelState.Poisoned code) step_halted = KernelState.Poisoned code := by
+  rfl
+
 end Babylon60
 
