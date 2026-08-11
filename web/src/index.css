@@ -1,9 +1,127 @@
-@import "tailwindcss";
+/* BABYLON-60 v4.0 — Sovereign Industrial Noir Design System */
+:root {
+  --bg-void: #05070a;
+  --bg-card: rgba(13, 17, 23, 0.75);
+  --bg-card-hover: rgba(22, 27, 34, 0.85);
+  --border-cyan: rgba(0, 240, 255, 0.25);
+  --border-cyan-glow: rgba(0, 240, 255, 0.6);
+  --border-amber: rgba(255, 183, 0, 0.3);
+  --border-emerald: rgba(0, 255, 157, 0.3);
+  
+  --cyan-primary: #00f0ff;
+  --amber-primary: #ffb700;
+  --emerald-primary: #00ff9d;
+  --magenta-accent: #ff0055;
+  --text-main: #f0f6fc;
+  --text-muted: #8b949e;
+  --text-dim: #484f58;
 
-body {
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: #0a0a0a;
-  color: #e2e8f0;
-  font-family: 'JetBrains Mono', monospace, sans-serif;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-void);
+  color: var(--text-main);
+  font-family: var(--font-display);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Industrial Grid Mesh Background */
+.c5-grid-bg {
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Glassmorphism Panel */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-cyan);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel:hover {
+  border-color: var(--border-cyan-glow);
+  box-shadow: 0 12px 40px 0 rgba(0, 240, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(5, 7, 10, 0.8);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 240, 255, 0.6);
+}
+
+/* Glowing Animations */
+@keyframes pulse-cyan {
+  0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 4px rgba(0, 240, 255, 0.4)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.9)); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
+}
+
+.glow-cyan {
+  animation: pulse-cyan 3s infinite ease-in-out;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Badge Styles */
+.c5-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.badge-emerald {
+  background: rgba(0, 255, 157, 0.12);
+  color: var(--emerald-primary);
+  border: 1px solid rgba(0, 255, 157, 0.3);
+}
+
+.badge-cyan {
+  background: rgba(0, 240, 255, 0.12);
+  color: var(--cyan-primary);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+}
+
+.badge-amber {
+  background: rgba(255, 183, 0, 0.12);
+  color: var(--amber-primary);
+  border: 1px solid rgba(255, 183, 0, 0.3);
 }
