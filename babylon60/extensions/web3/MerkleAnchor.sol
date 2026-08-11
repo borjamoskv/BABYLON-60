@@ -47,4 +47,30 @@ contract MerkleAnchor {
     function isAnchored(bytes32 _rootHash) external view returns (bool) {
         return anchoredRoots[_rootHash] > 0;
     }
+
+    /**
+     * @dev Verifies a Merkle proof against an anchored root.
+     * @param proof Array of sibling hashes in the Merkle tree.
+     * @param root The anchored Merkle root.
+     * @param leaf The leaf hash to verify.
+     */
+    function verifyProof(
+        bytes32[] calldata proof,
+        bytes32 root,
+        bytes32 leaf
+    ) external view returns (bool) {
+        require(anchoredRoots[root] > 0, "Root is not anchored");
+        bytes32 computedHash = leaf;
+
+        for (uint256 i = 0; i < proof.length; i++) {
+            bytes32 proofElement = proof[i];
+            if (computedHash <= proofElement) {
+                computedHash = keccak256(abi.encodePacked(computedHash, proofElement));
+            } else {
+                computedHash = keccak256(abi.encodePacked(proofElement, computedHash));
+            }
+        }
+
+        return computedHash == root;
+    }
 }

@@ -122,8 +122,25 @@ pub async fn ignite_cortex_bridge(db_state: Arc<CortexLedger>) {
                                 return;
                             }
                             
-                            // Validate Path Traversal
-                            if mutation.target_file.contains("..") || mutation.target_file.starts_with("/etc/") || mutation.target_file.starts_with("/sys/") || mutation.target_file.starts_with("/proc/") || mutation.target_file.starts_with("/dev/") {
+                            // Validate Path Traversal & Workspace Isolation Guard
+                            let target_path = std::path::Path::new(&mutation.target_file);
+                            let contains_traversal = mutation.target_file.contains("..")
+                                || mutation.target_file.contains(".ssh")
+                                || mutation.target_file.contains(".bash")
+                                || mutation.target_file.contains(".zsh")
+                                || mutation.target_file.contains(".git/hooks")
+                                || mutation.target_file.contains("autostart");
+                            let is_forbidden_root = target_path.is_absolute() && (
+                                mutation.target_file.starts_with("/etc/")
+                                || mutation.target_file.starts_with("/sys/")
+                                || mutation.target_file.starts_with("/proc/")
+                                || mutation.target_file.starts_with("/dev/")
+                                || mutation.target_file.starts_with("/root/")
+                                || mutation.target_file.starts_with("/var/")
+                                || mutation.target_file.starts_with("/tmp/")
+                            );
+
+                            if contains_traversal || is_forbidden_root {
                                 let error_json = "{\"status\": \"ERROR\", \"message\": \"PATH_TRAVERSAL_DETECTED\"}";
                                 if is_http {
                                     let http_err = format!(

@@ -24,19 +24,24 @@ class ScittResult(TypedDict):
 
 
 def _check_ast_node(node: ast.AST, reflection_funcs: set[str], allowed_imports: set[str]) -> None:
-    # 1. Block Dunder Attributes (Direct access)
-    if isinstance(node, ast.Attribute) and isinstance(node.attr, str) and node.attr.startswith("__") and node.attr.endswith("__"):
-        raise SecurityError(f"Acceso a atributo dunder prohibido: {node.attr}")
+    forbidden_attrs = {"sys", "modules", "os", "subprocess", "popen", "system", "eval", "exec"}
+
+    # 1. Block Dunder Attributes and Forbidden Introspection Attributes
+    if isinstance(node, ast.Attribute) and isinstance(node.attr, str):
+        if node.attr.startswith("__") and node.attr.endswith("__"):
+            raise SecurityError(f"Acceso a atributo dunder prohibido: {node.attr}")
+        if node.attr in forbidden_attrs:
+            raise SecurityError(f"Acceso a atributo prohibido: {node.attr}")
 
     # 2. Block direct call to reflection functions
-    if isinstance(node, ast.Name) and node.id in reflection_funcs:
-        raise SecurityError(f"Llamada a funcion de introspeccion prohibida: {node.id}")
+    if isinstance(node, ast.Name) and (node.id in reflection_funcs or node.id in forbidden_attrs):
+        raise SecurityError(f"Llamada a funcion prohibida: {node.id}")
 
-    # 3. RULE_AST_REFLECT_01: Block string literals containing dunders or reflection func names
+    # 3. RULE_AST_REFLECT_01: Block string literals containing dunders, reflection func names, or OS escape keywords
     if isinstance(node, ast.Constant) and isinstance(node.value, str):
         val = node.value
         is_forbidden_dunder = val.startswith("__") and val.endswith("__") and val != "__main__"
-        if is_forbidden_dunder or val in reflection_funcs:
+        if is_forbidden_dunder or val in reflection_funcs or val in forbidden_attrs:
             raise SecurityError(f"Constante literal prohibida: {val}")
 
     # 4. Block imports except whitelist
@@ -56,9 +61,9 @@ def validate_ast_sandbox(source_code: str) -> tuple[bool, str]:
     """
     reflection_funcs = {
         "getattr", "setattr", "delattr", "__getattribute__",
-        "eval", "exec", "compile", "__import__",
+        "eval", "exec", "compile", "__import__", "open", "input",
     }
-    allowed_imports = {"numpy", "networkx", "warnings", "typing"}
+    allowed_imports = {"numpy", "networkx", "typing"}
 
     try:
         tree = ast.parse(source_code)
@@ -103,7 +108,7 @@ class BoundedStringIO(StringIO):
 code = sys.stdin.read()
 
 # Stripped down builtins for strict isolation
-# Removed: getattr, hasattr, issubclass, exec, eval, open, etc.
+# Removed: getattr, hasattr, issubclass, exec, eval, open, __import__, etc.
 safe_builtins = {
     'abs': abs, 'all': all, 'any': any, 'ascii': ascii, 'bin': bin,
     'bool': bool, 'bytearray': bytearray, 'bytes': bytes, 'chr': chr,
@@ -116,7 +121,7 @@ safe_builtins = {
     'oct': oct, 'ord': ord, 'pow': pow, 'print': print, 'range': range,
     'repr': repr, 'reversed': reversed, 'round': round, 'set': set,
     'slice': slice, 'sorted': sorted, 'str': str, 'sum': sum, 'tuple': tuple,
-    'type': type, 'zip': zip, '__import__': __import__
+    'type': type, 'zip': zip
 }
 # Execute within a restricted global scope (La Monada Estricta)
 env = {"__builtins__": safe_builtins, "__name__": "__main__"}
