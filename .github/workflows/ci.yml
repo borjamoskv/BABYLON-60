@@ -14,5 +14,15 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.1.7
-    - name: Fricción Cero - Echo placeholder
-      run: echo "Inyectar dependencias (Node/Rust/Python) aquí"
+    - name: Rust Toolchain
+      uses: dtolnay/rust-toolchain@stable
+    - name: Rust Check and Test
+      run: cargo check --workspace && cargo test --workspace
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+    - name: Python Pytest
+      run: |
+        pip install pytest
+        pytest tests/

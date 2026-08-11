@@ -5,9 +5,7 @@
 **Layer 0 Infrastructure for Verifiable AI Agents & EU AI Act Regulatory Compliance**
 
 [![Version](https://img.shields.io/badge/Version-4.0.0--Sovereign--Hardened-black?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
-[![Security Rating](https://img.shields.io/badge/Security_Rating-A%2B-brightgreen?style=for-the-badge)](./docs/02_ontology/security_threat_model_v4.md)
-[![EU AI Act](https://img.shields.io/badge/EU_AI_Act-Articles_9--14_Compliant-purple?style=for-the-badge)](./docs/04_research/eu_ai_act_compliance_whitepaper.md)
-[![Formal Verification](https://img.shields.io/badge/Lean_4-Verified-green?style=for-the-badge)](./BabylonTrace.lean)
+
 [![Governance](https://img.shields.io/badge/Governance-C5--REAL-blue?style=for-the-badge)](./SECURITY.md)
 [![License](https://img.shields.io/badge/License-Sovereign_Exclusion_v1.0-orange?style=for-the-badge)](./LICENSE)
 
