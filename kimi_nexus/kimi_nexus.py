@@ -1,21 +1,14 @@
-from fastapi import FastAPI, Request
-from pydantic import BaseModel
 import os
 import httpx
 from dotenv import load_dotenv
+from mcp.server.fastmcp import FastMCP
 
 load_dotenv()
 
-app = FastAPI(title="Kimi Nexus MCP Server")
+# Inicializamos el servidor MCP estándar con Cero Fricción (stdio)
+mcp = FastMCP("Kimi Nexus MCP Server")
 KIMI_API_KEY = os.getenv("KIMI_API_KEY")
 MOONSHOT_API_URL = "https://api.moonshot.cn/v1/chat/completions"
-
-class AskRequest(BaseModel):
-    prompt: str
-
-class AuditRequest(BaseModel):
-    file_content: str
-    criteria: str
 
 async def call_moonshot(messages: list) -> str:
     if not KIMI_API_KEY:
@@ -41,24 +34,24 @@ async def call_moonshot(messages: list) -> str:
         except Exception as e:
             return f"Error de comunicación con Moonshot: {str(e)}"
 
-@app.post("/kimi_ask")
-async def kimi_ask(req: AskRequest):
+@mcp.tool()
+async def kimi_ask(prompt: str) -> str:
+    """Consultar al oráculo Kimi (Moonshot API) bajo el protocolo C5-REAL."""
     messages = [
         {"role": "system", "content": "Eres Kimi, el asistente de IA integrado a través de MCP en BABYLON-60. Utiliza el estándar epistemológico C5-REAL."},
-        {"role": "user", "content": req.prompt}
+        {"role": "user", "content": prompt}
     ]
-    response = await call_moonshot(messages)
-    return {"response": response}
+    return await call_moonshot(messages)
 
-@app.post("/kimi_audit")
-async def kimi_audit(req: AuditRequest):
+@mcp.tool()
+async def kimi_audit(file_content: str, criteria: str) -> str:
+    """Ejecutar auditoría de código bajo invariantes categóricos C5-REAL."""
     messages = [
         {"role": "system", "content": "Eres un auditor estricto de código bajo el protocolo C5-REAL (Categorías de Markov, Lentes Bayesianas). Identifica huecos de existencia, pérdida de exergía y fallos en axiomas."},
-        {"role": "user", "content": f"Criterios de auditoría:\n{req.criteria}\n\nCódigo a auditar:\n```\n{req.file_content}\n```"}
+        {"role": "user", "content": f"Criterios de auditoría:\n{criteria}\n\nCódigo a auditar:\n```\n{file_content}\n```"}
     ]
-    response = await call_moonshot(messages)
-    return {"response": response}
+    return await call_moonshot(messages)
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8050)
+    # Ejecutamos el servidor MCP utilizando stdio (Zero fricción, no consume puertos locales en background)
+    mcp.run(transport='stdio')
