@@ -33,10 +33,43 @@ pub fn step(mut state: MachineState, instr: &Instruction) -> Result<MachineState
         }
         Opcode::Halt => return Err(HaltReason::Graceful),
         Opcode::CriticalHalt => return Err(HaltReason::Critical),
-        // Additional pure operations here
-        _ => {}
+        // Fail-Stop invariant: unknown or unhandled opcodes trigger Critical Halt
+        _ => return Err(HaltReason::Critical),
     }
     
     state.pc = state.pc.saturating_add(1);
     Ok(state)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::isa::{Reg, TypeTag};
+
+    #[test]
+    fn test_step_alloc_load_mov_halt() {
+        let state = MachineState::new();
+        let alloc_instr = Instruction { opcode: Opcode::Alloc(Reg::R1, TypeTag::I64) };
+        let state = step(state, &alloc_instr).unwrap();
+        assert_eq!(state.read_reg(Reg::R1).tag, TypeTag::I64);
+
+        let load_instr = Instruction { opcode: Opcode::LoadImm(Reg::R1, 42) };
+        let state = step(state, &load_instr).unwrap();
+        assert_eq!(state.read_reg(Reg::R1).value, Value::ImmI64(42));
+
+        let mov_instr = Instruction { opcode: Opcode::Mov(Reg::R2, Reg::R1) };
+        let state = step(state, &mov_instr).unwrap();
+        assert_eq!(state.read_reg(Reg::R2).value, Value::ImmI64(42));
+
+        let halt_instr = Instruction { opcode: Opcode::Halt };
+        assert_eq!(step(state, &halt_instr), Err(HaltReason::Graceful));
+    }
+
+    #[test]
+    fn test_step_critical_halt() {
+        let state = MachineState::new();
+        let crit_instr = Instruction { opcode: Opcode::CriticalHalt };
+        assert_eq!(step(state, &crit_instr), Err(HaltReason::Critical));
+    }
+}
 }
