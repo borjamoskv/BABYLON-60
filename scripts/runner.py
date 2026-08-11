@@ -192,6 +192,10 @@ def main() -> None:
     POC_MAP = {
         "xenharmonic": "c5_demos/poc_xenharmonic_swarm.py",
         "categorical": "c5_demos/poc_categorical_hallucination.py",
+        "extinction": "c5_demos/poc_epistemic_extinction.py",
+        "active-inference": "c5_demos/poc_active_inference_efe.py",
+        "eu-ai-act": "c5_demos/poc_eu_ai_act_audit.py",
+        "comonad": "c5_demos/poc_cta_comonad.py",
         "causal-hitl": "c5_demos/poc_causal_hitl_agent.py",
         "graph-wl": "c5_demos/poc_graph_isomorphism_wl.py",
         "planner-worker": "c5_demos/poc_two_tier_planner_worker.py",
@@ -204,8 +208,9 @@ def main() -> None:
         "bft": "c5_demos/run_commercial_bft.py",
         "logos-ethos": "c5_demos/demo_logos_ethos_ship.py",
     }
-    poc_parser = subparsers.add_parser("poc", help="Execute Proof of Concept engines (13 PoCs available)")
-    poc_parser.add_argument("--target", choices=list(POC_MAP.keys()), required=True, help="Target PoC script to execute")
+    poc_parser = subparsers.add_parser("poc", help=f"Execute Proof of Concept engines ({len(POC_MAP)} PoCs available)")
+    poc_parser.add_argument("--target", choices=list(POC_MAP.keys()), default=None, help="Target PoC script to execute")
+    poc_parser.add_argument("--list", action="store_true", help="List all available PoCs and their target keys")
     poc_parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
 
     args, unknown = parser.parse_known_args()
@@ -273,6 +278,14 @@ def main() -> None:
         cmd_args = ["--json"] if getattr(args, "json", False) else []
         sys.exit(run_subcommand("c5_verifiers/autodetect_invariants.py", cmd_args + unknown))
     elif args.command == "poc":
+        if getattr(args, "list", False) or not getattr(args, "target", None):
+            print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓{C5_COLORS.RESET}")
+            print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  {C5_COLORS.BOLD}BABYLON-60{C5_COLORS.RESET} {C5_COLORS.DIM}:: PROOF OF CONCEPT ENGINES (15 PoCs){C5_COLORS.RESET}    {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
+            print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛{C5_COLORS.RESET}\n")
+            for target_key, script_rel in POC_MAP.items():
+                print(f"  {C5_COLORS.BOLD}{C5_COLORS.AMBER}► {target_key:<20}{C5_COLORS.RESET} {C5_COLORS.DIM}│{C5_COLORS.RESET} {script_rel}")
+            print(f"\n{C5_COLORS.DIM}Uso: ./scripts/runner.py poc --target <name>{C5_COLORS.RESET}\n")
+            return
         cmd_args = ["--json"] if getattr(args, "json", False) else []
         target = getattr(args, "target", None)
         if target in POC_MAP:
