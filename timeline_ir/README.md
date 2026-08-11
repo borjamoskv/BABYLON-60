@@ -2,9 +2,18 @@
 
 [![Continuous Time](https://img.shields.io/badge/Simulation-Continuous_Time-blue?style=for-the-badge)]()
 [![State Graph](https://img.shields.io/badge/Graph-Universe_Snapshot-purple?style=for-the-badge)]()
-[![Deterministic](https://img.shields.io/badge/Evaluation-Deterministic-brightgreen?style=for-the-badge)]()
+[![Epistemology](https://img.shields.io/badge/Epistemology-Continuous_Geodesics-green?style=for-the-badge)](../docs/00_MANIFESTO.md)
 
 **Timeline IR** (`timeline_ir`) is the continuous-time simulation kernel and state-graph rendering engine for **BABYLON-60**. It parses temporal timeline domain scripts (`.tlir`), constructs immutable universe snapshot graphs (`state_graph.py`), and evaluates continuous state mutations $State(t)$ deterministically across temporal event streams.
+
+---
+
+## 🧮 C5-REAL Epistemological Context: Continuous Geodesics & Free Energy
+
+Under the **C5-REAL Epistemological Constitution**:
+- **Continuous Geodesics in State Space**: $State(t)$ is not evaluated as discrete spatial jumps; it tracks continuous geodesic flows minimizing Variational Free Energy ($\delta \int F dt = 0$).
+- **Universe Snapshots as Colimit Diagrams**: `UniverseSnapshot` graphs (`state_graph.py`) are **Colimits** of event streams $E(t)$, assembling temporal trajectories without spatial redundancy.
+- **Deterministic Action Evaluation**: `SimulationKernel` (`kernel.py`) processes bisect-sorted event streams maintaining Chentsov parametric information distance invariance.
 
 ---
 
@@ -45,4 +54,4 @@ python3 timeline_ir/run_test.py
 
 ---
 
-<sub>BABYLON-60 Timeline IR Substrate · Continuous-Time Simulation Engine · Borja Moskv</sub>
+<sub>BABYLON-60 Timeline IR Substrate · Continuous Geodesics & State Simulation · Borja Moskv</sub>

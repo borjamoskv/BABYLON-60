@@ -2,9 +2,18 @@
 
 [![EU AI Act](https://img.shields.io/badge/EU_AI_Act-Article_14_Human_Oversight-purple?style=for-the-badge)](../docs/03_guides/tonnetz_audit_guide.md)
 [![Neo-Riemannian](https://img.shields.io/badge/Theory-Neo--Riemannian_Toric_Graph-blue?style=for-the-badge)](https://en.wikipedia.org/wiki/Tonnetz)
-[![Status](https://img.shields.io/badge/Status-Production_Ready-brightgreen?style=for-the-badge)]()
+[![Epistemology](https://img.shields.io/badge/Epistemology-Toric_Harmonic_Lattices-green?style=for-the-badge)](../docs/00_MANIFESTO.md)
 
 **TONNETZ App** is a standalone, browser-based Neo-Riemannian spatial harmonic visualizer and generative audit interface. It serves as the primary visual debugging interface for **EU AI Act Article 14 (Human Oversight)** compliance within BABYLON-60, mapping high-dimensional model drift and cognitive state transitions into a 2D/3D toric harmonic grid.
+
+---
+
+## 🧮 C5-REAL Epistemological Context: Toric Lattices & Drift Optics
+
+Under the **C5-REAL Epistemological Constitution**:
+- **Harmonic Space as a Topological Manifold**: Cognitive state trajectories are projected onto a 2D/3D Toric Harmonic Lattice, transforming abstract model drift into visual spatial trajectories.
+- **Neo-Riemannian Morphisms ($P, L, R$)**: Parallel ($P$), Leading-tone ($L$), and Relative ($R$) transformations form a discrete group acting on triad nodes, making state transitions fully reversible and deterministic.
+- **Human Oversight (Art. 14)**: Allows human auditors to visually inspect information distance shifts and variational free energy anomalies ($\delta \int F dt \neq 0$) before safety limits are breached.
 
 ---
 
@@ -53,4 +62,4 @@ tonnetz_app/
 
 ---
 
-<sub>BABYLON-60 Tonnetz Substrate · Human Oversight (Art. 14) · Borja Moskv</sub>
+<sub>BABYLON-60 Tonnetz Substrate · Human Oversight (Art. 14) & Toric Harmonic Lattices · Borja Moskv</sub>
