@@ -36,6 +36,7 @@ pub fn step(mut state: MachineState, instr: &Instruction) -> Result<MachineState
                 Value::ImmI64(v) => *v,
                 Value::Reg(r) => match state.read_reg(*r).value {
                     Value::ImmI64(v) => v,
+                    _ => return Err(HaltReason::Critical),
                 },
             };
             let mut cell = state.read_reg(*dest).clone();
@@ -51,6 +52,7 @@ pub fn step(mut state: MachineState, instr: &Instruction) -> Result<MachineState
                 Value::ImmI64(v) => *v,
                 Value::Reg(r) => match state.read_reg(*r).value {
                     Value::ImmI64(v) => v,
+                    _ => return Err(HaltReason::Critical),
                 },
             };
             let mut cell = state.read_reg(*dest).clone();
@@ -66,6 +68,7 @@ pub fn step(mut state: MachineState, instr: &Instruction) -> Result<MachineState
                 Value::ImmI64(v) => *v,
                 Value::Reg(r) => match state.read_reg(*r).value {
                     Value::ImmI64(v) => v,
+                    _ => return Err(HaltReason::Critical),
                 },
             };
             let mut cell = state.read_reg(*dest).clone();
@@ -81,6 +84,7 @@ pub fn step(mut state: MachineState, instr: &Instruction) -> Result<MachineState
                 Value::ImmI64(v) => *v,
                 Value::Reg(r) => match state.read_reg(*r).value {
                     Value::ImmI64(v) => v,
+                    _ => return Err(HaltReason::Critical),
                 },
             };
             if rhs == 0 {
