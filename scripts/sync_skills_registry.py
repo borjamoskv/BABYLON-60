@@ -124,11 +124,17 @@ def sync_skills_json(verify_only: bool = False) -> bool:
                 "category": info["category"],
             }
             
-    # 3. Update existing tiers and categories to match canonical mapping
+    # 3. Update existing tiers, categories, and display_names to match SKILL.md
     for name, item in entry_map.items():
         if name in SKILL_TIER_MAPPING:
             item["tier"] = SKILL_TIER_MAPPING[name]["tier"]
             item["category"] = SKILL_TIER_MAPPING[name]["category"]
+        skill_file = SKILLS_DIR / name / "SKILL.md"
+        if skill_file.exists():
+            content = skill_file.read_text(encoding="utf-8")
+            m = re.search(r"display_name:\s*\"?(.*?)\"?\s*\n", content)
+            if m:
+                item["display_name"] = m.group(1).strip()
 
     # 4. Update Adjacency Matrix
     adj_set = {(a["source"], a["target"], a["relation"]) for a in adjacency}
