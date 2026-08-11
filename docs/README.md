@@ -119,7 +119,7 @@ cargo test -p babylon60-kernel
 pytest tests/test_ast_sandbox_evasion.py
 
 # 3. Legion Swarm 222 Agent Execution (11 Cores x 20 Threads)
-python3 /tmp/legion_222_agentes.py
+python3 scripts/legion_222_agentes.py
 
 # 4. Lean 4 Formal Verification Integrity Verification
 bash ./scripts/verify_lean_proofs.sh
