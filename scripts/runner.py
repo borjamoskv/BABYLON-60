@@ -80,17 +80,17 @@ def main() -> None:
 
     if args.command == "audit":
         cmd_args = ["--fix"] if getattr(args, "fix", False) else []
-        sys.exit(run_subcommand("audit_scripts_quality.py", cmd_args + unknown))
+        sys.exit(run_subcommand("c5_quality_gates/audit_scripts_quality.py", cmd_args + unknown))
 
     elif args.command == "preserve":
-        sys.exit(run_subcommand("c5_preserve_logs.py", ["--provider", args.provider] + unknown))
+        sys.exit(run_subcommand("c5_log_custody/c5_preserve_logs.py", ["--provider", args.provider] + unknown))
     elif args.command == "swarm":
         cmd_args = ["--tenants", str(args.tenants)]
         if args.concurrency:
             cmd_args += ["--concurrency", str(args.concurrency)]
         sys.exit(run_subcommand("c5_legion/legion_swarm.py", cmd_args + unknown))
     elif args.command == "sync":
-        sys.exit(run_subcommand("sync_skills_registry.py", unknown))
+        sys.exit(run_subcommand("c5_skills_ontology/sync_skills_registry.py", unknown))
 
 
 if __name__ == "__main__":
