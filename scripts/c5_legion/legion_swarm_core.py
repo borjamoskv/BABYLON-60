@@ -17,6 +17,8 @@ import time
 import logging
 from typing import List, Dict, Any
 
+from agent_beeper import AgentPager
+
 # Configuración del logger de entropía
 logging.basicConfig(
     level=logging.INFO,
@@ -25,7 +27,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger("SWARM-CORE")
 
-async def _tenant_execution_cycle(tenant_id: int, semaphore: asyncio.Semaphore) -> Dict[str, Any]:
+async def _tenant_execution_cycle(tenant_id: int, semaphore: asyncio.Semaphore, pager: AgentPager) -> Dict[str, Any]:
     """
     Representa el ciclo de vida de un único agente dentro del enjambre.
     Protegido por el semáforo para garantizar el límite de concurrencia termodinámico.
@@ -34,16 +36,17 @@ async def _tenant_execution_cycle(tenant_id: int, semaphore: asyncio.Semaphore) 
         # Simulamos la función de onda probabilística del agente (Inferencia local)
         start_time = time.perf_counter()
         
-        # Simulación de trabajo: cálculo estocástico / inferencia LLM
-        # En la realidad esto invocaría la API o el LLM local
-        await asyncio.sleep(0.01)  # Sleep mínimo para simular overhead I/O
+        # El agente entra en estado de suspensión pura (0 CPU, 0 fricción)
+        # hasta que recibe el "beep" del orquestador.
+        payload = await pager.wait_for_beep(tenant_id)
         
         execution_time = time.perf_counter() - start_time
         return {
             "tenant_id": tenant_id,
             "status": "COLLAPSED",
             "exergy_consumed": round(execution_time * 1000, 2),  # ms
-            "manifest_integrity": True
+            "manifest_integrity": True,
+            "payload_received": payload
         }
 
 async def run_legion_swarm(num_tenants: int = 10000, concurrency_limit: int = 500, json_output: bool = False) -> None:
@@ -61,17 +64,23 @@ async def run_legion_swarm(num_tenants: int = 10000, concurrency_limit: int = 50
     
     start_time = time.perf_counter()
     
-    # 1. Instanciación del Semáforo de Concurrencia
+    # 1. Instanciación del Semáforo de Concurrencia y el Pager
     semaphore = asyncio.Semaphore(concurrency_limit)
+    pager = AgentPager()
     
     # 2. Generación del campo de onda (Tareas)
     tasks: List[asyncio.Task] = [
-        asyncio.create_task(_tenant_execution_cycle(i, semaphore))
+        asyncio.create_task(_tenant_execution_cycle(i, semaphore, pager))
         for i in range(num_tenants)
     ]
     
-    if not json_output:
-        logger.info("🌊 Funciones de onda probabilísticas emitidas. Esperando Colapso...")
+    logger.info("🌊 Funciones de onda probabilísticas emitidas. Agentes en suspensión (CPU 0%)...")
+    
+    # Simulamos que el orquestador toma su tiempo antes de colapsar la onda
+    await asyncio.sleep(0.5)
+    
+    # El Orquestador transmite el Beep de colapso global
+    pager.beep_swarm(payload="OMEGA_COLLAPSE_SIGNAL")
     
     # 3. Colapso Cuántico (Barrier Event)
     # Todos los resultados convergen en este punto monótono (Teorema CALM)
