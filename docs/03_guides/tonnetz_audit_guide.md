@@ -78,4 +78,27 @@ Article 14 requires that human supervisors be enabled to:
 
 ---
 
+## 5. Popperian Falsification & Landauer Thermodynamic Bound
+
+Under the **C5-REAL Epistemological Constitution**, visual harmonic mapping ($T: \mathrm{Kl}(\mathcal{D}) \to \mathbf{Tonnetz}$) is an *observational heuristic*, not a formal proof of correctness.
+
+### 5.1 Functor Infidelity (Non-Injectivity Lemma)
+The projection functor $T$ collapses distinct stochastic belief states $q_1 \neq q_2$ into identical triadic nodes on the toric lattice ($T(q_1) = T(q_2)$). Therefore, harmonic consonance alone does **not** guarantee semantic validity.
+
+### 5.2 Landauer Exergy Dissipation Limit
+To prevent false-negative safety passes, BABYLON-60 couples the visual grid with exact thermodynamic exergy dissipation tracking in `babylon60-kernel`:
+
+$$\Delta \Xi \ge k_B T \ln(2) \cdot D_{\mathrm{KL}}(p \parallel q)$$
+
+- **Nominal Execution ($D_{\mathrm{KL}} < \epsilon$):** Consonant lattice trajectory, $\Delta \Xi \approx 0$.
+- **Hallucinated State ($D_{\mathrm{KL}} \ge \epsilon$):** Exergy surge triggers an immediate `Step::critical_halt` in Rust, independent of UI display state.
+
+Run the empirical falsification verification:
+```bash
+python3 scripts/verify_tonnetz_falsification.py
+```
+
+---
+
 <sub>BABYLON-60 v4.0 · Human Oversight Guide · Borja Moskv</sub>
+
