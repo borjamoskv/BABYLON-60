@@ -30,15 +30,15 @@ logger = logging.getLogger("SWARM-CORE")
 async def _tenant_execution_cycle(tenant_id: int, semaphore: asyncio.Semaphore, pager: AgentPager) -> Dict[str, Any]:
     """
     Representa el ciclo de vida de un único agente dentro del enjambre.
-    Protegido por el semáforo para garantizar el límite de concurrencia termodinámico.
+    El registro y la espera del Beeper ocurren de forma asíncrona fuera del semáforo.
+    Una vez recibido el Beep, se adquiere el semáforo para ejecutar el colapso sin saturación.
     """
+    # 1. Suspensión pura (0% CPU). Todos los N agentes se registran simultáneamente en el Pager.
+    payload = await pager.wait_for_beep(tenant_id)
+    
+    # 2. Válvula de concurrencia termodinámica (Throttling post-Beep para evitar OOM)
     async with semaphore:
-        # Simulamos la función de onda probabilística del agente (Inferencia local)
         start_time = time.perf_counter()
-        
-        # El agente entra en estado de suspensión pura (0 CPU, 0 fricción)
-        # hasta que recibe el "beep" del orquestador.
-        payload = await pager.wait_for_beep(tenant_id)
         
         execution_time = time.perf_counter() - start_time
         return {
@@ -58,7 +58,9 @@ async def run_legion_swarm(num_tenants: int = 10000, concurrency_limit: int = 50
         concurrency_limit: Máximo de agentes activos simultáneamente.
         json_output: Si es True, emite un payload JSON estructurado en lugar de logs.
     """
-    if not json_output:
+    if json_output:
+        logging.getLogger().setLevel(logging.ERROR)
+    else:
         logger.info(f"⚡ INICIANDO ENJAMBRE LEGION: {num_tenants} Tenantes")
         logger.info(f"⚡ LÍMITE DE CONCURRENCIA (Válvula Termodinámica): {concurrency_limit}")
     
@@ -74,7 +76,8 @@ async def run_legion_swarm(num_tenants: int = 10000, concurrency_limit: int = 50
         for i in range(num_tenants)
     ]
     
-    logger.info("🌊 Funciones de onda probabilísticas emitidas. Agentes en suspensión (CPU 0%)...")
+    if not json_output:
+        logger.info("🌊 Funciones de onda probabilísticas emitidas. Agentes en suspensión (CPU 0%)...")
     
     # Simulamos que el orquestador toma su tiempo antes de colapsar la onda
     await asyncio.sleep(0.5)
