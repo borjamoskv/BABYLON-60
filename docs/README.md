@@ -65,6 +65,7 @@ BABYLON-60 abandons hardware-dependent physical intuition to embrace a category-
 | `[Core]` | **Spanish Main README** | [`README_ES.md`](../README_ES.md) | Versión completa en español del README principal. |
 | `[Kernel]` | **Rust Kernel Engine** | [`kernel/`](../kernel/README.md) | Low-level `#![no_std]` Rust engine, $F_{60}$ scheduler, WORM quarantine. |
 | `[UI]` | **Sovereign IDE** | [`babylon60-ide/`](../babylon60-ide/README.md) | Desktop/Mobile Tauri v2 IDE, FastAPI OpenRouter backend, Iceoryx2 IPC. |
+| `[UI]` | **Tauri Substrate** | [`src-tauri/`](../src-tauri/) | Tauri v2 desktop integration layer & native system bridges. |
 | `[UI]` | **Web Telemetry UI** | [`web/`](../web/README.md) | React 18 + WASM Causal Telemetry visualizer & FSA API mount. |
 | `[Oversight]` | **Tonnetz Human Oversight**| [`tonnetz_app/`](../tonnetz_app/README.md) | Neo-Riemannian toric harmonic graph visualizer (EU AI Act Art. 14). |
 | `[Persistence]`| **Cortex Substrate** | [`cortex/`](../cortex/README.md) | Python memory persistence (`cortex-persist`), SQLite WAL, MCP Server. |
@@ -73,9 +74,18 @@ BABYLON-60 abandons hardware-dependent physical intuition to embrace a category-
 | `[IPC]` | **Strike RS Engine** | [`strike_rs/`](../strike_rs/README.md) | PyO3 native GIL bypass, Iceoryx2 shared memory, BLAKE3 taint graph. |
 | `[BFT]` | **Master Ledger BFT** | [`babylon60/bft/`](../babylon60/bft/README.md) | Escalón 3 Tamper-Evident log with Git Sentinel external witness. |
 | `[Web3]` | **EVM On-Chain Notary** | [`anvil_yung/`](../anvil_yung/README.md) | Foundry smart contracts for EVM Merkle root notarization. |
+| `[Web3]` | **Bitcoin L1 Sink** | [`L1_sink/`](../L1_sink/) | On-chain Bitcoin `OP_RETURN` transaction hashes and anchor receipts. |
 | `[Transpiler]`| **Transpiler (F# -> Rust)**| [`causal_isomorphism/`](../causal_isomorphism/README.md)| Functional F# domain kernel transpiler & linear type checker. |
+| `[Transpiler]`| **F# Domain Kernel** | [`domain_kernel/`](../domain_kernel/) | F# IRP automata domain model (`IRPAutomata.fs`). |
+| `[Proof]` | **Lean 4 Formal Proofs** | [`proof/`](../proof/) | Lean 4 formal proof theorems (`proof/lean/Babylon.lean`). |
+| `[Proof]` | **Proof IR Crate** | [`proof_ir/`](../proof_ir/) | Rust AST to Lean 4 proof IR compiler crate. |
+| `[Proof]` | **Zero-Knowledge Kernel** | [`proof_kernel/`](../proof_kernel/) | NUL-ZK zero-knowledge state boundary kernels. |
+| `[Fuzz]` | **Cargo Fuzzing Targets** | [`fuzz/`](../fuzz/) | Fuzzing suite for AST parsing, binary encoding, and $F_{60}$ boundaries. |
+| `[Meta]` | **Lisp Metamembrane** | [`lisp_metamembrane/`](../lisp_metamembrane/) | Clojure/EDN Lisp metamembrane substrate for non-linear symbolic inference. |
 | `[Simulation]`| **Continuous Timeline IR** | [`timeline_ir/`](../timeline_ir/README.md) | Continuous-time state graph simulation kernel ($State(t)$). |
-| `[Clinical]` | **APEX Clinical Copilot** | [`docs/06_theory/`](./06_theory/README_APEX.md) | Deterministic clinical-trial protocol amendment-risk copilot. |
+| `[Clinical]` | **APEX Clinical Copilot** | [`apex_trials/`](../apex_trials/) | Deterministic clinical-trial protocol amendment-risk copilot & fitted weights. |
+| `[Execution]`| **Ultrathink Engine** | [`ultrathink/`](../ultrathink/) | Zero-friction forced execution scheduler & thermodynamic collapse controller. |
+| `[Ops]` | **Legion Swarm & Scripts**| [`scripts/`](../scripts/) | Legión 222 swarm runner (`legion_222_agentes.py`), Centuria commanders. |
 
 ---
 
@@ -92,8 +102,8 @@ BABYLON-60 abandons hardware-dependent physical intuition to embrace a category-
 
 ## 🚀 Go-To-Market & Commercial Data Room (`docs/05_gtm/`)
 
-- **[Pitch Deck v4.0 (11 Slides)](./PITCH_DECK.md)**: Executive pitch presentation for enterprise B2B sales and investor due diligence.
-- **[Valuation Strategy](./VALUATION_STRATEGY.md)**: Comprehensive valuation analysis ($8M to $400M exit scenarios).
+- **[Pitch Deck v4.0 (11 Slides)](./05_gtm/PITCH_DECK.md)**: Executive pitch presentation for enterprise B2B sales and investor due diligence.
+- **[Valuation Strategy](./05_gtm/VALUATION_STRATEGY.md)**: Comprehensive valuation analysis ($8M to $400M exit scenarios).
 - **[Forensic Quarantine PoC Spec](./05_gtm/forensic_quarantine_poc_spec.md)**: 7-day non-intrusive shadow sidecar PoC specification for enterprise CISOs.
 - **[CISO Cold Email Playbook](./05_gtm/ciso_cold_email_playbook.md)**: High-conversion B2B outreach templates in ES, EN, and DE.
 - **[Enterprise PoC Term Sheet](./05_gtm/enterprise_poc_agreement_term_sheet.md)**: Commercial evaluation contract protecting IP (`CORTEX_LICENSE_KEY`).
