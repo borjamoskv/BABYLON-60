@@ -29,8 +29,10 @@ class SentinelMonitor:
     async def _notify_os(self, title: str, message: str) -> None:
         """Trigger an OS notification (macOS, Linux, Windows) to break focus modes."""
         try:
+            safe_msg = message.replace('\\', '\\\\').replace('"', '\\"')
+            safe_title = title.replace('\\', '\\\\').replace('"', '\\"')
             if sys.platform == "darwin":
-                script = f'display notification "{message}" with title "{title}" sound name "Basso"'
+                script = f'display notification "{safe_msg}" with title "{safe_title}" sound name "Basso"'
                 proc = await asyncio.create_subprocess_exec(
                     "osascript",
                     "-e",
@@ -49,7 +51,9 @@ class SentinelMonitor:
                 )
                 await proc.communicate()
             elif sys.platform == "win32":
-                ps_script = f"(New-Object -ComObject Wscript.Shell).Popup('{message}', 10, '{title}', 0x0 + 0x30)"
+                safe_msg_win = message.replace("'", "''")
+                safe_title_win = title.replace("'", "''")
+                ps_script = f"(New-Object -ComObject Wscript.Shell).Popup('{safe_msg_win}', 10, '{safe_title_win}', 0x0 + 0x30)"
                 proc = await asyncio.create_subprocess_exec(
                     "powershell",
                     "-NoProfile",

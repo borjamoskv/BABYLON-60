@@ -71,8 +71,12 @@ class CloudflareEdgeBridge:
         """
         Validates ZK-Guards coming from the edge node.
         """
+        import os
+        import hmac
         if not signature or len(signature) < 8:
             return False
         logger.debug("Verifying edge signature: %s...", signature[:8])
-        # Placeholder for actual cryptographic verification
-        return signature.startswith("sig") or signature.startswith("v1_edge_")
+        expected = os.environ.get("EDGE_BRIDGE_EXPECTED_SIG", "")
+        if not expected:
+            return False
+        return hmac.compare_digest(signature.encode(), expected.encode())
