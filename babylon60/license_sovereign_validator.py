@@ -15,7 +15,16 @@ import time
 from typing import NamedTuple
 
 # Secret salt for verifying structural hash of commercial keys
-LICENSE_SECRET_SALT: bytes = b"BABYLON60_CORTEX_PERSIST_SOVEREIGN_SECRET_2026"
+def _license_salt() -> bytes:
+    """HMAC salt for license signing. No static fallback: a hardcoded salt lets
+    anyone forge licenses for any tier. Provision out-of-band via env/KMS."""
+    _s = os.environ.get("BABYLON60_LICENSE_SALT")
+    if not _s:
+        raise RuntimeError(
+            "FATAL: BABYLON60_LICENSE_SALT env var required for license signing "
+            "(zero static salt permitted)."
+        )
+    return _s.encode("utf-8")
 
 
 class LicenseStatus(NamedTuple):
@@ -37,7 +46,7 @@ def generate_license_key(owner: str, tier: str, expires_at: int) -> str:
     assert expires_at > 0, "Fail-fast: expires_at must be positive int"
 
     payload = f"{owner}:{tier}:{expires_at}"
-    sig = hmac.new(LICENSE_SECRET_SALT, payload.encode("utf-8"), hashlib.sha256).hexdigest()[:16]
+    sig = hmac.new(_license_salt(), payload.encode("utf-8"), hashlib.sha256).hexdigest()[:16]
     return f"{payload}:{sig}"
 
 
@@ -82,7 +91,7 @@ def verify_license_key(key: str | None = None) -> LicenseStatus:
         )
 
     payload = f"{owner}:{tier}:{exp_str}"
-    expected_sig = hmac.new(LICENSE_SECRET_SALT, payload.encode("utf-8"), hashlib.sha256).hexdigest()[:16]
+    expected_sig = hmac.new(_license_salt(), payload.encode("utf-8"), hashlib.sha256).hexdigest()[:16]
 
     if not hmac.compare_digest(sig, expected_sig):
         return LicenseStatus(
