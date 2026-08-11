@@ -1,4 +1,8 @@
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
+use babylon60_kernel::forensic_quarantine::QuarantineSnapshot;
+use alloc::vec::Vec;
+
+extern crate alloc;
 
 // Placeholder F60 benchmark enforcing Landauer limit
 fn f60_scheduler_cycle_benchmark(c: &mut Criterion) {
@@ -13,13 +17,21 @@ fn f60_scheduler_cycle_benchmark(c: &mut Criterion) {
 }
 
 fn worm_snapshot_serialization_benchmark(c: &mut Criterion) {
-    c.bench_function("worm_quarantine_snapshot", |b| {
-        b.iter(|| {
-            // Emulate memory copy for WORM quarantine (e.g. 64B manifest)
-            let manifest = black_box([0u64; 8]);
-            let _snapshot = manifest.clone();
-        })
-    });
+    let mut group = c.benchmark_group("worm_quarantine_snapshot");
+    // Test with different memory dump sizes: 1KB, 1MB
+    for size in [1024, 1024 * 1024].iter() {
+        group.bench_with_input(BenchmarkId::from_parameter(size), size, |b, &s| {
+            let memory_dump = vec![0u8; s];
+            let causal_hash = [0xABu8; 32];
+            b.iter(|| {
+                // Measure the exact latency of freezing the WORM snapshot
+                let cloned_dump = black_box(memory_dump.clone());
+                let snapshot = QuarantineSnapshot::freeze(black_box(causal_hash), cloned_dump);
+                black_box(snapshot);
+            })
+        });
+    }
+    group.finish();
 }
 
 criterion_group!(benches, f60_scheduler_cycle_benchmark, worm_snapshot_serialization_benchmark);
