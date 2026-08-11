@@ -30,7 +30,8 @@ ISOMORFISMOS_PATH = os.path.expandvars(
 
 
 def bootstrap_cortex(json_output: bool = False) -> None:
-    print("[CORTEX] Initiating bootstrap de persistencia de base de datos...")
+    if not json_output:
+        print("[CORTEX] Initiating bootstrap de persistencia de base de datos...")
     if not VAULT_KEY:
         print(
             "\x1b[1;31m[CORTEX APOPTOSIS]\x1b[0m CORTEX_VAULT_KEY is missing. Causal-Determinist Fail-Fast.",
