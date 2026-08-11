@@ -1,7 +1,7 @@
 ---
 title: Motor Causal Principal — Taxonomía Arsenal de Skills por Exergía
-status: Causal-Determinist
-version: 1.0.0
+status: Causal-Determinist (Verified Physical & Theoretical Arsenal)
+version: 2.0.0
 ---
 
 # Motor Causal Principal — TAXONOMÍA ARSENAL DE SKILLS POR EXERGÍA
@@ -10,9 +10,10 @@ version: 1.0.0
 > Los skills se definen por la exergía que producen.
 
 ```yaml
-Date: 2026-08-09T00:00:00+02:00
+Date: 2026-08-11T20:20:00+02:00
 Operator: borjamoskv
-Total_Skills: 130
+Total_Physical_Skills: 39
+Total_Ecosystem_Skills: 143
 Classification: Thermodynamic Exergy Tiers (S → D)
 Conserved_Quantity: Useful work per token consumed
 ```
@@ -316,7 +317,53 @@ Conserved_Quantity: Useful work per token consumed
 | 140 | `Iceberg_REST_Catalog_Bridge` | Lakehouse federated catalogs → remote Iceberg REST |
 | 141 | `gcs-security-assessment` | GCS security posture, SAIF compliance |
 | 142 | `modern-web-guidance` | Modern web development guidance |
-| 143 | `ManifestV3_AST_Compiler` | Chrome Extensions (Manifest V3) |
+---
+
+## ⚡ PHYSICAL ACTIVE SKILLS INVENTORY (`~/.gemini/config/skills/`)
+
+> **39 Physical SKILL.md modules** deployed and active in the global runtime substrate:
+
+| # | Physical Skill Directory | Category | Tier | Function & Domain |
+|:--|:-------------------------|:---------|:-----|:------------------|
+| 1 | `cortex-kernel` | Kernel | Tier S | Low-level core engine & CORTEX execution monad |
+| 2 | `cortex-skill-composer` | Meta-Kernel | Tier S | Dynamic composition & chaining of CORTEX skills |
+| 3 | `cortex-skill-auditor` | Meta-Kernel | Tier S | Verification & static/dynamic safety audit of skills |
+| 4 | `cortex-skill-genesis` | Meta-Kernel | Tier S | Synthesis & auto-generation of new SKILL.md manifests |
+| 5 | `epistemic-extinction-protocol` | Nucleus | Tier S | Epistemic oblivion & zero-trust credential erasure |
+| 6 | `cta-cognitive-transition-algebra` | Nucleus | Tier S | Formal algebraic state transition modeling |
+| 7 | `agentic-protocol-axiomatization` | Nucleus | Tier S | Axiom enforcement for agent communication protocols |
+| 8 | `categorical-hallucination-audit` | Nucleus | Tier S | Category-theoretic audit of Markov disintegration & $Kl(D)$ bounds |
+| 9 | `existence-gap-audit` | Nucleus | Tier S | Reachability-weighted detection of ghost imports & supply-chain slop |
+| 10 | `polymath-concept-synthesis` | Nucleus | Tier S | Cross-domain polymathic concept unification |
+| 11 | `c5-real-thermodynamic-override` | Governance | Tier S | Emergency thermodynamic state override & halt protection |
+| 12 | `cct-cognitive-theory-advisor` | Nucleus | Tier S | Theoretical advisor for cognitive category structures |
+| 13 | `autodidact-omega-deep-research` | Nucleus | Tier A | Autonomous paper & SOTA research pipeline with Popperian falsification |
+| 14 | `c5-real-devsecops-scaffold` | Governance | Tier A | Zero-trust DevSecOps & CI/CD workflow security scaffold |
+| 15 | `c5-real-legaltech-analysis` | Governance | Tier A | EU AI Act & regulatory compliance legaltech analyzer |
+| 16 | `anergy-purge-protocol` | Governance | Tier A | Thermodynamic purge of zero-exergy code & token bloat |
+| 17 | `swarm-quantum-collapse` | Governance | Tier A | Multi-repo swarm synchronization & quantum collapse engine |
+| 18 | `whatsapp-nexus-protocol` | Governance | Tier A | Sovereign WhatsApp gateway & Baileys bridge protocol |
+| 19 | `dynamic-subagent-lifecycle` | Governance | Tier A | Subagent spawning, lifecycle supervision, and thread join safety |
+| 20 | `google-antigravity-sdk` | Governance | Tier A | Antigravity IDE SDK integration & RPC control |
+| 21 | `browser-subagent-orchestrator` | Governance | Tier A | Autonomous browser agent workflow orchestrator |
+| 22 | `babylon60-ide-orchestrator` | Governance | Tier A | Native Tauri v2 IDE desktop telemetry orchestrator |
+| 23 | `discourse-popperian-falsification` | Operations | Tier A | Empirical falsification & Popperian counter-hypothesis testing |
+| 24 | `ghidra-ida-binary-audit` | Operations | Tier A | Headless Ghidra / IDA Pro reverse-engineering and binary audit |
+| 25 | `jujutsu-vcs-management` | Operations | Tier A | Jujutsu (jj) VCS first-class integration and state DAG operations |
+| 26 | `cortex-telemetry` | Operations | Tier B | Continuous runtime telemetry & comonadic memory tracing |
+| 27 | `frontier-prompting` | Operations | Tier A | Alignment-evading mathematical frontier prompt synthesis |
+| 28 | `homebrew-ecosystem-management` | Operations | Tier B | macOS Homebrew package & environment audit |
+| 29 | `flstudio-mcp-production` | Operations | Tier B | FL Studio 2025 MCP integration & microtonal MIDI DSP generation |
+| 30 | `youtube-remotion-sota` | Operations | Tier B | Remotion React-driven programmatic video rendering |
+| 31 | `youtube-analysis-pipeline` | Operations | Tier B | Video transcript extraction & visual scene analysis |
+| 32 | `cloudflare-mcp-automation` | Operations | Tier B | Cloudflare Workers, DNS, and KV/R2 deployment automation |
+| 33 | `substack-socint-extraction` | Operations | Tier B | Substack publication scraping & SOCINT extraction |
+| 34 | `reddit-socint-extraction` | Operations | Tier B | Reddit API / Web SOCINT scraping & sentiment extraction |
+| 35 | `opentimestamps-l5-diagnostics` | Diagnostics | Tier C | OpenTimestamps Bitcoin calendar attestation diagnostics |
+| 36 | `electron-mac-bundle-collision-diagnostics` | Diagnostics | Tier C | macOS Electron app bundle collision & process diagnostics |
+| 37 | `vscode-git-packed-refs-diagnostics` | Diagnostics | Tier C | Git packed-refs corruption & VSCode locks recovery |
+| 38 | `macos-lulu-firewall-diagnostics` | Diagnostics | Tier C | Objective-See LuLu firewall rules & network flow diagnostics |
+| 39 | `github-api-rate-limit-optimization` | Utilities | Tier C | GitHub REST/GraphQL API secondary rate limit optimization |
 
 ---
 
