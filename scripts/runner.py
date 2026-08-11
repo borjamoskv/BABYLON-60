@@ -115,6 +115,10 @@ def main() -> None:
     # catalog
     catalog_parser = subparsers.add_parser("catalog", help="Generate or display scripts catalog")
     catalog_parser.add_argument("--json", action="store_true", help="Emit catalog JSON to stdout")
+    
+    # docs
+    docs_parser = subparsers.add_parser("docs", help="Synchronize or emit docs index")
+    docs_parser.add_argument("--json", action="store_true", help="Emit the document graph as pure JSON for inter-agentic consumption")
 
     # list
     list_parser = subparsers.add_parser("list", help="List and search scripts by domain or keyword")
@@ -157,6 +161,9 @@ def main() -> None:
             rc1 = run_subcommand("generate_scripts_readme.py", [])
             rc2 = run_subcommand("c5_quality_gates/sync_docs_index.py", [])
             sys.exit(rc1 if rc1 != 0 else rc2)
+    elif args.command == "docs":
+        cmd_args = ["--json"] if getattr(args, "json", False) else []
+        sys.exit(run_subcommand("c5_quality_gates/sync_docs_index.py", cmd_args + unknown))
     elif args.command == "verify":
         sys.exit(run_subcommand("c5_verifiers/autodetect_invariants.py", unknown))
 
