@@ -55,15 +55,15 @@ inductive Step : State → State → Prop where
       -- Bifurcación condicional nula: Solo avanza el estado lógico si R[r] == 0 (el salto se abstrae aquí)
       Step s s -- En semántica de estados pura sin PC explícito, el salto requiere añadir un Program Counter al State, pero como simplificación para la prueba de concepto B60, mantenemos el estado inmutable si se cumple.
 
-/-- 6. Teorema de Confluencia y Determinismo (Church-Rosser) sobre ℚ -/
+/-- 6. Teorema de Confluencia (Propiedad del Diamante / Church-Rosser) sobre ℚ -/
 theorem f60_val_associative (a b c : F60_Val) : (a * b) * c = a * (b * c) := by
   exact mul_assoc a b c
 
 theorem f60_val_commutative (a b : F60_Val) : a * b = b * a := by
   exact mul_comm a b
 
-/-- Invariante: La aritmética sobre F60_Val (ℚ) es determinista a nivel de campo algebraico. -/
-theorem b60_small_step_determinism (s s1 s2 : State) (h1 : Step s s1) (h2 : Step s s2) :
+/-- Invariante: La semántica de pasos pequeños cumple la propiedad de Confluencia Local (Diamond Property). -/
+theorem b60_small_step_confluence (s s1 s2 : State) (h1 : Step s s1) (h2 : Step s s2) :
   s1 = s2 ∨ (∃ s3, Step s1 s3 ∧ Step s2 s3) := by
   cases h1 with
   | assign s r1 v1 =>
