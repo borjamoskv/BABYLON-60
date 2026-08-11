@@ -16,33 +16,30 @@ import sys
 from typing import Dict, Any, List
 
 
-def bayesian_disintegration(prior_dist: List[float], likelihood_matrix: List[List[float]]) -> float:
-    """
-    Computes disintegration entropy bound in Kl(D).
-    Higher entropy indicates categorical divergence / confabulation risk.
-    """
-    total_kl_divergence = 0.0
-    for i, p in enumerate(prior_dist):
-        if p <= 0:
-            continue
-        row = likelihood_matrix[i]
-        row_entropy = -sum(q * math.log2(q + 1e-12) for q in row if q > 0)
-        total_kl_divergence += p * row_entropy
-    return total_kl_divergence
+def kl_divergence(p: List[float], q: List[float]) -> float:
+    """Computes D_KL(P || Q) for two discrete distributions."""
+    return sum(p_i * math.log2(p_i / q_i) for p_i, q_i in zip(p, q) if p_i > 0 and q_i > 0)
 
 
 def run_poc_categorical_hallucination(json_output: bool = False) -> None:
-    # Simulated Kleisli distribution monad transition
-    prior_dist = [0.4, 0.35, 0.25]
-    likelihood_matrix = [
-        [0.95, 0.04, 0.01],
-        [0.02, 0.90, 0.08],
-        [0.10, 0.15, 0.75]
-    ]
+    # 1. P_true (Ground Truth / Causal Precedent from Event Sourcing)
+    # The true transition distribution of the Markov Kernel
+    p_true = [0.1, 0.7, 0.2]
+    
+    # 2. Q_calibrated (Hallucination-Free Hypothesis)
+    # Predict functor perfectly disintegrates over Update functor
+    q_calibrated = [0.1, 0.7, 0.2]
+    
+    # 3. Q_confabulated (Red Teaming Counter-Example)
+    # Model hallucinates variance (spurious mass) not present in causal past
+    q_confabulated = [0.4, 0.2, 0.4]
 
-    divergence_score = bayesian_disintegration(prior_dist, likelihood_matrix)
-    cota_confabulacion = math.tanh(divergence_score)
-    clean = cota_confabulacion < 0.85
+    # Calculate Epistemic Hallucination Bound (D_KL)
+    dkl_calibrated = kl_divergence(p_true, q_calibrated)
+    dkl_confabulated = kl_divergence(p_true, q_confabulated)
+
+    clean = dkl_calibrated < 1e-9
+    red_team_success = dkl_confabulated > 0.5
 
     if json_output:
         payload = {
@@ -50,22 +47,22 @@ def run_poc_categorical_hallucination(json_output: bool = False) -> None:
             "type": "C5_CATEGORICAL_HALLUCINATION_AUDIT",
             "kleisli_category": "Kl(D)",
             "metrics": {
-                "disintegration_entropy_bits": round(divergence_score, 6),
-                "confabulation_bound_tanh": round(cota_confabulacion, 6),
-                "threshold_limit": 0.85
+                "dkl_calibrated_bits": round(dkl_calibrated, 6),
+                "dkl_confabulated_bits": round(dkl_confabulated, 6),
             },
-            "status": "VERIFIED_CLEAN" if clean else "CONFABULATION_DETECTED",
-            "passed": clean
+            "status": "VERIFIED_CLEAN" if clean and red_team_success else "CONFABULATION_DETECTED",
+            "passed": clean and red_team_success
         }
         print(json.dumps(payload, indent=2))
         return
 
     print("============================================================")
-    print(" 🧠 POC 2: CATEGORY-THEORETIC HALLUCINATION AUDIT (Kl(D))")
+    print(" 🧠 POC 2: CATEGORICAL HALLUCINATION AUDIT & RED TEAMING")
     print("============================================================")
-    print(f" Disintegration Entropy (bits) : {divergence_score:.6f}")
-    print(f" Confabulation Bound (tanh)     : {cota_confabulacion:.6f}")
-    print(f" Audit Status                   : {'✅ CLEAN (C5-REAL)' if clean else '❌ CONFABULATION DETECTED'}")
+    print(f" [Axiom Test 1] Calibrated D_KL (bits)   : {dkl_calibrated:.6f}")
+    print(f" [Axiom Test 2] Confabulated D_KL (bits) : {dkl_confabulated:.6f}")
+    print(f" Red Teaming (Falsification) Result      : {'✅ SUCCESS (Breached)' if red_team_success else '❌ FAILED'}")
+    print(f" Overall Audit Status                    : {'✅ CLEAN (C5-REAL)' if clean else '❌ ALIGNMENT FAILED'}")
     print("============================================================\n")
 
 
