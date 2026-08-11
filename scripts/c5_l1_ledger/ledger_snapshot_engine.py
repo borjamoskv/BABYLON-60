@@ -21,7 +21,7 @@ from pathlib import Path
 
 from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
 
-REPO_ROOT = Path(__file__).parents[1]
+REPO_ROOT = Path(__file__).parent.parents[2]
 SNAPSHOT_DIR = REPO_ROOT / "audit" / "snapshots"
 DB_PATH = REPO_ROOT / "cortex.db"
 AUTHOR = "Telmo Dinámico de Moskv (borjamoskv)"

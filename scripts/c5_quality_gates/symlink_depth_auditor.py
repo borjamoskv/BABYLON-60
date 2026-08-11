@@ -13,7 +13,7 @@ import sys
 import os
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).parents[1]
+REPO_ROOT = Path(__file__).parent.parents[2]
 
 
 def is_valid_sibling_symlink(target: str) -> bool:

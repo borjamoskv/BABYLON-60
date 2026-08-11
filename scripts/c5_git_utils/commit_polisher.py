@@ -21,7 +21,7 @@ from babylon60.utils.hygiene import run_exergy_optimizer
 from babylon60.database.core import connect
 from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
 
-REPO_ROOT = Path(__file__).parents[1]
+REPO_ROOT = Path(__file__).parent.parents[2]
 POLL_INTERVAL = 5  # seconds
 DEBOUNCE_TIME = 10  # seconds after last commit before processing
 

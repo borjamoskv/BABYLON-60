@@ -16,7 +16,7 @@ import subprocess
 from pathlib import Path
 from babylon60.transducers.hygiene import run_exergy_optimizer
 
-REPO_ROOT = Path(__file__).parents[1]
+REPO_ROOT = Path(__file__).parent.parents[2]
 
 
 def verify_exergy() -> bool:

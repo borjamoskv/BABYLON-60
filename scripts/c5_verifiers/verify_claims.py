@@ -211,7 +211,7 @@ def main() -> int:
 
     print("\n" + "=" * 84)
     print("  " + " · ".join(f"{k}={v}" for k, v in sorted(tally.items())))
-    audit_dir = Path(__file__).resolve().parent.parent / "cortex" / "audits"
+    audit_dir = Path(__file__).resolve().parent.parent.parent / "cortex" / "audits"
     audit_dir.mkdir(parents=True, exist_ok=True)
     out_file = audit_dir / "verification_report.json"
     json.dump(out, open(out_file, "w"), indent=2, ensure_ascii=False)

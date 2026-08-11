@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from pathlib import Path
 
-METRICS_DIR = Path(__file__).resolve().parents[1] / "babylon60" / "metrics"
-OUTPUT_DIR = Path(__file__).resolve().parents[1] / "assets" / "wallpapers"
+METRICS_DIR = Path(__file__).resolve().parents[2] / "babylon60" / "metrics"
+OUTPUT_DIR = Path(__file__).resolve().parents[2] / "assets" / "wallpapers"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 
