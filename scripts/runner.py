@@ -34,12 +34,22 @@ def run_subcommand(script_name: str, extra_args: list[str]) -> int:
     return res.returncode
 
 
+class C5_COLORS:
+    RESET = "\033[0m"
+    BOLD = "\033[1m"
+    DIM = "\033[2m"
+    CYAN = "\033[38;5;51m"
+    AMBER = "\033[38;5;214m"
+    GREEN = "\033[38;5;46m"
+    RED = "\033[38;5;196m"
+    GRAY = "\033[38;5;240m"
+
+
 def cmd_status() -> None:
-    print("============================================================")
-    print(" 🚀  BABYLON-60 SCRIPT SUITE DASHBOARD & STATUS")
-    print("============================================================")
     py_scripts = [p for p in SCRIPTS_DIR.rglob("*.py") if "__pycache__" not in p.parts]
     sh_scripts = [p for p in SCRIPTS_DIR.rglob("*.sh") if "__pycache__" not in p.parts]
+    domains = [p for p in SCRIPTS_DIR.glob("c5_*") if p.is_dir()]
+    
     shebang_ok = 0
     for p in py_scripts:
         try:
@@ -50,19 +60,33 @@ def cmd_status() -> None:
             pass
 
     pct = (shebang_ok / len(py_scripts) * 100.0) if py_scripts else 0.0
-    print(f"  Python Scripts Registered  : {len(py_scripts)}")
-    print(f"  Shell Scripts Registered   : {len(sh_scripts)}")
-    print(f"  Shebang Compliance (Line 1): {shebang_ok} / {len(py_scripts)} ({pct:.1f}%)")
-    print("============================================================\n")
+    status_color = C5_COLORS.GREEN if pct == 100.0 else C5_COLORS.AMBER
+    
+    # Calculate padding for shebang line to keep the box aligned
+    shebang_text = f"{shebang_ok}/{len(py_scripts)} ({pct:.1f}%)"
+    padding = " " * max(0, 32 - len(shebang_text))
+
+    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓{C5_COLORS.RESET}")
+    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  {C5_COLORS.BOLD}BABYLON-60{C5_COLORS.RESET} {C5_COLORS.DIM}:: SCRIPT SUITE DASHBOARD & STATUS{C5_COLORS.RESET}          {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
+    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫{C5_COLORS.RESET}")
+    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  {C5_COLORS.GRAY}System Metrics{C5_COLORS.RESET}                                           {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
+    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  • C5-REAL Domains      : {C5_COLORS.AMBER}{len(domains):<32}{C5_COLORS.RESET} {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
+    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  • Python Scripts       : {C5_COLORS.GREEN}{len(py_scripts):<32}{C5_COLORS.RESET} {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
+    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  • Shell Scripts        : {C5_COLORS.GREEN}{len(sh_scripts):<32}{C5_COLORS.RESET} {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
+    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  • Total Executables    : {C5_COLORS.CYAN}{len(py_scripts) + len(sh_scripts):<32}{C5_COLORS.RESET} {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
+    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  • Shebang Compliance   : {status_color}{shebang_text}{C5_COLORS.RESET}{padding} {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
+    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛{C5_COLORS.RESET}\n")
 
 
 def cmd_list(domain_filter: str | None = None, search_term: str | None = None) -> None:
     sys.path.insert(0, str(SCRIPTS_DIR))
     from generate_scripts_readme import collect_data
     data = collect_data()
-    print("============================================================")
-    print(" 📂  BABYLON-60 SCRIPT SUITE TAXONOMY LISTING")
-    print("============================================================")
+    
+    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓{C5_COLORS.RESET}")
+    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  {C5_COLORS.BOLD}BABYLON-60{C5_COLORS.RESET} {C5_COLORS.DIM}:: SCRIPT SUITE TAXONOMY LISTING{C5_COLORS.RESET}          {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
+    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛{C5_COLORS.RESET}")
+    
     total_matches = 0
     for cat_name, scripts in data["categories"].items():
         if domain_filter and domain_filter.lower() not in cat_name.lower():
@@ -75,17 +99,15 @@ def cmd_list(domain_filter: str | None = None, search_term: str | None = None) -
             filtered_scripts.append(s)
 
         if filtered_scripts:
-            print(f"\n{cat_name}")
-            print("-" * 60)
+            print(f"\n{C5_COLORS.BOLD}{C5_COLORS.AMBER}► {cat_name}{C5_COLORS.RESET}")
+            print(f"{C5_COLORS.GRAY}  {'─' * 75}{C5_COLORS.RESET}")
             for s in filtered_scripts:
-                stype = "PY" if s["type"] == "python" else "SH"
+                stype = f"{C5_COLORS.CYAN}PY{C5_COLORS.RESET}" if s["type"] == "python" else f"{C5_COLORS.GREEN}SH{C5_COLORS.RESET}"
                 desc = s["description"][:55] + "..." if len(s["description"]) > 55 else s["description"]
-                print(f"  [{stype}] {s['path']:<45} | {desc}")
+                print(f"  [{stype}] {s['path']:<45} {C5_COLORS.DIM}│{C5_COLORS.RESET} {desc}")
                 total_matches += 1
 
-    print("\n============================================================")
-    print(f" Total Matched Scripts: {total_matches}")
-    print("============================================================\n")
+    print(f"\n{C5_COLORS.BOLD}{C5_COLORS.CYAN}▶ Total Matched Scripts: {C5_COLORS.GREEN}{total_matches}{C5_COLORS.RESET}\n")
 
 
 def main() -> None:
@@ -110,7 +132,8 @@ def main() -> None:
     swarm_parser.add_argument("--concurrency", "-c", type=int, default=None)
 
     # sync
-    subparsers.add_parser("sync", help="Synchronize physical skills with docs/skills.json")
+    sync_parser = subparsers.add_parser("sync", help="Synchronize physical skills with docs/skills.json")
+    sync_parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
 
     # catalog
     catalog_parser = subparsers.add_parser("catalog", help="Generate or display scripts catalog")
@@ -151,9 +174,12 @@ def main() -> None:
             cmd_args += ["--concurrency", str(args.concurrency)]
         sys.exit(run_subcommand("c5_legion/legion_swarm.py", cmd_args + unknown))
     elif args.command == "sync":
-        rc1 = run_subcommand("c5_skills_ontology/sync_skills_registry.py", unknown)
-        rc2 = run_subcommand("c5_quality_gates/sync_docs_index.py", [])
-        sys.exit(rc1 if rc1 != 0 else rc2)
+        if getattr(args, "json", False):
+            sys.exit(run_subcommand("c5_skills_ontology/sync_skills_registry.py", ["--json"]))
+        else:
+            rc1 = run_subcommand("c5_skills_ontology/sync_skills_registry.py", unknown)
+            rc2 = run_subcommand("c5_quality_gates/sync_docs_index.py", [])
+            sys.exit(rc1 if rc1 != 0 else rc2)
     elif args.command == "catalog":
         if getattr(args, "json", False):
             sys.exit(run_subcommand("generate_scripts_readme.py", ["--json"]))

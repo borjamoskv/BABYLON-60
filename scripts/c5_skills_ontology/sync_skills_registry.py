@@ -95,12 +95,13 @@ def scan_physical_skills() -> Set[str]:
         print(f"Warning: Could not access {SKILLS_DIR}: {e}")
         return set()
 
-def sync_skills_json(verify_only: bool = False) -> bool:
+def sync_skills_json(verify_only: bool = False, json_output: bool = False) -> bool:
     """Sync disk skills with docs/skills.json."""
     physical_skills = scan_physical_skills()
     
     if not DOCS_SKILLS_JSON.exists():
-        print(f"Error: {DOCS_SKILLS_JSON} does not exist.")
+        if not json_output:
+            print(f"Error: {DOCS_SKILLS_JSON} does not exist.")
         return False
         
     with open(DOCS_SKILLS_JSON, "r") as f:
@@ -119,7 +120,8 @@ def sync_skills_json(verify_only: bool = False) -> bool:
     # 2. Re-register missing physical skills
     missing = physical_skills - set(entry_map.keys())
     if missing:
-        print(f"Found {len(missing)} physical skills missing from skills.json: {missing}")
+        if not json_output:
+            print(f"Found {len(missing)} physical skills missing from skills.json: {missing}")
         for name in missing:
             info = SKILL_TIER_MAPPING.get(name, {"tier": 10000, "category": "Utilities"})
             entry_map[name] = {
@@ -159,6 +161,10 @@ def sync_skills_json(verify_only: bool = False) -> bool:
         "adjacency": adjacency,
     }
     
+    if json_output:
+        print(json.dumps(updated_data, indent=2, ensure_ascii=False))
+        return True
+
     if verify_only:
         print(f"Verification completed. Total registered skills: {len(sorted_entries)}")
         return len(missing) == 0
@@ -171,6 +177,11 @@ def sync_skills_json(verify_only: bool = False) -> bool:
     return True
 
 if __name__ == "__main__":
-    verify = "--verify" in sys.argv
-    success = sync_skills_json(verify_only=verify)
+    import argparse
+    parser = argparse.ArgumentParser(description="BABYLON-60 Skills Registry Synchronizer")
+    parser.add_argument("--verify", action="store_true", help="Verify only without writing")
+    parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M consumption")
+    args = parser.parse_args()
+    
+    success = sync_skills_json(verify_only=args.verify, json_output=args.json)
     sys.exit(0 if success else 1)

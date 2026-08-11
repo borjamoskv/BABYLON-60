@@ -11,9 +11,15 @@ Scans agent rule files for new 'INV_C5_' definitions and ensures matching assert
 import os
 import re
 import sys
+import argparse
+import json
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Autopoiesis Invariant Auditor")
+    parser.add_argument("--json", action="store_true", help="Emit structured JSON for M2M")
+    args = parser.parse_args()
+
     root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     agents_file = os.path.join(root_dir, ".agents", "AGENTS.md")
     if not os.path.exists(agents_file):
@@ -21,10 +27,10 @@ def main():
     test_file = os.path.join(root_dir, "tests", "test_c5_invariants.py")
 
     if not os.path.exists(agents_file):
-        print(f"❌ Rules file not found at: {agents_file}")
+        if not args.json: print(f"❌ Rules file not found at: {agents_file}")
         sys.exit(1)
     if not os.path.exists(test_file):
-        print(f"❌ Test file not found at: {test_file}")
+        if not args.json: print(f"❌ Test file not found at: {test_file}")
         sys.exit(1)
 
     # 1. Parse rule definitions from AGENTS.md
@@ -35,9 +41,8 @@ def main():
     rule_matches = re.findall(r"\bINV_C5_(\d+)\b", agents_content)
     defined_invariants = sorted(list(set(int(x) for x in rule_matches)))
 
-    print(
-        f"🔍 Found {len(defined_invariants)} invariant definitions in AGENTS.md: {[f'INV_C5_{x:02d}' for x in defined_invariants]}"
-    )
+    if not args.json:
+        print(f"🔍 Found {len(defined_invariants)} invariant definitions in AGENTS.md: {[f'INV_C5_{x:02d}' for x in defined_invariants]}")
 
     # 2. Parse test functions from test_c5_invariants.py
     with open(test_file, "r") as f:
@@ -46,16 +51,11 @@ def main():
     test_matches = re.findall(r"def\s+test_inv_c5_(\d+)", test_content)
     tested_invariants = sorted(list(set(int(x) for x in test_matches)))
 
-    print(f"🧪 Found {len(tested_invariants)} implemented tests: {[f'test_inv_c5_{x:02d}' for x in tested_invariants]}")
+    if not args.json:
+        print(f"🧪 Found {len(tested_invariants)} implemented tests: {[f'test_inv_c5_{x:02d}' for x in tested_invariants]}")
 
     # 3. Detect missing tests
     missing = [x for x in defined_invariants if x not in tested_invariants]
-
-    if not missing:
-        print("✅ Alignment check: PASS. All defined invariants have corresponding tests.")
-        sys.exit(0)
-
-    print(f"⚠️ Detected {len(missing)} missing invariant tests: {[f'INV_C5_{x:02d}' for x in missing]}")
 
     # 4. Automate appending stubs for missing invariants
     modified = False
@@ -64,7 +64,8 @@ def main():
         if func_name in test_content:
             continue
 
-        print(f"⚡ Autonomously generating test assertion for INV_C5_{m:02d}...")
+        if not args.json:
+            print(f"⚡ Autonomously generating test assertion for INV_C5_{m:02d}...")
 
         # Determine rules for the stub based on the invariant index
         stub = ""
@@ -98,7 +99,35 @@ def test_inv_c5_{m:02d}_stub():
     if modified:
         with open(test_file, "w") as f:
             f.write(test_content)
-        print(f"📝 Appended missing test assertions to {test_file}")
+        if not args.json:
+            print(f"📝 Appended missing test assertions to {test_file}")
+
+    if args.json:
+        payload = {
+            "schema_version": "1.0",
+            "type": "C5_INVARIANT_AUDIT",
+            "metrics": {
+                "defined_invariants": len(defined_invariants),
+                "tested_invariants": len(tested_invariants),
+                "missing_tests": len(missing)
+            },
+            "lists": {
+                "defined": [f"INV_C5_{x:02d}" for x in defined_invariants],
+                "tested": [f"INV_C5_{x:02d}" for x in tested_invariants],
+                "missing": [f"INV_C5_{x:02d}" for x in missing]
+            },
+            "status": "PASS" if not missing else "AUTO-HEALED",
+            "healed": modified
+        }
+        print(json.dumps(payload, indent=2))
+        sys.exit(0)
+
+    if not missing:
+        print("✅ Alignment check: PASS. All defined invariants have corresponding tests.")
+        sys.exit(0)
+    else:
+        print(f"⚠️ Detected {len(missing)} missing invariant tests: {[f'INV_C5_{x:02d}' for x in missing]}")
+        sys.exit(0)
 
 
 if __name__ == "__main__":
