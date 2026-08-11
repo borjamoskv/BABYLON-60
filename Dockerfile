@@ -1,6 +1,5 @@
-FROM python:3.12-slim
-
-# C5-REAL Dockerfile for BABYLON-60 CORTEX
+# Stage 1: Build environment
+FROM python:3.12-slim AS builder
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -10,7 +9,6 @@ ENV PYTHONUNBUFFERED=1 \
 
 WORKDIR /app
 
-# Install system dependencies, Rust, and uv
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     curl \
@@ -25,18 +23,24 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ENV PATH="/root/.local/bin:$PATH"
 
-# Copy Python manifests and Rust workspace
 COPY pyproject.toml uv.lock ./
 COPY strike_rs ./strike_rs
-
-# Build Rust extensions
 RUN cd strike_rs && cargo build --release
-
-# Install Python dependencies using uv
 RUN uv sync --frozen --no-dev
-
-# Copy application source
 COPY . .
 
-# Default ignition command
-CMD ["uv", "run", "python", "-m", "babylon60.cli.onco_transducer"]
+# Stage 2: Minimal Runtime environment (Non-root user)
+FROM python:3.12-slim AS runner
+
+WORKDIR /app
+RUN useradd -m -u 1000 appuser
+
+COPY --from=builder /app /app
+COPY --from=builder /root/.local /home/appuser/.local
+
+ENV PATH="/home/appuser/.local/bin:$PATH" \
+    PYTHONUNBUFFERED=1
+
+USER appuser
+
+CMD ["python", "-m", "babylon60.cli.onco_transducer"]
