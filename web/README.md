@@ -1,32 +1,95 @@
-# React + TypeScript + Vite
+# 🌐 BABYLON-60 Web Substrate (`web/`)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+[![Framework](https://img.shields.io/badge/React-18.3-blue?style=for-the-badge&logo=react)](https://react.dev/)
+[![Build Tool](https://img.shields.io/badge/Vite-5.4-purple?style=for-the-badge&logo=vite)](https://vitejs.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![WASM Engine](https://img.shields.io/badge/WASM-Rust_Core-orange?style=for-the-badge)](../rust-core)
 
-Currently, two official plugins are available:
+The **BABYLON-60 Web Dashboard** is a high-performance, **Industrial Noir** web interface engineered with React 18, TypeScript, and WebAssembly (WASM). It provides real-time causal graph rendering, local file system mounting via the File System Access API, and direct telemetry bridges to the **Cortex Engine** (`lm-bridge`).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🎯 Architecture & Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```
+┌─────────────────────────────────────────────────────────────┐
+│                   React 18 / Vite Client                    │
+├──────────────────────────────┬──────────────────────────────┤
+│   Canvas UI (ADHD Mode)      │   FileSystem Access (FSA API)│
+├──────────────────────────────┼──────────────────────────────┤
+│   Cortex LM Bridge (Local)   │   Rust WASM Telemetry Core   │
+└──────────────────────────────┴──────────────────────────────┘
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+- **Industrial Noir Canvas UI**: Real-time interactive spatial canvas rendering state transitions, timeline IR nodes, and causal graphs.
+- **Local File System Access (`io/fs-access.ts`)**: Frictionless local workspace mounting using native browser FS APIs (`Cmd + O` / `Ctrl + O`).
+- **Cortex Neural Bridge (`cortex/lm-bridge.ts`)**: Direct connectivity to local LLMs (LM Studio / Ollama / Cortex MCP Server) with heartbeat telemetry.
+- **Rust WASM Acceleration (`rust-core`)**: In-browser zero-copy evaluation of Merkle DAG chains and sexagesimal arithmetic checks.
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- **Node.js**: `>= 18.0.0`
+- **npm**: `>= 9.0.0`
+
+### Installation & Run
+
+```bash
+# Navigate to web directory
+cd web
+
+# Install dependencies
+npm install
+
+# Start Vite Development Server
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+---
+
+## ⌨️ Keyboard Shortcuts
+
+| Shortcut | Action |
+| :--- | :--- |
+| <kbd>Cmd</kbd> + <kbd>O</kbd> / <kbd>Ctrl</kbd> + <kbd>O</kbd> | Mount local workspace folder via File System Access API |
+| <kbd>Esc</kbd> | Reset canvas layout / center view |
+
+---
+
+## 📁 Directory Structure
+
+```
+web/
+├── public/                 # Static assets & WASM binaries
+├── rust-core/              # Rust WASM compilation target
+├── src/
+│   ├── assets/             # Branding icons & SVGs
+│   ├── cortex/             # LM Studio & Cortex bridge client
+│   ├── io/                 # File System Access API wrappers
+│   ├── ui/                 # Canvas components & telemetry widgets
+│   ├── App.css             # Tailwind/Custom Industrial Noir styling
+│   ├── App.tsx             # Main layout & event router
+│   └── main.tsx            # React entrypoint
+├── package.json            # Node project configuration
+└── vite.config.ts          # Vite build & WASM plugin config
+```
+
+---
+
+## 🛠️ Production Build
+
+```bash
+# Build static assets & WASM bundle
+npm run build
+
+# Preview production build locally
+npm run preview
+```
+
+---
+
+<sub>BABYLON-60 Web Substrate · Industrial Noir UI · Borja Moskv</sub>
