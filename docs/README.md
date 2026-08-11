@@ -11,6 +11,16 @@ Welcome to the central documentation index for **BABYLON-60 v4.0**.
 [![Version](https://img.shields.io/badge/Version-4.0.0--Sovereign--Hardened-black?style=for-the-badge)](../README.md)
 [![EU AI Act](https://img.shields.io/badge/EU_AI_Act-Articles_9--14_Compliant-purple?style=for-the-badge)](./04_research/eu_ai_act_compliance_whitepaper.md)
 [![Formal Verification](https://img.shields.io/badge/Lean_4-Verified-green?style=for-the-badge)](../BabylonTrace.lean)
+[![Epistemology](https://img.shields.io/badge/Epistemology-C5--REAL_Constitution-blue?style=for-the-badge)](./00_MANIFESTO.md)
+
+---
+
+## 🧮 C5-REAL Epistemological Framework
+
+BABYLON-60 abandons hardware-dependent physical intuition to embrace a category-theoretic foundation for cognitive computer systems:
+- **Transformations over States**: Morphisms ($A \to B$) are the sole primitive. States are Lawvere fixed points ($T(X) \cong X$), memory is a Store Comonad, and context is a Bayesian Optic Lens.
+- **Parametric Information Invariance**: Chentsov's Theorem and the Free Energy Principle ($\delta \int F dt = 0$) govern all state reductions.
+- **Architectural Corollaries**: Event sourcing = Colimit Functors, CQRS = Adjoint Functor Pairs, CRDTs = Join-Semilattices, and Merkle DAGs = Natural Isomorphisms.
 
 ---
 
@@ -22,12 +32,12 @@ Welcome to the central documentation index for **BABYLON-60 v4.0**.
 | **Spanish Main README** | [`README_ES.md`](../README_ES.md) | Versión completa en español del README principal. |
 | **Rust Kernel** | [`kernel/`](../kernel/README.md) | Low-level `#![no_std]` Rust engine, $F_{60}$ scheduler, WORM quarantine. |
 | **Sovereign IDE** | [`babylon60-ide/`](../babylon60-ide/README.md) | Desktop/Mobile Tauri v2 IDE, FastAPI OpenRouter backend, Iceoryx2 IPC. |
-| **Web Telemetry UI** | [`web/`](../web/README.md) | React 18 + WASM Causal Telemetry visualizer & FSA API filesystem mount. |
+| **Web Telemetry UI** | [`web/`](../web/README.md) | React 18 + WASM Causal Telemetry visualizer & FSA API mount. |
 | **Tonnetz Human Oversight**| [`tonnetz_app/`](../tonnetz_app/README.md) | Neo-Riemannian toric harmonic graph visualizer (EU AI Act Art. 14). |
 | **Cortex Substrate** | [`cortex/`](../cortex/README.md) | Python memory persistence (`cortex-persist`), SQLite WAL, MCP Server. |
 | **Causal Attestation** | [`attestation/`](../attestation/README.md) | Hardware TPM 2.0 PCR Quote anchoring & P2P notary verification. |
 | **DSL Compiler** | [`compiler/`](../compiler/README.md) | `.b60` DSL lexer/parser, B60 bytecode IR, Lean 4 proof emitter. |
-| **Strike RS Engine** | [`strike_rs/`](../strike_rs/README.md) | PyO3 native GIL bypass, Iceoryx2 zero-copy IPC, BLAKE3 taint graph. |
+| **Strike RS Engine** | [`strike_rs/`](../strike_rs/README.md) | PyO3 native GIL bypass, Iceoryx2 shared memory, BLAKE3 taint graph. |
 | **Master Ledger BFT** | [`babylon60/bft/`](../babylon60/bft/README.md) | Escalón 3 Tamper-Evident log with Git Sentinel external witness. |
 | **EVM On-Chain Notary** | [`anvil_yung/`](../anvil_yung/README.md) | Foundry smart contracts for EVM Merkle root notarization. |
 | **Transpiler (F# -> Rust)**| [`causal_isomorphism/`](../causal_isomorphism/README.md)| Functional F# domain kernel transpiler & linear type checker. |

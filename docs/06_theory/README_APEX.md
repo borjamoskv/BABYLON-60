@@ -3,8 +3,17 @@
 [![FDA Compliance](https://img.shields.io/badge/FDA-21_CFR_Part_11-blue?style=for-the-badge)](https://www.fda.gov/)
 [![Data Source](https://img.shields.io/badge/Data-ClinicalTrials.gov_API_v2-purple?style=for-the-badge)](https://clinicaltrials.gov/)
 [![Causal Ledger](https://img.shields.io/badge/Ledger-Tamper--Evident_HashChain-brightgreen?style=for-the-badge)](../../babylon60/bft/README.md)
+[![Epistemology](https://img.shields.io/badge/Epistemology-C5--REAL_Categories-purple?style=for-the-badge)](../00_MANIFESTO.md)
 
 **APEX TRIALS** is a deterministic, auditable clinical-trial amendment-risk copilot built on the BABYLON-60 Ledger substrate.
+
+---
+
+## 🧮 C5-REAL Epistemological Context: Bayesian Lenses & Immutable Causal Trails
+
+Under the **C5-REAL Epistemological Constitution**:
+- **Risk Assessment as a Bayesian Lens**: Clinical trial complexity scoring acts as a **Bayesian Optic Lens**, projecting protocol features onto substantive amendment probability spaces while preserving informational distance under Chentsov's Theorem.
+- **Deterministic Morphisms for Regulatory Provenance**: Every scoring function is a pure morphism ($A \to B$). Firing rules generate an unalterable `causal_taint` hash-chain, fulfilling FDA 21 CFR Part 11 §11.10(e) audit requirements by mathematical construction.
 
 ---
 
