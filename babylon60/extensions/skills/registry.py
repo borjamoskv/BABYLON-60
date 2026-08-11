@@ -266,9 +266,14 @@ class SkillRegistry:
         return [m for m in self.all() if any(c.name == capability for c in m.capabilities)]
 
     def search(self, query: str) -> list[SkillManifest]:
-        """Full-text search in name, description, and tags."""
-        q = query.lower()
-        results = []
+        """Full-text search in name, description, category, tags, and aliases."""
+        q_lower = query.lower().strip()
+        if not q_lower:
+            return []
+
+        query_words = [w for w in re.split(r"[^\w-]+", q_lower) if len(w) > 1]
+        results_with_score = []
+
         for m in self.all():
             haystack = " ".join(
                 [
@@ -279,9 +284,17 @@ class SkillRegistry:
                     " ".join(m.aliases),
                 ]
             ).lower()
-            if q in haystack:
-                results.append(m)
-        return results
+
+            if q_lower in haystack:
+                score = 10.0 + len(q_lower)
+            else:
+                score = sum(3.0 for w in query_words if w in haystack)
+
+            if score > 0:
+                results_with_score.append((score, m))
+
+        results_with_score.sort(key=lambda x: x[0], reverse=True)
+        return [m for _, m in results_with_score]
 
     @property
     def count(self) -> int:
