@@ -289,32 +289,61 @@ const _: () = assert!(
 extern crate alloc;
 use core::cmp::Ordering;
 
-/// Errores del puente. Todos son fail-stop hacia el supervisor.
+/// Errores del puente categórico entre variedades de creencia y semirretículos.
+/// Todos los errores fuerzan un disparo fail-stop hacia el supervisor humano.
 #[derive(Debug, Clone)]
 pub enum BridgeError<S> {
-    IsometryViolation { epsilon: S, measured: S },
+    /// Violación de la isometría entre la distancia de Rao-Fisher y la métrica discreta.
+    IsometryViolation {
+        /// Umbral épsilon de tolerancia.
+        epsilon: S,
+        /// Valor medido de desviación.
+        measured: S,
+    },
+    /// Violación de la monotonía en la reducción de entropía.
     MonotonicityViolation,
-    JoinNonHomomorphic { epsilon: S, defect: S },
+    /// Violación del homomorfismo de unión (*join*) sobre el semirretículo.
+    JoinNonHomomorphic {
+        /// Umbral épsilon de tolerancia.
+        epsilon: S,
+        /// Defecto medido de homomorfismo.
+        defect: S,
+    },
+    /// Ruptura de la condición de naturalidad entre el functor y la transformación.
     NaturalityBroken,
+    /// Violación de la integridad criptográfica en la autenticación Merkle.
     IntegrityViolation,
 }
 
+/// Forma bilineal de Fisher-Rao sobre el espacio tangente.
 pub struct FisherForm<S>(pub alloc::vec::Vec<alloc::vec::Vec<S>>);
 
+/// Variedad riemanniana de distribuciones de probabilidad (espacio de creencias).
 pub trait BeliefManifold {
+    /// Tipo de punto en la variedad latente.
     type Point: Clone;
+    /// Tipo de vector en el espacio tangente.
     type Tangent;
+    /// Escalar numérico para distancias y curvatura.
     type Scalar: Copy + PartialOrd;
 
+    /// Calcula la matriz de información de Fisher en un punto dado.
     fn fisher(&self, at: &Self::Point) -> FisherForm<Self::Scalar>;
+    /// Calcula la distancia geodesica de Fisher-Rao entre dos distribuciones de creencia.
     fn dist_fr(&self, a: &Self::Point, b: &Self::Point) -> Self::Scalar;
+    /// Calcula el gradiente natural sobre la variedad riemanniana.
     fn natural_gradient(&self, at: &Self::Point, grad_free_energy: &Self::Tangent) -> Self::Tangent;
 }
 
+/// Semirretículo de unión acotado inferiormente (*Bounded Join-Semilattice*).
 pub trait BoundedJoinSemilattice: Clone {
+    /// Elemento mínimo del semirretículo (cero / fondo).
     fn bottom() -> Self;
+    /// Operación de unión suprema (*supremum / join*).
     fn join(&self, other: &Self) -> Self;
+    /// Operador de orden parcial (menor o igual).
     fn leq(&self, other: &Self) -> bool;
+    /// Comparación parcial sobre el semirretículo.
     fn partial_cmp_lat(&self, other: &Self) -> Option<Ordering> {
         match (self.leq(other), other.leq(self)) {
             (true, true)   => Some(Ordering::Equal),
@@ -325,22 +354,31 @@ pub trait BoundedJoinSemilattice: Clone {
     }
 }
 
+/// Estructura de datos autenticada por resumen criptográfico Merkle.
 pub trait MerkleAuthenticated {
+    /// Tipo de digesto criptográfico (ej. BLAKE3 / SHA256).
     type Digest: Eq + Clone;
+    /// Devuelve el digesto Merkle de la celda de datos.
     fn digest(&self) -> Self::Digest;
 }
 
+/// Cuantizador continuo-discreto basado en la métrica de Fisher.
 pub trait FisherQuantizer {
+    /// Variedad continua subyacente.
     type Manifold: BeliefManifold;
+    /// Semirretículo discreto cuantizado y autenticado.
     type Lattice: BoundedJoinSemilattice + MerkleAuthenticated;
+    /// Residuo continuo no capturado en el semirretículo.
     type Residual;
 
+    /// Cuantiza un punto de la variedad continua a una celda del semirretículo discreto.
     fn quantize(
         &self,
         manifold: &Self::Manifold,
         x: &<Self::Manifold as BeliefManifold>::Point,
     ) -> Result<(Self::Lattice, Self::Residual), BridgeError<<Self::Manifold as BeliefManifold>::Scalar>>;
 
+    /// Reconstruye el punto continuo a partir de la celda discreta y su residuo.
     fn reconstruct(
         &self,
         cell: &Self::Lattice,
@@ -348,9 +386,12 @@ pub trait FisherQuantizer {
     ) -> <Self::Manifold as BeliefManifold>::Point;
 }
 
+/// Functor de puente categórico con verificación de isometría y naturalidad.
 pub trait BridgeFunctor: FisherQuantizer {
+    /// Cota épsilon máxima tolerada para desviaciones isométricas.
     const EPSILON: <Self::Manifold as BeliefManifold>::Scalar;
 
+    /// Valida la isometría entre la distancia continua de Fisher-Rao y la métrica discreta.
     fn assert_isometry(
         &self,
         m: &Self::Manifold,
@@ -358,6 +399,7 @@ pub trait BridgeFunctor: FisherQuantizer {
         b: &<Self::Manifold as BeliefManifold>::Point,
     ) -> Result<(), BridgeError<<Self::Manifold as BeliefManifold>::Scalar>>;
 
+    /// Valida que la cuantización preserve el homomorfismo del semirretículo.
     fn assert_join_homomorphism(
         &self,
         m: &Self::Manifold,
@@ -365,9 +407,11 @@ pub trait BridgeFunctor: FisherQuantizer {
         b: &<Self::Manifold as BeliefManifold>::Point,
     ) -> Result<(), BridgeError<<Self::Manifold as BeliefManifold>::Scalar>>;
 
+    /// Valida la condición de naturalidad del functor de puente.
     fn assert_naturality(
         &self,
         m: &Self::Manifold,
         x: &<Self::Manifold as BeliefManifold>::Point,
     ) -> Result<(), BridgeError<<Self::Manifold as BeliefManifold>::Scalar>>;
 }
+
