@@ -52,3 +52,25 @@ export function connectWebSocket(path, onMessage, onError) {
   dial();
   return controller;
 }
+
+// WebSocket RPC implementation (Replaces Tauri invoke)
+export async function wsInvoke(command, args = {}) {
+  return new Promise((resolve, reject) => {
+    const ws = new WebSocket(`ws://127.0.0.1:4000/ws`);
+    ws.onopen = () => {
+      ws.send(JSON.stringify({ command, args }));
+    };
+    ws.onmessage = (e) => {
+      try {
+        const res = JSON.parse(e.data);
+        if (res.error) reject(new Error(res.error));
+        else resolve(res.result);
+      } catch (err) {
+        reject(err);
+      } finally {
+        ws.close();
+      }
+    };
+    ws.onerror = (e) => reject(e);
+  });
+}

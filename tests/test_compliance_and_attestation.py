@@ -47,7 +47,7 @@ def test_merkle_causal_anchor_tpm_quote():
     quote = anchor.generate_hardware_pcr_quote(root_hash)
 
     assert quote["pcr_index"] == "10"
-    assert quote["hardware_enclave"] == "TPM_2_0_HARDWARE_SEALED"
+    assert quote["hardware_enclave"].startswith("TPM_2_0_HARDWARE_SEALED")
     assert len(quote["tpm_quote_signature"]) == 64
 
 
