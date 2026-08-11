@@ -96,7 +96,7 @@ class EventLoopMixin:
             sys.path.append(scripts_path)
 
         async def run_ouroboros_prune():
-            from ouroboros_prune import execute_thermal_purge
+
 
             from babylon60.core.paths import CORTEX_DB
 
@@ -111,7 +111,7 @@ class EventLoopMixin:
 
         # CABLE-04b: LLM absorption of reflections.md -> SKILL.md every 12h
         async def run_ouroboros_absorb():
-            from ouroboros_absorb_runner import main as absorb_main
+
 
             await absorb_main()
 

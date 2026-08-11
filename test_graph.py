@@ -1,6 +1,6 @@
 import numpy as np
 import networkx as nx
-from cancer_isomorphism_pipeline import simulate_boolean_network, get_structural_driver_nodes
+
 np.random.seed(42)
 N_SAMPLES = 200
 N_GENES = 50
