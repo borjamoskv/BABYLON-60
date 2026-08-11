@@ -23,3 +23,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+          # Excluimos explícitamente el señuelo Canary para que no rompa el escáner de Gitleaks
+          GITLEAKS_OPTS: "--exclude-path=tests/fixtures/fake_aws_credentials"
+
+      - name: Run C5 OPSEC Sentinel
+        run: |
+          python3 scripts/c5_cli/opsec_sentinel_c5.py .
