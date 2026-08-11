@@ -30,6 +30,7 @@
  */
 import { get, post, connectWebSocket } from './api.js';
 import { registerRoute, navigate, rerender, getInitialRoute } from './router.js';
+import { listen } from '@tauri-apps/api/event';
 
 /* ══════════════════════════════════════════════════════════
    COGNITIVE MODES
@@ -109,6 +110,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupBifocal();
   setupCogModeButton();
   setupLoopDetector();
+  setupApoptosisIPC();
 
   await Promise.all([
     refreshDatabaseList(),
