@@ -49,25 +49,41 @@ def extract_title(md_path: Path) -> str:
     return f"{clean_name} Specification"
 
 
-def build_index() -> str:
+def main() -> None:
+    import argparse
+    import json
+    
+    parser = argparse.ArgumentParser(description="Synchronize or emit docs index")
+    parser.add_argument("--json", action="store_true", help="Emit the document graph as pure JSON for inter-agentic consumption")
+    args = parser.parse_args()
+
     md_files = sorted([p for p in DOCS_DIR.rglob("*.md") if p.name != "00_index.md"])
     by_section: Dict[str, List[Dict[str, str]]] = {}
-
+    
     for p in md_files:
         rel = p.relative_to(DOCS_DIR)
         parent_key = rel.parent.as_posix() if len(rel.parts) > 1 else "root"
         section_title = SECTION_NAMES.get(parent_key, f"📁 {parent_key.replace('_', ' ').title()}")
-
         if section_title not in by_section:
             by_section[section_title] = []
-
-        title = extract_title(p)
         by_section[section_title].append({
             "path": rel.as_posix(),
-            "title": title,
+            "title": extract_title(p),
             "filename": p.name
         })
 
+    if args.json:
+        # Machine-to-Machine output
+        payload = {
+            "schema_version": "1.0",
+            "type": "C5_DOCUMENT_GRAPH",
+            "total_documents": len(md_files),
+            "topology": by_section
+        }
+        print(json.dumps(payload, indent=2))
+        return
+
+    # Legacy human-readable Markdown compilation
     lines = [
         "# 📚 BABYLON-60 Sovereign Documentation Master Index",
         "",
@@ -79,7 +95,6 @@ def build_index() -> str:
         "## 🛠️ Navegación Rápida por Secciones",
         "",
     ]
-
     for section_title, docs in by_section.items():
         lines.append(f"### {section_title}")
         lines.append("")
@@ -89,18 +104,13 @@ def build_index() -> str:
             fp = doc["path"]
             lines.append(f"| [`{doc['filename']}`](file://{DOCS_DIR / fp}) | `{fp}` | {doc['title']} |")
         lines.append("")
-
     lines.append("---")
     lines.append("*Índice maestro autogenerado y sincronizado autónomamente por `sync_docs_index.py` bajo estándar C5-REAL.*")
     lines.append("")
-    return "\n".join(lines)
-
-
-def main() -> None:
-    content = build_index()
+    
+    content = "\n".join(lines)
     INDEX_FILE.write_text(content, encoding="utf-8")
-    print(f"[+] Successfully synchronized master index at {INDEX_FILE} with all 95+ docs!")
-
+    print(f"[+] Successfully synchronized master index at {INDEX_FILE} with all {len(md_files)} docs!")
 
 if __name__ == "__main__":
     main()
