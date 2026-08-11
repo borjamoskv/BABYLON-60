@@ -17,7 +17,7 @@ import json
 import sys
 from pathlib import Path
 
-ROOT_DIR = Path(__file__).resolve().parent.parent
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT_DIR))
 
 from babylon60.crypto.rfc3161 import RFC3161Client  # noqa: E402

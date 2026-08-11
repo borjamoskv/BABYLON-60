@@ -22,7 +22,7 @@ import sys
 import time
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
 from babylon60.bft.cortex_persist_ledger import CortexPersistLedger, CortexEvent  # noqa: E402

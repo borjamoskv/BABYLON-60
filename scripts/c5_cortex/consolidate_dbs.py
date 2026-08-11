@@ -17,7 +17,7 @@ Authorship: Telmo Dinámico de Moskv (borjamoskv)
 import shutil
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 CENTRAL_DIR = Path.home() / ".babylon60" / "dbs"
 
 MASTER_LEDGERS = {"cortex.db", "master_ledger.db", "cortex_memory.db", "ultrathink_ledger.db", "telemetry.db"}

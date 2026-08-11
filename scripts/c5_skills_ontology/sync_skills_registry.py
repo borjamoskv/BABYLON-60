@@ -19,7 +19,8 @@ from pathlib import Path
 from typing import Any, Dict, List, Set
 
 # Base Paths
-REPO_ROOT = Path(__file__).resolve().parent.parent
+SCRIPTS_DIR = Path(__file__).resolve().parent.parent
+REPO_ROOT = SCRIPTS_DIR.parent
 SKILLS_DIR = Path.home() / ".gemini" / "config" / "skills"
 DOCS_SKILLS_JSON = REPO_ROOT / "docs" / "skills.json"
 TAXONOMY_GUIDE = REPO_ROOT / "docs" / "03_guides" / "guide_skill_arsenal_taxonomy.md"
@@ -86,10 +87,13 @@ NEW_ADJACENCY_EDGES = [
 
 def scan_physical_skills() -> Set[str]:
     """Scan disk directory for physical skills."""
-    if not SKILLS_DIR.exists():
-        print(f"Warning: Skills dir {SKILLS_DIR} not found.")
+    try:
+        if not SKILLS_DIR.exists():
+            return set()
+        return {d.name for d in SKILLS_DIR.iterdir() if d.is_dir() and (d / "SKILL.md").exists()}
+    except Exception as e:
+        print(f"Warning: Could not access {SKILLS_DIR}: {e}")
         return set()
-    return {d.name for d in SKILLS_DIR.iterdir() if d.is_dir() and (d / "SKILL.md").exists()}
 
 def sync_skills_json(verify_only: bool = False) -> bool:
     """Sync disk skills with docs/skills.json."""

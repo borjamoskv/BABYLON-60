@@ -17,8 +17,8 @@ import re
 import sys
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
-SCRIPTS_DIR = REPO_ROOT / "scripts"
+SCRIPTS_DIR = Path(__file__).resolve().parent.parent
+REPO_ROOT = SCRIPTS_DIR.parent
 SHEBANG = "#!/usr/bin/env python3"
 
 BANNER = """# ============================================================================

@@ -13,7 +13,7 @@ import ast
 import json
 from typing import List, Dict, Any
 
-REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 TARGET_EXTENSIONS = {".py", ".rs", ".lean", ".md"}
 
 MYTHOLOGICAL_TERMS = [

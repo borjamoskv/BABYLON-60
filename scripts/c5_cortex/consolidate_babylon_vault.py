@@ -15,7 +15,7 @@ import hashlib
 import json
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 DB_PATH = REPO_ROOT / "data" / "cortex_memory.db"
 REPORT_PATH = (
     Path.home()
