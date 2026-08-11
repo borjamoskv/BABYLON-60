@@ -38,13 +38,53 @@ def cmd_status() -> None:
     print("============================================================")
     print(" 🚀  BABYLON-60 SCRIPT SUITE DASHBOARD & STATUS")
     print("============================================================")
-    py_scripts = list(SCRIPTS_DIR.glob("*.py"))
-    sh_scripts = list(SCRIPTS_DIR.glob("*.sh"))
-    shebang_ok = sum(1 for p in py_scripts if p.stat().st_size > 0 and p.read_text(encoding="utf-8").startswith("#!/usr/bin/env python3"))
+    py_scripts = [p for p in SCRIPTS_DIR.rglob("*.py") if "__pycache__" not in p.parts]
+    sh_scripts = [p for p in SCRIPTS_DIR.rglob("*.sh") if "__pycache__" not in p.parts]
+    shebang_ok = 0
+    for p in py_scripts:
+        try:
+            line1 = p.read_text(encoding="utf-8", errors="ignore").splitlines()[0]
+            if line1.startswith("#!/usr/bin/env python") or line1.startswith("#!/usr/bin/python"):
+                shebang_ok += 1
+        except Exception:
+            pass
 
+    pct = (shebang_ok / len(py_scripts) * 100.0) if py_scripts else 0.0
     print(f"  Python Scripts Registered  : {len(py_scripts)}")
     print(f"  Shell Scripts Registered   : {len(sh_scripts)}")
-    print(f"  Shebang Compliance (Line 1): {shebang_ok} / {len(py_scripts)} ({(shebang_ok/len(py_scripts))*100:.1f}%)")
+    print(f"  Shebang Compliance (Line 1): {shebang_ok} / {len(py_scripts)} ({pct:.1f}%)")
+    print("============================================================\n")
+
+
+def cmd_list(domain_filter: str | None = None, search_term: str | None = None) -> None:
+    sys.path.insert(0, str(SCRIPTS_DIR))
+    from generate_scripts_readme import collect_data
+    data = collect_data()
+    print("============================================================")
+    print(" 📂  BABYLON-60 SCRIPT SUITE TAXONOMY LISTING")
+    print("============================================================")
+    total_matches = 0
+    for cat_name, scripts in data["categories"].items():
+        if domain_filter and domain_filter.lower() not in cat_name.lower():
+            continue
+
+        filtered_scripts = []
+        for s in scripts:
+            if search_term and (search_term.lower() not in s["path"].lower() and search_term.lower() not in s["description"].lower()):
+                continue
+            filtered_scripts.append(s)
+
+        if filtered_scripts:
+            print(f"\n{cat_name}")
+            print("-" * 60)
+            for s in filtered_scripts:
+                stype = "PY" if s["type"] == "python" else "SH"
+                desc = s["description"][:55] + "..." if len(s["description"]) > 55 else s["description"]
+                print(f"  [{stype}] {s['path']:<45} | {desc}")
+                total_matches += 1
+
+    print("\n============================================================")
+    print(f" Total Matched Scripts: {total_matches}")
     print("============================================================\n")
 
 
@@ -59,7 +99,6 @@ def main() -> None:
     audit_parser = subparsers.add_parser("audit", help="Run AST & anti-pattern quality gate audit")
     audit_parser.add_argument("--fix", action="store_true", help="Enable in-situ atomic remediation")
 
-
     # preserve
     preserve_parser = subparsers.add_parser("preserve", help="Harvest and hash local CLI logs")
     preserve_parser.add_argument("--provider", choices=["agent", "claude", "all"], default="all")
@@ -72,16 +111,31 @@ def main() -> None:
     # sync
     subparsers.add_parser("sync", help="Synchronize physical skills with docs/skills.json")
 
+    # catalog
+    catalog_parser = subparsers.add_parser("catalog", help="Generate or display scripts catalog")
+    catalog_parser.add_argument("--json", action="store_true", help="Emit catalog JSON to stdout")
+
+    # list
+    list_parser = subparsers.add_parser("list", help="List and search scripts by domain or keyword")
+    list_parser.add_argument("--domain", "-d", type=str, default=None, help="Filter by C5 domain name")
+    list_parser.add_argument("--search", "-s", type=str, default=None, help="Search script path or description")
+
+    # verify
+    subparsers.add_parser("verify", help="Run invariant and axiom verification engine")
+
     args, unknown = parser.parse_known_args()
 
     if not args.command or args.command == "status":
         cmd_status()
         return
 
+    if args.command == "list":
+        cmd_list(domain_filter=args.domain, search_term=args.search)
+        return
+
     if args.command == "audit":
         cmd_args = ["--fix"] if getattr(args, "fix", False) else []
         sys.exit(run_subcommand("c5_quality_gates/audit_scripts_quality.py", cmd_args + unknown))
-
     elif args.command == "preserve":
         sys.exit(run_subcommand("c5_log_custody/c5_preserve_logs.py", ["--provider", args.provider] + unknown))
     elif args.command == "swarm":
@@ -91,7 +145,14 @@ def main() -> None:
         sys.exit(run_subcommand("c5_legion/legion_swarm.py", cmd_args + unknown))
     elif args.command == "sync":
         sys.exit(run_subcommand("c5_skills_ontology/sync_skills_registry.py", unknown))
+    elif args.command == "catalog":
+        cmd_args = ["--json"] if getattr(args, "json", False) else []
+        sys.exit(run_subcommand("generate_scripts_readme.py", cmd_args + unknown))
+    elif args.command == "verify":
+        sys.exit(run_subcommand("c5_verifiers/autodetect_invariants.py", unknown))
 
 
 if __name__ == "__main__":
     main()
+
+

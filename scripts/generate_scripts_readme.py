@@ -22,144 +22,95 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS_DIR = REPO_ROOT / "scripts"
 README_PATH = SCRIPTS_DIR / "README.md"
 
-CATEGORIES = {
-    "Core Dispatchers & Quality Gates": [
-        "runner.py",
-        "audit_scripts_quality.py",
-        "pre_push_ledger_guard.py",
-        "audit_fixer.py",
-        "symlink_depth_auditor.py",
-    ],
-    "Swarm & Legion Execution Engines": [
-        "c5_legion/legion_swarm.py",
-        "c5_legion/legion_swarm_core.py",
-        "c5_legion/legion_1000_audit_swarm.py",
-        "c5_legion/legion_10000_orchestrator.py",
-        "c5_legion/legion_222_agentes.py",
-        "centuria_swarm_commander.py",
-        "centuria_swarm_runner.py",
-        "remotion_swarm_orchestrator.py",
-        "secret_swarm_auditor.py",
-        "swarm_lock_guard.py",
-    ],
-    "Skill Synchronization & Ontology": [
-        "sync_skills_registry.py",
-        "optimize_all_skill_triggers.py",
-        "audit_skills_execution.py",
-        "sync_vault_uuids.py",
-    ],
-    "Log Custody & Forensic Attestation": [
-        "c5_preserve_logs.py",
-        "c5_preserve_agent_local_logs.py",
-        "c5_preserve_claude_local_logs.py",
-        "c5_organize_captures.py",
-        "c5_verifiers/verify_captures.py",
-    ],
-    "Thermodynamic Benchmarks & Stress Tests": [
-        "stress_100m_bft.py",
-        "stress_10m.py",
-        "stress_sqlite_wal.py",
-        "benchmark_ledger_throughput.py",
-        "cache_1000_memoization_bench.py",
-        "c5_exergy_optimizer_monitor.py",
-        "exergy_arbitrage_engine.py",
-        "exergy_dashboard_server.py",
-        "exergy_optimizer_agent.py",
-    ],
-    "Formal Verification & Axiom Oracles": [
-        "axiom_verifier_z3.py",
-        "c5_verifiers/verify_anergy_token_purge.py",
-        "autodetect_invariants.py",
-        "c5_verifiers/verify_claims.py",
-        "c5_verifiers/verify_tonnetz_falsification.py",
-        "conformance_test.py",
-        "deterministic_audit.py",
-    ],
-    "C5 Demos & Proofs of Concept": [
-        "c5_demos/poc_browser_pipeline.py",
-        "c5_demos/poc_causal_hitl_agent.py",
-        "c5_demos/poc_f60_time_domain.py",
-        "c5_demos/poc_fast_failure_guard.py",
-        "c5_demos/poc_graph_isomorphism_wl.py",
-        "c5_demos/poc_logop_veto.py",
-        "c5_demos/poc_two_tier_planner_worker.py",
-        "c5_demos/demo_exergy_poc.py",
-        "c5_demos/demo_logos_ethos_ship.py",
-    ],
-    "L1 Anchor & Ledger Engines": [
-        "anchor_l1_sink.py",
-        "l1_sink_bitcoin.py",
-        "ledger_snapshot_engine.py",
-        "bittensor_yuma_consensus_c5.py",
-    ],
+DOMAIN_NAMES = {
+    "root": "⚡ Core Dispatchers & CLI Entrypoints",
+    "c5_quality_gates": "🛡️ Quality Gates & AST Verification",
+    "c5_legion": "🐝 Swarm & Legion Execution Engines",
+    "c5_skills_ontology": "🧠 Skill Synchronization & Ontology",
+    "c5_log_custody": "📜 Log Custody & Forensic Attestation",
+    "c5_thermo": "🔥 Thermodynamic Benchmarks & Exergy Optimizers",
+    "c5_verifiers": "⚖️ Formal Verification & Axiom Oracles",
+    "c5_demos": "🔬 C5 Demos & Proofs of Concept",
+    "c5_l1_ledger": "⛓️ L1 Anchor & Ledger Engines",
+    "c5_cli": "🖥️ CLI Tools & Native Hosts",
+    "c5_cortex": "🌀 Cortex Memory & Auto-Consolidation",
+    "c5_isomorphisms": "🧩 Categorical Isomorphisms & Engines",
+    "c5_simulations": "♾️ Autopoiesis & System Simulations",
+    "c5_assets": "🎨 Assets & Multimodal Generators",
+    "c5_calibrations": "🎯 Entropy & Calibration Utilities",
+    "c5_centuria": "⚡ Centuria & Video Swarm Commanders",
+    "c5_git_utils": "🔧 Git Hooks & Commit Utilities",
+    "c5_setup": "🚀 Host & Repository Setup Scripts",
+    "c5_tests": "🧪 Unit Tests & Curvature Proofs",
+    "c5_utils": "🛠️ Domain Helpers & Enforcers",
+    "c5_deploy": "📦 Deployment & P0 Remediation Scripts",
 }
 
 
-def extract_docstring(py_path: Path) -> str:
+def extract_docstring_smart(py_path: Path) -> str:
     try:
         content = py_path.read_text(encoding="utf-8")
-        tree = ast.parse(content)
-        doc = ast.get_docstring(tree)
-        if doc:
-            first_paragraph = doc.strip().split("\n\n")[0].replace("\n", " ")
-            return first_paragraph
+        if py_path.suffix == ".py":
+            try:
+                tree = ast.parse(content)
+                doc = ast.get_docstring(tree)
+                if doc:
+                    lines = [l.strip() for l in doc.splitlines() if l.strip()]
+                    meaningful = [l for l in lines if not l.startswith("BABYLON-60") and not l.startswith("█") and not l.startswith("=") and len(l) > 3]
+                    if meaningful:
+                        return meaningful[0].replace("|", "\\|")
+            except Exception:
+                pass
+
+            lines = content.splitlines()
+            for line in lines[:30]:
+                s = line.strip()
+                if s.startswith("#") and not s.startswith("# =") and not s.startswith("#!") and not s.startswith("# ---"):
+                    text = s.lstrip("#").strip()
+                    if text and not text.startswith("BABYLON-60") and not text.startswith("█") and len(text) > 3:
+                        return text.replace("|", "\\|")
+        else:
+            lines = content.splitlines()
+            for line in lines[:20]:
+                s = line.strip()
+                if s.startswith("#") and not s.startswith("#!") and not s.startswith("# =") and not s.startswith("set -"):
+                    text = s.lstrip("#").strip()
+                    if text and not text.startswith("BABYLON-60") and not text.startswith("scripts/") and len(text) > 3:
+                        return text.replace("|", "\\|")
     except Exception:
         pass
 
-    # Fallback to first line of text
-    lines = py_path.read_text(encoding="utf-8").splitlines()
-    for line in lines[1:15]:
-        if line.strip().startswith('"""') or line.strip().startswith("'''"):
-            return line.strip().strip('"').strip("'")
-        if line.strip().startswith("#") and not line.startswith("# =") and not line.startswith("#!"):
-            return line.strip().lstrip("#").strip()
-    return "Sovereign execution script"
+    clean_name = py_path.stem.replace("_", " ").title()
+    return f"{clean_name} Utility"
 
 
 def collect_data() -> Dict[str, Any]:
-    py_files = sorted(SCRIPTS_DIR.rglob("*.py"))
-    sh_files = sorted(SCRIPTS_DIR.rglob("*.sh"))
+    py_files = sorted([p for p in SCRIPTS_DIR.rglob("*.py") if "__pycache__" not in p.parts])
+    sh_files = sorted([p for p in SCRIPTS_DIR.rglob("*.sh") if "__pycache__" not in p.parts])
 
-    categorized_files = set()
-    for files in CATEGORIES.values():
-        categorized_files.update(files)
+    by_category: Dict[str, List[Dict[str, str]]] = {}
 
-    data = {
-        "categories": {},
-        "uncategorized": [],
-        "shell_scripts": []
-    }
+    for p in py_files + sh_files:
+        rel = p.relative_to(SCRIPTS_DIR)
+        parent_key = rel.parent.as_posix() if len(rel.parts) > 1 else "root"
+        cat_title = DOMAIN_NAMES.get(parent_key, f"📁 {parent_key.replace('_', ' ').title()}")
 
-    # Process categorized
-    for cat_name, file_list in CATEGORIES.items():
-        scripts = []
-        for fn in file_list:
-            fp = SCRIPTS_DIR / fn
-            if fp.exists():
-                scripts.append({
-                    "path": fn,
-                    "description": extract_docstring(fp)
-                })
-        data["categories"][cat_name] = scripts
+        if cat_title not in by_category:
+            by_category[cat_title] = []
 
-    # Process uncategorized
-    for fp in py_files:
-        fn = fp.relative_to(SCRIPTS_DIR).as_posix()
-        if fn not in categorized_files and fp.name != "generate_scripts_readme.py":
-            data["uncategorized"].append({
-                "path": fn,
-                "description": extract_docstring(fp)
-            })
-
-    # Process shell scripts
-    for fp in sh_files:
-        fn = fp.relative_to(SCRIPTS_DIR).as_posix()
-        data["shell_scripts"].append({
-            "path": fn,
-            "description": "Executable Bash Script"
+        is_py = p.suffix == ".py"
+        desc = extract_docstring_smart(p)
+        by_category[cat_title].append({
+            "path": rel.as_posix(),
+            "description": desc,
+            "type": "python" if is_py else "shell"
         })
 
-    return data
+    return {
+        "categories": by_category,
+        "total_python": len(py_files),
+        "total_shell": len(sh_files)
+    }
 
 
 def generate_markdown(data: Dict[str, Any]) -> None:
@@ -167,7 +118,7 @@ def generate_markdown(data: Dict[str, Any]) -> None:
         "# ⚡ BABYLON-60 Sovereign Scripts Suite",
         "",
         "> **Directorio de Automatización, Enjambres BFT, Calidad AST y Preservación de Logs**  ",
-        "> **Estándar:** C5-REAL | **Shebang Compliance:** 100.0% Line 1",
+        f"> **Estándar:** C5-REAL | **Total Scripts:** {data.get('total_python', 0)} Python + {data.get('total_shell', 0)} Shell | **Shebang Compliance:** 100.0%",
         "",
         "## 🛠️ CLI Runner Centralizado",
         f"Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runner.py](file://{SCRIPTS_DIR / 'runner.py'}):",
@@ -177,11 +128,12 @@ def generate_markdown(data: Dict[str, Any]) -> None:
         "./scripts/runner.py preserve --provider all # Custodia forense de logs",
         "./scripts/runner.py swarm -n 100        # Enjambre paralelo BFT en RAM",
         "./scripts/runner.py sync                # Sincronización de skills con docs/skills.json",
+        "./scripts/runner.py catalog             # Auto-generación de este catálogo",
         "```",
         "",
         "---",
         "",
-        "## 📂 Catálogo por Categorías",
+        "## 📂 Catálogo Taxonómico por Dominios C5",
         "",
     ]
 
@@ -189,32 +141,13 @@ def generate_markdown(data: Dict[str, Any]) -> None:
         if scripts:
             md_lines.append(f"### {cat_name}")
             md_lines.append("")
-            md_lines.append("| Script | Descripción / Propósito |")
-            md_lines.append("| :--- | :--- |")
+            md_lines.append("| Script | Tipo | Descripción / Propósito |")
+            md_lines.append("| :--- | :--- | :--- |")
             for script in scripts:
                 fp = SCRIPTS_DIR / script["path"]
-                md_lines.append(f"| [`{script['path']}`](file://{fp}) | {script['description']} |")
+                stype = "Python" if script.get("type") == "python" else "Shell"
+                md_lines.append(f"| [`{script['path']}`](file://{fp}) | `{stype}` | {script['description']} |")
             md_lines.append("")
-
-    if data["uncategorized"]:
-        md_lines.append("### Herramientas de Dominio & Utilidades")
-        md_lines.append("")
-        md_lines.append("| Script | Descripción / Propósito |")
-        md_lines.append("| :--- | :--- |")
-        for script in data["uncategorized"]:
-            fp = SCRIPTS_DIR / script["path"]
-            md_lines.append(f"| [`{script['path']}`](file://{fp}) | {script['description']} |")
-        md_lines.append("")
-
-    if data["shell_scripts"]:
-        md_lines.append("### Shell Scripts (`*.sh`)")
-        md_lines.append("")
-        md_lines.append("| Script | Tipo |")
-        md_lines.append("| :--- | :--- |")
-        for script in data["shell_scripts"]:
-            fp = SCRIPTS_DIR / script["path"]
-            md_lines.append(f"| [`{script['path']}`](file://{fp}) | {script['description']} |")
-        md_lines.append("")
 
     md_lines.append("---")
     md_lines.append("*Catálogo auto-generado dinámicamente por `generate_scripts_readme.py`.*")
@@ -240,3 +173,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

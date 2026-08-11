@@ -1,12 +1,12 @@
 #!/bin/bash
-# scripts/install_host.sh
+# scripts/c5_setup/install_host.sh
 # Registra moskv_native_host.py en Chrome/Brave en macOS
 
 set -e
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 HOST_NAME="com.babylon60.moskv_scavenger"
-HOST_PATH="$DIR/moskv_native_host.py"
+HOST_PATH="$(cd "$DIR/../c5_cli" && pwd)/moskv_native_host.py"
 
 # Aseguramos que el script Python sea ejecutable
 chmod +x "$HOST_PATH"
