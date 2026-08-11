@@ -1,0 +1,24 @@
+name: Continuous Fuzzing Pipeline (cargo-fuzz)
+
+on:
+  schedule:
+    - cron: '0 */12 * * *' # Every 12 hours
+  workflow_dispatch:
+
+jobs:
+  fuzzing:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871
+    
+    - name: Setup Rust Nightly (required for cargo-fuzz)
+      uses: dtolnay/rust-toolchain@master
+      with:
+        toolchain: nightly
+        
+    - name: Install cargo-fuzz
+      run: cargo install cargo-fuzz
+        
+    - name: Run AST Parser Mutational Fuzzing (300s limit)
+      run: cargo +nightly fuzz run fuzz_target_1 -- -max_total_time=300
+      working-directory: ./fuzz
