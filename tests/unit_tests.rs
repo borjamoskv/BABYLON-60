@@ -227,8 +227,9 @@ fn generated_sheaf_fusion_operator_calibrated() {
     use babylon_60::thermodynamics::TopologicalCompressorFixed;
 
     let bound = SheafFusionOperator::aphairesis_bound();
-    assert!(bound.min_energy_zeptojoules() >= 0);
+    assert!(bound.min_energy_zeptojoules() > 0);
     assert!(bound.effective_bits_erased_q16 >= 0);
+
 }
 
 
