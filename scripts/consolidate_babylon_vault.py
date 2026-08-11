@@ -1,8 +1,8 @@
+#!/usr/bin/env python3
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
-#!/usr/bin/env python3
 """
 Causal-Determinist SOVEREIGN CONSOLIDATION PROTOCOL — BABYLON-60 MEMORY VAULT
 Orchestrates the crystallization of all 21 unconsolidated sessions from babylon_unconsolidated_report.md

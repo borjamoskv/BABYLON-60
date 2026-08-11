@@ -1,5 +1,11 @@
+#!/usr/bin/env python3
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
 import os, sys, subprocess, time, resource, argparse, math
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
+
 
 # LEGION MÁXIMO COGNITIVO - 222 Agentes Organizados
 # Topología de Escalado Extremo (Singularidad Prima)

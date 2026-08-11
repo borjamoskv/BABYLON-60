@@ -127,7 +127,32 @@ impl DAGLedger {
     pub fn root_hash(&self) -> Hash {
         self.cumulative_hash
     }
+
+    /// Verifies the causal integrity of the entire event ledger.
+    pub fn verify_chain(&self) -> bool {
+        for (&id, event) in &self.events {
+            let mut parent_hashes = Vec::new();
+            for &p in &event.parents {
+                match self.events.get(&p) {
+                    Some(parent_evt) => parent_hashes.push(parent_evt.hash),
+                    None => return false,
+                }
+            }
+            let expected_hash = compute_event_hash(
+                id,
+                &event.parents,
+                event.timestamp.0,
+                &event.payload,
+                &parent_hashes,
+            );
+            if expected_hash != event.hash {
+                return false;
+            }
+        }
+        true
+    }
 }
+
 
 #[cfg(test)]
 mod tests {

@@ -1,8 +1,8 @@
+#!/usr/bin/env python3
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
-#!/usr/bin/env python3
 """
 BABYLON-60 v4.0 Multi-Country Compliance Exporter CLI Tool
 Generates localized EU AI Act / NIST AI RMF compliance reports for target countries.

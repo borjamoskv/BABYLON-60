@@ -45,7 +45,8 @@ def run_full_skills_audit() -> bool:
     if malformed:
         print(f"[!] WARNING: Found {len(malformed)} malformed manifests: {[m.name for m in malformed]}")
     else:
-        print("[+] All 39 SKILL.md manifests passed YAML frontmatter validation.")
+        print(f"[+] All {total_physical} SKILL.md manifests passed YAML frontmatter validation.")
+
 
     # 2. Category Distribution
     print("\n--- Skill Distribution by Category ---")
