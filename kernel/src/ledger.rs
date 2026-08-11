@@ -86,7 +86,7 @@ impl DAGLedger {
             }
         }
 
-        let hash = compute_event_hash(id, &parents, timestamp.as_ticks(), &payload, &parent_hashes);
+        let hash = compute_event_hash(id, &parents, timestamp.0, &payload, &parent_hashes);
 
         let event = Event {
             id,
@@ -132,6 +132,7 @@ impl DAGLedger {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_dag_ledger_tamper_evident_hashes() {

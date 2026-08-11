@@ -149,10 +149,11 @@ pub const SUB: &str = "urn:babylon60:shared-manifest";
 ///
 /// # Retorna
 /// Bytes del `COSE_Sign1` serializado en CBOR.
-pub fn emit_halt_receipt<S: Signer>(
+pub fn emit_halt_receipt_with_timestamp<S: Signer>(
     m: &SharedManifest,
     motivo: HaltReason,
     signer: &S,
+    timestamp: u64,
 ) -> Vec<u8> {
     // ── Leer estado del slot ───────────────────────────────────────────────
     // Acquire: ver todos los stores previos del escritor (publish) y del halt.
@@ -162,17 +163,6 @@ pub fn emit_halt_receipt<S: Signer>(
         let w = m.payload_hash[i].load(Ordering::Acquire);
         hash_bytes[i * 8..(i + 1) * 8].copy_from_slice(&w.to_be_bytes());
     }
-
-    // ── Timestamp (segundos desde UNIX epoch) ─────────────────────────────
-    // En bare-metal sin RTC: usar epoch_id como proxy temporal.
-    // En std: usar std::time::SystemTime.
-    #[cfg(feature = "std")]
-    let timestamp: u64 = std::time::SystemTime::now()
-        .duration_since(std::time::UNIX_EPOCH)
-        .map(|d| d.as_secs())
-        .unwrap_or(epoch);
-    #[cfg(not(feature = "std"))]
-    let timestamp: u64 = epoch; // proxy
 
     // ── Halt_Payload CBOR ──────────────────────────────────────────────────
     // Serialización manual en CBOR (ciborium) siguiendo el CDDL del perfil:
@@ -212,6 +202,15 @@ pub fn emit_halt_receipt<S: Signer>(
 
     // Serializar a CBOR Tagged(18, ...)
     sign1.to_vec().unwrap_or_default()
+}
+
+pub fn emit_halt_receipt<S: Signer>(
+    m: &SharedManifest,
+    motivo: HaltReason,
+    signer: &S,
+) -> Vec<u8> {
+    let epoch = m.epoch_id.load(Ordering::Acquire);
+    emit_halt_receipt_with_timestamp(m, motivo, signer, epoch)
 }
 
 // ---------------------------------------------------------------------------
