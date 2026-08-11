@@ -31,13 +31,11 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 
 | Script | Descripción / Propósito |
 | :--- | :--- |
-| [`legion_swarm.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/legion_swarm.py) | legion_swarm.py - Unified Sovereign Swarm Orchestrator CLI Usage:     ./scripts/legion_swarm.py --tenants 100     ./scripts/legion_swarm.py --tenants 10000 --concurrency 500 |
-| [`legion_swarm_core.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/legion_swarm_core.py) | legion_swarm_core.py - Core Engine for Swarm Quantum Collapse |
-| [`legion_100_swarm.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/legion_100_swarm.py) | MOSKV-1 APEX: Legion 100 Swarm Execution Engine (INV_C5_18) Delegates execution to legion_swarm_core engine. |
-| [`legion_10000_swarm.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/legion_10000_swarm.py) | MOSKV-1 APEX: Legion 10000 Swarm Execution Engine (INV_C5_18 & INV_C5_THERMO_VALVE) Delegates execution to legion_swarm_core engine with bounded concurrency. |
-| [`legion_1000_audit_swarm.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/legion_1000_audit_swarm.py) | MOSKV-1: Legion 1000 Audit Swarm Engine (INV_C5_18) Async file auditor with bounded concurrency (INV_C5_THERMO_VALVE). Scans workspace for mythological term violations and emits structured telemetry. |
-| [`legion_10000_orchestrator.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/legion_10000_orchestrator.py) | BABYLON-60 v4.0 Sovereign Hardened |
-| [`legion_222_agentes.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/legion_222_agentes.py) | BABYLON-60 v4.0 Sovereign Hardened |
+| [`c5_legion/legion_swarm.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/legion_swarm.py) | legion_swarm.py - Unified Sovereign Swarm Orchestrator CLI Usage:     ./scripts/legion_swarm.py --tenants 100     ./scripts/legion_swarm.py --tenants 10000 --concurrency 500 |
+| [`c5_legion/legion_swarm_core.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/legion_swarm_core.py) | legion_swarm_core.py - Core Engine for Swarm Quantum Collapse |
+| [`c5_legion/legion_1000_audit_swarm.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/legion_1000_audit_swarm.py) | MOSKV-1: Legion 1000 Audit Swarm Engine (INV_C5_18) Async file auditor with bounded concurrency (INV_C5_THERMO_VALVE). Scans workspace for mythological term violations and emits structured telemetry. |
+| [`c5_legion/legion_10000_orchestrator.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/legion_10000_orchestrator.py) | BABYLON-60 v4.0 Sovereign Hardened |
+| [`c5_legion/legion_222_agentes.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/legion_222_agentes.py) | BABYLON-60 v4.0 Sovereign Hardened |
 | [`centuria_swarm_commander.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/centuria_swarm_commander.py) | BABYLON-60 v4.0 Sovereign Hardened |
 | [`centuria_swarm_runner.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/centuria_swarm_runner.py) | BABYLON-60 v4.0 Sovereign Hardened |
 | [`remotion_swarm_orchestrator.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/remotion_swarm_orchestrator.py) | BABYLON-60 — REMOTION AGENT SWARM RENDERER (N = 10,000 AGENTS) Enforces:   - INV_C5_18: Zero-Worktree Swarm Scaling (In-memory AgencyHypervisor handles to prevent ENOSPC).   - INV_BFT_04: Non-silent collision fail-fast on frame payload mismatch. |
