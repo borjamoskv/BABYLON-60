@@ -107,7 +107,13 @@ pub async fn ignite_cortex_bridge(db_state: Arc<CortexLedger>) {
                         let clean_json = json_str.trim_matches(char::from(0)).trim();
 
                         if let Ok(mutation) = serde_json::from_str::<LlmMutation>(clean_json) {
-                            if mutation.auth_token.as_deref() != Some(expected_key.as_str()) {
+                            let token_provided = mutation.auth_token.as_deref().unwrap_or("");
+                            let mut diff = token_provided.len() ^ expected_key.len();
+                            for (a, b) in token_provided.bytes().zip(expected_key.bytes()) {
+                                diff |= (a ^ b) as usize;
+                            }
+                            
+                            if diff != 0 {
                                 let error_json = "{\"status\": \"ERROR\", \"message\": \"UNAUTHORIZED\"}";
                                 if is_http {
                                     let http_err = format!(
