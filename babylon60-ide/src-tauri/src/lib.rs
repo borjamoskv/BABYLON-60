@@ -115,8 +115,7 @@ pub fn run() {
     let ledger_instance = CortexLedger::new(db_path).expect("Failed to initialize CortexLedger");
     let ipc_handle = init_ipc();
 
-    // [ AXIOMA: NOMENCLATURE_IS_STRUCTURE ] — init_kernel boots 3D semantic + 4D tensor
-    kernel::init_kernel();
+    // kernel initialization moved to setup hook
 
     std::thread::spawn(|| {
         let rt = tokio::runtime::Runtime::new().unwrap();
@@ -133,6 +132,11 @@ pub fn run() {
 
     tauri::Builder::default()
         .plugin(tauri_plugin_log::Builder::new().build())
+        .setup(|app| {
+            let app_handle = app.handle().clone();
+            kernel::init_kernel(app_handle);
+            Ok(())
+        })
         .manage(AppState {
             ledger: Mutex::new(ledger_instance),
             ipc: ipc_handle,
