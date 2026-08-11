@@ -2,9 +2,18 @@
 
 [![Language](https://img.shields.io/badge/Source-F%23_Functional-purple?style=for-the-badge&logo=fsharp)](https://fsharp.org/)
 [![Target](https://img.shields.io/badge/Target-Rust_%2F_Solidity-orange?style=for-the-badge)]()
-[![Type System](https://img.shields.io/badge/Types-Linear_%26_Affine-brightgreen?style=for-the-badge)]()
+[![Epistemology](https://img.shields.io/badge/Epistemology-C5--REAL_Categories-purple?style=for-the-badge)](../docs/00_MANIFESTO.md)
 
 The **Causal Isomorphism Transpiler** (`causal_isomorphism`) parses functional F# domain kernel specifications (`domain_kernel/*.fs`) into a linear Intermediate Representation (`ir.py`), verifies linear/affine resource invariants (`linear_checker.py`), and emits cryptographically isomorphic **Rust** (`emitter_rust.py`) and **Solidity** (`emitter_solidity.py`) target code.
+
+---
+
+## 🧮 C5-REAL Epistemological Context: Isomorphic Functors & Affine Resources
+
+Under the **C5-REAL Epistemological Constitution**:
+- **Functorial Code Mapping**: Transpilation is a structure-preserving **Functor** $F: \mathcal{C}_{\text{F\#}} \to \mathcal{C}_{\text{Rust/Solidity}}$.
+- **Linear Resource Invariants**: Linear types enforce strict affine resource consumption. No state payload can be duplicated or silently dropped without explicit consumption morphisms.
+- **Natural Isomorphisms**: The emitted Rust kernel and Solidity smart contract instances form a **Natural Isomorphism** ($\eta: F(X) \cong G(X)$), proving byte-for-byte state transition equivalence on-chain and off-chain.
 
 ---
 
@@ -60,4 +69,4 @@ python3 -m causal_isomorphism.cli inspect domain_kernel/IRPAutomata.fs
 
 ---
 
-<sub>BABYLON-60 Causal Isomorphism Substrate · F# Transpiler · Borja Moskv</sub>
+<sub>BABYLON-60 Causal Isomorphism Substrate · F# Transpiler & Natural Isomorphisms · Borja Moskv</sub>
