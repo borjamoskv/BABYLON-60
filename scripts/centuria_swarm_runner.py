@@ -20,8 +20,8 @@ from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent  # noqa: E402
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("centuria_swarm_runner")
 
-SHARDS_FILE = REPO_ROOT / "scripts" / "shards.json"
-DB_PATH = REPO_ROOT / "scripts" / "cib_async_ledger.db"
+SHARDS_FILE = REPO_ROOT / "data" / "shards.json"
+DB_PATH = REPO_ROOT / "data" / "cib_async_ledger.db"
 
 
 async def execute_vector_agent(agent_id: int, vector: dict[str, str], actor: BFTLedgerActor) -> dict[str, str]:

@@ -11,13 +11,17 @@ from typing import Any
 from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
 
 
+REPO_ROOT = Path(__file__).resolve().parent.parent
+
+
 async def run_benchmark(iterations: int = 10000) -> None:
-    db_path: Path = Path("benchmark_temp.db")
+    db_path: Path = REPO_ROOT / "benchmark_temp.db"
     if db_path.exists():
         db_path.unlink()
 
     actor: BFTLedgerActor = BFTLedgerActor(db_path)
     await actor.start()
+
 
     print(f"⚡ [Causal-Determinist] Ignición de Benchmark: {iterations} transacciones WAL")
 
@@ -52,12 +56,13 @@ async def run_benchmark(iterations: int = 10000) -> None:
     # Limpieza
     if db_path.exists():
         db_path.unlink()
-    shm: Path = Path("benchmark_temp.db-shm")
-    wal: Path = Path("benchmark_temp.db-wal")
+    shm: Path = REPO_ROOT / "benchmark_temp.db-shm"
+    wal: Path = REPO_ROOT / "benchmark_temp.db-wal"
     if shm.exists():
         shm.unlink()
     if wal.exists():
         wal.unlink()
+
 
     # Métricas
     success: int = sum(1 for r in results if not isinstance(r, BaseException))

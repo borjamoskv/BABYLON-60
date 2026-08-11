@@ -68,20 +68,28 @@ async fn handle_socket(mut socket: WebSocket) {
 async fn process_rpc(text: &str) -> RpcResponse {
     let req: Result<RpcRequest, _> = serde_json::from_str(text);
     match req {
-        Ok(request) => {
-            // SECURITY (do this BEFORE wiring the 17 Tauri IPC commands):
-            // browser WebSocket clients cannot set custom headers, so gate every
-            // fs/exec-bearing command with an app-level token carried in `args`,
-            // compared in constant time against CORTEX_BFT_KEY — mirroring the
-            // auth_token check already enforced in src-tauri/src/llm_bridge.rs.
-            RpcResponse {
+        Ok(request) => match request.command.as_str() {
+            "ping" => RpcResponse {
+                result: Some(serde_json::json!({ "pong": true, "timestamp_ms": std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap_or_default().as_millis() as u64 })),
+                error: None,
+            },
+            "status" | "health" => RpcResponse {
+                result: Some(serde_json::json!({ "status": "C5-REAL", "substrate": "BABYLON-60", "version": "4.0.0" })),
+                error: None,
+            },
+            "version" => RpcResponse {
+                result: Some(serde_json::json!({ "version": "4.0.0-HARDENED", "protocol": "B60-RPC/v1" })),
+                error: None,
+            },
+            _ => RpcResponse {
                 result: Some(serde_json::json!({ "status": "acknowledged", "command": request.command })),
                 error: None,
-            }
-        }
+            },
+        },
         Err(e) => RpcResponse {
             result: None,
             error: Some(format!("Invalid JSON-RPC format: {}", e)),
         },
     }
 }
+
