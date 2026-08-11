@@ -144,13 +144,13 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 
 | Script | Tipo |
 | :--- | :--- |
+| [`c5_cli/pty_tmux_bridge.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cli/pty_tmux_bridge.sh) | Executable Bash Script |
+| [`c5_deploy/deploy_hotstuff.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_deploy/deploy_hotstuff.sh) | Executable Bash Script |
+| [`c5_deploy/publish_crates.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_deploy/publish_crates.sh) | Executable Bash Script |
+| [`c5_setup/install_host.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_setup/install_host.sh) | Executable Bash Script |
+| [`c5_setup/install_into_repo.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_setup/install_into_repo.sh) | Executable Bash Script |
 | [`c5_verifiers/verify_execution.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_verifiers/verify_execution.sh) | Executable Bash Script |
 | [`c5_verifiers/verify_lean_proofs.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_verifiers/verify_lean_proofs.sh) | Executable Bash Script |
-| [`deploy_hotstuff.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/deploy_hotstuff.sh) | Executable Bash Script |
-| [`install_host.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/install_host.sh) | Executable Bash Script |
-| [`install_into_repo.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/install_into_repo.sh) | Executable Bash Script |
-| [`pty_tmux_bridge.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/pty_tmux_bridge.sh) | Executable Bash Script |
-| [`publish_crates.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/publish_crates.sh) | Executable Bash Script |
 
 ---
 *Catálogo auto-generado dinámicamente por `generate_scripts_readme.py`.*
