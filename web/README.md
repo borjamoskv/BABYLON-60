@@ -5,11 +5,11 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![WASM Engine](https://img.shields.io/badge/WASM-Rust_Core-orange?style=for-the-badge)](../rust-core)
 
-The **BABYLON-60 Web Dashboard** is a high-performance, **Industrial Noir** web interface engineered with React 18, TypeScript, and WebAssembly (WASM). It provides real-time causal graph rendering, local file system mounting via the File System Access API, and direct telemetry bridges to the **Cortex Engine** (`lm-bridge`).
+The **BABYLON-60 Web Dashboard** is a high-performance, **Industrial Noir** web interface engineered with React 18, TypeScript, and WebAssembly (WASM). It provides real-time causal graph rendering, local file system mounting via the File System Access API, and direct telemetry bridges to the **Cortex Engine** (`lm-bridge.ts`).
 
 ---
 
-## 🎯 Architecture & Features
+## 🎯 Architecture & Client Features
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -17,13 +17,16 @@ The **BABYLON-60 Web Dashboard** is a high-performance, **Industrial Noir** web 
 ├──────────────────────────────┬──────────────────────────────┤
 │   Canvas UI (ADHD Mode)      │   FileSystem Access (FSA API)│
 ├──────────────────────────────┼──────────────────────────────┤
-│   Cortex LM Bridge (Local)   │   Rust WASM Telemetry Core   │
+│   Cortex SSE Stream Bridge   │   Rust WASM Telemetry Core   │
+│   (cortex/lm-bridge.ts)      │   (rust-core)                │
 └──────────────────────────────┴──────────────────────────────┘
 ```
 
-- **Industrial Noir Canvas UI**: Real-time interactive spatial canvas rendering state transitions, timeline IR nodes, and causal graphs.
+- **Industrial Noir Canvas UI (`ui/Canvas.tsx`)**: Real-time interactive spatial canvas rendering state transitions, timeline IR nodes, and causal graphs.
 - **Local File System Access (`io/fs-access.ts`)**: Frictionless local workspace mounting using native browser FS APIs (`Cmd + O` / `Ctrl + O`).
-- **Cortex Neural Bridge (`cortex/lm-bridge.ts`)**: Direct connectivity to local LLMs (LM Studio / Ollama / Cortex MCP Server) with heartbeat telemetry.
+- **Cortex Neural Bridge (`cortex/lm-bridge.ts`)**: Direct connectivity to local LLMs (LM Studio / Ollama / Cortex MCP Server at `http://localhost:1234/v1`).
+  - `checkCortexStatus()`: Instant heartbeat status polling.
+  - `streamCompletion(messages, signal, onChunk)`: Zero-latency Server-Sent Events (SSE) chat completion stream parser.
 - **Rust WASM Acceleration (`rust-core`)**: In-browser zero-copy evaluation of Merkle DAG chains and sexagesimal arithmetic checks.
 
 ---
@@ -55,7 +58,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 | Shortcut | Action |
 | :--- | :--- |
-| <kbd>Cmd</kbd> + <kbd>O</kbd> / <kbd>Ctrl</kbd> + <kbd>O</kbd> | Mount local workspace folder via File System Access API |
+| <kbd>Cmd</kbd> + <kbd>O</kbd> / <kbd>Ctrl</kbd> + <kbd>O</kbd> | Mount local workspace folder via File System Access API (`mountProject`) |
 | <kbd>Esc</kbd> | Reset canvas layout / center view |
 
 ---
@@ -68,9 +71,9 @@ web/
 ├── rust-core/              # Rust WASM compilation target
 ├── src/
 │   ├── assets/             # Branding icons & SVGs
-│   ├── cortex/             # LM Studio & Cortex bridge client
-│   ├── io/                 # File System Access API wrappers
-│   ├── ui/                 # Canvas components & telemetry widgets
+│   ├── cortex/             # lm-bridge.ts (SSE streaming client & status checker)
+│   ├── io/                 # fs-access.ts (File System Access API wrappers)
+│   ├── ui/                 # Canvas.tsx components & telemetry widgets
 │   ├── App.css             # Tailwind/Custom Industrial Noir styling
 │   ├── App.tsx             # Main layout & event router
 │   └── main.tsx            # React entrypoint
