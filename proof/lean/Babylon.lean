@@ -95,8 +95,8 @@ theorem b60_small_step_confluence (s s1 s2 : State) (h1 : Step s s1) (h2 : Step 
              Step.lal _ r_dest r_src,
              Step.assign _ r1 v1⟩
     | nu _ r target =>
-      left
-      rfl
+      right
+      exact ⟨s1, Step.nu s1 r target, Step.assign _ r1 v1⟩
   | fork s child1 =>
     cases h2 with
     | assign _ r2 v2 =>
@@ -121,8 +121,8 @@ theorem b60_small_step_confluence (s s1 s2 : State) (h1 : Step s s1) (h2 : Step 
              Step.lal _ r_dest r_src,
              Step.fork _ child1⟩
     | nu _ r target =>
-      left
-      rfl
+      right
+      exact ⟨s1, Step.nu s1 r target, Step.fork _ child1⟩
   | dah s r1 v1 =>
     cases h2 with
     | assign _ r2 v2 =>
@@ -152,8 +152,8 @@ theorem b60_small_step_confluence (s s1 s2 : State) (h1 : Step s s1) (h2 : Step 
              Step.lal _ r_dest r_src,
              Step.dah _ r1 v1⟩
     | nu _ r target =>
-      left
-      rfl
+      right
+      exact ⟨s1, Step.nu s1 r target, Step.dah _ r1 v1⟩
   | lal s r_dest1 r_src1 =>
     cases h2 with
     | assign _ r2 v2 =>
@@ -183,8 +183,8 @@ theorem b60_small_step_confluence (s s1 s2 : State) (h1 : Step s s1) (h2 : Step 
                Step.lal _ r_dest2 r_src2,
                Step.lal _ r_dest1 r_src1⟩
     | nu _ r target =>
-      left
-      rfl
+      right
+      exact ⟨s1, Step.nu s1 r target, Step.lal _ r_dest1 r_src1⟩
   | nu s r target =>
     right
     exact ⟨s2, h2, Step.nu s2 r target⟩
