@@ -115,10 +115,30 @@ def bootstrap_cortex() -> None:
             isomorphisms_inserted += 1
     conn.commit()
     conn.close()
+    
+    if json_output:
+        import json
+        payload = {
+            "schema_version": "1.0",
+            "type": "C5_CORTEX_BOOTSTRAP",
+            "db_path": DB_PATH,
+            "metrics": {
+                "primitives_inserted_L1": primitives_inserted,
+                "isomorphisms_inserted_L2": isomorphisms_inserted
+            },
+            "status": "SUCCESS"
+        }
+        print(json.dumps(payload, indent=2))
+        return
+
     print("[CORTEX] SQLite persistida exitosamente.")
     print(f"[CORTEX] Nodos Primitivos (L1) instanciados: {primitives_inserted}")
     print(f"[CORTEX] Enlaces Isomorfos (L2) instanciados: {isomorphisms_inserted}")
 
 
 if __name__ == "__main__":
-    bootstrap_cortex()
+    import argparse
+    parser = argparse.ArgumentParser(description="Bootstrap CORTEX Memory DB from Vault")
+    parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M")
+    args = parser.parse_args()
+    bootstrap_cortex(json_output=args.json)
