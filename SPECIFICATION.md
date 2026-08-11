@@ -32,37 +32,37 @@
 The file structure evolves to reflect the new security maturity and monetization strategy:
 
 ```text
-BABYLON-60/ (v4.0 Sovereign Hardened)
-├── kernel/                   # [CORE - IMPLEMENTED] Causal-Determinist Execution Engine
-│   ├── scheduler/            # [IMPLEMENTED] F60 & Coroutine Management
-│   └── forensic_quarantine/  # [IMPLEMENTED] WORM Black Box for critical states
+BABYLON-60/ (v4.0 C5-REAL Sovereign Hardened)
+├── kernel/                   # [CORTEX NÚCLEO] Endofuntor de Puntos Fijos & Invariantes F60
+│   ├── scheduler/            # [IMPLEMENTADO] Orquestador de Corrutinas & Reloj Simulado
+│   └── forensic_quarantine/  # [WORM BLACK BOX] Atractor de Aislamiento Causal (Zombie State)
 │
-├── attestation/              # [IMPLEMENTED] External Verifiability Layer
-│   ├── merkle_anchor/        # [IMPLEMENTED] State root anchoring
-│   └── oidc_verifier/        # [IMPLEMENTED] Identity validation for Ledger
+├── attestation/              # [ANCLAJE CAUSAL] Lentes y Funtores de Verificabilidad Externa
+│   ├── merkle_anchor/        # [IMPLEMENTED] Anclaje Asíncrono a L2 / Notario Causal
+│   └── oidc_verifier/        # [IMPLEMENTED] Verificador de Identidad Fibrada para el Ledger
 │
-├── compiler/                 # [HARDENED - FAIL CLOSED] B60 Compiler → IR + Lean 4
-├── runtime/                  # [IMPLEMENTED] Coroutine and memory management runtime
-├── proof_ir/                 # [IMPLEMENTED] Formal proofs IR
-├── strike_rs/                # [IMPLEMENTED] GIL bypass and exergy extraction (PyO3)
-├── fuzz/                     # [HARDENED] Robustness fuzzing & proptest suite
+├── compiler/                 # [TRANSDUCTOR CAUSAL - FAIL CLOSED] B60 AST → IR + Lean 4
+├── runtime/                  # [EJECUCIÓN] Operadores Comonádicos de Memoria & Corrutinas
+├── proof_ir/                 # [DEMOSTRACIÓN] IR de Pruebas Formales y Falsabilidad
+├── strike_rs/                # [EXTRACTOR EXERGÍA] Bypass de GIL (PyO3) & Métricas C5
+├── fuzz/                     # [VERIFICACIÓN ADVERSARIAL] Proptests & Robustez de Cuarentena
 │
-├── causal_isomorphism/       # [IMPLEMENTED] Transpiler
-├── timeline_ir/              # [IMPLEMENTED] Causal timeline rendering
-├── ultrathink/               # [IMPLEMENTED] Thermodynamic scheduler
+├── causal_isomorphism/       # [TRANSPILADOR] Isomorfismos Naturales (F# → Rust/Solidity)
+├── timeline_ir/              # [TOPOLOGÍA] Renderizado de Trayectorias Temporales
+├── ultrathink/               # [TERMODINÁMICA] Scheduler de Mínima Disipación de Landauer
 │
-├── babylon60/                # [IMPLEMENTED] Python module: cortex-persist
-│   ├── mamba_engine/         # [IMPLEMENTED] State Space Models integration
-│   └── chaos_monad/          # [IMPLEMENTED] LLM entropy encapsulation
+├── babylon60/                # [PYTHON CORTEX PERSIST] Integración de Modelos de Estado
+│   ├── mamba_engine/         # [IMPLEMENTED] Integración State Space Models (SSM)
+│   └── chaos_monad/          # [MONADA DE ENTROPÍA] Encapsulamiento Estocástico LLM
 │
-├── web/                      # [IMPLEMENTED] State visualization interface
-├── tonnetz_app/              # [IMPLEMENTED] Harmonic decision visualizer
-├── babylon60-ide/            # [HARDENED] Tauri IDE (CSWSH hardened)
+├── web/                      # [INTERFAZ] Visualizador de Estados Latentes
+├── tonnetz_app/              # [GEOMETRÍA] Visualizador Armónico de Decisiones
+├── babylon60-ide/            # [IDE TAURI HARDENED] Entorno Soberano (CSWSH Hardened)
 │
-├── BabylonTrace.lean         # [IMPLEMENTED] Theorems: Quarantine Proofs
-├── tests/                    # [IMPLEMENTED] 313 passing pytest suites
-├── SPECIFICATION.md          # Ground-truth Spec v4.0
-└── LICENSE                   # Sovereign Dual-License
+├── BabylonTrace.lean         # [TEOREMAS LEAN 4] Pruebas Formales de Cuarentena & WORM
+├── tests/                    # [BATERÍA DE VERIFICACIÓN] 313 pytest suites pasadas
+├── SPECIFICATION.md          # Especificación Toponómica C5-REAL v4.0
+└── LICENSE                   # Sovereign Dual-License (COMMERCIAL / C5-ENTERPRISE)
 ```
 
 ---
