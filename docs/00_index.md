@@ -79,7 +79,7 @@ graph TD
 | `guide_experimental.md` | Operadores internos | `spec_technical.md` |
 | `guide_commercial_license.md` | Legal / Partners comerciales | — |
 | `guide_repository_source_of_truth.md` | Todos los agentes | `AGENTS.md` |
-| `guide_skill_arsenal_taxonomy.md` | ⚠️ PHANTOM — verificar contra `~/.gemini/config/skills/` | — |
+| `guide_skill_arsenal_taxonomy.md` | ✅ VERIFIED — Mapeo completo (39 skills físicas / 143 operadores) | `docs/skills.json` |
 
 ---
 
@@ -155,8 +155,8 @@ Prefijos válidos:
   NN_        → Documentos teóricos ordenados (00-10)
 ```
 
-> [!WARNING]
-> `guide_skill_arsenal_taxonomy.md` está marcado como **PHANTOM** (`INV_C5_PHANTOM_ONTOLOGY`). Verificar antes de confiar: `ls ~/.gemini/config/skills/ | grep -f <(grep "^##" guide_skill_arsenal_taxonomy.md | sed 's/## //')`
+> [!NOTE]
+> `guide_skill_arsenal_taxonomy.md` está **VERIFICADO Y SINCRONIZADO** (`INV_C5_NOMINAL_DENSITY`). Las 39 skills físicas de `~/.gemini/config/skills/` están vinculadas deterministamente con `docs/skills.json`.
 
 > [!NOTE]
 > Los archivos en `sources/` (`.docx`) son **inputs fósiles** — anergía estocástica pendiente de cristalización. No son parte del grafo operativo.
