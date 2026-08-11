@@ -98,6 +98,7 @@ def main() -> None:
     # audit
     audit_parser = subparsers.add_parser("audit", help="Run AST & anti-pattern quality gate audit")
     audit_parser.add_argument("--fix", action="store_true", help="Enable in-situ atomic remediation")
+    audit_parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
 
     # preserve
     preserve_parser = subparsers.add_parser("preserve", help="Harvest and hash local CLI logs")
@@ -134,7 +135,9 @@ def main() -> None:
         return
 
     if args.command == "audit":
-        cmd_args = ["--fix"] if getattr(args, "fix", False) else []
+        cmd_args = []
+        if getattr(args, "fix", False): cmd_args.append("--fix")
+        if getattr(args, "json", False): cmd_args.append("--json")
         sys.exit(run_subcommand("c5_quality_gates/audit_scripts_quality.py", cmd_args + unknown))
     elif args.command == "preserve":
         sys.exit(run_subcommand("c5_log_custody/c5_preserve_logs.py", ["--provider", args.provider] + unknown))
@@ -148,9 +151,12 @@ def main() -> None:
         rc2 = run_subcommand("c5_quality_gates/sync_docs_index.py", [])
         sys.exit(rc1 if rc1 != 0 else rc2)
     elif args.command == "catalog":
-        rc1 = run_subcommand("generate_scripts_readme.py", ["--json"] if getattr(args, "json", False) else [])
-        rc2 = run_subcommand("c5_quality_gates/sync_docs_index.py", [])
-        sys.exit(rc1 if rc1 != 0 else rc2)
+        if getattr(args, "json", False):
+            sys.exit(run_subcommand("generate_scripts_readme.py", ["--json"]))
+        else:
+            rc1 = run_subcommand("generate_scripts_readme.py", [])
+            rc2 = run_subcommand("c5_quality_gates/sync_docs_index.py", [])
+            sys.exit(rc1 if rc1 != 0 else rc2)
     elif args.command == "verify":
         sys.exit(run_subcommand("c5_verifiers/autodetect_invariants.py", unknown))
 
