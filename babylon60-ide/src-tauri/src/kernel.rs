@@ -5,6 +5,7 @@
 use std::collections::HashMap;
 use std::sync::{Mutex, OnceLock};
 use serde::{Deserialize, Serialize};
+use tauri::{AppHandle, Emitter};
 use crate::lexicon::{Domain, Primitive, Modifier, VectorPath, VectorPath4D};
 
 // ═══════════════════════════════════════════════════════
@@ -153,13 +154,39 @@ pub fn build_ontology() {
 //  KERNEL INIT — Wire both dispatch spaces at boot
 // ═══════════════════════════════════════════════════════
 
-pub fn init_kernel() {
+pub fn init_kernel(app: AppHandle) {
     // 1. Build 3D semantic ontology
     build_ontology();
 
     // 2. Initialize 4D static table (all 10,000 slots default to base handler)
     let table = [default_4d_handler as Action4D; 10_000];
     KERNEL_TABLE_4D.set(table).ok();
+
+    // 3. Iceoryx2 Zero-Copy IPC Listener for WORM Quarantine
+    std::thread::spawn(move || {
+        use iceoryx2::prelude::*;
+        if let Ok(service_name) = ServiceName::new("babylon60/worm_quarantine") {
+            if let Ok(service) = iceoryx2::service::zero_copy::Service::new(&service_name)
+                .publish_subscribe()
+                .open_or_create::<[u8; 32]>() // Simulated payload size for causal hash
+            {
+                if let Ok(subscriber) = service.subscriber().create() {
+                    loop {
+                        if let Ok(Some(sample)) = subscriber.receive() {
+                            let hash_hex = hex::encode(&*sample);
+                            let payload = serde_json::json!({
+                                "causal_hash": hash_hex,
+                                "timestamp": chrono::Utc::now().to_rfc3339(),
+                                "reason": "Entropic Divergence Detected"
+                            });
+                            let _ = app.emit("critical-apoptosis", payload);
+                        }
+                        std::thread::sleep(std::time::Duration::from_millis(50));
+                    }
+                }
+            }
+        }
+    });
 
     println!("⚡ BABYLON60 KERNEL ONLINE — 3D semantic + 4D tensor (10,000-space)");
 }

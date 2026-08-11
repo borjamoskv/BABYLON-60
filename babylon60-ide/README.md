@@ -5,11 +5,11 @@
 [![React](https://img.shields.io/badge/React-18-blue?style=for-the-badge&logo=react)](https://react.dev/)
 [![IPC](https://img.shields.io/badge/IPC-Iceoryx2_Zero--Copy-orange?style=for-the-badge)](https://github.com/eclipse-iceoryx/iceoryx2)
 
-The **BABYLON-60 Sovereign IDE** is a dedicated, multi-platform desktop and mobile development workspace built on **Tauri v2** and **FastAPI**. It combines an **Industrial Noir UI** with an **AUTO_SOTA Model Router**, **Dual-Model Arena comparison**, and **Iceoryx2 zero-copy IPC** for real-time local model interaction and WORM Quarantine inspection.
+The **BABYLON-60 Sovereign IDE** is a dedicated, multi-platform desktop and mobile development workspace built on **Tauri v2** and **FastAPI** (v0.4.0). It combines an **Industrial Noir UI** with an **AUTO_SOTA Model Router**, **Dual-Model Arena comparison**, and **Iceoryx2 zero-copy IPC** for real-time local model interaction and WORM Quarantine inspection.
 
 ---
 
-## 🏗️ Architecture
+## 🏗️ Architecture & Backend API Router Matrix
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -19,11 +19,23 @@ The **BABYLON-60 Sovereign IDE** is a dedicated, multi-platform desktop and mobi
 │            Tauri v2 Rust Core (IPC / Iceoryx2 / WORM)           │
 ├─────────────────────────────────────────────────────────────────┤
 │             FastAPI Backend (Port 8000 / Uvicorn)               │
-│ - OpenRouter Native API Bridge                                  │
-│ - AUTO_SOTA Model Classifier & Cost Optimizer                   │
+│ - OpenRouter Native API Bridge & SOTA Model Classifier          │
 │ - Dual-Model Arena Evaluation & Streaming Telemetry             │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
+### FastAPI Endpoint Routers (`backend/routes/`)
+
+| Router | Endpoint Domain | Purpose |
+| :--- | :--- | :--- |
+| **`inference`** | `/api/v1/inference` | OpenRouter native streaming bridge & AUTO_SOTA model classifier. |
+| **`ledger`** | `/api/v1/ledger` | WORM hash-chain audit log inspector (`cortex_ledger.py`). |
+| **`sentinel`** | `/api/v1/sentinel` | Git Sentinel external witness monitoring and branch verification. |
+| **`telemetry`** | `/api/v1/telemetry` | Live token throughput, latency metrics, and exergy consumption. |
+| **`ontology`** | `/api/v1/ontology` | C5-REAL threat model ontology and regulatory constraint inspector. |
+| **`query`** | `/api/v1/query` | L1 Sink SQLite vector/graph query interface. |
+| **`delegation`**| `/api/v1/delegation` | Multi-agent task delegation and swarm execution control. |
+| **`analytics`** | `/api/v1/analytics` | System health, memory footprint, and Landauer energy audit metrics. |
 
 ---
 
@@ -52,23 +64,14 @@ npm run build:ios
 
 ---
 
-## 🎯 Key Features
-
-1. **AUTO_SOTA Classifier**: Automatically selects the optimal AI model (Claude 3.5 Sonnet, GPT-4o, DeepSeek R1) based on task complexity, token count, and cost efficiency.
-2. **Dual-Model Arena**: Run parallel prompts across two model candidates simultaneously with side-by-side diffing and zero-latency streaming.
-3. **Iceoryx2 Zero-Copy IPC**: Shared-memory microsecond messaging between Rust process host and Python sidecar backend.
-4. **Model Context Protocol (MCP) Integration**: Native loader for local MCP servers (`mcp.json`).
-
----
-
 ## 📁 Monorepo Structure
 
 ```
 babylon60-ide/
 ├── backend/                # FastAPI Python sidecar engine
-│   ├── routes/             # API endpoints (completion, routing, arena)
-│   ├── services/           # OpenRouter client & SOTA router logic
-│   ├── main.py             # Uvicorn app entrypoint
+│   ├── routes/             # 8 API routers (inference, ledger, sentinel, telemetry...)
+│   ├── services/           # OpenRouter client, cortex_ledger, SOTA router logic
+│   ├── main.py             # Uvicorn app entrypoint (FastAPI v0.4.0)
 │   └── pyproject.toml      # Backend dependencies
 ├── frontend/               # React + Vite Industrial Noir UI
 │   ├── src/                # Components, hooks, and views
