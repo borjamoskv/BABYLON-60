@@ -69,7 +69,8 @@ class SkillManifest:
 
     # ── Identity ──
     name: str
-    path: Path
+    display_name: str = ""
+    path: Path = field(default_factory=Path)
     description: str = ""
     version: str = "0.0.0"
     category: str = "uncategorized"
@@ -380,8 +381,11 @@ class SkillRegistry:
         aliases_raw = raw.get("aliases", [])
         aliases = [str(a).lstrip("/") for a in aliases_raw]
 
+        display_name = str(raw.get("display_name") or raw.get("title") or name)
+
         return SkillManifest(
             name=name,
+            display_name=display_name,
             path=path,
             description=str(raw.get("description", "")).strip(),
             version=str(raw.get("version", "0.0.0")),
