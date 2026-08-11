@@ -13,6 +13,16 @@ USER_HOME = Path.home()
 CONFIG_DIR = USER_HOME / ".gemini" / "config"
 SKILLS_DIR = CONFIG_DIR / "skills"
 
+# CORTEX Engine Local Storage Directories
+CORTEX_DIR = USER_HOME / ".cortex"
+MEMORY_DIR = CORTEX_DIR / "memory"
+DAEMON_DIR = CORTEX_DIR / "daemon"
+
+# Subsystem Configuration & State Files
+DAEMON_CONFIG_FILE = DAEMON_DIR / "config.json"
+DAEMON_STATUS_FILE = DAEMON_DIR / "status.json"
+SYNC_STATE_FILE = CORTEX_DIR / "sync_state.json"
+
 # Monorepo root paths
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 DOCS_DIR = REPO_ROOT / "docs"
