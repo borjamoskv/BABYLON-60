@@ -130,6 +130,7 @@ def main() -> None:
     swarm_parser = subparsers.add_parser("swarm", help="Run parallel BFT legion swarm")
     swarm_parser.add_argument("--tenants", "-n", type=int, default=100)
     swarm_parser.add_argument("--concurrency", "-c", type=int, default=None)
+    swarm_parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
 
     # sync
     sync_parser = subparsers.add_parser("sync", help="Synchronize physical skills with docs/skills.json")
@@ -173,6 +174,8 @@ def main() -> None:
         cmd_args = ["--tenants", str(args.tenants)]
         if args.concurrency:
             cmd_args += ["--concurrency", str(args.concurrency)]
+        if getattr(args, "json", False):
+            cmd_args.append("--json")
         sys.exit(run_subcommand("c5_legion/legion_swarm.py", cmd_args + unknown))
     elif args.command == "sync":
         if getattr(args, "json", False):

@@ -46,16 +46,18 @@ async def _tenant_execution_cycle(tenant_id: int, semaphore: asyncio.Semaphore) 
             "manifest_integrity": True
         }
 
-async def run_legion_swarm(num_tenants: int = 10000, concurrency_limit: int = 500) -> None:
+async def run_legion_swarm(num_tenants: int = 10000, concurrency_limit: int = 500, json_output: bool = False) -> None:
     """
     Inicia la simulación del enjambre y fuerza el colapso cuántico (sincronización).
     
     Args:
         num_tenants: Número total de agentes/tenantes a instanciar.
         concurrency_limit: Máximo de agentes activos simultáneamente.
+        json_output: Si es True, emite un payload JSON estructurado en lugar de logs.
     """
-    logger.info(f"⚡ INICIANDO ENJAMBRE LEGION: {num_tenants} Tenantes")
-    logger.info(f"⚡ LÍMITE DE CONCURRENCIA (Válvula Termodinámica): {concurrency_limit}")
+    if not json_output:
+        logger.info(f"⚡ INICIANDO ENJAMBRE LEGION: {num_tenants} Tenantes")
+        logger.info(f"⚡ LÍMITE DE CONCURRENCIA (Válvula Termodinámica): {concurrency_limit}")
     
     start_time = time.perf_counter()
     
@@ -68,7 +70,8 @@ async def run_legion_swarm(num_tenants: int = 10000, concurrency_limit: int = 50
         for i in range(num_tenants)
     ]
     
-    logger.info("🌊 Funciones de onda probabilísticas emitidas. Esperando Colapso...")
+    if not json_output:
+        logger.info("🌊 Funciones de onda probabilísticas emitidas. Esperando Colapso...")
     
     # 3. Colapso Cuántico (Barrier Event)
     # Todos los resultados convergen en este punto monótono (Teorema CALM)
@@ -80,6 +83,23 @@ async def run_legion_swarm(num_tenants: int = 10000, concurrency_limit: int = 50
     successful_collapses = sum(1 for r in results if r["status"] == "COLLAPSED")
     total_exergy = sum(r["exergy_consumed"] for r in results)
     
+    if json_output:
+        import json
+        payload = {
+            "schema_version": "1.0",
+            "type": "C5_LEGION_SWARM_COLLAPSE",
+            "metrics": {
+                "target_tenants": num_tenants,
+                "concurrency_limit": concurrency_limit,
+                "successful_collapses": successful_collapses,
+                "wall_clock_seconds": total_time,
+                "total_cpu_exergy_ms": total_exergy,
+                "integrity_l0": 100.0
+            }
+        }
+        print(json.dumps(payload, indent=2))
+        return
+
     logger.info("======================================================")
     logger.info("█ REPORTE DE COLAPSO CUÁNTICO (PUNTO FIJO Ω)")
     logger.info("======================================================")

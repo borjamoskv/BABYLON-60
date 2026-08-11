@@ -39,16 +39,20 @@ def main() -> None:
         default="AST_ISOMORPHISM_SWARM_MUTATION",
         help="Action name for event projection",
     )
+    parser.add_argument(
+        "--json",
+        action="store_true",
+        help="Emit JSON payload for M2M communication",
+    )
     args = parser.parse_args()
 
     asyncio.run(
         run_legion_swarm(
             num_tenants=args.tenants,
-            action_type=args.action,
-            concurrency_limit=args.concurrency,
+            concurrency_limit=args.concurrency or args.tenants,
+            json_output=args.json
         )
     )
-
 
 if __name__ == "__main__":
     main()
