@@ -165,7 +165,7 @@ class IsomorphismAuditorC5:
 
 
 def main() -> None:
-    repo_root = Path(__file__).resolve().parent.parent
+    repo_root = Path(__file__).resolve().parent.parent.parent
     db_path = repo_root / "cortex" / "L1_sink" / "isomorphism_audit.db"
     auditor = IsomorphismAuditorC5(db_path)
     report = auditor.verify_isomorphism()

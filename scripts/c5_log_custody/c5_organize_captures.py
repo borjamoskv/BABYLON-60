@@ -8,7 +8,7 @@ import hashlib
 from pathlib import Path
 from typing import Any
 
-REPO_ROOT: Path = Path(__file__).resolve().parent.parent
+REPO_ROOT: Path = Path(__file__).resolve().parent.parent.parent
 EVIDENCE_DIR: Path = REPO_ROOT / "cortex" / "legal_dossier" / "evidencias_capturas"
 SESSION_SUBDIR: Path = EVIDENCE_DIR / "anexos_capturas_sesion"
 INDEX_FILE: Path = EVIDENCE_DIR / "C5_INDICE_CATALOGO_EVIDENCIAS_AMODEO.md"

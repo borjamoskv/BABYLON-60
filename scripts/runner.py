@@ -20,7 +20,7 @@ from pathlib import Path
 import subprocess
 import sys
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parent
 SCRIPTS_DIR = REPO_ROOT / "scripts"
 
 

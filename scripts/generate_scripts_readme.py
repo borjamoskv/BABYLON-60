@@ -18,7 +18,7 @@ import argparse
 from pathlib import Path
 from typing import Dict, List, Any
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parent
 SCRIPTS_DIR = REPO_ROOT / "scripts"
 README_PATH = SCRIPTS_DIR / "README.md"
 
