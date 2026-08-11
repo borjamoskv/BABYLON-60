@@ -1,28 +1,31 @@
-# 🐤 Canary Tokens Guide (OPSEC-Ω Taskforce-16)
+# Canary Tokens — Ω-11 (Honeypot)
 
-## 📌 Propósito
+> Plantar credenciales FALSAS con alerta real. Si alguien las usa, el
+> proveedor notifica la intrusión. Este fichero declara los señuelos
+> para que `scripts/canary_check.py` (Ω-12) vigile su presencia.
 
-Los Canary Tokens son trampas criptográficas/de red diseñadas para alertar al operador si un actor malicioso o un subagente no autorizado intenta acceder o exfiltrar credenciales simuladas en el ecosistema BABYLON-60.
+## Cómo plantar (OPERADOR, ~10 min)
 
----
+1. **AWS canary** — genera un par de credenciales falsas en
+   https://canarytokens.org/generate (tipo "AWS Keys") apuntando a tu
+   email/Telegram. Déjalas en un fichero `~/.aws/credentials.canary`
+   (fuera del repo) y, si quieres tentar, en un `.env.canary` del repo
+   IGNORADO por git. `canary_path: .env.canary`
 
-## 🛡️ Despliegue de Canary Tokens
+2. **GitHub token canary** — mismo servicio, tipo "GitHub Token".
+   `canary_path: .github_token.canary`
 
-### 1. Webhook Canary Token
-Plantar en archivos ficticios de configuración de pruebas (e.g., `tests/fixtures/fake_aws_credentials`):
+3. **Solana keypair canary** — genera un keypair vacío y anota su
+   pubkey; si recibe fondos inesperados o se firma con él, hay fuga.
+   `canary_path: .cortex/solana_keypair.canary.json`
 
-- **Tipo:** AWS Key / HTTP Webhook
-- **Alert Target:** Alerta inmediata vía Telegram / Webhook a la pasarela `whatsapp-nexus` o canal seguro.
+## Regla
 
-### 2. DNS Canary Token
-Plantar en comentarios de código o manifiestos de simulación:
+NUNCA uses una credencial canary para nada real. Su único valor es la
+alarma. Si `canary_check.py` deja de ver una → posible purga maliciosa.
 
-- **Dominio:** `*.canarytokens.com` o subdominio Soberano privado.
-- **Acción:** Registro de accesos IP no autorizados en tiempo real.
+## Estado
 
----
-
-## 🔒 Invariantes de Seguridad
-
-1. **Jamás commit de tokens reales.** Todos los canary tokens son inocuos y solo registran metadatos de acceso (IP, User-Agent, timestamp).
-2. **Alerting Automático:** Si un token salta, el `opsec_sentinel_c5.py` debe congelar inmediatamente los workflows de CI/CD.
+- [ ] AWS canary plantado
+- [ ] GitHub token canary plantado
+- [ ] Solana keypair canary plantado

@@ -52,3 +52,21 @@ docs/PITCH_DECK.md
 docs/VALUATION_STRATEGY.md
 docs/05_gtm/
 tests/sequencer_spsc_harness
+
+# ============================================================
+# OPSEC-Ω TASKFORCE HARDENING (2026-07-19, ITERA-1 · port 2026-08-12)
+# Defensa en profundidad. Contexto y pruebas: docs/OPSEC_OMEGA_ITERA1.md
+# (*.pem, *.key, .env* ya cubiertos por la sección Environment & Secrets)
+# ============================================================
+# Bóveda privada (nunca versionar)
+20_VAULT/
+# Material criptográfico — jamás versionar
+*.keystore
+*keypair*.json
+.cortex/*.hex
+.cortex/*.key
+.cortex/*keypair*
+# Baselines/reportes de escáneres de secretos — locales, no versionar
+.secrets.baseline
+gitleaks-report.json
+secret_audit.sarif

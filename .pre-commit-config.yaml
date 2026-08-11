@@ -1,0 +1,35 @@
+# OPSEC-Ω TASKFORCE — barrera pre-commit (capa 0: antes de que el
+# secreto llegue a git). Instalar:  pip install pre-commit && pre-commit install
+# Ω-07 (PreCommit-Gatekeeper) + Ω-12 (Canary-Guard, post-purge).
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.24.3
+    hooks:
+      - id: gitleaks
+        name: gitleaks (OPSEC-Ω config)
+        args: [--config=.gitleaks.toml]
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args: [--baseline, .secrets.baseline]
+        additional_dependencies: ['gibberish-detector']
+
+  # Ω-12 Canary-Guard: bloquea el commit si un señuelo canary desaparece
+  # del árbol (post-purga). Ejecutar `pre-commit install --hook-type pre-push`
+  # para cubrir también el push. Activar tras plantar docs/CANARY_TOKENS.md.
+  - repo: local
+    hooks:
+      - id: canary-guard
+        name: canary tokens present in tree
+        entry: python3 scripts/canary_check.py
+        language: system
+        pass_filenames: false
