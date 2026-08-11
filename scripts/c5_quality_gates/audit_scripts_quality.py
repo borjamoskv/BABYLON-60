@@ -67,16 +67,19 @@ def auto_fix_script(py_file: Path) -> bool:
         return False
 
 
-def audit_scripts(auto_fix: bool = False) -> bool:
-    print("============================================================")
-    print(f" 🛡️  BABYLON-60 QUALITY AUDITOR & AUTO-HEALER (MODE: {'IN-SITU AUTO-FIX' if auto_fix else 'READ-ONLY'})")
-    print("============================================================")
+def audit_scripts(auto_fix: bool = False, json_output: bool = False) -> bool:
+    if not json_output:
+        print("============================================================")
+        print(f" 🛡️  BABYLON-60 QUALITY AUDITOR & AUTO-HEALER (MODE: {'IN-SITU AUTO-FIX' if auto_fix else 'READ-ONLY'})")
+        print("============================================================")
 
-    py_files = sorted(SCRIPTS_DIR.rglob("*.py"))
-    sh_files = sorted(SCRIPTS_DIR.rglob("*.sh"))
+    # Exclude __pycache__ from rglob
+    py_files = sorted([p for p in SCRIPTS_DIR.rglob("*.py") if "__pycache__" not in p.parts])
+    sh_files = sorted([p for p in SCRIPTS_DIR.rglob("*.sh") if "__pycache__" not in p.parts])
     total_files = len(py_files) + len(sh_files)
 
-    print(f"[*] Auditing {len(py_files)} Python scripts and {len(sh_files)} Shell scripts...\n")
+    if not json_output:
+        print(f"[*] Auditing {len(py_files)} Python scripts and {len(sh_files)} Shell scripts...\n")
 
     passed_shebang = 0
     passed_ast = 0
@@ -84,13 +87,11 @@ def audit_scripts(auto_fix: bool = False) -> bool:
     violations = []
     remediated_count = 0
 
-    # 1. Audit Python Shebangs, AST Syntax, and Banned Anti-Patterns
     for py_file in py_files:
         rel_path = py_file.name
         content = py_file.read_text(encoding="utf-8")
         lines = content.splitlines()
 
-        # A. Shebang Check
         if lines and lines[0].strip() == SHEBANG:
             passed_shebang += 1
         else:
@@ -99,34 +100,52 @@ def audit_scripts(auto_fix: bool = False) -> bool:
                     passed_shebang += 1
                     remediated_count += 1
                 else:
-                    violations.append(f"[FAIL Shebang] {rel_path}: Missing or displaced Shebang on Line 1")
+                    violations.append({"file": rel_path, "type": "Shebang", "message": "Missing or displaced Shebang on Line 1"})
             else:
-                violations.append(f"[FAIL Shebang] {rel_path}: Missing or displaced Shebang on Line 1")
+                violations.append({"file": rel_path, "type": "Shebang", "message": "Missing or displaced Shebang on Line 1"})
 
-        # B. AST Parsing Check
         try:
             ast.parse(py_file.read_text(encoding="utf-8"), filename=str(py_file))
             passed_ast += 1
         except SyntaxError as e:
-            violations.append(f"[FAIL AST Syntax] {rel_path}:{e.lineno} - Syntax error: {e.msg}")
+            violations.append({"file": rel_path, "type": "AST Syntax", "message": f"Syntax error: {e.msg}", "line": e.lineno})
 
-        # C. Banned Patterns Check
         file_violations = 0
         current_lines = py_file.read_text(encoding="utf-8").splitlines()
         for pattern, reason in BANNED_PATTERNS:
             for idx, line in enumerate(current_lines, 1):
                 if pattern.search(line):
-                    violations.append(f"[FAIL Pattern] {rel_path}:{idx} - {reason}")
+                    violations.append({"file": rel_path, "type": "Anti-Pattern", "message": reason, "line": idx})
                     file_violations += 1
         if file_violations == 0:
             passed_patterns += 1
 
-    # 2. Audit Artifact Leakage in scripts/
     leaked_artifacts = []
     for item in SCRIPTS_DIR.iterdir():
         if item.is_file() and item.suffix.lower() not in ALLOWED_DATA_EXTENSIONS:
             if not item.name.startswith("."):
                 leaked_artifacts.append(item.name)
+
+    success = len(violations) == 0 and len(leaked_artifacts) == 0
+
+    if json_output:
+        import json
+        payload = {
+            "schema_version": "1.0",
+            "type": "C5_AUDIT_REPORT",
+            "passed": success,
+            "metrics": {
+                "total_scripts": total_files,
+                "shebang_compliance": f"{(passed_shebang/len(py_files))*100:.1f}%" if py_files else "100%",
+                "ast_integrity": f"{(passed_ast/len(py_files))*100:.1f}%" if py_files else "100%",
+                "anti_pattern_cleanliness": f"{(passed_patterns/len(py_files))*100:.1f}%" if py_files else "100%",
+                "remediated_count": remediated_count
+            },
+            "leaked_artifacts": leaked_artifacts,
+            "violations": violations
+        }
+        print(json.dumps(payload, indent=2))
+        return success
 
     print("--- AUDIT RESULTS ---")
     print(f"  Total Scripts Scanned      : {total_files}")
@@ -142,7 +161,8 @@ def audit_scripts(auto_fix: bool = False) -> bool:
     if violations:
         print("\n--- VIOLATION DETAILS ---")
         for v in violations:
-            print(f"  ❌ {v}")
+            line_info = f":{v['line']}" if "line" in v else ""
+            print(f"  ❌ [FAIL {v['type']}] {v['file']}{line_info} - {v['message']}")
         print("============================================================\n")
         return False
 
@@ -154,9 +174,10 @@ def audit_scripts(auto_fix: bool = False) -> bool:
 def main() -> None:
     parser = argparse.ArgumentParser(description="BABYLON-60 Quality Auditor & Auto-Healer")
     parser.add_argument("--fix", action="store_true", help="Enable in-situ atomic remediation")
+    parser.add_argument("--json", action="store_true", help="Emit audit report as JSON payload")
     args = parser.parse_args()
 
-    success = audit_scripts(auto_fix=args.fix)
+    success = audit_scripts(auto_fix=args.fix, json_output=args.json)
     sys.exit(0 if success else 1)
 
 
