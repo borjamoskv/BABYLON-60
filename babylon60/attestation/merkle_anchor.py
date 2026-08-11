@@ -11,9 +11,11 @@ from typing import Dict
 
 class MerkleCausalAnchor:
     """
+    [SIMULATED ENCLAVE - NOT FOR PRODUCTION]
     Anchors local Merkle-Causal DAG global hashes to external notary checkpoints
     and hardware security modules (TPM 2.0 / Intel SGX / AWS Nitro Enclaves).
     Supports Grace Period & Local-Only fallback to prevent network DDoS vulnerability.
+    WARNING: Does not currently interact with real hardware TPMs.
     """
 
     def __init__(
@@ -38,7 +40,7 @@ class MerkleCausalAnchor:
             "pcr_value": pcr_value,
             "nonce": nonce,
             "tpm_quote_signature": tpm_quote_signature,
-            "hardware_enclave": "TPM_2_0_HARDWARE_SEALED",
+            "hardware_enclave": "TPM_2_0_HARDWARE_SEALED [SIMULATED - NOT FOR PRODUCTION]",
         }
 
     def generate_notary_checkpoint(
