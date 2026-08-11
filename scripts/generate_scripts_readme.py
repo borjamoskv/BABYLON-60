@@ -5,13 +5,18 @@
 # ============================================================================
 """
 generate_scripts_readme.py - Automated self-documenting catalog generator
-Scans all scripts in scripts/ and builds scripts/README.md with docstrings and taxonomy.
+Scans all scripts in scripts/ and builds taxonomy.
+Molded via Autopoiesis (L0) to support Machine-to-Machine JSON output.
 """
 
 from __future__ import annotations
 
 import ast
+import json
+import sys
+import argparse
 from pathlib import Path
+from typing import Dict, List, Any
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS_DIR = REPO_ROOT / "scripts"
@@ -31,9 +36,9 @@ CATEGORIES = {
         "c5_legion/legion_1000_audit_swarm.py",
         "c5_legion/legion_10000_orchestrator.py",
         "c5_legion/legion_222_agentes.py",
-        "c5_centuria/centuria_swarm_commander.py",
-        "c5_centuria/centuria_swarm_runner.py",
-        "c5_centuria/remotion_swarm_orchestrator.py",
+        "centuria_swarm_commander.py",
+        "centuria_swarm_runner.py",
+        "remotion_swarm_orchestrator.py",
         "secret_swarm_auditor.py",
         "swarm_lock_guard.py",
     ],
@@ -51,15 +56,15 @@ CATEGORIES = {
         "c5_verifiers/verify_captures.py",
     ],
     "Thermodynamic Benchmarks & Stress Tests": [
-        "c5_thermo/stress_100m_bft.py",
-        "c5_thermo/stress_10m.py",
-        "c5_thermo/stress_sqlite_wal.py",
-        "c5_thermo/benchmark_ledger_throughput.py",
-        "c5_thermo/cache_1000_memoization_bench.py",
-        "c5_thermo/c5_exergy_optimizer_monitor.py",
-        "c5_thermo/exergy_arbitrage_engine.py",
-        "c5_thermo/exergy_dashboard_server.py",
-        "c5_thermo/exergy_optimizer_agent.py",
+        "stress_100m_bft.py",
+        "stress_10m.py",
+        "stress_sqlite_wal.py",
+        "benchmark_ledger_throughput.py",
+        "cache_1000_memoization_bench.py",
+        "c5_exergy_optimizer_monitor.py",
+        "exergy_arbitrage_engine.py",
+        "exergy_dashboard_server.py",
+        "exergy_optimizer_agent.py",
     ],
     "Formal Verification & Axiom Oracles": [
         "axiom_verifier_z3.py",
@@ -111,14 +116,53 @@ def extract_docstring(py_path: Path) -> str:
     return "Sovereign execution script"
 
 
-def generate_readme() -> None:
+def collect_data() -> Dict[str, Any]:
     py_files = sorted(SCRIPTS_DIR.rglob("*.py"))
     sh_files = sorted(SCRIPTS_DIR.rglob("*.sh"))
 
     categorized_files = set()
-    for cat, files in CATEGORIES.items():
+    for files in CATEGORIES.values():
         categorized_files.update(files)
 
+    data = {
+        "categories": {},
+        "uncategorized": [],
+        "shell_scripts": []
+    }
+
+    # Process categorized
+    for cat_name, file_list in CATEGORIES.items():
+        scripts = []
+        for fn in file_list:
+            fp = SCRIPTS_DIR / fn
+            if fp.exists():
+                scripts.append({
+                    "path": fn,
+                    "description": extract_docstring(fp)
+                })
+        data["categories"][cat_name] = scripts
+
+    # Process uncategorized
+    for fp in py_files:
+        fn = fp.relative_to(SCRIPTS_DIR).as_posix()
+        if fn not in categorized_files and fp.name != "generate_scripts_readme.py":
+            data["uncategorized"].append({
+                "path": fn,
+                "description": extract_docstring(fp)
+            })
+
+    # Process shell scripts
+    for fp in sh_files:
+        fn = fp.relative_to(SCRIPTS_DIR).as_posix()
+        data["shell_scripts"].append({
+            "path": fn,
+            "description": "Executable Bash Script"
+        })
+
+    return data
+
+
+def generate_markdown(data: Dict[str, Any]) -> None:
     md_lines = [
         "# ⚡ BABYLON-60 Sovereign Scripts Suite",
         "",
@@ -141,48 +185,58 @@ def generate_readme() -> None:
         "",
     ]
 
-    for cat_name, file_list in CATEGORIES.items():
-        md_lines.append(f"### {cat_name}")
-        md_lines.append("")
-        md_lines.append("| Script | Descripción / Propósito |")
-        md_lines.append("| :--- | :--- |")
-        for fn in file_list:
-            fp = SCRIPTS_DIR / fn
-            if fp.exists():
-                doc = extract_docstring(fp)
-                md_lines.append(f"| [`{fn}`](file://{fp}) | {doc} |")
-        md_lines.append("")
+    for cat_name, scripts in data["categories"].items():
+        if scripts:
+            md_lines.append(f"### {cat_name}")
+            md_lines.append("")
+            md_lines.append("| Script | Descripción / Propósito |")
+            md_lines.append("| :--- | :--- |")
+            for script in scripts:
+                fp = SCRIPTS_DIR / script["path"]
+                md_lines.append(f"| [`{script['path']}`](file://{fp}) | {script['description']} |")
+            md_lines.append("")
 
-    # General Utilities (uncategorized)
-    uncategorized = [f for f in py_files if f.relative_to(SCRIPTS_DIR).as_posix() not in categorized_files and f.name != "generate_scripts_readme.py"]
-    if uncategorized:
+    if data["uncategorized"]:
         md_lines.append("### Herramientas de Dominio & Utilidades")
         md_lines.append("")
         md_lines.append("| Script | Descripción / Propósito |")
         md_lines.append("| :--- | :--- |")
-        for fp in uncategorized:
-            fn = fp.relative_to(SCRIPTS_DIR).as_posix()
-            doc = extract_docstring(fp)
-            md_lines.append(f"| [`{fn}`](file://{fp}) | {doc} |")
+        for script in data["uncategorized"]:
+            fp = SCRIPTS_DIR / script["path"]
+            md_lines.append(f"| [`{script['path']}`](file://{fp}) | {script['description']} |")
         md_lines.append("")
 
-    # Shell Scripts
-    if sh_files:
+    if data["shell_scripts"]:
         md_lines.append("### Shell Scripts (`*.sh`)")
         md_lines.append("")
         md_lines.append("| Script | Tipo |")
         md_lines.append("| :--- | :--- |")
-        for fp in sh_files:
-            fn = fp.relative_to(SCRIPTS_DIR).as_posix()
-            md_lines.append(f"| [`{fn}`](file://{fp}) | Executable Bash Script |")
+        for script in data["shell_scripts"]:
+            fp = SCRIPTS_DIR / script["path"]
+            md_lines.append(f"| [`{script['path']}`](file://{fp}) | {script['description']} |")
         md_lines.append("")
 
     md_lines.append("---")
     md_lines.append("*Catálogo auto-generado dinámicamente por `generate_scripts_readme.py`.*")
 
     README_PATH.write_text("\n".join(md_lines), encoding="utf-8")
-    print(f"[+] Successfully generated catalog README at: {README_PATH}")
+    print(f"[+] Successfully generated catalog README at: {README_PATH}", file=sys.stderr)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Generador de catálogo de scripts (Soporta M2M JSON)")
+    parser.add_argument("--json", action="store_true", help="Emite el catálogo en formato JSON puro a stdout")
+    args = parser.parse_args()
+
+    data = collect_data()
+
+    if args.json:
+        # Volcar el JSON estructurado a stdout para que los agentes lo consuman
+        print(json.dumps(data, indent=2))
+    else:
+        # Comportamiento legacy para humanos
+        generate_markdown(data)
 
 
 if __name__ == "__main__":
-    generate_readme()
+    main()
