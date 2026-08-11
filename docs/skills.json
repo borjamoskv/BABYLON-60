@@ -1,54 +1,329 @@
 {
-  "version": "23.100",
-  "updated_at": "2026-08-05T00:00:00Z",
-  "description": "Grafo de adyacencia y topología conectada de las 31 habilidades del ecosistema CORTEX Engine integrado en BABYLON-60",
+  "version": "24.000",
+  "updated_at": "2026-08-11T20:20:00Z",
+  "description": "Grafo de adyacencia y topología conectada de las 43 habilidades del ecosistema CORTEX Engine integrado en BABYLON-60",
   "entries": [
-    { "name": "cortex-kernel", "tier": 23000, "category": "Kernel" },
-    { "name": "cortex-skill-composer", "tier": 21500, "category": "Meta-Kernel" },
-    { "name": "cortex-skill-auditor", "tier": 21200, "category": "Meta-Kernel" },
-    { "name": "cortex-skill-genesis", "tier": 21000, "category": "Meta-Kernel" },
-    { "name": "epistemic-extinction-protocol", "tier": 20980, "category": "Nucleus" },
-    { "name": "cta-cognitive-transition-algebra", "tier": 20950, "category": "Nucleus" },
-    { "name": "agentic-protocol-axiomatization", "tier": 20800, "category": "Nucleus" },
-    { "name": "polymath-concept-synthesis", "tier": 20500, "category": "Nucleus" },
-    { "name": "autodidact-omega-deep-research", "tier": 20200, "category": "Nucleus" },
-    { "name": "c5-real-devsecops-scaffold", "tier": 19850, "category": "Governance" },
-    { "name": "c5-real-legaltech-analysis", "tier": 19700, "category": "Governance" },
-    { "name": "anergy-purge-protocol", "tier": 19300, "category": "Governance" },
-    { "name": "wa-nexus-agent-gateway", "tier": 18900, "category": "Governance" },
-    { "name": "dynamic-subagent-lifecycle", "tier": 18600, "category": "Governance" },
-    { "name": "google-antigravity-sdk", "tier": 18400, "category": "Governance" },
-    { "name": "browser-subagent-orchestrator", "tier": 18200, "category": "Governance" },
-    { "name": "babylon60-ide-orchestrator", "tier": 18100, "category": "Governance" },
-    { "name": "discourse-popperian-falsification", "tier": 17900, "category": "Operations" },
-    { "name": "ghidra-ida-binary-audit", "tier": 17800, "category": "Operations" },
-    { "name": "jujutsu-vcs-management", "tier": 17600, "category": "Operations" },
-    { "name": "cortex-telemetry", "tier": 17500, "category": "Operations" },
-    { "name": "homebrew-ecosystem-management", "tier": 17200, "category": "Operations" },
-    { "name": "youtube-remotion-sota", "tier": 16800, "category": "Operations" },
-    { "name": "youtube-analysis-pipeline", "tier": 16400, "category": "Operations" },
-    { "name": "cloudflare-mcp-automation", "tier": 15900, "category": "Operations" },
-    { "name": "substack-socint-extraction", "tier": 15500, "category": "Operations" },
-    { "name": "reddit-socint-extraction", "tier": 15300, "category": "Operations" },
-    { "name": "whatsapp-perfect-group", "tier": 15100, "category": "Operations" },
-    { "name": "electron-mac-bundle-collision-diagnostics", "tier": 14800, "category": "Diagnostics" },
-    { "name": "vscode-git-packed-refs-diagnostics", "tier": 14600, "category": "Diagnostics" },
-    { "name": "macos-lulu-firewall-diagnostics", "tier": 14200, "category": "Diagnostics" },
-    { "name": "github-api-rate-limit-optimization", "tier": 13900, "category": "Utilities" },
-    { "name": "suno-bracket-tagging", "tier": 12800, "category": "Utilities" },
-    { "name": "ironic-content-generator", "tier": 11200, "category": "Utilities" }
+    {
+      "name": "cortex-kernel",
+      "tier": 23000,
+      "category": "Kernel"
+    },
+    {
+      "name": "cortex-skill-composer",
+      "tier": 21500,
+      "category": "Meta-Kernel"
+    },
+    {
+      "name": "cortex-skill-auditor",
+      "tier": 21200,
+      "category": "Meta-Kernel"
+    },
+    {
+      "name": "cortex-skill-genesis",
+      "tier": 21000,
+      "category": "Meta-Kernel"
+    },
+    {
+      "name": "epistemic-extinction-protocol",
+      "tier": 20980,
+      "category": "Nucleus"
+    },
+    {
+      "name": "cta-cognitive-transition-algebra",
+      "tier": 20950,
+      "category": "Nucleus"
+    },
+    {
+      "name": "agentic-protocol-axiomatization",
+      "tier": 20800,
+      "category": "Nucleus"
+    },
+    {
+      "name": "categorical-hallucination-audit",
+      "tier": 20700,
+      "category": "Nucleus"
+    },
+    {
+      "name": "existence-gap-audit",
+      "tier": 20600,
+      "category": "Nucleus"
+    },
+    {
+      "name": "polymath-concept-synthesis",
+      "tier": 20500,
+      "category": "Nucleus"
+    },
+    {
+      "name": "c5-real-thermodynamic-override",
+      "tier": 20400,
+      "category": "Governance"
+    },
+    {
+      "name": "cct-cognitive-theory-advisor",
+      "tier": 20300,
+      "category": "Nucleus"
+    },
+    {
+      "name": "autodidact-omega-deep-research",
+      "tier": 20200,
+      "category": "Nucleus"
+    },
+    {
+      "name": "c5-real-devsecops-scaffold",
+      "tier": 19850,
+      "category": "Governance"
+    },
+    {
+      "name": "c5-real-legaltech-analysis",
+      "tier": 19700,
+      "category": "Governance"
+    },
+    {
+      "name": "anergy-purge-protocol",
+      "tier": 19300,
+      "category": "Governance"
+    },
+    {
+      "name": "swarm-quantum-collapse",
+      "tier": 19100,
+      "category": "Governance"
+    },
+    {
+      "name": "whatsapp-nexus-protocol",
+      "tier": 18900,
+      "category": "Governance"
+    },
+    {
+      "name": "dynamic-subagent-lifecycle",
+      "tier": 18600,
+      "category": "Governance"
+    },
+    {
+      "name": "google-antigravity-sdk",
+      "tier": 18400,
+      "category": "Governance"
+    },
+    {
+      "name": "browser-subagent-orchestrator",
+      "tier": 18200,
+      "category": "Governance"
+    },
+    {
+      "name": "babylon60-ide-orchestrator",
+      "tier": 18100,
+      "category": "Governance"
+    },
+    {
+      "name": "discourse-popperian-falsification",
+      "tier": 17900,
+      "category": "Operations"
+    },
+    {
+      "name": "ghidra-ida-binary-audit",
+      "tier": 17800,
+      "category": "Operations"
+    },
+    {
+      "name": "jujutsu-vcs-management",
+      "tier": 17600,
+      "category": "Operations"
+    },
+    {
+      "name": "cortex-telemetry",
+      "tier": 17500,
+      "category": "Operations"
+    },
+    {
+      "name": "frontier-prompting",
+      "tier": 17300,
+      "category": "Operations"
+    },
+    {
+      "name": "homebrew-ecosystem-management",
+      "tier": 17200,
+      "category": "Operations"
+    },
+    {
+      "name": "flstudio-mcp-production",
+      "tier": 17000,
+      "category": "Operations"
+    },
+    {
+      "name": "youtube-remotion-sota",
+      "tier": 16800,
+      "category": "Operations"
+    },
+    {
+      "name": "youtube-analysis-pipeline",
+      "tier": 16400,
+      "category": "Operations"
+    },
+    {
+      "name": "cloudflare-mcp-automation",
+      "tier": 15900,
+      "category": "Operations"
+    },
+    {
+      "name": "substack-socint-extraction",
+      "tier": 15500,
+      "category": "Operations"
+    },
+    {
+      "name": "reddit-socint-extraction",
+      "tier": 15300,
+      "category": "Operations"
+    },
+    {
+      "name": "whatsapp-perfect-group",
+      "tier": 15100,
+      "category": "Operations"
+    },
+    {
+      "name": "opentimestamps-l5-diagnostics",
+      "tier": 15000,
+      "category": "Diagnostics"
+    },
+    {
+      "name": "electron-mac-bundle-collision-diagnostics",
+      "tier": 14800,
+      "category": "Diagnostics"
+    },
+    {
+      "name": "vscode-git-packed-refs-diagnostics",
+      "tier": 14600,
+      "category": "Diagnostics"
+    },
+    {
+      "name": "macos-lulu-firewall-diagnostics",
+      "tier": 14200,
+      "category": "Diagnostics"
+    },
+    {
+      "name": "github-api-rate-limit-optimization",
+      "tier": 13900,
+      "category": "Utilities"
+    },
+    {
+      "name": "suno-bracket-tagging",
+      "tier": 12800,
+      "category": "Utilities"
+    },
+    {
+      "name": "ironic-content-generator",
+      "tier": 11200,
+      "category": "Utilities"
+    },
+    {
+      "name": "handoff",
+      "tier": 10500,
+      "category": "Utilities"
+    }
   ],
   "adjacency": [
-    { "source": "autodidact-omega-deep-research", "target": "polymath-concept-synthesis", "relation": "feeds_into" },
-    { "source": "polymath-concept-synthesis", "target": "agentic-protocol-axiomatization", "relation": "axiomatized_by" },
-    { "source": "polymath-concept-synthesis", "target": "discourse-popperian-falsification", "relation": "falsified_by" },
-    { "source": "c5-real-legaltech-analysis", "target": "discourse-popperian-falsification", "relation": "audited_by" },
-    { "source": "epistemic-extinction-protocol", "target": "anergy-purge-protocol", "relation": "purges_via" },
-    { "source": "ghidra-ida-binary-audit", "target": "c5-real-devsecops-scaffold", "relation": "audits_scaffold" },
-    { "source": "jujutsu-vcs-management", "target": "c5-real-devsecops-scaffold", "relation": "version_controls" },
-    { "source": "cortex-telemetry", "target": "cortex-skill-auditor", "relation": "telemetry_for" },
-    { "source": "cortex-telemetry", "target": "cortex-skill-genesis", "relation": "generates_from" },
-    { "source": "babylon60-ide-orchestrator", "target": "cortex-telemetry", "relation": "visualizes" },
-    { "source": "cortex-skill-composer", "target": "*", "relation": "orchestrates" }
+    {
+      "source": "autodidact-omega-deep-research",
+      "target": "polymath-concept-synthesis",
+      "relation": "feeds_into"
+    },
+    {
+      "source": "polymath-concept-synthesis",
+      "target": "agentic-protocol-axiomatization",
+      "relation": "axiomatized_by"
+    },
+    {
+      "source": "polymath-concept-synthesis",
+      "target": "discourse-popperian-falsification",
+      "relation": "falsified_by"
+    },
+    {
+      "source": "c5-real-legaltech-analysis",
+      "target": "discourse-popperian-falsification",
+      "relation": "audited_by"
+    },
+    {
+      "source": "epistemic-extinction-protocol",
+      "target": "anergy-purge-protocol",
+      "relation": "purges_via"
+    },
+    {
+      "source": "ghidra-ida-binary-audit",
+      "target": "c5-real-devsecops-scaffold",
+      "relation": "audits_scaffold"
+    },
+    {
+      "source": "jujutsu-vcs-management",
+      "target": "c5-real-devsecops-scaffold",
+      "relation": "version_controls"
+    },
+    {
+      "source": "cortex-telemetry",
+      "target": "cortex-skill-auditor",
+      "relation": "telemetry_for"
+    },
+    {
+      "source": "cortex-telemetry",
+      "target": "cortex-skill-genesis",
+      "relation": "generates_from"
+    },
+    {
+      "source": "babylon60-ide-orchestrator",
+      "target": "cortex-telemetry",
+      "relation": "visualizes"
+    },
+    {
+      "source": "cortex-skill-composer",
+      "target": "*",
+      "relation": "orchestrates"
+    },
+    {
+      "source": "categorical-hallucination-audit",
+      "target": "agentic-protocol-axiomatization",
+      "relation": "audits_axioms"
+    },
+    {
+      "source": "existence-gap-audit",
+      "target": "c5-real-devsecops-scaffold",
+      "relation": "audits_codebase"
+    },
+    {
+      "source": "swarm-quantum-collapse",
+      "target": "dynamic-subagent-lifecycle",
+      "relation": "orchestrates_swarm"
+    },
+    {
+      "source": "c5-real-thermodynamic-override",
+      "target": "anergy-purge-protocol",
+      "relation": "overrides_anergy"
+    },
+    {
+      "source": "cct-cognitive-theory-advisor",
+      "target": "cta-cognitive-transition-algebra",
+      "relation": "advises"
+    },
+    {
+      "source": "frontier-prompting",
+      "target": "autodidact-omega-deep-research",
+      "relation": "prompts_frontier"
+    },
+    {
+      "source": "flstudio-mcp-production",
+      "target": "youtube-remotion-sota",
+      "relation": "provides_audio"
+    },
+    {
+      "source": "opentimestamps-l5-diagnostics",
+      "target": "c5-real-legaltech-analysis",
+      "relation": "attests_l5"
+    },
+    {
+      "source": "whatsapp-nexus-protocol",
+      "target": "dynamic-subagent-lifecycle",
+      "relation": "gateways_messaging"
+    },
+    {
+      "source": "handoff",
+      "target": "cortex-telemetry",
+      "relation": "persists_session_state"
+    }
   ]
 }
