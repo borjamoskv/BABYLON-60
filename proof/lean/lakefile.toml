@@ -1,7 +1,7 @@
 # C5-REAL: paquete Lake para verificación mecánica del teorema causal.
 # `lake build` compila Babylon.lean; si alguna prueba no cierra, falla (fail-fast).
 name = "babylon-proof"
-defaultTargets = ["Babylon"]
+defaultTargets = ["Babylon", "C5Real"]
 
 [[require]]
 name = "mathlib"
@@ -9,3 +9,7 @@ scope = "leanprover-community"
 
 [[lean_lib]]
 name = "Babylon"
+
+[[lean_lib]]
+name = "C5Real"
+globs = ["C5Real.MarkovWorld", "C5Real.BayesianLens", "C5Real.Provenance"]
