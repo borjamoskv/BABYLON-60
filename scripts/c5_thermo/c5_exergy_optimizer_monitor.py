@@ -16,7 +16,7 @@ import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
-ROOT_DIR = Path(__file__).resolve().parent.parent
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 STATUS_FILE = ROOT_DIR / "STATUS.md"
 
 DB_TARGETS = [

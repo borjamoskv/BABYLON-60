@@ -7,7 +7,7 @@ import json
 import os
 import re
 
-REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 HEADER_CONTENT_PY = """# ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened

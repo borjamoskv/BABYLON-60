@@ -13,7 +13,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 GIT_HOOKS_DIR = REPO_ROOT / ".git" / "hooks"
 PRE_COMMIT_HOOK_PATH = GIT_HOOKS_DIR / "pre-commit"
 

@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-WORKSPACE_DIR = Path(__file__).resolve().parent.parent
+WORKSPACE_DIR = Path(__file__).resolve().parent.parent.parent
 YAML_STATE_PATH = WORKSPACE_DIR / "cortex/ontology/babylon60_objectives.yaml"
 PROJECT_MD_PATH = WORKSPACE_DIR / "PROJECT.md"
 

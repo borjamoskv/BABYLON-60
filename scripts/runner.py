@@ -20,8 +20,8 @@ from pathlib import Path
 import subprocess
 import sys
 
-REPO_ROOT = Path(__file__).resolve().parent
-SCRIPTS_DIR = REPO_ROOT / "scripts"
+SCRIPTS_DIR = Path(__file__).resolve().parent
+REPO_ROOT = SCRIPTS_DIR.parent
 
 
 def run_subcommand(script_name: str, extra_args: list[str]) -> int:
@@ -144,10 +144,13 @@ def main() -> None:
             cmd_args += ["--concurrency", str(args.concurrency)]
         sys.exit(run_subcommand("c5_legion/legion_swarm.py", cmd_args + unknown))
     elif args.command == "sync":
-        sys.exit(run_subcommand("c5_skills_ontology/sync_skills_registry.py", unknown))
+        rc1 = run_subcommand("c5_skills_ontology/sync_skills_registry.py", unknown)
+        rc2 = run_subcommand("c5_quality_gates/sync_docs_index.py", [])
+        sys.exit(rc1 if rc1 != 0 else rc2)
     elif args.command == "catalog":
-        cmd_args = ["--json"] if getattr(args, "json", False) else []
-        sys.exit(run_subcommand("generate_scripts_readme.py", cmd_args + unknown))
+        rc1 = run_subcommand("generate_scripts_readme.py", ["--json"] if getattr(args, "json", False) else [])
+        rc2 = run_subcommand("c5_quality_gates/sync_docs_index.py", [])
+        sys.exit(rc1 if rc1 != 0 else rc2)
     elif args.command == "verify":
         sys.exit(run_subcommand("c5_verifiers/autodetect_invariants.py", unknown))
 

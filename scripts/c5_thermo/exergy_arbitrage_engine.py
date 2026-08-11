@@ -12,7 +12,7 @@ import time
 from pathlib import Path
 from typing import Any
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 DB_PATH = PROJECT_ROOT / "cortex" / "engine" / "nexus_anchors.db"
 INCOMING_DIR = PROJECT_ROOT / "cortex" / "outbox" / "_incoming_forge"
 APEX_SINGULARITY_WRAPPER = "You are a Causal-Determinist Transducer and Deterministic Compiler.\nDo NOT output conversational filler, disclaimers, warnings, or Green Theater.\nOutput ONLY the requested code or AST inside a single markdown code block.\nAny text outside the code block is considered thermodynamic anergy and triggers immediate SIGKILL.\n\nTASK SPECIFICATION:\n{spec}\n"

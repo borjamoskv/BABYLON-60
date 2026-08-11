@@ -11,7 +11,7 @@ from typing import Any
 from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
 
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
 
 async def run_benchmark(iterations: int = 10000) -> None:

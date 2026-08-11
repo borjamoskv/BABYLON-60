@@ -18,7 +18,7 @@ import time
 import re
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 DB_PATH = REPO_ROOT / "data" / "cortex_memory.db"
 AUDIT_DIR = REPO_ROOT / "cortex" / "audits"
 

@@ -17,7 +17,7 @@ import time
 from pathlib import Path
 
 # Add project root to sys.path
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
 from babylon60.extensions.skills.registry import SkillRegistry

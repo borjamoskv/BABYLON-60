@@ -18,8 +18,8 @@ import argparse
 from pathlib import Path
 from typing import Dict, List, Any
 
-REPO_ROOT = Path(__file__).resolve().parent
-SCRIPTS_DIR = REPO_ROOT / "scripts"
+SCRIPTS_DIR = Path(__file__).resolve().parent
+REPO_ROOT = SCRIPTS_DIR.parent
 README_PATH = SCRIPTS_DIR / "README.md"
 
 DOMAIN_NAMES = {

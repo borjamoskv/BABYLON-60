@@ -21,7 +21,7 @@ import sys
 import yaml
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 DEFS_DIR = REPO_ROOT / "babylon60" / "extensions" / "agents" / "definitions"
 
 REQUIRED_KEYS = [
