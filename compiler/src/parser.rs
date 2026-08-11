@@ -6,7 +6,12 @@ use crate::ast::AST;
 use kernel::isa::{Instruction, Opcode, Reg};
 use std::vec::Vec;
 
-pub fn parse(source: &str) -> AST {
+#[derive(Debug, PartialEq, Eq, Clone)]
+pub enum ParseError {
+    UnknownOpcode(String),
+}
+
+pub fn parse(source: &str) -> Result<AST, ParseError> {
     let mut instructions = Vec::new();
     for line in source.lines() {
         let trimmed = line.trim();
@@ -28,8 +33,8 @@ pub fn parse(source: &str) -> AST {
                 let val = parts.get(1).and_then(|s| s.parse::<i64>().ok()).unwrap_or(0);
                 instructions.push(Instruction { opcode: Opcode::LoadImm(Reg::R1, val) });
             }
-            _ => {}
+            unknown => return Err(ParseError::UnknownOpcode(unknown.to_string())),
         }
     }
-    AST { instructions }
+    Ok(AST { instructions })
 }

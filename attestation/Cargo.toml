@@ -1,0 +1,9 @@
+[package]
+name = "attestation"
+version = "4.0.0"
+edition = "2021"
+authors = ["Borja Moskv"]
+description = "Causal Mesh Attestation for BABYLON-60"
+
+[dependencies]
+# Dependencies for cryptographic anchoring will go here

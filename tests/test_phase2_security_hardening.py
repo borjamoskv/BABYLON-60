@@ -60,7 +60,8 @@ def test_serialization_boundary_checksum_mismatch():
         SerializationBoundary.validate_tensor_checksum(buf, "invalid_checksum_hash")
 
 
-def test_hybrid_license_verifier():
+def test_hybrid_license_verifier(monkeypatch):
+    monkeypatch.setenv("BABYLON60_LICENSE_SALT", "test_sovereign_salt_2026")
     org = "Enterprise_Bank_Corp"
     node = "NODE_PROD_01"
     expires = int(time.time()) + 86400  # 1 day in future

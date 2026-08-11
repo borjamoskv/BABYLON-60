@@ -72,4 +72,4 @@ mod tests {
         assert_eq!(step(state, &crit_instr), Err(HaltReason::Critical));
     }
 }
-}
+

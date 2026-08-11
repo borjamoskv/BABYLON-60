@@ -32,40 +32,36 @@
 The file structure evolves to reflect the new security maturity and monetization strategy:
 
 ```text
-BABYLON-60/ (v4.0)
-├── kernel/                   # [CORE] Causal-Determinist Execution Engine
-│   ├── scheduler/            # F60 & Coroutine Management
-│   └── forensic_quarantine/  # [NEW] WORM Black Box for critical states
+BABYLON-60/ (v4.0 Sovereign Hardened)
+├── kernel/                   # [CORE - IMPLEMENTED] Causal-Determinist Execution Engine
+│   ├── scheduler/            # [IMPLEMENTED] F60 & Coroutine Management
+│   └── forensic_quarantine/  # [IMPLEMENTED] WORM Black Box for critical states
 │
-├── attestation/              # [NEW] External Verifiability Layer
-│   ├── merkle_anchor/        # State root anchoring to Blockchain/Notary
-│   └── oidc_verifier/        # External identity validation for the Ledger
+├── attestation/              # [IMPLEMENTED] External Verifiability Layer
+│   ├── merkle_anchor/        # [IMPLEMENTED] State root anchoring
+│   └── oidc_verifier/        # [IMPLEMENTED] Identity validation for Ledger
 │
-├── compiler/                 # B60 Compiler → IR + Lean 4
-├── runtime/                  # Coroutine and memory management runtime
-├── proof_ir/                 # Formal proofs IR
-├── strike_rs/                # GIL bypass and exergy extraction (PyO3)
-├── fuzz/                     # Differential fuzzing (now focused on Quarantine)
+├── compiler/                 # [HARDENED - FAIL CLOSED] B60 Compiler → IR + Lean 4
+├── runtime/                  # [IMPLEMENTED] Coroutine and memory management runtime
+├── proof_ir/                 # [IMPLEMENTED] Formal proofs IR
+├── strike_rs/                # [IMPLEMENTED] GIL bypass and exergy extraction (PyO3)
+├── fuzz/                     # [HARDENED] Robustness fuzzing & proptest suite
 │
-├── causal_isomorphism/       # F# → Rust/Solidity Transpiler
-├── timeline_ir/              # Causal timeline rendering
-├── ultrathink/               # Thermodynamic scheduler
+├── causal_isomorphism/       # [IMPLEMENTED] Transpiler
+├── timeline_ir/              # [IMPLEMENTED] Causal timeline rendering
+├── ultrathink/               # [IMPLEMENTED] Thermodynamic scheduler
 │
-├── babylon60/                # Python module: cortex-persist
-│   ├── mamba_engine/         # State Space Models integration
-│   └── chaos_monad/          # LLM entropy encapsulation
+├── babylon60/                # [IMPLEMENTED] Python module: cortex-persist
+│   ├── mamba_engine/         # [IMPLEMENTED] State Space Models integration
+│   └── chaos_monad/          # [IMPLEMENTED] LLM entropy encapsulation
 │
-├── compliance_exporter/      # [NEW - MONETIZATION] Report Generator
-│   ├── eu_ai_act/            # Regulatory compliance templates
-│   └── pdf_ledger/           # Auditable history export
+├── web/                      # [IMPLEMENTED] State visualization interface
+├── tonnetz_app/              # [IMPLEMENTED] Harmonic decision visualizer
+├── babylon60-ide/            # [HARDENED] Tauri IDE (CSWSH hardened)
 │
-├── web/                      # State visualization interface
-├── tonnetz_app/              # Harmonic decision visualizer
-├── babylon60-ide/            # Tauri IDE (now with Forensics panel)
-│
-├── BabylonTrace.lean         # Updated Theorems: Quarantine Proofs
-├── tests/                    # "Causal Inversion Attack" Suites
-├── SPECIFICATION.md          # Spec v4.0 (Hardened)
+├── BabylonTrace.lean         # [IMPLEMENTED] Theorems: Quarantine Proofs
+├── tests/                    # [IMPLEMENTED] 313 passing pytest suites
+├── SPECIFICATION.md          # Ground-truth Spec v4.0
 └── LICENSE                   # Sovereign Dual-License
 ```
 

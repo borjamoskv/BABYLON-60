@@ -9,7 +9,10 @@ use kernel::state::MachineState;
 /// recognized. Must never panic for any input (robustness invariant).
 pub fn fuzz_parse_instruction(data: &[u8]) -> usize {
     let src = String::from_utf8_lossy(data);
-    parse(&src).instructions.len()
+    match parse(&src) {
+        Ok(ast) => ast.instructions.len(),
+        Err(_) => 0,
+    }
 }
 
 /// Parse then drive the evaluator over the resulting program. Returns true when
@@ -17,7 +20,10 @@ pub fn fuzz_parse_instruction(data: &[u8]) -> usize {
 /// panicking — the property a fuzzer asserts.
 pub fn fuzz_eval_step(data: &[u8]) -> bool {
     let src = String::from_utf8_lossy(data);
-    let ast = parse(&src);
+    let ast = match parse(&src) {
+        Ok(ast) => ast,
+        Err(_) => return true,
+    };
     let mut state = MachineState::new();
     for instr in &ast.instructions {
         match step(state, instr) {
