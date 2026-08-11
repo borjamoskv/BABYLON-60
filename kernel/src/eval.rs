@@ -31,6 +31,84 @@ pub fn step(mut state: MachineState, instr: &Instruction) -> Result<MachineState
             let cell = state.read_reg(*src).clone();
             state.write_reg(*dest, cell);
         }
+        Opcode::Add(dest, operand) => {
+            let rhs = match operand {
+                Value::ImmI64(v) => *v,
+                Value::Reg(r) => match state.read_reg(*r).value {
+                    Value::ImmI64(v) => v,
+                },
+            };
+            let mut cell = state.read_reg(*dest).clone();
+            if let Value::ImmI64(lhs) = cell.value {
+                cell.value = Value::ImmI64(lhs.wrapping_add(rhs));
+                state.write_reg(*dest, cell);
+            } else {
+                return Err(HaltReason::Critical);
+            }
+        }
+        Opcode::Sub(dest, operand) => {
+            let rhs = match operand {
+                Value::ImmI64(v) => *v,
+                Value::Reg(r) => match state.read_reg(*r).value {
+                    Value::ImmI64(v) => v,
+                },
+            };
+            let mut cell = state.read_reg(*dest).clone();
+            if let Value::ImmI64(lhs) = cell.value {
+                cell.value = Value::ImmI64(lhs.wrapping_sub(rhs));
+                state.write_reg(*dest, cell);
+            } else {
+                return Err(HaltReason::Critical);
+            }
+        }
+        Opcode::Mul(dest, operand) => {
+            let rhs = match operand {
+                Value::ImmI64(v) => *v,
+                Value::Reg(r) => match state.read_reg(*r).value {
+                    Value::ImmI64(v) => v,
+                },
+            };
+            let mut cell = state.read_reg(*dest).clone();
+            if let Value::ImmI64(lhs) = cell.value {
+                cell.value = Value::ImmI64(lhs.wrapping_mul(rhs));
+                state.write_reg(*dest, cell);
+            } else {
+                return Err(HaltReason::Critical);
+            }
+        }
+        Opcode::Div(dest, operand) => {
+            let rhs = match operand {
+                Value::ImmI64(v) => *v,
+                Value::Reg(r) => match state.read_reg(*r).value {
+                    Value::ImmI64(v) => v,
+                },
+            };
+            if rhs == 0 {
+                return Err(HaltReason::Critical);
+            }
+            let mut cell = state.read_reg(*dest).clone();
+            if let Value::ImmI64(lhs) = cell.value {
+                cell.value = Value::ImmI64(lhs / rhs);
+                state.write_reg(*dest, cell);
+            } else {
+                return Err(HaltReason::Critical);
+            }
+        }
+        Opcode::Emit(tag, reg) => {
+            let cell = state.read_reg(*reg);
+            let val_str = match cell.value {
+                Value::ImmI64(v) => alloc::format!("{}:{}", tag, v),
+                _ => alloc::format!("{}:reg", tag),
+            };
+            let parent_ids = if state.ledger.is_empty() {
+                alloc::vec::Vec::new()
+            } else {
+                alloc::vec![(state.ledger.len() - 1) as u64]
+            };
+            if state.ledger.append(parent_ids, state.sim_clock, val_str).is_err() {
+                return Err(HaltReason::Critical);
+            }
+        }
         Opcode::Halt => return Err(HaltReason::Graceful),
         Opcode::CriticalHalt => return Err(HaltReason::Critical),
         // Fail-Stop invariant: unknown or unhandled opcodes trigger Critical Halt
@@ -71,5 +149,26 @@ mod tests {
         let crit_instr = Instruction { opcode: Opcode::CriticalHalt };
         assert_eq!(step(state, &crit_instr), Err(HaltReason::Critical));
     }
+
+    #[test]
+    fn test_step_arithmetic_and_emit() {
+        let state = MachineState::new();
+        let load_instr = Instruction { opcode: Opcode::LoadImm(Reg::R1, 10) };
+        let state = step(state, &load_instr).unwrap();
+
+        let add_instr = Instruction { opcode: Opcode::Add(Reg::R1, Value::ImmI64(5)) };
+        let state = step(state, &add_instr).unwrap();
+        assert_eq!(state.read_reg(Reg::R1).value, Value::ImmI64(15));
+
+        let mul_instr = Instruction { opcode: Opcode::Mul(Reg::R1, Value::ImmI64(2)) };
+        let state = step(state, &mul_instr).unwrap();
+        assert_eq!(state.read_reg(Reg::R1).value, Value::ImmI64(30));
+
+        let emit_instr = Instruction { opcode: Opcode::Emit("STATE_TAG".into(), Reg::R1) };
+        let state = step(state, &emit_instr).unwrap();
+        assert_eq!(state.ledger.len(), 1);
+        assert_ne!(state.ledger.root_hash(), [0u8; 32]);
+    }
 }
+
 
