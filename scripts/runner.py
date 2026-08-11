@@ -161,6 +161,11 @@ def main() -> None:
     swarm_parser.add_argument("--concurrency", "-c", type=int, default=None)
     swarm_parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
 
+    # cortex
+    cortex_parser = subparsers.add_parser("cortex", help="CORTEX engine orchestration (Memory, Bootstrapping, Vault)")
+    cortex_parser.add_argument("--mode", choices=["bootstrap", "vault"], required=True, help="Mode of execution")
+    cortex_parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
+
     # sync
     sync_parser = subparsers.add_parser("sync", help="Synchronize physical skills with docs/skills.json")
     sync_parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
@@ -218,6 +223,15 @@ def main() -> None:
             sys.exit(run_subcommand("c5_legion/legion_222_agentes.py", unknown))
         elif mode == "mcts":
             sys.exit(run_subcommand("c5_legion/legion_10000_orchestrator.py", unknown))
+    elif args.command == "cortex":
+        mode = getattr(args, "mode", None)
+        cmd_args = []
+        if getattr(args, "json", False):
+            cmd_args.append("--json")
+        if mode == "bootstrap":
+            sys.exit(run_subcommand("c5_cortex/bootstrap_cortex_memory.py", cmd_args + unknown))
+        elif mode == "vault":
+            sys.exit(run_subcommand("c5_cortex/consolidate_babylon_vault.py", cmd_args + unknown))
     elif args.command == "sync":
         if getattr(args, "json", False):
             sys.exit(run_subcommand("c5_skills_ontology/sync_skills_registry.py", ["--json"]))
