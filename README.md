@@ -137,7 +137,11 @@ python3 scripts/run_hero_demo.py
 # 2. Export Compliance Certificate for Spain (AESIA)
 python3 scripts/export_country_compliance.py --locale es --output docs/audits/CERTIFICADO_ES.md
 
-# 3. Run Test Suite (301 Tests)
+# 3. Kimi Nexus MCP Server (Moonshot Integration)
+export KIMI_API_KEY="sk-..."
+uvicorn kimi_nexus.kimi_nexus:app --host 127.0.0.1 --port 8050
+
+# 4. Run Test Suite (301 Tests)
 uv run pytest tests/ -v
 
 # 4. Build & Test Rust Workspace
