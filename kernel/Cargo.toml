@@ -9,6 +9,7 @@ readme = "../README.md"
 authors = ["BABYLON-60 Contributors"]
 
 [dependencies]
+perf-event = "0.4.7"
 
 [dev-dependencies]
 criterion = "0.5"
