@@ -1,66 +1,64 @@
-## Foundry
+# 🔨 Anvil Yung: EVM Notarization Layer (`anvil_yung/`)
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+[![Foundry](https://img.shields.io/badge/Toolkit-Foundry-orange?style=for-the-badge&logo=ethereum)](https://getfoundry.sh/)
+[![Smart Contracts](https://img.shields.io/badge/EVM-Solidity_0.8.20-blue?style=for-the-badge&logo=solidity)](https://soliditylang.org/)
+[![Causal Anchor](https://img.shields.io/badge/Anchor-On--Chain_WORM-brightgreen?style=for-the-badge)]()
 
-Foundry consists of:
+**Anvil Yung** is the Ethereum Virtual Machine (EVM) smart contract notarization layer for **BABYLON-60**. Built with **Foundry** (Forge, Cast, Anvil), it compiles and deploys Solidity contracts that register Merkle state roots, tamper-evident hash-chains, and WORM Quarantine certificates directly on EVM-compatible blockchains.
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+---
 
-## Documentation
+## 🎯 Architecture & Components
 
-https://book.getfoundry.sh/
+- **Forge**: Compiles, unit tests, and fuzzes BABYLON-60 EVM notarization smart contracts.
+- **Anvil**: Local ephemeral Ethereum node simulating zero-latency state root commits during integration testing.
+- **Cast**: CLI tool interfacing with deployed on-chain notarization contracts.
 
-## Usage
+---
 
-### Build
+## 🚀 Quick Start
 
-```shell
-$ forge build
+### Build Contracts
+
+```bash
+cd anvil_yung
+forge build
 ```
 
-### Test
+### Run Fuzz & Unit Tests
 
-```shell
-$ forge test
+```bash
+forge test -vvv
 ```
 
-### Format
+### Launch Local Anvil Node
 
-```shell
-$ forge fmt
+```bash
+anvil --port 8545
 ```
 
-### Gas Snapshots
+### Deploy Notary Contract to Chain
 
-```shell
-$ forge snapshot
+```bash
+forge script script/Counter.s.sol:CounterScript \
+  --rpc-url http://127.0.0.1:8545 \
+  --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 \
+  --broadcast
 ```
 
-### Anvil
+---
 
-```shell
-$ anvil
+## 📁 Directory Structure
+
+```
+anvil_yung/
+├── src/                # Solidity smart contract source code
+├── test/               # Forge unit & fuzz test suites
+├── script/             # Deployment & interaction scripts
+├── lib/                # Submodules (forge-std)
+└── foundry.toml        # Foundry compilation & EVM network configuration
 ```
 
-### Deploy
+---
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+<sub>BABYLON-60 Anvil Yung Substrate · EVM On-Chain Notary · Borja Moskv</sub>
