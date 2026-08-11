@@ -4,8 +4,18 @@
 [![Build Tool](https://img.shields.io/badge/Vite-5.4-purple?style=for-the-badge&logo=vite)](https://vitejs.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![WASM Engine](https://img.shields.io/badge/WASM-Rust_Core-orange?style=for-the-badge)](../rust-core)
+[![Epistemology](https://img.shields.io/badge/Epistemology-C5--REAL_Categories-green?style=for-the-badge)](../docs/00_MANIFESTO.md)
 
 The **BABYLON-60 Web Dashboard** is a high-performance, **Industrial Noir** web interface engineered with React 18, TypeScript, and WebAssembly (WASM). It provides real-time causal graph rendering, local file system mounting via the File System Access API, and direct telemetry bridges to the **Cortex Engine** (`lm-bridge.ts`).
+
+---
+
+## 🧮 C5-REAL Epistemological Context: Visualizing Lawvere Fixed Points & WASM Optics
+
+Under the **C5-REAL Epistemological Constitution**:
+- **Visualizing Lawvere Fixed Points**: The Canvas UI (`ui/Canvas.tsx`) renders state not as static data tables, but as dynamic Lawvere fixed-point attractors ($T(X) \cong X$) on a spatial canvas.
+- **Client-Side WASM Telemetry Optics**: `rust-core` executes zero-copy WebAssembly checks in browser space, evaluating Merkle DAG hash-chains and verifying Chentsov information distance invariance locally without cloud round-trips.
+- **Local File System Mount as Store Comonad**: The FSA API integration (`io/fs-access.ts`) treats the mounted local workspace directory as a Store Comonad workspace, interacting directly with local source files.
 
 ---
 
@@ -95,4 +105,4 @@ npm run preview
 
 ---
 
-<sub>BABYLON-60 Web Substrate · Industrial Noir UI · Borja Moskv</sub>
+<sub>BABYLON-60 Web Substrate · Industrial Noir UI & Lawvere Fixed-Point Optics · Borja Moskv</sub>

@@ -4,8 +4,18 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/React-18-blue?style=for-the-badge&logo=react)](https://react.dev/)
 [![IPC](https://img.shields.io/badge/IPC-Iceoryx2_Zero--Copy-orange?style=for-the-badge)](https://github.com/eclipse-iceoryx/iceoryx2)
+[![Epistemology](https://img.shields.io/badge/Epistemology-C5--REAL_Categories-green?style=for-the-badge)](../docs/00_MANIFESTO.md)
 
 The **BABYLON-60 Sovereign IDE** is a dedicated, multi-platform desktop and mobile development workspace built on **Tauri v2** and **FastAPI** (v0.4.0). It combines an **Industrial Noir UI** with an **AUTO_SOTA Model Router**, **Dual-Model Arena comparison**, and **Iceoryx2 zero-copy IPC** for real-time local model interaction and WORM Quarantine inspection.
+
+---
+
+## 🧮 C5-REAL Epistemological Context: Zero-Copy Interprocess Isomorphisms
+
+Under the **C5-REAL Epistemological Constitution**:
+- **Zero-Copy Memory Isomorphisms**: Iceoryx2 shared memory IPC forms a **Natural Isomorphism** between the Rust process host and the FastAPI sidecar backend, transferring zero-copy state objects without data serialization.
+- **Model Router as Polynomial Co-Algebra Policy**: The AUTO_SOTA Model Router operates as a polynomial functor policy ($\text{Input} \to \text{Model\_Candidate}$), dynamically selecting model inference paths to minimize Free Energy Principle (FEP) cost divergence.
+- **WORM Quarantine Inspection**: The IDE's `/api/v1/ledger` router provides a direct optic into WORM cryptographic state freezes, allowing developers to audit immutable failure evidence.
 
 ---
 
@@ -86,4 +96,4 @@ babylon60-ide/
 
 ---
 
-<sub>BABYLON-60 Sovereign IDE · Tauri v2 Substrate · Borja Moskv</sub>
+<sub>BABYLON-60 Sovereign IDE · Tauri v2 Substrate & Zero-Copy Memory Isomorphisms · Borja Moskv</sub>
