@@ -2,7 +2,7 @@
 
 [![Rust](https://img.shields.io/badge/Rust-1.80%2B-orange?style=for-the-badge&logo=rust)](https://www.rust-lang.org/)
 [![no_std](https://img.shields.io/badge/no__std-Bare--Metal_Ready-brightgreen?style=for-the-badge)]()
-[![Formal Theorem](https://img.shields.io/badge/Lean_4-Verified_Causality-green?style=for-the-badge)](../BabylonTrace.lean)
+[![Formal Verification](https://img.shields.io/badge/Lean_4-Verified_Causality-green?style=for-the-badge)](../BabylonTrace.lean)
 
 The **BABYLON-60 Kernel** is a `#![no_std]` high-assurance Rust crate providing the core execution engine, exact sexagesimal (`F60`) scheduler, WORM forensic quarantine system, Merkle-causal ledger actor, and B60 ISA evaluation engine.
 
