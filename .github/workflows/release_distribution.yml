@@ -5,14 +5,13 @@ on:
   release:
     types: [published]
 
-permissions:
-  id-token: write  # Required for OIDC Trusted Publishing to PyPI
-  contents: read
-
 jobs:
   publish-pypi:
     name: Publish Python Package to PyPI
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python & UV
