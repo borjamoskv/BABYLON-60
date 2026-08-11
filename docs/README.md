@@ -85,7 +85,8 @@ BABYLON-60 abandons hardware-dependent physical intuition to embrace a category-
 - **[Formal Specification v4.0](../SPECIFICATION.md)**: Operational semantics, B60 ISA, F60 exact arithmetic, Proof IR.
 - **[Technical Whitepaper v1.0](./WHITEPAPER.md)**: Deep tech paper covering F60, Merkle DAG Ledger, Self-Falsification Engine.
 - **[EU AI Act Compliance Whitepaper](./04_research/eu_ai_act_compliance_whitepaper.md)**: Comprehensive mapping for Articles 9, 10, 11, 12, 13 & 14 of Regulation (EU) 2024/1689.
-- **[Análisis de Falsación Popperiana en Selección de LLMs (2026)](./04_research/evaluacion_falsacion_llm_models_2026.md)**: Evaluación comparativa de modelos (Gemini Ultra, Kimi K3, Claude 3.5 Sonnet, DeepSeek R1) para ingeniería agéntica de sistemas complejos.
+- **[Análisis de Falsación Popperiana en Selección de LLMs (2026)](./04_research/evaluacion_falsacion_llm_models_2026.md)**: Evaluación comparativa de modelos (Gemini Ultra, Kimi K3, Claude 3.5 Sonnet, DeepSeek R1).
+- **[Topología de Enjambre Legión 222 Agentes](./04_research/legion_222_swarm_topology.md)**: Especificación de escalado masivo (11 Procesos $\times$ 20 Hilos) para pruebas de estrés termodinámico.
 
 ---
 
@@ -110,8 +111,6 @@ BABYLON-60 abandons hardware-dependent physical intuition to embrace a category-
 
 ## 🧪 Local Verification & Verification Commands
 
-To perform real empirical verification across all system layers:
-
 ```bash
 # 1. Rust Kernel Engine Unit & Integration Tests
 cargo test -p babylon60-kernel
@@ -119,14 +118,11 @@ cargo test -p babylon60-kernel
 # 2. Python Security Suite & AST Sandbox Isolation Tests
 pytest tests/test_ast_sandbox_evasion.py
 
-# 3. Full Monorepo Python Test Suite
-pytest
+# 3. Legion Swarm 222 Agent Execution (11 Cores x 20 Threads)
+python3 /tmp/legion_222_agentes.py
 
 # 4. Lean 4 Formal Verification Integrity Verification
 bash ./scripts/verify_lean_proofs.sh
-
-# 5. Solidity Smart Contract Transpilation
-solc causal_isomorphism/generated/DomainAnchor.sol babylon60/extensions/web3/MerkleAnchor.sol
 ```
 
 ---
