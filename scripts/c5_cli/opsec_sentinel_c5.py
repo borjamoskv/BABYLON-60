@@ -27,6 +27,9 @@ TARGET_PATTERNS: dict[str, re.Pattern[str]] = {
         "(?:You have an error in your SQL syntax|Warning: mysql_connect|SQLSTATE\\[\\d+\\]|Unclosed quotation mark after the character string)",
         re.IGNORECASE,
     ),
+    "AWS_ACCESS_KEY": re.compile(r"(?<![A-Z0-9])[A-Z0-9]{20}(?![A-Z0-9])"), # A simplistic AWS key pattern (often starts with AKIA, ASIA, etc)
+    "AWS_SECRET_KEY": re.compile(r"(?<![A-Za-z0-9/+=])[A-Za-z0-9/+=]{40}(?![A-Za-z0-9/+=])"),
+    "CANARY_WEBHOOK": re.compile(r"canarytokens\.com|webhook\.site"),
 }
 
 
