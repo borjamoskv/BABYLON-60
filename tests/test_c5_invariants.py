@@ -23,7 +23,7 @@ import pathlib
 import pytest
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-SRC_DIRS = ["babylon60", "strike_rs/src", "contracts", "scripts", "proof"]
+SRC_DIRS = ["packages/babylon60", "crates/strike-rs/src", "contracts", "scripts", "docs/proof"]
 PRUNE = {"target", "__pycache__", ".venv", "node_modules", "experimental", ".lake", "dist", "extensions"}
 
 
@@ -152,7 +152,7 @@ def test_inv_c5_11_gh_purge_constraints():
 def test_inv_c5_12_nexus_symlinks():
     """INV_C5_12 — Relative symbolic links within babylon60 must have exactly two levels of depth (../../)."""
     for link_name in ["crypto", "extensions", "utils"]:
-        link_path = ROOT / "babylon60" / link_name
+        link_path = ROOT / "packages" / "babylon60" / link_name
         if link_path.is_symlink():
             target = str(link_path.readlink())
             assert target.startswith("../../"), (
