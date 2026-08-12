@@ -71,3 +71,4 @@ tests/sequencer_spsc_harness
 gitleaks-report.json
 secret_audit.sarif
 .kimi-code/
+*.jsonl
