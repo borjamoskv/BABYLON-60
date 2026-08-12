@@ -45,7 +45,7 @@ jobs:
 
       - name: Build Web Frontend
         run: |
-          cd babylon60-ide/frontend
+          cd apps/babylon60-ide/frontend
           npm install
           npm run build
 
