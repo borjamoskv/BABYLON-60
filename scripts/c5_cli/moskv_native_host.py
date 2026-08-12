@@ -54,8 +54,8 @@ def setup_logger(log_file: Optional[Path] = None) -> logging.Logger:
 
 
 def calculate_payload_commitment(raw_bytes: bytes) -> str:
-    """Compute 256-bit SHA-256 cryptographic payload hash (INV_C5_15)."""
-    return hashlib.sha256(raw_bytes).hexdigest()
+    """Compute 256-bit SHA3-256 cryptographic payload hash (INV_C5_15)."""
+    return hashlib.sha3_256(raw_bytes).hexdigest()
 
 
 def read_message_frame(
@@ -81,7 +81,7 @@ def read_message_frame(
 
         commitment = calculate_payload_commitment(raw_payload)
         payload = json.loads(raw_payload.decode("utf-8"))
-        payload["_sha256_commitment"] = commitment
+        payload["_hash_commitment"] = commitment
         return payload
     except (struct.error, json.JSONDecodeError, ValueError, EOFError) as exc:
         logger = logging.getLogger("moskv_native_host")
@@ -103,7 +103,7 @@ def send_message_frame(payload: dict[str, Any], stream: Optional[BinaryIO] = Non
         stream.write(encoded)
         stream.flush()
         return True
-    except Exception as exc:
+    except (OSError, TypeError, ValueError) as exc:
         logger = logging.getLogger("moskv_native_host")
         logger.error("IPC Frame Packing Error: %s", exc)
         return False
@@ -112,7 +112,7 @@ def send_message_frame(payload: dict[str, Any], stream: Optional[BinaryIO] = Non
 def process_extension_event(msg: dict[str, Any], logger: logging.Logger) -> None:
     """Dispatch extension event to Motor Causal handler."""
     status = msg.get("status")
-    commitment = msg.get("_sha256_commitment", "unknown")[:12]
+    commitment = msg.get("_hash_commitment", "unknown")[:12]
     logger.info("Ingested Extension Event [status=%s, hash=%s]", status, commitment)
 
     if status == "READY":

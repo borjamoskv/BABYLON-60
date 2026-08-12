@@ -85,8 +85,12 @@ def extract_docstring_smart(py_path: Path) -> str:
 
 
 import hashlib
+import os
 
-KI_ARTIFACT_PATH = Path.home() / ".gemini/antigravity-ide/knowledge/immutable_script_kernel/artifacts/immutable_script_kernel.md"
+babylon_home = os.environ.get("BABYLON_HOME")
+if not babylon_home:
+    raise RuntimeError("INV_C5_ENV: BABYLON_HOME must be set. Path.home() is prohibited.")
+KI_ARTIFACT_PATH = Path(babylon_home) / ".gemini/antigravity-ide/knowledge/immutable_script_kernel/artifacts/immutable_script_kernel.md"
 
 def collect_data() -> Dict[str, Any]:
     py_files = sorted([p for p in SCRIPTS_DIR.rglob("*.py") if "__pycache__" not in p.parts])
@@ -105,15 +109,15 @@ def collect_data() -> Dict[str, Any]:
         is_py = p.suffix == ".py"
         desc = extract_docstring_smart(p)
         try:
-            sha256_hash = hashlib.sha256(p.read_bytes()).hexdigest()[:12]
+            file_hash = hashlib.sha3_256(p.read_bytes()).hexdigest()[:12]
         except Exception:
-            sha256_hash = "e3b0c44298fc"
+            file_hash = "e3b0c44298fc"
 
         by_category[cat_title].append({
             "path": rel.as_posix(),
             "description": desc,
             "type": "python" if is_py else "shell",
-            "sha256": sha256_hash
+            "hash": file_hash
         })
 
     return {
@@ -143,7 +147,7 @@ def generate_markdown(data: Dict[str, Any]) -> None:
         "",
         "---",
         "",
-        "## 📂 Catálogo Taxonómico por Dominios C5 (Atestación SHA-256)",
+        "## 📂 Catálogo Taxonómico por Dominios C5 (Atestación SHA3-256)",
         "",
     ]
 
@@ -151,17 +155,17 @@ def generate_markdown(data: Dict[str, Any]) -> None:
         if scripts:
             md_lines.append(f"### {cat_name}")
             md_lines.append("")
-            md_lines.append("| Script | Tipo | SHA-256 | Descripción / Propósito |")
+            md_lines.append("| Script | Tipo | SHA3-256 | Descripción / Propósito |")
             md_lines.append("| :--- | :--- | :--- | :--- |")
             for script in scripts:
                 fp = SCRIPTS_DIR / script["path"]
                 stype = "Python" if script.get("type") == "python" else "Shell"
-                sha_str = f"`{script.get('sha256', 'N/A')}`"
+                sha_str = f"`{script.get('hash', 'N/A')}`"
                 md_lines.append(f"| [`{script['path']}`](file://{fp}) | `{stype}` | {sha_str} | {script['description']} |")
             md_lines.append("")
 
     md_lines.append("---")
-    md_lines.append("*Catálogo auto-generado dinámicamente por `generate_scripts_readme.py` con atestación criptográfica SHA-256.*")
+    md_lines.append("*Catálogo auto-generado dinámicamente por `generate_scripts_readme.py` con atestación criptográfica SHA3-256.*")
 
     content = "\n".join(md_lines)
     README_PATH.write_text(content, encoding="utf-8")

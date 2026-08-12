@@ -309,30 +309,27 @@ class GitHubCortexBridge:
         Returns a dict for O(1) dedup during sync.
         """
         index: dict[str, int] = {}
-        try:
-            async with self._engine.session() as conn:
-                cursor = await conn.execute(
-                    "SELECT id, metadata FROM facts "
-                    "WHERE fact_type = 'bridge' AND valid_until IS NULL "
-                    "AND source = ?",
-                    (_SOURCE,),
-                )
-                rows = await cursor.fetchall()
+        async with self._engine.session() as conn:
+            cursor = await conn.execute(
+                "SELECT id, metadata FROM facts "
+                "WHERE fact_type = 'bridge' AND valid_until IS NULL "
+                "AND source = ?",
+                (_SOURCE,),
+            )
+            rows = await cursor.fetchall()
 
-            from babylon60.crypto import get_default_encrypter
+        from babylon60.crypto import get_default_encrypter
 
-            enc = get_default_encrypter()
+        enc = get_default_encrypter()
 
-            for row in rows:
-                fact_id = row[0]
-                try:
-                    meta_dict = enc.decrypt_json(row[1], tenant_id="default")
-                    if isinstance(meta_dict, dict) and "github_key" in meta_dict:
-                        index[meta_dict["github_key"]] = fact_id
-                except (ValueError, TypeError, OSError):
-                    continue  # Skip corrupted or non-GitHub entries
-        except Exception as exc:  # noqa: BLE001
-            logger.warning("Failed to load existing GitHub keys: %s", exc)
+        for row in rows:
+            fact_id = row[0]
+            try:
+                meta_dict = enc.decrypt_json(row[1], tenant_id="default")
+                if isinstance(meta_dict, dict) and "github_key" in meta_dict:
+                    index[meta_dict["github_key"]] = fact_id
+            except (ValueError, TypeError, OSError):
+                continue  # Skip corrupted or non-GitHub entries
 
         logger.debug("Loaded %d existing GitHub bridge keys", len(index))
         return index
