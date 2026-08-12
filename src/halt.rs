@@ -126,7 +126,6 @@ fn abort_bare_metal() -> ! {
 /// ```
 #[inline]
 #[must_use]
-pub fn is_halted(_m: &SharedManifest) -> bool {
-    // Adaptado temporalmente para canonización ABI
-    unimplemented!("halt.rs requiere refactorización")
+pub fn is_halted(m: &SharedManifest) -> bool {
+    m.status_flag.load(Ordering::Acquire) == POISONED
 }
