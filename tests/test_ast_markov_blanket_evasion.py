@@ -3,35 +3,35 @@
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 import pytest
-from babylon60.cortex.cortex_chaos_monad import validate_ast_sandbox, run_chaos_monad, SecurityError
+from babylon60.cortex.cortex_chaos_monad import validate_ast_markov_blanket, run_chaos_monad, SecurityError
 
 
-class TestASTSandboxEvasion:
+class TestASTMarkovBlanketEvasion:
     def test_basic_dunder_blocking(self):
         with pytest.raises(SecurityError, match="Acceso a atributo dunder prohibido"):
-            validate_ast_sandbox("().__class__")
+            validate_ast_markov_blanket("().__class__")
 
     def test_string_concatenation_bypass(self):
         with pytest.raises(SecurityError):
-            validate_ast_sandbox("getattr((), '__' + 'class' + '__')")
+            validate_ast_markov_blanket("getattr((), '__' + 'class' + '__')")
 
     def test_exception_based_type_extraction(self):
         payload = "try:\n    1 / 0\nexcept Exception as e:\n    t = e.__class__.__base__"
         with pytest.raises(SecurityError, match="Acceso a atributo dunder prohibido"):
-            validate_ast_sandbox(payload)
+            validate_ast_markov_blanket(payload)
 
     def test_subclass_hunting_comprehension(self):
         payload = "[c for c in ().__class__.__base__.__subclasses__() if c.__name__ == 'BuiltinImporter']"
         with pytest.raises(SecurityError, match="Acceso a atributo dunder prohibido"):
-            validate_ast_sandbox(payload)
+            validate_ast_markov_blanket(payload)
 
     def test_fstring_attribute_bypass(self):
         with pytest.raises(SecurityError):
-            validate_ast_sandbox("getattr((), f'__{'class'}__')")
+            validate_ast_markov_blanket("getattr((), f'__{'class'}__')")
 
     def test_import_star_evasion(self):
         with pytest.raises(SecurityError, match="Importacion no permitida"):
-            validate_ast_sandbox("from os import *")
+            validate_ast_markov_blanket("from os import *")
 
     @pytest.mark.asyncio
     async def test_execution_success(self):
