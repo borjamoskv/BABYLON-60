@@ -39,8 +39,12 @@ def signal_handler(signum: int, _frame: Any) -> None:
 def setup_logger(log_file: Optional[Path] = None) -> logging.Logger:
     """Initialize file logger (stdout is strictly reserved for binary IPC)."""
     if log_file is None:
-        log_dir = Path.home() / "80_LOGS"
-        if not log_dir.exists():
+        import os
+        babylon_home = os.environ.get("BABYLON_HOME")
+        if babylon_home:
+            log_dir = Path(babylon_home) / "logs"
+            log_dir.mkdir(parents=True, exist_ok=True)
+        else:
             log_dir = Path("/tmp")
         log_file = log_dir / "moskv_native_host.log"
 
