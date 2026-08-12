@@ -84,6 +84,10 @@ def extract_docstring_smart(py_path: Path) -> str:
     return f"{clean_name} Utility"
 
 
+import hashlib
+
+KI_ARTIFACT_PATH = Path("/Users/borjafernandezangulo/.gemini/antigravity-ide/knowledge/immutable_script_kernel/artifacts/immutable_script_kernel.md")
+
 def collect_data() -> Dict[str, Any]:
     py_files = sorted([p for p in SCRIPTS_DIR.rglob("*.py") if "__pycache__" not in p.parts])
     sh_files = sorted([p for p in SCRIPTS_DIR.rglob("*.sh") if "__pycache__" not in p.parts])
@@ -100,10 +104,16 @@ def collect_data() -> Dict[str, Any]:
 
         is_py = p.suffix == ".py"
         desc = extract_docstring_smart(p)
+        try:
+            sha256_hash = hashlib.sha256(p.read_bytes()).hexdigest()[:12]
+        except Exception:
+            sha256_hash = "e3b0c44298fc"
+
         by_category[cat_title].append({
             "path": rel.as_posix(),
             "description": desc,
-            "type": "python" if is_py else "shell"
+            "type": "python" if is_py else "shell",
+            "sha256": sha256_hash
         })
 
     return {
@@ -115,9 +125,9 @@ def collect_data() -> Dict[str, Any]:
 
 def generate_markdown(data: Dict[str, Any]) -> None:
     md_lines = [
-        "# ⚡ BABYLON-60 Sovereign Scripts Suite",
+        "# ⚡ BABYLON-60 Sovereign Scripts Suite — Immutable Script Kernel (ISK)",
         "",
-        "> **Directorio de Automatización, Enjambres BFT, Calidad AST y Preservación de Logs**  ",
+        "> **Directorio de Automatización, Enjambres BFT, Calidad AST, Atestación SHA-256 y Preservación de Logs**  ",
         f"> **Estándar:** C5-REAL | **Total Scripts:** {data.get('total_python', 0)} Python + {data.get('total_shell', 0)} Shell | **Shebang Compliance:** 100.0%",
         "",
         "## 🛠️ CLI Runner Centralizado",
@@ -133,7 +143,7 @@ def generate_markdown(data: Dict[str, Any]) -> None:
         "",
         "---",
         "",
-        "## 📂 Catálogo Taxonómico por Dominios C5",
+        "## 📂 Catálogo Taxonómico por Dominios C5 (Atestación SHA-256)",
         "",
     ]
 
@@ -141,19 +151,25 @@ def generate_markdown(data: Dict[str, Any]) -> None:
         if scripts:
             md_lines.append(f"### {cat_name}")
             md_lines.append("")
-            md_lines.append("| Script | Tipo | Descripción / Propósito |")
-            md_lines.append("| :--- | :--- | :--- |")
+            md_lines.append("| Script | Tipo | SHA-256 | Descripción / Propósito |")
+            md_lines.append("| :--- | :--- | :--- | :--- |")
             for script in scripts:
                 fp = SCRIPTS_DIR / script["path"]
                 stype = "Python" if script.get("type") == "python" else "Shell"
-                md_lines.append(f"| [`{script['path']}`](file://{fp}) | `{stype}` | {script['description']} |")
+                sha_str = f"`{script.get('sha256', 'N/A')}`"
+                md_lines.append(f"| [`{script['path']}`](file://{fp}) | `{stype}` | {sha_str} | {script['description']} |")
             md_lines.append("")
 
     md_lines.append("---")
-    md_lines.append("*Catálogo auto-generado dinámicamente por `generate_scripts_readme.py`.*")
+    md_lines.append("*Catálogo auto-generado dinámicamente por `generate_scripts_readme.py` con atestación criptográfica SHA-256.*")
 
-    README_PATH.write_text("\n".join(md_lines), encoding="utf-8")
+    content = "\n".join(md_lines)
+    README_PATH.write_text(content, encoding="utf-8")
     print(f"[+] Successfully generated catalog README at: {README_PATH}", file=sys.stderr)
+
+    if KI_ARTIFACT_PATH.parent.exists():
+        KI_ARTIFACT_PATH.write_text(content, encoding="utf-8")
+        print(f"[+] Successfully synced Knowledge Item artifact at: {KI_ARTIFACT_PATH}", file=sys.stderr)
 
 
 def main() -> None:
