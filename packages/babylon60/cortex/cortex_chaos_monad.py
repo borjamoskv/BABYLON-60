@@ -54,7 +54,7 @@ def _check_ast_node(node: ast.AST, reflection_funcs: set[str], allowed_imports: 
         raise SecurityError(f"Importacion no permitida: {node.module}")
 
 
-def validate_ast_sandbox(source_code: str) -> tuple[bool, str]:
+def validate_ast_markov_blanket(source_code: str) -> tuple[bool, str]:
     """
     Evaluates AST for forbidden introspection and memory escapes.
     Implements RULE_AST_REFLECT_01: Validates string constants used in reflections.
@@ -170,7 +170,7 @@ async def run_chaos_monad(source_code: str, frontier_tick: str = "GENESIS_TICK",
     Returns a strict Monad Result to protect the core from entropy.
     """
     try:
-        is_valid, ast_hash = validate_ast_sandbox(source_code)
+        is_valid, ast_hash = validate_ast_markov_blanket(source_code)
     except SecurityError as e:
         return {"status": "SecurityError", "stdout": "", "error": str(e), "scitt_receipt": {}}
 

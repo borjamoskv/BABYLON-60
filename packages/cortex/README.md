@@ -9,11 +9,11 @@
 
 ---
 
-## 🧮 C5-REAL Epistemological Context: Store Comonad & Chaos Monad Sandbox
+## 🧮 C5-REAL Epistemological Context: Store Comonad & Chaos Monad Markov Blanket
 
 Under the **C5-REAL Epistemological Constitution**:
 - **Memory as a Store Comonad**: Memory is not a static disk container; it is the execution of a **Store Comonad** (`get/set` operators). Remembering is the amalgamation of past trajectories into an emergent **Colimit** without storing static spatial copies.
-- **Chaos Monad AST Sandbox (`cortex_chaos_monad.py`)**: Before code execution reaches the Rust kernel, Python source input passes through `validate_ast_sandbox()`. It enforces `RULE_AST_REFLECT_01`, rejecting introspection escapes, dunder attribute access (`__class__`, `__subclasses__`), and forbidden reflection functions (`eval`, `exec`, `getattr`, `setattr`), emitting structured `ScittResult` receipts.
+- **Chaos Monad AST Markov Blanket (`cortex_chaos_monad.py`)**: Before code execution reaches the Rust kernel, Python source input passes through `validate_ast_markov_blanket()`. It enforces `RULE_AST_REFLECT_01`, rejecting introspection escapes, dunder attribute access (`__class__`, `__subclasses__`), and forbidden reflection functions (`eval`, `exec`, `getattr`, `setattr`), emitting structured `ScittResult` receipts.
 - **Context as a Bayesian Lens**: Context is a **Fibrated Projection (Adjoint Functor)** filtering relevant topological submanifolds without breaking structural integrity.
 
 ---
@@ -24,8 +24,8 @@ Under the **C5-REAL Epistemological Constitution**:
 ┌─────────────────────────────────────────────────────────────┐
 │           Model Context Protocol (MCP Markov Blanket)       │
 ├─────────────────────────────────────────────────────────────┤
-│   Chaos Monad AST Sandbox (cortex_chaos_monad.py)           │
-│   - validate_ast_sandbox() & RULE_AST_REFLECT_01           │
+│   Chaos Monad AST Markov Blanket (cortex_chaos_monad.py)    │
+│   - validate_ast_markov_blanket() & RULE_AST_REFLECT_01     │
 │   - ScittResult: ["Success", "SecurityError", "Falsified"]  │
 ├─────────────────────────────────────────────────────────────┤
 │               Moskv-Swarm Autopoietic Orchestrator          │
@@ -35,7 +35,7 @@ Under the **C5-REAL Epistemological Constitution**:
 └──────────────────────────────┴──────────────────────────────┘
 ```
 
-- **Chaos Monad Sandbox (`cortex_chaos_monad.py`)**: Static AST analyzer blocking memory escapes and introspection injections before kernel evaluation.
+- **Chaos Monad Markov Blanket (`cortex_chaos_monad.py`)**: Static AST analyzer blocking memory escapes and introspection injections before kernel evaluation.
 - **Moskv Swarm (`agents/` & `moskv-swarm/`)**: Orchestrates autopoietic swarm tasks with deterministic exergy bounds.
 - **L1 Sink Persistence (`L1_sink/`)**: Single-writer SQLite WAL causal ledger holding the Merkle-Causal DAG log.
 - **Cortex MCP Server (`cortex_mcp_server.py`)**: Standard MCP Markov Blanket exposing WORM Quarantine, F60 scheduling, and exergic physical tool execution to AI agents.
@@ -53,8 +53,8 @@ pip install cortex-persist
 # Run Cortex MCP Server
 python3 -m babylon60.cortex_mcp_server
 
-# Run AST Sandbox Evasion Test Suite (18 Tests)
-pytest tests/test_ast_sandbox_evasion.py
+# Run AST Markov Blanket Evasion Test Suite (18 Tests)
+pytest tests/test_ast_markov_blanket_evasion.py
 ```
 
 ---
@@ -73,4 +73,4 @@ packages/cortex/
 
 ---
 
-<sub>BABYLON-60 Cortex Substrate · Cognitive Store Comonad & Chaos Monad Sandbox · Borja Moskv</sub>
+<sub>BABYLON-60 Cortex Substrate · Cognitive Store Comonad & Chaos Monad Markov Blanket · Borja Moskv</sub>
