@@ -1,9 +1,9 @@
 # Certificado de Cumplimiento Normativo de IA (BABYLON-60 v4.0)
 **Reglamento de Inteligencia Artificial de la UE (Reglamento UE 2024/1689 / AESIA)**  
 **Autoridad de Supervisión:** `Agencia Española de Supervisión de Inteligencia Artificial (AESIA) / UE`  
-**ID Certificado:** `EU-AIA-CERT-139327F73E90F625`  
+**ID Certificado:** `EU-AIA-CERT-9B89CF1BB50BB917`  
 **Sistema:** `agent_finance_01` | **Operador:** `EU_Bank_Corp`  
-**Emisión:** `2026-08-12T11:17:00Z` | **Estado de Cuarentena:** `NOMINAL_LIMPIO`  
+**Emisión:** `2026-08-12T11:32:21Z` | **Estado de Cuarentena:** `NOMINAL_LIMPIO`  
 
 ---
 
@@ -12,7 +12,7 @@
 Se certifica que el sistema especificado ha sido ejecutado bajo el Kernel Causal-Determinista BABYLON-60 v4.0. Todas las transiciones de memoria y operaciones temporales están ancladas a un Ledger DAG Merkle-Causal con no-repudiación por hardware.
 
 - **Global Merkle Root:** `d1e673e1977b7888d52ea8d580c02ff96d1f0edb96f1c69d093195b4623913a7`
-- **Firma Digital (Fingerprint):** `139327f73e90f6256665ba67d47e7e988e59ad3b51877110de5f637e3ab3da96`
+- **Firma Digital (Fingerprint):** `9b89cf1bb50bb917d2661465e5dbf0c772dbe2bcb84cca1719d0026b644b35c4`
 
 ---
 

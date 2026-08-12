@@ -1,9 +1,9 @@
 # AI Regulatory Compliance Certificate (BABYLON-60 v4.0)
 **EU Artificial Intelligence Act (Regulation EU 2024/1689 / NIST AI RMF)**  
 **Autoridad de Supervisión:** `EU AI Office / NIST (USA) / UK AI Safety Institute`  
-**ID Certificado:** `EU-AIA-CERT-F0B5F2DAABFD54AD`  
+**ID Certificado:** `EU-AIA-CERT-08593CF8E1F3A386`  
 **Sistema:** `agent_finance_01` | **Operador:** `EU_Bank_Corp`  
-**Emisión:** `2026-08-12T11:17:00Z` | **Estado de Cuarentena:** `NOMINAL_CLEAN`  
+**Emisión:** `2026-08-12T11:32:21Z` | **Estado de Cuarentena:** `NOMINAL_CLEAN`  
 
 ---
 
@@ -12,7 +12,7 @@
 This certifies that the specified system was executed under the BABYLON-60 v4.0 Causal-Determinist Kernel. All memory transitions and temporal scheduling operations were anchored to a Merkle-Causal DAG Ledger with hardware non-repudiation.
 
 - **Global Merkle Root:** `d1e673e1977b7888d52ea8d580c02ff96d1f0edb96f1c69d093195b4623913a7`
-- **Firma Digital (Fingerprint):** `f0b5f2daabfd54ad68069c4590dcd79a14482ebba07103ae62cabf5eeaf5f7bf`
+- **Firma Digital (Fingerprint):** `08593cf8e1f3a386987eee5cb522c2a21c3450dfb9d1846432281778138da81a`
 
 ---
 

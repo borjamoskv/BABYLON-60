@@ -70,3 +70,4 @@ tests/sequencer_spsc_harness
 .secrets.baseline
 gitleaks-report.json
 secret_audit.sarif
+.kimi-code/
