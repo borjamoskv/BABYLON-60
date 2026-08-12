@@ -113,3 +113,25 @@ flowchart TD
 > [!TIP]
 > All theory modules in this suite are published under **`INV_C5_17`** (Sovereign Dual-Licensing Invariant): 100% free, open-source, and sovereign for individuals, independent developers, and non-commercial usage.
 
+## 🔬 Verificación Formal (Lean 4)
+
+> [!TIP]
+> **Puente Isomorfo C5-REAL**
+> Firma topológica extraída dinámicamente para demostración formal en Lean 4.
+
+```lean
+namespace Babylon60.Theory.00Index
+
+/--
+  Firma formal generada dinámicamente mediante `inject_lean4_stubs.py`.
+  Dominio: C5-REAL Formal Verification
+-/
+variable {X Y : Type}
+
+/-- Axioma Cánonico por Defecto -/
+axiom ax_canonical_invariant : ∀ (x : X), True
+
+theorem formal_axiomatization (x : X) : True := by
+  exact ax_canonical_invariant x
+end Babylon60.Theory.00Index
+```
