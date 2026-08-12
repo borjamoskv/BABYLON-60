@@ -17,7 +17,7 @@ DB_PATH = os.path.join(PROJECT_ROOT, "packages/cortex/agents/ontology/re_drm_bft
 def test_re_drm_rust_bft_verification():
     """
     Test suite validating that the strike_rs Rust binary compiles and runs,
-    completing P2P BFT consensus across 896 RE/DRM primitives in < 150ms
+    completing P2P BFT consensus across 10000 RE/DRM primitives in < 150ms
     and writing correctly to the SQLite WAL database.
     """
     # 0. Clean old database to prevent cross-run pollution
@@ -43,7 +43,7 @@ def test_re_drm_rust_bft_verification():
     )
 
     assert res.returncode == 0, f"Rust binary failed: {res.stderr}"
-    assert "[PASS] 896/896 Primitives in Rust par-par consensus" in res.stdout
+    assert "[PASS] 10000/10000 Primitives in Rust par-par consensus" in res.stdout
 
     # 2. Check Database persistence
     assert os.path.exists(DB_PATH), "Database re_drm_bft_ledger.db should exist"
@@ -59,7 +59,7 @@ def test_re_drm_rust_bft_verification():
     # Verify counts
     cursor.execute("SELECT count(*) FROM re_drm_p2p_ledger")
     row_count = cursor.fetchone()[0]
-    assert row_count == 896, f"Expected 896 entries in database, got {row_count}"
+    assert row_count == 10000, f"Expected 10000 entries in database, got {row_count}"
 
     # Verify byzantine consensus matches count
     cursor.execute("SELECT count(*) FROM re_drm_p2p_ledger WHERE quorum_match='3/3'")
@@ -68,7 +68,7 @@ def test_re_drm_rust_bft_verification():
     tolerant = cursor.fetchone()[0]
 
     print(f"[+] Verified in DB: Unanimous={unanimous}, Byzantine-Tolerant={tolerant}")
-    assert unanimous + tolerant == 896, "All 896 entries must be resolved under quorums"
+    assert unanimous + tolerant == 10000, "All 10000 entries must be resolved under quorums"
 
     conn.close()
     print("[+] Test successfully verified Causal-Determinist integration.")

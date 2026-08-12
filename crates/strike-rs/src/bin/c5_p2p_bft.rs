@@ -2,12 +2,12 @@
 // BABYLON-60 v4.0 Sovereign Hardened
 // █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 // ============================================================================
-// Causal-Determinist: UNIFIED 896 PRIMITIVES RUST BFT CONSENSUS ENGINE
+// Causal-Determinist: UNIFIED 10000 PRIMITIVES RUST BFT CONSENSUS ENGINE
 // =================================================================================
 // SYS_ID: MOSKV-1 APEX ULTRATHINK P0 (Trilingual Causal-Determinist Iteration)
 // REALITY_LEVEL: Causal-Determinist (Rust Taint Verification / BLAKE3 Poset / WAL Persistence)
 //
-// Transducción y verificación empírica nativa en Rust de las 896 Primitivas
+// Transducción y verificación empírica nativa en Rust de las 10000 Primitivas
 // Soporta modos: 'centuria' (Ontológica) y 're_drm' (Ingeniería Inversa).
 
 use rusqlite::Connection;
@@ -226,12 +226,12 @@ fn main() {
 
     let (db_path_str, table_name) = match mode {
         RunMode::ReDrm => (std::env::var("CORTEX_RE_DRM_DB").unwrap_or_else(|_| "packages/cortex/agents/ontology/re_drm_bft_ledger.db".to_string()), "re_drm_p2p_ledger"),
-        RunMode::Centuria => (std::env::var("CORTEX_CENTURIA_DB").unwrap_or_else(|_| "cortex/engine/nexus_anchors.db".to_string()), "p2p_896_primitives_rust_ledger"),
+        RunMode::Centuria => (std::env::var("CORTEX_CENTURIA_DB").unwrap_or_else(|_| "cortex/engine/nexus_anchors.db".to_string()), "p2p_10000_primitives_rust_ledger"),
     };
     
     let mut conn = init_db(Path::new(&db_path_str), table_name).unwrap();
 
-    let results = Arc::new(Mutex::new(Vec::with_capacity(896)));
+    let results = Arc::new(Mutex::new(Vec::with_capacity(10000)));
     let mut handles = Vec::new();
 
     let domain_count = if mode == RunMode::ReDrm { 20 } else { 10 };
@@ -247,9 +247,9 @@ fn main() {
             
             if m == RunMode::ReDrm {
                 for v_idx in 0..10 {
-                    for q_idx in 0..5 {
+                    for q_idx in 0..50 {
                         let abs_idx = q_idx * 200 + d_idx * 10 + v_idx;
-                        if abs_idx >= 896 { continue; }
+                        if abs_idx >= 10000 { continue; }
                         let inject_fault = abs_idx % 11 == 0;
                         let res = verify_primitive_p2p(abs_idx, d_idx, v_idx, inject_fault, &m);
                         
@@ -259,10 +259,10 @@ fn main() {
                     }
                 }
             } else {
-                for p in 1..=100 {
-                    let p_num = (d_idx * 100) + p;
-                    if p_num > 896 { continue; }
-                    let inject_fault = p_num == 90 || p_num == 250 || p_num == 500 || p_num == 750 || p_num == 895;
+                for p in 1..=1000 {
+                    let p_num = (d_idx * 1000) + p;
+                    if p_num > 10000 { continue; }
+                    let inject_fault = p_num % 175 == 90;
                     let res = verify_primitive_p2p(p_num, d_idx, 0, inject_fault, &m);
                     
                     let node_ref = taint_engine.add_node(&res.primitive_id, res.cortex_taint.as_bytes());
@@ -315,14 +315,14 @@ fn main() {
     }
 
     let elapsed = start_time.elapsed().unwrap().as_micros() as f64 / 1000.0;
-    println!("[Causal-Determinist] Execution completed: {}/896 primitives in {:.2} ms.", total_verified, elapsed);
+    println!("[Causal-Determinist] Execution completed: {}/10000 primitives in {:.2} ms.", total_verified, elapsed);
     println!("          Quorum 3/3 (Unanimous): {} | Quorum 2/3 (BFT Tolerant): {}", quorum_3of3, quorum_2of3);
 
-    if total_verified == 896 {
-        println!("[PASS] 896/896 Primitives in Rust par-par consensus (BFT topology 100% verified).");
+    if total_verified == 10000 {
+        println!("[PASS] 10000/10000 Primitives in Rust par-par consensus (BFT topology 100% verified).");
         std::process::exit(0);
     } else {
-        eprintln!("[FAIL] P2P Rust verification incomplete ({}/896). Aborting.", total_verified);
+        eprintln!("[FAIL] P2P Rust verification incomplete ({}/10000). Aborting.", total_verified);
         std::process::exit(1);
     }
 }
