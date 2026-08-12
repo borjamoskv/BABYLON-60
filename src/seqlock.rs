@@ -117,7 +117,7 @@ pub fn publish(m: &SharedManifest, epoch: u64, hash: &[u64; 4]) {
 pub fn read(m: &SharedManifest) -> Option<(u64, [u64; 4])> {
     let mut retries = 0;
     loop {
-        if retries > 1000 {
+        if retries > MAX_RETRIES {
             return None;
         }
         let s1 = m.seq.load(Ordering::Acquire);
@@ -133,7 +133,7 @@ pub fn read(m: &SharedManifest) -> Option<(u64, [u64; 4])> {
         let h2 = m.payload_hash[2].load(Ordering::Relaxed);
         let h3 = m.payload_hash[3].load(Ordering::Relaxed);
 
-        fence(Ordering::Acquire);
+        memory_barrier_acquire_read();
         let s2 = m.seq.load(Ordering::Relaxed);
 
         if s1 == s2 {
