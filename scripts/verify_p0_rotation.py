@@ -27,9 +27,12 @@ REQUIRED_GITLEAKS = ["cortex-master-key-hex", "solana-keypair-json"]
 
 
 def sh(*args: str) -> str:
-    return subprocess.run(
-        ["git", *args], capture_output=True, text=True, check=False
-    ).stdout
+    try:
+        return subprocess.run(
+            ["git", *args], capture_output=True, text=True, check=False
+        ).stdout
+    except Exception:
+        return ""
 
 
 def main() -> int:

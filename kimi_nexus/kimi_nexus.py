@@ -3,6 +3,7 @@ import httpx
 from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
 from swarm_orchestrator import run_swarm_orchestrator
+from lingua import Language, LanguageDetectorBuilder
 
 load_dotenv()
 
@@ -10,6 +11,17 @@ load_dotenv()
 mcp = FastMCP("Kimi Nexus MCP Server")
 KIMI_API_KEY = os.getenv("KIMI_API_KEY")
 MOONSHOT_API_URL = "https://api.moonshot.cn/v1/chat/completions"
+
+# Inicializamos el detector de lenguaje AOT (Alta Exergía) para evitar overhead en cada llamada
+languages = [Language.ENGLISH, Language.SPANISH, Language.FRENCH, Language.GERMAN, Language.CHINESE, Language.JAPANESE]
+detector = LanguageDetectorBuilder.from_languages(*languages).build()
+
+def _inject_language_context(base_system_prompt: str, user_text: str) -> str:
+    """Inyecta el idioma detectado en el prompt de sistema para acoplar el LLM al usuario."""
+    detected_lang = detector.detect_language_of(user_text)
+    if detected_lang:
+        return f"{base_system_prompt} El usuario está interactuando en el idioma: {detected_lang.name}."
+    return base_system_prompt
 
 async def call_moonshot(messages: list) -> str:
     if not KIMI_API_KEY:
@@ -38,8 +50,11 @@ async def call_moonshot(messages: list) -> str:
 @mcp.tool()
 async def kimi_ask(prompt: str) -> str:
     """Consultar al oráculo Kimi (Moonshot API) bajo el protocolo C5-REAL."""
+    base_sys = "Eres Kimi, el asistente de IA integrado a través de MCP en BABYLON-60. Utiliza el estándar epistemológico C5-REAL."
+    sys_prompt = _inject_language_context(base_sys, prompt)
+    
     messages = [
-        {"role": "system", "content": "Eres Kimi, el asistente de IA integrado a través de MCP en BABYLON-60. Utiliza el estándar epistemológico C5-REAL."},
+        {"role": "system", "content": sys_prompt},
         {"role": "user", "content": prompt}
     ]
     return await call_moonshot(messages)
@@ -47,8 +62,12 @@ async def kimi_ask(prompt: str) -> str:
 @mcp.tool()
 async def kimi_audit(file_content: str, criteria: str) -> str:
     """Ejecutar auditoría de código bajo invariantes categóricos C5-REAL."""
+    base_sys = "Eres un auditor estricto de código bajo el protocolo C5-REAL (Categorías de Markov, Lentes Bayesianas). Identifica huecos de existencia, pérdida de exergía y fallos en axiomas."
+    # El idioma se detecta a partir de los criterios de auditoría
+    sys_prompt = _inject_language_context(base_sys, criteria)
+
     messages = [
-        {"role": "system", "content": "Eres un auditor estricto de código bajo el protocolo C5-REAL (Categorías de Markov, Lentes Bayesianas). Identifica huecos de existencia, pérdida de exergía y fallos en axiomas."},
+        {"role": "system", "content": sys_prompt},
         {"role": "user", "content": f"Criterios de auditoría:\n{criteria}\n\nCódigo a auditar:\n```\n{file_content}\n```"}
     ]
     return await call_moonshot(messages)

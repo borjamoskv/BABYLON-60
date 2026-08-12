@@ -54,7 +54,7 @@ class SwarmConfig:
 
     # Endpoints
     moonshot_url: str = "https://api.moonshot.cn/v1/chat/completions"
-    moonshot_key: str = field(default_factory=lambda: os.getenv("KIMI_API_KEY", ""))
+    moonshot_key: str = field(default_factory=lambda: os.getenv("KIMI_API_KEY") or os.getenv("MOONSHOT_API_KEY", ""))
     moonshot_model: str = "moonshot-v1-auto"
 
     local_url: str = "http://localhost:8000/v1/chat/completions"

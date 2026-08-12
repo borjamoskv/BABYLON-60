@@ -41,10 +41,13 @@ CANARY_MANIFEST = Path("docs/CANARY_TOKENS.md")
 
 
 def _tracked_files() -> list[str]:
-    out = subprocess.run(
-        ["git", "ls-files"], capture_output=True, text=True, check=False
-    ).stdout
-    return [ln for ln in out.splitlines() if ln]
+    try:
+        out = subprocess.run(
+            ["git", "ls-files"], capture_output=True, text=True, check=False
+        ).stdout
+        return [ln for ln in out.splitlines() if ln]
+    except Exception:
+        return []
 
 
 def main() -> int:
