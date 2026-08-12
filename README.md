@@ -86,18 +86,18 @@ Built-in exporter generating audit-ready certificates for national supervisory a
 
 | Subproject Module | Documentation README | Focus / Technology |
 | :--- | :--- | :--- |
-| **Rust Kernel** | [`kernel/`](./kernel/README.md) | `#![no_std]` Rust execution engine, $F_{60}$ scheduler, WORM quarantine. |
-| **Cortex Substrate** | [`cortex/`](./cortex/README.md) | Python cognitive memory (`cortex-persist`), SQLite WAL, MCP Server. |
-| **Sovereign IDE** | [`babylon60-ide/`](./babylon60-ide/README.md) | Desktop/Mobile Tauri v2 IDE, FastAPI OpenRouter backend, Iceoryx2 IPC. |
-| **Web Telemetry UI** | [`web/`](./web/README.md) | React 18 + WASM Causal Telemetry visualizer & FSA API mount. |
-| **Tonnetz Human Oversight**| [`tonnetz_app/`](./tonnetz_app/README.md) | Neo-Riemannian toric harmonic graph visualizer (EU AI Act Art. 14). |
-| **Causal Attestation** | [`attestation/`](./attestation/README.md) | TPM 2.0 PCR Quote hardware notary & Merkle DAG state anchoring. |
-| **DSL Compiler** | [`compiler/`](./compiler/README.md) | `.b60` DSL lexer/parser, B60 bytecode IR, Lean 4 proof emitter. |
-| **Strike RS Acceleration**| [`strike_rs/`](./strike_rs/README.md) | PyO3 native GIL bypass, Iceoryx2 shared memory, BLAKE3 taint engine. |
-| **Master Ledger BFT** | [`babylon60/bft/`](./babylon60/bft/README.md) | Escalón 3 Tamper-Evident log with Git Sentinel external witness. |
-| **EVM On-Chain Notary** | [`anvil_yung/`](./anvil_yung/README.md) | Foundry smart contracts for EVM Merkle state root notarization. |
-| **Causal Transpiler** | [`causal_isomorphism/`](./causal_isomorphism/README.md)| Functional F# domain kernel transpiler & linear type checker. |
-| **Continuous Timeline IR** | [`timeline_ir/`](./timeline_ir/README.md) | Continuous-time state graph simulation kernel ($State(t)$). |
+| **Rust Kernel** | [`crates/babylon60-kernel/`](./crates/babylon60-kernel/README.md) | `#![no_std]` Rust execution engine, $F_{60}$ scheduler, WORM quarantine. |
+| **Cortex Substrate** | [`packages/cortex/`](./packages/cortex/README.md) | Python cognitive memory (`cortex-persist`), SQLite WAL, MCP Server. |
+| **Sovereign IDE** | [`apps/babylon60-ide/`](./apps/babylon60-ide/README.md) | Desktop/Mobile Tauri v2 IDE, FastAPI OpenRouter backend, Iceoryx2 IPC. |
+| **Web Telemetry UI** | [`apps/web/`](./apps/web/README.md) | React 18 + WASM Causal Telemetry visualizer & FSA API mount. |
+| **Tonnetz Human Oversight**| [`apps/tonnetz_app/`](./apps/tonnetz_app/README.md) | Neo-Riemannian toric harmonic graph visualizer (EU AI Act Art. 14). |
+| **Causal Attestation** | [`tools/attestation/`](./tools/attestation/README.md) | TPM 2.0 PCR Quote hardware notary & Merkle DAG state anchoring. |
+| **DSL Compiler** | [`crates/babylon60-compiler/`](./crates/babylon60-compiler/README.md) | `.b60` DSL lexer/parser, B60 bytecode IR, Lean 4 proof emitter. |
+| **Strike RS Acceleration**| [`crates/strike-rs/`](./crates/strike-rs/README.md) | PyO3 native GIL bypass, Iceoryx2 shared memory, BLAKE3 taint engine. |
+| **Master Ledger BFT** | [`packages/babylon60/bft/`](./packages/babylon60/bft/README.md) | Escalón 3 Tamper-Evident log with Git Sentinel external witness. |
+| **EVM On-Chain Notary** | [`experiments/anvil_yung/`](./experiments/anvil_yung/README.md) | Foundry smart contracts for EVM Merkle state root notarization. |
+| **Causal Transpiler** | [`experiments/causal_isomorphism/`](./experiments/causal_isomorphism/README.md)| Functional F# domain kernel transpiler & linear type checker. |
+| **Continuous Timeline IR** | [`experiments/timeline_ir/`](./experiments/timeline_ir/README.md) | Continuous-time state graph simulation kernel ($State(t)$). |
 | **APEX Clinical Copilot** | [`docs/06_theory/`](./docs/06_theory/README_APEX.md) | Deterministic clinical-trial protocol amendment-risk copilot. |
 | **Documentation Hub** | [`docs/`](./docs/README.md) | Central index for specifications, whitepapers, GTM playbooks. |
 
