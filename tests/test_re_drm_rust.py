@@ -11,7 +11,7 @@ import sqlite3
 import sys
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-DB_PATH = os.path.join(PROJECT_ROOT, "cortex/agents/ontology/re_drm_bft_ledger.db")
+DB_PATH = os.path.join(PROJECT_ROOT, "packages/cortex/agents/ontology/re_drm_bft_ledger.db")
 
 
 def test_re_drm_rust_bft_verification():
@@ -35,7 +35,7 @@ def test_re_drm_rust_bft_verification():
     # (evita que pyo3-build-config herede un Python del sistema obsoleto).
     env["PYO3_PYTHON"] = sys.executable
     res = subprocess.run(
-        ["cargo", "run", "--manifest-path", "strike_rs/Cargo.toml", "--bin", "re_drm_896_bft"],
+        ["cargo", "run", "--manifest-path", "crates/strike-rs/Cargo.toml", "--bin", "re_drm_896_bft"],
         cwd=PROJECT_ROOT,
         capture_output=True,
         text=True,
