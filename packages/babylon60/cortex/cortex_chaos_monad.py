@@ -78,6 +78,10 @@ def validate_ast_markov_blanket(source_code: str) -> tuple[bool, str]:
         raise SecurityError(f"Syntax error (safe): {e}")
 
 
+# Legacy alias for backwards compatibility
+validate_ast_sandbox = validate_ast_markov_blanket
+
+
 _SUBPROCESS_WRAPPER = """
 import sys
 import json
