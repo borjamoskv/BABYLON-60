@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Editor from '@monaco-editor/react';
-import { streamCompletion, Message } from '../cortex/lm-bridge';
+import { streamCompletion, type Message } from '../cortex/lm-bridge';
 
 export function Canvas() {
   const [code, setCode] = useState('// BABYLON-60 Causal Engine\n// Press Cmd+O to mount project...\n// Press Cmd+L to ping Cortex via LM Studio...');

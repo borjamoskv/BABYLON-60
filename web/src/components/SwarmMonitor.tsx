@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 export const SwarmMonitor: React.FC = () => {
-  const [tenants, setTenants] = useState(100000);
-  const [concurrency, setConcurrency] = useState(5000);
+  const [tenants] = useState(100000);
+  const [concurrency] = useState(5000);
   const [exergy, setExergy] = useState(1000);
 
   useEffect(() => {
