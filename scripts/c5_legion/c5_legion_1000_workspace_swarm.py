@@ -27,7 +27,7 @@ BANNED_PATTERNS = [
     (re.compile(r"/(" + "Users|home" + r")/[^/\s\"'\)]+"), "Hardcoded absolute user home path (use Path.home())"),
 ]
 
-SKIP_DIRS = {".git", ".venv", "node_modules", "__pycache__", "target", "dist", "build", ".cortex"}
+SKIP_DIRS = {".git", ".venv", "node_modules", "__pycache__", "target", "dist", "build", ".cortex", "vendor"}
 
 
 def audit_file_worker(filepath: str, agent_id: int) -> dict:

@@ -115,8 +115,8 @@ fn abort_bare_metal() -> ! {
 ///
 /// # Ejemplo
 /// ```
-/// use babylon_60::manifest::{SharedManifest, POISONED};
-/// use babylon_60::halt::is_halted;
+/// use babylon60::manifest::{SharedManifest, POISONED};
+/// use babylon60::halt::is_halted;
 /// use std::sync::atomic::Ordering;
 ///
 /// let manifest = SharedManifest::new();

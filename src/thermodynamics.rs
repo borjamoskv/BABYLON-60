@@ -73,7 +73,7 @@ const _THERMO_ASSERTS: () = {
 ///
 /// # Ejemplo
 /// ```
-/// use babylon_60::thermodynamics::{is_entelecheia, is_dynamis, is_valid_writer_transition};
+/// use babylon60::thermodynamics::{is_entelecheia, is_dynamis, is_valid_writer_transition};
 ///
 /// assert!(is_entelecheia(0));
 /// assert!(is_dynamis(1));

@@ -2,9 +2,9 @@
 
 #![cfg(not(loom))]
 
-use babylon_60::manifest::{SharedManifest, RUNNING};
-use babylon_60::seqlock::{publish, read};
-use babylon_60::thermodynamics::{is_entelecheia, is_dynamis, is_valid_writer_transition};
+use babylon60::manifest::{SharedManifest, RUNNING};
+use babylon60::seqlock::{publish, read};
+use babylon60::thermodynamics::{is_entelecheia, is_dynamis, is_valid_writer_transition};
 use proptest::prelude::*;
 use std::sync::atomic::{AtomicU32, AtomicU64};
 

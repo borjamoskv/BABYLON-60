@@ -81,8 +81,8 @@ fn cpu_spin_yield() {
 ///
 /// # Ejemplo
 /// ```
-/// use babylon_60::manifest::SharedManifest;
-/// use babylon_60::seqlock::{publish, read};
+/// use babylon60::manifest::SharedManifest;
+/// use babylon60::seqlock::{publish, read};
 ///
 /// let manifest = SharedManifest::new();
 /// let hash = [0xA, 0xB, 0xC, 0xD];

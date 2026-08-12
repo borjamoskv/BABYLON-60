@@ -6,13 +6,13 @@
 
 #![cfg(not(loom))]
 
-use babylon_60::manifest::{SharedManifest, HaltReason, RUNNING, POISONED, MAX_RETRIES};
-use babylon_60::seqlock::{publish, read};
-use babylon_60::thermodynamics::{
+use babylon60::manifest::{SharedManifest, HaltReason, RUNNING, POISONED, MAX_RETRIES};
+use babylon60::seqlock::{publish, read};
+use babylon60::thermodynamics::{
     is_entelecheia, is_dynamis, is_valid_writer_transition,
     LANDAUER_FLOOR_TOTAL_AJ_X1000, BITS_PER_PUBLISH,
 };
-use babylon_60::halt::is_halted;
+use babylon60::halt::is_halted;
 
 use core::sync::atomic::Ordering;
 use std::mem::{size_of, align_of, offset_of};
@@ -165,14 +165,14 @@ fn inv3_valid_writer_transitions() {
 
 #[test]
 fn inv3_aphairesis_entropy_loss() {
-    use babylon_60::thermodynamics::aphairesis_entropy_loss_aj_x1000;
+    use babylon60::thermodynamics::aphairesis_entropy_loss_aj_x1000;
     // Eliminación de 100 bits → 100 * 2870 = 287_000 aJ*1000 (0.287 aJ)
     assert_eq!(aphairesis_entropy_loss_aj_x1000(100), 287_000);
 }
 
 #[test]
 fn inv3_calm_monotonic_transition() {
-    use babylon_60::thermodynamics::is_calm_monotonic_transition;
+    use babylon60::thermodynamics::is_calm_monotonic_transition;
     assert!(is_calm_monotonic_transition(10, 11));
     assert!(!is_calm_monotonic_transition(10, 10));
     assert!(!is_calm_monotonic_transition(10, 9));
@@ -180,7 +180,7 @@ fn inv3_calm_monotonic_transition() {
 
 #[test]
 fn inv3_aphairesis_bound_min_energy() {
-    use babylon_60::thermodynamics::{AphairesisBound, to_q16_16_from_x1000};
+    use babylon60::thermodynamics::{AphairesisBound, to_q16_16_from_x1000};
     let bound = AphairesisBound {
         effective_bits_erased_q16: to_q16_16_from_x1000(64000),
         kl_divergence_q16: to_q16_16_from_x1000(100),
@@ -195,7 +195,7 @@ fn inv3_aphairesis_bound_min_energy() {
 
 #[test]
 fn inv3_topological_compressor_trait() {
-    use babylon_60::thermodynamics::{TopologicalCompressorFixed, AphairesisBound, to_q16_16_from_x1000};
+    use babylon60::thermodynamics::{TopologicalCompressorFixed, AphairesisBound, to_q16_16_from_x1000};
 
     struct TestSheafCompressor;
     impl TopologicalCompressorFixed for TestSheafCompressor {
@@ -212,7 +212,7 @@ fn inv3_topological_compressor_trait() {
 
 #[test]
 fn sheaf_fusion_respects_extended_landauer() {
-    use babylon_60::thermodynamics::{TopologicalCompressorFixed, SheafFusionOperator};
+    use babylon60::thermodynamics::{TopologicalCompressorFixed, SheafFusionOperator};
 
     assert!(
         SheafFusionOperator::MIN_ENERGY_ZEPTOJOULES >= 148,
@@ -223,8 +223,8 @@ fn sheaf_fusion_respects_extended_landauer() {
 
 #[test]
 fn generated_sheaf_fusion_operator_calibrated() {
-    use babylon_60::generated_aphairesis_constants::SheafFusionOperator;
-    use babylon_60::thermodynamics::TopologicalCompressorFixed;
+    use babylon60::generated_aphairesis_constants::SheafFusionOperator;
+    use babylon60::thermodynamics::TopologicalCompressorFixed;
 
     let bound = SheafFusionOperator::aphairesis_bound();
     assert!(bound.min_energy_zeptojoules() > 0);
@@ -236,7 +236,7 @@ fn generated_sheaf_fusion_operator_calibrated() {
 
 #[test]
 fn measurement_below_bound_is_rejected() {
-    use babylon_60::thermodynamics::{TopologicalCompressorFixed, SheafFusionOperator};
+    use babylon60::thermodynamics::{TopologicalCompressorFixed, SheafFusionOperator};
     let op = SheafFusionOperator;
     let impossible_measurement = SheafFusionOperator::MIN_ENERGY_ZEPTOJOULES.saturating_sub(1);
     
@@ -245,14 +245,14 @@ fn measurement_below_bound_is_rejected() {
 
 #[test]
 fn measurement_at_bound_is_accepted() {
-    use babylon_60::thermodynamics::{TopologicalCompressorFixed, SheafFusionOperator};
+    use babylon60::thermodynamics::{TopologicalCompressorFixed, SheafFusionOperator};
     let op = SheafFusionOperator;
     assert!(op.validate_measurement(SheafFusionOperator::MIN_ENERGY_ZEPTOJOULES).is_ok());
 }
 
 #[test]
 fn symbolic_message_spsc_layout_and_bound() {
-    use babylon_60::thermodynamics::{TopologicalCompressorFixed, SheafFusionOperator, SymbolicMessage};
+    use babylon60::thermodynamics::{TopologicalCompressorFixed, SheafFusionOperator, SymbolicMessage};
     use core::mem::size_of;
 
     let payload = [42u8; 48];
@@ -265,7 +265,7 @@ fn symbolic_message_spsc_layout_and_bound() {
 
 #[test]
 fn spsc_ring_buffer_push_pop() {
-    use babylon_60::spsc_ring::SpscRingBuffer;
+    use babylon60::spsc_ring::SpscRingBuffer;
 
     let ring = SpscRingBuffer::<(u64, [u64; 4]), 16>::new();
     let hash = [1u64, 2u64, 3u64, 4u64];
@@ -421,7 +421,7 @@ fn inv5_padding_integrity_preserved() {
 
 #[test]
 fn test_spsc_ring_buffer_basic_push_pop() {
-    use babylon_60::SpscRingBuffer;
+    use babylon60::SpscRingBuffer;
 
     let ring = SpscRingBuffer::<u64, 8>::new();
     assert!(ring.is_empty());
@@ -445,7 +445,7 @@ fn test_spsc_ring_buffer_basic_push_pop() {
 
 #[test]
 fn test_spsc_ring_buffer_concurrent_producer_consumer() {
-    use babylon_60::SpscRingBuffer;
+    use babylon60::spsc_ring::SpscRingBuffer;
     use std::sync::Arc;
     use std::thread;
 
