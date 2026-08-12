@@ -62,8 +62,10 @@ pytest tests/test_ast_sandbox_evasion.py
 ## 📁 Subdirectory Map
 
 ```
-cortex/
+packages/cortex/
 ├── agents/             # Autonomous agent role definitions & prompt templates
+├── audits/             # YAML audit reports of Causal-Determinist consolidations (C5-REAL)
+├── engine/             # Core BFT ledger databases (nexus_anchors.db)
 ├── infra/              # Low-level SQLite database connectors & WAL triggers
 ├── L1_sink/            # Primary persistent storage sink (Colimit Event Sourcing)
 └── moskv-swarm/        # Distributed swarm coordination protocols (Polynomial Functors)

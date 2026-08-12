@@ -16,15 +16,15 @@ def test_hypervisor_zero_copy():
     ent_key = generate_license_key("TestCorp", "enterprise", exp)
 
     # 2. Start ABFT Zero-Copy Daemon (Rust)
-    service_name = "b60_hypervisor_test_svc"
+    autopoietic_entity_id = "b60_hypervisor_test_svc"
     try:
-        HighAvailabilityCluster.start_hypervisor_daemon(db_path, service_name)
+        HighAvailabilityCluster.start_hypervisor_daemon(db_path, autopoietic_entity_id)
     except NotImplementedError as e:
         print(f"Skipping test due to INV_C5_RUST_ABORT: {e}")
         return
 
     # 3. Instantiate HA Cluster Client
-    cluster = HighAvailabilityCluster(ent_key, service_name=service_name)
+    cluster = HighAvailabilityCluster(ent_key, service_name=autopoietic_entity_id)
     assert cluster.is_active
 
     # 4. Init Ledger and bind HA Cluster

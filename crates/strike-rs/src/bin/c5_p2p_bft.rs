@@ -226,7 +226,7 @@ fn main() {
 
     let (db_path_str, table_name) = match mode {
         RunMode::ReDrm => (std::env::var("CORTEX_RE_DRM_DB").unwrap_or_else(|_| "packages/cortex/agents/ontology/re_drm_bft_ledger.db".to_string()), "re_drm_p2p_ledger"),
-        RunMode::Centuria => (std::env::var("CORTEX_CENTURIA_DB").unwrap_or_else(|_| "cortex/engine/nexus_anchors.db".to_string()), "p2p_10000_primitives_rust_ledger"),
+        RunMode::Centuria => (std::env::var("CORTEX_CENTURIA_DB").unwrap_or_else(|_| "packages/cortex/engine/nexus_anchors.db".to_string()), "p2p_10000_primitives_rust_ledger"),
     };
     
     let mut conn = init_db(Path::new(&db_path_str), table_name).unwrap();

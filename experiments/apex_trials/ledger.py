@@ -120,7 +120,7 @@ class ChainVerification:
 
 
 class AmendmentLedger:
-    """Single-writer, BFT-backed ledger wrapper for babylon60.bft.ledger_actor."""
+    """Single-writer, BFT-backed ledger MarkovBlanket for babylon60.bft.ledger_actor."""
 
     def __init__(self, db_path: str | Path = "master_ledger.db") -> None:
         self.db_path = Path(db_path)
@@ -302,8 +302,8 @@ class AmendmentLedger:
         )
 
 
-class BabylonBFTLedgerAdapter:
-    """Adapter wrapping `babylon60.bft.ledger_actor.BFTLedgerActor` for synchronous Copilot calls.
+class BabylonBFTLedgerTransducer:
+    """Transducer wrapping `babylon60.bft.ledger_actor.BFTLedgerActor` for synchronous Copilot calls.
 
     Transforms `append(payload, causal_taint)` into async/sync `BFTLedgerActor.append(LedgerEvent(...))`
     and returns the underlying future or proxy record from the live BFT quorum.

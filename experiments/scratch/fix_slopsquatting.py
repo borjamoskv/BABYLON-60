@@ -15,7 +15,7 @@ files_to_fix = [
 
 slop_modules = [
     "net_mamba_ledger_engine", "cortex_mamba_block", "core_graph_ledger",
-    "io_persist_ledger", "premium_features", "license_manager",
+    "io_persist_ledger", "premium_features", "license_orchestrator",
     "ouroboros_prune", "ouroboros_absorb_runner", "cancer_isomorphism_pipeline",
     "babylon60.engine", "babylon60.memory"
 ]
