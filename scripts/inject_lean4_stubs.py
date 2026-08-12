@@ -72,13 +72,13 @@ def generate_lean_code(module_name: str, axioms: list, theorems: list) -> str:
         ])
     else:
         for idx, ax in enumerate(axioms, 1):
-            var_name = f"ax_{idx}_{re.sub(r'[^a_z0_9]', '_', ax.lower())}".rstrip('_')
+            var_name = f"ax_{idx}_{re.sub(r'[^a-z0-9]', '_', ax.lower())}".rstrip('_')
             lines.append(f"/-- {ax} -/")
             lines.append(f"axiom {var_name} : ∀ (x : X), True")
             lines.append("")
 
         for idx, th in enumerate(theorems, 1):
-            var_name = f"theorem_{idx}_{re.sub(r'[^a_z0_9]', '_', th.lower())}".rstrip('_')
+            var_name = f"theorem_{idx}_{re.sub(r'[^a-z0-9]', '_', th.lower())}".rstrip('_')
             lines.append(f"/-- {th} -/")
             lines.append(f"theorem {var_name} (x : X) : True := by")
             lines.append("  trivial")
