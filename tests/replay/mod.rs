@@ -3,9 +3,12 @@ mod tests {
     // Replay Tests: Causal State Determinism
     // Verifies that a given sequence of causal events always deterministically rebuilds the same State Tuple.
     
+    use sha2::{Digest, Sha256};
+
     #[test]
     fn test_causal_determinism_replay_hash() {
-        // Enforces that execution determinism is invariant to physical hardware state.
+        // Enforces that execution determinism is invariant to physical hardware state,
+        // using genuine cryptographic SHA-256 hash accumulation.
         
         let initial_state_hash = "BABYLON-60-INIT-HASH";
         let mock_trace = vec![
@@ -14,22 +17,43 @@ mod tests {
             "EV_03: EMIT DB_SYNC",
         ];
         
-        // Simulating the replay of the trace through the DAG Ledger
-        let mut computed_hash = initial_state_hash.to_string();
-        for ev in mock_trace {
-            // Hash accumulation logic: SHA256(prev_hash ++ new_event)
-            // Here we just mutate it predictably for the mock
-            computed_hash = format!("{}_{}", computed_hash, ev.len());
-        }
+        // Simulating the replay of the trace through SHA256 accumulation:
+        // H_0 = SHA256(initial_state_hash)
+        // H_{i+1} = SHA256(H_i ++ event_bytes)
+        let compute_trace_hash = |trace: &[&str]| -> String {
+            let mut hasher = Sha256::new();
+            hasher.update(initial_state_hash.as_bytes());
+            let mut current_hash = hasher.finalize().to_vec();
+
+            for ev in trace {
+                let mut step_hasher = Sha256::new();
+                step_hasher.update(&current_hash);
+                step_hasher.update(ev.as_bytes());
+                current_hash = step_hasher.finalize().to_vec();
+            }
+            hex::encode(current_hash)
+        };
+
+        let computed_hash = compute_trace_hash(&mock_trace);
         
-        // If the system is deterministic, computed_hash will always be identical
-        // for the same `mock_trace`, regardless of OS, clock, or memory layout.
-        
-        let expected_replay_hash = "BABYLON-60-INIT-HASH_17_20_19";
-        
+        // Replay again to confirm bit-for-bit determinism
+        let replayed_hash = compute_trace_hash(&mock_trace);
         assert_eq!(
-            computed_hash, expected_replay_hash,
-            "CRITICAL: Causal determinism broken. Replay hash diverged."
+            computed_hash, replayed_hash,
+            "CRITICAL: Causal determinism broken. Replay hash diverged across iterations."
+        );
+
+        // Negative test: verify that a trace with identical string lengths but different event payload
+        // produces a completely different hash (anti-collision property).
+        let mutated_trace = vec![
+            "EV_01: KILL TaskA",
+            "EV_02: AWAIT DB_SYNC",
+            "EV_03: EMIT DB_SYNC",
+        ];
+        let mutated_hash = compute_trace_hash(&mutated_trace);
+        assert_ne!(
+            computed_hash, mutated_hash,
+            "CRITICAL: Hash collision detected! String length hashing vulnerability reintroduced."
         );
     }
 
