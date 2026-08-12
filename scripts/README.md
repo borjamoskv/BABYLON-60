@@ -56,7 +56,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 
 | Script | Tipo | SHA-256 | Descripción / Propósito |
 | :--- | :--- | :--- | :--- |
-| [`c5_cortex/autoconsolidate.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/autoconsolidate.py) | `Python` | `1f71388afa21` | Delete old entries, respecting INV_BFT_04 semantics |
+| [`c5_cortex/autoconsolidate.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/autoconsolidate.py) | `Python` | `93f1f01bb64a` | [ANERGY_PURGE] from babylon60.memory.journal import JournalEntry |
 | [`c5_cortex/bootstrap_cortex_memory.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/bootstrap_cortex_memory.py) | `Python` | `90c2bacb8206` | Bootstrap Cortex Memory Utility |
 | [`c5_cortex/consolidate_babylon_vault.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/consolidate_babylon_vault.py) | `Python` | `0477d218a41d` | Causal-Determinist SOVEREIGN CONSOLIDATION PROTOCOL — BABYLON-60 MEMORY VAULT |
 | [`c5_cortex/consolidate_dbs.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/consolidate_dbs.py) | `Python` | `ceb44ff71f51` | Consolidación BFT (Erradicación del Antipatrón de Dispersión SQLite) |
@@ -181,7 +181,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | [`c5_thermo/c5_exergy_optimizer_monitor.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/c5_exergy_optimizer_monitor.py) | `Python` | `5a6406e619ab` | MOSKV-1 APEX SINGULARITY — Causal-Determinist STATE MONITOR (EXERGY_OPTIMIZER) |
 | [`c5_thermo/cache_1000_memoization_bench.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/cache_1000_memoization_bench.py) | `Python` | `592643d70567` | Cache 1000 Memoization Bench Utility |
 | [`c5_thermo/exergy_arbitrage_engine.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/exergy_arbitrage_engine.py) | `Python` | `3cc2fed0312b` | Exergy Arbitrage Engine Utility |
-| [`c5_thermo/exergy_dashboard_server.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/exergy_dashboard_server.py) | `Python` | `7af6764c60ed` | Exergy Dashboard Server (Causal-Determinist). |
+| [`c5_thermo/exergy_dashboard_server.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/exergy_dashboard_server.py) | `Python` | `cdc2727d5c8f` | Exergy Dashboard Server (Causal-Determinist). |
 | [`c5_thermo/exergy_optimizer_agent.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/exergy_optimizer_agent.py) | `Python` | `d4502d167d80` | [Causal-Determinist] Exergy Optimizer Agent. |
 | [`c5_thermo/stress_100m_bft.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/stress_100m_bft.py) | `Python` | `e56bf524c87a` | 100,000,000 STRESS TEST ENGINE — CORTEX PERSIST BFT LEDGER |
 | [`c5_thermo/stress_10m.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/stress_10m.py) | `Python` | `20a61576e633` | Stress 10M Utility |
