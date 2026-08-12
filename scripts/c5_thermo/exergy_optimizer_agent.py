@@ -10,6 +10,7 @@ implements strict algebraic typing, and determines when memory consolidation is 
 """
 
 import sys
+import os
 from pathlib import Path
 
 # Add project root to sys.path to resolve local packages
