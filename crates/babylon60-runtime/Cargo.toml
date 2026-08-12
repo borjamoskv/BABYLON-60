@@ -2,10 +2,10 @@
 name = "babylon60-runtime"
 version = "0.1.0"
 edition = "2021"
-license-file = "../LICENSE"
+license-file = "../../LICENSE"
 description = "F60 Rational Arithmetic and Coroutine Runtime for BABYLON-60"
 repository = "https://github.com/borjamoskv/BABYLON-60"
-readme = "../README.md"
+readme = "../../README.md"
 authors = ["BABYLON-60 Contributors"]
 
 [dependencies]
