@@ -42,6 +42,14 @@ class InferenceBackend(Enum):
     LOCAL_MLX = "local_mlx"       # MLX server local (Apple Silicon)
 
 
+def _get_default_moonshot_url() -> str:
+    return os.getenv("MOONSHOT_API_URL") or "https://api.moonshot.cn/v1/chat/completions"
+
+
+def _get_default_moonshot_key() -> str:
+    return os.getenv("KIMI_API_KEY") or os.getenv("MOONSHOT_API_KEY", "")
+
+
 @dataclass
 class SwarmConfig:
     """Configuración determinista del enjambre."""
@@ -53,9 +61,9 @@ class SwarmConfig:
     backend: InferenceBackend = InferenceBackend.MOONSHOT_REMOTE
 
     # Endpoints
-    moonshot_url: str = "https://api.moonshot.cn/v1/chat/completions"
-    moonshot_key: str = field(default_factory=lambda: os.getenv("KIMI_API_KEY") or os.getenv("MOONSHOT_API_KEY", ""))
-    moonshot_model: str = "moonshot-v1-auto"
+    moonshot_url: str = field(default_factory=_get_default_moonshot_url)
+    moonshot_key: str = field(default_factory=_get_default_moonshot_key)
+    moonshot_model: str = os.getenv("MOONSHOT_MODEL", "moonshot-v1-auto")
 
     local_url: str = "http://localhost:8000/v1/chat/completions"
     local_model: str = "kimi-k3-1bit"  # Nombre del modelo en vLLM/MLX
@@ -179,9 +187,15 @@ class InferenceClient:
     """
     Cliente HTTP asíncrono con:
       - Reintentos con backoff exponencial
-      - Circuit breaker (para no martillear un backend caído)
-      - Soporte dual Moonshot/Local
-    """
+async def _http_post_single_attempt(url: str, payload: dict, headers: dict, timeout: float) -> dict:
+    async with httpx.AsyncClient(timeout=timeout) as client:
+        response = await client.post(url, json=payload, headers=headers)
+        response.raise_for_status()
+        return response.json()
+
+
+class RobustLLMClient:
+    """Cliente HTTP resiliente con circuit breaker y retries."""
     def __init__(self, config: SwarmConfig):
         self.config = config
         self._consecutive_failures = 0
@@ -202,36 +216,23 @@ class InferenceClient:
 
         for attempt in range(1, self.config.max_retries + 1):
             try:
-                async with httpx.AsyncClient(timeout=self.config.request_timeout_s) as client:
-                    response = await client.post(
-                        self.config.api_url,
-                        json=payload,
-                        headers=headers
-                    )
-                    response.raise_for_status()
-                    data = response.json()
-                    self._consecutive_failures = 0
-                    return data["choices"][0]["message"]["content"]
-
+                data = await _http_post_single_attempt(self.config.api_url, payload, headers, self.config.request_timeout_s)
+                self._consecutive_failures = 0
+                return data["choices"][0]["message"]["content"]
             except httpx.HTTPStatusError as e:
-                if e.response.status_code == 429:
-                    # Rate limit — backoff exponencial
-                    delay = self.config.retry_base_delay_s * (2 ** (attempt - 1))
-                    log.warning(f"⏳ Rate limit (429). Reintento {attempt}/{self.config.max_retries} en {delay:.1f}s...")
-                    await asyncio.sleep(delay)
-                else:
+                if e.response.status_code != 429:
                     self._consecutive_failures += 1
                     return f"Error HTTP {e.response.status_code}: {e.response.text[:200]}"
-
+                delay = self.config.retry_base_delay_s * (2 ** (attempt - 1))
+                log.warning(f"⏳ Rate limit (429). Reintento {attempt}/{self.config.max_retries} en {delay:.1f}s...")
+                await asyncio.sleep(delay)
             except (httpx.ConnectError, httpx.ReadTimeout) as e:
                 self._consecutive_failures += 1
-                if attempt < self.config.max_retries:
-                    delay = self.config.retry_base_delay_s * (2 ** (attempt - 1))
-                    log.warning(f"⏳ Conexión fallida. Reintento {attempt}/{self.config.max_retries} en {delay:.1f}s...")
-                    await asyncio.sleep(delay)
-                else:
+                if attempt >= self.config.max_retries:
                     return f"Error de conexión tras {self.config.max_retries} reintentos: {str(e)}"
-
+                delay = self.config.retry_base_delay_s * (2 ** (attempt - 1))
+                log.warning(f"⏳ Conexión fallida. Reintento {attempt}/{self.config.max_retries} en {delay:.1f}s...")
+                await asyncio.sleep(delay)
             except Exception as e:
                 self._consecutive_failures += 1
                 return f"Error inesperado: {str(e)}"

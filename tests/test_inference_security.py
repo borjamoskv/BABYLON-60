@@ -6,8 +6,13 @@ from fastapi.testclient import TestClient
 import sys
 import os
 
-# Add backend directory to sys.path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../babylon60-ide/backend")))
+# Add backend directory to sys.path (local submodule or standalone repo)
+ide_backend_local = os.path.abspath(os.path.join(os.path.dirname(__file__), "../babylon60-ide/backend"))
+ide_backend_external = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../babylon60-ide/backend"))
+if os.path.exists(ide_backend_local):
+    sys.path.insert(0, ide_backend_local)
+elif os.path.exists(ide_backend_external):
+    sys.path.insert(0, ide_backend_external)
 
 from routes.inference import router
 from fastapi import FastAPI
