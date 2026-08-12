@@ -1,11 +1,11 @@
 import React from 'react';
 
 interface AxiomItem {
-  id: str;
-  name: str;
-  category: str;
+  id: string;
+  name: string;
+  category: string;
   status: 'PASSED' | 'FAILED';
-  detail: str;
+  detail: string;
 }
 
 const AXIOMS: AxiomItem[] = [
