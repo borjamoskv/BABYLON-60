@@ -13,7 +13,7 @@ load_dotenv()
 # Inicializamos el servidor MCP estándar con Cero Fricción (stdio)
 mcp = FastMCP("Kimi Nexus MCP Server")
 KIMI_API_KEY = os.getenv("KIMI_API_KEY")
-MOONSHOT_API_URL = "https://api.moonshot.cn/v1/chat/completions"
+MOONSHOT_API_URL = os.getenv("MOONSHOT_API_URL", "https://api.moonshot.cn/v1/chat/completions")
 
 # Inicializamos el detector de lenguaje AOT (Alta Exergía) para evitar overhead en cada llamada
 languages = [Language.ENGLISH, Language.SPANISH, Language.FRENCH, Language.GERMAN, Language.CHINESE, Language.JAPANESE]
