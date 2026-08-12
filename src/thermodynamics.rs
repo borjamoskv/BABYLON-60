@@ -1,4 +1,4 @@
-// C5-REAL EXERGY CERTIFIED — BABYLON-60 — INV-3 (termodinámica)
+// Certified Specification — BABYLON-60 — INV-3 (thermodynamic bounds)
 // Landauer, Zero Anergía, bisimulación Dynamis/Entelecheia
 //
 // NOTA EPISTÉMICA: este módulo documenta y verifica los invariantes

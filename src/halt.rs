@@ -1,4 +1,4 @@
-// C5-REAL EXERGY CERTIFIED — BABYLON-60 — INV-4 (fail-stop)
+// Certified Specification — BABYLON-60 — INV-4 (fail-stop mechanism)
 // Mecanismo determinista de halt epistémico y frontera topológica inmutable
 //
 // FUNDAMENTACIÓN JURÍDICA (EU AI Act — Reglamento (UE) 2024/1689):

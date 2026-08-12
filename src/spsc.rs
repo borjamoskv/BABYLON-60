@@ -1,4 +1,4 @@
-// C5-REAL EXERGY CERTIFIED — BABYLON-60 — SPSC Ring Buffer Lock-Free
+// Certified Specification — BABYLON-60 — SPSC Ring Buffer Lock-Free
 // Single-Producer Single-Consumer (SPSC) Zero-Copy Channel para AArch64/ARMv9
 //
 // ALINEACIÓN Y COHERENCIA:

@@ -2565,7 +2565,7 @@ def emit_yaml(recs: list[dict[str, Any]], path: str) -> None:
 
 def emit_python(recs: list[dict[str, Any]], path: str) -> None:
     header = (
-        '# -*- coding: utf-8 -*-\n"""\nCORTEX / BABYLON-60 :: oncology_primitives\nModulo de datos: 300 primitivas de biologia molecular del cancer y dianas terapeuticas.\n\nGENERADO por scripts/gen_oncology_primitives.py -- NO editar a mano.\nAutoria artistica/arquitectonica (AKA): Borja Moskv (borjamoskv).\n\n%s\n"""\nfrom __future__ import annotations\nfrom typing import Optional, Any\n\nDISCLAIMER = %r\n\nCATEGORIES: dict[str, dict[str, str]] = %r\n\nPRIMITIVES: list[dict[str, Any]] = [\n'
+        '#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n"""\nCORTEX / BABYLON-60 :: oncology_primitives\nModulo de datos: 300 primitivas de biologia molecular del cancer y dianas terapeuticas.\n\nGENERADO por scripts/gen_oncology_primitives.py -- NO editar a mano.\nAutoria artistica/arquitectonica (AKA): Borja Moskv (borjamoskv).\n\n%s\n"""\nfrom __future__ import annotations\nfrom typing import Optional, Any\n\nDISCLAIMER = %r\n\nCATEGORIES: dict[str, dict[str, str]] = %r\n\nPRIMITIVES: list[dict[str, Any]] = [\n'
         % (DISCLAIMER_ES, DISCLAIMER_ES, {k: {"label": v[0], "layer": v[1]} for k, v in CATS.items()})
     )
     body: list[str] = []

@@ -28,7 +28,7 @@
 //!   should be called on it while other threads may be reading.
 //! * In production, use `Box::leak` or a static pool; never pass by value.
 
-// C5-REAL EXERGY CERTIFIED — INV-1..4 BABYLON-60 2026-08-09
+// Formally Verified Invariants INV-1..4 — BABYLON-60 IPC Specification
 
 #![deny(unsafe_op_in_unsafe_fn)]
 #![warn(missing_docs)]

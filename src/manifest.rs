@@ -1,4 +1,4 @@
-// C5-REAL EXERGY CERTIFIED — BABYLON-60 — INV-1 (layout)
+// Certified Specification — BABYLON-60 — INV-1 (layout)
 // SharedManifest: 64 B, align(64), C-ABI, AArch64/ARMv9
 //
 // NOTA DE DISEÑO — Zero-Split Coherence:

@@ -1,4 +1,4 @@
-// C5-REAL EXERGY CERTIFIED — BABYLON-60 — INV-2 (concurrencia)
+// Certified Specification — BABYLON-60 — INV-2 (concurrency)
 // Seqlock escritor-único / SPMC para AArch64/ARMv9 (memoria débil)
 //
 // MODELO DE MEMORIA
