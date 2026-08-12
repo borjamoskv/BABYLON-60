@@ -29,4 +29,12 @@ axiom ax_tz_3 (h : Float) (ex : Float) (h_fatal : h >= 2.0) : (Phi h ex).1 == To
 theorem homeostasis_tonnetz_garantizada : Phi 0.0 0.0 == (TonnetzState.HomeostaticPure, 0.0) := by
   exact ax_tz_1 Phi
 
+/-- Teorema: Disonancia Microtonal Estricta en Regimen Degradado -/
+theorem disonancia_microtonal_estricta (h : Float) (ex : Float) (h_crit : h > 1.0) : (Phi h ex).2 > 0.0 := by
+  exact ax_tz_2 Phi h ex h_crit
+
+/-- Teorema: Alerta por Disipación Extrema de Anergía Inducida -/
+theorem alerta_anergy_extrema (h : Float) (ex : Float) (h_fatal : h >= 2.0) : (Phi h ex).1 == TonnetzState.AnergyAlertDissonant := by
+  exact ax_tz_3 Phi h ex h_fatal
+
 end Babylon60.Theory.AxiomTonnetzOversight
