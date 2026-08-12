@@ -23,7 +23,7 @@ def test_payload_commitment():
     raw = b'{"status": "READY"}'
     hash_hex = calculate_payload_commitment(raw)
     assert len(hash_hex) == 64
-    assert hash_hex == "867e0cd435381bb56251908fc2cf891b652c72d233a5f3a2fe5582a98cfde5e0"
+    assert hash_hex == "a258bbbe3b975c9b5dded37eb0e8d77e64b7bec2c1a2f2b9247e06fecf3802a5"
 
 
 def test_read_send_message_frame_roundtrip():
@@ -48,7 +48,7 @@ def test_read_send_message_frame_roundtrip():
     assert read_result is not None
     assert read_result["status"] == "READY"
     assert read_result["exergy"] == 500.0
-    assert "_sha256_commitment" in read_result
+    assert "_hash_commitment" in read_result
 
 
 def test_read_message_frame_exceeds_max_bytes(caplog):
