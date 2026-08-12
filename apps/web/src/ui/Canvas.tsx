@@ -34,7 +34,7 @@ export function Canvas() {
         defaultLanguage="python"
         theme="vs-dark"
         value={code}
-        onChange={(val) => setCode(val || '')}
+        onChange={(val: string | undefined) => setCode(val || '')}
         options={{
           minimap: { enabled: false },
           fontSize: 14,
