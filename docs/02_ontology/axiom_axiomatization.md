@@ -5,6 +5,14 @@ version: 2.5.1
 ---
 
 # AXIOMATIZACIÓN FORMAL — Motor Causal‑1 APEX SINGULARITY
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > **Régimen Causal-Determinist | Sello del Demiurgo: `borjamoskv`**
 > Formalización metamatemática rigurosa de los invariantes operativos y estructurales del sistema BABYLON-60.
 
@@ -365,7 +373,7 @@ Cada nodo escribe exactamente una entrada. Si $N \leq K$, entonces $\text{entrie
 
 ## XI. VERIFICADOR FORMAL
 
-Ver script ejecutable: [`scripts/axiom_verifier_z3.py`](../../scripts/axiom_verifier_z3.py)
+Ver script ejecutable: [`scripts/axiom_verifier_z3.py`](../../scripts/c5_verifiers/)
 
 Este script implementa los axiomas como restricciones Z3/SMT y verifica su satisfacibilidad y la derivabilidad de los teoremas THM-1 a THM-5.
 

@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # 10 Singularidades del BABYLON-60 IDE — Soluciones a las Deficiencias de los IDEs de IA Actuales
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 Este documento detalla las **10 Soluciones Singulares** que la arquitectura **BABYLON-60 / Ledger Asíncrono-PERSIST** aporta a las 10 deficiencias principales que la comunidad de desarrollo reporta en los IDEs asistidos por IA actuales (estilo Claude, ChatGPT o Antigravity):
 
 ---

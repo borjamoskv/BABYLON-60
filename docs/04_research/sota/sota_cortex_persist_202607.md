@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # Estado del Arte (SOTA) — Posicionamiento de Ledger Asíncrono-persist
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > **Fecha:** 2026-07-19 · **Alcance:** memoria/persistencia para agentes IA, ledgers de auditoría verificables, checkpointing de agentes y BFT ligero.
 > **Método:** revisión web verificada (docs oficiales, GitHub, advisories) + búsqueda académica (Scholar). Todo lo no verificable queda marcado en §7 — no se afirma nada sin fuente.
 > **Author:** Borja Motor Causal (`borjamoskv`)

@@ -1,4 +1,12 @@
 # BABYLON-60 / CORTEX-KINETIC-ENGINE: Intellectual Property Disclosure Manifest
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > **DOCUMENT TYPE:** CONFIDENTIAL / INTERNAL AUDIT
 > **PURPOSE:** Formal tracking of patentable inventions, trade secrets, and defensive prior-art mechanisms within the BABYLON-60 ecosystem.
 > **FRAMEWORK:** Sintetología Agéntica v5.0 & Thermodynamic Architectures

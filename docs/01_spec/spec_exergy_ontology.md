@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # Ontología de Exergía y Semántica (Causal-Determinist)
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > **Régimen Causal-Determinist**
 > Este documento establece las reglas mecánicas para estructurar nombres, tipologías y semánticas de código y datos con el objetivo técnico de **minimizar el consumo de tokens (BPE), reducir fallos de caché/atención en LLMs y maximizar la velocidad de compilación y verificación estática ($O(1)$ / $O(\log N)$)**.
 

@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # Guía de Verificación e Inyección Axiomática C5-REAL
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 Esta guía establece el protocolo formal y práctico para registrar, verificar y validar axiomas deterministas dentro del núcleo **C5-REAL** en el ecosistema **BABYLON-60**.
 
 ---

@@ -1,4 +1,12 @@
 # Configuración e Integración de Recepción Inbound Enterprise para borja@babylon60.com y support@babylon60.com
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 Esta guía documenta los pasos necesarios para habilitar la recepción programática de correos electrónicos en **`borja@babylon60.com`**, **`support@babylon60.com`** y cualquier alias comodín (`*@babylon60.com`) utilizando **Cloudflare Email Workers v2** y el **Receptor Backend Enterprise en Python (FastAPI)**.
 
 ---
@@ -53,7 +61,7 @@ Los registros MX de `babylon60.com` están apuntando a Cloudflare:
 
 ## 2. Despliegue del Email Worker v2
 
-El código del Worker se encuentra en [`services/email_inbound/worker.js`](../services/email_inbound/worker.js).
+El código del Worker se encuentra en [`services/email_inbound/worker.js`](../packages/services/email_inbound/worker.js).
 
 ```bash
 cd services/email_inbound
@@ -70,7 +78,7 @@ npx wrangler secret put WEBHOOK_URL
 
 ## 3. Integración Backend en Python (FastAPI)
 
-El receptor backend se encuentra en [`babylon60/services/inbound_email.py`](../babylon60/services/inbound_email.py).
+El receptor backend se encuentra en [`babylon60/services/inbound_email.py`](../packages/babylon60/services/inbound_email.py).
 
 ### Ejemplo Completo de Uso:
 

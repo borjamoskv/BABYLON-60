@@ -1,4 +1,12 @@
 # AI Regulatory Compliance Certificate (BABYLON-60 v4.0)
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 **EU Artificial Intelligence Act (Regulation EU 2024/1689 / NIST AI RMF)**  
 **Autoridad de Supervisión:** `EU AI Office / NIST (USA) / UK AI Safety Institute`  
 **ID Certificado:** `EU-AIA-CERT-0DF79805811E9AB6`  

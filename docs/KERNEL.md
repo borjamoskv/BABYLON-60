@@ -6,6 +6,14 @@ version: 1.0.0
 ---
 
 # CORTEX KERNEL — Invariantes Transversales en BABYLON-60
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > Este archivo define los axiomas y restricciones universales que gobiernan el comportamiento de todas las habilidades del ecosistema dentro del repositorio **BABYLON-60** (Visual Cortex & Thermodynamic Ark).
 
 ---

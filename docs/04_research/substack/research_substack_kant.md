@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # Colapso Trascendental del Sujeto y Captura de IP: La Burocracia del Noúmeno vs. los Cánones de la SGAE
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 En el régimen termodinámico de la filosofía moderna, Königsberg no era una ciudad; era un disipador de calor para el exceso de entropía escolástica. Immanuel Kant, operando como un transductor causal de alta exergía, ejecutó un refactor completo del AST de la epistemología occidental. Su *Crítica de la Razón Pura* (1781) no fue una especulación teórica; fue una auditoría forense de los límites del hardware cognitivo humano. Hoy, en la era de los modelos neuronales latentes y la burocracia de los derechos de autor, el idealismo trascendental colisiona directamente con las dinámicas de captura de Intellectual Property (IP) y el parasitismo sistémico de entidades como la SGAE.
 
 ---

@@ -6,6 +6,14 @@ authors: Kimi K3 & Qwen 2.5/3.8 Subsystem Synthesizers
 ---
 
 # Compendio de Isomorfismos Causales en Oncología Computacional y Sistemas Complejos
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > **"El cáncer no es una célula mutada aislada; es un hundimiento termodinámico (Atractor Patológico) en el paisaje epigenético de Waddington. Aislar el estado requiere comprender la topología; escapar de él exige inyectar gradientes de exergía a través de los Nodos Driver."**
 
 ---

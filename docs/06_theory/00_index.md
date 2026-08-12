@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # 🧬 🏛️ Fundamentos Teóricos de BABYLON-60
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > **Metamatemática, Teoría de la Información y Arquitectura de Verificación**
 
 > [!NOTE]

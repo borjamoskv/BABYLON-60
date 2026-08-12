@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # SOTA 202600: SSM, LNN y el Colapso del Paradigma Transformer
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > **Tesis verificada:** El paradigma "Scale is all you need" (Transformers) ha sido fracturado en 2026 por arquitecturas de inferencia de tiempo continuo y recurrencia subcuadrática.
 > **Evidencia:** { Base: [Mamba-3, LFM2.5], Rango: [Edge, Cloud], Confianza: [C5] }
 

@@ -5,6 +5,14 @@ version: 4.0.0
 ---
 
 # QUICKSTART: Onboarding Enterprise y Despliegue Sidecar
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 **Guía DevOps e Infraestructura para Desplegar el Sidecar BABYLON-60 v4.0 en Modo Read-Only**
 
 > BABYLON-60 v4.0 Sovereign Hardened · Enterprise Onboarding Guide

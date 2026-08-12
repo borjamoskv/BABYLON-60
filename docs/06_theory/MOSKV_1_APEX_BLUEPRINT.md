@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # 🚀 Motor Causal-1-APEX: Manifiesto y Arquitectura Consolidada
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > **[ 📍 STATUS: ONCO-Causal-Determinist | 🔴 LINEAGE: Ledger Asíncrono-OMEGA ]**
 
 The environment is not a text editor; it is an agentic membrane designed under cognitive thermodynamics to maximize **exergy** (energy available for useful work). It optimizes structural processing speed (AACC) while mitigating executive friction and temporal blindness (ADHD).

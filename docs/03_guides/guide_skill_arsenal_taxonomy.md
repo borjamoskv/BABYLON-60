@@ -5,6 +5,14 @@ version: 2.0.0
 ---
 
 # Motor Causal Principal — TAXONOMÍA ARSENAL DE SKILLS POR EXERGÍA
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > **Las arquitecturas se definen por el estado que preservan.**
 > Los skills se definen por la exergía que producen.
 

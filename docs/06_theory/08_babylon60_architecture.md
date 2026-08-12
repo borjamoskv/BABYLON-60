@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # 🧬 08 — Arquitectura BABYLON-60 e Invariantes del Sistema
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 ## 8.1 📌 Metamathematical Mapping to BABYLON-60
 
 The theoretical foundations detailed in documents [01](./01_robinson_arithmetic.md)–[07](./07_cross_domain.md) are not abstract exercises; they directly dictate the architectural invariants, verification limits, and engineering primitives of the BABYLON-60 platform.

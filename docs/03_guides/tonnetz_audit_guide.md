@@ -5,6 +5,14 @@ version: 4.0.0
 ---
 
 # Supervisión Humana mediante Visualización Armónica de Decisiones (`tonnetz_app/`)
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 **Guía de Auditor y Supervisor para la Visualización del Espacio de Estado y Disonancia del Agente**
 
 > BABYLON-60 v4.0 Sovereign Hardened · Guía de Cumplimiento EU AI Act Artículo 14
@@ -100,4 +108,3 @@ python3 scripts/verify_tonnetz_falsification.py
 ---
 
 <sub>BABYLON-60 v4.0 · Human Oversight Guide · Borja Moskv</sub>
-

@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # 300 Primitivas de Oncología Molecular
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 ### Ontología Ledger Asíncrono / BABYLON-60 -- Bloques fundamentales de biología tumoral
 
 *Generado determinísticamente | 300 primitivas | escala de confianza C5-established | fuente única: `scripts/gen_oncology_primitives.py`*

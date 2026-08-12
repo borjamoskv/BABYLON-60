@@ -5,6 +5,14 @@ version: 4.0.0
 ---
 
 # ⚖️ Base Axiomática Sellada C5-REAL
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 Este documento constituye la especificación axiomática formal e inmutable del núcleo **C5-REAL** en el ecosistema **BABYLON-60**. Todo backend computacional, agente o transformador latente debe satisfacer estos axiomas para compilar dentro del sistema.
 
 ---
