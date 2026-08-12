@@ -24,8 +24,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ENV PATH="/root/.local/bin:$PATH"
 
 COPY pyproject.toml uv.lock ./
-COPY strike_rs ./strike_rs
-RUN cd strike_rs && cargo build --release
+COPY crates/strike-rs ./crates/strike-rs
+RUN cd crates/strike-rs && cargo build --release
 RUN uv sync --frozen --no-dev
 COPY . .
 
