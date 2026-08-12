@@ -7,23 +7,6 @@ version: 1.0.0
 # 🧬 Axiomatización Formal: Desintegración Bayesiana y No-Alucinación
 > **Axioma de Integridad del Sistema Cognitivo**
 
-<div align="center">
-
-[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
-[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
-
-</div>
-
-
-<div align="center">
-
-[![Verified Specification](https://img.shields.io/badge/Specification-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
-[![Status](https://img.shields.io/badge/Estado-Zero_Redundancy-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
-
-</div>
-
 > [!NOTE]
 > **Contexto del Protocolo**
 > Metodología formal generada bajo el protocolo `agentic-protocol-axiomatization`. Define el modelo lógico-deductivo $\mathcal{G}$ del motor de inversión categórica de Markov (`poc_axiom4_disintegration.py`), estableciendo las cotas absolutas contra la alucinación estocástica.

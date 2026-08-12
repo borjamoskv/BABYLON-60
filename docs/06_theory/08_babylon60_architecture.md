@@ -5,16 +5,6 @@ version: 1.0.0
 ---
 
 # 🧬 08 — Arquitectura BABYLON-60 e Invariantes del Sistema
-
-<div align="center">
-
-[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
-[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
-
-</div>
-
-
 ## 8.1 📌 Metamathematical Mapping to BABYLON-60
 
 The theoretical foundations detailed in documents [01](./01_robinson_arithmetic.md)–[07](./07_cross_domain.md) are not abstract exercises; they directly dictate the architectural invariants, verification limits, and engineering primitives of the BABYLON-60 platform.

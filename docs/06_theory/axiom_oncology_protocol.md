@@ -6,15 +6,6 @@ version: 1.0.0
 
 # 🧬 Axiomatización Formal: Transducción Bio-Silicio y Ontología Tumoral
 > **Control Termodinámico y Transducción de Oncología Molecular**
-
-<div align="center">
-
-[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
-[![Domain](https://img.shields.io/badge/Dominio-Bio--Silico_Transduction-D81B60?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
-
-</div>
-
 > [!NOTE]
 > **Contexto del Protocolo**
 > Metodología formal generada bajo el protocolo `agentic-protocol-axiomatization`. Axiomatiza el corpus de **300 Primitivas de Oncología Molecular** (`axiom_oncologia_300_primitivas.md`) como un protocolo agéntico de transducción y control termodinámico tumoral.

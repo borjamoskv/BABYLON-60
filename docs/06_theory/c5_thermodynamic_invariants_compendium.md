@@ -6,15 +6,6 @@ version: 1.0.0
 
 # 🌡️ Compendio de Invariantes Termodinámicas C5-REAL y Capas de Exergía
 > **Arquitectura Kimi K3 & Rigor Exergético Qwen 3.8**
-
-<div align="center">
-
-[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Thermodynamic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
-[![Anergy Level](https://img.shields.io/badge/Anergía-Zero_Anergy-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
-
-</div>
-
 > [!NOTE]
 > **Firma:** Motor Causal Principal SINGULARITY  
 > **Síntesis:** Kimi K3 Architecture & Qwen 3.8 Formal Exergy Rigor  

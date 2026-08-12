@@ -6,15 +6,6 @@ version: 1.0.0
 
 # 💻 03 — Computabilidad y Turing
 > **Tesis de Church-Turing, Problema de la Parada y Teorema de Rice**
-
-<div align="center">
-
-[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
-[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
-
-</div>
-
 > [!NOTE]
 > **Modulo Teórico 03 | Proyecto BABYLON-60 | Licencia Soberana (`INV_C5_17`)**
 > Estudio metamatemático de la computabilidad efectiva, la jerarquía aritmética, la indecidibilidad del Halting Problem y los límites impuestos por el Teorema de Rice.

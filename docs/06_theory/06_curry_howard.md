@@ -5,16 +5,6 @@ version: 1.0.0
 ---
 
 # 🧬 06 — La Correspondencia Curry-Howard-Lambek
-
-<div align="center">
-
-[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
-[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
-
-</div>
-
-
 ## 6.1 🏛️ The Trilateral Isomorphism
 
 The **Curry-Howard-Lambek correspondence** (also known as the Curry-Howard isomorphism or formulas-as-types isomorphism) establishes a profound structural identity between three previously distinct fields of mathematics:

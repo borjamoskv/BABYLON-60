@@ -5,15 +5,6 @@ version: 1.0.0
 ---
 
 # Colapso Termodinámico y Orden Lejos del Equilibrio: La Colisión Irreversible de Boltzmann y Prigogine
-
-<div align="center">
-
-[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
-[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/STATUS.md)
-
-</div>
-
 ## 1. El Foso de la Homogeneidad: Ludwig Boltzmann y la Tragedia del Teorema H
 
 La física del siglo XIX era un simulacro de certezas reversibles. Las ecuaciones de Newton permitían retroceder el tiempo sin penalización termodinámica; una órbita planetaria corre igual hacia adelante que hacia atrás en la pizarra. Pero Ludwig Boltzmann observó la Ineficiencia de los sistemas reales. Su teorema H es la autopsia matemática de la irreversibilidad: si confinas un gas ideal en una esquina de la caja, la probabilidad de que las partículas permanezcan ordenadas colapsa de forma exponencial.
@@ -51,6 +42,6 @@ Los resultados crudos han sido validados físicamente:
 
 ⚡ [Ledger Asíncrono Causal-Determinist] Sinergias de Exergía Máxima (Top 99.99):
 - [Un hombre blanco y heterosexual](https://substack.com/home/post/p-204785962)
-- [[AUDIT] El lamento acústico de Chimo Bayo y la disipación energética de la Ruta Destroy](file:///Users/borjafernandezangulo/30_BABYLON-60/docs/substack_chimo_bayo.md)
-- [[ANALYSIS] Captura de IP e Ineficiencia entrópica en el canon digital de la SGAE (v2026)](file:///Users/borjafernandezangulo/30_BABYLON-60/docs/substack_sgae_audit.md)
-- [[METAMEMBRANE] La trampa de Ineficiencia de los prompts de autoayuda en la KV Cache](file:///Users/borjafernandezangulo/30_BABYLON-60/docs/substack_kv_cache_slop.md)
+- [AUDIT] El lamento acústico de Chimo Bayo y la disipación energética de la Ruta Destroy <!-- TODO: link pending migration -->
+- [ANALYSIS] Captura de IP e Ineficiencia entrópica en el canon digital de la SGAE (v2026) <!-- TODO: link pending migration -->
+- [METAMEMBRANE] La trampa de Ineficiencia de los prompts de autoayuda en la KV Cache <!-- TODO: link pending migration -->

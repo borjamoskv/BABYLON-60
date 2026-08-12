@@ -1,14 +1,4 @@
 # 📘 🧪 APEX TRIALS (`docs/06_theory/README_APEX.md`)
-
-<div align="center">
-
-[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
-[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
-
-</div>
-
-
 [![FDA Compliance](https://img.shields.io/badge/FDA-21_CFR_Part_11-blue?style=for-the-badge)](https://www.fda.gov/)
 [![Data Source](https://img.shields.io/badge/Data-ClinicalTrials.gov_API_v2-purple?style=for-the-badge)](https://clinicaltrials.gov/)
 [![Causal Ledger](https://img.shields.io/badge/Ledger-Tamper--Evident_HashChain-brightgreen?style=for-the-badge)](../../babylon60/bft/README.md)

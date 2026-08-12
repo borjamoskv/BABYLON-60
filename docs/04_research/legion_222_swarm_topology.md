@@ -1,13 +1,4 @@
 # 🐝 Topología de Enjambre Legión 222 Agentes (`legion_222_agentes.py`)
-
-<div align="center">
-
-[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
-[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/STATUS.md)
-
-</div>
-
 [![Topology](https://img.shields.io/badge/Swarm-222_Agents-orange?style=for-the-badge)]()
 [![Process Architecture](https://img.shields.io/badge/Processes-11_Cores_%C3%97_20_Threads-purple?style=for-the-badge)]()
 [![Verification](https://img.shields.io/badge/Verification-LOOM_%2B_FUZZ_%2B_THERMO-brightgreen?style=for-the-badge)]()

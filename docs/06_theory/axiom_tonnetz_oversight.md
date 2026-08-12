@@ -6,15 +6,6 @@ version: 1.0.0
 
 # 🎵 Axiomatización Formal: Monitor Armónico Tonnetz
 > **Audio Engine & Oversight Bi-Modal (Conforme al Art. 14 EU AI Act)**
-
-<div align="center">
-
-[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
-[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
-
-</div>
-
 > [!NOTE]
 > **Contexto del Protocolo**
 > Este módulo materializa un sistema de sonificación de métricas termodinámicas, proporcionando un canal de monitorización bi-modal y perceptivo continuo para supervisión humana, en estricto cumplimiento con el **Artículo 14 (Human Oversight)** del marco legislativo *AI Act* de la Unión Europea. Aplica la Teoría Neo-Riemanniana para traducir la entropía sistémica en transformaciones audibles sobre el Toro de Tonnetz.

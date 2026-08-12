@@ -5,15 +5,6 @@ version: 1.0.0
 ---
 
 # Ingestión de Cemento en la Tabula Rasa y Arbitraje del Pelotazo: John Locke ante el Catastro del Suelo Español
-
-<div align="center">
-
-[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
-[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/STATUS.md)
-
-</div>
-
 Si Immanuel Kant ejecutó una auditoría del middleware cognitivo humano, John Locke fue el arquitecto del sistema de archivos. Locke (1632-1704) no teorizaba sobre el espíritu; operaba como un ingeniero de sistemas empíricos encargado de diseñar el firmware de entrada de datos de la mente. Su *Ensayo sobre el entendimiento humano* (1689) y sus *Dos tratados sobre el gobierno civil* (1690) sentaron las bases para dos de las mayores invariantes del software moderno: la inicialización de memoria limpia (`tabula rasa`) y el protocolo de prueba de trabajo (el trabajo mezclado con la materia prima como origen de la propiedad). 
 
 Hoy, cuando el idealismo lockeano del contrato social y el valor del trabajo físico se enfrenta al costumbrismo inmobiliario español y la burocracia del catastro, el sistema de Locke revela sus mayores fricciones y asimetrías de diseño.
