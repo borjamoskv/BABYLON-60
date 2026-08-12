@@ -38,7 +38,7 @@ use core::hint::spin_loop;
 use crate::manifest::{SharedManifest, MAX_RETRIES};
 
 // ---------------------------------------------------------------------------
-// Helpers de microarquitectura AArch64 / ARMv9
+// Morfismos de microarquitectura AArch64 / ARMv9
 // ---------------------------------------------------------------------------
 
 /// Barrera de memoria de lectura-lectura física `dmb ishld` para AArch64.
@@ -112,6 +112,7 @@ pub fn publish(m: &SharedManifest, epoch: u64, hash: &[u64; 4]) {
 // Lector (puro-de-carga) — INV-2
 // ---------------------------------------------------------------------------
 
+/// Lee de forma atómica y libre de locks el `epoch_id` y `payload_hash` desde el manifiesto.
 #[inline]
 #[must_use]
 pub fn read(m: &SharedManifest) -> Option<(u64, [u64; 4])> {

@@ -86,19 +86,19 @@ Exportador integrado que genera certificados auditables para las autoridades de 
 
 | Módulo del Subproyecto | Documentación README | Enfoque / Tecnología |
 | :--- | :--- | :--- |
-| **Rust Kernel** | [`kernel/`](./kernel/README.md) | Motor de ejecución `#![no_std]`, scheduler $F_{60}$, cuarentena WORM. |
-| **Cortex Substrate** | [`cortex/`](./cortex/README.md) | Memoria cognitiva Python (`cortex-persist`), SQLite WAL, Servidor MCP. |
-| **Sovereign IDE** | [`babylon60-ide/`](./babylon60-ide/README.md) | IDE Tauri v2 Escritorio/Móvil, backend FastAPI OpenRouter, IPC Iceoryx2. |
-| **Web Telemetry UI** | [`web/`](./web/README.md) | Visualizador de telemetría React 18 + WASM y montado local via FSA API. |
-| **Tonnetz Human Oversight**| [`tonnetz_app/`](./tonnetz_app/README.md) | Visualizador armónico tórico Neo-Riemanniano (EU AI Act Art. 14). |
-| **Causal Attestation** | [`attestation/`](./attestation/README.md) | Notariado hardware TPM 2.0 PCR Quote y anclaje de raíz Merkle. |
-| **DSL Compiler** | [`compiler/`](./compiler/README.md) | Lexer/Parser `.b60`, Bytecode IR B60, emisor de teoremas Lean 4. |
-| **Strike RS Acceleration**| [`strike_rs/`](./strike_rs/README.md) | Bypass nativo del GIL PyO3, memoria compartida Iceoryx2, motor BLAKE3. |
-| **Master Ledger BFT** | [`babylon60/bft/`](./babylon60/bft/README.md) | Log Tamper-Evident Escalón 3 con testigo externo Git Sentinel. |
-| **EVM On-Chain Notary** | [`anvil_yung/`](./anvil_yung/README.md) | Smart contracts Foundry para notariado de raíz Merkle en EVM. |
-| **Causal Transpiler** | [`causal_isomorphism/`](./causal_isomorphism/README.md)| Transpilador funcional F# y verificador de tipos lineales. |
-| **Continuous Timeline IR** | [`timeline_ir/`](./timeline_ir/README.md) | Kernel de simulación de grafos de estado en tiempo continuo ($State(t)$). |
-| **APEX Clinical Copilot** | [`docs/06_theory/`](./docs/06_theory/README_APEX.md) | Copiloto determinista de riesgo de enmiendas en ensayos clínicos. |
+| **Rust Kernel** | [`crates/babylon60-kernel/`](./crates/babylon60-kernel/README.md) | Motor de ejecución `#![no_std]`, scheduler $F_{60}$, cuarentena WORM. |
+| **Cortex Substrate** | [`packages/cortex/`](./packages/cortex/README.md) | Memoria cognitiva Python (`cortex-persist`), SQLite WAL, Servidor MCP. |
+| **Sovereign IDE** | [`apps/babylon60-ide/`](./apps/babylon60-ide/README.md) | IDE Tauri v2 Escritorio/Móvil, backend FastAPI OpenRouter, IPC Iceoryx2. |
+| **Web Telemetry UI** | [`apps/web/`](./apps/web/README.md) | Visualizador de telemetría React 18 + WASM y montado local via FSA API. |
+| **Tonnetz Human Oversight**| [`apps/tonnetz_app/`](./apps/tonnetz_app/README.md) | Visualizador armónico tórico Neo-Riemanniano (EU AI Act Art. 14). |
+| **Causal Attestation** | [`tools/attestation/`](./tools/attestation/README.md) | Notariado hardware TPM 2.0 PCR Quote y anclaje de raíz Merkle. |
+| **DSL Compiler** | [`crates/babylon60-compiler/`](./crates/babylon60-compiler/README.md) | Lexer/Parser `.b60`, Bytecode IR B60, emisor de teoremas Lean 4. |
+| **Strike RS Acceleration**| [`crates/strike-rs/`](./crates/strike-rs/README.md) | Bypass nativo del GIL PyO3, memoria compartida Iceoryx2, motor BLAKE3. |
+| **Master Ledger BFT** | [`packages/babylon60/bft/`](./packages/babylon60/bft/README.md) | Log Tamper-Evident Escalón 3 con testigo externo Git Sentinel. |
+| **EVM On-Chain Notary** | [`experiments/anvil_yung/`](./experiments/anvil_yung/README.md) | Smart contracts Foundry para notariado de raíz Merkle en EVM. |
+| **Causal Transpiler** | [`experiments/causal_isomorphism/`](./experiments/causal_isomorphism/README.md)| Transpilador funcional F# y verificador de tipos lineales. |
+| **Continuous Timeline IR** | [`experiments/timeline_ir/`](./experiments/timeline_ir/README.md) | Kernel de simulación de grafos de estado en tiempo continuo ($State(t)$). |
+| **APEX Clinical Copilot** | [`docs/04_research/`](./docs/04_research/README_APEX.md) | Copiloto determinista de riesgo de enmiendas en ensayos clínicos. |
 | **Documentation Hub** | [`docs/`](./docs/README.md) | Índice central de especificaciones, whitepapers y playbooks GTM. |
 
 ---

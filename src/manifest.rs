@@ -64,14 +64,20 @@ pub const MAX_RETRIES: usize = 10_000;
 /// diseño seqlock. Usar `mmap`, `Box::leak`, o pool estático.
 #[repr(C, align(64))]
 pub struct SharedManifest {
+    /// Flag de estado del manifiesto compartido.
     pub status_flag: AtomicU32,
+    /// Número de secuencia para sincronización seqlock.
     pub seq: AtomicU32,
+    /// Identificador de época (epoch).
     pub epoch_id: AtomicU64,
+    /// Hash del payload compuesto por 4 palabras de 64 bits.
     pub payload_hash: [AtomicU64; 4],
+    /// Padding para alineamiento de línea de caché (64 bytes).
     pub _padding: [u8; 16],
 }
 
 impl SharedManifest {
+    /// Crea una nueva instancia de `SharedManifest` inicializada.
     #[must_use]
     pub const fn new() -> Self {
         Self {
@@ -88,6 +94,7 @@ impl SharedManifest {
         }
     }
 
+    /// Crea una instancia de `SharedManifest` con todos los campos en cero.
     #[must_use]
     pub const fn zeroed() -> Self {
         Self::new()
