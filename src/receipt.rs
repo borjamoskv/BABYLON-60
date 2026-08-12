@@ -58,12 +58,7 @@
 extern crate alloc;
 use alloc::vec::Vec;
 
-use core::sync::atomic::Ordering;
-
-use coset::{
-    CborSerializable, CoseSign1Builder, HeaderBuilder,
-    iana,
-};
+use coset::CborSerializable;
 
 use crate::manifest::{SharedManifest, HaltReason};
 
@@ -244,6 +239,7 @@ pub fn emit_halt_receipt_null(m: &SharedManifest, motivo: HaltReason) -> Vec<u8>
 // Nota: para una implementación de producción usar ciborium correctamente.
 // Estos helpers codifican solo los tipos necesarios para el Halt_Payload.
 
+#[allow(dead_code)]
 fn cbor_uint(buf: &mut Vec<u8>, v: u64) {
     if v <= 0x17 {
         buf.push(v as u8);
@@ -262,6 +258,7 @@ fn cbor_uint(buf: &mut Vec<u8>, v: u64) {
     }
 }
 
+#[allow(dead_code)]
 fn cbor_bstr(buf: &mut Vec<u8>, data: &[u8]) {
     let len = data.len() as u64;
     if len <= 0x17 {
@@ -273,6 +270,7 @@ fn cbor_bstr(buf: &mut Vec<u8>, data: &[u8]) {
     buf.extend_from_slice(data);
 }
 
+#[allow(dead_code)]
 fn cbor_tstr(buf: &mut Vec<u8>, s: &str) {
     let len = s.len() as u64;
     if len <= 0x17 {
@@ -284,6 +282,7 @@ fn cbor_tstr(buf: &mut Vec<u8>, s: &str) {
     buf.extend_from_slice(s.as_bytes());
 }
 
+#[allow(dead_code)]
 /// Construye el mapa CWT_Claims CBOR para iss(1) y sub(2).
 /// {1: "urn:babylon60:operator", 2: "urn:babylon60:shared-manifest"}
 fn build_cwt_claims() -> Vec<u8> {
