@@ -240,7 +240,8 @@ def main() -> None:
         if getattr(args, "json", False): cmd_args.append("--json")
         sys.exit(run_subcommand("c5_quality_gates/audit_scripts_quality.py", cmd_args + unknown))
     elif args.command == "fast-smt":
-        sys.exit(run_subcommand("c5_verifiers/fast_smt_gate.py", unknown))
+        cmd_args = ["--json"] if getattr(args, "json", False) else []
+        sys.exit(run_subcommand("c5_verifiers/fast_smt_gate.py", cmd_args + unknown))
     elif args.command == "preserve":
         sys.exit(run_subcommand("c5_log_custody/c5_preserve_logs.py", ["--provider", args.provider] + unknown))
     elif args.command == "swarm":
