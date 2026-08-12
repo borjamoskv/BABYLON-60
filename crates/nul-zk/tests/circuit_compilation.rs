@@ -1,4 +1,4 @@
-use nul_zk::{compile_nul_source, parse_circuit, Compiler, Gate};
+use nul_zk::{compile_nul_source, Gate};
 
 #[test]
 fn test_multiplier_circuit_compilation() {
