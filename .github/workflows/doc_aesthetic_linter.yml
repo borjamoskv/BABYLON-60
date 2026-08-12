@@ -1,0 +1,29 @@
+name: C5-REAL Documentation Aesthetics & Rigor Linter
+
+on:
+  push:
+    paths:
+      - 'docs/**/*.md'
+      - 'scripts/lint_doc_aesthetics.py'
+  pull_request:
+    paths:
+      - 'docs/**/*.md'
+      - 'scripts/lint_doc_aesthetics.py'
+
+jobs:
+  audit-documentation-aesthetics:
+    name: Audit Markdown Visual Invariants
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Execute C5-REAL Documentation Aesthetic Linter
+        run: |
+          python3 scripts/lint_doc_aesthetics.py

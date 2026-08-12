@@ -4,9 +4,18 @@ status: Causal-Determinist
 version: 1.0.0
 ---
 
-# 05 — Teoría de Modelos
+# 🧬 05 — Teoría de Modelos
 
-## 5.1 Structures and Models
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
+
+</div>
+
+
+## 5.1 🏛️ Structures and Models
 
 A **structure** (or model) $\mathfrak{A}$ for a first-order language $\mathcal{L}$ consists of:
 - A non-empty **domain** (universe) $|\mathfrak{A}|$
@@ -16,9 +25,10 @@ A structure $\mathfrak{A}$ is a **model** of a theory $T$ (written $\mathfrak{A}
 
 The **standard model** of Robinson Arithmetic $Q$ is $\mathbb{N} = (\mathbb{N}, 0, S, +, \cdot)$ with their usual interpretations. But $Q$ admits many **non-standard models**.
 
-## 5.2 The Compactness Theorem
+## 5.2 🛡️ The Compactness Theorem
 
-> **Theorem:** A set of sentences $\Gamma$ has a model if and only if every **finite** subset of $\Gamma$ has a model.
+> [!IMPORTANT]
+> ### Theorem:** A set of sentences $\Gamma$ has a model if and only if every **finite** subset of $\Gamma$ has a model.
 
 ### Proof (Two Routes)
 
@@ -52,7 +62,7 @@ If a theory has an infinite model, it has models of every infinite cardinality (
 
 The name "compactness" comes from topology. For each sentence $\phi$, define $[\phi] = \{\text{models of } \phi\}$. These form a base for the **Stone space** of the theory. Logical compactness **is** topological compactness of this Stone space.
 
-## 5.3 The Löwenheim-Skolem Theorem
+## 5.3 🛡️ The Löwenheim-Skolem Theorem
 
 ### Downward (Löwenheim 1915, Skolem 1920)
 
@@ -87,9 +97,10 @@ ZFC proves that uncountable sets exist ($\mathbb{R}$, $\mathcal{P}(\mathbb{N})$)
 | **Internal** (within $\mathcal{M}$) | **Yes** — no bijection $\mathbb{N}^{\mathcal{M}} \to \mathbb{R}^{\mathcal{M}}$ in $\mathcal{M}$ |
 | **External** (from outside) | **No** — $\mathcal{M}$ is countable, so everything in it is |
 
-## 5.4 Lindström's Theorem (1969)
+## 5.4 🛡️ Lindström's Theorem (1969)
 
-> **Theorem (Lindström):** First-order logic is the **most expressive logic** satisfying both:
+> [!IMPORTANT]
+> ### Theorem (Lindström):** First-order logic is the **most expressive logic** satisfying both:
 > (a) The Compactness Theorem, and
 > (b) The Downward Löwenheim-Skolem Theorem.
 
@@ -129,9 +140,10 @@ First-order logic is a **fixed point** in the space of all possible logics:
  └────────────────────────────────────────┘
 ```
 
-## 5.5 Tennenbaum's Theorem (1959)
+## 5.5 🛡️ Tennenbaum's Theorem (1959)
 
-> **Theorem (Tennenbaum):** There is no **computable non-standard model** of Peano Arithmetic ($PA$). If $\mathcal{M} \models PA$ and $\mathcal{M} \not\cong \mathbb{N}$, then $+^{\mathcal{M}}$ and $\cdot^{\mathcal{M}}$ are not computable.
+> [!IMPORTANT]
+> ### Theorem (Tennenbaum):** There is no **computable non-standard model** of Peano Arithmetic ($PA$). If $\mathcal{M} \models PA$ and $\mathcal{M} \not\cong \mathbb{N}$, then $+^{\mathcal{M}}$ and $\cdot^{\mathcal{M}}$ are not computable.
 
 ### Contrast with $Q$
 
@@ -148,7 +160,7 @@ $\mathbb{N}$ is, in a sense, the **only computationally accessible model** of $P
 
 For $Q$, non-standard models are **algorithmically real** — you can program one.
 
-## 5.6 Categoricity and Its Impossibility
+## 5.6 📌 Categoricity and Its Impossibility
 
 A theory is **categorical** if it has exactly one model (up to isomorphism). Löwenheim-Skolem implies:
 
@@ -158,7 +170,7 @@ $Q$ cannot "fix" its intended model as $\mathbb{N}$. Neither can $PA$. To achiev
 
 This is the **irreducible dilemma** at the heart of mathematical foundations.
 
-## 5.7 References
+## 5.7 📌 References
 
 - Lindström, P. (1969). "On extensions of elementary logic." *Theoria*, 35(1), 1–11.
 - Tennenbaum, S. (1959). "Non-Archimedean models for arithmetic." *Notices of the AMS*, 6, 270.

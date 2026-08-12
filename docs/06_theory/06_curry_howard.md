@@ -4,9 +4,18 @@ status: Causal-Determinist
 version: 1.0.0
 ---
 
-# 06 — La Correspondencia Curry-Howard-Lambek
+# 🧬 06 — La Correspondencia Curry-Howard-Lambek
 
-## 6.1 The Trilateral Isomorphism
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
+
+</div>
+
+
+## 6.1 🏛️ The Trilateral Isomorphism
 
 The **Curry-Howard-Lambek correspondence** (also known as the Curry-Howard isomorphism or formulas-as-types isomorphism) establishes a profound structural identity between three previously distinct fields of mathematics:
 
@@ -29,7 +38,7 @@ Under this correspondence:
 - **Proving a theorem** is literally **writing a program** that inhabits a specified type.
 - **Checking a proof** is literally **type-checking a program**.
 
-## 6.2 Intuitionistic vs. Classical Logic
+## 6.2 📌 Intuitionistic vs. Classical Logic
 
 The standard Curry-Howard correspondence maps directly to **Constructive / Intuitionistic Logic**, not classical logic:
 
@@ -37,7 +46,7 @@ The standard Curry-Howard correspondence maps directly to **Constructive / Intui
 - Under Curry-Howard, a proof of $\phi \lor \psi$ must explicitly provide either a proof of $\phi$ or a proof of $\psi$ (a tagged union value `Left(a)` or `Right(b)`).
 - Classical logic corresponds to computational systems with **control operators / continuations** (such as Scheme's `call/cc` or Parigot's $\lambda\mu$-calculus).
 
-## 6.3 Inhabitance and Type Checking
+## 6.3 📌 Inhabitance and Type Checking
 
 | Problem | Logical Statement | Computational Meaning | Decidability |
 | :--- | :--- | :--- | :---: |
@@ -50,7 +59,7 @@ In rich type systems capable of dependent types and arithmetic (such as Coq, Lea
 1. **Gödel's First Theorem** translates to: There exist valid types $A$ such that $A$ is true in the intended model, but **no term $e : A$ can be constructed** within the formal system.
 2. **Uninhabited Types:** The type representing consistency `Con(System)` is an inhabited type in reality (if consistent), but **no term of type `Con(System)` can be written in the system itself** (Second Incompleteness Theorem).
 
-## 6.4 Robinson's Q in Type Theory
+## 6.4 📌 Robinson's Q in Type Theory
 
 When we express Robinson Arithmetic $Q$ inside a dependently typed language (such as Lean 4 or Agda):
 
@@ -69,7 +78,7 @@ theorem add_zero_left (x : QNat) : QAdd QZero x = x := by
   sorry
 ```
 
-## 6.5 Homotopy Type Theory (HoTT) and Univalence
+## 6.5 📌 Homotopy Type Theory (HoTT) and Univalence
 
 Modern developments extend Curry-Howard to topology via **Homotopy Type Theory**:
 
@@ -81,12 +90,12 @@ Modern developments extend Curry-Howard to topology via **Homotopy Type Theory**
 
 In HoTT, structural isomorphism (like Weisfeiler-Lehman graph equivalence in **INV_C5_28**) is formally unified with identity, providing a type-theoretic foundation for structural equivalence.
 
-## 6.6 Implications for BABYLON-60
+## 6.6 📌 Implications for BABYLON-60
 
 - **Proof IR as Type Signatures:** In BABYLON-60, executable proofs (`proof_ir`) are first-class terms whose verification is pure type-checking (decidable in $O(N)$ time), while proof generation is type inhabitance search (undecidable in general).
 - **Decidable Verification vs. Undecidable Synthesis:** Execution/Verification is always $\Sigma_1$ (type-checking a given trace). Synthesis is $\Pi_1$ or higher.
 
-## 6.7 References
+## 6.7 📌 References
 
 - Howard, W. A. (1980). "The formulae-as-types notion of construction." *Essays on Combinatory Logic, Lambda Calculus and Formalism*, pp. 479–490.
 - Wadler, P. (2015). "Propositions as Types." *Communications of the ACM*, 58(12), 75–84.

@@ -4,15 +4,24 @@ status: Causal-Determinist
 version: 1.0.0
 ---
 
-# 08 — Arquitectura BABYLON-60 e Invariantes del Sistema
+# 🧬 08 — Arquitectura BABYLON-60 e Invariantes del Sistema
 
-## 8.1 Metamathematical Mapping to BABYLON-60
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
+
+</div>
+
+
+## 8.1 📌 Metamathematical Mapping to BABYLON-60
 
 The theoretical foundations detailed in documents [01](./01_robinson_arithmetic.md)–[07](./07_cross_domain.md) are not abstract exercises; they directly dictate the architectural invariants, verification limits, and engineering primitives of the BABYLON-60 platform.
 
 This document explicitly maps each metamathematical limit to its corresponding operational invariant in the codebase.
 
-## 8.2 Architectural Mapping Matrix
+## 8.2 📌 Architectural Mapping Matrix
 
 | Metamathematical Principle | Limiting Factor | System Response in BABYLON-60 | Enforcing Invariant / Rule |
 | :--- | :--- | :--- | :--- |
@@ -23,7 +32,7 @@ This document explicitly maps each metamathematical limit to its corresponding o
 | **AST Nesting Depth Ceiling** | High AST control flow complexity ($\ge 5$) impedes static proof extraction | Python code within `babylon60/` enforces nesting depth $\le 4$ per function | **GELABP_DEPTH_INVARIANT** |
 | **Sovereign Dual-Licensing** | Monopolistic licensing restricts sovereign user execution | 100% free, open-source, sovereign component access | **INV_C5_17** (Sovereign Dual-Licensing) |
 
-## 8.3 Operational Invariants Breakdown
+## 8.3 📌 Operational Invariants Breakdown
 
 ### 8.3.1 Non-Silent Collision Fail-Fast (INV_BFT_04)
 
@@ -49,7 +58,7 @@ This document explicitly maps each metamathematical limit to its corresponding o
 
 **Theoretical Rationale:** Deep control flow nesting rapidly increases the number of execution paths ($O(2^d)$ for depth $d$), expanding the complexity of formal proof extraction. Capping depth $\le 4$ maintains bounded path verification.
 
-## 8.4 Verification System Architecture
+## 8.4 🏗️ Verification System Architecture
 
 ```mermaid
 graph TD
@@ -73,7 +82,7 @@ graph TD
     HYPER <--> AST
 ```
 
-## 8.5 Conclusion: The Metamathematical Sovereignty of BABYLON-60
+## 8.5 📌 Conclusion: The Metamathematical Sovereignty of BABYLON-60
 
 BABYLON-60 is engineered under explicit recognition of Gödelian and Chaitinian limits:
 

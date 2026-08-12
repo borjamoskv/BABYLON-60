@@ -4,8 +4,17 @@ status: Causal-Determinist
 version: 1.0.0
 ---
 
-# 🏛️ Fundamentos Teóricos de BABYLON-60
+# 🧬 🏛️ Fundamentos Teóricos de BABYLON-60
 > **Metamatemática, Teoría de la Información y Arquitectura de Verificación**
+
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
+
+</div>
+
 
 <div align="center">
 
@@ -26,7 +35,7 @@ This documentation suite establishes the **metamathematical, information-theoret
 
 ---
 
-## 2. 🗺️ Reading & Dependency Graph
+## 2. 📌 🗺️ Reading & Dependency Graph
 
 ```mermaid
 flowchart TD
@@ -71,7 +80,7 @@ flowchart TD
 
 ---
 
-## 3. 📚 Master Index of Theory Modules
+## 3. 📌 📚 Master Index of Theory Modules
 
 | # | Module Document | Core Metamathematical Topic | System Mapping | Invariant Link |
 | :---: | :--- | :--- | :--- | :--- |
@@ -90,7 +99,7 @@ flowchart TD
 
 ---
 
-## 4. 🧠 Universal Central Thesis
+## 4. 📌 🧠 Universal Central Thesis
 
 > [!IMPORTANT]
 > **Tesis Central de Cómputo e Incompletitud:**
@@ -98,7 +107,7 @@ flowchart TD
 
 ---
 
-## 5. ⚖️ License & Sovereignty
+## 5. 📌 ⚖️ License & Sovereignty
 
 > [!TIP]
 > All theory modules in this suite are published under **`INV_C5_17`** (Sovereign Dual-Licensing Invariant): 100% free, open-source, and sovereign for individuals, independent developers, and non-commercial usage.

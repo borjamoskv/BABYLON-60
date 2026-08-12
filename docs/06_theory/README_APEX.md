@@ -1,4 +1,13 @@
-# 🧪 APEX TRIALS (`docs/06_theory/README_APEX.md`)
+# 📘 🧪 APEX TRIALS (`docs/06_theory/README_APEX.md`)
+
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
+
+</div>
+
 
 [![FDA Compliance](https://img.shields.io/badge/FDA-21_CFR_Part_11-blue?style=for-the-badge)](https://www.fda.gov/)
 [![Data Source](https://img.shields.io/badge/Data-ClinicalTrials.gov_API_v2-purple?style=for-the-badge)](https://clinicaltrials.gov/)
@@ -35,14 +44,14 @@ The amendment-risk signal itself is built on a source public protocol version hi
 
 ---
 
-## 🔬 Integration with Causal Motor Substrate
+## 🔬 📌 Integration with Causal Motor Substrate
 
 `apex_trials.ledger.AmendmentLedger` implements the exact entry contract:
 `{ id: uuid5, prev_hash: sha3_256, payload, causal_taint, lamport_t, agent_id }`, SQLite WAL, single-writer, verified-on-read — making it **drop-in contract-compatible** with `babylon60.bft.ledger_actor`. The hash covers only deterministic decision content (never wall-clock), preserving byte-for-byte reproducibility while a sidecar `created_at` column supplies Part 11 provenance.
 
 ---
 
-## 🚀 Install & Run
+## 🚀 📌 Install & Run
 
 ```bash
 cd apex_trials

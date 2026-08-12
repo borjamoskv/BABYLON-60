@@ -4,9 +4,18 @@ status: Causal-Determinist
 version: 1.0.0
 ---
 
-# 04 — Chaitin, Kolmogorov y Teoría de Información Algorítmica
+# 🧬 04 — Chaitin, Kolmogorov y Teoría de Información Algorítmica
 
-## 4.1 Kolmogorov Complexity
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
+
+</div>
+
+
+## 4.1 🏛️ Kolmogorov Complexity
 
 ### Definition
 
@@ -26,7 +35,8 @@ Kolmogorov complexity is therefore an **intrinsic property** of the string, not 
 
 ### Non-Computability
 
-> **Theorem:** $K(x)$ is **not computable**. No algorithm can calculate $K(x)$ for arbitrary $x$.
+> [!IMPORTANT]
+> ### Theorem:** $K(x)$ is **not computable**. No algorithm can calculate $K(x)$ for arbitrary $x$.
 
 **Proof (Berry's Paradox variant):**
 
@@ -46,7 +56,7 @@ BERRY(n):
 2. **Most strings are incompressible:** For strings of length $n$, at least $2^n(1 - 2^{-c})$ have $K(x) \ge n - c$. For $c = 10$: over 99.9% are incompressible.
 3. **Structured strings are compressible:** $K(\pi_n) = O(\log n)$ because $\pi$ has a short generating algorithm.
 
-## 4.2 Shannon Entropy vs. Kolmogorov Complexity
+## 4.2 📌 Shannon Entropy vs. Kolmogorov Complexity
 
 | | Shannon $H$ | Kolmogorov $K$ |
 | :--- | :--- | :--- |
@@ -55,18 +65,21 @@ BERRY(n):
 | **Computable?** | Yes | No |
 | **Connection** | $E[K(X)] \approx H(X)$ for ergodic sources | Shannon is the "average" of Kolmogorov |
 
-## 4.3 Martin-Löf Randomness
+## 4.3 📌 Martin-Löf Randomness
 
-> **Definition (Martin-Löf, 1966):** An infinite sequence $\alpha$ is **ML-random** if it passes every effectively given statistical test — i.e., it belongs to no computably enumerable set of measure zero.
+> [!NOTE]
+> ### Definition (Martin-Löf, 1966):** An infinite sequence $\alpha$ is **ML-random** if it passes every effectively given statistical test — i.e., it belongs to no computably enumerable set of measure zero.
 
-> **Theorem (Schnorr-Levin):** $\alpha$ is ML-random **if and only if** its prefixes are incompressible:
+> [!IMPORTANT]
+> ### Theorem (Schnorr-Levin):** $\alpha$ is ML-random **if and only if** its prefixes are incompressible:
 > $$\forall n: \; K(\alpha \restriction n) \ge n - O(1)$$
 
 A sequence is random if and only if **no program can compress it significantly**.
 
-## 4.4 Chaitin's Incompleteness Theorem
+## 4.4 🛡️ Chaitin's Incompleteness Theorem
 
-> **Theorem (Chaitin, 1974):** For every consistent formal theory $T \supseteq Q$, there exists a constant $c_T$ such that $T$ **cannot prove** any sentence of the form $K(s) > c_T$, for any string $s$.
+> [!IMPORTANT]
+> ### Theorem (Chaitin, 1974):** For every consistent formal theory $T \supseteq Q$, there exists a constant $c_T$ such that $T$ **cannot prove** any sentence of the form $K(s) > c_T$, for any string $s$.
 
 ### Proof
 
@@ -96,7 +109,7 @@ A formal theory's "resolution" for randomness is bounded by the Kolmogorov compl
 
 This mirrors Robinson's asymmetry: $Q$ is $\Sigma_1$-complete but $\Pi_1$-incomplete.
 
-## 4.5 Chaitin's Number $\Omega$
+## 4.5 📌 Chaitin's Number $\Omega$
 
 ### Definition
 
@@ -117,7 +130,7 @@ Each bit of $\Omega$ encodes the answer to an instance of the Halting Problem. K
 
 A theory $T \supseteq Q$ can determine **finitely many bits** of $\Omega$ — exactly $c_T$. After that, each bit is an arithmetic truth beyond $T$'s reach.
 
-## 4.6 Incompleteness as a Compression Limit
+## 4.6 📌 Incompleteness as a Compression Limit
 
 Chaitin demonstrated that Gödel's Incompleteness Theorems are **special cases** of a general information-theoretic phenomenon:
 
@@ -130,7 +143,7 @@ Chaitin demonstrated that Gödel's Incompleteness Theorems are **special cases**
 
 > **A formal theory is a finite program that generates truths. The Kolmogorov complexity of its axioms determines exactly how much randomness it can "see." Beyond that horizon, infinitely many mathematical truths exist that the theory cannot prove — not by design defect, but because those truths contain more information than the axioms themselves. Gödel's incompleteness, in its most distilled form, is the fact that no finite compressor can capture incompressible data.**
 
-## 4.7 Thermodynamic Analogy
+## 4.7 📌 Thermodynamic Analogy
 
 | Thermodynamics | Information Theory | Incompleteness |
 | :--- | :--- | :--- |
@@ -141,7 +154,7 @@ Chaitin demonstrated that Gödel's Incompleteness Theorems are **special cases**
 | Finite heat engine | Finite theory $T$ | Program $P_T$ |
 | **Cannot extract more work than energy available** | **Cannot compress beyond $K(s)$** | **Cannot prove beyond $K(\text{axioms})$** |
 
-## 4.8 Escaping the Horizon
+## 4.8 📌 Escaping the Horizon
 
 | Strategy | Works? | Cost |
 | :--- | :--- | :--- |
@@ -150,7 +163,7 @@ Chaitin demonstrated that Gödel's Incompleteness Theorems are **special cases**
 | Self-modification | No — Löb forbids self-verification | Cannot prove improved version is consistent |
 | Randomness as axiom ($\Omega$ bits) | Yes, but bits are "brute truths" | Abandonment of rational explanation |
 
-## 4.9 The Three Independent Discoverers
+## 4.9 📌 The Three Independent Discoverers
 
 | Author | Year | Motivation |
 | :--- | :---: | :--- |
@@ -160,7 +173,7 @@ Chaitin demonstrated that Gödel's Incompleteness Theorems are **special cases**
 
 Three completely different motivations → the same mathematical concept. This suggests $K(x)$ is a **natural concept**, not an artifact of any particular perspective.
 
-## 4.10 References
+## 4.10 🏛️ References
 
 - Kolmogorov, A. N. (1965). "Three approaches to the quantitative definition of information." *Problems of Information Transmission*, 1(1), 1–7.
 - Chaitin, G. J. (1974). "Information-Theoretic Limitations of Formal Systems." *Journal of the ACM*, 21(3), 403–424.

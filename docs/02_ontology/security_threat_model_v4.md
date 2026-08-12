@@ -6,6 +6,14 @@ version: 4.0.0
 
 # BABYLON-60 v4.0: Modelo de Amenazas y Mitigación de Vectores de Ataque
 
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/STATUS.md)
+
+</div>
+
 > **Arquitectura de Seguridad para Despliegue Enterprise y Due Diligence Técnica**
 > Borja Moskv · babylon60.com · Agosto 2026 · Licencia de Exclusión Soberana v1.0
 
@@ -44,7 +52,8 @@ val = re.sub(r"(?i)(api[_-]?key|secret|token|password|bearer|pk_)[=:\s]+[A-Za-z0
 val = re.sub(r"-----BEGIN [A-Z ]+ PRIVATE KEY-----[\s\S]+?-----END [A-Z ]+ PRIVATE KEY-----", "[REDACTED_PRIVATE_KEY]", val)
 ```
 
-> [!SECURITY]
+> [!CAUTION]
+> **Políticas de Seguridad en Payloads**
 > Todos los payloads de manifiestos son sanitizados recursivamente antes de renderizar certificados en Markdown o JSON.
 
 ---

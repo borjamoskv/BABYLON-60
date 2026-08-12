@@ -1,5 +1,13 @@
 # OPSEC-Ω TASKFORCE-16 · ITERA-1 — Bitácora de mutación
 
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/STATUS.md)
+
+</div>
+
 > ⚓ **Nota de port (2026-08-12):** esta bitácora se recupera desde la PR #2
 > (`opsec/omega-itera1`), cerrada sin merge el 2026-07-27. El estado real de
 > cada acción a fecha de hoy figura en el cuerpo de la PR de port y en el
@@ -26,7 +34,7 @@ residual**: lo que el nuevo linaje aún deja abierto a pesar de estar limpio.
 ## Hallazgos accionables (verificados vía API + lectura de ficheros)
 
 | # | Hallazgo | Fichero | Severidad |
-|:--|:--|:--|:--|
+| :---: | :--- | :--- | :--- |
 | H1 | `run_backend.py` lanza `subprocess.run` sin allowlist | `run_backend.py` | media |
 | H2 | `except Exception` residual en rutas del IDE (AGENTS.md lo prohíbe) | `mcp_symbol_helper.py`, `routes/inference.py`, `routes/arena.py`, `scratch/*` | baja |
 | H3 | Dockerfile corre como **root** | `Dockerfile` | media |
@@ -43,8 +51,9 @@ residual**: lo que el nuevo linaje aún deja abierto a pesar de estar limpio.
 ## Los 16 agentes de ITERA-1
 
 | # | Agente | Misión | Ejecutor | Estado | Prueba |
-|:--|:--|:--|:--|:--|:--|
+| :---: | :--- | :--- | :--- | :---: | :--- |
 | Ω-01 | **Gitignore-Hardener** | `20_VAULT/`, `*.pem`, `*.key`, `*keypair*.json`, `.cortex/*.hex`, baselines | TASKFORCE-16 | ⬜ pendiente | `.gitignore` |
+
 | Ω-02 | **Secret-Scan-Verifier** | Confirmar secret scanning + push protection (GitHub los re-activó tras recrear el repo) | TASKFORCE-16 | ✅ HECHO (STATUS.md) | lectura STATUS.md |
 | Ω-03 | **Gitleaks-Armer** | `.gitleaks.toml` (3 reglas P0) | TASKFORCE-16 | ✅ HECHO | `.gitleaks.toml` |
 | Ω-04 | **Workflow-Installer** | `.github/workflows/gitleaks.yml` (capa CI) | OPERADOR (scope workflow) | ⬜ pendiente | Anexo abajo |

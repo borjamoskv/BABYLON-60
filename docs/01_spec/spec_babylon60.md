@@ -1,5 +1,13 @@
 # BABYLON-60: Especificación Formal (v2.5.1-Causal-Determinist)
 
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/STATUS.md)
+
+</div>
+
 > **Axioma Causal-Determinist:** El lenguaje no comunica; compila. Esta especificación formal define la semántica operacional, la máquina abstracta, los invariantes y el modelo de fallos de BABYLON-60, permitiendo a un asistente de pruebas (Lean 4 / Coq) razonar sobre los artefactos exportados sin ambigüedad.
 
 ---

@@ -9,6 +9,15 @@ version: 1.0.0
 
 <div align="center">
 
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
+
+</div>
+
+
+<div align="center">
+
 [![Verified Specification](https://img.shields.io/badge/Specification-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
 [![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
 [![Status](https://img.shields.io/badge/Estado-Zero_Redundancy-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
@@ -58,7 +67,7 @@ version: 1.0.0
 
 ---
 
-## 3. 🧩 Definiciones de Alto Nivel
+## 3. 📌 🧩 Definiciones de Alto Nivel
 
 | Concepto | Fórmula / Estructura | Mapeo Arquitectónico |
 | :--- | :---: | :--- |
@@ -139,7 +148,7 @@ $$ f^\dagger_p(y, x) = \lim_{\epsilon \to 0^+} \frac{f(x, y) \cdot p(x)}{(p \cdo
 
 ---
 
-## 7. 💻 Complejidad Algorítmica e Implementación
+## 7. 📌 💻 Complejidad Algorítmica e Implementación
 
 Para asegurar que la Desintegración Bayesiana no introduzca cuellos de botella termodinámicos en tiempo de ejecución (Run-Time), el operador $f^\dagger_p$ debe cumplir estrictas cotas de complejidad computacional.
 

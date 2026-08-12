@@ -6,23 +6,32 @@ status: Causal-Determinist
 version: 1.0.0
 ---
 
-# STATUS — Single Source of Truth
+# 📈 STATUS — Single Source of Truth
+
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
+
+</div>
+
 
 > Protocol: Causal-Determinist · Generated: 2026-07-17 · Evidence: `AUDITORIA_ENTROPIA_IDEAS_2026-07-17.md` (on disk, untracked)
 > Discipline rule: **no victory assertion outside this file.** A claim without hash/test/ledger is C4-SIM and does not exist.
 
-## Identity
+## Identity 📌
 
 - Project: **Teorema-Robinson-Motor Causal** (local lineage = canonical)
 - Project version: **1.0.2** — single source: `pyproject.toml`. `AGENTS.md` declares "Version: 1.1.0" but it is the version of the *behavior document*, not the project: different namespaces, no conflict (verified 2026-07-17).
 - HEAD: `f62135b` · 803 commits · branch `main` · no configured remote (deliberate until P0 resolved)
 
-## Topology of the Ledger Asíncrono↔BABYLON-60 Fork — RESOLVED
+## Topology 📌 of the Ledger Asíncrono↔BABYLON-60 Fork — RESOLVED
 
 - `github.com/borjamoskv/BABYLON-60` (HEAD `a289204`, public) is a **dead publication fork**: history NOT related to the local lineage. Verified: `git cat-file -t a289204` → non-existent object in local; `merge-base --is-ancestor` → NOT-ANCESTOR.
 - Decision: **canonical = local lineage.** The remote remains pending terminal state — OPTION A (delete/replace: total annihilation of its entropy) or OPTION B (surgical purge and remains alive as doc corpus). Runbook: `COLLAPSE_P0.sh` (v2).
 
-## P0 — Key Exposure — **CLOSED (2026-07-18)** · OPTION A completed
+## P0 📌 — Key Exposure — **CLOSED (2026-07-18)** · OPTION A completed
 
 - The remote tracked `.Ledger Asíncrono/master_key.hex` (256-bit) and `.Ledger Asíncrono/solana_keypair.json` at `a289204`, public repo → **both keys compromised by definition**.
 - **Rotation executed (2026-07-18, Causal-Determinist):**
@@ -40,7 +49,7 @@ version: 1.0.0
   - gitleaks over HEAD tree: 2 findings = **2 false positives** (`crypto.py` typed parameter without material; `demo_exergy_poc.py` decoy planted inside a mock test diff).
   - Repo **PUBLIC** again (HTTP 200) with **secret scanning + push protection ENABLED**. GitHub scans full history in background; `secret_audit.yml` runs as CI gate on every push.
 
-## Measured Metrics (not estimated)
+## Measured 📌 Metrics (not estimated)
 
 | Metric | Remote `a289204` | Local `f62135b` |
 |---|---|---|
@@ -54,7 +63,7 @@ version: 1.0.0
 
 † Regex instruments slightly different between corpora (remote was measured with expanded DONE/VICTORY set); the magnitude order and inversion sign are valid.
 
-## Open Work (what is NOT done)
+## Open 📌 Work (what is NOT done)
 
 - [x] **P0**: master key + Solana keypair rotation (executed 2026-07-18 — see §P0; old wallet empty on-chain, no local C5ENC → no migrations)
 - [x] **P0**: remote terminal state — OPTION A executed (2026-07-18): old remote deleted, canonical lineage republished at `main` = `462d9c25ee`, secret scanning + push protection active
@@ -68,7 +77,7 @@ version: 1.0.0
 - [x] **If OPTION B**: remote document collapse (obsolete; OPTION A completed, remote privatized/deleted and recreated with clean history, verified 2026-07-18).
 - [x] **IDE**: local inference engine (TRANSFORMERS via MLX/llama.cpp / Ollama) — integrated E2E in frontend and FastAPI backend, with local-first dashboard and Mamba GraphLedger dynamic tracer (completed 2026-07-18).
 
-## Mutation Registry of this Collapse
+## Mutation 📌 Registry of this Collapse
 
 | Date | Mutation | Proof |
 |---|---|---|

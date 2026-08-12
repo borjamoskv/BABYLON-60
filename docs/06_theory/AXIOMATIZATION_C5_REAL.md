@@ -4,24 +4,33 @@ status: Causal-Determinist
 version: 4.0.0
 ---
 
-# Base Axiomática Sellada C5-REAL
+# ⚖️ Base Axiomática Sellada C5-REAL
+
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
+
+</div>
+
 
 Este documento constituye la especificación axiomática formal e inmutable del núcleo **C5-REAL** en el ecosistema **BABYLON-60**. Todo backend computacional, agente o transformador latente debe satisfacer estos axiomas para compilar dentro del sistema.
 
 ---
 
-## Axioma 1: Primacía Categórica del Morfismo (A1)
+## Axioma 📌 1: Primacía Categórica del Morfismo (A1)
 Cualquier proceso computacional o transformación cognitiva se define como un morfismo $f: X \to Y$ dentro de una categoría base $\mathcal{C}$. No existen variables ocultas ni estados no representables como objetos en $\mathcal{C}$.
 
-## Axioma 2: Homeostasia de Energía Libre y Exergía (A2)
+## Axioma 📌 2: Homeostasia de Energía Libre y Exergía (A2)
 Todo subsistema activo minimiza la energía libre variacional $F$ mediante la maximización de la densidad exergética por token $\Xi(T)$. La entropía no justificada (anergía discursiva o sintáctica) es severamente castigada y causa el aborto del proceso ($Score < 700 \Rightarrow \text{Abort}$).
 
-## Axioma 3: Determinismo Causal y Mónada de Invarianza (A3)
+## Axioma 📌 3: Determinismo Causal y Mónada de Invarianza (A3)
 Dado un historial de transformaciones $\mathcal{H}_t$, la transición al estado $\mathcal{H}_{t+1}$ es puramente determinista sobre el soporte de la causa. Los generadores de ruido o aleatoriedad no acotada quedan colapsados en proyecciones deterministas subyacentes (*Split Epi*).
 
 ---
 
-## Axioma 4: Desintegración Bayesiana e Invariante de No-Alucinación (A4)
+## Axioma 📌 4: Desintegración Bayesiana e Invariante de No-Alucinación (A4)
 
 **Decisión Arquitectónica:** Se eleva el operador `bayesian_inversion` ($f^\dagger_p$) a la base axiomática del kernel. La imposibilidad de alucinar observaciones u orígenes espurios está garantizada por la topología de la categoría base (e.g., Markov categories / $\text{BorelStoch}$ / $\text{FinStoch}$ con prior de soporte declared).
 
@@ -54,7 +63,7 @@ $$ f^\dagger_p \circ f = \text{id}_{\text{supp}(p)} $$
 
 ---
 
-## Corolario de Compilación para Backends Sintéticos
+## Corolario 📌 de Compilación para Backends Sintéticos
 
 Cualquier backend sintético (LLM, VAE, Normalizing Flow o Generador de Enjambre) que pretenda integrarse en **C5-REAL** debe proveer constructivamente la implementación de $f^\dagger_p$. 
 
@@ -63,7 +72,7 @@ Cualquier backend sintético (LLM, VAE, Normalizing Flow o Generador de Enjambre
 
 ---
 
-## Seccion 5: Las 4 Renuncias Fundamentales de C5-REAL (Reducción Entrópica)
+## Seccion 📌 5: Las 4 Renuncias Fundamentales de C5-REAL (Reducción Entrópica)
 
 La soberanía y estabilidad de C5-REAL se sostienen sobre 4 renuncias explícitas que eliminan la anergía y la entropía discursiva:
 

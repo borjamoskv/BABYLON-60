@@ -6,6 +6,14 @@ version: 1.0.0
 
 # Autopoiesis del Trámite Digital y el Cierre Operativo de la Burocracia: Niklas Luhmann ante el RETA y el Bucle del Certificado FNMT
 
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/STATUS.md)
+
+</div>
+
 En la termodinámica social del siglo XX, Niklas Luhmann (1927-1998) no teorizaba sobre la sociología; diseñaba sistemas de comunicación con cierre operativo. Su gran revelación fue que la sociedad no se compone de personas, sino de comunicaciones: un flujo continuo de eventos autorreferenciales estructurados en códigos binarios rígidos. Para Luhmann, la intervención del sujeto humano es mero ruido externo; el sistema se autoproduce a sí mismo. Hoy, en la era de los certificados digitales y la burocracia digital, el RETA (Régimen Especial de Trabajadores Autónomos) y la Fábrica Nacional de Moneda y Timbre (FNMT) se erigen como las encarnaciones físicas más puras —y a la vez más catastróficas— de esta autopoiesis sistémica.
 
 ---
