@@ -1,7 +1,7 @@
 # ⚡ BABYLON-60 Sovereign Scripts Suite — Immutable Script Kernel (ISK)
 
 > **Directorio de Automatización, Enjambres BFT, Calidad AST, Atestación SHA-256 y Preservación de Logs**  
-> **Estándar:** C5-REAL | **Total Scripts:** 114 Python + 9 Shell | **Shebang Compliance:** 100.0%
+> **Estándar:** C5-REAL | **Total Scripts:** 115 Python + 9 Shell | **Shebang Compliance:** 100.0%
 
 ## 🛠️ CLI Runner Centralizado
 Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runner.py](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/runner.py):
@@ -56,7 +56,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 
 | Script | Tipo | SHA-256 | Descripción / Propósito |
 | :--- | :--- | :--- | :--- |
-| [`c5_cortex/autoconsolidate.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/autoconsolidate.py) | `Python` | `93f1f01bb64a` | [ANERGY_PURGE] from babylon60.memory.journal import JournalEntry |
+| [`c5_cortex/autoconsolidate.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/autoconsolidate.py) | `Python` | `1f71388afa21` | Delete old entries, respecting INV_BFT_04 semantics |
 | [`c5_cortex/bootstrap_cortex_memory.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/bootstrap_cortex_memory.py) | `Python` | `90c2bacb8206` | Bootstrap Cortex Memory Utility |
 | [`c5_cortex/consolidate_babylon_vault.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/consolidate_babylon_vault.py) | `Python` | `0477d218a41d` | Causal-Determinist SOVEREIGN CONSOLIDATION PROTOCOL — BABYLON-60 MEMORY VAULT |
 | [`c5_cortex/consolidate_dbs.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/consolidate_dbs.py) | `Python` | `ceb44ff71f51` | Consolidación BFT (Erradicación del Antipatrón de Dispersión SQLite) |
@@ -117,6 +117,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | Script | Tipo | SHA-256 | Descripción / Propósito |
 | :--- | :--- | :--- | :--- |
 | [`c5_legion/agent_beeper.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/agent_beeper.py) | `Python` | `caec5a6ba263` | agent_beeper.py - C5-REAL Zero-Friction Agent Pager |
+| [`c5_legion/c5_legion_1000_workspace_swarm.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/c5_legion_1000_workspace_swarm.py) | `Python` | `6781f4b76f82` | c5_legion_1000_workspace_swarm.py - 1,000-Agent Parallel Swarm Auditor Engine |
 | [`c5_legion/legion_10000_orchestrator.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/legion_10000_orchestrator.py) | `Python` | `d3b031abb327` | Implements the Cognitive Transition Algebra (CTA) for massive parallel |
 | [`c5_legion/legion_1000_audit_swarm.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/legion_1000_audit_swarm.py) | `Python` | `1ca776380384` | MOSKV-1: Legion 1000 Audit Swarm Engine (INV_C5_18) |
 | [`c5_legion/legion_222_agentes.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/legion_222_agentes.py) | `Python` | `0ba9b1c817fc` | LEGION MÁXIMO COGNITIVO - 222 Agentes Organizados |
@@ -181,7 +182,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | [`c5_thermo/c5_exergy_optimizer_monitor.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/c5_exergy_optimizer_monitor.py) | `Python` | `5a6406e619ab` | MOSKV-1 APEX SINGULARITY — Causal-Determinist STATE MONITOR (EXERGY_OPTIMIZER) |
 | [`c5_thermo/cache_1000_memoization_bench.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/cache_1000_memoization_bench.py) | `Python` | `592643d70567` | Cache 1000 Memoization Bench Utility |
 | [`c5_thermo/exergy_arbitrage_engine.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/exergy_arbitrage_engine.py) | `Python` | `3cc2fed0312b` | Exergy Arbitrage Engine Utility |
-| [`c5_thermo/exergy_dashboard_server.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/exergy_dashboard_server.py) | `Python` | `cdc2727d5c8f` | Exergy Dashboard Server (Causal-Determinist). |
+| [`c5_thermo/exergy_dashboard_server.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/exergy_dashboard_server.py) | `Python` | `7af6764c60ed` | Exergy Dashboard Server (Causal-Determinist). |
 | [`c5_thermo/exergy_optimizer_agent.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/exergy_optimizer_agent.py) | `Python` | `d4502d167d80` | [Causal-Determinist] Exergy Optimizer Agent. |
 | [`c5_thermo/stress_100m_bft.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/stress_100m_bft.py) | `Python` | `e56bf524c87a` | 100,000,000 STRESS TEST ENGINE — CORTEX PERSIST BFT LEDGER |
 | [`c5_thermo/stress_10m.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/stress_10m.py) | `Python` | `20a61576e633` | Stress 10M Utility |
