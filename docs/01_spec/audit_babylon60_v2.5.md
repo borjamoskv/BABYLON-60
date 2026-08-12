@@ -20,7 +20,7 @@ version: 2.5.1
 | **Demostrabilidad Formal** | B | **A** | Exportación a Lean 4 (`BabylonTrace.lean`) e isomorfismo Curry-Howard |
 | **Preparación para Producción**| C+ | **A−** | Transacciones WAL en SQLite, MTK y Quorum BFT ($N=3$) |
 | **Riesgo Científico (N-S)** | Alto | **Baja-Controlado** | Aritmética Base-60 con reducción GCD determinista y `BigInt` |
-| **Entropía Documental** | Alta | **Eliminada** | Fusión de especificaciones redundantes (`semantics.md` $\rightarrow$ `spec_babylon60.md`, `proof_ir.md` $\rightarrow$ `spec_proof_ir.md`) |
+| **Entropía Documental** | Alta | **Eliminada** | Fusión de especificaciones redundantes (`semantics.md` $\rightarrow$ `01_spec/spec_babylon60.md`, `proof_ir.md` $\rightarrow$ `01_spec/spec_proof_ir.md`) |
 
 ---
 
@@ -38,7 +38,7 @@ version: 2.5.1
 
 ### 🟢 Riesgo 3: Semántica Formal del Scheduler
 - **Problema:** Falta de especificación formal de estados de corrutinas (`Suspended`, `Waiting`, `Ready`).
-- **Resolución Implementada:** Especificación formal unificada en `spec_babylon60.md` con Small-Step Semantics ($\Gamma \vdash \text{FORK}$, $\Gamma \vdash \text{AWAIT}$, $\Gamma \vdash \text{AFTER}$).
+- **Resolución Implementada:** Especificación formal unificada en `01_spec/spec_babylon60.md` con Small-Step Semantics ($\Gamma \vdash \text{FORK}$, $\Gamma \vdash \text{AWAIT}$, $\Gamma \vdash \text{AFTER}$).
 
 ### 🟢 Riesgo 4: Especificación de Memoria y Tipos Lineales
 - **Problema:** Indefinición sobre inmutabilidad de registros y gestión del Heap.
@@ -67,8 +67,8 @@ version: 2.5.1
 
 ## 4. Estado de Cumplimiento del Roadmap (Hitos A - E)
 
-- [x] **Hito A:** Especificación formal `spec_babylon60.md` completada con Small-Step Semantics y modelo de máquina abstracta unificado.
+- [x] **Hito A:** Especificación formal `01_spec/spec_babylon60.md` completada con Small-Step Semantics y modelo de máquina abstracta unificado.
 - [x] **Hito B:** Intérprete de referencia en Rust (`babylon60.rs`) y Kernel en Python (`b60_kernel`).
 - [x] **Hito C:** Suite de conformidad y pruebas estresadas (`conformity_suite.py`, `b60_stress.py`).
-- [x] **Hito D:** Backend de exportación formal a Lean 4 (`BabylonTrace.lean` y `spec_proof_ir.md`).
-- [x] **Hito E:** Verificación determinista de firma de grafos (`spec_graph_canonical.md`) e integración L1 Bitcoin.
+- [x] **Hito D:** Backend de exportación formal a Lean 4 (`BabylonTrace.lean` y `01_spec/spec_proof_ir.md`).
+- [x] **Hito E:** Verificación determinista de firma de grafos (`01_spec/spec_graph_canonical.md`) e integración L1 Bitcoin.

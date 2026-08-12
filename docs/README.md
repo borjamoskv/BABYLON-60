@@ -85,7 +85,7 @@ BABYLON-60 abandons hardware-dependent physical intuition to embrace a category-
 | `[Simulation]`| **Continuous Timeline IR** | [`timeline_ir/`](../timeline_ir/README.md) | Continuous-time state graph simulation kernel ($State(t)$). |
 | `[Clinical]` | **APEX Clinical Copilot** | [`apex_trials/`](../apex_trials/) | Deterministic clinical-trial protocol amendment-risk copilot & fitted weights. |
 | `[Execution]`| **Ultrathink Engine** | [`ultrathink/`](../ultrathink/) | Zero-friction forced execution scheduler & thermodynamic collapse controller. |
-| `[Ops]` | **Legion Swarm & Scripts**| [`scripts/`](../scripts/) | Legión 222 swarm runner (`legion_222_agentes.py`), Centuria commanders. |
+| `[Ops]` | **Legion Swarm & Scripts**| [`scripts/`](../scripts/) | Legión 222 swarm runner (`scripts/unified_legion.py`), Centuria commanders. |
 
 ---
 

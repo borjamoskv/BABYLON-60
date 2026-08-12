@@ -1,0 +1,3007 @@
+{
+  "version": "1.0.0",
+  "standard": "C5-REAL",
+  "total_primitives": 300,
+  "primitives": [
+    {
+      "id": "ONC-001",
+      "name": "Sustaining proliferative signaling",
+      "category": "Hallmarks del Cáncer",
+      "layer": "meta",
+      "role": "proceso",
+      "mechanism": "Las celulas tumorales generan y sostienen senales mitogenicas de forma autonoma (p.ej. via RTK/RAS).",
+      "therapeutic_relevance": "Objetivo de inhibidores de RTK y de la via MAPK.",
+      "reference": "Hanahan & Weinberg, Cell 2011"
+    },
+    {
+      "id": "ONC-002",
+      "name": "Evading growth suppressors",
+      "category": "Hallmarks del Cáncer",
+      "layer": "meta",
+      "role": "proceso",
+      "mechanism": "Elusion de frenos antiproliferativos como RB y TP53.",
+      "therapeutic_relevance": "Restaurar checkpoints; inhibidores CDK4/6; reactivadores de p53.",
+      "reference": "Hanahan & Weinberg, Cell 2011"
+    },
+    {
+      "id": "ONC-003",
+      "name": "Resisting cell death",
+      "category": "Hallmarks del Cáncer",
+      "layer": "meta",
+      "role": "proceso",
+      "mechanism": "Bloqueo de apoptosis por sobreexpresion de anti-apoptoticos o perdida de sensores.",
+      "therapeutic_relevance": "Mimeticos BH3 (venetoclax) restauran la muerte.",
+      "reference": "Hanahan & Weinberg, Cell 2011"
+    },
+    {
+      "id": "ONC-004",
+      "name": "Enabling replicative immortality",
+      "category": "Hallmarks del Cáncer",
+      "layer": "meta",
+      "role": "proceso",
+      "mechanism": "Mantenimiento telomerico (telomerasa/ALT) que evita la senescencia replicativa.",
+      "therapeutic_relevance": "Inhibicion de telomerasa (investigacion).",
+      "reference": "Hanahan & Weinberg, Cell 2011"
+    },
+    {
+      "id": "ONC-005",
+      "name": "Inducing angiogenesis",
+      "category": "Hallmarks del Cáncer",
+      "layer": "meta",
+      "role": "proceso",
+      "mechanism": "Activacion del switch angiogenico para vascularizar el tumor.",
+      "therapeutic_relevance": "Anti-VEGF (bevacizumab), TKI antiangiogenicos.",
+      "reference": "Hanahan & Weinberg, Cell 2011"
+    },
+    {
+      "id": "ONC-006",
+      "name": "Activating invasion and metastasis",
+      "category": "Hallmarks del Cáncer",
+      "layer": "meta",
+      "role": "proceso",
+      "mechanism": "Adquisicion de motilidad, invasion local y diseminacion a distancia.",
+      "therapeutic_relevance": "Diana de terapias sobre EMT y microambiente.",
+      "reference": "Hanahan & Weinberg, Cell 2011"
+    },
+    {
+      "id": "ONC-007",
+      "name": "Deregulating cellular energetics",
+      "category": "Hallmarks del Cáncer",
+      "layer": "meta",
+      "role": "proceso",
+      "mechanism": "Reprogramacion metabolica (efecto Warburg) para soportar proliferacion.",
+      "therapeutic_relevance": "Inhibidores metabolicos (IDH mutante, glutaminasa).",
+      "reference": "Hanahan & Weinberg, Cell 2011"
+    },
+    {
+      "id": "ONC-008",
+      "name": "Avoiding immune destruction",
+      "category": "Hallmarks del Cáncer",
+      "layer": "meta",
+      "role": "proceso",
+      "mechanism": "Escape del reconocimiento y eliminacion por el sistema inmune.",
+      "therapeutic_relevance": "Bloqueo de checkpoints (anti-PD-1/PD-L1/CTLA-4).",
+      "reference": "Hanahan & Weinberg, Cell 2011"
+    },
+    {
+      "id": "ONC-009",
+      "name": "Genome instability and mutation",
+      "category": "Hallmarks del Cáncer",
+      "layer": "meta",
+      "role": "proceso",
+      "mechanism": "Caracteristica facilitadora: tasa mutacional elevada que genera diversidad clonal.",
+      "therapeutic_relevance": "Explotable por sintesis letal (PARPi en HRD).",
+      "reference": "Hanahan & Weinberg, Cell 2011"
+    },
+    {
+      "id": "ONC-010",
+      "name": "Tumor-promoting inflammation",
+      "category": "Hallmarks del Cáncer",
+      "layer": "meta",
+      "role": "proceso",
+      "mechanism": "Caracteristica facilitadora: inflamacion que aporta factores pro-tumorales.",
+      "therapeutic_relevance": "Objetivo de estrategias anti-inflamatorias.",
+      "reference": "Hanahan & Weinberg, Cell 2011"
+    },
+    {
+      "id": "ONC-011",
+      "name": "Unlocking phenotypic plasticity",
+      "category": "Hallmarks del Cáncer",
+      "layer": "meta",
+      "role": "proceso",
+      "mechanism": "Nuevo hallmark 2022: desdiferenciacion/transdiferenciacion que evade el destino celular.",
+      "therapeutic_relevance": "Terapias de diferenciacion; reto en resistencia.",
+      "reference": "Hanahan, Cancer Discov 2022 (New Dimensions)"
+    },
+    {
+      "id": "ONC-012",
+      "name": "Nonmutational epigenetic reprogramming",
+      "category": "Hallmarks del Cáncer",
+      "layer": "meta",
+      "role": "proceso",
+      "mechanism": "Nuevo hallmark 2022: adquisicion de capacidades por cambios epigeneticos sin mutacion.",
+      "therapeutic_relevance": "Farmacos epigeneticos (DNMTi, HDACi, EZH2i).",
+      "reference": "Hanahan, Cancer Discov 2022 (New Dimensions)"
+    },
+    {
+      "id": "ONC-013",
+      "name": "Polymorphic microbiomes",
+      "category": "Hallmarks del Cáncer",
+      "layer": "meta",
+      "role": "proceso",
+      "mechanism": "Nuevo hallmark 2022: microbiota que modula iniciacion, progresion y respuesta terapeutica.",
+      "therapeutic_relevance": "Modulacion del microbioma; impacto en inmunoterapia.",
+      "reference": "Hanahan, Cancer Discov 2022 (New Dimensions)"
+    },
+    {
+      "id": "ONC-014",
+      "name": "Senescent cells",
+      "category": "Hallmarks del Cáncer",
+      "layer": "meta",
+      "role": "proceso",
+      "mechanism": "Nuevo hallmark 2022: celulas senescentes y su SASP modulan capacidades tumorales.",
+      "therapeutic_relevance": "Senoliticos (investigacion).",
+      "reference": "Hanahan, Cancer Discov 2022 (New Dimensions)"
+    },
+    {
+      "id": "ONC-015",
+      "name": "Clonal evolution and intratumoral heterogeneity",
+      "category": "Hallmarks del Cáncer",
+      "layer": "meta",
+      "role": "proceso",
+      "mechanism": "Seleccion darwiniana de subclones que genera heterogeneidad espacial y temporal.",
+      "therapeutic_relevance": "Base de la resistencia; terapias adaptativas.",
+      "reference": "Nowell, Science 1976; Greaves & Maley, Nature 2012"
+    },
+    {
+      "id": "ONC-016",
+      "name": "Two-hit hypothesis (Knudson)",
+      "category": "Hallmarks del Cáncer",
+      "layer": "meta",
+      "role": "proceso",
+      "mechanism": "Los supresores tumorales suelen requerir inactivacion bialelica para perder funcion.",
+      "therapeutic_relevance": "Marco de riesgo hereditario (RB1, BRCA).",
+      "reference": "Knudson, PNAS 1971"
+    },
+    {
+      "id": "ONC-017",
+      "name": "KRAS",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "GTPasa RAS; mutaciones (G12/G13/Q61) la fijan activa y disparan MAPK/PI3K.",
+      "therapeutic_relevance": "KRAS G12C: sotorasib, adagrasib.",
+      "reference": "Prior et al., Cancer Res 2020"
+    },
+    {
+      "id": "ONC-018",
+      "name": "HRAS",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "Isoforma RAS mutada en tumores de cabeza y cuello y vejiga.",
+      "therapeutic_relevance": "Inhibidor de farnesiltransferasa (tipifarnib) en HRAS-mut.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-019",
+      "name": "NRAS",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "Isoforma RAS frecuentemente mutada en melanoma y leucemias.",
+      "therapeutic_relevance": "Diana indirecta via MEK; sin inhibidor directo aprobado.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-020",
+      "name": "BRAF",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "Cinasa RAF; V600E constitutivamente activa la via MAPK.",
+      "therapeutic_relevance": "Vemurafenib/dabrafenib + inhibidor MEK.",
+      "reference": "Davies et al., Nature 2002"
+    },
+    {
+      "id": "ONC-021",
+      "name": "EGFR",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "RTK cuya activacion/mutacion (ex19del, L858R) impulsa proliferacion.",
+      "therapeutic_relevance": "TKI de EGFR (gefitinib, osimertinib).",
+      "reference": "Lynch et al., NEJM 2004"
+    },
+    {
+      "id": "ONC-022",
+      "name": "ERBB2 / HER2",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "RTK amplificado en subtipos de mama y gastrico.",
+      "therapeutic_relevance": "Trastuzumab, pertuzumab, T-DXd.",
+      "reference": "Slamon et al., Science 1987"
+    },
+    {
+      "id": "ONC-023",
+      "name": "MYC",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "Factor de transcripcion maestro de crecimiento; amplificado/translocado.",
+      "therapeutic_relevance": "Diana 'undruggable'; BET-i indirectos.",
+      "reference": "Dang, Cell 2012"
+    },
+    {
+      "id": "ONC-024",
+      "name": "MYCN",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "Parologo de MYC amplificado en neuroblastoma de alto riesgo.",
+      "therapeutic_relevance": "Biomarcador pronostico; BET/Aurora-A indirectos.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-025",
+      "name": "MET",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "RTK (receptor de HGF); amplificacion o exon 14 skipping activan la via.",
+      "therapeutic_relevance": "Capmatinib, tepotinib, crizotinib.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-026",
+      "name": "ALK",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "RTK activada por fusiones (EML4-ALK) en NSCLC.",
+      "therapeutic_relevance": "Crizotinib, alectinib, lorlatinib.",
+      "reference": "Soda et al., Nature 2007"
+    },
+    {
+      "id": "ONC-027",
+      "name": "ROS1",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "RTK activada por fusiones en un subconjunto de NSCLC.",
+      "therapeutic_relevance": "Crizotinib, entrectinib.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-028",
+      "name": "RET",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "RTK activada por fusiones o mutaciones puntuales (MEN2).",
+      "therapeutic_relevance": "Selpercatinib, pralsetinib.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-029",
+      "name": "FLT3",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "RTK mutada (ITD/TKD) en leucemia mieloide aguda.",
+      "therapeutic_relevance": "Midostaurina, gilteritinib.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-030",
+      "name": "KIT",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "RTK con mutaciones activadoras en GIST y mastocitosis.",
+      "therapeutic_relevance": "Imatinib, avapritinib.",
+      "reference": "Hirota et al., Science 1998"
+    },
+    {
+      "id": "ONC-031",
+      "name": "PDGFRA",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "RTK relacionada con KIT; mutada en subgrupos de GIST.",
+      "therapeutic_relevance": "Avapritinib (D842V), imatinib.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-032",
+      "name": "ABL1 (BCR-ABL)",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "Fusion del cromosoma Filadelfia con tirosina-cinasa constitutiva en LMC.",
+      "therapeutic_relevance": "Imatinib y TKI de siguiente generacion.",
+      "reference": "Rowley, Nature 1973"
+    },
+    {
+      "id": "ONC-033",
+      "name": "JAK2",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "Cinasa citoplasmatica; V617F impulsa neoplasias mieloproliferativas.",
+      "therapeutic_relevance": "Ruxolitinib (JAK1/2).",
+      "reference": "James et al., Nature 2005"
+    },
+    {
+      "id": "ONC-034",
+      "name": "PIK3CA",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "Subunidad p110-alfa de PI3K; mutaciones activan PI3K-AKT.",
+      "therapeutic_relevance": "Alpelisib en mama HR+ PIK3CA-mut.",
+      "reference": "Samuels et al., Science 2004"
+    },
+    {
+      "id": "ONC-035",
+      "name": "AKT1",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "Cinasa central de supervivencia/crecimiento aguas abajo de PI3K.",
+      "therapeutic_relevance": "Inhibidores de AKT (capivasertib).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-036",
+      "name": "MTOR",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "Cinasa que integra nutrientes y crecimiento; activacion aberrante en tumores.",
+      "therapeutic_relevance": "Everolimus, temsirolimus.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-037",
+      "name": "MDM2",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "E3 ligasa que degrada p53; su amplificacion inactiva p53 sin mutarlo.",
+      "therapeutic_relevance": "Inhibidores MDM2-p53 (investigacion).",
+      "reference": "Momand et al., Cell 1992"
+    },
+    {
+      "id": "ONC-038",
+      "name": "CCND1 (Cyclin D1)",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "Ciclina que activa CDK4/6 e impulsa la transicion G1/S.",
+      "therapeutic_relevance": "Sensibiliza a inhibidores CDK4/6.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-039",
+      "name": "CDK4",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "Cinasa dependiente de ciclina que fosforila RB en G1.",
+      "therapeutic_relevance": "Palbociclib, ribociclib, abemaciclib.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-040",
+      "name": "CDK6",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "Parologo de CDK4 en el eje ciclina D-RB.",
+      "therapeutic_relevance": "Inhibidores CDK4/6.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-041",
+      "name": "BCL2",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "Proteina anti-apoptotica sobreexpresada (t(14;18)) que bloquea la muerte.",
+      "therapeutic_relevance": "Venetoclax (mimetico BH3).",
+      "reference": "Tsujimoto et al., Science 1984"
+    },
+    {
+      "id": "ONC-042",
+      "name": "EZH2",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "Metiltransferasa de PRC2 (H3K27me3); mutaciones GOF en linfoma folicular.",
+      "therapeutic_relevance": "Tazemetostat.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-043",
+      "name": "IDH1",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "Mutacion neomorfica que produce el oncometabolito 2-HG (glioma, LMA).",
+      "therapeutic_relevance": "Ivosidenib.",
+      "reference": "Dang et al., Nature 2009"
+    },
+    {
+      "id": "ONC-044",
+      "name": "IDH2",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "Isoforma mitocondrial con mutacion neomorfica productora de 2-HG.",
+      "therapeutic_relevance": "Enasidenib.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-045",
+      "name": "FGFR1",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "RTK de la familia FGFR; amplificacion/fusion en varios tumores.",
+      "therapeutic_relevance": "Inhibidores pan-FGFR (erdafitinib, pemigatinib).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-046",
+      "name": "CTNNB1 (beta-catenina)",
+      "category": "Oncogenes",
+      "layer": "molecular",
+      "role": "oncogen",
+      "mechanism": "Efector de Wnt; mutaciones lo estabilizan y activan transcripcion pro-tumoral.",
+      "therapeutic_relevance": "Diana dificil; via Wnt en investigacion.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-047",
+      "name": "TP53",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Guardian del genoma; induce arresto/apoptosis ante estres; mutado en ~50% de tumores.",
+      "therapeutic_relevance": "Reactivadores de p53 mutante (investigacion).",
+      "reference": "Levine, Cell 1997"
+    },
+    {
+      "id": "ONC-048",
+      "name": "RB1",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Freno del ciclo celular que secuestra E2F; su perdida libera G1/S.",
+      "therapeutic_relevance": "Perdida de RB confiere resistencia a CDK4/6i.",
+      "reference": "Weinberg, Cell 1995"
+    },
+    {
+      "id": "ONC-049",
+      "name": "PTEN",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Fosfatasa que antagoniza PI3K; su perdida hiperactiva AKT.",
+      "therapeutic_relevance": "Sensibiliza a inhibidores de PI3K/AKT.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-050",
+      "name": "APC",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Regulador negativo de beta-catenina; su perdida inicia cancer colorrectal.",
+      "therapeutic_relevance": "Marco de la via Wnt en CCR.",
+      "reference": "Kinzler & Vogelstein, Cell 1996"
+    },
+    {
+      "id": "ONC-051",
+      "name": "VHL",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "E3 ligasa que degrada HIF; su perdida activa pseudohipoxia (renal).",
+      "therapeutic_relevance": "Belzutifan (HIF-2 alfa).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-052",
+      "name": "BRCA1",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Reparacion por recombinacion homologa; su perdida causa HRD.",
+      "therapeutic_relevance": "Sintesis letal con inhibidores de PARP.",
+      "reference": "Miki et al., Science 1994"
+    },
+    {
+      "id": "ONC-053",
+      "name": "BRCA2",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Carga RAD51 en la HR; su perdida sensibiliza a dano de ADN.",
+      "therapeutic_relevance": "Olaparib y otros PARPi.",
+      "reference": "Wooster et al., Nature 1995"
+    },
+    {
+      "id": "ONC-054",
+      "name": "PALB2",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Puente entre BRCA1 y BRCA2 en la HR; su perdida da fenotipo BRCAness.",
+      "therapeutic_relevance": "PARPi en HRD.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-055",
+      "name": "NF1",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "GAP que apaga RAS; su perdida sostiene senal MAPK.",
+      "therapeutic_relevance": "Sensibilidad a inhibidores de MEK.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-056",
+      "name": "NF2 (Merlin)",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Activador de Hippo; su perdida activa YAP/TAZ (meningioma, mesotelioma).",
+      "therapeutic_relevance": "Inhibidores de YAP/TEAD (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-057",
+      "name": "CDKN2A (p16INK4a)",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Inhibe CDK4/6 manteniendo RB activo; deleccion frecuente.",
+      "therapeutic_relevance": "Predice dependencia de CDK4/6.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-058",
+      "name": "CDKN1A (p21)",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Inhibidor de CDK inducido por p53 que impone arresto del ciclo.",
+      "therapeutic_relevance": "Mediador de senescencia terapeutica.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-059",
+      "name": "CDKN1B (p27)",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Inhibidor de CDK que frena la transicion G1/S.",
+      "therapeutic_relevance": "Su degradacion marca agresividad.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-060",
+      "name": "SMAD4",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Mediador central de TGF-beta; su perdida elude su efecto citostatico.",
+      "therapeutic_relevance": "Contexto de senalizacion TGF-beta.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-061",
+      "name": "STK11 (LKB1)",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Cinasa que activa AMPK y frena mTOR; su perdida altera metabolismo e inmunidad.",
+      "therapeutic_relevance": "Asociada a resistencia a anti-PD-1.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-062",
+      "name": "TSC1",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Con TSC2 inhibe mTORC1; su perdida hiperactiva mTOR.",
+      "therapeutic_relevance": "Sensibilidad a inhibidores de mTOR.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-063",
+      "name": "TSC2",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "GAP de RHEB que reprime mTORC1.",
+      "therapeutic_relevance": "Everolimus en tumores asociados a TSC.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-064",
+      "name": "WT1",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Factor de transcripcion supresor en tumor de Wilms (rol dual).",
+      "therapeutic_relevance": "Antigeno para inmunoterapia.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-065",
+      "name": "MEN1 (menina)",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Supresor en tumores neuroendocrinos; interacciona con complejos MLL.",
+      "therapeutic_relevance": "Inhibidores menina-MLL en leucemias.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-066",
+      "name": "PTCH1",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Receptor que reprime Hedgehog; su perdida activa la via (basocelular, meduloblastoma).",
+      "therapeutic_relevance": "Vismodegib, sonidegib.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-067",
+      "name": "ARID1A",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Subunidad de SWI/SNF (BAF); mutaciones alteran la accesibilidad de cromatina.",
+      "therapeutic_relevance": "Sintesis letal con EZH2/ATR (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-068",
+      "name": "SMARCB1",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Subunidad nuclear de SWI/SNF; su perdida define tumores rabdoides.",
+      "therapeutic_relevance": "Dependencia de EZH2 (tazemetostat).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-069",
+      "name": "FBXW7",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Receptor de E3 ligasa que degrada MYC, ciclina E y NOTCH.",
+      "therapeutic_relevance": "Su perdida estabiliza oncoproteinas.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-070",
+      "name": "CDH1 (E-cadherina)",
+      "category": "Genes Supresores de Tumores",
+      "layer": "molecular",
+      "role": "supresor",
+      "mechanism": "Adhesion celula-celula; su perdida favorece invasion (gastrico difuso, lobulillar).",
+      "therapeutic_relevance": "Biomarcador hereditario (CDH1).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-071",
+      "name": "Receptor tyrosine kinase (RTK) signaling",
+      "category": "Vías de Señalización",
+      "layer": "pathway",
+      "role": "proceso",
+      "mechanism": "Receptores de superficie que traducen factores de crecimiento a senales intracelulares.",
+      "therapeutic_relevance": "Nodo mayor de inhibidores dirigidos.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-072",
+      "name": "RAS-RAF-MEK-ERK (MAPK)",
+      "category": "Vías de Señalización",
+      "layer": "pathway",
+      "role": "proceso",
+      "mechanism": "Cascada mitogenica central; hiperactivada por RAS/RAF/RTK.",
+      "therapeutic_relevance": "Inhibidores de BRAF y MEK.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-073",
+      "name": "PI3K-AKT-mTOR",
+      "category": "Vías de Señalización",
+      "layer": "pathway",
+      "role": "proceso",
+      "mechanism": "Eje de supervivencia, crecimiento y metabolismo.",
+      "therapeutic_relevance": "Alpelisib, capivasertib, everolimus.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-074",
+      "name": "Wnt / beta-catenin",
+      "category": "Vías de Señalización",
+      "layer": "pathway",
+      "role": "proceso",
+      "mechanism": "Via de stemness y proliferacion; aberrante en CCR y otros.",
+      "therapeutic_relevance": "Diana dificil; en investigacion.",
+      "reference": "Clevers, Cell 2006"
+    },
+    {
+      "id": "ONC-075",
+      "name": "Hedgehog",
+      "category": "Vías de Señalización",
+      "layer": "pathway",
+      "role": "proceso",
+      "mechanism": "Via del desarrollo reactivada en basocelular y meduloblastoma.",
+      "therapeutic_relevance": "Vismodegib, sonidegib.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-076",
+      "name": "Notch",
+      "category": "Vías de Señalización",
+      "layer": "pathway",
+      "role": "proceso",
+      "mechanism": "Senal de contacto con rol oncogenico o supresor segun contexto.",
+      "therapeutic_relevance": "Gamma-secretasa (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-077",
+      "name": "JAK-STAT",
+      "category": "Vías de Señalización",
+      "layer": "pathway",
+      "role": "proceso",
+      "mechanism": "Transduce citocinas hacia transcripcion de supervivencia/proliferacion.",
+      "therapeutic_relevance": "Ruxolitinib (JAK1/2).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-078",
+      "name": "TGF-beta / SMAD",
+      "category": "Vías de Señalización",
+      "layer": "pathway",
+      "role": "proceso",
+      "mechanism": "Citostatica temprana pero pro-invasiva y pro-inmunosupresora tardia.",
+      "therapeutic_relevance": "Diana dual segun estadio.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-079",
+      "name": "Hippo-YAP/TAZ",
+      "category": "Vías de Señalización",
+      "layer": "pathway",
+      "role": "proceso",
+      "mechanism": "Controla tamano de organo; su desregulacion activa coactivadores YAP/TAZ.",
+      "therapeutic_relevance": "Inhibidores TEAD (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-080",
+      "name": "NF-kappaB",
+      "category": "Vías de Señalización",
+      "layer": "pathway",
+      "role": "proceso",
+      "mechanism": "Factor de transcripcion de inflamacion y supervivencia.",
+      "therapeutic_relevance": "Diana en neoplasias hematologicas.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-081",
+      "name": "p53 network",
+      "category": "Vías de Señalización",
+      "layer": "pathway",
+      "role": "proceso",
+      "mechanism": "Red de respuesta a estres que decide arresto, reparacion o apoptosis.",
+      "therapeutic_relevance": "Restauracion/estabilizacion de p53.",
+      "reference": "Vousden & Prives, Cell 2009"
+    },
+    {
+      "id": "ONC-082",
+      "name": "RB-E2F axis",
+      "category": "Vías de Señalización",
+      "layer": "pathway",
+      "role": "proceso",
+      "mechanism": "Controla la entrada en fase S liberando E2F al fosforilarse RB.",
+      "therapeutic_relevance": "Inhibidores CDK4/6.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-083",
+      "name": "MYC transcriptional program",
+      "category": "Vías de Señalización",
+      "layer": "pathway",
+      "role": "proceso",
+      "mechanism": "Amplifica la transcripcion global que sostiene crecimiento y metabolismo.",
+      "therapeutic_relevance": "BET-i, inhibicion de sintesis (indirecta).",
+      "reference": "Dang, Cell 2012"
+    },
+    {
+      "id": "ONC-084",
+      "name": "HIF / hypoxia response",
+      "category": "Vías de Señalización",
+      "layer": "pathway",
+      "role": "proceso",
+      "mechanism": "Adaptacion a hipoxia que induce angiogenesis y glucolisis.",
+      "therapeutic_relevance": "Belzutifan (HIF-2 alfa).",
+      "reference": "Semenza, Cell 2012"
+    },
+    {
+      "id": "ONC-085",
+      "name": "NRF2-KEAP1",
+      "category": "Vías de Señalización",
+      "layer": "pathway",
+      "role": "proceso",
+      "mechanism": "Respuesta antioxidante secuestrada por tumores para tolerar ROS.",
+      "therapeutic_relevance": "Diana metabolica emergente.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-086",
+      "name": "Estrogen receptor (ER) signaling",
+      "category": "Vías de Señalización",
+      "layer": "pathway",
+      "role": "proceso",
+      "mechanism": "Impulsa proliferacion en cancer de mama ER+.",
+      "therapeutic_relevance": "Tamoxifeno, inhibidores de aromatasa, SERD.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-087",
+      "name": "Androgen receptor (AR) signaling",
+      "category": "Vías de Señalización",
+      "layer": "pathway",
+      "role": "proceso",
+      "mechanism": "Motor del cancer de prostata.",
+      "therapeutic_relevance": "Enzalutamida, abiraterona.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-088",
+      "name": "cGAS-STING",
+      "category": "Vías de Señalización",
+      "layer": "pathway",
+      "role": "proceso",
+      "mechanism": "Sensor de ADN citosolico que activa inmunidad innata tipo I.",
+      "therapeutic_relevance": "Agonistas STING (investigacion inmuno).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-089",
+      "name": "G1/S checkpoint (restriction point)",
+      "category": "Ciclo Celular y Checkpoints",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Punto de compromiso a la division controlado por RB-E2F.",
+      "therapeutic_relevance": "Inhibidores CDK4/6 lo bloquean.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-090",
+      "name": "G2/M checkpoint",
+      "category": "Ciclo Celular y Checkpoints",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Impide entrar en mitosis con ADN danado (ATR-CHK1-WEE1).",
+      "therapeutic_relevance": "Inhibidores de WEE1/ATR/CHK1.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-091",
+      "name": "Spindle assembly checkpoint (SAC)",
+      "category": "Ciclo Celular y Checkpoints",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Retrasa la anafase hasta el correcto anclaje de cromosomas.",
+      "therapeutic_relevance": "Diana de taxanos y alcaloides de la vinca.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-092",
+      "name": "Cyclin D-CDK4/6",
+      "category": "Ciclo Celular y Checkpoints",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Complejo que inicia la fosforilacion de RB en G1.",
+      "therapeutic_relevance": "Palbociclib, ribociclib, abemaciclib.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-093",
+      "name": "Cyclin E-CDK2",
+      "category": "Ciclo Celular y Checkpoints",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Completa la inactivacion de RB y dispara la fase S.",
+      "therapeutic_relevance": "Inhibidores de CDK2 (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-094",
+      "name": "Cyclin A-CDK2",
+      "category": "Ciclo Celular y Checkpoints",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Sostiene la progresion en fase S y replicacion del ADN.",
+      "therapeutic_relevance": "Contexto de estres replicativo.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-095",
+      "name": "Cyclin B-CDK1",
+      "category": "Ciclo Celular y Checkpoints",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Factor promotor de la mitosis (MPF) que desencadena la mitosis.",
+      "therapeutic_relevance": "Diana indirecta antimitotica.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-096",
+      "name": "RB phosphorylation",
+      "category": "Ciclo Celular y Checkpoints",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "La hiperfosforilacion de RB libera E2F y permite la fase S.",
+      "therapeutic_relevance": "Bloqueada por inhibidores CDK4/6.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-097",
+      "name": "E2F transcriptional release",
+      "category": "Ciclo Celular y Checkpoints",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "E2F activa genes de replicacion al liberarse de RB.",
+      "therapeutic_relevance": "Nodo del control G1/S.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-098",
+      "name": "p16-CDK4/6-RB axis",
+      "category": "Ciclo Celular y Checkpoints",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Eje supresor que mantiene RB activo; a menudo inactivado en tumores.",
+      "therapeutic_relevance": "Predice respuesta a CDK4/6i.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-099",
+      "name": "CDC25 phosphatases",
+      "category": "Ciclo Celular y Checkpoints",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Activan complejos CDK removiendo fosfatos inhibidores.",
+      "therapeutic_relevance": "Diana experimental.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-100",
+      "name": "WEE1 kinase",
+      "category": "Ciclo Celular y Checkpoints",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Frena CDK1 imponiendo el checkpoint G2/M.",
+      "therapeutic_relevance": "Adavosertib (WEE1i).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-101",
+      "name": "APC/C (anaphase-promoting complex)",
+      "category": "Ciclo Celular y Checkpoints",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "E3 ligasa que degrada ciclinas y securina para la anafase.",
+      "therapeutic_relevance": "Objeto de estudio antimitotico.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-102",
+      "name": "Intrinsic (mitochondrial) apoptosis",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Estres interno provoca MOMP y liberacion de citocromo c.",
+      "therapeutic_relevance": "Restaurada por mimeticos BH3.",
+      "reference": "Green & Kroemer, Science 2004"
+    },
+    {
+      "id": "ONC-103",
+      "name": "Extrinsic (death receptor) apoptosis",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Ligandos de muerte activan caspasa-8 via receptores.",
+      "therapeutic_relevance": "Agonistas de DR (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-104",
+      "name": "BCL2 (anti-apoptotic)",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "diana",
+      "mechanism": "Secuestra proteinas pro-apoptoticas impidiendo la MOMP.",
+      "therapeutic_relevance": "Venetoclax.",
+      "reference": "Souers et al., Nat Med 2013"
+    },
+    {
+      "id": "ONC-105",
+      "name": "BCL-XL (BCL2L1)",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "diana",
+      "mechanism": "Guardian anti-apoptotico clave en plaquetas y tumores solidos.",
+      "therapeutic_relevance": "Inhibidores BCL-XL (toxicidad plaquetaria).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-106",
+      "name": "MCL1",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "diana",
+      "mechanism": "Anti-apoptotica de vida corta que media resistencia.",
+      "therapeutic_relevance": "Inhibidores de MCL1 (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-107",
+      "name": "BAX",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Efector que oligomeriza y permeabiliza la membrana mitocondrial.",
+      "therapeutic_relevance": "Activacion promuerte deseada.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-108",
+      "name": "BAK",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Efector complementario de BAX en la MOMP.",
+      "therapeutic_relevance": "Restaurar su activacion.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-109",
+      "name": "BIM (BCL2L11)",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "BH3-only activador que dispara BAX/BAK.",
+      "therapeutic_relevance": "Su induccion media respuesta a TKI.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-110",
+      "name": "PUMA (BBC3)",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "BH3-only inducido por p53 que sensibiliza a apoptosis.",
+      "therapeutic_relevance": "Efector de terapias que activan p53.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-111",
+      "name": "NOXA (PMAIP1)",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "BH3-only que neutraliza MCL1 preferentemente.",
+      "therapeutic_relevance": "Sinergiza con inhibidores BCL2.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-112",
+      "name": "Cytochrome c / apoptosome (APAF1)",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "El citocromo c liberado ensambla el apoptosoma que activa caspasa-9.",
+      "therapeutic_relevance": "Nodo central de la via intrinseca.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-113",
+      "name": "Caspase-8 (initiator)",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Iniciadora de la via extrinseca en el DISC.",
+      "therapeutic_relevance": "Diana de estrategias pro-muerte.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-114",
+      "name": "Caspase-9 (initiator)",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Iniciadora activada por el apoptosoma.",
+      "therapeutic_relevance": "Nodo intrinseco.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-115",
+      "name": "Caspase-3 (executioner)",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Ejecutora que degrada sustratos y desmantela la celula.",
+      "therapeutic_relevance": "Marcador de muerte efectiva.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-116",
+      "name": "FAS-FASL",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Par receptor-ligando de muerte de la via extrinseca.",
+      "therapeutic_relevance": "Modulacion inmune de la muerte.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-117",
+      "name": "TRAIL-DR4/DR5",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "diana",
+      "mechanism": "Ligando y receptores que inducen apoptosis selectiva en tumores.",
+      "therapeutic_relevance": "Agonistas de DR5 (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-118",
+      "name": "XIAP",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "diana",
+      "mechanism": "IAP que inhibe caspasas ejecutoras.",
+      "therapeutic_relevance": "Antagonistas SMAC-mimeticos.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-119",
+      "name": "Survivin (BIRC5)",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "diana",
+      "mechanism": "IAP sobreexpresada que bloquea apoptosis y regula mitosis.",
+      "therapeutic_relevance": "Diana e inmunodiana.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-120",
+      "name": "SMAC/DIABLO",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Neutraliza IAP al liberarse de la mitocondria.",
+      "therapeutic_relevance": "Base de los SMAC-mimeticos.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-121",
+      "name": "Necroptosis (RIPK3-MLKL)",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Muerte litica programada independiente de caspasas.",
+      "therapeutic_relevance": "Explotable ante apoptosis bloqueada.",
+      "reference": "Vandenabeele et al., Nat Rev Mol Cell Biol 2010"
+    },
+    {
+      "id": "ONC-122",
+      "name": "Ferroptosis (GPX4)",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "diana",
+      "mechanism": "Muerte por peroxidacion lipidica dependiente de hierro; GPX4 la reprime.",
+      "therapeutic_relevance": "Inductores de ferroptosis (investigacion).",
+      "reference": "Dixon et al., Cell 2012"
+    },
+    {
+      "id": "ONC-123",
+      "name": "Pyroptosis (gasdermin)",
+      "category": "Apoptosis y Muerte Celular Regulada",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Muerte inflamatoria mediada por poros de gasdermina.",
+      "therapeutic_relevance": "Interfaz con inmunidad antitumoral.",
+      "reference": "Shi et al., Nature 2015"
+    },
+    {
+      "id": "ONC-124",
+      "name": "ATM kinase",
+      "category": "Respuesta al Daño y Reparación de ADN (DDR)",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Sensor apical de roturas de doble cadena que coordina el DDR.",
+      "therapeutic_relevance": "Su perdida sensibiliza a inhibidores.",
+      "reference": "Shiloh, Nat Rev Cancer 2003"
+    },
+    {
+      "id": "ONC-125",
+      "name": "ATR kinase",
+      "category": "Respuesta al Daño y Reparación de ADN (DDR)",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Sensor de estres replicativo y ADN monocatenario.",
+      "therapeutic_relevance": "Inhibidores de ATR (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-126",
+      "name": "CHK1",
+      "category": "Respuesta al Daño y Reparación de ADN (DDR)",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Efector de ATR que impone el checkpoint intra-S y G2/M.",
+      "therapeutic_relevance": "Inhibidores de CHK1.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-127",
+      "name": "CHK2",
+      "category": "Respuesta al Daño y Reparación de ADN (DDR)",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Efector de ATM que propaga la senal de dano a p53/CDC25.",
+      "therapeutic_relevance": "Contexto de checkpoints.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-128",
+      "name": "DNA-PKcs",
+      "category": "Respuesta al Daño y Reparación de ADN (DDR)",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Cinasa central del NHEJ que une extremos rotos.",
+      "therapeutic_relevance": "Radiosensibilizacion.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-129",
+      "name": "Homologous recombination (RAD51)",
+      "category": "Respuesta al Daño y Reparación de ADN (DDR)",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Reparacion fiel de DSB usando la cromatida hermana.",
+      "therapeutic_relevance": "Su deficiencia (HRD) sensibiliza a PARPi/platino.",
+      "reference": "Farmer et al., Nature 2005"
+    },
+    {
+      "id": "ONC-130",
+      "name": "Non-homologous end joining (NHEJ)",
+      "category": "Respuesta al Daño y Reparación de ADN (DDR)",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Reparacion rapida y propensa a error que religa extremos.",
+      "therapeutic_relevance": "Radiosensibilizacion.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-131",
+      "name": "Mismatch repair (MMR)",
+      "category": "Respuesta al Daño y Reparación de ADN (DDR)",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Corrige errores de apareamiento; su perdida causa MSI e hipermutacion.",
+      "therapeutic_relevance": "dMMR/MSI-H predice respuesta a anti-PD-1.",
+      "reference": "Le et al., NEJM 2015"
+    },
+    {
+      "id": "ONC-132",
+      "name": "Base excision repair (BER)",
+      "category": "Respuesta al Daño y Reparación de ADN (DDR)",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Repara bases danadas por oxidacion/alquilacion.",
+      "therapeutic_relevance": "Contexto de sensibilidad a PARP.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-133",
+      "name": "Nucleotide excision repair (NER)",
+      "category": "Respuesta al Daño y Reparación de ADN (DDR)",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Elimina lesiones voluminosas como aductos de platino/UV.",
+      "therapeutic_relevance": "Modula respuesta al platino.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-134",
+      "name": "PARP1",
+      "category": "Respuesta al Daño y Reparación de ADN (DDR)",
+      "layer": "molecular",
+      "role": "diana",
+      "mechanism": "Detecta roturas de cadena simple e inicia su reparacion.",
+      "therapeutic_relevance": "Olaparib y otros PARPi (sintesis letal).",
+      "reference": "Bryant et al., Nature 2005"
+    },
+    {
+      "id": "ONC-135",
+      "name": "Fanconi anemia pathway",
+      "category": "Respuesta al Daño y Reparación de ADN (DDR)",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Resuelve enlaces cruzados interhebra coordinando HR.",
+      "therapeutic_relevance": "Sensibilidad a agentes de cross-link.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-136",
+      "name": "53BP1",
+      "category": "Respuesta al Daño y Reparación de ADN (DDR)",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Favorece NHEJ y antagoniza la reseccion; su perdida da resistencia a PARPi.",
+      "therapeutic_relevance": "Biomarcador de resistencia.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-137",
+      "name": "gamma-H2AX",
+      "category": "Respuesta al Daño y Reparación de ADN (DDR)",
+      "layer": "molecular",
+      "role": "biomarcador",
+      "mechanism": "Fosforilacion de H2AX que marca focos de dano de doble cadena.",
+      "therapeutic_relevance": "Biomarcador de dano/eficacia.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-138",
+      "name": "MRN complex (MRE11-RAD50-NBS1)",
+      "category": "Respuesta al Daño y Reparación de ADN (DDR)",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Sensa y resecciona DSB reclutando ATM.",
+      "therapeutic_relevance": "Nodo temprano del DDR.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-139",
+      "name": "Replication stress response",
+      "category": "Respuesta al Daño y Reparación de ADN (DDR)",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Gestion de horquillas de replicacion estancadas o colapsadas.",
+      "therapeutic_relevance": "Explotable con ATR/WEE1/CHK1i.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-140",
+      "name": "Synthetic lethality",
+      "category": "Respuesta al Daño y Reparación de ADN (DDR)",
+      "layer": "molecular",
+      "role": "mecanismo",
+      "mechanism": "Dos defectos individualmente tolerables son letales juntos.",
+      "therapeutic_relevance": "Paradigma PARPi en HRD.",
+      "reference": "Kaelin, Nat Rev Cancer 2005"
+    },
+    {
+      "id": "ONC-141",
+      "name": "BRCAness",
+      "category": "Respuesta al Daño y Reparación de ADN (DDR)",
+      "layer": "molecular",
+      "role": "biomarcador",
+      "mechanism": "Fenotipo de deficiencia de HR sin mutacion germinal de BRCA.",
+      "therapeutic_relevance": "Amplia la poblacion candidata a PARPi.",
+      "reference": "Lord & Ashworth, Nat Med 2013"
+    },
+    {
+      "id": "ONC-142",
+      "name": "Chromosomal instability (CIN)",
+      "category": "Inestabilidad Genómica y Mutagénesis",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Tasa elevada de errores en segregacion cromosomica que induce ganancias/perdidas sub- y cromosomicas continuas, generando heterogeneidad intratumoral y evolucion adaptativa darwiniana.",
+      "therapeutic_relevance": "Explotable terapeuticamente via sintesis letal con inhibidores de PARP y ATR en contextos de HRD, o induciendo catastrofe mitotica con inhibidores SAC.",
+      "reference": "Lengauer et al., Nature 1998; Bakhoum et al., Nature 2018"
+    },
+    {
+      "id": "ONC-143",
+      "name": "Microsatellite instability (MSI)",
+      "category": "Inestabilidad Genómica y Mutagénesis",
+      "layer": "molecular",
+      "role": "biomarcador",
+      "mechanism": "Hipermutabilidad y expansion/contraccion aberrante de secuencias repetitivas mononucleotidas y dinucleotidas provocada por deficiencia en el sistema de reparacion de apareamientos erroneos (dMMR: MLH1, MSH2, MSH6, PMS2).",
+      "therapeutic_relevance": "Biomarcador agnostico tumor-independiente (MSI-H/dMMR) que predice respuesta excepcional y duradera al bloqueo de puntos de control inmunitario (anti-PD-1 pembrolizumab/nivolumab).",
+      "reference": "Vogelstein et al., Science 2013; Le et al., NEJM 2017"
+    },
+    {
+      "id": "ONC-144",
+      "name": "Aneuploidy",
+      "category": "Inestabilidad Genómica y Mutagénesis",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Estado genomico con numero anomalo de cromosomas enteros (monosomia/trisomia/tetrasomia) que altera el balance de dosis genica, induce estres proteotoxico endoplasmico y activa checkpoints de spindle.",
+      "therapeutic_relevance": "Las celulas aneuploides presentan vulnerabilidades emergentes acopladas al estres del reticulo endoplasmico y dependencia hipertrofica del punto de control del huso mitotico (SAC: BUB1B/MPS1).",
+      "reference": "Ben-David & Amon, Nat Rev Cancer 2020"
+    },
+    {
+      "id": "ONC-145",
+      "name": "Tumor mutational burden (TMB)",
+      "category": "Inestabilidad Genómica y Mutagénesis",
+      "layer": "molecular",
+      "role": "biomarcador",
+      "mechanism": "Densidad cuantitativa de mutaciones somaticas (SNVs e indels) por megabase en la region codificante (corte clinico estandar >= 10 mut/Mb en panel estandarizado de 38 Mb).",
+      "therapeutic_relevance": "TMB alto incrementa la probabilidad de presentacion de neoantigenos inmunogenicos en el complejo MHC-I, prediciendo beneficio clinico al bloqueo de PD-1 en tumores solidos.",
+      "reference": "Schumacher & Schreiber, Science 2015; Marabelle et al., Lancet Oncol 2020"
+    },
+    {
+      "id": "ONC-146",
+      "name": "Mutational signatures (COSMIC)",
+      "category": "Inestabilidad Genómica y Mutagénesis",
+      "layer": "molecular",
+      "role": "biomarcador",
+      "mechanism": "Deconstruccion matematica de perfiles trinucleotidos (catálogo COSMIC v3.4 SBS/ID/CN) que revela las huellas digitales mutacionales de procesos endogenos y exogenos (desaminacion 5mC SBS1, APOBEC SBS2/13, HRD SBS3, tabaco SBS4, UV SBS7).",
+      "therapeutic_relevance": "Permiten inferir la etiologia oncogenica subyacente, estratificar la agresividad tumoral y predecir dianas accionables (ej. firma HRD/SBS3 predice sensibilidad a platino y PARPi).",
+      "reference": "Alexandrov et al., Nature 2013; Alexandrov et al., Nature 2020"
+    },
+    {
+      "id": "ONC-147",
+      "name": "APOBEC mutagenesis",
+      "category": "Inestabilidad Genómica y Mutagénesis",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Hiperactividad desregulada de enzimas citidina-desaminasas (APOBEC3A/APOBEC3B) sobre ADN de cadena sencilla que catalizan C->T o C->G preferentemente en contextos trinucleotidos TCW (W = A o T).",
+      "therapeutic_relevance": "Genera lluvias mutacionales agrupadas y alto volumen de neoantigenos; su actividad sostenida promueve evolucion clonal, evasión inmunológica y resistencia adquirida a terapias dirigidas.",
+      "reference": "Swanton et al., Cancer Discov 2015; Bozek et al., Genome Biol 2023"
+    },
+    {
+      "id": "ONC-148",
+      "name": "Chromothripsis",
+      "category": "Inestabilidad Genómica y Mutagénesis",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Evento catastrofico en una sola division celular (a menudo en micronucleos tras segregacion anomala) donde uno o varios cromosomas se fragmentan masivamente y re-ensamblan aleatoriamente por NHEJ/MMEJ propensos a error.",
+      "therapeutic_relevance": "Origina amplificaciones masivas en aglomerados de oncogenes clave (ecDNA que contiene MYC, MDM2, CDK4 o EGFR) al tiempo que deleciona supresores tumorales en los puntos de fractura.",
+      "reference": "Stephens et al., Cell 2011; Ly et al., Nat Genet 2019"
+    },
+    {
+      "id": "ONC-149",
+      "name": "Kataegis",
+      "category": "Inestabilidad Genómica y Mutagénesis",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Hipermutacion focal y ultra-densa (lluvia mutacional co-localizada con distancia intermutacional <= 1000 pb) comunmente coordinada en la misma hebra de ADN y catalizada de forma procesiva por encimas APOBEC en horquillas colapsadas o roturas DSB.",
+      "therapeutic_relevance": "Marca regiones de extrema inestabilidad estructural y co-ocurre con eventos de reordenamiento genómico y cromotripsis, sirviendo como huella de estres replicativo terminal.",
+      "reference": "Nik-Zainal et al., Cell 2012"
+    },
+    {
+      "id": "ONC-150",
+      "name": "Whole-genome doubling",
+      "category": "Inestabilidad Genómica y Mutagénesis",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Duplicacion completa del genoma (WGD) mediada por fallo en citoquinesis o endorreduplicacion que transforma una celula diploide en tetraploide transitoria o aneuploide pseudodiploide.",
+      "therapeutic_relevance": "Amortigua el impacto letal de perdidas cromosomicas sub-o-cromosomicas, facilita la tolerancia a aneuploidias severas, confiere resistencia multiresistente y predice mal pronostico global.",
+      "reference": "Bielski et al., Nat Genet 2018; Lopez et al., Nat Genet 2020"
+    },
+    {
+      "id": "ONC-151",
+      "name": "Loss of heterozygosity (LOH)",
+      "category": "Inestabilidad Genómica y Mutagénesis",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Perdida del alelo funcional restante o silenciado en un gen supresor tumoral (ej. BRCA1/2, TP53, RB1), concretando el segundo golpe de la hipotesis de Knudson ya sea por delecion fisica, recombinacion mitotica o disomia uniparental.",
+      "therapeutic_relevance": "El calculo de la fraccion genomica con LOH subcromosomica (>15 Mb) compone el indice HRD-LOH score, validado clínicamente para indicar sensibilidad a inhibidores de PARP en cancer de ovario y mama.",
+      "reference": "Knudson, PNAS 1971; Abkevich et al., Br J Cancer 2012"
+    },
+    {
+      "id": "ONC-152",
+      "name": "Oncogene-induced replication stress",
+      "category": "Inestabilidad Genómica y Mutagénesis",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Estres mecanico en la maquinaria de replicacion inducido por oncogenes hiperactivos (MYC, CCND1, KRAS) que fuerzan la activacion prematura de origenes, colapso de horquillas de replicacion y acumulacion de ADN monocatenario cubierto por RPA.",
+      "therapeutic_relevance": "Crea una dependencia existencial del tumor sobre el punto de control intra-S y G2/M dependiente del eje ATR-CHK1-WEE1, explotable mediante inhibidores selectivos (adavosertib, ceralasertib).",
+      "reference": "Halazonetis, Gorgoulis & Bartek, Science 2008; Zeman & Cimprich, Nat Cell Biol 2014"
+    },
+    {
+      "id": "ONC-153",
+      "name": "Extrachromosomal DNA (ecDNA)",
+      "category": "Inestabilidad Genómica y Mutagénesis",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Amplicones de ADN circular sin centromero ni telomeros (tamaños de 1 a 3 Mb) que se replican y segregan de manera aleatoria y no mendeliana durante la mitosis, concentrando oncogenes (EGFR, MYC, ERBB2) en un estado de cromatina ultra-abierta.",
+      "therapeutic_relevance": "Confieren enorme plasticidad transcripcional (hasta 100x copias de oncogene), posibilitan la adaptacion ultrarrapida bajo presion farmacologica por fluctuacion de copias y representan una diana terapeutica de vanguardia (intervencion en hubs transcripcionales).",
+      "reference": "Turner et al., Nature 2017; Wu et al., Nature 2019"
+    },
+    {
+      "id": "ONC-154",
+      "name": "Telomerase (TERT)",
+      "category": "Telómeros, Senescencia e Inmortalidad",
+      "layer": "cellular",
+      "role": "diana",
+      "mechanism": "Transcriptasa inversa que elonga telomeros y confiere inmortalidad.",
+      "therapeutic_relevance": "Inhibicion de telomerasa (investigacion).",
+      "reference": "Kim et al., Science 1994"
+    },
+    {
+      "id": "ONC-155",
+      "name": "TERT promoter mutations",
+      "category": "Telómeros, Senescencia e Inmortalidad",
+      "layer": "cellular",
+      "role": "biomarcador",
+      "mechanism": "Mutaciones que reactivan TERT (melanoma, glioma, vejiga).",
+      "therapeutic_relevance": "Biomarcador diagnostico/pronostico.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-156",
+      "name": "Alternative lengthening of telomeres (ALT)",
+      "category": "Telómeros, Senescencia e Inmortalidad",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Mantenimiento telomerico por recombinacion, sin telomerasa.",
+      "therapeutic_relevance": "Diana de ATR (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-157",
+      "name": "Replicative senescence",
+      "category": "Telómeros, Senescencia e Inmortalidad",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Arresto permanente por acortamiento telomerico critico.",
+      "therapeutic_relevance": "Barrera a superar por el tumor.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-158",
+      "name": "Oncogene-induced senescence (OIS)",
+      "category": "Telómeros, Senescencia e Inmortalidad",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Freno protector ante oncogenes hiperactivos.",
+      "therapeutic_relevance": "Su elusion favorece progresion.",
+      "reference": "Serrano et al., Cell 1997"
+    },
+    {
+      "id": "ONC-159",
+      "name": "SASP (senescence-associated secretory phenotype)",
+      "category": "Telómeros, Senescencia e Inmortalidad",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Secretoma inflamatorio de celulas senescentes que remodela el TME.",
+      "therapeutic_relevance": "Diana de senomorficos.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-160",
+      "name": "Therapy-induced senescence",
+      "category": "Telómeros, Senescencia e Inmortalidad",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Senescencia inducida por quimio/radio con efectos duales.",
+      "therapeutic_relevance": "Estrategias one-two punch (senoliticos).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-161",
+      "name": "Hayflick limit",
+      "category": "Telómeros, Senescencia e Inmortalidad",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Numero finito de divisiones de celulas somaticas normales.",
+      "therapeutic_relevance": "Marco conceptual de la inmortalizacion.",
+      "reference": "Hayflick & Moorhead, Exp Cell Res 1961"
+    },
+    {
+      "id": "ONC-162",
+      "name": "VEGF-A",
+      "category": "Angiogénesis",
+      "layer": "cellular",
+      "role": "diana",
+      "mechanism": "Ligando maestro que induce proliferacion y permeabilidad endotelial.",
+      "therapeutic_relevance": "Bevacizumab, aflibercept.",
+      "reference": "Ferrara et al., Nat Med 2003"
+    },
+    {
+      "id": "ONC-163",
+      "name": "VEGFR2 (KDR)",
+      "category": "Angiogénesis",
+      "layer": "cellular",
+      "role": "diana",
+      "mechanism": "Receptor principal de la senal angiogenica de VEGF.",
+      "therapeutic_relevance": "Ramucirumab; TKI antiangiogenicos.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-164",
+      "name": "Angiogenic switch",
+      "category": "Angiogénesis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Cambio hacia fenotipo pro-angiogenico que vasculariza el tumor.",
+      "therapeutic_relevance": "Blanco de la terapia antiangiogenica.",
+      "reference": "Hanahan & Folkman, Cell 1996"
+    },
+    {
+      "id": "ONC-165",
+      "name": "HIF-1 alpha",
+      "category": "Angiogénesis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Factor de transcripcion de hipoxia que induce VEGF y glucolisis.",
+      "therapeutic_relevance": "Diana indirecta; HIF-2 con belzutifan.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-166",
+      "name": "Tumor hypoxia",
+      "category": "Angiogénesis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Baja oxigenacion que selecciona clones agresivos y resistencia.",
+      "therapeutic_relevance": "Radiorresistencia; profarmacos hipoxicos.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-167",
+      "name": "Angiopoietin-Tie2",
+      "category": "Angiogénesis",
+      "layer": "cellular",
+      "role": "diana",
+      "mechanism": "Regula estabilidad y maduracion vascular.",
+      "therapeutic_relevance": "Inhibicion dual con VEGF (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-168",
+      "name": "FGF-driven angiogenesis",
+      "category": "Angiogénesis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "FGF como via alternativa de escape antiangiogenico.",
+      "therapeutic_relevance": "Inhibidores pan-FGFR.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-169",
+      "name": "PDGF pericyte recruitment",
+      "category": "Angiogénesis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Reclutamiento de pericitos que estabiliza neovasos.",
+      "therapeutic_relevance": "Diana combinada con VEGF.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-170",
+      "name": "Vascular normalization",
+      "category": "Angiogénesis",
+      "layer": "cellular",
+      "role": "mecanismo",
+      "mechanism": "La antiangiogenica juiciosa normaliza vasos y mejora la entrega de farmaco.",
+      "therapeutic_relevance": "Ventana de sinergia con quimio.",
+      "reference": "Jain, Science 2005"
+    },
+    {
+      "id": "ONC-171",
+      "name": "Anti-angiogenic therapy",
+      "category": "Angiogénesis",
+      "layer": "cellular",
+      "role": "modalidad",
+      "mechanism": "Bloqueo del suministro vascular del tumor.",
+      "therapeutic_relevance": "Bevacizumab, sunitinib, sorafenib.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-172",
+      "name": "Epithelial-mesenchymal transition (EMT)",
+      "category": "Invasión, EMT y Metástasis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Reprogramacion que otorga motilidad e invasividad.",
+      "therapeutic_relevance": "Diana de la plasticidad tumoral.",
+      "reference": "Thiery, Nat Rev Cancer 2002"
+    },
+    {
+      "id": "ONC-173",
+      "name": "E-cadherin loss",
+      "category": "Invasión, EMT y Metástasis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Perdida de adhesion epitelial que libera celulas invasivas.",
+      "therapeutic_relevance": "Marcador de EMT.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-174",
+      "name": "SNAIL",
+      "category": "Invasión, EMT y Metástasis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Factor de transcripcion que reprime E-cadherina e induce EMT.",
+      "therapeutic_relevance": "Diana de EMT (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-175",
+      "name": "TWIST",
+      "category": "Invasión, EMT y Metástasis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Inductor de EMT y stemness metastasica.",
+      "therapeutic_relevance": "Contexto de plasticidad.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-176",
+      "name": "ZEB1",
+      "category": "Invasión, EMT y Metástasis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Represor de epitelialidad que refuerza el estado mesenquimal.",
+      "therapeutic_relevance": "Nodo de resistencia/plasticidad.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-177",
+      "name": "Matrix metalloproteinases (MMPs)",
+      "category": "Invasión, EMT y Metástasis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Proteasas que degradan la matriz y liberan factores.",
+      "therapeutic_relevance": "Historicos MMPi (reto de especificidad).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-178",
+      "name": "Invadopodia",
+      "category": "Invasión, EMT y Metástasis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Protrusiones que focalizan la degradacion de matriz.",
+      "therapeutic_relevance": "Diana estructural (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-179",
+      "name": "Basement membrane degradation",
+      "category": "Invasión, EMT y Metástasis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Ruptura de la barrera que separa epitelio y estroma.",
+      "therapeutic_relevance": "Paso definitorio de invasion.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-180",
+      "name": "Intravasation",
+      "category": "Invasión, EMT y Metástasis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Entrada de celulas tumorales a la circulacion.",
+      "therapeutic_relevance": "Diana del cascada metastasica.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-181",
+      "name": "Circulating tumor cells (CTCs)",
+      "category": "Invasión, EMT y Metástasis",
+      "layer": "cellular",
+      "role": "biomarcador",
+      "mechanism": "Celulas tumorales en sangre; siembra metastasica y biopsia liquida.",
+      "therapeutic_relevance": "Monitorizacion no invasiva.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-182",
+      "name": "Extravasation",
+      "category": "Invasión, EMT y Metástasis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Salida de la circulacion hacia el tejido diana.",
+      "therapeutic_relevance": "Paso de la colonizacion.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-183",
+      "name": "Pre-metastatic niche",
+      "category": "Invasión, EMT y Metástasis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Acondicionamiento a distancia del organo diana antes de la llegada.",
+      "therapeutic_relevance": "Diana preventiva (investigacion).",
+      "reference": "Kaplan et al., Nature 2005"
+    },
+    {
+      "id": "ONC-184",
+      "name": "Metastatic colonization",
+      "category": "Invasión, EMT y Metástasis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Etapa limitante: crecer en un organo ajeno.",
+      "therapeutic_relevance": "Objetivo terapeutico critico.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-185",
+      "name": "Tumor dormancy",
+      "category": "Invasión, EMT y Metástasis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Celulas diseminadas quiescentes que recaen anos despues.",
+      "therapeutic_relevance": "Reto de erradicacion.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-186",
+      "name": "Organotropism (seed and soil)",
+      "category": "Invasión, EMT y Metástasis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "Patrones organo-especificos de metastasis.",
+      "therapeutic_relevance": "Explica tropismos clinicos.",
+      "reference": "Paget 1889; Fidler, Nat Rev Cancer 2003"
+    },
+    {
+      "id": "ONC-187",
+      "name": "Integrins",
+      "category": "Invasión, EMT y Metástasis",
+      "layer": "cellular",
+      "role": "diana",
+      "mechanism": "Receptores de matriz que guian adhesion y supervivencia.",
+      "therapeutic_relevance": "Modulan tropismo y farmacorresistencia.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-188",
+      "name": "Focal adhesion kinase (FAK)",
+      "category": "Invasión, EMT y Metástasis",
+      "layer": "cellular",
+      "role": "diana",
+      "mechanism": "Integra senal de adhesion con supervivencia y motilidad.",
+      "therapeutic_relevance": "Inhibidores de FAK (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-189",
+      "name": "Rho/Rac cytoskeletal dynamics",
+      "category": "Invasión, EMT y Metástasis",
+      "layer": "cellular",
+      "role": "proceso",
+      "mechanism": "GTPasas que reorganizan el citoesqueleto para migrar.",
+      "therapeutic_relevance": "Diana de motilidad (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-190",
+      "name": "Warburg effect (aerobic glycolysis)",
+      "category": "Metabolismo Tumoral",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Preferencia por glucolisis con lactato pese a haber oxigeno.",
+      "therapeutic_relevance": "Base de PET-FDG; dianas metabolicas.",
+      "reference": "Warburg 1956; Vander Heiden et al., Science 2009"
+    },
+    {
+      "id": "ONC-191",
+      "name": "Glutaminolysis",
+      "category": "Metabolismo Tumoral",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Uso de glutamina como carbono/nitrogeno anaplerotico.",
+      "therapeutic_relevance": "Inhibidores de glutaminasa (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-192",
+      "name": "Lactate / MCT shuttle",
+      "category": "Metabolismo Tumoral",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Exportacion e intercambio de lactato que acidifica el TME.",
+      "therapeutic_relevance": "Inhibidores de MCT (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-193",
+      "name": "PKM2",
+      "category": "Metabolismo Tumoral",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Isoforma de piruvato-cinasa que favorece biosintesis.",
+      "therapeutic_relevance": "Diana metabolica (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-194",
+      "name": "LDHA",
+      "category": "Metabolismo Tumoral",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Convierte piruvato en lactato regenerando NAD+.",
+      "therapeutic_relevance": "Inhibicion de LDHA (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-195",
+      "name": "GLUT1 (SLC2A1)",
+      "category": "Metabolismo Tumoral",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Transportador que eleva la captacion de glucosa.",
+      "therapeutic_relevance": "Correlato de PET-FDG.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-196",
+      "name": "One-carbon / folate metabolism",
+      "category": "Metabolismo Tumoral",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Aporta unidades de carbono para nucleotidos y metilacion.",
+      "therapeutic_relevance": "Antifolatos (metotrexato, pemetrexed).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-197",
+      "name": "Serine-glycine biosynthesis",
+      "category": "Metabolismo Tumoral",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Ruta biosintetica reprogramada que alimenta el one-carbon.",
+      "therapeutic_relevance": "Diana metabolica emergente.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-198",
+      "name": "Fatty acid synthesis (FASN)",
+      "category": "Metabolismo Tumoral",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Lipogenesis de novo para membranas y senalizacion.",
+      "therapeutic_relevance": "Inhibidores de FASN (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-199",
+      "name": "2-HG oncometabolite (IDH-mut)",
+      "category": "Metabolismo Tumoral",
+      "layer": "molecular",
+      "role": "biomarcador",
+      "mechanism": "IDH mutante produce 2-hidroxiglutarato que altera la epigenetica.",
+      "therapeutic_relevance": "Ivosidenib/enasidenib; biomarcador.",
+      "reference": "Dang et al., Nature 2009"
+    },
+    {
+      "id": "ONC-200",
+      "name": "TCA cycle rewiring",
+      "category": "Metabolismo Tumoral",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Reprogramacion del ciclo de Krebs para biosintesis.",
+      "therapeutic_relevance": "Vulnerabilidades contextuales.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-201",
+      "name": "NAD+ metabolism",
+      "category": "Metabolismo Tumoral",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Cofactor redox y de senalizacion elevado en proliferacion.",
+      "therapeutic_relevance": "Inhibidores de NAMPT (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-202",
+      "name": "Autophagy",
+      "category": "Metabolismo Tumoral",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Reciclaje de organelas/proteinas para sobrevivir al estres.",
+      "therapeutic_relevance": "Modulacion (cloroquina, investigacion).",
+      "reference": "Levine & Kroemer, Cell 2008"
+    },
+    {
+      "id": "ONC-203",
+      "name": "Reductive carboxylation",
+      "category": "Metabolismo Tumoral",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Sintesis de citrato desde glutamina en hipoxia.",
+      "therapeutic_relevance": "Vulnerabilidad metabolica.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-204",
+      "name": "ROS / redox homeostasis",
+      "category": "Metabolismo Tumoral",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Equilibrio de especies reactivas que el tumor debe tamponar.",
+      "therapeutic_relevance": "Estrategias pro-oxidantes selectivas.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-205",
+      "name": "Amino-acid dependency (Asn/Arg)",
+      "category": "Metabolismo Tumoral",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Adiccion a aminoacidos no sintetizables por ciertos tumores.",
+      "therapeutic_relevance": "L-asparaginasa (LLA); depledores de arginina.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-206",
+      "name": "DNA methylation (5mC)",
+      "category": "Epigenética y Cromatina",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Marca en CpG que regula la expresion sin cambiar la secuencia.",
+      "therapeutic_relevance": "Base de terapias hipometilantes.",
+      "reference": "Jones & Baylin, Nat Rev Genet 2002"
+    },
+    {
+      "id": "ONC-207",
+      "name": "DNMTs (DNMT1/3A/3B)",
+      "category": "Epigenética y Cromatina",
+      "layer": "molecular",
+      "role": "diana",
+      "mechanism": "Enzimas que escriben la metilacion del ADN.",
+      "therapeutic_relevance": "Azacitidina, decitabina.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-208",
+      "name": "CpG island hypermethylation",
+      "category": "Epigenética y Cromatina",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Silenciamiento de supresores por metilacion de promotores.",
+      "therapeutic_relevance": "Reversible con DNMTi.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-209",
+      "name": "Global hypomethylation",
+      "category": "Epigenética y Cromatina",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Perdida global de metilacion que favorece inestabilidad.",
+      "therapeutic_relevance": "Marca epigenetica tumoral.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-210",
+      "name": "Histone acetyltransferases (HATs)",
+      "category": "Epigenética y Cromatina",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Anaden acetilo abriendo cromatina para transcripcion.",
+      "therapeutic_relevance": "Contexto de balance con HDAC.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-211",
+      "name": "Histone deacetylases (HDACs)",
+      "category": "Epigenética y Cromatina",
+      "layer": "molecular",
+      "role": "diana",
+      "mechanism": "Retiran acetilos compactando cromatina.",
+      "therapeutic_relevance": "Vorinostat, romidepsina.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-212",
+      "name": "Histone methylation",
+      "category": "Epigenética y Cromatina",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Marcas activadoras o represoras segun residuo y grado.",
+      "therapeutic_relevance": "Diana de escritores/borradores.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-213",
+      "name": "EZH2 / PRC2 (H3K27me3)",
+      "category": "Epigenética y Cromatina",
+      "layer": "molecular",
+      "role": "diana",
+      "mechanism": "Deposita marca represiva que silencia supresores.",
+      "therapeutic_relevance": "Tazemetostat.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-214",
+      "name": "DOT1L (H3K79me)",
+      "category": "Epigenética y Cromatina",
+      "layer": "molecular",
+      "role": "diana",
+      "mechanism": "Metiltransferasa esencial en leucemias con reordenamiento MLL.",
+      "therapeutic_relevance": "Inhibidores de DOT1L (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-215",
+      "name": "BET / BRD4",
+      "category": "Epigenética y Cromatina",
+      "layer": "molecular",
+      "role": "diana",
+      "mechanism": "Lectores de acetil-lisina que sostienen la transcripcion de MYC.",
+      "therapeutic_relevance": "Inhibidores BET (investigacion).",
+      "reference": "Filippakopoulos et al., Nature 2010"
+    },
+    {
+      "id": "ONC-216",
+      "name": "SWI/SNF (BAF) remodeling",
+      "category": "Epigenética y Cromatina",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Complejo que reposiciona nucleosomas; frecuentemente mutado.",
+      "therapeutic_relevance": "Sintesis letal con EZH2.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-217",
+      "name": "TET enzymes / 5hmC",
+      "category": "Epigenética y Cromatina",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Oxidan 5mC iniciando desmetilacion activa.",
+      "therapeutic_relevance": "Alterada por 2-HG en IDH-mut.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-218",
+      "name": "Super-enhancers",
+      "category": "Epigenética y Cromatina",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Grandes clusters regulatorios que sostienen oncogenes de identidad.",
+      "therapeutic_relevance": "Vulnerables a inhibicion transcripcional.",
+      "reference": "Hnisz et al., Cell 2013"
+    },
+    {
+      "id": "ONC-219",
+      "name": "Histone variants",
+      "category": "Epigenética y Cromatina",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Variantes (p.ej. H3.3) que alteran cromatina; mutadas en gliomas pediatricos.",
+      "therapeutic_relevance": "Biomarcador diagnostico.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-220",
+      "name": "Chromatin accessibility",
+      "category": "Epigenética y Cromatina",
+      "layer": "molecular",
+      "role": "proceso",
+      "mechanism": "Paisaje abierto/cerrado que define programas transcripcionales.",
+      "therapeutic_relevance": "Perfilable por ATAC-seq.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-221",
+      "name": "Cancer-associated fibroblasts (CAFs)",
+      "category": "Microambiente Tumoral (TME)",
+      "layer": "tissue",
+      "role": "proceso",
+      "mechanism": "Fibroblastos activados que remodelan matriz y secretan factores.",
+      "therapeutic_relevance": "Diana estromal (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-222",
+      "name": "Tumor-associated macrophages (TAMs, M2)",
+      "category": "Microambiente Tumoral (TME)",
+      "layer": "tissue",
+      "role": "diana",
+      "mechanism": "Macrofagos pro-tumorales que suprimen inmunidad y favorecen angiogenesis.",
+      "therapeutic_relevance": "Reprogramacion; anti-CSF1R.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-223",
+      "name": "Myeloid-derived suppressor cells (MDSCs)",
+      "category": "Microambiente Tumoral (TME)",
+      "layer": "tissue",
+      "role": "proceso",
+      "mechanism": "Poblacion mieloide inmadura que inhibe linfocitos T.",
+      "therapeutic_relevance": "Objetivo de combinaciones inmunes.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-224",
+      "name": "Regulatory T cells (Tregs)",
+      "category": "Microambiente Tumoral (TME)",
+      "layer": "tissue",
+      "role": "diana",
+      "mechanism": "Linfocitos que amortiguan la respuesta antitumoral.",
+      "therapeutic_relevance": "Deplecion selectiva (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-225",
+      "name": "Extracellular matrix remodeling",
+      "category": "Microambiente Tumoral (TME)",
+      "layer": "tissue",
+      "role": "proceso",
+      "mechanism": "Rigidez y composicion de matriz que guian invasion y farmacorresistencia.",
+      "therapeutic_relevance": "Normalizacion estromal.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-226",
+      "name": "Hypoxic niche",
+      "category": "Microambiente Tumoral (TME)",
+      "layer": "tissue",
+      "role": "proceso",
+      "mechanism": "Regiones hipoxicas que fomentan stemness y resistencia.",
+      "therapeutic_relevance": "Radiorresistencia; profarmacos.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-227",
+      "name": "Abnormal tumor vasculature",
+      "category": "Microambiente Tumoral (TME)",
+      "layer": "tissue",
+      "role": "proceso",
+      "mechanism": "Vasos tortuosos y permeables que dificultan la entrega de farmacos.",
+      "therapeutic_relevance": "Normalizacion vascular.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-228",
+      "name": "Desmoplasia",
+      "category": "Microambiente Tumoral (TME)",
+      "layer": "tissue",
+      "role": "proceso",
+      "mechanism": "Estroma denso (p.ej. pancreas) que actua de barrera fisica.",
+      "therapeutic_relevance": "Reto de penetracion terapeutica.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-229",
+      "name": "Tumor-derived exosomes",
+      "category": "Microambiente Tumoral (TME)",
+      "layer": "tissue",
+      "role": "proceso",
+      "mechanism": "Vesiculas que transportan senales pro-tumorales a distancia.",
+      "therapeutic_relevance": "Biomarcadores y dianas emergentes.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-230",
+      "name": "Cytokine/chemokine milieu",
+      "category": "Microambiente Tumoral (TME)",
+      "layer": "tissue",
+      "role": "proceso",
+      "mechanism": "Red soluble que recluta y polariza celulas inmunes.",
+      "therapeutic_relevance": "Modulacion inmune dirigida.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-231",
+      "name": "Tertiary lymphoid structures (TLS)",
+      "category": "Microambiente Tumoral (TME)",
+      "layer": "tissue",
+      "role": "biomarcador",
+      "mechanism": "Agregados linfoides intratumorales asociados a mejor respuesta inmune.",
+      "therapeutic_relevance": "Predictor de respuesta a checkpoint.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-232",
+      "name": "Immune-excluded phenotype",
+      "category": "Microambiente Tumoral (TME)",
+      "layer": "tissue",
+      "role": "biomarcador",
+      "mechanism": "Linfocitos confinados al estroma sin infiltrar el nido tumoral.",
+      "therapeutic_relevance": "Estratifica respuesta a inmunoterapia.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-233",
+      "name": "Metabolic competition in TME",
+      "category": "Microambiente Tumoral (TME)",
+      "layer": "tissue",
+      "role": "proceso",
+      "mechanism": "El tumor priva de glucosa y aminoacidos a linfocitos.",
+      "therapeutic_relevance": "Reprogramacion metabolica inmune.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-234",
+      "name": "PD-1 (PDCD1)",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "diana",
+      "mechanism": "Checkpoint inhibidor en linfocitos T que limita su activacion.",
+      "therapeutic_relevance": "Pembrolizumab, nivolumab.",
+      "reference": "Ishida et al., EMBO J 1992"
+    },
+    {
+      "id": "ONC-235",
+      "name": "PD-L1 (CD274)",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "diana",
+      "mechanism": "Ligando tumoral de PD-1 que apaga la respuesta T.",
+      "therapeutic_relevance": "Atezolizumab; biomarcador (TPS/CPS).",
+      "reference": "Dong et al., Nat Med 2002"
+    },
+    {
+      "id": "ONC-236",
+      "name": "CTLA-4",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "diana",
+      "mechanism": "Checkpoint que compite con CD28 frenando el cebado T.",
+      "therapeutic_relevance": "Ipilimumab.",
+      "reference": "Leach, Krummel & Allison, Science 1996"
+    },
+    {
+      "id": "ONC-237",
+      "name": "Immune checkpoint blockade",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "modalidad",
+      "mechanism": "Liberar frenos inmunes para reactivar linfocitos antitumorales.",
+      "therapeutic_relevance": "Paradigma anti-PD-1/PD-L1/CTLA-4.",
+      "reference": "Sharma & Allison, Science 2015"
+    },
+    {
+      "id": "ONC-238",
+      "name": "T-cell exhaustion",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "proceso",
+      "mechanism": "Disfuncion progresiva de T por estimulacion cronica.",
+      "therapeutic_relevance": "Reversible parcialmente con checkpoint.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-239",
+      "name": "Neoantigens",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "biomarcador",
+      "mechanism": "Peptidos mutados tumor-especificos reconocidos por linfocitos T.",
+      "therapeutic_relevance": "Base de vacunas personalizadas.",
+      "reference": "Schumacher & Schreiber, Science 2015"
+    },
+    {
+      "id": "ONC-240",
+      "name": "MHC-I antigen presentation",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "proceso",
+      "mechanism": "Presentacion de peptidos a CD8; su perdida evade inmunidad.",
+      "therapeutic_relevance": "Su restauracion mejora respuesta.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-241",
+      "name": "Tumor-infiltrating lymphocytes (TILs)",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "biomarcador",
+      "mechanism": "Linfocitos infiltrantes; su densidad predice pronostico/respuesta.",
+      "therapeutic_relevance": "Base de la terapia con TIL.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-242",
+      "name": "CD8+ cytotoxic T cells",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "proceso",
+      "mechanism": "Efectores que lisan celulas tumorales reconocidas.",
+      "therapeutic_relevance": "Objetivo a potenciar en inmunoterapia.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-243",
+      "name": "Natural killer (NK) cells",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "proceso",
+      "mechanism": "Inmunidad innata que mata celulas sin MHC-I (missing self).",
+      "therapeutic_relevance": "Terapias NK y CAR-NK.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-244",
+      "name": "CAR-T cells",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "modalidad",
+      "mechanism": "Linfocitos T con receptor quimerico contra antigeno tumoral.",
+      "therapeutic_relevance": "Anti-CD19 en linfoma/leucemia; anti-BCMA en mieloma.",
+      "reference": "June & Sadelain, NEJM 2018"
+    },
+    {
+      "id": "ONC-245",
+      "name": "Bispecific T-cell engagers (BiTE)",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "modalidad",
+      "mechanism": "Anticuerpos que unen CD3 de T con antigeno tumoral.",
+      "therapeutic_relevance": "Blinatumomab (CD19xCD3).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-246",
+      "name": "TCR-engineered T cells",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "modalidad",
+      "mechanism": "T con TCR redirigido a antigenos intracelulares via MHC.",
+      "therapeutic_relevance": "Anti-antigenos de cancer/testiculo.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-247",
+      "name": "Cancer vaccines",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "modalidad",
+      "mechanism": "Inmunizacion con antigenos tumorales para inducir respuesta T.",
+      "therapeutic_relevance": "Vacunas de neoantigeno (mRNA).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-248",
+      "name": "Oncolytic viruses",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "modalidad",
+      "mechanism": "Virus que lisan tumores e inducen inmunidad in situ.",
+      "therapeutic_relevance": "Talimogene laherparepvec (T-VEC).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-249",
+      "name": "LAG-3",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "diana",
+      "mechanism": "Checkpoint co-inhibidor que sinergiza con PD-1.",
+      "therapeutic_relevance": "Relatlimab (combinado con nivolumab).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-250",
+      "name": "TIM-3 (HAVCR2)",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "diana",
+      "mechanism": "Marcador/regulador de agotamiento T.",
+      "therapeutic_relevance": "Inhibidores en investigacion.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-251",
+      "name": "TIGIT",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "diana",
+      "mechanism": "Checkpoint que compite por ligandos con CD226.",
+      "therapeutic_relevance": "Anti-TIGIT en investigacion.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-252",
+      "name": "IDO1",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "diana",
+      "mechanism": "Enzima que degrada triptofano creando entorno inmunosupresor.",
+      "therapeutic_relevance": "Inhibidores de IDO (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-253",
+      "name": "Adenosine / CD73 axis",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "diana",
+      "mechanism": "Adenosina extracelular que suprime linfocitos T.",
+      "therapeutic_relevance": "Anti-CD39/CD73/A2AR (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-254",
+      "name": "CD47-SIRP alpha (dont eat me)",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "diana",
+      "mechanism": "Senal que protege al tumor de la fagocitosis.",
+      "therapeutic_relevance": "Bloqueo de CD47 (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-255",
+      "name": "Immunogenic cell death (ICD)",
+      "category": "Inmuno-Oncología y Evasión Inmune",
+      "layer": "tissue",
+      "role": "proceso",
+      "mechanism": "Muerte que libera senales de peligro y activa inmunidad.",
+      "therapeutic_relevance": "Inducida por ciertas quimio/radio.",
+      "reference": "Galluzzi et al., Nat Rev Immunol 2017"
+    },
+    {
+      "id": "ONC-256",
+      "name": "Cytotoxic chemotherapy",
+      "category": "Modalidades Terapéuticas",
+      "layer": "therapy",
+      "role": "modalidad",
+      "mechanism": "Farmacos que danan celulas en division rapida.",
+      "therapeutic_relevance": "Columna vertebral historica del tratamiento.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-257",
+      "name": "Alkylating agents",
+      "category": "Modalidades Terapéuticas",
+      "layer": "therapy",
+      "role": "modalidad",
+      "mechanism": "Anaden grupos alquilo al ADN generando enlaces cruzados.",
+      "therapeutic_relevance": "Ciclofosfamida, temozolomida.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-258",
+      "name": "Platinum agents",
+      "category": "Modalidades Terapéuticas",
+      "layer": "therapy",
+      "role": "modalidad",
+      "mechanism": "Forman aductos de ADN que bloquean replicacion.",
+      "therapeutic_relevance": "Cisplatino, carboplatino, oxaliplatino.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-259",
+      "name": "Antimetabolites",
+      "category": "Modalidades Terapéuticas",
+      "layer": "therapy",
+      "role": "modalidad",
+      "mechanism": "Analogos que interfieren sintesis de nucleotidos/ADN.",
+      "therapeutic_relevance": "5-FU, metotrexato, gemcitabina.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-260",
+      "name": "Topoisomerase inhibitors",
+      "category": "Modalidades Terapéuticas",
+      "layer": "therapy",
+      "role": "modalidad",
+      "mechanism": "Bloquean topoisomerasas provocando roturas de ADN.",
+      "therapeutic_relevance": "Irinotecan, etoposido, doxorrubicina.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-261",
+      "name": "Taxanes",
+      "category": "Modalidades Terapéuticas",
+      "layer": "therapy",
+      "role": "modalidad",
+      "mechanism": "Estabilizan microtubulos e impiden la mitosis.",
+      "therapeutic_relevance": "Paclitaxel, docetaxel.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-262",
+      "name": "Vinca alkaloids",
+      "category": "Modalidades Terapéuticas",
+      "layer": "therapy",
+      "role": "modalidad",
+      "mechanism": "Impiden el ensamblaje de microtubulos.",
+      "therapeutic_relevance": "Vincristina, vinblastina.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-263",
+      "name": "Anthracyclines",
+      "category": "Modalidades Terapéuticas",
+      "layer": "therapy",
+      "role": "modalidad",
+      "mechanism": "Intercalan ADN e inhiben topoisomerasa II.",
+      "therapeutic_relevance": "Doxorrubicina (toxicidad cardiaca).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-264",
+      "name": "Small-molecule kinase inhibitors",
+      "category": "Modalidades Terapéuticas",
+      "layer": "therapy",
+      "role": "modalidad",
+      "mechanism": "Bloquean cinasas oncogenicas especificas.",
+      "therapeutic_relevance": "Imatinib, osimertinib, muchos mas.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-265",
+      "name": "Monoclonal antibodies",
+      "category": "Modalidades Terapéuticas",
+      "layer": "therapy",
+      "role": "modalidad",
+      "mechanism": "Anticuerpos que marcan o bloquean dianas de superficie.",
+      "therapeutic_relevance": "Rituximab, trastuzumab, cetuximab.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-266",
+      "name": "Antibody-drug conjugates (ADCs)",
+      "category": "Modalidades Terapéuticas",
+      "layer": "therapy",
+      "role": "modalidad",
+      "mechanism": "Anticuerpo unido a citotoxico para entrega dirigida.",
+      "therapeutic_relevance": "T-DXd, sacituzumab govitecan.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-267",
+      "name": "Radiotherapy",
+      "category": "Modalidades Terapéuticas",
+      "layer": "therapy",
+      "role": "modalidad",
+      "mechanism": "Radiacion ionizante que induce dano letal de ADN.",
+      "therapeutic_relevance": "Curativa/paliativa segun contexto.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-268",
+      "name": "Endocrine / hormonal therapy",
+      "category": "Modalidades Terapéuticas",
+      "layer": "therapy",
+      "role": "modalidad",
+      "mechanism": "Bloquea senal hormonal que impulsa el tumor.",
+      "therapeutic_relevance": "Tamoxifeno, inhibidores de aromatasa, ADT.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-269",
+      "name": "Proteasome inhibitors",
+      "category": "Modalidades Terapéuticas",
+      "layer": "therapy",
+      "role": "modalidad",
+      "mechanism": "Bloquean la degradacion proteica generando estres.",
+      "therapeutic_relevance": "Bortezomib (mieloma).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-270",
+      "name": "PROTAC degraders",
+      "category": "Modalidades Terapéuticas",
+      "layer": "therapy",
+      "role": "modalidad",
+      "mechanism": "Reclutan una E3 ligasa para degradar la diana.",
+      "therapeutic_relevance": "Degradadores de AR/ER (investigacion).",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-271",
+      "name": "Differentiation therapy",
+      "category": "Modalidades Terapéuticas",
+      "layer": "therapy",
+      "role": "modalidad",
+      "mechanism": "Fuerza la maduracion de celulas malignas.",
+      "therapeutic_relevance": "ATRA + arsenico en LPA.",
+      "reference": "Huang et al., Blood 1988"
+    },
+    {
+      "id": "ONC-272",
+      "name": "Immunomodulatory drugs (IMiDs)",
+      "category": "Modalidades Terapéuticas",
+      "layer": "therapy",
+      "role": "modalidad",
+      "mechanism": "Modulan cereblon y la inmunidad (mieloma).",
+      "therapeutic_relevance": "Lenalidomida, pomalidomida.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-273",
+      "name": "Epigenetic therapy",
+      "category": "Modalidades Terapéuticas",
+      "layer": "therapy",
+      "role": "modalidad",
+      "mechanism": "Revierte silenciamientos aberrantes de la cromatina.",
+      "therapeutic_relevance": "DNMTi, HDACi, EZH2i.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-274",
+      "name": "Imatinib -> BCR-ABL",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Inhibidor de tirosina-cinasa que apaga BCR-ABL en LMC.",
+      "therapeutic_relevance": "Transformo la LMC en enfermedad cronica.",
+      "reference": "Druker et al., NEJM 2001"
+    },
+    {
+      "id": "ONC-275",
+      "name": "Trastuzumab -> HER2",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Anticuerpo que bloquea HER2 en tumores HER2+.",
+      "therapeutic_relevance": "Mama y gastrico HER2+.",
+      "reference": "Slamon et al., NEJM 2001"
+    },
+    {
+      "id": "ONC-276",
+      "name": "Trastuzumab deruxtecan -> HER2 (ADC)",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "ADC que entrega un inhibidor de topoisomerasa I a celulas HER2.",
+      "therapeutic_relevance": "Activo incluso en HER2-bajo.",
+      "reference": "Modi et al., NEJM 2022"
+    },
+    {
+      "id": "ONC-277",
+      "name": "Osimertinib -> EGFR (T790M)",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "TKI de 3a generacion contra EGFR mutante y T790M.",
+      "therapeutic_relevance": "1a linea en NSCLC EGFR-mut.",
+      "reference": "Soria et al., NEJM 2018"
+    },
+    {
+      "id": "ONC-278",
+      "name": "Gefitinib/Erlotinib -> EGFR",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "TKI de 1a generacion para EGFR con mutacion sensibilizante.",
+      "therapeutic_relevance": "NSCLC EGFR-mut.",
+      "reference": "Mok et al., NEJM 2009"
+    },
+    {
+      "id": "ONC-279",
+      "name": "Vemurafenib -> BRAF V600E",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Inhibidor selectivo de BRAF V600E.",
+      "therapeutic_relevance": "Melanoma BRAF-mut.",
+      "reference": "Chapman et al., NEJM 2011"
+    },
+    {
+      "id": "ONC-280",
+      "name": "Dabrafenib + Trametinib -> BRAF + MEK",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Doble bloqueo de la via MAPK que retrasa resistencia.",
+      "therapeutic_relevance": "Melanoma y otros BRAF V600.",
+      "reference": "Long et al., NEJM 2014"
+    },
+    {
+      "id": "ONC-281",
+      "name": "Sotorasib -> KRAS G12C",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Inhibidor covalente que atrapa KRAS G12C inactivo (bolsillo switch-II).",
+      "therapeutic_relevance": "NSCLC KRAS G12C.",
+      "reference": "Skoulidis et al., NEJM 2021"
+    },
+    {
+      "id": "ONC-282",
+      "name": "Adagrasib -> KRAS G12C",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Segundo inhibidor covalente de KRAS G12C.",
+      "therapeutic_relevance": "NSCLC y CCR KRAS G12C.",
+      "reference": "Janne et al., NEJM 2022"
+    },
+    {
+      "id": "ONC-283",
+      "name": "Crizotinib -> ALK/ROS1",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "TKI para fusiones ALK y ROS1.",
+      "therapeutic_relevance": "NSCLC ALK+ o ROS1+.",
+      "reference": "Shaw et al., NEJM 2013"
+    },
+    {
+      "id": "ONC-284",
+      "name": "Alectinib -> ALK",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "TKI de ALK de nueva generacion con actividad en SNC.",
+      "therapeutic_relevance": "1a linea NSCLC ALK+.",
+      "reference": "Peters et al., NEJM 2017"
+    },
+    {
+      "id": "ONC-285",
+      "name": "Larotrectinib -> NTRK fusion",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Inhibidor TRK agnostico de tipo tumoral.",
+      "therapeutic_relevance": "Tumores con fusion NTRK.",
+      "reference": "Drilon et al., NEJM 2018"
+    },
+    {
+      "id": "ONC-286",
+      "name": "Olaparib -> PARP",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Inhibidor de PARP letal en tumores con deficiencia de HR.",
+      "therapeutic_relevance": "Ovario/mama BRCA-mut.",
+      "reference": "Ledermann et al., NEJM 2012"
+    },
+    {
+      "id": "ONC-287",
+      "name": "Venetoclax -> BCL2",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Mimetico BH3 que restaura la apoptosis.",
+      "therapeutic_relevance": "LLC y LMA.",
+      "reference": "Souers et al., Nat Med 2013"
+    },
+    {
+      "id": "ONC-288",
+      "name": "Palbociclib -> CDK4/6",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Inhibidor de CDK4/6 que frena la fosforilacion de RB.",
+      "therapeutic_relevance": "Mama HR+/HER2-.",
+      "reference": "Finn et al., NEJM 2016"
+    },
+    {
+      "id": "ONC-289",
+      "name": "Rituximab -> CD20",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Anticuerpo anti-CD20 que deplecciona linfocitos B.",
+      "therapeutic_relevance": "Linfomas B y LLC.",
+      "reference": "Coiffier et al., NEJM 2002"
+    },
+    {
+      "id": "ONC-290",
+      "name": "Bevacizumab -> VEGF-A",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Anticuerpo que neutraliza VEGF-A y priva de angiogenesis.",
+      "therapeutic_relevance": "Colorrectal, pulmon, otros.",
+      "reference": "Hurwitz et al., NEJM 2004"
+    },
+    {
+      "id": "ONC-291",
+      "name": "Sunitinib -> VEGFR (multi-TKI)",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Inhibidor multicinasa antiangiogenico.",
+      "therapeutic_relevance": "Renal, GIST, TNE.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-292",
+      "name": "Ibrutinib -> BTK",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Inhibidor covalente de BTK en la senal del receptor B.",
+      "therapeutic_relevance": "LLC y linfoma del manto.",
+      "reference": "Byrd et al., NEJM 2013"
+    },
+    {
+      "id": "ONC-293",
+      "name": "Ruxolitinib -> JAK1/2",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Inhibidor de JAK que bloquea la senal JAK-STAT.",
+      "therapeutic_relevance": "Mielofibrosis y policitemia vera.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-294",
+      "name": "Ivosidenib -> IDH1 mutante",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Inhibidor del IDH1 mutante que reduce el 2-HG.",
+      "therapeutic_relevance": "LMA y colangiocarcinoma IDH1-mut.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-295",
+      "name": "Enasidenib -> IDH2 mutante",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Inhibidor del IDH2 mutante que induce diferenciacion.",
+      "therapeutic_relevance": "LMA IDH2-mut.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-296",
+      "name": "Tazemetostat -> EZH2",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Inhibidor de EZH2 que revierte silenciamiento represivo.",
+      "therapeutic_relevance": "Linfoma folicular y sarcoma epitelioide.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-297",
+      "name": "Pembrolizumab -> PD-1",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Anti-PD-1 que reactiva linfocitos T antitumorales.",
+      "therapeutic_relevance": "Multiples tumores; agnostico en MSI-H.",
+      "reference": "Le et al., NEJM 2015"
+    },
+    {
+      "id": "ONC-298",
+      "name": "Nivolumab -> PD-1",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Anti-PD-1 con amplio desarrollo clinico.",
+      "therapeutic_relevance": "Melanoma, pulmon, renal, otros.",
+      "reference": "Topalian et al., NEJM 2012"
+    },
+    {
+      "id": "ONC-299",
+      "name": "Atezolizumab -> PD-L1",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Anticuerpo anti-PD-L1 que bloquea el eje PD-1/PD-L1.",
+      "therapeutic_relevance": "Pulmon, vejiga, mama TN.",
+      "reference": "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+    },
+    {
+      "id": "ONC-300",
+      "name": "Ipilimumab -> CTLA-4",
+      "category": "Primitivas Fármaco -> Diana",
+      "layer": "therapy",
+      "role": "farmaco->diana",
+      "mechanism": "Anti-CTLA-4, primer checkpoint con beneficio en supervivencia.",
+      "therapeutic_relevance": "Melanoma; combinaciones.",
+      "reference": "Hodi et al., NEJM 2010"
+    }
+  ]
+}

@@ -102,9 +102,5 @@ Todo nodo o dato derivado de un modelo de lenguaje generativo está implícitame
 
 ## 5. Cumplimiento de Invariantes de Arquitectura
 
-- **`INV_BFT_04`:** Ejecutado en el `SQLiteCommitter` con verificación de `payload_hash`.
-- **`INV_C5_15`:** Ensamblado en el sink L1 mediante script `OP_RETURN` binario de 32 bytes.
-- **`INV_C5_17`:** Licenciamiento Dual Soberano embebido en las cabeceras de compilación.
-- **`INV_C5_18`:** Escalado agéntico en memoria con `AgencyHypervisor` sin Git Worktrees físicos.
-- **`INV_C5_28`:** Pre-filtro isomórfico de grafos vía refinamiento de color 1-WL.
-- **`GELABP_DEPTH_INVARIANT`:** Límite de profundidad AST $\le 4$ validado sintácticamente.
+Todos los invariantes arquitectónicos (`INV_BFT_04`, `INV_C5_15`, etc.) han sido unificados y su definición formal se encuentra documentada en la especificación central:
+👉 **[Invariantes del Sistema BABYLON-60](spec_invariants.md)**

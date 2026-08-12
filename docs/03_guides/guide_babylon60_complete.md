@@ -140,9 +140,9 @@ The output assets are compiled to:
 
 The repository enforces strict BFT (Byzantine Fault Tolerance) consistency checks to protect against code-injection and credential leakage:
 
-### 🔍 Secret Swarm Auditor (`scripts/secret_swarm_auditor.py`)
+### 🔍 Secret Swarm Auditor (`scripts/canary_check.py`)
 Scans all active project directories (excluding `.venv`, `node_modules`, `dist`, and `target`) for high-entropy strings and hardcoded credentials (AWS, RSA private keys, JWTs, Github tokens, Google APIs).
-* Run command: `python3 scripts/secret_swarm_auditor.py`
+* Run command: `python3 scripts/canary_check.py`
 * Enforces entropy threshold $> 4.8$ for any word token longer than 20 characters.
 
 ### 🧪 Test & Regress Verification

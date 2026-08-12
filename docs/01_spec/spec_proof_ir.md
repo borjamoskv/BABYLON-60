@@ -86,7 +86,7 @@ $$\text{Parent}_{j} = \text{SHA256}\big( \text{Leaf}_{2j} \;\parallel\; \text{Le
 $$\text{MerkleRoot}_{\text{ProofIR}} = \text{RootNode} \in \{0, 1\}^{256} \cong \mathbf{32 \text{ bytes}}$$
 
 > [!NOTE]
-> De acuerdo con **`INV_C5_15`**, esta raíz de 32 bytes exactos es inyectada directamente en el script `OP_RETURN` de la transacción L1 de Bitcoin, anclando de forma inmutable e inalterable la validez de la demostración a la blockchain de Bitcoin.
+> De acuerdo con el invariante [INV_C5_15 (Invariantes BABYLON-60)](spec_invariants.md), esta raíz de 32 bytes exactos es inyectada directamente en el script `OP_RETURN` de la transacción L1 de Bitcoin, anclando de forma inmutable e inalterable la validez de la demostración a la blockchain de Bitcoin.
 
 ---
 
