@@ -63,26 +63,29 @@ pub const MAX_RETRIES: usize = 10_000;
 /// ## Prohibición de Arc en ruta caliente
 /// El refcount de `Arc` reintroduce el RMW contencioso eliminado por el
 /// diseño seqlock. Usar `mmap`, `Box::leak`, o pool estático.
-#[repr(C, align(8))]
+#[repr(C, align(64))]
 pub struct SharedManifest {
-    pub session_id: [u8; 16],
-    pub domain_mask: u32,
-    pub effect_class: u32,
-    pub timestamp_l5: u64,
-    pub exergy_cost_joules: f64,
-    pub reserved_padding: [u8; 24],
+    pub status_flag: AtomicU32,
+    pub seq: AtomicU32,
+    pub epoch_id: AtomicU64,
+    pub payload_hash: [AtomicU64; 4],
+    pub _padding: [u8; 16],
 }
 
 impl SharedManifest {
     #[must_use]
     pub const fn new() -> Self {
         Self {
-            session_id: [0; 16],
-            domain_mask: 0,
-            effect_class: 0,
-            timestamp_l5: 0,
-            exergy_cost_joules: 0.0,
-            reserved_padding: [0; 24],
+            status_flag: AtomicU32::new(RUNNING),
+            seq: AtomicU32::new(0),
+            epoch_id: AtomicU64::new(0),
+            payload_hash: [
+                AtomicU64::new(0),
+                AtomicU64::new(0),
+                AtomicU64::new(0),
+                AtomicU64::new(0),
+            ],
+            _padding: [0; 16],
         }
     }
 
@@ -101,18 +104,16 @@ impl Default for SharedManifest {
 impl core::fmt::Debug for SharedManifest {
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         f.debug_struct("SharedManifest")
-            .field("session_id", &self.session_id)
-            .field("domain_mask", &self.domain_mask)
-            .field("effect_class", &self.effect_class)
-            .field("timestamp_l5", &self.timestamp_l5)
-            .field("exergy_cost_joules", &self.exergy_cost_joules)
+            .field("status_flag", &self.status_flag)
+            .field("seq", &self.seq)
+            .field("epoch_id", &self.epoch_id)
             .finish()
     }
 }
 
 const _LAYOUT_ASSERTS: () = {
     assert!(size_of::<SharedManifest>() == 64, "SharedManifest debe ser exactamente 64 B");
-    assert!(align_of::<SharedManifest>() == 8, "SharedManifest debe alinearse a 8 B");
+    assert!(align_of::<SharedManifest>() == 64, "SharedManifest debe alinearse a 64 B");
 };
 
 // ---------------------------------------------------------------------------
