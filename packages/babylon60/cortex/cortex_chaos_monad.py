@@ -113,7 +113,7 @@ def _safe_import(name, globals=None, locals=None, fromlist=(), level=0):
     allowed_imports = {"numpy", "networkx", "typing"}
     base_name = name.split('.')[0]
     if base_name not in allowed_imports:
-        raise ImportError(f"SecurityError: Import of '{name}' is forbidden by CORTEX Sandbox")
+        raise ImportError(f"SecurityError: Import of '{name}' is forbidden by CORTEX Markov Blanket")
     return __import__(name, globals, locals, fromlist, level)
 
 safe_builtins = {
@@ -202,7 +202,7 @@ async def run_chaos_monad(source_code: str, frontier_tick: str = "GENESIS_TICK",
                 process.communicate(input=source_code.encode("utf-8")), timeout=timeout_ms / 1000.0
             )
         except asyncio.TimeoutError:
-            # Turing-Sandbox Chaos Isolation (La Sandbox Aislado)
+            # Turing Markov Blanket Chaos Isolation
             _purge_zombies(process)
             return {"status": "Timeout_Entropy_Death", "stdout": "", "error": "Execution exceeded timeout", "scitt_receipt": {}}
     finally:
