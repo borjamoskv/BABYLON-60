@@ -22,6 +22,6 @@ def run_auto_purge() -> None:
         subprocess.run(["find", ".", "-name", "*.db-wal", "-delete"], check=False)
         subprocess.run(["find", ".", "-name", "__pycache__", "-type", "d", "-exec", "rm", "-rf", "{}", "+"], check=False)
         logger.info("✅ [ITERA] Anergía purgada con éxito. Exergía maximizada.")
-    except Exception as e:
+    except (OSError, subprocess.SubprocessError) as e:
         logger.warning(f"⚠️ [ITERA] Fricción detectada durante la purga: {e}")
 

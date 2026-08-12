@@ -34,7 +34,7 @@ class HybridLicenseVerifier:
     def verify_license_offline(license_json: str, expected_node: str) -> Tuple[bool, Dict[str, Any]]:
         try:
             data = json.loads(license_json)
-        except Exception as e:
+        except (json.JSONDecodeError, ValueError, KeyError) as e:
             raise LicenseValidationError(f"Invalid JSON format: {e}")
 
         key = data.get("key")
