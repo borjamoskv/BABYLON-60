@@ -86,7 +86,7 @@ def extract_docstring_smart(py_path: Path) -> str:
 
 import hashlib
 
-KI_ARTIFACT_PATH = Path("/Users/borjafernandezangulo/.gemini/antigravity-ide/knowledge/immutable_script_kernel/artifacts/immutable_script_kernel.md")
+KI_ARTIFACT_PATH = Path.home() / ".gemini/antigravity-ide/knowledge/immutable_script_kernel/artifacts/immutable_script_kernel.md"
 
 def collect_data() -> Dict[str, Any]:
     py_files = sorted([p for p in SCRIPTS_DIR.rglob("*.py") if "__pycache__" not in p.parts])
