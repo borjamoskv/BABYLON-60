@@ -31,7 +31,8 @@ BANNER = """# ==================================================================
 BANNED_PATTERNS = [
     (re.compile(r"os\.kill\([^)]*SIGKILL\)"), "Dangerous SIGKILL self-termination in exception path"),
     (re.compile(r"except\s*:\s*pass"), "Swallowed raw exception handler without logging"),
-    (re.compile(r"/Users/[a-zA-Z0-9_\-]+/"), "Hardcoded absolute user home path (use Path.home())"),
+    (re.compile(r"/(" + "Users|home" + r")/[^/\s\"'\)]+"), "Hardcoded absolute user home path (use Path.home())"),
+    (re.compile(r"[A-Za-z]:\\(" + "Users" + r")\\[^\\\s\"'\)]+"), "Hardcoded Windows user home path (use Path.home())"),
 ]
 
 ALLOWED_DATA_EXTENSIONS = {".py", ".sh", ".json", ".db", ".sqlite", ".md"}

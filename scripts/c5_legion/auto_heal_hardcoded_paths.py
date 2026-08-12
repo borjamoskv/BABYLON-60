@@ -1,81 +1,172 @@
 #!/usr/bin/env python3
 """
-c5_legion_auto_heal.py - Auto-remediation for hardcoded absolute paths.
-Uses Regex to safely extract the string content and wrap it in Path.home()
+auto_heal_hardcoded_paths.py - Sovereign AST-based Auto-Remediation Engine for hardcoded paths.
+Uses Python AST NodeTransformer to safely transform hardcoded absolute user home paths
+into dynamic Path.home() expressions without syntax corruption or regex side-effects.
 """
 
+import ast
 import os
 import re
+import sys
 from pathlib import Path
 
-WORKSPACE_DIR = str(Path.home() / "10_PROJECTS" / "20_VAULT")
-# Matches exactly a string literal containing the home path, e.g. "<home>/foo/bar"
-# Group 1: Quote char (' or ")
-# Group 2: The rest of the path after borjafernandezangulo/
-# Group 3: Closing quote char (should match Group 1, but we'll assume it's valid code)
-_HOME = str(Path.home())
-PATTERN = re.compile(r'([\'"])' + re.escape(_HOME) + r'/([^\'"]*)([\'"])')
+WORKSPACE_DIR = Path(__file__).resolve().parent.parent.parent
 
-def heal_file(filepath):
+
+class HardcodedPathRemediator(ast.NodeTransformer):
+    """AST Transformer that converts string literals containing user home paths to Path.home() calls."""
+
+    def __init__(self):
+        self.modified = False
+        self.needs_pathlib = False
+
+    def visit_FunctionDef(self, node: ast.FunctionDef) -> ast.AST:
+        # Preserve docstrings in functions
+        self.generic_visit(node)
+        return node
+
+    def visit_ClassDef(self, node: ast.ClassDef) -> ast.AST:
+        # Preserve docstrings in classes
+        self.generic_visit(node)
+        return node
+
+    def visit_Module(self, node: ast.Module) -> ast.AST:
+        # Preserve module-level docstring if present
+        if (node.body and isinstance(node.body[0], ast.Expr) and 
+                isinstance(node.body[0].value, ast.Constant) and 
+                isinstance(node.body[0].value.value, str)):
+            for child in node.body[1:]:
+                self.visit(child)
+            return node
+        self.generic_visit(node)
+        return node
+
+    def visit_Constant(self, node: ast.Constant) -> ast.AST:
+        if isinstance(node.value, str):
+            val = node.value
+            # Match absolute user home path: <home_prefix>/<user>/...
+            match = re.match(r"^/(" + "Users|home" + r")/[^/]+(?:/(.*))?$", val)
+            if match:
+                rel_path = match.group(2) or ""
+                self.modified = True
+                self.needs_pathlib = True
+                
+                # Build AST: str(Path.home() / "rel_path") or str(Path.home())
+                if rel_path:
+                    new_node = ast.Call(
+                        func=ast.Name(id="str", ctx=ast.Load()),
+                        args=[
+                            ast.BinOp(
+                                left=ast.Call(
+                                    func=ast.Attribute(
+                                        value=ast.Name(id="Path", ctx=ast.Load()),
+                                        attr="home",
+                                        ctx=ast.Load()
+                                    ),
+                                    args=[],
+                                    keywords=[]
+                                ),
+                                op=ast.Div(),
+                                right=ast.Constant(value=rel_path)
+                            )
+                        ],
+                        keywords=[]
+                    )
+                else:
+                    new_node = ast.Call(
+                        func=ast.Name(id="str", ctx=ast.Load()),
+                        args=[
+                            ast.Call(
+                                func=ast.Attribute(
+                                    value=ast.Name(id="Path", ctx=ast.Load()),
+                                    attr="home",
+                                    ctx=ast.Load()
+                                ),
+                                args=[],
+                                keywords=[]
+                            )
+                        ],
+                        keywords=[]
+                    )
+                return ast.copy_location(new_node, node)
+        return node
+
+
+def ensure_pathlib_import(tree: ast.Module) -> None:
+    """Inserts 'from pathlib import Path' if not present in module body."""
+    has_pathlib = False
+    for node in tree.body:
+        if isinstance(node, ast.ImportFrom) and node.module == "pathlib":
+            if any(alias.name == "Path" for alias in node.names):
+                has_pathlib = True
+                break
+        elif isinstance(node, ast.Import):
+            if any(alias.name == "pathlib" for alias in node.names):
+                has_pathlib = True
+                break
+
+    if not has_pathlib:
+        import_node = ast.ImportFrom(
+            module="pathlib",
+            names=[ast.alias(name="Path", asname=None)],
+            level=0
+        )
+        idx = 0
+        # Insert after shebang/module docstring if present
+        if (tree.body and isinstance(tree.body[0], ast.Expr) and 
+                isinstance(tree.body[0].value, ast.Constant)):
+            idx = 1
+        tree.body.insert(idx, import_node)
+        ast.fix_missing_locations(tree)
+
+
+def heal_file(filepath: Path) -> bool:
     try:
-        with open(filepath, 'r', encoding='utf-8') as f:
-            content = f.read()
+        content = filepath.read_text(encoding="utf-8")
+        tree = ast.parse(content, filename=str(filepath))
     except Exception:
         return False
+
+    transformer = HardcodedPathRemediator()
+    new_tree = transformer.visit(tree)
+
+    if transformer.modified:
+        ast.fix_missing_locations(new_tree)
+        if transformer.needs_pathlib:
+            ensure_pathlib_import(new_tree)
         
-    if _HOME + "/" not in content:
-        return False
-        
-    lines = content.split('\n')
-    has_pathlib = any("from pathlib import Path" in line for line in lines)
-    has_os = any("import os" in line for line in lines)
-    
-    new_lines = []
-    modified = False
-    
-    for line in lines:
-        if _HOME + "/" in line:
-            # We skip lines that might be docstrings or complex if they don't match simple quotes
-            # or if they are already using f-strings (f")
-            if 'f"' in line or "f'" in line:
-                new_lines.append(line)
-                continue
-                
-            # Replace: "<home>/path" -> str(Path.home() / "path")
-            new_line = PATTERN.sub(r'str(Path.home() / "\2")', line)
-            if new_line != line:
-                modified = True
-            line = new_line
-            
-        new_lines.append(line)
-        
-    if modified:
-        # Add import if missing
-        if not has_pathlib:
-            if new_lines and new_lines[0].startswith("#!"):
-                new_lines.insert(1, "from pathlib import Path")
-            else:
-                new_lines.insert(0, "from pathlib import Path")
-                
-        with open(filepath, 'w', encoding='utf-8') as f:
-            f.write('\n'.join(new_lines))
+        remediated_code = ast.unparse(new_tree)
+        # Preserve shebang if original had one
+        lines = content.splitlines()
+        if lines and lines[0].startswith("#!"):
+            remediated_code = f"{lines[0]}\n" + remediated_code
+
+        filepath.write_text(remediated_code + "\n", encoding="utf-8")
         return True
     return False
 
-def main():
-    print("[*] Initiating Auto-Heal Swarm on 20_VAULT for hardcoded paths (SAFE REGEX MODE)...")
+
+def main() -> None:
+    print("[*] Initiating AST Sovereign Auto-Heal Engine for Hardcoded Paths...")
+    target_dir = WORKSPACE_DIR / "scripts"
+    if not target_dir.exists():
+        target_dir = WORKSPACE_DIR
+
     healed_count = 0
-    for root, _, files in os.walk(WORKSPACE_DIR):
+    for root, _, files in os.walk(target_dir):
         if ".git" in root or "__pycache__" in root or "node_modules" in root:
             continue
         for f in files:
             if f.endswith(".py"):
-                filepath = os.path.join(root, f)
+                filepath = Path(root) / f
                 if heal_file(filepath):
-                    print(f"  [+] Healed: {os.path.relpath(filepath, WORKSPACE_DIR)}")
+                    rel = filepath.relative_to(WORKSPACE_DIR)
+                    print(f"  [⚡ AST HEALED] Remediated: {rel}")
                     healed_count += 1
-                    
-    print(f"[*] Auto-Heal Complete. {healed_count} files remediated.")
+
+    print(f"[*] AST Auto-Heal Complete. {healed_count} files remediated.")
+
 
 if __name__ == "__main__":
     main()
