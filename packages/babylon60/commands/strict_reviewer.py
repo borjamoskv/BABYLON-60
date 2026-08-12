@@ -148,7 +148,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     run_auto_purge()
     subprocess.run(["git", "add", "."], check=True)
     subprocess.run(
-        ["git", "commit", "-m", "chore(cortex): strict reviewer auto‑fixes applied", "--no-verify"],
+        ["git", "commit", "-m", "chore(cortex): strict reviewer auto‑fixes applied"],
         check=True,
     )
     return 0
