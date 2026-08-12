@@ -98,7 +98,7 @@ Built-in exporter generating audit-ready certificates for national supervisory a
 | **EVM On-Chain Notary** | [`experiments/anvil_yung/`](./experiments/anvil_yung/README.md) | Foundry smart contracts for EVM Merkle state root notarization. |
 | **Causal Transpiler** | [`experiments/causal_isomorphism/`](./experiments/causal_isomorphism/README.md)| Functional F# domain kernel transpiler & linear type checker. |
 | **Continuous Timeline IR** | [`experiments/timeline_ir/`](./experiments/timeline_ir/README.md) | Continuous-time state graph simulation kernel ($State(t)$). |
-| **APEX Clinical Copilot** | [`docs/06_theory/`](./docs/06_theory/README_APEX.md) | Deterministic clinical-trial protocol amendment-risk copilot. |
+| **APEX Clinical Copilot** | [`docs/04_research/`](./docs/04_research/README_APEX.md) | Deterministic clinical-trial protocol amendment-risk copilot. |
 | **Documentation Hub** | [`docs/`](./docs/README.md) | Central index for specifications, whitepapers, GTM playbooks. |
 
 ---

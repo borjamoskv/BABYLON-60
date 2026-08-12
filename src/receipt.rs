@@ -234,10 +234,10 @@ pub fn emit_halt_receipt_null(m: &SharedManifest, motivo: HaltReason) -> Vec<u8>
 }
 
 // ---------------------------------------------------------------------------
-// Helpers de serialización CBOR mínimos (sin ciborium para no arrastrar deps)
+// Morfismos de serialización CBOR mínimos (sin ciborium para no arrastrar deps)
 // ---------------------------------------------------------------------------
 // Nota: para una implementación de producción usar ciborium correctamente.
-// Estos helpers codifican solo los tipos necesarios para el Halt_Payload.
+// Estos morfismos codifican solo los tipos necesarios para el Halt_Payload.
 
 #[allow(dead_code)]
 fn cbor_uint(buf: &mut Vec<u8>, v: u64) {
