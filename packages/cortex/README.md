@@ -5,7 +5,7 @@
 [![AST Sandbox](https://img.shields.io/badge/Sandbox-Chaos_Monad_AST-orange?style=for-the-badge)](../babylon60/cortex_chaos_monad.py)
 [![Epistemology](https://img.shields.io/badge/Epistemology-Store_Comonad-green?style=for-the-badge)](../docs/00_MANIFESTO.md)
 
-**CORTEX** (`cortex-persist`) is the Python persistence, AST sandbox isolation, and cognitive memory substrate for **BABYLON-60**. It provides multi-agent swarm orchestration (`moskv-swarm`), vector/graph persistent memory (`L1_sink`), the **Chaos Monad AST Sandbox** (`cortex_chaos_monad.py`), and the Model Context Protocol (MCP) server interface (`cortex_mcp_server.py`) for Claude Code, Cursor, and ChatGPT.
+**CORTEX** (`cortex-persist`) is the Python persistence, AST Markov Blanket isolation, and cognitive memory substrate for **BABYLON-60**. It provides autopoietic swarm orchestration (`moskv-swarm`), vector/graph comonadic memory (`L1_sink`), the **Chaos Monad AST Sandbox** (`cortex_chaos_monad.py`), and the Model Context Protocol (MCP) Markov Blanket interface (`cortex_mcp_server.py`) for Claude Code, Cursor, and ChatGPT.
 
 ---
 
@@ -22,23 +22,23 @@ Under the **C5-REAL Epistemological Constitution**:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                 Model Context Protocol (MCP Server)         │
+│           Model Context Protocol (MCP Markov Blanket)       │
 ├─────────────────────────────────────────────────────────────┤
 │   Chaos Monad AST Sandbox (cortex_chaos_monad.py)           │
 │   - validate_ast_sandbox() & RULE_AST_REFLECT_01           │
 │   - ScittResult: ["Success", "SecurityError", "Falsified"]  │
 ├─────────────────────────────────────────────────────────────┤
-│                 Moskv-Swarm Agent Orchestrator              │
+│               Moskv-Swarm Autopoietic Orchestrator          │
 ├──────────────────────────────┬──────────────────────────────┤
-│  L1 Sink Persistent Store    │  Vector & Graph Memory DB    │
+│  L1 Sink Deterministic Store │ Vector & Graph Topological DB│
 │  (SQLite WAL + Hash-Chain)   │  (cortex_memory.db)          │
 └──────────────────────────────┴──────────────────────────────┘
 ```
 
 - **Chaos Monad Sandbox (`cortex_chaos_monad.py`)**: Static AST analyzer blocking memory escapes and introspection injections before kernel evaluation.
-- **Moskv Swarm (`agents/` & `moskv-swarm/`)**: Orchestrates multi-agent swarm tasks with deterministic exergy bounds.
-- **L1 Sink Persistence (`L1_sink/`)**: Single-writer SQLite WAL storage engine holding the Merkle-Causal DAG log.
-- **Cortex MCP Server (`cortex_mcp_server.py`)**: Standard MCP protocol server exposing WORM Quarantine, F60 scheduling, and physical tool execution to AI agents.
+- **Moskv Swarm (`agents/` & `moskv-swarm/`)**: Orchestrates autopoietic swarm tasks with deterministic exergy bounds.
+- **L1 Sink Persistence (`L1_sink/`)**: Single-writer SQLite WAL causal ledger holding the Merkle-Causal DAG log.
+- **Cortex MCP Server (`cortex_mcp_server.py`)**: Standard MCP Markov Blanket exposing WORM Quarantine, F60 scheduling, and exergic physical tool execution to AI agents.
 
 ---
 
@@ -63,12 +63,12 @@ pytest tests/test_ast_sandbox_evasion.py
 
 ```
 packages/cortex/
-├── agents/             # Autonomous agent role definitions & prompt templates
+├── agents/             # Autopoietic agent definitions & prompt templates
 ├── audits/             # YAML audit reports of Causal-Determinist consolidations (C5-REAL)
-├── engine/             # Core BFT ledger databases (nexus_anchors.db)
+├── engine/             # Core BFT causal ledgers (nexus_anchors.db)
 ├── infra/              # Low-level SQLite database connectors & WAL triggers
 ├── L1_sink/            # Primary persistent storage sink (Colimit Event Sourcing)
-└── moskv-swarm/        # Distributed swarm coordination protocols (Polynomial Functors)
+└── moskv-swarm/        # Autopoietic swarm coordination protocols (Polynomial Functors)
 ```
 
 ---
