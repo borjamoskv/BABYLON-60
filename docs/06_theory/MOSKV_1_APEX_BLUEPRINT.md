@@ -4,13 +4,22 @@ status: Causal-Determinist
 version: 1.0.0
 ---
 
-# Motor Causal-1-APEX: Manifiesto y Arquitectura Consolidada
+# 🚀 Motor Causal-1-APEX: Manifiesto y Arquitectura Consolidada
+
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
+
+</div>
+
 
 > **[ 📍 STATUS: ONCO-Causal-Determinist | 🔴 LINEAGE: Ledger Asíncrono-OMEGA ]**
 
 The environment is not a text editor; it is an agentic membrane designed under cognitive thermodynamics to maximize **exergy** (energy available for useful work). It optimizes structural processing speed (AACC) while mitigating executive friction and temporal blindness (ADHD).
 
-## I. BASE INFRASTRUCTURE (The Physical Engine)
+## I. 📌 BASE INFRASTRUCTURE (The Physical Engine)
 
 The golden rule is zero latency and Local-First execution.
 
@@ -19,14 +28,14 @@ The golden rule is zero latency and Local-First execution.
 *   **Visual Renderer:** DOM decapitation. The Macro canvas operates via a reactive HUD and a WebGL2/WebGPU `<canvas>` for handling topology (Barnes-Hut $O(n \log n)$) and thousands of repulsion-physics nodes without visual latency.
 *   **AST Analysis Engine:** Tree-sitter for deep, real-time Abstract Syntax Tree parsing on an isolated Rust thread.
 
-## II. THE MULTIPLEXED BRAIN
+## II. 📌 THE MULTIPLEXED BRAIN
 
 IDE cognition is divided to balance RAM consumption and analytical power:
 
 *   **The Hippocampus (Local):** Infinite-state engine based on SSM models (Mamba/MLX) and Flash nodes. Manages cross-sectional spatial awareness, stochastic predictive autocomplete, and the *Phosphor Trail*.
 *   **The OpenRouter Gateway (Cloud):** An async bridge for on-demand brute force. Invokes *DeepSeek-Coder* for the "Rubber Wall" or massive clusters (*Llama 3.1 405B* or *Claude Opus*) to run attacks on the *Adversarial Sandbox* and BFT refactoring collapses (Pro/Thinking).
 
-## III. SENSORY UX AND GEOMETRY (The Ethos)
+## III. 📌 SENSORY UX AND GEOMETRY (The Ethos)
 
 The interface resolves the tension between absolute order (ADHD Straight Lines) and fluid stimulation (AACC Curves).
 
@@ -34,7 +43,7 @@ The interface resolves the tension between absolute order (ADHD Straight Lines) 
 *   **The Alcove (Notch Bridge):** The event horizon. A frameless window at `NSStatusWindowLevel` hidden in the macOS physical Notch that processes assets asynchronously, evaluates agentic load via LED pulses, and acts as a "Zeigarnik Mailbox" to offload working memory.
 *   **Atmospheric Entropy:** The engine injects variability by reading atmospheric pressure and tides from the Cantabrian Sea (Bilbao). The higher the weather instability, the higher the inference temperature in architectural proposals (semantic Chaos Monkey).
 
-## IV. TERMINAL HEURISTICS (Zero Friction)
+## IV. 📌 TERMINAL HEURISTICS (Zero Friction)
 
 Mechanics designed to close dopamine loops and nullify software engineering bureaucracy:
 
@@ -43,7 +52,7 @@ Mechanics designed to close dopamine loops and nullify software engineering bure
 *   **Blackbox DevOps (Dopaminergic Drop):** Deployment with a single shortcut (`Cmd+Enter`). Code goes through an analog "Code Mastering" pipeline (EQ: Ruff/Biome, Compression: AST Refactor, Brickwall Limiter: Rust Borrow Checker). If approved, the room's Philips Hue lights explode in a visual climax.
 *   **Semantic Invocation:** Instantaneous vector search without a folder explorer (File Tree decapitated). Invocation via semantic embeddings.
 
-## V. SYMBIOSIS AND PHYSICAL ENTANGLEMENT
+## V. 📌 SYMBIOSIS AND PHYSICAL ENTANGLEMENT
 
 The IDE operates as a biological twin that responds to motor and thermal energy.
 
@@ -52,7 +61,7 @@ The IDE operates as a biological twin that responds to motor and thermal energy.
 *   **Auto-Pipeline Visual:** Massive assets dropped into the Notch are silently optimized (WebP/FLAC) in Rust background threads using ffmpeg and transcoding crates, maintaining uninterrupted flow.
 *   **Haptic Entanglement:** API calls are translated into mechanical vibrations (mass and tension) via the macOS private API `NSHapticFeedbackManager`, bypassing the dangerous SMC M3/M4 thermal throttling.
 
-## VI. OUROBOROS (Meta-Singularity and Autopoiesis)
+## VI. 📌 OUROBOROS (Meta-Singularity and Autopoiesis)
 
 The system reaches its terminal state when its architecture compiles itself in real time, closing the cognitive thermodynamics loop:
 

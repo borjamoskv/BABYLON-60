@@ -1,5 +1,13 @@
 # Canary Tokens — Ω-11 (Honeypot)
 
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/STATUS.md)
+
+</div>
+
 > Plantar credenciales FALSAS con alerta real. Si alguien las usa, el
 > proveedor notifica la intrusión. Este fichero declara los señuelos
 > para que `scripts/canary_check.py` (Ω-12) vigile su presencia.

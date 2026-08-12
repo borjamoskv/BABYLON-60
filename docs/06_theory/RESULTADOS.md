@@ -1,10 +1,19 @@
-# Estado del Proyecto y Resultados
+# 📊 Estado del Proyecto y Resultados
+
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
+
+</div>
+
 
 Este documento detalla de manera transparente qué componentes de BABYLON-60 están implementados y verificados empíricamente, cuáles son diseños teóricos o aspiracionales, y cómo ejecutar una prueba trivial de principio a fin.
 
 ---
 
-## 1. Estado Actual (Lo que está construido)
+## 1. 📌 Estado Actual (Lo que está construido)
 
 La infraestructura central del **Proof Harness** está implementada y cuenta con pruebas automatizadas:
 
@@ -14,14 +23,14 @@ La infraestructura central del **Proof Harness** está implementada y cuenta con
 - **Integración Formal (Lean 4):** El puente hacia Lean 4 está establecido (`BabylonTrace.lean`). Se pueden asimilar *Proof-Ready Logs* estructurados.
 - **Seguridad y DevOps:** Pipelines de verificación (`verify_lean`), auditoría de secretos y dependencias configurados. Testing basado en propiedades con `hypothesis`.
 
-## 2. Trabajo Futuro (Lo que es aspiracional)
+## 2. 📌 Trabajo Futuro (Lo que es aspiracional)
 
 - **Aislamiento de Singularidades Reales:** Actualmente, el motor *no* ha aislado un Finite-Time Blowup real de las ecuaciones de Navier-Stokes. Las pruebas actuales demuestran la viabilidad mecánica del arnés, pero no han resuelto el problema matemático.
 - **Concurrencia en Entornos Distribuidos:** El *Event Ledger* funciona para sincronización en un único nodo, pero la validación topológica sobre clústeres distribuidos sigue en fase de diseño.
 
 ---
 
-## 3. Demostración Trivial (Prueba End-to-End)
+## 3. 🧮 Demostración Trivial (Prueba End-to-End)
 
 Para validar que el pipeline mecánico está operativo, puedes ejecutar una prueba causal básica que demuestra la ejecución del DSL y la generación de un log determinista sin errores:
 

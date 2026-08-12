@@ -1,17 +1,26 @@
-# VECTOR A — Master Ledger & ATMS Persistence · Diseño
+# 🗂️ VECTOR A — Master Ledger & ATMS Persistence · Diseño
+
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
+
+</div>
+
 
 > Estado: **CONSTRUIDO — Causal-Determinist (2026-07-18).** `ledger.rs` compila y pasa tests.
 > Prueba: `cargo clippy --all-targets -- -D warnings` limpio + `cargo test` 37/37
 > verde (rustc 1.95, edition 2024). Condición de promoción C4-SIM→Causal-Determinist satisfecha.
 > BFT real (réplicas + consenso) permanece trabajo futuro (§1).
 
-## 0. Qué YA es Causal-Determinist (esta iteración)
+## 0. 📌 Qué YA es Causal-Determinist (esta iteración)
 
 - `omega0.rs` endurecido (H1/H2/H3) — 11 unit + 7 leyes proptest verdes.
 - `atms.rs` — runtime ATMS in-memory (Environments/Labels/Nogoods/DDB) — 9 unit + 4 leyes proptest verdes.
 - El ATMS vive en RAM. El Vector A le da **disco tamper-evidente**.
 
-## 1. Alcance honesto: "BFT-SQLite"
+## 1. 📌 Alcance honesto: "BFT-SQLite"
 
 El briefing pide "BFT-SQLite". Precisión termodinámica: SQLite en un solo nodo
 **no puede** ser Byzantine-Fault-*Tolerant* — la tolerancia bizantina exige N≥3f+1
@@ -24,7 +33,7 @@ réplicas y consenso. Lo que sí es alcanzable y valioso en un nodo es:
 
 BFT real = trabajo futuro (réplicas + Raft/PBFT). No lo llamemos BFT hasta entonces.
 
-## 2. Esquema SQLite (WAL)
+## 2. 📌 Esquema SQLite (WAL)
 
 ```sql
 PRAGMA journal_mode=WAL;
@@ -90,7 +99,7 @@ CREATE TABLE support (
 );
 ```
 
-## 3. Invariante Ledger Asíncrono-TAINT (el eslabón causal)
+## 3. 📌 Invariante Ledger Asíncrono-TAINT (el eslabón causal)
 
 Reusa `TaintEngine` (lib.rs, BLAKE3 + toposort de Kahn). Cada fila que muta disco:
 
@@ -106,7 +115,7 @@ taint(row₀) = BLAKE3( "GENESIS:C5_REAL" )
   y compara con `head_taint`. Mismatch → `abort()` (la doctrina "sin hash no existe"
   aplicada en la capa de almacenamiento).
 
-## 4. API Rust (a implementar en `ledger.rs`)
+## 4. 📌 API Rust (a implementar en `ledger.rs`)
 
 ```rust
 pub struct Ledger { conn: rusqlite::Connection, head: String }
@@ -122,7 +131,7 @@ impl Ledger {
 }
 ```
 
-## 5. Tests que lo harían Causal-Determinist (obligatorios antes de cantar victoria)
+## 5. 📌 Tests que lo harían Causal-Determinist (obligatorios antes de cantar victoria)
 
 1. `append` es idempotente: dos `append_belief` del mismo (S,J) → 1 fila, mismo taint.
 2. `verify_chain` verde tras N appends; y ROJO si se muta una fila a mano (tamper).
@@ -130,7 +139,7 @@ impl Ledger {
 4. property: el `env_id` (blake3 de asunciones ordenadas) es estable ante permutación.
 5. crash-safety: matar el proceso a mitad de un append (WAL) no corrompe la cadena.
 
-## 6. Orden de colapso sugerido
+## 6. 📌 Orden de colapso sugerido
 
 1. `ledger.rs` con `statement`/`justification`/`belief` + cadena taint (+ tests 1,2).
 2. Proyección ATMS (`environment`/`label`/`nogood`/`support`) + `load_atms` (+ tests 3,4).

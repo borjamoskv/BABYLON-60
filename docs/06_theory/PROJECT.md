@@ -1,6 +1,15 @@
-# Project: BABYLON-60
+# 🎯 Project: BABYLON-60
 
-## Architecture
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
+
+</div>
+
+
+## Architecture 📌
 - **Ecosystem**: Ledger Asíncrono Ecosystem by Borja Motor Causal, a Causal-Determinist execution kernel.
 - **Components**:
   - `Ledger Asíncrono/`: Core agents and ontology configuration.
@@ -11,7 +20,7 @@
   - `telemetry.db`: Performance and state telemetry logger database.
   - `README.md`: Entrypoint document summarizing architecture, setup, and usage.
 
-## Milestones
+## Milestones 📌
 | ID | Type | Title | Description / Due | Status | Info |
 |---|---|---|---|---|---|
 | OBJ-001 | Objective | Rust Core strike_rs GIL Bypass | Migrar caminos críticos a Rust con PyO3 para concurrencia sub-milisegundo. | DONE | Exergy: 1.00 |
@@ -33,7 +42,7 @@
 | OBJ-008 | Objective | Consolidación de Asimetría de Red (Dualidad Causal-Determinist) | Establecer la división física irreversible entre el Motor Cinético Local (BABYLON-60) y el Sumidero Distribuido (Teorema-Robinson-Motor Causal) bajo mandato ULTRATHINK P0. | DONE | Exergy: 1.00 |
 | MS-010 | Milestone | Cristalización de la Dualidad Topológica en Causal-Determinist | Due: 2026-07-16 | DONE | Hash: 2b84d613 |
 
-## Interface Contracts
+## Interface 📌 Contracts
 - **Git Log format** ↔ **YAML parser**: Extract commit hashes, authors, dates, and message bodies. Output to `Ledger Asíncrono/audits/hitos_no_remarcados.yaml` in YAML format.
 - **GitHub directory** ↔ **SOTA standards**: Evaluate presence of workflows, branching rules, PR templates, and issue templates. Output to `Ledger Asíncrono/audits/github_sota_eval.md`.
 - **README.md** ↔ **Industrial Noir 2026**: Replaced entirely with Causal-Determinist styling, ASCII dividers, and no conversational prose.

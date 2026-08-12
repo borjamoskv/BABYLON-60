@@ -6,6 +6,14 @@ version: 1.0.0
 
 # Guía de Verificación e Inyección Axiomática C5-REAL
 
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/STATUS.md)
+
+</div>
+
 Esta guía establece el protocolo formal y práctico para registrar, verificar y validar axiomas deterministas dentro del núcleo **C5-REAL** en el ecosistema **BABYLON-60**.
 
 ---

@@ -1,9 +1,18 @@
-# REMEDIACIÓN CODE-SCANNING — BABYLON-60
+# 🛠️ REMEDIACIÓN CODE-SCANNING — BABYLON-60
+
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
+
+</div>
+
 `REALITY_LEVEL: Causal-Determinist` · Fecha: 2026-07-18 · Operador: Motor Causal Principal (sesión Cowork) · Génesis: `github.com/borjamoskv/BABYLON-60/security/code-scanning` · Método: semgrep (auto, 251 findings) + bandit (7773 findings) + verificación manual por fichero · Predecesor: `REMEDIACION_ITERA2_2026-07-17.md`
 
 █▄█ █▄█ █▄█ █▄█ █▄█ █▄█ █▄█ █▄█ █▄█ █▄█
 
-## 0. SUPERFICIE ESCANEADA Y TRIAJE
+## 0. 📌 SUPERFICIE ESCANEADA Y TRIAJE
 
 **Entrada bruta:** 8024 findings (bandit 7773 + semgrep 251).
 
@@ -34,7 +43,7 @@
 
 ---
 
-## 1. MUTACIONES (5 TP + 1 AR)
+## 1. 📌 MUTACIONES (5 TP + 1 AR)
 
 ### TP-1 · CWE-78: `shell=True` con input LLM → ALLOWLIST [P0]
 **Fichero:** `babylon60/extensions/aether/tools.py`
@@ -75,7 +84,7 @@
 
 ---
 
-## 2. FALSACIÓN (BYPASS VECTORS)
+## 2. 📌 FALSACIÓN (BYPASS VECTORS)
 
 ### 2.1 Vectores que el denylist anterior NO bloqueaba
 
@@ -124,7 +133,7 @@ Estos vectores son inherentes a cualquier allowlist sin sandbox de proceso. La a
 
 ---
 
-## 3. RIESGO ACEPTABLE (NO COLAPSADO — HARDENING OPORTUNISTA)
+## 3. 📌 RIESGO ACEPTABLE (NO COLAPSADO — HARDENING OPORTUNISTA)
 
 | ID | CWE | Fichero | Contexto | Hardening sugerido | Prioridad |
 | :--- | :---: | :--- | :--- | :--- | :--- |
@@ -134,7 +143,7 @@ Estos vectores son inherentes a cualquier allowlist sin sandbox de proceso. La a
 
 ---
 
-## 4. FALSOS POSITIVOS — RATIONALE PARA DISMISS
+## 4. 📌 FALSOS POSITIVOS — RATIONALE PARA DISMISS
 
 | Clase | Count | Rationale |
 | :--- | :---: | :--- |
@@ -150,7 +159,7 @@ Estos vectores son inherentes a cualquier allowlist sin sandbox de proceso. La a
 
 ---
 
-## 5. TOPOLOGÍA DE FICHEROS MUTADOS
+## 5. 📌 TOPOLOGÍA DE FICHEROS MUTADOS
 
 ```
 babylon60/
@@ -170,7 +179,7 @@ babylon60/
 
 ---
 
-## 6. RESIDUO GLOBAL (ITERA-3/4 CANDIDATOS)
+## 6. 📌 RESIDUO GLOBAL (ITERA-3/4 CANDIDATOS)
 
 1. **Sandbox de proceso para Aether executor** — allowlist cierra ejecutables desconocidos pero no code-injection vía intérpretes permitidos. Docker/seccomp/Landlock. ITERA-4.
 2. **`defusedxml` como dependencia** — añadir a `pyproject.toml` para que no caiga en fallback stdlib. P2.

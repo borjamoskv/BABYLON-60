@@ -4,14 +4,23 @@ status: Causal-Determinist
 version: 1.0.0
 ---
 
-# 09 — Ontología Formal en Lean 4
+# 🧬 09 — Ontología Formal en Lean 4
+
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
+
+</div>
+
 
 > **Módulo Teórico 09 | Proyecto BABYLON-60 | Licencia Soberana (`INV_C5_17`)**
 > Ontología Formal en Lean 4: El puente constructivo entre la incompletitud metamatemática y la ejecución determinista de la máquina de estados.
 
 ---
 
-## 9.1 La Verdad Constructiva Frente al Abismo de Gödel
+## 9.1 📌 La Verdad Constructiva Frente al Abismo de Gödel
 
 Tras recorrer los horizontes informacionales de Chaitin y la incompletitud esencial de Robinson ($Q$), nos enfrentamos a la pregunta final del ingeniero de sistemas distribuidos: **si ningún sistema puede auto-verificarse universalmente, ¿cómo construimos un motor de consenso (BFT) fiable?**
 
@@ -21,7 +30,7 @@ En BABYLON-60, esta exigencia se materializa en la **Ontología Formal Causal-De
 
 ---
 
-## 9.2 El Dominio de Tipos y el Determinismo BFT
+## 9.2 📌 El Dominio de Tipos y el Determinismo BFT
 
 Para que una red distribuida alcance consenso bizantino sin divergencias de estado (invariante **`INV_BFT_04`**), el cómputo subyacente debe ser matemáticamente determinista a nivel de bit, a lo largo de cualquier arquitectura hardware (x86, ARM, RISC-V).
 
@@ -47,7 +56,7 @@ Al forzar `F60_Val` a ser estrictamente **$\mathbb{Q}$ (los números racionales 
 
 ---
 
-## 9.3 El Grafo Causal y el Estado Global $\Gamma$
+## 9.3 📌 El Grafo Causal y el Estado Global $\Gamma$
 
 El libro mayor de BABYLON-60 no es una cadena lineal, sino un **Grafo Acíclico Dirigido (DAG)** de eventos causales. Lean define esta topología de forma inductiva:
 
@@ -72,7 +81,7 @@ Al definir `LogicalClock` puramente sobre $\mathbb{N}$ (los naturales estándar)
 
 ---
 
-## 9.4 Semántica de Pasos Pequeños (Small-Step Semantics)
+## 9.4 📌 Semántica de Pasos Pequeños (Small-Step Semantics)
 
 La joya de la corona metamatemática en `Babylon.lean` es la definición inductiva del morfismo de evolución de la máquina: el **Paso Pequeño**.
 
@@ -107,7 +116,7 @@ La red distribuida solo hace validación ($\Sigma_1$), descargando la carga inde
 
 ---
 
-## 9.5 Conclusión de la Jerarquía de ULTRATHINK
+## 9.5 📊 Conclusión de la Jerarquía de ULTRATHINK
 
 La profundización a través de esta serie documental ha revelado el esqueleto arquitectónico completo:
 

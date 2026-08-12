@@ -1,5 +1,13 @@
 # ⚡ Arquitectura Centuria Swarm (`scripts/centuria_swarm_runner.py`)
 
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/STATUS.md)
+
+</div>
+
 [![Swarm Size](https://img.shields.io/badge/Swarm-100_ULTRATHINK_Agents-orange?style=for-the-badge)]()
 [![Disk Overhead](https://img.shields.io/badge/Worktree_Overhead-0_Disk_Overhead-brightgreen?style=for-the-badge)]()
 [![BFT Ledger](https://img.shields.io/badge/Ledger-BFTLedgerActor_Commit-purple?style=for-the-badge)](../../babylon60/bft/README.md)

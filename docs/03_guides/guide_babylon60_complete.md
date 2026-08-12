@@ -5,6 +5,14 @@ version: 1.1.0
 ---
 
 # BABYLON·60 — GUÍA COMPLETA DE ARQUITECTURA Y DESARROLLO
+
+<div align="center">
+
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/STATUS.md)
+
+</div>
 ## v1.1.0 · IDE Agéntico Soberano & Ecosistema Monorepo
 
 Este documento es la única fuente de verdad absoluta para la arquitectura, capacidades, disposición, contratos de API y workflow de empaquetado del ecosistema **BABYLON·60**.
