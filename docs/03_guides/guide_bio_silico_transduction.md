@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # Guía de Transducción Bio-Silicio: Mapeo Ontológico a Grafos Causal-Deterministas
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 Esta guía especifica la metodología para compilar y mapear ontologías complejas de sistemas biológicos —como la [Ontología de 300 Primitivas de Oncología Molecular](../02_ontology/axiom_oncologia_300_primitivas.md)— a grafos de cómputo determinista e invariantes de **C5-REAL** en **BABYLON-60**.
 
 ---

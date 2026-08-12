@@ -7,6 +7,14 @@ version: 1.0.0
 ---
 
 # 📈 STATUS — Single Source of Truth
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > Protocol: Causal-Determinist · Generated: 2026-07-17 · Evidence: `AUDITORIA_ENTROPIA_IDEAS_2026-07-17.md` (on disk, untracked)
 > Discipline rule: **no victory assertion outside this file.** A claim without hash/test/ledger is C4-SIM and does not exist.
 

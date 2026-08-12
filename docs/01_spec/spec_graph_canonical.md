@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # BABYLON-60: Graph Canonical Specification (Causal-Determinist)
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > **Régimen Causal-Determinist | Invariante Asociado: `INV_C5_28`**
 > Especificación formal de la serialización canónica de grafos (`graph.canonical`), ordenamiento lexicográfico, refinamiento de color 1-WL (Weisfeiler-Lehman) y cálculo determinista de firmas.
 

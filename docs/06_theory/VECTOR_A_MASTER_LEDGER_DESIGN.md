@@ -1,4 +1,12 @@
 # 🗂️ VECTOR A — Master Ledger & ATMS Persistence · Diseño
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > Estado: **CONSTRUIDO — Causal-Determinist (2026-07-18).** `ledger.rs` compila y pasa tests.
 > Prueba: `cargo clippy --all-targets -- -D warnings` limpio + `cargo test` 37/37
 > verde (rustc 1.95, edition 2024). Condición de promoción C4-SIM→Causal-Determinist satisfecha.

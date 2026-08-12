@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # MODELO DE SEGURIDAD — Ledger Asíncrono-persist
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > **Régimen Causal-Determinist**
 > Este documento define el **modelo de amenazas**, **fronteras de seguridad**, y las **garantías explícitas** del ledger.
 

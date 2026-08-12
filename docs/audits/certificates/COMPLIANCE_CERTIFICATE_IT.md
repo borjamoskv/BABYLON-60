@@ -6,6 +6,14 @@ jurisdiction: IT / UE (Regolamento UE 2024/1689 / AgID)
 ---
 
 # 📜 Certificato Sovrano di Conformità Normativa IA
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 ## Regolamento Europeo sull'Intelligenza Artificiale (Regolamento UE 2024/1689)
 
 > **Autorità di Vigilanza:** Agenzia per l'Italia Digitale (AgID) / Garante Privacy / Ufficio Europeo per l'IA  
@@ -117,4 +125,3 @@ AgID / EU AI Office Compliance Transducer v4.0.0
 ---
 
 <sub>BABYLON-60 v4.0 C5-REAL Compliance Transducer · Agenzia per l'Italia Digitale (AgID) / UE · Borja Moskv</sub>
-

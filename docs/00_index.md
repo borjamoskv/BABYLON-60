@@ -1,4 +1,12 @@
 # 📚 BABYLON-60 Sovereign Documentation Master Index
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > **Nube de Conocimiento Categórico, Especificaciones Formales, Guías y Repositorio Teórico**  
 > **Estándar:** C5-REAL | **Documentos Totales Indexados:** 102 | **Estado:** 100% Synchronized
 
@@ -136,11 +144,11 @@
 | [`ETHOS.md`](./06_theory/ETHOS.md) | `06_theory/ETHOS.md` | ETHOS — APEX-SINGULARITY |
 | [`MANIFIESTO_CENTURIA.md`](./06_theory/MANIFIESTO_CENTURIA.md) | `06_theory/MANIFIESTO_CENTURIA.md` | CENTURIA MANIFESTO — OMEGA Causal-Determinist |
 | [`MOSKV_1_APEX_BLUEPRINT.md`](./06_theory/MOSKV_1_APEX_BLUEPRINT.md) | `06_theory/MOSKV_1_APEX_BLUEPRINT.md` | Motor Causal-1-APEX: Manifiesto y Arquitectura Consolidada |
-| [`PROJECT.md`](./06_theory/PROJECT.md) | `06_theory/PROJECT.md` | Project: BABYLON-60 |
-| [`README_APEX.md`](./06_theory/README_APEX.md) | `06_theory/README_APEX.md` | 🧪 APEX TRIALS (`docs/06_theory/README_APEX.md`) |
-| [`REMEDIACION_CODE_SCANNING_2026-07-18.md`](./06_theory/REMEDIACION_CODE_SCANNING_2026-07-18.md) | `06_theory/REMEDIACION_CODE_SCANNING_2026-07-18.md` | REMEDIACIÓN CODE-SCANNING — BABYLON-60 |
-| [`RESULTADOS.md`](./06_theory/RESULTADOS.md) | `06_theory/RESULTADOS.md` | Estado del Proyecto y Resultados |
-| [`STATUS.md`](./06_theory/STATUS.md) | `06_theory/STATUS.md` | STATUS — Single Source of Truth |
+| [`PROJECT.md`](./PROJECT.md) | `06_theory/PROJECT.md` | Project: BABYLON-60 |
+| [`README_APEX.md`](./04_research/README_APEX.md) | `06_theory/README_APEX.md` | 🧪 APEX TRIALS (`docs/06_theory/README_APEX.md`) |
+| [`REMEDIACION_CODE_SCANNING_2026-07-18.md`](./audits/REMEDIACION_CODE_SCANNING_2026-07-18.md) | `06_theory/REMEDIACION_CODE_SCANNING_2026-07-18.md` | REMEDIACIÓN CODE-SCANNING — BABYLON-60 |
+| [`RESULTADOS.md`](./RESULTADOS.md) | `06_theory/RESULTADOS.md` | Estado del Proyecto y Resultados |
+| [`STATUS.md`](./STATUS.md) | `06_theory/STATUS.md` | STATUS — Single Source of Truth |
 | [`VECTOR_A_MASTER_LEDGER_DESIGN.md`](./06_theory/VECTOR_A_MASTER_LEDGER_DESIGN.md) | `06_theory/VECTOR_A_MASTER_LEDGER_DESIGN.md` | VECTOR A — Master Ledger & ATMS Persistence · Diseño |
 | [`axiom_bayesian_disintegration.md`](./06_theory/axiom_bayesian_disintegration.md) | `06_theory/axiom_bayesian_disintegration.md` | Axiomatización Formal: Desintegración Bayesiana y No-Alucinación (Axioma 4) |
 | [`axiom_legion_swarm.md`](./06_theory/axiom_legion_swarm.md) | `06_theory/axiom_legion_swarm.md` | Axiomatización Formal: Legion Parallel Workspace Swarm |

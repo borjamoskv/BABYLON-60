@@ -5,6 +5,14 @@ version: 4.0.0
 ---
 
 # Certificado de Cumplimiento Normativo de IA (BABYLON-60 v4.0)
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 **Reglamento de Inteligencia Artificial de la UE (Reglamento UE 2024/1689 / AESIA)**  
 **Autoridad de Supervisión:** `Agencia Española de Supervisión de Inteligencia Artificial (AESIA) / UE`  
 **ID Certificado:** `EU-AIA-CERT-6D865E2704FD3904`  

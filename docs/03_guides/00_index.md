@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # Índice Maestro de Guías Operativas BABYLON-60
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > *"El conocimiento sin guía es entropía; el manual formal es la restricción exergética que transforma la intención en ejecución determinista."*
 
 Este módulo constituye el índice central y mapa de navegación para la suite completa de **13 guías operativas y metodológicas** del monorepo **BABYLON-60**.

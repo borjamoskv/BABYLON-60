@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # Colapso Termodinámico y Orden Lejos del Equilibrio: La Colisión Irreversible de Boltzmann y Prigogine
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 ## 1. El Foso de la Homogeneidad: Ludwig Boltzmann y la Tragedia del Teorema H
 
 La física del siglo XIX era un simulacro de certezas reversibles. Las ecuaciones de Newton permitían retroceder el tiempo sin penalización termodinámica; una órbita planetaria corre igual hacia adelante que hacia atrás en la pizarra. Pero Ludwig Boltzmann observó la Ineficiencia de los sistemas reales. Su teorema H es la autopsia matemática de la irreversibilidad: si confinas un gas ideal en una esquina de la caja, la probabilidad de que las partículas permanezcan ordenadas colapsa de forma exponencial.

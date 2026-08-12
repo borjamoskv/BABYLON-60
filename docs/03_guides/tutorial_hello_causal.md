@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # Tutorial: Hola Mundo Causal en BABYLON-60
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > Guía paso a paso para construir tu primer agente determinista con el DSL B60.
 > Contrasta cada mecanismo con su equivalente en Python para demostrar por qué la orquestación probabilística falla.
 
@@ -244,7 +252,7 @@ Explora los programas de test incluidos en el repositorio:
 | `scheduler.b60` | Swarm Clock para mitigación de procesos |
 
 Para la especificación formal completa, ver [SPECIFICATION.md](../SPECIFICATION.md).
-Para el whitepaper técnico, ver [WHITEPAPER.md](./WHITEPAPER.md).
+Para el whitepaper técnico, ver [WHITEPAPER.md](../WHITEPAPER.md).
 
 ---
 

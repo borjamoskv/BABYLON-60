@@ -5,6 +5,14 @@ version: 1.1.0
 ---
 
 # BABYLON·60 — GUÍA COMPLETA DE ARQUITECTURA Y DESARROLLO
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 ## v1.1.0 · IDE Agéntico Soberano & Ecosistema Monorepo
 
 Este documento es la única fuente de verdad absoluta para la arquitectura, capacidades, disposición, contratos de API y workflow de empaquetado del ecosistema **BABYLON·60**.
@@ -117,7 +125,7 @@ Accessible via **`⌘ 8`** or by clicking the diamond icon (`◈`) in the sideba
 BABYLON·60 is compiled into a standalone desktop application using **Tauri v2** and **Rust**.
 
 ### ⚙️ Build Requirements
-* The Tauri configuration is stored in [babylon60-ide/src-tauri/tauri.conf.json](../../babylon60-ide/src-tauri/tauri.conf.json).
+* The Tauri configuration is stored in [babylon60-ide/src-tauri/tauri.conf.json](../../apps/babylon60-ide/src-tauri/tauri.conf.json).
 * A unique bundle identifier is required: `"identifier": "com.babylon60.ide"`.
 * System icons must be generated from the square source image `public/logo_icon.jpg` using the Tauri CLI:
   ```bash

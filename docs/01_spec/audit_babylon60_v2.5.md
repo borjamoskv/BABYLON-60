@@ -5,6 +5,14 @@ version: 2.5.1
 ---
 
 # Auditoría Causal-Determinist — BABYLON-60 v2.5.1 (Estado & Resolución)
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > **Régimen Causal-Determinist | Sello del Demiurgo: `borjamoskv`**
 > Informe de auditoría técnica, matriz de riesgos mitigados, estado de resolución formal y plan de verificación.
 

@@ -6,6 +6,14 @@ jurisdiction: FR / UE (Règlement UE 2024/1689)
 ---
 
 # 📜 Certificat Souverain de Conformité Réglementaire IA
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 ## Règlement Européen sur l'Intelligence Artificielle (Règlement UE 2024/1689)
 
 > **Autorité de Contrôle:** Commission Nationale de l'Informatique et des Libertés (CNIL) / ANSSI / Bureau Européen de l'IA  
@@ -117,4 +125,3 @@ CNIL / ANSSI / EU AI Office Compliance Transducer v4.0.0
 ---
 
 <sub>BABYLON-60 v4.0 C5-REAL Compliance Transducer · Commission Nationale de l'Informatique et des Libertés (CNIL) / ANSSI / UE · Borja Moskv</sub>
-

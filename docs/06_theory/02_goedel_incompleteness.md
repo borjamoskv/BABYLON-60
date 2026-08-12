@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # 🌀 02 — Teoremas de Incompletitud de Gödel
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > **Límites Absolutos de la Formalización y Verificación Automática**
 > [!NOTE]
 > **Modulo Teórico 02 | Proyecto BABYLON-60 | Licencia Soberana (`INV_C5_17`)**

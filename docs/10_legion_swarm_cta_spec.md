@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # Especificación Axiomática: Legion 10k Swarm (CTA)
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 ## 1. Declaración de Muerte del Agente (FSM to Semantic NFA)
 En la orquestación de la Legión (10.000 subagentes), rechazamos categóricamente la arquitectura basada en DAGs y Schedulers centralizados. Un enjambre de 10k nodos colapsa bajo el modelo tradicional por saturación de contexto y bloqueos mutuos. 
 **Axioma:** El "agente" como entidad con estado no existe. La Legión es un conjunto de **10.000 Transiciones Cognitivas ($T$)** que mapean un espacio de conocimiento inmutable (Ledger) a un nuevo estado proyectado.

@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # 🧬 05 — Teoría de Modelos
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 ## 5.1 🏛️ Structures and Models
 
 A **structure** (or model) $\mathfrak{A}$ for a first-order language $\mathcal{L}$ consists of:

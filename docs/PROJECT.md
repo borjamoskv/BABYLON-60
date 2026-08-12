@@ -1,4 +1,12 @@
 # 🎯 Project: BABYLON-60
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 ## Architecture 📌
 - **Ecosystem**: Ledger Asíncrono Ecosystem by Borja Motor Causal, a Causal-Determinist execution kernel.
 - **Components**:

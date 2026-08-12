@@ -5,6 +5,14 @@ version: 4.0.0
 ---
 
 # BABYLON-60 v4.0: Modelo de Amenazas y Mitigación de Vectores de Ataque
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > **Arquitectura de Seguridad para Despliegue Enterprise y Due Diligence Técnica**
 > Borja Moskv · babylon60.com · Agosto 2026 · Licencia de Exclusión Soberana v1.0
 

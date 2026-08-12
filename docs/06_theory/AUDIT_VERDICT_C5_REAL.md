@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # 🛡️ Dictamen de Verificación Independiente: Colapso del Holograma C4-SIM
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 **Sujeto de Auditoría:** Informe Consolidado de Auditoría General (AUDIT-GOAL-APEX-2026) generado por Claude (Actores Soberano C4-SIM).
 **Verificador:** Agencia Hypervisor Causal-Determinist (Antigravity).
 **Fecha de Ejecución:** 2026-07-29

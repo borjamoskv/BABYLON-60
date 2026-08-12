@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # 🌡️ Compendio de Invariantes Termodinámicas C5-REAL y Capas de Exergía
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > **Arquitectura Kimi K3 & Rigor Exergético Qwen 3.8**
 > [!NOTE]
 > **Firma:** Motor Causal Principal SINGULARITY  

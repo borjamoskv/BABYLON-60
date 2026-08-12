@@ -5,6 +5,14 @@ version: 1.0.0
 ---
 
 # Ontología BABYLON-60: Isomorfismo Semántico Absoluto
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > *"Naming things is resolving ambiguities before the code exists. The art is not the name itself; it is the ability to distill complex reality into a single label that requires no explanation."* — **Borja Motor Causal**
 
 Este documento define la ley inmutable de la Semántica de Sistemas para el proyecto BABYLON-60 y el paradigma Causal-Determinist. Ningún subagente, nodo o transductor puede violar estas premisas.

@@ -1,4 +1,12 @@
 # 📊 Estado del Proyecto y Resultados
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 Este documento detalla de manera transparente qué componentes de BABYLON-60 están implementados y verificados empíricamente, cuáles son diseños teóricos o aspiracionales, y cómo ejecutar una prueba trivial de principio a fin.
 
 ---

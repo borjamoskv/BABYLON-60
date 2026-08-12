@@ -1,8 +1,16 @@
 # Specification: Causal Human-in-the-Loop (HITL) Governance & Operational Workers
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 **Version:** 1.1.0  
 **Status:** Canonical Standard  
 **Governance Invariants:** `RULE[human_in_the_loop_causal_governance]`, `RULE[c5_real_invariants]`  
-**Reference Implementation:** [scripts/poc_causal_hitl_agent.py](../../scripts/poc_causal_hitl_agent.py)  
+**Reference Implementation:** [scripts/poc_causal_hitl_agent.py](../../scripts/c5_cortex/)  
 
 ---
 

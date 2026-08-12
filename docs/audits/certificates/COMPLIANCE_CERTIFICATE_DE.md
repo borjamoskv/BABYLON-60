@@ -6,6 +6,14 @@ jurisdiction: DE / UE (Verordnung EU 2024/1689)
 ---
 
 # 📜 Souveräne KI-Konformitätsbescheinigung
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 ## EU-Verordnung über Künstliche Intelligenz (Verordnung EU 2024/1689)
 
 > **Aufsichtsbehörde:** Bundesamt für Sicherheit in der Informationstechnik (BSI) / EU AI Office  
@@ -117,4 +125,3 @@ BSI / EU AI Office Compliance Transducer v4.0.0
 ---
 
 <sub>BABYLON-60 v4.0 C5-REAL Compliance Transducer · Bundesamt für Sicherheit in der Informationstechnik (BSI) / EU AI Office · Borja Moskv</sub>
-

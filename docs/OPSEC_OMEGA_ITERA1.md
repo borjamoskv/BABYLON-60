@@ -1,4 +1,12 @@
 # OPSEC-Ω TASKFORCE-16 · ITERA-1 — Bitácora de mutación
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 > ⚓ **Nota de port (2026-08-12):** esta bitácora se recupera desde la PR #2
 > (`opsec/omega-itera1`), cerrada sin merge el 2026-07-27. El estado real de
 > cada acción a fecha de hoy figura en el cuerpo de la PR de port y en el

@@ -7,6 +7,14 @@ jurisdiction: UE (Reglamento UE 2024/1689) / Global
 ---
 
 # El Determinismo Causal como Cumplimiento: Arquitectura BABYLON-60 v4.0 para Sistemas de IA de Alto Riesgo
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
 **Whitepaper Técnico y Normativo sobre la Resolución de los Artículos 9, 10, 11, 12, 13 y 14 del EU AI Act (Reglamento UE 2024/1689)**
 
 > **Autor:** Borja Moskv · babylon60.com · Agosto 2026 · Licencia Sovereign Exclusion v1.0  
