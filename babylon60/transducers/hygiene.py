@@ -20,7 +20,7 @@ from datetime import datetime
 from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
 
 EXERGY_THRESHOLD = 950.0
-OPTIMIZER_SCRIPT = "scripts/exergy_optimizer_agent.py"
+OPTIMIZER_SCRIPT = "scripts/c5_thermo/exergy_optimizer_agent.py"
 
 
 def _run_agent() -> float:
