@@ -27,5 +27,5 @@ def is_safe_path(path: str | Path, base_dir: str | Path | None = None) -> bool:
             if forbidden in resolved_path.parents or resolved_path == forbidden:
                 return False
         return True
-    except Exception:
+    except (OSError, ValueError):
         return False

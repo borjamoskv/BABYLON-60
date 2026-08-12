@@ -29,7 +29,7 @@ class SafeTransport:
             if hostname in ("169.254.169.254", "metadata.google.internal"):
                 return False
             return True
-        except Exception as e:
+        except (ValueError, AttributeError) as e:
             logger.warning("URL validation failure: %s", e)
             return False
 
