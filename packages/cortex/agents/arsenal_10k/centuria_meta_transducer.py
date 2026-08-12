@@ -19,7 +19,7 @@ from typing import Any, Dict, List
 import aiosqlite
 import yaml
 
-from cortex.agents.arsenal_896.registry import get_all_primitives, execute_primitive
+from cortex.agents.arsenal_10k.registry import get_all_primitives, execute_primitive
 
 
 class CenturiaMetaTransducer:
@@ -30,7 +30,7 @@ class CenturiaMetaTransducer:
     """
 
     def __init__(
-        self, db_path: str = "cortex.db", audit_path: str = "cortex/audits/centuria_896_ultrathink_consolidation.yaml"
+        self, db_path: str = "cortex.db", audit_path: str = "cortex/audits/centuria_10k_ultrathink_consolidation.yaml"
     ):
         self.db_path = db_path
         self.audit_path = audit_path
@@ -54,7 +54,7 @@ class CenturiaMetaTransducer:
 
     async def execute_retroactive_rewrite(self) -> Dict[str, Any]:
         """
-        Executes the 896 primitives across all domains, computes the Merkle root,
+        Executes the 10000 primitives across all domains, computes the Merkle root,
         and consolidates the causal state in the BFT ledger.
         """
         primitives = get_all_primitives()
@@ -81,7 +81,7 @@ class CenturiaMetaTransducer:
             if taint_hash:
                 self.merkle_leaves.append(taint_hash)
 
-        # Compute aggregate Merkle root over all 896 primitives
+        # Compute aggregate Merkle root over all 10000 primitives
         merkle_root = self.compute_merkle_root(self.merkle_leaves)
 
         # Step 3: Consolidate in CORTEX Ledger (sqlite3 WAL via aiosqlite)
@@ -186,7 +186,7 @@ class CenturiaMetaTransducer:
 
 
 async def main():
-    print("💥 [CENTURIA_META_TRANSDUCER] Iniciando reescritura retroactiva ULTRATHINK (896 primitivas)...")
+    print("💥 [CENTURIA_META_TRANSDUCER] Iniciando reescritura retroactiva ULTRATHINK (10000 primitivas)...")
     transducer = CenturiaMetaTransducer()
     report = await transducer.execute_retroactive_rewrite()
     print(f"✅ [CENTURIA_META_TRANSDUCER] Reescritura completada. Merkle Root: {report['Merkle_Root']}")
