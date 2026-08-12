@@ -63,6 +63,10 @@ onco = [
 telemetry = [
     "psutil>=7.2.2",
 ]
+gemini = [
+    "google-genai>=0.1.0",
+    "fastmcp>=0.1.0",
+]
 voice = [
     "sounddevice>=0.4.6",
     "faster-whisper>=1.1",

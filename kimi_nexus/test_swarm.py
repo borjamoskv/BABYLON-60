@@ -9,7 +9,10 @@ Ejecutar:
 
 import asyncio
 import argparse
-from swarm_orchestrator import run_swarm_orchestrator
+try:
+    from .swarm_orchestrator import run_swarm_orchestrator
+except ImportError:
+    from swarm_orchestrator import run_swarm_orchestrator
 
 
 PROMPTS = {

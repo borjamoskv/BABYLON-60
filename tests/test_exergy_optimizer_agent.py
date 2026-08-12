@@ -3,7 +3,7 @@
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 import os
-from scripts.exergy_optimizer_agent import evaluate_gelabp, ExergyFailed, ComplexityVisitor
+from scripts.c5_thermo.exergy_optimizer_agent import evaluate_gelabp, ExergyFailed, ComplexityVisitor
 import ast
 
 

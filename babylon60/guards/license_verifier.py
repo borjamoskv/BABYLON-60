@@ -6,7 +6,7 @@ Connects legacy test harness to license_sovereign_validator primitives.
 import time
 import json
 from typing import Tuple, Dict, Any
-from babylon60.license_sovereign_validator import (
+from babylon60.guards.license_sovereign_validator import (
     generate_license_key,
     verify_license_key,
     LicenseStatus

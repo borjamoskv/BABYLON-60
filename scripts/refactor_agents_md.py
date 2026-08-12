@@ -15,9 +15,9 @@ import shutil
 import sys
 from pathlib import Path
 
-AGENTS_PATH = Path("/Users/borjafernandezangulo/10_PROJECTS/.agents/AGENTS.md")
-BACKUP_PATH = Path("/Users/borjafernandezangulo/10_PROJECTS/.agents/AGENTS.md.bak")
-ENV_PATH = Path("/Users/borjafernandezangulo/10_PROJECTS/.agents/ENVIRONMENT.md")
+AGENTS_PATH = Path.home() / "10_PROJECTS/.agents/AGENTS.md"
+BACKUP_PATH = Path.home() / "10_PROJECTS/.agents/AGENTS.md.bak"
+ENV_PATH = Path.home() / "10_PROJECTS/.agents/ENVIRONMENT.md"
 
 
 def extract_rule_block(content: str, rule_name: str) -> tuple[str, str]:

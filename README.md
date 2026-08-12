@@ -13,6 +13,13 @@
 
 ---
 
+## 0. Relación de Repositorios en el Ecosistema
+
+* **[`Teorema-Robinson-Moskv`](https://github.com/borjamoskv/Teorema-Robinson-Moskv) (La Madre / Base Teórica):** Repositorio matriz donde reside la formalización matemática en Lean 4, la investigación fundacional y los axiomas de causalidad de Robinson.
+* **[`BABYLON-60`](https://github.com/borjamoskv/BABYLON-60) (El Hijo / Plataforma Ejecutable):** Monorepo de ingeniería de producción que traslada los principios teóricos de `Teorema-Robinson-Moskv` a código ejecutable multisistema (Rust, Python, Web, Tauri).
+
+---
+
 ## ⚡ Live Executable Demo (5 Seconds)
 
 Test the live kernel, cryptographic sanitization, network failure fallback, and automated certificate generation for **AESIA (Spain)**, **BSI (Germany)**, and the **EU AI Office** by running:

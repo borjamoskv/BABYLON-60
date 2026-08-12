@@ -13,7 +13,7 @@ from babylon60.primitives.serialization_boundary import (
     SerializationBoundary,
     SerializationBoundaryError,
 )
-from babylon60.license_verifier import (
+from babylon60.guards.license_verifier import (
     HybridLicenseVerifier,
     LicenseValidationError,
 )

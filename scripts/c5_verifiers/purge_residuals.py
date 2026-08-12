@@ -80,5 +80,12 @@ def purge_repository_residuals():
     print("  VERDICT: RESIDUAL PURGE COMPLETE — REPOSITORIO LIBRE DE ANERGÍA (0% ENTROPÍA)")
     print("======================================================================")
 
+    # 3. Automatic V_A Verification
+    try:
+        from verify_agent_ontological_value import verify_va
+        verify_va()
+    except Exception as e:
+        print(f"  [WARN] V_A Verification call: {e}")
+
 if __name__ == "__main__":
     purge_repository_residuals()

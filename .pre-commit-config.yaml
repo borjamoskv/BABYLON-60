@@ -33,3 +33,10 @@ repos:
         entry: python3 scripts/canary_check.py
         language: system
         pass_filenames: false
+
+      - id: verify-agent-ontological-value
+        name: agent ontological value (V_A) oracle verifier
+        entry: python3 scripts/c5_verifiers/verify_agent_ontological_value.py
+        language: system
+        pass_filenames: false
+
