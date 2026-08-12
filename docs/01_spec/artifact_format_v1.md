@@ -5,15 +5,6 @@ version: 1.0.0
 ---
 
 # Formato de Artefacto BABYLON-60 v1
-
-<div align="center">
-
-[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
-[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/STATUS.md)
-
-</div>
-
 ## 1. Introducción
 Esta es la especificación normativa para el *Artifact Bundle* (Paquete de Artefacto) de BABYLON-60. Cualquier implementación conforme de la Fase 0 (Runtime Bootstrap) debe emitir esta estructura canónica exacta. El propósito de este formato es garantizar que estados lógicos idénticos produzcan hashes idénticos, permitiendo la verificación reproducible vía Lean 4 y Coq.
 

@@ -1,13 +1,4 @@
 # OPSEC-Ω TASKFORCE-16 · ITERA-1 — Bitácora de mutación
-
-<div align="center">
-
-[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
-[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/STATUS.md)
-
-</div>
-
 > ⚓ **Nota de port (2026-08-12):** esta bitácora se recupera desde la PR #2
 > (`opsec/omega-itera1`), cerrada sin merge el 2026-07-27. El estado real de
 > cada acción a fecha de hoy figura en el cuerpo de la PR de port y en el

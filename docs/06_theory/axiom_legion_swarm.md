@@ -6,15 +6,6 @@ version: 1.0.0
 
 # ⚡ Axiomatización Formal: Legion Parallel Workspace Swarm
 > **Auditoría Agéntica de Alta Concurrencia de BABYLON-60**
-
-<div align="center">
-
-[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
-[![Concurrency](https://img.shields.io/badge/Concurrency-10k--Swarm-FF6D00?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
-
-</div>
-
 > [!NOTE]
 > **Contexto del Protocolo**
 > Metodología formal generada bajo el protocolo `agentic-protocol-axiomatization`. Define el modelo lógico-deductivo $\mathcal{G}$ subyacente al motor de auditoría de 1,000+ agentes paralelos.

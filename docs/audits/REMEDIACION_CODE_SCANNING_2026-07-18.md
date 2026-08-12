@@ -1,13 +1,4 @@
 # 🛠️ REMEDIACIÓN CODE-SCANNING — BABYLON-60
-
-<div align="center">
-
-[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
-[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
-
-</div>
-
 `REALITY_LEVEL: Causal-Determinist` · Fecha: 2026-07-18 · Operador: Motor Causal Principal (sesión Cowork) · Génesis: `github.com/borjamoskv/BABYLON-60/security/code-scanning` · Método: semgrep (auto, 251 findings) + bandit (7773 findings) + verificación manual por fichero · Predecesor: `REMEDIACION_ITERA2_2026-07-17.md`
 
 █▄█ █▄█ █▄█ █▄█ █▄█ █▄█ █▄█ █▄█ █▄█ █▄█
