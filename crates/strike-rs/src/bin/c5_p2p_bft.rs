@@ -32,6 +32,7 @@ const RE_DRM_VECTORS: [&str; 10] = [
     "Transduction", "Decryption", "Verification", "Reconstruction", "Purge"
 ];
 
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 struct Theory {
     code: &'static str,
