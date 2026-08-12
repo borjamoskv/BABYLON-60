@@ -309,6 +309,143 @@ wheels = [
 ]
 
 [[package]]
+name = "babylon60"
+version = "4.0.0"
+source = { editable = "." }
+dependencies = [
+    { name = "aiosqlite" },
+    { name = "argon2-cffi" },
+    { name = "cbor2" },
+    { name = "click" },
+    { name = "cryptography" },
+    { name = "defusedxml" },
+    { name = "httpx" },
+    { name = "lingua-language-detector", version = "2.1.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "lingua-language-detector", version = "2.2.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+    { name = "pydantic" },
+    { name = "pynacl" },
+    { name = "pynput" },
+    { name = "pyyaml" },
+    { name = "starlette" },
+    { name = "textual" },
+]
+
+[package.optional-dependencies]
+apex = [
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
+    { name = "numpy", version = "2.5.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+    { name = "scikit-learn", version = "1.7.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "scikit-learn", version = "1.9.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "scipy", version = "1.15.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "scipy", version = "1.17.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
+    { name = "scipy", version = "1.18.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+]
+dev = [
+    { name = "fastapi" },
+    { name = "jinja2" },
+    { name = "mypy" },
+    { name = "networkx", version = "3.4.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "networkx", version = "3.6.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "pandas", version = "2.3.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "pandas", version = "3.0.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "pytest" },
+    { name = "pytest-asyncio" },
+    { name = "ruff" },
+    { name = "urllib3" },
+    { name = "uvicorn" },
+]
+embeddings = [
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
+    { name = "numpy", version = "2.5.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+]
+gemini = [
+    { name = "fastmcp" },
+    { name = "google-genai" },
+]
+graph = [
+    { name = "networkx", version = "3.4.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "networkx", version = "3.6.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+]
+onco = [
+    { name = "networkx", version = "3.4.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "networkx", version = "3.6.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
+    { name = "numpy", version = "2.5.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+    { name = "pandas", version = "2.3.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "pandas", version = "3.0.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+]
+telemetry = [
+    { name = "psutil" },
+]
+voice = [
+    { name = "faster-whisper" },
+    { name = "sounddevice" },
+]
+voice-full = [
+    { name = "faster-whisper" },
+    { name = "kokoro" },
+    { name = "mlx-lm", marker = "platform_machine == 'arm64' and sys_platform == 'darwin'" },
+    { name = "sounddevice" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "hypothesis" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "aiosqlite", specifier = ">=0.19" },
+    { name = "argon2-cffi", specifier = ">=23.0" },
+    { name = "cbor2", specifier = ">=5.6.0" },
+    { name = "click", specifier = ">=8.0" },
+    { name = "cryptography", specifier = ">=43.0.0" },
+    { name = "defusedxml", specifier = ">=0.7.1" },
+    { name = "fastapi", marker = "extra == 'dev'", specifier = ">=0.115.0" },
+    { name = "faster-whisper", marker = "extra == 'voice'", specifier = ">=1.1" },
+    { name = "faster-whisper", marker = "extra == 'voice-full'", specifier = ">=1.1" },
+    { name = "fastmcp", marker = "extra == 'gemini'", specifier = ">=0.1.0" },
+    { name = "google-genai", marker = "extra == 'gemini'", specifier = ">=0.1.0" },
+    { name = "httpx", specifier = ">=0.27.2" },
+    { name = "jinja2", marker = "extra == 'dev'", specifier = ">=3.1.4" },
+    { name = "kokoro", marker = "extra == 'voice-full'", specifier = ">=0.9" },
+    { name = "lingua-language-detector", specifier = ">=2.0.2" },
+    { name = "mlx-lm", marker = "platform_machine == 'arm64' and sys_platform == 'darwin' and extra == 'voice-full'", specifier = ">=0.21" },
+    { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.8" },
+    { name = "networkx", marker = "extra == 'dev'", specifier = ">=3.0" },
+    { name = "networkx", marker = "extra == 'graph'", specifier = ">=3.0" },
+    { name = "networkx", marker = "extra == 'onco'", specifier = ">=3.0" },
+    { name = "numpy", marker = "extra == 'apex'", specifier = ">=1.24" },
+    { name = "numpy", marker = "extra == 'embeddings'", specifier = ">=1.24" },
+    { name = "numpy", marker = "extra == 'onco'", specifier = ">=1.24" },
+    { name = "pandas", marker = "extra == 'dev'", specifier = ">=2.0" },
+    { name = "pandas", marker = "extra == 'onco'", specifier = ">=2.0" },
+    { name = "psutil", marker = "extra == 'telemetry'", specifier = ">=7.2.2" },
+    { name = "pydantic", specifier = ">=2.8.0" },
+    { name = "pynacl", specifier = ">=1.5.0" },
+    { name = "pynput", specifier = ">=1.7.0" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
+    { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = ">=0.23" },
+    { name = "pyyaml", specifier = ">=6.0.2" },
+    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.4" },
+    { name = "scikit-learn", marker = "extra == 'apex'", specifier = ">=1.3" },
+    { name = "scipy", marker = "extra == 'apex'", specifier = ">=1.11" },
+    { name = "sounddevice", marker = "extra == 'voice'", specifier = ">=0.4.6" },
+    { name = "sounddevice", marker = "extra == 'voice-full'", specifier = ">=0.4.6" },
+    { name = "starlette", specifier = ">=0.40.0" },
+    { name = "textual", specifier = ">=0.50.0" },
+    { name = "urllib3", marker = "extra == 'dev'", specifier = ">=2.2.2" },
+    { name = "uvicorn", marker = "extra == 'dev'", specifier = ">=0.30.0" },
+]
+provides-extras = ["dev", "embeddings", "graph", "onco", "telemetry", "gemini", "voice", "voice-full", "apex"]
+
+[package.metadata.requires-dev]
+dev = [{ name = "hypothesis", specifier = ">=6.163.0" }]
+
+[[package]]
 name = "backports-asyncio-runner"
 version = "1.2.0"
 source = { registry = "https://pypi.org/simple" }
@@ -793,143 +930,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/ca/65/efd0fe8a936fc8ca2
 wheels = [
     { url = "https://files.pythonhosted.org/packages/8d/e4/d66708bdf0d92fb4d49b22cdff4b10cec38aca5dcd7e81d909bb55c65cd7/confection-1.3.3-py3-none-any.whl", hash = "sha256:b9fef9ee84b237ef4611ec3eb5797b70e13063e6310ad9f15536373f5e313c82", size = 35902, upload-time = "2026-03-24T18:45:22.664Z" },
 ]
-
-[[package]]
-name = "cortex-persist"
-version = "4.0.0"
-source = { editable = "." }
-dependencies = [
-    { name = "aiosqlite" },
-    { name = "argon2-cffi" },
-    { name = "cbor2" },
-    { name = "click" },
-    { name = "cryptography" },
-    { name = "defusedxml" },
-    { name = "httpx" },
-    { name = "lingua-language-detector", version = "2.1.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
-    { name = "lingua-language-detector", version = "2.2.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
-    { name = "pydantic" },
-    { name = "pynacl" },
-    { name = "pynput" },
-    { name = "pyyaml" },
-    { name = "starlette" },
-    { name = "textual" },
-]
-
-[package.optional-dependencies]
-apex = [
-    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
-    { name = "numpy", version = "2.5.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
-    { name = "scikit-learn", version = "1.7.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "scikit-learn", version = "1.9.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "scipy", version = "1.15.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "scipy", version = "1.17.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
-    { name = "scipy", version = "1.18.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
-]
-dev = [
-    { name = "fastapi" },
-    { name = "jinja2" },
-    { name = "mypy" },
-    { name = "networkx", version = "3.4.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "networkx", version = "3.6.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "pandas", version = "2.3.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "pandas", version = "3.0.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "pytest" },
-    { name = "pytest-asyncio" },
-    { name = "ruff" },
-    { name = "urllib3" },
-    { name = "uvicorn" },
-]
-embeddings = [
-    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
-    { name = "numpy", version = "2.5.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
-]
-gemini = [
-    { name = "fastmcp" },
-    { name = "google-genai" },
-]
-graph = [
-    { name = "networkx", version = "3.4.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "networkx", version = "3.6.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-]
-onco = [
-    { name = "networkx", version = "3.4.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "networkx", version = "3.6.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
-    { name = "numpy", version = "2.5.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
-    { name = "pandas", version = "2.3.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "pandas", version = "3.0.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-]
-telemetry = [
-    { name = "psutil" },
-]
-voice = [
-    { name = "faster-whisper" },
-    { name = "sounddevice" },
-]
-voice-full = [
-    { name = "faster-whisper" },
-    { name = "kokoro" },
-    { name = "mlx-lm", marker = "platform_machine == 'arm64' and sys_platform == 'darwin'" },
-    { name = "sounddevice" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "hypothesis" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "aiosqlite", specifier = ">=0.19" },
-    { name = "argon2-cffi", specifier = ">=23.0" },
-    { name = "cbor2", specifier = ">=5.6.0" },
-    { name = "click", specifier = ">=8.0" },
-    { name = "cryptography", specifier = ">=43.0.0" },
-    { name = "defusedxml", specifier = ">=0.7.1" },
-    { name = "fastapi", marker = "extra == 'dev'", specifier = ">=0.115.0" },
-    { name = "faster-whisper", marker = "extra == 'voice'", specifier = ">=1.1" },
-    { name = "faster-whisper", marker = "extra == 'voice-full'", specifier = ">=1.1" },
-    { name = "fastmcp", marker = "extra == 'gemini'", specifier = ">=0.1.0" },
-    { name = "google-genai", marker = "extra == 'gemini'", specifier = ">=0.1.0" },
-    { name = "httpx", specifier = ">=0.27.2" },
-    { name = "jinja2", marker = "extra == 'dev'", specifier = ">=3.1.4" },
-    { name = "kokoro", marker = "extra == 'voice-full'", specifier = ">=0.9" },
-    { name = "lingua-language-detector", specifier = ">=2.0.2" },
-    { name = "mlx-lm", marker = "platform_machine == 'arm64' and sys_platform == 'darwin' and extra == 'voice-full'", specifier = ">=0.21" },
-    { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.8" },
-    { name = "networkx", marker = "extra == 'dev'", specifier = ">=3.0" },
-    { name = "networkx", marker = "extra == 'graph'", specifier = ">=3.0" },
-    { name = "networkx", marker = "extra == 'onco'", specifier = ">=3.0" },
-    { name = "numpy", marker = "extra == 'apex'", specifier = ">=1.24" },
-    { name = "numpy", marker = "extra == 'embeddings'", specifier = ">=1.24" },
-    { name = "numpy", marker = "extra == 'onco'", specifier = ">=1.24" },
-    { name = "pandas", marker = "extra == 'dev'", specifier = ">=2.0" },
-    { name = "pandas", marker = "extra == 'onco'", specifier = ">=2.0" },
-    { name = "psutil", marker = "extra == 'telemetry'", specifier = ">=7.2.2" },
-    { name = "pydantic", specifier = ">=2.8.0" },
-    { name = "pynacl", specifier = ">=1.5.0" },
-    { name = "pynput", specifier = ">=1.7.0" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
-    { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = ">=0.23" },
-    { name = "pyyaml", specifier = ">=6.0.2" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.4" },
-    { name = "scikit-learn", marker = "extra == 'apex'", specifier = ">=1.3" },
-    { name = "scipy", marker = "extra == 'apex'", specifier = ">=1.11" },
-    { name = "sounddevice", marker = "extra == 'voice'", specifier = ">=0.4.6" },
-    { name = "sounddevice", marker = "extra == 'voice-full'", specifier = ">=0.4.6" },
-    { name = "starlette", specifier = ">=0.40.0" },
-    { name = "textual", specifier = ">=0.50.0" },
-    { name = "urllib3", marker = "extra == 'dev'", specifier = ">=2.2.2" },
-    { name = "uvicorn", marker = "extra == 'dev'", specifier = ">=0.30.0" },
-]
-provides-extras = ["dev", "embeddings", "graph", "onco", "telemetry", "gemini", "voice", "voice-full", "apex"]
-
-[package.metadata.requires-dev]
-dev = [{ name = "hypothesis", specifier = ">=6.163.0" }]
 
 [[package]]
 name = "cryptography"
