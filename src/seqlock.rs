@@ -94,8 +94,18 @@ fn cpu_spin_yield() {
 /// Debe ser invocada por **un único hilo escritor** en todo momento.
 /// La invocación concurrente desde múltiples hilos es UB.
 #[inline]
-pub fn publish(_m: &SharedManifest, _epoch: u64, _hash: &[u64; 4]) {
-    unimplemented!("ABI canonizada a 64 bytes (PxS) - seqlock requiere refactor");
+pub fn publish(m: &SharedManifest, epoch: u64, hash: &[u64; 4]) {
+    let s = m.seq.load(Ordering::Relaxed);
+    m.seq.store(s.wrapping_add(1), Ordering::Relaxed);
+    fence(Ordering::Release);
+
+    m.epoch_id.store(epoch, Ordering::Relaxed);
+    m.payload_hash[0].store(hash[0], Ordering::Relaxed);
+    m.payload_hash[1].store(hash[1], Ordering::Relaxed);
+    m.payload_hash[2].store(hash[2], Ordering::Relaxed);
+    m.payload_hash[3].store(hash[3], Ordering::Relaxed);
+
+    m.seq.store(s.wrapping_add(2), Ordering::Release);
 }
 
 // ---------------------------------------------------------------------------
@@ -104,7 +114,33 @@ pub fn publish(_m: &SharedManifest, _epoch: u64, _hash: &[u64; 4]) {
 
 #[inline]
 #[must_use]
-pub fn read(_m: &SharedManifest) -> Option<(u64, [u64; 4])> {
-    unimplemented!("ABI canonizada a 64 bytes (PxS) - seqlock requiere refactor");
+pub fn read(m: &SharedManifest) -> Option<(u64, [u64; 4])> {
+    let mut retries = 0;
+    loop {
+        if retries > 1000 {
+            return None;
+        }
+        let s1 = m.seq.load(Ordering::Acquire);
+        if s1 & 1 != 0 {
+            cpu_spin_yield();
+            retries += 1;
+            continue;
+        }
+
+        let epoch = m.epoch_id.load(Ordering::Relaxed);
+        let h0 = m.payload_hash[0].load(Ordering::Relaxed);
+        let h1 = m.payload_hash[1].load(Ordering::Relaxed);
+        let h2 = m.payload_hash[2].load(Ordering::Relaxed);
+        let h3 = m.payload_hash[3].load(Ordering::Relaxed);
+
+        fence(Ordering::Acquire);
+        let s2 = m.seq.load(Ordering::Relaxed);
+
+        if s1 == s2 {
+            return Some((epoch, [h0, h1, h2, h3]));
+        }
+        cpu_spin_yield();
+        retries += 1;
+    }
 }
 
