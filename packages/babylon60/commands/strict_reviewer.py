@@ -39,7 +39,7 @@ from babylon60.commands.itera import run_auto_purge
 from babylon60.utils.hygiene import run_exergy_optimizer
 
 # ---------------------------------------------------------------------------
-# Helper utilities
+# Morfismos y Operadores Funcionales
 # ---------------------------------------------------------------------------
 
 

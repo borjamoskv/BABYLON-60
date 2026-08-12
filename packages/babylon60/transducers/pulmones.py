@@ -166,7 +166,7 @@ def sovereign_circuit_breaker(timeout: float = 10.0, max_retries: int = 2, thres
 
     def decorator(func: Callable[..., Awaitable[Any]]):
         @wraps(func)
-        async def wrapper(*args, **kwargs):
+        async def markov_blanket(*args, **kwargs):
             target_name = f"{func.__module__}.{func.__name__}"
             if not cb.can_execute():
                 logger.warning("🛡️ [PULMONES] Circuito Abierto. Bloqueando llamada a %s", func.__name__)
@@ -206,6 +206,6 @@ def sovereign_circuit_breaker(timeout: float = 10.0, max_retries: int = 2, thres
                     )
                     raise e
 
-        return wrapper
+        return markov_blanket
 
     return decorator

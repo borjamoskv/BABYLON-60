@@ -1,9 +1,9 @@
 # 🧠 CORTEX Substrate (`packages/cortex/`)
 
 [![PyPI Version](https://img.shields.io/badge/PyPI-cortex--persist-blue?style=for-the-badge&logo=pypi)](https://pypi.org/project/cortex-persist/)
-[![MCP Server](https://img.shields.io/badge/MCP-Model_Context_Protocol-purple?style=for-the-badge)](../docs/03_guides/cortex_mcp_guide.md)
-[![AST Sandbox](https://img.shields.io/badge/Sandbox-Chaos_Monad_AST-orange?style=for-the-badge)](../babylon60/cortex_chaos_monad.py)
-[![Epistemology](https://img.shields.io/badge/Epistemology-Store_Comonad-green?style=for-the-badge)](../docs/00_MANIFESTO.md)
+[![MCP Server](https://img.shields.io/badge/MCP-Model_Context_Protocol-purple?style=for-the-badge)](../babylon60/mcp/cortex_mcp_server.py)
+[![AST Sandbox](https://img.shields.io/badge/Sandbox-Chaos_Monad_AST-orange?style=for-the-badge)](../babylon60/cortex/cortex_chaos_monad.py)
+[![Epistemology](https://img.shields.io/badge/Epistemology-Store_Comonad-green?style=for-the-badge)](../../docs/00_MANIFESTO.md)
 
 **CORTEX** (`cortex-persist`) is the Python persistence, AST Markov Blanket isolation, and cognitive memory substrate for **BABYLON-60**. It provides autopoietic swarm orchestration (`moskv-swarm`), vector/graph comonadic memory (`L1_sink`), the **Chaos Monad AST Sandbox** (`cortex_chaos_monad.py`), and the Model Context Protocol (MCP) Markov Blanket interface (`cortex_mcp_server.py`) for Claude Code, Cursor, and ChatGPT.
 
