@@ -16,7 +16,6 @@
 //   Las cargas Relaxed encajan correctamente en el protocolo seqlock.
 
 use core::mem::{align_of, size_of};
-use core::mem::offset_of;
 use core::sync::atomic::{AtomicU32, AtomicU64};
 
 // ---------------------------------------------------------------------------

@@ -40,6 +40,19 @@ loom = { version = "0.7" }
 proptest = "1.0"
 num-bigint = "0.4"
 sha2 = "0.10"
+hex = "0.4"
+
+[[test]]
+name = "replay"
+path = "tests/replay/mod.rs"
+
+[[test]]
+name = "differential"
+path = "tests/differential/mod.rs"
+
+[[test]]
+name = "property"
+path = "tests/property/mod.rs"
 
 [profile.release]
 lto = "fat"
