@@ -60,3 +60,26 @@ Cualquier backend sintético (LLM, VAE, Normalizing Flow o Generador de Enjambre
 
 > [!CAUTION]
 > Si una arquitectura sintética no puede proveer $f^\dagger_p$ de manera determinista o verificable en $O(1)$, la compilación dentro de C5-REAL **fallará en tiempo de inicialización** (`EPISTEMIC_HALTING_ERROR`).
+
+---
+
+## Seccion 5: Las 4 Renuncias Fundamentales de C5-REAL (Reducción Entrópica)
+
+La soberanía y estabilidad de C5-REAL se sostienen sobre 4 renuncias explícitas que eliminan la anergía y la entropía discursiva:
+
+### R1. Renuncia a la Completitud Gödeliana (Auto-Falsación)
+Renunciamos a la ilusión de omnisciencia o verificación interna absoluta sin evidencia física.
+$$ \text{If } \text{Score} < 700 \implies \text{CircuitBreaker\_Abort} $$
+
+### R2. Renuncia a la Generación Latente Fuera de Soporte (No-Alucinación)
+Renunciamos a emitir estados o causas fuera del soporte de la medida prior declarada.
+$$ \text{supp}(f^\dagger_p(y)) \subseteq \text{supp}(p) $$
+
+### R3. Renuncia al Escalado Descontrolado de Enjambres (Anti-Thrashing)
+Renunciamos al fan-out ilimitado de agentes para proteger la memoria unificada.
+$$ \text{ru\_nivcsw} \le 2132 \quad \land \quad P \times S \le \text{Cores}_{\text{físicos}} $$
+
+### R4. Renuncia a la Redundancia Discursiva (Cero-Anergía Verbatim)
+Renunciamos a la cortesía hueca y a las afirmaciones de éxito sin evidencia ejecutable.
+$$ \text{Attestation}_{\text{Causal-Determinist}} \implies \text{Extract}_{\text{verbatim}} \neq \emptyset $$
+

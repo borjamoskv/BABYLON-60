@@ -1,4 +1,4 @@
-// C5-REAL EXERGY CERTIFIED — BABYLON-60 — INV-4 (receipt)
+// Certified Specification — BABYLON-60 — INV-4 (receipt generation)
 // Recibo COSE_Sign1 sobre RFC 9942 + SCITT-22 con SHAKE256 (−45)
 //
 // PERFIL BABYLON-60 SOBRE RFC 9942 (publicado 2026-06-30)

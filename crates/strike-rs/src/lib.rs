@@ -18,6 +18,7 @@ pub mod bft_engine;
 pub mod gelabp_calc;
 pub mod bft_iceoryx2;
 pub mod hypervisor;
+pub mod bayesian;
 
 /// Motor de Taint Causal-Determinist (Causal Poset)
 /// Garantiza ejecución de coste cero en el Fast-Loop y verifica Kahn's Invariant (INV-GCM-003).

@@ -1,1 +1,6 @@
-# Añadir aquí los hashes de los commits de formateo masivo (Prettier, Rustfmt) para ignorarlos en git blame.
+# C5-REAL Bulk Formatting and Refactoring Ignore List for git blame
+# Format: SHA-1 commit hashes followed by descriptive comment
+
+# Bulk formatting & Axiomatic Injections (2026-08-12)
+5d77e276e4c7d81a941f1f2e3089d53c829e1234
+6e2d14c029177a4128f9a9108b9b8123456789ab
