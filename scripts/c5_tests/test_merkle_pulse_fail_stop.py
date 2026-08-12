@@ -40,6 +40,9 @@ async def test_fail_stop():
     
     # Asegurar que el directorio existe
     MEMORY_DIR.mkdir(parents=True, exist_ok=True)
+    hitl_db = MEMORY_DIR / "hitl.db"
+    if hitl_db.exists():
+        hitl_db.unlink()
     
     ghosts_file = MEMORY_DIR / "ghosts.json"
     ghosts_file.write_text('{"test_project": {"mood": "hyper-focused"}}', encoding="utf-8")

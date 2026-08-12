@@ -13,6 +13,9 @@ Checks:
 
 import os, sys
 repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+packages_dir = os.path.join(repo_root, "packages")
+if packages_dir not in sys.path:
+    sys.path.insert(0, packages_dir)
 if repo_root not in sys.path:
     sys.path.insert(0, repo_root)
 
@@ -33,12 +36,17 @@ def verify_va():
         return False
         
     # Check 2: Existence Gap check for local modules
-    required_local_mods = ["babylon60", "kimi_nexus", "scripts"]
-    for mod in required_local_mods:
-        if not os.path.exists(mod):
-            print(f"  [FAIL] Pilar 2: Módulo esencial '{mod}' no encontrado en raíz.")
+    required_paths = [
+        os.path.join(repo_root, "packages", "babylon60"),
+        os.path.join(repo_root, "scripts"),
+        os.path.join(repo_root, "crates"),
+    ]
+    for p in required_paths:
+        if not os.path.exists(p):
+            print(f"  [FAIL] Pilar 2: Módulo esencial '{os.path.basename(p)}' no encontrado en {p}.")
             return False
     print("  [OK] Pilar 2: Anclaje de Existencia de Módulos Locales Verificado.")
+
 
     # Check 3: Anergy Check
     target_path = "target"
