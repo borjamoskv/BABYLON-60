@@ -4,94 +4,130 @@ status: Causal-Determinist
 version: 1.0.0
 ---
 
-# Axiomatización Formal: Legion Parallel Workspace Swarm
+# ⚡ Axiomatización Formal: Legion Parallel Workspace Swarm
+> **Auditoría Agéntica de Alta Concurrencia de BABYLON-60**
 
-> **Régimen Causal-Determinist**
-> Metodología formal generada bajo el protocolo `agentic-protocol-axiomatization`. Define el modelo lógico-deductivo $\mathcal{G}$ subyacente al motor de auditoría de 1,000 agentes paralelos.
+<div align="center">
 
----
+[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Axiomatic_Verified-0052CC?style=for-the-badge&logo=shield)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md)
+[![Concurrency](https://img.shields.io/badge/Concurrency-10k--Swarm-FF6D00?style=for-the-badge)](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md)
 
-## 1. Primitivas Irreducibles
+</div>
 
-- **Espacio de Trabajo ($\mathcal{W}$)**: Un hipergrafo inmutable compuesto por un conjunto discreto de Nodos Documentales $D = \{d_1, d_2, \dots, d_n\}$.
-- **Agente Lógico ($\alpha$)**: Un autómata determinista de estado cero, definido como una función pura $\alpha : D \to \mathcal{V}$, donde $\mathcal{V}$ es el Espacio de Violaciones.
-- **Oráculo Estructural ($\mathcal{O}$)**: Conjunto de predicados booleanos (AST, Patrones Banned, Shebang) que un documento debe satisfacer.
-- **Legión ($\Lambda$)**: El orquestador de concurrencia física (Process/Thread Pool) que inyecta instancias de $\alpha$ sobre particiones de $\mathcal{W}$.
-
----
-
-## 2. Axiomas Fundamentales
-
-### AX-LS-1 (Acotamiento de Concurrencia Férrea)
-El paralelismo físico en cualquier instante $t$ está estrictamente acotado por un límite termodinámico superior, evitando la saturación del OS:
-$$ \forall t \in \text{Ejecución}, \quad |\text{Active}(\Lambda_t)| \le \mathcal{C}_{\text{proc}} \times \mathcal{C}_{\text{thr}} $$
-
-### AX-LS-2 (Mutabilidad Cero / Aislamiento Causal)
-La legión es un observador epistemológico puro. Ningún nodo altera $\mathcal{W}$ durante la ejecución. El gradiente de entropía local del sistema de archivos es estrictamente cero:
-$$ \Delta\text{Entropía}(\mathcal{W}) = 0 $$
-
-### AX-LS-3 (Fail-Fast de Grano Fino)
-Una excepción en $\alpha_i$ evaluando $d_i$ (e.g., error de lectura o corrupción binaria no UTF-8) no interrumpe el bucle de la Legión, sino que colapsa determinísticamente en un elemento de $\mathcal{V}$ sin propagarse topológicamente:
-$$ \text{Crash}(\alpha_i) \implies \alpha_i(d_i) = \{ v_{\text{crash}} \} \land \text{Alive}(\alpha_{j \neq i}) $$
+> [!NOTE]
+> **Contexto del Protocolo**
+> Metodología formal generada bajo el protocolo `agentic-protocol-axiomatization`. Define el modelo lógico-deductivo $\mathcal{G}$ subyacente al motor de auditoría de 1,000+ agentes paralelos.
 
 ---
 
-## 3. Definiciones de Alto Nivel
+## 1. 📐 Primitivas Irreducibles
 
-- **Partición Topológica (Chunking):** El espacio $\mathcal{W}$ se divide ortogonalmente en $K$ subconjuntos disjuntos $\mathcal{W}_1, \dots, \mathcal{W}_K$ tal que $\bigcup \mathcal{W}_k = \mathcal{W}$ y $\bigcap \mathcal{W}_k = \emptyset$. Cada chunk es procesado atómicamente por un Process Worker.
-- **Bucle Deductivo de Auditoría:** La aplicación recursiva de $\mathcal{O}$ a cada nodo $d_i \in \mathcal{W}$ hasta que $\Lambda$ se vacía.
-- **Matriz de Saneamiento:** El conjunto final $\mathbf{V} = \bigcup_{i=1}^{|\mathcal{W}|} \alpha(d_i)$. Si $\mathbf{V} = \emptyset$, el repositorio alcanza la **Homeostasis Estructural**.
+| Primitiva | Símbolo | Naturaleza Matemática | Descripción & Función Causal |
+| :--- | :---: | :--- | :--- |
+| **Espacio de Trabajo** | $\mathcal{W}$ | Hipergrafo Inmutable | Conjunto discreto de Nodos Documentales $D = \{d_1, d_2, \dots, d_n\}$. |
+| **Agente Lógico** | $\alpha$ | Función Pura $\alpha : D \to \mathcal{V}$ | Autómata determinista de estado cero donde $\mathcal{V}$ es el Espacio de Violaciones. |
+| **Oráculo Estructural** | $\mathcal{O}$ | Predicados Booleanos | Validador de esquemas (AST, Patrones Prohibidos, Shebang, Invariantes C5). |
+| **Legión** | $\Lambda$ | Pool de Concurrencia Física | Orquestador de Process/Thread Pool que inyecta $\alpha$ sobre particiones disjuntas de $\mathcal{W}$. |
 
 ---
 
-## 4. Teoremas y Corolarios
+## 2. 🛡️ Axiomas Fundamentales
 
-### Teorema 1: Invarianza Causal del Scheduler
+> [!IMPORTANT]
+> ### AX-LS-1: Acotamiento de Concurrencia Férrea
+> El paralelismo físico en cualquier instante $t$ está strictly acotado por un límite termodinámico superior, evitando la saturación de recursos del SO (CPU/RAM thrashing).
+> 
+> $$ \forall t \in \text{Ejecución}, \quad |\text{Active}(\Lambda_t)| \le \mathcal{C}_{\text{proc}} \times \mathcal{C}_{\text{thr}} $$
+
+> [!CAUTION]
+> ### AX-LS-2: Mutabilidad Cero / Aislamiento Causal
+> La legión es un observador epistemológico puro. Ningún nodo altera $\mathcal{W}$ durante la ejecución de auditoría. El gradiente de entropía local del sistema de archivos es estrictamente cero.
+> 
+> $$ \Delta\text{Entropía}(\mathcal{W}) = 0 $$
+
+> [!WARNING]
+> ### AX-LS-3: Fail-Fast de Grano Fino
+> Una excepción en $\alpha_i$ evaluando $d_i$ (e.g., error de I/O o corrupción binaria non-UTF-8) no interrumpe el bucle de la Legión, sino que colapsa determinísticamente en un elemento de $\mathcal{V}$ sin propagarse topológicamente.
+> 
+> $$ \text{Crash}(\alpha_i) \implies \alpha_i(d_i) = \{ v_{\text{crash}} \} \land \text{Alive}(\alpha_{j \neq i}) $$
+
+---
+
+## 3. 🧩 Definiciones de Alto Nivel
+
+| Concepto | Estructura | Mapeo Arquitectónico |
+| :--- | :---: | :--- |
+| **Partición Topológica (Chunking)** | $\bigcup \mathcal{W}_k = \mathcal{W} \quad \text{y} \quad \bigcap \mathcal{W}_k = \emptyset$ | División disjunta de $\mathcal{W}$ en $K$ subconjuntos procesados atómicamente por Process Workers. |
+| **Bucle Deductivo de Auditoría** | $\mathcal{O}(d_i) \quad \forall d_i \in \mathcal{W}$ | Aplicación recursiva paralela del oráculo estructural sobre cada nodo hasta agotar $\Lambda$. |
+| **Matriz de Saneamiento** | $\mathbf{V} = \bigcup_{i=1}^{|\mathcal{W}|} \alpha(d_i)$ | Vector global acumulado. Si $\mathbf{V} = \emptyset$, el repositorio alcanza **Homeostasis Estructural**. |
+
+---
+
+## 4. 🧮 Teoremas y Corolarios
+
+> [!TIP]
+> ### Teorema 1: Invarianza Causal del Scheduler
 > **Enunciado:** Dado un espacio $\mathcal{W}$ inmutable, el estado final de la Matriz de Saneamiento $\mathbf{V}$ es matemáticamente idéntico independientemente de la latencia del sistema operativo o el orden asíncrono de los hilos de ejecución.
+> 
+> **Demostración (Boceto):**
+> 1. Por AX-LS-2, ninguna función $\alpha$ muta el estado global de $\mathcal{W}$.
+> 2. Como cada $\alpha_i$ procesa un $d_i$ independiente de la Partición Topológica disjunta, las evaluaciones son homomorfismos aislados.
+> 3. La unión de conjuntos es conmutativa ($A \cup B = B \cup A$).
+> 4. $\therefore$ El orden de resolución de los `Future`s en el pool conmutativo no altera el vector final $\mathbf{V}$. $\blacksquare$
 
-**Demostración (Boceto):** Por AX-LS-2, ninguna función $\alpha$ muta el estado global. Como cada $\alpha_i$ procesa un $d_i$ independiente de la Partición Topológica disjunta, las evaluaciones son homomorfismos aislados. La unión de conjuntos conmutativos $A \cup B = B \cup A$ garantiza que el orden de retorno de los `Future`s en el `as_completed` no alterará el vector final $\mathbf{V}$. $\blacksquare$
-
-### Corolario 1: Cota de Sobrecarga Termodinámica
-El sistema nunca puede entrar en "Green Theater" (bloqueo mutuo asintótico o livelock). Debido a AX-LS-3 y la finitud de $\mathcal{W}$, el proceso siempre termína en un número acotado de operaciones atómicas de SO.
+> [!NOTE]
+> ### Corolario 1: Cota de Sobrecarga Termodinámica
+> El sistema jamás entra en *Livelock* o *Green Theater*. Debido a AX-LS-3 y la finitud de $\mathcal{W}$, el proceso termina determinísticamente en un número acotado de operaciones de sistema.
 
 ---
 
-## 5. Topología del Bucle Deductivo (Mermaid)
+## 5. 📊 Topología del Bucle Deductivo
 
 ```mermaid
-stateDiagram-v2
-    direction TB
-    [*] --> DiscoveredFiles : Exploración AST
-    
-    state "Orquestación Legion (P×T)" as Legion {
-        DiscoveredFiles --> ProcessChunk : Partición Topológica
-        ProcessChunk --> ThreadAgent_1
-        ProcessChunk --> ThreadAgent_N
-    }
-    
-    state "Oráculo Estructural (O)" as Oracle {
-        ThreadAgent_1 --> AST_Verifier
-        ThreadAgent_1 --> Regex_Scanner
-        AST_Verifier --> Banned_Patterns
-    }
-    
-    Oracle --> ViolationSet : Reducción Monádica
-    
-    state "Evaluación de Homeostasis" as Eval {
-        ViolationSet --> Homeostasis_Zero : |V| = 0
-        ViolationSet --> Termodynamic_Friction : |V| > 0
-    }
-    
-    Homeostasis_Zero --> [*]
-    Termodynamic_Friction --> [*]
+flowchart TB
+    %% Estilos
+    classDef discovery fill:#1e1e2e,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4;
+    classDef legion fill:#313244,stroke:#f9e2af,stroke-width:2px,color:#cdd6f4;
+    classDef oracle fill:#181825,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4;
+    classDef result fill:#181825,stroke:#b4befe,stroke-width:2px,color:#cdd6f4;
+
+    Start(["Exploración AST / Filesystem"]):::discovery --> Part["Partición Topológica disjunta W_k"]:::discovery
+
+    subgraph Swarm_Pool ["Orquestación Legion Parallel (P × T Pool)"]
+        Part --> Worker1["Process Worker 1"]:::legion
+        Part --> WorkerN["Process Worker N"]:::legion
+        
+        Worker1 --> Agent1["Agent Thread α_1"]:::legion
+        WorkerN --> AgentM["Agent Thread α_M"]:::legion
+    end
+
+    subgraph Structural_Oracle ["Oráculo Estructural O"]
+        Agent1 --> AST_Verify["Validador AST / Regex"]:::oracle
+        AgentM --> AST_Verify
+        AST_Verify --> RuleCheck{"Violación Detectada?"}:::oracle
+    end
+
+    RuleCheck -- "SÍ" --> CrashCatch["Captura V_crash (AX-LS-3)"]:::result
+    RuleCheck -- "NO" --> PassNode["Nodo Limpio (v = ∅)"]:::result
+
+    CrashCatch --> MonadicUnion["Reducción Monádica final V"]:::result
+    PassNode --> MonadicUnion
 ```
 
 ---
 
-## 6. Ecuación Límite del Protocolo
+## 6. ⚡ Ecuación Límite del Protocolo
 
-El protocolo colapsa el esfuerzo termodinámico del agente humano en tiempo constante amortizado. La ecuación límite para el tiempo de procesamiento total (Wall Time) $t_{\text{wall}}$ en estado de saturación total ($N \to |\mathcal{W}|$) se define por:
+El protocolo colapsa la sobrecarga de auditoría en tiempo constante amortizado. La ecuación límite para el tiempo de procesamiento total (*Wall Time*) $t_{\text{wall}}$ en saturación total se define por:
 
-$$ \lim_{N \to \infty} t_{\text{wall}} = O\left( \frac{|\mathcal{W}|}{\min(N, \mathcal{C}_{\text{proc}} \times \mathcal{C}_{\text{thr}})} \cdot \tau_{\text{io}} \right) + c_{\text{overhead}} $$
+$$ \lim_{N \to \infty} t_{\text{wall}} = \mathcal{O}\left( \frac{|\mathcal{W}|}{\min(N, \mathcal{C}_{\text{proc}} \times \mathcal{C}_{\text{thr}})} \cdot \tau_{\text{io}} \right) + c_{\text{overhead}} $$
 
-Donde $\tau_{\text{io}}$ es la fricción térmica irreducible del disco duro, y $c_{\text{overhead}}$ el coste exergético de serializar/deserializar en los pipes IPC.
+### Desglose de Parámetros Termodinámicos
+
+| Parámetro | Significado Físico / Algorítmico |
+| :---: | :--- |
+| $\tau_{\text{io}}$ | Latencia de fricción térmica de lectura de disco (I/O Bound). |
+| $c_{\text{overhead}}$ | Coste exergético de serialización/deserialización IPC en los pipes de proceso. |
+| $\mathcal{C}_{\text{proc}} \times \mathcal{C}_{\text{thr}}$ | Límite superior rígido de hilos paralelos concedidos por el hardware. |
+

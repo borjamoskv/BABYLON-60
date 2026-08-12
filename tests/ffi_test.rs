@@ -2,8 +2,8 @@
 
 #![cfg(not(loom))]
 
-use babylon_60::ffi::*;
-use babylon_60::manifest::SharedManifest;
+use babylon60::ffi::*;
+use babylon60::manifest::SharedManifest;
 use std::mem::MaybeUninit;
 
 #[test]

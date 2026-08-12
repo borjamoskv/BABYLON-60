@@ -4,9 +4,9 @@
 
 #![cfg(not(loom))]
 
-use babylon_60::manifest::{SharedManifest, RUNNING, POISONED};
-use babylon_60::seqlock::{publish, read};
-use babylon_60::halt::is_halted;
+use babylon60::manifest::{SharedManifest, RUNNING, POISONED};
+use babylon60::seqlock::{publish, read};
+use babylon60::halt::is_halted;
 use std::sync::{Arc, Barrier};
 use std::sync::atomic::{AtomicU32, AtomicU64, Ordering};
 use std::thread;

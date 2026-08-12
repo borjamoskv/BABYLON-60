@@ -1,7 +1,7 @@
 #![cfg(feature = "cortex-persist")]
 
-use babylon_60::cortex::CortexPersister;
-use babylon_60::manifest::{SharedManifest, RUNNING};
+use babylon60::cortex::CortexPersister;
+use babylon60::manifest::{SharedManifest, RUNNING};
 use std::fs;
 use std::sync::atomic::{AtomicU32, AtomicU64, Ordering};
 use std::time::Instant;
