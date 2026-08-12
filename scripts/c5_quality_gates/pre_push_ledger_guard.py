@@ -35,7 +35,7 @@ def verify_exergy() -> bool:
 def verify_invariants() -> bool:
     print("🔍 Verifying Autopoietic Invariants alignment...")
     res = subprocess.run(
-        [sys.executable, str(REPO_ROOT / "scripts" / "autodetect_invariants.py")],
+        [sys.executable, str(REPO_ROOT / "scripts" / "c5_verifiers" / "autodetect_invariants.py")],
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
@@ -51,7 +51,7 @@ def verify_invariants() -> bool:
 def verify_symlink_depth() -> bool:
     print("🔗 Verifying Symlink Depth Invariant (INV_C5_12)...")
     res = subprocess.run(
-        [sys.executable, str(REPO_ROOT / "scripts" / "symlink_depth_auditor.py")],
+        [sys.executable, str(REPO_ROOT / "scripts" / "c5_quality_gates" / "symlink_depth_auditor.py")],
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
