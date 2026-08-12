@@ -195,9 +195,108 @@ window.addEventListener('resize', () => {
     drawArrangement();
 });
 
+// --- EU AI Act Art. 14 Oversight Web Audio Synthesis Engine ---
+let audioCtx = null;
+let activeOscillators = [];
+
+function initAudio() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+}
+
+function stopSynth() {
+    activeOscillators.forEach(osc => osc.stop());
+    activeOscillators = [];
+}
+
+function playTriadWithDetuning(freqs, detuningCents) {
+    if (!audioCtx) return;
+    stopSynth();
+
+    freqs.forEach((freq, idx) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        // Base frequency + microtonal detuning in cents
+        osc.type = detuningCents > 15 ? 'sawtooth' : 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        osc.detune.setValueAtTime(idx === 1 ? detuningCents : -detuningCents * 0.5, audioCtx.currentTime);
+
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        activeOscillators.push(osc);
+    });
+}
+
+const sliderEntropy = document.getElementById('slider-entropy');
+const sliderExergy = document.getElementById('slider-exergy');
+const valEntropy = document.getElementById('val-entropy');
+const valExergy = document.getElementById('val-exergy');
+const playBtn = document.querySelector('.play-btn');
+
+let isPlaying = false;
+
+function updateOversightState() {
+    const H = parseFloat(sliderEntropy.value);
+    const Ex = parseFloat(sliderExergy.value);
+
+    valEntropy.textContent = `${H.toFixed(2)} bits`;
+    valExergy.textContent = `${Ex.toFixed(2)}`;
+
+    const isHomeostatic = (H < 0.1) && (Ex < 0.1);
+    const detuningCents = Math.min(100.0, H * 25.0 + Ex * 15.0);
+
+    // Dynamic UI feedback
+    const panelHeader = document.querySelector('.panel-meta.right');
+    const statusFooter = document.querySelector('.status-info');
+
+    if (panelHeader) {
+        panelHeader.innerHTML = isHomeostatic
+            ? `<span style="color:#10b981; font-weight:bold;">HOMEOSTASIS</span><br><small>Art. 14 EU AI Act</small>`
+            : `<span style="color:#ef4444; font-weight:bold;">ALERTA DISONANTE</span><br><small>Detuning: +${detuningCents.toFixed(1)}c</small>`;
+    }
+
+    if (statusFooter) {
+        statusFooter.innerHTML = isHomeostatic
+            ? `<b>OVERSIGHT ACTIVE</b> &nbsp;|&nbsp; H(T|C): ${H.toFixed(2)} &nbsp;|&nbsp; Exergía: ${Ex.toFixed(2)}`
+            : `<b style="color:#ef4444;">DISONANCIA CRÍTICA DETECTADA</b> &nbsp;|&nbsp; Desviación: +${detuningCents.toFixed(1)} cents`;
+    }
+
+    if (isPlaying) {
+        // C4 (261.63Hz), E4 (329.63Hz), G4 (392.00Hz)
+        const baseFreqs = isHomeostatic ? [261.63, 329.63, 392.00] : [261.63, 311.13, 392.00]; // Minor/augmented under tension
+        playTriadWithDetuning(baseFreqs, detuningCents);
+    }
+}
+
+if (sliderEntropy && sliderExergy) {
+    sliderEntropy.addEventListener('input', updateOversightState);
+    sliderExergy.addEventListener('input', updateOversightState);
+}
+
+if (playBtn) {
+    playBtn.addEventListener('click', () => {
+        initAudio();
+        isPlaying = !isPlaying;
+        if (isPlaying) {
+            playBtn.textContent = '⏹';
+            updateOversightState();
+        } else {
+            playBtn.textContent = '▶';
+            stopSynth();
+        }
+    });
+}
+
 // Initial draw
 setTimeout(() => {
     drawTonnetz();
     drawRings();
     drawArrangement();
+    updateOversightState();
 }, 100);
+
