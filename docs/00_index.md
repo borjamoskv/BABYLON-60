@@ -1,7 +1,7 @@
 # 📚 BABYLON-60 Sovereign Documentation Master Index
 
 > **Nube de Conocimiento Categórico, Especificaciones Formales, Guías y Repositorio Teórico**  
-> **Estándar:** C5-REAL | **Documentos Totales Indexados:** 94 | **Estado:** 100% Synchronized
+> **Estándar:** C5-REAL | **Documentos Totales Indexados:** 89 | **Estado:** 100% Synchronized
 
 ---
 
@@ -14,9 +14,11 @@
 | [`00_MANIFESTO.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/00_MANIFESTO.md) | `00_MANIFESTO.md` | 📜 FOUNDATIONAL MANIFESTO: BABYLON-60 |
 | [`00_MANIFESTO_ES.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/00_MANIFESTO_ES.md) | `00_MANIFESTO_ES.md` | 📜 MANIFIESTO FUNDACIONAL: BABYLON-60 |
 | [`10_legion_swarm_cta_spec.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/10_legion_swarm_cta_spec.md) | `10_legion_swarm_cta_spec.md` | Especificación Axiomática: Legion 10k Swarm (CTA) |
+| [`CANARY_TOKENS.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/CANARY_TOKENS.md) | `CANARY_TOKENS.md` | Canary Tokens — Ω-11 (Honeypot) |
 | [`COMMERCIAL_LICENSE.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/COMMERCIAL_LICENSE.md) | `COMMERCIAL_LICENSE.md` | BABYLON-60 Commercial License (Enterprise Tier) |
 | [`INBOUND_EMAIL_SETUP.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/INBOUND_EMAIL_SETUP.md) | `INBOUND_EMAIL_SETUP.md` | Configuración e Integración de Recepción Inbound Enterprise para borja@babylon60.com y support@babylon60.com |
 | [`KERNEL.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/KERNEL.md) | `KERNEL.md` | CORTEX KERNEL — Invariantes Transversales en BABYLON-60 |
+| [`OPSEC_OMEGA_ITERA1.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/OPSEC_OMEGA_ITERA1.md) | `OPSEC_OMEGA_ITERA1.md` | OPSEC-Ω TASKFORCE-16 · ITERA-1 — Bitácora de mutación |
 | [`README.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/README.md) | `README.md` | 📚 BABYLON-60 Documentation Hub (v4.0 Sovereign Hardened) |
 | [`WHITEPAPER.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/WHITEPAPER.md) | `WHITEPAPER.md` | BABYLON-60: A Formal Infrastructure for Verifiable AI Agents |
 
@@ -107,15 +109,6 @@
 | [`forensic_quarantine_poc_spec.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/05_gtm/forensic_quarantine_poc_spec.md) | `05_gtm/forensic_quarantine_poc_spec.md` | BABYLON-60 Forensic Quarantine PoC Specification |
 | [`vc_data_room_manifest.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/05_gtm/vc_data_room_manifest.md) | `05_gtm/vc_data_room_manifest.md` | VC Virtual Data Room Manifest |
 
-### 🧩 Cancer Isomorphisms & Complex Systems Dynamics
-
-| Documento | Ruta / Archivo | Título Principal / Propósito |
-| :--- | :--- | :--- |
-| [`iso_cancer_sistemas.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/05_isomorphisms/iso_cancer_sistemas.md) | `05_isomorphisms/iso_cancer_sistemas.md` | Oncología Computacional y Sistemas Complejos (Doctrina Causal-Determinist) |
-| [`iso_dinamica_atractores_cancer.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/05_isomorphisms/iso_dinamica_atractores_cancer.md) | `05_isomorphisms/iso_dinamica_atractores_cancer.md` | Motor Causal Principal: Dinámica de Atractores y Paisaje Energético en Oncología |
-| [`iso_falsabilidad_empirica_cancer.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/05_isomorphisms/iso_falsabilidad_empirica_cancer.md) | `05_isomorphisms/iso_falsabilidad_empirica_cancer.md` | Motor Causal Principal: Ciencia Empírica y Falsabilidad en Oncología de Sistemas |
-| [`iso_isomorfismos_cancer.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/05_isomorphisms/iso_isomorfismos_cancer.md) | `05_isomorphisms/iso_isomorfismos_cancer.md` | Motor Causal Principal: Topología de Red y Alineamiento en Oncología |
-
 ### ⚖️ Formal Theory, Gödel Incompleteness & Exergy Invariants
 
 | Documento | Ruta / Archivo | Título Principal / Propósito |
@@ -131,11 +124,7 @@
 | [`09_formal_ontology_lean.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/09_formal_ontology_lean.md) | `06_theory/09_formal_ontology_lean.md` | 09 — Ontología Formal en Lean 4 |
 | [`10_physical_realization.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/10_physical_realization.md) | `06_theory/10_physical_realization.md` | 10 — Realización Física en Silicio (B60) |
 | [`AUDIT_VERDICT_C5_REAL.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md) | `06_theory/AUDIT_VERDICT_C5_REAL.md` | Dictamen de Verificación Independiente: Colapso del Holograma C4-SIM |
-| [`BABYLON_60_SYNTHESIS.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/BABYLON_60_SYNTHESIS.md) | `06_theory/BABYLON_60_SYNTHESIS.md` | BABYLON-60: Síntesis Determinista y Análisis Ordenado por Rango |
 | [`ETHOS.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/ETHOS.md) | `06_theory/ETHOS.md` | ETHOS — APEX-SINGULARITY |
-| [`LEARN_SHIP_ITERATE_INVARIANT.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/LEARN_SHIP_ITERATE_INVARIANT.md) | `06_theory/LEARN_SHIP_ITERATE_INVARIANT.md` | LEARN - SHIP - ITERATE [INVARIANT] |
-| [`LLM_THERMODYNAMICS_LAYERS.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/LLM_THERMODYNAMICS_LAYERS.md) | `06_theory/LLM_THERMODYNAMICS_LAYERS.md` | LLM THERMODYNAMICS: THE 4 EXERGY LAYERS [INVARIANT] |
-| [`LLM_THERMODYNAMICS_LAYERS_5_8.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/LLM_THERMODYNAMICS_LAYERS_5_8.md) | `06_theory/LLM_THERMODYNAMICS_LAYERS_5_8.md` | LLM THERMODYNAMICS (ADVANCED): LEVELS 5-8 [INVARIANT] |
 | [`MANIFIESTO_CENTURIA.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/MANIFIESTO_CENTURIA.md) | `06_theory/MANIFIESTO_CENTURIA.md` | CENTURIA MANIFESTO — OMEGA Causal-Determinist |
 | [`MOSKV_1_APEX_BLUEPRINT.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/MOSKV_1_APEX_BLUEPRINT.md) | `06_theory/MOSKV_1_APEX_BLUEPRINT.md` | Motor Causal-1-APEX: Manifiesto y Arquitectura Consolidada |
 | [`PROJECT.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/PROJECT.md) | `06_theory/PROJECT.md` | Project: BABYLON-60 |
@@ -143,23 +132,34 @@
 | [`REMEDIACION_CODE_SCANNING_2026-07-18.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/REMEDIACION_CODE_SCANNING_2026-07-18.md) | `06_theory/REMEDIACION_CODE_SCANNING_2026-07-18.md` | REMEDIACIÓN CODE-SCANNING — BABYLON-60 |
 | [`RESULTADOS.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/RESULTADOS.md) | `06_theory/RESULTADOS.md` | Estado del Proyecto y Resultados |
 | [`STATUS.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS.md) | `06_theory/STATUS.md` | STATUS — Single Source of Truth |
-| [`TEXTBOOK_EXERGY_INVARIANT.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/TEXTBOOK_EXERGY_INVARIANT.md) | `06_theory/TEXTBOOK_EXERGY_INVARIANT.md` | TEXTBOOK EXERGY [INVARIANT] |
 | [`VECTOR_A_MASTER_LEDGER_DESIGN.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/VECTOR_A_MASTER_LEDGER_DESIGN.md) | `06_theory/VECTOR_A_MASTER_LEDGER_DESIGN.md` | VECTOR A — Master Ledger & ATMS Persistence · Diseño |
+| [`c5_thermodynamic_invariants_compendium.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/c5_thermodynamic_invariants_compendium.md) | `06_theory/c5_thermodynamic_invariants_compendium.md` | Compendio de Invariantes Termodinámicas C5-REAL y Capas de Exergía LLM |
+
+### 📁 07 Isomorphisms
+
+| Documento | Ruta / Archivo | Título Principal / Propósito |
+| :--- | :--- | :--- |
+| [`iso_cancer_sistemas_compendio.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/07_isomorphisms/iso_cancer_sistemas_compendio.md) | `07_isomorphisms/iso_cancer_sistemas_compendio.md` | Compendio de Isomorfismos Causales en Oncología Computacional y Sistemas Complejos |
 
 ### 🛡️ Compliance Certificates & Forensic Audits
 
 | Documento | Ruta / Archivo | Título Principal / Propósito |
 | :--- | :--- | :--- |
-| [`CERTIFICADO_ES.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/CERTIFICADO_ES.md) | `audits/CERTIFICADO_ES.md` | Certificado de Cumplimiento Normativo de IA (BABYLON-60 v4.0) |
-| [`COMPLIANCE_CERTIFICATE_DE.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/COMPLIANCE_CERTIFICATE_DE.md) | `audits/COMPLIANCE_CERTIFICATE_DE.md` | 📜 Souveräne KI-Konformitätsbescheinigung |
-| [`COMPLIANCE_CERTIFICATE_EN.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/COMPLIANCE_CERTIFICATE_EN.md) | `audits/COMPLIANCE_CERTIFICATE_EN.md` | 📜 Sovereign AI Regulatory Compliance Certificate |
-| [`COMPLIANCE_CERTIFICATE_ES.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/COMPLIANCE_CERTIFICATE_ES.md) | `audits/COMPLIANCE_CERTIFICATE_ES.md` | 📜 Certificado Soberano de Cumplimiento Normativo de IA |
-| [`COMPLIANCE_CERTIFICATE_FR.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/COMPLIANCE_CERTIFICATE_FR.md) | `audits/COMPLIANCE_CERTIFICATE_FR.md` | 📜 Certificat Souverain de Conformité Réglementaire IA |
-| [`COMPLIANCE_CERTIFICATE_IT.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/COMPLIANCE_CERTIFICATE_IT.md) | `audits/COMPLIANCE_CERTIFICATE_IT.md` | 📜 Certificato Sovrano di Conformità Normativa IA |
-| [`HERO_DEMO_CERTIFICATE_DE.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/HERO_DEMO_CERTIFICATE_DE.md) | `audits/HERO_DEMO_CERTIFICATE_DE.md` | 📜 Souveräne KI-Konformitätsbescheinigung |
-| [`HERO_DEMO_CERTIFICATE_EN.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/HERO_DEMO_CERTIFICATE_EN.md) | `audits/HERO_DEMO_CERTIFICATE_EN.md` | 📜 Sovereign AI Regulatory Compliance Certificate |
-| [`HERO_DEMO_CERTIFICATE_ES.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/HERO_DEMO_CERTIFICATE_ES.md) | `audits/HERO_DEMO_CERTIFICATE_ES.md` | 📜 Certificado Soberano de Cumplimiento Normativo de IA |
 | [`IP_INVENTION_DISCLOSURE.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/IP_INVENTION_DISCLOSURE.md) | `audits/IP_INVENTION_DISCLOSURE.md` | BABYLON-60 / CORTEX-KINETIC-ENGINE: Intellectual Property Disclosure Manifest |
+
+### 📁 Audits/Certificates
+
+| Documento | Ruta / Archivo | Título Principal / Propósito |
+| :--- | :--- | :--- |
+| [`CERTIFICADO_ES.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/CERTIFICADO_ES.md) | `audits/certificates/CERTIFICADO_ES.md` | Certificado de Cumplimiento Normativo de IA (BABYLON-60 v4.0) |
+| [`COMPLIANCE_CERTIFICATE_DE.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/COMPLIANCE_CERTIFICATE_DE.md) | `audits/certificates/COMPLIANCE_CERTIFICATE_DE.md` | 📜 Souveräne KI-Konformitätsbescheinigung |
+| [`COMPLIANCE_CERTIFICATE_EN.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/COMPLIANCE_CERTIFICATE_EN.md) | `audits/certificates/COMPLIANCE_CERTIFICATE_EN.md` | 📜 Sovereign AI Regulatory Compliance Certificate |
+| [`COMPLIANCE_CERTIFICATE_ES.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/COMPLIANCE_CERTIFICATE_ES.md) | `audits/certificates/COMPLIANCE_CERTIFICATE_ES.md` | 📜 Certificado Soberano de Cumplimiento Normativo de IA |
+| [`COMPLIANCE_CERTIFICATE_FR.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/COMPLIANCE_CERTIFICATE_FR.md) | `audits/certificates/COMPLIANCE_CERTIFICATE_FR.md` | 📜 Certificat Souverain de Conformité Réglementaire IA |
+| [`COMPLIANCE_CERTIFICATE_IT.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/COMPLIANCE_CERTIFICATE_IT.md) | `audits/certificates/COMPLIANCE_CERTIFICATE_IT.md` | 📜 Certificato Sovrano di Conformità Normativa IA |
+| [`HERO_DEMO_CERTIFICATE_DE.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/HERO_DEMO_CERTIFICATE_DE.md) | `audits/certificates/HERO_DEMO_CERTIFICATE_DE.md` | KI-Konformitätsbescheinigung (BABYLON-60 v4.0) |
+| [`HERO_DEMO_CERTIFICATE_EN.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/HERO_DEMO_CERTIFICATE_EN.md) | `audits/certificates/HERO_DEMO_CERTIFICATE_EN.md` | AI Regulatory Compliance Certificate (BABYLON-60 v4.0) |
+| [`HERO_DEMO_CERTIFICATE_ES.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/HERO_DEMO_CERTIFICATE_ES.md) | `audits/certificates/HERO_DEMO_CERTIFICATE_ES.md` | Certificado de Cumplimiento Normativo de IA (BABYLON-60 v4.0) |
 
 ---
 *Índice maestro autogenerado y sincronizado autónomamente por `sync_docs_index.py` bajo estándar C5-REAL.*
