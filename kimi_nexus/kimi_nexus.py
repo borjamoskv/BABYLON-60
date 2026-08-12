@@ -54,9 +54,23 @@ async def kimi_audit(file_content: str, criteria: str) -> str:
     return await call_moonshot(messages)
 
 @mcp.tool()
-async def kimi_swarm(prompt: str, p_cores: int = 4, s_threads: int = 1) -> str:
-    """Orquestar un clúster masivo de subagentes para resolver una tarea compleja en paralelo."""
-    return await run_swarm_orchestrator(prompt, p_cores, s_threads)
+async def kimi_swarm(prompt: str, p_cores: int = 4, s_threads: int = 1, backend: str = "moonshot") -> str:
+    """Orquestar un clúster masivo de subagentes para resolver una tarea compleja en paralelo.
+    
+    Args:
+        prompt: Tarea compleja a descomponer y resolver.
+        p_cores: Procesos paralelos (default: 4, Pareto Cero-Thrashing ARM64).
+        s_threads: Hilos de I/O por core (default: 1).
+        backend: "moonshot" (API remota) | "local_vllm" (vLLM soberano) | "local_mlx" (MLX Apple Silicon).
+    """
+    return await run_swarm_orchestrator(prompt, p_cores, s_threads, backend)
+
+
+@mcp.tool()
+async def kimi_swarm_local(prompt: str, p_cores: int = 4, s_threads: int = 1) -> str:
+    """Clúster soberano air-gapped: usa modelo local vLLM sin conexión a internet."""
+    return await run_swarm_orchestrator(prompt, p_cores, s_threads, backend="local_vllm")
+
 
 if __name__ == "__main__":
     # Ejecutamos el servidor MCP utilizando stdio (Zero fricción, no consume puertos locales en background)
