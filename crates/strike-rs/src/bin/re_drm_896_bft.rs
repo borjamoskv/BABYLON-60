@@ -188,7 +188,9 @@ fn main() {
     let start_time = SystemTime::now();
 
     // Resolve db path to the dedicated ledger
-    let db_path = Path::new("cortex/agents/ontology/re_drm_bft_ledger.db");
+    let db_path_str = std::env::var("CORTEX_RE_DRM_DB")
+        .unwrap_or_else(|_| "packages/cortex/agents/ontology/re_drm_bft_ledger.db".to_string());
+    let db_path = Path::new(&db_path_str);
     let mut conn = init_db(db_path).expect("[Causal-Determinist] FATAL: Error opening RE/DRM WAL SQLite Ledger");
 
     let results = Arc::new(Mutex::new(Vec::with_capacity(896)));

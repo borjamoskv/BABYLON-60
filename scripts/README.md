@@ -222,7 +222,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | Script | Tipo | SHA-256 | Descripción / Propósito |
 | :--- | :--- | :--- | :--- |
 | [`canary_check.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/canary_check.py) | `Python` | `843c22a34b3a` | Ω-12 — canary_check: verifica que los señuelos canary siguen en el árbol. |
-| [`generate_scripts_readme.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/generate_scripts_readme.py) | `Python` | `7e1dcffdce1a` | generate_scripts_readme.py - Automated self-documenting catalog generator |
+| [`generate_scripts_readme.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/generate_scripts_readme.py) | `Python` | `f0e3299cd0c0` | generate_scripts_readme.py - Automated self-documenting catalog generator |
 | [`pipe_audit.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/pipe_audit.py) | `Python` | `223dc64cd748` | Ω-15 — pipe_audit: proxy auditado de sustitución de intérprete. |
 | [`refactor_agents_md.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/refactor_agents_md.py) | `Python` | `f525f77a71e7` | scripts/refactor_agents_md.py — Deterministic AGENTS.md & ENVIRONMENT.md Refactoring Engine |
 | [`runner.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/runner.py) | `Python` | `4aadb2e43f46` | runner.py - Central CLI Dispatcher for BABYLON-60 Sovereign Scripts Suite |
