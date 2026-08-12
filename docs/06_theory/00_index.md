@@ -94,6 +94,7 @@ flowchart TD
 | **08** | [Arquitectura BABYLON-60](./08_babylon60_architecture.md) | Matriz de mapeo metamatemático-a-código | Rust/Python Kernel | `01_spec/spec_technical.md` |
 | **09** | [Ontología Formal (Lean 4)](./09_formal_ontology_lean.md) | Semántica de pequeños pasos, Teoría de Tipos Constructiva en práctica | `proof/lean/Babylon.lean` | `INV_BFT_04` |
 | **10** | [Realización Física (B60)](./10_physical_realization.md) | B60 Assembly, completitud de Turing, fuzzing, determinismo de grafos | `fibonacci.b60`, `fuzz_b60.py` | `INV_BFT_04` |
+| **11** | [Monitor Armónico Tonnetz](./axiom_tonnetz_oversight.md) | Sonificación de Entropía, Toro de Tonnetz, EU AI Act | Audio Engine Bi-Modal | `Art. 14 EU AI Act` |
 | **AX** | [Base Axiomática C5-REAL](./AXIOMATIZATION_C5_REAL.md) | Axiomas A1–A4 (Categorías de Markov, Inversión Bayesiana, No-Alucinación) | Motor de Verificación Axiomática | `INV_C5_REAL_A4` |
 | **ESSAY** | [Skinner, Chomsky y Gödel](../04_research/substack/research_substack_skinner_chomsky_goedel.md) | LLMs como modelos no estándar del lenguaje humano | Dinámica Comunitaria e IA | `RULE_HUMO_EVAL_01` |
 
