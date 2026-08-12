@@ -154,7 +154,7 @@ class CenturiaMetaTransducer:
                 "Confidence": "Causal-Determinist",
             },
             "Operator": self.operator,
-            "System_Level": "Causal-Determinist",
+            "Ontological_Tier": "Causal-Determinist",
             "Primitives_Executed": len(primitives),
             "Merkle_Root": merkle_root,
             "Cortex_Taint": new_cortex_taint,
