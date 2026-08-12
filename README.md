@@ -1,190 +1,289 @@
-# BABYLON-60 v4.0 (Sovereign Hardened)
+# BABYLON-60
 
 [🌐 Leer en Español](README_ES.md)
 
-**Layer 0 Infrastructure for Verifiable AI Agents & EU AI Act Regulatory Compliance**
+**Tamper-evident, local-first cryptographic ledger for autonomous AI agents.**
 
-[![Version](https://img.shields.io/badge/Version-4.0.0--Sovereign--Hardened-black?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
-
-[![Governance](https://img.shields.io/badge/Governance-C5--REAL-blue?style=for-the-badge)](./SECURITY.md)
-[![License](https://img.shields.io/badge/License-Sovereign_Exclusion_v1.0-orange?style=for-the-badge)](./LICENSE)
-
-> *"Most AI systems can generate text. Few can justify their lineage."*
+[![Version](https://img.shields.io/badge/version-4.0.0-black?style=flat-square)](https://github.com/borjamoskv/BABYLON-60)
+[![License](https://img.shields.io/badge/license-Sovereign_Dual--License-orange?style=flat-square)](./LICENSE)
+[![Python](https://img.shields.io/badge/python-≥3.10-blue?style=flat-square)](./pyproject.toml)
+[![Rust](https://img.shields.io/badge/rust-≥1.77-orange?style=flat-square)](./Cargo.toml)
 
 ---
 
-## 0. Relación de Repositorios en el Ecosistema
+## What Is BABYLON-60
 
-* **[`Teorema-Robinson-Moskv`](https://github.com/borjamoskv/Teorema-Robinson-Moskv) (La Madre / Base Teórica):** Repositorio matriz donde reside la formalización matemática en Lean 4, la investigación fundacional y los axiomas de causalidad de Robinson.
-* **[`BABYLON-60`](https://github.com/borjamoskv/BABYLON-60) (El Hijo / Plataforma Ejecutable):** Monorepo de ingeniería de producción que traslada los principios teóricos de `Teorema-Robinson-Moskv` a código ejecutable multisistema (Rust, Python, Web, Tauri).
+BABYLON-60 is a monorepo that provides a **hash-chained, append-only ledger** backed by SQLite WAL and a low-level Rust IPC kernel. It is designed so that AI agents — regardless of which LLM or orchestrator drives them — produce an auditable, tamper-evident trail of every action they take.
+
+**Core idea:** every event an agent produces is appended to a local SQLite database with a SHA3-256 hash chain. Each entry's hash covers the previous entry's hash, creating a linked sequence where any retroactive modification breaks the chain and is programmatically detectable.
+
+### What It Is
+
+- A **local-first** persistence layer: all data stays on your machine in `$BABYLON_HOME/`.
+- A **tamper-evident** (not tamper-proof) ledger with hash-chain integrity verification.
+- A **single-writer SQLite/WAL** database with `busy_timeout=5000ms`, `synchronous=FULL`, and `foreign_keys=ON`.
+- A Rust kernel providing a 64-byte lock-free IPC slot (`SharedManifest`) with fail-stop semantics and COSE_Sign1 halt receipts.
+- A compliance exporter that generates audit-ready certificates for EU AI Act supervisory authorities (AESIA, BSI, CNIL).
+
+### What It Is Not
+
+- Not a distributed consensus system (no live BFT/PBFT quorum). Consensus is achieved *a posteriori* via Git Sentinel external witnesses.
+- Not tamper-proof against an attacker with filesystem access who bypasses the database engine.
+- Not a replacement for your LLM or agent framework — it wraps around them as an accountability layer.
 
 ---
 
-## ⚡ Live Executable Demo (5 Seconds)
+## Architecture
 
-Test the live kernel, cryptographic sanitization, network failure fallback, and automated certificate generation for **AESIA (Spain)**, **BSI (Germany)**, and the **EU AI Office** by running:
+```
+┌──────────────────────────────────────────────────────────────┐
+│   Your Agent Stack (LangChain / AutoGen / CrewAI / Ollama)   │
+├──────────────────────────────────────────────────────────────┤
+│   BABYLON-60 Accountability Layer                            │
+│                                                              │
+│   Python (packages/babylon60/)                               │
+│   ├── bft/          Hash-chained ledger (SHA3-256)           │
+│   ├── crypto/       Hash registry, AES-256-GCM, Ed25519     │
+│   ├── database/     Single-writer SQLite/WAL connector       │
+│   ├── guards/       URL, path, license validation            │
+│   ├── attestation/  Merkle DAG anchoring                     │
+│   └── compliance_exporter/  EU AI Act certificates           │
+│                                                              │
+│   Rust (src/ + crates/)                                      │
+│   ├── SharedManifest    64 B lock-free IPC (AArch64/x86)     │
+│   ├── seqlock           SPMC readers, zero RFO               │
+│   ├── halt              Fail-stop + COSE_Sign1 receipts      │
+│   └── thermodynamics    Landauer floor bisimulation           │
+├──────────────────────────────────────────────────────────────┤
+│   SQLite WAL Database ($BABYLON_HOME/dbs/)                   │
+└──────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Security & Integrity Properties
+
+| Property | Mechanism | Limitation |
+| :--- | :--- | :--- |
+| **Hash chaining** | Each ledger entry includes a SHA3-256 hash of the previous entry. `verify_integrity()` recomputes and validates the full chain. | Detects tampering *a posteriori*; does not prevent it if the attacker bypasses SQLite. |
+| **Append-only enforcement** | SQLite triggers (`trg_ledger_immutable_update` / `trg_ledger_immutable_delete`) block UPDATE/DELETE at the engine level. | Bypassable by direct filesystem manipulation outside the DB engine. |
+| **Single-writer WAL** | All connections use `PRAGMA journal_mode=WAL` + `busy_timeout=5000` via the centralized connector in [`database/core.py`](./packages/babylon60/database/core.py). | Scripts outside the core package may still use `sqlite3.connect` directly (tracked as technical debt). |
+| **Idempotency** | UUID v5 keys per event prevent duplicate insertion. | Scoped to a single ledger instance. |
+| **Lamport ordering** | Monotonically increasing Lamport timestamps enforce causal ordering. | Logical clock, not wall-clock; no distributed coordination. |
+| **External witnessing** | Git Sentinel injects `Ledger-Head` and `Ledger-Seq` as commit trailers. CI runners act as independent witnesses. | Requires pushing to a remote; no protection during offline-only operation. |
+| **Crypto agility** | [`hash_registry.py`](./packages/babylon60/crypto/hash_registry.py) allows swapping hash algorithms (SHA-256, SHA3-256, SHA-512, SHA3-512) at startup. | Changing algorithm mid-session breaks the hash chain (by design). |
+
+---
+
+## Installation
+
+### Prerequisites
+
+- Python ≥ 3.10
+- [uv](https://docs.astral.sh/uv/) (recommended) or pip
+- Rust ≥ 1.77 (for the kernel crate)
+
+### Setup
+
+```bash
+git clone https://github.com/borjamoskv/BABYLON-60.git
+cd BABYLON-60
+
+# Set the required environment variable
+export BABYLON_HOME="$HOME/.babylon60"
+mkdir -p "$BABYLON_HOME"
+
+# Install Python dependencies
+uv sync
+
+# Build and test the Rust workspace
+cargo test --workspace
+```
+
+---
+
+## Quick Start
+
+### Run the Hero Demo
+
+Demonstrates PII redaction, serialization boundary verification, network-failure fallback, and compliance certificate generation:
 
 ```bash
 PYTHONPATH=. python3 scripts/c5_demos/run_hero_demo.py
 ```
 
----
+### Append an Event to the Ledger (Python API)
 
-## 🎯 The Problem: Why Vector Databases Are Not the Solution
+```python
+from babylon60.bft.cortex_persist_ledger import CortexPersistLedger, CortexEvent
 
-In 2026, deploying AI agents in banking, healthcare, or defense using vector databases (Pinecone, Milvus, Weaviate) creates an **unacceptable legal liability**:
+ledger = CortexPersistLedger("$BABYLON_HOME/dbs/my_agent_ledger.db")
 
-| What Vector DBs / Guardrails Do | What an EU AI Act Auditor Requires | Legal Consequence |
-| :--- | :--- | :--- |
-| Find semantically similar text | Proof of storage date/timestamp | Rejected under Art. 10 (Governance) |
-| Return $K$-nearest neighbors | Causal chain: what data produced this decision | Rejected under Art. 9 (Risk Management) |
-| Filter prompts probabilistically | Immutable guarantee that log was untampered | Fines up to **€35M or 7% turnover** (Art. 12) |
+event = CortexEvent(
+    event_type="AGENT_ACTION",
+    payload={"action": "search", "query": "quarterly revenue"},
+    cortex_taint="session:abc123",
+)
 
-**Similarity is not lineage.** Without verifiable causal lineage, agents suffer from *generative entropy*: they drift and leave logs inadmissible in court.
+result = ledger.append(event)
+# => {"seq": 1, "event_id": "...", "entry_hash": "...", "status": "C5_PERMANENT"}
 
----
+# Verify the full hash chain
+assert ledger.verify_integrity()
 
-## 🛡️ The Solution: BABYLON-60 v4.0 Substrate
-
-BABYLON-60 is a **"local-first" governance and execution layer written in Rust and Lean 4** that encapsulates any agent stack (LangChain, AutoGen, CrewAI, Ollama) under thermodynamic and cryptographic constraints:
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│    Agents & Orchestrators (LangChain / AutoGen / CrewAI)    │
-├─────────────────────────────────────────────────────────────┤
-│    Latent LLMs (OpenAI / Claude / Mamba / Ollama)           │
-├─────────────────────────────────────────────────────────────┤
-│  ██ BABYLON-60 v4.0 SOVEREIGN HARDENED ██                   │
-│  - Exact Sexagesimal Scheduler F60 (0;20 exact)             │
-│  - Merkle-Causal DAG Ledger (Tamper-Evident)                │
-│  - WORM Forensic Quarantine (Write Once Read Many)          │
-│  - EU AI Act i18n Exporter (AESIA / BSI / CNIL)             │
-├─────────────────────────────────────────────────────────────┤
-│  Hardware Secure Enclave (TPM 2.0 / TEE / Native GPU bf16)  │
-└─────────────────────────────────────────────────────────────┘
+# Get a Merkle root for attestation
+root = ledger.get_merkle_root()
 ```
 
----
-
-## 💎 Moats & Technology Pillars
-
-### 1. Exact Sexagesimal Arithmetic (`F60`)
-In `f64`, $1/3$ of an hour is `0.33333...` — accumulating catastrophic drift. In `F60`, it is exactly `0;20` (20 exact minutes, zero drift). `F60` governs the **Scheduler and Ledger**, while GPU tensors execute at native `bf16` speed.
-
-### 2. Forensic WORM Quarantine (Write Once Read Many)
-Traditional AIs hallucinate or purge logs upon failure. BABYLON-60 applies an **Immutable Cryptographic Freeze**: upon any anomaly, the engine triggers a `CRITICAL HALT` and freezes state into `artifact_bundle_v3/quarantine/` signed by TPM 2.0 hardware. **Zero destruction of evidence.**
-
-### 3. Formal Verification with Lean 4
-Static mathematical theorems (`proof.ir` $\to$ `BabylonTrace.lean`) proving the kernel is mathematically incapable of violating causal invariants.
-
-### 4. Automated Multilingual Certification (`compliance_exporter`)
-Built-in exporter generating audit-ready certificates for national supervisory authorities (AESIA in Spain, BSI in Germany, CNIL in France, NIST in the US).
-
----
-
-## 📚 Monorepo Architecture & Subproject Index
-
-| Subproject Module | Documentation README | Focus / Technology |
-| :--- | :--- | :--- |
-| **Rust Kernel** | [`crates/babylon60-kernel/`](./crates/babylon60-kernel/README.md) | `#![no_std]` Rust execution engine, $F_{60}$ scheduler, WORM quarantine. |
-| **Cortex Substrate** | [`packages/cortex/`](./packages/cortex/README.md) | Python cognitive memory (`cortex-persist`), SQLite WAL, MCP Server. |
-| **Sovereign IDE** | [`apps/babylon60-ide/`](./apps/babylon60-ide/README.md) | Desktop/Mobile Tauri v2 IDE, FastAPI OpenRouter backend, Iceoryx2 IPC. |
-| **Web Telemetry UI** | [`apps/web/`](./apps/web/README.md) | React 18 + WASM Causal Telemetry visualizer & FSA API mount. |
-| **Tonnetz Human Oversight**| [`apps/tonnetz_app/`](./apps/tonnetz_app/README.md) | Neo-Riemannian toric harmonic graph visualizer (EU AI Act Art. 14). |
-| **Causal Attestation** | [`tools/attestation/`](./tools/attestation/README.md) | TPM 2.0 PCR Quote hardware notary & Merkle DAG state anchoring. |
-| **DSL Compiler** | [`crates/babylon60-compiler/`](./crates/babylon60-compiler/README.md) | `.b60` DSL lexer/parser, B60 bytecode IR, Lean 4 proof emitter. |
-| **Strike RS Acceleration**| [`crates/strike-rs/`](./crates/strike-rs/README.md) | PyO3 native GIL bypass, Iceoryx2 shared memory, BLAKE3 taint engine. |
-| **Master Ledger BFT** | [`packages/babylon60/bft/`](./packages/babylon60/bft/README.md) | Escalón 3 Tamper-Evident log with Git Sentinel external witness. |
-| **EVM On-Chain Notary** | [`experiments/anvil_yung/`](./experiments/anvil_yung/README.md) | Foundry smart contracts for EVM Merkle state root notarization. |
-| **Causal Transpiler** | [`experiments/causal_isomorphism/`](./experiments/causal_isomorphism/README.md)| Functional F# domain kernel transpiler & linear type checker. |
-| **Continuous Timeline IR** | [`experiments/timeline_ir/`](./experiments/timeline_ir/README.md) | Continuous-time state graph simulation kernel ($State(t)$). |
-| **APEX Clinical Copilot** | [`docs/04_research/`](./docs/04_research/README_APEX.md) | Deterministic clinical-trial protocol amendment-risk copilot. |
-| **Documentation Hub** | [`docs/`](./docs/README.md) | Central index for specifications, whitepapers, GTM playbooks. |
-
----
-
-## 🕹️ Agent Integration & Command Console (Antigravity & WA-Nexus)
-
-BABYLON-60 interfaces directly with your preferred AI stack to provide deterministic autonomy, "Deep Research" (AUTODIDACT-Ω), and zero-friction forced execution (ULTRATHINK).
-
-### 1. LLM Injection (Model Context Protocol)
-The kernel exposes its local tool arsenal via the MCP standard (`cortex_mcp_server.py`):
-- **For Claude Code & Cursor/Codex:** Native MCP support. Add the local server in settings to inherit WORM Quarantine shielding.
-- **For ChatGPT (Web):** Export BABYLON-60's toolset in *OpenAPI* JSON format to operate the kernel over the web.
-
-### 2. Intervention Gateway (WA-Nexus)
-Control your agent swarms from WhatsApp without standing in front of your PC.
-- **Direct Messages (DMs):** Instant event-driven intervention.
-- **Group Chats:** Requires the `Moskv-1` trigger at the start of the message to force a hardware interrupt.
-- **Kernel Assistance:** Type `Moskv-tips` to receive architectural guidance.
-
-### 3. Cheat Sheet: Thermodynamic Directives & Slash Commands
-
-- **⚡ Slash Commands:**
-  - `/goal [task]` $\to$ Triggers continuous execution until goal completion.
-  - `/learn` $\to$ Crystallizes current context into permanent memory.
-  - `/schedule` $\to$ Schedules an agentic Cron Job (e.g., audit network every hour).
-  - `/grill-me` $\to$ Inquisitor mode. Iterative interview to validate architecture before code generation.
-
-- **🔥 Thermodynamic Triggers (Zero-Friction):**
-  - `ULTRATHINK` $\to$ Forces model inference to collapse into physical code, eliminating generative entropy.
-  - `purga anergia` $\to$ Deterministic cleanup protocol to eradicate zombie files and dead code.
-  - `deep research` $\to$ Triggers the AUTODIDACT-Ω engine for ultra-deep web research.
-
----
-
-## 🛠️ Quick Start
+### Verify Ledger Attestation (CLI)
 
 ```bash
-# 1. Run Interactive Hero Demo Live
-python3 scripts/run_hero_demo.py
-
-# 2. Export Compliance Certificate for Spain (AESIA)
-python3 scripts/export_country_compliance.py --locale es --output docs/audits/CERTIFICADO_ES.md
-
-# 3. Kimi Nexus MCP Server (Moonshot Integration)
-export KIMI_API_KEY="sk-..."
-uvicorn kimi_nexus.kimi_nexus:app --host 127.0.0.1 --port 8050
-
-# 4. Run Test Suite (301 Tests)
-uv run pytest tests/ -v
-
-# 4. Build & Test Rust Workspace
-cargo test --workspace
-
-# 5. BABYLON IDE v0.4.0 (Multi-Platform Desktop & Mobile Installables)
-cd babylon60-ide
-npm run dev           # Launch Development IDE
-npm run build:mac     # Build macOS Universal Binary (.dmg / .app)
-npm run build:win     # Build Windows Installer (.msi / .exe NSIS)
-npm run build:android # Build Android Package (.apk / .aab)
-npm run build:ios     # Build iOS Application (.app / .ipa)
-
-# 6. Verify Formal Lean 4 Theorems
-lean BabylonTrace.lean
+# Verify an LLM attestation payload
+uv run cortex-attest --file attestation_payload.json
 ```
 
 ---
 
-## 📜 License
+## Configuration
 
-**Sovereign Exclusion License v1.0** — Dual Licensing Model:
+### Environment Variables
+
+| Variable | Required | Description |
+| :--- | :--- | :--- |
+| `BABYLON_HOME` | **Yes** | Root directory for all databases and state. Defaults to nothing — must be set explicitly. |
+| `GEMINI_HOME` | Scripts only | Used by exergy scripts for vault/brain paths. |
+| `CORTEX_BFT_KEY` | Rust bridge | HMAC key for the Rust BFT kernel. |
+| `CORTEX_LICENSE_KEY` | Enterprise | Cryptographic license key for commercial use. |
+
+### Data Location
+
+All persistent state is stored under `$BABYLON_HOME/`:
+
+```
+$BABYLON_HOME/
+├── dbs/                    # SQLite databases (ledger, memory, etc.)
+├── .babylon60/             # Exergy agent ledger
+└── ...
+```
+
+---
+
+## Verification & Audit
+
+### Programmatic Integrity Check
+
+```python
+ledger = CortexPersistLedger("$BABYLON_HOME/dbs/my_ledger.db")
+
+# Full hash-chain verification
+is_valid = ledger.verify_integrity()
+
+# State attestation manifest
+attestation = ledger.get_state_attestation()
+# => {"total_entries": N, "merkle_root": "...", "integrity_verified": True, ...}
+```
+
+### Static Verification
+
+```bash
+# Lint + type check
+make check
+
+# Or individually:
+ruff check packages/babylon60 tests
+mypy packages/babylon60 tests --strict --ignore-missing-imports
+```
+
+---
+
+## Testing
+
+```bash
+# Python test suite (377 tests)
+export BABYLON_HOME=/tmp/babylon
+uv run pytest tests/ -v
+
+# Rust workspace tests
+cargo test --workspace
+
+# Full CI check (format + lint + typecheck + test)
+make all
+```
+
+---
+
+## Project Layout
+
+```
+BABYLON-60/
+├── src/                          # Rust root crate (SharedManifest, seqlock, halt)
+├── crates/
+│   ├── babylon60-kernel/         # #![no_std] execution engine
+│   ├── babylon60-compiler/       # .b60 DSL lexer/parser
+│   ├── babylon60-proof-ir/       # Proof IR → Lean 4 emitter
+│   ├── babylon60-runtime/        # Runtime executor
+│   ├── strike-rs/                # PyO3 native bridge, BLAKE3 taint
+│   └── nul-zk/                   # ZK circuit compilation
+├── packages/
+│   ├── babylon60/                # Core Python package
+│   │   ├── bft/                  # Hash-chained ledger (CortexPersistLedger)
+│   │   ├── crypto/               # Hash registry, AES, Ed25519, RFC 3161
+│   │   ├── database/             # Centralized SQLite/WAL connector
+│   │   ├── guards/               # URL/path/license validation
+│   │   ├── attestation/          # Merkle DAG anchoring
+│   │   ├── compliance_exporter/  # EU AI Act certificate generator
+│   │   ├── cli/                  # CLI entrypoints
+│   │   ├── primitives/           # F60 arithmetic, result types, serialization
+│   │   └── transducers/          # Cache, hygiene, data processing
+│   └── cortex/                   # Cortex cognitive memory substrate
+├── apps/
+│   ├── babylon60-ide/            # Tauri v2 desktop IDE
+│   ├── web/                      # React telemetry UI
+│   └── tonnetz_app/              # Neo-Riemannian harmonic visualizer
+├── scripts/                      # CLI tools, demos, verifiers
+├── tests/                        # Python + Rust test suites
+├── docs/                         # Specifications, whitepapers, guides
+├── experiments/                  # Research prototypes
+└── tools/                        # Attestation tooling
+```
+
+---
+
+## Related Repository
+
+- **[Teorema-Robinson-Moskv](https://github.com/borjamoskv/Teorema-Robinson-Moskv)**: The foundational mathematical formalization in Lean 4 from which BABYLON-60's causal axioms derive.
+
+---
+
+## Known Limitations
+
+1. **Tamper-evident, not tamper-proof.** The hash chain detects modifications but cannot prevent an attacker with direct filesystem access from rewriting the database.
+2. **No live distributed consensus.** The BFT module name is aspirational; the current architecture uses single-writer local persistence with external Git witnesses (Escalón 3). Live BFT (Escalón 4) is a future target.
+3. **`except Exception` technical debt.** Several modules in `packages/babylon60/` and `scripts/` use broad exception handlers. These are tracked and being narrowed incrementally.
+4. **Direct `sqlite3.connect` in scripts.** Some scripts bypass the centralized `database/core.py` connector. Migration is in progress.
+5. **`BABYLON_HOME` required.** The system will not start without this environment variable — `Path.home()` fallbacks have been removed by policy.
+
+---
+
+## License
+
+**Sovereign Dual-License v4.0:**
 
 | Tier | Access | Requirement |
 | :--- | :--- | :--- |
-| **Sovereign** | Individuals, researchers, non-commercial use | Free — 100% Open Core |
+| **Sovereign** | Individuals, researchers, non-commercial | Free — 100% Open Core |
 | **Enterprise** | Corporations, commercial use, production | Cryptographic `CORTEX_LICENSE_KEY` |
 
-See details in [LICENSE](./LICENSE) and [COMMERCIAL_LICENSE.md](./docs/COMMERCIAL_LICENSE.md).
+See [LICENSE](./LICENSE) and [COMMERCIAL_LICENSE.md](./docs/COMMERCIAL_LICENSE.md).
 
 ---
 
-## 🔒 Security
+## Security
 
-To report security vulnerabilities: **security@babylon60.com** (Do not use public GitHub Issues).  
-SLA Commitment: acknowledgement < 24h, remediation < 72h.  
-See [SECURITY.md](./SECURITY.md) and [Threat Model v4.0](./docs/02_ontology/security_threat_model_v4.md).
+Report vulnerabilities to **security@babylon60.com** — do not use public GitHub issues.  
+SLA: acknowledgement < 24h, remediation < 72h.  
+See [SECURITY.md](./SECURITY.md).
 
 ---
 
-<sub>BABYLON-60 v4.0.0 Sovereign Hardened · Layer 0 Infrastructure for Verifiable AI Agents · Borja Moskv</sub>
+<sub>BABYLON-60 v4.0.0 · Tamper-Evident Cryptographic Ledger for AI Agents · Borja Moskv</sub>
