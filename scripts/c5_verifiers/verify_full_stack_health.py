@@ -80,6 +80,10 @@ def verify_full_stack():
         ),
     ]
 
+    web_dir = os.path.join(repo_root, "apps", "web")
+    if not os.path.exists(os.path.join(web_dir, "node_modules")):
+        run_step("0. Install Web Dependencies (npm install)", ["npm", "install"], web_dir, None)
+
     all_passed = True
     for name, cmd, cwd, env in steps:
         if not run_step(name, cmd, cwd, env):
