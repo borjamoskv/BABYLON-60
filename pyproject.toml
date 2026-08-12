@@ -91,6 +91,7 @@ cortex-attest = "babylon60.cli.llm_attest:main"
 cortex-char-attest = "babylon60.cli.attest_character_count:main"
 
 [tool.setuptools.packages.find]
+where = ["packages", "experiments"]
 include = ["babylon60*", "apex_trials*"]
 exclude = [
     "babylon60.extensions",

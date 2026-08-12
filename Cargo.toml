@@ -1,11 +1,6 @@
 [workspace]
 members = [
-    "kernel",
-    "compiler",
-    "proof_ir",
-    "runtime",
-    "fuzz",
-    "strike_rs",
+    "crates/*"
 ]
 resolver = "2"
 
