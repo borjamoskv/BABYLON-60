@@ -21,7 +21,7 @@ readme = "README.md"
 authors = ["BABYLON-60 Contributors"]
 
 [lib]
-name = "babylon_60"
+name = "babylon60"
 path = "src/lib.rs"
 
 [dependencies]
