@@ -1,9 +1,9 @@
 import asyncio
-from babylon60.cortex_chaos_monad import run_chaos_monad
+from babylon60.cortex.cortex_chaos_monad import run_chaos_monad
 import json
 
 async def test_attestation():
-    with open("scripts/cancer_isomorphism_pipeline.py", "r") as f:
+    with open("scripts/c5_isomorphisms/cancer_isomorphism_pipeline.py", "r") as f:
         payload_code = f.read()
 
     print("[ORCHESTRATOR] Inyectando payload en la Mónada del Caos (Test Harness)...")

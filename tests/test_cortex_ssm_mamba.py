@@ -13,7 +13,7 @@ import math
 
 # Add parent directory to path to import cortex_ssm_mamba_core
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from babylon60.cortex_ssm_mamba_core import StateSpaceModel
+from babylon60.cortex.cortex_ssm_mamba_core import StateSpaceModel
 
 
 def test_ssm_causal_shape() -> None:

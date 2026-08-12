@@ -8,7 +8,7 @@ Tests both PASS (isomorphic) and FAIL-FAST (non-isomorphic / bypass attempt).
 """
 
 import pytest
-from scripts.poc_graph_isomorphism_wl import verify_isomorphism, weisfeiler_lehman_hash
+from scripts.c5_demos.poc_graph_isomorphism_wl import verify_isomorphism, weisfeiler_lehman_hash
 
 
 def test_inv_c5_28_isomorphic_pass() -> None:

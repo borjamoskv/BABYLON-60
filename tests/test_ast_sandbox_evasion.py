@@ -3,7 +3,7 @@
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 import pytest
-from babylon60.cortex_chaos_monad import validate_ast_sandbox, run_chaos_monad, SecurityError
+from babylon60.cortex.cortex_chaos_monad import validate_ast_sandbox, run_chaos_monad, SecurityError
 
 
 class TestASTSandboxEvasion:

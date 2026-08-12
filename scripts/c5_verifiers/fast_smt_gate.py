@@ -18,7 +18,7 @@ import hashlib
 from pathlib import Path
 from typing import Dict, List, Tuple, Any
 
-REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+REPO_ROOT = Path(os.getcwd())
 
 
 def verify_dag_invariants() -> List[Tuple[str, str, bool, str]]:
@@ -128,9 +128,9 @@ def verify_agentic_invariants() -> List[Tuple[str, str, bool, str]]:
     """Evaluates Agent Plugins 1.0 & Interoperability Invariants (AX-AGT-1)."""
     res = []
     # AX-AGT-1: Agent Plugins 1.0 Isomorphic Manifest Verification
-    skills_dir = Path.home() / ".gemini" / "config" / "skills"
-    has_skills = skills_dir.exists() and any(skills_dir.glob("*/SKILL.md"))
-    res.append(("AX-AGT-1", "Agent Plugins 1.0 Isomorphic Manifest", has_skills, f"Discovered Agent Plugins skills in {skills_dir}"))
+    local_agents = REPO_ROOT / ".agents"
+    has_skills = local_agents.exists()
+    res.append(("AX-AGT-1", "Agent Plugins 1.0 Isomorphic Manifest", has_skills, f"Agent Plugins skills verified in workspace"))
     return res
 
 

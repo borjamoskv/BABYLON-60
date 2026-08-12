@@ -14,7 +14,7 @@ Ontology Level: Causal-Determinist (Physical assertion of Yuma invariants and WA
 
 import os
 import sqlite3
-from scripts.bittensor_yuma_consensus_c5 import (
+from scripts.c5_l1_ledger.bittensor_yuma_consensus_c5 import (
     compute_yuma_consensus,
     simulate_subnet_emission,
     simulate_subnet_epochs,

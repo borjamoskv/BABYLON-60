@@ -9,7 +9,7 @@ import sys
 
 
 def test_constants():
-    from scripts.commit_polisher import POLL_INTERVAL, DEBOUNCE_TIME, REPO_ROOT
+    from scripts.c5_git_utils.commit_polisher import POLL_INTERVAL, DEBOUNCE_TIME, REPO_ROOT
 
     assert isinstance(POLL_INTERVAL, int) and POLL_INTERVAL > 0
     assert isinstance(DEBOUNCE_TIME, int) and DEBOUNCE_TIME >= POLL_INTERVAL
@@ -22,7 +22,7 @@ def test_main_entrypoint(monkeypatch):
     # Ensure that running the script as __main__ does not raise immediately
     from importlib import reload
 
-    module_path = "scripts.commit_polisher"
+    module_path = "scripts.c5_git_utils.commit_polisher"
     # Reload the module to execute top-level code safely (it just defines functions)
     module = reload(sys.modules[module_path])
     assert hasattr(module, "main")

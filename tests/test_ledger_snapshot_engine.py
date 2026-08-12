@@ -5,7 +5,7 @@
 import json
 import sqlite3
 from unittest.mock import patch
-from scripts.ledger_snapshot_engine import compute_sha256, create_snapshot, main, AUTHOR
+from scripts.c5_l1_ledger.ledger_snapshot_engine import compute_sha256, create_snapshot, main, AUTHOR
 
 
 def test_author_identity():
@@ -30,8 +30,8 @@ def test_create_snapshot(tmp_path):
 
     snap_dir = tmp_path / "audit" / "snapshots"
     with (
-        patch("scripts.ledger_snapshot_engine.DB_PATH", db_file),
-        patch("scripts.ledger_snapshot_engine.SNAPSHOT_DIR", snap_dir),
+        patch("scripts.c5_l1_ledger.ledger_snapshot_engine.DB_PATH", db_file),
+        patch("scripts.c5_l1_ledger.ledger_snapshot_engine.SNAPSHOT_DIR", snap_dir),
     ):
         manifest_path = create_snapshot()
         assert manifest_path.exists()
@@ -51,8 +51,8 @@ def test_main_success(tmp_path):
         pass
 
     with (
-        patch("scripts.ledger_snapshot_engine.DB_PATH", db_file),
-        patch("scripts.ledger_snapshot_engine.SNAPSHOT_DIR", snap_dir),
-        patch("scripts.ledger_snapshot_engine.record_snapshot_event", side_effect=mock_record),
+        patch("scripts.c5_l1_ledger.ledger_snapshot_engine.DB_PATH", db_file),
+        patch("scripts.c5_l1_ledger.ledger_snapshot_engine.SNAPSHOT_DIR", snap_dir),
+        patch("scripts.c5_l1_ledger.ledger_snapshot_engine.record_snapshot_event", side_effect=mock_record),
     ):
         assert main() == 0

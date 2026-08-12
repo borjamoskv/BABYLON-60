@@ -11,7 +11,7 @@ import io
 import json
 import logging
 import struct
-from scripts.moskv_native_host import (
+from scripts.c5_cli.moskv_native_host import (
     calculate_payload_commitment,
     process_extension_event,
     read_message_frame,

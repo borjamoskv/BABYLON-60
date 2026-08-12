@@ -3,7 +3,7 @@
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 import os
-from scripts.symlink_depth_auditor import audit_symlinks, main
+from scripts.c5_quality_gates.symlink_depth_auditor import audit_symlinks, main
 
 
 def test_audit_symlinks_valid(tmp_path):
@@ -29,7 +29,7 @@ def test_main_pass(tmp_path):
     valid_link = tmp_path / "link_valid"
     os.symlink("../../sibling/file", valid_link)
     # Mock REPO_ROOT in script
-    import scripts.symlink_depth_auditor as module
+    import scripts.c5_quality_gates.symlink_depth_auditor as module
 
     original_root = module.REPO_ROOT
     try:

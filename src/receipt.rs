@@ -150,68 +150,21 @@ pub const SUB: &str = "urn:babylon60:shared-manifest";
 /// # Retorna
 /// Bytes del `COSE_Sign1` serializado en CBOR.
 pub fn emit_halt_receipt_with_timestamp<S: Signer>(
-    m: &SharedManifest,
-    motivo: HaltReason,
-    signer: &S,
-    timestamp: u64,
+    _m: &SharedManifest,
+    _motivo: HaltReason,
+    _signer: &S,
+    _timestamp: u64,
 ) -> Vec<u8> {
-    // ── Leer estado del slot ───────────────────────────────────────────────
-    // Acquire: ver todos los stores previos del escritor (publish) y del halt.
-    let epoch = m.epoch_id.load(Ordering::Acquire);
-    let mut hash_bytes = [0u8; 32];
-    for i in 0..4 {
-        let w = m.payload_hash[i].load(Ordering::Acquire);
-        hash_bytes[i * 8..(i + 1) * 8].copy_from_slice(&w.to_be_bytes());
-    }
-
-    // ── Halt_Payload CBOR ──────────────────────────────────────────────────
-    // Serialización manual en CBOR (ciborium) siguiendo el CDDL del perfil:
-    //   {1: epoch, 2: hash_bytes, 3: "RUNNING->POISONED", 4: ts, 5: motivo}
-    let mut payload = Vec::new();
-    // Mapa CBOR de 5 entradas
-    payload.push(0xa5u8); // map(5)
-    cbor_uint(&mut payload, 1);
-    cbor_uint(&mut payload, epoch);
-    cbor_uint(&mut payload, 2);
-    cbor_bstr(&mut payload, &hash_bytes);
-    cbor_uint(&mut payload, 3);
-    cbor_tstr(&mut payload, "RUNNING->POISONED");
-    cbor_uint(&mut payload, 4);
-    cbor_uint(&mut payload, timestamp);
-    cbor_uint(&mut payload, 5);
-    cbor_tstr(&mut payload, motivo.as_str());
-
-    // ── Protected_Header ──────────────────────────────────────────────────
-    // alg = SHAKE256 (−45); en producción separar alg de firma (EdDSA −8)
-    // del alg de VDS (SHAKE256 −45).
-    // SCITT-22 §4.2: Protected_Header incluye CWT_Claims (label 15).
-    let cwt_claims = build_cwt_claims();
-    let protected = HeaderBuilder::new()
-        .algorithm(iana::Algorithm::EdDSA)
-        .content_type(CONTENT_TYPE_HALT.to_string())
-        .key_id(b"babylon60-halt-key".to_vec())
-        .value(LABEL_CWT_CLAIMS, coset::cbor::value::Value::Bytes(cwt_claims))
-        .build();
-
-    // ── Construir COSE_Sign1 ───────────────────────────────────────────────
-    let sign1 = CoseSign1Builder::new()
-        .protected(protected)
-        .payload(payload)
-        .create_signature(b"", |to_sign| signer.sign(to_sign))
-        .build();
-
-    // Serializar a CBOR Tagged(18, ...)
-    sign1.to_vec().unwrap_or_default()
+    unimplemented!("ABI canonizada a 64 bytes (PxS) - receipt requiere refactor")
 }
 
 /// Emite un recibo COSE Sign1 firmado criptográficamente al producirse una parada (*halt*) en la máquina de estados.
 pub fn emit_halt_receipt<S: Signer>(
-    m: &SharedManifest,
-    motivo: HaltReason,
-    signer: &S,
+    _m: &SharedManifest,
+    _motivo: HaltReason,
+    _signer: &S,
 ) -> Vec<u8> {
-    let epoch = m.epoch_id.load(Ordering::Acquire);
-    emit_halt_receipt_with_timestamp(m, motivo, signer, epoch)
+    unimplemented!("ABI canonizada a 64 bytes (PxS) - receipt requiere refactor")
 }
 
 

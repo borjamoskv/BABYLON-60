@@ -63,48 +63,29 @@ pub const MAX_RETRIES: usize = 10_000;
 /// ## Prohibición de Arc en ruta caliente
 /// El refcount de `Arc` reintroduce el RMW contencioso eliminado por el
 /// diseño seqlock. Usar `mmap`, `Box::leak`, o pool estático.
-#[repr(C, align(64))]
+#[repr(C, align(8))]
 pub struct SharedManifest {
-    /// 0x00 — estado operativo: `RUNNING` o `POISONED`.
-    pub status_flag: AtomicU32,
-    /// 0x04 — contador de secuencia seqlock.
-    /// Par → publicación válida (Entelecheia).
-    /// Impar → escritura en curso (Dynamis), lectores rechazan.
-    pub seq: AtomicU32,
-    /// 0x08 — época monótona. Imposibilita ABA: 2⁶⁴ ÷ 10⁹ ≈ 584 años.
-    pub epoch_id: AtomicU64,
-    /// 0x10..0x30 — SHAKE256/256 del estado del ledger, como 4×u64 atómicos.
-    /// Misma ABI que `[u8; 32]`. Evita data race en lecturas Relaxed del seqlock.
-    pub payload_hash: [AtomicU64; 4],
-    /// 0x30..0x40 — relleno para completar hasta 64 B.
-    pub _padding: [u8; 16],
+    pub session_id: [u8; 16],
+    pub domain_mask: u32,
+    pub effect_class: u32,
+    pub timestamp_l5: u64,
+    pub exergy_cost_joules: f64,
+    pub reserved_padding: [u8; 24],
 }
 
 impl SharedManifest {
-    /// Crea una nueva instancia de `SharedManifest` inicializada con estado `RUNNING` (const fn).
-    ///
-    /// ## Ejemplo
-    /// ```rust
-    /// use babylon_60::manifest::SharedManifest;
-    /// static MANIFEST: SharedManifest = SharedManifest::new();
-    /// ```
     #[must_use]
     pub const fn new() -> Self {
         Self {
-            status_flag: AtomicU32::new(RUNNING),
-            seq: AtomicU32::new(0),
-            epoch_id: AtomicU64::new(0),
-            payload_hash: [
-                AtomicU64::new(0),
-                AtomicU64::new(0),
-                AtomicU64::new(0),
-                AtomicU64::new(0),
-            ],
-            _padding: [0u8; 16],
+            session_id: [0; 16],
+            domain_mask: 0,
+            effect_class: 0,
+            timestamp_l5: 0,
+            exergy_cost_joules: 0.0,
+            reserved_padding: [0; 24],
         }
     }
 
-    /// Alias de `new()` para inicialización constante en `static`.
     #[must_use]
     pub const fn zeroed() -> Self {
         Self::new()
@@ -119,33 +100,19 @@ impl Default for SharedManifest {
 
 impl core::fmt::Debug for SharedManifest {
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
-        let status = self.status_flag.load(core::sync::atomic::Ordering::Relaxed);
-        let seq = self.seq.load(core::sync::atomic::Ordering::Relaxed);
-        let epoch = self.epoch_id.load(core::sync::atomic::Ordering::Relaxed);
-        let h0 = self.payload_hash[0].load(core::sync::atomic::Ordering::Relaxed);
-        let h1 = self.payload_hash[1].load(core::sync::atomic::Ordering::Relaxed);
-        let h2 = self.payload_hash[2].load(core::sync::atomic::Ordering::Relaxed);
-        let h3 = self.payload_hash[3].load(core::sync::atomic::Ordering::Relaxed);
         f.debug_struct("SharedManifest")
-            .field("status_flag", &format_args!("{:#010X}", status))
-            .field("seq", &seq)
-            .field("epoch_id", &epoch)
-            .field("payload_hash", &[h0, h1, h2, h3])
+            .field("session_id", &self.session_id)
+            .field("domain_mask", &self.domain_mask)
+            .field("effect_class", &self.effect_class)
+            .field("timestamp_l5", &self.timestamp_l5)
+            .field("exergy_cost_joules", &self.exergy_cost_joules)
             .finish()
     }
 }
 
-// ---------------------------------------------------------------------------
-// INV-1: verificación estática del layout (tiempo de compilación)
-// ---------------------------------------------------------------------------
 const _LAYOUT_ASSERTS: () = {
-    assert!(size_of::<SharedManifest>() == 64,    "SharedManifest debe ser exactamente 64 B");
-    assert!(align_of::<SharedManifest>() == 64,   "SharedManifest debe alinearse a 64 B");
-    assert!(offset_of!(SharedManifest, status_flag)  == 0x00);
-    assert!(offset_of!(SharedManifest, seq)          == 0x04);
-    assert!(offset_of!(SharedManifest, epoch_id)     == 0x08);
-    assert!(offset_of!(SharedManifest, payload_hash) == 0x10);
-    assert!(offset_of!(SharedManifest, _padding)     == 0x30);
+    assert!(size_of::<SharedManifest>() == 64, "SharedManifest debe ser exactamente 64 B");
+    assert!(align_of::<SharedManifest>() == 8, "SharedManifest debe alinearse a 8 B");
 };
 
 // ---------------------------------------------------------------------------

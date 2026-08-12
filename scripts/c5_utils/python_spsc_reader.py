@@ -15,11 +15,12 @@ import ctypes
 # Definición del C-ABI de SharedManifest (64 bytes, align 64)
 class SharedManifestCTypes(ctypes.Structure):
     _fields_ = [
-        ("status_flag", ctypes.c_uint32),
-        ("seq", ctypes.c_uint32),
-        ("epoch_id", ctypes.c_uint64),
-        ("payload_hash", ctypes.c_uint64 * 4),
-        ("_padding", ctypes.c_uint8 * 16),
+        ("session_id", ctypes.c_uint8 * 16),
+        ("domain_mask", ctypes.c_uint32),
+        ("effect_class", ctypes.c_uint32),
+        ("timestamp_l5", ctypes.c_uint64),
+        ("exergy_cost_joules", ctypes.c_double),
+        ("reserved_padding", ctypes.c_uint8 * 24),
     ]
 
 
@@ -35,20 +36,17 @@ def main():
 
     # Creación de manifest de prueba en memoria compartida / buffer local
     manifest_buf = SharedManifestCTypes()
-    manifest_buf.seq = 0  # Estado Entelecheia (par)
-    manifest_buf.status_flag = 0  # RUNNING
-    manifest_buf.epoch_id = 1001
-    manifest_buf.payload_hash[0] = 0xAAAAAAAAAAAAAAAA
-    manifest_buf.payload_hash[1] = 0xBBBBBBBBBBBBBBBB
-    manifest_buf.payload_hash[2] = 0xCCCCCCCCCCCCCCCC
-    manifest_buf.payload_hash[3] = 0xDDDDDDDDDDDDDDDD
+    manifest_buf.domain_mask = 31
+    manifest_buf.effect_class = 2  # HITL
+    manifest_buf.timestamp_l5 = 1691234567
+    manifest_buf.exergy_cost_joules = 12.5
 
     # Lectura pura sin RFO
-    seq = manifest_buf.seq
-    is_entelecheia = (seq % 2 == 0)
-    print(f"[+] Estado de Secuencia: seq={seq} | Entelecheia (Observable): {is_entelecheia}")
-    print(f"[+] Época Leída: epoch_id={manifest_buf.epoch_id}")
-    print(f"[+] Hash Leído: {[hex(x) for x in manifest_buf.payload_hash]}")
+    effect = manifest_buf.effect_class
+    domain = manifest_buf.domain_mask
+    print(f"[+] Estado leído: effect_class={effect} | domain_mask={domain}")
+    print(f"[+] Timestamp L5: {manifest_buf.timestamp_l5}")
+    print(f"[+] Exergía: {manifest_buf.exergy_cost_joules} J")
     print("[✓] Lectura ejecutada en modo PURO-DE-CARGA (Cero Anergía Lectora).")
 
 if __name__ == "__main__":

@@ -199,7 +199,7 @@ def test_inv_c5_14_no_broad_except_pass():
 
 def test_inv_c5_15_vault_sync_script():
     """INV_C5_15 — Memory vault session synchronizer script scripts/sync_vault_uuids.py must exist."""
-    script_path = ROOT / "scripts" / "sync_vault_uuids.py"
+    script_path = ROOT / "scripts" / "c5_skills_ontology" / "sync_vault_uuids.py"
     assert script_path.exists(), "INV_C5_15: scripts/sync_vault_uuids.py is missing from project"
 
 
@@ -268,7 +268,7 @@ def test_inv_c5_22_swarm_workspace_locks():
 def test_inv_c5_28_weisfeiler_lehman_prefilter() -> None:
     """INV_C5_28 — Any structural graph comparison MUST execute 1-WL pre-filtering before exact matching."""
     # Ensure the PoC script exists and implements the check
-    poc_path = ROOT / "scripts" / "poc_graph_isomorphism_wl.py"
+    poc_path = ROOT / "scripts" / "c5_demos" / "poc_graph_isomorphism_wl.py"
     assert poc_path.exists(), "INV_C5_28: scripts/poc_graph_isomorphism_wl.py is missing"
 
     # Scan for exact matching functions (e.g. vf2_isomorphism, is_isomorphic) in python codebase
