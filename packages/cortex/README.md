@@ -1,4 +1,4 @@
-# 🧠 CORTEX Substrate (`cortex/`)
+# 🧠 CORTEX Substrate (`packages/cortex/`)
 
 [![PyPI Version](https://img.shields.io/badge/PyPI-cortex--persist-blue?style=for-the-badge&logo=pypi)](https://pypi.org/project/cortex-persist/)
 [![MCP Server](https://img.shields.io/badge/MCP-Model_Context_Protocol-purple?style=for-the-badge)](../docs/03_guides/cortex_mcp_guide.md)
