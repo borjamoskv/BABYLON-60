@@ -9,7 +9,7 @@ import json
 import os
 import re
 import signal
-import sqlite3
+from babylon60.database.core import connect_sync
 import sys
 from pathlib import Path
 from typing import Any
@@ -40,11 +40,18 @@ class OpsecSentinelC5:
         self._init_db()
 
     def _init_db(self) -> None:
-        with sqlite3.connect(self.db_path, timeout=5.0) as conn:
-            conn.execute("PRAGMA journal_mode=WAL;")
-            conn.execute("PRAGMA busy_timeout=5000;")
+        with connect_sync(self.db_path) as conn:
             conn.execute(
-                "\n                CREATE TABLE IF NOT EXISTS opsec_audit_log (\n                    id INTEGER PRIMARY KEY AUTOINCREMENT,\n                    file_path TEXT NOT NULL,\n                    violation_type TEXT NOT NULL,\n                    snippet_hash TEXT NOT NULL,\n                    severity TEXT NOT NULL,\n                    timestamp TEXT NOT NULL\n                );\n            "
+                """
+                CREATE TABLE IF NOT EXISTS opsec_audit_log (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    file_path TEXT NOT NULL,
+                    violation_type TEXT NOT NULL,
+                    snippet_hash TEXT NOT NULL,
+                    severity TEXT NOT NULL,
+                    timestamp TEXT NOT NULL
+                );
+                """
             )
 
     def audit_file(self, filepath: Path) -> list[dict[str, str]]:
@@ -93,7 +100,7 @@ class OpsecSentinelC5:
         details: list[dict[str, str]] = []
         violations_found: int = 0
         ignore_dirs: set[str] = {".git", ".venv", "node_modules", "scratch", "__pycache__"}
-        with sqlite3.connect(self.db_path, timeout=5.0) as conn:
+        with connect_sync(self.db_path) as conn:
             for root, dirs, files in os.walk(self.workspace):
                 dirs[:] = [d for d in dirs if d not in ignore_dirs]
                 for file in files:
