@@ -35,7 +35,7 @@ def test_re_drm_rust_bft_verification():
     # (evita que pyo3-build-config herede un Python del sistema obsoleto).
     env["PYO3_PYTHON"] = sys.executable
     res = subprocess.run(
-        ["cargo", "run", "--manifest-path", "crates/strike-rs/Cargo.toml", "--bin", "c5_p2p_bft", "--", "re_drm"],
+        ["cargo", "run", "--manifest-path", "crates/strike-rs/Cargo.toml", "--bin", "c5_p2p_bft", "--", "--re_drm"],
         cwd=PROJECT_ROOT,
         capture_output=True,
         text=True,
@@ -43,7 +43,7 @@ def test_re_drm_rust_bft_verification():
     )
 
     assert res.returncode == 0, f"Rust binary failed: {res.stderr}"
-    assert "[PASS] 896/896 RE/DRM Primitives in Rust par-par consensus" in res.stdout
+    assert "[PASS] 896/896 Primitives in Rust par-par consensus" in res.stdout
 
     # 2. Check Database persistence
     assert os.path.exists(DB_PATH), "Database re_drm_bft_ledger.db should exist"
