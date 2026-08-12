@@ -1,18 +1,13 @@
----
-title: Ontología de 300 Primitivas de Oncología Molecular
-status: Causal-Determinist
-version: 1.0.0
----
+# 300 Primitivas de Oncologia Molecular
+### Ontologia CORTEX / BABYLON-60 -- bloques fundamentales que la investigacion del cancer estudia y ataca
 
-# 300 Primitivas de Oncología Molecular
-### Ontología Ledger Asíncrono / BABYLON-60 -- Bloques fundamentales de biología tumoral
+*Generado deterministicamente | 300 primitivas | escala de confianza C5-established | fuente unica: `scripts/gen_oncology_primitives.py`*
 
-*Generado determinísticamente | 300 primitivas | escala de confianza C5-established | fuente única: `scripts/gen_oncology_primitives.py`*
+> **AVISO IMPORTANTE.** AVISO. Esto es una ONTOLOGIA DE CONOCIMIENTO de biologia molecular del cancer y de sus dianas terapeuticas: los bloques fundamentales que la investigacion oncologica estudia y ataca. NO es una cura, NO es un protocolo de tratamiento y NO es consejo medico. Ninguna primitiva individual ni el conjunto 'curan el cancer'. El cancer no es una sola enfermedad sino mas de 200 enfermedades distintas; el diagnostico y el tratamiento son clinicos, individualizados y competencia de oncologos e investigadores. Cualquier decision medica debe tomarse con profesionales sanitarios.
 
-> [!WARNING]
-> **Aviso Médico y Legal:** Esto es una **ONTOLOGÍA DE CONOCIMIENTO** de biología molecular del cáncer y de sus dianas terapéuticas: los bloques fundamentales que la investigación oncobiológica estudia y ataca. **NO es una cura, NO es un protocolo de tratamiento y NO constituye consejo médico.** El cáncer comprende más de 200 enfermedades distintas; el diagnóstico y el tratamiento son clínicos, individualizados y competencia exclusiva de oncólogos e investigadores sanitarios.
+> *NOTICE.* NOTICE. This is a KNOWLEDGE ONTOLOGY of cancer molecular biology and its therapeutic targets. It is NOT a cure, NOT a treatment protocol and NOT medical advice. No single primitive nor the whole set 'cures cancer'. Cancer is 200+ distinct diseases; diagnosis and treatment are clinical and individualized. Consult qualified healthcare professionals.
 
-Autoría artística/arquitectónica del sustrato (AKA): **Borja Motor Causal** (`borjamoskv`).
+Autoria artistica/arquitectonica del sustrato (AKA): **Borja Moskv** (`borjamoskv`).
 
 ---
 
@@ -41,55 +36,7 @@ Autoría artística/arquitectónica del sustrato (AKA): **Borja Motor Causal** (
 
 ---
 
-## 🗺️ Mapa de Topología Causal y Flujo de Transducción Bio-Silicio
-
-```mermaid
-graph TD
-    subgraph MetaLayer["Capa Meta (Hallmarks)"]
-        H[Hallmarks del Cáncer ONC-001..016]
-    end
-
-    subgraph MolLayer["Capa Molecular (Dianas & Vías)"]
-        O[Oncogenes ONC-017..046]
-        TSG[Supresores Tumorales ONC-047..070]
-        P[Vías de Señalización ONC-071..088]
-        DDR[Respuesta a Daño ADN ONC-124..141]
-        EPI[Epigenética & Cromatina ONC-206..220]
-        MET[Metabolismo Tumoral ONC-190..205]
-    end
-
-    subgraph CellLayer["Capa Celular & Tisular"]
-        CC[Ciclo Celular & Checkpoints ONC-089..101]
-        APO[Apoptosis & Muerte Celular ONC-102..123]
-        TEL[Telómeros & Inmortalidad ONC-154..161]
-        ANG[Angiogénesis ONC-162..171]
-        EMT[Invasión & Metástasis ONC-172..189]
-        TME[Microambiente Tumoral ONC-221..233]
-        IMM[Inmuno-Oncología ONC-234..255]
-    end
-
-    subgraph TherapyLayer["Capa Terapéutica & Cierre BFT"]
-        MOD[Modalidades Terapéuticas ONC-256..273]
-        DRUG[Primitivas Fármaco -> Diana ONC-274..300]
-    end
-
-    H --> O & TSG
-    O & TSG --> P
-    P --> CC & APO & MET
-    DDR & EPI --> CC & APO
-    CC & APO & TEL --> ANG & EMT
-    TME & IMM --> EMT
-    MOD & DRUG -. "Inversión Causal (Bloqueo BFT)" .-> P & CC & APO & IMM
-```
-
----
-
----
-
----
-
-## Hallmarks del Cáncer
-> **Invariante C5:** `INV_BIO_01` | *Operador Transductivo:* \( H_{\text{meta}}: \mathcal{S}_{\text{bio}} \to \mathcal{S}_{\text{hallmark}} \)
+## Hallmarks del cancer
 <a id="hallmarks-del-cancer"></a>
 *Capa: meta | 16 primitivas*
 
@@ -113,7 +60,6 @@ graph TD
 | `ONC-016` | **Two-hit hypothesis (Knudson)** | proceso | Los supresores tumorales suelen requerir inactivacion bialelica para perder funcion. | Marco de riesgo hereditario (RB1, BRCA). | Knudson, PNAS 1971 |
 
 ## Oncogenes
-> **Invariante C5:** `INV_BIO_02` | *Operador Transductivo:* \( T_{\text{onc}}: \text{Gain-of-Function} \implies \text{Hyper-Activation} \)
 <a id="oncogenes"></a>
 *Capa: molecular | 30 primitivas*
 
@@ -150,8 +96,7 @@ graph TD
 | `ONC-045` | **FGFR1** | oncogen | RTK de la familia FGFR; amplificacion/fusion en varios tumores. | Inhibidores pan-FGFR (erdafitinib, pemigatinib). | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 | `ONC-046` | **CTNNB1 (beta-catenina)** | oncogen | Efector de Wnt; mutaciones lo estabilizan y activan transcripcion pro-tumoral. | Diana dificil; via Wnt en investigacion. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
-## Genes Supresores de Tumores
-> **Invariante C5:** `INV_BIO_03` | *Operador Transductivo:* \( T_{\text{tsg}}: \text{Loss-of-Function} \implies \text{Checkpoint Collapse} \)
+## Genes supresores de tumores
 <a id="genes-supresores-de-tumores"></a>
 *Capa: molecular | 24 primitivas*
 
@@ -182,8 +127,7 @@ graph TD
 | `ONC-069` | **FBXW7** | supresor | Receptor de E3 ligasa que degrada MYC, ciclina E y NOTCH. | Su perdida estabiliza oncoproteinas. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 | `ONC-070` | **CDH1 (E-cadherina)** | supresor | Adhesion celula-celula; su perdida favorece invasion (gastrico difuso, lobulillar). | Biomarcador hereditario (CDH1). | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
-## Vías de Señalización
-> **Invariante C5:** `INV_BIO_04` | *Operador Transductivo:* \( P_{\text{pathway}}: \text{RTK} \to \text{RAS} \to \text{RAF} \to \text{MEK} \to \text{ERK} \)
+## Vias de senalizacion
 <a id="vias-de-senalizacion"></a>
 *Capa: pathway | 18 primitivas*
 
@@ -208,8 +152,7 @@ graph TD
 | `ONC-087` | **Androgen receptor (AR) signaling** | proceso | Motor del cancer de prostata. | Enzalutamida, abiraterona. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 | `ONC-088` | **cGAS-STING** | proceso | Sensor de ADN citosolico que activa inmunidad innata tipo I. | Agonistas STING (investigacion inmuno). | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
-## Ciclo Celular y Checkpoints
-> **Invariante C5:** `INV_BIO_05` | *Operador Transductivo:* \( C_{\text{cycle}}: G_1/S \to S \to G_2/M \to M \)
+## Ciclo celular y checkpoints
 <a id="ciclo-celular-y-checkpoints"></a>
 *Capa: cellular | 13 primitivas*
 
@@ -229,8 +172,7 @@ graph TD
 | `ONC-100` | **WEE1 kinase** | proceso | Frena CDK1 imponiendo el checkpoint G2/M. | Adavosertib (WEE1i). | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 | `ONC-101` | **APC/C (anaphase-promoting complex)** | proceso | E3 ligasa que degrada ciclinas y securina para la anafase. | Objeto de estudio antimitotico. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
-## Apoptosis y Muerte Celular Regulada
-> **Invariante C5:** `INV_BIO_06` | *Operador Transductivo:* \( A_{\text{pop}}: \text{Bax/Bak} \implies \text{MOMP} \implies \text{Caspase Cascade} \)
+## Apoptosis y muerte celular regulada
 <a id="apoptosis-y-muerte-celular-regulada"></a>
 *Capa: cellular | 22 primitivas*
 
@@ -259,8 +201,7 @@ graph TD
 | `ONC-122` | **Ferroptosis (GPX4)** | diana | Muerte por peroxidacion lipidica dependiente de hierro; GPX4 la reprime. | Inductores de ferroptosis (investigacion). | Dixon et al., Cell 2012 |
 | `ONC-123` | **Pyroptosis (gasdermin)** | proceso | Muerte inflamatoria mediada por poros de gasdermina. | Interfaz con inmunidad antitumoral. | Shi et al., Nature 2015 |
 
-## Respuesta al Daño y Reparación de ADN (DDR)
-> **Invariante C5:** `INV_BIO_07` | *Operador Transductivo:* \( D_{\text{repair}}: \text{PARP1} \otimes \text{HRD} \implies \text{Synthetic Lethality} \)
+## Respuesta al dano y reparacion de ADN
 <a id="respuesta-al-dano-y-reparacion-de-adn"></a>
 *Capa: molecular | 18 primitivas*
 
@@ -273,11 +214,11 @@ graph TD
 | `ONC-128` | **DNA-PKcs** | proceso | Cinasa central del NHEJ que une extremos rotos. | Radiosensibilizacion. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 | `ONC-129` | **Homologous recombination (RAD51)** | proceso | Reparacion fiel de DSB usando la cromatida hermana. | Su deficiencia (HRD) sensibiliza a PARPi/platino. | Farmer et al., Nature 2005 |
 | `ONC-130` | **Non-homologous end joining (NHEJ)** | proceso | Reparacion rapida y propensa a error que religa extremos. | Radiosensibilizacion. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
-| `ONC-131` | **Mismatch repair (MMR)** | proceso | Corrige errores de apareamiento; su perdida causa MSI e hipermutacion. | dMMR/MSI-H predice respuesta a anti-PD-1. | Le et al., NEJM 2015 |
+| `ONC-131` | **Mismatch repair (MMR)** | proceso | Corrige errors de apareamiento; su perdida causa MSI e hipermutacion. | dMMR/MSI-H predice respuesta a anti-PD-1. | Le et al., NEJM 2015 |
 | `ONC-132` | **Base excision repair (BER)** | proceso | Repara bases danadas por oxidacion/alquilacion. | Contexto de sensibilidad a PARP. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 | `ONC-133` | **Nucleotide excision repair (NER)** | proceso | Elimina lesiones voluminosas como aductos de platino/UV. | Modula respuesta al platino. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 | `ONC-134` | **PARP1** | diana | Detecta roturas de cadena simple e inicia su reparacion. | Olaparib y otros PARPi (sintesis letal). | Bryant et al., Nature 2005 |
-| `ONC-135` | **Fanconi anemia pathway** | proceso | Resuelve enlaces cruzados interhebra coordinando HR. | Sensibilidad a agentes de cross-link. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
+| `ONC-135` | **Fanconi anemia pathway** | proceso | Resuelve enlaces cruzados interhebra coordinando HR. | Sensibilidad a agents de cross-link. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 | `ONC-136` | **53BP1** | proceso | Favorece NHEJ y antagoniza la reseccion; su perdida da resistencia a PARPi. | Biomarcador de resistencia. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 | `ONC-137` | **gamma-H2AX** | biomarcador | Fosforilacion de H2AX que marca focos de dano de doble cadena. | Biomarcador de dano/eficacia. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 | `ONC-138` | **MRN complex (MRE11-RAD50-NBS1)** | proceso | Sensa y resecciona DSB reclutando ATM. | Nodo temprano del DDR. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
@@ -285,14 +226,13 @@ graph TD
 | `ONC-140` | **Synthetic lethality** | mecanismo | Dos defectos individualmente tolerables son letales juntos. | Paradigma PARPi en HRD. | Kaelin, Nat Rev Cancer 2005 |
 | `ONC-141` | **BRCAness** | biomarcador | Fenotipo de deficiencia de HR sin mutacion germinal de BRCA. | Amplia la poblacion candidata a PARPi. | Lord & Ashworth, Nat Med 2013 |
 
-## Inestabilidad Genómica y Mutagénesis
-> **Invariante C5:** `INV_BIO_08` | *Operador Transductivo:* \( G_{\text{instability}}: \text{Chromothripsis} \implies \text{Subclonal Diversity} \)
+## Inestabilidad genomica y mutagenesis
 <a id="inestabilidad-genomica-y-mutagenesis"></a>
 *Capa: molecular | 12 primitivas*
 
 | ID | Primitiva | Rol | Mecanismo | Relevancia terapeutica | Referencia |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `ONC-142` | **Chromosomal instability (CIN)** | proceso | Tasa elevada de errores en segregacion cromosomica que induce ganancias/perdidas sub- y cromosomicas continuas, generando heterogeneidad intratumoral y evolucion adaptativa darwiniana. | Explotable terapeuticamente via sintesis letal con inhibidores de PARP y ATR en contextos de HRD, o induciendo catastrofe mitotica con inhibidores SAC. | Lengauer et al., Nature 1998; Bakhoum et al., Nature 2018 |
+| `ONC-142` | **Chromosomal instability (CIN)** | proceso | Tasa elevada de errors en segregacion cromosomica que induce ganancias/perdidas sub- y cromosomicas continuas, generando heterogeneidad intratumoral y evolucion adaptativa darwiniana. | Explotable terapeuticamente via sintesis letal con inhibidores de PARP y ATR en contextos de HRD, o induciendo catastrofe mitotica con inhibidores SAC. | Lengauer et al., Nature 1998; Bakhoum et al., Nature 2018 |
 | `ONC-143` | **Microsatellite instability (MSI)** | biomarcador | Hipermutabilidad y expansion/contraccion aberrante de secuencias repetitivas mononucleotidas y dinucleotidas provocada por deficiencia en el sistema de reparacion de apareamientos erroneos (dMMR: MLH1, MSH2, MSH6, PMS2). | Biomarcador agnostico tumor-independiente (MSI-H/dMMR) que predice respuesta excepcional y duradera al bloqueo de puntos de control inmunitario (anti-PD-1 pembrolizumab/nivolumab). | Vogelstein et al., Science 2013; Le et al., NEJM 2017 |
 | `ONC-144` | **Aneuploidy** | proceso | Estado genomico con numero anomalo de cromosomas enteros (monosomia/trisomia/tetrasomia) que altera el balance de dosis genica, induce estres proteotoxico endoplasmico y activa checkpoints de spindle. | Las celulas aneuploides presentan vulnerabilidades emergentes acopladas al estres del reticulo endoplasmico y dependencia hipertrofica del punto de control del huso mitotico (SAC: BUB1B/MPS1). | Ben-David & Amon, Nat Rev Cancer 2020 |
 | `ONC-145` | **Tumor mutational burden (TMB)** | biomarcador | Densidad cuantitativa de mutaciones somaticas (SNVs e indels) por megabase en la region codificante (corte clinico estandar >= 10 mut/Mb en panel estandarizado de 38 Mb). | TMB alto incrementa la probabilidad de presentacion de neoantigenos inmunogenicos en el complejo MHC-I, prediciendo beneficio clinico al bloqueo de PD-1 en tumores solidos. | Schumacher & Schreiber, Science 2015; Marabelle et al., Lancet Oncol 2020 |
@@ -302,11 +242,10 @@ graph TD
 | `ONC-149` | **Kataegis** | proceso | Hipermutacion focal y ultra-densa (lluvia mutacional co-localizada con distancia intermutacional <= 1000 pb) comunmente coordinada en la misma hebra de ADN y catalizada de forma procesiva por encimas APOBEC en horquillas colapsadas o roturas DSB. | Marca regiones de extrema inestabilidad estructural y co-ocurre con eventos de reordenamiento genómico y cromotripsis, sirviendo como huella de estres replicativo terminal. | Nik-Zainal et al., Cell 2012 |
 | `ONC-150` | **Whole-genome doubling** | proceso | Duplicacion completa del genoma (WGD) mediada por fallo en citoquinesis o endorreduplicacion que transforma una celula diploide en tetraploide transitoria o aneuploide pseudodiploide. | Amortigua el impacto letal de perdidas cromosomicas sub-o-cromosomicas, facilita la tolerancia a aneuploidias severas, confiere resistencia multiresistente y predice mal pronostico global. | Bielski et al., Nat Genet 2018; Lopez et al., Nat Genet 2020 |
 | `ONC-151` | **Loss of heterozygosity (LOH)** | proceso | Perdida del alelo funcional restante o silenciado en un gen supresor tumoral (ej. BRCA1/2, TP53, RB1), concretando el segundo golpe de la hipotesis de Knudson ya sea por delecion fisica, recombinacion mitotica o disomia uniparental. | El calculo de la fraccion genomica con LOH subcromosomica (>15 Mb) compone el indice HRD-LOH score, validado clínicamente para indicar sensibilidad a inhibidores de PARP en cancer de ovario y mama. | Knudson, PNAS 1971; Abkevich et al., Br J Cancer 2012 |
-| `ONC-152` | **Oncogene-induced replication stress** | proceso | Estres mecanico en la maquinaria de replicacion inducido por oncogenes hiperactivos (MYC, CCND1, KRAS) que fuerzan la activacion prematura de origenes, colapso de horquillas de replicacion y acumulacion de ADN monocatenario cubierto por RPA. | Crea una dependencia existencial del tumor sobre el punto de control intra-S y G2/M dependiente del eje ATR-CHK1-WEE1, explotable mediante inhibidores selectivos (adavosertib, ceralasertib). | Halazonetis, Gorgoulis & Bartek, Science 2008; Zeman & Cimprich, Nat Cell Biol 2014 |
+| `ONC-152` | **Oncogene-induced replication stress** | proceso | Estres mecanico en la maquinaria de replicacion inducido por oncogenes hiperactivos (MYC, CCND1, KRAS) que fuerzan la activacion prematura de origenes, collapse de horquillas de replicacion y acumulacion de ADN monocatenario cubierto por RPA. | Crea una dependencia existencial del tumor sobre el punto de control intra-S y G2/M dependiente del eje ATR-CHK1-WEE1, explotable mediante inhibidores selectivos (adavosertib, ceralasertib). | Halazonetis, Gorgoulis & Bartek, Science 2008; Zeman & Cimprich, Nat Cell Biol 2014 |
 | `ONC-153` | **Extrachromosomal DNA (ecDNA)** | proceso | Amplicones de ADN circular sin centromero ni telomeros (tamaños de 1 a 3 Mb) que se replican y segregan de manera aleatoria y no mendeliana durante la mitosis, concentrando oncogenes (EGFR, MYC, ERBB2) en un estado de cromatina ultra-abierta. | Confieren enorme plasticidad transcripcional (hasta 100x copias de oncogene), posibilitan la adaptacion ultrarrapida bajo presion farmacologica por fluctuacion de copias y representan una diana terapeutica de vanguardia (intervencion en hubs transcripcionales). | Turner et al., Nature 2017; Wu et al., Nature 2019 |
 
-## Telómeros, Senescencia e Inmortalidad
-> **Invariante C5:** `INV_BIO_09` | *Operador Transductivo:* \( T_{\text{elo}}: \text{TERT/ALT} \implies \text{Infinite Passage} \)
+## Telomeros, senescencia e inmortalidad
 <a id="telomeros-senescencia-e-inmortalidad"></a>
 *Capa: cellular | 8 primitivas*
 
@@ -321,8 +260,7 @@ graph TD
 | `ONC-160` | **Therapy-induced senescence** | proceso | Senescencia inducida por quimio/radio con efectos duales. | Estrategias one-two punch (senoliticos). | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 | `ONC-161` | **Hayflick limit** | proceso | Numero finito de divisiones de celulas somaticas normales. | Marco conceptual de la inmortalizacion. | Hayflick & Moorhead, Exp Cell Res 1961 |
 
-## Angiogénesis
-> **Invariante C5:** `INV_BIO_10` | *Operador Transductivo:* \( V_{\text{scular}}: \text{HIF-1\alpha} \to \text{VEGF} \implies \text{Endothelial Sprouting} \)
+## Angiogenesis
 <a id="angiogenesis"></a>
 *Capa: cellular | 10 primitivas*
 
@@ -339,8 +277,7 @@ graph TD
 | `ONC-170` | **Vascular normalization** | mecanismo | La antiangiogenica juiciosa normaliza vasos y mejora la entrega de farmaco. | Ventana de sinergia con quimio. | Jain, Science 2005 |
 | `ONC-171` | **Anti-angiogenic therapy** | modalidad | Bloqueo del suministro vascular del tumor. | Bevacizumab, sunitinib, sorafenib. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
-## Invasión, EMT y Metástasis
-> **Invariante C5:** `INV_BIO_11` | *Operador Transductivo:* \( E_{\text{mt}}: \text{E-cadherin}^\downarrow \to \text{N-cadherin}^\uparrow \implies \text{Motility} \)
+## Invasion, EMT y metastasis
 <a id="invasion-emt-y-metastasis"></a>
 *Capa: cellular | 18 primitivas*
 
@@ -365,8 +302,7 @@ graph TD
 | `ONC-188` | **Focal adhesion kinase (FAK)** | diana | Integra senal de adhesion con supervivencia y motilidad. | Inhibidores de FAK (investigacion). | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 | `ONC-189` | **Rho/Rac cytoskeletal dynamics** | proceso | GTPasas que reorganizan el citoesqueleto para migrar. | Diana de motilidad (investigacion). | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
-## Metabolismo Tumoral
-> **Invariante C5:** `INV_BIO_12` | *Operador Transductivo:* \( M_{\text{etab}}: \text{Glucose} \to \text{Lactate} \quad (\text{Efecto Warburg}) \)
+## Metabolismo tumoral
 <a id="metabolismo-tumoral"></a>
 *Capa: molecular | 16 primitivas*
 
@@ -389,8 +325,7 @@ graph TD
 | `ONC-204` | **ROS / redox homeostasis** | proceso | Equilibrio de especies reactivas que el tumor debe tamponar. | Estrategias pro-oxidantes selectivas. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 | `ONC-205` | **Amino-acid dependency (Asn/Arg)** | proceso | Adiccion a aminoacidos no sintetizables por ciertos tumores. | L-asparaginasa (LLA); depledores de arginina. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
-## Epigenética y Cromatina
-> **Invariante C5:** `INV_BIO_13` | *Operador Transductivo:* \( E_{\text{pigen}}: \text{H3K27me3} \implies \text{Transcriptional Silencing} \)
+## Epigenetica y cromatina
 <a id="epigenetica-y-cromatina"></a>
 *Capa: molecular | 15 primitivas*
 
@@ -412,8 +347,7 @@ graph TD
 | `ONC-219` | **Histone variants** | proceso | Variantes (p.ej. H3.3) que alteran cromatina; mutadas en gliomas pediatricos. | Biomarcador diagnostico. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 | `ONC-220` | **Chromatin accessibility** | proceso | Paisaje abierto/cerrado que define programas transcripcionales. | Perfilable por ATAC-seq. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
-## Microambiente Tumoral (TME)
-> **Invariante C5:** `INV_BIO_14` | *Operador Transductivo:* \( M_{\text{icro}}: \text{CAF} + \text{TAM (M2)} \implies \text{Immune Exclusion} \)
+## Microambiente tumoral (TME)
 <a id="microambiente-tumoral-tme"></a>
 *Capa: tissue | 13 primitivas*
 
@@ -433,8 +367,7 @@ graph TD
 | `ONC-232` | **Immune-excluded phenotype** | biomarcador | Linfocitos confinados al estroma sin infiltrar el nido tumoral. | Estratifica respuesta a inmunoterapia. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 | `ONC-233` | **Metabolic competition in TME** | proceso | El tumor priva de glucosa y aminoacidos a linfocitos. | Reprogramacion metabolica inmune. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
-## Inmuno-Oncología y Evasión Inmune
-> **Invariante C5:** `INV_BIO_15` | *Operador Transductivo:* \( I_{\text{mmune}}: \text{PD-1} \otimes \text{PD-L1} \implies T_{\text{cell}} \text{ Exhaustion} \)
+## Inmuno-oncologia y evasion inmune
 <a id="inmuno-oncologia-y-evasion-inmune"></a>
 *Capa: tissue | 22 primitivas*
 
@@ -463,8 +396,7 @@ graph TD
 | `ONC-254` | **CD47-SIRP alpha (dont eat me)** | diana | Senal que protege al tumor de la fagocitosis. | Bloqueo de CD47 (investigacion). | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 | `ONC-255` | **Immunogenic cell death (ICD)** | proceso | Muerte que libera senales de peligro y activa inmunidad. | Inducida por ciertas quimio/radio. | Galluzzi et al., Nat Rev Immunol 2017 |
 
-## Modalidades Terapéuticas
-> **Invariante C5:** `INV_BIO_16` | *Operador Transductivo:* \( T_{\text{herapy}}: \text{ADC/PROTAC/TKI} \to \text{Target Neutralization} \)
+## Modalidades terapeuticas
 <a id="modalidades-terapeuticas"></a>
 *Capa: therapy | 18 primitivas*
 
@@ -489,8 +421,7 @@ graph TD
 | `ONC-272` | **Immunomodulatory drugs (IMiDs)** | modalidad | Modulan cereblon y la inmunidad (mieloma). | Lenalidomida, pomalidomida. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 | `ONC-273` | **Epigenetic therapy** | modalidad | Revierte silenciamientos aberrantes de la cromatina. | DNMTi, HDACi, EZH2i. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
-## Primitivas Fármaco -> Diana
-> **Invariante C5:** `INV_BIO_17` | *Operador Transductivo:* \( D_{\text{rug}}: \text{Compound} \times \text{Target} \implies \mathbb{I}_{\text{inhibition}} \)
+## Primitivas farmaco -> diana
 <a id="primitivas-farmaco-->-diana"></a>
 *Capa: therapy | 27 primitivas*
 
@@ -530,49 +461,3 @@ graph TD
 
 Las primitivas cubren desde los *hallmarks* de Hanahan & Weinberg (Cell 2000, 2011; Cancer Discovery 2022) hasta pares farmaco->diana con evidencia clinica registrada. Las referencias citan articulos o revisiones canonicas; los mecanismos reflejan conocimiento establecido a la fecha de generacion. Esto es material educativo y de modelado ontologico: **no sustituye juicio clinico ni investigacion primaria.**
 
-
-
----
-
-## 18. Formalización de Categorías de Markov y Desintegración Bayesiana
-
-> [!IMPORTANT]
-> **Teorema de Transducción Oncobiológica ($V_A$ Grounding):** En la Categoría de Kleisli \( \mathcal{Kl}(D) \), cada primitiva oncológica \( ONC_{i} \) actúa como una **Lente Bayesiana** que actualiza la densidad de probabilidad del estado tumoral \( P(X_t \mid X_{t-1}) \).
-
-### 18.1 Ecuaciones Fundamentales de Exergía y Entropía Tumoral
-
-1. **Agotamiento Exérgico Causal:**
-   \[
-   \Delta E_{\text{exergy}} = \int_0^T \left( \sigma_{\text{mitosis}}(t) - \delta_{\text{checkpoint}}(t) \right) dt \le E_{\text{limit}}
-   \]
-2. **Cota de Desintegración Bayesiana en \( \mathcal{Kl}(D) \):**
-   \[
-   D_{\text{KL}}\left( P_{\text{tumor}}(X) \parallel P_{\text{homeostasis}}(X) \right) = \sum_{i=1}^{300} w_i \cdot \log \left( \frac{\text{Mechanism}(ONC_i)}{\text{Basal}(ONC_i)} \right)
-   \]
-3. **Invariante C5 de Sintesis Letal (Dualidad PARP/BRCA):**
-   \[
-   \Phi_{\text{lethal}}(x) = \mathbb{I}_{\text{HRD}}(x) \wedge \mathbb{I}_{\text{PARPi}}(x) \implies \text{Apoptosis}_{\Sigma_1}
-   \]
-
-### 18.2 Matriz de Exportación AST & Verificación Lean 4
-
-El árbol ontológico de las 300 primitivas se exporta automáticamente a un AST determinista de tipo `OncologyOntology.lean` mediante el script del Kernel:
-```bash
-python3 scripts/gen_oncology_primitives.py --export-lean4 --json-out data/oncology_300.json
-```
-
----
-
-## 19. Control Termodinámico y Límite de Anergía (Purga $\Omega$)
-
-> [!IMPORTANT]
-> **Axioma de Extinción Epistémica (Punto Fijo $\Omega$):** El catálogo de 300 primitivas constituye la matriz de mínima entropía semántica requerida para acorralar la complejidad oncológica.
-
-### 19.1 Operador Transductivo de Purga
-
-> **Invariante C5:** `INV_BIO_19` | *Operador Transductivo:* \( \Omega_{\text{purge}}: \Delta S_{\text{anergy}} \to 0 \)
-
-- **Reducción Dimensional Exergética:** Cada terapia $ONC_{i} \in \mathcal{T}$ (donde $256 \le i \le 300$) actúa como un operador contractivo sobre el espacio de fase tumoral, colapsando trayectorias metastásicas anérgicas en el atractor puntual $\Omega$.
-- **Anergy Purge en $\mathcal{Kl}(D)$:** La aplicación reiterada del bloqueo farmacológico purga la *entropía discursiva/biológica*, obligando a la red a obedecer transiciones probabilísticas $P(X_{t+1}|X_t)$ donde el límite temporal tiende a la extinción tumoral (cero anergía termodinámica).
-
----

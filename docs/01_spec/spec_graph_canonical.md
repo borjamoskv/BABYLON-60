@@ -47,7 +47,7 @@ Antes de escribir el archivo a disco o calcular el hash del grafo:
 
 ## 3. Algoritmo 1-WL (Weisfeiler-Lehman 1-D Color Refinement)
 
-Para dar cumplimiento a **`INV_C5_28`**, todo grafo serializado debe someterse al refinamiento de color 1-WL en $O(|V|+|E|)$ para generar la firma de color pre-filtro:
+Para dar cumplimiento al invariante [INV_C5_28 (Invariantes BABYLON-60)](spec_invariants.md), todo grafo serializado debe someterse al refinamiento de color 1-WL en $O(|V|+|E|)$ para generar la firma de color pre-filtro:
 
 ### 3.1 Formulación Matemática de Actualización de Color
 
@@ -95,4 +95,4 @@ El hash final del artefacto canónico (`graph_hash`) se calcula inyectando el bu
 
 $$\text{graph\_hash} = \text{SHA256}\Big( \text{line}_1 \parallel \text{line}_2 \parallel \dots \parallel \text{line}_N \Big) \in \{0, 1\}^{256}$$
 
-Este `graph_hash` de 32 bytes binarios es exactamente el valor utilizado por el sink Bitcoin L1 para el cumplimiento de **`INV_C5_15`**.
+Este `graph_hash` de 32 bytes binarios es exactamente el valor utilizado por el sink Bitcoin L1 para el cumplimiento del invariante [INV_C5_15 (Invariantes BABYLON-60)](spec_invariants.md).

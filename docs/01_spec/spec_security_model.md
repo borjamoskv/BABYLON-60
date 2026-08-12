@@ -42,7 +42,7 @@ version: 1.0.0
 | Bit-rot silente o modificación accidental histórica | La cadena BLAKE3 se rompe en lectura — detectado en verificación. |
 | Inyección de escritura duplicada por un agente | Clave de idempotencia UUID v5 rechaza duplicados. |
 | Condición de carrera entre escritores concurrentes | Cola `asyncio.Queue` single-writer + WAL journal serializa todo. |
-| Contención de lock en SQLite | `busy_timeout=5000ms` + modo WAL previene deadlock lector/escritor. |
+| Contención de lock en SQLite | Pragma de concurrencia WAL (ver [Especificación Técnica](spec_technical.md)). |
 | Escritura parcial por aniquilación de proceso | Journal WAL hace rollback automático al reiniciar. |
 | Escrituras sin atribución | `causal_taint` + `agent_id` obligatorios en toda entrada. |
 

@@ -92,40 +92,6 @@ La documentación técnica exige prueba matemática, no declaraciones de intenci
 
 ---
 
-## 4. MAPEO EXHAUSTIVO DE ARTÍCULOS DE LA LEY (EU AI Act)
-
-### 4.1 Artículo 9: Sistema de Gestión de Riesgos
-> *"Se establecerá, aplicará, documentará y mantendrá un sistema de gestión de riesgos..."*
-
-- **Resolución BABYLON-60:** El podador termodinámico de AST intercepta loops de limerencia y saturaciones numéricas mediante un **Interruptor de Hombre Muerto** (`CRITICAL HALT`).
-
-### 4.2 Artículo 10: Gobernanza de Datos y Linaje
-> *"Los conjuntos de datos de entrenamiento, validación y prueba estarán sujetos a prácticas de gobernanza..."*
-
-- **Resolución BABYLON-60:** Cada entrada consumida por el agente queda encadenada causalmente mediante hashes BLAKE3 inmutables en la estructura DAG.
-
-### 4.3 Artículo 11: Documentación Técnica
-> *"La documentación técnica de un sistema de IA de alto riesgo se elaborará antes de que dicho sistema se comercialice..."*
-
-- **Resolución BABYLON-60:** Generación automática de certificados de auditoría exportables en markdown/PDF con lemas de Lean 4 verificados estáticamente.
-
-### 4.4 Artículo 12: Conservación de Registros (Logging)
-> *"Los sistemas de IA de alto riesgo permitirán el registro automático de eventos (logs) a lo largo de su ciclo de vida..."*
-
-- **Resolución BABYLON-60:** Ledger WORM no manipulable con timestamping monotónico de Lamport y firma criptográfica Ed25519.
-
-### 4.5 Artículo 13: Transparencia y Explicabilidad
-> *"Los sistemas de IA de alto riesgo se diseñarán de modo que su funcionamiento sea suficientemente transparente..."*
-
-- **Resolución BABYLON-60:** Exportación en JSON-LD de la red causal completa de decisiones, permitiendo a cualquier auditor inspeccionar el orden exacto de los acontecimientos.
-
-### 4.6 Artículo 14: Supervisión Humana
-> *"Los sistemas de IA de alto riesgo se diseñarán y desarrollarán de forma que puedan ser supervisados por personas físicas..."*
-
-- **Resolución BABYLON-60:** Integración nativa con la interfaz armónica **Tonnetz**, permitiendo detectar disonancias contextuales geométricamente y congelar la ejecución mediante un solo clic.
-
----
-
 ## 4. MAPEO TÉCNICO-NORMATIVO (MATRIZ DE CUMPLIMIENTO)
 
 ```
@@ -141,26 +107,38 @@ La documentación técnica exige prueba matemática, no declaraciones de intenci
 ```
 
 ### 4.1 Artículo 9: Sistema de Gestión de Riesgos
-- **Exigencia Legal:** Implementar un sistema continuo de evaluación y mitigación de riesgos durante todo el ciclo de vida.
+> *"Se establecerá, aplicará, documentará y mantendrá un sistema de gestión de riesgos..."*
+
+- **Exigencia Legal:** Implementar un sistema continuo de evaluación y mitigación de riesgos.
 - **Solución B60 v4.0:** **Motor de Auto-Falsación y Cuarentena Forense (WORM)**. Si el agente entra en un bucle de limerencia o sufre inestabilidad numérica, el kernel dispara `CRITICAL HALT`, congela la memoria y sella el estado. El riesgo se contiene físicamente antes de causar daño externo.
 
 ### 4.2 Artículo 10: Gobernanza de Datos y Linaje
-- **Exigencia Legal:** Trazabilidad completa de la procedencia y linaje de los datos consumidos y generados.
+> *"Los conjuntos de datos de entrenamiento, validación y prueba estarán sujetos a prácticas de gobernanza..."*
+
+- **Exigencia Legal:** Trazabilidad completa de la procedencia y linaje de los datos.
 - **Solución B60 v4.0:** **Tipado Estricto (`ALLOC T R`) y DAG de Causalidad Merkle**. Ningún dato entra en la memoria del agente sin estar firmado y tipado. Cada nodo de decisión contiene los IDs hash de sus eventos padres.
 
 ### 4.3 Artículo 11: Documentación Técnica
+> *"La documentación técnica de un sistema de IA de alto riesgo se elaborará antes de que dicho sistema se comercialice..."*
+
 - **Exigencia Legal:** Elaboración y actualización de documentación técnica detallada previa a la comercialización.
 - **Solución B60 v4.0:** **Auto-Exportación de Proof IR (`proof.ir`) a Lean 4**. La documentación técnica no se escribe a mano; la genera el compilador como teoremas matemáticos verificables en Lean 4.
 
-### 4.4 Artículo 12: Conservación de Registros (Logging Automático)
+### 4.4 Artículo 12: Conservación de Registros (Logging)
+> *"Los sistemas de IA de alto riesgo permitirán el registro automático de eventos (logs) a lo largo de su ciclo de vida..."*
+
 - **Exigencia Legal:** Registro automático de eventos durante el funcionamiento del sistema para garantizar trazabilidad.
 - **Solución B60 v4.0:** **Ledger Merkle-Causal + Anclaje Hardware TPM 2.0 / TEE**. Los eventos se encadenan mediante firmas SHA-256 inmutables y se anclan al registro PCR de un chip TPM 2.0 / enclave SGX local. Los administradores del servidor no pueden alterar los registros.
 
-### 4.5 Artículo 13: Transparencia y Provisión de Información
-- **Exigencia Legal:** Diseño transparente que permita a los usuarios interpretar las salidas del sistema.
-- **Solución B60 v4.0:** **Timeline IR Export**. Exportación estandarizada en formato JSON/YAML (`export_schema.json`) de la secuencia exacta de opcodes y decisiones causales.
+### 4.5 Artículo 13: Transparencia y Explicabilidad
+> *"Los sistemas de IA de alto riesgo se diseñarán de modo que su funcionamiento sea suficientemente transparente..."*
 
-### 4.6 Artículo 14: Control Humano (Human Oversight)
+- **Exigencia Legal:** Diseño transparente que permita a los usuarios interpretar las salidas del sistema.
+- **Solución B60 v4.0:** **Timeline IR Export**. Exportación estandarizada en formato JSON/YAML/JSON-LD de la secuencia exacta de opcodes y decisiones causales, permitiendo a cualquier auditor inspeccionar el orden exacto de los acontecimientos.
+
+### 4.6 Artículo 14: Supervisión Humana
+> *"Los sistemas de IA de alto riesgo se diseñarán y desarrollarán de forma que puedan ser supervisados por personas físicas..."*
+
 - **Exigencia Legal:** Garantizar que los sistemas puedan ser supervisados e intervenidos eficazmente por personas físicas.
 - **Solución B60 v4.0:** **Visualizador Armónico Tonnetz (`tonnetz_app/`)**. Interfaz basada en redes de afinidad tonal Neo-Riemannianas que proyecta el estado del agente en un plano geométrico 2D. La disonancia armónica (rojo) alerta a los supervisores humanos sobre desviaciones o alucinaciones antes de que se ejecute la acción.
 

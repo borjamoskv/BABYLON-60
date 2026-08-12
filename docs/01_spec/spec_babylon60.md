@@ -48,12 +48,7 @@ Los valores $v$ son pares de tipo y datos: $v : \tau \times \mathbb{D}_\tau$, do
 - $\mathbb{D}_{F60} = \mathbb{Z} \times \mathbb{N}$ (racionales exactos $N / 60^S$)
 
 ### 2.2 Exactitud y Reducción Determinista Sexagesimal (`F60`)
-El tipo `F60` previene la acumulación de errores y el *Blowup del Numerador*:
-$$\text{F60} = \{ N \in \mathbb{Z}, S \in \mathbb{N}_{60} \}$$
-$$\text{ValorMatemático}(\text{F60}) = \frac{N}{60^S}$$
-
-> [!WARNING]
-> **Overflow Demostrable:** Si la memoria de $N \in \mathbb{Z}$ excede la cuota estricta (256 bytes por escalar), la máquina virtual dispara la transición de fallo `CRITICAL_HALT`.
+El tipo `F60` previene la acumulación de errores y el *Blowup del Numerador* utilizando enteros escalados. La formulación matemática exacta y las cuotas de memoria se rigen por el **Axioma 1: Aritmética Base-60** detallado en la [Especificación Técnica](spec_technical.md).
 
 ---
 
@@ -81,8 +76,7 @@ Estos invariantes son verificados formalmente por el kernel. Cualquier violació
 - **I3 (Inmutabilidad del Pasado):** $\mathcal{L}$ es estrictamente *append-only*.
 - **I4 (Monotonicidad Temporal):** $C.\text{now}() \le C.\text{next}()$.
 - **I5 (Ausencia de Anergía):** Toda mutación se refleja transparentemente en $\mathcal{R}$, $\mathcal{H}$ o $\mathcal{L}$.
-- **`INV_BFT_04`:** Colisiones de `payload_hash` disparan `ValueError` instantáneo.
-- **`INV_C5_28`:** Toda comparación de grafos ejecuta el filtro 1-WL antes de VF2.
+- *Nota: Para los invariantes arquitectónicos (`INV_BFT_04`, `INV_C5_28`, etc.) y sus mecánicas de validación cruzada, referirse a la especificación central de [Invariantes del Sistema BABYLON-60](spec_invariants.md).*
 
 ### 4.1 Teorema de BABYLON (Isomorfismo Semántico-Operacional)
 

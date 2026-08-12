@@ -23,7 +23,7 @@ En el desarrollo de **BABYLON-60 v4.0** (*kernel Rust `#![no_std]`, scheduler se
 | Dimensión | Evaluación Falsada | Evidencia Empírica de Fallo |
 | :--- | :--- | :--- |
 | **Multimodalidad Nativa** | 🟢 **ÓPTIMA** | Ingesta nativa de audio de voz directa (notas de voz), visualización de diagrams y PDF sin OCR intermedio. |
-| **Filtros de Seguridad / Guardrails** | 🔴 **FALLO CRÍTICO** | Sobre-alineamiento corporativo. Rechaza prompts de auditoría de ciberseguridad, modelo de amenazas (`security_threat_model_v4.md`) o deconstrucción de exploits. |
+| **Filtros de Seguridad / Guardrails** | 🔴 **FALLO CRÍTICO** | Sobre-alineamiento corporativo. Rechaza prompts de auditoría de ciberseguridad, modelo de amenazas (`02_ontology/security_threat_model_v4.md`) o deconstrucción de exploits. |
 | **Sintaxis de Lean 4** | 🟡 **MODERADO** | Genera tácticas de demostración conceptualmente verosímiles pero con fallos de sintaxis que rompen `lean BabylonTrace.lean`. |
 | **Economía de API vs Suscripción** | 🔴 **FALLO ECONÓMICO** | La suscripción Web de $20/mes no otorga cuota ilimitada en la API agéntica (Google AI Studio), encareciendo los bucles `/goal`. |
 

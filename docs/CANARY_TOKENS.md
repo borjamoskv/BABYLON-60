@@ -22,7 +22,7 @@
 ## Regla
 
 NUNCA uses una credencial canary para nada real. Su único valor es la
-alarma. Si `canary_check.py` deja de ver una → posible purga maliciosa.
+alarma. Si `scripts/canary_check.py` deja de ver una → posible purga maliciosa.
 
 ## Estado
 

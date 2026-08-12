@@ -34,12 +34,7 @@ Un objeto JSON que indica la versión y los hashes estructurales. Debe contener 
 - `"global_hash"`: El hash global del bundle, calculado como el SHA-256 de los contenidos concatenados de `hashes/bundle.sha256`.
 
 ### 2.2. Serialización Canónica (`graph.canonical`)
-El DAG del Ledger DEBE ser serializado de forma canónica antes de aplicar el hash. Las reglas son:
-1. **Ordenamiento Topológico**: Todos los eventos en el Ledger DEBEN estar ordenados topológicamente.
-2. **Desempate**: Si dos eventos $E_a$ y $E_b$ no tienen dependencia causal, DEBEN ser ordenados lexicográficamente por sus IDs.
-3. **Formato**: El archivo `graph.canonical` contiene un evento por línea. Cada línea DEBE seguir este formato estricto (UTF-8):
-   `{event_id}|{parent1,parent2,...}|{logical_tick}|{payload}|{signature}`
-   Los padres (parents) DEBEN estar ordenados lexicográficamente.
+El DAG del Ledger DEBE ser serializado de forma canónica antes de aplicar el hash, siguiendo estrictamente las reglas de ordenamiento topológico y el formato delimitado por pipes detallados en la [Especificación de Serialización Canónica de Grafos](spec_graph_canonical.md).
 
 ### 2.3. Representación Intermedia (`proof.ir`)
 Este archivo contiene la Representación Intermedia (Proof IR) de la traza de ejecución y sus invariantes, limpia de cualquier sintaxis específica de Lean o Coq. Los traductores backend parsearán este IR para generar pruebas nativas.

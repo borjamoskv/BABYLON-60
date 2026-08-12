@@ -1,3 +1,5 @@
+> 🛡️ **Falsa-Traceability Audit Log (`INV_C5_CHAOS_MONAD`):** Este documento registra el historial de remediaciones y símbolos auditados.
+
 ---
 title: STATUS — Única Fuente de Verdad
 status: Causal-Determinist

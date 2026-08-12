@@ -36,7 +36,7 @@ Capa de interfaz primaria. Maneja la validación, idempotencia y la gestión de 
 - `babylon60.api.client`: API pública `CortexClient`.
 - `babylon60.api.server`: Servidor REST+WebSocket con FastAPI/Uvicorn.
 - `babylon60.bft.ledger_actor`: Actor single-writer que serializa todas las escrituras en base de datos.
-- `babylon60.database.core`: Pool SQLite WAL asíncrono (`busy_timeout=5000ms`).
+- `babylon60.database.core`: Pool SQLite asíncrono.
 
 ### 2.2 Núcleo Rust (`strike_rs/`)
 Extensión opcional de baja latencia vía PyO3/Maturin. Evita el GIL de Python para:
@@ -108,7 +108,7 @@ networkx   ──►  babylon60.graph (ontología)
 cbor2      ──►  babylon60.ledger (codificación binaria)
 ```
 
-## 8. Axioma del Dominio Temporal F60 (Teorema Robinson-Moskv)
+## 8. Axioma del Dominio Temporal (Teorema Robinson-Moskv)
 
 **Postulado Termodinámico:** El Motor Causal prohíbe explícitamente la lectura de relojes de sistema continuos (POSIX `CLOCK_REALTIME`, NTP) para establecer el consenso de causalidad.
 
@@ -119,5 +119,5 @@ $$ e_n \prec e_{n+1} \iff Hash(e_n) \in Payload(e_{n+1}) \land Lamport(e_n) < La
 Cualquier evento $e_x$ cuyo $Lamport(e_x)$ o $Hash$ rompa esta topología estricta es considerado fuera del Cono de Luz Causal.
 
 > [!CAUTION]
-> **Falsabilidad Estructural (`INV_BFT_04` / Válvula de Exergía):**
-> Si un evento no satisface la precondición causal, el sistema **DEBE** hacer `panic!` o descartar la mutación en $O(1)$. No se permiten esperas (`await sleep`), heurísticas de red, ni uniones de estado silentes. El tiempo es una prueba criptográfica (Witness), no una métrica de red.
+> **Falsabilidad Estructural:**
+> Esta precondición causal está reforzada mecánicamente por el invariante `INV_BFT_04`. Para más detalles sobre su aplicación técnica, ver [Invariantes del Sistema BABYLON-60](spec_invariants.md).
