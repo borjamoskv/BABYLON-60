@@ -6,6 +6,7 @@
 
 """Core path definitions for BABYLON-60 / CORTEX engine."""
 
+import os
 from pathlib import Path
 
 # Base user directory & Antigravity / Gemini configuration roots
@@ -22,9 +23,16 @@ DAEMON_DIR = CORTEX_DIR / "daemon"
 DAEMON_CONFIG_FILE = DAEMON_DIR / "config.json"
 DAEMON_STATUS_FILE = DAEMON_DIR / "status.json"
 SYNC_STATE_FILE = CORTEX_DIR / "sync_state.json"
+CORTEX_DB = CORTEX_DIR / "cortex.db"
 
 # Monorepo root paths
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 DOCS_DIR = REPO_ROOT / "docs"
 KERNEL_DIR = REPO_ROOT / "crates" / "babylon60-kernel"
 STRIKE_DIR = REPO_ROOT / "crates" / "strike-rs"
+
+# Agent State Directory with Environmental Override
+_env_agent_dir = os.environ.get("BABYLON_AGENT_DIR") or os.environ.get("CORTEX_AGENT_DIR")
+AGENT_DIR = Path(_env_agent_dir).resolve() if _env_agent_dir else REPO_ROOT / ".agent"
+
+

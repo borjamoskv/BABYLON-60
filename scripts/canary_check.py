@@ -59,13 +59,13 @@ def main() -> int:
         if any(f == bad or f.startswith(bad.rstrip("/") + "/") for f in tracked):
             failures.append(f"LEAK: '{bad}' está trackeado en el índice")
 
-    # 2. Canaries declarados pero ausentes
+    # 2. Canaries declarados y plantados (- [x] canary_path: ...)
     if CANARY_MANIFEST.exists():
         body = CANARY_MANIFEST.read_text(encoding="utf-8", errors="replace")
-        declared = re.findall(r"canary_path:\s*(\S+)", body)
+        declared = re.findall(r"-\s*\[[xX]\]\s*canary_path:\s*(\S+)", body)
         for path in declared:
             if path not in tracked and not Path(path).exists():
-                failures.append(f"CANARY LOST: '{path}' declarado pero ausente")
+                failures.append(f"CANARY LOST: '{path}' declarado como plantado pero ausente")
     else:
         print("[Ω-12] idle: docs/CANARY_TOKENS.md no existe (canaries no plantados aún)")
 

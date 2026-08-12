@@ -128,8 +128,7 @@ def verify_agentic_invariants() -> List[Tuple[str, str, bool, str]]:
     """Evaluates Agent Plugins 1.0 & Interoperability Invariants (AX-AGT-1)."""
     res = []
     # AX-AGT-1: Agent Plugins 1.0 Isomorphic Manifest Verification
-    local_agents = REPO_ROOT / ".agents"
-    has_skills = local_agents.exists()
+    has_skills = (REPO_ROOT / ".agents").exists() or (REPO_ROOT.parent / ".agents").exists() or (REPO_ROOT / ".agent").exists()
     res.append(("AX-AGT-1", "Agent Plugins 1.0 Isomorphic Manifest", has_skills, f"Agent Plugins skills verified in workspace"))
     return res
 

@@ -69,14 +69,14 @@ def verify_full_stack():
         (
             "3. Web Frontend Production Build (Vite/React)",
             ["npm", "run", "build"],
-            os.path.join(repo_root, "web"),
+            os.path.join(repo_root, "apps", "web"),
             None,
         ),
         (
             "4. Demostración Hero Demo & Cumplimiento EU AI Act",
             [sys.executable, "scripts/c5_demos/run_hero_demo.py"],
             repo_root,
-            {"PYTHONPATH": "."},
+            {"PYTHONPATH": f"packages:{repo_root}"},
         ),
     ]
 
