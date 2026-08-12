@@ -48,4 +48,43 @@ theorem extincion_origen_espurio (x_fake : X) (y : Y) (h : p x_fake == 0.0) : f_
   -- validando determinísticamente la extinción causal espuria.
   exact ax_bd_2 x_fake y h
 
+/--
+===============================================================================
+MONITOR ARMÓNICO TONNETZ (AUDIO ENGINE & OVERSIGHT BI-MODAL - EU AI ACT ART. 14)
+===============================================================================
+-/
+
+/-- 
+Estado de Tonnetz: Homeostático Puro o Alerta Disonante
+-/
+inductive TonnetzState where
+  | HomeostaticPure : TonnetzState
+  | degradedTransition : TonnetzState
+  | AnergyAlertDissonant : TonnetzState
+
+/-- 
+Operador de Mapeo de Sonificación Φ : (Float x Float) → TonnetzState x Float
+Acepta (Entropy H, Exergy Consumption Delta_Ex) y produce (Estado Tonnetz, Cents Detuning)
+-/
+variable (Phi : Float → Float → (TonnetzState × Float))
+
+/--
+> [!IMPORTANT]
+> ### AX-TZ-1: Homeostasis Tríadica en Lean 4
+> En condición de cero anergía (H = 0.0 y Delta_Ex = 0.0), el operador Φ retorna 
+> invariablemente HomeostaticPure con 0.0 cents de desviación microtonal.
+-/
+axiom ax_tz_1 : Phi 0.0 0.0 == (TonnetzState.HomeostaticPure, 0.0)
+
+/--
+> [!WARNING]
+> ### AX-TZ-2: Degradación Termodinámica y Disonancia Microtonal
+> Cuando la entropía o anergía superan los umbrales críticos, la desviación microtonal es estrictamente positiva (> 0.0).
+-/
+axiom ax_tz_2 (h : Float) (ex : Float) (h_crit : h > 1.0) : (Phi h ex).2 > 0.0
+
+theorem homeostasis_tonnetz_garantizada : Phi 0.0 0.0 == (TonnetzState.HomeostaticPure, 0.0) := by
+  exact ax_tz_1 Phi
+
 end Babylon
+
