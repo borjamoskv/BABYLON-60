@@ -24,7 +24,7 @@ DAEMON_STATUS_FILE = DAEMON_DIR / "status.json"
 SYNC_STATE_FILE = CORTEX_DIR / "sync_state.json"
 
 # Monorepo root paths
-REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 DOCS_DIR = REPO_ROOT / "docs"
-KERNEL_DIR = REPO_ROOT / "kernel"
-STRIKE_DIR = REPO_ROOT / "strike_rs"
+KERNEL_DIR = REPO_ROOT / "crates" / "babylon60-kernel"
+STRIKE_DIR = REPO_ROOT / "crates" / "strike-rs"
