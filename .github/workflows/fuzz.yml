@@ -21,4 +21,4 @@ jobs:
         
     - name: Run AST Parser Mutational Fuzzing (300s limit)
       run: cargo +nightly fuzz run fuzz_target_1 -- -max_total_time=300
-      working-directory: ./fuzz
+      working-directory: ./crates/babylon60-fuzz
