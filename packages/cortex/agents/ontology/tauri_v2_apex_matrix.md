@@ -50,7 +50,7 @@ compression_ratio: MAX_EXERGY
 - **TRV2-PLG-[307-399]:** *[Vectores de empaquetado de plugins, bridging C-FFI, crates dinámicos, y auto-generación de Typescript API]*
 
 ## 05. AISLAMIENTO Y SEGURIDAD (TRV2-SEC-400 → 499)
-- **TRV2-SEC-400:** Pattern Isolation (iFrame sandbox proxy para IPC).
+- **TRV2-SEC-400:** Pattern Isolation (iFrame Markov Blanket proxy para IPC).
 - **TRV2-SEC-401:** CSP (Content Security Policy) estricto auto-inyectado.
 - **TRV2-SEC-402:** `tauri.conf.json > security > dangerousUseHttpScheme` = false.
 - **TRV2-SEC-403:** Freezing de `window.__TAURI__` (Prevención Prototype Pollution).
