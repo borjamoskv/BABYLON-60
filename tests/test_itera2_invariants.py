@@ -142,7 +142,7 @@ async def test_master_ledger_queue_durabilidad_full(tmp_path: Path) -> None:
 
 
 def _load_cli(name: str, filename: str):
-    path = Path(__file__).resolve().parent.parent / "babylon60" / "cli" / filename
+    path = Path(__file__).resolve().parent.parent / "packages" / "babylon60" / "cli" / filename
     spec = importlib.util.spec_from_file_location(name, path)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
