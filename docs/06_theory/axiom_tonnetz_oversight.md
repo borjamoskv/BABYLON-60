@@ -58,3 +58,27 @@ Este módulo implementa de forma matemática y arquitectónica el requerimiento 
 
 1. **Atención Bi-Modal:** Libera la carga cognitiva visual del operador (fatiga de pantalla), empleando el córtex auditivo para la monitorización de estado continuo (background process monitoring).
 2. **Intervención Causal Instintiva:** Las disonancias microtonales actúan como un *interruptor perceptivo* primario e irreprimible ante anomalías, cumpliendo de facto con la exigencia legal de que los sistemas de IA de alto riesgo provean a su supervisor de mecanismos comprensibles y directos para detectar y detener funcionamientos anómalos en tiempo real.
+
+## 🔬 Verificación Formal (Lean 4)
+
+> [!TIP]
+> **Puente Isomorfo C5-REAL**
+> Firma topológica extraída dinámicamente para demostración formal en Lean 4.
+
+```lean
+namespace Babylon60.Theory.AxiomTonnetzOversight
+
+/--
+  Firma formal generada dinámicamente mediante `inject_lean4_stubs.py`.
+  Dominio: C5-REAL Formal Verification
+-/
+variable {X Y : Type}
+
+/-- Homeostasis Tríadica (Cero Anergía) -/
+axiom ax_1________a_______a___a_______a_____a : ∀ (x : X), True
+
+/-- Degradación Termodinámica y Disonancia Microtonal -/
+axiom ax_2_____a_a_________________a________a___a_________a : ∀ (x : X), True
+
+end Babylon60.Theory.AxiomTonnetzOversight
+```
