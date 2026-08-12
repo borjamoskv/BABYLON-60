@@ -25,7 +25,7 @@
 Test the live kernel, cryptographic sanitization, network failure fallback, and automated certificate generation for **AESIA (Spain)**, **BSI (Germany)**, and the **EU AI Office** by running:
 
 ```bash
-python3 scripts/run_hero_demo.py
+PYTHONPATH=. python3 scripts/c5_demos/run_hero_demo.py
 ```
 
 ---
