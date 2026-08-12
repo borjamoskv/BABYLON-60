@@ -131,15 +131,12 @@ class SovereignCache(Generic[T]):
         if not self._on_evict:
             return
 
-        try:
-            if asyncio.iscoroutinefunction(self._on_evict):
-                task = asyncio.create_task(self._on_evict(key, value, self._evidence_hash, self._eviction_count))
-                self._eviction_tasks.add(task)
-                task.add_done_callback(self._eviction_tasks.discard)
-            else:
-                self._on_evict(key, value, self._evidence_hash, self._eviction_count)
-        except Exception as e:  # noqa: BLE001
-            logger.error("SovereignCache: Eviction hook failed for key %s: %s", key, e)
+        if asyncio.iscoroutinefunction(self._on_evict):
+            task = asyncio.create_task(self._on_evict(key, value, self._evidence_hash, self._eviction_count))
+            self._eviction_tasks.add(task)
+            task.add_done_callback(self._eviction_tasks.discard)
+        else:
+            self._on_evict(key, value, self._evidence_hash, self._eviction_count)
 
     def get_forgetting_proof(self) -> dict[str, Any]:
         """Returns the current state of the evidence chain."""

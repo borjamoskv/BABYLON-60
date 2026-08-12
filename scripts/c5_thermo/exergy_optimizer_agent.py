@@ -47,9 +47,15 @@ class ComplexityVisitor(ast.NodeVisitor):
 
 
 # Invariants
-DB_PATH = Path.home() / ".babylon60/exergy_agent_ledger.db"
-VAULT_DIR = Path.home() / ".gemini/config/.cortex/memory_vault"
-BRAIN_DIR = Path.home() / ".gemini/antigravity/brain"
+babylon_home = os.environ.get("BABYLON_HOME")
+if not babylon_home:
+    raise RuntimeError("INV_C5_ENV: BABYLON_HOME must be set. Path.home() is prohibited.")
+DB_PATH = Path(babylon_home) / ".babylon60/exergy_agent_ledger.db"
+gemini_home = os.environ.get("GEMINI_HOME")
+if not gemini_home:
+    raise RuntimeError("INV_C5_ENV: GEMINI_HOME must be set. Path.home() is prohibited.")
+VAULT_DIR = Path(gemini_home) / "config/.cortex/memory_vault"
+BRAIN_DIR = Path(gemini_home) / "antigravity-ide/brain"
 
 
 @dataclass(frozen=True)

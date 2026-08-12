@@ -125,9 +125,7 @@ def _worker(source_code: str, global_ctx: dict, conn) -> None:
         else:
             result_dict["status"] = "failed"
             result_dict["error"] = f"AssertionError: {str(e)}"
-    except Exception as e:  # noqa: BLE001
-        result_dict["status"] = "failed"
-        result_dict["error"] = f"{type(e).__name__}: {str(e)}"
+
 
     try:
         conn.send(("result", result_dict))

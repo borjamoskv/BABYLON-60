@@ -32,7 +32,11 @@ def resolve_db_path(db_path: str | Path) -> Path:
     p = Path(db_path)
     if p.is_absolute():
         return p
-    central_dir = Path.home() / ".babylon60" / "dbs"
+    import os
+    babylon_home = os.environ.get("BABYLON_HOME")
+    if not babylon_home:
+        raise RuntimeError("INV_C5_ENV: BABYLON_HOME must be set. Path.home() is prohibited.")
+    central_dir = Path(babylon_home) / "dbs"
     central_dir.mkdir(parents=True, exist_ok=True)
     return central_dir / p.name
 

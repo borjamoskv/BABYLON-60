@@ -8,7 +8,7 @@ Demonstrates:
 2. Asynchronous State Suspension & Resumption via Causal Gate (Human Sign-off):
    State_{t+1} = F(State_t, a_t) if a_t NOT IN A_critical OR G_human(a_t) == APPROVED
    State_{t+1} = PAUSED(State_t, a_t) if a_t IN A_critical AND G_human(a_t) == PENDING
-3. Cryptographic SCITT-compliant SHA-256 Tamper-Evident Audit Ledger.
+3. Cryptographic SCITT-compliant SHA3-256 Tamper-Evident Audit Ledger.
 4. Multidisciplinary Domain Workflows (Business CRM, Code Security Audit, Audiovisual Rendering).
 """
 
@@ -185,7 +185,7 @@ class OperationalWorkerPoC:
                     print(f"   \033[91m[✗ HUMAN SIGN-OFF]\033[0m Decision received: >>> \033[1m{decision}\033[0m <<<")
 
                 digest = self.engine.record_decision(self.execution_id, action_name, criticality, decision)
-                print(f"   \033[90m[🔐 SHA-256 RECEIPT]\033[0m {digest[:16]}...{digest[-16:]}")
+                print(f"   \033[90m[🔐 SHA3-256 RECEIPT]\033[0m {digest[:16]}...{digest[-16:]}")
 
                 if decision != "APPROVED":
                     self.engine.save_snapshot(
@@ -224,7 +224,7 @@ class OperationalWorkerPoC:
         print(f"   Sign-off Decision for [{pending_action}]: >>> {decision} <<<")
 
         digest = self.engine.record_decision(self.execution_id, pending_action, ActionCriticality.MUTATIVE_CRITICAL, decision)
-        print(f"   [🔐 SHA-256 RECEIPT] {digest[:16]}...{digest[-16:]}")
+        print(f"   [🔐 SHA3-256 RECEIPT] {digest[:16]}...{digest[-16:]}")
 
         if decision != "APPROVED":
             self.engine.save_snapshot(
@@ -321,7 +321,7 @@ def main():
     integrity_valid = engine.verify_ledger_integrity()
 
     print("\n" + "═" * 80)
-    print(f"   CRYPTOGRAPHIC AUDIT LEDGER (SCITT Tamper-Evident SHA-256 Chain)")
+    print(f"   CRYPTOGRAPHIC AUDIT LEDGER (SCITT Tamper-Evident SHA3-256 Chain)")
     print(f"   Ledger Verification Status: [{'VERIFIED OK' if integrity_valid else 'CORRUPTED'}]")
     print("═" * 80)
 
