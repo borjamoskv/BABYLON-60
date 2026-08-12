@@ -113,13 +113,13 @@ pythonpath = [".", "packages", "experiments"]
 target-version = "py310"
 line-length = 120
 extend-exclude = [
-    "domain_kernel",
-    "strike_rs",
+    "experiments/domain_kernel",
+    "crates/strike-rs",
     "src",
     "L1_sink",
     "BABYLON-60-fixes",
     "c5_remotion_video",
-    "babylon60/extensions",
+    "packages/babylon60/extensions",
 ]
 
 [tool.ruff.lint]
@@ -130,7 +130,7 @@ ignore = ["E743"]
 python_version = "3.12"
 explicit_package_bases = true
 disallow_any_generics = false
-exclude = ["^scratch/", "^anvil_yung/", "^babylon60/extensions/"]
+exclude = ["^scratch/", "^experiments/anvil_yung/", "^packages/babylon60/extensions/"]
 ignore_missing_imports = true
 
 # Legacy vendorizado (babylon60/extensions): excluido de packaging y lint.
