@@ -39,7 +39,17 @@ def main() -> None:
         )
         sys.exit(1)
         
-    repo_root = tauri_dir.parent
+    # The actual rust workspace root is BABYLON-60 (donde está el target dir general)
+    repo_root = tauri_dir
+    while not (repo_root / "Cargo.toml").exists() or not (repo_root / "target").exists() and repo_root.name != "BABYLON-60":
+        if repo_root.parent == repo_root:
+            # Fallback to tauri_dir parent if we reach filesystem root
+            repo_root = tauri_dir.parent.parent
+            break
+        repo_root = repo_root.parent
+        
+    if not (repo_root / "target").exists():
+        repo_root = Path.cwd()
 
     # HANDOFF SOBERANO A MOSKV-1 (Zero-Python Memory Overhead)
     if "status" in args or "--status" in args:
