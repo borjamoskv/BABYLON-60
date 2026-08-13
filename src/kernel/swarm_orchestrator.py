@@ -4,6 +4,15 @@ Enrutador Maestro y Despachador de 5 Subagentes
 """
 import asyncio
 import logging
+import uuid
+import time
+from .bft_db_async import persist_bft_event
+
+try:
+    import strike_rs
+except ImportError:
+    strike_rs = None
+    logging.warning("No se pudo importar strike_rs. Compila el módulo con maturin.")
 
 # Simulando la importación del patrón Agent Beeper 
 # desde el hypervisor Antigravity / C5-REAL
@@ -31,8 +40,14 @@ async def agent_i_kernel_architect(tenant_id: str):
     payload = await pager.wait_for_beep(tenant_id)
     async with semaphore:
         logging.info(f"[Agente I] Despertado. Traduciendo directivas a AST BFT...")
-        await asyncio.sleep(0.5) # Simular trabajo
-        return {"status": "SUCCESS", "ast_signature": "0xABC123"}
+        await asyncio.sleep(0.1) # Simular trabajo I/O
+        
+        ast_signature = "0xFALLBACK"
+        if strike_rs:
+            # Invocar al silicio nativo vía PyO3
+            ast_signature = strike_rs.compute_cortex_taint_fast(tenant_id, "Payload_Code_Simulation")
+            
+        return {"status": "SUCCESS", "ast_signature": ast_signature}
 
 async def agent_ii_exergy_auditor(tenant_id: str):
     """Agente II: Auditor Termodinámico (QA Exergética)"""
@@ -95,12 +110,21 @@ async def swarm_quantum_collapse():
     results = await asyncio.gather(*tasks)
     
     # Verificar si hubo alucinación/anergia (Falla Bizantina)
+    ast_signature = "0xUNKNOWN"
     for res in results:
         if res.get("delta_x", 0) > 0:
             logging.error("[BFT FATAL] Anergía detectada. Aplicando Thermodynamic Override al enjambre.")
             return False
+        if "ast_signature" in res:
+            ast_signature = res["ast_signature"]
             
     logging.info("[BFT SUCCESS] Enjambre ejecutado con Cero Anergía. Colapso de Estado Sellado.")
+    
+    # Persistir en cortex.db
+    event_id = str(uuid.uuid4())
+    lamport_t = int(time.time() * 1000)
+    await persist_bft_event("cortex.db", event_id, "Swarm State Collapsed", lamport_t, ast_signature)
+    
     return True
 
 if __name__ == "__main__":
