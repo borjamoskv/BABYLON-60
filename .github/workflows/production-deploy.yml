@@ -1,6 +1,9 @@
 name: Production Deployment (GHCR)
 
 on:
+  push:
+    branches: [main]
+    tags: ['v*']
   release:
     types: [published]
   workflow_dispatch:
