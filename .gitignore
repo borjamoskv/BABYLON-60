@@ -24,6 +24,8 @@ __pycache__/
 venv/
 .pytest_cache/
 scratch/
+scratch/*
+scratch/
 
 # Node / Web Build Assets
 node_modules/
