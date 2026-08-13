@@ -92,5 +92,6 @@ Teorema-Robinson-Moskv · master branch · BFT Cycle 500 · C5-REAL EXERGY CERTI
 
 ## LEGAL
 
-MIT License - 2026 MOSKV-1 APEX.
+MIT License - Copyright (c) 2026 Borja Fernández Angulo (@borjamoskv).
+
 
