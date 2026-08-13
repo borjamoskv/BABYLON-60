@@ -165,23 +165,6 @@ def _format_project_section(project: str, facts: list[dict]) -> list[str]:
 
 async def _generate_tips_section(engine: CortexEngine) -> list[str]:
     """Generate a 'Tip del Día' section for the snapshot with 3 random tips."""
-    try:
-        from babylon60.engine.core.tips import TipsEngine
+    # Módulo de tips purgado por anergía
+    return []
 
-        tips_engine = TipsEngine(engine, include_dynamic=True, lang="es")
-        lines = [
-            "---",
-            "",
-            "## 💡 Tips del Día",
-            "",
-        ]
-        seen: set[str] = set()
-        for _ in range(3):
-            tip = await tips_engine.random()
-            if tip.id not in seen:
-                seen.add(tip.id)
-                lines.append(f"- **[{tip.category.value.upper()}]** {tip.content}")
-        lines.append("")
-        return lines
-    except (ImportError, RuntimeError, OSError, ValueError):
-        return []
