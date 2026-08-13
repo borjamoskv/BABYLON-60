@@ -25,6 +25,9 @@ La evolución SOTA de BABYLON-60 no implica relajar la seguridad, sino **aislar 
 * **[ ] Hito 1.2: GraphRAG & Embeddings de AST**
   * **Descripción:** Extraer el grafo de dependencias de funciones y módulos del repositorio utilizando árboles AST.
   * **Entregable:** Base de datos vectorial local (Qdrant/SQLite-vss) integrada con `cortex-persist` que permita al agente inyectar grafos de llamadas (*Call Graphs*) dinámicos, superando las limitaciones de la ventana de contexto.
+* **[ ] Hito 1.3: Resolutor de Dependencias 4D (Temporal Solver)**
+  * **Descripción:** Un motor de evaluación epistémica que fuerza al agente a computar el estado temporal completo del ecosistema antes de mutarlo.
+  * **Entregable:** Matriz de validación que bloquea cualquier acción que ignore: **Pasado** (compatibilidad hacia atrás, historial de versiones y vías de *rollback*), **Presente** (estado exacto de los *lockfiles* y firmas hash actuales) y **Futuro** (alertas de deprecación inminentes o *breaking changes* advertidos en versiones *upstream*).
 
 ---
 
@@ -61,6 +64,18 @@ La evolución SOTA de BABYLON-60 no implica relajar la seguridad, sino **aislar 
 * **[ ] Hito 4.2: Compilador "Dream to Ledger"**
   * **Descripción:** El puente final que reconcilia la alta entropía con el determinismo.
   * **Entregable:** Un módulo en Rust que toma el parche SOTA generado (ya verde en tests y optimizado por MCTS), lo formatea bajo los invariantes de `Babylon.lean`, y lo inyecta como una transición de estado inmutable en el DAG Ledger $F_{60}$ (COSE Sign1 + TPM).
+
+---
+
+### Fase 5: Auto-Evolución Arquitectónica (The SOTA Self-Implementation Loop)
+**Objetivo:** El sistema debe auditar la literatura de frontera (arXiv, GitHub trending) y auto-actualizar sus propios paradigmas de orquestación sin esperar parches humanos.
+
+* **[ ] Hito 5.1: Oráculo de Inteligencia Tecnológica (SOTA Watchdog)**
+  * **Descripción:** Agente programado en cron (`schedule`) que monitorea repositorios SOTA, papers de arXiv y benchmarks (SWE-bench).
+  * **Entregable:** Matriz automatizada que detecta avances en IA agentiva (p.ej. un nuevo protocolo RAG o heurística MCTS).
+* **[ ] Hito 5.2: Bucle de Implementación Reflexiva (Reflexive Forking)**
+  * **Descripción:** Cuando se detecta un salto SOTA, el sistema hace un *fork* de sí mismo dentro del *Dream State*.
+  * **Entregable:** El agente orquestador intenta refactorizar su propio código de enjambre (p.ej. reemplazar su indexador base por el nuevo paradigma), ejecuta su batería de pruebas `pytest`/`cargo test` y, si supera el benchmark interno, somete un *Pull Request* autónomo o un `Dream to Ledger` commit para actualizar su propio kernel agentivo.
 
 ---
 
