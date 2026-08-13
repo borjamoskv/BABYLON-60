@@ -3,8 +3,15 @@
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 # [Causal-Determinist] Exergy-Maximized
-from babylon60.extensions.scraper.engine import ScraperEngine
-from babylon60.extensions.scraper.models import ExtractionStrategy, ScrapeRequest, ScrapeResult
+try:
+    from babylon60.extensions.scraper.engine import ScraperEngine
+    from babylon60.extensions.scraper.models import ExtractionStrategy, ScrapeRequest, ScrapeResult
+except ImportError:
+    ScraperEngine = None
+    ExtractionStrategy = None
+    ScrapeRequest = None
+    ScrapeResult = None
+
 
 from .models import MarketReport, NicheTarget
 
@@ -32,6 +39,12 @@ class NicheArbitrageEngine:
         """Runs the fully autonomous pipeline for a given target."""
 
         # 1. Extraction (Scraping)
+        if not ScraperEngine or not ScrapeRequest or not ExtractionStrategy:
+            return MarketReport(
+                target_name=target.name,
+                summary="FAILED EXTRACTION: Scraper module (anergy) purged or absent.",
+                signals=[],
+            )
         scrape_req = ScrapeRequest(url=target.url, strategy=ExtractionStrategy.AUTO)
         scrape_result: ScrapeResult = await self.scraper.scrape(scrape_req)
 
