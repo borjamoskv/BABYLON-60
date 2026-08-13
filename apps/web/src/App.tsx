@@ -154,9 +154,9 @@ function App() {
                     <li>✅ Servidor MCP `babylon60-mcp`</li>
                     <li>✅ Firma HMAC Comercial</li>
                   </ul>
-                  <button onClick={() => handleCTA('license')} className="w-full py-2.5 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/40 rounded-lg text-cyan-300 text-xs font-bold transition-all">
+                  <a href="https://buy.stripe.com/test_123" target="_blank" rel="noopener noreferrer" className="block text-center w-full py-2.5 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/40 rounded-lg text-cyan-300 text-xs font-bold transition-all">
                     OBTENER LICENCIA PRO
-                  </button>
+                  </a>
                 </div>
 
                 {/* Sovereign Enterprise */}
@@ -170,9 +170,9 @@ function App() {
                     <li>✅ Orquestación Legion 100k Tenantes</li>
                     <li>✅ SLA 99.999% & Soporte 24/7</li>
                   </ul>
-                  <button onClick={() => handleCTA('license')} className="w-full py-2.5 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 rounded-lg text-emerald-300 text-xs font-bold transition-all">
+                  <a href="mailto:sales@babylon60.com?subject=BABYLON-60%20Sovereign%20Enterprise" className="block text-center w-full py-2.5 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 rounded-lg text-emerald-300 text-xs font-bold transition-all">
                     CONTACTAR ENTERPRISE
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
