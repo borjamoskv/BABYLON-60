@@ -34,6 +34,8 @@ tokio-stream = "0.1.19"
 
 [dev-dependencies]
 proptest = "1.6.0"
+pyo3 = { version = "0.21.2", features = ["auto-initialize"] }
+
 
 [features]
 extension-module = ["pyo3/extension-module"]
