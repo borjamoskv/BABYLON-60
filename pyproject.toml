@@ -84,7 +84,19 @@ apex = [
 ]
 
 [project.scripts]
+babylon60 = "babylon60.cli.onco_transducer:main"
+babylon60-compliance = "babylon60.compliance_exporter.eu_ai_act:main_cli"
+babylon60-license = "babylon60.cli.license_cli:main"
+babylon60-mcp = "babylon60.mcp.cortex_mcp_server:main"
+babylon60-dashboard = "scripts.c5_thermo.exergy_dashboard_server:main"
+babylon60-bridge = "babylon60.cli.bridge:main"
+babylon60-onco = "babylon60.cli.onco_transducer:main"
+babylon60-attest = "babylon60.cli.llm_attest:main"
 apex = "apex_trials.cli:main"
+cortex-compliance = "babylon60.compliance_exporter.eu_ai_act:main_cli"
+cortex-license = "babylon60.cli.license_cli:main"
+cortex-mcp = "babylon60.mcp.cortex_mcp_server:main"
+cortex-dashboard = "scripts.c5_thermo.exergy_dashboard_server:main"
 cortex-bridge = "babylon60.cli.bridge:main"
 cortex-onco = "babylon60.cli.onco_transducer:main"
 cortex-attest = "babylon60.cli.llm_attest:main"

@@ -139,7 +139,14 @@ root = ledger.get_merkle_root()
 
 ```bash
 # Verificar un payload de atestación LLM
-uv run cortex-attest --file attestation_payload.json
+uv run babylon60-attest --file attestation_payload.json
+
+# Generar Certificado de Cumplimiento EU AI Act (JSON / Markdown / HTML)
+uv run babylon60-compliance --bundle artifact_bundle_v3 --locale es --format html --output cert.html
+
+# Gestionar Licencias Enterprise
+uv run babylon60-license generate --owner "AcmeCorp" --tier enterprise --days 365
+uv run babylon60-license verify --key "AcmeCorp:enterprise:..."
 ```
 
 ---
@@ -152,8 +159,8 @@ uv run cortex-attest --file attestation_payload.json
 | :--- | :--- | :--- |
 | `BABYLON_HOME` | **Sí** | Directorio raíz para todas las bases de datos y estado. No tiene valor por defecto — debe establecerse explícitamente. |
 | `GEMINI_HOME` | Solo scripts | Usado por scripts de exergía para rutas de vault/brain. |
-| `CORTEX_BFT_KEY` | Puente Rust | Clave HMAC para el kernel BFT Rust. |
-| `CORTEX_LICENSE_KEY` | Enterprise | Clave criptográfica de licencia para uso comercial. |
+| `BABYLON60_LICENSE_KEY` | Enterprise | Clave criptográfica de licencia para uso comercial (fallback: `CORTEX_LICENSE_KEY`). |
+| `BABYLON60_LICENSE_SALT` | Enterprise | Salt secreto HMAC para verificación de licencias. |
 
 ### Ubicación de Datos
 

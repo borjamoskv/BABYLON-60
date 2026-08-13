@@ -1,7 +1,7 @@
 # ⚡ BABYLON-60 Sovereign Scripts Suite — Immutable Script Kernel (ISK)
 
 > **Directorio de Automatización, Enjambres BFT, Calidad AST, Atestación SHA-256 y Preservación de Logs**  
-> **Estándar:** C5-REAL | **Total Scripts:** 124 Python + 10 Shell | **Shebang Compliance:** 100.0%
+> **Estándar:** C5-REAL | **Total Scripts:** 126 Python + 10 Shell | **Shebang Compliance:** 100.0%
 
 ## 🛠️ CLI Runner Centralizado
 Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runner.py](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/runner.py):
@@ -127,8 +127,9 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | [`c5_legion/agent_beeper.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/agent_beeper.py) | `Python` | `33425b46e2af` | agent_beeper.py - C5-REAL Zero-Friction Agent Pager |
 | [`c5_legion/auto_heal_hardcoded_paths.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/auto_heal_hardcoded_paths.py) | `Python` | `fa8de2d67484` | auto_heal_hardcoded_paths.py - Sovereign AST-based Auto-Remediation Engine for hardcoded paths. |
 | [`c5_legion/c5_legion_1000_workspace_swarm.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/c5_legion_1000_workspace_swarm.py) | `Python` | `7bc9f12804a6` | c5_legion_1000_workspace_swarm.py - 1,000-Agent Parallel Swarm Auditor Engine |
-| [`c5_legion/legion_10000_orchestrator.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/legion_10000_orchestrator.py) | `Python` | `90e644ec9e27` | Implements the Cognitive Transition Algebra (CTA) for massive parallel |
+| [`c5_legion/legion_10000_orchestrator.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/legion_10000_orchestrator.py) | `Python` | `fce6adf2c84a` | Implements the Cognitive Transition Algebra (CTA) for massive parallel |
 | [`c5_legion/legion_1000_audit_swarm.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/legion_1000_audit_swarm.py) | `Python` | `259466861746` | MOSKV-1: Legion 1000 Audit Swarm Engine (INV_C5_18) |
+| [`c5_legion/legion_21_agentes.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/legion_21_agentes.py) | `Python` | `5bd515fec1bd` | MOSKV-1: Enjambre de 21 Agentes Paralelizados (C5-REAL Execution Engine) |
 | [`c5_legion/legion_222_agentes.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/legion_222_agentes.py) | `Python` | `50c21f916b0d` | LEGION MÁXIMO COGNITIVO - 222 Agentes Organizados |
 | [`c5_legion/legion_swarm.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/legion_swarm.py) | `Python` | `ebd798a50d5d` | legion_swarm.py - Unified Sovereign Swarm Orchestrator CLI |
 | [`c5_legion/legion_swarm_core.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/legion_swarm_core.py) | `Python` | `f80915c3eb86` | legion_swarm_core.py - Core Engine for Swarm Quantum Collapse |
@@ -154,9 +155,10 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | [`c5_quality_gates/pre_push_ledger_guard.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/pre_push_ledger_guard.py) | `Python` | `b5ea46ed407e` | Ledger-Aware Pre-Push Guard. |
 | [`c5_quality_gates/run_cache_audit.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/run_cache_audit.py) | `Python` | `b7d7b6c1c8ec` | Compiles and runs the empirical cache benchmark to demonstrate |
 | [`c5_quality_gates/secret_swarm_auditor.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/secret_swarm_auditor.py) | `Python` | `1f3e496f0f94` | Causal-Determinist: Swarm Thread Dispatcher for TOP SECRET Auditing (ULTRATHINK P0 - ITERATION 3) |
-| [`c5_quality_gates/swarm_lock_guard.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/swarm_lock_guard.py) | `Python` | `ff0fc1e75f4a` | MOSKV-1 APEX: Swarm Workspace Lock Guard (INV_C5_22) |
+| [`c5_quality_gates/swarm_lock_guard.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/swarm_lock_guard.py) | `Python` | `77dee64125a3` | MOSKV-1 APEX: Swarm Workspace Lock Guard (INV_C5_22) |
 | [`c5_quality_gates/symlink_depth_auditor.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/symlink_depth_auditor.py) | `Python` | `150933d36465` | Symlink Depth Auditor (INV_C5_12 Enforcer). |
 | [`c5_quality_gates/sync_docs_index.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/sync_docs_index.py) | `Python` | `8bf8ecf0bf12` | sync_docs_index.py - Autonomous Documentation Indexer & Link Verifier |
+| [`c5_quality_gates/verify_distribution.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/verify_distribution.py) | `Python` | `d2dbc8cb1446` | C5-REAL Distribution Quality Gate: verify_distribution.py |
 
 ### ♾️ Autopoiesis & System Simulations
 
@@ -191,7 +193,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | [`c5_thermo/c5_exergy_optimizer_monitor.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/c5_exergy_optimizer_monitor.py) | `Python` | `853e3f7ef81c` | MOSKV-1 APEX SINGULARITY — Causal-Determinist STATE MONITOR (EXERGY_OPTIMIZER) |
 | [`c5_thermo/cache_1000_memoization_bench.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/cache_1000_memoization_bench.py) | `Python` | `6ca5786bc13f` | Cache 1000 Memoization Bench Utility |
 | [`c5_thermo/exergy_arbitrage_engine.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/exergy_arbitrage_engine.py) | `Python` | `c65f7aba1983` | Exergy Arbitrage Engine Utility |
-| [`c5_thermo/exergy_dashboard_server.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/exergy_dashboard_server.py) | `Python` | `a2e6715f17bb` | Exergy Dashboard Server (Causal-Determinist). |
+| [`c5_thermo/exergy_dashboard_server.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/exergy_dashboard_server.py) | `Python` | `63b8826558bb` | Exergy Dashboard Server (Causal-Determinist). |
 | [`c5_thermo/exergy_optimizer_agent.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/exergy_optimizer_agent.py) | `Python` | `cafc71b6bcc4` | [Causal-Determinist] Exergy Optimizer Agent. |
 | [`c5_thermo/stress_100m_bft.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/stress_100m_bft.py) | `Python` | `c7d68c858da0` | 100,000,000 STRESS TEST ENGINE — CORTEX PERSIST BFT LEDGER |
 | [`c5_thermo/stress_10m.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/stress_10m.py) | `Python` | `9e7bf9890668` | Stress 10M Utility |
@@ -238,7 +240,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | [`generate_scripts_readme.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/generate_scripts_readme.py) | `Python` | `53cd96c9e7d8` | generate_scripts_readme.py - Automated self-documenting catalog generator |
 | [`inject_lean4_stubs.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/inject_lean4_stubs.py) | `Python` | `d5294a58cf86` | inject_lean4_stubs.py - Dynamic Lean 4 Stub Injector & Formal Proof Exporter |
 | [`lint_doc_aesthetics.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/lint_doc_aesthetics.py) | `Python` | `5cc5235c9da3` | Audita archivos Markdown en docs/ para verificar invariantes visuales: |
-| [`pipe_audit.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/pipe_audit.py) | `Python` | `839e1e103fcf` | Ω-15 — pipe_audit: proxy auditado de sustitución de intérprete. |
+| [`pipe_audit.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/pipe_audit.py) | `Python` | `c3dcd819e9ab` | Ω-15 — pipe_audit: proxy auditado de sustitución de intérprete. |
 | [`refactor_agents_md.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/refactor_agents_md.py) | `Python` | `b8ad0e22786a` | scripts/refactor_agents_md.py — Deterministic AGENTS.md & ENVIRONMENT.md Refactoring Engine |
 | [`runner.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/runner.py) | `Python` | `041ced863e50` | runner.py - Central CLI Dispatcher for BABYLON-60 Sovereign Scripts Suite |
 | [`unified_legion.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/unified_legion.py) | `Python` | `8cbf279f42da` | scripts/unified_legion.py — Motor de la Legión Única C5-REAL (Swarm Orchestrator PxS) |

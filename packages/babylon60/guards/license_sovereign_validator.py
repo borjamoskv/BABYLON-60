@@ -57,7 +57,11 @@ def verify_license_key(key: str | None = None) -> LicenseStatus:
     Post: returns LicenseStatus tuple
     """
     if key is None:
-        key = os.getenv("CORTEX_LICENSE_KEY", "").strip()
+        key = (
+            os.getenv("BABYLON60_LICENSE_KEY")
+            or os.getenv("BABYLON_LICENSE_KEY")
+            or os.getenv("CORTEX_LICENSE_KEY", "")
+        ).strip()
 
     if not key:
         return LicenseStatus(

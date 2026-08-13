@@ -1,0 +1,47 @@
+name: Publish Rust Crates to Crates.io
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  publish-crates:
+    name: Publish Workspace Crates to Crates.io
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Cargo Dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-publish-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Topological Publish to Crates.io
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+        run: |
+          set -e
+          echo "==> Publishing independent base crates..."
+          cargo publish --p babylon60-proof-ir --allow-dirty || true
+          cargo publish --p babylon60-kernel --allow-dirty || true
+          cargo publish --p babylon60-runtime --allow-dirty || true
+          cargo publish --p nul-zk --allow-dirty || true
+          
+          echo "==> Waiting for index propagation..."
+          sleep 15
+
+          echo "==> Publishing dependent crates..."
+          cargo publish --p babylon60-compiler --allow-dirty || true
+          cargo publish --p babylon60-fuzz --allow-dirty || true
+          cargo publish --p strike_rs --allow-dirty || true

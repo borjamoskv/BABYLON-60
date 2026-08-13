@@ -32,7 +32,9 @@ class CognitiveTransitionLedger:
     """Event Sourced WAL for 10k nodes (Zero-Anergy BFT Ledger)"""
 
     def __init__(self):
-        self.wal_path = ".cortex/legion_10k.wal"
+        base_dir = Path(os.getenv("BABYLON_HOME", str(Path.home() / ".babylon60")))
+        base_dir.mkdir(parents=True, exist_ok=True)
+        self.wal_path = str(base_dir / "legion_10k.wal")
         self.total_exergy_loss = 0.0
         # In a real C5-REAL system, this connects to the Rust FFI (libverifiable_inference_engine.dylib)
 

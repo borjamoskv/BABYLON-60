@@ -13,7 +13,7 @@ import os
 import sys
 import time
 
-LOCK_FILENAME = ".cortex_thermal_lock"
+LOCK_FILENAME = ".babylon60_thermal_lock"
 MAX_LOCK_AGE_SEC = 300.0
 
 

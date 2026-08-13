@@ -144,7 +144,7 @@ def calculate_calcification(file_path: Path) -> dict | None:
 def audit_calcification(directory: Path, limit: int = 10) -> list[dict]:
     """Scan directory for calcified files."""
     results = []
-    skip_dirs = {".venv", "venv", ".cortex", ".git", "__pycache__", "node_modules"}
+    skip_dirs = {".venv", "venv", ".cortex", ".babylon60", ".git", "__pycache__", "node_modules"}
     for root, dirs, files in os.walk(directory):
         # Skip directories in-place
         dirs[:] = [d for d in dirs if d not in skip_dirs]

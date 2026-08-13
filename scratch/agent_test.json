@@ -1,0 +1,49 @@
+{
+  "title": "Certificado de Cumplimiento Normativo de IA (BABYLON-60 v4.0)",
+  "locale": "es",
+  "compliance_standard": "Reglamento de Inteligencia Artificial de la UE (Reglamento UE 2024/1689 / AESIA)",
+  "supervisory_authority": "Agencia Española de Supervisión de Inteligencia Artificial (AESIA) / UE",
+  "certificate_id": "EU-AIA-CERT-D5464ECFDE31E0CC",
+  "system_identifier": "BABYLON60-PROD-01",
+  "operator": "Enterprise Operator",
+  "issued_at": "2026-08-13T10:07:31Z",
+  "global_merkle_root": "a1b2c3d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890",
+  "quarantine_status": "NOMINAL_LIMPIO",
+  "articles_compliance": {
+    "Article_9_Risk_Management": {
+      "title": "Art. 9: Sistema de Gestión de Riesgos",
+      "status": "CONFORME",
+      "mechanism": "Podador Termodinámico de AST + Motor de Auto-Falsación (Interruptor de Hombre Muerto)",
+      "evidence_hash": "c7b6a45ecbd976b712afb8d39418270c7f6fb497adaa90d98bdbacc11f2e96cb"
+    },
+    "Article_10_Data_Governance": {
+      "title": "Art. 10: Gobernanza de Datos y Linaje",
+      "status": "CONFORME",
+      "mechanism": "Memoria Tipada Sexagesimal F60 + Linaje DAG Merkle-Causal",
+      "evidence_hash": "6754a10673d0991e435f69ab7a6ff2ea961c240e733d6ad23eb0689de98c83dc"
+    },
+    "Article_11_Technical_Documentation": {
+      "title": "Art. 11: Documentación Técnica y Demostración Lean 4",
+      "status": "CONFORME",
+      "mechanism": "Exportación Automática de Proof IR a Lemas de Teorema Lean 4",
+      "evidence_hash": "00d34be6ea7ba4c5d24272e9e07a1ba2eb4edb3c43ab58873791cead77646065"
+    },
+    "Article_12_Record_Keeping_Logging": {
+      "title": "Art. 12: Conservación de Registros / Logging WORM",
+      "status": "CONFORME",
+      "mechanism": "Ledger DAG Merkle-Causal + Sello Criptográfico de Cuarentena WORM",
+      "evidence_hash": "04522f231f6c62c82112198e1a2c79bf32b2e4890edbe4e66ca6af21bd6c915b"
+    },
+    "Article_14_Human_Oversight": {
+      "title": "Art. 14: Control y Supervisión Humana",
+      "status": "CONFORME",
+      "mechanism": "Visualizador Armónico Tonnetz + Inspección de Trazas Causal IR",
+      "evidence_hash": "1a94e6f4f34fb7d31f40857b5a4fdc1d5e8a1e0e21ed2ed73aabddd892e6f5dc"
+    }
+  },
+  "cryptographic_attestation": {
+    "policy": "Sovereign Dual-License v1.0",
+    "attestation_engine": "BABYLON-60 C5-REAL Transducer",
+    "fingerprint": "d5464ecfde31e0cc8ffa51a4a6ada7437c665a170f0a0718f9dd83f63f557a13"
+  }
+}

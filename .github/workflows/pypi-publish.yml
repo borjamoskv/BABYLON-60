@@ -1,34 +1,56 @@
-name: Upload Python Package to PyPI
+name: Publish Signed Python Package to PyPI
 
 on:
   release:
     types: [published]
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read
+  attestations: write
+
 jobs:
   pypi-publish:
-    name: Upload release to PyPI
+    name: Build, Sign & Publish to PyPI
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/p/babylon-60
-    permissions:
-      id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
-      contents: read
-    
+      url: https://pypi.org/p/babylon60
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.x'
-        
-    - name: Install build dependencies
-      run: python -m pip install --upgrade pip build
-      
-    - name: Build package
-      run: python -m build
-      
-    - name: Publish package to PyPI
-      uses: pypa/gh-action-pypi-publish@release/v1
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python & UV
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install UV & Twine
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          python -m pip install --upgrade pip twine
+
+      - name: Build Package Artifacts (sdist & wheel)
+        run: uv build
+
+      - name: Verify Package Metadata
+        run: twine check dist/*
+
+      - name: Generate Build Attestation (SLSA Provenance)
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-path: 'dist/*'
+
+      - name: Sign Distributions with Sigstore
+        uses: sigstore/gh-action-sigstore-python@v3.0.0
+        with:
+          inputs: >-
+            ./dist/*.tar.gz
+            ./dist/*.whl
+
+      - name: Publish Package to PyPI (OIDC Trusted Publishing)
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          verify-metadata: true
