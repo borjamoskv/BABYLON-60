@@ -136,7 +136,7 @@ class CortexPersistLedger:
             raise ValueError("INV_BFT_03: cortex_taint es obligatorio")
 
         payload_json = _canonical_json(event.payload)
-        idempotency_str = f"{event.event_type}\x1f{payload_json}\x1f{event.cortex_taint}"
+        idempotency_str = f"{event.event_type}\x1f{payload_json}\x1f{event.cortex_taint}\x1f{event.agent_id}\x1f{event.domain}"
         event_id = str(uuid.uuid5(NAMESPACE_CORTEX, idempotency_str))
         timestamp = datetime.now(timezone.utc).isoformat()
 
@@ -234,7 +234,7 @@ class CortexPersistLedger:
             raise ValueError("INV_BFT_03: cortex_taint es obligatorio")
 
         payload_json = _canonical_json(ev.payload)
-        idempotency_str = f"{ev.event_type}\x1f{payload_json}\x1f{ev.cortex_taint}"
+        idempotency_str = f"{ev.event_type}\x1f{payload_json}\x1f{ev.cortex_taint}\x1f{ev.agent_id}\x1f{ev.domain}"
         event_id = str(uuid.uuid5(NAMESPACE_CORTEX, idempotency_str))
 
         cursor.execute("SELECT seq, entry_hash, lamport_t FROM cortex_ledger WHERE event_id = ?", (event_id,))
