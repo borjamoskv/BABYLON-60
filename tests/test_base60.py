@@ -3,7 +3,7 @@
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 import pytest
-from babylon60.utils import base60
+from babylon60.primitives import base60
 
 
 def test_base60_integer():
