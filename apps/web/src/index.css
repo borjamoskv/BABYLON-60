@@ -1,21 +1,20 @@
-/* BABYLON-60 v4.0 — Sovereign Industrial Noir Design System */
+@import "tailwindcss";
+
+/* BABYLON-60 v4.0 — Sovereign Industrial Noir 2026 Design System */
 :root {
-  --bg-void: #05070a;
-  --bg-card: rgba(13, 17, 23, 0.75);
-  --bg-card-hover: rgba(22, 27, 34, 0.85);
+  --bg-void: #030508;
+  --bg-card: rgba(10, 14, 23, 0.85);
+  --bg-card-hover: rgba(18, 24, 38, 0.95);
   --border-cyan: rgba(0, 240, 255, 0.25);
-  --border-cyan-glow: rgba(0, 240, 255, 0.6);
-  --border-amber: rgba(255, 183, 0, 0.3);
-  --border-emerald: rgba(0, 255, 157, 0.3);
+  --border-cyan-glow: rgba(0, 240, 255, 0.7);
+  --border-emerald: rgba(16, 185, 129, 0.35);
+  --border-amber: rgba(245, 158, 11, 0.35);
   
   --cyan-primary: #00f0ff;
-  --amber-primary: #ffb700;
-  --emerald-primary: #00ff9d;
-  --magenta-accent: #ff0055;
-  --text-main: #f0f6fc;
-  --text-muted: #8b949e;
-  --text-dim: #484f58;
-
+  --emerald-primary: #10b981;
+  --amber-primary: #f59e0b;
+  --violet-primary: #a855f7;
+  
   --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
@@ -30,7 +29,7 @@ body, html {
   width: 100%;
   height: 100%;
   background-color: var(--bg-void);
-  color: var(--text-main);
+  color: #f1f5f9;
   font-family: var(--font-display);
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
@@ -39,25 +38,25 @@ body, html {
 /* Industrial Grid Mesh Background */
 .c5-grid-bg {
   background-image: 
-    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
+    linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+  background-size: 36px 36px;
 }
 
 /* Glassmorphism Panel */
 .glass-panel {
   background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-cyan);
   border-radius: 12px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-panel:hover {
   border-color: var(--border-cyan-glow);
-  box-shadow: 0 12px 40px 0 rgba(0, 240, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 48px 0 rgba(0, 240, 255, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 /* Custom Scrollbars */
@@ -66,20 +65,20 @@ body, html {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(5, 7, 10, 0.8);
+  background: rgba(3, 5, 8, 0.9);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 240, 255, 0.3);
+  background: rgba(0, 240, 255, 0.35);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 240, 255, 0.6);
+  background: rgba(0, 240, 255, 0.7);
 }
 
 /* Glowing Animations */
 @keyframes pulse-cyan {
-  0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 4px rgba(0, 240, 255, 0.4)); }
-  50% { opacity: 1; filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.9)); }
+  0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.5)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.95)); }
 }
 
 @keyframes scanline {
@@ -95,33 +94,37 @@ body, html {
   font-family: var(--font-mono);
 }
 
+.font-display {
+  font-family: var(--font-display);
+}
+
 /* Badge Styles */
 .c5-badge {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  padding: 3px 8px;
-  border-radius: 4px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  padding: 3px 10px;
+  border-radius: 9999px;
   display: inline-flex;
-  align-items: center;
+  items-center: center;
   gap: 6px;
-}
-
-.badge-emerald {
-  background: rgba(0, 255, 157, 0.12);
-  color: var(--emerald-primary);
-  border: 1px solid rgba(0, 255, 157, 0.3);
+  border: 1px solid transparent;
 }
 
 .badge-cyan {
-  background: rgba(0, 240, 255, 0.12);
-  color: var(--cyan-primary);
-  border: 1px solid rgba(0, 240, 255, 0.3);
+  background: rgba(0, 240, 255, 0.1);
+  color: #67e8f9;
+  border-color: rgba(0, 240, 255, 0.3);
+}
+
+.badge-emerald {
+  background: rgba(16, 185, 129, 0.1);
+  color: #6ee7b7;
+  border-color: rgba(16, 185, 129, 0.3);
 }
 
 .badge-amber {
-  background: rgba(255, 183, 0, 0.12);
-  color: var(--amber-primary);
-  border: 1px solid rgba(255, 183, 0, 0.3);
+  background: rgba(245, 158, 11, 0.1);
+  color: #fcd34d;
+  border-color: rgba(245, 158, 11, 0.3);
 }
