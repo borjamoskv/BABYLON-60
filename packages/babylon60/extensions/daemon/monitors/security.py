@@ -16,8 +16,8 @@ from pathlib import Path
 from typing import Any
 
 from babylon60.extensions.daemon.models import SecurityAlert
-from babylon60.memory.encoder import AsyncEncoder
-from babylon60.memory.sqlite_vec_store import SovereignVectorStoreL2 as VectorStoreL2
+# from babylon60.memory.encoder import AsyncEncoder  # purgado por anergía
+# from babylon60.memory.sqlite_vec_store import SovereignVectorStoreL2 as VectorStoreL2  # purgado por anergía
 
 logger = logging.getLogger("moskv-daemon")
 
@@ -137,7 +137,7 @@ class SecurityMonitor:
 
         db_path = config.DB_PATH
         try:
-            from babylon60.database.core import connect_async
+#             from babylon60.database.core import connect_async  # purgado por anergía
 
             async with await connect_async(db_path) as conn:
                 for alert in alerts:

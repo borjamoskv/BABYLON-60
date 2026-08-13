@@ -15,10 +15,10 @@ import time
 from collections.abc import Callable
 from pathlib import Path
 
-from babylon60.extensions.health.collector import HealthCollector
-from babylon60.extensions.health.models import Grade
-from babylon60.extensions.health.scorer import HealthScorer
-from babylon60.extensions.health.trend import TrendDetector
+# from babylon60.extensions.health.collector import HealthCollector  # purgado por anergía
+# from babylon60.extensions.health.models import Grade  # purgado por anergía
+# from babylon60.extensions.health.scorer import HealthScorer  # purgado por anergía
+# from babylon60.extensions.health.trend import TrendDetector  # purgado por anergía
 
 logger = logging.getLogger("moskv-daemon.health")
 
@@ -51,7 +51,7 @@ class HealthLoop:
         """Run one health check cycle."""
         try:
             if self._db_path:
-                from babylon60.ledger.escape_hatch import record_liveness_sync
+#                 from babylon60.ledger.escape_hatch import record_liveness_sync  # purgado por anergía
 
                 record_liveness_sync(self._db_path)
 

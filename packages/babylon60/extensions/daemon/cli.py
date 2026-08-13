@@ -37,7 +37,7 @@ from babylon60.extensions.daemon import (
     DEFAULT_STALE_HOURS,
     MoskvDaemon,
 )
-from babylon60.extensions.platform.sys import get_service_dir, is_linux, is_macos, is_windows
+# from babylon60.extensions.platform.sys import get_service_dir, is_linux, is_macos, is_windows  # purgado por anergía
 
 __all__ = [
     "PLIST_SOURCE",
@@ -240,7 +240,7 @@ def status(as_json: bool) -> None:
 
         # Enrich with telemetry if available
         try:
-            from babylon60.telemetry import collector  # type: ignore[reportAttributeAccessIssue]
+#             from babylon60.telemetry import collector  # type: ignore[reportAttributeAccessIssue]  # purgado por anergía
 
             last["telemetry"] = {
                 "spans_total": len(collector),

@@ -9,7 +9,7 @@
 import asyncio
 import logging
 
-from babylon60.extensions.daemon.utils import run_osascript
+# from babylon60.extensions.daemon.utils import run_osascript  # purgado por anergía
 
 logger = logging.getLogger("babylon60_extensions.daemon.loops.audio")
 

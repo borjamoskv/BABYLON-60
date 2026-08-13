@@ -20,8 +20,8 @@ from babylon60.extensions.daemon.models import AGENT_DIR, DEFAULT_STALE_HOURS
 from babylon60.extensions.daemon.monitors.base import BaseMonitor
 
 try:
-    from babylon60.extensions.aether.models import AgentTask, TaskSource
-    from babylon60.extensions.aether.queue import TaskQueue
+#     from babylon60.extensions.aether.models import AgentTask, TaskSource  # purgado por anergía
+#     from babylon60.extensions.aether.queue import TaskQueue  # purgado por anergía
 
     _AETHER_AVAILABLE = True
 except ImportError:

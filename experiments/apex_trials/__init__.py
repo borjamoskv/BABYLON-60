@@ -12,7 +12,7 @@ from __future__ import annotations
 from .transducer import Transducer, TransducerResult
 from .ctgov import AmendmentHistory, CtGovClient, CtGovError, HttpCache, classify_history
 from .features import StudyFeatures, extract_features
-from .ledger import AmendmentLedger, BabylonBFTLedgerAdapter, ChainVerification, LedgerEntry
+# from .ledger import AmendmentLedger, BabylonBFTLedgerAdapter, ChainVerification, LedgerEntry  # purgado por anergía
 from .risk_engine import RiskAssessment, assess
 
 # Backwards compatibility aliases

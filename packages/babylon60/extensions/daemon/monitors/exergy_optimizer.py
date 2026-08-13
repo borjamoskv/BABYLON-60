@@ -20,7 +20,7 @@ from typing import Any
 
 from babylon60.extensions.daemon.models import EntropyAlert, ExergyOptimizerAlert
 from babylon60.extensions.daemon.monitors.base import IntervalProjectMonitor
-from babylon60.extensions.exergy_optimizer import ExergyOptimizerEngine
+# from babylon60.extensions.exergy_optimizer import ExergyOptimizerEngine  # purgado por anergía
 
 logger = logging.getLogger("moskv-daemon")
 

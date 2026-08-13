@@ -20,7 +20,7 @@ from pydantic import BaseModel, Field
 from babylon60.crypto.hash_registry import cortex_hash
 from babylon60.engine.cognitive.endocrine import ENDOCRINE, HormoneType
 from babylon60.extensions.swarm.byzantine import ByzantineConsensus
-from babylon60.swarm.aleph_omega import AxiomaticLeapEngine
+# from babylon60.swarm.aleph_omega import AxiomaticLeapEngine  # purgado por anergía
 
 __all__ = [
     "CentauroEngine",
@@ -98,7 +98,7 @@ class VirtualAgent:
             # ── Causal-Determinist path ──────────────────────────────────────────
             # [K1] FAIL-FAST: No try/except masking. Execution failure must crash the node
             # and be handled by the Byzantine Consensus (as a faulty node).
-            from babylon60.extensions.llm._models import CortexPrompt, IntentProfile
+#             from babylon60.extensions.llm._models import CortexPrompt, IntentProfile  # purgado por anergía
 
             # War Council: Cognitive Diversity Mapping
             intent_map = {
@@ -319,7 +319,7 @@ class CentauroEngine:
         try:
             # 🌌 [P0] Ultrathink Physics Collapse
             if formation == Formation.ULTRATHINK or epicenter_radius is not None:
-                from babylon60.engine.core.ultrathink_physics import UltrathinkPhysicsEngine
+#                 from babylon60.engine.core.ultrathink_physics import UltrathinkPhysicsEngine  # purgado por anergía
 
                 # Assume default P0 if explicitly ULTRATHINK but missing parameters
                 radius = epicenter_radius or 10

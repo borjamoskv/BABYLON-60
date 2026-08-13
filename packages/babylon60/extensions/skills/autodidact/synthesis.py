@@ -20,12 +20,12 @@ import re
 import time
 from typing import Any
 
-from babylon60.extensions.llm._models import CortexPrompt
-from babylon60.extensions.llm.provider import LLMProvider
-from babylon60.extensions.llm.router import CortexLLMRouter, IntentProfile
-from babylon60.memory.encoder import AsyncEncoder
-from babylon60.memory.models import CortexFactModel
-from babylon60.memory.sqlite_vec_store import SovereignVectorStoreL2
+# from babylon60.extensions.llm._models import CortexPrompt  # purgado por anergía
+# from babylon60.extensions.llm.provider import LLMProvider  # purgado por anergía
+# from babylon60.extensions.llm.router import CortexLLMRouter, IntentProfile  # purgado por anergía
+# from babylon60.memory.encoder import AsyncEncoder  # purgado por anergía
+# from babylon60.memory.models import CortexFactModel  # purgado por anergía
+# from babylon60.memory.sqlite_vec_store import SovereignVectorStoreL2  # purgado por anergía
 from babylon60.utils.pulmones import sovereign_circuit_breaker
 from babylon60.utils.turboquant import optimize_vector_qjl
 

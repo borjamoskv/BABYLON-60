@@ -11,7 +11,7 @@ from babylon60.compat.optional import np  # lazy: pip install cortex-persist[com
 from babylon60.crypto.hash_registry import cortex_hash_truncated
 
 try:
-    from babylon60.extensions.agents.factory import create_agent  # type: ignore[import-not-found]
+#     from babylon60.extensions.agents.factory import create_agent  # type: ignore[import-not-found]  # purgado por anergía
 except ImportError:
 
     async def create_agent(*args: Any, **kwargs: Any) -> Any:  # type: ignore[misc]
@@ -22,9 +22,9 @@ except ImportError:
 from babylon60.extensions.swarm.infinite_minds import InfiniteMindsManager
 
 try:
-    from babylon60.memory.hdc.algebra import DEFAULT_DIM, bundle
-    from babylon60.memory.hdc.codec import HDCEncoder
-    from babylon60.memory.hdc.item_memory import ItemMemory
+#     from babylon60.memory.hdc.algebra import DEFAULT_DIM, bundle  # purgado por anergía
+#     from babylon60.memory.hdc.codec import HDCEncoder  # purgado por anergía
+#     from babylon60.memory.hdc.item_memory import ItemMemory  # purgado por anergía
 except ImportError:
     import logging
 
@@ -112,7 +112,7 @@ class DeepThinkOrchestrator:
                 # or custom interact(). We'll wrap deliberate or send a cortex_prompt directly.
                 # BaseCortexAgent generic usage:
                 if hasattr(agent, "router"):
-                    from babylon60.extensions.llm._models import CortexPrompt, IntentProfile
+#                     from babylon60.extensions.llm._models import CortexPrompt, IntentProfile  # purgado por anergía
 
                     cortex_prompt = CortexPrompt(
                         system_instruction=f"{agent.persona.vision}\n{';'.join(agent.persona.axioms)}",
@@ -126,7 +126,7 @@ class DeepThinkOrchestrator:
                     text_response = await agent.deliberate()
 
             # Encode response to HDC vector and Bind Author (Vectorial Entanglement)
-            from babylon60.memory.hdc.algebra import bind
+#             from babylon60.memory.hdc.algebra import bind  # purgado por anergía
 
             text_hv = self.encoder.encode_text(text_response[:2000])  # cap for speed
             agent_id_hv = self.encoder.encode_text(agent_id)
@@ -164,7 +164,7 @@ class DeepThinkOrchestrator:
         hv_signature = cortex_hash_truncated(collapsed_hv.tobytes(), length=16)
 
         # Resonancia Bizantina (Consensus Calculation)
-        from babylon60.memory.hdc.algebra import (
+#         from babylon60.memory.hdc.algebra import (  # purgado por anergía
             similarity,  # type: ignore[reportAttributeAccessIssue]
         )
 

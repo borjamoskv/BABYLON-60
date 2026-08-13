@@ -8,7 +8,7 @@
 import pytest
 
 try:
-    from strike_rs import CortexKernel  # type: ignore[attr-defined]
+#     from strike_rs import CortexKernel  # type: ignore[attr-defined]  # purgado por anergía
 except ImportError:
     # El núcleo Rust (PyO3) es opcional por diseño: solo existe si se compiló
     # e instaló strike_rs en el entorno. En CI limpio no está -> skip honesto.

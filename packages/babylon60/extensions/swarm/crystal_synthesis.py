@@ -19,9 +19,9 @@ import logging
 import re
 from typing import Any
 
-from babylon60.extensions.llm._models import CortexPrompt, IntentProfile
-from babylon60.extensions.llm.provider import LLMProvider
-from babylon60.extensions.llm.router import CortexLLMRouter
+# from babylon60.extensions.llm._models import CortexPrompt, IntentProfile  # purgado por anergía
+# from babylon60.extensions.llm.provider import LLMProvider  # purgado por anergía
+# from babylon60.extensions.llm.router import CortexLLMRouter  # purgado por anergía
 
 logger = logging.getLogger("babylon60_extensions.swarm.crystal_synthesis")
 

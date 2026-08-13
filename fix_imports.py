@@ -6,10 +6,10 @@ def fix_imports():
         data = json.load(f)
         
     for finding in data.get('findings', []):
-        if finding['clase'] in ('FANTASMA_INTERNO', 'FANTASMA', 'SIMBOLO_FANTASMA'):
-            for pt in finding['puntos']:
-                filepath = Path(pt['fichero'])
-                line_idx = pt['linea'] - 1
+        if finding.get('kind') in ('FANTASMA_INTERNO', 'FANTASMA', 'SIMBOLO_FANTASMA'):
+            for pt in finding.get('sites', []):
+                filepath = Path(pt['file'])
+                line_idx = pt['line'] - 1
                 
                 if filepath.exists():
                     lines = filepath.read_text().splitlines()
@@ -19,7 +19,7 @@ def fix_imports():
                         if not original.strip().startswith('#'):
                             lines[line_idx] = f"# {original}  # purgado por anergía"
                             filepath.write_text('\n'.join(lines) + '\n')
-                            print(f"Fixed {filepath}:{pt['linea']}")
+                            print(f"Fixed {filepath}:{pt['line']}")
 
 if __name__ == '__main__':
     fix_imports()

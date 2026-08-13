@@ -12,7 +12,7 @@ import logging
 import time
 from typing import Any
 
-from babylon60.memory.homeostasis import EntropyPruner
+# from babylon60.memory.homeostasis import EntropyPruner  # purgado por anergía
 
 logger = logging.getLogger("moskv-daemon")
 

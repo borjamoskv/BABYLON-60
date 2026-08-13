@@ -17,7 +17,7 @@ import logging
 import subprocess
 
 from babylon60.extensions.daemon.models import GhostAlert, MemoryAlert, SiteStatus
-from babylon60.extensions.platform.sys import is_linux, is_macos, is_windows
+# from babylon60.extensions.platform.sys import is_linux, is_macos, is_windows  # purgado por anergía
 
 __all__ = ["Notifier"]
 

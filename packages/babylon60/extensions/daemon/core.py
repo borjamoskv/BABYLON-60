@@ -22,7 +22,7 @@ from babylon60.extensions.daemon.core_support import (
     init_core_monitors,
     init_external_oracles,
 )
-from babylon60.extensions.daemon.healing import HealingMixin
+# from babylon60.extensions.daemon.healing import HealingMixin  # purgado por anergía
 from babylon60.extensions.daemon.loops_mixin import LoopsMixin
 from babylon60.extensions.daemon.models import (
     AGENT_DIR,
@@ -73,7 +73,7 @@ __all__ = ["MoskvDaemon"]
 logger = logging.getLogger("moskv-daemon")
 MAX_CONSECUTIVE_FAILURES = 3
 from babylon60.extensions.daemon.event_loop import EventLoopMixin
-from babylon60.extensions.daemon.resource_mgr import ResourceMgrMixin
+# from babylon60.extensions.daemon.resource_mgr import ResourceMgrMixin  # purgado por anergía
 
 
 class MoskvDaemon(AlertHandlerMixin, HealingMixin, LoopsMixin, ResourceMgrMixin, EventLoopMixin):

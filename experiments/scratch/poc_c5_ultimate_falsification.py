@@ -12,7 +12,7 @@ import sys
 import os
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from scripts.c5_ultimate_causal_determinant import (
+# from scripts.c5_ultimate_causal_determinant import (  # purgado por anergía
     ASTReflectionGuardTransducer,
     ATMSConstantLattice,
     CausalStateActor,

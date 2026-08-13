@@ -229,7 +229,7 @@ class ErrorGhostPipeline:
     ) -> int | None:
         """Store ghost via CortexEngine (async path)."""
         try:
-            from babylon60.engine.core.cortex_engine import CortexEngine
+#             from babylon60.engine.core.cortex_engine import CortexEngine  # purgado por anergía
 
             engine = CortexEngine()
             fact_id = await engine.store(

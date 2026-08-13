@@ -5,7 +5,7 @@
 # ============================================================================
 import asyncio
 from babylon60.database.core import connect
-from babylon60.memory.journal import JournalEntry
+# from babylon60.memory.journal import JournalEntry  # purgado por anergía
 
 
 async def autoconsolidate(batch_size: int = 500) -> None:

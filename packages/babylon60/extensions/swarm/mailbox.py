@@ -14,7 +14,7 @@ from __future__ import annotations
 import json
 from typing import Any
 
-from babylon60.database.core import connect_async
+# from babylon60.database.core import connect_async  # purgado por anergía
 
 
 class AtomicMailbox:

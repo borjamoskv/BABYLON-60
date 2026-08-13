@@ -10,7 +10,7 @@
 import math
 import random
 from typing import List
-from babylon60.cortex_mamba_network import MambaNetwork
+# from babylon60.cortex_mamba_network import MambaNetwork  # purgado por anergía
 
 
 def softmax(logits: List[float], temperature: float = 1.0) -> List[float]:

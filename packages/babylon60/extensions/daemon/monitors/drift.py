@@ -66,7 +66,7 @@ class DriftMonitorDaemon:
 
     def _run_check(self) -> list[DriftAlert]:
         """Execute the actual drift check against persisted baseline."""
-        from babylon60.memory.drift import DriftMonitor, model_hash_from_name
+#         from babylon60.memory.drift import DriftMonitor, model_hash_from_name  # purgado por anergía
 
         model_hash = model_hash_from_name(self.model_name)
         signature_dir = self.cortex_dir / "drift"

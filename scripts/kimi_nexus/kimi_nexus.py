@@ -9,7 +9,7 @@ from openai import OpenAI
 
 # Attempt to import FastMCP. If missing, we'll inform the user via logs.
 try:
-    from mcp.server.fastmcp import FastMCP
+#     from mcp.server.fastmcp import FastMCP  # purgado por anergía
 except ImportError:
     print("Error: The 'mcp' package is not installed. Please run: pip install mcp", file=sys.stderr)
     sys.exit(1)

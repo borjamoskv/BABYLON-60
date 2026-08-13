@@ -16,7 +16,7 @@ from pytrends.request import TrendReq  # pyright: ignore[reportMissingImports]
 from requests.exceptions import RequestException
 
 from babylon60.extensions.daemon.models import TrendsAlert
-from babylon60.extensions.daemon.sidecar.trends_oracle.config import TrendsConfig
+# from babylon60.extensions.daemon.sidecar.trends_oracle.config import TrendsConfig  # purgado por anergía
 
 logger = logging.getLogger("moskv-daemon")
 

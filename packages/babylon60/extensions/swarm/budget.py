@@ -77,7 +77,7 @@ class SwarmBudgetManager:
 
         now = time.monotonic()
         try:
-            from babylon60.database.core import causal_write
+#             from babylon60.database.core import causal_write  # purgado por anergía
 
             with db_connect(str(self.db_path)) as conn:
                 with causal_write(conn):

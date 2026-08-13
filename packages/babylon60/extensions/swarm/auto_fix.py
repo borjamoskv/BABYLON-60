@@ -231,10 +231,10 @@ class AutoFixPipeline:
 
     async def _execute(self, task_dict: dict[str, Any]) -> dict[str, Any]:
         """Execute the fix task via Aether in an isolated worktree."""
-        from babylon60.extensions.aether.models import AgentTask, TaskStatus
-        from babylon60.extensions.aether.queue import TaskQueue
-        from babylon60.extensions.aether.runner import AetherAgent
-        from babylon60.extensions.swarm.worktree_isolation import isolated_worktree
+#         from babylon60.extensions.aether.models import AgentTask, TaskStatus  # purgado por anergía
+#         from babylon60.extensions.aether.queue import TaskQueue  # purgado por anergía
+#         from babylon60.extensions.aether.runner import AetherAgent  # purgado por anergía
+#         from babylon60.extensions.swarm.worktree_isolation import isolated_worktree  # purgado por anergía
 
         task = AgentTask.from_dict(task_dict)
         queue = TaskQueue()

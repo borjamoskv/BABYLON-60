@@ -17,8 +17,8 @@ import re
 import time
 from typing import Any
 
-from babylon60.extensions.llm._models import CortexPrompt
-from babylon60.extensions.llm.router import CortexLLMRouter, IntentProfile
+# from babylon60.extensions.llm._models import CortexPrompt  # purgado por anergía
+# from babylon60.extensions.llm.router import CortexLLMRouter, IntentProfile  # purgado por anergía
 from babylon60.utils.pulmones import sovereign_circuit_breaker
 
 logger = logging.getLogger("CORTEX.AUTODIDACT.CANARY_EMULATOR")

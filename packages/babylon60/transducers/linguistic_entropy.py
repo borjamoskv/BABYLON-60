@@ -140,7 +140,7 @@ class LinguisticEntropyDetector:
 
     @staticmethod
     def _shannon(items: list[str]) -> float:
-        from babylon60.extensions.security.utils import calculate_distribution_entropy
+#         from babylon60.extensions.security.utils import calculate_distribution_entropy  # purgado por anergía
 
         return calculate_distribution_entropy(Counter(items))
 
@@ -237,7 +237,7 @@ class LinguisticEntropyDetector:
         for i in range(0, len(words) - window_size, window_size // 2):
             chunk = words[i : i + window_size]
             counts = Counter(chunk)
-            from babylon60.extensions.security.utils import calculate_distribution_entropy
+#             from babylon60.extensions.security.utils import calculate_distribution_entropy  # purgado por anergía
 
             h = calculate_distribution_entropy(counts)
             windows.append(h)
