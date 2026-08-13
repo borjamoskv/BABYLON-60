@@ -10,19 +10,19 @@ interface CommandOutput {
 export const TerminalHero: React.FC = () => {
   const [activeCmd, setActiveCmd] = useState<string>('pip install babylon60');
   const [terminalOutput, setTerminalOutput] = useState<string>(
-    `$ pip install babylon60\n[+] Downloading babylon60-4.0.0-py3-none-any.whl (1.4 MB)\n[+] Verified Sigstore OIDC Signature: PASS\n[+] Installed babylon60-4.0.0 successfully.`
+    `$ pip install babylon60\n[+] Downloading babylon60-1.0.2-py3-none-any.whl (1.4 MB)\n[+] Verifying SHA256 package hash: PASS\n[+] Installed babylon60-1.0.2 successfully.`
   );
 
   const commands: CommandOutput[] = [
     {
       command: 'pip install babylon60',
       type: 'python',
-      output: `$ pip install babylon60\n[+] Downloading babylon60-4.0.0-py3-none-any.whl (1.4 MB)\n[+] Verified Sigstore OIDC Signature: PASS\n[+] SLSA Provenance Attestation: VALID\n[+] Installed babylon60-4.0.0 successfully.`
+      output: `$ pip install babylon60\n[+] Downloading babylon60-1.0.2-py3-none-any.whl (1.4 MB)\n[+] Verifying SHA256 package hash: PASS\n[+] Installed babylon60-1.0.2 successfully.`
     },
     {
       command: 'babylon60-compliance --bundle artifact_bundle_v3 --format html',
       type: 'compliance',
-      output: `$ babylon60-compliance --bundle artifact_bundle_v3 --format html --output cert.html\n[+] Auditando Artículos 9, 10, 11, 12, 14 del EU AI Act...\n[+] Z3 SMT Risk Mitigation Check: 100% PASS\n[+] Generando Certificado HTML en: cert.html (SHA256: 30512f6f4a4b...)`
+      output: `$ babylon60-compliance --bundle artifact_bundle_v3 --format html --output report.html\n[+] Auditando Artículos 9, 10, 11, 12, 14 del EU AI Act...\n[+] Z3 SMT Risk Mitigation Check: 100% PASS\n[+] Generando Informe de Auto-Evaluación en: report.html (SHA256: 30512f6f4a4b...)`
     },
     {
       command: 'babylon60-license generate --owner "AcmeCorp" --tier enterprise',
@@ -32,7 +32,7 @@ export const TerminalHero: React.FC = () => {
     {
       command: 'babylon60-mcp --port 8080',
       type: 'mcp',
-      output: `$ babylon60-mcp --port 8080\n[+] C5-REAL MCP Server listening on stdio & http://localhost:8080\n[+] Ledger WAL path resolved to: $BABYLON_HOME/mcp_ledger.db\n[+] Exposed Tools: [bft_append, verify_merkle_root, generate_compliance_cert, validate_license_key]`
+      output: `$ babylon60-mcp --port 8080\n[+] C5-REAL MCP Server listening on stdio & http://localhost:8080\n[+] Ledger WAL path resolved to: $BABYLON_HOME/mcp_ledger.db\n[+] Exposed Tools: [bft_append, verify_merkle_root, generate_compliance_report, validate_license_key]`
     }
   ];
 
