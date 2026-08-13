@@ -49,6 +49,12 @@ function App() {
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
                   <button 
+                    onClick={() => handleCTA('blog')} 
+                    className="px-6 py-3 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 rounded-xl text-xs font-mono font-bold text-amber-300 transition-all shadow-[0_0_20px_rgba(245,158,11,0.25)]"
+                  >
+                    📝 BLOG EXÉRGICO
+                  </button>
+                  <button 
                     onClick={() => handleCTA('compliance')} 
                     className="px-6 py-3 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/50 rounded-xl text-xs font-mono font-bold text-emerald-300 transition-all shadow-[0_0_20px_rgba(16,185,129,0.25)]"
                   >
@@ -180,6 +186,7 @@ function App() {
           </div>
         )}
 
+        {activeTab === 'blog' && <BlogPortal />}
         {activeTab === 'compliance' && <ComplianceInspector />}
         {activeTab === 'license' && <LicensePortal />}
         {activeTab === 'swarm' && <SwarmMonitor />}
