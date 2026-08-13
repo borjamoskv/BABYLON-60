@@ -51,7 +51,7 @@ class EventLoopMixin:
 
     def run(self, interval: int = DEFAULT_INTERVAL) -> None:
         """Run the daemon using the sovereign async loop (all subsystems as tasks)."""
-        from babylon60.events.loop import sovereign_run
+#         from babylon60.events.loop import sovereign_run  # purgado por anergía
 
         logger.info("🚀 MOSKV-1 Daemon starting in sovereign async mode (interval=%ds)", interval)
         sovereign_run(self.run_sovereign(interval=interval))

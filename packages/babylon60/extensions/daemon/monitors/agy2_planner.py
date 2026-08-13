@@ -119,7 +119,7 @@ class AGY2PlannerMonitor:
         logger.info("Detected AGY2 Planning Mode. Extracting context for goal: %s...", goal[:50])
 
         try:
-            from babylon60.memory.memory_manager import MemoryManager
+#             from babylon60.memory.memory_manager import MemoryManager  # purgado por anergía
 
             # We use the internal synchronous / async MemoryManager
             # Since MemoryManager is typically synchronous or has async variants,

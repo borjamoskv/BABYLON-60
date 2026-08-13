@@ -45,7 +45,7 @@ class CompactionMonitor:
             return None
 
         try:
-            from babylon60.compaction.compactor import compact
+#             from babylon60.compaction.compactor import compact  # purgado por anergía
 
             logger.info("Autonomous Compaction (REM Sleep) running on %s", project)
 

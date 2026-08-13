@@ -35,7 +35,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from babylon60.extensions.swarm.swarm_heartbeat import SWARM_HEARTBEAT
-from babylon60.extensions.swarm.worktree_isolation import isolated_worktree
+# from babylon60.extensions.swarm.worktree_isolation import isolated_worktree  # purgado por anergía
 
 logger = logging.getLogger("babylon60_extensions.swarm.josu_daemon")
 
@@ -118,7 +118,7 @@ class JosuProactiveDaemon:
 
         # Co-launch Toolbox watchdog (Ω₀ self-reference)
         try:
-            from babylon60.mcp_server.toolbox_watchdog import (
+#             from babylon60.mcp_server.toolbox_watchdog import (  # purgado por anergía
                 ToolboxWatchdog,
             )
 
@@ -181,7 +181,7 @@ class JosuProactiveDaemon:
             try:
                 # Signal planning
                 async with self.db.session() as conn:
-                    from babylon60.extensions.signals.bus import AsyncSignalBus
+#                     from babylon60.extensions.signals.bus import AsyncSignalBus  # purgado por anergía
 
                     bus = AsyncSignalBus(conn)
                     await bus.emit(
@@ -224,7 +224,7 @@ class JosuProactiveDaemon:
                                 source=source_id,
                             )
                             # Invoke HumanEscalationPulse structurally
-                            from babylon60.extensions.swarm.escalation import HumanEscalationPulse
+#                             from babylon60.extensions.swarm.escalation import HumanEscalationPulse  # purgado por anergía
 
                             raise HumanEscalationPulse(
                                 source_id,
@@ -253,7 +253,7 @@ class JosuProactiveDaemon:
                 logger.info("🌿 [JOSU] Worktree lab created at %s", wt_path)
 
                 async with self.db.session() as conn:
-                    from babylon60.extensions.signals.bus import AsyncSignalBus
+#                     from babylon60.extensions.signals.bus import AsyncSignalBus  # purgado por anergía
 
                     bus = AsyncSignalBus(conn)
                     await bus.emit(
@@ -261,7 +261,7 @@ class JosuProactiveDaemon:
                     )
 
                 # Import Pulse lazily to avoid circular deps
-                from babylon60.engine.meta.metabolism import Metabolism
+#                 from babylon60.engine.meta.metabolism import Metabolism  # purgado por anergía
 
                 metabolism = Metabolism(flatline_threshold=3.0)
 
@@ -274,7 +274,7 @@ class JosuProactiveDaemon:
                 #   agent.live()
 
                 # For now: delegate to AgentToolkit + simple heuristic
-                from babylon60.extensions.aether.tools import AgentToolkit
+#                 from babylon60.extensions.aether.tools import AgentToolkit  # purgado por anergía
 
                 toolkit = AgentToolkit(wt_path)
 

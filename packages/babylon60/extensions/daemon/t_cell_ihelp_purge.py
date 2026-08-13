@@ -21,7 +21,7 @@ from datetime import datetime, timezone
 from typing import TYPE_CHECKING, Any, Final
 
 # Import the router from the engine
-from babylon60.engine.causal.taint_engine import MHCAntigenRouter, canonicalize_content
+# from babylon60.engine.causal.taint_engine import MHCAntigenRouter, canonicalize_content  # purgado por anergía
 from babylon60.utils.base60 import bytes_to_base60
 
 if TYPE_CHECKING:
@@ -42,7 +42,7 @@ class IHelpPurgeDaemon:
         self.mhc_router: MHCAntigenRouter = mhc_router
 
         # Import dynamically to avoid circular dependencies
-        from babylon60.routes.telemetry import BASE_MAFIA_NODES
+#         from babylon60.routes.telemetry import BASE_MAFIA_NODES  # purgado por anergía
 
         # Escape all regex characters in the nodes, and convert whitespace in nodes to \s+
         escaped_nodes: list[str] = []
@@ -69,7 +69,7 @@ class IHelpPurgeDaemon:
         """
         import sqlite3
 
-        from babylon60.database.core import causal_write
+#         from babylon60.database.core import causal_write  # purgado por anergía
 
         row: tuple[str] | None = None
         try:
@@ -79,7 +79,7 @@ class IHelpPurgeDaemon:
                 row = await cursor.fetchone()
         except sqlite3.OperationalError:
             # Create agents table if missing
-            from babylon60.database.schema_extensions import CREATE_AGENTS
+#             from babylon60.database.schema_extensions import CREATE_AGENTS  # purgado por anergía
 
             with causal_write(conn):
                 await conn.execute(CREATE_AGENTS)
@@ -97,7 +97,7 @@ class IHelpPurgeDaemon:
         """
         Actualiza asintóticamente la reputación del agente de acuerdo con hits/misses de alineación.
         """
-        from babylon60.database.core import causal_write
+#         from babylon60.database.core import causal_write  # purgado por anergía
 
         async with conn.execute(
             "SELECT reputation_score, alignment_hits, alignment_misses FROM agents WHERE id = ?",
@@ -145,10 +145,10 @@ class IHelpPurgeDaemon:
         import os
         import uuid
 
-        from babylon60.audit.ledger import EnterpriseAuditLedger
+#         from babylon60.audit.ledger import EnterpriseAuditLedger  # purgado por anergía
         from babylon60.crypto.keys import KeyManager
-        from babylon60.database.core import connect_async
-        from babylon60.engine.causal.taint_engine import generate_secure_taint_token
+#         from babylon60.database.core import connect_async  # purgado por anergía
+#         from babylon60.engine.causal.taint_engine import generate_secure_taint_token  # purgado por anergía
 
         # Auto-defense check against denial-of-service payload attacks
         if len(payload) > self.MAX_PAYLOAD_BYTES:
@@ -245,9 +245,9 @@ class IHelpPurgeDaemon:
 
         import httpx
 
-        from babylon60.audit.ledger import EnterpriseAuditLedger
-        from babylon60.database.core import connect_async
-        from babylon60.routes.telemetry import BASE_MAFIA_NODES
+#         from babylon60.audit.ledger import EnterpriseAuditLedger  # purgado por anergía
+#         from babylon60.database.core import connect_async  # purgado por anergía
+#         from babylon60.routes.telemetry import BASE_MAFIA_NODES  # purgado por anergía
 
         # Filter out non-domains (e.g. names with spaces or no dots)
         domains: list[str] = [node for node in BASE_MAFIA_NODES if "." in node and " " not in node]

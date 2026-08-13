@@ -28,7 +28,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from babylon60.compat.optional import np  # lazy: pip install cortex-persist[compute]
-from babylon60.extensions.swarm.crystal_thermometer import CrystalVitals
+# from babylon60.extensions.swarm.crystal_thermometer import CrystalVitals  # purgado por anergía
 
 logger = logging.getLogger("babylon60_extensions.swarm.crystal_consolidator")
 
@@ -302,9 +302,9 @@ async def _execute_heuristic_integration(
     dry_run: bool,
 ) -> None:
     """Connect Right-Brain HeuristicEngine to enable automated architectural suggestions."""
-    from babylon60.engine.meta.right_brain import HeuristicEngine
-    from babylon60.extensions.evolution.agents import AgentDomain
-    from babylon60.extensions.evolution.free_energy import FreeEnergyState
+#     from babylon60.engine.meta.right_brain import HeuristicEngine  # purgado por anergía
+#     from babylon60.extensions.evolution.agents import AgentDomain  # purgado por anergía
+#     from babylon60.extensions.evolution.free_energy import FreeEnergyState  # purgado por anergía
 
     if len(vitals) < 2:
         return

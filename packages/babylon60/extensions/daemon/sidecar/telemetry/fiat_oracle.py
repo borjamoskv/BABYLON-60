@@ -61,7 +61,7 @@ class FiatOracle:
         logger.info("💸 [FIAT_ORACLE] (Thread) started.")
         self.running = True
 
-        from babylon60.events.loop import sovereign_run
+#         from babylon60.events.loop import sovereign_run  # purgado por anergía
 
         while self.running:
             try:

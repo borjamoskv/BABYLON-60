@@ -19,9 +19,9 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 # CORTEX L2 Membrane
 from babylon60.engine import CortexEngine
-from babylon60.extensions.immune.membrane import ImmuneMembrane, Verdict
-from babylon60.memory.encoder import AsyncEncoder
-from babylon60.memory.sqlite_vec_store import SovereignVectorStoreL2
+# from babylon60.extensions.immune.membrane import ImmuneMembrane, Verdict  # purgado por anergía
+# from babylon60.memory.encoder import AsyncEncoder  # purgado por anergía
+# from babylon60.memory.sqlite_vec_store import SovereignVectorStoreL2  # purgado por anergía
 
 _security = HTTPBearer(auto_error=False)
 

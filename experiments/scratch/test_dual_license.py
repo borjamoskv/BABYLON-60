@@ -1,7 +1,7 @@
 import os
 
 
-from babylon60.license_manager import generate_license_key
+# from babylon60.license_manager import generate_license_key  # purgado por anergía
 import time
 
 

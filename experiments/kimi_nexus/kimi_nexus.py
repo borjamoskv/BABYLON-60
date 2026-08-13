@@ -1,7 +1,7 @@
 import os
 import httpx
 from dotenv import load_dotenv
-from mcp.server.fastmcp import FastMCP
+# from mcp.server.fastmcp import FastMCP  # purgado por anergía
 try:
     from .swarm_orchestrator import run_swarm_orchestrator
 except ImportError:

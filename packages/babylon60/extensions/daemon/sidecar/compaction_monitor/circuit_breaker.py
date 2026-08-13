@@ -125,7 +125,7 @@ async def call_external_compact(
 
     async def _real_compact():
         try:
-            from babylon60.compaction.compactor import compact
+#             from babylon60.compaction.compactor import compact  # purgado por anergía
 
             if engine is not None:
                 # compact() is sync - run in thread to avoid blocking event loop

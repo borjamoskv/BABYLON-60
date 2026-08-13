@@ -37,7 +37,7 @@ ENTROPY_SURVIVAL_THRESHOLD = 3.5
 
 
 def shannon_density(crystal_text: str) -> float:
-    from babylon60.extensions.security.utils import calculate_shannon_entropy
+#     from babylon60.extensions.security.utils import calculate_shannon_entropy  # purgado por anergía
 
     return calculate_shannon_entropy(crystal_text)
 
@@ -278,7 +278,7 @@ class NightShiftCrystalDaemon:
 
         try:
             from babylon60.extensions.swarm.crystal_consolidator import consolidate
-            from babylon60.extensions.swarm.crystal_thermometer import scan_all_crystals
+#             from babylon60.extensions.swarm.crystal_thermometer import scan_all_crystals  # purgado por anergía
 
             logger.info("🌙 [NIGHTSHIFT] Phase 2: Consolidation (REM) for %s", cycle_id)
 

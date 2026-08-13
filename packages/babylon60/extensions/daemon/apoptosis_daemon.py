@@ -17,7 +17,7 @@ import subprocess
 import time
 from pathlib import Path
 
-from babylon60.audit.ledger import EnterpriseAuditLedger
+# from babylon60.audit.ledger import EnterpriseAuditLedger  # purgado por anergía
 from babylon60.database.core import connect
 
 logger = logging.getLogger("babylon60.daemon.apoptosis")

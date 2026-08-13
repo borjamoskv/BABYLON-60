@@ -129,7 +129,7 @@ class DailyShieldMonitor:
     async def _update_feeds(self) -> dict[str, Any] | None:
         """Update threat intelligence feeds."""
         try:
-            from babylon60.extensions.security.threat_feed import ThreatFeedEngine
+#             from babylon60.extensions.security.threat_feed import ThreatFeedEngine  # purgado por anergía
 
             engine = ThreatFeedEngine()
             report = await engine.update_daily()
@@ -143,7 +143,7 @@ class DailyShieldMonitor:
     async def _run_audit(self) -> dict[str, Any] | None:
         """Run integrity audit."""
         try:
-            from babylon60.extensions.security.integrity_audit import IntegrityAuditor
+#             from babylon60.extensions.security.integrity_audit import IntegrityAuditor  # purgado por anergía
 
             auditor = IntegrityAuditor()
             report = await auditor.full_audit()
@@ -157,7 +157,7 @@ class DailyShieldMonitor:
     def _get_anomaly_stats(self) -> dict[str, Any] | None:
         """Get anomaly detection statistics."""
         try:
-            from babylon60.extensions.security.anomaly_detector import DETECTOR
+#             from babylon60.extensions.security.anomaly_detector import DETECTOR  # purgado por anergía
 
             stats = DETECTOR.get_daily_stats()
             DETECTOR.reset_daily_stats()

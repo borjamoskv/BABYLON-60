@@ -67,7 +67,7 @@ class IdentityBootstrap:
         import time
 
         from babylon60.crypto.hash_registry import cortex_hash
-        from babylon60.crypto.serialization import canonical_serialize
+#         from babylon60.crypto.serialization import canonical_serialize  # purgado por anergía
 
         timestamp = str(time.time())
 

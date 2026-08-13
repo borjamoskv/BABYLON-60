@@ -40,8 +40,8 @@ class SignalMonitor:
             return
 
         try:
-            from babylon60.extensions.signals.bus import SignalBus
-            from babylon60.extensions.signals.reactor import SignalReactor
+#             from babylon60.extensions.signals.bus import SignalBus  # purgado por anergía
+#             from babylon60.extensions.signals.reactor import SignalReactor  # purgado por anergía
 
             # Standard sqlite3 connection for the bus
             self._bus_conn = db_connect(self.db_path)

@@ -35,15 +35,15 @@ from babylon60.extensions.daemon.sidecar.telemetry.fiat_oracle import FiatOracle
 logger = logging.getLogger("moskv-daemon")
 
 try:
-    from babylon60.extensions.aether.daemon import AetherDaemon, AetherMonitor
-    from babylon60.extensions.aether.queue import TaskQueue
+#     from babylon60.extensions.aether.daemon import AetherDaemon, AetherMonitor  # purgado por anergía
+#     from babylon60.extensions.aether.queue import TaskQueue  # purgado por anergía
 
     _AETHER_AVAILABLE = True
 except ImportError:
     _AETHER_AVAILABLE = False
 
 try:
-    from babylon60.extensions.daemon.sidecar.telemetry.iot_oracle import IoTOracle
+#     from babylon60.extensions.daemon.sidecar.telemetry.iot_oracle import IoTOracle  # purgado por anergía
 
     _IOT_ORACLE_AVAILABLE = True
 except ImportError:
@@ -133,7 +133,7 @@ def init_external_oracles(
     daemon.tombstone_monitor = TombstoneMonitor(db_path=file_config.get("db_path", str(CORTEX_DB)))
 
     try:
-        from babylon60.database.pool import CortexConnectionPool
+#         from babylon60.database.pool import CortexConnectionPool  # purgado por anergía
         from babylon60.engine import CortexEngine as AsyncCortexEngine
         from babylon60.extensions.daemon.sidecar.telemetry import ASTOracle
 

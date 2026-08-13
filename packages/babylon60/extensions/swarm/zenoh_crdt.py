@@ -23,7 +23,7 @@ except ImportError:
         "Asyncio emulation has been permanently purged for zero-copy determinism."
     )
 
-from babylon60.memory.crdt import CRDTEngram
+# from babylon60.memory.crdt import CRDTEngram  # purgado por anergía
 
 logger = logging.getLogger("babylon60.swarm.zenoh_crdt")
 
@@ -73,8 +73,8 @@ class ZenohCRDTBridge:
             signatures = {k: bytes.fromhex(v) for k, v in signatures_hex.items()}
 
             # Validate BFT Quorum using the distributed Trust Matrix
-            from babylon60.consensus.bft_quorum import BFTQuorumGuard
-            from babylon60.consensus.pki import trust_matrix
+#             from babylon60.consensus.bft_quorum import BFTQuorumGuard  # purgado por anergía
+#             from babylon60.consensus.pki import trust_matrix  # purgado por anergía
 
             known_peers = trust_matrix.get_known_peers()
             bft_guard = BFTQuorumGuard(known_peers)

@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from babylon60.core import config
-from babylon60.database.core import connect_async
+# from babylon60.database.core import connect_async  # purgado por anergía
 from babylon60.extensions.daemon.models import SecurityAlert
 
 logger = logging.getLogger("moskv-daemon")

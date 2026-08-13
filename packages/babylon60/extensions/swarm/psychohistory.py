@@ -8,7 +8,7 @@ import logging
 from typing import Any
 
 from babylon60.crypto.hash_registry import cortex_hash_truncated
-from babylon60.extensions.llm._models import CortexPrompt, IntentProfile
+# from babylon60.extensions.llm._models import CortexPrompt, IntentProfile  # purgado por anergía
 
 logger = logging.getLogger("babylon60_extensions.swarm.psychohistory")
 

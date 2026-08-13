@@ -18,7 +18,7 @@ import logging
 from pathlib import Path
 from typing import Any
 
-from babylon60.extensions.exergy_optimizer.swarm import ExergyOptimizerSwarm
+# from babylon60.extensions.exergy_optimizer.swarm import ExergyOptimizerSwarm  # purgado por anergía
 
 logger = logging.getLogger("babylon60_extensions.swarm.github_auditor")
 

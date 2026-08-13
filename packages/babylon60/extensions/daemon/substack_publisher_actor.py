@@ -8,7 +8,7 @@ import os
 
 from playwright.async_api import async_playwright
 
-from babylon60.extensions.daemon.gmail_magic_link import GmailMagicLinkExtractor
+# from babylon60.extensions.daemon.gmail_magic_link import GmailMagicLinkExtractor  # purgado por anergía
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger("Cortex.SubstackCDP")
