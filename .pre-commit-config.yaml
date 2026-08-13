@@ -40,3 +40,9 @@ repos:
         language: system
         pass_filenames: false
 
+      - id: verify-distribution-gate
+        name: commercial distribution packaging quality gate
+        entry: python3 scripts/c5_quality_gates/verify_distribution.py
+        language: system
+        pass_filenames: false
+
