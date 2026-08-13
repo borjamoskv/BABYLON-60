@@ -154,7 +154,7 @@ function App() {
                     <li>✅ Servidor MCP `babylon60-mcp`</li>
                     <li>✅ Firma HMAC Comercial</li>
                   </ul>
-                  <a href="https://buy.stripe.com/test_123" target="_blank" rel="noopener noreferrer" className="block text-center w-full py-2.5 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/40 rounded-lg text-cyan-300 text-xs font-bold transition-all">
+                  <a href="https://buy.stripe.com/aFaeVe2nq9G666v9hx3ks00" target="_blank" rel="noopener noreferrer" className="block text-center w-full py-2.5 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/40 rounded-lg text-cyan-300 text-xs font-bold transition-all">
                     OBTENER LICENCIA PRO
                   </a>
                 </div>
