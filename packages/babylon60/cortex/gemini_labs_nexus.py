@@ -17,7 +17,7 @@ import hashlib
 from typing import Dict, Any, Optional
 
 try:
-#     from mcp.server.fastmcp import FastMCP  # purgado por anergía
+    from mcp.server.fastmcp import FastMCP
     HAS_FASTMCP = True
 except ImportError:
     HAS_FASTMCP = False
