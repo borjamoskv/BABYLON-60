@@ -75,3 +75,10 @@ gitleaks-report.json
 secret_audit.sarif
 .kimi-code/
 *.jsonl
+
+# Audio & Research Transcripts
+clean_transcript*.txt
+transcript*.vtt
+docs/04_research/transcripts/
+sample_toxic_chat.txt
+
