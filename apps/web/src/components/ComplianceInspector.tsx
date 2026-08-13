@@ -20,11 +20,11 @@ export const ComplianceInspector: React.FC = () => {
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold mb-2">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              REGULATORY AUDIT CERTIFIER — EU AI ACT
+              AUTO-EVALUACIÓN DE CONFORMIDAD — EU AI ACT
             </div>
-            <h2 className="text-2xl font-bold text-white">Inspección de Certificado de Cumplimiento Regulatorio</h2>
+            <h2 className="text-2xl font-bold text-white">Inspección de Informe de Auto-Evaluación Regulatoria</h2>
             <p className="text-xs text-slate-400 mt-1">
-              Validación automatizada de los Artículos 9–14 para sistemas IA de alto riesgo bajo la CLI <code className="text-emerald-300 font-bold">babylon60-compliance</code>.
+              Generación de evidencia técnica de auto-evaluación interna para los Artículos 9–14 del EU AI Act vía CLI <code className="text-emerald-300 font-bold">babylon60-compliance</code>.
             </p>
           </div>
           <div className="flex gap-2">
@@ -43,6 +43,16 @@ export const ComplianceInspector: React.FC = () => {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* Legal Disclaimer Alert Banner */}
+      <div className="p-4 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono space-y-1">
+        <div className="font-bold flex items-center gap-2">
+          <span>⚠️ DESCARGO LEGAL / SELF-ASSESSMENT NOTICE</span>
+        </div>
+        <p className="text-slate-300 text-[11px]">
+          Esta herramienta genera documentación de auto-evaluación técnica interna para facilitar el cumplimiento del Reglamento UE 2024/1689. No constituye una certificación formal emitida por un Organismo Notificado (Notified Body).
+        </p>
       </div>
 
       {/* Article Selector Cards */}
@@ -72,7 +82,7 @@ export const ComplianceInspector: React.FC = () => {
         <div className="flex justify-between items-center text-xs text-slate-400 border-b border-slate-800 pb-3">
           <span className="flex items-center gap-2 text-slate-200 font-bold">
             <span className="w-2 h-2 rounded-full bg-emerald-400" />
-            VISTA PREVIA DE CERTIFICADO DE CUMPLIMIENTO ({selectedFormat.toUpperCase()})
+            VISTA PREVIA DEL INFORME DE AUTO-EVALUACIÓN ({selectedFormat.toUpperCase()})
           </span>
           <span>SHA-256: 0x9f8b...2c4a | ISO-8601 UTC</span>
         </div>
@@ -81,17 +91,17 @@ export const ComplianceInspector: React.FC = () => {
           <div className="p-4 bg-slate-950 border border-slate-800 rounded font-sans text-xs text-slate-300 space-y-4">
             <div className="border-b border-slate-800 pb-3 flex justify-between items-center">
               <div>
-                <h3 className="text-lg font-bold text-white font-mono">Certificado de Cumplimiento Regulatorio — EU AI Act</h3>
-                <p className="text-xs text-emerald-400 font-mono">Emisor: BABYLON-60 Compliance Engine v4.0.0</p>
+                <h3 className="text-lg font-bold text-white font-mono">Informe de Auto-Evaluación de Conformidad — EU AI Act</h3>
+                <p className="text-xs text-emerald-400 font-mono">Generador: BABYLON-60 Compliance Exporter v4.0.0</p>
               </div>
               <span className="px-3 py-1 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 rounded font-mono text-xs font-bold">
-                AUDITORÍA VÁLIDA
+                AUTO-EVALUACIÓN OK
               </span>
             </div>
 
             <div className="grid grid-cols-2 gap-4 font-mono text-xs">
               <div className="p-3 bg-slate-900/60 rounded border border-slate-800">
-                <span className="text-slate-500 block text-[10px]">ID CERTIFICADO:</span>
+                <span className="text-slate-500 block text-[10px]">ID INFORME:</span>
                 <span className="text-cyan-300 font-bold">B60-EU-AI-ACT-2026-0813-001</span>
               </div>
               <div className="p-3 bg-slate-900/60 rounded border border-slate-800">
