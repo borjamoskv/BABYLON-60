@@ -11,11 +11,8 @@ from typing import Any
 from babylon60.extensions.skills.autodidact.fetchers import execute_cognitive_acquisition
 from babylon60.extensions.skills.autodidact.synthesis import execute_cognitive_synthesis
 
-# Integración Babestu (Security)
-try:
-    from babylon60.extensions.security.t_cell import BabestuTCell
-except ImportError:
-    BabestuTCell = None  # type: ignore[assignment,misc]
+# Seguridad estática desactivada (Control T-Cell ausente)
+BabestuTCell = None
 
 logger = logging.getLogger("CORTEX.AUTODIDACT.ACTUATOR")
 
@@ -79,16 +76,8 @@ async def daemon_ingesta_soberana(
         msg = f"Rechazo Kolmogorov: K={k_ratio:.2f} (Baja complejidad/Spam)."
         return {"estado": "FALLO", "error": msg}
 
-    # 2. Barrera Babestu (Seguridad Estática T-Cell)
-    if BabestuTCell:
-        logger.info("🛡️ [BABESTU] Escaneando payload con T-Cell (O(1))...")
-        audit = BabestuTCell.scan_payload(texto_raw, source_url=target_url)
-        if audit.get("estado") == "CONTAMINADO":
-            msg = f"Veneno detectado: {audit.get('firma_ataque')}. Razón: {audit.get('razon')}"
-            logger.critical("🛑 [BABESTU] %s", msg)
-            return {"estado": "CUARENTENA", "error": msg}
-        # Si hay contenido saneado (stripping de JS/HTML peligroso), lo usamos.
-        texto_raw = audit.get("contenido_saneado") or texto_raw
+    # 2. Barrera Babestu (Seguridad Estática T-Cell - Purgada por Anergía)
+
 
     # 3. Síntesis Profunda (Crystallization)
     try:

@@ -27,7 +27,11 @@ import logging
 from dataclasses import dataclass, field
 from typing import Any
 
-from babylon60.extensions.sync.hlc import HLCTimestamp
+try:
+    from babylon60.extensions.sync.hlc import HLCTimestamp
+except ImportError:
+    HLCTimestamp = Any  # type: ignore[misc, assignment]
+
 
 logger = logging.getLogger("babylon60_extensions.sync.crdt")
 
