@@ -21,7 +21,7 @@ from babylon60.extensions.sync.common import (
     load_sync_state,
     save_sync_state,
 )
-from babylon60.extensions.sync.system import sync_system
+# babylon60.extensions.sync.system import purgado por anergía
 from babylon60.memory.temporal import now_iso
 
 __all__ = ["sync_memory"]
@@ -91,7 +91,7 @@ async def sync_memory(engine: CortexEngine) -> SyncResult:
         return result
 
     await _sync_file(engine, MEMORY_DIR / "ghosts.json", "ghosts", state, _sync_ghosts, result)
-    await _sync_file(engine, MEMORY_DIR / "system.json", "system", state, sync_system, result)
+    # sync_system purgado
     await _sync_file(
         engine, MEMORY_DIR / "mistakes.jsonl", "mistakes", state, _sync_mistakes, result
     )
