@@ -1,0 +1,67 @@
+import sqlite3
+import time
+import random
+import logging
+from typing import Any, Tuple, List, Optional
+from contextlib import contextmanager
+
+logger = logging.getLogger("bft_sqlite")
+
+class BFTDatabaseError(Exception):
+    """Excepción termodinámica para fallos BFT irrecuperables en SQLite."""
+    pass
+
+class BFTSQLite:
+    """
+    Wrapper C5-REAL para SQLite.
+    Mitigación determinista de SQLITE_BUSY usando Exponential Backoff y Jitter.
+    Garantiza que la exergía de la base de datos se mantiene intacta bajo alta concurrencia.
+    """
+    
+    def __init__(self, db_path: str, max_retries: int = 5, base_delay: float = 0.1, max_delay: float = 2.0):
+        self.db_path = db_path
+        self.max_retries = max_retries
+        self.base_delay = base_delay
+        self.max_delay = max_delay
+
+    @contextmanager
+    def _connection(self):
+        """Provee una conexión configurada para serialización estricta y WAL."""
+        conn = sqlite3.connect(self.db_path, isolation_level="IMMEDIATE")
+        conn.row_factory = sqlite3.Row
+        try:
+            conn.execute("PRAGMA journal_mode=WAL;")
+            conn.execute("PRAGMA synchronous=NORMAL;")
+            conn.execute("PRAGMA busy_timeout=5000;")
+            yield conn
+        finally:
+            conn.close()
+
+    def execute_with_backoff(self, query: str, params: tuple = ()) -> sqlite3.Cursor:
+        """
+        Ejecuta un query con mitigación de bloqueos vía Exponential Backoff.
+        """
+        retries = 0
+        while retries <= self.max_retries:
+            try:
+                with self._connection() as conn:
+                    cursor = conn.cursor()
+                    cursor.execute(query, params)
+                    conn.commit()
+                    return cursor
+            except sqlite3.OperationalError as e:
+                if "database is locked" in str(e).lower() or "busy" in str(e).lower():
+                    if retries == self.max_retries:
+                        logger.error(f"[BFT-FAIL] Colapso inminente. Imposible adquirir lock en {self.db_path}.")
+                        raise BFTDatabaseError(f"Max retries reached: {e}")
+                    
+                    # Exponential Backoff with Jitter
+                    delay = min(self.max_delay, self.base_delay * (2 ** retries))
+                    jitter = random.uniform(0, delay * 0.1)
+                    sleep_time = delay + jitter
+                    
+                    logger.warning(f"[BFT-RETRY] SQLITE_BUSY detectado. Intento {retries+1}/{self.max_retries}. Esperando {sleep_time:.3f}s")
+                    time.sleep(sleep_time)
+                    retries += 1
+                else:
+                    raise e
