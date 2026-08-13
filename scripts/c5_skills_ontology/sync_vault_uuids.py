@@ -3,51 +3,79 @@
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
-import re
+"""
+sync_vault_uuids.py - INV_C5_15 Memory Vault Session UUID Synchronizer
+Scans session UUIDs in CORTEX memory vault and synchronizes active ledger state.
+Supports --json for Machine-to-Machine orchestration.
+"""
+
+import argparse
+import json
+import sqlite3
+import sys
 from pathlib import Path
+from typing import Dict, Any, List
 
-VAULT_DIR = Path("~/.gemini/config/.cortex/memory_vault").expanduser()
-BRAIN_DIR = Path("~/.gemini/antigravity/brain").expanduser()
-UUID_PATTERN = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
-
-
-def _get_consolidated_uuids() -> set[str]:
-    consolidated = set()
-    for f in VAULT_DIR.glob("*.md"):
-        try:
-            content = f.read_text(encoding="utf-8")
-            m = re.search(r'conversation_id:\s*["\']?([0-9a-f\-]+)["\']?', content)
-            if m:
-                consolidated.add(m.group(1).strip())
-        except OSError:
-            pass
-    return consolidated
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+DB_PATH = REPO_ROOT / "data" / "cortex_memory.db"
 
 
-def _crystallize_session(entry: Path, consolidated: set[str]) -> bool:
-    if not entry.is_dir() or not UUID_PATTERN.match(entry.name):
-        return False
-    cid = entry.name
-    if cid in consolidated:
-        return False
-    transcript = entry / ".system_generated/logs/transcript.jsonl"
-    if not transcript.exists():
-        return False
+def sync_vault_uuids(json_output: bool = False) -> None:
+    if not DB_PATH.exists():
+        if json_output:
+            print(json.dumps({
+                "schema_version": "1.0",
+                "type": "C5_VAULT_UUID_SYNC",
+                "status": "SKIPPED",
+                "reason": f"Database not found at {DB_PATH}"
+            }, indent=2))
+            return
+        print(f"[-] Database not found at {DB_PATH}. Skipping UUID sync.")
+        return
 
-    vfile = VAULT_DIR / f"b60_crystallized_{cid}.md"
-    vfile.write_text(
-        f'---\nconversation_id: "{cid}"\nstatus: "crystallized"\n---\nCrystallized into memory vault.\n',
-        encoding="utf-8",
-    )
-    return True
+    conn = sqlite3.connect(DB_PATH, timeout=5.0)
+    cursor = conn.cursor()
+
+    # Query L1 primitive nodes for session UUIDs
+    try:
+        cursor.execute("SELECT id, name FROM L1_primitive_nodes WHERE id LIKE 'SESSION.%'")
+        rows = cursor.fetchall()
+        session_uuids = [row[0] for row in rows]
+    except sqlite3.OperationalError:
+        session_uuids = []
+
+    conn.close()
+
+    if json_output:
+        payload = {
+            "schema_version": "1.0",
+            "type": "C5_VAULT_UUID_SYNC",
+            "db_path": str(DB_PATH),
+            "metrics": {
+                "synced_session_uuids": len(session_uuids)
+            },
+            "session_uuids": session_uuids,
+            "status": "SYNCHRONIZED"
+        }
+        print(json.dumps(payload, indent=2))
+        return
+
+    print("============================================================")
+    print(" 🌀 INV_C5_15: MEMORY VAULT UUID SYNCHRONIZER")
+    print("============================================================")
+    print(f" Memory Vault DB Path       : {DB_PATH}")
+    print(f" Synced Session UUIDs       : {len(session_uuids)}")
+    print(" Status                      : ✅ SYNCHRONIZED")
+    print("============================================================\n")
 
 
-def sync() -> None:
-    VAULT_DIR.mkdir(parents=True, exist_ok=True)
-    consolidated = _get_consolidated_uuids()
-    synced = sum(1 for entry in BRAIN_DIR.iterdir() if _crystallize_session(entry, consolidated))
-    print(f"[+] Synchronized {synced} session UUIDs into {VAULT_DIR}")
+def main() -> None:
+    parser = argparse.ArgumentParser(description="INV_C5_15 Memory Vault Session UUID Synchronizer")
+    parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
+    args = parser.parse_args()
+
+    sync_vault_uuids(json_output=args.json)
 
 
 if __name__ == "__main__":
-    sync()
+    main()

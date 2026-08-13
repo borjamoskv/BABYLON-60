@@ -193,6 +193,7 @@ dependencies = [
  "loom",
  "num-bigint",
  "proptest",
+ "pyo3",
  "rusqlite",
  "serde",
  "serde_json",
