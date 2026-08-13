@@ -1,0 +1,3404 @@
+{
+  "repo": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+  "reachability": "medida",
+  "entrypoints": [
+    "apps/babylon60-ide/backend/main.py",
+    "apps/babylon60-ide/backend/mcp_symbol_transducer.py",
+    "crates/babylon60-compiler/lean_backend.py",
+    "docs/reference/interpreter.py",
+    "experiments/1_Operaciones_Activas/scripts/59_autodidact_falsification_test.py",
+    "experiments/1_Operaciones_Activas/scripts/59_autodidact_omega_deep_research_engine.py",
+    "experiments/1_Operaciones_Activas/verifiable_inference_suite/run_verifiable_suite.py",
+    "experiments/anvil_yung/lib/forge-std/scripts/vm.py",
+    "experiments/apex_trials/cli.py",
+    "experiments/causal_isomorphism/cli.py",
+    "experiments/kimi_nexus/kimi_nexus.py",
+    "experiments/kimi_nexus/test_swarm.py",
+    "experiments/scratch/ci_supply_chain.py",
+    "experiments/scratch/existence_gap.py",
+    "experiments/scratch/improved_map_primitives.py",
+    "experiments/scratch/map_primitives_thermodynamics.py",
+    "experiments/scratch/poc_c5_ultimate_falsification.py",
+    "experiments/scratch/run_kimi.py",
+    "experiments/scratch/test_dual_license.py",
+    "experiments/scratch/test_hypervisor.py"
+  ],
+  "reachable_files": 258,
+  "total_python_files": 513,
+  "demoted_by_reachability": [
+    {
+      "kind": "LOCAL_DESALINEADO",
+      "file": "scripts/c5_legion/legion_swarm_core.py",
+      "sin_alcanzabilidad": "alto",
+      "con_alcanzabilidad": "bajo"
+    },
+    {
+      "kind": "FANTASMA",
+      "file": "packages/babylon60/cortex/cortex_mamba_inference.py",
+      "sin_alcanzabilidad": "medio",
+      "con_alcanzabilidad": "informativo"
+    },
+    {
+      "kind": "FANTASMA",
+      "file": "packages/babylon60/crypto/bootstrap.py",
+      "sin_alcanzabilidad": "alto",
+      "con_alcanzabilidad": "informativo"
+    },
+    {
+      "kind": "FANTASMA",
+      "file": "packages/babylon60/crypto/aes.py",
+      "sin_alcanzabilidad": "alto",
+      "con_alcanzabilidad": "informativo"
+    },
+    {
+      "kind": "FANTASMA",
+      "file": "packages/babylon60/crypto/keys.py",
+      "sin_alcanzabilidad": "alto",
+      "con_alcanzabilidad": "informativo"
+    },
+    {
+      "kind": "FANTASMA",
+      "file": "packages/babylon60/extensions/swarm/crystal_synthesis.py",
+      "sin_alcanzabilidad": "medio",
+      "con_alcanzabilidad": "informativo"
+    },
+    {
+      "kind": "FANTASMA",
+      "file": "packages/babylon60/extensions/swarm/nightshift_daemon.py",
+      "sin_alcanzabilidad": "medio",
+      "con_alcanzabilidad": "informativo"
+    },
+    {
+      "kind": "FANTASMA",
+      "file": "packages/babylon60/transducers/export.py",
+      "sin_alcanzabilidad": "medio",
+      "con_alcanzabilidad": "informativo"
+    },
+    {
+      "kind": "FANTASMA",
+      "file": "packages/babylon60/transducers/i18n.py",
+      "sin_alcanzabilidad": "medio",
+      "con_alcanzabilidad": "informativo"
+    },
+    {
+      "kind": "FANTASMA",
+      "file": "packages/babylon60/transducers/i18n.py",
+      "sin_alcanzabilidad": "medio",
+      "con_alcanzabilidad": "informativo"
+    },
+    {
+      "kind": "FANTASMA",
+      "file": "apps/babylon60-ide/backend/routes/inference.py",
+      "sin_alcanzabilidad": "medio",
+      "con_alcanzabilidad": "informativo"
+    }
+  ],
+  "syntax_errors": [
+    {
+      "file": "experiments/kimi_nexus/swarm_orchestrator.py",
+      "error": "linea 434: unterminated triple-quoted string literal (detected at line 522)"
+    }
+  ],
+  "counts": {
+    "LOCAL_DESALINEADO": 8,
+    "FANTASMA_INTERNO": 97,
+    "SIMBOLO_FANTASMA": 4,
+    "FANTASMA": 1,
+    "NO_DECLARADO": 21
+  },
+  "findings": [
+    {
+      "ecosystem": "python",
+      "module": "c5_preserve_logs",
+      "kind": "LOCAL_DESALINEADO",
+      "severity": "alto",
+      "flags": [],
+      "note": "existe en el repo (scripts/c5_log_custody/c5_preserve_logs.py) pero se importa como top-level; solo resuelve con el cwd/sys.path correcto",
+      "evidence": "",
+      "declared": false,
+      "in_registry": false,
+      "registry_name": null,
+      "on_disk": [
+        "scripts/c5_log_custody/c5_preserve_logs.py"
+      ],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "scripts/c5_log_custody/c5_preserve_claude_local_logs.py",
+          "line": 10,
+          "imported": "c5_preserve_logs"
+        },
+        {
+          "file": "scripts/c5_log_custody/c5_preserve_agent_local_logs.py",
+          "line": 10,
+          "imported": "c5_preserve_logs"
+        }
+      ],
+      "site_count": 2
+    },
+    {
+      "ecosystem": "python",
+      "module": "generate_scripts_readme",
+      "kind": "LOCAL_DESALINEADO",
+      "severity": "alto",
+      "flags": [
+        "lazy"
+      ],
+      "note": "existe en el repo (scripts/generate_scripts_readme.py) pero se importa como top-level; solo resuelve con el cwd/sys.path correcto",
+      "evidence": "",
+      "declared": false,
+      "in_registry": false,
+      "registry_name": null,
+      "on_disk": [
+        "scripts/generate_scripts_readme.py"
+      ],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "scripts/runner.py",
+          "line": 104,
+          "imported": "generate_scripts_readme"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "legion_swarm_core",
+      "kind": "LOCAL_DESALINEADO",
+      "severity": "alto",
+      "flags": [],
+      "note": "existe en el repo (scripts/c5_legion/legion_swarm_core.py) pero se importa como top-level; solo resuelve con el cwd/sys.path correcto",
+      "evidence": "",
+      "declared": false,
+      "in_registry": false,
+      "registry_name": null,
+      "on_disk": [
+        "scripts/c5_legion/legion_swarm_core.py"
+      ],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "scripts/c5_legion/legion_swarm.py",
+          "line": 17,
+          "imported": "legion_swarm_core"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "exergy_optimizer_agent",
+      "kind": "LOCAL_DESALINEADO",
+      "severity": "alto",
+      "flags": [],
+      "note": "existe en el repo (scripts/c5_thermo/exergy_optimizer_agent.py) pero se importa como top-level; solo resuelve con el cwd/sys.path correcto",
+      "evidence": "",
+      "declared": false,
+      "in_registry": false,
+      "registry_name": null,
+      "on_disk": [
+        "scripts/c5_thermo/exergy_optimizer_agent.py"
+      ],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "scripts/c5_demos/demo_exergy_poc.py",
+          "line": 16,
+          "imported": "exergy_optimizer_agent"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "verify_agent_ontological_value",
+      "kind": "LOCAL_DESALINEADO",
+      "severity": "alto",
+      "flags": [
+        "guarded",
+        "lazy"
+      ],
+      "note": "existe en el repo (scripts/c5_verifiers/verify_agent_ontological_value.py) pero se importa como top-level; solo resuelve con el cwd/sys.path correcto",
+      "evidence": "",
+      "declared": false,
+      "in_registry": false,
+      "registry_name": null,
+      "on_disk": [
+        "scripts/c5_verifiers/verify_agent_ontological_value.py"
+      ],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "scripts/c5_verifiers/purge_residuals.py",
+          "line": 85,
+          "imported": "verify_agent_ontological_value"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "extraction",
+      "kind": "LOCAL_DESALINEADO",
+      "severity": "alto",
+      "flags": [
+        "lazy"
+      ],
+      "note": "existe en el repo (legacy_exergy/paralife-cortex-v2/extraction) pero se importa como top-level; solo resuelve con el cwd/sys.path correcto | ADEMAS 'extraction' existe en PyPI con el mismo nombre: el orden de sys.path decide cual gana (shadowing)",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "extraction",
+      "on_disk": [
+        "legacy_exergy/paralife-cortex-v2/extraction"
+      ],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "legacy_exergy/paralife-cortex-v2/engine/core.py",
+          "line": 66,
+          "imported": "extraction.kant_audit_gate"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.license_manager",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "alto",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/license_manager' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "experiments/scratch/test_dual_license.py",
+          "line": 4,
+          "imported": "babylon60.license_manager"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.security.integrity_audit",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "alto",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/security/integrity_audit' no resuelve a ningun modulo del repo | CONTROL DE SEGURIDAD AUSENTE: el nombre identifica un guard/sandbox/validador. La exclusion por arbol legacy no aplica — el codigo lo importa y la documentacion lo anuncia, pero no existe.",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/shield_monitor.py",
+          "line": 146,
+          "imported": "babylon60.extensions.security.integrity_audit"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "mcp.server.fastmcp",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "medio",
+      "note": "el paquete raiz 'mcp' existe, pero la ruta completa 'mcp/server/fastmcp' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "experiments/kimi_nexus/kimi_nexus.py",
+          "line": 4,
+          "imported": "mcp.server.fastmcp"
+        },
+        {
+          "file": "scripts/kimi_nexus/kimi_nexus.py",
+          "line": 12,
+          "imported": "mcp.server.fastmcp"
+        },
+        {
+          "file": "packages/babylon60/cortex/gemini_labs_nexus.py",
+          "line": 20,
+          "imported": "mcp.server.fastmcp"
+        }
+      ],
+      "site_count": 3
+    },
+    {
+      "ecosystem": "python",
+      "module": "experiments.apex_trials.ledger.BabylonBFTLedgerAdapter",
+      "kind": "SIMBOLO_FANTASMA",
+      "severity": "medio",
+      "note": "el modulo 'experiments.apex_trials.ledger' existe y resuelve, pero no define ni reexporta 'BabylonBFTLedgerAdapter'. El import falla en runtime con ImportError, no ModuleNotFoundError",
+      "evidence": "enumeracion de bindings de nivel superior del modulo destino",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "experiments/apex_trials/__init__.py",
+          "line": 15,
+          "imported": "from experiments.apex_trials.ledger import BabylonBFTLedgerAdapter"
+        },
+        {
+          "file": "experiments/apex_trials/cli.py",
+          "line": 39,
+          "imported": "from experiments.apex_trials.ledger import BabylonBFTLedgerAdapter"
+        }
+      ],
+      "site_count": 2
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.memory.journal",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "medio",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/memory/journal' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "scripts/c5_cortex/autoconsolidate.py",
+          "line": 8,
+          "imported": "babylon60.memory.journal"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "scripts.c5_ultimate_causal_determinant",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "medio",
+      "note": "el paquete raiz 'scripts' existe, pero la ruta completa 'scripts/c5_ultimate_causal_determinant' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "experiments/scratch/poc_c5_ultimate_falsification.py",
+          "line": 15,
+          "imported": "scripts.c5_ultimate_causal_determinant"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "http.server",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "medio",
+      "note": "el paquete raiz 'http' existe, pero la ruta completa 'http/server' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "scripts/c5_thermo/exergy_dashboard_server.py",
+          "line": 17,
+          "imported": "http.server"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "strike_rs",
+      "kind": "FANTASMA",
+      "severity": "bajo",
+      "flags": [
+        "guarded"
+      ],
+      "note": "no existe ni en el repo ni en PyPI: el codigo que lo importa nunca se ha ejecutado | todos los puntos de import estan envueltos en try/except ImportError: degrada limpiamente. Es una trampa latente, no una vulnerabilidad activa",
+      "evidence": "",
+      "declared": false,
+      "in_registry": false,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "tests/test_atms_hardening.py",
+          "line": 11,
+          "imported": "strike_rs"
+        },
+        {
+          "file": "scripts/c5_demos/poc_fast_failure_guard.py",
+          "line": 15,
+          "imported": "strike_rs"
+        },
+        {
+          "file": "scripts/c5_demos/run_commercial_bft.py",
+          "line": 14,
+          "imported": "strike_rs"
+        },
+        {
+          "file": "scripts/c5_thermo/stress_10m.py",
+          "line": 13,
+          "imported": "strike_rs"
+        }
+      ],
+      "site_count": 4
+    },
+    {
+      "ecosystem": "python",
+      "module": "dotenv",
+      "kind": "NO_DECLARADO",
+      "severity": "bajo",
+      "flags": [
+        "guarded"
+      ],
+      "note": "paquete real de PyPI ('python-dotenv') usado en 3 fichero(s) y ausente del manifiesto: instalacion limpia rota",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "python-dotenv",
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "experiments/kimi_nexus/kimi_nexus.py",
+          "line": 3,
+          "imported": "dotenv"
+        },
+        {
+          "file": "experiments/kimi_nexus/swarm_orchestrator.py",
+          "line": 22,
+          "imported": "dotenv"
+        },
+        {
+          "file": "scripts/c5_cortex/bootstrap_cortex_memory.py",
+          "line": 14,
+          "imported": "dotenv"
+        }
+      ],
+      "site_count": 3
+    },
+    {
+      "ecosystem": "python",
+      "module": "aiohttp",
+      "kind": "NO_DECLARADO",
+      "severity": "bajo",
+      "flags": [],
+      "note": "paquete real de PyPI ('aiohttp') usado en 3 fichero(s) y ausente del manifiesto: instalacion limpia rota",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "aiohttp",
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/sidecar/sentinel_monitor/monitor.py",
+          "line": 13,
+          "imported": "aiohttp"
+        },
+        {
+          "file": "legacy_exergy/cortex-memory-mvp/legion_1000.py",
+          "line": 2,
+          "imported": "aiohttp"
+        },
+        {
+          "file": "legacy_exergy/moskv-core-ledger/scripts/ouroboros_pipeline.py",
+          "line": 6,
+          "imported": "aiohttp"
+        }
+      ],
+      "site_count": 3
+    },
+    {
+      "ecosystem": "python",
+      "module": "lingua",
+      "kind": "NO_DECLARADO",
+      "severity": "bajo",
+      "flags": [
+        "guarded"
+      ],
+      "note": "paquete real de PyPI ('lingua') usado en 2 fichero(s) y ausente del manifiesto: instalacion limpia rota",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "lingua",
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "experiments/kimi_nexus/kimi_nexus.py",
+          "line": 9,
+          "imported": "lingua"
+        },
+        {
+          "file": "packages/babylon60/cortex/gemini_labs_nexus.py",
+          "line": 26,
+          "imported": "lingua"
+        }
+      ],
+      "site_count": 2
+    },
+    {
+      "ecosystem": "python",
+      "module": "openai",
+      "kind": "NO_DECLARADO",
+      "severity": "bajo",
+      "flags": [
+        "guarded"
+      ],
+      "note": "paquete real de PyPI ('openai') usado en 2 fichero(s) y ausente del manifiesto: instalacion limpia rota",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "openai",
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "scripts/kimi_nexus/kimi_nexus.py",
+          "line": 8,
+          "imported": "openai"
+        },
+        {
+          "file": "packages/babylon60/extensions/skills/niche_arbitrage/pipeline.py",
+          "line": 16,
+          "imported": "openai"
+        }
+      ],
+      "site_count": 2
+    },
+    {
+      "ecosystem": "python",
+      "module": "tomli",
+      "kind": "NO_DECLARADO",
+      "severity": "bajo",
+      "flags": [
+        "guarded",
+        "lazy"
+      ],
+      "note": "paquete real de PyPI ('tomli') usado en 1 fichero(s) y ausente del manifiesto: instalacion limpia rota",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "tomli",
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "experiments/scratch/existence_gap.py",
+          "line": 422,
+          "imported": "tomli"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "routes",
+      "kind": "LOCAL_DESALINEADO",
+      "severity": "bajo",
+      "flags": [],
+      "note": "existe en el repo (apps/babylon60-ide/backend/routes) pero se importa como top-level; solo resuelve con el cwd/sys.path correcto | ADEMAS 'routes' existe en PyPI con el mismo nombre: el orden de sys.path decide cual gana (shadowing)",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "routes",
+      "on_disk": [
+        "apps/babylon60-ide/backend/routes"
+      ],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "tests/test_inference_security.py",
+          "line": 17,
+          "imported": "routes.inference"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "gtts",
+      "kind": "NO_DECLARADO",
+      "severity": "bajo",
+      "flags": [],
+      "note": "paquete real de PyPI ('gTTS') usado en 1 fichero(s) y ausente del manifiesto: instalacion limpia rota",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "gTTS",
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "scripts/c5_assets/gen_voice_assets.py",
+          "line": 6,
+          "imported": "gtts"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "matplotlib",
+      "kind": "NO_DECLARADO",
+      "severity": "bajo",
+      "flags": [],
+      "note": "paquete real de PyPI ('matplotlib') usado en 1 fichero(s) y ausente del manifiesto: instalacion limpia rota",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "matplotlib",
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "scripts/c5_assets/thermo_wallpaper.py",
+          "line": 7,
+          "imported": "matplotlib.pyplot"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "agent_beeper",
+      "kind": "LOCAL_DESALINEADO",
+      "severity": "bajo",
+      "flags": [],
+      "note": "existe en el repo (scripts/c5_legion/agent_beeper.py) pero se importa como top-level; solo resuelve con el cwd/sys.path correcto",
+      "evidence": "",
+      "declared": false,
+      "in_registry": false,
+      "registry_name": null,
+      "on_disk": [
+        "scripts/c5_legion/agent_beeper.py"
+      ],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "scripts/c5_legion/legion_swarm_core.py",
+          "line": 20,
+          "imported": "agent_beeper"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "node",
+      "module": "postal-mime",
+      "kind": "NO_DECLARADO",
+      "severity": "bajo",
+      "note": "no declarado en package.json; existe en npm",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "postal-mime",
+      "on_disk": [],
+      "flags": [],
+      "sites": [
+        {
+          "file": "packages/services/email_inbound/worker.js",
+          "line": 5,
+          "imported": "postal-mime"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "watchdog",
+      "kind": "NO_DECLARADO",
+      "severity": "informativo",
+      "flags": [
+        "guarded"
+      ],
+      "note": "paquete real de PyPI ('watchdog') usado en 3 fichero(s) y ausente del manifiesto: instalacion limpia rota | mitigado: todos los puntos de import estan en un arbol que el propio pyproject excluye de packaging/lint (deuda declarada)",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "watchdog",
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/watchers.py",
+          "line": 37,
+          "imported": "watchdog.events"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/watchers.py",
+          "line": 41,
+          "imported": "watchdog.observers"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/loops/watcher.py",
+          "line": 15,
+          "imported": "watchdog.events"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/loops/watcher.py",
+          "line": 16,
+          "imported": "watchdog.observers"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/sidecar/telemetry/ast_oracle.py",
+          "line": 23,
+          "imported": "watchdog.events"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/sidecar/telemetry/ast_oracle.py",
+          "line": 24,
+          "imported": "watchdog.observers"
+        }
+      ],
+      "site_count": 6
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.llm._models",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/llm/_models' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/crystal_synthesis.py",
+          "line": 22,
+          "imported": "babylon60.extensions.llm._models"
+        },
+        {
+          "file": "packages/babylon60/extensions/swarm/orchestrator_deep_think.py",
+          "line": 115,
+          "imported": "babylon60.extensions.llm._models"
+        },
+        {
+          "file": "packages/babylon60/extensions/swarm/psychohistory.py",
+          "line": 11,
+          "imported": "babylon60.extensions.llm._models"
+        },
+        {
+          "file": "packages/babylon60/extensions/swarm/centauro_engine.py",
+          "line": 101,
+          "imported": "babylon60.extensions.llm._models"
+        },
+        {
+          "file": "packages/babylon60/extensions/skills/autodidact/canary_emulator.py",
+          "line": 20,
+          "imported": "babylon60.extensions.llm._models"
+        },
+        {
+          "file": "packages/babylon60/extensions/skills/autodidact/synthesis.py",
+          "line": 23,
+          "imported": "babylon60.extensions.llm._models"
+        }
+      ],
+      "site_count": 6
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.signals.bus",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/signals/bus' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/josu_daemon.py",
+          "line": 184,
+          "imported": "babylon60.extensions.signals.bus"
+        },
+        {
+          "file": "packages/babylon60/extensions/swarm/josu_daemon.py",
+          "line": 256,
+          "imported": "babylon60.extensions.signals.bus"
+        },
+        {
+          "file": "packages/babylon60/extensions/swarm/swarm_engine.py",
+          "line": 22,
+          "imported": "babylon60.extensions.signals.bus"
+        },
+        {
+          "file": "packages/babylon60/extensions/swarm/swarm_engine.py",
+          "line": 245,
+          "imported": "babylon60.extensions.signals.bus"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/signals.py",
+          "line": 43,
+          "imported": "babylon60.extensions.signals.bus"
+        }
+      ],
+      "site_count": 5
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.database.core.connect_async",
+      "kind": "SIMBOLO_FANTASMA",
+      "severity": "informativo",
+      "note": "el modulo 'babylon60.database.core' existe y resuelve, pero no define ni reexporta 'connect_async'. El import falla en runtime con ImportError, no ModuleNotFoundError",
+      "evidence": "enumeracion de bindings de nivel superior del modulo destino",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/mailbox.py",
+          "line": 17,
+          "imported": "from babylon60.database.core import connect_async"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/t_cell_ihelp_purge.py",
+          "line": 150,
+          "imported": "from babylon60.database.core import connect_async"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/t_cell_ihelp_purge.py",
+          "line": 249,
+          "imported": "from babylon60.database.core import connect_async"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/canary.py",
+          "line": 17,
+          "imported": "from babylon60.database.core import connect_async"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/security.py",
+          "line": 140,
+          "imported": "from babylon60.database.core import connect_async"
+        }
+      ],
+      "site_count": 5
+    },
+    {
+      "ecosystem": "python",
+      "module": "llama_index",
+      "kind": "NO_DECLARADO",
+      "severity": "informativo",
+      "flags": [],
+      "note": "paquete real de PyPI ('llama-index') usado en 1 fichero(s) y ausente del manifiesto: instalacion limpia rota | mitigado: todos los puntos de import estan en un arbol que el propio pyproject excluye de packaging/lint (deuda declarada)",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "llama-index",
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/llamaindex_bridge.py",
+          "line": 8,
+          "imported": "llama_index.core.callbacks.base_handler"
+        },
+        {
+          "file": "packages/babylon60/extensions/llamaindex_bridge.py",
+          "line": 11,
+          "imported": "llama_index.core.callbacks.schema"
+        },
+        {
+          "file": "packages/babylon60/extensions/llamaindex_bridge.py",
+          "line": 12,
+          "imported": "llama_index.core.postprocessor.types"
+        },
+        {
+          "file": "packages/babylon60/extensions/llamaindex_bridge.py",
+          "line": 15,
+          "imported": "llama_index.core.schema"
+        }
+      ],
+      "site_count": 4
+    },
+    {
+      "ecosystem": "python",
+      "module": "rich",
+      "kind": "NO_DECLARADO",
+      "severity": "informativo",
+      "flags": [],
+      "note": "paquete real de PyPI ('rich') usado en 2 fichero(s) y ausente del manifiesto: instalacion limpia rota | mitigado: todos los puntos de import estan en un arbol que el propio pyproject excluye de packaging/lint (deuda declarada)",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "rich",
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/platform.py",
+          "line": 18,
+          "imported": "rich.console"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/cli.py",
+          "line": 27,
+          "imported": "rich.console"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/cli.py",
+          "line": 28,
+          "imported": "rich.panel"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/cli.py",
+          "line": 29,
+          "imported": "rich.table"
+        }
+      ],
+      "site_count": 4
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.llm.router",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/llm/router' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/crystal_synthesis.py",
+          "line": 24,
+          "imported": "babylon60.extensions.llm.router"
+        },
+        {
+          "file": "packages/babylon60/extensions/skills/autodidact/canary_emulator.py",
+          "line": 21,
+          "imported": "babylon60.extensions.llm.router"
+        },
+        {
+          "file": "packages/babylon60/extensions/skills/autodidact/synthesis.py",
+          "line": 25,
+          "imported": "babylon60.extensions.llm.router"
+        },
+        {
+          "file": "packages/babylon60/transducers/i18n.py",
+          "line": 228,
+          "imported": "babylon60.extensions.llm.router"
+        }
+      ],
+      "site_count": 4
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.llm.provider",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/llm/provider' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/crystal_synthesis.py",
+          "line": 23,
+          "imported": "babylon60.extensions.llm.provider"
+        },
+        {
+          "file": "packages/babylon60/extensions/swarm/swarm_engine.py",
+          "line": 391,
+          "imported": "babylon60.extensions.llm.provider"
+        },
+        {
+          "file": "packages/babylon60/extensions/skills/autodidact/synthesis.py",
+          "line": 24,
+          "imported": "babylon60.extensions.llm.provider"
+        }
+      ],
+      "site_count": 3
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.aether.queue",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/aether/queue' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/auto_fix.py",
+          "line": 235,
+          "imported": "babylon60.extensions.aether.queue"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/core_support.py",
+          "line": 39,
+          "imported": "babylon60.extensions.aether.queue"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/auto_immune.py",
+          "line": 24,
+          "imported": "babylon60.extensions.aether.queue"
+        }
+      ],
+      "site_count": 3
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.swarm.worktree_isolation",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/swarm/worktree_isolation' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/auto_fix.py",
+          "line": 237,
+          "imported": "babylon60.extensions.swarm.worktree_isolation"
+        },
+        {
+          "file": "packages/babylon60/extensions/swarm/josu_daemon.py",
+          "line": 38,
+          "imported": "babylon60.extensions.swarm.worktree_isolation"
+        },
+        {
+          "file": "packages/babylon60/extensions/swarm/swarm_engine.py",
+          "line": 27,
+          "imported": "babylon60.extensions.swarm.worktree_isolation"
+        }
+      ],
+      "site_count": 3
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.security.utils",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/security/utils' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/nightshift_daemon.py",
+          "line": 40,
+          "imported": "babylon60.extensions.security.utils"
+        },
+        {
+          "file": "packages/babylon60/transducers/linguistic_entropy.py",
+          "line": 143,
+          "imported": "babylon60.extensions.security.utils"
+        },
+        {
+          "file": "packages/babylon60/transducers/linguistic_entropy.py",
+          "line": 240,
+          "imported": "babylon60.extensions.security.utils"
+        }
+      ],
+      "site_count": 3
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.memory.hdc.algebra",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/memory/hdc/algebra' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/orchestrator_deep_think.py",
+          "line": 25,
+          "imported": "babylon60.memory.hdc.algebra"
+        },
+        {
+          "file": "packages/babylon60/extensions/swarm/orchestrator_deep_think.py",
+          "line": 129,
+          "imported": "babylon60.memory.hdc.algebra"
+        },
+        {
+          "file": "packages/babylon60/extensions/swarm/orchestrator_deep_think.py",
+          "line": 167,
+          "imported": "babylon60.memory.hdc.algebra"
+        }
+      ],
+      "site_count": 3
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.audit.ledger",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/audit/ledger' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/t_cell_ihelp_purge.py",
+          "line": 148,
+          "imported": "babylon60.audit.ledger"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/t_cell_ihelp_purge.py",
+          "line": 248,
+          "imported": "babylon60.audit.ledger"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/apoptosis_daemon.py",
+          "line": 20,
+          "imported": "babylon60.audit.ledger"
+        }
+      ],
+      "site_count": 3
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.platform.sys",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/platform/sys' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/notifier.py",
+          "line": 20,
+          "imported": "babylon60.extensions.platform.sys"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/platform.py",
+          "line": 21,
+          "imported": "babylon60.extensions.platform.sys"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/cli.py",
+          "line": 40,
+          "imported": "babylon60.extensions.platform.sys"
+        }
+      ],
+      "site_count": 3
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.memory.encoder",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/memory/encoder' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/ccr_proxy.py",
+          "line": 23,
+          "imported": "babylon60.memory.encoder"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/security.py",
+          "line": 19,
+          "imported": "babylon60.memory.encoder"
+        },
+        {
+          "file": "packages/babylon60/extensions/skills/autodidact/synthesis.py",
+          "line": 26,
+          "imported": "babylon60.memory.encoder"
+        }
+      ],
+      "site_count": 3
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.memory.sqlite_vec_store",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/memory/sqlite_vec_store' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/ccr_proxy.py",
+          "line": 24,
+          "imported": "babylon60.memory.sqlite_vec_store"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/security.py",
+          "line": 20,
+          "imported": "babylon60.memory.sqlite_vec_store"
+        },
+        {
+          "file": "packages/babylon60/extensions/skills/autodidact/synthesis.py",
+          "line": 28,
+          "imported": "babylon60.memory.sqlite_vec_store"
+        }
+      ],
+      "site_count": 3
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.database.core.causal_write",
+      "kind": "SIMBOLO_FANTASMA",
+      "severity": "informativo",
+      "note": "el modulo 'babylon60.database.core' existe y resuelve, pero no define ni reexporta 'causal_write'. El import falla en runtime con ImportError, no ModuleNotFoundError",
+      "evidence": "enumeracion de bindings de nivel superior del modulo destino",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/budget.py",
+          "line": 80,
+          "imported": "from babylon60.database.core import causal_write"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/t_cell_ihelp_purge.py",
+          "line": 72,
+          "imported": "from babylon60.database.core import causal_write"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/t_cell_ihelp_purge.py",
+          "line": 100,
+          "imported": "from babylon60.database.core import causal_write"
+        }
+      ],
+      "site_count": 3
+    },
+    {
+      "ecosystem": "python",
+      "module": "playwright",
+      "kind": "NO_DECLARADO",
+      "severity": "informativo",
+      "flags": [],
+      "note": "paquete real de PyPI ('playwright') usado en 2 fichero(s) y ausente del manifiesto: instalacion limpia rota | mitigado: todos los puntos de import estan en un arbol que el propio pyproject excluye de packaging/lint (deuda declarada)",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "playwright",
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/substack_publisher_actor.py",
+          "line": 9,
+          "imported": "playwright.async_api"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/substack_follower_actor.py",
+          "line": 10,
+          "imported": "playwright.async_api"
+        }
+      ],
+      "site_count": 2
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.cortex_mamba_network",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/cortex_mamba_network' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "packages/babylon60/cortex/cortex_mamba_inference.py",
+          "line": 13,
+          "imported": "babylon60.cortex_mamba_network"
+        },
+        {
+          "file": "apps/babylon60-ide/backend/routes/inference.py",
+          "line": 150,
+          "imported": "babylon60.cortex_mamba_network"
+        }
+      ],
+      "site_count": 2
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.aether.models",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/aether/models' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/auto_fix.py",
+          "line": 234,
+          "imported": "babylon60.extensions.aether.models"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/auto_immune.py",
+          "line": 23,
+          "imported": "babylon60.extensions.aether.models"
+        }
+      ],
+      "site_count": 2
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.swarm.crystal_thermometer",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/swarm/crystal_thermometer' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/crystal_consolidator.py",
+          "line": 31,
+          "imported": "babylon60.extensions.swarm.crystal_thermometer"
+        },
+        {
+          "file": "packages/babylon60/extensions/swarm/nightshift_daemon.py",
+          "line": 281,
+          "imported": "babylon60.extensions.swarm.crystal_thermometer"
+        }
+      ],
+      "site_count": 2
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.memory.models",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/memory/models' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/infinite_minds.py",
+          "line": 21,
+          "imported": "babylon60.memory.models"
+        },
+        {
+          "file": "packages/babylon60/extensions/skills/autodidact/synthesis.py",
+          "line": 27,
+          "imported": "babylon60.memory.models"
+        }
+      ],
+      "site_count": 2
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.engine.causal.taint_engine",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/engine/causal/taint_engine' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/t_cell_ihelp_purge.py",
+          "line": 24,
+          "imported": "babylon60.engine.causal.taint_engine"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/t_cell_ihelp_purge.py",
+          "line": 151,
+          "imported": "babylon60.engine.causal.taint_engine"
+        }
+      ],
+      "site_count": 2
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.routes.telemetry",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/routes/telemetry' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/t_cell_ihelp_purge.py",
+          "line": 45,
+          "imported": "babylon60.routes.telemetry"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/t_cell_ihelp_purge.py",
+          "line": 250,
+          "imported": "babylon60.routes.telemetry"
+        }
+      ],
+      "site_count": 2
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.events.loop",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/events/loop' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/event_loop.py",
+          "line": 54,
+          "imported": "babylon60.events.loop"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/sidecar/telemetry/fiat_oracle.py",
+          "line": 64,
+          "imported": "babylon60.events.loop"
+        }
+      ],
+      "site_count": 2
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.exergy_optimizer.engine",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/exergy_optimizer/engine' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/zero_prompting.py",
+          "line": 47,
+          "imported": "babylon60.extensions.exergy_optimizer.engine"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/zero_prompting.py",
+          "line": 82,
+          "imported": "babylon60.extensions.exergy_optimizer.engine"
+        }
+      ],
+      "site_count": 2
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.evolution.ouroboros_omega",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/evolution/ouroboros_omega' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/zero_prompting.py",
+          "line": 81,
+          "imported": "babylon60.extensions.evolution.ouroboros_omega"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/frontier.py",
+          "line": 51,
+          "imported": "babylon60.extensions.evolution.ouroboros_omega"
+        }
+      ],
+      "site_count": 2
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.compaction.compactor",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/compaction/compactor' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/compaction.py",
+          "line": 48,
+          "imported": "babylon60.compaction.compactor"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/sidecar/compaction_monitor/circuit_breaker.py",
+          "line": 128,
+          "imported": "babylon60.compaction.compactor"
+        }
+      ],
+      "site_count": 2
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.daemon.sidecar.compaction_monitor.memory_wrapper",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/daemon/sidecar/compaction_monitor/memory_wrapper' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/sidecar/compaction_monitor/monitor.py",
+          "line": 138,
+          "imported": "babylon60.extensions.daemon.sidecar.compaction_monitor.memory_wrapper"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/sidecar/compaction_monitor/monitor.py",
+          "line": 163,
+          "imported": "babylon60.extensions.daemon.sidecar.compaction_monitor.memory_wrapper"
+        }
+      ],
+      "site_count": 2
+    },
+    {
+      "ecosystem": "python",
+      "module": "zenoh",
+      "kind": "NO_DECLARADO",
+      "severity": "informativo",
+      "flags": [
+        "guarded"
+      ],
+      "note": "paquete real de PyPI ('eclipse-zenoh') usado en 1 fichero(s) y ausente del manifiesto: instalacion limpia rota | mitigado: todos los puntos de import estan en un arbol que el propio pyproject excluye de packaging/lint (deuda declarada)",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "eclipse-zenoh",
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/zenoh_crdt.py",
+          "line": 19,
+          "imported": "zenoh"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "langgraph",
+      "kind": "NO_DECLARADO",
+      "severity": "informativo",
+      "flags": [
+        "guarded"
+      ],
+      "note": "paquete real de PyPI ('langgraph') usado en 1 fichero(s) y ausente del manifiesto: instalacion limpia rota | mitigado: todos los puntos de import estan en un arbol que el propio pyproject excluye de packaging/lint (deuda declarada)",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "langgraph",
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/langgraph_supervisor.py",
+          "line": 14,
+          "imported": "langgraph.graph"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "langsmith",
+      "kind": "NO_DECLARADO",
+      "severity": "informativo",
+      "flags": [
+        "guarded"
+      ],
+      "note": "paquete real de PyPI ('langsmith') usado en 1 fichero(s) y ausente del manifiesto: instalacion limpia rota | mitigado: todos los puntos de import estan en un arbol que el propio pyproject excluye de packaging/lint (deuda declarada)",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "langsmith",
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/telemetry_gate.py",
+          "line": 41,
+          "imported": "langsmith.run_trees"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "croniter",
+      "kind": "NO_DECLARADO",
+      "severity": "informativo",
+      "flags": [
+        "guarded",
+        "lazy"
+      ],
+      "note": "paquete real de PyPI ('croniter') usado en 1 fichero(s) y ausente del manifiesto: instalacion limpia rota | mitigado: todos los puntos de import estan en un arbol que el propio pyproject excluye de packaging/lint (deuda declarada)",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "croniter",
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/scheduler.py",
+          "line": 432,
+          "imported": "croniter"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "sqlite_vec",
+      "kind": "NO_DECLARADO",
+      "severity": "informativo",
+      "flags": [
+        "guarded",
+        "lazy"
+      ],
+      "note": "paquete real de PyPI ('sqlite-vec') usado en 1 fichero(s) y ausente del manifiesto: instalacion limpia rota | mitigado: todos los puntos de import estan en un arbol que el propio pyproject excluye de packaging/lint (deuda declarada)",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "sqlite-vec",
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/drift.py",
+          "line": 117,
+          "imported": "sqlite_vec"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "legion",
+      "kind": "NO_DECLARADO",
+      "severity": "informativo",
+      "flags": [
+        "guarded",
+        "lazy"
+      ],
+      "note": "paquete real de PyPI ('legion') usado en 1 fichero(s) y ausente del manifiesto: instalacion limpia rota | mitigado: todos los puntos de import estan en un arbol que el propio pyproject excluye de packaging/lint (deuda declarada)",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "legion",
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/sidecar/compaction_monitor/monitor.py",
+          "line": 329,
+          "imported": "legion"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "pytrends",
+      "kind": "NO_DECLARADO",
+      "severity": "informativo",
+      "flags": [],
+      "note": "paquete real de PyPI ('pytrends') usado en 1 fichero(s) y ausente del manifiesto: instalacion limpia rota | mitigado: todos los puntos de import estan en un arbol que el propio pyproject excluye de packaging/lint (deuda declarada)",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "pytrends",
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/sidecar/trends_oracle/oracle.py",
+          "line": 15,
+          "imported": "pytrends.request"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "requests",
+      "kind": "NO_DECLARADO",
+      "severity": "informativo",
+      "flags": [],
+      "note": "paquete real de PyPI ('requests') usado en 1 fichero(s) y ausente del manifiesto: instalacion limpia rota | mitigado: todos los puntos de import estan en un arbol que el propio pyproject excluye de packaging/lint (deuda declarada)",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "requests",
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/sidecar/trends_oracle/oracle.py",
+          "line": 16,
+          "imported": "requests.exceptions"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "instructor",
+      "kind": "NO_DECLARADO",
+      "severity": "informativo",
+      "flags": [
+        "guarded"
+      ],
+      "note": "paquete real de PyPI ('instructor') usado en 1 fichero(s) y ausente del manifiesto: instalacion limpia rota | mitigado: todos los puntos de import estan en un arbol que el propio pyproject excluye de packaging/lint (deuda declarada)",
+      "evidence": "",
+      "declared": false,
+      "in_registry": true,
+      "registry_name": "instructor",
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/skills/niche_arbitrage/pipeline.py",
+          "line": 15,
+          "imported": "instructor"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.crypto.serialization",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/crypto/serialization' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "packages/babylon60/crypto/bootstrap.py",
+          "line": 70,
+          "imported": "babylon60.crypto.serialization"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.core.config",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/core/config' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "packages/babylon60/crypto/aes.py",
+          "line": 53,
+          "imported": "babylon60.core.config"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.crypto.vault",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/crypto/vault' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "packages/babylon60/crypto/keys.py",
+          "line": 34,
+          "imported": "babylon60.crypto.vault"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.aether.runner",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/aether/runner' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/auto_fix.py",
+          "line": 236,
+          "imported": "babylon60.extensions.aether.runner"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.engine.meta.right_brain",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/engine/meta/right_brain' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/crystal_consolidator.py",
+          "line": 305,
+          "imported": "babylon60.engine.meta.right_brain"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.evolution.agents",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/evolution/agents' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/crystal_consolidator.py",
+          "line": 306,
+          "imported": "babylon60.extensions.evolution.agents"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.evolution.free_energy",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/evolution/free_energy' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/crystal_consolidator.py",
+          "line": 307,
+          "imported": "babylon60.extensions.evolution.free_energy"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.memory.crdt",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/memory/crdt' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/zenoh_crdt.py",
+          "line": 26,
+          "imported": "babylon60.memory.crdt"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.consensus.bft_quorum",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/consensus/bft_quorum' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/zenoh_crdt.py",
+          "line": 76,
+          "imported": "babylon60.consensus.bft_quorum"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.consensus.pki",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/consensus/pki' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/zenoh_crdt.py",
+          "line": 77,
+          "imported": "babylon60.consensus.pki"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.mcp_server.toolbox_watchdog",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/mcp_server/toolbox_watchdog' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/josu_daemon.py",
+          "line": 121,
+          "imported": "babylon60.mcp_server.toolbox_watchdog"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.swarm.escalation",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/swarm/escalation' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/josu_daemon.py",
+          "line": 227,
+          "imported": "babylon60.extensions.swarm.escalation"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.engine.meta.metabolism",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/engine/meta/metabolism' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/josu_daemon.py",
+          "line": 264,
+          "imported": "babylon60.engine.meta.metabolism"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.aether.tools",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/aether/tools' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/josu_daemon.py",
+          "line": 277,
+          "imported": "babylon60.extensions.aether.tools"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.agents.factory",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/agents/factory' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/orchestrator_deep_think.py",
+          "line": 14,
+          "imported": "babylon60.extensions.agents.factory"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.memory.hdc.codec",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/memory/hdc/codec' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/orchestrator_deep_think.py",
+          "line": 26,
+          "imported": "babylon60.memory.hdc.codec"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.memory.hdc.item_memory",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/memory/hdc/item_memory' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/orchestrator_deep_think.py",
+          "line": 27,
+          "imported": "babylon60.memory.hdc.item_memory"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.exergy_optimizer.swarm",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/exergy_optimizer/swarm' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/github_auditor.py",
+          "line": 21,
+          "imported": "babylon60.extensions.exergy_optimizer.swarm"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.engine.core.cortex_engine",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/engine/core/cortex_engine' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/error_ghost_pipeline.py",
+          "line": 232,
+          "imported": "babylon60.engine.core.cortex_engine"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.memory.semantic_ram",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/memory/semantic_ram' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/infinite_minds.py",
+          "line": 23,
+          "imported": "babylon60.memory.semantic_ram"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.swarm.protocols",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/swarm/protocols' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/swarm_engine.py",
+          "line": 25,
+          "imported": "babylon60.extensions.swarm.protocols"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.swarm.kv_prefix_registry",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/swarm/kv_prefix_registry' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/swarm_engine.py",
+          "line": 196,
+          "imported": "babylon60.extensions.swarm.kv_prefix_registry"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.swarm.aleph_omega",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/swarm/aleph_omega' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/centauro_engine.py",
+          "line": 23,
+          "imported": "babylon60.swarm.aleph_omega"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.engine.core.ultrathink_physics",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/engine/core/ultrathink_physics' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/swarm/centauro_engine.py",
+          "line": 322,
+          "imported": "babylon60.engine.core.ultrathink_physics"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.health.collector",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/health/collector' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/health_loop.py",
+          "line": 18,
+          "imported": "babylon60.extensions.health.collector"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.health.models",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/health/models' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/health_loop.py",
+          "line": 19,
+          "imported": "babylon60.extensions.health.models"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.health.scorer",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/health/scorer' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/health_loop.py",
+          "line": 20,
+          "imported": "babylon60.extensions.health.scorer"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.health.trend",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/health/trend' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/health_loop.py",
+          "line": 21,
+          "imported": "babylon60.extensions.health.trend"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.ledger.escape_hatch",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/ledger/escape_hatch' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/health_loop.py",
+          "line": 54,
+          "imported": "babylon60.ledger.escape_hatch"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.daemon.gmail_magic_link",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/daemon/gmail_magic_link' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/substack_publisher_actor.py",
+          "line": 11,
+          "imported": "babylon60.extensions.daemon.gmail_magic_link"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.database.schema_extensions",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/database/schema_extensions' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/t_cell_ihelp_purge.py",
+          "line": 82,
+          "imported": "babylon60.database.schema_extensions"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.aether.daemon",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/aether/daemon' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/core_support.py",
+          "line": 38,
+          "imported": "babylon60.extensions.aether.daemon"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.daemon.sidecar.telemetry.iot_oracle",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/daemon/sidecar/telemetry/iot_oracle' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/core_support.py",
+          "line": 46,
+          "imported": "babylon60.extensions.daemon.sidecar.telemetry.iot_oracle"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.database.pool",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/database/pool' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/core_support.py",
+          "line": 136,
+          "imported": "babylon60.database.pool"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.daemon.healing",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/daemon/healing' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/core.py",
+          "line": 25,
+          "imported": "babylon60.extensions.daemon.healing"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.daemon.resource_mgr",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/daemon/resource_mgr' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/core.py",
+          "line": 76,
+          "imported": "babylon60.extensions.daemon.resource_mgr"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.cli.common",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/cli/common' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/zero_toil.py",
+          "line": 20,
+          "imported": "babylon60.cli.common"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.telemetry",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/telemetry' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/cli.py",
+          "line": 243,
+          "imported": "babylon60.telemetry"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.immune.membrane",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/immune/membrane' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/ccr_proxy.py",
+          "line": 22,
+          "imported": "babylon60.extensions.immune.membrane"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.agents.primitives.dispatcher",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/agents/primitives/dispatcher' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/nightshift.py",
+          "line": 11,
+          "imported": "babylon60.agents.primitives.dispatcher"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.engine.crystallizer",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/engine/crystallizer' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/nightshift.py",
+          "line": 12,
+          "imported": "babylon60.engine.crystallizer"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.signals.reactor",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/signals/reactor' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/signals.py",
+          "line": 44,
+          "imported": "babylon60.extensions.signals.reactor"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.security.threat_feed",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/security/threat_feed' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/shield_monitor.py",
+          "line": 132,
+          "imported": "babylon60.extensions.security.threat_feed"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.security.anomaly_detector",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/security/anomaly_detector' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/shield_monitor.py",
+          "line": 160,
+          "imported": "babylon60.extensions.security.anomaly_detector"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.storage.turso",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/storage/turso' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/cloud.py",
+          "line": 16,
+          "imported": "babylon60.storage.turso"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.memory.drift",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/memory/drift' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/drift.py",
+          "line": 69,
+          "imported": "babylon60.memory.drift"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.exergy_optimizer",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/exergy_optimizer' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/exergy_optimizer.py",
+          "line": 23,
+          "imported": "babylon60.extensions.exergy_optimizer"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.memory.memory_manager",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/memory/memory_manager' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/agy2_planner.py",
+          "line": 122,
+          "imported": "babylon60.memory.memory_manager"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.memory.homeostasis",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/memory/homeostasis' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/thermodynamic.py",
+          "line": 15,
+          "imported": "babylon60.memory.homeostasis"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.utils.respiration",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/utils/respiration' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/network.py",
+          "line": 20,
+          "imported": "babylon60.utils.respiration"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.storage.qdrant",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/storage/qdrant' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/l2_drain.py",
+          "line": 21,
+          "imported": "babylon60.storage.qdrant"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.storage.turbopuffer",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/storage/turbopuffer' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/l2_drain.py",
+          "line": 22,
+          "imported": "babylon60.storage.turbopuffer"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.evolution.ouroboros_hook",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/evolution/ouroboros_hook' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/monitors/l2_drain.py",
+          "line": 75,
+          "imported": "babylon60.extensions.evolution.ouroboros_hook"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.daemon.utils",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/daemon/utils' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/loops/audio.py",
+          "line": 12,
+          "imported": "babylon60.extensions.daemon.utils"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.daemon.sidecar.trends_oracle.config",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/daemon/sidecar/trends_oracle/config' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/sidecar/trends_oracle/oracle.py",
+          "line": 19,
+          "imported": "babylon60.extensions.daemon.sidecar.trends_oracle.config"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.daemon.sidecar.telemetry.fs_entropy_oracle",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/daemon/sidecar/telemetry/fs_entropy_oracle' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/sidecar/telemetry/__init__.py",
+          "line": 13,
+          "imported": "babylon60.extensions.daemon.sidecar.telemetry.fs_entropy_oracle"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.daemon.sidecar.telemetry.network_void_oracle",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/daemon/sidecar/telemetry/network_void_oracle' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/sidecar/telemetry/__init__.py",
+          "line": 14,
+          "imported": "babylon60.extensions.daemon.sidecar.telemetry.network_void_oracle"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.daemon.sidecar.telemetry.thermodynamics_oracle",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/daemon/sidecar/telemetry/thermodynamics_oracle' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/sidecar/telemetry/__init__.py",
+          "line": 15,
+          "imported": "babylon60.extensions.daemon.sidecar.telemetry.thermodynamics_oracle"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.security.t_cell",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/security/t_cell' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/skills/autodidact/actuator.py",
+          "line": 16,
+          "imported": "babylon60.extensions.security.t_cell"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.scraper.engine",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/scraper/engine' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/skills/niche_arbitrage/pipeline.py",
+          "line": 6,
+          "imported": "babylon60.extensions.scraper.engine"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.scraper.models",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/scraper/models' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/skills/niche_arbitrage/pipeline.py",
+          "line": 7,
+          "imported": "babylon60.extensions.scraper.models"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.sync.hlc",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/sync/hlc' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/sync/crdt.py",
+          "line": 30,
+          "imported": "babylon60.extensions.sync.hlc"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.engine.core.tips",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/engine/core/tips' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/sync/snapshot.py",
+          "line": 169,
+          "imported": "babylon60.engine.core.tips"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.sync.system",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/sync/system' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": true,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/sync/read.py",
+          "line": 24,
+          "imported": "babylon60.extensions.sync.system"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.engine.cognitive.models",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/engine/cognitive/models' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "packages/babylon60/transducers/export.py",
+          "line": 22,
+          "imported": "babylon60.engine.cognitive.models"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.facts",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/facts' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "packages/babylon60/transducers/i18n.py",
+          "line": 195,
+          "imported": "babylon60.facts"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.extensions.llm.manager",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/extensions/llm/manager' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "packages/babylon60/transducers/i18n.py",
+          "line": 205,
+          "imported": "babylon60.extensions.llm.manager"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.cortex_bpe_tokenizer",
+      "kind": "FANTASMA_INTERNO",
+      "severity": "informativo",
+      "note": "el paquete raiz 'babylon60' existe, pero la ruta completa 'babylon60/cortex_bpe_tokenizer' no resuelve a ningun modulo del repo",
+      "evidence": "resolucion de ruta punteada contra el filesystem",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "apps/babylon60-ide/backend/routes/inference.py",
+          "line": 149,
+          "imported": "babylon60.cortex_bpe_tokenizer"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "babylon60.database.core.connect_async_ctx",
+      "kind": "SIMBOLO_FANTASMA",
+      "severity": "informativo",
+      "note": "el modulo 'babylon60.database.core' existe y resuelve, pero no define ni reexporta 'connect_async_ctx'. El import falla en runtime con ImportError, no ModuleNotFoundError",
+      "evidence": "enumeracion de bindings de nivel superior del modulo destino",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "packages/babylon60/extensions/daemon/apoptosis_daemon.py",
+          "line": 21,
+          "imported": "from babylon60.database.core import connect_async_ctx"
+        }
+      ],
+      "site_count": 1
+    }
+  ]
+}
