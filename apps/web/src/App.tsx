@@ -80,11 +80,11 @@ function App() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <div className="glass-panel p-6 space-y-2">
                 <div className="flex justify-between items-center text-xs font-mono text-slate-400">
-                  <span>CUMPLIMIENTO REGULATORIO</span>
+                  <span>AUTO-EVALUACIÓN</span>
                   <span className="text-emerald-400 font-bold">100% PASS</span>
                 </div>
                 <div className="text-xl font-bold font-mono text-white">EU AI Act Art. 9–14</div>
-                <p className="text-xs text-slate-400 font-mono">Exportador de evidencia en JSON, Markdown y HTML.</p>
+                <p className="text-xs text-slate-400 font-mono">Generador de informes de evidencia técnica en JSON, Markdown y HTML.</p>
               </div>
 
               <div className="glass-panel p-6 space-y-2">
@@ -98,20 +98,20 @@ function App() {
 
               <div className="glass-panel p-6 space-y-2">
                 <div className="flex justify-between items-center text-xs font-mono text-slate-400">
-                  <span>DISTRIBUCIÓN FIRMADA</span>
-                  <span className="text-emerald-400 font-bold font-mono">OIDC & COSIGN</span>
+                  <span>DISTRIBUCIÓN SOBERANA</span>
+                  <span className="text-emerald-400 font-bold font-mono">PyPI & SOURCE</span>
                 </div>
-                <div className="text-xl font-bold font-mono text-white">PyPI + Crates + GHCR</div>
-                <p className="text-xs text-slate-400 font-mono">Firmas Sigstore/SLSA y contenedores multi-arch Cosign.</p>
+                <div className="text-xl font-bold font-mono text-white">PyPI (babylon60) + Repo</div>
+                <p className="text-xs text-slate-400 font-mono">Paquete PyPI `babylon60` y código fuente Rust en el espacio de trabajo.</p>
               </div>
 
               <div className="glass-panel p-6 space-y-2">
                 <div className="flex justify-between items-center text-xs font-mono text-slate-400">
                   <span>LICENCIAMIENTO</span>
-                  <span className="text-amber-400 font-bold font-mono">HMAC-SHA256</span>
+                  <span className="text-amber-400 font-bold font-mono">TOKEN VERIFY</span>
                 </div>
                 <div className="text-xl font-bold font-mono text-amber-300">Enterprise Ready</div>
-                <p className="text-xs text-slate-400 font-mono">Verificación soberana offline en $BABYLON60_LICENSE_KEY.</p>
+                <p className="text-xs text-slate-400 font-mono">Verificación soberana offline mediante claves de suscripción.</p>
               </div>
             </div>
 
@@ -157,9 +157,9 @@ function App() {
                   <p className="text-xs text-slate-400">Para startups desplegando agentes autónomos en producción.</p>
                   <ul className="text-xs text-slate-300 space-y-2">
                     <li>✅ Todo lo de Developer</li>
-                    <li>✅ Certificador EU AI Act (HTML/JSON)</li>
+                    <li>✅ Generador de Auto-Evaluación EU AI Act (HTML/JSON)</li>
                     <li>✅ Servidor MCP `babylon60-mcp`</li>
-                    <li>✅ Firma HMAC Comercial</li>
+                    <li>✅ Firma Criptográfica Comercial</li>
                   </ul>
                   <a href="https://buy.stripe.com/aFaeVe2nq9G666v9hx3ks00" target="_blank" rel="noopener noreferrer" className="block text-center w-full py-2.5 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/40 rounded-lg text-cyan-300 text-xs font-bold transition-all">
                     OBTENER LICENCIA PRO
