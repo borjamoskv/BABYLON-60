@@ -11,11 +11,9 @@ Complies with INV_C5_17 (100% free, zero external dependencies).
 """
 
 import json
+import os
 import sqlite3
 import sys
-from http.server import HTTPServer, SimpleHTTPRequestHandler
-from pathlib import Path
-from urllib.parse import urlparse
 
 # Add project root to sys.path to resolve local packages
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
