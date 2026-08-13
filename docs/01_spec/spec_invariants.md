@@ -1,10 +1,10 @@
 ---
-title: Invariantes del Sistema BABYLON-60
+title: Invariantes del Dominio C5-REAL BABYLON-60
 status: Causal-Determinist
 version: 1.0.0
 ---
 
-# Invariantes del Sistema BABYLON-60 (Causal-Determinist)
+# Invariantes del Dominio C5-REAL BABYLON-60 (Causal-Determinist)
 
 <div align="center">
 
@@ -14,19 +14,19 @@ version: 1.0.0
 </div>
 
 > **Régimen Causal-Determinist**
-> Esta especificación centraliza todas las definiciones formales y topológicas de los invariantes del sistema BABYLON-60.
+> Esta especificación centraliza todas las definiciones formales y topológicas de los invariantes del Dominio C5-REAL BABYLON-60.
 > Estas reglas son el núcleo fundamental para garantizar el determinismo, la seguridad y la cadena causal.
 
 ---
 
-## 1. Inventario de Invariantes del Sistema
+## 1. Inventario de Invariantes del Dominio C5-REAL
 
 Los invariantes aquí definidos son verificados formalmente por el kernel. Cualquier violación dispara un `CRITICAL_HALT`.
 
 ### 1.1 `INV_BFT_04`: Non-Silent Collision Fail-Fast
 **Propósito:** Prohibir la tolerancia a fallos silenciosa en colisiones causales y temporales.
 **Mecánica:** Ejecutado en el `SQLiteCommitter` con verificación de `payload_hash`.
-- Si un evento no satisface la precondición causal (el hash de su padre no existe o su reloj de Lamport es inválido), el sistema **DEBE** hacer `panic!` o descartar la mutación en $O(1)$.
+- Si un evento no satisface la precondición causal (el hash de su padre no existe o su reloj de Lamport es inválido), el Dominio C5-REAL **DEBE** hacer `panic!` o descartar la mutación en $O(1)$.
 - Queda explícitamente prohibido el uso de esperas (`await sleep`), heurísticas de red o uniones de estado silentes. El tiempo es una prueba criptográfica (Witness), no una métrica de red.
 - Las colisiones de `payload_hash` disparan un `ValueError` instantáneo.
 

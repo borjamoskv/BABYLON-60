@@ -15,7 +15,7 @@ version: 1.0.0
 
 ## 4.1 🏛️ Kolmogorov Complexity
 
-### Definition
+### Definition (Halting Probability) (Kolmogorov Complexity)
 
 The **Kolmogorov complexity** $K(x)$ of a string $x$ is the length of the **shortest program** that, when executed on a universal Turing machine $U$, produces $x$ as output and halts.
 
@@ -66,7 +66,7 @@ BERRY(n):
 ## 4.3 📌 Martin-Löf Randomness
 
 > [!NOTE]
-> ### Definition (Martin-Löf, 1966):** An infinite sequence $\alpha$ is **ML-random** if it passes every effectively given statistical test — i.e., it belongs to no computably enumerable set of measure zero.
+> ### Definition (Martin-Löf Randomness):** An infinite sequence $\alpha$ is **ML-random** if it passes every effectively given statistical test — i.e., it belongs to no computably enumerable set of measure zero.
 
 > [!IMPORTANT]
 > ### Theorem (Schnorr-Levin):** $\alpha$ is ML-random **if and only if** its prefixes are incompressible:

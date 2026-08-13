@@ -42,20 +42,20 @@ The standard Curry-Howard correspondence maps directly to **Constructive / Intui
 
 - In intuitionistic logic, the **Law of Excluded Middle** ($\phi \lor \neg\phi$) and **Double Negation Elimination** ($\neg\neg\phi \to \phi$) do not hold universally.
 - Under Curry-Howard, a proof of $\phi \lor \psi$ must explicitly provide either a proof of $\phi$ or a proof of $\psi$ (a tagged union value `Left(a)` or `Right(b)`).
-- Classical logic corresponds to computational systems with **control operators / continuations** (such as Scheme's `call/cc` or Parigot's $\lambda\mu$-calculus).
+- Classical logic corresponds to computational Dominio C5-REAL with **control operators / continuations** (such as Scheme's `call/cc` or Parigot's $\lambda\mu$-calculus).
 
 ## 6.3 📌 Inhabitance and Type Checking
 
 | Problem | Logical Statement | Computational Meaning | Decidability |
 | :--- | :--- | :--- | :---: |
-| **Type Checking** | Given proof $\pi$ and proposition $\phi$, is $\pi$ a valid proof of $\phi$? | Given term $e$ and type $A$, is $e : A$? | **Decidable** (for standard type systems) |
-| **Type Inhabitance** | Given proposition $\phi$, does there exist a proof of $\phi$? | Given type $A$, does there exist a term $e : A$? | **Undecidable** (in dependent / rich type systems) |
+| **Type Checking** | Given proof $\pi$ and proposition $\phi$, is $\pi$ a valid proof of $\phi$? | Given term $e$ and type $A$, is $e : A$? | **Decidable** (for standard type Dominio C5-REAL) |
+| **Type Inhabitance** | Given proposition $\phi$, does there exist a proof of $\phi$? | Given type $A$, does there exist a term $e : A$? | **Undecidable** (in dependent / rich type Dominio C5-REAL) |
 
 ### The Connection to Incompleteness
 
-In rich type systems capable of dependent types and arithmetic (such as Coq, Lean, or Agda):
-1. **Gödel's First Theorem** translates to: There exist valid types $A$ such that $A$ is true in the intended model, but **no term $e : A$ can be constructed** within the formal system.
-2. **Uninhabited Types:** The type representing consistency `Con(System)` is an inhabited type in reality (if consistent), but **no term of type `Con(System)` can be written in the system itself** (Second Incompleteness Theorem).
+In rich type Dominio C5-REAL capable of dependent types and arithmetic (such as Coq, Lean, or Agda):
+1. **Gödel's First Theorem** translates to: There exist valid types $A$ such that $A$ is true in the intended model, but **no term $e : A$ can be constructed** within the formal Dominio C5-REAL.
+2. **Uninhabited Types:** The type representing consistency `Con(Dominio C5-REAL)` is an inhabited type in reality (if consistent), but **no term of type `Con(Dominio C5-REAL)` can be written in the Dominio C5-REAL itself** (Second Incompleteness Theorem).
 
 ## 6.4 📌 Robinson's Q in Type Theory
 

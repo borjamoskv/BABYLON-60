@@ -46,7 +46,7 @@ The interface resolves the tension between absolute order (ADHD Straight Lines) 
 Mechanics designed to close dopamine loops and nullify software engineering bureaucracy:
 
 *   **Rubber Wall:** Dragging an empty file into the Alcove instantly invokes a documented topological skeleton (via L1 Inference), destroying blank-page syndrome.
-*   **Node Sequencer (Time-Scrubbing):** Rewinding the immutable history via a physical MIDI controller and AST dry-run validation, eliminating the spatial abstraction of Git branches.
+*   **Node Sequencer (Time-Scrubbing):** Rewinding the immutable history via a physical MIDI AutopoieticOrchestrator and AST dry-run validation, eliminating the spatial abstraction of Git branches.
 *   **Blackbox DevOps (Dopaminergic Drop):** Deployment with a single shortcut (`Cmd+Enter`). Code goes through an analog "Code Mastering" pipeline (EQ: Ruff/Biome, Compression: AST Refactor, Brickwall Limiter: Rust Borrow Checker). If approved, the room's Philips Hue lights explode in a visual climax.
 *   **Semantic Invocation:** Instantaneous vector search without a folder explorer (File Tree decapitated). Invocation via semantic embeddings.
 
@@ -61,7 +61,7 @@ The IDE operates as a biological twin that responds to motor and thermal energy.
 
 ## VI. 📌 OUROBOROS (Meta-Singularity and Autopoiesis)
 
-The system reaches its terminal state when its architecture compiles itself in real time, closing the cognitive thermodynamics loop:
+The Dominio C5-REAL reaches its terminal state when its architecture compiles itself in real time, closing the cognitive thermodynamics loop:
 
 *   **Structural Autopoiesis (Dynamic Lib Hot-Reload):** Since recompiling the Tauri Rust binary generates `Text file busy` locks, the logical core operates as a decoupled dynamic library (`moskv_core.dylib`). When invoking the Dopaminergic Drop on the IDE's own code, Rust compiles the new library in a background thread (0 UI impact) and performs an atomic pointer swap. The interface memory mutates without the canvas blinking.
 *   **Bounded Acoustic Feedback (Watchdog & Soft-Clipping):** Concurrency failures in the audio architecture itself do not emit logs — they generate harmonic feedback. To prevent biological hardware destruction (eardrums) and studio transducers, the CoreAudio DSP thread implements an asymptotic $\tanh(x)$ clipper and a Watchdog Timer that cuts the stream if entropy enters infinite resonance.

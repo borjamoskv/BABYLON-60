@@ -32,7 +32,7 @@ cargo build --release
 
 ## Lección 1: Asignación de Tiempo Exacta (`F60` vs `f64`)
 
-### El problema en Python
+### El problema en Python (Asignación de Tiempo)
 
 ```python
 # Python: 1 hora dividida entre 3
@@ -43,7 +43,7 @@ print(accumulated)  # 333333.3333333198 ← DRIFT de -0.00000135 horas
 # En HFT, esto son microsegundos perdidos. En logística, paquetes mal rutados.
 ```
 
-### La solución en B60
+### La solución en B60 (Asignación de Tiempo)
 
 ```
 DUB
@@ -79,7 +79,7 @@ Guarda este programa como `hello_causal.b60` y ejecútalo:
 
 ## Lección 2: Concurrencia Causal (`FORK` + `AWAIT` vs `asyncio`)
 
-### El problema en Python
+### El problema en Python (Concurrencia Causal)
 
 ```python
 import asyncio
@@ -104,7 +104,7 @@ async def main():
 asyncio.run(main())
 ```
 
-### La solución en B60
+### La solución en B60 (Concurrencia Causal)
 
 ```
 DUB
@@ -155,7 +155,7 @@ La inversión causal es **imposible por construcción**. Si ocurriera por un bug
 
 ## Lección 3: Auto-Falsación (El Interruptor de Hombre Muerto)
 
-### El problema en Python
+### El problema en Python (Auto-Falsación)
 
 ```python
 # Python: Un agente que divide repetidamente pierde precisión silenciosamente
@@ -168,7 +168,7 @@ print(value)  # 0.9999999999999983 ← CONTAMINACIÓN SILENCIOSA
 # En un diagnóstico médico o un smart contract, esto es catastrófico.
 ```
 
-### La solución en B60
+### La solución en B60 (Auto-Falsación)
 
 ```
 DUB
