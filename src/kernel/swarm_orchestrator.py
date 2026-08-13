@@ -45,7 +45,8 @@ async def agent_i_kernel_architect(tenant_id: str):
         ast_signature = "0xFALLBACK"
         if strike_rs:
             # Invocar al silicio nativo vía PyO3
-            ast_signature = strike_rs.compute_cortex_taint_fast(tenant_id, "Payload_Code_Simulation")
+            cortex_kernel = strike_rs.CortexKernel("cortex.db")
+            ast_signature = cortex_kernel.assert_knowledge("Agent I Payload Code", "Agent_I_Sensor", tenant_id)
             
         return {"status": "SUCCESS", "ast_signature": ast_signature}
 

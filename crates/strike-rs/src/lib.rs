@@ -130,24 +130,3 @@ mod tests {
 }
 pub mod sync_bridge;
 
-#[cfg(feature = "extension-module")]
-use pyo3::prelude::*;
-
-#[cfg(feature = "extension-module")]
-#[pyfunction]
-fn compute_cortex_taint_fast(id: String, payload: String) -> PyResult<String> {
-    let mut engine = TaintEngine::new();
-    engine.add_node(&id, payload.as_bytes());
-    match engine.compute_cortex_taint() {
-        Ok(taint) => Ok(taint),
-        Err(_) => Err(pyo3::exceptions::PyRuntimeError::new_err("Cycle Detected or Taint Error")),
-    }
-}
-
-#[cfg(feature = "extension-module")]
-#[pymodule]
-fn strike_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
-    m.add_function(wrap_pyfunction!(compute_cortex_taint_fast, m)?)?;
-    Ok(())
-}
-
