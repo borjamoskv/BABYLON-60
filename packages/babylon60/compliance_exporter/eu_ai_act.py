@@ -105,7 +105,7 @@ class EUAIActComplianceExporter:
             "compliance_standard": t["compliance_standard"],
             "supervisory_authority": t["authority"],
             "report_id": f"EU-AIA-REPORT-{cert_fingerprint[:16].upper()}",
-            "certificate_id": f"EU-AIA-REPORT-{cert_fingerprint[:16].upper()}",
+            "certificate_id": f"EU-AIA-CERT-{cert_fingerprint[:16].upper()}",
             "system_identifier": system_id,
             "operator": operator_name,
             "issued_at": timestamp_iso,

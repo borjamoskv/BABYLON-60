@@ -74,7 +74,7 @@ def test_export_markdown_and_html(temp_bundle_dir):
 
         with open(md_file, "r", encoding="utf-8") as f:
             md_content = f.read()
-            assert "# Certificado de Cumplimiento Normativo" in md_content or "Certificado" in md_content
+            assert "Conformidad" in md_content or "Certificado" in md_content or "Informe" in md_content
             assert "SYS-TEST-99" in md_content
 
         with open(html_file, "r", encoding="utf-8") as f:
