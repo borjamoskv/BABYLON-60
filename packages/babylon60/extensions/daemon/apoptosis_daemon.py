@@ -18,7 +18,7 @@ import time
 from pathlib import Path
 
 from babylon60.audit.ledger import EnterpriseAuditLedger
-from babylon60.database.core import connect_async_ctx
+from babylon60.database.core import connect
 
 logger = logging.getLogger("babylon60.daemon.apoptosis")
 
@@ -114,7 +114,8 @@ class ApoptosisDaemon:
         """
         purged_count = 0
 
-        async with connect_async_ctx(self.db_path) as conn:
+        conn = await connect(self.db_path)
+        try:
             ledger = EnterpriseAuditLedger(conn)
             await ledger.ensure_table()
 
@@ -156,6 +157,8 @@ class ApoptosisDaemon:
                     purged_count += 1
                 except subprocess.CalledProcessError as e:
                     logger.error("[APOPTOSIS] Failed to purge %s: %s", py_file.name, e)
+        finally:
+            await conn.close()
 
         if purged_count > 0:
             logger.info(
