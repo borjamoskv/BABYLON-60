@@ -1,0 +1,1294 @@
+{
+  "repo": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+  "actions_seen": 26,
+  "findings": [
+    {
+      "kind": "PERMISO_EXCESIVO",
+      "severity": "medio",
+      "target": "security-events: write",
+      "file": ".github/workflows/codeql.yml",
+      "line": 18,
+      "note": "scope de escritura; comprueba que ningun paso del job ejecute codigo no confiable"
+    },
+    {
+      "kind": "PERMISO_EXCESIVO",
+      "severity": "medio",
+      "target": "id-token: write",
+      "file": ".github/workflows/pypi-publish.yml",
+      "line": 9,
+      "note": "scope de escritura; comprueba que ningun paso del job ejecute codigo no confiable"
+    },
+    {
+      "kind": "PERMISO_EXCESIVO",
+      "severity": "medio",
+      "target": "packages: write",
+      "file": ".github/workflows/docker-ghcr.yml",
+      "line": 21,
+      "note": "scope de escritura; comprueba que ningun paso del job ejecute codigo no confiable"
+    },
+    {
+      "kind": "PERMISO_EXCESIVO",
+      "severity": "medio",
+      "target": "id-token: write",
+      "file": ".github/workflows/docker-ghcr.yml",
+      "line": 22,
+      "note": "scope de escritura; comprueba que ningun paso del job ejecute codigo no confiable"
+    },
+    {
+      "kind": "PERMISO_EXCESIVO",
+      "severity": "medio",
+      "target": "id-token: write",
+      "file": ".github/workflows/release_distribution.yml",
+      "line": 13,
+      "note": "scope de escritura; comprueba que ningun paso del job ejecute codigo no confiable"
+    },
+    {
+      "kind": "PERMISO_EXCESIVO",
+      "severity": "medio",
+      "target": "id-token: write",
+      "file": ".github/workflows/deploy-web-pages.yml",
+      "line": 12,
+      "note": "scope de escritura; comprueba que ningun paso del job ejecute codigo no confiable"
+    },
+    {
+      "kind": "PERMISO_EXCESIVO",
+      "severity": "medio",
+      "target": "id-token: write",
+      "file": ".github/workflows/oidc-deploy.yml",
+      "line": 8,
+      "note": "scope de escritura; comprueba que ningun paso del job ejecute codigo no confiable"
+    },
+    {
+      "kind": "PERMISO_EXCESIVO",
+      "severity": "medio",
+      "target": "packages: write",
+      "file": ".github/workflows/production-deploy.yml",
+      "line": 24,
+      "note": "scope de escritura; comprueba que ningun paso del job ejecute codigo no confiable"
+    },
+    {
+      "kind": "PERMISO_EXCESIVO",
+      "severity": "medio",
+      "target": "id-token: write",
+      "file": ".github/workflows/production-deploy.yml",
+      "line": 25,
+      "note": "scope de escritura; comprueba que ningun paso del job ejecute codigo no confiable"
+    },
+    {
+      "kind": "PERMISO_EXCESIVO",
+      "severity": "medio",
+      "target": "security-events: write",
+      "file": ".github/workflows/secret_audit.yml",
+      "line": 15,
+      "note": "scope de escritura; comprueba que ningun paso del job ejecute codigo no confiable"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/attest-build-provenance@v1",
+      "file": ".github/workflows/pypi-publish.yml",
+      "line": 42,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/attest-build-provenance@v1",
+      "file": ".github/workflows/docker-ghcr.yml",
+      "line": 69,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/cache@v4",
+      "file": ".github/workflows/verify_lean.yml",
+      "line": 27,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/cache@v4",
+      "file": ".github/workflows/crates-publish.yml",
+      "line": 20,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v3",
+      "file": ".github/workflows/verify_ledger.yml",
+      "line": 13,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/doc_aesthetic_linter.yml",
+      "line": 20,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/hotstuff_bench.yml",
+      "line": 21,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/verify_lean.yml",
+      "line": 24,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/codeql.yml",
+      "line": 22,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/crates-publish.yml",
+      "line": 14,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/python-app.yml",
+      "line": 21,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/pypi-publish.yml",
+      "line": 22,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/docker-ghcr.yml",
+      "line": 27,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/existence_gap_gate.yml",
+      "line": 29,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/gitleaks.yml",
+      "line": 17,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/release_distribution.yml",
+      "line": 16,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/release_distribution.yml",
+      "line": 32,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/deploy-web-pages.yml",
+      "line": 20,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/multiplatform_builds.yml",
+      "line": 28,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/multiplatform_builds.yml",
+      "line": 69,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/oidc-deploy.yml",
+      "line": 15,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/production-deploy.yml",
+      "line": 29,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/c5_formal_verification.yml",
+      "line": 18,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/conformance.yml",
+      "line": 9,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/checkout@v4",
+      "file": ".github/workflows/secret_audit.yml",
+      "line": 20,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/deploy-pages@v4",
+      "file": ".github/workflows/deploy-web-pages.yml",
+      "line": 55,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/labeler@v5",
+      "file": ".github/workflows/labeler.yml",
+      "line": 13,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/setup-java@v4",
+      "file": ".github/workflows/multiplatform_builds.yml",
+      "line": 72,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/setup-node@v4",
+      "file": ".github/workflows/deploy-web-pages.yml",
+      "line": 23,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/setup-node@v4",
+      "file": ".github/workflows/multiplatform_builds.yml",
+      "line": 31,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/setup-node@v4",
+      "file": ".github/workflows/multiplatform_builds.yml",
+      "line": 81,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/setup-python@v5",
+      "file": ".github/workflows/doc_aesthetic_linter.yml",
+      "line": 23,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/setup-python@v5",
+      "file": ".github/workflows/hotstuff_bench.yml",
+      "line": 22,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/setup-python@v3",
+      "file": ".github/workflows/python-app.yml",
+      "line": 23,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/setup-python@v5",
+      "file": ".github/workflows/pypi-publish.yml",
+      "line": 25,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/setup-python@v5",
+      "file": ".github/workflows/existence_gap_gate.yml",
+      "line": 33,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/setup-python@v5",
+      "file": ".github/workflows/release_distribution.yml",
+      "line": 18,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/setup-python@v5",
+      "file": ".github/workflows/c5_formal_verification.yml",
+      "line": 24,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/setup-python@v5",
+      "file": ".github/workflows/conformance.yml",
+      "line": 10,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/setup-python@v5",
+      "file": ".github/workflows/secret_audit.yml",
+      "line": 25,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/setup-python@v4",
+      "file": ".github/workflows/ci.yml",
+      "line": 22,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/stale@v9",
+      "file": ".github/workflows/stale.yml",
+      "line": 15,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/upload-artifact@v4",
+      "file": ".github/workflows/existence_gap_gate.yml",
+      "line": 49,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "actions/upload-pages-artifact@v3",
+      "file": ".github/workflows/deploy-web-pages.yml",
+      "line": 48,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "android-actions/setup-android@v3",
+      "file": ".github/workflows/multiplatform_builds.yml",
+      "line": 78,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "aws-actions/configure-aws-credentials@v4",
+      "file": ".github/workflows/oidc-deploy.yml",
+      "line": 17,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "cloudflare/pages-action@v1",
+      "file": ".github/workflows/deploy-web-pages.yml",
+      "line": 38,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "docker/build-push-action@v6",
+      "file": ".github/workflows/docker-ghcr.yml",
+      "line": 58,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "docker/build-push-action@v5",
+      "file": ".github/workflows/production-deploy.yml",
+      "line": 48,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "docker/login-action@v3",
+      "file": ".github/workflows/docker-ghcr.yml",
+      "line": 39,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "docker/login-action@v3",
+      "file": ".github/workflows/production-deploy.yml",
+      "line": 32,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "docker/metadata-action@v5",
+      "file": ".github/workflows/docker-ghcr.yml",
+      "line": 47,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "docker/metadata-action@v5",
+      "file": ".github/workflows/production-deploy.yml",
+      "line": 40,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "docker/setup-buildx-action@v3",
+      "file": ".github/workflows/docker-ghcr.yml",
+      "line": 33,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "docker/setup-qemu-action@v3",
+      "file": ".github/workflows/docker-ghcr.yml",
+      "line": 30,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "dtolnay/rust-toolchain@stable",
+      "file": ".github/workflows/crates-publish.yml",
+      "line": 17,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "dtolnay/rust-toolchain@stable",
+      "file": ".github/workflows/release_distribution.yml",
+      "line": 34,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "dtolnay/rust-toolchain@stable",
+      "file": ".github/workflows/multiplatform_builds.yml",
+      "line": 36,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "dtolnay/rust-toolchain@master",
+      "file": ".github/workflows/loom.yml",
+      "line": 16,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "dtolnay/rust-toolchain@master",
+      "file": ".github/workflows/fuzz.yml",
+      "line": 15,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "dtolnay/rust-toolchain@stable",
+      "file": ".github/workflows/c5_formal_verification.yml",
+      "line": 21,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "dtolnay/rust-toolchain@stable",
+      "file": ".github/workflows/ci.yml",
+      "line": 18,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "github/codeql-action@v3",
+      "file": ".github/workflows/codeql.yml",
+      "line": 25,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "github/codeql-action@v3",
+      "file": ".github/workflows/codeql.yml",
+      "line": 30,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "github/codeql-action@v3",
+      "file": ".github/workflows/secret_audit.yml",
+      "line": 51,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "gitleaks/gitleaks-action@v2",
+      "file": ".github/workflows/gitleaks.yml",
+      "line": 22,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "pypa/gh-action-pypi-publish@release/v1",
+      "file": ".github/workflows/pypi-publish.yml",
+      "line": 54,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "pypa/gh-action-pypi-publish@release/v1",
+      "file": ".github/workflows/release_distribution.yml",
+      "line": 26,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "sigstore/cosign-installer@v3.5.0",
+      "file": ".github/workflows/docker-ghcr.yml",
+      "line": 36,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "sigstore/gh-action-sigstore-python@v3.0.0",
+      "file": ".github/workflows/pypi-publish.yml",
+      "line": 47,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "PIN_MUTABLE",
+      "severity": "bajo",
+      "target": "tauri-apps/tauri-action@v2",
+      "file": ".github/workflows/multiplatform_builds.yml",
+      "line": 53,
+      "note": "referencia movil: el propietario puede reescribir el tag y cambiar lo que ejecuta tu runner sin que cambie tu repo. Fija el SHA de 40 caracteres"
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "actions/attest-build-provenance",
+      "file": ".github/workflows/pypi-publish.yml",
+      "line": 42,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/pypi-publish.yml",
+          42,
+          "v1"
+        ],
+        [
+          ".github/workflows/docker-ghcr.yml",
+          69,
+          "v1"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "actions/cache",
+      "file": ".github/workflows/verify_lean.yml",
+      "line": 27,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/verify_lean.yml",
+          27,
+          "v4"
+        ],
+        [
+          ".github/workflows/crates-publish.yml",
+          20,
+          "v4"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "actions/checkout",
+      "file": ".github/workflows/verify_ledger.yml",
+      "line": 13,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/verify_ledger.yml",
+          13,
+          "v3"
+        ],
+        [
+          ".github/workflows/doc_aesthetic_linter.yml",
+          20,
+          "v4"
+        ],
+        [
+          ".github/workflows/hotstuff_bench.yml",
+          21,
+          "v4"
+        ],
+        [
+          ".github/workflows/verify_lean.yml",
+          24,
+          "v4"
+        ],
+        [
+          ".github/workflows/codeql.yml",
+          22,
+          "v4"
+        ],
+        [
+          ".github/workflows/crates-publish.yml",
+          14,
+          "v4"
+        ],
+        [
+          ".github/workflows/python-app.yml",
+          21,
+          "v4"
+        ],
+        [
+          ".github/workflows/pypi-publish.yml",
+          22,
+          "v4"
+        ],
+        [
+          ".github/workflows/docker-ghcr.yml",
+          27,
+          "v4"
+        ],
+        [
+          ".github/workflows/existence_gap_gate.yml",
+          29,
+          "v4"
+        ],
+        [
+          ".github/workflows/python-tests.yml",
+          17,
+          "11bd71901bbe5b1630ceea73d27597364c9af683"
+        ],
+        [
+          ".github/workflows/gitleaks.yml",
+          17,
+          "v4"
+        ],
+        [
+          ".github/workflows/release_distribution.yml",
+          16,
+          "v4"
+        ],
+        [
+          ".github/workflows/release_distribution.yml",
+          32,
+          "v4"
+        ],
+        [
+          ".github/workflows/deploy-web-pages.yml",
+          20,
+          "v4"
+        ],
+        [
+          ".github/workflows/multiplatform_builds.yml",
+          28,
+          "v4"
+        ],
+        [
+          ".github/workflows/multiplatform_builds.yml",
+          69,
+          "v4"
+        ],
+        [
+          ".github/workflows/oidc-deploy.yml",
+          15,
+          "v4"
+        ],
+        [
+          ".github/workflows/production-deploy.yml",
+          29,
+          "v4"
+        ],
+        [
+          ".github/workflows/loom.yml",
+          13,
+          "eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871"
+        ],
+        [
+          ".github/workflows/fuzz.yml",
+          12,
+          "eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871"
+        ],
+        [
+          ".github/workflows/c5_formal_verification.yml",
+          18,
+          "v4"
+        ],
+        [
+          ".github/workflows/conformance.yml",
+          9,
+          "v4"
+        ],
+        [
+          ".github/workflows/secret_audit.yml",
+          20,
+          "v4"
+        ],
+        [
+          ".github/workflows/ci.yml",
+          16,
+          "11bd71901bbe5b1630ceea73d27597364c9af683"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "actions/deploy-pages",
+      "file": ".github/workflows/deploy-web-pages.yml",
+      "line": 55,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/deploy-web-pages.yml",
+          55,
+          "v4"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "actions/labeler",
+      "file": ".github/workflows/labeler.yml",
+      "line": 13,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/labeler.yml",
+          13,
+          "v5"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "actions/setup-java",
+      "file": ".github/workflows/multiplatform_builds.yml",
+      "line": 72,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/multiplatform_builds.yml",
+          72,
+          "v4"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "actions/setup-node",
+      "file": ".github/workflows/deploy-web-pages.yml",
+      "line": 23,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/deploy-web-pages.yml",
+          23,
+          "v4"
+        ],
+        [
+          ".github/workflows/multiplatform_builds.yml",
+          31,
+          "v4"
+        ],
+        [
+          ".github/workflows/multiplatform_builds.yml",
+          81,
+          "v4"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "actions/setup-python",
+      "file": ".github/workflows/doc_aesthetic_linter.yml",
+      "line": 23,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/doc_aesthetic_linter.yml",
+          23,
+          "v5"
+        ],
+        [
+          ".github/workflows/hotstuff_bench.yml",
+          22,
+          "v5"
+        ],
+        [
+          ".github/workflows/python-app.yml",
+          23,
+          "v3"
+        ],
+        [
+          ".github/workflows/pypi-publish.yml",
+          25,
+          "v5"
+        ],
+        [
+          ".github/workflows/existence_gap_gate.yml",
+          33,
+          "v5"
+        ],
+        [
+          ".github/workflows/python-tests.yml",
+          20,
+          "39cd14951b08e74b54015e9e001cdefcf80e669f"
+        ],
+        [
+          ".github/workflows/release_distribution.yml",
+          18,
+          "v5"
+        ],
+        [
+          ".github/workflows/c5_formal_verification.yml",
+          24,
+          "v5"
+        ],
+        [
+          ".github/workflows/conformance.yml",
+          10,
+          "v5"
+        ],
+        [
+          ".github/workflows/secret_audit.yml",
+          25,
+          "v5"
+        ],
+        [
+          ".github/workflows/ci.yml",
+          22,
+          "v4"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "actions/stale",
+      "file": ".github/workflows/stale.yml",
+      "line": 15,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/stale.yml",
+          15,
+          "v9"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "actions/upload-artifact",
+      "file": ".github/workflows/existence_gap_gate.yml",
+      "line": 49,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/existence_gap_gate.yml",
+          49,
+          "v4"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "actions/upload-pages-artifact",
+      "file": ".github/workflows/deploy-web-pages.yml",
+      "line": 48,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/deploy-web-pages.yml",
+          48,
+          "v3"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "android-actions/setup-android",
+      "file": ".github/workflows/multiplatform_builds.yml",
+      "line": 78,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/multiplatform_builds.yml",
+          78,
+          "v3"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "aws-actions/configure-aws-credentials",
+      "file": ".github/workflows/oidc-deploy.yml",
+      "line": 17,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/oidc-deploy.yml",
+          17,
+          "v4"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "cloudflare/pages-action",
+      "file": ".github/workflows/deploy-web-pages.yml",
+      "line": 38,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/deploy-web-pages.yml",
+          38,
+          "v1"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "docker/build-push-action",
+      "file": ".github/workflows/docker-ghcr.yml",
+      "line": 58,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/docker-ghcr.yml",
+          58,
+          "v6"
+        ],
+        [
+          ".github/workflows/production-deploy.yml",
+          48,
+          "v5"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "docker/login-action",
+      "file": ".github/workflows/docker-ghcr.yml",
+      "line": 39,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/docker-ghcr.yml",
+          39,
+          "v3"
+        ],
+        [
+          ".github/workflows/production-deploy.yml",
+          32,
+          "v3"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "docker/metadata-action",
+      "file": ".github/workflows/docker-ghcr.yml",
+      "line": 47,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/docker-ghcr.yml",
+          47,
+          "v5"
+        ],
+        [
+          ".github/workflows/production-deploy.yml",
+          40,
+          "v5"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "docker/setup-buildx-action",
+      "file": ".github/workflows/docker-ghcr.yml",
+      "line": 33,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/docker-ghcr.yml",
+          33,
+          "v3"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "docker/setup-qemu-action",
+      "file": ".github/workflows/docker-ghcr.yml",
+      "line": 30,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/docker-ghcr.yml",
+          30,
+          "v3"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "dtolnay/rust-toolchain",
+      "file": ".github/workflows/crates-publish.yml",
+      "line": 17,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/crates-publish.yml",
+          17,
+          "stable"
+        ],
+        [
+          ".github/workflows/release_distribution.yml",
+          34,
+          "stable"
+        ],
+        [
+          ".github/workflows/multiplatform_builds.yml",
+          36,
+          "stable"
+        ],
+        [
+          ".github/workflows/loom.yml",
+          16,
+          "master"
+        ],
+        [
+          ".github/workflows/fuzz.yml",
+          15,
+          "master"
+        ],
+        [
+          ".github/workflows/c5_formal_verification.yml",
+          21,
+          "stable"
+        ],
+        [
+          ".github/workflows/ci.yml",
+          18,
+          "stable"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "github/codeql-action",
+      "file": ".github/workflows/codeql.yml",
+      "line": 25,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/codeql.yml",
+          25,
+          "v3"
+        ],
+        [
+          ".github/workflows/codeql.yml",
+          30,
+          "v3"
+        ],
+        [
+          ".github/workflows/secret_audit.yml",
+          51,
+          "v3"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "gitleaks/gitleaks-action",
+      "file": ".github/workflows/gitleaks.yml",
+      "line": 22,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/gitleaks.yml",
+          22,
+          "v2"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "pypa/gh-action-pypi-publish",
+      "file": ".github/workflows/pypi-publish.yml",
+      "line": 54,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/pypi-publish.yml",
+          54,
+          "release/v1"
+        ],
+        [
+          ".github/workflows/release_distribution.yml",
+          26,
+          "release/v1"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "sigstore/cosign-installer",
+      "file": ".github/workflows/docker-ghcr.yml",
+      "line": 36,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/docker-ghcr.yml",
+          36,
+          "v3.5.0"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "sigstore/gh-action-sigstore-python",
+      "file": ".github/workflows/pypi-publish.yml",
+      "line": 47,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/pypi-publish.yml",
+          47,
+          "v3.0.0"
+        ]
+      ]
+    },
+    {
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "target": "tauri-apps/tauri-action",
+      "file": ".github/workflows/multiplatform_builds.yml",
+      "line": 53,
+      "note": "GitHub no respondio de forma concluyente (rate-limit sin GITHUB_TOKEN o red)",
+      "sites": [
+        [
+          ".github/workflows/multiplatform_builds.yml",
+          53,
+          "v2"
+        ]
+      ]
+    }
+  ]
+}
