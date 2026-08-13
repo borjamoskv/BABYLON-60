@@ -30,7 +30,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
             <h1 className="text-base font-bold tracking-wider text-white font-mono flex items-center gap-2">
               BABYLON60.COM <span className="text-xs text-cyan-400 font-normal">v4.0.0</span>
             </h1>
-            <p className="text-[10px] text-slate-400 font-mono">Sovereign Layer 0 Hardened Substrate</p>
+            <p className="text-[10px] text-slate-400 font-mono">Sovereign Causal Engine & Local Ledger</p>
           </div>
         </div>
 
@@ -39,7 +39,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
         <div className="hidden lg:flex items-center gap-2">
           <span className="c5-badge badge-emerald">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            EU AI ACT: CERTIFIED
+            EU AI ACT: COMPLIANCE-READY
           </span>
           <span className="c5-badge badge-cyan">
             21 AGENTS: PASS

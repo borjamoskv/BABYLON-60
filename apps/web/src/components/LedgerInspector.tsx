@@ -42,7 +42,7 @@ export const LedgerInspector: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl font-bold font-mono text-cyan-300 flex items-center gap-3">
-            <span>🔗 BFT MASTER LEDGER WAL (HASH-CHAINED INMUTABLE)</span>
+            <span>🔗 LOCAL CAUSAL LEDGER WAL (SHA3-256 TAMPER-EVIDENT)</span>
           </h2>
           <p className="text-xs text-slate-400 font-mono mt-1">
             Single-Writer SQLite WAL Ledger con Trazabilidad Causal SHA3-256 e Invariantes EU AI Act

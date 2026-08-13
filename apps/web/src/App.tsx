@@ -34,21 +34,21 @@ function App() {
               <div className="max-w-4xl relative z-10 space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-mono text-xs font-semibold">
                   <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                  SUBSTRATO SOBERANO CAPA 0 — BABYLON60.COM v4.0.0
+                  MOTOR CAUSAL SOBERANO — BABYLON60.COM v4.0.0
                 </div>
                 <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight font-display leading-tight">
                   Infraestructura Causal Verificable para <span className="text-cyan-400">Agentes de IA</span>
                 </h2>
                 <p className="text-base text-slate-300 leading-relaxed font-sans max-w-3xl">
                   BABYLON-60 es el motor de atestación criptográfica y gobernanza de cero anergía para sistemas cognitivos autónomos.
-                  Sustituye bases de datos vectoriales opacas por un ledger BFT inmutable con certificación automática del <strong className="text-emerald-400">EU AI Act (Artículos 9–14)</strong>.
+                  Sustituye bases de datos vectoriales opacas por un ledger local hash-chained (SHA3-256) con exportador de autoevaluación para el <strong className="text-emerald-400">EU AI Act (Artículos 9–14)</strong>.
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
                   <button 
                     onClick={() => handleCTA('compliance')} 
                     className="px-6 py-3 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/50 rounded-xl text-xs font-mono font-bold text-emerald-300 transition-all shadow-[0_0_20px_rgba(16,185,129,0.25)]"
                   >
-                    🛡️ CERTIFICADOR EU AI ACT
+                    🛡️ AUTOEVALUADOR EU AI ACT
                   </button>
                   <button 
                     onClick={() => handleCTA('license')} 
@@ -74,7 +74,7 @@ function App() {
                   <span className="text-emerald-400 font-bold">100% PASS</span>
                 </div>
                 <div className="text-xl font-bold font-mono text-white">EU AI Act Art. 9–14</div>
-                <p className="text-xs text-slate-400 font-mono">Certificado de auditoría en JSON, Markdown y HTML.</p>
+                <p className="text-xs text-slate-400 font-mono">Exportador de evidencia en JSON, Markdown y HTML.</p>
               </div>
 
               <div className="glass-panel p-6 space-y-2">
@@ -123,7 +123,7 @@ function App() {
                   <ul className="text-xs text-slate-300 space-y-2">
                     <li>✅ Acceso al Kernel Rust & Python API</li>
                     <li>✅ 25 Axiomas Z3 & Pruebas Lean 4</li>
-                    <li>✅ SQLite BFT Ledger local</li>
+                    <li>✅ SQLite Tamper-Evident Ledger local (SHA3-256)</li>
                     <li>❌ Soporte SLAs Enterprise</li>
                   </ul>
                 </div>
