@@ -11,8 +11,9 @@ Simulates high-entropy vs. high-exergy code changes and evaluates them using the
 import sys
 import os
 
-# Ensure the scripts directory is in path to import exergy agent
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# Ensure c5_thermo is in sys.path to import exergy agent
+SCRIPTS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(SCRIPTS_DIR, "c5_thermo"))
 from exergy_optimizer_agent import evaluate_gelabp
 
 # Define mock diffs representing different development actions
@@ -51,26 +52,51 @@ def print_banner(title: str):
     print("=" * 60)
 
 
-def run_poc():
+def run_poc(json_output: bool = False):
+    exergy1, g1, e1, l1, a1, b1 = evaluate_gelabp(MOCK_DIFF_HIGH_ENTROPY)
+    exergy2, g2, e2, l2, a2, b2 = evaluate_gelabp(MOCK_DIFF_HIGH_EXERGY)
+
+    if json_output:
+        import json
+        payload = {
+            "schema_version": "1.0",
+            "type": "C5_EXERGY_OPTIMIZER_POC",
+            "scenarios": [
+                {
+                    "name": "High Entropy Mutation",
+                    "exergy_score": exergy1,
+                    "passed": exergy1 >= 700.0,
+                    "metrics": {"gradient": g1, "entropy": e1, "leverage": l1, "autoloop": a1, "bottleneck": b1}
+                },
+                {
+                    "name": "High Exergy Mutation",
+                    "exergy_score": exergy2,
+                    "passed": exergy2 >= 700.0,
+                    "metrics": {"gradient": g2, "entropy": e2, "leverage": l2, "autoloop": a2, "bottleneck": b2}
+                }
+            ],
+            "status": "PASS"
+        }
+        print(json.dumps(payload, indent=2))
+        return
+
     print_banner("Causal-Determinist Exergy Agent Proof of Concept")
 
     # Test Scenario 1: Bad code (leak + broad exception + weak pattern)
     print_banner("Scenario 1: Code Mutation containing High Entropy")
     print(f"Mock Diff Content:\n{MOCK_DIFF_HIGH_ENTROPY.strip()}\n")
-    exergy, g, e, lev, a, b = evaluate_gelabp(MOCK_DIFF_HIGH_ENTROPY)
-    print(f"📊 Evaluated Exergy: {exergy:.1f}/1000.0")
-    print(f"  G (Gradient):  {g}")
-    print(f"  E (Entropy):   {e}")
-    print(f"  L (Leverage):  {lev}")
-    print(f"  A (AutoLoop):  {a}")
-    print(f"  B (Bottleneck):{b}")
-    print(f"Veredicto: {'🟢 PASS' if exergy >= 700.0 else '🔴 FAIL (Fallo síncrono provocado)'}")
+    print(f"📊 Evaluated Exergy: {exergy1:.1f}/1000.0")
+    print(f"  G (Gradient):  {g1}")
+    print(f"  E (Entropy):   {e1}")
+    print(f"  L (Leverage):  {l1}")
+    print(f"  A (AutoLoop):  {a1}")
+    print(f"  B (Bottleneck):{b1}")
+    print(f"Veredicto: {'🟢 PASS' if exergy1 >= 700.0 else '🔴 FAIL (Fallo síncrono provocado)'}")
     print()
 
     # Test Scenario 2: Optimized code (invariant test addition + strict serialization)
     print_banner("Scenario 2: Code Mutation containing High Exergy")
     print(f"Mock Diff Content:\n{MOCK_DIFF_HIGH_EXERGY.strip()}\n")
-    exergy2, g2, e2, l2, a2, b2 = evaluate_gelabp(MOCK_DIFF_HIGH_EXERGY)
     print(f"📊 Evaluated Exergy: {exergy2:.1f}/1000.0")
     print(f"  G (Gradient):  {g2}")
     print(f"  E (Entropy):   {e2}")
@@ -82,4 +108,8 @@ def run_poc():
 
 
 if __name__ == "__main__":
-    run_poc()
+    import argparse
+    parser = argparse.ArgumentParser(description="Exergy Optimizer Agent Proof of Concept")
+    parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
+    args = parser.parse_args()
+    run_poc(json_output=args.json)

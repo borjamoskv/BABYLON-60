@@ -5,6 +5,12 @@ import logging
 from typing import Any, Tuple, List, Optional
 from contextlib import contextmanager
 
+try:
+    import babylon60
+    _HAVE_RUST_KERNEL = True
+except ImportError:
+    _HAVE_RUST_KERNEL = False
+
 logger = logging.getLogger("bft_sqlite")
 
 class BFTDatabaseError(Exception):
@@ -18,11 +24,14 @@ class BFTSQLite:
     Garantiza que la exergía de la base de datos se mantiene intacta bajo alta concurrencia.
     """
     
-    def __init__(self, db_path: str, max_retries: int = 5, base_delay: float = 0.1, max_delay: float = 2.0):
+    def __init__(self, db_path: str = "cortex.db", max_retries: int = 5, base_delay: float = 0.1, max_delay: float = 2.0):
         self.db_path = db_path
         self.max_retries = max_retries
         self.base_delay = base_delay
         self.max_delay = max_delay
+        
+        if _HAVE_RUST_KERNEL:
+            logger.info(f"[BFT-KERNEL] {babylon60.kernel_status()}")
 
     @contextmanager
     def _connection(self):
