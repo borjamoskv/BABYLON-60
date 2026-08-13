@@ -118,7 +118,7 @@ def cortex_hash_truncated(data: bytes | str, length: int = 16) -> str:
     Returns:
         Truncated hex representation string.
     """
-    return cortex_hash(data)[:length]
+    return cortex_hash_hex(data)[:length]
 
 
 def cortex_hmac(key: bytes | str, data: bytes | str) -> str:
@@ -137,7 +137,10 @@ def cortex_hmac(key: bytes | str, data: bytes | str) -> str:
         key = key.encode("utf-8")
     if isinstance(data, str):
         data = data.encode("utf-8")
-    return _hmac.new(key, data, hashlib.new(_active_algorithm.value).__class__).hexdigest()
+    alg = _active_algorithm.value
+    if alg.startswith("sha3"):
+        alg = "sha256"
+    return _hmac.new(key, data, digestmod=alg).hexdigest()
 
 
 def cortex_hmac_b60(key: bytes | str, data: bytes | str) -> str:
@@ -156,7 +159,12 @@ def cortex_hmac_b60(key: bytes | str, data: bytes | str) -> str:
         key = key.encode("utf-8")
     if isinstance(data, str):
         data = data.encode("utf-8")
-    return bytes_to_base60(_hmac.new(key, data, hashlib.new(_active_algorithm.value).__class__).digest())
+    alg = _active_algorithm.value
+    if alg.startswith("sha3"):
+        alg = "sha256"
+    digest = _hmac.new(key, data, digestmod=alg).digest()
+    return bytes_to_base60(digest)
+
 
 
 def cortex_hash_raw(data: bytes | str) -> bytes:

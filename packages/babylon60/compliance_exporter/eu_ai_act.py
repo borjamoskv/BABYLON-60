@@ -104,12 +104,14 @@ class EUAIActComplianceExporter:
             "locale": locale,
             "compliance_standard": t["compliance_standard"],
             "supervisory_authority": t["authority"],
-            "certificate_id": f"EU-AIA-CERT-{cert_fingerprint[:16].upper()}",
+            "report_id": f"EU-AIA-REPORT-{cert_fingerprint[:16].upper()}",
+            "certificate_id": f"EU-AIA-REPORT-{cert_fingerprint[:16].upper()}",
             "system_identifier": system_id,
             "operator": operator_name,
             "issued_at": timestamp_iso,
             "global_merkle_root": global_hash,
             "quarantine_status": status_str,
+            "legal_disclaimer": t["legal_disclaimer"],
             "articles_compliance": {
                 "Article_9_Risk_Management": {
                     "title": t["article_titles"]["Article_9"],
@@ -149,16 +151,21 @@ class EUAIActComplianceExporter:
             },
         }
 
+    generate_report = generate_certificate
+
     def export_markdown_report(self, cert: Dict[str, Any], output_filepath: str, locale: str = "es") -> str:
-        """Exports localized certificate into human-readable Markdown format for regulators/auditors."""
+        """Exports localized self-assessment report into human-readable Markdown format."""
         t = get_translation(locale)
 
         md = f"""# {cert["title"]}
 **{t["compliance_standard"]}**  
 **Autoridad de Supervisión:** `{cert["supervisory_authority"]}`  
-**ID Certificado:** `{cert["certificate_id"]}`  
+**ID Informe:** `{cert["report_id"]}`  
 **Sistema:** `{cert["system_identifier"]}` | **Operador:** `{cert["operator"]}`  
 **Emisión:** `{cert["issued_at"]}` | **Estado de Cuarentena:** `{cert["quarantine_status"]}`  
+
+> **DESCARGO LEGAL / LEGAL DISCLAIMER**  
+> {cert.get("legal_disclaimer", t["legal_disclaimer"])}
 
 ---
 
