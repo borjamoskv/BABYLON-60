@@ -1,5 +1,5 @@
 # Stage 1: Build environment
-FROM python:3.12-slim AS builder
+FROM python:3.12-slim-bookworm AS builder
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -24,13 +24,24 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ENV PATH="/root/.local/bin:$PATH"
 
 COPY pyproject.toml uv.lock ./
-COPY crates/strike-rs ./crates/strike-rs
-RUN cd crates/strike-rs && cargo build --release
+COPY crates ./crates
+COPY packages ./packages
+COPY src ./src
+COPY experiments ./experiments
+COPY README.md LICENSE ./
+
 RUN uv sync --frozen --no-dev
 COPY . .
 
 # Stage 2: Minimal Runtime environment (Non-root user)
-FROM python:3.12-slim AS runner
+FROM python:3.12-slim-bookworm AS runner
+
+LABEL org.opencontainers.image.title="BABYLON-60" \
+      org.opencontainers.image.description="CORTEX C5-REAL execution kernel (BABYLON-60): BFT ledgers, onco-transducer, exergy pipelines" \
+      org.opencontainers.image.url="https://github.com/borjamoskv/BABYLON-60" \
+      org.opencontainers.image.source="https://github.com/borjamoskv/BABYLON-60" \
+      org.opencontainers.image.vendor="Borja Moskv" \
+      org.opencontainers.image.licenses="Sovereign Dual-License (Non-Commercial / Enterprise)"
 
 WORKDIR /app
 RUN useradd -m -u 1000 appuser
@@ -38,9 +49,14 @@ RUN useradd -m -u 1000 appuser
 COPY --from=builder /app /app
 COPY --from=builder /root/.local /home/appuser/.local
 
-ENV PATH="/home/appuser/.local/bin:$PATH" \
-    PYTHONUNBUFFERED=1
+ENV PATH="/home/appuser/.local/bin:/app/.venv/bin:$PATH" \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH="/app/packages:/app/experiments:."
 
 USER appuser
 
-CMD ["python", "-m", "babylon60.cli.onco_transducer"]
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD python -c "import babylon60; print('BABYLON-60 OK')" || exit 1
+
+ENTRYPOINT ["python", "-m", "babylon60.cli.onco_transducer"]
+CMD ["--help"]

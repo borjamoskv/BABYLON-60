@@ -79,7 +79,8 @@ class HotStateDB:
 
     def __init__(self, db_path: Path | str | None = None) -> None:
         if db_path is None:
-            db_path = Path.home() / ".cortex" / "hot_state.db"
+            base_dir = Path(os.getenv("BABYLON_HOME", str(Path.home() / ".babylon60")))
+            db_path = base_dir / "hot_state.db"
         self._db_path = Path(db_path)
         self._db_path.parent.mkdir(parents=True, exist_ok=True)
         self._boot_time = time.monotonic()

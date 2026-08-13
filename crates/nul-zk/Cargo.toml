@@ -2,9 +2,10 @@
 name = "nul-zk"
 version = "0.1.0"
 edition = "2021"
-authors = ["Borja Moskv"]
+authors = ["Borja Moskv <borjamoskv@github.com>"]
 description = "Sovereign Zero-Knowledge DSL compiler and Arkworks synthesizer for BABYLON-60"
-license = "MIT OR Apache-2.0"
+license = "Apache-2.0 OR MIT"
+repository = "https://github.com/borjamoskv/BABYLON-60"
 
 [dependencies]
 pest = "2.7"

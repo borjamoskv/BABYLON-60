@@ -2,6 +2,10 @@
 name = "strike_rs"
 version = "0.1.0"
 edition = "2024"
+license = "Apache-2.0 OR MIT"
+description = "High-performance I/O and cryptographic primitives for BABYLON-60"
+repository = "https://github.com/borjamoskv/BABYLON-60"
+authors = ["Borja Moskv <borjamoskv@github.com>"]
 
 [lib]
 name = "strike_rs"
@@ -39,4 +43,3 @@ tonic-build = { version = "0.12", features = ["prost"] }
 
 [dependencies.iceoryx2]
 version = "0.3.0"
-

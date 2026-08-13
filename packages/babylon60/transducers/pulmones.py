@@ -16,15 +16,20 @@ from functools import wraps
 from pathlib import Path
 from typing import Any
 
-logger = logging.getLogger("CORTEX.PULMONES")
+import os
+
+logger = logging.getLogger("BABYLON60.PULMONES")
 
 
 class PulmonesQueue:
     """Cola SQLite ACID para persistir tareas fallidas (Zero-Trust Queue)."""
 
-    def __init__(self, db_path: Path = Path.home() / ".cortex" / "pulmones.db"):
+    def __init__(self, db_path: Path | None = None):
+        if db_path is None:
+            base_dir = Path(os.getenv("BABYLON_HOME", str(Path.home() / ".babylon60")))
+            db_path = base_dir / "pulmones.db"
         self.db_path = db_path
-        self._fallback_path = Path(tempfile.gettempdir()) / "cortex_pulmones.db"
+        self._fallback_path = Path(tempfile.gettempdir()) / "babylon60_pulmones.db"
         self._available = True
         try:
             self._init_with_fallback()

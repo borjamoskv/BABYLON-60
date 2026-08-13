@@ -11,14 +11,19 @@ import time
 from importlib import import_module
 from pathlib import Path
 
+import os
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
-logger = logging.getLogger("CORTEX.PULMONES.WORKER")
+logger = logging.getLogger("BABYLON60.PULMONES.WORKER")
 
 
 class PulmonesWorker:
     """Daemon soberano que drena la cola de fallos SQLite de forma asíncrona."""
 
-    def __init__(self, db_path: Path = Path.home() / ".cortex" / "pulmones.db"):
+    def __init__(self, db_path: Path | None = None):
+        if db_path is None:
+            base_dir = Path(os.getenv("BABYLON_HOME", str(Path.home() / ".babylon60")))
+            db_path = base_dir / "pulmones.db"
         self.db_path = db_path
         self.running = False
         # Para evitar saturar APIs en la recuperación, aplicamos rate-limiting por lote

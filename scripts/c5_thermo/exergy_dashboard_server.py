@@ -22,12 +22,14 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 
-import os
-# We will read from exergy_agent_ledger.db which is created in ~/.babylon60/exergy_agent_ledger.db
 babylon_home = os.environ.get("BABYLON_HOME")
 if not babylon_home:
     raise RuntimeError("INV_C5_ENV: BABYLON_HOME must be set. Path.home() is prohibited.")
-DB_PATH = Path(babylon_home) / ".babylon60/exergy_agent_ledger.db"
+home_path = Path(babylon_home)
+if home_path.name == ".babylon60":
+    DB_PATH = home_path / "exergy_agent_ledger.db"
+else:
+    DB_PATH = home_path / ".babylon60" / "exergy_agent_ledger.db"
 
 
 class ExergyDashboardHandler(SimpleHTTPRequestHandler):

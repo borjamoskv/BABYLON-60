@@ -55,9 +55,10 @@ logger = logging.getLogger("babylon60.mcp.server")
 # ---------------------------------------------------------------------------
 # Default ledger path
 # ---------------------------------------------------------------------------
-DEFAULT_LEDGER_PATH = Path.home() / ".babylon60" / "mcp_ledger.db"
-DEFAULT_MAIL_LEDGER_PATH = Path.home() / ".babylon60" / "babylonmail" / "mail_ledger.db"
-DEFAULT_CAUSAL_GATE_PATH = Path.home() / ".babylon60" / "causal_gate.db"
+BABYLON_BASE_PATH = Path(os.getenv("BABYLON_HOME", str(Path.home() / ".babylon60")))
+DEFAULT_LEDGER_PATH = BABYLON_BASE_PATH / "mcp_ledger.db"
+DEFAULT_MAIL_LEDGER_PATH = BABYLON_BASE_PATH / "babylonmail" / "mail_ledger.db"
+DEFAULT_CAUSAL_GATE_PATH = BABYLON_BASE_PATH / "causal_gate.db"
 
 # ---------------------------------------------------------------------------
 # MCP Protocol Constants (JSON-RPC 2.0)

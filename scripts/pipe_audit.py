@@ -29,9 +29,9 @@ import json
 import re
 import sys
 from datetime import datetime, timezone
-from pathlib import Path
+import os
 
-LEDGER = Path.home() / ".cortex" / "pipe_audit_log.jsonl"
+LEDGER = Path(os.getenv("BABYLON_HOME", str(Path.home() / ".babylon60"))) / "pipe_audit_log.jsonl"
 
 # ── Vectores de ejecución OS en payloads de intérprete ─────────────────
 DANGEROUS_PY_CALLS = {

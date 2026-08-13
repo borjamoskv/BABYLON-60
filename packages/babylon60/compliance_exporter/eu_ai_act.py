@@ -189,3 +189,214 @@ class EUAIActComplianceExporter:
         with open(output_filepath, "w", encoding="utf-8") as f:
             f.write(md)
         return output_filepath
+
+    def export_html_report(self, cert: Dict[str, Any], output_filepath: str, locale: str = "es") -> str:
+        """Exports localized certificate into a visually stunning, printable HTML report."""
+        t = get_translation(locale)
+
+        rows = ""
+        for art_key, art_val in cert["articles_compliance"].items():
+            status_badge = (
+                '<span class="badge badge-success">✅ ' + str(art_val["status"]) + '</span>'
+                if "PASS" in str(art_val["status"]) or "CUMPLIDO" in str(art_val["status"])
+                else '<span class="badge badge-danger">❌ ' + str(art_val["status"]) + '</span>'
+            )
+            rows += f"""
+            <tr>
+                <td><strong>{art_val['title']}</strong></td>
+                <td>{art_val['mechanism']}</td>
+                <td>{status_badge}</td>
+                <td><code>{art_val['evidence_hash'][:16]}...</code></td>
+            </tr>
+            """
+
+        html = f"""<!DOCTYPE html>
+<html lang="{locale}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{cert['title']} - {cert['certificate_id']}</title>
+    <style>
+        :root {{
+            --bg-color: #0b0f19;
+            --card-bg: rgba(18, 26, 43, 0.85);
+            --accent: #00F0FF;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --success: #10b981;
+            --danger: #ef4444;
+            --border: rgba(255, 255, 255, 0.1);
+        }}
+        body {{
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.6;
+        }}
+        .container {{
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }}
+        .header {{
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }}
+        h1 {{
+            color: #fff;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.8rem;
+            letter-spacing: -0.025em;
+        }}
+        .badge {{
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }}
+        .badge-success {{ background: rgba(16, 185, 129, 0.2); color: var(--success); border: 1px solid var(--success); }}
+        .badge-danger {{ background: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid var(--danger); }}
+        .grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }}
+        .card {{
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+        }}
+        .card-title {{ font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }}
+        .card-value {{ font-size: 1rem; font-weight: 600; color: #fff; margin-top: 0.25rem; font-family: monospace; }}
+        table {{
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }}
+        th, td {{
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }}
+        th {{ background: rgba(255, 255, 255, 0.05); color: var(--muted); font-size: 0.85rem; text-transform: uppercase; }}
+        code {{ background: rgba(0, 240, 255, 0.1); color: var(--accent); padding: 0.2rem 0.4rem; border-radius: 4px; font-family: monospace; }}
+        .footer {{
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: var(--muted);
+            text-align: center;
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📜 {cert['title']}</h1>
+            <p style="color: var(--accent); font-weight: 600; margin: 0;">{t['compliance_standard']}</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-title">ID Certificado</div>
+                <div class="card-value">{cert['certificate_id']}</div>
+            </div>
+            <div class="card">
+                <div class="card-title">Sistema Auditado</div>
+                <div class="card-value">{cert['system_identifier']}</div>
+            </div>
+            <div class="card">
+                <div class="card-title">Operador / Entidad</div>
+                <div class="card-value">{cert['operator']}</div>
+            </div>
+            <div class="card">
+                <div class="card-title">Fecha Emisión</div>
+                <div class="card-value">{cert['issued_at']}</div>
+            </div>
+        </div>
+
+        <h2>Executive Summary</h2>
+        <p>{t['executive_summary_text']}</p>
+        <p><strong>Global Merkle Root:</strong> <code>{cert['global_merkle_root']}</code></p>
+        <p><strong>Cryptographic Fingerprint:</strong> <code>{cert['cryptographic_attestation']['fingerprint']}</code></p>
+
+        <h2 style="margin-top: 2rem;">Matriz de Cumplimiento Normativo EU AI Act</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Artículo / Requisito</th>
+                    <th>Mecanismo Técnico BABYLON-60</th>
+                    <th>Estado</th>
+                    <th>Evidencia Hash</th>
+                </tr>
+            </thead>
+            <tbody>
+                {rows}
+            </tbody>
+        </table>
+
+        <div class="footer">
+            BABYLON-60 v4.0 C5-REAL Compliance Transducer — {cert['supervisory_authority']}
+        </div>
+    </div>
+</body>
+</html>
+"""
+        os.makedirs(os.path.dirname(output_filepath), exist_ok=True)
+        with open(output_filepath, "w", encoding="utf-8") as f:
+            f.write(html)
+        return output_filepath
+
+
+def main_cli():
+    import argparse
+
+    parser = argparse.ArgumentParser(description="BABYLON-60 EU AI Act Compliance Certificate Exporter")
+    parser.add_argument("--bundle", default="artifact_bundle_v3", help="Ruta al paquete de artefactos/evidencia")
+    parser.add_argument("--system-id", default="BABYLON60-PROD-01", help="Identificador del sistema de IA auditado")
+    parser.add_argument("--operator", default="Enterprise Operator", help="Nombre de la entidad u operador")
+    parser.add_argument("--locale", default="es", choices=["es", "en", "de", "fr", "it"], help="Idioma de certificación")
+    parser.add_argument("--format", default="json", choices=["json", "md", "html"], help="Formato de exportación")
+    parser.add_argument("--output", help="Ruta del archivo de salida")
+
+    args = parser.parse_args()
+
+    exporter = EUAIActComplianceExporter(artifact_bundle_path=args.bundle)
+    cert = exporter.generate_certificate(
+        system_id=args.system_id,
+        operator_name=args.operator,
+        locale=args.locale
+    )
+
+    out_path = args.output
+    if not out_path:
+        ext = args.format if args.format != "md" else "md"
+        out_path = f"compliance_cert_{args.system_id}.{ext}"
+
+    if args.format == "json":
+        os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+        with open(out_path, "w", encoding="utf-8") as f:
+            json.dump(cert, f, indent=2, ensure_ascii=False)
+    elif args.format == "md":
+        exporter.export_markdown_report(cert, out_path, locale=args.locale)
+    elif args.format == "html":
+        exporter.export_html_report(cert, out_path, locale=args.locale)
+
+    print(f"[+] Certificado EU AI Act generado con éxito en: {out_path}")
+
+
+if __name__ == "__main__":
+    main_cli()
+
