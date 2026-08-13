@@ -28,7 +28,8 @@ from dataclasses import dataclass, field
 from typing import Any
 
 try:
-#     from babylon60.extensions.sync.hlc import HLCTimestamp  # purgado por anergía
+    pass
+    # from babylon60.extensions.sync.hlc import HLCTimestamp  # purgado por anergía
 except ImportError:
     HLCTimestamp = Any  # type: ignore[misc, assignment]
 

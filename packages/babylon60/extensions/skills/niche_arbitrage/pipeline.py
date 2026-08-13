@@ -4,8 +4,9 @@
 # ============================================================================
 # [Causal-Determinist] Exergy-Maximized
 try:
-#     from babylon60.extensions.scraper.engine import ScraperEngine  # purgado por anergía
-#     from babylon60.extensions.scraper.models import ExtractionStrategy, ScrapeRequest, ScrapeResult  # purgado por anergía
+    pass
+    pass  # from babylon60.extensions.scraper.engine import ScraperEngine  # purgado por anergía (purgado por anergía)
+    pass  # from babylon60.extensions.scraper.models import ExtractionStrategy, ScrapeRequest, ScrapeResult  # purgado por anergía (purgado por anergía)
 except ImportError:
     ScraperEngine = None
     ExtractionStrategy = None

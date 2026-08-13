@@ -23,14 +23,20 @@
     "experiments/scratch/test_dual_license.py",
     "experiments/scratch/test_hypervisor.py"
   ],
-  "reachable_files": 260,
-  "total_python_files": 515,
+  "reachable_files": 262,
+  "total_python_files": 518,
   "demoted_by_reachability": [
     {
       "kind": "LOCAL_DESALINEADO",
       "file": "scripts/c5_legion/legion_swarm_core.py",
       "sin_alcanzabilidad": "alto",
       "con_alcanzabilidad": "bajo"
+    },
+    {
+      "kind": "FANTASMA",
+      "file": "tools/kimi_bridge.py",
+      "sin_alcanzabilidad": "medio",
+      "con_alcanzabilidad": "informativo"
     }
   ],
   "syntax_errors": [
@@ -47,22 +53,6 @@
       "error": "linea 12: expected an indented block after 'try' statement on line 10"
     },
     {
-      "file": "scripts/kimi_nexus/kimi_nexus.py",
-      "error": "linea 13: expected an indented block after 'try' statement on line 11"
-    },
-    {
-      "file": "scripts/c5_demos/poc_fast_failure_guard.py",
-      "error": "linea 16: expected an indented block after 'try' statement on line 14"
-    },
-    {
-      "file": "scripts/c5_demos/run_commercial_bft.py",
-      "error": "linea 15: expected an indented block after 'try' statement on line 13"
-    },
-    {
-      "file": "scripts/c5_thermo/stress_10m.py",
-      "error": "linea 14: expected an indented block after 'try' statement on line 12"
-    },
-    {
       "file": "packages/babylon60/extensions/swarm/josu_daemon.py",
       "error": "linea 123: unindent does not match any outer indentation level"
     },
@@ -77,19 +67,13 @@
     {
       "file": "packages/babylon60/extensions/daemon/sidecar/compaction_monitor/monitor.py",
       "error": "linea 140: unindent does not match any outer indentation level"
-    },
-    {
-      "file": "packages/babylon60/extensions/skills/niche_arbitrage/pipeline.py",
-      "error": "linea 9: expected an indented block after 'try' statement on line 6"
-    },
-    {
-      "file": "packages/babylon60/extensions/sync/crdt.py",
-      "error": "linea 32: expected an indented block after 'try' statement on line 30"
     }
   ],
   "counts": {
     "LOCAL_DESALINEADO": 8,
-    "NO_DECLARADO": 21
+    "NO_DECLARADO": 21,
+    "NO_VERIFICADO": 7,
+    "SIMBOLO_FANTASMA": 1
   },
   "findings": [
     {
@@ -348,7 +332,9 @@
       "module": "openai",
       "kind": "NO_DECLARADO",
       "severity": "bajo",
-      "flags": [],
+      "flags": [
+        "guarded"
+      ],
       "note": "paquete real de PyPI ('openai') usado en 2 fichero(s) y ausente del manifiesto: instalacion limpia rota",
       "evidence": "",
       "declared": false,
@@ -364,7 +350,7 @@
         },
         {
           "file": "packages/babylon60/extensions/skills/niche_arbitrage/pipeline.py",
-          "line": 23,
+          "line": 24,
           "imported": "openai"
         }
       ],
@@ -401,10 +387,10 @@
       "kind": "LOCAL_DESALINEADO",
       "severity": "bajo",
       "flags": [],
-      "note": "existe en el repo (apps/babylon60-ide/backend/routes) pero se importa como top-level; solo resuelve con el cwd/sys.path correcto | ADEMAS 'routes' existe en PyPI con el mismo nombre: el orden de sys.path decide cual gana (shadowing)",
+      "note": "existe en el repo (apps/babylon60-ide/backend/routes) pero se importa como top-level; solo resuelve con el cwd/sys.path correcto",
       "evidence": "",
       "declared": false,
-      "in_registry": true,
+      "in_registry": null,
       "registry_name": "routes",
       "on_disk": [
         "apps/babylon60-ide/backend/routes"
@@ -509,6 +495,379 @@
     },
     {
       "ecosystem": "python",
+      "module": "cryptography",
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "flags": [
+        "lazy"
+      ],
+      "note": "registro indeterminado (red); no se concluye",
+      "evidence": "",
+      "declared": true,
+      "in_registry": null,
+      "registry_name": "cryptography",
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "experiments/apex_trials/ledger.py",
+          "line": 287,
+          "imported": "cryptography.fernet"
+        },
+        {
+          "file": "tests/test_ledger_vault_verify.py",
+          "line": 14,
+          "imported": "cryptography.fernet"
+        },
+        {
+          "file": "scripts/c5_cortex/bootstrap_cortex_memory.py",
+          "line": 10,
+          "imported": "cryptography.fernet"
+        },
+        {
+          "file": "packages/babylon60/crypto/bootstrap.py",
+          "line": 14,
+          "imported": "cryptography.hazmat.primitives"
+        },
+        {
+          "file": "packages/babylon60/crypto/bootstrap.py",
+          "line": 15,
+          "imported": "cryptography.hazmat.primitives.asymmetric"
+        },
+        {
+          "file": "packages/babylon60/crypto/aes.py",
+          "line": 21,
+          "imported": "cryptography.exceptions"
+        },
+        {
+          "file": "packages/babylon60/crypto/aes.py",
+          "line": 22,
+          "imported": "cryptography.hazmat.primitives"
+        },
+        {
+          "file": "packages/babylon60/crypto/aes.py",
+          "line": 23,
+          "imported": "cryptography.hazmat.primitives.ciphers.aead"
+        },
+        {
+          "file": "packages/babylon60/crypto/aes.py",
+          "line": 24,
+          "imported": "cryptography.hazmat.primitives.kdf.hkdf"
+        },
+        {
+          "file": "packages/babylon60/crypto/keys.py",
+          "line": 30,
+          "imported": "cryptography.exceptions"
+        },
+        {
+          "file": "packages/babylon60/crypto/keys.py",
+          "line": 31,
+          "imported": "cryptography.hazmat.primitives"
+        },
+        {
+          "file": "packages/babylon60/crypto/keys.py",
+          "line": 32,
+          "imported": "cryptography.hazmat.primitives.asymmetric"
+        }
+      ],
+      "site_count": 28
+    },
+    {
+      "ecosystem": "python",
+      "module": "pytest",
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "flags": [
+        "lazy"
+      ],
+      "note": "registro indeterminado (red); no se concluye",
+      "evidence": "",
+      "declared": true,
+      "in_registry": null,
+      "registry_name": "pytest",
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "tests/test_itera2_invariants.py",
+          "line": 16,
+          "imported": "pytest"
+        },
+        {
+          "file": "tests/test_syntax_integrity.py",
+          "line": 14,
+          "imported": "pytest"
+        },
+        {
+          "file": "tests/test_quarantine_snapshot.py",
+          "line": 7,
+          "imported": "pytest"
+        },
+        {
+          "file": "tests/test_master_ledger_queue.py",
+          "line": 6,
+          "imported": "pytest"
+        },
+        {
+          "file": "tests/test_compliance_and_attestation.py",
+          "line": 12,
+          "imported": "pytest"
+        },
+        {
+          "file": "tests/test_gemini_labs_nexus.py",
+          "line": 11,
+          "imported": "pytest"
+        },
+        {
+          "file": "tests/test_f60_arithmetic.py",
+          "line": 5,
+          "imported": "pytest"
+        },
+        {
+          "file": "tests/test_c5_invariants.py",
+          "line": 23,
+          "imported": "pytest"
+        },
+        {
+          "file": "tests/test_shadow_router_c5.py",
+          "line": 9,
+          "imported": "pytest"
+        },
+        {
+          "file": "tests/test_causal_hitl_verification_gate.py",
+          "line": 8,
+          "imported": "pytest"
+        },
+        {
+          "file": "tests/test_atms_hardening.py",
+          "line": 7,
+          "imported": "pytest"
+        },
+        {
+          "file": "tests/test_phase3_enterprise.py",
+          "line": 10,
+          "imported": "pytest"
+        }
+      ],
+      "site_count": 28
+    },
+    {
+      "ecosystem": "python",
+      "module": "fastapi",
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "flags": [],
+      "note": "registro indeterminado (red); no se concluye",
+      "evidence": "",
+      "declared": true,
+      "in_registry": null,
+      "registry_name": "fastapi",
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "tests/test_inference_security.py",
+          "line": 5,
+          "imported": "fastapi.testclient"
+        },
+        {
+          "file": "tests/test_inference_security.py",
+          "line": 18,
+          "imported": "fastapi"
+        },
+        {
+          "file": "tests/test_inbound_email.py",
+          "line": 10,
+          "imported": "fastapi"
+        },
+        {
+          "file": "tests/test_inbound_email.py",
+          "line": 11,
+          "imported": "fastapi.testclient"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/ccr_proxy.py",
+          "line": 15,
+          "imported": "fastapi"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/ccr_proxy.py",
+          "line": 16,
+          "imported": "fastapi.middleware.cors"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/ccr_proxy.py",
+          "line": 17,
+          "imported": "fastapi.responses"
+        },
+        {
+          "file": "packages/babylon60/extensions/daemon/ccr_proxy.py",
+          "line": 18,
+          "imported": "fastapi.security"
+        },
+        {
+          "file": "packages/babylon60/services/inbound_email.py",
+          "line": 15,
+          "imported": "fastapi"
+        },
+        {
+          "file": "apps/babylon60-ide/backend/main.py",
+          "line": 15,
+          "imported": "fastapi"
+        },
+        {
+          "file": "apps/babylon60-ide/backend/main.py",
+          "line": 16,
+          "imported": "fastapi.middleware.cors"
+        },
+        {
+          "file": "apps/babylon60-ide/backend/main.py",
+          "line": 17,
+          "imported": "fastapi.middleware.gzip"
+        }
+      ],
+      "site_count": 24
+    },
+    {
+      "ecosystem": "python",
+      "module": "numpy",
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "flags": [
+        "guarded"
+      ],
+      "note": "registro indeterminado (red); no se concluye",
+      "evidence": "",
+      "declared": true,
+      "in_registry": null,
+      "registry_name": "numpy",
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "experiments/xenarmonia/makam_dsp.py",
+          "line": 1,
+          "imported": "numpy"
+        },
+        {
+          "file": "tests/test_graph.py",
+          "line": 1,
+          "imported": "numpy"
+        },
+        {
+          "file": "scripts/c5_isomorphisms/cancer_isomorphism_pipeline.py",
+          "line": 6,
+          "imported": "numpy"
+        },
+        {
+          "file": "scripts/c5_assets/thermo_wallpaper.py",
+          "line": 8,
+          "imported": "numpy"
+        },
+        {
+          "file": "scripts/c5_calibrations/calibrate_aphairesis.py",
+          "line": 17,
+          "imported": "numpy"
+        },
+        {
+          "file": "scripts/c5_calibrations/topological_calibration.py",
+          "line": 17,
+          "imported": "numpy"
+        },
+        {
+          "file": "packages/babylon60/compat/optional.py",
+          "line": 37,
+          "imported": "numpy"
+        },
+        {
+          "file": "packages/babylon60/core/discrete_curvature.py",
+          "line": 6,
+          "imported": "numpy"
+        },
+        {
+          "file": "packages/babylon60/cli/onco_transducer.py",
+          "line": 23,
+          "imported": "numpy"
+        },
+        {
+          "file": "packages/babylon60/extensions/swarm/infinite_minds.py",
+          "line": 142,
+          "imported": "numpy"
+        },
+        {
+          "file": "packages/babylon60/transducers/compression.py",
+          "line": 26,
+          "imported": "numpy"
+        }
+      ],
+      "site_count": 11
+    },
+    {
+      "ecosystem": "python",
+      "module": "yaml",
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "flags": [
+        "guarded"
+      ],
+      "note": "registro indeterminado (red); no se concluye",
+      "evidence": "",
+      "declared": true,
+      "in_registry": null,
+      "registry_name": "pyyaml",
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "experiments/scratch/map_primitives_thermodynamics.py",
+          "line": 1,
+          "imported": "yaml"
+        },
+        {
+          "file": "experiments/scratch/improved_map_primitives.py",
+          "line": 1,
+          "imported": "yaml"
+        },
+        {
+          "file": "scripts/c5_quality_gates/audit_100_agents.py",
+          "line": 21,
+          "imported": "yaml"
+        },
+        {
+          "file": "scripts/c5_cortex/bootstrap_cortex_memory.py",
+          "line": 7,
+          "imported": "yaml"
+        },
+        {
+          "file": "scripts/c5_cortex/cortex_objectives_transducer.py",
+          "line": 9,
+          "imported": "yaml"
+        },
+        {
+          "file": "packages/cortex/agents/arsenal_10k/centuria_meta_transducer.py",
+          "line": 20,
+          "imported": "yaml"
+        },
+        {
+          "file": "packages/babylon60/cortex/cortex_purge_anergy.py",
+          "line": 17,
+          "imported": "yaml"
+        },
+        {
+          "file": "packages/babylon60/extensions/swarm/knowledge_radar.py",
+          "line": 28,
+          "imported": "yaml"
+        },
+        {
+          "file": "packages/babylon60/extensions/skills/registry.py",
+          "line": 25,
+          "imported": "yaml"
+        }
+      ],
+      "site_count": 9
+    },
+    {
+      "ecosystem": "python",
       "module": "watchdog",
       "kind": "NO_DECLARADO",
       "severity": "informativo",
@@ -555,6 +914,46 @@
         }
       ],
       "site_count": 6
+    },
+    {
+      "ecosystem": "python",
+      "module": "nacl",
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "flags": [
+        "guarded",
+        "lazy"
+      ],
+      "note": "registro indeterminado (red); no se concluye",
+      "evidence": "",
+      "declared": true,
+      "in_registry": null,
+      "registry_name": "pynacl",
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "tests/test_itera2_invariants.py",
+          "line": 171,
+          "imported": "nacl.signing"
+        },
+        {
+          "file": "packages/babylon60/cli/llm_attest.py",
+          "line": 13,
+          "imported": "nacl.signing"
+        },
+        {
+          "file": "packages/babylon60/cli/llm_attest.py",
+          "line": 14,
+          "imported": "nacl.exceptions"
+        },
+        {
+          "file": "packages/babylon60/cli/attest_character_count.py",
+          "line": 10,
+          "imported": "nacl.signing"
+        }
+      ],
+      "site_count": 4
     },
     {
       "ecosystem": "python",
@@ -629,6 +1028,33 @@
         }
       ],
       "site_count": 4
+    },
+    {
+      "ecosystem": "python",
+      "module": "hypothesis",
+      "kind": "NO_VERIFICADO",
+      "severity": "informativo",
+      "flags": [],
+      "note": "registro indeterminado (red); no se concluye",
+      "evidence": "",
+      "declared": true,
+      "in_registry": null,
+      "registry_name": "hypothesis",
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "tests/test_axioms_hypothesis.py",
+          "line": 19,
+          "imported": "hypothesis"
+        },
+        {
+          "file": "tests/test_axioms_hypothesis.py",
+          "line": 20,
+          "imported": "hypothesis"
+        }
+      ],
+      "site_count": 2
     },
     {
       "ecosystem": "python",
@@ -850,7 +1276,9 @@
       "module": "instructor",
       "kind": "NO_DECLARADO",
       "severity": "informativo",
-      "flags": [],
+      "flags": [
+        "guarded"
+      ],
       "note": "paquete real de PyPI ('instructor') usado en 1 fichero(s) y ausente del manifiesto: instalacion limpia rota | mitigado: todos los puntos de import estan en un arbol que el propio pyproject excluye de packaging/lint (deuda declarada)",
       "evidence": "",
       "declared": false,
@@ -861,8 +1289,30 @@
       "sites": [
         {
           "file": "packages/babylon60/extensions/skills/niche_arbitrage/pipeline.py",
-          "line": 22,
+          "line": 23,
           "imported": "instructor"
+        }
+      ],
+      "site_count": 1
+    },
+    {
+      "ecosystem": "python",
+      "module": "kimi_nexus.call_moonshot",
+      "kind": "SIMBOLO_FANTASMA",
+      "severity": "informativo",
+      "note": "el modulo 'kimi_nexus' existe y resuelve, pero no define ni reexporta 'call_moonshot'. El import falla en runtime con ImportError, no ModuleNotFoundError",
+      "evidence": "enumeracion de bindings de nivel superior del modulo destino",
+      "flags": [],
+      "declared": true,
+      "in_registry": null,
+      "registry_name": null,
+      "on_disk": [],
+      "only_in_excluded_tree": false,
+      "sites": [
+        {
+          "file": "tools/kimi_bridge.py",
+          "line": 5,
+          "imported": "from kimi_nexus import call_moonshot"
         }
       ],
       "site_count": 1
