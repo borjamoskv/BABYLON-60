@@ -7,13 +7,17 @@ from typing import Dict, Any
 
 TRANSLATIONS: Dict[str, Dict[str, Any]] = {
     "es": {
-        "title": "Certificado de Cumplimiento Normativo de IA (BABYLON-60 v4.0)",
+        "title": "Informe de Auto-Evaluación de Conformidad Regulatoria de IA (BABYLON-60 v4.0)",
         "compliance_standard": "Reglamento de Inteligencia Artificial de la UE (Reglamento UE 2024/1689 / AESIA)",
-        "executive_summary_title": "Resumen Ejecutivo de Auditoría",
+        "executive_summary_title": "Resumen Ejecutivo de Auto-Evaluación",
         "executive_summary_text": (
-            "Se certifica que el sistema especificado ha sido ejecutado bajo el Kernel Causal-Determinista "
+            "Se documenta la auto-evaluación técnica del sistema ejecutado bajo el Kernel Causal-Determinista "
             "BABYLON-60 v4.0. Todas las transiciones de memoria y operaciones temporales están ancladas "
-            "a un Ledger DAG Merkle-Causal con no-repudiación por hardware."
+            "a un Ledger DAG Merkle-Causal con verificación criptográfica local."
+        ),
+        "legal_disclaimer": (
+            "Nota legal: Este informe genera evidencia técnica de auto-evaluación interna para los Artículos 9–14 "
+            "del Reglamento UE 2024/1689. No constituye una certificación formal emitida por un Organismo Notificado (Notified Body)."
         ),
         "status_pass": "CONFORME",
         "quarantine_nominal": "NOMINAL_LIMPIO",
@@ -35,13 +39,17 @@ TRANSLATIONS: Dict[str, Dict[str, Any]] = {
         "authority": "Agencia Española de Supervisión de Inteligencia Artificial (AESIA) / UE",
     },
     "en": {
-        "title": "AI Regulatory Compliance Certificate (BABYLON-60 v4.0)",
+        "title": "AI Regulatory Compliance Self-Assessment Report (BABYLON-60 v4.0)",
         "compliance_standard": "EU Artificial Intelligence Act (Regulation EU 2024/1689 / NIST AI RMF)",
-        "executive_summary_title": "Executive Audit Summary",
+        "executive_summary_title": "Executive Self-Assessment Summary",
         "executive_summary_text": (
-            "This certifies that the specified system was executed under the BABYLON-60 v4.0 Causal-Determinist Kernel. "
+            "This technical self-assessment report documents the system execution under the BABYLON-60 v4.0 Causal-Determinist Kernel. "
             "All memory transitions and temporal scheduling operations were anchored to a Merkle-Causal DAG Ledger "
-            "with hardware non-repudiation."
+            "with local cryptographic verification."
+        ),
+        "legal_disclaimer": (
+            "Legal notice: This report provides technical self-assessment evidence for Articles 9–14 of EU Regulation 2024/1689. "
+            "It does not constitute a formal certification by an accredited Notified Body."
         ),
         "status_pass": "COMPLIANT",
         "quarantine_nominal": "NOMINAL_CLEAN",
@@ -63,13 +71,16 @@ TRANSLATIONS: Dict[str, Dict[str, Any]] = {
         "authority": "EU AI Office / NIST (USA) / UK AI Safety Institute",
     },
     "de": {
-        "title": "KI-Konformitätsbescheinigung (BABYLON-60 v4.0)",
+        "title": "KI-Konformitätsselbstbewertungsbericht (BABYLON-60 v4.0)",
         "compliance_standard": "EU-Verordnung über Künstliche Intelligenz (Verordnung EU 2024/1689 / BSI)",
-        "executive_summary_title": "Zusammenfassung der Audit-Ergebnisse",
+        "executive_summary_title": "Zusammenfassung der Selbstbewertung",
         "executive_summary_text": (
-            "Hiermit wird bescheinigt, dass das angegebene System unter dem BABYLON-60 v4.0 Kausal-Deterministischen "
-            "Kernel ausgeführt wurde. Alle Speicherübergänge und Zeitsteuerungsoperationen wurden in einem "
-            "Merkle-Kausalen DAG-Ledger mit Hardware-Nichtabstreitbarkeit verankert."
+            "Dieser Bericht dokumentiert die technische Selbstbewertung des Systems unter dem BABYLON-60 v4.0 Kausal-Deterministischen "
+            "Kernel. Alle Speicherübergänge und Zeitsteuerungsoperationen wurden in einem Merkle-Kausalen DAG-Ledger verankert."
+        ),
+        "legal_disclaimer": (
+            "Rechtlicher Hinweis: Dieser Bericht liefert technische Selbstbewertungsnachweise für die Artikel 9–14 der EU-Verordnung 2024/1689. "
+            "Er stellt keine formelle Zertifizierung durch eine Benannte Stelle dar."
         ),
         "status_pass": "KONFORM",
         "quarantine_nominal": "NOMINAL_SAUBER",
@@ -91,13 +102,16 @@ TRANSLATIONS: Dict[str, Dict[str, Any]] = {
         "authority": "Bundesamt für Sicherheit in der Informationstechnik (BSI) / EU AI Office",
     },
     "fr": {
-        "title": "Certificat de Conformité Réglementaire IA (BABYLON-60 v4.0)",
+        "title": "Rapport d'Auto-Évaluation de Conformité Réglementaire IA (BABYLON-60 v4.0)",
         "compliance_standard": "Règlement Européen sur l'IA (Règlement UE 2024/1689 / CNIL / ANSSI)",
-        "executive_summary_title": "Résumé Exécutif d'Audit",
+        "executive_summary_title": "Résumé d'Auto-Évaluation",
         "executive_summary_text": (
-            "Il est certifié que le système spécifié a été exécuté sous le Noyau Causal-Déterministe BABYLON-60 v4.0. "
-            "Toutes les transitions de mémoire et opérations temporelles ont été ancrées dans un Registre DAG Merkle-Causal "
-            "avec non-répudiation matérielle."
+            "Ce rapport documente l'auto-évaluation technique du système exécuté sous le Noyau Causal-Déterministe BABYLON-60 v4.0. "
+            "Toutes les transitions de mémoire et opérations temporelles ont été ancrées dans un Registre DAG Merkle-Causal."
+        ),
+        "legal_disclaimer": (
+            "Mentions légales : Ce rapport fournit des preuves d'auto-évaluation technique pour les articles 9–14 du règlement UE 2024/1689. "
+            "Il ne constitue pas une certification formelle par un organisme notifié."
         ),
         "status_pass": "CONFORME",
         "quarantine_nominal": "NOMINAL_PROPRE",
@@ -119,13 +133,16 @@ TRANSLATIONS: Dict[str, Dict[str, Any]] = {
         "authority": "Commission Nationale de l'Informatique et des Libertés (CNIL) / ANSSI / UE",
     },
     "it": {
-        "title": "Certificato di Conformità Regolatoria IA (BABYLON-60 v4.0)",
+        "title": "Rapporto di Autovalutazione di Conformità Regolatoria IA (BABYLON-60 v4.0)",
         "compliance_standard": "Regolamento Europeo sull'IA (Regolamento UE 2024/1689 / AgID)",
-        "executive_summary_title": "Riepilogo Esecutivo di Audit",
+        "executive_summary_title": "Riepilogo di Autovalutazione",
         "executive_summary_text": (
-            "Si certifica che il sistema specificato è stato eseguito sotto il Kernel Causale-Deterministico BABYLON-60 v4.0. "
-            "Tutte le transizioni di memoria e le operazioni temporali sono state ancorate a un Ledger DAG Merkle-Causale "
-            "con non-ripudiabilità hardware."
+            "Questo rapporto documenta l'autovalutazione tecnica del sistema eseguito sotto il Kernel Causale-Deterministico BABYLON-60 v4.0. "
+            "Tutte le transizioni di memoria e le operazioni temporali sono state ancorate a un Ledger DAG Merkle-Causale."
+        ),
+        "legal_disclaimer": (
+            "Nota legale: Questo rapporto fornisce evidenze di autovalutazione tecnica per gli Articoli 9–14 del Regolamento UE 2024/1689. "
+            "Non costituisce una certificazione formale rilasciata da un Organismo Notificato."
         ),
         "status_pass": "CONFORME",
         "quarantine_nominal": "NOMINALE_PULITO",

@@ -47,6 +47,8 @@ def compute_cortex_hash(
     lamport_t: int,
     prev_hash: str,
     timestamp: str,
+    agent_id: str = "ULTRATHINK-APEX",
+    domain: str = "babylon60.com",
 ) -> str:
     """Computa el digest criptografico SHA3-256 inmutable de una entrada Cortex."""
     body = {
@@ -55,6 +57,8 @@ def compute_cortex_hash(
         "event_type": event_type,
         "payload_json": payload_json,
         "cortex_taint": cortex_taint,
+        "agent_id": agent_id,
+        "domain": domain,
         "lamport_t": lamport_t,
         "prev_hash": prev_hash,
         "timestamp": timestamp,
@@ -86,7 +90,7 @@ class CortexPersistLedger:
         conn = sqlite3.connect(str(self.db_path), timeout=5.0)
         conn.execute("PRAGMA journal_mode=WAL;")
         conn.execute("PRAGMA busy_timeout=5000;")
-        conn.execute("PRAGMA synchronous=NORMAL;")
+        conn.execute("PRAGMA synchronous=FULL;")
         return conn
 
     def _init_db(self) -> None:
@@ -184,6 +188,8 @@ class CortexPersistLedger:
             lamport_t=lamport_t,
             prev_hash=prev_hash,
             timestamp=timestamp,
+            agent_id=event.agent_id,
+            domain=event.domain,
         )
 
         cursor.execute(
@@ -255,6 +261,8 @@ class CortexPersistLedger:
             lamport_t=last_lamport,
             prev_hash=prev_hash,
             timestamp=timestamp,
+            agent_id=ev.agent_id,
+            domain=ev.domain,
         )
 
         row = (
@@ -350,7 +358,19 @@ class CortexPersistLedger:
 
     @staticmethod
     def _verify_row(row: tuple[Any, ...], prev_hash: str, last_lamport: int) -> bool:
-        seq, event_id, event_type, payload_json, cortex_taint, lamport_t, row_prev_hash, entry_hash, timestamp = row
+        (
+            seq,
+            event_id,
+            event_type,
+            payload_json,
+            cortex_taint,
+            agent_id,
+            domain,
+            lamport_t,
+            row_prev_hash,
+            entry_hash,
+            timestamp,
+        ) = row
         if lamport_t <= last_lamport:
             logger.error(f"🔴 Violacion Lamport: {lamport_t} <= {last_lamport} en seq {seq}")
             return False
@@ -366,6 +386,8 @@ class CortexPersistLedger:
             lamport_t=lamport_t,
             prev_hash=prev_hash,
             timestamp=timestamp,
+            agent_id=agent_id,
+            domain=domain,
         )
         if computed != entry_hash:
             logger.error(f"🔴 Entry hash corrupto en seq {seq}: calculado {computed}, en DB {entry_hash}")
@@ -379,7 +401,7 @@ class CortexPersistLedger:
         with self._get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute(
-                "SELECT seq, event_id, event_type, payload_json, cortex_taint, lamport_t, prev_hash, entry_hash, timestamp FROM cortex_ledger ORDER BY seq ASC"
+                "SELECT seq, event_id, event_type, payload_json, cortex_taint, agent_id, domain, lamport_t, prev_hash, entry_hash, timestamp FROM cortex_ledger ORDER BY seq ASC"
             )
             rows = cursor.fetchall()
 
@@ -388,8 +410,8 @@ class CortexPersistLedger:
         for row in rows:
             if not self._verify_row(row, prev_hash, last_lamport):
                 return False
-            prev_hash = row[7]
-            last_lamport = row[5]
+            prev_hash = row[9]
+            last_lamport = row[7]
 
         return True
 
