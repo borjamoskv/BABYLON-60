@@ -37,3 +37,12 @@ theorem:
   statement: "Si un entorno atacante físico no logra causar un Colapso Epistémico en la hipótesis de seguridad, la hipótesis es termodinámicamente resiliente y se sella en el Ledger."
 
 CORTEX_TAINT: taint:moskv-1:falsification:e6f7g8h9i0j1k2l3:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

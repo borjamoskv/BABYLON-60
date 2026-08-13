@@ -37,3 +37,12 @@ theorem:
   statement: "El aislamiento del estado BFT solo se garantiza si las dependencias simuladas son sustituciones topológicas completas y no mutaciones parciales del genotipo global."
 
 CORTEX_TAINT: taint:moskv-1:mocking:c8d9e0f1a2b3c4d5:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

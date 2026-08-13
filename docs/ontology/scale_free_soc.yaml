@@ -124,3 +124,12 @@ Implicaciones:
     Resultado: "Acumulación de material combustible → megaincendios inevitables"
     Isomorfismo: "Suprimir la volatilidad natural de un sistema en estado crítico no elimina el riesgo; lo acumula hasta una liberación catastrófica"
     Invariante: "Ω142 (Purist Fallacy): la fricción innecesaria es Anergía"
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

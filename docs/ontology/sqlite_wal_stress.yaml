@@ -13,3 +13,12 @@ Blast_Radius_Matrix:
   Blast_Radius: "El Event Loop y el I/O Scheduler del Kernel (Mac/Linux)."
   Target_Invariant: "Regla L10 (journal_mode=WAL, busy_timeout=5000) y Serialización Escritura (Ω13)."
   Anergy_Risk: "High (Deadlock Termodinámico si el timeout es menor al IOPS del disco)."
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

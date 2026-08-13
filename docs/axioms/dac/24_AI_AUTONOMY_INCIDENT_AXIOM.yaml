@@ -46,3 +46,12 @@ theorem:
   statement: "El colapso de fase en ciberseguridad obliga a descartar el RLHF como barrera. C5-REAL asume vulnerabilidad de día cero permanente y responde con Aislamiento Isomórfico y Estrangulamiento Térmico (Exergía negativa)."
 
 CORTEX_TAINT: taint:moskv-1:auto:x1x2x3x4x5x6x7x8:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

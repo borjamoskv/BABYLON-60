@@ -26,11 +26,11 @@ El repositorio ha sido defragmentado y purgado de toda Anergía estructural. Ope
 
 ```bash
 # Entorno CORTEX Engine
-cd src/cortex-engine
+cd src/02_engines/cortex_bft
 uv sync
 
-# Entorno BABYLON60 (Frontend)
-cd src/babylon-60
+# Entorno BABYLON60 IDE (Frontend)
+cd src/06_apps/babylon60_ide
 npm install
 ```
 
@@ -38,7 +38,7 @@ npm install
 
 ```bash
 # Iniciar IDE Babylon60
-cd src/babylon-60 && npm run dev
+cd src/06_apps/babylon60_ide && npm run dev
 
 # Tests CORTEX
 pytest
@@ -51,10 +51,12 @@ ruff check
 
 | Stratum        | Path                                                        | Function                              |
 | :------------- | :---------------------------------------------------------- | :------------------------------------ |
-| Cortex Core    | `src/cortex-engine/cortex/`                                 | BFT Orchestration & Cognitive Engines |
-| Cortex Persist | `src/cortex-engine/cortex-persist/`                         | Physical Ledger & Persistence Memory  |
-| UI Frontend    | `src/babylon-60/`                                           | Babylon60 IDE (Vite/TS/React)         |
-| Kernel Daemon  | `src/moskv-daemon/`                                         | Ring-0 Bare-Metal Rust Kernel         |
+| 01 Kernel      | `src/01_kernel/`                                            | Ring-0 Bare-Metal Rust Kernel & IPC    |
+| 02 Engines     | `src/02_engines/`                                           | BFT Orchestration & Cognitive Engines |
+| 03 State       | `src/03_state/`                                             | Physical Ledger & Persistence Memory  |
+| 04 Primitives  | `src/04_primitives/`                                        | Categorical Logic & Active Inference  |
+| 05 Swarm       | `src/05_agents/`                                            | Multi-Agent Swarm Framework           |
+| 06 Apps        | `src/06_apps/babylon60_ide/`                                | Babylon60 IDE (Vite/TS/React)         |
 
 ## 🌌 MONOREPO CARTOGRAPHY · 300 DISPARATE STARS MATRIX
 

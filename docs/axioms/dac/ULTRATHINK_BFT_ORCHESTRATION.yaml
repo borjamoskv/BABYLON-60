@@ -45,3 +45,12 @@ theorem:
   statement: "Si el orquestador garantiza la transformación BFT a más de 2200 ops/s y bloquea desbordamientos de volumen, el enjambre asegura Colapso Causal sin parálisis estocástica."
 
 CORTEX_TAINT: taint:moskv-1:bft:g8h9i0j1k2l3m4n5:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

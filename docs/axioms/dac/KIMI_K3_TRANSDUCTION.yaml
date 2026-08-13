@@ -45,3 +45,12 @@ theorem:
   statement: "Si el funtor K3 preserva el estado asimétrico y acopla el esfuerzo a la complejidad, la disipación de anergía es proporcional al colapso físico, logrando Autopoiesis C5-REAL."
 
 CORTEX_TAINT: taint:moskv-1:kimik3:j0k1l2m3n4o5p6q7:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

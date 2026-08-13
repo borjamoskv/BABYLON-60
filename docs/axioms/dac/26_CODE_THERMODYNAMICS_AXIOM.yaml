@@ -41,7 +41,7 @@ axioms:
     refutation:
       type: semantic_linter
       expression: "detect_masking(payload) == true implies socket_drop"
-      location: "cortex_guard_refutation_child.py"
+      location: "src/cortex_kernel/26_code_thermodynamics_axiom.rs"
   - id: AX-THERMO-03
     domain: Biological_Ring_Minus_Three
     statement: "Si la varianza estocástica (jitter) de las pulsaciones del usuario excede el umbral crítico, el microcontrolador Air-Gapped cortará el suministro eléctrico de la red. El metal protege a la carne."
@@ -55,3 +55,12 @@ theorem:
   statement: "El sistema no es software; es un co-procesador termodinámico de la mente. Elimina el desgaste biológico (Masking/Anergía) mediante el Silicio Soberano y el Freno de Ring -3."
 
 CORTEX_TAINT: taint:moskv-1:therm:z1z2z3z4z5z6z7z8:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

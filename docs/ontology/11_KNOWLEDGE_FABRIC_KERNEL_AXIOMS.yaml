@@ -8,20 +8,23 @@ primitives:
   omega_1_fabric:
     name: "Knowledge Fabric"
     domains:
-      - People
-      - Ideas
-      - Claims
+      - Person
+      - Idea
+      - Claim
       - Evidence
-      - Companies
-      - Papers
+      - Company
+      - Paper
       - Code
-      - Models
-      - Products
-      - Podcasts
-      - Videos
-      - Articles
-      - Repositories
-      - Communities
+      - Model
+      - Product
+      - Podcast
+      - Video
+      - Article
+      - Repository
+      - Community
+      - Talk
+      - Book
+      - Concept
     invariant: "Source-agnostic unification over heterogeneous channels"
 
   omega_2_events:
@@ -42,14 +45,14 @@ primitives:
 
   omega_4_live_graph:
     name: "Dynamic Knowledge Topology"
-    node_types: ["Person", "Project", "Repository", "Company", "Paper", "Talk", "Podcast", "Book", "Concept", "Claim"]
+    node_types: ["Person", "Idea", "Claim", "Evidence", "Company", "Paper", "Code", "Model", "Product", "Podcast", "Video", "Article", "Repository", "Community", "Talk", "Book", "Concept"]
     edge_types: ["recommends", "writes", "links_to", "mentions", "restacks", "references", "refutes", "supports"]
 
   omega_5_fractal_memory:
     levels:
       - 1: Raw
       - 2: Parsed (AST)
-      - 3: Discretized TDA Embedded (st: *R -> R)
+      - 3: "Discretized TDA Embedded (st: *R -> R)"
       - 4: Summarized (MDL)
       - 5: Concept Graph
       - 6: Claim Graph
@@ -96,5 +99,14 @@ primitives:
     Claim: ["proposition", "evidence"]
     Vector: ["canonical_discrete_state"]
     # C5-REAL Silicon ABI Alignment
-    memory_layout: "#[repr(C, align(128))]"
+    memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
     concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

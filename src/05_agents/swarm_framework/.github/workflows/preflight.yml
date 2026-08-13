@@ -1,0 +1,18 @@
+# C5-REAL EXERGY CERTIFIED
+name: preflight
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: Secret & hygiene gate
+        run: bash scripts/preflight.sh
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - name: Verify counters == data
+        run: node scripts/verify-counters.mjs

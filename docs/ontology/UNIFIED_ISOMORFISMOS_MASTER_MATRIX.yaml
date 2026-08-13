@@ -202,8 +202,6 @@ Isomorfismos_Definitions:
         o payload C4-SIM).
       terapia de exposición y prevención de respuesta: Aplicación de Chaos Monkey
         local sin reinicio permitido de subrutinas caídas.
-      Terapia de interacción padres-hijos: Protocolo de Sincronización Estricta Proceso
-        Padre-Hijo (IPC Strict Sync).
       terapia de interacción padres-hijos: Protocolo de Sincronización Estricta Proceso
         Padre-Hijo (IPC Strict Sync).
       terapia dialéctico-conductual: Negociación BFT (Tolerancia a faltas bizantinas
@@ -477,3 +475,12 @@ Isomorfismos_Definitions:
       Hash: '[CORTEX-TAINT:borjamoskv:isomorfismos_anestesia_dolor:2026-07-23T19:35:00+02:00:8f2a1b9c3d4e5f6a]'
     Rust_Kernel_Binding: HaltReason::NociceptiveHalt = 14
 CORTEX_TAINT: taint:moskv-1:unified_isomorfismos_master_matrix_v10
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

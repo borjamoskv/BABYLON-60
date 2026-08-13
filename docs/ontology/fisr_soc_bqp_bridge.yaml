@@ -77,3 +77,12 @@ Bridge_3_Kappa_QEC:
     Mapa: "κ(α, R) ↔ Overhead de QEC (ratio qubits físicos/lógicos)"
     Monotonía: "Restricciones más estrictas R → mayor κ ↔ Mayor fidelidad exigida → más qubits de corrección"
     Satisfacibilidad: "κ=0 ⟺ el sistema ya satisface R sin reparación ↔ Código sin errores detectados (síndrome trivial)"
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

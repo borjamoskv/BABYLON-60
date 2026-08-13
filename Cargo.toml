@@ -2,17 +2,17 @@
 [workspace]
 resolver = "2"
 members = [
-    "src/cortex-engine/kernel",
-    "src/cortex-engine/cortex-wasm",
-    "src/cortex-engine/cortex-persist/kernel_rs",
-    "src/cortex-engine/strike-rs",
-    "src/moskv-daemon",
-    "src/legion-engine/legion-core",
-    "src/legion-engine/legion-apfs",
-    "src/legion-engine/legion-exergy",
-    "src/legion-engine/legion-healer",
-    "src/legion-engine/legion-cli",
-    "src/legion-engine/legion-lang",
+    "src/01_kernel/ring0_rust",
+    "src/01_kernel/ipc_daemon",
+    "src/02_engines/cortex_wasm",
+    "src/02_engines/strike_rs",
+    "src/02_engines/legion_engine/legion-core",
+    "src/02_engines/legion_engine/legion-apfs",
+    "src/02_engines/legion_engine/legion-exergy",
+    "src/02_engines/legion_engine/legion-healer",
+    "src/02_engines/legion_engine/legion-cli",
+    "src/02_engines/legion_engine/legion-lang",
+    "src/03_state/scitt_ledger/kernel_rs",
     "tests/compliance-suite"
 ]
 

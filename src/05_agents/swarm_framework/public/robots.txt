@@ -1,0 +1,5 @@
+# agents.archi — Registro de Auditoría Soberana
+User-agent: *
+Allow: /
+
+Sitemap: https://agents.archi/sitemap.xml

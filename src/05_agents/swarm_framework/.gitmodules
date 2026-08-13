@@ -1,0 +1,6 @@
+[submodule "docs/legacy-wiki"]
+	path = docs/legacy-wiki
+	url = git@github.com:borjamoskv/wiki.git
+[submodule "docs/legacy-cortex-docs"]
+	path = docs/legacy-cortex-docs
+	url = git@github.com:borjamoskv/cortex-docs-site.git

@@ -22,3 +22,12 @@ Firma_Ejecucion:
   Operador: borjamoskv
   Kernel: MOSKV-1 APEX
   Hash: "[CORTEX-TAINT:borjamoskv:isomorfismos_anestesia_dolor:2026-07-23T19:35:00+02:00:8f2a1b9c3d4e5f6a]"
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

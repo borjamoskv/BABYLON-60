@@ -175,3 +175,12 @@
 - **Prohibición de Criptografía No Registrada**: Todo recibo SCITT o atestación de estado canónico emitida por el Kernel DEBE utilizar exclusivamente algoritmos y parámetros de cabecera registrados oficialmente en IANA COSE (ej. RFC 9942, RFC 9054).
 - **Resolución de Pruebas Merkle**: Queda ESTRICTAMENTE PROHIBIDO el uso de `SHA3-256` puro para la emisión de pruebas de inclusión (*inclusion-proofs*). El sistema debe transmutar a `SHA-256` (Algoritmo IANA `-16`) o `SHAKE256` (Algoritmo IANA `-45`) para garantizar que la evidencia pericial (Art. 14 / Art. 50 EU AI Act) sea verificable unívocamente por auditores de terceros sin fricción de parsing.
 
+## Invariante de Tolerancia de Herramientas Opcionales en Sandboxes / FFI C
+- **Aislamiento de Aborto Nativo C (SIGABRT):** Cuando se instancien comandos del sistema mediante primitivas que se comunican con extensiones C nativas de comprobación (`cortex_guard_core`), la validación física en `__post_init__` solo DEBE ejecutarse si `check=True`.
+- **Manejo de Simulación y Fallbacks:** Si un binario es opcional para el contexto de ejecución (ej. `docker` en entornos sin contenedores), `check` DEBE establecerse en `False` para permitir que Python capture `FileNotFoundError` y conmute a modo simulación o fallback sin abortar el proceso del Kernel o de la suite de pruebas.
+
+## Invariante de Saneamiento e Importaciones Post-Reestructuración
+- **Purga de Espacios de Nombres Legados:** Al reorganizar módulos o mover carpetas dentro del árbol de código (`src/`), el agente DEBE realizar una auditoría de importaciones (`grep`) sobre todo el espacio de nombres, migrando referencias legadas (`cortex_persist` → `babylon60`, `cortex.primitives` → `primitives`) tanto en código de aplicación como en la suite de tests (`tests/` y `*_test.py`).
+- **Verificación Obligatoria de Importabilidad:** NINGUNA reorganización de archivos se da por finalizada sin ejecutar `uv run pytest` o `python3 -m py_compile` sobre los paquetes afectados.
+
+

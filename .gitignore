@@ -1,10 +1,12 @@
 # Build artifacts and caches
+build/
 target/
 src-tauri/target/
 node_modules/
 .ruff_cache/
 .mypy_cache/
 .pytest_cache/
+.gocache/
 .coverage
 .vite/
 *.log
@@ -59,6 +61,8 @@ transcript_*.txt
 cortex_audit_report.yml
 test-render.js
 render-check.png
+tests/compliance-suite/c_src/sequencer_spsc_harness
+tests/compliance-suite/c_src/test_primitives
 
 # Spotlight exclusion markers
 **/.metadata_never_index

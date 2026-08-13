@@ -1,0 +1,85 @@
+/* C5-REAL EXERGY CERTIFIED */
+/* ── Sections ── */
+.section {
+  padding: var(--space-3xl) var(--space-xl);
+}
+
+.section-dark {
+  background: var(--void);
+}
+
+.section-gradient {
+  background: linear-gradient(180deg, var(--void-elevated) 0%, var(--void) 100%);
+}
+
+.section-cta {
+  background: var(--void-elevated);
+  border-top: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--accent-bright), var(--accent), transparent);
+  animation: cta-border-pulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes cta-border-pulse {
+  0% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+/* Section gradient dividers */
+.section + .section::before {
+  content: '';
+  display: block;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--void-border), transparent);
+  margin-bottom: var(--space-3xl);
+}
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--space-3xl);
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-bright);
+  margin-bottom: var(--space-md);
+}
+
+.section-header h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: var(--space-md);
+}
+
+.text-accent {
+  color: var(--accent-bright);
+}
+
+.section-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}

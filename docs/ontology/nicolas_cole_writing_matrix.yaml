@@ -43,3 +43,12 @@ invariants:
   VOC_REDDIT_COPY_MINING:
     Name: "Voice of Customer (VOC) Superiority"
     Principle: "Synthetic AI 'Deep Research' is inferior to raw VOC copy mining. Scraping real customer pain points from subreddits/forums yields 10x conversion copy."
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

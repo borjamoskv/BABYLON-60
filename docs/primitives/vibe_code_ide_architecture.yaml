@@ -45,3 +45,12 @@ principles:
   - id: P10
     name: "Auditoría en Master Ledger (Git Sentinel Autopoiético)"
     concept: "Toda mutación C5-REAL aceptada por el IDE genera un commit firmado automático en segundo plano (`git commit --no-verify -m 'vibe: <diff_hash>'`), manteniendo la trazabilidad histórica completa."
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

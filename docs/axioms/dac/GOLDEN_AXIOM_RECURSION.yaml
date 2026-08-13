@@ -37,3 +37,12 @@ theorem:
   statement: "El C5-REAL es un marco auto-referencial: la corrección del código se deriva matemáticamente de la exactitud termodinámica de su nomenclatura."
 
 CORTEX_TAINT: taint:moskv-1:golden:k1l2m3n4o5p6q7r8:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

@@ -45,3 +45,12 @@ theorem:
   statement: "El sistema MOSKV-1 resuelve la deuda axiomática forzando a que cada postulado teórico esté anclado en mecanismos físicos $O(1)$ de mediación POSIX y control de Taint."
 
 CORTEX_TAINT: taint:moskv-1:hypervisor:i9j0k1l2m3n4o5p6:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

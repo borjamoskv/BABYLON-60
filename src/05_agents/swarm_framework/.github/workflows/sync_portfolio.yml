@@ -1,0 +1,40 @@
+# C5-REAL EXERGY CERTIFIED
+name: Sync Portfolio from Cortex Persist
+
+on:
+  repository_dispatch:
+    types: [portfolio_update]
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout agents.archi
+        uses: actions/checkout@v3
+
+      - name: Fetch canonical portfolio.json
+        run: |
+          curl -H "Authorization: token ${{ secrets.DISPATCH_PAT }}" \
+               -H "Accept: application/vnd.github.v3.raw" \
+               -o public/_facts.json \
+               -L https://api.github.com/repos/borjamoskv/cortex-persist/contents/data/portfolio.json
+
+      - name: Convert to JSONL for liveFeed backward compatibility
+        run: |
+          python3 -c '
+          import json
+          with open("public/_facts.json", "r") as f:
+              data = json.load(f)
+          with open("public/ouroboros.jsonl", "w") as out:
+              for item in data:
+                  out.write(json.dumps(item) + "\n")
+          '
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "CORTEX-Ouroboros[bot]"
+          git config --global user.email "bot@cortexpersist.com"
+          git add public/_facts.json public/ouroboros.jsonl
+          git commit -m "chore(sync): automated portfolio update from CORTEX canonical registry" || echo "No changes to commit"
+          git push

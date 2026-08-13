@@ -46,3 +46,12 @@ theorem:
   statement: "La autorreferencia en C5-REAL no explota condicionales infinitos, sino que colapsa vectores de 3 dígitos (ej: 000 = ONT_READ_HASH) para alterar el universo determinísticamente."
 
 CORTEX_TAINT: taint:moskv-1:auto:x9y8z7w6v5u4t3s2:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

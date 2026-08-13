@@ -2,7 +2,7 @@
 # UNIFIED PRIMITIVES ARCHITECTURE MANIFEST
 Version: 10.0-SINGULARITY
 Blueprint_Modules:
-  - 896_categorical_logic_primitives.yml
+  - 101_categorical_logic_primitives.yaml
   - ephesus_reverse_engineering.yml
   - swarm_centuria_matrix.yml
   - swarm_v4_blueprint.yml
@@ -10,12 +10,13 @@ Blueprint_Modules:
 
 Architecture_Definitions:
 
-  896_categorical_logic_primitives.yml:
-    cortex_taint: CORTEX-TAINT:borjamoskv:896_categorical_primitives:2026-07-22T01:12:00Z
+  101_categorical_logic_primitives.yaml:
+    cortex_taint: CORTEX-TAINT:borjamoskv:101_categorical_primitives:2026-08-09T02:23:48.770908+00:00
     specification:
-      Matriz de 896 Primitivas de Colisión, Estructura y Antipatrones en
-      Teoría de Categorías y Lógica Categórica
-    total_primitives: 896
+      Matriz de 101 Primitivas Ortogonales Fundacionales en Lógica Categórica.
+      Falsacionismo de Landauer aplicado (Purga del 88% de Anergía).
+    total_primitives: 101
+
     domains:
       - id: D1
         name: Estructura Categórica Fundamental (112 Primitivas)
@@ -429,3 +430,12 @@ Architecture_Definitions:
         concept: "Toda mutación C5-REAL aceptada por el IDE genera un commit firmado automático en segundo plano (`git commit --no-verify -m 'vibe: <diff_hash>'`), manteniendo la trazabilidad histórica completa."
 
 CORTEX_TAINT: taint:moskv-1:unified_primitives_manifest_v10
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

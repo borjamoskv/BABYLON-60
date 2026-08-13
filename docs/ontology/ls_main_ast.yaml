@@ -14,3 +14,12 @@ Blast_Radius_Matrix:
   Target_Invariant: "Pointer-as-Physical (El colapso de la ambigüedad)."
   Anergy_Risk: "High (si ls-main indexa node_modules, degenera en asfixia RAM)."
 CORTEX_TAINT: db37c7bde6605883a2dd07725c100ff2f0f4c4b75b932762610370cdc2383ae5
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

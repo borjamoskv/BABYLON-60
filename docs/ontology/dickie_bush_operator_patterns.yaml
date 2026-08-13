@@ -18,3 +18,12 @@ Cognitive_Rhythm_Duality:
 Pricing_Outcome_Transduction:
   Low_Exergy_Underpaid: "Commodity Word-Count Pricing + Generic Audience Targeting"
   High_Exergy_Premium: "Outcome-Based Value Capture + Information Advantage"
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

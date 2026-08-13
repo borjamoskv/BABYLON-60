@@ -28,3 +28,12 @@ Exergy_Delta:
     Mobile_Protocol: "Burp Suite | Wireshark"
     Semantic_Obfuscation: "Claude 3.5 Sonnet"
 CORTEX_TAINT: taint:moskv-1:2026-07-18T12:42:44:4d410303b46ccb42a56e28f28c86c353fe9ee602d73938fdc4dbc49d0e1ed50c
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

@@ -46,3 +46,12 @@ theorem:
   statement: "Si el Golden Axiom se respeta, el kernel K(D) colapsa el objeto inicial, y el código 'se escribe solo' porque los morfismos desde el objeto inicial son únicos."
 
 CORTEX_TAINT: taint:moskv-1:kra:f1a2g3h4j5k6l7m8:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

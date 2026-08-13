@@ -45,3 +45,12 @@ theorem:
   statement: "El sistema orquestal elimina el atasco termodinámico mediante pipelines y protege su verdad ontológica mediante asedios adversariales obligatorios."
 
 CORTEX_TAINT: taint:moskv-1:orchestr:v2w3x4y5z6a7b8:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

@@ -1,0 +1,105 @@
+/* C5-REAL EXERGY CERTIFIED */
+/* Nexus Graph Component Styles */
+.section-nexus {
+  background: var(--bg-surface);
+  position: relative;
+  border-top: 1px solid var(--border-light);
+}
+
+.nexus-graph-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.nexus-node-card {
+  background: rgba(10, 10, 10, 0.7);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.nexus-node-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nexus-node-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px rgba(43, 59, 229, 0.1);
+  transform: translateY(-2px);
+}
+
+.nexus-node-card:hover::before {
+  opacity: 1;
+}
+
+.nexus-node-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nexus-node-source {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nexus-node-title {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.nexus-node-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: auto;
+  padding-top: var(--space-md);
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.nexus-node-id {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nexus-node-link {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nexus-node-link:hover {
+  color: var(--accent-light);
+  text-decoration: underline;
+}

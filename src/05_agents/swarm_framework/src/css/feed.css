@@ -1,0 +1,54 @@
+/* C5-REAL EXERGY CERTIFIED */
+/* ═══════════════════════════════════════════════════════════
+   Live Threat Feed — Powered by MCP Swarm
+   ═══════════════════════════════════════════════════════════ */
+.section-feed { background: linear-gradient(180deg, var(--void) 0%, #0D0D12 50%, var(--void-elevated) 100%); border-top: 1px solid var(--void-border); }
+.feed-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-md); }
+
+.feed-card {
+  position: relative; padding: var(--space-lg);
+  background: linear-gradient(145deg, rgba(20, 20, 28, 0.9), rgba(16, 16, 22, 0.7));
+  border: 1px solid var(--void-border); border-radius: var(--radius-md);
+  transition: all var(--duration-normal) var(--ease-out); overflow: hidden;
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+
+.feed-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--void-border); transition: all var(--duration-normal) var(--ease-out); }
+.feed-critical::before { background: var(--critical); box-shadow: 0 0 12px rgba(255, 59, 92, 0.4); animation: threat-pulse 3s ease-in-out infinite; }
+.feed-high::before { background: var(--high); box-shadow: 0 0 12px rgba(255, 140, 66, 0.3); }
+
+@keyframes threat-pulse {
+  0%, 100% { opacity: 0.7; box-shadow: 0 0 8px rgba(255, 59, 92, 0.2); }
+  50% { opacity: 1; box-shadow: 0 0 20px rgba(255, 59, 92, 0.5); }
+}
+
+.feed-card::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
+  background: linear-gradient(135deg, transparent 40%, var(--accent) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity: 0; transition: opacity var(--duration-normal) var(--ease-out); pointer-events: none;
+}
+.feed-critical::after { background: linear-gradient(135deg, transparent 40%, var(--critical) 100%); }
+.feed-high::after { background: linear-gradient(135deg, transparent 40%, var(--high) 100%); }
+.feed-card:hover::after { opacity: 1; }
+.feed-card:hover { border-color: var(--void-hover); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5); }
+
+.feed-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-sm); }
+.feed-cve { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; color: var(--text-tertiary); letter-spacing: 0.04em; padding: 2px 8px; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--void-border); border-radius: 4px; }
+.feed-severity { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 3px 10px; border-radius: 4px; }
+.feed-severity.critical { color: var(--critical); background: var(--critical-bg); border: 1px solid rgba(255, 59, 92, 0.15); }
+.feed-severity.high { color: var(--high); background: var(--high-bg); border: 1px solid rgba(255, 140, 66, 0.15); }
+.feed-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.01em; color: var(--text-primary); }
+.feed-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: var(--space-md); }
+.feed-meta { display: flex; justify-content: space-between; align-items: center; padding-top: var(--space-sm); border-top: 1px solid var(--void-border); }
+.feed-source { font-size: 0.72rem; font-weight: 600; color: var(--accent-bright); text-transform: uppercase; letter-spacing: 0.06em; }
+.feed-date { font-size: 0.72rem; font-family: var(--font-mono); color: var(--text-tertiary); }
+.feed-footer { text-align: center; font-size: 0.8rem; color: var(--text-tertiary); margin-top: var(--space-xl); font-style: italic; }
+.feed-footer strong { color: var(--accent-bright); font-weight: 600; font-style: normal; }
+
+/* CVSS Score Badge */
+.feed-cvss { display: inline-flex; align-items: center; gap: 4px; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.02em; }
+.feed-cvss.cvss-critical { color: var(--critical); background: var(--critical-bg); border: 1px solid rgba(255, 59, 92, 0.12); }
+.feed-cvss.cvss-high { color: var(--high); background: var(--high-bg); border: 1px solid rgba(255, 140, 66, 0.12); }

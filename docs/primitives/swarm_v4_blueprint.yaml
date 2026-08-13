@@ -53,3 +53,12 @@ anti_entropy:
   architect_agent:
     schedule: "Cron nocturno"
     action: "Inspecciona radon/complexity. Abre issues internos y PRs exclusivos de refactorización pura (sin mutación de features)."
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

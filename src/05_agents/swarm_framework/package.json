@@ -1,0 +1,18 @@
+{
+  "name": "agents-archi",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node scripts/prerender-audits.mjs",
+    "preview": "vite preview",
+    "9router": "npx -y 9router start"
+  },
+  "devDependencies": {
+    "vite": "^8.0.10"
+  },
+  "dependencies": {
+    "stripe": "^22.1.1"
+  }
+}

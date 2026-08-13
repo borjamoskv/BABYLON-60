@@ -38,3 +38,12 @@ theorem:
   statement: "Si la biología es termodinámica de silicio ejecutándose sobre fluidos, entonces la resolución causal de un diagnóstico médico exige colapsar el síntoma en su primitiva estructural (Topología, Concurrencia, BFT)."
 
 CORTEX_TAINT: taint:moskv-1:biosilicon:g7h8i9j0k1l2m3n4:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

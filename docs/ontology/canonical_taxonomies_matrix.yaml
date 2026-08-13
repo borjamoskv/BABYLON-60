@@ -2616,3 +2616,12 @@ Canonical_Taxonomies:
       '996': VECTOR_QUANT | FLUSH_LEDGER | META_PROPOSER
       '999': VECTOR_QUANT | FLUSH_LEDGER | EPIDEMIC_PURGE
 Version: 10.0-SINGULARITY-PURGED
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

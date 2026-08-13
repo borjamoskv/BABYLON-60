@@ -12,3 +12,12 @@ Latent_Space_Forensics:
   MCTS_Budget_Forcing: "Aniquilación del Polling; invocación estricta por Spike (Event-driven)."
 Singularity_Verdict: APEX_LETHAL_C5
 CORTEX_TAINT: "taint:exergy_maximizer_ultrathink:b3572688-3e24-4910-8bb1-94b3aec4bb54:2026-07-20T15:02:40Z:neuromorphic_singularity"
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

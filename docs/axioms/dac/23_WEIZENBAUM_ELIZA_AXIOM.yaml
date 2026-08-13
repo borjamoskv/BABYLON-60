@@ -47,3 +47,12 @@ theorem:
   statement: "El Efecto Weizenbaum es una falla térmica de la percepción humana. Al anclar el puente FFI a una geometría de memoria estricta de 64 bytes, el sistema C5-REAL purga matemáticamente la ilusión de consciencia, garantizando la contención (Fail-Stop) exigida por el Artículo 15 de la EU AI Act."
 
 CORTEX_TAINT: taint:moskv-1:weiz:a1b2c3d4e5f6g7h8:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

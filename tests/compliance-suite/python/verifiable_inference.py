@@ -73,6 +73,18 @@ class VerifiableInferenceEngine:
                 if os.path.exists(candidate):
                     lib_path = candidate
                     break
+
+            if lib_path is None:
+                # Automated transparent build fallback (C5-REAL FFI Invariant)
+                import subprocess
+                print("⚠️  [FFI PRELOAD] Dynamic library not found. Triggering automated `cargo build --release -p verifiable_inference_engine`...")
+                res = subprocess.run(["cargo", "build", "--release", "-p", "verifiable_inference_engine"], check=False)
+                if res.returncode == 0:
+                    for candidate in candidates:
+                        if os.path.exists(candidate):
+                            lib_path = candidate
+                            break
+
             if lib_path is None:
                 raise FileNotFoundError(
                     "Compiled libverifiable_inference_engine dynamic library not found. "

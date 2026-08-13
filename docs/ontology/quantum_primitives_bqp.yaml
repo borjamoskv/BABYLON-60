@@ -149,3 +149,12 @@ BQP:
   Invariante_Ω148: "BQP NO resuelve NP-Completos arbitrarios (SAT, TSP) sin estructura algebraica explícita"
   Estructura_Requerida: "Simetría de subgrupos ocultos, periodicidad espectral, propiedades Hermitianas del Hamiltoniano"
   Anti_Patrón: "Proyectar velocidad cuántica exponencial sobre problemas sin simetría = Falso Paralelismo Cuántico (Anergía C4-SIM)"
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

@@ -1,4 +1,6 @@
-:- consult('../axioms/robinson_resolution.pl').
+:- [robinson_resolution].
+
+
 
 :- initialization(run_all, main).
 
@@ -28,10 +30,11 @@ run_all :-
     ->  writeln('[T4 PASS] FO Orient: Y=hello')
     ;   writeln('[T4 FAIL] FO Orient failed')),
 
-    % Test 5: occurs_check bloquea X = f(X) — evita binding circular
-    (occurs_check(Z1, f(Z1))
-    ->  writeln('[T5 FAIL] occurs_check should block circular binding')
-    ;   writeln('[T5 PASS] occurs_check: circular binding blocked correctly')),
+    % Test 5: occurs_check detecta la presencia de Z1 en f(Z1) y unify rechaza el binding circular
+    (occurs_check(Z1, f(Z1)), \+ unify(Z1, f(Z1))
+    ->  writeln('[T5 PASS] occurs_check: circular binding detected and blocked correctly')
+    ;   writeln('[T5 FAIL] occurs_check failed to block circular binding')),
+
 
     % Test 6: Clash — f(a) != f(b)
     (unify(f(a), f(b))

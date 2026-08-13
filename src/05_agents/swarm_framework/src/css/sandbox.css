@@ -1,0 +1,45 @@
+/* C5-REAL EXERGY CERTIFIED */
+/* ── ASL Sandbox ── */
+.sandbox-container { display: flex; flex-direction: column; background: #08080c; }
+.sandbox-editor { display: flex; border-bottom: 1px solid var(--void-border); min-height: 120px; background: #050507; position: relative; }
+.line-numbers { padding: var(--space-md) var(--space-sm); background: #0a0a0e; color: var(--text-tertiary); font-family: var(--font-mono); font-size: 0.7rem; text-align: right; min-width: 32px; -webkit-user-select: none; user-select: none; border-right: 1px solid rgba(255, 255, 255, 0.03); }
+#asl-editor { flex: 1; background: transparent; border: none; padding: var(--space-md); color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.5; resize: vertical; outline: none; overflow: hidden; }
+#asl-editor:focus { color: var(--text-primary); }
+.sandbox-actions { display: flex; gap: var(--space-sm); padding: var(--space-sm) var(--space-md); background: #0a0a0e; border-bottom: 1px solid var(--void-border); }
+/* scrollbar-width/scrollbar-color: progressive enhancement — degrades to default scrollbar in Safari/older Chrome */
+.sandbox-output { padding: var(--space-md); height: 100px; overflow-y: auto; font-family: var(--font-mono); font-size: 0.7rem; background: #050507; scrollbar-width: thin; scrollbar-color: var(--void-border) transparent; }
+.sandbox-output::-webkit-scrollbar { width: 6px; }
+.sandbox-output::-webkit-scrollbar-track { background: transparent; }
+.sandbox-output::-webkit-scrollbar-thumb { background: var(--void-border); border-radius: 3px; }
+.output-line { margin-bottom: 4px; color: var(--text-tertiary); }
+.output-line.success { color: #34d399; background: rgba(52, 211, 153, 0.05); padding: 4px 8px; border-radius: 4px; }
+.output-line.error { color: var(--critical); background: var(--critical-bg); padding: 4px 8px; border-radius: 4px; }
+
+/* ── Glitch Animation ── */
+.glitch-text { position: relative; display: inline-block; }
+.glitch-text::before, .glitch-text::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8; }
+.glitch-text::before { color: var(--accent-bright); z-index: -1; animation: glitch-anim-1 2s infinite linear alternate-reverse; }
+.glitch-text::after { color: var(--critical); z-index: -2; animation: glitch-anim-2 3s infinite linear alternate-reverse; }
+
+@keyframes glitch-anim-1 {
+  0% { clip-path: inset(20% 0 30% 0); transform: translate(-2px, -2px); }
+  20% { clip-path: inset(60% 0 10% 0); transform: translate(2px, 2px); }
+  40% { clip-path: inset(40% 0 50% 0); transform: translate(-2px, 2px); }
+  60% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -2px); }
+  80% { clip-path: inset(10% 0 70% 0); transform: translate(-2px, -2px); }
+  100% { clip-path: inset(30% 0 20% 0); transform: translate(2px, 2px); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip-path: inset(10% 0 80% 0); transform: translate(2px, 2px); }
+  20% { clip-path: inset(40% 0 20% 0); transform: translate(-2px, -2px); }
+  40% { clip-path: inset(70% 0 5% 0); transform: translate(2px, -2px); }
+  60% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 2px); }
+  80% { clip-path: inset(50% 0 30% 0); transform: translate(2px, 2px); }
+  100% { clip-path: inset(80% 0 10% 0); transform: translate(-2px, -2px); }
+}
+
+/* ── Back to Top Button ── */
+.back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px; background: var(--void-surface); border: 1px solid var(--void-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 50; opacity: 0; visibility: hidden; transform: translateY(12px); transition: all var(--duration-normal) var(--ease-out); color: var(--text-tertiary); font-size: 1.2rem; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { border-color: var(--accent); color: var(--accent-bright); background: var(--accent-subtle); box-shadow: 0 4px 24px var(--accent-glow); transform: translateY(-2px); }

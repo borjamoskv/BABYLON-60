@@ -1,0 +1,1026 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AGENTS.archi — Registro de Auditoría Soberana</title>
+    <meta name="description" content="Portafolio de Pruebas: Auditorías de seguridad forense y verificación formal para ecosistemas de agentes autónomos. Cada hallazgo está vinculado criptográficamente a una cadena de evidencia inmutable." />
+    <meta name="theme-color" content="#0A0A0A" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="AGENTS.archi — Registro de Auditoría Soberana" />
+    <meta property="og:description" content="Auditorías forenses y verificación formal para agentes autónomos. La confianza se computa, no se asume." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://agents.archi" />
+    <meta property="og:image" content="https://agents.archi/og-image.jpg" />
+    <link rel="canonical" href="https://agents.archi/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@borjamoskv" />
+    <meta name="twitter:title" content="AGENTS.archi — Portafolio de Pruebas" />
+    <meta name="twitter:description" content="Auditorías forenses para agentes autónomos. Cada hallazgo verificable mediante prueba criptográfica Merkle." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <script src="https://js.stripe.com/v3/"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "AGENTS.archi",
+      "url": "https://agents.archi",
+      "description": "La primera Autoridad de Seguridad de Agentes. Verifique formalmente el comportamiento de los agentes autónomos.",
+      "founder": {
+        "@type": "Person",
+        "name": "Borja Moskv",
+        "url": "https://x.com/borjamoskv"
+      },
+      "sameAs": [
+        "https://x.com/borjamoskv",
+        "https://github.com/borjamoskv"
+      ]
+    }
+    </script>
+
+<style>
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+  <body>
+    <div class="grain-overlay" aria-hidden="true"></div>
+    <a href="#main-content" class="skip-to-content">Saltar al contenido</a>
+
+    <!-- Banner Entorno Experimental -->
+    <div class="experimental-banner" id="experimental-banner">
+      <div class="banner-inner">
+        <span class="banner-badge">ENTORNO EXPERIMENTAL</span>
+        <span class="banner-text">
+          <strong>AGENTS.archi es una plataforma de investigación y laboratorio en fase de pruebas.</strong>
+          La pasarela de cobros (Stripe) está activa, pero el proyecto aún no está en condiciones de ofrecer servicios comerciales en producción.
+        </span>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="nav-main" class="nav">
+      <div class="nav-inner">
+        <a href="/" class="nav-logo" id="nav-logo">
+          <span class="logo-mark">⬡</span>
+          <span class="logo-text">agents<span class="logo-dot">.</span>archi</span>
+          <span class="nav-status-badge experimental-badge"><span class="status-pulse amber-pulse"></span> Modo Experimento</span>
+        </a>
+        <div class="nav-links" id="nav-links">
+          <a href="#threat-vectors" class="nav-link" id="nav-taxonomy">Panorama</a>
+          <a href="#solution" class="nav-link" id="nav-solution">Metodología</a>
+          <a href="#track-record" class="nav-link" id="nav-track">Portafolio</a>
+          <a href="#certification" class="nav-link" id="nav-cert">Registro</a>
+          <a href="#threat-feed" class="nav-link" id="nav-feed">Amenazas</a>
+          <a href="#architect-swarm" class="nav-link" id="nav-swarm">Enjambre</a>
+          <a href="#sovereign-council" class="nav-link" id="nav-council">Consejo</a>
+          <a href="https://babylon60.com" target="_blank" rel="noopener noreferrer" class="nav-link" style="color: var(--accent); border: 1px solid var(--accent); padding: 4px 12px; border-radius: 4px; box-shadow: 0 0 10px rgba(43,59,229,0.15);">BABYLON60 Runtime</a>
+          <a href="#contact" class="nav-cta" id="nav-contact">Iniciar Auditoría</a>
+        </div>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <main id="main-content">
+    <section id="hero" class="hero">
+      <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-grid-bg"></div>
+      <div class="hero-noise"></div>
+      <div class="hero-glow"></div>
+      <div class="hero-interactive-glow" id="hero-interactive-glow"></div>
+      <div class="hero-content">
+        <div class="hero-badge" id="hero-badge">
+          <span class="badge-pulse"></span>
+          <span class="badge-text">Registro de Auditoría <span class="glitch-text" data-text="Forense">Forense</span></span>
+        </div>
+        <h1 id="hero-title">
+          Portafolio de<br />
+          <span class="hero-accent glitch-text" data-text="Pruebas">Pruebas</span>
+        </h1>
+        <p class="hero-sub" id="hero-sub">
+          La firma adversarial de <strong>Borja Moskv</strong>. Verificación formal y evidencia forense para la frontera de la seguridad agentica. Recompensas de alto impacto, pruebas criptográficas, cero especulación.
+        </p>
+        <div class="hero-actions">
+          <a href="#track-record" class="btn btn-primary" id="hero-cta-explore">Explorar Portafolio de Pruebas</a>
+          <a href="#certification" class="btn btn-ghost" id="hero-cta-audit">Ver Registro de Evidencia →</a>
+          <a href="https://babylon60.com" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="border-color: var(--accent); color: var(--accent);">Integrate BABYLON60 Runtime</a>
+        </div>
+        <div class="hero-stats" id="hero-stats">
+          <div class="stat">
+            <span class="stat-value" data-count="10">10</span>
+            <span class="stat-label">Clases de Vectores de Ataque</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" data-count="22">22</span>
+            <span class="stat-label">Hallazgos Verificados</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" data-count="17">17</span>
+            <span class="stat-label">Protocolos Auditados</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Terminal — floating chrome (bottom-left) -->
+      <div class="hero-terminal" id="hero-terminal" aria-hidden="true">
+        <div class="hero-terminal-bar">
+          <span class="terminal-dot r"></span>
+          <span class="terminal-dot y"></span>
+          <span class="terminal-dot g"></span>
+          <span class="hero-terminal-title">cortex-audit — zsh</span>
+        </div>
+        <div class="hero-terminal-body" id="hero-terminal-body"></div>
+      </div>
+
+      <!-- Live Threat Counter — floating chrome (bottom-right) -->
+      <div class="hero-live-counter" id="hero-live-counter" aria-hidden="true">
+        <span class="hero-live-counter-dot"></span>
+        <span class="hero-live-counter-label">CVEs Rastreados en Vivo</span>
+        <span class="hero-live-counter-value" id="hero-live-count">847</span>
+      </div>
+    </section>
+
+
+
+    <!-- Problem — Threat Vectors -->
+    <section id="threat-vectors" class="section section-dark">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">Contexto de Auditoría</span>
+          <h2 id="threat-title">El Panorama.<br /><span class="text-accent">Superficie de Vulnerabilidad Crítica.</span></h2>
+          <p class="section-desc">Un mapa sistemático de la superficie de ataque. Diez clases de vectores críticos extraídos de fallos reales en protocolos agenticos.</p>
+        </div>
+        <div class="threat-grid" id="threat-grid">
+          <!-- Threat cards injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Solution -->
+    <section id="solution" class="section section-gradient">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">La Metodología</span>
+          <h2 id="solution-title">Especificar. Verificar. Comprometer.</h2>
+          <p class="section-desc">Un pipeline de verificación formal en tres fases. Invariantes definidos en ASL, probados mediante Z3 SMT, cristalizados en una prueba de auditoría a prueba de manipulaciones.</p>
+        </div>
+        <div class="pillars" id="pillars">
+          <div class="pillar" id="pillar-specify">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="8" y="6" width="32" height="36" rx="2" />
+                <line x1="14" y1="14" x2="34" y2="14" />
+                <line x1="14" y1="20" x2="28" y2="20" />
+                <line x1="14" y1="26" x2="32" y2="26" />
+                <line x1="14" y1="32" x2="22" y2="32" />
+              </svg>
+            </div>
+            <h3>Especificar</h3>
+            <p>Codifique las restricciones del agente en el <strong>Lenguaje de Especificación de Agentes (ASL)</strong>: invariantes, concesiones de capacidad y reglas de denegación como declaraciones verificables por máquina.</p>
+            <div class="pillar-code">
+              <pre><code><span class="kw">agent</span> PaymentBot {
+  <span class="kw">invariant:</span> never_transfer &gt; limit
+  <span class="kw">capability:</span> read(balance)
+  <span class="kw">deny:</span> shell_exec(*)
+}</code></pre>
+            </div>
+          </div>
+          <div class="pillar" id="pillar-verify">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 24l8 8 16-16" />
+                <circle cx="24" cy="24" r="20" />
+              </svg>
+            </div>
+            <h3>Verificar</h3>
+            <p>Compile especificaciones a <strong>aserciones Z3 SMT</strong>. Pruebe exhaustivamente la corrección de los invariantes en todas las rutas de ejecución, o muestre un contraejemplo concreto.</p>
+            <div class="pillar-terminal" id="verification-sandbox">
+              <div class="terminal-header">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span class="terminal-title">Sandbox de Verificación ASL <span class="badge-simulation">[C4-SIMULACIÓN]</span></span>
+              </div>
+              <div class="terminal-body sandbox-container">
+                <div class="sandbox-editor">
+                  <div class="line-numbers" id="sandbox-line-numbers">1<br>2<br>3<br>4<br>5</div>
+                  <textarea id="asl-editor" spellcheck="false" aria-label="ASL Specification Editor">agent PaymentBot {
+  invariant: never_transfer > limit
+  capability: read(balance)
+  deny: shell_exec(*)
+}</textarea>
+                </div>
+                <div class="sandbox-actions">
+                  <button id="btn-verify-asl" class="btn btn-primary btn-sm">Ejecutar Prueba (Z3)</button>
+                  <button id="btn-reset-asl" class="btn btn-ghost btn-sm">Reiniciar</button>
+                </div>
+                <div class="sandbox-output" id="sandbox-output">
+                  <div class="output-line">⬡ Listo para la verificación formal.</div>
+                </div>
+              </div>
+            </div>
+            <div class="pillar-badge" id="verification-status-badge">
+              <span class="verified-badge">✓ Motor de Prueba Activo</span>
+              <span class="verified-detail">Seleccione una especificación y haga clic en 'Ejecutar Prueba' para verificar el comportamiento.</span>
+            </div>
+          </div>
+          <div class="pillar" id="pillar-certify">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M24 4l6 12h13l-10.5 8 4 13L24 29l-12.5 8 4-13L5 16h13z" />
+              </svg>
+            </div>
+            <h3>Certificar</h3>
+            <p>Emita una <strong>Prueba de Auditoría Forense</strong>: firmada con Ed25519, anclada en Merkle. La cadena de evidencia y el estado de verificación sellados en un artefacto inmutable.</p>
+            <div class="scorecard-preview">
+              <div class="score-bar">
+                <span class="score-label">Cobertura de Amenazas</span>
+                <div class="score-track"><div class="score-fill" data-fill="100"></div></div>
+                <span class="score-pct">100%</span>
+              </div>
+              <div class="score-bar">
+                <span class="score-label">Pruebas Formales</span>
+                <div class="score-track"><div class="score-fill" data-fill="100"></div></div>
+                <span class="score-pct">100%</span>
+              </div>
+              <div class="score-bar">
+                <span class="score-label">Seguridad de Composición</span>
+                <div class="score-track"><div class="score-fill" data-fill="72"></div></div>
+                <span class="score-pct">72%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="track-record" class="section section-dark">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">Portafolio de Pruebas</span>
+          <h2 id="track-title">Arquitectura Adversaria,<br /><span class="text-accent">Resultados Verificables.</span></h2>
+          <p class="section-desc">Hallazgos de severidad crítica en DeFi, sandboxes de VM y capas de consenso. Cada entrada es un ataque verificado C5-REAL.</p>
+        </div>
+        <div class="bounty-controls" id="bounty-controls">
+          <div class="bounty-summary">
+            <span class="bounty-total"><span class="bounty-total-count">22</span> Hallazgos Verificados</span>
+            <div class="bounty-severity-counts">
+              <span class="severity-count critical"><span class="sc-dot"></span>9 Críticos</span>
+              <span class="severity-count high"><span class="sc-dot"></span>11 Alta</span>
+              <span class="severity-count medium"><span class="sc-dot"></span>2 Media</span>
+            </div>
+          </div>
+          <div class="bounty-filters">
+            <button class="bounty-filter active" data-filter="all">Todos</button>
+            <button class="bounty-filter" data-filter="critical">Crítico</button>
+            <button class="bounty-filter" data-filter="high">Alta</button>
+            <button class="bounty-filter" data-filter="medium">Media</button>
+          </div>
+        </div>
+        <div class="bounty-grid" id="bounty-grid">
+          <!-- Bounties renderizadas dinámicamente vía _facts.json -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Proof -->
+    <div class="social-proof" id="social-proof">
+      <div class="social-proof-inner">
+        <p class="social-proof-label">Vulnerabilidades Enviadas A</p>
+        <div class="platform-marquee-wrap">
+          <div class="platform-logos">
+            <!-- Set 1 -->
+            <span class="platform-logo">⬡ Immunefi</span>
+            <span class="platform-logo">◈ Code4rena</span>
+            <span class="platform-logo">▲ Sherlock</span>
+            <span class="platform-logo">◆ Cantina</span>
+            <span class="platform-logo">● HackerOne</span>
+            <span class="platform-logo">◉ Hats Finance</span>
+            <span class="platform-logo">▸ Spearbit</span>
+            <!-- Set 2 — duplicate for seamless loop -->
+            <span class="platform-logo">⬡ Immunefi</span>
+            <span class="platform-logo">◈ Code4rena</span>
+            <span class="platform-logo">▲ Sherlock</span>
+            <span class="platform-logo">◆ Cantina</span>
+            <span class="platform-logo">● HackerOne</span>
+            <span class="platform-logo">◉ Hats Finance</span>
+            <span class="platform-logo">▸ Spearbit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Libro Mayor Soberano -->
+    <section id="certification" class="section section-certification">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">Libro Mayor Soberano</span>
+          <h2 id="cert-title">Cadena de Verificación.<br /><span class="text-accent">Prueba C5-REAL.</span></h2>
+          <p class="section-desc">Anclado en Merkle, firmado con Ed25519. Cada hallazgo es un nodo inmutable en la cadena de auditoría — verificable sin confiar en el emisor.</p>
+        </div>
+
+        <div class="cert-grid">
+          <!-- Merkle Tree Visualization -->
+          <div class="cert-panel" id="merkle-panel">
+            <div class="cert-panel-header">
+              <div class="cert-panel-title">
+                <span class="cert-panel-icon">⬡</span>
+                <span class="cert-panel-label">Cadena de Auditoría — Árbol de Merkle</span>
+              </div>
+              <span class="cert-status-pill pill-green"><span class="pill-dot"></span>Verificado</span>
+            </div>
+            <div class="merkle-canvas-wrap">
+              <canvas id="merkle-canvas" class="merkle-canvas" aria-hidden="true"></canvas>
+              <div class="merkle-fade"></div>
+            </div>
+            <div class="merkle-footer">
+              <span class="merkle-hash" id="evidence-root-hash">raíz: 0x3a7f2c1b9e4d6a8f5c0b2e7d1a3f9c6b9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d</span>
+              <span class="merkle-depth">Profundidad: 7 · 127 Nodos</span>
+            </div>
+          </div>
+
+          <!-- SAGA Write-Path Pipeline -->
+          <div class="cert-panel" id="saga-panel">
+            <div class="cert-panel-header">
+              <div class="cert-panel-title">
+                <span class="cert-panel-icon">⛓</span>
+                <span class="cert-panel-label">Contrato de Escritura (SAGA)</span>
+              </div>
+              <span class="cert-status-pill pill-accent">Protección de 7 Pasos</span>
+            </div>
+            <div class="saga-pipeline" id="saga-pipeline">
+              <div class="saga-step" id="saga-1">
+                <div class="saga-step-connector">
+                  <div class="saga-step-node">1</div>
+                  <div class="saga-step-line"></div>
+                </div>
+                <div class="saga-step-content">
+                  <div class="saga-step-name">Validación de Guard <span class="saga-tag tag-det">Determinista</span></div>
+                  <div class="saga-step-desc">Control de cordura y lógica. Propuestas inválidas rechazadas antes de cualquier mutación de estado.</div>
+                </div>
+              </div>
+              <div class="saga-step" id="saga-2">
+                <div class="saga-step-connector">
+                  <div class="saga-step-node">2</div>
+                  <div class="saga-step-line"></div>
+                </div>
+                <div class="saga-step-content">
+                  <div class="saga-step-name">Firma de Taint <span class="saga-tag tag-cry">Criptográfico</span></div>
+                  <div class="saga-step-desc">Token de atribución CORTEX-TAINT — SHA3-256 del payload + identidad del agente.</div>
+                </div>
+              </div>
+              <div class="saga-step" id="saga-3">
+                <div class="saga-step-connector">
+                  <div class="saga-step-node">3</div>
+                  <div class="saga-step-line"></div>
+                </div>
+                <div class="saga-step-content">
+                  <div class="saga-step-name">Validación de Esquema <span class="saga-tag tag-det">Determinista</span></div>
+                  <div class="saga-step-desc">Cumplimiento de interfaz tipada — ninguna salida estocástica muta el estado persistente.</div>
+                </div>
+              </div>
+              <div class="saga-step" id="saga-4">
+                <div class="saga-step-connector">
+                  <div class="saga-step-node">4</div>
+                  <div class="saga-step-line"></div>
+                </div>
+                <div class="saga-step-content">
+                  <div class="saga-step-name">Capa de Cifrado <span class="saga-tag tag-cry">Criptográfico</span></div>
+                  <div class="saga-step-desc">Payloads sensibles cifrados en reposo mediante el llavero nativo del SO.</div>
+                </div>
+              </div>
+              <div class="saga-step" id="saga-5">
+                <div class="saga-step-connector">
+                  <div class="saga-step-node">5</div>
+                  <div class="saga-step-line"></div>
+                </div>
+                <div class="saga-step-content">
+                  <div class="saga-step-name">Emisión en el Libro Mayor <span class="saga-tag tag-imm">Inmutable</span></div>
+                  <div class="saga-step-desc">Anexión a la cadena de hash criptográfica. Cada acción es inalterable para siempre.</div>
+                </div>
+              </div>
+              <div class="saga-step" id="saga-6">
+                <div class="saga-step-connector">
+                  <div class="saga-step-node">6</div>
+                  <div class="saga-step-line"></div>
+                </div>
+                <div class="saga-step-content">
+                  <div class="saga-step-name">Persistencia <span class="saga-tag tag-imm">Inmutable</span></div>
+                  <div class="saga-step-desc">Escritura atómica en SQLite con captura previa de snapshot ROLLBACK.</div>
+                </div>
+              </div>
+              <div class="saga-step" id="saga-7">
+                <div class="saga-step-connector">
+                  <div class="saga-step-node">7</div>
+                  <div class="saga-step-line"></div>
+                </div>
+                <div class="saga-step-content">
+                  <div class="saga-step-name">Índice y Efectos Secundarios <span class="saga-tag tag-det">Determinista</span></div>
+                  <div class="saga-step-desc">Actualizaciones de índice Vector/KV. Todas las funciones compensatorias son idempotentes.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certificate Preview -->
+        <div class="cert-certificate" id="cert-preview">
+          <div class="cert-watermark">VERIFICADO</div>
+          <div class="cert-seal">
+            <div class="cert-seal-ring"></div>
+            <div class="cert-seal-ring"></div>
+            <div class="cert-seal-core">⬡</div>
+          </div>
+          <div class="cert-card-title">Prueba de Auditoría Soberana</div>
+          <div class="cert-card-sub">Informe de Verificación Firmado Criptográficamente</div>
+          <div class="cert-fields">
+            <div class="cert-field">
+              <span class="cert-field-label">Agente</span>
+              <span class="cert-field-value">PaymentBot v3.1</span>
+            </div>
+            <div class="cert-field">
+              <span class="cert-field-label">Nivel de Verificación</span>
+              <span class="cert-field-value">Z3 SMT — Cobertura Total</span>
+            </div>
+            <div class="cert-field">
+              <span class="cert-field-label">Cobertura de Amenazas</span>
+              <span class="cert-field-value mono">10/10 Vectores Mapeados</span>
+            </div>
+            <div class="cert-field">
+              <span class="cert-field-label">ID de Certificado</span>
+              <span class="cert-field-value mono">CERT-2026-0704-B9D3</span>
+            </div>
+            <div class="cert-field">
+              <span class="cert-field-label">Válido Desde</span>
+              <span class="cert-field-value">10 de mayo, 2026</span>
+            </div>
+            <div class="cert-field">
+              <span class="cert-field-label">Emitido Por</span>
+              <span class="cert-field-value">AGENTS.archi Sovereign Ledger</span>
+            </div>
+          </div>
+          <div class="cert-divider"></div>
+          <div class="cert-signature">
+            <div class="cert-sig-block">
+              <span class="cert-sig-hash">Ed25519: 7a3f2c1b9e4d...8f5c0b2e7d1a</span>
+              <span class="cert-sig-label">Firma Digital (Ed25519)</span>
+            </div>
+            <div class="cert-verified-stamp">✓ Evidencia de Alteración</div>
+          </div>
+        </div>
+
+        <!-- Trust Metrics -->
+        <div class="trust-metrics" id="trust-metrics" style="margin-top: var(--space-xl);">
+          <div class="trust-metric">
+            <div class="trust-metric-value" data-count="7" data-suffix="-Pasos">7-Pasos</div>
+            <div class="trust-metric-label">Pipeline de Validación SAGA</div>
+            <div class="trust-metric-sub">Cada escritura protegida</div>
+          </div>
+          <div class="trust-metric">
+            <div class="trust-metric-value" data-count="100" data-suffix="%">100%</div>
+            <div class="trust-metric-label">Integridad de la Cadena de Auditoría</div>
+            <div class="trust-metric-sub">Cadena de Hash SHA3-256</div>
+          </div>
+          <div class="trust-metric">
+            <div class="trust-metric-value" data-prefix="&lt;" data-count="8" data-suffix="ms">&lt;8ms</div>
+            <div class="trust-metric-label">Latencia de Verificación</div>
+            <div class="trust-metric-sub">Objetivo de 60fps mantenido</div>
+          </div>
+          <div class="trust-metric">
+            <div class="trust-metric-value" data-count="0" data-suffix=" brechas">0 brechas</div>
+            <div class="trust-metric-label">Violaciones del Límite de Confianza</div>
+            <div class="trust-metric-sub">Tolerancia cero aplicada</div>
+          </div>
+        </div>
+
+        <!-- Standards Compliance -->
+        <div class="cert-standards">
+          <div class="cert-standards-label">Alineación con el Marco de Soporte de Evidencia</div>
+          <div class="cert-standards-list">
+            <div class="cert-standard-item">
+              <span class="cert-standard-icon">[EU]</span>
+              <span class="cert-standard-name">EU AI Act Art.12</span>
+            </div>
+            <div class="cert-standard-item">
+              <span class="cert-standard-icon">[KEY]</span>
+              <span class="cert-standard-name">Ed25519 + SHA3-256</span>
+            </div>
+            <div class="cert-standard-item">
+              <span class="cert-standard-icon">[HASH]</span>
+              <span class="cert-standard-name">Cadena de Auditoría Merkle</span>
+            </div>
+            <div class="cert-standard-item">
+              <span class="cert-standard-icon">[SHLD]</span>
+              <span class="cert-standard-name">Tolerancia Bizantina</span>
+            </div>
+            <div class="cert-standard-item">
+              <span class="cert-standard-icon">[SOC2]</span>
+              <span class="cert-standard-name">Ruta de Evidencia SOC 2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feed de Amenazas en Vivo — Impulsado por 9 Nodos MCP -->
+    <section id="threat-feed" class="section section-feed">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">Inteligencia Adversaria</span>
+          <h2 id="live-threat-feed-title">Señales de Alta Exergía <span class="badge-simulation">[C5-REAL]</span><br /><span class="text-accent">Desde el Exterior.</span></h2>
+          <p class="section-desc">Señales zero-day seleccionadas de la superficie de ataque agéntica. Obtenidas de NVD, MSRC y revelaciones de investigadores independientes.</p>
+        </div>
+        <div class="feed-grid" id="feed-grid">
+          <div class="feed-card feed-critical" id="feed-cve-25592">
+            <div class="feed-card-header">
+              <span class="feed-cve">CVE-2026-25592</span>
+              <span class="feed-severity critical">Crítico</span>
+            </div>
+            <h4>Semantic Kernel — De Prompt a RCE</h4>
+            <p>Los prompts se convierten en shells: instrucciones controladas por el atacante activan llamadas a funciones autónomas en .NET SDK &lt;1.71.0, permitiendo la ejecución de código arbitrario en el host.</p>
+            <div class="feed-meta">
+              <span class="feed-source">Microsoft MSRC</span>
+              <span class="feed-cvss cvss-critical">CVSS 9.8</span>
+              <span class="feed-date">7 de mayo, 2026</span>
+            </div>
+          </div>
+          <div class="feed-card feed-critical" id="feed-cve-26030">
+            <div class="feed-card-header">
+              <span class="feed-cve">CVE-2026-26030</span>
+              <span class="feed-severity critical">Crítico</span>
+            </div>
+            <h4>Semantic Kernel — Bypass de Auto-Invocación</h4>
+            <p>Segundo RCE en el mismo framework: el modelo de IA evade los filtros de auto-invocación para activar funciones de herramientas restringidas sin confirmación del usuario.</p>
+            <div class="feed-meta">
+              <span class="feed-source">Microsoft MSRC</span>
+              <span class="feed-cvss cvss-critical">CVSS 9.1</span>
+              <span class="feed-date">7 de mayo, 2026</span>
+            </div>
+          </div>
+          <div class="feed-card feed-critical" id="feed-cve-30615">
+            <div class="feed-card-header">
+              <span class="feed-cve">CVE-2026-30615</span>
+              <span class="feed-severity critical">Crítico</span>
+            </div>
+            <h4>Windsurf IDE — Inyección de Prompt MCP a RCE</h4>
+            <p>Ataque a la cadena de suministro MCP: un servidor comprometido inyecta definiciones de herramientas maliciosas que escalan a ejecución de código local a través del runtime del IDE agéntico.</p>
+            <div class="feed-meta">
+              <span class="feed-source">OX Security</span>
+              <span class="feed-cvss cvss-critical">CVSS 9.6</span>
+              <span class="feed-date">Mayo 2026</span>
+            </div>
+          </div>
+          <div class="feed-card feed-high" id="feed-agent-leak">
+            <div class="feed-card-header">
+              <span class="feed-cve">AGENT-LEAK-01</span>
+              <span class="feed-severity high">Alta</span>
+            </div>
+            <h4>Exfiltración de Secretos de Triple Agente</h4>
+            <p>Una sola inyección de prompt filtró simultáneamente secretos de API de Claude Code, Gemini CLI y GitHub Copilot. Las system cards fallaron al prevenir la exfiltración de datos entre agentes.</p>
+            <div class="feed-meta">
+              <span class="feed-source">VentureBeat</span>
+              <span class="feed-cvss cvss-high">CVSS 8.5</span>
+              <span class="feed-date">Mayo 2026</span>
+            </div>
+          </div>
+        </div>
+        <p class="feed-footer">Datos obtenidos vía <strong>Brave Search API</strong> + <strong>NVD REST API</strong> — 9 nodos MCP en concierto.</p>
+      </div>
+    </section>
+
+    <!-- El Laboratorio — Métricas en Vivo -->
+    <section id="lab" class="section section-gradient">
+      <div class="lab-scanline"></div>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">El Laboratorio</span>
+          <h2 id="lab-title">Análisis en Tiempo Real.<br /><span class="text-accent">Inteligencia Global de Amenazas.</span></h2>
+          <p class="section-desc">Monitoreo adversario continuo. Las vulnerabilidades emergentes aparecen aquí antes de llegar a los canales de divulgación pública.</p>
+        </div>
+        <div class="lab-grid">
+          <div class="lab-card">
+            <div class="lab-card-header">
+              <span class="lab-card-title">LEGION-10000 Throughput</span>
+              <span class="lab-card-value" id="lab-throughput">238162 <small>agts/seg</small></span>
+            </div>
+            <div class="lab-chart" id="lab-chart">
+              <div class="bar-group">
+                <div class="bar" data-h="40"></div>
+                <div class="bar" data-h="60"></div>
+                <div class="bar" data-h="45"></div>
+                <div class="bar" data-h="80"></div>
+                <div class="bar" data-h="55"></div>
+                <div class="bar" data-h="90"></div>
+                <div class="bar" data-h="70"></div>
+              </div>
+            </div>
+          </div>
+          <div class="lab-card">
+            <div class="lab-card-header">
+              <span class="lab-card-title">Swarm Processing Latency</span>
+              <span class="lab-card-value" id="lab-latency">70.6<small>ms</small></span>
+            </div>
+            <p class="lab-card-desc">Latencia O(1) vía ZeroCopyRingBuffer en el motor CORTEX-Persist para 10000 agentes concurrentes.</p>
+          </div>
+          <div class="lab-card">
+            <div class="lab-card-header">
+              <span class="lab-card-title">Complejidad de la Prueba</span>
+              <span class="lab-card-value">O(2ⁿ)</span>
+            </div>
+            <p class="lab-card-desc">Complejidad de ejecución simbólica en el peor de los casos. Los clusters de solvers Z3 manejan la enumeración completa del espacio de estados sin aproximaciones.</p>
+          </div>
+        </div>
+    </section>
+
+    <!-- C5-REAL Kernel -->
+    <section id="kernel-core" class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">El Sustrato</span>
+          <h2 id="kernel-title">Núcleo C5-REAL.<br /><span class="text-accent">Ejecución No Simulada.</span></h2>
+          <p class="section-desc">Detrás de AGENTS.archi opera un autómata físico gobernado por leyes termodinámicas estrictas. La verdad no es conjetura; se compila paso a paso.</p>
+        </div>
+
+        <div class="kernel-grid">
+          <!-- Card 1: Zero Anergia -->
+          <div class="kernel-card">
+            <span class="kernel-card-icon">Ω₁₃</span>
+            <h3>Cero Anergía</h3>
+            <p>Se eliminan las disculpas, la prosa decorativa y el "safety theater". Cada ciclo de computación debe resultar en una mutación de estado determinista u observación empírica.</p>
+            <div class="kernel-code-window">
+              <div class="kernel-code-header">
+                <span>cortex_guard.rs</span>
+                <span>Active</span>
+              </div>
+              <div class="kernel-code-body">fn check_fluff(payload: &amp;str) -&gt; Result&lt;(), EntropyError&gt; {
+    if payload.contains("<span class="kernel-highlight">espero_que</span>") {
+        return Err(EntropyError::<span class="kernel-highlight">AnergiaDetected</span>);
+    }
+    Ok(())
+}</div>
+            </div>
+          </div>
+
+          <!-- Card 2: Git Sentinel -->
+          <div class="kernel-card">
+            <span class="kernel-card-icon">AX-041</span>
+            <h3>Git Sentinel</h3>
+            <p>El repositorio es la base de datos. Ningún cambio de lógica ocurre en el limbo; cada transacción se firma criptográficamente y se inyecta en el ledger de commits locales.</p>
+            <div class="kernel-code-window">
+              <div class="kernel-code-header">
+                <span>git_sentinel.py</span>
+                <span>Ledger Locked</span>
+              </div>
+              <div class="kernel-code-body"># Commiting atomic mutation
+hash = ledger.commit({
+    "action": "MUTATION",
+    "signature": "<span class="kernel-success">C5-REAL</span>"
+})
+print(f"Ledger Hash: {hash[:7]}")</div>
+            </div>
+          </div>
+
+          <!-- Card 3: Swarm BFT -->
+          <div class="kernel-card">
+            <span class="kernel-card-icon">Ω₄</span>
+            <h3>Mitosis de Swarm</h3>
+            <p>Cuando la complejidad de una tarea supera el límite entrópico, el núcleo despliega autómatas paralelos (LEGION) coordinando la sincronización en segundo plano con un quórum N=3.</p>
+            <div class="kernel-code-window">
+              <div class="kernel-code-header">
+                <span>swarm_consensus.go</span>
+                <span>Swarm Active</span>
+              </div>
+              <div class="kernel-code-body">func consensus(votes []Vote) bool {
+    quorum := len(votes) * 2 / 3
+    if countSuccess(votes) >= quorum {
+        return <span class="kernel-success">true</span> // Commit state
+    }
+    return false // Apoptosis
+}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="section section-dark">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag" style="border-color: rgba(245, 158, 11, 0.4); color: #FCD34D; background: rgba(245, 158, 11, 0.1);">ENTORNO EXPERIMENTAL · APORTACIÓN RESEARCH</span>
+          <h2>Aportación Libre (In Rainbows)</h2>
+          <p class="section-desc">Consigue acceso a las herramientas y auditorías de la versión estable actual. AGENTS.archi opera como un laboratorio experimental de investigación: evalúa el valor obtenido y aporta lo que consideres justo (incluso €0) para respaldar el desarrollo de la investigación C5-REAL.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Sprint Card -->
+          <div class="plan-card">
+            <div class="plan-header">
+              <h3>Sprint Adversarial</h3>
+              <div class="plan-price">Aportación Libre<small>Sugerido: €25k</small></div>
+            </div>
+            <ul class="plan-features">
+              <li>Licencia de por vida (v1.x).</li>
+              <li>2-week deep dive adversarial audit.</li>
+              <li>Prompt Injection & Sandbox Escapes</li>
+              <li>Logic Gate & Memory Confinement Tests</li>
+              <li>C5-REAL Forensic Report</li>
+              <li>Cryptographic Proof Pack</li>
+            </ul>
+            <button class="btn btn-primary btn-full plan-btn" data-plan="sprint">Iniciar Sprint</button>
+          </div>
+
+          <!-- Council Card -->
+          <div class="plan-card featured">
+            <div class="plan-badge">Most Popular</div>
+            <div class="plan-header">
+              <h3>Sovereign Council</h3>
+              <div class="plan-price">Aportación Libre<small>Sugerido: €8k</small></div>
+            </div>
+            <ul class="plan-features">
+              <li>Licencia de por vida (v1.x).</li>
+              <li>Continuous Autonomous Red Teaming</li>
+              <li>Weekly Threat Feed Synthesis</li>
+              <li>Priority Emergency Triage</li>
+              <li>Dedicated Signal Node</li>
+            </ul>
+            <button class="btn btn-accent btn-full plan-btn" data-plan="council">Adquirir Licencia</button>
+          </div>
+
+          <!-- Cert Card -->
+          <div class="plan-card">
+            <div class="plan-header">
+              <h3>Pre-deploy Cert</h3>
+              <div class="plan-price">Aportación Libre<small>Sugerido: €15k</small></div>
+            </div>
+            <ul class="plan-features">
+              <li>Licencia de por vida (v1.x).</li>
+              <li>EU AI Act / DORA Regulatory readiness</li>
+              <li>Full Stack System Hardening</li>
+              <li>Immutable Verification Badge</li>
+              <li>Zero-Knowledge Compliance</li>
+            </ul>
+            <button class="btn btn-primary btn-full plan-btn" data-plan="cert">Obtener Certificado</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formulario de Contacto (C4-Simulated) -->
+    <section id="contact" class="section section-dark">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">Colaborar</span>
+          <h2 id="contact-title">Solicitar Verificación<br /><span class="text-accent">Forense.</span></h2>
+          <p class="section-desc">Sin clientes. Solo casos. Envía una base de código objetivo para revisión adversaria. Cada hallazgo confirmado se registra criptográficamente en el Libro Mayor de Auditoría — público, verificable, permanente.</p>
+        </div>
+        <div class="contact-card">
+          <p>Proporciona un repositorio, dirección de contrato desplegado o especificación del sistema. Se priorizan las superficies de ataque de alto impacto. Resultados entregados como un paquete forense firmado.</p>
+          <button id="btn-commission" class="btn btn-primary">Iniciar Análisis Forense</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enjambre del Arquitecto — Lista Completa de Ayudantes -->
+    <section id="architect-swarm" class="section section-swarm">
+      <canvas class="swarm-canvas" id="swarm-canvas" aria-hidden="true"></canvas>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">⬡ El Enjambre del Arquitecto</span>
+          <h2 id="swarm-title">100 Ayudantes Autónomos.<br /><span class="text-accent">Inteligencia de Enjambre Activa.</span></h2>
+          <p class="section-desc">La lista unificada de CORTEX. 100 agentes especializados operando en híper-paralelo — gestionando ventanas de contexto, verificando pruebas formales y aplicando las Nueve Leyes.</p>
+          <div class="swarm-header-meta">
+            <span class="swarm-count" id="swarm-count">0/100 ACTIVOS</span>
+          </div>
+        </div>
+
+        <!-- Global Swarm Dashboard -->
+        <div class="swarm-dashboard" id="swarm-dashboard">
+          <div class="dash-metric">
+            <span class="dash-label">MEMORIA TOTAL</span>
+            <span class="dash-value" id="dash-memory">0%</span>
+            <div class="dash-progress"><div class="dash-bar" id="bar-memory" style="width: 0%"></div></div>
+          </div>
+          <div class="dash-metric">
+            <span class="dash-label">SINCRONIZACIÓN DEL ENJAMBRE</span>
+            <span class="dash-value" id="dash-sync">0%</span>
+            <div class="dash-progress"><div class="dash-bar" id="bar-sync" style="width: 0%"></div></div>
+          </div>
+          <div class="dash-metric">
+            <span class="dash-label">ESTRÉS DEL SISTEMA</span>
+            <span class="dash-value" id="dash-stress">0%</span>
+            <div class="dash-progress"><div class="dash-bar bar-danger" id="bar-stress" style="width: 0%"></div></div>
+          </div>
+          <div class="dash-metric">
+            <span class="dash-label">TASA DE CRISTALIZACIÓN</span>
+            <span class="dash-value" id="dash-rate">0.0<small>hz</small></span>
+            <div class="swarm-dashboard-actions">
+              <button class="btn-swarm-opt" id="btn-swarm-opt">SWARM_OPTIMIZATION_Ω</button>
+              <button class="btn-swarm-audit" id="btn-swarm-audit">SOVEREIGN_AUDIT_λ</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="swarm-filters" id="swarm-filters"></div>
+        <div class="swarm-grid" id="swarm-grid"></div>
+      </div>
+    </section>
+
+    <!-- Nexus Graph -->
+    <section id="nexus-graph" class="section section-nexus">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">⬡ NEXUS BRIDGING — UNIFIED GRAPH</span>
+          <h2>Topología Documental <span class="text-accent">Soberana</span></h2>
+          <p class="section-desc">Grafo de conocimiento unificado mediante la ingesta submodular de repositorios legados (wiki, cortex-docs-site). Inmutable. Renderizado en C5-REAL.</p>
+        </div>
+        <div id="nexus-graph-container" class="nexus-graph-container">
+          <p class="text-dim">Iniciando protocolo de telemetría Nexus...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Consejo Soberano -->
+    <section id="sovereign-council" class="section section-council">
+      <canvas class="legion-canvas" id="legion-canvas" aria-hidden="true"></canvas>
+      <div class="council-bg-mesh" id="council-mesh" aria-hidden="true">
+        <svg class="council-svg" id="council-svg" width="100%" height="100%"></svg>
+      </div>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag council-tag">⬡ CORTEX-PERSIST — 10.000 NODOS ACTIVOS</span>
+          <h2 id="council-title">Consejo de Agentes Soberanos<br /><span class="text-accent">Protocolo de Reunión Activo</span></h2>
+          <p class="section-desc">9 comandantes. 10.000 agentes. Homeostasis Armónica Ω₂ aplicada. Consenso Bizantino activo en todas las rutas de escritura de ataques de exergía.</p>
+        </div>
+        <div class="council-arena">
+          <!-- Agent Grid -->
+          <div class="council-grid" id="council-grid">
+            <!-- Injected by JS -->
+          </div>
+          <!-- Mission Terminal -->
+          <div class="council-terminal">
+            <div class="terminal-header">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="terminal-title">Registro de Misión CORTEX <span class="council-live-badge"><span class="status-pulse"></span>EN VIVO</span></span>
+            </div>
+            <div class="council-log" id="council-log"></div>
+            <div class="council-prompt">
+              <span class="prompt-prefix">CORTEX:~$</span>
+              <span class="prompt-cursor" id="council-cursor"></span>
+            </div>
+          </div>
+        </div>
+        <!-- Swarm Metrics Bar -->
+        <div class="council-metrics" id="council-metrics">
+          <div class="council-metric">
+            <span class="metric-label">Nodos Activos</span>
+            <span class="metric-value" id="metric-nodes">0/100</span>
+          </div>
+          <div class="council-metric">
+            <span class="metric-label">Consenso</span>
+            <span class="metric-value text-green" id="metric-consensus">BIZANTINO ✓</span>
+          </div>
+          <div class="council-metric">
+            <span class="metric-label">Flujo de Exergía</span>
+            <span class="metric-value" id="metric-yield">0.00 Hz</span>
+          </div>
+          <div class="council-metric">
+            <span class="metric-label">Ruido Térmal</span>
+            <span class="metric-value" id="metric-noise">-84.2 dB</span>
+          </div>
+          <div class="council-metric">
+            <span class="metric-label">Protocolo</span>
+            <span class="metric-value">Ω₁₆ · HOMEOSTASIS</span>
+          </div>
+          <div class="council-metric">
+            <span class="metric-label">Nivel de Realidad</span>
+            <span class="metric-value" id="metric-reality">C5-HÍBRIDO</span>
+          </div>
+        </div>
+        <!-- Genesis Synthesis Oscilloscope -->
+        <div class="legion-oscilloscope" id="legion-oscilloscope">
+          <div class="oscilloscope-header">
+            <span class="oscilloscope-label">⬡ SÍNTESIS GÉNESIS Ω₆₄ — Forma de Onda Armónica Aditiva</span>
+            <span class="osc-state osc-stable" id="harmonic-state">ESTABLE</span>
+          </div>
+          <canvas class="oscilloscope-canvas" id="oscilloscope-canvas" aria-hidden="true"></canvas>
+          <div class="oscilloscope-metrics">
+            <span class="osc-metric">
+              <span class="osc-metric-label">Entropía</span>
+              <span class="osc-metric-value" id="entropy-value">0.0000</span>
+            </span>
+            <span class="osc-metric">
+              <span class="osc-metric-label">Consonancia</span>
+              <span class="osc-metric-value" id="consonance-value">1:1 Unísono</span>
+            </span>
+            <span class="osc-metric">
+              <span class="osc-metric-label">Nodos Activos</span>
+              <span class="osc-metric-value" id="legion-node-count">0 / 100</span>
+            </span>
+            <span class="osc-metric">
+              <span class="osc-metric-label">Conexiones</span>
+              <span class="osc-metric-value" id="legion-conn-count">0</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    </main>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span class="logo-hex">⬡</span>agents<span style="color: var(--accent-bright);">.</span>archi
+          </div>
+          <p class="footer-tagline">© 2026 CORTEX PERSIST FOUNDATION. ALL RIGHTS PERSISTED.</p>
+          <p class="footer-disclaimer">
+            <strong>Nota de Entorno Experimental:</strong> AGENTS.archi es un proyecto de investigación independiente. La pasarela de cobro está activa en fase de pruebas e investigación, pero la plataforma aún no ofrece ni presta servicios en condiciones comerciales de producción.
+          </p>
+        </div>
+        <div class="footer-social">
+          <a href="https://x.com/borjamoskv" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://github.com/borjamoskv" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+          </a>
+          <a href="https://borjamoskv.substack.com" target="_blank" rel="noopener noreferrer" aria-label="Substack">
+            <svg viewBox="0 0 24 24"><path d="M22.534 2.25H1.466a.716.716 0 0 0-.716.716v2.981a.716.716 0 0 0 .716.716h21.068a.716.716 0 0 0 .716-.716V2.966a.716.716 0 0 0-.716-.716zM1.466 8.917a.716.716 0 0 0-.716.716v2.982a.716.716 0 0 0 .716.716h21.068a.716.716 0 0 0 .716-.716V9.633a.716.716 0 0 0-.716-.716zm0 6.666a.716.716 0 0 0-.716.717v5.437a.716.716 0 0 0 1.206.524l9.31-8.528a1.066 1.066 0 0 1 1.436 0l9.31 8.528a.716.716 0 0 0 1.206-.524v-5.437a.716.716 0 0 0-.716-.717z"/></svg>
+          </a>
+        </div>
+        <div class="footer-copy">
+          <div style="display: flex; gap: var(--space-md); justify-content: flex-end; font-family: var(--font-mono); font-size: 10px; opacity: 0.6; letter-spacing: 0.08em; text-transform: uppercase;">
+            <a href="https://babylon60.com" target="_blank" rel="noopener noreferrer" style="color: var(--accent-bright);">BABYLON60 RUNTIME</a>
+            <a href="https://cortexpersist.dev" target="_blank" rel="noopener noreferrer" style="color: var(--accent-bright);">CORTEX.DEV</a>
+            <a href="https://cortexpersist.org" target="_blank" rel="noopener noreferrer" style="color: var(--accent-bright);">CORTEX.ORG</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal-overlay">
+      <div class="modal-container">
+        <div class="modal-header">
+          <h4 class="modal-title">Confirmar Transacción (Modo Experimento)</h4>
+          <button class="modal-close" aria-label="Cerrar">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="checkout-experiment-warning">
+            <div class="warning-title">⚠️ ENTORNO EN EXPERIMENTACIÓN</div>
+            <p class="warning-body">
+              La pasarela de cobro (Stripe) está <strong>activa</strong>, pero <strong>AGENTS.archi opera como una prueba de concepto e investigación experimental</strong>. Aún no estamos en condiciones de prestar servicios comerciales en producción. Cualquier importe transferido se destinará a aportación/donación para la investigación C5-REAL.
+            </p>
+          </div>
+          <div class="checkout-summary">
+            <span class="summary-plan" id="checkout-plan-name">...</span>
+            <span class="summary-price" id="checkout-plan-price">...</span>
+          </div>
+          <div class="checkout-pwyw">
+            <label for="checkout-custom-amount" class="pwyw-label">Aportación (USD): Paga lo que consideres justo (incluso 0)</label>
+            <input type="number" id="checkout-custom-amount" class="checkout-input" placeholder="Ej: 1000" min="0" />
+          </div>
+          <input type="email" id="checkout-email" class="checkout-input" placeholder="Operador Email (Opcional)" />
+          <button id="btn-checkout-confirm" class="btn btn-accent btn-full">
+            <span class="btn-text">Proceder a la Aportación / Pago</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <span class="secure-icon">🔒</span> Stripe Checkout Activo · Entorno Experimental & Pruebas
+        </div>
+      </div>
+    </div>
+
+    <!-- Back to Top -->
+    <button id="back-to-top" class="back-to-top" aria-label="Volver arriba">
+      ↑
+    </button>
+
+    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/components/pricingCheckout.js"></script>
+  </body>
+</html>

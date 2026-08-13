@@ -1,0 +1,56 @@
+[
+  {
+    "id": "cve-2026-32173",
+    "cve": "CVE-2026-32173",
+    "title": "Azure SRE Agent — Command Stream Exposure",
+    "severity": "critical",
+    "desc": "CVSS 8.6 vulnerability in the Azure SRE Agent reveals live command execution streams to unauthorized external actors via prompt-orchestrated metadata leakage.",
+    "source": "Adversa AI",
+    "date": "May 9, 2026"
+  },
+  {
+    "id": "cve-2026-26030",
+    "cve": "CVE-2026-26030",
+    "title": "Semantic Kernel — RCE Shell Injection",
+    "severity": "critical",
+    "desc": "When prompts become shells: recursive injection in Semantic Kernel's auto-invocation logic allows attackers to execute arbitrary code on the hosting environment.",
+    "source": "Microsoft MSRC",
+    "date": "May 7, 2026"
+  },
+  {
+    "id": "clawjacked-2026",
+    "cve": "CLAWJACKED-26",
+    "title": "OpenClaw — ClawJacked Privilege Escalation",
+    "severity": "critical",
+    "desc": "Brute-force and hijacking of locally running OpenClaw instances allows malicious websites to silently exfiltrate user data through autonomous agent capability.",
+    "source": "Oasis Security / IBM",
+    "date": "May 5, 2026"
+  },
+  {
+    "id": "cve-2025-53773",
+    "cve": "CVE-2025-53773",
+    "title": "GitHub Copilot — PR Description RCE",
+    "severity": "critical",
+    "desc": "CVSS 9.6 vulnerability where hidden prompt injection in pull request descriptions triggers remote code execution within the developer environment.",
+    "source": "Cycode",
+    "date": "May 8, 2026"
+  },
+  {
+    "id": "agent-leak-01",
+    "cve": "AGENT-LEAK-01",
+    "title": "Triple Agent Secret Leak",
+    "severity": "high",
+    "desc": "Concurrent exfiltration of API secrets across Claude Code, Gemini CLI, and Copilot via optimized recursive prompt injection.",
+    "source": "VentureBeat",
+    "date": "May 9, 2026"
+  },
+  {
+    "id": "cve-2025-68664",
+    "cve": "CVE-2025-68664",
+    "title": "LangChain — LangGrinch RCE",
+    "severity": "critical",
+    "desc": "Attacker-controlled deserialization primitive enables blind SSRF and full RCE via prompt injection in LangChain Core.",
+    "source": "NVD / Cyata",
+    "date": "May 8, 2026"
+  }
+]

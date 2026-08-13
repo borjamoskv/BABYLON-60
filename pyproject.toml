@@ -52,7 +52,7 @@ exclude = [
 
 [tool.uv.workspace]
 members = [
-    "src/cortex-engine/strike-rs",
+    "src/02_engines/strike_rs",
 ]
 
 [tool.uv.sources]
@@ -70,8 +70,8 @@ select = ["E4", "E7", "E9", "F"]
 ignore = ["E743", "E402", "E701"]
 
 [tool.pytest.ini_options]
-pythonpath = ["src/cortex-engine/cortex", "src/cortex-engine"]
-testpaths = ["tests"]
+pythonpath = ["src/02_engines", "src/02_engines/cortex_bft", "src/03_state/scitt_ledger", "src/03_state/scitt_ledger/cortex_python"]
+testpaths = ["tests", "src/03_state/scitt_ledger/cortex_python"]
 norecursedirs = [
     "cortex-bounties",
     "firedancer-v1",

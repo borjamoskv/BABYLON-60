@@ -110,6 +110,13 @@ probar_inconsistencia(Clausulas, HistorialCompleto) :-
 unify(X, Y) :-
     unify_with_occurs_check(X, Y).
 
+%% occurs_check(+Sub, +Term) is semidet
+%  Verdadero si Sub ocurre como sub-término dentro de Term (evita bindings circulares).
+occurs_check(Sub, Term) :-
+    sub_term(S, Term),
+    Sub == S, !.
+
+
 % ----------------------------------------------------------------------------
 % SECTION 3: FIRST-ORDER RESOLUTION (resolve_fo/3)
 %
