@@ -7,6 +7,7 @@ import { SwarmMonitor } from './components/SwarmMonitor';
 import { LedgerInspector } from './components/LedgerInspector';
 import { LicensePortal } from './components/LicensePortal';
 import { ComplianceInspector } from './components/ComplianceInspector';
+import { BlogPortal } from './components/BlogPortal';
 import { HeroCodeSnippet } from './components/HeroCodeSnippet';
 import { EcosystemGrid } from './components/EcosystemGrid';
 import { RoadmapMatrix } from './components/RoadmapMatrix';
