@@ -13,8 +13,10 @@ def _find_tauri_root() -> Path | None:
     """Localiza el directorio que contiene src-tauri/Cargo.toml por heurística:
     cwd primero, luego relativo a la ubicación de este fichero instalado."""
     candidates = (
+        Path.cwd() / "apps" / "src-tauri",
+        Path.cwd() / "apps" / "babylon60-ide" / "src-tauri",
         Path.cwd() / "src-tauri",
-        Path(__file__).resolve().parent.parent.parent / "src-tauri",
+        Path(__file__).resolve().parent.parent.parent.parent / "apps" / "src-tauri",
     )
     for candidate in candidates:
         if (candidate / "Cargo.toml").exists():
