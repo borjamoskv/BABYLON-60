@@ -11,7 +11,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 try:
-#     import strike_rs  # purgado por anergía
+    pass  #     import strike_rs  # purgado por anergía
 except ImportError as e:
     print(f"[!] Error importando strike_rs nativo: {e}")
     sys.exit(1)
