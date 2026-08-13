@@ -17,7 +17,7 @@ import uuid
 from datetime import datetime
 from pathlib import Path
 
-from babylon60.utils.hygiene import run_exergy_optimizer
+from babylon60.transducers.hygiene import run_exergy_optimizer
 from babylon60.database.core import connect
 from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
 
