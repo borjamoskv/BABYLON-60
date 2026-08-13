@@ -6,3 +6,7 @@ pre-commit:
       glob: "*"
       run: detect-secrets-hook --baseline .secrets.baseline {staged_files}
       fallback: echo "ALERTA: detect-secrets no instalado. Previniendo fuga entrópica por defecto."
+    distribution:
+      run: python3 scripts/c5_quality_gates/verify_distribution.py
+    legion:
+      run: python3 scripts/c5_legion/legion_21_agentes.py
