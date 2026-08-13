@@ -111,6 +111,15 @@ function App() {
             {/* CLI Playground Terminal Hero */}
             <TerminalHero />
 
+            {/* SDK Code Snippet 5-Lines */}
+            <HeroCodeSnippet />
+
+            {/* Open Ecosystem Interoperability Grid */}
+            <EcosystemGrid />
+
+            {/* Roadmap & Evolution Matrix */}
+            <RoadmapMatrix />
+
             {/* Pricing Tiers Grid */}
             <div className="space-y-4 pt-2">
               <h3 className="text-lg font-bold font-mono text-white flex items-center gap-2">
