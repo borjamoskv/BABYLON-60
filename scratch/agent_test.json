@@ -3,10 +3,10 @@
   "locale": "es",
   "compliance_standard": "Reglamento de Inteligencia Artificial de la UE (Reglamento UE 2024/1689 / AESIA)",
   "supervisory_authority": "Agencia Española de Supervisión de Inteligencia Artificial (AESIA) / UE",
-  "certificate_id": "EU-AIA-CERT-0D6B35C3C54B86B5",
+  "certificate_id": "EU-AIA-CERT-9F095FEE89FC5AF1",
   "system_identifier": "BABYLON60-PROD-01",
   "operator": "Enterprise Operator",
-  "issued_at": "2026-08-13T10:14:46Z",
+  "issued_at": "2026-08-13T10:30:34Z",
   "global_merkle_root": "a1b2c3d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890",
   "quarantine_status": "NOMINAL_LIMPIO",
   "articles_compliance": {
@@ -44,6 +44,6 @@
   "cryptographic_attestation": {
     "policy": "Sovereign Dual-License v1.0",
     "attestation_engine": "BABYLON-60 C5-REAL Transducer",
-    "fingerprint": "0d6b35c3c54b86b5e7cbcafb7fe7f37eecd205fd394606ee30c09779a2b4e70d"
+    "fingerprint": "9f095fee89fc5af1a5eb9cccde9174432e97890e06ecac19c76a7790bcde078e"
   }
 }
