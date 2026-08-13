@@ -191,57 +191,14 @@ def _report_missing_key(key: str, lang: Lang) -> None:
 
 def _report_as_ghost_fact(key: str, lang: Lang) -> None:
     """Report as Ghost Fact for permanent resolution."""
-    try:
-        from babylon60.facts import store_fact  # type: ignore[reportAttributeAccessIssue]
-
-        store_fact("cortex", f"MISSING_I18N: Key '{key}' missing for lang '{lang.value}'", type="ghost")
-    except ImportError:
-        logger.debug("I18N: Periodic report skipped - cortex.facts not available yet")
+    # babylon60.facts import purgado por anergía
+    pass
 
 
 def _trigger_adaptive_repair(key: str, lang: Lang) -> None:
     """Trigger background translation if LLM is available."""
-    try:
-        from babylon60.extensions.llm.manager import LLMManager
-    except ImportError:
-        return
-
-    # Module-level singleton pattern (avoids per-call instantiation)
-    if not hasattr(_report_missing_key, "_llm"):
-        _report_missing_key._llm = LLMManager()  # type: ignore[attr-defined]
-
-    llm = _report_missing_key._llm  # type: ignore[attr-defined]
-    if not llm.available:
-        return
-
-    import asyncio
-
-    async def _repair():
-        logger.info("I18N: Adaptive repair triggered for [%s] in [%s]", key, lang.value)
-        prompt = (
-            f"Translate the following I18N key to {lang.name} ({lang.value}). "
-            f"Context: It's a UI key for CORTEX (Agentic AI Memory System).\n"
-            f"Key: {key}\n"
-            f"Translate only the value, be concise and professional."
-        )
-        try:
-            from babylon60.extensions.llm.router import IntentProfile
-
-            translation = await llm.complete(
-                prompt,
-                system="You are a professional translator.",
-                intent=IntentProfile.CREATIVE,
-            )
-            if translation:
-                register_translation(key, lang, translation.strip())
-        except (OSError, RuntimeError, ValueError) as exc:
-            logger.debug("I18N: Adaptive repair failed: %s", exc)
-
-    try:
-        loop = asyncio.get_running_loop()
-        loop.create_task(_repair())
-    except RuntimeError:
-        threading.Thread(target=asyncio.run, args=(_repair(),), daemon=True).start()
+    # babylon60.extensions.llm import purgado por anergía
+    pass
 
 
 def get_trans(key: TranslationKey, lang: Lang | str | None = None, **kwargs: Any) -> str:
