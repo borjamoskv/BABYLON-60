@@ -55,6 +55,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
         <nav className="flex items-center gap-1 bg-slate-900/60 p-1 rounded-lg border border-slate-800">
           {[
             { id: 'overview', label: '📊 INICIO' },
+            { id: 'blog', label: '📝 BLOG EXÉRGICO' },
             { id: 'compliance', label: '🛡️ EU AI ACT' },
             { id: 'license', label: '🔑 LICENCIAS' },
             { id: 'swarm', label: '🐝 ENJAMBRE 21' },
