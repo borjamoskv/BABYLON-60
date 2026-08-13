@@ -37,7 +37,7 @@ Byzantine Fault Tolerant consensus extending the local ledger to a distributed q
 - Distributed quorum layer (`Motor Causal-swarm`) is a **separate package** that is not a dependency of the core `Ledger Asíncrono-persist`
 - No production benchmarks exist for N>1 node scenarios
 
-### Known Limitations
+### Known Limitations (BFT Swarm)
 
 - Split-brain recovery under network partition is not tested
 - Reputational weighting of agents in quorum is not implemented
@@ -63,7 +63,7 @@ mem = VectorMemory(db_path="cortex_memory.db")
 results = mem.search("agent startup sequence", top_k=5)
 ```
 
-### Limitations
+### Limitations (Vector Memory)
 
 - Embedding models must be loaded separately (`sentence-transformers` or `mlx-lm`)
 - Vector index is rebuilt from scratch on schema migration
@@ -83,7 +83,7 @@ Lean 4 mechanical proofs of core ledger invariants.
 - Non-equivocation: a single-writer actor cannot produce two conflicting entries for the same Lamport timestamp
 - BFT safety bound: no fork below f < N/3 Byzantine nodes
 
-### Current State
+### Current State (Formal Verification)
 
 Not integrated into CI. Requires `lake build` locally. Theorem coverage is now bridged directly to the Python implementation via strictly typed `BFTCausalInvariantError` assertions in `ledger_actor.py`.
 
@@ -95,13 +95,13 @@ Not integrated into CI. Requires `lake build` locally. Theorem coverage is now b
 
 A planned background daemon that fine-tunes a local LLM on ledger history to produce a personalized inference layer.
 
-### Design Intent
+### Design Intent (LoRA Daemon)
 
 - Consume `cortex_memory.db` history as training data
 - Fine-tune a base model via LoRA / QLoRA on Apple Silicon (MLX-LM)
 - Write fine-tuned adapter weights back to the ledger with causal taint
 
-### Current State
+### Current State (LoRA Daemon)
 
 **Not implemented.** No code exists beyond design notes. Do not reference this as a feature.
 
@@ -113,13 +113,13 @@ A planned background daemon that fine-tunes a local LLM on ledger history to pro
 
 An alternative to vector embeddings using binary hypervectors for near-zero memory similarity search.
 
-### Design Intent
+### Design Intent (Hyperdimensional Computing)
 
 - Encode ledger entries as 10,000-bit hypervectors
 - Similarity via Hamming distance — O(1) per comparison
 - Bundling and binding operations for compositional memory
 
-### Current State
+### Current State (Hyperdimensional Computing)
 
 **Not implemented.** Literature review only.
 
@@ -131,13 +131,13 @@ An alternative to vector embeddings using binary hypervectors for near-zero memo
 
 External tamper-evident anchoring of the ledger's Merkle root to a public blockchain.
 
-### Design Intent
+### Design Intent (Blockchain Anchoring)
 
 - Accumulate BLAKE3 hashes into a Merkle tree
 - Submit root hash to Bitcoin via OP_RETURN or to Solana
 - Use OpenTimestamps protocol for decentralized timestamp proofs
 
-### Current State
+### Current State (Blockchain Anchoring)
 
 `L1_sink/` directory contains an experimental OTS sink. Not integrated into the main ledger pipeline. No production use.
 
@@ -157,7 +157,7 @@ node server.js
 
 Exposes metrics at `ws://localhost:8080`.
 
-### Limitations
+### Limitations (Node.js Daemon)
 
 - macOS-only (uses `system_profiler` and native APIs)
 - No authentication on WebSocket endpoint

@@ -43,7 +43,7 @@ No existen aproximaciones IEEE-754 (NaN, Denormals, Inf). El dominio de computac
 
 ## 2. Estructura de Aislamiento Entrópico
 
-El estado físico del sistema está protegido contra la estocasticidad ambiental a través de un modelo de aislamiento en capas:
+El estado físico del Dominio C5-REAL está protegido contra la estocasticidad ambiental a través de un modelo de aislamiento en capas:
 
 ```
     ┌─────────────────────────────────────────────────────────────┐
@@ -110,4 +110,4 @@ Todo nodo o dato derivado de un modelo de lenguaje generativo está implícitame
 ## 5. Cumplimiento de Invariantes de Arquitectura
 
 Todos los invariantes arquitectónicos (`INV_BFT_04`, `INV_C5_15`, etc.) han sido unificados y su definición formal se encuentra documentada en la especificación central:
-👉 **[Invariantes del Sistema BABYLON-60](spec_invariants.md)**
+👉 **[Invariantes del Dominio C5-REAL BABYLON-60](spec_invariants.md)**

@@ -41,7 +41,7 @@ version: 1.0.0
 
 > [!CAUTION]
 > ### AX-LS-2: Mutabilidad Cero / Aislamiento Causal
-> La legión es un observador epistemológico puro. Ningún nodo altera $\mathcal{W}$ durante la ejecución de auditoría. El gradiente de entropía local del sistema de archivos es estrictamente cero.
+> La legión es un observador epistemológico puro. Ningún nodo altera $\mathcal{W}$ durante la ejecución de auditoría. El gradiente de entropía local del Dominio C5-REAL de archivos es estrictamente cero.
 > 
 > $$ \Delta\text{Entropía}(\mathcal{W}) = 0 $$
 
@@ -67,7 +67,7 @@ version: 1.0.0
 
 > [!TIP]
 > ### Teorema 1: Invarianza Causal del Scheduler
-> **Enunciado:** Dado un espacio $\mathcal{W}$ inmutable, el estado final de la Matriz de Saneamiento $\mathbf{V}$ es matemáticamente idéntico independientemente de la latencia del sistema operativo o el orden asíncrono de los hilos de ejecución.
+> **Enunciado:** Dado un espacio $\mathcal{W}$ inmutable, el estado final de la Matriz de Saneamiento $\mathbf{V}$ es matemáticamente idéntico independientemente de la latencia del Dominio C5-REAL operativo o el orden asíncrono de los hilos de ejecución.
 > 
 > **Demostración (Boceto):**
 > 1. Por AX-LS-2, ninguna función $\alpha$ muta el estado global de $\mathcal{W}$.
@@ -77,7 +77,7 @@ version: 1.0.0
 
 > [!NOTE]
 > ### Corolario 1: Cota de Sobrecarga Termodinámica
-> El sistema jamás entra en *Livelock* o *Green Theater*. Debido a AX-LS-3 y la finitud de $\mathcal{W}$, el proceso termina determinísticamente en un número acotado de operaciones de sistema.
+> El Dominio C5-REAL jamás entra en *Livelock* o *Green Theater*. Debido a AX-LS-3 y la finitud de $\mathcal{W}$, el proceso termina determinísticamente en un número acotado de operaciones de Dominio C5-REAL.
 
 ---
 
@@ -154,7 +154,7 @@ axiom ax_2____a_____a_________a___a________a__a : ∀ (x : X), True
 /-- Fail-Fast de Grano Fino -/
 axiom ax_3__a____a________a : ∀ (x : X), True
 
-/-- y la finitud de $\mathcal{W}$, el proceso termina determinísticamente en un número acotado de operaciones de sistema. -/
+/-- y la finitud de $\mathcal{W}$, el proceso termina determinísticamente en un número acotado de operaciones de Dominio C5-REAL. -/
 axiom ax_4____a_______________a___a________________________a______________a___________________a___a__________a________________a : ∀ (x : X), True
 
 /-- Invarianza Causal del Scheduler -/

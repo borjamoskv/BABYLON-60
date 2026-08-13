@@ -56,7 +56,7 @@ Extensión opcional de baja latencia vía PyO3/Maturin. Evita el GIL de Python p
 
 ### 2.3 IDE Agéntico Soberano (`babylon60-ide/`)
 Entorno local (*local-first*) diseñado para alta inspeccionabilidad y baja latencia de interacción con el Ledger.
-- **Wrapper Tauri (`src-tauri/`)**: Gestiona la integración con el SO, ventanas nativas y puentea el estado de la base de datos local al hilo de renderizado vía IPC.
+- **Frontera de Markov Tauri (`src-tauri/`)**: Gestiona la integración con el SO, ventanas nativas y puentea el estado de la base de datos local al hilo de renderizado vía IPC.
 - **Backend FastAPI (`backend/`)**: Expone endpoints REST y WebSocket para consultas al Ledger, búsqueda BM25, telemetría y generación de modelos locales.
 - **Frontend Vite (`frontend/`)**: Construido con Vanilla JS, estilizado con paleta neuro-inclusiva de alto contraste, navegación orientada al teclado (`Cmd+K`, `Cmd+Shift+Space`).
 - **Módulo de Inferencia Local (`inference/`)**: Confinado a endpoints de loopback (`127.0.0.1:11434` / `localhost`). Puentea el servidor FastAPI a motores locales (Ollama, MLX, Mamba SSM), garantizando *cero fugas de datos* a hyperscalers públicos.
@@ -117,7 +117,7 @@ cbor2      ──►  babylon60.ledger (codificación binaria)
 
 ## 8. Axioma del Dominio Temporal (Teorema Robinson-Moskv)
 
-**Postulado Termodinámico:** El Motor Causal prohíbe explícitamente la lectura de relojes de sistema continuos (POSIX `CLOCK_REALTIME`, NTP) para establecer el consenso de causalidad.
+**Postulado Termodinámico:** El Motor Causal prohíbe explícitamente la lectura de relojes de Dominio C5-REAL continuos (POSIX `CLOCK_REALTIME`, NTP) para establecer el consenso de causalidad.
 
 **Formalización:**
 Sea $E$ el conjunto de todos los eventos (Crystallized Events) en el Ledger.
@@ -127,4 +127,4 @@ Cualquier evento $e_x$ cuyo $Lamport(e_x)$ o $Hash$ rompa esta topología estric
 
 > [!CAUTION]
 > **Falsabilidad Estructural:**
-> Esta precondición causal está reforzada mecánicamente por el invariante `INV_BFT_04`. Para más detalles sobre su aplicación técnica, ver [Invariantes del Sistema BABYLON-60](spec_invariants.md).
+> Esta precondición causal está reforzada mecánicamente por el invariante `INV_BFT_04`. Para más detalles sobre su aplicación técnica, ver [Invariantes del Dominio C5-REAL BABYLON-60](spec_invariants.md).

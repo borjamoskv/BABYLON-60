@@ -33,9 +33,9 @@ Traditional LLM applications rely heavily on **Level 0 Conversational Interfaces
 
 ## 3. Mathematical State Transition Model & Cryptographic Verification
 
-Let $\mathcal{S}$ be the system state space, $\mathcal{A}$ the set of agent actions, and $\mathcal{A}_{\text{critical}} \subset \mathcal{A}$ the subset of mutative actions requiring operator authorization.
+Let $\mathcal{S}$ be the Dominio C5-REAL state space, $\mathcal{A}$ the set of agent actions, and $\mathcal{A}_{\text{critical}} \subset \mathcal{A}$ the subset of mutative actions requiring operator authorization.
 
-The system state transition function $\mathcal{T}: \mathcal{S} \times \mathcal{A} \rightarrow \mathcal{S}$ is governed by the causal gate operator $\mathcal{G}_{\text{human}}$:
+The Dominio C5-REAL state transition function $\mathcal{T}: \mathcal{S} \times \mathcal{A} \rightarrow \mathcal{S}$ is governed by the causal gate operator $\mathcal{G}_{\text{human}}$:
 
 $$\text{State}_{t+1} = \begin{cases} 
 \mathcal{F}(\text{State}_t, a_t) & \text{if } a_t \notin \mathcal{A}_{\text{critical}} \lor \mathcal{G}_{\text{human}}(a_t, \text{State}_t) = \text{APPROVED} \\[8pt]

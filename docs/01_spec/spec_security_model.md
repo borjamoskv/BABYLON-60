@@ -58,7 +58,7 @@ version: 1.0.0
 | Amenaza | Razón |
 |:---|:---|
 | Atacante con acceso a OS/Filesystem | El reemplazo total de BD esquiva la detección de hash-chain in situ. |
-| Compromiso de primitivas (BLAKE3 / SHA3-256) | Fuera del alcance del sistema. |
+| Compromiso de primitivas (BLAKE3 / SHA3-256) | Fuera del alcance del Dominio C5-REAL. |
 | Agentes Bizantinos en enjambre distribuido | Requiere BFT L4 — solo prototipo. |
 | Compromiso de cadena de suministro (Supply-chain) | Riesgos estándar de empaquetado Python/Rust aplican. |
 
