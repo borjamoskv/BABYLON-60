@@ -40,15 +40,17 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
       {/* Navigation Tabs */}
       <nav className="flex items-center gap-1 bg-slate-900/60 p-1 rounded-lg border border-slate-800">
         {[
-          { id: 'overview', label: '📊 VISTA GENERAL' },
-          { id: 'axioms', label: '📐 AXIOMAS Z3 & LEAN 4' },
-          { id: 'ledger', label: '🔗 BFT WAL LEDGER' },
-          { id: 'swarm', label: '🐝 ENJAMBRE P×S' },
+          { id: 'overview', label: '📊 INICIO / LANDING' },
+          { id: 'compliance', label: '🛡️ EU AI ACT' },
+          { id: 'license', label: '🔑 LICENCIAS' },
+          { id: 'axioms', label: '📐 AXIOMAS Z3' },
+          { id: 'swarm', label: '🐝 ENJAMBRE 21' },
+          { id: 'ledger', label: '🔗 LEDGER WAL' },
         ].map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-1.5 rounded-md text-xs font-mono transition-all ${
+            className={`px-3 py-1.5 rounded-md text-xs font-mono transition-all ${
               activeTab === tab.id
                 ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-[0_0_10px_rgba(0,240,255,0.2)] font-semibold'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
