@@ -19,7 +19,8 @@ from typing import TYPE_CHECKING
 __all__ = ["export_facts"]
 
 if TYPE_CHECKING:
-    from babylon60.engine.cognitive.models import Fact
+    from typing import Any
+    Fact = Any  # type: ignore
 
 
 def export_facts(facts: list[Fact], fmt: str = "json") -> str:

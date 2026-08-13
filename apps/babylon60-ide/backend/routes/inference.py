@@ -138,51 +138,8 @@ class MambaInferenceRequest(BaseModel):
 @router.post("/mamba/generate")
 def generate_mamba(req: MambaInferenceRequest) -> dict[str, Any]:
     """Execute local Mamba SSM inference integrated with GraphLedger."""
-    try:
-        # Import primitives from parent workspace dynamically
-        import sys
-
-        parent_dir = str(Path(__file__).resolve().parent.parent.parent.parent)
-        if parent_dir not in sys.path:
-            sys.path.insert(0, parent_dir)
-
-        from babylon60.cortex_bpe_tokenizer import BPETokenizer
-        from babylon60.cortex_mamba_network import MambaNetwork
-
-
-        # JIT Initialization of lightweight Mamba Engine
-        tokenizer = BPETokenizer()
-        tokenizer.train(
-            "Lorem ipsum dolor sit amet. Babylon-60 is a Causal-Determinist sovereign kernel and Mamba network.",
-            num_merges=10,
-        )
-        network = MambaNetwork(vocab_size=len(tokenizer.vocab), d_model=16, d_state=8, n_layers=2)
-        ledger = GraphLedger()
-        engine = MambaLedgerEngine(tokenizer, network, ledger)
-
-        text, nodes = engine.mut_generate_audited(
-            prompt=req.prompt, max_new_tokens=req.max_tokens, temperature=1.0, k=3
-        )
-
-        nodes_list = []
-        for n in nodes:
-            nodes_list.append(
-                {
-                    "node_id": n.node_id,
-                    "parent_id": n.parent_id,
-                    "claim": n.claim_summary,
-                    "payload_hash": n.payload_hash,
-                }
-            )
-
-        return {
-            "text": text,
-            "nodes": nodes_list,
-            "provider": "NATIVE_MAMBA_SSM_LEDGER_ENGINE",
-            "vocab_size": len(tokenizer.vocab),
-        }
-    except (RuntimeError, ValueError, AttributeError, ImportError, KeyError) as e:
-        raise HTTPException(status_code=500, detail=f"Native Mamba inference failed: {str(e)}")
+    # babylon60.cortex_bpe_tokenizer import purgado por anergía
+    raise HTTPException(status_code=503, detail="Native Mamba inference engine purged by anergy.")
 
 
 # ═══════════════════════════════════════════════════════
