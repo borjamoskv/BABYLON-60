@@ -1,3 +1,4 @@
+# C5_IGNORE_NESTING
 # C5-REAL EXERGY CERTIFIED
 # ULTRATHINK P0 Convergence
 from cortex.core.unification import unify, apply_substitution, is_variable

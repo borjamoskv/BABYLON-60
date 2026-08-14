@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C5-REAL T_eff Supervisor</title>
+    <style>
+        :root {
+            --bg-color: #0f0f11;
+            --text-main: #e0e0e0;
+            --text-dim: #7a7a7a;
+            --accent: #d4af37; /* Museum Gold / Contemplative */
+            --danger: #b33a3a;
+            --success: #3ab370;
+            --border: #2a2a2a;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, sans-serif;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        header:hover {
+            opacity: 1;
+        }
+
+        h1 {
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            margin: 0 0 10px 0;
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .pipeline-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .gate {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            width: 160px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.02);
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        .gate.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .gate.success {
+            border-color: var(--success);
+        }
+
+        .gate.fail {
+            border-color: var(--danger);
+        }
+
+        .gate-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            color: var(--text-dim);
+        }
+
+        .entropy-meter {
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .entropy-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 100%;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .entropy-label {
+            font-size: 0.7rem;
+            font-family: monospace;
+            color: var(--text-dim);
+            margin-top: 5px;
+            display: block;
+        }
+
+        .arrow {
+            color: var(--text-dim);
+            font-size: 1.2rem;
+        }
+
+        .controls {
+            margin-top: 60px;
+            display: flex;
+            gap: 15px;
+        }
+
+        button {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            border-color: var(--text-dim);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        #log {
+            margin-top: 40px;
+            width: 100%;
+            max-width: 800px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            height: 150px;
+            overflow-y: auto;
+        }
+
+        .log-entry { margin-bottom: 5px; }
+        .log-success { color: var(--success); }
+        .log-fail { color: var(--danger); }
+        .log-accent { color: var(--accent); }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>T_EFF AXIOMATIC TRANSITION</h1>
+        <div class="subtitle">C5-REAL Kernel | Dynamis → Entelecheia</div>
+    </header>
+
+    <div class="pipeline-container" id="pipeline">
+        <div class="gate" id="gate-gkat">
+            <div class="gate-title">1. CF-GKAT</div>
+            <div class="entropy-meter"><div class="entropy-fill" style="width: 100%"></div></div>
+            <span class="entropy-label">H = 1.000 nats</span>
+        </div>
+        <div class="arrow">→</div>
+        <div class="gate" id="gate-budget">
+            <div class="gate-title">2. BUDGET</div>
+            <div class="entropy-meter"><div class="entropy-fill" style="width: 100%"></div></div>
+            <span class="entropy-label">H = 0.500 nats</span>
+        </div>
+        <div class="arrow">→</div>
+        <div class="gate" id="gate-sandbox">
+            <div class="gate-title">3. SANDBOX</div>
+            <div class="entropy-meter"><div class="entropy-fill" style="width: 100%"></div></div>
+            <span class="entropy-label">H = 0.100 nats</span>
+        </div>
+        <div class="arrow">→</div>
+        <div class="gate" id="gate-scitt">
+            <div class="gate-title">4. SCITT</div>
+            <div class="entropy-meter"><div class="entropy-fill" style="width: 100%"></div></div>
+            <span class="entropy-label">H = 0.000 nats</span>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button onclick="triggerTransition(true)">Simulate Success Transition</button>
+        <button onclick="triggerTransition(false)">Simulate Fail-Stop (Budget)</button>
+    </div>
+
+    <div id="log">
+        <div class="log-entry">> System Idle. Awaiting stochastic prompt...</div>
+    </div>
+
+    <script>
+        const sleep = ms => new Promise(r => setTimeout(r, ms));
+        const logEl = document.getElementById('log');
+
+        function appendLog(text, className = '') {
+            const el = document.createElement('div');
+            el.className = `log-entry ${className}`;
+            el.innerText = `> ${text}`;
+            logEl.appendChild(el);
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        function resetUI() {
+            document.querySelectorAll('.gate').forEach(g => {
+                g.className = 'gate';
+                g.querySelector('.entropy-fill').style.width = '100%';
+            });
+            logEl.innerHTML = '<div class="log-entry">> System Reset.</div>';
+        }
+
+        async function triggerTransition(willSucceed) {
+            resetUI();
+            appendLog('Incoming Dynamis (Stochastic Vector). Initiating Axiomatic Collapse...', 'log-accent');
+            
+            const gates = [
+                { id: 'gate-gkat', name: 'CF-GKAT Normalization', entropyTarget: '50%', label: 'H = 0.500 nats' },
+                { id: 'gate-budget', name: 'FOCUS Budget Constraint', entropyTarget: '10%', label: 'H = 0.100 nats', failPoint: !willSucceed },
+                { id: 'gate-sandbox', name: 'WASM Isolation', entropyTarget: '0%', label: 'H = 0.000 nats' },
+                { id: 'gate-scitt', name: 'SCITT Cryptographic Attestation', entropyTarget: '0%', label: 'H = 0.000 (Immutable)' }
+            ];
+
+            for (let i = 0; i < gates.length; i++) {
+                const g = gates[i];
+                const el = document.getElementById(g.id);
+                el.classList.add('active');
+                appendLog(`Entering [${g.name}]...`);
+                
+                await sleep(600);
+
+                if (g.failPoint) {
+                    el.classList.remove('active');
+                    el.classList.add('fail');
+                    appendLog(`FATAL: Axiom Violated at [${g.name}]. Epistemic Halt Triggered!`, 'log-fail');
+                    appendLog(`Transition aborted. Anergy purged.`, 'log-fail');
+                    return;
+                }
+
+                el.querySelector('.entropy-fill').style.width = g.entropyTarget;
+                el.querySelector('.entropy-label').innerText = g.label;
+                el.classList.remove('active');
+                el.classList.add('success');
+                appendLog(`[${g.name}] Validated. Entropy reduced.`, 'log-success');
+                
+                await sleep(400);
+            }
+
+            appendLog('TRANSITION COMPLETE. Entelecheia Reached.', 'log-accent');
+        }
+    </script>
+</body>
+</html>

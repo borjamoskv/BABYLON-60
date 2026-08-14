@@ -68,7 +68,7 @@ export async function onRequestPost({ request, env }) {
     params.append('metadata[source]', 'AGENTS.archi');
     params.append('metadata[status]', 'experimental_research_mode');
     params.append('metadata[notice]', 'Payment gateway active for experimental contributions; production commercial service provision not yet active.');
-    params.append('metadata[cortex_taint]', `taint:checkout:${Date.now()}`);
+    params.append('metadata[cortex_taint]', `taint:checkout:${performance.now()}`);
 
     const res = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method: 'POST',

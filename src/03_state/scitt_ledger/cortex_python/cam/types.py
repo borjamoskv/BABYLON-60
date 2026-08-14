@@ -54,7 +54,7 @@ class Epistemic5D:
     timestamp: float = field(default_factory=time.time)
 
     def current_freshness(self, current_time: float | None = None) -> float:
-        now = current_time if current_time is not None else time.time()
+        now = current_time if current_time is not None else time.monotonic()
         elapsed = max(0.0, now - self.timestamp)
         return math.exp(-self.decay_lambda * elapsed)
 

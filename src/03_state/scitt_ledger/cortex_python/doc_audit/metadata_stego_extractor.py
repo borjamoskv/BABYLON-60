@@ -66,13 +66,8 @@ class MetadataStegoExtractor:
         # 4. Decodificación de Secuencia Esteganográfica si existen Zero-Width
         stego_binary_payload = ""
         if "\u200B" in text_content or "\u200C" in text_content:
-            # Mapeo binario: U+200B -> 0, U+200C -> 1
-            bits = []
-            for char in text_content:
-                if char == "\u200B":
-                    bits.append("0")
-                elif char == "\u200C":
-                    bits.append("1")
+            stego_map = {"\u200B": "0", "\u200C": "1"}
+            bits = [stego_map[char] for char in text_content if char in stego_map]
             stego_binary_payload = "".join(bits)
 
         # 5. Detección de Homóglifos

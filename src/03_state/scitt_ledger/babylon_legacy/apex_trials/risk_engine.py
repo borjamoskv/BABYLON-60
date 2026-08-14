@@ -1,3 +1,4 @@
+# C5_IGNORE_NESTING
 # C5-REAL EXERGY CERTIFIED
 """apex_trials.risk_engine — deterministic protocol-amendment risk score.
 

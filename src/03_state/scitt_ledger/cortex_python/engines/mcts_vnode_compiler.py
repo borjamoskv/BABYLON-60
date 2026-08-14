@@ -414,4 +414,4 @@ def enforce_ide_theorem_physical(intention: str) -> None:
     )
 
 if __name__ == "__main__":
-    enforce_ide_theorem_physical(f"ULTRATHINK_PHYSICAL_COLLAPSE_ITER_{time.time()}")
+    enforce_ide_theorem_physical(f"ULTRATHINK_PHYSICAL_COLLAPSE_ITER_{time.monotonic()}")

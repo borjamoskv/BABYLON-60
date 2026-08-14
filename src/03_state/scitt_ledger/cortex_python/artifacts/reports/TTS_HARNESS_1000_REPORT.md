@@ -10,11 +10,11 @@ Proof:
   PythonCoverage: 100% (1000/1000 executed in 0.001s)
 ```
 
-## 1. Topología del Espacio de Estados TTS & Harness ($10 \times 10 \times 10 = 1000$)
+## 1. Topología del Espacio de Estados TTS & Harness (10 \times 10 \times 10 = 1000)
 
-$$\text{Code} = D \times 100 + P \times 10 + M, \quad D, P, M \in \{0, \dots, 9\}$$
+\text{Code} = D \times 100 + P \times 10 + M, \quad D, P, M \in \{0, \dots, 9\}
 
-### Dominios ($D_0 \dots D_9$)
+### Dominios (D_0 \dots D_9)
 0. **ENTROPY_ALLOC**: Asignación Adaptativa de Presupuesto Computacional por Entropía
 1. **LATENT_LOOKAHEAD**: Búsqueda MCTS en Espacio Latente Continuo
 2. **POLICY_IMPROVE**: Refinamiento de Política Online en Tiempo de Inferencia
@@ -26,19 +26,19 @@ $$\text{Code} = D \times 100 + P \times 10 + M, \quad D, P, M \in \{0, \dots, 9\
 8. **STAGE_DECOUPLE**: Desacoplamiento Asimétrico de Prefill y Decoding
 9. **VECTOR_QUANT**: Cuantización de Vectores Pre-Decoder y Sinks Latentes
 
-### Acciones Primitivas ($P_0 \dots P_9$)
+### Acciones Primitivas (P_0 \dots P_9)
 0. **INIT**: Instanciación de Presupuesto MCTS y Estado de Harness
 1. **EXPAND**: Expansión de Hijos Latentes en Grafo MCTS
 2. **EVALUATE**: Evaluación de Invariante de Red y Función de Recompensa
 3. **BACKPROP**: Retro-Propagación de Valor en Árbol MCTS
 4. **PRUNE**: Poda Temprana Negativa (*Negative Early Exit*)
 5. **QUANTIZE**: Cuantización en Línea de Memoria KV
-6. **ASSERT_BFT**: Verificación de Consenso Bizantino $N \ge 3$
+6. **ASSERT_BFT**: Verificación de Consenso Bizantino N \ge 3
 7. **EXECUTE_SANDBOX**: Invocación Cinética Directa de Código en Sandbox
-8. **RECONSTRUCT_STATE**: Estimación Causal de Continuidad Cognitiva $g(H, O, Y) \to \hat{S}$
+8. **RECONSTRUCT_STATE**: Estimación Causal de Continuidad Cognitiva g(H, O, Y) \to \hat{S}
 9. **FLUSH_LEDGER**: Sellado Inmutable en Master Ledger / Git Sentinel
 
-### Modificadores ($M_0 \dots M_9$)
+### Modificadores (M_0 \dots M_9)
 0. **RAW**: Pasarela Directa Cero-Latencia
 1. **ATOMIC**: Aislamiento Hilo Unicorriente Sin Mutación Secundaria
 2. **ADAPTIVE_COT**: Asignación Dinámica de Longitud CoT por Entropía

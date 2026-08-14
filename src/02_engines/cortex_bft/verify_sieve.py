@@ -17,14 +17,14 @@ def main():
     N = 100_000_000
     print(f"[CORTEX] Inyectando vector de {N} elementos al colador físico...")
 
-    start_t = time.time()
+    start_t = time.monotonic()
     try:
         colapsos, elapsed_rust, gflops = strike_rs.run_silicon_sieve(N)
     except Exception as e:
         print(f"[FATAL] Fallo estructural en FFI: {e}")
         sys.exit(1)
 
-    total_py_time = time.time() - start_t
+    total_py_time = time.monotonic() - start_t
 
     print("\n--- RESULTADOS FÍSICOS (Ω39) ---")
     print(f"> Colapsos Estocásticos Aniquilados: {colapsos}")

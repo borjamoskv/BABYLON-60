@@ -12,11 +12,11 @@ Proof:
 
 ## 1. Cadena Neuro-Transductora Causal
 
-$$\text{Homeostasis}(E) \xrightarrow{\text{Free Energy Min}} \text{Prediction}(P) \xrightarrow{\text{Attention Mask}} \text{Attention}(A) \xrightarrow{\text{Physical Torque}} \text{Action}(Act) \xrightarrow{\text{Symbolic Collapse}} \text{Language}(L)$$
+\text{Homeostasis}(E) \xrightarrow{\text{Free Energy Min}} \text{Prediction}(P) \xrightarrow{\text{Attention Mask}} \text{Attention}(A) \xrightarrow{\text{Physical Torque}} \text{Action}(Act) \xrightarrow{\text{Symbolic Collapse}} \text{Language}(L)
 
-1. **Homeostasis**: Minimización de variaciones térmicas y presión de exergía ($E \ge 0.01$).
-2. **Prediction**: Generación a priori de modelos bayesianos $P(X)$ y cálculo del error de innovación.
-3. **Attention**: Asignación de peso de atención a partir del error de predicción ($A = \frac{1}{1 + e_{\text{pred}}}$).
+1. **Homeostasis**: Minimización de variaciones térmicas y presión de exergía (E \ge 0.01).
+2. **Prediction**: Generación a priori de modelos bayesianos P(X) y cálculo del error de innovación.
+3. **Attention**: Asignación de peso de atención a partir del error de predicción (A = \frac{1}{1 + e_{\text{pred}}}).
 4. **Action**: Disparo cinético sobre el disco C5-REAL (Mutación de AST, IO sockets).
 5. **Language**: Colapso tardío hacia la representación simbólica/texto plano de exergía pura.
 

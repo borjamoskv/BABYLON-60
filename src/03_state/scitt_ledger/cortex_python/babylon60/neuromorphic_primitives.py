@@ -48,7 +48,7 @@ class STDPMemristor:
 
     def register_pre_spike(self) -> float:
         """Registra el pulso de la neurona origen y calcula STDP si la destino disparó recientemente."""
-        now = time.time()
+        now = time.monotonic()
         with self._conn:
             cur = self._conn.execute(
                 "SELECT weight, last_post_spike_ts FROM memristor_weights WHERE synapse_id = ?",
@@ -68,7 +68,7 @@ class STDPMemristor:
 
     def register_post_spike(self) -> float:
         """Registra el pulso de la neurona destino y calcula STDP si la origen disparó recientemente."""
-        now = time.time()
+        now = time.monotonic()
         with self._conn:
             cur = self._conn.execute(
                 "SELECT weight, last_pre_spike_ts FROM memristor_weights WHERE synapse_id = ?",
@@ -97,12 +97,12 @@ class LeakySpikingNode:
         self.threshold = threshold
         self.leak_rate = leak_rate
         self._current_potential = 0.0
-        self.last_update_ts = time.time()
+        self.last_update_ts = time.monotonic()
         self._fire_event = asyncio.Event()
 
     def _apply_leak(self) -> None:
         """Aplica la caída termodinámica basada en el tiempo transcurrido."""
-        now = time.time()
+        now = time.monotonic()
         delta_t = now - self.last_update_ts
         self._current_potential = max(0.0, self._current_potential - (self.leak_rate * delta_t))
         self.last_update_ts = now
@@ -127,7 +127,7 @@ class LeakySpikingNode:
         spiked_energy = self._current_potential
         self._current_potential = 0.0
         self._fire_event.clear()
-        self.last_update_ts = time.time()
+        self.last_update_ts = time.monotonic()
 
         return spiked_energy
 

@@ -64,7 +64,7 @@ class DocAuditSwarmOrchestrator:
         self.red_team = RedTeamVerificationSubagent()
 
     def audit_document(self, filepath: str, verbose: bool = False) -> Dict[str, Any]:
-        start_time = time.time()
+        start_time = time.monotonic()
 
         if not os.path.exists(filepath):
             raise FileNotFoundError(f"Archivo no encontrado para auditoría: {filepath}")
@@ -129,7 +129,7 @@ class DocAuditSwarmOrchestrator:
             metadata_results=stego_res
         )
 
-        elapsed_ms = round((time.time() - start_time) * 1000, 2)
+        elapsed_ms = round((time.monotonic() - start_time) * 1000, 2)
 
         # Métricas del Tensor Agéntico (Iteraciones 1 - 10)
         throughput_bytes_per_sec = round(entropy_res["file_size"] / max(0.001, elapsed_ms / 1000), 2)

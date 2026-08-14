@@ -582,7 +582,7 @@ function updateAgentContext(agent) {
   } else if (Math.random() > 0.85) {
     if (Math.random() > 0.95) {
       // Periodic Taint Signature (AGENTS.md Compliance)
-      const taint = `TAINT:${String(agent.id).substring(0,4)}:${Date.now().toString(36)}`;
+      const taint = `TAINT:${String(agent.id).substring(0,4)}:${performance.now().toString(36)}`;
       addLogLine(agent.id, `SIG_VERIFY: ${taint}`);
     } else {
       const msg = CONTEXT_MESSAGES[Math.floor(Math.random() * CONTEXT_MESSAGES.length)];

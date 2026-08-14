@@ -11,11 +11,11 @@ Proof:
   HaskellCoverage: 100% (1000/1000 executed in 0.001s)
 ```
 
-## 1. Topología del Espacio de Estados Observables ($10 \times 10 \times 10 = 1000$)
+## 1. Topología del Espacio de Estados Observables (10 \times 10 \times 10 = 1000)
 
-$$\text{Code} = D \times 100 + P \times 10 + M, \quad D, P, M \in \{0, \dots, 9\}$$
+\text{Code} = D \times 100 + P \times 10 + M, \quad D, P, M \in \{0, \dots, 9\}
 
-### Dominios ($D_0 \dots D_9$)
+### Dominios (D_0 \dots D_9)
 0. **LAZY_EVAL**: Lazy Evaluation and Thunk Forcing
 1. **MONAD_TRANS**: Monad Transformer Stack State
 2. **TYPE_CLASS**: Typeclass Polymorphism Constraints
@@ -27,7 +27,7 @@ $$\text{Code} = D \times 100 + P \times 10 + M, \quad D, P, M \in \{0, \dots, 9\
 8. **FFI_SYSTEM**: Foreign Function Interface and C Struct Binding
 9. **COMPILER_GHC**: GHC Core Primitives and Rewrite Rules
 
-### Acciones Primitivas ($P_0 \dots P_9$)
+### Acciones Primitivas (P_0 \dots P_9)
 0. **THUNK_FORCE**: Force thunk evaluation via seq or deepseq
 1. **BIND_EVAL**: Monadic bind execution (>>=)
 2. **MAP_APPLY**: Map over structure or apply applicative context
@@ -39,7 +39,7 @@ $$\text{Code} = D \times 100 + P \times 10 + M, \quad D, P, M \in \{0, \dots, 9\
 8. **FORK_SPARK**: Fork IO thread or trigger lazy parallel spark
 9. **FFI_CALL**: Execute foreign/unsafe external call
 
-### Modificadores ($M_0 \dots M_9$)
+### Modificadores (M_0 \dots M_9)
 0. **RAW**: Direct pass-through, zero wrapper overhead
 1. **STRICT**: Force evaluation strictness (deepseq, !, seq)
 2. **LAZY**: Lazy deferred evaluation via thunks

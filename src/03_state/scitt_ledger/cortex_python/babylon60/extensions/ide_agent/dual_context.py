@@ -14,23 +14,33 @@ class DualContextAgent:
     Servidor IPC (Unix Socket) para ingestión de grafos AST y AOM.
     """
 
+    def _extract_socket_from_lines(self, lines: list[str]) -> str | None:
+        for line in lines:
+            if line.startswith("CORTEX_IPC_SOCKET="):
+                return line.split("=")[1].strip()
+        return None
+
+    def _read_env_socket(self) -> str | None:
+        env_path = os.path.join(os.getcwd(), ".env")
+        if not os.path.exists(env_path):
+            return None
+        try:
+            with open(env_path, "r") as f:
+                lines = f.readlines()
+            return self._extract_socket_from_lines(lines)
+        except OSError:
+            pass
+        return None
+
     def __init__(self) -> None:
         self.code_ast: dict[str, Any] | None = None
         self.dom_aom: dict[str, Any] | None = None
 
         socket_env = os.environ.get("CORTEX_IPC_SOCKET")
         if not socket_env:
-            try:
-                env_path = os.path.join(os.getcwd(), ".env")
-                if os.path.exists(env_path):
-                    with open(env_path, "r") as f:
-                        for line in f:
-                            if line.startswith("CORTEX_IPC_SOCKET="):
-                                socket_env = line.split("=")[1].strip()
-                                os.environ["CORTEX_IPC_SOCKET"] = socket_env
-                                break
-            except OSError:
-                pass
+            socket_env = self._read_env_socket()
+            if socket_env:
+                os.environ["CORTEX_IPC_SOCKET"] = socket_env
 
         if not socket_env:
             socket_env = "/tmp/cortex_ipc.sock"
@@ -57,6 +67,15 @@ class DualContextAgent:
             "action": "Esperando comandos del operador",
         }
 
+    async def _process_payload(self, payload: dict[str, Any]) -> None:
+        ptype = payload.get("type")
+        if ptype == "AST":
+            await self.ingest_code_context(payload.get("file", "unknown"), payload.get("data", {}))
+        elif ptype == "AOM":
+            await self.ingest_dom_context(payload.get("data", {}))
+        elif ptype == "HEARTBEAT":
+            pass
+
     async def handle_client(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter) -> None:
         """Transductor de payload IPC (NDJSON Stream)."""
         try:
@@ -66,13 +85,7 @@ class DualContextAgent:
                     continue
                 try:
                     payload = json.loads(line_str)
-                    ptype = payload.get("type")
-                    if ptype == "AST":
-                        await self.ingest_code_context(payload.get("file", "unknown"), payload.get("data", {}))
-                    elif ptype == "AOM":
-                        await self.ingest_dom_context(payload.get("data", {}))
-                    elif ptype == "HEARTBEAT":
-                        pass  # Ω43: Mantiene el liveness del socket
+                    await self._process_payload(payload)
                 except json.JSONDecodeError as e:
                     logging.warning(f"[C5-REAL] NDJSON Stream Warning: Chunk ignorado por error de formato: {e}")
                     continue

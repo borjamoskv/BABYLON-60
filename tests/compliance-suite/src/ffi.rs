@@ -50,7 +50,7 @@ extern "C" {
 
 /// Run C SIMD 10-primitive batch pipeline via FFI.
 /// Returns 0 on success, -1 if any pointer is null or len is 0.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn run_verifiable_primitives(
     input_a: *const f32,
     input_b: *const f32,
@@ -65,7 +65,7 @@ pub unsafe extern "C" fn run_verifiable_primitives(
 }
 
 /// Direct C FFI export for batch execution of 10 primitives.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn execute_10_primitives(
     a: *const f32,
     b: *const f32,
@@ -76,7 +76,7 @@ pub unsafe extern "C" fn execute_10_primitives(
 }
 
 /// Execute SIMD 10-primitive batch pipeline for N iterations in a fast native loop.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn run_batch_primitives_loop(
     input_a: *const f32,
     input_b: *const f32,
@@ -94,7 +94,7 @@ pub unsafe extern "C" fn run_batch_primitives_loop(
 }
 
 /// Calculate Landauer thermodynamic energy dissipation via C SIMD FFI: E_min = k_B * T * ln(2) * \sum |A_i - B_i|
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn calculate_landauer_energy(
     a: *const f32,
     b: *const f32,
@@ -108,7 +108,7 @@ pub unsafe extern "C" fn calculate_landauer_energy(
 }
 
 /// Project standard part map st(x) dissipating infinitesimal noise \epsilon \in \mu(0)
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn project_standard_part(
     a: *const f32,
     b: *const f32,
@@ -124,7 +124,7 @@ pub unsafe extern "C" fn project_standard_part(
 
 /// Prove and verify ZK LogUp fractional lookup argument from binary witness data.
 /// Returns 0 if proof is successfully created and verified, 1 if verification fails, -1 on error.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn prove_and_verify_zk_logup(
     witness_data: *const u8,
     witness_len: usize,
@@ -186,7 +186,7 @@ pub unsafe extern "C" fn prove_and_verify_zk_logup(
 /// Create BN254 R1CS Zero-Knowledge Proof.
 /// Serializes proof into `proof_out` buffer.
 /// Returns 0 on success, -1 on error, -2 if output buffer is too small.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn create_bn254_r1cs_proof(
     witness_data: *const u8,
     witness_len: usize,
@@ -259,7 +259,7 @@ pub unsafe extern "C" fn create_bn254_r1cs_proof(
 
 /// Verify BN254 R1CS Zero-Knowledge Proof.
 /// Returns 0 if verified, 1 if verification failed, -1 on format/null error.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn verify_bn254_r1cs_proof(
     proof_data: *const u8,
     proof_len: usize,
@@ -320,7 +320,7 @@ pub struct teff_result_t {
 /// Run full Teff end-to-end transition pipeline via FFI.
 /// Evaluates CF-GKAT normalization, FOCUS budget check, WASM sandbox isolation,
 /// and SCITT RFC 9942 receipt emission.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn run_teff_transition(
     tool_name_ptr: *const std::ffi::c_char,
     param_ptr: *const u8,

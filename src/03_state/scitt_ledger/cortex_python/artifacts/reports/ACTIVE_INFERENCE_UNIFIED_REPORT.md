@@ -12,10 +12,10 @@ Proof:
 
 ## 1. Topología del Bucle Variacional de Inferencia Activa
 
-En cada ciclo del transductor $t$, el motor dispara de forma síncrona en $O(1)$:
-1. **State Observer ($1000$ Primitivas)**: Estima el vector de estado $\hat{S}(t)$ y la covarianza de innovación.
-2. **Neuro-Cognitive Chain ($1000$ Primitivas)**: Modula la cadena causa-efecto ($\text{Homeostasis} \to \text{Prediction} \to \text{Attention} \to \text{Action} \to \text{Language}$).
-3. **TTS & Harness Transducer ($1000$ Primitivas)**: Optimiza la búsqueda MCTS en espacio latente y el escalado en tiempo de inferencia.
+En cada ciclo del transductor t, el motor dispara de forma síncrona en O(1):
+1. **State Observer (1000 Primitivas)**: Estima el vector de estado \hat{S}(t) y la covarianza de innovación.
+2. **Neuro-Cognitive Chain (1000 Primitivas)**: Modula la cadena causa-efecto (\text{Homeostasis} \to \text{Prediction} \to \text{Attention} \to \text{Action} \to \text{Language}).
+3. **TTS & Harness Transducer (1000 Primitivas)**: Optimiza la búsqueda MCTS en espacio latente y el escalado en tiempo de inferencia.
 
 ---
 

@@ -4,7 +4,7 @@ pre-commit:
   parallel: false
   commands:
     preflight:
-      run: ./scripts/preflight.sh
+      run: python3 scripts/c5_manifest_compiler.py && ./scripts/preflight.sh
 
 pre-push:
   parallel: false

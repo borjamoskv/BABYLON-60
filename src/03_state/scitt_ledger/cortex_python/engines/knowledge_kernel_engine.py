@@ -263,6 +263,28 @@ class KnowledgeKernelEngine:
             "cascade_factor": len(impacted_neighbors) * 1.414,
         }
 
+    def _evaluate_node_pair(self, id1: str, id2: str, n1: KnowledgeNode, n2: KnowledgeNode) -> Optional[Dict[str, Any]]:
+        has_edge = any(
+            (e.source == id1 and e.target == id2) or (e.source == id2 and e.target == id1)
+            for e in self._edges
+        )
+        if has_edge or not n1.embedding or not n2.embedding or len(n1.embedding) != len(n2.embedding):
+            return None
+
+        dot = sum(a * b for a, b in zip(n1.embedding, n2.embedding))
+        mag1 = math.sqrt(sum(a * a for a in n1.embedding))
+        mag2 = math.sqrt(sum(b * b for b in n2.embedding))
+        sim = dot / (mag1 * mag2) if mag1 > 0 and mag2 > 0 else 0.0
+
+        if sim > 0.8:
+            return {
+                "node_a": id1,
+                "node_b": id2,
+                "similarity": sim,
+                "hypothesis": f"Nodes {id1} and {id2} converge on latent vector space (sim={sim:.3f}) without explicit link."
+            }
+        return None
+
     def generate_hypotheses(self) -> List[Dict[str, Any]]:
         """
         Omega 6 Hypothesis Engine.
@@ -274,25 +296,9 @@ class KnowledgeKernelEngine:
             for j in range(i + 1, len(node_ids)):
                 id1, id2 = node_ids[i], node_ids[j]
                 n1, n2 = self._nodes[id1], self._nodes[id2]
-
-                # Check if edge already exists
-                has_edge = any(
-                    (e.source == id1 and e.target == id2) or (e.source == id2 and e.target == id1)
-                    for e in self._edges
-                )
-                if not has_edge and n1.embedding and n2.embedding and len(n1.embedding) == len(n2.embedding):
-                    dot = sum(a * b for a, b in zip(n1.embedding, n2.embedding))
-                    mag1 = math.sqrt(sum(a * a for a in n1.embedding))
-                    mag2 = math.sqrt(sum(b * b for b in n2.embedding))
-                    sim = dot / (mag1 * mag2) if mag1 > 0 and mag2 > 0 else 0.0
-
-                    if sim > 0.8:
-                        hypotheses.append({
-                            "node_a": id1,
-                            "node_b": id2,
-                            "similarity": sim,
-                            "hypothesis": f"Nodes {id1} and {id2} converge on latent vector space (sim={sim:.3f}) without explicit link."
-                        })
+                result = self._evaluate_node_pair(id1, id2, n1, n2)
+                if result:
+                    hypotheses.append(result)
         return hypotheses
 
     def detect_innovation_shift(

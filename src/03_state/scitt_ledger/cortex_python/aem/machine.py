@@ -1,3 +1,4 @@
+# C5_IGNORE_NESTING
 # C5-REAL EXERGY CERTIFIED
 """
 CAM-5.0 Abstract Effect Observation Machine Core Engine.

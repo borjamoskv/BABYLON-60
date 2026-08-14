@@ -5,16 +5,22 @@ import time
 import pytest
 from babylon60.neuromorphic_primitives import SelfHealingMesh
 
+def _cleanup_db(db_path: str):
+    for suffix in ["", "-wal", "-shm"]:
+        p = f"{db_path}{suffix}"
+        if os.path.exists(p):
+            try:
+                os.remove(p)
+            except OSError:
+                pass
+
 @pytest.mark.anyio
 async def test_neuromorphic_v2() -> None:
     print("[C5-REAL] Inicializando Malla Neuromórfica V2 (STDP + LIF)...")
     import uuid
 
     db_path = f"memristor_v2_test_{uuid.uuid4().hex}.db"
-    for suffix in ["", "-wal", "-shm"]:
-        p = f"{db_path}{suffix}"
-        if os.path.exists(p):
-            os.remove(p)
+    _cleanup_db(db_path)
 
     try:
         mesh = SelfHealingMesh(db_path)
@@ -25,9 +31,9 @@ async def test_neuromorphic_v2() -> None:
 
         # MotorB waits for a spike
         async def motor_waiter() -> float:
-            start_time = time.time()
+            start_time = time.monotonic()
             energy = await motor.wait_and_fire()
-            elapsed = time.time() - start_time
+            elapsed = time.monotonic() - start_time
             print(f"[MotorB] ¡Spike recibido! Energía disipada: {energy:.2f}. Bloqueo duró {elapsed:.4f}s")
             # Post-spike: registra el disparo para STDP Hebbiano (Potenciación)
             w = synapse.register_post_spike()
@@ -61,13 +67,7 @@ async def test_neuromorphic_v2() -> None:
 
         print("[C5-REAL] VERIFICACIÓN COMPLETADA (V2). Invariantes STDP y LIF validados físicamente.")
     finally:
-        for suffix in ["", "-wal", "-shm"]:
-            p = f"{db_path}{suffix}"
-            if os.path.exists(p):
-                try:
-                    os.remove(p)
-                except OSError:
-                    pass
+        _cleanup_db(db_path)
 
 @pytest.mark.anyio
 async def test_auto_healing_mesh() -> None:
@@ -94,13 +94,7 @@ async def test_auto_healing_mesh() -> None:
         node_c = mesh.get_node("NodeC")
         assert node_c.current_potential >= 10.0
     finally:
-        for suffix in ["", "-wal", "-shm"]:
-            p = f"{db_path}{suffix}"
-            if os.path.exists(p):
-                try:
-                    os.remove(p)
-                except OSError:
-                    pass
+        _cleanup_db(db_path)
 
 if __name__ == "__main__":
     asyncio.run(test_neuromorphic_v2())

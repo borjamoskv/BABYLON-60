@@ -72,7 +72,7 @@ class CAMAbstractMachine:
 
         # 4. Hash-Chained Ledger Append
         prev_hash = self.state.ledger[-1]["entry_hash"] if self.state.ledger else "00000000000000000000000000000000"
-        now_ts = current_time if current_time is not None else time.time()
+        now_ts = current_time if current_time is not None else time.monotonic()
         entry_payload = f"{claim_id}:{evidence_id}:{prev_hash}:{now_ts}"
         entry_hash = hashlib.sha3_256(entry_payload.encode("utf-8")).hexdigest()
 

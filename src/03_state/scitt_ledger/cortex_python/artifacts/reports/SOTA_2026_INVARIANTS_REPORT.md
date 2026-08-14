@@ -12,7 +12,7 @@ Proof:
 1. **INV-01: Per-Problem Adaptive Test-Time Compute Allocation**: Presupuesto computacional dinámico escalado según la entropía del problema (*Policy of Thoughts / ProcessBench*).
 2. **INV-02: Continuous Latent-Space MCTS Lookahead**: Búsqueda en el espacio latente continuo con verificación discreta periódica.
 3. **INV-03: Test-Time Policy Evolution & Online Optimization**: Bucle de optimización de política en línea durante el tiempo de inferencia.
-4. **INV-04: Protocol Standardization & Token Purge (MCP)**: Estandarización de herramientas en MCP reduciendo el overhead de contexto de $>100\text{k}$ a $<2\text{k}$ tokens.
+4. **INV-04: Protocol Standardization & Token Purge (MCP)**: Estandarización de herramientas en MCP reduciendo el overhead de contexto de >100\text{k} a <2\text{k} tokens.
 5. **INV-05: Programmatic Code Execution vs. JSON Tooling**: Sustitución de llamadas JSON por código en sandbox (Python/JIT).
 6. **INV-06: Autonomous Dynamic Swarm Composition**: Grafos de comunicación multi-agente dinámicos y auto-ensamblados (*CORAL / LangGraph Swarms*).
 7. **INV-07: Tri-Tiered Memory Architecture (Factual, Experiential, Working)**: Grafos de conocimiento temporales (*Zep / Mem0 / MEMPROBE*).

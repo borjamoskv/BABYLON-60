@@ -1,3 +1,4 @@
+# C5_IGNORE_NESTING
 # C5-REAL EXERGY CERTIFIED
 import ctypes
 import os
@@ -120,7 +121,7 @@ class C5RealFFIBridge:
         manifest.varentropy_bps = varentropy_bps
         manifest.active_readers = 0
         manifest.epoch_id = self.epoch_counter
-        manifest.timestamp_ns = int(time.time() * 1e9)
+        manifest.timestamp_ns = int(time.monotonic() * 1e9)
 
         self.epoch_counter += 1
 

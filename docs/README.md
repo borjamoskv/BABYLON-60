@@ -7,7 +7,7 @@ Este directorio no contiene documentación genérica; constituye la **fuente de 
 
 ---
 
-## 🔗 Matriz de Isomorfismo: Especificación (`docs/`) $\leftrightarrow$ Silicio (`src/`)
+## 🔗 Matriz de Isomorfismo: Especificación (`docs/`) \leftrightarrow Silicio (`src/`)
 
 El mapa epistémico se traduce directamente en las 6 capas de ejecución del código fuente en `src/`:
 

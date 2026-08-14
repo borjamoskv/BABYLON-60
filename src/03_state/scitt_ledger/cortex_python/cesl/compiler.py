@@ -112,40 +112,53 @@ class CESLLexer:
                     self.pos += 1
                 continue
 
-            if ch == "{":
-                tokens.append(CESLToken(TokenType.LBRACE, "{", self.line, self.column))
+            self._tokenize_char(ch, tokens)
+
+        tokens.append(CESLToken(TokenType.EOF, "", self.line, self.column))
+        return tokens
+
+    def _tokenize_char(self, ch: str, tokens: list[CESLToken]) -> None:
+        if ch == "{":
+            tokens.append(CESLToken(TokenType.LBRACE, "{", self.line, self.column))
+            self._advance()
+            return
+        if ch == "}":
+            tokens.append(CESLToken(TokenType.RBRACE, "}", self.line, self.column))
+            self._advance()
+            return
+        if ch == ":":
+            tokens.append(CESLToken(TokenType.COLON, ":", self.line, self.column))
+            self._advance()
+            return
+        if ch == "?":
+            tokens.append(CESLToken(TokenType.QUESTION, "?", self.line, self.column))
+            self._advance()
+            return
+        if ch == "-" and self._peek() == ">":
+            tokens.append(CESLToken(TokenType.ARROW, "->", self.line, self.column))
+            self._advance(2)
+            return
+        if ch == '"':
+            start_line, start_col = self.line, self.column
+            self._advance()
+            start_pos = self.pos
+            while self.pos < self.length and self.source[self.pos] != '"':
                 self._advance()
-            elif ch == "}":
-                tokens.append(CESLToken(TokenType.RBRACE, "}", self.line, self.column))
+            val = self.source[start_pos : self.pos]
+            self._advance()  # closing quote
+            tokens.append(CESLToken(TokenType.STRING, val, start_line, start_col))
+            return
+        if ch.isalpha() or ch == "_":
+            start_line, start_col = self.line, self.column
+            start_pos = self.pos
+            while self.pos < self.length and (self.source[self.pos].isalnum() or self.source[self.pos] in "_."):
                 self._advance()
-            elif ch == ":":
-                tokens.append(CESLToken(TokenType.COLON, ":", self.line, self.column))
-                self._advance()
-            elif ch == "?":
-                tokens.append(CESLToken(TokenType.QUESTION, "?", self.line, self.column))
-                self._advance()
-            elif ch == "-" and self._peek() == ">":
-                tokens.append(CESLToken(TokenType.ARROW, "->", self.line, self.column))
-                self._advance(2)
-            elif ch == '"':
-                start_line, start_col = self.line, self.column
-                self._advance()
-                start_pos = self.pos
-                while self.pos < self.length and self.source[self.pos] != '"':
-                    self._advance()
-                val = self.source[start_pos : self.pos]
-                self._advance()  # closing quote
-                tokens.append(CESLToken(TokenType.STRING, val, start_line, start_col))
-            elif ch.isalpha() or ch == "_":
-                start_line, start_col = self.line, self.column
-                start_pos = self.pos
-                while self.pos < self.length and (self.source[self.pos].isalnum() or self.source[self.pos] in "_."):
-                    self._advance()
-                word = self.source[start_pos : self.pos]
-                t_type = TokenType.KEYWORD if word in self.KEYWORDS else TokenType.IDENTIFIER
-                tokens.append(CESLToken(t_type, word, start_line, start_col))
-            else:
-                self._advance()
+            word = self.source[start_pos : self.pos]
+            t_type = TokenType.KEYWORD if word in self.KEYWORDS else TokenType.IDENTIFIER
+            tokens.append(CESLToken(t_type, word, start_line, start_col))
+            return
+        
+        self._advance()
 
         tokens.append(CESLToken(TokenType.EOF, "", self.line, self.column))
         return tokens
@@ -163,28 +176,37 @@ class CESLParser:
         self.tokens = tokens
         self.pos = 0
 
+    def _parse_keyword_declaration(self, token: CESLToken, ast: CESLAST) -> None:
+        if token.value == "module":
+            self._advance()
+            ast.module_name = self._consume(TokenType.IDENTIFIER, "Expected module name").value
+            return
+        if token.value == "type":
+            ast.types.append(self._parse_type())
+            return
+        if token.value == "relation":
+            ast.relations.append(self._parse_relation())
+            return
+        if token.value == "invariant":
+            ast.invariants.append(self._parse_invariant())
+            return
+        if token.value == "transition":
+            ast.transitions.append(self._parse_transition())
+            return
+        if token.value == "capability":
+            self._advance()
+            cap_name = self._consume(TokenType.IDENTIFIER, "Expected capability name").value
+            ast.capabilities.append(CapabilityDecl(name=cap_name))
+            return
+        
+        self._advance()
+
     def parse(self) -> CESLAST:
         ast = CESLAST()
         while not self._is_at_end():
             token = self._peek()
             if token.type == TokenType.KEYWORD:
-                if token.value == "module":
-                    self._advance()
-                    ast.module_name = self._consume(TokenType.IDENTIFIER, "Expected module name").value
-                elif token.value == "type":
-                    ast.types.append(self._parse_type())
-                elif token.value == "relation":
-                    ast.relations.append(self._parse_relation())
-                elif token.value == "invariant":
-                    ast.invariants.append(self._parse_invariant())
-                elif token.value == "transition":
-                    ast.transitions.append(self._parse_transition())
-                elif token.value == "capability":
-                    self._advance()
-                    cap_name = self._consume(TokenType.IDENTIFIER, "Expected capability name").value
-                    ast.capabilities.append(CapabilityDecl(name=cap_name))
-                else:
-                    self._advance()
+                self._parse_keyword_declaration(token, ast)
             else:
                 self._advance()
         return ast
@@ -215,23 +237,56 @@ class CESLParser:
         cod = self._consume(TokenType.IDENTIFIER, "Expected codomain type").value
         return RelationDecl(name=rel_name, domain=dom, codomain=cod)
 
+    def _read_balanced_braces(self) -> list[str]:
+        self._advance()
+        depth = 1
+        expr_parts = []
+        while depth > 0 and not self._is_at_end():
+            t = self._advance()
+            if t.type == TokenType.LBRACE:
+                depth += 1
+                expr_parts.append(t.value)
+                continue
+            if t.type == TokenType.RBRACE:
+                depth -= 1
+                if depth == 0:
+                    break
+            expr_parts.append(t.value)
+        return expr_parts
+
     def _parse_invariant(self) -> InvariantDecl:
         self._advance()  # consume 'invariant'
         inv_name = self._consume(TokenType.IDENTIFIER, "Expected invariant name").value
         expr_parts = []
         if self._check(TokenType.LBRACE):
-            self._advance()
-            depth = 1
-            while depth > 0 and not self._is_at_end():
-                t = self._advance()
-                if t.type == TokenType.LBRACE:
-                    depth += 1
-                elif t.type == TokenType.RBRACE:
-                    depth -= 1
-                    if depth == 0:
-                        break
-                expr_parts.append(t.value)
+            expr_parts = self._read_balanced_braces()
         return InvariantDecl(name=inv_name, expression=" ".join(expr_parts))
+
+    def _process_transition_keyword(self, t: CESLToken, inputs: list, outputs: list) -> tuple[str, str]:
+        pre, post = "", ""
+        if t.value == "input":
+            self._advance()
+            self._consume(TokenType.COLON, "Expected ':'")
+            inputs.append(self._consume(TokenType.IDENTIFIER, "Expected input type").value)
+            return pre, post
+        if t.value == "output":
+            self._advance()
+            self._consume(TokenType.COLON, "Expected ':'")
+            outputs.append(self._consume(TokenType.IDENTIFIER, "Expected output type").value)
+            return pre, post
+        if t.value == "pre":
+            self._advance()
+            self._consume(TokenType.COLON, "Expected ':'")
+            pre = self._read_until_newline_or_keyword()
+            return pre, post
+        if t.value == "post":
+            self._advance()
+            self._consume(TokenType.COLON, "Expected ':'")
+            post = self._read_until_newline_or_keyword()
+            return pre, post
+        
+        self._advance()
+        return pre, post
 
     def _parse_transition(self) -> TransitionDecl:
         self._advance()  # consume 'transition'
@@ -243,24 +298,9 @@ class CESLParser:
         while not self._check(TokenType.RBRACE) and not self._is_at_end():
             t = self._peek()
             if t.type == TokenType.KEYWORD:
-                if t.value == "input":
-                    self._advance()
-                    self._consume(TokenType.COLON, "Expected ':'")
-                    inputs.append(self._consume(TokenType.IDENTIFIER, "Expected input type").value)
-                elif t.value == "output":
-                    self._advance()
-                    self._consume(TokenType.COLON, "Expected ':'")
-                    outputs.append(self._consume(TokenType.IDENTIFIER, "Expected output type").value)
-                elif t.value == "pre":
-                    self._advance()
-                    self._consume(TokenType.COLON, "Expected ':'")
-                    pre_cond = self._read_until_newline_or_keyword()
-                elif t.value == "post":
-                    self._advance()
-                    self._consume(TokenType.COLON, "Expected ':'")
-                    post_cond = self._read_until_newline_or_keyword()
-                else:
-                    self._advance()
+                pr, po = self._process_transition_keyword(t, inputs, outputs)
+                if pr: pre_cond = pr
+                if po: post_cond = po
             else:
                 self._advance()
         self._consume(TokenType.RBRACE, "Expected '}'")

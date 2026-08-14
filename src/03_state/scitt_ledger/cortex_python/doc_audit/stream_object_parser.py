@@ -21,6 +21,22 @@ class StreamObjectParser:
     Parser forense de objetos PDF/Streams a bajo nivel.
     """
 
+    def _process_stream(self, body: bytes, risky_token_matches: Dict[str, int]) -> tuple[bool, int, int]:
+        stream_match = re.search(rb"stream\r?\n(.*?\r?\n)endstream", body, re.DOTALL)
+        if not stream_match:
+            return False, 0, 0
+            
+        raw_stream = stream_match.group(1)
+        try:
+            decompressed_data = zlib.decompress(raw_stream)
+            for token in RISKY_TOKENS:
+                token_str = token.decode("ascii")
+                if token in decompressed_data:
+                    risky_token_matches[token_str] = risky_token_matches.get(token_str, 0) + 1
+            return True, len(decompressed_data), 0
+        except Exception:
+            return True, 0, 1
+
     def parse_file(self, filepath: str) -> Dict[str, Any]:
         with open(filepath, "rb") as f:
             content = f.read()
@@ -43,28 +59,10 @@ class StreamObjectParser:
                 if token in body:
                     risky_token_matches[token_str] = risky_token_matches.get(token_str, 0) + 1
 
-            # Descompresión de Streams (si contiene stream...endstream)
-            stream_match = re.search(rb"stream\r?\n(.*?\r?\n)endstream", body, re.DOTALL)
-            decompressed_size = 0
-            is_compressed = False
-
-            if stream_match:
-                is_compressed = True
-                raw_stream = stream_match.group(1)
-                try:
-                    # Intentar descompresión zlib/FlateDecode directa
-                    decompressed_data = zlib.decompress(raw_stream)
-                    decompressed_size = len(decompressed_data)
-                    streams_decompressed += 1
-
-                    # Buscar tokens de riesgo dentro del stream descomprimido
-                    for token in RISKY_TOKENS:
-                        token_str = token.decode("ascii")
-                        if token in decompressed_data:
-                            risky_token_matches[token_str] = risky_token_matches.get(token_str, 0) + 1
-
-                except Exception:
-                    decompression_failures += 1
+            is_compressed, decompressed_size, failures = self._process_stream(body, risky_token_matches)
+            if is_compressed and failures == 0:
+                streams_decompressed += 1
+            decompression_failures += failures
 
             parsed_objects.append({
                 "obj_id": obj_id,

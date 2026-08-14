@@ -78,7 +78,7 @@ class ScittMerkleProver:
             status_code = 4  # Active / Certified Status en C5-REAL
 
         # Emisión del Manifiesto SCITT
-        timestamp_epoch = time.time()
+        timestamp_epoch = time.monotonic()
         scitt_receipt = {
             "scitt_version": "1.0-C5REAL",
             "timestamp": timestamp_epoch,

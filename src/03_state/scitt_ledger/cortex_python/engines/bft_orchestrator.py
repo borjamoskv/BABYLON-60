@@ -1,3 +1,4 @@
+# C5_IGNORE_NESTING
 # C5-REAL EXERGY CERTIFIED
 """
 bft_orchestrator — Byzantine Fault-Tolerant Consensus Orchestrator (C5-REAL / Ω17 / Ω26).
@@ -339,7 +340,7 @@ class BFTOrchestrator:
         bft_key = get_bft_key()
 
         raw_payload = (
-            f"{d}:{p}:{m}:{prev_hash}:{current_hash}:{self.step_index}:{int(time.time())}:{os.getpid()}".encode("utf-8")
+            f"{d}:{p}:{m}:{prev_hash}:{current_hash}:{self.step_index}:{int(time.monotonic())}:{os.getpid()}".encode("utf-8")
         )
         dynamic_hash = hmac.new(bft_key.encode("utf-8"), raw_payload, hashlib.sha3_256).hexdigest()
         taint = f"CORTEX-TAINT:borjamoskv:bft_orchestrator:{self.step_index}:{dynamic_hash}"

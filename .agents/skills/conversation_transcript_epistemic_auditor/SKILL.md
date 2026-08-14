@@ -9,7 +9,7 @@ description: extracción, clasificación, auditoría epistémica y generación d
 este skill define la metodología estándar para escanear, analizar, categorizar y sintetizar el historial de conversaciones pasadas almacenadas en la plataforma (`<appdatadir>/brain/`).
 
 ## 1. cuándo invocarse
-- cuando el usuario solicite un repaso o auditoría de $n$ conversaciones pasadas (ej. "repasa las ultimas 200 conversaciones", "analiza el historial").
+- cuando el usuario solicite un repaso o auditoría de n conversaciones pasadas (ej. "repasa las ultimas 200 conversaciones", "analiza el historial").
 - para rescatar credenciales rotadas, contexto perdido o decisiones de diseño tomadas en sesiones anteriores.
 - para generar un atlas cronológico y una matriz de fricción/resolución sobre el desarrollo del proyecto.
 

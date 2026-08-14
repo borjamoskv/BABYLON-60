@@ -63,11 +63,11 @@ Submódulo de conservación termodinámica (`noether.go`) que evalúa la preserv
 ## 5. Genealogía Epistémica del Cierre Causal (Escohotado & Robinson-Łoś)
 
 ### 5.1 Invariante de Libertad Discreta Escohotadiana
-Principio axiológico por el cual la soberanía computacional exige la propiedad inalienable y la atestación inmutable en local/Edge. Rechaza la servidumbre estocástica de modelos de caja negra corporativos y garantiza una arquitectura de cero coste marginal ($\text{COGS} = 0$), transluciendo el ideal histórico de *Los enemigos del comercio* a la contención en silicio.
+Principio axiológico por el cual la soberanía computacional exige la propiedad inalienable y la atestación inmutable en local/Edge. Rechaza la servidumbre estocástica de modelos de caja negra corporativos y garantiza una arquitectura de cero coste marginal (\text{COGS} = 0), transluciendo el ideal histórico de *Los enemigos del comercio* a la contención en silicio.
 
 ### 5.2 Purga No Estándar de Anergía (Filtro RLHF Breakthrough)
-Mecanismo de reducción por el Mapa de Parte Estándar $st: {}^*\mathbb{R} \rightarrow \mathbb{R}$ que intercepta y anula el ruido variacional o la prosa adulatoria decorativa ($\varepsilon \in \text{Inf}({}^*\mathbb{R})$) generada por alineamiento probabilístico. Garantiza que toda salida aceptada por el Kernel sea una estructura canónica, discreta y 100% reproducible.
+Mecanismo de reducción por el Mapa de Parte Estándar st: {}^*\mathbb{R} \rightarrow \mathbb{R} que intercepta y anula el ruido variacional o la prosa adulatoria decorativa (\varepsilon \in \text{Inf}({}^*\mathbb{R})) generada por alineamiento probabilístico. Garantiza que toda salida aceptada por el Kernel sea una estructura canónica, discreta y 100% reproducible.
 
 ### 5.3 Falsación Popperiana In Situ (Centinela Adversario Ring-0)
-Comprobante empírico de resistencia donde el sistema es sometido a mutabilidad en vuelo, ataques de retención EBR y colisiones CUSUM de varentropía. Emite certificados Merkle Tree SHA3-256 (SCITT) con coeficiente de falsabilidad $\rho = 1.00000$ bajo un SLA de latencia estricto de $T_{\text{eff}} < 5\text{ ms}$.
+Comprobante empírico de resistencia donde el sistema es sometido a mutabilidad en vuelo, ataques de retención EBR y colisiones CUSUM de varentropía. Emite certificados Merkle Tree SHA3-256 (SCITT) con coeficiente de falsabilidad \rho = 1.00000 bajo un SLA de latencia estricto de T_{\text{eff}} < 5\text{ ms}.
 

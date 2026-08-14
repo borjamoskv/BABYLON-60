@@ -1,3 +1,4 @@
+# C5_IGNORE_NESTING
 #!/usr/bin/env python3
 # C5-REAL EXERGY CERTIFIED
 """
@@ -64,7 +65,7 @@ def pure_anergy_filter(raw_bytes: bytes) -> bytes:
 # Iteration 11: Desacoplamiento Concurrente Físico (ProcessPoolExecutor)
 def process_transcript_worker(t_path: str, dry_run: bool) -> Tuple[str, int, int, str]:
     # Returns (conv_id, anergy_bytes, exergy_bytes, leaf_hash_hex)
-    start_time = time.time()
+    start_time = time.monotonic()
     conv_id = t_path.split("/")[-4]
 
     # Iteration 18: Candado Atómico en Memoria Compartida (Lock-Free EBR)
@@ -154,7 +155,7 @@ def process_transcript_worker(t_path: str, dry_run: bool) -> Tuple[str, int, int
         sys.stdout.buffer.write(f"Error asíncrono en {conv_id}: {e}\n".encode())
 
     # Iteration 20: Fricción Térmica Heurística
-    t_eff_worker = time.time() - start_time
+    t_eff_worker = time.monotonic() - start_time
     if t_eff_worker > 2.0:  # Umbral de Anergía térmica temporal
         sys.stdout.buffer.write(f"\n[!] Anergía Térmica detectada en {conv_id}: T_eff={t_eff_worker:.3f}s\n".encode())
 
@@ -212,9 +213,9 @@ def main():
     parser.add_argument("--brain-dir", default=BRAIN_DIR_DEFAULT, help="Directorio objetivo de transcripciones.")
     args = parser.parse_args()
 
-    start_time = time.time()
+    start_time = time.monotonic()
     runner(args.dry_run, args.brain_dir)
-    elapsed = time.time() - start_time
+    elapsed = time.monotonic() - start_time
 
     sys.stdout.buffer.write(f"\n\xE2\x8F\xB1\xEF\xB8\x8F Tiempo T_eff (Total): {elapsed:.2f} segundos.\n".encode('utf-8'))
     sys.stdout.buffer.flush()

@@ -40,7 +40,7 @@ El flujo del sistema opera bajo el principio de Event Sourcing Causal Inmutable:
 **A. Mutación del Estado:**
 - **Paso 1 (Ingesta):** Un cambio en el AST del editor es capturado por la extensión Chrome y enviado al backend de FastAPI (`/api/sentinel/transduce`).
 - **Paso 2 (Taint & Poset):** El backend de FastAPI delega en `strike_rs` (vía FFI / bindings). El `TaintEngine` inserta la mutación en el poset, verifica la **Invariante de Kahn (INV-GCM-003)** y genera el cortex-taint BLAKE3.
-- **Paso 3 (Consenso BFT):** El enjambre de subagentes valida el cambio. Si el quórum es alcanzado ($2f+1$), se firman los datos con claves Ed25519 y se valida en `BFT_Ledger`.
+- **Paso 3 (Consenso BFT):** El enjambre de subagentes valida el cambio. Si el quórum es alcanzado (2f+1), se firman los datos con claves Ed25519 y se valida en `BFT_Ledger`.
 - **Paso 4 (Consolidación):** La mutación se serializa en formato CBOR2 y se inyecta de forma atómica en el SQLite local.
 - **Paso 5 (Hot-Reload):** Si la lógica central ha cambiado, se realiza un pointer-swap atómico en caliente de `moskv_core.dylib` en el espacio de memoria del orquestador Tauri.
 
@@ -51,11 +51,11 @@ El flujo del sistema opera bajo el principio de Event Sourcing Causal Inmutable:
 A nivel macro, el acoplamiento sigue una estructura acíclica de DAG (Direct Acyclic Graph) verificada por el compilador:
 
 **A. Relaciones de Importación:**
-- `babylon60-ide/frontend` $\rightarrow$ Consume la API expuesta por `babylon60-ide/backend`.
-- `babylon60-ide/backend` $\rightarrow$ Carga `babylon60` core python y llama dinámicamente a `core_graph_ledger` y `cortex_mamba_network`.
-- `babylon60` core $\rightarrow$ Llama a `causal_isomorphism` para validar la transducción y usa `BFT_Ledger` para transacciones.
-- `BFT_Ledger` $\rightarrow$ Llama a `strike_rs` a través de bindings compilados para calcular el cortex-taint y la inmutabilidad de los bloques.
-- `strike_rs` $\rightarrow$ No tiene dependencias de capas superiores. Actúa como el sumidero de exergía absoluto y el kernel matemático inmutable.
+- `babylon60-ide/frontend` \rightarrow Consume la API expuesta por `babylon60-ide/backend`.
+- `babylon60-ide/backend` \rightarrow Carga `babylon60` core python y llama dinámicamente a `core_graph_ledger` y `cortex_mamba_network`.
+- `babylon60` core \rightarrow Llama a `causal_isomorphism` para validar la transducción y usa `BFT_Ledger` para transacciones.
+- `BFT_Ledger` \rightarrow Llama a `strike_rs` a través de bindings compilados para calcular el cortex-taint y la inmutabilidad de los bloques.
+- `strike_rs` \rightarrow No tiene dependencias de capas superiores. Actúa como el sumidero de exergía absoluto y el kernel matemático inmutable.
 
 ---
 
@@ -119,7 +119,7 @@ def validate_zero_network(url: str) -> None:
 
 ## 8. Rendimiento y Cuellos de Botella
 
-- **Kahn's Algorithm Complexity:** La ordenación topológica en `strike_rs` tiene una complejidad de $O(V + E)$. Sin embargo, si el Poset Causal supera los 50.000 nodos, la verificación cíclica y la serialización secuencial con BLAKE3 introducen una latencia medible (>100ms), bloqueando el flujo principal del orquestador.
+- **Kahn's Algorithm Complexity:** La ordenación topológica en `strike_rs` tiene una complejidad de O(V + E). Sin embargo, si el Poset Causal supera los 50.000 nodos, la verificación cíclica y la serialización secuencial con BLAKE3 introducen una latencia medible (>100ms), bloqueando el flujo principal del orquestador.
 - **SQLite Concurrencia:** SQLite WAL permite lectores concurrentes pero restringe a un único escritor físico. Si múltiples agentes en paralelo escriben en el ledger BFT, las transacciones se bloquearán secuencialmente, causando un cuello de botella atencional en la UI.
 
 ---

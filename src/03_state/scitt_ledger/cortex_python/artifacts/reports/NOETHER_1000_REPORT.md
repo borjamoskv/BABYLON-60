@@ -10,11 +10,11 @@ Proof:
   PythonCoverage: 100% (1000/1000 executed in 0.001s)
 ```
 
-## 1. Topología del Espacio de Symmetries ($10 \times 10 \times 10 = 1000$)
+## 1. Topología del Espacio de Symmetries (10 \times 10 \times 10 = 1000)
 
-$$\text{Code} = D \times 100 + P \times 10 + M, \quad D, P, M \in \{0, \dots, 9\}$$
+\text{Code} = D \times 100 + P \times 10 + M, \quad D, P, M \in \{0, \dots, 9\}
 
-### Dominios ($D_0 \dots D_9$)
+### Dominios (D_0 \dots D_9)
 0. **SPACE_TRANS**: Spatial Translations (Conservation of Momentum p)
 1. **TIME_TRANS**: Time Translations (Conservation of Energy E)
 2. **ROTATION_SO3**: Spatial Rotations (Conservation of Angular Momentum L)
@@ -26,7 +26,7 @@ $$\text{Code} = D \times 100 + P \times 10 + M, \quad D, P, M \in \{0, \dots, 9\
 8. **DIFEOMORPH_GR**: General Diffeomorphisms (Conservation of Stress-Energy Tensor T_mu_nu)
 9. **SUPER_SUSY**: Supersymmetries (Conservation of Supercharge Q_alpha)
 
-### Acciones Primitivas ($P_0 \dots P_9$)
+### Acciones Primitivas (P_0 \dots P_9)
 0. **INF_VARIATION**: Infinitesimal variation of coordinates delta x or fields delta phi
 1. **LAGRANGIAN_DERIV**: Evaluate Lagrangian density L(phi, d_mu phi)
 2. **ACTION_INTEGRAL**: Variation of Action S = integral L d4x
@@ -38,7 +38,7 @@ $$\text{Code} = D \times 100 + P \times 10 + M, \quad D, P, M \in \{0, \dots, 9\
 8. **COMMUTATOR_ALGEBRA**: Verify charge brackets / generators [Q_i, Q_j] = f_ijk Q_k
 9. **SECTOR_FLUSH**: Cryptographically seal conserved sector in ledger
 
-### Modificadores ($M_0 \dots M_9$)
+### Modificadores (M_0 \dots M_9)
 0. **RAW**: Classical field theory direct pass-through
 1. **STRICT**: Force strict boundary limits
 2. **QUANTUM_QFT**: Quantum field theory operator mapping (Ward-Takahashi)

@@ -138,7 +138,7 @@ class OrchestrationPillar:
 
             conn.execute(
                 "INSERT INTO state_events (payload_hash, lamport_t, mode, cortex_taint, created_at) VALUES (?, ?, ?, ?, ?);",
-                (payload_hash, next_t, mode, taint, time.time()),
+                (payload_hash, next_t, mode, taint, time.monotonic()),
             )
             conn.commit()
 
@@ -179,7 +179,7 @@ class MemoryPillar:
             "tier_2_repository_state": repo_state,
             "tier_3_recorded_hypothesis": recorded_hypothesis,
             "tier_4_governance": governance,
-            "timestamp": time.time(),
+            "timestamp": time.monotonic(),
         }
         self.ledger_entries.append(entry)
         return entry

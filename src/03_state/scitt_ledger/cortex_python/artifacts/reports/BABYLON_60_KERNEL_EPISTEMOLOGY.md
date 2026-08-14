@@ -1,7 +1,7 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
 # BABYLON-60: Teorema Epistemológico del Kernel (Fase Ω-2)
 
-Este teorema refuta la premisa de que BABYLON-60 es un software monolítico y lo clasifica formalmente como una **Máquina de Transición de Estados Verificable** ($\Omega = C \circ V \circ T \circ O$).
+Este teorema refuta la premisa de que BABYLON-60 es un software monolítico y lo clasifica formalmente como una **Máquina de Transición de Estados Verificable** (\Omega = C \circ V \circ T \circ O).
 
 Dejamos de analizar el código imperativo (`event -> handler -> effect`) para auditar la tubería causal (`constraint -> solve -> proof -> materialize`).
 
@@ -20,19 +20,19 @@ Mediante el escaneo transversal del AST del Kernel irreducible (797 módulos fí
 
 ## 2. Resolución de las 4 Conjeturas
 
-La proyección de BABYLON-60 sobre los cuatro grafos ($G_1$: Ejecución, $G_2$: Dependencias, $G_3$: Estado, $G_4$: Confianza) permite resolver las conjeturas planteadas.
+La proyección de BABYLON-60 sobre los cuatro grafos (G_1: Ejecución, G_2: Dependencias, G_3: Estado, G_4: Confianza) permite resolver las conjeturas planteadas.
 
 ### 🔴 Conjecture 1: Todo estado persistido posee un certificado verificable.
 **STATUS: DEMOSTRADA (TRUE)**
-- **Prueba:** Los operadores `bft_validator` y `bft_committer` (273 archivos de *Verified_by_Construction*) actúan como embudo. El grafo de confianza ($G_4$) requiere firmas Ed25519 y un hash SHA3-256 válido antes de que SQLite WAL permita la escritura.
+- **Prueba:** Los operadores `bft_validator` y `bft_committer` (273 archivos de *Verified_by_Construction*) actúan como embudo. El grafo de confianza (G_4) requiere firmas Ed25519 y un hash SHA3-256 válido antes de que SQLite WAL permita la escritura.
 
 ### 🔴 Conjecture 2: Ninguna transición viola los invariantes globales.
 **STATUS: REFUTADA (FALSE)**
-- **Prueba:** Existen 485 archivos `Assumed`. En el grafo de ejecución ($G_1$), estas capas pueden mutar su propio estado en memoria y devolver respuestas de "Éxito" al Operador sin haber transitado por $G_4$. Una transición de memoria no verificada viola el invariante global hasta que choca contra el Ledger.
+- **Prueba:** Existen 485 archivos `Assumed`. En el grafo de ejecución (G_1), estas capas pueden mutar su propio estado en memoria y devolver respuestas de "Éxito" al Operador sin haber transitado por G_4. Una transición de memoria no verificada viola el invariante global hasta que choca contra el Ledger.
 
-### 🔴 Conjecture 3: El kernel puede reducirse a cuatro operadores ($\Omega$).
+### 🔴 Conjecture 3: El kernel puede reducirse a cuatro operadores (\Omega).
 **STATUS: DEMOSTRADA (TRUE)**
-- **Prueba:** Todo el sistema se reduce a $O$ (Especificación de entrada), $T$ (Solve/Generación de Payload), $V$ (Verificación Criptográfica/Lean), y $C$ (Consenso/Persistencia WAL). La refactorización del `consensus_ledger.py` probó matemáticamente que estos ejes son ortogonales y componibles.
+- **Prueba:** Todo el sistema se reduce a O (Especificación de entrada), T (Solve/Generación de Payload), V (Verificación Criptográfica/Lean), y C (Consenso/Persistencia WAL). La refactorización del `consensus_ledger.py` probó matemáticamente que estos ejes son ortogonales y componibles.
 
 ### 🔴 Conjecture 4: Toda interfaz es reemplazable sin alterar los invariantes.
 **STATUS: DEMOSTRADA (TRUE)**

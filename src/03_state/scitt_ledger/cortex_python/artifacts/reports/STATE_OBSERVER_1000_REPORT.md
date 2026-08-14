@@ -10,11 +10,11 @@ Proof:
   PythonCoverage: 100% (1000/1000 executed in 0.002s)
 ```
 
-## 1. Topología del Espacio de Estados Observables ($10 \times 10 \times 10 = 1000$)
+## 1. Topología del Espacio de Estados Observables (10 \times 10 \times 10 = 1000)
 
-$$\text{Code} = D \times 100 + P \times 10 + M, \quad D, P, M \in \{0, \dots, 9\}$$
+\text{Code} = D \times 100 + P \times 10 + M, \quad D, P, M \in \{0, \dots, 9\}
 
-### Dominios ($D_0 \dots D_9$)
+### Dominios (D_0 \dots D_9)
 0. **SOURCE**: Sensores de Entrada / Ingesta de Traza
 1. **MATRIX**: Memoria Interna / Grafo de Estados AST
 2. **PULSE**: Latido / Rendimiento / Frecuencia de Invocación
@@ -26,29 +26,29 @@ $$\text{Code} = D \times 100 + P \times 10 + M, \quad D, P, M \in \{0, \dots, 9\
 8. **CLOCK**: Fase Temporal / Ruidos de Jitter y Reloj
 9. **COMPILER**: Pipeline JIT / Transducción de Código
 
-### Acciones Primitivas de Observación ($P_0 \dots P_9$)
-0. **INIT**: Asignación de Matriz de Covarianza $P_0$ y Ganancia $L_0$
-1. **PREDICT**: Estimación de Estado A Priori $\hat{x}_{k|k-1} = A\hat{x}_{k-1} + Bu_k$
-2. **UPDATE**: Corrección A Posteriori $\hat{x}_{k|k} = \hat{x}_{k|k-1} + L_k(y_k - C\hat{x}_{k|k-1})$
-3. **INNOVATION**: Cálculo del Residuo $\nu_k = y_k - C\hat{x}_{k|k-1}$
-4. **GAIN**: Ganancia Óptima $L_k = P_{k|k-1}C^T (CP_{k|k-1}C^T + R)^{-1}$
-5. **COVARIANCE**: Propagación del Error $P_{k|k} = (I - L_k C)P_{k|k-1}$
-6. **DRIFT_CHECK**: Medición de Divergencia KL / Norma $\|\nu_k\|$
+### Acciones Primitivas de Observación (P_0 \dots P_9)
+0. **INIT**: Asignación de Matriz de Covarianza P_0 y Ganancia L_0
+1. **PREDICT**: Estimación de Estado A Priori \hat{x}_{k|k-1} = A\hat{x}_{k-1} + Bu_k
+2. **UPDATE**: Corrección A Posteriori \hat{x}_{k|k} = \hat{x}_{k|k-1} + L_k(y_k - C\hat{x}_{k|k-1})
+3. **INNOVATION**: Cálculo del Residuo \nu_k = y_k - C\hat{x}_{k|k-1}
+4. **GAIN**: Ganancia Óptima L_k = P_{k|k-1}C^T (CP_{k|k-1}C^T + R)^{-1}
+5. **COVARIANCE**: Propagación del Error P_{k|k} = (I - L_k C)P_{k|k-1}
+6. **DRIFT_CHECK**: Medición de Divergencia KL / Norma \|\nu_k\|
 7. **RECONSTRUCT**: Reconstrucción de Estados Latentes No-Observables
 8. **SANITY_ASSERT**: Validación de Estabilidad de Lyapunov & Consenso BFT
 9. **FLUSH_LEDGER**: Sellado Criptográfico en Memoria C5-REAL
 
-### Modificadores de Filtro ($M_0 \dots M_9$)
+### Modificadores de Filtro (M_0 \dots M_9)
 0. **RAW**: Pasarela Directa Lineal Sin Filtrado
 1. **ATOMIC**: Aislamiento Hilo Unicorriente Sin Mutación Secundaria
-2. **KALMAN_EXTENDED**: EKF Jacobianos No-Lineales ($\nabla f, \nabla h$)
-3. **LUENBERGER_RIGID**: Observador Determinista con Ganancia Constante $L$
+2. **KALMAN_EXTENDED**: EKF Jacobianos No-Lineales (\nabla f, \nabla h)
+3. **LUENBERGER_RIGID**: Observador Determinista con Ganancia Constante L
 4. **PARTICLE_PF**: Filtro Monte Carlo de 1000 Partículas Secuenciales
 5. **SLIDING_MODE**: Observador por Superficie Deslizante Descontinua
 6. **QUANTIZED**: Discretización Cuántica a 60 bits
-7. **ADAPTIVE_R**: Estimación Adaptativa en Línea de Covarianza $R$
+7. **ADAPTIVE_R**: Estimación Adaptativa en Línea de Covarianza R
 8. **NEURAL_LATENT**: VAE Auto-Encoder de Reducción de Dimensión
-9. **BFT_CONSENSUS**: Acuerdo Distribuido BFT con Redundancia $N \ge 3$
+9. **BFT_CONSENSUS**: Acuerdo Distribuido BFT con Redundancia N \ge 3
 
 ---
 

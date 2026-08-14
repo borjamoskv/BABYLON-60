@@ -27,7 +27,7 @@ def simulate_transition_gate(input_token_entropy: float, is_adversarial: bool) -
         }
 
     # Transición canónica a Entelecheia
-    receipt_hash = hashlib.sha3_256(f"transition_{time.time()}_{random.random()}".encode()).hexdigest()
+    receipt_hash = hashlib.sha3_256(f"transition_{time.monotonic()}_{random.random()}".encode()).hexdigest()
     return {
         "status": "ATTESTED_SCITT",
         "residual_anergy": 0.0,

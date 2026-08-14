@@ -725,3 +725,357 @@ body, html {
   50% { opacity: 1; }
   100% { opacity: 0.8; }
 }
+
+/* ==========================================================================
+   TDAH / NEURODIVERGENT ADAPTIVE DESIGN SYSTEM (C5-REAL ADHD UX)
+   ========================================================================== */
+
+/* 1. ADHD Hyperfocus Mode Grid Adjustment */
+.app-container.adhd-hyperfocus-mode {
+  grid-template-columns: 260px 1fr 0px !important;
+  background: #040405;
+}
+
+.app-container.adhd-hyperfocus-mode .sidebar {
+  border-right: 1px solid rgba(0, 255, 65, 0.2);
+  background: #090a0d;
+}
+
+/* 2. High-Contrast Focus Indicators (Puntos de anclaje de atención) */
+.adhd-hyperfocus-mode .focus-ring-target:focus-within,
+.adhd-hyperfocus-mode .focus-ring-target:hover {
+  outline: 2px solid var(--accent-green) !important;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.15) !important;
+  transition: outline 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* 3. Bionic Reading / High-Legibility Anchoring */
+.bionic-typography body,
+.bionic-typography p,
+.bionic-typography span,
+.bionic-typography button {
+  letter-spacing: 0.02em;
+  word-spacing: 0.05em;
+  line-height: 1.6;
+}
+
+/* 4. ADHD Suite Control Card */
+.adhd-suite-card {
+  background: rgba(0, 255, 65, 0.04);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.adhd-suite-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--accent-green);
+}
+
+.adhd-suite-desc {
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+.adhd-suite-desc code {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1px 4px;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.adhd-toggle-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.btn-adhd-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-adhd-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.btn-adhd-toggle.active {
+  background: rgba(0, 255, 65, 0.15);
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+  font-weight: 600;
+}
+
+/* 5. Pomodoro Sprint Widget (Time Blindness mitigation) */
+.focus-sprint-widget {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-top: 4px;
+}
+
+.sprint-timer-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timer-text {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-green);
+}
+
+.sprint-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+.sprint-controls {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.btn-sprint, .btn-sprint-reset {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
+  color: #fff;
+  font-size: 10px;
+  padding: 3px 0;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.btn-sprint:hover {
+  background: var(--accent-green);
+  color: #000;
+  font-weight: 700;
+}
+
+.btn-sprint-reset:hover {
+  background: rgba(255, 0, 60, 0.2);
+  color: var(--accent-red);
+}
+
+/* 6. Cognitive Chunking Tabs in Header HUD */
+.adhd-task-tabs {
+  display: flex;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 3px;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+}
+
+.adhd-tab {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.adhd-tab:hover {
+  color: #fff;
+}
+
+.adhd-tab.active {
+  background: rgba(0, 255, 65, 0.2);
+  color: var(--accent-green);
+  font-weight: 600;
+}
+
+.text-green {
+  color: var(--accent-green);
+}
+
+/* 7. Pitch & Buy Conversion Engine Styles */
+.pitch-conversion-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pitch-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.pitch-title {
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
+.pitch-badge {
+  margin-left: auto;
+  font-size: 10px;
+  background: var(--accent-green);
+  color: #000;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.pitch-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.pitch-textarea {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 14px;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  resize: vertical;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pitch-textarea:focus {
+  outline: none;
+  border-color: var(--accent-green);
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+}
+
+.pitch-actions-bar {
+  margin-top: 10px;
+}
+
+.btn-pitch-eval {
+  width: 100%;
+  background: rgba(0, 255, 65, 0.15);
+  border: 1px solid var(--accent-green);
+  color: var(--accent-green);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+
+.btn-pitch-eval:hover:not(:disabled) {
+  background: var(--accent-green);
+  color: #000;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+}
+
+.pitch-result-box {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 255, 65, 0.3);
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.pitch-buy-section {
+  background: linear-gradient(135deg, rgba(0, 255, 65, 0.08) 0%, rgba(0, 0, 0, 0.8) 100%);
+  border: 1px solid rgba(0, 255, 65, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.buy-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.buy-benefits-list {
+  list-style: none;
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.buy-benefits-list strong {
+  color: #fff;
+}
+
+.btn-buy-now {
+  background: linear-gradient(90deg, #00FF41 0%, #00CC33 100%);
+  border: none;
+  color: #000;
+  font-weight: 800;
+  font-size: 14px;
+  padding: 14px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 25px rgba(0, 255, 65, 0.35);
+  transition: all 0.2s ease;
+}
+
+.btn-buy-now:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(0, 255, 65, 0.6);
+}
+
+.buy-success-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(0, 255, 65, 0.2);
+  border: 1px solid var(--accent-green);
+  color: var(--accent-green);
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 12px;
+}
+

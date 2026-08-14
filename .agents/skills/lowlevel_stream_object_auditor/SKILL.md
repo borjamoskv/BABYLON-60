@@ -27,7 +27,7 @@ Frente a diccionarios que declaran ejecución dinámica, el sistema asume incomp
 ## 4. Purga No Estándar y Disipación de Overlay
 Se auditan manipulaciones topológicas inyectadas fuera de las fronteras declaradas o mediante homóglifos.
 - **Truncado de Anergía Post-EOF**: Todo bloque de bytes residual (`trailing_bytes`) que no mapee a un estado finito indexado se disipa sin análisis, devolviendo el contenedor a su estado canónico discreto (st: *R → R).
-- **Homóglifos Topológicos**: Las secuencias de ancho cero (`U+200B`) inyectadas dentro de claves estructurales (ej. `/Auth​or`) se interceptan y neutralizan como canales paralelos de exfiltración.
+- **Homóglifos Topológicos**: Las secuencias de ancho cero (`U+200B`) inyectadas dentro de claves estructurales (ej. `/Author`) se interceptan y neutralizan como canales paralelos de exfiltración.
 
 ## 5. Arquitectura de Ejecución FFI (C-ABI & Lock-Free EBR)
 La validación no bloqueante se delega al Kernel Ring-0 (Rust), garantizando la latencia estricta T_eff < 5 ms.

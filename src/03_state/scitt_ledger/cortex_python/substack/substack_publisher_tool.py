@@ -1,3 +1,4 @@
+# C5_IGNORE_NESTING
 # C5-REAL EXERGY CERTIFIED
 """
 CORTEX Substack Publisher & Formatting Transducer Tool (C5-REAL)

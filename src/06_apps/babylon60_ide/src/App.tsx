@@ -1,4 +1,4 @@
-// C5-REAL EXERGY CERTIFIED - ADVANCED EDITION
+// C5-REAL EXERGY CERTIFIED - NATIVE ADHD / TDAH UNIFIED EDITION
 import { useState, useEffect } from 'react';
 import { sound } from './components/AudioSynthesizer';
 import { ChatWindow } from './components/ChatWindow';
@@ -6,6 +6,7 @@ import { IdeaValuator } from './components/IdeaValuator';
 import { CausalVisualizer } from './components/CausalVisualizer';
 import { RingBufferVisualizer, EpochSlot } from './components/RingBufferVisualizer';
 import { ReceiptStream, ScittReceipt } from './components/ReceiptStream';
+import { CortexTraceDAG, TraceNode } from './components/CortexTraceDAG';
 import {
   Shield,
   Activity,
@@ -14,6 +15,9 @@ import {
   VolumeX,
   Layers,
   Zap,
+  Clock,
+  Sparkles,
+  Focus,
 } from 'lucide-react';
 
 function App() {
@@ -22,6 +26,12 @@ function App() {
   const [liveTEff, setLiveTEff] = useState(1.84);
   const [isAttackActive, setIsAttackActive] = useState(false);
   const [isFailStopActive, setIsFailStopActive] = useState(false);
+
+  // TDAH / ADHD is the NON-NEGOTIABLE UNIFIED DEFAULT MODE
+  const [bionicReading, setBionicReading] = useState(true);
+  const [focusTimer, setFocusTimer] = useState(1500); // 25 min Pomodoro Sprint
+  const [timerRunning, setTimerRunning] = useState(false);
+  const [activeTab, setActiveTab] = useState<'workspace' | 'kernel' | 'traces'>('workspace');
 
   const [mockSlots] = useState<EpochSlot[]>([
     { id: 0, status: '5 Retired', epochId: 1040, readers: 0, hash: '0xabc123' },
@@ -38,6 +48,52 @@ function App() {
     { id: 'REC-1042', timestamp: new Date().toISOString(), epoch: 1042, digest: '0x8899aabbccddeeff...', status: 'ATTESTED', latencyMs: 1.84, varentropy: 0.012 },
     { id: 'REC-1041', timestamp: new Date().toISOString(), epoch: 1041, digest: '0xdef4567890abcdef...', status: 'ATTESTED', latencyMs: 1.91, varentropy: 0.015 },
     { id: 'REC-1040', timestamp: new Date().toISOString(), epoch: 1040, digest: '0xabc1234567890abc...', status: 'HALTED_FAIL_STOP', latencyMs: 4.12, varentropy: 0.089 },
+  ]);
+
+  const [mockTraces] = useState<TraceNode[]>([
+    {
+      id: 'trace-root-1',
+      run_type: 'bft_consensus',
+      name: 'CORTEX_BFT_Cycle_500',
+      status: 'ATTESTED',
+      latency_ms: 0.84,
+      varentropy: 0.004,
+      scitt_digest: 'sha3:9f8e7d...',
+      children: [
+        {
+          id: 'trace-agent-1',
+          parent_id: 'trace-root-1',
+          run_type: 'agent',
+          name: 'ActiveInferencePolicyNode',
+          status: 'ATTESTED',
+          latency_ms: 0.32,
+          varentropy: 0.001,
+          scitt_digest: 'sha3:1a2b3c...',
+          children: [
+            {
+              id: 'trace-tool-1',
+              parent_id: 'trace-agent-1',
+              run_type: 'mcp_bridge',
+              name: 'FFI_RingBuffer_Commit',
+              status: 'ATTESTED',
+              latency_ms: 0.12,
+              varentropy: 0.0,
+              scitt_digest: 'sha3:4d5e6f...',
+            },
+            {
+              id: 'trace-tool-2',
+              parent_id: 'trace-agent-1',
+              run_type: 'scitt_attestation',
+              name: 'Emit_SCITT_Merkle_Receipt',
+              status: 'ATTESTED',
+              latency_ms: 0.18,
+              varentropy: 0.0,
+              scitt_digest: 'sha3:7890ab...',
+            },
+          ],
+        },
+      ],
+    },
   ]);
 
   // Live WebSocket Telemetry Connector
@@ -62,23 +118,92 @@ function App() {
     };
   }, []);
 
+  // ADHD Focus Sprint Timer
+  useEffect(() => {
+    let interval: ReturnType<typeof setInterval>;
+    if (timerRunning && focusTimer > 0) {
+      interval = setInterval(() => {
+        setFocusTimer((prev) => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [timerRunning, focusTimer]);
+
   const toggleSound = () => {
     sound.enabled = !soundEnabled;
     setSoundEnabled(!soundEnabled);
   };
 
+  const formatTimer = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
+
   return (
-    <div className={`app-container ${isFailStopActive ? 'fail-stop-alert' : ''}`}>
-      {/* Sidebar Metrics */}
+    <div
+      className={`app-container adhd-hyperfocus-mode ${isFailStopActive ? 'fail-stop-alert' : ''} ${
+        bionicReading ? 'bionic-typography' : ''
+      }`}
+    >
+      {/* Sidebar Metrics (Minimalist ADHD Layout) */}
       <aside className="sidebar">
         <div className="brand-header">
-          <div className="brand-badge">RING-0 VERIFIED</div>
+          <div className="brand-badge">TDAH NATIVE UI</div>
           <h1>BABYLON-60</h1>
-          <p className="brand-sub">C5-REAL Advanced IDE</p>
+          <p className="brand-sub">Entorno de Foco Exergético</p>
+        </div>
+
+        {/* TDAH / ADHD Neuro-Focus Suite */}
+        <div className="adhd-suite-card">
+          <div className="adhd-suite-header">
+            <Focus size={16} className="text-green" />
+            <span>INTERFAZ TDAH UNIFICADA</span>
+          </div>
+          <p className="adhd-suite-desc">
+            Cero ruido. Cero distracción. Diseñado para hiperfoco cognitivo continuo.
+          </p>
+
+          <div className="adhd-toggle-row">
+            <button
+              className={`btn-adhd-toggle ${bionicReading ? 'active' : ''}`}
+              onClick={() => setBionicReading(!bionicReading)}
+              title="Tipografía de anclaje de alta atención"
+            >
+              <Sparkles size={14} />
+              <span>{bionicReading ? 'Lectura Biónica: ON' : 'Lectura Biónica: OFF'}</span>
+            </button>
+          </div>
+
+          {/* Pomodoro Focus Sprint counter for time blindness */}
+          <div className="focus-sprint-widget">
+            <div className="sprint-timer-display">
+              <Clock size={14} color="#00FF41" />
+              <span className="timer-text">{formatTimer(focusTimer)}</span>
+              <span className="sprint-label">Sprint Atencional</span>
+            </div>
+            <div className="sprint-controls">
+              <button
+                className="btn-sprint"
+                onClick={() => setTimerRunning(!timerRunning)}
+              >
+                {timerRunning ? 'Pausar' : 'Iniciar'}
+              </button>
+              <button
+                className="btn-sprint-reset"
+                onClick={() => {
+                  setTimerRunning(false);
+                  setFocusTimer(1500);
+                }}
+              >
+                Reset
+              </button>
+            </div>
+          </div>
         </div>
 
         <div className="metric-group">
-          <div className="metric-label">Status</div>
+          <div className="metric-label">Status Kernel</div>
           <div className={`metric-value ${isFailStopActive ? 'red' : 'green'}`}>
             <Shield size={20} />
             {isFailStopActive ? 'QUARANTINE' : 'ONLINE'}
@@ -86,16 +211,16 @@ function App() {
         </div>
 
         <div className="metric-group">
-          <div className="metric-label">Marginal Cloud Cost</div>
+          <div className="metric-label">Cómputo Local</div>
           <div className="metric-value">
             <Cpu size={20} />
             $0.00
           </div>
-          <div className="metric-sub">Local Sovereign AI</div>
+          <div className="metric-sub">Soberanía de Silicio</div>
         </div>
 
         <div className="metric-group" style={{ marginTop: '10px' }}>
-          <div className="metric-label">Causal Controls</div>
+          <div className="metric-label">Controles Causalidad</div>
           <div className="control-deck">
             <button
               className={`btn-control ${isAttackActive ? 'btn-attack-active' : ''}`}
@@ -124,7 +249,7 @@ function App() {
 
       {/* Main Center: HUD + Visualizer + Tools */}
       <main className="main-content">
-        {/* Top HUD */}
+        {/* Top HUD with Focus Tabs for ADHD single-tasking */}
         <div className="header-hud">
           <div className="hud-left">
             <span className="hud-tag">
@@ -139,36 +264,74 @@ function App() {
               <span>{isConnectedToKernel ? '● LIVE (8765)' : '○ STANDALONE'}</span>
             </span>
           </div>
-        </div>
 
-        <div className="canvas-wrapper-outer" style={{ flex: '0 0 35%', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-          <CausalVisualizer
-            isAttackActive={isAttackActive}
-            isFailStopActive={isFailStopActive}
-            onParticlePurged={() => {}}
-            onParticleValidated={() => {}}
-          />
-        </div>
-
-        {/* Workspace Area */}
-        <div className="workspace-grid" style={{ height: 'calc(100% - 35% - 50px)' }}>
-          <div className="panel-container">
-             <IdeaValuator />
+          {/* Tab Selector for ADHD Cognitive Chunking */}
+          <div className="adhd-task-tabs">
+            <button
+              className={`adhd-tab ${activeTab === 'workspace' ? 'active' : ''}`}
+              onClick={() => setActiveTab('workspace')}
+            >
+              Lienzo Trabajo
+            </button>
+            <button
+              className={`adhd-tab ${activeTab === 'kernel' ? 'active' : ''}`}
+              onClick={() => setActiveTab('kernel')}
+            >
+              Grafo Causal
+            </button>
+            <button
+              className={`adhd-tab ${activeTab === 'traces' ? 'active' : ''}`}
+              onClick={() => setActiveTab('traces')}
+            >
+              Trazas & Registros
+            </button>
           </div>
-
-          <div className="panel-container">
-             <ChatWindow />
-          </div>
         </div>
+
+        {/* View switching based on active Tab (Single-Tasking ADHD Paradigm) */}
+        {activeTab === 'kernel' && (
+          <div
+            className="canvas-wrapper-outer"
+            style={{ flex: '1', borderBottom: '1px solid rgba(255,255,255,0.08)' }}
+          >
+            <CausalVisualizer
+              isAttackActive={isAttackActive}
+              isFailStopActive={isFailStopActive}
+              onParticlePurged={() => {}}
+              onParticleValidated={() => {}}
+            />
+          </div>
+        )}
+
+        {/* Workspace Area: Focused Lienzo in ADHD Single Mode */}
+        {activeTab === 'workspace' && (
+          <div
+            className="workspace-grid"
+            style={{ height: 'calc(100% - 50px)' }}
+          >
+            <div className="panel-container focus-ring-target">
+              <IdeaValuator />
+            </div>
+
+            <div className="panel-container focus-ring-target">
+              <ChatWindow />
+            </div>
+          </div>
+        )}
+
+        {/* Dedicated Traces view when selected explicitly in ADHD Single Mode */}
+        {activeTab === 'traces' && (
+          <div className="adhd-full-traces-view" style={{ padding: '20px', overflowY: 'auto' }}>
+            <CortexTraceDAG traces={mockTraces} />
+            <RingBufferVisualizer slots={mockSlots} activeEpochPtr={3} fallbackEpochPtr={2} />
+            <ReceiptStream receipts={mockReceipts} />
+          </div>
+        )}
       </main>
-
-      {/* Right Panel: Machinery */}
-      <aside className="right-panel">
-        <RingBufferVisualizer slots={mockSlots} activeEpochPtr={3} fallbackEpochPtr={2} />
-        <ReceiptStream receipts={mockReceipts} />
-      </aside>
     </div>
   );
 }
 
 export default App;
+
+

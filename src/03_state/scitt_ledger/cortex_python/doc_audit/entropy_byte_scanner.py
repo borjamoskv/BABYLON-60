@@ -124,6 +124,26 @@ class ByteEntropyScanner:
                 stego_counts[name] = count
         return stego_counts
 
+    def _check_overlay_data(self, content: bytes, detected_format: str) -> Tuple[bool, int, int, str, Optional[bytes]]:
+        if detected_format not in ["PDF", "PNG", "JPEG"]:
+            return False, -1, 0, "NONE", None
+
+        marker = EOF_MARKERS[detected_format]
+        idx = content.find(marker) if detected_format == "PNG" else content.rfind(marker)
+        
+        if idx == -1:
+            return False, -1, 0, "NONE", None
+
+        eof_offset = idx + len(marker)
+        trailing = content[eof_offset:].lstrip(b"\r\n\t ")
+        overlay_bytes = len(trailing)
+        
+        if overlay_bytes == 0:
+            return True, eof_offset, 0, "NONE", None
+
+        overlay_format, _ = self._detect_magic(trailing)
+        return True, eof_offset, overlay_bytes, overlay_format, trailing
+
     def scan_file(self, filepath: str) -> Dict[str, Any]:
         """
         Escanea el archivo binario y retorna el diagnóstico de bajo nivel.
@@ -138,45 +158,7 @@ class ByteEntropyScanner:
 
         # Detección de Overlay Data específica para archivos con marcadores EOF conocidos
         detected_format = res["detected_format"]
-        overlay_bytes = 0
-        eof_detected = False
-        eof_offset = -1
-        overlay_format = "NONE"
-        overlay_data: Optional[bytes] = None
-
-        if detected_format == "PDF":
-            last_eof = content.rfind(EOF_MARKERS["PDF"])
-            if last_eof != -1:
-                eof_detected = True
-                eof_offset = last_eof + len(EOF_MARKERS["PDF"])
-                trailing = content[eof_offset:].lstrip(b"\r\n\t ")
-                overlay_bytes = len(trailing)
-                if overlay_bytes > 0:
-                    overlay_data = trailing
-                    fmt, _ = self._detect_magic(trailing)
-                    overlay_format = fmt
-        elif detected_format == "PNG":
-            iend_idx = content.find(EOF_MARKERS["PNG"])
-            if iend_idx != -1:
-                eof_detected = True
-                eof_offset = iend_idx + len(EOF_MARKERS["PNG"])
-                trailing = content[eof_offset:].lstrip(b"\r\n\t ")
-                overlay_bytes = len(trailing)
-                if overlay_bytes > 0:
-                    overlay_data = trailing
-                    fmt, _ = self._detect_magic(trailing)
-                    overlay_format = fmt
-        elif detected_format == "JPEG":
-            eoi_idx = content.rfind(EOF_MARKERS["JPEG"])
-            if eoi_idx != -1:
-                eof_detected = True
-                eof_offset = eoi_idx + len(EOF_MARKERS["JPEG"])
-                trailing = content[eof_offset:].lstrip(b"\r\n\t ")
-                overlay_bytes = len(trailing)
-                if overlay_bytes > 0:
-                    overlay_data = trailing
-                    fmt, _ = self._detect_magic(trailing)
-                    overlay_format = fmt
+        eof_detected, eof_offset, overlay_bytes, overlay_format, overlay_data = self._check_overlay_data(content, detected_format)
 
         res.update({
             "eof_detected": eof_detected,

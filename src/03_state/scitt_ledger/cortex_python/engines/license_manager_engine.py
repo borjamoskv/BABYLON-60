@@ -82,7 +82,7 @@ class LicenseToken:
         return hmac.compare_digest(self.signature or "", expected)
 
     def is_expired(self) -> bool:
-        return time.time() > self.expires_at
+        return time.monotonic() > self.expires_at
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -216,7 +216,7 @@ class LicenseManagerEngine:
         Preserva la capacidad operativa del kernel si el token local era válido.
         """
         self.consecutive_429_count += 1
-        self.last_429_timestamp = time.time()
+        self.last_429_timestamp = time.monotonic()
 
         if self.current_token and not self.current_token.is_expired():
             # Mantiene operativas las funciones comercialmente validadas bajo cache local
@@ -234,7 +234,7 @@ class LicenseManagerEngine:
 
     def stage_offline_audit(self, event_type: str, feature: str, details: Dict[str, Any]) -> str:
         """Almacena auditorías en el staging ledger SQLite local durante caídas 429 (Ω_BFT_04)."""
-        event_id = hashlib.sha3_256(f"{time.time()}:{feature}:{event_type}".encode("utf-8")).hexdigest()[:16]
+        event_id = hashlib.sha3_256(f"{time.monotonic()}:{feature}:{event_type}".encode("utf-8")).hexdigest()[:16]
         payload = {
             "event_id": event_id,
             "license_id": self.current_token.license_id if self.current_token else "ANONYMOUS_COMMUNITY",
@@ -242,14 +242,14 @@ class LicenseManagerEngine:
             "feature": feature,
             "event_type": event_type,
             "details": details,
-            "timestamp": time.time(),
+            "timestamp": time.monotonic(),
         }
 
         conn = sqlite3.connect(str(self.db_path), timeout=5.0)
         try:
             conn.execute(
                 "INSERT INTO license_staging_ledger (event_id, payload_json, staged_at, retry_count) VALUES (?, ?, ?, 0)",
-                (event_id, json.dumps(payload), time.time()),
+                (event_id, json.dumps(payload), time.monotonic()),
             )
             conn.commit()
         except sqlite3.IntegrityError:
@@ -263,7 +263,7 @@ class LicenseManagerEngine:
         """Registra un evento de auditoría de licencias inmutable (Ω11, Ω_BFT_04)."""
         lic_id = self.current_token.license_id if self.current_token else "COMMUNITY_FREE"
         tier_val = self.active_tier().value
-        ts = time.time()
+        ts = time.monotonic()
         event_id = hashlib.sha3_256(f"{lic_id}:{feature}:{ts}".encode("utf-8")).hexdigest()[:16]
         phash = hashlib.sha3_256(f"{event_id}:{lic_id}:{tier_val}:{feature}:{status}".encode("utf-8")).hexdigest()
 

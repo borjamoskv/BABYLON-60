@@ -123,10 +123,10 @@ La cognición agéntica de BABYLON-60 se distribuye en tres niveles de abstracci
 ## 6. StateFlow & DataFlow (Flujo de Estados y Datos)
 
 - **Causal Taint (BLAKE3):** El hash global de integridad del repositorio se calcula concatenando los IDs y payloads de los nodos del Poset en su orden topológico estricto:
-  $$Hash_{total} = \text{BLAKE3}(Id_0 \parallel Payload_0 \parallel Id_1 \parallel Payload_1 \dots)$$
+  Hash_{total} = \text{BLAKE3}(Id_0 \parallel Payload_0 \parallel Id_1 \parallel Payload_1 \dots)
 - **Serialización CBOR / CBOR Canónico:** Los payloads de las transmutaciones de estado se codifican en CBOR (Concise Binary Object Representation) para garantizar el determinismo bit-a-bit del hash y evitar la inestabilidad de formateo que sufre JSON (espacios, saltos de línea).
 - **Lamport Ordering:** Todas las transacciones concurrentes calculan el tiempo lógico:
-  $$Lamport_t = \max(Lamport_{local\_db}) + 1$$
+  Lamport_t = \max(Lamport_{local\_db}) + 1
   Esto garantiza un orden secuencial total de operaciones concurrentes en la red agéntica BFT sin depender de relojes físicos de sistema, vulnerables a desvíos.
 
 ---

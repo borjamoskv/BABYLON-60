@@ -47,7 +47,7 @@ class VibeIDEEngine:
 
     def purge_tier_1(self) -> int:
         """Principio P3: Weaponized Forgetting de TIER_1 expirable."""
-        now = time.time()
+        now = time.monotonic()
         expired = [k for k, (_, ts) in self.tier_1.items() if now - ts > self.tier_1_ttl_seconds]
         for k in expired:
             del self.tier_1[k]
@@ -76,7 +76,7 @@ class VibeIDEEngine:
             return True, "IDEMPOTENT_NO_CHANGE"
 
         # P3: TIER_1 Quarantine
-        self.tier_1[file_path] = (proposed_code, time.time())
+        self.tier_1[file_path] = (proposed_code, time.monotonic())
         self.memory.log(
             0,
             "vibe_ide",

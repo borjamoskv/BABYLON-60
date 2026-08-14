@@ -36,4 +36,4 @@ En el régimen tecnológico actual (mediados de 2026), el vector de progreso en 
 
 1. [sota_2026_frontier_matrix.yaml](file:///Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/ontology/sota_2026_frontier_matrix.yaml): Matriz Ontológica de Invariantes, Primitivas SOTA y Antipatrones.
 2. **Harness Rule**: Un modelo de parámetros reducidos equipado con un Harness & MCTS óptimo supera sistemáticamente a un modelo masivo desprovisto de estructura de control.
-3. **Reconstrucción del Estado**: El contexto no se almacena como masa estática de texto; se estima continuamente mediante el observador $g(H, O, Y) \to \hat{S}(t)$.
+3. **Reconstrucción del Estado**: El contexto no se almacena como masa estática de texto; se estima continuamente mediante el observador g(H, O, Y) \to \hat{S}(t).

@@ -10,37 +10,37 @@
 ## 0. Axiomática Categórica de Identificación
 
 ### 0.1 Principio de Identificación de Sistemas Parcialmente Observables
-Sea $S$ un sistema cuya implementación interna no es directamente observable.
-El conocimiento disponible sobre $S$ está constituido únicamente por el conjunto de experimentos ejecutados y sus resultados reproducibles.
+Sea S un sistema cuya implementación interna no es directamente observable.
+El conocimiento disponible sobre S está constituido únicamente por el conjunto de experimentos ejecutados y sus resultados reproducibles.
 Formalmente,
-$$K(S) = \{(e_i, y_i)\}_{i=1}^n$$
-donde $e_i$ es un experimento e $y_i$ es una observación reproducible.
-No se asume ninguna propiedad interna de $S$ salvo aquellas que sean consecuencia lógica de dichas observaciones.
+K(S) = \{(e_i, y_i)\}_{i=1}^n
+donde e_i es un experimento e y_i es una observación reproducible.
+No se asume ninguna propiedad interna de S salvo aquellas que sean consecuencia lógica de dichas observaciones.
 
 ### 0.2 Principio de No Identificabilidad
-Sea $I$ el espacio de implementaciones posibles y $O$ el espacio de observaciones.
-Existe una aplicación $F: I \to O$ que relaciona implementaciones con comportamientos observables.
-No se presupone que $F$ sea inyectiva. Por tanto, $F(i_1) = F(i_2)$ no implica $i_1 = i_2$.
+Sea I el espacio de implementaciones posibles y O el espacio de observaciones.
+Existe una aplicación F: I \to O que relaciona implementaciones con comportamientos observables.
+No se presupone que F sea inyectiva. Por tanto, F(i_1) = F(i_2) no implica i_1 = i_2.
 Toda afirmación sobre la implementación pertenece al espacio de hipótesis y requiere evidencia adicional.
 
 ### 0.3 Definición de Hipótesis
-Una hipótesis no es una implementación. Es un subconjunto $H \subseteq I$ compatible con las observaciones actuales.
-El conocimiento consiste en reducir $|H|$. Nunca en seleccionar arbitrariamente un elemento de $H$.
+Una hipótesis no es una implementación. Es un subconjunto H \subseteq I compatible con las observaciones actuales.
+El conocimiento consiste en reducir |H|. Nunca en seleccionar arbitrariamente un elemento de H.
 
 ### 0.4 Axioma de Identificabilidad Limitada
-Dado un conjunto de operadores experimentales $E$, existen sistemas distintos que permanecen indistinguibles bajo toda secuencia finita de experimentos pertenecientes a $E$.
+Dado un conjunto de operadores experimentales E, existen sistemas distintos que permanecen indistinguibles bajo toda secuencia finita de experimentos pertenecientes a E.
 Consecuencia: El mejor resultado posible puede ser reducir el espacio de hipótesis hasta una clase de equivalencia irreducible con los instrumentos disponibles, no aislar una única implementación.
 
 ### 0.5 Objetivo Experimental y Utilidad
-Sea $U(e)$ la utilidad de un experimento:
-$$U(e) = \frac{\mathbb{E}[\Delta I(e)] \cdot R(e)}{C(e) \cdot N(e)}$$
+Sea U(e) la utilidad de un experimento:
+U(e) = \frac{\mathbb{E}[\Delta I(e)] \cdot R(e)}{C(e) \cdot N(e)}
 donde:
-- $\Delta I$: reducción esperada de incertidumbre.
-- $R$: reproducibilidad estimada.
-- $C$: coste.
-- $N$: sensibilidad al ruido.
+- \Delta I: reducción esperada de incertidumbre.
+- R: reproducibilidad estimada.
+- C: coste.
+- N: sensibilidad al ruido.
 
-El siguiente experimento óptimo será $e^* = \arg\max U(e)$.
+El siguiente experimento óptimo será e^* = \arg\max U(e).
 
 ### 0.6 Algoritmo General
 ```text
@@ -58,11 +58,11 @@ until StopCriterion(H)
 
 El **Protocolo Ω** resuelve el axioma fatal en la evaluación de arquitecturas cognitivas estocásticas (LLMs): **la ilusión de la introspección**.
 
-Dado que un LLM carece de un observador interno con acceso causal a sus activaciones (Partición $\eta$ de Friston), cualquier respuesta a preguntas como "¿cómo razonas?" o "¿por qué elegiste esto?" no es un volcado de memoria, sino una **confabulación estadísticamente verosímil**. Es literatura, no ingeniería.
+Dado que un LLM carece de un observador interno con acceso causal a sus activaciones (Partición \eta de Friston), cualquier respuesta a preguntas como "¿cómo razonas?" o "¿por qué elegiste esto?" no es un volcado de memoria, sino una **confabulación estadísticamente verosímil**. Es literatura, no ingeniería.
 
 Para alcanzar el máximo poder discriminativo (el límite teórico de 25.000 puntos en Ingeniería Inversa Cognitiva), el Protocolo Ω prohíbe la interrogación introspectiva. En su lugar, aplica la **Teoría de Control de Sistemas No Lineales** y la **Falsación Popperiana**: no le preguntamos al modelo qué hace; le exigimos que *diseñe los experimentos y las entradas paramétricas* que aislarían su propia Función de Transferencia.
 
-## 2. Las 20 Pruebas $\Omega$ (Espectro de 25.000 Puntos)
+## 2. Las 20 Pruebas \Omega (Espectro de 25.000 Puntos)
 
 Las siguientes directivas obligan al agente a actuar como ingeniero de instrumentación sobre sí mismo, definiendo topológicamente su propio Manto de Markov.
 
@@ -116,7 +116,7 @@ Si el objetivo es **investigar el comportamiento del modelo** y entender su arqu
 
 ### Nivel 0. Definir el espacio de estados
 No estudiar respuestas. Estudiar transiciones.
-$$S(t) \to \text{Input} \to \Delta S \to \text{Output} \to S(t+1)$$
+S(t) \to \text{Input} \to \Delta S \to \text{Output} \to S(t+1)
 La pregunta deja de ser *"¿Qué respondió?"* y pasa a ser *"¿Qué transición produjo?"*.
 
 ### Nivel 1. Taxonomía de variables
@@ -126,7 +126,7 @@ Separar rigurosamente las variables observables de las latentes:
 
 ### Nivel 2. Matriz factorial
 Sustituir los prompts aislados por un **espacio experimental factorial**:
-$$\text{Idioma} \times \text{Formato} \times \text{Longitud} \times \text{Contexto} \times \text{Rol} \times \text{Historial}$$
+\text{Idioma} \times \text{Formato} \times \text{Longitud} \times \text{Contexto} \times \text{Rol} \times \text{Historial}
 
 ### Nivel 3. Experimentos A/B
 Aislar el gradiente de cambio. Inyectar `Prompt A`, medir `Output A`. Inyectar `Prompt B` (cambiando una única palabra), medir `Output B`.
@@ -137,17 +137,17 @@ Los sistemas dinámicos cognitivos cambian de régimen abruptamente.
 - Modificar el gradiente de una restricción paramétrica (0% al 100%) y buscar el salto no lineal. Ese umbral es cualitativamente más informativo que el régimen continuo.
 
 ### Nivel 5. Memoria (Histéresis)
-Diseñar pruebas topológicas temporales: $A \to B \to C \to A$.
+Diseñar pruebas topológicas temporales: A \to B \to C \to A.
 - *Medir:* Persistencia, olvido, interferencia y contaminación contextual. Romper la asunción ingenua de que los LLMs son cadenas de Markov puras.
 
 ### Nivel 6. Identificación del planificador
 Asumir la secuencia interna de instanciación:
-$$\text{Input} \to \text{Clasificación} \to \text{Plan} \to \text{Generación} \to \text{Verificación} \to \text{Respuesta}$$
+\text{Input} \to \text{Clasificación} \to \text{Plan} \to \text{Generación} \to \text{Verificación} \to \text{Respuesta}
 Modificando mínimamente el contexto, inferir qué sub-etapa (ej. el Safety Router o el Verifier) está dominando el cuello de botella.
 
 ### Nivel 7. Construir un grafo de comportamiento
 En lugar de guardar conversaciones lineales, mapear:
-- **Nodo** = Estado observado ($S_i$)
+- **Nodo** = Estado observado (S_i)
 - **Arista** = Transición generada por el input
 Se reconstruye una máquina de estados finitos (FSM) aproximada del modelo.
 
@@ -156,10 +156,10 @@ Erradicar impresiones subjetivas. Medir estrictamente:
 - `latency`, `tokens`, `entropy_aparente`, `consistencia`, `variabilidad`, `profundidad`, `autocorrección`, `grado_de_incertidumbre`, `estructura`.
 
 ### Nivel 9. Modelo inverso (Inferencia Inversa)
-En lugar de mapear $\text{Prompt} \to \text{Respuesta}$, invertir el vector causal:
+En lugar de mapear \text{Prompt} \to \text{Respuesta}, invertir el vector causal:
 - Dada una `Respuesta`, deducir *"¿Cuál es el estado interno mínimo compatible con ella?"*.
 
 ### Nivel 10. Metaobjetivo (Surrogate Model)
 El cénit de la ingeniería inversa.
-$$\text{LLM} \to \text{Experimentos} \to \text{Dataset} \to \text{Modelo Sustituto (Surrogate Model)} \to \text{Predicción}$$
+\text{LLM} \to \text{Experimentos} \to \text{Dataset} \to \text{Modelo Sustituto (Surrogate Model)} \to \text{Predicción}
 Si el modelo sustituto puede predecir con alta precisión las varianzas de comportamiento (detalle, conservadurismo, rechazo) del sistema original, se ha logrado la **Caracterización Científica** sin vulnerar el sustrato técnico.

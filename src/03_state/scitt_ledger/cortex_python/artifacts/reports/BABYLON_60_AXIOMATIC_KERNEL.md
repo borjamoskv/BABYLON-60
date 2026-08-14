@@ -25,26 +25,26 @@ Todo componente de la arquitectura causal se reduce a la siguiente tupla estrict
 `Component = (Input, Output, Invariant, Complexity, Proof)`
 
 ### 2.1 El Estado del Universo (Persistence)
-- **Input:** $τ$ (Transición atestada con CORTEX_TAINT).
-- **Output:** $\Sigma_{n+1}$ (Nuevo estado global).
+- **Input:** τ (Transición atestada con CORTEX_TAINT).
+- **Output:** \Sigma_{n+1} (Nuevo estado global).
 - **Invariant:** Inmutabilidad de la cadena (Append-Only WAL).
-- **Complexity:** $O(1)$ inserción.
+- **Complexity:** O(1) inserción.
 - **Proof:** Ledger SQLite (WAL) sellado por hash encadenado.
 - **Implementación Física:** `babylon60/database/core.py`
 
 ### 2.2 La Validación Matemática (Verify)
-- **Input:** $τ_{raw}$ (Intención del agente / mutación abstracta).
-- **Output:** $W$ (Witness criptográfico) o $⊥$ (Abort).
+- **Input:** τ_{raw} (Intención del agente / mutación abstracta).
+- **Output:** W (Witness criptográfico) o ⊥ (Abort).
 - **Invariant:** Determinismo absoluto (Funciones Puras).
-- **Complexity:** $O(\log n)$ validación asimétrica.
+- **Complexity:** O(\log n) validación asimétrica.
 - **Proof:** Firmas Ed25519 y canonicalización de memoria estricta (CBOR).
 - **Implementación Física:** `babylon60/bft/consensus_validator.py`, `babylon60/core/crypto.py`
 
 ### 2.3 El Consenso Bizantino (Consensus)
-- **Input:** $W$ de múltiples actores.
-- **Output:** Certificado de suficiencia BFT ($f \ge 2/3$).
+- **Input:** W de múltiples actores.
+- **Output:** Certificado de suficiencia BFT (f \ge 2/3).
 - **Invariant:** Tolerancia a la falla asimétrica.
-- **Complexity:** $O(n)$ atestaciones.
+- **Complexity:** O(n) atestaciones.
 - **Proof:** Integración FFI (Rust) y Committer BFT.
 - **Implementación Física:** `strike_rs/src`, `babylon60/bft/consensus_committer.py`
 
@@ -59,7 +59,7 @@ Cualquier sistema que respete estas 7 leyes físicas **ES** BABYLON-60.
 2. **Invariant Ω2: Every state transition is deterministic.**
    - Garantizado por la canonicalización determinista CBOR antes de la generación del hash. Dos payloads iguales generan el mismo hash bit a bit.
 3. **Invariant Ω3: Every persisted state is verified.**
-   - Garantizado por el embudo de Verificación ($\Omega = C \circ V$): el commit no existe sin firma Ed25519 válida en la curva elíptica.
+   - Garantizado por el embudo de Verificación (\Omega = C \circ V): el commit no existe sin firma Ed25519 válida en la curva elíptica.
 4. **Invariant Ω4: Every proof is reproducible.**
    - Garantizado por las aserciones formales del código Lean en `proof/lean/`, ligando matemática y ejecución sin estado de red oculto (Zero-Network).
 5. **Invariant Ω5: Every observable history is replayable.**
@@ -76,6 +76,6 @@ Cualquier sistema que respete estas 7 leyes físicas **ES** BABYLON-60.
 En su madurez termodinámica, el sistema no ejecuta código; **resuelve restricciones**.
 El Verificador es el Main Thread del Universo. La capa de aplicación es un esclavo que propone sub-grafos (AST) intentando cumplir las pruebas del Verificador.
 
-$$ \forall \tau : \text{Si } V(\tau) = True \rightarrow C(\tau) \rightarrow \Sigma_{n+1} $$
+ \forall \tau : \text{Si } V(\tau) = True \rightarrow C(\tau) \rightarrow \Sigma_{n+1} 
 
 Esa es la Identidad Matemática Absoluta de BABYLON-60.

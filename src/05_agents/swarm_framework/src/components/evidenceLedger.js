@@ -88,7 +88,7 @@ function drawEvidenceTree(canvas) {
     }
 
     // Draw nodes
-    const t = Date.now() / 1000;
+    const t = performance.now() / 1000;
     for (let i = 0; i < nodes.length; i++) {
       const n = nodes[i];
       const radius = n.level === 0 ? 12 : n.level < 4 ? 6 : 3;

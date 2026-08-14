@@ -55,7 +55,7 @@ class AdversarialFFIBridge(C5RealFFIBridge):
         manifest.varentropy_bps = varentropy_bps
         manifest.active_readers = 0
         manifest.epoch_id = self.epoch_counter
-        manifest.timestamp_ns = int(time.time() * 1e9)
+        manifest.timestamp_ns = int(time.monotonic() * 1e9)
         self.epoch_counter += 1
 
         return manifest, digest_c, raw_text_c, text_len
@@ -130,10 +130,10 @@ def test_contention_stress(bridge: AdversarialFFIBridge) -> bool:
             contention_halts += 1
 
     threads = [threading.Thread(target=producer) for _ in range(50)]
-    t0 = time.time()
+    t0 = time.monotonic()
     for t in threads: t.start()
     for t in threads: t.join()
-    t_eff_ms = (time.time() - t0) * 1000 / 50
+    t_eff_ms = (time.monotonic() - t0) * 1000 / 50
 
     print(f"[*] Resultados de contención: {success_count} éxitos, {contention_halts} colisiones CAS.")
     print(f"[*] Latencia media T_eff: {t_eff_ms:.2f} ms")

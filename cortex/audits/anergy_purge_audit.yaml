@@ -1,0 +1,10 @@
+timestamp: "2026-08-14T11:11:12Z"
+exergy_recovered_mb: 9140
+cortex_taint_hash: "0adbcf24e32c875ee315a78e54fea2d3a2412b8a174322961d4eb1c2457710a0"
+classes_purged:
+  class_a_mb: 9140
+  class_b_wal_purged: 0
+  class_c_pycache_purged: 58
+  class_d_binaries_purged: 0
+  class_e_receipts_purged: 0
+status: COMPLETE

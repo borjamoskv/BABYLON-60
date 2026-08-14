@@ -8,7 +8,7 @@ Este subdirectorio define las reglas de **Contención de Varentropía y Falsaci�
 ## 🔗 Vinculación con Silicio (`src/`)
 
 - **Capa en `src/`**: [`src/02_engines/cortex_guard/`](../../src/02_engines/cortex_guard/)
-- **Propósito**: Ejecutar la vigilancia termodinámica del sistema, activando el *Epistemic Halt* cuando la entropía o la varentropía $H(X)$ sobrepasan los umbrales legales y matemáticos tolerados.
+- **Propósito**: Ejecutar la vigilancia termodinámica del sistema, activando el *Epistemic Halt* cuando la entropía o la varentropía H(X) sobrepasan los umbrales legales y matemáticos tolerados.
 
 ---
 

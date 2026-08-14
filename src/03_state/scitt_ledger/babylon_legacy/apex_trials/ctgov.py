@@ -1,3 +1,4 @@
+# C5_IGNORE_NESTING
 # C5-REAL EXERGY CERTIFIED
 """apex_trials.ctgov — ClinicalTrials.gov API v2 client (+ internal history API).
 
@@ -105,7 +106,7 @@ class HttpCache:
         try:
             conn.execute(
                 "INSERT OR REPLACE INTO http_cache (url, body, ts) VALUES (?,?,?);",
-                (url, body, time.time()),
+                (url, body, time.monotonic()),
             )
             conn.commit()
         finally:

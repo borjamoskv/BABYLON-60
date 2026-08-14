@@ -188,6 +188,18 @@ def obliterate_repo_entropy(repo_path: str) -> int:
     except (subprocess.CalledProcessError, FileNotFoundError):
         pass
 
+def _prune_gone_branch(line: str, repo_path: str):
+    if ": gone]" not in line:
+        return
+    branch_name = line.split()[0].lstrip("*").strip()
+    BashCommand(
+        binary="git",
+        args=("branch", "-D", branch_name),
+        cwd=repo_path,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    ).execute()
+
     try:
         res = BashCommand(
             binary="git",
@@ -198,17 +210,7 @@ def obliterate_repo_entropy(repo_path: str) -> int:
             check=True,
         ).execute()
         for line in res.stdout.splitlines():
-            if ": gone]" in line:
-                branch_name = line.split()[0]
-                if branch_name.startswith("*"):
-                    branch_name = branch_name[1:].strip()
-                BashCommand(
-                    binary="git",
-                    args=("branch", "-D", branch_name),
-                    cwd=repo_path,
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL,
-                ).execute()
+            _prune_gone_branch(line, repo_path)
     except (subprocess.CalledProcessError, FileNotFoundError):
         pass
 
@@ -224,22 +226,31 @@ def obliterate_repo_entropy(repo_path: str) -> int:
     except (subprocess.CalledProcessError, FileNotFoundError):
         pass
 
+def _get_file_size(file_path) -> int:
+    try:
+        return file_path.stat().st_size
+    except OSError:
+        return 0
+
+def _purge_single_cache_dir(d_path: str) -> int:
+    from pathlib import Path
+    purged = 0
+    try:
+        for f in Path(d_path).rglob('*'):
+            if f.is_file():
+                purged += _get_file_size(f)
+        shutil.rmtree(d_path)
+    except OSError:
+        pass
+    return purged
+
     for root, dirs, _files in os.walk(repo_path):
         for cache_dir in ["__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache"]:
-            if cache_dir in dirs:
-                d_path = os.path.join(root, cache_dir)
-                try:
-                    for dr, _, fls in os.walk(d_path):
-                        for f in fls:
-                            file_path = os.path.join(dr, f)
-                            try:
-                                purged_bytes += os.path.getsize(file_path)
-                            except OSError:
-                                pass
-                    shutil.rmtree(d_path)
-                except OSError:
-                    pass
-                dirs.remove(cache_dir)
+            if cache_dir not in dirs:
+                continue
+            d_path = os.path.join(root, cache_dir)
+            purged_bytes += _purge_single_cache_dir(d_path)
+            dirs.remove(cache_dir)
 
     return purged_bytes
 

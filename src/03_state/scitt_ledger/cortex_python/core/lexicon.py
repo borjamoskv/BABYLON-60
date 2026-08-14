@@ -345,14 +345,7 @@ class LexiconLedgerActor:
                     }
 
                     # --- INTERCEPCIÓN EXERGÉTICA CRÍTICA NIVEL L4 ---
-                    if self.bft_node:
-                        if self.bft_node.is_primary:
-                            network_future = asyncio.get_running_loop().create_future()
-                            await self.bft_node.propose_block(temp_seq, entry_hash, shielded_taint, network_future)
-                            await network_future
-                        else:
-                            # Los seguidores registran cuando su propia red alcance el COMMIT
-                            pass
+                    await self._sync_bft_node(temp_seq, entry_hash, shielded_taint)
 
                     # Actualización de contadores locales
                     self.current_seq = temp_seq
@@ -367,6 +360,14 @@ class LexiconLedgerActor:
                 future.set_exception(e)
             finally:
                 self.queue.task_done()
+
+    async def _sync_bft_node(self, temp_seq: int, entry_hash: str, shielded_taint: str):
+        if not self.bft_node:
+            return
+        if self.bft_node.is_primary:
+            network_future = asyncio.get_running_loop().create_future()
+            await self.bft_node.propose_block(temp_seq, entry_hash, shielded_taint, network_future)
+            await network_future
 
 # --- NÚCLEO CENTRAL DEL TRANSDUCTOR ---
 class LexiconEntry:

@@ -37,7 +37,7 @@ class CryptographicLedger:
             print(f"  [COMMIT GATE] Rechazo de Seguridad. Firma inválida para '{intent}'.")
             return False
 
-        block_data = f"{self.latest_hash}|{intent}|{pcc_signature}|{time.time()}"
+        block_data = f"{self.latest_hash}|{intent}|{pcc_signature}|{time.monotonic()}"
         new_hash = hashlib.sha256(block_data.encode()).hexdigest()
 
         self.chain.append({
