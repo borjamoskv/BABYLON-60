@@ -34,7 +34,7 @@ COPY experiments ./experiments
 COPY README.md LICENSE ./
 
 RUN pip install --no-cache-dir --upgrade pip setuptools cffi maturin \
-    && uv sync --frozen --no-dev
+    && uv sync --frozen --no-dev --no-build-isolation
 COPY . .
 
 # Stage 2: Minimal Runtime environment (Non-root user)
