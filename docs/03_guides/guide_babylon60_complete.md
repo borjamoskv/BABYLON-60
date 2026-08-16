@@ -125,22 +125,22 @@ Accessible via **`⌘ 8`** or by clicking the diamond icon (`◈`) in the sideba
 BABYLON·60 is compiled into a standalone desktop application using **Tauri v2** and **Rust**.
 
 ### ⚙️ Build Requirements
-* The Tauri configuration is stored in [babylon60-ide/src-tauri/tauri.conf.json](../../apps/babylon60-ide/src-tauri/tauri.conf.json).
+* The Tauri configuration is stored in [apps/babylon60-ide/src-tauri/tauri.conf.json](../../apps/babylon60-ide/src-tauri/tauri.conf.json).
 * A unique bundle identifier is required: `"identifier": "com.babylon60.ide"`.
 * System icons must be generated from the square source image `public/logo_icon.jpg` using the Tauri CLI:
   ```bash
-  cd babylon60-ide && npx --package @tauri-apps/cli tauri icon ../public/logo_icon.jpg
+  cd apps/babylon60-ide && npx --package @tauri-apps/cli tauri icon ../public/logo_icon.jpg
   ```
   This generates all PNG sizes, `icon.icns` for macOS, and `icon.ico` for Windows in `src-tauri/icons/`.
 
 ### 🏗️ Compilation & DMG Generation Command
 The release build compiles all Rust crate dependencies in release mode and packages the macOS bundle:
 ```bash
-cd babylon60-ide && npx --package @tauri-apps/cli tauri build
+cd apps/babylon60-ide && npx --package @tauri-apps/cli tauri build
 ```
 The output assets are compiled to:
-* **macOS Bundle**: `babylon60-ide/src-tauri/target/release/bundle/macos/BABYLON60.app`
-* **DMG Installer**: `babylon60-ide/src-tauri/target/release/bundle/dmg/BABYLON60_0.1.0_aarch64.dmg`
+* **macOS Bundle**: `apps/babylon60-ide/src-tauri/target/release/bundle/macos/BABYLON60.app`
+* **DMG Installer**: `apps/babylon60-ide/src-tauri/target/release/bundle/dmg/BABYLON60_0.1.0_aarch64.dmg`
 
 ---
 
