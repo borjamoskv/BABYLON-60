@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-ENV PATH="/root/.local/bin:$PATH"
+ENV PATH="/root/.local/bin:/opt/cargo/bin:$PATH"
 
 COPY pyproject.toml uv.lock Cargo.toml Cargo.lock* ./
 COPY crates ./crates
@@ -33,7 +33,8 @@ COPY src ./src
 COPY experiments ./experiments
 COPY README.md LICENSE ./
 
-RUN uv sync --frozen --no-dev
+RUN pip install --no-cache-dir maturin cffi setuptools \
+    && UV_NO_BUILD_ISOLATION=1 uv sync --frozen --no-dev
 COPY . .
 
 # Stage 2: Minimal Runtime environment (Non-root user)
