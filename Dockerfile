@@ -33,7 +33,8 @@ COPY src ./src
 COPY experiments ./experiments
 COPY README.md LICENSE ./
 
-RUN pip install --no-cache-dir maturin cffi setuptools \
+RUN uv venv \
+    && uv pip install maturin cffi setuptools \
     && uv sync --frozen --no-dev
 COPY . .
 
