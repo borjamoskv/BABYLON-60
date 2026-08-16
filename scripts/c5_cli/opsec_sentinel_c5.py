@@ -5,6 +5,7 @@
 # ============================================================================
 import datetime
 import hashlib
+import ipaddress
 import json
 import os
 import re
@@ -31,6 +32,49 @@ TARGET_PATTERNS: dict[str, re.Pattern[str]] = {
     "AWS_SECRET_KEY": re.compile(r"(?<![A-Za-z0-9/+=])[A-Za-z0-9/+=]{40}(?![A-Za-z0-9/+=])"),
     "CANARY_WEBHOOK": re.compile(r"canarytokens\.com|webhook\.site"),
 }
+
+# Allowlist C5 (auditoría 2026-08): SOLO falsos positivos verificados por forma
+# (SHA git, txid, hash pineado de Action, fixture dummy, constante, fingerprint),
+# NUNCA por valor del secreto. Formato: (prefijo_de_ruta_relativa, regla | "*").
+# Precedente jul-2026: fixtures dummy (fake_aws_credentials, CANARY_TOKENS.md).
+PATH_RULE_ALLOWLIST: tuple[tuple[str, str], ...] = (
+    (".git-blame-ignore-revs", "*"),                        # SHAs de commits git (40-hex)
+    (".gitleaks.toml", "*"),                                # definiciones de patrones del escáner
+    ("babylon60.egg-info/", "*"),                           # artefacto generado por pip install -e .
+    ("tools/audit/snapshots/", "*"),                        # commit_sha en manifiestos de auditoría
+    ("data/L1_sink/", "*"),                                 # txids Bitcoin (hex) en OP_RETURN
+    ("docs/", "*"),                                         # hashes/ejemplos citados en prosa
+    ("experiments/anvil_yung/lib/", "*"),                   # forge-std vendored (Foundry)
+    ("experiments/1_Operaciones_Activas/verifiable_inference_suite/run_verifiable_suite.py", "AWS_SECRET_KEY"),  # banners repetitivos (uniq=1)
+    ("tests/", "*"),                                        # fixtures dummy y endpoints loopback de test
+    ("apps/", "PLAIN_HTTP_C2"),                             # defensa en profundidad (la regla ya ignora loopback/RFC1918)
+    ("crates/strike-rs/src/bin/c5_cli.rs", "PLAIN_HTTP_C2"),
+    ("packages/babylon60/extensions/", "PLAIN_HTTP_C2"),
+    (".github/workflows/", "AWS_SECRET_KEY"),               # SHAs de Actions pineadas (pinning = buena práctica)
+    ("scripts/runner.py", "CANARY_WEBHOOK"),                # canary intencional (tripwire documentado)
+    ("scripts/c5_cli/babylon_mail_cli.py", "AWS_SECRET_KEY"),    # fingerprint ed25519 (hash, no clave)
+    ("scripts/c5_demos/", "*"),                             # fixtures demo 'leaked_*' dummy
+    ("scripts/c5_quality_gates/secret_swarm_auditor.py", "*"),   # patrones del propio detector
+    ("scripts/c5_quality_gates/audit_100_agents.py", "AWS_SECRET_KEY"),  # constante en docstring
+)
+
+
+def _is_allowlisted(rel_path: str, rule: str) -> bool:
+    rel: str = rel_path.replace(os.sep, "/")
+    return any(
+        (scope == "*" or scope == rule)
+        and (rel == prefix.rstrip("/") or rel.startswith(prefix))
+        for prefix, scope in PATH_RULE_ALLOWLIST
+    )
+
+
+def _is_local_http_endpoint(url_match: str) -> bool:
+    """http://127.0.0.1 / RFC1918 son sockets locales de desarrollo, nunca C2 plaintext."""
+    try:
+        ip = ipaddress.ip_address(url_match.rsplit("//", 1)[-1])
+    except ValueError:
+        return False
+    return ip.is_loopback or ip.is_private or ip.is_link_local
 
 
 class OpsecSentinelC5:
@@ -67,6 +111,10 @@ class OpsecSentinelC5:
                 if v_type == "PLAINTEXT_CREDIT_CARD":
                     valid_cards = [m for m in matches if self._luhn_check(m)]
                     if not valid_cards:
+                        continue
+                if v_type == "PLAIN_HTTP_C2":
+                    matches = [m for m in matches if not _is_local_http_endpoint(m)]
+                    if not matches:
                         continue
                 hash_sig = hashlib.sha3_256(content[:1000].encode("utf-8")).hexdigest()[:16]
                 severity = "CRITICAL_P0" if v_type in ("PLAINTEXT_CREDIT_CARD", "PRIVATE_KEY_HEADER") else "CRITICAL_P1"
@@ -110,6 +158,11 @@ class OpsecSentinelC5:
                     if fpath.suffix in (".pyc", ".db", ".png", ".jpg", ".pdf", ".mp4", ".lock"):
                         continue
                     file_violations = self.audit_file(fpath)
+                    rel_path: str = str(fpath.relative_to(self.workspace))
+                    file_violations = [
+                        v for v in file_violations
+                        if not _is_allowlisted(rel_path, v["violation_type"])
+                    ]
                     for v in file_violations:
                         conn.execute(
                             "\n                            INSERT INTO opsec_audit_log (file_path, violation_type, snippet_hash, severity, timestamp)\n                            VALUES (?, ?, ?, ?, ?)\n                        ",

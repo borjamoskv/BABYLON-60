@@ -5,7 +5,7 @@ use pest_derive::Parser;
 use crate::ast::*;
 
 #[derive(Parser)]
-#[grammar = "nul.pest"]
+#[grammar = "nul_grammar.pest"]
 pub struct NulParser;
 
 pub fn parse_circuit(input: &str) -> Result<Circuit> {

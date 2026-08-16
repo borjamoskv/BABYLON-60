@@ -3,6 +3,15 @@
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 import os
+import tempfile
+
+# INV_C5_ENV: exergy_optimizer_agent exige BABYLON_HOME/GEMINI_HOME explícitos en
+# import time (Path.home() prohibido). Sandbox aislado fijado ANTES del import;
+# sin él, pytest collection crashea con RuntimeError en cualquier runner sin esas envs.
+_EXERGY_SANDBOX = tempfile.mkdtemp(prefix="exergy_agent_test_")
+os.environ.setdefault("BABYLON_HOME", _EXERGY_SANDBOX)
+os.environ.setdefault("GEMINI_HOME", _EXERGY_SANDBOX)
+
 from scripts.c5_thermo.exergy_optimizer_agent import evaluate_gelabp, ExergyFailed, ComplexityVisitor
 import ast
 

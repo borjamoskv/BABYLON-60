@@ -18,7 +18,7 @@ jobs:
         toolchain: stable
         
     - name: Run Loom Data Race Verification
-      run: cargo test --test seqlock_loom --features loom --release
+      run: cargo test --test seqlock_loom --release
       env:
         LOOM_MAX_PREEMPTIONS: 2
         RUSTFLAGS: "--cfg loom"

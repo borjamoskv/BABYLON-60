@@ -2,10 +2,6 @@
 name = "strike_rs"
 version = "0.1.0"
 edition = "2024"
-license = "Apache-2.0 OR MIT"
-description = "High-performance I/O and cryptographic primitives for BABYLON-60"
-repository = "https://github.com/borjamoskv/BABYLON-60"
-authors = ["Borja Moskv <borjamoskv@github.com>"]
 
 [lib]
 name = "strike_rs"
@@ -16,7 +12,6 @@ blake3 = "1.8.5"
 petgraph = "0.8.3"
 rusqlite = { version = "0.40.1", features = ["bundled"] }
 ring = "0.17.8"
-inotify = "0.10.2"
 signal-hook = "0.3.17"
 pyo3 = { version = "0.21.2" }
 libc = "0.2.186"
@@ -34,14 +29,19 @@ tokio-stream = "0.1.19"
 
 [dev-dependencies]
 proptest = "1.6.0"
-pyo3 = { version = "0.21.2", features = ["auto-initialize"] }
-
 
 [features]
 extension-module = ["pyo3/extension-module"]
 
 [build-dependencies]
 tonic-build = { version = "0.12", features = ["prost"] }
+protoc-bin-vendored = "3"
 
 [dependencies.iceoryx2]
 version = "0.3.0"
+
+# inotify es Linux-only (inotify-sys no compila en Windows: libc sin O_CLOEXEC/O_NONBLOCK).
+# Su único consumidor es src/bin/bft_interceptor.rs, ya cfg-gated.
+[target.'cfg(target_os = "linux")'.dependencies]
+inotify = "0.10.2"
+
