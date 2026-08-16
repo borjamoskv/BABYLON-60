@@ -68,9 +68,9 @@ A traditional, standard-density layout:
 
 ---
 
-## 🛜 3. BACKEND ROUTES & API CONTRACTS
+## 🛜 3. BACKEND ROUTES & KERNEL CONTRACTS
 
-The backend is built with FastAPI and runs on a local loopback address, enforcing the **Zero-Network Policy** (no outbound telemetry or external internet calls).
+The core intelligence is driven by the **MOSKV-1 APEX Sovereign Kernel**, a strict Causal-Determinist Rust binary. The backend Python bridge delegates execution to this kernel via a zero-overhead `os.execv` process handoff, and optional Python embeddings are exposed through a native `pyo3` integration. This architecture enforces the **Zero-Network Policy** (no outbound telemetry or external internet calls) while maintaining memory safety and extreme performance.
 
 ### ⧉ Ledger Inspection (`/api/ledger/*`)
 * `GET  /api/ledger/stats`
