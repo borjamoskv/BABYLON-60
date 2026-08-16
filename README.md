@@ -57,6 +57,7 @@ ruff check
 | 04 Primitives  | `src/04_primitives/`                                        | Categorical Logic & Active Inference  |
 | 05 Swarm       | `src/05_agents/`                                            | Multi-Agent Swarm Framework           |
 | 06 Apps        | `src/06_apps/babylon60_ide/`                                | Babylon60 IDE (Vite/TS/React)         |
+| 06 Apps        | `src/06_apps/mcp_c5_abi_bridge/`                            | Bare-Metal C-ABI MCP Server & Landauer Purge |
 
 ## 🌌 MONOREPO CARTOGRAPHY · 300 DISPARATE STARS MATRIX
 

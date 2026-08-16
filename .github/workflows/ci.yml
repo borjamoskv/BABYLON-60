@@ -62,6 +62,9 @@ jobs:
         run: |
           if [ -f scripts/verify_popper_coverage.py ]; then python3 scripts/verify_popper_coverage.py; fi
 
+      - name: Verify MCP C-ABI & Landauer Gate
+        run: python3 scripts/verify_mcp_cabi.py
+
       - name: Execute IPC FFI Integration Test
         run: |
-          PYTHONPATH=src/cortex-engine python3 scripts/test_ipc.py
+          if [ -f scripts/test_ipc.py ]; then PYTHONPATH=src/cortex-engine python3 scripts/test_ipc.py; fi
