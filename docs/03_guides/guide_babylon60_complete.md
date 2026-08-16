@@ -148,10 +148,14 @@ The output assets are compiled to:
 
 The repository enforces strict BFT (Byzantine Fault Tolerance) consistency checks to protect against code-injection and credential leakage:
 
-### 🔍 Secret Swarm Auditor (`scripts/canary_check.py`)
+### 🔍 Secret Swarm Auditor (`scripts/c5_quality_gates/secret_swarm_auditor.py`)
 Scans all active project directories (excluding `.venv`, `node_modules`, `dist`, and `target`) for high-entropy strings and hardcoded credentials (AWS, RSA private keys, JWTs, Github tokens, Google APIs).
-* Run command: `python3 scripts/canary_check.py`
+* Run command: `python3 scripts/c5_quality_gates/secret_swarm_auditor.py`
 * Enforces entropy threshold $> 4.8$ for any word token longer than 20 characters.
+
+### 🦅 Canary Guard (`scripts/canary_check.py`)
+Verifies that honeypot canary tokens (planted fake credentials) remain active in the repository tree to detect external intrusion attempts or cloning by unauthorized actors.
+* Run command: `python3 scripts/canary_check.py`
 
 ### 🧪 Test & Regress Verification
 The entire test suite compiles and runs against the isolated virtual environment `.venv` interpreter (Python 3.12/3.14):
