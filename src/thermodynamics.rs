@@ -41,8 +41,7 @@ pub const BITS_PER_PUBLISH: u64 = 384;
 
 /// Suelo de disipación por publicación (en attojoules × 1000):
 /// 384 × 2.87 aJ ≈ 1101.88 aJ ≈ 1.10×10⁻¹⁸ J
-pub const LANDAUER_FLOOR_TOTAL_AJ_X1000: u64 =
-    BITS_PER_PUBLISH * LANDAUER_FLOOR_AJ_PER_BIT_X1000;
+pub const LANDAUER_FLOOR_TOTAL_AJ_X1000: u64 = 1_102_080;
 
 /// Cota superior de publicaciones antes del envolvimiento de epoch_id (u64).
 /// 2⁶⁴ = 18_446_744_073_709_551_616 publicaciones.
@@ -53,11 +52,10 @@ pub const EPOCH_WRAPAROUND_YEARS_FLOOR: u64 = 584;
 // Verificaciones en tiempo de compilación (INV-3)
 // ---------------------------------------------------------------------------
 const _THERMO_ASSERTS: () = {
-    // Verificar que la constante de Landauer es positiva y no desborda u64
+    // Verificar que la constante de Landauer es positiva y coincide con la fórmula
     assert!(LANDAUER_FLOOR_TOTAL_AJ_X1000 > 0);
     assert!(BITS_PER_PUBLISH == 384);
-
-    // La cota de Landauer total debe ser ≥ 384×2870 = 1_101_880 aJ×1000
+    assert!(LANDAUER_FLOOR_TOTAL_AJ_X1000 == BITS_PER_PUBLISH * LANDAUER_FLOOR_AJ_PER_BIT_X1000);
     assert!(LANDAUER_FLOOR_TOTAL_AJ_X1000 >= 1_101_880);
 
     // Cota de envolvimiento ≥ 500 años (holgura conservadora)
