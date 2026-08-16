@@ -23,7 +23,7 @@ def report_violation(rule: str, detail: str):
 def iter_files(root: Path, pattern: str):
     banned_dirs = {".venv", "node_modules", "target", "scratch", ".git", ".jj", "dist", "build"}
     for file in root.rglob(pattern):
-        if not any(banned in file.parts for banned in banned_dirs):
+        if file.is_file() and not any(banned in file.parts for banned in banned_dirs):
             yield file
 
 # --- A. [KERNEL & SILICIO] ---
@@ -49,7 +49,11 @@ def verify_markdown_latex(root: Path):
             continue
         try:
             content = md_file.read_text(errors="ignore")
-            if re.search(r'\$\$.+?\$\$', content, re.DOTALL) or re.search(r'(?<!\$)\$(?!\$).+?(?<!\$)\$(?!\$)', content):
+            if (
+                re.search(r'\$\$.+?\$\$', content, re.DOTALL) or 
+                re.search(r'(?<!\$)\$(?!\$).+?(?<!\$)\$(?!\$)', content) or
+                re.search(r'\\(mathcal|mathbb|rightarrow|frac|text|implies|blacksquare|lim|sum)', content)
+            ):
                 report_violation("ESTETICA_LATEX_01", f"Raw LaTeX detected in {md_file.name}. Use UTF-8 Universal Mathematics.")
         except Exception:
             pass

@@ -10,9 +10,9 @@ Donde S es el Espacio de Estados, T es el conjunto de Transiciones, y C es el co
 
 ## 1. El Hipergrafo de Restricciones (H)
 
-A diferencia de un DAG, donde los vértices se conectan de a pares, aquí modelamos **Hiperaristas** que representan axiomas. Cada Invariante (\Omega_i) es una hiperarista que agrupa a todos los módulos necesarios para preservarlo.
+A diferencia de un DAG, donde los vértices se conectan de a pares, aquí modelamos **Hiperaristas** que representan axiomas. Cada Invariante (Ω_i) es una hiperarista que agrupa a todos los módulos necesarios para preservarlo.
 
-**Espacio de Invariantes (\Omega):**
+**Espacio de Invariantes (Ω):**
 -   **Ω1:** Deterministic Transition
 -   **Ω2:** Immutable History
 -   **Ω3:** Verifiable Transition
@@ -26,9 +26,9 @@ A diferencia de un DAG, donde los vértices se conectan de a pares, aquí modela
 Al despegar la identidad del sistema de sus archivos, establecemos la demostración de equivalencia:
 
 > **Teorema de Equivalencia:**
-> Sea \Omega el conjunto de invariantes.
+> Sea Ω el conjunto de invariantes.
 > Dos implementaciones distintas A y B (ej. una en Python y otra en Rust puro) son arquitectónicamente equivalentes sí y sólo sí:
->  Preserve(A, \Omega) = Preserve(B, \Omega) 
+>  Preserve(A, Ω) = Preserve(B, Ω) 
 
 **Corolario:** El Kernel no es un conjunto fijo de archivos; es cualquier instancia de código capaz de implementar el *Transversal Mínimo (Hitting Set)* que corta el Hipergrafo de Restricciones.
 
@@ -38,7 +38,7 @@ Al despegar la identidad del sistema de sus archivos, establecemos la demostraci
 
 Sustituimos la definición abstracta de "código feo" por una medición de fricción termodinámica pura:
 
- \text{Technical Debt} = Complexity(I_{actual}) - Complexity(Minimal(\Omega)) 
+ Technical Debt = Complexity(I_{actual}) - Complexity(Minimal(Ω)) 
 
 La deuda es la distancia (entropía) entre la complejidad de la implementación actual y el *Hitting Set* óptimo requerido para preservar los invariantes.
 
@@ -70,7 +70,7 @@ Metrics:
 
 ### Significado del Architectural Drift
 El índice de deriva actual es `0.00` porque establecemos este commit como el Génesis del certificado.
- \text{Architectural Drift} = \text{Distance}(Kernel(commit_n), Kernel(commit_{n-1})) 
+ Architectural Drift = Distance(Kernel(commit_n), Kernel(commit_{n-1})) 
 A partir de este momento, cualquier commit que expanda el tamaño del Hitting Set (incrementando el porcentaje desde 0.16%) incrementará el Drift y denotará una regresión arquitectónica que debe ser purgada.
 
 La auditoría de BABYLON-60 ya no es un documento estático. Es este **Certificado Computable**.

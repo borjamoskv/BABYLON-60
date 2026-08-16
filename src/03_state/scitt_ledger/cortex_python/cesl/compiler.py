@@ -159,9 +159,7 @@ class CESLLexer:
             return
         
         self._advance()
-
-        tokens.append(CESLToken(TokenType.EOF, "", self.line, self.column))
-        return tokens
+        return
 
     def _advance(self, count: int = 1) -> None:
         for _ in range(count):

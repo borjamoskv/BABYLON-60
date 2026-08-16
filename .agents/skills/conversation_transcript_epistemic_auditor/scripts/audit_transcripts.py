@@ -32,9 +32,7 @@ def categorize(initial_prompt, all_prompts, files_touched):
     p = (initial_prompt + " " + " ".join(all_prompts)).lower()
     files = " ".join(files_touched).lower()
 
-    if any(k in p or k in files for k in ["naroa", "naroarte", "naroa.online", "deploy.sh", "vercel"]):
-        return "Naroa Gutierrez Gil (naroa.online)"
-    elif any(k in p or k in files for k in ["escohotado", "libertad", "verdad", "caos", "enemigos del comercio", "prigogine", "ultradiano", "genialidad"]):
+    if any(k in p or k in files for k in ["escohotado", "libertad", "verdad", "caos", "enemigos del comercio", "prigogine", "ultradiano", "genialidad"]):
         return "Filosofía Escohotado & Epistemología"
     elif any(k in p or k in files for k in ["resend", "smtp", "mail", "hotmail", "babylon60", "spamhaus", "cloudflare", "routing", "webhook", "pixel"]):
         return "Infraestructura Email & Delivery"

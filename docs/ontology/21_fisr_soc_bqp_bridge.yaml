@@ -16,6 +16,7 @@ Status: "Frozen"
 Bridge_1_FISR_SOC:
   FISR_Side:
     Teorema: "7.1 (Límite de Escalabilidad Termodinámica)"
+    k
     Condición_Crítica: "Δ(δ_○) ≥ k₁ + k₂"
     Significado: "El coste de fricción interna domina al presupuesto base → Singularidad Composicional"
 

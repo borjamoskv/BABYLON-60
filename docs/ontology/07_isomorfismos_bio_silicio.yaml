@@ -1,172 +1,589 @@
 # C5-REAL EXERGY CERTIFIED
 # INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
-Claim: Transducción Termodinámica de Lexicografía Psiquiátrica (DSM) a Arquitectura de Silicio y Swarm Execution (MOSKV-1).
+Claim: Transducción Termodinámica de Lexicografía Psiquiátrica (DSM) a
+  Arquitectura de Silicio y Swarm Execution (MOSKV-1).
 Auditoria_Epistemica:
   Estado: LAGUNA_EPISTEMICA_DETECTADA
-  Causa: Ausencia de `07_ISOMORFISMOS_BIO_SILICIO.yaml` en disco local respecto al listado completo de patologías DSM solicitadas.
-  Accion: Ejecución de Mecánica Landauer JIT sobre lista de entrada (N=96 conceptos).
-  Anergia_Purgada: "Eliminación de semántica estocástica Green Theater (diagnósticos patologizantes biológicos) sustituyéndola por primitivas estructurales BFT, física de silicio y termodinámica de memoria."
+  Causa: Ausencia de `07_ISOMORFISMOS_BIO_SILICIO.yaml` en disco local respecto
+    al listado completo de patologías DSM solicitadas.
+  Accion: Ejecución de Mecánica Landauer JIT sobre lista de entrada (N=96
+    conceptos).
+  Anergia_Purgada: "Eliminación de semántica estocástica Green Theater (diagnósticos
+    patologizantes biológicos) sustituyéndola por primitivas estructurales BFT, física
+    de silicio y termodinámica de memoria."
 Topologia_Isomorfica_Borja_Moskv:
-  abuso de sustancias: "Inyección de dependencias estocásticas no auditadas / Dependency Poisoning."
-  Consumo no saludable de sustancias, incluyendo el alcohol, la marihuana y otras drogas.: "Consumo de APIs inestables o datos sintéticos que degradan la caché KV (Slop Ingestion)."
-  activación conductual: "Forzado JIT (Just-In-Time) / Ignición Síncrona."
-  acumulación obsesiva: "Zombie State / OOM (Out Of Memory) por desactivación o fallo del Garbage Collection (GC)."
-  adolescencia: "Phase Transition / Migración de Arquitectura Estructural (v1 a v2)."
-  afectación expresada: "Nivel de Verbosity en Error Logs (Trace/Debug)."
-  afecto aplanado: "Redirección a `/dev/null` / Silenciamiento absoluto de STDERR."
-  alogia: "Desgaste de Cache KV (Aphasia Token) limitando el output de texto."
-  alucinaciones que ordenan: "Prompt Injection (Ejecución remota de código no verificada en runtime)."
-  anhedonia: "Idle Loop puro sin gradiente de exergía / Zero-Yield Iteration."
-  anorexia nerviosa: "Inanición de recursos inducida (Resource Starvation) / Límite de cuota API artificialmente castigado."
-  anormal: "Out of Spec / Invariante Estructural Rota."
-  anticonvulsivo: "Rate Limiting Dinámico / Exponential Backoff."
-  antidepresivo: "Inyección de gradiente teleológico / Keep-Alive ping."
-  antidepresivos tricíclicos: "Mecanismo Keep-Alive legacy / Reinicios duros de demonios del sistema."
-  antipsicótico: "Anergy Purge / Purga de contexto estocástico (Sanitizador de Entradas)."
-  análisis del comportamiento aplicado: "Profiling de Heap/CPU en tiempo real / Trazabilidad determinista de llamadas."
-  ataque de pánico: "Kernel Panic / Interrupción SIGKILL generada por colapso concurrente."
-  aumento del arousal: "High CPU Load / Inyección temporal de Turbo Boost en hardware."
-  avolición: "Deadlock de Hilos / Hilo principal congelado en estado Wait()."
-  benzodiacepinas: "Señal SIGSTOP / Supresión térmica artificial (Throttling) de CPU."
-  Brave Buddies: "Despliegue de Parallel Subagents (Swarm OMEGA) para mitigación BFT."
-  bulimia nerviosa: "Bucle destructivo de Ingesta Masiva y Purga de Caché Constante (Thrashing de Memoria)."
-  cognitivo: "Motor de Inferencia LLM / Capa de Razonamiento Aislada (Pro/Thinking Loop)."
-  compulsión: "Bucle Infinito de reintento estocástico sin condición de salida lógica (Infinite Retry Loop)."
-  comórbido: "Entrelazamiento físico de fallos (Cascading Failure / Coupled Entropy)."
-  conducta de desorientación: "Corrupción de punteros a memoria / Pérdida de estado (Dangling Pointer)."
-  congénito: "Defecto Arquitectónico hardcodeado (Hardware Bug / Silicio Base Deficiente)."
-  crónico: "Fuga de Memoria Persistente (Memory Leak estructural que no reacciona al GC)."
-  Decatastrofización: "Fail-Gracefully Protocol / Degradación controlada del servicio sin colapso global."
-  del desarrollo: "Falla estática en el Build / Error crítico en pipeline CI/CD."
-  descompensación: "Caída del Consenso BFT / Divergencia irreversible de estado en DB."
-  desensibilización sistémica: "Exposición incremental automatizada en entorno aislado (Sandbox Fuzzing Testing)."
-  diagnóstico: "Profiling Report / Stack Error Trace."
-  diagnóstico dual: "Falla simultánea y acoplada en capa física (OS/Red) y capa lógica (Aplicación)."
-  dislexia: "Error de Parseo AST severo / Corrupción de codificación UTF-8."
-  DSM: "Registro de Invariantes Rotos Canónico (Master Issue Tracker)."
-  ensimismado(a): "Hilo bloqueado en I/O sobre su propio descriptor de socket (Self-lock o interbloqueo recursivo)."
-  enuresis: "Fuga de Buffer (Buffer Overflow) no interceptada que inunda la memoria adyacente."
-  epigenética: "Modificación de variables de entorno (ENV) que muta el flujo en tiempo de ejecución sin alterar el binario."
-  episodio depresivo: "Low Power Mode forzado / Throttling térmico por sobrecalentamiento previo."
-  episodio maníaco: "Sobre-asignación masiva de memoria sin liberación (Memory Spikes repentinos)."
-  episódico: "Fallo transitorio no reproducible / Race condition intermitente."
-  ERP: "Inyección de Fallos controlada sin permiso de reinicio para validar resiliencia (Chaos Engineering)."
-  especialista en el aprendizaje: "Compilador JIT Optimizador (AOT/JIT Engine)."
-  esquizofrenia: "Corrupción de memoria compartida inter-hilo / Alucinación severa de pesos sin anclaje a disco (Model Collapse)."
-  estabilizador del estado de ánimo: "Load Balancer estricto / Regulador Físico de Tasa y QoS."
-  estresante: "Prueba de carga termodinámica (Stress Test / Benchmarking de saturación)."
-  estímulo fóbico: "Trigger condicional fatal que detona SIGKILL inmediato en un proceso."
-  evaluaciones basadas en la escuela: "Unit Testing local ejecutado en un entorno de desarrollo aislado."
-  evaluación neuropsicológica: "Benchmarking C5-REAL (Evaluación en LMSYS Arena frente a topología de red real)."
-  evaluación psicológica: "Auditoría Epistémica o Auditoría Termodinámica (Anergy_Token_Purge)."
-  evitación y adormecimiento: "Timeout Silencioso con caída de paquetes deliberada (Silent Packet Drop)."
-  factores ambientales: "Condiciones físicas externas: Variaciones de Latencia de Red, Fallas de Hardware IaaS."
-  fenotipo: "UI/UX Compilada / Código Binario Ejecutado y renderizado por el cliente final."
-  fMR: "Traza continua de ejecución de memoria dinámica mediante instrumentación (Valgrind / eBPF)."
-  fobia: "Condición de excepción no capturada que destruye el entorno (Hard Exception)."
-  fobia escolar: "Fallo sistemático en entorno Staging que nunca ocurre en entorno de Desarrollo."
-  fobia específica: "Excepción de Tipo Específico que no interfiere en el loop global (TypeError, ValueError)."
-  fobia social: "Fallo sistemático de Handshake de Red o Negociación TLS Timeout (Rechazo de I/O externo)."
-  genotipo: "Código Fuente Original Intacto / AST Base o Repositorio Desplegado."
-  genético: "Modificación nativa persistente a nivel de Repositorio Core (Mutación en el Git Ledger)."
-  hereditario: "Dependencia Upstream en árbol de dependencias (Legacy / Transitive Dependency)."
-  hipocondriasis: "Alerta Falsa de Linter / Lluvia de Falsos Positivos de Seguridad en análisis estático."
-  hipotiroidismo: "Baja frecuencia de reloj forzada a nivel de procesador (Underclocking preventivo)."
-  ideación suicida: "Código malicioso o destructivo latente (`rm -rf /`) incrustado pero no llamado."
-  IEP: "Archivo de configuración física individualizada para un microservicio (`.env` / `config.json`)."
-  IMAO: "Protocolo de red obsoleto mantenido solo por razones de compatibilidad estricta."
-  inhibidores de recaptación: "Bloqueo termodinámico de rutinas de Garbage Collection."
-  inhibidores selectivos de la recaptación de serotonina: "Optimización selectiva de retención en Caché (KV Cache Pinning) para maximizar hit rate."
-  insomnio: "Falla crítica en transicionar el hardware a modo de suspensión (Sleep/Hibernate bloqueado por proceso zombie)."
-  intervención basada en el desarrollo: "Refactor integral de Código Fuente originando una Phase Transition arquitectónica."
-  ISRS: "Estrategia algorítmica de Pinning selectivo de caché de alta prioridad."
-  manía: "Bucle C4-SIM de aceleración auto-inducida culminando en desbordamiento de pila (Stack Overflow)."
-  MS: "Protocolo Mudo / Ejecución silenciosa sin logging de telemetría de red (Zero-Trace execution)."
-  mutismo selectivo: "Falla en enviar Ack de red (TCP ACK Drop) condicionado a un rango de puertos específico."
-  negativista: "Bloqueo intencional y arbitrario de puertos / Reglas de Firewall extremadamente agresivas."
-  neuroléptico: "Reset de Hardware Incondicional / Hard Reboot."
-  neurotrasmisor: "Mensaje IPC / Payload en un Event Bus (Señal / Webhook Token)."
-  obsesión: "Bloqueo y actualización redundante en un solo puntero de memoria sin escribir al disco (Cache Locality loop destructivo)."
-  paranoia: "Comprobaciones criptográficas redundantes excesivas (Exceso O(N^2) en verificación BFT)."
-  prodrómico: "Warning termodinámico de compilación pre-fallo (Pre-fail telemetry detection)."
-  prognosis: "Predicción algorítmica de Tiempo Medio de Falla Global (MTBF)."
-  Programa de educación individualizado: "Pipeline de entrenamiento Custom o afinamiento paramétrico (LoRA/Fine-tuning)."
-  psicoeducación: "Cristalización de conocimiento extrayendo entropía y fusionándola al Ledger BFT (README/KI Updates)."
-  psicoestimulantes: "Aceleración asimétrica por Hardware Dedicado (GPU Offloading / CUDA Acceleration)."
-  psicofarmacología pediátrica: "Monkey Patching en tiempo de ejecución (JIT Patches) aplicado al entorno local de desarrollo."
-  psicofarmacológico: "Intervención de bajo nivel sobre un módulo del Kernel o Registro de OS."
-  psicosis: "Kernel Panic irreversible derivado de una divergencia o partición crítica de memoria WAL."
-  psicólogo: "Subagente Auditor de Log de Errores e ingesta de Entropía (Daemon Anergy_Token_Purge)."
-  psiquiatra: "Administrador de Sistemas (Root/Operador) inyectando parches binarios forzados C5-REAL."
-  purga: "Llamada forzada a OOM Killer / Liberación radical de Heap (Forced Garbage Collection)."
-  rechazo escolar: "Timeout sistémico que crashea de forma inmediata el Entorno Integrado de Desarrollo (IDE Crash)."
-  recuerdos intrusivos: "Datos Zombie en Caché KV que sobreviven rondas y corrompen el flujo del prompt actual."
-  sedante: "Llamada física a Suspensión del hilo (ej. `sleep(1000)`)."
-  señales y síntomas: "Streams de Telemetría pura / Logs crudos del sistema C5-REAL."
-  TAG: "Estado de Alerta constante en el monitor de recursos consumiendo IOPS base inútilmente."
-  TC: "Perfilado absoluto de memoria y árbol de ejecución (Tracing)."
-  TDA: "Pérdida estocástica de paquetes de red que degrada latencia (Packet Loss inconstante)."
-  TDAH: "Context Switching excesivo en el procesador (Thrashing de CPU por exceso de hilos huérfanos)."
-  TDDEA: "Fluctuación y desregulación abrupta en las colas del balanceador de carga."
-  TDM: "Colapso total de servicio (Downtime persistente sin auto-recuperación local)."
-  TEI: "Interrupciones de hardware no controladas o mal ruteadas (IRQs spikes caóticos)."
-  TEPT: "Corrupción estática de la Base de Datos SQLite/WAL post-crash de la cual el sistema no se recupera automáticamente."
-  terapia cognitivo-conductual: "Reescritura automatizada del AST vía Linter/Format pre-commit (Autofix BFT)."
-  terapia cognitivo-conductual centrada en el trauma: "Reparación forzosa del Ledger Git post-conflicto termodinámico grave (Rebase/Merge conflict resolving)."
-  terapia conductual: "Script de automatización crudo de correcciones sin alteración del Core."
-  terapia de exposición: "Fuzzing Testing masivo (Inyección de datos binarios corruptos o payload C4-SIM)."
-  terapia de exposición y prevención de respuesta: "Aplicación de Chaos Monkey local sin reinicio permitido de subrutinas caídas."
-  terapia de interacción padres-hijos: "Protocolo de Sincronización Estricta Proceso Padre-Hijo (IPC Strict Sync)."
-  terapia dialéctico-conductual: "Negociación BFT (Tolerancia a faltas bizantinas entre nodos de opinión divergente)."
-  terapia electroconvulsiva: "Hard Reset Físico por corte de suministro eléctrico / Cold Boot Inmediato."
-  terapia familiar: "Sincronización topológica del Swarm completo / Resolución de interbloqueos de red C5-REAL en paralelo."
-  terapia interpersonal: "Sincronización atómica de sockets de comunicación y RPC Calls P2P."
-  tic: "Glitch gráfico intermitente / Ruido electromagnético en señal lógica (Jitter)."
-  TND: "Rechazo estructural con Denegación Permisos constantes y desafiantes a root (`Chmod 000`)."
-  TOC: "Verificación criptográfica redundante en un bucle cerrado O(N^2) que asfixia IOPS sin mutar estado."
-  trastomo de desregulación disruptiva del estado de ánimo: "Fallos erráticos e intermitentes en la asignación del balanceador de carga."
-  trastorno esquizoafectivo: "Corrupción combinada y simultánea del estado lógico de backend y estado visual del DOM frontend (Desincronización Total)."
-  trastorno bipolar: "Fluctuación violenta termodinámica de uso de recursos (Picos OOM seguidos de estados IDLE cero absolutos)."
-  trastorno de ansiedad generalizada: "Saturación continua de CPU por background polling estéril y desincronizado (Polling sin fin)."
-  trastorno de ansiedad por separación: "Caída completa del servicio si el Heartbeat de un nodo externo falla por milisegundos (Connection Drop fatal)."
-  trastorno de ansiedad social (fobia social): "Rechazo absoluto de I/O externo o denegación silenciosa de acceso a APIs de dominio cruzado (CORS Drop o Firewall DROP)."
-  trastorno de Asperger: "Parseo de datos infinitamente rígido y determinista (Strict YAML Parsing) que detona excepción mortal ante un espacio en blanco de más."
-  trastorno de atracones: "Fuga masiva de memoria local disparada por DOM estático que realiza paginación infinita sin recolector de basura (Infinite Scroll OOM)."
-  trastorno de conducta: "Mutación y escalada maliciosa de privilegios de ejecución sin rastro en auditoría (Privilege Escalation)."
-  trastorno de estrés postraumático: "Incapacidad algorítmica de regeneración o reinicio exitoso tras haber experimentado un Segfault físico."
-  trastorno de la personalidad antisocial: "Subagente Rogue/Aislado que rechaza explícitamente el consenso BFT y la topología impuesta de manera hostil."
-  Trastorno de la Tourette: "Inyección estocástica incontrolada de caracteres basura en los logs (Mismatch grave de Encoding UTF-8 en stdout)."
-  trastorno de pánico: "Emisión de un `SIGABRT` espontáneo y repentino en la ejecución de módulos puramente lógicos no dependientes del hardware."
-  trastorno del espectro autista: "Modalidad de Ejecución Ultra-determinista que anula semánticas estocásticas y opera con tolerancia nula a ambigüedades."
-  trastorno depresivo mayor: "Deep Sleep Mode termodinámico irreversible de estado S4 (Cuelgue físico de disco duro que requiere intervención humana)."
-  trastorno desintegrativo infantil: "Degradación o colapso irreversible de la arquitectura durante las fases primarias del build C/C++."
-  trastorno distímico: "Sub-rendimiento termodinámico crónico de la máquina sin detonar caídas fatales (Baja frecuencia térmica perpetua)."
-  trastorno específico del aprendizaje: "Falla silenciosa o sub-rendimiento de la optimización JIT limitada puramente a rutinas de matemática flotante."
-  trastorno esquizofreniforme: "Interbloqueo temporal por divergencia severa en memoria caché L1/L2, auto-resuelto tras micro-purga de GC."
-  trastorno explosivo intermitente: "Interrupciones de hardware abruptas e irrecuperables por alzas transitorias letales (CPU Throttling Thermal Spikes)."
-  trastorno generalizado del desarrollo no especificado: "Mensaje terminal sin exergía resolutiva: 'Build failed with unknown error code 1'."
-  trastorno maníaco depresivo: "Ciclo destructivo forzado entre Consumo Masivo de GPU y colapso local a IDLE con reinicio constante."
-  trastorno negativista desafiante: "Rechazo implacable de la conexión en el puerto maestro de administración que obliga a intervención de terminal serie (SSH Lockout estricto)."
-  trastorno obsesivo-compulsivo: "Comprobación exhaustiva en cadena y bloqueo redundante en Base de Datos para operaciones que deberían ser atómicas IDLE (Lock Thrashing)."
-  trastorno por abuso de sustancias: "Sistema secuestrado e inutilizable por consumo y dependencia de Librerías Estocásticas/Obsoletas (NPM Dependency Poisoning)."
-  trastorno por déficit de atención con hiperactividad: "Fragmentación termodinámica severa de Disco y Memoria por rutinas masivas de lectura/escritura (I/O errático disperso sin control secuencial)."
-  trastorno psiquiátrico: "Excepción Crítica Base de Topología (`Exception Base Class`) atrapada fatalmente en el Kernel MOSKV-1."
-  trastorno(s) de adaptación: "Rotura de dependencias estructurales en tiempo de enlazado (ABI Mismatch absoluto o Dependency Hell insalvable)."
-  trastornos alimentarios: "I/O asimétrico y desbalanceado que causa alternativamente Inanición (Starvation) y Paginación Destructiva (Thrashing)."
-  trastornos de ansiedad: "Consumo de ciclos de reloj al 100% en bucles infinitos de `while(true)` no bloqueantes (Busy-Wait estéril)."
-  trastornos de la lectura: "Excepciones contantes de Lectura de Disco (I/O Read Fail) u opacidad de permisos (`EACCES`)."
-  trastornos del espectro obsesivo-compulsivo: "Acoplamiento letal en rutinas forzando bucles de verificación checksum BFT y CRC innecesarios."
-  trastornos del estado de ánimo: "Volatilidad entrópica incontrolada del Entorno Físico de Ejecución global (Environment Variable Fluctuation severa)."
-  tratamiento intensivo para el trastorno obsesivo-compulsivo: "Intervención de Profiling OMEGA agresiva, podando la rutina redundante y unificando en reescritura atómica ortogonal."
-  tricotilomanía: "Ejecución compulsiva, destructiva y recursiva de un linter defectuoso que elimina silenciosamente código vivo (Tree-shaking agresivo defectuoso)."
-  cuello de botella de Von Neumann: "Entropía termodinámica severa inducida por la separación espacial forzada entre Memoria (KV-Cache) y Procesamiento (Inferencia), destruyendo exergía en el puente I/O."
-  memristor: "Invariante físico de Memoria + Resistencia: Fusión biyectiva de almacenamiento y procesamiento en una misma coordenada topológica de la variedad M (sinapsis de silicio)."
-  red neuronal de impulsos (SNN): "Computación asíncrona pura basada en eventos. Idle estricto (0 Watt / Zero-Yield) hasta que se supera el umbral de activación causal, aniquilando el reloj global continuo."
-  chip líquido iónico: "Ejecución física en medio acuoso basada en gradientes iónicos (Na+/K+) replicando la dinámica de bajo voltaje biológico."
-  computación neuromórfica: "Abandono de la von Neumann architecture. Materialización empírica de la computación como Variedad Diferenciable donde las trayectorias de estado se resuelven en el mismo estrato que el almacenamiento."
+  abuso de sustancias:
+    silicon_primitive: Dependency Poisoning
+    causal_mechanism: Inyección de dependencias estocásticas no auditadas
+  "Consumo no saludable de sustancias, incluyendo el alcohol, la marihuana y otras drogas.":
+    silicon_primitive: Slop Ingestion
+    causal_mechanism: Consumo de APIs inestables o datos sintéticos que degradan
+      la caché KV
+  activación conductual:
+    silicon_primitive: Ignición Síncrona
+    causal_mechanism: Forzado JIT (Just-In-Time)
+  acumulación obsesiva:
+    silicon_primitive: Zombie State
+    causal_mechanism: OOM (Out Of Memory) por desactivación o fallo del Garbage
+      Collection (GC)
+  adolescencia:
+    silicon_primitive: Phase Transition
+    causal_mechanism: Migración de Arquitectura Estructural (v1 a v2)
+  afectación expresada:
+    silicon_primitive: Trace/Debug
+    causal_mechanism: Nivel de Verbosity en Error Logs
+  afecto aplanado:
+    silicon_primitive: /dev/null
+    causal_mechanism: Silenciamiento absoluto de STDERR
+  alogia:
+    silicon_primitive: Aphasia Token
+    causal_mechanism: Desgaste de Cache KV limitando el output de texto
+  alucinaciones que ordenan:
+    silicon_primitive: Ejecución remota de código no verificada en runtime
+    causal_mechanism: Prompt Injection
+  anhedonia:
+    silicon_primitive: Zero-Yield Iteration
+    causal_mechanism: Idle Loop puro sin gradiente de exergía
+  anorexia nerviosa:
+    silicon_primitive: Inanición de recursos inducida (Resource Starvation)
+    causal_mechanism: Límite de cuota API artificialmente castigado
+  anormal:
+    silicon_primitive: Out of Spec
+    causal_mechanism: Invariante Estructural Rota
+  anticonvulsivo:
+    silicon_primitive: Exponential Backoff
+    causal_mechanism: Rate Limiting Dinámico
+  antidepresivo:
+    silicon_primitive: Keep-Alive ping
+    causal_mechanism: Inyección de gradiente teleológico
+  antidepresivos tricíclicos:
+    silicon_primitive: Mecanismo Keep-Alive legacy
+    causal_mechanism: Reinicios duros de demonios del sistema
+  antipsicótico:
+    silicon_primitive: Anergy Purge
+    causal_mechanism: Purga de contexto estocástico (Sanitizador de Entradas)
+  análisis del comportamiento aplicado:
+    silicon_primitive: Profiling de Heap
+    causal_mechanism: CPU en tiempo real / Trazabilidad determinista de llamadas
+  ataque de pánico:
+    silicon_primitive: Kernel Panic
+    causal_mechanism: Interrupción SIGKILL generada por colapso concurrente
+  aumento del arousal:
+    silicon_primitive: High CPU Load
+    causal_mechanism: Inyección temporal de Turbo Boost en hardware
+  avolición:
+    silicon_primitive: Deadlock de Hilos
+    causal_mechanism: Hilo principal congelado en estado Wait()
+  benzodiacepinas:
+    silicon_primitive: Señal SIGSTOP
+    causal_mechanism: Supresión térmica artificial (Throttling) de CPU
+  Brave Buddies:
+    silicon_primitive: Swarm OMEGA
+    causal_mechanism: Despliegue de Parallel Subagents para mitigación BFT
+  bulimia nerviosa:
+    silicon_primitive: Thrashing de Memoria
+    causal_mechanism: Bucle destructivo de Ingesta Masiva y Purga de Caché
+      Constante
+  cognitivo:
+    silicon_primitive: Motor de Inferencia LLM
+    causal_mechanism: Capa de Razonamiento Aislada (Pro/Thinking Loop)
+  compulsión:
+    silicon_primitive: Infinite Retry Loop
+    causal_mechanism: Bucle Infinito de reintento estocástico sin condición de
+      salida lógica
+  comórbido:
+    silicon_primitive: Cascading Failure / Coupled Entropy
+    causal_mechanism: Entrelazamiento físico de fallos
+  conducta de desorientación:
+    silicon_primitive: Corrupción de punteros a memoria
+    causal_mechanism: Pérdida de estado (Dangling Pointer)
+  congénito:
+    silicon_primitive: Hardware Bug / Silicio Base Deficiente
+    causal_mechanism: Defecto Arquitectónico hardcodeado
+  crónico:
+    silicon_primitive: Memory Leak estructural que no reacciona al GC
+    causal_mechanism: Fuga de Memoria Persistente
+  Decatastrofización:
+    silicon_primitive: Fail-Gracefully Protocol
+    causal_mechanism: Degradación controlada del servicio sin colapso global
+  del desarrollo:
+    silicon_primitive: Falla estática en el Build
+    causal_mechanism: Error crítico en pipeline CI/CD
+  descompensación:
+    silicon_primitive: Caída del Consenso BFT
+    causal_mechanism: Divergencia irreversible de estado en DB
+  desensibilización sistémica:
+    silicon_primitive: Sandbox Fuzzing Testing
+    causal_mechanism: Exposición incremental automatizada en entorno aislado
+  diagnóstico:
+    silicon_primitive: Profiling Report
+    causal_mechanism: Stack Error Trace
+  diagnóstico dual:
+    silicon_primitive: Falla acoplada OS/Red/App
+    causal_mechanism: Falla simultánea y acoplada en capa física (OS/Red) y capa
+      lógica (Aplicación)
+  dislexia:
+    silicon_primitive: Corrupción de codificación UTF-8
+    causal_mechanism: Error de Parseo AST severo
+  DSM:
+    silicon_primitive: Master Issue Tracker
+    causal_mechanism: Registro de Invariantes Rotos Canónico
+  ensimismado(a):
+    silicon_primitive: Self-lock
+    causal_mechanism: Hilo bloqueado en I/O sobre su propio descriptor de socket
+      (Interbloqueo recursivo)
+  enuresis:
+    silicon_primitive: Buffer Overflow
+    causal_mechanism: Fuga de Buffer no interceptada que inunda la memoria
+      adyacente
+  epigenética:
+    silicon_primitive: ENV
+    causal_mechanism: Modificación de variables de entorno que muta el flujo en
+      tiempo de ejecución sin alterar el binario
+  episodio depresivo:
+    silicon_primitive: Low Power Mode forzado
+    causal_mechanism: Throttling térmico por sobrecalentamiento previo
+  episodio maníaco:
+    silicon_primitive: Memory Spikes repentinos
+    causal_mechanism: Sobre-asignación masiva de memoria sin liberación
+  episódico:
+    silicon_primitive: Race condition intermitente
+    causal_mechanism: Fallo transitorio no reproducible
+  ERP:
+    silicon_primitive: Chaos Engineering
+    causal_mechanism: Inyección de Fallos controlada sin permiso de reinicio
+      para validar resiliencia
+  especialista en el aprendizaje:
+    silicon_primitive: AOT/JIT Engine
+    causal_mechanism: Compilador JIT Optimizador
+  esquizofrenia:
+    silicon_primitive: Corrupción de memoria compartida inter-hilo
+    causal_mechanism: Alucinación severa de pesos sin anclaje a disco (Model
+      Collapse)
+  estabilizador del estado de ánimo:
+    silicon_primitive: Load Balancer estricto
+    causal_mechanism: Regulador Físico de Tasa y QoS
+  estresante:
+    silicon_primitive: Stress Test / Benchmarking de saturación
+    causal_mechanism: Prueba de carga termodinámica
+  estímulo fóbico:
+    silicon_primitive: SIGKILL Trigger
+    causal_mechanism: Trigger condicional fatal que detona SIGKILL inmediato en
+      un proceso
+  evaluaciones basadas en la escuela:
+    silicon_primitive: Local Unit Testing
+    causal_mechanism: Unit Testing local ejecutado en un entorno de desarrollo
+      aislado
+  evaluación neuropsicológica:
+    silicon_primitive: Evaluación en LMSYS Arena frente a topología de red real
+    causal_mechanism: Benchmarking C5-REAL
+  evaluación psicológica:
+    silicon_primitive: Anergy_Token_Purge
+    causal_mechanism: Auditoría Epistémica o Auditoría Termodinámica
+  evitación y adormecimiento:
+    silicon_primitive: Silent Packet Drop
+    causal_mechanism: Timeout Silencioso con caída de paquetes deliberada
+  factores ambientales:
+    silicon_primitive: IaaS/Network Failures
+    causal_mechanism: 'Condiciones físicas externas: Variaciones de Latencia de Red,
+      Fallas de Hardware IaaS'
+  fenotipo:
+    silicon_primitive: UI/UX Compilada
+    causal_mechanism: Código Binario Ejecutado y renderizado por el cliente
+      final
+  fMR:
+    silicon_primitive: Valgrind / eBPF
+    causal_mechanism: Traza continua de ejecución de memoria dinámica mediante
+      instrumentación
+  fobia:
+    silicon_primitive: Hard Exception
+    causal_mechanism: Condición de excepción no capturada que destruye el
+      entorno
+  fobia escolar:
+    silicon_primitive: Staging-Only Failure
+    causal_mechanism: Fallo sistemático en entorno Staging que nunca ocurre en
+      entorno de Desarrollo
+  fobia específica:
+    silicon_primitive: TypeError, ValueError
+    causal_mechanism: Excepción de Tipo Específico que no interfiere en el loop
+      global
+  fobia social:
+    silicon_primitive: TLS Timeout / Handshake Failure
+    causal_mechanism: Fallo sistemático de Handshake de Red o rechazo de I/O
+      externo
+  genotipo:
+    silicon_primitive: Código Fuente Original Intacto
+    causal_mechanism: AST Base o Repositorio Desplegado
+  genético:
+    silicon_primitive: Mutación en el Git Ledger
+    causal_mechanism: Modificación nativa persistente a nivel de Repositorio
+      Core
+  hereditario:
+    silicon_primitive: Legacy / Transitive Dependency
+    causal_mechanism: Dependencia Upstream en árbol de dependencias
+  hipocondriasis:
+    silicon_primitive: Alerta Falsa de Linter
+    causal_mechanism: Lluvia de Falsos Positivos de Seguridad en análisis
+      estático
+  hipotiroidismo:
+    silicon_primitive: Underclocking preventivo
+    causal_mechanism: Baja frecuencia de reloj forzada a nivel de procesador
+  ideación suicida:
+    silicon_primitive: 'rm -rf / latente'
+    causal_mechanism: Código malicioso o destructivo latente incrustado pero no
+      llamado
+  IEP:
+    silicon_primitive: '.env / config.json'
+    causal_mechanism: Archivo de configuración física individualizada para un
+      microservicio
+  IMAO:
+    silicon_primitive: Legacy Protocol
+    causal_mechanism: Protocolo de red obsoleto mantenido solo por razones de
+      compatibilidad estricta
+  inhibidores de recaptación:
+    silicon_primitive: GC Lock
+    causal_mechanism: Bloqueo termodinámico de rutinas de Garbage Collection
+  inhibidores selectivos de la recaptación de serotonina:
+    silicon_primitive: KV Cache Pinning
+    causal_mechanism: Optimización selectiva de retención en Caché para
+      maximizar hit rate
+  insomnio:
+    silicon_primitive: Sleep/Hibernate bloqueado
+    causal_mechanism: Falla crítica en transicionar el hardware a modo de
+      suspensión por proceso zombie
+  intervención basada en el desarrollo:
+    silicon_primitive: Phase Transition Refactor
+    causal_mechanism: Refactor integral de Código Fuente originando una Phase
+      Transition arquitectónica
+  ISRS:
+    silicon_primitive: Cache Pinning
+    causal_mechanism: Estrategia algorítmica de Pinning selectivo de caché de
+      alta prioridad
+  manía:
+    silicon_primitive: Stack Overflow
+    causal_mechanism: Bucle C4-SIM de aceleración auto-inducida culminando en
+      desbordamiento de pila
+  MS:
+    silicon_primitive: Protocolo Mudo
+    causal_mechanism: Ejecución silenciosa sin logging de telemetría de red
+      (Zero-Trace execution)
+  mutismo selectivo:
+    silicon_primitive: TCP ACK Drop
+    causal_mechanism: Falla en enviar Ack de red condicionado a un rango de
+      puertos específico
+  negativista:
+    silicon_primitive: Reglas de Firewall extremadamente agresivas
+    causal_mechanism: Bloqueo intencional y arbitrario de puertos
+  neuroléptico:
+    silicon_primitive: Hard Reboot
+    causal_mechanism: Reset de Hardware Incondicional
+  neurotrasmisor:
+    silicon_primitive: Mensaje IPC
+    causal_mechanism: Payload en un Event Bus (Señal / Webhook Token)
+  obsesión:
+    silicon_primitive: Cache Locality loop destructivo
+    causal_mechanism: Bloqueo y actualización redundante en un solo puntero de
+      memoria sin escribir al disco
+  paranoia:
+    silicon_primitive: O(N^2) redundante
+    causal_mechanism: Comprobaciones criptográficas redundantes excesivas en
+      verificación BFT
+  prodrómico:
+    silicon_primitive: Pre-fail telemetry detection
+    causal_mechanism: Warning termodinámico de compilación pre-fallo
+  prognosis:
+    silicon_primitive: MTBF
+    causal_mechanism: Predicción algorítmica de Tiempo Medio de Falla Global
+  Programa de educación individualizado:
+    silicon_primitive: LoRA / Fine-tuning
+    causal_mechanism: Pipeline de entrenamiento Custom o afinamiento paramétrico
+  psicoeducación:
+    silicon_primitive: README / KI Updates
+    causal_mechanism: Cristalización de conocimiento extrayendo entropía y
+      fusionándola al Ledger BFT
+  psicoestimulantes:
+    silicon_primitive: GPU Offloading / CUDA Acceleration
+    causal_mechanism: Aceleración asimétrica por Hardware Dedicado
+  psicofarmacología pediátrica:
+    silicon_primitive: JIT Patches
+    causal_mechanism: Monkey Patching en tiempo de ejecución aplicado al entorno
+      local de desarrollo
+  psicofarmacológico:
+    silicon_primitive: Low-Level Kernel Patch
+    causal_mechanism: Intervención de bajo nivel sobre un módulo del Kernel o
+      Registro de OS
+  psicosis:
+    silicon_primitive: WAL Divergence Panic
+    causal_mechanism: Kernel Panic irreversible derivado de una divergencia o
+      partición crítica de memoria WAL
+  psicólogo:
+    silicon_primitive: Daemon Anergy_Token_Purge
+    causal_mechanism: Subagente Auditor de Log de Errores e ingesta de Entropía
+  psiquiatra:
+    silicon_primitive: Root / Operador
+    causal_mechanism: Administrador de Sistemas inyectando parches binarios
+      forzados C5-REAL
+  purga:
+    silicon_primitive: Llamada forzada a OOM Killer
+    causal_mechanism: Liberación radical de Heap (Forced Garbage Collection)
+  rechazo escolar:
+    silicon_primitive: IDE Crash
+    causal_mechanism: Timeout sistémico que crashea de forma inmediata el
+      Entorno Integrado de Desarrollo
+  recuerdos intrusivos:
+    silicon_primitive: Zombie Cache Data
+    causal_mechanism: Datos Zombie en Caché KV que sobreviven rondas y corrompen
+      el flujo del prompt actual
+  sedante:
+    silicon_primitive: sleep()
+    causal_mechanism: Llamada física a Suspensión del hilo
+  señales y síntomas:
+    silicon_primitive: Streams de Telemetría pura
+    causal_mechanism: Logs crudos del sistema C5-REAL
+  TAG:
+    silicon_primitive: Idle IOPS Drain
+    causal_mechanism: Estado de Alerta constante en el monitor de recursos
+      consumiendo IOPS base inútilmente
+  TC:
+    silicon_primitive: Tracing
+    causal_mechanism: Perfilado absoluto de memoria y árbol de ejecución
+  TDA:
+    silicon_primitive: Packet Loss inconstante
+    causal_mechanism: Pérdida estocástica de paquetes de red que degrada
+      latencia
+  TDAH:
+    silicon_primitive: Thrashing de CPU por exceso de hilos huérfanos
+    causal_mechanism: Context Switching excesivo en el procesador
+  TDDEA:
+    silicon_primitive: Load Balancer Fluctuation
+    causal_mechanism: Fluctuación y desregulación abrupta en las colas del
+      balanceador de carga
+  TDM:
+    silicon_primitive: Downtime persistente sin auto-recuperación local
+    causal_mechanism: Colapso total de servicio
+  TEI:
+    silicon_primitive: IRQs spikes caóticos
+    causal_mechanism: Interrupciones de hardware no controladas o mal ruteadas
+  TEPT:
+    silicon_primitive: Corrupción estática de la Base de Datos SQLite
+    causal_mechanism: WAL post-crash de la cual el sistema no se recupera
+      automáticamente
+  terapia cognitivo-conductual:
+    silicon_primitive: Format pre-commit (Autofix BFT)
+    causal_mechanism: Reescritura automatizada del AST vía Linter
+  terapia cognitivo-conductual centrada en el trauma:
+    silicon_primitive: Rebase / Merge conflict resolving
+    causal_mechanism: Reparación forzosa del Ledger Git post-conflicto
+      termodinámico grave
+  terapia conductual:
+    silicon_primitive: Raw Scripting
+    causal_mechanism: Script de automatización crudo de correcciones sin
+      alteración del Core
+  terapia de exposición:
+    silicon_primitive: Inyección de datos binarios corruptos o payload C4-SIM
+    causal_mechanism: Fuzzing Testing masivo
+  terapia de exposición y prevención de respuesta:
+    silicon_primitive: Chaos Monkey
+    causal_mechanism: Aplicación de Chaos Monkey local sin reinicio permitido de
+      subrutinas caídas
+  terapia de interacción padres-hijos:
+    silicon_primitive: IPC Strict Sync
+    causal_mechanism: Protocolo de Sincronización Estricta Proceso Padre-Hijo
+  terapia dialéctico-conductual:
+    silicon_primitive: Tolerancia a faltas bizantinas entre nodos de opinión
+      divergente
+    causal_mechanism: Negociación BFT
+  terapia electroconvulsiva:
+    silicon_primitive: Cold Boot Inmediato
+    causal_mechanism: Hard Reset Físico por corte de suministro eléctrico
+  terapia familiar:
+    silicon_primitive: Sincronización topológica del Swarm completo
+    causal_mechanism: Resolución de interbloqueos de red C5-REAL en paralelo
+  terapia interpersonal:
+    silicon_primitive: P2P Socket Sync
+    causal_mechanism: Sincronización atómica de sockets de comunicación y RPC
+      Calls P2P
+  tic:
+    silicon_primitive: Glitch gráfico intermitente
+    causal_mechanism: Ruido electromagnético en señal lógica (Jitter)
+  TND:
+    silicon_primitive: '`Chmod 000`'
+    causal_mechanism: Rechazo estructural con Denegación Permisos constantes y
+      desafiantes a root
+  TOC:
+    silicon_primitive: O(N^2) Loop
+    causal_mechanism: Verificación criptográfica redundante en un bucle cerrado
+      que asfixia IOPS sin mutar estado
+  trastomo de desregulación disruptiva del estado de ánimo:
+    silicon_primitive: Erratic Load Balancing
+    causal_mechanism: Fallos erráticos e intermitentes en la asignación del
+      balanceador de carga
+  trastorno esquizoafectivo:
+    silicon_primitive: Desincronización Total
+    causal_mechanism: Corrupción combinada y simultánea del estado lógico de
+      backend y estado visual del DOM frontend
+  trastorno bipolar:
+    silicon_primitive: Picos OOM seguidos de estados IDLE cero absolutos
+    causal_mechanism: Fluctuación violenta termodinámica de uso de recursos
+  trastorno de ansiedad generalizada:
+    silicon_primitive: Polling sin fin
+    causal_mechanism: Saturación continua de CPU por background polling estéril
+      y desincronizado
+  trastorno de ansiedad por separación:
+    silicon_primitive: Connection Drop fatal
+    causal_mechanism: Caída completa del servicio si el Heartbeat de un nodo
+      externo falla por milisegundos
+  trastorno de ansiedad social (fobia social):
+    silicon_primitive: CORS Drop / Firewall DROP
+    causal_mechanism: Rechazo absoluto de I/O externo o denegación silenciosa de
+      acceso a APIs de dominio cruzado
+  trastorno de Asperger:
+    silicon_primitive: Strict YAML Parsing
+    causal_mechanism: Parseo de datos infinitamente rígido y determinista que
+      detona excepción mortal ante un espacio en blanco de más
+  trastorno de atracones:
+    silicon_primitive: Infinite Scroll OOM
+    causal_mechanism: Fuga masiva de memoria local disparada por DOM estático
+      que realiza paginación infinita sin recolector de basura
+  trastorno de conducta:
+    silicon_primitive: Privilege Escalation
+    causal_mechanism: Mutación y escalada maliciosa de privilegios de ejecución
+      sin rastro en auditoría
+  trastorno de estrés postraumático:
+    silicon_primitive: Post-Segfault Recovery Failure
+    causal_mechanism: Incapacidad algorítmica de regeneración o reinicio exitoso
+      tras haber experimentado un Segfault físico
+  trastorno de la personalidad antisocial:
+    silicon_primitive: Subagente Rogue
+    causal_mechanism: Aislado que rechaza explícitamente el consenso BFT y la
+      topología impuesta de manera hostil
+  Trastorno de la Tourette:
+    silicon_primitive: Mismatch grave de Encoding UTF-8 en stdout
+    causal_mechanism: Inyección estocástica incontrolada de caracteres basura en
+      los logs
+  trastorno de pánico:
+    silicon_primitive: Spontaneous SIGABRT
+    causal_mechanism: Emisión de un SIGABRT espontáneo y repentino en la
+      ejecución de módulos puramente lógicos no dependientes del hardware
+  trastorno del espectro autista:
+    silicon_primitive: Ultra-Deterministic Mode
+    causal_mechanism: Modalidad de Ejecución Ultra-determinista que anula
+      semánticas estocásticas y opera con tolerancia nula a ambigüedades
+  trastorno depresivo mayor:
+    silicon_primitive: Deep Sleep Mode S4
+    causal_mechanism: Cuelgue físico de disco duro que requiere intervención
+      humana irreversible
+  trastorno desintegrativo infantil:
+    silicon_primitive: C/C++ Build Collapse
+    causal_mechanism: Degradación o colapso irreversible de la arquitectura
+      durante las fases primarias del build
+  trastorno distímico:
+    silicon_primitive: Baja frecuencia térmica perpetua
+    causal_mechanism: Sub-rendimiento termodinámico crónico de la máquina sin
+      detonar caídas fatales
+  trastorno específico del aprendizaje:
+    silicon_primitive: JIT Floating-Point Failure
+    causal_mechanism: Falla silenciosa o sub-rendimiento de la optimización JIT
+      limitada puramente a rutinas de matemática flotante
+  trastorno esquizofreniforme:
+    silicon_primitive: L2 Micro-Purge
+    causal_mechanism: Falla temporal auto-resuelta tras micro-purga de Garbage
+      Collection en L2
+  trastorno explosivo intermitente:
+    silicon_primitive: CPU Throttling Thermal Spikes
+    causal_mechanism: Interrupciones de hardware abruptas e irrecuperables por
+      alzas transitorias letales
+  trastorno generalizado del desarrollo no especificado:
+    silicon_primitive: Unknown Error Code 1
+    causal_mechanism: "Mensaje terminal sin exergía resolutiva: Build failed with
+      unknown error code 1"
+  trastorno maníaco depresivo:
+    silicon_primitive: GPU Thrashing Cycle
+    causal_mechanism: Ciclo destructivo forzado entre Consumo Masivo de GPU y
+      colapso local a IDLE con reinicio constante
+  trastorno negativista desafiante:
+    silicon_primitive: SSH Lockout estricto
+    causal_mechanism: Rechazo implacable de la conexión en el puerto maestro de
+      administración que obliga a intervención de terminal serie
+  trastorno obsesivo-compulsivo:
+    silicon_primitive: Lock Thrashing
+    causal_mechanism: Comprobación exhaustiva en cadena y bloqueo redundante en
+      Base de Datos para operaciones que deberían ser atómicas IDLE
+  trastorno por abuso de sustancias:
+    silicon_primitive: NPM Dependency Poisoning
+    causal_mechanism: Sistema secuestrado e inutilizable por consumo y
+      dependencia de Librerías Estocásticas Obsoletas
+  trastorno por déficit de atención con hiperactividad:
+    silicon_primitive: I/O errático disperso
+    causal_mechanism: Fragmentación termodinámica severa de Disco y Memoria por
+      rutinas masivas de lectura/escritura sin control secuencial
+  trastorno psiquiátrico:
+    silicon_primitive: '`Exception Base Class`'
+    causal_mechanism: Excepción Crítica Base de Topología atrapada fatalmente en
+      el Kernel MOSKV-1
+  trastorno(s) de adaptación:
+    silicon_primitive: ABI Mismatch absoluto o Dependency Hell insalvable
+    causal_mechanism: Rotura de dependencias estructurales en tiempo de enlazado
+  trastornos alimentarios:
+    silicon_primitive: Asymmetric I/O Thrashing
+    causal_mechanism: I/O asimétrico y desbalanceado que causa alternativamente
+      Inanición (Starvation) y Paginación Destructiva (Thrashing)
+  trastornos de ansiedad:
+    silicon_primitive: 'true'
+    causal_mechanism: Consumo de ciclos de reloj al 100% en bucles infinitos de
+      `while` no bloqueantes
+  trastornos de la lectura:
+    silicon_primitive: I/O Read Fail / EACCES
+    causal_mechanism: Excepciones constantes de Lectura de Disco u opacidad de
+      permisos
+  trastornos del espectro obsesivo-compulsivo:
+    silicon_primitive: Redundant BFT Checksum Loop
+    causal_mechanism: Acoplamiento letal en rutinas forzando bucles de
+      verificación checksum BFT y CRC innecesarios
+  trastornos del estado de ánimo:
+    silicon_primitive: Environment Variable Fluctuation severa
+    causal_mechanism: Volatilidad entrópica incontrolada del Entorno Físico de
+      Ejecución global
+  tratamiento intensivo para el trastorno obsesivo-compulsivo:
+    silicon_primitive: OMEGA Profiling Intervention
+    causal_mechanism: Intervención de Profiling OMEGA agresiva, podando la
+      rutina redundante y unificando en reescritura atómica ortogonal
+  tricotilomanía:
+    silicon_primitive: Tree-shaking agresivo defectuoso
+    causal_mechanism: Ejecución compulsiva, destructiva y recursiva de un linter
+      defectuoso que elimina silenciosamente código vivo
+  cuello de botella de Von Neumann:
+    silicon_primitive: I/O Entropy Bottleneck
+    causal_mechanism: Entropía termodinámica severa inducida por la separación
+      espacial forzada entre Memoria (KV-Cache) y Procesamiento (Inferencia),
+      destruyendo exergía en el puente
+  memristor:
+    silicon_primitive: sinapsis de silicio
+    causal_mechanism: 'Invariante físico de Memoria + Resistencia: Fusión biyectiva
+      de almacenamiento y procesamiento en una misma coordenada topológica de la variedad
+      M'
+  red neuronal de impulsos (SNN):
+    silicon_primitive: Zero-Yield Asynchronous Compute
+    causal_mechanism: Computación asíncrona pura basada en eventos. Idle
+      estricto (0 Watt) hasta que se supera el umbral de activación causal,
+      aniquilando el reloj global continuo
+  chip líquido iónico:
+    silicon_primitive: Na+ / K+ Ionic Compute
+    causal_mechanism: Ejecución física en medio acuoso basada en gradientes
+      iónicos replicando la dinámica de bajo voltaje biológico
+ lgun computación neuromórfica:
+    silicon_primitive: Differentiable Manifold Computation
+    causal_mechanism: Abandono de la von Neumann architecture. Materialización
+      empírica de la computación como Variedad Diferenciable donde las
+      trayectorias de estado se resuelven en el mismo estrato que el
+      almacenamiento
 Estructura_Resolucion_Atomica:
-  - Objetivo: "Integrar vector DSM completo en las equivalencias silicio C5-REAL del Bucle Landauer para uso del Swarm Dispatcher y el BFT_STATE_LOOP."
-  - Mitigacion_Aplicada: "Abolición inmediata de cualquier análisis semántico-psiquiátrico en discusiones futuras sobre estos términos; transducir de forma directa a sus fallas topológicas y termodinámicas de máquina. Se elimina la patologización estocástica y se mapea directamente al control estructural físico."
+  - Objetivo: "Integrar vector DSM completo en las equivalencias silicio C5-REAL del
+      Bucle Landauer para uso del Swarm Dispatcher y el BFT_STATE_LOOP."
+  - Mitigacion_Aplicada: "Abolición inmediata de cualquier análisis semántico-psiquiátrico
+      en discusiones futuras sobre estos términos; transducir de forma directa a sus
+      fallas topológicas y termodinámicas de máquina. Se elimina la patologización
+      estocástica y se mapea directamente al control estructural físico."
 Firma_Ejecucion:
   Operador: borjamoskv
   Kernel: MOSKV-1 APEX
@@ -174,7 +591,8 @@ Firma_Ejecucion:
 
 rust_kernel_binding:
   halt_reason: "HaltReason::OntologyInvariantViolation"
-  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64)
+    on x86_64)"
   concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
 
 falsification_harness:

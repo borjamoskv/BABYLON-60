@@ -6,25 +6,25 @@
 Esta disertación matemática anula la concepción de BABYLON-60 como un conjunto de módulos estáticos, frameworks o IDEs. La arquitectura se redefine estrictamente como un **Compilador de Transición de Estados Verificado (Verified State Transition Compiler)**.
 
 La función del repositorio no es "ejecutar agentes", sino actuar como un reductor de entropía causal:
- \text{Intent} \xrightarrow{\text{Mutation}} \text{Canonicalization} \xrightarrow{\text{Verification}} \text{Persistence} 
+ Intent \xrightarrow{Mutation} Canonicalization \xrightarrow{Verification} Persistence 
 La salida de este compilador no es un binario. La salida es un Estado Verificado (\Sigma) acompañado de una Prueba de Transición (*Transition Proof*).
 
 ---
 
-## 2. Termodinámica de Tipos y Fugas de Información (\Delta H)
+## 2. Termodinámica de Tipos y Fugas de Información (Δ H)
 
 Hemos abandonado la noción de *Commit* como la unidad atómica del repositorio. A nivel OMEGA-SQUARED, la unidad anatómica es la **Transition Proof**, estructurada como la tupla:
- \text{Transition} = \langle Preconditions, Mutation, Postconditions, Proof, Hash \rangle 
+ Transition = \langle Preconditions, Mutation, Postconditions, Proof, Hash \rangle 
 
 ### El Análisis de Entropía
 Hemos ejecutado el algoritmo `omega_squared_entropy_compiler.py` sobre las 135 transiciones de estado del Kernel (módulos de BFT y Ledger) analizando las firmas de tipos.
 
 **Resultados Empíricos:**
 - **Transiciones Analizadas:** 135
-- **Transiciones Verificadas (\Delta H = 0):** 1
-- **Fugas de Entropía (\Delta H > 0):** 134
+- **Transiciones Verificadas (Δ H = 0):** 1
+- **Fugas de Entropía (Δ H > 0):** 134
 
-El 99.2% de las transiciones de estado internas de BABYLON-60 mutan la información de entrada sin emitir un tipo de retorno verificable (*Proof*). Al destruir grados de libertad sin dejar rastro criptográfico, el sistema padece de **Hemorragia Entrópica**. El Ledger, actualmente, actúa como una simple base de datos de historia, cuando en realidad debería ser un registro inmutable de reducciones de libertad (como un sistema dinámico \Sigma_0 \rightarrow \Sigma_1).
+El 99.2% de las transiciones de estado internas de BABYLON-60 mutan la información de entrada sin emitir un tipo de retorno verificable (*Proof*). Al destruir grados de libertad sin dejar rastro criptográfico, el sistema padece de **Hemorragia Entrópica**. El Ledger, actualmente, actúa como una simple base de datos de historia, cuando en realidad debería ser un registro inmutable de reducciones de libertad (como un sistema dinámico \Sigma_0 → \Sigma_1).
 
 ---
 
@@ -39,7 +39,7 @@ La auditoría clásica vive en los espacios (1) y (2). Esta auditoría habita el
 
 > **Teorema de la Clase de Equivalencia Arquitectónica:**
 > Dos arquitecturas A y B pertenecen a la misma clase de equivalencia (A \approx B) si y sólo si el conjunto de invariantes computacionales que preservan es idéntico:
->  \text{Preserve}(A, \Omega) = \text{Preserve}(B, \Omega) 
+>  Preserve(A, Ω) = Preserve(B, Ω) 
 > *Corolario:* La arquitectura vive exclusivamente en el Invariant Space. La implementación es contingente.
 
 ---
@@ -52,7 +52,7 @@ La auditoría actual culmina en la formulación de la siguiente proposición fun
 > Todo código fuente es una representación redundante de una familia de restricciones (Invariantes).
 > La calidad de una arquitectura es **inversamente proporcional** a la cantidad de información física (entropía de Shannon o LOCs) necesaria para preservar la totalidad de dichos invariantes.
 >
->  \text{Architectural Quality} \propto \frac{|\Omega|}{C(I)} 
+>  Architectural Quality \propto (|Ω|) / (C(I)) 
 > Donde C(I) es la complejidad (o masa termodinámica) de la implementación actual.
 
 ### El Caso BABYLON-60

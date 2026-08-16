@@ -24,7 +24,7 @@ Donde \alpha + \beta + \gamma + \delta = 1 representa la distribución probabil�
 
 La pureza arquitectónica no es una etiqueta binaria (Puro / God Object). Es la Entropía Térmica de Shannon (H) aplicada al vector m:
 
- H(m) = -\sum_{p \in \{\alpha, \beta, \gamma, \delta\}} p \log_2 p 
+ H(m) = -∑_{p ∈ \{\alpha, \beta, \gamma, \delta\}} p \log_2 p 
 
 ### Clasificación Entrópica (Ejemplos Empíricos):
 *   **Módulo Puro:** Un operador estrictamente limitante (ej. m = 1.0 T). Su entropía es H(m) \approx 0.
@@ -38,7 +38,7 @@ La pureza arquitectónica no es una etiqueta binaria (Puro / God Object). Es la 
 Bajo esta formulación, la "Deuda Técnica" abandona la ambigüedad. No es el número de archivos, las líneas de código (LOC) ni el estilo arquitectónico.
 La Deuda Técnica de cualquier repositorio en el universo es la sumatoria termodinámica continua de la entropía de sus módulos:
 
- Debt(A) = \sum_{m \in A} H(m) 
+ Debt(A) = ∑_{m ∈ A} H(m) 
 
 La calidad arquitectónica es inversamente proporcional a la entropía de dicha distribución.
 
@@ -49,10 +49,10 @@ La calidad arquitectónica es inversamente proporcional a la entropía de dicha 
 El "Kernel" ya no es una lista estática extraíble por un clasificador, sino el límite ideal de un problema de minimización termodinámica.
 
 > **El Teorema Principal de la Compresión Arquitectónica:**
-> El Kernel Verdadero es la implementación de mínima entropía global que preserva el subespacio de invariantes \Omega.
+> El Kernel Verdadero es la implementación de mínima entropía global que preserva el subespacio de invariantes Ω.
 
 El objetivo de cualquier refactor no es separar carpetas, sino resolver:
- \arg\min_{A'} \sum_{m \in A'} H(m) \quad \text{sujeto a} \quad Preserve(A', \Omega) 
+ \arg\min_{A'} ∑_{m ∈ A'} H(m)   sujeto a   Preserve(A', Ω) 
 
 ---
 
@@ -60,12 +60,12 @@ El objetivo de cualquier refactor no es separar carpetas, sino resolver:
 
 Para evaluar cualquier sistema independiente (BABYLON-60, Linux, PostgreSQL), la calidad global Q(A) se define:
 
- Quality(A) = \frac{Preserve(\Omega) \times Orthogonality(\Phi)}{\sum H(m)} 
+ Quality(A) = (Preserve(Ω) × Orthogonality(Φ)) / (∑ H(m)) 
 
 Donde:
-*   Preserve(\Omega) es booleano o porcentaje de cobertura.
-*   Orthogonality(\Phi) es la robustez de la descomposición de los operadores.
-*   \sum H(m) es la fricción térmica acumulada de la implementación.
+*   Preserve(Ω) es booleano o porcentaje de cobertura.
+*   Orthogonality(Φ) es la robustez de la descomposición de los operadores.
+*   ∑ H(m) es la fricción térmica acumulada de la implementación.
 
 ---
 

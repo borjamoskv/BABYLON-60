@@ -11,7 +11,7 @@ Esta skill define la rutina automatizada para mantener la indexación, frescura 
 ## Rutina de Verificación Diaria
 
 1. **Sincronización de Sitemap & Dominio Canónico**:
-   - **Matriz de Alineación de Dominio Canónico**: Garantizar que el dominio principal seleccionado (ej. `https://naroa.online/`) esté unificado en todos los puntos de la pila:
+   - **Matriz de Alineación de Dominio Canónico**: Garantizar que el dominio principal seleccionado (ej. `https://example.com/`) esté unificado en todos los puntos de la pila:
      - **HTML Head**: `<link rel="canonical" href="https://<domain>/" />`.
      - **OpenGraph & Twitter Cards**: `og:url`, `og:image`, `og:image:secure_url`, `twitter:url`, `twitter:image`.
      - **Grafo Schema.org JSON-LD**: Todos los `@id`, `url`, `publisher` y `creator` del grafo (`VisualArtist`, `WebSite`, `ArtGallery`, `VisualArtwork`, `FAQPage`).

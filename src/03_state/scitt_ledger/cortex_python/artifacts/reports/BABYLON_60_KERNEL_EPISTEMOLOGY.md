@@ -1,7 +1,7 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
 # BABYLON-60: Teorema Epistemológico del Kernel (Fase Ω-2)
 
-Este teorema refuta la premisa de que BABYLON-60 es un software monolítico y lo clasifica formalmente como una **Máquina de Transición de Estados Verificable** (\Omega = C \circ V \circ T \circ O).
+Este teorema refuta la premisa de que BABYLON-60 es un software monolítico y lo clasifica formalmente como una **Máquina de Transición de Estados Verificable** (Ω = C ∘ V ∘ T ∘ O).
 
 Dejamos de analizar el código imperativo (`event -> handler -> effect`) para auditar la tubería causal (`constraint -> solve -> proof -> materialize`).
 
@@ -30,7 +30,7 @@ La proyección de BABYLON-60 sobre los cuatro grafos (G_1: Ejecución, G_2: Depe
 **STATUS: REFUTADA (FALSE)**
 - **Prueba:** Existen 485 archivos `Assumed`. En el grafo de ejecución (G_1), estas capas pueden mutar su propio estado en memoria y devolver respuestas de "Éxito" al Operador sin haber transitado por G_4. Una transición de memoria no verificada viola el invariante global hasta que choca contra el Ledger.
 
-### 🔴 Conjecture 3: El kernel puede reducirse a cuatro operadores (\Omega).
+### 🔴 Conjecture 3: El kernel puede reducirse a cuatro operadores (Ω).
 **STATUS: DEMOSTRADA (TRUE)**
 - **Prueba:** Todo el sistema se reduce a O (Especificación de entrada), T (Solve/Generación de Payload), V (Verificación Criptográfica/Lean), y C (Consenso/Persistencia WAL). La refactorización del `consensus_ledger.py` probó matemáticamente que estos ejes son ortogonales y componibles.
 

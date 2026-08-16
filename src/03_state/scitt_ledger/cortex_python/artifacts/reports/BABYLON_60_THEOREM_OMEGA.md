@@ -1,10 +1,10 @@
 # [AUDIT] BABYLON-60 — Fase Ω: Teorema de Equivalencia Arquitectónica
 
-## 1. El Teorema de Equivalencia (\Omega)
+## 1. El Teorema de Equivalencia (Ω)
 
 La auditoría final abandona la topología de módulos para centrarse en el **Kernel Irreducible de Transformación**. Postulamos que la arquitectura soberana real se describe mediante la ecuación:
 
- \Omega = C \circ V \circ T \circ O 
+ Ω = C ∘ V ∘ T ∘ O 
 
 Todo componente del sistema debe mapear ortogonalmente a un único operador fundamental:
 - **O (Observe):** Captura estocástica del entorno (Ingesta, APIs, Webhooks).
@@ -29,7 +29,7 @@ Se ejecutó el analizador ortogonal `phase_omega_theorem_prover.py` sobre los 15
 *Total de módulos en el Kernel Irreducible:* **328 módulos**.
 
 ### El Residuo Entrópico (Complejidad Accidental)
-El clasificador identificó un volumen masivo de archivos que violan la ecuación \Omega:
+El clasificador identificó un volumen masivo de archivos que violan la ecuación Ω:
 - **God Objects (Colisión de Operadores):** Módulos que mutan el estado y persisten simultáneamente, rompiendo la ortogonalidad BFT. (Ej: `core_graph_ledger.py`, `io_persist_ledger.py`, `babylon60/crypto/shredder.py`).
 - **Zero-Operator (Inercia sin Función):** Código muerto, wrappers sin lógica, o archivos `__init__.py` vacíos.
 

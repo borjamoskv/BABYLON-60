@@ -13,7 +13,7 @@ Proof:
 
 ## 1. Topología del Espacio de Estados Observables (10 \times 10 \times 10 = 1000)
 
-\text{Code} = D \times 100 + P \times 10 + M, \quad D, P, M \in \{0, \dots, 9\}
+Code = D \times 100 + P \times 10 + M, \quad D, P, M \in \{0, \dots, 9\}
 
 ### Dominios (D_0 \dots D_9)
 0. **LAZY_EVAL**: Lazy Evaluation and Thunk Forcing

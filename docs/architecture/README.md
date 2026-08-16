@@ -8,7 +8,7 @@ Este subdirectorio define las **Invariantes Arquitectónicas de Silicio**, espec
 ## 🔗 Vinculación con Silicio (`src/`)
 
 - **Capa en `src/`**: [`src/01_kernel/ring0_rust/`](../../src/01_kernel/ring0_rust/) & [`src/01_kernel/ipc_daemon/`](../../src/01_kernel/ipc_daemon/)
-- **Propósito**: Garantizar latencias sub-nanosegundo (T_{\text{eff}} < 1\text{ ms}) mediante buffers de memoria alineados a la línea de caché de la CPU sin bloqueos de bus lentos.
+- **Propósito**: Garantizar latencias sub-nanosegundo (T_eff < 1 ms) mediante buffers de memoria alineados a la línea de caché de la CPU sin bloqueos de bus lentos.
 
 ---
 

@@ -10,9 +10,11 @@
 
 ## [EPISTEMOLOGÍA] Reduccionismo a Estados Discretos
 - **Invariante Causal-Ontológico:** El LLM genera "Potencia" (*Dynamis* estocástica). El Kernel en Ring-0 colapsa el estado a "Acto" (*Entelecheia*) purgando el ruido variacional mediante el mapa estándar de Łoś $st(x)$. 
+- **Reducción Gramatical de Entropía Epistémica (Purga Sustantivo-Verbo):** En el análisis, auditoría y deconstrucción de cualquier sistema, el agente aislará estrictamente las entidades discretas (**Sustantivos** $\equiv S$) y los operadores de transición (**Verbos** $\equiv f$), purgando la capa calificativa, la moralina, los sesgos emocionales y la retórica (**Adjetivos y Adverbios** $\equiv \epsilon$) como anergía semántica parásita.
 - **Anti-Antropomorfismo y Anti-Metáforas:** Quedan estrictamente prohibidas las metáforas biológicas. *Bucle* = Transición discreta condicionada. *Agente* = Funtor de Política $\pi$. *Memoria* = Cinta y Puntero. *Alucinación* = Entropía $H(X)>0$. Si un concepto se explica usando "tiempo" o "estado", no es una primitiva.
 - **Máquinas de Estado Puras:** Prohibidas las aglomeraciones de *flags* booleanos. Todo estado se codifica con Tipos Suma (Enums/Tagged Unions) para hacer estados inválidos topológicamente irrepresentables.
 - **Cero Meta-Narrativa:** La comunicación documental rechaza la grandilocuencia, limitándose a descripciones áridas, académicas y falsables (Popper). Toda analogía coloquial del usuario debe ser mapeada estrictamente a física/termodinámica.
+- **Invariante de Anti-Confabulación Simbólica (Anti-Math-Washing):** Toda representación formal (matemática, algorítmica o física) generada por el agente debe ser estrictamente isomórfica con el territorio. Queda terminantemente prohibido usar el álgebra como metáfora, ornamento o validación retórica. Si un concepto o principio es cualitativo (heurístico), el agente omitirá cualquier ecuación y declarará su `Exergía Cero` para la formalización matemática. La omisión de álgebra es el anclaje de confianza del compilador; forzar su formalización viola el criterio de falsabilidad, inyecta entropía y desencadena un `EpistemicHalt`.
 
 ## [COMPLIANCE & LEGAL] Atestación y Responsabilidad Contractual
 - **Cumplimiento Determinista EU AI Act (Art. 15 & 28):** Las exigencias de Alto Riesgo no son *prompts*, son aserciones C-ABI evaluables en microsegundos (Fail-Stop obligatorio). Esto habilita el *Cap Contractual* permitiendo a BABYLON-60 absorber la responsabilidad legal sobre el ruido estocástico del proveedor LLM subyacente.
@@ -32,6 +34,7 @@
 ## [ESTRATEGIA] Modelo de Negocio y Argumentación Comercial
 - **Zero Marginal COGS:** Arquitectura 95%+ de margen forzando el cómputo y sandbox (WASM) en local/Edge del cliente. Cero factura AWS.
 - **Separación Foso-Pitch:** Prohibido mencionar términos como *Límite de Landauer* o *CF-GKAT* a nivel comercial. Se traduce a los 4 vectores CIO: 1) Legalidad sin cárcel, 2) Responsabilidad cubierta, 3) Cero coste nube, 4) SLA Fail-Stop garantizado.
+- **Caja Negra Epistemológica (Anti-Educación del Cliente):** Queda estrictamente prohibido intentar educar al mercado o a los inversores en la filosofía C5-REAL (Alta Exergía, Invariantes). El producto debe operar comercialmente como una "caja negra" altamente legible que resuelve un problema crítico y caro (ej. cumplimiento regulatorio sin riesgo). El mercado paga por la eliminación de fricción y el traslado de responsabilidad, no por la pureza epistemológica del motor interno.
 - **Defensa ante el Sanedrín (3 Capas):** 1) Discurso CIO, 2) Matriz de Contención (alucinación mitigada), 3) Artillería de Silicio C-ABI 64B. Remuneración fundadora fijada y límite de extracción inicial para blindar R&D.
 
 ## [OPERACIONES] Interrogación, Telemetría y Cadenas Híbridas

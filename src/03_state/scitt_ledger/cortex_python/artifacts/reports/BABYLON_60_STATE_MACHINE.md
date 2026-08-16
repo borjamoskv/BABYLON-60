@@ -5,7 +5,7 @@
 En respuesta a la refutación del Operador, esta fase abandona el análisis espacial de directorios para centrarse exclusivamente en el Acoplamiento Causal y la Topología de Transformación.
 
 **Hipótesis Falsable:**
- \text{BABYLON-60} \cong \text{Verified State Transformation Machine} 
+ BABYLON-60 \cong Verified State Transformation Machine 
 
 Toda operación que no pertenezca a la clase de equivalencia causal `Intent -> State Mutation -> Validation -> Ordering -> Persistence -> Evidence` es contingente y puede ser amputada sin destruir la identidad del sistema.
 

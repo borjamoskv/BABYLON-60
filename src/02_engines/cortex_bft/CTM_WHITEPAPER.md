@@ -13,13 +13,13 @@
 
 La investigación contemporánea en inteligencia artificial y arquitectura de software sufre de una frágil dependencia del sustrato tecnológico, construyendo conceptos de abajo hacia arriba a partir de artefactos temporales (LLMs, redes neuronales, bases de datos o pipelines de Von Neumann). La ontología tradicional asume una progresión secuencial secundaria:
 
-\text{Realidad} \longrightarrow \text{Eventos} \longrightarrow \text{Estado} \longrightarrow \text{Proyección}
+Realidad \longrightarrow Eventos \longrightarrow Estado \longrightarrow Proyección
 
 Para cimentar un marco composicional universal, la **Máquina de Transiciones Cognitivas (CTM v3.1)** invierte esta direccionalidad, adoptando un formalismo euclidiano y categórico *top-down*. Se postula una hipótesis unificadora estricta:
 
 > **Axioma Fundamental (A0):** La única primitiva ontológica y matemática indivisible de un Sistema Cognitivo Computacional es la **Transformación**.
 
-Un sistema cognitivo se define puramente como una categoría pequeña \mathcal{C}_{cog} compuesta por una clase de objetos \operatorname{Ob}(\mathcal{C}_{cog}) (que actúan meramente como índices topológicos o dominios de definición carentes de sustancia interna) y morfismos f \in \operatorname{Hom}_{\mathcal{C}_{cog}}(A, B) que encapsulan la totalidad de la sustancia operativa.
+Un sistema cognitivo se define puramente como una categoría pequeña C_{cog} compuesta por una clase de objetos Ob(C_{cog}) (que actúan meramente como índices topológicos o dominios de definición carentes de sustancia interna) y morfismos f ∈ Hom_{C_{cog}}(A, B) que encapsulan la totalidad de la sustancia operativa.
 
 ```mermaid
 graph LR
@@ -48,9 +48,9 @@ graph LR
 
 La afirmación de que los objetos carecen de sustancia interna no es una elección filosófica arbitraria sino un teorema. El **Lema de Yoneda** establece que un objeto A queda completamente determinado, hasta isomorfismo, por la totalidad de los morfismos que apuntan hacia él:
 
-\operatorname{Nat}(\operatorname{Hom}_{\mathcal{C}}(A, -), F) \cong F(A)
+Nat(Hom_{C}(A, -), F) \cong F(A)
 
-Un objeto no "es" nada más allá de la estructura completa de las transformaciones que lo involucran. La incrustación de Yoneda \mathsf{y}: \mathcal{C} \hookrightarrow [\mathcal{C}^{op}, \mathbf{Set}] es fiel y plena: no se pierde información al sustituir los objetos por sus perfiles relacionales. Esto fundamenta axiomáticamente la decisión ontológica del CTM de tratar los objetos como puras sombras de los morfismos.
+Un objeto no "es" nada más allá de la estructura completa de las transformaciones que lo involucran. La incrustación de Yoneda y: C ↪ [C^{op}, Set] es fiel y plena: no se pierde información al sustituir los objetos por sus perfiles relacionales. Esto fundamenta axiomáticamente la decisión ontológica del CTM de tratar los objetos como puras sombras de los morfismos.
 
 ### 1.2 Sistema Axiomático Completo
 
@@ -59,10 +59,10 @@ Se enuncian formalmente los axiomas mínimos que sustentan la teoría:
 | Axioma | Enunciado | Consecuencia |
 | :--- | :--- | :--- |
 | **A0 (Primitiva)** | La Transformación (morfismo) es la única primitiva ontológica. | Estado, Memoria, Contexto y Agente son derivados. |
-| **A1 (Composición)** | \forall f: A \to B, \; g: B \to C, \; \exists \; g \circ f : A \to C | Todo par de transformaciones consecutivas produce una transformación compuesta. |
-| **A2 (Asociatividad)** | h \circ (g \circ f) = (h \circ g) \circ f | El orden de agrupación es irrelevante; la estructura es invariante. |
-| **A3 (Identidad)** | \forall A \in \operatorname{Ob}(\mathcal{C}_{cog}), \; \exists \; 1_A : A \to A | El "estado" es un caso degenerado: la transformación que se aplica a sí misma. |
-| **A4 (Yoneda)** | A \cong \operatorname{Hom}(-, A) (hasta isomorfismo natural) | Un objeto queda exhaustivamente definido por sus relaciones entrantes. |
+| **A1 (Composición)** | ∀ f: A → B,   g: B → C,   ∃   g ∘ f : A → C | Todo par de transformaciones consecutivas produce una transformación compuesta. |
+| **A2 (Asociatividad)** | h ∘ (g ∘ f) = (h ∘ g) ∘ f | El orden de agrupación es irrelevante; la estructura es invariante. |
+| **A3 (Identidad)** | ∀ A ∈ Ob(C_{cog}),   ∃   1_A : A → A | El "estado" es un caso degenerado: la transformación que se aplica a sí misma. |
+| **A4 (Yoneda)** | A \cong Hom(-, A) (hasta isomorfismo natural) | Un objeto queda exhaustivamente definido por sus relaciones entrantes. |
 | **A5 (Conservación de Fisher)** | La métrica g^{FR} es invariante bajo morfismos de Markov. | Ninguna transformación cognitiva distorsiona las distancias informacionales. |
 | **A6 (Estacionariedad Variacional)** | \delta F = 0 sobre la trayectoria del sistema. | La cognición minimiza la energía libre variacional. |
 
@@ -74,9 +74,9 @@ Bajo la exigencia de la prueba de fuego categórica, las nociones previamente as
 
 ### 2.1 El Estado: Morfismos Identidad y Puntos Fijos de Lawvere
 
-El "estado" no existe como un espacio físico de memoria RAM o disco. Es el **acto dinámico continuo de autorreferencia con varianza nula**. Para cada objeto A, el estado es la aplicación sostenida del morfismo identidad 1_A : A \to A.
+El "estado" no existe como un espacio físico de memoria RAM o disco. Es el **acto dinámico continuo de autorreferencia con varianza nula**. Para cada objeto A, el estado es la aplicación sostenida del morfismo identidad 1_A : A → A.
 
-Bajo el **Teorema del Punto Fijo de Lawvere**, en un endofuntor cognitivo F: \mathcal{C}_{cog} \to \mathcal{C}_{cog}, un estado estacionario u observable X^* surge cuando satisface el isomorfismo:
+Bajo el **Teorema del Punto Fijo de Lawvere**, en un endofuntor cognitivo F: C_{cog} → C_{cog}, un estado estacionario u observable X^* surge cuando satisface el isomorfismo:
 
 F(X^*) \cong X^*
 
@@ -92,16 +92,16 @@ La memoria deshecha el modelo de repositorio o almacén de vectores. Se formaliz
 
 **Nivel Macro (Emergencia Estructural):** Mediante los **Sistemas Evolutivos de Memoria (MES)** de Ehresmann y Vanbremeersch, un patrón complejo de interacciones pasadas se amalgama en un recuerdo emergente mediante el **Colímite Categórico**:
 
-\operatorname{colim} D = \left( \sum_{i} A_i \right) / \sim
+colim D = \left( ∑_{i} A_i \right) / \sim
 
 El colímite permite la **complejificación jerárquica**: componentes de niveles inferiores se fusionan en componentes de niveles superiores sin requerir almacenamiento estático. Un "recuerdo" es un objeto emergente en el que convergen las inyecciones universales de todos los morfismos del patrón histórico.
 
 **Nivel Micro (Semántica Funcional):** La reconstrucción temporal del foco contextual se rige por la **Comónada Store**:
 
-\operatorname{Store}_S(A) = (S \to A) \times S
+Store_S(A) = (S → A) × S
 
 * **Counidad (\epsilon):** \epsilon(g, s) = g(s) — Extrae la evaluación emergente del foco actual.
-* **Coduplicación (\delta):** \delta(g, s) = (\lambda s'. (g, s'), \; s) — Despliega la reconstrucción del contexto, recontextualizando la trayectoria entera con respecto a cada punto focal posible.
+* **Coduplicación (\delta):** \delta(g, s) = (\lambda s'. (g, s'),   s) — Despliega la reconstrucción del contexto, recontextualizando la trayectoria entera con respecto a cada punto focal posible.
 
 La memoria, ergo, no es almacenaje. Es el continuo despliegue operativo del funtor que evalúa y proyecta la transformación histórica.
 
@@ -111,30 +111,30 @@ La memoria, ergo, no es almacenaje. Es el continuo despliegue operativo del funt
 
 El contexto no es una caja delimitadora de tokens ni un espacio algorítmico. Es una subvariedad topológica materializada por un par de funtores adjuntos L \dashv R mediante **Lentes Ópticas Bayesianas**:
 
-\mathbf{Lens}((X, S), (Y, R)) = \operatorname{Hom}(X, Y) \times \operatorname{Hom}(X \times R, S)
+Lens((X, S), (Y, R)) = Hom(X, Y) × Hom(X × R, S)
 
-* **Vista Directa (Forward v):** v: X \to Y — Proyecta la distribución contextual a través de un canal de Markov.
-* **Actualización Inversa (Backward u):** u: X \times R \to S — Propaga la corrección de error condicionada hacia atrás, ajustando los parámetros generativos.
+* **Vista Directa (Forward v):** v: X → Y — Proyecta la distribución contextual a través de un canal de Markov.
+* **Actualización Inversa (Backward u):** u: X × R → S — Propaga la corrección de error condicionada hacia atrás, ajustando los parámetros generativos.
 
-\text{Contexto} \equiv \text{Subvariedad materializada por } L \dashv R
+Contexto \equiv Subvariedad materializada por  L \dashv R
 
 La adjunción impone una restricción fundamental: la información proyectada por L (lo que "se ve") y la información reconstruida por R (lo que "se actualiza") mantienen una correspondencia biyectiva natural. La "ventana de contexto" de un LLM es un colapso degenerado de esta estructura: una lente plana con backward path trivial.
 
 ---
 
-### 2.4 El Agente: Coálgebra sobre Funtores Polinómicos (\mathbf{Poly})
+### 2.4 El Agente: Coálgebra sobre Funtores Polinómicos (Poly)
 
-El homúnculo voluntario queda disuelto. Un "agente" se reconstruye como una coálgebra (S, \alpha) sobre un funtor polinómico p \in \mathbf{Poly}:
+El homúnculo voluntario queda disuelto. Un "agente" se reconstruye como una coálgebra (S, \alpha) sobre un funtor polinómico p ∈ Poly:
 
-p(y) = \sum_{i \in p(1)} y^{p[i]} \quad \implies \quad \alpha : S \longrightarrow \sum_{i \in p(1)} S^{p[i]}
+p(y) = ∑_{i ∈ p(1)} y^{p[i]}   ⇒   \alpha : S \longrightarrow ∑_{i ∈ p(1)} S^{p[i]}
 
 Donde p(1) denota el fenotipo de salidas/posiciones observables y p[i] el espectro de entradas/direcciones aceptadas en la posición i. La agencia es la política emergente sobre esta interfaz polinómica.
 
-**Composición de Agentes (Interacción Multi-Sistema):** La categoría \mathbf{Poly} posee una estructura monoidal riquísima. Dados dos agentes p y q con sus coálgebras respectivas, la interacción se modela mediante el **producto de composición** (composition product):
+**Composición de Agentes (Interacción Multi-Sistema):** La categoría Poly posee una estructura monoidal riquísima. Dados dos agentes p y q con sus coálgebras respectivas, la interacción se modela mediante el **producto de composición** (composition product):
 
 p \triangleleft q
 
-Este producto captura la noción de que las salidas de un sistema se enrutan hacia las entradas del otro, y viceversa, produciendo un sistema dinámico acoplado. Un "equipo multi-agente" no es una orquestación imperativa: es la coálgebra sobre el funtor polinómico compuesto p_1 \triangleleft p_2 \triangleleft \cdots \triangleleft p_n, cuyas propiedades emergen por la estructura algebraica del producto, no por un planificador central.
+Este producto captura la noción de que las salidas de un sistema se enrutan hacia las entradas del otro, y viceversa, produciendo un sistema dinámico acoplado. Un "equipo multi-agente" no es una orquestación imperativa: es la coálgebra sobre el funtor polinómico compuesto p_1 \triangleleft p_2 \triangleleft ·s \triangleleft p_n, cuyas propiedades emergen por la estructura algebraica del producto, no por un planificador central.
 
 ---
 
@@ -161,7 +161,7 @@ graph TB
 
 Cualquier inferencia cognitiva opera sobre variedades estadísticas. El **Teorema de Chentsov** demuestra que la **Métrica de Información de Fisher** g^{FR} es la *única* métrica Riemanniana (salvo constante escalar) invariante bajo morfismos de Markov:
 
-g_{ij}^{FR}(\theta) = \int p(x; \theta) \left( \frac{\partial \log p(x; \theta)}{\partial \theta^i} \right) \left( \frac{\partial \log p(x; \theta)}{\partial \theta^j} \right) dx
+g_{ij}^{FR}(\theta) = ∈t p(x; \theta) \left( (\partial \log p(x; \theta)) / (\partial \theta^i) \right) \left( (\partial \log p(x; \theta)) / (\partial \theta^j) \right) dx
 
 La distancia informacional entre representaciones no sufre distorsión bajo transformaciones reductoras sin pérdida termodinámica, independientemente del hardware subyacente. La longitud de arco infinitesimal ds^2 = g_{ij}^{FR} \, d\theta^i \, d\theta^j (relacionada con la divergencia de Kullback-Leibler) actúa como una constante cósmica de la cognición.
 
@@ -169,7 +169,7 @@ La distancia informacional entre representaciones no sufre distorsión bajo tran
 
 Integrando la Inferencia Activa Composicional y las Lentes Bayesianas, todo sistema adaptativo auto-organizado evoluciona minimizando la Energía Libre Variacional F:
 
-F = \mathbb{E}_{q(\vartheta)} [\log q(\vartheta) - \log p(y, \vartheta)] = D_{KL}(q(\vartheta) \parallel p(\vartheta \mid y)) - \log p(y)
+F = E_{q(θ)} [\log q(θ) - \log p(y, θ)] = D_{KL}(q(θ) ∥ p(θ \mid y)) - \log p(y)
 
 La cognición obedece la ecuación Euler-Lagrange variacional:
 
@@ -181,11 +181,11 @@ Toda trayectoria cognitiva sigue flujos geodésicos en variedades de Fisher, an�
 
 Ningún sistema cognitivo computacional puede eludir la restricción termodinámica fundamental. El **Límite de Landauer** establece que el borrado de un bit de información requiere una disipación mínima de energía:
 
-E_{min} = k_B T \ln 2 \approx 2.87 \times 10^{-21} \, \text{J} \quad (\text{a } T = 300\text{K})
+E_{min} = k_B T \ln 2 \approx 2.87 × 10^{-21} \, J   (a  T = 300K)
 
 Este invariante impone que toda transformación cognitiva que reduzca entropía interna (consolide, comprima o "olvide" información) tiene un coste energético real no negociable. La cognición computacional no es gratuita: cada operación de colímite que fusiona trayectorias, cada proyección contextual que descarta información marginal, y cada actualización bayesiana que estrecha la distribución posterior, genera disipación térmica irreductible.
 
-**Verificación Empírica:** La suite FFI nativa (Rust/BN254) verificó la cota de Landauer a E_{min} = 1.837 \times 10^{-19} J sobre 10^7 iteraciones con cero excepciones (4.42 \times 10^9 ops/sec).
+**Verificación Empírica:** La suite FFI nativa (Rust/BN254) verificó la cota de Landauer a E_{min} = 1.837 × 10^{-19} J sobre 10^7 iteraciones con cero excepciones (4.42 × 10^9 ops/sec).
 
 ---
 
@@ -212,12 +212,12 @@ Para gobernar el LLM estocástico, la arquitectura adopta el **Álgebra de Kleen
 
 La selección de la siguiente transición no se arbitra por un planificador secuencial, sino por la **Dinámica de Campos** gobernada por la minimización de la **Energía Libre Esperada (EFE)**. Dado que computar la EFE perfecta es intratable en runtime, el CTM introduce la **Varentropía** (varianza de la entropía predictiva):
 
-* **Alta Varentropía:** \to *Slow Deliberation* costosa, explorando espacios abstractos.
-* **Baja Varentropía:** \to *Fast Agents* (heurísticas baratas y ruta directa).
+* **Alta Varentropía:** → *Slow Deliberation* costosa, explorando espacios abstractos.
+* **Baja Varentropía:** → *Fast Agents* (heurísticas baratas y ruta directa).
 
 **Epistemic Cross-Examination:** Si el modelo propone una transición T_{eff} irreversible con baja varentropía, el *Decision Kernel* intercepta exigiendo un `[Knowledge Proof]` fundamentado en el Hipergrafo. Las "alucinaciones arrogantes" (LLMs confiados pero erróneos) se neutralizan por esta asimetría de verificación.
 
-**Anti-Reward Hacking:** La recompensa UCB exige amortiguación: \text{Reward} = (\Delta I / \text{Cost}) \times D_{KL}(\text{Objetivo} \parallel \text{Transición}). Si la transición verificada no reduce la distancia al objetivo, su recompensa es cero.
+**Anti-Reward Hacking:** La recompensa UCB exige amortiguación: Reward = (Δ I / Cost) × D_{KL}(Objetivo ∥ Transición). Si la transición verificada no reduce la distancia al objetivo, su recompensa es cero.
 
 ### 4.4 Especulación Dirigida por Patrones (Pattern-Driven Speculation)
 
@@ -250,11 +250,11 @@ Las tecnologías de diseño contemporáneas se derivan como corolarios funtorial
 
 | Patrón Implementacional | Corolario Categórico y Algebraico | Expresión Formal |
 | :--- | :--- | :--- |
-| **Event Sourcing** | Pliegue funtorial sobre una categoría libre de morfismos inmutables. | \text{Estado} = \operatorname{colim}_{\mathcal{C}_{free}} (e_1 \xrightarrow{f_1} e_2 \dots) |
-| **CQRS** | Factorización de morfismos por funtores adjuntos (Lentes separadas L \dashv R). | \operatorname{Hom}_{\text{Read}}(L(A), B) \cong \operatorname{Hom}_{\text{Write}}(A, R(B)) |
-| **CRDTs** | Morfismos monótonos actuando sobre Join-Semilattices idempotentes. | a \vee (b \vee c) = (a \vee b) \vee c, \quad a \vee a = a |
-| **Merkle DAGs** | Funtor preservador de estructura hacia espacio probabilístico verificable. | F_{hash} : \mathcal{C}_{cog} \to \mathbf{HashSpace} (\mathcal{O}(1) Isomorfismo natural) |
-| **Sagas** | Compensación semántica no-reversible que preserva el rastro auditable. | T_{comp} \neq T^{-1}; el Ledger registra ambos morfismos. |
+| **Event Sourcing** | Pliegue funtorial sobre una categoría libre de morfismos inmutables. | Estado = colim_{C_{free}} (e_1 \xrightarrow{f_1} e_2 \dots) |
+| **CQRS** | Factorización de morfismos por funtores adjuntos (Lentes separadas L \dashv R). | Hom_{Read}(L(A), B) \cong Hom_{Write}(A, R(B)) |
+| **CRDTs** | Morfismos monótonos actuando sobre Join-Semilattices idempotentes. | a \vee (b \vee c) = (a \vee b) \vee c,   a \vee a = a |
+| **Merkle DAGs** | Funtor preservador de estructura hacia espacio probabilístico verificable. | F_{hash} : C_{cog} → HashSpace (O(1) Isomorfismo natural) |
+| **Sagas** | Compensación semántica no-reversible que preserva el rastro auditable. | T_{comp} ≠ T^{-1}; el Ledger registra ambos morfismos. |
 
 ---
 
@@ -323,7 +323,7 @@ quadrantChart
     Contratos Lente LegalTech: 0.90, 0.25
 ```
 
-1. **Matemáticas Puras:** Lema de Yoneda, dualidad de Lawvere, funtores polinómicos \mathbf{Poly} (composición \triangleleft), comónada Store y CF-GKAT.
+1. **Matemáticas Puras:** Lema de Yoneda, dualidad de Lawvere, funtores polinómicos Poly (composición \triangleleft), comónada Store y CF-GKAT.
 2. **Física Teórica:** Variedades estadísticas de Fisher-Rao, Teorema de Chentsov, Principio de Energía Libre (\delta F = 0), Límite de Landauer (k_B T \ln 2).
 3. **Ciencias Cognitivas & Biomedicina:** Sistemas Evolutivos de Memoria (MES) en redes neuronales biológicas, Inferencia Activa Composicional (Friston/Smithe), dinámica homeostática neurobiológica.
 4. **Arquitectura de Software:** Event Sourcing, CQRS, CRDTs, Merkle DAGs, Commit Gates SCITT (IETF RFC 9943) y Sagas semánticas.

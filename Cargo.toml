@@ -14,7 +14,7 @@ members = [
     "src/02_engines/legion_engine/legion-lang",
     "src/03_state/scitt_ledger/kernel_rs",
     "tests/compliance-suite"
-]
+, "src/02_engines/cortex_guard/rust_core"]
 
 # Perfil para desarrollo rápido (Alineado con el C5-REAL)
 [profile.dev]

@@ -51,11 +51,11 @@ El flujo del sistema opera bajo el principio de Event Sourcing Causal Inmutable:
 A nivel macro, el acoplamiento sigue una estructura acíclica de DAG (Direct Acyclic Graph) verificada por el compilador:
 
 **A. Relaciones de Importación:**
-- `babylon60-ide/frontend` \rightarrow Consume la API expuesta por `babylon60-ide/backend`.
-- `babylon60-ide/backend` \rightarrow Carga `babylon60` core python y llama dinámicamente a `core_graph_ledger` y `cortex_mamba_network`.
-- `babylon60` core \rightarrow Llama a `causal_isomorphism` para validar la transducción y usa `BFT_Ledger` para transacciones.
-- `BFT_Ledger` \rightarrow Llama a `strike_rs` a través de bindings compilados para calcular el cortex-taint y la inmutabilidad de los bloques.
-- `strike_rs` \rightarrow No tiene dependencias de capas superiores. Actúa como el sumidero de exergía absoluto y el kernel matemático inmutable.
+- `babylon60-ide/frontend` → Consume la API expuesta por `babylon60-ide/backend`.
+- `babylon60-ide/backend` → Carga `babylon60` core python y llama dinámicamente a `core_graph_ledger` y `cortex_mamba_network`.
+- `babylon60` core → Llama a `causal_isomorphism` para validar la transducción y usa `BFT_Ledger` para transacciones.
+- `BFT_Ledger` → Llama a `strike_rs` a través de bindings compilados para calcular el cortex-taint y la inmutabilidad de los bloques.
+- `strike_rs` → No tiene dependencias de capas superiores. Actúa como el sumidero de exergía absoluto y el kernel matemático inmutable.
 
 ---
 

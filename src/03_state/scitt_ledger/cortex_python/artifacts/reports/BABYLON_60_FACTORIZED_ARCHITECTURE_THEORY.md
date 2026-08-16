@@ -8,17 +8,17 @@ Este documento formaliza la auditoría arquitectónica del repositorio BABYLON-6
 
 ## 2. Definición Formal de la Arquitectura
 Definimos la arquitectura A no como el conjunto de archivos físicos, sino como la tupla causal:
- A = (\Omega, \Gamma, \Pi, \Lambda) 
+ A = (Ω, \Gamma, \Pi, \Lambda) 
 
 Donde:
-*   **\Omega**: El conjunto de invariantes fundamentales que el sistema asegura preservar (ej. Determinismo, Atribución, Inmutabilidad).
+*   **Ω**: El conjunto de invariantes fundamentales que el sistema asegura preservar (ej. Determinismo, Atribución, Inmutabilidad).
 *   **\Gamma**: El conjunto de transformaciones de estado permitidas (Mutaciones/Operadores).
 *   **\Pi**: La política de evidencia (*Proof* policy). Especifica qué atestación criptográfica exige el sistema para aceptar una mutación en \Gamma.
 *   **\Lambda**: El Ledger o bitácora de observaciones (Persistencia de la historia validada).
 
 **Equivalencia Arquitectónica:**
 Dos sistemas independientes A_1 y A_2 (independientemente del lenguaje de programación o framework utilizado) se consideran de la misma *clase de equivalencia arquitectónica* si y solo si:
- Preserve(A_1, \Omega) = Preserve(A_2, \Omega) \iff (\Omega, \Gamma, \Pi, \Lambda)_1 = (\Omega, \Gamma, \Pi, \Lambda)_2 
+ Preserve(A_1, Ω) = Preserve(A_2, Ω) \iff (Ω, \Gamma, \Pi, \Lambda)_1 = (Ω, \Gamma, \Pi, \Lambda)_2 
 
 ---
 
@@ -46,4 +46,4 @@ Para caracterizar a BABYLON-60 bajo esta teoría, hemos utilizado un clasificado
 ---
 
 ## 5. Conclusión Metodológica
-Bajo el marco (\Omega, \Gamma, \Pi, \Lambda), el repositorio actual de BABYLON-60 se clasifica como un representante de baja densidad exergética para su clase teórica. El documento no propone una corrección estética, sino que provee la línea base (CR=588, API=0.49) para que futuras refactorizaciones puedan ser evaluadas falsablemente: si un refactor incrementa el API y reduce el CR preservando \Omega, la hipótesis \Omega se fortalecerá empíricamente.
+Bajo el marco (Ω, \Gamma, \Pi, \Lambda), el repositorio actual de BABYLON-60 se clasifica como un representante de baja densidad exergética para su clase teórica. El documento no propone una corrección estética, sino que provee la línea base (CR=588, API=0.49) para que futuras refactorizaciones puedan ser evaluadas falsablemente: si un refactor incrementa el API y reduce el CR preservando Ω, la hipótesis Ω se fortalecerá empíricamente.

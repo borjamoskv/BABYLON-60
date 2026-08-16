@@ -59,7 +59,7 @@ Cualquier sistema que respete estas 7 leyes físicas **ES** BABYLON-60.
 2. **Invariant Ω2: Every state transition is deterministic.**
    - Garantizado por la canonicalización determinista CBOR antes de la generación del hash. Dos payloads iguales generan el mismo hash bit a bit.
 3. **Invariant Ω3: Every persisted state is verified.**
-   - Garantizado por el embudo de Verificación (\Omega = C \circ V): el commit no existe sin firma Ed25519 válida en la curva elíptica.
+   - Garantizado por el embudo de Verificación (Ω = C ∘ V): el commit no existe sin firma Ed25519 válida en la curva elíptica.
 4. **Invariant Ω4: Every proof is reproducible.**
    - Garantizado por las aserciones formales del código Lean en `proof/lean/`, ligando matemática y ejecución sin estado de red oculto (Zero-Network).
 5. **Invariant Ω5: Every observable history is replayable.**
@@ -76,6 +76,6 @@ Cualquier sistema que respete estas 7 leyes físicas **ES** BABYLON-60.
 En su madurez termodinámica, el sistema no ejecuta código; **resuelve restricciones**.
 El Verificador es el Main Thread del Universo. La capa de aplicación es un esclavo que propone sub-grafos (AST) intentando cumplir las pruebas del Verificador.
 
- \forall \tau : \text{Si } V(\tau) = True \rightarrow C(\tau) \rightarrow \Sigma_{n+1} 
+ \forall \tau : Si  V(\tau) = True → C(\tau) → \Sigma_{n+1} 
 
 Esa es la Identidad Matemática Absoluta de BABYLON-60.
