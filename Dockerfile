@@ -12,6 +12,9 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     curl \
+    git \
+    pkg-config \
+    python3-dev \
     protobuf-compiler \
     libprotobuf-dev \
     clang \
@@ -30,7 +33,8 @@ COPY src ./src
 COPY experiments ./experiments
 COPY README.md LICENSE ./
 
-RUN uv sync --frozen --no-dev
+RUN pip install --no-cache-dir --upgrade pip setuptools cffi maturin \
+    && uv sync --frozen --no-dev
 COPY . .
 
 # Stage 2: Minimal Runtime environment (Non-root user)
