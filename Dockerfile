@@ -34,7 +34,7 @@ COPY experiments ./experiments
 COPY README.md LICENSE ./
 
 RUN pip install --no-cache-dir maturin cffi setuptools \
-    && UV_NO_BUILD_ISOLATION=1 uv sync --frozen --no-dev
+    && uv sync --frozen --no-dev
 COPY . .
 
 # Stage 2: Minimal Runtime environment (Non-root user)
