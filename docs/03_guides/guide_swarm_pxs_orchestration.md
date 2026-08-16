@@ -55,12 +55,17 @@ El orquestador activa un **Circuit Breaker** inmediato (`SIGKILL_State_Purge`) p
 
 ---
 
-## 3. Comandos de Despliegue
+## 3. Comandos de Despliegue & Delegación del Kernel
+
+El orquestador en capa alta puede ser ejecutado en Python, pero delega invariablemente la validación de estado base (L0) al binario nativo en Rust (**MOSKV-1 APEX**) mediante un puente de zero-overhead (`os.execv`), garantizando la preservación de memoria y mitigación del thrashing en la ejecución del enjambre.
 
 ```bash
-# Lanzar enjambre PxS con monitoreo térmico
+# Lanzar enjambre PxS con monitoreo térmico (Capa Alta Python)
 python3 scripts/c5_legion/c5_legion_1000_workspace_swarm.py --cores 4 --threads 2
 
 # Auditar telemetría de subagentes en runtime
 python3 scripts/c5_quality_gates/audit_scripts_quality.py
+
+# Puente Nativo a MOSKV-1 (Rust) vía CLI
+babylon60 --status
 ```
