@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ENV PATH="/root/.local/bin:$PATH"
 
-COPY pyproject.toml uv.lock ./
+COPY pyproject.toml uv.lock Cargo.toml Cargo.lock* ./
 COPY crates ./crates
 COPY packages ./packages
 COPY src ./src
