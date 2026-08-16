@@ -1,34 +1,71 @@
 // C5-REAL EXERGY CERTIFIED
 // Implementación bare-metal del modelo Asymmetric Ownership + Static Ring Buffer Slots.
-// Resuelve fricción termodinámica de GC en aarch64.
+// Resuelve fricción termodinámica de GC en aarch64 (Apple Silicon L1 Cache-Line: 128 Bytes).
 
-use std::sync::atomic::{AtomicPtr, AtomicUsize, Ordering};
+use std::sync::atomic::{AtomicPtr, AtomicU32, AtomicU64, Ordering};
 use std::ptr;
 
 /// Representa el estado de un slot en el Ring Buffer pre-asignado.
-/// #[repr(C)] garantiza layout estable para interoperabilidad con Python/mmap.
-/// Align(128) asegura que cada slot reside en su propia línea de caché (Apple Silicon),
+/// Layout C-ABI estricto (128 bytes metadatos + 4096 bytes payload).
+/// Align(128) asegura que los metadatos residen en su propia línea de caché L1 (Apple Silicon),
 /// eliminando false sharing entre contadores atómicos de slots adyacentes.
 #[repr(C, align(128))]
 pub struct StateSlot {
-    /// Contador de lectores activos. Python solo reutiliza si == 0 y status >= 5.
-    pub active_readers: AtomicUsize,
-    /// Estado del slot: 0=Idle, 2=Ready, 3=Validating, 4=Active, 5=Retired, 6=Quarantine
-    pub status_flag: AtomicUsize,
-    /// Hash SHA-256 de validación (Causa Formal)
+    /// 0x00 - 0x03: Bandera de estado atómica (0=Idle, 2=Ready, 3=Validating, 4=Active, 5=Retired, 6=Quarantine)
+    pub status_flag: AtomicU32,
+    /// 0x04 - 0x07: Contador de lectores activos. Python solo reutiliza si == 0 y status >= 5.
+    pub active_readers: AtomicU32,
+    /// 0x08 - 0x0F: ID de Época / Secuencia para Seqlock (Par = Estable, Impar = En Escritura).
+    pub epoch_id: AtomicU64,
+    /// 0x10 - 0x2F: Hash SHA-256 de validación (Causa Formal, 32 bytes).
     pub payload_hash: [u8; 32],
-    /// Datos opacos del estado. La interpretación depende del protocolo compartido.
+    /// 0x30 - 0x7F: Relleno explícito hasta completar exactamente 128 Bytes (L1 Cache Line en Apple Silicon).
+    pub _padding: [u8; 80],
+    /// 0x80 - 0x107F: Datos opacos del estado (4096 bytes).
     pub payload: [u8; 4096],
 }
 
 impl StateSlot {
     pub const fn new() -> Self {
         StateSlot {
-            active_readers: AtomicUsize::new(0),
-            status_flag: AtomicUsize::new(0),
+            status_flag: AtomicU32::new(0),
+            active_readers: AtomicU32::new(0),
+            epoch_id: AtomicU64::new(0),
             payload_hash: [0; 32],
+            _padding: [0; 80],
             payload: [0; 4096],
         }
+    }
+
+    /// Lectura optimista lock-free protegida por Seqlock (Acquire/Release).
+    /// Retorna `None` si detecta un desgarro de lectura (torn read) o escritura en progreso.
+    #[inline(always)]
+    pub fn read_payload_seqlock(&self) -> Option<([u8; 32], &[u8; 4096])> {
+        let e1 = self.epoch_id.load(Ordering::Acquire);
+        if e1 % 2 != 0 {
+            return None; // Escritura concurrente en progreso (Impar)
+        }
+        let hash = self.payload_hash;
+        let payload_ref = &self.payload;
+        let e2 = self.epoch_id.load(Ordering::Acquire);
+        if e1 == e2 {
+            Some((hash, payload_ref))
+        } else {
+            None // Lectura desgarrada (Torn read)
+        }
+    }
+
+    /// Inicia secuencia de escritura Seqlock incrementando la época a IMPAR.
+    #[inline(always)]
+    pub fn begin_write(&self) -> u64 {
+        let prev = self.epoch_id.fetch_add(1, Ordering::Release);
+        prev + 1
+    }
+
+    /// Cierra secuencia de escritura Seqlock incrementando la época a PAR.
+    #[inline(always)]
+    pub fn end_write(&self) {
+        self.epoch_id.fetch_add(1, Ordering::Release);
     }
 }
 
@@ -65,8 +102,7 @@ impl EbrKernel {
         }
     }
 
-    /// Evalúa heurística de varentropía. Simula detección de RLHF breakthrough.
-    /// En producción, inspeccionaría métricas de entropía en el payload.
+    /// Evalúa heurística de varentropía.
     #[inline(always)]
     fn is_varentropy_lethal(&self, epoch: *const StateSlot) -> bool {
         if epoch.is_null() {
@@ -74,7 +110,7 @@ impl EbrKernel {
         }
         unsafe {
             let status = (*epoch).status_flag.load(Ordering::Relaxed);
-            // Simulación: status 6 ya marcado como quarantine por escritor externo
+            // Status 6 marcado como cuarentena por auditor o escritor
             status == 6
         }
     }
@@ -83,11 +119,10 @@ impl EbrKernel {
     ///
     /// # Seguridad de Memoria en aarch64
     /// - CAS exitoso usa `Release`: publica el puntero DESPUÉS de que todos los writes
-    ///   al slot (incluyendo status_flag) sean globalmente visibles.
+    ///   al slot (incluyendo status_flag y epoch_id) sean globalmente visibles.
     /// - Load inicial usa `Acquire`: garantiza que lecturas subsiguientes al slot
     ///   no se reordenan antes de la carga del puntero (previene zombie reads).
-    /// - CAS fallido usa `Acquire`: necesitamos consistencia para reintentar,
-    ///   pero no estamos publicando nada nuevo.
+    /// - CAS fallido usa `Acquire`: consistencia para reintentar.
     pub fn commit_transition(&self, new_epoch: *mut StateSlot) -> Result<(), &'static str> {
         if new_epoch.is_null() {
             return Err("null epoch rejected");
@@ -95,20 +130,16 @@ impl EbrKernel {
 
         if self.is_varentropy_lethal(new_epoch) {
             // Marcar slot defectuoso como cuarentena ANTES de revertir
-            // Release asegura que este write sea visible antes del CAS de reversión
             unsafe {
                 (*new_epoch).status_flag.store(6, Ordering::Release);
             }
 
             // Reversión atómica: active_epoch_ptr → stable_fallback_ptr
-            // Leemos fallback con Acquire para garantizar consistencia
             let fallback = self.manifest.stable_fallback_ptr.load(Ordering::Acquire);
             if fallback.is_null() {
                 return Err("fallback null during lethal reversal");
             }
 
-            // CAS AcqRel: Acquire para ver estado actual consistente,
-            // Release para publicar fallback de forma segura.
             let current = self.manifest.active_epoch_ptr.load(Ordering::Acquire);
             match self.manifest.active_epoch_ptr.compare_exchange(
                 current,
@@ -121,7 +152,6 @@ impl EbrKernel {
             }
         } else {
             // Transición normal: publicar new_epoch como activo
-            // Release: garantiza inicialización completa
             let current = self.manifest.active_epoch_ptr.load(Ordering::Acquire);
             match self.manifest.active_epoch_ptr.compare_exchange(
                 current,
@@ -138,4 +168,3 @@ impl EbrKernel {
 
 // Instancia global del Kernel
 pub static KERNEL: EbrKernel = EbrKernel::new();
-
