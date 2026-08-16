@@ -22,8 +22,8 @@ impl ExergyTelemetry {
     pub fn new() -> Self {
         #[cfg(target_os = "linux")]
         {
-            let l1d = Builder::new().hardware(perf_event::events::Hardware::CACHE_MISSES).build().ok();
-            let branch = Builder::new().hardware(perf_event::events::Hardware::BRANCH_MISSES).build().ok();
+            let l1d = Builder::new().kind(perf_event::events::Hardware::CACHE_MISSES).build().ok();
+            let branch = Builder::new().kind(perf_event::events::Hardware::BRANCH_MISSES).build().ok();
             Self { l1d_misses: l1d, branch_misses: branch }
         }
         #[cfg(not(target_os = "linux"))]

@@ -2,12 +2,14 @@
 // BABYLON-60 v4.0 Sovereign Hardened
 // █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 // ============================================================================
+#[cfg(target_os = "linux")]
 use inotify::{Inotify, WatchMask};
 use ring::hmac;
 use rusqlite::{params, Connection};
 use signal_hook::consts::signal::{SIGINT, SIGTERM};
 use signal_hook::iterator::Signals;
 use std::env;
+#[cfg(target_os = "linux")]
 use std::path::Path;
 use std::process::{Command, Stdio};
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -85,6 +87,41 @@ impl BftLedger {
     }
 }
 
+/// Monitoreo inotify de ~/.agent_persist (Linux-only: inotify no existe fuera de
+/// Linux; inotify-sys no compila en Windows). En macOS/Windows el binario corre
+/// sin este watcher — la telemetría FS es best-effort por diseño.
+#[cfg(target_os = "linux")]
+fn spawn_fs_watch(ledger: Arc<Mutex<BftLedger>>, shutdown_flag: Arc<AtomicBool>) {
+    let home = env::var("HOME").unwrap_or_else(|_| "/root".to_string());
+    let agent_dir = format!("{}/.agent_persist", home);
+
+    if Path::new(&agent_dir).exists() {
+        thread::spawn(move || {
+            if let Ok(mut inotify) = Inotify::init() {
+                let _ = inotify.watches().add(
+                    Path::new(&agent_dir),
+                    WatchMask::MODIFY | WatchMask::CREATE | WatchMask::DELETE,
+                );
+
+                let mut buffer = [0; 1024];
+                while !shutdown_flag.load(Ordering::SeqCst) {
+                    if let Ok(events) = inotify.read_events(&mut buffer) {
+                        for event in events {
+                            if let Some(name) = event.name {
+                                let payload = name.to_string_lossy().to_string();
+                                if let Ok(mut l) = ledger.lock() {
+                                    let _ = l.insert("FS_EVENT", &payload);
+                                }
+                            }
+                        }
+                    }
+                    thread::sleep(std::time::Duration::from_millis(50));
+                }
+            }
+        });
+    }
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("█▄ [Causal-Determinist] AGENT CODE BFT INTERCEPTOR (HARDENED MCTS)");
 
@@ -130,38 +167,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     });
 
-    // 2. Monitoreo inotify de ~/.agent_persist
-    let home = env::var("HOME").unwrap_or_else(|_| "/root".to_string());
-    let agent_dir = format!("{}/.agent_persist", home);
-    
-    let l_fs = Arc::clone(&ledger);
-    let s_fs = Arc::clone(&shutdown_flag);
-    
-    if Path::new(&agent_dir).exists() {
-        thread::spawn(move || {
-            if let Ok(mut inotify) = Inotify::init() {
-                let _ = inotify.watches().add(
-                    Path::new(&agent_dir),
-                    WatchMask::MODIFY | WatchMask::CREATE | WatchMask::DELETE,
-                );
-                
-                let mut buffer = [0; 1024];
-                while !s_fs.load(Ordering::SeqCst) {
-                    if let Ok(events) = inotify.read_events(&mut buffer) {
-                        for event in events {
-                            if let Some(name) = event.name {
-                                let payload = name.to_string_lossy().to_string();
-                                if let Ok(mut l) = l_fs.lock() {
-                                    let _ = l.insert("FS_EVENT", &payload);
-                                }
-                            }
-                        }
-                    }
-                    thread::sleep(std::time::Duration::from_millis(50));
-                }
-            }
-        });
-    }
+    // 2. Monitoreo inotify de ~/.agent_persist (Linux-only; no-op en otros OS)
+    #[cfg(target_os = "linux")]
+    spawn_fs_watch(Arc::clone(&ledger), Arc::clone(&shutdown_flag));
 
     // 3. Subproceso CLI (Bypass de recursión infinita)
     let real_cli = env::var("REAL_AGENT_PATH").unwrap_or_else(|_| "npx".to_string());

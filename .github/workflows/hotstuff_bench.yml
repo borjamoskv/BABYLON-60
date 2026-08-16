@@ -23,6 +23,6 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install dependencies
-        run: pip install pytest pytest-asyncio
+        run: pip install -e . pytest pytest-asyncio
       - name: Run scheduler tests
         run: PYTHONPATH=. pytest tests/test_hotstuff_consensus.py -v

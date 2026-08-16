@@ -1,3 +1,24 @@
 [submodule "docs/aie-book"]
 	path = docs/aie-book
 	url = https://github.com/chiphuyen/aie-book.git
+[submodule "apps/babylon60-ide/src-tauri/moskv-1-apex"]
+	path = apps/babylon60-ide/src-tauri/moskv-1-apex
+	url = https://github.com/borjamoskv/moskv-1-apex.git
+[submodule "experiments/proof_kernel/NUL-ZK"]
+	path = experiments/proof_kernel/NUL-ZK
+	url = https://github.com/borjamoskv/NUL-ZK.git
+[submodule "experiments/proof_kernel/babylon-60-alpha"]
+	path = experiments/proof_kernel/babylon-60-alpha
+	url = https://github.com/borjamoskv/babylon-60-alpha.git
+[submodule "packages/cortex/moskv-swarm"]
+	path = packages/cortex/moskv-swarm
+	url = https://github.com/borjamoskv/moskv-swarm.git
+[submodule "packages/extensions/smoke-detector-extension"]
+	path = packages/extensions/smoke-detector-extension
+	url = https://github.com/borjamoskv/smoke-detector-extension.git
+[submodule "tools/audit/openclaw-test-bounty"]
+	path = tools/audit/openclaw-test-bounty
+	url = https://github.com/borjamoskv/openclaw-test-bounty.git
+[submodule "tools/audit/uniswap-v4-eip1153-audit"]
+	path = tools/audit/uniswap-v4-eip1153-audit
+	url = https://github.com/borjamoskv/uniswap-v4-eip1153-audit.git

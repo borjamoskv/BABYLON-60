@@ -52,17 +52,27 @@ forge test -vvv
 
 ---
 
-## 🚀 Deployment & Anvil Local Node
+## 🚀 Deployment & Testnet L2 Integration
 
 ```bash
-# 1. Start local Anvil RPC node
-anvil --port 8545
+# 1. Local Anvil Dry-Run / Deployment
+forge script script/DeployApoptosisAnchor.s.sol:DeployApoptosisAnchorScript --sig "run()"
 
-# 2. Deploy ApoptosisAnchor contract to Anvil
-forge script script/Counter.s.sol:CounterScript \
-  --rpc-url http://127.0.0.1:8545 \
+# 2. Deploy to Local Anvil Node
+anvil --port 8545
+forge script script/DeployApoptosisAnchor.s.sol:DeployApoptosisAnchorScript \
+  --rpc-url anvil_local \
   --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 \
   --broadcast
+
+# 3. Deploy to Base Sepolia Testnet L2
+GENESIS_HASH=0x... forge script script/DeployApoptosisAnchor.s.sol:DeployApoptosisAnchorScript \
+  --rpc-url base_sepolia \
+  --private-key $ETH_PRIVATE_KEY \
+  --broadcast
+
+# 4. Run E2E Testnet Notary Simulator
+python3 ../../scripts/c5_simulations/testnet_apoptosis_notary.py --dry-run
 ```
 
 ---

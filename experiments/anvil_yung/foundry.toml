@@ -3,7 +3,11 @@ src = "src"
 out = "out"
 libs = ["lib"]
 
-# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
 [fuzz]
 runs = 20000
 
+[rpc_endpoints]
+anvil_local = "http://127.0.0.1:8545"
+base_sepolia = "https://sepolia.base.org"
+sepolia = "https://rpc.sepolia.org"
+arbitrum_sepolia = "https://sepolia-rollup.arbitrum.io/rpc"

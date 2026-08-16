@@ -2,6 +2,7 @@
 members = [
     "crates/*"
 ]
+exclude = ["apps/*"]
 resolver = "2"
 
 [package]
@@ -9,19 +10,17 @@ name = "babylon60_root"
 version = "4.0.0"
 edition = "2021"
 rust-version = "1.77"
-license = "Apache-2.0 OR MIT"
+license-file = "LICENSE"
 description = "SharedManifest (64 B, fail-stop, EU AI Act) — BABYLON-60 formal specification"
 repository = "https://github.com/borjamoskv/BABYLON-60"
 readme = "README.md"
-authors = ["Borja Moskv <borjamoskv@github.com>"]
+authors = ["BABYLON-60 Contributors"]
 
 [lib]
 name = "babylon60"
-crate-type = ["cdylib", "rlib"]
 path = "src/lib.rs"
 
 [dependencies]
-pyo3 = { version = "0.21.2", features = ["extension-module", "abi3-py310"] }
 coset = { version = "0.3", optional = true }
 ciborium = { version = "0.2", optional = true }
 rusqlite = { version = "0.40", optional = true, features = ["bundled"] }

@@ -1,11 +1,19 @@
 "engine: rust":
-  - "strike_rs/**/*"
+  - changed-files:
+      - any-glob-to-any-file:
+          - "strike_rs/**/*"
 
 "engine: python":
-  - "**/*.py"
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.py"
 
 "config: github":
-  - ".github/**/*"
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/**/*"
 
 "docs: artifact":
-  - "**/*.md"
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.md"
