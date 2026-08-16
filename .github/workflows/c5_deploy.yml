@@ -3,14 +3,6 @@ name: C5-REAL Sovereign Cloud Allocation (GCP)
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main, master]
-    paths:
-      - "infra/**"
-  pull_request:
-    branches: [main, master]
-    paths:
-      - "infra/**"
 
 concurrency:
   group: infra-deploy
