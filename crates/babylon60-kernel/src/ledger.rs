@@ -21,8 +21,18 @@ pub struct Event {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Checkpoint {
+    pub id: u64,
+    pub event_cutoff: EventId,
+    pub root_hash: Hash,
+    pub timestamp: SimulationClock,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct DAGLedger {
     events: BTreeMap<EventId, Event>,
+    pruned_hashes: BTreeMap<EventId, Hash>,
+    checkpoints: Vec<Checkpoint>,
     next_id: EventId,
     cumulative_hash: Hash,
 }
@@ -66,6 +76,8 @@ impl DAGLedger {
     pub fn new() -> Self {
         Self {
             events: BTreeMap::new(),
+            pruned_hashes: BTreeMap::new(),
+            checkpoints: Vec::new(),
             next_id: 0,
             cumulative_hash: [0u8; 32],
         }
@@ -82,7 +94,13 @@ impl DAGLedger {
             }
             match self.events.get(&p) {
                 Some(parent_evt) => parent_hashes.push(parent_evt.hash),
-                None => return Err("ParentNotFound"),
+                None => {
+                    if let Some(&hash) = self.pruned_hashes.get(&p) {
+                        parent_hashes.push(hash);
+                    } else {
+                        return Err("ParentNotFound");
+                    }
+                }
             }
         }
 
@@ -108,6 +126,37 @@ impl DAGLedger {
         Ok(id)
     }
 
+    pub fn create_checkpoint(&mut self) -> Result<Checkpoint, &'static str> {
+        if self.events.is_empty() && self.pruned_hashes.is_empty() {
+            return Err("CannotCheckpointEmptyLedger");
+        }
+
+        let cutoff = self.next_id;
+        let last_timestamp = self.events.values().last().map(|e| e.timestamp).unwrap_or(SimulationClock::new(0));
+
+        let checkpoint = Checkpoint {
+            id: self.checkpoints.len() as u64,
+            event_cutoff: cutoff,
+            root_hash: self.cumulative_hash,
+            timestamp: last_timestamp,
+        };
+
+        self.checkpoints.push(checkpoint.clone());
+        Ok(checkpoint)
+    }
+
+    pub fn prune_events_before(&mut self, cutoff: EventId) -> usize {
+        let to_prune: Vec<EventId> = self.events.keys().cloned().filter(|&id| id < cutoff).collect();
+        let pruned_count = to_prune.len();
+
+        for id in to_prune {
+            if let Some(event) = self.events.remove(&id) {
+                self.pruned_hashes.insert(id, event.hash);
+            }
+        }
+        pruned_count
+    }
+
     pub fn get_event(&self, id: EventId) -> Option<&Event> {
         self.events.get(&id)
     }
@@ -117,25 +166,39 @@ impl DAGLedger {
     }
 
     pub fn len(&self) -> usize {
+        self.events.len() + self.pruned_hashes.len()
+    }
+
+    pub fn active_len(&self) -> usize {
         self.events.len()
     }
 
     pub fn is_empty(&self) -> bool {
-        self.events.is_empty()
+        self.events.is_empty() && self.pruned_hashes.is_empty()
     }
 
     pub fn root_hash(&self) -> Hash {
         self.cumulative_hash
     }
 
-    /// Verifies the causal integrity of the entire event ledger.
+    pub fn checkpoints(&self) -> &[Checkpoint] {
+        &self.checkpoints
+    }
+
+    /// Verifies the causal integrity of active events in the ledger.
     pub fn verify_chain(&self) -> bool {
         for (&id, event) in &self.events {
             let mut parent_hashes = Vec::new();
             for &p in &event.parents {
                 match self.events.get(&p) {
                     Some(parent_evt) => parent_hashes.push(parent_evt.hash),
-                    None => return false,
+                    None => {
+                        if let Some(&pruned_hash) = self.pruned_hashes.get(&p) {
+                            parent_hashes.push(pruned_hash);
+                        } else {
+                            return false;
+                        }
+                    }
                 }
             }
             let expected_hash = compute_event_hash(
@@ -185,5 +248,31 @@ mod tests {
         let clock = SimulationClock::new(100);
         assert!(ledger.append(vec![0], clock, "self_loop".into()).is_err());
     }
+
+    #[test]
+    fn test_dag_ledger_checkpoint_and_pruning() {
+        let mut ledger = DAGLedger::new();
+        let clock = SimulationClock::new(100);
+
+        let id0 = ledger.append(vec![], clock, "evt0".into()).unwrap();
+        let id1 = ledger.append(vec![id0], clock, "evt1".into()).unwrap();
+        let _id2 = ledger.append(vec![id1], clock, "evt2".into()).unwrap();
+
+        let root_before = ledger.root_hash();
+        let checkpoint = ledger.create_checkpoint().unwrap();
+        assert_eq!(checkpoint.event_cutoff, 3);
+        assert_eq!(checkpoint.root_hash, root_before);
+
+        let pruned = ledger.prune_events_before(2);
+        assert_eq!(pruned, 2);
+        assert_eq!(ledger.active_len(), 1);
+        assert_eq!(ledger.len(), 3);
+
+        // Appending new event targeting pruned parent (id1) must succeed
+        let id3 = ledger.append(vec![id1], clock, "evt3".into()).unwrap();
+        assert_eq!(id3, 3);
+        assert!(ledger.verify_chain());
+    }
 }
+
 

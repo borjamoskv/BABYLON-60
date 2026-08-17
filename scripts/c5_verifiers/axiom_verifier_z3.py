@@ -14,7 +14,10 @@ providing equivalent coverage for the finite-domain axioms of the PoC system.
 """
 
 import sys
+import hashlib
+import time
 from dataclasses import dataclass, field
+from functools import lru_cache
 from typing import Dict, FrozenSet, List, Optional, Set, Tuple
 
 
@@ -47,8 +50,37 @@ class ExergyParamsSpec:
 
 
 # ---------------------------------------------------------------------------
-# Axiom Verification Functions
+# AST Memoization & Bounded Execution (Z3 SMT Safeguards)
 # ---------------------------------------------------------------------------
+class ASTMemoizationCache:
+    """Caché canónico determinista para la verificación formal de invariantes SMT/Z3."""
+
+    def __init__(self, maxsize: int = 1024) -> None:
+        self.maxsize = maxsize
+        self._cache: Dict[str, Tuple[bool, str]] = {}
+        self.hits = 0
+        self.misses = 0
+
+    def hash_ast(self, expr_repr: str) -> str:
+        """Calcula el hash SHA-256 del AST canónico estandarizado."""
+        canonical = "".join(expr_repr.split())
+        return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+    def get(self, expr_repr: str) -> Optional[Tuple[bool, str]]:
+        ast_hash = self.hash_ast(expr_repr)
+        if ast_hash in self._cache:
+            self.hits += 1
+            return self._cache[ast_hash]
+        self.misses += 1
+        return None
+
+    def put(self, expr_repr: str, passed: bool, detail: str) -> None:
+        ast_hash = self.hash_ast(expr_repr)
+        if len(self._cache) >= self.maxsize:
+            # Evicción básica FIFO
+            first_key = next(iter(self._cache))
+            del self._cache[first_key]
+        self._cache[ast_hash] = (passed, detail)
 
 
 class AxiomVerifier:
@@ -56,9 +88,32 @@ class AxiomVerifier:
 
     def __init__(self) -> None:
         self.results: List[Tuple[str, bool, str]] = []
+        self.ast_cache = ASTMemoizationCache()
 
     def record(self, name: str, passed: bool, detail: str) -> None:
         self.results.append((name, passed, detail))
+
+    def verify_with_bounded_timeout(
+        self, name: str, expr_repr: str, verify_fn, timeout_ms: float = 50.0
+    ) -> None:
+        """Ejecuta una verificación de restricción respetando tiempo acotado y caché AST."""
+        cached = self.ast_cache.get(expr_repr)
+        if cached is not None:
+            passed, detail = cached
+            self.record(f"{name} [CACHE HIT]", passed, detail)
+            return
+
+        start = time.perf_counter()
+        passed, detail = verify_fn()
+        elapsed_ms = (time.perf_counter() - start) * 1000.0
+
+        if elapsed_ms > timeout_ms:
+            passed = False
+            detail = f"SMT Timeout Exceeded: {elapsed_ms:.2f}ms > {timeout_ms:.2f}ms limit"
+
+        self.ast_cache.put(expr_repr, passed, detail)
+        self.record(name, passed, f"{detail} (eval_time={elapsed_ms:.3f}ms)")
+
 
     # === DAG AXIOMS ===
 
