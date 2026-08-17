@@ -1,6 +1,6 @@
 {
-  "version": "2.0.0",
-  "verified_at": "2026-08-17T14:19:38.464636+00:00",
+  "version": "2.1.0",
+  "verified_at": "2026-08-17T14:20:43.396280+00:00",
   "repository": "borjamoskv/teorema-robinson-moskv",
   "lock_files": {
     "FORMAL_CLAIMS.md": {
@@ -75,8 +75,9 @@
     },
     "CLAIM_TRACEABILITY_LOCK.md": {
       "path": "CLAIM_TRACEABILITY_LOCK.md",
-      "sha256": "27b18ff0f254fa35085df228f0fb2471ead961771d2fd8d37aaa7c65eecbd851",
+      "sha256": "d10f5099fdeb933e36585ada0d558135a7ecae101d8626aa825a3a39da225404",
       "status": "VERIFIED"
     }
-  }
+  },
+  "root_lock_set_digest": "0339d37b10f753d47e7905f6f00801f340cffab645aeacd4ff00c719845d1e9d"
 }

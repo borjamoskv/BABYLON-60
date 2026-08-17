@@ -1,6 +1,6 @@
 # EPISTEMIC_LOCKS.md — Master Index & Governance Specification
 
-> **STATUS: FROZEN / NORMATIVE MASTER INDEX v2.0.0**  
+> **STATUS: FROZEN / NORMATIVE MASTER INDEX v2.1.0**  
 > **Repository**: `borjamoskv/teorema-robinson-moskv`  
 > **Verification CLI**: `python3 scripts/verify_epistemic_locks.py`  
 
@@ -8,34 +8,34 @@ This master document serves as the central index and entry point for the **15 fr
 
 ---
 
-## 1. Epistemic Architecture & Claim Traceability DAG
+## 1. The 3-Way Epistemic Separation Firewall
+
+To prevent circular reasoning or false equivalence, the architecture strictly decouples three distinct levels of truth:
 
 ```text
 +-----------------------------------------------------------------------------------+
-|                              EPISTEMIC FIREWALL                                   |
-|                  (THEOREM_EMPIRICAL_BRIDGE.md)                                    |
-|   Formal inclusion + Runtime refinement + Cost alignment => Empirical superiority |
+|                            LEVEL 1: CRYPTOGRAPHIC TRUTH                           |
+|                    "This artifact hash has not been modified"                     |
 +-----------------------------------------------------------------------------------+
-                             /                                 \
-                            /                                   \
-                           v                                     v
-+---------------------------------------+       +---------------------------------------+
-|          FORMAL PROOF BOUNDARY        |       |        EXPERIMENTAL BENCHMARK         |
-|  - FORMAL_CLAIMS.md                   |       |  - BENCHMARK_PROTOCOL_v1.0.0.md       |
-|  - ASSUMPTIONS.md                     |       |  - RANDOMIZATION_PROTOCOL.md          |
-|  - proof/lean/EpistemicBoundary.lean  |       |  - METRICS.md                         |
-+---------------------------------------+       |  - FALSIFICATION_RULES.md             |
-                    |                           +---------------------------------------+
-                    v                                               |
-+---------------------------------------+                           v
-|           RUNTIME CONTRACT            |       +---------------------------------------+
-|  - TRACE_CONTRACT_v1.0.0.json         |       |        REPRODUCIBILITY & THREATS      |
-|  - Forbidden runtime self-certify     |       |  - REPRODUCIBILITY_LOCK.md            |
-+---------------------------------------+       |  - THREAT_MODEL.md                    |
-                                                +---------------------------------------+
+                                         |
+                                         v
++-----------------------------------------------------------------------------------+
+|                             LEVEL 2: FORMAL TRUTH                                 |
+|             "Lean 4 proves reachability inclusion under bridge axioms"             |
++-----------------------------------------------------------------------------------+
+                                         |
+                                         v
++-----------------------------------------------------------------------------------+
+|                            LEVEL 3: EMPIRICAL RESULT                              |
+|           "Paired McNemar test yielded p < 0.05 on benchmark task set B"          |
++-----------------------------------------------------------------------------------+
 ```
 
-### Claim-to-Verdict Chain of Custody (LOCK-15)
+> **FIREWALL INVARIANT**: No single level (Cryptographic, Formal, or Empirical) can be automatically converted into `"THE THEOREM IS TRUE IN THE WORLD"`. The system enforces empirical falsability at all times.
+
+---
+
+## 2. Claim-to-Verdict Chain of Custody (LOCK-15)
 
 ```text
 CLAIM -> FORMAL_CLAIM -> TEST -> RUN_ID -> RAW_DATA -> STATISTIC -> DECISION -> VERDICT
@@ -43,7 +43,7 @@ CLAIM -> FORMAL_CLAIM -> TEST -> RUN_ID -> RAW_DATA -> STATISTIC -> DECISION -> 
 
 ---
 
-## 2. Catalog of 15 Frozen Lock Files
+## 3. Catalog of 15 Frozen Lock Files
 
 | Lock ID | Filename | Primary Role | Status |
 |---|---|---|---|
@@ -65,16 +65,9 @@ CLAIM -> FORMAL_CLAIM -> TEST -> RUN_ID -> RAW_DATA -> STATISTIC -> DECISION -> 
 
 ---
 
-## 3. Automated Verification & Tamper Resistance Audit
-
-To audit and verify the structural integrity of all 15 lock files:
+## 4. Automated Verification & Security Audits
 
 ```bash
 python3 scripts/verify_epistemic_locks.py
-```
-
-To run the automated tamper-resistance security test suite:
-
-```bash
 pytest tests/test_epistemic_tamper_resistance.py
 ```
