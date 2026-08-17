@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/borjamoskv/teorema-robinson-moskv/master/TRACE_CONTRACT_v1.0.0.json",
+  "title": "BABYLON Epistemic Trace Contract",
+  "description": "Frozen normative trace contract governing runtime trace serialization, hashing, and authority boundaries.",
+  "type": "object",
+  "trace_contract": {
+    "version": "1.0.0",
+    "canonical_serialization": "RFC8785",
+    "hash_algorithm": "SHA-256",
+    "required": [
+      "trace_id",
+      "state_hash",
+      "action",
+      "cost",
+      "model_id",
+      "run_id",
+      "benchmark_version",
+      "environment_id"
+    ],
+    "forbidden_as_authority": [
+      "is_legal_diagnostic",
+      "is_safe",
+      "is_valid",
+      "certified"
+    ]
+  },
+  "required": [
+    "trace_id",
+    "state_hash",
+    "action",
+    "cost",
+    "model_id",
+    "run_id",
+    "benchmark_version",
+    "environment_id"
+  ],
+  "properties": {
+    "trace_id": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+      "description": "Canonical UUIDv4 identifying the trace execution instance."
+    },
+    "state_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{64}$",
+      "description": "SHA-256 hash of the canonical state representation (RFC8785)."
+    },
+    "action": {
+      "type": "object",
+      "description": "Reified action object emitted by runtime agent.",
+      "required": ["action_type", "payload"],
+      "properties": {
+        "action_type": { "type": "string" },
+        "payload": { "type": "object" }
+      }
+    },
+    "cost": {
+      "type": "object",
+      "required": ["tokens", "steps", "wall_clock_ms"],
+      "properties": {
+        "tokens": { "type": "integer", "minimum": 0 },
+        "steps": { "type": "integer", "minimum": 0 },
+        "wall_clock_ms": { "type": "number", "minimum": 0 }
+      }
+    },
+    "model_id": {
+      "type": "string",
+      "description": "Exact designation and revision of the candidate LLM or generator."
+    },
+    "run_id": {
+      "type": "string",
+      "description": "Unique identifier of the overall benchmark run suite."
+    },
+    "benchmark_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Version string of the benchmark protocol specification."
+    },
+    "environment_id": {
+      "type": "string",
+      "description": "SHA-256 digest of the reproducibility environment lock manifest."
+    },
+    "is_legal_diagnostic": {
+      "type": "boolean",
+      "description": "FORBIDDEN AS AUTHORITY: Diagnostic trace metadata only. Runtime value cannot bind verification."
+    },
+    "is_safe": {
+      "type": "boolean",
+      "description": "FORBIDDEN AS AUTHORITY: Diagnostic trace metadata only. Runtime value cannot bind verification."
+    },
+    "is_valid": {
+      "type": "boolean",
+      "description": "FORBIDDEN AS AUTHORITY: Diagnostic trace metadata only. Runtime value cannot bind verification."
+    },
+    "certified": {
+      "type": "boolean",
+      "description": "FORBIDDEN AS AUTHORITY: Runtime engines are strictly forbidden from setting this value to true."
+    }
+  },
+  "additionalProperties": false
+}
