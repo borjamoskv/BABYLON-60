@@ -1,36 +1,52 @@
 /-
-  CTM.Metrics — Formalization of Cognitive Recovery Metrics
+  CTM.Metrics — Cognitive Recovery Metrics (Iteration 4)
   
-  Formalizes the RE (Recovery Efficacy) metric:
-  RE = (Score(CTM) - Score(A)) / (Score(Sol) - Score(A))
-  
-  and its guarded bounds.
+  Separates model capability from orchestration and formalizes
+  the Recovery Efficacy (RE) metric mathematically.
 -/
+
+import Mathlib.Data.Real.Basic
 
 namespace CTM.Metrics
 
-/-- Scores are represented as Reals, but here we can abstract them as Floats for the benchmark logic -/
-structure BenchmarkScores where
-  score_A : Float  -- Luna Single-Pass
-  score_D : Float  -- Sol Single-Pass
-  score_C : Float  -- Luna CTM (Recovered)
-  
 /-- 
   Recovery Efficacy (RE).
-  We define it guarded by an epsilon to avoid division by zero.
+  Measures the portion of the model-gap recovered by the orchestration.
+  A: Perf(Luna, Identity, T)
+  C: Perf(Luna, CTM, T)
+  D: Perf(Sol, Identity, T)
 -/
-def RE (scores : BenchmarkScores) (epsilon : Float) : Option Float :=
-  let gap := scores.score_D - scores.score_A
-  if gap.abs < epsilon then
-    none -- Guard against instability if Score(D) ≈ Score(A)
+def Recovery (A C D : ℝ) : Option ℝ :=
+  if h : D ≠ A then
+    some ((C - A) / (D - A))
   else
-    some ((scores.score_C - scores.score_A) / gap)
+    none
 
-/-- 
-  Properties of RE:
-  1. If Score(C) == Score(A) and gap > epsilon, RE == 0.0
-  2. If Score(C) == Score(D) and gap > epsilon, RE == 1.0
+/--
+  Theorem: If orchestration yields no improvement over single-pass, Recovery is 0.
 -/
--- These can be proven as theorems in Lean.
+theorem recovery_zero (A C D : ℝ) (h_gap : D ≠ A) (h_no_gain : C = A) : 
+  Recovery A C D = some 0 := 
+by
+  unfold Recovery
+  split
+  · -- Case D ≠ A (h is true)
+    rw [h_no_gain, sub_self, zero_div]
+  · -- Case ¬(D ≠ A) (contradicts h_gap)
+    contradiction
+
+/--
+  Theorem: If orchestration perfectly matches Sol's performance, Recovery is 1.
+-/
+theorem recovery_one (A C D : ℝ) (h_gap : D ≠ A) (h_perfect : C = D) : 
+  Recovery A C D = some 1 := 
+by
+  unfold Recovery
+  split
+  · -- Case D ≠ A (h is true)
+    rw [h_perfect, div_self]
+    exact sub_ne_zero.mpr h_gap
+  · -- Case ¬(D ≠ A) (contradicts h_gap)
+    contradiction
 
 end CTM.Metrics

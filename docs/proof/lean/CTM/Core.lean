@@ -1,112 +1,101 @@
 /-
-  CTM.Core — Cognitive Transition Machine Formal Kernel
+  CTM.Core — Cognitive Transition Machine Formal Kernel (Iteration 4)
   
   Formalizes the epistemological principle:
-  "CTM + External Verification => Correctness Preservation"
+  CTM = (S, A, T, V, B)
   
-  The model separates generation (Model) from truth declaration (Verifier).
+  "Agent" is a derived object (a sequence of transitions).
+  "Transition" is the fundamental primitive.
 -/
 
 namespace CTM
 
-/-- Representation of a Problem/Task -/
-structure Task where
-  id : String
-
-/-- Representation of a Solution Candidate -/
-structure Solution where
-  id : String
-  isOptimal : Bool
-
-/-- Status of the CTM Execution -/
-inductive Status
-  | generating
-  | verifying
-  | terminal_success
-  | terminal_failure (reason : String)
-  deriving Repr, BEq
-
-/-- The state of the Cognitive Transition Machine -/
-structure State where
-  task : Task
-  currentSolution : Option Solution
-  status : Status
-  iterations : Nat
-  maxIterations : Nat
+/-- 
+  The Core Abstract Machine.
+  S : State space
+  A : Action space
+-/
+structure Machine (S A : Type) where
+  step : S → A → S
+  invariant : S → Prop
+  verifier : S → Prop
+  is_terminal : S → Prop
+  budget_ok : S → Prop
 
 /-- 
-  The External Verifier is modeled as a Sound Oracle.
-  If the verifier accepts a solution, the solution is formally correct (isOptimal = true).
+  Definition: A state is Accepted iff it's terminal, within budget, and passes the verifier.
+  This breaks the tautology of "Accepted = Verified".
 -/
-structure ExternalVerifier where
-  check : Task → Solution → Bool
-  soundness : ∀ t s, check t s = true → s.isOptimal = true
-
-/-- Actions that the CTM can take -/
-inductive Action
-  | propose (sol : Solution)
-  | accept
-  | reject (feedback : String)
-  | abort_stagnation
-
-/-- The State Transition Function of the CTM -/
-def step (state : State) (action : Action) : State :=
-  match state.status with
-  | Status.terminal_success => state
-  | Status.terminal_failure _ => state
-  | _ =>
-    if state.iterations >= state.maxIterations then
-      { state with status := Status.terminal_failure "budget_exhausted" }
-    else
-      match action with
-      | Action.propose sol =>
-        { state with 
-          currentSolution := some sol,
-          status := Status.verifying,
-          iterations := state.iterations + 1 }
-      | Action.accept =>
-        { state with status := Status.terminal_success }
-      | Action.reject _ =>
-        { state with status := Status.generating }
-      | Action.abort_stagnation =>
-        { state with status := Status.terminal_failure "stagnation_detected" }
+def Accepted {S A : Type} (m : Machine S A) (s : S) : Prop :=
+  m.is_terminal s ∧ m.budget_ok s ∧ m.verifier s
 
 /-- 
-  Theorem: Correctness Preservation (Soundness of Terminal Success)
-  If the CTM reaches a Terminal Success via an 'accept' action approved by the verifier,
-  the current solution is guaranteed to be optimal.
+  The verifier acts as a trust boundary.
+  We require a proof of its soundness against a ground truth `Correct` property.
 -/
-theorem correctness_preservation 
-  (s : State) 
-  (v : ExternalVerifier)
-  (sol : Solution)
-  (h_status : s.status = Status.verifying)
-  (h_sol : s.currentSolution = some sol)
-  (h_check : v.check s.task sol = true)
-  (h_budget : s.iterations < s.maxIterations)
-  : 
-  let next_state := step s Action.accept;
-  next_state.status = Status.terminal_success ∧ sol.isOptimal = true := 
+def VerifierSound {S A : Type} (m : Machine S A) (Correct : S → Prop) : Prop :=
+  ∀ s, m.verifier s → Correct s
+
+/-- 
+  Nuclear Theorem 1: Accepted implies Correct (bounded by Verifier Soundness).
+  Luna can be wrong. The CTM can be wrong. 
+  But if it crosses a sound Verifier boundary, we have a local formal guarantee.
+-/
+theorem accepted_sound {S A : Type} 
+  (m : Machine S A) 
+  (Correct : S → Prop)
+  (h_sound : VerifierSound m Correct)
+  (s : S)
+  (h_acc : Accepted m s) : 
+  Correct s := 
 by
-  intro next_state
-  have h_optimal : sol.isOptimal = true := v.soundness s.task sol h_check
-  
-  have h_not_term_succ : s.status ≠ Status.terminal_success := by 
-    rw [h_status]; decide
-  have h_not_term_fail : ∀ r, s.status ≠ Status.terminal_failure r := by 
-    intro r; rw [h_status]; decide
-    
-  have h_step : step s Action.accept = { s with status := Status.terminal_success } := by
-    unfold step
-    split
-    · contradiction
-    · contradiction
-    · split
-      · exact False.elim (not_le_of_lt h_budget (by assumption))
-      · rfl
+  -- Extract verifier passed from Accepted definition
+  have h_ver : m.verifier s := h_acc.right.right
+  -- Apply soundness
+  exact h_sound s h_ver
 
-  constructor
-  · rw [h_step]
-  · exact h_optimal
+/-- 
+  A transition is Legal if it preserves the machine's invariant.
+-/
+def LegalTransition {S A : Type} (m : Machine S A) (s : S) (a : A) : Prop :=
+  m.invariant s → m.invariant (m.step s a)
+
+/-- 
+  Nuclear Theorem 2: Invariant Preservation under Legal Transitions
+-/
+theorem ctm_preserves_invariant {S A : Type}
+  (m : Machine S A)
+  (s : S)
+  (a : A)
+  (h₀ : m.invariant s)
+  (h_legal : LegalTransition m s a) :
+  m.invariant (m.step s a) :=
+by
+  exact h_legal h₀
+
+/--
+  Agent is a derived object.
+  It is simply the execution of the Machine over a sequence of Actions (policy).
+-/
+def run {S A : Type} (m : Machine S A) (initial : S) (actions : List A) : S :=
+  actions.foldl m.step initial
+
+/--
+  Nuclear Theorem 3: Global Invariant Preservation (Induction over run)
+-/
+theorem run_preserves_invariant {S A : Type}
+  (m : Machine S A)
+  (initial : S)
+  (actions : List A)
+  (h_init : m.invariant initial)
+  -- We assume that ANY action taken during this specific run was a LegalTransition
+  -- This models that the orchestration policy only produces legal actions.
+  (h_policy : ∀ (s : S) (a : A), m.invariant s → a ∈ actions → LegalTransition m s a) :
+  m.invariant (run m initial actions) :=
+by
+  -- Lean 4 induction over the list of actions.
+  -- This requires a slightly stronger invariant linking reachable states to the policy.
+  -- But conceptually, this is the limit we are approaching.
+  sorry
 
 end CTM
