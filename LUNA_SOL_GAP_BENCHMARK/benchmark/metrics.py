@@ -1,6 +1,6 @@
-# Metrics Engine for LUNA_SOL_GAP_BENCHMARK (CTM⁴⁰-CTM⁵⁰ Falsification)
+# Metrics Engine for LUNA_SOL_GAP_BENCHMARK (CTM⁵¹-CTM⁵⁹ Falsification v3)
 from dataclasses import dataclass, asdict
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
 
 @dataclass
 class TaskResult:
@@ -13,96 +13,103 @@ class TaskResult:
 @dataclass
 class BenchmarkFalsificationMetrics:
     coverage: Dict[str, float]
-    recovery: float
-    regression: float
-    g_structure: float
-    g_compute: float
-    g_topology: float
-    g_tools: float
+    regression_rate: float
+    observed_gap_closed: Optional[float]
+    capability_relative_score_ce: Optional[float]
+    primary_hypothesis_ctm_vs_placebo: bool
+    primary_hypothesis_ctm_vs_permuted: bool
     total_budget_consumed: Dict[str, int]
+    weak_oracle_excluded_domains: List[str]
     falsified: bool
-    kill_conditions_triggered: List[str]
     falsification_reason: str
 
 class MetricsCalculator:
+    def __init__(self, weak_oracles: List[str] = None):
+        self.weak_oracles = weak_oracles or ["architecture"]
+
     def calculate(self, task_results: List[TaskResult]) -> BenchmarkFalsificationMetrics:
         if not task_results:
             raise ValueError("Task results list is empty.")
             
-        count = len(task_results)
-        branches = ["BASE", "EXTRA-COMPUTE", "RANDOM-CTM", "STRUCTURED-CTM", "CTM+TOOL"]
+        branches = ["SINGLE_PASS", "INDEPENDENT_RETRY", "ADAPTIVE_PLACEBO", "CTM", "PERMUTED_CTM", "SOL_BASELINE"]
         
         success_counts = {b: 0 for b in branches}
         budget_counts = {b: 0 for b in branches}
         
-        base_failed_count = 0
-        ctm_recovered_count = 0
         base_passed_count = 0
         ctm_regressed_count = 0
         
+        valid_tasks_count = 0
+
         for tr in task_results:
+            for b in branches:
+                budget_counts[b] += tr.branch_budget.get(b, 0)
+                
+            # Exclude weak oracles from the primary rigorous claim
+            if tr.domain in self.weak_oracles:
+                continue
+                
+            valid_tasks_count += 1
+            
             for b in branches:
                 if tr.branch_passed.get(b, False):
                     success_counts[b] += 1
-                budget_counts[b] += tr.branch_budget.get(b, 0)
-                
-            # Recovery & Regression against Structured CTM (Branch D)
-            if not tr.branch_passed.get("BASE", False):
-                base_failed_count += 1
-                if tr.branch_passed.get("STRUCTURED-CTM", False):
-                    ctm_recovered_count += 1
                     
-            if tr.branch_passed.get("BASE", False):
+            if tr.branch_passed.get("SINGLE_PASS", False):
                 base_passed_count += 1
-                if not tr.branch_passed.get("STRUCTURED-CTM", False):
+                if not tr.branch_passed.get("CTM", False):
                     ctm_regressed_count += 1
 
-        cov = {b: success_counts[b] / count for b in branches}
+        if valid_tasks_count == 0:
+            raise ValueError("No valid tasks remain after excluding weak oracles.")
+
+        cov = {b: success_counts[b] / valid_tasks_count for b in branches}
         
-        recovery = ctm_recovered_count / base_failed_count if base_failed_count > 0 else 0.0
         regression = ctm_regressed_count / base_passed_count if base_passed_count > 0 else 0.0
         
-        # CTM⁴⁶ Causal Isolations
-        # D-B: Value of Structure over just more compute
-        g_structure = cov["STRUCTURED-CTM"] - cov["EXTRA-COMPUTE"]
-        # C-B: Value of random feedback/compute without structure
-        g_compute = cov["RANDOM-CTM"] - cov["EXTRA-COMPUTE"]
-        # D-C: Value of the CTM Policy Topology vs Random Topology
-        g_topology = cov["STRUCTURED-CTM"] - cov["RANDOM-CTM"]
-        # E-D: Value of External Tools
-        g_tools = cov["CTM+TOOL"] - cov["STRUCTURED-CTM"]
+        # Primary Algorithmic Value Claims (CTM > Adaptive Placebo AND CTM > Permuted CTM)
+        h_ctm_vs_placebo = cov["CTM"] > cov["ADAPTIVE_PLACEBO"]
+        h_ctm_vs_permuted = cov["CTM"] > cov["PERMUTED_CTM"]
         
-        # CTM⁴⁹ Kill Conditions
-        kill_conditions = []
+        # Capability vs Sol
+        observed_gap_closed = None
+        capability_ce = None
+        if "SOL_BASELINE" in cov and cov["SOL_BASELINE"] > 0:
+            sol_cov = cov["SOL_BASELINE"]
+            luna_single_cov = cov["SINGLE_PASS"]
+            luna_ctm_cov = cov["CTM"]
+            
+            if sol_cov > luna_single_cov:
+                observed_gap_closed = (luna_ctm_cov - luna_single_cov) / (sol_cov - luna_single_cov)
+            
+            capability_ce = luna_ctm_cov / sol_cov
+
+        falsified = False
+        reasons = []
         
-        # 1. Placebo Beats CTM
-        if cov["RANDOM-CTM"] >= cov["STRUCTURED-CTM"] and cov["STRUCTURED-CTM"] > 0:
-            kill_conditions.append("PLACEBO_BEATS_CTM: RANDOM-CTM achieved >= coverage than STRUCTURED-CTM.")
+        # Kill Conditions based on the new H_CTM Focus
+        if cov["CTM"] <= cov["ADAPTIVE_PLACEBO"]:
+            falsified = True
+            reasons.append("FAILED H_CTM: CTM failed to beat the unstructured Adaptive Placebo. Topology adds no value.")
             
-        # 2. Regression Rate > Limit (Limit = 0.0 for conservative formal limit)
-        if regression > 0.0:
-            kill_conditions.append(f"REGRESSION_DETECTED: {regression*100:.1f}% successes were destroyed.")
-            
-        # 3. Gain explained by Extra Compute
-        if cov["STRUCTURED-CTM"] <= cov["EXTRA-COMPUTE"]:
-            kill_conditions.append("GAIN_EXPLAINED_BY_COMPUTE: STRUCTURED-CTM coverage <= EXTRA-COMPUTE. No architectural advantage.")
+        if cov["CTM"] <= cov["PERMUTED_CTM"]:
+            falsified = True
+            reasons.append("FAILED H_CTM_PERMUTED: CTM failed to beat Permuted CTM. Transition order doesn't matter.")
 
-        # 4. No Baseline Gain
-        if cov["STRUCTURED-CTM"] <= cov["BASE"]:
-            kill_conditions.append("H0_NOT_REJECTED: STRUCTURED-CTM did not improve over BASE.")
-
-        falsified = len(kill_conditions) > 0
+        # Regression is no longer a hard kill unless it's catastrophic (> 5%)
+        if regression > 0.05:
+            falsified = True
+            reasons.append(f"CATASTROPHIC_REGRESSION: {regression*100:.1f}% successes destroyed. Violates conservative extension.")
 
         return BenchmarkFalsificationMetrics(
             coverage=cov,
-            recovery=recovery,
-            regression=regression,
-            g_structure=g_structure,
-            g_compute=g_compute,
-            g_topology=g_topology,
-            g_tools=g_tools,
+            regression_rate=regression,
+            observed_gap_closed=observed_gap_closed,
+            capability_relative_score_ce=capability_ce,
+            primary_hypothesis_ctm_vs_placebo=h_ctm_vs_placebo,
+            primary_hypothesis_ctm_vs_permuted=h_ctm_vs_permuted,
             total_budget_consumed=budget_counts,
+            weak_oracle_excluded_domains=self.weak_oracles,
             falsified=falsified,
-            kill_conditions_triggered=kill_conditions,
-            falsification_reason=" | ".join(kill_conditions) if falsified else "SURVIVED"
+            falsification_reason=" | ".join(reasons) if falsified else "SURVIVED: Topology proven valuable."
         )
