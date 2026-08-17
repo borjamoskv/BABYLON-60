@@ -13,3 +13,6 @@ name = "Babylon"
 [[lean_lib]]
 name = "C5Real"
 globs = ["C5Real.MarkovWorld", "C5Real.BayesianLens", "C5Real.Provenance"]
+
+[[lean_lib]]
+name = "CTM"
