@@ -1,0 +1,78 @@
+# EPISTEMIC_LOCKS.md — Master Index & Governance Specification
+
+> **STATUS: FROZEN / NORMATIVE MASTER INDEX v1.0.0**  
+> **Repository**: `borjamoskv/teorema-robinson-moskv`  
+> **Verification CLI**: `python3 scripts/verify_epistemic_locks.py`  
+
+This master document serves as the central index and entry point for the 10 frozen epistemic, contractual, and experimental governance locks established for the **Teorema Robinson-Moskv** architecture.
+
+---
+
+## 1. Epistemic Architecture Map
+
+```text
++-----------------------------------------------------------------------------------+
+|                              EPISTEMIC FIREWALL                                   |
+|                  (THEOREM_EMPIRICAL_BRIDGE.md)                                    |
+|   Formal inclusion + Runtime refinement + Cost alignment => Empirical superiority |
++-----------------------------------------------------------------------------------+
+                             /                                 \
+                            /                                   \
+                           v                                     v
++---------------------------------------+       +---------------------------------------+
+|          FORMAL PROOF BOUNDARY        |       |        EXPERIMENTAL BENCHMARK         |
+|  - FORMAL_CLAIMS.md                   |       |  - BENCHMARK_PROTOCOL_v1.0.0.md       |
+|  - ASSUMPTIONS.md                     |       |  - RANDOMIZATION_PROTOCOL.md          |
+|  - proof/lean/EpistemicBoundary.lean  |       |  - METRICS.md                         |
++---------------------------------------+       |  - FALSIFICATION_RULES.md             |
+                    |                           +---------------------------------------+
+                    v                                               |
++---------------------------------------+                           v
+|           RUNTIME CONTRACT            |       +---------------------------------------+
+|  - TRACE_CONTRACT_v1.0.0.json         |       |        REPRODUCIBILITY & THREATS      |
+|  - Forbidden runtime self-certify     |       |  - REPRODUCIBILITY_LOCK.md            |
++---------------------------------------+       |  - THREAT_MODEL.md                    |
+                                                +---------------------------------------+
+```
+
+---
+
+## 2. Catalog of Frozen Lock Files
+
+| Lock ID | Filename | Primary Role | Status |
+|---|---|---|---|
+| **LOCK-01** | [FORMAL_CLAIMS.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/FORMAL_CLAIMS.md) | Boundary of Lean 4 proofs vs assumptions vs empirical claims vs non-claims | **FROZEN** |
+| **LOCK-02** | [ASSUMPTIONS.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/ASSUMPTIONS.md) | 4-tier bridge axioms (Formal $\to$ Model $\to$ Runtime $\to$ Experiment) | **FROZEN** |
+| **LOCK-03** | [TRACE_CONTRACT_v1.0.0.json](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/TRACE_CONTRACT_v1.0.0.json) | Normative JSON Schema (RFC 8785, SHA-256) enforcing runtime authority limits | **FROZEN** |
+| **LOCK-04** | [BENCHMARK_PROTOCOL_v1.0.0.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/BENCHMARK_PROTOCOL_v1.0.0.md) | Preregistered experimental protocol with exact one-sided McNemar test ($\alpha=0.05$) | **FROZEN** |
+| **LOCK-05** | [RANDOMIZATION_PROTOCOL.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/RANDOMIZATION_PROTOCOL.md) | Deterministic ChaCha20 seed generation, arm interleaving, zero retries, fixed sample size | **FROZEN** |
+| **LOCK-06** | [METRICS.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/METRICS.md) | Operational mathematical formulas for Coverage (zero partial credit) and secondary metrics | **FROZEN** |
+| **LOCK-07** | [FALSIFICATION_RULES.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/FALSIFICATION_RULES.md) | Popperian kill conditions ($D \le C$ or $p \ge 0.05$) and $p$-value epistemic guardrails | **FROZEN** |
+| **LOCK-08** | [REPRODUCIBILITY_LOCK.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/REPRODUCIBILITY_LOCK.md) | Full environment pins and 6-stage cryptographic provenance hash chain | **FROZEN** |
+| **LOCK-09** | [THREAT_MODEL.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/THREAT_MODEL.md) | Catalog of 14 systemic & experimental threats and mitigation matrix | **FROZEN** |
+| **LOCK-10** | [THEOREM_EMPIRICAL_BRIDGE.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/THEOREM_EMPIRICAL_BRIDGE.md) | Central epistemic firewall equation and 6-stage derivation ladder | **FROZEN** |
+
+---
+
+## 3. Automated Verification & Enforcement
+
+To audit and verify the structural integrity of all 10 lock files:
+
+```bash
+python3 scripts/verify_epistemic_locks.py
+```
+
+Expected output:
+```text
+[✓] LOCK-01: FORMAL_CLAIMS.md valid.
+[✓] LOCK-02: ASSUMPTIONS.md valid.
+[✓] LOCK-03: TRACE_CONTRACT_v1.0.0.json valid (Draft 2020-12 Schema verified).
+[✓] LOCK-04: BENCHMARK_PROTOCOL_v1.0.0.md valid.
+[✓] LOCK-05: RANDOMIZATION_PROTOCOL.md valid.
+[✓] LOCK-06: METRICS.md valid.
+[✓] LOCK-07: FALSIFICATION_RULES.md valid.
+[✓] LOCK-08: REPRODUCIBILITY_LOCK.md valid.
+[✓] LOCK-09: THREAT_MODEL.md valid.
+[✓] LOCK-10: THEOREM_EMPIRICAL_BRIDGE.md valid.
+[SUCCESS] All 10 Epistemic Lock files verified. Manifest generated at EPISTEMIC_LOCKS_MANIFEST.json.
+```
