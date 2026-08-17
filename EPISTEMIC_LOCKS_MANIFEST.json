@@ -1,0 +1,56 @@
+{
+  "verified_at": "2026-08-17T14:17:25.779072+00:00",
+  "repository": "borjamoskv/teorema-robinson-moskv",
+  "lock_files": {
+    "FORMAL_CLAIMS.md": {
+      "path": "FORMAL_CLAIMS.md",
+      "sha256": "e7aa0eaa25a6a652aa10e45840b1e9bb958d265c145296c7ab5b66500f283843",
+      "status": "VERIFIED"
+    },
+    "ASSUMPTIONS.md": {
+      "path": "ASSUMPTIONS.md",
+      "sha256": "dd88f90439dabd1752a655aabc4f332fa31b070b49822a7d110f14f40a0c8b5d",
+      "status": "VERIFIED"
+    },
+    "TRACE_CONTRACT_v1.0.0.json": {
+      "path": "TRACE_CONTRACT_v1.0.0.json",
+      "sha256": "2689d38bd3dd4348b430e616e1eab41e9a836f4ab80d6244dd9b590dc3a2427b",
+      "status": "VERIFIED"
+    },
+    "BENCHMARK_PROTOCOL_v1.0.0.md": {
+      "path": "BENCHMARK_PROTOCOL_v1.0.0.md",
+      "sha256": "17c30f3d7d0ec0ce78adf83ef673993c6ec2c86834bfe49b2bd32dbb552af4e1",
+      "status": "VERIFIED"
+    },
+    "RANDOMIZATION_PROTOCOL.md": {
+      "path": "RANDOMIZATION_PROTOCOL.md",
+      "sha256": "1d76513a8ad011c780485e3b56cab2797a18c74189389a374f2e5f3d30643722",
+      "status": "VERIFIED"
+    },
+    "METRICS.md": {
+      "path": "METRICS.md",
+      "sha256": "3a546ec1597715fbbf8a0ef4a31b1ce1dc227f4b27c96ee7813d96eb19213531",
+      "status": "VERIFIED"
+    },
+    "FALSIFICATION_RULES.md": {
+      "path": "FALSIFICATION_RULES.md",
+      "sha256": "6620b7a41e7b2035fab441ca390ecc03a66abfddf53880cfaf3eb6825fddf709",
+      "status": "VERIFIED"
+    },
+    "REPRODUCIBILITY_LOCK.md": {
+      "path": "REPRODUCIBILITY_LOCK.md",
+      "sha256": "0dc2ce5d8cb2cc7ce5c088ef5dc73f7bf38950e79ccbac84db56496a6fc082fe",
+      "status": "VERIFIED"
+    },
+    "THREAT_MODEL.md": {
+      "path": "THREAT_MODEL.md",
+      "sha256": "6cf25c129d0f3e74554b9b61c4a9cc2d68c011bf1200adf4a790d975fdf19348",
+      "status": "VERIFIED"
+    },
+    "THEOREM_EMPIRICAL_BRIDGE.md": {
+      "path": "THEOREM_EMPIRICAL_BRIDGE.md",
+      "sha256": "822176ea88cb0e2c143437b8919c84c99d782bc6b263ef4cbc86d10ac3662e95",
+      "status": "VERIFIED"
+    }
+  }
+}
