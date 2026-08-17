@@ -1,0 +1,41 @@
+{
+  "experiment_name": "luna_ctm_falsification_final_pre_live",
+  "falsified": true,
+  "falsification_reason": "FAILED H_CTM: STRUCTURED_CTM not significantly better than NULL_ADAPTIVE_CONTROL (p=1.000 > 0.05). | FAILED H_CTM_PERMUTED: STRUCTURED_CTM not significantly better than PERMUTED_CTM (p=1.000 > 0.05). Topology adds no value. | FAILED EFFICIENCY: STRUCTURED_CTM failed to beat EXTRA_COMPUTE in both Coverage and Efficiency.",
+  "metrics": {
+    "coverage": {
+      "BASE": 1.0,
+      "EXTRA_COMPUTE": 1.0,
+      "NULL_ADAPTIVE_CONTROL": 1.0,
+      "STRUCTURED_CTM": 1.0,
+      "CTM_TOOL": 1.0,
+      "PERMUTED_CTM": 1.0,
+      "SOL_BASELINE": 1.0
+    },
+    "efficiency": {
+      "BASE": 0.00125,
+      "EXTRA_COMPUTE": 0.00125,
+      "NULL_ADAPTIVE_CONTROL": 0.00125,
+      "STRUCTURED_CTM": 0.00125,
+      "CTM_TOOL": 0.00125,
+      "PERMUTED_CTM": 0.00125,
+      "SOL_BASELINE": 0.0075
+    },
+    "regression_rate": 0.0,
+    "observed_gap_closed": null,
+    "capability_relative_score_ce": 1.0,
+    "total_budget_tokens": {
+      "BASE": 12000,
+      "EXTRA_COMPUTE": 12000,
+      "NULL_ADAPTIVE_CONTROL": 12000,
+      "STRUCTURED_CTM": 12000,
+      "CTM_TOOL": 12000,
+      "PERMUTED_CTM": 12000,
+      "SOL_BASELINE": 2000
+    }
+  },
+  "statistical_tests": {
+    "h_ctm_vs_placebo": false,
+    "h_ctm_vs_permuted": false
+  }
+}

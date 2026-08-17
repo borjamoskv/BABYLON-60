@@ -1,25 +1,34 @@
-# LUNA_SOL_GAP_BENCHMARK Config v1 (Falsification Pre-registration)
-experiment_name: "luna_ctm_falsification_v1"
+# LUNA_SOL_GAP_BENCHMARK Config (CTM-FALSIFICATION v4 Final Pre-Live)
+experiment_name: "luna_ctm_falsification_final_pre_live"
 task_corpus_path: "LUNA_SOL_GAP_BENCHMARK/benchmark/tasks/task_corpus.yaml"
 results_dir: "LUNA_SOL_GAP_BENCHMARK/results"
 reports_dir: "LUNA_SOL_GAP_BENCHMARK/reports"
 
 # STRICT FALSIFICATION CONTROLS
-model: "gpt-5-luna" # Keep model identical across test branches
+model: "gpt-5-luna"
 sampling_seed: 42
-evaluator: "logic_evaluator" # Fixed Oracle L
+evaluator: "logic_evaluator" # Weak oracles like 'architecture' are excluded in metrics.py
 
 budget_constraints:
   max_iterations: 3
   budget_limit_tokens: 15000
 
 branches:
-  BASE:
-    name: "baseline_single_pass"
+  A:
+    name: "BASE"
     policy: "BASE"
-  BASE-N:
-    name: "baseline_random_retry"
-    policy: "BASE-N"
-  CTM:
-    name: "ctm_guided_retry"
-    policy: "CTM"
+  B:
+    name: "EXTRA_COMPUTE"
+    policy: "EXTRA_COMPUTE"
+  C:
+    name: "NULL_ADAPTIVE_CONTROL"
+    policy: "NULL_ADAPTIVE_CONTROL"
+  D:
+    name: "STRUCTURED_CTM"
+    policy: "STRUCTURED_CTM"
+  E:
+    name: "CTM_TOOL"
+    policy: "CTM_TOOL"
+  F:
+    name: "PERMUTED_CTM"
+    policy: "PERMUTED_CTM"

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# CLI Runner for LUNA_SOL_GAP_BENCHMARK v1 (Falsification Edition)
+# CLI Runner for LUNA_SOL_GAP_BENCHMARK (CTM Falsification Final Matrix A-F)
 import argparse
 import json
 import os
@@ -7,7 +7,6 @@ import sys
 import yaml
 from pathlib import Path
 
-# Add project root to sys.path
 BASE_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE_DIR))
 
@@ -25,9 +24,9 @@ def load_yaml(filepath: str) -> dict:
         return yaml.safe_load(f)
 
 def main():
-    parser = argparse.ArgumentParser(description="CTM-FALSIFICATION v1 CLI Runner")
+    parser = argparse.ArgumentParser(description="CTM-FALSIFICATION v4 CLI Runner")
     parser.add_argument("--config", default=str(BASE_DIR / "configs" / "experiment.yaml"), help="Path to config file")
-    parser.add_argument("--mock", action="store_true", default=True, help="Use mock deterministic runner (default: True)")
+    parser.add_argument("--mock", action="store_true", default=True, help="Use mock deterministic runner")
     parser.add_argument("--live", action="store_true", help="Use live LLM API runner")
     parser.add_argument("--output-dir", default=str(BASE_DIR / "results"), help="Directory for JSON results")
     args = parser.parse_args()
@@ -35,18 +34,16 @@ def main():
     use_mock = not args.live
 
     print("=" * 70)
-    print(" CTM-FALSIFICATION v1 Execution Engine")
+    print(" CTM-FALSIFICATION (Final Pre-Live Matrix A-F)")
     print(f" Mode: {'MOCK (Deterministic Test)' if use_mock else 'LIVE LLM API'}")
     print("=" * 70)
 
-    # Load configuration & corpus
     config = load_yaml(args.config)
     task_corpus = load_yaml(str(BASE_DIR / "benchmark" / "tasks" / "task_corpus.yaml"))
     tasks = task_corpus.get("tasks", [])
 
-    print(f"Loaded {len(tasks)} tasks across domains.")
+    print(f"Loaded {len(tasks)} tasks.")
 
-    # Initialize evaluator
     evaluators = {
         "coding": CodingEvaluator(),
         "math": MathEvaluator(),
@@ -55,7 +52,6 @@ def main():
         "architecture": ArchitectureEvaluator()
     }
     
-    # We use a single constant model for falsification
     model_name = config.get("model", "gpt-5-luna")
     if use_mock:
         runner = MockRunner(branch="FALSIFICATION", model_name=model_name)
@@ -63,7 +59,7 @@ def main():
         runner = LLMRunner(model_name=model_name)
 
     max_iterations = config.get("budget_constraints", {}).get("max_iterations", 3)
-    branches = ["BASE", "BASE-N", "CTM"]
+    branches = ["BASE", "EXTRA_COMPUTE", "NULL_ADAPTIVE_CONTROL", "STRUCTURED_CTM", "CTM_TOOL", "PERMUTED_CTM", "SOL_BASELINE"]
 
     task_results = []
 
@@ -83,23 +79,18 @@ def main():
         branch_scores = {}
         branch_budget = {}
 
-        # 1. BASE Policy
-        res_base = policy_engine.run_base(task)
-        branch_passed["BASE"] = res_base.passed
-        branch_scores["BASE"] = res_base.final_score
-        branch_budget["BASE"] = res_base.budget_consumed_tokens
-
-        # 2. BASE-N Policy (Random Retry)
-        res_basen = policy_engine.run_random_retry(task, max_iterations=max_iterations)
-        branch_passed["BASE-N"] = res_basen.passed
-        branch_scores["BASE-N"] = res_basen.final_score
-        branch_budget["BASE-N"] = res_basen.budget_consumed_tokens
-
-        # 3. CTM Policy (Guided Retry)
-        res_ctm = policy_engine.run_ctm(task, max_iterations=max_iterations)
-        branch_passed["CTM"] = res_ctm.passed
-        branch_scores["CTM"] = res_ctm.final_score
-        branch_budget["CTM"] = res_ctm.budget_consumed_tokens
+        for branch in branches:
+            if branch == "SOL_BASELINE":
+                # Mock SOL_BASELINE for capability score testing
+                branch_passed[branch] = True if use_mock else False
+                branch_scores[branch] = 1.0 if use_mock else 0.0
+                branch_budget[branch] = 100
+                continue
+                
+            res = policy_engine.run_branch(task, policy_name=branch, max_iterations=max_iterations)
+            branch_passed[branch] = res.passed
+            branch_scores[branch] = res.final_score
+            branch_budget[branch] = res.budget_consumed_tokens
 
         task_results.append(TaskResult(
             task_id=task_id,
@@ -109,27 +100,28 @@ def main():
             branch_budget=branch_budget
         ))
 
-    # Calculate falsification metrics
-    calc = MetricsCalculator()
+    calc = MetricsCalculator(weak_oracles=["architecture"])
     metrics = calc.calculate(task_results)
 
-    # Output directory creation
     os.makedirs(args.output_dir, exist_ok=True)
-    json_path = os.path.join(args.output_dir, "falsification_results.json")
+    json_path = os.path.join(args.output_dir, "falsification_matrix_af.json")
 
-    # Save JSON results
     json_data = {
         "experiment_name": config["experiment_name"],
         "falsified": metrics.falsified,
         "falsification_reason": metrics.falsification_reason,
         "metrics": {
             "coverage": metrics.coverage,
-            "recovery_rate": metrics.recovery,
-            "regression_rate": metrics.regression,
-            "g_strategy_gain": metrics.g_strategy,
+            "efficiency": metrics.efficiency,
+            "regression_rate": metrics.regression_rate,
+            "observed_gap_closed": metrics.observed_gap_closed,
+            "capability_relative_score_ce": metrics.capability_relative_score_ce,
             "total_budget_tokens": metrics.total_budget_consumed
         },
-        "domain_breakdown": metrics.domain_breakdown
+        "statistical_tests": {
+            "h_ctm_vs_placebo": metrics.primary_hypothesis_ctm_vs_placebo,
+            "h_ctm_vs_permuted": metrics.primary_hypothesis_ctm_vs_permuted
+        }
     }
 
     with open(json_path, "w", encoding="utf-8") as f:
@@ -141,10 +133,11 @@ def main():
     print(f"Results JSON:  {json_path}")
     print(f"\nFALSIFICATION RESULT: {'FAILED' if metrics.falsified else 'SURVIVED'}")
     print(f"Reasoning: {metrics.falsification_reason}")
-    print(f"Coverage BASE:   {metrics.coverage.get('BASE'):.2%}")
-    print(f"Coverage BASE-N: {metrics.coverage.get('BASE-N'):.2%}")
-    print(f"Coverage CTM:    {metrics.coverage.get('CTM'):.2%}")
-    print(f"Regression Rate: {metrics.regression:.2%}")
+    print(f"Coverage BASE:                  {metrics.coverage.get('BASE'):.2%}")
+    print(f"Coverage NULL_ADAPTIVE_CONTROL: {metrics.coverage.get('NULL_ADAPTIVE_CONTROL'):.2%}")
+    print(f"Coverage PERMUTED_CTM:          {metrics.coverage.get('PERMUTED_CTM'):.2%}")
+    print(f"Coverage STRUCTURED_CTM:        {metrics.coverage.get('STRUCTURED_CTM'):.2%}")
+    print(f"Regression Rate:                {metrics.regression_rate:.2%}")
     print("=" * 70)
 
 if __name__ == "__main__":
