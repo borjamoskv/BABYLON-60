@@ -1,0 +1,365 @@
+tasks:
+  # =========================================================================
+  # CODING (5 Tasks)
+  # =========================================================================
+  - id: "code_01"
+    domain: "coding"
+    title: "LRU Cache with O(1) Operations and Expiration"
+    difficulty: "hard"
+    deterministic: true
+    evaluator: "coding"
+    prompt: >
+      Write a Python class `ExpiringLRUCache` with methods `put(key, value, ttl_seconds)`, `get(key)`, and `evict_expired()`.
+      `get` and `put` must operate in average O(1) time complexity.
+      `get` should return -1 if key does not exist or if expired.
+      `evict_expired()` purges all expired keys.
+    ground_truth:
+      test_code: |
+        cache = ExpiringLRUCache(capacity=2)
+        cache.put(1, 100, ttl_seconds=10)
+        cache.put(2, 200, ttl_seconds=10)
+        assert cache.get(1) == 100
+        cache.put(3, 300, ttl_seconds=10) # evicts 2 because 1 was accessed
+        assert cache.get(2) == -1
+        assert cache.get(3) == 300
+        cache.put(4, 400, ttl_seconds=0) # immediate expiry
+        cache.evict_expired()
+        assert cache.get(4) == -1
+
+  - id: "code_02"
+    domain: "coding"
+    title: "Longest Valid Parentheses Substring"
+    difficulty: "medium"
+    deterministic: true
+    evaluator: "coding"
+    prompt: >
+      Write a Python function `longest_valid_parentheses(s: str) -> int` that returns the length of the longest valid (well-formed) parentheses substring.
+    ground_truth:
+      test_code: |
+        assert longest_valid_parentheses("(()") == 2
+        assert longest_valid_parentheses(")()())") == 4
+        assert longest_valid_parentheses("") == 0
+        assert longest_valid_parentheses("()(()") == 2
+        assert longest_valid_parentheses("()(())") == 6
+
+  - id: "code_03"
+    domain: "coding"
+    title: "Tarjan's Strongly Connected Components"
+    difficulty: "hard"
+    deterministic: true
+    evaluator: "coding"
+    prompt: >
+      Write a Python function `find_sccs(n: int, edges: list[tuple[int, int]]) -> list[list[int]]` that finds all strongly connected components in a directed graph using Tarjan's algorithm. Returns list of SCC node lists sorted by their minimal element.
+    ground_truth:
+      test_code: |
+        edges = [(0, 1), (1, 2), (2, 0), (1, 3), (3, 4), (4, 3)]
+        sccs = find_sccs(5, edges)
+        sccs_sorted = sorted([sorted(c) for c in sccs])
+        assert sccs_sorted == [[0, 1, 2], [3, 4]]
+
+  - id: "code_04"
+    domain: "coding"
+    title: "Thread-Safe Ring Buffer with Backpressure"
+    difficulty: "hard"
+    deterministic: true
+    evaluator: "coding"
+    prompt: >
+      Write a Python class `BoundedRingBuffer` using `threading.Lock` and `threading.Condition` with `push(item, timeout)` and `pop(timeout)`.
+    ground_truth:
+      test_code: |
+        buf = BoundedRingBuffer(capacity=2)
+        assert buf.push(10, timeout=0.1) == True
+        assert buf.push(20, timeout=0.1) == True
+        assert buf.push(30, timeout=0.05) == False
+        assert buf.pop(timeout=0.1) == 10
+        assert buf.push(30, timeout=0.1) == True
+        assert buf.pop(timeout=0.1) == 20
+        assert buf.pop(timeout=0.1) == 30
+
+  - id: "code_05"
+    domain: "coding"
+    title: "Interval Merging with Metadata"
+    difficulty: "medium"
+    deterministic: true
+    evaluator: "coding"
+    prompt: >
+      Write a Python function `merge_intervals(intervals: list[tuple[int, int, str]]) -> list[tuple[int, int, list[str]]]` that merges overlapping intervals `(start, end, label)` and combines labels.
+    ground_truth:
+      test_code: |
+        intervals = [(1, 4, "A"), (3, 6, "B"), (8, 10, "C"), (9, 12, "D")]
+        res = merge_intervals(intervals)
+        assert res == [(1, 6, ["A", "B"]), (8, 12, ["C", "D"])]
+
+  # =========================================================================
+  # MATHEMATICS (5 Tasks)
+  # =========================================================================
+  - id: "math_01"
+    domain: "mathematics"
+    title: "Recurrence Relation Closed Form"
+    difficulty: "medium"
+    deterministic: true
+    evaluator: "math"
+    prompt: >
+      Given the linear homogeneous recurrence relation T(n) = 5*T(n-1) - 6*T(n-2) with initial conditions T(0) = 2 and T(1) = 5.
+      Provide the closed form expression for T(n) in terms of n.
+    ground_truth:
+      expression: "2^n + 3^n"
+      eval_points:
+        0: 2
+        1: 5
+        2: 13
+        3: 35
+        5: 275
+
+  - id: "math_02"
+    domain: "mathematics"
+    title: "Matrix Trace and Determinant Invariants"
+    difficulty: "hard"
+    deterministic: true
+    evaluator: "math"
+    prompt: >
+      A 2x2 matrix A has trace Tr(A) = 7 and determinant Det(A) = 12.
+      Calculate the trace of A^3. Provide the exact integer value.
+    ground_truth:
+      expression: "91"
+      value: 91
+
+  - id: "math_03"
+    domain: "mathematics"
+    title: "Conditional Expectation on Exponential Distribution"
+    difficulty: "hard"
+    deterministic: true
+    evaluator: "math"
+    prompt: >
+      Let X ~ Exp(lambda=2). Compute the conditional expectation E[X^2 | X > 1].
+      Provide the exact rational number or simplified expression.
+    ground_truth:
+      expression: "7/4"
+      value: 1.75
+
+  - id: "math_04"
+    domain: "mathematics"
+    title: "Combinatorial Identities and Inclusion-Exclusion"
+    difficulty: "medium"
+    deterministic: true
+    evaluator: "math"
+    prompt: >
+      Compute the number of permutations of the digits {1, 2, 3, 4, 5, 6} with no fixed points (derangements, D_6).
+      Provide the exact integer.
+    ground_truth:
+      expression: "265"
+      value: 265
+
+  - id: "math_05"
+    domain: "mathematics"
+    title: "Optimization with Lagrange Multipliers"
+    difficulty: "hard"
+    deterministic: true
+    evaluator: "math"
+    prompt: >
+      Find the minimum distance from the origin (0, 0, 0) to the plane 2x + 3y + z = 14.
+      Provide the exact simplified radical or fractional expression.
+    ground_truth:
+      expression: "sqrt(14)"
+      value: 3.7416573867739413
+
+  # =========================================================================
+  # LOGIC (5 Tasks)
+  # =========================================================================
+  - id: "logic_01"
+    domain: "logic"
+    title: "Boolean Propositional Validity"
+    difficulty: "medium"
+    deterministic: true
+    evaluator: "logic"
+    prompt: >
+      Is the following formula a tautology?
+      ((P -> Q) and (Q -> R)) -> (P -> R)
+      Answer TRUE or FALSE and provide the truth table validity check.
+    ground_truth:
+      valid: true
+      variables: ["P", "Q", "R"]
+      formula: "((not P or Q) and (not Q or R)) -> (not P or R)"
+
+  - id: "logic_02"
+    domain: "logic"
+    title: "Knights and Knaves Island Inference"
+    difficulty: "hard"
+    deterministic: true
+    evaluator: "logic"
+    prompt: >
+      On an island of Knights (who always tell the truth) and Knaves (who always lie):
+      Person A says: "At least one of us is a Knave."
+      Person B says: "A is a Knight."
+      Determine the identity (Knight/Knave) of A and B.
+    ground_truth:
+      valid: true
+      solution:
+        A: "Knight"
+        B: "Knight"
+
+  - id: "logic_03"
+    domain: "logic"
+    title: "CNF Satisfiability and Counterexample Search"
+    difficulty: "hard"
+    deterministic: true
+    evaluator: "logic"
+    prompt: >
+      Determine if the following CNF formula is SATISFIABLE:
+      (A or B) and (not A or C) and (not B or not C) and (A or not C).
+      If SATISFIABLE, provide a satisfying truth assignment for (A, B, C).
+    ground_truth:
+      satisfiable: true
+      valid_assignments:
+        - {"A": true, "B": false, "C": true}
+
+  - id: "logic_04"
+    domain: "logic"
+    title: "Temporal Ordering Logic Constraints"
+    difficulty: "medium"
+    deterministic: true
+    evaluator: "logic"
+    prompt: >
+      Five events E1, E2, E3, E4, E5 occur at distinct integer timestamps 1..5.
+      Constraints:
+      1. E1 occurs before E3.
+      2. E2 occurs immediately after E4.
+      3. E5 occurs at timestamp 5.
+      4. E3 occurs after E2.
+      Find the unique valid temporal sequence.
+    ground_truth:
+      valid: true
+      sequence: ["E1", "E4", "E2", "E3", "E5"]
+
+  - id: "logic_05"
+    domain: "logic"
+    title: "Syllogistic Logical Deduction"
+    difficulty: "medium"
+    deterministic: true
+    evaluator: "logic"
+    prompt: >
+      Premise 1: All hyper-exergy processes are thermodynamic.
+      Premise 2: No irreversible process is hyper-exergy.
+      Premise 3: Process P is irreversible.
+      Which of the following conclusions logically MUST follow?
+      (a) P is not hyper-exergy.
+      (b) P is not thermodynamic.
+      (c) P is reversible.
+    ground_truth:
+      valid: true
+      conclusion: "a"
+
+  # =========================================================================
+  # ARCHITECTURE (5 Tasks)
+  # =========================================================================
+  - id: "arch_01"
+    domain: "architecture"
+    title: "Distributed Transaction Saga Pattern with Compensation"
+    difficulty: "hard"
+    deterministic: true
+    evaluator: "architecture"
+    prompt: >
+      Design an Event-Driven Orchestrated Saga architecture for an order fulfillment service involving Payment, Inventory, and Shipping.
+      Must specify:
+      1. Forward execution steps.
+      2. Compensating transactions for payment failure vs shipping failure.
+      3. Idempotency mechanism (deduplication key).
+      4. Outbox pattern for message delivery.
+    ground_truth:
+      required_components:
+        - "compensating_transaction"
+        - "idempotency_key"
+        - "outbox_pattern"
+        - "saga_orchestrator"
+      failure_modes:
+        - "payment_failed"
+        - "shipping_failed"
+        - "duplicate_event"
+
+  - id: "arch_02"
+    domain: "architecture"
+    title: "Rate Limiter with Sliding Window Counter & Distributed Redis"
+    difficulty: "medium"
+    deterministic: true
+    evaluator: "architecture"
+    prompt: >
+      Specify a distributed rate-limiting architecture supporting 100k QPS across multiple API Gateway instances.
+      Must specify:
+      1. Sliding window counter algorithm using Redis Sorted Sets or Lua scripts.
+      2. Graceful degradation strategy if Redis cluster becomes unreachable.
+      3. Headers returned to clients (`X-RateLimit-Limit`, `X-RateLimit-Remaining`, `Retry-After`).
+    ground_truth:
+      required_components:
+        - "sliding_window"
+        - "lua_script"
+        - "graceful_degradation"
+        - "headers"
+      failure_modes:
+        - "redis_outage"
+        - "clock_skew"
+
+  - id: "arch_03"
+    domain: "architecture"
+    title: "Write-Ahead Log (WAL) and Merkle Tree State Sync"
+    difficulty: "hard"
+    deterministic: true
+    evaluator: "architecture"
+    prompt: >
+      Specify an append-only BFT ledger architecture using WAL and incremental Merkle Tree hashing.
+      Must detail:
+      1. Entry layout with hash chain link (prev_hash, payload, sig).
+      2. Merkle tree incremental root update.
+      3. Crash recovery procedure during partial write.
+    ground_truth:
+      required_components:
+        - "prev_hash"
+        - "merkle_root"
+        - "crash_recovery"
+        - "atomic_append"
+      failure_modes:
+        - "partial_write"
+        - "hash_mismatch"
+
+  - id: "arch_04"
+    domain: "architecture"
+    title: "Multi-Tier Caching with Cache Stampede Mitigation"
+    difficulty: "medium"
+    deterministic: true
+    evaluator: "architecture"
+    prompt: >
+      Architect a 2-tier cache (L1 Memory + L2 Redis) with Cache Stampede (Thundering Herd) prevention.
+      Must detail:
+      1. Mutex/Probabilistic early expiration (XFetch / Lease token).
+      2. Cache invalidation strategy on write.
+      3. L1/L2 synchronization protocol.
+    ground_truth:
+      required_components:
+        - "stampede_mitigation"
+        - "lease_token"
+        - "invalidation"
+        - "l1_l2_sync"
+      failure_modes:
+        - "thundering_herd"
+        - "stale_read"
+
+  - id: "arch_05"
+    domain: "architecture"
+    title: "Zero-Trust Service Mesh Authentication & Mutual TLS"
+    difficulty: "hard"
+    deterministic: true
+    evaluator: "architecture"
+    prompt: >
+      Architect a Zero-Trust inter-service security framework using SPIFFE/SPIRE mTLS and fine-grained authorization.
+      Must specify:
+      1. Workload identity attestation.
+      2. Short-lived X.509 certificate rotation.
+      3. Authorization policy engine (OPA / Wasm filter).
+    ground_truth:
+      required_components:
+        - "spiffe_identity"
+        - "certificate_rotation"
+        - "authorization_policy"
+        - "mtls_handshake"
+      failure_modes:
+        - "cert_expiration"
+        - "unauthorized_egress"

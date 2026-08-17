@@ -1,0 +1,45 @@
+# LUNA_SOL_GAP_BENCHMARK Config v0.1
+experiment_name: "luna_sol_gap_benchmark_v0.1"
+task_corpus_path: "LUNA_SOL_GAP_BENCHMARK/benchmark/tasks/task_corpus.yaml"
+results_dir: "LUNA_SOL_GAP_BENCHMARK/results"
+reports_dir: "LUNA_SOL_GAP_BENCHMARK/reports"
+
+models:
+  luna: "gpt-5-luna"
+  sol: "gpt-5-sol"
+
+branches:
+  A:
+    name: "luna_single_pass"
+    model: "luna"
+    think: false
+    ctm: false
+  B:
+    name: "luna_think"
+    model: "luna"
+    think: true
+    ctm: false
+  C:
+    name: "luna_ctm"
+    model: "luna"
+    think: true
+    ctm: true
+  D:
+    name: "sol_baseline"
+    model: "sol"
+    think: true
+    ctm: false
+  E:
+    name: "luna_ctm_no_think"
+    model: "luna"
+    think: false
+    ctm: true
+
+ctm_settings:
+  max_iterations: 3
+  stagnation_window: 3
+  epsilon_semantic_delta: 0.05
+  epsilon_score_delta: 0.01
+
+metrics_settings:
+  epsilon_baseline_gap: 0.05
