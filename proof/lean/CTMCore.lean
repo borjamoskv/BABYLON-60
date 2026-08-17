@@ -2,7 +2,7 @@ namespace CTMCore
 
 /--
 State Space and Action Space primitives.
-These are completely agnostic of any particular implementation, modeling
+Completely agnostic of any particular implementation, modeling
 the bare minimal ontology of the CTM.
 -/
 variable {S A : Type}
@@ -10,7 +10,7 @@ variable {S A : Type}
 /--
 Strong Invariant State boundary.
 A state wrapped with a formal proof that it satisfies the invariant.
-This ensures the machine cannot represent invalid states.
+Lean models Subtypes as a value paired with a proof of the property, transparent in runtime.
 -/
 def SafeState (S : Type) (I : S → Prop) := { s : S // I s }
 
@@ -35,29 +35,25 @@ structure CTM (S A : Type) where
   -/
   preservation : ∀ (s : S) (a : A), invariant s → legal s a → invariant (transition s a)
 
+/--
+Explicit theorem proving that a valid transition step preserves the state invariant.
+-/
+theorem step_preserves {S A : Type} (M : CTM S A) (s : SafeState S M.invariant) (a : A) (hlegal : M.legal s.val a) :
+    M.invariant (M.transition s.val a) := by
+  exact M.preservation s.val a s.property hlegal
 
 /--
-The strict transition controller.
-It takes a certified `SafeState`, an `Action`, and a formal proof of legality.
-It outputs a new certified `SafeState`.
-This enforces the strict boundary between abduction (generation) and deduction (certification).
+The strict transition controller (safeStep).
+Constructs a new certified SafeState by pairing the untrusted proposal with the step_preserves proof.
+Untrusted proposal -> Legal proof -> Invariant-preserving transition.
 -/
-def step {S A : Type} (M : CTM S A) (s_safe : SafeState S M.invariant) (a : A) (h_legal : M.legal s_safe.val a) : SafeState S M.invariant :=
-  -- Extract the bare state and its proof of invariant
-  let s_val := s_safe.val
-  let h_inv := s_safe.property
-  
-  -- Generate the next state via the untrusted transition
-  let s_next := M.transition s_val a
-  
-  -- Apply the preservation theorem to certify the next state
-  let h_next_inv := M.preservation s_val a h_inv h_legal
-  
-  -- Package and return the new Strong State
-  ⟨s_next, h_next_inv⟩
+def safeStep {S A : Type} (M : CTM S A) (s : SafeState S M.invariant) (a : A) (hlegal : M.legal s.val a) : SafeState S M.invariant :=
+  ⟨M.transition s.val a, step_preserves M s a hlegal⟩
 
--- AP-09 AUDIT: No custom axioms or sorryAx used. 
--- Validating that the core CTM transition engine is constructively sound.
-#print axioms step
+-- AP-09 AUDIT: Trusted Core Axiom Audits
+-- Must be checked in CI with Lean toolchain to verify zero custom axioms or sorryAx.
+#print axioms SafeState
+#print axioms step_preserves
+#print axioms safeStep
 
 end CTMCore
