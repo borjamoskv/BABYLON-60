@@ -1,4 +1,4 @@
-# Metrics Engine for LUNA_SOL_GAP_BENCHMARK (CTM⁵¹-CTM⁵⁹ Falsification v4)
+# Metrics Engine for LUNA_SOL_GAP_BENCHMARK (CTM⁵¹-CTM⁶³ Falsification v5)
 from dataclasses import dataclass
 from typing import Dict, List, Any, Optional
 import math
@@ -22,6 +22,10 @@ class BenchmarkFalsificationMetrics:
     primary_hypothesis_ctm_vs_permuted: bool
     total_budget_consumed: Dict[str, int]
     weak_oracle_excluded_domains: List[str]
+    discordance_c_vs_d: Dict[str, int]  # b (C wins), c (D wins), b+c (total discordant pairs)
+    discordance_f_vs_d: Dict[str, int]  # b (F wins), c (D wins), b+c (total discordant pairs)
+    p_value_c_vs_d: float
+    p_value_f_vs_d: float
     falsified: bool
     falsification_reason: str
 
@@ -38,7 +42,7 @@ class MetricsCalculator:
         """
         n = b + c
         if n == 0:
-            return 1.0  # No discordants, cannot reject H0
+            return 1.0  # No discordants (b+c=0), cannot reject H0
         p_val = 0.0
         for k in range(c, n + 1):
             p_val += math.comb(n, k) * (0.5 ** n)
@@ -57,8 +61,8 @@ class MetricsCalculator:
         ctm_regressed_count = 0
         
         # McNemar discordants
-        discordant_C_vs_D = {"C_wins": 0, "D_wins": 0}
-        discordant_F_vs_D = {"F_wins": 0, "D_wins": 0}
+        discordant_C_vs_D = {"b_C_wins": 0, "c_D_wins": 0}
+        discordant_F_vs_D = {"b_F_wins": 0, "c_D_wins": 0}
         
         valid_tasks_count = 0
 
@@ -85,16 +89,16 @@ class MetricsCalculator:
             pass_c = tr.branch_passed.get("NULL_ADAPTIVE_CONTROL", False)
             pass_d = tr.branch_passed.get("STRUCTURED_CTM", False)
             if pass_c and not pass_d:
-                discordant_C_vs_D["C_wins"] += 1
+                discordant_C_vs_D["b_C_wins"] += 1
             elif pass_d and not pass_c:
-                discordant_C_vs_D["D_wins"] += 1
+                discordant_C_vs_D["c_D_wins"] += 1
                 
             # McNemar Pairs (F vs D)
             pass_f = tr.branch_passed.get("PERMUTED_CTM", False)
             if pass_f and not pass_d:
-                discordant_F_vs_D["F_wins"] += 1
+                discordant_F_vs_D["b_F_wins"] += 1
             elif pass_d and not pass_f:
-                discordant_F_vs_D["D_wins"] += 1
+                discordant_F_vs_D["c_D_wins"] += 1
 
         if valid_tasks_count == 0:
             raise ValueError("No valid tasks remain after excluding weak oracles.")
@@ -103,9 +107,17 @@ class MetricsCalculator:
         efficiency = {b: (success_counts[b] / budget_counts[b] if budget_counts[b] > 0 else 0) for b in branches}
         regression = ctm_regressed_count / base_passed_count if base_passed_count > 0 else 0.0
         
-        # McNemar Significance Tests (Is D significantly better than C/F?)
-        p_val_c = self.exact_mcnemar_p_value(b=discordant_C_vs_D["C_wins"], c=discordant_C_vs_D["D_wins"])
-        p_val_f = self.exact_mcnemar_p_value(b=discordant_F_vs_D["F_wins"], c=discordant_F_vs_D["D_wins"])
+        b_c = discordant_C_vs_D["b_C_wins"]
+        c_c = discordant_C_vs_D["c_D_wins"]
+        b_f = discordant_F_vs_D["b_F_wins"]
+        c_f = discordant_F_vs_D["c_D_wins"]
+
+        discordant_C_vs_D["total_discordant_b_plus_c"] = b_c + c_c
+        discordant_F_vs_D["total_discordant_b_plus_c"] = b_f + c_f
+
+        # McNemar Significance Tests
+        p_val_c = self.exact_mcnemar_p_value(b=b_c, c=c_c)
+        p_val_f = self.exact_mcnemar_p_value(b=b_f, c=c_f)
         
         h_ctm_vs_placebo = p_val_c <= self.alpha
         h_ctm_vs_permuted = p_val_f <= self.alpha
@@ -127,11 +139,11 @@ class MetricsCalculator:
         # Kill Conditions based on the McNemar Exact Tests
         if not h_ctm_vs_placebo:
             falsified = True
-            reasons.append(f"FAILED H_CTM: STRUCTURED_CTM not significantly better than NULL_ADAPTIVE_CONTROL (p={p_val_c:.3f} > {self.alpha}).")
+            reasons.append(f"FAILED H_CTM: STRUCTURED_CTM not significantly better than NULL_ADAPTIVE_CONTROL (p={p_val_c:.3f} > {self.alpha}, discordance b+c={b_c+c_c}).")
             
         if not h_ctm_vs_permuted:
             falsified = True
-            reasons.append(f"FAILED H_CTM_PERMUTED: STRUCTURED_CTM not significantly better than PERMUTED_CTM (p={p_val_f:.3f} > {self.alpha}). Topology adds no value.")
+            reasons.append(f"FAILED H_CTM_PERMUTED: STRUCTURED_CTM not significantly better than PERMUTED_CTM (p={p_val_f:.3f} > {self.alpha}, discordance b+c={b_f+c_f}). Topology adds no value.")
 
         # Regression Tolerance
         if regression > self.max_regression_rate:
@@ -153,6 +165,10 @@ class MetricsCalculator:
             primary_hypothesis_ctm_vs_permuted=h_ctm_vs_permuted,
             total_budget_consumed=budget_counts,
             weak_oracle_excluded_domains=self.weak_oracles,
+            discordance_c_vs_d=discordant_C_vs_D,
+            discordance_f_vs_d=discordant_F_vs_D,
+            p_value_c_vs_d=p_val_c,
+            p_value_f_vs_d=p_val_f,
             falsified=falsified,
             falsification_reason=" | ".join(reasons) if falsified else "SURVIVED: Structured Topology proven significantly valuable."
         )
