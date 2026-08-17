@@ -10,3 +10,4 @@ import CTM.Metrics
 import CTM.Evidence
 import CTM.Kernel
 import CTM.Policy
+import CTM.Strategy
