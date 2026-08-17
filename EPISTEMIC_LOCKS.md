@@ -1,14 +1,14 @@
 # EPISTEMIC_LOCKS.md — Master Index & Governance Specification
 
-> **STATUS: FROZEN / NORMATIVE MASTER INDEX v1.0.0**  
+> **STATUS: FROZEN / NORMATIVE MASTER INDEX v2.0.0**  
 > **Repository**: `borjamoskv/teorema-robinson-moskv`  
 > **Verification CLI**: `python3 scripts/verify_epistemic_locks.py`  
 
-This master document serves as the central index and entry point for the 10 frozen epistemic, contractual, and experimental governance locks established for the **Teorema Robinson-Moskv** architecture.
+This master document serves as the central index and entry point for the **15 frozen epistemic, contractual, and experimental governance locks** established for the **Teorema Robinson-Moskv** architecture.
 
 ---
 
-## 1. Epistemic Architecture Map
+## 1. Epistemic Architecture & Claim Traceability DAG
 
 ```text
 +-----------------------------------------------------------------------------------+
@@ -35,9 +35,15 @@ This master document serves as the central index and entry point for the 10 froz
                                                 +---------------------------------------+
 ```
 
+### Claim-to-Verdict Chain of Custody (LOCK-15)
+
+```text
+CLAIM -> FORMAL_CLAIM -> TEST -> RUN_ID -> RAW_DATA -> STATISTIC -> DECISION -> VERDICT
+```
+
 ---
 
-## 2. Catalog of Frozen Lock Files
+## 2. Catalog of 15 Frozen Lock Files
 
 | Lock ID | Filename | Primary Role | Status |
 |---|---|---|---|
@@ -51,28 +57,24 @@ This master document serves as the central index and entry point for the 10 froz
 | **LOCK-08** | [REPRODUCIBILITY_LOCK.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/REPRODUCIBILITY_LOCK.md) | Full environment pins and 6-stage cryptographic provenance hash chain | **FROZEN** |
 | **LOCK-09** | [THREAT_MODEL.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/THREAT_MODEL.md) | Catalog of 14 systemic & experimental threats and mitigation matrix | **FROZEN** |
 | **LOCK-10** | [THEOREM_EMPIRICAL_BRIDGE.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/THEOREM_EMPIRICAL_BRIDGE.md) | Central epistemic firewall equation and 6-stage derivation ladder | **FROZEN** |
+| **LOCK-11** | [PROVENANCE_LOCK.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/PROVENANCE_LOCK.md) | Cryptographic data origin, ISO 8601 UTC timestamps, and Merkle custody chain | **FROZEN** |
+| **LOCK-12** | [EXECUTION_LOCK.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/EXECUTION_LOCK.md) | Attestation linking results to clean git commit SHA, binary hashes, and code entrypoints | **FROZEN** |
+| **LOCK-13** | [ENVIRONMENT_LOCK.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/ENVIRONMENT_LOCK.md) | Pinning of Python, Lean 4, Rust, OS, CPU microarchitecture, and lockfile digests | **FROZEN** |
+| **LOCK-14** | [STATISTICAL_DECISION_LOCK.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/STATISTICAL_DECISION_LOCK.md) | Pre-registered parameter locks ($\alpha=0.05$, exact McNemar, fixed sample size) | **FROZEN** |
+| **LOCK-15** | [CLAIM_TRACEABILITY_LOCK.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/CLAIM_TRACEABILITY_LOCK.md) | 8-stage Claim Traceability DAG linking assertion to raw evidence and verdict | **FROZEN** |
 
 ---
 
-## 3. Automated Verification & Enforcement
+## 3. Automated Verification & Tamper Resistance Audit
 
-To audit and verify the structural integrity of all 10 lock files:
+To audit and verify the structural integrity of all 15 lock files:
 
 ```bash
 python3 scripts/verify_epistemic_locks.py
 ```
 
-Expected output:
-```text
-[✓] LOCK-01: FORMAL_CLAIMS.md valid.
-[✓] LOCK-02: ASSUMPTIONS.md valid.
-[✓] LOCK-03: TRACE_CONTRACT_v1.0.0.json valid (Draft 2020-12 Schema verified).
-[✓] LOCK-04: BENCHMARK_PROTOCOL_v1.0.0.md valid.
-[✓] LOCK-05: RANDOMIZATION_PROTOCOL.md valid.
-[✓] LOCK-06: METRICS.md valid.
-[✓] LOCK-07: FALSIFICATION_RULES.md valid.
-[✓] LOCK-08: REPRODUCIBILITY_LOCK.md valid.
-[✓] LOCK-09: THREAT_MODEL.md valid.
-[✓] LOCK-10: THEOREM_EMPIRICAL_BRIDGE.md valid.
-[SUCCESS] All 10 Epistemic Lock files verified. Manifest generated at EPISTEMIC_LOCKS_MANIFEST.json.
+To run the automated tamper-resistance security test suite:
+
+```bash
+pytest tests/test_epistemic_tamper_resistance.py
 ```

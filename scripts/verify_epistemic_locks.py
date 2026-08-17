@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-verify_epistemic_locks.py — Automated Forensic Verifier for Epistemic & Contractual Locks
+verify_epistemic_locks.py — Automated Forensic Verifier for Epistemic & Contractual Locks (v2.0)
 
-Verifies the cryptographic and structural integrity of the 10 frozen lock files in
+Verifies the cryptographic and structural integrity of the 15 frozen lock files in
 the teorema-robinson-moskv repository.
 """
 
@@ -25,7 +25,12 @@ LOCK_FILES = [
     "FALSIFICATION_RULES.md",
     "REPRODUCIBILITY_LOCK.md",
     "THREAT_MODEL.md",
-    "THEOREM_EMPIRICAL_BRIDGE.md"
+    "THEOREM_EMPIRICAL_BRIDGE.md",
+    "PROVENANCE_LOCK.md",
+    "EXECUTION_LOCK.md",
+    "ENVIRONMENT_LOCK.md",
+    "STATISTICAL_DECISION_LOCK.md",
+    "CLAIM_TRACEABILITY_LOCK.md"
 ]
 
 FORBIDDEN_AUTHORITY_KEYS = [
@@ -49,7 +54,6 @@ def verify_trace_contract(filepath: Path) -> bool:
         with open(filepath, "r", encoding="utf-8") as f:
             data = json.load(f)
 
-        # Check required schema fields
         trace_contract = data.get("trace_contract", {})
         if trace_contract.get("version") != "1.0.0":
             print(f"[X] TRACE_CONTRACT version mismatch: {trace_contract.get('version')}")
@@ -68,9 +72,10 @@ def verify_trace_contract(filepath: Path) -> bool:
 
 
 def verify_all_locks():
-    print(f"=== VERIFYING EPISTEMIC LOCKS ({ROOT_DIR}) ===")
+    print(f"=== VERIFYING 15 EPISTEMIC LOCKS ({ROOT_DIR}) ===")
     errors = []
     manifest = {
+        "version": "2.0.0",
         "verified_at": datetime.now(timezone.utc).isoformat(),
         "repository": "borjamoskv/teorema-robinson-moskv",
         "lock_files": {}
@@ -95,7 +100,7 @@ def verify_all_locks():
                 errors.append("TRACE_CONTRACT authority verification failed")
                 continue
 
-        print(f"[✓] {lock_name:<30} SHA256: {file_hash[:16]}... OK")
+        print(f"[✓] {lock_name:<32} SHA256: {file_hash[:16]}... OK")
 
     manifest_path = ROOT_DIR / "EPISTEMIC_LOCKS_MANIFEST.json"
     with open(manifest_path, "w", encoding="utf-8") as f:
