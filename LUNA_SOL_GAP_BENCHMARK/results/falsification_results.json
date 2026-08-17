@@ -1,0 +1,42 @@
+{
+  "experiment_name": "luna_ctm_falsification_v1",
+  "falsified": true,
+  "falsification_reason": "NO_STRATEGY_GAIN: CTM Coverage (1.00) <= BASE-N (1.00). Gain is purely due to compute budget. | H0_NOT_REJECTED: CTM did not improve absolute coverage over BASE.",
+  "metrics": {
+    "coverage": {
+      "BASE": 1.0,
+      "BASE-N": 1.0,
+      "CTM": 1.0
+    },
+    "recovery_rate": 0.0,
+    "regression_rate": 0.0,
+    "g_strategy_gain": 0.0,
+    "total_budget_tokens": {
+      "BASE": 12000,
+      "BASE-N": 12000,
+      "CTM": 12000
+    }
+  },
+  "domain_breakdown": {
+    "coding": {
+      "BASE": 1.0,
+      "BASE-N": 1.0,
+      "CTM": 1.0
+    },
+    "mathematics": {
+      "BASE": 1.0,
+      "BASE-N": 1.0,
+      "CTM": 1.0
+    },
+    "logic": {
+      "BASE": 1.0,
+      "BASE-N": 1.0,
+      "CTM": 1.0
+    },
+    "architecture": {
+      "BASE": 1.0,
+      "BASE-N": 1.0,
+      "CTM": 1.0
+    }
+  }
+}
