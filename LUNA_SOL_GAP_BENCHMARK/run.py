@@ -24,7 +24,7 @@ def load_yaml(filepath: str) -> dict:
         return yaml.safe_load(f)
 
 def main():
-    parser = argparse.ArgumentParser(description="CTM-FALSIFICATION v4 CLI Runner")
+    parser = argparse.ArgumentParser(description="CTM-FALSIFICATION v5 CLI Runner")
     parser.add_argument("--config", default=str(BASE_DIR / "configs" / "experiment.yaml"), help="Path to config file")
     parser.add_argument("--mock", action="store_true", default=True, help="Use mock deterministic runner")
     parser.add_argument("--live", action="store_true", help="Use live LLM API runner")
@@ -120,7 +120,15 @@ def main():
         },
         "statistical_tests": {
             "h_ctm_vs_placebo": metrics.primary_hypothesis_ctm_vs_placebo,
-            "h_ctm_vs_permuted": metrics.primary_hypothesis_ctm_vs_permuted
+            "h_ctm_vs_permuted": metrics.primary_hypothesis_ctm_vs_permuted,
+            "mcnemar_c_vs_d": {
+                "discordance": metrics.discordance_c_vs_d,
+                "p_value": metrics.p_value_c_vs_d
+            },
+            "mcnemar_f_vs_d": {
+                "discordance": metrics.discordance_f_vs_d,
+                "p_value": metrics.p_value_f_vs_d
+            }
         }
     }
 
@@ -138,6 +146,8 @@ def main():
     print(f"Coverage PERMUTED_CTM:          {metrics.coverage.get('PERMUTED_CTM'):.2%}")
     print(f"Coverage STRUCTURED_CTM:        {metrics.coverage.get('STRUCTURED_CTM'):.2%}")
     print(f"Regression Rate:                {metrics.regression_rate:.2%}")
+    print(f"McNemar C vs D Discordance (b, c, b+c): {metrics.discordance_c_vs_d}")
+    print(f"McNemar C vs D p-value:        {metrics.p_value_c_vs_d:.4f}")
     print("=" * 70)
 
 if __name__ == "__main__":
