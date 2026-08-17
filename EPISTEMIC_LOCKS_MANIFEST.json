@@ -1,5 +1,6 @@
 {
-  "verified_at": "2026-08-17T14:17:43.974180+00:00",
+  "version": "2.0.0",
+  "verified_at": "2026-08-17T14:19:38.464636+00:00",
   "repository": "borjamoskv/teorema-robinson-moskv",
   "lock_files": {
     "FORMAL_CLAIMS.md": {
@@ -50,6 +51,31 @@
     "THEOREM_EMPIRICAL_BRIDGE.md": {
       "path": "THEOREM_EMPIRICAL_BRIDGE.md",
       "sha256": "822176ea88cb0e2c143437b8919c84c99d782bc6b263ef4cbc86d10ac3662e95",
+      "status": "VERIFIED"
+    },
+    "PROVENANCE_LOCK.md": {
+      "path": "PROVENANCE_LOCK.md",
+      "sha256": "99c4286b91c2391b00b6835447d151f4773352073ece0a7f9aefe0f8f0b85e4b",
+      "status": "VERIFIED"
+    },
+    "EXECUTION_LOCK.md": {
+      "path": "EXECUTION_LOCK.md",
+      "sha256": "bf42811bdadf990737a833131f8e49f60c9e7127adaf64079412ce42fae3f204",
+      "status": "VERIFIED"
+    },
+    "ENVIRONMENT_LOCK.md": {
+      "path": "ENVIRONMENT_LOCK.md",
+      "sha256": "7d38b8728c5a413285b17eb94a1bd06c311d4870c7627910375544f06ae24d00",
+      "status": "VERIFIED"
+    },
+    "STATISTICAL_DECISION_LOCK.md": {
+      "path": "STATISTICAL_DECISION_LOCK.md",
+      "sha256": "6195c4c609b4c683592b1ba6daba2fb18aaaca057d46ee0ac67297cc1deaa1fc",
+      "status": "VERIFIED"
+    },
+    "CLAIM_TRACEABILITY_LOCK.md": {
+      "path": "CLAIM_TRACEABILITY_LOCK.md",
+      "sha256": "27b18ff0f254fa35085df228f0fb2471ead961771d2fd8d37aaa7c65eecbd851",
       "status": "VERIFIED"
     }
   }
