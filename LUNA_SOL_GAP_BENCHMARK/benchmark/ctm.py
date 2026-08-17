@@ -1,5 +1,5 @@
 # Cognitive Transition Machine (CTM) Formal Engine for LUNA_SOL_GAP_BENCHMARK
-# Implements CTM⁵¹-CTM⁵⁹ Invariants (Falsification v3)
+# Implements CTM⁵¹-CTM⁵⁹ Invariants (Falsification v4 - Pre-Live)
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 from benchmark.evaluators.base_evaluator import BaseEvaluator, EvaluationResult
@@ -16,7 +16,7 @@ class TransitionTrace:
 @dataclass
 class CTMResult:
     task_id: str
-    policy: str  # 'SINGLE_PASS', 'INDEPENDENT_RETRY', 'ADAPTIVE_PLACEBO', 'CTM', 'PERMUTED_CTM'
+    policy: str  # 'BASE', 'EXTRA_COMPUTE', 'NULL_ADAPTIVE_CONTROL', 'STRUCTURED_CTM', 'CTM_TOOL', 'PERMUTED_CTM'
     passed: bool
     final_score: float
     budget_consumed_tokens: int
@@ -60,31 +60,31 @@ class CTMPolicyEngine:
 
         # Retry Loop
         for i in range(2, max_iterations + 1):
-            if policy_name == "INDEPENDENT_RETRY":
+            if policy_name == "EXTRA_COMPUTE":
                 prompt = base_prompt
                 
-            elif policy_name == "ADAPTIVE_PLACEBO":
+            elif policy_name == "NULL_ADAPTIVE_CONTROL":
+                # Blind feedback: Model is told it failed but not given the actual reason.
                 prompt = f"""Task: {task.get('prompt')}
 Previous Candidate:
 {candidate}
-Kernel Feedback: {eval_result.feedback}
-Failure Set: {eval_result.failure_set}
-You failed. Do NOT try to fix the specific constraints structurally. Instead, ignore the details of the failure and just guess a completely different and creative alternative solution."""
+Kernel Feedback: REJECTED (Feedback omitted for control).
+Generate an alternative solution. Do not repeat the previous candidate."""
 
             elif policy_name == "PERMUTED_CTM":
-                # Inject a random past feedback instead of the most recent one to destroy topological order
+                # Inject a random past feedback instead of the most recent one to destroy topological causal order
                 random_past = random.choice(feedback_history)
                 past_feedback, past_failures = random_past
                 prompt = f"""Task: {task.get('prompt')}
 Previous Candidate:
 {candidate}
-Kernel Verification Failure (Scrambled Order):
+Kernel Verification Failure (Permuted):
 {past_feedback}
 Failure Set: {past_failures}
 Provide a corrected candidate that resolves these strict legality constraints."""
 
             else:
-                # CTM (Structured)
+                # STRUCTURED_CTM or CTM_TOOL
                 prompt = f"""Task: {task.get('prompt')}
 Previous Candidate:
 {candidate}
@@ -93,9 +93,7 @@ Kernel Verification Failure:
 Failure Set: {eval_result.failure_set}
 Provide a corrected candidate that strictly resolves these legality constraints without breaking existing invariants."""
 
-            # Override temperature for placebo branches to encourage structural break
-            use_high_temp = policy_name in ["ADAPTIVE_PLACEBO"]
-            candidate, tokens = self.runner.generate(prompt, use_think=not use_high_temp) 
+            candidate, tokens = self.runner.generate(prompt, use_think=True) 
             total_tokens += tokens
             eval_result = self.checker.evaluate(candidate, task)
             
@@ -119,17 +117,7 @@ Provide a corrected candidate that strictly resolves these legality constraints 
             iterations_used=max_iterations, trace=trace
         )
 
-    def run_single_pass(self, task: Dict[str, Any]) -> CTMResult:
-        return self._execute_branch(task, max_iterations=1, policy_name="SINGLE_PASS")
-
-    def run_independent_retry(self, task: Dict[str, Any], max_iterations: int) -> CTMResult:
-        return self._execute_branch(task, max_iterations=max_iterations, policy_name="INDEPENDENT_RETRY")
-
-    def run_adaptive_placebo(self, task: Dict[str, Any], max_iterations: int) -> CTMResult:
-        return self._execute_branch(task, max_iterations=max_iterations, policy_name="ADAPTIVE_PLACEBO")
-
-    def run_ctm(self, task: Dict[str, Any], max_iterations: int) -> CTMResult:
-        return self._execute_branch(task, max_iterations=max_iterations, policy_name="CTM")
-
-    def run_permuted_ctm(self, task: Dict[str, Any], max_iterations: int) -> CTMResult:
-        return self._execute_branch(task, max_iterations=max_iterations, policy_name="PERMUTED_CTM")
+    def run_branch(self, task: Dict[str, Any], policy_name: str, max_iterations: int) -> CTMResult:
+        if policy_name == "BASE":
+            return self._execute_branch(task, max_iterations=1, policy_name="BASE")
+        return self._execute_branch(task, max_iterations=max_iterations, policy_name=policy_name)
