@@ -16,6 +16,8 @@ import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
+from babylon60.database.core import connect_sync
+
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 STATUS_FILE = ROOT_DIR / "STATUS.md"
 
@@ -98,9 +100,7 @@ def audit_db_census() -> dict[str, dict[str, int]]:
     for db_path in sorted(db_paths):
         rel_name = str(db_path.relative_to(ROOT_DIR))
         try:
-            conn = sqlite3.connect(str(db_path), timeout=2.0)
-            conn.execute("PRAGMA journal_mode=WAL;")
-            conn.execute("PRAGMA busy_timeout=5000;")
+            conn = connect_sync(db_path)
             tables = [t[0] for t in conn.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()]
             census[rel_name] = _get_table_counts(conn, tables)
             conn.close()
