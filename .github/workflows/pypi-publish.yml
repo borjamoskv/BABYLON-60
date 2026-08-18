@@ -43,12 +43,7 @@ jobs:
         with:
           subject-path: 'dist/*'
 
-      - name: Sign Distributions with Sigstore
-        uses: sigstore/gh-action-sigstore-python@v3.0.0
-        with:
-          inputs: >-
-            ./dist/*.tar.gz
-            ./dist/*.whl
+
 
       - name: Publish Package to PyPI (OIDC Trusted Publishing)
         uses: pypa/gh-action-pypi-publish@release/v1
