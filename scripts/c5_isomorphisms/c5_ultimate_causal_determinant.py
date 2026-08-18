@@ -35,6 +35,8 @@ import sys
 import time
 from typing import Dict, List, Optional, Set, Tuple
 
+from babylon60.database.core import connect_sync
+
 
 class FFIEventHorizonRouter:
     """INV_C5_FFI_EVENT_HORIZON: Strict byte-passing router to Rust (Simulated)."""
@@ -193,8 +195,7 @@ class CausalStateActor:
         self._init_db()
 
     def _init_db(self) -> None:
-        with sqlite3.connect(self.db_path, timeout=5.0) as conn:
-            conn.execute("PRAGMA journal_mode = WAL;")
+        with connect_sync(self.db_path) as conn:
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS master_ledger (
                     sequence_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -220,7 +221,7 @@ class CausalStateActor:
         ).hexdigest()
 
         now = time.time()
-        with sqlite3.connect(self.db_path, timeout=5.0) as conn:
+        with connect_sync(self.db_path) as conn:
             try:
                 cursor = conn.execute(
                     "INSERT INTO master_ledger (taint_hash, payload_hash, lamport_clock, wl_color_hash, logop_score, l1_op_return, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
