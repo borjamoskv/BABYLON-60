@@ -12,16 +12,15 @@ import time
 from pathlib import Path
 from typing import Any
 
+from babylon60.database.core import connect_sync
+
 PROJECT_ROOT: Path = Path(__file__).resolve().parent.parent.parent
 DB_PATH: Path = PROJECT_ROOT / "data" / "cib_master_ledger.db"
 CORTEX_DB_PATH: Path = PROJECT_ROOT / "cortex" / "engine" / "nexus_anchors.db"
 
 
 def get_db_connection(path: Path = DB_PATH) -> sqlite3.Connection:
-    conn = sqlite3.connect(str(path), timeout=5.0)
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.execute("PRAGMA busy_timeout=5000")
-    return conn
+    return connect_sync(path)
 
 
 def init_ledger(conn: sqlite3.Connection) -> None:

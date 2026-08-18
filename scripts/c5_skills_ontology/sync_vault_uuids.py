@@ -33,7 +33,9 @@ def sync_vault_uuids(json_output: bool = False) -> None:
         print(f"[-] Database not found at {DB_PATH}. Skipping UUID sync.")
         return
 
-    conn = sqlite3.connect(DB_PATH, timeout=5.0)
+    from babylon60.database.core import connect_sync
+
+    conn = connect_sync(DB_PATH)
     cursor = conn.cursor()
 
     # Query L1 primitive nodes for session UUIDs
