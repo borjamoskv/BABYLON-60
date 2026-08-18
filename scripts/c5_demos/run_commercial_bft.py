@@ -64,8 +64,9 @@ def main():
 
     # VERIFY SQLITE WAL FLUSH
     print("\n[*] Validando cristalización inmutable en SQLite WAL...")
-    try:
-        conn = sqlite3.connect("cortex_memory_bft.db", timeout=5.0)
+        from babylon60.database.core import connect_sync
+
+        conn = connect_sync("cortex_memory_bft.db")
         cursor = conn.cursor()
         cursor.execute("SELECT COUNT(*) FROM cortex_memory_bft;")
         count = cursor.fetchone()[0]

@@ -124,11 +124,10 @@ class AmendmentLedger:
 
     def __init__(self, db_path: str | Path = "master_ledger.db") -> None:
         self.db_path = Path(db_path)
-        # Create schema and immutable triggers synchronously using sqlite3
-        conn = sqlite3.connect(self.db_path, timeout=5.0)
+        from babylon60.database.core import connect_sync
+
+        conn = connect_sync(self.db_path)
         try:
-            conn.execute("PRAGMA journal_mode=WAL;")
-            conn.execute("PRAGMA busy_timeout=5000;")
             conn.execute(
                 """
                 CREATE TABLE IF NOT EXISTS ledger_entries (

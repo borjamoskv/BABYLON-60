@@ -14,7 +14,9 @@ class ParalifeLedger:
         self._init_db()
 
     def _init_db(self):
-        conn = sqlite3.connect(DB_PATH)
+        from babylon60.database.core import connect_sync
+
+        conn = connect_sync(DB_PATH)
         cursor = conn.cursor()
         
         # Sessions Table
@@ -45,7 +47,9 @@ class ParalifeLedger:
         conn.close()
 
     def register_session(self, sid, profile, path):
-        conn = sqlite3.connect(DB_PATH)
+        from babylon60.database.core import connect_sync
+
+        conn = connect_sync(DB_PATH)
         cursor = conn.cursor()
         cursor.execute("INSERT OR REPLACE INTO sessions VALUES (?, ?, ?, 'OPERATIONAL', ?)", 
                        (sid, profile, datetime.now(timezone.utc).isoformat(), path))
@@ -53,14 +57,18 @@ class ParalifeLedger:
         conn.close()
 
     def update_session_status(self, sid, status):
-        conn = sqlite3.connect(DB_PATH)
+        from babylon60.database.core import connect_sync
+
+        conn = connect_sync(DB_PATH)
         cursor = conn.cursor()
         cursor.execute("UPDATE sessions SET status = ? WHERE id = ?", (status, sid))
         conn.commit()
         conn.close()
 
     def log_audit(self, sid, decision, reason, data_summary):
-        conn = sqlite3.connect(DB_PATH)
+        from babylon60.database.core import connect_sync
+
+        conn = connect_sync(DB_PATH)
         cursor = conn.cursor()
         cursor.execute("""
             INSERT INTO audit_logs (session_id, data_summary, decision, reason, timestamp)
@@ -70,7 +78,9 @@ class ParalifeLedger:
         conn.close()
 
     def get_active_sessions(self):
-        conn = sqlite3.connect(DB_PATH)
+        from babylon60.database.core import connect_sync
+
+        conn = connect_sync(DB_PATH)
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM sessions WHERE status = 'OPERATIONAL'")
         rows = cursor.fetchall()

@@ -67,7 +67,7 @@ BABYLON-60 es un monorepo que proporciona un **ledger append-only con cadena de 
 | :--- | :--- | :--- |
 | **Cadena de hashes** | Cada entrada del ledger incluye un hash SHA3-256 de la entrada anterior. `verify_integrity()` recomputa y valida la cadena completa. | Detecta manipulación *a posteriori*; no la previene si el atacante evita SQLite. |
 | **Append-only** | Triggers SQLite (`trg_ledger_immutable_update` / `trg_ledger_immutable_delete`) bloquean UPDATE/DELETE a nivel de motor. | Evitable mediante manipulación directa del filesystem fuera del motor DB. |
-| **Single-writer WAL** | Todas las conexiones del paquete core (`packages/babylon60/`) usan `PRAGMA journal_mode=WAL` + `busy_timeout=5000` via el conector centralizado en [`database/core.py`](./packages/babylon60/database/core.py). | Scripts independientes en `scripts/` están en fase final de migración. |
+| **Single-writer WAL** | Todas las conexiones del paquete core y scripts del repositorio usan `PRAGMA journal_mode=WAL` + `busy_timeout=5000` via el conector centralizado en [`database/core.py`](./packages/babylon60/database/core.py). | Migración 100% completada en todo el árbol de código. |
 | **Idempotencia** | Claves UUID v5 por evento previenen inserción duplicada. | Alcance limitado a una instancia de ledger. |
 | **Ordenamiento Lamport** | Timestamps Lamport monótonamente crecientes imponen orden causal. | Reloj lógico, no wall-clock; sin coordinación distribuida. |
 | **Testigo externo** | Git Sentinel inyecta `Ledger-Head` y `Ledger-Seq` como trailers de commit. Los runners CI actúan como testigos independientes. | Requiere push a remoto; sin protección durante operación solo-offline. |
@@ -267,7 +267,7 @@ BABYLON-60/
 1. **Tamper-evident, no tamper-proof.** La cadena de hashes detecta modificaciones pero no puede prevenir que un atacante con acceso directo al filesystem reescriba la base de datos.
 2. **Sin consenso distribuido en vivo.** El nombre del módulo BFT es aspiracional; la arquitectura actual usa persistencia local single-writer con testigos Git externos (Escalón 3). BFT en vivo (Escalón 4) es un objetivo futuro.
 3. **Deuda técnica `except Exception`.** Módulos core de `packages/babylon60/` refactorizados a excepciones explícitas; scripts secundarios en estrechamiento incremental.
-4. **`sqlite3.connect` directo en scripts.** Los módulos de `packages/babylon60/` usan el conector centralizado `database/core.py`; la migración de scripts secundarios en `scripts/` está en progreso.
+4. **`sqlite3.connect` directo erradicado.** Todos los módulos y scripts usan el conector centralizado `database/core.py` (migración 100% completada).
 5. **`BABYLON_HOME` requerido.** El sistema no arrancará sin esta variable de entorno — los fallbacks `Path.home()` han sido eliminados por política.
 
 ---

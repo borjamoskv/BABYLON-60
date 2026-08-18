@@ -200,11 +200,10 @@ OP_TAINT_SEAL:
         f.write(audit_yaml)
     print(f"[+] Crystallized Autocognitive Audit Report at: {AUDIT_FILE}")
 
-    # Persist directly in Memory Vault L3_inference_cache
+    from babylon60.database.core import connect_sync
+
     print("[*] Sealing Autocognition crystal into Memory Vault (`cortex_memory.db`)...")
-    conn = sqlite3.connect(DB_PATH, timeout=5.0)
-    conn.execute("PRAGMA journal_mode = WAL;")
-    conn.execute("PRAGMA busy_timeout = 5000;")
+    conn = connect_sync(DB_PATH)
     cursor = conn.cursor()
 
     cursor.execute("""

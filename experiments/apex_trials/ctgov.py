@@ -84,8 +84,9 @@ class HttpCache:
     db_path: str = "ctgov_cache.db"
 
     def _conn(self) -> sqlite3.Connection:
-        conn = sqlite3.connect(self.db_path, timeout=5.0)
-        conn.execute("PRAGMA busy_timeout=5000;")
+        from babylon60.database.core import connect_sync
+
+        conn = connect_sync(self.db_path)
         conn.execute(
             "CREATE TABLE IF NOT EXISTS http_cache (url TEXT PRIMARY KEY, body TEXT NOT NULL, ts REAL NOT NULL);"
         )

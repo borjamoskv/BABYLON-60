@@ -13,7 +13,9 @@ DB_PATH = "falsification_test.db"
 def init_db():
     if os.path.exists(DB_PATH):
         os.remove(DB_PATH)
-    conn = sqlite3.connect(DB_PATH)
+    from babylon60.database.core import connect_sync
+
+    conn = connect_sync(DB_PATH)
     conn.execute("CREATE TABLE bft_log (id INTEGER PRIMARY KEY, thread_id TEXT, timestamp REAL)")
     conn.commit()
     conn.close()

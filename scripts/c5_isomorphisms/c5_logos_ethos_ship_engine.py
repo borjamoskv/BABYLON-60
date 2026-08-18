@@ -105,13 +105,9 @@ class BFTMasterLedgerWAL:
     def _get_conn(self) -> sqlite3.Connection:
         """Single-connection reuse — avoids file descriptor churn on repeated calls."""
         if self._conn is None:
-            conn = sqlite3.connect(self.db_path, timeout=5.0)
-            conn.execute("PRAGMA journal_mode = WAL;")
-            # INV_BFT durability: FULL sync guarantees committed data survives OS crash.
-            # NORMAL only guarantees process crash — insufficient for a master ledger.
-            conn.execute("PRAGMA synchronous = FULL;")
-            conn.execute("PRAGMA busy_timeout = 5000;")
-            self._conn = conn
+            from babylon60.database.core import connect_sync
+
+            self._conn = connect_sync(self.db_path, synchronous="FULL")
         return self._conn
 
     def close(self) -> None:

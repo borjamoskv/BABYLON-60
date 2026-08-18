@@ -17,14 +17,13 @@ from typing import Any
 _BUSY_TIMEOUT_MS = 5000
 
 
+from babylon60.database.core import connect_sync
+
+
 def connect_readonly(db_path: str | Path) -> sqlite3.Connection:
     """Read-only connection with INV_BFT_02 pragmas. No mutations allowed."""
-    conn = sqlite3.connect(str(db_path), timeout=5.0)
+    conn = connect_sync(db_path, synchronous="NORMAL")
     conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.execute("PRAGMA synchronous=NORMAL")
-    conn.execute("PRAGMA foreign_keys=ON")
-    conn.execute(f"PRAGMA busy_timeout={_BUSY_TIMEOUT_MS}")
     conn.execute("PRAGMA query_only=ON")
     return conn
 

@@ -21,6 +21,7 @@ import time
 import concurrent.futures
 import uuid
 import random
+from babylon60.database.core import connect_sync
 
 DB_PATH = "stress_test.db"
 NUM_WORKERS = 40
@@ -31,10 +32,7 @@ def init_db() -> None:
     if os.path.exists(DB_PATH):
         os.remove(DB_PATH)
     # This matches babylon60.database.core.connect configuration
-    with sqlite3.connect(DB_PATH, timeout=5.0) as conn:
-        conn.execute("PRAGMA journal_mode=WAL")
-        conn.execute("PRAGMA synchronous=NORMAL")
-        conn.execute("PRAGMA busy_timeout=5000")
+    with connect_sync(DB_PATH, synchronous="NORMAL") as conn:
         conn.execute("""
             CREATE TABLE ledger (
                 id TEXT PRIMARY KEY,
@@ -51,8 +49,7 @@ def hostile_writer(worker_id: int) -> int:
 
     # We create a new connection per worker, mimicking independent swarm agents
     try:
-        with sqlite3.connect(DB_PATH, timeout=5.0) as conn:
-            conn.execute("PRAGMA busy_timeout=5000")
+        with connect_sync(DB_PATH, synchronous="NORMAL") as conn:
             for _ in range(WRITES_PER_WORKER):
                 # Small random sleep to maximize collision probability at different execution phases
                 time.sleep(random.uniform(0.001, 0.01))

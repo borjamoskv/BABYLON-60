@@ -36,12 +36,11 @@ class BFTSQLite:
     @contextmanager
     def _connection(self):
         """Provee una conexión configurada para serialización estricta y WAL."""
-        conn = sqlite3.connect(self.db_path, isolation_level="IMMEDIATE")
+        from babylon60.database.core import connect_sync
+
+        conn = connect_sync(self.db_path, synchronous="NORMAL")
         conn.row_factory = sqlite3.Row
         try:
-            conn.execute("PRAGMA journal_mode=WAL;")
-            conn.execute("PRAGMA synchronous=NORMAL;")
-            conn.execute("PRAGMA busy_timeout=5000;")
             yield conn
         finally:
             conn.close()

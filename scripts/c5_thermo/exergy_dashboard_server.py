@@ -48,9 +48,9 @@ class ExergyDashboardHandler(SimpleHTTPRequestHandler):
 
     def serve_metrics(self):
         try:
-            # We connect strictly read-only to avoid any lock contention (INV_BFT_02 compliance)
-            # uri=True allows us to specify mode=ro
-            conn = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
+            from babylon60.database.core import connect_sync
+
+            conn = connect_sync(DB_PATH)
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
 

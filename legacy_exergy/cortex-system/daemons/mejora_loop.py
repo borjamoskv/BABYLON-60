@@ -126,7 +126,9 @@ class CortexScanner:
             raise FileNotFoundError(f"CORTEX DB not found: {self.db_path}")
 
     def _query(self, sql: str, params: tuple = ()) -> list:
-        with sqlite3.connect(str(self.db_path)) as conn:
+        from babylon60.database.core import connect_sync
+
+        with connect_sync(self.db_path) as conn:
             conn.row_factory = sqlite3.Row
             return conn.execute(sql, params).fetchall()
 

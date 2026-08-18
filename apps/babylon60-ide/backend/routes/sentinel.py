@@ -141,9 +141,9 @@ def get_exergy_history() -> dict[str, Any]:
     db_path = Path(os.path.expanduser("~")) / ".babylon60" / "exergy_agent_ledger.db"
     if not db_path.exists():
         return {"history": []}
-    try:
-        conn = sqlite3.connect(str(db_path), timeout=5.0)
-        conn.execute("PRAGMA journal_mode=WAL;")
+        from babylon60.database.core import connect_sync
+
+        conn = connect_sync(db_path)
         cursor = conn.cursor()
         cursor.execute(
             "SELECT timestamp, commit_hash, exergy_score, gradient, entropy, leverage, autoloop, bottleneck, verdict_yaml FROM ledger ORDER BY id DESC"

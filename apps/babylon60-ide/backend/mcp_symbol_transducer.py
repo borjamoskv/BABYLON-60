@@ -21,9 +21,10 @@ def query_ledger(query_type, param):
         return {"error": f"Ledger db not found at {db_path}"}
 
     try:
-        conn = sqlite3.connect(db_path)
+        from babylon60.database.core import connect_sync
+
+        conn = connect_sync(db_path)
         cursor = conn.cursor()
-        cursor.execute("PRAGMA busy_timeout=5000;")
 
         if query_type == "search":
             cursor.execute(

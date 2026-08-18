@@ -55,14 +55,14 @@ def _canonical(data: Any) -> str:
     return json.dumps(data, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
 
 
+from babylon60.database.core import connect_sync
+
+
 def _connect(db_path: str | Path) -> sqlite3.Connection:
     # isolation_level=None → autocommit; append_event manages its own
     # BEGIN IMMEDIATE so read-head + insert is atomic against other writers.
-    conn = sqlite3.connect(str(db_path), timeout=5.0, isolation_level=None)
+    conn = connect_sync(db_path, synchronous="NORMAL")
     conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.execute("PRAGMA synchronous=NORMAL")
-    conn.execute(f"PRAGMA busy_timeout={_BUSY_TIMEOUT_MS}")
     return conn
 
 

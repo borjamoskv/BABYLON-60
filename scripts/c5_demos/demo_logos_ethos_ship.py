@@ -34,9 +34,9 @@ def ship_kinetic_collapse(ast_state: str, taint_hash: str) -> None:
     root_dir: str = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     scratch_dir: str = os.path.join(root_dir, "scratch")
     os.makedirs(scratch_dir, exist_ok=True)
-    db_path: str = os.path.join(scratch_dir, "c5_ejemplo_ship.db")
-    with sqlite3.connect(db_path, timeout=5.0) as conn:
-        conn.execute("PRAGMA journal_mode = WAL;")
+    from babylon60.database.core import connect_sync
+
+    with connect_sync(db_path) as conn:
         conn.execute("CREATE TABLE IF NOT EXISTS master_ledger (hash TEXT UNIQUE, payload TEXT)")
         try:
             conn.execute("INSERT INTO master_ledger (hash, payload) VALUES (?, ?)", (taint_hash, ast_state))
