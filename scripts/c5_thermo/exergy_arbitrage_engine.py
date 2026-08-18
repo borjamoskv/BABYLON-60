@@ -12,6 +12,8 @@ import time
 from pathlib import Path
 from typing import Any
 
+from babylon60.database.core import connect_sync
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 DB_PATH = PROJECT_ROOT / "cortex" / "engine" / "nexus_anchors.db"
 INCOMING_DIR = PROJECT_ROOT / "cortex" / "outbox" / "_incoming_forge"
@@ -19,10 +21,7 @@ APEX_SINGULARITY_WRAPPER = "You are a Causal-Determinist Transducer and Determin
 
 
 def get_bft_connection() -> sqlite3.Connection:
-    conn = sqlite3.connect(str(DB_PATH), timeout=5.0)
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.execute("PRAGMA busy_timeout=5000")
-    return conn
+    return connect_sync(DB_PATH)
 
 
 def init_ledger() -> None:
