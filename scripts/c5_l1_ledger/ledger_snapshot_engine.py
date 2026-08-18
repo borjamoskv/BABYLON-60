@@ -45,16 +45,18 @@ def create_snapshot() -> Path:
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     dest_db = SNAPSHOT_DIR / f"cortex_snapshot_{timestamp}.db"
 
+    from babylon60.database.core import connect_sync
+
     # SQLite VACUUM INTO to safely create a consistent snapshot without blocking WAL
     if DB_PATH.exists():
-        conn = sqlite3.connect(DB_PATH)
+        conn = connect_sync(DB_PATH)
         try:
             conn.execute(f"VACUUM INTO '{dest_db}'")
         finally:
             conn.close()
     else:
         # Create empty db if cortex.db doesn't exist yet
-        sqlite3.connect(dest_db).close()
+        connect_sync(dest_db).close()
 
     db_hash = compute_sha256(dest_db)
     commit_sha = get_latest_commit()

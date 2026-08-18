@@ -117,6 +117,9 @@ UNCONSOLIDATED_SESSIONS = [
 ]
 
 
+from babylon60.database.core import connect_sync
+
+
 def compute_sha3(text: str) -> str:
     return hashlib.sha3_256(text.encode("utf-8")).hexdigest()
 
@@ -124,9 +127,7 @@ def compute_sha3(text: str) -> str:
 def consolidate_vault(json_output: bool = False) -> None:
     if not json_output:
         print("[*] Causal-Determinist: Bootstrapping and connecting to Memory Vault (`cortex_memory.db`)...")
-    conn = sqlite3.connect(DB_PATH, timeout=5.0)
-    conn.execute("PRAGMA journal_mode = WAL;")
-    conn.execute("PRAGMA busy_timeout = 5000;")
+    conn = connect_sync(DB_PATH)
     cursor = conn.cursor()
 
     # Ensure L1 and L3 tables exist for memory vault indexing

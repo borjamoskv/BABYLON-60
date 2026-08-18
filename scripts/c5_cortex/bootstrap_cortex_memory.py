@@ -9,6 +9,8 @@ import sys
 import os
 from cryptography.fernet import Fernet
 
+from babylon60.database.core import connect_sync
+
 _BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 try:
     from dotenv import load_dotenv
@@ -59,9 +61,7 @@ def bootstrap_cortex(json_output: bool = False) -> None:
     with open(ISOMORFISMOS_PATH, "rb") as f:
         isomorfismos_enc = f.read()
     isomorfismos = yaml.safe_load(fernet.decrypt(isomorfismos_enc))
-    conn = sqlite3.connect(DB_PATH, timeout=5.0)
-    conn.execute("PRAGMA journal_mode = WAL;")
-    conn.execute("PRAGMA busy_timeout = 5000;")
+    conn = connect_sync(DB_PATH)
     cursor = conn.cursor()
     cursor.execute(
         "\n        CREATE TABLE IF NOT EXISTS L1_primitive_nodes (\n            id TEXT PRIMARY KEY,\n            theory TEXT,\n            dimension TEXT,\n            name TEXT,\n            access_count INTEGER DEFAULT 0,\n            last_accessed TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n        )\n    "
