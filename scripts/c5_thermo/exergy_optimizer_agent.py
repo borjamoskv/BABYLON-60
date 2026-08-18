@@ -19,10 +19,11 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 from dataclasses import dataclass  # noqa: E402
 from typing import Union, List, Set, Optional, Tuple  # noqa: E402
-import re  # noqa: E402
 import sqlite3  # noqa: E402
 import hashlib  # noqa: E402
 import time  # noqa: E402
+
+from babylon60.database.core import connect_sync
 import subprocess  # noqa: E402
 import ast  # noqa: E402
 
@@ -112,8 +113,7 @@ ConsolidationDecision = Union[TriggerConsolidation, Stable]
 
 def init_db() -> None:
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(str(DB_PATH), timeout=5.0)
-    conn.execute("PRAGMA journal_mode=WAL;")
+    conn = connect_sync(DB_PATH)
     cursor = conn.cursor()
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS ledger (
@@ -388,8 +388,7 @@ ProvSignature: "{prov_hash}"
 
     # Write to database
     try:
-        conn = sqlite3.connect(str(DB_PATH), timeout=5.0)
-        conn.execute("PRAGMA journal_mode=WAL;")
+        conn = connect_sync(DB_PATH)
         cursor = conn.cursor()
         cursor.execute(
             """
