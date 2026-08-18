@@ -18,6 +18,8 @@ from typing import Any
 
 import os
 
+from babylon60.database.core import connect_sync
+
 logger = logging.getLogger("BABYLON60.PULMONES")
 
 
@@ -62,7 +64,7 @@ class PulmonesQueue:
             raise last_error
 
     def _init_db_at(self, path: Path) -> None:
-        with sqlite3.connect(path) as conn:
+        with connect_sync(path) as conn:
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS fallback_queue (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -82,7 +84,7 @@ class PulmonesQueue:
         payload = json.dumps({"args": args, "kwargs": kwargs})
         next_retry = time.monotonic() + delay
         try:
-            with sqlite3.connect(self.db_path) as conn:
+            with connect_sync(self.db_path) as conn:
                 conn.execute(
                     "INSERT INTO fallback_queue (target_func, payload, next_retry_at) VALUES (?, ?, ?)",
                     (func_name, payload, next_retry),
@@ -97,7 +99,7 @@ class PulmonesQueue:
                 try:
                     self._init_db_at(self._fallback_path)
                     self.db_path = self._fallback_path
-                    with sqlite3.connect(self.db_path) as conn:
+                    with connect_sync(self.db_path) as conn:
                         conn.execute(
                             "INSERT INTO fallback_queue (target_func, payload, next_retry_at) VALUES (?, ?, ?)",
                             (func_name, payload, next_retry),
