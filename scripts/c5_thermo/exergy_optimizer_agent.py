@@ -19,6 +19,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 from dataclasses import dataclass  # noqa: E402
 from typing import Union, List, Set, Optional, Tuple  # noqa: E402
+import re  # noqa: E402
 import sqlite3  # noqa: E402
 import hashlib  # noqa: E402
 import time  # noqa: E402

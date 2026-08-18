@@ -38,6 +38,8 @@ class AgentState(enum.Enum):
 
 
 class CausalHitlEngine:
+    def __init__(self, db_path: str = ":memory:"):
+        self.db_path = db_path
         from babylon60.database.core import connect_sync
 
         self._conn = connect_sync(self.db_path)

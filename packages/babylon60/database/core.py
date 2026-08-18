@@ -26,9 +26,12 @@ def _validate_synchronous(synchronous: str) -> str:
     return synchronous
 
 
-def resolve_db_path(db_path: str | Path) -> Path:
+def resolve_db_path(db_path: str | Path) -> Path | str:
     """Resuelve la ruta de la base de datos a un directorio soberano unificado ~/.babylon60/dbs/
     para erradicar la entropía y proliferación de DBs dispersas en el repositorio."""
+    s = str(db_path)
+    if s.startswith(":memory:") or "mode=memory" in s:
+        return s
     p = Path(db_path)
     if p.is_absolute():
         return p
@@ -46,7 +49,8 @@ async def connect(db_path: str | Path, *, synchronous: str = "FULL") -> aiosqlit
     mode = _validate_synchronous(synchronous)
     resolved_path = resolve_db_path(db_path)
     db = await aiosqlite.connect(str(resolved_path), isolation_level=None, timeout=5.0)
-    await db.execute("PRAGMA journal_mode=WAL")
+    if not str(resolved_path).startswith(":memory:"):
+        await db.execute("PRAGMA journal_mode=WAL")
     await db.execute(f"PRAGMA synchronous={mode}")
     await db.execute("PRAGMA foreign_keys=ON")
     await db.execute(f"PRAGMA busy_timeout={_BUSY_TIMEOUT_MS}")
@@ -59,7 +63,8 @@ def connect_sync(db_path: str | Path, *, synchronous: str = "FULL") -> sqlite3.C
     mode = _validate_synchronous(synchronous)
     resolved_path = resolve_db_path(db_path)
     conn = sqlite3.connect(str(resolved_path), isolation_level=None, timeout=5.0)
-    conn.execute("PRAGMA journal_mode=WAL")
+    if not str(resolved_path).startswith(":memory:"):
+        conn.execute("PRAGMA journal_mode=WAL")
     conn.execute(f"PRAGMA synchronous={mode}")
     conn.execute("PRAGMA foreign_keys=ON")
     conn.execute(f"PRAGMA busy_timeout={_BUSY_TIMEOUT_MS}")

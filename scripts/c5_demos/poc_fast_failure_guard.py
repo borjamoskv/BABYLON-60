@@ -115,7 +115,7 @@ def main():
     time.sleep(1)
     simulate_policy("Cosecha_Algoritmica_Soberana", 2, "Asíncrono (Alta Velocidad)")
 
-    print("\n[*] Validando cristalización inmutable en SQLite WAL...")
+    try:
         from babylon60.database.core import connect_sync
 
         conn = connect_sync("cortex_memory_bft.db")

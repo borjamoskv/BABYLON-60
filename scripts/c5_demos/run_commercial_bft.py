@@ -63,7 +63,7 @@ def main():
     run_swarm("COGNITIVE_PASS")
 
     # VERIFY SQLITE WAL FLUSH
-    print("\n[*] Validando cristalización inmutable en SQLite WAL...")
+    try:
         from babylon60.database.core import connect_sync
 
         conn = connect_sync("cortex_memory_bft.db")
