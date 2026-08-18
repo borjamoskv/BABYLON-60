@@ -194,47 +194,49 @@ class ASTExtractor:
             base_classes=base_classes,
         )
 
+    def _parse_field_value_details(self, value_node: ast.expr) -> Tuple[Dict[str, Any], Any, bool]:
+        """Extrae restricciones y valor por defecto de un nodo ast.expr."""
+        if not isinstance(value_node, ast.Call):
+            return {}, self._get_literal_value(value_node), True
+
+        func_name = self._get_name(value_node.func)
+        if func_name != "Field":
+            return {}, self._get_literal_value(value_node), True
+
+        constraints = self._extract_field_constraints(value_node)
+        default = None
+        has_default = False
+
+        if value_node.args:
+            def_val = self._get_literal_value(value_node.args[0])
+            if def_val is not ...:
+                default = def_val
+                has_default = True
+
+        for kw in value_node.keywords:
+            if kw.arg == "default":
+                default = self._get_literal_value(kw.value)
+                has_default = True
+            elif kw.arg == "default_factory":
+                has_default = True
+                default = "<factory>"
+
+        return constraints, default, has_default
+
     def _extract_field(self, node: ast.AnnAssign) -> Optional[PydanticFieldIR]:
         """Extrae un PydanticFieldIR de una anotación de campo."""
         field_name = node.target.id  # type: ignore[union-attr]
         if field_name.startswith("_"):
             return None
 
-        # Parse the type annotation
-        python_type, is_optional, enum_values = self._parse_annotation(
-            node.annotation
-        )
+        python_type, is_optional, enum_values = self._parse_annotation(node.annotation)
 
-        # Parse Field(...) constraints and default value
         constraints: Dict[str, Any] = {}
         default: Any = None
         has_default = False
 
         if node.value is not None:
-            if isinstance(node.value, ast.Call):
-                func_name = self._get_name(node.value.func)
-                if func_name == "Field":
-                    constraints = self._extract_field_constraints(node.value)
-                    # First positional arg is default (or Ellipsis for required)
-                    if node.value.args:
-                        default = self._get_literal_value(node.value.args[0])
-                        if default is not ...:
-                            has_default = True
-                    # Check 'default' keyword
-                    for kw in node.value.keywords:
-                        if kw.arg == "default":
-                            default = self._get_literal_value(kw.value)
-                            has_default = True
-                        elif kw.arg == "default_factory":
-                            has_default = True
-                            default = "<factory>"
-                else:
-                    # Direct default value assignment
-                    default = self._get_literal_value(node.value)
-                    has_default = True
-            else:
-                default = self._get_literal_value(node.value)
-                has_default = True
+            constraints, default, has_default = self._parse_field_value_details(node.value)
 
         return PydanticFieldIR(
             name=field_name,
@@ -422,25 +424,25 @@ class Z3ConstraintEmitter:
 
         if base_type == "str":
             return z3.StringSort(), z3.String(var_name)
-        elif base_type == "int":
+        if base_type == "int":
             return z3.IntSort(), z3.Int(var_name)
-        elif base_type == "float":
+        if base_type == "float":
             return z3.RealSort(), z3.Real(var_name)
-        elif base_type == "bool":
+        if base_type == "bool":
             return z3.BoolSort(), z3.Bool(var_name)
-        elif base_type.startswith("List["):
+        if base_type.startswith("List["):
             inner = self._extract_inner_type(base_type)
             inner_sort = self._type_to_sort(inner)
             arr = z3.Array(var_name, z3.IntSort(), inner_sort)
             length = z3.Int(f"{var_name}__len")
             return z3.ArraySort(z3.IntSort(), inner_sort), (arr, length)
-        elif field_ir.enum_values is not None:
+        if field_ir.enum_values is not None:
             # Literal/Enum: use StringSort with constrained domain
             return z3.StringSort(), z3.String(var_name)
-        else:
-            # Fallback: uninterpreted sort
-            sort = z3.DeclareSort(f"Sort_{base_type}")
-            return sort, z3.Const(var_name, sort)
+
+        # Fallback: uninterpreted sort
+        sort = z3.DeclareSort(f"Sort_{base_type}")
+        return sort, z3.Const(var_name, sort)
 
     def emit_field_constraints(
         self, field_ir: PydanticFieldIR

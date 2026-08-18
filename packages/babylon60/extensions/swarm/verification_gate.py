@@ -11,7 +11,10 @@ import json
 import sqlite3
 import time
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+from babylon60.database.core import connect_sync
 
 __all__ = ["RiskLevel", "AgentState", "CausalSignOffReceipt", "VerificationGate", "InterventionChannel"]
 
@@ -58,7 +61,9 @@ class VerificationGate:
     def __init__(self, db_path: str = ":memory:", default_risk: RiskLevel = RiskLevel.LOW):
         self.db_path = db_path
         self.default_risk = default_risk
-        self._conn = sqlite3.connect(self.db_path)
+        if self.db_path != ":memory:":
+            Path(self.db_path).parent.mkdir(parents=True, exist_ok=True)
+        self._conn = connect_sync(self.db_path)
         self._init_db()
 
     def _init_db(self) -> None:

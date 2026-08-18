@@ -28,6 +28,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict
 
+from babylon60.database.core import connect_sync
+
 logger = logging.getLogger("babylon60.bft.cortex_persist")
 
 NAMESPACE_CORTEX = uuid.UUID("a291bb18-79ad-4fc7-94e6-e6060ffd51f1")
@@ -87,11 +89,7 @@ class CortexPersistLedger:
         self._init_db()
 
     def _get_connection(self) -> sqlite3.Connection:
-        conn = sqlite3.connect(str(self.db_path), timeout=5.0)
-        conn.execute("PRAGMA journal_mode=WAL;")
-        conn.execute("PRAGMA busy_timeout=5000;")
-        conn.execute("PRAGMA synchronous=FULL;")
-        return conn
+        return connect_sync(self.db_path, synchronous="FULL")
 
     def _init_db(self) -> None:
         with self._get_connection() as conn:

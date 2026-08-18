@@ -13,6 +13,8 @@ from pathlib import Path
 
 import os
 
+from babylon60.database.core import connect_sync
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("BABYLON60.PULMONES.WORKER")
 
@@ -32,7 +34,7 @@ class PulmonesWorker:
     def _fetch_ripe_tasks(self) -> list:
         """O(1) fetch gracias al índice idx_next_retry."""
         now = time.monotonic()
-        with sqlite3.connect(self.db_path) as conn:
+        with connect_sync(self.db_path) as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.execute(
                 """
@@ -47,7 +49,7 @@ class PulmonesWorker:
             return [dict(row) for row in cursor.fetchall()]
 
     def _remove_task(self, task_id: int):
-        with sqlite3.connect(self.db_path) as conn:
+        with connect_sync(self.db_path) as conn:
             conn.execute("DELETE FROM fallback_queue WHERE id = ?", (task_id,))
 
     def _penalize_task(self, task_id: int, retries: int):
@@ -57,7 +59,7 @@ class PulmonesWorker:
         delay = min(60 * (2**retries), 3600)
         next_retry = time.monotonic() + delay
 
-        with sqlite3.connect(self.db_path) as conn:
+        with connect_sync(self.db_path) as conn:
             conn.execute(
                 "UPDATE fallback_queue SET retries = ?, next_retry_at = ? WHERE id = ?",
                 (new_retries, next_retry, task_id),
@@ -89,7 +91,7 @@ class PulmonesWorker:
             self._remove_task(task_id)
             logger.info("✅ Tarea %s recuperada exitosamente.", task_id)
 
-        except Exception as e:  # noqa: BLE001
+        except (AttributeError, ImportError, TypeError, ValueError, sqlite3.Error, OSError) as e:
             logger.error("❌ Fallo crónico en tarea %s: %s", task_id, str(e))
             self._penalize_task(task_id, task["retries"])
 

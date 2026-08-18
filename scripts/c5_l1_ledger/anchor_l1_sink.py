@@ -77,7 +77,7 @@ def anchor_l1_sink() -> None:
 
             print(f"[✓] Successfully anchored {json_file.name}")
 
-        except Exception as e:
+        except (json.JSONDecodeError, OSError, ValueError, KeyError, AssertionError) as e:
             print(f"[!] Error processing {json_file.name}: {e}", file=sys.stderr)
 
 
