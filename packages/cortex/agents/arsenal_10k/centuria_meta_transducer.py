@@ -19,7 +19,7 @@ from typing import Any, Dict, List
 import aiosqlite
 import yaml
 
-from cortex.agents.arsenal_10k.registry import get_all_primitives, execute_primitive
+from .registry import get_all_primitives, execute_primitive
 
 
 class CenturiaMetaTransducer:

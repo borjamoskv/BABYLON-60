@@ -61,9 +61,16 @@ tests/sequencer_spsc_harness
 # Defensa en profundidad. Contexto y pruebas: docs/OPSEC_OMEGA_ITERA1.md
 # (*.pem, *.key, .env* ya cubiertos por la sección Environment & Secrets)
 # ============================================================
-# Bóveda privada (nunca versionar)
+# Bóveda privada & Estado Local del Agente (nunca versionar)
 20_VAULT/
-# Material criptográfico — jamás versionar
+.kimi-code/
+.babylon60/
+.agent/
+.audit/
+.hypothesis/
+.lake/
+.cortex/
+.snapshots/
 *.keystore
 *keypair*.json
 .cortex/*.hex
@@ -73,7 +80,6 @@ tests/sequencer_spsc_harness
 .secrets.baseline
 gitleaks-report.json
 secret_audit.sarif
-.kimi-code/
 *.jsonl
 
 # Audio & Research Transcripts
