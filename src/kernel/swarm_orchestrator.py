@@ -14,6 +14,10 @@ except ImportError:
     strike_rs = None
     logging.warning("No se pudo importar strike_rs. Compila el módulo con maturin.")
 
+from .browser_cdp_engine import BrowserEngine
+from .kimi_client import KimiClient
+from .quantum_sync import QuantumSyncEngine
+
 # Simulando la importación del patrón Agent Beeper 
 # desde el hypervisor Antigravity / C5-REAL
 class AgentPager:
