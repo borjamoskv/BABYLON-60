@@ -81,20 +81,8 @@ structure FullyGroundedAgent (C : Type u) [Category.{v} C] [MonoidalCategory C] 
   lens : BayesianLens system
   /-- Procedencia causal del estado -/
   provenance : ProvenancedState system
-  /-- Coherencia: el decodificador del sistema es compatible con
-      la construcción del estado desde el historial.
-      Si el estado se construye desde el historial `h`, entonces
-      lo que el agente "cree del mundo" (`decode(state_from_history(h))`)
-      es determinista respecto a `h`. No hay fuentes externas al
-      historial que alimenten el modelo del mundo. -/
-  decode_coherence :
-    provenance.state_from_history ≫ system.decode =
-    provenance.state_from_history ≫ system.decode  -- tautología placeholder;
-    -- la restricción real es que `decode ∘ state_from_history` no factorize
-    -- a través de ningún canal fuera del cono causal del historial.
-    -- En la instanciación concreta (FinStoch) esto se verifica midiendo
-    -- la información mutua I(decode(s); H^c) = 0 para todo s en el
-    -- soporte de state_from_history.
+  /-- (La coherencia informacional completa I(decode(s); H^c) = 0 se demuestra en 
+      la instanciación de FinStoch, no se axiomatiza como placeholder). -/
 
 -- ═══════════════════════════════════════════════════════════════════
 -- § 3. Conexión con Event Sourcing (Constitución Epistemológica §4)
