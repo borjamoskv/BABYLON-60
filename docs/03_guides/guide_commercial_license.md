@@ -27,6 +27,6 @@ However, the Sovereign Tier imposes strict thermodynamic limits:
 ## 2. ENTERPRISE COMMERCIAL USE
 Commercial, corporate, or enterprise exploitation (e.g., teams > 5 developers, annual revenue > $1M, or offering managed enterprise services) requires an explicit commercial license agreement.
 
-By purchasing a commercial license, you receive a cryptographic `CORTEX_LICENSE_KEY` that unlocks $O(1)$ limit validation, high-throughput batching, and advanced Sovereign Cluster replication APIs.
+By purchasing a commercial license, you receive a cryptographic `BABYLON60_LICENSE_KEY` that unlocks $O(1)$ limit validation, high-throughput batching, and advanced Sovereign Cluster replication APIs.
 
 Contact: licensing@borjamoskv.dev

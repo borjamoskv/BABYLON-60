@@ -48,7 +48,7 @@ Nuestra ventaja competitiva no es un feature; es una barrera de entrada basada e
 Nuestro motor de monetización se basa en la asimetría del riesgo regulatorio:
 
 - **Adopción (Open-Core):** La comunidad técnica adopta el Kernel y el DSL `.b60` como el estándar de facto para investigación y desarrollo de agentes locales.
-- **Monetización (Enterprise `CORTEX_LICENSE_KEY`):** Las corporaciones pagan suscripciones de alto margen ($50k - $250k ARR) no por "tokens procesados", sino por el **Certificado de Cumplimiento Normativo** (AESIA, BSI, NIST) que nuestro `compliance_exporter` genera automáticamente.
+- **Monetización (Enterprise `BABYLON60_LICENSE_KEY`):** Las corporaciones pagan suscripciones de alto margen ($50k - $250k ARR) no por "tokens procesados", sino por el **Certificado de Cumplimiento Normativo** (AESIA, BSI, NIST) que nuestro `compliance_exporter` genera automáticamente.
 - **El ROI de la Venta:** El coste de nuestra licencia es una fracción del 1% de la multa mínima por incumplimiento del EU AI Act. La venta es lógica, no emocional.
 
 ---
