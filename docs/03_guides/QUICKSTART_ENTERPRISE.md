@@ -51,7 +51,7 @@ services:
   b60_kernel:
     image: babylon60/kernel:4.0.0-sovereign
     environment:
-      - CORTEX_LICENSE_KEY=${CORTEX_LICENSE_KEY:-DEMO_EVALUATION_KEY}
+      - BABYLON60_LICENSE_KEY=${BABYLON60_LICENSE_KEY:-DEMO_EVALUATION_KEY}
       - B60_MODE=READ_ONLY_SHADOW_TAP
       - B60_WORM_QUARANTINE_PATH=/var/log/b60_quarantine
     volumes:

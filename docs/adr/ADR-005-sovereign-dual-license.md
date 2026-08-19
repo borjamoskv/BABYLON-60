@@ -33,7 +33,7 @@ Permisos completos (uso, copia, modificación, distribución, sublicencia) para:
 
 ### Tier Enterprise (Restricción Corporativa)
 
-Entidades con ingresos anuales > $1M USD deben obtener una clave de licencia criptográfica (`CORTEX_LICENSE_KEY`) para:
+Entidades con ingresos anuales > $1M USD deben obtener una clave de licencia criptográfica (`BABYLON60_LICENSE_KEY`) para:
 - Eliminar throttling de throughput termodinámico.
 - Acceder a APIs enterprise.
 - Usar en producción SaaS.

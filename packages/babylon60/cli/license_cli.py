@@ -27,7 +27,7 @@ def main():
 
     # Command: verify
     ver_parser = subparsers.add_parser("verify", help="Verificar una clave BABYLON60_LICENSE_KEY")
-    ver_parser.add_argument("--key", help="Clave de licencia a verificar (o via env BABYLON60_LICENSE_KEY / CORTEX_LICENSE_KEY)")
+    ver_parser.add_argument("--key", help="Clave de licencia a verificar (o via env BABYLON60_LICENSE_KEY / BABYLON60_LICENSE_KEY)")
     ver_parser.add_argument("--salt", help="Secret salt HMAC (o via env BABYLON60_LICENSE_SALT)")
 
     args = parser.parse_args()
@@ -55,7 +55,7 @@ def main():
         print("==================================================")
 
     elif args.command == "verify":
-        key_to_check = args.key or os.getenv("BABYLON60_LICENSE_KEY") or os.getenv("BABYLON_LICENSE_KEY") or os.getenv("CORTEX_LICENSE_KEY")
+        key_to_check = args.key or os.getenv("BABYLON60_LICENSE_KEY") or os.getenv("BABYLON_LICENSE_KEY") or os.getenv("BABYLON60_LICENSE_KEY")
         status: LicenseStatus = verify_license_key(key=key_to_check)
         
         print("==================================================")

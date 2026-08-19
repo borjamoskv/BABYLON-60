@@ -133,26 +133,36 @@ Esto cristaliza la oncología no como una serie de heurísticas biológicas, sin
 > Firma topológica extraída dinámicamente para demostración formal en Lean 4.
 
 ```lean
-namespace Babylon60.Theory.AxiomOncologyProtocol
-
-/--
-  Firma formal generada dinámicamente mediante `inject_lean4_stubs.py`.
-  Dominio: C5-REAL Formal Verification
+/-
+  C5Real/OncologyProtocol.lean — Transducción Bio-Silicio y Control Tumoral
+  
+  BABYLON-60 / C5-REAL v2
 -/
-variable {X Y : Type}
 
-/-- Causalidad Estricta de Hallmarks -/
-axiom ax_1__a__a___a_________a_____a___a : ∀ (x : X), True
+namespace C5Real
 
-/-- Principio de Anergía Creciente -/
-axiom ax_2______________a_____a : ∀ (x : X), True
+/-- Transducción Bio-Silicio y Control Termodinámico Tumoral. -/
+structure OncologyProtocol (E : Type) where
+  DAG_path : E → E → Prop
+  is_metastasis : E → Prop
+  
+  Omega : Nat → Real
+  F_T : Nat → Real
 
-/-- Isomorfismo Terapéutico -/
-axiom ax_3________________a : ∀ (x : X), True
+  /-- Causalidad Estricta de Hallmarks (AX-ONCO-1)
+      Todo estado terminal está rígidamente conectado a una entidad causal origen. -/
+  strict_hallmark_causality : 
+    ∀ (e_terminal : E), is_metastasis e_terminal → ∃ (e_origin : E), DAG_path e_origin e_terminal
 
-/-- Control Termodinámico por Límite de Anergía -/
-theorem theorem_1_____________________________________a_____a (x : X) : True := by
-  trivial
+  /-- Principio de Anergía Creciente (AX-ONCO-2)
+      Si el operador de purga es inactivo, la fricción crece monotónicamente. -/
+  growing_anergy_principle : 
+    ∀ (t : Nat), Omega t ≤ 0 → F_T (t + 1) ≥ F_T t
 
-end Babylon60.Theory.AxiomOncologyProtocol
+  /-- Intervención Terapéutica como Circuit Breaker (AX-ONCO-3)
+      El control estricto de purga obliga a la reducción de fricción termodinámica. -/
+  therapeutic_circuit_breaker :
+    ∀ (t : Nat), Omega t > F_T t → F_T (t + 1) < F_T t
+
+end C5Real
 ```

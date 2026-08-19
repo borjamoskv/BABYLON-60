@@ -21,7 +21,7 @@ This document describes the terms and conditions for the **Enterprise Tier** of 
 
 ## Enterprise Tier Activation
 
-Corporate and commercial exploitation of BABYLON-60 requires an explicit **`CORTEX_LICENSE_KEY`** — a cryptographic license key that lifts thermodynamic throughput constraints and enables production deployment.
+Corporate and commercial exploitation of BABYLON-60 requires an explicit **`BABYLON60_LICENSE_KEY`** — a cryptographic license key that lifts thermodynamic throughput constraints and enables production deployment.
 
 ### What requires an Enterprise License?
 

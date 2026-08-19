@@ -100,15 +100,22 @@ $$ \text{Attestation}_{\text{Causal-Determinist}} \implies \text{Extract}_{\text
 namespace Babylon60.Theory.AxiomatizationC5Real
 
 /--
-  Firma formal generada dinámicamente mediante `inject_lean4_stubs.py`.
-  Dominio: C5-REAL Formal Verification
+  Firma formal generada bajo C5-REAL Formal Verification.
 -/
-variable {X Y : Type}
+variable {C : Type} -- Categoría Base C
+variable (F : Real) -- Energía Libre Variacional
+variable (Xi : Real) -- Densidad Exergética
+variable (Score : Real) -- Puntuación de Anergía Discursiva
 
-/-- Axioma Cánonico por Defecto -/
-axiom ax_canonical_invariant : ∀ (x : X), True
+/-- Primacía Categórica del Morfismo (A1) -/
+-- Todo proceso computacional es estrictamente un morfismo en C
+axiom morphism_primacy (process : Type) : 
+  ∃ (x y : C), process = (x → y)
 
-theorem formal_axiomatization (x : X) : True := by
-  exact ax_canonical_invariant x
+/-- Homeostasia de Energía Libre y Exergía (A2) -/
+-- Puntuaciones de entropía discursiva bajas fuerzan aborto termodinámico
+axiom exergy_homeostasis_abort :
+  Score < 700 → F > 0 -- Representa el colapso (CircuitBreaker_Abort)
+
 end Babylon60.Theory.AxiomatizationC5Real
 ```

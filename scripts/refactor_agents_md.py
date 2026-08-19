@@ -55,7 +55,7 @@ def main() -> int:
     exergy_nom_block, content = extract_rule_block(content, "sovereign_exergy_nomenclature")
     
     # Extraer bullets relevantes: Sovereign Dual-License y Documentación Grado Militar/Financiero
-    dual_license_bullet = "- **Sovereign Dual-License (INV_C5_17):** Toda mención a licencias debe referirse a la estructura *Sovereign Dual-License*: \"SOVEREIGN TIER\" (Gratis para uso individual) y \"ENTERPRISE TIER\" (Requiere `CORTEX_LICENSE_KEY`), protegiendo el ecosistema contra recolección de datos (Anti-Harvesting) e IAs parásitas."
+    dual_license_bullet = "- **Sovereign Dual-License (INV_C5_17):** Toda mención a licencias debe referirse a la estructura *Sovereign Dual-License*: \"SOVEREIGN TIER\" (Gratis para uso individual) y \"ENTERPRISE TIER\" (Requiere `BABYLON60_LICENSE_KEY`), protegiendo el ecosistema contra recolección de datos (Anti-Harvesting) e IAs parásitas."
     military_doc_bullet = "- **Documentación Grado Militar/Financiero:** Especificaciones, manifiestos y scripts de despliegue (`deploy.sh`) deben estar redactados en inglés riguroso formal, sin coloquialismos, manteniendo la estética *Industrial Noir 2026 / C5-REAL*."
 
     # Inyectar estos bullets en english_naming_toponymy_standard

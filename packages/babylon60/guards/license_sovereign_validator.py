@@ -52,7 +52,7 @@ def generate_license_key(owner: str, tier: str, expires_at: int) -> str:
 
 def verify_license_key(key: str | None = None) -> LicenseStatus:
     """
-    Pre: key string or None (if None, reads CORTEX_LICENSE_KEY env var)
+    Pre: key string or None (if None, reads BABYLON60_LICENSE_KEY env var)
     Exec: validate structural integrity and HMAC signature
     Post: returns LicenseStatus tuple
     """
@@ -60,7 +60,7 @@ def verify_license_key(key: str | None = None) -> LicenseStatus:
         key = (
             os.getenv("BABYLON60_LICENSE_KEY")
             or os.getenv("BABYLON_LICENSE_KEY")
-            or os.getenv("CORTEX_LICENSE_KEY", "")
+            or os.getenv("BABYLON60_LICENSE_KEY", "")
         ).strip()
 
     if not key:

@@ -125,15 +125,26 @@ flowchart TB
 namespace Babylon60.Theory.C5ThermodynamicInvariantsCompendium
 
 /--
-  Firma formal generada dinámicamente mediante `inject_lean4_stubs.py`.
-  Dominio: C5-REAL Formal Verification
+  Firma formal generada bajo C5-REAL Formal Verification.
+  Invariantes Termodinámicos y Slop Horizon.
 -/
-variable {X Y : Type}
+variable {T : Type} -- Secuencia de Tokens Generada
+variable {C : Type} -- Contexto de Entrada
+variable (Xi : T → Real) -- Densidad Exergética por Token
+variable (H : T → C → Real) -- Entropía de Shannon condicional
+variable (H_max : Real) -- Entropía Máxima del vocabulario
+variable (is_audited_text : T → Prop)
+variable (is_slop : T → Prop)
 
-/-- Axioma Cánonico por Defecto -/
-axiom ax_canonical_invariant : ∀ (x : X), True
+/-- Teorema de Exergía de Token -/
+-- La densidad exergética es la reducción neta de entropía.
+axiom token_exergy_theorem (t : T) (c : C) :
+  Xi t = H_max - H t c
 
-theorem formal_axiomatization (x : X) : True := by
-  exact ax_canonical_invariant x
+/-- Slop Horizon -/
+-- Textos auditados (alta exergía) dominan sistemáticamente al ruido estocástico (Slop).
+axiom slop_horizon_inequality (text slop : T) :
+  is_audited_text text ∧ is_slop slop → Xi text > Xi slop
+
 end Babylon60.Theory.C5ThermodynamicInvariantsCompendium
 ```
