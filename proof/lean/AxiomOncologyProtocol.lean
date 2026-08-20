@@ -9,16 +9,16 @@ namespace Babylon60.Theory.AxiomOncologyProtocol
 variable {X Y : Type}
 
 /-- Causalidad Estricta de Hallmarks -/
-axiom ax_1__a__a___a_________a_____a___a : ∀ (x : X), True
+axiom ax_1_causalidad_estricta_de_hallmarks : ∀ (x : X), True
 
 /-- Principio de Anergía Creciente -/
-axiom ax_2______________a_____a : ∀ (x : X), True
+axiom ax_2_principio_de_anerg_a_creciente : ∀ (x : X), True
 
 /-- Isomorfismo Terapéutico -/
-axiom ax_3________________a : ∀ (x : X), True
+axiom ax_3_isomorfismo_terap_utico : ∀ (x : X), True
 
 /-- Control Termodinámico por Límite de Anergía -/
-theorem theorem_1_____________________________________a_____a (x : X) : True := by
+theorem theorem_1_control_termodin_mico_por_l_mite_de_anerg_a (x : X) : True := by
   trivial
 
 end Babylon60.Theory.AxiomOncologyProtocol

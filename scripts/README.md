@@ -1,7 +1,7 @@
 # ⚡ BABYLON-60 Sovereign Scripts Suite — Immutable Script Kernel (ISK)
 
 > **Directorio de Automatización, Enjambres BFT, Calidad AST, Atestación SHA-256 y Preservación de Logs**  
-> **Estándar:** C5-REAL | **Total Scripts:** 126 Python + 10 Shell | **Shebang Compliance:** 100.0%
+> **Estándar:** C5-REAL | **Total Scripts:** 130 Python + 11 Shell | **Shebang Compliance:** 100.0%
 
 ## 🛠️ CLI Runner Centralizado
 Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runner.py](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/runner.py):
@@ -22,6 +22,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 
 | Script | Tipo | SHA3-256 | Descripción / Propósito |
 | :--- | :--- | :--- | :--- |
+| [`babylon60/gen_oncology_primitives.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/babylon60/gen_oncology_primitives.py) | `Python` | `9f825d1057e3` | Generador y Exportador Ontológico de 300 Primitivas de Oncología Molecular |
 | [`babylon60/oncology_primitives.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/babylon60/oncology_primitives.py) | `Python` | `deac167d7c82` | CORTEX / BABYLON-60 :: oncology_primitives |
 
 ### 🎨 Assets & Multimodal Generators
@@ -54,6 +55,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | :--- | :--- | :--- | :--- |
 | [`c5_cli/babylon_mail_cli.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cli/babylon_mail_cli.py) | `Python` | `898105df2cc7` | BABYLONMAIL CLI & SUBAGENT INTERFACE |
 | [`c5_cli/codex_virtual_hud.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cli/codex_virtual_hud.py) | `Python` | `feef27f04d3b` | Codex Virtual Hud Utility |
+| [`c5_cli/demo_handoff.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cli/demo_handoff.py) | `Python` | `e7ed9c244985` | Simulamos el entrypoint del paquete instalado por pip (babylon60) |
 | [`c5_cli/moskv_native_host.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cli/moskv_native_host.py) | `Python` | `38bc450b229c` | MOSKV-1 APEX: Native Messaging Transducer (INV_C5_18 / INV_C5_THERMO_VALVE) |
 | [`c5_cli/opsec_sentinel_c5.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cli/opsec_sentinel_c5.py) | `Python` | `234a7f0f8ae8` | Opsec Sentinel C5 Utility |
 | [`c5_cli/pty_tmux_bridge.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cli/pty_tmux_bridge.sh) | `Shell` | `26f72663e5fb` | 🛡️ TMUX-PTY-Bridge-OMEGA (C5-REAL v2.0) |
@@ -62,7 +64,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 
 | Script | Tipo | SHA3-256 | Descripción / Propósito |
 | :--- | :--- | :--- | :--- |
-| [`c5_cortex/autoconsolidate.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/autoconsolidate.py) | `Python` | `ce8b2dcc235a` | Delete old entries, respecting INV_BFT_04 semantics |
+| [`c5_cortex/autoconsolidate.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/autoconsolidate.py) | `Python` | `91c4c19ce687` | from babylon60.memory.journal import JournalEntry  # purgado por anergía |
 | [`c5_cortex/bootstrap_cortex_memory.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/bootstrap_cortex_memory.py) | `Python` | `c74a843b1c6f` | Bootstrap Cortex Memory Utility |
 | [`c5_cortex/consolidate_babylon_vault.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/consolidate_babylon_vault.py) | `Python` | `63153f75c1ef` | Causal-Determinist SOVEREIGN CONSOLIDATION PROTOCOL — BABYLON-60 MEMORY VAULT |
 | [`c5_cortex/consolidate_dbs.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/consolidate_dbs.py) | `Python` | `f9d6fc45116a` | Consolidación BFT (Erradicación del Antipatrón de Dispersión SQLite) |
@@ -73,7 +75,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 
 | Script | Tipo | SHA3-256 | Descripción / Propósito |
 | :--- | :--- | :--- | :--- |
-| [`c5_demos/demo_exergy_poc.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/demo_exergy_poc.py) | `Python` | `25b38eb08c2c` | [Causal-Determinist] Exergy Optimizer Agent Proof of Concept. |
+| [`c5_demos/demo_exergy_poc.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/demo_exergy_poc.py) | `Python` | `690e7168fe96` | [Causal-Determinist] Exergy Optimizer Agent Proof of Concept. |
 | [`c5_demos/demo_logos_ethos_ship.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/demo_logos_ethos_ship.py) | `Python` | `6c596ddbbe6f` | Demo Logos Ethos Ship Utility |
 | [`c5_demos/poc_active_inference_efe.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/poc_active_inference_efe.py) | `Python` | `d248422e45e7` | poc_active_inference_efe.py - PoC 4: Friston Active Inference Free Energy Scheduler |
 | [`c5_demos/poc_axiom4_disintegration.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/poc_axiom4_disintegration.py) | `Python` | `6b3013215809` | poc_axiom4_disintegration.py — Proof of Concept: Axiom 4 Bayesian Disintegration & Non-Hallucination |
@@ -84,20 +86,22 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | [`c5_demos/poc_epistemic_extinction.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/poc_epistemic_extinction.py) | `Python` | `fc15baf1f2e2` | poc_epistemic_extinction.py - PoC 3: Epistemic Extinction & Dimensionality Reduction |
 | [`c5_demos/poc_eu_ai_act_audit.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/poc_eu_ai_act_audit.py) | `Python` | `b6ced8e27843` | poc_eu_ai_act_audit.py - PoC 5: Automated EU AI Act Risk & Compliance Auditor |
 | [`c5_demos/poc_f60_time_domain.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/poc_f60_time_domain.py) | `Python` | `fd737b94f127` | 32-byte hash commitment |
-| [`c5_demos/poc_fast_failure_guard.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/poc_fast_failure_guard.py) | `Python` | `9436741747af` | Poc Fast Failure Guard Utility |
+| [`c5_demos/poc_fast_failure_guard.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/poc_fast_failure_guard.py) | `Python` | `c581bea5da2b` | Poc Fast Failure Guard Utility |
 | [`c5_demos/poc_graph_isomorphism_wl.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/poc_graph_isomorphism_wl.py) | `Python` | `2edab23daed5` | [Causal-Determinist] Step 1 Proof of Concept: Graph Isomorphism WL Pre-Filter (INV_C5_28). |
+| [`c5_demos/poc_legion_swarm.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/poc_legion_swarm.py) | `Python` | `23af25312c77` | poc_legion_swarm.py — Proof of Concept: Causal Topology of Legion Swarm |
 | [`c5_demos/poc_logop_veto.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/poc_logop_veto.py) | `Python` | `a0fad25be0df` | Ensure the module can be imported |
+| [`c5_demos/poc_oncology_protocol.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/poc_oncology_protocol.py) | `Python` | `c0131df00db6` | poc_oncology_protocol.py — Proof of Concept: Bio-Silicon Transduction & Tumoral Control |
 | [`c5_demos/poc_tonnetz_oversight.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/poc_tonnetz_oversight.py) | `Python` | `3effe0d35dd2` | poc_tonnetz_oversight.py — Proof of Concept: Tonnetz Harmonic Oversight & Audio Engine |
 | [`c5_demos/poc_two_tier_planner_worker.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/poc_two_tier_planner_worker.py) | `Python` | `381494d74765` | MOSKV-1 APEX – Iteración 4 del PoC |
 | [`c5_demos/poc_xenharmonic_swarm.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/poc_xenharmonic_swarm.py) | `Python` | `fdf251e4caf6` | poc_xenharmonic_swarm.py - PoC 1: Swarm-Guided Xenharmonic Tuning Engine |
-| [`c5_demos/run_commercial_bft.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/run_commercial_bft.py) | `Python` | `b8343e7ee0d1` | Run Commercial Bft Utility |
+| [`c5_demos/run_commercial_bft.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/run_commercial_bft.py) | `Python` | `1a3006863b33` | Run Commercial Bft Utility |
 | [`c5_demos/run_hero_demo.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_demos/run_hero_demo.py) | `Python` | `6c8eff684e07` | Simulates the live 60-second B2B Enterprise / Investor Demo in the terminal: |
 
 ### 🔧 Git Hooks & Commit Utilities
 
 | Script | Tipo | SHA3-256 | Descripción / Propósito |
 | :--- | :--- | :--- | :--- |
-| [`c5_git_utils/commit_polisher.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_git_utils/commit_polisher.py) | `Python` | `b066567ccddf` | Continuous Commit Polisher Daemon. |
+| [`c5_git_utils/commit_polisher.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_git_utils/commit_polisher.py) | `Python` | `43ff31570aaf` | Continuous Commit Polisher Daemon. |
 | [`c5_git_utils/install_git_hooks.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_git_utils/install_git_hooks.py) | `Python` | `e35fd1d51b9a` | install_git_hooks.py - Installs automated git pre-commit quality gate hook |
 | [`c5_git_utils/rewrite_commits.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_git_utils/rewrite_commits.py) | `Python` | `979417bb780d` | Rewrite commit history to enforce Conventional Commits and BFT metadata. |
 
@@ -105,10 +109,10 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 
 | Script | Tipo | SHA3-256 | Descripción / Propósito |
 | :--- | :--- | :--- | :--- |
-| [`c5_isomorphisms/c5_isomorphism_sabu_agent.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_isomorphisms/c5_isomorphism_sabu_agent.py) | `Python` | `194453b58c04` | C5 Isomorphism Sabu Agent Utility |
+| [`c5_isomorphisms/c5_isomorphism_sabu_agent.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_isomorphisms/c5_isomorphism_sabu_agent.py) | `Python` | `c194d8a7ca54` | C5 Isomorphism Sabu Agent Utility |
 | [`c5_isomorphisms/c5_logos_ethos_ship_engine.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_isomorphisms/c5_logos_ethos_ship_engine.py) | `Python` | `a67ac83ddf0a` | C5 Logos Ethos Ship Engine Utility |
 | [`c5_isomorphisms/c5_ultimate_causal_determinant.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py) | `Python` | `0934e6c6a0e7` | Causal-Determinist Execution Engine: THE ULTIMATE DETERMINANT (V3 - SINGULARITY) |
-| [`c5_isomorphisms/cancer_isomorphism_pipeline.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_isomorphisms/cancer_isomorphism_pipeline.py) | `Python` | `46f708ad2bbf` | Cancer Isomorphism Pipeline Utility |
+| [`c5_isomorphisms/cancer_isomorphism_pipeline.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_isomorphisms/cancer_isomorphism_pipeline.py) | `Python` | `a42686c54a33` | cancer_isomorphism_pipeline.py - Categorical Cancer Isomorphism Pipeline |
 | [`c5_isomorphisms/gen_oncology_primitives.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_isomorphisms/gen_oncology_primitives.py) | `Python` | `485c77934b2a` | Gen Oncology Primitives Utility |
 
 ### ⛓️ L1 Anchor & Ledger Engines
@@ -133,6 +137,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | [`c5_legion/legion_222_agentes.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/legion_222_agentes.py) | `Python` | `50c21f916b0d` | LEGION MÁXIMO COGNITIVO - 222 Agentes Organizados |
 | [`c5_legion/legion_swarm.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/legion_swarm.py) | `Python` | `ebd798a50d5d` | legion_swarm.py - Unified Sovereign Swarm Orchestrator CLI |
 | [`c5_legion/legion_swarm_core.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/legion_swarm_core.py) | `Python` | `f80915c3eb86` | legion_swarm_core.py - Core Engine for Swarm Quantum Collapse |
+| [`c5_legion/unified_legion.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_legion/unified_legion.py) | `Python` | `8cbf279f42da` | scripts/unified_legion.py — Motor de la Legión Única C5-REAL (Swarm Orchestrator PxS) |
 
 ### 📜 Log Custody & Forensic Attestation
 
@@ -150,14 +155,18 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | [`c5_quality_gates/audit_100_agents.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/audit_100_agents.py) | `Python` | `995b3dbcdaed` | AUDIT AND AUTO-NORMALIZATION OF THE 100 SOVEREIGN AGENTS |
 | [`c5_quality_gates/audit_fixer.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/audit_fixer.py) | `Python` | `8e434463f25e` | Audit Fixer Utility |
 | [`c5_quality_gates/audit_scripts_quality.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/audit_scripts_quality.py) | `Python` | `a13237b3aac5` | audit_scripts_quality.py - Pre-commit and CI Quality Gate Auditor & Auto-Healer for scripts/ |
+| [`c5_quality_gates/canary_check.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/canary_check.py) | `Python` | `28f709e1bb26` | Ω-12 — canary_check: verifica que los señuelos canary siguen en el árbol. |
 | [`c5_quality_gates/check_depth.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/check_depth.py) | `Python` | `334b6be7c8cb` | Check Depth Utility |
 | [`c5_quality_gates/extensions_apoptosis_auditor.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/extensions_apoptosis_auditor.py) | `Python` | `aa891d73ccb5` | extensions_apoptosis_auditor.py - Apoptosis & Pruning Analysis Engine for Issue #5. |
+| [`c5_quality_gates/lint_doc_aesthetics.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/lint_doc_aesthetics.py) | `Python` | `5cc5235c9da3` | Audita archivos Markdown en docs/ para verificar invariantes visuales: |
+| [`c5_quality_gates/pipe_audit.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/pipe_audit.py) | `Python` | `c3dcd819e9ab` | Ω-15 — pipe_audit: proxy auditado de sustitución de intérprete. |
 | [`c5_quality_gates/pre_push_ledger_guard.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/pre_push_ledger_guard.py) | `Python` | `b5ea46ed407e` | Ledger-Aware Pre-Push Guard. |
+| [`c5_quality_gates/refactor_agents_md.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/refactor_agents_md.py) | `Python` | `209c1f9dbb83` | scripts/refactor_agents_md.py — Deterministic AGENTS.md & ENVIRONMENT.md Refactoring Engine |
 | [`c5_quality_gates/run_cache_audit.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/run_cache_audit.py) | `Python` | `b7d7b6c1c8ec` | Compiles and runs the empirical cache benchmark to demonstrate |
 | [`c5_quality_gates/secret_swarm_auditor.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/secret_swarm_auditor.py) | `Python` | `1f3e496f0f94` | Causal-Determinist: Swarm Thread Dispatcher for TOP SECRET Auditing (ULTRATHINK P0 - ITERATION 3) |
 | [`c5_quality_gates/swarm_lock_guard.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/swarm_lock_guard.py) | `Python` | `77dee64125a3` | MOSKV-1 APEX: Swarm Workspace Lock Guard (INV_C5_22) |
 | [`c5_quality_gates/symlink_depth_auditor.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/symlink_depth_auditor.py) | `Python` | `150933d36465` | Symlink Depth Auditor (INV_C5_12 Enforcer). |
-| [`c5_quality_gates/sync_docs_index.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/sync_docs_index.py) | `Python` | `8bf8ecf0bf12` | sync_docs_index.py - Autonomous Documentation Indexer & Link Verifier |
+| [`c5_quality_gates/sync_docs_index.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/sync_docs_index.py) | `Python` | `8a2479f7864b` | sync_docs_index.py - Autonomous Documentation Indexer & Link Verifier |
 | [`c5_quality_gates/verify_distribution.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_quality_gates/verify_distribution.py) | `Python` | `d2dbc8cb1446` | C5-REAL Distribution Quality Gate: verify_distribution.py |
 
 ### ♾️ Autopoiesis & System Simulations
@@ -175,7 +184,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | [`c5_skills_ontology/audit_skills_execution.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_skills_ontology/audit_skills_execution.py) | `Python` | `f650bbe54200` | audit_skills_execution.py - Comprehensive verification & benchmark suite for |
 | [`c5_skills_ontology/optimize_all_skill_triggers.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_skills_ontology/optimize_all_skill_triggers.py) | `Python` | `89db083fbd34` | optimize_all_skill_triggers.py - Enriches and formats display names and trigger |
 | [`c5_skills_ontology/sync_skills_registry.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_skills_ontology/sync_skills_registry.py) | `Python` | `b15d22d63ae2` | sync_skills_registry.py - Automated synchronization of physical skills (disk) |
-| [`c5_skills_ontology/sync_vault_uuids.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_skills_ontology/sync_vault_uuids.py) | `Python` | `71561c349874` | Sync Vault Uuids Utility |
+| [`c5_skills_ontology/sync_vault_uuids.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_skills_ontology/sync_vault_uuids.py) | `Python` | `8d2966e16452` | sync_vault_uuids.py - INV_C5_15 Memory Vault Session UUID Synchronizer |
 
 ### 🧪 Unit Tests & Curvature Proofs
 
@@ -193,10 +202,10 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | [`c5_thermo/c5_exergy_optimizer_monitor.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/c5_exergy_optimizer_monitor.py) | `Python` | `853e3f7ef81c` | MOSKV-1 APEX SINGULARITY — Causal-Determinist STATE MONITOR (EXERGY_OPTIMIZER) |
 | [`c5_thermo/cache_1000_memoization_bench.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/cache_1000_memoization_bench.py) | `Python` | `6ca5786bc13f` | Cache 1000 Memoization Bench Utility |
 | [`c5_thermo/exergy_arbitrage_engine.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/exergy_arbitrage_engine.py) | `Python` | `c65f7aba1983` | Exergy Arbitrage Engine Utility |
-| [`c5_thermo/exergy_dashboard_server.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/exergy_dashboard_server.py) | `Python` | `c4ae3427d446` | Exergy Dashboard Server (Causal-Determinist). |
+| [`c5_thermo/exergy_dashboard_server.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/exergy_dashboard_server.py) | `Python` | `532f593afea5` | Exergy Dashboard Server (Causal-Determinist). |
 | [`c5_thermo/exergy_optimizer_agent.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/exergy_optimizer_agent.py) | `Python` | `cafc71b6bcc4` | [Causal-Determinist] Exergy Optimizer Agent. |
 | [`c5_thermo/stress_100m_bft.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/stress_100m_bft.py) | `Python` | `c7d68c858da0` | 100,000,000 STRESS TEST ENGINE — CORTEX PERSIST BFT LEDGER |
-| [`c5_thermo/stress_10m.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/stress_10m.py) | `Python` | `9e7bf9890668` | Stress 10M Utility |
+| [`c5_thermo/stress_10m.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/stress_10m.py) | `Python` | `261490b595b0` | Stress 10M Utility |
 | [`c5_thermo/stress_sqlite_wal.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_thermo/stress_sqlite_wal.py) | `Python` | `65178e037bab` | Stress test for SQLite WAL and busy_timeout (INV_BFT_02). |
 
 ### 🛠️ Domain Helpers & Enforcers
@@ -206,6 +215,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | [`c5_utils/ddd_strangler.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_utils/ddd_strangler.py) | `Python` | `975ea8dac24b` | Utils |
 | [`c5_utils/export_country_compliance.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_utils/export_country_compliance.py) | `Python` | `4990f9e54e21` | Generates localized EU AI Act / NIST AI RMF compliance reports for target countries. |
 | [`c5_utils/fetch_missing_dates.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_utils/fetch_missing_dates.py) | `Python` | `e7b4a6d36bdf` | fetch_missing_dates.py — batch update dataset.json with enrollment_velocity. |
+| [`c5_utils/financial_extractor.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_utils/financial_extractor.py) | `Python` | `5cb8b69f44a4` | Financial Extractor Utility |
 | [`c5_utils/python_spsc_reader.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_utils/python_spsc_reader.py) | `Python` | `d4efc03306eb` | python_spsc_reader.py — Consumidor Multiproceso Python Zero-Copy (C-ABI FFI) |
 | [`c5_utils/quadrilingual_enforcer.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_utils/quadrilingual_enforcer.py) | `Python` | `2206fd22a86b` | Quadrilingual Enforcer Utility |
 
@@ -219,6 +229,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | [`c5_verifiers/deterministic_audit.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_verifiers/deterministic_audit.py) | `Python` | `dd3bad41d3a2` | Zero-Friction Mass Execution (F=0) |
 | [`c5_verifiers/devsecops_attest.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_verifiers/devsecops_attest.py) | `Python` | `cc673910fcf1` | devsecops_attest.py — Sovereign DevSecOps & Zero-Trust Cryptographic Attestation Engine |
 | [`c5_verifiers/fast_smt_gate.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_verifiers/fast_smt_gate.py) | `Python` | `38d7b4a89a6a` | fast_smt_gate.py - Ultra-fast SMT / Invariant verifier for CI/CD environments. |
+| [`c5_verifiers/inject_lean4_stubs.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_verifiers/inject_lean4_stubs.py) | `Python` | `d5294a58cf86` | inject_lean4_stubs.py - Dynamic Lean 4 Stub Injector & Formal Proof Exporter |
 | [`c5_verifiers/purge_residuals.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_verifiers/purge_residuals.py) | `Python` | `f21c054b6e65` | purge_residuals.py - Residual Artifact Purge Engine (Anergy Purge Protocol) |
 | [`c5_verifiers/verify_agent_ontological_value.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_verifiers/verify_agent_ontological_value.py) | `Python` | `8f1db9c53c1c` | Oracle Verifier for Agent Ontological Value (V_A). |
 | [`c5_verifiers/verify_anergy_token_purge.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_verifiers/verify_anergy_token_purge.py) | `Python` | `2d95d730278a` | Causal-Determinist SOVEREIGN ANERGY PURGE & AUTOCOGNITION-OMEGA ENGINE |
@@ -227,7 +238,9 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | [`c5_verifiers/verify_claims.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_verifiers/verify_claims.py) | `Python` | `8237f47e118f` | verify_claims.py — Verificación paralela del report de arbitraje contra |
 | [`c5_verifiers/verify_full_stack_health.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_verifiers/verify_full_stack_health.py) | `Python` | `06fe6b2b8b00` | Oracle Verifier for Full-Stack System Health across: |
 | [`c5_verifiers/verify_oncology_primitives_dag.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_verifiers/verify_oncology_primitives_dag.py) | `Python` | `16055e765a62` | verify_oncology_primitives_dag.py — C5-REAL Causal Verifier for 300 Molecular Oncology Primitives |
+| [`c5_verifiers/verify_p0_rotation.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_verifiers/verify_p0_rotation.py) | `Python` | `44aa581a13d4` | Ω-16 — verify_p0_rotation: certificador del estado opsec del linaje. |
 | [`c5_verifiers/verify_tonnetz_falsification.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_verifiers/verify_tonnetz_falsification.py) | `Python` | `e5d4bd34ae90` | scripts/verify_tonnetz_falsification.py |
+| [`c5_verifiers/enforce_c5_rules.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_verifiers/enforce_c5_rules.sh) | `Shell` | `0961c5186b4e` | █ AUTOCOGNITION-Ω \| STATE: C5-REAL \| AESTHETIC: INDUSTRIAL_NOIR_2026 |
 | [`c5_verifiers/verify_execution.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_verifiers/verify_execution.sh) | `Shell` | `c075b209640b` | verify_execution.sh |
 | [`c5_verifiers/verify_lean_proofs.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_verifiers/verify_lean_proofs.sh) | `Shell` | `f1eea2de41fb` | Check for 'sorry' keyword in proof file |
 
@@ -235,23 +248,14 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 
 | Script | Tipo | SHA3-256 | Descripción / Propósito |
 | :--- | :--- | :--- | :--- |
-| [`canary_check.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/canary_check.py) | `Python` | `28f709e1bb26` | Ω-12 — canary_check: verifica que los señuelos canary siguen en el árbol. |
-| [`gen_oncology_primitives.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/gen_oncology_primitives.py) | `Python` | `9f825d1057e3` | Generador y Exportador Ontológico de 300 Primitivas de Oncología Molecular |
-| [`generate_scripts_readme.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/generate_scripts_readme.py) | `Python` | `53cd96c9e7d8` | generate_scripts_readme.py - Automated self-documenting catalog generator |
-| [`inject_lean4_stubs.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/inject_lean4_stubs.py) | `Python` | `d5294a58cf86` | inject_lean4_stubs.py - Dynamic Lean 4 Stub Injector & Formal Proof Exporter |
-| [`lint_doc_aesthetics.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/lint_doc_aesthetics.py) | `Python` | `5cc5235c9da3` | Audita archivos Markdown en docs/ para verificar invariantes visuales: |
-| [`pipe_audit.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/pipe_audit.py) | `Python` | `c3dcd819e9ab` | Ω-15 — pipe_audit: proxy auditado de sustitución de intérprete. |
-| [`refactor_agents_md.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/refactor_agents_md.py) | `Python` | `b8ad0e22786a` | scripts/refactor_agents_md.py — Deterministic AGENTS.md & ENVIRONMENT.md Refactoring Engine |
-| [`runner.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/runner.py) | `Python` | `041ced863e50` | runner.py - Central CLI Dispatcher for BABYLON-60 Sovereign Scripts Suite |
-| [`unified_legion.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/unified_legion.py) | `Python` | `8cbf279f42da` | scripts/unified_legion.py — Motor de la Legión Única C5-REAL (Swarm Orchestrator PxS) |
-| [`verify_p0_rotation.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/verify_p0_rotation.py) | `Python` | `44aa581a13d4` | Ω-16 — verify_p0_rotation: certificador del estado opsec del linaje. |
-| [`enforce_c5_rules.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/enforce_c5_rules.sh) | `Shell` | `0961c5186b4e` | █ AUTOCOGNITION-Ω \| STATE: C5-REAL \| AESTHETIC: INDUSTRIAL_NOIR_2026 |
+| [`generate_scripts_readme.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/generate_scripts_readme.py) | `Python` | `82d0d95cf310` | generate_scripts_readme.py - Automated self-documenting catalog generator |
+| [`runner.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/runner.py) | `Python` | `a38f1f0de89c` | runner.py - Central CLI Dispatcher for BABYLON-60 Sovereign Scripts Suite |
 
 ### 📁 Kimi Nexus
 
 | Script | Tipo | SHA3-256 | Descripción / Propósito |
 | :--- | :--- | :--- | :--- |
-| [`kimi_nexus/kimi_nexus.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/kimi_nexus/kimi_nexus.py) | `Python` | `f06c851299a6` | Attempt to import FastMCP. If missing, we'll inform the user via logs. |
+| [`kimi_nexus/kimi_nexus.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/kimi_nexus/kimi_nexus.py) | `Python` | `cccb9e31c882` | Attempt to import FastMCP. If missing, we'll inform the user via logs. |
 
 ### 📦 Deployment & P0 Remediation Scripts
 
@@ -268,6 +272,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | :--- | :--- | :--- | :--- |
 | [`c5_setup/install_host.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_setup/install_host.sh) | `Shell` | `71b8228b6009` | Registra moskv_native_host.py en Chrome/Brave en macOS |
 | [`c5_setup/install_into_repo.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_setup/install_into_repo.sh) | `Shell` | `05132535692a` | install_into_repo.sh |
+| [`c5_setup/setup_nacho_cortex.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_setup/setup_nacho_cortex.sh) | `Shell` | `35f722c7dca1` | █ CORTEX FULL ENVIRONMENT SETUP FOR NACHO \| STATE: C5-REAL |
 
 ---
 *Catálogo auto-generado dinámicamente por `generate_scripts_readme.py` con atestación criptográfica SHA3-256.*
