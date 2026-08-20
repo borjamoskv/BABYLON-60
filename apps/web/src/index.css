@@ -1,131 +1,131 @@
 @import "tailwindcss";
 
-/* BABYLON-60 v4.0 — Sovereign Industrial Noir Minimalist Design System */
+/* AGENTS.ARCHI — Formal Verification & Rust Compiler Diagnostics UI */
 :root {
-  /* Cursor-style Deep Charcoal background */
-  --bg-void: #0a0a0a;
-  --bg-card: #111111;
-  --bg-card-hover: #18181b;
+  --bg-void: #030508;
+  --bg-panel: #080C14;
+  --bg-verdict: #050505;
   
-  /* Linear-style subtle borders */
-  --border-cyan: rgba(0, 240, 255, 0.15);
-  --border-cyan-glow: rgba(0, 240, 255, 0.3);
-  --border-emerald: rgba(16, 185, 129, 0.2);
-  --border-amber: rgba(245, 158, 11, 0.2);
+  --text-main: #F1F5F9;
+  --text-muted: #94A3B8;
+  --text-dim: #64748B;
   
-  --cyan-primary: #00f0ff;
-  --emerald-primary: #10b981;
-  --amber-primary: #f59e0b;
-  --violet-primary: #a855f7;
+  --border-line: #1E293B;
   
-  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --rust-red: #EF4444;
+  --cyan: #00F2FE;
+  --emerald: #10B981;
+  --amber: #F59E0B;
+  
   --font-mono: 'JetBrains Mono', monospace;
 }
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-body, html {
+html, body {
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   background-color: var(--bg-void);
-  color: #ededed;
-  font-family: var(--font-display);
-  overflow: hidden;
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  overflow-x: hidden;
+  overflow-y: auto;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Industrial Grid Mesh Background - Highly Subdued */
-.c5-grid-bg {
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-  background-size: 48px 48px;
+.c5-container {
+  width: 100%;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
-/* Bento Grid Panels (Magic UI style) */
-.glass-panel {
-  background: var(--bg-card);
-  border: 1px solid #27272a;
-  border-radius: 16px;
-  transition: all 0.2s ease-out;
+/* Rigid Demo Grid Container */
+.demo-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0px;
+  border: 1px solid var(--border-line);
+  font-family: var(--font-mono);
+  background-color: var(--bg-void);
+  color: #fff;
 }
 
-.glass-panel:hover {
-  border-color: #3f3f46;
-  background: var(--bg-card-hover);
+@media (max-width: 768px) {
+  .demo-container {
+    grid-template-columns: 1fr;
+  }
 }
 
-/* Custom Scrollbars - Minimalist */
+.demo-panel {
+  padding: 20px;
+  border: 1px solid var(--border-line);
+  background: var(--bg-panel);
+}
+
+.verdict-panel {
+  grid-column: span 2;
+  border-top: 1px solid var(--border-line);
+  background-color: #050505;
+  padding: 24px;
+}
+
+@media (max-width: 768px) {
+  .verdict-panel {
+    grid-column: span 1;
+  }
+}
+
+/* Input Drag Box */
+.demo-drag-box {
+  border: 1px dashed #334155;
+  background: rgba(255, 255, 255, 0.01);
+  padding: 24px;
+  text-align: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.demo-drag-box:hover {
+  border-color: var(--cyan);
+  background: rgba(0, 242, 254, 0.02);
+}
+
+/* Rust Error Format Styling */
+.rust-error-block {
+  background: #060911;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  padding: 16px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.rust-pass-block {
+  background: #060911;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 16px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 4px;
   height: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #030508;
 }
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
-  border-radius: 2px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
-}
-
-/* Glowing Animations - Reduced to strict opacity pulsing */
-@keyframes pulse-cyan {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 1; }
-}
-
-@keyframes scanline {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(1000%); }
-}
-
-.glow-cyan {
-  animation: pulse-cyan 3s infinite ease-in-out;
-}
-
-.font-mono {
-  font-family: var(--font-mono);
-}
-
-.font-display {
-  font-family: var(--font-display);
-}
-
-/* Badge Styles - Strict geometric */
-.c5-badge {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 500;
-  padding: 4px 8px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid transparent;
-}
-
-.badge-cyan {
-  background: transparent;
-  color: var(--cyan-primary);
-  border-color: var(--border-cyan);
-}
-
-.badge-emerald {
-  background: transparent;
-  color: var(--emerald-primary);
-  border-color: var(--border-emerald);
-}
-
-.badge-amber {
-  background: transparent;
-  color: var(--amber-primary);
-  border-color: var(--border-amber);
+  background: #1E293B;
 }

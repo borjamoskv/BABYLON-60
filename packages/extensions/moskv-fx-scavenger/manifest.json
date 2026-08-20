@@ -5,7 +5,6 @@
   "description": "Causal-Determinist Transducer for Google Labs FX (BABYLON-60)",
   "permissions": [
     "nativeMessaging",
-    "scripting",
     "activeTab"
   ],
   "host_permissions": [
@@ -13,5 +12,14 @@
   ],
   "background": {
     "service_worker": "background.js"
-  }
+  },
+  "action": {
+    "default_title": "Disparar Ping IPC"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://labs.google/*"],
+      "js": ["content.js"]
+    }
+  ]
 }

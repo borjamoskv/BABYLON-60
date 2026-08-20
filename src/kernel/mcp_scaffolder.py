@@ -40,6 +40,7 @@ class McpCodeScaffolder:
                 py_type = "bool"
             elif param.param_type == "object":
                 py_type = "dict"
+            func_params.append(f"{param.name}: {py_type}")
             
         params_signature = ", ".join(func_params)
         # Pre-calcular cadenas para la plantilla de código
