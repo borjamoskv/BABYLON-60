@@ -7,7 +7,8 @@ import sys
 import os
 
 # Agregamos la ruta base para que Python encuentre el módulo timeline_ir
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+base_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(base_dir))
 
 from timeline_ir import Movie
 from timeline_ir.renderers.json_backend import RemotionJsonBackend
@@ -15,7 +16,8 @@ from timeline_ir.renderers.json_backend import RemotionJsonBackend
 
 def test_compiler():
     print("[TimelineIR] Compilando test.tlir...")
-    with open("timeline_ir/test.tlir", "r") as f:
+    tlir_path = os.path.join(base_dir, "test.tlir")
+    with open(tlir_path, "r") as f:
         source = f.read()
 
     movie = Movie(source)
@@ -44,7 +46,7 @@ def test_compiler():
 
     print("\n[TimelineIR] Exportando a Render Backend (Remotion JSON)...")
     renderer = RemotionJsonBackend()
-    out_path = renderer.render(movie.kernel, duration=70.0, fps=10, output_path="timeline_ir/render_out.json")
+    out_path = renderer.render(movie.kernel, duration=70.0, fps=10, output_path=os.path.join(base_dir, "render_out.json"))
     print(f"[TimelineIR] Cristalización completa en {out_path}.")
 
 

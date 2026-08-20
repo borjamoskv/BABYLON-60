@@ -53,13 +53,18 @@ def test_eval_code_with_sandbox_unsafe():
     assert len(verdict["violations"]) > 0
 
 
-def test_append_auto_log():
-    from babylon60.cortex.gemini_labs_nexus import append_auto_log, LOG_FILE
+def test_append_auto_log(monkeypatch, tmp_path):
+    from babylon60.cortex.gemini_labs_nexus import append_auto_log
+    
+    mock_log_file = tmp_path / "gemini_labs_telemetry.jsonl"
+    monkeypatch.setattr("babylon60.cortex.gemini_labs_nexus.LOG_FILE", str(mock_log_file))
+    
+    from babylon60.cortex.gemini_labs_nexus import generate_scitt_receipt
     receipt = generate_scitt_receipt({"model": "gemini-2.5-pro"}, "test payload")
     append_auto_log("TEST_EVENT", {"prompt": "unit test prompt", "model": "gemini-2.5-pro"}, receipt)
     
-    assert os.path.exists(LOG_FILE)
-    with open(LOG_FILE, "r", encoding="utf-8") as f:
+    assert os.path.exists(mock_log_file)
+    with open(mock_log_file, "r", encoding="utf-8") as f:
         lines = f.readlines()
         assert len(lines) > 0
         last_entry = json.loads(lines[-1])

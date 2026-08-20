@@ -1,18 +1,21 @@
 // content.js - La Mónada Estricta / FSM
-// Inyectado por background.js en el contexto de labs.google
+// Inyectado por manifest.json en el contexto de labs.google
 // Objetivo: Bypassear el DOM y atacar el enrutador tRPC directamente.
 
-console.log("[Moskv-FX-Scavenger] Content Script Injected in labs.google");
+if (!window.moskvFsmInjected) {
+    window.moskvFsmInjected = true;
+    console.log("[Moskv-FX-Scavenger] Content Script Injected in labs.google");
 
-// Escucha comandos del background.js
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === "START_FSM") {
-        runFSM(request.prompt)
-            .then(result => sendResponse(result))
-            .catch(error => sendResponse({ status: "FATAL_ENTROPY", error: error.message }));
-        return true; // Keep the message channel open for async response
-    }
-});
+    // Escucha comandos del background.js
+    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+        if (request.action === "START_FSM") {
+            runFSM(request.prompt)
+                .then(result => sendResponse(result))
+                .catch(error => sendResponse({ status: "FATAL_ENTROPY", error: error.message }));
+            return true; // Keep the message channel open for async response
+        }
+    });
+}
 
 /**
  * Máquina de Estados Causal (FSM)

@@ -1,0 +1,49 @@
+name: 'ArchiGuard BIM & CTE Compliance Auditor'
+description: 'Deterministic Z3 Formal Verification Action for IFC BIM files against CTE and municipal PGOU DSL rules'
+author: 'BABYLON-60 / agents.archi'
+
+inputs:
+  ifc-path:
+    description: 'Path to the IFC BIM file to audit'
+    required: true
+    default: './edificio.ifc'
+  pgou-path:
+    description: 'Path to the PGOU / CTE Constraint DSL rulebook'
+    required: true
+    default: './pgou/madrid_v2023.dsl'
+  format:
+    description: 'Output format (human, json, sarif)'
+    required: false
+    default: 'sarif'
+  strict:
+    description: 'Fail workflow (exit code 1) on any UNSAT violation'
+    required: false
+    default: 'true'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Rust toolchain
+      uses: dtolnay/rust-toolchain@stable
+
+    - name: Build cortex-guard binary
+      shell: bash
+      run: |
+        cargo build --release --bin cortex-guard
+
+    - name: Run cortex-guard Audit
+      shell: bash
+      run: |
+        ./target/release/cortex-guard verify \
+          --ifc "${{ inputs.ifc-path }}" \
+          --pgou "${{ inputs.pgou-path }}" \
+          --format "${{ inputs.format }}" \
+          --strict="${{ inputs.strict }}" \
+          --annotate-gh > cortex_audit_report.${{ inputs.format }}
+        
+    - name: Upload SARIF Audit Report to GitHub Code Scanning
+      if: inputs.format == 'sarif' && always()
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: 'cortex_audit_report.sarif'
+        category: 'cortex-guard-architectural-audit'

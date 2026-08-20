@@ -34,22 +34,33 @@ function executeGenerationOnLabs(prompt) {
     }
     
     const labsTab = tabs[0];
-    console.log("Inyectando transductor (content.js) en pestaña:", labsTab.id);
+    console.log("Disparando FSM en pestaña:", labsTab.id);
     
-    // Inyectamos content.js para ejecutar el fetch en el contexto de la página
-    chrome.scripting.executeScript({
-      target: { tabId: labsTab.id },
-      files: ["content.js"]
-    }, () => {
-      // Tras inyectar, enviamos un mensaje al content.js con el prompt
-      chrome.tabs.sendMessage(labsTab.id, { action: "START_FSM", prompt: prompt }, (response) => {
-         if (nativePort) {
-           nativePort.postMessage(response);
-         }
-      });
+    chrome.tabs.sendMessage(labsTab.id, { action: "START_FSM", prompt: prompt }, (response) => {
+      if (chrome.runtime.lastError) {
+        console.error("Fallo de comunicación con FSM:", chrome.runtime.lastError.message);
+        if (nativePort) nativePort.postMessage({ status: "FATAL_ENTROPY", message: chrome.runtime.lastError.message });
+        return;
+      }
+      if (nativePort && response) {
+        nativePort.postMessage(response);
+      }
     });
   });
 }
 
 // Inicializar conexión
 connectToNativeHost();
+
+// PoC: Enviar PING manual al hacer clic en el icono de la extensión
+chrome.action.onClicked.addListener((tab) => {
+  console.log("Acción manual: Disparando PING hacia el Kernel...");
+  if (nativePort) {
+    nativePort.postMessage({ 
+      cmd: "PING", 
+      payload: `Timestamp: ${Date.now()}` 
+    });
+  } else {
+    console.error("No se puede enviar el PING: El túnel IPC está desconectado.");
+  }
+});

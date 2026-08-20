@@ -3,35 +3,42 @@
     auto_https off
 }
 
+# 0. C5-REAL DevSecOps Hardening (Zero-Trust Invariants)
+(c5_security) {
+    header Strict-Transport-Security "max-age=31536000;"
+    header X-Content-Type-Options "nosniff"
+    header X-Frame-Options "DENY"
+}
+
 # 1. babylon60.com -> Master Ledger (Puerto 8060)
 babylon60.com {
+    import c5_security
     reverse_proxy localhost:8060
-    header Strict-Transport-Security "max-age=31536000;"
     header X-C5-REAL "Verified"
 }
 
-# 2. agents.archi -> APEX Taxonomy (Puerto 8070)
+# 2. agents.archi -> AEC Agent Platform (Puerto 5173 / Web App)
 agents.archi {
-    reverse_proxy localhost:8070
-    header Strict-Transport-Security "max-age=31536000;"
-    header X-CORTEX-DOMAIN "Taxonomy"
+    import c5_security
+    reverse_proxy localhost:5173
+    header X-CORTEX-DOMAIN "AEC-Agent-Platform"
 }
 
-# 3. cortexpersist.dev -> Playground & WSS (Puerto 8080)
-cortexpersist.dev {
+# 3. api.babylon60.com -> Playground & WSS (Puerto 8080)
+api.babylon60.com {
+    import c5_security
     reverse_proxy localhost:8080
-    header Strict-Transport-Security "max-age=31536000;"
-    header X-CORTEX-DOMAIN "Developer"
+    header X-CORTEX-DOMAIN "Developer-API"
 }
 
-# 4. cortexpersist.com -> Dashboard Comercial (Puerto 3000)
-cortexpersist.com {
+# 4. dashboard.babylon60.com -> Dashboard Comercial (Puerto 3000)
+dashboard.babylon60.com {
+    import c5_security
     reverse_proxy localhost:3000
-    header Strict-Transport-Security "max-age=31536000;"
     header X-CORTEX-DOMAIN "Dashboard"
 }
 
-# 5. cortexpersist.org -> Sybil Mitigation
-cortexpersist.org {
-    redir https://cortexpersist.dev{uri} 301
+# 5. Sybil Mitigation & Legacy Domains (Redirección 301 Absoluta)
+cortexpersist.com, cortexpersist.dev, cortexpersist.org {
+    redir https://babylon60.com{uri} 301
 }
