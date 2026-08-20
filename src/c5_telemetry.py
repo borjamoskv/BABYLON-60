@@ -45,7 +45,7 @@ class ThermodynamicValve:
                 logger.error(f"[VALVE-ERROR] Error procesando telemetría: {e}")
 
     def start(self):
-        """Inicia el worker asíncrono."""
+        """Inicia el Worker Asíncrono."""
         if self._worker_task is None:
             self._worker_task = asyncio.create_task(self._process_events())
 
