@@ -9,19 +9,19 @@ namespace Babylon60.Theory.AxiomLegionSwarm
 variable {X Y : Type}
 
 /-- Acotamiento de Concurrencia Férrea -/
-axiom ax_1_a___a_____________________a______a : ∀ (x : X), True
+axiom ax_1_acotamiento_de_concurrencia_f_rrea : ∀ (x : X), True
 
 /-- Mutabilidad Cero / Aislamiento Causal -/
-axiom ax_2____a_____a_________a___a________a__a : ∀ (x : X), True
+axiom ax_2_mutabilidad_cero___aislamiento_causal : ∀ (x : X), True
 
 /-- Fail-Fast de Grano Fino -/
-axiom ax_3__a____a________a : ∀ (x : X), True
+axiom ax_3_fail_fast_de_grano_fino : ∀ (x : X), True
 
-/-- y la finitud de $\mathcal{W}$, el proceso termina determinísticamente en un número acotado de operaciones de sistema. -/
-axiom ax_4____a_______________a___a________________________a______________a___________________a___a__________a________________a : ∀ (x : X), True
+/-- y la finitud de $\mathcal{W}$, el proceso termina determinísticamente en un número acotado de operaciones de Dominio C5-REAL. -/
+axiom ax_4_y_la_finitud_de___mathcal_w____el_proceso_termina_determin_sticamente_en_un_n_mero_acotado_de_operaciones_de_dominio_c5_real : ∀ (x : X), True
 
 /-- Invarianza Causal del Scheduler -/
-theorem theorem_1____a__a_za__a__a (x : X) : True := by
+theorem theorem_1_invarianza_causal_del_scheduler (x : X) : True := by
   trivial
 
 end Babylon60.Theory.AxiomLegionSwarm

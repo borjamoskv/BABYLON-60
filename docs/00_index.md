@@ -9,7 +9,7 @@
 </div>
 
 > **Nube de Conocimiento Categórico, Especificaciones Formales, Guías y Repositorio Teórico**  
-> **Estándar:** C5-REAL | **Documentos Totales Indexados:** 104 | **Estado:** 100% Synchronized
+> **Estándar:** C5-REAL | **Documentos Totales Indexados:** 115 | **Estado:** 100% Synchronized
 
 ---
 
@@ -91,6 +91,8 @@
 | [`eu_ai_act_compliance_whitepaper.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/eu_ai_act_compliance_whitepaper.md) | `04_research/eu_ai_act_compliance_whitepaper.md` | El Determinismo Causal como Cumplimiento: Arquitectura BABYLON-60 v4.0 para Sistemas de IA de Alto Riesgo |
 | [`evaluacion_falsacion_llm_models_2026.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/evaluacion_falsacion_llm_models_2026.md) | `04_research/evaluacion_falsacion_llm_models_2026.md` | 🔬 ANÁLISIS DE FALSACIÓN POPPERIANA EN SELECCIÓN DE LLMS (2026) |
 | [`legion_222_swarm_topology.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/legion_222_swarm_topology.md) | `04_research/legion_222_swarm_topology.md` | 🐝 Topología de Enjambre Legión 222 Agentes (`legion_222_agentes.py`) |
+| [`sanedrin_reflexive_forking_audit.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/sanedrin_reflexive_forking_audit.md) | `04_research/sanedrin_reflexive_forking_audit.md` | 🏛️ Acta del Sanedrín: Auditoría Arquitectónica del "Reflexive Forking" |
+| [`sota_evolution_roadmap.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/sota_evolution_roadmap.md) | `04_research/sota_evolution_roadmap.md` | 🗺️ BABYLON-60: SOTA Architectural Evolution Roadmap |
 
 ### 📜 Autonomous AI Manifestos
 
@@ -144,6 +146,7 @@
 | [`08_babylon60_architecture.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/08_babylon60_architecture.md) | `06_theory/08_babylon60_architecture.md` | 🧬 08 — Arquitectura BABYLON-60 e Invariantes del Sistema |
 | [`09_formal_ontology_lean.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/09_formal_ontology_lean.md) | `06_theory/09_formal_ontology_lean.md` | 🧬 09 — Ontología Formal en Lean 4 |
 | [`10_physical_realization.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/10_physical_realization.md) | `06_theory/10_physical_realization.md` | ⚡ 10 — Realización Física en Silicio (B60) |
+| [`AUDIT_AXIOMS_2026.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_AXIOMS_2026.md) | `06_theory/AUDIT_AXIOMS_2026.md` | 🛡️ Dictamen de Auditoría Epistémica: Axiomatización C5-REAL |
 | [`AUDIT_VERDICT_C5_REAL.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md) | `06_theory/AUDIT_VERDICT_C5_REAL.md` | 🛡️ Dictamen de Verificación Independiente: Colapso del Holograma C4-SIM |
 | [`AXIOMATIZATION_C5_REAL.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md) | `06_theory/AXIOMATIZATION_C5_REAL.md` | ⚖️ Base Axiomática Sellada C5-REAL |
 | [`ETHOS.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/ETHOS.md) | `06_theory/ETHOS.md` | 📜 ETHOS — APEX-SINGULARITY |
@@ -161,7 +164,20 @@
 
 | Documento | Ruta / Archivo | Título Principal / Propósito |
 | :--- | :--- | :--- |
+| [`iso_babilonia_colapso.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/07_isomorphisms/iso_babilonia_colapso.md) | `07_isomorphisms/iso_babilonia_colapso.md` | Isomorfismo de Babilonia y Patrones de Colapso Sistémico |
 | [`iso_cancer_sistemas_compendio.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/07_isomorphisms/iso_cancer_sistemas_compendio.md) | `07_isomorphisms/iso_cancer_sistemas_compendio.md` | Compendio de Isomorfismos Causales en Oncología Computacional y Sistemas Complejos |
+| [`iso_comoditizacion_morfismos.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/07_isomorphisms/iso_comoditizacion_morfismos.md) | `07_isomorphisms/iso_comoditizacion_morfismos.md` | Isomorfismo de Comoditización Tecnológica y Morfismos Computacionales |
+
+### 📁 Adr
+
+| Documento | Ruta / Archivo | Título Principal / Propósito |
+| :--- | :--- | :--- |
+| [`ADR-001-lean4-over-coq-isabelle.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/ADR-001-lean4-over-coq-isabelle.md) | `adr/ADR-001-lean4-over-coq-isabelle.md` | ADR-001: Lean 4 sobre Coq/Isabelle para Verificación Formal |
+| [`ADR-002-pyo3-maturin-ffi-bridge.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/ADR-002-pyo3-maturin-ffi-bridge.md) | `adr/ADR-002-pyo3-maturin-ffi-bridge.md` | ADR-002: Puente FFI PyO3/Maturin para Runtime Híbrido Rust-Python |
+| [`ADR-003-bft-attestation-architecture.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/ADR-003-bft-attestation-architecture.md) | `adr/ADR-003-bft-attestation-architecture.md` | ADR-003: Arquitectura BFT y Modelo de Atestación Criptográfica |
+| [`ADR-004-taint-tracking-isolation.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/ADR-004-taint-tracking-isolation.md) | `adr/ADR-004-taint-tracking-isolation.md` | ADR-004: Modelo de Aislamiento y Tracking de Taint |
+| [`ADR-005-sovereign-dual-license.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/ADR-005-sovereign-dual-license.md) | `adr/ADR-005-sovereign-dual-license.md` | ADR-005: Sovereign Dual-License v4.0 |
+| [`README.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/README.md) | `adr/README.md` | Architecture Decision Records (ADR) |
 
 ### 🛡️ Compliance Certificates & Forensic Audits
 
