@@ -34,8 +34,12 @@ REPO_ROOT = SCRIPTS_DIR.parent
 def run_subcommand(script_name: str, extra_args: list[str]) -> int:
     script_path = SCRIPTS_DIR / script_name
     if not script_path.exists():
-        print(f"[-] Script not found: {script_path}")
-        return 1
+        matches = list(SCRIPTS_DIR.rglob(Path(script_name).name))
+        if matches:
+            script_path = matches[0]
+        else:
+            print(f"[-] Script not found: {script_path}")
+            return 1
     cmd = [sys.executable, str(script_path)] + extra_args
     res = subprocess.run(cmd)
     return res.returncode
