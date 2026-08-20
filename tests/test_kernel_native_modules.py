@@ -13,7 +13,7 @@ from src.kernel.kimi_client import KimiClient
 from src.kernel.quantum_sync import QuantumSyncEngine
 
 def test_browser_cdp_engine_init():
-    engine = BrowserEngine(headless=True)
+    engine = BrowserEngine(headless=True, remote_debugging_port=9222)
     binary = engine.find_chrome_binary()
     # Should evaluate without throwing exception
     assert engine.port == 9222
