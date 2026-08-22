@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C5-REAL Studio DSP Vocal Master & EQ Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #06080d;
+      --panel-bg: rgba(16, 20, 32, 0.8);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --accent-green: #00ff9d;
+      --accent-gold: #ffb700;
+      --accent-red: #ff3b5c;
+      --accent-blue: #00b8ff;
+      --text-main: #f0f4fc;
+      --text-muted: #8a96b0;
+      --card-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 10% 10%, rgba(255, 183, 0, 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 90% 90%, rgba(0, 255, 157, 0.06) 0%, transparent 45%);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      text-align: center;
+      max-width: 950px;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #ffffff 0%, var(--accent-gold) 50%, var(--accent-green) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .container { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--panel-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .full-width { grid-column: 1 / -1; }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.75rem;
+    }
+
+    .card-title span.badge {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 20px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .badge-green { background: rgba(0, 255, 157, 0.15); color: var(--accent-green); border: 1px solid var(--accent-green); }
+    .badge-gold { background: rgba(255, 183, 0, 0.15); color: var(--accent-gold); border: 1px solid var(--accent-gold); }
+    .badge-red { background: rgba(255, 59, 92, 0.15); color: var(--accent-red); border: 1px solid var(--accent-red); }
+    .badge-blue { background: rgba(0, 184, 255, 0.15); color: var(--accent-blue); border: 1px solid var(--accent-blue); }
+
+    /* Audio Selectors */
+    .preset-buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.6rem;
+    }
+
+    @media (max-width: 900px) {
+      .preset-buttons { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .btn-preset {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.85rem 0.5rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.82rem;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.35rem;
+    }
+
+    .btn-preset:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-preset.active-orig { border-color: var(--accent-blue); background: rgba(0, 184, 255, 0.12); color: var(--accent-blue); }
+    .btn-preset.active-bad { border-color: var(--accent-red); background: rgba(255, 59, 92, 0.12); color: var(--accent-red); }
+    .btn-preset.active-pro { border-color: var(--accent-green); background: rgba(0, 255, 157, 0.12); color: var(--accent-green); }
+    .btn-preset.active-clean { border-color: #00b8ff; background: rgba(0, 184, 255, 0.12); color: #00b8ff; }
+    .btn-preset.active-studio { border-color: var(--accent-gold); background: rgba(255, 183, 0, 0.15); color: var(--accent-gold); box-shadow: 0 0 15px rgba(255, 183, 0, 0.3); }
+
+    audio {
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 0.5rem;
+    }
+
+    .visualizer-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .visualizer-container { grid-template-columns: 1fr; }
+    }
+
+    canvas {
+      width: 100%;
+      height: 200px;
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* EQ Sliders */
+    .slider-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .slider-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+    }
+
+    .slider-name { font-weight: 600; }
+    .slider-value { font-family: 'JetBrains Mono', monospace; color: var(--accent-gold); }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.1);
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 183, 0, 0.6);
+    }
+
+    .explain-box {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      background: rgba(0, 0, 0, 0.25);
+      border-left: 3px solid var(--accent-gold);
+      padding: 0.85rem;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .explain-box strong { color: var(--text-main); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>C5-REAL Studio Vocal Master & DSP EQ Lab</h1>
+    <p>Cadena de Procesamiento Broadcast de 6 Etapas: De-Clipping, Supresión de Ruido FFT, De-Esser, Excitación Armónica y Masterizado EBU R128.</p>
+  </header>
+
+  <div class="container">
+    
+    <!-- Audio Presets Selector -->
+    <div class="card full-width">
+      <div class="card-title">
+        <span>Audición A/B/C/D/E (Audio del Usuario)</span>
+        <span class="badge badge-gold">5-Preset Broadcast Comparison</span>
+      </div>
+
+      <div class="preset-buttons">
+        <button class="btn-preset active-orig" id="btn-orig" onclick="selectPreset('orig')">
+          <span>🔊 1. Original</span>
+          <small>Voz sin procesar</small>
+        </button>
+        <button class="btn-preset" id="btn-bad" onclick="selectPreset('bad')">
+          <span>⚠️ 2. EQ Mal</span>
+          <small>Enlatado/Hueco</small>
+        </button>
+        <button class="btn-preset" id="btn-pro" onclick="selectPreset('pro')">
+          <span>✨ 3. EQ Pro</span>
+          <small>Sustractivo</small>
+        </button>
+        <button class="btn-preset" id="btn-clean" onclick="selectPreset('clean')">
+          <span>🛡️ 4. Adeclip</span>
+          <small>Sin saturación</small>
+        </button>
+        <button class="btn-preset" id="btn-studio" onclick="selectPreset('studio')">
+          <span>👑 5. Studio Master</span>
+          <small>Broadcast 6-Etapas</small>
+        </button>
+      </div>
+
+      <audio id="audio-player" controls preload="auto">
+        <source id="audio-source" src="../brain/8a52b5a3-d737-409f-a6e8-550fe064b0fe/audio_studio_master.mp3" type="audio/mpeg">
+        Tu navegador no soporta el reproductor de audio.
+      </audio>
+    </div>
+
+    <!-- Visualizer Canvas Container -->
+    <div class="card full-width">
+      <div class="card-title">
+        <span>Monitor Espectral FFT y Osciloscopio de Onda en Tiempo Real</span>
+        <span class="badge badge-green">Real-time Audio Telemetry</span>
+      </div>
+      <div class="visualizer-container">
+        <div>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.4rem; text-align:center;">ESPECTROGRAMA FFT (FRECUENCIAS)</p>
+          <canvas id="visualizer-fft"></canvas>
+        </div>
+        <div>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.4rem; text-align:center;">OSCILOSCOPIO (FORMA DE ONDA)</p>
+          <canvas id="visualizer-wave"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live EQ Sliders -->
+    <div class="card">
+      <div class="card-title">
+        <span>Ecualizador Gráfico Vivo (Web Audio API)</span>
+        <span class="badge badge-gold">Live Biquad Filters</span>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-item">
+          <div class="slider-header">
+            <span class="slider-name">High-Pass Filter (85 Hz)</span>
+            <span class="slider-value" id="val-hpf">85 Hz</span>
+          </div>
+          <input type="range" id="slider-hpf" min="20" max="300" value="85" oninput="updateEQ()">
+        </div>
+
+        <div class="slider-item">
+          <div class="slider-header">
+            <span class="slider-name">Corte de Barro (320 Hz)</span>
+            <span class="slider-value" id="val-mud">-3.8 dB</span>
+          </div>
+          <input type="range" id="slider-mud" min="-12" max="3" step="0.5" value="-3.8" oninput="updateEQ()">
+        </div>
+
+        <div class="slider-item">
+          <div class="slider-header">
+            <span class="slider-name">Corte de Resonancia (700 Hz)</span>
+            <span class="slider-value" id="val-box">-1.8 dB</span>
+          </div>
+          <input type="range" id="slider-box" min="-8" max="4" step="0.5" value="-1.8" oninput="updateEQ()">
+        </div>
+
+        <div class="slider-item">
+          <div class="slider-header">
+            <span class="slider-name">Presencia Broadcast (3.5 kHz)</span>
+            <span class="slider-value" id="val-pres">+1.8 dB</span>
+          </div>
+          <input type="range" id="slider-pres" min="-6" max="6" step="0.5" value="1.8" oninput="updateEQ()">
+        </div>
+      </div>
+    </div>
+
+    <!-- Epistemic Explanation -->
+    <div class="card">
+      <div class="card-title">
+        <span>Arquitectura de Masterizado Broadcast 6-Stage</span>
+        <span class="badge badge-gold">C5-REAL Exergy Standard</span>
+      </div>
+
+      <div class="explain-box">
+        <strong>1. De-Clipping Criptográfico</strong>: Reconstrucción matemática de los picos saturados a 0 dBFS.<br>
+        <strong>2. Supresión de Ruido FFT (`afftdn`)</strong>: Eliminación de siseos de microfonía sin artefactos de fase.<br>
+        <strong>3. De-Esser Dinámico</strong>: Control automático de sibilancias a 7 kHz.<br>
+        <strong>4. Excitación Armónica</strong>: 2º armónico de tubo suave para cálidez vocal.<br>
+        <strong>5. Normalización EBU R128</strong>: Ajuste de sonoridad a -16 LUFS y picos a -1.5 dBFS.
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const basePath = "../brain/8a52b5a3-d737-409f-a6e8-550fe064b0fe/";
+    const player = document.getElementById("audio-player");
+    const source = document.getElementById("audio-source");
+
+    const presets = {
+      orig: basePath + "audio_original.mp3",
+      bad: basePath + "audio_bad_eq_enlatado.mp3",
+      pro: basePath + "audio_equalized_pro.mp3",
+      clean: basePath + "audio_declipped_mastered.mp3",
+      studio: basePath + "audio_studio_master.mp3"
+    };
+
+    function selectPreset(type) {
+      document.getElementById("btn-orig").className = "btn-preset " + (type === 'orig' ? 'active-orig' : '');
+      document.getElementById("btn-bad").className = "btn-preset " + (type === 'bad' ? 'active-bad' : '');
+      document.getElementById("btn-pro").className = "btn-preset " + (type === 'pro' ? 'active-pro' : '');
+      document.getElementById("btn-clean").className = "btn-preset " + (type === 'clean' ? 'active-clean' : '');
+      document.getElementById("btn-studio").className = "btn-preset " + (type === 'studio' ? 'active-studio' : '');
+
+      player.pause();
+      source.src = presets[type];
+      player.load();
+      player.play().catch(() => {});
+    }
+
+    // Web Audio API Visualizer Setup
+    const canvasFFT = document.getElementById("visualizer-fft");
+    const canvasWave = document.getElementById("visualizer-wave");
+    const ctxFFT = canvasFFT.getContext("2d");
+    const ctxWave = canvasWave.getContext("2d");
+    let audioCtx, analyser, dataArrayFreq, dataArrayTime;
+
+    function initAudioVisualizer() {
+      if (audioCtx) return;
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 512;
+      
+      const track = audioCtx.createMediaElementSource(player);
+      track.connect(analyser);
+      analyser.connect(audioCtx.destination);
+      
+      dataArrayFreq = new Uint8Array(analyser.frequencyBinCount);
+      dataArrayTime = new Uint8Array(analyser.fftSize);
+      draw();
+    }
+
+    player.addEventListener("play", () => {
+      initAudioVisualizer();
+      if (audioCtx && audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+    });
+
+    function draw() {
+      requestAnimationFrame(draw);
+      if (!analyser) return;
+
+      // 1. Draw FFT Spectrogram
+      canvasFFT.width = canvasFFT.clientWidth;
+      canvasFFT.height = canvasFFT.clientHeight;
+      const w1 = canvasFFT.width, h1 = canvasFFT.height;
+
+      analyser.getByteFrequencyData(dataArrayFreq);
+      ctxFFT.fillStyle = "rgba(6, 8, 13, 0.4)";
+      ctxFFT.fillRect(0, 0, w1, h1);
+
+      const barWidth = (w1 / dataArrayFreq.length) * 1.6;
+      let x = 0;
+      for (let i = 0; i < dataArrayFreq.length; i++) {
+        const barHeight = (dataArrayFreq[i] / 255) * h1;
+        const grad = ctxFFT.createLinearGradient(0, h1, 0, 0);
+        grad.addColorStop(0, "rgba(255, 183, 0, 0.2)");
+        grad.addColorStop(1, "rgba(0, 255, 157, 0.95)");
+        ctxFFT.fillStyle = grad;
+        ctxFFT.fillRect(x, h1 - barHeight, barWidth - 1, barHeight);
+        x += barWidth;
+      }
+
+      // 2. Draw Waveform Oscilloscope
+      canvasWave.width = canvasWave.clientWidth;
+      canvasWave.height = canvasWave.clientHeight;
+      const w2 = canvasWave.width, h2 = canvasWave.height;
+
+      analyser.getByteTimeDomainData(dataArrayTime);
+      ctxWave.fillStyle = "rgba(6, 8, 13, 0.4)";
+      ctxWave.fillRect(0, 0, w2, h2);
+      ctxWave.lineWidth = 2;
+      ctxWave.strokeStyle = "#00b8ff";
+      ctxWave.beginPath();
+
+      const sliceWidth = w2 / dataArrayTime.length;
+      let x2 = 0;
+      for (let i = 0; i < dataArrayTime.length; i++) {
+        const v = dataArrayTime[i] / 128.0;
+        const y = (v * h2) / 2;
+        if (i === 0) ctxWave.moveTo(x2, y);
+        else ctxWave.lineTo(x2, y);
+        x2 += sliceWidth;
+      }
+      ctxWave.lineTo(w2, h2 / 2);
+      ctxWave.stroke();
+    }
+
+    function updateEQ() {
+      const hpf = document.getElementById("slider-hpf").value;
+      const mud = document.getElementById("slider-mud").value;
+      const box = document.getElementById("slider-box").value;
+      const pres = document.getElementById("slider-pres").value;
+
+      document.getElementById("val-hpf").innerText = hpf + " Hz";
+      document.getElementById("val-mud").innerText = (mud > 0 ? "+" : "") + mud + " dB";
+      document.getElementById("val-box").innerText = (box > 0 ? "+" : "") + box + " dB";
+      document.getElementById("val-pres").innerText = (pres > 0 ? "+" : "") + pres + " dB";
+    }
+  </script>
+</body>
+</html>

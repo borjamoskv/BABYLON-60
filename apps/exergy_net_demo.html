@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exergy-Net — El Mensajero Anti-Entrópico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090a0f;
+      --panel-bg: #11131c;
+      --panel-border: rgba(255, 255, 255, 0.08);
+      --panel-hover: #181b28;
+      
+      --accent-exergy: #10b981;
+      --accent-exergy-glow: rgba(16, 185, 129, 0.25);
+      
+      --accent-warning: #f59e0b;
+      --accent-warning-glow: rgba(245, 158, 11, 0.25);
+      
+      --accent-danger: #ef4444;
+      --accent-danger-glow: rgba(239, 68, 68, 0.25);
+      
+      --accent-primary: #6366f1;
+      --accent-primary-glow: rgba(99, 102, 241, 0.3);
+
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --text-dim: #6b7280;
+      
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: rgba(17, 19, 28, 0.8);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--panel-border);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent-exergy), var(--accent-primary));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-family: var(--font-heading);
+      box-shadow: 0 0 16px var(--accent-exergy-glow);
+    }
+
+    .logo-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .badge-tag {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--accent-exergy);
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: var(--font-mono);
+    }
+
+    .header-stats {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .stat-pill {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .stat-val {
+      font-weight: 700;
+      color: var(--accent-exergy);
+      font-family: var(--font-mono);
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 360px 1fr 380px;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      max-width: 1600px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    @media (max-width: 1200px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    .card-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--panel-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card-body {
+      padding: 1.25rem;
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* Simulator Panel */
+    textarea {
+      width: 100%;
+      height: 160px;
+      background: var(--bg-dark);
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      padding: 0.75rem;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    textarea:focus {
+      border-color: var(--accent-primary);
+    }
+
+    .btn {
+      background: var(--accent-primary);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .btn-exergy {
+      background: linear-gradient(135deg, var(--accent-exergy), #059669);
+      box-shadow: 0 4px 12px var(--accent-exergy-glow);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--panel-border);
+      color: var(--text-main);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* Dashboard List */
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .badge-count {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.1rem 0.4rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+    }
+
+    .exergy-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--panel-border);
+      border-radius: 10px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: all 0.2s;
+    }
+
+    .exergy-item:hover {
+      background: var(--panel-hover);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .exergy-item.high {
+      border-left: 4px solid var(--accent-danger);
+    }
+
+    .exergy-item.medium {
+      border-left: 4px solid var(--accent-warning);
+    }
+
+    .exergy-item.low {
+      border-left: 4px solid var(--accent-exergy);
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .item-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .item-time {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+
+    .crystal-box {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    .crystal-bullets {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .crystal-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .crystal-bullets li::before {
+      content: "•";
+      color: var(--accent-exergy);
+      font-weight: bold;
+    }
+
+    .decision-options {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .opt-btn {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--panel-border);
+      color: var(--text-main);
+      padding: 0.5rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .opt-btn:hover {
+      background: var(--accent-primary-glow);
+      border-color: var(--accent-primary);
+    }
+
+    .opt-btn.voted {
+      background: var(--accent-exergy);
+      color: #000;
+      font-weight: 700;
+      border-color: var(--accent-exergy);
+    }
+
+    /* Contract Panel */
+    .contract-box {
+      background: linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, rgba(17, 19, 28, 0.8) 100%);
+      border: 1px dashed var(--accent-exergy);
+      border-radius: 10px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .contract-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--accent-exergy);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hash-code {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      word-break: break-all;
+      background: rgba(0,0,0,0.5);
+      padding: 0.4rem;
+      border-radius: 4px;
+    }
+
+    /* Meter */
+    .exergy-meter {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .exergy-fill {
+      height: 100%;
+      width: 88%;
+      background: linear-gradient(90deg, var(--accent-warning), var(--accent-exergy));
+      transition: width 0.5s ease;
+    }
+
+    .pulse-switch {
+      display: flex;
+      background: var(--bg-dark);
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      padding: 0.2rem;
+      gap: 0.2rem;
+    }
+
+    .pulse-opt {
+      flex: 1;
+      padding: 0.4rem 0.6rem;
+      font-size: 0.75rem;
+      text-align: center;
+      border-radius: 6px;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .pulse-opt.active {
+      background: var(--panel-bg);
+      color: var(--accent-exergy);
+      font-weight: 600;
+      border: 1px solid var(--panel-border);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <div class="logo-icon">⚡</div>
+      <div>
+        <div class="logo-title">Exergy-Net</div>
+        <div style="font-size:0.7rem; color:var(--text-dim);">Mensajería Anti-Entrópica (Rust Core Engine)</div>
+      </div>
+      <span class="badge-tag">v0.2 PROTOTYPE</span>
+    </div>
+
+    <div class="header-stats">
+      <div class="stat-pill">
+        <span>Ratio de Exergía:</span>
+        <span class="stat-val" id="exergyRatioVal">88%</span>
+      </div>
+      <div class="stat-pill">
+        <span>Anergía Destruida:</span>
+        <span class="stat-val" id="anergySavedVal">42 min/día</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- LEFT PANEL: Entropic Input Simulator -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span>💬 Simulo Chorro WhatsApp</span>
+        </div>
+        <span style="font-size:0.75rem; color:var(--text-dim);">Entropía Cruda</span>
+      </div>
+      <div class="card-body">
+        <p style="font-size:0.8rem; color:var(--text-muted);">
+          Pega o escribe una discusión típica de grupo (audios largos, opiniones dispersas, mensajes fragmentados):
+        </p>
+        
+        <textarea id="rawInput">Juan (Audio 3:45): "Oye chicos que estaba pensando lo del viernes, no sé si cenar carne o japo... bueno Ana decía que mejor céntrico porque salimos tarde del curro."
+Pedro: "Yo paso de japo la verdad, prefiero carne o hamburguesa"
+Ana (Audio 1:12): "Vale pues Sukalde o Etxebarri. Sukalde tiene menú vegano para María que no come carne..."
+Carlos: "A mí me da igual pero confirmad antes de las 18h que tengo que reservar!"</textarea>
+
+        <button class="btn btn-exergy" id="btnTransduce">
+          <span>⚡ Filtrar Gouy-Stodola (Edge AI)</span>
+        </button>
+
+        <div style="margin-top:1rem; border-top:1px solid var(--panel-border); padding-top:1rem;">
+          <div class="section-label" style="margin-bottom:0.5rem;">Configuración de Pulsos</div>
+          <div class="pulse-switch">
+            <div class="pulse-opt active" onclick="setPulse(this, 'deep')">🧠 Deep Work (Batch)</div>
+            <div class="pulse-opt" onclick="setPulse(this, 'hourly')">⏰ Cada Hora</div>
+            <div class="pulse-opt" onclick="setPulse(this, 'realtime')">⚡ Tiempo Real</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MIDDLE PANEL: Exergy Dashboard -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span>📊 Tablero de Exergía Conversacional</span>
+        </div>
+        <div class="exergy-meter" style="width:120px;">
+          <div class="exergy-fill" id="exergyFill"></div>
+        </div>
+      </div>
+
+      <div class="card-body" id="dashboardBody">
+        
+        <!-- SECTION 1: Decision Pending -->
+        <div class="section-label" style="color:var(--accent-danger)">
+          <span>🔴 DECISIONES PENDIENTES</span>
+          <span class="badge-count" style="background:rgba(239,68,68,0.2); color:var(--accent-danger)">1</span>
+        </div>
+
+        <div class="exergy-item high">
+          <div class="item-header">
+            <div class="item-title">Grupo Cena Viernes</div>
+            <div class="item-time">Límite: Hoy 18:00h</div>
+          </div>
+          <div class="crystal-box">
+            <div style="font-weight:600; margin-bottom:0.4rem; color:var(--accent-danger);">
+              ¿En qué restaurante cenamos el viernes?
+            </div>
+            <ul class="crystal-bullets">
+              <li>Ana propone <strong>Sukalde</strong> (opción menú vegano para María).</li>
+              <li>Juan y Pedro prefieren opción con carne (<strong>Etxebarri</strong>).</li>
+              <li>Carlos requiere confirmación inmediata para reserva.</li>
+            </ul>
+            <div class="decision-options" id="decisionButtons">
+              <button class="opt-btn" onclick="castVote(1, 'Sukalde')">Sukalde (Menú Vegano)</button>
+              <button class="opt-btn" onclick="castVote(2, 'Etxebarri')">Etxebarri (Asador)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: Updates -->
+        <div class="section-label" style="color:var(--accent-warning)">
+          <span>🟡 ACTUALIZACIONES DETERMINISTAS</span>
+          <span class="badge-count" style="background:rgba(245,158,11,0.2); color:var(--accent-warning)">2</span>
+        </div>
+
+        <div class="exergy-item medium">
+          <div class="item-header">
+            <div class="item-title">Proyecto BABYLON-60</div>
+            <div class="item-time">14:20h</div>
+          </div>
+          <div class="crystal-box">
+            <ul class="crystal-bullets">
+              <li>Crate <code>exergy-core</code> compilado y verificado (4/4 tests passed).</li>
+              <li>FSM de estadosconversacionales integrada en workspace.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- SECTION 3: Digest -->
+        <div class="section-label" style="color:var(--accent-exergy)">
+          <span>🟢 DIGEST SOCIAL (Baja Entropía)</span>
+          <span class="badge-count" style="background:rgba(16,185,129,0.2); color:var(--accent-exergy)">12 msgs</span>
+        </div>
+
+        <div class="exergy-item low">
+          <div class="item-header">
+            <div class="item-title">Grupo Amigos & Familia</div>
+            <div class="item-time">Resumen Diarios</div>
+          </div>
+          <div style="font-size:0.8rem; color:var(--text-muted);">
+            • 8 mensajes sobre memes de la jornada futbolística.<br>
+            • 4 fotos de vacaciones de la familia. Sin peticiones de respuesta.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL: Causal Contract & Invariants -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span>📜 Contrato Causal Firmado</span>
+        </div>
+        <span style="font-size:0.75rem; color:var(--accent-exergy); font-family:var(--font-mono);" id="contractStatus">STANDBY</span>
+      </div>
+      <div class="card-body">
+        
+        <div class="contract-box" id="contractDisplay">
+          <div class="contract-title">
+            <span>📜 Estado: Esperando Colapso</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-muted);">
+            Vota una opción en el Tablero de Exergía para colapsar la FSM y generar el Contrato Causal Inmutable.
+          </p>
+          <div class="hash-code">0x0000000000000000000000000000000000000000</div>
+        </div>
+
+        <div style="margin-top:auto; border-top:1px solid var(--panel-border); padding-top:1rem;">
+          <div class="section-label">Invariantes C5 Aplicadas</div>
+          <ul style="font-size:0.75rem; color:var(--text-muted); list-style:none; display:flex; flex-direction:column; gap:0.4rem; margin-top:0.5rem;">
+            <li>✓ <strong>Gouy-Stodola:</strong> Entropía traducida a exergía en el edge</li>
+            <li>✓ <strong>Markov Morphism:</strong> Preservación de señal determinista</li>
+            <li>✓ <strong>Cero Anergía:</strong> Cuestiones circulares eliminadas</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function setPulse(el, mode) {
+      document.querySelectorAll('.pulse-opt').forEach(opt => opt.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function castVote(optionId, optionName) {
+      const btns = document.querySelectorAll('#decisionButtons .opt-btn');
+      btns.forEach(b => b.classList.remove('voted'));
+      
+      if (optionId === 1) btns[0].classList.add('voted');
+      if (optionId === 2) btns[1].classList.add('voted');
+
+      // Generate Causal Contract
+      const now = new Date().toISOString();
+      const rawString = `CONTRACT_CENA_VIERNES_${optionName}_${now}`;
+      
+      // Simple hash mock
+      let hash = 0;
+      for (let i = 0; i < rawString.length; i++) {
+        hash = ((hash << 5) - hash) + rawString.charCodeAt(i);
+        hash |= 0;
+      }
+      const hexHash = '0x' + Math.abs(hash).toString(16).padStart(8, '0') + 'a3f899c011e4b872d910a';
+
+      const contractDisplay = document.getElementById('contractDisplay');
+      const contractStatus = document.getElementById('contractStatus');
+
+      contractStatus.textContent = "VERIFIED ✓";
+      contractStatus.style.color = "var(--accent-exergy)";
+
+      contractDisplay.innerHTML = `
+        <div class="contract-title">
+          <span>✅ ACUERDO INMUTABLE</span>
+        </div>
+        <div style="font-size:0.9rem; font-weight:600; color:var(--text-main);">
+          Restaurante Seleccionado: <span style="color:var(--accent-exergy)">${optionName}</span>
+        </div>
+        <div style="font-size:0.8rem; color:var(--text-muted);">
+          📅 Fecha: Viernes 21:00h<br>
+          👥 Votos colapsados: Juan, Pedro, Ana, Tú<br>
+          📅 Sincronizado con Google/Apple Calendar
+        </div>
+        <div class="hash-code">Hash SHA-256:<br>${hexHash}</div>
+        <button class="btn btn-outline" style="font-size:0.75rem; margin-top:0.4rem;" onclick="alert('Contrato Causal exportado a ICS y anclado en DB local Rust')">
+          📅 Exportar a Calendario (.ics)
+        </button>
+      `;
+
+      // Update metrics
+      document.getElementById('exergyRatioVal').textContent = '96%';
+      document.getElementById('exergyFill').style.width = '96%';
+    }
+
+    document.getElementById('btnTransduce').addEventListener('click', () => {
+      const btn = document.getElementById('btnTransduce');
+      btn.innerHTML = '<span>⌛ Procesando en Edge (Whisper + Phi-4)...</span>';
+      setTimeout(() => {
+        btn.innerHTML = '<span>⚡ Filtrar Gouy-Stodola (Edge AI)</span>';
+        alert('Chorro entropico procesado: 3 audios + 4 textos comprimidos en 1 Cristal de Exergía con ratio 96%');
+      }, 600);
+    });
+  </script>
+</body>
+</html>

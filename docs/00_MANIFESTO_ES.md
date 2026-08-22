@@ -20,6 +20,8 @@ author: borjamoskv
 **Versión:** 4.0 Sovereign Hardened | **Autor:** Borja Moskv
 *"El Substrato de Ejecución Verificable para la Era de la Agencia Autónoma"*
 
+👉 **[📖 Leer el Artículo Extenso: Ideología Humano-Tecnológica-Social (C5-REAL)](./IDEOLOGIA_HUMANO_TECNOLOGICA_SOCIAL.md)**
+
 ---
 
 ### I. LA TESIS CENTRAL

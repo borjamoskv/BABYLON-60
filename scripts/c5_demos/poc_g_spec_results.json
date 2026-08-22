@@ -1,0 +1,86 @@
+{
+  "version": "2.0",
+  "timestamp": "2026-08-21T01:24:05+0200",
+  "config": {
+    "n_modules": 30,
+    "n_steps": 20,
+    "oracle_rigor": "STRICT",
+    "max_retries": 3
+  },
+  "results": {
+    "vibe": {
+      "total_tokens": 500000,
+      "final_entropy": 1.154054,
+      "convergent": false
+    },
+    "spec": {
+      "total_tokens": 101000,
+      "final_entropy": 0.833333,
+      "convergent": true,
+      "oracle_calls": 31,
+      "oracle_rejections": 11,
+      "aborts_ax_spec_4": 0
+    },
+    "theorems": {
+      "T1_entropy_monotone": true,
+      "T2_bounded_cost": true
+    },
+    "multiplier": 4.95,
+    "savings_pct": 79.8
+  },
+  "ledger_summary": {
+    "total_blocks": 40,
+    "head_hash": "24af6235a430917a67fef07666005901ae1a27c61594e4d15c8205a80d3f4412",
+    "lamport_final": 40,
+    "integrity_pre_tamper": true,
+    "tamper_detected_at_seq": 5
+  },
+  "entropy_trajectories": {
+    "vibe": [
+      1.0,
+      1.015,
+      1.0334,
+      1.0479,
+      1.0536,
+      1.0509,
+      1.0454,
+      1.0442,
+      1.052,
+      1.0679,
+      1.0862,
+      1.0996,
+      1.1039,
+      1.1004,
+      1.095,
+      1.095,
+      1.1042,
+      1.1209,
+      1.1389,
+      1.1511,
+      1.1541
+    ],
+    "spec": [
+      1.0,
+      0.9917,
+      0.9833,
+      0.975,
+      0.9667,
+      0.9583,
+      0.95,
+      0.9417,
+      0.9333,
+      0.925,
+      0.9167,
+      0.9083,
+      0.9,
+      0.8917,
+      0.8833,
+      0.875,
+      0.8667,
+      0.8583,
+      0.85,
+      0.8417,
+      0.8333
+    ]
+  }
+}
