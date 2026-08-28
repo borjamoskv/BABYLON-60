@@ -1,21 +1,27 @@
-name: C5-REAL CodeQL AST Scanner
+# C5-REAL EXERGY CERTIFIED
+name: "CodeQL Advanced (C5-REAL)"
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master", "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master", "main" ]
   schedule:
-    - cron: '30 4 * * 1'
+    - cron: '30 2 * * 1'
 
 jobs:
   analyze:
-    name: Analyze
+    name: Analyze (${{ matrix.language }})
     runs-on: ubuntu-latest
     permissions:
       actions: read
       contents: read
       security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'python', 'javascript' ]
 
     steps:
     - name: Checkout repository
@@ -24,9 +30,10 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
-        languages: 'javascript, python' # Ajustado al repo (F#/Rust requieren extractores custom o no están soportados)
+        languages: ${{ matrix.language }}
+        queries: security-and-quality
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
       with:
-        category: "/language:all"
+        category: "/language:${{matrix.language}}"

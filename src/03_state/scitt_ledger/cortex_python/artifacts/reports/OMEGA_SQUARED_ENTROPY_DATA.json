@@ -1,0 +1,680 @@
+{
+  "Entropy_Metrics": {
+    "transitions_analyzed": 135,
+    "entropy_leaks": 134,
+    "verified_transitions": 1,
+    "leaking_functions": [
+      {
+        "module": "net_mamba_ledger_engine.py",
+        "function": "mut_generate_audited",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "core_graph_ledger.py",
+        "function": "core_calc_sha256",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "core_graph_ledger.py",
+        "function": "mut_append_node",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "core_graph_ledger.py",
+        "function": "core_get_path",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "io_persist_ledger.py",
+        "function": "io_persist_ledger",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "io_persist_ledger.py",
+        "function": "io_load_ledger",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "io_persist_ledger.py",
+        "function": "io_node_count",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "io_persist_ledger.py",
+        "function": "close",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "apex_trials/ledger.py",
+        "function": "canonical",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "apex_trials/ledger.py",
+        "function": "compute_entry_hash",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "apex_trials/ledger.py",
+        "function": "compute_entry_id",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "apex_trials/ledger.py",
+        "function": "as_dict",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "apex_trials/ledger.py",
+        "function": "as_dict",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "apex_trials/ledger.py",
+        "function": "close",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "apex_trials/ledger.py",
+        "function": "append",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "apex_trials/ledger.py",
+        "function": "get_by_id",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "apex_trials/ledger.py",
+        "function": "entries",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "apex_trials/ledger.py",
+        "function": "count",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "apex_trials/ledger.py",
+        "function": "verify_chain",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "apex_trials/ledger.py",
+        "function": "append",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "tests/test_io_persist_ledger.py",
+        "function": "test_roundtrip_persist_and_reload",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "tests/test_io_persist_ledger.py",
+        "function": "test_idempotent_persist",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "tests/test_io_persist_ledger.py",
+        "function": "test_orphan_detection",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "tests/test_net_mamba_ledger_engine.py",
+        "function": "test_audited_generation_flow",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "tests/test_net_mamba_ledger_engine.py",
+        "function": "test_engine_fail_fast_on_invalid_prompt",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "tests/test_core_graph_ledger.py",
+        "function": "test_ledger_append_and_trace",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "tests/test_core_graph_ledger.py",
+        "function": "test_ledger_fail_fast_on_missing_parent",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "tests/test_core_graph_ledger.py",
+        "function": "test_ledger_fail_fast_on_invalid_claim",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "tests/apex/test_ledger.py",
+        "function": "test_genesis_and_chain_linkage",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "tests/apex/test_ledger.py",
+        "function": "test_determinism_same_inputs_same_hash",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "tests/apex/test_ledger.py",
+        "function": "test_key_order_independence",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "tests/apex/test_ledger.py",
+        "function": "test_idempotency",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "tests/apex/test_ledger.py",
+        "function": "test_causal_taint_mandatory",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "tests/apex/test_ledger.py",
+        "function": "test_tamper_detection",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "tests/apex/test_ledger.py",
+        "function": "test_babylon_bft_ledger_adapter",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "tests/apex/test_ledger.py",
+        "function": "append",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/bootstrap.py",
+        "function": "generate_identity",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/provider.py",
+        "function": "encrypt",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/provider.py",
+        "function": "decrypt",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/provider.py",
+        "function": "encrypt",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/provider.py",
+        "function": "decrypt",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/provider.py",
+        "function": "encrypt",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/provider.py",
+        "function": "decrypt",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/provider.py",
+        "function": "sha256",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/provider.py",
+        "function": "sha512",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/provider.py",
+        "function": "sign_hmac",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/provider.py",
+        "function": "sign_hmac_sha256",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/provider.py",
+        "function": "verify_hmac_sha256",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/provider.py",
+        "function": "pbkdf2_hmac_sha256",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/provider.py",
+        "function": "generate_bytes",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/aes.py",
+        "function": "get_default_encrypter",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/aes.py",
+        "function": "reset_default_encrypter",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/aes.py",
+        "function": "is_active",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/aes.py",
+        "function": "encrypt_str",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/aes.py",
+        "function": "decrypt_str",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/aes.py",
+        "function": "encrypt_json",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/aes.py",
+        "function": "decrypt_json",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/rekor_client.py",
+        "function": "anchor_payload",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/shredder.py",
+        "function": "is_shredded",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/shredder.py",
+        "function": "get_shredded_fact_ids",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/shredder.py",
+        "function": "shred_fact",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/shredder.py",
+        "function": "audit_shredding",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/__init__.py",
+        "function": "get_master_key",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/__init__.py",
+        "function": "generate_and_store_master_key",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keys.py",
+        "function": "generate_and_store_key",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keys.py",
+        "function": "get_private_key_b64",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keys.py",
+        "function": "revoke_key",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keys.py",
+        "function": "get_public_key_b64",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keys.py",
+        "function": "is_revoked",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keys.py",
+        "function": "is_expired",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keys.py",
+        "function": "rotate_key",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keys.py",
+        "function": "sign_payload",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keys.py",
+        "function": "sign_raw_content",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keys.py",
+        "function": "verify_signature",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keys.py",
+        "function": "verify_raw_content",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keys.py",
+        "function": "sign_raw_content",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keys.py",
+        "function": "verify_raw_content",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keys.py",
+        "function": "generate_keypair",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keys.py",
+        "function": "sign_payload",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keys.py",
+        "function": "verify_payload",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keys.py",
+        "function": "get_or_create_identity",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keys.py",
+        "function": "rotate_keys",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/hash_registry.py",
+        "function": "configure",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/hash_registry.py",
+        "function": "cortex_hash",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/hash_registry.py",
+        "function": "cortex_hash_b60",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/hash_registry.py",
+        "function": "cortex_hash_hex",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/hash_registry.py",
+        "function": "cortex_hash_truncated",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/hash_registry.py",
+        "function": "cortex_hmac",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/hash_registry.py",
+        "function": "cortex_hmac_b60",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/hash_registry.py",
+        "function": "cortex_hash_raw",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keyring.py",
+        "function": "get_master_key",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/keyring.py",
+        "function": "generate_and_store_master_key",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/rfc3161.py",
+        "function": "request_timestamp",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/identity.py",
+        "function": "forge_identity",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/identity.py",
+        "function": "load_identity",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/identity.py",
+        "function": "get_latest_root",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/identity.py",
+        "function": "append_event",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/identity.py",
+        "function": "verify_chain",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/identity.py",
+        "function": "is_anchored",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/crypto/identity.py",
+        "function": "anchor_genesis",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/extensions/mejoralo/ledger.py",
+        "function": "record_session",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/extensions/mejoralo/ledger.py",
+        "function": "get_history",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/extensions/mejoralo/ledger.py",
+        "function": "record_scar",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/extensions/mejoralo/ledger.py",
+        "function": "get_scars",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/extensions/health/collectors/ledger.py",
+        "function": "name",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/extensions/health/collectors/ledger.py",
+        "function": "weight",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/extensions/health/collectors/ledger.py",
+        "function": "description",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/extensions/health/collectors/ledger.py",
+        "function": "remediation",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/extensions/health/collectors/ledger.py",
+        "function": "collect",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/extensions/evolution/ledger_db.py",
+        "function": "record_mutation",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/extensions/evolution/ledger_db.py",
+        "function": "record_mutations_batch",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/extensions/evolution/ledger_db.py",
+        "function": "record_metrics",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/extensions/evolution/ledger_db.py",
+        "function": "get_mutation_history",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/extensions/evolution/ledger_db.py",
+        "function": "get_metric_trend",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/extensions/evolution/ledger_db.py",
+        "function": "update_domain_status",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/bft/consensus_ledger.py",
+        "function": "invoke_subagent",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/bft/consensus_ledger.py",
+        "function": "audit_integrity",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/bft/consensus_committer.py",
+        "function": "commit_mutation",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/bft/consensus_committer.py",
+        "function": "get_audit_rows",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/bft/consensus_validator.py",
+        "function": "verify_signature",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/bft/consensus_validator.py",
+        "function": "validate_votes",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/bft/consensus_validator.py",
+        "function": "decode_payload",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/bft/consensus_validator.py",
+        "function": "audit_payload",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60/bft/ledger_actor.py",
+        "function": "append",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "scripts/benchmark_ledger_throughput.py",
+        "function": "main",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60-ide/backend/routes/ledger.py",
+        "function": "ledger_stats",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60-ide/backend/routes/ledger.py",
+        "function": "list_entries",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60-ide/backend/routes/ledger.py",
+        "function": "get_entry",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60-ide/backend/routes/ledger.py",
+        "function": "verify_ledger",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60-ide/backend/services/cortex_ledger.py",
+        "function": "init",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60-ide/backend/services/cortex_ledger.py",
+        "function": "append_event",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60-ide/backend/services/cortex_ledger.py",
+        "function": "list_events",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60-ide/backend/services/cortex_ledger.py",
+        "function": "claim",
+        "delta_h_penalty": "HIGH"
+      },
+      {
+        "module": "babylon60-ide/backend/services/cortex_ledger.py",
+        "function": "verify_chain",
+        "delta_h_penalty": "HIGH"
+      }
+    ]
+  },
+  "Architectural_Compression_Factor": 43.43
+}

@@ -1,0 +1,64 @@
+# C5-REAL EXERGY CERTIFIED
+name: Autonomous Security & Falsification Gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+  pull_request_review:
+    types: [submitted]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  agent_review:
+    if: contains(github.event.pull_request.labels.*.name, 'agent-approved') || github.actor == 'agent-bot'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Set up Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install dependencies
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install bandit pytest pytest-cov
+
+      - name: Build Rust Kernel
+        run: cargo build -p cortex_kernel
+
+      - name: Run Empirical Popperian Coverage (INV-3)
+        run: python3 scripts/verify_popper_coverage.py
+
+      - name: Security Lint (Bandit)
+        run: bandit -r src/cortex-engine -f json -o bandit.json || true
+
+      - name: Upload Bandit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bandit-report
+          path: bandit.json
+          retention-days: 30
+
+      - name: Check for secrets
+        uses: trufflesecurity/trufflehog@v3.88.26
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+
+  agent_approve:
+    needs: agent_review
+    if: github.event_name == 'pull_request_review' && github.event.review.state == 'approved' && github.actor == 'agent-reviewer'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log Agent Approval
+        run: echo "PR approved by autonomous agent-reviewer"

@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-08-16T14:45:00.919590+00:00",
+  "audit_type": "C5_REAL_MANIFEST_CRYSTALLIZATION",
+  "verified_manifests_count": 13,
+  "compiler_status": "SUCCESS",
+  "varentropy": 0.0,
+  "drop_zone_hygiene_level": 0,
+  "latex_raw_anergy": false,
+  "sha256_manifest_hashes": {
+    "docs/architecture/c5_real_ring_buffer_manifesto.md": "945f308d4d8a7691c1875160300a51d5f0ea8f65d9ae9fb326f702a55e66cd7e",
+    "docs/architecture/README.md": "482a0bb440972e58478520e49b4d84e554b07777ea41c34deae9db3cf373cdd2",
+    "docs/primitives/unified_primitives_architecture_manifest.yaml": "a0c6bfed6f2464276f0c29a3743c16ddd149f042bb211b855b00ac68ccc4467a",
+    "docs/primitives/swarm_centuria_matrix.yaml": "daa4bfdf216a0e8e49e63b37595153de4505e94f5443c4f4f5be0e9e77a5ee0c",
+    "docs/primitives/vibe_code_ide_architecture.yaml": "b7613ad95de5ea627522b3e2adc86e5070078027188a3fd8206207d9c364b29e",
+    "docs/ontology/unified_isomorfismos_master_matrix.yaml": "bc605cb2277571ef2b09de92976a1287ae917654c15d94e49dded4b86e3a6816",
+    "docs/ontology/11_knowledge_fabric_kernel_axioms.yaml": "3872d4eba6e4bf57338e8704829d6054cd1db568f14e938adc3cca96cf9f56cd",
+    "docs/axioms/axiom_teff_transition.md": "744578b05e61f2fa7f8048ec8674b9ab52fbdeaa8d5796e9decf43ba777e936a",
+    "docs/axioms/semantics/nomenclator.md": "72455361f10befb9f5e12af394b9524ce340363faf5551aecc9518a7961bf243",
+    "docs/epistemology/iteracion_cron_hibrido_c5.md": "04caaf62b50d8e413b26c8c088aaa5b527818ddf6c459cabb9feb10cbe3c1aa1",
+    "docs/gtm/C5_REAL_ENTERPRISE_SLA_CONTRACT.md": "3ecd8b092f957fbb23365138e0094969d6890ca2c3913f3082a0949685c72a94",
+    "docs/gtm/IP_SPECIFICATION_C5_REAL.md": "68931777c8daf36d403c8e9a02444fe33df2eddb892d613bef3eea2f49d06cd0",
+    "docs/POPPERIAN_FALSIFICATION_CERTIFICATE.json": "5aa22b4279e2cb0d123adc57c206c6ba80ada698aa2bed8a58dc9e427b4ba557"
+  },
+  "certified_by": "C5-REAL Axiomatic Kernel Engine"
+}

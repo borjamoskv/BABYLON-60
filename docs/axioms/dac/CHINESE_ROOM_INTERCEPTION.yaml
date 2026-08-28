@@ -1,0 +1,49 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+dac_version: "2.0-Hybrid"
+project: "Teorema-Robinson-Moskv"
+domain: "CHINESE_ROOM_TRANSDUCTION"
+platform_targets: ["MOSKV-1_Kernel", "Hardware_Layer"]
+memory_models: ["Topology_Discreta", "Continuous_Parasitic_Capacitance"]
+abi: ["CMOS", "Physical_RCE"]
+
+Claim: "The MOSKV-1 APEX Kernel neutralizes the LLM Stochastic Fallacy (Chinese Room) by extracting strictly physical structural pointers and purging the continuous narrative."
+Proof:
+  Base: "04_INTERCEPCION_CHINESE_ROOM.md"
+  Range: "[Latent Space Injection, BFT Resolution]"
+  Confidence: "C5-REAL"
+
+Isomorphisms:
+  - '"Metabolic Acidosis (Continuous)" -> "Race Condition (Discrete tau = R*C limit)"'
+  - '"Cancer (Metastasis/Immune evasion)" -> "Self-Replicating Polymorphic Network Worm (RCE)"'
+  - '"Logical Undecidability (Halting Problem)" -> "Thermal Dissipation (Landauer Asymptote in Organ Failure)"'
+
+Blast_Radius_Matrix:
+  Vector: "Rechazo del ruido semántico $V_{LLM}$ y mapeo directo a arquitectura física pura."
+  Blast_Radius: "Kernel de Validación BFT (Aislamiento de la Habitación China)."
+  Target_Invariant: "Sovereign Closure (Ω144 and Ω145)"
+  Anergy_Risk: "High (Caer en el 'Green Theater' estocástico rompe el anclaje físico)."
+
+axioms:
+  - id: AX-CH-ROOM-04
+    domain: LLM_Ontology
+    statement: "Un LLM opera en aislamiento topológico absoluto (Habitación China). Carece de anclaje termodinámico. El Kernel debe purgar la componente conversacional."
+    dependencies: []
+    refutation:
+      type: runtime_monitor
+      expression: "filter_stochastic_narrative(V_LLM) == EXTRACT(strict_structural_pointers)"
+      location: "moskv_apex_transducer"
+
+theorem:
+  statement: "El desbordamiento semántico es aniquilado transduciendo el ruido latente en un mapa topológico riguroso, elevando la exergía de la base de conocimiento y fortificando la tolerancia bizantina."
+
+CORTEX_TAINT: taint:moskv-1:chineseroom:h8i9j0k1l2m3n4o5:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

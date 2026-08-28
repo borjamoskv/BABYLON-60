@@ -1,0 +1,43 @@
+{
+  "attestation_digest_sha3_256": "71f197378fb0cfeb460036abbefa7e2db32c19d67a2e2c16d6835bd17c4dcc49",
+  "core": {
+    "commit": "a3161b0b21d0c85cee53314b0c155f334dab9c46",
+    "gates": {
+      "bandit": {
+        "report": "bandit.json",
+        "status": "NOT_RUN"
+      },
+      "coverage": {
+        "report": "coverage.xml",
+        "status": "NOT_RUN"
+      },
+      "pip_audit": {
+        "report": "pip-audit.json",
+        "status": "NOT_RUN"
+      },
+      "trufflehog": {
+        "report": "trufflehog.json",
+        "status": "NOT_RUN"
+      }
+    },
+    "parents": [
+      "62116022546788d7aff6f5dad50be9c3f11dca0f"
+    ],
+    "schema": "moskv.devsecops.attestation/v1",
+    "source_digest_sha3_256": "ec11c7e989a16050cf6fbe09125bb2bb2e1bdc49017065a6c8f7b08bb3761fb6",
+    "tree": "dcb957b6ed198e72aa21b044f89d3a2986475f5a",
+    "worktree_clean": true
+  },
+  "witness": {
+    "anchor": {
+      "data": "",
+      "ots": "",
+      "status": "DISABLED"
+    },
+    "attested_at_utc": "2026-08-03T22:48:33.403161+00:00",
+    "ci_run": "",
+    "ci_workflow": "",
+    "ledger_uuid": "5ff33529-deb7-52e4-8472-107262b806c2",
+    "remote": "git@github.com:borjamoskv/Teorema-Robinson-Moskv.git"
+  }
+}

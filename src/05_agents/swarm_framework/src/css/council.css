@@ -1,0 +1,419 @@
+/* C5-REAL EXERGY CERTIFIED */
+/* ═══════════════════════════════════════════════════════════
+   Sovereign Council — 9-Node CORTEX Swarm Visualization
+   Industrial Noir 2026
+   ═══════════════════════════════════════════════════════════ */
+
+.section-council {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--void) 0%, #08081A 50%, var(--void) 100%);
+  padding: var(--space-3xl) var(--space-md);
+}
+
+/* ── Background Mesh ── */
+.council-bg-mesh {
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.council-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.council-svg line {
+  stroke: var(--accent);
+  stroke-width: 0.5;
+  opacity: 0.3;
+  transition: opacity 0.6s ease;
+}
+
+.council-svg circle {
+  fill: var(--accent-bright);
+  transition: r 0.3s ease;
+}
+
+/* ── Section Tag Override ── */
+.council-tag {
+  color: var(--accent-bright);
+  border-color: var(--accent);
+  background: var(--accent-subtle);
+  letter-spacing: 0.15em;
+  animation: council-tag-pulse 3s ease-in-out infinite;
+}
+
+@keyframes council-tag-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
+  50% { box-shadow: 0 0 16px 4px var(--accent-glow); }
+}
+
+/* ── Arena Layout ── */
+.council-arena {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  margin-top: var(--space-xl);
+  align-items: start;
+}
+
+/* ── Agent Grid ── */
+.council-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+/* ── Agent Card ── */
+.agent-card,
+.council-agent {
+  position: relative;
+  background: rgba(10, 10, 20, 0.85);
+  border: 1px solid var(--void-border);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1rem 0.9rem;
+  text-align: center;
+  cursor: default;
+  transition: all var(--duration-normal) var(--ease-out);
+  overflow: hidden;
+}
+
+.agent-card::before,
+.council-agent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.agent-card:hover::before,
+.council-agent:hover::before {
+  transform: scaleX(1);
+}
+
+.agent-card:hover,
+.council-agent:hover {
+  border-color: var(--accent);
+  background: var(--void-surface);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(43, 59, 229, 0.15);
+}
+
+.agent-card.active,
+.council-agent.active {
+  border-color: var(--accent-bright);
+  box-shadow: 0 0 24px rgba(43, 59, 229, 0.12);
+}
+
+.agent-card.active::before,
+.council-agent.active::before {
+  transform: scaleX(1);
+}
+
+.council-grid .agent-card.speaking {
+  border-color: rgba(43, 59, 229, 0.9);
+  box-shadow: 0 0 32px rgba(43, 59, 229, 0.3);
+  animation: card-pulse 1.4s ease-in-out;
+}
+
+@keyframes card-pulse {
+  0%, 100% { box-shadow: 0 0 32px rgba(43, 59, 229, 0.3); }
+  50% { box-shadow: 0 0 56px rgba(43, 59, 229, 0.6); }
+}
+
+/* ── Card internals ── */
+.agent-card-top {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.55rem;
+}
+
+.agent-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  flex-shrink: 0;
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+.agent-name {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+
+.agent-role {
+  font-size: 0.6rem;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.1rem;
+}
+
+/* ── Status indicator ── */
+.agent-status,
+.agent-status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ADE80;
+  box-shadow: 0 0 6px rgba(74, 222, 128, 0.5);
+  animation: status-blink 2s ease-in-out infinite;
+}
+
+.agent-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+@keyframes status-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.agent-ping {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Mini telemetry bar ── */
+.agent-bar {
+  margin-top: 0.55rem;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.agent-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+  border-radius: 2px;
+  transition: width 1.2s ease;
+}
+
+/* ── Agent law badge ── */
+.agent-law {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.7rem;
+  font-size: 0.55rem;
+  font-family: var(--font-mono);
+  color: rgba(43, 59, 229, 0.7);
+  letter-spacing: 0.05em;
+}
+
+/* ── Mission Terminal ── */
+.council-terminal {
+  background: var(--void-card);
+  border: 1px solid var(--void-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 380px;
+  max-height: 480px;
+}
+
+.council-log {
+  flex: 1;
+  padding: var(--space-md);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  max-height: 360px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(43, 59, 229, 0.3) transparent;
+}
+
+.council-log::-webkit-scrollbar { width: 4px; }
+.council-log::-webkit-scrollbar-track { background: transparent; }
+.council-log::-webkit-scrollbar-thumb { background: rgba(43, 59, 229, 0.3); border-radius: 2px; }
+
+.council-log .log-entry,
+.log-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(4px);
+  animation: log-appear 0.3s ease forwards;
+}
+
+@keyframes log-appear {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.log-entry .log-time,
+.log-ts {
+  color: var(--text-tertiary);
+  margin-right: var(--space-sm);
+}
+
+.log-entry .log-agent,
+.log-agent {
+  color: var(--accent-bright);
+  font-weight: 600;
+  margin-right: 0.3em;
+}
+
+.log-entry .log-action { color: var(--text-primary); }
+.log-entry.log-success .log-action,
+.log-msg-ok { color: #4ADE80; }
+.log-entry.log-warning .log-action,
+.log-msg-warn { color: var(--high); }
+.log-entry.log-critical .log-action,
+.log-msg-strike { color: var(--critical); }
+.log-msg-info { color: rgba(255, 255, 255, 0.6); }
+
+/* ── Prompt ── */
+.council-prompt {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-top: 1px solid var(--void-border);
+  background: var(--void-elevated);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.prompt-prefix { color: var(--accent-bright); }
+
+.prompt-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  background: var(--accent-bright);
+  border-radius: 1px;
+  animation: blink-cursor 1s step-end infinite;
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ── Live Badge ── */
+.council-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.6rem;
+  color: #4ADE80;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-left: var(--space-sm);
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  border-radius: 20px;
+  padding: 0.05em 0.5em;
+  font-family: var(--font-mono);
+}
+
+/* ── Metrics Bar ── */
+.council-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-top: var(--space-xl);
+  border: 1px solid var(--void-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--void-card);
+}
+
+.council-metric {
+  flex: 1;
+  min-width: 140px;
+  padding: 1rem 1.4rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.council-metric:last-child { border-right: none; }
+
+.metric-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+
+.metric-value {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+}
+
+.text-green { color: #4ADE80; }
+
+/* ── SVG connection lines ── */
+.council-connection {
+  stroke: rgba(43, 59, 229, 0.25);
+  stroke-width: 1;
+  fill: none;
+  animation: conn-pulse 3s ease-in-out infinite;
+}
+
+@keyframes conn-pulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.6; }
+}
+
+.council-node-dot {
+  fill: rgba(43, 59, 229, 0.6);
+  animation: node-glow 2.5s ease-in-out infinite;
+}
+
+@keyframes node-glow {
+  0%, 100% { r: 3; opacity: 0.6; }
+  50% { r: 5; opacity: 1; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .council-arena { grid-template-columns: 1fr; }
+  .council-log { max-height: 240px; }
+}
+
+@media (max-width: 768px) {
+  .council-grid { grid-template-columns: repeat(3, 1fr); gap: var(--space-sm); }
+  .council-agent,
+  .agent-card { padding: var(--space-md); }
+  .agent-name { font-size: 0.65rem; }
+  .council-metrics { gap: var(--space-lg); }
+}
+
+@media (max-width: 480px) {
+  .council-grid { grid-template-columns: repeat(3, 1fr); gap: var(--space-xs); }
+  .council-agent,
+  .agent-card { padding: var(--space-sm); }
+  .agent-icon { font-size: 1.2rem; }
+  .agent-name { font-size: 0.6rem; }
+  .agent-role { font-size: 0.55rem; }
+  .council-metrics { flex-direction: column; align-items: center; }
+}

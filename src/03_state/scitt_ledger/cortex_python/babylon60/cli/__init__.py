@@ -1,0 +1,2 @@
+# C5-REAL EXERGY CERTIFIED
+"""CORTEX C5-REAL CLI Registry Package."""

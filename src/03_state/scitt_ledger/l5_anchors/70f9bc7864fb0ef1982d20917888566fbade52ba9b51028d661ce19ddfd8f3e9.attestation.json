@@ -1,0 +1,43 @@
+{
+  "attestation_digest_sha3_256": "70f9bc7864fb0ef1982d20917888566fbade52ba9b51028d661ce19ddfd8f3e9",
+  "core": {
+    "commit": "196cca426af4808f90990348e2651273a6c38ecb",
+    "gates": {
+      "bandit": {
+        "report": "bandit.json",
+        "status": "NOT_RUN"
+      },
+      "coverage": {
+        "report": "coverage.xml",
+        "status": "NOT_RUN"
+      },
+      "pip_audit": {
+        "report": "pip-audit.json",
+        "status": "NOT_RUN"
+      },
+      "trufflehog": {
+        "report": "trufflehog.json",
+        "status": "NOT_RUN"
+      }
+    },
+    "parents": [
+      "38b012a6c23b47a12c71ec5ec3d734ad9833eaef"
+    ],
+    "schema": "moskv.devsecops.attestation/v1",
+    "source_digest_sha3_256": "79e16949d5d6969f8217abb2a2c8488b5a69ce90c6316ac9fcabf7477e0845c0",
+    "tree": "8fc4aed6b26e0ac89599d9c214698084c661ac73",
+    "worktree_clean": true
+  },
+  "witness": {
+    "anchor": {
+      "data": "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-persist/l5_anchors/70f9bc7864fb0ef1982d20917888566fbade52ba9b51028d661ce19ddfd8f3e9.digest",
+      "ots": "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/1_Operaciones_Activas/02_CORTEX_ENGINE/cortex-persist/l5_anchors/70f9bc7864fb0ef1982d20917888566fbade52ba9b51028d661ce19ddfd8f3e9.digest.ots",
+      "status": "DEFERRED"
+    },
+    "attested_at_utc": "2026-08-02T01:07:24.045464+00:00",
+    "ci_run": "",
+    "ci_workflow": "",
+    "ledger_uuid": "6a3d12d0-9186-5fbe-9923-cd3a0aa8dd6f",
+    "remote": "git@github.com:borjamoskv/Teorema-Robinson-Moskv.git"
+  }
+}

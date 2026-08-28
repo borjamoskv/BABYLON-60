@@ -1,0 +1,62 @@
+[
+  {
+    "id": "legacy-wiki/SONIC_ARCHIVE",
+    "source": "legacy-wiki",
+    "path": "/docs_nexus/legacy-wiki/SONIC_ARCHIVE.md",
+    "name": "SONIC_ARCHIVE"
+  },
+  {
+    "id": "legacy-wiki/README",
+    "source": "legacy-wiki",
+    "path": "/docs_nexus/legacy-wiki/README.md",
+    "name": "README"
+  },
+  {
+    "id": "legacy-cortex-docs/README",
+    "source": "legacy-cortex-docs",
+    "path": "/docs_nexus/legacy-cortex-docs/README.md",
+    "name": "README"
+  },
+  {
+    "id": "legacy-cortex-docs/docs/TECHNICAL_SPEC",
+    "source": "legacy-cortex-docs",
+    "path": "/docs_nexus/legacy-cortex-docs/docs/TECHNICAL_SPEC.md",
+    "name": "TECHNICAL_SPEC"
+  },
+  {
+    "id": "legacy-cortex-docs/src/content/docs/guides/example",
+    "source": "legacy-cortex-docs",
+    "path": "/docs_nexus/legacy-cortex-docs/src/content/docs/guides/example.md",
+    "name": "example"
+  },
+  {
+    "id": "legacy-cortex-docs/src/content/docs/guides/saga",
+    "source": "legacy-cortex-docs",
+    "path": "/docs_nexus/legacy-cortex-docs/src/content/docs/guides/saga.md",
+    "name": "saga"
+  },
+  {
+    "id": "legacy-cortex-docs/src/content/docs/reference/axioms",
+    "source": "legacy-cortex-docs",
+    "path": "/docs_nexus/legacy-cortex-docs/src/content/docs/reference/axioms.md",
+    "name": "axioms"
+  },
+  {
+    "id": "legacy-cortex-docs/src/content/docs/reference/example",
+    "source": "legacy-cortex-docs",
+    "path": "/docs_nexus/legacy-cortex-docs/src/content/docs/reference/example.md",
+    "name": "example"
+  },
+  {
+    "id": "legacy-cortex-docs/src/content/docs/reference/security",
+    "source": "legacy-cortex-docs",
+    "path": "/docs_nexus/legacy-cortex-docs/src/content/docs/reference/security.md",
+    "name": "security"
+  },
+  {
+    "id": "legacy-cortex-docs/src/content/docs/index",
+    "source": "legacy-cortex-docs",
+    "path": "/docs_nexus/legacy-cortex-docs/src/content/docs/index.mdx",
+    "name": "index"
+  }
+]

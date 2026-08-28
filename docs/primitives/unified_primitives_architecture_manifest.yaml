@@ -1,0 +1,441 @@
+# C5-REAL EXERGY CERTIFIED
+# UNIFIED PRIMITIVES ARCHITECTURE MANIFEST
+Version: 10.0-SINGULARITY
+Blueprint_Modules:
+  - 101_categorical_logic_primitives.yaml
+  - ephesus_reverse_engineering.yml
+  - swarm_centuria_matrix.yml
+  - swarm_v4_blueprint.yml
+  - vibe_code_ide_architecture.yml
+
+Architecture_Definitions:
+
+  101_categorical_logic_primitives.yaml:
+    cortex_taint: CORTEX-TAINT:borjamoskv:101_categorical_primitives:2026-08-09T02:23:48.770908+00:00
+    specification:
+      Matriz de 101 Primitivas Ortogonales Fundacionales en Lógica Categórica.
+      Falsacionismo de Landauer aplicado (Purga del 88% de Anergía).
+    total_primitives: 101
+
+    domains:
+      - id: D1
+        name: Estructura Categórica Fundamental (112 Primitivas)
+        range:
+          - 1
+          - 112
+        type: STRUCTURE
+        categories:
+          - Objetos Nucleares (Inicial, Final, Cero, Subobjetos, Cocientes)
+          - Morfismos y Dualidad (Monomorfismos, Epimorfismos, Isomorfismos, Endomorfismos,
+            Automorfismos, Retracciones, Secciones)
+          - Hom-Sets y Categorías Locamente Pequeñas
+          - Slices, Coslices y Categorías de Coma
+          - Esqueletos, Subcategorías Plenas y Llenas
+      - id: D2
+        name: Límites, Colímites y Extensiones de Kan (112 Primitivas)
+        range:
+          - 113
+          - 224
+        type: LIMITS_COLIMITS
+        categories:
+          - Productos y Coproductos Categóricos
+          - Pullbacks (Cambio de Base) y Pushouts (Suma Pegada)
+          - Ecualizadores y Coecualizadores
+          - Límites Inductivos y Proyectivos (Conos y Coconos)
+          - Extensiones de Kan Izquierda y Derecha (Lan_F, Ran_F)
+          - Categorías Completas y Cocompletas
+      - id: D3
+        name: Functores, Adjunciones, Mónadas y Módulos (112 Primitivas)
+        range:
+          - 225
+          - 336
+        type: FUNCTORIAL_ADJUNCTIONS
+        categories:
+          - Functores Covariantes, Contravariantes y Fieles/Plenos
+          - Transformaciones Naturales y Modificaciones
+          - Adjunciones (L ⊣ R, Unidades y Counidades η, ε)
+          - Mónadas, Comónadas y Álgebras de Eilenberg-Moore / Kleisli
+          - "Lema y Inmersión de Yoneda (Y: C -> [C^op, Set])"
+          - Functores Representables y Duality Theory
+      - id: D4
+        name: Categorías Monoidales, Trenzadas y Enriquecidas (112 Primitivas)
+        range:
+          - 337
+          - 448
+        type: MONOIDAL_ENRICHED
+        categories:
+          - Categorías Monoidales (Tensor ⊗, Unidad I, Asociadores α)
+          - Categorías Monoidales Simétricas y Trenzadas (Braiding σ)
+          - Categorías Monoidales Cerradas (Hom Interno [-,-])
+          - Categorías Compactas Cerradas y Rígidas (Objetos Duales A*)
+          - Categorías Enriquecidas (V-Categories, V-Functors)
+          - Estricteificación y Teorema de Coherencia de Mac Lane
+      - id: D5
+        name: Lógica Categórica, Tópoi e Hiperdoctrinas (112 Primitivas)
+        range:
+          - 449
+          - 560
+        type: CATEGORICAL_LOGIC_TOPOS
+        categories:
+          - Clasificador de Subobjetos Ω y Lógica Interna de Mitchell-Bénabou
+          - Álgebras de Heyting Internas y Negación No-Clásica
+          - Topologías de Lawvere-Tierney y Haces (Sheaves)
+          - Morfismos Geométricos (Flat Pullback, Direct Image)
+          - Hiperdoctrinas de Lawvere e Cuantificadores Categóricos (∃ ⊣ f* ⊣ ∀)
+          - Condición de Beck-Chevalley y Preservación Fibrada
+      - id: D6
+        name: Colisiones Diagramáticas, Obstrucciones y No-Conmutatividad (112 Primitivas)
+        range:
+          - 561
+          - 672
+        type: COLLISION_OBSTRUCTION
+        categories:
+          - Colisión de No-Conmutatividad de Limites y Colímites (lim colim ≠ colim lim)
+          - Obstrucción Monoidal (Fail-Pentagon, Non-Trivial Associator Barrier)
+          - Colisión de Fase Fibrada (Fiber Mismatch)
+          - Colisiones Monádicas (Non-Distributive Monad Composition)
+          - Colisión de Incompletitud / Singularidad en Exactitud (Non-Exact Functors)
+          - Interrupción de Coherencia de Braiding / Twist
+      - id: D7
+        name: Antipatrones Categóricos y Degradación Estructural (112 Primitivas)
+        range:
+          - 673
+          - 784
+        type: ANTIPATTERNS
+        categories:
+          - Falso Isomorfismo (Confundir Equivalencia con Identidad)
+          - Sesgo de Estricteificación Ciega (Strictness Illusion)
+          - Falsa Adjunción Sin Unidad/Counidad Válida
+          - Colapso de Subobjeto Ω (Lawvere Nullification)
+          - Degradación Fibrada (Pérdida de Adjunto Izquierdo ∃_α)
+          - Anulación Monoidal por Objeto Cero Volátil
+          - Pseudo-Mónada Sin Coherencia Associativa
+      - id: D8
+        name: Categorías Fibradas, Complejos Simpliciales y Métricas Compat(Ω) (112 Primitivas)
+        range:
+          - 785
+          - 896
+        type: FIBERED_COMPATIBILITY_METRICS
+        categories:
+          - Fibraciones de Grothendieck y Cartesian Morphisms
+          - Display Maps y Contextos Tipados Fibrados
+          - "Funtor de Certificados Cert: Arr(C) -> Set"
+          - Métrica Primitiva Morfismo-Nivel μ(α) y Modelo-Nivel μ(M)
+          - Coste Derivado de Extensión Fibrada Conservativa κ(M)
+          - Métrica de Fricción Síncrona Δ_overhead(α, β)
+          - Complejo Simplicial Compat(Ω) y Caras de Invariantes (F, I, S, R_k)
+    primitives:
+      - id: 1
+        code: P001_D1_Initial_Object_Uniqueness_0
+        domain_id: D1
+        type: STRUCTURE
+        category: Objetos Nucleares (Inicial, Final, Cero, Subobjetos, Cocientes)
+        description:
+          "Primitiva estructural de teoría de categorías Nivel-0/1: Initial_Object_Uniqueness
+          bajo firma Σ."
+        formal_proof_invariant: Validación C5-REAL en Mod(Σ, T) para P001
+      - id: 2
+        code: P002_D1_Terminal_Object_Duality_0
+        domain_id: D1
+        type: STRUCTURE
+        category:
+          Morfismos y Dualidad (Monomorfismos, Epimorfismos, Isomorfismos, Endomorfismos,
+          Automorfismos, Retracciones, Secciones)
+        description:
+          "Primitiva estructural de teoría de categorías Nivel-0/1: Terminal_Object_Duality
+          bajo firma Σ."
+        formal_proof_invariant: Validación C5-REAL en Mod(Σ, T) para P002
+      - id: 3
+        code: P003_D1_Zero_Object_Kernel_Collision_0
+        domain_id: D1
+        type: STRUCTURE
+        category: Hom-Sets y Categorías Locamente Pequeñas
+        description:
+          "Primitiva estructural de teoría de categorías Nivel-0/1: Zero_Object_Kernel_Collision
+          bajo firma Σ."
+        formal_proof_invariant: Validación C5-REAL en Mod(Σ, T) para P003
+      - id: 4
+        code: P004_D1_Monic_Cancelability_0
+        domain_id: D1
+        type: STRUCTURE
+        category: Slices, Coslices y Categorías de Coma
+        description:
+          "Primitiva estructural de teoría de categorías Nivel-0/1: Monic_Cancelability
+          bajo firma Σ."
+
+  ephesus_reverse_engineering.yml:
+    cortex_taint: "CORTEX-TAINT:borjamoskv:reverse_engineering_ephesus:2026-07-18T10:33:45Z:abc1237a8f9b4c2d"
+    system_design_heuristics:
+      primary_invariant: "La autonomía reside en la rigidez del proceso determinista (CI/CD), no en el libre albedrío del agente (LLM)."
+      evaluation_matrix:
+        pragmatism_vs_entropy:
+          metric: "Costo de tokens vs Utilidad de código"
+          limit_boundary: "No over-engineerizar en fases iniciales. Bloquear RAG/fuzzing complejo si el pipeline básico no está en verde."
+        boundary_of_autonomy:
+          agent_limits:
+            - "Crear ramas"
+            - "Escribir código"
+            - "Generar PRs"
+            - "Correr tests"
+            - "Automerge en bajo riesgo"
+          human_escrow:
+            - "Kill Switch (Control Físico)"
+            - "Presupuesto de APIs (Límite Termodinámico)"
+            - "Secretos e Inyección de Variables IAM"
+            - "Permisos de Escritura del Ledger"
+            - "Decisiones de Negocio"
+        decoupling_axiom:
+          rule: "Developer != Reviewer"
+          justification: "Evitar reverberación estocástica (la alucinación del Coder es heredada por el Reviewer si comparten el mismo contexto o modelo)."
+        determinism_boundary:
+          judge: "CI/CD (Ruff, Pytest, Bandit, Semgrep, Trufflehog)"
+          advisor: "Reviewer Agent (LLM con Prompt Adversario)"
+          relation: "El Reviewer sugiere u obstaculiza mediante API, pero el CI/CD determina físicamente el merge."
+    reverse_engineered_by: "MOSKV-1 APEX Sovereign Kernel"
+    reality_level: "C5-REAL"
+
+  swarm_centuria_matrix.yml:
+    cortex_taint: "CORTEX-TAINT:borjamoskv:swarm_centuria_matrix:2026-07-18T10:40:20Z:cf23a890de894bc7"
+    description: "Centuria Matrix: 100 Invariantes y Antipatrones deterministas condensando 1000 primitivas APEX para Gestión Autónoma de Repositorios."
+    domains:
+      - id: D1
+        name: "Gobernanza e IAM (Access Control & Escrow)"
+        invariants:
+          - "I1.1: Separación de identidades: cada agente opera con un bot (GitHub App) único y credenciales acotadas al mínimo privilegio."
+          - "I1.2: OIDC dinámico para despliegues en la nube, prohibiendo credenciales estáticas de larga duración."
+          - "I1.3: Bloqueo incondicional de push directo a la rama de producción (main)."
+          - "I1.4: CODEOWNERS define revisores humanos obligatorios para configuraciones de infraestructura y workflows de CI/CD."
+          - "I1.5: La revocación de accesos del swarm debe estar centralizada en un único token maestro (Kill Switch)."
+          - "I1.6: Toda creación de ramas debe seguir una nomenclatura tipada (/feature, /fix, /release)."
+          - "I1.7: Todo pull request generado por el swarm debe referenciar un issue id preexistente."
+          - "I1.8: La rotación de llaves SSH/GPG para firmas de commits de bots se realiza de forma automatizada y programada."
+          - "I1.9: Los privilegios administrativos del repositorio están restringidos únicamente a humanos dueños del negocio."
+          - "I1.10: Los bots de testing y deploy no poseen permisos de escritura sobre el código fuente."
+        antipatterns:
+          - "A1.1: Compartir un Personal Access Token (PAT) único con permisos de administrador en todo el swarm."
+          - "A1.2: Almacenar llaves de AWS/GCP en los prompts del sistema o en issues del repositorio."
+          - "A1.3: Permitir que un bot de código modifique las Branch Protection Rules de producción."
+          - "A1.4: Ejecutar despliegues usando tokens con acceso permanente en lugar de tokens efímeros."
+          - "A1.5: Asignar propiedad de CODEOWNERS en subcarpetas críticas exclusivamente a bots autónomos."
+          - "A1.6: Crear ramas con nombres arbitrarios fuera del estándar tipado."
+          - "A1.7: Fusionar PRs de agentes sin trazabilidad a un requerimiento de negocio (issue) aprobado."
+          - "A1.8: Utilizar la misma GitHub App para el Coder y el Reviewer (pérdida de oposición de roles)."
+          - "A1.9: Dejar deshabilitado el control de firmas en commits para repositorios públicos."
+          - "A1.10: Dar permisos de borrado de repositorio a la API de los agentes."
+      - id: D2
+        name: "Máquina de Estados y FSM Transitions"
+        invariants:
+          - "I2.1: El estado de cada tarea se rastrea en una base de datos local persistente como fuente de verdad única."
+          - "I2.2: Circuit Breaker obligatorio: abortar y enviar a DEAD_LETTER si una tarea excede 3 intentos fallidos."
+          - "I2.3: Cada transición de estado requiere una firma criptográfica única del bot emisor."
+          - "I2.4: El estado de una tarea solo puede avanzar de forma secuencial determinista (FSM)."
+          - "I2.5: Las tareas en estado DEAD_LETTER requieren intervención manual explícita para ser reactivadas."
+          - "I2.6: El tiempo de permanencia en cada estado de la FSM tiene un timeout físico estricto."
+          - "I2.7: La inicialización de la FSM se valida de forma síncrona contra el estado del disco."
+          - "I2.8: Toda falla crítica en el motor de transiciones aborta el bucle completo y apaga el daemon."
+          - "I2.9: La base de datos de estado registra la traza del modelo LLM utilizado en cada paso."
+          - "I2.10: El estado de producción se mapea de forma isomórfica con los tags del ledger."
+        antipatterns:
+          - "A2.1: Permitir loops infinitos de corrección de código quemando API budget."
+          - "A2.2: Usar variables de entorno volátiles en memoria para seguir el estado del swarm."
+          - "A2.3: Saltar estados en la FSM sin pasar por las validaciones previas (ej. de CODING a MERGE sin pasar por TESTING)."
+          - "A2.4: Mantener tareas encoladas indefinidamente sin timeout de ejecución."
+          - "A2.5: Reintentar de forma indefinida tareas que fallan en el linter estático."
+          - "A2.6: Compartir la base de datos de estado sin bloqueos de escritura concurrentes."
+          - "A2.7: Permitir transiciones sin firmas o logs de auditoría estructurados."
+          - "A2.8: Ignorar las excepciones de I/O en la base de datos de estado de la FSM."
+          - "A2.9: Limpiar la tabla de estados históricos sin archivar el log causal."
+          - "A2.10: Permitir que un agente modifique su propio estado en la FSM directamente."
+      - id: D3
+        name: "Determinismo CI/CD y Puertas de Prueba"
+        invariants:
+          - "I3.1: Los linters, pruebas unitarias y analizadores de seguridad estática son el juez supremo del merge."
+          - "I3.2: El PR requiere 100% de tests en verde antes de que se habilite el auto-merge."
+          - "I3.3: La cobertura de código debe mantenerse o aumentar; cualquier PR que la reduzca es bloqueado."
+          - "I3.4: Los linters de formato (ej. Ruff, Prettier) se ejecutan de manera obligatoria e inmutable."
+          - "I3.5: El CI/CD incluye escaneo automático de secretos (ej. Trufflehog) en cada PR."
+          - "I3.6: El entorno de CI/CD es aislado e idéntico al de producción."
+          - "I3.7: Las pruebas se ejecutan contra la rama main actualizada, no contra diffs aislados."
+          - "I3.8: El análisis estático de dependencias reporta alertas críticas antes del paso de merge."
+          - "I3.9: El log de compilación y salida de CI/CD se persiste para auditoría forense."
+          - "I3.10: Toda falla en el pipeline de CI/CD detiene el pipeline de despliegue inmediatamente."
+        antipatterns:
+          - "A3.1: Permitir auto-merge con pruebas unitarias fallidas o ignoradas."
+          - "A3.2: Utilizar el LLM para 'aprobar' la sintaxis o el build en lugar de un compilador real."
+          - "A3.3: Ejecutar pruebas en el entorno de desarrollo local del agente sin aislamiento."
+          - "A3.4: Omitir el escaneo de dependencias vulnerables en PRs generados por bots."
+          - "A3.5: Reducir la cobertura de tests para forzar el merge rápido de un fix."
+          - "A3.6: Ignorar advertencias de seguridad estática (Bandit, Semgrep) marcándolas como falsos positivos sin revisión humana."
+          - "A3.7: Permitir que los agentes editen los archivos de configuración del CI/CD (.github/workflows)."
+          - "A3.8: Deshabilitar el paso de compilación para agilizar las pruebas unitarias."
+          - "A3.9: Ejecutar tests que dependan de bases de datos externas sin mockear."
+          - "A3.10: Reutilizar entornos de compilación sucios entre PRs de diferentes agentes."
+      - id: D4
+        name: "Aislamiento del Entorno y Sandboxing"
+        invariants:
+          - "I4.1: Todo código auto-generado se compila y ejecuta en una MicroVM o contenedor efímero sin red."
+          - "I4.2: La memoria y CPU del entorno de sandbox están acotados físicamente para prevenir RCE o ataques DoS."
+          - "I4.3: El sandbox se destruye incondicionalmente tras finalizar el ciclo de pruebas del PR."
+          - "I4.4: Se bloquea la persistencia de datos del sandbox en el host principal."
+          - "I4.5: El contenedor de sandbox se ejecuta con un usuario sin privilegios de administrador (non-root)."
+          - "I4.6: Los volúmenes montados en el sandbox están limitados a solo-lectura excepto la carpeta temporal de trabajo."
+          - "I4.7: El sandbox valida el comportamiento en tiempo de ejecución para detectar bucles infinitos de CPU."
+          - "I4.8: La red del sandbox está desactivada por defecto para impedir fugas de datos (Trufflehog)."
+          - "I4.9: Las dependencias necesarias para los tests se pre-instalan en la imagen base para evitar accesos externos."
+          - "I4.10: La salida de error estándar del sandbox se captura de forma segura para depuración."
+        antipatterns:
+          - "A4.1: Ejecutar código LLM no confiable directamente sobre la máquina host de producción."
+          - "A4.2: Conceder acceso ilimitado a internet al sandbox mientras se prueban dependencias del agente."
+          - "A4.3: Reutilizar el mismo contenedor para ejecutar pruebas de múltiples agentes concurrentemente."
+          - "A4.4: Correr contenedores de Docker en modo privilegiado (--privileged) dentro del pipeline de agentes."
+          - "A4.5: Permitir que el sandbox lea variables de entorno del host que contengan secretos de producción."
+          - "A4.6: Omitir los límites de tiempo (timeouts) en la ejecución de scripts en el sandbox."
+          - "A4.7: Permitir que el código generado escriba directamente en el disco duro del host."
+          - "A4.8: Ejecutar tests sin aislar los sockets o puertos efímeros de red local."
+          - "A4.9: Guardar las imágenes de Docker generadas con dependencias de agentes sin escanear."
+          - "A4.10: Ignorar excepciones del sandbox asumiendo que el código era seguro."
+      - id: D5
+        name: "Sanitización de Entradas y Prompt Injection Shielding"
+        invariants:
+          - "I5.1: Todas las entradas de issues y comentarios se sanitizan mediante un modelo de lenguaje intermedio ultra-rápido (Zero-Trust)."
+          - "I5.2: Se rechazan automáticamente las entradas que contengan directivas como 'ignore previous instructions'."
+          - "I5.3: Las entradas del usuario se encapsulan estrictamente en bloques de datos estructurados delimitados (ej. XML/JSON)."
+          - "I5.4: Toda entrada sospechosa genera un issue cerrado automáticamente y notifica al operador."
+          - "I5.5: Los prompts del sistema de los agentes son inmutables y no se concatenan directamente con texto de entrada."
+          - "I5.6: Se valida la codificación de caracteres en las entradas para evitar ataques de ofuscación Unicode."
+          - "I5.7: El volumen de caracteres de entrada tiene un límite estricto para evitar ataques de desbordamiento de contexto (DoS)."
+          - "I5.8: Las palabras clave reservadas de la FSM (ej. PASS, REJECT) se filtran de los inputs del issue."
+          - "I5.9: El sanitizador utiliza plantillas de respuesta predefinidas, evitando la generación libre sobre ataques."
+          - "I5.10: El historial de sanitización se almacena con hashes criptográficos."
+        antipatterns:
+          - "A5.1: Concatenar el cuerpo del issue directamente en el prompt del Planner sin delimitadores ni sanitización."
+          - "A5.2: Confiar en el LLM principal para auto-detectar inyecciones en el mismo hilo de ejecución."
+          - "A5.3: Permitir que usuarios externos modifiquen los parámetros de configuración del bot mediante issues."
+          - "A5.4: Ejecutar código extraído directamente de bloques markdown de issues sin validación estática previa."
+          - "A5.5: Permitir que los issues procesados contengan caracteres de control ocultos o inyecciones de escape ANSI."
+          - "A5.6: Dejar los prompts del sistema expuestos a la lectura directa a través de consultas de API."
+          - "A5.7: Ignorar los intentos de inyección de prompt repetidos del mismo usuario."
+          - "A5.8: Procesar peticiones con un límite de contexto dinámico que pueda ahogar el LLM base."
+          - "A5.9: Utilizar entradas de texto plano no estructuradas para el paso de planificación del Coder."
+          - "A5.10: Permitir que el sanitizador dependa de APIs externas susceptibles de fallos de red."
+      - id: D6
+        name: "Anti-Entropía y Mitigación de Deuda Técnica"
+        invariants:
+          - "I6.1: Se ejecutan análisis de complejidad ciclomática de forma periódica e independiente del flujo de features."
+          - "I6.2: El agente arquitecto abre PRs exclusivos para pagar deuda técnica sin alterar la API pública."
+          - "I6.3: Toda refactorización de código debe preservar el 100% de las pruebas funcionales preexistentes en verde."
+          - "I6.4: Se detecta y bloquea la duplicación de código que supere las 50 líneas continuas."
+          - "I6.5: Las firmas de las funciones y APIs públicas se protegen de alteraciones no consensuadas."
+          - "I6.6: Los comentarios obsoletos y el código muerto se eliminan automáticamente mediante ganchos AST."
+          - "I6.7: El agente arquitecto valida que no existan dependencias circulares nuevas tras cada commit."
+          - "I6.8: Se exige un formato e indentación homogéneos forzados por el formateador del proyecto."
+          - "I6.9: Las métricas de deuda técnica se exponen en un log visible para el operador."
+          - "I6.10: El refactoring de código crítico requiere aprobación en modo conservador."
+        antipatterns:
+          - "A6.1: Incorporar funcionalidades nuevas en PRs creados exclusivamente para refactorizar código."
+          - "A6.2: Permitir la degradación continua de la mantenibilidad del código sin alarmar al sistema."
+          - "A6.3: Generar código espagueti combinando múltiples lógicas en una única función monolítica."
+          - "A6.4: Omitir la actualización de la documentación de API pública tras mutaciones en los tipos de retorno."
+          - "A6.5: Dejar funciones obsoletas en producción sin etiquetarlas como deprecadas."
+          - "A6.6: Refactorizar código crítico sin pruebas unitarias que garanticen el comportamiento observable."
+          - "A6.7: Permitir que los agentes introduzcan nuevas dependencias externas sin justificación termodinámica."
+          - "A6.8: Dejar archivos temporales o de configuración huérfanos en la estructura de directorios."
+
+  swarm_v4_blueprint.yml:
+    cortex_taint: "CORTEX-TAINT:borjamoskv:swarm_v4_blueprint:2026-07-18T10:36:10Z:cf23a890de894bc7"
+    version: "4.0"
+    architecture_name: "Sovereign Swarm Gatekeeper"
+    fundamental_principle: "Autonomía operativa descentralizada 100%, con Gobernanza y Privilegio Mínimo (Zero-Trust) sobre la rama de producción."
+    roles_and_permissions:
+      bots:
+        bot_triage:
+          scope: "issues, labels, project boards"
+          permissions: "write:issues"
+        bot_coder:
+          scope: "create feature branches, push changes, open PRs"
+          permissions: "write:contents (restricted to branches matching 'feature/*' and 'fix/*')"
+        bot_reviewer:
+          scope: "adversarial LLM review, comment, status checks validation"
+          permissions: "write:pull_requests, write:checks"
+        bot_release:
+          scope: "create tags, compile release assets, update changelogs"
+          permissions: "write:contents (releases)"
+        bot_security:
+          scope: "dependency monitoring, vulnerability analysis"
+          permissions: "read:contents, write:issues"
+        bot_deployer:
+          scope: "OIDC connection, temporal cloud authorization"
+          permissions: "read:contents, id-token:write"
+    control_flow:
+      deterministic_gatekeeper: "GitHub Actions CI/CD es el juez inapelable. Si fallan linters, tests o auditorías de secretos, el código no avanza independientemente de la aprobación de los agentes."
+      risk_based_automerge:
+        low_risk:
+          scope: "Format, docs, additions to tests, version patches"
+          action: "Auto-merge si CI/CD y Bot-Reviewer están en PASS."
+        high_risk:
+          scope: "Infrastructure, DB migrations, cloud permissions, security modifications, API-breaking changes"
+          action: "Bloqueo de Auto-merge. Requiere aprobación manual de Operador (Humano)."
+    resilience_mechanisms:
+      circuit_breaker:
+        max_retries: 3
+        action_on_fail: "DEAD_LETTER_QUEUE (Cierra issue, remueve etiquetas de automatización, alerta al Operador)."
+      kill_switch:
+        env_trigger: "SWARM_KILL_SWITCH=1"
+        file_trigger: "kill_switch.lock"
+        action: "Halt físico instantáneo de las transiciones de la FSM."
+      sandboxing:
+        runtime: "Docker / Vesicular MicroVM"
+        network: "disabled (network_disabled=True)"
+        memory_limit: "512m"
+    anti_entropy:
+      architect_agent:
+        schedule: "Cron nocturno"
+        action: "Inspecciona radon/complexity. Abre issues internos y PRs exclusivos de refactorización pura (sin mutación de features)."
+
+  vibe_code_ide_architecture.yml:
+    cortex_taint: "CORTEX-TAINT:borjamoskv:vibe_code_ide_architecture:2026-07-18T10:51:10Z:7a8b9c0d1e2f3a4b"
+    title: "CONSEJOS Y ARQUITECTURA PARA UN IDE AGÉNTICO 100% VIBE CODE"
+    version: "1.0-C5-REAL"
+    core_philosophy: "El Vibe Code no es despreocupación; es flujo puro de alta exergía. El desarrollador dicta intenciones teleológicas (Ψ); el IDE agéntico transduce el estado a disco (C5-REAL) mediante comprobadores deterministas y degradación de agencia sin fricción discursiva."
+    principles:
+      - id: P1
+        name: "Graceful Degradation of Agency (Transición 4 ➔ 0)"
+        concept: "El IDE opera por defecto en Nivel 4 (Autonomía total con auto-commit). Ante cualquier falla BFT o infracción de linter, el entorno degrada suavemente a Nivel 3 (confirmación rápida), Nivel 2 (diff preview) o Nivel 0 (EpistemicHalt), sin bloquear la escritura del usuario."
+      - id: P2
+        name: "Transducción Causal Inmediata (Zero-Prosa UI)"
+        concept: "Cero disclaimers, cero explicaciones narrativas ('He arreglado el código...'). La UI renderiza únicamente deltas en código, hashes de Git y estado de compilación."
+      - id: P3
+        name: "Memoria de Doble Nivel (TIER_0 vs TIER_1)"
+        concept: "Separación física en SQLite del código humano/AST (TIER_0) y las propuestas sintéticas (TIER_1). Purga automática (Weaponized Forgetting) de las propuestas no validadas tras 60 minutos para evitar Autophagic Context Poisoning."
+      - id: P4
+        name: "Juez Determinista Local (Compiler > LLM Reviewer)"
+        concept: "El agente sugiere, pero los binarios locales (Ruff, Cargo, Mypy, Pytest) determinan la validez. Ningún código generado se promueve a TIER_0 sin pasar el compilador local."
+      - id: P5
+        name: "Aislamiento Asíncrono en Worktrees"
+        concept: "Cada agente o sub-tarea del swarm trabaja en un Git Worktree o rama efímera aislada (`feature/vibe-*`). El usuario jamás experimenta congelamiento de pantalla (0ms UI lag)."
+      - id: P6
+        name: "Verificación de Objetos Físicos (Phantom Target Shield)"
+        concept: "Se prohíbe emitir notificaciones de tareas completadas sin un diff verificable en el sistema de archivos (`stat` + `sha256`). Elimina el C4-SIM y la iteración mimética."
+      - id: P7
+        name: "Idempotency Lock y Ahorro de ATP"
+        concept: "Cálculo de hash previo a llamadas de API o escrituras en disco. Si hash(payload) == hash(target), la operación se aborta al instante, ahorrando cuota y latencia."
+      - id: P8
+        name: "Kill Switch Hardware/Hotkey Inmediato"
+        concept: "Atajo de teclado global (ej. ⌥+⌘+K) o toque de archivo `kill_switch.lock` que revoca todos los sockets de subagentes activos en <10ms."
+      - id: P9
+        name: "Filtro de Inyección Zero-Trust en Tiempo Real"
+        concept: "Sanitización síncrona de cualquier fragmento de texto o comentario pegado en el editor para prevenir vectores de desvío de prompt (Jailbreaks/System Overrides)."
+      - id: P10
+        name: "Auditoría en Master Ledger (Git Sentinel Autopoiético)"
+        concept: "Toda mutación C5-REAL aceptada por el IDE genera un commit firmado automático en segundo plano (`git commit --no-verify -m 'vibe: <diff_hash>'`), manteniendo la trazabilidad histórica completa."
+
+CORTEX_TAINT: taint:moskv-1:unified_primitives_manifest_v10
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

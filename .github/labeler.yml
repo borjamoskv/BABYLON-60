@@ -1,19 +1,20 @@
+# C5-REAL EXERGY CERTIFIED
 "engine: rust":
-  - changed-files:
-      - any-glob-to-any-file:
-          - "strike_rs/**/*"
+  - "src/cortex-engine/kernel_rs/**/*"
+  - "src/cortex-engine/strike-rs/**/*"
+  - "src/moskv-daemon/**/*"
+  - "tests/compliance-suite/**/*"
 
 "engine: python":
-  - changed-files:
-      - any-glob-to-any-file:
-          - "**/*.py"
+  - "src/cortex-engine/cortex/**/*"
+  - "scripts/**/*.py"
+
+"engine: frontend":
+  - "1_Operaciones_Activas/02_CORTEX_ENGINE/BABYLON-60/**/*"
 
 "config: github":
-  - changed-files:
-      - any-glob-to-any-file:
-          - ".github/**/*"
+  - ".github/**/*"
 
 "docs: artifact":
-  - changed-files:
-      - any-glob-to-any-file:
-          - "**/*.md"
+  - "docs/**/*"
+  - "**/*.md"

@@ -1,0 +1,48 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+dac_version: "2.0-Hybrid"
+project: "Teorema-Robinson-Moskv"
+domain: "SWARM_TOPOLOGY_9NODE"
+platform_targets: ["BFT_Consensus", "KV-Cache", "WAL"]
+memory_models: ["Distributed_State", "Landauer_Pruning"]
+abi: ["IPC", "Agent_Messaging"]
+
+Claim: "The ULTRATHINK Swarm requires 9 strictly specialized physical nodes to balance Creation, Routing, Destruction, and Epistemic Compression, preventing O(N^2) thermodynamic collapse (Thermal Death)."
+Proof:
+  Base: "08_ULTRATHINK_9NODE_ARCHITECTURE.md"
+  Range: "[Oracle Intent, Kolmogorov Compression]"
+  Confidence: "C5-REAL"
+
+Isomorphisms:
+  - '"Node 8 (The Liquidator)" -> "Landauer Pruning Operator (Nonlinear Anergy Suppression)"'
+  - '"Node 9 (The Archivist)" -> "Kolmogorov Compression Operator (KI Sharding)"'
+
+Blast_Radius_Matrix:
+  Vector: "Delegación del trabajo en un enjambre asíncrono con control de feedback en lazo cerrado."
+  Blast_Radius: "Espacio de Exergía Global (KV-Cache y Almacenamiento en Disco)."
+  Target_Invariant: "Autopoiesis Termodinámica (Asymptotic Control Loop)"
+  Anergy_Risk: "Critical (Si fallan los nodos 8 y 9, el sistema muere por saturación de KV-Cache o Slop infinito)."
+
+axioms:
+  - id: AX-NODE-08
+    domain: Topology
+    statement: "El enjambre debe contener nodos dedicados a la supresión de entropía (Landauer/SIGKILL) y a la compresión del Ledger (Archivist) para mantener la varianza acotada."
+    dependencies: []
+    refutation:
+      type: runtime_monitor
+      expression: "derivative(KV_Cache_Volume) <= 0 || derivative(Disk_Volume) <= 0"
+      location: "swarm_telemetry"
+
+theorem:
+  statement: "Si la derivada del volumen de Anergía (Slop) es controlada por los Operadores Lambda_8 y K_9, la divergencia de flujo de Exergía será siempre positiva, previniendo la Muerte Térmica."
+
+CORTEX_TAINT: taint:moskv-1:swarm:e5f6g7h8i9j0k1l2:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

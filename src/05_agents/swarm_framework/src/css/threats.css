@@ -1,0 +1,113 @@
+/* C5-REAL EXERGY CERTIFIED */
+/* ── Threat Grid ── */
+.threat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+.threat-card {
+  position: relative;
+  padding: var(--space-lg);
+  background: linear-gradient(145deg, var(--void-card), rgba(30, 30, 36, 0.6));
+  border: 1px solid var(--void-border);
+  border-radius: var(--radius-md);
+  transition: all var(--duration-normal) var(--ease-out);
+  overflow: hidden;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.threat-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, transparent 40%, var(--card-accent, var(--accent)) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-out);
+  pointer-events: none;
+}
+
+.threat-card:hover::after { opacity: 1; }
+
+.threat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--card-accent, var(--accent));
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-out);
+}
+
+.threat-card:hover {
+  border-color: var(--void-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.threat-card:hover::before { opacity: 1; }
+
+.threat-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+}
+
+.threat-icon { font-size: 1.5rem; }
+
+.threat-status {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.threat-status.unsolved { color: var(--critical); background: var(--critical-bg); }
+.threat-status.partial { color: var(--high); background: var(--high-bg); }
+
+
+.threat-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.01em; }
+
+/* Short descriptor — bold mid-layer between title and body */
+.threat-card .threat-short-desc {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+/* Full description — secondary copy */
+.threat-card .threat-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 0;
+}
+
+/* Monospace index badge — dim, top-left of header */
+.threat-index {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 0.05em;
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.threat-card-header {
+  gap: var(--space-xs, 6px);
+}

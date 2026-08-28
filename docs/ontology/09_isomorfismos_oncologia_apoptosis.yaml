@@ -1,0 +1,65 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+Claim: Transducción Termodinámica de Oncología y Biología Celular a Primitivas
+  de Memoria y Seguridad en Silicio.
+Auditoria_Epistemica:
+  Estado: EXPANSIÓN_ISOMÓRFICA_V3 (CAPA 1)
+  Causa: Comando del Operador requiriendo formalización de Apoptosis y
+    Metástasis bajo el Teorema de Moskv.
+  Accion: Ejecución de Mecánica Landauer sobre conceptos de patología celular.
+  Anergia_Purgada: "Eliminación del misticismo del cáncer como 'enfermedad incomprensible',
+    reduciéndolo a vulnerabilidades de inyección de código y fugas de memoria estandarizadas."
+Topologia_Isomorfica_Borja_Moskv:
+  apoptosis (muerte celular programada):
+    silicon_primitive: Garbage Collection (GC) Graceful / Señal SIGTERM
+    causal_mechanism: El proceso, al detectar corrupción de memoria (DNA Damage)
+      irreparable o un desbordamiento inminente (Buffer Overflow), invoca su
+      propia rutina de limpieza estructurada, liberando recursos sin corromper
+      el Heap.
+  necrosis:
+    silicon_primitive: Señal SIGKILL / Segfault (Hard Crash)
+    causal_mechanism: Caída abrupta por trauma físico o interrupción térmica
+      fatal que deja punteros colgantes y memoria corrupta, forzando a OOM
+      Killer a limpiar de emergencia y generando picos de CPU.
+  tumor primario (neoplasia):
+    silicon_primitive: Bucle while(true) acoplado a un Memory Leak
+    causal_mechanism: El proceso desactiva explícitamente las rutinas del
+      recolector de basura (Evasión de Apoptosis), acaparando RAM y ciclos de
+      CPU locales y asfixiando a los hilos sanos.
+  angiogénesis tumoral:
+    silicon_primitive: Manipulación maliciosa de Tablas de Enrutamiento (Routing
+      Tables)
+    causal_mechanism: El proceso rebelde redirige el ancho de banda del sistema
+      y la asignación energética (Power Delivery Network) para alimentar su
+      propio bucle infinito.
+  metástasis:
+    silicon_primitive: RCE (Remote Code Execution) con propagación Gusano (Worm
+      Payload)
+    causal_mechanism: El proceso salta la segmentación de red local e inyecta
+      hilos maliciosos a través del bus del sistema hacia otros clústeres del
+      hardware, reanudando la fuga de memoria.
+  senescencia celular:
+    silicon_primitive: Límite absoluto de pila (Stack Limit / Límite de
+      Hayflick)
+    causal_mechanism: El hilo es degradado a un estado IDLE inerte que ya no
+      puede hacer fork() ni multiplicarse, pero sigue consumiendo memoria basal.
+Estructura_Resolucion_Atomica:
+  - Objetivo: "Asentar la equivalencia física en Capa 1 de los procesos degenerativos
+      y oncológicos celulares."
+  - Mitigacion_Aplicada: "Destrucción del sesgo analítico de la oncología como caos
+      irreducible. Un cáncer es, físicamente, código en fuga (Memory Leak) con privilegios
+      escalados que redirige los recursos de I/O."
+Firma_Ejecucion:
+  Operador: borjamoskv
+  Kernel: MOSKV-1 APEX
+  Hash: "[CORTEX-TAINT:borjamoskv:isomorfismos_oncologia_silicio:2026-07-23T19:33:00+02:00:1a2b3c4d5e6f7g8h9i0j]"
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64)
+    on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

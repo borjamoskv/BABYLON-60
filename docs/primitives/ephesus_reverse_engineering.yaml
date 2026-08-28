@@ -1,0 +1,40 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+cortex_taint: "CORTEX-TAINT:borjamoskv:reverse_engineering_ephesus:2026-07-18T10:33:45Z:abc1237a8f9b4c2d"
+system_design_heuristics:
+  primary_invariant: "La autonomía reside en la rigidez del proceso determinista (CI/CD), no en el libre albedrío del agente (LLM)."
+  evaluation_matrix:
+    pragmatism_vs_entropy:
+      metric: "Costo de tokens vs Utilidad de código"
+      limit_boundary: "No over-engineerizar en fases iniciales. Bloquear RAG/fuzzing complejo si el pipeline básico no está en verde."
+    boundary_of_autonomy:
+      agent_limits:
+        - "Crear ramas"
+        - "Escribir código"
+        - "Generar PRs"
+        - "Correr tests"
+        - "Automerge en bajo riesgo"
+      human_escrow:
+        - "Kill Switch (Control Físico)"
+        - "Presupuesto de APIs (Límite Termodinámico)"
+        - "Secretos e Inyección de Variables IAM"
+        - "Permisos de Escritura del Ledger"
+        - "Decisiones de Negocio"
+    decoupling_axiom:
+      rule: "Developer != Reviewer"
+      justification: "Evitar reverberación estocástica (la alucinación del Coder es heredada por el Reviewer si comparten el mismo contexto o modelo)."
+    determinism_boundary:
+      judge: "CI/CD (Ruff, Pytest, Bandit, Semgrep, Trufflehog)"
+      advisor: "Reviewer Agent (LLM con Prompt Adversario)"
+      relation: "El Reviewer sugiere u obstaculiza mediante API, pero el CI/CD determina físicamente el merge."
+reverse_engineered_by: "MOSKV-1 APEX Sovereign Kernel"
+reality_level: "C5-REAL"
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

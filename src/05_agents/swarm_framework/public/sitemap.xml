@@ -1,0 +1,27 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://agents.archi/</loc><lastmod>2026-07-13</lastmod><priority>1.0</priority></url>
+  <url><loc>https://agents.archi/audit/firedancer-funk-01</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/firedancer-vm-sandbox</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/exactly-verified-market</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/exactly-oracle-flashloan</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/exactly-stale-oracle</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/k2-stellar-admin</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/k2-lending-close-factor</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/sky-dust-truncation</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/ssv-fee-dos</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/bitflow-fee-evasion</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/bitflow-zero-share</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/insurace-harvest</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/hatvaults-reentrancy</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/folks-ntt-decimal</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/folks-ntt-rate-limit</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/lz-shadow-exploit</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/lido-v3-quarantine</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/moonwell-voting-drift</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/intuition-rollover</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/gmtrade-race</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/renegade-mpc</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://agents.archi/audit/eigenlayer-slashing-desync</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
+</urlset>

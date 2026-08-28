@@ -1,0 +1,34 @@
+// C5-REAL EXERGY CERTIFIED
+// Política Formal de Optimización Exergética para macOS
+
+// 1. Purga de Cachés de Adobe inactivas > 14 días
+rule PurgeOldAdobeCaches {
+    target = "~/Library/Caches/com.adobe.*"
+    guard  = (age > 14d) && (!is_locked)
+    action = SafeTrash
+    attest = SCITT
+}
+
+// 2. Purga Quirúrgica de Cachés de Electron (preserva Cookies y Logins)
+rule PurgeElectronRenderBloat {
+    target = "~/Library/Application Support/*"
+    guard  = (is_electron_cache) && (age > 14d) && (!is_locked)
+    action = SafeTrash
+    attest = SCITT
+}
+
+// 3. Purga de Compilaciones de Rust y Node en proyectos inactivos > 21 días
+rule PurgeDevBuildArtifacts {
+    target = "~/Developer/*"
+    guard  = (is_dev_artifact) && (age > 21d)
+    action = SafeTrash
+    attest = SCITT
+}
+
+// 4. Inmunidad Absoluta para Claves, Documentos y Bases de Datos
+rule ProtectSensitiveVaults {
+    target = "~/.ssh/*"
+    guard  = true
+    action = Immune
+    attest = SCITT
+}

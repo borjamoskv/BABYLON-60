@@ -1,0 +1,28 @@
+# C5-REAL EXERGY CERTIFIED
+name: Nueva tarea (Agente)
+description: Crear una tarea para el equipo de agentes
+labels: ["triage"]
+body:
+  - type: textarea
+    attributes:
+      label: Objetivo
+      description: ¿Qué se quiere conseguir?
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Criterios de aceptación
+      description: ¿Cómo se valida que está terminado?
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: Riesgo
+      options:
+        - Bajo
+        - Medio
+        - Alto
+    validations:
+      required: true

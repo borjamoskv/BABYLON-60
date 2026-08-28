@@ -1,4 +1,5 @@
-name: Python Tests
+# C5-REAL EXERGY CERTIFIED
+name: Python Tests & Popperian Verification
 
 on:
   push:
@@ -14,24 +15,29 @@ jobs:
         python-version: ["3.11", "3.12"]
 
     steps:
-    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.1.7
-    
+    - uses: actions/checkout@v4
+
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@39cd14951b08e74b54015e9e001cdefcf80e669f # v5.1.1
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
-        
-    - name: Install uv
-      uses: astral-sh/setup-uv@887d942a15f0278a9c2f6d0f98393649e37db754 # v5.1.0 / v7
+
+    - name: Set up Rust toolchain
+      uses: dtolnay/rust-toolchain@stable
 
     - name: Install dependencies
       run: |
-        uv venv
-        uv pip install -e ".[dev]"
-        # Si no hay pyproject.toml con dev dependencies, podemos forzar pytest
-        uv pip install pytest
-        
-    - name: Run tests with pytest
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        pip install pytest
+
+    - name: Build Kernel Workspace
+      run: cargo build --workspace
+
+    - name: Run Popperian Falsification Gate
       run: |
-        source .venv/bin/activate
-        pytest tests/ || echo "No tests found or tests failed, please check."
+        if [ -f scripts/verify_popper_coverage.py ]; then python3 scripts/verify_popper_coverage.py; fi
+
+    - name: Run compliance suite tests
+      run: |
+        if [ -d tests ]; then pytest tests/; fi

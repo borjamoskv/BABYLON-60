@@ -1,0 +1,570 @@
+{
+  "files_analyzed": 140,
+  "circular_dependencies": [],
+  "hotspots": [
+    {
+      "file": "cortex/llm_router.py",
+      "score": 37,
+      "complexity": 33,
+      "fan_in": 2,
+      "fan_out": 0,
+      "loc": 192
+    },
+    {
+      "file": "cortex/swarm/engine_fsm.py",
+      "score": 34,
+      "complexity": 18,
+      "fan_in": 6,
+      "fan_out": 4,
+      "loc": 133
+    },
+    {
+      "file": "cortex/bft_orchestrator.py",
+      "score": 31,
+      "complexity": 28,
+      "fan_in": 1,
+      "fan_out": 1,
+      "loc": 332
+    },
+    {
+      "file": "scripts/10_codegen_engine.py",
+      "score": 31,
+      "complexity": 31,
+      "fan_in": 0,
+      "fan_out": 0,
+      "loc": 395
+    },
+    {
+      "file": "scripts/run_pipeline.py",
+      "score": 31,
+      "complexity": 31,
+      "fan_in": 0,
+      "fan_out": 0,
+      "loc": 229
+    },
+    {
+      "file": "scripts/quantitative_ast_analyzer.py",
+      "score": 30,
+      "complexity": 30,
+      "fan_in": 0,
+      "fan_out": 0,
+      "loc": 224
+    },
+    {
+      "file": "scripts/anergy_ratio.py",
+      "score": 30,
+      "complexity": 30,
+      "fan_in": 0,
+      "fan_out": 0,
+      "loc": 289
+    },
+    {
+      "file": "cortex/mcts_vnode_compiler.py",
+      "score": 28,
+      "complexity": 24,
+      "fan_in": 2,
+      "fan_out": 0,
+      "loc": 307
+    },
+    {
+      "file": "scripts/phase4_runtime_ipc.py",
+      "score": 25,
+      "complexity": 25,
+      "fan_in": 0,
+      "fan_out": 0,
+      "loc": 149
+    },
+    {
+      "file": "cortex/substack_subscriber_audit.py",
+      "score": 23,
+      "complexity": 17,
+      "fan_in": 3,
+      "fan_out": 0,
+      "loc": 246
+    },
+    {
+      "file": "scripts/cortex-omega-purge.py",
+      "score": 23,
+      "complexity": 23,
+      "fan_in": 0,
+      "fan_out": 0,
+      "loc": 157
+    },
+    {
+      "file": "scripts/gemini_pool_manager.py",
+      "score": 23,
+      "complexity": 23,
+      "fan_in": 0,
+      "fan_out": 0,
+      "loc": 245
+    },
+    {
+      "file": "cortex/escohotado_chaos_engine.py",
+      "score": 22,
+      "complexity": 20,
+      "fan_in": 1,
+      "fan_out": 0,
+      "loc": 175
+    },
+    {
+      "file": "scripts/50_audit_loop.py",
+      "score": 22,
+      "complexity": 21,
+      "fan_in": 0,
+      "fan_out": 1,
+      "loc": 223
+    },
+    {
+      "file": "scripts/56_laboratory_validator.py",
+      "score": 22,
+      "complexity": 22,
+      "fan_in": 0,
+      "fan_out": 0,
+      "loc": 171
+    },
+    {
+      "file": "cortex/babylon60/extensions/ide_agent/dual_context.py",
+      "score": 20,
+      "complexity": 20,
+      "fan_in": 0,
+      "fan_out": 0,
+      "loc": 125
+    },
+    {
+      "file": "cortex/swarm/memory_store.py",
+      "score": 19,
+      "complexity": 7,
+      "fan_in": 6,
+      "fan_out": 0,
+      "loc": 147
+    },
+    {
+      "file": "scripts/codegen_utils.py",
+      "score": 19,
+      "complexity": 19,
+      "fan_in": 0,
+      "fan_out": 0,
+      "loc": 690
+    },
+    {
+      "file": "cortex/swarm/architect_agent.py",
+      "score": 18,
+      "complexity": 13,
+      "fan_in": 2,
+      "fan_out": 1,
+      "loc": 113
+    },
+    {
+      "file": "cortex/claude_bridge.py",
+      "score": 17,
+      "complexity": 15,
+      "fan_in": 1,
+      "fan_out": 0,
+      "loc": 128
+    }
+  ],
+  "top_50_complex": [
+    {
+      "file": "cortex/llm_router.py",
+      "complexity": 33
+    },
+    {
+      "file": "scripts/10_codegen_engine.py",
+      "complexity": 31
+    },
+    {
+      "file": "scripts/run_pipeline.py",
+      "complexity": 31
+    },
+    {
+      "file": "scripts/quantitative_ast_analyzer.py",
+      "complexity": 30
+    },
+    {
+      "file": "scripts/anergy_ratio.py",
+      "complexity": 30
+    },
+    {
+      "file": "cortex/bft_orchestrator.py",
+      "complexity": 28
+    },
+    {
+      "file": "scripts/phase4_runtime_ipc.py",
+      "complexity": 25
+    },
+    {
+      "file": "cortex/mcts_vnode_compiler.py",
+      "complexity": 24
+    },
+    {
+      "file": "scripts/cortex-omega-purge.py",
+      "complexity": 23
+    },
+    {
+      "file": "scripts/gemini_pool_manager.py",
+      "complexity": 23
+    },
+    {
+      "file": "scripts/56_laboratory_validator.py",
+      "complexity": 22
+    },
+    {
+      "file": "scripts/50_audit_loop.py",
+      "complexity": 21
+    },
+    {
+      "file": "cortex/escohotado_chaos_engine.py",
+      "complexity": 20
+    },
+    {
+      "file": "cortex/babylon60/extensions/ide_agent/dual_context.py",
+      "complexity": 20
+    },
+    {
+      "file": "scripts/codegen_utils.py",
+      "complexity": 19
+    },
+    {
+      "file": "cortex/swarm/engine_fsm.py",
+      "complexity": 18
+    },
+    {
+      "file": "cortex/substack_subscriber_audit.py",
+      "complexity": 17
+    },
+    {
+      "file": "scripts/55_substack_laboratory_compiler.py",
+      "complexity": 16
+    },
+    {
+      "file": "cortex/claude_bridge.py",
+      "complexity": 15
+    },
+    {
+      "file": "cortex/escohotado_cli.py",
+      "complexity": 15
+    },
+    {
+      "file": "scripts/phase_omega_theorem_prover.py",
+      "complexity": 15
+    },
+    {
+      "file": "scripts/54_tdah_orphan_purge.py",
+      "complexity": 15
+    },
+    {
+      "file": "scripts/16_codegen_primitives.py",
+      "complexity": 15
+    },
+    {
+      "file": "cortex/laboratory/tercer_experimento_c5/03_codigo.py",
+      "complexity": 14
+    },
+    {
+      "file": "scripts/phase3_call_graph.py",
+      "complexity": 14
+    },
+    {
+      "file": "scripts/phase7_state_machine_extractor.py",
+      "complexity": 14
+    },
+    {
+      "file": "fix_mypy.py",
+      "complexity": 13
+    },
+    {
+      "file": "cortex/swarm/architect_agent.py",
+      "complexity": 13
+    },
+    {
+      "file": "scripts/ultrathink_sweep.py",
+      "complexity": 13
+    },
+    {
+      "file": "scripts/52_legion_purge.py",
+      "complexity": 13
+    },
+    {
+      "file": "scripts/43_iter_ultrathink.py",
+      "complexity": 13
+    },
+    {
+      "file": "cortex/github_webhook_daemon.py",
+      "complexity": 12
+    },
+    {
+      "file": "cortex/invariant_sentinel.py",
+      "complexity": 12
+    },
+    {
+      "file": "cortex/substack_publisher_tool.py",
+      "complexity": 12
+    },
+    {
+      "file": "scripts/epistemic_forensics_prober.py",
+      "complexity": 12
+    },
+    {
+      "file": "scripts/51_autoconsolidate.py",
+      "complexity": 12
+    },
+    {
+      "file": "cortex/babylon60/neuromorphic_primitives.py",
+      "complexity": 11
+    },
+    {
+      "file": "scripts/omega_obliteration_purge.py",
+      "complexity": 11
+    },
+    {
+      "file": "scripts/gemini_pool_collector.py",
+      "complexity": 11
+    },
+    {
+      "file": "scripts/20_format_all.py",
+      "complexity": 11
+    },
+    {
+      "file": "scripts/arm64_mem_filter.py",
+      "complexity": 11
+    },
+    {
+      "file": "cortex/active_inference_engine.py",
+      "complexity": 10
+    },
+    {
+      "file": "cortex/vibe_ide_engine.py",
+      "complexity": 10
+    },
+    {
+      "file": "cortex/escohotado_substance_ontology.py",
+      "complexity": 9
+    },
+    {
+      "file": "cortex/swarm/sanitizer.py",
+      "complexity": 9
+    },
+    {
+      "file": "cortex/swarm/cli.py",
+      "complexity": 9
+    },
+    {
+      "file": "scripts/17_codegen_github.py",
+      "complexity": 9
+    },
+    {
+      "file": "scripts/53_centuria_swarm.py",
+      "complexity": 9
+    },
+    {
+      "file": "scripts/generate_math_model.py",
+      "complexity": 9
+    },
+    {
+      "file": "cortex/deliverability_validator.py",
+      "complexity": 8
+    }
+  ],
+  "top_50_loc": [
+    {
+      "file": "scripts/codegen_utils.py",
+      "loc": 690
+    },
+    {
+      "file": "scripts/10_codegen_engine.py",
+      "loc": 395
+    },
+    {
+      "file": "cortex/bft_orchestrator.py",
+      "loc": 332
+    },
+    {
+      "file": "cortex/mcts_vnode_compiler.py",
+      "loc": 307
+    },
+    {
+      "file": "scripts/anergy_ratio.py",
+      "loc": 289
+    },
+    {
+      "file": "cortex/mcts_vnode_compiler_test.py",
+      "loc": 257
+    },
+    {
+      "file": "scripts/55_substack_laboratory_compiler.py",
+      "loc": 252
+    },
+    {
+      "file": "cortex/substack_subscriber_audit.py",
+      "loc": 246
+    },
+    {
+      "file": "scripts/gemini_pool_manager.py",
+      "loc": 245
+    },
+    {
+      "file": "scratch/parse_user_pasted_archive.py",
+      "loc": 230
+    },
+    {
+      "file": "scripts/run_pipeline.py",
+      "loc": 229
+    },
+    {
+      "file": "scripts/quantitative_ast_analyzer.py",
+      "loc": 224
+    },
+    {
+      "file": "scripts/50_audit_loop.py",
+      "loc": 223
+    },
+    {
+      "file": "scratch/audit_escohotado.py",
+      "loc": 211
+    },
+    {
+      "file": "cortex/github_webhook_daemon_test.py",
+      "loc": 207
+    },
+    {
+      "file": "scripts/43_iter_ultrathink.py",
+      "loc": 199
+    },
+    {
+      "file": "cortex/llm_router.py",
+      "loc": 192
+    },
+    {
+      "file": "scripts/17_codegen_github.py",
+      "loc": 190
+    },
+    {
+      "file": "scripts/stress_10k_async.py",
+      "loc": 189
+    },
+    {
+      "file": "cortex/babylon60/neuromorphic_primitives.py",
+      "loc": 188
+    },
+    {
+      "file": "scripts/52_legion_purge.py",
+      "loc": 186
+    },
+    {
+      "file": "scratch/improve_substack_post.py",
+      "loc": 176
+    },
+    {
+      "file": "cortex/escohotado_chaos_engine.py",
+      "loc": 175
+    },
+    {
+      "file": "scripts/53_centuria_swarm.py",
+      "loc": 175
+    },
+    {
+      "file": "scratch/build_all_substack_posts.py",
+      "loc": 174
+    },
+    {
+      "file": "scripts/56_laboratory_validator.py",
+      "loc": 171
+    },
+    {
+      "file": "scripts/18_codegen_playwright.py",
+      "loc": 168
+    },
+    {
+      "file": "scratch/ingest_real_substack_bodies.py",
+      "loc": 158
+    },
+    {
+      "file": "scripts/cortex-omega-purge.py",
+      "loc": 157
+    },
+    {
+      "file": "scripts/phase4_runtime_ipc.py",
+      "loc": 149
+    },
+    {
+      "file": "cortex/swarm/memory_store.py",
+      "loc": 147
+    },
+    {
+      "file": "cortex/github_webhook_daemon.py",
+      "loc": 143
+    },
+    {
+      "file": "cortex/substack_publisher_tool.py",
+      "loc": 135
+    },
+    {
+      "file": "cortex/escohotado_market_prohibition_engine.py",
+      "loc": 134
+    },
+    {
+      "file": "cortex/swarm/engine_fsm.py",
+      "loc": 133
+    },
+    {
+      "file": "cortex/escohotado_substance_ontology.py",
+      "loc": 131
+    },
+    {
+      "file": "cortex/bft_orchestrator_test.py",
+      "loc": 130
+    },
+    {
+      "file": "cortex/substack_preview_server.py",
+      "loc": 130
+    },
+    {
+      "file": "cortex/claude_bridge.py",
+      "loc": 128
+    },
+    {
+      "file": "cortex/escohotado_cli.py",
+      "loc": 127
+    },
+    {
+      "file": "cortex/babylon60/extensions/ide_agent/dual_context.py",
+      "loc": 125
+    },
+    {
+      "file": "scripts/54_tdah_orphan_purge.py",
+      "loc": 122
+    },
+    {
+      "file": "scratch/improve_entire_substack_archive.py",
+      "loc": 120
+    },
+    {
+      "file": "scripts/phase_omega_theorem_prover.py",
+      "loc": 120
+    },
+    {
+      "file": "cortex/vibe_ide_engine.py",
+      "loc": 116
+    },
+    {
+      "file": "scratch/transduce_all_200_substack_posts.py",
+      "loc": 116
+    },
+    {
+      "file": "cortex/swarm/architect_agent.py",
+      "loc": 113
+    },
+    {
+      "file": "cortex/laboratory/tercer_experimento_c5/03_codigo.py",
+      "loc": 110
+    },
+    {
+      "file": "scripts/epistemic_forensics_prober.py",
+      "loc": 108
+    },
+    {
+      "file": "cortex/substack_subscriber_audit_test.py",
+      "loc": 107
+    }
+  ]
+}

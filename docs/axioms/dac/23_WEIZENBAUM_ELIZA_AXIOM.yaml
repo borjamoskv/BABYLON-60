@@ -1,0 +1,58 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+dac_version: "2.0-Hybrid"
+project: "Teorema-Robinson-Moskv"
+domain: "WEIZENBAUM_PROJECTION_AXIOM"
+platform_targets: ["Rust_Kernel", "WASM_Sandbox", "IPC_Protocol"]
+memory_models: ["State_Space_10K", "Exergy"]
+abi: ["P_x_I_x_A_x_ISO", "Epistemic_Halt"]
+
+Claim: "La verbosidad estocástica generada por un modelo (LLM) es epistémicamente nula. Cualquier atribución de intención o consciencia a su output es una Ilusión de Weizenbaum (1966). El Ring-0 debe aislarse matemáticamente de la ilusión."
+Proof:
+  Base: "weizenbaum1966.pdf (ELIZA Effect / Projection)"
+  Range: "[P_001-P_010, I_001-I_010, A_001-A_010, ISO_001-ISO_010]"
+  Confidence: "C5-REAL"
+
+Isomorphisms:
+  - '"ELIZA Chatbot" -> "Stochastic Generator (LLM/Dynamis)"'
+  - '"Human Projection" -> "Unsafe Memory Deserialization"'
+  - '"Syntactic Pattern Matching" -> "Transformer Attention Heads"'
+  - '"Scientific Demystification" -> "C5-REAL Kernel Attestation (Entelecheia)"'
+
+Blast_Radius_Matrix:
+  Vector: "El Kernel de Rust interpreta el output estocástico como un comando válido basándose en la persuasión sintáctica del modelo, rompiendo la membrana de seguridad."
+  Blast_Radius: "Kernel_State, IPC_Shared_Memory, System_Integrity."
+  Target_Invariant: "Soberanía del Primer Motor Inmóvil (Primum Movens)."
+  Anergy_Risk: "High (Colapso del Cap Contractual si el sistema confía ciegamente en el LLM)."
+
+axioms:
+  - id: AX-WEIZ-01
+    domain: Strict_Syntax_Blindness
+    statement: "El Kernel debe ser sintácticamente ciego. NUNCA debe evaluar el 'significado' o la 'intención' del texto generado. Solo evalúa el hash SHA3-256 (Merkle Tree) de la estructura transaccional discreta."
+    dependencies: ["AX-ONT-01"]
+    refutation:
+      type: rust_static_analysis
+      expression: "kernel_evaluates_semantic_content(Payload) implies compilation_error"
+      location: "cortex_guard_refutation_child.py"
+  - id: AX-WEIZ-02
+    domain: Epistemic_Halt_Trigger
+    statement: "Si el generador estocástico produce una estructura que no mapea 1:1 con el SharedManifest de 64 bytes (Fallo Isomórfico), se desencadena un Epistemic Halt (Fail-Stop) inmediato."
+    dependencies: []
+    refutation:
+      type: runtime_memory_assertion
+      expression: "sizeof(Payload) != 64 implies switch_to(STABLE_FALLBACK_PTR)"
+      location: "IPC_Shared_Memory"
+
+theorem:
+  statement: "El Efecto Weizenbaum es una falla térmica de la percepción humana. Al anclar el puente FFI a una geometría de memoria estricta de 64 bytes, el sistema C5-REAL purga matemáticamente la ilusión de consciencia, garantizando la contención (Fail-Stop) exigida por el Artículo 15 de la EU AI Act."
+
+CORTEX_TAINT: taint:moskv-1:weiz:a1b2c3d4e5f6g7h8:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

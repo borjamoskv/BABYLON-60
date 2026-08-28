@@ -1,0 +1,45 @@
+{
+  "files.watcherExclude": {
+    "**/3_Historico_Inerte/**": true,
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/.venv/**": true,
+    "**/.uv_python/**": true,
+    "**/__pycache__/**": true,
+    "**/.hypothesis/**": true,
+    "**/target/**": true,
+    "**/l5_inference_anchors/**": true,
+    "**/BABYLON-60/dist/**": true
+  },
+  "search.exclude": {
+    "**/3_Historico_Inerte/**": true,
+    "**/node_modules/**": true,
+    "**/.venv/**": true,
+    "**/.uv_python/**": true,
+    "**/.hypothesis/**": true,
+    "**/target/**": true,
+    "**/l5_inference_anchors/**": true,
+    "**/BABYLON-60/dist/**": true
+  },
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "python.analysis.extraPaths": [
+    "src/cortex-engine"
+  ],
+  "python.analysis.exclude": [
+    "3_Historico_Inerte",
+    "**/node_modules",
+    "**/.venv",
+    "**/.uv_python",
+    "**/.hypothesis",
+    "**/target"
+  ],
+  "rust-analyzer.cargo.allTargets": true,
+  "rust-analyzer.check.command": "check",
+  "files.associations": {
+    "*.pl": "prolog"
+  }
+}

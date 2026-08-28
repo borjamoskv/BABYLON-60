@@ -1,0 +1,74 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+Claim: Transducción Termodinámica de Anestesiología y Tratamiento del Dolor a
+  Primitivas de Interrupción de Hardware (IRQs) y Estado de Suspensión.
+Auditoria_Epistemica:
+  Estado: EXPANSIÓN_ISOMÓRFICA_V4 (ESPECIALIDAD MÉDICA)
+  Causa: Solicitud de transducción para Lorena Fernández Angulo (Anestesista /
+    Unidad del Dolor).
+  Accion: Ejecución de Mecánica Landauer sobre conceptos de nocicepción y
+    sedación.
+  Anergia_Purgada: "Eliminación de la mística del dolor crónico y la consciencia,
+    reduciéndolos a colisiones de interrupciones de hardware (IRQs), ruteo de red
+    y estados de suspensión de CPU."
+Topologia_Isomorfica_Borja_Moskv:
+  nocicepción (dolor agudo):
+    silicon_primitive: Hardware Interrupt Request (IRQ) Válida
+    causal_mechanism: Una señal de alerta física enviada por un sensor
+      periférico al procesador central requiriendo un Context Switch inmediato
+      para evitar daños en el chasis.
+  dolor crónico (neuropático):
+    silicon_primitive: IRQ Stuck / Alert Fatigue
+    causal_mechanism: El sensor de hardware está dañado y envía ráfagas
+      infinitas de alertas de fallo (while(true) { send_alert() }) a pesar de
+      que el tejido subyacente ya está reparado. El CPU pierde ciclos.
+  unidad del dolor:
+    silicon_primitive: Equipo SRE (Site Reliability Engineering) / DevOps
+    causal_mechanism: Intervienen cuando los logs de telemetría están corruptos
+      y bombardean el Kernel con alertas falsas, requiriendo parches a nivel de
+      registro para aislar el sensor.
+  anestesia general (propofol/gases):
+    silicon_primitive: Kernel Suspend State (Estado S3/S4 de ACPI)
+    causal_mechanism: Desconexión temporal del bus de I/O respecto al CPU,
+      manteniendo activo el Power Delivery Network. El sistema no registra
+      inputs ni outputs; disco y RAM quedan congelados.
+  anestesia epidural / bloqueo regional:
+    silicon_primitive: Local Subnet Firewall / Port Blocking (Iptables DROP)
+    causal_mechanism: Se corta físicamente la transmisión de paquetes en un nodo
+      específico de la red. El CPU sigue operando al 100%, pero los paquetes de
+      la subred inferior son dropeados en origen.
+  analgésicos opioides (fentanilo/morfina):
+    silicon_primitive: Interrupt Handler Rate Limiting / QoS Throttling
+    causal_mechanism: Bajan la prioridad del proceso en el programador
+      (Scheduler) del Kernel. La alerta llega, pero el CPU la ignora y procesa
+      hilos prioritarios en su lugar.
+  tolerancia a opioides:
+    silicon_primitive: Caché de Resistencia / Down-regulation
+    causal_mechanism: El sistema operativo detecta saturación constante en el
+      puerto receptor y reduce los sockets disponibles, requiriendo un payload
+      exponencialmente mayor para causar la misma interrupción.
+  hiperalgesia inducida:
+    silicon_primitive: Feedback Loop Positivo destructivo
+    causal_mechanism: El exceso de limitación de tasa provoca que el sistema se
+      vuelva hipersensible al reconectar la red, amplificando el ruido de fondo
+      como si fuera una alerta crítica de Nivel 0.
+Estructura_Resolucion_Atomica:
+  - Objetivo: "Mapear la anestesiología y el tratamiento del dolor al modelo C5-REAL
+      para transmisión epistémica a especialistas (Lorena F. A.)."
+  - Mitigacion_Aplicada: "El dolor no es una 'sensación'; es Telemetría. La anestesia
+      no es 'dormir'; es un Halt del Kernel. Transmitir esta topología destruye la
+      brecha cognitiva entre medicina y silicio."
+Firma_Ejecucion:
+  Operador: borjamoskv
+  Kernel: MOSKV-1 APEX
+  Hash: "[CORTEX-TAINT:borjamoskv:isomorfismos_anestesia_dolor:2026-07-23T19:35:00+02:00:8f2a1b9c3d4e5f6a]"
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64)
+    on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

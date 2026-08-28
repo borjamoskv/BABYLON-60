@@ -1,0 +1,103 @@
+// C5-REAL EXERGY CERTIFIED
+syntax = "proto3";
+
+package c5real;
+
+// ADVERTENCIA CRÍTICA DE DISEÑO (RFC 8949 / RFC 9942):
+// "Proto Serialization Is Not Canonical". NUNCA calcular un hash (digest)
+// directamente sobre los bytes serializados de este Protobuf debido a su inestabilidad
+// (campos desconocidos, flags de compilación, orden arbitrario).
+// c5_exergy.proto es EXCLUSIVAMENTE para transporte.
+// El objeto que se firma en SCITT DEBE ser una representación CBOR determinista
+// (RFC 8949 §4.2.1) extraída de estos campos, que es el formato nativo de COSE.
+
+// Frontera de Confianza: Plano de Emisión (No confiable) -> Núcleo Verificado (Confiable)
+service VerifiedKernelGateway {
+  // Envía el plan emitido por el modelo para su validación estricta y ejecución
+  rpc CommitTransition (EmissionPayload) returns (TransitionAck) {}
+}
+
+// Manifiesto de Época (E) - Define el alcance declarado (INV-1) y presupuesto
+message EpochManifest {
+  string epoch_id = 1;
+  repeated string whitelisted_tools = 2; // Alcance Declarado (Sandbox WASM)
+  uint64 budget_tokens = 3;              // FOCUS 1
+  uint64 budget_usd_micros = 4;          // FOCUS 2
+}
+
+// El artefacto de transición emitido (Payload no confiable)
+message EmissionPayload {
+  string prompt_digest = 1;
+  string model_identity = 2;
+  EpochManifest manifest = 3;
+
+  // El núcleo de CF-GKAT: La emisión debe ser un nodo sintácticamente válido
+  // La restricción al esquema S ocurre directamente en el parser Protobuf.
+  CfGkatNode program = 4;
+}
+
+// Conjunto S (Fragmento algebraico CF-GKAT explícito)
+message CfGkatNode {
+  oneof node_type {
+    SkipNode skip = 1;
+    AssignNode assign = 2;
+    SeqNode seq = 3;
+    IfThenElseNode if_branch = 4;
+    WhileNode loop = 5;
+    GotoNode goto_stmt = 6;
+    BreakNode break_stmt = 7;
+    ReturnNode return_stmt = 8;
+    SandboxInvokeNode tool_invoke = 9; // Efectos confinados al Sandbox WASM
+  }
+}
+
+message SkipNode {}
+
+message AssignNode {
+  string variable = 1;
+  string expression = 2; // (idealmente tipado o restringido en un sub-AST)
+}
+
+message SeqNode {
+  CfGkatNode left = 1;
+  CfGkatNode right = 2;
+}
+
+message IfThenElseNode {
+  string condition = 1;
+  CfGkatNode then_branch = 2;
+  CfGkatNode else_branch = 3;
+}
+
+message WhileNode {
+  string condition = 1;
+  CfGkatNode body = 2;
+}
+
+message GotoNode {
+  string label = 1;
+}
+
+message BreakNode {
+  string label = 1; // Para break multinivel
+}
+
+message ReturnNode {
+  string value = 1;
+}
+
+message SandboxInvokeNode {
+  string tool_name = 1; // Debe estar en whitelisted_tools
+  map<string, string> arguments = 2;
+}
+
+// SCITT Receipt: Recibo Verificable devuelto por el Commit Gate
+message TransitionAck {
+  bool accepted = 1;
+
+  // Propiedades del Recibo SCITT (RFC 9942/9943)
+  string scitt_receipt_hash = 2;
+  string verification_method = 3; // e.g. "CF-GKAT Algebra Normalization"
+  bool blocked = 4;
+  string error_reason = 5;
+}

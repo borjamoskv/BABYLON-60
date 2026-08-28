@@ -1,0 +1,2749 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
+WEBVTT
+Kind: captions
+Language: es
+
+00:00:00.000 --> 00:00:01.870 align:start position:0%
+
+Unreal <00:00:00.266><c>nos </c><00:00:00.532><c>trae </c><00:00:00.798><c>una </c><00:00:01.064><c>actualización: </c><00:00:01.330><c>Unreal </c><00:00:01.596><c>Engine</c>
+
+00:00:01.870 --> 00:00:01.880 align:start position:0%
+Unreal nos trae una actualización: Unreal Engine
+
+
+00:00:01.880 --> 00:00:04.230 align:start position:0%
+Unreal nos trae una actualización: Unreal Engine
+5.8 <00:00:02.177><c>acaba </c><00:00:02.474><c>de </c><00:00:02.771><c>ser </c><00:00:03.068><c>lanzado </c><00:00:03.365><c>y </c><00:00:03.662><c>supone </c><00:00:03.959><c>un</c>
+
+00:00:04.230 --> 00:00:04.240 align:start position:0%
+5.8 acaba de ser lanzado y supone un
+
+
+00:00:04.240 --> 00:00:06.230 align:start position:0%
+5.8 acaba de ser lanzado y supone un
+cambio <00:00:04.576><c>radical.  </c><00:00:04.912><c>La </c><00:00:05.248><c>razón </c><00:00:05.584><c>es </c><00:00:05.920><c>un</c>
+
+00:00:06.230 --> 00:00:06.240 align:start position:0%
+cambio radical.  La razón es un
+
+
+00:00:06.240 --> 00:00:08.070 align:start position:0%
+cambio radical.  La razón es un
+sistema <00:00:06.513><c>de </c><00:00:06.786><c>paisaje </c><00:00:07.059><c>de </c><00:00:07.332><c>última </c><00:00:07.605><c>generación </c><00:00:07.878><c>llamado</c>
+
+00:00:08.070 --> 00:00:08.080 align:start position:0%
+sistema de paisaje de última generación llamado
+
+
+00:00:08.080 --> 00:00:09.950 align:start position:0%
+sistema de paisaje de última generación llamado
+terreno <00:00:08.302><c>de </c><00:00:08.524><c>malla </c><00:00:08.746><c>y </c><00:00:08.968><c>una </c><00:00:09.190><c>nueva </c><00:00:09.412><c>y </c><00:00:09.634><c>potente</c>
+
+00:00:09.950 --> 00:00:09.960 align:start position:0%
+terreno de malla y una nueva y potente
+
+
+00:00:09.960 --> 00:00:12.310 align:start position:0%
+terreno de malla y una nueva y potente
+función <00:00:10.165><c>de </c><00:00:10.370><c>iluminación </c><00:00:10.575><c>llamada </c><00:00:10.780><c>oclusión </c><00:00:10.985><c>de </c><00:00:11.190><c>sonda </c><00:00:11.395><c>Lumen.</c>
+
+00:00:12.310 --> 00:00:12.320 align:start position:0%
+función de iluminación llamada oclusión de sonda Lumen.
+
+
+00:00:12.320 --> 00:00:13.950 align:start position:0%
+función de iluminación llamada oclusión de sonda Lumen.
+El <00:00:12.485><c>sistema </c><00:00:12.650><c>de </c><00:00:12.815><c>paisajes </c><00:00:12.980><c>actual </c><00:00:13.145><c>en </c><00:00:13.310><c>Unreal </c><00:00:13.475><c>se</c>
+
+00:00:13.950 --> 00:00:13.960 align:start position:0%
+El sistema de paisajes actual en Unreal se
+
+
+00:00:13.960 --> 00:00:16.550 align:start position:0%
+El sistema de paisajes actual en Unreal se
+ha <00:00:14.320><c>mantenido </c><00:00:14.680><c>prácticamente </c><00:00:15.040><c>igual </c><00:00:15.400><c>desde </c><00:00:15.760><c>UE3.</c>
+
+00:00:16.550 --> 00:00:16.560 align:start position:0%
+ha mantenido prácticamente igual desde UE3.
+
+
+00:00:16.560 --> 00:00:18.550 align:start position:0%
+ha mantenido prácticamente igual desde UE3.
+Si <00:00:16.765><c>bien </c><00:00:16.970><c>es </c><00:00:17.175><c>funcional, </c><00:00:17.380><c>ya </c><00:00:17.585><c>que </c><00:00:17.790><c>nos </c><00:00:17.995><c>proporciona </c><00:00:18.200><c>un</c>
+
+00:00:18.550 --> 00:00:18.560 align:start position:0%
+Si bien es funcional, ya que nos proporciona un
+
+
+00:00:18.560 --> 00:00:20.630 align:start position:0%
+Si bien es funcional, ya que nos proporciona un
+objeto <00:00:18.780><c>grande </c><00:00:19.000><c>sobre </c><00:00:19.220><c>el </c><00:00:19.440><c>que </c><00:00:19.660><c>podemos </c><00:00:19.880><c>esculpir, </c><00:00:20.100><c>no </c><00:00:20.320><c>era</c>
+
+00:00:20.630 --> 00:00:20.640 align:start position:0%
+objeto grande sobre el que podemos esculpir, no era
+
+
+00:00:20.640 --> 00:00:22.670 align:start position:0%
+objeto grande sobre el que podemos esculpir, no era
+personalizable.  <00:00:20.902><c>Tenemos </c><00:00:21.164><c>limitaciones </c><00:00:21.426><c>en </c><00:00:21.688><c>cuanto </c><00:00:21.950><c>al </c><00:00:22.212><c>nivel </c><00:00:22.474><c>de</c>
+
+00:00:22.670 --> 00:00:22.680 align:start position:0%
+personalizable.  Tenemos limitaciones en cuanto al nivel de
+
+
+00:00:22.680 --> 00:00:24.710 align:start position:0%
+personalizable.  Tenemos limitaciones en cuanto al nivel de
+detalle <00:00:22.980><c>que </c><00:00:23.280><c>podemos </c><00:00:23.580><c>esculpir </c><00:00:23.880><c>y </c><00:00:24.180><c>solo </c><00:00:24.480><c>podemos</c>
+
+00:00:24.710 --> 00:00:24.720 align:start position:0%
+detalle que podemos esculpir y solo podemos
+
+
+00:00:24.720 --> 00:00:26.870 align:start position:0%
+detalle que podemos esculpir y solo podemos
+esculpir <00:00:24.946><c>hacia </c><00:00:25.172><c>arriba </c><00:00:25.398><c>y </c><00:00:25.624><c>hacia </c><00:00:25.850><c>abajo.  </c><00:00:26.076><c>No </c><00:00:26.302><c>hay </c><00:00:26.528><c>forma </c><00:00:26.754><c>de</c>
+
+00:00:26.870 --> 00:00:26.880 align:start position:0%
+esculpir hacia arriba y hacia abajo.  No hay forma de
+
+
+00:00:26.880 --> 00:00:29.070 align:start position:0%
+esculpir hacia arriba y hacia abajo.  No hay forma de
+excavar <00:00:27.080><c>una </c><00:00:27.280><c>cueva </c><00:00:27.480><c>en </c><00:00:27.680><c>el </c><00:00:27.880><c>suelo </c><00:00:28.080><c>ni </c><00:00:28.280><c>de </c><00:00:28.480><c>esculpir </c><00:00:28.680><c>salientes</c>
+
+00:00:29.070 --> 00:00:29.080 align:start position:0%
+excavar una cueva en el suelo ni de esculpir salientes
+
+
+00:00:29.080 --> 00:00:31.190 align:start position:0%
+excavar una cueva en el suelo ni de esculpir salientes
+naturales <00:00:29.420><c>en </c><00:00:29.760><c>los </c><00:00:30.100><c>acantilados.  </c><00:00:30.440><c>El </c><00:00:30.780><c>tipo </c><00:00:31.120><c>de</c>
+
+00:00:31.190 --> 00:00:31.200 align:start position:0%
+naturales en los acantilados.  El tipo de
+
+
+00:00:31.200 --> 00:00:32.749 align:start position:0%
+naturales en los acantilados.  El tipo de
+formaciones <00:00:31.440><c>que </c><00:00:31.680><c>uno </c><00:00:31.920><c>esperaría </c><00:00:32.160><c>ver </c><00:00:32.400><c>en </c><00:00:32.640><c>la</c>
+
+00:00:32.749 --> 00:00:32.759 align:start position:0%
+formaciones que uno esperaría ver en la
+
+
+00:00:32.759 --> 00:00:34.830 align:start position:0%
+formaciones que uno esperaría ver en la
+naturaleza.  <00:00:33.010><c>Por </c><00:00:33.261><c>eso, </c><00:00:33.512><c>en </c><00:00:33.763><c>la </c><00:00:34.014><c>mayoría </c><00:00:34.265><c>de </c><00:00:34.516><c>los</c>
+
+00:00:34.830 --> 00:00:34.840 align:start position:0%
+naturaleza.  Por eso, en la mayoría de los
+
+
+00:00:34.840 --> 00:00:36.910 align:start position:0%
+naturaleza.  Por eso, en la mayoría de los
+entornos <00:00:35.093><c>y </c><00:00:35.346><c>juegos </c><00:00:35.599><c>de </c><00:00:35.852><c>Unreal, </c><00:00:36.105><c>el </c><00:00:36.358><c>paisaje</c>
+
+00:00:36.910 --> 00:00:36.920 align:start position:0%
+entornos y juegos de Unreal, el paisaje
+
+
+00:00:36.920 --> 00:00:39.150 align:start position:0%
+entornos y juegos de Unreal, el paisaje
+actúa <00:00:37.148><c>más </c><00:00:37.376><c>como </c><00:00:37.604><c>la </c><00:00:37.832><c>base </c><00:00:38.060><c>de </c><00:00:38.288><c>un </c><00:00:38.516><c>nivel,</c>
+
+00:00:39.150 --> 00:00:39.160 align:start position:0%
+actúa más como la base de un nivel,
+
+
+00:00:39.160 --> 00:00:40.990 align:start position:0%
+actúa más como la base de un nivel,
+y <00:00:39.500><c>los </c><00:00:39.840><c>detalles </c><00:00:40.180><c>del </c><00:00:40.520><c>paisaje</c>
+
+00:00:40.990 --> 00:00:41.000 align:start position:0%
+y los detalles del paisaje
+
+
+00:00:41.000 --> 00:00:42.950 align:start position:0%
+y los detalles del paisaje
+se <00:00:41.320><c>gestionan </c><00:00:41.640><c>casi </c><00:00:41.960><c>por </c><00:00:42.280><c>completo </c><00:00:42.600><c>mediante</c>
+
+00:00:42.950 --> 00:00:42.960 align:start position:0%
+se gestionan casi por completo mediante
+
+
+00:00:42.960 --> 00:00:45.550 align:start position:0%
+se gestionan casi por completo mediante
+mallas <00:00:43.173><c>estáticas.  </c><00:00:43.386><c>No </c><00:00:43.599><c>utilizamos </c><00:00:43.812><c>un </c><00:00:44.025><c>sistema </c><00:00:44.238><c>de </c><00:00:44.451><c>modelado </c><00:00:44.664><c>del </c><00:00:44.877><c>paisaje</c>
+
+00:00:45.550 --> 00:00:45.560 align:start position:0%
+mallas estáticas.  No utilizamos un sistema de modelado del paisaje
+
+
+00:00:45.560 --> 00:00:47.190 align:start position:0%
+mallas estáticas.  No utilizamos un sistema de modelado del paisaje
+para <00:00:45.760><c>crear </c><00:00:45.960><c>una </c><00:00:46.160><c>cueva </c><00:00:46.360><c>ni </c><00:00:46.560><c>para </c><00:00:46.760><c>esculpir</c>
+
+00:00:47.190 --> 00:00:47.200 align:start position:0%
+para crear una cueva ni para esculpir
+
+
+00:00:47.200 --> 00:00:49.310 align:start position:0%
+para crear una cueva ni para esculpir
+geometrías <00:00:47.520><c>complejas.  </c><00:00:47.840><c>Todo </c><00:00:48.160><c>esto </c><00:00:48.480><c>fue </c><00:00:48.800><c>simulado </c><00:00:49.120><c>con</c>
+
+00:00:49.310 --> 00:00:49.320 align:start position:0%
+geometrías complejas.  Todo esto fue simulado con
+
+
+00:00:49.320 --> 00:00:51.070 align:start position:0%
+geometrías complejas.  Todo esto fue simulado con
+objetos <00:00:49.760><c>separados </c><00:00:50.200><c>de </c><00:00:50.640><c>la</c>
+
+00:00:51.070 --> 00:00:51.080 align:start position:0%
+objetos separados de la
+
+
+00:00:51.080 --> 00:00:53.030 align:start position:0%
+objetos separados de la
+malla <00:00:51.285><c>del </c><00:00:51.490><c>paisaje.  </c><00:00:51.695><c>El </c><00:00:51.900><c>uso </c><00:00:52.105><c>de </c><00:00:52.310><c>técnicas </c><00:00:52.515><c>como </c><00:00:52.720><c>la</c>
+
+00:00:53.030 --> 00:00:53.040 align:start position:0%
+malla del paisaje.  El uso de técnicas como la
+
+
+00:00:53.040 --> 00:00:55.070 align:start position:0%
+malla del paisaje.  El uso de técnicas como la
+fusión <00:00:53.235><c>de </c><00:00:53.430><c>texturas </c><00:00:53.625><c>virtuales </c><00:00:53.820><c>hacía </c><00:00:54.015><c>que </c><00:00:54.210><c>estos </c><00:00:54.405><c>objetos </c><00:00:54.600><c>parecieran </c><00:00:54.795><c>estar</c>
+
+00:00:55.070 --> 00:00:55.080 align:start position:0%
+fusión de texturas virtuales hacía que estos objetos parecieran estar
+
+
+00:00:55.080 --> 00:00:56.910 align:start position:0%
+fusión de texturas virtuales hacía que estos objetos parecieran estar
+conectados <00:00:55.580><c>al </c><00:00:56.080><c>paisaje,</c>
+
+00:00:56.910 --> 00:00:56.920 align:start position:0%
+conectados al paisaje,
+
+
+00:00:56.920 --> 00:00:58.550 align:start position:0%
+conectados al paisaje,
+cuando <00:00:57.153><c>en </c><00:00:57.386><c>realidad </c><00:00:57.619><c>el </c><00:00:57.852><c>paisaje </c><00:00:58.085><c>no </c><00:00:58.318><c>podía</c>
+
+00:00:58.550 --> 00:00:58.560 align:start position:0%
+cuando en realidad el paisaje no podía
+
+
+00:00:58.560 --> 00:01:01.550 align:start position:0%
+cuando en realidad el paisaje no podía
+soportar <00:00:59.024><c>tanto </c><00:00:59.488><c>detalle.  </c><00:00:59.952><c>En </c><00:01:00.416><c>Unreal </c><00:01:00.880><c>5.8</c>
+
+00:01:01.550 --> 00:01:01.560 align:start position:0%
+soportar tanto detalle.  En Unreal 5.8
+
+
+00:01:01.560 --> 00:01:03.430 align:start position:0%
+soportar tanto detalle.  En Unreal 5.8
+esto <00:01:01.728><c>cambia </c><00:01:01.896><c>con </c><00:01:02.064><c>el </c><00:01:02.232><c>nuevo </c><00:01:02.400><c>sistema </c><00:01:02.568><c>de </c><00:01:02.736><c>terreno </c><00:01:02.904><c>de </c><00:01:03.072><c>malla</c>
+
+00:01:03.430 --> 00:01:03.440 align:start position:0%
+esto cambia con el nuevo sistema de terreno de malla
+
+
+00:01:03.440 --> 00:01:05.710 align:start position:0%
+esto cambia con el nuevo sistema de terreno de malla
+que <00:01:03.930><c>nos </c><00:01:04.420><c>permite </c><00:01:04.910><c>esculpir </c><00:01:05.400><c>tantos</c>
+
+00:01:05.710 --> 00:01:05.720 align:start position:0%
+que nos permite esculpir tantos
+
+
+00:01:05.720 --> 00:01:08.150 align:start position:0%
+que nos permite esculpir tantos
+detalles <00:01:06.088><c>como </c><00:01:06.456><c>queramos </c><00:01:06.824><c>en </c><00:01:07.192><c>un </c><00:01:07.560><c>gran</c>
+
+00:01:08.150 --> 00:01:08.160 align:start position:0%
+detalles como queramos en un gran
+
+
+00:01:08.160 --> 00:01:10.390 align:start position:0%
+detalles como queramos en un gran
+paisaje <00:01:08.650><c>continuo.  </c><00:01:09.140><c>Nos </c><00:01:09.630><c>brinda </c><00:01:10.120><c>más</c>
+
+00:01:10.390 --> 00:01:10.400 align:start position:0%
+paisaje continuo.  Nos brinda más
+
+
+00:01:10.400 --> 00:01:12.910 align:start position:0%
+paisaje continuo.  Nos brinda más
+control <00:01:10.880><c>creativo </c><00:01:11.360><c>que </c><00:01:11.840><c>nunca.  </c><00:01:12.320><c>Ahora </c><00:01:12.800><c>podemos</c>
+
+00:01:12.910 --> 00:01:12.920 align:start position:0%
+control creativo que nunca.  Ahora podemos
+
+
+00:01:12.920 --> 00:01:15.790 align:start position:0%
+control creativo que nunca.  Ahora podemos
+esculpir <00:01:13.302><c>el </c><00:01:13.684><c>terreno </c><00:01:14.066><c>en </c><00:01:14.448><c>verdadero </c><00:01:14.830><c>3D </c><00:01:15.212><c>para </c><00:01:15.594><c>crear</c>
+
+00:01:15.790 --> 00:01:15.800 align:start position:0%
+esculpir el terreno en verdadero 3D para crear
+
+
+00:01:15.800 --> 00:01:18.510 align:start position:0%
+esculpir el terreno en verdadero 3D para crear
+sistemas <00:01:16.028><c>de </c><00:01:16.256><c>cuevas </c><00:01:16.484><c>y </c><00:01:16.712><c>formaciones </c><00:01:16.940><c>naturales </c><00:01:17.168><c>del </c><00:01:17.396><c>suelo.</c>
+
+00:01:18.510 --> 00:01:18.520 align:start position:0%
+sistemas de cuevas y formaciones naturales del suelo.
+
+
+00:01:18.520 --> 00:01:20.190 align:start position:0%
+sistemas de cuevas y formaciones naturales del suelo.
+Si <00:01:18.710><c>has </c><00:01:18.900><c>esculpido </c><00:01:19.090><c>alguna </c><00:01:19.280><c>vez </c><00:01:19.470><c>en </c><00:01:19.660><c>un </c><00:01:19.850><c>programa </c><00:01:20.040><c>como</c>
+
+00:01:20.190 --> 00:01:20.200 align:start position:0%
+Si has esculpido alguna vez en un programa como
+
+
+00:01:20.200 --> 00:01:22.070 align:start position:0%
+Si has esculpido alguna vez en un programa como
+Blender <00:01:20.640><c>o </c><00:01:21.080><c>ZBrush, </c><00:01:21.520><c>entonces </c><00:01:21.960><c>estarás</c>
+
+00:01:22.070 --> 00:01:22.080 align:start position:0%
+Blender o ZBrush, entonces estarás
+
+
+00:01:22.080 --> 00:01:24.350 align:start position:0%
+Blender o ZBrush, entonces estarás
+familiarizado <00:01:22.325><c>con </c><00:01:22.570><c>las </c><00:01:22.815><c>nuevas </c><00:01:23.060><c>herramientas.  </c><00:01:23.305><c>Solo </c><00:01:23.550><c>que, </c><00:01:23.795><c>en</c>
+
+00:01:24.350 --> 00:01:24.360 align:start position:0%
+familiarizado con las nuevas herramientas.  Solo que, en
+
+
+00:01:24.360 --> 00:01:26.710 align:start position:0%
+familiarizado con las nuevas herramientas.  Solo que, en
+lugar <00:01:24.800><c>de </c><00:01:25.240><c>esculpir </c><00:01:25.680><c>un </c><00:01:26.120><c>solo </c><00:01:26.560><c>objeto,</c>
+
+00:01:26.710 --> 00:01:26.720 align:start position:0%
+lugar de esculpir un solo objeto,
+
+
+00:01:26.720 --> 00:01:29.190 align:start position:0%
+lugar de esculpir un solo objeto,
+estamos <00:01:27.113><c>esculpiendo </c><00:01:27.506><c>un </c><00:01:27.899><c>mundo </c><00:01:28.292><c>entero.  </c><00:01:28.685><c>Esto </c><00:01:29.078><c>es</c>
+
+00:01:29.190 --> 00:01:29.200 align:start position:0%
+estamos esculpiendo un mundo entero.  Esto es
+
+
+00:01:29.200 --> 00:01:31.390 align:start position:0%
+estamos esculpiendo un mundo entero.  Esto es
+posible <00:01:29.411><c>gracias </c><00:01:29.622><c>a </c><00:01:29.833><c>un </c><00:01:30.044><c>sistema </c><00:01:30.255><c>de </c><00:01:30.466><c>capas </c><00:01:30.677><c>inteligente</c>
+
+00:01:31.390 --> 00:01:31.400 align:start position:0%
+posible gracias a un sistema de capas inteligente
+
+
+00:01:31.400 --> 00:01:32.670 align:start position:0%
+posible gracias a un sistema de capas inteligente
+que <00:01:31.720><c>permite </c><00:01:32.040><c>guardar </c><00:01:32.360><c>las</c>
+
+00:01:32.670 --> 00:01:32.680 align:start position:0%
+que permite guardar las
+
+
+00:01:32.680 --> 00:01:34.630 align:start position:0%
+que permite guardar las
+formaciones <00:01:32.920><c>esculpidas.  </c><00:01:33.160><c>Así </c><00:01:33.400><c>que, </c><00:01:33.640><c>si </c><00:01:33.880><c>creas </c><00:01:34.120><c>algo </c><00:01:34.360><c>que</c>
+
+00:01:34.630 --> 00:01:34.640 align:start position:0%
+formaciones esculpidas.  Así que, si creas algo que
+
+
+00:01:34.640 --> 00:01:36.510 align:start position:0%
+formaciones esculpidas.  Así que, si creas algo que
+te <00:01:34.940><c>guste, </c><00:01:35.240><c>puedes </c><00:01:35.540><c>copiarlo </c><00:01:35.840><c>y </c><00:01:36.140><c>moverlo </c><00:01:36.440><c>a</c>
+
+00:01:36.510 --> 00:01:36.520 align:start position:0%
+te guste, puedes copiarlo y moverlo a
+
+
+00:01:36.520 --> 00:01:38.550 align:start position:0%
+te guste, puedes copiarlo y moverlo a
+otra <00:01:36.793><c>parte </c><00:01:37.066><c>de </c><00:01:37.339><c>tu </c><00:01:37.612><c>paisaje.  </c><00:01:37.885><c>Como </c><00:01:38.158><c>si</c>
+
+00:01:38.550 --> 00:01:38.560 align:start position:0%
+otra parte de tu paisaje.  Como si
+
+
+00:01:38.560 --> 00:01:40.910 align:start position:0%
+otra parte de tu paisaje.  Como si
+fuera <00:01:39.008><c>un </c><00:01:39.456><c>objeto </c><00:01:39.904><c>normal.  </c><00:01:40.352><c>O </c><00:01:40.800><c>si</c>
+
+00:01:40.910 --> 00:01:40.920 align:start position:0%
+fuera un objeto normal.  O si
+
+
+00:01:40.920 --> 00:01:42.550 align:start position:0%
+fuera un objeto normal.  O si
+no <00:01:41.224><c>te </c><00:01:41.528><c>gusta </c><00:01:41.832><c>un </c><00:01:42.136><c>cambio, </c><00:01:42.440><c>puedes</c>
+
+00:01:42.550 --> 00:01:42.560 align:start position:0%
+no te gusta un cambio, puedes
+
+
+00:01:42.560 --> 00:01:45.030 align:start position:0%
+no te gusta un cambio, puedes
+eliminar <00:01:42.726><c>esa </c><00:01:42.892><c>capa </c><00:01:43.058><c>sin </c><00:01:43.224><c>que </c><00:01:43.390><c>se </c><00:01:43.556><c>degrade.</c>
+
+00:01:45.030 --> 00:01:45.040 align:start position:0%
+eliminar esa capa sin que se degrade.
+
+
+00:01:45.040 --> 00:01:46.950 align:start position:0%
+eliminar esa capa sin que se degrade.
+A <00:01:45.240><c>diferencia </c><00:01:45.440><c>del </c><00:01:45.640><c>sistema </c><00:01:45.840><c>de </c><00:01:46.040><c>terreno </c><00:01:46.240><c>anterior,</c>
+
+00:01:46.950 --> 00:01:46.960 align:start position:0%
+A diferencia del sistema de terreno anterior,
+
+
+00:01:46.960 --> 00:01:48.710 align:start position:0%
+A diferencia del sistema de terreno anterior,
+donde <00:01:47.206><c>estábamos </c><00:01:47.452><c>limitados </c><00:01:47.698><c>a </c><00:01:47.944><c>tener </c><00:01:48.190><c>la </c><00:01:48.436><c>misma</c>
+
+00:01:48.710 --> 00:01:48.720 align:start position:0%
+donde estábamos limitados a tener la misma
+
+
+00:01:48.720 --> 00:01:50.950 align:start position:0%
+donde estábamos limitados a tener la misma
+densidad <00:01:48.992><c>de </c><00:01:49.264><c>polígonos </c><00:01:49.536><c>en </c><00:01:49.808><c>todas </c><00:01:50.080><c>partes,</c>
+
+00:01:50.950 --> 00:01:50.960 align:start position:0%
+densidad de polígonos en todas partes,
+
+
+00:01:50.960 --> 00:01:52.790 align:start position:0%
+densidad de polígonos en todas partes,
+para <00:01:51.170><c>los </c><00:01:51.380><c>terrenos </c><00:01:51.590><c>de </c><00:01:51.800><c>malla </c><00:01:52.010><c>se </c><00:01:52.220><c>puede </c><00:01:52.430><c>especificar </c><00:01:52.640><c>la</c>
+
+00:01:52.790 --> 00:01:52.800 align:start position:0%
+para los terrenos de malla se puede especificar la
+
+
+00:01:52.800 --> 00:01:55.510 align:start position:0%
+para los terrenos de malla se puede especificar la
+cantidad <00:01:53.154><c>de </c><00:01:53.508><c>polígonos </c><00:01:53.862><c>para </c><00:01:54.216><c>cada </c><00:01:54.570><c>área.  </c><00:01:54.924><c>Así, </c><00:01:55.278><c>una</c>
+
+00:01:55.510 --> 00:01:55.520 align:start position:0%
+cantidad de polígonos para cada área.  Así, una
+
+
+00:01:55.520 --> 00:01:57.150 align:start position:0%
+cantidad de polígonos para cada área.  Así, una
+parte <00:01:55.684><c>de </c><00:01:55.848><c>tu </c><00:01:56.012><c>mapa </c><00:01:56.176><c>que </c><00:01:56.340><c>sea </c><00:01:56.504><c>plana </c><00:01:56.668><c>y </c><00:01:56.832><c>con </c><00:01:56.996><c>menos</c>
+
+00:01:57.150 --> 00:01:57.160 align:start position:0%
+parte de tu mapa que sea plana y con menos
+
+
+00:01:57.160 --> 00:01:58.590 align:start position:0%
+parte de tu mapa que sea plana y con menos
+detalles <00:01:57.386><c>puede </c><00:01:57.612><c>tener </c><00:01:57.838><c>una </c><00:01:58.064><c>pequeña </c><00:01:58.290><c>cantidad </c><00:01:58.516><c>de</c>
+
+00:01:58.590 --> 00:01:58.600 align:start position:0%
+detalles puede tener una pequeña cantidad de
+
+
+00:01:58.600 --> 00:02:00.950 align:start position:0%
+detalles puede tener una pequeña cantidad de
+polígonos, <00:01:58.862><c>mientras </c><00:01:59.124><c>que </c><00:01:59.386><c>otra </c><00:01:59.648><c>área </c><00:01:59.910><c>de </c><00:02:00.172><c>tu </c><00:02:00.434><c>mapa</c>
+
+00:02:00.950 --> 00:02:00.960 align:start position:0%
+polígonos, mientras que otra área de tu mapa
+
+
+00:02:00.960 --> 00:02:02.630 align:start position:0%
+polígonos, mientras que otra área de tu mapa
+donde <00:02:01.220><c>hayas </c><00:02:01.480><c>esculpido </c><00:02:01.740><c>formaciones </c><00:02:02.000><c>complejas</c>
+
+00:02:02.630 --> 00:02:02.640 align:start position:0%
+donde hayas esculpido formaciones complejas
+
+
+00:02:02.640 --> 00:02:04.750 align:start position:0%
+donde hayas esculpido formaciones complejas
+puede <00:02:02.914><c>tener </c><00:02:03.188><c>una </c><00:02:03.462><c>gran </c><00:02:03.736><c>cantidad </c><00:02:04.010><c>de </c><00:02:04.284><c>polígonos.  </c><00:02:04.558><c>Y</c>
+
+00:02:04.750 --> 00:02:04.760 align:start position:0%
+puede tener una gran cantidad de polígonos.  Y
+
+
+00:02:04.760 --> 00:02:06.230 align:start position:0%
+puede tener una gran cantidad de polígonos.  Y
+gracias <00:02:05.032><c>a </c><00:02:05.304><c>Nanite, </c><00:02:05.576><c>no </c><00:02:05.848><c>tienes </c><00:02:06.120><c>que</c>
+
+00:02:06.230 --> 00:02:06.240 align:start position:0%
+gracias a Nanite, no tienes que
+
+
+00:02:06.240 --> 00:02:07.750 align:start position:0%
+gracias a Nanite, no tienes que
+preocuparte <00:02:06.480><c>por </c><00:02:06.720><c>el </c><00:02:06.960><c>nivel </c><00:02:07.200><c>de </c><00:02:07.440><c>detalle.  </c><00:02:07.680><c>El</c>
+
+00:02:07.750 --> 00:02:07.760 align:start position:0%
+preocuparte por el nivel de detalle.  El
+
+
+00:02:07.760 --> 00:02:09.669 align:start position:0%
+preocuparte por el nivel de detalle.  El
+paisaje <00:02:08.320><c>utilizará </c><00:02:08.880><c>automáticamente </c><00:02:09.440><c>menos</c>
+
+00:02:09.669 --> 00:02:09.679 align:start position:0%
+paisaje utilizará automáticamente menos
+
+
+00:02:09.679 --> 00:02:11.870 align:start position:0%
+paisaje utilizará automáticamente menos
+polígonos <00:02:10.032><c>cuanto </c><00:02:10.385><c>más </c><00:02:10.738><c>lejos </c><00:02:11.091><c>esté </c><00:02:11.444><c>de </c><00:02:11.797><c>la</c>
+
+00:02:11.870 --> 00:02:11.880 align:start position:0%
+polígonos cuanto más lejos esté de la
+
+
+00:02:11.880 --> 00:02:14.070 align:start position:0%
+polígonos cuanto más lejos esté de la
+cámara.  <00:02:12.410><c>Esto </c><00:02:12.940><c>es </c><00:02:13.470><c>importante </c><00:02:14.000><c>porque</c>
+
+00:02:14.070 --> 00:02:14.080 align:start position:0%
+cámara.  Esto es importante porque
+
+
+00:02:14.080 --> 00:02:15.190 align:start position:0%
+cámara.  Esto es importante porque
+significa <00:02:14.288><c>que, </c><00:02:14.496><c>si </c><00:02:14.704><c>estás </c><00:02:14.912><c>diseñando </c><00:02:15.120><c>un</c>
+
+00:02:15.190 --> 00:02:15.200 align:start position:0%
+significa que, si estás diseñando un
+
+
+00:02:15.200 --> 00:02:17.350 align:start position:0%
+significa que, si estás diseñando un
+entorno, <00:02:15.710><c>tienes </c><00:02:16.220><c>más </c><00:02:16.730><c>opciones </c><00:02:17.240><c>para</c>
+
+00:02:17.350 --> 00:02:17.360 align:start position:0%
+entorno, tienes más opciones para
+
+
+00:02:17.360 --> 00:02:19.350 align:start position:0%
+entorno, tienes más opciones para
+trabajar <00:02:17.600><c>en </c><00:02:17.840><c>Unreal </c><00:02:18.080><c>en </c><00:02:18.320><c>lugar </c><00:02:18.560><c>de </c><00:02:18.800><c>en </c><00:02:19.040><c>otro</c>
+
+00:02:19.350 --> 00:02:19.360 align:start position:0%
+trabajar en Unreal en lugar de en otro
+
+
+00:02:19.360 --> 00:02:21.910 align:start position:0%
+trabajar en Unreal en lugar de en otro
+programa.  <00:02:19.792><c>También </c><00:02:20.224><c>podemos </c><00:02:20.656><c>convertir </c><00:02:21.088><c>cualquier </c><00:02:21.520><c>objeto</c>
+
+00:02:21.910 --> 00:02:21.920 align:start position:0%
+programa.  También podemos convertir cualquier objeto
+
+
+00:02:21.920 --> 00:02:23.830 align:start position:0%
+programa.  También podemos convertir cualquier objeto
+en <00:02:22.180><c>un </c><00:02:22.440><c>terreno </c><00:02:22.700><c>de </c><00:02:22.960><c>malla.  </c><00:02:23.220><c>Debido </c><00:02:23.480><c>a</c>
+
+00:02:23.830 --> 00:02:23.840 align:start position:0%
+en un terreno de malla.  Debido a
+
+
+00:02:23.840 --> 00:02:26.190 align:start position:0%
+en un terreno de malla.  Debido a
+limitaciones <00:02:24.148><c>anteriores, </c><00:02:24.456><c>gran </c><00:02:24.764><c>parte </c><00:02:25.072><c>del </c><00:02:25.380><c>terreno </c><00:02:25.688><c>personalizado </c><00:02:25.996><c>se</c>
+
+00:02:26.190 --> 00:02:26.200 align:start position:0%
+limitaciones anteriores, gran parte del terreno personalizado se
+
+
+00:02:26.200 --> 00:02:28.630 align:start position:0%
+limitaciones anteriores, gran parte del terreno personalizado se
+creaba <00:02:26.586><c>primero </c><00:02:26.972><c>en </c><00:02:27.358><c>otros </c><00:02:27.744><c>programas </c><00:02:28.130><c>3D </c><00:02:28.516><c>y</c>
+
+00:02:28.630 --> 00:02:28.640 align:start position:0%
+creaba primero en otros programas 3D y
+
+
+00:02:28.640 --> 00:02:31.510 align:start position:0%
+creaba primero en otros programas 3D y
+luego <00:02:28.965><c>se </c><00:02:29.290><c>importaba </c><00:02:29.615><c>a </c><00:02:29.940><c>Unreal </c><00:02:30.265><c>como </c><00:02:30.590><c>una </c><00:02:30.915><c>malla.  </c><00:02:31.240><c>Ahora</c>
+
+00:02:31.510 --> 00:02:31.520 align:start position:0%
+luego se importaba a Unreal como una malla.  Ahora
+
+
+00:02:31.520 --> 00:02:33.430 align:start position:0%
+luego se importaba a Unreal como una malla.  Ahora
+puedes <00:02:31.692><c>crear </c><00:02:31.864><c>el </c><00:02:32.036><c>terreno </c><00:02:32.208><c>en </c><00:02:32.380><c>el </c><00:02:32.552><c>motor </c><00:02:32.724><c>del </c><00:02:32.896><c>juego, </c><00:02:33.068><c>o </c><00:02:33.240><c>bien,</c>
+
+00:02:33.430 --> 00:02:33.440 align:start position:0%
+puedes crear el terreno en el motor del juego, o bien,
+
+
+00:02:33.440 --> 00:02:35.070 align:start position:0%
+puedes crear el terreno en el motor del juego, o bien,
+otra <00:02:33.830><c>opción </c><00:02:34.220><c>es </c><00:02:34.610><c>comenzar </c><00:02:35.000><c>el</c>
+
+00:02:35.070 --> 00:02:35.080 align:start position:0%
+otra opción es comenzar el
+
+
+00:02:35.080 --> 00:02:37.030 align:start position:0%
+otra opción es comenzar el
+proceso <00:02:35.310><c>de </c><00:02:35.540><c>creación </c><00:02:35.770><c>de </c><00:02:36.000><c>una </c><00:02:36.230><c>malla </c><00:02:36.460><c>de </c><00:02:36.690><c>paisaje </c><00:02:36.920><c>en</c>
+
+00:02:37.030 --> 00:02:37.040 align:start position:0%
+proceso de creación de una malla de paisaje en
+
+
+00:02:37.040 --> 00:02:39.230 align:start position:0%
+proceso de creación de una malla de paisaje en
+otro <00:02:37.352><c>programa </c><00:02:37.664><c>y </c><00:02:37.976><c>luego, </c><00:02:38.288><c>en </c><00:02:38.600><c>Unreal,</c>
+
+00:02:39.230 --> 00:02:39.240 align:start position:0%
+otro programa y luego, en Unreal,
+
+
+00:02:39.240 --> 00:02:41.710 align:start position:0%
+otro programa y luego, en Unreal,
+convertir <00:02:39.485><c>ese </c><00:02:39.730><c>objeto </c><00:02:39.975><c>en </c><00:02:40.220><c>una </c><00:02:40.465><c>malla </c><00:02:40.710><c>de </c><00:02:40.955><c>terreno.</c>
+
+00:02:41.710 --> 00:02:41.720 align:start position:0%
+convertir ese objeto en una malla de terreno.
+
+
+00:02:41.720 --> 00:02:43.430 align:start position:0%
+convertir ese objeto en una malla de terreno.
+Así <00:02:41.973><c>podremos </c><00:02:42.226><c>seguir </c><00:02:42.479><c>esculpiendo </c><00:02:42.732><c>y </c><00:02:42.985><c>pintando </c><00:02:43.238><c>el</c>
+
+00:02:43.430 --> 00:02:43.440 align:start position:0%
+Así podremos seguir esculpiendo y pintando el
+
+
+00:02:43.440 --> 00:02:45.670 align:start position:0%
+Así podremos seguir esculpiendo y pintando el
+objeto.  <00:02:43.872><c>Esto </c><00:02:44.304><c>resulta </c><00:02:44.736><c>especialmente </c><00:02:45.168><c>útil </c><00:02:45.600><c>si</c>
+
+00:02:45.670 --> 00:02:45.680 align:start position:0%
+objeto.  Esto resulta especialmente útil si
+
+
+00:02:45.680 --> 00:02:46.990 align:start position:0%
+objeto.  Esto resulta especialmente útil si
+estás <00:02:45.935><c>creando </c><00:02:46.190><c>un </c><00:02:46.445><c>entorno </c><00:02:46.700><c>para </c><00:02:46.955><c>un</c>
+
+00:02:46.990 --> 00:02:47.000 align:start position:0%
+estás creando un entorno para un
+
+
+00:02:47.000 --> 00:02:48.510 align:start position:0%
+estás creando un entorno para un
+juego <00:02:47.310><c>y </c><00:02:47.620><c>necesitas </c><00:02:47.930><c>realizar </c><00:02:48.240><c>un</c>
+
+00:02:48.510 --> 00:02:48.520 align:start position:0%
+juego y necesitas realizar un
+
+
+00:02:48.520 --> 00:02:50.390 align:start position:0%
+juego y necesitas realizar un
+ajuste <00:02:48.765><c>rápido </c><00:02:49.010><c>a </c><00:02:49.255><c>la </c><00:02:49.500><c>malla </c><00:02:49.745><c>del </c><00:02:49.990><c>paisaje </c><00:02:50.235><c>por</c>
+
+00:02:50.390 --> 00:02:50.400 align:start position:0%
+ajuste rápido a la malla del paisaje por
+
+
+00:02:50.400 --> 00:02:52.470 align:start position:0%
+ajuste rápido a la malla del paisaje por
+motivos <00:02:50.673><c>de </c><00:02:50.946><c>jugabilidad.  </c><00:02:51.219><c>En </c><00:02:51.492><c>lugar </c><00:02:51.765><c>de </c><00:02:52.038><c>cambiar</c>
+
+00:02:52.470 --> 00:02:52.480 align:start position:0%
+motivos de jugabilidad.  En lugar de cambiar
+
+
+00:02:52.480 --> 00:02:54.550 align:start position:0%
+motivos de jugabilidad.  En lugar de cambiar
+a <00:02:52.856><c>Blender </c><00:02:53.232><c>o </c><00:02:53.608><c>Maya, </c><00:02:53.984><c>podemos </c><00:02:54.360><c>realizar</c>
+
+00:02:54.550 --> 00:02:54.560 align:start position:0%
+a Blender o Maya, podemos realizar
+
+
+00:02:54.560 --> 00:02:56.790 align:start position:0%
+a Blender o Maya, podemos realizar
+ese <00:02:54.839><c>cambio </c><00:02:55.118><c>directamente </c><00:02:55.397><c>en </c><00:02:55.676><c>el </c><00:02:55.955><c>nivel.</c>
+
+00:02:56.790 --> 00:02:56.800 align:start position:0%
+ese cambio directamente en el nivel.
+
+
+00:02:56.800 --> 00:02:58.510 align:start position:0%
+ese cambio directamente en el nivel.
+Ya <00:02:57.160><c>existen </c><00:02:57.520><c>muchísimas </c><00:02:57.880><c>herramientas </c><00:02:58.240><c>útiles</c>
+
+00:02:58.510 --> 00:02:58.520 align:start position:0%
+Ya existen muchísimas herramientas útiles
+
+
+00:02:58.520 --> 00:03:00.990 align:start position:0%
+Ya existen muchísimas herramientas útiles
+para <00:02:58.688><c>el </c><00:02:58.856><c>terreno </c><00:02:59.024><c>en </c><00:02:59.192><c>malla, </c><00:02:59.360><c>como </c><00:02:59.528><c>los </c><00:02:59.696><c>modificadores </c><00:02:59.864><c>de </c><00:03:00.032><c>textura.</c>
+
+00:03:00.990 --> 00:03:01.000 align:start position:0%
+para el terreno en malla, como los modificadores de textura.
+
+
+00:03:01.000 --> 00:03:02.270 align:start position:0%
+para el terreno en malla, como los modificadores de textura.
+Así <00:03:01.124><c>que, </c><00:03:01.248><c>si </c><00:03:01.372><c>dispones </c><00:03:01.496><c>de </c><00:03:01.620><c>un </c><00:03:01.744><c>mapa </c><00:03:01.868><c>de </c><00:03:01.992><c>alturas </c><00:03:02.116><c>tradicional</c>
+
+00:03:02.270 --> 00:03:02.280 align:start position:0%
+Así que, si dispones de un mapa de alturas tradicional
+
+
+00:03:02.280 --> 00:03:04.270 align:start position:0%
+Así que, si dispones de un mapa de alturas tradicional
+, <00:03:02.573><c>simplemente </c><00:03:02.866><c>colócalo </c><00:03:03.159><c>en </c><00:03:03.452><c>el </c><00:03:03.745><c>mundo </c><00:03:04.038><c>y</c>
+
+00:03:04.270 --> 00:03:04.280 align:start position:0%
+, simplemente colócalo en el mundo y
+
+
+00:03:04.280 --> 00:03:06.030 align:start position:0%
+, simplemente colócalo en el mundo y
+muévelo.  <00:03:05.560><c>Para</c>
+
+00:03:06.030 --> 00:03:06.040 align:start position:0%
+muévelo.  Para
+
+
+00:03:06.040 --> 00:03:07.990 align:start position:0%
+muévelo.  Para
+paisajes <00:03:06.392><c>realistas, </c><00:03:06.744><c>también </c><00:03:07.096><c>puedes </c><00:03:07.448><c>conectar </c><00:03:07.800><c>cualquier</c>
+
+00:03:07.990 --> 00:03:08.000 align:start position:0%
+paisajes realistas, también puedes conectar cualquier
+
+
+00:03:08.000 --> 00:03:09.790 align:start position:0%
+paisajes realistas, también puedes conectar cualquier
+malla <00:03:08.256><c>estática </c><00:03:08.512><c>a </c><00:03:08.768><c>ella </c><00:03:09.024><c>mediante </c><00:03:09.280><c>un</c>
+
+00:03:09.790 --> 00:03:09.800 align:start position:0%
+malla estática a ella mediante un
+
+
+00:03:09.800 --> 00:03:11.990 align:start position:0%
+malla estática a ella mediante un
+modificador <00:03:10.050><c>booleano.  </c><00:03:10.300><c>Aquí </c><00:03:10.550><c>tenéis </c><00:03:10.800><c>una </c><00:03:11.050><c>formación </c><00:03:11.300><c>terrestre </c><00:03:11.550><c>que </c><00:03:11.800><c>creé</c>
+
+00:03:11.990 --> 00:03:12.000 align:start position:0%
+modificador booleano.  Aquí tenéis una formación terrestre que creé
+
+
+00:03:12.000 --> 00:03:14.229 align:start position:0%
+modificador booleano.  Aquí tenéis una formación terrestre que creé
+en <00:03:12.297><c>Blender </c><00:03:12.594><c>y, </c><00:03:12.891><c>utilizando </c><00:03:13.188><c>una </c><00:03:13.485><c>operación </c><00:03:13.782><c>booleana, </c><00:03:14.079><c>puedo</c>
+
+00:03:14.229 --> 00:03:14.239 align:start position:0%
+en Blender y, utilizando una operación booleana, puedo
+
+
+00:03:14.239 --> 00:03:16.710 align:start position:0%
+en Blender y, utilizando una operación booleana, puedo
+conectarla <00:03:14.539><c>al </c><00:03:14.839><c>paisaje </c><00:03:15.139><c>sin </c><00:03:15.439><c>problemas.</c>
+
+00:03:16.710 --> 00:03:16.720 align:start position:0%
+conectarla al paisaje sin problemas.
+
+
+00:03:16.720 --> 00:03:18.190 align:start position:0%
+conectarla al paisaje sin problemas.
+Si <00:03:16.875><c>crees </c><00:03:17.030><c>que </c><00:03:17.185><c>al </c><00:03:17.340><c>terreno </c><00:03:17.495><c>de </c><00:03:17.650><c>malla </c><00:03:17.805><c>le </c><00:03:17.960><c>falta </c><00:03:18.115><c>alguna</c>
+
+00:03:18.190 --> 00:03:18.200 align:start position:0%
+Si crees que al terreno de malla le falta alguna
+
+
+00:03:18.200 --> 00:03:19.910 align:start position:0%
+Si crees que al terreno de malla le falta alguna
+función, <00:03:18.512><c>puedes </c><00:03:18.824><c>crear </c><00:03:19.136><c>herramientas </c><00:03:19.448><c>personalizadas </c><00:03:19.760><c>para</c>
+
+00:03:19.910 --> 00:03:19.920 align:start position:0%
+función, puedes crear herramientas personalizadas para
+
+
+00:03:19.920 --> 00:03:22.509 align:start position:0%
+función, puedes crear herramientas personalizadas para
+ello <00:03:20.192><c>utilizando </c><00:03:20.464><c>PCG </c><00:03:20.736><c>y </c><00:03:21.008><c>planos.   </c><00:03:21.280><c>El</c>
+
+00:03:22.509 --> 00:03:22.519 align:start position:0%
+ello utilizando PCG y planos.   El
+
+
+00:03:22.519 --> 00:03:24.030 align:start position:0%
+ello utilizando PCG y planos.   El
+terreno <00:03:22.719><c>de </c><00:03:22.919><c>malla </c><00:03:23.119><c>es </c><00:03:23.319><c>el </c><00:03:23.519><c>futuro </c><00:03:23.719><c>de </c><00:03:23.919><c>cómo</c>
+
+00:03:24.030 --> 00:03:24.040 align:start position:0%
+terreno de malla es el futuro de cómo
+
+
+00:03:24.040 --> 00:03:25.870 align:start position:0%
+terreno de malla es el futuro de cómo
+creamos <00:03:24.392><c>paisajes </c><00:03:24.744><c>en </c><00:03:25.096><c>Unreal </c><00:03:25.448><c>Engine.  </c><00:03:25.800><c>Las</c>
+
+00:03:25.870 --> 00:03:25.880 align:start position:0%
+creamos paisajes en Unreal Engine.  Las
+
+
+00:03:25.880 --> 00:03:28.310 align:start position:0%
+creamos paisajes en Unreal Engine.  Las
+posibilidades <00:03:26.450><c>son </c><00:03:27.020><c>infinitas.  </c><00:03:27.590><c>Si </c><00:03:28.160><c>quieres</c>
+
+00:03:28.310 --> 00:03:28.320 align:start position:0%
+posibilidades son infinitas.  Si quieres
+
+
+00:03:28.320 --> 00:03:29.710 align:start position:0%
+posibilidades son infinitas.  Si quieres
+saber <00:03:28.480><c>cómo </c><00:03:28.640><c>crear </c><00:03:28.800><c>paisajes </c><00:03:28.960><c>de </c><00:03:29.120><c>última </c><00:03:29.280><c>generación</c>
+
+00:03:29.710 --> 00:03:29.720 align:start position:0%
+saber cómo crear paisajes de última generación
+
+
+00:03:29.720 --> 00:03:31.990 align:start position:0%
+saber cómo crear paisajes de última generación
+y <00:03:30.160><c>obtener </c><00:03:30.600><c>un </c><00:03:31.040><c>material </c><00:03:31.480><c>maestro </c><00:03:31.920><c>que</c>
+
+00:03:31.990 --> 00:03:32.000 align:start position:0%
+y obtener un material maestro que
+
+
+00:03:32.000 --> 00:03:34.110 align:start position:0%
+y obtener un material maestro que
+creé <00:03:32.500><c>específicamente </c><00:03:33.000><c>para </c><00:03:33.500><c>ello, </c><00:03:34.000><c>puedes</c>
+
+00:03:34.110 --> 00:03:34.120 align:start position:0%
+creé específicamente para ello, puedes
+
+
+00:03:34.120 --> 00:03:36.350 align:start position:0%
+creé específicamente para ello, puedes
+consultar <00:03:34.411><c>el </c><00:03:34.702><c>tutorial </c><00:03:34.993><c>de </c><00:03:35.284><c>terreno </c><00:03:35.575><c>en </c><00:03:35.866><c>malla </c><00:03:36.157><c>que</c>
+
+00:03:36.350 --> 00:03:36.360 align:start position:0%
+consultar el tutorial de terreno en malla que
+
+
+00:03:36.360 --> 00:03:38.550 align:start position:0%
+consultar el tutorial de terreno en malla que
+subí <00:03:36.693><c>al </c><00:03:37.026><c>canal </c><00:03:37.359><c>la </c><00:03:37.692><c>semana </c><00:03:38.025><c>pasada, </c><00:03:38.358><c>que</c>
+
+00:03:38.550 --> 00:03:38.560 align:start position:0%
+subí al canal la semana pasada, que
+
+
+00:03:38.560 --> 00:03:40.350 align:start position:0%
+subí al canal la semana pasada, que
+abarca <00:03:38.833><c>todo </c><00:03:39.106><c>lo </c><00:03:39.379><c>que </c><00:03:39.652><c>necesitas </c><00:03:39.925><c>saber </c><00:03:40.198><c>para</c>
+
+00:03:40.350 --> 00:03:40.360 align:start position:0%
+abarca todo lo que necesitas saber para
+
+
+00:03:40.360 --> 00:03:42.509 align:start position:0%
+abarca todo lo que necesitas saber para
+empezar.  <00:03:40.706><c>La </c><00:03:41.052><c>siguiente </c><00:03:41.398><c>novedad </c><00:03:41.744><c>importante </c><00:03:42.090><c>es </c><00:03:42.436><c>un</c>
+
+00:03:42.509 --> 00:03:42.519 align:start position:0%
+empezar.  La siguiente novedad importante es un
+
+
+00:03:42.519 --> 00:03:44.390 align:start position:0%
+empezar.  La siguiente novedad importante es un
+nuevo <00:03:42.855><c>sistema </c><00:03:43.191><c>de </c><00:03:43.527><c>iluminación </c><00:03:43.863><c>para </c><00:03:44.199><c>Lumen,</c>
+
+00:03:44.390 --> 00:03:44.400 align:start position:0%
+nuevo sistema de iluminación para Lumen,
+
+
+00:03:44.400 --> 00:03:46.910 align:start position:0%
+nuevo sistema de iluminación para Lumen,
+centrado <00:03:44.929><c>en </c><00:03:45.458><c>la </c><00:03:45.987><c>optimización.  </c><00:03:46.516><c>Utiliza</c>
+
+00:03:46.910 --> 00:03:46.920 align:start position:0%
+centrado en la optimización.  Utiliza
+
+
+00:03:46.920 --> 00:03:49.110 align:start position:0%
+centrado en la optimización.  Utiliza
+campos <00:03:47.120><c>de </c><00:03:47.320><c>irradiancia </c><00:03:47.520><c>con </c><00:03:47.720><c>oclusión </c><00:03:47.920><c>de </c><00:03:48.120><c>la </c><00:03:48.320><c>sonda,</c>
+
+00:03:49.110 --> 00:03:49.120 align:start position:0%
+campos de irradiancia con oclusión de la sonda,
+
+
+00:03:49.120 --> 00:03:51.110 align:start position:0%
+campos de irradiancia con oclusión de la sonda,
+lo <00:03:49.487><c>que </c><00:03:49.854><c>suena </c><00:03:50.221><c>complicado, </c><00:03:50.588><c>pero </c><00:03:50.955><c>es</c>
+
+00:03:51.110 --> 00:03:51.120 align:start position:0%
+lo que suena complicado, pero es
+
+
+00:03:51.120 --> 00:03:53.190 align:start position:0%
+lo que suena complicado, pero es
+sencillo <00:03:51.365><c>una </c><00:03:51.610><c>vez </c><00:03:51.855><c>que </c><00:03:52.100><c>se </c><00:03:52.345><c>entiende.  </c><00:03:52.590><c>Este </c><00:03:52.835><c>sistema </c><00:03:53.080><c>se</c>
+
+00:03:53.190 --> 00:03:53.200 align:start position:0%
+sencillo una vez que se entiende.  Este sistema se
+
+
+00:03:53.200 --> 00:03:55.350 align:start position:0%
+sencillo una vez que se entiende.  Este sistema se
+llama <00:03:53.440><c>Lumen </c><00:03:53.680><c>light, </c><00:03:53.920><c>pero </c><00:03:54.160><c>a </c><00:03:54.400><c>mí </c><00:03:54.640><c>me </c><00:03:54.880><c>gusta </c><00:03:55.120><c>llamarlo</c>
+
+00:03:55.350 --> 00:03:55.360 align:start position:0%
+llama Lumen light, pero a mí me gusta llamarlo
+
+
+00:03:55.360 --> 00:03:57.750 align:start position:0%
+llama Lumen light, pero a mí me gusta llamarlo
+Lumen <00:03:55.706><c>sondes.  </c><00:03:56.052><c>Por </c><00:03:56.398><c>si </c><00:03:56.744><c>no </c><00:03:57.090><c>lo </c><00:03:57.436><c>sabías,</c>
+
+00:03:57.750 --> 00:03:57.760 align:start position:0%
+Lumen sondes.  Por si no lo sabías,
+
+
+00:03:57.760 --> 00:03:59.830 align:start position:0%
+Lumen sondes.  Por si no lo sabías,
+Lumen <00:03:58.005><c>es </c><00:03:58.250><c>el </c><00:03:58.495><c>sistema </c><00:03:58.740><c>de </c><00:03:58.985><c>iluminación </c><00:03:59.230><c>de </c><00:03:59.475><c>Unreal </c><00:03:59.720><c>Engine.</c>
+
+00:03:59.830 --> 00:03:59.840 align:start position:0%
+Lumen es el sistema de iluminación de Unreal Engine.
+
+
+00:03:59.840 --> 00:04:02.110 align:start position:0%
+Lumen es el sistema de iluminación de Unreal Engine.
+Calcula <00:04:00.131><c>la </c><00:04:00.422><c>iluminación </c><00:04:00.713><c>en </c><00:04:01.004><c>tiempo </c><00:04:01.295><c>real, </c><00:04:01.586><c>lo </c><00:04:01.877><c>que</c>
+
+00:04:02.110 --> 00:04:02.120 align:start position:0%
+Calcula la iluminación en tiempo real, lo que
+
+
+00:04:02.120 --> 00:04:03.870 align:start position:0%
+Calcula la iluminación en tiempo real, lo que
+significa <00:04:02.360><c>que </c><00:04:02.600><c>si </c><00:04:02.840><c>el </c><00:04:03.080><c>mundo </c><00:04:03.320><c>cambia </c><00:04:03.560><c>o </c><00:04:03.800><c>si</c>
+
+00:04:03.870 --> 00:04:03.880 align:start position:0%
+significa que si el mundo cambia o si
+
+
+00:04:03.880 --> 00:04:05.470 align:start position:0%
+significa que si el mundo cambia o si
+la <00:04:04.113><c>luz </c><00:04:04.346><c>se </c><00:04:04.579><c>mueve, </c><00:04:04.812><c>la </c><00:04:05.045><c>iluminación </c><00:04:05.278><c>se</c>
+
+00:04:05.470 --> 00:04:05.480 align:start position:0%
+la luz se mueve, la iluminación se
+
+
+00:04:05.480 --> 00:04:07.470 align:start position:0%
+la luz se mueve, la iluminación se
+actualizará <00:04:05.793><c>durante </c><00:04:06.106><c>el </c><00:04:06.419><c>juego.  </c><00:04:06.732><c>Este </c><00:04:07.045><c>es </c><00:04:07.358><c>un</c>
+
+00:04:07.470 --> 00:04:07.480 align:start position:0%
+actualizará durante el juego.  Este es un
+
+
+00:04:07.480 --> 00:04:09.630 align:start position:0%
+actualizará durante el juego.  Este es un
+proceso <00:04:07.742><c>costoso </c><00:04:08.004><c>en </c><00:04:08.266><c>cuanto </c><00:04:08.528><c>a </c><00:04:08.790><c>hardware, </c><00:04:09.052><c>ya </c><00:04:09.314><c>que</c>
+
+00:04:09.630 --> 00:04:09.640 align:start position:0%
+proceso costoso en cuanto a hardware, ya que
+
+
+00:04:09.640 --> 00:04:11.270 align:start position:0%
+proceso costoso en cuanto a hardware, ya que
+cada <00:04:09.888><c>fotograma </c><00:04:10.136><c>tiene </c><00:04:10.384><c>que </c><00:04:10.632><c>calcular </c><00:04:10.880><c>la</c>
+
+00:04:11.270 --> 00:04:11.280 align:start position:0%
+cada fotograma tiene que calcular la
+
+
+00:04:11.280 --> 00:04:13.550 align:start position:0%
+cada fotograma tiene que calcular la
+iluminación <00:04:11.546><c>global, </c><00:04:11.812><c>que </c><00:04:12.078><c>es </c><00:04:12.344><c>la </c><00:04:12.610><c>iluminación </c><00:04:12.876><c>indirecta.</c>
+
+00:04:13.550 --> 00:04:13.560 align:start position:0%
+iluminación global, que es la iluminación indirecta.
+
+
+00:04:13.560 --> 00:04:15.110 align:start position:0%
+iluminación global, que es la iluminación indirecta.
+La <00:04:13.720><c>luz </c><00:04:13.880><c>no </c><00:04:14.040><c>simplemente </c><00:04:14.200><c>incide </c><00:04:14.360><c>sobre </c><00:04:14.520><c>un </c><00:04:14.680><c>objeto </c><00:04:14.840><c>y </c><00:04:15.000><c>se</c>
+
+00:04:15.110 --> 00:04:15.120 align:start position:0%
+La luz no simplemente incide sobre un objeto y se
+
+
+00:04:15.120 --> 00:04:17.110 align:start position:0%
+La luz no simplemente incide sobre un objeto y se
+detiene.  <00:04:15.487><c>En </c><00:04:15.854><c>cambio, </c><00:04:16.221><c>rebota </c><00:04:16.588><c>en </c><00:04:16.955><c>ese</c>
+
+00:04:17.110 --> 00:04:17.120 align:start position:0%
+detiene.  En cambio, rebota en ese
+
+
+00:04:17.120 --> 00:04:18.949 align:start position:0%
+detiene.  En cambio, rebota en ese
+objeto <00:04:17.472><c>e </c><00:04:17.824><c>ilumina </c><00:04:18.176><c>otras </c><00:04:18.528><c>partes </c><00:04:18.880><c>del</c>
+
+00:04:18.949 --> 00:04:18.959 align:start position:0%
+objeto e ilumina otras partes del
+
+
+00:04:18.959 --> 00:04:21.430 align:start position:0%
+objeto e ilumina otras partes del
+mundo.  <00:04:19.252><c>Esto </c><00:04:19.545><c>se </c><00:04:19.838><c>llama </c><00:04:20.131><c>trazado </c><00:04:20.424><c>de </c><00:04:20.717><c>rayos</c>
+
+00:04:21.430 --> 00:04:21.440 align:start position:0%
+mundo.  Esto se llama trazado de rayos
+
+
+00:04:21.440 --> 00:04:23.510 align:start position:0%
+mundo.  Esto se llama trazado de rayos
+porque <00:04:21.691><c>traza </c><00:04:21.942><c>los </c><00:04:22.193><c>rayos </c><00:04:22.444><c>de </c><00:04:22.695><c>luz.  </c><00:04:22.946><c>Antes </c><00:04:23.197><c>de</c>
+
+00:04:23.510 --> 00:04:23.520 align:start position:0%
+porque traza los rayos de luz.  Antes de
+
+
+00:04:23.520 --> 00:04:25.590 align:start position:0%
+porque traza los rayos de luz.  Antes de
+Lumen <00:04:23.794><c>en </c><00:04:24.068><c>Unreal </c><00:04:24.342><c>Engine </c><00:04:24.616><c>4, </c><00:04:24.890><c>solíamos </c><00:04:25.164><c>obtener </c><00:04:25.438><c>la</c>
+
+00:04:25.590 --> 00:04:25.600 align:start position:0%
+Lumen en Unreal Engine 4, solíamos obtener la
+
+
+00:04:25.600 --> 00:04:27.190 align:start position:0%
+Lumen en Unreal Engine 4, solíamos obtener la
+iluminación <00:04:25.890><c>global </c><00:04:26.180><c>mediante </c><00:04:26.470><c>un </c><00:04:26.760><c>proceso</c>
+
+00:04:27.190 --> 00:04:27.200 align:start position:0%
+iluminación global mediante un proceso
+
+
+00:04:27.200 --> 00:04:29.470 align:start position:0%
+iluminación global mediante un proceso
+llamado <00:04:27.435><c>"light </c><00:04:27.670><c>baking" </c><00:04:27.905><c>(horneado </c><00:04:28.140><c>de </c><00:04:28.375><c>luz).  </c><00:04:28.610><c>Este </c><00:04:28.845><c>proceso </c><00:04:29.080><c>calcula </c><00:04:29.315><c>todos</c>
+
+00:04:29.470 --> 00:04:29.480 align:start position:0%
+llamado "light baking" (horneado de luz).  Este proceso calcula todos
+
+
+00:04:29.480 --> 00:04:31.630 align:start position:0%
+llamado "light baking" (horneado de luz).  Este proceso calcula todos
+los <00:04:29.693><c>rayos </c><00:04:29.906><c>de </c><00:04:30.119><c>luz </c><00:04:30.332><c>del </c><00:04:30.545><c>mundo </c><00:04:30.758><c>una </c><00:04:30.971><c>sola </c><00:04:31.184><c>vez </c><00:04:31.397><c>y</c>
+
+00:04:31.630 --> 00:04:31.640 align:start position:0%
+los rayos de luz del mundo una sola vez y
+
+
+00:04:31.640 --> 00:04:33.190 align:start position:0%
+los rayos de luz del mundo una sola vez y
+convierte <00:04:31.864><c>esa </c><00:04:32.088><c>iluminación </c><00:04:32.312><c>en </c><00:04:32.536><c>una </c><00:04:32.760><c>textura</c>
+
+00:04:33.190 --> 00:04:33.200 align:start position:0%
+convierte esa iluminación en una textura
+
+
+00:04:33.200 --> 00:04:35.550 align:start position:0%
+convierte esa iluminación en una textura
+llamada <00:04:33.560><c>mapa </c><00:04:33.920><c>de </c><00:04:34.280><c>luz.  </c><00:04:34.640><c>Esto </c><00:04:35.000><c>contiene </c><00:04:35.360><c>toda</c>
+
+00:04:35.550 --> 00:04:35.560 align:start position:0%
+llamada mapa de luz.  Esto contiene toda
+
+
+00:04:35.560 --> 00:04:37.470 align:start position:0%
+llamada mapa de luz.  Esto contiene toda
+la <00:04:35.846><c>iluminación </c><00:04:36.132><c>reflejada </c><00:04:36.418><c>y </c><00:04:36.704><c>las </c><00:04:36.990><c>sombras, </c><00:04:37.276><c>que</c>
+
+00:04:37.470 --> 00:04:37.480 align:start position:0%
+la iluminación reflejada y las sombras, que
+
+
+00:04:37.480 --> 00:04:39.590 align:start position:0%
+la iluminación reflejada y las sombras, que
+luego <00:04:37.767><c>se </c><00:04:38.054><c>superponen </c><00:04:38.341><c>sobre </c><00:04:38.628><c>el </c><00:04:38.915><c>mundo.</c>
+
+00:04:39.590 --> 00:04:39.600 align:start position:0%
+luego se superponen sobre el mundo.
+
+
+00:04:39.600 --> 00:04:41.830 align:start position:0%
+luego se superponen sobre el mundo.
+Esto <00:04:39.766><c>simula </c><00:04:39.932><c>una </c><00:04:40.098><c>iluminación </c><00:04:40.264><c>global, </c><00:04:40.430><c>ya </c><00:04:40.596><c>que </c><00:04:40.762><c>da </c><00:04:40.928><c>la </c><00:04:41.094><c>impresión </c><00:04:41.260><c>de </c><00:04:41.426><c>que </c><00:04:41.592><c>hay</c>
+
+00:04:41.830 --> 00:04:41.840 align:start position:0%
+Esto simula una iluminación global, ya que da la impresión de que hay
+
+
+00:04:41.840 --> 00:04:43.390 align:start position:0%
+Esto simula una iluminación global, ya que da la impresión de que hay
+luz <00:04:42.580><c>realista </c><00:04:43.320><c>en</c>
+
+00:04:43.390 --> 00:04:43.400 align:start position:0%
+luz realista en
+
+
+00:04:43.400 --> 00:04:45.590 align:start position:0%
+luz realista en
+el <00:04:43.635><c>mundo, </c><00:04:43.870><c>cuando </c><00:04:44.105><c>en </c><00:04:44.340><c>realidad </c><00:04:44.575><c>se </c><00:04:44.810><c>trata </c><00:04:45.045><c>simplemente </c><00:04:45.280><c>de </c><00:04:45.515><c>una</c>
+
+00:04:45.590 --> 00:04:45.600 align:start position:0%
+el mundo, cuando en realidad se trata simplemente de una
+
+
+00:04:45.600 --> 00:04:47.470 align:start position:0%
+el mundo, cuando en realidad se trata simplemente de una
+textura <00:04:45.912><c>llamada </c><00:04:46.224><c>mapa </c><00:04:46.536><c>de </c><00:04:46.848><c>luz.  </c><00:04:47.160><c>La</c>
+
+00:04:47.470 --> 00:04:47.480 align:start position:0%
+textura llamada mapa de luz.  La
+
+
+00:04:47.480 --> 00:04:49.230 align:start position:0%
+textura llamada mapa de luz.  La
+iluminación <00:04:47.728><c>precalculada </c><00:04:47.976><c>nos </c><00:04:48.224><c>permite </c><00:04:48.472><c>calcular </c><00:04:48.720><c>la</c>
+
+00:04:49.230 --> 00:04:49.240 align:start position:0%
+iluminación precalculada nos permite calcular la
+
+
+00:04:49.240 --> 00:04:51.190 align:start position:0%
+iluminación precalculada nos permite calcular la
+iluminación <00:04:49.407><c>mediante </c><00:04:49.574><c>trazado </c><00:04:49.741><c>de </c><00:04:49.908><c>rayos </c><00:04:50.075><c>una </c><00:04:50.242><c>sola </c><00:04:50.409><c>vez, </c><00:04:50.576><c>en </c><00:04:50.743><c>lugar </c><00:04:50.910><c>de </c><00:04:51.077><c>en</c>
+
+00:04:51.190 --> 00:04:51.200 align:start position:0%
+iluminación mediante trazado de rayos una sola vez, en lugar de en
+
+
+00:04:51.200 --> 00:04:52.870 align:start position:0%
+iluminación mediante trazado de rayos una sola vez, en lugar de en
+cada <00:04:51.504><c>fotograma, </c><00:04:51.808><c>que </c><00:04:52.112><c>es </c><00:04:52.416><c>lo </c><00:04:52.720><c>que</c>
+
+00:04:52.870 --> 00:04:52.880 align:start position:0%
+cada fotograma, que es lo que
+
+
+00:04:52.880 --> 00:04:54.909 align:start position:0%
+cada fotograma, que es lo que
+hace <00:04:53.097><c>el </c><00:04:53.314><c>trazado </c><00:04:53.531><c>de </c><00:04:53.748><c>rayos </c><00:04:53.965><c>moderno.  </c><00:04:54.182><c>Pero </c><00:04:54.399><c>simplemente </c><00:04:54.616><c>hornear </c><00:04:54.833><c>la</c>
+
+00:04:54.909 --> 00:04:54.919 align:start position:0%
+hace el trazado de rayos moderno.  Pero simplemente hornear la
+
+
+00:04:54.919 --> 00:04:56.870 align:start position:0%
+hace el trazado de rayos moderno.  Pero simplemente hornear la
+textura <00:04:55.136><c>del </c><00:04:55.353><c>mapa </c><00:04:55.570><c>de </c><00:04:55.787><c>luz </c><00:04:56.004><c>solo </c><00:04:56.221><c>funcionó </c><00:04:56.438><c>para</c>
+
+00:04:56.870 --> 00:04:56.880 align:start position:0%
+textura del mapa de luz solo funcionó para
+
+
+00:04:56.880 --> 00:04:59.630 align:start position:0%
+textura del mapa de luz solo funcionó para
+objetos <00:04:57.222><c>estáticos.  </c><00:04:57.564><c>Como </c><00:04:57.906><c>sabemos, </c><00:04:58.248><c>los </c><00:04:58.590><c>juegos </c><00:04:58.932><c>contienen </c><00:04:59.274><c>muchos</c>
+
+00:04:59.630 --> 00:04:59.640 align:start position:0%
+objetos estáticos.  Como sabemos, los juegos contienen muchos
+
+
+00:04:59.640 --> 00:05:01.390 align:start position:0%
+objetos estáticos.  Como sabemos, los juegos contienen muchos
+elementos <00:04:59.952><c>en </c><00:05:00.264><c>movimiento </c><00:05:00.576><c>que </c><00:05:00.888><c>no </c><00:05:01.200><c>tienen</c>
+
+00:05:01.390 --> 00:05:01.400 align:start position:0%
+elementos en movimiento que no tienen
+
+
+00:05:01.400 --> 00:05:03.550 align:start position:0%
+elementos en movimiento que no tienen
+acceso <00:05:01.565><c>a </c><00:05:01.730><c>la </c><00:05:01.895><c>textura </c><00:05:02.060><c>del </c><00:05:02.225><c>mapa </c><00:05:02.390><c>de </c><00:05:02.555><c>iluminación </c><00:05:02.720><c>precalculada.</c>
+
+00:05:03.550 --> 00:05:03.560 align:start position:0%
+acceso a la textura del mapa de iluminación precalculada.
+
+
+00:05:03.560 --> 00:05:05.030 align:start position:0%
+acceso a la textura del mapa de iluminación precalculada.
+Para <00:05:03.899><c>solucionar </c><00:05:04.238><c>esto, </c><00:05:04.577><c>además </c><00:05:04.916><c>de</c>
+
+00:05:05.030 --> 00:05:05.040 align:start position:0%
+Para solucionar esto, además de
+
+
+00:05:05.040 --> 00:05:07.150 align:start position:0%
+Para solucionar esto, además de
+hornear <00:05:05.530><c>la </c><00:05:06.020><c>textura, </c><00:05:06.510><c>en </c><00:05:07.000><c>UE4</c>
+
+00:05:07.150 --> 00:05:07.160 align:start position:0%
+hornear la textura, en UE4
+
+
+00:05:07.160 --> 00:05:09.909 align:start position:0%
+hornear la textura, en UE4
+también <00:05:07.525><c>hornearíamos </c><00:05:07.890><c>un </c><00:05:08.255><c>mapa </c><00:05:08.620><c>de </c><00:05:08.985><c>luz </c><00:05:09.350><c>volumétrico, </c><00:05:09.715><c>que</c>
+
+00:05:09.909 --> 00:05:09.919 align:start position:0%
+también hornearíamos un mapa de luz volumétrico, que
+
+
+00:05:09.919 --> 00:05:12.030 align:start position:0%
+también hornearíamos un mapa de luz volumétrico, que
+son <00:05:10.225><c>puntos </c><00:05:10.531><c>en </c><00:05:10.837><c>el </c><00:05:11.143><c>espacio </c><00:05:11.449><c>que </c><00:05:11.755><c>contienen</c>
+
+00:05:12.030 --> 00:05:12.040 align:start position:0%
+son puntos en el espacio que contienen
+
+
+00:05:12.040 --> 00:05:14.550 align:start position:0%
+son puntos en el espacio que contienen
+información <00:05:12.271><c>sobre </c><00:05:12.502><c>la </c><00:05:12.733><c>luz </c><00:05:12.964><c>reflejada.  </c><00:05:13.195><c>Entonces, </c><00:05:13.426><c>esta </c><00:05:13.657><c>es </c><00:05:13.888><c>la </c><00:05:14.119><c>luz</c>
+
+00:05:14.550 --> 00:05:14.560 align:start position:0%
+información sobre la luz reflejada.  Entonces, esta es la luz
+
+
+00:05:14.560 --> 00:05:16.790 align:start position:0%
+información sobre la luz reflejada.  Entonces, esta es la luz
+que <00:05:14.906><c>iluminaría </c><00:05:15.252><c>un </c><00:05:15.598><c>objeto </c><00:05:15.944><c>si </c><00:05:16.290><c>se </c><00:05:16.636><c>encuentra</c>
+
+00:05:16.790 --> 00:05:16.800 align:start position:0%
+que iluminaría un objeto si se encuentra
+
+
+00:05:16.800 --> 00:05:18.830 align:start position:0%
+que iluminaría un objeto si se encuentra
+en <00:05:17.270><c>ese </c><00:05:17.740><c>punto.  </c><00:05:18.210><c>Estos </c><00:05:18.680><c>puntos</c>
+
+00:05:18.830 --> 00:05:18.840 align:start position:0%
+en ese punto.  Estos puntos
+
+
+00:05:18.840 --> 00:05:21.070 align:start position:0%
+en ese punto.  Estos puntos
+proyectarían <00:05:19.114><c>la </c><00:05:19.388><c>información </c><00:05:19.662><c>de </c><00:05:19.936><c>luz </c><00:05:20.210><c>almacenada </c><00:05:20.484><c>sobre </c><00:05:20.758><c>los</c>
+
+00:05:21.070 --> 00:05:21.080 align:start position:0%
+proyectarían la información de luz almacenada sobre los
+
+
+00:05:21.080 --> 00:05:23.350 align:start position:0%
+proyectarían la información de luz almacenada sobre los
+objetos <00:05:21.297><c>móviles </c><00:05:21.514><c>cuando </c><00:05:21.731><c>estos </c><00:05:21.948><c>se </c><00:05:22.165><c>acerquen </c><00:05:22.382><c>a </c><00:05:22.599><c>ellos.</c>
+
+00:05:23.350 --> 00:05:23.360 align:start position:0%
+objetos móviles cuando estos se acerquen a ellos.
+
+
+00:05:23.360 --> 00:05:24.990 align:start position:0%
+objetos móviles cuando estos se acerquen a ellos.
+Visualizamos <00:05:23.680><c>la </c><00:05:24.000><c>luz </c><00:05:24.320><c>que </c><00:05:24.640><c>captan</c>
+
+00:05:24.990 --> 00:05:25.000 align:start position:0%
+Visualizamos la luz que captan
+
+
+00:05:25.000 --> 00:05:27.590 align:start position:0%
+Visualizamos la luz que captan
+estos <00:05:25.408><c>puntos </c><00:05:25.816><c>mediante </c><00:05:26.224><c>sondas.  </c><00:05:26.632><c>En </c><00:05:27.040><c>UE4,</c>
+
+00:05:27.590 --> 00:05:27.600 align:start position:0%
+estos puntos mediante sondas.  En UE4,
+
+
+00:05:27.600 --> 00:05:29.150 align:start position:0%
+estos puntos mediante sondas.  En UE4,
+después <00:05:27.880><c>de </c><00:05:28.160><c>generar </c><00:05:28.440><c>este </c><00:05:28.720><c>entorno, </c><00:05:29.000><c>se</c>
+
+00:05:29.150 --> 00:05:29.160 align:start position:0%
+después de generar este entorno, se
+
+
+00:05:29.160 --> 00:05:31.470 align:start position:0%
+después de generar este entorno, se
+crearon <00:05:29.506><c>dos </c><00:05:29.852><c>sondas </c><00:05:30.198><c>en </c><00:05:30.544><c>esta </c><00:05:30.890><c>ubicación.  </c><00:05:31.236><c>Y</c>
+
+00:05:31.470 --> 00:05:31.480 align:start position:0%
+crearon dos sondas en esta ubicación.  Y
+
+
+00:05:31.480 --> 00:05:34.190 align:start position:0%
+crearon dos sondas en esta ubicación.  Y
+a <00:05:31.720><c>medida </c><00:05:31.960><c>que </c><00:05:32.200><c>acerco </c><00:05:32.440><c>este </c><00:05:32.680><c>objeto </c><00:05:32.920><c>a </c><00:05:33.160><c>cada </c><00:05:33.400><c>sonda,</c>
+
+00:05:34.190 --> 00:05:34.200 align:start position:0%
+a medida que acerco este objeto a cada sonda,
+
+
+00:05:34.200 --> 00:05:36.230 align:start position:0%
+a medida que acerco este objeto a cada sonda,
+se <00:05:34.425><c>puede </c><00:05:34.650><c>observar </c><00:05:34.875><c>cómo </c><00:05:35.100><c>la </c><00:05:35.325><c>luz </c><00:05:35.550><c>capturada </c><00:05:35.775><c>por </c><00:05:36.000><c>cada</c>
+
+00:05:36.230 --> 00:05:36.240 align:start position:0%
+se puede observar cómo la luz capturada por cada
+
+
+00:05:36.240 --> 00:05:38.430 align:start position:0%
+se puede observar cómo la luz capturada por cada
+sonda <00:05:36.670><c>se </c><00:05:37.100><c>proyecta </c><00:05:37.530><c>sobre </c><00:05:37.960><c>el</c>
+
+00:05:38.430 --> 00:05:38.440 align:start position:0%
+sonda se proyecta sobre el
+
+
+00:05:38.440 --> 00:05:40.510 align:start position:0%
+sonda se proyecta sobre el
+objeto <00:05:38.725><c>móvil.  </c><00:05:39.010><c>La </c><00:05:39.295><c>desventaja </c><00:05:39.580><c>es </c><00:05:39.865><c>que, </c><00:05:40.150><c>si </c><00:05:40.435><c>nuestro</c>
+
+00:05:40.510 --> 00:05:40.520 align:start position:0%
+objeto móvil.  La desventaja es que, si nuestro
+
+
+00:05:40.520 --> 00:05:42.190 align:start position:0%
+objeto móvil.  La desventaja es que, si nuestro
+entorno <00:05:40.799><c>cambia, </c><00:05:41.078><c>las </c><00:05:41.357><c>sondas </c><00:05:41.636><c>de </c><00:05:41.915><c>luz</c>
+
+00:05:42.190 --> 00:05:42.200 align:start position:0%
+entorno cambia, las sondas de luz
+
+
+00:05:42.200 --> 00:05:44.430 align:start position:0%
+entorno cambia, las sondas de luz
+no <00:05:42.508><c>se </c><00:05:42.816><c>actualizarán.  </c><00:05:43.124><c>Son </c><00:05:43.432><c>estáticos.  </c><00:05:43.740><c>Por </c><00:05:44.048><c>lo </c><00:05:44.356><c>tanto,</c>
+
+00:05:44.430 --> 00:05:44.440 align:start position:0%
+no se actualizarán.  Son estáticos.  Por lo tanto,
+
+
+00:05:44.440 --> 00:05:46.030 align:start position:0%
+no se actualizarán.  Son estáticos.  Por lo tanto,
+necesitamos <00:05:44.570><c>volver </c><00:05:44.700><c>a </c><00:05:44.830><c>generar </c><00:05:44.960><c>la </c><00:05:45.090><c>textura </c><00:05:45.220><c>del </c><00:05:45.350><c>mapa </c><00:05:45.480><c>de </c><00:05:45.610><c>luz </c><00:05:45.740><c>y </c><00:05:45.870><c>el</c>
+
+00:05:46.030 --> 00:05:46.040 align:start position:0%
+necesitamos volver a generar la textura del mapa de luz y el
+
+
+00:05:46.040 --> 00:05:48.270 align:start position:0%
+necesitamos volver a generar la textura del mapa de luz y el
+mapa <00:05:46.333><c>de </c><00:05:46.626><c>luz </c><00:05:46.919><c>volumétrico </c><00:05:47.212><c>para </c><00:05:47.505><c>obtener </c><00:05:47.798><c>las</c>
+
+00:05:48.270 --> 00:05:48.280 align:start position:0%
+mapa de luz volumétrico para obtener las
+
+
+00:05:48.280 --> 00:05:50.470 align:start position:0%
+mapa de luz volumétrico para obtener las
+sondas <00:05:48.495><c>de </c><00:05:48.710><c>luz </c><00:05:48.925><c>actualizadas.  </c><00:05:49.140><c>Volviendo </c><00:05:49.355><c>a </c><00:05:49.570><c>Unreal </c><00:05:49.785><c>Engine </c><00:05:50.000><c>5,</c>
+
+00:05:50.470 --> 00:05:50.480 align:start position:0%
+sondas de luz actualizadas.  Volviendo a Unreal Engine 5,
+
+
+00:05:50.480 --> 00:05:52.350 align:start position:0%
+sondas de luz actualizadas.  Volviendo a Unreal Engine 5,
+si <00:05:50.840><c>bien </c><00:05:51.200><c>Lumen </c><00:05:51.560><c>logró </c><00:05:51.920><c>acelerar </c><00:05:52.280><c>el</c>
+
+00:05:52.350 --> 00:05:52.360 align:start position:0%
+si bien Lumen logró acelerar el
+
+
+00:05:52.360 --> 00:05:54.390 align:start position:0%
+si bien Lumen logró acelerar el
+proceso <00:05:52.790><c>de </c><00:05:53.220><c>iluminación </c><00:05:53.650><c>global </c><00:05:54.080><c>mediante</c>
+
+00:05:54.390 --> 00:05:54.400 align:start position:0%
+proceso de iluminación global mediante
+
+
+00:05:54.400 --> 00:05:56.550 align:start position:0%
+proceso de iluminación global mediante
+técnicas <00:05:54.808><c>de </c><00:05:55.216><c>optimización </c><00:05:55.624><c>únicas, </c><00:05:56.032><c>sigue </c><00:05:56.440><c>siendo</c>
+
+00:05:56.550 --> 00:05:56.560 align:start position:0%
+técnicas de optimización únicas, sigue siendo
+
+
+00:05:56.560 --> 00:05:58.630 align:start position:0%
+técnicas de optimización únicas, sigue siendo
+una <00:05:56.780><c>tarea </c><00:05:57.000><c>costosa </c><00:05:57.220><c>para </c><00:05:57.440><c>el </c><00:05:57.660><c>hardware.   </c><00:05:57.880><c>Los</c>
+
+00:05:58.630 --> 00:05:58.640 align:start position:0%
+una tarea costosa para el hardware.   Los
+
+
+00:05:58.640 --> 00:06:00.510 align:start position:0%
+una tarea costosa para el hardware.   Los
+ordenadores <00:05:58.897><c>antiguos </c><00:05:59.154><c>o </c><00:05:59.411><c>los </c><00:05:59.668><c>dispositivos </c><00:05:59.925><c>móviles </c><00:06:00.182><c>como </c><00:06:00.439><c>la</c>
+
+00:06:00.510 --> 00:06:00.520 align:start position:0%
+ordenadores antiguos o los dispositivos móviles como la
+
+
+00:06:00.520 --> 00:06:03.510 align:start position:0%
+ordenadores antiguos o los dispositivos móviles como la
+Switch <00:06:00.851><c>2 </c><00:06:01.182><c>no </c><00:06:01.513><c>son </c><00:06:01.844><c>capaces </c><00:06:02.175><c>de </c><00:06:02.506><c>ejecutar </c><00:06:02.837><c>Lumen</c>
+
+00:06:03.510 --> 00:06:03.520 align:start position:0%
+Switch 2 no son capaces de ejecutar Lumen
+
+
+00:06:03.520 --> 00:06:06.070 align:start position:0%
+Switch 2 no son capaces de ejecutar Lumen
+con <00:06:03.765><c>una </c><00:06:04.010><c>velocidad </c><00:06:04.255><c>de </c><00:06:04.500><c>fotogramas </c><00:06:04.745><c>fluida.  </c><00:06:04.990><c>Ahora, </c><00:06:05.235><c>UE5.1</c>
+
+00:06:06.070 --> 00:06:06.080 align:start position:0%
+con una velocidad de fotogramas fluida.  Ahora, UE5.1
+
+
+00:06:06.080 --> 00:06:08.390 align:start position:0%
+con una velocidad de fotogramas fluida.  Ahora, UE5.1
+introduce <00:06:06.426><c>la </c><00:06:06.772><c>oclusión </c><00:06:07.118><c>de </c><00:06:07.464><c>sonda </c><00:06:07.810><c>Lumen, </c><00:06:08.156><c>que</c>
+
+00:06:08.390 --> 00:06:08.400 align:start position:0%
+introduce la oclusión de sonda Lumen, que
+
+
+00:06:08.400 --> 00:06:10.470 align:start position:0%
+introduce la oclusión de sonda Lumen, que
+es <00:06:08.608><c>el </c><00:06:08.816><c>mismo </c><00:06:09.024><c>concepto </c><00:06:09.232><c>que </c><00:06:09.440><c>los </c><00:06:09.648><c>mapas </c><00:06:09.856><c>de </c><00:06:10.064><c>luz </c><00:06:10.272><c>volumétricos</c>
+
+00:06:10.470 --> 00:06:10.480 align:start position:0%
+es el mismo concepto que los mapas de luz volumétricos
+
+
+00:06:10.480 --> 00:06:12.710 align:start position:0%
+es el mismo concepto que los mapas de luz volumétricos
+de <00:06:10.771><c>UE4.  </c><00:06:11.062><c>Pero, </c><00:06:11.353><c>en </c><00:06:11.644><c>lugar </c><00:06:11.935><c>de </c><00:06:12.226><c>que </c><00:06:12.517><c>las</c>
+
+00:06:12.710 --> 00:06:12.720 align:start position:0%
+de UE4.  Pero, en lugar de que las
+
+
+00:06:12.720 --> 00:06:14.430 align:start position:0%
+de UE4.  Pero, en lugar de que las
+sondas <00:06:12.875><c>de </c><00:06:13.030><c>luz </c><00:06:13.185><c>sean </c><00:06:13.340><c>estáticas </c><00:06:13.495><c>y </c><00:06:13.650><c>se </c><00:06:13.805><c>creen </c><00:06:13.960><c>una </c><00:06:14.115><c>sola</c>
+
+00:06:14.430 --> 00:06:14.440 align:start position:0%
+sondas de luz sean estáticas y se creen una sola
+
+
+00:06:14.440 --> 00:06:16.390 align:start position:0%
+sondas de luz sean estáticas y se creen una sola
+vez, <00:06:14.870><c>ahora </c><00:06:15.300><c>se </c><00:06:15.730><c>crean </c><00:06:16.160><c>y</c>
+
+00:06:16.390 --> 00:06:16.400 align:start position:0%
+vez, ahora se crean y
+
+
+00:06:16.400 --> 00:06:17.830 align:start position:0%
+vez, ahora se crean y
+actualizan <00:06:16.664><c>en </c><00:06:16.928><c>tiempo </c><00:06:17.192><c>real </c><00:06:17.456><c>en </c><00:06:17.720><c>nuestro</c>
+
+00:06:17.830 --> 00:06:17.840 align:start position:0%
+actualizan en tiempo real en nuestro
+
+
+00:06:17.840 --> 00:06:19.950 align:start position:0%
+actualizan en tiempo real en nuestro
+entorno.  <00:06:18.075><c>Si </c><00:06:18.310><c>un </c><00:06:18.545><c>objeto </c><00:06:18.780><c>o </c><00:06:19.015><c>una </c><00:06:19.250><c>fuente </c><00:06:19.485><c>de </c><00:06:19.720><c>luz</c>
+
+00:06:19.950 --> 00:06:19.960 align:start position:0%
+entorno.  Si un objeto o una fuente de luz
+
+
+00:06:19.960 --> 00:06:21.830 align:start position:0%
+entorno.  Si un objeto o una fuente de luz
+se <00:06:20.211><c>mueve, </c><00:06:20.462><c>las </c><00:06:20.713><c>sondas </c><00:06:20.964><c>de </c><00:06:21.215><c>luz </c><00:06:21.466><c>cambiarán </c><00:06:21.717><c>y</c>
+
+00:06:21.830 --> 00:06:21.840 align:start position:0%
+se mueve, las sondas de luz cambiarán y
+
+
+00:06:21.840 --> 00:06:24.430 align:start position:0%
+se mueve, las sondas de luz cambiarán y
+se <00:06:22.130><c>actualizarán </c><00:06:22.420><c>automáticamente.  </c><00:06:22.710><c>Esto </c><00:06:23.000><c>ofrece </c><00:06:23.290><c>un </c><00:06:23.580><c>rendimiento </c><00:06:23.870><c>dos </c><00:06:24.160><c>veces</c>
+
+00:06:24.430 --> 00:06:24.440 align:start position:0%
+se actualizarán automáticamente.  Esto ofrece un rendimiento dos veces
+
+
+00:06:24.440 --> 00:06:26.350 align:start position:0%
+se actualizarán automáticamente.  Esto ofrece un rendimiento dos veces
+superior <00:06:24.653><c>al </c><00:06:24.866><c>de </c><00:06:25.079><c>Lumen </c><00:06:25.292><c>de </c><00:06:25.505><c>alta </c><00:06:25.718><c>calidad,</c>
+
+00:06:26.350 --> 00:06:26.360 align:start position:0%
+superior al de Lumen de alta calidad,
+
+
+00:06:26.360 --> 00:06:28.070 align:start position:0%
+superior al de Lumen de alta calidad,
+principalmente <00:06:26.866><c>porque </c><00:06:27.372><c>guardamos </c><00:06:27.878><c>la</c>
+
+00:06:28.070 --> 00:06:28.080 align:start position:0%
+principalmente porque guardamos la
+
+
+00:06:28.080 --> 00:06:30.270 align:start position:0%
+principalmente porque guardamos la
+información <00:06:28.272><c>de </c><00:06:28.464><c>la </c><00:06:28.656><c>luz </c><00:06:28.848><c>en </c><00:06:29.040><c>un </c><00:06:29.232><c>espacio </c><00:06:29.424><c>3D </c><00:06:29.616><c>y </c><00:06:29.808><c>solo </c><00:06:30.000><c>la</c>
+
+00:06:30.270 --> 00:06:30.280 align:start position:0%
+información de la luz en un espacio 3D y solo la
+
+
+00:06:30.280 --> 00:06:32.510 align:start position:0%
+información de la luz en un espacio 3D y solo la
+calculamos <00:06:30.606><c>cuando </c><00:06:30.932><c>es </c><00:06:31.258><c>necesario, </c><00:06:31.584><c>no </c><00:06:31.910><c>en </c><00:06:32.236><c>cada</c>
+
+00:06:32.510 --> 00:06:32.520 align:start position:0%
+calculamos cuando es necesario, no en cada
+
+
+00:06:32.520 --> 00:06:34.430 align:start position:0%
+calculamos cuando es necesario, no en cada
+fotograma.  <00:06:32.880><c>Esto </c><00:06:33.240><c>se </c><00:06:33.600><c>diseñó </c><00:06:33.960><c>específicamente </c><00:06:34.320><c>para</c>
+
+00:06:34.430 --> 00:06:34.440 align:start position:0%
+fotograma.  Esto se diseñó específicamente para
+
+
+00:06:34.440 --> 00:06:36.230 align:start position:0%
+fotograma.  Esto se diseñó específicamente para
+que <00:06:34.630><c>los </c><00:06:34.820><c>dispositivos </c><00:06:35.010><c>de </c><00:06:35.200><c>gama </c><00:06:35.390><c>baja, </c><00:06:35.580><c>como </c><00:06:35.770><c>la </c><00:06:35.960><c>Switch</c>
+
+00:06:36.230 --> 00:06:36.240 align:start position:0%
+que los dispositivos de gama baja, como la Switch
+
+
+00:06:36.240 --> 00:06:38.030 align:start position:0%
+que los dispositivos de gama baja, como la Switch
+2, <00:06:36.425><c>pudieran </c><00:06:36.610><c>seguir </c><00:06:36.795><c>disfrutando </c><00:06:36.980><c>de </c><00:06:37.165><c>la </c><00:06:37.350><c>iluminación </c><00:06:37.535><c>global </c><00:06:37.720><c>Lumen</c>
+
+00:06:38.030 --> 00:06:38.040 align:start position:0%
+2, pudieran seguir disfrutando de la iluminación global Lumen
+
+
+00:06:38.040 --> 00:06:40.030 align:start position:0%
+2, pudieran seguir disfrutando de la iluminación global Lumen
+, <00:06:39.520><c>pero</c>
+
+00:06:40.030 --> 00:06:40.040 align:start position:0%
+, pero
+
+
+00:06:40.040 --> 00:06:42.310 align:start position:0%
+, pero
+todo <00:06:40.260><c>tiene </c><00:06:40.480><c>sus </c><00:06:40.700><c>ventajas </c><00:06:40.920><c>y </c><00:06:41.140><c>desventajas.  </c><00:06:41.360><c>Por </c><00:06:41.580><c>supuesto, </c><00:06:41.800><c>Lumen </c><00:06:42.020><c>configurado </c><00:06:42.240><c>en</c>
+
+00:06:42.310 --> 00:06:42.320 align:start position:0%
+todo tiene sus ventajas y desventajas.  Por supuesto, Lumen configurado en
+
+
+00:06:42.320 --> 00:06:44.150 align:start position:0%
+todo tiene sus ventajas y desventajas.  Por supuesto, Lumen configurado en
+alta <00:06:42.500><c>calidad </c><00:06:42.680><c>y </c><00:06:42.860><c>con </c><00:06:43.040><c>trazado </c><00:06:43.220><c>de </c><00:06:43.400><c>rayos </c><00:06:43.580><c>por </c><00:06:43.760><c>hardware</c>
+
+00:06:44.150 --> 00:06:44.160 align:start position:0%
+alta calidad y con trazado de rayos por hardware
+
+
+00:06:44.160 --> 00:06:46.430 align:start position:0%
+alta calidad y con trazado de rayos por hardware
+sigue <00:06:44.351><c>ofreciendo </c><00:06:44.542><c>una </c><00:06:44.733><c>mejor </c><00:06:44.924><c>calidad </c><00:06:45.115><c>y </c><00:06:45.306><c>un </c><00:06:45.497><c>aspecto </c><00:06:45.688><c>más </c><00:06:45.879><c>realista</c>
+
+00:06:46.430 --> 00:06:46.440 align:start position:0%
+sigue ofreciendo una mejor calidad y un aspecto más realista
+
+
+00:06:46.440 --> 00:06:49.070 align:start position:0%
+sigue ofreciendo una mejor calidad y un aspecto más realista
+que <00:06:46.697><c>las </c><00:06:46.954><c>sondas </c><00:06:47.211><c>de </c><00:06:47.468><c>Lumen.  </c><00:06:47.725><c>Lumen </c><00:06:47.982><c>ya </c><00:06:48.239><c>no </c><00:06:48.496><c>es </c><00:06:48.753><c>solo</c>
+
+00:06:49.070 --> 00:06:49.080 align:start position:0%
+que las sondas de Lumen.  Lumen ya no es solo
+
+
+00:06:49.080 --> 00:06:51.230 align:start position:0%
+que las sondas de Lumen.  Lumen ya no es solo
+una <00:06:49.426><c>técnica </c><00:06:49.772><c>de </c><00:06:50.118><c>iluminación </c><00:06:50.464><c>global, </c><00:06:50.810><c>sino </c><00:06:51.156><c>una</c>
+
+00:06:51.230 --> 00:06:51.240 align:start position:0%
+una técnica de iluminación global, sino una
+
+
+00:06:51.240 --> 00:06:52.870 align:start position:0%
+una técnica de iluminación global, sino una
+colección <00:06:51.473><c>de </c><00:06:51.706><c>varios </c><00:06:51.939><c>sistemas </c><00:06:52.172><c>de </c><00:06:52.405><c>iluminación </c><00:06:52.638><c>diferentes</c>
+
+00:06:52.870 --> 00:06:52.880 align:start position:0%
+colección de varios sistemas de iluminación diferentes
+
+
+00:06:52.880 --> 00:06:55.270 align:start position:0%
+colección de varios sistemas de iluminación diferentes
+, <00:06:53.166><c>que </c><00:06:53.452><c>van </c><00:06:53.738><c>desde </c><00:06:54.024><c>el </c><00:06:54.310><c>más </c><00:06:54.596><c>atractivo</c>
+
+00:06:55.270 --> 00:06:55.280 align:start position:0%
+, que van desde el más atractivo
+
+
+00:06:55.280 --> 00:06:56.750 align:start position:0%
+, que van desde el más atractivo
+pero <00:06:55.474><c>también </c><00:06:55.668><c>el </c><00:06:55.862><c>más </c><00:06:56.056><c>caro, </c><00:06:56.250><c>que </c><00:06:56.444><c>es </c><00:06:56.638><c>el</c>
+
+00:06:56.750 --> 00:06:56.760 align:start position:0%
+pero también el más caro, que es el
+
+
+00:06:56.760 --> 00:06:58.990 align:start position:0%
+pero también el más caro, que es el
+trazado <00:06:56.956><c>de </c><00:06:57.152><c>rayos </c><00:06:57.348><c>por </c><00:06:57.544><c>hardware </c><00:06:57.740><c>de </c><00:06:57.936><c>alta </c><00:06:58.132><c>calidad, </c><00:06:58.328><c>pasando </c><00:06:58.524><c>por </c><00:06:58.720><c>el</c>
+
+00:06:58.990 --> 00:07:01.110 align:start position:0%
+trazado de rayos por hardware de alta calidad, pasando por el
+
+
+00:07:01.110 --> 00:07:01.120 align:start position:0%
+
+
+
+00:07:01.120 --> 00:07:03.270 align:start position:0%
+
+trazado <00:07:01.198><c>de </c><00:07:01.276><c>rayos </c><00:07:01.354><c>por </c><00:07:01.432><c>software, </c><00:07:01.510><c>que </c><00:07:01.588><c>ofrece </c><00:07:01.666><c>un </c><00:07:01.744><c>mejor </c><00:07:01.822><c>rendimiento </c><00:07:01.900><c>pero </c><00:07:01.978><c>es </c><00:07:02.056><c>menos </c><00:07:02.134><c>preciso, </c><00:07:02.212><c>hasta </c><00:07:02.290><c>las </c><00:07:02.368><c>sondas </c><00:07:02.446><c>Lumen, </c><00:07:02.524><c>que </c><00:07:02.602><c>ofrecen </c><00:07:02.680><c>la </c><00:07:02.758><c>configuración </c><00:07:02.836><c>más </c><00:07:02.914><c>baja</c>
+
+00:07:03.270 --> 00:07:03.280 align:start position:0%
+trazado de rayos por software, que ofrece un mejor rendimiento pero es menos preciso, hasta las sondas Lumen, que ofrecen la configuración más baja
+
+
+00:07:03.280 --> 00:07:05.590 align:start position:0%
+trazado de rayos por software, que ofrece un mejor rendimiento pero es menos preciso, hasta las sondas Lumen, que ofrecen la configuración más baja
+pero <00:07:03.577><c>el </c><00:07:03.874><c>mejor </c><00:07:04.171><c>rendimiento </c><00:07:04.468><c>y </c><00:07:04.765><c>aún </c><00:07:05.062><c>así </c><00:07:05.359><c>un</c>
+
+00:07:05.590 --> 00:07:05.600 align:start position:0%
+pero el mejor rendimiento y aún así un
+
+
+00:07:05.600 --> 00:07:07.750 align:start position:0%
+pero el mejor rendimiento y aún así un
+buen <00:07:06.120><c>aspecto.   </c><00:07:06.640><c>Las</c>
+
+00:07:07.750 --> 00:07:07.760 align:start position:0%
+buen aspecto.   Las
+
+
+00:07:07.760 --> 00:07:09.630 align:start position:0%
+buen aspecto.   Las
+sondas <00:07:08.040><c>de </c><00:07:08.320><c>lúmenes </c><00:07:08.600><c>se </c><00:07:08.880><c>encienden </c><00:07:09.160><c>automáticamente</c>
+
+00:07:09.630 --> 00:07:09.640 align:start position:0%
+sondas de lúmenes se encienden automáticamente
+
+
+00:07:09.640 --> 00:07:11.190 align:start position:0%
+sondas de lúmenes se encienden automáticamente
+cuando <00:07:09.833><c>en </c><00:07:10.026><c>la </c><00:07:10.219><c>configuración </c><00:07:10.412><c>se </c><00:07:10.605><c>establece </c><00:07:10.798><c>la</c>
+
+00:07:11.190 --> 00:07:11.200 align:start position:0%
+cuando en la configuración se establece la
+
+
+00:07:11.200 --> 00:07:13.790 align:start position:0%
+cuando en la configuración se establece la
+iluminación <00:07:11.560><c>global </c><00:07:11.920><c>en </c><00:07:12.280><c>nivel </c><00:07:12.640><c>medio.  </c><00:07:13.000><c>Es </c><00:07:13.360><c>fundamental</c>
+
+00:07:13.790 --> 00:07:13.800 align:start position:0%
+iluminación global en nivel medio.  Es fundamental
+
+
+00:07:13.800 --> 00:07:15.430 align:start position:0%
+iluminación global en nivel medio.  Es fundamental
+conseguir <00:07:14.026><c>que </c><00:07:14.252><c>UE5 </c><00:07:14.478><c>funcione </c><00:07:14.704><c>con </c><00:07:14.930><c>una </c><00:07:15.156><c>buena</c>
+
+00:07:15.430 --> 00:07:15.440 align:start position:0%
+conseguir que UE5 funcione con una buena
+
+
+00:07:15.440 --> 00:07:17.950 align:start position:0%
+conseguir que UE5 funcione con una buena
+velocidad <00:07:15.697><c>de </c><00:07:15.954><c>fotogramas </c><00:07:16.211><c>en </c><00:07:16.468><c>la </c><00:07:16.725><c>Switch </c><00:07:16.982><c>2 </c><00:07:17.239><c>porque </c><00:07:17.496><c>Nintendo </c><00:07:17.753><c>está</c>
+
+00:07:17.950 --> 00:07:17.960 align:start position:0%
+velocidad de fotogramas en la Switch 2 porque Nintendo está
+
+
+00:07:17.960 --> 00:07:19.550 align:start position:0%
+velocidad de fotogramas en la Switch 2 porque Nintendo está
+utilizando <00:07:18.165><c>Unreal </c><00:07:18.370><c>Engine </c><00:07:18.575><c>cada </c><00:07:18.780><c>vez </c><00:07:18.985><c>más </c><00:07:19.190><c>para </c><00:07:19.395><c>sus</c>
+
+00:07:19.550 --> 00:07:19.560 align:start position:0%
+utilizando Unreal Engine cada vez más para sus
+
+
+00:07:19.560 --> 00:07:21.830 align:start position:0%
+utilizando Unreal Engine cada vez más para sus
+juegos.  <00:07:19.970><c>Mario </c><00:07:20.380><c>and </c><00:07:20.790><c>Luigi </c><00:07:21.200><c>Brothership,</c>
+
+00:07:21.830 --> 00:07:21.840 align:start position:0%
+juegos.  Mario and Luigi Brothership,
+
+
+00:07:21.840 --> 00:07:24.230 align:start position:0%
+juegos.  Mario and Luigi Brothership,
+Pikmin <00:07:22.213><c>4 </c><00:07:22.586><c>y </c><00:07:22.959><c>Yoshi's </c><00:07:23.332><c>Crafted </c><00:07:23.705><c>World </c><00:07:24.078><c>se</c>
+
+00:07:24.230 --> 00:07:24.240 align:start position:0%
+Pikmin 4 y Yoshi's Crafted World se
+
+
+00:07:24.240 --> 00:07:26.390 align:start position:0%
+Pikmin 4 y Yoshi's Crafted World se
+crearon <00:07:24.533><c>con </c><00:07:24.826><c>Unreal </c><00:07:25.119><c>Engine, </c><00:07:25.412><c>pero </c><00:07:25.705><c>están </c><00:07:25.998><c>usando</c>
+
+00:07:26.390 --> 00:07:26.400 align:start position:0%
+crearon con Unreal Engine, pero están usando
+
+
+00:07:26.400 --> 00:07:29.710 align:start position:0%
+crearon con Unreal Engine, pero están usando
+UE4 <00:07:26.742><c>porque </c><00:07:27.084><c>no </c><00:07:27.426><c>hay </c><00:07:27.768><c>razón </c><00:07:28.110><c>para </c><00:07:28.452><c>usar </c><00:07:28.794><c>UE5</c>
+
+00:07:29.710 --> 00:07:29.720 align:start position:0%
+UE4 porque no hay razón para usar UE5
+
+
+00:07:29.720 --> 00:07:31.190 align:start position:0%
+UE4 porque no hay razón para usar UE5
+si <00:07:29.968><c>no </c><00:07:30.216><c>van </c><00:07:30.464><c>a </c><00:07:30.712><c>aprovechar </c><00:07:30.960><c>nuevas</c>
+
+00:07:31.190 --> 00:07:31.200 align:start position:0%
+si no van a aprovechar nuevas
+
+
+00:07:31.200 --> 00:07:33.550 align:start position:0%
+si no van a aprovechar nuevas
+funciones <00:07:31.640><c>como </c><00:07:32.080><c>Lumen.  </c><00:07:32.520><c>Las </c><00:07:32.960><c>sondas </c><00:07:33.400><c>Lumen</c>
+
+00:07:33.550 --> 00:07:33.560 align:start position:0%
+funciones como Lumen.  Las sondas Lumen
+
+
+00:07:33.560 --> 00:07:36.190 align:start position:0%
+funciones como Lumen.  Las sondas Lumen
+ayudarán <00:07:33.768><c>a </c><00:07:33.976><c>que </c><00:07:34.184><c>más </c><00:07:34.392><c>funciones </c><00:07:34.600><c>de </c><00:07:34.808><c>UE5 </c><00:07:35.016><c>lleguen </c><00:07:35.224><c>a </c><00:07:35.432><c>Switch </c><00:07:35.640><c>2</c>
+
+00:07:36.190 --> 00:07:36.200 align:start position:0%
+ayudarán a que más funciones de UE5 lleguen a Switch 2
+
+
+00:07:36.200 --> 00:07:38.550 align:start position:0%
+ayudarán a que más funciones de UE5 lleguen a Switch 2
+y <00:07:36.450><c>a </c><00:07:36.700><c>los </c><00:07:36.950><c>teléfonos </c><00:07:37.200><c>móviles.  </c><00:07:37.450><c>El </c><00:07:37.700><c>Creador </c><00:07:37.950><c>de </c><00:07:38.200><c>Metahumanos</c>
+
+00:07:38.550 --> 00:07:38.560 align:start position:0%
+y a los teléfonos móviles.  El Creador de Metahumanos
+
+
+00:07:38.560 --> 00:07:40.350 align:start position:0%
+y a los teléfonos móviles.  El Creador de Metahumanos
+ha <00:07:38.840><c>recibido </c><00:07:39.120><c>su </c><00:07:39.400><c>mayor </c><00:07:39.680><c>actualización </c><00:07:39.960><c>desde </c><00:07:40.240><c>su</c>
+
+00:07:40.350 --> 00:07:40.360 align:start position:0%
+ha recibido su mayor actualización desde su
+
+
+00:07:40.360 --> 00:07:42.710 align:start position:0%
+ha recibido su mayor actualización desde su
+lanzamiento, <00:07:40.713><c>con </c><00:07:41.066><c>la </c><00:07:41.419><c>capacidad </c><00:07:41.772><c>de </c><00:07:42.125><c>convertir </c><00:07:42.478><c>cualquier</c>
+
+00:07:42.710 --> 00:07:42.720 align:start position:0%
+lanzamiento, con la capacidad de convertir cualquier
+
+
+00:07:42.720 --> 00:07:44.870 align:start position:0%
+lanzamiento, con la capacidad de convertir cualquier
+objeto <00:07:43.066><c>que </c><00:07:43.412><c>parezca </c><00:07:43.758><c>un </c><00:07:44.104><c>humano </c><00:07:44.450><c>en </c><00:07:44.796><c>un</c>
+
+00:07:44.870 --> 00:07:44.880 align:start position:0%
+objeto que parezca un humano en un
+
+
+00:07:44.880 --> 00:07:47.030 align:start position:0%
+objeto que parezca un humano en un
+Metahumano <00:07:45.288><c>completo.  </c><00:07:45.696><c>Esto </c><00:07:46.104><c>significa </c><00:07:46.512><c>que </c><00:07:46.920><c>podemos</c>
+
+00:07:47.030 --> 00:07:47.040 align:start position:0%
+Metahumano completo.  Esto significa que podemos
+
+
+00:07:47.040 --> 00:07:49.070 align:start position:0%
+Metahumano completo.  Esto significa que podemos
+esculpir <00:07:47.273><c>un </c><00:07:47.506><c>personaje </c><00:07:47.739><c>en </c><00:07:47.972><c>Blender </c><00:07:48.205><c>o </c><00:07:48.438><c>ZBrush,</c>
+
+00:07:49.070 --> 00:07:49.080 align:start position:0%
+esculpir un personaje en Blender o ZBrush,
+
+
+00:07:49.080 --> 00:07:51.190 align:start position:0%
+esculpir un personaje en Blender o ZBrush,
+importarlo <00:07:49.600><c>a </c><00:07:50.120><c>Unreal </c><00:07:50.640><c>y</c>
+
+00:07:51.190 --> 00:07:51.200 align:start position:0%
+importarlo a Unreal y
+
+
+00:07:51.200 --> 00:07:53.390 align:start position:0%
+importarlo a Unreal y
+convertirlo <00:07:51.400><c>automáticamente </c><00:07:51.600><c>en </c><00:07:51.800><c>un </c><00:07:52.000><c>personaje </c><00:07:52.200><c>de </c><00:07:52.400><c>alta </c><00:07:52.600><c>calidad</c>
+
+00:07:53.390 --> 00:07:53.400 align:start position:0%
+convertirlo automáticamente en un personaje de alta calidad
+
+
+00:07:53.400 --> 00:07:55.670 align:start position:0%
+convertirlo automáticamente en un personaje de alta calidad
+listo <00:07:53.708><c>para </c><00:07:54.016><c>la </c><00:07:54.324><c>animación </c><00:07:54.632><c>y </c><00:07:54.940><c>el </c><00:07:55.248><c>juego.  </c><00:07:55.556><c>La</c>
+
+00:07:55.670 --> 00:07:55.680 align:start position:0%
+listo para la animación y el juego.  La
+
+
+00:07:55.680 --> 00:07:58.310 align:start position:0%
+listo para la animación y el juego.  La
+malla <00:07:56.112><c>puede </c><00:07:56.544><c>tener </c><00:07:56.976><c>cualquier </c><00:07:57.408><c>topología.  </c><00:07:57.840><c>MetaHuman</c>
+
+00:07:58.310 --> 00:07:58.320 align:start position:0%
+malla puede tener cualquier topología.  MetaHuman
+
+
+00:07:58.320 --> 00:08:00.350 align:start position:0%
+malla puede tener cualquier topología.  MetaHuman
+Creator <00:07:58.760><c>lo </c><00:07:59.200><c>convertirá </c><00:07:59.640><c>en</c>
+
+00:08:00.350 --> 00:08:00.360 align:start position:0%
+Creator lo convertirá en
+
+
+00:08:00.360 --> 00:08:02.630 align:start position:0%
+Creator lo convertirá en
+geometría <00:08:00.674><c>animable.  </c><00:08:00.988><c>Esto </c><00:08:01.302><c>es </c><00:08:01.616><c>una </c><00:08:01.930><c>locura, </c><00:08:02.244><c>porque </c><00:08:02.558><c>si</c>
+
+00:08:02.630 --> 00:08:02.640 align:start position:0%
+geometría animable.  Esto es una locura, porque si
+
+
+00:08:02.640 --> 00:08:03.790 align:start position:0%
+geometría animable.  Esto es una locura, porque si
+alguna <00:08:02.800><c>vez </c><00:08:02.960><c>has </c><00:08:03.120><c>creado </c><00:08:03.280><c>un </c><00:08:03.440><c>personaje </c><00:08:03.600><c>desde</c>
+
+00:08:03.790 --> 00:08:03.800 align:start position:0%
+alguna vez has creado un personaje desde
+
+
+00:08:03.800 --> 00:08:05.910 align:start position:0%
+alguna vez has creado un personaje desde
+cero, <00:08:04.085><c>sabes </c><00:08:04.370><c>lo </c><00:08:04.655><c>mucho </c><00:08:04.940><c>que </c><00:08:05.225><c>puede </c><00:08:05.510><c>llevar </c><00:08:05.795><c>tiempo</c>
+
+00:08:05.910 --> 00:08:05.920 align:start position:0%
+cero, sabes lo mucho que puede llevar tiempo
+
+
+00:08:05.920 --> 00:08:08.550 align:start position:0%
+cero, sabes lo mucho que puede llevar tiempo
+.  <00:08:06.480><c>Y </c><00:08:07.040><c>cualquier </c><00:08:07.600><c>animación </c><00:08:08.160><c>o</c>
+
+00:08:08.550 --> 00:08:08.560 align:start position:0%
+.  Y cualquier animación o
+
+
+00:08:08.560 --> 00:08:10.910 align:start position:0%
+.  Y cualquier animación o
+mecánica <00:08:08.745><c>de </c><00:08:08.930><c>juego </c><00:08:09.115><c>que </c><00:08:09.300><c>hayas </c><00:08:09.485><c>creado </c><00:08:09.670><c>para </c><00:08:09.855><c>otros </c><00:08:10.040><c>MetaHumanos</c>
+
+00:08:10.910 --> 00:08:10.920 align:start position:0%
+mecánica de juego que hayas creado para otros MetaHumanos
+
+
+00:08:10.920 --> 00:08:13.150 align:start position:0%
+mecánica de juego que hayas creado para otros MetaHumanos
+puede <00:08:11.205><c>aplicarse </c><00:08:11.490><c>a </c><00:08:11.775><c>esto.  </c><00:08:12.060><c>También </c><00:08:12.345><c>hay </c><00:08:12.630><c>una </c><00:08:12.915><c>nueva</c>
+
+00:08:13.150 --> 00:08:13.160 align:start position:0%
+puede aplicarse a esto.  También hay una nueva
+
+
+00:08:13.160 --> 00:08:14.630 align:start position:0%
+puede aplicarse a esto.  También hay una nueva
+forma <00:08:13.337><c>de </c><00:08:13.514><c>animar </c><00:08:13.691><c>con </c><00:08:13.868><c>controles </c><00:08:14.045><c>de </c><00:08:14.222><c>malla </c><00:08:14.399><c>directos</c>
+
+00:08:14.630 --> 00:08:14.640 align:start position:0%
+forma de animar con controles de malla directos
+
+
+00:08:14.640 --> 00:08:16.470 align:start position:0%
+forma de animar con controles de malla directos
+.  <00:08:14.885><c>Se </c><00:08:15.130><c>trata </c><00:08:15.375><c>de </c><00:08:15.620><c>una </c><00:08:15.865><c>forma </c><00:08:16.110><c>única </c><00:08:16.355><c>de</c>
+
+00:08:16.470 --> 00:08:16.480 align:start position:0%
+.  Se trata de una forma única de
+
+
+00:08:16.480 --> 00:08:18.310 align:start position:0%
+.  Se trata de una forma única de
+animación <00:08:16.910><c>que </c><00:08:17.340><c>permite </c><00:08:17.770><c>seleccionar </c><00:08:18.200><c>y</c>
+
+00:08:18.310 --> 00:08:18.320 align:start position:0%
+animación que permite seleccionar y
+
+
+00:08:18.320 --> 00:08:20.550 align:start position:0%
+animación que permite seleccionar y
+modificar <00:08:18.622><c>la </c><00:08:18.924><c>malla </c><00:08:19.226><c>directamente, </c><00:08:19.528><c>lo </c><00:08:19.830><c>que </c><00:08:20.132><c>puede </c><00:08:20.434><c>resultar</c>
+
+00:08:20.550 --> 00:08:20.560 align:start position:0%
+modificar la malla directamente, lo que puede resultar
+
+
+00:08:20.560 --> 00:08:22.870 align:start position:0%
+modificar la malla directamente, lo que puede resultar
+más <00:08:20.702><c>rápido </c><00:08:20.844><c>a </c><00:08:20.986><c>la </c><00:08:21.128><c>hora </c><00:08:21.270><c>de </c><00:08:21.412><c>animar </c><00:08:21.554><c>en </c><00:08:21.696><c>algunas </c><00:08:21.838><c>situaciones.</c>
+
+00:08:22.870 --> 00:08:22.880 align:start position:0%
+más rápido a la hora de animar en algunas situaciones.
+
+
+00:08:22.880 --> 00:08:24.550 align:start position:0%
+más rápido a la hora de animar en algunas situaciones.
+Así <00:08:23.080><c>pues, </c><00:08:23.280><c>en </c><00:08:23.480><c>lugar </c><00:08:23.680><c>de </c><00:08:23.880><c>seleccionar </c><00:08:24.080><c>un</c>
+
+00:08:24.550 --> 00:08:24.560 align:start position:0%
+Así pues, en lugar de seleccionar un
+
+
+00:08:24.560 --> 00:08:26.590 align:start position:0%
+Así pues, en lugar de seleccionar un
+control <00:08:24.944><c>predefinido, </c><00:08:25.328><c>se </c><00:08:25.712><c>anima </c><00:08:26.096><c>directamente </c><00:08:26.480><c>sobre</c>
+
+00:08:26.590 --> 00:08:26.600 align:start position:0%
+control predefinido, se anima directamente sobre
+
+
+00:08:26.600 --> 00:08:29.190 align:start position:0%
+control predefinido, se anima directamente sobre
+la <00:08:26.808><c>malla.  </c><00:08:27.016><c>Y </c><00:08:27.224><c>un </c><00:08:27.432><c>cambio </c><00:08:27.640><c>en </c><00:08:27.848><c>la </c><00:08:28.056><c>calidad </c><00:08:28.264><c>de </c><00:08:28.472><c>vida</c>
+
+00:08:29.190 --> 00:08:29.200 align:start position:0%
+la malla.  Y un cambio en la calidad de vida
+
+
+00:08:29.200 --> 00:08:30.590 align:start position:0%
+la malla.  Y un cambio en la calidad de vida
+es <00:08:29.420><c>que </c><00:08:29.640><c>existe </c><00:08:29.860><c>una </c><00:08:30.080><c>visión </c><00:08:30.300><c>alternativa </c><00:08:30.520><c>de</c>
+
+00:08:30.590 --> 00:08:30.600 align:start position:0%
+es que existe una visión alternativa de
+
+
+00:08:30.600 --> 00:08:33.029 align:start position:0%
+es que existe una visión alternativa de
+la <00:08:30.840><c>línea </c><00:08:31.080><c>de </c><00:08:31.320><c>tiempo, </c><00:08:31.560><c>que </c><00:08:31.800><c>es </c><00:08:32.040><c>más </c><00:08:32.280><c>corta.  </c><00:08:32.520><c>Se </c><00:08:32.760><c>parece</c>
+
+00:08:33.029 --> 00:08:33.039 align:start position:0%
+la línea de tiempo, que es más corta.  Se parece
+
+
+00:08:33.039 --> 00:08:35.350 align:start position:0%
+la línea de tiempo, que es más corta.  Se parece
+más <00:08:33.412><c>a </c><00:08:33.785><c>la </c><00:08:34.158><c>cronología </c><00:08:34.531><c>de </c><00:08:34.904><c>Blender.  </c><00:08:35.277><c>Ofrece</c>
+
+00:08:35.350 --> 00:08:35.360 align:start position:0%
+más a la cronología de Blender.  Ofrece
+
+
+00:08:35.360 --> 00:08:37.589 align:start position:0%
+más a la cronología de Blender.  Ofrece
+mucho <00:08:35.628><c>más </c><00:08:35.896><c>espacio </c><00:08:36.164><c>en </c><00:08:36.432><c>pantalla </c><00:08:36.700><c>sin </c><00:08:36.968><c>dejar </c><00:08:37.236><c>de</c>
+
+00:08:37.589 --> 00:08:37.599 align:start position:0%
+mucho más espacio en pantalla sin dejar de
+
+
+00:08:37.599 --> 00:08:39.830 align:start position:0%
+mucho más espacio en pantalla sin dejar de
+ser <00:08:38.089><c>funcional.  </c><00:08:38.579><c>Existe </c><00:08:39.069><c>un </c><00:08:39.559><c>nuevo</c>
+
+00:08:39.830 --> 00:08:39.840 align:start position:0%
+ser funcional.  Existe un nuevo
+
+
+00:08:39.840 --> 00:08:41.469 align:start position:0%
+ser funcional.  Existe un nuevo
+sistema <00:08:39.991><c>de </c><00:08:40.142><c>niebla </c><00:08:40.293><c>llamado </c><00:08:40.444><c>dispersión </c><00:08:40.595><c>espacial </c><00:08:40.746><c>mediante </c><00:08:40.897><c>pantalla </c><00:08:41.048><c>de </c><00:08:41.199><c>niebla</c>
+
+00:08:41.469 --> 00:08:41.479 align:start position:0%
+sistema de niebla llamado dispersión espacial mediante pantalla de niebla
+
+
+00:08:41.479 --> 00:08:43.510 align:start position:0%
+sistema de niebla llamado dispersión espacial mediante pantalla de niebla
+.  <00:08:41.709><c>Esto </c><00:08:41.939><c>hace </c><00:08:42.169><c>que </c><00:08:42.399><c>la </c><00:08:42.629><c>niebla </c><00:08:42.859><c>se </c><00:08:43.089><c>sienta </c><00:08:43.319><c>más</c>
+
+00:08:43.510 --> 00:08:43.520 align:start position:0%
+.  Esto hace que la niebla se sienta más
+
+
+00:08:43.520 --> 00:08:44.750 align:start position:0%
+.  Esto hace que la niebla se sienta más
+integrada <00:08:43.893><c>físicamente </c><00:08:44.266><c>con </c><00:08:44.639><c>el</c>
+
+00:08:44.750 --> 00:08:44.760 align:start position:0%
+integrada físicamente con el
+
+
+00:08:44.760 --> 00:08:46.910 align:start position:0%
+integrada físicamente con el
+entorno, <00:08:45.200><c>suavizando </c><00:08:45.640><c>y </c><00:08:46.080><c>difuminando </c><00:08:46.520><c>los</c>
+
+00:08:46.910 --> 00:08:46.920 align:start position:0%
+entorno, suavizando y difuminando los
+
+
+00:08:46.920 --> 00:08:49.030 align:start position:0%
+entorno, suavizando y difuminando los
+objetos <00:08:47.320><c>a </c><00:08:47.720><c>distancia.  </c><00:08:48.120><c>Esto </c><00:08:48.520><c>crea </c><00:08:48.920><c>un</c>
+
+00:08:49.030 --> 00:08:49.040 align:start position:0%
+objetos a distancia.  Esto crea un
+
+
+00:08:49.040 --> 00:08:51.630 align:start position:0%
+objetos a distancia.  Esto crea un
+aspecto <00:08:49.488><c>más </c><00:08:49.936><c>borroso </c><00:08:50.384><c>y </c><00:08:50.832><c>cinematográfico.  </c><00:08:51.280><c>Para</c>
+
+00:08:51.630 --> 00:08:51.640 align:start position:0%
+aspecto más borroso y cinematográfico.  Para
+
+
+00:08:51.640 --> 00:08:53.510 align:start position:0%
+aspecto más borroso y cinematográfico.  Para
+activarlo, <00:08:51.866><c>seleccione </c><00:08:52.092><c>la </c><00:08:52.318><c>niebla </c><00:08:52.544><c>de </c><00:08:52.770><c>altura </c><00:08:52.996><c>exponencial,</c>
+
+00:08:53.510 --> 00:08:53.520 align:start position:0%
+activarlo, seleccione la niebla de altura exponencial,
+
+
+00:08:53.520 --> 00:08:55.510 align:start position:0%
+activarlo, seleccione la niebla de altura exponencial,
+active <00:08:53.833><c>la </c><00:08:54.146><c>niebla </c><00:08:54.459><c>volumétrica </c><00:08:54.772><c>(está </c><00:08:55.085><c>diseñada </c><00:08:55.398><c>para</c>
+
+00:08:55.510 --> 00:08:55.520 align:start position:0%
+active la niebla volumétrica (está diseñada para
+
+
+00:08:55.520 --> 00:08:57.430 align:start position:0%
+active la niebla volumétrica (está diseñada para
+usarse <00:08:55.820><c>con </c><00:08:56.120><c>ella) </c><00:08:56.420><c>y </c><00:08:56.720><c>habilítela </c><00:08:57.020><c>en </c><00:08:57.320><c>modo</c>
+
+00:08:57.430 --> 00:08:57.440 align:start position:0%
+usarse con ella) y habilítela en modo
+
+
+00:08:57.440 --> 00:08:59.710 align:start position:0%
+usarse con ella) y habilítela en modo
+experimental.  <00:08:57.880><c>Aquí </c><00:08:58.320><c>está </c><00:08:58.760><c>el </c><00:08:59.200><c>antes, </c><00:08:59.640><c>el</c>
+
+00:08:59.710 --> 00:08:59.720 align:start position:0%
+experimental.  Aquí está el antes, el
+
+
+00:08:59.720 --> 00:09:02.070 align:start position:0%
+experimental.  Aquí está el antes, el
+mundo <00:09:00.022><c>es </c><00:09:00.324><c>demasiado </c><00:09:00.626><c>claro, </c><00:09:00.928><c>y </c><00:09:01.230><c>el </c><00:09:01.532><c>después.  </c><00:09:01.834><c>Observen</c>
+
+00:09:02.070 --> 00:09:02.080 align:start position:0%
+mundo es demasiado claro, y el después.  Observen
+
+
+00:09:02.080 --> 00:09:03.870 align:start position:0%
+mundo es demasiado claro, y el después.  Observen
+cómo <00:09:02.275><c>la </c><00:09:02.470><c>niebla </c><00:09:02.665><c>oculta </c><00:09:02.860><c>los </c><00:09:03.055><c>objetos </c><00:09:03.250><c>que </c><00:09:03.445><c>se </c><00:09:03.640><c>encuentran </c><00:09:03.835><c>a</c>
+
+00:09:03.870 --> 00:09:03.880 align:start position:0%
+cómo la niebla oculta los objetos que se encuentran a
+
+
+00:09:03.880 --> 00:09:05.910 align:start position:0%
+cómo la niebla oculta los objetos que se encuentran a
+distancia, <00:09:04.166><c>que </c><00:09:04.452><c>es </c><00:09:04.738><c>lo </c><00:09:05.024><c>que </c><00:09:05.310><c>cabría </c><00:09:05.596><c>esperar</c>
+
+00:09:05.910 --> 00:09:05.920 align:start position:0%
+distancia, que es lo que cabría esperar
+
+
+00:09:05.920 --> 00:09:08.390 align:start position:0%
+distancia, que es lo que cabría esperar
+de <00:09:06.384><c>una </c><00:09:06.848><c>niebla </c><00:09:07.312><c>densa.  </c><00:09:07.776><c>Mega </c><00:09:08.240><c>Lights</c>
+
+00:09:08.390 --> 00:09:08.400 align:start position:0%
+de una niebla densa.  Mega Lights
+
+
+00:09:08.400 --> 00:09:10.190 align:start position:0%
+de una niebla densa.  Mega Lights
+ya <00:09:08.582><c>está </c><00:09:08.764><c>listo </c><00:09:08.946><c>para </c><00:09:09.128><c>la </c><00:09:09.310><c>producción </c><00:09:09.492><c>y </c><00:09:09.674><c>viene </c><00:09:09.856><c>activado </c><00:09:10.038><c>por</c>
+
+00:09:10.190 --> 00:09:10.200 align:start position:0%
+ya está listo para la producción y viene activado por
+
+
+00:09:10.200 --> 00:09:11.950 align:start position:0%
+ya está listo para la producción y viene activado por
+defecto.  <00:09:10.609><c>Podemos </c><00:09:11.018><c>preocuparnos </c><00:09:11.427><c>menos </c><00:09:11.836><c>por</c>
+
+00:09:11.950 --> 00:09:11.960 align:start position:0%
+defecto.  Podemos preocuparnos menos por
+
+
+00:09:11.960 --> 00:09:13.670 align:start position:0%
+defecto.  Podemos preocuparnos menos por
+cuántas <00:09:12.171><c>luces </c><00:09:12.382><c>hay </c><00:09:12.593><c>en </c><00:09:12.804><c>el </c><00:09:13.015><c>mundo </c><00:09:13.226><c>y </c><00:09:13.437><c>llenar</c>
+
+00:09:13.670 --> 00:09:13.680 align:start position:0%
+cuántas luces hay en el mundo y llenar
+
+
+00:09:13.680 --> 00:09:15.150 align:start position:0%
+cuántas luces hay en el mundo y llenar
+nuestro <00:09:13.888><c>entorno </c><00:09:14.096><c>de </c><00:09:14.304><c>pequeñas </c><00:09:14.512><c>luces </c><00:09:14.720><c>por</c>
+
+00:09:15.150 --> 00:09:15.160 align:start position:0%
+nuestro entorno de pequeñas luces por
+
+
+00:09:15.160 --> 00:09:17.110 align:start position:0%
+nuestro entorno de pequeñas luces por
+todas <00:09:15.520><c>partes.  </c><00:09:15.880><c>La </c><00:09:16.240><c>dispersión </c><00:09:16.600><c>subsuperficial </c><00:09:16.960><c>y</c>
+
+00:09:17.110 --> 00:09:17.120 align:start position:0%
+todas partes.  La dispersión subsuperficial y
+
+
+00:09:17.120 --> 00:09:19.270 align:start position:0%
+todas partes.  La dispersión subsuperficial y
+los <00:09:17.440><c>materiales </c><00:09:17.760><c>translúcidos </c><00:09:18.080><c>como </c><00:09:18.400><c>el </c><00:09:18.720><c>agua </c><00:09:19.040><c>ahora</c>
+
+00:09:19.270 --> 00:09:19.280 align:start position:0%
+los materiales translúcidos como el agua ahora
+
+
+00:09:19.280 --> 00:09:21.150 align:start position:0%
+los materiales translúcidos como el agua ahora
+funcionan <00:09:19.608><c>con </c><00:09:19.936><c>megaluces.  </c><00:09:20.264><c>Existe </c><00:09:20.592><c>un </c><00:09:20.920><c>nuevo</c>
+
+00:09:21.150 --> 00:09:21.160 align:start position:0%
+funcionan con megaluces.  Existe un nuevo
+
+
+00:09:21.160 --> 00:09:22.710 align:start position:0%
+funcionan con megaluces.  Existe un nuevo
+sistema <00:09:21.380><c>de </c><00:09:21.600><c>materiales </c><00:09:21.820><c>de </c><00:09:22.040><c>sustrato </c><00:09:22.260><c>para </c><00:09:22.480><c>el</c>
+
+00:09:22.710 --> 00:09:22.720 align:start position:0%
+sistema de materiales de sustrato para el
+
+
+00:09:22.720 --> 00:09:25.110 align:start position:0%
+sistema de materiales de sustrato para el
+sombreado <00:09:23.150><c>de </c><00:09:23.580><c>tonos, </c><00:09:24.010><c>específicamente </c><00:09:24.440><c>para</c>
+
+00:09:25.110 --> 00:09:25.120 align:start position:0%
+sombreado de tonos, específicamente para
+
+
+00:09:25.120 --> 00:09:27.550 align:start position:0%
+sombreado de tonos, específicamente para
+personajes <00:09:25.536><c>estilizados </c><00:09:25.952><c>no </c><00:09:26.368><c>realistas.  </c><00:09:26.784><c>Podemos </c><00:09:27.200><c>controlar</c>
+
+00:09:27.550 --> 00:09:27.560 align:start position:0%
+personajes estilizados no realistas.  Podemos controlar
+
+
+00:09:27.560 --> 00:09:29.630 align:start position:0%
+personajes estilizados no realistas.  Podemos controlar
+el <00:09:27.764><c>gradiente </c><00:09:27.968><c>de </c><00:09:28.172><c>color </c><00:09:28.376><c>exacto </c><00:09:28.580><c>con </c><00:09:28.784><c>el </c><00:09:28.988><c>que </c><00:09:29.192><c>la </c><00:09:29.396><c>luz</c>
+
+00:09:29.630 --> 00:09:29.640 align:start position:0%
+el gradiente de color exacto con el que la luz
+
+
+00:09:29.640 --> 00:09:31.750 align:start position:0%
+el gradiente de color exacto con el que la luz
+interactúa <00:09:29.953><c>con </c><00:09:30.266><c>los </c><00:09:30.579><c>materiales.  </c><00:09:30.892><c>Esto </c><00:09:31.205><c>es </c><00:09:31.518><c>genial</c>
+
+00:09:31.750 --> 00:09:31.760 align:start position:0%
+interactúa con los materiales.  Esto es genial
+
+
+00:09:31.760 --> 00:09:33.829 align:start position:0%
+interactúa con los materiales.  Esto es genial
+para <00:09:32.136><c>personajes </c><00:09:32.512><c>de </c><00:09:32.888><c>anime.  </c><00:09:33.264><c>Blender </c><00:09:33.640><c>lleva</c>
+
+00:09:33.829 --> 00:09:33.839 align:start position:0%
+para personajes de anime.  Blender lleva
+
+
+00:09:33.839 --> 00:09:35.710 align:start position:0%
+para personajes de anime.  Blender lleva
+tiempo <00:09:33.995><c>incorporando </c><00:09:34.151><c>la </c><00:09:34.307><c>función </c><00:09:34.463><c>de </c><00:09:34.619><c>sombreado </c><00:09:34.775><c>de </c><00:09:34.931><c>tonos, </c><00:09:35.087><c>y </c><00:09:35.243><c>la </c><00:09:35.399><c>cantidad</c>
+
+00:09:35.710 --> 00:09:35.720 align:start position:0%
+tiempo incorporando la función de sombreado de tonos, y la cantidad
+
+
+00:09:35.720 --> 00:09:37.750 align:start position:0%
+tiempo incorporando la función de sombreado de tonos, y la cantidad
+de <00:09:35.988><c>increíbles </c><00:09:36.256><c>películas </c><00:09:36.524><c>de </c><00:09:36.792><c>anime </c><00:09:37.060><c>creadas </c><00:09:37.328><c>con </c><00:09:37.596><c>ella</c>
+
+00:09:37.750 --> 00:09:37.760 align:start position:0%
+de increíbles películas de anime creadas con ella
+
+
+00:09:37.760 --> 00:09:40.390 align:start position:0%
+de increíbles películas de anime creadas con ella
+es <00:09:38.030><c>impresionante.  </c><00:09:38.300><c>Si </c><00:09:38.570><c>bien </c><00:09:38.840><c>Unreal </c><00:09:39.110><c>Engine </c><00:09:39.380><c>ha </c><00:09:39.650><c>contado </c><00:09:39.920><c>con</c>
+
+00:09:40.390 --> 00:09:40.400 align:start position:0%
+es impresionante.  Si bien Unreal Engine ha contado con
+
+
+00:09:40.400 --> 00:09:42.510 align:start position:0%
+es impresionante.  Si bien Unreal Engine ha contado con
+juegos <00:09:40.784><c>y </c><00:09:41.168><c>animaciones </c><00:09:41.552><c>de </c><00:09:41.936><c>estilo </c><00:09:42.320><c>caricaturesco</c>
+
+00:09:42.510 --> 00:09:42.520 align:start position:0%
+juegos y animaciones de estilo caricaturesco
+
+
+00:09:42.520 --> 00:09:44.830 align:start position:0%
+juegos y animaciones de estilo caricaturesco
+, <00:09:42.880><c>como </c><00:09:43.240><c>Marvel </c><00:09:43.600><c>Rivals, </c><00:09:43.960><c>requería </c><00:09:44.320><c>una</c>
+
+00:09:44.830 --> 00:09:44.840 align:start position:0%
+, como Marvel Rivals, requería una
+
+
+00:09:44.840 --> 00:09:47.430 align:start position:0%
+, como Marvel Rivals, requería una
+ingeniería <00:09:45.320><c>de </c><00:09:45.800><c>sombreado </c><00:09:46.280><c>avanzada.  </c><00:09:46.760><c>Ahora, </c><00:09:47.240><c>está</c>
+
+00:09:47.430 --> 00:09:47.440 align:start position:0%
+ingeniería de sombreado avanzada.  Ahora, está
+
+
+00:09:47.440 --> 00:09:49.790 align:start position:0%
+ingeniería de sombreado avanzada.  Ahora, está
+integrado <00:09:47.670><c>en </c><00:09:47.900><c>el </c><00:09:48.130><c>motor.  </c><00:09:48.360><c>Por </c><00:09:48.590><c>lo </c><00:09:48.820><c>tanto, </c><00:09:49.050><c>podemos </c><00:09:49.280><c>esperar</c>
+
+00:09:49.790 --> 00:09:49.800 align:start position:0%
+integrado en el motor.  Por lo tanto, podemos esperar
+
+
+00:09:49.800 --> 00:09:51.670 align:start position:0%
+integrado en el motor.  Por lo tanto, podemos esperar
+creaciones <00:09:50.136><c>más </c><00:09:50.472><c>estilizadas </c><00:09:50.808><c>de </c><00:09:51.144><c>parte </c><00:09:51.480><c>de</c>
+
+00:09:51.670 --> 00:09:51.680 align:start position:0%
+creaciones más estilizadas de parte de
+
+
+00:09:51.680 --> 00:09:53.870 align:start position:0%
+creaciones más estilizadas de parte de
+Unreal.  <00:09:51.960><c>Ahora </c><00:09:52.240><c>tenemos </c><00:09:52.520><c>la </c><00:09:52.800><c>capacidad </c><00:09:53.080><c>de </c><00:09:53.360><c>editar </c><00:09:53.640><c>el</c>
+
+00:09:53.870 --> 00:09:53.880 align:start position:0%
+Unreal.  Ahora tenemos la capacidad de editar el
+
+
+00:09:53.880 --> 00:09:55.510 align:start position:0%
+Unreal.  Ahora tenemos la capacidad de editar el
+contenido <00:09:54.140><c>procedimental </c><00:09:54.400><c>después </c><00:09:54.660><c>de </c><00:09:54.920><c>que </c><00:09:55.180><c>se </c><00:09:55.440><c>haya</c>
+
+00:09:55.510 --> 00:09:55.520 align:start position:0%
+contenido procedimental después de que se haya
+
+
+00:09:55.520 --> 00:09:58.630 align:start position:0%
+contenido procedimental después de que se haya
+generado, <00:09:55.835><c>lo </c><00:09:56.150><c>que </c><00:09:56.465><c>nos </c><00:09:56.780><c>da </c><00:09:57.095><c>un </c><00:09:57.410><c>control </c><00:09:57.725><c>total.  </c><00:09:58.040><c>PCG</c>
+
+00:09:58.630 --> 00:09:58.640 align:start position:0%
+generado, lo que nos da un control total.  PCG
+
+
+00:09:58.640 --> 00:10:00.190 align:start position:0%
+generado, lo que nos da un control total.  PCG
+es <00:09:58.805><c>una </c><00:09:58.970><c>herramienta </c><00:09:59.135><c>invaluable </c><00:09:59.300><c>a </c><00:09:59.465><c>la </c><00:09:59.630><c>hora </c><00:09:59.795><c>de </c><00:09:59.960><c>crear</c>
+
+00:10:00.190 --> 00:10:00.200 align:start position:0%
+es una herramienta invaluable a la hora de crear
+
+
+00:10:00.200 --> 00:10:01.990 align:start position:0%
+es una herramienta invaluable a la hora de crear
+entornos <00:10:00.460><c>extensos, </c><00:10:00.720><c>ya </c><00:10:00.980><c>que </c><00:10:01.240><c>nos </c><00:10:01.500><c>permite </c><00:10:01.760><c>establecer</c>
+
+00:10:01.990 --> 00:10:02.000 align:start position:0%
+entornos extensos, ya que nos permite establecer
+
+
+00:10:02.000 --> 00:10:04.470 align:start position:0%
+entornos extensos, ya que nos permite establecer
+reglas <00:10:02.325><c>para </c><00:10:02.650><c>generar </c><00:10:02.975><c>mundos </c><00:10:03.300><c>de </c><00:10:03.625><c>forma </c><00:10:03.950><c>aleatoria.  </c><00:10:04.275><c>Lo</c>
+
+00:10:04.470 --> 00:10:04.480 align:start position:0%
+reglas para generar mundos de forma aleatoria.  Lo
+
+
+00:10:04.480 --> 00:10:06.670 align:start position:0%
+reglas para generar mundos de forma aleatoria.  Lo
+uso <00:10:04.754><c>constantemente </c><00:10:05.028><c>en </c><00:10:05.302><c>mis </c><00:10:05.576><c>flujos </c><00:10:05.850><c>de </c><00:10:06.124><c>trabajo, </c><00:10:06.398><c>pero</c>
+
+00:10:06.670 --> 00:10:06.680 align:start position:0%
+uso constantemente en mis flujos de trabajo, pero
+
+
+00:10:06.680 --> 00:10:08.470 align:start position:0%
+uso constantemente en mis flujos de trabajo, pero
+había <00:10:06.960><c>un </c><00:10:07.240><c>gran </c><00:10:07.520><c>problema.  </c><00:10:07.800><c>Y </c><00:10:08.080><c>es </c><00:10:08.360><c>que</c>
+
+00:10:08.470 --> 00:10:08.480 align:start position:0%
+había un gran problema.  Y es que
+
+
+00:10:08.480 --> 00:10:10.310 align:start position:0%
+había un gran problema.  Y es que
+teníamos <00:10:08.824><c>muy </c><00:10:09.168><c>poco </c><00:10:09.512><c>control </c><00:10:09.856><c>sobre </c><00:10:10.200><c>la</c>
+
+00:10:10.310 --> 00:10:10.320 align:start position:0%
+teníamos muy poco control sobre la
+
+
+00:10:10.320 --> 00:10:12.430 align:start position:0%
+teníamos muy poco control sobre la
+ubicación <00:10:10.653><c>de </c><00:10:10.986><c>los </c><00:10:11.319><c>objetos </c><00:10:11.652><c>individuales </c><00:10:11.985><c>o </c><00:10:12.318><c>los</c>
+
+00:10:12.430 --> 00:10:12.440 align:start position:0%
+ubicación de los objetos individuales o los
+
+
+00:10:12.440 --> 00:10:15.070 align:start position:0%
+ubicación de los objetos individuales o los
+cambios <00:10:12.724><c>que </c><00:10:13.008><c>estos </c><00:10:13.292><c>producían.  </c><00:10:13.576><c>Ahora, </c><00:10:13.860><c>en </c><00:10:14.144><c>la </c><00:10:14.428><c>versión </c><00:10:14.712><c>5.3, </c><00:10:14.996><c>si</c>
+
+00:10:15.070 --> 00:10:15.080 align:start position:0%
+cambios que estos producían.  Ahora, en la versión 5.3, si
+
+
+00:10:15.080 --> 00:10:16.750 align:start position:0%
+cambios que estos producían.  Ahora, en la versión 5.3, si
+no <00:10:15.275><c>te </c><00:10:15.470><c>gusta </c><00:10:15.665><c>la </c><00:10:15.860><c>posición </c><00:10:16.055><c>de </c><00:10:16.250><c>un </c><00:10:16.445><c>objeto </c><00:10:16.640><c>en</c>
+
+00:10:16.750 --> 00:10:16.760 align:start position:0%
+no te gusta la posición de un objeto en
+
+
+00:10:16.760 --> 00:10:19.110 align:start position:0%
+no te gusta la posición de un objeto en
+un <00:10:17.086><c>PCG, </c><00:10:17.412><c>simplemente </c><00:10:17.738><c>puedes </c><00:10:18.064><c>ir </c><00:10:18.390><c>a </c><00:10:18.716><c>editar</c>
+
+00:10:19.110 --> 00:10:19.120 align:start position:0%
+un PCG, simplemente puedes ir a editar
+
+
+00:10:19.120 --> 00:10:21.630 align:start position:0%
+un PCG, simplemente puedes ir a editar
+y <00:10:19.670><c>moverlo.  </c><00:10:20.220><c>También </c><00:10:20.770><c>puedes </c><00:10:21.320><c>añadir</c>
+
+00:10:21.630 --> 00:10:21.640 align:start position:0%
+y moverlo.  También puedes añadir
+
+
+00:10:21.640 --> 00:10:23.910 align:start position:0%
+y moverlo.  También puedes añadir
+o <00:10:22.000><c>eliminar </c><00:10:22.360><c>objetos </c><00:10:22.720><c>manualmente.  </c><00:10:23.080><c>Esta </c><00:10:23.440><c>es </c><00:10:23.800><c>una</c>
+
+00:10:23.910 --> 00:10:23.920 align:start position:0%
+o eliminar objetos manualmente.  Esta es una
+
+
+00:10:23.920 --> 00:10:25.670 align:start position:0%
+o eliminar objetos manualmente.  Esta es una
+característica <00:10:24.248><c>esencial </c><00:10:24.576><c>para </c><00:10:24.904><c>la </c><00:10:25.232><c>jugabilidad.  </c><00:10:25.560><c>Por</c>
+
+00:10:25.670 --> 00:10:25.680 align:start position:0%
+característica esencial para la jugabilidad.  Por
+
+
+00:10:25.680 --> 00:10:27.550 align:start position:0%
+característica esencial para la jugabilidad.  Por
+ejemplo, <00:10:25.973><c>puede </c><00:10:26.266><c>que </c><00:10:26.559><c>crees </c><00:10:26.852><c>un </c><00:10:27.145><c>bosque, </c><00:10:27.438><c>pero</c>
+
+00:10:27.550 --> 00:10:27.560 align:start position:0%
+ejemplo, puede que crees un bosque, pero
+
+
+00:10:27.560 --> 00:10:28.990 align:start position:0%
+ejemplo, puede que crees un bosque, pero
+luego <00:10:27.890><c>haya </c><00:10:28.220><c>algunos </c><00:10:28.550><c>árboles </c><00:10:28.880><c>que</c>
+
+00:10:28.990 --> 00:10:29.000 align:start position:0%
+luego haya algunos árboles que
+
+
+00:10:29.000 --> 00:10:30.430 align:start position:0%
+luego haya algunos árboles que
+estorben <00:10:29.194><c>a </c><00:10:29.388><c>un </c><00:10:29.582><c>elemento </c><00:10:29.776><c>del </c><00:10:29.970><c>juego, </c><00:10:30.164><c>como </c><00:10:30.358><c>una</c>
+
+00:10:30.430 --> 00:10:30.440 align:start position:0%
+estorben a un elemento del juego, como una
+
+
+00:10:30.440 --> 00:10:32.590 align:start position:0%
+estorben a un elemento del juego, como una
+casa.  <00:10:30.700><c>En </c><00:10:30.960><c>lugar </c><00:10:31.220><c>de </c><00:10:31.480><c>tener </c><00:10:31.740><c>que </c><00:10:32.000><c>regenerar</c>
+
+00:10:32.590 --> 00:10:32.600 align:start position:0%
+casa.  En lugar de tener que regenerar
+
+
+00:10:32.600 --> 00:10:34.990 align:start position:0%
+casa.  En lugar de tener que regenerar
+el <00:10:32.795><c>PCG, </c><00:10:32.990><c>con </c><00:10:33.185><c>la </c><00:10:33.380><c>esperanza </c><00:10:33.575><c>de </c><00:10:33.770><c>obtener </c><00:10:33.965><c>una </c><00:10:34.160><c>mejor </c><00:10:34.355><c>aparición</c>
+
+00:10:34.990 --> 00:10:35.000 align:start position:0%
+el PCG, con la esperanza de obtener una mejor aparición
+
+
+00:10:35.000 --> 00:10:37.190 align:start position:0%
+el PCG, con la esperanza de obtener una mejor aparición
+o <00:10:35.392><c>agregarle </c><00:10:35.784><c>más </c><00:10:36.176><c>nodos, </c><00:10:36.568><c>podemos </c><00:10:36.960><c>simplemente</c>
+
+00:10:37.190 --> 00:10:37.200 align:start position:0%
+o agregarle más nodos, podemos simplemente
+
+
+00:10:37.200 --> 00:10:39.790 align:start position:0%
+o agregarle más nodos, podemos simplemente
+entrar <00:10:37.502><c>y </c><00:10:37.804><c>editarlo </c><00:10:38.106><c>directamente.  </c><00:10:38.408><c>Se </c><00:10:38.710><c>trata </c><00:10:39.012><c>de </c><00:10:39.314><c>un</c>
+
+00:10:39.790 --> 00:10:39.800 align:start position:0%
+entrar y editarlo directamente.  Se trata de un
+
+
+00:10:39.800 --> 00:10:41.950 align:start position:0%
+entrar y editarlo directamente.  Se trata de un
+cambio <00:10:39.968><c>pequeño </c><00:10:40.136><c>pero </c><00:10:40.304><c>que </c><00:10:40.472><c>ahorra </c><00:10:40.640><c>tiempo </c><00:10:40.808><c>y </c><00:10:40.976><c>hace </c><00:10:41.144><c>que </c><00:10:41.312><c>PCG </c><00:10:41.480><c>sea</c>
+
+00:10:41.950 --> 00:10:41.960 align:start position:0%
+cambio pequeño pero que ahorra tiempo y hace que PCG sea
+
+
+00:10:41.960 --> 00:10:44.230 align:start position:0%
+cambio pequeño pero que ahorra tiempo y hace que PCG sea
+más <00:10:42.296><c>práctico.  </c><00:10:42.632><c>Hablando </c><00:10:42.968><c>de </c><00:10:43.304><c>ahorrar </c><00:10:43.640><c>tiempo,</c>
+
+00:10:44.230 --> 00:10:44.240 align:start position:0%
+más práctico.  Hablando de ahorrar tiempo,
+
+
+00:10:44.240 --> 00:10:46.110 align:start position:0%
+más práctico.  Hablando de ahorrar tiempo,
+ahora <00:10:44.506><c>tenemos </c><00:10:44.772><c>un </c><00:10:45.038><c>nuevo </c><00:10:45.304><c>dispositivo </c><00:10:45.570><c>que </c><00:10:45.836><c>funciona</c>
+
+00:10:46.110 --> 00:10:46.120 align:start position:0%
+ahora tenemos un nuevo dispositivo que funciona
+
+
+00:10:46.120 --> 00:10:47.990 align:start position:0%
+ahora tenemos un nuevo dispositivo que funciona
+mejor <00:10:46.353><c>que </c><00:10:46.586><c>el </c><00:10:46.819><c>original.  </c><00:10:47.052><c>Es </c><00:10:47.285><c>más </c><00:10:47.518><c>limpio</c>
+
+00:10:47.990 --> 00:10:48.000 align:start position:0%
+mejor que el original.  Es más limpio
+
+
+00:10:48.000 --> 00:10:49.870 align:start position:0%
+mejor que el original.  Es más limpio
+y <00:10:48.440><c>no </c><00:10:48.880><c>ocupa </c><00:10:49.320><c>tanto </c><00:10:49.760><c>espacio.</c>
+
+00:10:49.870 --> 00:10:49.880 align:start position:0%
+y no ocupa tanto espacio.
+
+
+00:10:49.880 --> 00:10:51.630 align:start position:0%
+y no ocupa tanto espacio.
+También <00:10:50.074><c>contamos </c><00:10:50.268><c>con </c><00:10:50.462><c>nuevas </c><00:10:50.656><c>opciones </c><00:10:50.850><c>de </c><00:10:51.044><c>movimiento </c><00:10:51.238><c>inspiradas</c>
+
+00:10:51.630 --> 00:10:51.640 align:start position:0%
+También contamos con nuevas opciones de movimiento inspiradas
+
+
+00:10:51.640 --> 00:10:53.430 align:start position:0%
+También contamos con nuevas opciones de movimiento inspiradas
+en <00:10:51.855><c>Blender.  </c><00:10:52.070><c>Manteniendo </c><00:10:52.285><c>pulsadas </c><00:10:52.500><c>las </c><00:10:52.715><c>teclas </c><00:10:52.930><c>Control </c><00:10:53.145><c>y </c><00:10:53.360><c>los</c>
+
+00:10:53.430 --> 00:10:53.440 align:start position:0%
+en Blender.  Manteniendo pulsadas las teclas Control y los
+
+
+00:10:53.440 --> 00:10:55.390 align:start position:0%
+en Blender.  Manteniendo pulsadas las teclas Control y los
+botones <00:10:53.680><c>del </c><00:10:53.920><c>ratón, </c><00:10:54.160><c>puedes </c><00:10:54.400><c>mover </c><00:10:54.640><c>un </c><00:10:54.880><c>objeto</c>
+
+00:10:55.390 --> 00:10:55.400 align:start position:0%
+botones del ratón, puedes mover un objeto
+
+
+00:10:55.400 --> 00:10:57.630 align:start position:0%
+botones del ratón, puedes mover un objeto
+sin <00:10:55.635><c>tocar </c><00:10:55.870><c>el </c><00:10:56.105><c>dispositivo.  </c><00:10:56.340><c>Si </c><00:10:56.575><c>usas </c><00:10:56.810><c>la </c><00:10:57.045><c>tecla </c><00:10:57.280><c>Alt</c>
+
+00:10:57.630 --> 00:10:57.640 align:start position:0%
+sin tocar el dispositivo.  Si usas la tecla Alt
+
+
+00:10:57.640 --> 00:10:59.470 align:start position:0%
+sin tocar el dispositivo.  Si usas la tecla Alt
+y <00:10:57.825><c>las </c><00:10:58.010><c>teclas </c><00:10:58.195><c>de </c><00:10:58.380><c>flecha, </c><00:10:58.565><c>podrás </c><00:10:58.750><c>mover </c><00:10:58.935><c>el </c><00:10:59.120><c>objeto</c>
+
+00:10:59.470 --> 00:10:59.480 align:start position:0%
+y las teclas de flecha, podrás mover el objeto
+
+
+00:10:59.480 --> 00:11:01.510 align:start position:0%
+y las teclas de flecha, podrás mover el objeto
+gradualmente, <00:10:59.766><c>y </c><00:11:00.052><c>si </c><00:11:00.338><c>mantienes </c><00:11:00.624><c>presionada </c><00:11:00.910><c>la </c><00:11:01.196><c>tecla</c>
+
+00:11:01.510 --> 00:11:01.520 align:start position:0%
+gradualmente, y si mantienes presionada la tecla
+
+
+00:11:01.520 --> 00:11:03.829 align:start position:0%
+gradualmente, y si mantienes presionada la tecla
+Control, <00:11:01.833><c>realizarás </c><00:11:02.146><c>cambios </c><00:11:02.459><c>más </c><00:11:02.772><c>pequeños </c><00:11:03.085><c>y </c><00:11:03.398><c>precisos</c>
+
+00:11:03.829 --> 00:11:03.839 align:start position:0%
+Control, realizarás cambios más pequeños y precisos
+
+
+00:11:03.839 --> 00:11:06.110 align:start position:0%
+Control, realizarás cambios más pequeños y precisos
+.  <00:11:04.192><c>Estos </c><00:11:04.545><c>atajos </c><00:11:04.898><c>también </c><00:11:05.251><c>funcionan </c><00:11:05.604><c>para </c><00:11:05.957><c>la</c>
+
+00:11:06.110 --> 00:11:06.120 align:start position:0%
+.  Estos atajos también funcionan para la
+
+
+00:11:06.120 --> 00:11:08.350 align:start position:0%
+.  Estos atajos también funcionan para la
+rotación <00:11:06.473><c>y </c><00:11:06.826><c>el </c><00:11:07.179><c>escalado.  </c><00:11:07.532><c>En </c><00:11:07.885><c>colaboración </c><00:11:08.238><c>con</c>
+
+00:11:08.350 --> 00:11:08.360 align:start position:0%
+rotación y el escalado.  En colaboración con
+
+
+00:11:08.360 --> 00:11:10.630 align:start position:0%
+rotación y el escalado.  En colaboración con
+Valve, <00:11:08.728><c>Epic </c><00:11:09.096><c>ha </c><00:11:09.464><c>añadido </c><00:11:09.832><c>soporte </c><00:11:10.200><c>inicial</c>
+
+00:11:10.630 --> 00:11:10.640 align:start position:0%
+Valve, Epic ha añadido soporte inicial
+
+
+00:11:10.640 --> 00:11:12.390 align:start position:0%
+Valve, Epic ha añadido soporte inicial
+para <00:11:10.928><c>Steam </c><00:11:11.216><c>Deck, </c><00:11:11.504><c>que </c><00:11:11.792><c>es </c><00:11:12.080><c>la</c>
+
+00:11:12.390 --> 00:11:12.400 align:start position:0%
+para Steam Deck, que es la
+
+
+00:11:12.400 --> 00:11:14.829 align:start position:0%
+para Steam Deck, que es la
+próxima <00:11:12.624><c>plataforma </c><00:11:12.848><c>y </c><00:11:13.072><c>sistema </c><00:11:13.296><c>de </c><00:11:13.520><c>realidad </c><00:11:13.744><c>virtual </c><00:11:13.968><c>de </c><00:11:14.192><c>Steam.  </c><00:11:14.416><c>Es </c><00:11:14.640><c>fantástico</c>
+
+00:11:14.829 --> 00:11:14.839 align:start position:0%
+próxima plataforma y sistema de realidad virtual de Steam.  Es fantástico
+
+
+00:11:14.839 --> 00:11:17.230 align:start position:0%
+próxima plataforma y sistema de realidad virtual de Steam.  Es fantástico
+ver <00:11:14.966><c>que </c><00:11:15.093><c>Epic </c><00:11:15.220><c>y </c><00:11:15.347><c>Unreal </c><00:11:15.474><c>cuentan </c><00:11:15.601><c>con </c><00:11:15.728><c>el </c><00:11:15.855><c>respaldo </c><00:11:15.982><c>de </c><00:11:16.109><c>la </c><00:11:16.236><c>realidad </c><00:11:16.363><c>virtual </c><00:11:16.490><c>y </c><00:11:16.617><c>que </c><00:11:16.744><c>esta </c><00:11:16.871><c>sea</c>
+
+00:11:17.230 --> 00:11:17.240 align:start position:0%
+ver que Epic y Unreal cuentan con el respaldo de la realidad virtual y que esta sea
+
+
+00:11:17.240 --> 00:11:18.790 align:start position:0%
+ver que Epic y Unreal cuentan con el respaldo de la realidad virtual y que esta sea
+la <00:11:17.473><c>primera </c><00:11:17.706><c>plataforma </c><00:11:17.939><c>en </c><00:11:18.172><c>implementarla </c><00:11:18.405><c>en </c><00:11:18.638><c>los</c>
+
+00:11:18.790 --> 00:11:18.800 align:start position:0%
+la primera plataforma en implementarla en los
+
+
+00:11:18.800 --> 00:11:20.950 align:start position:0%
+la primera plataforma en implementarla en los
+nuevos <00:11:19.074><c>auriculares </c><00:11:19.348><c>de </c><00:11:19.622><c>Valve.  </c><00:11:19.896><c>Cabe </c><00:11:20.170><c>esperar </c><00:11:20.444><c>que </c><00:11:20.718><c>se</c>
+
+00:11:20.950 --> 00:11:20.960 align:start position:0%
+nuevos auriculares de Valve.  Cabe esperar que se
+
+
+00:11:20.960 --> 00:11:23.110 align:start position:0%
+nuevos auriculares de Valve.  Cabe esperar que se
+desarrollen <00:11:21.148><c>más </c><00:11:21.336><c>juegos </c><00:11:21.524><c>de </c><00:11:21.712><c>realidad </c><00:11:21.900><c>virtual </c><00:11:22.088><c>para </c><00:11:22.276><c>Unreal.</c>
+
+00:11:23.110 --> 00:11:23.120 align:start position:0%
+desarrollen más juegos de realidad virtual para Unreal.
+
+
+00:11:23.120 --> 00:11:25.110 align:start position:0%
+desarrollen más juegos de realidad virtual para Unreal.
+Estas <00:11:23.285><c>son </c><00:11:23.450><c>solo </c><00:11:23.615><c>algunas </c><00:11:23.780><c>de </c><00:11:23.945><c>las </c><00:11:24.110><c>nuevas </c><00:11:24.275><c>funciones.</c>
+
+00:11:25.110 --> 00:11:25.120 align:start position:0%
+Estas son solo algunas de las nuevas funciones.
+
+
+00:11:25.120 --> 00:11:26.790 align:start position:0%
+Estas son solo algunas de las nuevas funciones.
+Puedes <00:11:25.325><c>consultar </c><00:11:25.530><c>la </c><00:11:25.735><c>hoja </c><00:11:25.940><c>de </c><00:11:26.145><c>ruta </c><00:11:26.350><c>para </c><00:11:26.555><c>ver</c>
+
+00:11:26.790 --> 00:11:26.800 align:start position:0%
+Puedes consultar la hoja de ruta para ver
+
+
+00:11:26.800 --> 00:11:28.870 align:start position:0%
+Puedes consultar la hoja de ruta para ver
+todo <00:11:26.995><c>lo </c><00:11:27.190><c>que </c><00:11:27.385><c>se </c><00:11:27.580><c>ha </c><00:11:27.775><c>añadido.  </c><00:11:27.970><c>No </c><00:11:28.165><c>olvides </c><00:11:28.360><c>suscribirte</c>
+
+00:11:28.870 --> 00:11:28.880 align:start position:0%
+todo lo que se ha añadido.  No olvides suscribirte
+
+
+00:11:28.880 --> 00:11:30.790 align:start position:0%
+todo lo que se ha añadido.  No olvides suscribirte
+para <00:11:29.080><c>recibir </c><00:11:29.280><c>más </c><00:11:29.480><c>noticias </c><00:11:29.680><c>y </c><00:11:29.880><c>tutoriales </c><00:11:30.080><c>sobre </c><00:11:30.280><c>3D </c><00:11:30.480><c>en </c><00:11:30.680><c>el</c>
+
+00:11:30.790 --> 00:11:30.800 align:start position:0%
+para recibir más noticias y tutoriales sobre 3D en el
+
+
+00:11:30.800 --> 00:11:33.070 align:start position:0%
+para recibir más noticias y tutoriales sobre 3D en el
+futuro.  <00:11:31.152><c>Y </c><00:11:31.504><c>si </c><00:11:31.856><c>quieres </c><00:11:32.208><c>aprender </c><00:11:32.560><c>Unreal,</c>
+
+00:11:33.070 --> 00:11:33.080 align:start position:0%
+futuro.  Y si quieres aprender Unreal,
+
+
+00:11:33.080 --> 00:11:34.790 align:start position:0%
+futuro.  Y si quieres aprender Unreal,
+tengo <00:11:33.346><c>dos </c><00:11:33.612><c>cursos </c><00:11:33.878><c>gratuitos </c><00:11:34.144><c>aquí </c><00:11:34.410><c>mismo </c><00:11:34.676><c>en</c>
+
+00:11:34.790 --> 00:11:34.800 align:start position:0%
+tengo dos cursos gratuitos aquí mismo en
+
+
+00:11:34.800 --> 00:11:36.510 align:start position:0%
+tengo dos cursos gratuitos aquí mismo en
+YouTube <00:11:35.013><c>que </c><00:11:35.226><c>te </c><00:11:35.439><c>enseñarán </c><00:11:35.652><c>los </c><00:11:35.865><c>conceptos </c><00:11:36.078><c>básicos</c>
+
+00:11:36.510 --> 00:11:36.520 align:start position:0%
+YouTube que te enseñarán los conceptos básicos
+
+
+00:11:36.520 --> 00:11:38.830 align:start position:0%
+YouTube que te enseñarán los conceptos básicos
+de <00:11:36.760><c>Unreal.  </c><00:11:37.000><c>En </c><00:11:37.240><c>el </c><00:11:37.480><c>primer </c><00:11:37.720><c>curso </c><00:11:37.960><c>para </c><00:11:38.200><c>principiantes,</c>
+
+00:11:38.830 --> 00:11:38.840 align:start position:0%
+de Unreal.  En el primer curso para principiantes,
+
+
+00:11:38.840 --> 00:11:40.230 align:start position:0%
+de Unreal.  En el primer curso para principiantes,
+aprenderás <00:11:39.173><c>a </c><00:11:39.506><c>crear </c><00:11:39.839><c>este</c>
+
+00:11:40.230 --> 00:11:40.240 align:start position:0%
+aprenderás a crear este
+
+
+00:11:40.240 --> 00:11:42.190 align:start position:0%
+aprenderás a crear este
+entorno <00:11:40.475><c>de </c><00:11:40.710><c>castillo </c><00:11:40.945><c>que </c><00:11:41.180><c>ves </c><00:11:41.415><c>ahora </c><00:11:41.650><c>mismo.  </c><00:11:41.885><c>Y </c><00:11:42.120><c>en</c>
+
+00:11:42.190 --> 00:11:42.200 align:start position:0%
+entorno de castillo que ves ahora mismo.  Y en
+
+
+00:11:42.200 --> 00:11:44.150 align:start position:0%
+entorno de castillo que ves ahora mismo.  Y en
+el <00:11:42.733><c>segundo </c><00:11:43.266><c>tutorial, </c><00:11:43.799><c>programarás</c>
+
+00:11:44.150 --> 00:11:44.160 align:start position:0%
+el segundo tutorial, programarás
+
+
+00:11:44.160 --> 00:11:45.990 align:start position:0%
+el segundo tutorial, programarás
+tu <00:11:44.733><c>primer </c><00:11:45.306><c>videojuego.  </c><00:11:45.879><c>Puedes</c>
+
+00:11:45.990 --> 00:11:46.000 align:start position:0%
+tu primer videojuego.  Puedes
+
+
+00:11:46.000 --> 00:11:47.710 align:start position:0%
+tu primer videojuego.  Puedes
+consultar <00:11:46.280><c>ambos, </c><00:11:46.560><c>los </c><00:11:46.840><c>enlaces </c><00:11:47.120><c>están </c><00:11:47.400><c>en </c><00:11:47.680><c>la</c>
+
+00:11:47.710 --> 00:11:47.720 align:start position:0%
+consultar ambos, los enlaces están en la
+
+
+00:11:47.720 --> 00:11:50.640 align:start position:0%
+consultar ambos, los enlaces están en la
+descripción <00:11:47.960><c>a </c><00:11:48.200><c>continuación.</c>
+

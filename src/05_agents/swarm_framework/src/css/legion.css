@@ -1,0 +1,118 @@
+/* C5-REAL EXERGY CERTIFIED */
+/* ═══════════════════════════════════════════════════════════
+   LEGIØN-1 — 1000-Node Swarm Visualization
+   Harmonic Homeostasis × Genesis Synthesis
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Canvas Layer ── */
+.legion-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+
+.section-council .section-inner {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Oscilloscope Panel ── */
+.legion-oscilloscope {
+  margin-top: var(--space-lg);
+  border: 1px solid var(--void-border);
+  border-radius: var(--radius-md);
+  background: var(--void-card);
+  overflow: hidden;
+}
+
+.oscilloscope-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  background: var(--void-elevated);
+}
+
+.oscilloscope-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.osc-state {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.15em 0.6em;
+  border-radius: 20px;
+  border: 1px solid;
+}
+
+.osc-synced  { color: #4ADE80; border-color: rgba(74, 222, 128, 0.3); background: rgba(74, 222, 128, 0.08); }
+.osc-stable  { color: #4ADE80; border-color: rgba(74, 222, 128, 0.25); background: rgba(74, 222, 128, 0.06); }
+.osc-tension { color: #FBBF24; border-color: rgba(251, 191, 36, 0.3); background: rgba(251, 191, 36, 0.08); }
+.osc-critical { color: #FF3B3B; border-color: rgba(255, 59, 59, 0.3); background: rgba(255, 59, 59, 0.08); }
+
+.oscilloscope-canvas {
+  display: block;
+  width: 100%;
+  height: 80px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* ── Oscilloscope Metrics ── */
+.oscilloscope-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.osc-metric {
+  flex: 1;
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.6rem 0.8rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.osc-metric:last-child { border-right: none; }
+
+.osc-metric-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+}
+
+.osc-metric-value {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-bright);
+  letter-spacing: 0.04em;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .oscilloscope-canvas { height: 50px; }
+  .oscilloscope-header { flex-direction: column; gap: 0.4rem; align-items: flex-start; }
+  .oscilloscope-metrics { flex-direction: column; }
+  .osc-metric { flex-direction: row; justify-content: space-between; border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.04); }
+  .osc-metric:last-child { border-bottom: none; }
+}
+
+@media (max-width: 480px) {
+  .oscilloscope-canvas { height: 40px; }
+}

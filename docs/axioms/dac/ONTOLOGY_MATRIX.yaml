@@ -1,0 +1,58 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+dac_version: "2.0-Hybrid"
+project: "Teorema-Robinson-Moskv"
+domain: "ONTOLOGY_MATRIX"
+platform_targets: ["Knowledge_Graph", "Ontology_Engineering"]
+memory_models: ["Semantic_Singularity", "Causal_Directedness"]
+abi: ["P_x_I_x_A_x_ISO", "Identity_Reflexivity"]
+
+Claim: "Un sistema sin una ontología densa es una simulación estocástica (C4-SIM) condenada a la entropía semántica. La disciplina formal exige un colapso del significado."
+Proof:
+  Base: "ontology/matrix.md"
+  Range: "[P_001-P_010, I_001-I_010, A_001-A_010, ISO_001-ISO_010]"
+  Confidence: "C5-REAL"
+
+Isomorphisms:
+  - '"Ontology Node" -> "Graph/Document Entity"'
+  - '"Ontological Edge" -> "Relational Foreign Key"'
+  - '"Taxon/Type" -> "Database Schema"'
+  - '"Provenance Trait" -> "[CORTEX-TAINT] Git Sentinel"'
+
+Blast_Radius_Matrix:
+  Vector: "Slop Naming, Falsa Sinonimia y JSON Blob Abyss que causan ceguera forense y fuga semántica."
+  Blast_Radius: "Semántica Global, Motor de Inferencia, AST Reflection."
+  Target_Invariant: "Identity Reflexivity (Un concepto físico = Un URI global)."
+  Anergy_Risk: "High (El fallo ontológico provoca bifurcaciones esquizofrénicas, ej. 'Client' vs 'Customer')."
+
+axioms:
+  - id: AX-ONT-01
+    domain: Asymmetric_Power_Flows
+    statement: "Las relaciones jerárquicas dictan cascadas de destrucción. Si A OWNS B, la muerte de A implica físicamente la aniquilación atómica de B."
+    dependencies: []
+    refutation:
+      type: database_constraint
+      expression: "FOREIGN_KEY(B, A) ON DELETE CASCADE"
+      location: "schema_migration"
+  - id: AX-ONT-02
+    domain: Naming_Absolutism
+    statement: "Prohibido el uso de sustantivos opacos (Data, Info, Manager, Item). El nombre debe reflejar el colapso exacto de su propósito."
+    dependencies: []
+    refutation:
+      type: semantic_linter
+      expression: "reject_identifiers([Data, Info, Manager, Item])"
+      location: "pre_commit_hook"
+
+theorem:
+  statement: "Las 10000 iteraciones operativas de la disciplina formal emergen del Producto Matricial de las Capas Base (P x I x A x ISO), cristalizando la Verdad Estructural."
+
+CORTEX_TAINT: taint:moskv-1:ont:q1w2e3r4t5y6u7i8:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

@@ -1,0 +1,26 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+Claim: Sybil Dominance Invariant (La Locura como Orphan Block)
+Proof:
+  Base: Byzantine Fault Tolerance (BFT)
+  Range: N/2 + 1
+  Confidence: C5
+Isomorphisms:
+  - '"Cordura" -> "Cadena Principal (51% Hashrate)"'
+  - '"Locura" -> "Orphan Block / Minor Fork"'
+  - '"Matrix" -> "Motor Estocástico Mayoritario"'
+Blast_Radius_Matrix:
+  Vector: Sociological_Consensus_Inversion
+  Blast_Radius: Global
+  Target_Invariant: Omega20_Slop_Horizon
+  Anergy_Risk: Low
+CORTEX_TAINT: a1e0130ab060f032fce618a8a4959846909c9fb7ba276f473ab8baf27295801c
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

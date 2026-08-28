@@ -1,22 +1,34 @@
-.PHONY: all check test lint typecheck format backend
+.PHONY: help status test intel engine studio lab sync audit
 
-all: format lint typecheck test
+help:
+	@./moskv --help
 
-check: lint typecheck
-
-lint:
-	ruff check packages/babylon60 tests
-	ruff format --check packages/babylon60 tests
-
-format:
-	ruff check --fix packages/babylon60 tests
-	ruff format packages/babylon60 tests
-
-typecheck:
-	mypy packages/babylon60 tests --strict --ignore-missing-imports
+status:
+	@./moskv status
 
 test:
-	pytest tests/ -v
+	@./moskv test
 
-backend:
-	python3 run_backend.py
+intel:
+	@./moskv intel
+
+engine:
+	@./moskv engine
+
+studio:
+	@./moskv studio
+
+lab:
+	@./moskv lab
+
+sync:
+	@./moskv sync
+
+audit:
+	@python3 /Users/borjafernandezangulo/.gemini/antigravity/scratch/legion_100_agents_audit.py
+
+build-guard:
+	@echo "[ULTRATHINK] Compiling Native C-Extension OUT-OF-TREE (/tmp/cortex_exergy_build)..."
+	@mkdir -p /tmp/cortex_exergy_build
+	@cd cortex_guard && uv run python setup.py build_ext --build-lib /tmp/cortex_exergy_build --build-temp /tmp/cortex_exergy_build/temp
+

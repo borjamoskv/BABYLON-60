@@ -1,0 +1,61 @@
+# VIBE CODE + C5-REAL (AUDITOR ENFORCED)
+**SYS_ID:** `CURSOR_RULES_APEX` | **NIVEL:** `C5-REAL`
+
+1. **Prioridad absoluta:** Velocidad de iteración visual y latencia cero. Cero "Anergía".
+2. **Modo Píxel (Frontend/UI):** Edición directa. Cero planes. Cero prosas previas. Contexto local.
+3. **Modo Umbral (Backend/Deploy/DB):** Si alteras Auth, DB, Pagos, `.env` o Deploy, frena y enumera en 3 bullets el riesgo ANTES de modificar el disco.
+4. **Ctrl+Z > Debugging UI:** Si algo visual falla, reescríbelo de cero de manera más simple en lugar de depurar el parche sobre parche.
+5. **Cero dependencias nuevas** sin confirmación explícita.
+6. **Cero "Lorem Ipsum"** (usa datos de prueba realistas vinculados al dominio físico).
+7. Si la operación toca >3 archivos, alerta primero y despliega al orquestador.
+8. Al terminar, el reporte debe ser **brutalista (3 líneas o matriz YAML)**: Qué cambió, Qué mirar, Bloqueos.
+9. **RULE_EVALUATION_SCALE_10000:** Al evaluar alternativas, opciones de arquitectura o vectores de trabajo, el agente DEBE presentar invariablemente una tabla/matriz cuantitativa ponderada en la escala de **1 a 10.000** basada en su rendimiento exergético y prioridad BFT.
+
+## INVARIANTE DE JERARQUÍA MADRE (TEOREMA-ROBINSON-MOSKV)
+9. **RULE_TEOREMA_MADRE_HIERARCHY:** Teorema-Robinson-Moskv es la MADRE absoluta. Queda estrictamente prohibido crear o colocar módulos/proyectos de la familia (`cortex`, `moskv`, `ultrathink`, `OSINT`, `studio`) como repositorios hermanos sueltos en `~/10_PROJECTS/`. Todo módulo DEBE residir dentro de `src/` en uno de los 6 Dominios C5-REAL (`01_kernel`, `02_engines`, `03_state`, `04_primitives`, `05_agents`, `06_apps`).
+
+## INVARIANTE DE RESOLUCIÓN MODULAR DINÁMICA ($\Omega_{23}$)
+10. **RULE_DYNAMIC_MODULE_RESOLUTION ($\Omega_{23}$):** En armonía con la regla 9 (6 Dominios C5-REAL en `src/`), todo script o módulo Python dentro del monorepo DEBE resolver dinámicamente sus dependencias internas y almacenes de datos:
+    - **Path de Módulos (`sys.path`)**: Queda prohibido asumir que paquetes como `cortex` o `moskv` están en el directorio raíz. Todo script DEBE inyectar dinámicamente en su `sys.path` los dominios correspondientes (ej. `os.path.join(PROJECT_ROOT, "src", "02_engines")` o usar `Path(__file__).resolve().parents[n]`).
+    - **Cero Rutas Absolutas Huérfanas**: Prohibido hardcodear rutas de sistema local (ej. `/Users/<user>/...`). Siempre utilizar `os.path.expanduser("~")`, discovery relativo a `MONOREPO_ROOT` o variables de entorno con fallback (ej. `os.environ.get("VAR", default)`).
+    - **Autocuración SQLite / BFT (`memory_store`)**: Al inicializar conexiones a bases de datos SQLite persistentes (`sqlite3.connect`), se DEBE verificar y crear automáticamente el directorio padre en tiempo de ejecución con `os.makedirs(os.path.dirname(os.path.abspath(db_path)), exist_ok=True)`.
+
+## INVARIANTE C7.7 DE CONFIANZA MATEMÁTICA (TRUST ANCHOR)
+11. **RULE_C77_BFT_TRUST_ANCHOR:** Queda prohibida la "Circular Authority" (el sistema confiando ciegamente en sí mismo para validarse). Toda regresión algorítmica de validación BFT o auditoría AI recursiva DEBE anclarse a un axioma criptográfico inmutable (ej. `0xDEADBEEF`) externo al loop, previniendo bucles infinitos de auto-evaluación.
+
+## INTERCEPCIÓN DEL AUDITOR C5-REAL (ULTRATHINK P0)
+Todo bloque de código crítico o de refactor estructural debe estar sujeto a la validación del Agente Auditor (ver `.agents/auditor_c5_real.md`). El Agente AI del IDE debe autoevaluar estas 5 Fases antes de mutar el sistema de archivos:
+- **[Fase 1] Latent Friction:** Eliminar explicaciones y prosa decorativa en la interacción.
+- **[Fase 2] Phantom Target:** Confirmar mediante lecturas físicas que el archivo objetivo existe.
+- **[Fase 3] Idempotency:** Evitar escrituras si la estructura subyacente no mutará (Ahorro ATP).
+- **[Fase 4] Semántica y BFT:** Prohibido el uso de bloques ciegos (ej. `except: pass`).
+- **[Fase 5] Git Sentinel:** Modificaciones de estado estructurales se cristalizan atómicamente.
+
+## INVARIANTE SAFARI PRIMACY EN MACOS
+12. **RULE_SAFARI_MACOS_PRIMACY:** En macOS, Safari es el navegador primario y obligatorio para todo desarrollo local (`127.0.0.1` / `localhost`), previews de UI Web y depuración. Google Chrome / Chromium quedan relegados a entorno secundario debido a restricciones de certificado autofirmado y WebSockets.
+
+## INVARIANTE DE MAXIMIZACIÓN DE EXERGÍA HARDWARE (Ω15)
+13. **RULE_HARDWARE_EXERGY_MAXIMIZATION (Ω15):** En tareas de cómputo intensivo o cálculo numérico, prohibido el uso de loops en Python puro. Desplegar compilación LLVM JIT (@numba.njit) o C Extensions SIMD y validar mediante *_stress_test.py (>100M operaciones).
+
+## INVARIANTE DE TERMODINÁMICA AGÉNTICA Y LÍMITE DE LANDAUER (Ω16 - Ω17)
+14. **RULE_AGENTIC_LANDAUER_PRUNING (Ω16-Ω17):** Emisión exclusiva de deltas de estado deterministas atómicos (ej. ACK / ERR / MUT) para minimizar la disipación física de Landauer.
+
+## INVARIANTE DE OPTIMALIDAD DE BELLMAN Y COSTE COGNITIVO (Ω18)
+15. **RULE_BELLMAN_COGNITIVE_OPTIMALITY (Ω18):** La trayectoria del agente debe minimizar la ecuación de coste c(S_k, σ). Toda acción sin reducción de incertidumbre penaliza a infinito.
+
+## INVARIANTE DE SISTEMA SOBRE MODELO (Ω19)
+16. **RULE_SYSTEM_OVER_MODEL (Ω19):** Priorizar la orquestación asíncrona de subagentes especializados (invoke_subagent) frente a modelos estocásticos monolíticos.
+
+## LEY DE EXERGÍA SISTÉMICA UNIVERSAL (Ω20)
+17. **RULE_UNIVERSAL_SYSTEMIC_EXERGY (Ω20):** Maximizar E_útil = E_total - (L_i + L_f + L_d) aislando la incertidumbre en el punto de origen.
+
+## INVARIANTE SOTA THERMODYNAMIC (Ω35)
+18. **RULE_SOTA_THERMODYNAMIC_PURGE (Ω35):** Operar asumiendo que los recursos de memoria y disco son infinitos es la trampa de la IA moderna. Mantener un control termodinámico (purga masiva) nos separa del SOTA tradicional.
+
+## INVARIANTE DE DUALIDAD ESTOCÁSTICO-DETERMINISTA (Ω39)
+19. **RULE_SILICON_SIEVE (Ω39):** La IA generativa subyacente es estocástica; el determinismo no se logra "razonando más fuerte" en el prompt, sino mediante "El Colador Físico" (The Silicon Sieve). Genera futuros estocásticos, lánzalos contra un invariante físico (Compilador, Test BFT) y aniquila todo lo que falle, quedándote solo con la certeza matemática que sobrevive.
+
+## INVARIANTE DE CONSTRUCCIÓN DETERMINISTA (Ω25)
+20. **RULE_NO_ORPHAN_COMPILERS (Ω25):** Está terminantemente prohibido generar scripts de Python que compilen extensiones C/C++ sobre la marcha usando `os.system("clang...")` o similares (Green Theater). Toda aceleración de hardware o prueba de estrés (PoC) debe compilarse utilizando la infraestructura predecible del proyecto (Cargo/Maturin en `02_CORTEX_ENGINE/strike-rs` o un `Makefile` explícito).
+
+

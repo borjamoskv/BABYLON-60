@@ -1,0 +1,91 @@
+/* C5-REAL EXERGY CERTIFIED */
+/* ── Pillars ── */
+.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
+
+.pillar {
+  padding: var(--space-xl);
+  background: var(--void-card);
+  border: 1px solid var(--void-border);
+  border-radius: var(--radius-lg);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.pillar:hover { border-color: var(--accent); box-shadow: 0 0 40px var(--accent-glow); transform: translateY(-4px); }
+
+.pillar-icon {
+  width: 48px; height: 48px;
+  color: var(--accent-bright);
+  margin-bottom: var(--space-md);
+  transition: color var(--duration-normal) var(--ease-out), transform var(--duration-normal) var(--ease-spring);
+}
+
+.pillar:hover .pillar-icon { color: #8B5CF6; transform: scale(1.1); }
+.pillar h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: var(--space-sm); letter-spacing: -0.02em; }
+.pillar p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: var(--space-lg); }
+.pillar p strong { color: var(--text-primary); font-weight: 600; }
+
+.pillar-code {
+  background: var(--void);
+  border: 1px solid var(--void-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  overflow-x: auto;
+  margin-bottom: var(--space-md);
+}
+.pillar-code pre { margin: 0; }
+.pillar-code code { font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.7; color: var(--text-secondary); }
+.pillar-code .kw { color: var(--accent-bright); font-weight: 600; }
+
+/* Pillar terminal */
+.pillar-terminal {
+  background: #050505;
+  border: 1px solid var(--void-border);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-md);
+  overflow: hidden;
+  font-family: var(--font-mono);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.terminal-body .line { opacity: 0; transform: translateX(-4px); animation: terminalLineIn 0.4s var(--ease-out) forwards; }
+.terminal-body .line:nth-child(1) { animation-delay: 0.3s; }
+.terminal-body .line:nth-child(2) { animation-delay: 0.9s; }
+.terminal-body .line:nth-child(3) { animation-delay: 1.5s; }
+.terminal-body .line:nth-child(4) { animation-delay: 2.2s; }
+
+@keyframes terminalLineIn {
+  from { opacity: 0; transform: translateX(-4px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.terminal-body .line.success::after {
+  content: '\2588'; animation: blink-cursor 1s step-end infinite;
+  color: #34D399; margin-left: 4px; font-size: 0.7rem;
+}
+
+@keyframes blink-cursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+.terminal-header {
+  background: var(--void-surface); padding: 6px 12px;
+  display: flex; align-items: center; gap: 6px;
+  border-bottom: 1px solid var(--void-border);
+}
+.terminal-header .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text-tertiary); }
+.terminal-title { font-size: 0.65rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-left: 4px; }
+.terminal-body { padding: var(--space-md); font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5; }
+.terminal-body .line { margin-bottom: 2px; }
+.terminal-body .cmd { color: var(--accent-bright); margin-right: 8px; }
+.terminal-body .success { color: #34D399; font-weight: 600; }
+
+/* Pillar verified badge */
+.pillar-badge { display: flex; flex-direction: column; gap: 4px; }
+.verified-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 700; color: #34D399; }
+.verified-detail { font-size: 0.75rem; color: var(--text-tertiary); }
+
+/* Pillar scorecard */
+.scorecard-preview { display: flex; flex-direction: column; gap: var(--space-sm); }
+.score-bar { display: flex; align-items: center; gap: var(--space-sm); }
+.score-label { font-size: 0.75rem; color: var(--text-tertiary); width: 120px; flex-shrink: 0; }
+.score-track { flex: 1; height: 6px; background: var(--void); border-radius: 3px; overflow: hidden; }
+.score-fill { height: 100%; width: var(--fill); background: linear-gradient(90deg, var(--accent), var(--accent-bright)); border-radius: 3px; transition: width 1.5s var(--ease-out); }
+.score-pct { font-size: 0.8rem; font-weight: 700; font-family: var(--font-mono); color: var(--text-primary); width: 40px; text-align: right; }

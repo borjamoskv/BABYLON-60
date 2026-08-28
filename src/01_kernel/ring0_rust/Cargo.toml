@@ -1,0 +1,13 @@
+# C5-REAL EXERGY CERTIFIED
+[package]
+name = "kernel"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ciborium = "0.2.2"
+prost = "0.14.4"
+serde = { version = "1.0.229", features = ["derive"] }
+
+[dev-dependencies]
+proptest = "1.11.0"

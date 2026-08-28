@@ -1,0 +1,21 @@
+{
+  "mode": "experimental_research_sandbox",
+  "notice": "Payment gateway active for experimental contributions; production commercial service provision not yet active.",
+  "plans": {
+    "sprint": {
+      "name": "Sprint Adversarial",
+      "currency": "usd",
+      "suggested": 25000
+    },
+    "council": {
+      "name": "Sovereign Council",
+      "currency": "usd",
+      "suggested": 8000
+    },
+    "cert": {
+      "name": "Pre-deploy Cert",
+      "currency": "usd",
+      "suggested": 15000
+    }
+  }
+}

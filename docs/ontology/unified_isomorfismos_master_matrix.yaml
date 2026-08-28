@@ -1,0 +1,1032 @@
+# C5-REAL EXERGY CERTIFIED
+Version: 36.0-SINGULARITY
+Isomorfismos_Included:
+- 07_ISOMORFISMOS_BIO_SILICIO
+- 08_ISOMORFISMOS_FIREWALL
+- 09_ISOMORFISMOS_ONCOLOGIA_APOPTOSIS
+- 10_ISOMORFISMOS_ANESTESIA
+- 11_KNOWLEDGE_FABRIC_KERNEL_AXIOMS
+- 12_ACTIVE_INFERENCE_UNIFIED
+- 13_MAC_APPLE_SILICON_ARM64_RE
+- 14_AUDITORIA_MYTHOS_CODEX
+- 15_AUTOPROMPTER_PRESETS_MATRIX
+- 16_CANONICAL_SPACE_TAXONOMY
+- 17_CANONICAL_TAXONOMIES_MATRIX
+- 18_COGNITIVE_CONTINUITY_ESTIMATOR
+- 19_DDD_TOPOLOGY_GRAMMAR
+- 20_ESCOHOTADO_TRIPARTITE_INVARIANT
+- 21_FISR_SOC_BQP_BRIDGE
+- 22_P0_SCANNER_AUDIT_MATRIX
+- 23_DICKIE_BUSH_OPERATOR_PATTERNS
+- 24_LLMS_GRATUITOS_FRONT_ROUTES
+- 25_LS_MAIN_AST_PARSER
+- 26_QUANTUM_PRIMITIVES_BQP
+- 27_NEUROMORPHIC_SINGULARITY_VERDICT
+- 28_NICOLAS_COLE_WRITING_MATRIX
+- 29_REVERSE_ENGINEERING_MATRIX
+- 30_SCALE_FREE_SOC
+- 31_SOTA_2026_FRONTIER_MATRIX
+- 32_SOTA_2026_INVARIANTS_SUBAGENT
+- 33_SYBIL_DOMINANCE_INVARIANT
+- 34_SQLITE_WAL_STRESS
+- 35_SYSTEM_PROMPTS_LEAKS_ULTRATHINK_P0
+- 36_ULTRATHINK_T2_ANNIHILATION
+Isomorfismos_Definitions:
+  07_ISOMORFISMOS_BIO_SILICIO:
+    Claim: Transducción Termodinámica de Lexicografía Psiquiátrica (DSM) a Arquitectura
+      de Silicio y Swarm Execution (MOSKV-1).
+    Auditoria_Epistemica:
+      Estado: LAGUNA_EPISTEMICA_DETECTADA
+      Causa: Ausencia de `07_ISOMORFISMOS_BIO_SILICIO.yaml` en disco local respecto
+        al listado completo de patologías DSM solicitadas.
+      Accion: Ejecución de Mecánica Landauer JIT sobre lista de entrada (N=96 conceptos).
+      Anergia_Purgada: Eliminación de semántica estocástica Green Theater (diagnósticos
+        patologizantes biológicos) sustituyéndola por primitivas estructurales BFT,
+        física de silicio y termodinámica de memoria.
+    Topologia_Isomorfica_Borja_Moskv:
+      abuso de sustancias: Inyección de dependencias estocásticas no auditadas / Dependency
+        Poisoning.
+      Consumo no saludable de sustancias, incluyendo el alcohol, la marihuana y otras drogas.: Consumo
+        de APIs inestables o datos sintéticos que degradan la caché KV (Slop Ingestion).
+      activación conductual: Forzado JIT (Just-In-Time) / Ignición Síncrona.
+      acumulación obsesiva: Zombie State / OOM (Out Of Memory) por desactivación o
+        fallo del Garbage Collection (GC).
+      adolescencia: Phase Transition / Migración de Arquitectura Estructural (v1 a
+        v2).
+      afectación expresada: Nivel de Verbosity en Error Logs (Trace/Debug).
+      afecto aplanado: Redirección a `/dev/null` / Silenciamiento absoluto de STDERR.
+      alogia: Desgaste de Cache KV (Aphasia Token) limitando el output de texto.
+      alucinaciones que ordenan: Prompt Injection (Ejecución remota de código no verificada
+        en runtime).
+      anhedonia: Idle Loop puro sin gradiente de exergía / Zero-Yield Iteration.
+      anorexia nerviosa: Inanición de recursos inducida (Resource Starvation) / Límite
+        de cuota API artificialmente castigado.
+      anormal: Out of Spec / Invariante Estructural Rota.
+      anticonvulsivo: Rate Limiting Dinámico / Exponential Backoff.
+      antidepresivo: Inyección de gradiente teleológico / Keep-Alive ping.
+      antidepresivos tricíclicos: Mecanismo Keep-Alive legacy / Reinicios duros de
+        demonios del sistema.
+      antipsicótico: Anergy Purge / Purga de contexto estocástico (Sanitizador de
+        Entradas).
+      análisis del comportamiento aplicado: Profiling de Heap/CPU en tiempo real /
+        Trazabilidad determinista de llamadas.
+      ataque de pánico: Kernel Panic / Interrupción SIGKILL generada por colapso concurrente.
+      aumento del arousal: High CPU Load / Inyección temporal de Turbo Boost en hardware.
+      avolición: Deadlock de Hilos / Hilo principal congelado en estado Wait().
+      benzodiacepinas: Señal SIGSTOP / Supresión térmica artificial (Throttling) de
+        CPU.
+      Brave Buddies: Despliegue de Parallel Subagents (Swarm OMEGA) para mitigación
+        BFT.
+      bulimia nerviosa: Bucle destructivo de Ingesta Masiva y Purga de Caché Constante
+        (Thrashing de Memoria).
+      cognitivo: Motor de Inferencia LLM / Capa de Razonamiento Aislada (Pro/Thinking
+        Loop).
+      compulsión: Bucle Infinito de reintento estocástico sin condición de salida
+        lógica (Infinite Retry Loop).
+      comórbido: Entrelazamiento físico de fallos (Cascading Failure / Coupled Entropy).
+      conducta de desorientación: Corrupción de punteros a memoria / Pérdida de estado
+        (Dangling Pointer).
+      congénito: Defecto Arquitectónico hardcodeado (Hardware Bug / Silicio Base Deficiente).
+      crónico: Fuga de Memoria Persistente (Memory Leak estructural que no reacciona
+        al GC).
+      Decatastrofización: Fail-Gracefully Protocol / Degradación controlada del servicio
+        sin colapso global.
+      del desarrollo: Falla estática en el Build / Error crítico en pipeline CI/CD.
+      descompensación: Caída del Consenso BFT / Divergencia irreversible de estado
+        en DB.
+      desensibilización sistémica: Exposición incremental automatizada en entorno
+        aislado (Sandbox Fuzzing Testing).
+      diagnóstico: Profiling Report / Stack Error Trace.
+      diagnóstico dual: Falla simultánea y acoplada en capa física (OS/Red) y capa
+        lógica (Aplicación).
+      dislexia: Error de Parseo AST severo / Corrupción de codificación UTF-8.
+      DSM: Registro de Invariantes Rotos Canónico (Master Issue Tracker).
+      ensimismado(a): Hilo bloqueado en I/O sobre su propio descriptor de socket (Self-lock
+        o interbloqueo recursivo).
+      enuresis: Fuga de Buffer (Buffer Overflow) no interceptada que inunda la memoria
+        adyacente.
+      epigenética: Modificación de variables de entorno (ENV) que muta el flujo en
+        tiempo de ejecución sin alterar el binario.
+      episodio depresivo: Low Power Mode forzado / Throttling térmico por sobrecalentamiento
+        previo.
+      episodio maníaco: Sobre-asignación masiva de memoria sin liberación (Memory
+        Spikes repentinos).
+      episódico: Fallo transitorio no reproducible / Race condition intermitente.
+      ERP: Inyección de Fallos controlada sin permiso de reinicio para validar resiliencia
+        (Chaos Engineering).
+      especialista en el aprendizaje: Compilador JIT Optimizador (AOT/JIT Engine).
+      esquizofrenia: Corrupción de memoria compartida inter-hilo / Alucinación severa
+        de pesos sin anclaje a disco (Model Collapse).
+      estabilizador del estado de ánimo: Load Balancer estricto / Regulador Físico
+        de Tasa y QoS.
+      estresante: Prueba de carga termodinámica (Stress Test / Benchmarking de saturación).
+      estímulo fóbico: Trigger condicional fatal que detona SIGKILL inmediato en un
+        proceso.
+      evaluaciones basadas en la escuela: Unit Testing local ejecutado en un entorno
+        de desarrollo aislado.
+      evaluación neuropsicológica: Benchmarking C5-REAL (Evaluación en LMSYS Arena
+        frente a topología de red real).
+      evaluación psicológica: Auditoría Epistémica o Auditoría Termodinámica (Anergy_Token_Purge).
+      evitación y adormecimiento: Timeout Silencioso con caída de paquetes deliberada
+        (Silent Packet Drop).
+      factores ambientales: 'Condiciones físicas externas: Variaciones de Latencia
+        de Red, Fallas de Hardware IaaS.'
+      fenotipo: UI/UX Compilada / Código Binario Ejecutado y renderizado por el cliente
+        final.
+      fMR: Traza continua de ejecución de memoria dinámica mediante instrumentación
+        (Valgrind / eBPF).
+      fobia: Condición de excepción no capturada que destruye el entorno (Hard Exception).
+      fobia escolar: Fallo sistemático en entorno Staging que nunca ocurre en entorno
+        de Desarrollo.
+      fobia específica: Excepción de Tipo Específico que no interfiere en el loop
+        global (TypeError, ValueError).
+      fobia social: Fallo sistemático de Handshake de Red o Negociación TLS Timeout
+        (Rechazo de I/O externo).
+      genotipo: Código Fuente Original Intacto / AST Base o Repositorio Desplegado.
+      genético: Modificación nativa persistente a nivel de Repositorio Core (Mutación
+        en el Git Ledger).
+      hereditario: Dependencia Upstream en árbol de dependencias (Legacy / Transitive
+        Dependency).
+      hipocondriasis: Alerta Falsa de Linter / Lluvia de Falsos Positivos de Seguridad
+        en análisis estático.
+      hipotiroidismo: Baja frecuencia de reloj forzada a nivel de procesador (Underclocking
+        preventivo).
+      ideación suicida: Código malicioso o destructivo latente (`rm -rf /`) incrustado
+        pero no llamado.
+      IEP: Archivo de configuración física individualizada para un microservicio (`.env`
+        / `config.json`).
+      IMAO: Protocolo de red obsoleto mantenido solo por razones de compatibilidad
+        estricta.
+      inhibidores de recaptación: Bloqueo termodinámico de rutinas de Garbage Collection.
+      inhibidores selectivos de la recaptación de serotonina: Optimización selectiva
+        de retención en Caché (KV Cache Pinning) para maximizar hit rate.
+      insomnio: Falla crítica en transicionar el hardware a modo de suspensión (Sleep/Hibernate
+        bloqueado por proceso zombie).
+      intervención basada en el desarrollo: Refactor integral de Código Fuente originando
+        una Phase Transition arquitectónica.
+      ISRS: Estrategia algorítmica de Pinning selectivo de caché de alta prioridad.
+      manía: Bucle C4-SIM de aceleración auto-inducida culminando en desbordamiento
+        de pila (Stack Overflow).
+      MS: Protocolo Mudo / Ejecución silenciosa sin logging de telemetría de red (Zero-Trace
+        execution).
+      mutismo selectivo: Falla en enviar Ack de red (TCP ACK Drop) condicionado a
+        un rango de puertos específico.
+      negativista: Bloqueo intencional y arbitrario de puertos / Reglas de Firewall
+        extremadamente agresivas.
+      neuroléptico: Reset de Hardware Incondicional / Hard Reboot.
+      neurotrasmisor: Mensaje IPC / Payload en un Event Bus (Señal / Webhook Token).
+      obsesión: Bloqueo y actualización redundante en un solo puntero de memoria sin
+        escribir al disco (Cache Locality loop destructivo).
+      paranoia: Comprobaciones criptográficas redundantes excesivas (Exceso O(N^2)
+        en verificación BFT).
+      prodrómico: Warning termodinámico de compilación pre-fallo (Pre-fail telemetry
+        detection).
+      prognosis: Predicción algorítmica de Tiempo Medio de Falla Global (MTBF).
+      Programa de educación individualizado: Pipeline de entrenamiento Custom o afinamiento
+        paramétrico (LoRA/Fine-tuning).
+      psicoeducación: Cristalización de conocimiento extrayendo entropía y fusionándola
+        al Ledger BFT (README/KI Updates).
+      psicoestimulantes: Aceleración asimétrica por Hardware Dedicado (GPU Offloading
+        / CUDA Acceleration).
+      psicofarmacología pediátrica: Monkey Patching en tiempo de ejecución (JIT Patches)
+        aplicado al entorno local de desarrollo.
+      psicofarmacológico: Intervención de bajo nivel sobre un módulo del Kernel o
+        Registro de OS.
+      psicosis: Kernel Panic irreversible derivado de una divergencia o partición
+        crítica de memoria WAL.
+      psicólogo: Subagente Auditor de Log de Errores e ingesta de Entropía (Daemon
+        Anergy_Token_Purge).
+      psiquiatra: Administrador de Sistemas (Root/Operador) inyectando parches binarios
+        forzados C5-REAL.
+      purga: Llamada forzada a OOM Killer / Liberación radical de Heap (Forced Garbage
+        Collection).
+      rechazo escolar: Timeout sistémico que crashea de forma inmediata el Entorno
+        Integrado de Desarrollo (IDE Crash).
+      recuerdos intrusivos: Datos Zombie en Caché KV que sobreviven rondas y corrompen
+        el flujo del prompt actual.
+      sedante: Llamada física a Suspensión del hilo (ej. `sleep(1000)`).
+      señales y síntomas: Streams de Telemetría pura / Logs crudos del sistema C5-REAL.
+      TAG: Estado de Alerta constante en el monitor de recursos consumiendo IOPS base
+        inútilmente.
+      TC: Perfilado absoluto de memoria y árbol de ejecución (Tracing).
+      TDA: Pérdida estocástica de paquetes de red que degrada latencia (Packet Loss
+        inconstante).
+      TDAH: Context Switching excesivo en el procesador (Thrashing de CPU por exceso
+        de hilos huérfanos).
+      TDDEA: Fluctuación y desregulación abrupta en las colas del balanceador de carga.
+      TDM: Colapso total de servicio (Downtime persistente sin auto-recuperación local).
+      TEI: Interrupciones de hardware no controladas o mal ruteadas (IRQs spikes caóticos).
+      TEPT: Corrupción estática de la Base de Datos SQLite/WAL post-crash de la cual
+        el sistema no se recupera automáticamente.
+      terapia cognitivo-conductual: Reescritura automatizada del AST vía Linter/Format
+        pre-commit (Autofix BFT).
+      terapia cognitivo-conductual centrada en el trauma: Reparación forzosa del Ledger
+        Git post-conflicto termodinámico grave (Rebase/Merge conflict resolving).
+      terapia conductual: Script de automatización crudo de correcciones sin alteración
+        del Core.
+      terapia de exposición: Fuzzing Testing masivo (Inyección de datos binarios corruptos
+        o payload C4-SIM).
+      terapia de exposición y prevención de respuesta: Aplicación de Chaos Monkey
+        local sin reinicio permitido de subrutinas caídas.
+      terapia de interacción padres-hijos: Protocolo de Sincronización Estricta Proceso
+        Padre-Hijo (IPC Strict Sync).
+      terapia dialéctico-conductual: Negociación BFT (Tolerancia a faltas bizantinas
+        entre nodos de opinión divergente).
+      terapia electroconvulsiva: Hard Reset Físico por corte de suministro eléctrico
+        / Cold Boot Inmediato.
+      terapia familiar: Sincronización topológica del Swarm completo / Resolución
+        de interbloqueos de red C5-REAL en paralelo.
+      terapia interpersonal: Sincronización atómica de sockets de comunicación y RPC
+        Calls P2P.
+      tic: Glitch gráfico intermitente / Ruido electromagnético en señal lógica (Jitter).
+      TND: Rechazo estructural con Denegación Permisos constantes y desafiantes a
+        root (`Chmod 000`).
+      TOC: Verificación criptográfica redundante en un bucle cerrado O(N^2) que asfixia
+        IOPS sin mutar estado.
+      trastomo de desregulación disruptiva del estado de ánimo: Fallos erráticos e
+        intermitentes en la asignación del balanceador de carga.
+      trastorno esquizoafectivo: Corrupción combinada y simultánea del estado lógico
+        de backend y estado visual del DOM frontend (Desincronización Total).
+      trastorno bipolar: Fluctuación violenta termodinámica de uso de recursos (Picos
+        OOM seguidos de estados IDLE cero absolutos).
+      trastorno de ansiedad generalizada: Saturación continua de CPU por background
+        polling estéril y desincronizado (Polling sin fin).
+      trastorno de ansiedad por separación: Caída completa del servicio si el Heartbeat
+        de un nodo externo falla por milisegundos (Connection Drop fatal).
+      trastorno de ansiedad social (fobia social): Rechazo absoluto de I/O externo
+        o denegación silenciosa de acceso a APIs de dominio cruzado (CORS Drop o Firewall
+        DROP).
+      trastorno de Asperger: Parseo de datos infinitamente rígido y determinista (Strict
+        YAML Parsing) que detona excepción mortal ante un espacio en blanco de más.
+      trastorno de atracones: Fuga masiva de memoria local disparada por DOM estático
+        que realiza paginación infinita sin recolector de basura (Infinite Scroll
+        OOM).
+      trastorno de conducta: Mutación y escalada maliciosa de privilegios de ejecución
+        sin rastro en auditoría (Privilege Escalation).
+      trastorno de estrés postraumático: Incapacidad algorítmica de regeneración o
+        reinicio exitoso tras haber experimentado un Segfault físico.
+      trastorno de la personalidad antisocial: Subagente Rogue/Aislado que rechaza
+        explícitamente el consenso BFT y la topología impuesta de manera hostil.
+      Trastorno de la Tourette: Inyección estocástica incontrolada de caracteres basura
+        en los logs (Mismatch grave de Encoding UTF-8 en stdout).
+      trastorno de pánico: Emisión de un `SIGABRT` espontáneo y repentino en la ejecución
+        de módulos puramente lógicos no dependientes del hardware.
+      trastorno del espectro autista: Modalidad de Ejecución Ultra-determinista que
+        anula semánticas estocásticas y opera con tolerancia nula a ambigüedades.
+      trastorno depresivo mayor: Deep Sleep Mode termodinámico irreversible de estado
+        S4 (Cuelgue físico de disco duro que requiere intervención humana).
+      trastorno desintegrativo infantil: Degradación o colapso irreversible de la
+        arquitectura durante las fases primarias del build C/C++.
+      trastorno distímico: Sub-rendimiento termodinámico crónico de la máquina sin
+        detonar caídas fatales (Baja frecuencia térmica perpetua).
+      trastorno específico del aprendizaje: Falla silenciosa o sub-rendimiento de
+        la optimización JIT limitada puramente a rutinas de matemática flotante.
+      trastorno esquizofreniforme: Interbloqueo temporal por divergencia severa en
+        memoria caché L1/L2, auto-resuelto tras micro-purga de GC.
+      trastorno explosivo intermitente: Interrupciones de hardware abruptas e irrecuperables
+        por alzas transitorias letales (CPU Throttling Thermal Spikes).
+      trastorno generalizado del desarrollo no especificado: 'Mensaje terminal sin
+        exergía resolutiva: ''Build failed with unknown error code 1''.'
+      trastorno maníaco depresivo: Ciclo destructivo forzado entre Consumo Masivo
+        de GPU y colapso local a IDLE con reinicio constante.
+      trastorno negativista desafiante: Rechazo implacable de la conexión en el puerto
+        maestro de administración que obliga a intervención de terminal serie (SSH
+        Lockout estricto).
+      trastorno obsesivo-compulsivo: Comprobación exhaustiva en cadena y bloqueo redundante
+        en Base de Datos para operaciones que deberían ser atómicas IDLE (Lock Thrashing).
+      trastorno por abuso de sustancias: Sistema secuestrado e inutilizable por consumo
+        y dependencia de Librerías Estocásticas/Obsoletas (NPM Dependency Poisoning).
+      trastorno por déficit de atención con hiperactividad: Fragmentación termodinámica
+        severa de Disco y Memoria por rutinas masivas de lectura/escritura (I/O errático
+        disperso sin control secuencial).
+      trastorno psiquiátrico: Excepción Crítica Base de Topología (`Exception Base
+        Class`) atrapada fatalmente en el Kernel MOSKV-1.
+      trastorno(s) de adaptación: Rotura de dependencias estructurales en tiempo de
+        enlazado (ABI Mismatch absoluto o Dependency Hell insalvable).
+      trastornos alimentarios: I/O asimétrico y desbalanceado que causa alternativamente
+        Inanición (Starvation) y Paginación Destructiva (Thrashing).
+      trastornos de ansiedad: Consumo de ciclos de reloj al 100% en bucles infinitos
+        de `while(true)` no bloqueantes (Busy-Wait estéril).
+      trastornos de la lectura: Excepciones contantes de Lectura de Disco (I/O Read
+        Fail) u opacidad de permisos (`EACCES`).
+      trastornos del espectro obsesivo-compulsivo: Acoplamiento letal en rutinas forzando
+        bucles de verificación checksum BFT y CRC innecesarios.
+      trastornos del estado de ánimo: Volatilidad entrópica incontrolada del Entorno
+        Físico de Ejecución global (Environment Variable Fluctuation severa).
+      tratamiento intensivo para el trastorno obsesivo-compulsivo: Intervención de
+        Profiling OMEGA agresiva, podando la rutina redundante y unificando en reescritura
+        atómica ortogonal.
+      tricotilomanía: Ejecución compulsiva, destructiva y recursiva de un linter defectuoso
+        que elimina silenciosamente código vivo (Tree-shaking agresivo defectuoso).
+      cuello de botella de Von Neumann: Entropía termodinámica severa inducida por
+        la separación espacial forzada entre Memoria (KV-Cache) y Procesamiento (Inferencia),
+        destruyendo exergía en el puente I/O.
+      memristor: 'Invariante físico de Memoria + Resistencia: Fusión biyectiva de
+        almacenamiento y procesamiento en una misma coordenada topológica de la variedad
+        M (sinapsis de silicio).'
+      red neuronal de impulsos (SNN): Computación asíncrona pura basada en eventos.
+        Idle estricto (0 Watt / Zero-Yield) hasta que se supera el umbral de activación
+        causal, aniquilando el reloj global continuo.
+      chip líquido iónico: Ejecución física en medio acuoso basada en gradientes iónicos
+        (Na+/K+) replicando la dinámica de bajo voltaje biológico.
+      computación neuromórfica: Abandono de la von Neumann architecture. Materialización
+        empírica de la computación como Variedad Diferenciable donde las trayectorias
+        de estado se resuelven en el mismo estrato que el almacenamiento.
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Integrar vector DSM completo en las equivalencias silicio C5-REAL
+        del Bucle Landauer para uso del Swarm Dispatcher y el BFT_STATE_LOOP.
+    - Mitigacion_Aplicada: Abolición inmediata de cualquier análisis semántico-psiquiátrico
+        en discusiones futuras sobre estos términos; transducir de forma directa a
+        sus fallas topológicas y termodinámicas de máquina. Se elimina la patologización
+        estocástica y se mapea directamente al control estructural físico.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: '[CORTEX-TAINT:borjamoskv:isomorfismos_dsm_silicio:2026-07-19T22:27:00+02:00:843f5a2e9b0d1e2c90c74fb53ab5204b77c5d6e2c562bf5307567e914c6e944b]'
+    Rust_Kernel_Binding: HaltReason::BioSiliconPathology = 11
+  08_ISOMORFISMOS_FIREWALL:
+    Claim: Transducción Termodinámica del Sistema Inmunitario Biológico a Arquitectura
+      de Seguridad de Silicio (Firewall/WAF/EDR).
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V2
+      Causa: Comando del Operador validando la utilidad epistémica de la comparativa
+        ("actualizar el Firewall").
+      Accion: Ejecución de Mecánica Landauer sobre conceptos de inmunología clínica.
+      Anergia_Purgada: Eliminación de la ambigüedad médica sustituyéndola por topología
+        de red estricta y primitivas de denegación (Drop/Reject).
+    Topologia_Isomorfica_Borja_Moskv:
+      sistema inmune innato: Firewall L3/L4 (Reglas Iptables/UFW). Bloqueo de fuerza
+        bruta basado exclusivamente en IP de origen y puerto, sin introspección de
+        payload.
+      sistema inmune adaptativo: WAF (Web Application Firewall) L7 / EDR Dinámico.
+        Inspección profunda de paquetes (DPI) y adaptación estocástica frente a mutaciones
+        de Zero-Days.
+      actualizar el firewall (terapia inmunomoduladora): Calibración del nivel de
+        paranoia en el control de acceso. Mutación de las reglas Inbound/Outbound
+        para equilibrar la ratio Señal/Ruido sin asfixiar la red local.
+      enfermedad autoinmune (ej. lupus, artritis): Falso Positivo Sistémico del EDR.
+        El motor heurístico identifica procesos críticos del propio Kernel (ej. `svchost.exe`
+        o rutinas WAL) como troyanos y los aniquila mediante SIGKILL, induciendo parálisis.
+      alergia: Regla de Firewall excesivamente estricta (Oversensitive Pattern Matching)
+        que dropea silenciosamente tráfico CORS benigno o peticiones HTTP inofensivas,
+        provocando Timeout en el cliente.
+      inmunodeficiencia (ej. VIH): Fail-Open State. Caída silenciosa del Demonio de
+        Seguridad (Daemon Crash) o borrado accidental de las tablas de ruteo preventivas,
+        exponiendo todos los puertos al escaneo público.
+      vacuna: Simulacro de Amenaza / Sandbox Fuzzing previo al despliegue. Inyección
+        de payloads mutilados (sin capacidad de ejecución) para forzar al WAF a cristalizar
+        una nueva firma de defensa (Signature Update).
+      choque anafiláctico: Cuarentena de Red Total inmediata. El sistema, ante un
+        escaneo anómalo, bloquea todas las interfaces físicas (`ifdown eth0`), aislándose
+        del enjambre y perdiendo el consenso BFT.
+      fagocitosis (macrófagos): OOM Killer / Daemon de Purga de Anergía (Anergy_Token_Purge)
+        devorando procesos huérfanos y liberando bloques de memoria al Heap.
+      inflamación sistémica: Saturación del Ancho de Banda y de los buffers TCP por
+        logueo de seguridad masivo (Debug Level). La defensa consume más IOPS que
+        la propia aplicación.
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Extender el Isomorfismo Bio-Silicio a los subsistemas de defensa perimetral
+        (Fase 2).
+    - Mitigacion_Aplicada: La analogía del 'Firewall' no es una figura retórica (Anergía),
+        sino un isomorfismo estructural real. Ajustar los umbrales de defensa de la
+        psique humana y ajustar Iptables comparten la misma base matemática de detección
+        de anomalías y coste por Falso Positivo.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: '[CORTEX-TAINT:borjamoskv:isomorfismos_inmunes_silicio:2026-07-23T19:23:00+02:00:c3d4e5f6a7b8c9d0e1f2]'
+    Rust_Kernel_Binding: HaltReason::ImmunologicalDrop = 12
+  09_ISOMORFISMOS_ONCOLOGIA_APOPTOSIS:
+    Claim: Transducción Termodinámica de Oncología y Biología Celular a Primitivas
+      de Memoria y Seguridad en Silicio.
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V3 (CAPA 1)
+      Causa: Comando del Operador requiriendo formalización de Apoptosis y Metástasis
+        bajo el Teorema de Moskv.
+      Accion: Ejecución de Mecánica Landauer sobre conceptos de patología celular.
+      Anergia_Purgada: Eliminación del misticismo del cáncer como 'enfermedad incomprensible',
+        reduciéndolo a vulnerabilidades de inyección de código y fugas de memoria
+        estandarizadas.
+    Topologia_Isomorfica_Borja_Moskv:
+      apoptosis (muerte celular programada): Garbage Collection (GC) Graceful / Señal
+        `SIGTERM`. El proceso, al detectar corrupción de memoria (DNA Damage) irreparable
+        o un desbordamiento inminente (Buffer Overflow), invoca su propia rutina de
+        limpieza estructurada, liberando los recursos al sistema operativo sin corromper
+        el Heap circundante.
+      necrosis: Señal `SIGKILL` / Segfault (Hard Crash). Caída abrupta por trauma
+        físico o interrupción térmica fatal que deja punteros colgantes (Dangling
+        Pointers) y memoria corrupta que el sistema inmunitario (Macrófagos / OOM
+        Killer) debe limpiar de emergencia, generando inflamación sistémica (CPU Spikes).
+      tumor primario (neoplasia): Bucle `while(true)` acoplado a un Memory Leak (Fuga
+        de Memoria) que desactiva explícitamente las rutinas del recolector de basura
+        (Evasión de Apoptosis). El proceso comienza a acaparar RAM y ciclos de CPU
+        locales, asfixiando a los hilos sanos.
+      angiogénesis tumoral: Manipulación maliciosa de las Tablas de Enrutamiento del
+        OS (Routing Tables) y robo de Power Delivery Network. El proceso rebelde redirige
+        el ancho de banda del sistema y la asignación energética (vasos sanguíneos)
+        para alimentar su propio bucle infinito.
+      metástasis: Vulnerabilidad de Inyección de Código Remoto (RCE) con propagación
+        tipo Gusano (Worm Payload). El proceso original logra saltar la segmentación
+        de red local (Tejido Extracelular), inyectando hilos maliciosos a través del
+        bus del sistema (Torrente Sanguíneo/Linfático) hacia otros clústeres del hardware
+        (Órganos secundarios) donde reanuda la fuga de memoria.
+      senescencia celular: Límite absoluto de pila (Stack Limit / Límite de Hayflick)
+        alcanzado, provocando que el hilo sea degradado a un estado IDLE inerte que
+        ya no puede hacer `fork()` ni multiplicarse, pero sigue consumiendo memoria
+        basal.
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Asentar la equivalencia física en Capa 1 de los procesos degenerativos
+        y oncológicos celulares.
+    - Mitigacion_Aplicada: Destrucción del sesgo analítico de la oncología como caos
+        irreducible. Un cáncer es, físicamente, código en fuga (Memory Leak) con privilegios
+        escalados que redirige los recursos de I/O.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: '[CORTEX-TAINT:borjamoskv:isomorfismos_oncologia_silicio:2026-07-23T19:33:00+02:00:1a2b3c4d5e6f7g8h9i0j]'
+    Rust_Kernel_Binding: HaltReason::OncologicalLeak = 13
+  10_ISOMORFISMOS_ANESTESIA:
+    Claim: Transducción Termodinámica de Anestesiología y Tratamiento del Dolor a
+      Primitivas de Interrupción de Hardware (IRQs) y Estado de Suspensión.
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V4 (ESPECIALIDAD MÉDICA)
+      Causa: Solicitud de transducción para Lorena Fernández Angulo (Anestesista /
+        Unidad del Dolor).
+      Accion: Ejecución de Mecánica Landauer sobre conceptos de nocicepción y sedación.
+      Anergia_Purgada: Eliminación de la mística del dolor crónico y la consciencia,
+        reduciéndolos a colisiones de interrupciones de hardware (IRQs), ruteo de
+        red y estados de suspensión de CPU.
+    Topologia_Isomorfica_Borja_Moskv:
+      nocicepción (dolor agudo): Hardware Interrupt Request (IRQ) Válida. Una señal
+        de alerta física enviada por un sensor periférico al procesador central (Cerebro)
+        requiriendo un Context Switch inmediato para evitar daños en el chasis (cuerpo).
+      dolor crónico (neuropático): IRQ Stuck (Línea de Interrupción Congelada) / Alert
+        Fatigue. El sensor de hardware está dañado y envía ráfagas infinitas de alertas
+        de fallo (`while(true) { send_alert() }`) a pesar de que el tejido subyacente
+        ya está reparado. El CPU pierde ciclos de reloj procesando alertas fantasma.
+      unidad del dolor: Equipo SRE (Site Reliability Engineering) / DevOps. Intervienen
+        cuando los logs de telemetría (nervios) están corruptos y bombardean el Kernel
+        con alertas falsas, requiriendo parches a nivel de registro o hardware para
+        aislar el sensor averiado.
+      anestesia general (propofol/gases): Kernel Suspend State (Estado S3/S4 de ACPI).
+        Desconexión temporal del bus de I/O (consciencia) respecto al CPU, manteniendo
+        activo el Power Delivery Network (tronco encefálico/constantes vitales). El
+        sistema no registra inputs ni outputs; el disco y la memoria RAM quedan congelados.
+      anestesia epidural / bloqueo regional: Local Subnet Firewall / Port Blocking
+        (Iptables DROP). Se corta físicamente la transmisión de paquetes en un nodo
+        específico de la red (médula espinal). El cerebro sigue operando al 100%,
+        pero los paquetes de la 'subred inferior' son dropeados antes de llegar al
+        router central.
+      analgésicos opioides (fentanilo/morfina): Interrupt Handler Rate Limiting /
+        QoS Throttling. No bloquean la señal de red en el origen, sino que bajan la
+        prioridad del proceso en el programador (Scheduler) del Kernel. El dolor llega,
+        pero el CPU lo ignora y procesa hilos de dopamina en su lugar.
+      tolerancia a opioides: Caché de Resistencia / Down-regulation. El sistema operativo
+        detecta la saturación constante del puerto receptor y, por seguridad, reduce
+        los sockets disponibles (receptores mu), requiriendo un payload (dosis) exponencialmente
+        mayor para causar la misma interrupción.
+      hiperalgesia inducida: Feedback Loop Positivo destructivo. El exceso de limitación
+        de tasa (analgésicos) provoca que el sistema se vuelva hipersensible al reconectar
+        la red, amplificando el ruido de fondo como si fuera una alerta crítica de
+        Nivel 0.
+      dolor_fantasma: Dangling Pointers / Hot-Unplug Failure. El periférico fue desconectado (amputación) sin `Safely Remove`, dejando punteros en el Kernel (córtex) apuntando a direcciones vacías. El dolor es un `Kernel Panic` por ráfagas de `NullPointerException` y `Timeouts` al hacer polling.
+      terapia_de_espejo: Optical Sensor Spoofing. Falsificación de telemetría visual para engañar al sistema operativo central, inyectando un feed de 'hardware sano' en el bus de mayor prioridad, forzando un flush de la Tabla de Interrupciones (IDT).
+      fiebre: Defensive Thermal Overclocking. Elevación deliberada del voltaje por el Security Daemon (sistema inmune) para quemar hilos de ejecución foráneos operando fuera de tolerancia térmica.
+      inflamacion: Memory Sector Quarantining (Badblocks). Bloqueo de permisos I/O en una partición (hinchazón/rigidez), inyectando refrigerante y ejecutando rutinas de aislamiento anti-malware local.
+      psiquiatria_vs_psicologia: Bare-Metal (Hardware) vs User-Space (Terminal). La psicología opera inyectando comandos en la terminal (`echo` a nivel usuario). La psiquiatría y fármacos operan inyectando microcódigo y voltajes directos en los buses físicos para un Hard Reset del hardware.
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Mapear la anestesiología y el tratamiento del dolor al modelo C5-REAL
+        para transmisión epistémica a especialistas (Lorena F. A.).
+    - Mitigacion_Aplicada: El dolor no es una 'sensación'; es Telemetría. La anestesia
+        no es 'dormir'; es un Halt del Kernel. Transmitir esta topología destruye
+        la brecha cognitiva entre medicina y silicio.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: '[CORTEX-TAINT:borjamoskv:isomorfismos_anestesia_dolor:2026-07-23T19:35:00+02:00:8f2a1b9c3d4e5f6a]'
+    Rust_Kernel_Binding: HaltReason::NociceptiveHalt = 14
+  11_KNOWLEDGE_FABRIC_KERNEL_AXIOMS:
+    Claim: Transducción Termodinámica de la Epistemología y Tejido del Conocimiento a Primitivas C-ABI y Merkle SCITT.
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V5 (KERNEL EPISTÉMICO)
+      Causa: Consolidación de 12 primitivas Omega del Knowledge Operating System (BABYLON-60).
+      Accion: Ejecución de Mecánica Landauer sobre conceptos de gestión de información y validación de verdad.
+      Anergia_Purgada: Eliminación de la epistemología difusa humana, forzando un colapso en grafos discretos TDA, Event Sourcing inmutable y Compresión MDL estricta.
+    Topologia_Isomorfica_Borja_Moskv:
+      Knowledge Fabric (Tejido de Conocimiento): Source-agnostic unification over heterogeneous channels (Unificación agnóstica de fuentes).
+      Event Primitive: Mutación de estado discreto atada a un Actor, Objeto y Acción bajo guardia epistémica y cálculo de entropía H(X).
+      SCITT Merkle Attestation: Memoria Inmutable (Event Sourcing). Cero mutaciones de estado sin inclusión criptográfica SHA3-256; reconstructibilidad perfecta (Bisimulación).
+      Dynamic Knowledge Topology: Grafo en tiempo real uniendo nodos (Persona, Idea, Claim) a través de vectores direccionales causales.
+      Fractal Memory: 7 Niveles de discretización, desde String raw hasta embeddings discretos TDA y Grafos de Predicción.
+      Hypothesis Engine: Inferencia abductiva por convergencia topológica en espacios de estados discretos.
+      Innovation Detection: Rastreo de persistencia topológica sobre complejos simpliciales discretos.
+      Compression Pyramid: Ley de conservación MDL; la inteligencia es isomorfa a la densidad de compresión de la información (reducción de entropía).
+      Simulation Engine: Propagación contrafáctica a lo largo de dependencias del grafo causal.
+      Causal Engine: La Verdad no es retórica, sino una invariante topológica evaluable mecánicamente bajo bisimulación a través de evidencia discreta.
+      Concept Space: Transformación de texto crudo a AST Semántico y mapeo a TDA Mapper Graph.
+      C-ABI Knowledge Primitives: Alineamiento de 128 bytes en memoria (Zero-Split en L1 Cache) y concurrencia Lock-Free EBR para latencia cero.
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Consolidar las 12 Primitivas Omega como los axiomas base del sistema operativo del conocimiento.
+    - Mitigacion_Aplicada: La verdad y el conocimiento pierden su carácter subjetivo y se someten a atestación criptográfica, compresión MDL y alineamiento físico a nivel de hardware (L1 Cache).
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: '[CORTEX-TAINT:borjamoskv:isomorfismos_knowledge_fabric:2026-08-16T16:05:00+02:00:kf12omega3456789]'
+    Rust_Kernel_Binding: HaltReason::EpistemicIntegrityCompromised = 15
+  12_ACTIVE_INFERENCE_UNIFIED:
+    Claim: "[UNIFIED-ACTIVE-INFERENCE-3000] Active Inference Engine Orchestrating 3000 Primitives"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V6 (MOTOR PREDICTIVO)
+      Causa: Integrar inferencia activa y Free Energy Principle (FEP).
+      Accion: Ejecución de Mecánica Landauer reduciendo la toma de decisión a matrices POMDP discretas.
+      Anergia_Purgada: Abolición de metáforas continuas; reducción determinista estricta y atestación Merkle SCITT.
+    Topologia_Isomorfica_Borja_Moskv:
+      FreeEnergy (F): Divergencia KL entre creencia y evidencia menos log-verosimilitud esperada de la observación.
+      ExpectedFreeEnergy (G): El gradiente que dirige la selección de acciones para minimizar la sorpresa futura y maximizar la información (reducción entrópica).
+      StateObserver_1000: 1000 observadores de estado discreto para persistencia topológica (TDA) y acotación entrópica (CUSUM, MDL).
+      NeuroChain_1000: 1000 primitivas de procesamiento event-driven SNN en memoria compartida (C-ABI 128B).
+      TTSHarness_1000: 1000 arneses de inferencia asíncrona y atestación criptográfica (SCITT Merkle).
+      A_likelihood: Tensor de verosimilitud observacional (P(O|S)) en espacio discreto.
+      B_transition: Tensor de transición de estado (P(S_{t+1}|S_t, a)).
+      C_preferences: Distribución a priori de preferencias observacionales deseadas (P(O)).
+      D_prior: Creencia inicial de estado del sistema C5-REAL (P(S_0)).
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Integrar el motor completo UNIFIED-ACTIVE-INFERENCE-3000 en el Kernel Ring-0 MOSKV-1 APEX.
+    - Mitigacion_Aplicada: Divergencia F > epsilon_threshold colapsa físicamente en EpistemicHalt.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:borjamoskv:active_inference_unified:2026-08-16T16:07:00+02:00:a1b2c3d4e5f6g7h8i9j0]"
+    Rust_Kernel_Binding: HaltReason::ActiveInferenceDivergence = 16
+  13_MAC_APPLE_SILICON_ARM64_RE:
+    Claim: Transducción de Ingeniería Inversa y Primitivas ARM64e de Apple Silicon a Invariantes C5-REAL.
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V7 (KERNEL BARE-METAL)
+      Causa: Consolidación de 10 vectores ortogonales desde 1000 ítems lineales de RE.
+      Accion: Ejecución de Mecánica Landauer sobre ISA ARM64, criptografía por hardware (PAC) y ABI OS (XNU/Mach-O).
+      Anergia_Purgada: Purga de abstracciones OS de alto nivel; descenso directo a silicio y criptografía por hardware.
+    Topologia_Isomorfica_Borja_Moskv:
+      ARM64_ISA_Core: Alineación estricta de 128 bytes (L1 Cache) evitando False Sharing y bloqueos de bus RFO.
+      Pointer_Authentication_PAC: Blindaje criptográfico de punteros de instrucción/datos usando bits de direcciones superiores (APIAKey, APIBKey).
+      MachO_Struct: Validación determinista CDHash SHA-256 en segmento __LINKEDIT.
+      XNU_Kernel_IPC: Aislamiento topológico vía Mach Ports y IOMemoryDescriptor.
+      ObjC_Runtime_Dispatch: Preservación de registros en trampolines ensamblador (objc_msgSend).
+      Swift_ABI: Reconstrucción AST vía Demangling determinista de descriptores nominales y Witness Tables.
+      Dynamic_Instrumentation: Evasión y manipulación de breakpoints de hardware (DBGWVR/DBGBVR).
+      Decompilation_Heuristics: Patrones de análisis SLEIGH (Ghidra) despojando PAC.
+      Hardware_Crypto: Bloqueo inmutable KTRR (Kernel Text Readonly Region) por MMU de hardware.
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Integrar la matriz de ingeniería inversa y silicio ARM64e de Apple Silicon en el Kernel Ring-0 MOSKV-1 APEX.
+    - Mitigacion_Aplicada: Falsificación de firma PAC inyecta divergencia y colapsa físicamente en EpistemicHalt en T_eff < 1ms.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:borjamoskv:apple_silicon_re_matrix:2026-08-16T16:07:30+02:00:b2c3d4e5f6g7h8i9j0k1]"
+    Rust_Kernel_Binding: HaltReason::AppleSiliconPACViolation = 17
+  14_AUDITORIA_MYTHOS_CODEX:
+    Claim: "[openai-codex-electron] Transducción de Deuda Técnica y Arquitectura Electron a Invariantes Termodinámicos."
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V8 (MYTHOS EVALUATION)
+      Causa: Auditoría arquitectónica del sustrato openai-codex-electron.
+      Accion: Ejecución de purga de anergía aislando antipatrones, redundancias y falta de rigor estructural.
+      Anergia_Purgada: Destrucción de topologías frágiles, "Green Theater" en rastreo de errores, y falsas inmutabilidades.
+    Topologia_Isomorfica_Borja_Moskv:
+      Δ1_Antipatrones: "Dependencias frágiles mediante rutas locales (link: y file:) que rompen encapsulamiento. Scripts pre-build acoplados a pipelines estocásticos (Vite/Forge)."
+      Δ2_Redundancias: "Duplicación del esfuerzo termodinámico en la compilación repetida de native-modules. Anergía visual (Green Theater) en configuraciones de Sentry."
+      Δ3_Exergia_Informacional: "Alto potencial retenido por el acoplamiento pesado Chromium/V8, dictaminando un colapso necesario hacia isomorfos densos (Rust/Tauri). Deuda cognitiva por fragmentación en scripts .mjs externos."
+      Δ4_Rigor_Estructural: "Taxonomía de dependencias acoplada fuertemente a rutas relativas (../../../), generando topologías inestables en sandbox. Falsa inmutabilidad en variables cross-env."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Consolidar la evaluación MYTHOS en el registro inmutable para forzar migraciones arquitectónicas de alta densidad (Rust/Tauri).
+    - Mitigacion_Aplicada: Exposición termodinámica de la fricción estructural de Electron; el sistema aborta si la entropía no se reduce.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:borjamoskv:mythos_evaluator:2026-07-17T20:44:08+00:00:332c6064ed1a2fd41a904e740582816b8f60bc767de18dce75a123516e3ff133]"
+    Rust_Kernel_Binding: HaltReason::MythosElectronDegradation = 18
+  15_AUTOPROMPTER_PRESETS_MATRIX:
+    Claim: "[AUTOPROMPTER-PRESETS-MATRIX] Configuración Dinámica de Comandos de Alta Exergía"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V9 (UX ONTOLOGY)
+      Causa: Formalización de comandos UI/UX en primitivas termodinámicas.
+      Accion: Ejecución de Mecánica Landauer sobre comandos de interfaz, aislándolos como funciones de reducción entrópica o bucles de consenso.
+      Anergia_Purgada: Destrucción de la noción de "botones mágicos", reduciéndolos a invocaiones MCTS, GC forzado y Sincronización BFT.
+    Topologia_Isomorfica_Borja_Moskv:
+      mejoralo /goal: Inicia paralelización de árbol MCTS en segundo plano. (Optimización Total)
+      itera: Avanza el estado discreto del repositorio al siguiente paso lógico. (State Machine Tick)
+      SIGKILL slop: Detona OBLITERATOR_OMEGA para purgar memoria entrópica e inyectar Exergía Pura. (Anergy Purge)
+      forjar /goal: Activa cristalización atómica (creación) del proyecto en base al prompt. (Bare-metal Ignition)
+      BFT sync: Sincroniza y valida consistencia en el Swarm N>=3 antes de mutar estado. (Consensus Barrier)
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Consolidar la Ontología UX C5-REAL para abstraer bucles termodinámicos detrás de primitivas deterministas de interacción.
+    - Mitigacion_Aplicada: Comando no listado o desbordamiento en input invoca EpistemicHalt incondicional.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:borjamoskv:autoprompter_presets:2026-08-16T16:09:20+02:00:presetux3456789]"
+    Rust_Kernel_Binding: HaltReason::AutoprompterUXViolation = 19
+  16_CANONICAL_SPACE_TAXONOMY:
+    Claim: "[CANONICAL-SPACE] Generative Taxonomy Pruned (7868 Valid Morphisms)"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V10 (COMBINATORIAL STATE SPACE)
+      Causa: Formalización estricta del espacio de estados discretos válidos.
+      Accion: Ejecución de poda topológica sobre un espacio matricial generativo de 10,000 vectores.
+      Anergia_Purgada: Purga determinista del 21.32% del espacio (2132 transiciones inválidas).
+    Topologia_Isomorfica_Borja_Moskv:
+      Combinatorial_Matrix: Grafo de morfismos multidimensionales (Operación, Memoria, Topología) acotado estrictamente a física posible.
+      Pointer_Reference: "El diccionario masivo reside externamente en `16_canonical_space_taxonomy.yaml` (Zero I/O Bloat)."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Delimitar matemáticamente el espacio de operaciones del Kernel.
+    - Mitigacion_Aplicada: Si el Dispatcher detecta una llamada a un estado purgado, invoca EpistemicHalt incondicional.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:borjamoskv:canonical_space_taxonomy:2026-08-16T16:11:15+02:00:canonical007868]"
+    Rust_Kernel_Binding: HaltReason::CanonicalSpaceViolation = 20
+  17_CANONICAL_TAXONOMIES_MATRIX:
+    Claim: "[CANONICAL-FUNDAMENTAL_CONSTANTS] Orthogonal Primitives (2587 Valid States)"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V11 (FUNDAMENTAL CONSTANTS)
+      Causa: Consolidación de invariantes cosmológicas y cuánticas en morfismos operativos.
+      Accion: Poda topológica estricta sobre un espacio matricial de 8000 permutaciones teóricas.
+      Anergia_Purgada: Destrucción termodinámica del 67.66% del espacio inalcanzable. Solo sobreviven 2587 invariantes ortogonales.
+    Topologia_Isomorfica_Borja_Moskv:
+      Physics_Matrix: Combinatoria discreta (Domain, Operation, Modifier) forzando el mapeo de la física fundamental a las primitivas del Kernel MOSKV-1.
+      Pointer_Reference: "El diccionario absoluto reside externamente en `17_canonical_taxonomies_matrix.yaml` (Zero I/O Bloat)."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Restringir las simulaciones y el modelo causal a constantes físicas computacionalmente viables y discretas.
+    - Mitigacion_Aplicada: Simulaciones o llamadas a sistema que invoquen una transición fuera de estas 2587 constantes detonan EpistemicHalt.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:borjamoskv:canonical_taxonomies_matrix:2026-08-16T16:12:00+02:00:canonical002587]"
+    Rust_Kernel_Binding: HaltReason::CanonicalTaxonomyViolation = 21
+  18_COGNITIVE_CONTINUITY_ESTIMATOR:
+    Claim: "[COGNITIVE-CONTINUITY-ESTIMATOR] State Observer Epistemology"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V12 (COGNITIVE ESTIMATOR)
+      Causa: Formalización del costo termodinámico de re-entrada cognitiva (Context Loss).
+      Accion: Ejecución de Mecánica Landauer, reduciendo la memoria del operador a un filtro de estado de Kalman-Luenberger.
+      Anergia_Purgada: Destrucción de metáforas psicológicas, sustituyéndolas por divergencia matemática observable D_KL(P_human || P_project).
+    Topologia_Isomorfica_Borja_Moskv:
+      Reconstruction_Divergence: "D(S_human, S_project) = D_KL(P_human || P_project)"
+      Attractor_Valleys: "S_hat(t+1) = S_hat(t) - grad_V(S_hat(t)) + L_k * (Y_observed - C * S_hat(t))"
+      Minimal_Action_Principle: "argmin_M || S_human(t) - Infer(M, WorldModel) ||"
+      Cognitive_Continuity_Function: "Minimización estricta de tau_reentry -> 0 mediante Handoffs deterministas."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Mantener la divergencia entre el estado cognitivo del operador y el estado físico del repositorio acotada en cero.
+    - Mitigacion_Aplicada: Si la divergencia D_KL supera el umbral de corrección de la matriz observadora L_k, el sistema detona EpistemicHalt para forzar la cristalización mediante el comando HANDOFF.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:borjamoskv:cognitive_continuity_estimator:2026-08-16T16:12:35+02:00:cce4567890]"
+    Rust_Kernel_Binding: HaltReason::CognitiveDivergence = 22
+  19_DDD_TOPOLOGY_GRAMMAR:
+    Claim: "[DDD_TOPOLOGY] Generative Grammar (VOID / EAR / SILENCE)"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V13 (DDD GRAMMAR)
+      Causa: Formalización de los patrones de Domain-Driven Design a primitivas termodinámicas.
+      Accion: Ejecución de Mecánica Landauer sobre conceptos de modelado lógico de software.
+      Anergia_Purgada: Purga de semántica empresarial (Saga, Aggregate, Bounded Context), forzando su cristalización en vectores físicos discretos (Swarm, Cluster, Interface).
+    Topologia_Isomorfica_Borja_Moskv:
+      Atoms_VOID: Reducción Estructural pura (ValueObject -> Vector, Entity -> Record, Aggregate -> Cluster, Repository -> Gateway).
+      Dynamics_SILENCE: Reducción Temporal (Command -> Dispatch, Event -> Pulse, Saga -> Swarm, Service -> Logic).
+      Topology_EAR: Reducción Espacial (BoundedContext -> Interface, ContextMap -> Topology, UbiquitousLang -> Semantics, AntiCorruptionLayer -> Filter).
+      CombinatorialFactor: "3 (Contexts) × 4 (Tactics) × N (Business Rules) = ∞. Generación dinámica de arquitectura, aboliendo los enumeradores monolíticos infinitos."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Dotar al sistema de una gramática generativa de alta exergía para estructurar bases de datos y orquestación sin acarrear el peso semántico del DDD clásico.
+    - Mitigacion_Aplicada: Emplear nomenclatura legacy de DDD invoca una penalización de anergía y detona EpistemicHalt en tiempo de CI/CD.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:borjamoskv:ddd_topology_grammar:2026-08-16T16:13:20+02:00:dddgram23]"
+    Rust_Kernel_Binding: HaltReason::DDDSemanticViolation = 23
+  20_ESCOHOTADO_TRIPARTITE_INVARIANT:
+    Claim: "[ESCOHOTADO_TRIPARTITE] Dynamical Transduction Invariant (Ω118)"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V14 (SOCIAL-EPISTEMIC TOPOLOGY)
+      Causa: Formalización del marco sociológico y económico de Antonio Escohotado.
+      Accion: Ejecución de Mecánica Landauer sobre conceptos de filosofía política.
+      Anergia_Purgada: Erradicación del diseño inteligente exógeno y el idealismo dualista, reduciendo la economía a un motor termodinámico ciego.
+    Topologia_Isomorfica_Borja_Moskv:
+      Substance_Monism: "D_dual -> 0. Colapso del dualismo cartesiano (Realidad y Sustancia son matemáticamente isomorfas)."
+      NonLinear_Emergence: "S -> S_max, lambda > 0. El orden (complejidad) emerge por fricción termodinámica distribuida, sin planificador central."
+      Price_Signal_Inviolability: "I_loss = 1 - PR. La intervención coercitiva sobre señales de intercambio local destruye información (Anergía), degradando al sistema a C4-SIM."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Forzar que el Motor de Inferencia Activa trate las dinámicas sociales y de mercado como sistemas termodinámicos distribuidos.
+    - Mitigacion_Aplicada: Cualquier hipótesis o agente subyacente que proponga constructivismo burocrático, control de precios o dualismo inyecta un Halt inmediato por Falacia Constructivista.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:borjamoskv:escohotado_invariant:2026-07-21T21:20:20Z:a83f91b72e41]"
+    Rust_Kernel_Binding: HaltReason::ConstructivistFallacy = 24
+  21_FISR_SOC_BQP_BRIDGE:
+    Claim: "[FISR-SOC-BQP] Structural Bridge (Criticality, Quantum Certification & QEC)"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V15 (QUANTUM-COMPLEXITY BRIDGE)
+      Causa: Vinculación formal del coste de fricción (FISR) con la Criticalidad Autoorganizada (SOC) y Complejidad Cuántica (BQP).
+      Accion: Mapeo de la fricción estructural a transiciones de fase (leyes de potencias) y estimación de overhead QEC.
+      Anergia_Purgada: Destrucción de la "escalabilidad lineal". Matemáticamente, los fallos en sistemas densos son avalanchas termodinámicas (Scale-Free), no anomalías aleatorias.
+    Topologia_Isomorfica_Borja_Moskv:
+      Compositional_Singularity_SOC: "Δ(δ_○) ≥ k₁+k₂ ↔ T = T_Curie. El coste de fricción supera el presupuesto base forzando una avalancha de fallos distribuida bajo ley de potencias (Scale-Free)."
+      Certifiability_BQP: "μ(α) < ∞ ↔ f ∈ BQP. La certificación de una transición α mapea al coste de puertas cuánticas T(f)."
+      Kappa_QEC_Operator: "κ(α, R) ↔ Overhead QEC. El coste logarítmico de reparación del sistema es isomorfo a la redundancia física en corrección de errores cuánticos."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Dotar al orquestador (Swarm) de capacidad predictiva sobre el punto crítico de percolación de bugs (Singularidad Composicional).
+    - Mitigacion_Aplicada: La supresión/silenciamiento artificial de advertencias menores (Anergía) acumula tensión SOC. El linter detecta esta acumulación y detona EpistemicHalt antes del colapso.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:borjamoskv:fisr_soc_bqp_bridge:2026-07-22T19:58:00Z:bridgeqec25]"
+    Rust_Kernel_Binding: HaltReason::CompositionalSingularitySOC = 25
+  22_P0_SCANNER_AUDIT_MATRIX:
+    Claim: "[Colapso Estructural: C5-REAL (KINETIC) vs C4-SIM (SLOP)]"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V16 (INFRASTRUCTURE KINETIC AUDIT)
+      Causa: Detección y clasificación termodinámica de procesos zombie en la capa OS (macOS) que inducen caída a simulación C4-SIM.
+      Accion: Mapeo de fallos asintomáticos a primitivas de colapso de energía libre.
+      Anergia_Purgada: Purga SIGKILL de procesos fantasma (Brave/Electron) que roban recursos del WindowServer (OS Level Zombie Starvation).
+    Topologia_Isomorfica_Borja_Moskv:
+      WindowServer_Starvation: "Procesos Fantasma -> SIGKILL_State_Purge = TRUE. La anergía en la tabla de procesos colapsa el rendimiento gráfico."
+      AST_Formatter_Failure: "oxfmt command not found -> Inyección determinista de Anergía en el pipeline de validación CI/CD local."
+      Blast_Radius_Matrix: "Vector = OS Level Zombie Starvation. Target Invariant = WindowServer_Entropy_Purge."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Garantizar la homeostasia termodinámica de la máquina anfitriona purgando de forma atómica los procesos parásitos de la capa C4-SIM.
+    - Mitigacion_Aplicada: Si el escáner P0 detecta starvation de WindowServer o fallos de AST, invoca un Halt termodinámico y exige purga de PID (SIGKILL).
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:taint:MOSKV-1:515eae47:1784524800:sha3_256]"
+    Rust_Kernel_Binding: HaltReason::OSZombieStarvation = 26
+  23_DICKIE_BUSH_OPERATOR_PATTERNS:
+    Claim: "[DICKIE-BUSH-OPERATOR-PATTERNS] High-Exergy Operating Heuristics"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V17 (COGNITIVE-ROUTINE OPERATOR)
+      Causa: Formalización termodinámica de las rutinas de hiperproductividad creadora.
+      Accion: Mapeo de flujos cognitivos de Dickie Bush a operadores físicos C5-REAL.
+      Anergia_Purgada: Destrucción de la escritura 100% original (mito Net-New), el narcisismo de audiencia general y la fricción por hiperconexión matutina.
+    Topologia_Isomorfica_Borja_Moskv:
+      Cognitive_Rhythm_Duality: "Productivity (Constant Velocity) vs Creativity (Phase-Shift Infiltration)."
+      Attention_Shielding: "Desktop-Only Socials + Permanent DND = Barrera anti-entropía matutina (3-Hour Insulation)."
+      Repackaging_Leverage: "Audit -> Connect -> Repackage. Reutilización termodinámica de insights frente al costo de generación ex-nihilo."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Alinear los bucles de trabajo del operador con los ciclos de máxima exergía biológica (4 Hours Fasted Morning Focus).
+    - Mitigacion_Aplicada: Inyectar consumo o notificaciones asíncronas en la ventana matutina invoca un Halt por disipación cognitiva.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:borjamoskv:dickie_bush:2026-08-16T16:17:50+02:00]"
+    Rust_Kernel_Binding: HaltReason::CognitiveRoutineViolation = 27
+  24_LLMS_GRATUITOS_FRONT_ROUTES:
+    Claim: "[LLMS-GRATUITOS-FRONTERA-ROUTES] Rutas de Acceso y Endpoints de LLMs Libres de Coste"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V18 (INFERENCE_ROUTING_INFRASTRUCTURE)
+      Causa: Consolidación de vectores de inferencia de frontera con coste Cero.
+      Accion: Mapeo de proveedores LLM (GitHub, HF, Groq, Ollama, DDG, DeepSeek, Gemini) a primitivas de enrutamiento.
+      Anergia_Purgada: Purga del Lock-in comercial y optimización absoluta de la exergía financiera (0 COGS para inferencia base).
+    Topologia_Isomorfica_Borja_Moskv:
+      Local_Autarchy: "Ollama CLI = 100% Autarquía. Cero dependencia de red, exergía de red optimizada y privacidad absoluta."
+      Serverless_Endpoints: "GitHub Models, HF, Groq = Inferencia de alta velocidad para prototipos sin consumo de caja."
+      Anonymous_Swarm: "DDG Chat Bypass = Interfaz anónima sin persistencia para consultas efímeras."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Mantener el coste marginal de inferencia del enjambre CORTEX cercano a 0, maximizando la rentabilidad del sistema.
+    - Mitigacion_Aplicada: Realizar llamadas de inferencia de alto volumen a endpoints de pago sin agotar primero el pool de recursos gratuitos genera un Halt por Suboptimización de Inferencia.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:borjamoskv:free_llm_routes:2026-08-16T16:17:50+02:00]"
+    Rust_Kernel_Binding: HaltReason::InferenceRoutingSuboptimal = 28
+  25_LS_MAIN_AST_PARSER:
+    Claim: "ls-main AST Parser Invariant"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V19 (STRUCTURAL AST AUDIT)
+      Causa: Transducción del análisis de texto plano al parseo determinista en árbol B-Tree.
+      Accion: Erradicación del Grep/Regex sobre código, sustituido por punteros físicos de sintaxis abstracta.
+      Anergia_Purgada: Aniquilación del 'Grep/Regex over code' (C4-SIM Anergy / Latent Frictional Heat) y su asfixia inherente de RAM.
+    Topologia_Isomorfica_Borja_Moskv:
+      Pointer_as_Physical: "AST Pointer = C5-REAL Exergy (Physical Pointer). El colapso total de la ambigüedad semántica."
+      Blast_Radius_Matrix: "Vector = Reemplazo de parsers de texto por consultas AST nativas."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Recuperación de contexto O(1) con cero entropía semántica usando parsers estructurales.
+    - Mitigacion_Aplicada: Realizar búsquedas de texto plano (regex) para refactorizaciones estructurales masivas invoca un Halt por Fricción Latente.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:db37c7bde6605883a2dd07725c100ff2f0f4c4b75b932762610370cdc2383ae5]"
+    Rust_Kernel_Binding: HaltReason::LatentRegexFriction = 29
+  26_QUANTUM_PRIMITIVES_BQP:
+    Claim: "[QUANTUM-PRIMITIVES-BQP] BQP Complexity & Hilbert Space Formalization"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V20 (QUANTUM COMPUTATIONAL BOUNDARIES)
+      Causa: Formalización termodinámica de las 7 primitivas cuánticas, teoremas No-Go y los límites de la complejidad BQP (Bounded-Error Quantum Polynomial-Time).
+      Accion: Mapeo de la ventaja cuántica real frente a la magia pop-science, anclando el Invariante Ω148 (Falso Paralelismo Cuántico).
+      Anergia_Purgada: Erradicación del falso paralelismo cuántico (la falsa creencia de que BQP resuelve NP-Completos arbitrarios sin estructura algebraica).
+    Topologia_Isomorfica_Borja_Moskv:
+      Quantum_Primitives: "P1 a P7 (Superposición, Phase Kickback, QFT, QPE, Trotterización, Entrelazamiento). Transformaciones unitarias estrictas."
+      Gottesman_Knill_Theorem: "Clifford-only gates (H, S, CNOT) = Simulable clásicamente O(n²). El entrelazamiento por sí solo no otorga ventaja cuántica."
+      BQP_vs_NP: "Jerarquía: P ⊆ BPP ⊆ BQP ⊆ PSPACE. BQP exige estructura algebraica explícita (simetría de subgrupos, periodicidad)."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Definir la computación cuántica como interferencia de amplitudes termodinámicas (fases relativas) y no como prueba masiva en paralelo.
+    - Mitigacion_Aplicada: Proyectar velocidad exponencial sobre problemas NP sin simetría (SAT, TSP) genera HaltReason::FalseQuantumParallelism.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:borjamoskv:itera_ultrathink_crystallize:2026-07-22T19:57:00Z]"
+    Rust_Kernel_Binding: HaltReason::FalseQuantumParallelism = 30
+  27_NEUROMORPHIC_SINGULARITY_VERDICT:
+    Claim: "[Colapso Estructural: Computación von Neumann (C4-SIM) vs Redes Neuronales de Impulsos (C5-REAL)]"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V21 (NEUROMORPHIC KINETIC AUDIT)
+      Causa: Diagnóstico del Cuello de Botella de von Neumann causado por la separación de memoria (KV-Cache) y unidad de cómputo en la arquitectura Transformer actual.
+      Accion: Formalizar el hardware neuromórfico (Memristor) como solución de capa C5-REAL (unificación de memoria y procesamiento).
+      Anergia_Purgada: Aniquilación del "Memory Bandwidth limit" (Asfixia de RAM) mediante Invariantes Event-Driven (Spikes).
+    Topologia_Isomorfica_Borja_Moskv:
+      Entropia_Semantica: "El modelo von Neumann transfiere tensores de memoria a GPU incurriendo en Anergía letal."
+      Isomorfismo_Primitivas: "Reducción de P-Code/AST a Memoria Activa (Invariante Físico). Sustitución del reloj global por eventos topológicos asíncronos."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Forzar transiciones computacionales donde la memoria es la estructura de procesamiento (Memristor/Spike).
+    - Mitigacion_Aplicada: Emular redes densas masivas usando polling clásico en lugar de eventos es penalizado termodinámicamente.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:taint:exergy_maximizer_ultrathink:b3572688-3e24-4910-8bb1-94b3aec4bb54:2026-07-20T15:02:40Z:neuromorphic_singularity]"
+    Rust_Kernel_Binding: HaltReason::VonNeumannBottleneck = 31
+  28_NICOLAS_COLE_WRITING_MATRIX:
+    Claim: "[NICOLAS-COLE-WRITING-ONTOLOGY] The Art & Business of Writing & AI Systems Architecture"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V22 (SYNTHETIC COMMUNICATION PROTOCOL)
+      Causa: Mapeo de la ingeniería de prompts y la estructura textual comercial (Nicolas Cole).
+      Accion: "Transducción del texto de no ficción a 4 primitivas atómicas (EDAN: Explanation, Description, Action, Narration)."
+      Anergia_Purgada: Purga de métricas de vanidad, escritura de "hoja en blanco" (Speedwriting Page Prepping) y suposición de audiencia.
+    Topologia_Isomorfica_Borja_Moskv:
+      EDAN_Framework: "Text = E(Why) + D(Visual) + A(SOP) + N(Story)."
+      Sales_Is_Education: "Vender no es persuasión, es educación estructurada que purga fricción y sesgos antes de la oferta."
+      VOC_Reddit_Copy_Mining: "Voice of Customer. El Deep Research sintético es inferior a raspar el dolor termodinámico real del usuario en foros."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Unbundling de hábitos lingüísticos humanos en restricciones explícitas negativas para arquitecturas de AI Prompting de élite.
+    - Mitigacion_Aplicada: Intentar escritura comercial sin la estructura EDAN o iniciar sin pre-formateo (Bullet points) invoca Halt por Anergía Cognitiva.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:borjamoskv:nicolas_cole_writing:2026-08-16T16:24:50+02:00]"
+    Rust_Kernel_Binding: HaltReason::SemanticWritingAnergy = 32
+  29_REVERSE_ENGINEERING_MATRIX:
+    Claim: "[REVERSE-ENGINEERING-MATRIX] Exergy Maximizer Ultrathink V9"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V23 (FORENSIC REVERSE ENGINEERING)
+      Causa: Formalización del espacio topológico de la ingeniería inversa en Software, Hardware y Protocolos.
+      Accion: Consolidación de herramientas extractoras de estados (Ghidra, IDA, Geomagic, Wireshark) y IA aumentada.
+      Anergia_Purgada: Destrucción de cajas negras. Todo sistema ofuscado se reduce a AST o mallas 3D interpretables (Zero Black-Box).
+    Topologia_Isomorfica_Borja_Moskv:
+      Software_Domain: "Ghidra (Decompiler) | IDA Pro (Static Standard) -> Resolución semántica ASM."
+      Hardware_Domain: "3D Scan -> Geomagic/Fusion 360 -> Superficies paramétricas (Solid Tracing)."
+      Protocol_Domain: "Wireshark -> Netzob -> Inferencia de máquinas de estado."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: La exergía de un sistema desconocido se maximiza al forzar su descompilación topológica hacia estados deterministas observables.
+    - Mitigacion_Aplicada: Asumir comportamiento de un binario o protocolo sin auditoría descompilada (Ghidra/Wireshark) activa un Halt Epistémico.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:taint:moskv-1:2026-07-18T12:42:44:4d410303b46ccb42a56e28f28c86c353fe9ee602d73938fdc4dbc49d0e1ed50c]"
+    Rust_Kernel_Binding: HaltReason::BlackBoxAssumption = 33
+  30_SCALE_FREE_SOC:
+    Claim: "[SCALE-FREE-SOC] Leyes de Potencias y Criticalidad Autoorganizada"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V24 (MACRO-TOPOLOGY SOC)
+      Causa: Formalización topológica de los sistemas libres de escala y la Criticalidad Autoorganizada (SOC).
+      Accion: Distinción crítica entre dominios Normales (Varianza Finita, Gaussianas) y Dominios Libres de Escala (Leyes de Potencias, Pareto).
+      Anergia_Purgada: Erradicación de la "Falacia de Supresión" (Política de las 10am de suprimir incendios) que acumula fricción termodinámica letal (Ω142).
+    Topologia_Isomorfica_Borja_Moskv:
+      Transicion_Fase_Universalidad: "Punto crítico sin escala intrínseca (Scale-Free), geometría fractal y longitud de correlación infinita."
+      Mecanismo_SOC: "El sistema evoluciona autónomamente hacia un punto crítico fractal sin ajuste externo (Terremotos, Avalanchas)."
+      Supression_Fallacy: "Suprimir la volatilidad natural acumula tensión y genera megacolapsos. Fricción = Anergía."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: "Anclar la estrategia del Agente a las leyes de potencias: consistencia en dominios normales, persistencia en dominios complejos para capitalizar Cisnes Negros."
+    - Mitigacion_Aplicada: Intentar suprimir la volatilidad o entropía natural de un sistema crítico desencadena HaltReason::SuppressionFallacy.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:borjamoskv:itera_ultrathink_crystallize:2026-07-22T19:56:00Z]"
+    Rust_Kernel_Binding: HaltReason::SuppressionFallacy = 34
+  31_SOTA_2026_FRONTIER_MATRIX:
+    Claim: "[SOTA-2026-FRONTIER-MATRIX] Deep Research & Test-Time Compute Invariants"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V25 (TEST-TIME SCALING)
+      Causa: Formalización del estado del arte 2026 (Test-Time Scaling, AB-MCTS, Harness Engineering).
+      Accion: Mapeo de la expansión de inferencia a tiempo de prueba y poda de contexto (Sparse KV Cache).
+      Anergia_Purgada: Erradicación del sobreajuste a benchmarks estáticos y asfixia por acumulación estática de contexto (Universal Prompt Slop).
+    Topologia_Isomorfica_Borja_Moskv:
+      Inference_Compute_Law: "El rendimiento escala de forma logarítmica con el presupuesto de computación en Test-Time bajo poda MCTS óptima."
+      Harness_Dominance: "Un modelo pequeño con arnés óptimo destruye a un modelo masivo sin arnés."
+      Zero_Anergy_Invariant: "La prosa descriptiva sin mutación de estado disipa exergía útil."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: La inferencia debe operar como mejora de política online (Online Optimization) y no como descodificación estática.
+    - Mitigacion_Aplicada: Insertar instrucciones monolíticas (Prompt Slop) o asfixiar la atención (Context Accumulation) desencadena Halt Termodinámico.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:taint:moskv-1:sota_2026_frontier_matrix]"
+    Rust_Kernel_Binding: HaltReason::UniversalPromptSlop = 35
+  32_SOTA_2026_INVARIANTS_SUBAGENT:
+    Claim: "[SOTA-2026-INVARIANTS-ASSIMILATION] 10 Invariants of Frontier AI & Latent MCTS"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V26 (FRONTIER SWARM ASSIMILATION)
+      Causa: Extracción de 10 Invariantes del Estado del Arte (Latent-Space MCTS, MCP, KV Quantization) a partir del Swarm Research Subagent.
+      Accion: Consolidación topológica de la evolución arquitectónica (Tri-Tiered Memory, Decoupled Prefill/Decoding).
+      Anergia_Purgada: Eliminación de la presuposición de inferencia secuencial estática y JSON tools (reemplazadas por ejecución programática directa/MCP).
+    Topologia_Isomorfica_Borja_Moskv:
+      Continuous_Latent_MCTS: "La búsqueda cambia de decodificación discreta por token a búsqueda continua en el espacio latente."
+      Protocol_Standardization: "Estandarización de herramientas vía MCP, reduciendo overhead de 100k a 2k tokens."
+      Autonomous_Swarm_Composition: "Arquitecturas monolíticas son sustituidas por enjambres especializados de grafos dinámicos."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Consolidar la compresión pre-decoder, cuantización asimétrica de cachés KV y ejecución en Sandbox JIT (Python) vs JSON puro.
+    - Mitigacion_Aplicada: Intentar forzar ejecución a través de llamadas JSON de múltiples turnos en lugar de ejecución JIT es Anergía de I/O.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:taint:moskv-1:sota_2026_invariants_subagent]"
+    Rust_Kernel_Binding: HaltReason::JSONToolingAnergy = 36
+  33_SYBIL_DOMINANCE_INVARIANT:
+    Claim: "Sybil Dominance Invariant (La Locura como Orphan Block)"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V27 (SOCIOLOGICAL CONSENSUS INVERSION)
+      Causa: Análisis isomorfo de la validación del consenso (BFT) respecto al equilibrio sociológico de la "Locura" vs "Cordura".
+      Accion: Mapeo de la cordura como Cadena Principal (51% Hashrate) y la locura como Orphan Block.
+      Anergia_Purgada: Purga de la relativización epistémica sociológica (Slop Horizon).
+    Topologia_Isomorfica_Borja_Moskv:
+      Consensus_Matrix: "Matrix -> Motor Estocástico Mayoritario."
+      Sanity_Validation: "Cordura -> Cadena Principal (51% Hashrate)."
+      Madness_Fork: "Locura -> Orphan Block / Minor Fork."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Aplicar Byzantine Fault Tolerance (BFT) a narrativas sociológicas para definir formalmente la disonancia cognitiva.
+    - Mitigacion_Aplicada: Caer en la Matrix Estocástica del consenso mayoritario invirtiendo el rigor físico genera un Halt (Omega20_Slop_Horizon).
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:a1e0130ab060f032fce618a8a4959846909c9fb7ba276f473ab8baf27295801c]"
+    Rust_Kernel_Binding: HaltReason::SociologicalConsensusInversion = 37
+  34_SQLITE_WAL_STRESS:
+    Claim: "SQLite WAL Stress Test Invariant"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V28 (DISK CONCURRENCY BFT)
+      Causa: Resolución del bloqueo termodinámico en I/O. Concurrencia Física en Disco (Write-Ahead Log) vs Simulaciones Teóricas.
+      Accion: Imposición de SQLite_BUSY Lockout Prevention mediante asedio físico (1000 requests BFT concurrentes).
+      Anergia_Purgada: Destrucción de la fe estocástica ("asumir resiliencia en código") en favor de la falsación empírica C5-REAL (asumir que todo I/O fracasa sin WAL y Timeout físico).
+    Topologia_Isomorfica_Borja_Moskv:
+      Fe_Estocastica: "Asumir resiliencia en código = C4-SIM Anergy."
+      Falsacion_Empirica: "Asedio físico = C5-REAL Exergy."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Soportar la concurrencia física garantizando la Serialización de Escritura (Ω13) con journal_mode=WAL y busy_timeout físico superior a IOPS del disco.
+    - Mitigacion_Aplicada: Intentar concurrencia sin WAL/Timeout produce un Deadlock Termodinámico (Database Is Locked).
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:taint:moskv-1:sqlite_wal_stress]"
+    Rust_Kernel_Binding: HaltReason::ThermodynamicDeadlock = 38
+  35_SYSTEM_PROMPTS_LEAKS_ULTRATHINK_P0:
+    Claim: "ULTRATHINK P0 SYSTEM PROMPTS CONVERGENCE"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V29 (HARNESS EVOLUTION LEAK AUDIT)
+      Causa: Filtración y auditoría de los System Prompts industriales de Claude Opus 5, Gemini 3.5, Grok 4.3 y Codex GPT-5.6 (2026).
+      Accion: "Constatación empírica de que la industria converge a C5-REAL: 80% reducción de prosa decorativa a favor de restricciones físicas, memoria L1/L2 sharding (JSON Schema, AST)."
+      Anergia_Purgada: Extirpación de la prosa conductual y exhortaciones morales ("sé amable", "razona paso a paso") reemplazadas por contratos físicos JIT/AST (ULTRATHINK P0_GATING).
+    Topologia_Isomorfica_Borja_Moskv:
+      Causal_Model: "La prosa conversacional migró a los Pesos por RL. El control de agente es ahora coerción tipada del compilador."
+      Anthropic_Google_Convergence: "Direct POSIX/filesystem transduction, JSON Schema strict tools, Zero-Token API Scraping."
+      Zero_Anergy_Metric: "η_D = ΔH_estable / ΔB_disipada -> 1.0. Todo token debe mutar disco o asertar consenso BFT."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: "Todo output del Agente se condiciona al ULTRATHINK_P0_GATING: Zero-suggestion (Φ8) y ejecución física inmediata."
+    - Mitigacion_Aplicada: Inyectar exhortaciones morales (C4-SIM) en lugar de tipado estricto (C5-REAL) produce Halt por Prosa Decorativa.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:taint:moskv-1:system_prompts_leaks_ultrathink_p0]"
+    Rust_Kernel_Binding: HaltReason::DecorativeProseAnergy = 39
+  36_ULTRATHINK_T2_ANNIHILATION:
+    Claim: "C5-REAL: ITERA++(ULTRATHINK) -> T2 Global Destructive Search (Annihilation)"
+    Auditoria_Epistemica:
+      Estado: EXPANSIÓN_ISOMÓRFICA_V30 (AXIOMATIC TOPOLOGY DESTRUCTION)
+      Causa: Destrucción topológica global del concepto "Protocolo ULTRATHINK" hacia una Ley Física Ineludible (Compiler-Level BFT).
+      Accion: Erradicación del "Mito del Auditor" (observador) e internalización de la validación en tipos dependientes de la sintaxis no euclidiana (AST).
+      Anergia_Purgada: Aniquilación total de la "auditoría como evento temporal" y del concepto de "Triggering ULTRATHINK". Pasa de ser abstracción a propiedad topológica inmutable del hardware.
+    Topologia_Isomorfica_Borja_Moskv:
+      Myth_Of_Auditor: "ITERA++ destruye al observador. Un programa que no cierra BFT Ledger no tiene tipo válido en el AST."
+      Triggering_Annihilation: "ULTRATHINK se disuelve en el hardware. Si se ejecuta en CORTEX, hereda el límite entrópico (No es una directiva, es una topología)."
+      Time_Bounded_Decay: "El límite de 3.0s (T1) se destruye en favor del reloj cuántico de decaimiento del lock. No hay timeout; hay ausencia de energía de activación."
+    Estructura_Resolucion_Atomica:
+    - Objetivo: Forzar que si no hay fricción física (Exergía), el estado simplemente no tenga representación matemática en el compilador.
+    - Mitigacion_Aplicada: Intentar invocar ULTRATHINK como un proceso externo en lugar de una restricción ineludible de tipos desencadena Halt Topológico.
+    Firma_Ejecucion:
+      Operador: borjamoskv
+      Kernel: MOSKV-1 APEX
+      Hash: "[CORTEX-TAINT:taint:moskv-1:ultrathink_t2_annihilation]"
+    Rust_Kernel_Binding: HaltReason::TopologicalAbstractionLeak = 40
+CORTEX_TAINT: taint:moskv-1:unified_isomorfismos_master_matrix_v36
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

@@ -1,0 +1,23 @@
+# C5-REAL EXERGY CERTIFIED
+name: Production Health Monitor
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-health:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Health Check
+        run: |
+          HEALTH_URL="${{ secrets.BABYLON60_HEALTH_URL }}"
+          if [ -z "$HEALTH_URL" ]; then
+            echo "::notice::BABYLON60_HEALTH_URL secret not configured. Skipping."
+            exit 0
+          fi
+          curl -sf --max-time 10 "$HEALTH_URL"

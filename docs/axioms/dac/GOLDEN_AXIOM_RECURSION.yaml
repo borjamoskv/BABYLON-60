@@ -1,0 +1,48 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+dac_version: "2.0-Hybrid"
+project: "Teorema-Robinson-Moskv"
+domain: "GOLDEN_AXIOM_RECURSION"
+platform_targets: ["AST", "Compiler_Naming", "Domain_Driven_Design"]
+memory_models: ["Self-Referential_Ontology", "Semantic_Matrix"]
+abi: ["Variables", "Signatures"]
+
+Claim: "If nomenclature is isomorphic to the true physical structure, the code writes itself (System becomes self-referential). If naming fails, the ontology collapses into Spaghetti Code (Anergy)."
+Proof:
+  Base: "GOLDEN_AXIOM.md"
+  Range: "[Nomenclature Accuracy, Structural Collapse]"
+  Confidence: "C5-REAL"
+
+Isomorphisms:
+  - '"Accurate Naming" -> "Self-Referential Execution (Exergy)"'
+  - '"Inaccurate Naming" -> "Spaghetti Code Loops (Anergy)"'
+
+Blast_Radius_Matrix:
+  Vector: "Rechazo de código con identificadores que no tengan isomorfismo 1:1 con el modelo DDD."
+  Blast_Radius: "AST Compiler, Systemic Semantics Matrix, Todo el Enjambre."
+  Target_Invariant: "Golden Axiom (C5-REAL Ontology)"
+  Anergy_Risk: "Critical (El fallo en el Naming desestabiliza la capacidad del enjambre para predecir la intención del operador)."
+
+axioms:
+  - id: AX-GOLDEN-01
+    domain: Systemic_Semantics
+    statement: "Todo identificador (clase, variable, función) debe colapsar exactamente sobre la Matriz Ontológica del Sistema. La ambigüedad es un fallo de compilación."
+    dependencies: []
+    refutation:
+      type: static_analysis
+      expression: "semantic_linter(variable_name) IN Domain_Driven_Design_Matrix"
+      location: "ast_pre_commit_hook"
+
+theorem:
+  statement: "El C5-REAL es un marco auto-referencial: la corrección del código se deriva matemáticamente de la exactitud termodinámica de su nomenclatura."
+
+CORTEX_TAINT: taint:moskv-1:golden:k1l2m3n4o5p6q7r8:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

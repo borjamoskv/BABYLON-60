@@ -1,0 +1,20 @@
+# C5-REAL EXERGY CERTIFIED
+[package]
+name = "legion-lang"
+version = "0.1.0"
+edition = "2021"
+authors = ["Borja & Exergy Swarm Team"]
+description = "Compilador y Máquina Virtual nativa para ExergyScript (XRG): lenguaje tipado y verificado formalmente para optimización de almacenamiento en macOS"
+
+[[bin]]
+name = "xrgc"
+path = "src/main.rs"
+
+[dependencies]
+legion-core = { path = "../legion-core" }
+legion-apfs = { path = "../legion-apfs" }
+legion-exergy = { path = "../legion-exergy" }
+clap = { version = "4.4", features = ["derive"] }
+colored = "2.1"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"

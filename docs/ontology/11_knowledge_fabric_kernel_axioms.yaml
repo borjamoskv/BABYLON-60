@@ -1,0 +1,112 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+# CORTEX-TAINT: Knowledge_Fabric_Kernel_Axioms_v1.0
+version: "1.0"
+reality_level: "C5-REAL"
+kernel: "Knowledge Operating System"
+primitives:
+  omega_1_fabric:
+    name: "Knowledge Fabric"
+    domains:
+      - Person
+      - Idea
+      - Claim
+      - Evidence
+      - Company
+      - Paper
+      - Code
+      - Model
+      - Product
+      - Podcast
+      - Video
+      - Article
+      - Repository
+      - Community
+      - Talk
+      - Book
+      - Concept
+    invariant: "Source-agnostic unification over heterogeneous channels"
+
+  omega_2_events:
+    name: "Event Primitive"
+    schema:
+      timestamp: "ISO8601 UTC"
+      actor: "UUID"
+      object: "UUID"
+      action: "Enum[published, mentions, cites, refutes, implements, forks, transforms]"
+      epistemic_guard: "Boolean (CF-GKAT Predicate)"
+      entropy_h_x: "UInt32 (Discrete Minimum Description Length)"
+      source: "String"
+
+  omega_3_event_sourcing_scitt:
+    name: "SCITT Merkle Attestation State"
+    mode: "Append-Only Deterministic Ledger"
+    invariant: "Zero state mutations without SHA3-256 Merkle inclusion; complete cryptographic reconstructibility"
+
+  omega_4_live_graph:
+    name: "Dynamic Knowledge Topology"
+    node_types: ["Person", "Idea", "Claim", "Evidence", "Company", "Paper", "Code", "Model", "Product", "Podcast", "Video", "Article", "Repository", "Community", "Talk", "Book", "Concept"]
+    edge_types: ["recommends", "writes", "links_to", "mentions", "restacks", "references", "refutes", "supports"]
+
+  omega_5_fractal_memory:
+    levels:
+      - 1: Raw
+      - 2: Parsed (AST)
+      - 3: "Discretized TDA Embedded (st: *R -> R)"
+      - 4: Summarized (MDL)
+      - 5: Concept Graph
+      - 6: Claim Graph
+      - 7: Prediction Graph
+
+  omega_6_hypothesis_engine:
+    mechanism: "Abductive inference over non-obvious topological convergence via bisimulation in discrete state spaces"
+
+  omega_7_innovation_detection:
+    mechanism: "Topological persistence tracking over discrete simplicial complexes (TDA)"
+
+  omega_8_compression_pyramid:
+    ratios:
+      articles: 100000
+      ideas: 20000
+      concepts: 4000
+      patterns: 900
+      paradigms: 120
+      structural_shifts: 12
+      meta_trends: 3
+      signal: 1
+    invariant: "Information compression (MDL) is strictly isomorphic to intelligence density (Acotación de Indecidibilidad de Kolmogorov)"
+
+  omega_9_simulation:
+    mechanism: "Counterfactual propagation along causal graph dependencies"
+
+  omega_10_causal_engine:
+    schema:
+      claim: "Proposition String"
+      evidence: "List[EvidenceNode]"
+      counter_evidence: "List[EvidenceNode]"
+      exergy_density: "UInt32 (Termodinámica de Landauer)"
+      source: "URI"
+      temporal_evolution: "List[EventId]"
+    invariant: "Truth is a topological invariant under bisimulation over an evolving discrete state of evidence"
+
+  omega_11_concept_space:
+    transformation: "Text -> Semantic AST -> Knowledge Graph -> Concept Space -> Discrete TDA Mapper Graph"
+
+  omega_12_knowledge_kernel_primitives_c_abi:
+    Node: ["id", "type", "discrete_tda_embedding"]
+    Edge: ["source", "target", "relation", "epistemic_guard"]
+    Event: ["actor", "action", "object", "time"]
+    Claim: ["proposition", "evidence"]
+    Vector: ["canonical_discrete_state"]
+    # C5-REAL Silicon ABI Alignment
+    memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+    concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

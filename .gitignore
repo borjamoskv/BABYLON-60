@@ -1,84 +1,127 @@
-# Build Targets & Binaries
-/target
-b60_kernel
-*.egg-info/
-
-# B60 Programs: track canonical, ignore generated
-fuzz_test_*.b60
-test_*.b60
-
-# Environment & Secrets (Crucial Security Invariant)
-.env
-.env.*
-*.pem
-*.key
-*.token
-*.secret
-*.p12
-*.crt
-
-# Virtual Environments & Caches
+# Build artifacts and caches
+build/
+target/
+src-tauri/target/
+node_modules/
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+.gocache/
+.coverage
+.vite/
+*.log
+*.tmp
 __pycache__/
 *.pyc
-.venv/
-venv/
-.pytest_cache/
-scratch/
-scratch/*
-scratch/
-
-# Node / Web Build Assets
-node_modules/
-web/node_modules/
-web/dist/
-.wrangler/
-web/.wrangler/
-
-# Temporary Artifacts & System Files
-proof_artifact.json
+out/
+dist/
 .DS_Store
-*.log
+fsharp_kernel/bin/
+fsharp_kernel/obj/
+strike-rs/target/
+.venv/
+# Secrets and credentials
+.env
+.env.*
+*.key
+*.pem
 
-# Entropy Purge — Prevent Re-Tracking
-.tmp_yt/
-yt-dlp
+# Database files and Master Ledger
+.cortex/
+cognitive_state.db
+cortex.db*
+cortex_bft_ledger.db*
 *.db
 *.db-wal
 *.db-shm
-*.sqlite
-*.cortex_thermal_lock
+
+# Compiled Go Portal Daemon
+bin/portal_daemon
+
+# Scratch scripts
+scratch/
+
+bin/babylon60.sh.bak
+db/chroma_memory/
+mypy_errors.txt
+fix_mypy.py
+cortex/artifacts/
+*.srt
+*_meta.json
+*_transcript.txt
+*.mp4
+
+# Temporary build/test output
+go_deps.json
+mypy_report.txt
+coverage.html
+coverage.out
+clean_subs*.txt
+transcript_*.txt
+cortex_audit_report.yml
+test-render.js
+render-check.png
+tests/compliance-suite/c_src/sequencer_spsc_harness
+tests/compliance-suite/c_src/test_primitives
+
+# Spotlight exclusion markers
+**/.metadata_never_index
+tmp_chroma_pkg/
+
+# UV Python cache
+.uv_python/
+
+# Hypothesis test cache
+.hypothesis/
+
+# Terraform state and providers
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+# Python egg-info
+*.egg-info/
+
+# FastAPI temp packages
+tmp_fastapi_pkg/
+
+# Attestation proofs
+c7_*.json
+
+# Post-commit hook logs
+post-commit.log
+post-commit.json
+
+# Audit receipts and logs (R9)
+.audit/
+
+# Swarm Worker States (C5-REAL WAL)
+.agents/teamwork_preview_*/
+
+
+# Ephemeral C4-SIM Slop (Scratch, Wheels, Agent State)
+scratch/
+tmp_*/
+.agents/orchestrator/
+.agents/sentinel/
+.agents/ORIGINAL_REQUEST.md
+
+*.bundle
+venv/
+
+# Historical inactive data isolation
+3_Historico_Inerte/
+.*_Historico_Inerte/
+99_ARCHIVO_INERTE/
+99_CUARENTENA_TERMICA/
+
+# Compiled native extensions (Axioma Ω24)
+*.dylib
+*.so
+target/
+*.rmeta
+*.rlib
 
 # Added by Antigravity C5-REAL Audit
 .vercel
-
-docs/PITCH_DECK.md
-docs/VALUATION_STRATEGY.md
-docs/05_gtm/
-tests/sequencer_spsc_harness
-
-# ============================================================
-# OPSEC-Ω TASKFORCE HARDENING (2026-07-19, ITERA-1 · port 2026-08-12)
-# Defensa en profundidad. Contexto y pruebas: docs/OPSEC_OMEGA_ITERA1.md
-# (*.pem, *.key, .env* ya cubiertos por la sección Environment & Secrets)
-# ============================================================
-# Bóveda privada (nunca versionar)
-20_VAULT/
-# Material criptográfico — jamás versionar
-*.keystore
-*keypair*.json
-.cortex/*.hex
-.cortex/*.key
-.cortex/*keypair*
-# Baselines/reportes de escáneres de secretos — locales, no versionar
-.secrets.baseline
-gitleaks-report.json
-secret_audit.sarif
-.kimi-code/
-*.jsonl
-
-# Audio & Research Transcripts
-clean_transcript*.txt
-transcript*.vtt
-docs/04_research/transcripts/
-sample_toxic_chat.txt
-

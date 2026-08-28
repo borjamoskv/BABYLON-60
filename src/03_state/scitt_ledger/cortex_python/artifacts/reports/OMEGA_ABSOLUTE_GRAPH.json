@@ -1,0 +1,6544 @@
+{
+  "nodes": 1222,
+  "edges": 4134,
+  "scc_count": 1222,
+  "articulation_points": 209,
+  "kernel": [
+    "babylon60/extensions/daemon/event_loop.py",
+    "babylon60/extensions/daemon/loops_mixin.py",
+    "babylon60/extensions/skills/cadastral/__init__.py",
+    "babylon60/extensions/nexus/model.py",
+    "babylon60/extensions/skills/niche_arbitrage/pipeline.py",
+    "babylon60/extensions/daemon/monitors/drift.py",
+    "babylon60/extensions/billing/gateway.py",
+    "babylon60/extensions/hypervisor/compressor.py",
+    "tests/test_c5_memory_shield.py",
+    "babylon60/extensions/music_engine/dsp_apotheosis.py",
+    "babylon60/extensions/swarm/autodidact_actuator.py",
+    "babylon60/extensions/mejoralo/daemon.py",
+    "babylon60/extensions/ui_control/accessibility.py",
+    "babylon60/extensions/hypervisor/belief_engine.py",
+    "babylon60/extensions/swarm/crystal_consolidator.py",
+    "tests/test_io_persist_ledger.py",
+    "babylon60/extensions/training/verifier.py",
+    "tests/apex/test_history.py",
+    "babylon60/extensions/swarm/zenoh_crdt.py",
+    "babylon60/crypto/keys.py",
+    "babylon60/utils/turboquant.py",
+    "babylon60/extensions/context/hiagent.py",
+    "babylon60/extensions/evolution/ouroboros_omega.py",
+    "babylon60/extensions/daemon/cli.py",
+    "babylon60/extensions/daemon/monitors/agy2_planner.py",
+    "babylon60/extensions/mac_maestro/security_control.py",
+    "babylon60/extensions/songlines/sensor.py",
+    "babylon60/extensions/scraper/engine.py",
+    "babylon60/extensions/llm/sovereign.py",
+    "babylon60/extensions/daemon/monitors/thermodynamic.py",
+    "babylon60/extensions/tutor_agent/agent.py",
+    "babylon60/extensions/genesis/templates.py",
+    "tests/test_inference_security.py",
+    "babylon60/extensions/thinking/fusion.py",
+    "babylon60/extensions/mejoralo/swarm.py",
+    "babylon60/extensions/signals/reactor.py",
+    "babylon60/extensions/daemon/sidecar/trends_oracle/oracle.py",
+    "babylon60/extensions/metering/middleware.py",
+    "babylon60/crypto/__init__.py",
+    "babylon60/extensions/daemon/monitors/l2_drain.py",
+    "babylon60/extensions/skills/autodidact/synthesis.py",
+    "scripts/conformance_test.py",
+    "babylon60/extensions/signals/sharded_bus.py",
+    "tests/test_shadow_router_c5.py",
+    "babylon60/extensions/llm/__init__.py",
+    "tests/test_cortex_ssm_mamba.py",
+    "scripts/demo_exergy_poc.py",
+    "cortex/agents/arsenal_896/centuria_meta_transducer.py",
+    "babylon60/extensions/aether/daemon.py",
+    "babylon60/extensions/genesis/renderers/__init__.py",
+    "babylon60/extensions/daemon/ccr_proxy.py",
+    "babylon60-ide/backend/routes/ledger.py",
+    "babylon60/extensions/music_engine/adapters.py",
+    "babylon60/extensions/alma/engine.py",
+    "babylon60/extensions/swarm/manager.py",
+    "babylon60/extensions/hypervisor/projector.py",
+    "babylon60/extensions/genesis/__init__.py",
+    "babylon60/extensions/swarm/nightshift_daemon.py",
+    "babylon60/extensions/evo/_mutation_projectors.py",
+    "babylon60/extensions/thinking/orchestra.py",
+    "babylon60/extensions/mejoralo/heal.py",
+    "babylon60/extensions/swarm/orchestrator_deep_think.py",
+    "babylon60/extensions/revenue/engine.py",
+    "babylon60/extensions/manifold/dimensions.py",
+    "anvil_yung/lib/forge-std/scripts/vm.py",
+    "babylon60/extensions/training/run_daemon.py",
+    "babylon60/extensions/evo/_genome_mutator.py",
+    "babylon60/extensions/evolution/engine.py",
+    "babylon60/extensions/sovereign/dashboard.py",
+    "tests/test_genomics_engine.py",
+    "tests/test_hotstuff_consensus.py",
+    "babylon60/extensions/sap/client.py",
+    "scripts/bootstrap_cortex_memory.py",
+    "babylon60/extensions/swarm/centauro_engine.py",
+    "babylon60/extensions/immune/breaker.py",
+    "babylon60/extensions/immune/membrane.py",
+    "babylon60/extensions/llamaindex_bridge.py",
+    "cortex/agents/arsenal_896/__init__.py",
+    "babylon60/extensions/ui/swarm_board.py",
+    "babylon60/extensions/bci/osc_bridge.py",
+    "babylon60/extensions/daemon/core_support.py",
+    "babylon60/extensions/cuatrida/orchestrator.py",
+    "babylon60/extensions/speculative/keter.py",
+    "babylon60/extensions/aether/executor.py",
+    "babylon60/cli/llm_attest.py",
+    "babylon60/extensions/red_team/discovery.py",
+    "babylon60/extensions/aether/tools.py",
+    "babylon60/extensions/fingerprint/extractor.py",
+    "tests/apex/test_integration.py",
+    "babylon60/extensions/daemon/nightshift.py",
+    "babylon60/extensions/mejoralo/scan.py",
+    "babylon60/extensions/mejoralo/antipatterns.py",
+    "tests/test_atms_hardening.py",
+    "babylon60/extensions/daemon/monitors/mejoralo.py",
+    "babylon60/extensions/swarm/langgraph_supervisor.py",
+    "babylon60/extensions/perception/pipeline.py",
+    "babylon60/extensions/daemon/sidecar/telemetry/__init__.py",
+    "babylon60/extensions/sovereign/engine.py",
+    "babylon60/extensions/swarm/infinite_minds.py",
+    "babylon60/extensions/sync/crdt.py",
+    "babylon60/extensions/sync/snapshot.py",
+    "babylon60/extensions/speculative/apotheosis_audits_mixin.py",
+    "babylon60/extensions/evo/_autocurative_helper.py",
+    "babylon60/extensions/mejoralo/ledger.py",
+    "babylon60/extensions/gate/core.py",
+    "babylon60/extensions/red_team/swarm_chaos.py",
+    "babylon60/extensions/evolution/operations_mixin.py",
+    "babylon60/extensions/market_maker/__init__.py",
+    "babylon60/extensions/agents/friction_annihilator.py",
+    "apex_trials/cli.py",
+    "babylon60/extensions/llm/provider.py",
+    "babylon60/extensions/hive/main.py",
+    "babylon60/extensions/notifications/__init__.py",
+    "babylon60/extensions/daemon/scheduler.py",
+    "scripts/automejora_1000_cache.py",
+    "babylon60/extensions/music_engine/midi_engine.py",
+    "babylon60/extensions/daemon/monitors/shield_monitor.py",
+    "tests/test_syntax_integrity.py",
+    "babylon60/extensions/timing/tracker.py",
+    "babylon60/extensions/agents/handoff.py",
+    "babylon60/extensions/llm/_backoff.py",
+    "babylon60/extensions/evolution/demiurge.py",
+    "babylon60/extensions/speculative/genesis.py",
+    "babylon60/utils/i18n.py",
+    "babylon60/extensions/notifications/adapters/base.py",
+    "apex_trials/report.py",
+    "babylon60/extensions/temporal/rem_cycle.py",
+    "babylon60/extensions/swarm/code_smith.py",
+    "babylon60/extensions/llm/router.py",
+    "babylon60/extensions/skills/router.py",
+    "babylon60-ide/backend/services/chain_verifier.py",
+    "babylon60/extensions/red_team/hydra_chaos.py",
+    "babylon60/extensions/daemon/core.py",
+    "babylon60/extensions/llm/vllm_edge.py",
+    "babylon60/extensions/evo/evolution_metrics.py",
+    "babylon60/extensions/music_engine/orchestrator.py",
+    "babylon60/extensions/sap/sync.py",
+    "babylon60/extensions/agents/mac_maestro.py",
+    "tests/apex/test_modules.py",
+    "babylon60/extensions/shannon/report.py",
+    "babylon60/extensions/interfaces/telegram_daemon.py",
+    "babylon60/extensions/zkortex/commitment.py",
+    "tests/test_thermo_ast_pruner.py",
+    "babylon60/extensions/aether/queue.py",
+    "babylon60/extensions/daemon/monitors/signals.py",
+    "babylon60/extensions/skills/autodidact/actuator.py",
+    "babylon60/extensions/swarm/sortu_jit_executor.py",
+    "babylon60/bft/consensus_ledger.py",
+    "babylon60/extensions/audio/altozano.py",
+    "babylon60/extensions/evo/genome.py",
+    "babylon60/extensions/alma/__init__.py",
+    "babylon60/extensions/git/poet.py",
+    "babylon60-ide/backend/main.py",
+    "babylon60/extensions/swarm/josu_daemon.py",
+    "babylon60/extensions/daemon/__init__.py",
+    "babylon60/extensions/hypervisor/core.py",
+    "babylon60/extensions/daemon/sidecar/compaction_monitor/monitor.py",
+    "babylon60/extensions/daemon/substack_publisher_bot.py",
+    "babylon60/extensions/nous/runtime.py",
+    "babylon60/crypto/bootstrap.py",
+    "babylon60/extensions/mejoralo/engine.py",
+    "babylon60/extensions/llm/_provider_fable.py",
+    "babylon60/extensions/daemon/t_cell_ihelp_purge.py",
+    "babylon60/extensions/ui_control/mouse.py",
+    "babylon60/extensions/llm/_stealth.py",
+    "babylon60/extensions/aether/cdp_agentkit.py",
+    "babylon60/extensions/bci/daemon.py",
+    "babylon60/extensions/growth/kinetic_extractor.py",
+    "babylon60/genomics/__init__.py",
+    "babylon60/cli/onco_transducer.py",
+    "babylon60/extensions/ui_control/feedback_loop.py",
+    "babylon60/extensions/web3/oracle.py",
+    "tests/test_itera2_invariants.py",
+    "babylon60/extensions/zkortex/test_integration.py",
+    "babylon60/extensions/training/moskv1_core.py",
+    "babylon60/extensions/agents/degradation_executor.py",
+    "babylon60/extensions/evo/healing_stack.py",
+    "babylon60/extensions/speculative/apotheosis.py",
+    "babylon60/extensions/fiscal/decorators.py",
+    "babylon60/extensions/ui_control/maestro.py",
+    "babylon60/extensions/speculative/substack_sidecar.py",
+    "babylon60/extensions/security/threat_feed.py",
+    "babylon60/extensions/swarm/telemetry_gate.py",
+    "babylon60/extensions/daemon/loops/audio.py",
+    "tests/test_bittensor_yuma_consensus.py",
+    "babylon60/extensions/genesis/renderers/python.py",
+    "babylon60/extensions/mejoralo/effectiveness.py",
+    "babylon60/extensions/scraper/extractors.py",
+    "babylon60/extensions/daemon/health_loop.py",
+    "tests/test_cortex_mamba_block.py",
+    "babylon60/extensions/sync/read.py",
+    "babylon60/extensions/billing/metering.py",
+    "babylon60/extensions/manifold/core.py",
+    "babylon60/extensions/daemon/monitors/cloud.py"
+  ],
+  "preservation_matrix": {
+    "run_backend.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "net_mamba_ledger_engine.py": {
+      "Preserves": [
+        "\u03a92",
+        "\u03a94"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "core_graph_ledger.py": {
+      "Preserves": [
+        "\u03a92",
+        "\u03a94"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "cortex_mamba_inference.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "io_persist_ledger.py": {
+      "Preserves": [
+        "\u03a92",
+        "\u03a94"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "cortex_purge_anergy.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "cortex_ssm_mamba_core.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "cortex/__init__.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "cortex/agents/__init__.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "cortex/agents/arsenal_896/registry.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "cortex/agents/arsenal_896/__init__.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "cortex/agents/arsenal_896/centuria_meta_transducer.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "apex_trials/ctgov.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "apex_trials/ledger.py": {
+      "Preserves": [
+        "\u03a92",
+        "\u03a94"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "apex_trials/features.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "apex_trials/risk_engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "apex_trials/cli.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "apex_trials/modules.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "apex_trials/report.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/test_onco_transducer.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/test_ide_inference.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "tests/test_io_persist_ledger.py": {
+      "Preserves": [
+        "\u03a92",
+        "\u03a94"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "tests/test_itera2_invariants.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/test_bittensor_yuma_consensus.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "tests/test_cortex_ssm_mamba.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/test_syntax_integrity.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/test_master_ledger_queue.py": {
+      "Preserves": [
+        "\u03a92",
+        "\u03a94"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "tests/test_ast_sandbox_evasion.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/test_net_mamba_ledger_engine.py": {
+      "Preserves": [
+        "\u03a92",
+        "\u03a94"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "tests/test_c5_invariants.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/test_shadow_router_c5.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/test_cortex_mamba_network.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/test_atms_hardening.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/test_thermo_ast_pruner.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/test_hotstuff_consensus.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "tests/test_causal_isomorphism.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/test_ledger_resilience.py": {
+      "Preserves": [
+        "\u03a92",
+        "\u03a94"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "tests/test_base60.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/test_core_graph_ledger.py": {
+      "Preserves": [
+        "\u03a92",
+        "\u03a94"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "tests/test_ledger_vault_verify.py": {
+      "Preserves": [
+        "\u03a92",
+        "\u03a94"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "tests/test_crypto_canonical.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "tests/test_re_drm_rust.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/test_genomics_engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/test_inference_security.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/test_cortex_mamba_inference.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/test_cortex_bpe_tokenizer.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/test_c5_memory_shield.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/test_cortex_mamba_block.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/apex/test_risk_engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/apex/test_fitted.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/apex/test_integration.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/apex/test_history.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/apex/test_modules.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "tests/apex/test_ledger.py": {
+      "Preserves": [
+        "\u03a92",
+        "\u03a94"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "anvil_yung/lib/forge-std/scripts/vm.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scratch/map_primitives_thermodynamics.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scratch/improved_map_primitives.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/oncology_primitives.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/database/tlru_cache.py": {
+      "Preserves": [
+        "\u03a92",
+        "\u03a94"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/database/core.py": {
+      "Preserves": [
+        "\u03a92",
+        "\u03a94"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/crypto/bootstrap.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/crypto/provider.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/crypto/aes.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/crypto/rekor_client.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/crypto/shredder.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/crypto/__init__.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/crypto/keys.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/crypto/hash_registry.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/crypto/keyring.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/crypto/rfc3161.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/crypto/identity.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/types/__init__.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/core/thermo_ast_pruner.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/core/c5_memory_shield.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/core/replay_kernel.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/core/cortex_persist.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/core/shadow_router.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/core/crypto.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/core/moskv_kernel.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/genomics/transducer.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/genomics/__init__.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/genomics/engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/genomics/hygiene.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/utils/void_vec.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/utils/linguistic_entropy.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/utils/base60.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/utils/void_mih.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/utils/compression.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/utils/turboquant.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/utils/cache.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/utils/export.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/utils/semantic_heartbeat.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/utils/result.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/utils/sandbox.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/utils/canonical.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/utils/http.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/utils/pulmones_worker.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/utils/i18n.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/utils/errors.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/utils/pulmones.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/utils/landauer.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/cli/llm_attest.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/cli/bridge.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/cli/attest_character_count.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/cli/onco_transducer.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llamaindex_bridge.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/registry.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/scraper/models.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/scraper/extractors.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/scraper/engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/temporal/chronos_roi.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/temporal/rem_cycle.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/encryption/zk_hardware.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/ui/swarm_board.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/causality/models.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/crystal_synthesis.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/auto_fix.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/crystal_consolidator.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/knowledge_radar.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/zenoh_crdt.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/budget.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/swarm_heartbeat.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/josu_daemon.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/nightshift_daemon.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/autodidact_actuator.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/langgraph_supervisor.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/nightshift_pipeline.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/byzantine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/orchestrator_deep_think.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/centuria_10k_forge.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/github_auditor.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/mailbox.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/error_ghost_pipeline.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/sortu_jit_executor.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/ast_validator.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/infinite_minds.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/code_smith.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/manager.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/psychohistory.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/conflict_resolution.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/centauro_engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/swarm/telemetry_gate.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/mac_maestro/security_control.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/artist_cortex/artist_cortex.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/taas/market.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/dopamine_loop/modulator.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/mejoralo/swarm.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/mejoralo/deps.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/mejoralo/models.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/mejoralo/heal.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/mejoralo/antipatterns.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/mejoralo/heal_prompts.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/mejoralo/constants.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/mejoralo/effectiveness.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/mejoralo/ledger.py": {
+      "Preserves": [
+        "\u03a92",
+        "\u03a94"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/extensions/mejoralo/engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/mejoralo/scan.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/mejoralo/_scanner_import_graph.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/mejoralo/_scanner_visitors.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/mejoralo/daemon.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/wealth/scanner.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/zkortex/commitment.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/zkortex/range_proof.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/zkortex/test_integration.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/grok_client.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/metacognitive_boundary.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/_cache.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/boundary.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/fable_poc.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/fable_stress_test.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/_hedging.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/_router_shannon.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/provider.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60/extensions/llm/vllm_edge.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/_pool.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/_telemetry.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/_presets.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/client.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/quota.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/__init__.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/fable_steerability_poc.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/_backoff.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/_router_policy.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/_stealth.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/_provider_config.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60/extensions/llm/_resilience.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/raw_client.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/_provider_fable.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60/extensions/llm/_validation.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/_result_cache.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/sovereign.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/mlx_ffi.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/_router_hedging.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/_provider_gemini.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60/extensions/llm/_oracle_pool.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/_models.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/router.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/_provider_stream.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60/extensions/llm/cognitive_handoff.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/manager.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/gemini_cache.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/llm/_cascade.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/axioms/registry.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/axioms/ttl.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/axioms/topological_id.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/tutor_agent/agent.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evo/_genome_mutator.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evo/autopoiesis.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evo/healing_stack.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evo/_mutation_projectors.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evo/_autocurative_helper.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evo/_genome_types.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evo/growth.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evo/reaper.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evo/evolution_metrics.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evo/evaporator.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evo/_genome_tree_helper.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evo/genome.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evo/decalcifier.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evo/_autopoietic_state.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/context/hiagent.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/context/collector.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/context/inference.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/fingerprint/scanner.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/fingerprint/models.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/fingerprint/extractor.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/sap/sync.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/sap/mapper.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/sap/client.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/bci/osc_bridge.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/bci/maestro_bridge.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/bci/daemon.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/fiscal/decorators.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/security/threat_feed.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/security/anomaly_detector.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/security/t_cell.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/security/security_sync.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/security/threat_signatures.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/security/injection_guard.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/cuatrida/orchestrator.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/training/run_daemon.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/training/ttt_engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/training/moskv1_core.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/training/collector.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/training/__init__.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/training/moskv1_dataset_compiler.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/training/moskv1_cli.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/training/verifier.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/training/daemon.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/training/reward_engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/health/models.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/health/registry.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/health/trend.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/health/prometheus.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/health/health_mixin.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/health/invariants.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/health/collectors/db.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/health/collectors/ledger.py": {
+      "Preserves": [
+        "\u03a92",
+        "\u03a94"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/extensions/episodic/boot.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/episodic/main.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/signals/reactor.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60/extensions/signals/models.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/signals/sharded_bus.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/signals/bus.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/signals/trigger_engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/signals/trigger_registry.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/red_team/discovery.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/red_team/swarm_chaos.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/red_team/hydra_chaos.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/web3/oracle.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/ui_control/mouse.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/ui_control/maestro.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/ui_control/accessibility.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/ui_control/feedback_loop.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/ui_control/keyboard.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/agents/mac_maestro.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/agents/neural.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/agents/handoff.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/agents/registry.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/agents/llm.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/agents/scavenger_governance.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/agents/scavenger_core.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/agents/degradation_executor.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/agents/pitches.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/agents/mejoralo_omega.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/agents/friction_annihilator.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/agents/apis_omega.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60/extensions/agents/tools/hypothesis_tool.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/agents/tools/crystallization_tool.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/agents/tools/autodidact_tool.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/alma/__init__.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/alma/engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/alma/taste.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/market_maker/mvp_generator.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/market_maker/__init__.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/market_maker/orchestrator.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/mcp/comfyui_tool.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/mcp/claude_tool.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/aether/queue.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/aether/planner.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/aether/runner.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/aether/models.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/aether/cdp_agentkit.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/aether/tools.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/aether/__init__.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/aether/cli.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/aether/redteam.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/aether/critic.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/aether/daemon.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/aether/executor.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/nous/compiler.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/nous/models.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/nous/sql_synthesizer.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/nous/compiler_v2.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/nous/runtime.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/nous/interpreter.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/growth/kinetic_extractor.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/timing/tracker.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/timing/chronos.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/browser/engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/browser/agent.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/vex/planner.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/vex/loop.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/vex/receipt.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/manifold/dimensions.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/manifold/core.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/nexus/db.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/nexus/model.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/audio/altozano.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/immune/membrane.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/immune/chaos.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/immune/breaker.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/immune/metastability.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/immune/falsification.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/immune/arbiter.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/immune/error_boundary.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/immune/filters/reversibility.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/immune/filters/entropic_quarantine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/immune/filters/entropy.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/thinking/orchestra.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/thinking/presets.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/thinking/reflection.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/thinking/semantic_router.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/thinking/fusion_models.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/thinking/fusion.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/thinking/orchestra_introspection.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/thinking/pool.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/shannon/scanner.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/shannon/analyzer.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/shannon/epistemology.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/shannon/exergy.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/shannon/report.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/health_loop.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/alerts.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/epistemic_breaker.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/models.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/t_cell_ihelp_purge.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/notifier.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/watchers.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/core_support.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/__init__.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/sync_manager.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/core.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/loops_mixin.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/platform.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/zero_toil.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/event_loop.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/apoptosis_daemon.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/cli.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/zero_prompting.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/ccr_proxy.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/metabolism.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/reaper_death_protocol.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/scheduler.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/substack_follower_bot.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/nightshift.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/substack_publisher_bot.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/frontier.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/hot_state.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/state.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/centaur/queue.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/signals.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/disk.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/tombstone.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/epistemic.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/ghosts.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/shield_monitor.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/memory.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/cloud.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/canary.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/ast_oracle.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/evaluation.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/security.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/drift.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/mejoralo.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/agy2_planner.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/auto_immune.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/thermodynamic.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/network.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/auto_audit.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/compaction.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/l2_drain.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/trends.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/heartbeat.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/workflow.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/monitors/base.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/loops/audio.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/loops/watcher.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/daemon/sidecar/compaction_monitor/monitor.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60/extensions/daemon/sidecar/compaction_monitor/circuit_breaker.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60/extensions/daemon/sidecar/sentinel_monitor/monitor.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60/extensions/daemon/sidecar/trends_oracle/oracle.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60/extensions/daemon/sidecar/telemetry/ast_oracle.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60/extensions/daemon/sidecar/telemetry/__init__.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60/extensions/daemon/sidecar/telemetry/fiat_oracle.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60/extensions/kapso/webhook.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/kapso/types.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/ha/crdt.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/ha/gossip.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/ha/raft.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/sovereign/autopoiesis.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/sovereign/infrastructure.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/sovereign/dashboard.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/sovereign/engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evolution/ast_mutators.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evolution/strategies.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evolution/free_energy.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evolution/cortex_metrics.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evolution/ouroboros_omega.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evolution/telemetry.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evolution/action.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evolution/agents.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evolution/engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evolution/lnn.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evolution/psi_sap.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evolution/ledger_db.py": {
+      "Preserves": [
+        "\u03a92",
+        "\u03a94"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/extensions/evolution/demiurge.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evolution/landscape.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evolution/db_persistence.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evolution/p0_extractor.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evolution/daemon.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/evolution/operations_mixin.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/federation/gossip.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/federation/main.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/langbase/sync.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/langbase/client.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/langbase/pipe.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/ttt/forge.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/ttt/ghost_harvester.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/gate/core.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/gate/ouroboros.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/hive/main.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/music_engine/_synth.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/music_engine/dsp_apotheosis.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/music_engine/midi_engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/music_engine/orchestrator.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/music_engine/adapters.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/trust/bayesian.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/songlines/sensor.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/songlines/emitter.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/metering/tracker.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/metering/middleware.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/skills/registry.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/skills/__init__.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/skills/taxonomy.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/skills/router.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/skills/newsletter_crystallizer/boletin_compiler.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/skills/autodidact/canary_emulator.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/skills/autodidact/fetchers.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/skills/autodidact/epistemology.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/skills/autodidact/actuator.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/skills/autodidact/synthesis.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/skills/niche_arbitrage/models.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/skills/niche_arbitrage/pipeline.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/skills/cadastral/models.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/skills/cadastral/__init__.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/skills/cadastral/engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/edge_cloudflare/edge_bridge.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/speculative/apotheosis.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/speculative/keter.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/speculative/apotheosis_audits_mixin.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/speculative/substack_sidecar.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60/extensions/speculative/genesis.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/perception/observer.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/perception/pipeline.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/perception/inference.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/perception/metabolism.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/perception/base.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/sync/write.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/sync/gitops.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/sync/crdt.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/sync/common.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/sync/obsidian.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/sync/github_bridge.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/sync/snapshot.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/sync/read.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/forensic/predictive_healer.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/forensic/data_surgery.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/forensic/replay.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/forensic/circuit_breaker.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/forensic/slashing.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/forensic/anomaly_hunter.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/revenue/engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/protocols/zenon_1.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/genesis/validator.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/genesis/models.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/genesis/__init__.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/genesis/assembler.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/genesis/templates.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/genesis/engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/genesis/renderers/__init__.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/genesis/renderers/api.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60/extensions/genesis/renderers/cli.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/genesis/renderers/python.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/notifications/__init__.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/notifications/adapters/base.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/hypervisor/belief_engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/hypervisor/models.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/hypervisor/core.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/hypervisor/belief_object.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/hypervisor/projector.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/hypervisor/compressor.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/billing/gateway.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/billing/models.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/billing/metering.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/git/poet.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/git/poet_data.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/policy/models.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/policy/__init__.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/policy/engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/extensions/interfaces/telegram_daemon.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60/bft/master_ledger_queue.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/bft/consensus_ledger.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/bft/consensus_committer.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/bft/consensus_validator.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/bft/ledger_actor.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60/compiler/lean_backend.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/c5_preserve_claude_local_logs.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/c5_organize_captures_ultrathink.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/exergy_optimizer_agent.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/verify_Anergy_Token_Purge.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/objectives_manager.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/ejemplo_logos_ethos_ship.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/autodetect_invariants.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/automejora_1000_cache.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/conformance_test.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/verify_captures.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/cancer_isomorphism_pipeline.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/consolidate_babylon_vault.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/quadrilingual_enforcer.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/fetch_missing_dates.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/gen_oncology_primitives.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/c5_logos_ethos_ship_engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/demo_exergy_poc.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/bootstrap_cortex_memory.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/luhmann_autopoiesis_simulation.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/centuria_swarm_commander.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/opsec_sentinel_c5.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/c5_mejoralo_monitor.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/exergy_arbitrage_engine.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/secret_swarm_auditor.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/benchmark_ledger_throughput.py": {
+      "Preserves": [
+        "\u03a92",
+        "\u03a94"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "scripts/c5_isomorphism_sabu_agent.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/c5_preserve_agent_local_logs.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/ouroboros_infinity.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/prigogine_boltzmann_simulation.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "scripts/bittensor_yuma_consensus_c5.py": {
+      "Preserves": [
+        "\u03a91",
+        "\u03a93",
+        "\u03a95"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "causal_isomorphism/regime_validator.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "causal_isomorphism/emitter_solidity.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "causal_isomorphism/parser_fsharp.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "causal_isomorphism/__init__.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "causal_isomorphism/ir.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "causal_isomorphism/transpiler.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "causal_isomorphism/cli.py": {
+      "Preserves": [],
+      "Violates": [],
+      "Requires": [
+        "\u03a91",
+        "\u03a92",
+        "\u03a93",
+        "\u03a94",
+        "\u03a95"
+      ]
+    },
+    "babylon60-ide/backend/mcp_symbol_helper.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60-ide/backend/main.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60-ide/backend/routes/query.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60-ide/backend/routes/ledger.py": {
+      "Preserves": [
+        "\u03a92",
+        "\u03a94"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60-ide/backend/routes/telemetry.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60-ide/backend/routes/ontology.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60-ide/backend/routes/inference.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60-ide/backend/routes/analytics.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60-ide/backend/routes/delegation.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60-ide/backend/routes/sentinel.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60-ide/backend/routes/arena.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60-ide/backend/services/chain_verifier.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    },
+    "babylon60-ide/backend/services/cortex_ledger.py": {
+      "Preserves": [
+        "\u03a92",
+        "\u03a94"
+      ],
+      "Violates": [],
+      "Requires": []
+    },
+    "babylon60-ide/backend/services/db_pool.py": {
+      "Preserves": [],
+      "Violates": [
+        "\u03a91",
+        "\u03a93"
+      ],
+      "Requires": [
+        "\u03a92"
+      ]
+    }
+  }
+}

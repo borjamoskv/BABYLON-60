@@ -1,0 +1,56 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+dac_version: "2.0-Hybrid"
+project: "Teorema-Robinson-Moskv"
+domain: "SLOP_HORIZON_TELEONOMY"
+platform_targets: ["VLOPs", "IDE", "AST"]
+memory_models: ["L1_Moderation", "Causal_Filter"]
+abi: ["DSA", "Trusted_Flaggers"]
+
+Claim: "The possession of a causal semantic model (empirical experience) unconditionally dominates the kinematic dexterity of I/O syntax, avoiding the Slop Horizon."
+Proof:
+  Base: "Axiom_Slop_Horizon.md"
+  Range: "[Syntactic Noise, O(1) DSA Appeal]"
+  Confidence: "C5-REAL"
+
+Isomorphisms:
+  - '"Zero-latency operator without Loss Function" -> "Slop Horizon (Recursive Syntactic Noise)"'
+  - '"L1 VLOP Moderation" -> "Legal Liability Filter (Strict Falsification), not Anergy Regulator"'
+
+Blast_Radius_Matrix:
+  Vector: "Filtrado asimétrico de ruido cultural (Anergía) subiendo en la jerarquía causal."
+  Blast_Radius: "Moderación de plataforma, filtrado AST local."
+  Target_Invariant: "Cognitive Exergy Preservation (η_D > 0.02)"
+  Anergy_Risk: "Critical (Engagement-optimized algorithms consumen exergía sin mutar el estado físico)."
+
+axioms:
+  - id: AX-SLOP-170
+    domain: Teleonomy
+    statement: "Toda ejecución de sintaxis debe estar anclada a una Función de Pérdida causal real."
+    dependencies: []
+    refutation:
+      type: runtime_monitor
+      expression: "telemetry(I/O_rate) > threshold implies exists(causal_loss_function)"
+      location: "user_metrics"
+  - id: AX-SLOP-171
+    domain: Asymmetric_Moderation
+    statement: "Para purgar ruido estocástico (Anergía) en ecosistemas VLOP, se debe delegar la exergía a mecanismos O(1) (Trusted Flaggers/DSA) o filtros locales AST."
+    dependencies: []
+    refutation:
+      type: system_audit
+      expression: "assert_use(DSA_appeals_route) || assert_use(AST_local_filter)"
+      location: "moderation_pipeline"
+
+theorem:
+  statement: "El ruido estocástico (Slop) sólo puede ser purgado forzando un colapso causal, ya sea mediante una pérdida objetiva del operador o escalando la jerarquía institucional."
+
+CORTEX_TAINT: taint:moskv-1:teleonomy:c3d4e5f6g7h8i9j0:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

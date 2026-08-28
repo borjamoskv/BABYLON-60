@@ -1,156 +1,84 @@
-[build-system]
-requires = ["maturin>=1.5,<2.0"]
-build-backend = "maturin"
-
+# C5-REAL EXERGY CERTIFIED
 [project]
-name = "babylon60"
-version = "4.0.0"
-license = { file = "LICENSE" }
-description = "CORTEX C5-REAL execution kernel (BABYLON-60): BFT ledgers, onco-transducer, exergy pipelines"
+name = "teorema-robinson-moskv"
+version = "1.0.2"
+description = "MOSKV-1 BFT Cortex"
 readme = "README.md"
-authors = [{ name = "Borja Moskv (borjamoskv)" }]
-requires-python = ">=3.10"
-classifiers = [
-    "License :: Other/Proprietary License",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3 :: Only",
-]
+requires-python = "==3.12.*"
 dependencies = [
-    "aiosqlite>=0.19",
-    "cbor2>=5.6.0",
-    "pydantic>=2.8.0",
-    "cryptography>=43.0.0",
-    "pynacl>=1.5.0",
-    "click>=8.0",
-    "pyyaml>=6.0.2",
-    "textual>=0.50.0",
-    "pynput>=1.7.0",
-    "httpx>=0.27.2",
-    "starlette>=0.40.0",
-    "lingua-language-detector>=2.0.2",
-    "yfinance>=1.6.0",
-]
-
-[project.urls]
-Repository = "https://github.com/borjamoskv/BABYLON-60"
-Issues = "https://github.com/borjamoskv/BABYLON-60/issues"
-
-[project.optional-dependencies]
-dev = [
-    "pytest>=8.0",
-    "pytest-asyncio>=0.23",
-    "ruff>=0.4",
-    "mypy>=1.8",
-    "networkx>=3.0",
-    "pandas>=2.0",
+    "chromadb==0.4.20",
+    "maturin==1.14.1",
+    "mypy==1.11.0",
+    "pytest>=9.1.1",
+    "pytest-cov==7.1.0",
+    "pyyaml==6.0.3",
+    "strike-rs",
+    "websocket-client==1.9.0",
     "fastapi>=0.115.0",
-    "uvicorn>=0.30.0",
-    "jinja2>=3.1.4",
-    "urllib3>=2.2.2",
-]
-embeddings = [
-    "numpy>=1.24",
-]
-graph = [
-    "networkx>=3.0",
-]
-onco = [
-    "numpy>=1.24",
-    "networkx>=3.0",
-    "pandas>=2.0",
-]
-telemetry = [
+    "starlette>=1.3.1",
+    "numpy<2.0.0",
     "psutil>=7.2.2",
-]
-gemini = [
-    "google-genai>=0.1.0",
-    "fastmcp>=0.1.0",
-]
-voice = [
-    "sounddevice>=0.4.6",
-    "faster-whisper>=1.1",
-]
-voice-full = [
-    "sounddevice>=0.4.6",
-    "faster-whisper>=1.1",
-    "mlx-lm>=0.21; platform_machine=='arm64' and sys_platform=='darwin'",
-    "kokoro>=0.9",
-]
-apex = [
-    "numpy>=1.24",
-    "scikit-learn>=1.3",
-    "scipy>=1.11",
+    "matplotlib>=3.11.1",
+    "pillow>=12.3.0",
+    "urllib3>=2.0",
+    "requests>=2.30",
+    "pip-audit>=2.10.1",
+    "click",
+    "pyaudio",
+    "pynacl",
+    "posthog",
+    "cryptography",
+    "playwright",
+    "numba",
 ]
 
-[project.scripts]
-babylon60 = "babylon60.cli.onco_transducer:main"
-babylon60-compliance = "babylon60.compliance_exporter.eu_ai_act:main_cli"
-babylon60-license = "babylon60.cli.license_cli:main"
-babylon60-mcp = "babylon60.mcp.cortex_mcp_server:main"
-babylon60-dashboard = "scripts.c5_thermo.exergy_dashboard_server:main"
-babylon60-bridge = "babylon60.cli.bridge:main"
-babylon60-onco = "babylon60.cli.onco_transducer:main"
-babylon60-attest = "babylon60.cli.llm_attest:main"
-apex = "apex_trials.cli:main"
-cortex-compliance = "babylon60.compliance_exporter.eu_ai_act:main_cli"
-cortex-license = "babylon60.cli.license_cli:main"
-cortex-mcp = "babylon60.mcp.cortex_mcp_server:main"
-cortex-dashboard = "scripts.c5_thermo.exergy_dashboard_server:main"
-cortex-bridge = "babylon60.cli.bridge:main"
-cortex-onco = "babylon60.cli.onco_transducer:main"
-cortex-attest = "babylon60.cli.llm_attest:main"
-cortex-char-attest = "babylon60.cli.attest_character_count:main"
+[dependency-groups]
+dev = [
+    "ruff",
+    "black",
+    "pip-audit",
+    "mkdocstrings[python]",
+    "mkdocs-material",
+    "hypothesis>=6.158.1",
+    "types-pyyaml>=6.0.12.20260518",
+]
 
-[tool.setuptools.packages.find]
-where = ["packages", "experiments"]
-include = ["babylon60*", "apex_trials*"]
+[tool.mypy]
+namespace_packages = true
+explicit_package_bases = true
 exclude = [
-    "babylon60.extensions",
-    "babylon60.extensions.*",
-    "babylon60.utils",
-    "babylon60.utils.*",
+    "^scratch/",
 ]
 
-[tool.setuptools.package-data]
-apex_trials = ["*.json"]
+[tool.uv.workspace]
+members = [
+    "src/02_engines/strike_rs",
+]
 
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-addopts = "-x --tb=short"
-asyncio_mode = "auto"
-pythonpath = [".", "packages", "experiments"]
+[tool.uv.sources]
+strike-rs = { workspace = true }
 
 [tool.ruff]
-target-version = "py310"
+target-version = "py312"
 line-length = 120
 extend-exclude = [
-    "experiments/domain_kernel",
-    "crates/strike-rs",
-    "src",
-    "L1_sink",
-    "BABYLON-60-fixes",
-    "c5_remotion_video",
-    "packages/babylon60/extensions",
+    "cortex/laboratory",
 ]
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F"]
-ignore = ["E743"]
+ignore = ["E743", "E402", "E701"]
 
-[tool.mypy]
-python_version = "3.12"
-explicit_package_bases = true
-disallow_any_generics = false
-exclude = ["^scratch/", "^experiments/anvil_yung/", "^packages/babylon60/extensions/"]
-ignore_missing_imports = true
-
-# Legacy vendorizado (babylon60/extensions): excluido de packaging y lint.
-# Se trata como Any hasta su poda/tipado — deuda registrada en el issue tracker.
-[[tool.mypy.overrides]]
-module = ["babylon60.extensions.*"]
-follow_imports = "skip"
-
-[dependency-groups]
-dev = [
-    "hypothesis>=6.163.0",
+[tool.pytest.ini_options]
+pythonpath = ["src/02_engines", "src/02_engines/cortex_bft", "src/03_state/scitt_ledger", "src/03_state/scitt_ledger/cortex_python"]
+testpaths = ["tests", "src/03_state/scitt_ledger/cortex_python"]
+norecursedirs = [
+    "cortex-bounties",
+    "firedancer-v1",
+    "ethereum-protocol",
+    "intuition-contracts-v2",
+    "laboratorio-rd",
+    "babylon-60",
+    "BABYLON-60",
+    ".hypothesis"
 ]

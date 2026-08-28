@@ -1,84 +1,73 @@
----
-title: BABYLON-60 Documentation Hub
-status: Causal-Determinist
-version: 4.0.0
----
+<!-- C5-REAL EXERGY CERTIFIED -->
+# Mapa de Exergía Epistémica C5-REAL: `docs/`
 
-# 📚 BABYLON-60 Documentation Hub
+Bienvenido al núcleo de especificación formal, matemática y contractual de **Teorema-Robinson-Moskv**.
 
-Welcome to the central documentation index for **BABYLON-60 v4.0 Sovereign Hardened**.
-
-[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Verified-0052CC?style=flat-square&logo=shield)](./06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![EU AI Act](https://img.shields.io/badge/EU_AI_Act-Articles_9--14_Compliant-purple?style=flat-square)](./04_research/eu_ai_act_compliance_whitepaper.md)
-[![Formal Verification](https://img.shields.io/badge/Lean_4-Verified-green?style=flat-square)](../proof/lean/Babylon.lean)
-[![Epistemology](https://img.shields.io/badge/Epistemology-C5--REAL_Constitution-blue?style=flat-square)](./00_MANIFESTO.md)
+Este directorio no contiene documentación genérica; constituye la **fuente de verdad autoritativa (Oráculo de Verificación)** del proyecto. Toda propiedad afirmada en el runtime (Ring-0 Rust Kernel, verificadores IPC, sandboxes WASM) está axiomáticamente especificada y formalizada en estas subcarpetas.
 
 ---
 
-## 🧭 How to Navigate This Documentation
+## 🔗 Matriz de Isomorfismo: Especificación (`docs/`) \leftrightarrow Silicio (`src/`)
 
-Depending on your role and goal, here are the recommended starting points:
+El mapa epistémico se traduce directamente en las 6 capas de ejecución del código fuente en `src/`:
 
-| Your Role | What You Want to Do | Recommended Reading |
-| :--- | :--- | :--- |
-| **Developer / Engineer** | Quickstart & API integration into Python AI agents. | 📖 [Main README](../README.md#quick-start-in-3-steps)<br>📖 [Python Package Specs](../packages/babylon60/) |
-| **Compliance Officer / Legal** | EU AI Act Articles 9–14 compliance & certificate export. | 📜 [EU AI Act Compliance Whitepaper](./04_research/eu_ai_act_compliance_whitepaper.md)<br>📜 [Audit Verdict](./06_theory/AUDIT_VERDICT_C5_REAL.md) |
-| **Security / Auditor** | Threat model, hash-chain tamper-evidence, Rust kernel IPC. | 🔒 [Threat Model](../THREAT_MODEL.md)<br>🔒 [Security Policy](../SECURITY.md) |
-| **Researcher / Mathematician**| Formal verification in Lean 4, category theory & exergy. | 🧮 [Lean 4 Proofs](../proof/lean/Babylon.lean)<br>🧮 [Axiomatization Paper](./06_theory/AXIOMATIZATION_C5_REAL.md) |
-
----
-
-## 📐 System Architecture Diagram
-
-```mermaid
-graph TD
-    Sub[Sovereign Substrate / User Request] --> AST[AST Sandbox Monad]
-    AST -->|AST Validated| Kernel[Rust Kernel - no_std F60 State Machine]
-    AST -->|Security Error| Fail[Critical Halt / Poisoned State]
-    
-    Kernel -->|Step Transition| Ledger[DAGLedger - Merkle Cumulative State Hash]
-    Ledger -->|COSE Sign1| Receipt[Halt Receipts - IETF RFC 9943 SCITT]
-    
-    Kernel -->|IPC / Iceoryx2| IDE[Sovereign IDE - Tauri v2 / FastAPI]
-    Kernel -->|WASM Mount| WebUI[Web Telemetry UI - React 18]
-    Kernel -->|Art. 14 Oversight| Tonnetz[Tonnetz Neo-Riemannian Oversight]
-    
-    Receipt -->|Notarization| EVM[EVM Merkle Anchor - Solidity]
-    Receipt -->|Attestation| TPM[TPM 2.0 PCR Quote Notary]
-```
-
----
-
-## 📂 Subproject & Crate Documentation Directory
-
-| Tag | Component | Location | Description & Focus |
+| Módulo en `docs/` | Especificación Clave | Capa en `src/` | Módulos de Ejecución Reales |
 | :--- | :--- | :--- | :--- |
-| `[Core]` | **Main English README** | [`README.md`](../README.md) | Central overview, black box analogy, quickstart & monorepo map. |
-| `[Core]` | **Main Spanish README** | [`README_ES.md`](../README_ES.md) | Versión completa en español del README principal. |
-| `[Kernel]` | **Rust Engine Crate** | [`crates/babylon60-kernel/`](../crates/babylon60-kernel/) | Low-level `#![no_std]` Rust engine, $F_{60}$ scheduler, WORM quarantine. |
-| `[UI]` | **Sovereign IDE App** | [`apps/babylon60-ide/`](../apps/babylon60-ide/) | Desktop/Mobile Tauri v2 IDE, FastAPI OpenRouter backend, Iceoryx2 IPC. |
-| `[UI]` | **Web Telemetry UI** | [`apps/web/`](../apps/web/) | React 18 + WASM Causal Telemetry visualizer. |
-| `[Oversight]`| **Tonnetz Human Control** | [`apps/tonnetz_app/`](../apps/tonnetz_app/) | Neo-Riemannian toric harmonic visualizer for EU AI Act Art. 14 oversight. |
-| `[Persistence]`| **Cortex Engine** | [`packages/cortex/`](../packages/cortex/) | Python memory persistence (`cortex-persist`), SQLite WAL & MCP Server. |
-| `[Attestation]`| **Causal Attestation** | [`packages/babylon60/attestation/`](../packages/babylon60/attestation/) | Hardware TPM 2.0 PCR Quote anchoring & notary verification. |
-| `[Compiler]` | **DSL Compiler** | [`crates/babylon60-compiler/`](../crates/babylon60-compiler/) | `.b60` DSL lexer/parser, B60 bytecode IR, Lean 4 proof emitter. |
-| `[IPC]` | **Strike RS Bridge** | [`crates/strike-rs/`](../crates/strike-rs/) | PyO3 native GIL bypass, shared memory & BLAKE3 taint graph. |
-| `[BFT]` | **Master Ledger BFT** | [`packages/babylon60/bft/`](../packages/babylon60/bft/) | Escalón 3 Tamper-Evident log with Git Sentinel external witness. |
-| `[Proof]` | **Lean 4 Proofs** | [`proof/lean/`](../proof/lean/) | Lean 4 formal proof verification code (`proof/lean/Babylon.lean`). |
+| **[`architecture/`](architecture/)** | Manifiesto Ring Buffer C-ABI y Lock-Free EBR IPC | **[`src/01_kernel/`](../src/01_kernel/)** | `ring0_rust` (Kernel C-ABI), `ipc_daemon` (Daemon IPC Rust) |
+| **[`epistemology/`](epistemology/)** | Centinela de Entropía, Varentropía y Falsación | **[`src/02_engines/`](../src/02_engines/)** | `cortex_guard`, `strike_rs`, `cortex_wasm`, `legion_engine`, `cortex_bft` |
+| **[`ontology/`](ontology/)** | Taxonomías Canónicas, Atestación L5 e Isomorfismos | **[`src/03_state/`](../src/03_state/)** | `scitt_ledger` (Merkle Trees SHA3-256, Registros Inmutables L5) |
+| **[`axioms/`](axioms/)** | Demostraciones Lean 4, Lógica Prolog y DAC YAMLs | **[`src/04_primitives/`](../src/04_primitives/)** | `formal_logic` (Primitivas Categóricas Haskell/Go/Lean) |
+| **[`primitives/`](primitives/)** | Lógica Categórica 101 y Matrices de Enjambres | **[`src/05_agents/`](../src/05_agents/)** | `swarm_framework` (Orquestación de subagentes y sandboxes WASM) |
+| **[`gtm/`](gtm/)** | SLA Enterprise, Cap Contractual y EU AI Act | **[`src/06_apps/`](../src/06_apps/)** | `babylon60_ide`, `cortexpersist_web` (Entornos de ejecución de usuario) |
 
 ---
 
-## 🧮 Theoretical Framework (C5-REAL Axiomatization)
+## 🏛️ Estructura del Mapa Epistémico
 
-BABYLON-60 maps system transformations to category-theoretic primitives:
-
-| Primitive | Mathematical Definition | Runtime Implementation |
+| Módulo Epistémico | Ruta | Descripción y Contenido Primario |
 | :--- | :--- | :--- |
-| **Lawvere Fixed Point** | $T(X) \cong X$ | Pure `step()` State Machine ([eval.rs](../crates/babylon60-kernel/src/eval.rs)) |
-| **Store Comonad** | $w \to a$ | WORM Ledger Event Stream ([ledger.rs](../crates/babylon60-kernel/src/ledger.rs)) |
-| **Colimit Functor** | Information Density Equilibrium | BFT Merkle DAG Consensus ([bft/](../packages/babylon60/bft/)) |
-| **SCITT Statement** | IETF RFC 9943 | COSE Sign1 Signed Halt Receipts ([receipt.rs](../src/receipt.rs)) |
+| **01. Axiomas y Demostraciones** | [`axioms/`](axioms/) | Demostraciones formales en Lean 4, validaciones en Prolog y la matriz de axiomas DAC (26 especificadores YAML). |
+| **02. Ontología e Isomorfismos** | [`ontology/`](ontology/) | Taxonomía espacial canónica, matrices de isomorfismos bio-silicio y cortafuegos ontológicos. |
+| **03. Primitivas Categóricas** | [`primitives/`](primitives/) | Manifiesto de arquitectura de primitivas, lógica categórica y planos de orquestación de enjambres. |
+| **04. Arquitectura de Silicio** | [`architecture/`](architecture/) | Manifiesto de memoria compartida sin bloqueos (*Lock-Free Shared Memory Ring Buffer*) y especificaciones C-ABI. |
+| **05. Iteración Epistémica** | [`epistemology/`](epistemology/) | Protocolos de contención de varentropía, halts epistémicos y sincronización de ciclos cron. |
+| **06. Gobernanza Comercial y SLA** | [`gtm/`](gtm/) | Contrato SLA Enterprise C5-REAL, especificaciones de PI y contención regulatoria de la EU AI Act. |
+| **07. Recursos y Diagramas** | [`assets/`](assets/) | Diagramas de trayectoria, esquemas estructurales y artefactos visuales. |
 
 ---
 
-<sub>BABYLON-60 v4.0.0 Documentation Hub</sub>
+## 📜 Detalle de Módulos Destacados
+
+### 1. Demostración Formal y Axiomatización ([`axioms/`](axioms/))
+- **Lean 4 Formalization**: [`axioms/RobinsonResolution.lean`](axioms/RobinsonResolution.lean) — Prueba formal del Teorema de Resolución de Robinson.
+- **Prolog Engine**: [`axioms/robinson_resolution.pl`](axioms/robinson_resolution.pl) — Ejecutor lógico e inferencial.
+- **Matriz DAC**: [`axioms/dac/`](axioms/dac/) — 26 axiomas de aislamiento (`GOLDEN_AXIOM_RECURSION.yaml`, `KERNEL_FALSIFICATION.yaml`, `BFT_MOCKING_INVARIANT.yaml`).
+- **Semántica**: [`axioms/semantics/cortex_axioms_mapping.md`](axioms/semantics/cortex_axioms_mapping.md) — Mapeo directo entre axiomas teóricos y símbolos de código.
+
+### 2. Ontología y Taxonomías Canónicas ([`ontology/`](ontology/))
+- **Taxonomía Canónica**: [`ontology/canonical_space_taxonomy.yaml`](ontology/canonical_space_taxonomy.yaml) — Matriz de tipos y espacios de estados computacionales.
+- **Isomorfismos Bio-Silicio**: [`ontology/07_isomorfismos_bio_silicio.yaml`](ontology/07_isomorfismos_bio_silicio.yaml) — Mapeos topológicos de homeostasia y transmisión energética.
+- **Matriz Unificada**: [`ontology/unified_isomorfismos_master_matrix.yaml`](ontology/unified_isomorfismos_master_matrix.yaml) — Integración de invariantes de cortafuegos y anestesia del sistema.
+
+### 3. Primitivas Categóricas y Enjambres ([`primitives/`](primitives/))
+- **Primitivas Lógicas**: [`primitives/101_categorical_logic_primitives.yaml`](primitives/101_categorical_logic_primitives.yaml) — Deducción categórica y funciones monoidales.
+- **Orquestación**: [`primitives/swarm_centuria_matrix.yaml`](primitives/swarm_centuria_matrix.yaml) — Blueprint de coordinación de subagentes en paralelo.
+
+### 4. Arquitectura de Memoria Compartida C5-REAL ([`architecture/`](architecture/))
+- **Manifiesto Ring Buffer**: [`architecture/c5_real_ring_buffer_manifesto.md`](architecture/c5_real_ring_buffer_manifesto.md) — Protocolo IPC de memoria compartida determinista de 64 bytes (`#[repr(C, align(64))]`) con validación SHA-256 en Ring-0 Rust.
+
+### 5. Gobernanza Comercial e Indemnización SLA ([`gtm/`](gtm/))
+- **Contrato SLA Enterprise**: [`gtm/C5_REAL_ENTERPRISE_SLA_CONTRACT.md`](gtm/C5_REAL_ENTERPRISE_SLA_CONTRACT.md) — Garantía Fail-Stop, acotación contractual de responsabilidad y cumplimiento normativo Artículos 9-15 de la EU AI Act.
+- **Especificación de Propiedad Intelectual**: [`gtm/IP_SPECIFICATION_C5_REAL.md`](gtm/IP_SPECIFICATION_C5_REAL.md).
+
+---
+
+## ⚡ Atestación Criptográfica e Invariante Popperiano
+
+El estado de validación popperiana de la documentación y del repositorio se registra automáticamente mediante:
+- [`POPPERIAN_FALSIFICATION_CERTIFICATE.json`](POPPERIAN_FALSIFICATION_CERTIFICATE.json)
+
+Para recalcular la cobertura de falsación y generar un certificado actualizado:
+```bash
+python3 scripts/verify_popper_coverage.py
+```

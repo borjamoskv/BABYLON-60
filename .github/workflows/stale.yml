@@ -1,8 +1,9 @@
+# C5-REAL EXERGY CERTIFIED
 name: "Gestión de Anergía (Stale Issues & PRs)"
 
 on:
   schedule:
-    - cron: '30 1 * * *'
+    - cron: '30 1 * * *' # Cada noche a la 1:30 AM
 
 permissions:
   issues: write

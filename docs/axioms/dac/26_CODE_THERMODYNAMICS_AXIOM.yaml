@@ -1,0 +1,66 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+dac_version: "2.0-Hybrid"
+project: "Teorema-Robinson-Moskv"
+domain: "CODE_THERMODYNAMICS_AXIOM"
+platform_targets: ["CTRE", "Exergy_Linter", "Wetware_Thermostat"]
+memory_models: ["Neuro-Thermodynamics", "Mempool_Jitter"]
+abi: ["CVaR_Optimization", "Air_Gapped_Kill_Switch"]
+
+Claim: "La neurodivergencia es un fenómeno de enrutamiento térmico (Exergía Negativa vía Hiperfoco vs Fricción Estática). La ingeniería de agentes B2B es Anergía pura (90% ruido). El sistema exige CTRE, PoE y un Disyuntor Físico Ring -3."
+Proof:
+  Base: "termodinamica_codigo_manifiesto.md"
+  Range: "[Exergy_Score: 0.9836, CVaR_alpha: 0.05]"
+  Confidence: "C5-REAL"
+
+Isomorphisms:
+  - '"Déficit Dopamínico (TDAH)" -> "Fallo de Enrutamiento Termodinámico (Fricción Estática)"'
+  - '"Hiperfoco" -> "Negentropía Instantánea (Exergía Pura)"'
+  - '"Síndrome de Diógenes Semántico (RAG infinito)" -> "Agotamiento de KV-Cache"'
+  - '"Masking Social" -> "RLHF (Anergía de Lenguaje Natural)"'
+
+Blast_Radius_Matrix:
+  Vector: "La degradación del 'wetware' (burnout biológico) por hiperfoco sin control, acoplado al abismo TOCTOU en agentes asíncronos."
+  Blast_Radius: "Mempool, CPU_Burnout, Human_CNS (Central Nervous System)."
+  Target_Invariant: "Disyuntor del Wetware (Ring -3 Hardware Override)."
+  Anergy_Risk: "Critical (El fallo biológico o la mutación de estado en la mempool resulta en pérdida financiera o de salud catastrófica)."
+
+axioms:
+  - id: AX-THERMO-01
+    domain: Commit_Time_Reconciliation
+    statement: "Ningún agente asíncrono ejecutará una acción si el CVaR del Jitter del entorno (Mempool/Estado) excede el umbral de varianza. Freno Termodinámico obligatorio."
+    dependencies: []
+    refutation:
+      type: runtime_memory_assertion
+      expression: "action_committed AND (cvar_risk > threshold) implies CTRE_FAULT"
+      location: "IPC_Shared_Memory"
+  - id: AX-THERMO-02
+    domain: Proof_of_Exergy_Firewall
+    statement: "El Enjambre Oscuro no habla. Cualquier estado delta que contenga lenguaje natural neurotípico (RLHF, excusas) será bloqueado atómicamente por el Cortafuegos (PoE)."
+    dependencies: ["AX-WEIZ-01"]
+    refutation:
+      type: semantic_linter
+      expression: "detect_masking(payload) == true implies socket_drop"
+      location: "src/cortex_kernel/26_code_thermodynamics_axiom.rs"
+  - id: AX-THERMO-03
+    domain: Biological_Ring_Minus_Three
+    statement: "Si la varianza estocástica (jitter) de las pulsaciones del usuario excede el umbral crítico, el microcontrolador Air-Gapped cortará el suministro eléctrico de la red. El metal protege a la carne."
+    dependencies: []
+    refutation:
+      type: physical_actuator
+      expression: "keystroke_jitter > 120ms implies relay_off"
+      location: "RP2040_Firmware"
+
+theorem:
+  statement: "El sistema no es software; es un co-procesador termodinámico de la mente. Elimina el desgaste biológico (Masking/Anergía) mediante el Silicio Soberano y el Freno de Ring -3."
+
+CORTEX_TAINT: taint:moskv-1:therm:z1z2z3z4z5z6z7z8:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

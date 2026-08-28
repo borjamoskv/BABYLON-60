@@ -1,0 +1,872 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+# 101 ORTHOGONAL PRIMITIVES (Purged 88% Anergy)
+cortex_taint: CORTEX-TAINT:borjamoskv:101_categorical_primitives:2026-08-09T02:23:48.770908+00:00
+specification: |
+  Matriz de 101 Primitivas Ortogonales Fundacionales en Lógica Categórica.
+  Falsacionismo de Landauer aplicado (Purga de Anergía).
+total_primitives: 101
+domains:
+  - id: D1
+    name: Estructura Categórica Fundamental (112 Primitivas)
+    range:
+      - 1
+      - 112
+    type: STRUCTURE
+    categories:
+      - Objetos Nucleares (Inicial, Final, Cero, Subobjetos, Cocientes)
+      - Morfismos y Dualidad (Monomorfismos, Epimorfismos, Isomorfismos, Endomorfismos,
+        Automorfismos, Retracciones, Secciones)
+      - Hom-Sets y Categorías Locamente Pequeñas
+      - Slices, Coslices y Categorías de Coma
+      - Esqueletos, Subcategorías Plenas y Llenas
+  - id: D2
+    name: Límites, Colímites y Extensiones de Kan (112 Primitivas)
+    range:
+      - 113
+      - 224
+    type: LIMITS_COLIMITS
+    categories:
+      - Productos y Coproductos Categóricos
+      - Pullbacks (Cambio de Base) y Pushouts (Suma Pegada)
+      - Ecualizadores y Coecualizadores
+      - Límites Inductivos y Proyectivos (Conos y Coconos)
+      - Extensiones de Kan Izquierda y Derecha (Lan_F, Ran_F)
+      - Categorías Completas y Cocompletas
+  - id: D3
+    name: Functores, Adjunciones, Mónadas y Módulos (112 Primitivas)
+    range:
+      - 225
+      - 336
+    type: FUNCTORIAL_ADJUNCTIONS
+    categories:
+      - Functores Covariantes, Contravariantes y Fieles/Plenos
+      - Transformaciones Naturales y Modificaciones
+      - Adjunciones (L ⊣ R, Unidades y Counidades η, ε)
+      - Mónadas, Comónadas y Álgebras de Eilenberg-Moore / Kleisli
+      - "Lema y Inmersión de Yoneda (Y: C -> [C^op, Set])"
+      - Functores Representables y Duality Theory
+  - id: D4
+    name: Categorías Monoidales, Trenzadas y Enriquecidas (112 Primitivas)
+    range:
+      - 337
+      - 448
+    type: MONOIDAL_ENRICHED
+    categories:
+      - Categorías Monoidales (Tensor ⊗, Unidad I, Asociadores α)
+      - Categorías Monoidales Simétricas y Trenzadas (Braiding σ)
+      - Categorías Monoidales Cerradas (Hom Interno [-,-])
+      - Categorías Compactas Cerradas y Rígidas (Objetos Duales A*)
+      - Categorías Enriquecidas (V-Categories, V-Functors)
+      - Estricteificación y Teorema de Coherencia de Mac Lane
+  - id: D5
+    name: Lógica Categórica, Tópoi e Hiperdoctrinas (112 Primitivas)
+    range:
+      - 449
+      - 560
+    type: CATEGORICAL_LOGIC_TOPOS
+    categories:
+      - Clasificador de Subobjetos Ω y Lógica Interna de Mitchell-Bénabou
+      - Álgebras de Heyting Internas y Negación No-Clásica
+      - Topologías de Lawvere-Tierney y Haces (Sheaves)
+      - Morfismos Geométricos (Flat Pullback, Direct Image)
+      - Hiperdoctrinas de Lawvere e Cuantificadores Categóricos (∃ ⊣ f* ⊣ ∀)
+      - Condición de Beck-Chevalley y Preservación Fibrada
+  - id: D6
+    name: Colisiones Diagramáticas, Obstrucciones y No-Conmutatividad (112 Primitivas)
+    range:
+      - 561
+      - 672
+    type: COLLISION_OBSTRUCTION
+    categories:
+      - Colisión de No-Conmutatividad de Limites y Colímites (lim colim ≠ colim lim)
+      - Obstrucción Monoidal (Fail-Pentagon, Non-Trivial Associator Barrier)
+      - Colisión de Fase Fibrada (Fiber Mismatch)
+      - Colisiones Monádicas (Non-Distributive Monad Composition)
+      - Colisión de Incompletitud / Singularidad en Exactitud (Non-Exact Functors)
+      - Interrupción de Coherencia de Braiding / Twist
+  - id: D7
+    name: Antipatrones Categóricos y Degradación Estructural (112 Primitivas)
+    range:
+      - 673
+      - 784
+    type: ANTIPATTERNS
+    categories:
+      - Falso Isomorfismo (Confundir Equivalencia con Identidad)
+      - Sesgo de Estricteificación Ciega (Strictness Illusion)
+      - Falsa Adjunción Sin Unidad/Counidad Válida
+      - Colapso de Subobjeto Ω (Lawvere Nullification)
+      - Degradación Fibrada (Pérdida de Adjunto Izquierdo ∃_α)
+      - Anulación Monoidal por Objeto Cero Volátil
+      - Pseudo-Mónada Sin Coherencia Associativa
+  - id: D8
+    name: Categorías Fibradas, Complejos Simpliciales y Métricas Compat(Ω) (112 Primitivas)
+    range:
+      - 785
+      - 896
+    type: FIBERED_COMPATIBILITY_METRICS
+    categories:
+      - Fibraciones de Grothendieck y Cartesian Morphisms
+      - Display Maps y Contextos Tipados Fibrados
+      - "Funtor de Certificados Cert: Arr(C) -> Set"
+      - Métrica Primitiva Morfismo-Nivel μ(α) y Modelo-Nivel μ(M)
+      - Coste Derivado de Extensión Fibrada Conservativa κ(M)
+      - Métrica de Fricción Síncrona Δ_overhead(α, β)
+      - Complejo Simplicial Compat(Ω) y Caras de Invariantes (F, I, S, R_k)
+primitives:
+  - id: 1
+    code: P001_D1_Initial_Object_Uniqueness
+    domain_id: D1
+    type: STRUCTURE
+    category: "Objetos Nucleares (Inicial, Final, Cero, Subobjetos, Cocientes)"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P001"
+  - id: 2
+    code: P002_D1_Terminal_Object_Duality
+    domain_id: D1
+    type: STRUCTURE
+    category: "Objetos Nucleares (Inicial, Final, Cero, Subobjetos, Cocientes)"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P002"
+  - id: 3
+    code: P003_D1_Zero_Object_Kernel_Collision
+    domain_id: D1
+    type: STRUCTURE
+    category: "Objetos Nucleares (Inicial, Final, Cero, Subobjetos, Cocientes)"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P003"
+  - id: 4
+    code: P004_D1_Monic_Cancelability
+    domain_id: D1
+    type: STRUCTURE
+    category: "Morfismos y Dualidad (Monomorfismos, Epimorfismos, Isomorfismos, Endomorfismos, Automorfismos, Retracciones, Secciones)"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P004"
+  - id: 5
+    code: P005_D1_Epic_Surjectivity_Dual
+    domain_id: D1
+    type: STRUCTURE
+    category: "Morfismos y Dualidad (Monomorfismos, Epimorfismos, Isomorfismos, Endomorfismos, Automorfismos, Retracciones, Secciones)"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P005"
+  - id: 6
+    code: P006_D1_Iso_Inverse_Equivalence
+    domain_id: D1
+    type: STRUCTURE
+    category: "Morfismos y Dualidad (Monomorfismos, Epimorfismos, Isomorfismos, Endomorfismos, Automorfismos, Retracciones, Secciones)"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P006"
+  - id: 7
+    code: P007_D1_Slice_Category_Over_Object
+    domain_id: D1
+    type: STRUCTURE
+    category: "Slices, Coslices y Categorías de Coma"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P007"
+  - id: 8
+    code: P008_D1_Coslice_Category_Under_Object
+    domain_id: D1
+    type: STRUCTURE
+    category: "Slices, Coslices y Categorías de Coma"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P008"
+  - id: 9
+    code: P009_D1_Comma_Category_Projection
+    domain_id: D1
+    type: STRUCTURE
+    category: "Slices, Coslices y Categorías de Coma"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P009"
+  - id: 10
+    code: P010_D1_Skeleton_Equivalence_Isomorphic
+    domain_id: D1
+    type: STRUCTURE
+    category: "Morfismos y Dualidad (Monomorfismos, Epimorfismos, Isomorfismos, Endomorfismos, Automorfismos, Retracciones, Secciones)"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P010"
+  - id: 11
+    code: P011_D1_Subcategory_Full_Faithful_Inclusion
+    domain_id: D1
+    type: STRUCTURE
+    category: "Esqueletos, Subcategorías Plenas y Llenas"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P011"
+  - id: 12
+    code: P012_D1_Hom_Set_Poset_Structure
+    domain_id: D1
+    type: STRUCTURE
+    category: "Hom-Sets y Categorías Locamente Pequeñas"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P012"
+  - id: 13
+    code: P013_D1_Endomorphism_Monoid_Ring
+    domain_id: D1
+    type: STRUCTURE
+    category: "Morfismos y Dualidad (Monomorfismos, Epimorfismos, Isomorfismos, Endomorfismos, Automorfismos, Retracciones, Secciones)"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P013"
+  - id: 14
+    code: P014_D1_Automorphism_Group_Symmetry
+    domain_id: D1
+    type: STRUCTURE
+    category: "Morfismos y Dualidad (Monomorfismos, Epimorfismos, Isomorfismos, Endomorfismos, Automorfismos, Retracciones, Secciones)"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P014"
+  - id: 15
+    code: P015_D1_Retraction_Section_Split_Epic
+    domain_id: D1
+    type: STRUCTURE
+    category: "Morfismos y Dualidad (Monomorfismos, Epimorfismos, Isomorfismos, Endomorfismos, Automorfismos, Retracciones, Secciones)"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P015"
+  - id: 16
+    code: P016_D1_Subobject_Lattice_Ordering
+    domain_id: D1
+    type: STRUCTURE
+    category: "Objetos Nucleares (Inicial, Final, Cero, Subobjetos, Cocientes)"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P016"
+  - id: 17
+    code: P017_D2_Categorical_Product_Universal_Property
+    domain_id: D2
+    type: LIMITS_COLIMITS
+    category: "Productos y Coproductos Categóricos"
+    description: "Primitiva universal de límites/colímites y extensiones de Kan: Categorical_Product_Universal_Property."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P113"
+  - id: 18
+    code: P018_D2_Coproduct_Direct_Sum_Duality
+    domain_id: D2
+    type: LIMITS_COLIMITS
+    category: "Pullbacks (Cambio de Base) y Pushouts (Suma Pegada)"
+    description: "Primitiva universal de límites/colímites y extensiones de Kan: Coproduct_Direct_Sum_Duality."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P114"
+  - id: 19
+    code: P019_D2_Pullback_Fibered_Product_Base_Change
+    domain_id: D2
+    type: LIMITS_COLIMITS
+    category: "Ecualizadores y Coecualizadores"
+    description: "Primitiva universal de límites/colímites y extensiones de Kan: Pullback_Fibered_Product_Base_Change."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P115"
+  - id: 20
+    code: P020_D2_Pushout_Amalgamated_Sum
+    domain_id: D2
+    type: LIMITS_COLIMITS
+    category: "Límites Inductivos y Proyectivos (Conos y Coconos)"
+    description: "Primitiva universal de límites/colímites y extensiones de Kan: Pushout_Amalgamated_Sum."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P116"
+  - id: 21
+    code: P021_D2_Equalizer_Kernel_Pair_Intersection
+    domain_id: D2
+    type: LIMITS_COLIMITS
+    category: "Extensiones de Kan Izquierda y Derecha (Lan_F, Ran_F)"
+    description: "Primitiva universal de límites/colímites y extensiones de Kan: Equalizer_Kernel_Pair_Intersection."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P117"
+  - id: 22
+    code: P022_D2_Coequalizer_Cokernel_Quotient
+    domain_id: D2
+    type: LIMITS_COLIMITS
+    category: "Categorías Completas y Cocompletas"
+    description: "Primitiva universal de límites/colímites y extensiones de Kan: Coequalizer_Cokernel_Quotient."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P118"
+  - id: 23
+    code: P023_D2_Directed_Limit_Filter_Cone
+    domain_id: D2
+    type: LIMITS_COLIMITS
+    category: "Productos y Coproductos Categóricos"
+    description: "Primitiva universal de límites/colímites y extensiones de Kan: Directed_Limit_Filter_Cone."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P119"
+  - id: 24
+    code: P024_D2_Colimit_Cocone_Universal_Arrow
+    domain_id: D2
+    type: LIMITS_COLIMITS
+    category: "Pullbacks (Cambio de Base) y Pushouts (Suma Pegada)"
+    description: "Primitiva universal de límites/colímites y extensiones de Kan: Colimit_Cocone_Universal_Arrow."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P120"
+  - id: 25
+    code: P025_D2_Left_Kan_Extension_Lan
+    domain_id: D2
+    type: LIMITS_COLIMITS
+    category: "Ecualizadores y Coecualizadores"
+    description: "Primitiva universal de límites/colímites y extensiones de Kan: Left_Kan_Extension_Lan."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P121"
+  - id: 26
+    code: P026_D2_Right_Kan_Extension_Ran
+    domain_id: D2
+    type: LIMITS_COLIMITS
+    category: "Límites Inductivos y Proyectivos (Conos y Coconos)"
+    description: "Primitiva universal de límites/colímites y extensiones de Kan: Right_Kan_Extension_Ran."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P122"
+  - id: 27
+    code: P027_D2_Complete_Category_All_Small_Limits
+    domain_id: D2
+    type: LIMITS_COLIMITS
+    category: "Extensiones de Kan Izquierda y Derecha (Lan_F, Ran_F)"
+    description: "Primitiva universal de límites/colímites y extensiones de Kan: Complete_Category_All_Small_Limits."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P123"
+  - id: 28
+    code: P028_D2_Cocomplete_Category_All_Small_Colimits
+    domain_id: D2
+    type: LIMITS_COLIMITS
+    category: "Categorías Completas y Cocompletas"
+    description: "Primitiva universal de límites/colímites y extensiones de Kan: Cocomplete_Category_All_Small_Colimits."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P124"
+  - id: 29
+    code: P029_D2_Preservation_Of_Limits_By_Right_Adjoint
+    domain_id: D2
+    type: LIMITS_COLIMITS
+    category: "Productos y Coproductos Categóricos"
+    description: "Primitiva universal de límites/colímites y extensiones de Kan: Preservation_Of_Limits_By_Right_Adjoint."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P125"
+  - id: 30
+    code: P030_D2_Creation_Of_Limits_By_Monadic_Functor
+    domain_id: D2
+    type: LIMITS_COLIMITS
+    category: "Pullbacks (Cambio de Base) y Pushouts (Suma Pegada)"
+    description: "Primitiva universal de límites/colímites y extensiones de Kan: Creation_Of_Limits_By_Monadic_Functor."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P126"
+  - id: 31
+    code: P031_D3_Covariant_Functor_Composition
+    domain_id: D3
+    type: FUNCTORIAL_ADJUNCTIONS
+    category: "Functores Covariantes, Contravariantes y Fieles/Plenos"
+    description: "Primitiva funtorial/monádica de transducción categórica: Covariant_Functor_Composition."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P225"
+  - id: 32
+    code: P032_D3_Contravariant_Functor_Dual_Arrow
+    domain_id: D3
+    type: FUNCTORIAL_ADJUNCTIONS
+    category: "Transformaciones Naturales y Modificaciones"
+    description: "Primitiva funtorial/monádica de transducción categórica: Contravariant_Functor_Dual_Arrow."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P226"
+  - id: 33
+    code: P033_D3_Faithful_Functor_Hom_Injective
+    domain_id: D3
+    type: FUNCTORIAL_ADJUNCTIONS
+    category: "Hom-Sets y Categorías Locamente Pequeñas"
+    description: "Primitiva funtorial/monádica de transducción categórica: Faithful_Functor_Hom_Injective."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P227"
+  - id: 34
+    code: P034_D3_Full_Functor_Hom_Surjective
+    domain_id: D3
+    type: FUNCTORIAL_ADJUNCTIONS
+    category: "Hom-Sets y Categorías Locamente Pequeñas"
+    description: "Primitiva funtorial/monádica de transducción categórica: Full_Functor_Hom_Surjective."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P228"
+  - id: 35
+    code: P035_D3_Natural_Transformation_Commutative_Square
+    domain_id: D3
+    type: FUNCTORIAL_ADJUNCTIONS
+    category: "Lema y Inmersión de Yoneda (Y: C -> [C^op, Set])"
+    description: "Primitiva funtorial/monádica de transducción categórica: Natural_Transformation_Commutative_Square."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P229"
+  - id: 36
+    code: P036_D3_Natural_Isomorphism_Equivalence
+    domain_id: D3
+    type: FUNCTORIAL_ADJUNCTIONS
+    category: "Morfismos y Dualidad (Monomorfismos, Epimorfismos, Isomorfismos, Endomorfismos, Automorfismos, Retracciones, Secciones)"
+    description: "Primitiva funtorial/monádica de transducción categórica: Natural_Isomorphism_Equivalence."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P230"
+  - id: 37
+    code: P037_D3_Adjunction_Unit_Eta
+    domain_id: D3
+    type: FUNCTORIAL_ADJUNCTIONS
+    category: "Functores Covariantes, Contravariantes y Fieles/Plenos"
+    description: "Primitiva funtorial/monádica de transducción categórica: Adjunction_Unit_Eta."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P231"
+  - id: 38
+    code: P038_D3_Adjunction_Counit_Epsilon
+    domain_id: D3
+    type: FUNCTORIAL_ADJUNCTIONS
+    category: "Transformaciones Naturales y Modificaciones"
+    description: "Primitiva funtorial/monádica de transducción categórica: Adjunction_Counit_Epsilon."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P232"
+  - id: 39
+    code: P039_D3_Monad_T_Product_Mu
+    domain_id: D3
+    type: FUNCTORIAL_ADJUNCTIONS
+    category: "Adjunciones (L ⊣ R, Unidades y Counidades η, ε)"
+    description: "Primitiva funtorial/monádica de transducción categórica: Monad_T_Product_Mu."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P233"
+  - id: 40
+    code: P040_D3_Monad_T_Unit_Eta
+    domain_id: D3
+    type: FUNCTORIAL_ADJUNCTIONS
+    category: "Mónadas, Comónadas y Álgebras de Eilenberg-Moore / Kleisli"
+    description: "Primitiva funtorial/monádica de transducción categórica: Monad_T_Unit_Eta."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P234"
+  - id: 41
+    code: P041_D3_Comonad_W_Coproduct_Delta
+    domain_id: D3
+    type: FUNCTORIAL_ADJUNCTIONS
+    category: "Lema y Inmersión de Yoneda (Y: C -> [C^op, Set])"
+    description: "Primitiva funtorial/monádica de transducción categórica: Comonad_W_Coproduct_Delta."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P235"
+  - id: 42
+    code: P042_D3_Eilenberg_Moore_Category_Of_Algebras
+    domain_id: D3
+    type: FUNCTORIAL_ADJUNCTIONS
+    category: "Functores Representables y Duality Theory"
+    description: "Primitiva funtorial/monádica de transducción categórica: Eilenberg_Moore_Category_Of_Algebras."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P236"
+  - id: 43
+    code: P043_D3_Kleisli_Category_Of_Computation
+    domain_id: D3
+    type: FUNCTORIAL_ADJUNCTIONS
+    category: "Functores Covariantes, Contravariantes y Fieles/Plenos"
+    description: "Primitiva funtorial/monádica de transducción categórica: Kleisli_Category_Of_Computation."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P237"
+  - id: 44
+    code: P044_D3_Yoneda_Lemma_Natural_Bijections
+    domain_id: D3
+    type: FUNCTORIAL_ADJUNCTIONS
+    category: "Transformaciones Naturales y Modificaciones"
+    description: "Primitiva funtorial/monádica de transducción categórica: Yoneda_Lemma_Natural_Bijections."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P238"
+  - id: 45
+    code: P045_D3_Yoneda_Embedding_Full_Faithful
+    domain_id: D3
+    type: FUNCTORIAL_ADJUNCTIONS
+    category: "Adjunciones (L ⊣ R, Unidades y Counidades η, ε)"
+    description: "Primitiva funtorial/monádica de transducción categórica: Yoneda_Embedding_Full_Faithful."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P239"
+  - id: 46
+    code: P046_D4_Tensor_Product_Bifunctor
+    domain_id: D4
+    type: MONOIDAL_ENRICHED
+    category: "Categorías Monoidales (Tensor ⊗, Unidad I, Asociadores α)"
+    description: "Primitiva de álgebra monoidal y estructura enriquecida: Tensor_Product_Bifunctor."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P337"
+  - id: 47
+    code: P047_D4_Associator_Natural_Isomorphism
+    domain_id: D4
+    type: MONOIDAL_ENRICHED
+    category: "Morfismos y Dualidad (Monomorfismos, Epimorfismos, Isomorfismos, Endomorfismos, Automorfismos, Retracciones, Secciones)"
+    description: "Primitiva de álgebra monoidal y estructura enriquecida: Associator_Natural_Isomorphism."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P338"
+  - id: 48
+    code: P048_D4_Left_Unitor_Lambda
+    domain_id: D4
+    type: MONOIDAL_ENRICHED
+    category: "Categorías Monoidales Cerradas (Hom Interno [-,-])"
+    description: "Primitiva de álgebra monoidal y estructura enriquecida: Left_Unitor_Lambda."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P339"
+  - id: 49
+    code: P049_D4_Right_Unitor_Rho
+    domain_id: D4
+    type: MONOIDAL_ENRICHED
+    category: "Categorías Compactas Cerradas y Rígidas (Objetos Duales A*)"
+    description: "Primitiva de álgebra monoidal y estructura enriquecida: Right_Unitor_Rho."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P340"
+  - id: 50
+    code: P050_D4_Symmetric_Monoidal_Braiding_Swap
+    domain_id: D4
+    type: MONOIDAL_ENRICHED
+    category: "Categorías Enriquecidas (V-Categories, V-Functors)"
+    description: "Primitiva de álgebra monoidal y estructura enriquecida: Symmetric_Monoidal_Braiding_Swap."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P341"
+  - id: 51
+    code: P051_D4_Braided_Monoidal_Hexagon_Coherence
+    domain_id: D4
+    type: MONOIDAL_ENRICHED
+    category: "Estricteificación y Teorema de Coherencia de Mac Lane"
+    description: "Primitiva de álgebra monoidal y estructura enriquecida: Braided_Monoidal_Hexagon_Coherence."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P342"
+  - id: 52
+    code: P052_D4_Closed_Monoidal_Internal_Hom_Currying
+    domain_id: D4
+    type: MONOIDAL_ENRICHED
+    category: "Hom-Sets y Categorías Locamente Pequeñas"
+    description: "Primitiva de álgebra monoidal y estructura enriquecida: Closed_Monoidal_Internal_Hom_Currying."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P343"
+  - id: 53
+    code: P053_D4_Compact_Closed_Dual_Object_Evaluation
+    domain_id: D4
+    type: MONOIDAL_ENRICHED
+    category: "Categorías Monoidales Simétricas y Trenzadas (Braiding σ)"
+    description: "Primitiva de álgebra monoidal y estructura enriquecida: Compact_Closed_Dual_Object_Evaluation."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P344"
+  - id: 54
+    code: P054_D4_Rigid_Monoidal_Coevaluation_Arrow
+    domain_id: D4
+    type: MONOIDAL_ENRICHED
+    category: "Categorías Monoidales Cerradas (Hom Interno [-,-])"
+    description: "Primitiva de álgebra monoidal y estructura enriquecida: Rigid_Monoidal_Coevaluation_Arrow."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P345"
+  - id: 55
+    code: P055_D4_Enriched_V_Category_Hom_Objects
+    domain_id: D4
+    type: MONOIDAL_ENRICHED
+    category: "Hom-Sets y Categorías Locamente Pequeñas"
+    description: "Primitiva de álgebra monoidal y estructura enriquecida: Enriched_V_Category_Hom_Objects."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P346"
+  - id: 56
+    code: P056_D4_Mac_Lane_Pentagon_Coherence_Theorem
+    domain_id: D4
+    type: MONOIDAL_ENRICHED
+    category: "Categorías Enriquecidas (V-Categories, V-Functors)"
+    description: "Primitiva de álgebra monoidal y estructura enriquecida: Mac_Lane_Pentagon_Coherence_Theorem."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P347"
+  - id: 57
+    code: P057_D4_Strictification_Monoidal_Equivalence
+    domain_id: D4
+    type: MONOIDAL_ENRICHED
+    category: "Estricteificación y Teorema de Coherencia de Mac Lane"
+    description: "Primitiva de álgebra monoidal y estructura enriquecida: Strictification_Monoidal_Equivalence."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P348"
+  - id: 58
+    code: P058_D5_Subobject_Classifier_Omega_Truth_Arrow
+    domain_id: D5
+    type: CATEGORICAL_LOGIC_TOPOS
+    category: "Objetos Nucleares (Inicial, Final, Cero, Subobjetos, Cocientes)"
+    description: "Primitiva de lógica categórica, tópoi y cuantificación fibrada: Subobject_Classifier_Omega_Truth_Arrow."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P449"
+  - id: 59
+    code: P059_D5_Mitchell_Benabou_Internal_Logic
+    domain_id: D5
+    type: CATEGORICAL_LOGIC_TOPOS
+    category: "Álgebras de Heyting Internas y Negación No-Clásica"
+    description: "Primitiva de lógica categórica, tópoi y cuantificación fibrada: Mitchell_Benabou_Internal_Logic."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P450"
+  - id: 60
+    code: P060_D5_Heyting_Algebra_Internal_Implication
+    domain_id: D5
+    type: CATEGORICAL_LOGIC_TOPOS
+    category: "Topologías de Lawvere-Tierney y Haces (Sheaves)"
+    description: "Primitiva de lógica categórica, tópoi y cuantificación fibrada: Heyting_Algebra_Internal_Implication."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P451"
+  - id: 61
+    code: P061_D5_Lawvere_Tierney_Topology_Operator
+    domain_id: D5
+    type: CATEGORICAL_LOGIC_TOPOS
+    category: "Morfismos Geométricos (Flat Pullback, Direct Image)"
+    description: "Primitiva de lógica categórica, tópoi y cuantificación fibrada: Lawvere_Tierney_Topology_Operator."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P452"
+  - id: 62
+    code: P062_D5_Sheafification_Modal_Operator
+    domain_id: D5
+    type: CATEGORICAL_LOGIC_TOPOS
+    category: "Hiperdoctrinas de Lawvere e Cuantificadores Categóricos (∃ ⊣ f* ⊣ ∀)"
+    description: "Primitiva de lógica categórica, tópoi y cuantificación fibrada: Sheafification_Modal_Operator."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P453"
+  - id: 63
+    code: P063_D5_Geometric_Morphism_Inverse_Image
+    domain_id: D5
+    type: CATEGORICAL_LOGIC_TOPOS
+    category: "Condición de Beck-Chevalley y Preservación Fibrada"
+    description: "Primitiva de lógica categórica, tópoi y cuantificación fibrada: Geometric_Morphism_Inverse_Image."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P454"
+  - id: 64
+    code: P064_D5_Hyperdoctrine_Existential_Quantifier_Left_Adjoint
+    domain_id: D5
+    type: CATEGORICAL_LOGIC_TOPOS
+    category: "Clasificador de Subobjetos Ω y Lógica Interna de Mitchell-Bénabou"
+    description: "Primitiva de lógica categórica, tópoi y cuantificación fibrada: Hyperdoctrine_Existential_Quantifier_Left_Adjoint."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P455"
+  - id: 65
+    code: P065_D5_Hyperdoctrine_Universal_Quantifier_Right_Adjoint
+    domain_id: D5
+    type: CATEGORICAL_LOGIC_TOPOS
+    category: "Álgebras de Heyting Internas y Negación No-Clásica"
+    description: "Primitiva de lógica categórica, tópoi y cuantificación fibrada: Hyperdoctrine_Universal_Quantifier_Right_Adjoint."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P456"
+  - id: 66
+    code: P066_D5_Beck_Chevalley_Condition_Square_Preservation
+    domain_id: D5
+    type: CATEGORICAL_LOGIC_TOPOS
+    category: "Topologías de Lawvere-Tierney y Haces (Sheaves)"
+    description: "Primitiva de lógica categórica, tópoi y cuantificación fibrada: Beck_Chevalley_Condition_Square_Preservation."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P457"
+  - id: 67
+    code: P067_D5_Fibered_Predicate_Monoidal_Preservation
+    domain_id: D5
+    type: CATEGORICAL_LOGIC_TOPOS
+    category: "Morfismos Geométricos (Flat Pullback, Direct Image)"
+    description: "Primitiva de lógica categórica, tópoi y cuantificación fibrada: Fibered_Predicate_Monoidal_Preservation."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P458"
+  - id: 68
+    code: P068_D5_Internal_Naturals_Object_NNO
+    domain_id: D5
+    type: CATEGORICAL_LOGIC_TOPOS
+    category: "Hiperdoctrinas de Lawvere e Cuantificadores Categóricos (∃ ⊣ f* ⊣ ∀)"
+    description: "Primitiva de lógica categórica, tópoi y cuantificación fibrada: Internal_Naturals_Object_NNO."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P459"
+  - id: 69
+    code: P069_D5_Power_Object_Exponential
+    domain_id: D5
+    type: CATEGORICAL_LOGIC_TOPOS
+    category: "Condición de Beck-Chevalley y Preservación Fibrada"
+    description: "Primitiva de lógica categórica, tópoi y cuantificación fibrada: Power_Object_Exponential."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P460"
+  - id: 70
+    code: P070_D6_Limit_Colimit_Non_Commutativity_Collision
+    domain_id: D6
+    type: COLLISION_OBSTRUCTION
+    category: ""
+    description: "Primitiva de colisión diagramática y obstrucción no-conmutativa: Limit_Colimit_Non_Commutativity_Collision."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P561"
+    cf_gkat_guard: "CheckGuard(P070_D6_Limit_Colimit_Non_Commutativity_Collision_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 71
+    code: P071_D6_Monoidal_Pentagon_Breakage_Obstruction
+    domain_id: D6
+    type: COLLISION_OBSTRUCTION
+    category: "Obstrucción Monoidal (Fail-Pentagon, Non-Trivial Associator Barrier)"
+    description: "Primitiva de colisión diagramática y obstrucción no-conmutativa: Monoidal_Pentagon_Breakage_Obstruction."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P562"
+    cf_gkat_guard: "CheckGuard(P071_D6_Monoidal_Pentagon_Breakage_Obstruction_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 72
+    code: P072_D6_Fiber_Phase_Mismatch_Collision
+    domain_id: D6
+    type: COLLISION_OBSTRUCTION
+    category: "Colisión de Fase Fibrada (Fiber Mismatch)"
+    description: "Primitiva de colisión diagramática y obstrucción no-conmutativa: Fiber_Phase_Mismatch_Collision."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P563"
+    cf_gkat_guard: "CheckGuard(P072_D6_Fiber_Phase_Mismatch_Collision_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 73
+    code: P073_D6_Non_Distributive_Monad_Composition_Collision
+    domain_id: D6
+    type: COLLISION_OBSTRUCTION
+    category: "Colisiones Monádicas (Non-Distributive Monad Composition)"
+    description: "Primitiva de colisión diagramática y obstrucción no-conmutativa: Non_Distributive_Monad_Composition_Collision."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P564"
+    cf_gkat_guard: "CheckGuard(P073_D6_Non_Distributive_Monad_Composition_Collision_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 74
+    code: P074_D6_Non_Exact_Functor_Singularity_Collision
+    domain_id: D6
+    type: COLLISION_OBSTRUCTION
+    category: "Colisión de Incompletitud / Singularidad en Exactitud (Non-Exact Functors)"
+    description: "Primitiva de colisión diagramática y obstrucción no-conmutativa: Non_Exact_Functor_Singularity_Collision."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P565"
+    cf_gkat_guard: "CheckGuard(P074_D6_Non_Exact_Functor_Singularity_Collision_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 75
+    code: P075_D6_Braiding_Twist_Interruption_Collision
+    domain_id: D6
+    type: COLLISION_OBSTRUCTION
+    category: "Interrupción de Coherencia de Braiding / Twist"
+    description: "Primitiva de colisión diagramática y obstrucción no-conmutativa: Braiding_Twist_Interruption_Collision."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P566"
+    cf_gkat_guard: "CheckGuard(P075_D6_Braiding_Twist_Interruption_Collision_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 76
+    code: P076_D6_Adjunction_Unbalance_Kernel_Collision
+    domain_id: D6
+    type: COLLISION_OBSTRUCTION
+    category: ""
+    description: "Primitiva de colisión diagramática y obstrucción no-conmutativa: Adjunction_Unbalance_Kernel_Collision."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P567"
+    cf_gkat_guard: "CheckGuard(P076_D6_Adjunction_Unbalance_Kernel_Collision_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 77
+    code: P077_D6_Subobject_Classifier_Degradation_Collision
+    domain_id: D6
+    type: COLLISION_OBSTRUCTION
+    category: "Objetos Nucleares (Inicial, Final, Cero, Subobjetos, Cocientes)"
+    description: "Primitiva de colisión diagramática y obstrucción no-conmutativa: Subobject_Classifier_Degradation_Collision."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P568"
+    cf_gkat_guard: "CheckGuard(P077_D6_Subobject_Classifier_Degradation_Collision_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 78
+    code: P078_D6_Kan_Extension_Divergence_Collision
+    domain_id: D6
+    type: COLLISION_OBSTRUCTION
+    category: "Colisión de Fase Fibrada (Fiber Mismatch)"
+    description: "Primitiva de colisión diagramática y obstrucción no-conmutativa: Kan_Extension_Divergence_Collision."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P569"
+    cf_gkat_guard: "CheckGuard(P078_D6_Kan_Extension_Divergence_Collision_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 79
+    code: P079_D6_Beck_Chevalley_Violation_Collision
+    domain_id: D6
+    type: COLLISION_OBSTRUCTION
+    category: "Colisiones Monádicas (Non-Distributive Monad Composition)"
+    description: "Primitiva de colisión diagramática y obstrucción no-conmutativa: Beck_Chevalley_Violation_Collision."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P570"
+    cf_gkat_guard: "CheckGuard(P079_D6_Beck_Chevalley_Violation_Collision_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 80
+    code: P080_D7_False_Isomorphism_Equivalence_Confusio
+    domain_id: D7
+    type: ANTIPATTERNS
+    category: "Morfismos y Dualidad (Monomorfismos, Epimorfismos, Isomorfismos, Endomorfismos, Automorfismos, Retracciones, Secciones)"
+    description: "Antipatrón categórico y falla estructural de tipado: False_Isomorphism_Equivalence_Confusio."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P673"
+    cf_gkat_guard: "CheckGuard(P080_D7_False_Isomorphism_Equivalence_Confusio_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 81
+    code: P081_D7_Strictness_Illusion_Antipattern
+    domain_id: D7
+    type: ANTIPATTERNS
+    category: "Sesgo de Estricteificación Ciega (Strictness Illusion)"
+    description: "Antipatrón categórico y falla estructural de tipado: Strictness_Illusion_Antipattern."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P674"
+    cf_gkat_guard: "CheckGuard(P081_D7_Strictness_Illusion_Antipattern_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 82
+    code: P082_D7_Unbalanced_Adjunction_Phantom_Unit
+    domain_id: D7
+    type: ANTIPATTERNS
+    category: "Falsa Adjunción Sin Unidad/Counidad Válida"
+    description: "Antipatrón categórico y falla estructural de tipado: Unbalanced_Adjunction_Phantom_Unit."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P675"
+    cf_gkat_guard: "CheckGuard(P082_D7_Unbalanced_Adjunction_Phantom_Unit_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 83
+    code: P083_D7_Subobject_Lawvere_Nullification_Antipattern
+    domain_id: D7
+    type: ANTIPATTERNS
+    category: "Objetos Nucleares (Inicial, Final, Cero, Subobjetos, Cocientes)"
+    description: "Antipatrón categórico y falla estructural de tipado: Subobject_Lawvere_Nullification_Antipattern."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P676"
+    cf_gkat_guard: "CheckGuard(P083_D7_Subobject_Lawvere_Nullification_Antipattern_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 84
+    code: P084_D7_Fibered_Left_Adjoint_Degradation_Antipattern
+    domain_id: D7
+    type: ANTIPATTERNS
+    category: "Degradación Fibrada (Pérdida de Adjunto Izquierdo ∃_α)"
+    description: "Antipatrón categórico y falla estructural de tipado: Fibered_Left_Adjoint_Degradation_Antipattern."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P677"
+    cf_gkat_guard: "CheckGuard(P084_D7_Fibered_Left_Adjoint_Degradation_Antipattern_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 85
+    code: P085_D7_Zero_Object_Monoidal_Annihilation_Antipattern
+    domain_id: D7
+    type: ANTIPATTERNS
+    category: "Objetos Nucleares (Inicial, Final, Cero, Subobjetos, Cocientes)"
+    description: "Antipatrón categórico y falla estructural de tipado: Zero_Object_Monoidal_Annihilation_Antipattern."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P678"
+    cf_gkat_guard: "CheckGuard(P085_D7_Zero_Object_Monoidal_Annihilation_Antipattern_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 86
+    code: P086_D7_Pseudo_Monad_Associativity_Disruption_Antipattern
+    domain_id: D7
+    type: ANTIPATTERNS
+    category: "Pseudo-Mónada Sin Coherencia Associativa"
+    description: "Antipatrón categórico y falla estructural de tipado: Pseudo_Monad_Associativity_Disruption_Antipattern."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P679"
+    cf_gkat_guard: "CheckGuard(P086_D7_Pseudo_Monad_Associativity_Disruption_Antipattern_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 87
+    code: P087_D7_Type_Level_Erasure_Antipattern
+    domain_id: D7
+    type: ANTIPATTERNS
+    category: "Falso Isomorfismo (Confundir Equivalencia con Identidad)"
+    description: "Antipatrón categórico y falla estructural de tipado: Type_Level_Erasure_Antipattern."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P680"
+    cf_gkat_guard: "CheckGuard(P087_D7_Type_Level_Erasure_Antipattern_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 88
+    code: P088_D7_Cartesian_Closed_Currying_Leak_Antipattern
+    domain_id: D7
+    type: ANTIPATTERNS
+    category: "Sesgo de Estricteificación Ciega (Strictness Illusion)"
+    description: "Antipatrón categórico y falla estructural de tipado: Cartesian_Closed_Currying_Leak_Antipattern."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P681"
+    cf_gkat_guard: "CheckGuard(P088_D7_Cartesian_Closed_Currying_Leak_Antipattern_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 89
+    code: P089_D7_Yoneda_Lemma_Dimensional_Collapse_Antipattern
+    domain_id: D7
+    type: ANTIPATTERNS
+    category: "Falsa Adjunción Sin Unidad/Counidad Válida"
+    description: "Antipatrón categórico y falla estructural de tipado: Yoneda_Lemma_Dimensional_Collapse_Antipattern."
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P682"
+    cf_gkat_guard: "CheckGuard(P089_D7_Yoneda_Lemma_Dimensional_Collapse_Antipattern_Decidable_Halt)"
+    ring0_memory_map: "Offset: 0x2A | Size: 1 byte | Align: 64 | Atomic: CAS"
+  - id: 90
+    code: P090_D8_Grothendieck_Fibration_Cartesian_Lift
+    domain_id: D8
+    type: FIBERED_COMPATIBILITY_METRICS
+    category: "Fibraciones de Grothendieck y Cartesian Morphisms"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P785"
+  - id: 91
+    code: P091_D8_Display_Map_Context_Extension
+    domain_id: D8
+    type: FIBERED_COMPATIBILITY_METRICS
+    category: "Display Maps y Contextos Tipados Fibrados"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P786"
+  - id: 92
+    code: P092_D8_Certificate_Functor_Cert_ArrC_Set
+    domain_id: D8
+    type: FIBERED_COMPATIBILITY_METRICS
+    category: "Funtor de Certificados Cert: Arr(C) -> Set"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P787"
+  - id: 93
+    code: P093_D8_Primitive_Morphism_Cost_Mu
+    domain_id: D8
+    type: FIBERED_COMPATIBILITY_METRICS
+    category: "Métrica Primitiva Morfismo-Nivel μ(α) y Modelo-Nivel μ(M)"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P788"
+  - id: 94
+    code: P094_D8_Model_Level_Cost_Mu_M
+    domain_id: D8
+    type: FIBERED_COMPATIBILITY_METRICS
+    category: "Coste Derivado de Extensión Fibrada Conservativa κ(M)"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P789"
+  - id: 95
+    code: P095_D8_Conservative_Fibered_Extension_Cost_Kappa
+    domain_id: D8
+    type: FIBERED_COMPATIBILITY_METRICS
+    category: "Métrica de Fricción Síncrona Δ_overhead(α, β)"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P790"
+  - id: 96
+    code: P096_D8_Synchronous_Friction_Overhead_Delta
+    domain_id: D8
+    type: FIBERED_COMPATIBILITY_METRICS
+    category: "Complejo Simplicial Compat(Ω) y Caras de Invariantes (F, I, S, R_k)"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P791"
+  - id: 97
+    code: P097_D8_Simplicial_Compatibility_Complex_Compat_Omega
+    domain_id: D8
+    type: FIBERED_COMPATIBILITY_METRICS
+    category: "Fibraciones de Grothendieck y Cartesian Morphisms"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P792"
+  - id: 98
+    code: P098_D8_Fibered_Property_F_Left_Adjoint
+    domain_id: D8
+    type: FIBERED_COMPATIBILITY_METRICS
+    category: "Display Maps y Contextos Tipados Fibrados"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P793"
+  - id: 99
+    code: P099_D8_Monoidal_Invariant_Property_I_Fibered
+    domain_id: D8
+    type: FIBERED_COMPATIBILITY_METRICS
+    category: "Funtor de Certificados Cert: Arr(C) -> Set"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P794"
+  - id: 100
+    code: P100_D8_Synchronous_Property_S_Box_t_Preservation
+    domain_id: D8
+    type: FIBERED_COMPATIBILITY_METRICS
+    category: "Métrica Primitiva Morfismo-Nivel μ(α) y Modelo-Nivel μ(M)"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P795"
+  - id: 101
+    code: P101_D8_Proof_Theoretic_Certificate_Validation
+    domain_id: D8
+    type: FIBERED_COMPATIBILITY_METRICS
+    category: "Coste Derivado de Extensión Fibrada Conservativa κ(M)"
+    description: ""
+    formal_proof_invariant: "Validación C5-REAL en Mod(Σ, T) para P796"
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::OntologyInvariantViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert zero unexpected mutations under strict C5-REAL verification"

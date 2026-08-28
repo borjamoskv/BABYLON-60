@@ -1,0 +1,56 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+dac_version: "2.0-Hybrid"
+project: "Teorema-Robinson-Moskv"
+domain: "ORCHESTRATION_ASYMMETRY"
+platform_targets: ["Swarm_Orchestrator", "Verification_Pipeline"]
+memory_models: ["Pipeline_Topology", "Barrier_Topology"]
+abi: ["Async_Flow", "Active_Falsification"]
+
+Claim: "Orchestration must default to asynchronous Pipelines to maximize exergy, restricting Barriers only to explicit cross-deduplication limits. Furthermore, neutral verification is prohibited; trust demands Adversarial Epistemic Cleansing."
+Proof:
+  Base: "09_ORCHESTRATION_AND_EPISTEMIC_INVARIANTS.md"
+  Range: "[Latency Anergy, Adversarial Refutation]"
+  Confidence: "C5-REAL"
+
+Isomorphisms:
+  - '"Unnecessary Barrier" -> "Latency Anergy (C4-SIM Fallacy)"'
+  - '"Neutral Verification" -> "Stochastic Contamination (Failure to siege hypothesis)"'
+
+Blast_Radius_Matrix:
+  Vector: "Forzado de topologías Pipeline y destrucción de hipótesis en L2 si fallan el asedio adversarial."
+  Blast_Radius: "Swarm Scheduler y L2 Epistemic Memory."
+  Target_Invariant: "Orchestration Asymmetry (Ω185) & Epistemic Cleansing (Ω186)"
+  Anergy_Risk: "High (El exceso de sincronización asfixia al enjambre. La confianza ciega contamina el Ledger)."
+
+axioms:
+  - id: AX-ORCH-185
+    domain: Topology_Routing
+    statement: "Si el estado global no exige deduplicación cruzada, el planificador DEBE enrutar vía Pipeline continuo O(max(t_i)), no Barrier."
+    dependencies: []
+    refutation:
+      type: runtime_monitor
+      expression: "check_barrier_necessity() == FALSE implies topology == PIPELINE"
+      location: "swarm_scheduler"
+  - id: AX-ORCH-186
+    domain: Epistemic_Cleansing
+    statement: "Toda hipótesis crítica debe someterse a Falsificación Activa Adversarial. Si es refutada, se aniquila en memoria volátil protegiendo el disco."
+    dependencies: []
+    refutation:
+      type: adversarial_test
+      expression: "adversarial_agent_refute(claim) == PASS implies seal_claim()"
+      location: "epistemic_L2"
+
+theorem:
+  statement: "El sistema orquestal elimina el atasco termodinámico mediante pipelines y protege su verdad ontológica mediante asedios adversariales obligatorios."
+
+CORTEX_TAINT: taint:moskv-1:orchestr:v2w3x4y5z6a7b8:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

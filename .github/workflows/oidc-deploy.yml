@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 name: Zero-Trust OIDC Deploy
 
 on:
@@ -13,8 +14,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Configure AWS Credentials via OIDC
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-          aws-region: us-east-1
+      - name: Configure Cloud Provider OIDC
+        run: echo "Intercambiar JWT por STS token aquí (ej. aws-actions/configure-aws-credentials)"

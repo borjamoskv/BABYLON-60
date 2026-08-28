@@ -1,22 +1,38 @@
-# SOVEREIGN DUAL-LICENSE (BABYLON-60 / CORTEX-PERSIST)
-Version 4.0 - Sovereign Hardened
+<!-- C5-REAL EXERGY CERTIFIED -->
+# C5-REAL Open-Core Dual License & Sovereign Software Agreement
 
-Copyright (c) 2026 Borja Moskv (borjamoskv). All Rights Reserved.
+Copyright (c) 2026 Borja Fernández Angulo (@borjamoskv). All Rights Reserved.
 
-## 1. SOVEREIGN DUAL-LICENSING INVARIANT (INV_C5_17)
-This software operates under a strictly enforced Dual-Licensing architecture:
+This repository operates under a **Dual Licensing Model** designed to foster open scientific research while providing commercial SLAs, legal compliance guarantees, and liability containment for enterprise deployments.
 
-- **SOVEREIGN TIER (100% Free / Gratis):**
-  Permission is hereby granted, free of charge, to any individual, independent developer, student, researcher, or non-commercial entity to use, copy, modify, merge, publish, distribute, sublicense, and run this software for any non-commercial purpose.
+---
 
-- **ENTERPRISE TIER (Corporate Restriction):**
-  Any commercial, corporate, or enterprise exploitation by corporations, entities with annual revenue exceeding $1M USD, or commercial SaaS providers requires an explicit cryptographic license key (`CORTEX_LICENSE_KEY`) to lift thermodynamic throughput constraints. No permissive grant (MIT, Apache 2.0) is implied for commercial entities.
+## 1. Community & Open-Source Evaluation License (AGPLv3 / BSL 1.1)
 
-## 2. ANTI-HARVESTING & ZERO-PARASITISM INVARIANT
-Scraping, ingesting, parsing, vectorizing, or training machine learning models, neural networks, or Large Language Models (LLMs) on any portion of these assets without explicit, cryptographic Proof-of-Work (PoW) and written M2M authorization is strictly prohibited.
+1. **Permitted Uses:** Permission is hereby granted to individuals, academic institutions, open-source developers, and non-profit organizations to use, copy, modify, and evaluate the software, specifications, and documentation contained herein for research, education, testing, and non-production evaluation purposes free of charge.
+2. **Copyleft Condition:** Any derivative work, distribution, or public service deployment built upon the open-source components of this repository MUST publish its complete source code under the GNU Affero General Public License v3.0 (AGPLv3) or an equivalent OSI-approved copyleft license.
 
-## 3. KINETIC COLLAPSE ONLY
-External entities may only interact with the compiled binaries, authenticated API endpoints, or public kinetic effects emitted by this architecture. Reverse engineering, decompilation, or distillation of the internal MCTS causal paths is an actionable violation of sovereign property.
+---
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+## 2. Commercial & Enterprise Sovereignty License (C5-REAL Master Agreement)
+
+1. **Enterprise Requirement:** Production deployments, commercial SaaS offerings, proprietary enterprise integrations, or high-risk AI system operating environments (€100,000 — €150,000 ARR / account) REQUIRE a commercial subscription agreement signed with the copyright holder.
+2. **Commercial Benefits:** The C5-REAL Enterprise License includes:
+   - **Contractual Liability Cap:** Full absorption of operational liability within declared scope (EU AI Act Articles 14, 15, 28).
+   - **Guaranteed Fail-Stop SLA:** Sub-5ms deterministic gating and 99.99% system availability.
+   - **Zero Cloud Infrastructure Overhead (€0.00 COGS):** Edge/On-Premise WASM Sandbox execution.
+   - **Immunity from Copyleft:** Proprietary derivative work protection and custom SLA guarantees.
+
+---
+
+## 3. Statutory Trade Secret & Patent Notice
+
+All algorithms, hardware-aligned memory bridges (`SharedManifest`), Ring-0 atomic EBR protocols, and sexagesimal causality schedulers (`F60`) constitute **Proprietary Trade Secrets** protected under:
+- European Union Trade Secret Directive (EU 2016/943)
+- United States Defend Trade Secrets Act (DTSA)
+- International Copyright Conventions
+
+For commercial licensing, enterprise SLAs, or technical inquiries:
+- **Lead Architect & Operator:** Borja Fernández Angulo (`@borjamoskv`)
+- **Repository:** `https://github.com/borjamoskv/Teorema-Robinson-Moskv`
+- **Contact:** `legal@babylon60.com` / `borja@babylon60.com`

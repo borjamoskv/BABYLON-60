@@ -1,0 +1,11 @@
+# C5-REAL EXERGY CERTIFIED
+[package]
+name = "rust_core"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+libc = "0.2"

@@ -1,0 +1,130 @@
+{
+  "metadata": {
+    "model_target": "KIMI-k3-Residual-Stream",
+    "layer_source": 24,
+    "dimension": 100,
+    "max_possible_entropy": 4.605170185988092
+  },
+  "datapoints": [
+    {
+      "temperature": 0.1,
+      "shannon_entropy": 8.67937431583763e-20,
+      "exergy_reduction": 4.605170185988092,
+      "top_token_probability": 1.0
+    },
+    {
+      "temperature": 0.2,
+      "shannon_entropy": 3.249779057813701e-09,
+      "exergy_reduction": 4.605170182738313,
+      "top_token_probability": 0.9999999998750084
+    },
+    {
+      "temperature": 0.3,
+      "shannon_entropy": 9.186876581529609e-06,
+      "exergy_reduction": 4.6051609991115106,
+      "top_token_probability": 0.9999994799944818
+    },
+    {
+      "temperature": 0.4,
+      "shannon_entropy": 0.0004531315549072959,
+      "exergy_reduction": 4.604717054433184,
+      "top_token_probability": 0.9999664460202773
+    },
+    {
+      "temperature": 0.5,
+      "shannon_entropy": 0.004518867737590155,
+      "exergy_reduction": 4.6006513182505016,
+      "top_token_probability": 0.999590197940538
+    },
+    {
+      "temperature": 0.6,
+      "shannon_entropy": 0.020588826372127337,
+      "exergy_reduction": 4.584581359615965,
+      "top_token_probability": 0.9978139328627688
+    },
+    {
+      "temperature": 0.7,
+      "shannon_entropy": 0.06076387413373397,
+      "exergy_reduction": 4.544406311854358,
+      "top_token_probability": 0.9927045327612704
+    },
+    {
+      "temperature": 0.8,
+      "shannon_entropy": 0.1379159624009776,
+      "exergy_reduction": 4.467254223587114,
+      "top_token_probability": 0.9817929019575364
+    },
+    {
+      "temperature": 0.9,
+      "shannon_entropy": 0.26353534565341546,
+      "exergy_reduction": 4.3416348403346765,
+      "top_token_probability": 0.9625757526673603
+    },
+    {
+      "temperature": 1.0,
+      "shannon_entropy": 0.44547063055300457,
+      "exergy_reduction": 4.159699555435087,
+      "top_token_probability": 0.9330548055861125
+    },
+    {
+      "temperature": 1.1,
+      "shannon_entropy": 0.6852253575892081,
+      "exergy_reduction": 3.919944828398884,
+      "top_token_probability": 0.8922911090688036
+    },
+    {
+      "temperature": 1.2,
+      "shannon_entropy": 0.9761302910572375,
+      "exergy_reduction": 3.6290398949308544,
+      "top_token_probability": 0.8408220619834552
+    },
+    {
+      "temperature": 1.3,
+      "shannon_entropy": 1.3038894922431217,
+      "exergy_reduction": 3.30128069374497,
+      "top_token_probability": 0.7807088621822444
+    },
+    {
+      "temperature": 1.4,
+      "shannon_entropy": 1.64967302119463,
+      "exergy_reduction": 2.955497164793462,
+      "top_token_probability": 0.7151188399399943
+    },
+    {
+      "temperature": 1.5,
+      "shannon_entropy": 1.994389369544392,
+      "exergy_reduction": 2.6107808164437,
+      "top_token_probability": 0.647603953822929
+    },
+    {
+      "temperature": 1.6,
+      "shannon_entropy": 2.322284081909549,
+      "exergy_reduction": 2.2828861040785426,
+      "top_token_probability": 0.5813875457875016
+    },
+    {
+      "temperature": 1.7,
+      "shannon_entropy": 2.6227516075931523,
+      "exergy_reduction": 1.9824185783949395,
+      "top_token_probability": 0.5189074351951141
+    },
+    {
+      "temperature": 1.8,
+      "shannon_entropy": 2.8903728412825074,
+      "exergy_reduction": 1.7147973447055844,
+      "top_token_probability": 0.46167967597326987
+    },
+    {
+      "temperature": 1.9,
+      "shannon_entropy": 3.1238689950442238,
+      "exergy_reduction": 1.481301190943868,
+      "top_token_probability": 0.41039979459533016
+    },
+    {
+      "temperature": 2.0,
+      "shannon_entropy": 3.3247218813531205,
+      "exergy_reduction": 1.2804483046349713,
+      "top_token_probability": 0.36515345327001925
+    }
+  ]
+}

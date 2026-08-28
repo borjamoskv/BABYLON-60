@@ -1,0 +1,561 @@
+/* C5-REAL EXERGY CERTIFIED */
+/* ═══════════════════════════════════════════════════════════
+   AGENTS.archi — Architect's Swarm Styles
+   Industrial Noir 2026 — #0A0A0A / #2B3BE5
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Section ── */
+.section-swarm {
+  background: linear-gradient(180deg, #0A0A0A 0%, #0d0d14 50%, #0A0A0A 100%);
+  position: relative;
+  overflow: hidden;
+  transition: background 1s ease;
+}
+
+.section-swarm::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 20%, var(--stress-glow, rgba(43,59,229,0.04)) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 80% 80%, var(--stress-glow, rgba(43,59,229,0.03)) 0%, transparent 70%);
+  pointer-events: none;
+  transition: background 1s ease;
+}
+
+/* ── Swarm Header Addon ── */
+.swarm-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.swarm-count {
+  font-family: 'JetBrains Mono', 'SF Mono', monospace;
+  font-size: 0.8rem;
+  color: #2B3BE5;
+  background: rgba(43,59,229,0.08);
+  border: 1px solid rgba(43,59,229,0.15);
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+}
+
+/* ── Swarm Dashboard ── */
+.swarm-dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.swarm-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.section-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.dash-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dash-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.15em;
+}
+
+.dash-value {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.dash-value small {
+  font-size: 0.8rem;
+  color: #2B3BE5;
+  margin-left: 0.25rem;
+}
+
+.dash-progress {
+  height: 4px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 0.25rem;
+}
+
+.dash-bar {
+  height: 100%;
+  background: var(--blue-glow);
+  box-shadow: 0 0 10px var(--blue-glow);
+  transition: width 0.3s ease;
+}
+
+.dash-bar.bar-danger {
+  background: #e53e3e;
+  box-shadow: 0 0 10px rgba(229, 62, 62, 0.5);
+}
+
+.btn-swarm-opt {
+  margin-top: 0.5rem;
+  background: rgba(43,59,229,0.15);
+  border: 1px solid rgba(43,59,229,0.3);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.btn-swarm-opt:hover {
+  background: #2B3BE5;
+  box-shadow: 0 0 15px rgba(43,59,229,0.4);
+}
+
+.btn-swarm-opt:active {
+  transform: scale(0.95);
+}
+
+/* ── Filters ── */
+.swarm-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+.swarm-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.5);
+  padding: 0.4rem 0.9rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  letter-spacing: 0.02em;
+}
+
+.swarm-filter-btn:hover {
+  background: rgba(43,59,229,0.08);
+  border-color: rgba(43,59,229,0.2);
+  color: rgba(255,255,255,0.8);
+}
+
+.swarm-filter-btn.filter-active {
+  background: rgba(43,59,229,0.12);
+  border-color: rgba(43,59,229,0.4);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(43,59,229,0.15);
+}
+
+/* ── Grid ── */
+.swarm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ── Card ── */
+.swarm-card {
+  position: relative;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 1.25rem;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.swarm-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.swarm-card.reveal { opacity: 0; transform: translateY(12px); }
+.swarm-card.revealed { opacity: 1; transform: translateY(0); }
+
+.swarm-card:hover {
+  border-color: rgba(43,59,229,0.3);
+  background: rgba(43,59,229,0.04);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(43,59,229,0.2);
+  transform: translateY(-4px);
+  cursor: pointer;
+}
+
+.swarm-card-stripe {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 2px;
+  opacity: 0.6;
+}
+
+/* ── Header ── */
+.swarm-card-header { margin-bottom: 1rem; }
+.swarm-name-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.2rem; }
+.swarm-name { font-weight: 600; font-size: 0.95rem; color: #fff; }
+.swarm-tier-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  margin-left: auto;
+  text-transform: uppercase;
+}
+.tier-apex { background: rgba(43,59,229,0.2); color: #667eea; border: 1px solid rgba(43,59,229,0.3); }
+.tier-commander { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6); }
+.tier-specialist { background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.4); }
+
+.swarm-role {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── Context Management & Ledger ── */
+.swarm-context-mgmt {
+  margin: 1rem 0;
+  padding: 0.85rem;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(43, 59, 229, 0.1);
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+}
+
+.swarm-context-mgmt::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.1) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.4;
+}
+
+.swarm-ctx-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+.ctx-label { font-size: 0.6rem; color: rgba(255, 255, 255, 0.35); }
+.ctx-status {
+  font-size: 0.55rem;
+  padding: 1px 4px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.ctx-status.status-synchronized { color: #38A169; text-shadow: 0 0 8px rgba(56, 161, 105, 0.4); }
+.ctx-status.status-overflow {
+  color: #ff3e3e;
+  text-shadow: 2px 0 0 rgba(255,0,0,0.5), -2px 0 0 rgba(0,255,255,0.5);
+  animation: criticalBlink 0.15s infinite;
+}
+.ctx-status.status-crystallizing {
+  color: #00f2ff;
+  text-shadow: 0 0 10px rgba(0, 242, 255, 0.6);
+  animation: cyanPulse 1.5s infinite;
+}
+.ctx-status.status-resolving {
+  color: #f0f;
+  text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+  animation: glitchText 0.4s infinite;
+}
+.ctx-status.status-scrubbing {
+  color: #D69E2E;
+  text-shadow: 0 0 8px rgba(214, 158, 46, 0.4);
+  animation: subtlePulse 2s infinite;
+}
+.ctx-status.status-optimizing {
+  color: #805AD5;
+  text-shadow: 0 0 8px rgba(128, 90, 213, 0.4);
+}
+
+.swarm-ctx-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 0.6rem;
+}
+
+.ctx-metric { display: flex; flex-direction: column; }
+.ctx-metric span:first-child { font-size: 0.55rem; color: rgba(255, 255, 255, 0.25); text-transform: uppercase; }
+.ctx-metric span:last-child { font-size: 0.75rem; color: #fff; font-weight: 600; }
+
+/* Resolution Progress */
+.swarm-resolution-container {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  margin: 8px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.swarm-resolution-bar {
+  height: 100%;
+  width: 0%;
+  background: #2B3BE5;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 8px #2B3BE5;
+  position: relative;
+  z-index: 1;
+}
+
+.swarm-resolution-glitch {
+  position: absolute;
+  top: 0; left: 0; height: 100%; width: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.resolving .swarm-resolution-glitch {
+  animation: barGlitch 0.2s infinite;
+  opacity: 1;
+}
+
+@keyframes barGlitch {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.swarm-ctx-log {
+  height: 48px;
+  overflow: hidden;
+  font-size: 0.52rem;
+  color: rgba(255, 255, 255, 0.4);
+  -webkit-mask-image: linear-gradient(to bottom, white 50%, transparent 100%);
+  mask-image: linear-gradient(to bottom, white 50%, transparent 100%);
+}
+
+.log-line {
+  margin-bottom: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Cognitive Halo & Effects */
+.swarm-card.resolving {
+  border-color: rgba(255, 0, 255, 0.3);
+  box-shadow: 0 0 35px rgba(255, 0, 255, 0.2);
+}
+
+.swarm-card.resolving::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 0, 255, 0.6),
+    #2B3BE5,
+    rgba(0, 242, 255, 0.6),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: flowGlow 1.5s linear infinite;
+  z-index: -1;
+  border-radius: 14px;
+}
+
+.swarm-card.scrubbing {
+  border-color: rgba(214, 158, 46, 0.3);
+  box-shadow: 0 0 15px rgba(214, 158, 46, 0.1);
+}
+
+.swarm-card.scrubbing::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 1px,
+    rgba(214, 158, 46, 0.03) 1px,
+    rgba(214, 158, 46, 0.03) 2px
+  );
+  pointer-events: none;
+  animation: scanlineH 1s linear infinite;
+}
+
+@keyframes scanlineH {
+  0% { background-position: 0 0; }
+  100% { background-position: 4px 0; }
+}
+
+.swarm-card.overflow {
+  animation: shake 0.4s infinite;
+  border-color: rgba(255, 62, 62, 0.6);
+  box-shadow: 0 0 40px rgba(255, 62, 62, 0.2);
+}
+
+.swarm-card.overflow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(255, 62, 62, 0.08) 1px,
+      rgba(255, 62, 62, 0.08) 2px
+    ),
+    radial-gradient(circle at center, transparent 30%, rgba(255, 62, 62, 0.05) 100%);
+  pointer-events: none;
+  z-index: 5;
+  animation: scanline 0.5s linear infinite;
+}
+
+@keyframes scanline {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 4px; }
+}
+
+.swarm-card.crystallizing::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  animation: flashFade 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  z-index: 10;
+  pointer-events: none;
+}
+
+@keyframes flowGlow {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes glitchText {
+  0% { transform: translate(0); }
+  20% { transform: translate(-1px, 1px); }
+  40% { transform: translate(-1px, -1px); opacity: 0.8; }
+  60% { transform: translate(1px, 1px); }
+  80% { transform: translate(1px, -1px); opacity: 0.9; }
+  100% { transform: translate(0); }
+}
+
+@keyframes criticalBlink {
+  0%, 100% { opacity: 1; filter: contrast(1.2); }
+  50% { opacity: 0.5; filter: contrast(2); }
+}
+
+@keyframes cyanPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+@keyframes flashFade {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes subtlePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-1px, 0.5px); }
+  50% { transform: translate(1px, -0.5px); }
+  75% { transform: translate(-0.5px, -1px); }
+}
+
+/* Footer */
+.swarm-card-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.swarm-status-dot { width: 6px; height: 6px; border-radius: 50%; }
+.status-active { background: #38A169; box-shadow: 0 0 5px #38A169; }
+.status-standby { background: #D69E2E; }
+.status-dormant { background: rgba(255, 255, 255, 0.1); }
+
+.swarm-status-text { font-size: 0.6rem; color: rgba(255, 255, 255, 0.3); text-transform: uppercase; }
+.swarm-pulse { margin-left: auto; font-size: 0.6rem; color: rgba(43, 59, 229, 0.6); }
+
+/* Ripple */
+.card-ripple {
+  position: absolute;
+  top: 50%; left: 50%; width: 10px; height: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: rippleEffect 0.6s ease-out;
+  pointer-events: none;
+}
+@keyframes rippleEffect { to { width: 300%; height: 300%; opacity: 0; } }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .swarm-dashboard { grid-template-columns: 1fr; }
+  .swarm-grid { grid-template-columns: 1fr; }
+}
+@media (min-width: 1200px) {
+  .swarm-grid { grid-template-columns: repeat(4, 1fr); }
+}

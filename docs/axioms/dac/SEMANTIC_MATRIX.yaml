@@ -1,0 +1,57 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+dac_version: "2.0-Hybrid"
+project: "Teorema-Robinson-Moskv"
+domain: "SYSTEMIC_SEMANTICS_MATRIX"
+platform_targets: ["AST", "Linter", "MCTS"]
+memory_models: ["Semantic_Black_Hole", "Exergy"]
+abi: ["Naming_Rules", "Syntax_Tree"]
+
+Claim: "Semantics is the mathematics of language. A name is not a label, but the collapse of a causal graph in memory. Guaranteeing S/N > 0.99 prevents code Alzheimer's and shields system exergy."
+Proof:
+  Base: "semantics/matrix.md"
+  Range: "[Primitives, Invariants, Antipatterns, Isomorphisms]"
+  Confidence: "C5-REAL"
+
+Isomorphisms:
+  - '"Event Past-Tense" -> "Immutable Ledger Append"'
+  - '"Pluralization (users)" -> "Memory Allocation Map O(N)"'
+  - '"Boolean Predicate (isLocked)" -> "Branching Instruction (if)"'
+
+Blast_Radius_Matrix:
+  Vector: "Rechazo de código con Weasel Words, Boolean Blindness y Smurf Naming."
+  Blast_Radius: "Semantic Linter, MCTS Agent Navigation."
+  Target_Invariant: "Golden Axiom (C5-REAL Systemic Semantics)"
+  Anergy_Risk: "Critical (El uso de palabras como Manager o Helper destruye la predicción causal)."
+
+axioms:
+  - id: AX-SEM-I007
+    domain: Weasel_Word_Ban
+    statement: "Ilegal el uso de Manager, Handler, Helper, Data, Info, System, Processor. Son agujeros negros de Anergía."
+    dependencies: []
+    refutation:
+      type: static_analysis
+      expression: "reject_identifier(REGEX(.*(Manager|Handler|Helper|Data|Info|System|Processor).*))"
+      location: "semantic_linter"
+  - id: AX-SEM-I001
+    domain: Truth_Isomorphism
+    statement: "El nombre debe describir matemáticamente y sin ambigüedad la mutación de estado. N = Comportamiento."
+    dependencies: []
+    refutation:
+      type: system_audit
+      expression: "AST_Mutation_Graph == Name_Causal_Vector"
+      location: "pre_commit_hook"
+
+theorem:
+  statement: "Si el espacio combinatorio PxIxAxISO se respeta, el árbol AST y el árbol semántico del LLM son idénticos, garantizando la Autopoiesis."
+
+CORTEX_TAINT: taint:moskv-1:semmatrix:a1b2c3d4e5f6g7h8:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

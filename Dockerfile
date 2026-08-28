@@ -1,62 +1,32 @@
-# Stage 1: Build environment
-FROM python:3.12-slim-bookworm AS builder
+# C5-REAL EXERGY CERTIFIED - SOVEREIGN CONTAINER IMAGE
+# Target: ghcr.io/borjamoskv/babylon-60
 
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    CARGO_HOME=/opt/cargo \
-    RUSTUP_HOME=/opt/rustup \
-    PATH="/opt/cargo/bin:$PATH"
+# Stage 1: Rust Bare-Metal C-ABI Builder
+FROM rust:1.85-slim as builder
 
-WORKDIR /app
+WORKDIR /build
+COPY src/06_apps/mcp_c5_abi_bridge/c5_abi_core.rs .
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    curl \
-    protobuf-compiler \
-    libprotobuf-dev \
-    clang \
-    libclang-dev \
-    && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
-    && curl -LsSf https://astral.sh/uv/install.sh | sh \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+RUN rustc --crate-type cdylib -C opt-level=3 -C lto=thin -C panic=abort c5_abi_core.rs -o libc5_abi_core.so
 
-ENV PATH="/root/.local/bin:$PATH"
+# Stage 2: Minimal Production Runtime
+FROM python:3.12-slim
 
-COPY pyproject.toml uv.lock ./
-COPY crates ./crates
-COPY packages ./packages
-COPY src ./src
-COPY experiments ./experiments
-COPY README.md LICENSE ./
-
-RUN uv sync --frozen --no-dev
-COPY . .
-
-# Stage 2: Minimal Runtime environment (Non-root user)
-FROM python:3.12-slim-bookworm AS runner
-
-LABEL org.opencontainers.image.title="BABYLON-60" \
-      org.opencontainers.image.description="CORTEX C5-REAL execution kernel (BABYLON-60): BFT ledgers, onco-transducer, exergy pipelines" \
-      org.opencontainers.image.url="https://github.com/borjamoskv/BABYLON-60" \
-      org.opencontainers.image.source="https://github.com/borjamoskv/BABYLON-60" \
-      org.opencontainers.image.vendor="Borja Moskv" \
-      org.opencontainers.image.licenses="Sovereign Dual-License (Non-Commercial / Enterprise)"
+LABEL org.opencontainers.image.title="BABYLON-60 Sovereign Container"
+LABEL org.opencontainers.image.description="C5-REAL High-Exergy Engine & MCP C-ABI Bridge"
+LABEL org.opencontainers.image.source="https://github.com/borjamoskv/BABYLON-60"
+LABEL org.opencontainers.image.licenses="MIT"
 
 WORKDIR /app
-RUN useradd -m -u 1000 appuser
 
-COPY --from=builder /app /app
-COPY --from=builder /root/.local /home/appuser/.local
+# Copy compiled C-ABI shared library and MCP server
+COPY --from=builder /build/libc5_abi_core.so /app/scratch/libc5_abi_core.so
+COPY src/06_apps/mcp_c5_abi_bridge/mcp_server.py /app/mcp_server.py
 
-ENV PATH="/home/appuser/.local/bin:/app/.venv/bin:$PATH" \
-    PYTHONUNBUFFERED=1 \
-    PYTHONPATH="/app/packages:/app/experiments:."
+RUN chmod +x /app/mcp_server.py
 
-USER appuser
+ENV PYTHONUNBUFFERED=1
 
-HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-    CMD python -c "import babylon60; print('BABYLON-60 OK')" || exit 1
+EXPOSE 8080
 
-ENTRYPOINT ["python", "-m", "babylon60.cli.onco_transducer"]
-CMD ["--help"]
+CMD ["python3", "/app/mcp_server.py"]

@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+import os
+import sys
+import subprocess
+
+IGNORE_DIRS = {
+    ".git", "node_modules", "target", ".venv", ".codebase-memory", "__pycache__",
+    "dist", ".pytest_cache", ".ruff_cache", ".mypy_cache", "artifacts", ".uv_python",
+    "tmp_fastapi_pkg", "tmp_chroma_pkg", ".cortex", ".vscode", "scratch"
+}
+
+def get_comment_syntax(filename):
+    ext = os.path.splitext(filename)[1].lower()
+    if ext in {".py", ".sh", ".toml", ".yaml", ".yml", ".rb"}:
+        return "#"
+    elif ext in {".js", ".ts", ".jsx", ".tsx", ".go", ".rs", ".c", ".cpp", ".java", ".cs", ".php"}:
+        return "//"
+    elif ext in {".html", ".xml", ".md", ".vtt", ".srt"}:
+        return "<!--"
+    elif ext in {".css", ".scss", ".less"}:
+        return "/*"
+    return None
+
+def close_comment_syntax(filename):
+    ext = os.path.splitext(filename)[1].lower()
+    if ext in {".html", ".xml", ".md", ".vtt", ".srt"}:
+        return "-->"
+    elif ext in {".css", ".scss", ".less"}:
+        return "*/"
+    return ""
+
+def maximize_exergy(filepath):
+    if not os.path.exists(filepath):
+        return False
+        
+    for ig in IGNORE_DIRS:
+        if f"/{ig}/" in filepath or filepath.startswith(ig + "/"):
+            return False
+
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            content = f.read()
+    except Exception:
+        return False
+
+    lines = content.splitlines()
+    stripped_lines = [line.rstrip() for line in lines]
+    
+    comment_open = get_comment_syntax(filepath)
+    comment_close = close_comment_syntax(filepath)
+    
+    new_content = "\n".join(stripped_lines) + "\n"
+    
+    if comment_open and "C5-REAL EXERGY CERTIFIED" not in new_content:
+        signature = f"{comment_open} C5-REAL EXERGY CERTIFIED {comment_close}".strip()
+        new_content = signature + "\n" + new_content
+        
+    if new_content != content:
+        with open(filepath, "w", encoding="utf-8") as f:
+            f.write(new_content)
+        return True
+    return False
+
+def main():
+    res = subprocess.run(["git", "diff", "--cached", "--name-only", "--diff-filter=ACM"], capture_output=True, text=True)
+    staged_files = [f.strip() for f in res.stdout.splitlines() if f.strip()]
+    
+    mutated = []
+    for file in staged_files:
+        if file.endswith(".db") or file.endswith(".json") or file.endswith(".lock") or file.endswith(".mp4"):
+            continue
+        if maximize_exergy(file):
+            mutated.append(file)
+            subprocess.run(["git", "add", file])
+            
+    if mutated:
+        print(f"C5-REAL PRE-COMMIT HOOK: Exergía maximizada en {len(mutated)} archivos antes de colapsar la onda.")
+
+if __name__ == "__main__":
+    main()

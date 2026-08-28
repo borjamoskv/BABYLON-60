@@ -1,0 +1,48 @@
+# C5-REAL EXERGY CERTIFIED
+# INV-3 POPPER: All theoretical invariants must be empirically falsifiable. Continuous metaphors are rejected.
+dac_version: "2.0-Hybrid"
+project: "Teorema-Robinson-Moskv"
+domain: "KERNEL_FALSIFICATION_PROTOCOL"
+platform_targets: ["Ring-0", "C5-REAL_Pipeline"]
+memory_models: ["Thermodynamic_Siege", "Destructive_Cascade"]
+abi: ["falsabiliza_directive", "Aggressor_Code"]
+
+Claim: "Epistemic resilience is not validated theoretically, but through a Thermodynamic Siege. Without a destructive refutation script running in Ring-0, any security assertion is a stochastic illusion."
+Proof:
+  Base: "12_KERNEL_FALSIFICATION_PROTOCOL.md"
+  Range: "[Active Falsification, Epistemic Collapse Measurement]"
+  Confidence: "C5-REAL"
+
+Isomorphisms:
+  - '"Theoretical Validation" -> "Stochastic Illusion (Green Theater)"'
+  - '"falsabiliza directive" -> "Execution of Aggressor Environment F(H)"'
+
+Blast_Radius_Matrix:
+  Vector: "Ejecución forzada de un vector atacante para probar hipótesis del Kernel."
+  Blast_Radius: "Resiliencia Sintáctica vs Colapso Epistémico."
+  Target_Invariant: "Falsabiliza Invariant (Ω195)"
+  Anergy_Risk: "High (El Green Theater es una aserción no comprobada que genera debilidad latente)."
+
+axioms:
+  - id: AX-FALS-12
+    domain: Epistemology
+    statement: "Al recibir la directiva falsabiliza, el sistema debe crear un script atacante (scratch_refute_*.py) diseñado con la heurística exclusiva de romper la hipótesis."
+    dependencies: []
+    refutation:
+      type: runtime_monitor
+      expression: "falsabiliza(claim) triggers Execute(E_attack, claim) -> O_{R|S|E}"
+      location: "moskv_transducer"
+
+theorem:
+  statement: "Si un entorno atacante físico no logra causar un Colapso Epistémico en la hipótesis de seguridad, la hipótesis es termodinámicamente resiliente y se sella en el Ledger."
+
+CORTEX_TAINT: taint:moskv-1:falsification:e6f7g8h9i0j1k2l3:sha3_256
+
+rust_kernel_binding:
+  halt_reason: "HaltReason::AxiomViolation"
+  memory_layout: "#[repr(C, align(128))] # Apple Silicon L1 Cache Line (align(64) on x86_64)"
+  concurrency_model: "Lock-Free EBR (Epoch-Based Reclamation)"
+
+falsification_harness:
+  script: "scratch/test_falsification_crystal.py"
+  assertion: "Assert axiom violation triggers immediate EpistemicHalt in T_eff < 1ms"

@@ -1,0 +1,23 @@
+# C5-REAL EXERGY CERTIFIED
+name: Update Facts
+on:
+  repository_dispatch:
+    types: [portfolio-update]
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch portfolio.json
+        run: |
+          curl -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
+               -H "Accept: application/vnd.github.v3.raw" \
+               -L https://api.github.com/repos/borjamoskv/Cortex-Persist/contents/data/portfolio.json \
+               > _facts.json
+      - name: Commit and push
+        run: |
+          git config user.name "CORTEX Bot"
+          git config user.email "bot@cortexpersist.com"
+          git add _facts.json
+          git commit -m "chore: sync portfolio.json from cortex-persist" || echo "No changes to commit"
+          git push

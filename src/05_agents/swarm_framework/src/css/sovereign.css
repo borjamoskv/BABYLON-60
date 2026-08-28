@@ -1,0 +1,428 @@
+/* C5-REAL EXERGY CERTIFIED */
+/* ═══════════════════════════════════════════════════════════
+   AGENTS.archi — Sovereign Polish v2.0 — 10x Upgrade Module
+   Industrial Noir 2026 · C5-REAL
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────
+   01. SCANLINE OVERLAY — CRT noise over entire viewport
+   ───────────────────────────────────────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.012) 2px,
+    rgba(255, 255, 255, 0.012) 4px
+  );
+  animation: scanlines-drift 12s linear infinite;
+  will-change: background-position;
+}
+
+@keyframes scanlines-drift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 80px; }
+}
+
+/* ─────────────────────────────────────────────────────────
+   02. THREAT CARD — Risk score bar + hover lift depth
+   ───────────────────────────────────────────────────────── */
+.threat-card {
+  cursor: default;
+}
+
+.threat-risk-bar {
+  margin-top: var(--space-md);
+  height: 3px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+}
+
+.threat-risk-fill {
+  height: 100%;
+  border-radius: 99px;
+  width: 0%;
+  transition: width 1.2s var(--ease-out);
+  background: var(--card-accent, var(--accent));
+  box-shadow: 0 0 8px var(--card-accent, var(--accent));
+}
+
+.threat-card.visible .threat-risk-fill {
+  width: var(--risk-pct, 75%);
+}
+
+.threat-card:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+/* ─────────────────────────────────────────────────────────
+   03. LIVE THREAT COUNTER — floating badge on hero
+   ───────────────────────────────────────────────────────── */
+.hero-live-counter {
+  position: absolute;
+  bottom: var(--space-2xl);
+  right: var(--space-xl);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(10, 10, 10, 0.8);
+  border: 1px solid rgba(255, 59, 92, 0.2);
+  border-radius: var(--radius-sm);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  animation: counter-appear 1s var(--ease-out) 1.5s both;
+}
+
+.hero-live-counter-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--critical);
+  border-radius: 50%;
+  animation: critical-pulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes critical-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 59, 92, 0.6); }
+  50% { box-shadow: 0 0 0 6px rgba(255, 59, 92, 0); }
+}
+
+.hero-live-counter-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.04em;
+}
+
+.hero-live-counter-value {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--critical);
+  letter-spacing: 0.02em;
+}
+
+@keyframes counter-appear {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─────────────────────────────────────────────────────────
+   04. HERO CODE TERMINAL — floating dark panel
+   ───────────────────────────────────────────────────────── */
+.hero-terminal {
+  position: absolute;
+  bottom: var(--space-2xl);
+  left: var(--space-xl);
+  width: 320px;
+  background: rgba(14, 14, 18, 0.9);
+  border: 1px solid var(--void-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  animation: terminal-appear 1s var(--ease-out) 1.8s both;
+  z-index: 1;
+}
+
+.hero-terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--void-border);
+}
+
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.terminal-dot.r { background: #FF5F57; }
+.terminal-dot.y { background: #FEBC2E; }
+.terminal-dot.g { background: #28C840; }
+
+.hero-terminal-title {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-tertiary);
+  margin-left: auto;
+  margin-right: auto;
+  letter-spacing: 0.04em;
+}
+
+.hero-terminal-body {
+  padding: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.8;
+  min-height: 100px;
+}
+
+.hero-term-line {
+  display: block;
+  opacity: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.hero-term-line.t-prompt { color: var(--accent-bright); }
+.hero-term-line.t-output { color: var(--text-secondary); }
+.hero-term-line.t-success { color: #34D399; }
+.hero-term-line.t-warning { color: var(--high); }
+.hero-term-line.t-cursor { color: var(--text-primary); }
+
+.hero-term-line.visible {
+  opacity: 1;
+  animation: type-in 0.4s var(--ease-out) both;
+}
+
+@keyframes type-in {
+  from { opacity: 0; transform: translateX(-4px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes terminal-appear {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─────────────────────────────────────────────────────────
+   05. NEON SCROLL PROGRESS — top edge line
+   ───────────────────────────────────────────────────────── */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  z-index: 10000;
+  background: linear-gradient(90deg, var(--accent), var(--accent-bright), #8B5CF6);
+  box-shadow: 0 0 12px rgba(77, 91, 247, 0.8);
+  transition: width 80ms linear;
+}
+
+/* ─────────────────────────────────────────────────────────
+   06. AMBIENT ORB SYSTEM — background depth layers
+   ───────────────────────────────────────────────────────── */
+.ambient-orb {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(120px);
+  z-index: 0;
+  will-change: transform;
+}
+
+.orb-blue {
+  width: 600px;
+  height: 600px;
+  background: rgba(43, 59, 229, 0.07);
+  top: -200px;
+  left: -200px;
+  animation: orb-drift-1 20s ease-in-out infinite alternate;
+}
+
+.orb-purple {
+  width: 500px;
+  height: 500px;
+  background: rgba(139, 92, 246, 0.05);
+  bottom: -150px;
+  right: -150px;
+  animation: orb-drift-2 25s ease-in-out infinite alternate;
+}
+
+.orb-red {
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 59, 92, 0.04);
+  top: 50%;
+  right: 20%;
+  animation: orb-drift-3 18s ease-in-out infinite alternate;
+}
+
+@keyframes orb-drift-1 {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(120px, 80px) scale(1.15); }
+}
+@keyframes orb-drift-2 {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-80px, -120px) scale(1.2); }
+}
+@keyframes orb-drift-3 {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(60px, -90px) scale(0.85); }
+}
+
+/* ─────────────────────────────────────────────────────────
+   07. MAGNETIC BUTTON — enhanced primary CTA
+   ───────────────────────────────────────────────────────── */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: conic-gradient(
+    from 0deg,
+    var(--accent),
+    var(--accent-bright),
+    #8B5CF6,
+    var(--accent-bright),
+    var(--accent)
+  );
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-out);
+  animation: rotate-border 3s linear infinite;
+}
+
+.btn-primary:hover::before { opacity: 1; }
+
+@keyframes rotate-border {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background: var(--accent);
+  border-radius: calc(var(--radius-sm) - 2px);
+  z-index: -1;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.btn-primary:hover::after { background: var(--accent-bright); }
+
+/* ─────────────────────────────────────────────────────────
+   08. SECTION WARP REVEAL — tilt on entrance
+   ───────────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─────────────────────────────────────────────────────────
+   09. FEED CARD — live pulse indicator + scanline
+   ───────────────────────────────────────────────────────── */
+.feed-badge-new {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #34D399;
+  background: rgba(52, 211, 153, 0.1);
+  border: 1px solid rgba(52, 211, 153, 0.2);
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.08em;
+  animation: new-badge-pulse 2s ease-in-out infinite;
+}
+
+.feed-badge-new::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: #34D399;
+  border-radius: 50%;
+  animation: critical-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes new-badge-pulse {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 1; box-shadow: 0 0 8px rgba(52, 211, 153, 0.3); }
+}
+
+/* ─────────────────────────────────────────────────────────
+   10. NAV LINK — animated underline slide-in
+   ───────────────────────────────────────────────────────── */
+.nav-link {
+  position: relative;
+  isolation: isolate;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: var(--accent-bright);
+  box-shadow: 0 0 6px var(--accent-bright);
+  transition: width var(--duration-normal) var(--ease-out);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: var(--text-primary);
+}
+
+/* ─────────────────────────────────────────────────────────
+   BONUS. STAT VALUE — glow on hover
+   ───────────────────────────────────────────────────────── */
+.stat-value {
+  transition: text-shadow var(--duration-normal) var(--ease-out);
+}
+
+.stat:hover .stat-value {
+  text-shadow: 0 0 20px rgba(77, 91, 247, 0.6);
+  color: var(--accent-bright);
+}
+
+/* ─────────────────────────────────────────────────────────
+   BONUS 2. SECTION TAG — animated bracket
+   ───────────────────────────────────────────────────────── */
+.section-tag {
+  position: relative;
+}
+.section-tag::before { content: '[ '; opacity: 0.4; }
+.section-tag::after  { content: ' ]'; opacity: 0.4; }
+
+/* ─────────────────────────────────────────────────────────
+   BONUS 3. Threat index — accent on hover card
+   ───────────────────────────────────────────────────────── */
+.threat-card:hover .threat-index {
+  color: var(--card-accent, var(--accent-bright));
+  transition: color var(--duration-fast);
+}
+
+/* ─────────────────────────────────────────────────────────
+   BONUS 4. Mobile — responsive hero terminal
+   ───────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero-terminal,
+  .hero-live-counter { display: none; }
+  body::after { display: none; } /* skip scanlines on mobile for perf */
+}
