@@ -1,9 +1,9 @@
 # KI-Konformitätsselbstbewertungsbericht (BABYLON-60 v4.0)
 **EU-Verordnung über Künstliche Intelligenz (Verordnung EU 2024/1689 / BSI)**  
 **Autoridad de Supervisión:** `Bundesamt für Sicherheit in der Informationstechnik (BSI) / EU AI Office`  
-**ID Informe:** `EU-AIA-REPORT-70C6036ABE6D8C79`  
+**ID Informe:** `EU-AIA-REPORT-45D435D400B25C1E`  
 **Sistema:** `agent_finance_01` | **Operador:** `EU_Bank_Corp`  
-**Emisión:** `2026-08-22T14:50:11Z` | **Estado de Cuarentena:** `NOMINAL_SAUBER`  
+**Emisión:** `2026-08-28T17:43:56Z` | **Estado de Cuarentena:** `NOMINAL_SAUBER`  
 
 > **DESCARGO LEGAL / LEGAL DISCLAIMER**  
 > Rechtlicher Hinweis: Dieser Bericht liefert technische Selbstbewertungsnachweise für die Artikel 9–14 der EU-Verordnung 2024/1689. Er stellt keine formelle Zertifizierung durch eine Benannte Stelle dar.
@@ -15,7 +15,7 @@
 Dieser Bericht dokumentiert die technische Selbstbewertung des Systems unter dem BABYLON-60 v4.0 Kausal-Deterministischen Kernel. Alle Speicherübergänge und Zeitsteuerungsoperationen wurden in einem Merkle-Kausalen DAG-Ledger verankert.
 
 - **Global Merkle Root:** `a1b2c3d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890`
-- **Firma Digital (Fingerprint):** `70c6036abe6d8c790de0931d600108b512b435d23efac9add58be80d1a8ac100`
+- **Firma Digital (Fingerprint):** `45d435d400b25c1eff560049d46e79294b8e02d4e118e59e57fce1e9730cd3c5`
 
 ---
 
