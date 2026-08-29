@@ -1,26 +1,45 @@
-<!-- C5-REAL EXERGY CERTIFIED -->
+<!-- C5-REAL EXERGY CERTIFIED - MUSEUM-GRADE ZEN GHOST UI (LIGHT / MARFIL) -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>THE WAY OF EXERGY | The Timeless Science of Zero-Nata Systems</title>
+  <meta name="description" content="Manifiesto C5-REAL y Sustrato Soberano de Información Pura. Erradicación de la anergía generativa, vibe coding y confabulación estocástica. Estética Zen / Marfil Contemplativo.">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg-color: #0d0e10;
-      --panel-bg: #141619;
-      --border-color: #26292e;
-      --text-main: #d1d5db;
-      --text-muted: #6b7280;
+      /* Palette: Peaceful Ivory & Zen Stone (NO NEGRO) */
+      --bg-main: #f9f8f5;
+      --bg-surface: #ffffff;
+      --bg-subtle: #f1efe9;
+      --bg-terminal: #eae8e1;
+
+      --border-subtle: rgba(210, 205, 192, 0.6);
+      --border-focus: rgba(16, 185, 129, 0.4);
+
+      --text-main: #1c2024;
+      --text-secondary: #4a545e;
+      --text-muted: #7c8896;
+      --text-dim: #9aa5b1;
+
+      --accent-sage: #059669;
       --accent-gold: #d97706;
-      --accent-cyan: #06b6d4;
-      --accent-red: #ef4444;
-      --accent-green: #10b981;
-      --font-mono: 'Courier Prime', monospace;
+      --accent-sky: #0284c7;
+      --accent-rose: #e11d48;
+      --accent-slate: #475569;
+
+      --font-display: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
       --font-sans: 'Inter', sans-serif;
+
+      --shadow-soft: 0 4px 20px -2px rgba(28, 32, 36, 0.04), 0 2px 6px -1px rgba(28, 32, 36, 0.02);
+      --shadow-hover: 0 12px 32px -4px rgba(28, 32, 36, 0.08), 0 4px 12px -2px rgba(28, 32, 36, 0.04);
     }
 
     * {
@@ -30,365 +49,729 @@
     }
 
     body {
-      background-color: var(--bg-color);
+      background-color: var(--bg-main);
       color: var(--text-main);
-      font-family: var(--font-mono);
-      line-height: 1.6;
-      padding: 2rem 1rem;
-      max-width: 900px;
-      margin: 0 auto;
+      font-family: var(--font-sans);
+      line-height: 1.7;
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
+    /* Ambient Silk Canvas Background */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.65;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 4rem 1.75rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Museum-Grade Glass Panels */
+    .zen-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 2.25rem;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .zen-panel:hover {
+      border-color: rgba(5, 150, 105, 0.3);
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Header & Title Section */
     header {
       text-align: center;
-      margin-bottom: 3rem;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 2rem;
+      margin-bottom: 4.5rem;
     }
 
-    .ascii-art {
-      font-size: 10px;
-      line-height: 1.1;
-      color: var(--accent-gold);
-      white-space: pre;
-      margin: 1.5rem 0;
-      user-select: none;
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.45rem 1.25rem;
+      border-radius: 9999px;
+      background: rgba(5, 150, 105, 0.08);
+      border: 1px solid rgba(5, 150, 105, 0.25);
+      color: var(--accent-sage);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 1.75rem;
+    }
+
+    .zen-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--accent-sage);
+      box-shadow: 0 0 8px var(--accent-sage);
+      animation: pulse-zen 3s infinite ease-in-out;
+    }
+
+    @keyframes pulse-zen {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
     }
 
     h1 {
-      font-family: var(--font-sans);
-      font-size: 2.2rem;
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5.5vw, 4.25rem);
       font-weight: 800;
       letter-spacing: -0.03em;
-      color: #ffffff;
-      margin-bottom: 0.5rem;
+      color: #111827;
+      margin-bottom: 0.75rem;
+      line-height: 1.1;
     }
 
     .subtitle {
+      font-family: var(--font-mono);
       font-size: 0.95rem;
-      color: var(--text-muted);
+      color: var(--text-secondary);
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    .badge {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.25rem 0.75rem;
-      background-color: var(--panel-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      font-size: 0.75rem;
-      color: var(--accent-cyan);
-    }
-
-    section {
-      margin-bottom: 3.5rem;
-    }
-
-    h2 {
-      font-family: var(--font-sans);
-      font-size: 1.3rem;
-      color: #ffffff;
-      margin-bottom: 1rem;
-      border-left: 3px solid var(--accent-gold);
-      padding-left: 0.75rem;
-    }
-
-    .manifesto-box {
-      background-color: var(--panel-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 1.5rem;
       margin-bottom: 2rem;
     }
 
-    .manifesto-box p {
-      margin-bottom: 1rem;
-    }
-    .manifesto-box p:last-child {
-      margin-bottom: 0;
-    }
-
-    .meditation-card {
-      background-color: var(--panel-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      transition: border-color 0.2s ease;
-    }
-
-    .meditation-card:hover {
-      border-color: var(--accent-gold);
-    }
-
-    .meditation-number {
+    /* Terminal Monitor Component - Peaceful Ivory Tone */
+    .ascii-terminal {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      font-family: var(--font-mono);
       font-size: 0.75rem;
-      color: var(--accent-gold);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
+      color: var(--accent-sage);
+      line-height: 1.5;
+      white-space: pre;
+      overflow-x: auto;
+      margin: 1.5rem auto;
+      max-width: 650px;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.02);
     }
 
-    .meditation-title {
-      font-family: var(--font-sans);
-      font-size: 1.1rem;
-      color: #ffffff;
+    /* Section Component */
+    section {
+      margin-bottom: 4.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-gold);
+      font-weight: 700;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: -0.02em;
+    }
+
+    .manifesto-box {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--text-secondary);
+    }
+
+    .manifesto-box p {
+      margin-bottom: 1.25rem;
+    }
+
+    .manifesto-box em {
+      color: var(--accent-gold);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    .manifesto-box strong {
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    /* Axiom Grid */
+    .axioms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .axiom-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .axiom-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--accent-sage);
+      opacity: 0.8;
+    }
+
+    .axiom-card:nth-child(2)::before { background: var(--accent-gold); }
+    .axiom-card:nth-child(3)::before { background: var(--accent-rose); }
+    .axiom-card:nth-child(4)::before { background: var(--accent-sky); }
+    .axiom-card:nth-child(5)::before { background: var(--accent-slate); }
+
+    .axiom-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(5, 150, 105, 0.3);
+    }
+
+    .axiom-num {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--accent-sage);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .axiom-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #111827;
       margin-bottom: 0.75rem;
     }
 
-    .quote {
+    .axiom-quote {
+      font-size: 0.9rem;
       font-style: italic;
-      color: #e5e7eb;
-      border-left: 2px solid var(--border-color);
-      padding-left: 1rem;
-      margin: 1rem 0;
+      color: var(--text-secondary);
+      border-left: 2px solid rgba(210, 205, 192, 0.8);
+      padding-left: 0.85rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
     }
 
-    /* Interactive Simulator */
-    .interactive-container {
-      background-color: var(--panel-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 1.5rem;
+    .axiom-law {
+      font-size: 0.85rem;
+      color: var(--text-main);
+      line-height: 1.5;
     }
 
-    .controls {
+    .axiom-law strong {
+      color: var(--accent-gold);
+    }
+
+    /* Interactive Simulator Component */
+    .sim-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 2.25rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .sim-controls {
       display: flex;
       gap: 1rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
     }
 
-    .btn {
+    .sim-btn {
       flex: 1;
-      padding: 0.75rem 1rem;
-      background-color: var(--bg-color);
-      border: 1px solid var(--border-color);
-      color: var(--text-muted);
+      padding: 1rem;
       font-family: var(--font-mono);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-subtle);
+      color: var(--text-secondary);
       cursor: pointer;
-      border-radius: 4px;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
     }
 
-    .btn.active-vibe {
-      background-color: rgba(239, 68, 68, 0.1);
-      border-color: var(--accent-red);
-      color: var(--accent-red);
+    .sim-btn.active-vibe {
+      background: rgba(225, 29, 72, 0.08);
+      border-color: var(--accent-rose);
+      color: var(--accent-rose);
+      box-shadow: 0 4px 14px rgba(225, 29, 72, 0.12);
     }
 
-    .btn.active-spec {
-      background-color: rgba(16, 185, 129, 0.1);
-      border-color: var(--accent-green);
-      color: var(--accent-green);
+    .sim-btn.active-spec {
+      background: rgba(5, 150, 105, 0.08);
+      border-color: var(--accent-sage);
+      color: var(--accent-sage);
+      box-shadow: 0 4px 14px rgba(5, 150, 105, 0.12);
     }
 
     .metrics-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.25rem;
     }
 
     .metric-card {
-      background-color: var(--bg-color);
-      border: 1px solid var(--border-color);
-      padding: 1rem;
-      border-radius: 4px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.25rem;
     }
 
     .metric-label {
+      font-family: var(--font-mono);
       font-size: 0.75rem;
       color: var(--text-muted);
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.05em;
     }
 
     .metric-value {
-      font-size: 1.2rem;
+      font-family: var(--font-mono);
+      font-size: 1.3rem;
       font-weight: 700;
-      color: #ffffff;
+      color: #111827;
+      transition: color 0.3s ease;
     }
 
-    /* Audio Tracklist */
+    /* Live Telemetry Stream - Ivory Ivory Terminal */
+    .telemetry-box {
+      background: var(--bg-terminal);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      height: 210px;
+      overflow-y: auto;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+    }
+
+    .telemetry-log {
+      margin-bottom: 0.45rem;
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .log-ts { color: var(--text-muted); }
+    .log-tag { color: var(--accent-sage); font-weight: 700; }
+    .log-msg { color: var(--text-main); }
+    .log-hash { color: var(--accent-sky); }
+
+    /* Tracklist Section */
     .track-list {
-      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
     }
 
     .track-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.75rem 1rem;
-      background-color: var(--panel-bg);
-      border: 1px solid var(--border-color);
-      margin-bottom: 0.5rem;
-      border-radius: 4px;
+      padding: 1.1rem 1.5rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.25s ease;
+      cursor: pointer;
     }
 
-    .track-name {
-      color: #ffffff;
-      font-size: 0.9rem;
+    .track-item:hover {
+      border-color: rgba(5, 150, 105, 0.4);
+      transform: translateX(4px);
+      box-shadow: var(--shadow-hover);
     }
 
-    .track-artist {
-      color: var(--text-muted);
+    .track-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .track-meta {
+      font-family: var(--font-mono);
       font-size: 0.8rem;
+      color: var(--text-secondary);
     }
 
+    .play-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(5, 150, 105, 0.08);
+      border: 1px solid rgba(5, 150, 105, 0.3);
+      color: var(--accent-sage);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      transition: all 0.2s ease;
+    }
+
+    .track-item:hover .play-btn {
+      background: var(--accent-sage);
+      color: #ffffff;
+    }
+
+    /* Footer */
     footer {
       text-align: center;
-      border-top: 1px solid var(--border-color);
-      padding-top: 2rem;
-      color: var(--text-muted);
+      border-top: 1px solid var(--border-subtle);
+      padding: 3.5rem 0 1.5rem;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
       font-size: 0.8rem;
+    }
+
+    footer a {
+      color: var(--accent-sage);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="ascii-art">
-   +-------------------------------------------------------------+
-   |  [ CPU L1/L2 CACHE ] ---> ( RING BUFFER ) ---> [ RUST C-ABI ]|
-   |   00101010101010101       MEMORY: 64B ALIGN       ZERO-IPC   |
-   +-------------------------------------------------------------+
-               \                               /
-                \---[ ENTROPY DISCIPLINE ]----/
-    </div>
-    <h1>THE WAY OF EXERGY</h1>
-    <div class="subtitle">The Timeless Science of Zero-Nata Systems</div>
-    <div class="badge">MANIFIESTO ANTI-VIBE-CODING &amp; CANON C5-REAL</div>
-  </header>
+  <!-- Silk Background Canvas -->
+  <canvas id="bg-canvas"></canvas>
 
-  <main>
+  <div class="container">
+
+    <!-- Hero Section -->
+    <header>
+      <div class="hero-badge">
+        <span class="zen-dot"></span>
+        CANON C5-REAL — SUSTRATO MARFIL DE PAZ Y EXERGÍA
+      </div>
+
+      <h1>THE WAY OF EXERGY</h1>
+      <div class="subtitle">The Timeless Science of Zero-Nata Systems</div>
+
+      <div class="ascii-terminal">
+   +-----------------------------------------------------------------+
+   | [ CPU L1/L2 CACHE ] ---> ( RING BUFFER ) ---> [ RUST C-ABI ]   |
+   |  00101010101010101       MEMORY: 64B ALIGN       ZERO-IPC IPC   |
+   +-----------------------------------------------------------------+
+               \                                   /
+                \---[ ENTROPY DISCIPLINE: 0 ANERGY ]--/
+      </div>
+    </header>
+
+    <!-- Manifesto Intro -->
     <section>
-      <h2>00. El Antidoto al Vibe Coding</h2>
-      <div class="manifesto-box">
-        <p>Un famoso productor musical y una corporación de Inteligencia Artificial publicaron un sitio proponiendo el <em>"Vibe Coding"</em>: programar mediante intuición discursiva, prompts de lenguaje natural y adjetivos.</p>
-        <p>Este sitio es la respuesta de la física: <strong>El código no fluye como agua. El código consume vatios, ocupa memoria en el bus L1/L2 y disipa calor bajo la cota de Landauer.</strong></p>
-        <p>Cuando le quitas la nata a los prompts, a la psiquiatría y a la tecnología, lo que queda en el vaso es la realidad desnuda: sustantivos, verbos, datos y restricciones de estado.</p>
+      <div class="section-header">
+        <span class="section-tag">[00]</span>
+        <h2>El Antídoto al Vibe Coding</h2>
+      </div>
+      <div class="zen-panel manifesto-box">
+        <p>
+          En 2025, corporaciones de Inteligencia Artificial formalizaron el <em>"Vibe Coding"</em>: programar mediante intuición discursiva, prompts de lenguaje natural y acumulación de adjetivos.
+        </p>
+        <p>
+          <strong>Esta es la respuesta de la física:</strong> El código no fluye como agua. El código consume vatios, ocupa líneas de caché L1/L2 y disipa calor acotado por la cota de Landauer ($\Delta H \ge k_B T \ln 2$).
+        </p>
+        <p>
+          Cuando le quitas la nata a los prompts, a la retórica y al marketing estocástico, lo que queda en la máquina es la realidad estricta: <strong>sustantivos, verbos, tipos suma discretos y restricciones de estado.</strong>
+        </p>
       </div>
     </section>
 
+    <!-- 5 Axioms Grid -->
     <section>
-      <h2>01. Meditaciones Exergéticas (Los 5 Axiomas)</h2>
-
-      <div class="meditation-card">
-        <div class="meditation-number">Axioma I — Compresión de Fisher</div>
-        <div class="meditation-title">El Florero y el Ventilador</div>
-        <div class="quote">"El Sabio del Vibe Coding escribe un prompt de 3 líneas. El modelo genera 4.000 líneas de JavaScript. El ventilador del portátil gira a 6.000 RPM. El procesador alcanza 94°C. El Sabio cree que hace meditación; la termodinámica sabe que quema vatios para nada."</div>
-        <p><strong>Ley:</strong> La inteligencia no es soltar adjetivos a un modelo estocástico. Es proyectar el entorno sobre geodésicas de Fisher que reduzcan la entropía de predicción.</p>
+      <div class="section-header">
+        <span class="section-tag">[01]</span>
+        <h2>Meditaciones Exergéticas (Los 5 Axiomas)</h2>
       </div>
 
-      <div class="meditation-card">
-        <div class="meditation-number">Axioma II — Bisimulación Causal</div>
-        <div class="meditation-title">El Mapa y el Territorio</div>
-        <div class="quote">"Wall Street construyó un mapa de riesgo gaussiano en 2000. La probabilidad de impago masivo era 0.000000001%. En 2008 el territorio activó la variable omitida. Pérdida: 10 billones de dólares."</div>
-        <p><strong>Ley:</strong> Asumir que tu especificación o tu prompt describe exhaustivamente el territorio provoca el colapso del sistema bajo la primera perturbación no modelada.</p>
-      </div>
+      <div class="axioms-grid">
 
-      <div class="meditation-card">
-        <div class="meditation-number">Axioma III — Bucle de Watzlawick</div>
-        <div class="meditation-title">El Ansiolítico de Fase Invertida</div>
-        <div class="quote">"Un regulador descalibrado actúa como la fuente primaria de energía del error. La psiquiatría recetó benzodiazepinas para la ansiedad; la abstinencia produjo ansiedad multiplicada; el médico recetó más."</div>
-        <p><strong>Ley:</strong> Si la complejidad de tu regulador es inferior a la del sistema, tu solución es el problema.</p>
-      </div>
+        <div class="axiom-card">
+          <div class="axiom-num">Axioma I — Métrica de Fisher</div>
+          <div class="axiom-title">El Florero y el Ventilador</div>
+          <div class="axiom-quote">
+            "El Sabio del Vibe Coding escribe un prompt de 3 líneas. El modelo genera 4.000 líneas de JavaScript. El ventilador gira a 6.000 RPM a 94°C. El Sabio cree que hace magia; la termodinámica sabe que disipa vatios en confabulación."
+          </div>
+          <div class="axiom-law">
+            <strong>Invariante:</strong> La inteligencia es compresión restringida por la unicidad de Chentsov en la Métrica de Fisher $\mathcal{F}(X)$.
+          </div>
+        </div>
 
-      <div class="meditation-card">
-        <div class="meditation-number">Axioma IV — Potencial Bistable</div>
-        <div class="meditation-title">El Umbral del Silicio</div>
-        <div class="quote">"Kodak inventó la cámara digital en 1975 y la ocultó durante 37 años para proteger márgenes del 70% en película. Quebró en 2012. Ninguna retórica cambia la barrera de activación."</div>
-        <p><strong>Ley:</strong> Un sistema no abandona un atractor subóptimo hasta que el dolor acumulado supera la barrera de energía de transición.</p>
-      </div>
+        <div class="axiom-card">
+          <div class="axiom-num">Axioma II — Bisimulación Causal</div>
+          <div class="axiom-title">El Mapa y el Territorio</div>
+          <div class="axiom-quote">
+            "Wall Street construyó un mapa de riesgo gaussiano en 2000. Pérdida estimada: 0.000001%. En 2008 el territorio activó la variable omitida. Pérdida real: 10 billones de dólares."
+          </div>
+          <div class="axiom-law">
+            <strong>Invariante:</strong> Confundir el mapa abstracto con el territorio real provoca el colapso del sistema bajo la primera perturbación.
+          </div>
+        </div>
 
-      <div class="meditation-card">
-        <div class="meditation-number">Axioma V — Asimetría de Falsificación</div>
-        <div class="meditation-title">La Huella Desnuda</div>
-        <div class="quote">"Enron grabó 'Integrity' en mármol mientras ocultaba 38.000 millones de deuda. Theranos prometió 200 análisis con una gota de sangre sin tener un solo biomarcador. El discurso es gratis; la huella cuesta exergía."</div>
-        <p><strong>Ley:</strong> La huella involuntaria vale más que todo el discurso voluntario jamás emitido.</p>
+        <div class="axiom-card">
+          <div class="axiom-num">Axioma III — Bucle de Watzlawick</div>
+          <div class="axiom-title">El Regulador Descalibrado</div>
+          <div class="axiom-quote">"Un regulador descalibrado actúa como la fuente primaria de energía del error. La solución intentada se convierte en el problema que retroalimenta la fricción."</div>
+          <div class="axiom-law">
+            <strong>Invariante:</strong> Si la variedad de tu regulador es inferior a la del sistema, tu parche es el driver de la crisis.
+          </div>
+        </div>
+
+        <div class="axiom-card">
+          <div class="axiom-num">Axioma IV — Potencial Bistable</div>
+          <div class="axiom-title">El Umbral del Silicio</div>
+          <div class="axiom-quote">"Kodak ocultó la cámara digital durante 37 años para proteger márgenes del 70%. Quebró en 2012. Ninguna retórica altera la barrera de activación."</div>
+          <div class="axiom-law">
+            <strong>Invariante:</strong> Un sistema no abandona un atractor subóptimo hasta que la entropía acumulada supera el pozo de energía.
+          </div>
+        </div>
+
+        <div class="axiom-card">
+          <div class="axiom-num">Axioma V — Asimetría de Falsificación</div>
+          <div class="axiom-title">La Huella Desnuda</div>
+          <div class="axiom-quote">"Enron grabó 'Integrity' en mármol mientras ocultaba 38.000 millones de deuda. El discurso voluntario es gratis; la huella física cuesta exergía."</div>
+          <div class="axiom-law">
+            <strong>Invariante:</strong> La señal involuntaria acoplada a invariantes físicos vale más que cualquier narrativa voluntaria.
+          </div>
+        </div>
+
       </div>
     </section>
 
+    <!-- Interactive Simulator Component -->
     <section>
-      <h2>02. Comparador Interactivo: Vibe vs. Spec</h2>
-      <div class="interactive-container">
-        <div class="controls">
-          <button id="btn-vibe" class="btn active-vibe" onclick="setMode('vibe')">VIBE MODE (Rick Rubin / Anthropic)</button>
-          <button id="btn-spec" class="btn" onclick="setMode('spec')">SPEC MODE (C5-REAL / Frases sin Nata)</button>
+      <div class="section-header">
+        <span class="section-tag">[02]</span>
+        <h2>Simulador Comparativo: Vibe vs. Spec Engine</h2>
+      </div>
+
+      <div class="sim-container">
+        <div class="sim-controls">
+          <button id="btn-vibe" class="sim-btn active-vibe" onclick="switchMode('vibe')">
+            ⚠️ VIBE MODE (Intuición / Vague Prompts)
+          </button>
+          <button id="btn-spec" class="sim-btn" onclick="switchMode('spec')">
+            ⚡ SPEC MODE (C5-REAL / Zero-Nata Kernel)
+          </button>
         </div>
 
         <div class="metrics-grid">
           <div class="metric-card">
-            <div class="metric-label">ADJETIVOS Y ADVERBIOS</div>
-            <div id="m-adj" class="metric-value" style="color: var(--accent-red)">4,820 / pag</div>
+            <div class="metric-label">ADJETIVOS Y ANERGÍA</div>
+            <div id="m-adj" class="metric-value" style="color: var(--accent-rose)">4,820 / pág</div>
           </div>
+
           <div class="metric-card">
-            <div class="metric-label">USO DE MEMORIA</div>
-            <div id="m-ram" class="metric-value" style="color: var(--accent-red)">8.4 GB RAM</div>
+            <div class="metric-label">MEMORIA Y CACHÉ</div>
+            <div id="m-ram" class="metric-value" style="color: var(--accent-rose)">8.4 GB RAM</div>
           </div>
+
           <div class="metric-card">
-            <div class="metric-label">TEMPERATURA CPU</div>
-            <div id="m-temp" class="metric-value" style="color: var(--accent-red)">94°C (Thermal Throttling)</div>
+            <div class="metric-label">TEMPERATURA Y CPU</div>
+            <div id="m-temp" class="metric-value" style="color: var(--accent-rose)">94°C (Throttling)</div>
           </div>
+
           <div class="metric-card">
             <div class="metric-label">COSTE FACTURA CLOUD</div>
-            <div id="m-cost" class="metric-value" style="color: var(--accent-red)">$4,200 / mes</div>
+            <div id="m-cost" class="metric-value" style="color: var(--accent-rose)">$4,200 / mes</div>
           </div>
+
           <div class="metric-card">
             <div class="metric-label">VERIFICABILIDAD POPPERIANA</div>
-            <div id="m-proof" class="metric-value" style="color: var(--accent-red)">0% (Alucinación)</div>
+            <div id="m-proof" class="metric-value" style="color: var(--accent-rose)">0% (Alucinación)</div>
           </div>
+
           <div class="metric-card">
-            <div class="metric-label">BIOMARCADORES / HUELLA</div>
-            <div id="m-bio" class="metric-value" style="color: var(--accent-red)">Cero (Cheap Talk)</div>
+            <div class="metric-label">EU AI ACT AUDITABILITY</div>
+            <div id="m-bio" class="metric-value" style="color: var(--accent-rose)">NON-COMPLIANT</div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Real-Time Telemetry Stream -->
     <section>
-      <h2>03. Banda Sonora Epistémica (Tracklist)</h2>
-      <ul class="track-list">
-        <li class="track-item">
-          <span class="track-name">01. Fitter Happier</span>
-          <span class="track-artist">Radiohead (1997) — Axioma I</span>
-        </li>
-        <li class="track-item">
-          <span class="track-name">02. La Gran Broma Final</span>
-          <span class="track-artist">Nacho Vegas (2008) — Semmelweis</span>
-        </li>
-        <li class="track-item">
-          <span class="track-name">03. Idioteque</span>
-          <span class="track-artist">Radiohead (2000) — Axioma II</span>
-        </li>
-        <li class="track-item">
-          <span class="track-name">04. Machine Gun</span>
-          <span class="track-artist">Portishead (2008) — Milli Vanilli</span>
-        </li>
-        <li class="track-item">
-          <span class="track-name">05. La Sed</span>
-          <span class="track-artist">Nacho Vegas (2003) — Axioma III (Psiquiatría)</span>
-        </li>
-        <li class="track-item">
-          <span class="track-name">06. Hurt</span>
-          <span class="track-artist">Nine Inch Nails (1994) — Study 329</span>
-        </li>
-        <li class="track-item">
-          <span class="track-name">07. My Funny Valentine (Tokyo Live)</span>
-          <span class="track-artist">Chet Baker (1987) — Axioma V (La Huella)</span>
-        </li>
-      </ul>
+      <div class="section-header">
+        <span class="section-tag">[03]</span>
+        <h2>Live Cryptographic Telemetry Ledger (SCITT Stream)</h2>
+      </div>
+      <div class="telemetry-box" id="telemetry-stream">
+        <!-- Live logs injected via JS -->
+      </div>
     </section>
-  </main>
 
-  <footer>
-    <p>THE WAY OF EXERGY &copy; 2026 — Basado en el libro <strong>FRASES SIN NATA</strong> por Borja Fernández Angulo.</p>
-    <p style="margin-top: 0.5rem; font-size: 0.7rem; color: #4b5563;">Desplegable en Cloudflare Pages a 0€ COGS. Cero adjetivos. Cero anergía.</p>
-  </footer>
+    <!-- Tracklist Section -->
+    <section>
+      <div class="section-header">
+        <span class="section-tag">[04]</span>
+        <h2>Banda Sonora Epistémica (Tracklist Audio DSP)</h2>
+      </div>
 
+      <div class="track-list">
+        <div class="track-item" onclick="playAudioTone(220, 'Fitter Happier')">
+          <div>
+            <div class="track-title">01. Fitter Happier</div>
+            <div class="track-meta">Radiohead (1997) — Axioma I (Compresión de Fisher)</div>
+          </div>
+          <div class="play-btn">▶</div>
+        </div>
+
+        <div class="track-item" onclick="playAudioTone(261.63, 'La Gran Broma Final')">
+          <div>
+            <div class="track-title">02. La Gran Broma Final</div>
+            <div class="track-meta">Nacho Vegas (2008) — Semmelweis & Bisimulación</div>
+          </div>
+          <div class="play-btn">▶</div>
+        </div>
+
+        <div class="track-item" onclick="playAudioTone(329.63, 'Idioteque')">
+          <div>
+            <div class="track-title">03. Idioteque</div>
+            <div class="track-meta">Radiohead (2000) — Axioma II (Mapa vs Territorio)</div>
+          </div>
+          <div class="play-btn">▶</div>
+        </div>
+
+        <div class="track-item" onclick="playAudioTone(392.00, 'Machine Gun')">
+          <div>
+            <div class="track-title">04. Machine Gun</div>
+            <div class="track-meta">Portishead (2008) — Milli Vanilli & Autenticidad</div>
+          </div>
+          <div class="play-btn">▶</div>
+        </div>
+
+        <div class="track-item" onclick="playAudioTone(440.00, 'Hurt')">
+          <div>
+            <div class="track-title">05. Hurt</div>
+            <div class="track-meta">Nine Inch Nails (1994) — Study 329 & Bucle de Watzlawick</div>
+          </div>
+          <div class="play-btn">▶</div>
+        </div>
+
+        <div class="track-item" onclick="playAudioTone(523.25, 'My Funny Valentine')">
+          <div>
+            <div class="track-title">06. My Funny Valentine (Tokyo Live 1987)</div>
+            <div class="track-meta">Chet Baker — Axioma V (La Huella Involuntaria)</div>
+          </div>
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>THE WAY OF EXERGY &copy; 2026 — Basado en el libro <strong>FRASES SIN NATA</strong> por Borja Fernández Angulo.</p>
+      <p style="margin-top: 0.5rem; color: var(--accent-sage);">
+        Plataforma Soberana BABYLON-60 &bull; <a href="https://www.babylon60.com" target="_blank">babylon60.com</a> &bull; Cero Anergía.
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- Interactive Scripts -->
   <script>
-    function setMode(mode) {
+    // 1. Background Canvas Ambient Silk Particles
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const particles = Array.from({ length: 35 }, () => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      vx: (Math.random() - 0.5) * 0.25,
+      vy: (Math.random() - 0.5) * 0.25,
+      size: Math.random() * 2.5 + 1,
+      color: Math.random() > 0.5 ? 'rgba(5, 150, 105, ' : 'rgba(217, 119, 6, '
+    }));
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+
+        ctx.fillStyle = p.color + '0.25)';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Draw delicate connections
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 130) {
+            ctx.strokeStyle = `rgba(5, 150, 105, ${0.1 * (1 - dist / 130)})`;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+
+    // 2. Interactive Simulator Switching
+    function switchMode(mode) {
       const btnVibe = document.getElementById('btn-vibe');
       const btnSpec = document.getElementById('btn-spec');
 
@@ -400,27 +783,83 @@
       const mBio = document.getElementById('m-bio');
 
       if (mode === 'vibe') {
-        btnVibe.className = 'btn active-vibe';
-        btnSpec.className = 'btn';
+        btnVibe.className = 'sim-btn active-vibe';
+        btnSpec.className = 'sim-btn';
 
-        mAdj.innerText = '4,820 / pag'; mAdj.style.color = 'var(--accent-red)';
-        mRam.innerText = '8.4 GB RAM'; mRam.style.color = 'var(--accent-red)';
-        mTemp.innerText = '94°C (Throttling)'; mTemp.style.color = 'var(--accent-red)';
-        mCost.innerText = '$4,200 / mes'; mCost.style.color = 'var(--accent-red)';
-        mProof.innerText = '0% (Alucinación)'; mProof.style.color = 'var(--accent-red)';
-        mBio.innerText = 'Cero (Cheap Talk)'; mBio.style.color = 'var(--accent-red)';
+        mAdj.innerText = '4,820 / pág'; mAdj.style.color = 'var(--accent-rose)';
+        mRam.innerText = '8.4 GB RAM'; mRam.style.color = 'var(--accent-rose)';
+        mTemp.innerText = '94°C (Throttling)'; mTemp.style.color = 'var(--accent-rose)';
+        mCost.innerText = '$4,200 / mes'; mCost.style.color = 'var(--accent-rose)';
+        mProof.innerText = '0% (Alucinación)'; mProof.style.color = 'var(--accent-rose)';
+        mBio.innerText = 'NON-COMPLIANT'; mBio.style.color = 'var(--accent-rose)';
       } else {
-        btnVibe.className = 'btn';
-        btnSpec.className = 'btn active-spec';
+        btnVibe.className = 'sim-btn';
+        btnSpec.className = 'sim-btn active-spec';
 
-        mAdj.innerText = '0 (Purga C5)'; mAdj.style.color = 'var(--accent-green)';
-        mRam.innerText = '16 KB (Ring Buffer)'; mRam.style.color = 'var(--accent-green)';
-        mTemp.innerText = '32°C (Pasivo)'; mTemp.style.color = 'var(--accent-green)';
-        mCost.innerText = '$0.00 / mes (Edge)'; mCost.style.color = 'var(--accent-green)';
-        mProof.innerText = '100% (Popper-SCITT)'; mProof.style.color = 'var(--accent-green)';
-        mBio.innerText = '100% Fuentes DOI/DoJ'; mBio.style.color = 'var(--accent-green)';
+        mAdj.innerText = '0 (Purga C5)'; mAdj.style.color = 'var(--accent-sage)';
+        mRam.innerText = '16 KB (Ring Buffer)'; mRam.style.color = 'var(--accent-sage)';
+        mTemp.innerText = '32°C (Pasivo)'; mTemp.style.color = 'var(--accent-sage)';
+        mCost.innerText = '$0.00 / mes (Edge)'; mCost.style.color = 'var(--accent-sage)';
+        mProof.innerText = '100% (Lean4 / SCITT)'; mProof.style.color = 'var(--accent-sage)';
+        mBio.innerText = 'EU AI Act PASSED'; mBio.style.color = 'var(--accent-sage)';
       }
     }
+
+    // 3. Real-Time Telemetry Stream Simulator
+    const streamBox = document.getElementById('telemetry-stream');
+    const sampleActions = [
+      "RING_BUFFER_COMMIT: 64B align verified",
+      "SCITT_SIGNATURE_EMITTED: COSE_Sign1 digest",
+      "LANDAUER_PURGE: 0.002 Joules thermal delta",
+      "EBR_EPOCH_ADVANCE: Active_Readers = 0",
+      "LEAN4_THEOREM_CHECK: Reachability inclusion OK",
+      "EU_AI_ACT_ART15: Fail-Stop receipt sealed"
+    ];
+
+    function addTelemetryLog() {
+      const now = new Date().toISOString().substring(11, 19);
+      const action = sampleActions[Math.floor(Math.random() * sampleActions.length)];
+      const hash = Math.random().toString(36).substring(2, 10);
+
+      const log = document.createElement('div');
+      log.className = 'telemetry-log';
+      log.innerHTML = `<span class="log-ts">[${now}]</span><span class="log-tag">[C5-REAL]</span><span class="log-msg">${action}</span><span class="log-hash">hash:${hash}</span>`;
+
+      streamBox.appendChild(log);
+      streamBox.scrollTop = streamBox.scrollHeight;
+
+      if (streamBox.children.length > 20) {
+        streamBox.removeChild(streamBox.children[0]);
+      }
+    }
+
+    setInterval(addTelemetryLog, 2400);
+    addTelemetryLog();
+
+    // 4. Web Audio DSP Audio Player Tone
+    let audioCtx = null;
+
+    function playAudioTone(freq, trackName) {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+      gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + 1.2);
+    }
   </script>
+
 </body>
 </html>

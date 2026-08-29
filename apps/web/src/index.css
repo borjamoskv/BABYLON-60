@@ -1,20 +1,21 @@
+/* C5-REAL EXERGY CERTIFIED */
 @import "tailwindcss";
 
-/* BABYLON-60 v4.0 — Sovereign Industrial Noir 2026 Design System */
+/* BABYLON-60 v4.0 — Sovereign Museum-Grade Zen Marfil (Peaceful Light) */
 :root {
-  --bg-void: #030508;
-  --bg-card: rgba(10, 14, 23, 0.85);
-  --bg-card-hover: rgba(18, 24, 38, 0.95);
-  --border-cyan: rgba(0, 240, 255, 0.25);
-  --border-cyan-glow: rgba(0, 240, 255, 0.7);
-  --border-emerald: rgba(16, 185, 129, 0.35);
-  --border-amber: rgba(245, 158, 11, 0.35);
-  
-  --cyan-primary: #00f0ff;
+  --bg-void: #f9f8f5;
+  --bg-card: rgba(255, 255, 255, 0.88);
+  --bg-card-hover: rgba(255, 255, 255, 0.98);
+  --border-cyan: rgba(5, 150, 105, 0.2);
+  --border-cyan-glow: rgba(5, 150, 105, 0.5);
+  --border-emerald: rgba(16, 185, 129, 0.3);
+  --border-amber: rgba(217, 119, 6, 0.3);
+
+  --cyan-primary: #059669;
   --emerald-primary: #10b981;
-  --amber-primary: #f59e0b;
-  --violet-primary: #a855f7;
-  
+  --amber-primary: #d97706;
+  --violet-primary: #6366f1;
+
   --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
@@ -29,34 +30,34 @@ body, html {
   width: 100%;
   height: 100%;
   background-color: var(--bg-void);
-  color: #f1f5f9;
+  color: #1f2937;
   font-family: var(--font-display);
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Industrial Grid Mesh Background */
+/* Zen Grid Mesh Background */
 .c5-grid-bg {
-  background-image: 
-    linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+  background-image:
+    linear-gradient(rgba(5, 150, 105, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(5, 150, 105, 0.04) 1px, transparent 1px);
   background-size: 36px 36px;
 }
 
-/* Glassmorphism Panel */
+/* Glassmorphism Panel - Light Zen */
 .glass-panel {
   background: var(--bg-card);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-cyan);
-  border-radius: 12px;
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px -2px rgba(28, 32, 36, 0.04), 0 2px 6px -1px rgba(28, 32, 36, 0.02);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-panel:hover {
   border-color: var(--border-cyan-glow);
-  box-shadow: 0 12px 48px 0 rgba(0, 240, 255, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 32px -4px rgba(28, 32, 36, 0.08);
 }
 
 /* Custom Scrollbars */
@@ -65,25 +66,20 @@ body, html {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(3, 5, 8, 0.9);
+  background: rgba(241, 239, 233, 0.9);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 240, 255, 0.35);
+  background: rgba(5, 150, 105, 0.35);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 240, 255, 0.7);
+  background: rgba(5, 150, 105, 0.7);
 }
 
 /* Glowing Animations */
 @keyframes pulse-cyan {
-  0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.5)); }
-  50% { opacity: 1; filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.95)); }
-}
-
-@keyframes scanline {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(1000%); }
+  0%, 100% { opacity: 0.7; filter: drop-shadow(0 0 6px rgba(5, 150, 105, 0.4)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 14px rgba(5, 150, 105, 0.8)); }
 }
 
 .glow-cyan {
@@ -112,19 +108,19 @@ body, html {
 }
 
 .badge-cyan {
-  background: rgba(0, 240, 255, 0.1);
-  color: #67e8f9;
-  border-color: rgba(0, 240, 255, 0.3);
+  background: rgba(5, 150, 105, 0.08);
+  color: #047857;
+  border-color: rgba(5, 150, 105, 0.25);
 }
 
 .badge-emerald {
-  background: rgba(16, 185, 129, 0.1);
-  color: #6ee7b7;
-  border-color: rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.08);
+  color: #059669;
+  border-color: rgba(16, 185, 129, 0.25);
 }
 
 .badge-amber {
-  background: rgba(245, 158, 11, 0.1);
-  color: #fcd34d;
-  border-color: rgba(245, 158, 11, 0.3);
+  background: rgba(245, 158, 11, 0.08);
+  color: #b45309;
+  border-color: rgba(245, 158, 11, 0.25);
 }
