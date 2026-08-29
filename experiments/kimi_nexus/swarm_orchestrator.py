@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Kimi K3 Swarm Sovereign Orchestrator — C5-REAL (v2.0)
 
@@ -187,6 +188,9 @@ class InferenceClient:
     """
     Cliente HTTP asíncrono con:
       - Reintentos con backoff exponencial
+    """
+
+
 async def _http_post_single_attempt(url: str, payload: dict, headers: dict, timeout: float) -> dict:
     async with httpx.AsyncClient(timeout=timeout) as client:
         response = await client.post(url, json=payload, headers=headers)

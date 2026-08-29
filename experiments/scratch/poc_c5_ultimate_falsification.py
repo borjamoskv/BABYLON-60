@@ -13,13 +13,13 @@ import os
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 # from scripts.c5_ultimate_causal_determinant import (  # purgado por anergía
-    ASTReflectionGuardTransducer,
-    ATMSConstantLattice,
-    CausalStateActor,
-    DeterministicEntropyProof,
-    FFIEventHorizonRouter,
-    L1BitcoinCommitmentReceipt,
-)
+#     ASTReflectionGuardTransducer,
+#     ATMSConstantLattice,
+#     CausalStateActor,
+#     DeterministicEntropyProof,
+#     FFIEventHorizonRouter,
+#     L1BitcoinCommitmentReceipt,
+# )
 
 
 def run_falsification_suite():
