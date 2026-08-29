@@ -1,11 +1,14 @@
-# C5-REAL EXERGY CERTIFIED
-timestamp: "2026-08-14T11:11:12Z"
-exergy_recovered_mb: 9140
-cortex_taint_hash: "0adbcf24e32c875ee315a78e54fea2d3a2412b8a174322961d4eb1c2457710a0"
+audit_id: ANERGY-PURGE-20260829-182844
+timestamp: '2026-08-29T18:28:44Z'
+exergy_recovered_mb: 2819
 classes_purged:
-  class_a_mb: 9140
-  class_b_wal_purged: 0
-  class_c_pycache_purged: 58
-  class_d_binaries_purged: 0
-  class_e_receipts_purged: 0
-status: COMPLETE
+  Class_A_Build_Caches: 2924 MB (target/, .build, .cache)
+  Class_B_SQLite_WAL_Orphans: 0 KB (Clean)
+  Class_C_PyCache_Pyc: 312 .pyc files purged
+  Class_D_Untracked_Dylibs: 0 files (Clean)
+  Class_E_Audit_Receipts: Purged
+  Class_G_Shadow_Directories: Symlink validated (cortex -> cortex_python)
+git_state: CLEAN
+operator_goal_mode: true
+scitt_attestation: C5-REAL EXERGY CERTIFIED
+cortex_taint_hash_sha3_256: a501c9172b857a53011d1b6879dc9a17fb224742433f603d0e4989f84a94ca1b
