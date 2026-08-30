@@ -60,6 +60,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
             { id: 'license', label: '🔑 LICENCIAS' },
             { id: 'swarm', label: '🐝 ENJAMBRE 21' },
             { id: 'causal', label: '🌐 GRAFO CAUSAL' },
+            { id: 'bft', label: '⚡ CONSENSO BFT' },
             { id: 'axioms', label: '📐 AXIOMAS Z3' },
             { id: 'ledger', label: '🔗 LEDGER WAL' },
           ].map((tab) => (
