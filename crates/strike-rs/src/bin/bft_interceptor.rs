@@ -7,6 +7,7 @@ use inotify::{Inotify, WatchMask};
 use ring::hmac;
 use rusqlite::{params, Connection};
 use signal_hook::consts::signal::{SIGINT, SIGTERM};
+#[cfg(not(windows))]
 use signal_hook::iterator::Signals;
 use std::env;
 #[cfg(target_os = "linux")]
@@ -122,6 +123,20 @@ fn spawn_fs_watch(ledger: Arc<Mutex<BftLedger>>, shutdown_flag: Arc<AtomicBool>)
     }
 }
 
+/// Vigilante de señales SIGINT/SIGTERM → shutdown_flag. signal_hook::iterator es
+/// unix-only en 0.3.18 (#[cfg(all(not(windows), feature = "iterator"))]); en
+/// Windows el cierre ordenado llega vía salida del subproceso CLI (try_wait loop).
+#[cfg(not(windows))]
+fn spawn_signal_watch(shutdown_flag: Arc<AtomicBool>) -> Result<(), Box<dyn std::error::Error>> {
+    let mut signals = Signals::new([SIGINT, SIGTERM])?;
+    thread::spawn(move || {
+        if signals.forever().next().is_some() {
+            shutdown_flag.store(true, Ordering::SeqCst);
+        }
+    });
+    Ok(())
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("█▄ [Causal-Determinist] AGENT CODE BFT INTERCEPTOR (HARDENED MCTS)");
 
@@ -158,14 +173,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let shutdown_flag = Arc::new(AtomicBool::new(false));
 
-    // 1. Manejador de señales (Graceful SIGTERM/SIGINT)
-    let mut signals = Signals::new([SIGINT, SIGTERM])?;
-    let sf = Arc::clone(&shutdown_flag);
-    thread::spawn(move || {
-        if signals.forever().next().is_some() {
-            sf.store(true, Ordering::SeqCst);
-        }
-    });
+    // 1. Manejador de señales (Graceful SIGTERM/SIGINT) — unix-only (iterator es
+    // not(windows) en signal-hook 0.3.18); en Windows el shutdown llega por try_wait.
+    #[cfg(not(windows))]
+    spawn_signal_watch(Arc::clone(&shutdown_flag))?;
 
     // 2. Monitoreo inotify de ~/.agent_persist (Linux-only; no-op en otros OS)
     #[cfg(target_os = "linux")]

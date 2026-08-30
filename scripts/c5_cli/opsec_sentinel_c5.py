@@ -56,6 +56,8 @@ PATH_RULE_ALLOWLIST: tuple[tuple[str, str], ...] = (
     ("scripts/c5_demos/", "*"),                             # fixtures demo 'leaked_*' dummy
     ("scripts/c5_quality_gates/secret_swarm_auditor.py", "*"),   # patrones del propio detector
     ("scripts/c5_quality_gates/audit_100_agents.py", "AWS_SECRET_KEY"),  # constante en docstring
+    ("ci.json", "AWS_SECRET_KEY"),                      # informe de auditoría CI: SHAs/hashes hex citados
+    ("imports.json", "AWS_SECRET_KEY"),                 # grafo de imports: nombres de fichero con prefijo hash
 )
 
 
