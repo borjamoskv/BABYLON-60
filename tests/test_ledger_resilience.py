@@ -3,14 +3,16 @@
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 import pytest
+import pytest_asyncio
 import aiosqlite
 from pathlib import Path
 from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
 from typing import AsyncGenerator
 
 
-@pytest.fixture
+@pytest_asyncio.fixture
 async def ephemeral_ledger(tmp_path: Path) -> AsyncGenerator[BFTLedgerActor, None]:
+
     db_path = tmp_path / "test_resilience.db"
     actor = BFTLedgerActor(db_path)
     await actor.start()
