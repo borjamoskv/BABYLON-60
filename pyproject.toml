@@ -2,6 +2,12 @@
 requires = ["maturin>=1.5,<2.0"]
 build-backend = "maturin"
 
+[tool.uv]
+no-build-isolation-package = ["babylon60"]
+
+[tool.uv.extra-build-dependencies]
+babylon60 = ["maturin>=1.5,<2.0"]
+
 [project]
 name = "babylon60"
 version = "4.0.0"

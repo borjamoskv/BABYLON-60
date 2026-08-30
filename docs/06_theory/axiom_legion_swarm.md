@@ -137,29 +137,37 @@ $$ \lim_{N \to \infty} t_{\text{wall}} = \mathcal{O}\left( \frac{|\mathcal{W}|}{
 > Firma topológica extraída dinámicamente para demostración formal en Lean 4.
 
 ```lean
-namespace Babylon60.Theory.AxiomLegionSwarm
-
-/--
-  Firma formal generada dinámicamente mediante `inject_lean4_stubs.py`.
-  Dominio: C5-REAL Formal Verification
+/-
+  C5Real/LegionSwarm.lean — Axiomatización de Topología Causal de Enjambres
+  
+  BABYLON-60 / C5-REAL v2
 -/
-variable {X Y : Type}
 
-/-- Acotamiento de Concurrencia Férrea -/
-axiom ax_1_a___a_____________________a______a : ∀ (x : X), True
+namespace C5Real
 
-/-- Mutabilidad Cero / Aislamiento Causal -/
-axiom ax_2____a_____a_________a___a________a__a : ∀ (x : X), True
+/-- Topología Causal de la Legión P×S. -/
+structure LegionSwarm (W : Type) (V : Type) where
+  /-- Agente Lógico con Transición de Estado Explícita (No muta W in-place) -/
+  alpha_stateful : W → W × V
+  
+  max_threads : Nat
+  active_threads : Nat → Nat
+  
+  /-- Predicado de Falla Crítica -/
+  is_crash : V → Prop
 
-/-- Fail-Fast de Grano Fino -/
-axiom ax_3__a____a________a : ∀ (x : X), True
+  /-- Acotamiento de Concurrencia Férrea (AX-LS-1) -/
+  strict_concurrency_bound : ∀ (t : Nat), active_threads t ≤ max_threads
 
-/-- y la finitud de $\mathcal{W}$, el proceso termina determinísticamente en un número acotado de operaciones de Dominio C5-REAL. -/
-axiom ax_4____a_______________a___a________________________a______________a___________________a___a__________a________________a : ∀ (x : X), True
+  /-- Mutabilidad Cero / Aislamiento Causal (AX-LS-2)
+      La función de transición proyecta siempre el mismo estado de entrada 
+      (no contamina la invariabilidad del oráculo). -/
+  zero_mutability_invariant : ∀ (w : W), (alpha_stateful w).1 = w 
 
-/-- Invarianza Causal del Scheduler -/
-theorem theorem_1____a__a_za__a__a (x : X) : True := by
-  trivial
+  /-- Fail-Fast de Grano Fino (AX-LS-3)
+      Si se detecta un crash, el sistema garantiza el colapso inmediato
+      y se preserva el estado puro original W. -/
+  granular_fail_fast : ∀ (w : W), is_crash (alpha_stateful w).2 → (alpha_stateful w).1 = w
 
-end Babylon60.Theory.AxiomLegionSwarm
+end C5Real
 ```

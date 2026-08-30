@@ -13,8 +13,10 @@ def _find_tauri_root() -> Path | None:
     """Localiza el directorio que contiene src-tauri/Cargo.toml por heurística:
     cwd primero, luego relativo a la ubicación de este fichero instalado."""
     candidates = (
+        Path.cwd() / "apps" / "src-tauri",
+        Path.cwd() / "apps" / "babylon60-ide" / "src-tauri",
         Path.cwd() / "src-tauri",
-        Path(__file__).resolve().parent.parent.parent / "src-tauri",
+        Path(__file__).resolve().parent.parent.parent.parent / "apps" / "src-tauri",
     )
     for candidate in candidates:
         if (candidate / "Cargo.toml").exists():
@@ -25,54 +27,57 @@ def _find_tauri_root() -> Path | None:
 def main() -> None:
     """
     Ignición Determinista del Puente CORTEX.
-    Busca la raíz del workspace (BABYLON-60) y compila/ejecuta la topología Causal-Determinist (moskv-1-apex).
-
-    Requiere el checkout completo del monorepo BABYLON-60 (con src-tauri/) y Rust/Cargo
-    instalados. No es funcional desde una instalación aislada `pip install cortex-persist`.
     """
-    argparse.ArgumentParser(
-        prog="cortex-bridge",
-        description="Ignición del Puente CORTEX (Tauri/Rust). Requiere checkout completo de BABYLON-60.",
-    ).parse_args()  # sin opciones propias; solo habilita -h/--help
-
+    args = sys.argv[1:]
+    
     tauri_dir = _find_tauri_root()
     if tauri_dir is None:
         print(
             "🔴 [FATAL] No se pudo localizar el root físico Causal-Determinist (src-tauri/Cargo.toml).\n"
-            "    cortex-bridge requiere el checkout completo del monorepo BABYLON-60\n"
-            "    (no funciona desde una instalación aislada `pip install cortex-persist`).\n"
-            "    Clona el repositorio completo: git clone git@github.com:borjamoskv/BABYLON-60.git",
+            "    cortex-bridge requiere el checkout completo del monorepo BABYLON-60.",
             file=sys.stderr,
         )
         sys.exit(1)
+        
+    # The actual rust workspace root is BABYLON-60 (donde está el target dir general)
+    repo_root = tauri_dir
+    while not (repo_root / "Cargo.toml").exists() or not (repo_root / "target").exists() and repo_root.name != "BABYLON-60":
+        if repo_root.parent == repo_root:
+            # Fallback to tauri_dir parent if we reach filesystem root
+            repo_root = tauri_dir.parent.parent
+            break
+        repo_root = repo_root.parent
+        
+    if not (repo_root / "target").exists():
+        repo_root = Path.cwd()
 
+    # HANDOFF SOBERANO A MOSKV-1 (Zero-Python Memory Overhead)
+    if "status" in args or "--status" in args:
+        kernel_path = repo_root / "target" / "debug" / "babylon60_kernel"
+        
+        if not kernel_path.exists():
+            print("🟢 [CORTEX-BRIDGE] Compilando Sovereign Kernel (MOSKV-1) por primera vez...")
+            try:
+                subprocess.run(["cargo", "build", "--bin", "babylon60_kernel"], cwd=str(repo_root), check=True)
+            except subprocess.CalledProcessError:
+                sys.exit(1)
+        
+        # El asesinato de Python. Reemplazo del espacio de memoria por el Kernel C-ABI.
+        os.execv(str(kernel_path), [str(kernel_path), "--status"])
+
+    # Fallback clásico a Tauri si no hay handoff explícito
     cargo_toml = tauri_dir / "Cargo.toml"
-
-    print("🟢 [CORTEX-BRIDGE] Transducción iniciada. Ignición Causal-Determinist del Ledger Rust.")
+    print("🟢 [CORTEX-BRIDGE] Transducción iniciada. Ignición de Interfaz Tauri.")
     try:
-        # BFT_KEY fallback logic (Zero static fallback is strictly handled in Rust, but we warn here if not present)
-        bft_key = os.environ.get("CORTEX_BFT_KEY") or os.environ.get("CORTEX_VAULT_KEY")
-        if not bft_key:
-            print(
-                "🟡 [WARNING] CORTEX_BFT_KEY o CORTEX_VAULT_KEY no detectada. "
-                "El núcleo Rust fallará (Zero Static HMAC Invariant).",
-                file=sys.stderr,
-            )
-
         subprocess.run(["cargo", "run", "--manifest-path", str(cargo_toml)], check=True)
     except FileNotFoundError:
-        print(
-            "🔴 [FATAL] 'cargo' no está instalado o no está en PATH. Instala Rust: https://rustup.rs",
-            file=sys.stderr,
-        )
+        print("🔴 [FATAL] 'cargo' no está instalado o no está en PATH.", file=sys.stderr)
         sys.exit(1)
     except subprocess.CalledProcessError as e:
-        print(f"🔴 [FATAL] El Puente CORTEX colapsó termodinámicamente. Exit Code: {e.returncode}", file=sys.stderr)
         sys.exit(e.returncode)
     except KeyboardInterrupt:
         print("\n💥 [SIGKILL] Puente CORTEX desconectado. Ineficiencia purgada.")
         sys.exit(0)
-
 
 if __name__ == "__main__":
     main()

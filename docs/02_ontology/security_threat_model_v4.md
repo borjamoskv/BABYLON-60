@@ -101,7 +101,7 @@ SerializationBoundary.validate_tensor_checksum(packed_buffer, checksum)
 ### 5.1 Diseño del Protocolo
 Para evitar un punto único de fallo en servidores de licencias manteniendo la protección contra falsificación offline, `HybridLicenseVerifier` implementa:
 
-1. **Chequeo de Firma Offline:** Valida `CORTEX_LICENSE_KEY` mediante firmas Ed25519 (`SOVEREIGN_KEY_SIG`). Opera 100% offline.
+1. **Chequeo de Firma Offline:** Valida `BABYLON60_LICENSE_KEY` mediante firmas Ed25519 (`SOVEREIGN_KEY_SIG`). Opera 100% offline.
 2. **Heartbeat Asíncrono de 7 Días:** Verifica el estado de revocación de forma asíncrona. Si se sobrepasan los 7 días sin conexión, la ejecución continúa en modo advertencia (`HEARTBEAT_WARNING_OFFLINE_GRACE_ACTIVE`) sin bloqueo duro de operaciones críticas.
 
 ---

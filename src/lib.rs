@@ -61,4 +61,5 @@ pub use spsc_ring::SpscRingBuffer;
 pub mod cortex;
 pub use seqlock::{publish, read};
 
+#[cfg(feature = "python")]
 pub mod ffi_python;

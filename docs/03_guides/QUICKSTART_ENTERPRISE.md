@@ -24,8 +24,9 @@ version: 4.0.0
 Before deploying the BABYLON-60 sidecar container, ensure your environment meets the following minimum requirements:
 
 - **Container Runtime:** Docker 24.0+ or Kubernetes 1.28+
-- **Hardware:** 1 vCPU, 512MB RAM (Kernel is lightweight Rust binary)
+- **Hardware:** 1 vCPU, 512MB RAM (Kernel is the lightweight Rust `moskv-1-apex` binary)
 - **Permissions:** Read-only access to agent execution logs / gRPC stream
+- **Handoff:** Python bridge delegating to Rust Kernel via zero-overhead `os.execv` (optional `pyo3` integration available)
 - **Hardware Enclave (Optional):** TPM 2.0 device mapped at `/dev/tpmrm0` for hardware PCR quotes
 
 ---
@@ -50,7 +51,7 @@ services:
   b60_kernel:
     image: babylon60/kernel:4.0.0-sovereign
     environment:
-      - CORTEX_LICENSE_KEY=${CORTEX_LICENSE_KEY:-DEMO_EVALUATION_KEY}
+      - BABYLON60_LICENSE_KEY=${BABYLON60_LICENSE_KEY:-DEMO_EVALUATION_KEY}
       - B60_MODE=READ_ONLY_SHADOW_TAP
       - B60_WORM_QUARANTINE_PATH=/var/log/b60_quarantine
     volumes:

@@ -21,6 +21,7 @@ name = "babylon60"
 path = "src/lib.rs"
 
 [dependencies]
+pyo3 = { version = "0.21.2", features = ["extension-module", "abi3-py310"], optional = true }
 coset = { version = "0.3", optional = true }
 ciborium = { version = "0.2", optional = true }
 rusqlite = { version = "0.40", optional = true, features = ["bundled"] }
@@ -31,6 +32,7 @@ serde_json = { version = "1.0", optional = true }
 
 [features]
 default = ["halt-receipt", "std"]
+python = ["dep:pyo3"]
 halt-receipt = ["dep:coset", "dep:ciborium"]
 cortex-persist = ["dep:rusqlite", "dep:sha2", "dep:hex"]
 cortex-telemetry = ["dep:serde", "dep:serde_json"]
@@ -62,3 +64,7 @@ opt-level = 3
 
 [lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(loom)'] }
+
+[[bin]]
+name = "babylon60_kernel"
+path = "src/bin/babylon60_kernel.rs"

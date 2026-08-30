@@ -114,7 +114,7 @@ BABYLON-60 abandons hardware-dependent physical intuition to embrace a category-
 - **[Valuation Strategy](./05_gtm/VALUATION_STRATEGY.md)**: Comprehensive valuation analysis ($8M to $400M exit scenarios).
 - **[Forensic Quarantine PoC Spec](./05_gtm/forensic_quarantine_poc_spec.md)**: 7-day non-intrusive shadow sidecar PoC specification for enterprise CISOs.
 - **[CISO Cold Email Playbook](./05_gtm/ciso_cold_email_playbook.md)**: High-conversion B2B outreach templates in ES, EN, and DE.
-- **[Enterprise PoC Term Sheet](./05_gtm/enterprise_poc_agreement_term_sheet.md)**: Commercial evaluation contract protecting IP (`CORTEX_LICENSE_KEY`).
+- **[Enterprise PoC Term Sheet](./05_gtm/enterprise_poc_agreement_term_sheet.md)**: Commercial evaluation contract protecting IP (`BABYLON60_LICENSE_KEY`).
 - **[VC Data Room Manifest](./05_gtm/vc_data_room_manifest.md)**: Index mapping all 5 virtual data room due diligence folders for Seed round VCs.
 
 ---

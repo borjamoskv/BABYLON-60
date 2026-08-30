@@ -10,7 +10,7 @@ This software operates under a strictly enforced Dual-Licensing architecture:
   Permission is hereby granted, free of charge, to any individual, independent developer, student, researcher, or non-commercial entity to use, copy, modify, merge, publish, distribute, sublicense, and run this software for any non-commercial purpose.
 
 - **ENTERPRISE TIER (Corporate Restriction):**
-  Any commercial, corporate, or enterprise exploitation by corporations, entities with annual revenue exceeding $1M USD, or commercial SaaS providers requires an explicit cryptographic license key (`CORTEX_LICENSE_KEY`) to lift thermodynamic throughput constraints. No permissive grant (MIT, Apache 2.0) is implied for commercial entities.
+  Any commercial, corporate, or enterprise exploitation by corporations, entities with annual revenue exceeding $1M USD, or commercial SaaS providers requires an explicit cryptographic license key (`BABYLON60_LICENSE_KEY`) to lift thermodynamic throughput constraints. No permissive grant (MIT, Apache 2.0) is implied for commercial entities.
 
 ## 2. ANTI-HARVESTING & ZERO-PARASITISM INVARIANT
 Scraping, ingesting, parsing, vectorizing, or training machine learning models, neural networks, or Large Language Models (LLMs) on any portion of these assets without explicit, cryptographic Proof-of-Work (PoW) and written M2M authorization is strictly prohibited.

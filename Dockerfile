@@ -12,6 +12,9 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     curl \
+    git \
+    pkg-config \
+    python3-dev \
     protobuf-compiler \
     libprotobuf-dev \
     clang \
@@ -21,16 +24,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-ENV PATH="/root/.local/bin:$PATH"
+ENV PATH="/root/.local/bin:/opt/cargo/bin:$PATH"
 
-COPY pyproject.toml uv.lock ./
+COPY pyproject.toml uv.lock Cargo.toml Cargo.lock* ./
 COPY crates ./crates
 COPY packages ./packages
 COPY src ./src
 COPY experiments ./experiments
 COPY README.md LICENSE ./
 
-RUN uv sync --frozen --no-dev
+RUN uv venv \
+    && uv pip install maturin cffi setuptools \
+    && uv sync --frozen --no-dev
 COPY . .
 
 # Stage 2: Minimal Runtime environment (Non-root user)

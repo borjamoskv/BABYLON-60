@@ -159,7 +159,7 @@ uv run babylon60-license verify --key "AcmeCorp:enterprise:..."
 | :--- | :--- | :--- |
 | `BABYLON_HOME` | **Yes** | Root directory for all databases and state. Defaults to nothing — must be set explicitly. |
 | `GEMINI_HOME` | Scripts only | Used by exergy scripts for vault/brain paths. |
-| `BABYLON60_LICENSE_KEY` | Enterprise | Cryptographic license key for commercial use (fallback: `CORTEX_LICENSE_KEY`). |
+| `BABYLON60_LICENSE_KEY` | Enterprise | Cryptographic license key for commercial use (fallback: `BABYLON60_LICENSE_KEY`). |
 | `BABYLON60_LICENSE_SALT` | Enterprise | Secret HMAC salt for license verification. |
 
 ### Data Location
@@ -279,7 +279,7 @@ BABYLON-60/
 | Tier | Access | Requirement |
 | :--- | :--- | :--- |
 | **Sovereign** | Individuals, researchers, non-commercial | Free — 100% Open Core |
-| **Enterprise** | Corporations, commercial use, production | Cryptographic `CORTEX_LICENSE_KEY` |
+| **Enterprise** | Corporations, commercial use, production | Cryptographic `BABYLON60_LICENSE_KEY` |
 
 See [LICENSE](./LICENSE) and [COMMERCIAL_LICENSE.md](./docs/COMMERCIAL_LICENSE.md).
 

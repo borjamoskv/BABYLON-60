@@ -68,9 +68,9 @@ A traditional, standard-density layout:
 
 ---
 
-## 🛜 3. BACKEND ROUTES & API CONTRACTS
+## 🛜 3. BACKEND ROUTES & KERNEL CONTRACTS
 
-The backend is built with FastAPI and runs on a local loopback address, enforcing the **Zero-Network Policy** (no outbound telemetry or external internet calls).
+The core intelligence is driven by the **MOSKV-1 APEX Sovereign Kernel**, a strict Causal-Determinist Rust binary. The backend Python bridge delegates execution to this kernel via a zero-overhead `os.execv` process handoff, and optional Python embeddings are exposed through a native `pyo3` integration. This architecture enforces the **Zero-Network Policy** (no outbound telemetry or external internet calls) while maintaining memory safety and extreme performance.
 
 ### ⧉ Ledger Inspection (`/api/ledger/*`)
 * `GET  /api/ledger/stats`
@@ -125,22 +125,22 @@ Accessible via **`⌘ 8`** or by clicking the diamond icon (`◈`) in the sideba
 BABYLON·60 is compiled into a standalone desktop application using **Tauri v2** and **Rust**.
 
 ### ⚙️ Build Requirements
-* The Tauri configuration is stored in [babylon60-ide/src-tauri/tauri.conf.json](../../apps/babylon60-ide/src-tauri/tauri.conf.json).
+* The Tauri configuration is stored in [apps/babylon60-ide/src-tauri/tauri.conf.json](../../apps/babylon60-ide/src-tauri/tauri.conf.json).
 * A unique bundle identifier is required: `"identifier": "com.babylon60.ide"`.
 * System icons must be generated from the square source image `public/logo_icon.jpg` using the Tauri CLI:
   ```bash
-  cd babylon60-ide && npx --package @tauri-apps/cli tauri icon ../public/logo_icon.jpg
+  cd apps/babylon60-ide && npx --package @tauri-apps/cli tauri icon ../public/logo_icon.jpg
   ```
   This generates all PNG sizes, `icon.icns` for macOS, and `icon.ico` for Windows in `src-tauri/icons/`.
 
 ### 🏗️ Compilation & DMG Generation Command
 The release build compiles all Rust crate dependencies in release mode and packages the macOS bundle:
 ```bash
-cd babylon60-ide && npx --package @tauri-apps/cli tauri build
+cd apps/babylon60-ide && npx --package @tauri-apps/cli tauri build
 ```
 The output assets are compiled to:
-* **macOS Bundle**: `babylon60-ide/src-tauri/target/release/bundle/macos/BABYLON60.app`
-* **DMG Installer**: `babylon60-ide/src-tauri/target/release/bundle/dmg/BABYLON60_0.1.0_aarch64.dmg`
+* **macOS Bundle**: `apps/babylon60-ide/src-tauri/target/release/bundle/macos/BABYLON60.app`
+* **DMG Installer**: `apps/babylon60-ide/src-tauri/target/release/bundle/dmg/BABYLON60_0.1.0_aarch64.dmg`
 
 ---
 
@@ -148,10 +148,14 @@ The output assets are compiled to:
 
 The repository enforces strict BFT (Byzantine Fault Tolerance) consistency checks to protect against code-injection and credential leakage:
 
-### 🔍 Secret Swarm Auditor (`scripts/canary_check.py`)
+### 🔍 Secret Swarm Auditor (`scripts/c5_quality_gates/secret_swarm_auditor.py`)
 Scans all active project directories (excluding `.venv`, `node_modules`, `dist`, and `target`) for high-entropy strings and hardcoded credentials (AWS, RSA private keys, JWTs, Github tokens, Google APIs).
-* Run command: `python3 scripts/canary_check.py`
+* Run command: `python3 scripts/c5_quality_gates/secret_swarm_auditor.py`
 * Enforces entropy threshold $> 4.8$ for any word token longer than 20 characters.
+
+### 🦅 Canary Guard (`scripts/canary_check.py`)
+Verifies that honeypot canary tokens (planted fake credentials) remain active in the repository tree to detect external intrusion attempts or cloning by unauthorized actors.
+* Run command: `python3 scripts/canary_check.py`
 
 ### 🧪 Test & Regress Verification
 The entire test suite compiles and runs against the isolated virtual environment `.venv` interpreter (Python 3.12/3.14):

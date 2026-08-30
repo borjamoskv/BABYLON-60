@@ -58,13 +58,35 @@ BABYLON-60 attacks these problems at the infrastructure layer, below the LLM, by
 
 ---
 
-## 2. F60: Sexagesimal Exact Arithmetic
+## 2. Epistemological Isomorphisms (The C5-REAL Foundation)
 
-### 2.1 Motivation
+The architectural constraints of BABYLON-60 are not arbitrary software engineering choices; they are derived from formal isomorphisms between biological systems, historical collapse modalities, and computational thermodynamics. By mapping the failure modes of complex systems, we identify the exact structural invariants required to prevent entropy injection (Anergy) in autonomous agents.
+
+### 2.1 Degeneracy and Base-60 Robustness
+
+Biological robustness relies on *degeneracy* (Edelman & Gally, 2001)—the ability of structurally different elements to perform the same function, providing alternate pathways when primary systems fail. The historical Babylonian sexagesimal (base-60) system exhibited extreme topological degeneracy, absorbing computational errors through highly composite factorability. In BABYLON-60, **F60 Exact Arithmetic** replicates this degeneracy. By preventing floating-point approximation (IEEE 754), it eliminates the *erosion of redundancy* that causes the slow, monotonic decay (analogous to the silting of irrigation canals) observed in modern vector-based architectures.
+
+### 2.2 The Error Catastrophe & Replicative Decay
+
+In evolutionary dynamics, Eigen's error threshold defines the critical mutation rate beyond which information dissolves into noise. This *error catastrophe* mirrors the collapse of cuneiform scribal transmission: when copy errors exceeded correction capacity, the consensus canonical text disintegrated. Modern autonomous agents suffer this exact decay through context hallucination across inference loops. The **BFT DAG Ledger** acts as an immutable, cryptographically sealed phylogenetic tree, preventing replicative decay by guaranteeing that the causal lineage of every token is topologically preserved and tamper-evident.
+
+### 2.3 Predictive Overfitting & Generative Omens
+
+Mesopotamian omen systems operated as rigid generative priors. When their predictive coding models (Friston, 2010) failed to adjust to new environmental surprises, the system suffered from *overfitting*—confidently predicting the past while failing in the present. Modern LLMs exhibit an isomorphic pathology termed *Context Rot*. To prevent the system from confidently hallucinating based on obsolete priors, BABYLON-60 utilizes a **Self-Falsification Engine**. When causal or numerical reality is contaminated, the engine mimics biological apoptosis (programmed cell death): it forces a `CRITICAL HALT`, preferring total silence over the propagation of a falsified model.
+
+### 2.4 Metabolic Integrators and Exergy Limits
+
+In physiological networks, metabolic integrators (like the liver, or historically, the redistributive temple economy) smooth out flow fluctuations. Under sustained stress, the integrator saturates and the system collapses into famine (or computational starvation). The **Thermodynamic Routing Matrix** maps this constraint to computational *Exergy*. It imposes strict bounds on reasoning depth and parallel `FORK` coroutines. If an agent enters a *Limerence Loop*—consuming computational calories without producing causal DAG state changes—the matrix cuts the energy flow, terminating the runaway loop before it drains the system's execution bandwidth.
+
+---
+
+## 3. F60: Sexagesimal Exact Arithmetic
+
+### 3.1 Motivation
 
 In IEEE 754 double-precision (`f64`), the fraction `1/3` is represented as `0.333333333333333...` with an error of `~5.55e-17` per operation. Over 10⁶ scheduling iterations (a typical long-running agent lifecycle), this drift accumulates to `~5.55e-11` — sufficient to cause off-by-one tick errors in high-frequency scheduling, false singularity detection in numerical simulation, and divergent replay hashes in audit trails.
 
-### 2.2 Design
+### 3.2 Design
 
 BABYLON-60 defines `F60` as a compile-time rational type:
 
@@ -82,15 +104,15 @@ All temporal values are strongly typed with units (`UNIT.TICK`, `UNIT.SECOND`, `
 | 1 hour ÷ 3 | 0.33333... hours | `F60(20, 1)` = 0;20 = 20 min exact | **0** |
 | 1 hour ÷ 7 | 0.14285... hours | `F60(8, 1)` + remainder tracked | **bounded** |
 
-### 2.3 Overflow Protection
+### 3.3 Overflow Protection
 
 If `base60_scale` saturates (exceeds the representable range), the result cannot be represented exactly. Rather than silently truncating — which would contaminate downstream computations — the system triggers a **CRITICAL HALT** (§4). This is the "truncation firewall": the kernel refuses to emit approximate results under any circumstance.
 
 ---
 
-## 3. BFT DAG Ledger
+## 4. BFT DAG Ledger
 
-### 3.1 Architecture
+### 4.1 Architecture
 
 The execution ledger is not a flat `Vec<Event>` but a formal Directed Acyclic Graph where each event contains:
 
@@ -106,7 +128,7 @@ struct DAGEvent {
 }
 ```
 
-### 3.2 Properties
+### 4.2 Properties
 
 | Property | Mechanism | Guarantee |
 | :--- | :--- | :--- |
@@ -115,7 +137,7 @@ struct DAGEvent {
 | **Deterministic replay** | `replay_hash` = SHA-256(ordered event sequence) | 1:1 execution correspondence |
 | **Tamper evidence** | Hash chain over parent events | Detectable modification |
 
-### 3.3 Temporal Domain Separation
+### 4.3 Temporal Domain Separation
 
 Three temporal domains are strongly typed and **incompatible at compile time**:
 
@@ -125,15 +147,15 @@ Three temporal domains are strongly typed and **incompatible at compile time**:
 
 Mixing temporal domains is a **compile-time error**, not a runtime warning.
 
-### 3.4 Collision Invariant (INV_BFT_04)
+### 4.4 Collision Invariant (INV_BFT_04)
 
 If two events share the same `id` but produce different hashes, the kernel panics immediately ("fail-fast collision check"). This prevents silent overwrites in the agent's memory, which is the root cause of context rot in vector-database architectures.
 
 ---
 
-## 4. Self-Falsification Engine
+## 5. Self-Falsification Engine
 
-### 4.1 The Dead Man's Switch
+### 5.1 The Dead Man's Switch
 
 BABYLON-60 is designed to **self-destruct when numerical reality is contaminated**. The falsification engine monitors three invariants during execution:
 
@@ -143,13 +165,13 @@ BABYLON-60 is designed to **self-destruct when numerical reality is contaminated
 | **Causal Consistency** | Event processed out of topological order vs. `AWAIT` dependencies | `CRITICAL HALT` + log purge |
 | **Replay Determinism** | Re-execution from same seed produces divergent `replay_hash` | Artifact invalidated, denied for Lean 4 |
 
-### 4.2 Why Self-Destruct?
+### 5.2 Why Self-Destruct?
 
 Current AI systems, when they fail, **hallucinate silently**. The failure mode is undetectable by the system itself and by downstream consumers. BABYLON-60 takes the opposite approach: it prefers to halt and emit nothing rather than emit potentially spurious evidence.
 
 This is the "dead man's switch" property: the absence of a `CRITICAL HALT` in the log is itself a positive signal that the execution maintained all invariants.
 
-### 4.3 Falsification Test Suite
+### 5.3 Falsification Test Suite
 
 The repository includes `falsation_test.b60`, a dedicated self-destruction suite:
 
@@ -158,9 +180,9 @@ The repository includes `falsation_test.b60`, a dedicated self-destruction suite
 
 ---
 
-## 5. Proof IR and Lean 4 Backend
+## 6. Proof IR and Lean 4 Backend
 
-### 5.1 Architecture
+### 6.1 Architecture
 
 To avoid coupling the kernel to a specific theorem prover, BABYLON-60 emits a minimal **Proof Intermediate Representation** (Proof IR):
 
@@ -179,13 +201,13 @@ The Proof IR contains exclusively:
 | `Obligation` | Tasks delegated to the external prover |
 | `Witness` | Evidence of singularity or state collapse |
 
-### 5.2 The Theorem of BABYLON (Operational Version)
+### 6.2 The Theorem of BABYLON (Operational Version)
 
 > *"If a well-typed program terminates without `CRITICAL HALT` and the Artifact Bundle passes cryptographic validation, then there exists a one-to-one correspondence between the observed runtime execution and the trace represented in the exported artifact."*
 
 This theorem is the formal foundation of the audit guarantee: the artifact perfectly represents the semantic execution, completely decoupled from the physical truth of the numerical model.
 
-### 5.3 Export Artifact Schema
+### 6.3 Export Artifact Schema
 
 Upon detecting a causal candidate (or termination), the kernel exports a cryptographically sealed package:
 
@@ -202,13 +224,13 @@ Two different machines compiling the same `.b60` source produce exactly the same
 
 ---
 
-## 6. Thermodynamic Routing Matrix
+## 7. Thermodynamic Routing Matrix
 
-### 6.1 Exergy Constraints
+### 7.1 Exergy Constraints
 
 The routing matrix applies exergy bounds to the agent's reasoning AST. Each `FORK` operation has a bounded exergy budget. If a coroutine exceeds its budget without producing a measurable state transition in the DAG Ledger, it is classified as a **limerence loop** and terminated.
 
-### 6.2 Instruction Set (v3.0)
+### 7.2 Instruction Set (v3.0)
 
 The kernel operates on a minimal ISA (~25 instructions) designed for formal provability:
 
@@ -222,7 +244,7 @@ The kernel operates on a minimal ISA (~25 instructions) designed for formal prov
 | `AWAIT S L` | Causality | Emit event `S`, freeze frame until topological `ACK`, resume at `L` |
 | `EXECUTE S` | Ledger | Idempotent fire-and-forget event `S` to ledger |
 
-### 6.3 Trusted Computing Base (TCB)
+### 7.3 Trusted Computing Base (TCB)
 
 | Trusted | Untrusted |
 | :--- | :--- |
@@ -232,9 +254,9 @@ The TCB is deliberately minimized: ~25 instructions, 3 special registers, strong
 
 ---
 
-## 7. Compliance and Regulatory Alignment
+## 8. Compliance and Regulatory Alignment
 
-### 7.1 EU AI Act
+### 8.1 EU AI Act
 
 The EU AI Act (effective 2025) requires that high-risk AI systems provide:
 
@@ -248,13 +270,13 @@ BABYLON-60's BFT DAG Ledger and Proof IR directly address Articles 11, 12, and 1
 - Formally verified proof obligations exportable as compliance documentation (Art. 11)
 - Human-readable causal lineage through the DAG structure (Art. 14)
 
-### 7.2 Financial Regulation (SEC, MiFID II)
+### 8.2 Financial Regulation (SEC, MiFID II)
 
 Algorithmic trading systems must demonstrate that autonomous decisions are explainable and reproducible. The `replay_hash` determinism and `F60` exact arithmetic provide the mathematical foundation for reproducible audit trails in high-frequency trading environments.
 
 ---
 
-## 8. Conclusion
+## 9. Conclusion
 
 BABYLON-60 represents a departure from the prevailing approach of wrapping probabilistic models in ad-hoc orchestration frameworks. By imposing formal constraints at the infrastructure layer — exact arithmetic, cryptographic ledgers, self-falsification, and theorem-prover integration — we provide a substrate upon which verifiable autonomous agents can be built with the rigor demanded by regulated industries.
 
@@ -264,6 +286,10 @@ The system's correctness is not a claim but a proof obligation: if the kernel te
 
 ## References
 
+- Bejan, A., & Lorente, S. (2008). *Design with Constructal Theory*. Wiley.
+- Edelman, G. M., & Gally, J. A. (2001). "Degeneracy and Complexity in Biological Systems". *PNAS*, 98(24), 13763–13768.
+- Eigen, M. (1971). "Selforganization of Matter and the Evolution of Biological Macromolecules". *Naturwissenschaften*, 58(10), 465–523.
+- Friston, K. (2010). "The Free-Energy Principle: A Unified Brain Theory?". *Nature Reviews Neuroscience*, 11(2), 127–138.
 - Repository: [github.com/borjamoskv/BABYLON-60](https://github.com/borjamoskv/BABYLON-60)
 - Specification: [SPECIFICATION.md](https://github.com/borjamoskv/BABYLON-60/blob/main/SPECIFICATION.md)
 - Website: [babylon60.com](https://babylon60.com)

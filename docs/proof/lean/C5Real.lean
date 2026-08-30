@@ -12,3 +12,7 @@
 import C5Real.MarkovWorld
 import C5Real.BayesianLens
 import C5Real.Provenance
+import C5Real.BayesianDisintegration
+import C5Real.LegionSwarm
+import C5Real.OncologyProtocol
+import C5Real.TonnetzOversight
