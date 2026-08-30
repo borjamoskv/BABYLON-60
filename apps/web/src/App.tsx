@@ -9,6 +9,7 @@ import { LicensePortal } from './components/LicensePortal';
 import { ComplianceInspector } from './components/ComplianceInspector';
 import { BlogPortal } from './components/BlogPortal';
 import { CausalGraphVisualizer } from './components/CausalGraphVisualizer';
+import { BftConsensusSimulator } from './components/BftConsensusSimulator';
 import { soundFx } from './components/AudioEngine';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         {activeTab === 'license' && <LicensePortal />}
         {activeTab === 'swarm' && <SwarmMonitor />}
         {activeTab === 'causal' && <CausalGraphVisualizer />}
+        {activeTab === 'bft' && <BftConsensusSimulator />}
         {activeTab === 'axioms' && <AxiomMatrix />}
         {activeTab === 'ledger' && <LedgerInspector />}
       </main>
