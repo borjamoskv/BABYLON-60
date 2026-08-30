@@ -35,8 +35,9 @@ def test_re_drm_rust_bft_verification():
     # (evita que pyo3-build-config herede un Python del sistema obsoleto).
     env["PYO3_PYTHON"] = sys.executable
     res = subprocess.run(
-        ["cargo", "run", "--manifest-path", "crates/strike-rs/Cargo.toml", "--bin", "c5_p2p_bft", "--", "--re_drm"],
+        ["cargo", "run", "-p", "strike_rs", "--bin", "c5_p2p_bft", "--", "--re_drm"],
         cwd=PROJECT_ROOT,
+
         capture_output=True,
         text=True,
         env=env,
