@@ -1,8 +1,11 @@
 import asyncio
+import pytest
 from babylon60.cortex.cortex_chaos_monad import run_chaos_monad
 import json
 
+@pytest.mark.asyncio
 async def test_attestation():
+
     with open("scripts/c5_isomorphisms/cancer_isomorphism_pipeline.py", "r") as f:
         payload_code = f.read()
 
