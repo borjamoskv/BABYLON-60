@@ -8,6 +8,7 @@ import { LedgerInspector } from './components/LedgerInspector';
 import { LicensePortal } from './components/LicensePortal';
 import { ComplianceInspector } from './components/ComplianceInspector';
 import { BlogPortal } from './components/BlogPortal';
+import { CausalGraphVisualizer } from './components/CausalGraphVisualizer';
 import { soundFx } from './components/AudioEngine';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         {activeTab === 'compliance' && <ComplianceInspector />}
         {activeTab === 'license' && <LicensePortal />}
         {activeTab === 'swarm' && <SwarmMonitor />}
+        {activeTab === 'causal' && <CausalGraphVisualizer />}
         {activeTab === 'axioms' && <AxiomMatrix />}
         {activeTab === 'ledger' && <LedgerInspector />}
       </main>
