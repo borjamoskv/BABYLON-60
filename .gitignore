@@ -16,6 +16,7 @@ test_*.b60
 *.secret
 *.p12
 *.crt
+*.canary*
 
 # Virtual Environments & Caches
 __pycache__/

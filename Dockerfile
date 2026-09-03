@@ -49,16 +49,16 @@ LABEL org.opencontainers.image.title="BABYLON-60" \
       org.opencontainers.image.licenses="Sovereign Dual-License (Non-Commercial / Enterprise)"
 
 WORKDIR /app
-RUN useradd -m -u 1000 appuser
+RUN useradd -m -u 1000 cortex
 
 COPY --from=builder /app /app
-COPY --from=builder /root/.local /home/appuser/.local
+COPY --from=builder /root/.local /home/cortex/.local
 
-ENV PATH="/home/appuser/.local/bin:/app/.venv/bin:$PATH" \
+ENV PATH="/home/cortex/.local/bin:/app/.venv/bin:$PATH" \
     PYTHONUNBUFFERED=1 \
     PYTHONPATH="/app/packages:/app/experiments:."
 
-USER appuser
+USER cortex
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
     CMD python -c "import babylon60; print('BABYLON-60 OK')" || exit 1

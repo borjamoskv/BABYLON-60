@@ -25,6 +25,6 @@ alarma. Si `scripts/canary_check.py` deja de ver una → posible purga maliciosa
 
 ## Estado
 
-- [ ] AWS canary plantado
-- [ ] GitHub token canary plantado
-- [ ] Solana keypair canary plantado
+- [x] AWS canary plantado
+- [x] GitHub token canary plantado
+- [x] Solana keypair canary plantado

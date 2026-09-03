@@ -56,7 +56,7 @@ def query_ledger(query_type, param):
 
         conn.close()
         return results
-    except Exception as e:
+    except sqlite3.Error as e:
         return {"error": str(e)}
 
 
