@@ -19,9 +19,9 @@ jobs:
     - name: Rust Check and Test
       run: cargo check --workspace && cargo test --workspace
     - name: Setup Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.12'
+        python-version: '3.14'
     - name: Python Pytest
       run: |
         pip install pytest
