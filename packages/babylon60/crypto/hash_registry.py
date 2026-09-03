@@ -26,7 +26,7 @@ from __future__ import annotations
 import hashlib
 from enum import Enum
 
-from babylon60.utils.base60 import bytes_to_base60
+from babylon60.primitives.base60 import bytes_to_base60
 
 
 class HashAlgorithm(Enum):

@@ -21,6 +21,11 @@ from .hygiene import (
 )
 from .engine import GenomicEvaluationEngine
 from .transducer import GenomicStateTransducer
+from .vsa_oncology import (
+    BFOCategory,
+    HyperVector,
+    OncologyOntologyVSA,
+)
 
 __all__ = [
     "GenomicVariantRecord",
@@ -32,4 +37,7 @@ __all__ = [
     "FASTASequenceValidator",
     "GenomicEvaluationEngine",
     "GenomicStateTransducer",
+    "BFOCategory",
+    "HyperVector",
+    "OncologyOntologyVSA",
 ]

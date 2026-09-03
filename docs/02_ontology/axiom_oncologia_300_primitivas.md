@@ -15,7 +15,7 @@ version: 1.0.0
 
 ### Ontología Ledger Asíncrono / BABYLON-60 -- Bloques fundamentales de biología tumoral
 
-*Generado determinísticamente | 300 primitivas | escala de confianza C5-established | fuente única: `scripts/gen_oncology_primitives.py`*
+*Generado determinísticamente | 300 primitivas | escala de confianza C5-established | fuente única: `scripts/c5_isomorphisms/gen_oncology_primitives.py`*
 
 > [!WARNING]
 > **Aviso Médico y Legal:** Esto es una **ONTOLOGÍA DE CONOCIMIENTO** de biología molecular del cáncer y de sus dianas terapéuticas: los bloques fundamentales que la investigación oncobiológica estudia y ataca. **NO es una cura, NO es un protocolo de tratamiento y NO constituye consejo médico.** El cáncer comprende más de 200 enfermedades distintas; el diagnóstico y el tratamiento son clínicos, individualizados y competencia exclusiva de oncólogos e investigadores sanitarios.
@@ -44,7 +44,7 @@ Autoría artística/arquitectónica del sustrato (AKA): **Borja Motor Causal** (
 | 14 | [Microambiente tumoral (TME)](#microambiente-tumoral-tme) | tissue | 13 |
 | 15 | [Inmuno-oncologia y evasion inmune](#inmuno-oncologia-y-evasion-inmune) | tissue | 22 |
 | 16 | [Modalidades terapeuticas](#modalidades-terapeuticas) | therapy | 18 |
-| 17 | [Primitivas farmaco -> diana](#primitivas-farmaco-->-diana) | therapy | 27 |
+| 17 | [Primitivas farmaco -> diana](#primitivas-farmaco-diana) | therapy | 27 |
 | | **TOTAL** | | **300** |
 
 ---
@@ -89,10 +89,6 @@ graph TD
     TME & IMM --> EMT
     MOD & DRUG -. "Inversión Causal (Bloqueo BFT)" .-> P & CC & APO & IMM
 ```
-
----
-
----
 
 ---
 
@@ -499,7 +495,7 @@ graph TD
 
 ## Primitivas Fármaco -> Diana
 > **Invariante C5:** `INV_BIO_17` | *Operador Transductivo:* \( D_{\text{rug}}: \text{Compound} \times \text{Target} \implies \mathbb{I}_{\text{inhibition}} \)
-<a id="primitivas-farmaco-->-diana"></a>
+<a id="primitivas-farmaco-diana"></a>
 *Capa: therapy | 27 primitivas*
 
 | ID | Primitiva | Rol | Mecanismo | Relevancia terapeutica | Referencia |
@@ -542,45 +538,61 @@ Las primitivas cubren desde los *hallmarks* de Hanahan & Weinberg (Cell 2000, 20
 
 ---
 
-## 18. Formalización de Categorías de Markov y Desintegración Bayesiana
+## 18. Formalización de Topología Dinámica y Paisajes de Waddington
 
 > [!IMPORTANT]
-> **Teorema de Transducción Oncobiológica ($V_A$ Grounding):** En la Categoría de Kleisli \( \mathcal{Kl}(D) \), cada primitiva oncológica \( ONC_{i} \) actúa como una **Lente Bayesiana** que actualiza la densidad de probabilidad del estado tumoral \( P(X_t \mid X_{t-1}) \).
+> **Modelo Dinámico de Transiciones Fenotípicas:** La red oncobiológica se formaliza como un sistema dinámico estocástico sobre un paisaje epigenético cuantificado $U(\mathbf{x})$, donde el vector de estado $\mathbf{x} \in \mathbb{R}^d$ representa los niveles de expresión y fosforilación de las primitivas celulares:
+> $$ \frac{d\mathbf{x}}{dt} = -\nabla U(\mathbf{x}) + \mathbf{F}_{\text{oncogénico}}(\mathbf{x}) + \sqrt{2 D_{\text{term}}}\,\boldsymbol{\xi}(t) $$
 
-### 18.1 Ecuaciones Fundamentales de Exergía y Entropía Tumoral
+### 18.1 Cuencas de Atracción y Estabilidad Estructural
 
-1. **Agotamiento Exérgico Causal:**
-   \[
-   \Delta E_{\text{exergy}} = \int_0^T \left( \sigma_{\text{mitosis}}(t) - \delta_{\text{checkpoint}}(t) \right) dt \le E_{\text{limit}}
-   \]
-2. **Cota de Desintegración Bayesiana en \( \mathcal{Kl}(D) \):**
-   \[
-   D_{\text{KL}}\left( P_{\text{tumor}}(X) \parallel P_{\text{homeostasis}}(X) \right) = \sum_{i=1}^{300} w_i \cdot \log \left( \frac{\text{Mechanism}(ONC_i)}{\text{Basal}(ONC_i)} \right)
-   \]
-3. **Invariante C5 de Sintesis Letal (Dualidad PARP/BRCA):**
-   \[
-   \Phi_{\text{lethal}}(x) = \mathbb{I}_{\text{HRD}}(x) \wedge \mathbb{I}_{\text{PARPi}}(x) \implies \text{Apoptosis}_{\Sigma_1}
-   \]
+1. **Cuenca Homeostática:**
+   Estado diferenciado basal $U(\mathbf{x}_{\text{basal}})$, protegido por las barreras de activación de los supresores tumorales (`TP53`, `RB1`, `PTEN`):
+   $$ \Delta U^{\ddagger} = U(\mathbf{x}_{\text{saddle}}) - U(\mathbf{x}_{\text{basal}}) > 0 $$
 
-### 18.2 Matriz de Exportación AST & Verificación Lean 4
+2. **Transición Maligna e Inestabilidad:**
+   Las mutaciones en oncogenes de ganancia de función (`KRAS G12C`, `BRAF V600E`) actúan como fuerzas no conservativas $\mathbf{F}_{\text{oncogénico}}$ que deforman el potencial, colapsando la barrera $\Delta U^{\ddagger} \to 0$ y canalizando la trayectoria celular hacia la cuenca proliferativa desregulada.
 
-El árbol ontológico de las 300 primitivas se exporta automáticamente a un AST determinista de tipo `OncologyOntology.lean` mediante el script del Kernel:
+3. **Inversión Terapéutica por Letalidad Sintética:**
+   En contextos de deficiencia en recombinación homóloga ($\mathbb{I}_{\text{HRD}} = 1$), la inhibición de `PARP1` mediante olaparib (`ONC-286`) reconfigura el espacio de fase, eliminando la cuenca atractora tumoral y forzando la trayectoria hacia la bifurcación de apoptosis mitocondrial ($\text{MOMP}$).
+
+### 18.2 Taxonomía Fundamentada en BFO (ISO/IEC 21838-2)
+
+Para prevenir el aplanamiento ontológico, las 300 primitivas se particionan en tres categorías disjuntas:
+
+* **Continuants (Entidades Materiales y Estructurales):**
+  - Genes y Receptores: `KRAS`, `EGFR`, `TP53`, `BRCA1`.
+  - Compuestos Terapéuticos: `Sotorasib`, `Osimertinib`, `Trastuzumab Deruxtecan`.
+  - Complejos Moleculares: Complejo MRN (`MRE11-RAD50-NBS1`), BAX/BAK.
+
+* **Occurrents (Procesos Fisiológicos y Transducción Temporal):**
+  - Cascadas de Señalización: Cascada MAPK, Eje PI3K-AKT-mTOR.
+  - Puntos de Control: Checkpoint G1/S, Checkpoint G2/M, Checkpoint del Huso (SAC).
+  - Vías de Muerte Celular: Apoptosis Intrínseca, Ferroptosis (`GPX4`), Piroptosis.
+
+* **Informational Entities (Métricas, Modelos y Evidencia):**
+  - Biomarcadores Clínicos: Carga Mutacional Tumoral (`TMB`), Inestabilidad de Microsatélites (`MSI-H`), Firmas Mutacionales COSMIC (`SBS1`..`SBS13`).
+  - Modelos e Hipótesis: Hipótesis de Dos Impactos de Knudson (`ONC-016`), Límite de Hayflick (`ONC-161`).
+
+---
+
+## 19. Representación Vectorial Simbólica (VSA) y Trazabilidad EU AI Act
+
+### 19.1 Binding Hiperdimensional $\mathcal{O}(1)$
+En la capa de inferencia causal, cada primitiva se proyecta sobre vectores bipolares densos $\mathbf{v} \in \{-1, +1\}^D$ ($D = 10\,000$). La asociación fármaco-diana se resuelve mediante el operador de convolución circular o producto Hadamard:
+
+$$ \mathbf{v}_{\text{complejo}} = \mathbf{v}_{\text{fármaco}} \circledast \mathbf{v}_{\text{diana}} $$
+
+La similitud cosenoidal normalizada se evalúa mediante operaciones bitwise POPCOUNT/XOR en hardware SIMD/NEON con complejidad temporal estrictamente $\mathcal{O}(1)$.
+
+### 19.2 Trazabilidad de Evidencia y Cumplimiento Regulatorio (EU AI Act)
+De conformidad con los Artículos 10 (Calidad de Datos) y 12 (Trazabilidad) del Reglamento (UE) 2024/1689:
+* Cada relación causal está vinculada a identificadores estandarizados de persistencia global (PubMed PMID, UniProt, ChEMBL, COSMIC).
+* Se mantiene separación estricta entre **ontología descriptiva de biología molecular** y **sistemas de apoyo al diagnóstico clínico**, garantizando que ningún algoritmo derive prescripciones automáticas sin supervisión médica humana cualificada (Human-in-the-Loop, Art. 14).
+
+### 19.3 Generación y Exportación Determinista
+Para reconstruir los artefactos derivados en JSON y Lean 4:
 ```bash
-python3 scripts/gen_oncology_primitives.py --export-lean4 --json-out data/oncology_300.json
+python3 scripts/c5_isomorphisms/gen_oncology_primitives.py
+python3 scripts/babylon60/gen_oncology_primitives.py --export-lean4 --json-out data/oncology_300.json
 ```
-
----
-
-## 19. Control Termodinámico y Límite de Anergía (Purga $\Omega$)
-
-> [!IMPORTANT]
-> **Axioma de Extinción Epistémica (Punto Fijo $\Omega$):** El catálogo de 300 primitivas constituye la matriz de mínima entropía semántica requerida para acorralar la complejidad oncológica.
-
-### 19.1 Operador Transductivo de Purga
-
-> **Invariante C5:** `INV_BIO_19` | *Operador Transductivo:* \( \Omega_{\text{purge}}: \Delta S_{\text{anergy}} \to 0 \)
-
-- **Reducción Dimensional Exergética:** Cada terapia $ONC_{i} \in \mathcal{T}$ (donde $256 \le i \le 300$) actúa como un operador contractivo sobre el espacio de fase tumoral, colapsando trayectorias metastásicas anérgicas en el atractor puntual $\Omega$.
-- **Anergy Purge en $\mathcal{Kl}(D)$:** La aplicación reiterada del bloqueo farmacológico purga la *entropía discursiva/biológica*, obligando a la red a obedecer transiciones probabilísticas $P(X_{t+1}|X_t)$ donde el límite temporal tiende a la extinción tumoral (cero anergía termodinámica).
-
----

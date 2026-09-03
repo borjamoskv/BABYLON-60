@@ -40,6 +40,7 @@ def _init_lib():
 def verify_payload(payload: bytes, nonce: int, proof_hash: bytes) -> bool:
     """
     Verifica un payload contra su nonce y su hash de prueba mediante el motor nativo FFI.
+    Si la biblioteca nativa FFI no se encuentra compilada, aplica fallback determinista en Python.
 
     Args:
         payload: Bytes del contenido estocástico.
@@ -49,8 +50,12 @@ def verify_payload(payload: bytes, nonce: int, proof_hash: bytes) -> bool:
     Returns:
         bool: True si la verificación fue exitosa, False en caso contrario.
     """
-    lib = _init_lib()
-    return bool(lib.verify_inference_payload(payload, nonce, proof_hash))
+    try:
+        lib = _init_lib()
+        return bool(lib.verify_inference_payload(payload, nonce, proof_hash))
+    except (FileNotFoundError, OSError):
+        expected = generate_proof(payload, nonce)
+        return expected.lower() == proof_hash.lower()
 
 
 def generate_proof(payload: bytes, nonce: int) -> bytes:
