@@ -48,7 +48,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from babylon60.bft.cortex_persist_ledger import CortexEvent, CortexPersistLedger  # noqa: E402
-from babylon60.extensions.swarm.verification_gate import RiskLevel, VerificationGate  # noqa: E402
+from babylon60.verification.verification_gate import RiskLevel, VerificationGate  # noqa: E402
 
 logger = logging.getLogger("babylon60.mcp.server")
 

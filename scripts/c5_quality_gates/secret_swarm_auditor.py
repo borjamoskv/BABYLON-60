@@ -33,6 +33,7 @@ EXCLUDE_DIRS = {
     "BABYLON-60-fixes",
     "target",
     "claude_code_local_logs",
+    ".kimi-code",
 }
 EXCLUDE_EXTS = {
     ".png",

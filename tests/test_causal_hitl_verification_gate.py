@@ -6,7 +6,7 @@ Conforme a RULE[human_in_the_loop_causal_governance] y RULE[c5_real_invariants].
 
 import os
 import pytest
-from babylon60.extensions.swarm.verification_gate import (
+from babylon60.verification.verification_gate import (
     AgentState,
     CausalSignOffReceipt,
     RiskLevel,
