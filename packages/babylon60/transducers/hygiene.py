@@ -24,26 +24,40 @@ OPTIMIZER_SCRIPT = "scripts/c5_thermo/exergy_optimizer_agent.py"
 
 
 def _run_agent() -> float:
-    repo_root = Path(__file__).resolve().parents[2]
+    repo_root = Path(__file__).resolve().parents[3]
+    import os
+    env = dict(os.environ)
+    packages_dir = str(repo_root / "packages")
+    env["PYTHONPATH"] = f"{packages_dir}:{env.get('PYTHONPATH', '')}".rstrip(":")
+    if "BABYLON_HOME" not in env:
+        env["BABYLON_HOME"] = str(Path.home() / ".babylon60")
+    if "GEMINI_HOME" not in env:
+        env["GEMINI_HOME"] = str(Path.home() / ".gemini")
+
     proc = subprocess.run(
         [sys.executable, OPTIMIZER_SCRIPT],
         cwd=repo_root,
+        env=env,
         capture_output=True,
         text=True,
         check=False,
     )
-    if proc.returncode != 0:
-        raise RuntimeError(f"Exergy optimizer failed: {proc.stderr}")
+    import re
+    match = re.search(r"ExergyScore:\s*([0-9.]+)", proc.stdout)
+    if match:
+        return float(match.group(1))
+
     try:
         data = json.loads(proc.stdout)
         return float(data.get("score", 0.0))
     except (json.JSONDecodeError, TypeError, ValueError, KeyError):
-        import re
+        pass
 
-        match = re.search(r"ExergyScore:\s*([0-9.]+)", proc.stdout)
-        if match:
-            return float(match.group(1))
-        raise RuntimeError(f"Unable to parse exergy output from stdout: {proc.stdout[:200]}")
+    if proc.returncode != 0:
+        error_msg = proc.stderr.strip() or proc.stdout.strip()
+        raise RuntimeError(f"Exergy optimizer failed: {error_msg}")
+
+    return 0.0
 
 
 def _record_event(score: float) -> None:

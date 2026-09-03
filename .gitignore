@@ -10,6 +10,7 @@ test_*.b60
 # Environment & Secrets (Crucial Security Invariant)
 .env
 .env.*
+!.env.example
 *.pem
 *.key
 *.token

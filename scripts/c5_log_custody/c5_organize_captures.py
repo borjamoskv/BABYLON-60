@@ -148,7 +148,7 @@ def main() -> None:
         "",
         "> **Documento de Custodia Forense e Identificación Criptográfica (`CORTEX-PERSIST`)**  ",
         "> **Titular de Propiedad Intellectual:** Don CORTEX Core Dev (`borjamoskv`)  ",
-        "> **Dirección Letrada:** Don Ricardo Muñiz (`Akorn Abogados`)  ",
+        "> **Dirección Letrada:** Don Ricardo Muñiz Zurita (`Akorn Abogados`)  ",
         "> **Objeto:** Indexación cronológica, biyectiva y con sellado hash inmutable (`SHA256 / SHA3-256`) de las 11 evidencias fotográficas que demuestran la Confesión por Actos Propios, la validación pública (Likes/Recomendación), el borrado precipitado y el posterior bloqueo unilateral (`HTTP Error 403 / Account Ban`).",
         "",
         "---",
