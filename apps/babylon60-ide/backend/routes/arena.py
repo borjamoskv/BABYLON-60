@@ -142,5 +142,5 @@ def get_conversations() -> dict[str, Any]:
             conversations.append({"conv_id": conv_id, "prompt": prompt, "response": response, "toxicity": toxicity})
 
         return {"exists": True, "conversations": conversations}
-    except Exception as e:
+    except (OSError, ValueError) as e:
         return {"exists": False, "conversations": [], "error": str(e)}

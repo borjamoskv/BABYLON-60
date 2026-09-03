@@ -246,7 +246,7 @@ class RobustLLMClient:
 # § 5. Fases del Enjambre
 # ─────────────────────────────────────────────────────────
 
-async def task_decomposer(client: InferenceClient, prompt: str, max_tasks: int) -> list:
+async def task_decomposer(client: RobustLLMClient, prompt: str, max_tasks: int) -> list:
     """
     Fase 1: TaskDecomposer (Planner).
     Toma un prompt complejo y genera hasta max_tasks subtareas JSON.
@@ -292,7 +292,7 @@ async def task_decomposer(client: InferenceClient, prompt: str, max_tasks: int) 
 async def execute_subagent(
     task_id: int,
     task_desc: str,
-    client: InferenceClient,
+    client: RobustLLMClient,
     pager: AgentPager,
     semaphore: asyncio.Semaphore,
     mcts_delay: float,
@@ -346,7 +346,7 @@ async def execute_subagent(
         }
 
 
-async def anergy_reducer(client: InferenceClient, original_prompt: str, results: list) -> str:
+async def anergy_reducer(client: RobustLLMClient, original_prompt: str, results: list) -> str:
     """
     Fase 3: AnergyReducer (Síntesis).
     Unifica los reportes eliminando redundancia y entropía discursiva.
@@ -446,7 +446,7 @@ async def run_swarm_orchestrator(
         s_threads=s_threads,
         backend=backend_enum
     )
-    client = InferenceClient(config)
+    client = RobustLLMClient(config)
 
     log.info(f"🌌 [Swarm] Iniciando colapso cuántico — Backend: {config.backend.value}, Topología: P={p_cores}×S={s_threads}")
 
