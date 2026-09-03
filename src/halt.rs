@@ -54,6 +54,7 @@ use crate::manifest::{SharedManifest, HaltReason, POISONED};
 /// `HaltReason::ExternalSignal` corresponde a la capacidad de supervisión
 /// humana de interrumpir el sistema exigida por Art. 14(4).
 #[inline(never)]
+#[allow(unused_variables)]
 pub fn epistemic_halt(m: &SharedManifest, motivo: HaltReason) -> ! {
     // ── Paso 1: frontera topológica inmutable ──────────────────────────────
     // Release: garantiza que toda escritura previa (hash, epoch) es visible
@@ -99,6 +100,11 @@ pub fn epistemic_halt(m: &SharedManifest, motivo: HaltReason) -> ! {
 #[inline(never)]
 fn abort_bare_metal() -> ! {
     loop {
+        #[cfg(target_arch = "aarch64")]
+        unsafe {
+            core::arch::asm!("wfe", options(nomem, nostack, preserves_flags));
+        }
+        #[cfg(not(target_arch = "aarch64"))]
         core::hint::spin_loop();
     }
 }

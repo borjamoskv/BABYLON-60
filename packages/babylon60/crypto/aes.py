@@ -23,7 +23,7 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 
-from babylon60.utils.errors import DecryptionPolicyError
+from babylon60.primitives.errors import DecryptionPolicyError
 
 logger = logging.getLogger("babylon60.crypto")
 
