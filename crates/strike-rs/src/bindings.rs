@@ -18,7 +18,7 @@ use tokio::sync::RwLock;
 
 use crate::hypervisor::{ZeroCopyPublisher, spawn_writer_daemon};
 
-#[pyclass]
+#[pyclass(unsendable)]
 pub struct CortexKernel {
     ledger: MasterLedger,
     atms: Atms,
@@ -245,7 +245,7 @@ mod tests {
 
     #[test]
     fn test_cortex_kernel_atms_hardening_and_replay() {
-        pyo3::prepare_freethreaded_python();
+        Python::initialize();
         let db_path = "target/test_cortex_kernel_replay.db";
         let _ = std::fs::create_dir_all("target");
         let _ = fs::remove_file(db_path);
