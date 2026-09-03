@@ -1,5 +1,5 @@
 # Stage 1: Build environment
-FROM python:3.12-slim-bookworm AS builder
+FROM python:3.14-slim-bookworm AS builder
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -39,7 +39,7 @@ RUN uv venv \
 COPY . .
 
 # Stage 2: Minimal Runtime environment (Non-root user)
-FROM python:3.12-slim-bookworm AS runner
+FROM python:3.14-slim-bookworm AS runner
 
 LABEL org.opencontainers.image.title="BABYLON-60" \
       org.opencontainers.image.description="CORTEX C5-REAL execution kernel (BABYLON-60): BFT ledgers, onco-transducer, exergy pipelines" \
