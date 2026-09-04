@@ -26,6 +26,70 @@ export const BftConsensusSimulator: React.FC = () => {
 
   const [merkleRoot, setMerkleRoot] = useState<string>('0x7f8a9b2c3d4e5f6a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b2c3d4e5f6a');
 
+  // LogOP Bayesian Veto State
+  const [logopOpinions, setLogopOpinions] = useState<{ [nodeId: number]: number }>({
+    0: 0.95,
+    1: 0.92,
+    2: 0.96,
+    3: 0.0, // Default veto to showcase invariant
+    4: 0.94,
+    5: 0.91,
+    6: 0.95,
+  });
+  const [logopHypothesis] = useState<string>('Mutación Causal AST Válida');
+  const [backendStatus, setBackendStatus] = useState<string | null>(null);
+  const [isSyncing, setIsSyncing] = useState<boolean>(false);
+
+  // Direct mathematical LogOP calculation: P_LogOP = prod(p_i^w_i)
+  const calculateLocalLogOp = (): number => {
+    const vals = Object.values(logopOpinions);
+    if (vals.some((v) => v === 0.0)) {
+      return 0.0;
+    }
+    const weight = 1.0 / vals.length;
+    let logSum = 0;
+    for (const v of vals) {
+      logSum += weight * Math.log(Math.max(1e-9, v));
+    }
+    return Math.exp(logSum);
+  };
+
+  const aggregatedProb = calculateLocalLogOp();
+
+  const syncWithBackendLogOp = async () => {
+    setIsSyncing(true);
+    soundFx.playClick();
+    try {
+      const opinionsPayload: Record<string, Record<string, number>> = {};
+      nodes.forEach((node) => {
+        const prob = logopOpinions[node.id] ?? 0.95;
+        opinionsPayload[node.name] = {
+          [logopHypothesis]: prob,
+          'Mutación Inválida': Number((1.0 - prob).toFixed(4)),
+        };
+      });
+
+      const res = await fetch('/api/swarm/logop', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ opinions: opinionsPayload }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        soundFx.playSuccess();
+        const vetoInfo = data.veto_triggered ? 'VETO CONFIRMADO POR KERNEL' : 'CONSENSO SIN VETO';
+        setBackendStatus(`✓ KERNEL FASTAPI: ${vetoInfo} (d_LogOP = ${data.aggregate_probabilities[logopHypothesis]?.toFixed(4)})`);
+      } else {
+        setBackendStatus('⚠️ KERNEL OFFLINE: Usando motor LogOP local.');
+      }
+    } catch {
+      setBackendStatus('⚠️ KERNEL OFFLINE: Usando motor LogOP local.');
+    } finally {
+      setIsSyncing(false);
+    }
+  };
+
   const triggerConsensusRound = () => {
     soundFx.playClick();
     setPhase('PRE-PREPARE');
@@ -240,6 +304,124 @@ export const BftConsensusSimulator: React.FC = () => {
               <div className="text-red-400">[WARN] Malicious vote from Node 3 ignored by BFT quorum gate.</div>
             )}
           </div>
+        </div>
+      </div>
+
+      {/* LogOP Bayesian Veto Oracle Section */}
+      <div className="glass-panel p-6 border-cyan-500/30 space-y-5">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold mb-1">
+              <span>📐 ORÁCULO DE VETO LOGOP BAYESIANO (INV_BFT_LOGOP)</span>
+            </div>
+            <h3 className="text-lg font-bold text-white">Logarithmic Opinion Pooling: Inmunidad ante Mayorías Alucinatorias</h3>
+            <p className="text-xs text-slate-400 mt-0.5">
+              Si un solo auditor riguroso asigna probabilidad <code className="text-cyan-300 font-bold">P = 0.0</code>, el consenso multiplicativo colapsa a cero.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => {
+                soundFx.playClick();
+                setLogopOpinions((prev) => ({
+                  ...prev,
+                  3: prev[3] === 0.0 ? 0.95 : 0.0,
+                }));
+              }}
+              className={`px-4 py-2 rounded-lg border text-xs font-bold transition-all cursor-pointer ${
+                logopOpinions[3] === 0.0
+                  ? 'bg-red-500/20 text-red-300 border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.3)]'
+                  : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+              }`}
+            >
+              {logopOpinions[3] === 0.0 ? '⛔ VETO NODO 3 ACTIVO (P=0.0)' : '✅ NODO 3 EN CONSENSO (P=0.95)'}
+            </button>
+            <button
+              onClick={syncWithBackendLogOp}
+              disabled={isSyncing}
+              className="px-4 py-2 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 rounded-lg text-cyan-300 text-xs font-bold transition-all cursor-pointer"
+            >
+              {isSyncing ? '⏳ EVALUANDO...' : '⚡ EVALUAR EN KERNEL'}
+            </button>
+          </div>
+        </div>
+
+        {/* Aggregate Probability Banner */}
+        <div className={`p-4 rounded-lg border flex flex-col sm:flex-row items-center justify-between gap-4 ${
+          aggregatedProb === 0.0
+            ? 'bg-red-950/40 border-red-500/50 text-red-200'
+            : 'bg-emerald-950/40 border-emerald-500/50 text-emerald-200'
+        }`}>
+          <div>
+            <div className="text-[10px] uppercase font-bold tracking-wider text-slate-400">
+              PROBABILIDAD LOGOP AGREGADA: P(H = &quot;{logopHypothesis}&quot;)
+            </div>
+            <div className="text-3xl font-extrabold mt-1 flex items-baseline gap-2">
+              <span className={aggregatedProb === 0.0 ? 'text-red-400' : 'text-emerald-400'}>
+                {(aggregatedProb * 100).toFixed(2)}%
+              </span>
+              <span className="text-xs font-normal text-slate-400">
+                {aggregatedProb === 0.0 ? 'COLAPSO POR VETO ABSOLUTO' : 'CONSENSO EPISTÉMICO VÁLIDO'}
+              </span>
+            </div>
+          </div>
+          <div className="text-right text-xs">
+            <span className={`inline-block px-3 py-1 rounded border font-bold ${
+              aggregatedProb === 0.0
+                ? 'bg-red-900/60 border-red-500 text-red-300'
+                : 'bg-emerald-900/60 border-emerald-500 text-emerald-300'
+            }`}>
+              {aggregatedProb === 0.0 ? '🚫 ALUCINACIÓN DETENIDA' : '✨ ACEPTADO SIN VETO'}
+            </span>
+            {backendStatus && (
+              <div className="text-[10px] text-cyan-400 mt-1 font-mono">
+                {backendStatus}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Sliders for Node Probabilities */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 pt-2">
+          {nodes.map((node) => {
+            const prob = logopOpinions[node.id] ?? 0.95;
+            const isVeto = prob === 0.0;
+            return (
+              <div
+                key={node.id}
+                className={`glass-panel p-3 border text-xs space-y-2 ${
+                  isVeto ? 'border-red-500/60 bg-red-950/20' : 'border-slate-800 bg-slate-950/40'
+                }`}
+              >
+                <div className="flex justify-between items-center">
+                  <span className="font-bold text-slate-300">{node.name}</span>
+                  <span className={`font-mono font-bold ${isVeto ? 'text-red-400' : 'text-cyan-300'}`}>
+                    {(prob * 100).toFixed(0)}%
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  step="5"
+                  value={prob * 100}
+                  onChange={(e) => {
+                    const newProb = parseFloat(e.target.value) / 100;
+                    setLogopOpinions((prev) => ({
+                      ...prev,
+                      [node.id]: newProb,
+                    }));
+                  }}
+                  className="w-full accent-cyan-400 cursor-pointer"
+                />
+                <div className="flex justify-between text-[9px] text-slate-500">
+                  <span className={isVeto ? 'text-red-400 font-bold' : ''}>0% (VETO)</span>
+                  <span>100% (CERTEZA)</span>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

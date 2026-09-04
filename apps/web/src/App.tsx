@@ -10,6 +10,7 @@ import { ComplianceInspector } from './components/ComplianceInspector';
 import { BlogPortal } from './components/BlogPortal';
 import { CausalGraphVisualizer } from './components/CausalGraphVisualizer';
 import { BftConsensusSimulator } from './components/BftConsensusSimulator';
+import { ThermodynamicMonitor } from './components/ThermodynamicMonitor';
 import { soundFx } from './components/AudioEngine';
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         {activeTab === 'bft' && <BftConsensusSimulator />}
         {activeTab === 'axioms' && <AxiomMatrix />}
         {activeTab === 'ledger' && <LedgerInspector />}
+        {activeTab === 'thermo' && <ThermodynamicMonitor />}
       </main>
 
       {/* Status Footer - Minimalist */}
