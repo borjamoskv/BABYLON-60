@@ -4,10 +4,11 @@ Motor Causal-1 and the Ledger Asíncrono ecosystem follow a Sovereign Architectu
 
 ## Supported Versions
 
-| Version | Supported |
-| ------- | --------- |
-| v5.x    | ✅         |
-| < v5.0  | ❌         |
+| Versión  | Soportada          |
+| :------- | :----------------- |
+| `v5.x`   | :white_check_mark: |
+| `v4.0.x` | :white_check_mark: |
+| `< v4.0` | :x:                |
 
 ## Reporting a Vulnerability
 

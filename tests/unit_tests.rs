@@ -5,6 +5,7 @@
 //   cargo test --test unit_tests
 
 #![cfg(not(loom))]
+#![allow(clippy::assertions_on_constants)]
 
 use babylon60::manifest::{SharedManifest, HaltReason, RUNNING, POISONED, MAX_RETRIES};
 use babylon60::seqlock::{publish, read};

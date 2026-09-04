@@ -62,6 +62,12 @@ fn compute_event_hash(id: EventId, parents: &[EventId], timestamp: u64, payload:
     h
 }
 
+impl Default for DAGLedger {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl DAGLedger {
     pub fn new() -> Self {
         Self {
@@ -98,9 +104,9 @@ impl DAGLedger {
         };
 
         // Update Merkle-causal cumulative root hash
-        for i in 0..32 {
-            self.cumulative_hash[i] ^= hash[i];
-            self.cumulative_hash[i] = self.cumulative_hash[i].rotate_left(1);
+        for (c, h) in self.cumulative_hash.iter_mut().zip(hash.iter()) {
+            *c ^= h;
+            *c = c.rotate_left(1);
         }
 
         self.events.insert(id, event);

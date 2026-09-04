@@ -132,7 +132,7 @@ pub fn generate_arkworks_rust(circuit: &CompiledCircuit) -> String {
     for priv_in in &circuit.private_inputs {
         code.push_str(&format!("        let var_{} = cs.new_witness_variable(|| self.{}.ok_or(SynthesisError::AssignmentMissing))?;\n", priv_in, priv_in));
     }
-    code.push_str("\n");
+    code.push('\n');
     
     // Evaluating gates
     for gate in &circuit.gates {

@@ -34,6 +34,12 @@ pub struct MachineState {
     pub ledger: DAGLedger,
 }
 
+impl Default for MachineState {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MachineState {
     pub fn new() -> Self {
         Self {

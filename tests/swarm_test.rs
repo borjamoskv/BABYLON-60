@@ -83,7 +83,7 @@ fn test_swarm_base_60_synchronization() {
     for (i, agent) in agents.into_iter().enumerate() {
         let final_epoch = agent.join().unwrap();
         // Cada agente debe haber leído al menos el epoch 3, y como máximo el 60.
-        assert!(final_epoch >= 3 && final_epoch <= 60, 
+        assert!((3..=60).contains(&final_epoch), 
             "Agente {} falló el invariante temporal. Final epoch: {}", i, final_epoch);
     }
 }

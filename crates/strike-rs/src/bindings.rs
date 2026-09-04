@@ -148,7 +148,7 @@ impl CortexKernel {
         };
 
         publisher.publish(environment_id, export_format)
-            .map_err(|e| PyRuntimeError::new_err(e))
+            .map_err(PyRuntimeError::new_err)
     }
 }
 

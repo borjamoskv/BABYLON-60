@@ -18,6 +18,12 @@ pub struct ExergyTelemetry {
     branch_misses: Option<Counter>,
 }
 
+impl Default for ExergyTelemetry {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ExergyTelemetry {
     pub fn new() -> Self {
         #[cfg(target_os = "linux")]

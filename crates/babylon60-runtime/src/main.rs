@@ -12,6 +12,7 @@ use std::env;
 use std::fs;
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[allow(clippy::upper_case_acronyms)]
 enum B60Type {
     I64,
     TIME,
@@ -141,14 +142,14 @@ fn parse_b60_number(b60_str: &str) -> F60 {
     let mut power = (places.len() - 1) as u32;
     for p in places {
         total += BigInt::from(parse_b60_digit(p)) * BigInt::from(60u64).pow(power);
-        if power > 0 { power -= 1; }
+        power = power.saturating_sub(1);
     }
     F60::new(total, 0)
 }
 
 fn get_reg_index(reg_str: &str) -> usize {
-    if reg_str.starts_with('R') {
-        reg_str[1..].parse().unwrap_or(0)
+    if let Some(num) = reg_str.strip_prefix('R') {
+        num.parse().unwrap_or(0)
     } else {
         0
     }

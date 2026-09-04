@@ -51,11 +51,10 @@ impl ZeroCopyPublisher {
 
     pub fn publish_node(&self, sender_id: u64, view: u64, seq_num: u64, payload_hash_hex: &str) -> Result<(), Box<dyn std::error::Error>> {
         let mut payload_hash = [0u8; 32];
-        if payload_hash_hex.len() == 64 {
-            if let Ok(bytes) = hex::decode(payload_hash_hex) {
+        if payload_hash_hex.len() == 64
+            && let Ok(bytes) = hex::decode(payload_hash_hex) {
                 payload_hash.copy_from_slice(&bytes);
             }
-        }
 
         let sample = self.publisher.loan_uninit()?;
         let sample = sample.write_payload(BftMessage {
@@ -198,11 +197,10 @@ pub fn spawn_writer_daemon(service_name_str: &str, stop_signal: Arc<AtomicBool>,
         let mut processed = 0usize;
         // Boundable loop: halted via stop_signal or max_events limit (INV_C5_TURING_CASTRATION)
         while !stop_signal.load(Ordering::SeqCst) {
-            if let Some(limit) = max_events {
-                if processed >= limit {
+            if let Some(limit) = max_events
+                && processed >= limit {
                     break;
                 }
-            }
 
             match subscriber.receive() {
                 Ok(Some(sample)) => {

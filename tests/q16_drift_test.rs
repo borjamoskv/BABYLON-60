@@ -37,10 +37,8 @@ pub fn landauer_zj_q16(temp_k: u32, bits_q16: Q16_16, kl_q16: Q16_16) -> u64 {
     let k_b_ln2_zj_q32: u64 = 41102555;
     let zj_per_bit_q32 = temp_k as u64 * k_b_ln2_zj_q32;
     
-    // total_bits (Q16.16) * zj_per_bit (Q32.32) = Q48.48
-    // Redondeo sumando 2^47 antes de truncar
     let energy_zj_q48 = total_bits_q16 as u64 * zj_per_bit_q32;
-    ((energy_zj_q48 + (1u64 << 47)) >> 48) as u64
+    (energy_zj_q48 + (1u64 << 47)) >> 48
 }
 
 #[test]
