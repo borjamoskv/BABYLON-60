@@ -104,9 +104,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
 
         // Límite de eventos
-        if let Some(max) = max_events {
-            if total >= max { break; }
-        }
+        if let Some(max) = max_events
+            && total >= max { break; }
     }
 
     // Resumen final (siempre a stderr para no contaminar el JSONL de stdout)

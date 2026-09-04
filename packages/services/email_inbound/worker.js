@@ -44,7 +44,10 @@ function bufferToBase64(buffer) {
 export default {
   async email(message, env, ctx) {
     const webhookUrl = env.WEBHOOK_URL || 'https://api.babylon60.com/api/v1/inbound-email';
-    const webhookSecret = env.WEBHOOK_SECRET || 'default_babylon60_inbound_secret';
+    const webhookSecret = env.WEBHOOK_SECRET;
+    if (!webhookSecret) {
+      throw new Error('WEBHOOK_SECRET is required but not configured in the environment.');
+    }
     const maxAttachmentSize = 2 * 1024 * 1024; // 2MB limit per attachment for inline webhook delivery
 
     let subject = message.headers.get('subject') || '(No Subject)';

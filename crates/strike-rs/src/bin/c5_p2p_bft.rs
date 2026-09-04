@@ -219,7 +219,7 @@ fn main() {
     let mode_arg = std::env::args().nth(1).unwrap_or_else(|| "--centuria".to_string());
     let mode = match mode_arg.as_str() {
         "--re_drm" => RunMode::ReDrm,
-        "--centuria" | _ => RunMode::Centuria,
+        _ => RunMode::Centuria,
     };
 
     println!("[Causal-Determinist] Initiating UNIFIED P2P BFT consensus check (Mode: {:?})...", mode);

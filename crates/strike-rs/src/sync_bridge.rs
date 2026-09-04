@@ -13,8 +13,10 @@ pub mod c5real {
 use c5real::exergy_bridge_server::{ExergyBridge, ExergyBridgeServer};
 use c5real::{ExergyState, ExergyAck, LedgerRequest};
 
+use crate::bft_engine::TelemetryEvent;
+
 pub struct C5ExergyService {
-    pub telemetry_rx: tokio::sync::Mutex<tokio::sync::broadcast::Receiver<(String, u64, f64, Vec<u8>)>>,
+    pub telemetry_rx: tokio::sync::Mutex<tokio::sync::broadcast::Receiver<TelemetryEvent>>,
 }
 
 #[tonic::async_trait]

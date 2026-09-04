@@ -2,11 +2,11 @@
 // BABYLON-60 v4.0 Sovereign Hardened
 // █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 // ============================================================================
-/// █ OPSEC MEMORY SHIELD PROTOCOL (Causal-Determinist)
-///
-/// Implements early process isolation (Anti-debugging via PT_DENY_ATTACH, 
-/// Anti-coredump via RLIMIT_CORE) to protect keys and sensitive structs in RAM.
-/// Translates the Causal-Determinist Python doctrine into safe Rust bindings for macOS.
+//! █ OPSEC MEMORY SHIELD PROTOCOL (Causal-Determinist)
+//!
+//! Implements early process isolation (Anti-debugging via PT_DENY_ATTACH, 
+//! Anti-coredump via RLIMIT_CORE) to protect keys and sensitive structs in RAM.
+//! Translates the Causal-Determinist Python doctrine into safe Rust bindings for macOS.
 
 #[cfg(target_os = "macos")]
 pub fn ignite_memory_shield() {

@@ -14,6 +14,9 @@ pub unsafe extern "C" fn babylon60_manifest_init(manifest: *mut SharedManifest) 
     if manifest.is_null() {
         return false;
     }
+    if (manifest as usize) % core::mem::align_of::<SharedManifest>() != 0 {
+        return false;
+    }
     unsafe {
         manifest.write(SharedManifest::new());
     }
@@ -33,6 +36,9 @@ pub unsafe extern "C" fn babylon60_publish(
     hash_ptr: *const u64,
 ) -> bool {
     if manifest.is_null() || hash_ptr.is_null() {
+        return false;
+    }
+    if (manifest as usize) % core::mem::align_of::<SharedManifest>() != 0 {
         return false;
     }
     let m = unsafe { &*manifest };
@@ -58,6 +64,9 @@ pub unsafe extern "C" fn babylon60_read(
     if manifest.is_null() || out_epoch.is_null() || out_hash_ptr.is_null() {
         return false;
     }
+    if (manifest as usize) % core::mem::align_of::<SharedManifest>() != 0 {
+        return false;
+    }
     let m = unsafe { &*manifest };
     match seqlock::read(m) {
         Some((epoch, hash)) => {
@@ -79,6 +88,9 @@ pub unsafe extern "C" fn babylon60_read(
 #[no_mangle]
 pub unsafe extern "C" fn babylon60_is_halted(manifest: *const SharedManifest) -> bool {
     if manifest.is_null() {
+        return true;
+    }
+    if (manifest as usize) % core::mem::align_of::<SharedManifest>() != 0 {
         return true;
     }
     let m = unsafe { &*manifest };

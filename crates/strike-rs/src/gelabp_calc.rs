@@ -63,7 +63,7 @@ pub fn compute_score(
     let score = raw * speedup;
 
     // AX-EX-6: Cota Superior Cerrada
-    score.min(1000.0).max(0.0)
+    score.clamp(0.0, 1000.0)
 }
 
 #[cfg(test)]

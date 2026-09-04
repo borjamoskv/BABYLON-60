@@ -168,7 +168,7 @@ impl AphairesisBound {
         let zj_per_bit_q32 = self.temperature_k as u64 * Self::K_B_LN2_ZJ_Q32;
         
         let energy_zj_q48 = total_bits_q16 as u64 * zj_per_bit_q32;
-        ((energy_zj_q48 + (1u64 << 47)) >> 48) as u64
+        (energy_zj_q48 + (1u64 << 47)) >> 48
     }
 
     /// Comprueba si una medición de energía en zeptojulios es físicamente válida.
@@ -370,6 +370,7 @@ pub trait FisherQuantizer {
     type Residual;
 
     /// Cuantiza un punto de la variedad continua a una celda del semirretículo discreto.
+    #[allow(clippy::type_complexity)]
     fn quantize(
         &self,
         manifold: &Self::Manifold,

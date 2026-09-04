@@ -43,10 +43,12 @@ pub struct BftNode {
     pub should_fail: bool,
 }
 
+pub type TelemetryEvent = (String, u64, f64, Vec<u8>);
+
 pub struct BftAsyncEngine {
     pub concurrency_limit: usize,
     nodes: HashMap<String, BftNode>,
-    pub telemetry_tx: Option<tokio::sync::broadcast::Sender<(String, u64, f64, Vec<u8>)>>,
+    pub telemetry_tx: Option<tokio::sync::broadcast::Sender<TelemetryEvent>>,
 }
 
 impl BftAsyncEngine {
@@ -292,7 +294,7 @@ impl BftAsyncEngine {
                 let mut stmt = tx.prepare_cached("INSERT OR REPLACE INTO cortex_memory_bft (node_id, proof) VALUES (?1, ?2)")
                     .map_err(|e| format!("Prepare Error: {}", e))?;
                 for (k, entry) in m.snapshot() {
-                    stmt.execute(&[&k, &entry.value]).map_err(|e| format!("Insert Error: {}", e))?;
+                    stmt.execute([&k, &entry.value]).map_err(|e| format!("Insert Error: {}", e))?;
                 }
             }
             tx.commit().map_err(|e| format!("Commit Error: {}", e))?;

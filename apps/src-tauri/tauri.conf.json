@@ -8,8 +8,7 @@
     "frontendDist": "../dist"
   },
   "app": {
-    "withGlobalTauri": true,
-    "macOSPrivateApi": true,
+    "withGlobalTauri": false,
     "windows": [
       {
         "title": "MOSKV-1 APEX SINGULARITY",
@@ -20,7 +19,7 @@
       }
     ],
     "security": {
-      "csp": null
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: asset:"
     }
   },
   "bundle": {

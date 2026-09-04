@@ -67,7 +67,6 @@ impl TaintEngine {
     }
 
     /// Verifica la Invariante de Kahn (INV-GCM-003): El poset debe ser acíclico.
-
     pub fn verify_kahn_invariant(&self) -> Result<(), TaintError> {
         if is_cyclic_directed(&self.graph) {
             return Err(TaintError::CycleDetected);
