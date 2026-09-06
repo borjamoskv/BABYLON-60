@@ -17,7 +17,7 @@ def pushforward(p: dict, F: dict) -> dict:
     q = f_* p
     Calculates the pushforward distribution q(y) = Σ_x p(x) * F[x,y].
     """
-    q = {}
+    q: dict[str, float] = {}
     p_supp = support(p)
     for x in p_supp:
         px = p[x]

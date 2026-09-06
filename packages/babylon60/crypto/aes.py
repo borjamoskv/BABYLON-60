@@ -49,12 +49,7 @@ class CortexEncrypter:
         self._master_key = master_key
         self.strict_mode = strict_mode
         if hkdf_salt is None:
-            try:
-#                 import babylon60.core.config as config  # purgado por anergía
-
-                self.hkdf_salt = config.HKDF_SALT.encode("utf-8")
-            except (ImportError, AttributeError):
-                self.hkdf_salt = b"cortex_v6_tenant_isolation_salt"
+            self.hkdf_salt = b"cortex_v6_tenant_isolation_salt"
         else:
             self.hkdf_salt = hkdf_salt
         # Cache of derived keys per tenant

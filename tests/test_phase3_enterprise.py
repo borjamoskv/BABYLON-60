@@ -4,10 +4,7 @@ Verifies HMAC license key generation, offline validation, and MCP protocol tools
 """
 
 import os
-import subprocess
-import sys
 import tempfile
-import pytest
 from babylon60.guards.license_sovereign_validator import (
     generate_license_key,
     verify_license_key,

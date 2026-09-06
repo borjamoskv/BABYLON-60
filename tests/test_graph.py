@@ -1,5 +1,4 @@
 import numpy as np
-import networkx as nx
 
 np.random.seed(42)
 N_SAMPLES = 200

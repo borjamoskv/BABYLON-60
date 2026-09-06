@@ -376,7 +376,7 @@ class ZKSwarmIdentity:
 class KeyLifecycleManager:
     """Legacy Compatibility."""
 
-    def __init__(self, storage_path: str | Path | None = None, vault: Vault | None = None):
+    def __init__(self, storage_path: str | Path | None = None, vault: Any = None):
         self.km = KeyManager()
 
     def get_or_create_identity(self) -> AgentKeyPair:

@@ -20,7 +20,7 @@ class BayesianSwarm:
         self.agents = agents
 
     def logarithmic_opinion_pool(
-        self, opinions: Dict[str, Dict[str, float]], weights: Dict[str, float] = None
+        self, opinions: Dict[str, Dict[str, float]], weights: Dict[str, float] | None = None
     ) -> Dict[str, float]:
         """
         Computes the Logarithmic Opinion Pool (LogOP) of multiple categorical distributions.

@@ -2,7 +2,6 @@
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
-import pytest
 
 def test_f60_fixed_point_exactness():
     """Verifica que la escala de representación Q32.32 F60 no acumule deriva."""

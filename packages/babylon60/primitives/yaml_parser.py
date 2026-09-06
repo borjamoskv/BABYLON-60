@@ -11,7 +11,7 @@ without external third-party dependencies under C5-REAL nesting depth invariants
 """
 
 import re
-from typing import Any, Dict, List, Tuple, Union
+from typing import Any, Dict, List, Tuple
 
 
 def _parse_scalar(val: str) -> Any:

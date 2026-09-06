@@ -4,10 +4,8 @@ BABYLON-60 Test Suite: Dynamic MCP Deduction & Synthesis Pipeline (C5-REAL)
 
 import os
 import pytest
-import asyncio
 import tempfile
-import sqlite3
-from src.kernel.mcp_deductive_engine import McpDeductiveEngine, McpCandidateContract, McpToolParameter
+from src.kernel.mcp_deductive_engine import McpDeductiveEngine
 from src.kernel.mcp_scaffolder import McpCodeScaffolder
 from src.kernel.mcp_sandbox_validator import McpSandboxValidator
 from src.kernel.mcp_lifecycle_manager import McpLifecycleManager

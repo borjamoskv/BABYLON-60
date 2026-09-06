@@ -68,8 +68,8 @@ class InboundEmailPayload(BaseModel):
     timestamp: str
     message_id: Optional[str] = None
     detected_language: Optional[str] = Field(default="auto")
-    intent: Optional[EmailIntent] = Field(default=EmailIntent.GENERAL)
-    severity: Optional[EmailSeverity] = Field(default=EmailSeverity.MEDIUM)
+    intent: EmailIntent = Field(default=EmailIntent.GENERAL)
+    severity: EmailSeverity = Field(default=EmailSeverity.MEDIUM)
 
     def detect_language(self) -> str:
         """Heuristic language detector for English vs Spanish."""
@@ -88,7 +88,7 @@ class InboundEmailPayload(BaseModel):
             self.detected_language = "en"
         return self.detected_language
 
-    def classify_intent_and_severity(self) -> (EmailIntent, EmailSeverity):
+    def classify_intent_and_severity(self) -> tuple["EmailIntent", "EmailSeverity"]:
         """Classifies the email intent and urgency level."""
         text = f"{self.subject} {self.text_body or ''}".lower()
 

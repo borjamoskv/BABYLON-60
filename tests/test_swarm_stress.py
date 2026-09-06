@@ -12,7 +12,6 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.kernel.swarm_orchestrator import AgentPager
-from src.kernel.bft_consensus import evaluate_thermodynamic_invariants
 
 # Configuración del Stress Test
 N_AGENTS = 500  # Enjambre Masivo

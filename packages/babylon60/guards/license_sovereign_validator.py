@@ -60,7 +60,7 @@ def verify_license_key(key: str | None = None) -> LicenseStatus:
         key = (
             os.getenv("BABYLON60_LICENSE_KEY")
             or os.getenv("BABYLON_LICENSE_KEY")
-            or os.getenv("BABYLON60_LICENSE_KEY", "")
+            or ""
         ).strip()
 
     if not key:

@@ -11,7 +11,7 @@ Markov disintegration kernels, and vector spaces with pure Python C5-REAL invari
 """
 
 from array import array
-from typing import Dict, List, Set, Tuple, Union
+from typing import Dict, List, Tuple, Union
 
 
 class Vector:

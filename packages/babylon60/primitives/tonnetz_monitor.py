@@ -10,7 +10,7 @@ and Exergy Consumption Delta_Ex to Tonnetz Torus transformations under Art. 14 E
 """
 
 import math
-from typing import Dict, List, NamedTuple, Tuple
+from typing import List, NamedTuple
 
 PITCH_CLASSES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 

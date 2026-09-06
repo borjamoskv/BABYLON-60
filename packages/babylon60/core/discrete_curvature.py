@@ -4,9 +4,8 @@
 # ============================================================================
 
 import numpy as np
-import scipy.linalg as la
 import networkx as nx
-from typing import Dict, Tuple, List, Any
+from typing import Dict, Tuple, Any
 
 def compute_effective_resistance(G: nx.Graph) -> float:
     """
