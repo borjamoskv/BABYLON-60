@@ -189,8 +189,6 @@
 ### 📁 Audits/Certificates
 
 | Documento | Ruta / Archivo | Título Principal / Propósito |
-| :--- | :--- | :--- |
-| [`CERTIFICADO_ES.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/CERTIFICADO_ES.md) | `audits/certificates/CERTIFICADO_ES.md` | Certificado de Cumplimiento Normativo de IA (BABYLON-60 v4.0) |
 | [`COMPLIANCE_CERTIFICATE_DE.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/COMPLIANCE_CERTIFICATE_DE.md) | `audits/certificates/COMPLIANCE_CERTIFICATE_DE.md` | 📜 Souveräne KI-Konformitätsbescheinigung |
 | [`COMPLIANCE_CERTIFICATE_EN.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/COMPLIANCE_CERTIFICATE_EN.md) | `audits/certificates/COMPLIANCE_CERTIFICATE_EN.md` | 📜 Sovereign AI Regulatory Compliance Certificate |
 | [`COMPLIANCE_CERTIFICATE_ES.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/COMPLIANCE_CERTIFICATE_ES.md) | `audits/certificates/COMPLIANCE_CERTIFICATE_ES.md` | 📜 Certificado Soberano de Cumplimiento Normativo de IA |
