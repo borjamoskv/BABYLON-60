@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List
 
 __all__ = ["ConflictReport", "detect_contradictions"]
@@ -15,7 +15,7 @@ __all__ = ["ConflictReport", "detect_contradictions"]
 class ConflictReport:
     has_conflicts: bool = False
     severity: str = "none"
-    conflicts: List[str] = None
+    conflicts: List[str] = field(default_factory=list)
 
     def __post_init__(self):
         if self.conflicts is None:

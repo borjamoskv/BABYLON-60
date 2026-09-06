@@ -1,5 +1,5 @@
 import pytest
-from babylon60.primitives.disintegration_matrix import disintegrate, disintegration_matrix, pushforward, support, verify_symmetry
+from babylon60.primitives.disintegration_matrix import disintegrate, disintegration_matrix, pushforward, verify_symmetry
 
 def test_bayesian_disintegration_valid():
     p = {"state_A": 0.7, "state_B": 0.3, "state_C": 0.0}

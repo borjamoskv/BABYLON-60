@@ -3,7 +3,6 @@
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 
-import pytest
 from pathlib import Path
 from babylon60.bft.cortex_persist_ledger import CortexPersistLedger, CortexEvent, compute_cortex_hash
 from babylon60.crypto.hash_registry import (
@@ -14,7 +13,6 @@ from babylon60.crypto.hash_registry import (
     HashAlgorithm,
 )
 from babylon60.compliance_exporter.eu_ai_act import EUAIActComplianceExporter
-from babylon60.compliance_exporter.i18n import get_translation
 
 
 def test_ledger_provenance_hash_sensitivity(tmp_path: Path) -> None:

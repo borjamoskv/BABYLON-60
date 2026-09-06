@@ -6,7 +6,6 @@
 test_kernel_native_modules.py — Automated verification for native CDP, Kimi, and Sync modules.
 """
 
-import asyncio
 import pytest
 from src.kernel.browser_cdp_engine import BrowserEngine
 from src.kernel.kimi_client import KimiClient

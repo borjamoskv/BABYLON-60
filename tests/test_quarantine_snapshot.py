@@ -4,7 +4,6 @@
 # ============================================================================
 import hashlib
 import json
-import pytest
 
 class MockQuarantineSnapshot:
     def __init__(self, timestamp: int, causal_hash: str, payload: dict):

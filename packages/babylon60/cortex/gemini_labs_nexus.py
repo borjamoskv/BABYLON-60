@@ -14,7 +14,7 @@ import sys
 import time
 import json
 import hashlib
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 
 try:
     from mcp.server.fastmcp import FastMCP
@@ -23,14 +23,14 @@ except ImportError:
     HAS_FASTMCP = False
 
 try:
-    from lingua import Language, LanguageDetectorBuilder
+    from lingua import Language, LanguageDetector, LanguageDetectorBuilder
     HAS_LINGUA = True
 except ImportError:
     HAS_LINGUA = False
 
 # Import AST Sandbox from primitives
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
-from babylon60.primitives.sandbox import ASTSandbox, SandboxVerdict
+from babylon60.primitives.sandbox import ASTSandbox
 
 # Initialize FastMCP Server
 mcp_app = FastMCP("Gemini Labs Nexus MCP Server") if HAS_FASTMCP else None
@@ -40,7 +40,7 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
 # Initialize AOT Lingua Language Detector
 if HAS_LINGUA:
     languages = [Language.ENGLISH, Language.SPANISH, Language.FRENCH, Language.GERMAN, Language.CHINESE, Language.JAPANESE]
-    detector = LanguageDetectorBuilder.from_languages(*languages).build()
+    detector: LanguageDetector | None = LanguageDetectorBuilder.from_languages(*languages).build()
 else:
     detector = None
 

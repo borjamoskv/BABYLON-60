@@ -9,8 +9,8 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from enum import Enum, auto
-from typing import Any, List, Optional
+from enum import Enum
+from typing import Any, List
 
 
 class Verdict(str, Enum):

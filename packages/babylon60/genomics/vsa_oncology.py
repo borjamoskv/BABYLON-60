@@ -15,7 +15,6 @@ Implementa la formalización ejecutable de la Ontología de 300 Primitivas:
 from __future__ import annotations
 
 import json
-import math
 import hashlib
 from enum import Enum
 from pathlib import Path

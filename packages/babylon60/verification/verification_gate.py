@@ -11,7 +11,7 @@ import json
 import sqlite3
 import time
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 __all__ = ["RiskLevel", "AgentState", "CausalSignOffReceipt", "VerificationGate", "InterventionChannel"]
 

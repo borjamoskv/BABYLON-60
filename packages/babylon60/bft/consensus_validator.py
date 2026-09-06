@@ -33,7 +33,7 @@ class BFT_Validator:
         return mutation_hash
 
     def validate_fuzzy_opinions(
-        self, opinions: Dict[str, Dict[str, float]], weights: Dict[str, float] = None
+        self, opinions: Dict[str, Dict[str, float]], weights: Dict[str, float] | None = None
     ) -> Dict[str, float]:
         """
         [Causal-Determinist] Evaluate heuristic / fuzzy inputs from the swarm using LogOP.

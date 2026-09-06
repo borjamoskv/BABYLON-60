@@ -16,6 +16,7 @@ Full-spectrum linguistic entropy analysis:
   - Exergy score [0.0, 1.0]
 """
 
+import math
 import re
 import statistics
 from collections import Counter
@@ -140,9 +141,16 @@ class LinguisticEntropyDetector:
 
     @staticmethod
     def _shannon(items: list[str]) -> float:
-#         from babylon60.extensions.security.utils import calculate_distribution_entropy  # purgado por anergía
-
-        return calculate_distribution_entropy(Counter(items))
+        counts = Counter(items)
+        total = sum(counts.values())
+        if total == 0:
+            return 0.0
+        entropy = 0.0
+        for count in counts.values():
+            if count > 0:
+                p = count / total
+                entropy -= p * math.log2(p)
+        return entropy
 
     def calculate_char_entropy(self, text: str) -> float:
         return round(self._shannon(list(text)), 4)
@@ -239,7 +247,7 @@ class LinguisticEntropyDetector:
             counts = Counter(chunk)
 #             from babylon60.extensions.security.utils import calculate_distribution_entropy  # purgado por anergía
 
-            h = calculate_distribution_entropy(counts)
+            h = self._shannon(chunk)
             windows.append(h)
 
         if len(windows) < 2:

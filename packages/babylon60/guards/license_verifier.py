@@ -8,8 +8,7 @@ import json
 from typing import Tuple, Dict, Any
 from babylon60.guards.license_sovereign_validator import (
     generate_license_key,
-    verify_license_key,
-    LicenseStatus
+    verify_license_key
 )
 
 

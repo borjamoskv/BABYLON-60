@@ -10,6 +10,29 @@
 from typing import List
 
 
+class MambaBlock:
+    """
+    Selective State-Space Model (S6) block.
+    Minimal deterministic implementation for structural invariant validation.
+    """
+
+    def __init__(self, d_model: int, d_state: int) -> None:
+        self.d_model = d_model
+        self.d_state = d_state
+        # Discretized state-space matrices (dummy weights)
+        self.A: List[List[float]] = [[-0.01 * (i + 1) for _ in range(d_state)] for i in range(d_state)]
+        self.B: List[float] = [0.01] * d_state
+        self.C: List[float] = [0.01] * d_state
+        self.D: float = 1.0  # Skip connection
+
+    def forward(self, hidden_states: List[List[float]]) -> List[List[float]]:
+        """Process sequence through the SSM block with skip connection."""
+        output: List[List[float]] = []
+        for h in hidden_states:
+            # Simple skip connection: y = D * x (structural placeholder)
+            y = [self.D * val for val in h]
+            output.append(y)
+        return output
 
 class MambaNetwork:
     """
