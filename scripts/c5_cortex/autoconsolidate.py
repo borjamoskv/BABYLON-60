@@ -4,8 +4,34 @@
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 import asyncio
+import sys
+from pathlib import Path
+
+# Add packages to sys.path
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT / "packages"))
+
 from babylon60.database.core import connect
-# from babylon60.memory.journal import JournalEntry  # purgado por anergía
+
+
+class JournalEntry:
+    """Modelo de entrada de diario BFT para consolidación."""
+
+    def __init__(self, entry_id: str, payload: dict | None = None) -> None:
+        self.id = entry_id
+        self.payload = payload or {}
+
+    @classmethod
+    async def load(cls, entry_id: str) -> "JournalEntry":
+        return cls(entry_id)
+
+    @classmethod
+    def merge(cls, entries: list["JournalEntry"]) -> "JournalEntry":
+        merged_id = "_".join(e.id for e in entries)
+        return cls(merged_id)
+
+    async def save(self) -> None:
+        pass
 
 
 async def autoconsolidate(batch_size: int = 500) -> None:
