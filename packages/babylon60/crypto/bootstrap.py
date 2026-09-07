@@ -64,6 +64,7 @@ class IdentityBootstrap:
             (tenant_id, pub_pem, priv_pem),
         )
 
+        import json
         import time
 
         from babylon60.crypto.hash_registry import cortex_hash
@@ -74,8 +75,6 @@ class IdentityBootstrap:
         payload = json.dumps(payload_dict, sort_keys=True, separators=(",", ":")).encode("utf-8")
         payload_hash = cortex_hash(payload)
         signature = private_key.sign(payload).hex()
-
-        import json
 
         await conn.execute(
             """INSERT INTO cortex_ledger

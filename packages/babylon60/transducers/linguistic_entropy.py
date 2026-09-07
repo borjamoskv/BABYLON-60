@@ -244,10 +244,7 @@ class LinguisticEntropyDetector:
         windows: list[float] = []
         for i in range(0, len(words) - window_size, window_size // 2):
             chunk = words[i : i + window_size]
-            counts = Counter(chunk)
-#             from babylon60.extensions.security.utils import calculate_distribution_entropy  # purgado por anergía
-
-            h = self._shannon(chunk)
+            h = LinguisticEntropyDetector._shannon(chunk)
             windows.append(h)
 
         if len(windows) < 2:

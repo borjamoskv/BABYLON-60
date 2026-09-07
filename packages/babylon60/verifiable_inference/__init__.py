@@ -9,7 +9,6 @@ Canonical Verifiable Inference Engine — C5-REAL Hardened FFI Subsystem.
 import ctypes
 import hashlib
 import os
-import sys
 
 _LIB = None
 
