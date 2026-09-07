@@ -108,7 +108,7 @@ cortex-attest = "babylon60.cli.llm_attest:main"
 cortex-char-attest = "babylon60.cli.attest_character_count:main"
 
 [tool.setuptools.packages.find]
-where = ["packages", "experiments"]
+where = ["packages"]
 include = ["babylon60*", "apex_trials*"]
 exclude = [
     "babylon60.extensions",
@@ -124,13 +124,12 @@ apex_trials = ["*.json"]
 testpaths = ["tests"]
 addopts = "-x --tb=short"
 asyncio_mode = "auto"
-pythonpath = [".", "packages", "experiments"]
+pythonpath = [".", "packages"]
 
 [tool.ruff]
 target-version = "py310"
 line-length = 120
 extend-exclude = [
-    "experiments/domain_kernel",
     "crates/strike-rs",
     "src",
     "L1_sink",
@@ -147,7 +146,7 @@ ignore = ["E743"]
 python_version = "3.12"
 explicit_package_bases = true
 disallow_any_generics = false
-exclude = ["^scratch/", "^experiments/anvil_yung/", "^packages/babylon60/extensions/"]
+exclude = ["^scratch/", "^packages/babylon60/extensions/"]
 ignore_missing_imports = true
 
 # Legacy vendorizado (babylon60/extensions): excluido de packaging y lint.

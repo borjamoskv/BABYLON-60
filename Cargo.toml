@@ -3,11 +3,6 @@ members = [
     "crates/*"
 ]
 exclude = [
-    "apps/*",
-    "apps/babylon60-ide/src-tauri",
-    "apps/src-tauri",
-    "apps/web/rust-core",
-    "experiments/*",
     "packages/*"
 ]
 resolver = "2"
