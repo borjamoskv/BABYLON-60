@@ -14,7 +14,7 @@ import tempfile
 # Ensure src/ is in path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src")))
 
-from kernel.sovereign_binary_analyzer import SovereignBinaryAnalyzer, Instruction, BasicBlock
+from babylon60.kernel.sovereign_binary_analyzer import SovereignBinaryAnalyzer, Instruction, BasicBlock
 
 
 class TestSovereignBinaryAnalyzer(unittest.TestCase):

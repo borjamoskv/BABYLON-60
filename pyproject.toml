@@ -1,12 +1,8 @@
 [build-system]
-requires = ["maturin>=1.5,<2.0"]
-build-backend = "maturin"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.uv]
-no-build-isolation-package = ["babylon60"]
 
-[tool.uv.extra-build-dependencies]
-babylon60 = ["maturin>=1.5,<2.0"]
 
 [project]
 name = "babylon60"
@@ -32,6 +28,7 @@ dependencies = [
     "textual>=0.50.0",
     "pynput>=1.7.0",
     "httpx>=0.27.2",
+    "python-dotenv>=1.0.1",
     "starlette>=0.40.0",
     "lingua-language-detector>=2.0.2",
     "yfinance>=1.6.0",
@@ -107,18 +104,18 @@ cortex-onco = "babylon60.cli.onco_transducer:main"
 cortex-attest = "babylon60.cli.llm_attest:main"
 cortex-char-attest = "babylon60.cli.attest_character_count:main"
 
-[tool.setuptools.packages.find]
-where = ["packages"]
-include = ["babylon60*", "apex_trials*"]
-exclude = [
-    "babylon60.extensions",
-    "babylon60.extensions.*",
-    "babylon60.utils",
-    "babylon60.utils.*",
-]
 
-[tool.setuptools.package-data]
-apex_trials = ["*.json"]
+
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "packages/babylon60",
+    "packages/apex_trials"
+]
+exclude = [
+    "packages/babylon60/extensions",
+    "packages/babylon60/utils"
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

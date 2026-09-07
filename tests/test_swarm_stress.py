@@ -11,7 +11,7 @@ import os
 # Añadir el path para importar el orquestador
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.kernel.swarm_orchestrator import AgentPager
+from babylon60.kernel.swarm_orchestrator import AgentPager
 
 # Configuración del Stress Test
 N_AGENTS = 500  # Enjambre Masivo
@@ -23,7 +23,7 @@ semaphore = asyncio.Semaphore(MAX_CONCURRENCY)
 async def stress_agent(agent_id: int, tenant_id: str, inject_fault: bool = False):
     """Subagente simulado en modo letargo para el test de estrés."""
     # Fase 1: Letargo (0% CPU)
-    payload = await pager.wait_for_beep(tenant_id)
+    payload = await pager.wait_for_beep()
     
     # Fase 2: Ejecución Acotada
     async with semaphore:
@@ -55,7 +55,7 @@ async def run_stress_test():
     
     # Fan-Out Multicast (El Beep O(1))
     logging.info("🔔 DESPACHANDO SEÑAL (BEEP) A TODO EL ENJAMBRE...")
-    pager.beep(tenant_id)
+    pager.beep()
     
     # Recolectar resultados
     results = await asyncio.gather(*tasks)

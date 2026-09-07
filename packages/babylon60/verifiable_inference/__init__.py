@@ -16,9 +16,9 @@ _LIB = None
 def _get_lib_path() -> str:
     base_dir = os.path.dirname(os.path.abspath(__file__))
     candidates = [
-        os.path.join(base_dir, "target", "release", "libverifiable_inference_engine.dylib"),
-        os.path.join(base_dir, "target", "release", "libverifiable_inference_engine.so"),
-        os.path.join(base_dir, "target", "release", "verifiable_inference_engine.dll"),
+        os.path.join(base_dir, "..", "..", "..", "target", "release", "libverifiable_inference_engine.dylib"),
+        os.path.join(base_dir, "..", "..", "..", "target", "release", "libverifiable_inference_engine.so"),
+        os.path.join(base_dir, "..", "..", "..", "target", "release", "verifiable_inference_engine.dll"),
     ]
     for path in candidates:
         if os.path.exists(path):

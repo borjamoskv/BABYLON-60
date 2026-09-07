@@ -7,9 +7,9 @@ test_kernel_native_modules.py — Automated verification for native CDP, Kimi, a
 """
 
 import pytest
-from src.kernel.browser_cdp_engine import BrowserEngine
-from src.kernel.kimi_client import KimiClient
-from src.kernel.quantum_sync import QuantumSyncEngine
+from babylon60.kernel.browser_cdp_engine import BrowserEngine
+from babylon60.kernel.kimi_client import KimiClient
+from babylon60.kernel.quantum_sync import QuantumSyncEngine
 
 def test_browser_cdp_engine_init():
     engine = BrowserEngine(headless=True, remote_debugging_port=9222)

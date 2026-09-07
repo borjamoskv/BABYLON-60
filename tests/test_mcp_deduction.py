@@ -5,10 +5,10 @@ BABYLON-60 Test Suite: Dynamic MCP Deduction & Synthesis Pipeline (C5-REAL)
 import os
 import pytest
 import tempfile
-from src.kernel.mcp_deductive_engine import McpDeductiveEngine
-from src.kernel.mcp_scaffolder import McpCodeScaffolder
-from src.kernel.mcp_sandbox_validator import McpSandboxValidator
-from src.kernel.mcp_lifecycle_manager import McpLifecycleManager
+from babylon60.kernel.mcp_deductive_engine import McpDeductiveEngine
+from babylon60.kernel.mcp_scaffolder import McpCodeScaffolder
+from babylon60.kernel.mcp_sandbox_validator import McpSandboxValidator
+from babylon60.kernel.mcp_lifecycle_manager import McpLifecycleManager
 
 
 def test_mcp_deductive_engine():

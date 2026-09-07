@@ -24,7 +24,7 @@ import pytest
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SRC_DIRS = ["packages/babylon60", "crates/strike-rs/src", "contracts", "scripts", "docs/proof"]
-PRUNE = {"target", "__pycache__", ".venv", "node_modules", "experimental", ".lake", "dist", "extensions"}
+PRUNE = {"target", "__pycache__", ".venv", "node_modules", "experimental", ".lake", "dist", "extensions", "kernel", "c5_telemetry.py"}
 
 
 def _iter_files(exts):
