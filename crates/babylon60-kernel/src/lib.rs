@@ -12,3 +12,4 @@ pub mod isa;
 pub mod state;
 pub mod ledger;
 pub mod eval;
+pub mod shared_manifest;
