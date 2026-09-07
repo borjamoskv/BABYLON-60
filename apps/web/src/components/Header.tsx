@@ -54,15 +54,16 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
       <div className="flex items-center gap-3">
         <nav className="flex items-center gap-1 bg-slate-900/60 p-1 rounded-lg border border-slate-800">
           {[
-            { id: 'overview', label: '📊 INICIO' },
-            { id: 'blog', label: '📝 BLOG EXÉRGICO' },
-            { id: 'compliance', label: '🛡️ EU AI ACT' },
-            { id: 'license', label: '🔑 LICENCIAS' },
-            { id: 'swarm', label: '🐝 ENJAMBRE 21' },
-            { id: 'causal', label: '🌐 GRAFO CAUSAL' },
-            { id: 'bft', label: '⚡ CONSENSO BFT' },
-            { id: 'axioms', label: '📐 AXIOMAS Z3' },
-            { id: 'ledger', label: '🔗 LEDGER WAL' },
+            { id: 'overview', label: 'MANIFIESTO B60' },
+            { id: 'causal', label: 'GRAFO CAUSAL' },
+            { id: 'bft', label: 'CONSENSO BFT' },
+            { id: 'compliance', label: 'EU AI ACT' },
+            { id: 'swarm', label: 'ENJAMBRE 21' },
+            { id: 'axioms', label: 'AXIOMAS Z3' },
+            { id: 'ledger', label: 'LEDGER WORM' },
+            { id: 'thermo', label: 'TERMODINÁMICA' },
+            { id: 'blog', label: 'BLOG' },
+            { id: 'license', label: 'LICENCIAS' },
           ].map((tab) => (
             <button
               key={tab.id}
