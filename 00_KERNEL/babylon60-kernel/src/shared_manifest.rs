@@ -93,10 +93,15 @@ impl SharedManifest {
     }
 
     /// Activa el protocolo de seguridad Fail-Stop (SCITT).
+    /// Envenena el estado del IPC y emite una atestación criptográfica firmada.
     #[inline(always)]
-    pub fn epistemic_halt(&self) {
+    pub fn epistemic_halt(&self, secret_key_bytes: &[u8; 32]) -> crate::scitt::ScittReceipt {
+        // Envenenamiento termodinámico irreversible
         self.status_flag.store(POISONED, Ordering::SeqCst);
         self.seq.fetch_add(1, Ordering::SeqCst);
+        
+        let epoch = self.epoch_id.load(Ordering::Relaxed);
+        crate::scitt::ScittReceipt::new(epoch, secret_key_bytes)
     }
 }
 
@@ -150,8 +155,10 @@ mod tests {
     #[test]
     fn test_epistemic_halt() {
         let manifest = SharedManifest::new();
+        let secret_bytes = [0u8; 32];
         
-        manifest.epistemic_halt();
+        let receipt = manifest.epistemic_halt(&secret_bytes);
+        assert_eq!(receipt.epoch_halted, 1); // El epoch_id inicial es 1
         
         // No se puede publicar
         assert!(manifest.publish(1, &[0; 4]).is_err());

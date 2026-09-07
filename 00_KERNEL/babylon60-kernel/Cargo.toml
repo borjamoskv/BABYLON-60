@@ -16,3 +16,7 @@ criterion = "0.5"
 [[bench]]
 name = "thermo_benches"
 harness = false
+[dependencies]
+ed25519-dalek = { version = "2.1.1", default-features = false }
+ciborium-ll = { version = "0.2.2", default-features = false }
+
