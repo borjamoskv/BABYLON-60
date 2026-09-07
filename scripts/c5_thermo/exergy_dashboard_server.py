@@ -14,7 +14,7 @@ import json
 import os
 import sqlite3
 import sys
-# from http.server import HTTPServer, SimpleHTTPRequestHandler  # purgado por anergía
+from http.server import HTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 from urllib.parse import urlparse
 
