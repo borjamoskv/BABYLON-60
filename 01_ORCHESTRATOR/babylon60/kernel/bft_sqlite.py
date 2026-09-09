@@ -6,15 +6,19 @@ from contextlib import contextmanager
 
 try:
     import babylon60
+
     _HAVE_RUST_KERNEL = True
 except ImportError:
     _HAVE_RUST_KERNEL = False
 
 logger = logging.getLogger("bft_sqlite")
 
+
 class BFTDatabaseError(Exception):
     """Excepción termodinámica para fallos BFT irrecuperables en SQLite."""
+
     pass
+
 
 class BFTSQLite:
     """
@@ -22,13 +26,15 @@ class BFTSQLite:
     Mitigación determinista de SQLITE_BUSY usando Exponential Backoff y Jitter.
     Garantiza que la exergía de la base de datos se mantiene intacta bajo alta concurrencia.
     """
-    
-    def __init__(self, db_path: str = "cortex.db", max_retries: int = 5, base_delay: float = 0.1, max_delay: float = 2.0):
+
+    def __init__(
+        self, db_path: str = "cortex.db", max_retries: int = 5, base_delay: float = 0.1, max_delay: float = 2.0
+    ):
         self.db_path = db_path
         self.max_retries = max_retries
         self.base_delay = base_delay
         self.max_delay = max_delay
-        
+
         if _HAVE_RUST_KERNEL:
             logger.info(f"[BFT-KERNEL] {babylon60.kernel_status()}")
 
@@ -62,13 +68,15 @@ class BFTSQLite:
                     if retries == self.max_retries:
                         logger.error(f"[BFT-FAIL] Colapso inminente. Imposible adquirir lock en {self.db_path}.")
                         raise BFTDatabaseError(f"Max retries reached: {e}")
-                    
+
                     # Exponential Backoff with Jitter
-                    delay = min(self.max_delay, self.base_delay * (2 ** retries))
+                    delay = min(self.max_delay, self.base_delay * (2**retries))
                     jitter = random.uniform(0, delay * 0.1)
                     sleep_time = delay + jitter
-                    
-                    logger.warning(f"[BFT-RETRY] SQLITE_BUSY detectado. Intento {retries+1}/{self.max_retries}. Esperando {sleep_time:.3f}s")
+
+                    logger.warning(
+                        f"[BFT-RETRY] SQLITE_BUSY detectado. Intento {retries + 1}/{self.max_retries}. Esperando {sleep_time:.3f}s"
+                    )
                     time.sleep(sleep_time)
                     retries += 1
                 else:

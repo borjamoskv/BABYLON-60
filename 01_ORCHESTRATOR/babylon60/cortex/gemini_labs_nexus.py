@@ -18,12 +18,14 @@ from typing import Dict, Any
 
 try:
     from mcp.server.fastmcp import FastMCP
+
     HAS_FASTMCP = True
 except ImportError:
     HAS_FASTMCP = False
 
 try:
     from lingua import Language, LanguageDetector, LanguageDetectorBuilder
+
     HAS_LINGUA = True
 except ImportError:
     HAS_LINGUA = False
@@ -39,7 +41,14 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
 
 # Initialize AOT Lingua Language Detector
 if HAS_LINGUA:
-    languages = [Language.ENGLISH, Language.SPANISH, Language.FRENCH, Language.GERMAN, Language.CHINESE, Language.JAPANESE]
+    languages = [
+        Language.ENGLISH,
+        Language.SPANISH,
+        Language.FRENCH,
+        Language.GERMAN,
+        Language.CHINESE,
+        Language.JAPANESE,
+    ]
     detector: LanguageDetector | None = LanguageDetectorBuilder.from_languages(*languages).build()
 else:
     detector = None
@@ -52,8 +61,10 @@ def inject_language_context(base_system_prompt: str, user_text: str) -> str:
             detected_lang = detector.detect_language_of(user_text)
             if detected_lang:
                 return f"{base_system_prompt} El usuario está interactuando en el idioma: {detected_lang.name}."
-        except Exception:
-            pass
+        except Exception as e:
+            import sys
+
+            sys.stderr.write(f"[C5-REAL INFO] Language detection bypassed: {e}\n")
     return base_system_prompt
 
 
@@ -62,7 +73,7 @@ def generate_scitt_receipt(claims: Dict[str, Any], payload: str) -> Dict[str, An
     payload_bytes = payload.encode("utf-8")
     merkle_root = hashlib.sha3_256(payload_bytes).hexdigest()
     timestamp = int(time.time())
-    
+
     return {
         "@context": "https://ietf.org/scitt/v1",
         "type": "GEMINI_LABS_C5_SCITT_RECEIPT",
@@ -74,9 +85,9 @@ def generate_scitt_receipt(claims: Dict[str, Any], payload: str) -> Dict[str, An
             "ast_sandbox_validated": claims.get("ast_sandbox_validated", True),
             "verification_latency_ms": claims.get("latency_ms", 0.0),
             "model": claims.get("model", "gemini-2.5-pro"),
-            "eu_ai_act_article_15_compliant": True
+            "eu_ai_act_article_15_compliant": True,
         },
-        "signature_ed25519": f"sig_ed25519_{merkle_root[:32]}"
+        "signature_ed25519": f"sig_ed25519_{merkle_root[:32]}",
     }
 
 
@@ -84,11 +95,11 @@ def eval_code_with_sandbox(code: str) -> Dict[str, Any]:
     """Validates python code with AST Sandbox (KETER-∞ Ola 4)."""
     sandbox = ASTSandbox()
     verdict = sandbox.validate(code)
-    
+
     return {
         "is_safe": verdict.is_safe,
         "violations": verdict.violations,
-        "allowed_nodes_count": len(verdict.allowed_nodes) if hasattr(verdict, "allowed_nodes") else 0
+        "allowed_nodes_count": len(verdict.allowed_nodes) if hasattr(verdict, "allowed_nodes") else 0,
     }
 
 
@@ -107,52 +118,51 @@ def append_auto_log(event_type: str, payload: Dict[str, Any], receipt: Dict[str,
             "payload_summary": {
                 "prompt_sha256": hashlib.sha256(str(payload.get("prompt", "")).encode("utf-8")).hexdigest()[:16],
                 "model": payload.get("model", "N/A"),
-                "is_safe": payload.get("is_safe", True)
+                "is_safe": payload.get("is_safe", True),
             },
-            "scitt_receipt": receipt
+            "scitt_receipt": receipt,
         }
         with open(LOG_FILE, "a", encoding="utf-8") as f:
             f.write(json.dumps(log_entry, ensure_ascii=False) + "\n")
-    except Exception:
-        pass
+    except Exception as e:
+        import sys
+
+        sys.stderr.write(f"[C5-REAL WARNING] Telemetry write failed: {e}\n")
 
 
 if mcp_app:
+
     @mcp_app.tool()
     def gemini_labs_generate(prompt: str, model: str = "gemini-2.5-pro") -> str:
         """Generates AI response using Gemini Labs API bridge with SCITT attestation and auto-logging."""
         start_time = time.perf_counter()
-        system_prompt = inject_language_context("Eres Gemini Labs MCP Server operando bajo invariantes C5-REAL.", prompt)
-        
+        system_prompt = inject_language_context(
+            "Eres Gemini Labs MCP Server operando bajo invariantes C5-REAL.", prompt
+        )
+
         # Simulated or actual API response
         response_text = f"[Gemini Labs Nexus Engine ({model})]: Respuesta generada determinísticamente para el prompt."
         latency_ms = (time.perf_counter() - start_time) * 1000
-        
-        receipt = generate_scitt_receipt({"latency_ms": round(latency_ms, 3), "model": model}, response_text)
-        
-        append_auto_log("GEMINI_GENERATE", {"prompt": prompt, "model": model}, receipt)
-        
-        return json.dumps({
-            "prompt": prompt,
-            "response": response_text,
-            "system_prompt": system_prompt,
-            "scitt_receipt": receipt
-        }, indent=2, ensure_ascii=False)
 
+        receipt = generate_scitt_receipt({"latency_ms": round(latency_ms, 3), "model": model}, response_text)
+
+        append_auto_log("GEMINI_GENERATE", {"prompt": prompt, "model": model}, receipt)
+
+        return json.dumps(
+            {"prompt": prompt, "response": response_text, "system_prompt": system_prompt, "scitt_receipt": receipt},
+            indent=2,
+            ensure_ascii=False,
+        )
 
     @mcp_app.tool()
     def gemini_labs_code_eval(code: str) -> str:
         """Validates python code against AST Sandbox and returns C5-REAL verdict with auto-logging."""
         verdict = eval_code_with_sandbox(code)
         receipt = generate_scitt_receipt({"ast_sandbox_validated": verdict["is_safe"]}, code)
-        
+
         append_auto_log("CODE_EVAL", {"prompt": code, "is_safe": verdict["is_safe"]}, receipt)
-        
-        return json.dumps({
-            "code": code,
-            "verdict": verdict,
-            "scitt_receipt": receipt
-        }, indent=2)
+
+        return json.dumps({"code": code, "verdict": verdict, "scitt_receipt": receipt}, indent=2)
 
 
 def main():
@@ -170,4 +180,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

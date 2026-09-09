@@ -41,7 +41,7 @@ class McpCodeScaffolder:
             elif param.param_type == "object":
                 py_type = "dict"
             func_params.append(f"{param.name}: {py_type}")
-            
+
         params_signature = ", ".join(func_params)
         # Pre-calcular cadenas para la plantilla de código
         schema_json_str = json.dumps(contract.to_json_schema())

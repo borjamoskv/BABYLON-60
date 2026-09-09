@@ -24,17 +24,17 @@ def _parse_scalar(val: str) -> Any:
         return False
     if (val.startswith('"') and val.endswith('"')) or (val.startswith("'") and val.endswith("'")):
         return val[1:-1]
-    
+
     try:
         return int(val)
     except ValueError:
         pass
-    
+
     try:
         return float(val)
     except ValueError:
         pass
-    
+
     return val
 
 
@@ -83,7 +83,7 @@ def parse_yaml(content: str) -> Dict[str, Any]:
         line = re.sub(r"#.*$", "", line_raw).rstrip()
         if not line.strip():
             continue
-        
+
         indent = len(line_raw) - len(line_raw.lstrip(" "))
         stripped = line.strip()
 

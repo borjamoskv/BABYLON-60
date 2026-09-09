@@ -17,8 +17,8 @@ __all__ = ["RiskLevel", "AgentState", "CausalSignOffReceipt", "VerificationGate"
 
 
 class InterventionChannel(enum.Enum):
-    SOFT_BAYESIAN = "SOFT_BAYESIAN"   # Update paramétrico, métrica de Fisher preservada, topología WL intacta
-    HARD_SURGERY = "HARD_SURGERY"     # Mutación do-calculus, topología WL bifurcada (requiere reset de MerklePulse)
+    SOFT_BAYESIAN = "SOFT_BAYESIAN"  # Update paramétrico, métrica de Fisher preservada, topología WL intacta
+    HARD_SURGERY = "HARD_SURGERY"  # Mutación do-calculus, topología WL bifurcada (requiere reset de MerklePulse)
 
 
 class RiskLevel(enum.Enum):
@@ -98,7 +98,9 @@ class VerificationGate:
         command = str(task_payload.get("command", "")).lower()
         is_mutative = task_payload.get("is_mutative", False)
 
-        if is_mutative or any(kw in action or kw in command for kw in ["deploy", "push", "purge", "rm", "delete", "format"]):
+        if is_mutative or any(
+            kw in action or kw in command for kw in ["deploy", "push", "purge", "rm", "delete", "format"]
+        ):
             return RiskLevel.CRITICAL
         elif any(kw in action or kw in command for kw in ["patch", "refactor", "write", "commit", "update"]):
             return RiskLevel.HIGH
@@ -122,14 +124,18 @@ class VerificationGate:
         cur = self._conn.cursor()
         cur.execute(
             "SELECT decision FROM audit_ledger WHERE execution_id=? AND risk_level=? ORDER BY id DESC LIMIT 1",
-            (exec_id, RiskLevel.CRITICAL.name)
+            (exec_id, RiskLevel.CRITICAL.name),
         )
         row = cur.fetchone()
         return row is not None and row[0] == "APPROVED"
 
     def register_sign_off(
-        self, execution_id: str, action_name: str, risk_level: RiskLevel, decision: str,
-        intervention_channel: InterventionChannel = InterventionChannel.SOFT_BAYESIAN
+        self,
+        execution_id: str,
+        action_name: str,
+        risk_level: RiskLevel,
+        decision: str,
+        intervention_channel: InterventionChannel = InterventionChannel.SOFT_BAYESIAN,
     ) -> CausalSignOffReceipt:
         """
         Record an operator sign-off decision into the SHA-256 SCITT tamper-evident ledger.
@@ -144,10 +150,22 @@ class VerificationGate:
         digest = hashlib.sha256(raw_data.encode("utf-8")).hexdigest()
 
         with self._conn as conn:
-            conn.execute("""
+            conn.execute(
+                """
                 INSERT INTO audit_ledger (execution_id, action_name, risk_level, intervention_channel, decision, timestamp, prev_digest, cryptographic_digest)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-            """, (execution_id, action_name, risk_level.name, intervention_channel.value, decision, now, prev_digest, digest))
+            """,
+                (
+                    execution_id,
+                    action_name,
+                    risk_level.name,
+                    intervention_channel.value,
+                    decision,
+                    now,
+                    prev_digest,
+                    digest,
+                ),
+            )
             conn.commit()
 
         return CausalSignOffReceipt(
@@ -158,8 +176,59 @@ class VerificationGate:
             decision=decision,
             timestamp=now,
             prev_digest=prev_digest,
-            cryptographic_digest=digest
+            cryptographic_digest=digest,
         )
+
+    def enforce_biometric_sign_off(self, execution_id: str, action_name: str, description: str) -> bool:
+        """
+        [C5-REAL] Invoca el Secure Enclave (TouchID) para atestar criptográficamente una cirugía causal.
+        """
+        import subprocess
+        import os
+        from pathlib import Path
+
+        # Calcular un hash preliminar para atestar
+        now = time.time()
+        raw_pre_hash = f"{execution_id}|{action_name}|{now:.6f}"
+        causal_hash = hashlib.sha256(raw_pre_hash.encode("utf-8")).hexdigest()
+
+        script_path = Path(__file__).parent.parent / "guards" / "c5_biometric_gate"
+        if not script_path.exists():
+            print(f"[!] Binario no encontrado: {script_path}")
+            return False
+
+        try:
+            print(f"\n[🛡️ C5-REAL] Solicitando firma biométrica para: {action_name}")
+            result = subprocess.run(
+                [str(script_path), "--causal-hash", causal_hash, "--message", description],
+                capture_output=True,
+                text=True,
+                check=True
+            )
+            
+            signature = result.stdout.strip()
+            print(f"[✓] Firma Biométrica obtenida: {signature}")
+            
+            # Registrar formalmente en el Ledger Inmutable
+            self.register_sign_off(
+                execution_id=execution_id,
+                action_name=action_name,
+                risk_level=RiskLevel.CRITICAL,
+                decision="APPROVED",
+                intervention_channel=InterventionChannel.HARD_SURGERY
+            )
+            return True
+            
+        except subprocess.CalledProcessError as e:
+            print(f"[X] Causal Sign-Off RECHAZADO o Timeout. Error: {e.stderr.strip()}")
+            self.register_sign_off(
+                execution_id=execution_id,
+                action_name=action_name,
+                risk_level=RiskLevel.CRITICAL,
+                decision="REJECTED",
+                intervention_channel=InterventionChannel.HARD_SURGERY
+            )
+            return False
 
     def check_authorized_bifurcation(self, time_window_seconds: float = 300.0) -> bool:
         """
@@ -171,20 +240,26 @@ class VerificationGate:
         cur = self._conn.cursor()
         cur.execute(
             "SELECT 1 FROM audit_ledger WHERE intervention_channel=? AND decision='APPROVED' AND timestamp >= ? LIMIT 1",
-            (InterventionChannel.HARD_SURGERY.value, threshold)
+            (InterventionChannel.HARD_SURGERY.value, threshold),
         )
         return cur.fetchone() is not None
 
     def save_snapshot(
-        self, execution_id: str, domain: str, step: int, status: AgentState,
-        pending_action: Optional[str], payload: Dict[str, Any]
+        self,
+        execution_id: str,
+        domain: str,
+        step: int,
+        status: AgentState,
+        pending_action: Optional[str],
+        payload: Dict[str, Any],
     ) -> None:
         """
         Persist execution state snapshot to WAL buffer for non-blocking pause/resume.
         """
         now = time.time()
         with self._conn as conn:
-            conn.execute("""
+            conn.execute(
+                """
                 INSERT INTO state_snapshots (execution_id, domain, current_step, state_status, pending_action, payload, created_at, updated_at)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT(execution_id) DO UPDATE SET
@@ -193,7 +268,9 @@ class VerificationGate:
                     pending_action=excluded.pending_action,
                     payload=excluded.payload,
                     updated_at=excluded.updated_at
-            """, (execution_id, domain, step, status.value, pending_action, json.dumps(payload), now, now))
+            """,
+                (execution_id, domain, step, status.value, pending_action, json.dumps(payload), now, now),
+            )
             conn.commit()
 
     def load_snapshot(self, execution_id: str) -> Optional[Dict[str, Any]]:
@@ -203,7 +280,7 @@ class VerificationGate:
         cur = self._conn.cursor()
         cur.execute(
             "SELECT domain, current_step, state_status, pending_action, payload FROM state_snapshots WHERE execution_id=?",
-            (execution_id,)
+            (execution_id,),
         )
         row = cur.fetchone()
         if row:
@@ -212,7 +289,7 @@ class VerificationGate:
                 "current_step": row[1],
                 "status": AgentState(row[2]),
                 "pending_action": row[3],
-                "payload": json.loads(row[4])
+                "payload": json.loads(row[4]),
             }
         return None
 
@@ -221,7 +298,9 @@ class VerificationGate:
         Verify Merkle hash chain integrity across all recorded SCITT audit ledger blocks.
         """
         cur = self._conn.cursor()
-        cur.execute("SELECT execution_id, action_name, risk_level, intervention_channel, decision, timestamp, prev_digest, cryptographic_digest FROM audit_ledger ORDER BY id ASC")
+        cur.execute(
+            "SELECT execution_id, action_name, risk_level, intervention_channel, decision, timestamp, prev_digest, cryptographic_digest FROM audit_ledger ORDER BY id ASC"
+        )
         rows = cur.fetchall()
         expected_prev = "0" * 64
         for r in rows:

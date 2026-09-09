@@ -214,8 +214,7 @@ TOOLS: list[dict[str, Any]] = [
     {
         "name": "causal_verify_ledger",
         "description": (
-            "Verify the cryptographic SHA-256 Merkle chain integrity of the Causal "
-            "Verification Gate audit ledger."
+            "Verify the cryptographic SHA-256 Merkle chain integrity of the Causal Verification Gate audit ledger."
         ),
         "inputSchema": {
             "type": "object",

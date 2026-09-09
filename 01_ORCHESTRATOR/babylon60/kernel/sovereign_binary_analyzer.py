@@ -4,8 +4,8 @@
 # ============================================================================
 """
 sovereign_binary_analyzer.py — Native Executable Parser & Control Flow Graph Engine.
-Provides zero-dependency Mach-O (macOS) and ELF (Linux) binary disassembly, 
-Basic Block fragmentation, Control Flow Graph (CFG) generation, and interactive 
+Provides zero-dependency Mach-O (macOS) and ELF (Linux) binary disassembly,
+Basic Block fragmentation, Control Flow Graph (CFG) generation, and interactive
 Mermaid / HTML visualization for BABYLON-60.
 """
 
@@ -21,6 +21,7 @@ from dataclasses import dataclass, field
 # Optional Capstone import
 try:
     import capstone
+
     HAS_CAPSTONE = True
 except ImportError:
     HAS_CAPSTONE = False
@@ -74,7 +75,7 @@ class SovereignBinaryAnalyzer:
     MH_CIGAM_64 = 0xCFFAEDFE
     FAT_MAGIC = 0xCAFEBABE
     FAT_CIGAM = 0xBEBAFECA
-    
+
     # ELF Constants
     ELF_MAGIC = b"\x7fELF"
 
@@ -82,7 +83,7 @@ class SovereignBinaryAnalyzer:
         self.filepath = os.path.abspath(filepath)
         if not os.path.isfile(self.filepath):
             raise FileNotFoundError(f"Binary file not found: {self.filepath}")
-        
+
         self.metadata = self._parse_metadata()
 
     def _parse_metadata(self) -> BinaryMetadata:
@@ -113,7 +114,7 @@ class SovereignBinaryAnalyzer:
         magic, cputype, cpusubtype, filetype, ncmds, sizeofcmds, flags, reserved = struct.unpack(
             "<IIIIIIII", header_bytes[:32]
         )
-        
+
         arch = "x86_64"
         if cputype == 0x0100000C:  # CPU_TYPE_ARM64
             arch = "arm64"
@@ -121,7 +122,7 @@ class SovereignBinaryAnalyzer:
             arch = "x86_64"
 
         sections: List[SectionInfo] = []
-        
+
         with open(self.filepath, "rb") as f:
             f.seek(32)  # Skip mach_header_64
             cmd_data = f.read(sizeofcmds)
@@ -130,22 +131,24 @@ class SovereignBinaryAnalyzer:
         for _ in range(ncmds):
             if offset + 8 > len(cmd_data):
                 break
-            cmd, cmdsize = struct.unpack("<II", cmd_data[offset:offset + 8])
-            
+            cmd, cmdsize = struct.unpack("<II", cmd_data[offset : offset + 8])
+
             # LC_SEGMENT_64 = 0x19
             if cmd == 0x19 and offset + 72 <= len(cmd_data):
-                segname = cmd_data[offset + 8:offset + 24].decode("utf-8", "ignore").rstrip("\x00")
+                _segname = cmd_data[offset + 8 : offset + 24].decode("utf-8", "ignore").rstrip("\x00")
                 vmaddr, vmsize, fileoff, filesize, maxprot, initprot, nsects, flags = struct.unpack(
-                    "<QQQQIIII", cmd_data[offset + 24:offset + 72]
+                    "<QQQQIIII", cmd_data[offset + 24 : offset + 72]
                 )
-                
+
                 sect_offset = offset + 72
                 for s in range(nsects):
                     if sect_offset + 80 <= len(cmd_data):
-                        sectname = cmd_data[sect_offset:sect_offset + 16].decode("utf-8", "ignore").rstrip("\x00")
-                        s_vmname = cmd_data[sect_offset + 16:sect_offset + 32].decode("utf-8", "ignore").rstrip("\x00")
+                        sectname = cmd_data[sect_offset : sect_offset + 16].decode("utf-8", "ignore").rstrip("\x00")
+                        s_vmname = (
+                            cmd_data[sect_offset + 16 : sect_offset + 32].decode("utf-8", "ignore").rstrip("\x00")
+                        )
                         addr, size, off, align, reloff, nreloc, s_flags = struct.unpack(
-                            "<QQIIIII", cmd_data[sect_offset + 32:sect_offset + 68]
+                            "<QQIIIII", cmd_data[sect_offset + 32 : sect_offset + 68]
                         )
                         sections.append(SectionInfo(f"{s_vmname}:{sectname}", addr, size, off, s_flags))
                         sect_offset += 80
@@ -157,17 +160,17 @@ class SovereignBinaryAnalyzer:
             format="Mach-O 64",
             architecture=arch,
             entry_point=sections[0].address if sections else 0,
-            sections=sections
+            sections=sections,
         )
 
     def _parse_elf_64(self, header_bytes: bytes) -> BinaryMetadata:
         """Parse ELF 64-bit header."""
-        ei_class = header_bytes[4]
+        _ei_class = header_bytes[4]
         ei_data = header_bytes[5]
         endian = "<" if ei_data == 1 else ">"
-        
+
         e_type, e_machine, e_version, e_entry = struct.unpack(f"{endian}HHIQ", header_bytes[16:32])
-        
+
         arch = "x86_64" if e_machine == 62 else ("arm64" if e_machine == 183 else f"arch_{e_machine}")
 
         return BinaryMetadata(
@@ -175,7 +178,7 @@ class SovereignBinaryAnalyzer:
             format="ELF 64",
             architecture=arch,
             entry_point=e_entry,
-            sections=[]
+            sections=[],
         )
 
     def disassemble_section(self, section_name: str = "__text", max_instructions: int = 500) -> List[Instruction]:
@@ -185,7 +188,7 @@ class SovereignBinaryAnalyzer:
         # Try Capstone first if available
         if HAS_CAPSTONE:
             instructions = self._disassemble_capstone(section_name, max_instructions)
-        
+
         # Fallback to system otool / objdump if Capstone is not present or failed
         if not instructions:
             instructions = self._disassemble_system_cli(max_instructions)
@@ -211,7 +214,7 @@ class SovereignBinaryAnalyzer:
 
         arch_cs = capstone.CS_ARCH_ARM64 if self.metadata.architecture == "arm64" else capstone.CS_ARCH_X86
         mode_cs = capstone.CS_MODE_ARM if self.metadata.architecture == "arm64" else capstone.CS_MODE_64
-        
+
         md = capstone.Cs(arch_cs, mode_cs)
         md.detail = True
 
@@ -219,30 +222,47 @@ class SovereignBinaryAnalyzer:
         for i, insn in enumerate(md.disasm(code_bytes, start_addr)):
             if i >= max_instructions:
                 break
-            
+
             mnemonic = insn.mnemonic.lower()
             op_str = insn.op_str.lower()
-            
-            is_branch = mnemonic in ("b", "b.eq", "b.ne", "b.gt", "b.lt", "cbz", "cbnz", "tbz", "tbnz", "jmp", "je", "jne", "jg", "jl")
+
+            is_branch = mnemonic in (
+                "b",
+                "b.eq",
+                "b.ne",
+                "b.gt",
+                "b.lt",
+                "cbz",
+                "cbnz",
+                "tbz",
+                "tbnz",
+                "jmp",
+                "je",
+                "jne",
+                "jg",
+                "jl",
+            )
             is_call = mnemonic in ("bl", "blr", "call")
             is_ret = mnemonic in ("ret", "rets")
-            
+
             target_addr = None
             if is_branch or is_call:
                 match = re.search(r"0x[0-9a-fA-F]+", op_str)
                 if match:
                     target_addr = int(match.group(0), 16)
 
-            instructions.append(Instruction(
-                address=insn.address,
-                mnemonic=mnemonic,
-                op_str=op_str,
-                bytes_hex=insn.bytes.hex(),
-                is_branch=is_branch,
-                is_call=is_call,
-                is_ret=is_ret,
-                target_address=target_addr
-            ))
+            instructions.append(
+                Instruction(
+                    address=insn.address,
+                    mnemonic=mnemonic,
+                    op_str=op_str,
+                    bytes_hex=insn.bytes.hex(),
+                    is_branch=is_branch,
+                    is_call=is_call,
+                    is_ret=is_ret,
+                    target_address=target_addr,
+                )
+            )
 
         return instructions
 
@@ -260,7 +280,7 @@ class SovereignBinaryAnalyzer:
             line = line.strip()
             if not line or ":" in line and not line.startswith("0x"):
                 continue
-            
+
             parts = line.split(maxsplit=2)
             if len(parts) >= 2:
                 try:
@@ -269,7 +289,20 @@ class SovereignBinaryAnalyzer:
                     mnemonic = parts[1].lower()
                     op_str = parts[2].lower() if len(parts) > 2 else ""
 
-                    is_branch = mnemonic in ("b", "b.eq", "b.ne", "b.gt", "b.lt", "cbz", "cbnz", "jmp", "je", "jne", "jg", "jl")
+                    is_branch = mnemonic in (
+                        "b",
+                        "b.eq",
+                        "b.ne",
+                        "b.gt",
+                        "b.lt",
+                        "cbz",
+                        "cbnz",
+                        "jmp",
+                        "je",
+                        "jne",
+                        "jg",
+                        "jl",
+                    )
                     is_call = mnemonic in ("bl", "blr", "call")
                     is_ret = mnemonic in ("ret", "rets")
 
@@ -279,16 +312,18 @@ class SovereignBinaryAnalyzer:
                         if match:
                             target_addr = int(match.group(0), 16)
 
-                    instructions.append(Instruction(
-                        address=addr,
-                        mnemonic=mnemonic,
-                        op_str=op_str,
-                        bytes_hex="",
-                        is_branch=is_branch,
-                        is_call=is_call,
-                        is_ret=is_ret,
-                        target_address=target_addr
-                    ))
+                    instructions.append(
+                        Instruction(
+                            address=addr,
+                            mnemonic=mnemonic,
+                            op_str=op_str,
+                            bytes_hex="",
+                            is_branch=is_branch,
+                            is_call=is_call,
+                            is_ret=is_ret,
+                            target_address=target_addr,
+                        )
+                    )
                     if len(instructions) >= max_instructions:
                         break
                 except ValueError:
@@ -318,23 +353,23 @@ class SovereignBinaryAnalyzer:
             start_i = addr_map[leader]
             next_leader = sorted_leaders[idx + 1] if idx + 1 < len(sorted_leaders) else None
             end_i = addr_map[next_leader] if next_leader and next_leader in addr_map else len(instructions)
-            
+
             block_insns = instructions[start_i:end_i]
             block_id = f"block_{hex(leader)}"
-            
+
             blocks[block_id] = BasicBlock(
                 id=block_id,
                 start_address=leader,
                 end_address=block_insns[-1].address if block_insns else leader,
-                instructions=block_insns
+                instructions=block_insns,
             )
 
         for block_id, block in blocks.items():
             if not block.instructions:
                 continue
-            
+
             last_insn = block.instructions[-1]
-            
+
             if last_insn.is_branch:
                 if last_insn.target_address:
                     target_id = f"block_{hex(last_insn.target_address)}"
@@ -363,17 +398,22 @@ class SovereignBinaryAnalyzer:
     def render_mermaid_html(self, blocks: Dict[str, BasicBlock], output_file: str) -> str:
         """Render CFG as an interactive HTML document with Mermaid.js graph."""
         mermaid_lines = ["graph TD"]
-        
+
         for b_id, block in blocks.items():
             insn_lines = [f"{hex(ins.address)}: {ins.mnemonic} {ins.op_str}" for ins in block.instructions[:6]]
             if len(block.instructions) > 6:
-                insn_lines.append(f"... (+{len(block.instructions)-6} insns)")
-            
+                insn_lines.append(f"... (+{len(block.instructions) - 6} insns)")
+
             block_label = f"<b>{b_id}</b><br/>" + "<br/>".join(insn_lines)
-            block_label_escaped = html.escape(block_label).replace("&lt;br/&gt;", "<br/>").replace("&lt;b&gt;", "<b>").replace("&lt;/b&gt;", "</b>")
-            
+            block_label_escaped = (
+                html.escape(block_label)
+                .replace("&lt;br/&gt;", "<br/>")
+                .replace("&lt;b&gt;", "<b>")
+                .replace("&lt;/b&gt;", "</b>")
+            )
+
             mermaid_lines.append(f'    {b_id}["{block_label_escaped}"]')
-            
+
             for succ in block.successors:
                 mermaid_lines.append(f"    {b_id} --> {succ}")
 

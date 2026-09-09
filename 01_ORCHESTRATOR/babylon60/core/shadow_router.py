@@ -18,7 +18,6 @@ from typing import Any, Dict, Tuple
 from babylon60.core.crypto import Ed25519Signer, canonicalize_cbor, hash_sha3_256
 
 
-
 def _utc_now_iso() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
 

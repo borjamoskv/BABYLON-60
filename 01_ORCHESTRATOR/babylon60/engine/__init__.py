@@ -21,15 +21,9 @@ class CortexEngine:
         timestamp = time.time()
         data_str = f"{key}:{payload}:{kwargs}:{timestamp}"
         digest = hashlib.sha256(data_str.encode("utf-8")).hexdigest()
-        
+
         record_key = key if key else digest[:16]
-        record = {
-            "key": record_key,
-            "digest": digest,
-            "payload": payload,
-            "kwargs": kwargs,
-            "timestamp": timestamp
-        }
+        record = {"key": record_key, "digest": digest, "payload": payload, "kwargs": kwargs, "timestamp": timestamp}
 
         if len(self._keys) >= self.capacity:
             oldest = self._keys.pop(0)

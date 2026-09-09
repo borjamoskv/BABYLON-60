@@ -34,6 +34,7 @@ class MambaBlock:
             output.append(y)
         return output
 
+
 class MambaNetwork:
     """
     Causal-Determinist full Mamba language model architecture.

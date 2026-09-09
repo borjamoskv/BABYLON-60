@@ -3,7 +3,8 @@ members = [
     "00_KERNEL/*"
 ]
 exclude = [
-    "packages/*"
+    "packages/*",
+    "00_KERNEL/formal_verification"
 ]
 resolver = "2"
 

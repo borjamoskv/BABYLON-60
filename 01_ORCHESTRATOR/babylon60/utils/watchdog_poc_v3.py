@@ -1,11 +1,12 @@
 import os
 
+
 def trigger_aggressive_alert():
     # 1. Voz Autoritaria (HAL-9000 vibe) - Daniel (British)
     # The message is cold, precise, and structural.
     voice_msg = "Critical architecture failure. Babylon sixty kernel has entered Epistemic Halt. Sequence poisoned. Awaiting operator clearance."
     os.system(f"say -v Daniel '{voice_msg}' &")
-    
+
     # 2. Modal Bloqueante rediseñado
     apple_script = """
     tell application "System Events"
@@ -22,8 +23,9 @@ El motor de consenso ha detectado una ruptura de isomorfismo (False Sharing o Al
 La integridad epistémica está comprometida. Las simulaciones han sido purgadas. Requiere purga manual de anergía y reinicio asíncrono." as critical buttons {"[CONFIRMAR] Destruir Sesión y Extraer Receipt"} default button 1
     end tell
     """
-    
+
     os.system(f"osascript -e '{apple_script}'")
+
 
 print("🛡️ [WATCHDOG V3] Simulando envenenamiento termodinámico...")
 trigger_aggressive_alert()

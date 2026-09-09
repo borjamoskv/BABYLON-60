@@ -11,8 +11,10 @@ logger = logging.getLogger("devsecops_attest")
 
 LOCK_FILE = ".devsecops_attest.lock"
 
+
 class AttestationError(Exception):
     pass
+
 
 @lru_cache(maxsize=128)
 def get_git_tree_hash(path: str) -> str:
@@ -23,11 +25,12 @@ def get_git_tree_hash(path: str) -> str:
     except subprocess.CalledProcessError:
         return ""
 
+
 class L5Attestor:
     """
     Atestación determinista L5 (Nivel de Seguridad y Trazabilidad C5-REAL).
     """
-    
+
     def __init__(self, target_dir: str):
         self.target_dir = target_dir
 
@@ -49,7 +52,7 @@ class L5Attestor:
             "timestamp": time.time(),
             "target_dir": self.target_dir,
             "git_tree_sha256": tree_hash,
-            "c5_real_invariant": "Zero-Anergy"
+            "c5_real_invariant": "Zero-Anergy",
         }
         return payload
 
@@ -73,6 +76,7 @@ class L5Attestor:
             logger.info("Atestación DevSecOps finalizada.")
         finally:
             self._release_lock()
+
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)

@@ -43,7 +43,7 @@ class SagaWriteProposal:
         if not isinstance(self.status, SagaStatus):
             return False
         return True
-    
+
     def transition_to(self, new_status: SagaStatus) -> SagaWriteProposal:
         """
         P3: Control rígido de transiciones (Máquina de Estados Inmutable).
@@ -52,11 +52,8 @@ class SagaWriteProposal:
         # Solo se permite transicionar desde PENDING
         if self.status != SagaStatus.PENDING:
             raise ValueError(f"[FATAL] Illegal state transition from {self.status.name} to {new_status.name}")
-        
+
         # Enforce inmutabilidad creando una nueva instancia determinista
         return SagaWriteProposal(
-            proposal_id=self.proposal_id,
-            target=self.target,
-            payload=self.payload,
-            status=new_status
+            proposal_id=self.proposal_id, target=self.target, payload=self.payload, status=new_status
         )

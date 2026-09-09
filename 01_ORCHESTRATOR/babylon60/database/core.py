@@ -33,6 +33,7 @@ def resolve_db_path(db_path: str | Path) -> Path:
     if p.is_absolute():
         return p
     import os
+
     babylon_home = os.environ.get("BABYLON_HOME")
     if not babylon_home:
         raise RuntimeError("INV_C5_ENV: BABYLON_HOME must be set. Path.home() is prohibited.")

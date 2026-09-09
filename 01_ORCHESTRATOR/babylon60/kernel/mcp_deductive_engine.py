@@ -77,9 +77,7 @@ class McpDeductiveEngine:
         logger.info(f"[McpDeductiveEngine] Fricción evaluada: {friction:.4f} (Umbral: {self.friction_threshold})")
         return friction >= self.friction_threshold
 
-    def deduce_contract(
-        self, domain_name: str, sample_calls: List[Dict[str, Any]]
-    ) -> McpCandidateContract:
+    def deduce_contract(self, domain_name: str, sample_calls: List[Dict[str, Any]]) -> McpCandidateContract:
         """
         Sintetiza la especificación formal del MCP candidate desde las llamadas observadas.
         """

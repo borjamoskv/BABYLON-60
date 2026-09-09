@@ -94,6 +94,7 @@ def test_idempotency_tracker():
     )
 
     import asyncio
+
     res1 = asyncio.run(processor.process_email(payload))
     assert res1["status"] == "processed"
 

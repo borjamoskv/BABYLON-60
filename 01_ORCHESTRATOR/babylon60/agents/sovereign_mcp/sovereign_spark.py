@@ -3,7 +3,8 @@ import logging
 
 import ollama
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - [%(levelname)s] - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - [%(levelname)s] - %(message)s")
+
 
 class SovereignSparkAgent:
     def __init__(self, model_name="llama3.1"):
@@ -21,7 +22,7 @@ class SovereignSparkAgent:
     async def _execute_tool(self, server_name: str, tool_name: str, arguments: dict):
         """Simula la ejecución en caliente de una herramienta a través del protocolo MCP"""
         logging.info(f"[MCP] Delegando tarea a servidor '{server_name}' -> Tool: {tool_name} | Args: {arguments}")
-        
+
         # Integración real requiere inicializar clientes estandarizados (mcp-sdk) y comunicarse por stdio o SSE.
         # Aquí se abstrae la topología causal (Stage 1).
         return {"status": "success", "data": f"Ejecución simulada exitosa de {tool_name}"}
@@ -34,8 +35,8 @@ class SovereignSparkAgent:
         3. Falsación empírica y ejecución local (MCP).
         """
         logging.info(f"Transición Cognitiva Iniciada: {prompt}")
-        
-        # Tools inyectadas termodinámicamente. 
+
+        # Tools inyectadas termodinámicamente.
         # En producción, estas se listan dinámicamente preguntando a `mcp_client.list_tools()`.
         tools = [
             {
@@ -48,9 +49,9 @@ class SovereignSparkAgent:
                         "properties": {
                             "path": {"type": "string", "description": "Ruta absoluta o relativa del archivo."}
                         },
-                        "required": ["path"]
-                    }
-                }
+                        "required": ["path"],
+                    },
+                },
             },
             {
                 "type": "function",
@@ -59,56 +60,53 @@ class SovereignSparkAgent:
                     "description": "Ejecuta una consulta SQL determinista usando el MCP de SQLite.",
                     "parameters": {
                         "type": "object",
-                        "properties": {
-                            "query": {"type": "string", "description": "Query SQL a ejecutar."}
-                        },
-                        "required": ["query"]
-                    }
-                }
-            }
+                        "properties": {"query": {"type": "string", "description": "Query SQL a ejecutar."}},
+                        "required": ["query"],
+                    },
+                },
+            },
         ]
 
         try:
             response = ollama.chat(
                 model=self.model_name,
-                messages=[
-                    {"role": "system", "content": self.system_prompt},
-                    {"role": "user", "content": prompt}
-                ],
-                tools=tools
+                messages=[{"role": "system", "content": self.system_prompt}, {"role": "user", "content": prompt}],
+                tools=tools,
             )
 
-            message = response.get('message', {})
-            
-            if 'tool_calls' in message and message['tool_calls']:
-                for tool_call in message['tool_calls']:
-                    func = tool_call.get('function', {})
-                    name = func.get('name')
-                    args = func.get('arguments', {})
-                    
+            message = response.get("message", {})
+
+            if "tool_calls" in message and message["tool_calls"]:
+                for tool_call in message["tool_calls"]:
+                    func = tool_call.get("function", {})
+                    name = func.get("name")
+                    args = func.get("arguments", {})
+
                     server = "filesystem" if name == "read_filesystem" else "sqlite"
                     await self._execute_tool(server, name, args)
             else:
                 logging.info(f"Respuesta analítica pura (0 Tools): {message.get('content', '').strip()}")
-                
+
         except Exception as e:
             logging.error(f"Fricción de Inferencia: {str(e)}. ¿Está Ollama ejecutándose?")
 
-        logging.info("Transición Cognitiva Finalizada.\n" + "-"*50)
+        logging.info("Transición Cognitiva Finalizada.\n" + "-" * 50)
+
 
 async def main():
     # Instanciación con modelo cuantizado estándar
     agent = SovereignSparkAgent(model_name="llama3.1")
-    
+
     # Simulación de un bus de eventos asíncrono (Ej. Cola MQTT o Webhook)
     event_queue = [
         "Analiza el archivo WHITEPAPER.md en el directorio docs/ y extrae las métricas.",
-        "Consulta la tabla 'usuarios' en la base de datos para ver los últimos registros de telemetría."
+        "Consulta la tabla 'usuarios' en la base de datos para ver los últimos registros de telemetría.",
     ]
-    
+
     for event in event_queue:
         await agent.process_task(event)
         await asyncio.sleep(0.5)
+
 
 if __name__ == "__main__":
     asyncio.run(main())

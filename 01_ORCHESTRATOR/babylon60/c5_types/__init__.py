@@ -3,7 +3,7 @@
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 """
-Causal-Determinist Universal Algebraic Data Types (`babylon60.types`).
+Causal-Determinist Universal Algebraic Data Types (`babylon60.c5_types`).
 Enforces strict algebraic typing invariants:
 - Product Types (`|A * B| = |A| * |B|`)
 - Sum Types / Tagged Unions (`|A + B| = |A| + |B|`)

@@ -18,7 +18,7 @@ class Vector:
     """Zero-dependency dense vector wrapper based on standard library array."""
 
     def __init__(self, data: Union[List[float], Tuple[float, ...]]):
-        self._data = array('d', data)
+        self._data = array("d", data)
 
     def __len__(self) -> int:
         return len(self._data)
@@ -53,7 +53,7 @@ class Matrix:
     def __init__(self, rows: int, cols: int, fill: float = 0.0):
         self.rows = rows
         self.cols = cols
-        self._data = array('d', [fill] * (rows * cols))
+        self._data = array("d", [fill] * (rows * cols))
 
     def __getitem__(self, pos: Tuple[int, int]) -> float:
         r, c = pos

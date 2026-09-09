@@ -37,7 +37,6 @@ def test_re_drm_rust_bft_verification():
     res = subprocess.run(
         ["cargo", "run", "-p", "strike_rs", "--bin", "c5_p2p_bft", "--", "--re_drm"],
         cwd=PROJECT_ROOT,
-
         capture_output=True,
         text=True,
         env=env,

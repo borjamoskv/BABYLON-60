@@ -133,8 +133,8 @@ impl BftAsyncEngine {
         let stop_worker_clone = stop_worker.clone();
         
         let worker_handle = thread::spawn(move || {
-            let task_sub = ZeroCopySubscriber::new(svc_tasks).unwrap();
-            let result_pub = ZeroCopyPublisher::new(svc_results).unwrap();
+            let task_sub = ZeroCopySubscriber::new(svc_tasks).expect("C5-REAL: Failed to bind ZeroCopy Subscriber");
+            let result_pub = ZeroCopyPublisher::new(svc_results).expect("C5-REAL: Failed to bind ZeroCopy Publisher");
             
             while !stop_worker_clone.load(std::sync::atomic::Ordering::Relaxed) {
                 if let Ok(Some(sample)) = task_sub.subscriber.receive() {
@@ -164,8 +164,8 @@ impl BftAsyncEngine {
         }
         for node in self.nodes.values() {
             for dep in &node.deps {
-                children_map.get_mut(dep).unwrap().push(node.id.clone());
-                *in_degree.get_mut(&node.id).unwrap() += 1;
+                children_map.get_mut(dep).expect("C5-REAL: Topological dependency missing").push(node.id.clone());
+                *in_degree.get_mut(&node.id).expect("C5-REAL: Node ID missing in degree map") += 1;
             }
         }
         
@@ -178,13 +178,13 @@ impl BftAsyncEngine {
         
         let orch_keys_clone = orch_keys.clone();
         thread::spawn(move || {
-            let task_pub = ZeroCopyPublisher::new(svc_tasks).unwrap();
-            let result_sub = ZeroCopySubscriber::new(svc_results).unwrap();
+            let task_pub = ZeroCopyPublisher::new(svc_tasks).expect("C5-REAL: Failed to bind ZeroCopy Publisher");
+            let result_sub = ZeroCopySubscriber::new(svc_results).expect("C5-REAL: Failed to bind ZeroCopy Subscriber");
             let mut completed = HashSet::new();
             
             while completed.len() < num_nodes {
                 while let Some(n_id) = ready_queue.pop() {
-                    let seq_num = *node_to_id.get(&n_id).unwrap();
+                    let seq_num = *node_to_id.get(&n_id).expect("C5-REAL: Node ID missing in translation mapping");
                     let fake_hash = "0000000000000000000000000000000000000000000000000000000000000000";
                     let _ = task_pub.publish_node(1, 0, seq_num, fake_hash, &orch_keys_clone);
                 }
@@ -197,7 +197,7 @@ impl BftAsyncEngine {
                                 let _ = tx_completed.blocking_send(n_id.clone());
                                 if let Some(kids) = children_map.get(n_id) {
                                     for kid in kids {
-                                        let d = in_degree.get_mut(kid).unwrap();
+                                        let d = in_degree.get_mut(kid).expect("C5-REAL: Child ID missing in degree map");
                                         *d -= 1;
                                         if *d == 0 {
                                             ready_queue.push(kid.clone());
@@ -223,7 +223,7 @@ impl BftAsyncEngine {
         while completed_count < num_nodes {
             if let Some(n_id) = rx_completed.recv().await {
                 completed_count += 1;
-                let node = self.nodes.get(&n_id).unwrap();
+                let node = self.nodes.get(&n_id).expect("C5-REAL: Critical DAG Integrity Failure - Node not found");
                 if node.should_fail {
                     all_success = false;
                     err_msg = format!("Node {} failed", node.id);
@@ -339,8 +339,8 @@ impl BftAsyncEngine {
                 if !self.nodes.contains_key(dep) {
                     return Err(format!("Dependency {} not found for node {}", dep, node.id));
                 }
-                children_map.get_mut(dep).unwrap().push(node.id.clone());
-                *in_degree.get_mut(&node.id).unwrap() += 1;
+                children_map.get_mut(dep).expect("C5-REAL: Topological dependency missing").push(node.id.clone());
+                *in_degree.get_mut(&node.id).expect("C5-REAL: Node ID missing in degree map") += 1;
             }
         }
 
@@ -356,7 +356,7 @@ impl BftAsyncEngine {
             sorted.push(n.clone());
             if let Some(children) = children_map.get(&n) {
                 for child_id in children {
-                    let d = in_degree.get_mut(child_id).unwrap();
+                    let d = in_degree.get_mut(child_id).expect("C5-REAL: Child ID missing in topological map");
                     *d -= 1;
                     if *d == 0 {
                         queue.push(child_id.clone());

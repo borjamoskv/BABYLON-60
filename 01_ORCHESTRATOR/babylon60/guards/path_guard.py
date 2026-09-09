@@ -20,7 +20,7 @@ def is_safe_path(path: str | Path, base_dir: str | Path | None = None) -> bool:
         if base_dir:
             base_resolved = Path(base_dir).resolve()
             return base_resolved in resolved_path.parents or resolved_path == base_resolved
-        
+
         # Default safety check: block system root sensitive paths
         forbidden_prefixes = [Path("/etc"), Path("/proc"), Path("/sys"), Path("/dev")]
         for forbidden in forbidden_prefixes:

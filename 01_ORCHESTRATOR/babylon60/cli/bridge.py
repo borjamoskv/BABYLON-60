@@ -28,7 +28,7 @@ def main() -> None:
     Ignición Determinista del Puente CORTEX.
     """
     args = sys.argv[1:]
-    
+
     tauri_dir = _find_tauri_root()
     if tauri_dir is None:
         print(
@@ -37,30 +37,34 @@ def main() -> None:
             file=sys.stderr,
         )
         sys.exit(1)
-        
+
     # The actual rust workspace root is BABYLON-60 (donde está el target dir general)
     repo_root = tauri_dir
-    while not (repo_root / "Cargo.toml").exists() or not (repo_root / "target").exists() and repo_root.name != "BABYLON-60":
+    while (
+        not (repo_root / "Cargo.toml").exists()
+        or not (repo_root / "target").exists()
+        and repo_root.name != "BABYLON-60"
+    ):
         if repo_root.parent == repo_root:
             # Fallback to tauri_dir parent if we reach filesystem root
             repo_root = tauri_dir.parent.parent
             break
         repo_root = repo_root.parent
-        
+
     if not (repo_root / "target").exists():
         repo_root = Path.cwd()
 
     # HANDOFF SOBERANO A MOSKV-1 (Zero-Python Memory Overhead)
     if "status" in args or "--status" in args:
         kernel_path = repo_root / "target" / "debug" / "babylon60_kernel"
-        
+
         if not kernel_path.exists():
             print("🟢 [CORTEX-BRIDGE] Compilando Sovereign Kernel (MOSKV-1) por primera vez...")
             try:
                 subprocess.run(["cargo", "build", "--bin", "babylon60_kernel"], cwd=str(repo_root), check=True)
             except subprocess.CalledProcessError:
                 sys.exit(1)
-        
+
         # El asesinato de Python. Reemplazo del espacio de memoria por el Kernel C-ABI.
         os.execv(str(kernel_path), [str(kernel_path), "--status"])
 
@@ -77,6 +81,7 @@ def main() -> None:
     except KeyboardInterrupt:
         print("\n💥 [SIGKILL] Puente CORTEX desconectado. Ineficiencia purgada.")
         sys.exit(0)
+
 
 if __name__ == "__main__":
     main()

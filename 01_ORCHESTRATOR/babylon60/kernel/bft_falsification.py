@@ -10,6 +10,7 @@ logger = logging.getLogger("bft_falsification")
 
 DB_PATH = "falsification_test.db"
 
+
 def init_db():
     if os.path.exists(DB_PATH):
         os.remove(DB_PATH)
@@ -17,6 +18,7 @@ def init_db():
     conn.execute("CREATE TABLE bft_log (id INTEGER PRIMARY KEY, thread_id TEXT, timestamp REAL)")
     conn.commit()
     conn.close()
+
 
 def bft_worker(thread_id: int):
     """Trabajador que intenta violar la exclusión mutua de la base de datos."""
@@ -30,6 +32,7 @@ def bft_worker(thread_id: int):
     except Exception as e:
         logger.critical(f"Fallo anómalo que viola invariantes C5-REAL: {e}")
 
+
 def run_falsification_siege(num_threads: int = 20):
     """
     Ejecuta un asedio termodinámico de N hilos sobre la DB SQLite
@@ -37,20 +40,21 @@ def run_falsification_siege(num_threads: int = 20):
     """
     logger.info(f"Iniciando asedio BFT con {num_threads} hilos concurrentes.")
     init_db()
-    
+
     threads = []
     for i in range(num_threads):
         t = threading.Thread(target=bft_worker, args=(i,), name=f"SiegeThread-{i}")
         threads.append(t)
-    
+
     # Iniciar todos simultáneamente para maximizar contención
     for t in threads:
         t.start()
-        
+
     for t in threads:
         t.join()
-        
+
     logger.info("Asedio BFT finalizado.")
+
 
 if __name__ == "__main__":
     run_falsification_siege(20)

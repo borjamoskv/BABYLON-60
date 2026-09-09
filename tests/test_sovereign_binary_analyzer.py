@@ -18,7 +18,6 @@ from babylon60.kernel.sovereign_binary_analyzer import SovereignBinaryAnalyzer, 
 
 
 class TestSovereignBinaryAnalyzer(unittest.TestCase):
-
     def setUp(self):
         # Locate a system executable e.g. /bin/ls or /usr/bin/login
         self.test_binary = "/bin/ls" if os.path.exists("/bin/ls") else "/usr/bin/login"

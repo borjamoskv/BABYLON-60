@@ -6,10 +6,7 @@ Connects legacy test harness to license_sovereign_validator primitives.
 import time
 import json
 from typing import Tuple, Dict, Any
-from babylon60.guards.license_sovereign_validator import (
-    generate_license_key,
-    verify_license_key
-)
+from babylon60.guards.license_sovereign_validator import generate_license_key, verify_license_key
 
 
 class LicenseValidationError(Exception):
@@ -21,13 +18,7 @@ class HybridLicenseVerifier:
     def generate_license_payload(org: str, node: str, expires_at: int) -> Dict[str, Any]:
         tier = "enterprise"
         key = generate_license_key(f"{org}_{node}", tier, expires_at)
-        return {
-            "org": org,
-            "node": node,
-            "tier": tier,
-            "expires_at": expires_at,
-            "key": key
-        }
+        return {"org": org, "node": node, "tier": tier, "expires_at": expires_at, "key": key}
 
     @staticmethod
     def verify_license_offline(license_json: str, expected_node: str) -> Tuple[bool, Dict[str, Any]]:

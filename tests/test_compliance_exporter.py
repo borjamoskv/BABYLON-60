@@ -20,7 +20,7 @@ def temp_bundle_dir():
             "agent_id": "test_agent_alpha",
             "api_key": "secret_key_1234567890_do_not_leak",
             "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC...\n-----END PRIVATE KEY-----",
-            "events_count": 42
+            "events_count": 42,
         }
         with open(manifest_path, "w", encoding="utf-8") as f:
             json.dump(sample_manifest, f)
@@ -31,10 +31,7 @@ def test_redact_sensitive_data():
     raw_data = {
         "user_email": "operator@company.com",
         "api_key": "secret_token_1234567890",
-        "nested": {
-            "aws_key": "<REDACTED_AWS_KEY>",
-            "safe_val": "hello_world"
-        }
+        "nested": {"aws_key": "<REDACTED_AWS_KEY>", "safe_val": "hello_world"},
     }
     redacted = EUAIActComplianceExporter.redact_sensitive_data(raw_data)
     assert redacted["api_key"] == "[REDACTED_AUDIT_SAFE]"
@@ -44,11 +41,7 @@ def test_redact_sensitive_data():
 
 def test_generate_certificate(temp_bundle_dir):
     exporter = EUAIActComplianceExporter(artifact_bundle_path=temp_bundle_dir)
-    cert = exporter.generate_certificate(
-        system_id="SYS-TEST-99",
-        operator_name="Acme Corp",
-        locale="es"
-    )
+    cert = exporter.generate_certificate(system_id="SYS-TEST-99", operator_name="Acme Corp", locale="es")
 
     assert cert["system_identifier"] == "SYS-TEST-99"
     assert cert["operator"] == "Acme Corp"

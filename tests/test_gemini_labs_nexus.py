@@ -31,7 +31,7 @@ def test_generate_scitt_receipt():
     payload = "Test payload for SCITT receipt"
     claims = {"latency_ms": 12.34, "model": "gemini-2.5-pro"}
     receipt = generate_scitt_receipt(claims, payload)
-    
+
     assert receipt["type"] == "GEMINI_LABS_C5_SCITT_RECEIPT"
     assert receipt["issuer"] == "did:c5real:babylon60:gemini_labs_nexus"
     assert "merkle_root_sha3_256" in receipt
@@ -55,14 +55,15 @@ def test_eval_code_with_sandbox_unsafe():
 
 def test_append_auto_log(monkeypatch, tmp_path):
     from babylon60.cortex.gemini_labs_nexus import append_auto_log
-    
+
     mock_log_file = tmp_path / "gemini_labs_telemetry.jsonl"
     monkeypatch.setattr("babylon60.cortex.gemini_labs_nexus.LOG_FILE", str(mock_log_file))
-    
+
     from babylon60.cortex.gemini_labs_nexus import generate_scitt_receipt
+
     receipt = generate_scitt_receipt({"model": "gemini-2.5-pro"}, "test payload")
     append_auto_log("TEST_EVENT", {"prompt": "unit test prompt", "model": "gemini-2.5-pro"}, receipt)
-    
+
     assert os.path.exists(mock_log_file)
     with open(mock_log_file, "r", encoding="utf-8") as f:
         lines = f.readlines()
@@ -74,4 +75,3 @@ def test_append_auto_log(monkeypatch, tmp_path):
 
 if __name__ == "__main__":
     pytest.main([__file__])
-

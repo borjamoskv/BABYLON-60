@@ -39,10 +39,7 @@ def test_verification_gate_critical_permission():
 
     # Register APPROVED sign-off receipt
     receipt = gate.register_sign_off(
-        execution_id=exec_id,
-        action_name="deploy_production",
-        risk_level=RiskLevel.CRITICAL,
-        decision="APPROVED"
+        execution_id=exec_id, action_name="deploy_production", risk_level=RiskLevel.CRITICAL, decision="APPROVED"
     )
 
     assert isinstance(receipt, CausalSignOffReceipt)
@@ -62,7 +59,7 @@ def test_verification_gate_cryptographic_ledger_integrity():
             execution_id=f"EXEC-STEP-{i}",
             action_name=f"Action_{i}",
             risk_level=RiskLevel.HIGH if i % 2 == 0 else RiskLevel.CRITICAL,
-            decision="APPROVED" if i != 2 else "REJECTED"
+            decision="APPROVED" if i != 2 else "REJECTED",
         )
 
     # Merkle hash chain must be verified
@@ -79,7 +76,7 @@ def test_verification_gate_snapshot_pause_resume():
         step=2,
         status=AgentState.PAUSED_AWAITING_SIGN_OFF,
         pending_action="commit_state",
-        payload={"data": "test_payload"}
+        payload={"data": "test_payload"},
     )
 
     snapshot = gate.load_snapshot(exec_id)

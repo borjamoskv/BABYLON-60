@@ -26,6 +26,7 @@ OPTIMIZER_SCRIPT = "scripts/c5_thermo/exergy_optimizer_agent.py"
 def _run_agent() -> float:
     repo_root = Path(__file__).resolve().parents[3]
     import os
+
     env = dict(os.environ)
     packages_dir = str(repo_root / "packages")
     env["PYTHONPATH"] = f"{packages_dir}:{env.get('PYTHONPATH', '')}".rstrip(":")
@@ -43,6 +44,7 @@ def _run_agent() -> float:
         check=False,
     )
     import re
+
     match = re.search(r"ExergyScore:\s*([0-9.]+)", proc.stdout)
     if match:
         return float(match.group(1))

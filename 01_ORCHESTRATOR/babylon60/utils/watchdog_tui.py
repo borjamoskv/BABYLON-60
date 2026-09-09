@@ -7,6 +7,7 @@ YELLOW = "\033[93m"
 RESET = "\033[0m"
 BOLD = "\033[1m"
 
+
 def print_slow(text, delay=0.01):
     for char in text:
         sys.stdout.write(char)
@@ -14,7 +15,8 @@ def print_slow(text, delay=0.01):
         time.sleep(delay)
     print()
 
-print("\033[2J\033[H", end="") # Clear screen
+
+print("\033[2J\033[H", end="")  # Clear screen
 print(f"{RED}{BOLD}================================================================={RESET}")
 print_slow(f"{RED}{BOLD}             ⬛️ KERNEL EPISTEMIC HALT [AX-4] ⬛️{RESET}", 0.02)
 print(f"{RED}{BOLD}================================================================={RESET}")
@@ -37,7 +39,7 @@ print(f"{YELLOW}AWAITING OPERATOR INPUT...{RESET}")
 while True:
     try:
         ans = input(f"{BOLD}Selecciona vector de resolución [1/2/3] o (Q) para purgar: {RESET}")
-        if ans.lower() in ['1', '2', '3', 'q']:
+        if ans.lower() in ["1", "2", "3", "q"]:
             print(f"\n{RED}Iniciando maniobra termodinámica...{RESET}")
             time.sleep(1)
             break

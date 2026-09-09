@@ -6,10 +6,12 @@
 """
 Itera Command - Anergy Purge Protocol Automation
 """
+
 import subprocess
 import logging
 
 logger = logging.getLogger("CORTEX.ITERA")
+
 
 def run_auto_purge() -> None:
     """
@@ -20,8 +22,9 @@ def run_auto_purge() -> None:
     try:
         subprocess.run(["find", ".", "-name", "*.db-shm", "-delete"], check=False)
         subprocess.run(["find", ".", "-name", "*.db-wal", "-delete"], check=False)
-        subprocess.run(["find", ".", "-name", "__pycache__", "-type", "d", "-exec", "rm", "-rf", "{}", "+"], check=False)
+        subprocess.run(
+            ["find", ".", "-name", "__pycache__", "-type", "d", "-exec", "rm", "-rf", "{}", "+"], check=False
+        )
         logger.info("✅ [ITERA] Anergía purgada con éxito. Exergía maximizada.")
     except (OSError, subprocess.SubprocessError) as e:
         logger.warning(f"⚠️ [ITERA] Fricción detectada durante la purga: {e}")
-

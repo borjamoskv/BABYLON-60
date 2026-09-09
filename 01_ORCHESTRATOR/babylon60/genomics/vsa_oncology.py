@@ -22,9 +22,9 @@ from typing import Dict, List, Optional, Tuple, Any
 
 
 class BFOCategory(str, Enum):
-    CONTINUANT = "Continuant"               # Genes, Moléculas, Fármacos
-    OCCURRENT = "Occurrent"                 # Vías, Checkpoints, Procesos
-    INFORMATIONAL = "InformationalEntity"   # Biomarcadores, Hipótesis
+    CONTINUANT = "Continuant"  # Genes, Moléculas, Fármacos
+    OCCURRENT = "Occurrent"  # Vías, Checkpoints, Procesos
+    INFORMATIONAL = "InformationalEntity"  # Biomarcadores, Hipótesis
 
 
 DIMENSION = 10_000  # Espacio hiperdimensional estándar
@@ -80,7 +80,7 @@ class OncologyOntologyVSA:
         if json_path is None:
             repo_root = Path(__file__).resolve().parent.parent.parent.parent
             json_path = repo_root / "data" / "oncology_300.json"
-        
+
         self.json_path = json_path
         self.primitives: Dict[str, Dict[str, Any]] = {}
         self.vectors: Dict[str, HyperVector] = {}
@@ -89,7 +89,7 @@ class OncologyOntologyVSA:
     def _load_primitives(self) -> None:
         if not self.json_path.exists():
             raise FileNotFoundError(f"No se encuentra el catálogo ontológico en: {self.json_path}")
-        
+
         with open(self.json_path, "r", encoding="utf-8") as f:
             data = json.load(f)
             raw_list = data.get("primitives", [])
@@ -119,11 +119,7 @@ class OncologyOntologyVSA:
         return bound.similarity(v_target)
 
     def simulate_waddington_trajectory(
-        self,
-        oncogene_id: str,
-        inhibited: bool = False,
-        steps: int = 100,
-        dt: float = 0.05
+        self, oncogene_id: str, inhibited: bool = False, steps: int = 100, dt: float = 0.05
     ) -> List[Tuple[float, float]]:
         """
         Simula la evolución temporal sobre el paisaje de Waddington U(x).
@@ -138,10 +134,10 @@ class OncologyOntologyVSA:
         trajectory = []
 
         for _ in range(steps):
-            grad = 4.0 * (x ** 3) - 4.0 * x - f_onc
+            grad = 4.0 * (x**3) - 4.0 * x - f_onc
             x = x - grad * dt
             x = max(-2.0, min(2.0, x))
-            u_x = (x ** 4) - 2.0 * (x ** 2) - f_onc * x
+            u_x = (x**4) - 2.0 * (x**2) - f_onc * x
             trajectory.append((x, u_x))
 
         return trajectory

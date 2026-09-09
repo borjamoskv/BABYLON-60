@@ -166,7 +166,6 @@ def cortex_hmac_b60(key: bytes | str, data: bytes | str) -> str:
     return bytes_to_base60(digest)
 
 
-
 def cortex_hash_raw(data: bytes | str) -> bytes:
     """Compute the raw binary digest (not hex) using the active algorithm.
 

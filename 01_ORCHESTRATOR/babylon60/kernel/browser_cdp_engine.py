@@ -23,6 +23,7 @@ logger = logging.getLogger("babylon60.kernel.browser_cdp")
 
 try:
     import websockets
+
     HAS_WEBSOCKETS = True
 except ImportError:
     HAS_WEBSOCKETS = False
@@ -48,7 +49,7 @@ class CDPPage:
             raise RuntimeError("`websockets` package is required for CDPPage communication.")
         self.ws = await websockets.connect(self.ws_url, max_size=50 * 1024 * 1024)
         self._recv_task = asyncio.create_task(self._listen_loop())
-        
+
         # Enable core domains
         await self.send("Page.enable")
         await self.send("DOM.enable")
@@ -86,11 +87,13 @@ class CDPPage:
                     params = msg.get("params", {})
                     if method == "Network.responseReceived":
                         resp = params.get("response", {})
-                        self.network_logs.append({
-                            "url": resp.get("url"),
-                            "status": resp.get("status"),
-                            "mimeType": resp.get("mimeType"),
-                        })
+                        self.network_logs.append(
+                            {
+                                "url": resp.get("url"),
+                                "status": resp.get("status"),
+                                "mimeType": resp.get("mimeType"),
+                            }
+                        )
                     for cb in self._event_listeners.get(method, []):
                         if asyncio.iscoroutinefunction(cb):
                             asyncio.create_task(cb(params))
@@ -107,11 +110,7 @@ class CDPPage:
             raise RuntimeError("CDPPage is not connected. Call connect() first.")
         self._msg_id += 1
         current_id = self._msg_id
-        payload = {
-            "id": current_id,
-            "method": method,
-            "params": params or {}
-        }
+        payload = {"id": current_id, "method": method, "params": params or {}}
         loop = asyncio.get_running_loop()
         fut = loop.create_future()
         self._pending_requests[current_id] = fut
@@ -148,11 +147,9 @@ class CDPPage:
 
     async def evaluate(self, expression: str) -> Any:
         """Evaluate a JavaScript expression in the page context."""
-        res = await self.send("Runtime.evaluate", {
-            "expression": expression,
-            "returnByValue": True,
-            "awaitPromise": True
-        })
+        res = await self.send(
+            "Runtime.evaluate", {"expression": expression, "returnByValue": True, "awaitPromise": True}
+        )
         result_obj = res.get("result", {})
         if "exceptionDetails" in res:
             raise RuntimeError(f"JS Execution Exception: {res['exceptionDetails']}")
@@ -186,8 +183,12 @@ class CDPPage:
 
         x, y = coords["x"], coords["y"]
         # Dispatch mouse press & release
-        await self.send("Input.dispatchMouseEvent", {"type": "mousePressed", "x": x, "y": y, "button": "left", "clickCount": 1})
-        await self.send("Input.dispatchMouseEvent", {"type": "mouseReleased", "x": x, "y": y, "button": "left", "clickCount": 1})
+        await self.send(
+            "Input.dispatchMouseEvent", {"type": "mousePressed", "x": x, "y": y, "button": "left", "clickCount": 1}
+        )
+        await self.send(
+            "Input.dispatchMouseEvent", {"type": "mouseReleased", "x": x, "y": y, "button": "left", "clickCount": 1}
+        )
         return True
 
     async def type(self, selector: str, text: str, delay_ms: float = 20.0, timeout: float = 10.0) -> bool:
@@ -241,19 +242,19 @@ class CDPPage:
         """
         return await self.evaluate(js) or {}
 
-    async def screenshot(self, path: Optional[str] = None, format: str = "png", quality: Optional[int] = None, full_page: bool = False) -> bytes:
+    async def screenshot(
+        self, path: Optional[str] = None, format: str = "png", quality: Optional[int] = None, full_page: bool = False
+    ) -> bytes:
         """Capture a screenshot of the page, supporting full-page capture."""
         if full_page:
             layout = await self.send("Page.getLayoutMetrics")
             content_size = layout.get("contentSize", layout.get("cssContentSize", {}))
             width = content_size.get("width", 1280)
             height = content_size.get("height", 800)
-            await self.send("Emulation.setDeviceMetricsOverride", {
-                "width": int(width),
-                "height": int(height),
-                "deviceScaleFactor": 1,
-                "mobile": False
-            })
+            await self.send(
+                "Emulation.setDeviceMetricsOverride",
+                {"width": int(width), "height": int(height), "deviceScaleFactor": 1, "mobile": False},
+            )
 
         params: Dict[str, Any] = {"format": format}
         if quality and format in ("jpeg", "webp"):
@@ -393,7 +394,11 @@ class BrowserEngine:
                             if lines and lines[0].isdigit():
                                 self.port = int(lines[0])
                                 ver = await self.get_version_info()
-                                logger.info("Chrome CDP instance launched successfully on port %d (%s)", self.port, ver.get("Browser", "Chrome"))
+                                logger.info(
+                                    "Chrome CDP instance launched successfully on port %d (%s)",
+                                    self.port,
+                                    ver.get("Browser", "Chrome"),
+                                )
                                 return True
                     except Exception:
                         pass
@@ -404,7 +409,9 @@ class BrowserEngine:
                     await asyncio.sleep(0.2)
                     ver = await self.get_version_info()
                     if "error" not in ver:
-                        logger.info("Chrome CDP instance ready on port %d (%s)", self.port, ver.get("Browser", "Chrome"))
+                        logger.info(
+                            "Chrome CDP instance ready on port %d (%s)", self.port, ver.get("Browser", "Chrome")
+                        )
                         return True
 
             logger.error("Timed out waiting for Chrome DevToolsActivePort / CDP endpoint.")
@@ -503,10 +510,10 @@ async def run_standalone_demo():
         async with BrowserEngine(headless=True) as engine:
             ver = await engine.get_version_info()
             print("  [+] Browser Version:", ver.get("Browser", "Unknown"))
-            
+
             page = await engine.new_page()
             print("  [+] Created CDP page target with anti-fingerprint stealth")
-            
+
             # 1. Navigate to inline HTML
             data_url = "data:text/html;base64," + base64.b64encode(test_html.encode()).decode()
             await page.send("Page.navigate", {"url": data_url})
@@ -523,14 +530,14 @@ async def run_standalone_demo():
             await page.type("#inp", "C5-REAL High Exergy Test")
             print("  [+] Clicking submit button '#btn'...")
             await page.click("#btn")
-            
+
             output_text = await page.evaluate("document.getElementById('out').innerText")
             print("  [+] Form Result DOM Output:", output_text)
 
             # 4. Screenshot & PDF export
             img_bytes = await page.screenshot(full_page=True)
             print(f"  [+] Full-page Screenshot Captured: {len(img_bytes)} bytes")
-            
+
             pdf_bytes = await page.pdf()
             print(f"  [+] PDF Document Exported: {len(pdf_bytes)} bytes")
 
@@ -544,4 +551,3 @@ async def run_standalone_demo():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     asyncio.run(run_standalone_demo())
-

@@ -5,6 +5,7 @@
 import hashlib
 import json
 
+
 class MockQuarantineSnapshot:
     def __init__(self, timestamp: int, causal_hash: str, payload: dict):
         self.timestamp = timestamp
@@ -24,7 +25,7 @@ def test_quarantine_snapshot_integrity_pass():
     snapshot = MockQuarantineSnapshot(
         timestamp=1000,
         causal_hash="0000000000000000000000000000000000000000000000000000000000000000",
-        payload={"event": "CRITICAL_HALT", "reason": "CausalInversionDetected"}
+        payload={"event": "CRITICAL_HALT", "reason": "CausalInversionDetected"},
     )
     assert snapshot.verify_integrity() is True
 
@@ -33,7 +34,7 @@ def test_quarantine_snapshot_integrity_fail_on_tampering():
     snapshot = MockQuarantineSnapshot(
         timestamp=1000,
         causal_hash="0000000000000000000000000000000000000000000000000000000000000000",
-        payload={"event": "CRITICAL_HALT", "reason": "CausalInversionDetected"}
+        payload={"event": "CRITICAL_HALT", "reason": "CausalInversionDetected"},
     )
     # Alter payload after instantiation
     snapshot.payload["reason"] = "AlteredReason"

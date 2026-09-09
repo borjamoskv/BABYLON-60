@@ -65,9 +65,7 @@ class MetamemoryMonitor:
         """Return FOK confidence score (0.0 - 1.0) for an intent."""
         return self._fok_scores.get(intent, 0.85)
 
-    def judge_procedural_fok(
-        self, intent: str, candidates: list[Any]
-    ) -> FokJudgment:
+    def judge_procedural_fok(self, intent: str, candidates: list[Any]) -> FokJudgment:
         """Evaluate procedural FOK confidence for intent given candidate skill surfaces."""
         if not candidates:
             return FokJudgment(fok_score=0.1, tip_of_tongue=False)
@@ -96,9 +94,7 @@ class MetamemoryMonitor:
             relevance_matches=matched,
         )
 
-    def evaluate_epistemic_context(
-        self, intent: str, memory_cards: List[MemoryCard] | None = None
-    ) -> MetaJudgment:
+    def evaluate_epistemic_context(self, intent: str, memory_cards: List[MemoryCard] | None = None) -> MetaJudgment:
         """Evaluate epistemic judgment and confidence for a prompt context."""
         cards = memory_cards or []
         if not cards:

@@ -5,17 +5,13 @@ Verifies HMAC license key generation, offline validation, and MCP protocol tools
 
 import os
 import tempfile
-from babylon60.guards.license_sovereign_validator import (
-    generate_license_key,
-    verify_license_key,
-    LicenseStatus
-)
+from babylon60.guards.license_sovereign_validator import generate_license_key, verify_license_key, LicenseStatus
 from babylon60.mcp.cortex_mcp_server import CortexMCPServer, TOOLS, JSONRPC_VERSION
 
 
 def test_enterprise_license_generation_and_verification():
     os.environ["BABYLON60_LICENSE_SALT"] = "test_sovereign_salt_999"
-    
+
     # 1. Test community fallback (empty key)
     community_status = verify_license_key("")
     assert community_status.tier == "community"
@@ -24,7 +20,7 @@ def test_enterprise_license_generation_and_verification():
     # 2. Test valid Enterprise key generation
     expires = 1956528000  # Year 2032
     key = generate_license_key(owner="TestCorp", tier="enterprise", expires_at=expires)
-    
+
     # 3. Test verification of valid key
     valid_status: LicenseStatus = verify_license_key(key)
     assert valid_status.is_valid is True
@@ -52,10 +48,7 @@ def test_mcp_server_initialization():
     with tempfile.TemporaryDirectory() as tmpdir:
         ledger_path = os.path.join(tmpdir, "mcp_ledger.db")
         mail_path = os.path.join(tmpdir, "mail_ledger.db")
-        
-        server = CortexMCPServer(
-            ledger_path=ledger_path,
-            mail_ledger_path=mail_path
-        )
+
+        server = CortexMCPServer(ledger_path=ledger_path, mail_ledger_path=mail_path)
         assert server.ledger is not None
         assert server.mail_ledger is not None

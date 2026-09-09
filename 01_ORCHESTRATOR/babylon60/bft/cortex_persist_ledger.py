@@ -136,7 +136,9 @@ class CortexPersistLedger:
             raise ValueError("INV_BFT_03: cortex_taint es obligatorio")
 
         payload_json = _canonical_json(event.payload)
-        idempotency_str = f"{event.event_type}\x1f{payload_json}\x1f{event.cortex_taint}\x1f{event.agent_id}\x1f{event.domain}"
+        idempotency_str = (
+            f"{event.event_type}\x1f{payload_json}\x1f{event.cortex_taint}\x1f{event.agent_id}\x1f{event.domain}"
+        )
         event_id = str(uuid.uuid5(NAMESPACE_CORTEX, idempotency_str))
         timestamp = datetime.now(timezone.utc).isoformat()
 

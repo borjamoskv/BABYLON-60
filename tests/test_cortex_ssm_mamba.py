@@ -65,4 +65,3 @@ def test_ssm_linear_time_invariant() -> None:
     assert ratio < 3.5, (
         f"Violación de Invariante O(N): Ratio de crecimiento termodinámico {ratio:.2f} excede la cota teórica."
     )
-

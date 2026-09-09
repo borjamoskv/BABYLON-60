@@ -17,8 +17,10 @@ import logging
 
 logger = logging.getLogger("BABYLON-60.COMPAT")
 
+
 class MissingOptionalDependency:
     """Mock object that raises an error only when accessed/called."""
+
     def __init__(self, name: str, pip_package: str):
         self._name = name
         self._pip_package = pip_package
@@ -28,9 +30,10 @@ class MissingOptionalDependency:
             f"❌ Dependencia Opcional Faltante: El ecosistema requiere '{self._name}' "
             f"para colapsar esta función matemática. Ejecuta: pip install {self._pip_package}"
         )
-        
+
     def __call__(self, *args, **kwargs):
         self.__getattr__("__call__")
+
 
 # Intento de importación local de NumPy (Lazy Compute Bridge)
 try:

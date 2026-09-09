@@ -30,9 +30,7 @@ def test_mcp_deductive_engine():
     assert engine.should_deduce_mcp(high_friction_steps)
 
     # 3. Deducir contrato
-    sample_calls = [
-        {"args": {"query": "SELECT * FROM users", "limit": 10}}
-    ]
+    sample_calls = [{"args": {"query": "SELECT * FROM users", "limit": 10}}]
     contract = engine.deduce_contract("DatabaseQuery", sample_calls)
     assert contract.server_name == "DatabasequeryBridge"
     assert contract.tool_name == "databasequery_action"
@@ -48,9 +46,7 @@ async def test_full_mcp_scaffolding_sandbox_and_lifecycle():
 
         # 1. Deducción
         engine = McpDeductiveEngine()
-        contract = engine.deduce_contract(
-            "SystemInfo", [{"args": {"target_host": "localhost"}}]
-        )
+        contract = engine.deduce_contract("SystemInfo", [{"args": {"target_host": "localhost"}}])
 
         # 2. Scaffolding
         scaffolder = McpCodeScaffolder(output_dir=tmp_dir)

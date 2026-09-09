@@ -5,7 +5,7 @@
 """
 tonnetz_monitor.py — Production Primitive for Tonnetz Harmonic Oversight Monitor
 
-Implements the bi-modal audio oversight engine mapping Shannon Entropy H(T | C) 
+Implements the bi-modal audio oversight engine mapping Shannon Entropy H(T | C)
 and Exergy Consumption Delta_Ex to Tonnetz Torus transformations under Art. 14 EU AI Act.
 """
 
@@ -33,9 +33,7 @@ def compute_shannon_entropy(probabilities: List[float]) -> float:
     return -sum(p * math.log2(p) for p in norm_probs)
 
 
-def evaluate_tonnetz_oversight(
-    entropy: float, exergy_consumption: float
-) -> TonnetzTelemetry:
+def evaluate_tonnetz_oversight(entropy: float, exergy_consumption: float) -> TonnetzTelemetry:
     """
     Evaluate the Tonnetz oversight state given systemic entropy and exergy consumption.
     Enforces AX-TZ-1 (Homeostatic Triadic Compliance) and AX-TZ-2 (Dissonance Alert).

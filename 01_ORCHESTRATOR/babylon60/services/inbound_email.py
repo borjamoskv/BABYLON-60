@@ -74,8 +74,32 @@ class InboundEmailPayload(BaseModel):
     def detect_language(self) -> str:
         """Heuristic language detector for English vs Spanish."""
         text = f"{self.subject} {self.text_body or ''}".lower()
-        english_keywords = {"the", "is", "help", "support", "issue", "please", "thanks", "regards", "error", "bug", "account", "request"}
-        spanish_keywords = {"el", "la", "que", "gracias", "saludos", "ayuda", "soporte", "problema", "por favor", "cuenta"}
+        english_keywords = {
+            "the",
+            "is",
+            "help",
+            "support",
+            "issue",
+            "please",
+            "thanks",
+            "regards",
+            "error",
+            "bug",
+            "account",
+            "request",
+        }
+        spanish_keywords = {
+            "el",
+            "la",
+            "que",
+            "gracias",
+            "saludos",
+            "ayuda",
+            "soporte",
+            "problema",
+            "por favor",
+            "cuenta",
+        }
 
         en_count = sum(1 for kw in english_keywords if f" {kw} " in f" {text} ")
         es_count = sum(1 for kw in spanish_keywords if f" {kw} " in f" {text} ")
@@ -93,7 +117,9 @@ class InboundEmailPayload(BaseModel):
         text = f"{self.subject} {self.text_body or ''}".lower()
 
         # Security check
-        if any(w in text for w in ("cve", "vulnerability", "exploit", "security incident", "data leak", "vulnerabilidad")):
+        if any(
+            w in text for w in ("cve", "vulnerability", "exploit", "security incident", "data leak", "vulnerabilidad")
+        ):
             self.intent = EmailIntent.SECURITY_INCIDENT
             self.severity = EmailSeverity.URGENT
             return self.intent, self.severity
@@ -151,11 +177,7 @@ def verify_hmac_signature(secret: str, raw_body: bytes, expected_signature: str)
     """Verifies HMAC-SHA256 signature."""
     if not secret or not expected_signature:
         return False
-    computed_hmac = hmac.new(
-        secret.encode("utf-8"),
-        raw_body,
-        hashlib.sha256
-    ).hexdigest()
+    computed_hmac = hmac.new(secret.encode("utf-8"), raw_body, hashlib.sha256).hexdigest()
     return hmac.compare_digest(computed_hmac, expected_signature)
 
 
@@ -233,7 +255,7 @@ def create_inbound_email_router(processor: InboundEmailProcessor) -> APIRouter:
             logger.warning("Rejected unauthorized inbound email webhook attempt.")
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Invalid or missing X-Babylon-Signature or Authorization Bearer token"
+                detail="Invalid or missing X-Babylon-Signature or Authorization Bearer token",
             )
 
         # 2. Parse & Process
@@ -242,8 +264,7 @@ def create_inbound_email_router(processor: InboundEmailProcessor) -> APIRouter:
         except Exception as e:
             logger.error(f"Failed to parse inbound email payload: {e}")
             raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"Invalid email payload format: {str(e)}"
+                status_code=status.HTTP_400_BAD_REQUEST, detail=f"Invalid email payload format: {str(e)}"
             )
 
         result = await processor.process_email(payload)
@@ -273,11 +294,15 @@ class EnglishSupportAgentHandler:
         attachments_block = "\n\n".join(attachments_summary) if attachments_summary else "No attachments."
 
         system_prompt = (
-            f"You are {self.agent_name}. Respond in clear, professional English.\n"
-            f"Intent: {intent.value.upper()} | Urgency: {severity.value.upper()}"
-        ) if lang == "en" else (
-            f"Eres {self.agent_name}. Responde en español profesional.\n"
-            f"Intención: {intent.value.upper()} | Urgencia: {severity.value.upper()}"
+            (
+                f"You are {self.agent_name}. Respond in clear, professional English.\n"
+                f"Intent: {intent.value.upper()} | Urgency: {severity.value.upper()}"
+            )
+            if lang == "en"
+            else (
+                f"Eres {self.agent_name}. Responde en español profesional.\n"
+                f"Intención: {intent.value.upper()} | Urgencia: {severity.value.upper()}"
+            )
         )
 
         prompt_context = {

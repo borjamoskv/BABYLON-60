@@ -46,11 +46,11 @@ def _check_ast_node(node: ast.AST, reflection_funcs: set[str], allowed_imports: 
 
     # 4. Block imports except whitelist
     if isinstance(node, ast.Import):
-        forbidden = [a.name for a in node.names if a.name.split('.')[0] not in allowed_imports]
+        forbidden = [a.name for a in node.names if a.name.split(".")[0] not in allowed_imports]
         if forbidden:
             raise SecurityError(f"Importacion no permitida: {forbidden[0]}")
 
-    if isinstance(node, ast.ImportFrom) and (not node.module or node.module.split('.')[0] not in allowed_imports):
+    if isinstance(node, ast.ImportFrom) and (not node.module or node.module.split(".")[0] not in allowed_imports):
         raise SecurityError(f"Importacion no permitida: {node.module}")
 
 
@@ -60,8 +60,16 @@ def validate_ast_markov_blanket(source_code: str) -> tuple[bool, str]:
     Implements RULE_AST_REFLECT_01: Validates string constants used in reflections.
     """
     reflection_funcs = {
-        "getattr", "setattr", "delattr", "__getattribute__",
-        "eval", "exec", "compile", "__import__", "open", "input",
+        "getattr",
+        "setattr",
+        "delattr",
+        "__getattribute__",
+        "eval",
+        "exec",
+        "compile",
+        "__import__",
+        "open",
+        "input",
     }
     allowed_imports = {"numpy", "networkx", "typing"}
 
@@ -168,7 +176,9 @@ def _purge_zombies(process: asyncio.subprocess.Process) -> None:
         process.kill()
 
 
-async def run_chaos_monad(source_code: str, frontier_tick: str = "GENESIS_TICK", timeout_ms: int = 1000, use_seatbelt: bool = False) -> ScittResult:
+async def run_chaos_monad(
+    source_code: str, frontier_tick: str = "GENESIS_TICK", timeout_ms: int = 1000, use_seatbelt: bool = False
+) -> ScittResult:
     """
     Executes dynamic code in a strict subprocess sandbox.
     Returns a strict Monad Result to protect the core from entropy.
@@ -208,7 +218,12 @@ async def run_chaos_monad(source_code: str, frontier_tick: str = "GENESIS_TICK",
         except asyncio.TimeoutError:
             # Turing Markov Blanket Chaos Isolation
             _purge_zombies(process)
-            return {"status": "Timeout_Entropy_Death", "stdout": "", "error": "Execution exceeded timeout", "scitt_receipt": {}}
+            return {
+                "status": "Timeout_Entropy_Death",
+                "stdout": "",
+                "error": "Execution exceeded timeout",
+                "scitt_receipt": {},
+            }
     finally:
         # Guarantee no zombie processes or runaway processes remain
         if process.returncode is None:
@@ -225,11 +240,7 @@ async def run_chaos_monad(source_code: str, frontier_tick: str = "GENESIS_TICK",
         # Emula la firma COSE Sign1 (SCITT) anclando el AST y la frontera
         payload = f"{frontier_tick}|{ast_hash}|{final_status}|{len(out_text)}"
         signature = hashlib.sha256(payload.encode("utf-8")).hexdigest()
-        return {
-            "frontier_tick": frontier_tick,
-            "ast_hash": ast_hash,
-            "signature": signature
-        }
+        return {"frontier_tick": frontier_tick, "ast_hash": ast_hash, "signature": signature}
 
     if "---JSON_OUTPUT_MARKER---" in stdout_str:
         parts = stdout_str.split("---JSON_OUTPUT_MARKER---")
@@ -237,18 +248,13 @@ async def run_chaos_monad(source_code: str, frontier_tick: str = "GENESIS_TICK",
             parsed = json.loads(parts[1].strip())
             status = parsed.get("status", "RuntimeError")
             error_str = parsed.get("error", "")
-            
+
             # Defensa Bizantina: Interceptamos AssertionError del código ejecutado
             if "AssertionError" in error_str or "AssertionError" in stderr_str:
                 status = "Falsified"
-                
+
             receipt = generate_receipt(status, parsed.get("stdout", ""))
-            return {
-                "status": status,
-                "stdout": parsed.get("stdout", ""),
-                "error": error_str,
-                "scitt_receipt": receipt
-            }
+            return {"status": status, "stdout": parsed.get("stdout", ""), "error": error_str, "scitt_receipt": receipt}
         except json.JSONDecodeError:
             return {"status": "RuntimeError", "stdout": parts[0], "error": "Failed to decode JSON", "scitt_receipt": {}}
 

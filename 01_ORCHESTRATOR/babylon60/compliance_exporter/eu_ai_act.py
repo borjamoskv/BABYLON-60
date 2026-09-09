@@ -204,16 +204,16 @@ class EUAIActComplianceExporter:
         rows = ""
         for art_key, art_val in cert["articles_compliance"].items():
             status_badge = (
-                '<span class="badge badge-success">✅ ' + str(art_val["status"]) + '</span>'
+                '<span class="badge badge-success">✅ ' + str(art_val["status"]) + "</span>"
                 if "PASS" in str(art_val["status"]) or "CUMPLIDO" in str(art_val["status"])
-                else '<span class="badge badge-danger">❌ ' + str(art_val["status"]) + '</span>'
+                else '<span class="badge badge-danger">❌ ' + str(art_val["status"]) + "</span>"
             )
             rows += f"""
             <tr>
-                <td><strong>{art_val['title']}</strong></td>
-                <td>{art_val['mechanism']}</td>
+                <td><strong>{art_val["title"]}</strong></td>
+                <td>{art_val["mechanism"]}</td>
                 <td>{status_badge}</td>
-                <td><code>{art_val['evidence_hash'][:16]}...</code></td>
+                <td><code>{art_val["evidence_hash"][:16]}...</code></td>
             </tr>
             """
 
@@ -222,7 +222,7 @@ class EUAIActComplianceExporter:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{cert['title']} - {cert['certificate_id']}</title>
+    <title>{cert["title"]} - {cert["certificate_id"]}</title>
     <style>
         :root {{
             --bg-color: #0b0f19;
@@ -311,33 +311,33 @@ class EUAIActComplianceExporter:
 <body>
     <div class="container">
         <div class="header">
-            <h1>📜 {cert['title']}</h1>
-            <p style="color: var(--accent); font-weight: 600; margin: 0;">{t['compliance_standard']}</p>
+            <h1>📜 {cert["title"]}</h1>
+            <p style="color: var(--accent); font-weight: 600; margin: 0;">{t["compliance_standard"]}</p>
         </div>
 
         <div class="grid">
             <div class="card">
                 <div class="card-title">ID Certificado</div>
-                <div class="card-value">{cert['certificate_id']}</div>
+                <div class="card-value">{cert["certificate_id"]}</div>
             </div>
             <div class="card">
                 <div class="card-title">Sistema Auditado</div>
-                <div class="card-value">{cert['system_identifier']}</div>
+                <div class="card-value">{cert["system_identifier"]}</div>
             </div>
             <div class="card">
                 <div class="card-title">Operador / Entidad</div>
-                <div class="card-value">{cert['operator']}</div>
+                <div class="card-value">{cert["operator"]}</div>
             </div>
             <div class="card">
                 <div class="card-title">Fecha Emisión</div>
-                <div class="card-value">{cert['issued_at']}</div>
+                <div class="card-value">{cert["issued_at"]}</div>
             </div>
         </div>
 
         <h2>Executive Summary</h2>
-        <p>{t['executive_summary_text']}</p>
-        <p><strong>Global Merkle Root:</strong> <code>{cert['global_merkle_root']}</code></p>
-        <p><strong>Cryptographic Fingerprint:</strong> <code>{cert['cryptographic_attestation']['fingerprint']}</code></p>
+        <p>{t["executive_summary_text"]}</p>
+        <p><strong>Global Merkle Root:</strong> <code>{cert["global_merkle_root"]}</code></p>
+        <p><strong>Cryptographic Fingerprint:</strong> <code>{cert["cryptographic_attestation"]["fingerprint"]}</code></p>
 
         <h2 style="margin-top: 2rem;">Matriz de Cumplimiento Normativo EU AI Act</h2>
         <table>
@@ -355,7 +355,7 @@ class EUAIActComplianceExporter:
         </table>
 
         <div class="footer">
-            BABYLON-60 v4.0 C5-REAL Compliance Transducer — {cert['supervisory_authority']}
+            BABYLON-60 v4.0 C5-REAL Compliance Transducer — {cert["supervisory_authority"]}
         </div>
     </div>
 </body>
@@ -374,18 +374,16 @@ def main_cli():
     parser.add_argument("--bundle", default="artifact_bundle_v3", help="Ruta al paquete de artefactos/evidencia")
     parser.add_argument("--system-id", default="BABYLON60-PROD-01", help="Identificador del sistema de IA auditado")
     parser.add_argument("--operator", default="Enterprise Operator", help="Nombre de la entidad u operador")
-    parser.add_argument("--locale", default="es", choices=["es", "en", "de", "fr", "it"], help="Idioma de certificación")
+    parser.add_argument(
+        "--locale", default="es", choices=["es", "en", "de", "fr", "it"], help="Idioma de certificación"
+    )
     parser.add_argument("--format", default="json", choices=["json", "md", "html"], help="Formato de exportación")
     parser.add_argument("--output", help="Ruta del archivo de salida")
 
     args = parser.parse_args()
 
     exporter = EUAIActComplianceExporter(artifact_bundle_path=args.bundle)
-    cert = exporter.generate_certificate(
-        system_id=args.system_id,
-        operator_name=args.operator,
-        locale=args.locale
-    )
+    cert = exporter.generate_certificate(system_id=args.system_id, operator_name=args.operator, locale=args.locale)
 
     out_path = args.output
     if not out_path:
@@ -406,4 +404,3 @@ def main_cli():
 
 if __name__ == "__main__":
     main_cli()
-

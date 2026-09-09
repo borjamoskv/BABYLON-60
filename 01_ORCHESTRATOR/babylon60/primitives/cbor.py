@@ -56,7 +56,7 @@ def _encode_map(obj: dict) -> bytes:
         k_bytes = dumps(k)
         v_bytes = dumps(v)
         encoded_pairs.append((k_bytes, v_bytes))
-    
+
     encoded_pairs.sort(key=lambda pair: (len(pair[0]), pair[0]))
     hdr = _encode_header(MAJOR_MAP, len(encoded_pairs))
     body = b"".join(k + v for k, v in encoded_pairs)
@@ -128,7 +128,7 @@ def _decode_stream(stream: io.BytesIO) -> Any:
     b = stream.read(1)
     if not b:
         raise EOFError("Unexpected end of CBOR stream")
-    
+
     first = b[0]
     major = first >> 5
     additional = first & 0x1F

@@ -12,6 +12,7 @@ import hashlib
 import time
 from collections import deque
 
+
 class ShardedLedgerRing:
     def __init__(self, shards: int = 16, capacity_per_shard: int = 10000):
         self.shards = [deque(maxlen=capacity_per_shard) for _ in range(shards)]
@@ -22,9 +23,9 @@ class ShardedLedgerRing:
     def append(self, agent_id: str, payload: str) -> dict:
         self.lamport_clock += 1
         shard_idx = hash(agent_id) % self.num_shards
-        
+
         # Calculate SHA3-256 Taint Hash
-        raw = f"{self.lamport_clock}:{agent_id}:{payload}:{self.prev_hash}".encode('utf-8')
+        raw = f"{self.lamport_clock}:{agent_id}:{payload}:{self.prev_hash}".encode("utf-8")
         taint_hash = hashlib.sha3_256(raw).hexdigest()
         self.prev_hash = taint_hash
 
@@ -43,6 +44,7 @@ class ShardedLedgerRing:
         total_flushed = sum(len(s) for s in self.shards)
         # Flush simulated
         return total_flushed
+
 
 if __name__ == "__main__":
     ring = ShardedLedgerRing()

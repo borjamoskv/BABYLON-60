@@ -20,6 +20,7 @@ __all__ = ["export_facts"]
 
 if TYPE_CHECKING:
     from typing import Any
+
     Fact = Any  # type: ignore
 
 

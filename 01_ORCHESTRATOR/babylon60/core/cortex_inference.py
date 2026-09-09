@@ -14,6 +14,7 @@ from pathlib import Path
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 CACHE_DB_PATH = str(ROOT_DIR / "data" / "cortex_memory.db")
 
+
 class CortexInferenceEngine:
     """High-exergy inference engine adapter with L3 memoization."""
 
@@ -36,6 +37,7 @@ class CortexInferenceEngine:
 
     def execute_inference(self, query: str) -> Dict[str, Any]:
         import hashlib
+
         q_hash = hashlib.sha3_256(query.encode("utf-8")).hexdigest()
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
@@ -43,17 +45,18 @@ class CortexInferenceEngine:
             row = cursor.fetchone()
             if row:
                 return {"query": query, "response": row[0], "cached": True}
-            
+
             response = f"[CORTEX_INFERENCE_RESPONSE] {query}"
             cursor.execute(
                 "INSERT OR REPLACE INTO L3_inference_cache (query_hash, query, response) VALUES (?, ?, ?)",
-                (q_hash, query, response)
+                (q_hash, query, response),
             )
             conn.commit()
             return {"query": query, "response": response, "cached": False}
 
     def execute_batch_inference(self, queries: list[str]) -> list[Dict[str, Any]]:
         import hashlib
+
         records = []
         results = []
         for q in queries:
@@ -64,8 +67,7 @@ class CortexInferenceEngine:
 
         with sqlite3.connect(self.db_path) as conn:
             conn.executemany(
-                "INSERT OR REPLACE INTO L3_inference_cache (query_hash, query, response) VALUES (?, ?, ?)",
-                records
+                "INSERT OR REPLACE INTO L3_inference_cache (query_hash, query, response) VALUES (?, ?, ?)", records
             )
             conn.commit()
         return results

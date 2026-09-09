@@ -6,6 +6,7 @@ import time
 
 logger = logging.getLogger("c5_telemetry")
 
+
 @dataclass
 class TelemetryEvent:
     event_type: str
@@ -13,12 +14,13 @@ class TelemetryEvent:
     metadata: Dict[str, Any] = field(default_factory=dict)
     timestamp: float = field(default_factory=time.time)
 
+
 class ThermodynamicValve:
     """
     Cola asíncrona no bloqueante (Válvula Termodinámica).
     Permite ingerir eventos de telemetría sin acoplar ni bloquear el bucle principal (Zero-Friction).
     """
-    
+
     def __init__(self, max_size: int = 1000):
         self.queue = asyncio.Queue(maxsize=max_size)
         self._worker_task = None

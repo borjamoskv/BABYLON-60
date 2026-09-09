@@ -12,17 +12,18 @@ import os
 import subprocess
 from typing import Any, Dict
 
+
 class QuantumSyncEngine:
     """Atomic VCS state sync engine supporting Jujutsu (jj) and Git DAGs."""
-    
-    def __init__(self, repo_root: Optional[str] = None):
+
+    def __init__(self, repo_root: str | None = None):
         self.repo_root = repo_root or os.getcwd()
 
     def check_vcs_status(self) -> Dict[str, Any]:
         """Audit local repository VCS configuration."""
         is_git = os.path.exists(os.path.join(self.repo_root, ".git"))
         is_jj = os.path.exists(os.path.join(self.repo_root, ".jj"))
-        
+
         status = {
             "path": self.repo_root,
             "is_git": is_git,
@@ -43,43 +44,48 @@ class QuantumSyncEngine:
         """Execute atomic sync operation using jj or git."""
         vcs = self.check_vcs_status()
         results = {"status": vcs, "actions": []}
-        
+
         if vcs["is_jj"] and vcs["jj_installed"]:
             # Perform Jujutsu sync
             cmd = ["jj", "git", "fetch"]
             res = subprocess.run(cmd, cwd=self.repo_root, capture_output=True, text=True)
-            results["actions"].append({
-                "vcs": "jj",
-                "command": "jj git fetch",
-                "returncode": res.returncode,
-                "output": res.stdout or res.stderr
-            })
-            
+            results["actions"].append(
+                {
+                    "vcs": "jj",
+                    "command": "jj git fetch",
+                    "returncode": res.returncode,
+                    "output": res.stdout or res.stderr,
+                }
+            )
+
             # Track bookmark if requested
             cmd_track = ["jj", "bookmark", "track", track_bookmark]
             res_track = subprocess.run(cmd_track, cwd=self.repo_root, capture_output=True, text=True)
-            results["actions"].append({
-                "vcs": "jj",
-                "command": f"jj bookmark track {track_bookmark}",
-                "returncode": res_track.returncode,
-                "output": res_track.stdout or res_track.stderr
-            })
+            results["actions"].append(
+                {
+                    "vcs": "jj",
+                    "command": f"jj bookmark track {track_bookmark}",
+                    "returncode": res_track.returncode,
+                    "output": res_track.stdout or res_track.stderr,
+                }
+            )
         elif vcs["is_git"] and vcs["git_installed"]:
             # Fallback to standard git fetch
             cmd = ["git", "fetch", "--all"]
             res = subprocess.run(cmd, cwd=self.repo_root, capture_output=True, text=True)
-            results["actions"].append({
-                "vcs": "git",
-                "command": "git fetch --all",
-                "returncode": res.returncode,
-                "output": res.stdout or res.stderr
-            })
+            results["actions"].append(
+                {
+                    "vcs": "git",
+                    "command": "git fetch --all",
+                    "returncode": res.returncode,
+                    "output": res.stdout or res.stderr,
+                }
+            )
         else:
-            results["actions"].append({
-                "error": "No valid VCS workspace or executable found."
-            })
-            
+            results["actions"].append({"error": "No valid VCS workspace or executable found."})
+
         return results
+
 
 def main():
     parser = argparse.ArgumentParser(description="BABYLON-60 Native Quantum Sync Engine")
@@ -88,18 +94,19 @@ def main():
     args = parser.parse_args()
 
     engine = QuantumSyncEngine()
-    
+
     if args.status or not args.sync:
         status = engine.check_vcs_status()
         print(f"[QUANTUM_SYNC] Workspace: {status['path']}")
         print(f"               Jujutsu Repo: {status['is_jj']} | Git Repo: {status['is_git']}")
         print(f"               jj binary: {status['jj_installed']} | git binary: {status['git_installed']}")
-        
+
     if args.sync:
         print("[QUANTUM_SYNC] Executing atomic quantum sync...")
         res = engine.sync()
         for act in res["actions"]:
             print(f" -> [{act.get('vcs', 'vcs').upper()}] {act.get('command')}: exit code {act.get('returncode')}")
+
 
 if __name__ == "__main__":
     main()

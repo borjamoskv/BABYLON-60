@@ -14,8 +14,15 @@ os.environ.setdefault("GEMINI_HOME", os.path.expanduser("~/.gemini"))
 
 # Register experiments domain directories in sys.path for test discovery
 _experiments_dir = _repo_root / "experiments"
-for _sub in ["2_COMPILERS", "3_SUBPROJECTS", "4_INTEGRATIONS", "5_AUDIO_DSP", "6_SCRATCH", "7_SECURITY_AUDIT", "1_Operaciones_Activas/scripts"]:
+for _sub in [
+    "2_COMPILERS",
+    "3_SUBPROJECTS",
+    "4_INTEGRATIONS",
+    "5_AUDIO_DSP",
+    "6_SCRATCH",
+    "7_SECURITY_AUDIT",
+    "1_Operaciones_Activas/scripts",
+]:
     _p = str(_experiments_dir / _sub)
     if _p not in sys.path:
         sys.path.insert(0, _p)
-

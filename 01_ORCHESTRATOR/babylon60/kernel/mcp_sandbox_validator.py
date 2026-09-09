@@ -49,7 +49,7 @@ class McpSandboxValidator:
                     "clientInfo": {"name": "Babylon60Validator", "version": "1.0.0"},
                 },
             }
-            
+
             init_bytes = (json.dumps(init_req) + "\n").encode("utf-8")
             proc.stdin.write(init_bytes)
             await proc.stdin.drain()
@@ -101,7 +101,11 @@ class McpSandboxValidator:
 
         except asyncio.TimeoutError:
             logger.error("[McpSandboxValidator] Timeout durante la validación en sandbox.")
-            return {"is_valid": False, "reason": "Timeout en respuesta JSON-RPC stdio", "latency_ms": timeout_seconds * 1000}
+            return {
+                "is_valid": False,
+                "reason": "Timeout en respuesta JSON-RPC stdio",
+                "latency_ms": timeout_seconds * 1000,
+            }
         except Exception as e:
             logger.error(f"[McpSandboxValidator] Fallo en sandbox: {e}")
             return {"is_valid": False, "reason": f"Excepción durante sandbox: {str(e)}", "latency_ms": 0.0}
