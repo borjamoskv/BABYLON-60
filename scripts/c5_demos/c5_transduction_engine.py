@@ -74,24 +74,47 @@ class DirectorAgent:
 # ==============================================================================
 # 3. TRANSDUCTOR MULTIMODAL & COLAPSO DETERMINISTA (Mock Operacional)
 # ==============================================================================
+import subprocess
+
 class MultimodalTransducer:
     def __init__(self):
-        # Aquí se montarían los hooks a Vertex AI Vision (Imagen 3 / Veo 3) y Cloud TTS
         pass
 
+    def get_audio_duration(self, audio_path: str) -> float:
+        # Extraemos la duración matemática real del audio generado
+        cmd = ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", audio_path]
+        result = subprocess.run(cmd, stdout=subprocess.PIPE, text=True)
+        return float(result.stdout.strip())
+
     def render_scene(self, scene: FalsificationScene, style_vector: str, output_dir: str):
-        logging.info(f"Bifurcación Bimodal Escena {scene.id} | Duración Asignada: {scene.duration_sec}s")
+        logging.info(f"Bifurcación Bimodal Escena {scene.id} | Procesando Audio TTS...")
         
-        # 1. CANAL AUDITIVO (TTS)
-        logging.info(f"  -> Sintetizando Tensor de Audio: '{scene.voiceover_text[:35]}...'")
-        audio_path = os.path.join(output_dir, f"audio_{scene.id}.mp3")
-        # google_cloud_tts_client.synthesize_speech(...)
+        # 1. CANAL AUDITIVO (TTS Soberano de macOS)
+        audio_path = os.path.join(output_dir, f"audio_{scene.id}.aiff")
+        # Usamos síntesis local bare-metal para evitar cuotas de Cloud TTS
+        clean_text = scene.voiceover_text.replace('"', '\\"')
+        subprocess.run(f'say -o "{audio_path}" "{clean_text}"', shell=True, check=True)
         
-        # 2. CANAL VISUAL (Cross-Attention Anchoring)
-        full_prompt = f"STYLE: {style_vector} | SHOT: {scene.visual_prompt}"
-        logging.info(f"  -> Compilando Tensor Visual condicionado por V_global")
+        # 2. CALIBRACIÓN TEMPORAL (Map == Territory)
+        real_duration = self.get_audio_duration(audio_path)
+        scene.duration_sec = real_duration  # Sobrescribimos la estimación del LLM con la física real
+        logging.info(f"  -> Audio TTS sintetizado. Duración real anclada: {real_duration:.2f}s")
+        
+        # 3. CANAL VISUAL (Render Procedural)
+        # En lugar de mockear, inyectamos una matriz de vídeo negro con ruido termodinámico (Microscopio)
+        # y quemamos un subtítulo simplificado para identificar la escena.
         visual_path = os.path.join(output_dir, f"visual_{scene.id}.mp4")
-        # vertexai_vision_model.generate_video(prompt=full_prompt, duration=scene.duration_sec)
+        scene_type = ["TESIS", "FRICCIÓN", "FALSACIÓN"][scene.id - 1] if scene.id <= 3 else "ESCENA"
+        
+        v_filter = (
+            f"color=c=black:s=1280x720:d={real_duration} [base]; "
+            f"[base]noise=alls=30:allf=t+u [v_noise]; "
+            f"[v_noise]drawtext=text='{scene_type}':fontcolor=white:fontsize=72:x=(w-text_w)/2:y=(h-text_h)/2 [v_out]"
+        )
+        
+        logging.info(f"  -> Renderizando Tensor Visual Procedural ({scene_type})...")
+        cmd_v = ["ffmpeg", "-y", "-f", "lavfi", "-i", "color=c=black:s=1280x720", "-filter_complex", v_filter, "-map", "[v_out]", "-t", str(real_duration), "-c:v", "libx264", visual_path]
+        subprocess.run(cmd_v, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         
         return visual_path, audio_path
 
@@ -100,44 +123,33 @@ class Orchestrator:
     def multiplex_ffmpeg(scenes: List[FalsificationScene], visual_paths: list, audio_paths: list, output_file: str):
         logging.info("Iniciando Grafo FFmpeg (Filtergraph Matrix)...")
         
-        # 1. Construcción de Inputs para FFmpeg
         ffmpeg_inputs = []
         for i in range(len(scenes)):
             ffmpeg_inputs.extend(["-i", visual_paths[i], "-i", audio_paths[i]])
             
-        # 2. Generación del Filtergraph Complejo (C-ABI Level)
         filter_complex = ""
-        v_labels = []
-        a_labels = []
+        v_labels, a_labels = [], []
         
         for i, scene in enumerate(scenes):
-            # Anergía temporal: Aseguramos que el vídeo se recorte/ajuste a la duración exacta
             dur = float(scene.duration_sec)
-            
-            # Filtro de Video (setpts para resetear timestamps)
             filter_complex += f"[{i*2}:v]trim=duration={dur},setpts=PTS-STARTPTS,format=yuv420p[v{i}]; "
-            # Filtro de Audio
             filter_complex += f"[{i*2+1}:a]atrim=duration={dur},asetpts=PTS-STARTPTS[a{i}]; "
-            
             v_labels.append(f"[v{i}]")
             a_labels.append(f"[a{i}]")
             
-        # 3. Concatenación Topológica
         concat_v = "".join(v_labels) + f"concat=n={len(scenes)}:v=1:a=0[vout]; "
         concat_a = "".join(a_labels) + f"concat=n={len(scenes)}:v=0:a=1[aout]"
         filter_complex += concat_v + concat_a
         
-        # Comando bare-metal ensamblado
         cmd = ["ffmpeg", "-y"] + ffmpeg_inputs + [
             "-filter_complex", filter_complex, 
             "-map", "[vout]", "-map", "[aout]", 
             "-c:v", "libx264", "-c:a", "aac", output_file
         ]
         
-        logging.info(f"Topología DAG inyectada: {filter_complex[:120]}... (truncado)")
-        logging.info("Ejecutando subproceso FFMPEG (Simulado en PoC)...")
-        # En producción: subprocess.run(cmd, check=True)
-        logging.info(f"Transducción finalizada. Artefacto sellado en: {output_file}")
+        logging.info("Ejecutando subproceso FFMPEG BARE-METAL (Generando MP4 Real)...")
+        subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+        logging.info(f"Transducción finalizada. Artefacto REAL sellado en: {output_file}")
 
 # ==============================================================================
 # ENTRYPOINT (Díada Simbiótica en Ejecución)
