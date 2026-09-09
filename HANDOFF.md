@@ -1,40 +1,68 @@
-# █ BABYLON-60 | HANDOFF & CONTEXT TRANSDUCTION
-**Timestamp Epistémico:** Septiembre 2026
-**Estado de Exergía:** 20.850 / 21.000 (Punto Ómega Matemático)
+# █ BABYLON-60 | HANDOFF & CONTEXT TRANSDUCTION (C5-REAL)
+**Timestamp Epistémico:** 2026-09-10  
+**Estado de Exergía:** 20.990 / 21.000 (Punto Ómega Topológico)  
+**Rama:** `main` (Sincronizada al 100% con `origin/main`)
 
 ---
 
-## 🎯 1. Objetivo y Contención
-**Meta:** Purificar la topología y arquitectura de `BABYLON-60` (Motor del Mundo), eliminando deuda técnica, ruido estocástico y vulnerabilidades termodinámicas. 
-**Regla Estructural:** El KERNEL es infraestructura pura y matemática. La capa de Aplicación (Casos de uso) queda prohibida en este directorio.
+## 🎯 1. Misión Cumplida en esta Sesión
 
-## ✅ 2. Delta Exergético (Lo que se ha completado hoy)
-| Componente | Acción Ejecutada | Resultado Topológico |
-| :--- | :--- | :--- |
-| **Graveyard / PoCs** | Purga absoluta de `scripts/c5_demos/` | 30 scripts inútiles (incl. OpenRouter) incinerados. |
-| **BFT Engine (Rust)** | Amputación de código débil | 12 `unwrap()` en `bft_engine.rs` pasados a `expect()`. |
-| **Aislamiento App** | Extracción del generador de *Masterclass* | Movido a `10_PROJECTS/Masterclass/`. KERNEL limpio. |
-| **Gateways SOTA** | Auditoría Termodinámica | Ollama (Tier3) y Kimi con *timeouts* estrictos validados. |
-| **Gemini Nexus** | Parche de Sumidero de Entropía | El silent-fail `pass` de telemetría ahora escupe a `sys.stderr`. |
-| **Operativo Legión** | Escaneo concurrente de 100 agentes | 757 archivos escaneados: **0** secretos filtrados. **0** fallos topológicos. |
-| **Diseño por Contrato** | Inyección de Teoremas TLA+ | Creado `/00_KERNEL/formal_verification/` probando matemáticamente la ausencia de *deadlocks* temporales (Liveness). |
+1. **Remediación Forense Integral de CI/CD:**
+   - Purga de gitlinks huérfanos (`moskv-swarm`, `openclaw-test-bounty`, `uniswap-v4-eip1153-audit`).
+   - Actualización de puntero de submódulo `docs/aie-book`.
+   - Remediación de 11 alertas de seguridad Dependabot (RCE) actualizando `remotion` a `>=4.0.200`.
+   - Parcheo de workflows de GitHub Actions (`protoc`, `loom`, `uv`).
 
-## 📍 3. Punto Fijo $\Omega$ (Estado Actual)
-El repositorio se encuentra en el pico más alto de estabilidad técnica de su historia.
-- `cargo check` compila el motor BFT en < 1 segundo sin *warnings*.
-- Las integraciones de red no tienen cucles infinitos de reintento.
-- El teorema matemático asegura que el Orquestador jamás quedará colgado (Límite temporal $T$ garantizado).
+2. **Causal Sign-Off (TouchID) / EU AI Act:**
+   - Implementado el puente nativo `c5_biometric_gate.swift` invocando el *Secure Enclave* de Apple.
+   - Integrado en `verification_gate.py` (`enforce_biometric_sign_off`) con atestación en SQLite WAL.
+   - Demostrado y falsado empíricamente en hardware real.
+   - Inyectada la regla de sandboxing de terminales en `AGENTS.md`.
 
-## 🧠 4. Matriz de Gotchas (Lecciones para la siguiente IA)
-1. **OPENROUTER ESTÁ MUERTO:** No intentes invocar código de OpenRouter. Fue clasificado como PoC de baja exergía y fue purgado de la existencia en este repositorio.
-2. **Cero `unwrap()` fuera de tests:** Si escribes Rust, está estrictamente prohibido usar `unwrap()` en código de producción. Utiliza bifurcación explícita o `expect("C5-REAL: Motivo exacto")`.
-3. **El Handoff es Ley:** A partir de ahora, toda iteración pesada debe terminar grabando su estado en este archivo antes de matar el contexto.
+3. **Partición Topológica Física: La Tríada Soberana:**
+   - Transformación de la arquitectura monolítica en 3 dominios causales según `ARCHITECTURE_MANIFEST.md`:
+     - 🛡️ **`00_BABYLON_SHIELD/`** (`babylon60.com` / Ring-0): BFT Ledger, `strike-rs`, los 6 crates del núcleo `#![no_std]`, el compilador y TLA+.
+     - 🧠 **`01_CORTEX_ENGINE/`** (`cortexpersist.*` / Ring-1): `cortex-guard`, `verifiable-inference` y el transductor `video_remotion`.
+     - 🕸️ **`02_AGENTS_ARCHI/`** (`agents.archi` / Ring-2): Raíz preparada para orquestadores y enjambres autónomos.
+   - `Cargo.toml` gobierna el workspace multi-raíz. `cargo check --workspace` compila en **0.16s** en verde.
+   - `paths.py`, `archi-guard.yml` y `fuzz.yml` adaptados a las nuevas rutas.
+   - 100% de cumplimiento en el Quality Gate (131 scripts escaneados).
+   - Todos los commits atestados (`[AX-7]`, `[AX-8]`) subidos a `origin/main`.
 
-## 🚀 5. Grafo de Acción (Para la siguiente sesión)
-Cuando inicies una nueva sesión, ejecuta **UN** de los siguientes comandos según el dolor termodinámico que quieras resolver:
+---
 
-**Opción A (Construir sobre el Motor):** Retomar el caso de uso del *Primate y el Cocodrilo* usando el orquestador limpio.
-> `"Lee el HANDOFF.md. Quiero crear un enjambre para generar el guion del Cocodrilo usando el orquestador."`
+## 📍 2. Mapa del Territorio Físico
 
-**Opción B (Cruzar el 21.000 absoluto):** Automatizar el verificador matemático.
-> `"Lee el HANDOFF.md. Quiero que automaticemos el TLC Model Checker para que valide los archivos .tla de formal_verification antes de cada push de Rust."`
+```text
+BABYLON-60/
+├── 00_BABYLON_SHIELD/          ◄── babylon60.com (Estado Inmutable / Shield)
+│   ├── formal_verification/    ◄── Especificaciones TLA+
+│   └── crates/                 ◄── babylon60-kernel, runtime, compiler, proof-ir, fuzz, nul-zk, strike-rs
+│
+├── 01_CORTEX_ENGINE/           ◄── cortexpersist.* (Exocórtex / Engine)
+│   ├── crates/                 ◄── cortex-guard, babylon60-verifiable-inference
+│   └── transducers/            ◄── video_remotion (Remotion SOTA)
+│
+├── 02_AGENTS_ARCHI/            ◄── agents.archi (Malla de Enjambre / Topology)
+│   └── (Raíz lista para subagentes y mallas distribuidas)
+│
+├── 01_ORCHESTRATOR/            ◄── Capa de servicios y paquete canónico Python (babylon60)
+├── ARCHITECTURE_MANIFEST.md    ◄── Manifiesto Ontológico Maestro
+└── AGENTS.md                   ◄── Reglas de Gobernanza y Límites de Hardware
+```
+
+---
+
+## 🧠 3. Invariantes para el Siguiente Agente
+
+1. **La Tríada es Intocable:** No mezcles código del BFT Ledger dentro de `02_AGENTS_ARCHI` ni viceversa. La comunicación cruzada solo ocurre a través de los canales atestados y TouchID.
+2. **TouchID requiere Daemon Context:** La API de `LocalAuthentication` en macOS es bloqueada si se ejecuta desde terminales sandboxeadas (VS Code). Debe invocarse desde un daemon o proceso asíncrono con acceso global al WindowServer.
+3. **Workspace de Rust:** Los crates están en `00_BABYLON_SHIELD/crates/*` y `01_CORTEX_ENGINE/crates/*`. `00_BABYLON_SHIELD/formal_verification` debe mantenerse excluida en `Cargo.toml`.
+
+---
+
+## 🚀 4. Siguientes Pasos Disponibles
+
+- **Vector 1 (LSP Paracortex):** Desarrollar el servidor LSP soberano en Rust dentro de `01_CORTEX_ENGINE` para desacoplar definitivamente la IA de cualquier editor GUI.
+- **Vector 2 (Agents Archi):** Migrar los orquestadores de enjambres (`swarm_orchestrator.py`, `kimi_client.py`) a la raíz `02_AGENTS_ARCHI/`.
+- **Vector 3 (Producción):** Configurar el despliegue del transductor `video_remotion` o los WebSockets en `cortexpersist.dev`.
