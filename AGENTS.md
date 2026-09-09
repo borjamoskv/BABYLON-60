@@ -38,3 +38,8 @@ See [Workspace AGENTS.md](file:///Users/borjafernandezangulo/10_PROJECTS/.agents
 
 - **Invariante de Lógica Ejecutable**: El directorio `BABYLON-60` constituye exclusivamente el núcleo operativo, motor y arquitectura del programa. **NUNCA** debe ser tratado, parseado ni analizado asumiendo que es una base de datos o un repositorio pasivo de registros.
 - **Interpretación de Archivos**: Todo archivo dentro de este workspace (incluyendo JSONs, volcados o configuraciones) debe evaluarse bajo la estricta pregunta epistémica: *"¿Qué función estructural cumple esto en el motor de ejecución del sistema?"*.
+
+## 🔒 Límite de Autenticación Biométrica (TouchID Invariant)
+
+- **Sandboxing de Terminales:** Al implementar barreras causales biométricas (`LocalAuthentication` / TouchID) en macOS mediante binarios C-ABI o Swift, el agente DEBE saber que ejecutar el binario desde la terminal integrada de VS Code u otros editores sandboxeados bloqueará silenciosamente el sensor dactilar.
+- **Topología Obligatoria:** Para garantizar el despliegue nativo del modal de TouchID sin bloqueos, la invocación de `c5_biometric_gate` (o equivalentes) debe provenir de un *daemon* en segundo plano, un servidor LSP independiente (LSP Paracortex) o un túnel asíncrono del Agente con privilegios globales sobre el WindowServer.
