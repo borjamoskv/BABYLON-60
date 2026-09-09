@@ -78,6 +78,9 @@ impl ZeroCopyPublisher {
 
         let service = zero_copy::Service::new(&service_name)
             .publish_subscribe()
+            .subscriber_max_buffer_size(256)
+            .subscriber_max_borrowed_samples(256)
+            .history_size(256)
             .open_or_create::<BftMessage>()?;
 
         let publisher = service.publisher().create()?;
@@ -122,6 +125,9 @@ impl ZeroCopySubscriber {
 
         let service = zero_copy::Service::new(&service_name)
             .publish_subscribe()
+            .subscriber_max_buffer_size(256)
+            .subscriber_max_borrowed_samples(256)
+            .history_size(256)
             .open_or_create::<BftMessage>()?;
 
         let subscriber = service.subscriber().create()?;

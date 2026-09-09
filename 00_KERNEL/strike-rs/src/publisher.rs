@@ -82,16 +82,18 @@ mod tests {
     use super::*;
     use crate::omega0::{Modality, Statement, Justification};
     use crate::orchestrator::{Orchestrator, Attestor};
+    use async_trait::async_trait;
 
     struct DummyOracle;
+    #[async_trait]
     impl Attestor for DummyOracle {
-        fn query(&self, _goal: &Statement) -> Justification {
+        async fn query(&self, _goal: &Statement) -> Justification {
             Justification::Conjecture
         }
     }
 
-    #[test]
-    fn test_publish_markdown() {
+    #[tokio::test]
+    async fn test_publish_markdown() {
         let ledger = MasterLedger::new(":memory:").unwrap();
         let attestor = Box::new(DummyOracle);
         let mut orch = Orchestrator::new(ledger, attestor);
@@ -103,7 +105,7 @@ mod tests {
         };
 
         // Inject into ATMS and Ledger
-        orch.resolve_intent(&goal, "prod_env").unwrap();
+        orch.resolve_intent(&goal, "prod_env").await.unwrap();
 
         let publisher = Publisher::new(&orch.ledger);
         let markdown = publisher.publish("prod_env", ExportFormat::Markdown).unwrap();
@@ -114,8 +116,8 @@ mod tests {
         assert!(markdown.contains("Conjecture"));
     }
 
-    #[test]
-    fn test_publish_json() {
+    #[tokio::test]
+    async fn test_publish_json() {
         let ledger = MasterLedger::new(":memory:").unwrap();
         let attestor = Box::new(DummyOracle);
         let mut orch = Orchestrator::new(ledger, attestor);
@@ -126,7 +128,7 @@ mod tests {
             obligations: vec![],
         };
 
-        orch.resolve_intent(&goal, "json_env").unwrap();
+        orch.resolve_intent(&goal, "json_env").await.unwrap();
 
         let publisher = Publisher::new(&orch.ledger);
         let json = publisher.publish("json_env", ExportFormat::Json).unwrap();

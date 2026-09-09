@@ -105,81 +105,143 @@ impl BftAsyncEngine {
             Err(e) => return Err(e),
         };
 
-        // ULTRATHINK: Zero-Cost Causality Map (O(1) Wakeups)
-        let mut n_map = HashMap::new();
-        for node_id in &sorted {
-            n_map.insert(node_id.clone(), Arc::new(Notify::new()));
+        // --- ZERO-COPY BFT HYPERVISOR INTEGRATION ---
+        use crate::hypervisor::{ZeroCopyPublisher, ZeroCopySubscriber};
+        use ed25519_dalek::{SigningKey, Signer};
+        use rand::rngs::OsRng;
+        use std::thread;
+
+        let svc_tasks = "c5_bft_tasks";
+        let svc_results = "c5_bft_results";
+
+        let mut csprng = OsRng;
+        let orch_keys = SigningKey::generate(&mut csprng);
+        let worker_keys = SigningKey::generate(&mut csprng);
+        let worker_pub_key = worker_keys.verifying_key();
+        let orch_pub_key = orch_keys.verifying_key();
+
+        let mut node_to_id = HashMap::new();
+        let mut id_to_node = HashMap::new();
+        for (i, node_id) in sorted.iter().enumerate() {
+            let id = i as u64;
+            node_to_id.insert(node_id.clone(), id);
+            id_to_node.insert(id, node_id.clone());
         }
-        let notify_map = Arc::new(n_map);
-        let completed = Arc::new(RwLock::new(HashSet::new()));
+
+        // 1. Spawning IPC Worker in a native thread (not Tokio)
+        let stop_worker = Arc::new(std::sync::atomic::AtomicBool::new(false));
+        let stop_worker_clone = stop_worker.clone();
         
-        let mut tasks = Vec::new();
+        let worker_handle = thread::spawn(move || {
+            let task_sub = ZeroCopySubscriber::new(svc_tasks).unwrap();
+            let result_pub = ZeroCopyPublisher::new(svc_results).unwrap();
+            
+            while !stop_worker_clone.load(std::sync::atomic::Ordering::Relaxed) {
+                if let Ok(Some(sample)) = task_sub.subscriber.receive() {
+                    if !sample.verify(&orch_pub_key) { continue; }
+                    
+                    let node_id = sample.seq_num;
+                    let payload_hash_hex = hex::encode(sample.payload_hash);
+                    
+                    let _ = result_pub.publish_node(
+                        2, 1, node_id, &payload_hash_hex, &worker_keys
+                    );
+                } else {
+                    thread::yield_now();
+                }
+            }
+        });
 
-        for node_id in sorted {
-            let node = self.nodes.get(&node_id).unwrap().clone();
-            let sem = semaphore.clone();
-            let mem = memory.clone();
-            let n_map_task = notify_map.clone();
-            let completed_task = completed.clone();
+        // 2. Orchestrator Thread (Holds iceoryx2 non-Send types)
+        let (tx_completed, mut rx_completed) = tokio::sync::mpsc::channel(1024);
+        let num_nodes = sorted.len();
+        
+        let mut in_degree = HashMap::new();
+        let mut children_map = HashMap::new();
+        for k in self.nodes.keys() {
+            in_degree.insert(k.clone(), 0);
+            children_map.insert(k.clone(), Vec::new());
+        }
+        for node in self.nodes.values() {
+            for dep in &node.deps {
+                children_map.get_mut(dep).unwrap().push(node.id.clone());
+                *in_degree.get_mut(&node.id).unwrap() += 1;
+            }
+        }
+        
+        let mut ready_queue = Vec::new();
+        for (k, v) in &in_degree {
+            if *v == 0 {
+                ready_queue.push(k.clone());
+            }
+        }
+        
+        let orch_keys_clone = orch_keys.clone();
+        thread::spawn(move || {
+            let task_pub = ZeroCopyPublisher::new(svc_tasks).unwrap();
+            let result_sub = ZeroCopySubscriber::new(svc_results).unwrap();
+            let mut completed = HashSet::new();
+            
+            while completed.len() < num_nodes {
+                while let Some(n_id) = ready_queue.pop() {
+                    let seq_num = *node_to_id.get(&n_id).unwrap();
+                    let fake_hash = "0000000000000000000000000000000000000000000000000000000000000000";
+                    let _ = task_pub.publish_node(1, 0, seq_num, fake_hash, &orch_keys_clone);
+                }
 
-            let atms_ref = atms.clone();
-            let telemetry_tx_task = self.telemetry_tx.clone();
-
-            let task = tokio::spawn(async move {
-                // Zero-cost asynchronous wait with completion check (Deadlock-free)
-                for d in &node.deps {
-                    loop {
-                        {
-                            let c = completed_task.read().await;
-                            if c.contains(d) {
-                                break;
-                            }
-                        }
-                        if let Some(notify) = n_map_task.get(d) {
-                            let notified = notify.notified();
-                            {
-                                let c = completed_task.read().await;
-                                if c.contains(d) {
-                                    break;
+                if let Ok(Some(sample)) = result_sub.subscriber.receive() {
+                    if sample.verify(&worker_pub_key) && sample.view == 1 {
+                        let seq_num = sample.seq_num;
+                        if let Some(n_id) = id_to_node.get(&seq_num) {
+                            if completed.insert(n_id.clone()) {
+                                let _ = tx_completed.blocking_send(n_id.clone());
+                                if let Some(kids) = children_map.get(n_id) {
+                                    for kid in kids {
+                                        let d = in_degree.get_mut(kid).unwrap();
+                                        *d -= 1;
+                                        if *d == 0 {
+                                            ready_queue.push(kid.clone());
+                                        }
+                                    }
                                 }
                             }
-                            notified.await;
-                        } else {
-                            break;
                         }
                     }
+                } else {
+                    thread::yield_now();
                 }
+            }
+        });
 
-                let _permit = sem.acquire().await.unwrap();
-
+        // 3. Async Engine awaits completions
+        let mut all_success = true;
+        let mut err_msg = String::new();
+        let mut node_sum_ms = 0.0;
+        let mut has_high_latency = false;
+        
+        let mut completed_count = 0;
+        while completed_count < num_nodes {
+            if let Some(n_id) = rx_completed.recv().await {
+                completed_count += 1;
+                let node = self.nodes.get(&n_id).unwrap();
                 if node.should_fail {
-                    return Err(format!("Node {} failed", node.id));
+                    all_success = false;
+                    err_msg = format!("Node {} failed", node.id);
+                    break;
                 }
 
-                if node.latency_ms > 0 {
-                    tokio::time::sleep(std::time::Duration::from_millis(node.latency_ms)).await;
-                }
-
-                // VALIDACIÓN COGNITIVA (ATMS)
                 let js = JustifiedStatement {
                     statement: Statement { content: node.payload.clone(), modality: Modality::Epistemic, obligations: vec![] },
                     justification: Justification::Conjecture,
                 };
-                
                 let atms_node_id = {
-                    let mut a = atms_ref.write().await;
-                    if let Some(id) = a.find_node_by_datum(&node.payload) {
-                        id
-                    } else {
-                        a.install(&js)
-                    }
+                    let mut a = atms.write().await;
+                    if let Some(id) = a.find_node_by_datum(&node.payload) { id } else { a.install(&js) }
                 };
-                
-                {
-                    let a = atms_ref.read().await;
-                    if !a.contradiction_free(atms_node_id) {
-                        return Err(format!("ATMS Cognitive Contradiction: Payload '{}' is logically invalid (Nogood).", node.payload));
-                    }
+                if !atms.read().await.contradiction_free(atms_node_id) {
+                    all_success = false;
+                    err_msg = format!("ATMS Cognitive Contradiction: Payload '{}' is logically invalid (Nogood).", node.payload);
+                    break;
                 }
 
                 let mut hasher = Hasher::new();
@@ -187,62 +249,23 @@ impl BftAsyncEngine {
                 hasher.update(node.payload.as_bytes());
                 let proof = hasher.finalize().to_hex().to_string();
 
-                {
-                    let mut m = mem.write().await;
-                    m.put(&node.id, proof.clone());
-                }
+                memory.write().await.put(&node.id, proof.clone());
 
-                // AI Telemetry Broadcast
-                if let Some(tx) = &telemetry_tx_task {
-                    // Calculamos una entropía local simulada usando el hash truncado
+                if let Some(tx) = &self.telemetry_tx {
                     let local_exergy = 0.9999 - (node.latency_ms as f64 * 0.0001);
-                    let seq = { mem.read().await.len() as u64 };
-                    let bytes_proof = proof.as_bytes().to_vec();
-                    let _ = tx.send((proof, seq, local_exergy, bytes_proof));
+                    let seq_count = memory.read().await.len() as u64;
+                    let _ = tx.send((proof, seq_count, local_exergy, node.id.as_bytes().to_vec()));
                 }
 
-                {
-                    let mut c = completed_task.write().await;
-                    c.insert(node.id.clone());
-                }
-
-                // O(1) Wakeup: Awake all dependent children instantly
-                if let Some(notify) = n_map_task.get(&node.id) {
-                    notify.notify_waiters();
-                }
-
-                Ok::<u64, String>(node.latency_ms)
-            });
-
-            tasks.push(task);
-        }
-
-        let mut all_success = true;
-        let mut err_msg = String::new();
-        let mut node_sum_ms = 0.0;
-        let mut has_high_latency = false;
-
-        for t in tasks {
-            match t.await {
-                Ok(Ok(ms)) => {
-                    node_sum_ms += ms as f64;
-                    if ms > 2 { has_high_latency = true; } // Bottleneck only if > 2ms
-                },
-                Ok(Err(e)) => {
-                    all_success = false;
-                    err_msg = e;
-                    break;
-                },
-                Err(_) => {
-                    all_success = false;
-                    err_msg = "Task panicked".to_string();
-                    break;
-                }
+                node_sum_ms += node.latency_ms as f64;
+                if node.latency_ms > 2 { has_high_latency = true; }
             }
         }
 
+        stop_worker.store(true, std::sync::atomic::Ordering::Relaxed);
+        let _ = worker_handle.join();
+
         if !all_success {
-            // AX-BFT-2: Rollback
             let mut m = memory.write().await;
             m.restore(snapshot);
             return Err(err_msg);
