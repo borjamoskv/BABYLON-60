@@ -127,7 +127,7 @@ pythonpath = [".", "01_ORCHESTRATOR"]
 target-version = "py310"
 line-length = 120
 extend-exclude = [
-    "crates/strike-rs",
+    "00_BABYLON_SHIELD/crates/strike-rs",
     "src",
     "L1_sink",
     "BABYLON-60-fixes",

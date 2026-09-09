@@ -1,10 +1,11 @@
 [workspace]
 members = [
-    "00_KERNEL/*"
+    "00_BABYLON_SHIELD/crates/*",
+    "01_CORTEX_ENGINE/crates/*"
 ]
 exclude = [
     "packages/*",
-    "00_KERNEL/formal_verification"
+    "00_BABYLON_SHIELD/formal_verification"
 ]
 resolver = "2"
 

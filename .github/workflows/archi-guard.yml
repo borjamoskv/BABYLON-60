@@ -7,7 +7,7 @@ on:
       - '**.ifc'
       - '**.dsl'
       - '**.dxf'
-      - '00_KERNEL/cortex-guard/**'
+      - '01_CORTEX_ENGINE/crates/cortex-guard/**'
   pull_request:
     branches: [ main, master ]
     paths:

@@ -28,8 +28,11 @@ CORTEX_DB = CORTEX_DIR / "cortex.db"
 # Monorepo root paths
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 DOCS_DIR = REPO_ROOT / "docs"
-KERNEL_DIR = REPO_ROOT / "00_KERNEL" / "babylon60-kernel"
-STRIKE_DIR = REPO_ROOT / "00_KERNEL" / "strike-rs"
+SHIELD_DIR = REPO_ROOT / "00_BABYLON_SHIELD"
+CORTEX_ENGINE_DIR = REPO_ROOT / "01_CORTEX_ENGINE"
+AGENTS_ARCHI_DIR = REPO_ROOT / "02_AGENTS_ARCHI"
+KERNEL_DIR = SHIELD_DIR / "crates" / "babylon60-kernel"
+STRIKE_DIR = SHIELD_DIR / "crates" / "strike-rs"
 
 # Agent State Directory with Environmental Override
 _env_agent_dir = os.environ.get("BABYLON_AGENT_DIR") or os.environ.get("CORTEX_AGENT_DIR")

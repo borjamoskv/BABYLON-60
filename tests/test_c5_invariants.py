@@ -23,7 +23,7 @@ import pathlib
 import pytest
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-SRC_DIRS = ["01_ORCHESTRATOR/babylon60", "00_KERNEL/strike-rs/src", "contracts", "scripts", "docs/proof"]
+SRC_DIRS = ["01_ORCHESTRATOR/babylon60", "00_BABYLON_SHIELD/crates/strike-rs/src", "contracts", "scripts", "docs/proof"]
 PRUNE = {
     "target",
     "__pycache__",

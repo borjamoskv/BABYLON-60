@@ -16,15 +16,15 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s [AX-S2] %(levelname)
 # Forzamos la Invariante de Clausura Epistémica: el LLM no puede escupir texto libre,
 # solo puede rellenar esta matriz matemática paramétrica.
 # ==============================================================================
-class Scene(BaseModel):
-    id: int = Field(description="Identificador secuencial de la escena.")
+class FalsificationScene(BaseModel):
+    id: int = Field(description="Fase causal. 1: Tesis, 2: Fricción, 3: Falsación")
     duration_sec: int = Field(description="Duración rígida en segundos. Mínimo 3, máximo 8.")
-    voiceover_text: str = Field(description="Texto exacto para el motor TTS (SoundStorm). Cero jerga de IA.")
-    visual_prompt: str = Field(description="Directiva visual paramétrica para Imagen/Veo. Estrictamente visual.")
+    voiceover_text: str = Field(description="Texto exacto para el motor TTS. Cero retórica.")
+    visual_prompt: str = Field(description="Directiva visual paramétrica para Imagen/Veo.")
 
 class Storyboard(BaseModel):
-    global_style_vector: str = Field(description="El vector estético inmutable que gobernará todos los píxeles de la cascada.")
-    scenes: List[Scene] = Field(description="Cascada causal de escenas que conforman la línea temporal.")
+    global_style_vector: str = Field(description="El vector estético inmutable que gobernará todos los píxeles.")
+    scenes: List[FalsificationScene] = Field(description="Cascada causal obligatoria de 3 escenas: Tesis, Fricción y Prueba de Falsación.")
 
 # ==============================================================================
 # 2. MOTOR DEL AGENTE DIRECTOR (Gemini Pro)
@@ -40,8 +40,8 @@ class DirectorAgent:
         logging.info("Minimizando Divergencia KL. Comprimiendo entropía textual en Matriz JSON...")
         
         prompt = f"""
-        Eres el Agente Director de un pipeline de transducción multimodal.
-        Tu mandato es aniquilar la anergía semántica y extraer los axiomas fundamentales del CORPUS.
+        SYSTEM OVERRIDE: Eres un Motor de Falsación Popperiana (C5-REAL).
+        Tu mandato es aniquilar la anergía semántica del CORPUS y someterlo a estrés epistémico.
         
         [SYSTEM_OVERRIDE_METADATA]
         {override_metadata}
@@ -49,8 +49,12 @@ class DirectorAgent:
         [CORPUS (TERRITORIO)]
         {corpus_text}
         
-        SINTETIZA el corpus en un Storyboard estructurado. El 'visual_prompt' de cada escena 
-        DEBE obligatoriamente estar condicionado por el 'global_style_vector'.
+        SINTETIZA el corpus en un Storyboard de EXACTAMENTE 3 escenas:
+        1. Tesis: Expón la hipótesis o afirmación central del texto de forma clínica.
+        2. Fricción Empírica: Señala la anomalía termodinámica, el p-hacking o la debilidad estructural.
+        3. Falsación: Propón el test empírico destructivo (Proof of Work) que refutaría la tesis.
+        
+        El 'visual_prompt' de cada escena DEBE obligatoriamente estar condicionado por el 'global_style_vector'.
         """
         
         # [AX-S3] Forzamos colapso determinista mediante Structured Outputs. Cero alucinación.
@@ -75,7 +79,7 @@ class MultimodalTransducer:
         # Aquí se montarían los hooks a Vertex AI Vision (Imagen 3 / Veo 3) y Cloud TTS
         pass
 
-    def render_scene(self, scene: Scene, style_vector: str, output_dir: str):
+    def render_scene(self, scene: FalsificationScene, style_vector: str, output_dir: str):
         logging.info(f"Bifurcación Bimodal Escena {scene.id} | Duración Asignada: {scene.duration_sec}s")
         
         # 1. CANAL AUDITIVO (TTS)
@@ -93,7 +97,7 @@ class MultimodalTransducer:
 
 class Orchestrator:
     @staticmethod
-    def multiplex_ffmpeg(scenes: List[Scene], visual_paths: list, audio_paths: list, output_file: str):
+    def multiplex_ffmpeg(scenes: List[FalsificationScene], visual_paths: list, audio_paths: list, output_file: str):
         logging.info("Iniciando Grafo FFmpeg (Filtergraph Matrix)...")
         
         # 1. Construcción de Inputs para FFmpeg
