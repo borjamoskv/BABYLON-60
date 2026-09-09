@@ -7,7 +7,7 @@ import os
 import sqlite3
 import json
 import logging
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 from .mcp_deductive_engine import McpCandidateContract
 
 logger = logging.getLogger(__name__)

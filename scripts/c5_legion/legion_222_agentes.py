@@ -3,7 +3,11 @@
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
-import os, sys, subprocess, time, resource, argparse, math
+import os
+import subprocess
+import time
+import resource
+import math
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
 
 
@@ -31,19 +35,19 @@ def agent_task(agent_id, task_type):
     
     if task_type == "LOOM":
         # Agentes de verificación de memoria C11 (Data Races)
-        cmd = f"cargo test --test seqlock_loom --features loom -- --test-threads=1"
+        cmd = "cargo test --test seqlock_loom --features loom -- --test-threads=1"
         ok, out = run_cmd(cmd)
         return f"[Agente {agent_id:03d} | LOOM] {'✅ Verificado' if ok else '❌ UB Detectado'}"
     
     elif task_type == "FUZZ":
         # Agentes mutacionales sobre el parser AST
-        cmd = f"python3 -c \"import pytest; pytest.main(['tests/test_syntax_integrity.py', '-q'])\""
+        cmd = "python3 -c \"import pytest; pytest.main(['tests/test_syntax_integrity.py', '-q'])\""
         ok, out = run_cmd(cmd)
         return f"[Agente {agent_id:03d} | FUZZ] {'✅ Resiliencia AST' if ok else '❌ Fallo Parser'}"
         
     elif task_type == "THERMO":
         # Agentes de muestreo de exergía (simulado PMU limit)
-        cmd = f"cargo check --workspace"
+        cmd = "cargo check --workspace"
         ok, out = run_cmd(cmd)
         return f"[Agente {agent_id:03d} | THERMO] {'✅ Cota Landauer OK' if ok else '❌ Límite Excedido'}"
         
@@ -65,7 +69,7 @@ def process_chunk(chunk_id, agent_ids, s_threads):
     return results
 
 def ignite_legion():
-    print(f"🔥 INICIANDO LEGIÓN MÁXIMO COGNITIVO (222 Agentes Organizados) 🔥")
+    print("🔥 INICIANDO LEGIÓN MÁXIMO COGNITIVO (222 Agentes Organizados) 🔥")
     print(f"Topología C5-REAL: {P_CORES} Procesos × {S_THREADS} Hilos (+ 2 Orquestadores)")
     
     total_agents = P_CORES * S_THREADS

@@ -15,11 +15,9 @@ Demonstrates:
 import enum
 import hashlib
 import json
-import os
 import sqlite3
-import sys
 import time
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 
 class ActionCriticality(enum.Enum):
@@ -143,7 +141,7 @@ class OperationalWorkerPoC:
         self.engine = engine
 
     def execute_plan(self, steps: List[Dict[str, Any]], auto_approve: bool = True, async_mode: bool = False) -> AgentState:
-        print(f"\n" + "═" * 80)
+        print("\n" + "═" * 80)
         print(f"   [🚀 START EXECUTION] ID: [{self.execution_id}] | Domain: [{self.domain}]")
         print("═" * 80)
         
@@ -173,7 +171,7 @@ class OperationalWorkerPoC:
                 )
 
                 if async_mode:
-                    print(f"   \033[93m[⏸️ ASYNC PAUSE]\033[0m Execution suspended safely. State snapshot saved.")
+                    print("   \033[93m[⏸️ ASYNC PAUSE]\033[0m Execution suspended safely. State snapshot saved.")
                     print(f"   To resume, invoke: `worker.resume_execution('{self.execution_id}', decision='APPROVED')`\n")
                     return AgentState.PAUSED_AWAITING_SIGN_OFF
 
@@ -321,7 +319,7 @@ def main():
     integrity_valid = engine.verify_ledger_integrity()
 
     print("\n" + "═" * 80)
-    print(f"   CRYPTOGRAPHIC AUDIT LEDGER (SCITT Tamper-Evident SHA3-256 Chain)")
+    print("   CRYPTOGRAPHIC AUDIT LEDGER (SCITT Tamper-Evident SHA3-256 Chain)")
     print(f"   Ledger Verification Status: [{'VERIFIED OK' if integrity_valid else 'CORRUPTED'}]")
     print("═" * 80)
 

@@ -15,7 +15,7 @@ import struct
 import re
 import subprocess
 import html
-from typing import Dict, List, Tuple, Set, Optional, Any
+from typing import Dict, List, Set, Optional
 from dataclasses import dataclass, field
 
 # Optional Capstone import

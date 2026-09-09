@@ -11,8 +11,7 @@ Supports --json for Machine-to-Machine orchestration.
 
 import argparse
 import json
-import sys
-from typing import List, Dict, Any, Generic, TypeVar
+from typing import List, Generic, TypeVar
 
 T = TypeVar("T")
 
@@ -60,7 +59,7 @@ def run_poc_cta_comonad(json_output: bool = False) -> None:
     print("============================================================")
     print(f" History Length             : {len(events)} events")
     print(f" Current Extracted Focus    : {current_focus['type']} -> {current_focus['state']}")
-    print(f" Deterministic Replay       : ✅ VERIFIED MONOTONIC")
+    print(" Deterministic Replay       : ✅ VERIFIED MONOTONIC")
     print("============================================================\n")
 
 

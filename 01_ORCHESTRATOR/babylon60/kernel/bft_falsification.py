@@ -24,7 +24,7 @@ def bft_worker(thread_id: int):
     query = "INSERT INTO bft_log (thread_id, timestamp) VALUES (?, ?)"
     try:
         db.execute_with_backoff(query, (f"Thread-{thread_id}", time.time()))
-        logger.info(f"Escritura completada exitosamente.")
+        logger.info("Escritura completada exitosamente.")
     except BFTDatabaseError as e:
         logger.error(f"Falsación exitosa (Fallo esperado bajo asedio): {e}")
     except Exception as e:

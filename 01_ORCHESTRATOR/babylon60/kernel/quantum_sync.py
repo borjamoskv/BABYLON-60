@@ -10,8 +10,7 @@ Transduced from CORTEX skills into native Python CLI execution.
 import argparse
 import os
 import subprocess
-import sys
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 class QuantumSyncEngine:
     """Atomic VCS state sync engine supporting Jujutsu (jj) and Git DAGs."""

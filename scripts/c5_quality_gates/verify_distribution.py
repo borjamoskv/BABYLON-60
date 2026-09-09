@@ -6,7 +6,6 @@ Soporta emisión de telemetría nativa M2M via --json.
 """
 
 import sys
-import os
 import json
 import argparse
 import subprocess

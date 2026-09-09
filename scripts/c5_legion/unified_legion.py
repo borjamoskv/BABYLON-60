@@ -11,7 +11,6 @@ Aplica invariante anti-thrashing particionando en P dominios empíricos (P=5).
 """
 
 import json
-import sys
 import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
 

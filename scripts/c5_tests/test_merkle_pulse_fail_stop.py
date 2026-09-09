@@ -8,7 +8,6 @@ import logging
 from pathlib import Path
 import sys
 import json
-import hashlib
 
 # MOCK para el entorno roto de BABYLON-60 (paths.py no existe en el repo original)
 from types import ModuleType

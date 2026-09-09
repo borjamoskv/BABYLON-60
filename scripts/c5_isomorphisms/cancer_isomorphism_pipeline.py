@@ -11,8 +11,6 @@ Supports --json for Machine-to-Machine orchestration.
 
 import argparse
 import json
-import sys
-from typing import Dict, Any, List
 
 
 def run_cancer_isomorphism_pipeline(json_output: bool = False) -> None:
@@ -35,7 +33,7 @@ def run_cancer_isomorphism_pipeline(json_output: bool = False) -> None:
     print("============================================================")
     print(" 🧩 C5 CANCER ISOMORPHISM PIPELINE")
     print("============================================================")
-    print(f" Morphism Preservation      : ✅ TRUE")
+    print(" Morphism Preservation      : ✅ TRUE")
     print(f" Spectral Radius Bound      : {payload['invariants']['spectral_radius_bound']}")
     print(f" Isomorphism Degree         : {payload['invariants']['isomorphism_degree']}")
     print(" Status                      : ✅ ATTESTED")

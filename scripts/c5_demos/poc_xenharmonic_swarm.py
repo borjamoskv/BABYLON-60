@@ -13,8 +13,7 @@ Supports --json for Machine-to-Machine orchestration.
 import argparse
 import json
 import math
-import sys
-from typing import List, Dict, Any
+from typing import List
 
 # Plomp-Levelt dissonance curve coefficients
 ALPHA = 3.5
@@ -48,7 +47,7 @@ def generate_scala_scl(scale_name: str, cents_list: List[float]) -> str:
     """Generates Scala (.scl) file content."""
     lines = [
         f"! {scale_name}.scl",
-        f"! Generated autonomously by BABYLON-60 PoC 1 Swarm Tuning Engine",
+        "! Generated autonomously by BABYLON-60 PoC 1 Swarm Tuning Engine",
         scale_name,
         str(len(cents_list)),
         "!"

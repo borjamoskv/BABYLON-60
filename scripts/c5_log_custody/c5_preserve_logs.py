@@ -14,7 +14,6 @@ import argparse
 import hashlib
 from pathlib import Path
 import shutil
-import sys
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 

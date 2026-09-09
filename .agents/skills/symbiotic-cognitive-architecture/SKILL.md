@@ -66,6 +66,9 @@ Cuando el usuario introduzca la orden `itera` tras una discusión conceptual:
    - Diagramas de red Mermaid.
    - Matriz comparativa de la transformación de estado.
 
+**Invariante de Proporcionalidad Pragmática:**
+Si la conversación previa trata sobre productos, software práctico, arquitectura de código o dinámicas de mercado, el comando `itera` NO debe forzar artefactos de física matemática o formalización tensorial abstracta a menos que el Operador lo pida explícitamente. En su lugar, debe iterar sobre especificaciones técnicas accionables, benchmarks, diagramas de arquitectura de software o prototipos de código.
+
 ---
 
 ### 5. Heterarquía Estructural Multiescala & Acoplamiento Operacional

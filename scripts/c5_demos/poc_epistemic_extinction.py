@@ -12,8 +12,7 @@ Supports --json for Machine-to-Machine orchestration.
 import argparse
 import json
 import math
-import sys
-from typing import List, Dict, Any
+from typing import Dict, Any
 
 
 def simulate_manifold_extinction(input_dimensions: int = 1536, variance_threshold: float = 0.99) -> Dict[str, Any]:

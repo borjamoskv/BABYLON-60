@@ -111,6 +111,13 @@ impl MasterLedger {
         }
     }
 
+    pub fn get_latest_justification_json(&self) -> Result<String> {
+        let mut stmt = self.conn.prepare(
+            "SELECT j.payload_json FROM ledger_assertions a JOIN justifications j ON a.justification_hash = j.justification_hash ORDER BY a.lamport_t DESC LIMIT 1"
+        )?;
+        stmt.query_row([], |row| row.get(0))
+    }
+
     pub fn hash_statement(s: &Statement) -> String {
         let mut hasher = blake3::Hasher::new();
         hasher.update(s.content.as_bytes());

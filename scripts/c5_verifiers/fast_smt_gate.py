@@ -13,7 +13,6 @@ import os
 import sys
 import time
 import json
-import ast
 import hashlib
 from pathlib import Path
 from typing import Dict, List, Tuple, Any
@@ -129,7 +128,7 @@ def verify_agentic_invariants() -> List[Tuple[str, str, bool, str]]:
     res = []
     # AX-AGT-1: Agent Plugins 1.0 Isomorphic Manifest Verification
     has_skills = (REPO_ROOT / ".agents").exists() or (REPO_ROOT.parent / ".agents").exists() or (REPO_ROOT / ".agent").exists()
-    res.append(("AX-AGT-1", "Agent Plugins 1.0 Isomorphic Manifest", has_skills, f"Agent Plugins skills verified in workspace"))
+    res.append(("AX-AGT-1", "Agent Plugins 1.0 Isomorphic Manifest", has_skills, "Agent Plugins skills verified in workspace"))
     return res
 
 

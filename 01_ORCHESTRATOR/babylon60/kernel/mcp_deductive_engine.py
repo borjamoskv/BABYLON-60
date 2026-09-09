@@ -5,8 +5,7 @@ Motor de Abducción de Contratos MCP basado en Fricción Entrópica
 
 from dataclasses import dataclass, field
 import logging
-import json
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 
 logger = logging.getLogger(__name__)
 

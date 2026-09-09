@@ -32,7 +32,7 @@ def test_redact_sensitive_data():
         "user_email": "operator@company.com",
         "api_key": "secret_token_1234567890",
         "nested": {
-            "aws_key": "AKIAIOSFODNN7EXAMPLE",
+            "aws_key": "<REDACTED_AWS_KEY>",
             "safe_val": "hello_world"
         }
     }

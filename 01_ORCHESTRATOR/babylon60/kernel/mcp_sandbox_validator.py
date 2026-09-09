@@ -8,7 +8,7 @@ import asyncio
 import json
 import logging
 import time
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from .mcp_deductive_engine import McpCandidateContract
 
 logger = logging.getLogger(__name__)

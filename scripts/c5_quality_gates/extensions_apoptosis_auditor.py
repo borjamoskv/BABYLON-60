@@ -9,7 +9,6 @@ Scans `babylon60/extensions` to measure import reachability from core entrypoint
 """
 
 import ast
-import os
 import sys
 from pathlib import Path
 

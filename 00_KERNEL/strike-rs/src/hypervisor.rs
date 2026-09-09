@@ -17,6 +17,7 @@ use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::Duration;
+use ed25519_dalek::{SigningKey, VerifyingKey, Signer, Signature};
 
 /// BFT Envelope Message Layout for iceoryx2 Zero-Copy Shared Memory
 #[derive(Debug, Clone, Copy)]
@@ -29,6 +30,42 @@ pub struct BftMessage {
     pub signature: [u8; 64],    // Ed25519 signature
 }
 
+impl BftMessage {
+    pub fn sign(
+        sender_id: u64,
+        view: u64,
+        seq_num: u64,
+        payload_hash: [u8; 32],
+        keypair: &SigningKey,
+    ) -> Self {
+        // Sign over sender_id, view, seq_num, and payload_hash concatenated
+        let mut msg_bytes = Vec::new();
+        msg_bytes.extend_from_slice(&sender_id.to_le_bytes());
+        msg_bytes.extend_from_slice(&view.to_le_bytes());
+        msg_bytes.extend_from_slice(&seq_num.to_le_bytes());
+        msg_bytes.extend_from_slice(&payload_hash);
+        
+        let sig = keypair.sign(&msg_bytes);
+        Self {
+            sender_id,
+            view,
+            seq_num,
+            payload_hash,
+            signature: sig.to_bytes(),
+        }
+    }
+
+    pub fn verify(&self, pubkey: &VerifyingKey) -> bool {
+        let mut msg_bytes = Vec::new();
+        msg_bytes.extend_from_slice(&self.sender_id.to_le_bytes());
+        msg_bytes.extend_from_slice(&self.view.to_le_bytes());
+        msg_bytes.extend_from_slice(&self.seq_num.to_le_bytes());
+        msg_bytes.extend_from_slice(&self.payload_hash);
+        let sig = Signature::from_bytes(&self.signature);
+        pubkey.verify_strict(&msg_bytes, &sig).is_ok()
+    }
+}
+
 /// Zero-Copy Publisher using iceoryx2 v0.3.0 (INV_C5_ABFT_IPC)
 pub struct ZeroCopyPublisher {
     _port_factory: iceoryx2::service::port_factory::publish_subscribe::PortFactory<iceoryx2::service::zero_copy::Service, BftMessage>,
@@ -39,7 +76,6 @@ impl ZeroCopyPublisher {
     pub fn new(service_name_str: &str) -> Result<Self, Box<dyn std::error::Error>> {
         let service_name = ServiceName::new(service_name_str)?;
 
-        // INV_C5_ABFT_IPC: strict initialization constraint
         let service = zero_copy::Service::new(&service_name)
             .publish_subscribe()
             .open_or_create::<BftMessage>()?;
@@ -49,24 +85,48 @@ impl ZeroCopyPublisher {
         Ok(Self { _port_factory: service, publisher })
     }
 
-    pub fn publish_node(&self, sender_id: u64, view: u64, seq_num: u64, payload_hash_hex: &str) -> Result<(), Box<dyn std::error::Error>> {
+    pub fn publish_node(
+        &self, 
+        sender_id: u64, 
+        view: u64, 
+        seq_num: u64, 
+        payload_hash_hex: &str,
+        keypair: &SigningKey
+    ) -> Result<(), Box<dyn std::error::Error>> {
         let mut payload_hash = [0u8; 32];
-        if payload_hash_hex.len() == 64
-            && let Ok(bytes) = hex::decode(payload_hash_hex) {
+        if payload_hash_hex.len() == 64 {
+            if let Ok(bytes) = hex::decode(payload_hash_hex) {
                 payload_hash.copy_from_slice(&bytes);
             }
+        }
+
+        let msg = BftMessage::sign(sender_id, view, seq_num, payload_hash, keypair);
 
         let sample = self.publisher.loan_uninit()?;
-        let sample = sample.write_payload(BftMessage {
-            sender_id,
-            view,
-            seq_num,
-            payload_hash,
-            signature: [0; 64],
-        });
+        let sample = sample.write_payload(msg);
 
         sample.send()?;
         Ok(())
+    }
+}
+
+/// Zero-Copy Subscriber using iceoryx2 v0.3.0 (INV_C5_ABFT_IPC)
+pub struct ZeroCopySubscriber {
+    _port_factory: iceoryx2::service::port_factory::publish_subscribe::PortFactory<iceoryx2::service::zero_copy::Service, BftMessage>,
+    pub subscriber: iceoryx2::port::subscriber::Subscriber<iceoryx2::service::zero_copy::Service, BftMessage>,
+}
+
+impl ZeroCopySubscriber {
+    pub fn new(service_name_str: &str) -> Result<Self, Box<dyn std::error::Error>> {
+        let service_name = ServiceName::new(service_name_str)?;
+
+        let service = zero_copy::Service::new(&service_name)
+            .publish_subscribe()
+            .open_or_create::<BftMessage>()?;
+
+        let subscriber = service.subscriber().create()?;
+
+        Ok(Self { _port_factory: service, subscriber })
     }
 }
 
@@ -76,30 +136,28 @@ pub struct SwarmTenant {
     pub created_at_ms: u64,
     pub active: bool,
     pub memory_quota_bytes: usize,
+    pub pubkey: VerifyingKey,
 }
 
 /// Agency Hypervisor Kernel Core in Rust
 pub struct SwarmHypervisor {
-    tenants: Arc<Mutex<HashMap<String, SwarmTenant>>>,
-    #[allow(dead_code)]
-    publisher: Option<ZeroCopyPublisher>,
+    pub tenants: Arc<Mutex<HashMap<String, SwarmTenant>>>,
 }
 
 impl SwarmHypervisor {
-    pub fn new(service_name: Option<&str>) -> Self {
-        let publisher = service_name.and_then(|name| ZeroCopyPublisher::new(name).ok());
+    pub fn new() -> Self {
         Self {
             tenants: Arc::new(Mutex::new(HashMap::new())),
-            publisher,
         }
     }
 
     /// Register a new in-memory tenant scope (INV_C5_18 zero-worktree constraint)
-    pub fn register_tenant(&self, tenant_id: &str, quota_bytes: usize) -> bool {
+    pub fn register_tenant(&self, tenant_id: &str, quota_bytes: usize, pubkey: VerifyingKey) -> bool {
         let mut guard = self.tenants.lock().unwrap();
         if guard.contains_key(tenant_id) {
             if let Some(t) = guard.get_mut(tenant_id) {
                 t.active = true;
+                t.pubkey = pubkey; // Update pubkey
             }
             return true;
         }
@@ -114,6 +172,7 @@ impl SwarmHypervisor {
                     .as_millis() as u64,
                 active: true,
                 memory_quota_bytes: quota_bytes,
+                pubkey,
             },
         );
         true
@@ -224,8 +283,11 @@ mod tests {
 
     #[test]
     fn test_swarm_hypervisor_tenants() {
-        let hypervisor = SwarmHypervisor::new(None);
-        assert!(hypervisor.register_tenant("agent_alpha", 1024 * 1024));
+        let hypervisor = SwarmHypervisor::new();
+        let mut csprng = rand::rngs::OsRng;
+        let signing_key = ed25519_dalek::SigningKey::generate(&mut csprng);
+        
+        assert!(hypervisor.register_tenant("agent_alpha", 1024 * 1024, signing_key.verifying_key()));
         assert_eq!(hypervisor.active_tenant_count(), 1);
 
         assert!(hypervisor.evict_tenant("agent_alpha"));

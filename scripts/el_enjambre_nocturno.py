@@ -14,7 +14,6 @@ import sys
 import os
 import asyncio
 import json
-import time
 import urllib.request
 import urllib.error
 from datetime import datetime

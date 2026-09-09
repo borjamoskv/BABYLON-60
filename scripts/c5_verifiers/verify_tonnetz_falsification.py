@@ -6,7 +6,6 @@ Mide D_KL(p || q) y valida la cota exergética de Landauer (ΔΞ >= k_B T ln 2 *
 """
 
 import math
-import sys
 
 # Constantes termodinámicas normalizadas (C5-REAL Substrate)
 K_B = 1.380649e-23  # Constante de Boltzmann (J/K)

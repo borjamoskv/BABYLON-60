@@ -38,6 +38,7 @@ log = logging.getLogger("swarm")
 class InferenceBackend(Enum):
     """Selector de backend de inferencia."""
     MOONSHOT_REMOTE = "moonshot"   # API remota (api.moonshot.cn)
+    OPENROUTER_REMOTE = "openrouter" # API remota (openrouter.ai/api/v1)
     LOCAL_VLLM = "local_vllm"     # vLLM local (OpenAI-compatible)
     LOCAL_MLX = "local_mlx"       # MLX server local (Apple Silicon)
 
@@ -48,6 +49,14 @@ def _get_default_moonshot_url() -> str:
 
 def _get_default_moonshot_key() -> str:
     return os.getenv("KIMI_API_KEY") or os.getenv("MOONSHOT_API_KEY", "")
+
+
+def _get_default_openrouter_url() -> str:
+    return os.getenv("OPENROUTER_API_URL") or "https://openrouter.ai/api/v1/chat/completions"
+
+
+def _get_default_openrouter_key() -> str:
+    return os.getenv("OPENROUTER_API_KEY", "")
 
 
 @dataclass
@@ -64,6 +73,10 @@ class SwarmConfig:
     moonshot_url: str = field(default_factory=_get_default_moonshot_url)
     moonshot_key: str = field(default_factory=_get_default_moonshot_key)
     moonshot_model: str = os.getenv("MOONSHOT_MODEL", "moonshot-v1-auto")
+
+    openrouter_url: str = field(default_factory=_get_default_openrouter_url)
+    openrouter_key: str = field(default_factory=_get_default_openrouter_key)
+    openrouter_model: str = os.getenv("OPENROUTER_MODEL", "openrouter/auto")
 
     local_url: str = "http://localhost:8000/v1/chat/completions"
     local_model: str = "kimi-k3-1bit"  # Nombre del modelo en vLLM/MLX
@@ -86,18 +99,24 @@ class SwarmConfig:
     def api_url(self) -> str:
         if self.backend == InferenceBackend.MOONSHOT_REMOTE:
             return self.moonshot_url
+        if self.backend == InferenceBackend.OPENROUTER_REMOTE:
+            return self.openrouter_url
         return self.local_url
 
     @property
     def api_key(self) -> str:
         if self.backend == InferenceBackend.MOONSHOT_REMOTE:
             return self.moonshot_key
+        if self.backend == InferenceBackend.OPENROUTER_REMOTE:
+            return self.openrouter_key
         return ""  # Local no requiere key
 
     @property
     def model_name(self) -> str:
         if self.backend == InferenceBackend.MOONSHOT_REMOTE:
             return self.moonshot_model
+        if self.backend == InferenceBackend.OPENROUTER_REMOTE:
+            return self.openrouter_model
         return self.local_model
 
 
@@ -428,7 +447,7 @@ async def run_swarm_orchestrator(
         prompt: Tarea compleja a descomponer y resolver en paralelo.
         p_cores: Procesos paralelos (cores lógicos asignados).
         s_threads: Hilos de I/O por core (concurrencia de red).
-        backend: "moonshot" | "local_vllm" | "local_mlx"
+        backend: "moonshot" | "openrouter" | "local_vllm" | "local_mlx"
         on_progress: Callback opcional para streaming de progreso.
 
     Returns:
@@ -437,6 +456,7 @@ async def run_swarm_orchestrator(
     # Configuración
     backend_enum = {
         "moonshot": InferenceBackend.MOONSHOT_REMOTE,
+        "openrouter": InferenceBackend.OPENROUTER_REMOTE,
         "local_vllm": InferenceBackend.LOCAL_VLLM,
         "local_mlx": InferenceBackend.LOCAL_MLX,
     }.get(backend, InferenceBackend.MOONSHOT_REMOTE)

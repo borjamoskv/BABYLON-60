@@ -12,9 +12,7 @@ Supports --json for Machine-to-Machine orchestration.
 import argparse
 import json
 import sqlite3
-import sys
 from pathlib import Path
-from typing import Dict, Any, List
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 DB_PATH = REPO_ROOT / "data" / "cortex_memory.db"

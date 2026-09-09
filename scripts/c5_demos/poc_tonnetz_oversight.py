@@ -14,7 +14,6 @@ Demonstrates the Neo-Riemannian Tonnetz mapping for EU AI Act (Art. 14) Human Ov
 """
 
 import math
-import sys
 from typing import Dict, List, Tuple
 
 # Pitch names in 12-TET

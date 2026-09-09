@@ -10,12 +10,14 @@
 use crate::atms::{Atms, NodeId};
 use crate::ledger::MasterLedger;
 use crate::omega0::{Statement, JustifiedStatement, Justification, verify};
+use async_trait::async_trait;
 
 /// Vector C: La Interfaz de Atestador (Integración LLM)
 /// The trait boundary for external stochastic generators.
-pub trait Attestor {
-    /// Generates a heuristic justification (usually `Conjecture`) for a goal statement.
-    fn query(&self, goal: &Statement) -> Justification;
+#[async_trait]
+pub trait Attestor: Send + Sync {
+    /// Generates a heuristic justification (usually `Conjecture` or `ExogenousInjection`) for a goal statement.
+    async fn query(&self, goal: &Statement) -> Justification;
 }
 
 /// Vector B: El Bucle de Eventos (Scheduler & Orchestrator)
@@ -35,9 +37,9 @@ impl Orchestrator {
     }
 
     /// Ignición: Convierte un intent en un Proof Search y lo asienta.
-    pub fn resolve_intent(&mut self, goal: &Statement, environment_id: &str) -> Result<NodeId, String> {
+    pub async fn resolve_intent(&mut self, goal: &Statement, environment_id: &str) -> Result<NodeId, String> {
         // Delegación al Atestador para contener la entropía estocástica
-        let justification = self.attestor.query(goal);
+        let justification = self.attestor.query(goal).await;
         
         let js = JustifiedStatement {
             statement: goal.clone(),
@@ -60,7 +62,7 @@ impl Orchestrator {
     }
 
     /// Inyecciones Exógenas: Hook para APIs y monitores externos.
-    pub fn inject_observation(
+    pub async fn inject_observation(
         &mut self, 
         statement: &Statement, 
         sensor: &str, 
@@ -94,14 +96,15 @@ mod tests {
     use crate::omega0::Modality;
 
     struct DummyOracle;
+    #[async_trait]
     impl Attestor for DummyOracle {
-        fn query(&self, _goal: &Statement) -> Justification {
+        async fn query(&self, _goal: &Statement) -> Justification {
             Justification::Conjecture
         }
     }
 
-    #[test]
-    fn test_orchestrator_resolve_intent() {
+    #[tokio::test]
+    async fn test_orchestrator_resolve_intent() {
         let ledger = MasterLedger::new(":memory:").unwrap();
         let attestor = Box::new(DummyOracle);
         let mut orch = Orchestrator::new(ledger, attestor);
@@ -112,15 +115,15 @@ mod tests {
             obligations: vec![],
         };
 
-        let node_id = orch.resolve_intent(&goal, "master_env").unwrap();
+        let node_id = orch.resolve_intent(&goal, "master_env").await.unwrap();
         
         // Assert it was installed as a conjecture (an assumption in ATMS)
         assert!(orch.atms.is_believed(node_id));
         assert!(orch.atms.assumption_of(node_id).is_some());
     }
 
-    #[test]
-    fn test_orchestrator_inject_observation() {
+    #[tokio::test]
+    async fn test_orchestrator_inject_observation() {
         let ledger = MasterLedger::new(":memory:").unwrap();
         let attestor = Box::new(DummyOracle);
         let mut orch = Orchestrator::new(ledger, attestor);
@@ -131,10 +134,11 @@ mod tests {
             obligations: vec![],
         };
 
-        let node_id = orch.inject_observation(&fact, "lm-sensors", 1720000000, "master_env").unwrap();
+        let node_id = orch.inject_observation(&fact, "lm-sensors", 1720000000, "master_env").await.unwrap();
         
         // Assert it was installed as an observation (a premise in ATMS)
         assert!(orch.atms.is_believed(node_id));
         assert!(orch.atms.assumption_of(node_id).is_none());
     }
 }
+

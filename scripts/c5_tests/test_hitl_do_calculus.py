@@ -8,7 +8,6 @@ import logging
 from pathlib import Path
 import sys
 import json
-import time
 
 # MOCK para el entorno roto
 from types import ModuleType
@@ -20,7 +19,7 @@ paths_mock.SYNC_STATE_FILE = Path(".agent/memory/sync_state.json")
 sys.modules["babylon60.core.paths"] = paths_mock
 
 from babylon60.extensions.daemon.sync_engine import CortexSyncManager
-from babylon60.extensions.sync.common import MEMORY_DIR, SYNC_STATE_FILE, topological_file_hash, file_hash
+from babylon60.extensions.sync.common import MEMORY_DIR, SYNC_STATE_FILE, file_hash
 from babylon60.extensions.swarm.verification_gate import VerificationGate, RiskLevel, InterventionChannel
 
 logging.basicConfig(level=logging.DEBUG)

@@ -118,5 +118,5 @@ async def run_legion_swarm(num_tenants: int = 10000, concurrency_limit: int = 50
     logger.info(f"  > Tenantes Materializados : {successful_collapses} / {num_tenants}")
     logger.info(f"  > Tiempo Real (Wall-Clock): {total_time:.4f} segundos")
     logger.info(f"  > Exergía Total (CPU Time): {total_exergy:.2f} ms")
-    logger.info(f"  > Integridad de L0        : 100% (Huecos de existencia sellados)")
+    logger.info("  > Integridad de L0        : 100% (Huecos de existencia sellados)")
     logger.info("======================================================")

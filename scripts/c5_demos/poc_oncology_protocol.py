@@ -51,15 +51,15 @@ class OncologySimulator:
         if omega_purge <= 0:
             # AX-ONCO-2: Growing Anergy
             next_F = current_F * 1.5 + 5.0
-            print(f"-> [AX-ONCO-2 TRIGGER] No purge. Friction escalates monotically.")
+            print("-> [AX-ONCO-2 TRIGGER] No purge. Friction escalates monotically.")
         elif omega_purge > current_F:
             # AX-ONCO-3: Therapeutic Circuit Breaker
             next_F = current_F * 0.1
-            print(f"-> [AX-ONCO-3 TRIGGER] Circuit breaker activated. Friction collapses.")
+            print("-> [AX-ONCO-3 TRIGGER] Circuit breaker activated. Friction collapses.")
         else:
             # Partial purge, friction might remain stable or grow slightly
             next_F = current_F * 1.1
-            print(f"-> [SUB-CRITICAL PURGE] Friction continues to grow slowly.")
+            print("-> [SUB-CRITICAL PURGE] Friction continues to grow slowly.")
             
         self.friction_F.append(next_F)
         self.t += 1

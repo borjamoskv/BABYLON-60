@@ -11,7 +11,8 @@ Checks:
 3. Disk anergy footprint check (< 500 MB target anergy threshold)
 """
 
-import os, sys
+import os
+import sys
 repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 packages_dir = os.path.join(repo_root, "packages")
 if packages_dir not in sys.path:

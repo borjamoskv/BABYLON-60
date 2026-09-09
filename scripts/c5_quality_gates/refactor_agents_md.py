@@ -143,7 +143,7 @@ def main() -> int:
         print(f"  ✓ Reglas finales en AGENTS  : {final_rule_tags}")
         print(f"  ✓ Extraídas a ENVIRONMENT  : {extracted_tags_count} (Rutas locales/Zone IDs)")
         print(f"  ✓ Purgadas/Fusionadas       : {deleted_tags_count} (Empirismo, Cuñado, Nomenclatura)")
-        print(f"  ✓ Invariante de Etiquetas  : VERIFICADO (0 Huérfanos)")
+        print("  ✓ Invariante de Etiquetas  : VERIFICADO (0 Huérfanos)")
         print(f"  ✓ Archivo Creado           : {ENV_PATH}")
 
     return 0

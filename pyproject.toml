@@ -109,19 +109,19 @@ cortex-char-attest = "babylon60.cli.attest_character_count:main"
 
 [tool.hatch.build.targets.wheel]
 packages = [
-    "packages/babylon60",
-    "packages/apex_trials"
+    "01_ORCHESTRATOR/babylon60",
+    "01_ORCHESTRATOR/apex_trials"
 ]
 exclude = [
-    "packages/babylon60/extensions",
-    "packages/babylon60/utils"
+    "01_ORCHESTRATOR/babylon60/extensions",
+    "01_ORCHESTRATOR/babylon60/utils"
 ]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-x --tb=short"
 asyncio_mode = "auto"
-pythonpath = [".", "packages"]
+pythonpath = [".", "01_ORCHESTRATOR"]
 
 [tool.ruff]
 target-version = "py310"
@@ -132,7 +132,7 @@ extend-exclude = [
     "L1_sink",
     "BABYLON-60-fixes",
     "c5_remotion_video",
-    "packages/babylon60/extensions",
+    "01_ORCHESTRATOR/babylon60/extensions",
 ]
 
 [tool.ruff.lint]
@@ -143,7 +143,7 @@ ignore = ["E743"]
 python_version = "3.12"
 explicit_package_bases = true
 disallow_any_generics = false
-exclude = ["^scratch/", "^packages/babylon60/extensions/"]
+exclude = ["^scratch/", "^01_ORCHESTRATOR/babylon60/extensions/"]
 ignore_missing_imports = true
 
 # Legacy vendorizado (babylon60/extensions): excluido de packaging y lint.

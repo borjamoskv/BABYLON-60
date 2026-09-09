@@ -9,13 +9,11 @@ Dispatches 1,000 virtual subagent workers (10 Process Workers × 100 Thread Suba
 """
 
 import os
-import sys
 import time
 import glob
 import resource
 import ast
 import re
-import subprocess
 from pathlib import Path
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
 
@@ -85,7 +83,7 @@ def process_subagent_chunk(chunk: list[tuple[str, int]], thread_concurrency: int
 
 def ignite_1000_agent_legion(total_agents: int = 1000, process_workers: int = 10):
     print("============================================================")
-    print(f" 🛡️  LEGION 1000-AGENT PARALLEL WORKSPACE AUDITOR ENGINE")
+    print(" 🛡️  LEGION 1000-AGENT PARALLEL WORKSPACE AUDITOR ENGINE")
     print(f" █ TOPOLOGY: {process_workers} Process Workers × {total_agents // process_workers} Subagent Threads")
     print("============================================================")
 

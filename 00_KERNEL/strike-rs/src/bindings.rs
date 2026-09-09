@@ -155,6 +155,7 @@ impl CortexKernel {
 #[pyclass(unsendable)]
 pub struct AgencyHypervisor {
     publisher: ZeroCopyPublisher,
+    keypair: ed25519_dalek::SigningKey,
 }
 
 #[pymethods]
@@ -163,13 +164,16 @@ impl AgencyHypervisor {
     pub fn new(service_name: &str) -> PyResult<Self> {
         let publisher = ZeroCopyPublisher::new(service_name)
             .map_err(|e| PyRuntimeError::new_err(format!("Failed to init zero-copy publisher: {}", e)))?;
-        Ok(Self { publisher })
+        let mut csprng = rand::rngs::OsRng;
+        let keypair = ed25519_dalek::SigningKey::generate(&mut csprng);
+        Ok(Self { publisher, keypair })
     }
 
     pub fn publish_node(&self, sender_id: u64, view: u64, seq_num: u64, payload_hash_hex: &str) -> PyResult<()> {
-        self.publisher.publish_node(sender_id, view, seq_num, payload_hash_hex)
+        self.publisher.publish_node(sender_id, view, seq_num, payload_hash_hex, &self.keypair)
             .map_err(|e| PyRuntimeError::new_err(format!("Publish failed: {}", e)))
     }
+
 
     #[staticmethod]
     pub fn start_writer_daemon(service_name: &str, _db_path: &str) -> PyResult<()> {

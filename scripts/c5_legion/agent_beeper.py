@@ -12,7 +12,7 @@ polling (anergía CPU) mediante interrupciones asíncronas puras.
 
 import asyncio
 import logging
-from typing import Any, Dict, TypeVar, Generic, Optional
+from typing import Dict, TypeVar, Generic, Optional
 
 logger = logging.getLogger("AGENT-BEEPER")
 

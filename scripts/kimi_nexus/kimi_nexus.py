@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 import os
 import sys
-import json
 import logging
 from typing import Optional
-from pydantic import BaseModel
 from openai import OpenAI
 
 # Attempt to import FastMCP. If missing, we'll inform the user via logs.

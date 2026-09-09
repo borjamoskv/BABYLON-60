@@ -8,7 +8,6 @@ into dynamic Path.home() expressions without syntax corruption or regex side-eff
 import ast
 import os
 import re
-import sys
 from pathlib import Path
 
 WORKSPACE_DIR = Path(__file__).resolve().parent.parent.parent

@@ -12,8 +12,7 @@ Supports --json for Machine-to-Machine orchestration.
 import argparse
 import json
 import math
-import sys
-from typing import Dict, Any, List
+from typing import List
 
 
 def kl_divergence(p: List[float], q: List[float]) -> float:

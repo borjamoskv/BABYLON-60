@@ -9,9 +9,6 @@ Parses theory specifications in docs/06_theory/*.md, extracts Axioms and Theorem
 and generates customized Lean 4 formal stubs in Markdown and standalone .lean files.
 """
 
-import os
-import sys
-import glob
 import re
 import argparse
 import concurrent.futures

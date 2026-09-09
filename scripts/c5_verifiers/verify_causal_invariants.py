@@ -45,7 +45,7 @@ def verify_causal_invariants() -> bool:
                                 leaks.append((file, idx, term, line.strip()))
 
     if leaks:
-        print(f"  [FAIL] Violación de Teorema Robinson-Moskv: Filtración de tiempo POSIX/NTP detectada en BFT:")
+        print("  [FAIL] Violación de Teorema Robinson-Moskv: Filtración de tiempo POSIX/NTP detectada en BFT:")
         for file, idx, term, snippet in leaks:
             print(f"    - {file}:{idx} -> Encontrado '{term}': {snippet}")
         return False
