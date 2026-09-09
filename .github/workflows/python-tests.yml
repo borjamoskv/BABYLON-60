@@ -26,10 +26,10 @@ jobs:
         
     - name: Install dependencies
       run: |
-        $HOME/.cargo/bin/uv venv
-        $HOME/.cargo/bin/uv pip install -e ".[dev]"
+        $HOME/.local/bin/uv venv
+        $HOME/.local/bin/uv pip install -e ".[dev]"
         # Si no hay pyproject.toml con dev dependencies, podemos forzar pytest
-        $HOME/.cargo/bin/uv pip install pytest
+        $HOME/.local/bin/uv pip install pytest
         
     - name: Run tests with pytest
       run: |

@@ -32,6 +32,7 @@ jobs:
 
     - name: 1. Compilación y Pruebas del Workspace (Rust Cargo)
       run: |
+        sudo apt-get update && sudo apt-get install -y protobuf-compiler
         cargo build --workspace --all-targets
         cargo test --workspace
 
