@@ -183,12 +183,52 @@ impl AgencyHypervisor {
     }
 }
 
+use crate::hypervisor::ZeroCopySubscriber;
+
+#[pyclass(unsendable)]
+pub struct BftWorkerNode {
+    task_sub: ZeroCopySubscriber,
+    result_pub: ZeroCopyPublisher,
+    keypair: ed25519_dalek::SigningKey,
+}
+
+#[pymethods]
+impl BftWorkerNode {
+    #[new]
+    pub fn new(task_topic: &str, result_topic: &str) -> PyResult<Self> {
+        let task_sub = ZeroCopySubscriber::new(task_topic)
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to init task subscriber: {}", e)))?;
+        let result_pub = ZeroCopyPublisher::new(result_topic)
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to init result publisher: {}", e)))?;
+        let mut csprng = rand::rngs::OsRng;
+        let keypair = ed25519_dalek::SigningKey::generate(&mut csprng);
+        Ok(Self { task_sub, result_pub, keypair })
+    }
+
+    pub fn poll_task(&self) -> PyResult<Option<(u64, String)>> {
+        match self.task_sub.subscriber.receive() {
+            Ok(Some(sample)) => {
+                let payload_hash_hex = hex::encode(sample.payload_hash);
+                Ok(Some((sample.seq_num, payload_hash_hex)))
+            },
+            Ok(None) => Ok(None),
+            Err(e) => Err(PyRuntimeError::new_err(format!("Receive error: {}", e))),
+        }
+    }
+
+    pub fn publish_result(&self, seq_num: u64, payload_hash_hex: &str) -> PyResult<()> {
+        self.result_pub.publish_node(2, 1, seq_num, payload_hash_hex, &self.keypair)
+            .map_err(|e| PyRuntimeError::new_err(format!("Publish failed: {}", e)))
+    }
+}
+
 /// A Python module implemented in Rust.
 #[pymodule]
 fn strike_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<CortexKernel>()?;
     m.add_class::<BftSwarmEngine>()?;
     m.add_class::<AgencyHypervisor>()?;
+    m.add_class::<BftWorkerNode>()?;
     Ok(())
 }
 

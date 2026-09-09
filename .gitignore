@@ -91,3 +91,8 @@ docs/04_research/transcripts/
 sample_toxic_chat.txt
 
 .xtts_venv/
+
+# Trasteros locales aislados (C5-REAL Anergy Shield)
+scratch/
+archive/
+experiments/

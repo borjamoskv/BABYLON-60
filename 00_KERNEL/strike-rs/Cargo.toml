@@ -35,6 +35,7 @@ tokio-stream = "0.1.19"
 ed25519-dalek = { version = "2.1", features = ["rand_core"] }
 rand_core = "0.10.1"
 rand = "0.8"
+anyhow = "1.0.104"
 
 [dev-dependencies]
 proptest = "1.6.0"
