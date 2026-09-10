@@ -121,17 +121,6 @@
 | [`research_substack_luhmann.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/substack/research_substack_luhmann.md) | `04_research/substack/research_substack_luhmann.md` | Autopoiesis del Trámite Digital y el Cierre Operativo de la Burocracia: Niklas Luhmann ante el RETA y el Bucle del Certificado FNMT |
 | [`research_substack_skinner_chomsky_goedel.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/substack/research_substack_skinner_chomsky_goedel.md) | `04_research/substack/research_substack_skinner_chomsky_goedel.md` | Skinner, Chomsky y Gödel: Por qué los LLMs son Modelos No Estándar del Lenguaje |
 
-### 🚀 Go-To-Market, Valuation & Enterprise Agreements
-
-| Documento | Ruta / Archivo | Título Principal / Propósito |
-| :--- | :--- | :--- |
-| [`PITCH_DECK.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/05_gtm/PITCH_DECK.md) | `05_gtm/PITCH_DECK.md` | BABYLON-60 v4.0 Pitch Deck (Executive Data Room) |
-| [`VALUATION_STRATEGY.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/05_gtm/VALUATION_STRATEGY.md) | `05_gtm/VALUATION_STRATEGY.md` | BABYLON-60 Valuation Strategy & Economic Model |
-| [`ciso_cold_email_playbook.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/05_gtm/ciso_cold_email_playbook.md) | `05_gtm/ciso_cold_email_playbook.md` | BABYLON-60 CISO Outreach & Cold Email Playbook |
-| [`enterprise_poc_agreement_term_sheet.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/05_gtm/enterprise_poc_agreement_term_sheet.md) | `05_gtm/enterprise_poc_agreement_term_sheet.md` | Enterprise PoC Agreement Term Sheet |
-| [`forensic_quarantine_poc_spec.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/05_gtm/forensic_quarantine_poc_spec.md) | `05_gtm/forensic_quarantine_poc_spec.md` | BABYLON-60 Forensic Quarantine PoC Specification |
-| [`vc_data_room_manifest.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/05_gtm/vc_data_room_manifest.md) | `05_gtm/vc_data_room_manifest.md` | VC Virtual Data Room Manifest |
-
 ### ⚖️ Formal Theory, Gödel Incompleteness & Exergy Invariants
 
 | Documento | Ruta / Archivo | Título Principal / Propósito |

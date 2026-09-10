@@ -107,23 +107,11 @@ BABYLON-60 abandons hardware-dependent physical intuition to embrace a category-
 - **[Topología de Enjambre Legión 222 Agentes](./04_research/legion_222_swarm_topology.md)**: Especificación de escalado masivo (11 Procesos $\times$ 20 Hilos) para pruebas de estrés termodinámico.
 
 ---
-
-## 🚀 Go-To-Market & Commercial Data Room (`docs/05_gtm/`)
-
-- **[Pitch Deck v4.0 (11 Slides)](./05_gtm/PITCH_DECK.md)**: Executive pitch presentation for enterprise B2B sales and investor due diligence.
-- **[Valuation Strategy](./05_gtm/VALUATION_STRATEGY.md)**: Comprehensive valuation analysis ($8M to $400M exit scenarios).
-- **[Forensic Quarantine PoC Spec](./05_gtm/forensic_quarantine_poc_spec.md)**: 7-day non-intrusive shadow sidecar PoC specification for enterprise CISOs.
-- **[CISO Cold Email Playbook](./05_gtm/ciso_cold_email_playbook.md)**: High-conversion B2B outreach templates in ES, EN, and DE.
-- **[Enterprise PoC Term Sheet](./05_gtm/enterprise_poc_agreement_term_sheet.md)**: Commercial evaluation contract protecting IP (`BABYLON60_LICENSE_KEY`).
-- **[VC Data Room Manifest](./05_gtm/vc_data_room_manifest.md)**: Index mapping all 5 virtual data room due diligence folders for Seed round VCs.
-
----
-
-## 🛡️ Security & Pre-Generated Compliance Audits (`docs/02_ontology/` & `docs/audits/`)
+## 🛡️ Security & Governance (`docs/02_ontology/` & `SECURITY.md`)
 
 - **[Security Threat Model v4.0](./02_ontology/security_threat_model_v4.md)**: Phase II threat model, redaction layer, grace period, and bounds.
 - **[Security Policy](../SECURITY.md)**: Vulnerability reporting policy and SLA.
-- **[Sample Compliance Certificates](./audits/)**: Pre-generated compliance reports for **ES (AESIA)**, **DE (BSI)**, **FR (CNIL)**, **IT (AgID)**, and **EN (Global/NIST)**.
+- **[EU AI Act Compliance Framework](./05_compliance_eu_ai_act.md)**: Cryptographic verification of Merkle logs for Articles 9 to 14.
 
 ---
 

@@ -28,7 +28,7 @@ The Artificial Intelligence industry has crossed the Rubicon: we have transition
 
 Vector databases and semantic guardrails offer similarity, but **similarity is not lineage**. In critical sectors (banking, healthcare, defense, infrastructure), an algorithmic failure is not a "software bug"; it is a €35 Million legal liability under the EU AI Act.
 
-**BABYLON-60 does not exist to make AI smarter. It exists to make AI mathematically auditable, legally defensible, and thermodynamically controllable.** We do not sell software; we sell **legal immunity and causal determinism**.
+**BABYLON-60 does not exist to make AI smarter. It exists to make AI mathematically auditable, legally defensible, and thermodynamically controllable.** We do not sell software; we sell **verifiable legal defensibility and causal determinism**.
 
 ---
 
@@ -37,7 +37,7 @@ Vector databases and semantic guardrails offer similarity, but **similarity is n
 Our competitive advantage is not a feature; it is an entry barrier rooted in physics and mathematics that competitors (wrapped in Python and cloud APIs) cannot replicate:
 
 1. **Exact Sexagesimal Arithmetic (`F60`):** Time and state are not floating-point approximations (`f64`) that drift over time. They are pure fractions. Causality is undeniable.
-2. **Formal Verification (Lean 4 + Rust):** We do not rely on unit tests; we rely on mathematical theorems. The Kernel is formally verified to guarantee that safety invariants can *never* be violated.
+2. **Axiomatic Specification (Lean 4 + Rust):** We do not rely solely on unit tests; Kernel safety invariants are axiomatized and type-checked in Lean 4. Full formal verification (proving axioms as theorems) is a funded roadmap objective.
 3. **WORM Forensics (Quarantine, Not Purge):** Upon encountering anomalies, the system neither crashes nor purges its history. It freezes, cryptographically seals the evidence, and generates an audit certificate in <24 hours.
 4. **Local-First Sovereignty:** The core operates wherever the client dictates. Zero dependency on opaque clouds. The client retains absolute ownership of their chain of custody.
 

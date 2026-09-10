@@ -35,7 +35,7 @@ El despliegue corporativo de Agentes de IA Autónomos en 2026 ha chocado frontal
 ### 1.2 La Solución: Encapsulamiento Causal y Substrato de Verificación
 BABYLON-60 v4.0 no intenta alterar la aleatoriedad latente del LLM. En su lugar, encapsula el agente dentro de un **Substrato de Ejecución Verificable (Local-First Kernel)** en Rust que impone restricciones termodinámicas, aritmética sexagesimal exacta ($F60$) y verificación formal en Lean 4.
 
-### 1.3 El Resultado: Inmunidad Legal y "Caja Negra" Aeronáutica
+### 1.3 El Resultado: Defendibilidad Jurídica y "Caja Negra" Aeronáutica
 Si el agente falla, entra en bucles de limerencia o sufre un intento de inyección de prompt, el sistema **no destruye la evidencia ni alucina en silencio**. En su lugar, ejecuta un `CRITICAL HALT` con **Cuarentena Forense WORM (Write Once Read Many)**, congelando el estado y emitiendo un certificado auditable anclado criptográficamente por software (con anclaje a hardware TPM 2.0 / TEE en el roadmap) en menos de 24 horas.
 
 ---
@@ -53,7 +53,7 @@ Bajo el **EU AI Act (Reglamento UE 2024/1689)**, desplegar un sistema de IA de a
 | **Bases de Datos Vectoriales (RAG)** | Almacenan *similitud coseno*, no *linaje causal*. No prueban integridad temporal. | Rechazado bajo el Art. 10 (Gobernanza de Datos) |
 | **Logs en Texto Plano / JSON** | Modificables por administradores locales o procesos comprometidos. | Rechazado bajo el Art. 12 (Conservación de Registros) |
 | **Guardrails de Software en Python** | Latencia elevada y riesgo de sobrepaso por GIL de Python. | Inviable para alta frecuencia y tiempo real |
-| **BABYLON-60 v4.0 (Kernel Causal)** | **Linaje inmutable WORM + Aritmética Sexagesimal $F60$ + Demostración Lean 4.** | **✅ CONFORME (Inmunidad Legal)** |
+| **BABYLON-60 v4.0 (Kernel Causal)** | **Linaje inmutable WORM + Aritmética Sexagesimal $F60$ + Especificación Lean 4.** | **✅ CONFORME (Trazabilidad Forense Vinculante)** |
 
 ---
 
@@ -157,12 +157,12 @@ Ante un incidente en producción (ej. un intento de inyección de prompt o un fa
 
 ```
 [1. Detección] ──> [2. CRITICAL HALT] ──> [3. WORM Quarantine] ──> [4. Certificate Export]
- Runtime Check       State Freeze          Hardware Sealed           PDF/JSON < 24h
+ Runtime Check       State Freeze          Software Sealed           PDF/JSON < 24h
 ```
 
 1. **Detección Causal:** El Fuzzing diferencial o el Runtime Inspector detecta una inconsistencia en el DAG.
 2. **Congelación Causal (`CRITICAL HALT`):** Se congela la corrutina en estado Zombie. Se bloquea cualquier llamada a API externa.
-3. **Cuarentena Forense WORM:** El historial completo se sella en `artifact_bundle_v3/quarantine/` bajo firma TPM 2.0. Cero datos destruidos.
+3. **Cuarentena Forense WORM:** El historial completo se sella en `artifact_bundle_v3/quarantine/` bajo firma criptográfica software (COSE Sign1 / BLAKE3, con anclaje hardware TPM 2.0 en hoja de ruta). Cero datos destruidos.
 4. **Exportación de Cumplimiento:** El módulo `compliance_exporter` genera un paquete firmado en JSON/Markdown listo para ser entregado a la Autoridad de Supervisión de IA en menos de 24 horas.
 
 ---

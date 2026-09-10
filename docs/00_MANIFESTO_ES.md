@@ -28,7 +28,7 @@ La industria de la Inteligencia Artificial ha cruzado el Rubicón: hemos pasado 
 
 Las bases de datos vectoriales y los *guardrails* semánticos ofrecen similitud, pero **la similitud no es linaje**. En sectores críticos (banca, salud, defensa, infraestructura), un error algorítmico no es un "fallo de software"; es un pasivo legal de €35 Millones bajo el EU AI Act.
 
-**BABYLON-60 no existe para hacer que la IA sea más inteligente. Existe para hacer que la IA sea matemáticamente auditable, legalmente defendible y termodinámicamente controlable.** Nosotros no vendemos software; vendemos **inmunidad legal y determinismo causal**.
+**BABYLON-60 no existe para hacer que la IA sea más inteligente. Existe para hacer que la IA sea matemáticamente auditable, legalmente defendible y termodinámicamente controlable.** Nosotros no vendemos software; vendemos **defendibilidad jurídica estricta y determinismo causal**.
 
 ---
 
