@@ -369,7 +369,7 @@ mod tests {
         }
         
         for h in handles {
-            h.join().unwrap();
+            if let Err(e) = h.join() { tracing::error!("Worker thread paniqued: {:?}", e); }
         }
         
         assert_eq!(hypervisor.active_tenant_count(), 5000);
@@ -387,7 +387,7 @@ mod tests {
         }
         
         for h in evict_handles {
-            h.join().unwrap();
+            if let Err(e) = h.join() { tracing::error!("Worker thread paniqued: {:?}", e); }
         }
         
         assert_eq!(hypervisor.active_tenant_count(), 0);

@@ -270,8 +270,6 @@ dependencies = [
     { name = "click" },
     { name = "cryptography" },
     { name = "httpx" },
-    { name = "lingua-language-detector", version = "2.1.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
-    { name = "lingua-language-detector", version = "2.2.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
     { name = "pydantic" },
     { name = "pynacl" },
     { name = "pynput" },
@@ -279,7 +277,6 @@ dependencies = [
     { name = "pyyaml" },
     { name = "starlette" },
     { name = "textual" },
-    { name = "yfinance" },
 ]
 
 [package.optional-dependencies]
@@ -292,6 +289,7 @@ apex = [
     { name = "scipy", version = "1.15.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "scipy", version = "1.17.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
     { name = "scipy", version = "1.18.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+    { name = "yfinance" },
 ]
 dev = [
     { name = "fastapi" },
@@ -315,6 +313,8 @@ embeddings = [
 gemini = [
     { name = "fastmcp" },
     { name = "google-genai" },
+    { name = "lingua-language-detector", version = "2.1.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "lingua-language-detector", version = "2.2.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
 ]
 graph = [
     { name = "networkx", version = "3.4.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
@@ -362,7 +362,7 @@ requires-dist = [
     { name = "httpx", specifier = ">=0.27.2" },
     { name = "jinja2", marker = "extra == 'dev'", specifier = ">=3.1.4" },
     { name = "kokoro", marker = "extra == 'voice-full'", specifier = ">=0.9" },
-    { name = "lingua-language-detector", specifier = ">=2.0.2" },
+    { name = "lingua-language-detector", marker = "extra == 'gemini'", specifier = ">=2.0.2" },
     { name = "mlx-lm", marker = "platform_machine == 'arm64' and sys_platform == 'darwin' and extra == 'voice-full'", specifier = ">=0.21" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.8" },
     { name = "networkx", marker = "extra == 'dev'", specifier = ">=3.0" },
@@ -390,7 +390,7 @@ requires-dist = [
     { name = "textual", specifier = ">=0.50.0" },
     { name = "urllib3", marker = "extra == 'dev'", specifier = ">=2.2.2" },
     { name = "uvicorn", marker = "extra == 'dev'", specifier = ">=0.30.0" },
-    { name = "yfinance", specifier = ">=1.6.0" },
+    { name = "yfinance", marker = "extra == 'apex'", specifier = ">=1.6.0" },
 ]
 provides-extras = ["dev", "embeddings", "graph", "onco", "telemetry", "gemini", "voice", "voice-full", "apex"]
 

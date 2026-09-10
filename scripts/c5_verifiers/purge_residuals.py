@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+
+import logging
+#!/usr/bin/env python3
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
@@ -35,29 +38,29 @@ def purge_repository_residuals():
                 try:
                     shutil.rmtree(full_path)
                     purged_counts["pycache"] += 1
-                except Exception:
-                    pass
+                except Exception as e:
+                    logging.error(f'Traza Epistémica Perdida: {e}')
         for f in files:
             full_f = Path(root) / f
             if f.endswith(".pyc") or f.endswith(".pyo"):
                 try:
                     full_f.unlink()
                     purged_counts["pyc"] += 1
-                except Exception:
-                    pass
+                except Exception as e:
+                    logging.error(f'Traza Epistémica Perdida: {e}')
             elif f == ".DS_Store":
                 try:
                     full_f.unlink()
                     purged_counts["ds_store"] += 1
-                except Exception:
-                    pass
+                except Exception as e:
+                    logging.error(f'Traza Epistémica Perdida: {e}')
             elif f.endswith(".lock") and f != "Cargo.lock" and f != "uv.lock" and f != "package-lock.json":
                 if ".git" in full_f.parts:
                     try:
                         full_f.unlink()
                         purged_counts["locks"] += 1
-                    except Exception:
-                        pass
+                    except Exception as e:
+                        logging.error(f'Traza Epistémica Perdida: {e}')
 
     # 2. Clean scratch temporary databases
     scratch_dir = REPO_ROOT / "scratch"
@@ -66,8 +69,8 @@ def purge_repository_residuals():
             try:
                 db.unlink()
                 purged_counts["temp_db"] += 1
-            except Exception:
-                pass
+            except Exception as e:
+                logging.error(f'Traza Epistémica Perdida: {e}')
 
     print("\n--- INFORME DE PURGA DE RESIDUOS ---")
     print(f"  • Directorios Cache (__pycache__/.pytest_cache) : {purged_counts['pycache']} eliminados")

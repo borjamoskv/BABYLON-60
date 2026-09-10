@@ -65,13 +65,13 @@ impl ExergyPacket {
         }
         
         let mut cursor = 7;
-        let sender_len = u16::from_be_bytes(raw_bytes[cursor..cursor+2].try_into().unwrap()) as usize;
+        let sender_len = u16::from_be_bytes(raw_bytes[cursor..cursor+2].try_into().map_err(|_| anyhow::anyhow!("B60IPC slice bounds violation"))?) as usize;
         cursor += 2;
-        let recipient_len = u16::from_be_bytes(raw_bytes[cursor..cursor+2].try_into().unwrap()) as usize;
+        let recipient_len = u16::from_be_bytes(raw_bytes[cursor..cursor+2].try_into().map_err(|_| anyhow::anyhow!("B60IPC slice bounds violation"))?) as usize;
         cursor += 2;
-        let lamport_t = u64::from_be_bytes(raw_bytes[cursor..cursor+8].try_into().unwrap());
+        let lamport_t = u64::from_be_bytes(raw_bytes[cursor..cursor+8].try_into().map_err(|_| anyhow::anyhow!("B60IPC slice bounds violation"))?);
         cursor += 8;
-        let payload_len = u32::from_be_bytes(raw_bytes[cursor..cursor+4].try_into().unwrap()) as usize;
+        let payload_len = u32::from_be_bytes(raw_bytes[cursor..cursor+4].try_into().map_err(|_| anyhow::anyhow!("B60IPC slice bounds violation"))?) as usize;
         // cursor += 4; // cursor should be 23 now (HEADER_SIZE)
         
         let expected_total = HEADER_SIZE + sender_len + recipient_len + payload_len + 8;

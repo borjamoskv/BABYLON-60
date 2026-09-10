@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+
+import logging
+#!/usr/bin/env python3
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
@@ -42,8 +45,8 @@ def extract_title(md_path: Path) -> str:
             if line_str.startswith("# "):
                 title = line_str.lstrip("#").strip()
                 return title.replace("|", "\\|")
-    except Exception:
-        pass
+    except Exception as e:
+        logging.error(f'Traza Epistémica Perdida: {e}')
     clean_name = md_path.stem.replace("_", " ").title()
     return f"{clean_name} Specification"
 

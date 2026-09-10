@@ -21,6 +21,7 @@ Usage:
 """
 
 from __future__ import annotations
+import logging
 
 import argparse
 from pathlib import Path
@@ -67,8 +68,8 @@ def cmd_status(json_output: bool = False) -> None:
             line1 = p.read_text(encoding="utf-8", errors="ignore").splitlines()[0]
             if line1.startswith("#!/usr/bin/env python") or line1.startswith("#!/usr/bin/python"):
                 shebang_ok += 1
-        except Exception:
-            pass
+        except Exception as e:
+            logging.error(f'Traza Epistémica Perdida: {e}')
 
     pct = (shebang_ok / len(py_scripts) * 100.0) if py_scripts else 0.0
 

@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+
+import logging
+#!/usr/bin/env python3
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
@@ -30,8 +33,8 @@ def collect_imports_from_file(file_path: Path) -> set[str]:
             elif isinstance(node, ast.ImportFrom):
                 if node.module:
                     imports.add(node.module)
-    except Exception:
-        pass
+    except Exception as e:
+        logging.error(f'Traza Epistémica Perdida: {e}')
     return imports
 
 def audit_extensions_reachability():

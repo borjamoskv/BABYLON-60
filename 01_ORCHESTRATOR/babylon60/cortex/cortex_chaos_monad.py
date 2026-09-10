@@ -1,3 +1,4 @@
+import logging
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
@@ -102,8 +103,8 @@ import resource
 MAX_MEM = 50 * 1024 * 1024
 try:
     resource.setrlimit(resource.RLIMIT_AS, (MAX_MEM, MAX_MEM))
-except Exception:
-    pass
+except Exception as e:
+    logging.error(f'Traza Epistémica Perdida: {e}')
 
 class BoundedStringIO(StringIO):
     def __init__(self, max_bytes=1024 * 1024):

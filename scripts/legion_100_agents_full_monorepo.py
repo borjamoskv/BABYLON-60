@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+
+import logging
+#!/usr/bin/env python3
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ OPERATIVO LEGIÓN-100 | GLOBAL MONOREPO AUDIT (TUI ENHANCED)
@@ -138,8 +141,8 @@ def main():
                             rel_path = os.path.relpath(filepath, target_dir)
                             issues_dict[rel_path] = violations
                             total_violations += len(violations)
-                    except Exception:
-                        pass
+                    except Exception as e:
+                        logging.error(f'Traza Epistémica Perdida: {e}')
                     progress.advance(task_scan)
     else:
         # Fallback sin TUI
@@ -153,8 +156,8 @@ def main():
                         rel_path = os.path.relpath(filepath, target_dir)
                         issues_dict[rel_path] = violations
                         total_violations += len(violations)
-                except Exception:
-                    pass
+                except Exception as e:
+                    logging.error(f'Traza Epistémica Perdida: {e}')
 
     elapsed = time.time() - start_time
     

@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+
+import logging
+#!/usr/bin/env python3
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
@@ -59,8 +62,8 @@ def extract_docstring_smart(py_path: Path) -> str:
                     meaningful = [l for l in lines if not l.startswith("BABYLON-60") and not l.startswith("█") and not l.startswith("=") and len(l) > 3]
                     if meaningful:
                         return meaningful[0].replace("|", "\\|")
-            except Exception:
-                pass
+            except Exception as e:
+                logging.error(f'Traza Epistémica Perdida: {e}')
 
             lines = content.splitlines()
             for line in lines[:30]:
@@ -77,8 +80,8 @@ def extract_docstring_smart(py_path: Path) -> str:
                     text = s.lstrip("#").strip()
                     if text and not text.startswith("BABYLON-60") and not text.startswith("scripts/") and len(text) > 3:
                         return text.replace("|", "\\|")
-    except Exception:
-        pass
+    except Exception as e:
+        logging.error(f'Traza Epistémica Perdida: {e}')
 
     clean_name = py_path.stem.replace("_", " ").title()
     return f"{clean_name} Utility"

@@ -1,3 +1,4 @@
+import logging
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
@@ -26,8 +27,8 @@ def test_anergia_purger_injects_sigkill(tmp_path) -> None:
     source = """
 try:
     x = 1 / 0
-except Exception:
-    pass
+except Exception as e:
+    logging.error(f'Traza Epistémica Perdida: {e}')
 """
     tree = ast.parse(source)
     purger = AnergiaPurger()

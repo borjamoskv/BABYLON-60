@@ -1,22 +1,36 @@
-# HANDOFF - BABYLON-60 (Iteración IPC / PyO3 completada)
+# Protocolo de Traspaso (Handoff) - BABYLON-60 (Auditoría C5-REAL)
 
-## 🎯 Objetivo Alcanzado
-Diseño, inyección y validación empírica del puente de serialización binaria determinista (CBOR sobre Iceoryx2 Zero-Copy) entre el Orquestador (Python) y el BFT_HYPERVISOR (Rust).
+## 🎯 Objetivo de la Sesión
+Falsación empírica y remediación de la fricción estructural identificada por una auditoría externa (B-1, B-2, B-3 y Colapso Documental). Garantizar la inviolabilidad criptográfica de `CortexPersistLedger`.
 
-## ✅ Delta Exergético
-- **ExergyPacket (CBOR):** Reescrito el protocolo binario del motor BFT prescindiendo de Protobuf/gRPC (bloat). Se implementó un serializador simétrico Python/Rust (ciborium) en `00_BABYLON_SHIELD/crates/strike-rs/src/exergy_binary_ipc.rs`.
-- **IpcEnvelope Iceoryx2 (Workaround E0277):** Ante la incapacidad de la versión actual de `iceoryx2` para instanciar memorias compartidas con `[u8]` dinámicos sin `Sized`, se envolvió el *payload* binario en una estructura C-ABI plana (`[u8; 8192]`), garantizando un *zero-copy* estable.
-- **Transducción FFI PyO3:** Se exportó exitosamente `py_publish_exergy_packet` construyendo un *wheel* nativo local. Se inyectó exitosamente al entorno `uv` homebrew rompiendo los candados PEP-668 (`--break-system-packages`).
-- **Inyección Transaccional BFTLedger:** Se conectó la llamada IPC nativa al final del método `_process` de `BFTLedgerActor` en Python, garantizando que cada registro persistido se *broadcastee* vía memoria compartida hacia Rust con cero *overhead* de latencia TCP.
-- **Daemon Ingestion (Rust):** Se modificó `spawn_writer_daemon` en el Hipervisor para que se suscriba al *topic* `BABYLON_BFT_LEDGER` e ingiera y deserialice nativamente las tuplas CBOR de `ExergyPacket`.
+## ✅ Delta Exergético (Trabajo Realizado)
+- **Purgado de B-1 (Veneno de Hash):** Modificado `_build_batch_rows` en `cortex_persist_ledger.py` para no actualizar espuriamente `prev_hash` ante eventos ignorados (duplicados). Los lotes mixtos ahora mantienen un encadenamiento SHA3-256 matemáticamente puro.
+- **Purgado de B-2 (Crash In-Batch):** Introducido `seen_event_ids: set[str]` en el ciclo de vida del lote. Los duplicados intra-lote se descartan en memoria con `DUPLICATE_IGNORED`, eludiendo el `IntegrityError` de SQLite que bloqueaba la máquina de estados.
+- **Purgado de B-3 (Teatro LegalTech):** El `eu_ai_act.py` (EU AI Act Compliance Exporter) ha sido reprogramado. Ahora rechaza expedir certificados "COMPLIANT" para el Artículo 12 a menos que se le provea un `--ledger-db` válido que supere estrictamente `CortexPersistLedger.verify_integrity()`. Sobrescribe el `global_hash` con la verdadera Raíz de Merkle de la DB.
+- **Alineación Epistémica:**
+  - `README_ES.md` y `README.md` corregidos (`ledger.append_event` en lugar de `ledger.append`).
+  - `docs/SPECIFICATION.md` purgado de falsas topologías (refleja la estructura real de `00_BABYLON_SHIELD`, `01_ORCHESTRATOR`, etc.).
+  - `docs/SPECIFICATION.md` y `proof/lean/Babylon.lean` reconocen formalmente el uso de `sorry` como Deuda Técnica (Technical Debt), extinguiendo la afirmación de "0 sorrys".
 
-## 📍 Punto Fijo Ω
-- **Estado Actual:** El pipe IPC está cerrado de extremo a extremo. Python escribe el *Ledger*, sella el *buffer* binario, y dispara el *topic* de Iceoryx2. Rust lee y desempaqueta el *envelope* sin generar copias (Zero-Copy FFI).
-- **Compilación:** `maturin build --release` pasó. `cargo check` limpio. Linter Python limpio.
+## 📍 Punto Fijo Ω (Estado de Detención)
+- **Tests Creados:** `scripts/c5_demos/poc_b1_b2.py` y `scripts/c5_demos/poc_b3.py` certifican empíricamente que los exploits B-1, B-2 y B-3 están cerrados.
+- **Estado Global:** La topología base (Ledger) está estabilizada. El flujo LegalTech es criptográficamente riguroso. Ninguna regresión conocida.
 
-## 🧠 Invariantes Aprendidas (AGENTS.md)
-1. **Inyección Python Segura:** Estrictamente prohibido usar utilidades multilínea de shell (`sed`, `awk`) para inyectar bloques `try/except`. Usar Python scripts (`str.replace`).
-2. **Iceoryx2 Slices:** Prohibido instanciar `[u8]` dinámicos. Envolver siempre en `IpcEnvelope` (`[u8; MAX]`).
+## 🧠 Matriz de Gotchas (Lecciones Aprendidas)
+- **Invariante de Hash en Lotes:** Jamás se debe actualizar el puntero temporal de una cadena de bloques si el evento actual no se va a grabar en el sustrato (regla de oro aplicada en B-1).
+- **Zero Trust LegalTech:** Un certificado generado desde metadatos (JSON) es teatro. La verdadera atestación requiere recalcular el DAG en tiempo real desde la DB.
+- **El Mapa vs Territorio:** La fricción generada por falsas APIs en un README tiene un coste termodinámico enorme para nuevos desarrolladores.
 
-## 🚀 Grafo de Acción (Siguiente Sesión)
-- **Topología Consensus Engine (Rust):** Expandir el *Daemon* del Hipervisor recién refactorizado (`spawn_writer_daemon`) para que, una vez deserializado el paquete CBOR, inyecte el evento en la arquitectura multi-tenant (`DashMap`) y calcule los hash isomórficos (1-WL) para alcanzar validación bizantina.
+## 🚀 Grafo de Acción (Próximos Pasos)
+1. **Auditar Rendimiento del Fix:**
+   ```bash
+   uv run scripts/c5_thermo/stress_100m_bft.py
+   ```
+2. **Revisión de Formalización en Lean 4:** Iniciar la prueba formal real para cerrar la Deuda Técnica del `sorry` en `proof/lean/Babylon.lean` referida al *Prompt Injection Immunity* (Teorema de Confluencia).
+3. **Commit de la Arquitectura C5-REAL:**
+   ```bash
+   git add 01_ORCHESTRATOR/babylon60/bft/cortex_persist_ledger.py
+   git add 01_ORCHESTRATOR/babylon60/compliance_exporter/eu_ai_act.py
+   git add README.md README_ES.md docs/SPECIFICATION.md proof/lean/Babylon.lean
+   git commit -m "[AX-2] TOPOLOGY: Purgados B-1, B-2 y B-3. Sellado criptográfico de CortexPersistLedger y EU AI Act"
+   ```

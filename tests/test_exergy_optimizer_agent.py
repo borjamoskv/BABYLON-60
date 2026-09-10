@@ -1,3 +1,4 @@
+import logging
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
@@ -29,8 +30,8 @@ def deep_func():
                 try:
                     with open('file.txt') as f:
                         print(f.read())
-                except:
-                    pass
+                except Exception as e:
+                    logging.error(f'Traza Epistémica Perdida: {e}')
 """
     tree = ast.parse(code)
     visitor = ComplexityVisitor()
@@ -47,8 +48,8 @@ def deep_func():
                 try:
                     with open('file.txt') as f:
                         print(f.read())
-                except:
-                    pass
+                except Exception as e:
+                    logging.error(f'Traza Epistémica Perdida: {e}')
 """
     # Create a path that doesn't contain "test_" so evaluate_gelabp doesn't exclude it
     import tempfile
