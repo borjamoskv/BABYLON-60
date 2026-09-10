@@ -68,3 +68,54 @@ pub fn run_abft_subscriber_poc(service_name_str: &str) -> Result<(), Box<dyn std
 
     Ok(())
 }
+
+use crate::exergy_binary_ipc::ExergyPacket;
+
+#[derive(Debug)]
+#[repr(C)]
+pub struct IpcEnvelope {
+    pub len: usize,
+    pub data: [u8; 8192],
+}
+
+pub fn publish_exergy_packet(service_name_str: &str, packet: &ExergyPacket) -> Result<(), Box<dyn std::error::Error>> {
+    let service_name = ServiceName::new(service_name_str)?;
+    let service = zero_copy::Service::new(&service_name)
+        .publish_subscribe()
+        .open_or_create::<IpcEnvelope>()?;
+
+    let publisher = service.publisher().create()?;
+    let packed = packet.pack()?;
+    if packed.len() > 8192 {
+        return Err("Payload exceeds 8192 bytes fixed envelope".into());
+    }
+    
+    let mut env = IpcEnvelope {
+        len: packed.len(),
+        data: [0; 8192],
+    };
+    env.data[..packed.len()].copy_from_slice(&packed);
+    
+    let sample = publisher.loan_uninit()?;
+    let sample = sample.write_payload(env);
+    
+    sample.send()?;
+    
+    Ok(())
+}
+
+pub fn subscribe_exergy_packet(service_name_str: &str) -> Result<Option<ExergyPacket>, Box<dyn std::error::Error>> {
+    let service_name = ServiceName::new(service_name_str)?;
+    let service = zero_copy::Service::new(&service_name)
+        .publish_subscribe()
+        .open_or_create::<IpcEnvelope>()?;
+
+    let subscriber = service.subscriber().create()?;
+    
+    if let Some(sample) = subscriber.receive()? {
+        let env = &*sample;
+        let unpacked = ExergyPacket::unpack(&env.data[..env.len])?;
+        return Ok(Some(unpacked));
+    }
+    Ok(None)
+}
