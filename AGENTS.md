@@ -43,3 +43,13 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 
 - **Sandboxing de Terminales:** Al implementar barreras causales biométricas (`LocalAuthentication` / TouchID) en macOS mediante binarios C-ABI o Swift, el agente DEBE saber que ejecutar el binario desde la terminal integrada de VS Code u otros editores sandboxeados bloqueará silenciosamente el sensor dactilar.
 - **Topología Obligatoria:** Para garantizar el despliegue nativo del modal de TouchID sin bloqueos, la invocación de `c5_biometric_gate` (o equivalentes) debe provenir de un *daemon* en segundo plano, un servidor LSP independiente (LSP Paracortex) o un túnel asíncrono del Agente con privilegios globales sobre el WindowServer.
+
+## 🧠 Límite Epistémico y Estado del Kernel (C5-REAL v4.3)
+
+- **Línea Base Estructural:** Todo agente que opere sobre BABYLON-60 debe asumir el estado consolidado del grafo epistémico (v4.3): **65 Invariantes activos, 35 vacantes y 5 teoremas derivados (ej. Teorema de Landauer)**.
+- **Falsación Continua:** No se deben añadir nuevos "nodos" u opciones por el simple hecho de acumular features. La propiedad más crítica de este sistema es que **muere bien** (falla de forma determinista y predecible). Si un cambio añade complejidad sin poder ser falsado, debe ser rechazado.
+
+## 🏢 Topología de Despliegue Corporativo (Cero-Anergía)
+
+- **Invariante Clone & Run:** La instalación de BABYLON-60 en servidores empresariales o entornos locales de terceros no puede depender de fricciones burocráticas como la inyección manual de variables de entorno globales (`export BABYLON_HOME=...`).
+- **Soberanía del Repositorio:** El sistema debe resolver sus dependencias topológicas internamente (`cwd` o directorios relativos en `.cortex/`). Los *fallbacks* automáticos que deleguen la configuración al usuario final son considerados **anergía** y deben ser purgados.
