@@ -456,7 +456,7 @@
           </div>
           <p class="desc">Cada inferencia, embedding, prompt y acción se encadena criptográficamente en un SQLite WAL local. Cualquier manipulación retroactiva rompe la cadena y es detectable matemáticamente en O(N).</p>
           <ul class="bullet-list">
-            <li>Append-only garantizado por hardware</li>
+            <li>Append-only garantizado por hash-chaining criptográfico (anclaje en hardware: roadmap)</li>
             <li>No requiere gas de blockchain público</li>
             <li>Atestación externa vía Git Sentinel</li>
           </ul>
@@ -525,9 +525,9 @@
         <div class="card">
           <h3 class="card-title" style="margin-bottom: 16px;">Formal Verification & Rigor</h3>
           <ul class="bullet-list" style="margin-bottom: 20px;">
-            <li><strong>Verificación en Lean 4:</strong> Invariantes de seguridad probados formalmente con certeza matemática absoluta (<code>sorry = 0</code>).</li>
-            <li><strong>Robustez Anti-Mutaciones:</strong> 26 pipelines CI/CD con mutation testing (<code>cargo-mutants</code>) alcanzando un <strong>&gt;90% de muerte de mutantes</strong>.</li>
-            <li><strong>Zero Knowledge Proofs:</strong> Módulo <code>nul-zk</code> para demostrar el cumplimiento de políticas sin revelar datos confidenciales.</li>
+            <li><strong>Especificación formal en Lean 4:</strong> Invariantes de seguridad formalizados (<code>sorry = 0</code>; los invariantes clave se enuncian como axiomas explícitos — pruebas completas en progreso).</li>
+            <li><strong>Robustez Anti-Mutaciones:</strong> Pipelines CI/CD con SAST/DAST; mutation testing con <code>cargo-mutants</code> (<strong>integración en CI planificada</strong>).</li>
+            <li><strong>Zero Knowledge (PoC):</strong> Módulo <code>nul-zk</code> que compila circuitos ZK a Rust/Arkworks — integración completa en roadmap.</li>
           </ul>
           <div class="code-block">
 // Recibo de Parada Criptográfico (COSE_Sign1)
@@ -608,12 +608,12 @@
         <div class="card">
           <div class="highlight-stat" style="color: var(--cyan);">100%</div>
           <div class="stat-sub">Monorepo Operativo</div>
-          <p class="desc" style="margin-top: 10px;">Crates en Rust (<code>babylon60-kernel</code>, <code>strike-rs</code>, <code>cortex-guard</code>), paquete Python y pruebas Lean 4 completamente operativas.</p>
+          <p class="desc" style="margin-top: 10px;">Crates en Rust (<code>babylon60-kernel</code>, <code>strike-rs</code>, <code>cortex-guard</code>), paquete Python y especificación formal en Lean 4.</p>
         </div>
         <div class="card">
-          <div class="highlight-stat" style="color: var(--green);">30+</div>
-          <div class="stat-sub">Pruebas Formales Lean 4</div>
-          <p class="desc" style="margin-top: 10px;">Invariantes de integridad de estado probados por máquina en <code>/proof/lean</code> sin conjeturas ni código muerto.</p>
+          <div class="highlight-stat" style="color: var(--green);">Lean 4</div>
+          <div class="stat-sub">Especificación Formal</div>
+          <p class="desc" style="margin-top: 10px;">Invariantes de integridad de estado formalizados en <code>/proof/lean</code> (sin <code>sorry</code>; axiomas explícitos — pruebas completas en progreso).</p>
         </div>
         <div class="card">
           <div class="highlight-stat" style="color: var(--amber);">O(1)</div>
