@@ -237,7 +237,7 @@ impl SwarmHypervisor {
 }
 
 /// Spawn Turing-castrated, event-driven writer daemon (INV_C5_TURING_CASTRATION & INV_C5_ABFT_IPC)
-pub fn spawn_writer_daemon(service_name_str: &str, stop_signal: Arc<AtomicBool>, max_events: Option<usize>) -> thread::JoinHandle<()> {
+pub fn spawn_writer_daemon(hypervisor: Arc<SwarmHypervisor>, service_name_str: &str, stop_signal: Arc<AtomicBool>, max_events: Option<usize>) -> thread::JoinHandle<()> {
     let service_name_str = service_name_str.to_string();
     thread::spawn(move || {
         let service_name = match ServiceName::new(&service_name_str) {
@@ -269,8 +269,24 @@ pub fn spawn_writer_daemon(service_name_str: &str, stop_signal: Arc<AtomicBool>,
                 Ok(Some(sample)) => {
                     let env = &*sample;
                     if let Ok(unpacked) = ExergyPacket::unpack(&env.data[..env.len]) {
-                        // We successfully unpacked an ExergyPacket from Python!
-                        let _seq = unpacked.lamport_t;
+                        let tenant_id = &unpacked.sender;
+                        let seq = unpacked.lamport_t;
+                        
+                        // 1. Ingest event into the concurrent DashMap
+                        // For the PoC, we register the tenant if it doesn't exist, using a dummy pubkey
+                        if !hypervisor.tenants.contains_key(tenant_id) {
+                            let mut csprng = rand::rngs::OsRng;
+                            let signing_key = ed25519_dalek::SigningKey::generate(&mut csprng);
+                            hypervisor.register_tenant(tenant_id, 1024 * 1024, signing_key.verifying_key());
+                        }
+
+                        // 2. Here we would compute the 1-WL hash if we had a graph delta in the payload
+                        // For now we just update the tenant's last sequence number
+                        if let Some(mut t) = hypervisor.tenants.get_mut(tenant_id) {
+                            // Example mutation (in a real scenario, update the BFT state tree)
+                            t.created_at_ms = seq;
+                        }
+
                         processed += 1;
                     }
                 }

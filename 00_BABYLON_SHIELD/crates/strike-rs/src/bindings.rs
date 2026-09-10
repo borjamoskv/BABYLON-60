@@ -178,7 +178,7 @@ impl AgencyHypervisor {
     #[staticmethod]
     pub fn start_writer_daemon(service_name: &str, _db_path: &str) -> PyResult<()> {
         let stop_signal = std::sync::Arc::new(std::sync::atomic::AtomicBool::new(false));
-        spawn_writer_daemon(service_name, stop_signal, None);
+        spawn_writer_daemon(std::sync::Arc::new(crate::hypervisor::SwarmHypervisor::new()), service_name, stop_signal, None);
         Ok(())
     }
 }
