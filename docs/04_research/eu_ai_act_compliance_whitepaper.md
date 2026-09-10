@@ -43,7 +43,7 @@ Si el agente falla, entra en bucles de limerencia o sufre un intento de inyecci�
 ## 2. EL MURO REGULATORIO: EL FIN DE LOS AGENTES OPACOS
 
 ### 2.1 El Coste de la Opacidad
-Bajo el **EU AI Act (Reglamento UE 2024/1689)**, desplegar un sistema de IA de alto riesgo sin trazabilidad ni gobernanza conlleva multas administrativas de hasta **€35.000.000 o el 7% de la facturación global anual** de la empresa (lo que sea mayor).
+Bajo el **EU AI Act (Reglamento UE 2024/1689)**, desplegar un sistema de IA de alto riesgo sin trazabilidad ni gobernanza conlleva multas administrativas de hasta **€15.000.000 o el 3% de la facturación global anual** de la empresa (lo que sea mayor) por incumplimiento de las obligaciones aplicables a sistemas de alto riesgo (Art. 99); el tramo superior de **€35.000.000 o el 7%** se reserva a las prácticas prohibidas del Art. 5.
 
 ### 2.2 Comparativa de Enfoques de Gobernanza
 
@@ -178,9 +178,9 @@ El cliente instala el kernel de BABYLON-60 en su propia infraestructura (*on-pre
 
 ### 6.3 Análisis de Retorno de Inversión (ROI)
 
-$$\text{ROI} = \frac{\text{Multa Evitada (hasta 7\% Facturación)} + \text{Coste de Auditoría Ahorrado}}{\text{Licencia Enterprise } \text{CORTEX\_LICENSE\_KEY}}$$
+$$\text{ROI} = \frac{\text{Multa Evitada (hasta 3\% Facturación; 7\% en prácticas prohibidas)} + \text{Coste de Auditoría Ahorrado}}{\text{Licencia Enterprise } \text{CORTEX\_LICENSE\_KEY}}$$
 
-Para una institución financiera con €500M de facturación, el riesgo máximo evitado supera los €35M. El coste de la licencia Enterprise representa una fracción inferior al 1% del riesgo mitigado.
+Para una institución financiera con €500M de facturación, el riesgo máximo evitado por incumplimiento de obligaciones de alto riesgo asciende a €15M (y hasta €35M en el tramo de prácticas prohibidas del Art. 5). El coste de la licencia Enterprise representa una fracción inferior al 1% del riesgo mitigado.
 
 ---
 
