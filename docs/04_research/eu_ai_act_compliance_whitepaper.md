@@ -36,7 +36,7 @@ El despliegue corporativo de Agentes de IA Autónomos en 2026 ha chocado frontal
 BABYLON-60 v4.0 no intenta alterar la aleatoriedad latente del LLM. En su lugar, encapsula el agente dentro de un **Substrato de Ejecución Verificable (Local-First Kernel)** en Rust que impone restricciones termodinámicas, aritmética sexagesimal exacta ($F60$) y verificación formal en Lean 4.
 
 ### 1.3 El Resultado: Inmunidad Legal y "Caja Negra" Aeronáutica
-Si el agente falla, entra en bucles de limerencia o sufre un intento de inyección de prompt, el sistema **no destruye la evidencia ni alucina en silencio**. En su lugar, ejecuta un `CRITICAL HALT` con **Cuarentena Forense WORM (Write Once Read Many)**, congelando el estado y emitiendo un certificado auditable anclado a hardware TPM 2.0 / TEE en menos de 24 horas.
+Si el agente falla, entra en bucles de limerencia o sufre un intento de inyección de prompt, el sistema **no destruye la evidencia ni alucina en silencio**. En su lugar, ejecuta un `CRITICAL HALT` con **Cuarentena Forense WORM (Write Once Read Many)**, congelando el estado y emitiendo un certificado auditable anclado criptográficamente por software (con anclaje a hardware TPM 2.0 / TEE en el roadmap) en menos de 24 horas.
 
 ---
 
@@ -67,14 +67,14 @@ sequenceDiagram
     participant LLM as Agente LLM (Estocástico)
     participant Kernel as b60_kernel (Rust TCB)
     participant Ledger as BFT DAG Ledger (WORM)
-    participant TPM as Hardware TPM 2.0 / Enclave
+    participant TPM as Software Cryptographic Notary
     participant Lean as Proof Engine (Lean 4)
 
     LLM->>Kernel: Propone Transición de Estado (Intent)
     Kernel->>Kernel: Valida Aritmética Sexagesimal F60 & Límite de Exergía
     alt Anomalía o Salto Dissonante Detectado
         Kernel->>Ledger: Emite CRITICAL HALT + Congelamiento Forense WORM
-        Kernel->>TPM: Cryptographic Evidence Lock Quote
+        Kernel->>TPM: Software Evidence Lock Signature
         Kernel-->>LLM: Proceso Interrumpido (Cuarentena <24h)
     else Estado Nominal Causal
         Kernel->>Ledger: Append Event (prev_hash, Lamport_t, signature)
@@ -135,7 +135,7 @@ La documentación técnica exige prueba matemática, no declaraciones de intenci
 > *"Los sistemas de IA de alto riesgo permitirán el registro automático de eventos (logs) a lo largo de su ciclo de vida..."*
 
 - **Exigencia Legal:** Registro automático de eventos durante el funcionamiento del sistema para garantizar trazabilidad.
-- **Solución B60 v4.0:** **Ledger Merkle-Causal + Anclaje Hardware TPM 2.0 / TEE**. Los eventos se encadenan mediante firmas SHA-256 inmutables y se anclan al registro PCR de un chip TPM 2.0 / enclave SGX local. Los administradores del servidor no pueden alterar los registros.
+- **Solución B60 v4.0:** **Ledger Merkle-Causal + Cuarentena WORM por Software**. Los eventos se encadenan mediante firmas BLAKE3/SHA-256 inmutables (anclaje hardware TPM 2.0 / TEE programado en hoja de ruta). Los administradores del servidor no pueden alterar los registros sin romper la cadena de hashes criptográfica.
 
 ### 4.5 Artículo 13: Transparencia y Explicabilidad
 > *"Los sistemas de IA de alto riesgo se diseñarán de modo que su funcionamiento sea suficientemente transparente..."*

@@ -37,7 +37,7 @@ sequenceDiagram
     participant OP as Operatore Agente
     participant B60 as Kernel BABYLON-60
     participant DAG as WORM Merkle-DAG
-    participant TPM as TPM 2.0 Enclave
+    participant TPM as Notario WORM Software
     
     OP->>B60: Richiesta (Clock F60 Sessagesimale)
     B60->>DAG: Validazione Invarianti & Hash Precedente
@@ -74,7 +74,7 @@ graph TD
 | :--- | :--- | :--- |
 | **Radice Globale di Merkle (BLAKE3)** | `025f09ee7e2503247c89e2ab38ac4de95a076172a043de4036b3932bfcb35175` | ISO/IEC 10118-3 |
 | **Impronta Causale del Sistema** | `3012bcbed43a1af38127391abf192b472895cd45381a18bc983754ef1a293847` | Ed25519 / FIPS 186-5 |
-| **Attestazione Hardware Enclave (TPM 2.0 PCR-11)** | `a38b9f12c401e9d84712039ab1847c019d853e192847a192837490a1827364b` | TCG TPM 2.0 Spec |
+| **Firma Crittografica WORM Software** | `a38b9f12c401e9d84712039ab1847c019d853e192847a192837490a1827364b` | BLAKE3 Software Notary |
 | **Ricevuta SCITT (COSE_Sign1 CWT)** | `parse_halt_receipt::HaltReceiptSummary` (Verified) | RFC 9942 / SCITT-22 |
 | **Interfaccia C-ABI FFI Export** | `babylon60_manifest_init`, `babylon60_publish`, `babylon60_read` | POSIX / ISO C11 FFI |
 | **Teorema di Prova Lean 4** | `Babylon60::entelecheia_dynamis_disjoint` | Lean 4.8.0 Verified |

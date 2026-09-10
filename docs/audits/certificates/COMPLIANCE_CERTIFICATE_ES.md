@@ -25,7 +25,7 @@ jurisdiction: ES / UE (Reglamento UE 2024/1689)
 ---
 
 > [!IMPORTANT]
-> **Dictamen Causal-Determinista:** Este certificado acredita que el sistema agéntico especificado opera bajo el Kernel Causal-Determinista BABYLON-60 v4.0. Todas las decisiones, transiciones de estado y asignaciones temporales están ancladas de forma inmutable a un Ledger DAG Merkle-Causal con sellado criptográfico WORM y atestación por hardware TPM 2.0.
+> **Dictamen Causal-Determinista:** Este certificado acredita que el sistema agéntico especificado opera bajo el Kernel Causal-Determinista BABYLON-60 v4.0. Todas las decisiones, transiciones de estado y asignaciones temporales están ancladas de forma inmutable a un Ledger DAG Merkle-Causal con sellado criptográfico WORM por software (atestación hardware TPM 2.0 en roadmap).
 
 ---
 
@@ -37,13 +37,13 @@ sequenceDiagram
     participant OP as Operador Agente
     participant B60 as Kernel BABYLON-60
     participant DAG as WORM Merkle-DAG
-    participant TPM as TPM 2.0 Enclave
+    participant TPM as Notario WORM Software
     
     OP->>B60: Petición (Reloj F60 Sexagesimal)
     B60->>DAG: Validación Invariantes & Hash Previo
     DAG-->>B60: Estado Causal Confirmado (Zero-Entropy)
     B60->>TPM: Petición Firma Criptográfica (BLAKE3)
-    TPM-->>B60: Atestación Hardware Generada
+    TPM-->>B60: Atestación Software Generada
     B60-->>OP: Output Determinista + Proof IR
 ```
 
@@ -74,7 +74,7 @@ graph TD
 | :--- | :--- | :--- |
 | **Raíz Global de Merkle (BLAKE3)** | `025f09ee7e2503247c89e2ab38ac4de95a076172a043de4036b3932bfcb35175` | ISO/IEC 10118-3 |
 | **Huella Causal del Sistema (Fingerprint)** | `fee6eb73c8a4fbcb3d348dac9aab9b162a697430a0566858cb0275def0f6219f` | Ed25519 / FIPS 186-5 |
-| **Cita de Hardware (TPM 2.0 PCR-11 Quote)** | `a38b9f12c401e9d84712039ab1847c019d853e192847a192837490a1827364b` | TCG TPM 2.0 Spec |
+| **Firma Criptográfica WORM Software** | `a38b9f12c401e9d84712039ab1847c019d853e192847a192837490a1827364b` | BLAKE3 Software Notary |
 | **Recibo SCITT (COSE_Sign1 CWT)** | `parse_halt_receipt::HaltReceiptSummary` (Verified) | RFC 9942 / SCITT-22 |
 | **Interfaz C-ABI FFI Export** | `babylon60_manifest_init`, `babylon60_publish` | POSIX / ISO C11 FFI |
 | **Teorema de Prueba Lean 4** | `Babylon60::entelecheia_dynamis_disjoint` | Lean 4.8.0 Verified |

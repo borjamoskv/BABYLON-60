@@ -40,7 +40,7 @@ graph TD
     Kernel -->|Art. 14 Oversight| Tonnetz[Tonnetz Neo-Riemannian Oversight]
     
     Receipt -->|Notarization| EVM[EVM Merkle Anchor - Solidity]
-    Receipt -->|Attestation| TPM[TPM 2.0 PCR Quote Notary]
+    Receipt -->|Attestation| WORM[Software WORM Notary]
 ```
 
 ---
@@ -77,7 +77,7 @@ BABYLON-60 abandons hardware-dependent physical intuition to embrace a category-
 | `[UI]` | **Web Telemetry UI** | [`web/`](../apps/web/) | React 18 + WASM Causal Telemetry visualizer & FSA API mount. |
 | `[Oversight]` | **Tonnetz Human Oversight**| [`tonnetz_app/`](../apps/tonnetz_app/) | Neo-Riemannian toric harmonic graph visualizer (EU AI Act Art. 14). |
 | `[Persistence]`| **Cortex Substrate** | [`cortex/`](../packages/cortex/) | Python memory persistence (`cortex-persist`), SQLite WAL, MCP Server. |
-| `[Attestation]`| **Causal Attestation** | [`attestation/`](../packages/babylon60/attestation/) | Hardware TPM 2.0 PCR Quote anchoring & P2P notary verification. |
+| `[Attestation]`| **Causal Attestation** | [`attestation/`](../packages/babylon60/attestation/) | Software WORM causal anchoring & P2P notary verification. (TPM Roadmap) |
 | `[Compiler]` | **DSL Compiler** | [`compiler/`](../packages/babylon60/compiler/) | `.b60` DSL lexer/parser, B60 bytecode IR, Lean 4 proof emitter. |
 | `[IPC]` | **Strike RS Engine** | [`strike_rs/`](../crates/strike-rs/) | PyO3 native GIL bypass, Iceoryx2 shared memory, BLAKE3 taint graph. |
 | `[BFT]` | **Master Ledger BFT** | [`babylon60/bft/`](../packages/babylon60/bft/) | Escalón 3 Tamper-Evident log with Git Sentinel external witness. |

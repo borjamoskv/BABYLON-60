@@ -37,7 +37,7 @@ sequenceDiagram
     participant OP as Opérateur de l'Agent
     participant B60 as Noyau BABYLON-60
     participant DAG as WORM Merkle-DAG
-    participant TPM as TPM 2.0 Enclave
+    participant TPM as Notario WORM Software
     
     OP->>B60: Requête (Horloge Sexagésimale F60)
     B60->>DAG: Validation des Invariants & Hash Précédent
@@ -74,7 +74,7 @@ graph TD
 | :--- | :--- | :--- |
 | **Racine Globale de Merkle (BLAKE3)** | `025f09ee7e2503247c89e2ab38ac4de95a076172a043de4036b3932bfcb35175` | ISO/IEC 10118-3 |
 | **Empreinte Causale du Système** | `cc946052faebca5d302f9dd7e60efa49ffd627c99bdcee7072fa0bd188492190` | Ed25519 / FIPS 186-5 |
-| **Attestation de l'Enclave Matérielle (TPM 2.0 PCR-11)** | `a38b9f12c401e9d84712039ab1847c019d853e192847a192837490a1827364b` | TCG TPM 2.0 Spec |
+| **Signature Cryptographique WORM Logicielle** | `a38b9f12c401e9d84712039ab1847c019d853e192847a192837490a1827364b` | BLAKE3 Software Notary |
 | **Reçu SCITT (COSE_Sign1 CWT)** | `parse_halt_receipt::HaltReceiptSummary` (Verified) | RFC 9942 / SCITT-22 |
 | **Interface FFI d'Exportation C-ABI** | `babylon60_manifest_init`, `babylon60_publish` | POSIX / ISO C11 FFI |
 | **Théorème de Preuve Lean 4** | `Babylon60::entelecheia_dynamis_disjoint` | Lean 4.8.0 Verified |

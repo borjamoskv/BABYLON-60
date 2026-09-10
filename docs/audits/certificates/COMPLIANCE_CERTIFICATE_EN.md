@@ -25,7 +25,7 @@ jurisdiction: Global / EU / USA / UK
 ---
 
 > [!IMPORTANT]
-> **Causal-Determinist Finding:** This certificate attests that the specified agentic system executes within the BABYLON-60 v4.0 Causal-Determinist Kernel. All state transitions, memory allocations, and temporal operations are cryptographically anchored to an immutable Merkle-Causal DAG Ledger with hardware non-repudiation (TPM 2.0 PCR Quote).
+> **Causal-Determinist Finding:** This certificate attests that the specified agentic system executes within the BABYLON-60 v4.0 Causal-Determinist Kernel. All state transitions, memory allocations, and temporal operations are cryptographically anchored to an immutable Merkle-Causal DAG Ledger with software WORM non-repudiation (TPM 2.0 hardware anchoring on roadmap).
 
 ---
 
@@ -37,13 +37,13 @@ sequenceDiagram
     participant OP as Agent Operator
     participant B60 as BABYLON-60 Kernel
     participant DAG as WORM Merkle-DAG
-    participant TPM as TPM 2.0 Enclave
+    participant TPM as Software WORM Notary
     
     OP->>B60: Request (Sexagesimal F60 Clock)
     B60->>DAG: Validate Invariants & Previous Hash
     DAG-->>B60: Causal State Confirmed (Zero-Entropy)
     B60->>TPM: Cryptographic Signature Request (BLAKE3)
-    TPM-->>B60: Hardware Attestation Generated
+    TPM-->>B60: Software Attestation Generated
     B60-->>OP: Deterministic Output + Proof IR
 ```
 
@@ -74,7 +74,7 @@ graph TD
 | :--- | :--- | :--- |
 | **Global Merkle Root (BLAKE3)** | `025f09ee7e2503247c89e2ab38ac4de95a076172a043de4036b3932bfcb35175` | ISO/IEC 10118-3 |
 | **System Causal Fingerprint** | `fee6eb73c8a4fbcb3d348dac9aab9b162a697430a0566858cb0275def0f6219f` | Ed25519 / FIPS 186-5 |
-| **Hardware Enclave Quote (TPM 2.0 PCR-11)** | `a38b9f12c401e9d84712039ab1847c019d853e192847a192837490a1827364b` | TCG TPM 2.0 Spec |
+| **Software WORM Cryptographic Signature** | `a38b9f12c401e9d84712039ab1847c019d853e192847a192837490a1827364b` | BLAKE3 Software Notary |
 | **SCITT Receipt (COSE_Sign1 CWT)** | `parse_halt_receipt::HaltReceiptSummary` (Verified) | RFC 9942 / SCITT-22 |
 | **C-ABI FFI Export Interface** | `babylon60_manifest_init`, `babylon60_publish` | POSIX / ISO C11 FFI |
 | **Lean 4 Proof Theorem** | `Babylon60::entelecheia_dynamis_disjoint` | Lean 4.8.0 Verified |

@@ -37,13 +37,13 @@ sequenceDiagram
     participant OP as Agenten-Operator
     participant B60 as BABYLON-60 Kernel
     participant DAG as WORM Merkle-DAG
-    participant TPM as TPM 2.0 Enclave
+    participant TPM as Notario WORM Software
     
     OP->>B60: Anfrage (Sexagesimaler F60-Takt)
     B60->>DAG: Invarianten-Validierung & Vorheriger Hash
     DAG-->>B60: Kausaler Zustand Bestätigt (Zero-Entropy)
     B60->>TPM: Anforderung Kryptografische Signatur (BLAKE3)
-    TPM-->>B60: Hardware-Attestierung Generiert
+    TPM-->>B60: Software-Attestierung Generiert
     B60-->>OP: Deterministische Ausgabe + Proof IR
 ```
 
@@ -74,7 +74,7 @@ graph TD
 | :--- | :--- | :--- |
 | **Globale Merkle-Wurzel (BLAKE3)** | `025f09ee7e2503247c89e2ab38ac4de95a076172a043de4036b3932bfcb35175` | ISO/IEC 10118-3 |
 | **Kausaler System-Fingerabdruck** | `6893afb0dcb9a16306775b01a5f7acef858f3b802fca9e7ab5371b17fa921b49` | Ed25519 / FIPS 186-5 |
-| **Hardware-Enklaven-Nachweis (TPM 2.0 PCR-11)** | `a38b9f12c401e9d84712039ab1847c019d853e192847a192837490a1827364b` | TCG TPM 2.0 Spec |
+| **Kryptografische WORM-Softwaresignatur** | `a38b9f12c401e9d84712039ab1847c019d853e192847a192837490a1827364b` | BLAKE3 Software Notary |
 | **SCITT Beleg (COSE_Sign1 CWT)** | `parse_halt_receipt::HaltReceiptSummary` (Verified) | RFC 9942 / SCITT-22 |
 | **C-ABI FFI Export Interface** | `babylon60_manifest_init`, `babylon60_publish` | POSIX / ISO C11 FFI |
 | **Lean 4 Beweis-Theorem** | `Babylon60::entelecheia_dynamis_disjoint` | Lean 4.8.0 Verified |

@@ -27,7 +27,7 @@ Before deploying the BABYLON-60 sidecar container, ensure your environment meets
 - **Hardware:** 1 vCPU, 512MB RAM (Kernel is the lightweight Rust `moskv-1-apex` binary)
 - **Permissions:** Read-only access to agent execution logs / gRPC stream
 - **Handoff:** Python bridge delegating to Rust Kernel via zero-overhead `os.execv` (optional `pyo3` integration available)
-- **Hardware Enclave (Optional):** TPM 2.0 device mapped at `/dev/tpmrm0` for hardware PCR quotes
+- **Hardware Enclave:** Hardware TPM 2.0 integration is currently on the roadmap (software cryptographic notary active by default).
 
 ---
 
@@ -56,8 +56,8 @@ services:
       - B60_WORM_QUARANTINE_PATH=/var/log/b60_quarantine
     volumes:
       - b60_audit_data:/var/log/b60_quarantine
-    devices:
-      - "/dev/tpmrm0:/dev/tpmrm0" # Optional TPM 2.0 mapping
+    # devices:
+    #   - "/dev/tpmrm0:/dev/tpmrm0" # Roadmap: Future TPM 2.0 hardware anchoring
 
 volumes:
   b60_audit_data:
