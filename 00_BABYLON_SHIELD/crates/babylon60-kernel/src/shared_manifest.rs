@@ -103,6 +103,15 @@ impl SharedManifest {
     /// Envenena el estado del IPC y emite una atestación criptográfica firmada.
     #[inline(always)]
     pub fn epistemic_halt(&self, secret_key_bytes: &[u8; 32]) -> crate::scitt::ScittReceipt {
+        // [C5-REAL] Si ya está envenenado, retornar de forma inmediata en O(1) evitando re-firmar
+        if self.status_flag.load(Ordering::Acquire) == POISONED {
+            let epoch = self.epoch_id.load(Ordering::Relaxed);
+            return crate::scitt::ScittReceipt {
+                epoch_halted: epoch,
+                signature: [0u8; 64],
+            };
+        }
+
         // Envenenamiento termodinámico irreversible
         self.status_flag.store(POISONED, Ordering::SeqCst);
         self.seq.fetch_add(1, Ordering::SeqCst);

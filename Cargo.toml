@@ -82,3 +82,7 @@ path = "src/bin/babylon60_kernel.rs"
 name = "tpm_worm_poc"
 path = "src/bin/tpm_worm_poc.rs"
 required-features = ["cortex-persist"]
+
+[[bin]]
+name = "poc_stress_manifest_spmc"
+path = "src/bin/poc_stress_manifest_spmc.rs"

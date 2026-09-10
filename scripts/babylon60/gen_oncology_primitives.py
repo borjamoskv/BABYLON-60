@@ -15,7 +15,7 @@ import json
 import argparse
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parents[2]
 DOCS_PRIMITIVES = REPO_ROOT / "docs" / "02_ontology" / "axiom_oncologia_300_primitivas.md"
 DEFAULT_JSON_OUT = REPO_ROOT / "data" / "oncology_300.json"
 DEFAULT_LEAN_OUT = REPO_ROOT / "docs" / "proof" / "lean" / "OncologyOntology.lean"

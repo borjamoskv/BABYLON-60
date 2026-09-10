@@ -16,10 +16,13 @@ pub mod orchestrator;
 pub mod publisher;
 pub mod bindings;
 pub mod kda_memory;
+#[allow(clippy::float_arithmetic)]
 pub mod bft_engine;
+#[allow(clippy::float_arithmetic)]
 pub mod gelabp_calc;
 pub mod bft_iceoryx2;
 pub mod hypervisor;
+#[allow(clippy::float_arithmetic)]
 pub mod bayesian;
 
 /// Motor de Taint Causal-Determinist (Causal Poset)

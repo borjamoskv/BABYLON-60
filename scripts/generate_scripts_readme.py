@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-
-import logging
-#!/usr/bin/env python3
+from __future__ import annotations
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
@@ -12,7 +10,7 @@ Scans all scripts in scripts/ and builds taxonomy.
 Molded via Autopoiesis (L0) to support Machine-to-Machine JSON output.
 """
 
-from __future__ import annotations
+import logging
 
 import ast
 import json

@@ -97,14 +97,21 @@ import json
 from io import StringIO
 import contextlib
 import resource
+import logging
 
 # Thermodynamic Valve: Memory Constraint (50 MB)
-# macOS may ignore RLIMIT_RSS, so we use RLIMIT_AS (Address Space)
+# macOS restricts RLIMIT_AS differently from Linux, handle gracefully per platform
 MAX_MEM = 50 * 1024 * 1024
 try:
-    resource.setrlimit(resource.RLIMIT_AS, (MAX_MEM, MAX_MEM))
-except Exception as e:
-    logging.error(f'Traza Epistémica Perdida: {e}')
+    if sys.platform != "darwin":
+        resource.setrlimit(resource.RLIMIT_AS, (MAX_MEM, MAX_MEM))
+    else:
+        try:
+            resource.setrlimit(resource.RLIMIT_DATA, (MAX_MEM, MAX_MEM))
+        except (ValueError, OSError, AttributeError) as _err:
+            sys.stderr.write(f"C5-INFO: Darwin RLIMIT_DATA: {_err}\\n")
+except (ValueError, OSError, AttributeError) as _err:
+    sys.stderr.write(f"C5-INFO: RLIMIT_AS: {_err}\\n")
 
 class BoundedStringIO(StringIO):
     def __init__(self, max_bytes=1024 * 1024):

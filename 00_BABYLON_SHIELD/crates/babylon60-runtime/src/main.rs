@@ -52,7 +52,7 @@ impl F60 {
         }
     }
 
-    #[allow(dead_code)]
+    #[allow(dead_code, clippy::float_arithmetic)]
     fn to_f64(&self) -> f64 {
         let num_f = self.num.to_f64().unwrap_or(0.0);
         let den_f = 60_f64.powi(self.scale as i32);

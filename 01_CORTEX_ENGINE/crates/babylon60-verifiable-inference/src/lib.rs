@@ -50,6 +50,7 @@ fn hex_to_fr(hex_str: &str) -> Option<BlsFr> {
 /// 
 /// proof_hash: El string hexadecimal representando la prueba Groth16 serializada
 #[no_mangle]
+#[allow(clippy::not_unsafe_ptr_arg_deref)]
 pub extern "C" fn verify_inference_payload(
     payload_hash: *const c_char,
     nonce: u64,

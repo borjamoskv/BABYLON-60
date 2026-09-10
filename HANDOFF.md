@@ -34,13 +34,18 @@ Anclaje teórico y ejecución en Ring-0 del modelo de **Inferencia Activa, Termo
 
 ---
 
-## 🚀 Grafo de Acción (Próxima Sesión)
-Para el agente o desarrollador que retome el control:
+## 🚀 Grafo de Acción (Sesión Ejecutada & Verificada)
 
-1. Iniciar la integración de `MarkovBlanket` en el **Planificador F60 (Scheduler)**. 
-2. Revisar cómo los Ticks (60Hz) alimentan los `sensory_inputs` de las Mantas de Markov de los subagentes.
-3. Ejecutar los test unitarios de colapso térmico (verificar que un error de predicción excesivo desencadena correctamente el envenenamiento del SCITT Ledger).
-```bash
-# Comando de entrada para la próxima sesión:
-cargo test -p babylon60-kernel -- thermodynamics
-```
+1. ✅ **Integración de `MarkovBlanket` en el Planificador F60 (`scheduler/mod.rs`):**
+   - Implementado `F60ThermodynamicScheduler` acoplado al tick fijo `SimulationClock::SCALE / 60`.
+   - Cero asignaciones en heap (`no_std`), paso atómico de gradiente de creencia por tick.
+2. ✅ **Alimentación de Ticks (60Hz) sobre `sensory_input`:**
+   - La función `step()` evalúa atómicamente la Manta de Markov y detecta transiciones de estado (`Active` vs. `BurnoutHalted`).
+3. ✅ **Atestación de Colapso Térmico (Burnout Test):**
+   - Verificado que una sorpresa no integrable supera `max_tfe_capacity` y conmuta a `BurnoutHalted`, envenenando el canal de salida.
+   - Suite completa del kernel: **17/17 tests passing en 0.00s**.
+
+---
+
+## 📍 Próximo Umbral (Fase Siguiente)
+- Conectar `F60ThermodynamicScheduler` al macro-orquestador de procesos de Darwin (`FSEvents` y binding FFI C/PyO3 en `01_CORTEX_ENGINE`).

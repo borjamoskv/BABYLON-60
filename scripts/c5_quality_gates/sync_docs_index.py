@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-
-import logging
-#!/usr/bin/env python3
+from __future__ import annotations
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
@@ -11,7 +9,7 @@ sync_docs_index.py - Autonomous Documentation Indexer & Link Verifier
 Scans all 96+ markdown documents in docs/ and synchronizes docs/00_index.md.
 """
 
-from __future__ import annotations
+import logging
 
 from pathlib import Path
 from typing import Dict, List

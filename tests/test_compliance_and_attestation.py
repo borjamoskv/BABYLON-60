@@ -15,12 +15,27 @@ def test_eu_ai_act_compliance_exporter_locales():
     with pytest.raises(FileNotFoundError):
         exporter_fail.generate_certificate("system_agent_01", "Bank_EU_Operator")
 
+    import json
+    from babylon60.bft.cortex_persist_ledger import CortexPersistLedger, CortexEvent
+
     with tempfile.TemporaryDirectory() as bundle_dir:
+        ledger_file = os.path.join(bundle_dir, "ledger.db")
+        ledger = CortexPersistLedger(ledger_file)
+        event = CortexEvent(
+            agent_id="system_agent_01",
+            event_type="INIT",
+            payload={"action": "audit"},
+            cortex_taint="T0",
+            domain="compliance",
+        )
+        ledger.append_event(event)
+        root = ledger.get_merkle_root()
+
         manifest_path = os.path.join(bundle_dir, "manifest.json")
         with open(manifest_path, "w", encoding="utf-8") as f:
-            f.write('{"global_hash": "a1b2c3d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890"}')
+            json.dump({"global_hash": root, "ledger_path": ledger_file}, f)
 
-        exporter = EUAIActComplianceExporter(artifact_bundle_path=bundle_dir)
+        exporter = EUAIActComplianceExporter(artifact_bundle_path=bundle_dir, ledger_path=ledger_file)
         locales = ["es", "en", "de", "fr", "it"]
         for loc in locales:
             cert = exporter.generate_certificate("system_agent_01", "Bank_EU_Operator", locale=loc)

@@ -49,11 +49,12 @@ BABYLON-60 is a monorepo that provides a **hash-chained, append-only ledger** ba
 │   ├── attestation/  Merkle DAG anchoring                     │
 │   └── compliance_exporter/  EU AI Act certificates           │
 │                                                              │
-│   Rust (src/ + 00_BABYLON_SHIELD/crates/)                    │
+│   Rust (src/ + 00_BABYLON_SHIELD/ + 01_CORTEX_ENGINE/)       │
 │   ├── SharedManifest    64 B lock-free IPC (AArch64/x86)     │
 │   ├── seqlock           SPMC readers, zero RFO               │
 │   ├── halt              Fail-stop + COSE_Sign1 receipts      │
-│   └── thermodynamics    Landauer floor bisimulation           │
+│   ├── thermodynamics    Landauer floor bisimulation          │
+│   └── cortex            Cognitive memory substrate bridge    │
 ├──────────────────────────────────────────────────────────────┤
 │   SQLite WAL Database ($BABYLON_HOME/dbs/)                   │
 └──────────────────────────────────────────────────────────────┘
@@ -164,7 +165,7 @@ uv run babylon60-license verify --key "AcmeCorp:enterprise:..."
 | :--- | :--- | :--- |
 | `BABYLON_HOME` | **Yes** | Root directory for all databases and state. Defaults to nothing — must be set explicitly. |
 | `GEMINI_HOME` | Scripts only | Used by exergy scripts for vault/brain paths. |
-| `BABYLON60_LICENSE_KEY` | Enterprise | Cryptographic license key for commercial use (fallback: `BABYLON60_LICENSE_KEY`). |
+| `BABYLON60_LICENSE_KEY` | Enterprise | Cryptographic license key for commercial use (fallback: `BABYLON60_LICENSE_FILE`). |
 | `BABYLON60_LICENSE_SALT` | Enterprise | Secret HMAC salt for license verification. |
 | `BABYLON60_SIGNING_SEED` | Compliance | 64-hex-char Ed25519 seed for stable certificate signing. If unset, an ephemeral key is generated and flagged in the certificate. |
 

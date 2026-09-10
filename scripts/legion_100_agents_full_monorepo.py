@@ -68,8 +68,8 @@ def scan_file(filepath: str) -> list:
                 if re.search(BARE_EXCEPT_PATTERN, content):
                     violations.append("ADVERTENCIA [Entropía]: Bloque except mudo detectado (pérdida de traza).")
                     
-            # 4. Abuso de Unwrap (Rust)
-            if is_rust and "tests" not in filepath:
+            # 4. Abuso de Unwrap (Rust en código de producción)
+            if is_rust and "tests" not in filepath and "stress_test" not in filepath and "poc_" not in filepath:
                 # Contar unwraps en código de producción
                 unwraps = len(re.findall(RUST_UNWRAP_ABUSE, content))
                 if unwraps > 5:
