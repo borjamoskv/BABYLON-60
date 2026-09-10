@@ -38,7 +38,7 @@ ed25519-dalek = { version = "2.1.1", features = ["rand_core"] }
 rand = "0.8.5"
 
 [features]
-default = ["halt-receipt", "std"]
+default = ["halt-receipt", "std", "cortex-persist"]
 python = ["dep:pyo3"]
 halt-receipt = ["dep:coset", "dep:ciborium"]
 cortex-persist = ["dep:rusqlite", "dep:sha2", "dep:hex"]
@@ -52,7 +52,7 @@ num-bigint = "0.4"
 sha2 = "0.10"
 hex = "0.4"
 ed25519-dalek = { version = "2.1.1", features = ["rand_core"] }
-rand = "0.9.5"
+rand = "0.8.5"
 
 [[test]]
 name = "replay"

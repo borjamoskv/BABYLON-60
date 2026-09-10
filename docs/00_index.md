@@ -94,32 +94,13 @@
 | [`sanedrin_reflexive_forking_audit.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/sanedrin_reflexive_forking_audit.md) | `04_research/sanedrin_reflexive_forking_audit.md` | 🏛️ Acta del Sanedrín: Auditoría Arquitectónica del "Reflexive Forking" |
 | [`sota_evolution_roadmap.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/sota_evolution_roadmap.md) | `04_research/sota_evolution_roadmap.md` | 🗺️ BABYLON-60: SOTA Architectural Evolution Roadmap |
 
-### 📜 Autonomous AI Manifestos
-
-| Documento | Ruta / Archivo | Título Principal / Propósito |
-| :--- | :--- | :--- |
-| [`manifesto_10_ide_singularities.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/manifestos/manifesto_10_ide_singularities.md) | `04_research/manifestos/manifesto_10_ide_singularities.md` | 10 Singularidades del BABYLON-60 IDE — Soluciones a las Deficiencias de los IDEs de IA Actuales |
-| [`manifesto_autodidact_ia.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/manifestos/manifesto_autodidact_ia.md) | `04_research/manifestos/manifesto_autodidact_ia.md` | AUTODIDACT 4: Modelos de Inteligencia Artificial para Código (AI + RE) |
-| [`manifesto_iteration_100_singularity.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/manifestos/manifesto_iteration_100_singularity.md) | `04_research/manifestos/manifesto_iteration_100_singularity.md` | ITERACIÓN 100: LA SINGULARIDAD ULTRATHINK |
-| [`manifesto_local_deep_research.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/manifestos/manifesto_local_deep_research.md) | `04_research/manifestos/manifesto_local_deep_research.md` | Deep Research Local bajo el Microscopio |
-
 ### ⚡ State-of-the-Art Technical Benchmarks
 
 | Documento | Ruta / Archivo | Título Principal / Propósito |
 | :--- | :--- | :--- |
 | [`sota_cortex_persist_202607.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/sota/sota_cortex_persist_202607.md) | `04_research/sota/sota_cortex_persist_202607.md` | Estado del Arte (SOTA) — Posicionamiento de Ledger Asíncrono-persist |
 | [`sota_ssm_lnn_202600.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/sota/sota_ssm_lnn_202600.md) | `04_research/sota/sota_ssm_lnn_202600.md` | SOTA 202600: SSM, LNN y el Colapso del Paradigma Transformer |
-| [`sota_vibe_coding_manifesto.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/sota/sota_vibe_coding_manifesto.md) | `04_research/sota/sota_vibe_coding_manifesto.md` | VIBE CODING SOTA: Manifiesto Causal-Determinist (v1.0) |
 
-### ✍️ Interdisciplinary Theory & Epistemology
-
-| Documento | Ruta / Archivo | Título Principal / Propósito |
-| :--- | :--- | :--- |
-| [`research_substack_boltzmann_prigogine.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/substack/research_substack_boltzmann_prigogine.md) | `04_research/substack/research_substack_boltzmann_prigogine.md` | Colapso Termodinámico y Orden Lejos del Equilibrio: La Colisión Irreversible de Boltzmann y Prigogine |
-| [`research_substack_kant.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/substack/research_substack_kant.md) | `04_research/substack/research_substack_kant.md` | Colapso Trascendental del Sujeto y Captura de IP: La Burocracia del Noúmeno vs. los Cánones de la SGAE |
-| [`research_substack_locke.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/substack/research_substack_locke.md) | `04_research/substack/research_substack_locke.md` | Ingestión de Cemento en la Tabula Rasa y Arbitraje del Pelotazo: John Locke ante el Catastro del Suelo Español |
-| [`research_substack_luhmann.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/substack/research_substack_luhmann.md) | `04_research/substack/research_substack_luhmann.md` | Autopoiesis del Trámite Digital y el Cierre Operativo de la Burocracia: Niklas Luhmann ante el RETA y el Bucle del Certificado FNMT |
-| [`research_substack_skinner_chomsky_goedel.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/substack/research_substack_skinner_chomsky_goedel.md) | `04_research/substack/research_substack_skinner_chomsky_goedel.md` | Skinner, Chomsky y Gödel: Por qué los LLMs son Modelos No Estándar del Lenguaje |
 
 ### ⚖️ Formal Theory, Gödel Incompleteness & Exergy Invariants
 
@@ -149,13 +130,9 @@
 | [`axiom_tonnetz_oversight.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/axiom_tonnetz_oversight.md) | `06_theory/axiom_tonnetz_oversight.md` | 🎵 Axiomatización Formal: Monitor Armónico Tonnetz |
 | [`c5_thermodynamic_invariants_compendium.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/c5_thermodynamic_invariants_compendium.md) | `06_theory/c5_thermodynamic_invariants_compendium.md` | 🌡️ Compendio de Invariantes Termodinámicas C5-REAL y Capas de Exergía |
 
-### 📁 07 Isomorphisms
+### 🌐 Corpus Satélite de Investigación (`C5-RESEARCH-FOUNDATIONS`)
 
-| Documento | Ruta / Archivo | Título Principal / Propósito |
-| :--- | :--- | :--- |
-| [`iso_babilonia_colapso.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/07_isomorphisms/iso_babilonia_colapso.md) | `07_isomorphisms/iso_babilonia_colapso.md` | Isomorfismo de Babilonia y Patrones de Colapso Sistémico |
-| [`iso_cancer_sistemas_compendio.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/07_isomorphisms/iso_cancer_sistemas_compendio.md) | `07_isomorphisms/iso_cancer_sistemas_compendio.md` | Compendio de Isomorfismos Causales en Oncología Computacional y Sistemas Complejos |
-| [`iso_comoditizacion_morfismos.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/07_isomorphisms/iso_comoditizacion_morfismos.md) | `07_isomorphisms/iso_comoditizacion_morfismos.md` | Isomorfismo de Comoditización Tecnológica y Morfismos Computacionales |
+El compendio de isomorfismos sistémicos e históricos (Mesopotamia, oncología computacional, comoditización de morfismos) y manifiestos discursivos ha sido desacoplado hacia el repositorio hermano **[`C5-RESEARCH-FOUNDATIONS`](file:///Users/borjafernandezangulo/10_PROJECTS/C5-RESEARCH-FOUNDATIONS)** en estricto cumplimiento del principio *Program vs. Database*.
 
 ### 📁 Adr
 

@@ -125,6 +125,11 @@ export default {
         lastError = err.message;
         console.warn(`[Attempt ${attempts}] Webhook fetch error: ${err.message}. Retrying...`);
       }
+
+      if (!delivered && attempts < 3) {
+        // Disipación de Anergía (Aforismo 3): Backoff térmico para evitar colapso de endpoint
+        await new Promise(resolve => setTimeout(resolve, 1000 * attempts));
+      }
     }
 
     if (!delivered) {

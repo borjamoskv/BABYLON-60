@@ -87,7 +87,6 @@ flowchart TD
 | **10** | [Realización Física (B60)](./10_physical_realization.md) | B60 Assembly, completitud de Turing, fuzzing, determinismo de grafos | `fibonacci.b60`, `fuzz_b60.py` | `INV_BFT_04` |
 | **11** | [Monitor Armónico Tonnetz](./axiom_tonnetz_oversight.md) | Sonificación de Entropía, Toro de Tonnetz, EU AI Act | Audio Engine Bi-Modal | `Art. 14 EU AI Act` |
 | **AX** | [Base Axiomática C5-REAL](./AXIOMATIZATION_C5_REAL.md) | Axiomas A1–A4 (Categorías de Markov, Inversión Bayesiana, No-Alucinación) | Motor de Verificación Axiomática | `INV_C5_REAL_A4` |
-| **ESSAY** | [Skinner, Chomsky y Gödel](../04_research/substack/research_substack_skinner_chomsky_goedel.md) | LLMs como modelos no estándar del lenguaje humano | Dinámica Comunitaria e IA | `RULE_HUMO_EVAL_01` |
 
 ---
 

@@ -44,15 +44,11 @@ markdown_extensions:
 nav:
   - Home: README.md
   - Architecture:
-    - Specification: 01_spec/SPECIFICATION.md
+    - Specification: SPECIFICATION.md
     - Threat Model v4.0: 02_ontology/security_threat_model_v4.md
   - Enterprise:
     - Quickstart DevOps: 03_guides/QUICKSTART_ENTERPRISE.md
-    - PoC Term Sheet: 05_gtm/enterprise_poc_agreement_term_sheet.md
   - Compliance (EU AI Act):
     - Whitepaper: 04_research/eu_ai_act_compliance_whitepaper.md
-    - Audit Certificates: audits/
-  - Business & IP:
-    - Pitch Deck: 05_gtm/PITCH_DECK.md
-    - Patent Claims: 05_gtm/PATENT_CLAIMS_DRAFT.md
-  - Theory & Manifestos: 06_theory/
+    - Compliance Framework: 05_compliance_eu_ai_act.md
+  - Theory & Axioms: 06_theory/00_index.md

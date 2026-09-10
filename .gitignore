@@ -2,6 +2,7 @@
 /target
 b60_kernel
 *.egg-info/
+site/
 
 # B60 Programs: track canonical, ignore generated
 fuzz_test_*.b60

@@ -43,3 +43,25 @@ Tras la auditoría de falsación termodinámica, el sistema muta a la versión 6
 - **Compresión Epistémica (PoW Cognitivo):** Validación de *Complejidad de Kolmogorov* para el mensaje de commit cruzado con el diff estructural, purgando el *cheap talk* de los LLMs (Ley de Goodhart).
 - **Aislamiento Termodinámico:** Fijación de hilos (Thread Pinning / Core Affinity) a P-Cores en Apple Silicon para aislar el Seqlock 64B de la preemption del OS Scheduler.
 - **Soberanía Biométrica:** Firma SCITT aislada completamente en el Secure Enclave Processor (TouchID), cero exposición de clave Ed25519 en RAM.
+
+## 8. Protocolo de Soberanía en Cloudflare (Prevención Error 10053)
+**Transición de Secretos Wrangler (Zero-Trust):** Para sustituir una variable de entorno en texto plano (en `wrangler.toml` bajo `[vars]`) por un secreto cifrado, el agente DEBE seguir esta secuencia estricta o colapsará con el *Error 10053*:
+1. Eliminar la variable del `wrangler.toml`.
+2. Ejecutar `npx wrangler deploy` para sincronizar y purgar la caché de variables en el *edge*.
+3. Ejecutar `npx wrangler secret put <KEY>` (vía `stdin`) para inyectar la carga criptográfica definitiva.
+
+## 8. Conformal Aeon Engine (Cosmología Cíclica de Penrose-Landauer)
+- **INV-5 (Ciclo Conforme de Aeones)**: Reemplazar el almacenamiento lineal indefinido por una cosmología cíclica de épocas informacionales ($Aeon_k \to Aeon_{k+1}$).
+- **Rescalado Conforme de la Métrica de Fisher**: Al alcanzar la saturación crítica de entropía informacional ($H(t) \ge H_{\text{crit}}$), aplicar el factor de escala $\tilde{g}_{ij} = \Omega^2(t) \cdot g_{ij}$, compactar el histórico a una raíz Merkle de 32 bytes en Bitcoin OP_RETURN (`INV_C5_15`) y reiniciar la memoria de trabajo a costo de Landauer cero.
+- **Desacople de Impedancia Microarquitectónica**: Sustituir el cuello de botella de disco SQLite WAL ($5\text{ ms}$) por túneles POSIX Shared Memory / Iceoryx2 ($12\text{ ns}$) acoplados directamente al `SharedManifest` de 64 bytes para intercambio de estado inter-agente.
+
+## 9. Motor de Verdad ATMS (de Kleer 1986 en u128 Bitmasks)
+- **Conjeturas vs. Premisas**: Toda salida de agentes estocásticos (LLMs) se clasifica en Nivel 0 de Turing como `Justification::Conjecture` con máscaras de bits `u128`.
+- **Dependency-Directed Backtracking (DDB)**: Aislamiento $O(1)$ de asunciones culpables (*culprit assumptions*) sin rebobinado cronológico destructivo.
+- **Colapso a Premisa**: Requiere atestación física de Nivel 2 (TouchID / Secure Enclave) para cruzar a Ring-0.
+
+## 10. Geometría Causal Discreta & Sheaf Cohomology
+- **Curvatura Forman-Ricci**: $F(e) = 4 - d(u) - d(v) + 3 \cdot \#\text{triangles}(e)$. Valores negativos identifican cuellos de botella termodinámicos en DAGs.
+- **Resistencia Efectiva del Grafo**: $R_{\text{eff}} = N \cdot \operatorname{Tr}(L^\dagger)$ mediante la pseudoinversa de Moore-Penrose del Laplaciano.
+- **Obstrucción de Sheaf Cohomology $H^1$**: Estimada mediante la conectividad algebraica $\lambda_2$ (valor de Fiedler): $\text{Obstruction} \approx e^{-\lambda_2}$. Mide la imposibilidad de colimitar estados locales en verdad global.
+

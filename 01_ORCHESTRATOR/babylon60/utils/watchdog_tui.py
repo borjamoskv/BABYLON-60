@@ -36,12 +36,14 @@ print("  [2] Respaldo 1: Claude Sonnet 4.6 (Fuerza Bruta Lógica)")
 print("  [3] Respaldo 2: Gemini 3.8 Flash (Alta Velocidad)")
 print()
 print(f"{YELLOW}AWAITING OPERATOR INPUT...{RESET}")
-while True:
+awaiting_input = True
+while awaiting_input:
     try:
         ans = input(f"{BOLD}Selecciona vector de resolución [1/2/3] o (Q) para purgar: {RESET}")
         if ans.lower() in ["1", "2", "3", "q"]:
             print(f"\n{RED}Iniciando maniobra termodinámica...{RESET}")
             time.sleep(1)
-            break
+            awaiting_input = False
     except KeyboardInterrupt:
-        break
+        awaiting_input = False
+

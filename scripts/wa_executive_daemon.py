@@ -107,9 +107,8 @@ def main():
     print("[DAEMON ACTIVADO] Moskv-1 vigilando BABYLON-60 | Executive Command...")
     last_row = query_chat_latest()
     last_pk = last_row[0] if last_row else 0
-    print(f"[INICIAL] Último mensaje Z_PK registrado: {last_pk}")
-
-    while True:
+    daemon_running = True
+    while daemon_running:
         time.sleep(1.0)
         row = query_chat_latest()
         if not row:

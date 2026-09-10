@@ -1,36 +1,46 @@
-# Protocolo de Traspaso (Handoff) - BABYLON-60 (Auditoría C5-REAL)
+# HANDOFF C5-REAL: SESIÓN DE CRISTALIZACIÓN TERMODINÁMICA
 
-## 🎯 Objetivo de la Sesión
-Falsación empírica y remediación de la fricción estructural identificada por una auditoría externa (B-1, B-2, B-3 y Colapso Documental). Garantizar la inviolabilidad criptográfica de `CortexPersistLedger`.
+## 🎯 Objetivo
+Anclaje teórico y ejecución en Ring-0 del modelo de **Inferencia Activa, Termodinámica Estocástica y Geometría de la Información** sobre la arquitectura lock-free de BABYLON-60. El sistema ahora exige un peaje termodinámico para cualquier actualización epistémica (evadiendo la ergodicidad y garantizando coste computacional real).
 
-## ✅ Delta Exergético (Trabajo Realizado)
-- **Purgado de B-1 (Veneno de Hash):** Modificado `_build_batch_rows` en `cortex_persist_ledger.py` para no actualizar espuriamente `prev_hash` ante eventos ignorados (duplicados). Los lotes mixtos ahora mantienen un encadenamiento SHA3-256 matemáticamente puro.
-- **Purgado de B-2 (Crash In-Batch):** Introducido `seen_event_ids: set[str]` en el ciclo de vida del lote. Los duplicados intra-lote se descartan en memoria con `DUPLICATE_IGNORED`, eludiendo el `IntegrityError` de SQLite que bloqueaba la máquina de estados.
-- **Purgado de B-3 (Teatro LegalTech):** El `eu_ai_act.py` (EU AI Act Compliance Exporter) ha sido reprogramado. Ahora rechaza expedir certificados "COMPLIANT" para el Artículo 12 a menos que se le provea un `--ledger-db` válido que supere estrictamente `CortexPersistLedger.verify_integrity()`. Sobrescribe el `global_hash` con la verdadera Raíz de Merkle de la DB.
-- **Alineación Epistémica:**
-  - `README_ES.md` y `README.md` corregidos (`ledger.append_event` en lugar de `ledger.append`).
-  - `docs/SPECIFICATION.md` purgado de falsas topologías (refleja la estructura real de `00_BABYLON_SHIELD`, `01_ORCHESTRATOR`, etc.).
-  - `docs/SPECIFICATION.md` y `proof/lean/Babylon.lean` reconocen formalmente el uso de `sorry` como Deuda Técnica (Technical Debt), extinguiendo la afirmación de "0 sorrys".
+---
 
-## 📍 Punto Fijo Ω (Estado de Detención)
-- **Tests Creados:** `scripts/c5_demos/poc_b1_b2.py` y `scripts/c5_demos/poc_b3.py` certifican empíricamente que los exploits B-1, B-2 y B-3 están cerrados.
-- **Estado Global:** La topología base (Ledger) está estabilizada. El flujo LegalTech es criptográficamente riguroso. Ninguna regresión conocida.
+## ✅ Delta Exergético (Avances Verificados)
+1. **Auditoría Termodinámica (SharedManifest & F60 Scheduler):**
+   - Eliminado `f64` de `time.rs` para garantizar Aritmética Determinista de 64 bits en Ring-0.
+   - Purgado `spin_loop` ingenuo del SPMC de `shared_manifest.rs`, inyectando un *Backoff Geométrico Termodinámico* para evitar tormentas de MESI (Fricción).
+2. **Cristalización Ontológica (Motor Autodidact-Ω):** Se generaron 5 cristales sellados (SCITT/SHA3-256) validando el modelo epistémico C5-REAL:
+   - Termodinámica de la Inferencia (Fields et al. / MDPI)
+   - Fenomenología Psicológica (Díaz Olguín / CIPRA)
+   - Límites Gödel-Turing y Agencia (Landgrebe & Smith)
+   - Ruliología y Observadores Acotados (Stephen Wolfram)
+   - Grafos de Factores y CBFE (van de Laar)
+3. **Implementación de la Manta de Markov (Topología en Código):**
+   - Se diseñó el módulo `thermodynamics.rs` acoplado al `SharedManifest` IPC.
+   - Estructura `MarkovBlanket` instanciada con cálculo local de *Gradient Flow*, *Coarse-Graining* (Ruliad) y castigo de *Energía Libre Termodinámica (TFE)* con fail-stop de agotamiento.
 
-## 🧠 Matriz de Gotchas (Lecciones Aprendidas)
-- **Invariante de Hash en Lotes:** Jamás se debe actualizar el puntero temporal de una cadena de bloques si el evento actual no se va a grabar en el sustrato (regla de oro aplicada en B-1).
-- **Zero Trust LegalTech:** Un certificado generado desde metadatos (JSON) es teatro. La verdadera atestación requiere recalcular el DAG en tiempo real desde la DB.
-- **El Mapa vs Territorio:** La fricción generada por falsas APIs en un README tiene un coste termodinámico enorme para nuevos desarrolladores.
+---
 
-## 🚀 Grafo de Acción (Próximos Pasos)
-1. **Auditar Rendimiento del Fix:**
-   ```bash
-   uv run scripts/c5_thermo/stress_100m_bft.py
-   ```
-2. **Revisión de Formalización en Lean 4:** Iniciar la prueba formal real para cerrar la Deuda Técnica del `sorry` en `proof/lean/Babylon.lean` referida al *Prompt Injection Immunity* (Teorema de Confluencia).
-3. **Commit de la Arquitectura C5-REAL:**
-   ```bash
-   git add 01_ORCHESTRATOR/babylon60/bft/cortex_persist_ledger.py
-   git add 01_ORCHESTRATOR/babylon60/compliance_exporter/eu_ai_act.py
-   git add README.md README_ES.md docs/SPECIFICATION.md proof/lean/Babylon.lean
-   git commit -m "[AX-2] TOPOLOGY: Purgados B-1, B-2 y B-3. Sellado criptográfico de CortexPersistLedger y EU AI Act"
-   ```
+## 📍 Punto Fijo $\Omega$ (Estado de Detención)
+- **Topología de Código:** El módulo de `thermodynamics.rs` está inyectado y refactorizado en `/crates/babylon60-kernel/src/`.
+- **Verificación:** `cargo check -p babylon60-kernel` compila exitosamente (`0 errors`).
+- **Restricción Cumplida:** Arquitectura `no_std` preservada, cero asignaciones dinámicas (zero allocations), cero punteros inseguros colapsantes.
+
+---
+
+## 🧠 Matriz de Gotchas (Invariantes C5-REAL de la Sesión)
+- **Isomorfismo de Caché (¡CRÍTICO!):** NUNCA inyectar o combinar las propiedades internas de `MarkovBlanket` directamente dentro del `SharedManifest`. El `SharedManifest` debe pesar *exactamente 64 bytes* (`#[repr(C, align(64))]`) para evitar falsos compartimentos (False Sharing) en la caché L1 del procesador. El `MarkovBlanket` está diseñado para *envolver* referencias (`&'a SharedManifest`) de los canales sensoriales y activos.
+- **Fail-Stop Biológico (Burnout):** Cuando un nodo supera su `max_tfe_capacity` (Intentar aprender en un entorno de alta entropía superando el límite de disipación), el nodo debe ejecutar `epistemic_halt()` sobre su IPC activo para envenenar el canal, emitiendo un Recibo SCITT. **No se debe forzar la simulación o ignorar el panic.**
+
+---
+
+## 🚀 Grafo de Acción (Próxima Sesión)
+Para el agente o desarrollador que retome el control:
+
+1. Iniciar la integración de `MarkovBlanket` en el **Planificador F60 (Scheduler)**. 
+2. Revisar cómo los Ticks (60Hz) alimentan los `sensory_inputs` de las Mantas de Markov de los subagentes.
+3. Ejecutar los test unitarios de colapso térmico (verificar que un error de predicción excesivo desencadena correctamente el envenenamiento del SCITT Ledger).
+```bash
+# Comando de entrada para la próxima sesión:
+cargo test -p babylon60-kernel -- thermodynamics
+```

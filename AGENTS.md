@@ -54,3 +54,12 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 
 - **Invariante Clone & Run:** La instalación de BABYLON-60 en servidores empresariales o entornos locales de terceros no puede depender de fricciones burocráticas como la inyección manual de variables de entorno globales (`export BABYLON_HOME=...`).
 - **Soberanía del Repositorio:** El sistema debe resolver sus dependencias topológicas internamente (`cwd` o directorios relativos en `.cortex/`). Los *fallbacks* automáticos que deleguen la configuración al usuario final son considerados **anergía** y deben ser purgados.
+
+## 🌀 Invariante de Ciclo de Aeones Conformes (INV_C5_AEON)
+
+- **Límite de Acumulación Entrópica**: El ledger de persistencia no debe crecer de forma ilimitada sin compactación. Al detectarse saturación o colapso de dimensionalidad ($\operatorname{RankMe} \le 1.5$), el agente debe disparar la transición conforme: sellar la raíz Merkle en el Sink L1 y reciclar la memoria caliente hacia el siguiente Aeon causal.
+
+## ⚡ Invariante de Desacople de Impedancia (INV_C5_SHM)
+
+- **Prohibición de IO Síncrono en Ruta Caliente**: Queda terminantemente prohibido interponer escrituras a disco síncronas (SQLite WAL `synchronous=FULL`) en el bucle caliente de inferencia o negociación entre agentes. La comunicación inter-agente debe transitar exclusivamente por memoria compartida lock-free (`SharedManifest` 64 B / `Iceoryx2`). SQLite opera únicamente como *Cold Ledger / Archival Sink*.
+
