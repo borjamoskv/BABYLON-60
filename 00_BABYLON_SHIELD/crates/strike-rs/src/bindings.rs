@@ -223,12 +223,35 @@ impl BftWorkerNode {
 }
 
 /// A Python module implemented in Rust.
+
+use crate::bft_iceoryx2::{publish_exergy_packet, subscribe_exergy_packet};
+use crate::exergy_binary_ipc::ExergyPacket;
+use std::collections::BTreeMap;
+use ciborium::Value;
+
+#[pyfunction]
+fn py_publish_exergy_packet(service_name: &str, sender: &str, recipient: &str, lamport_t: u64) -> PyResult<()> {
+    let mut payload = BTreeMap::new();
+    payload.insert("type".to_string(), Value::Text("ping".to_string()));
+    let packet = ExergyPacket {
+        sender: sender.to_string(),
+        recipient: recipient.to_string(),
+        lamport_t,
+        payload,
+    };
+    
+    publish_exergy_packet(service_name, &packet)
+        .map_err(|e| pyo3::exceptions::PyRuntimeError::new_err(e.to_string()))?;
+    Ok(())
+}
+
 #[pymodule]
 fn strike_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<CortexKernel>()?;
     m.add_class::<BftSwarmEngine>()?;
     m.add_class::<AgencyHypervisor>()?;
     m.add_class::<BftWorkerNode>()?;
+    m.add_function(wrap_pyfunction!(py_publish_exergy_packet, m)?)?;
     Ok(())
 }
 
