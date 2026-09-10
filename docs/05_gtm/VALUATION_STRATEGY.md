@@ -14,7 +14,7 @@
 ## 1. Valuation Floor & Base Cap ($8M Pre-Money)
 - **Asset Floor:** Production-tested Rust `#![no_std]` kernel with Lean 4 axiomatic specification, sexagesimal $F_{60}$ arithmetic IP.
 - **Defensibility:** Hash-chained append-only ledger with cryptographic integrity verification prevents retroactive tampering of causal logging.
-- **Comparative Baseline:** Pre-revenue infrastructure security startups in EU-27 seed at €6M - €10M.
+- **Comparative Baseline:** Pre-revenue infrastructure security startups in EU-27 seed at €6M - €10M (internal comparable-based estimate).
 
 ---
 
@@ -26,6 +26,8 @@
 | **Phase II (Series A)**| €2.5M - €5M | 15x ARR | **€40M - €75M** | AESIA & BSI certified deployments |
 | **Phase III (Series B)**| €12M - €20M | 12x ARR | **€150M - €250M**| Cross-border EU banking & defense |
 | **Phase IV (Exit)** | €35M+ | 10x - 14x ARR | **€350M - €500M**| Strategic acquisition / Sovereign IPO |
+
+*Revenue multipliers and valuation ranges are comparable-driven planning assumptions (internal estimates), not observed market data.*
 
 ---
 
