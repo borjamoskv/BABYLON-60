@@ -329,4 +329,20 @@ class BFTLedgerActor:
             future.set_exception(exc)
         else:
             seq, entry_hash = tx_res[0]
+            
+            # Broadcast to Rust via Iceoryx2 PyO3 FFI
+            try:
+                import strike_rs
+                strike_rs.py_publish_exergy_packet(
+                    "BABYLON_BFT_LEDGER",
+                    "PYTHON_ORCHESTRATOR",
+                    "RUST_BFT_HYPERVISOR",
+                    seq
+                )
+            except ImportError:
+                pass
+            except Exception as e:
+                import logging
+                logging.warning(f"Failed to publish IPC binary packet via iceoryx2: {e}")
+                
             future.set_result({"seq": seq, "event_id": event_id, "entry_hash": entry_hash})
