@@ -97,3 +97,9 @@ sample_toxic_chat.txt
 scratch/
 archive/
 experiments/
+
+# Límite Topológico del Workspace
+data/
+*.db
+*.sqlite
+
