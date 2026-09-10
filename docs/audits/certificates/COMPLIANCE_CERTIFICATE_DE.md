@@ -25,11 +25,11 @@ jurisdiction: DE / UE (Verordnung EU 2024/1689)
 ---
 
 > [!IMPORTANT]
-> **Kausal-Deterministisches Gutachten:** Dieses Zertifikat bescheinigt, dass das angegebene agentenbasierte System unter dem Kausal-Deterministischen Kernel BABYLON-60 v4.0 ausgeführt wird. Alle Entscheidungen, Zustandsübergänge und zeitlichen Zuordnungen sind kryptografisch unveränderlich in einem Merkle-Kausalen DAG-Ledger mit WORM-Versiegelung und TPM 2.0-Hardware-Zertifizierung verankert.
+> **Kausal-Deterministisches Gutachten:** Dieses Zertifikat bescheinigt, dass das angegebene agentenbasierte System unter dem Kausal-Deterministischen Kernel BABYLON-60 v4.0 ausgeführt wird. Alle Entscheidungen, Zustandsübergänge und zeitlichen Zuordnungen sind kryptografisch unveränderlich in einem Merkle-Kausalen DAG-Ledger mit softwareseitiger WORM-Versiegelung verankert (TPM 2.0-Hardware-Attestierung in der Roadmap).
 
 ---
 
-### Kausaler Audit-Validierungsfluss (Hardware-Enforced)
+### Kausaler Audit-Validierungsfluss (Software-WORM)
 
 ```mermaid
 sequenceDiagram
@@ -37,7 +37,7 @@ sequenceDiagram
     participant OP as Agenten-Operator
     participant B60 as BABYLON-60 Kernel
     participant DAG as WORM Merkle-DAG
-    participant TPM as Notario WORM Software
+    participant TPM as Software-WORM-Notar
     
     OP->>B60: Anfrage (Sexagesimaler F60-Takt)
     B60->>DAG: Invarianten-Validierung & Vorheriger Hash
@@ -90,7 +90,7 @@ graph TD
 | **Art. 9 (Risikomanagement)** | Kontinuierliche Erkennung und Minderung von KI-Risiken. | Thermodynamischer AST-Pruner + Selbstfalsifikations-Engine (Totmannschalter). | ✅ KONFORM | `52099e623249c6ad8f102...` |
 | **Art. 10 (Daten-Governance)** | Rückverfolgbarkeit und vollständige Abstammung (Lineage). | Exakte Sexagesimal-Arithmetik ($F60$) + Unveränderliches DAG Merkle-Kausales WORM-Ledger. | ✅ KONFORM | `5eb25e74d0a0700e19284...` |
 | **Art. 11 (Technische Dokumentation)** | Formaler Konformitätsnachweis vor der Inbetriebnahme. | Automatischer Export von Proof IR zu mechanisch verifizierten Lemmata in Lean 4. | ✅ KONFORM | `9d53c9b5d5aa5d1209384...` |
-| **Art. 12 (Aufbewahrung von Aufzeichnungen)** | Unveränderliche WORM-Aufzeichnung während des gesamten Lebenszyklus. | WORM DAG-Ledger mit monotonem Lamport-Timestamping und Enklaven-Signatur. | ✅ KONFORM | `c65c9ce3bb20634519283...` |
+| **Art. 12 (Aufbewahrung von Aufzeichnungen)** | Unveränderliche WORM-Aufzeichnung während des gesamten Lebenszyklus. | WORM DAG-Ledger mit monotonem Lamport-Timestamping und Software-Signatur (COSE_Sign1). | ✅ KONFORM | `c65c9ce3bb20634519283...` |
 | **Art. 13 (Transparenz)** | Vollständige Erklärbarkeit der Entscheidungsprozesse. | Kausaler Abhängigkeitsgraph exportierbar als JSON-LD (Keine Blackbox). | ✅ KONFORM | `7a88b1928c89102938475...` |
 | **Art. 14 (Menschliche Aufsicht)** | Schnittstelle für das Eingreifen menschlicher Aufsichtspersonen. | Harmonische Neo-Riemannsche Tonnetz-Schnittstelle + direktes Einfrieren über `QUARANTINE`. | ✅ KONFORM | `2b1021f201dafbef84719...` |
 | **Art. 14(4) (Not-Aus)** | Sofortiger und sicherer menschlicher Not-Aus-Schalter. | Funktion `babylon60_epistemic_halt` (Deterministischer $O(1)$ Fail-Stop). | ✅ KONFORM | `8f10b23491ca029837419...` |
