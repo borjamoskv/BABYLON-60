@@ -23,7 +23,7 @@ BABYLON-60 is a monorepo that provides a **hash-chained, append-only ledger** ba
 - A **tamper-evident** (not tamper-proof) ledger with hash-chain integrity verification.
 - A **single-writer SQLite/WAL** database with `busy_timeout=5000ms`, `synchronous=FULL`, and `foreign_keys=ON`.
 - A Rust kernel providing a 64-byte lock-free IPC slot (`SharedManifest`) with fail-stop semantics and COSE_Sign1 halt receipts.
-- A compliance exporter that generates audit-ready certificates for EU AI Act supervisory authorities (AESIA, BSI, CNIL).
+- A compliance exporter that generates **Ed25519-signed self-assessment certificates** for EU AI Act supervisory authorities (AESIA, BSI, CNIL) which **re-verify the underlying ledger evidence** before any article is reported as compliant (fail-closed).
 
 ### What It Is Not
 
@@ -66,12 +66,12 @@ BABYLON-60 is a monorepo that provides a **hash-chained, append-only ledger** ba
 | Property | Mechanism | Limitation |
 | :--- | :--- | :--- |
 | **Hash chaining** | Each ledger entry includes a SHA3-256 hash of the previous entry. `verify_integrity()` recomputes and validates the full chain. | Detects tampering *a posteriori*; does not prevent it if the attacker bypasses SQLite. |
-| **Append-only enforcement** | SQLite triggers (`trg_ledger_immutable_update` / `trg_ledger_immutable_delete`) block UPDATE/DELETE at the engine level. | Bypassable by direct filesystem manipulation outside the DB engine. |
-| **Single-writer WAL** | All connections use `PRAGMA journal_mode=WAL` + `busy_timeout=5000` via the centralized connector in [`database/core.py`](./packages/babylon60/database/core.py). | Scripts outside the core package may still use `sqlite3.connect` directly (tracked as technical debt). |
-| **Idempotency** | UUID v5 keys per event prevent duplicate insertion. | Scoped to a single ledger instance. |
+| **Append-only enforcement** | SQLite triggers (`trg_cortex_no_update` / `trg_cortex_no_delete`) block UPDATE/DELETE at the engine level. | Bypassable by direct filesystem manipulation outside the DB engine. |
+| **Single-writer WAL** | All connections use `PRAGMA journal_mode=WAL` + `busy_timeout=5000` via the centralized connector in [`database/core.py`](./01_ORCHESTRATOR/babylon60/database/core.py). | Scripts outside the core package may still use `sqlite3.connect` directly (tracked as technical debt). |
+| **Idempotency** | UUID v5 keys per event prevent duplicate insertion — including duplicates inside a single `append_batch` call and replays of whole batches. | Scoped to a single ledger instance. |
 | **Lamport ordering** | Monotonically increasing Lamport timestamps enforce causal ordering. | Logical clock, not wall-clock; no distributed coordination. |
 | **External witnessing** | Git Sentinel injects `Ledger-Head` and `Ledger-Seq` as commit trailers. CI runners act as independent witnesses. | Requires pushing to a remote; no protection during offline-only operation. |
-| **Crypto agility** | [`hash_registry.py`](./packages/babylon60/crypto/hash_registry.py) allows swapping hash algorithms (SHA-256, SHA3-256, SHA-512, SHA3-512) at startup. | Changing algorithm mid-session breaks the hash chain (by design). |
+| **Crypto agility** | [`hash_registry.py`](./01_ORCHESTRATOR/babylon60/crypto/hash_registry.py) allows swapping hash algorithms (SHA-256, SHA3-256, SHA-512, SHA3-512) at startup. | Changing algorithm mid-session breaks the hash chain (by design). |
 
 ---
 
@@ -125,7 +125,7 @@ event = CortexEvent(
     cortex_taint="session:abc123",
 )
 
-result = ledger.append(event)
+result = ledger.append_event(event)
 # => {"seq": 1, "event_id": "...", "entry_hash": "...", "status": "C5_PERMANENT"}
 
 # Verify the full hash chain
@@ -142,7 +142,12 @@ root = ledger.get_merkle_root()
 uv run babylon60-attest --file attestation_payload.json
 
 # Generate EU AI Act Compliance Certificate (JSON / Markdown / HTML)
-uv run babylon60-compliance --bundle artifact_bundle_v3 --locale es --format html --output cert.html
+# --ledger binds the certificate to real evidence: the exporter re-runs the
+# full hash-chain verification and Merkle-root comparison before any article
+# is reported CONFORME, and signs the certificate with Ed25519.
+uv run babylon60-compliance --bundle artifact_bundle_v3 \
+    --ledger "$BABYLON_HOME/dbs/my_agent_ledger.db" \
+    --locale es --format html --output cert.html
 
 # Manage Enterprise Licenses
 uv run babylon60-license generate --owner "AcmeCorp" --tier enterprise --days 365
@@ -161,6 +166,7 @@ uv run babylon60-license verify --key "AcmeCorp:enterprise:..."
 | `GEMINI_HOME` | Scripts only | Used by exergy scripts for vault/brain paths. |
 | `BABYLON60_LICENSE_KEY` | Enterprise | Cryptographic license key for commercial use (fallback: `BABYLON60_LICENSE_KEY`). |
 | `BABYLON60_LICENSE_SALT` | Enterprise | Secret HMAC salt for license verification. |
+| `BABYLON60_SIGNING_SEED` | Compliance | 64-hex-char Ed25519 seed for stable certificate signing. If unset, an ephemeral key is generated and flagged in the certificate. |
 
 ### Data Location
 
@@ -197,8 +203,8 @@ attestation = ledger.get_state_attestation()
 make check
 
 # Or individually:
-ruff check packages/babylon60 tests
-mypy packages/babylon60 tests --strict --ignore-missing-imports
+ruff check 01_ORCHESTRATOR/babylon60 tests
+mypy 01_ORCHESTRATOR/babylon60 tests --strict --ignore-missing-imports
 ```
 
 ---
@@ -206,7 +212,7 @@ mypy packages/babylon60 tests --strict --ignore-missing-imports
 ## Testing
 
 ```bash
-# Python test suite (377 tests)
+# Python test suite (see CI for the current count)
 export BABYLON_HOME=/tmp/babylon
 uv run pytest tests/ -v
 
@@ -242,10 +248,10 @@ BABYLON-60/
 │   └── services/                 #   Core services
 ├── 02_AGENTS_ARCHI/              # Python Agents
 │   └── agents_archi/             #   Agents configuration and tools
+├── proof/                        # Lean 4 axiomatic sketch (lake build)
 ├── scripts/                      # CLI tools, demos, verifiers
 ├── tests/                        # Python + Rust test suites
 ├── docs/                         # Specifications, whitepapers, guides
-├── experiments/                  # Research prototypes
 └── tools/                        # Attestation tooling
 ```
 
@@ -261,9 +267,10 @@ BABYLON-60/
 
 1. **Tamper-evident, not tamper-proof.** The hash chain detects modifications but cannot prevent an attacker with direct filesystem access from rewriting the database.
 2. **No live distributed consensus.** The BFT module name is aspirational; the current architecture uses single-writer local persistence with external Git witnesses (Escalón 3). Live BFT (Escalón 4) is a future target.
-3. **`except Exception` technical debt.** Several modules in `packages/babylon60/` and `scripts/` use broad exception handlers. These are tracked and being narrowed incrementally.
+3. **`except Exception` technical debt.** Several modules in `01_ORCHESTRATOR/babylon60/` and `scripts/` use broad exception handlers. These are tracked and being narrowed incrementally.
 4. **Direct `sqlite3.connect` in scripts.** Some scripts bypass the centralized `database/core.py` connector. Migration is in progress.
 5. **`BABYLON_HOME` required.** The system will not start without this environment variable — `Path.home()` fallbacks have been removed by policy.
+6. **Two ledger implementations coexist.** The synchronous `CortexPersistLedger` (README quick-start) and the async `BFTLedgerActor` (used by the resilience tests) share semantics but not code. Consolidation is tracked as follow-up work.
 
 ---
 

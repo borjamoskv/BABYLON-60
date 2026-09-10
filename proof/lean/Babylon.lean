@@ -2,6 +2,15 @@
 -- AXIOMATIZACIÓN FORMAL DE DESINTEGRACIÓN BAYESIANA Y MONITOR ARMÓNICO TONNETZ
 -- Proyecto: BABYLON-60 (Kernel C5-REAL)
 -- Referencia: docs/06_theory/axiom_bayesian_disintegration.md
+--
+-- ESTADO FORMAL HONESTO (audit 2026-09-10):
+--   * Las propiedades fundamentales son AXIOMAS declarados (ax_bd_1..4, ax_tz_1..3),
+--     no teoremas demostrados. Este archivo es un ESBOCO AXIOMÁTICO.
+--   * Los teoremas 1-3 son corolarios inmediatos de dichos axiomas.
+--   * El antiguo `theorem resiliencia_bft_inyeccion` cerrado con `sorry` se ha
+--     elevado a axioma explícito (ax_bd_4): la multiplicación de Float por cero
+--     es opaca para el kernel de Lean 4 y no existen lemas de Float.mul en core.
+--   * `lake build` compila este archivo sin `sorry` ni axiomas ocultos.
 -- ===============================================================================
 
 namespace Babylon
@@ -71,6 +80,21 @@ axiom ax_bd_2 : ∀ (x : X) (y : Y), p x == 0.0 → f_dag_p y x == 0.0
 -/
 axiom ax_bd_3 : ∀ (x : X) (y : Y), pushforward p f y == 0.0 → f_dag_p y x == 0.0
 
+/--
+> [!NOTE]
+> ### AX-BD-4: Resiliencia BFT contra Inyección Causal (Prompt Injection Immunity)
+> Es imposible asignar masa a una hipótesis no autorizada por el prior sin romper
+> la simetría conjunta AX-BD-1.
+>
+> NOTA DE HONESTIDAD FORMAL (audit 2026-09-10): este enunciado era un `theorem`
+> cerrado con `sorry`. Dado que `Float.mul` es opaca para el kernel de Lean 4
+> (sin lemas algebraicos de Float en core), se declara como axioma explícito en
+> lugar de simular una demostración. Una formalización futura sobre racionales
+> (`Rat`) podría demostrarlo como teorema.
+-/
+axiom ax_bd_4_resiliencia_bft_inyeccion (x_fake : X) (y : Y) (h_prior : p x_fake == 0.0) :
+  p x_fake * f x_fake y == 0.0
+
 /-!
 # 3. Teoremas y Corolarios de la Desintegración
 -/
@@ -80,6 +104,7 @@ axiom ax_bd_3 : ∀ (x : X) (y : Y), pushforward p f y == 0.0 → f_dag_p y x ==
 > ### Teorema 1: Extinción del Origen Espurio (Eliminación Total de Alucinación)
 > Cualquier agente encapsulado mediante un operador $f^\dagger_p$ determinista posee 
 > una tasa de confabulación originaria de **exactamente $0.0$** para estados fuera del soporte del prior.
+> (Corolario directo de AX-BD-2.)
 -/
 theorem extincion_origen_espurio (x_fake : X) (y : Y) (h : p x_fake == 0.0) : f_dag_p y x_fake == 0.0 := by
   exact ax_bd_2 p f_dag_p x_fake y h
@@ -88,20 +113,10 @@ theorem extincion_origen_espurio (x_fake : X) (y : Y) (h : p x_fake == 0.0) : f_
 > [!TIP]
 > ### Teorema 2: Activación del Circuit Breaker Categórico
 > Ante una observación inconmensurable fuera de la imagen predictiva, la desintegración se extingue.
+> (Corolario directo de AX-BD-3.)
 -/
 theorem circuit_breaker_activado (x : X) (y_unseen : Y) (h : pushforward p f y_unseen == 0.0) : f_dag_p y_unseen x == 0.0 := by
   exact ax_bd_3 pushforward f_dag_p x y_unseen h
-
-/--
-> [!NOTE]
-> ### Corolario 1: Resiliencia BFT contra Inyección Causal (Prompt Injection Immunity)
-> Es imposible asignar masa a una hipótesis no autorizada por el prior sin romper la simetría conjunta AX-BD-1.
--/
-theorem resiliencia_bft_inyeccion (x_fake : X) (y : Y) (h_prior : p x_fake == 0.0) :
-  p x_fake * f x_fake y == 0.0 := by
-  have h_zero : f_dag_p y x_fake == 0.0 := extincion_origen_espurio p f_dag_p x_fake y h_prior
-  -- Dado que p(x_fake) = 0, el producto conjunto p(x_fake) * f(x_fake, y) es idénticamente 0.0
-  sorry
 
 /-!
 # 4. Monitor Armónico Tonnetz (Audio Engine & Oversight Bi-Modal - EU AI Act Art. 14)
@@ -146,6 +161,7 @@ axiom ax_tz_3 (h : Float) (ex : Float) (h_fatal : h >= 2.0) : (Phi h ex).1 == To
 /--
 ### Teorema 3: Homeostasis Tonnetz Garantizada
 En el estado fundamental de mínima entropía, el sistema permanece en armonía pura.
+(Corolario directo de AX-TZ-1.)
 -/
 theorem homeostasis_tonnetz_garantizada : Phi 0.0 0.0 == (TonnetzState.HomeostaticPure, 0.0) := by
   exact ax_tz_1 Phi

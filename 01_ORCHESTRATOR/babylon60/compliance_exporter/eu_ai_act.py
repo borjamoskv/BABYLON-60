@@ -2,6 +2,14 @@
 BABYLON-60 v4.0 Compliance Exporter — Multi-Country & Multi-Locale EU AI Act Audit Generator
 Generates verifiable, cryptographically sealed compliance reports for EU AI Act Articles 9, 10, 11, 12, 14
 localized for target countries/jurisdictions (ES, EN, DE, FR, IT).
+
+FIX B-3 (audit 2026-09-10): the exporter no longer issues CONFORME certificates
+against unverified evidence. When a ledger is supplied (CLI --ledger, constructor
+argument, or "ledger_path" in the manifest), the exporter re-runs the full
+SHA3-256 hash-chain verification and recomputes the Merkle root, compares it
+against the manifest's global_hash, and marks every article UNVERIFIED /
+NON_COMPLIANT when the evidence cannot be verified. Certificates are signed
+with Ed25519 (BABYLON60_SIGNING_SEED env var; ephemeral key otherwise).
 """
 
 import hashlib
@@ -11,6 +19,13 @@ import time
 from typing import Any, Dict, Optional
 from .i18n import get_translation
 
+STATUS_UNVERIFIED = "UNVERIFIED_NO_LEDGER"
+STATUS_MISMATCH = "EVIDENCE_MISMATCH_NON_COMPLIANT"
+
+
+def _canonical_json(data: Any) -> str:
+    return json.dumps(data, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
+
 
 class EUAIActComplianceExporter:
     """
@@ -18,8 +33,9 @@ class EUAIActComplianceExporter:
     into legal compliance certificates for EU AI Act auditing, with localized legal templates.
     """
 
-    def __init__(self, artifact_bundle_path: str = "artifact_bundle_v3"):
+    def __init__(self, artifact_bundle_path: str = "artifact_bundle_v3", ledger_path: Optional[str] = None):
         self.bundle_path = artifact_bundle_path
+        self.ledger_path = ledger_path
 
     @staticmethod
     def redact_sensitive_data(val: Any, key_name: Optional[str] = None) -> Any:
@@ -79,12 +95,129 @@ class EUAIActComplianceExporter:
             )
         return self.redact_sensitive_data(data)
 
-    def generate_certificate(self, system_id: str, operator_name: str, locale: str = "es") -> Dict[str, Any]:
+    # ------------------------------------------------------------------
+    # FIX B-3: real evidence verification (fail-closed)
+    # ------------------------------------------------------------------
+    def verify_evidence(self, manifest: Dict[str, Any], ledger_path: Optional[str] = None) -> Dict[str, Any]:
+        """
+        Re-runs the cryptographic verification of the underlying ledger and binds
+        the certificate to the ACTUAL state of the evidence:
+
+        1. Loads the CortexPersistLedger at ``ledger_path``.
+        2. Recomputes the full SHA3-256 hash chain (``verify_integrity``).
+        3. Recomputes the Merkle root and compares it against the manifest's
+           ``global_hash``.
+
+        The certificate is only eligible for CONFORME/COMPLIANT article statuses
+        when ``verified`` is True. Any failure (missing ledger, broken chain,
+        Merkle mismatch, exception) yields ``verified == False`` and the calling
+        certificate degrades every article to UNVERIFIED / NON_COMPLIANT.
+        """
+        resolved = ledger_path or self.ledger_path or manifest.get("ledger_path")
+        global_hash = manifest.get("global_hash", "UNKNOWN_HASH")
+        result: Dict[str, Any] = {
+            "ledger_path": resolved,
+            "ledger_present": False,
+            "integrity_verified": None,
+            "ledger_merkle_root": None,
+            "manifest_global_hash": global_hash,
+            "evidence_match": None,
+            "verified": False,
+            "detail": STATUS_UNVERIFIED,
+        }
+        if not resolved:
+            return result
+        if not os.path.exists(resolved):
+            result["detail"] = "LEDGER_NOT_FOUND"
+            return result
+
+        try:
+            from ..bft.cortex_persist_ledger import CortexPersistLedger
+        except ImportError:  # pragma: no cover - package-layout fallback
+            from babylon60.bft.cortex_persist_ledger import CortexPersistLedger  # type: ignore
+
+        try:
+            ledger = CortexPersistLedger(resolved)
+            attestation = ledger.get_state_attestation()
+            result["ledger_present"] = True
+            result["integrity_verified"] = bool(attestation["integrity_verified"])
+            result["ledger_merkle_root"] = attestation["merkle_root"]
+            result["ledger_total_entries"] = attestation["total_entries"]
+            result["ledger_max_lamport"] = attestation["max_lamport"]
+
+            if global_hash and global_hash != "UNKNOWN_HASH":
+                result["evidence_match"] = attestation["merkle_root"] == global_hash
+            else:
+                # Sin hash de referencia no hay binding posible: no verificable.
+                result["evidence_match"] = None
+
+            result["verified"] = bool(result["integrity_verified"] and result["evidence_match"])
+            if not result["integrity_verified"]:
+                result["detail"] = "LEDGER_CHAIN_BROKEN_NON_COMPLIANT"
+            elif result["evidence_match"] is False:
+                result["detail"] = STATUS_MISMATCH
+            elif result["evidence_match"] is None:
+                result["detail"] = "UNVERIFIED_NO_REFERENCE_HASH"
+            else:
+                result["detail"] = "VERIFIED"
+        except Exception as exc:  # fail-closed: cualquier error => no verificado
+            result["detail"] = f"VERIFICATION_ERROR: {exc.__class__.__name__}"
+            result["verified"] = False
+        return result
+
+    # ------------------------------------------------------------------
+    # FIX B-3: Ed25519 certificate signature
+    # ------------------------------------------------------------------
+    @staticmethod
+    def sign_certificate(cert: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Signs the canonical-JSON serialization of the certificate with Ed25519.
+
+        Key resolution:
+          - ``BABYLON60_SIGNING_SEED`` (64 hex chars = 32-byte seed) → stable key.
+          - Otherwise an ephemeral key is generated and flagged ``ephemeral: true``
+            (suitable for demos/tests, NOT for production attestation).
+        """
+        from nacl.signing import SigningKey
+
+        seed_hex = os.environ.get("BABYLON60_SIGNING_SEED", "").strip()
+        ephemeral = True
+        if seed_hex:
+            try:
+                signing_key = SigningKey(bytes.fromhex(seed_hex))
+                ephemeral = False
+            except Exception:
+                signing_key = SigningKey.generate()
+        else:
+            signing_key = SigningKey.generate()
+
+        payload = _canonical_json(cert).encode("utf-8")
+        payload_sha256 = hashlib.sha256(payload).hexdigest()
+        signed = signing_key.sign(payload)
+        return {
+            "algorithm": "Ed25519",
+            "public_key": signing_key.verify_key.encode().hex(),
+            "signature": signed.signature.hex(),
+            "signed_payload_sha256": payload_sha256,
+            "canonicalization": "json(sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False)",
+            "ephemeral": ephemeral,
+        }
+
+    def generate_certificate(
+        self,
+        system_id: str,
+        operator_name: str,
+        locale: str = "es",
+        ledger_path: Optional[str] = None,
+    ) -> Dict[str, Any]:
         """Generates a structured compliance certificate localized for target locale/country."""
         t = get_translation(locale)
         manifest = self.load_manifest()
         global_hash = manifest.get("global_hash", "UNKNOWN_HASH")
         is_quarantined = manifest.get("_is_quarantine", False)
+
+        verification = self.verify_evidence(manifest, ledger_path)
+        verified = verification["verified"]
 
         timestamp_iso = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
@@ -96,10 +229,24 @@ class EUAIActComplianceExporter:
 
         status_pass = t["status_pass"]
         status_halt = "CRITICAL_HALT_NON_COMPLIANT" if not is_quarantined else "QUARANTINE_NON_COMPLIANT"
-        art9_status = status_pass if not is_quarantined else status_halt
-        art12_status = status_pass if not is_quarantined else status_halt
 
-        return {
+        # FIX B-3: los artículos solo pasan a CONFORME si la evidencia fue
+        # verificada criptográficamente contra el ledger real.
+        if verified:
+            art9_status = status_pass if not is_quarantined else status_halt
+            art12_status = status_pass if not is_quarantined else status_halt
+            art10_status = status_pass
+            art11_status = status_pass
+            art14_status = status_pass
+        else:
+            unverified = verification["detail"]
+            art9_status = unverified
+            art10_status = unverified
+            art11_status = unverified
+            art12_status = unverified
+            art14_status = unverified
+
+        cert: Dict[str, Any] = {
             "title": t["title"],
             "locale": locale,
             "compliance_standard": t["compliance_standard"],
@@ -112,6 +259,7 @@ class EUAIActComplianceExporter:
             "global_merkle_root": global_hash,
             "quarantine_status": status_str,
             "legal_disclaimer": t["legal_disclaimer"],
+            "evidence_verification": verification,
             "articles_compliance": {
                 "Article_9_Risk_Management": {
                     "title": t["article_titles"]["Article_9"],
@@ -121,13 +269,13 @@ class EUAIActComplianceExporter:
                 },
                 "Article_10_Data_Governance": {
                     "title": t["article_titles"]["Article_10"],
-                    "status": status_pass,
+                    "status": art10_status,
                     "mechanism": t["mechanisms"]["Article_10"],
                     "evidence_hash": hashlib.sha256(f"ART10:{global_hash}".encode()).hexdigest(),
                 },
                 "Article_11_Technical_Documentation": {
                     "title": t["article_titles"]["Article_11"],
-                    "status": status_pass,
+                    "status": art11_status,
                     "mechanism": t["mechanisms"]["Article_11"],
                     "evidence_hash": hashlib.sha256(f"ART11:{global_hash}".encode()).hexdigest(),
                 },
@@ -139,7 +287,7 @@ class EUAIActComplianceExporter:
                 },
                 "Article_14_Human_Oversight": {
                     "title": t["article_titles"]["Article_14"],
-                    "status": status_pass,
+                    "status": art14_status,
                     "mechanism": t["mechanisms"]["Article_14"],
                     "evidence_hash": hashlib.sha256(f"ART14:{global_hash}".encode()).hexdigest(),
                 },
@@ -150,12 +298,16 @@ class EUAIActComplianceExporter:
                 "fingerprint": cert_fingerprint,
             },
         }
+        cert["signature"] = self.sign_certificate(cert)
+        return cert
 
     generate_report = generate_certificate
 
     def export_markdown_report(self, cert: Dict[str, Any], output_filepath: str, locale: str = "es") -> str:
         """Exports localized self-assessment report into human-readable Markdown format."""
         t = get_translation(locale)
+        v = cert.get("evidence_verification", {})
+        sig = cert.get("signature", {})
 
         md = f"""# {cert["title"]}
 **{t["compliance_standard"]}**  
@@ -178,15 +330,34 @@ class EUAIActComplianceExporter:
 
 ---
 
+## Verificación Criptográfica de la Evidencia
+
+| Parámetro | Valor |
+| :--- | :--- |
+| Ledger | `{v.get("ledger_path")}` |
+| Cadena íntegra (verify_integrity) | `{v.get("integrity_verified")}` |
+| Merkle root recomputado | `{v.get("ledger_merkle_root")}` |
+| Coincide con global_hash del manifiesto | `{v.get("evidence_match")}` |
+| **Veredicto** | **{v.get("detail")}** |
+
+## Firma Ed25519 del Certificado
+
+- **Algoritmo:** `{sig.get("algorithm")}` | **Clave efímera:** `{sig.get("ephemeral")}`
+- **Clave pública:** `{sig.get("public_key")}`
+- **Firma:** `{sig.get("signature", "")[:64]}...`
+- **SHA-256 del payload firmado:** `{sig.get("signed_payload_sha256")}`
+
+---
+
 ## Matriz de Cumplimiento Regulatorio
 
 | Requisito / Artículo | Mecanismo Técnico BABYLON-60 v4.0 | Estado | Hash de Evidencia |
 | :--- | :--- | :--- | :--- |
-| **{cert["articles_compliance"]["Article_9_Risk_Management"]["title"]}** | {cert["articles_compliance"]["Article_9_Risk_Management"]["mechanism"]} | ✅ {cert["articles_compliance"]["Article_9_Risk_Management"]["status"]} | `{cert["articles_compliance"]["Article_9_Risk_Management"]["evidence_hash"][:16]}...` |
-| **{cert["articles_compliance"]["Article_10_Data_Governance"]["title"]}** | {cert["articles_compliance"]["Article_10_Data_Governance"]["mechanism"]} | ✅ {cert["articles_compliance"]["Article_10_Data_Governance"]["status"]} | `{cert["articles_compliance"]["Article_10_Data_Governance"]["evidence_hash"][:16]}...` |
-| **{cert["articles_compliance"]["Article_11_Technical_Documentation"]["title"]}** | {cert["articles_compliance"]["Article_11_Technical_Documentation"]["mechanism"]} | ✅ {cert["articles_compliance"]["Article_11_Technical_Documentation"]["status"]} | `{cert["articles_compliance"]["Article_11_Technical_Documentation"]["evidence_hash"][:16]}...` |
-| **{cert["articles_compliance"]["Article_12_Record_Keeping_Logging"]["title"]}** | {cert["articles_compliance"]["Article_12_Record_Keeping_Logging"]["mechanism"]} | ✅ {cert["articles_compliance"]["Article_12_Record_Keeping_Logging"]["status"]} | `{cert["articles_compliance"]["Article_12_Record_Keeping_Logging"]["evidence_hash"][:16]}...` |
-| **{cert["articles_compliance"]["Article_14_Human_Oversight"]["title"]}** | {cert["articles_compliance"]["Article_14_Human_Oversight"]["mechanism"]} | ✅ {cert["articles_compliance"]["Article_14_Human_Oversight"]["status"]} | `{cert["articles_compliance"]["Article_14_Human_Oversight"]["evidence_hash"][:16]}...` |
+| **{cert["articles_compliance"]["Article_9_Risk_Management"]["title"]}** | {cert["articles_compliance"]["Article_9_Risk_Management"]["mechanism"]} | {cert["articles_compliance"]["Article_9_Risk_Management"]["status"]} | `{cert["articles_compliance"]["Article_9_Risk_Management"]["evidence_hash"][:16]}...` |
+| **{cert["articles_compliance"]["Article_10_Data_Governance"]["title"]}** | {cert["articles_compliance"]["Article_10_Data_Governance"]["mechanism"]} | {cert["articles_compliance"]["Article_10_Data_Governance"]["status"]} | `{cert["articles_compliance"]["Article_10_Data_Governance"]["evidence_hash"][:16]}...` |
+| **{cert["articles_compliance"]["Article_11_Technical_Documentation"]["title"]}** | {cert["articles_compliance"]["Article_11_Technical_Documentation"]["mechanism"]} | {cert["articles_compliance"]["Article_11_Technical_Documentation"]["status"]} | `{cert["articles_compliance"]["Article_11_Technical_Documentation"]["evidence_hash"][:16]}...` |
+| **{cert["articles_compliance"]["Article_12_Record_Keeping_Logging"]["title"]}** | {cert["articles_compliance"]["Article_12_Record_Keeping_Logging"]["mechanism"]} | {cert["articles_compliance"]["Article_12_Record_Keeping_Logging"]["status"]} | `{cert["articles_compliance"]["Article_12_Record_Keeping_Logging"]["evidence_hash"][:16]}...` |
+| **{cert["articles_compliance"]["Article_14_Human_Oversight"]["title"]}** | {cert["articles_compliance"]["Article_14_Human_Oversight"]["mechanism"]} | {cert["articles_compliance"]["Article_14_Human_Oversight"]["status"]} | `{cert["articles_compliance"]["Article_14_Human_Oversight"]["evidence_hash"][:16]}...` |
 
 ---
 
@@ -200,13 +371,16 @@ class EUAIActComplianceExporter:
     def export_html_report(self, cert: Dict[str, Any], output_filepath: str, locale: str = "es") -> str:
         """Exports localized certificate into a visually stunning, printable HTML report."""
         t = get_translation(locale)
+        v = cert.get("evidence_verification", {})
+        sig = cert.get("signature", {})
 
         rows = ""
         for art_key, art_val in cert["articles_compliance"].items():
+            status_str = str(art_val["status"])
             status_badge = (
-                '<span class="badge badge-success">✅ ' + str(art_val["status"]) + "</span>"
-                if "PASS" in str(art_val["status"]) or "CUMPLIDO" in str(art_val["status"])
-                else '<span class="badge badge-danger">❌ ' + str(art_val["status"]) + "</span>"
+                '<span class="badge badge-success">✅ ' + status_str + "</span>"
+                if "PASS" in status_str or "CUMPLIDO" in status_str or status_str == "CONFORME" or status_str == "COMPLIANT"
+                else '<span class="badge badge-danger">❌ ' + status_str + "</span>"
             )
             rows += f"""
             <tr>
@@ -216,6 +390,14 @@ class EUAIActComplianceExporter:
                 <td><code>{art_val["evidence_hash"][:16]}...</code></td>
             </tr>
             """
+
+        verdict = str(v.get("detail", "UNVERIFIED"))
+        verdict_ok = verdict == "VERIFIED"
+        verdict_badge = (
+            f'<span class="badge badge-success">✅ {verdict}</span>'
+            if verdict_ok
+            else f'<span class="badge badge-danger">❌ {verdict}</span>'
+        )
 
         html = f"""<!DOCTYPE html>
 <html lang="{locale}">
@@ -285,7 +467,7 @@ class EUAIActComplianceExporter:
             padding: 1rem;
         }}
         .card-title {{ font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }}
-        .card-value {{ font-size: 1rem; font-weight: 600; color: #fff; margin-top: 0.25rem; font-family: monospace; }}
+        .card-value {{ font-size: 1rem; font-weight: 600; color: #fff; margin-top: 0.25rem; font-family: monospace; word-break: break-all; }}
         table {{
             width: 100%;
             border-collapse: collapse;
@@ -339,6 +521,26 @@ class EUAIActComplianceExporter:
         <p><strong>Global Merkle Root:</strong> <code>{cert["global_merkle_root"]}</code></p>
         <p><strong>Cryptographic Fingerprint:</strong> <code>{cert["cryptographic_attestation"]["fingerprint"]}</code></p>
 
+        <h2 style="margin-top: 2rem;">Verificación de la Evidencia</h2>
+        <table>
+            <tbody>
+                <tr><td><strong>Ledger</strong></td><td><code>{v.get("ledger_path")}</code></td></tr>
+                <tr><td><strong>Cadena íntegra</strong></td><td><code>{v.get("integrity_verified")}</code></td></tr>
+                <tr><td><strong>Merkle recomputado</strong></td><td><code>{v.get("ledger_merkle_root")}</code></td></tr>
+                <tr><td><strong>Coincide con manifiesto</strong></td><td><code>{v.get("evidence_match")}</code></td></tr>
+                <tr><td><strong>Veredicto</strong></td><td>{verdict_badge}</td></tr>
+            </tbody>
+        </table>
+
+        <h2 style="margin-top: 2rem;">Firma Ed25519</h2>
+        <table>
+            <tbody>
+                <tr><td><strong>Algoritmo</strong></td><td><code>{sig.get("algorithm")}</code> (efímera: <code>{sig.get("ephemeral")}</code>)</td></tr>
+                <tr><td><strong>Clave pública</strong></td><td><code>{sig.get("public_key")}</code></td></tr>
+                <tr><td><strong>SHA-256 payload</strong></td><td><code>{sig.get("signed_payload_sha256")}</code></td></tr>
+            </tbody>
+        </table>
+
         <h2 style="margin-top: 2rem;">Matriz de Cumplimiento Normativo EU AI Act</h2>
         <table>
             <thead>
@@ -369,9 +571,11 @@ class EUAIActComplianceExporter:
 
 def main_cli():
     import argparse
+    import sys
 
     parser = argparse.ArgumentParser(description="BABYLON-60 EU AI Act Compliance Certificate Exporter")
     parser.add_argument("--bundle", default="artifact_bundle_v3", help="Ruta al paquete de artefactos/evidencia")
+    parser.add_argument("--ledger", help="Ruta al ledger SQLite (CortexPersistLedger) para verificación fail-closed")
     parser.add_argument("--system-id", default="BABYLON60-PROD-01", help="Identificador del sistema de IA auditado")
     parser.add_argument("--operator", default="Enterprise Operator", help="Nombre de la entidad u operador")
     parser.add_argument(
@@ -382,7 +586,7 @@ def main_cli():
 
     args = parser.parse_args()
 
-    exporter = EUAIActComplianceExporter(artifact_bundle_path=args.bundle)
+    exporter = EUAIActComplianceExporter(artifact_bundle_path=args.bundle, ledger_path=args.ledger)
     cert = exporter.generate_certificate(system_id=args.system_id, operator_name=args.operator, locale=args.locale)
 
     out_path = args.output
@@ -399,8 +603,20 @@ def main_cli():
     elif args.format == "html":
         exporter.export_html_report(cert, out_path, locale=args.locale)
 
+    verification = cert.get("evidence_verification", {})
+    detail = verification.get("detail", STATUS_UNVERIFIED)
     print(f"[+] Certificado EU AI Act generado con éxito en: {out_path}")
+    if detail == "VERIFIED":
+        print("[✓] Evidencia VERIFICADA criptográficamente contra el ledger (fail-closed).")
+        return 0
+    if verification.get("ledger_present"):
+        print(f"[✗] FALLO DE VERIFICACIÓN DE EVIDENCIA: {detail}. Certificado emitido como NO CONFORME.")
+        return 2
+    print(f"[!] AVISO: evidencia NO verificada ({detail}). Los artículos figuran como UNVERIFIED.")
+    return 0
 
 
 if __name__ == "__main__":
-    main_cli()
+    import sys
+
+    sys.exit(main_cli())

@@ -18,6 +18,14 @@ version: 1.0.0
 
 > Borja Moskv · babylon60.com · August 2026
 
+> [!IMPORTANT]
+> **Status note (audit 2026-09-10):** this whitepaper is a **design-stage document**.
+> The F60 sexagesimal arithmetic, the `.b60` kernel ISA, and the Proof IR → Lean 4
+> pipeline described in §3–§6 are architectural targets, several of which are not yet
+> present in the repository in the form described here. The implemented, empirically
+> verified system — hash-chained SQLite/WAL ledger, Rust fail-stop IPC slot, and
+> fail-closed compliance exporter — is documented in the repository [README](../README.md).
+
 ---
 
 ## Abstract
@@ -50,11 +58,11 @@ We identify two failure modes absent from the literature:
 
 BABYLON-60 attacks these problems at the infrastructure layer, below the LLM, by imposing thermodynamic and cryptographic constraints on the agent's execution substrate. Our contributions are:
 
-1. **F60 Exact Arithmetic** — A rational type system based on sexagesimal (base-60) encoding that eliminates floating-point drift in temporal computations (§2).
-2. **BFT DAG Ledger** — A directed acyclic graph execution ledger with cryptographic sealing, providing tamper-evident memory with deterministic replay (§3).
-3. **Self-Falsification Engine** — A dead-man's-switch mechanism that halts execution upon detecting causal inversions or numerical contamination (§4).
-4. **Proof IR and Lean 4 Backend** — A minimal intermediate representation that compiles execution traces into Lean 4 proof obligations for formal verification (§5).
-5. **Thermodynamic Routing Matrix** — Exergy-based constraints applied to the agent's reasoning AST to prevent context rot and limerence loops (§6).
+1. **F60 Exact Arithmetic** — A rational type system based on sexagesimal (base-60) encoding that eliminates floating-point drift in temporal computations (§2). *(Design stage.)*
+2. **BFT DAG Ledger** — A directed acyclic graph execution ledger with cryptographic sealing, providing tamper-evident memory with deterministic replay (§3). *(Implemented in single-writer SQLite/WAL form; live DAG consensus is roadmap.)*
+3. **Self-Falsification Engine** — A dead-man's-switch mechanism that halts execution upon detecting causal inversions or numerical contamination (§4). *(Implemented as the Rust fail-stop `epistemic_halt` path.)*
+4. **Proof IR and Lean 4 Backend** — A minimal intermediate representation that compiles execution traces into Lean 4 proof obligations for formal verification (§5). *(Roadmap; `proof/lean/` currently holds a compilable axiomatic sketch.)*
+5. **Thermodynamic Routing Matrix** — Exergy-based constraints applied to the agent's reasoning AST to prevent context rot and limerence loops (§6). *(Design stage.)*
 
 ---
 
@@ -258,11 +266,13 @@ The TCB is deliberately minimized: ~25 instructions, 3 special registers, strong
 
 ### 8.1 EU AI Act
 
-The EU AI Act (effective 2025) requires that high-risk AI systems provide:
+The EU AI Act — Regulation (EU) 2024/1689, in force since 1 August 2024 — requires that high-risk AI systems provide:
 
 - **Traceability:** Logging capabilities to enable monitoring of operation (Art. 12)
 - **Transparency:** Technical documentation sufficient to assess compliance (Art. 11)
 - **Human Oversight:** Ability to understand, interpret, and intervene (Art. 14)
+
+Following the Digital Omnibus on AI (Regulation (EU) 2026/1744, in force 27 July 2026), the Annex III high-risk obligations — including the Article 12 record-keeping duty — apply from **2 December 2027**; Article 50 transparency obligations apply since 2 August 2026.
 
 BABYLON-60's BFT DAG Ledger and Proof IR directly address Articles 11, 12, and 14 by providing:
 

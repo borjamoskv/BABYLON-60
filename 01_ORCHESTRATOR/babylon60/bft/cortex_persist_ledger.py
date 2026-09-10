@@ -231,6 +231,7 @@ class CortexPersistLedger:
         prev_hash: str,
         current_seq: int,
         timestamp: str,
+        batch_index: dict[str, tuple[int, str, int]] | None = None,
     ) -> dict[str, Any]:
         if not ev.cortex_taint:
             raise ValueError("INV_BFT_03: cortex_taint es obligatorio")
@@ -238,6 +239,21 @@ class CortexPersistLedger:
         payload_json = _canonical_json(ev.payload)
         idempotency_str = f"{ev.event_type}\x1f{payload_json}\x1f{ev.cortex_taint}\x1f{ev.agent_id}\x1f{ev.domain}"
         event_id = str(uuid.uuid5(NAMESPACE_CORTEX, idempotency_str))
+
+        # FIX B-2 (audit 2026-09-10): duplicados DENTRO del mismo lote no son
+        # visibles en la DB (las filas se insertan diferidas al final). Sin este
+        # índice, el segundo ejemplar llegaba al executemany y abortaba todo el
+        # lote con IntegrityError (UNIQUE event_id) en vez de DUPLICATE_IGNORED.
+        if batch_index is not None and event_id in batch_index:
+            orig_seq, orig_hash, orig_lamport = batch_index[event_id]
+            return {
+                "seq": orig_seq,
+                "event_id": event_id,
+                "entry_hash": orig_hash,
+                "lamport_t": orig_lamport,
+                "status": "DUPLICATE_IGNORED",
+                "row": None,
+            }
 
         cursor.execute("SELECT seq, entry_hash, lamport_t FROM cortex_ledger WHERE event_id = ?", (event_id,))
         dup = cursor.fetchone()
@@ -279,6 +295,8 @@ class CortexPersistLedger:
             entry_hash,
             timestamp,
         )
+        if batch_index is not None:
+            batch_index[event_id] = (current_seq, entry_hash, last_lamport)
         return {
             "seq": current_seq,
             "event_id": event_id,
@@ -299,8 +317,11 @@ class CortexPersistLedger:
     ) -> tuple[list[dict[str, Any]], list[tuple]]:
         results = []
         rows_to_insert = []
+        batch_index: dict[str, tuple[int, str, int]] = {}
         for ev in events:
-            res = self._process_batch_event(ev, cursor, last_lamport, prev_hash, current_seq, timestamp)
+            res = self._process_batch_event(
+                ev, cursor, last_lamport, prev_hash, current_seq, timestamp, batch_index
+            )
             row = res.pop("row")
             results.append(res)
             if row:
@@ -308,15 +329,20 @@ class CortexPersistLedger:
                 prev_hash = row[8]
                 last_lamport = row[6]
                 current_seq = res["seq"]
-            else:
-                prev_hash = res["entry_hash"]
-                last_lamport = max(last_lamport, res["lamport_t"])
+            # FIX B-1 (audit 2026-09-10): un DUPLICATE_IGNORED NUNCA reancla la
+            # cadena. prev_hash/lamport del próximo evento nuevo deben apuntar a
+            # la última fila REALMENTE insertada; adoptar el hash del duplicado
+            # rompía la cadena (verify_integrity() -> False permanente) sin
+            # intervención de ningún atacante.
         return results, rows_to_insert
 
     def append_batch(self, events: list[CortexEvent]) -> list[Dict[str, Any]]:
         """
         Inserta un lote masivo de eventos en una única transacción BFT atómica.
-        Throughput optimizado para pruebas de estrés masivas (> 50,000 tx/s).
+        Throughput medido: ~26,000 eventos/s por lote en hardware CI estándar
+        (audit 2026-09-10, tmpfs); el camino append_event individual está
+        limitado por fsync (synchronous=FULL) a ~10² eventos/s. Cifras
+        hardware-dependientes — no una garantía contractual.
         """
         if not events:
             return []
