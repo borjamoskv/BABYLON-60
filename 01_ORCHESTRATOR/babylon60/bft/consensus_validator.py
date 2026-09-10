@@ -7,7 +7,7 @@
 from typing import Any, Dict
 import cbor2
 import json
-from babylon60.core.crypto import canonicalize_cbor, hash_sha3_256, verify_ed25519
+from babylon60.core.crypto_utils import canonicalize_cbor, hash_sha3_256, verify_ed25519
 
 _UNDECODABLE = object()
 

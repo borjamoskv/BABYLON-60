@@ -15,7 +15,7 @@ from pathlib import Path
 
 import pytest
 
-from babylon60.core.crypto import Ed25519Signer, canonicalize_cbor, hash_sha3_256
+from babylon60.core.crypto_utils import Ed25519Signer, canonicalize_cbor, hash_sha3_256
 from babylon60.database import core as dbcore
 
 

@@ -184,7 +184,6 @@ class VerificationGate:
         [C5-REAL] Invoca el Secure Enclave (TouchID) para atestar criptográficamente una cirugía causal.
         """
         import subprocess
-        import os
         from pathlib import Path
 
         # Calcular un hash preliminar para atestar
@@ -203,22 +202,22 @@ class VerificationGate:
                 [str(script_path), "--causal-hash", causal_hash, "--message", description],
                 capture_output=True,
                 text=True,
-                check=True
+                check=True,
             )
-            
+
             signature = result.stdout.strip()
             print(f"[✓] Firma Biométrica obtenida: {signature}")
-            
+
             # Registrar formalmente en el Ledger Inmutable
             self.register_sign_off(
                 execution_id=execution_id,
                 action_name=action_name,
                 risk_level=RiskLevel.CRITICAL,
                 decision="APPROVED",
-                intervention_channel=InterventionChannel.HARD_SURGERY
+                intervention_channel=InterventionChannel.HARD_SURGERY,
             )
             return True
-            
+
         except subprocess.CalledProcessError as e:
             print(f"[X] Causal Sign-Off RECHAZADO o Timeout. Error: {e.stderr.strip()}")
             self.register_sign_off(
@@ -226,7 +225,7 @@ class VerificationGate:
                 action_name=action_name,
                 risk_level=RiskLevel.CRITICAL,
                 decision="REJECTED",
-                intervention_channel=InterventionChannel.HARD_SURGERY
+                intervention_channel=InterventionChannel.HARD_SURGERY,
             )
             return False
 

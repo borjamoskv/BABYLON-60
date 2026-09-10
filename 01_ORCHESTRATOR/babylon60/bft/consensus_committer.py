@@ -8,7 +8,7 @@ import sqlite3
 from typing import Any, Dict
 from dataclasses import dataclass
 from babylon60.database import core as database_core
-from babylon60.core.crypto import canonicalize_cbor
+from babylon60.core.crypto_utils import canonicalize_cbor
 
 
 @dataclass(frozen=True)

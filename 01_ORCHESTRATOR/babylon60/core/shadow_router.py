@@ -15,7 +15,7 @@ import time
 from datetime import datetime, timezone
 from typing import Any, Dict, Tuple
 
-from babylon60.core.crypto import Ed25519Signer, canonicalize_cbor, hash_sha3_256
+from babylon60.core.crypto_utils import Ed25519Signer, canonicalize_cbor, hash_sha3_256
 
 
 def _utc_now_iso() -> str:

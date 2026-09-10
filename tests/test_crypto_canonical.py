@@ -3,7 +3,7 @@
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 # [Causal-Determinist] Exergy-Maximized
-from babylon60.core.crypto import canonicalize_cbor, hash_sha3_256, Ed25519Signer
+from babylon60.core.crypto_utils import canonicalize_cbor, hash_sha3_256, Ed25519Signer
 
 
 def test_canonicalize_cbor_ordering() -> None:
