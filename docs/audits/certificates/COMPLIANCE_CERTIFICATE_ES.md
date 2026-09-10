@@ -29,7 +29,7 @@ jurisdiction: ES / UE (Reglamento UE 2024/1689)
 
 ---
 
-### Flujo de Validación de Auditoría (Hardware-Enforced)
+### Flujo de Validación de Auditoría (Sellado WORM por Software)
 
 ```mermaid
 sequenceDiagram
@@ -90,7 +90,7 @@ graph TD
 | **Art. 9 (Gestión de Riesgos)** | Identificación, evaluación y mitigación continua de riesgos de IA de alto riesgo. | Podador Termodinámico de AST + Motor de Auto-Falsación con interruptor de hombre muerto. | ✅ CONFORME | `52099e623249c6ad8f102...` |
 | **Art. 10 (Gobernanza de Datos)** | Trazabilidad, ausencia de sesgo y linaje completo de datos de entrenamiento e inferencia. | Aritmética Sexagesimal $F60$ sin deriva + Linaje inmutable DAG Merkle-Causal WORM. | ✅ CONFORME | `5eb25e74d0a0700e19284...` |
 | **Art. 11 (Documentación Técnica)** | Demostración formal de conformidad antes de la puesta en servicio. | Exportación automática de Proof IR a lemas y teoremas mecánicamente verificados en Lean 4. | ✅ CONFORME | `9d53c9b5d5aa5d1209384...` |
-| **Art. 12 (Conservación de Registros)** | Registro automático inmutable de eventos durante todo el ciclo de vida. | Registro WORM no manipulable con timestamping Lamport monotónico y firma por enclave. | ✅ CONFORME | `c65c9ce3bb20634519283...` |
+| **Art. 12 (Conservación de Registros)** | Registro automático inmutable de eventos durante todo el ciclo de vida. | Registro WORM no manipulable con timestamping Lamport monotónico y firma software COSE_Sign1. | ✅ CONFORME | `c65c9ce3bb20634519283...` |
 | **Art. 13 (Transparencia)** | Explicabilidad completa de los procesos de toma de decisión agéntica. | Grafo de dependencias causales exportable en JSON-LD y Causal IR sin cajas negras. | ✅ CONFORME | `7a88b1928c89102938475...` |
 | **Art. 14 (Supervisión Humana)** | Interfaz para que operadores humanos puedan prevenir o frenar riesgos (kill-switch). | Interfaz Armónica Neo-Riemanniana Tonnetz + comando directo de congelamiento `QUARANTINE`. | ✅ CONFORME | `2b1021f201dafbef84719...` |
 | **Art. 14(4) (Parada de Emergencia)** | Botón de parada humano instantáneo y seguro. | Función `babylon60_epistemic_halt` (Fail-stop determinista $O(1)$). | ✅ CONFORME | `8f10b23491ca029837419...` |
