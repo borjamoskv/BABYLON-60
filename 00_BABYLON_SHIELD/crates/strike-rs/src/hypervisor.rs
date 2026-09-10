@@ -325,4 +325,49 @@ mod tests {
         // Non-isomorphic graphs MUST have distinct 1-WL hashes
         assert_ne!(hash_a, hash_c);
     }
+
+    #[test]
+    fn test_swarm_hypervisor_concurrent_stress() {
+        let hypervisor = std::sync::Arc::new(SwarmHypervisor::new());
+        let mut handles = vec![];
+        
+        for thread_idx in 0..50 {
+            let hyper_clone = std::sync::Arc::clone(&hypervisor);
+            let handle = std::thread::spawn(move || {
+                let mut csprng = rand::rngs::OsRng;
+                let signing_key = ed25519_dalek::SigningKey::generate(&mut csprng);
+                let vk = signing_key.verifying_key();
+                
+                for i in 0..100 {
+                    let tenant_id = format!("agent_concurrent_{}_{}", thread_idx, i);
+                    hyper_clone.register_tenant(&tenant_id, 1024, vk.clone());
+                }
+            });
+            handles.push(handle);
+        }
+        
+        for h in handles {
+            h.join().unwrap();
+        }
+        
+        assert_eq!(hypervisor.active_tenant_count(), 5000);
+        
+        let mut evict_handles = vec![];
+        for thread_idx in 0..50 {
+            let hyper_clone = std::sync::Arc::clone(&hypervisor);
+            let handle = std::thread::spawn(move || {
+                for i in 0..100 {
+                    let tenant_id = format!("agent_concurrent_{}_{}", thread_idx, i);
+                    hyper_clone.evict_tenant(&tenant_id);
+                }
+            });
+            evict_handles.push(handle);
+        }
+        
+        for h in evict_handles {
+            h.join().unwrap();
+        }
+        
+        assert_eq!(hypervisor.active_tenant_count(), 0);
+    }
 }
