@@ -12,6 +12,8 @@
 //! - INV_C5_TURING_CASTRATION: Deterministic, bounded execution loops (No infinite polling).
 
 use iceoryx2::prelude::*;
+use crate::bft_iceoryx2::IpcEnvelope;
+use crate::exergy_binary_ipc::ExergyPacket;
 use std::collections::HashMap;
 use dashmap::DashMap;
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -245,7 +247,7 @@ pub fn spawn_writer_daemon(service_name_str: &str, stop_signal: Arc<AtomicBool>,
 
         let service = match zero_copy::Service::new(&service_name)
             .publish_subscribe()
-            .open_or_create::<BftMessage>() {
+            .open_or_create::<IpcEnvelope>() {
                 Ok(s) => s,
                 Err(_) => return,
             };
@@ -265,8 +267,12 @@ pub fn spawn_writer_daemon(service_name_str: &str, stop_signal: Arc<AtomicBool>,
 
             match subscriber.receive() {
                 Ok(Some(sample)) => {
-                    let _hash_hex = hex::encode(sample.payload_hash);
-                    processed += 1;
+                    let env = &*sample;
+                    if let Ok(unpacked) = ExergyPacket::unpack(&env.data[..env.len]) {
+                        // We successfully unpacked an ExergyPacket from Python!
+                        let _seq = unpacked.lamport_t;
+                        processed += 1;
+                    }
                 }
                 Ok(None) => {
                     thread::sleep(Duration::from_micros(10));
