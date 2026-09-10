@@ -29,7 +29,7 @@ jurisdiction: Global / EU / USA / UK
 
 ---
 
-### Causal Audit Validation Flow (Hardware-Enforced)
+### Causal Audit Validation Flow (Software WORM)
 
 ```mermaid
 sequenceDiagram
@@ -90,7 +90,7 @@ graph TD
 | **Art. 9 (Risk Management)** | Continuous risk management and automated mitigation for high-risk AI. | Thermodynamic AST Pruner + Self-Falsification Dead-Man's Switch. | ✅ COMPLIANT | `52099e623249c6ad8f102...` |
 | **Art. 10 (Data Governance)** | Data governance, bias elimination, and complete inference lineage. | Sexagesimal Exact Arithmetic ($F60$) + WORM Merkle-Causal DAG Lineage. | ✅ COMPLIANT | `5eb25e74d0a0700e19284...` |
 | **Art. 11 (Technical Doc)** | Technical documentation and formal proof before deployment. | Automatic Proof IR export to Lean 4 mechanically proven lemmas. | ✅ COMPLIANT | `9d53c9b5d5aa5d1209384...` |
-| **Art. 12 (Record-Keeping)** | Tamper-evident, automated event logging across system lifecycle. | Immutable WORM DAG ledger with monotonic Lamport time and enclave signature. | ✅ COMPLIANT | `c65c9ce3bb20634519283...` |
+| **Art. 12 (Record-Keeping)** | Tamper-evident, automated event logging across system lifecycle. | Immutable WORM DAG ledger with monotonic Lamport time and software COSE_Sign1 signature. | ✅ COMPLIANT | `c65c9ce3bb20634519283...` |
 | **Art. 13 (Transparency)** | Full transparency and interpretability of agent reasoning paths. | Exportable JSON-LD Causal Dependency Graph and Causal IR. | ✅ COMPLIANT | `7a88b1928c89102938475...` |
 | **Art. 14 (Human Oversight)** | Human oversight interface for real-time intervention & kill-switch. | Neo-Riemannian Tonnetz Harmonic Interface + direct `QUARANTINE` freeze. | ✅ COMPLIANT | `2b1021f201dafbef84719...` |
 | **Art. 14(4) (Emergency Stop)** | Instant and secure human emergency stop button. | Function `babylon60_epistemic_halt` (Deterministic $O(1)$ Fail-stop). | ✅ COMPLIANT | `8f10b23491ca029837419...` |
