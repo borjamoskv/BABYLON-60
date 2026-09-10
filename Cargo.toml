@@ -86,3 +86,11 @@ required-features = ["cortex-persist"]
 [[bin]]
 name = "poc_stress_manifest_spmc"
 path = "src/bin/poc_stress_manifest_spmc.rs"
+
+[[bin]]
+name = "poc_stress_spsc_ring"
+path = "src/bin/poc_stress_spsc_ring.rs"
+
+[[bin]]
+name = "babylon60"
+path = "src/babylon60.rs"

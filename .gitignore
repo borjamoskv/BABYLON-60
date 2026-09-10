@@ -59,6 +59,7 @@ docs/VALUATION_STRATEGY.md
 docs/05_gtm/
 tests/sequencer_spsc_harness
 01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate
+scripts/c5_demos/c5_biometric_gate
 
 # ============================================================
 # OPSEC-Ω TASKFORCE HARDENING (2026-07-19, ITERA-1 · port 2026-08-12)
