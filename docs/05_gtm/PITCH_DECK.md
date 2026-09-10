@@ -12,7 +12,7 @@
 ---
 
 ## Slide 1: The Invisible Liability of Enterprise AI
-In 2026, regulated enterprises deploying autonomous AI agents face catastrophic regulatory risk under **Regulation (EU) 2024/1689 (EU AI Act)**. Vector databases and probabilistic guardrails cannot provide verifiable proof of data lineage, leading to fines up to **€35M or 7% of annual turnover**.
+In 2026, regulated enterprises deploying autonomous AI agents face catastrophic regulatory risk under **Regulation (EU) 2024/1689 (EU AI Act)**. Vector databases and probabilistic guardrails cannot provide verifiable proof of data lineage, leading to fines of up to **€15M or 3% of annual turnover** for non-compliance with high-risk system obligations (and up to **€35M or 7%** for prohibited practices, per Art. 99).
 
 ---
 
@@ -40,8 +40,8 @@ BABYLON-60 is a local-first, zero-overhead execution substrate written in `#![no
 
 ## Slide 5: Target Market & TAM
 - **Initial Target:** EU Financial Services, Defense Contractors, Clinical Research Organizations.
-- **TAM:** €18.4B Enterprise AI Governance & Regulatory Compliance Market.
-- **SOM:** €120M High-Assurance AI Infrastructure in EU-27.
+- **TAM:** €18.4B Enterprise AI Governance & Regulatory Compliance Market (internal estimate).
+- **SOM:** €120M High-Assurance AI Infrastructure in EU-27 (internal estimate).
 
 ---
 
