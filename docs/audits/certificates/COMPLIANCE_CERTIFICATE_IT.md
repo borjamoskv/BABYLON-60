@@ -25,11 +25,11 @@ jurisdiction: IT / UE (Regolamento UE 2024/1689 / AgID)
 ---
 
 > [!IMPORTANT]
-> **Sentenza Causale-Deterministica:** Questo certificato attesta che il sistema agenziale specificato opera all'interno del Kernel Causale-Deterministico BABYLON-60 v4.0. Tutte le decisioni, le transizioni di stato e le allocazioni temporali sono ancorate in modo crittograficamente immutabile a un Registro DAG Merkle-Causale con sigillo WORM, attestazione hardware TPM 2.0 e ricevute verificate SCITT (RFC 9942).
+> **Sentenza Causale-Deterministica:** Questo certificato attesta che il sistema agenziale specificato opera all'interno del Kernel Causale-Deterministico BABYLON-60 v4.0. Tutte le decisioni, le transizioni di stato e le allocazioni temporali sono ancorate in modo crittograficamente immutabile a un Registro DAG Merkle-Causale con sigillo WORM software e ricevute verificate SCITT (RFC 9942) (attestazione hardware TPM 2.0 nella roadmap).
 
 ---
 
-### Flusso di Validazione dell'Audit (Hardware-Enforced)
+### Flusso di Validazione dell'Audit (WORM Software)
 
 ```mermaid
 sequenceDiagram
@@ -37,13 +37,13 @@ sequenceDiagram
     participant OP as Operatore Agente
     participant B60 as Kernel BABYLON-60
     participant DAG as WORM Merkle-DAG
-    participant TPM as Notario WORM Software
+    participant TPM as Notaio WORM Software
     
     OP->>B60: Richiesta (Clock F60 Sessagesimale)
     B60->>DAG: Validazione Invarianti & Hash Precedente
     DAG-->>B60: Stato Causale Confermato (Zero-Entropy)
     B60->>TPM: Richiesta Firma Crittografica (BLAKE3)
-    TPM-->>B60: Attestazione Hardware Generata
+    TPM-->>B60: Attestazione Software Generata
     B60-->>OP: Output Deterministico + Proof IR
 ```
 
@@ -90,7 +90,7 @@ graph TD
 | **Art. 9 (Gestione dei Rischi)** | Identificazione e mitigazione continue dei rischi dell'IA. | Potatore Termodinamico di AST + Motore di Auto-Falsificazione (Kill-switch). | ✅ CONFORME | `52099e623249c6ad8f102...` |
 | **Art. 10 (Governance dei Dati)** | Tracciabilità e lignaggio completo dell'inferenza. | Aritmetica Sessagesimale $F60$ + Lignaggio immutabile DAG Merkle-Causale WORM. | ✅ CONFORME | `5eb25e74d0a0700e19284...` |
 | **Art. 11 (Documentazione Tecnica)** | Prova formale di conformità prima della messa in servizio. | Esportazione automatica di Proof IR a lemmi verificati meccanicamente in Lean 4. | ✅ CONFORME | `9d53c9b5d5aa5d1209384...` |
-| **Art. 12 (Conservazione dei Registri)** | Registrazione WORM inalterabile degli eventi durante tutto il ciclo di vita. | Registro WORM DAG con timestamping Lamport monotonico e firma tramite enclave. | ✅ CONFORME | `c65c9ce3bb20634519283...` |
+| **Art. 12 (Conservazione dei Registri)** | Registrazione WORM inalterabile degli eventi durante tutto il ciclo di vita. | Registro WORM DAG con timestamping Lamport monotonico e firma software COSE_Sign1. | ✅ CONFORME | `c65c9ce3bb20634519283...` |
 | **Art. 13 (Trasparenza)** | Piena spiegabilità dei processi decisionali agenziali. | Grafo delle dipendenze causali esportabile in JSON-LD (Nessuna scatola nera). | ✅ CONFORME | `7a88b1928c89102938475...` |
 | **Art. 14 (Sorveglianza Umana)** | Interfaccia per l'intervento di operatori umani. | Interfaccia Armonica Neo-Riemanniana Tonnetz + congelamento diretto tramite `QUARANTINE`. | ✅ CONFORME | `2b1021f201dafbef84719...` |
 | **Art. 14(4) (Arresto di Emergenza)** | Pulsante di arresto umano istantaneo e sicuro. | Funzione `babylon60_epistemic_halt` (Fail-stop determinista $O(1)$). | ✅ CONFORME | `8f10b23491ca029837419...` |
