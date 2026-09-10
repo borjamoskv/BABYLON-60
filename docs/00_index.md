@@ -9,7 +9,7 @@
 </div>
 
 > **Nube de Conocimiento Categórico, Especificaciones Formales, Guías y Repositorio Teórico**  
-> **Estándar:** C5-REAL | **Documentos Totales Indexados:** 115 | **Estado:** 100% Synchronized
+> **Estándar:** C5-REAL | **Documentos Totales Indexados:** 85 | **Estado:** 100% Synchronized
 
 ---
 
@@ -25,17 +25,15 @@
 | [`10_legion_swarm_cta_spec.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/10_legion_swarm_cta_spec.md) | `10_legion_swarm_cta_spec.md` | Especificación Axiomática: Legion 10k Swarm (CTA) |
 | [`CANARY_TOKENS.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/CANARY_TOKENS.md) | `CANARY_TOKENS.md` | Canary Tokens — Ω-11 (Honeypot) |
 | [`COMMERCIAL_LICENSE.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/COMMERCIAL_LICENSE.md) | `COMMERCIAL_LICENSE.md` | BABYLON-60 Commercial License (Enterprise Tier) |
-| [`HANDOFF.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/HANDOFF.md) | `HANDOFF.md` | 🤝 Handoff: Lanzamiento Comercial & Enjambre de 21 Agentes en BABYLON-60 |
 | [`INBOUND_EMAIL_SETUP.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/INBOUND_EMAIL_SETUP.md) | `INBOUND_EMAIL_SETUP.md` | Configuración e Integración de Recepción Inbound Enterprise para borja@babylon60.com y support@babylon60.com |
 | [`KERNEL.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/KERNEL.md) | `KERNEL.md` | CORTEX KERNEL — Invariantes Transversales en BABYLON-60 |
 | [`KINETIC_CACHE_AUDIT.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/KINETIC_CACHE_AUDIT.md) | `KINETIC_CACHE_AUDIT.md` | KINETIC ENGINE: False Sharing Mitigation Audit |
-| [`OPSEC_OMEGA_ITERA1.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/OPSEC_OMEGA_ITERA1.md) | `OPSEC_OMEGA_ITERA1.md` | OPSEC-Ω TASKFORCE-16 · ITERA-1 — Bitácora de mutación |
 | [`PROJECT.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/PROJECT.md) | `PROJECT.md` | 🎯 Project: BABYLON-60 |
 | [`README.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/README.md) | `README.md` | 📚 BABYLON-60 Documentation Hub (v4.0 Sovereign Hardened) |
 | [`RESULTADOS.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/RESULTADOS.md) | `RESULTADOS.md` | 📊 Estado del Proyecto y Resultados |
 | [`SPECIFICATION.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/SPECIFICATION.md) | `SPECIFICATION.md` | BABYLON-60 Architecture & Formal Specification (v4.0) |
-| [`STATUS.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/STATUS.md) | `STATUS.md` | BABYLON-60 Status Ledger |
 | [`WHITEPAPER.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/WHITEPAPER.md) | `WHITEPAPER.md` | BABYLON-60: A Formal Infrastructure for Verifiable AI Agents |
+| [`cortex_lsp_setup.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/cortex_lsp_setup.md) | `cortex_lsp_setup.md` | 🧠 Integración de cortex-lsp: El LSP Paracortex Soberano |
 
 ### 📋 Technical Specifications & System Protocols
 
@@ -101,7 +99,6 @@
 | [`sota_cortex_persist_202607.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/sota/sota_cortex_persist_202607.md) | `04_research/sota/sota_cortex_persist_202607.md` | Estado del Arte (SOTA) — Posicionamiento de Ledger Asíncrono-persist |
 | [`sota_ssm_lnn_202600.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/sota/sota_ssm_lnn_202600.md) | `04_research/sota/sota_ssm_lnn_202600.md` | SOTA 202600: SSM, LNN y el Colapso del Paradigma Transformer |
 
-
 ### ⚖️ Formal Theory, Gödel Incompleteness & Exergy Invariants
 
 | Documento | Ruta / Archivo | Título Principal / Propósito |
@@ -123,16 +120,14 @@
 | [`MANIFIESTO_CENTURIA.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/MANIFIESTO_CENTURIA.md) | `06_theory/MANIFIESTO_CENTURIA.md` | 🔥 CENTURIA MANIFESTO — OMEGA Causal-Determinist |
 | [`MOSKV_1_APEX_BLUEPRINT.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/MOSKV_1_APEX_BLUEPRINT.md) | `06_theory/MOSKV_1_APEX_BLUEPRINT.md` | 🚀 Motor Causal-1-APEX: Manifiesto y Arquitectura Consolidada |
 | [`STATUS_THEORY.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS_THEORY.md) | `06_theory/STATUS_THEORY.md` | 📈 STATUS — Single Source of Truth |
+| [`TOPOLOGIA_MAESTRA.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/TOPOLOGIA_MAESTRA.md) | `06_theory/TOPOLOGIA_MAESTRA.md` | 🌌 Topología Maestra C5-REAL (BABYLON-60 / CORTEX) |
 | [`VECTOR_A_MASTER_LEDGER_DESIGN.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/VECTOR_A_MASTER_LEDGER_DESIGN.md) | `06_theory/VECTOR_A_MASTER_LEDGER_DESIGN.md` | 🗂️ VECTOR A — Master Ledger & ATMS Persistence · Diseño |
 | [`axiom_bayesian_disintegration.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/axiom_bayesian_disintegration.md) | `06_theory/axiom_bayesian_disintegration.md` | 🧬 Axiomatización Formal: Desintegración Bayesiana y No-Alucinación |
+| [`axiom_cyclic_conformal_aeon.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/axiom_cyclic_conformal_aeon.md) | `06_theory/axiom_cyclic_conformal_aeon.md` | 🌀 Axiomatización Formal: Teorema de Penrose-Landauer y Motor de Aeones Conformes (INV_C5_AEON / INV-3) |
 | [`axiom_legion_swarm.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/axiom_legion_swarm.md) | `06_theory/axiom_legion_swarm.md` | ⚡ Axiomatización Formal: Legion Parallel Workspace Swarm |
 | [`axiom_oncology_protocol.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/axiom_oncology_protocol.md) | `06_theory/axiom_oncology_protocol.md` | 🧬 Axiomatización Formal: Transducción Bio-Silicio y Ontología Tumoral |
 | [`axiom_tonnetz_oversight.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/axiom_tonnetz_oversight.md) | `06_theory/axiom_tonnetz_oversight.md` | 🎵 Axiomatización Formal: Monitor Armónico Tonnetz |
 | [`c5_thermodynamic_invariants_compendium.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/c5_thermodynamic_invariants_compendium.md) | `06_theory/c5_thermodynamic_invariants_compendium.md` | 🌡️ Compendio de Invariantes Termodinámicas C5-REAL y Capas de Exergía |
-
-### 🌐 Corpus Satélite de Investigación (`C5-RESEARCH-FOUNDATIONS`)
-
-El compendio de isomorfismos sistémicos e históricos (Mesopotamia, oncología computacional, comoditización de morfismos) y manifiestos discursivos ha sido desacoplado hacia el repositorio hermano **[`C5-RESEARCH-FOUNDATIONS`](file:///Users/borjafernandezangulo/10_PROJECTS/C5-RESEARCH-FOUNDATIONS)** en estricto cumplimiento del principio *Program vs. Database*.
 
 ### 📁 Adr
 
@@ -144,25 +139,6 @@ El compendio de isomorfismos sistémicos e históricos (Mesopotamia, oncología 
 | [`ADR-004-taint-tracking-isolation.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/ADR-004-taint-tracking-isolation.md) | `adr/ADR-004-taint-tracking-isolation.md` | ADR-004: Modelo de Aislamiento y Tracking de Taint |
 | [`ADR-005-sovereign-dual-license.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/ADR-005-sovereign-dual-license.md) | `adr/ADR-005-sovereign-dual-license.md` | ADR-005: Sovereign Dual-License v4.0 |
 | [`README.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/README.md) | `adr/README.md` | Architecture Decision Records (ADR) |
-
-### 🛡️ Compliance Certificates & Forensic Audits
-
-| Documento | Ruta / Archivo | Título Principal / Propósito |
-| :--- | :--- | :--- |
-| [`IP_INVENTION_DISCLOSURE.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/IP_INVENTION_DISCLOSURE.md) | `audits/IP_INVENTION_DISCLOSURE.md` | BABYLON-60 / CORTEX-KINETIC-ENGINE: Intellectual Property Disclosure Manifest |
-| [`REMEDIACION_CODE_SCANNING_2026-07-18.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/REMEDIACION_CODE_SCANNING_2026-07-18.md) | `audits/REMEDIACION_CODE_SCANNING_2026-07-18.md` | 🛠️ REMEDIACIÓN CODE-SCANNING — BABYLON-60 |
-
-### 📁 Audits/Certificates
-
-| Documento | Ruta / Archivo | Título Principal / Propósito |
-| [`COMPLIANCE_CERTIFICATE_DE.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/COMPLIANCE_CERTIFICATE_DE.md) | `audits/certificates/COMPLIANCE_CERTIFICATE_DE.md` | 📜 Souveräne KI-Konformitätsbescheinigung |
-| [`COMPLIANCE_CERTIFICATE_EN.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/COMPLIANCE_CERTIFICATE_EN.md) | `audits/certificates/COMPLIANCE_CERTIFICATE_EN.md` | 📜 Sovereign AI Regulatory Compliance Certificate |
-| [`COMPLIANCE_CERTIFICATE_ES.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/COMPLIANCE_CERTIFICATE_ES.md) | `audits/certificates/COMPLIANCE_CERTIFICATE_ES.md` | 📜 Certificado Soberano de Cumplimiento Normativo de IA |
-| [`COMPLIANCE_CERTIFICATE_FR.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/COMPLIANCE_CERTIFICATE_FR.md) | `audits/certificates/COMPLIANCE_CERTIFICATE_FR.md` | 📜 Certificat Souverain de Conformité Réglementaire IA |
-| [`COMPLIANCE_CERTIFICATE_IT.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/COMPLIANCE_CERTIFICATE_IT.md) | `audits/certificates/COMPLIANCE_CERTIFICATE_IT.md` | 📜 Certificato Sovrano di Conformità Normativa IA |
-| [`HERO_DEMO_CERTIFICATE_DE.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/HERO_DEMO_CERTIFICATE_DE.md) | `audits/certificates/HERO_DEMO_CERTIFICATE_DE.md` | KI-Konformitätsbescheinigung (BABYLON-60 v4.0) |
-| [`HERO_DEMO_CERTIFICATE_EN.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/HERO_DEMO_CERTIFICATE_EN.md) | `audits/certificates/HERO_DEMO_CERTIFICATE_EN.md` | AI Regulatory Compliance Certificate (BABYLON-60 v4.0) |
-| [`HERO_DEMO_CERTIFICATE_ES.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/audits/certificates/HERO_DEMO_CERTIFICATE_ES.md) | `audits/certificates/HERO_DEMO_CERTIFICATE_ES.md` | Certificado de Cumplimiento Normativo de IA (BABYLON-60 v4.0) |
 
 ---
 *Índice maestro autogenerado y sincronizado autónomamente por `sync_docs_index.py` bajo estándar C5-REAL.*

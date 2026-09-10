@@ -57,7 +57,7 @@ def main() -> None:
     parser.add_argument("--json", action="store_true", help="Emit the document graph as pure JSON for inter-agentic consumption")
     args = parser.parse_args()
 
-    md_files = sorted([p for p in DOCS_DIR.rglob("*.md") if p.name != "00_index.md"])
+    md_files = sorted([p for p in DOCS_DIR.rglob("*.md") if p.name != "00_index.md" and ".lake" not in p.parts])
     by_section: Dict[str, List[Dict[str, str]]] = {}
     
     for p in md_files:

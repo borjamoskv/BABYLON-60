@@ -86,6 +86,7 @@ flowchart TD
 | **09** | [Ontología Formal (Lean 4)](./09_formal_ontology_lean.md) | Semántica de pequeños pasos, Teoría de Tipos Constructiva en práctica | `proof/lean/Babylon.lean` | `INV_BFT_04` |
 | **10** | [Realización Física (B60)](./10_physical_realization.md) | B60 Assembly, completitud de Turing, fuzzing, determinismo de grafos | `fibonacci.b60`, `fuzz_b60.py` | `INV_BFT_04` |
 | **11** | [Monitor Armónico Tonnetz](./axiom_tonnetz_oversight.md) | Sonificación de Entropía, Toro de Tonnetz, EU AI Act | Audio Engine Bi-Modal | `Art. 14 EU AI Act` |
+| **12** | [Motor de Aeones Conformes (Penrose-Landauer)](./axiom_cyclic_conformal_aeon.md) | Cosmología CCC, Suelo de Landauer, Ciclo de Fase Omega | Kernel Ring-0 / SharedManifest | `INV_C5_AEON / INV-3` |
 | **AX** | [Base Axiomática C5-REAL](./AXIOMATIZATION_C5_REAL.md) | Axiomas A1–A4 (Categorías de Markov, Inversión Bayesiana, No-Alucinación) | Motor de Verificación Axiomática | `INV_C5_REAL_A4` |
 
 ---
