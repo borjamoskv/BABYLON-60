@@ -130,3 +130,4 @@ mod tests {
 pub mod sync_bridge;
 
 pub mod gateway;
+pub mod exergy_binary_ipc;
