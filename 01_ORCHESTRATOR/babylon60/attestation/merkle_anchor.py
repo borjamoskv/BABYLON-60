@@ -1,7 +1,8 @@
 """
-BABYLON-60 v4.0 Attestation & Hardware Anchor Module
-Provides cryptographic anchoring of Merkle-Causal DAG roots to TPM 2.0 / TEE enclaves
+BABYLON-60 v4.0 Attestation & Anchor Module
+Provides cryptographic anchoring of Merkle-Causal DAG roots to software WORM receipts
 and external P2P notary checkpoints with network outage Grace Period protection.
+TPM 2.0 / TEE hardware enclave anchoring is simulated only (roadmap — no real hardware binding).
 """
 
 import hashlib
@@ -12,8 +13,9 @@ from typing import Dict
 class MerkleCausalAnchor:
     """
     [SIMULATED ENCLAVE - NOT FOR PRODUCTION]
-    Anchors local Merkle-Causal DAG global hashes to external notary checkpoints
-    and hardware security modules (TPM 2.0 / Intel SGX / AWS Nitro Enclaves).
+    Anchors local Merkle-Causal DAG global hashes to external notary checkpoints.
+    Hardware security module anchoring (TPM 2.0 / Intel SGX / AWS Nitro Enclaves)
+    is simulated pending roadmap implementation.
     Supports Grace Period & Local-Only fallback to prevent network DDoS vulnerability.
     WARNING: Does not currently interact with real hardware TPMs.
     """
@@ -28,8 +30,8 @@ class MerkleCausalAnchor:
 
     def generate_hardware_pcr_quote(self, global_merkle_root: str) -> Dict[str, str]:
         """
-        Generates a hardware PCR Quote seal (TPM 2.0 / TEE enclave attestation)
-        binding the execution ledger root hash to hardware non-repudiation.
+        Generates a SIMULATED hardware PCR Quote seal (TPM 2.0 / TEE enclave attestation: roadmap).
+        Software-only stand-in — it does NOT bind the ledger root hash to real hardware.
         """
         nonce = f"NONCE_{int(time.time())}"
         pcr_value = hashlib.sha256(f"PCR{self.pcr_index}:{global_merkle_root}:{nonce}".encode()).hexdigest()

@@ -34,10 +34,15 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 - **Stress Test**: El PoC debe someterse a un test de estrés empírico (ej. 100-1000 iteraciones) para certificar latencias, *failovers*, *memory safety* y ausencia de *deadlocks*. 
 - Solo si el PoC sobrevive a la falsación termodinámica, se autoriza la mutación del código real.
 
-## 📂 Límite Topológico del Workspace (Program vs. Database)
+## 📂 Límite Topológico del Workspace (Program vs. Database & Research Corpus)
 
 - **Invariante de Lógica Ejecutable**: El directorio `BABYLON-60` constituye exclusivamente el núcleo operativo, motor y arquitectura del programa. **NUNCA** debe ser tratado, parseado ni analizado asumiendo que es una base de datos o un repositorio pasivo de registros.
 - **Interpretación de Archivos**: Todo archivo dentro de este workspace (incluyendo JSONs, volcados o configuraciones) debe evaluarse bajo la estricta pregunta epistémica: *"¿Qué función estructural cumple esto en el motor de ejecución del sistema?"*.
+- **Desacople del Corpus de Investigación Teórica**:
+  - Los ensayos de isomorfismo histórico/social (ej. colapso de Mesopotamia, comoditización de morfismos), manifiestos discursivos de singularidad y artículos reflexivos deben residir exclusivamente en el repositorio hermano satélite: **`C5-RESEARCH-FOUNDATIONS`** (`/Users/borjafernandezangulo/10_PROJECTS/C5-RESEARCH-FOUNDATIONS`).
+  - `docs/06_theory/` dentro de `BABYLON-60` se reserva estrictamente a la **matemática formal y computabilidad** que fundamenta el sistema de tipos y el Kernel (Robinson, Gödel, Turing, Chaitin-Kolmogorov, Curry-Howard e invariantes termodinámicas acopladas a Lean 4).
+- **Prohibición de Volcados Pasivos de Scraping**: Queda terminantemente prohibido almacenar archivos crudos de subtítulos (.vtt, .srt), volcados de audio o bases de datos SQLite locales (.db) en el árbol de fuentes del monorepo.
+- **Pureza Documental en `mkdocs.yml`**: Los archivos de configuración de documentación estática no deben declarar enlaces huérfanos ni referenciar directorios eliminados o activos de GTM/OpSec (`05_gtm/`, `audits/`).
 - **Segregación Estricta GTM / OpSec**: Queda estrictamente **PROHIBIDO** almacenar o versionar dentro del repositorio documentos de estrategia de marketing, análisis de algoritmos de captación, borradores de redes sociales (X, Hacker News, Reddit) o planes de lanzamiento viral. Todo activo de distribución y captación debe residir exclusivamente en el espacio privado del agente (`~/.gemini/antigravity/brain/`) o en notas externas no rastreadas por Git, protegiendo la soberanía técnica del código y evitando acusaciones de *astroturfing* o manipulación en auditorías públicas.
 
 ## 🔒 Límite de Autenticación Biométrica (TouchID Invariant)

@@ -43,7 +43,7 @@ Si el agente falla, entra en bucles de limerencia o sufre un intento de inyecci�
 ## 2. EL MURO REGULATORIO: EL FIN DE LOS AGENTES OPACOS
 
 ### 2.1 El Coste de la Opacidad
-Bajo el **EU AI Act (Reglamento UE 2024/1689)**, desplegar un sistema de IA de alto riesgo sin trazabilidad ni gobernanza conlleva multas administrativas de hasta **€35.000.000 o el 7% de la facturación global anual** de la empresa (lo que sea mayor).
+Bajo el **EU AI Act (Reglamento UE 2024/1689)**, desplegar un sistema de IA de alto riesgo sin trazabilidad ni gobernanza conlleva multas administrativas de hasta **€15.000.000 o el 3% de la facturación global anual** de la empresa (lo que sea mayor) por incumplimiento de las obligaciones aplicables a sistemas de alto riesgo (Art. 99); el tramo superior de **€35.000.000 o el 7%** se reserva a las prácticas prohibidas del Art. 5.
 
 ### 2.2 Comparativa de Enfoques de Gobernanza
 
@@ -68,7 +68,7 @@ sequenceDiagram
     participant Kernel as b60_kernel (Rust TCB)
     participant Ledger as BFT DAG Ledger (WORM)
     participant TPM as Software Cryptographic Notary
-    participant Lean as Proof Engine (Lean 4)
+    participant Lean as Proof IR Lean 4 (En Progreso)
 
     LLM->>Kernel: Propone Transición de Estado (Intent)
     Kernel->>Kernel: Valida Aritmética Sexagesimal F60 & Límite de Exergía
@@ -90,8 +90,8 @@ $$\text{F60} = \left\langle n \in \mathbb{U}64, \; s \in \mathbb{U}8 \right\rang
 
 $1/3$ de hora se representa como $\text{F60}(20, 1) = 0;20 = 20\text{ minutos exactos}$. La causalidad temporal se mantiene matemáticamente inalterable ($\Delta t = 0$ drift), permitiendo certificar el orden relativo exacto de las operaciones ante tribunales y auditores.
 
-### 3.3 Verificación Formal con Lean 4
-El compilador de BABYLON-60 traduce las trazas de ejecución `.b60` a una Representación Intermedia de Pruebas (`proof.ir`). Este archivo alimenta automáticamente al demostrador de teoremas **Lean 4**, generando lemas formales estáticos (`BabylonTrace.lean`):
+### 3.3 Especificación Formal con Lean 4 (En Progreso)
+El compilador de BABYLON-60 traduce las trazas de ejecución `.b60` a una Representación Intermedia de Pruebas (`proof.ir`). Este archivo alimenta al demostrador de teoremas **Lean 4**, generando lemas formales estáticos (`BabylonTrace.lean`). Nota de estado: los invariantes clave se enuncian actualmente como axiomas explícitos (sin `sorry`); las pruebas completas están en progreso:
 
 $$\forall e_i, e_j \in \mathcal{E}, \quad e_i \prec e_j \implies \text{Hash}(e_i) \in \text{Parents}(e_j) \;\land\; \text{Lamport}(e_i) < \text{Lamport}(e_j)$$
 
@@ -129,7 +129,7 @@ La documentación técnica exige prueba matemática, no declaraciones de intenci
 > *"La documentación técnica de un sistema de IA de alto riesgo se elaborará antes de que dicho sistema se comercialice..."*
 
 - **Exigencia Legal:** Elaboración y actualización de documentación técnica detallada previa a la comercialización.
-- **Solución B60 v4.0:** **Auto-Exportación de Proof IR (`proof.ir`) a Lean 4**. La documentación técnica no se escribe a mano; la genera el compilador como teoremas matemáticos verificables en Lean 4.
+- **Solución B60 v4.0:** **Auto-Exportación de Proof IR (`proof.ir`) a Lean 4**. La documentación técnica no se escribe a mano; la genera el compilador como especificación formal en Lean 4 (invariantes clave como axiomas explícitos; pruebas completas en progreso).
 
 ### 4.4 Artículo 12: Conservación de Registros (Logging)
 > *"Los sistemas de IA de alto riesgo permitirán el registro automático de eventos (logs) a lo largo de su ciclo de vida..."*
@@ -162,7 +162,7 @@ Ante un incidente en producción (ej. un intento de inyección de prompt o un fa
 
 1. **Detección Causal:** El Fuzzing diferencial o el Runtime Inspector detecta una inconsistencia en el DAG.
 2. **Congelación Causal (`CRITICAL HALT`):** Se congela la corrutina en estado Zombie. Se bloquea cualquier llamada a API externa.
-3. **Cuarentena Forense WORM:** El historial completo se sella en `artifact_bundle_v3/quarantine/` bajo firma criptográfica software (COSE Sign1 / BLAKE3, con anclaje hardware TPM 2.0 en hoja de ruta). Cero datos destruidos.
+3. **Cuarentena Forense WORM:** El historial completo se sella en `artifact_bundle_v3/quarantine/` bajo firma criptográfica software (BLAKE3 / COSE_Sign1, con anclaje hardware TPM 2.0 en hoja de ruta). Cero datos destruidos.
 4. **Exportación de Cumplimiento:** El módulo `compliance_exporter` genera un paquete firmado en JSON/Markdown listo para ser entregado a la Autoridad de Supervisión de IA en menos de 24 horas.
 
 ---
@@ -178,9 +178,9 @@ El cliente instala el kernel de BABYLON-60 en su propia infraestructura (*on-pre
 
 ### 6.3 Análisis de Retorno de Inversión (ROI)
 
-$$\text{ROI} = \frac{\text{Multa Evitada (hasta 7\% Facturación)} + \text{Coste de Auditoría Ahorrado}}{\text{Licencia Enterprise } \text{CORTEX\_LICENSE\_KEY}}$$
+$$\text{ROI} = \frac{\text{Multa Evitada (hasta 3\% Facturación; 7\% en prácticas prohibidas)} + \text{Coste de Auditoría Ahorrado}}{\text{Licencia Enterprise } \text{CORTEX\_LICENSE\_KEY}}$$
 
-Para una institución financiera con €500M de facturación, el riesgo máximo evitado supera los €35M. El coste de la licencia Enterprise representa una fracción inferior al 1% del riesgo mitigado.
+Para una institución financiera con €500M de facturación, el riesgo máximo evitado por incumplimiento de obligaciones de alto riesgo asciende a €15M (y hasta €35M en el tramo de prácticas prohibidas del Art. 5). El coste de la licencia Enterprise representa una fracción inferior al 1% del riesgo mitigado.
 
 ---
 
