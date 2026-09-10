@@ -14,8 +14,8 @@
 
 ---
 
-## Slide 2: The Problem — The 35M€ Liability Cliff
-* **Regulatory Punishment:** Systems classified as High-Risk under Annex III of the EU AI Act (Justice, Finance, Healthcare) face penalties of up to **35M€ or 7% of global turnover** if they fail continuous automated logging (Art. 12) and human oversight (Art. 14).
+## Slide 2: The Problem — The 15M€ Liability Cliff
+* **Regulatory Punishment:** Systems classified as High-Risk under Annex III of the EU AI Act (Justice, Finance, Healthcare) face penalties of up to **15M€ or 3% of global turnover** if they fail continuous automated logging (Art. 12) and human oversight (Art. 14) — per Art. 99; the higher tier of 35M€ or 7% applies to prohibited practices under Art. 5.
 * **Mutable Cloud Logs:** Current enterprise AI records events in plain-text logs (Datadog, Cloud SQL, Sentry). Any sysadmin with root credentials can modify them. They lack non-repudiation and are inadmissible as forensic proof in court.
 * **The ISO 27001 Illusion:** ISO 27001 certifies human access procedures and datacenter locks, not the stochasticity or unverified actions of autonomous agents.
 
@@ -39,8 +39,8 @@
 
 ## Slide 5: Market Timing — Why Now? (August 2026 Invariant)
 1. **EU AI Act Deadline:** Mandatory compliance for high-risk systems is in effect. European supervisors (AESIA, BSI, CNIL) are launching inspection probes.
-2. **Cyber-Insurance Catalyst:** Underwriters (Munich Re, AXA, Lloyd's) require verifiable audit trails before issuing D&O and AI liability policies, offering up to 30% premium discounts for certified systems.
-3. **The Observability Gap:** Tools like LangSmith or Arize solve cloud prompt debugging, but no player owns OS-level cryptographic non-repudiation. **$8.4B TAM** in AI Trust & Governance by 2028.
+2. **Cyber-Insurance Catalyst:** Underwriters (e.g., Munich Re, AXA, Lloyd's) are beginning to require verifiable audit trails before issuing D&O and AI liability policies, exploring premium discounts for certified systems (industry discussions, no confirmed public figures).
+3. **The Observability Gap:** Tools like LangSmith or Arize solve cloud prompt debugging, but no player owns OS-level cryptographic non-repudiation. **Estimated $8.4B TAM** in AI Trust & Governance by 2028 (internal estimate).
 
 ---
 
@@ -61,7 +61,7 @@
 
 ## Slide 8: Capital Asymmetry — SaaS vs. Trust Infrastructure
 * **Vertical SaaS (e.g. Lexroom):** Burns 70M$+ on human sales reps, paid Google Ads PPC, and country-by-country legal scrapers. High marginal costs, 10x-15x ARR exit multiple.
-* **BABYLON-60 Trust Substrate:** 2.5M€ Seed deployed into pure intellectual density, formal verification, and regulatory sandboxes. Marginal compute cost ≈ 0. 30x-50x ARR exit multiple (comparable to HashiCorp, Docker, Chainguard).
+* **BABYLON-60 Trust Substrate:** 2.5M€ Seed deployed into pure intellectual density, formal verification, and regulatory sandboxes. Marginal compute cost ≈ 0. 30x-50x ARR exit multiple (comparable-driven estimate: HashiCorp, Docker, Chainguard).
 
 ---
 
@@ -82,5 +82,5 @@
 * **18-Month Milestones:**
   * Q4 2026: 15 Enterprise LOIs secured.
   * Q2 2027: Reference architecture in the AESIA regulatory sandbox.
-  * Q4 2027: Series A round at **60M€ - 100M€ valuation**.
+  * Q4 2027: Series A round targeting a **60M€ - 100M€ valuation**.
 * **Repository:** [github.com/borjamoskv/BABYLON-60](https://github.com/borjamoskv/BABYLON-60)
