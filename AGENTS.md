@@ -68,3 +68,15 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 
 - **Prohibición de IO Síncrono en Ruta Caliente**: Queda terminantemente prohibido interponer escrituras a disco síncronas (SQLite WAL `synchronous=FULL`) en el bucle caliente de inferencia o negociación entre agentes. La comunicación inter-agente debe transitar exclusivamente por memoria compartida lock-free (`SharedManifest` 64 B / `Iceoryx2`). SQLite opera únicamente como *Cold Ledger / Archival Sink*.
 
+## 🧬 Invariante de Monotonicidad de Datasets (INV_DATASET_MONOTONIC)
+
+- **Preservación Acumulativa de Gradientes:** En cualquier pipeline de ingesta o compilación de datos para modelos de la familia MOSKV-1 / CORTEX, el reemplazo de datasets maestros exige verificación de monotonicidad estricta ($N_{t+1} \ge N_t$). 
+- **Los 6 Dominios Canónicos de MOSKV-1:** Todo corpus maestro multi-dominio de MOSKV-1 debe contemplar la distribución equilibrada de sus 6 dominios ontológicos:
+  1. `Ingeniero` (C++20/Rust/CALM II'/SPSC Lock-Free)
+  2. `Físico` (Termodinámica/Landauer/Mecánica Estadística)
+  3. `Médico` (Neurociencia/Homeostasis/Bioenergética)
+  4. `Músico` (Acústica Físico-Matemática/Armónicos/Microtonalidad)
+  5. `Abogado` (SCITT RFC 9943/EU AI Act/Gobernanza)
+  6. `Filósofo` (Invariante Ω118 Escohotadiano: Monismo de substancia, emergencia disipativa, rechazo del dirigismo)
+
+
