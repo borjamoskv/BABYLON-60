@@ -67,7 +67,7 @@ async fn main() {
             println!("   Believed?    : {}", is_believed);
 
             // Fetch the justification from Ledger directly
-            let json = orchestrator.ledger.get_latest_justification_json().unwrap();
+            let json = orchestrator.ledger.get_latest_justification_json().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
             println!("\n   === Recuperado del MasterLedger ===");
             println!("   Justification (JSON): {}", json);
         }

@@ -126,7 +126,7 @@ struct B60Compiler;
 impl B60Compiler {
     fn compile(source: &str) -> Vec<String> {
         let lines: Vec<String> = source.lines()
-            .map(|l| l.split('#').next().unwrap().trim().to_string())
+            .map(|l| l.split('#').next().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.").trim().to_string())
             .filter(|l| !l.is_empty())
             .collect();
         Self::static_proof(&lines);
@@ -358,9 +358,9 @@ fn export_quarantine_bundle(ledger: &DAGLedger) {
   "forensic_integrity": "IMMUTABLE"
 }}"#, graph_hash);
 
-    fs::create_dir_all("artifact_bundle_v3/quarantine").unwrap();
-    fs::write("artifact_bundle_v3/quarantine/manifest.json", quarantine_manifest).unwrap();
-    fs::write("artifact_bundle_v3/quarantine/graph.canonical", &canonical_graph).unwrap();
+    fs::create_dir_all("artifact_bundle_v3/quarantine").expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+    fs::write("artifact_bundle_v3/quarantine/manifest.json", quarantine_manifest).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+    fs::write("artifact_bundle_v3/quarantine/graph.canonical", &canonical_graph).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
     println!("-> [Quarantine] WORM Forensic Seal Applied. Seal Hash: {}", graph_hash);
 }
 
@@ -410,10 +410,10 @@ fn export_artifact_bundle(ledger: &DAGLedger) {
     }
     let proof_ir = ir_lines.join("\n") + "\n";
 
-    fs::create_dir_all("artifact_bundle_v3").unwrap();
-    fs::write("artifact_bundle_v3/manifest.json", manifest).unwrap();
-    fs::write("artifact_bundle_v3/graph.canonical", &canonical_graph).unwrap();
-    fs::write("artifact_bundle_v3/proof.ir", proof_ir).unwrap();
+    fs::create_dir_all("artifact_bundle_v3").expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+    fs::write("artifact_bundle_v3/manifest.json", manifest).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+    fs::write("artifact_bundle_v3/graph.canonical", &canonical_graph).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+    fs::write("artifact_bundle_v3/proof.ir", proof_ir).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
     
     println!("-> [Exporter] Canonical graph generated. graph.sha256 approx: {}", graph_hash);
     println!("-> [Exporter] Proof IR extracted. Dispatched to Lean/Coq Backends.");

@@ -132,15 +132,15 @@ mod tests {
     fn test_step_alloc_load_mov_halt() {
         let state = MachineState::new();
         let alloc_instr = Instruction { opcode: Opcode::Alloc(Reg::R1, TypeTag::I64) };
-        let state = step(state, &alloc_instr).unwrap();
+        let state = step(state, &alloc_instr).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         assert_eq!(state.read_reg(Reg::R1).tag, TypeTag::I64);
 
         let load_instr = Instruction { opcode: Opcode::LoadImm(Reg::R1, 42) };
-        let state = step(state, &load_instr).unwrap();
+        let state = step(state, &load_instr).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         assert_eq!(state.read_reg(Reg::R1).value, Value::ImmI64(42));
 
         let mov_instr = Instruction { opcode: Opcode::Mov(Reg::R2, Reg::R1) };
-        let state = step(state, &mov_instr).unwrap();
+        let state = step(state, &mov_instr).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         assert_eq!(state.read_reg(Reg::R2).value, Value::ImmI64(42));
 
         let halt_instr = Instruction { opcode: Opcode::Halt };
@@ -158,18 +158,18 @@ mod tests {
     fn test_step_arithmetic_and_emit() {
         let state = MachineState::new();
         let load_instr = Instruction { opcode: Opcode::LoadImm(Reg::R1, 10) };
-        let state = step(state, &load_instr).unwrap();
+        let state = step(state, &load_instr).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
 
         let add_instr = Instruction { opcode: Opcode::Add(Reg::R1, Value::ImmI64(5)) };
-        let state = step(state, &add_instr).unwrap();
+        let state = step(state, &add_instr).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         assert_eq!(state.read_reg(Reg::R1).value, Value::ImmI64(15));
 
         let mul_instr = Instruction { opcode: Opcode::Mul(Reg::R1, Value::ImmI64(2)) };
-        let state = step(state, &mul_instr).unwrap();
+        let state = step(state, &mul_instr).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         assert_eq!(state.read_reg(Reg::R1).value, Value::ImmI64(30));
 
         let emit_instr = Instruction { opcode: Opcode::Emit("STATE_TAG".into(), Reg::R1) };
-        let state = step(state, &emit_instr).unwrap();
+        let state = step(state, &emit_instr).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         assert_eq!(state.ledger.len(), 1);
         assert_ne!(state.ledger.root_hash(), [0u8; 32]);
     }

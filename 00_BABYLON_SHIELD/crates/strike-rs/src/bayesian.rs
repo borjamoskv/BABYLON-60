@@ -41,7 +41,7 @@ impl FiniteMarkovKernel {
             if *prob_x > 0.0 {
                 for y in &self.y_states {
                     let transition_prob = self.matrix.get(&(x.clone(), y.clone())).copied().unwrap_or(0.0);
-                    *pf.get_mut(y).unwrap() += prob_x * transition_prob;
+                    *pf.get_mut(y).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.") += prob_x * transition_prob;
                 }
             }
         }
@@ -142,13 +142,13 @@ mod tests {
         let kernel = FiniteMarkovKernel::new(x_states, y_states, matrix);
         
         let pf = kernel.apply_prior(&p);
-        assert!((pf.get("obs_1").unwrap() - 0.59).abs() < 1e-6);
-        assert!((pf.get("obs_2").unwrap() - 0.41).abs() < 1e-6);
+        assert!((pf.get("obs_1").expect("C5-REAL: Termodinámica forzada. Unwrap purgado.") - 0.59).abs() < 1e-6);
+        assert!((pf.get("obs_2").expect("C5-REAL: Termodinámica forzada. Unwrap purgado.") - 0.41).abs() < 1e-6);
 
         let f_dagger = kernel.disintegrate(&p).expect("Disintegration should succeed without hallucinations");
         
         // P(state_A | obs_1) = (0.8 * 0.7) / 0.59 = 0.9491...
-        let p_a_given_1 = f_dagger.get(&("obs_1".to_string(), "state_A".to_string())).unwrap();
+        let p_a_given_1 = f_dagger.get(&("obs_1".to_string(), "state_A".to_string())).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         assert!((*p_a_given_1 - 0.949152).abs() < 1e-5);
     }
 }

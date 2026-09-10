@@ -146,7 +146,7 @@ mod tests {
         // Leer dato
         let read_result = manifest.read();
         assert!(read_result.is_some());
-        let (read_epoch, read_hash) = read_result.unwrap();
+        let (read_epoch, read_hash) = read_result.expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         
         assert_eq!(read_epoch, 42);
         assert_eq!(read_hash, test_hash);

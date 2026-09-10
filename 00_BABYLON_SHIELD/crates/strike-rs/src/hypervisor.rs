@@ -159,7 +159,7 @@ impl SwarmHypervisor {
 
     /// Register a new in-memory tenant scope (INV_C5_18 zero-worktree constraint)
     pub fn register_tenant(&self, tenant_id: &str, quota_bytes: usize, pubkey: VerifyingKey) -> bool {
-        let mut guard = self.tenants.lock().unwrap();
+        let mut guard = self.tenants.lock().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         if guard.contains_key(tenant_id) {
             if let Some(t) = guard.get_mut(tenant_id) {
                 t.active = true;
@@ -186,13 +186,13 @@ impl SwarmHypervisor {
 
     /// Evict a tenant scope from RAM to purge session entropy
     pub fn evict_tenant(&self, tenant_id: &str) -> bool {
-        let mut guard = self.tenants.lock().unwrap();
+        let mut guard = self.tenants.lock().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         guard.remove(tenant_id).is_some()
     }
 
     /// Return total active in-memory tenants
     pub fn active_tenant_count(&self) -> usize {
-        let guard = self.tenants.lock().unwrap();
+        let guard = self.tenants.lock().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         guard.values().filter(|t| t.active).count()
     }
 

@@ -360,7 +360,7 @@ mod tests {
     #[tokio::test]
     async fn test_t1_succeeds_returns_t1() {
         let gw = CognitiveGateway::with_tier3(mock_engine(5, 0.0));
-        let resp = gw.execute_with_failover(make_request(2)).await.unwrap();
+        let resp = gw.execute_with_failover(make_request(2)).await.expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         assert!(resp.content.contains("Tier 1"));
         assert!(resp.content_hash.starts_with("GW_BLAKE3:"));
     }
@@ -408,7 +408,7 @@ mod tests {
     async fn test_gateway_without_tier3() {
         let gw = CognitiveGateway::new();
         // Should still work — T1 succeeds, T3 never needed
-        let resp = gw.execute_with_failover(make_request(2)).await.unwrap();
+        let resp = gw.execute_with_failover(make_request(2)).await.expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         assert!(resp.content.contains("Tier 1"));
     }
 }

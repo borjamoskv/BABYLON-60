@@ -35,7 +35,7 @@ async fn mock_t2_openrouter() -> Result<String, &'static str> {
 async fn speculative_gateway(t1_fail_chance: f64) -> Metric {
     let start_time = Instant::now();
     let t3_handle = tokio::spawn(async { mock_t3_local().await });
-    let _ = t3_handle.await.unwrap();
+    let _ = t3_handle.await.expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
     let t3_latency_ms = start_time.elapsed().as_millis();
 
     let t1_future = mock_t1_antigravity(t1_fail_chance);
@@ -65,7 +65,7 @@ async fn main() {
     }
     
     let results = join_all(tasks).await;
-    let metrics: Vec<Metric> = results.into_iter().map(|r| r.unwrap()).collect();
+    let metrics: Vec<Metric> = results.into_iter().map(|r| r.expect("C5-REAL: Termodinámica forzada. Unwrap purgado.")).collect();
 
     let global_time = global_start.elapsed().as_secs_f64();
     let avg_t3_latency: f64 = metrics.iter().map(|m| m.t3_latency_ms as f64).sum::<f64>() / total_iterations as f64;

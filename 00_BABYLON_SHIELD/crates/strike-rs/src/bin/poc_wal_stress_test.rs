@@ -12,7 +12,7 @@ fn main() {
     let _ = std::fs::remove_file(db_path);
 
     // Initializamos el ledger
-    let ledger = Arc::new(Mutex::new(MasterLedger::new(db_path).unwrap()));
+    let ledger = Arc::new(Mutex::new(MasterLedger::new(db_path).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.")));
 
     let num_threads = 10;
     let ops_per_thread = 500;
@@ -38,14 +38,14 @@ fn main() {
                 };
                 
                 // Bloqueo de Mutex forzado por el diseño síncrono de Rust + SQLite
-                let mut db = ledger_clone.lock().unwrap();
-                db.assert_knowledge(&js, "stress_env").unwrap();
+                let mut db = ledger_clone.lock().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+                db.assert_knowledge(&js, "stress_env").expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
             }
         }));
     }
 
     for h in handles {
-        h.join().unwrap();
+        h.join().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
     }
 
     let duration = start.elapsed();

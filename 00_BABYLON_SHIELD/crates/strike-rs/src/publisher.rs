@@ -94,7 +94,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_publish_markdown() {
-        let ledger = MasterLedger::new(":memory:").unwrap();
+        let ledger = MasterLedger::new(":memory:").expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         let attestor = Box::new(DummyOracle);
         let mut orch = Orchestrator::new(ledger, attestor);
 
@@ -105,10 +105,10 @@ mod tests {
         };
 
         // Inject into ATMS and Ledger
-        orch.resolve_intent(&goal, "prod_env").await.unwrap();
+        orch.resolve_intent(&goal, "prod_env").await.expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
 
         let publisher = Publisher::new(&orch.ledger);
-        let markdown = publisher.publish("prod_env", ExportFormat::Markdown).unwrap();
+        let markdown = publisher.publish("prod_env", ExportFormat::Markdown).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         
         assert!(markdown.contains("# Causal-Determinist KNOWLEDGE ARTIFACT"));
         assert!(markdown.contains("prod_env"));
@@ -118,7 +118,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_publish_json() {
-        let ledger = MasterLedger::new(":memory:").unwrap();
+        let ledger = MasterLedger::new(":memory:").expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         let attestor = Box::new(DummyOracle);
         let mut orch = Orchestrator::new(ledger, attestor);
 
@@ -128,13 +128,13 @@ mod tests {
             obligations: vec![],
         };
 
-        orch.resolve_intent(&goal, "json_env").await.unwrap();
+        orch.resolve_intent(&goal, "json_env").await.expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
 
         let publisher = Publisher::new(&orch.ledger);
-        let json = publisher.publish("json_env", ExportFormat::Json).unwrap();
+        let json = publisher.publish("json_env", ExportFormat::Json).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         
         // Assert valid JSON
-        let parsed: Vec<JustifiedStatement> = serde_json::from_str(&json).unwrap();
+        let parsed: Vec<JustifiedStatement> = serde_json::from_str(&json).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         assert_eq!(parsed.len(), 1);
         assert_eq!(parsed[0].statement.content, "Energy is conserved");
     }

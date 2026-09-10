@@ -211,14 +211,14 @@ impl Machine {
             theorem_prover_payload: "inductive B60State where ...".to_string(),
         };
 
-        let json = serde_json::to_string_pretty(&artifact).unwrap();
-        fs::write("proof_artifact.json", json).unwrap();
+        let json = serde_json::to_string_pretty(&artifact).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+        fs::write("proof_artifact.json", json).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         println!("[ MOSKV KERNEL ] Escrito a proof_artifact.json");
     }
 
     fn run(&mut self) {
         while !self.q.is_empty() {
-            let mut coro = self.q.pop_front().unwrap();
+            let mut coro = self.q.pop_front().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
             
             match coro.state {
                 CoroutineState::Completed | CoroutineState::Halted => continue,
@@ -445,7 +445,7 @@ fn main() {
     let mut labels = HashMap::new();
     for (i, line) in lines.iter().enumerate() {
         if line.starts_with("MUB ") {
-            let name = line.split_whitespace().nth(1).unwrap();
+            let name = line.split_whitespace().nth(1).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
             labels.insert(name.to_string(), i);
         }
     }

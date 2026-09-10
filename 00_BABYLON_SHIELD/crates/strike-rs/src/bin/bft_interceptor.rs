@@ -234,7 +234,7 @@ mod tests {
     fn test_bft_ledger_merkle_root() {
         let key_bytes = vec![0x42; 32];
         let key = hmac::Key::new(hmac::HMAC_SHA256, &key_bytes);
-        let conn = Connection::open_in_memory().unwrap();
+        let conn = Connection::open_in_memory().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         conn.execute_batch(
             "CREATE TABLE transactions (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -244,7 +244,7 @@ mod tests {
                 prev_hash TEXT NOT NULL,
                 curr_hash TEXT NOT NULL
             );"
-        ).unwrap();
+        ).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
 
         let mut ledger = BftLedger {
             conn,
@@ -255,11 +255,11 @@ mod tests {
 
         assert_eq!(ledger.compute_merkle_root(), "EMPTY_LEDGER");
 
-        ledger.insert("EVENT_A", "payload_A").unwrap();
+        ledger.insert("EVENT_A", "payload_A").expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         assert_ne!(ledger.compute_merkle_root(), "EMPTY_LEDGER");
         let root_1 = ledger.compute_merkle_root();
 
-        ledger.insert("EVENT_B", "payload_B").unwrap();
+        ledger.insert("EVENT_B", "payload_B").expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         let root_2 = ledger.compute_merkle_root();
         assert_ne!(root_1, root_2);
     }

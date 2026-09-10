@@ -82,13 +82,13 @@ fn parse_statement(pair: pest::iterators::Pair<Rule>) -> Result<Statement> {
     match inner.as_rule() {
         Rule::stmt_let => {
             let mut parts = inner.into_inner();
-            let var_name = parts.next().unwrap().as_str().to_string();
-            let expr = parse_expr(parts.next().unwrap())?;
+            let var_name = parts.next().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.").as_str().to_string();
+            let expr = parse_expr(parts.next().expect("C5-REAL: Termodinámica forzada. Unwrap purgado."))?;
             Ok(Statement::Let { name: var_name, expr })
         }
         Rule::stmt_assert => {
             let mut parts = inner.into_inner();
-            let expr = parse_expr(parts.next().unwrap())?;
+            let expr = parse_expr(parts.next().expect("C5-REAL: Termodinámica forzada. Unwrap purgado."))?;
             Ok(Statement::Assert { expr })
         }
         r => Err(anyhow!("Invalid statement rule: {:?}", r)),

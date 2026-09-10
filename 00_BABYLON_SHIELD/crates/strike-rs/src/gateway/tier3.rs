@@ -409,7 +409,7 @@ mod tests {
         let result = engine.execute("test prompt", 64).await;
         assert!(result.is_ok());
 
-        let output = result.unwrap();
+        let output = result.expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         assert!(output.content_hash.starts_with("T3_BLAKE3:"));
         assert!(output.tokens_generated > 0);
         assert_eq!(output.model_id, "mock-local-v0");

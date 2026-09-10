@@ -312,18 +312,18 @@ mod tests {
             assert!(taint_nogood.contains(":NOGOOD:"));
 
             // Verify DDB contradiction propagation pruned the label of the contradicted conjecture
-            assert!(kernel.is_believed("Water is H2O").unwrap(), "Uncontradicted premise must remain believed");
-            assert!(!kernel.is_believed("Alien hypothesis X").unwrap(), "Contradicted hypothesis label must be pruned");
-            assert!(!kernel.contradiction_free("Alien hypothesis X").unwrap());
+            assert!(kernel.is_believed("Water is H2O").expect("C5-REAL: Termodinámica forzada. Unwrap purgado."), "Uncontradicted premise must remain believed");
+            assert!(!kernel.is_believed("Alien hypothesis X").expect("C5-REAL: Termodinámica forzada. Unwrap purgado."), "Contradicted hypothesis label must be pruned");
+            assert!(!kernel.contradiction_free("Alien hypothesis X").expect("C5-REAL: Termodinámica forzada. Unwrap purgado."));
         }
 
         // Reopen new kernel instance from same disk DB and verify exact state replay
         {
             let kernel_replayed = CortexKernel::new(db_path).expect("[Causal-Determinist] FATAL: Failed to reopen CortexKernel");
-            assert!(kernel_replayed.is_believed("Water is H2O").unwrap(), "Replayed uncontradicted premise must be believed");
-            assert!(kernel_replayed.contradiction_free("Water is H2O").unwrap());
-            assert!(!kernel_replayed.is_believed("Alien hypothesis X").unwrap(), "Replayed contradicted hypothesis must remain pruned");
-            assert!(!kernel_replayed.contradiction_free("Alien hypothesis X").unwrap(), "Replayed ATMS must preserve nogood state");
+            assert!(kernel_replayed.is_believed("Water is H2O").expect("C5-REAL: Termodinámica forzada. Unwrap purgado."), "Replayed uncontradicted premise must be believed");
+            assert!(kernel_replayed.contradiction_free("Water is H2O").expect("C5-REAL: Termodinámica forzada. Unwrap purgado."));
+            assert!(!kernel_replayed.is_believed("Alien hypothesis X").expect("C5-REAL: Termodinámica forzada. Unwrap purgado."), "Replayed contradicted hypothesis must remain pruned");
+            assert!(!kernel_replayed.contradiction_free("Alien hypothesis X").expect("C5-REAL: Termodinámica forzada. Unwrap purgado."), "Replayed ATMS must preserve nogood state");
         }
 
         let _ = fs::remove_file(db_path);

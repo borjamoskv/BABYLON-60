@@ -171,8 +171,8 @@ mod tests {
         let mut l2 = DAGLedger::new();
 
         let clock = SimulationClock::new(100);
-        let id1 = l1.append(vec![], clock, "payload_alpha".into()).unwrap();
-        let id2 = l2.append(vec![], clock, "payload_beta".into()).unwrap();
+        let id1 = l1.append(vec![], clock, "payload_alpha".into()).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+        let id2 = l2.append(vec![], clock, "payload_beta".into()).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
 
         assert_eq!(id1, id2);
         assert_ne!(l1.root_hash(), l2.root_hash());

@@ -48,8 +48,8 @@ fn main() {
         (4, 7), (5, 8), (6, 9)          // Capa 1 -> Capa 2
     ];
     for (src, dst) in edges {
-        *in_degree.get_mut(&dst).unwrap() += 1;
-        children.get_mut(&src).unwrap().push(dst);
+        *in_degree.get_mut(&dst).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.") += 1;
+        children.get_mut(&src).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.").push(dst);
     }
 
     let num_nodes = 10;
@@ -134,7 +134,7 @@ fn main() {
                     // Propagar causalidad (Wakeup a hijos O(1))
                     if let Some(kids) = children.get(&node_id) {
                         for kid in kids {
-                            let d = in_degree.get_mut(kid).unwrap();
+                            let d = in_degree.get_mut(kid).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
                             *d -= 1;
                             if *d == 0 {
                                 ready_queue.push(*kid);
@@ -156,7 +156,7 @@ fn main() {
 
     let elapsed = start_time.elapsed();
     stop_signal.store(true, Ordering::Relaxed);
-    worker_handle.join().unwrap();
+    worker_handle.join().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
 
     println!("═══════════════════════════════════════════════════════════════════");
     println!("✅ FALSACIÓN DAG (ZERO-COPY) SUPERADA");

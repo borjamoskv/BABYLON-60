@@ -47,7 +47,7 @@ async fn speculative_gateway(iteration: usize, t1_fail_chance: f64) -> Metric {
     });
 
     // 2. Esperamos el T3 (que es determinísticamente rápido) para el "Stream inicial"
-    let _t3_result = t3_handle.await.unwrap();
+    let _t3_result = t3_handle.await.expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
     let t3_latency_ms = start_time.elapsed().as_millis();
 
     // 3. Disparamos T1 con un timeout de 2000ms

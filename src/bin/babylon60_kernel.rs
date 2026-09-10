@@ -173,7 +173,7 @@ fn handle_swarm(manifest_ref: &SharedManifest, num_threads: usize) {
     let mut total_valid = 0;
     let mut total_torn = 0;
     for handle in handles {
-        let (_id, valid, torn) = handle.join().unwrap();
+        let (_id, valid, torn) = handle.join().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         total_valid += valid;
         total_torn += torn;
     }

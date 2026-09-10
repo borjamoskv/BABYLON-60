@@ -100,7 +100,7 @@ fn main() {
     
     let total_elapsed = start.elapsed();
     stop_signal.store(true, Ordering::Relaxed);
-    sub_handle.join().unwrap();
+    sub_handle.join().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
 
     let publish_rate = (msg_count as f64 / publish_elapsed.as_secs_f64()) / 1_000_000.0;
     let e2e_rate = (msg_count as f64 / total_elapsed.as_secs_f64()) / 1_000_000.0;

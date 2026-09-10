@@ -27,7 +27,7 @@ thread_local! {
         buffer: vec![TelemetryLog { probe_id: "", start_cycle: 0, end_cycle: 0, delta_cycles: 0 }; TELEMETRY_CAPACITY]
             .into_boxed_slice()
             .try_into()
-            .unwrap(),
+            .expect("C5-REAL: Termodinámica forzada. Unwrap purgado."),
         index: 0,
     });
 }
