@@ -23,7 +23,7 @@
 
 ## Slide 3: The Solution — The Cryptographic Black Box
 1. **Immutable Audit Ledger (SHA3-256):** Every prompt, embedding, tool call, and state transition is cryptographically chained in a local SQLite WAL. Retroactive tampering breaks the chain and is mathematically detectable in $O(N)$.
-2. **Deterministic Fail-Stop (Rust IPC):** Sub-microsecond emergency interruption ($O(1)$) via a 64-byte lock-free shared memory slot (`SharedManifest`), emitting a hardware-signed `COSE_Sign1` halt receipt.
+2. **Deterministic Fail-Stop (Rust IPC):** Sub-microsecond emergency interruption ($O(1)$) via a 64-byte lock-free shared memory slot (`SharedManifest`), emitting a cryptographically signed `COSE_Sign1` halt receipt.
 3. **Local-First Sovereignty:** All data and trade secrets stay on the host machine (`$BABYLON_HOME/`). Zero mandatory cloud leaks, preserving professional and commercial secrecy.
 
 ---
@@ -33,7 +33,7 @@
 * **Layer 2: IPC Memory Slot:** 64-byte lock-free `SharedManifest` for zero-overhead inter-process control.
 * **Layer 3: Rust Kernel:** `babylon60-kernel` + `cortex-guard` providing atomic fail-stop semantics.
 * **Layer 4: Tamper-Evident Ledger:** SHA3-256 hash chains on SQLite WAL + Git Sentinel witnesses.
-* **Formal Rigor:** Security invariants verified in **Lean 4** (`sorry = 0`), mutation testing kill rate **>90%** (`cargo-mutants`), and Zero-Knowledge verification (`nul-zk`).
+* **Formal Rigor:** Security invariants formalized in **Lean 4** (`sorry = 0`; key invariants currently stated as explicit axioms — full proofs in progress), mutation testing with `cargo-mutants` (**CI integration planned**), and Zero-Knowledge circuit compilation (`nul-zk`, proof-of-concept).
 
 ---
 
@@ -46,7 +46,7 @@
 
 ## Slide 6: Product Maturity & Technical Moat
 * **100% Operational Monorepo:** Production-grade Rust crates (`babylon60-kernel`, `strike-rs`, `cortex-guard`), Python package, and Lean 4 proofs.
-* **30+ Formal Proofs in Lean 4:** Invariants verified mathematically in `/proof/lean` with zero guesswork.
+* **Lean 4 Formal Specification:** Security invariants formalized in `/proof/lean` (no `sorry`; key invariants stated as explicit axioms — full proofs in progress).
 * **Sub-Microsecond Fail-Stop:** $O(1)$ IPC interruption at the CPU instruction boundary.
 * **Zero Cloud Lock-in:** Universal static compilation (`x86_64-unknown-linux-musl` & Apple Silicon) for banking, defense, and air-gapped deployments.
 
