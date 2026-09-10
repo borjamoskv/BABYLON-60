@@ -192,7 +192,7 @@ impl SwarmHypervisor {
 
     /// Return total active in-memory tenants
     pub fn active_tenant_count(&self) -> usize {
-        let guard = self.tenants.write().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+        let guard = self.tenants.read().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         guard.values().filter(|t| t.active).count()
     }
 
