@@ -134,8 +134,10 @@ class CDPPage:
                 ready_state = await self.evaluate("document.readyState")
                 if ready_state == "complete":
                     return res
-            except Exception:
-                pass
+            except Exception as e:
+                import logging
+
+                logging.warning(f"CDP ReadyState Error: {e}")
 
             try:
                 await asyncio.wait_for(loaded_fut, timeout=timeout)
@@ -294,8 +296,10 @@ class CDPPage:
         if self.ws:
             try:
                 await self.send("Target.closeTarget", {"targetId": self.target_id})
-            except Exception:
-                pass
+            except Exception as e:
+                import logging
+
+                logging.warning(f"CDP ReadyState Error: {e}")
             await self.ws.close()
             self.ws = None
 
@@ -400,8 +404,10 @@ class BrowserEngine:
                                     ver.get("Browser", "Chrome"),
                                 )
                                 return True
-                    except Exception:
-                        pass
+                    except Exception as e:
+                        import logging
+
+                        logging.warning(f"CDP Wait Error: {e}")
 
             # Fallback HTTP check if DevToolsActivePort file is delayed
             if self.port != 0:
@@ -469,8 +475,10 @@ class BrowserEngine:
         if self._temp_dir:
             try:
                 self._temp_dir.cleanup()
-            except Exception:
-                pass
+            except Exception as e:
+                import logging
+
+                logging.warning(f"CDP ReadyState Error: {e}")
             self._temp_dir = None
 
     async def __aenter__(self):

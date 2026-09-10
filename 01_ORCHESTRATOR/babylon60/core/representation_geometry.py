@@ -6,14 +6,13 @@
 # Multi-Scale Latent Geometry: RankMe, IsoScore, ZCA-Whitening & m-KNN
 
 import numpy as np
-from typing import Tuple
 
 
 def compute_rankme(X: np.ndarray, eps: float = 1e-12) -> float:
     """
     Computes RankMe: the effective dimensionality of representations
     defined as the exponential of the Shannon entropy of normalized singular values.
-    
+
     Reference: Garrido et al. (2022) / Belouche et al. (2026, arXiv:2609.08692v1)
     """
     if X.ndim != 2 or X.shape[0] == 0 or X.shape[1] == 0:
@@ -22,7 +21,7 @@ def compute_rankme(X: np.ndarray, eps: float = 1e-12) -> float:
     # Center matrix before SVD
     X_c = X - np.mean(X, axis=0, keepdims=True)
     singular_values = np.linalg.svd(X_c, compute_uv=False)
-    
+
     total = np.sum(singular_values)
     if total <= eps:
         return 0.0
@@ -44,14 +43,14 @@ def compute_pc1_explained_variance(X: np.ndarray) -> float:
 
     X_c = X - np.mean(X, axis=0, keepdims=True)
     cov = np.cov(X_c, rowvar=False)
-    
+
     if cov.ndim == 0:
         return 1.0
 
     eigenvalues = np.linalg.eigvalsh(cov)
     eigenvalues = np.maximum(eigenvalues, 0.0)
     total_var = np.sum(eigenvalues)
-    
+
     if total_var <= 1e-12:
         return 0.0
 
@@ -63,7 +62,7 @@ def compute_isoscore(X: np.ndarray) -> float:
     Quantifies the degree of isotropy of latent space representations.
     Measures the normalized distance between the normalized eigenvalue distribution
     and the uniform distribution.
-    
+
     Score 1.0 = Perfectly isotropic (equal variance in all directions).
     Score 0.0 = Degenerated / anisotropic (collapsed into a 1D subspace).
     """
@@ -72,7 +71,7 @@ def compute_isoscore(X: np.ndarray) -> float:
 
     X_c = X - np.mean(X, axis=0, keepdims=True)
     cov = np.cov(X_c, rowvar=False)
-    
+
     if cov.ndim == 0:
         return 0.0
 
@@ -80,7 +79,7 @@ def compute_isoscore(X: np.ndarray) -> float:
     eigenvalues = np.linalg.eigvalsh(cov)
     eigenvalues = np.maximum(eigenvalues, 0.0)
     total_var = np.sum(eigenvalues)
-    
+
     if total_var <= 1e-12:
         return 0.0
 
@@ -88,8 +87,8 @@ def compute_isoscore(X: np.ndarray) -> float:
     uniform = 1.0 / d
     # Normalized Euclidean distance to uniform vector
     dist_sq = np.sum((p - uniform) ** 2)
-    max_dist_sq = (1.0 - uniform) ** 2 + (d - 1) * (uniform ** 2)
-    
+    max_dist_sq = (1.0 - uniform) ** 2 + (d - 1) * (uniform**2)
+
     if max_dist_sq <= 1e-12:
         return 1.0
 
@@ -102,7 +101,7 @@ def compute_zca_whitening(X: np.ndarray, eps: float = 1e-5) -> np.ndarray:
     Applies Zero-Phase Component Analysis (ZCA) whitening.
     Transforms representation space such that the global covariance becomes the identity matrix,
     removing anisotropic artifacts while minimizing Euclidean distance to original features.
-    
+
     Formula: X_white = (X - mu) * Sigma^(-1/2)
     Reference: Section 5.1 of Belouche et al. (2026, arXiv:2609.08692v1)
     """
@@ -111,12 +110,12 @@ def compute_zca_whitening(X: np.ndarray, eps: float = 1e-5) -> np.ndarray:
 
     X_c = X - np.mean(X, axis=0, keepdims=True)
     cov = np.cov(X_c, rowvar=False)
-    
+
     # Eigendecomposition of covariance matrix
     eigvals, eigvecs = np.linalg.eigh(cov)
     # Inverse square root with numerical damping
     inv_sqrt_eigvals = 1.0 / np.sqrt(np.maximum(eigvals, eps))
-    
+
     # ZCA transform matrix: W = V * diag(1 / sqrt(lambda)) * V^T
     zca_matrix = eigvecs @ np.diag(inv_sqrt_eigvals) @ eigvecs.T
     return X_c @ zca_matrix
@@ -127,7 +126,7 @@ def compute_m_knn_overlap(X: np.ndarray, Y: np.ndarray, k: int = 10) -> float:
     Computes Mutual k-Nearest Neighbors (m-KNN) overlap between two representation spaces.
     Measures structural equivalence of local token neighborhoods, invariant to global linear
     transformations or anisotropic scaling.
-    
+
     Reference: Section 5.2 of Belouche et al. (2026, arXiv:2609.08692v1)
     """
     if X.shape[0] != Y.shape[0] or X.shape[0] <= k or k <= 0:

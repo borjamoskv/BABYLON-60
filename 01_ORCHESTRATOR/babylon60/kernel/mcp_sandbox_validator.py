@@ -113,5 +113,5 @@ class McpSandboxValidator:
             try:
                 proc.terminate()
                 await proc.wait()
-            except Exception:
-                pass
+            except Exception as e:
+                logger.warning(f"Cleanup Error: {e}")

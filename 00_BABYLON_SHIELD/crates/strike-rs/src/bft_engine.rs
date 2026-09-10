@@ -9,9 +9,9 @@ use crate::omega0::{Statement, Modality, Justification, JustifiedStatement};
 use blake3::Hasher;
 use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
-use tokio::sync::{RwLock, Semaphore, Notify};
+use tokio::sync::{RwLock, Semaphore};
 use rusqlite::{Connection, OpenFlags};
-use std::time::Instant;
+use std::time::{Duration, Instant};
 use std::fs::{self, OpenOptions};
 
 struct ThermalLock {
@@ -98,7 +98,7 @@ impl BftAsyncEngine {
             m.snapshot()
         };
 
-        let semaphore = Arc::new(Semaphore::new(self.concurrency_limit));
+        let _semaphore = Arc::new(Semaphore::new(self.concurrency_limit));
         
         let sorted = match self.topological_sort() {
             Ok(s) => s,
@@ -107,7 +107,7 @@ impl BftAsyncEngine {
 
         // --- ZERO-COPY BFT HYPERVISOR INTEGRATION ---
         use crate::hypervisor::{ZeroCopyPublisher, ZeroCopySubscriber};
-        use ed25519_dalek::{SigningKey, Signer};
+        use ed25519_dalek::SigningKey;
         use rand::rngs::OsRng;
         use std::thread;
 
@@ -147,7 +147,7 @@ impl BftAsyncEngine {
                         2, 1, node_id, &payload_hash_hex, &worker_keys
                     );
                 } else {
-                    thread::yield_now();
+                    thread::sleep(Duration::from_micros(10));
                 }
             }
         });
@@ -208,7 +208,7 @@ impl BftAsyncEngine {
                         }
                     }
                 } else {
-                    thread::yield_now();
+                    thread::sleep(Duration::from_micros(10));
                 }
             }
         });

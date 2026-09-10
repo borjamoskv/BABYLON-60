@@ -13,7 +13,7 @@ use std::collections::{HashMap, HashSet};
 use std::sync::{Arc, atomic::{AtomicBool, Ordering}};
 use std::thread;
 use std::time::{Duration, Instant};
-use ed25519_dalek::{SigningKey, Signer};
+use ed25519_dalek::SigningKey;
 use rand::rngs::OsRng;
 use strike_rs::hypervisor::{SwarmHypervisor, ZeroCopyPublisher, ZeroCopySubscriber};
 use blake3::Hasher;

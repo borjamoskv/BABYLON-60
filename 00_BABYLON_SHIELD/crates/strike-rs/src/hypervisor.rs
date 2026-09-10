@@ -14,7 +14,7 @@
 use iceoryx2::prelude::*;
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicBool, Ordering};
-use std::sync::{Arc, Mutex};
+use std::sync::{Arc, RwLock};
 use std::thread;
 use std::time::Duration;
 use ed25519_dalek::{SigningKey, VerifyingKey, Signer, Signature};
