@@ -33,7 +33,7 @@
 * **Layer 2: IPC Memory Slot:** 64-byte lock-free `SharedManifest` for zero-overhead inter-process control.
 * **Layer 3: Rust Kernel:** `babylon60-kernel` + `cortex-guard` providing atomic fail-stop semantics.
 * **Layer 4: Tamper-Evident Ledger:** SHA3-256 hash chains on SQLite WAL + Git Sentinel witnesses.
-* **Formal Rigor:** Security invariants formalized in **Lean 4** (`sorry = 0`; key invariants currently stated as explicit axioms — full proofs in progress), mutation testing with `cargo-mutants` (**CI integration planned**), and Zero-Knowledge circuit compilation (`nul-zk`, proof-of-concept).
+* **Formal Rigor:** Safety invariants axiomatized in **Lean 4** (type-checked, zero `sorry`). Full formal verification, zero-knowledge circuits (`nul-zk`), and comprehensive mutation testing are funded roadmap items.
 
 ---
 
@@ -46,7 +46,7 @@
 
 ## Slide 6: Product Maturity & Technical Moat
 * **100% Operational Monorepo:** Production-grade Rust crates (`babylon60-kernel`, `strike-rs`, `cortex-guard`), Python package, and Lean 4 proofs.
-* **Lean 4 Formal Specification:** Security invariants formalized in `/proof/lean` (no `sorry`; key invariants stated as explicit axioms — full proofs in progress).
+* **Lean 4 Axiomatic Specification:** Safety properties declared and type-checked in `/proof/lean` — axiomatic sketch compilable with zero `sorry`, with roadmap to full theorem-level verification.
 * **Sub-Microsecond Fail-Stop:** $O(1)$ IPC interruption at the CPU instruction boundary.
 * **Zero Cloud Lock-in:** Universal static compilation (`x86_64-unknown-linux-musl` & Apple Silicon) for banking, defense, and air-gapped deployments.
 

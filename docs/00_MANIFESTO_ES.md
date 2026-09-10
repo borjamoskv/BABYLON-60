@@ -37,7 +37,7 @@ Las bases de datos vectoriales y los *guardrails* semánticos ofrecen similitud,
 Nuestra ventaja competitiva no es un feature; es una barrera de entrada basada en física y matemáticas que la competencia (envuelta en Python y APIs en la nube) no puede replicar:
 
 1. **Aritmética Sexagesimal Exacta (`F60`):** El tiempo y el estado no son aproximaciones de coma flotante (`f64`) que derivan con el tiempo. Son fracciones puras. La causalidad es innegable.
-2. **Verificación Formal (Lean 4 + Rust):** No confiamos en tests unitarios; confiamos en teoremas matemáticos. El Kernel está formalmente verificado para garantizar que las invariantes de seguridad *nunca* pueden ser violadas.
+2. **Especificación Axiomática (Lean 4 + Rust):** No confiamos solo en tests unitarios; las invariantes de seguridad del Kernel están axiomatizadas y type-checked en Lean 4. La verificación formal completa (demostrar los axiomas como teoremas) es un objetivo de roadmap financiado.
 3. **Forense WORM (Cuarentena, no Purga):** Ante la anomalía, el sistema no se rompe ni borra su historial. Se congela, sella criptográficamente la evidencia y genera un certificado de auditoría en <24 horas.
 4. **Soberanía Local-First:** El núcleo opera donde el cliente dicta. Sin dependencia de nubes opacas. El cliente es el dueño absoluto de su cadena de custodia.
 
