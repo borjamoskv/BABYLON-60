@@ -31,10 +31,10 @@ Los invariantes aquí definidos son verificados formalmente por el kernel. Cualq
 - Las colisiones de `payload_hash` disparan un `ValueError` instantáneo.
 
 ### 1.2 `INV_C5_15`: Raw 32-Byte OP_RETURN Payload Encoding
-**Propósito:** Anclar de forma inmutable la validez de la demostración a la blockchain de Bitcoin (Sink L1).
+**Propósito:** Especificación de codificación determinista para interfaz de anclaje a Bitcoin (Sink L1 Roadmap).
 **Mecánica:**
-- El hash final de un artefacto canónico (`graph_hash` o Raíz de Merkle del Proof IR) DEBE inyectarse directamente en un script `OP_RETURN` de la transacción L1 de Bitcoin.
-- Este valor siempre es un hash SHA-256 codificado en exactamente 32 bytes binarios (no hexadecimales).
+- El hash final de un artefacto canónico (`graph_hash` o Raíz de Merkle del Proof IR) se formatea canónicamente en un script `OP_RETURN` de 34 bytes (`6a20<root>`) mediante la suite `scripts/c5_l1_ledger/l1_sink_bitcoin.py`.
+- Este valor siempre es un hash SHA-256 codificado en exactamente 32 bytes binarios (no hexadecimales dobles).
 
 ### 1.3 `INV_C5_17`: Sovereign Dual-Licensing Invariant
 **Propósito:** Protección legal y soberana del código fuente.

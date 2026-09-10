@@ -82,7 +82,7 @@ BABYLON-60 abandons hardware-dependent physical intuition to embrace a category-
 | `[IPC]` | **Strike RS Engine** | [`strike_rs/`](../crates/strike-rs/) | PyO3 native GIL bypass, Iceoryx2 shared memory, BLAKE3 taint graph. |
 | `[BFT]` | **Master Ledger BFT** | [`babylon60/bft/`](../packages/babylon60/bft/) | Escalón 3 Tamper-Evident log with Git Sentinel external witness. |
 | `[Web3]` | **EVM On-Chain Notary** | [`anvil_yung/`](../legacy_exergy/) | Foundry smart contracts for EVM Merkle root notarization. |
-| `[Web3]` | **Bitcoin L1 Sink** | [`L1_sink/`](../packages/cortex/L1_sink/) | On-chain Bitcoin `OP_RETURN` transaction hashes and anchor receipts. |
+| `[Web3]` | **Bitcoin L1 Sink** | [`L1_sink/`](../packages/cortex/L1_sink/) | Raw 32-byte `OP_RETURN` script payload generation & dry-run receipts (Roadmap/INV_C5_15). |
 | `[Transpiler]`| **Transpiler (F# -> Rust)**| [`causal_isomorphism/`](../experiments/causal_isomorphism/)| Functional F# domain kernel transpiler & linear type checker. |
 | `[Transpiler]`| **F# Domain Kernel** | [`domain_kernel/`](../legacy_exergy/) | F# IRP automata domain model (`IRPAutomata.fs`). |
 | `[Proof]` | **Lean 4 Formal Proofs** | [`proof/`](../proof/) | Lean 4 formal proof theorems (`proof/lean/Babylon.lean`). |
