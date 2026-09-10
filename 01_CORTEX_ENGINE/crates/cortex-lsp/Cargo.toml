@@ -1,0 +1,14 @@
+[package]
+name = "cortex-lsp"
+version = "0.1.0"
+edition = "2021"
+description = "Sovereign LSP Paracortex daemon for C5-REAL cognitive guardrails & biometric sign-offs"
+authors = ["Borja Moskv <borjamoskv@github.com>"]
+
+[dependencies]
+tokio = { version = "1.40", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+anyhow = "1.0"
+sha2 = "0.10"
+hex = "0.4"

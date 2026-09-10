@@ -5,29 +5,36 @@ import sys
 import json
 import logging
 import argparse
-import textwrap
 import subprocess
-from typing import List
-from PIL import Image, ImageDraw, ImageFont
+from typing import List, Optional
 from pydantic import BaseModel, Field
 from google import genai
 from google.genai import types
 
 # Configuración de Alta Exergía (Logging estricto)
-logging.basicConfig(level=logging.INFO, format='%(asctime)s [AX-S2] %(levelname)s: %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s [AX-SOTA] %(levelname)s: %(message)s')
+
+from pathlib import Path
+REMOTION_DIR = str(Path(__file__).resolve().parent.parent / "01_CORTEX_ENGINE" / "transducers" / "video_remotion")
 
 # ==============================================================================
-# 1. DEFINICIÓN TOPOLÓGICA (PYDANTIC) - El Tensor de Transducción Popperiana
+# 1. TOPOLOGÍA PYDANTIC (Protocolo LAMP & Falsación Popperiana)
 # ==============================================================================
+class MotionPhysics(BaseModel):
+    mass: float = Field(default=1.0, description="Inercia del elemento (0.5 ligera a 1.8 pesada)")
+    damping: float = Field(default=15.0, description="Amortiguamiento del muelle (10 a 25)")
+    stiffness: float = Field(default=90.0, description="Rigidez de la restitución (50 a 130)")
+
 class FalsificationScene(BaseModel):
-    id: int = Field(description="Fase causal. 1: Tesis, 2: Fricción, 3: Falsación")
-    duration_sec: int = Field(description="Duración rígida en segundos. Mínimo 4, máximo 9.")
-    voiceover_text: str = Field(description="Texto exacto para el motor TTS en español. Cero retórica.")
-    visual_prompt: str = Field(description="Directiva visual paramétrica para microscopio/cine.")
+    id: int = Field(description="1: Tesis, 2: Fricción, 3: Falsación")
+    phase_title: str = Field(description="Ej: 'Fase 01: Tesis Epistémica'")
+    voiceover_text: str = Field(description="Texto exacto para el TTS en español. Riguroso y clínico.")
+    physics: MotionPhysics = Field(description="Parámetros cinemáticos LAMP calculados por el LLM")
 
 class Storyboard(BaseModel):
-    global_style_vector: str = Field(description="El vector estético inmutable que gobernará todos los píxeles.")
-    scenes: List[FalsificationScene] = Field(description="Cascada causal obligatoria de 3 escenas: Tesis, Fricción y Prueba de Falsación.")
+    title: str = Field(description="Título formal del dictamen o paper auditado")
+    session_hash: str = Field(default="AX-SOTA-2026", description="Identificador de la prueba")
+    scenes: List[FalsificationScene] = Field(description="Cascada causal obligatoria de 3 fases")
 
 # ==============================================================================
 # 2. MOTOR DEL AGENTE DIRECTOR (Gemini 3.8 Flash con Fallback)
@@ -38,25 +45,22 @@ class DirectorAgent:
         self.primary_model = model
         self.fallback_model = 'gemini-3.6-flash'
 
-    def extract_invariants(self, corpus_text: str, override_metadata: str) -> Storyboard:
+    def extract_invariants(self, corpus_text: str) -> Storyboard:
         logging.info(f"Minimizando Divergencia KL con {self.primary_model} (Modo Pensamiento Profundo)...")
         
         prompt = f"""
-        SYSTEM OVERRIDE: Eres un Motor de Falsación Popperiana (C5-REAL).
-        Tu mandato es aniquilar la anergía semántica del CORPUS y someterlo a estrés epistémico.
-        
-        [SYSTEM_OVERRIDE_METADATA]
-        {override_metadata}
+        SYSTEM OVERRIDE: Eres el Director Audiovisual y Motor de Falsación Popperiana de Babylon60 (C5-REAL).
+        Tu mandato es aniquilar la anergía semántica del CORPUS y planificar una masterclass cinematográfica SOTA 2026.
         
         [CORPUS (TERRITORIO)]
         {corpus_text}
         
-        SINTETIZA el corpus en un Storyboard de EXACTAMENTE 3 escenas en ESPAÑOL:
-        1. Tesis: Expón la hipótesis o afirmación central del texto de forma clínica y directa.
-        2. Fricción Empírica: Señala la anomalía termodinámica, el p-hacking o la debilidad estructural.
-        3. Falsación: Propón el test empírico destructivo (Proof of Work) que refutaría la tesis.
+        SINTETIZA el corpus en un Storyboard de EXACTAMENTE 3 fases en ESPAÑOL:
+        1. Tesis: Expón la hipótesis central fríamente. (Física LAMP: mass=0.8, damping=14, stiffness=95)
+        2. Fricción Empírica: Señala la anomalía termodinámica o el p-hacking. (Física LAMP: mass=1.4, damping=18, stiffness=70)
+        3. Falsación: Propón el test empírico destructivo. (Física LAMP: mass=0.7, damping=12, stiffness=110)
         
-        El 'visual_prompt' de cada escena DEBE obligatoriamente estar condicionado por el 'global_style_vector'.
+        Asigna a cada fase un 'phase_title' claro ('Fase 01: Tesis Epistémica', etc.) y calcula la cinemática de muelle (physics).
         """
         
         config = types.GenerateContentConfig(
@@ -73,7 +77,7 @@ class DirectorAgent:
             )
             return Storyboard.model_validate_json(response.text)
         except Exception as e:
-            logging.warning(f"Clúster {self.primary_model} saturado ({e}). Conmutando al nodo de contención {self.fallback_model}...")
+            logging.warning(f"Clúster {self.primary_model} saturado ({e}). Conmutando a {self.fallback_model}...")
             response = self.client.models.generate_content(
                 model=self.fallback_model,
                 contents=prompt,
@@ -82,9 +86,9 @@ class DirectorAgent:
             return Storyboard.model_validate_json(response.text)
 
 # ==============================================================================
-# 3. TRANSDUCTOR MULTIMODAL, HUD DINÁMICO & SOUND DESIGN DSP
+# 3. SOUND DESIGN DSP & BRIDGE A REMOTION SOTA (1080p 60fps)
 # ==============================================================================
-class MultimodalTransducer:
+class SotaCompiler:
     def __init__(self, voice: str = "Mónica"):
         self.voice = voice
 
@@ -93,160 +97,120 @@ class MultimodalTransducer:
         result = subprocess.run(cmd, stdout=subprocess.PIPE, text=True)
         return float(result.stdout.strip())
 
-    def render_hud_card(self, scene: FalsificationScene, out_path: str):
-        """Genera tarjeta HUD transparente (1280x720) con ventana para osciloscopio en vivo"""
-        W, H = 1280, 720
-        img = Image.new('RGBA', (W, H), (0, 0, 0, 0))
-        draw = ImageDraw.Draw(img)
+    def compile(self, storyboard: Storyboard, output_mp4: str):
+        out_dir = "/tmp/c5_render"
+        os.makedirs(out_dir, exist_ok=True)
         
-        font_mono_small = ImageFont.truetype('/System/Library/Fonts/Menlo.ttc', 14)
-        font_mono_bold = ImageFont.truetype('/System/Library/Fonts/Menlo.ttc', 19)
-        font_body = ImageFont.truetype('/System/Library/Fonts/Helvetica.ttc', 26)
+        remotion_scenes = []
+        audio_tracks = []
         
-        colors = {
-            1: (0, 240, 220),   # Cyan
-            2: (255, 180, 40),  # Amber
-            3: (255, 75, 75)    # Crimson
-        }
-        accent = colors.get(scene.id, (200, 200, 200))
-        titles = {1: "FASE 01: TESIS EPISTÉMICA", 2: "FASE 02: FRICCIÓN Y ANOMALÍA", 3: "FASE 03: TEST DESTRUCTIVO (FALSACIÓN)"}
-        title = titles.get(scene.id, "FASE EXPERIMENTAL")
+        total_duration = 0.0
         
-        # Panel Glassmórfico principal
-        draw.rounded_rectangle([70, 45, W-70, H-45], radius=16, fill=(8, 11, 16, 225), outline=(45, 55, 70, 255), width=2)
-        
-        # Top Bar
-        draw.text((100, 70), "● C5-REAL // TENSOR DE TRANSDUCCIÓN POPPERIANA", font=font_mono_small, fill=accent)
-        draw.text((W-260, 70), "GEMINI 3.8 FLASH SOTA", font=font_mono_small, fill=(150, 165, 180))
-        draw.line([100, 100, W-100, 100], fill=(45, 55, 70), width=1)
-        
-        # Badge Causal
-        badge_w = 480 if scene.id == 3 else 390
-        draw.rounded_rectangle([100, 120, 100 + badge_w, 165], radius=6, fill=(accent[0]//6, accent[1]//6, accent[2]//6, 255), outline=accent, width=2)
-        draw.text((120, 132), title, font=font_mono_bold, fill=accent)
-        
-        # Texto del oráculo envuelto con tipografía suiza
-        wrapped = textwrap.fill(scene.voiceover_text, width=60)
-        draw.text((100, 195), wrapped, font=font_body, fill=(245, 250, 255), spacing=10)
-        
-        # Ventana del Osciloscopio Acústico en Vivo (recuadro de visualización)
-        draw.rounded_rectangle([100, 465, W-100, 585], radius=8, fill=(3, 5, 8, 160), outline=(40, 52, 70, 255), width=1)
-        draw.text((115, 475), f"OSCILOGRAMA ACÚSTICO EN TIEMPO REAL // DSP MASTER BUS", font=font_mono_small, fill=(100, 120, 140))
-        
-        # Bottom Telemetry Bar
-        draw.line([100, H-105, W-100, H-105], fill=(45, 55, 70), width=1)
-        prompt_snippet = scene.visual_prompt[:65] + "..." if len(scene.visual_prompt) > 65 else scene.visual_prompt
-        draw.text((100, H-90), f"LATENTE: {prompt_snippet}", font=font_mono_small, fill=(110, 125, 140))
-        
-        prog_pct = scene.id * 33.33
-        draw.text((W-250, H-90), f"COLAPSO D_KL: {prog_pct:.1f}%", font=font_mono_bold, fill=accent)
-        
-        img.save(out_path)
-
-    def render_scene(self, scene: FalsificationScene, style_vector: str, output_dir: str):
-        logging.info(f"Bifurcación Bimodal Escena {scene.id} | Sintetizando Voz, Retícula SEM y Osciloscopio...")
-        
-        # 1. CANAL AUDITIVO (TTS Soberano macOS)
-        raw_audio = os.path.join(output_dir, f"raw_audio_{scene.id}.aiff")
-        clean_text = scene.voiceover_text.replace('"', '\\"')
-        cmd_say = f'say -v "{self.voice}" -o "{raw_audio}" "{clean_text}"'
-        res = subprocess.run(cmd_say, shell=True)
-        if res.returncode != 0:
-            subprocess.run(f'say -o "{raw_audio}" "{clean_text}"', shell=True, check=True)
-        
-        # 2. CALIBRACIÓN TEMPORAL (Map == Territory)
-        real_duration = self.get_audio_duration(raw_audio) + 0.8
-        scene.duration_sec = real_duration
-        logging.info(f"  -> Duración anclada al pulso de voz: {real_duration:.2f}s")
-        
-        # 3. CANAL VISUAL: HUD Card
-        hud_card = os.path.join(output_dir, f"hud_card_{scene.id}.png")
-        self.render_hud_card(scene, hud_card)
-        
-        # 4. SOUND DESIGN DSP (Voz + Sub-Bass Drone + Hiss Analógico)
-        master_audio = os.path.join(output_dir, f"master_audio_{scene.id}.aac")
-        cmd_dsp = [
-            "ffmpeg", "-y",
-            "-i", raw_audio,
-            "-f", "lavfi", "-i", f"sine=frequency=52:duration={real_duration}",
-            "-f", "lavfi", "-i", f"anoisesrc=d={real_duration}:c=pink:r=44100:a=0.006",
-            "-filter_complex",
-            "[0:a]highpass=f=80,lowpass=f=11000[voice]; "
-            "[1:a]volume=0.13[sub]; "
-            "[2:a]volume=0.18[hiss]; "
-            "[voice][sub][hiss]amix=inputs=3:duration=first:dropout_transition=2[aout]",
-            "-map", "[aout]", "-c:a", "aac", master_audio
-        ]
-        subprocess.run(cmd_dsp, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
-        
-        # 5. RENDER CINEMATOGRÁFICO V3 (Ruido SEM + Retícula + Osciloscopio Reactivo + HUD)
-        visual_path = os.path.join(output_dir, f"scene_{scene.id}.mp4")
-        wave_colors = {1: "0x00F0DC@0.85", 2: "0xFFB428@0.85", 3: "0xFF4B4B@0.85"}
-        wave_col = wave_colors.get(scene.id, "0x00F0DC@0.85")
-        
-        v_filter = (
-            f"color=c=black:s=1280x720:d={real_duration} [base]; "
-            f"[base]noise=alls=20:allf=t+u [grain]; "
-            f"[grain]drawgrid=width=120:height=120:thickness=1:color=0x203040@0.35 [bg]; "
-            f"[1:a]showwaves=s=1060x82:mode=line:colors={wave_col}:scale=cbrt [wave]; "
-            f"[bg][wave]overlay=110:492 [bg_wave]; "
-            f"[bg_wave][2:v]overlay=0:0:format=auto [vout]"
-        )
-        
-        cmd_v = [
-            "ffmpeg", "-y",
-            "-f", "lavfi", "-i", f"color=c=black:s=1280x720:d={real_duration}",
-            "-i", raw_audio,
-            "-i", hud_card,
-            "-i", master_audio,
-            "-filter_complex", v_filter,
-            "-map", "[vout]", "-map", "3:a",
-            "-t", str(real_duration),
-            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac",
-            visual_path
-        ]
-        logging.info(f"  -> Compilando Escena {scene.id} con Osciloscopio Reactivo y Retícula...")
-        subprocess.run(cmd_v, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
-        
-        return visual_path
-
-# ==============================================================================
-# 4. ORCHESTRATOR (Multiplexado y Ensamblaje Final)
-# ==============================================================================
-class Orchestrator:
-    @staticmethod
-    def multiplex_scenes(scene_paths: List[str], output_file: str):
-        logging.info("Iniciando Grafo de Ensamblaje Final (Concatenación Sin Anergía)...")
-        concat_list = "/tmp/c5_render/concat_list.txt"
-        with open(concat_list, "w") as f:
-            for p in scene_paths:
-                f.write(f"file '{p}'\n")
+        # 1. GENERACIÓN DE AUDIO MODULAR Y CÁLCULO DE FOTOGRAMAS (60 FPS)
+        for scene in storyboard.scenes:
+            logging.info(f"Sintetizando Audio Fase 0{scene.id} ({scene.phase_title})...")
+            raw_audio = os.path.join(out_dir, f"raw_audio_{scene.id}.aiff")
+            clean_text = scene.voiceover_text.replace('"', '\\"')
+            
+            # Síntesis TTS nativa macOS
+            cmd_say = f'say -v "{self.voice}" -o "{raw_audio}" "{clean_text}"'
+            if subprocess.run(cmd_say, shell=True).returncode != 0:
+                subprocess.run(f'say -o "{raw_audio}" "{clean_text}"', shell=True, check=True)
                 
-        cmd = [
-            "ffmpeg", "-y",
-            "-f", "concat", "-safe", "0",
-            "-i", concat_list,
-            "-c", "copy",
-            output_file
+            dur = self.get_audio_duration(raw_audio) + 0.6  # 0.6s de respiración
+            total_duration += dur
+            frames = int(dur * 60)  # Remotion opera a 60 fps nativos
+            
+            # Sound Design DSP por fase: Highpass 80Hz + Sub-bass 52Hz + Pink Noise Tape Floor
+            master_audio = os.path.join(out_dir, f"master_audio_{scene.id}.aac")
+            cmd_dsp = [
+                "ffmpeg", "-y",
+                "-i", raw_audio,
+                "-f", "lavfi", "-i", f"sine=frequency=52:duration={dur}",
+                "-f", "lavfi", "-i", f"anoisesrc=d={dur}:c=pink:r=44100:a=0.006",
+                "-filter_complex",
+                "[0:a]highpass=f=80,lowpass=f=11000[voice]; "
+                "[1:a]volume=0.13[sub]; "
+                "[2:a]volume=0.18[hiss]; "
+                "[voice][sub][hiss]amix=inputs=3:duration=first:dropout_transition=2,pan=stereo|c0=c0|c1=c0[aout]",
+                "-map", "[aout]", "-ac", "2", "-c:a", "aac", master_audio
+            ]
+            subprocess.run(cmd_dsp, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+            audio_tracks.append(master_audio)
+            
+            remotion_scenes.append({
+                "durationInFrames": frames,
+                "text": scene.voiceover_text,
+                "phaseId": scene.id,
+                "phaseTitle": scene.phase_title,
+                "physics": scene.physics.model_dump()
+            })
+
+        # 2. CONCATENACIÓN DE AUDIO GLOBAL MASTERIZADO
+        concat_audio_list = os.path.join(out_dir, "concat_audio.txt")
+        with open(concat_audio_list, "w") as f:
+            for a in audio_tracks:
+                f.write(f"file '{a}'\n")
+        
+        full_master_audio = os.path.join(out_dir, "full_master_audio.aac")
+        cmd_concat_a = ["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", concat_audio_list, "-c", "copy", full_master_audio]
+        subprocess.run(cmd_concat_a, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+        
+        # 3. CONSTRUCCIÓN DEL MANIFIESTO PROPS PARA REMOTION
+        props_data = {
+            "title": storyboard.title,
+            "sessionHash": storyboard.session_hash,
+            "scenes": remotion_scenes
+        }
+        props_path = os.path.join(out_dir, "remotion_props.json")
+        with open(props_path, "w") as f:
+            json.dump(props_data, f, indent=2)
+            
+        # 4. RENDERIZADO REMOTION (1080P 60FPS) - LÍMITE HARDWARE M-SERIES 18GB
+        raw_video = os.path.join(out_dir, "raw_remotion_video.mp4")
+        logging.info("Disparando Remotion Compiler SOTA (60 FPS, 1920x1080, Staggered Springs)...")
+        
+        cmd_remotion = [
+            "npx", "remotion", "render",
+            "src/index.ts", "BabylonMasterclass",
+            raw_video,
+            f"--props={props_path}",
+            "--concurrency=2",
+            "--timeout=120000"
         ]
-        subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
-        logging.info(f"Documental Popperiano sellado con éxito: {output_file}")
+        res = subprocess.run(cmd_remotion, cwd=REMOTION_DIR)
+        if res.returncode != 0:
+            raise RuntimeError("Fallo en el renderizado del kernel Remotion.")
+            
+        # 5. MULTIPLEXADO FINAL CON PISTA MASTER ESTÉREO (-ac 2)
+        logging.info("Multiplexando Vídeo 1080p60 con Pista de Audio Master Estéreo...")
+        cmd_final = [
+            "ffmpeg", "-y",
+            "-i", raw_video,
+            "-i", full_master_audio,
+            "-c:v", "copy",
+            "-c:a", "aac",
+            "-shortest",
+            output_mp4
+        ]
+        subprocess.run(cmd_final, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+        logging.info(f"¡OBRA MAESTRA SOTA COMPILADA CON ÉXITO!: {output_mp4}")
 
 # ==============================================================================
 # ENTRYPOINT
 # ==============================================================================
 def main():
-    parser = argparse.ArgumentParser(description="Tensor de Transducción Popperiana C5-REAL (V3 SOTA)")
-    parser.add_argument("--corpus", type=str, default=None, help="Texto o paper para someter a falsación")
-    parser.add_argument("--file", type=str, default=None, help="Ruta a archivo de texto con el corpus")
-    parser.add_argument("--voice", type=str, default="Mónica", help="Voz del sistema para TTS (ej. Mónica, Paulina, Flo)")
-    parser.add_argument("--model", type=str, default="gemini-3.8-flash", help="Modelo rector (default: gemini-3.8-flash)")
-    parser.add_argument("--output", type=str, default="/tmp/c5_render/historia_final.mp4", help="Ruta de destino del MP4")
+    parser = argparse.ArgumentParser(description="Babylon60 Remotion Transducer SOTA 2026")
+    parser.add_argument("--corpus", type=str, default=None, help="Texto o paper a falsar")
+    parser.add_argument("--file", type=str, default=None, help="Archivo de texto del paper")
+    parser.add_argument("--voice", type=str, default="Mónica", help="Voz TTS del sistema")
+    parser.add_argument("--model", type=str, default="gemini-3.8-flash", help="Modelo rector")
+    parser.add_argument("--output", type=str, default="/tmp/c5_render/historia_remotion_sota.mp4", help="Destino MP4")
     args = parser.parse_args()
 
     API_KEY = os.environ.get("GEMINI_API_KEY")
     if not API_KEY:
-        raise ValueError("Fricción detectada: Variable de entorno GEMINI_API_KEY no definida.")
+        raise ValueError("Variable GEMINI_API_KEY no definida.")
 
     if args.file and os.path.exists(args.file):
         with open(args.file, "r") as f:
@@ -255,32 +219,19 @@ def main():
         corpus = args.corpus
     else:
         corpus = (
-            "La hipótesis de la memoria del agua sostiene que el agua retiene una impronta "
-            "electromagnética de solutos previamente disueltos incluso tras sucesivas diluciones "
-            "que superan el número de Avogadro. Por otro lado, la dinámica de fluidos cuánticos "
-            "demuestra que los enlaces de hidrógeno en agua líquida tienen una vida media de picosegundos, "
-            "destruyendo cualquier orden molecular coherente a temperatura ambiente."
+            "arXiv:2606.19404 (Salim Khazem). El autor propone que el Laplaciano de atención en Transformers "
+            "opera como un Hamiltoniano cuántico H, donde las alucinaciones son transiciones de fase detectables "
+            "mediante energía libre de Helmholtz. Fricción: el softmax de atención no es hermitiano ni conserva energía; "
+            "un modelo puede confabular con baja entropía espectral. Falsación: inyectar perturbaciones en el subespacio "
+            "nulo del grafo para refutar la supuesta equivalencia física entre Hamiltoniano y verdad semántica."
         )
 
-    override_metadata = "GLOBAL_STYLE_VECTOR: Microscopio electrónico de barrido, blanco y negro puro, alto contraste, grano cuántico, sobriedad matemática."
-
     director = DirectorAgent(api_key=API_KEY, model=args.model)
-    transducer = MultimodalTransducer(voice=args.voice)
+    compiler = SotaCompiler(voice=args.voice)
     
     try:
-        storyboard = director.extract_invariants(corpus, override_metadata)
-        logging.info(f"V_Global Fijado: {storyboard.global_style_vector}")
-        
-        out_dir = "/tmp/c5_render"
-        os.makedirs(out_dir, exist_ok=True)
-        
-        scene_paths = []
-        for scene in storyboard.scenes:
-            path = transducer.render_scene(scene, storyboard.global_style_vector, out_dir)
-            scene_paths.append(path)
-            
-        Orchestrator.multiplex_scenes(scene_paths, args.output)
-        
+        storyboard = director.extract_invariants(corpus)
+        compiler.compile(storyboard, args.output)
     except Exception as e:
         logging.error(f"Fallo sistémico: {e}")
         sys.exit(1)
