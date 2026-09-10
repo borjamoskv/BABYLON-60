@@ -12,7 +12,7 @@
 ---
 
 ## 1. Valuation Floor & Base Cap ($8M Pre-Money)
-- **Asset Floor:** Production-tested Rust `#![no_std]` kernel with Lean 4 axiomatic specification, sexagesimal $F_{60}$ arithmetic IP, TPM 2.0 notary.
+- **Asset Floor:** Production-tested Rust `#![no_std]` kernel with Lean 4 axiomatic specification, sexagesimal $F_{60}$ arithmetic IP.
 - **Defensibility:** Hash-chained append-only ledger with cryptographic integrity verification prevents retroactive tampering of causal logging.
 - **Comparative Baseline:** Pre-revenue infrastructure security startups in EU-27 seed at €6M - €10M.
 

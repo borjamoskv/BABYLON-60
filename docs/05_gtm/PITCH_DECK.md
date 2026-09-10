@@ -26,8 +26,8 @@ In 2026, regulated enterprises deploying autonomous AI agents face catastrophic 
 ## Slide 3: The Solution — BABYLON-60 Substrate
 BABYLON-60 is a local-first, zero-overhead execution substrate written in `#![no_std]` Rust with safety properties axiomatized in Lean 4:
 1. **$F_{60}$ Sexagesimal Scheduler:** Exact 64-bit fixed-point clock eliminating temporal floating-point drift.
-2. **Merkle-Causal Ledger:** Cryptographic state DAG signed by TPM 2.0 / TEE hardware.
-3. **Forensic WORM Quarantine:** Immutable hardware-backed freeze upon any critical anomaly.
+2. **Merkle-Causal Ledger:** Cryptographic state DAG for software-backed WORM quarantine.
+3. **Forensic WORM Quarantine:** Immutable software-backed cryptographic freeze upon any critical anomaly.
 
 ---
 
@@ -72,7 +72,7 @@ BABYLON-60 is a local-first, zero-overhead execution substrate written in `#![no
 | :--- | :--- | :--- | :--- |
 | Causal Lineage Proof | **Bit-Exact** | None | None |
 | Formal Specification (Lean 4) | **Axiomatized** | None | None |
-| Hardware Notary (TPM) | **Native** | None | None |
+| Hardware Notary (TPM) | **Roadmap** | None | None |
 | EU AI Act Certificate | **Automated** | None | Partial |
 
 ---
