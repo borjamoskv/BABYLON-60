@@ -110,7 +110,8 @@ cortex-char-attest = "babylon60.cli.attest_character_count:main"
 [tool.hatch.build.targets.wheel]
 packages = [
     "01_ORCHESTRATOR/babylon60",
-    "01_ORCHESTRATOR/apex_trials"
+    "01_ORCHESTRATOR/apex_trials",
+    "02_AGENTS_ARCHI/agents_archi"
 ]
 exclude = [
     "01_ORCHESTRATOR/babylon60/extensions",
@@ -121,7 +122,7 @@ exclude = [
 testpaths = ["tests"]
 addopts = "-x --tb=short"
 asyncio_mode = "auto"
-pythonpath = [".", "01_ORCHESTRATOR"]
+pythonpath = [".", "01_ORCHESTRATOR", "02_AGENTS_ARCHI"]
 
 [tool.ruff]
 target-version = "py310"
