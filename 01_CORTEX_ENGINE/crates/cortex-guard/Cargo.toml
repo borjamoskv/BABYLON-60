@@ -5,10 +5,19 @@ edition = "2021"
 description = "Deterministic Architectural Verification CLI & SARIF Generator for agents.archi"
 authors = ["Borja Moskv <borjamoskv@github.com>"]
 
+[lib]
+name = "cortex_guard"
+path = "src/lib.rs"
+
+[[bin]]
+name = "cortex-guard"
+path = "src/main.rs"
+
 [dependencies]
 clap = { version = "4.5", features = ["derive"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+serde_yaml = "0.9"
 sha2 = "0.10"
 hex = "0.4"
 anyhow = "1.0"

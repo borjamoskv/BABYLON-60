@@ -14,7 +14,7 @@ description: Patrones de arquitectura de Babylon60 IDE (instaladores 1-clic auto
 - Permitir la opción de omitir configuración ("Omitir por ahora →").
 
 ## 3. Token Criptográfico & Correo de Bienvenida
-- Remitente oficial: `soporte@babylon60.com`.
+- Remitente oficial: `support@babylon60.com`.
 - Firma Ed25519 SCITT Certified (`B60-TOKEN-xxxx-xxxx-SCITT-ED25519`).
 - **Despliegue Axiomático de los 5 Estados Topológicos Cognitivos:**
   1. **$\Omega_1$ / Síntesis Ontológica:** Expansión estocástica n-dimensional y abducción lateral.
@@ -35,3 +35,11 @@ description: Patrones de arquitectura de Babylon60 IDE (instaladores 1-clic auto
 - **INV-2 (SPMC Seqlock)**: Sincronización libre de bloqueos para un único escritor y múltiples lectores puros-de-carga con barreras Acquire/Release (`DMB ISHLD` en AArch64).
 - **INV-3 (Termodinámica & Bisimulación)**: Cero RFO en lectores; disipación de anergía colapsada a cero. Bisimulación observacional par (Entelecheia) / impar (Dynamis).
 - **INV-4 (Fail-Stop & SCITT)**: Transición irreversible a `POISONED` (0xDEAD_6060) emitiendo recibo de interrupción firmada COSE_Sign1 conforme a RFC 9942 / SCITT para cumplimiento del EU AI Act (Arts. 12, 14(4), 15 y 50).
+
+## 7. Evolución Topológica: Babylon 61 (Síntesis de Alta Exergía)
+Tras la auditoría de falsación termodinámica, el sistema muta a la versión 61.1 para consolidar las barreras semánticas en restricciones físicas involuntarias:
+- **Tensor de Transducción Híbrido:** Validación deductiva AST vía SMT Solvers (ej. Z3/TLA+) post-inferencia LLM. Cero alucinaciones inyectadas.
+- **Manta de Markov Nivel SO:** Endurecimiento del *Babylon Shield* vía eBPF / macOS EndpointSecurity. Bloqueo Ring-0 real independiente del IDE.
+- **Compresión Epistémica (PoW Cognitivo):** Validación de *Complejidad de Kolmogorov* para el mensaje de commit cruzado con el diff estructural, purgando el *cheap talk* de los LLMs (Ley de Goodhart).
+- **Aislamiento Termodinámico:** Fijación de hilos (Thread Pinning / Core Affinity) a P-Cores en Apple Silicon para aislar el Seqlock 64B de la preemption del OS Scheduler.
+- **Soberanía Biométrica:** Firma SCITT aislada completamente en el Secure Enclave Processor (TouchID), cero exposición de clave Ed25519 en RAM.

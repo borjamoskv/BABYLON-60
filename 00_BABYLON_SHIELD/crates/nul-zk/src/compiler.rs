@@ -139,7 +139,7 @@ pub fn generate_arkworks_rust(circuit: &CompiledCircuit) -> String {
         match gate {
             Gate::Constant { out, value } => {
                 code.push_str(&format!("        let var_{} = cs.new_witness_variable(|| Ok(F::from({}u64)))?;\n", out, value));
-                code.push_str(&format!("        cs.enforce_constraint(LinearCombination::from(Variable::One), LinearCombination::from(var_{}), LinearCombination::from(F::from({}u64)))?;\n", out, value));
+                code.push_str(&format!("        cs.enforce_constraint(LinearCombination::from(Variable::One), LinearCombination::from(var_{}), LinearCombination::from((F::from({}u64), Variable::One)))?;\n", out, value));
             }
             Gate::Add { out, lhs, rhs } => {
                 code.push_str(&format!("        let var_{} = cs.new_witness_variable(|| {{\n", out));

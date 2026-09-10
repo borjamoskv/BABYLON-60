@@ -2,13 +2,53 @@
 // BABYLON-60 v4.0 Sovereign Hardened
 // █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 // ============================================================================
-use sha2::{Digest, Sha256};
+use ark_bls12_381::{Bls12_381, Fr as BlsFr};
+use ark_groth16::{Groth16, Proof, VerifyingKey};
+use ark_serialize::CanonicalDeserialize;
+use ark_snark::{CircuitSpecificSetupSNARK, SNARK};
+use rand_chacha::ChaCha20Rng;
+use rand::SeedableRng;
 use std::ffi::CStr;
 use std::os::raw::c_char;
+use std::sync::OnceLock;
 
-/// Motor de Verificación Causal-Determinist (Simulación LogUp/tlookup)
-/// Asegura la colisión Bizantina (INV_BFT_04) en O(1) comparando el compromiso hash
-/// generado a partir del payload estocástico y el nonce termodinámico.
+// Incluir el circuito transpilado de nul-zk
+include!(concat!(env!("OUT_DIR"), "/inference_circuit.rs"));
+
+/// Llave de Verificación Determinista. Se genera de manera perezosa (Lazy)
+/// usando una semilla termodinámica fija para asegurar que el Prover y Verifier
+/// deriven el mismo Setup sin necesidad de serializar llaves masivas.
+static VK: OnceLock<VerifyingKey<Bls12_381>> = OnceLock::new();
+
+fn get_verifying_key() -> &'static VerifyingKey<Bls12_381> {
+    VK.get_or_init(|| {
+        let mut rng = ChaCha20Rng::seed_from_u64(0xC5C5C5C5C5C5C5C5u64); // Invariante Determinista
+        let empty_circuit = InferenceConstraint::<BlsFr> {
+            weight: None,
+            nonce: None,
+            expected_hash: None,
+        };
+        let (_, vk) = Groth16::<Bls12_381>::setup(empty_circuit, &mut rng)
+            .expect("Fallo fatal en el Trusted Setup determinista");
+        vk
+    })
+}
+
+/// Convierte un string hexadecimal a un elemento del campo Fr (BLS12-381)
+fn hex_to_fr(hex_str: &str) -> Option<BlsFr> {
+    let clean_hex = hex_str.trim_start_matches("0x");
+    let bytes = hex::decode(clean_hex).ok()?;
+    BlsFr::deserialize_compressed(&*bytes).ok()
+}
+
+/// Motor de Verificación Causal-Determinist (Groth16 / ZK-SNARK)
+/// La simulación Sha256 (LogUp/tlookup) ha sido PURGADA bajo el Framework C5-REAL.
+///
+/// public_inputs:
+/// - nonce: El nonce termodinámico
+/// - payload_hash: expected_hash del circuito
+/// 
+/// proof_hash: El string hexadecimal representando la prueba Groth16 serializada
 #[no_mangle]
 pub extern "C" fn verify_inference_payload(
     payload_hash: *const c_char,
@@ -19,16 +59,39 @@ pub extern "C" fn verify_inference_payload(
         return false;
     }
 
-    let payload = unsafe { CStr::from_ptr(payload_hash) };
-    let proof = unsafe { CStr::from_ptr(proof_hash) };
+    let payload_c = unsafe { CStr::from_ptr(payload_hash) };
+    let proof_c = unsafe { CStr::from_ptr(proof_hash) };
 
-    if let (Ok(p_str), Ok(pr_str)) = (payload.to_str(), proof.to_str()) {
-        let mut hasher = Sha256::new();
-        hasher.update(p_str.as_bytes());
-        hasher.update(&nonce.to_le_bytes());
+    if let (Ok(p_str), Ok(pr_str)) = (payload_c.to_str(), proof_c.to_str()) {
+        
+        // 1. Deserialización estricta de la Prueba ZK
+        let proof_bytes = match hex::decode(pr_str) {
+            Ok(b) => b,
+            Err(_) => return false,
+        };
+        
+        let proof = match Proof::<Bls12_381>::deserialize_compressed(&*proof_bytes) {
+            Ok(p) => p,
+            Err(_) => return false, // Prueba corrupta o adulterada
+        };
 
-        let result = format!("{:x}", hasher.finalize());
-        return result == pr_str;
+        // 2. Parseo topológico de los Inputs Públicos (El Mapa Causal)
+        let expected_hash_fr = match hex_to_fr(p_str) {
+            Some(fr) => fr,
+            None => return false,
+        };
+        let nonce_fr = BlsFr::from(nonce);
+
+        // 3. Verificación ZK con VK Determinista (Cero-Anergía O(1))
+        // IMPORTANTE: El orden de los public inputs en Groth16 depende del compilador.
+        // nul-zk ordena los public inputs según aparecen en AST.
+        // En InferenceConstraint: 
+        // public nonce: Field
+        // public expected_hash: Field
+        let public_inputs = vec![nonce_fr, expected_hash_fr];
+        
+        let vk = get_verifying_key();
+        return Groth16::<Bls12_381>::verify(vk, &public_inputs, &proof).unwrap_or(false);
     }
 
     false

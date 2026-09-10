@@ -68,9 +68,12 @@ impl SharedManifest {
             // Acquire barrera para leer la secuencia de inicio
             let s1 = self.seq.load(Ordering::Acquire);
             if s1 % 2 != 0 {
-                // Hay una escritura en progreso (secuencia impar)
+                // Escritura en progreso: Backoff exponencial para enfriamiento MESI
+                let spins = 1 << retries.min(7);
+                for _ in 0..spins {
+                    core::hint::spin_loop();
+                }
                 retries += 1;
-                core::hint::spin_loop();
                 continue;
             }
             
@@ -86,8 +89,12 @@ impl SharedManifest {
                 return Some((epoch, hash));
             }
             
+            // Falla de consistencia: escritura concurrente. Backoff exponencial.
+            let spins = 1 << retries.min(7);
+            for _ in 0..spins {
+                core::hint::spin_loop();
+            }
             retries += 1;
-            core::hint::spin_loop();
         }
         None
     }

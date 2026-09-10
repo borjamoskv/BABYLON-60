@@ -1,13 +1,24 @@
+//! cortex-guard: Deterministic Architectural Verification Engine & SARIF Generator
+//! C5-REAL Compliant: Zero-Alucination, Physical Constraint Solver for IFC BIM models vs. PGOU/CTE
+
 use clap::{Parser, Subcommand, ValueEnum};
-use serde::{Deserialize, Serialize};
+use cortex_guard::dsl::Rulebook;
+use cortex_guard::eval::evaluate;
+use cortex_guard::ifc::IfcModel;
+use cortex_guard::sarif::generate_sarif;
 use sha2::{Digest, Sha256};
 use std::fs;
 use std::path::PathBuf;
 use std::process::exit;
+use std::time::Instant;
 
 #[derive(Parser)]
 #[command(name = "cortex-guard")]
-#[command(about = "CORTEX Deterministic Verification CLI for Architecture & AEC Compliance", long_about = None)]
+#[command(version = "1.0.0")]
+#[command(
+    about = "CORTEX Deterministic Verification CLI for Architecture & AEC Compliance",
+    long_about = "C5-REAL Architectural Solver: Evaluates ISO 10303-21 IFC BIM models against PGOU/CTE DSL rulebooks with exact line attribution and SARIF v2.1.0 output."
+)]
 struct Cli {
     #[command(subcommand)]
     command: Commands,
@@ -30,7 +41,7 @@ enum Commands {
         format: OutputFormat,
 
         /// Exit with code 1 on any UNSAT violation
-        #[arg(long, default_value_t = true)]
+        #[arg(long, default_value = "true", num_args = 0..=1, default_missing_value = "true")]
         strict: bool,
 
         /// Emit GitHub Actions workflow error annotations (::error file=...::)
@@ -39,111 +50,21 @@ enum Commands {
     },
 }
 
-#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ValueEnum, Serialize, Deserialize)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ValueEnum, serde::Serialize, serde::Deserialize)]
 enum OutputFormat {
     Human,
     Json,
     Sarif,
 }
 
-#[derive(Serialize, Deserialize)]
-struct VerificationResult {
-    status: String,
-    ifc_hash: String,
-    pgou_hash: String,
-    execution_time_ms: u64,
-    violations: Vec<Violation>,
-}
-
-#[derive(Serialize, Deserialize, Clone)]
-struct Violation {
-    code: String,
-    title: String,
-    description: String,
-    measured: String,
-    limit: String,
-    legal_citation: String,
-    file_path: String,
-    line: u32,
-    severity: String,
-}
-
-// SARIF v2.1.0 Data Structures for GitHub Code Scanning
-#[derive(Serialize)]
-struct SarifReport {
-    #[serde(rename = "$schema")]
-    schema: String,
-    version: String,
-    runs: Vec<SarifRun>,
-}
-
-#[derive(Serialize)]
-struct SarifRun {
-    tool: SarifTool,
-    results: Vec<SarifResult>,
-}
-
-#[derive(Serialize)]
-struct SarifTool {
-    driver: SarifDriver,
-}
-
-#[derive(Serialize)]
-struct SarifDriver {
-    name: String,
-    version: String,
-    rules: Vec<SarifRule>,
-}
-
-#[derive(Serialize)]
-struct SarifRule {
-    id: String,
-    name: String,
-    short_description: SarifText,
-}
-
-#[derive(Serialize)]
-struct SarifResult {
-    rule_id: String,
-    level: String,
-    message: SarifText,
-    locations: Vec<SarifLocation>,
-}
-
-#[derive(Serialize)]
-struct SarifText {
-    text: String,
-}
-
-#[derive(Serialize)]
-struct SarifLocation {
-    physical_location: SarifPhysicalLocation,
-}
-
-#[derive(Serialize)]
-struct SarifPhysicalLocation {
-    artifact_location: SarifArtifactLocation,
-    region: SarifRegion,
-}
-
-#[derive(Serialize)]
-struct SarifArtifactLocation {
-    uri: String,
-}
-
-#[derive(Serialize)]
-struct SarifRegion {
-    start_line: u32,
-}
-
-fn compute_file_hash(path: &PathBuf) -> Result<String, std::io::Error> {
-    let content = fs::read(path)?;
+fn compute_file_hash(content: &[u8]) -> String {
     let mut hasher = Sha256::new();
-    hasher.update(&content);
-    Ok(hex::encode(hasher.finalize()))
+    hasher.update(content);
+    hex::encode(hasher.finalize())
 }
 
 fn main() {
+    let start_time = Instant::now();
     let cli = Cli::parse();
 
     match cli.command {
@@ -154,63 +75,65 @@ fn main() {
             strict,
             annotate_gh,
         } => {
-            // Read and hash inputs
-            let ifc_hash = match compute_file_hash(&ifc) {
-                Ok(h) => h,
+            // 1. Read IFC file
+            let ifc_bytes = match fs::read(&ifc) {
+                Ok(bytes) => bytes,
                 Err(e) => {
                     eprintln!("CRASH [ERR_301]: Failed to read IFC file '{}': {}", ifc.display(), e);
                     exit(3);
                 }
             };
+            let ifc_hash = compute_file_hash(&ifc_bytes);
+            let ifc_content = match String::from_utf8(ifc_bytes) {
+                Ok(s) => s,
+                Err(e) => {
+                    eprintln!("CRASH [ERR_303]: IFC file '{}' is not valid UTF-8: {}", ifc.display(), e);
+                    exit(3);
+                }
+            };
 
-            let pgou_hash = match compute_file_hash(&pgou) {
-                Ok(h) => h,
+            // 2. Read PGOU Rulebook
+            let pgou_bytes = match fs::read(&pgou) {
+                Ok(bytes) => bytes,
                 Err(e) => {
                     eprintln!("CRASH [ERR_302]: Failed to read PGOU DSL file '{}': {}", pgou.display(), e);
                     exit(3);
                 }
             };
-
-            // Perform Deterministic Verification Engine Run
-            let violations = vec![
-                Violation {
-                    code: "ERR_042".to_string(),
-                    title: "INCUMPLIMIENTO DE RETRANQUEO A LINDEROS".to_string(),
-                    description: "Edificabilidad técnica superada en Fachada Norte.".to_string(),
-                    measured: "2.85m".to_string(),
-                    limit: "3.00m".to_string(),
-                    legal_citation: "PGOU Madrid - Sección II, Art. 14.3.a ('Distancias mínimas a colindantes')".to_string(),
-                    file_path: ifc.to_string_lossy().to_string(),
-                    line: 142,
-                    severity: "error".to_string(),
-                },
-                Violation {
-                    code: "ERR_089".to_string(),
-                    title: "EXCESO DE CONSUMO DE ENERGÍA PRIMARIA NO RENOVABLE".to_string(),
-                    description: "Demanda térmica supera el umbral límite CTE Zona D3.".to_string(),
-                    measured: "31.4 kWh/m²·año".to_string(),
-                    limit: "28.0 kWh/m²·año".to_string(),
-                    legal_citation: "CTE DB-HE0 (Sección 3.1, Tabla 3.1a)".to_string(),
-                    file_path: ifc.to_string_lossy().to_string(),
-                    line: 318,
-                    severity: "error".to_string(),
-                },
-            ];
-
-            let has_violations = !violations.is_empty();
-            let status = if has_violations { "UNSAT" } else { "SAT" };
-
-            let result = VerificationResult {
-                status: status.to_string(),
-                ifc_hash,
-                pgou_hash,
-                execution_time_ms: 124,
-                violations: violations.clone(),
+            let pgou_hash = compute_file_hash(&pgou_bytes);
+            let pgou_content = match String::from_utf8(pgou_bytes) {
+                Ok(s) => s,
+                Err(e) => {
+                    eprintln!("CRASH [ERR_304]: PGOU DSL file '{}' is not valid UTF-8: {}", pgou.display(), e);
+                    exit(3);
+                }
             };
 
-            // Emit GitHub Actions Annotations if requested
+            // 3. Parse IFC STEP Model
+            let model = match IfcModel::parse(&ifc_content, ifc.clone()) {
+                Ok(m) => m,
+                Err(e) => {
+                    eprintln!("CRASH [ERR_305]: Failed to parse STEP ISO 10303-21 in '{}': {}", ifc.display(), e);
+                    exit(3);
+                }
+            };
+
+            // 4. Parse PGOU / CTE Rulebook
+            let rulebook = match Rulebook::parse(&pgou_content, &pgou) {
+                Ok(r) => r,
+                Err(e) => {
+                    eprintln!("CRASH [ERR_306]: Failed to parse PGOU / CTE Rulebook in '{}': {}", pgou.display(), e);
+                    exit(3);
+                }
+            };
+
+            // 5. Run Deterministic Constraint Solver
+            let result = evaluate(&model, &rulebook, ifc_hash, pgou_hash, start_time);
+            let has_violations = !result.violations.is_empty();
+
+            // 6. Emit GitHub Actions Annotations if requested
             if annotate_gh {
-                for v in &violations {
+                for v in &result.violations {
                     println!(
                         "::error file={},line={}::[{}] {} — Medido: {}, Límite: {}. Cita: {}",
                         v.file_path, v.line, v.code, v.title, v.measured, v.limit, v.legal_citation
@@ -218,62 +141,42 @@ fn main() {
                 }
             }
 
-            // Output according to format
+            // 7. Output according to selected format
             match format {
                 OutputFormat::Human => {
-                  println!("================================================================================");
-                  println!("                       CORTEX-GUARD DETERMINISTIC AUDIT REPORT                  ");
-                  println!("================================================================================");
-                  println!("STATUS      : {}", result.status);
-                  println!("IFC HASH    : {}", result.ifc_hash);
-                  println!("PGOU HASH   : {}", result.pgou_hash);
-                  println!("EXEC TIME   : {} ms", result.execution_time_ms);
-                  println!("--------------------------------------------------------------------------------");
+                    println!("================================================================================");
+                    println!("                       CORTEX-GUARD DETERMINISTIC AUDIT REPORT                  ");
+                    println!("================================================================================");
+                    println!("STATUS      : {}", result.status);
+                    println!("IFC HASH    : {}", result.ifc_hash);
+                    println!("PGOU HASH   : {}", result.pgou_hash);
+                    println!("EXEC TIME   : {} ms", result.execution_time_ms);
+                    println!("VIOLATIONS  : {}", result.violations.len());
+                    println!("--------------------------------------------------------------------------------");
 
-                  for v in &violations {
-                      println!("[{}] {}", v.code, v.title);
-                      println!("── {}", v.description);
-                      println!("│");
-                      println!("├─ Plano aportado: Distancia/Valor medido = {}", v.measured);
-                      println!("├─ Norma aplicable: Valor límite exigido  = {}", v.limit);
-                      println!("│");
-                      println!("└─ Evidencia Legal: {}\n", v.legal_citation);
-                  }
+                    if result.violations.is_empty() {
+                        println!("✅ [CONFORME] Todos los elementos del modelo IFC satisfacen las restricciones normativas.");
+                    } else {
+                        for v in &result.violations {
+                            println!("[{}] {}", v.code, v.title);
+                            println!("── {}", v.description);
+                            println!("│");
+                            println!("├─ Archivo & Línea: {}:{}", v.file_path, v.line);
+                            println!("├─ Plano aportado:  Distancia/Valor medido = {}", v.measured);
+                            println!("├─ Norma aplicable: Valor límite exigido  = {}", v.limit);
+                            println!("│");
+                            println!("└─ Evidencia Legal: {}\n", v.legal_citation);
+                        }
+                    }
                 }
                 OutputFormat::Json => {
                     let json_out = serde_json::to_string_pretty(&result).unwrap();
                     println!("{}", json_out);
                 }
                 OutputFormat::Sarif => {
-                    let sarif = SarifReport {
-                        schema: "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json".to_string(),
-                        version: "2.1.0".to_string(),
-                        runs: vec![SarifRun {
-                            tool: SarifTool {
-                                driver: SarifDriver {
-                                    name: "cortex-guard".to_string(),
-                                    version: "0.1.0".to_string(),
-                                    rules: violations.iter().map(|v| SarifRule {
-                                        id: v.code.clone(),
-                                        name: v.title.clone(),
-                                        short_description: SarifText { text: v.legal_citation.clone() },
-                                    }).collect(),
-                                },
-                            },
-                            results: violations.iter().map(|v| SarifResult {
-                                rule_id: v.code.clone(),
-                                level: v.severity.clone(),
-                                message: SarifText { text: format!("{} — Medido: {}, Límite: {}. Evidencia: {}", v.title, v.measured, v.limit, v.legal_citation) },
-                                locations: vec![SarifLocation {
-                                    physical_location: SarifPhysicalLocation {
-                                        artifact_location: SarifArtifactLocation { uri: v.file_path.clone() },
-                                        region: SarifRegion { start_line: v.line },
-                                    },
-                                }],
-                            }).collect(),
-                        }],
-                    };
-                    println!("{}", serde_json::to_string_pretty(&sarif).unwrap());
+                    let sarif_report = generate_sarif(&result);
+                    let sarif_out = serde_json::to_string_pretty(&sarif_report).unwrap();
+                    println!("{}", sarif_out);
                 }
             }
 

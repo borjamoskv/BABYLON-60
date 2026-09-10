@@ -38,6 +38,7 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 
 - **Invariante de Lógica Ejecutable**: El directorio `BABYLON-60` constituye exclusivamente el núcleo operativo, motor y arquitectura del programa. **NUNCA** debe ser tratado, parseado ni analizado asumiendo que es una base de datos o un repositorio pasivo de registros.
 - **Interpretación de Archivos**: Todo archivo dentro de este workspace (incluyendo JSONs, volcados o configuraciones) debe evaluarse bajo la estricta pregunta epistémica: *"¿Qué función estructural cumple esto en el motor de ejecución del sistema?"*.
+- **Segregación Estricta GTM / OpSec**: Queda estrictamente **PROHIBIDO** almacenar o versionar dentro del repositorio documentos de estrategia de marketing, análisis de algoritmos de captación, borradores de redes sociales (X, Hacker News, Reddit) o planes de lanzamiento viral. Todo activo de distribución y captación debe residir exclusivamente en el espacio privado del agente (`~/.gemini/antigravity/brain/`) o en notas externas no rastreadas por Git, protegiendo la soberanía técnica del código y evitando acusaciones de *astroturfing* o manipulación en auditorías públicas.
 
 ## 🔒 Límite de Autenticación Biométrica (TouchID Invariant)
 

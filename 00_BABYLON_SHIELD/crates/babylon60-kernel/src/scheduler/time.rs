@@ -39,9 +39,10 @@ impl SimulationClock {
         self.0 / Self::SCALE
     }
 
-    /// Returns fractional part as a float 0.0..1.0 for non-critical telemetry display.
-    pub fn as_float(self) -> f64 {
-        (self.0 as f64) / (Self::SCALE as f64)
+    /// Returns fractional part as strictly integer milliseconds (0..999) to avoid FPU contamination.
+    pub fn subsec_millis(self) -> u64 {
+        let fraction = self.0 % Self::SCALE;
+        (fraction * 1000) / Self::SCALE
     }
 
     /// Adds two fixed point clocks with saturation.

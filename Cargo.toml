@@ -81,3 +81,4 @@ path = "src/bin/babylon60_kernel.rs"
 [[bin]]
 name = "tpm_worm_poc"
 path = "src/bin/tpm_worm_poc.rs"
+required-features = ["cortex-persist"]
