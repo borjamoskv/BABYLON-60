@@ -22,14 +22,14 @@ jobs:
         python-version: ${{ matrix.python-version }}
         
     - name: Install uv
-      run: curl -LsSf https://astral.sh/uv/install.sh | sh
+      uses: astral-sh/setup-uv@f94ec08e8a939077271e16104c9ff09d13e3bc3f
         
     - name: Install dependencies
       run: |
-        $HOME/.local/bin/uv venv
-        $HOME/.local/bin/uv pip install -e ".[dev]"
+        uv venv
+        uv pip install -e ".[dev]"
         # Si no hay pyproject.toml con dev dependencies, podemos forzar pytest
-        $HOME/.local/bin/uv pip install pytest
+        uv pip install pytest
         
     - name: Run tests with pytest
       run: |

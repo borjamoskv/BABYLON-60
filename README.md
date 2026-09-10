@@ -41,7 +41,7 @@ BABYLON-60 is a monorepo that provides a **hash-chained, append-only ledger** ba
 ├──────────────────────────────────────────────────────────────┤
 │   BABYLON-60 Accountability Layer                            │
 │                                                              │
-│   Python (packages/babylon60/)                               │
+│   Python (01_ORCHESTRATOR/babylon60/)                        │
 │   ├── bft/          Hash-chained ledger (SHA3-256)           │
 │   ├── crypto/       Hash registry, AES-256-GCM, Ed25519     │
 │   ├── database/     Single-writer SQLite/WAL connector       │
@@ -49,7 +49,7 @@ BABYLON-60 is a monorepo that provides a **hash-chained, append-only ledger** ba
 │   ├── attestation/  Merkle DAG anchoring                     │
 │   └── compliance_exporter/  EU AI Act certificates           │
 │                                                              │
-│   Rust (src/ + crates/)                                      │
+│   Rust (src/ + 00_BABYLON_SHIELD/crates/)                    │
 │   ├── SharedManifest    64 B lock-free IPC (AArch64/x86)     │
 │   ├── seqlock           SPMC readers, zero RFO               │
 │   ├── halt              Fail-stop + COSE_Sign1 receipts      │
@@ -224,29 +224,24 @@ make all
 ```
 BABYLON-60/
 ├── src/                          # Rust root crate (SharedManifest, seqlock, halt)
-├── crates/
-│   ├── babylon60-kernel/         # #![no_std] execution engine
-│   ├── babylon60-compiler/       # .b60 DSL lexer/parser
-│   ├── babylon60-proof-ir/       # Proof IR → Lean 4 emitter
-│   ├── babylon60-runtime/        # Runtime executor
-│   ├── strike-rs/                # PyO3 native bridge, BLAKE3 taint
-│   └── nul-zk/                   # ZK circuit compilation
-├── packages/
-│   ├── babylon60/                # Core Python package
-│   │   ├── bft/                  # Hash-chained ledger (CortexPersistLedger)
-│   │   ├── crypto/               # Hash registry, AES, Ed25519, RFC 3161
-│   │   ├── database/             # Centralized SQLite/WAL connector
-│   │   ├── guards/               # URL/path/license validation
-│   │   ├── attestation/          # Merkle DAG anchoring
-│   │   ├── compliance_exporter/  # EU AI Act certificate generator
-│   │   ├── cli/                  # CLI entrypoints
-│   │   ├── primitives/           # F60 arithmetic, result types, serialization
-│   │   └── transducers/          # Cache, hygiene, data processing
-│   └── cortex/                   # Cortex cognitive memory substrate
-├── apps/
-│   ├── babylon60-ide/            # Tauri v2 desktop IDE
-│   ├── web/                      # React telemetry UI
-│   └── tonnetz_app/              # Neo-Riemannian harmonic visualizer
+├── 00_BABYLON_SHIELD/            # Defense and Verification 
+│   ├── crates/                   #   #![no_std] execution engines, ZK circuits
+│   └── formal_verification/      #   Proof IR → Lean 4 emitter
+├── 01_CORTEX_ENGINE/             # Cognitive Memory Substrate
+│   ├── crates/                   #   Runtime executor, native bridge
+│   └── transducers/              #   Data processing transducers
+├── 01_ORCHESTRATOR/              # Python Core
+│   ├── babylon60/                #   Core Python package
+│   │   ├── bft/                  #     Hash-chained ledger (CortexPersistLedger)
+│   │   ├── crypto/               #     Hash registry, AES, Ed25519, RFC 3161
+│   │   ├── database/             #     Centralized SQLite/WAL connector
+│   │   ├── guards/               #     URL/path/license validation
+│   │   ├── attestation/          #     Merkle DAG anchoring
+│   │   └── compliance_exporter/  #     EU AI Act certificate generator
+│   ├── cortex/                   #   Cortex cognitive memory python substrate
+│   └── services/                 #   Core services
+├── 02_AGENTS_ARCHI/              # Python Agents
+│   └── agents_archi/             #   Agents configuration and tools
 ├── scripts/                      # CLI tools, demos, verifiers
 ├── tests/                        # Python + Rust test suites
 ├── docs/                         # Specifications, whitepapers, guides
