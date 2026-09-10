@@ -103,3 +103,15 @@ data/
 *.db
 *.sqlite
 
+
+# Segregación GTM / OpSec y Documentos Pasivos
+docs/05_gtm/
+docs/pitch/
+docs/sources/
+docs/aie-book/
+docs/audits/
+archive/
+*.pdf
+*.docx
+OPSEC_OMEGA_ITERA1.md
+
