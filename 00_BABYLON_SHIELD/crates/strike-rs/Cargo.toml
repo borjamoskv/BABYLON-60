@@ -36,6 +36,7 @@ ed25519-dalek = { version = "2.1", features = ["rand_core"] }
 rand_core = "0.10.1"
 rand = "0.8"
 anyhow = "1.0.104"
+dashmap = "6.2.1"
 
 [dev-dependencies]
 proptest = "1.6.0"
