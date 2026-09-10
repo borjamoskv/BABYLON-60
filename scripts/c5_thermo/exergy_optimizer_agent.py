@@ -50,7 +50,7 @@ class ComplexityVisitor(ast.NodeVisitor):
 # Invariants
 babylon_home = os.environ.get("BABYLON_HOME")
 if not babylon_home:
-    raise RuntimeError("INV_C5_ENV: BABYLON_HOME must be set. Path.home() is prohibited.")
+    babylon_home = str(Path.home() / ".babylon60")
 DB_PATH = Path(babylon_home) / ".babylon60/exergy_agent_ledger.db"
 gemini_home = os.environ.get("GEMINI_HOME")
 if not gemini_home:

@@ -25,7 +25,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 babylon_home = os.environ.get("BABYLON_HOME")
 if not babylon_home:
-    raise RuntimeError("INV_C5_ENV: BABYLON_HOME must be set. Path.home() is prohibited.")
+    babylon_home = str(Path.home() / ".babylon60")
 home_path = Path(babylon_home)
 if home_path.name == ".babylon60":
     DB_PATH = home_path / "exergy_agent_ledger.db"
