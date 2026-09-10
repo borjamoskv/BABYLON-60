@@ -50,7 +50,7 @@ def main():
     quote = anchor.generate_hardware_pcr_quote(cert["global_merkle_root"])
 
     print(f"[OK] Compliance report generated for locale '{args.locale}': {saved_file}")
-    print(f"[TPM Anchor] Hardware PCR Quote Signature: {quote['tpm_quote_signature'][:32]}...")
+    print(f"[Anchor] Software WORM signature (simulated TPM PCR quote — hardware anchoring on roadmap): {quote['tpm_quote_signature'][:32]}...")
 
 
 if __name__ == "__main__":
