@@ -27,6 +27,12 @@
 // COMPENSACIÓN:
 //   Solo en reinicio (protocolo BABYLON-60: KEYINIT/INTENT/RESULT/ORPHAN/
 //   COMPENSATION/RECOVERY; TamperError ante rotura de cadena).
+//
+// FIX (audit 2026-09-10): el store de POISONED estaba comentado
+// («Adaptado para ABI»), de modo que el proceso abortaba SIN envenenar el
+// slot compartido: ningún observador IPC llegaba a ver el estado POISONED y
+// `is_halted()` jamás retornaba true en la ruta de halt. Restaurado como
+// Paso 1, antes del recibo COSE y del abort, tal como documenta la spec.
 
 use core::sync::atomic::{fence, Ordering};
 
@@ -58,8 +64,9 @@ use crate::manifest::{SharedManifest, HaltReason, POISONED};
 pub fn epistemic_halt(m: &SharedManifest, motivo: HaltReason) -> ! {
     // ── Paso 1: frontera topológica inmutable ──────────────────────────────
     // Release: garantiza que toda escritura previa (hash, epoch) es visible
-    // antes de que otros lean POISONED.
-    // m.status_flag.store(POISONED, Ordering::Release); // Adaptado para ABI
+    // antes de que otros lean POISONED. Obligatorio ANTES del recibo y del
+    // abort: los observadores IPC deben poder ver el estado envenenado.
+    m.status_flag.store(POISONED, Ordering::Release);
 
     // ── Paso 2: recibo COSE_Sign1 (ruta fría, Art. 12/50) ─────────────────
     // Llamada condicional por feature. En no_std sin feature "halt-receipt",
