@@ -147,19 +147,19 @@ pub struct SwarmTenant {
 
 /// Agency Hypervisor Kernel Core in Rust
 pub struct SwarmHypervisor {
-    pub tenants: Arc<Mutex<HashMap<String, SwarmTenant>>>,
+    pub tenants: Arc<RwLock<HashMap<String, SwarmTenant>>>,
 }
 
 impl SwarmHypervisor {
     pub fn new() -> Self {
         Self {
-            tenants: Arc::new(Mutex::new(HashMap::new())),
+            tenants: Arc::new(RwLock::new(HashMap::new())),
         }
     }
 
     /// Register a new in-memory tenant scope (INV_C5_18 zero-worktree constraint)
     pub fn register_tenant(&self, tenant_id: &str, quota_bytes: usize, pubkey: VerifyingKey) -> bool {
-        let mut guard = self.tenants.lock().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+        let mut guard = self.tenants.write().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         if guard.contains_key(tenant_id) {
             if let Some(t) = guard.get_mut(tenant_id) {
                 t.active = true;
@@ -186,13 +186,13 @@ impl SwarmHypervisor {
 
     /// Evict a tenant scope from RAM to purge session entropy
     pub fn evict_tenant(&self, tenant_id: &str) -> bool {
-        let mut guard = self.tenants.lock().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+        let mut guard = self.tenants.write().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         guard.remove(tenant_id).is_some()
     }
 
     /// Return total active in-memory tenants
     pub fn active_tenant_count(&self) -> usize {
-        let guard = self.tenants.lock().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+        let guard = self.tenants.write().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         guard.values().filter(|t| t.active).count()
     }
 
@@ -273,7 +273,7 @@ pub fn spawn_writer_daemon(service_name_str: &str, stop_signal: Arc<AtomicBool>,
                     processed += 1;
                 }
                 Ok(None) => {
-                    thread::sleep(Duration::from_millis(5));
+                    thread::sleep(Duration::from_micros(10));
                 }
                 Err(_) => {
                     break;
