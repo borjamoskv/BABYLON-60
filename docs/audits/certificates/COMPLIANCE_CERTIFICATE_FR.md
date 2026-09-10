@@ -25,11 +25,11 @@ jurisdiction: FR / UE (Règlement UE 2024/1689)
 ---
 
 > [!IMPORTANT]
-> **Avis Causal-Déterministe:** Ce certificat atteste que le système agentique spécifié fonctionne sous le Noyau Causal-Déterministe BABYLON-60 v4.0. Toutes les décisions, transitions d'état et allocations temporelles sont ancrées cryptographiquement à un Registre DAG Merkle-Causal immuable avec scellement WORM et attestation matérielle TPM 2.0.
+> **Avis Causal-Déterministe:** Ce certificat atteste que le système agentique spécifié fonctionne sous le Noyau Causal-Déterministe BABYLON-60 v4.0. Toutes les décisions, transitions d'état et allocations temporelles sont ancrées cryptographiquement à un Registre DAG Merkle-Causal immuable avec scellement WORM logiciel (attestation matérielle TPM 2.0 dans la roadmap).
 
 ---
 
-### Flux de Validation de l'Audit (Hardware-Enforced)
+### Flux de Validation de l'Audit (WORM Logiciel)
 
 ```mermaid
 sequenceDiagram
@@ -37,13 +37,13 @@ sequenceDiagram
     participant OP as Opérateur de l'Agent
     participant B60 as Noyau BABYLON-60
     participant DAG as WORM Merkle-DAG
-    participant TPM as Notario WORM Software
+    participant TPM as Notaire WORM Logiciel
     
     OP->>B60: Requête (Horloge Sexagésimale F60)
     B60->>DAG: Validation des Invariants & Hash Précédent
     DAG-->>B60: État Causal Confirmé (Zero-Entropy)
     B60->>TPM: Requête de Signature Cryptographique (BLAKE3)
-    TPM-->>B60: Attestation Matérielle Générée
+    TPM-->>B60: Attestation Logicielle Générée
     B60-->>OP: Sortie Déterministe + Proof IR
 ```
 
@@ -90,7 +90,7 @@ graph TD
 | **Art. 9 (Gestion des Risques)** | Identification et atténuation continues des risques liés à l'IA. | Élagueur Thermodynamique d'AST + Moteur d'Auto-Falsification (Kill-switch). | ✅ CONFORME | `52099e623249c6ad8f102...` |
 | **Art. 10 (Gouvernance des Données)** | Traçabilité et lignée complète de l'inférence. | Arithmétique Sexagésimale $F60$ + Lignée immuable DAG Merkle-Causal WORM. | ✅ CONFORME | `5eb25e74d0a0700e19284...` |
 | **Art. 11 (Documentation Technique)** | Preuve formelle de conformité avant déploiement. | Exportation automatique de Proof IR vers des lemmes vérifiés mécaniquement dans Lean 4. | ✅ CONFORME | `9d53c9b5d5aa5d1209384...` |
-| **Art. 12 (Enregistrement des Journaux)** | Enregistrement WORM inaltérable des événements tout au long du cycle de vie. | Registre immuable WORM DAG avec horodatage Lamport et signature par enclave. | ✅ CONFORME | `c65c9ce3bb20634519283...` |
+| **Art. 12 (Enregistrement des Journaux)** | Enregistrement WORM inaltérable des événements tout au long du cycle de vie. | Registre immuable WORM DAG avec horodatage Lamport et signature logicielle COSE_Sign1. | ✅ CONFORME | `c65c9ce3bb20634519283...` |
 | **Art. 13 (Transparence)** | Explicabilité complète des processus de décision agentique. | Graphe de dépendances causales exportable en JSON-LD (Sans boîtes noires). | ✅ CONFORME | `7a88b1928c89102938475...` |
 | **Art. 14 (Contrôle Humain)** | Interface permettant l'intervention d'opérateurs humains. | Interface Harmonique Néo-Riemannienne Tonnetz + gel direct via `QUARANTINE`. | ✅ CONFORME | `2b1021f201dafbef84719...` |
 | **Art. 14(4) (Arrêt d'Urgence)** | Bouton d'arrêt d'urgence humain instantané et sécurisé. | Fonction `babylon60_epistemic_halt` (Fail-stop déterministe $O(1)$). | ✅ CONFORME | `8f10b23491ca029837419...` |
