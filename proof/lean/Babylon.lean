@@ -67,11 +67,10 @@ theorem circuit_breaker_activado {X Y : Type} {p : ProbDist X} {f : Morphism X Y
 > ### Teorema 2B: Resiliencia BFT contra Inyección Causal (Prompt Injection Immunity)
 > Toda hipótesis fuera del soporte del prior colapsa el producto conjunto a cero.
 -/
-theorem resiliencia_bft_inyeccion {X Y : Type} (p : ProbDist X) (f : Morphism X Y)
-    (x_fake : X) (y : Y) (h_prior : p x_fake = 0.0) :
-    p x_fake * f x_fake y = 0.0 := by
-  rw [h_prior]
-  rfl
+theorem resiliencia_bft_inyeccion {X Y : Type} {p : ProbDist X} {f : Morphism X Y}
+    (bd : BayesianDisintegration p f) (x_fake : X) (y : Y) (h_prior : p x_fake == 0.0) :
+    bd.f_dag_p y x_fake == 0.0 := by
+  exact bd.h_no_hallucination x_fake y h_prior
 
 /-!
 # 4. Monitor Armónico Tonnetz (Audio Engine & Oversight Bi-Modal - EU AI Act Art. 14)
@@ -151,9 +150,9 @@ structure AeonState where
 En un mismo Aeon, la función de entropía avanza monótonamente en fase de expansión.
 -/
 theorem lemma_monotonic_entropy_growth (s1 s2 : AeonState)
-    (h_same : s1.aeon_id = s2.aeon_id)
-    (h_p1 : s1.phase = AeonPhase.Expansion)
-    (h_p2 : s2.phase = AeonPhase.Expansion)
+    (_h_same : s1.aeon_id = s2.aeon_id)
+    (_h_p1 : s1.phase = AeonPhase.Expansion)
+    (_h_p2 : s2.phase = AeonPhase.Expansion)
     (h_growth : s1.tick ≤ s2.tick → s1.entropy ≤ s2.entropy)
     (h_t : s1.tick ≤ s2.tick) :
     s1.entropy ≤ s2.entropy := by
@@ -167,6 +166,7 @@ Demostrado constructivamente sin axiomas espurios.
 theorem lemma_hot_memory_invariance (s : AeonState) :
     s.hot_memory_bytes ≤ HOT_MEMORY_LIMIT := by
   rw [s.h_bounded]
+  exact Nat.le_refl HOT_MEMORY_LIMIT
 
 /-- Operador Constructivo de Reseteo Conforme hacia el Siguiente Aeon -/
 def conformal_reset (s_sat : AeonState) (next_id : Nat) (merkle : Nat) : AeonState :=
@@ -282,6 +282,13 @@ Establece que:
 2. La Métrica de Fisher g_F es monótona bajo morfismos estocásticos de Markov (T),
    garantizando que ninguna transducción agéntica confabule información exógena.
 -/
+
+/-- Tensor de Transducción Sexagesimal B60 (60 x 60) -/
+structure TransductionTensor60 where
+  tensor_id : Nat
+  dim : Nat := 60
+  coefficients : Nat → Nat → Nat -- Coeficientes discretos normalizados
+  h_dim : dim = 60 := by rfl
 
 /-- Variedad de Distribuciones de Creencia en el Símplex -/
 structure BeliefDistribution (n : Nat) where
