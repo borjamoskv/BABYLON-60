@@ -19,16 +19,19 @@ from pathlib import Path
 
 from cryptography.hazmat.primitives.asymmetric import ed25519
 
+from babylon60.attestation import (
+    AeonVerifier,
+    ConformalMerkleTree,
+    extract_claims_from_ledger as extract_claims_for_sealing,
+)
 from babylon60.bft.bounty_claim_attester import BountyClaimReceipt
 from babylon60.bft.bounty_cold_ledger import BountyColdLedger
+from babylon60.bft.bounty_remediation import synthesize_domain_remediation
 from scripts.c5_l1_ledger.seal_bounty_aeon import (
-    ConformalMerkleTree,
-    extract_claims_for_sealing,
     seal_bounty_aeon,
 )
 from scripts.c5_legion.c5_bounty_legion_exfiltration import (
     fetch_scitt_claims,
-    synthesize_domain_remediation,
 )
 
 
@@ -128,6 +131,23 @@ def test_aeon_sealing_end_to_end(tmp_path: Path) -> None:
         assert target_json.exists()
         loaded = json.loads(target_json.read_text(encoding="utf-8"))
         assert loaded["merkle_root"] == artifact["merkle_root"]
+
+        # 6. Validar mediante AeonVerifier (Oráculo L1)
+        v_report = AeonVerifier.verify_manifest(manifest_path=target_json, db_path=str(db_file))
+        assert v_report["overall_valid"] is True
+        assert v_report["tree_integrity_valid"] is True
+        assert v_report["ed25519_signature_valid"] is True
+        assert v_report["recomputed_claims_count"] == 15
+
+        # 7. Validar prueba de inclusión de un claim mediante AeonVerifier
+        c_report = AeonVerifier.verify_claim_membership(
+            claim_id="CLAIM-TEST-005",
+            manifest_path=target_json,
+            db_path=str(db_file),
+        )
+        assert c_report["is_valid_inclusion"] is True
+        assert c_report["proof_steps"] > 0
+        assert c_report["claim_id"] == "CLAIM-TEST-005"
 
     finally:
         _clean_sqlite_triplet(db_file)

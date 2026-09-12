@@ -117,3 +117,100 @@ def test_bounty_cli_export_claims(tmp_path: Path, capsys: pytest.CaptureFixture[
     assert exc_info.value.code == 0
     captured = capsys.readouterr()
     assert "TELEMETRÍA DE CICLO FUNTORIAL:" in captured.out
+
+
+def test_bounty_cli_verify_aeon_command(capsys: pytest.CaptureFixture[str]) -> None:
+    """Verifica el comando CLI --verify-aeon contra el manifiesto L1 y ledger."""
+    aeon_manifest = "L1_sink/aeon_bounty_omega_10k.json"
+    ledger_db = "bounty_ledger_10k.db"
+    if not Path(aeon_manifest).exists() or not Path(ledger_db).exists():
+        pytest.skip("Artefactos de Aeón Ω-10k no disponibles localmente")
+
+    with pytest.raises(SystemExit) as exc_info:
+        cli_main(["--verify-aeon", aeon_manifest, "--db", ledger_db])
+
+    assert exc_info.value.code == 0
+    captured = capsys.readouterr()
+    assert "ORÁCULO DE VERIFICACIÓN DE AEÓN CONFORME" in captured.out
+    assert "Firma Ed25519:    ✓ VÁLIDA" in captured.out
+    assert "Recomputación DB: ✓ ÍNTEGRA" in captured.out
+    assert "AEÓN CONFORME VERIFICADO EXITOSAMENTE" in captured.out
+
+
+def test_bounty_cli_verify_claim_command(capsys: pytest.CaptureFixture[str]) -> None:
+    """Verifica el comando CLI --verify-claim generando una prueba de inclusión O(log2 N)."""
+    aeon_manifest = "L1_sink/aeon_bounty_omega_10k.json"
+    ledger_db = "bounty_ledger_10k.db"
+    if not Path(aeon_manifest).exists() or not Path(ledger_db).exists():
+        pytest.skip("Artefactos de Aeón Ω-10k no disponibles localmente")
+
+    target_claim = "CLAIM-GHSA-AI-0037-bc1d-01358-21A846C4ED8D"
+
+    with pytest.raises(SystemExit) as exc_info:
+        cli_main(
+            [
+                "--verify-claim",
+                target_claim,
+                "--aeon",
+                aeon_manifest,
+                "--db",
+                ledger_db,
+            ]
+        )
+
+    assert exc_info.value.code == 0
+    captured = capsys.readouterr()
+    assert "VERIFICACIÓN FORMAL DE INCLUSIÓN DE CLAIM" in captured.out
+    assert "Pasos de Prueba:  14 (O(log2 N))" in captured.out
+    assert "PRUEBA DE INCLUSIÓN VÁLIDA" in captured.out
+
+
+def test_bounty_cli_verify_claim_falsification(capsys: pytest.CaptureFixture[str]) -> None:
+    """Valida que un claim espurio sea rechazado con código de error 1."""
+    aeon_manifest = "L1_sink/aeon_bounty_omega_10k.json"
+    ledger_db = "bounty_ledger_10k.db"
+    if not Path(aeon_manifest).exists() or not Path(ledger_db).exists():
+        pytest.skip("Artefactos de Aeón Ω-10k no disponibles localmente")
+
+    with pytest.raises(SystemExit) as exc_info:
+        cli_main(
+            [
+                "--verify-claim",
+                "CLAIM-ESPURIO-NON-EXISTENT",
+                "--aeon",
+                aeon_manifest,
+                "--db",
+                ledger_db,
+            ]
+        )
+
+    assert exc_info.value.code == 1
+    captured = capsys.readouterr()
+    assert "Error fatal durante la verificación" in captured.out
+
+
+def test_bounty_cli_export_remediations_command(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    """Verifica la síntesis masiva y exportación de planes de mitigación desde la CLI."""
+    ledger_db = "bounty_ledger_10k.db"
+    if not Path(ledger_db).exists():
+        pytest.skip("Cold Ledger Ω-10k no disponible localmente")
+
+    out_file = tmp_path / "remediations_ai.json"
+
+    with pytest.raises(SystemExit) as exc_info:
+        cli_main(
+            [
+                "--export-remediations",
+                str(out_file),
+                "--db",
+                ledger_db,
+                "--domain",
+                "DOMAIN_AI",
+            ]
+        )
+
+    assert exc_info.value.code == 0
+    captured = capsys.readouterr()
+    assert "SÍNTESIS MASIVA DE PLANES DE REMEDIACIÓN FORENSE" in captured.out
+    assert "3,000 planes de remediación sintetizados" in captured.out
+    assert out_file.exists()

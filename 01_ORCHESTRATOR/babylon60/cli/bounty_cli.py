@@ -6,7 +6,8 @@
 """bounty_cli.py - Consola soberana de control y telemetría de Ω-Bounty-Ingest.
 
 Permite invocar el ciclo funtorial de ingestión, triaje causal, inspección
-interactiva de bytecode y anclaje de reclamaciones criptográficas desde la terminal.
+interactiva de bytecode, verificación formal de Aeones Conformes L1 y generación
+de planes de remediación forense directamente desde la terminal.
 """
 
 from __future__ import annotations
@@ -14,14 +15,29 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import os
 from pathlib import Path
 import sys
 from typing import Sequence
 
-import httpx
+# ── Dynamic PYTHONPATH Resolution (Clone & Run Invariant) ───────────────────
+_ORCHESTRATOR_DIR = Path(__file__).resolve().parents[2]
+if str(_ORCHESTRATOR_DIR) not in sys.path:
+    sys.path.insert(0, str(_ORCHESTRATOR_DIR))
 
-from babylon60.bft.bounty_pipeline_orchestrator import BountyPipelineOrchestrator
-from babylon60.bft.defi_bytecode_scraper import DeFiBytecodeScraper
+import httpx  # noqa: E402
+
+from babylon60.attestation.conformal_tree import (  # noqa: E402
+    AeonVerifier,
+    extract_claims_from_ledger,
+)
+from babylon60.bft.bounty_pipeline_orchestrator import (  # noqa: E402
+    BountyPipelineOrchestrator,
+)
+from babylon60.bft.bounty_remediation import (  # noqa: E402
+    generate_remediation_reports,
+)
+from babylon60.bft.defi_bytecode_scraper import DeFiBytecodeScraper  # noqa: E402
 
 
 def render_dashboard_banner() -> None:
@@ -62,6 +78,108 @@ def handle_bytecode_inspection(bytecode_hex: str, hook_addr: str | None) -> int:
         print(f"    [!] {f}")
 
     return 0
+
+
+def handle_verify_aeon(manifest_path: str, db_path: str | None) -> int:
+    """Verifica formalmente la atestación de un Aeón Conforme sellado en L1."""
+    render_dashboard_banner()
+    print("[*] ORÁCULO DE VERIFICACIÓN DE AEÓN CONFORME (INV_C5_AEON):")
+    print(f"    • Manifiesto L1:    {manifest_path}")
+    print(f"    • Cold Ledger DB:   {db_path or 'No provisto (solo firma y cabeceras)'}")
+
+    try:
+        report = AeonVerifier.verify_manifest(manifest_path=manifest_path, db_path=db_path)
+    except Exception as exc:
+        print(f"\n[!] Error fatal durante la verificación: {exc}")
+        return 1
+
+    print("\n[+] RESULTADOS DE ATESTACIÓN CRIPTOGRÁFICA:")
+    print(f"    • Aeón ID:          {report['aeon_id']}")
+    print(f"    • Estado:           {report['status']}")
+    print(f"    • Raíz Merkle:      0x{report['merkle_root']}")
+    print(f"    • Total Claims:     {report['total_claims']:,}")
+    print(f"    • Firma Ed25519:    {'✓ VÁLIDA' if report['ed25519_signature_valid'] else '✗ INVÁLIDA'}")
+    print(f"    • Hardware UUID:    {report['hardware_anchor_uuid']}")
+    print(f"    • Host de Origen:   {'✓ COINCIDENTE' if report['is_origin_host'] else 'ℹ NODO REMOTO'}")
+
+    if report["tree_integrity_valid"] is not None:
+        print(
+            f"    • Recomputación DB: {'✓ ÍNTEGRA (Raíz y recuento idénticos)' if report['tree_integrity_valid'] else '✗ CORRUPCIÓN DETECTADA'}"
+        )
+        if report["recomputed_root"]:
+            print(f"      - Raíz Calculada: 0x{report['recomputed_root']}")
+            print(f"      - Claims en DB:   {report['recomputed_claims_count']:,}")
+
+    if report["overall_valid"]:
+        print("\n[✓] AEÓN CONFORME VERIFICADO EXITOSAMENTE (Atestación L1 C5-REAL sellada)")
+        return 0
+    else:
+        print("\n[✗] VIOLACIÓN EPISTÉMICA: El Aeón no superó los controles de integridad.")
+        return 1
+
+
+def handle_verify_claim(claim_id: str, manifest_path: str, db_path: str) -> int:
+    """Verifica formalmente la prueba de inclusión de un claim en el Aeón sellado."""
+    render_dashboard_banner()
+    print("[*] VERIFICACIÓN FORMAL DE INCLUSIÓN DE CLAIM (Membership Proof):")
+    print(f"    • Claim ID:         {claim_id}")
+    print(f"    • Manifiesto L1:    {manifest_path}")
+    print(f"    • Cold Ledger DB:   {db_path}")
+
+    try:
+        report = AeonVerifier.verify_claim_membership(
+            claim_id=claim_id,
+            manifest_path=manifest_path,
+            db_path=db_path,
+        )
+    except Exception as exc:
+        print(f"\n[!] Error fatal durante la verificación: {exc}")
+        return 1
+
+    print("\n[+] DICTAMEN DE INCLUSIÓN DE MERKLE:")
+    print(f"    • Advisory ID:      {report['advisory_id']}")
+    print(f"    • Dominio:          {report['domain']}")
+    print(f"    • Nivel de Riesgo:  {report['risk_score']:.2f}")
+    print(f"    • Hash de Hoja:     0x{report['leaf_hash']}")
+    print(f"    • Pasos de Prueba:  {report['proof_steps']} (O(log2 N))")
+    print(f"    • Raíz Esperada:    0x{report['expected_merkle_root']}")
+    print(f"    • Raíz Calculada:   0x{report['computed_merkle_root']}")
+
+    print("\n[+] TRAZA DE CAMINO MERKLE (Primeros 3 pasos):")
+    for i, (pos, sib) in enumerate(report["proof_path"][:3]):
+        print(f"    [{i + 1:02d}] {pos:<5} | Hermano: {sib[:24]}...")
+
+    if report["is_valid_inclusion"]:
+        print("\n[✓] PRUEBA DE INCLUSIÓN VÁLIDA: El claim está formalmente sellado en el Aeón L1.")
+        return 0
+    else:
+        print("\n[✗] PRUEBA DE INCLUSIÓN FALLIDA: El hash de la hoja discrepa de la raíz Merkle.")
+        return 1
+
+
+def handle_export_remediations(out_path: str, db_path: str, domain_filter: str | None) -> int:
+    """Exporta autopsias y planes de mitigación forense para los claims atestados."""
+    render_dashboard_banner()
+    print("[*] SÍNTESIS MASIVA DE PLANES DE REMEDIACIÓN FORENSE:")
+    print(f"    • Cold Ledger DB:   {db_path}")
+    print(f"    • Filtro Dominio:   {domain_filter or 'TODOS LOS DOMINIOS'}")
+    print(f"    • Destino JSON:     {out_path}")
+
+    try:
+        claims = extract_claims_from_ledger(db_path)
+        if domain_filter:
+            claims = [c for c in claims if str(c.get("domain")) == domain_filter]
+
+        reports = generate_remediation_reports(claims)
+        out_file = Path(out_path)
+        out_file.parent.mkdir(parents=True, exist_ok=True)
+        out_file.write_text(json.dumps(reports, indent=2), encoding="utf-8")
+
+        print(f"\n[✓] {len(reports):,} planes de remediación sintetizados y exportados a {out_file.resolve()}")
+        return 0
+    except Exception as exc:
+        print(f"\n[!] Error sintetizando planes de remediación: {exc}")
+        return 1
 
 
 async def run_single_cycle(args: argparse.Namespace, orchestrator: BountyPipelineOrchestrator) -> int:
@@ -117,9 +235,21 @@ async def run_single_cycle(args: argparse.Namespace, orchestrator: BountyPipelin
 
 
 async def run_cli(args: argparse.Namespace) -> int:
-    """Manejador principal CLI con soporte de modo watch y dry-run."""
+    """Manejador principal CLI con soporte de verificación, remediación y watch."""
     if args.inspect_bytecode:
         return handle_bytecode_inspection(args.inspect_bytecode, args.hook_address)
+
+    if args.verify_aeon:
+        return handle_verify_aeon(args.verify_aeon, args.db)
+
+    if args.verify_claim:
+        if not args.aeon:
+            print("[!] Se requiere --aeon <manifest_path> para verificar la pertenencia de un claim.")
+            return 1
+        return handle_verify_claim(args.verify_claim, args.aeon, args.db)
+
+    if args.export_remediations:
+        return handle_export_remediations(args.export_remediations, args.db, args.domain)
 
     orchestrator = BountyPipelineOrchestrator()
     orchestrator.cold_ledger.start()
@@ -146,6 +276,9 @@ async def run_cli(args: argparse.Namespace) -> int:
 
 def main(argv: Sequence[str] | None = None) -> None:
     """Punto de entrada principal para CLI babylon60-bounty."""
+    default_db = "bounty_ledger_10k.db" if os.path.exists("bounty_ledger_10k.db") else "bounty_ledger.db"
+    default_aeon = "L1_sink/aeon_bounty_omega_10k.json"
+
     parser = argparse.ArgumentParser(description="BABYLON-60 Ω-Bounty-Ingest CLI Terminal")
     parser.add_argument("--live", action="store_true", help="Realiza sondeo en vivo de APIs públicas")
     parser.add_argument("--per-page", type=int, default=5, help="Número de registros por feed")
@@ -155,6 +288,44 @@ def main(argv: Sequence[str] | None = None) -> None:
     parser.add_argument("--hook-address", type=str, help="Dirección Ethereum del hook Uniswap v4 a evaluar")
     parser.add_argument("--export-claims", type=str, help="Ruta de archivo JSON para exportar recibos sellados")
     parser.add_argument("--watch", type=int, help="Intervalo en segundos para sondeo continuo en bucle")
+
+    # Modos de Verificación y Auditoría Soberana
+    parser.add_argument(
+        "--verify-aeon",
+        type=str,
+        metavar="MANIFEST",
+        help="Ruta al manifiesto L1 para auditar integridad criptográfica",
+    )
+    parser.add_argument(
+        "--verify-claim",
+        type=str,
+        metavar="CLAIM_ID",
+        help="ID del claim para verificar formalmente su prueba de inclusión O(log2 N)",
+    )
+    parser.add_argument(
+        "--aeon",
+        type=str,
+        default=default_aeon,
+        help="Ruta al manifiesto L1 (por defecto L1_sink/aeon_bounty_omega_10k.json)",
+    )
+    parser.add_argument(
+        "--db",
+        type=str,
+        default=default_db,
+        help=f"Ruta a la base de datos Cold Ledger SQLite (por defecto {default_db})",
+    )
+    parser.add_argument(
+        "--export-remediations",
+        type=str,
+        metavar="OUT_FILE",
+        help="Exporta autopsias y planes de remediación de los claims atestados",
+    )
+    parser.add_argument(
+        "--domain",
+        type=str,
+        choices=["DOMAIN_EVM", "DOMAIN_NATIVE", "DOMAIN_AI"],
+        help="Filtro de dominio para exportación de remediaciones",
+    )
 
     args = parser.parse_args(argv)
     exit_code = asyncio.run(run_cli(args))

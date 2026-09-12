@@ -34,7 +34,12 @@ from typing import Any, Dict, List, Tuple
 _ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(_ROOT / "01_ORCHESTRATOR"))
 
-from babylon60.attestation.merkle_anchor import MerkleCausalAnchor  # noqa: E402
+from babylon60.attestation import (  # noqa: E402
+    ConformalMerkleTree,
+    MerkleCausalAnchor,
+    compute_claim_leaf_hash,
+    extract_claims_from_ledger as extract_claims_for_sealing,
+)
 from babylon60.crypto.identity import L0IdentityForge  # noqa: E402
 from babylon60.crypto.rfc3161 import RFC3161Client  # noqa: E402
 from cryptography.hazmat.primitives.asymmetric import ed25519  # noqa: E402
@@ -44,81 +49,6 @@ logger = logging.getLogger("AeonSealer")
 
 LANDAUER_BOUND_300K = 2.8705e-21
 
-
-class ConformalMerkleTree:
-    """Árbol de Merkle balanceado O(log N) para compactación conforma de Aeones."""
-
-    def __init__(self, leaves: List[str]) -> None:
-        if not leaves:
-            raise ValueError("El árbol de Merkle requiere al menos una hoja.")
-        self.leaves = leaves
-        self.tree_levels: List[List[str]] = [leaves]
-        self._build_tree()
-
-    def _build_tree(self) -> None:
-        current_level = self.leaves
-        while len(current_level) > 1:
-            next_level: List[str] = []
-            for i in range(0, len(current_level), 2):
-                left = current_level[i]
-                right = current_level[i + 1] if i + 1 < len(current_level) else left
-                combined = f"{left}:{right}".encode("utf-8")
-                parent = hashlib.sha3_256(combined).hexdigest()
-                next_level.append(parent)
-            self.tree_levels.append(next_level)
-            current_level = next_level
-
-    @property
-    def root(self) -> str:
-        return self.tree_levels[-1][0]
-
-    def get_inclusion_proof(self, index: int) -> List[Tuple[str, str]]:
-        """Genera prueba de inclusión: lista de tuplas (posicion, hash_hermano)."""
-        proof: List[Tuple[str, str]] = []
-        curr_idx = index
-        for level in self.tree_levels[:-1]:
-            is_right = curr_idx % 2 == 1
-            if is_right:
-                sibling_idx = curr_idx - 1
-                sibling_pos = "LEFT"
-            else:
-                sibling_idx = curr_idx + 1 if curr_idx + 1 < len(level) else curr_idx
-                sibling_pos = "RIGHT"
-
-            proof.append((sibling_pos, level[sibling_idx]))
-            curr_idx = curr_idx // 2
-        return proof
-
-    @staticmethod
-    def verify_inclusion_proof(leaf: str, proof: List[Tuple[str, str]], expected_root: str) -> bool:
-        """Verifica deterministamente una prueba de inclusión O(log N)."""
-        curr = leaf
-        for pos, sibling in proof:
-            if pos == "LEFT":
-                combined = f"{sibling}:{curr}".encode("utf-8")
-            else:
-                combined = f"{curr}:{sibling}".encode("utf-8")
-            curr = hashlib.sha3_256(combined).hexdigest()
-        return curr == expected_root
-
-
-def extract_claims_for_sealing(db_path: str) -> List[Dict[str, Any]]:
-    """Extrae todos los registros de atestación SCITT ordenados deterministamente."""
-    if not os.path.exists(db_path):
-        raise FileNotFoundError(f"Cold Ledger no encontrado: {db_path}")
-
-    uri = f"file:{os.path.abspath(db_path)}?mode=ro"
-    conn = sqlite3.connect(uri, uri=True)
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
-    cursor.execute(
-        "SELECT claim_id, advisory_id, domain, risk_score, payload_hash, "
-        "timestamp_utc, hardware_anchor, attestation_merkle_root "
-        "FROM bounty_claims ORDER BY timestamp_utc ASC, claim_id ASC"
-    )
-    rows = cursor.fetchall()
-    conn.close()
-    return [dict(r) for r in rows]
 
 
 def seal_bounty_aeon(
@@ -147,12 +77,20 @@ def seal_bounty_aeon(
     for c in claims:
         dom = str(c["domain"])
         by_domain[dom] = by_domain.get(dom, 0) + 1
-        leaf_repr = (
-            f"{c['claim_id']}:{c['advisory_id']}:{c['domain']}:{c['payload_hash']}:{c['attestation_merkle_root']}"
+        cid = str(c["claim_id"])
+        aid = str(c["advisory_id"])
+        phash = str(c["payload_hash"])
+        aroot = str(c["attestation_merkle_root"])
+        total_bits += len(f"{cid}:{aid}:{dom}:{phash}:{aroot}".encode("utf-8")) * 8
+        leaf_hashes.append(
+            compute_claim_leaf_hash(
+                claim_id=cid,
+                advisory_id=aid,
+                domain=dom,
+                payload_hash=phash,
+                attestation_merkle_root=aroot,
+            )
         )
-        leaf_bytes = leaf_repr.encode("utf-8")
-        total_bits += len(leaf_bytes) * 8
-        leaf_hashes.append(hashlib.sha3_256(leaf_bytes).hexdigest())
 
     merkle_tree = ConformalMerkleTree(leaf_hashes)
     master_root = merkle_tree.root
