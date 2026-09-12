@@ -1,5 +1,7 @@
 use clap::{Parser, Subcommand, ValueEnum};
+use sha3::Digest;
 use std::fs;
+
 use std::io::{Read, Write};
 use std::net::TcpListener;
 use std::path::PathBuf;
@@ -83,7 +85,30 @@ enum Commands {
         #[arg(long, default_value = "127.0.0.1")]
         host: String,
     },
+
+    /// Verify a sealed L1 Aeon manifest file (INV_C5_AEON)
+    VerifyAeon {
+        /// Path to the L1 Aeon JSON manifest file
+        #[arg(short, long)]
+        manifest: PathBuf,
+    },
+
+    /// Benchmark Merkle tree synthesis and O(log2 N) proof verification
+    BenchmarkMerkle {
+        /// Number of synthetic leaves to synthesize
+        #[arg(short, long, default_value_t = 10000)]
+        count: usize,
+    },
+
+    /// Build Merkle tree from a JSON or line-delimited file of leaves
+    BuildTree {
+        /// Path to the file containing leaf hashes (one per line or JSON array)
+        #[arg(short, long)]
+        leaves_file: PathBuf,
+    },
 }
+
+
 
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ValueEnum, serde::Serialize, serde::Deserialize)]
 enum OutputFormat {
@@ -361,5 +386,116 @@ fn main() {
                 }
             }
         }
+        Commands::VerifyAeon { manifest } => {
+            println!("╔══════════════════════════════════════════════════════════════════════════╗");
+            println!("║  BABYLON-60 ATTEST (RUST KERNEL) | L1 AEON MANIFEST VERIFIER             ║");
+            println!("║  STATE: C5-REAL | ENGINE: ed25519-dalek / sha3-256 | ZERO-COPY           ║");
+            println!("╚══════════════════════════════════════════════════════════════════════════╝");
+            println!("[*] Verificando manifiesto L1: {}", manifest.display());
+
+            match babylon_attest::conformal_tree::verify_manifest_file(&manifest) {
+                Ok(res) => {
+                    println!("\n[+] DICTAMEN DE ATESTACIÓN FORMAL (RUST NATIVO):");
+                    println!("    • Aeón ID:          {}", res.aeon_id);
+                    println!("    • Estado:           {}", res.status);
+                    println!("    • Raíz Merkle:      0x{}", res.merkle_root);
+                    println!("    • Total Claims:     {}", res.total_claims);
+                    println!(
+                        "    • Firma Ed25519:    {}",
+                        if res.ed25519_signature_valid {
+                            "✓ VÁLIDA (ed25519-dalek)"
+                        } else {
+                            "✗ INVÁLIDA"
+                        }
+                    );
+                    println!("    • Hardware UUID:    {}", res.hardware_uuid);
+                    if res.overall_valid {
+                        println!("\n[✓] AEÓN CONFORME VERIFICADO EXITOSAMENTE POR EL KERNEL RUST");
+                        std::process::exit(0);
+                    } else {
+                        eprintln!("\n[✗] VIOLACIÓN: Manifiesto no superó las invariantes criptográficas.");
+                        std::process::exit(1);
+                    }
+                }
+                Err(e) => {
+                    eprintln!("\n[!] Error fatal verificando manifiesto: {}", e);
+                    std::process::exit(1);
+                }
+            }
+        }
+        Commands::BenchmarkMerkle { count } => {
+            println!("╔══════════════════════════════════════════════════════════════════════════╗");
+            println!("║  BABYLON-60 ATTEST (RUST KERNEL) | CONFORMAL MERKLE BENCHMARK            ║");
+            println!("║  STATE: C5-REAL | COMPLEXITY: O(log2 N) | ALGORITHM: SHA3-256            ║");
+            println!("╚══════════════════════════════════════════════════════════════════════════╝");
+            println!("[*] Sintetizando {} hojas pseudoaleatorias...", count);
+            let t0 = std::time::Instant::now();
+            let leaves: Vec<String> = (0..count)
+                .map(|i| {
+                    let mut hasher = sha3::Sha3_256::new();
+                    hasher.update(format!("SYNTHETIC_LEAF_{}", i).as_bytes());
+                    hex::encode(hasher.finalize())
+                })
+                .collect();
+            let leaf_time = t0.elapsed();
+
+            let t_build = std::time::Instant::now();
+            let tree = babylon_attest::conformal_tree::ConformalMerkleTree::new(leaves.clone())
+                .expect("Failed to build tree");
+            let build_time = t_build.elapsed();
+
+            println!("\n[+] RESULTADOS DE BENCHMARK RUST:");
+            println!("    • Total Hojas:         {}", count);
+            println!("    • Profundidad Árbol:   {} niveles", tree.depth());
+            println!("    • Raíz Merkle:         0x{}", tree.root());
+            println!("    • Tiempo Síntesis Hojas: {:.2?}", leaf_time);
+            println!(
+                "    • Tiempo Construcción:   {:.2?} ({:.0} hojas/seg)",
+                build_time,
+                (count as f64) / build_time.as_secs_f64()
+            );
+
+            // Check sample proofs
+            let t_proofs = std::time::Instant::now();
+            let samples = [0, count / 2, count - 1];
+            for &idx in &samples {
+                let proof = tree.get_inclusion_proof(idx).expect("Proof failed");
+                let valid = babylon_attest::conformal_tree::ConformalMerkleTree::verify_inclusion_proof(
+                    &leaves[idx],
+                    &proof,
+                    tree.root(),
+                );
+                assert!(valid);
+            }
+            println!(
+                "    • Verificación Muestras: {:.2?} (✓ 3 pruebas válidas)",
+                t_proofs.elapsed()
+            );
+            println!("\n[✓] BENCHMARK CONCLUIDO CON ÉXITO");
+        }
+        Commands::BuildTree { leaves_file } => {
+            let content = fs::read_to_string(&leaves_file).expect("Failed to read leaves file");
+            let leaves: Vec<String> = if content.trim_start().starts_with('[') {
+                serde_json::from_str(&content).expect("Invalid JSON array of leaves")
+            } else {
+                content
+                    .lines()
+                    .map(|l| l.trim().to_string())
+                    .filter(|l| !l.is_empty())
+                    .collect()
+            };
+
+            let tree = babylon_attest::conformal_tree::ConformalMerkleTree::new(leaves)
+                .expect("Failed to construct tree");
+
+            let out = serde_json::json!({
+                "root": tree.root(),
+                "depth": tree.depth(),
+                "leaves_count": tree.leaves.len(),
+            });
+            println!("{}", out);
+        }
     }
 }
+
+
