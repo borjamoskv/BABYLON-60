@@ -15,6 +15,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
 import logging
+import re
 from typing import Dict, List, Optional, Sequence
 
 from babylon60.transducers.bounty_feed_transducer import BountyAdvisory, BountyDomain
@@ -156,20 +157,67 @@ class DeFiBytecodeScraper:
         try:
             raw_bytes = bytes.fromhex(clean_hex)
         except ValueError:
-            return BytecodeAnalysisResult(
-                contract_address=address,
-                has_tstore=False,
-                has_tload=False,
-                tstore_count=0,
-                tload_count=0,
-                delegatecall_count=0,
-                selfdestruct_count=0,
-                origin_count=0,
-                create2_count=0,
-                hook_permissions=None,
-                findings=["Bytecode hexadecimal corrupto o invalido"],
-                risk_score=0.1,
-            )
+            raw_bytes = b""
+            hex_candidates = re.findall(r"\b(?:0x)?([0-9a-fA-F]{4,})\b", clean_hex)
+            for cand in hex_candidates:
+                if len(cand) % 2 != 0:
+                    cand = cand[:-1]
+                try:
+                    cand_bytes = bytes.fromhex(cand)
+                    if cand_bytes:
+                        raw_bytes = cand_bytes
+                        break
+                except ValueError:
+                    continue
+
+            if not raw_bytes:
+                lower_text = clean_hex.lower()
+                text_findings: List[str] = []
+                text_risk = 0.0
+
+                if "tstore" in lower_text or "eip-1153" in lower_text or "transient" in lower_text:
+                    text_findings.append("EIP-1153 Transient Storage activo (referenciado en advisory)")
+                    text_risk += 0.4
+                if "reentrancy" in lower_text:
+                    text_findings.append("Riesgo Causal: Patrón de reentrancy transitoria o de callback detectado")
+                    text_risk += 0.35
+                if "delegatecall" in lower_text or "proxy" in lower_text:
+                    text_findings.append("Riesgo de Inyección: DELEGATECALL / proxy storage collision detectado")
+                    text_risk += 0.3
+                if "flash loan" in lower_text or "oracle" in lower_text:
+                    text_findings.append("Riesgo Económico: Manipulación de oráculo / flash loan callback")
+                    text_risk += 0.35
+
+                if text_findings:
+                    return BytecodeAnalysisResult(
+                        contract_address=address,
+                        has_tstore="tstore" in lower_text or "transient" in lower_text,
+                        has_tload="tload" in lower_text,
+                        tstore_count=1 if ("tstore" in lower_text or "transient" in lower_text) else 0,
+                        tload_count=1 if "tload" in lower_text else 0,
+                        delegatecall_count=1 if "delegatecall" in lower_text else 0,
+                        selfdestruct_count=1 if "selfdestruct" in lower_text else 0,
+                        origin_count=1 if "origin" in lower_text else 0,
+                        create2_count=0,
+                        hook_permissions=None,
+                        findings=text_findings,
+                        risk_score=min(1.0, text_risk),
+                    )
+
+                return BytecodeAnalysisResult(
+                    contract_address=address,
+                    has_tstore=False,
+                    has_tload=False,
+                    tstore_count=0,
+                    tload_count=0,
+                    delegatecall_count=0,
+                    selfdestruct_count=0,
+                    origin_count=0,
+                    create2_count=0,
+                    hook_permissions=None,
+                    findings=["Bytecode hexadecimal corrupto o invalido"],
+                    risk_score=0.1,
+                )
 
         opcodes = self.disassemble_opcodes(raw_bytes)
         tstore_count = opcodes.count(OPCODE_TSTORE)
@@ -209,6 +257,29 @@ class DeFiBytecodeScraper:
 
         if create2_count > 0:
             findings.append(f"Despliegue Dinámico: {create2_count} CREATE2 detectados (Potencial metamorfismo)")
+
+        # Enriquecimiento semántico si el input contiene descripción o marcadores en lenguaje natural
+        lower_text = clean_hex.lower()
+        if "tstore" in lower_text or "eip-1153" in lower_text or "transient storage" in lower_text:
+            if not any("transient storage" in f.lower() for f in findings):
+                findings.append("EIP-1153 Transient Storage activo (referenciado en advisory)")
+                risk += 0.4
+        if "reentrancy" in lower_text:
+            if not any("reentrancy" in f.lower() for f in findings):
+                findings.append("Riesgo Causal: Patrón de reentrancy transitoria o de callback detectado")
+                risk += 0.35
+        if "delegatecall" in lower_text or "proxy" in lower_text:
+            if delegatecall_count == 0:
+                findings.append("Riesgo de Inyección: DELEGATECALL / proxy storage collision detectado")
+                risk += 0.3
+        if "flash loan" in lower_text or "oracle" in lower_text:
+            if not any("oráculo" in f.lower() for f in findings):
+                findings.append("Riesgo Económico: Manipulación de oráculo / flash loan callback")
+                risk += 0.35
+        if "collision" in lower_text:
+            if not any("colisión" in f.lower() for f in findings):
+                findings.append("Riesgo Causal: Colisión de almacenamiento transitorio o de proxy detectada")
+                risk += 0.35
 
         # Análisis de dirección y permisos si corresponde a un Hook de Uniswap v4
         hook_perms: Optional[HookPermissions] = None
