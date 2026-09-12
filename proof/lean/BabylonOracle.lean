@@ -37,8 +37,7 @@ Emitir táctica en JSON."
     -- Llamada síncrona C-FFI (Zero-Copy) al LLM cuántico local
     let tactica_raw := inferir_tactica_metal prompt
     
-    -- El compilador inyecta la táctica inferida por la NPU/GPU instantáneamente.
-    -- (Nota: Para producción total, Parser.runParserCategory requiere el entorno completo,
-    -- por ahora, logueamos la atestación de FFI).
+    -- Invariante Ring-0: Erradicación total de goal.admit (INV_C5_07 LOUD FAILURE)
+    -- El oráculo exige verificación deductiva; el bypass ciego queda proscrito.
     logInfo m!"[C-FFI ZERO-COPY] Táctica recuperada en RAM: {tactica_raw}"
-    goal.admit
+    throwError s!"[INV_C5_07 LOUD FAILURE] El oráculo neuro-simbólico infirió: '{tactica_raw}'. La admisión ciega 'goal.admit' ha sido erradicada. Se requiere un proof term deductivo explícito."
