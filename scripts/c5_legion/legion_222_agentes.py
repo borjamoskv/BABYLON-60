@@ -19,9 +19,13 @@ S_THREADS = 20 # 20 Hilos por proceso
 
 REPO_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+import shlex
+
 def run_cmd(cmd, cwd=REPO_PATH):
     try:
-        res = subprocess.run(cmd, shell=True, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=30)
+        # Convertir comando de string a lista para evitar shell=True
+        cmd_list = shlex.split(cmd) if isinstance(cmd, str) else cmd
+        res = subprocess.run(cmd_list, shell=False, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=30)
         return res.returncode == 0, res.stdout.strip()
     except Exception as e:
         return False, str(e)

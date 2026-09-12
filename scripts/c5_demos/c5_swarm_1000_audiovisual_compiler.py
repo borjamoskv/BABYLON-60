@@ -222,9 +222,9 @@ class SwarmAudiovisualRenderer:
             raw_audio = os.path.join(OUTPUT_DIR, f"swarm_audio_{scene['id']}.aiff")
             clean_text = scene["voiceover_text"].replace('"', '\\"')
             
-            cmd_say = f'say -v "{self.voice}" -o "{raw_audio}" "{clean_text}"'
-            if subprocess.run(cmd_say, shell=True).returncode != 0:
-                subprocess.run(f'say -o "{raw_audio}" "{clean_text}"', shell=True, check=True)
+            cmd_say = ["say", "-v", self.voice, "-o", raw_audio, scene["voiceover_text"]]
+            if subprocess.run(cmd_say).returncode != 0:
+                subprocess.run(["say", "-o", raw_audio, scene["voiceover_text"]], check=True)
                 
             dur = self.get_audio_duration(raw_audio) + 0.6
             frames = int(dur * 60)
