@@ -424,9 +424,9 @@ class CortexPersistLedger:
         with self._get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute("SELECT entry_hash FROM cortex_ledger ORDER BY seq ASC")
-            leaves = [row[0] for row in cursor.fetchall()]
+            entry_hashes = [row[0] for row in cursor.fetchall()]
 
-        return build_merkle_tree(leaves)
+        return build_merkle_tree(entry_hashes)
 
     def get_event_proof(self, seq: int) -> Dict[str, Any]:
         """

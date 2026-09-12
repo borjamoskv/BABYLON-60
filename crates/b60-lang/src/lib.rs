@@ -12,6 +12,9 @@ pub mod compiler;
 pub mod mmr;
 pub mod fisher;
 pub mod transducer;
+pub mod ffi;
+pub mod repl;
+pub mod dag;
 
 pub use arithmetic::{Tick60, FRACTION_BASE};
 pub use isa::SexaOpCode;
@@ -22,6 +25,10 @@ pub use compiler::B60Compiler;
 pub use mmr::{MmrAccumulator, MmrInclusionProof};
 pub use fisher::FisherSimplex;
 pub use transducer::{AgentActionIntent, EpistemicEvaluation, EpistemicGate};
+pub use repl::B60Repl;
+pub use dag::{CausalDag, CausalNode, CompiledCausalPlan, CausalParadoxError};
+
+
 
 
 

@@ -1,5 +1,8 @@
 name = "babylon"
-defaultTargets = ["Babylon"]
+defaultTargets = ["Babylon", "BabylonOracle"]
+
+[[lean_lib]]
+name = "BabylonOracle"
 
 [[lean_lib]]
 name = "Babylon"

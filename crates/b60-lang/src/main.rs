@@ -50,6 +50,14 @@ enum Commands {
         #[arg(short, long, default_value_t = 1000)]
         budget: u64,
     },
+    /// Inicia la sesión interactiva REPL del lenguaje B60
+    Repl,
+    /// Compila y optimiza un grafo acíclico dirigido (Causal-DAG) bajo mínimas geodésicas de Fisher
+    Dag {
+        /// Ejecuta el flujo demostrativo de enjambre multi-agente
+        #[arg(short, long)]
+        demo: bool,
+    },
     /// Muestra la información de arquitectura, invariantes y estado exergético
     Info,
 }
@@ -251,6 +259,75 @@ fn main() {
                 }
                 b60_lang::EpistemicEvaluation::RuntimeError(e) => {
                     println!("  [✗] ERROR DE EJECUCIÓN VM: {}", e);
+                    std::process::exit(1);
+                }
+            }
+            println!("==================================================================");
+        }
+        Commands::Repl => {
+            let mut repl = b60_lang::B60Repl::new();
+            repl.run_interactive();
+        }
+        Commands::Dag { demo: _ } => {
+            println!("==================================================================");
+            println!("         B60 CAUSAL DAG COMPILER & TOPOLOGICAL SCHEDULER          ");
+            println!("==================================================================");
+            let mut dag = b60_lang::CausalDag::new();
+
+            dag.add_node(b60_lang::CausalNode {
+                id: 1,
+                label: "Agent0_Perception".to_string(),
+                exergy_cost: 120,
+                belief_coords: vec![0.5, 0.5],
+                lamport_ts: 1,
+            }).unwrap();
+
+            dag.add_node(b60_lang::CausalNode {
+                id: 2,
+                label: "Agent1_Reasoning_A".to_string(),
+                exergy_cost: 240,
+                belief_coords: vec![0.7, 0.3],
+                lamport_ts: 2,
+            }).unwrap();
+
+            dag.add_node(b60_lang::CausalNode {
+                id: 3,
+                label: "Agent2_Reasoning_B".to_string(),
+                exergy_cost: 240,
+                belief_coords: vec![0.3, 0.7],
+                lamport_ts: 2,
+            }).unwrap();
+
+            dag.add_node(b60_lang::CausalNode {
+                id: 4,
+                label: "Agent3_Consensus_BFT".to_string(),
+                exergy_cost: 300,
+                belief_coords: vec![0.5, 0.5],
+                lamport_ts: 3,
+            }).unwrap();
+
+            dag.add_edge(1, 2).unwrap();
+            dag.add_edge(1, 3).unwrap();
+            dag.add_edge(2, 4).unwrap();
+            dag.add_edge(3, 4).unwrap();
+
+            let t0 = Instant::now();
+            match dag.compile() {
+                Ok(plan) => {
+                    let elapsed = t0.elapsed();
+                    println!("  [✓] COMPILACIÓN CAUSAL EXITOSA (0 Paradojas, 0 Anomalías)");
+                    println!("  -> Nodos compilados:      {}", plan.topological_order.len());
+                    println!("  -> Orden Topológico:      {:?}", plan.topological_order);
+                    println!("  -> Ondas de Paralelismo:  {} etapas concurrentes", plan.execution_stages.len());
+                    for st in &plan.execution_stages {
+                        println!("     * Etapa {}: Nodos {:?} (Presupuesto: {} u)", st.stage_index, st.parallel_node_ids, st.stage_exergy_budget);
+                    }
+                    println!("  -> Coste Exergético Total: {} u", plan.total_exergy_cost);
+                    println!("  -> Acción Cinética Fisher: {:.6} rad²/s", plan.cumulative_fisher_action);
+                    println!("  -> Tiempo de compilación: {:.3} µs", elapsed.as_secs_f64() * 1_000_000.0);
+                }
+                Err(e) => {
+                    eprintln!("  [✗] Error en compilación causal: {:?}", e);
                     std::process::exit(1);
                 }
             }
