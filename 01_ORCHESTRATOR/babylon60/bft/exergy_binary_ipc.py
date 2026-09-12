@@ -95,9 +95,8 @@ POISONED = 0xDEAD_6060
 class BountySharedManifest(ctypes.Structure):
     """Mapeo C-ABI estricto (64 Bytes) para sincronización con babylon60-kernel."""
 
-    # Desactivamos el warning de MSVC (deprecated default) en versiones futuras:
-    # _layout_ = "ms" (solo en Python 3.19+), omitido por compatibilidad 3.10+
-    _pack_ = 1
+    # Alineación natural exacta a 64 Bytes (zero-split L1 cache line):
+    # status_flag(4) + seq(4) + epoch_id(8) + payload_hash(32) + _padding(16) = 64B
     _fields_ = [
         ("status_flag", ctypes.c_uint32),
         ("seq", ctypes.c_uint32),

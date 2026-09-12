@@ -25,7 +25,7 @@ from cryptography.hazmat.primitives.asymmetric import ed25519
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.primitives.kdf.argon2 import Argon2id
 
-from babylon60.utils.base60 import bytes_to_base60
+from babylon60.primitives.base60 import bytes_to_base60
 
 logger = logging.getLogger("babylon60.crypto.identity")
 
