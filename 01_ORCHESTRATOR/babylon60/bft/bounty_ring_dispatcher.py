@@ -59,6 +59,11 @@ class BountyRingDispatcher:
         """Retorna el estado de telemetría del despachador."""
         return self._telemetry
 
+    @property
+    def ffi_writer(self) -> SharedManifestFFIWriter:
+        """Retorna el escritor C-FFI del manifest de 64B (Seqlock SPMC)."""
+        return self._ffi_writer
+
     def dispatch_frame(self, raw_frame: bytes) -> Optional[BountyAdvisory]:
         """Desempaqueta una trama B60IPC y la enruta a su atractor causal."""
         self._telemetry.total_frames_received += 1

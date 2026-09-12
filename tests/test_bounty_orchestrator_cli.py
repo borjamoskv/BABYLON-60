@@ -214,3 +214,18 @@ def test_bounty_cli_export_remediations_command(tmp_path: Path, capsys: pytest.C
     assert "SÍNTESIS MASIVA DE PLANES DE REMEDIACIÓN FORENSE" in captured.out
     assert "3,000 planes de remediación sintetizados" in captured.out
     assert out_file.exists()
+
+
+def test_bounty_cli_inspect_manifest(capsys: pytest.CaptureFixture[str]) -> None:
+    """Verifica el comando --inspect-manifest y la auditoría en vivo del layout 64B."""
+    with pytest.raises(SystemExit) as exc_info:
+        cli_main(["--inspect-manifest"])
+
+    assert exc_info.value.code == 0
+    captured = capsys.readouterr()
+    assert "INSPECCIÓN C-ABI DE SHARED MANIFEST" in captured.out
+    assert "Modo Enlace FFI:" in captured.out
+    assert "Alineación 64 Bytes: ✓ CUMPLIDA (0-split L1)" in captured.out
+    assert "INV-1 Layout 64B: OK" in captured.out
+    assert "INV-2 Seqlock SPMC: OK" in captured.out
+    assert "INV-4 Fail-Stop Gate: OK" in captured.out

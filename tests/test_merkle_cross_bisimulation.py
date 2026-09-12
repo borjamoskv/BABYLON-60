@@ -83,3 +83,86 @@ def test_rust_binary_verifies_sealed_l1_manifest() -> None:
     )
     assert "AEÓN CONFORME VERIFICADO EXITOSAMENTE POR EL KERNEL RUST" in res.stdout
     assert "Firma Ed25519:    ✓ VÁLIDA (ed25519-dalek)" in res.stdout
+
+
+@pytest.mark.parametrize("leaf_count", [3, 9, 31, 64])
+def test_bidirectional_inclusion_proof_bisimulation(tmp_path: Path, leaf_count: int) -> None:
+    """Certifica bisimulación bidireccional de pruebas de inclusión Merkle O(log2 N) entre Python y Rust."""
+    rust_bin = _get_rust_binary_path()
+    leaves = [hashlib.sha3_256(f"PROOF_BISIM_{i}".encode("utf-8")).hexdigest() for i in range(leaf_count)]
+
+    leaves_file = tmp_path / f"leaves_proof_{leaf_count}.json"
+    leaves_file.write_text(json.dumps(leaves), encoding="utf-8")
+
+    py_tree = PyMerkleTree(leaves)
+    py_root = py_tree.root
+
+    for test_idx in [0, leaf_count // 2, leaf_count - 1]:
+        leaf = leaves[test_idx]
+
+        # 1. Dirección Python -> Rust: Python genera prueba, Rust la verifica
+        py_proof = py_tree.get_inclusion_proof(test_idx)
+        rust_proof_format = [{"position": pos, "sibling_hash": sib} for pos, sib in py_proof]
+        proof_json_str = json.dumps(rust_proof_format)
+
+        res_rust_verify = subprocess.run(
+            [
+                str(rust_bin),
+                "verify-proof",
+                "--leaf",
+                leaf,
+                "--proof",
+                proof_json_str,
+                "--root",
+                py_root,
+            ],
+            capture_output=True,
+            text=True,
+        )
+        assert res_rust_verify.returncode == 0, (
+            f"Rust verify-proof falló para index {test_idx}: {res_rust_verify.stderr}"
+        )
+        verify_data = json.loads(res_rust_verify.stdout.strip())
+        assert verify_data["valid"] is True
+
+        # 2. Dirección Rust -> Python: Rust genera prueba, Python la verifica
+        res_rust_get = subprocess.run(
+            [
+                str(rust_bin),
+                "get-proof",
+                "--leaves-file",
+                str(leaves_file),
+                "--index",
+                str(test_idx),
+            ],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        rust_get_data = json.loads(res_rust_get.stdout.strip())
+        assert rust_get_data["root"] == py_root
+        assert rust_get_data["leaf"] == leaf
+
+        # Convertir prueba de Rust a formato tupla de Python y verificar
+        py_reconstructed_proof = [(step["position"], step["sibling_hash"]) for step in rust_get_data["proof"]]
+        assert PyMerkleTree.verify_inclusion_proof(leaf, py_reconstructed_proof, py_root) is True
+
+        # 3. Falsación: Prueba con hoja adulterada debe ser rechazada por Rust
+        tampered_leaf = hashlib.sha3_256(b"TAMPERED").hexdigest()
+        res_tampered = subprocess.run(
+            [
+                str(rust_bin),
+                "verify-proof",
+                "--leaf",
+                tampered_leaf,
+                "--proof",
+                proof_json_str,
+                "--root",
+                py_root,
+            ],
+            capture_output=True,
+            text=True,
+        )
+        assert res_tampered.returncode != 0
+        tampered_data = json.loads(res_tampered.stdout.strip())
+        assert tampered_data["valid"] is False

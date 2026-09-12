@@ -106,6 +106,32 @@ enum Commands {
         #[arg(short, long)]
         leaves_file: PathBuf,
     },
+
+    /// Generate an O(log2 N) inclusion proof for a leaf at a given index
+    GetProof {
+        /// Path to the file containing leaf hashes (JSON array or one per line)
+        #[arg(short, long)]
+        leaves_file: PathBuf,
+
+        /// Index of the leaf in the tree (0-based)
+        #[arg(short, long)]
+        index: usize,
+    },
+
+    /// Verify an O(log2 N) inclusion proof against an expected Merkle root
+    VerifyProof {
+        /// Leaf hash to verify
+        #[arg(short, long)]
+        leaf: String,
+
+        /// JSON string representing proof steps or path to JSON proof file
+        #[arg(short, long)]
+        proof: String,
+
+        /// Expected Merkle root hash
+        #[arg(short, long)]
+        root: String,
+    },
 }
 
 
@@ -494,6 +520,82 @@ fn main() {
                 "leaves_count": tree.leaves.len(),
             });
             println!("{}", out);
+        }
+        Commands::GetProof { leaves_file, index } => {
+            let content = fs::read_to_string(&leaves_file).expect("Failed to read leaves file");
+            let leaves: Vec<String> = if content.trim_start().starts_with('[') {
+                serde_json::from_str(&content).expect("Invalid JSON array of leaves")
+            } else {
+                content
+                    .lines()
+                    .map(|l| l.trim().to_string())
+                    .filter(|l| !l.is_empty())
+                    .collect()
+            };
+
+            let tree = babylon_attest::conformal_tree::ConformalMerkleTree::new(leaves.clone())
+                .expect("Failed to construct tree");
+
+            match tree.get_inclusion_proof(index) {
+                Ok(proof) => {
+                    let out = serde_json::json!({
+                        "index": index,
+                        "leaf": leaves[index],
+                        "root": tree.root(),
+                        "proof_steps": proof.len(),
+                        "proof": proof,
+                    });
+                    println!("{}", out);
+                }
+                Err(e) => {
+                    eprintln!("Error generating proof: {}", e);
+                    std::process::exit(1);
+                }
+            }
+        }
+        Commands::VerifyProof { leaf, proof, root } => {
+            let proof_json_str = if std::path::Path::new(&proof).exists() {
+                fs::read_to_string(&proof).expect("Failed to read proof file")
+            } else {
+                proof
+            };
+
+            let proof_steps: Vec<babylon_attest::conformal_tree::InclusionStep> =
+                if let Ok(steps) = serde_json::from_str(&proof_json_str) {
+                    steps
+                } else if let Ok(val) = serde_json::from_str::<serde_json::Value>(&proof_json_str) {
+                    if let Some(steps_val) = val.get("proof") {
+                        serde_json::from_value(steps_val.clone())
+                            .expect("Invalid proof structure inside JSON object")
+                    } else {
+                        eprintln!("JSON proof does not contain 'proof' key or array");
+                        std::process::exit(1);
+                    }
+                } else {
+                    eprintln!("Failed to parse proof JSON");
+                    std::process::exit(1);
+                };
+
+            let expected_root_norm = root.strip_prefix("0x").unwrap_or(&root);
+            let valid = babylon_attest::conformal_tree::ConformalMerkleTree::verify_inclusion_proof(
+                &leaf,
+                &proof_steps,
+                expected_root_norm,
+            );
+
+            let out = serde_json::json!({
+                "leaf": leaf,
+                "expected_root": expected_root_norm,
+                "proof_steps": proof_steps.len(),
+                "valid": valid,
+            });
+            println!("{}", out);
+
+            if valid {
+                std::process::exit(0);
+            } else {
+                std::process::exit(1);
+            }
         }
     }
 }

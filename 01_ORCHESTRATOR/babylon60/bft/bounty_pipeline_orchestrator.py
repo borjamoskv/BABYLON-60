@@ -54,6 +54,7 @@ class BountyCycleReport:
     claim_receipts: List[BountyClaimReceipt] = field(default_factory=list)
     total_elapsed_ms: float = 0.0
     landauer_dissipated_joules: float = 0.0
+    manifest_telemetry: Dict[str, object] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, object]:
         """Serializa el reporte a formato de diccionario estructurado."""
@@ -67,6 +68,7 @@ class BountyCycleReport:
             "claim_receipts": [r.to_dict() for r in self.claim_receipts],
             "total_elapsed_ms": self.total_elapsed_ms,
             "landauer_dissipated_joules": self.landauer_dissipated_joules,
+            "manifest_telemetry": self.manifest_telemetry,
         }
 
 
@@ -167,6 +169,18 @@ class BountyPipelineOrchestrator:
         total_bits = sum(len(f) for f in frames) * 8
         landauer_joules = total_bits * LANDAUER_BOUND_300K
 
+        # Telemetría de Anclaje C-ABI 64B (INV_C5_SHM)
+        ffi = self.dispatcher.ffi_writer
+        read_val = ffi.read()
+        manifest_telemetry: Dict[str, object] = {
+            "is_native": ffi.is_native,
+            "status": "POISONED" if ffi.is_halted() else "RUNNING",
+            "epoch_id": ffi.manifest.epoch_id,
+            "seq": ffi.manifest.seq,
+            "is_consistent": (ffi.manifest.seq % 2 == 0),
+            "last_payload_hash": read_val[1].hex() if read_val else "",
+        }
+
         return BountyCycleReport(
             timestamp_utc=timestamp,
             frames_ingested=len(frames),
@@ -177,4 +191,5 @@ class BountyPipelineOrchestrator:
             claim_receipts=receipts,
             total_elapsed_ms=elapsed_ms,
             landauer_dissipated_joules=landauer_joules,
+            manifest_telemetry=manifest_telemetry,
         )
