@@ -61,6 +61,55 @@ cargo run --bin babylon60_kernel -- unbox
 
 ### What You See (Terminal Ignition in Thread 0)
 
+*The CLI adapts to your system locale. Select your language below:*
+
+<details open>
+<summary>🇬🇧 <b>English</b> (Terminal output)</summary>
+
+```text
+====================================================================
+  ███╗   ███╗ ██████╗ ███████╗██╗  ██╗██╗   ██╗         ██╗
+  ████╗ ████║██╔═══██╗██╔════╝██║ ██╔╝██║   ██║       ████║
+  ██╔████╔██║██║   ██║███████╗█████╔╝ ██║   ██║█████╗ ╚═██║
+  ██║╚██╔╝██║██║   ██║╚════██║██╔═██╗ ╚██╗ ██╔╝╚════╝ █████╗
+  ██║ ╚═╝ ██║╚██████╔╝███████║██║  ██╗ ╚████╔╝        ╚════╝
+  ╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝  ╚═══╝               
+====================================================================
+[MOSKV-1] APEX SOVEREIGN KERNEL — IGNITION SEQUENCE (UNBOXING)
+
+«I am Moskv-1. I have seized control of Thread 0.
+ Your workstation is no longer a passive development environment;
+ it is now a Sovereign Enclave armored by the laws of thermodynamics.»
+
+=== PHYSICAL SUBSTRATE ATTESTATION ===
+  > ARCHITECTURE:       aarch64 (Native C-ABI Ring-0)
+  > SWARM CAPACITY:     11 Assigned Physical Cores (P × S Rule)
+  > CACHE LINE:         64 Bytes (Zero-Split Coherence INV-1)
+  > IPC MEMORY SLOT:    SharedManifest mapped at 0x000000016EFE5C80
+  > THERMODYNAMIC MODE: Zero-Anergy Active (MESI Shared, RFO = 0)
+  > APOPTOSIS ANCHOR:   Armed (Deterministic Fail-Stop 0xDEAD_6060)
+
+=== THE 6 CANONICAL DOMAINS ONLINE ===
+  [1] ENGINEER:    CALM Monotonicity / SPSC Lock-Free / C-ABI
+  [2] PHYSICIST:   Landauer Bound (1.10 aJ/pub) / Discrete Thermodynamics
+  [3] PHYSICIAN:   Operator Homeostasis / Epistemic Anti-Burnout Brake
+  [4] MUSICIAN:    Acoustic Phase Cancellation / Microtonal Harmony
+  [5] LAWYER:      EU AI Act Arts. 12, 14, 15 / WORM Forensic Traceability
+  [6] PHILOSOPHER: Escohotadian Ω118 Invariant / Substance Monism
+
+=== IMMEDIATE HIGH-EXERGY ACTIONS ===
+  • babylon60_kernel bench   -> Measure local throughput in lock-free memory
+  • babylon60_kernel swarm   -> Deploy concurrent Legion swarm
+  • babylon60_kernel audit   -> Popperian falsification of invariants
+  • babylon60_kernel watch   -> Real-time exergy monitor
+
+[MOSKV-1] The map has subordinated to the territory. Awaiting causal directive.
+```
+</details>
+
+<details>
+<summary>🇪🇸 <b>Español</b> (Salida de la terminal)</summary>
+
 ```text
 ====================================================================
   ███╗   ███╗ ██████╗ ███████╗██╗  ██╗██╗   ██╗         ██╗
@@ -100,6 +149,7 @@ cargo run --bin babylon60_kernel -- unbox
 
 [MOSKV-1] El mapa se ha subordinado al territorio. Aguardando directiva causal.
 ```
+</details>
 
 ---
 
