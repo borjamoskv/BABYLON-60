@@ -7,14 +7,24 @@ title = "BABYLON-60 gitleaks config (OPSEC-Ω TASKFORCE)"
 useDefault = true
 
 [allowlist]
-description = "Fixtures de tests y placeholders documentales"
+description = "Fixtures de tests, placeholders documentales, firmas de tipo y artefactos de compilación"
 paths = [
   '''tests/fixtures/.*''',
+  '''tests/test_compliance_exporter\.py''',
   '''\.env\.example''',
+  '''scripts/c5_setup/setup_nacho_cortex\.(sh|ps1)''',
+  '''target/.*''',
+  '''\.venv/.*''',
+  '''node_modules/.*''',
+  '''__pycache__/.*''',
+  '''\.pytest_cache/.*''',
 ]
 regexes = [
   # Ejemplo canónico de AWS documentado (fixture de SecretGuard)
   '''AKIAIOSFODNN7EXAMPLE''',
+  '''ed25519\.Ed25519PrivateKey''',
+  '''tu_clave_moonshot''',
+  '''dGVzdF9rZXlfdGVzdF9rZXlfdGVzdF9rZXlfdA==''',
 ]
 
 # ── Ω-03: clave maestra CORTEX (32 bytes / 64 hex en fichero .hex) ────
