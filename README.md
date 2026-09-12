@@ -36,6 +36,17 @@ All stochastic multi-agent swarms and external LLMs are commoditizable. The high
 
 ---
 
+## Recent Thermodynamic Evolution
+
+The BABYLON-60 core has undergone a major topological phase transition (High Exergy) in the last 200 hours:
+
+- **Sovereign Triad Consolidation**: The monorepo has physically partitioned into `00_BABYLON_SHIELD` (Cryptography/Defense), `01_CORTEX_ENGINE` (Inference/BFT), and `02_AGENTS_ARCHI` (Interface/Swarms), tearing down legacy SPA/Cloudflare friction.
+- **Zero-Copy IPC & Lock-Free Bus**: Migration of the asynchronous core to a shared-memory *Zero-Copy* bus (`iceoryx2`), coupling Python Swarm Workers to the C-ABI bus via PyO3 for sub-millisecond exergy packet flow. BFT consensus was collapsed into strict lock-free concurrency (`DashMap`).
+- **Epistemic Purge & GTM Honesty**: Strict reconciliation of marketing claims with the physical territory. TPM 2.0 hardware enclave attestation and Lean 4 "formal verification" claims were downgraded to "roadmap" and "axiomatized" respectively, transitioning to a pure software WORM and Ed25519 `Fail-Stop` cryptography.
+- **Transduction & Paracortex**: Bootstrapping of `Legión-1000` for Remotion SOTA 1080p60 audiovisual transduction and the deployment of `cortex-lsp` (LSP Paracortex).
+
+---
+
 ## The Sovereign "Unboxing" Experience
 
 Installing BABYLON-60 instantly awakens MOSKV-1 on your machine:
