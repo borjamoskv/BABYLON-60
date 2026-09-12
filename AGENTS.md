@@ -33,6 +33,7 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 - **Obligatoriedad de PoC**: Antes de modificar el código de producción, el agente DEBE escribir un Proof of Concept (PoC) aislado (ej. un binario temporal en `src/bin/` o un script en `scripts/c5_demos/`).
 - **Stress Test**: El PoC debe someterse a un test de estrés empírico (ej. 100-1000 iteraciones) para certificar latencias, *failovers*, *memory safety* y ausencia de *deadlocks*. 
 - Solo si el PoC sobrevive a la falsación termodinámica, se autoriza la mutación del código real.
+- **Pipelines de Despliegue (DevSecOps):** La prohibición de *Zero-Trust Injection* aplica estrictamente a scripts bash (`.sh`) y *Makefiles*. Inyectar un comando biométrico o criptográfico en el pipeline de producción sin antes verificar su latencia/código de salida en un simulador aislado (PoC) constituye una violación epistémica de la arquitectura.
 
 ## 📂 Límite Topológico del Workspace (Program vs. Database & Research Corpus)
 
@@ -51,6 +52,8 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 - **Topología Obligatoria:** Para garantizar el despliegue nativo del modal de TouchID sin bloqueos, la invocación de `c5_biometric_gate` (o equivalentes) debe provenir de un *daemon* en segundo plano, un servidor LSP independiente (LSP Paracortex) o un túnel asíncrono del Agente con privilegios globales sobre el WindowServer.
 - **Aniquilación de Caché (Grace Period):** Todo binario en Swift (`LocalAuthentication`) debe forzar explícitamente `context.touchIDAuthenticationAllowableReuseDuration = 0` para impedir que macOS reutilice validaciones previas o que el Apple Watch conceda pases silenciosos.
 - **Hook de Persistencia (Ledger):** La inyección del *TouchID Gate* en mutaciones de BFT (`cortex_persist_ledger.py`) debe ser síncrona mediante un `subprocess.run(["c5_biometric_gate"])`. Si el código de salida no es `0`, el orquestador debe abortar la transacción levantando `RuntimeError("CausalAttestationError")`. Es normal un ligero *lag* en la UI de macOS WindowServer; el proceso debe esperar.
+- **Invocación desde Pipelines (Bash/Shell):** Nunca asumir que `c5_biometric_gate` reside en el `$PATH` global. Las invocaciones desde scripts de despliegue deben ejecutar explícitamente el archivo Swift mediante su ruta absoluta/relativa al repositorio (ej. `swift 01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift`).
+- **Manejo de Fallos por Sandbox:** Todo PoC o script que invoque el *gate* biométrico debe anticipar el silenciamiento de macOS (Código de salida `1`, `Authentication failure`). Las arquitecturas BFT deben manejar este fallo elegantemente sin entrar en *deadlock*.
 
 ## 🧠 Límite Epistémico y Estado del Kernel (C5-REAL v4.3)
 
