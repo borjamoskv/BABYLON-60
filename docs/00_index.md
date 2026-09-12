@@ -134,6 +134,7 @@
 | [`ADR-003-bft-attestation-architecture.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/ADR-003-bft-attestation-architecture.md) | `adr/ADR-003-bft-attestation-architecture.md` | ADR-003: Arquitectura BFT y Modelo de Atestación Criptográfica |
 | [`ADR-004-taint-tracking-isolation.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/ADR-004-taint-tracking-isolation.md) | `adr/ADR-004-taint-tracking-isolation.md` | ADR-004: Modelo de Aislamiento y Tracking de Taint |
 | [`ADR-005-sovereign-dual-license.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/ADR-005-sovereign-dual-license.md) | `adr/ADR-005-sovereign-dual-license.md` | ADR-005: Sovereign Dual-License v4.0 |
+| [`ADR-006-topologia-exposicion-repositorios.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/ADR-006-topologia-exposicion-repositorios.md) | `adr/ADR-006-topologia-exposicion-repositorios.md` | ADR-006: Topología C5-REAL de Exposición Pública y Privada |
 | [`README.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/README.md) | `adr/README.md` | Architecture Decision Records (ADR) |
 
 ---
