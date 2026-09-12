@@ -14,7 +14,7 @@ from __future__ import annotations
 import logging
 import queue
 import threading
-from typing import Optional
+from typing import Any, List, Optional
 
 from babylon60.bft.bounty_claim_attester import BountyClaimReceipt
 from babylon60.kernel.bft_sqlite import BFTSQLite, BFTDatabaseError
@@ -25,10 +25,10 @@ logger = logging.getLogger("babylon60.bft.bounty_cold_ledger")
 class BountyColdLedger:
     """Sumidero de persistencia asíncrona (Cold Ledger) para recibos SCITT."""
 
-    def __init__(self, db_path: str = "bounty_ledger.db") -> None:
+    def __init__(self, db_path: str = "bounty_ledger.db", max_queue_size: int = 50_000) -> None:
         self._db_path = db_path
         self._sqlite = BFTSQLite(db_path=self._db_path)
-        self._queue: queue.Queue[Optional[BountyClaimReceipt]] = queue.Queue(maxsize=10_000)
+        self._queue: queue.Queue[Optional[BountyClaimReceipt]] = queue.Queue(maxsize=max_queue_size)
         self._worker_thread: Optional[threading.Thread] = None
         self._initialize_schema()
 
@@ -58,7 +58,7 @@ class BountyColdLedger:
         self._worker_thread.start()
         logger.info(f"[ColdLedger] Sink asíncrono iniciado hacia {self._db_path}")
 
-    def stop(self, timeout: float = 5.0) -> None:
+    def stop(self, timeout: float = 30.0) -> None:
         """Detiene el daemon de drenaje de forma ordenada (Apoptosis de I/O)."""
         self._queue.put(None)  # Sentinel para detener el thread
         if self._worker_thread is not None:
@@ -77,7 +77,7 @@ class BountyColdLedger:
             return False
 
     def _drain_loop(self) -> None:
-        """Bucle de consumo asíncrono. Mueve datos de RAM (cola) a SQLite WAL."""
+        """Bucle de consumo asíncrono. Mueve datos de RAM (cola) a SQLite WAL en lotes atómicos."""
         insert_query = """
         INSERT OR IGNORE INTO bounty_claims (
             claim_id, advisory_id, domain, finding_summary, risk_score,
@@ -85,27 +85,43 @@ class BountyColdLedger:
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         """
 
+        batch: List[tuple[Any, ...]] = []
+        batch_receipts: List[BountyClaimReceipt] = []
+
+        def _flush() -> None:
+            if not batch:
+                return
+            try:
+                self._sqlite.executemany_with_backoff(insert_query, batch)
+                logger.debug(f"[ColdLedger] Lote de {len(batch)} recibos consolidado.")
+            except BFTDatabaseError as e:
+                logger.error(f"[ColdLedger] Fallo catastrófico persistiendo lote: {e}")
+            finally:
+                for _ in batch_receipts:
+                    self._queue.task_done()
+                batch.clear()
+                batch_receipts.clear()
+
         while True:
             receipt = self._queue.get()
             if receipt is None:
+                _flush()
                 self._queue.task_done()
                 break
 
-            try:
-                params = (
-                    receipt.claim_id,
-                    receipt.advisory_id,
-                    receipt.domain,
-                    receipt.finding_summary,
-                    receipt.risk_score,
-                    receipt.payload_hash,
-                    receipt.timestamp_utc,
-                    receipt.hardware_anchor,
-                    receipt.attestation_merkle_root,
-                )
-                self._sqlite.execute_with_backoff(insert_query, params)
-                logger.debug(f"[ColdLedger] Recibo {receipt.claim_id} consolidado.")
-            except BFTDatabaseError as e:
-                logger.error(f"[ColdLedger] Fallo catastrófico persistiendo {receipt.claim_id}: {e}")
-            finally:
-                self._queue.task_done()
+            params = (
+                receipt.claim_id,
+                receipt.advisory_id,
+                receipt.domain,
+                receipt.finding_summary,
+                receipt.risk_score,
+                receipt.payload_hash,
+                receipt.timestamp_utc,
+                receipt.hardware_anchor,
+                receipt.attestation_merkle_root,
+            )
+            batch.append(params)
+            batch_receipts.append(receipt)
+
+            if len(batch) >= 500 or self._queue.empty():
+                _flush()

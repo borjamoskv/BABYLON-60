@@ -86,3 +86,39 @@ class BFTSQLite:
                     raise e
 
         raise BFTDatabaseError(f"Max retries exceeded ({self.max_retries}) without acquiring lock on {self.db_path}.")
+
+    def executemany_with_backoff(self, query: str, seq_of_params: list[tuple[Any, ...]]) -> sqlite3.Cursor:
+        """
+        Ejecuta un query por lotes con mitigación de bloqueos vía Exponential Backoff.
+        """
+        if not seq_of_params:
+            with self._connection() as conn:
+                return conn.cursor()
+
+        retries = 0
+        while retries <= self.max_retries:
+            try:
+                with self._connection() as conn:
+                    cursor = conn.cursor()
+                    cursor.executemany(query, seq_of_params)
+                    conn.commit()
+                    return cursor
+            except sqlite3.OperationalError as e:
+                if "database is locked" in str(e).lower() or "busy" in str(e).lower():
+                    if retries == self.max_retries:
+                        logger.error(f"[BFT-FAIL] Colapso inminente. Imposible adquirir lock en {self.db_path}.")
+                        raise BFTDatabaseError(f"Max retries reached: {e}")
+
+                    delay = min(self.max_delay, self.base_delay * (2**retries))
+                    jitter = random.uniform(0, delay * 0.1)
+                    sleep_time = delay + jitter
+
+                    logger.warning(
+                        f"[BFT-RETRY] SQLITE_BUSY detectado en batch. Intento {retries + 1}/{self.max_retries}. Esperando {sleep_time:.3f}s"
+                    )
+                    time.sleep(sleep_time)
+                    retries += 1
+                else:
+                    raise e
+
+        raise BFTDatabaseError(f"Max retries exceeded ({self.max_retries}) without acquiring lock on {self.db_path}.")
