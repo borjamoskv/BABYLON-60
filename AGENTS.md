@@ -75,16 +75,23 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 - **Prohibición de IO Síncrono en Ruta Caliente**: Queda terminantemente prohibido interponer escrituras a disco síncronas (SQLite WAL `synchronous=FULL`) en el bucle caliente de inferencia o negociación entre agentes. La comunicación inter-agente debe transitar exclusivamente por memoria compartida lock-free (`SharedManifest` 64 B / `Iceoryx2`). SQLite opera únicamente como *Cold Ledger / Archival Sink*.
 - **Aislamiento de Persistencia en Tests (Cero-Fuga WAL)**: Queda terminantemente prohibido que tests unitarios o de estrés creen bases de datos SQLite en el árbol de fuentes del monorepo. Todo test con SQLite WAL debe residir en `std::env::temp_dir()` y ejecutar la aniquilación explícita del triplete completo (`.db`, `.db-wal`, `.db-shm`) tanto en la inicialización como en el teardown.
 
+## 🛡️ Invariante de Defensa Epistémica (Protocolo SAGA-1)
+
+- **Apoptosis sobre Alucinación:** Ante cualquier violación estocástica (alucinación) detectada por los oráculos de Ring-0, SAGA-1 **no debe corregir el error silenciosamente**. Debe abortar la ejecución, sellar el evento con la marca `CORTEX-TAINT` en el Ledger L1 y detener el subagente.
+- **Límite de Saturación (DDoS Cognitivo):** SAGA-1 es matemáticamente dependiente de la `INV_C5_AEON`. Si un enjambre entra en un bucle degenerado de inyección de entropía, SAGA-1 registrará cada fallo. Para evitar asfixia gravitatoria (OOM o hipertrofia de disco), el sistema debe disparar *timeouts* destructivos antes de acumular latencias terminales.
+- **Anti-Parálisis Cognitiva:** El enjambre no debe ajustar sus pesos para "evitar penalizaciones SAGA-1" si eso conlleva inacción (Silencio Termodinámico). La exergía exige mutación útil; una seguridad que paraliza el nodo viola el Aforismo 3.
+
+
 ## 🧬 Invariante de Monotonicidad de Datasets (INV_DATASET_MONOTONIC)
 
 - **Preservación Acumulativa de Gradientes:** En cualquier pipeline de ingesta o compilación de datos para modelos de la familia MOSKV-1 / CORTEX, el reemplazo de datasets maestros exige verificación de monotonicidad estricta ($N_{t+1} \ge N_t$). 
-- **Los 6 Dominios Canónicos de MOSKV-1:** Todo corpus maestro multi-dominio de MOSKV-1 debe contemplar la distribución equilibrada de sus 6 dominios ontológicos:
-  1. `Ingeniero` (C++20/Rust/CALM II'/SPSC Lock-Free)
-  2. `Físico` (Termodinámica/Landauer/Mecánica Estadística)
-  3. `Médico` (Neurociencia/Homeostasis/Bioenergética)
-  4. `Músico` (Acústica Físico-Matemática/Armónicos/Microtonalidad)
-  5. `Abogado` (SCITT RFC 9943/EU AI Act/Gobernanza)
-  6. `Filósofo` (Invariante Ω118 Escohotadiano: Monismo de substancia, emergencia disipativa, rechazo del dirigismo)
+- **Los 6 Dominios Canónicos y Fronteras Matemáticas de MOSKV-1:** Todo corpus maestro y pipeline neurosimbólico debe acatar la demarcación estructural de sus 6 dominios:
+  1. `Físico / Neurosimbólico` (Invariante C5-REAL): Sustitución del texto estocástico por Code-as-Data (AST) y validación determinista mediante Oráculos SMT (Z3).
+  2. `Filósofo Formal` (Curry-Howard en Lean 4): Equivalencia estricta entre demostración y programa. Separación total entre búsqueda heurística (LLM) y el *Kernel* de verificación insobornable.
+  3. `Abogado` (SCITT L5 y EU AI Act): Atestación conductual inmutable mediante grafos *append-only* (COSE_Sign1 y Pruebas de Inclusión Logarítmica en Árboles de Merkle).
+  4. `Geómetra de Redes / Ciberseguridad` (Topología DAG): Detección de *Slopsquatting* y anomalías de Día Cero evaluando asimetrías geométricas masivas mediante *Centralidad de Autovectores*.
+  5. `Ingeniero Lock-Free` (C-FFI y Épocas EBR): Virtualización temporal (*Epoch-Based Reclamation*) para cruzar la frontera C-ABI entre Rust y Python, neutralizando el Problema ABA y el *Use-After-Free* a latencia de nanosegundos.
+  6. `Médico / Biólogo` (Geometría de Chentsov en VUS): Reducción dimensional geodésica sobre el Tensor de Fisher-Rao, abandonando métricas euclidianas planas para calcular distancias termodinámicas puras en patologías celulares.
 
 ## 🎭 Invariante de Identidad y Anfitrión Soberano (Moskv-1)
 
