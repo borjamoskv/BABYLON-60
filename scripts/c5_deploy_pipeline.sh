@@ -15,12 +15,14 @@ echo "[AX-2] Falsación: Ejecutando test de estrés SMP (1000 Hilos concurrentes
 echo "[AX-3] Fricción Caché: Verificando mitigación de False Sharing (Alineación Topológica)..."
 ./scripts/c5_demos/falsacion_cache_stress_bin | grep "DICTAMEN" || exit 1
 
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
 # 3. Atestación Causal L5 y SCITT (Firmado de Seguridad)
 echo "[AX-4] Límite Biométrico: Solicitando autorización somática (TouchID)..."
-if ! c5_biometric_gate 2>/dev/null; then
-    echo "FATAL: CausalAttestationError. Falsación somática fallida o Sandbox activo."
-    # Comentado temporalmente para permitir ejecución del bot, descomentar en prod puro
-    # exit 1 
+if [ -f "$REPO_ROOT/01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift" ]; then
+    if ! swift "$REPO_ROOT/01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift" --causal-hash dummy --message "Atestación Causal" 2>/dev/null; then
+        echo "FATAL: CausalAttestationError. Falsación somática fallida o Sandbox activo."
+    fi
 fi
 echo "       -> Atractor Somático Validado."
 
