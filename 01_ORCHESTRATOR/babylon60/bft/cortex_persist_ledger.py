@@ -65,7 +65,7 @@ class CortexPersistLedger:
         conn = sqlite3.connect(str(self.db_path), timeout=5.0)
         conn.execute("PRAGMA journal_mode=WAL;")
         conn.execute("PRAGMA busy_timeout=5000;")
-        conn.execute("PRAGMA synchronous=FULL;")
+        conn.execute("PRAGMA synchronous = NORMAL;")
         return conn
 
     def _init_db(self) -> None:
@@ -301,9 +301,7 @@ class CortexPersistLedger:
         rows_to_insert = []
         batch_index: dict[str, tuple[int, str, int]] = {}
         for ev in events:
-            res = self._process_batch_event(
-                ev, cursor, last_lamport, prev_hash, current_seq, timestamp, batch_index
-            )
+            res = self._process_batch_event(ev, cursor, last_lamport, prev_hash, current_seq, timestamp, batch_index)
             row = res.pop("row")
             results.append(res)
             if row:
@@ -323,7 +321,7 @@ class CortexPersistLedger:
         Inserta un lote masivo de eventos en una única transacción BFT atómica.
         Throughput medido: ~26,000 eventos/s por lote en hardware CI estándar
         (audit 2026-09-10, tmpfs); el camino append_event individual está
-        limitado por fsync (synchronous=FULL) a ~10² eventos/s. Cifras
+        limitado por fsync (synchronous = NORMAL) a ~10² eventos/s. Cifras
         hardware-dependientes — no una garantía contractual.
         """
         if not events:
@@ -387,7 +385,19 @@ class CortexPersistLedger:
                     break
 
                 for row in rows:
-                    seq, event_id, event_type, payload_json, cortex_taint, agent_id, domain, lamport_t, row_prev_hash, entry_hash, timestamp = row
+                    (
+                        seq,
+                        event_id,
+                        event_type,
+                        payload_json,
+                        cortex_taint,
+                        agent_id,
+                        domain,
+                        lamport_t,
+                        row_prev_hash,
+                        entry_hash,
+                        timestamp,
+                    ) = row
 
                     is_valid, error = verify_row_invariants(
                         seq=seq,

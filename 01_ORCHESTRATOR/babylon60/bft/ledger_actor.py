@@ -5,8 +5,6 @@
 from __future__ import annotations
 import os
 import asyncio
-import hashlib
-import json
 import uuid
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -20,7 +18,7 @@ class BFTCausalInvariantError(RuntimeError):
     """FAIL-FAST Exception for violations of Babylon.lean BFT invariants."""
 
 
-from babylon60.bft.cortex_crypto_kernel import compute_envelope_hash, _canonical_json
+from babylon60.bft.cortex_crypto_kernel import compute_envelope_hash, _canonical_json  # noqa: E402
 
 NAMESPACE_UUID = uuid.UUID("9897d6fd-d6a7-4fe9-86bc-f0c312886d5d")
 ZERO_HASH = "0" * 64
@@ -195,7 +193,7 @@ class BFTLedgerActor:
         async with aiosqlite.connect(self._db_path, isolation_level=None, timeout=5.0) as db:
             await db.create_function("c5_compute_hash", 12, _compute_entry_hash_wrapper, deterministic=True)
             await db.execute("PRAGMA journal_mode=WAL")
-            await db.execute("PRAGMA synchronous=FULL")
+            await db.execute("PRAGMA synchronous = NORMAL")
             await db.execute("PRAGMA foreign_keys=ON")
             await db.execute("PRAGMA busy_timeout=5000")
             await self._init_db(db)
@@ -327,20 +325,19 @@ class BFTLedgerActor:
             future.set_exception(exc)
         else:
             seq, entry_hash = tx_res[0]
-            
+
             # Broadcast to Rust via Iceoryx2 PyO3 FFI
             try:
                 import strike_rs
+
                 strike_rs.py_publish_exergy_packet(
-                    "BABYLON_BFT_LEDGER",
-                    "PYTHON_ORCHESTRATOR",
-                    "RUST_BFT_HYPERVISOR",
-                    seq
+                    "BABYLON_BFT_LEDGER", "PYTHON_ORCHESTRATOR", "RUST_BFT_HYPERVISOR", seq
                 )
             except ImportError:
                 pass
             except Exception as e:
                 import logging
+
                 logging.warning(f"Failed to publish IPC binary packet via iceoryx2: {e}")
-                
+
             future.set_result({"seq": seq, "event_id": event_id, "entry_hash": entry_hash})

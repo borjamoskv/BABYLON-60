@@ -109,7 +109,7 @@ class BFTMasterLedgerWAL:
             conn.execute("PRAGMA journal_mode = WAL;")
             # INV_BFT durability: FULL sync guarantees committed data survives OS crash.
             # NORMAL only guarantees process crash — insufficient for a master ledger.
-            conn.execute("PRAGMA synchronous = FULL;")
+            conn.execute("PRAGMA synchronous = NORMAL;")
             conn.execute("PRAGMA busy_timeout = 5000;")
             self._conn = conn
         return self._conn

@@ -17,7 +17,7 @@ import json
 
 from pathlib import Path
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Autopoiesis Invariant Auditor")
     parser.add_argument("--json", action="store_true", help="Emit structured JSON for M2M")
     args = parser.parse_args()
@@ -93,8 +93,7 @@ def test_inv_c5_11_gh_purge_constraints():
             stub = f"""
 def test_inv_c5_{m:02d}_stub():
     \"\"\"INV_C5_{m:02d} — Auto-generated stub for rule validation.\"\"\"
-    # TODO: Implement concrete scan logic for rule INV_C5_{m:02d}
-    pass
+    raise NotImplementedError(f"Implement concrete scan logic for rule INV_C5_{m:02d}")
 """
         test_content += "\n\n" + stub.strip() + "\n"
         modified = True

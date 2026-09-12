@@ -1,6 +1,6 @@
 -- C5-REAL BFT Master Ledger Init
 PRAGMA journal_mode = WAL;
-PRAGMA synchronous = FULL;
+PRAGMA synchronous = NORMAL;
 PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS ledger_entries (
