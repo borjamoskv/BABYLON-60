@@ -49,6 +49,8 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 
 - **Sandboxing de Terminales:** Al implementar barreras causales biométricas (`LocalAuthentication` / TouchID) en macOS mediante binarios C-ABI o Swift, el agente DEBE saber que ejecutar el binario desde la terminal integrada de VS Code u otros editores sandboxeados bloqueará silenciosamente el sensor dactilar.
 - **Topología Obligatoria:** Para garantizar el despliegue nativo del modal de TouchID sin bloqueos, la invocación de `c5_biometric_gate` (o equivalentes) debe provenir de un *daemon* en segundo plano, un servidor LSP independiente (LSP Paracortex) o un túnel asíncrono del Agente con privilegios globales sobre el WindowServer.
+- **Aniquilación de Caché (Grace Period):** Todo binario en Swift (`LocalAuthentication`) debe forzar explícitamente `context.touchIDAuthenticationAllowableReuseDuration = 0` para impedir que macOS reutilice validaciones previas o que el Apple Watch conceda pases silenciosos.
+- **Hook de Persistencia (Ledger):** La inyección del *TouchID Gate* en mutaciones de BFT (`cortex_persist_ledger.py`) debe ser síncrona mediante un `subprocess.run(["c5_biometric_gate"])`. Si el código de salida no es `0`, el orquestador debe abortar la transacción levantando `RuntimeError("CausalAttestationError")`. Es normal un ligero *lag* en la UI de macOS WindowServer; el proceso debe esperar.
 
 ## 🧠 Límite Epistémico y Estado del Kernel (C5-REAL v4.3)
 
@@ -80,3 +82,9 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
   6. `Filósofo` (Invariante Ω118 Escohotadiano: Monismo de substancia, emergencia disipativa, rechazo del dirigismo)
 
 
+
+## 🧹 Invariante de Purga Epistémica (MyPy & Linter Zero-Debt)
+
+- **Prohibición del Silencio Burocrático:** Bajo el marco de Alta Exergía, el uso de directivas como `# type: ignore` o el tipado implícito `Any` se considera anergía (fricción residual). Queda estrictamente prohibido resolver fracturas de tipado apagando el linter.
+- **Operativos de Enjambre (Swarm Purge):** Cuando el repositorio presente una deuda masiva de tipado (ej. >100 fracturas MyPy en `make check`), el agente NO DEBE intentar refactorizar manualmente en el contexto principal. Debe invocar herramientas de inferencia AST (`autotyping`) y desplegar **Enjambres de Subagentes paralelos (Operativo Legión)** dividiendo la base de código en sectores. 
+- **Verificación:** La purga sólo se considera exitosa si `make check` (MyPy estricto) retorna 0 errores para los módulos afectados.

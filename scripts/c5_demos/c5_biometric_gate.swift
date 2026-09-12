@@ -3,10 +3,12 @@ import LocalAuthentication
 
 let semaphore = DispatchSemaphore(value: 0)
 let context = LAContext()
+context.touchIDAuthenticationAllowableReuseDuration = 0
 var error: NSError?
 
 // Invariante C5-REAL: Fricción Biométrica requerida para mutación topológica
-let reason = "BABYLON-60: Atestación Causal requerida para transición de estado al Punto Fijo Ω."
+let actionContext = CommandLine.arguments.count > 1 ? CommandLine.arguments.dropFirst().joined(separator: " ") : "transición de estado no especificada"
+let reason = "BABYLON-60 Atestación requerida para: \(actionContext)"
 
 if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
     context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in

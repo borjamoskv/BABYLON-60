@@ -94,3 +94,7 @@ path = "src/bin/poc_stress_spsc_ring.rs"
 [[bin]]
 name = "babylon60"
 path = "src/babylon60.rs"
+
+[[bin]]
+name = "poc_epistemic_lease"
+path = "src/bin/poc_epistemic_lease.rs"

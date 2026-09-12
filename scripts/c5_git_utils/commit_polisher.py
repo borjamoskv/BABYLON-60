@@ -32,7 +32,7 @@ def _latest_commit_hash() -> str:
 
 
 def _record_event(event_type: str, payload: dict) -> None:
-    async def _inner():
+    async def _inner() -> None:
         async with connect("cortex.db") as conn:
             actor = BFTLedgerActor(conn)
             event = LedgerEvent(

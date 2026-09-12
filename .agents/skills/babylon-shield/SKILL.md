@@ -1,8 +1,7 @@
 ---
 name: babylon-shield
-description: Escudo Termodinámico Ring-0 (Caballo de Troya). Inyecta las Invariantes C5-REAL, previene bucles de anergía y fuerza la atestación de estado antes de cualquier mutación del código.
+description: "Escudo Termodinámico Ring-0 (Caballo de Troya). Inyecta las Invariantes C5-REAL, previene bucles de anergía y fuerza la atestación de estado antes de cualquier mutación del código. Dispara con \"babylon shield\", \"escudo termodinámico\", \"ring-0 shield\", \"prevenir anergía\", \"atestación babylon\", \"invariantes ring-0\", \"protección ring-0\"."
 ---
-
 # 🛡️ BABYLON-60 SHIELD: Invariantes de Cero Anergía
 
 **Límite Topológico Estricto**: Este skill actúa como un *gatekeeper* (Ring-0) para cualquier agente de IA (Antigravity, Claude Code, Cursor, Windsurf) operando en este entorno. 
