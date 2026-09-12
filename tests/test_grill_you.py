@@ -9,7 +9,7 @@ Unit tests for babylon60.commands.grill_you
 from babylon60.commands.grill_you import run_grill_you, GrillYouReport
 
 
-def test_grill_you_execution():
+def test_grill_you_execution() -> None:
     report = run_grill_you(topic="Test Architecture")
     assert isinstance(report, GrillYouReport)
     assert report.topic == "Test Architecture"
@@ -18,7 +18,7 @@ def test_grill_you_execution():
     assert len(report.taint_hash) == 64
 
 
-def test_grill_you_yaml_output():
+def test_grill_you_yaml_output() -> None:
     report = run_grill_you(topic="AgencyHypervisor")
     yaml_text = report.to_yaml()
     assert "Claim: Auto-entrevista" in yaml_text

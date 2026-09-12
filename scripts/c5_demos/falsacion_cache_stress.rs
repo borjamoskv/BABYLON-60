@@ -53,7 +53,7 @@ fn main() {
             }
         }));
     }
-    for h in handles { h.join().unwrap(); }
+    for h in handles { h.join().expect("BFT Fallback"); }
     let duration_entropic = start.elapsed();
     println!("-> Disipación Entrópica (False Sharing): {:?}", duration_entropic);
 
@@ -82,7 +82,7 @@ fn main() {
             }
         }));
     }
-    for h in handles { h.join().unwrap(); }
+    for h in handles { h.join().expect("BFT Fallback"); }
     let duration_topo = start.elapsed();
     println!("-> Eficiencia Causal (Alineación Topológica 64B): {:?}", duration_topo);
     

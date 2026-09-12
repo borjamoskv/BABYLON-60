@@ -1,7 +1,7 @@
 import os
 
 
-def trigger_aggressive_alert():
+def trigger_aggressive_alert() -> None:
     # 1. Voz Autoritaria (HAL-9000 vibe) - Daniel (British)
     # The message is cold, precise, and structural.
     voice_msg = "Critical architecture failure. Babylon sixty kernel has entered Epistemic Halt. Sequence poisoned. Awaiting operator clearance."

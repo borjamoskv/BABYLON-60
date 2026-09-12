@@ -52,7 +52,7 @@ fn main() {
     }
     
     for h in handles {
-        h.join().unwrap();
+        h.join().expect("BFT Fallback");
     }
     
     println!("ESTADO TERMODINÁMICO: Falsación Superada.");

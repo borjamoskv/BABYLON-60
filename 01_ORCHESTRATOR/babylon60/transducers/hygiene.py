@@ -65,7 +65,7 @@ def _run_agent() -> float:
 def _record_event(score: float) -> None:
     """Persist the exergy check in the Cortex ledger."""
 
-    async def _inner():
+    async def _inner() -> None:
         actor = BFTLedgerActor(Path("cortex.db"))
         await actor.start()
         try:

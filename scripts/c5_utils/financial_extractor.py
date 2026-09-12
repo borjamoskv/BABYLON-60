@@ -3,7 +3,7 @@ import yfinance as yf
 import json
 import sys
 
-def analyze(ticker):
+def analyze(ticker) -> None:
     stock = yf.Ticker(ticker)
     
     try:

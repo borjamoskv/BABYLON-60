@@ -26,7 +26,7 @@ def _get_lib_path() -> str:
     raise FileNotFoundError("verifiable_inference_engine library binary not found. Build with cargo build --release")
 
 
-def _init_lib():
+def _init_lib() -> ctypes.CDLL:
     global _LIB
     if _LIB is None:
         path = _get_lib_path()

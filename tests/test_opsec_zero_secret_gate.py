@@ -14,7 +14,7 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
-def test_gitleaks_config_syntax():
+def test_gitleaks_config_syntax() -> None:
     """Ensures .gitleaks.toml is present and valid TOML."""
     config_path = REPO_ROOT / ".gitleaks.toml"
     assert config_path.exists(), ".gitleaks.toml must exist in repo root"
@@ -25,7 +25,7 @@ def test_gitleaks_config_syntax():
     assert "regexes" in data["allowlist"], "Must define allowlisted regexes"
 
 
-def test_pre_commit_hook_installed():
+def test_pre_commit_hook_installed() -> None:
     """Ensures git pre-commit hook is active, executable, and enforces gitleaks protect."""
     hook_path = REPO_ROOT / ".git" / "hooks" / "pre-commit"
     if not (REPO_ROOT / ".git").is_dir():
@@ -37,7 +37,7 @@ def test_pre_commit_hook_installed():
 
 
 @pytest.mark.skipif(not shutil.which("gitleaks"), reason="gitleaks binary not installed")
-def test_active_working_tree_zero_secrets():
+def test_active_working_tree_zero_secrets() -> None:
     """Verifies that the entire working tree passes Gitleaks with zero leaks."""
     cmd = ["gitleaks", "detect", "--config=.gitleaks.toml", "--no-git", "--verbose"]
     res = subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True)
@@ -45,7 +45,7 @@ def test_active_working_tree_zero_secrets():
 
 
 @pytest.mark.skipif(not shutil.which("gitleaks"), reason="gitleaks binary not installed")
-def test_canary_leak_interception(tmp_path):
+def test_canary_leak_interception(tmp_path: Path) -> None:
     """Falsification test: verifies that an unmitigated fake token IS flagged by gitleaks."""
     canary_file = tmp_path / "leaked_key.py"
     fake_token = "sk-" + "proj-" + "abc1234567890abcdef" * 3
@@ -56,10 +56,12 @@ def test_canary_leak_interception(tmp_path):
     assert "openai-api-key" in res.stdout or "generic-api-key" in res.stdout
 
 
-def test_devsecops_attestation_engine():
+def test_devsecops_attestation_engine() -> None:
     """Verifies that C5 DevSecOps Zero-Trust verification passes 100%."""
     import sys
+
     sys.path.insert(0, str(REPO_ROOT / "scripts"))
     from c5_verifiers.devsecops_attest import audit_devsecops_invariants
+
     passed = audit_devsecops_invariants()
     assert passed is True, "C5 DevSecOps Zero-Trust attestation must pass"

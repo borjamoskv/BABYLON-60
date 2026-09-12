@@ -17,7 +17,7 @@ U = TypeVar("U")
 class Ok(Generic[T]):
     __match_args__ = ("value",)
 
-    def __init__(self, value: T):
+    def __init__(self, value: T) -> None:
         self.value = value
 
     def is_ok(self) -> bool:
@@ -45,7 +45,7 @@ class Ok(Generic[T]):
 class Err(Generic[E]):
     __match_args__ = ("error",)
 
-    def __init__(self, error: E):
+    def __init__(self, error: E) -> None:
         self.error = error
 
     def is_ok(self) -> bool:
@@ -76,7 +76,7 @@ Result = Union[Ok[T], Err[E]]
 class Some(Generic[T]):
     __match_args__ = ("value",)
 
-    def __init__(self, value: T):
+    def __init__(self, value: T) -> None:
         self.value = value
 
     def is_some(self) -> bool:

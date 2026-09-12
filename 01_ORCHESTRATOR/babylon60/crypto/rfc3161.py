@@ -16,7 +16,7 @@ import logging
 import os
 import urllib.error
 import urllib.request
-from typing import Any
+from typing import TypedDict
 
 logger = logging.getLogger("babylon60.crypto.rfc3161")
 
@@ -24,10 +24,16 @@ logger = logging.getLogger("babylon60.crypto.rfc3161")
 DEFAULT_TSA_URL = os.environ.get("CORTEX_TSA_URL", "https://freetsa.org/tsr")
 
 
+class RFC3161TimestampResult(TypedDict):
+    tsr_b64: str
+    hash_hex: str
+    tsa_url: str
+
+
 class RFC3161Client:
     """Client for requesting cryptographic timestamps from RFC3161 authorities."""
 
-    def __init__(self, tsa_url: str = DEFAULT_TSA_URL):
+    def __init__(self, tsa_url: str = DEFAULT_TSA_URL) -> None:
         self.tsa_url = tsa_url
 
     def _build_tsq(self, payload_hash: bytes) -> bytes:
@@ -76,7 +82,7 @@ class RFC3161Client:
 
         return tsq
 
-    def request_timestamp(self, hash_hex: str) -> dict[str, Any] | None:
+    def request_timestamp(self, hash_hex: str) -> RFC3161TimestampResult | None:
         """
         Requests a timestamp for a given hex hash.
 

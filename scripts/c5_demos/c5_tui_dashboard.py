@@ -31,7 +31,7 @@ def generate_layout() -> Layout:
     )
     return layout
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Dashboard TUI Zero-JS para Transducción Popperiana")
     parser.add_argument("--corpus", type=str, default=None, help="Texto directo a falsar")
     parser.add_argument("--file", type=str, default=None, help="Ruta a archivo con el corpus")

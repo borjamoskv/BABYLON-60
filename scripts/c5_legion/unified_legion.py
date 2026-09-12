@@ -13,6 +13,7 @@ Aplica invariante anti-thrashing particionando en P dominios empíricos (P=5).
 import json
 import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
+from typing import Any, NotRequired, TypedDict
 
 # Dominios del problema empíricamente acotados
 DOMAINS = [
@@ -23,7 +24,16 @@ DOMAINS = [
     "performance_calm"
 ]
 
-def run_domain_audit(domain: str) -> dict:
+
+class DomainAuditResult(TypedDict):
+    domain: str
+    status: str
+    findings: NotRequired[list[Any]]
+    exergy_consumed_ms: NotRequired[float]
+    error: NotRequired[str]
+
+
+def run_domain_audit(domain: str) -> DomainAuditResult:
     """Ejecuta el protocolo (Dry-Run / Audit / Remediation) para un dominio."""
     start = time.time()
     # Simulación de trabajo / carga del dominio
@@ -38,11 +48,11 @@ def run_domain_audit(domain: str) -> dict:
         "exergy_consumed_ms": round(elapsed * 1000, 2)
     }
 
-def main():
+def main() -> None:
     print("🛡️  Iniciando Legión Única C5-REAL (Secuenciador Monádico)")
     print(f"[*] Dominios asignados (P={len(DOMAINS)}): {', '.join(DOMAINS)}\n")
     
-    results = {}
+    results: dict[str, DomainAuditResult] = {}
     
     # Orquestador: Invariante PxS (Anti-Thrashing)
     with ProcessPoolExecutor(max_workers=len(DOMAINS)) as executor:
@@ -53,7 +63,7 @@ def main():
             try:
                 res = future.result()
                 results[domain] = res
-                print(f"[✓] {domain.upper().ljust(22)} | Status: {res['status']} | Exergy: {res['exergy_consumed_ms']}ms")
+                print(f"[✓] {domain.upper().ljust(22)} | Status: {res['status']} | Exergy: {res.get('exergy_consumed_ms', 0.0)}ms")
             except Exception as e:
                 results[domain] = {"domain": domain, "status": "FAIL", "error": str(e)}
                 print(f"[✗] {domain.upper().ljust(22)} | Status: FAIL | Error: {e}")

@@ -13,7 +13,7 @@ import math
 
 
 class BayesianSwarm:
-    def __init__(self, agents: List[str]):
+    def __init__(self, agents: List[str]) -> None:
         """
         agents: List of BFT agent identifiers.
         """
@@ -39,11 +39,11 @@ class BayesianSwarm:
             weights = {agent: w for agent in opinions.keys()}
 
         # Collect all hypotheses
-        hypotheses = set()
+        hypotheses: set[str] = set()
         for dist in opinions.values():
             hypotheses.update(dist.keys())
 
-        aggregated_unnormalized = {}
+        aggregated_unnormalized: Dict[str, float] = {}
 
         for hyp in hypotheses:
             log_sum = 0.0

@@ -15,7 +15,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
-def execute_swarm_phase_4():
+def execute_swarm_phase_4() -> bool:
     print("======================================================================")
     print(" 🐝 ENJAMBRE LEGION C5-REAL — DESPLIEGUE MASTER FASE 4 (SWARM COLLAPSE)")
     print("======================================================================")

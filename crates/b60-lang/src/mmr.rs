@@ -28,6 +28,12 @@ pub struct MmrAccumulator {
     pub leaves: Vec<[u8; 32]>,
 }
 
+impl Default for MmrAccumulator {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MmrAccumulator {
     pub fn new() -> Self {
         Self { leaves: Vec::new() }

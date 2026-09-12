@@ -17,7 +17,8 @@ import shutil
 import subprocess
 import tempfile
 import urllib.request
-from typing import Any, Dict, List, Optional
+from typing import Type, Any, Dict, List, Optional
+from types import TracebackType
 
 logger = logging.getLogger("babylon60.kernel.browser_cdp")
 
@@ -33,17 +34,17 @@ except ImportError:
 class CDPPage:
     """Represents a single browser tab controlled via Chrome DevTools Protocol (CDP)."""
 
-    def __init__(self, target_id: str, ws_url: str):
+    def __init__(self, target_id: str, ws_url: str) -> None:
         self.target_id = target_id
         self.ws_url = ws_url
         self.ws: Optional[Any] = None
         self._msg_id = 0
-        self._pending_requests: Dict[int, asyncio.Future] = {}
+        self._pending_requests: Dict[int, asyncio.Future[Any]] = {}
         self._event_listeners: Dict[str, List[Any]] = {}
-        self._recv_task: Optional[asyncio.Task] = None
+        self._recv_task: Optional[asyncio.Task[None]] = None
         self.network_logs: List[Dict[str, Any]] = []
 
-    async def connect(self, enable_stealth: bool = True):
+    async def connect(self, enable_stealth: bool = True) -> None:
         """Establish WebSocket connection to the page target."""
         if not HAS_WEBSOCKETS:
             raise RuntimeError("`websockets` package is required for CDPPage communication.")
@@ -59,7 +60,7 @@ class CDPPage:
         if enable_stealth:
             await self.apply_stealth_scripts()
 
-    async def apply_stealth_scripts(self):
+    async def apply_stealth_scripts(self) -> None:
         """Inject anti-fingerprinting scripts before page scripts execute."""
         stealth_js = """
         Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
@@ -69,8 +70,10 @@ class CDPPage:
         """
         await self.send("Page.addScriptToEvaluateOnNewDocument", {"source": stealth_js})
 
-    async def _listen_loop(self):
+    async def _listen_loop(self) -> None:
         """Background loop reading WebSocket messages."""
+        if self.ws is None:
+            return
         try:
             async for raw_msg in self.ws:
                 msg = json.loads(raw_msg)
@@ -122,7 +125,7 @@ class CDPPage:
         if wait_until_load:
             loaded_fut = asyncio.get_running_loop().create_future()
 
-            def _on_load(params):
+            def _on_load(params: Any) -> None:
                 if not loaded_fut.done():
                     loaded_fut.set_result(True)
 
@@ -209,11 +212,12 @@ class CDPPage:
         doc = await self.send("DOM.getDocument", {"depth": -1})
         root_id = doc["root"]["nodeId"]
         html_res = await self.send("DOM.getOuterHTML", {"nodeId": root_id})
-        return html_res.get("outerHTML", "")
+        return str(html_res.get("outerHTML", ""))
 
     async def get_text(self) -> str:
         """Extract plain text of document body."""
-        return await self.evaluate("document.body ? document.body.innerText : ''")
+        res_text = await self.evaluate("document.body ? document.body.innerText : ''")
+        return str(res_text or "")
 
     async def extract_links(self) -> List[Dict[str, str]]:
         """Extract all hyper-links from the current document."""
@@ -283,13 +287,13 @@ class CDPPage:
             logger.info("PDF saved to %s", path)
         return pdf_bytes
 
-    def on(self, event_name: str, callback: Any):
+    def on(self, event_name: str, callback: Any) -> None:
         """Register an event listener for a CDP event."""
         if event_name not in self._event_listeners:
             self._event_listeners[event_name] = []
         self._event_listeners[event_name].append(callback)
 
-    async def close(self):
+    async def close(self) -> None:
         """Close the target page tab and disconnect WebSocket."""
         if self._recv_task and not self._recv_task.done():
             self._recv_task.cancel()
@@ -307,12 +311,14 @@ class CDPPage:
 class BrowserEngine:
     """Sovereign Chrome/Chromium CDP Engine for Headless Automation."""
 
-    def __init__(self, headless: bool = True, remote_debugging_port: int = 0, user_data_dir: Optional[str] = None):
+    def __init__(
+        self, headless: bool = True, remote_debugging_port: int = 0, user_data_dir: Optional[str] = None
+    ) -> None:
         self.headless = headless
         self.requested_port = remote_debugging_port
         self.port = remote_debugging_port
-        self.process: Optional[subprocess.Popen] = None
-        self._temp_dir: Optional[tempfile.TemporaryDirectory] = None
+        self.process: Optional[subprocess.Popen[bytes]] = None
+        self._temp_dir: Optional[tempfile.TemporaryDirectory[str]] = None
         self.user_data_dir = user_data_dir
 
     def find_chrome_binary(self) -> Optional[str]:
@@ -433,7 +439,9 @@ class BrowserEngine:
             req = urllib.request.Request(url)
             with urllib.request.urlopen(req, timeout=3.0) as resp:
                 data = json.loads(resp.read().decode())
-                return data
+                if isinstance(data, dict):
+                    return data
+                return {"error": "Invalid response format"}
         except Exception as e:
             return {"error": str(e)}
 
@@ -443,7 +451,10 @@ class BrowserEngine:
         try:
             req = urllib.request.Request(url)
             with urllib.request.urlopen(req, timeout=3.0) as resp:
-                return json.loads(resp.read().decode())
+                data = json.loads(resp.read().decode())
+                if isinstance(data, list):
+                    return data
+                return []
         except Exception as e:
             logger.error("Error listing CDP targets: %s", e)
             return []
@@ -461,7 +472,7 @@ class BrowserEngine:
         await page.connect()
         return page
 
-    def close(self):
+    def close(self) -> None:
         """Gracefully terminate browser process and clean temp profile."""
         if self.process:
             try:
@@ -481,17 +492,19 @@ class BrowserEngine:
                 logging.warning(f"CDP ReadyState Error: {e}")
             self._temp_dir = None
 
-    async def __aenter__(self):
+    async def __aenter__(self) -> "BrowserEngine":
         launched = await self.launch()
         if not launched:
             raise RuntimeError("Failed to launch Chrome CDP Engine.")
         return self
 
-    async def __aexit__(self, exc_type, exc_val, exc_tb):
+    async def __aexit__(
+        self, exc_type: Optional[Type[BaseException]], exc_val: Optional[BaseException], exc_tb: Optional[TracebackType]
+    ) -> None:
         self.close()
 
 
-async def run_standalone_demo():
+async def run_standalone_demo() -> None:
     print("[BROWSER_CDP_ENGINE] Running Expanded Standalone Verification...")
     test_html = """
     <!DOCTYPE html>

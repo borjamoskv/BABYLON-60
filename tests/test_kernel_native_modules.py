@@ -12,7 +12,7 @@ from babylon60.kernel.kimi_client import KimiClient
 from babylon60.kernel.quantum_sync import QuantumSyncEngine
 
 
-def test_browser_cdp_engine_init():
+def test_browser_cdp_engine_init() -> None:
     engine = BrowserEngine(headless=True, remote_debugging_port=9222)
     _binary = engine.find_chrome_binary()
     # Should evaluate without throwing exception
@@ -20,7 +20,7 @@ def test_browser_cdp_engine_init():
     assert engine.headless is True
 
 
-def test_kimi_client_unconfigured_contract():
+def test_kimi_client_unconfigured_contract() -> None:
     client = KimiClient(api_key=None)
     assert client.is_configured() is False or client.api_key is not None
     res = client.query("Hello")
@@ -29,7 +29,7 @@ def test_kimi_client_unconfigured_contract():
         assert "remediation" in res
 
 
-def test_quantum_sync_engine_status():
+def test_quantum_sync_engine_status() -> None:
     engine = QuantumSyncEngine()
     status = engine.check_vcs_status()
     assert "is_git" in status
@@ -39,7 +39,7 @@ def test_quantum_sync_engine_status():
 
 
 @pytest.mark.asyncio
-async def test_async_browser_launch_check():
+async def test_async_browser_launch_check() -> None:
     engine = BrowserEngine(headless=True)
     # Binary test check stub
     assert engine.process is None

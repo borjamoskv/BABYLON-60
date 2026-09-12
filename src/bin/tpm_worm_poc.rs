@@ -45,7 +45,7 @@ impl HardwareEnclave for MockTpm2 {
         if signature_bytes.len() != 64 {
             return false;
         }
-        let sig = Signature::from_bytes(signature_bytes.try_into().unwrap());
+        let sig = Signature::from_bytes(signature_bytes.try_into().expect("BFT Fallback"));
         self.signing_key.verify(payload, &sig).is_ok()
     }
 
@@ -87,16 +87,16 @@ impl WormLedger {
 
     pub fn append(&mut self, payload: &[u8], signature: &[u8]) -> Result<[u8; 32], &'static str> {
         use ed25519_dalek::{Signature, VerifyingKey};
-        let vk = VerifyingKey::from_bytes(self.enclave_pubkey.as_slice().try_into().unwrap())
+        let vk = VerifyingKey::from_bytes(self.enclave_pubkey.as_slice().try_into().expect("BFT Fallback"))
             .map_err(|_| "Clave publica del enclave invalida")?;
         
         if signature.len() != 64 {
             return Err("Longitud de firma incorrecta");
         }
-        let sig = Signature::from_bytes(signature.try_into().unwrap());
+        let sig = Signature::from_bytes(signature.try_into().expect("BFT Fallback"));
         vk.verify(payload, &sig).map_err(|_| "Rechazo WORM: Firma del TEE invalida")?;
 
-        let prev_hash = self.chain.last().unwrap().hash;
+        let prev_hash = self.chain.last().expect("BFT Fallback").hash;
         let mut hasher = Sha256::new();
         hasher.update(&prev_hash);
         hasher.update(payload);

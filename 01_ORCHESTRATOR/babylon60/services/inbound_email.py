@@ -10,11 +10,48 @@ import logging
 import base64
 import time
 from enum import Enum
-from typing import List, Optional, Callable, Dict, Any, Set
+from typing import List, Optional, Callable, Dict, Set, TypedDict
 from pydantic import BaseModel, Field, ConfigDict
 from fastapi import APIRouter, Request, Header, HTTPException, status
 
 logger = logging.getLogger("babylon60.services.inbound_email")
+
+ProcessEmailResult = TypedDict(
+    "ProcessEmailResult",
+    {
+        "status": str,
+        "message_id": Optional[str],
+        "from": str,
+        "to": str,
+        "detected_language": str,
+        "intent": str,
+        "severity": str,
+        "attachments_decoded": int,
+        "handlers_executed": int,
+    },
+    total=False,
+)
+
+
+class PromptContext(TypedDict):
+    system_prompt: str
+    sender: str
+    recipient: str
+    subject: str
+    language: str
+    intent: str
+    severity: str
+    body: str
+    attachments: str
+
+
+class AgentSupportResponse(TypedDict):
+    agent: str
+    target_language: str
+    intent: str
+    severity: str
+    prompt_context: PromptContext
+    status: str
 
 
 class EmailIntent(str, Enum):
@@ -150,7 +187,7 @@ class InboundEmailPayload(BaseModel):
 class IdempotencyTracker:
     """In-memory idempotency cache to reject duplicate webhook deliveries."""
 
-    def __init__(self, ttl_seconds: int = 86400):
+    def __init__(self, ttl_seconds: int = 86400) -> None:
         self.seen_ids: Set[str] = set()
         self.timestamps: Dict[str, float] = {}
         self.ttl = ttl_seconds
@@ -166,7 +203,7 @@ class IdempotencyTracker:
         self.timestamps[message_id] = now
         return False
 
-    def _cleanup(self, now: float):
+    def _cleanup(self, now: float) -> None:
         expired = [mid for mid, ts in self.timestamps.items() if now - ts > self.ttl]
         for mid in expired:
             self.seen_ids.discard(mid)
@@ -184,15 +221,15 @@ def verify_hmac_signature(secret: str, raw_body: bytes, expected_signature: str)
 class InboundEmailProcessor:
     """Enterprise Inbound Email Dispatcher Pipeline."""
 
-    def __init__(self, secret: str = "default_babylon60_inbound_secret"):
+    def __init__(self, secret: str = "default_babylon60_inbound_secret") -> None:
         self.secret = secret
-        self.handlers: List[Callable[[InboundEmailPayload], Any]] = []
+        self.handlers: List[Callable[[InboundEmailPayload], object]] = []
         self.idempotency = IdempotencyTracker()
 
-    def register_handler(self, handler: Callable[[InboundEmailPayload], Any]):
+    def register_handler(self, handler: Callable[[InboundEmailPayload], object]) -> None:
         self.handlers.append(handler)
 
-    async def process_email(self, payload: InboundEmailPayload) -> Dict[str, Any]:
+    async def process_email(self, payload: InboundEmailPayload) -> ProcessEmailResult:
         if payload.message_id and self.idempotency.is_duplicate(payload.message_id):
             logger.info(f"Duplicate email webhook skipped: {payload.message_id}")
             return {
@@ -221,9 +258,9 @@ class InboundEmailProcessor:
             "status": "processed",
             "from": payload.from_addr,
             "to": payload.to,
-            "detected_language": payload.detected_language,
-            "intent": payload.intent.value,
-            "severity": payload.severity.value,
+            "detected_language": payload.detected_language or "",
+            "intent": payload.intent.value if payload.intent else "",
+            "severity": payload.severity.value if payload.severity else "",
             "attachments_decoded": sum(1 for a in payload.attachments_metadata if a.decode_text_content() is not None),
             "handlers_executed": len(self.handlers),
         }
@@ -237,7 +274,7 @@ def create_inbound_email_router(processor: InboundEmailProcessor) -> APIRouter:
         request: Request,
         x_babylon_signature: Optional[str] = Header(None, alias="X-Babylon-Signature"),
         authorization: Optional[str] = Header(None, alias="Authorization"),
-    ):
+    ) -> ProcessEmailResult:
         raw_body = await request.body()
 
         # 1. Signature Verification
@@ -276,10 +313,10 @@ def create_inbound_email_router(processor: InboundEmailProcessor) -> APIRouter:
 class EnglishSupportAgentHandler:
     """AI Support Agent Handler tailored for English & Multilingual Queries."""
 
-    def __init__(self, agent_name: str = "BABYLON-60 Enterprise AI Support"):
+    def __init__(self, agent_name: str = "BABYLON-60 Enterprise AI Support") -> None:
         self.agent_name = agent_name
 
-    def handle(self, payload: InboundEmailPayload) -> Dict[str, Any]:
+    def handle(self, payload: InboundEmailPayload) -> AgentSupportResponse:
         lang = payload.detected_language or payload.detect_language()
         intent = payload.intent or EmailIntent.GENERAL
         severity = payload.severity or EmailSeverity.MEDIUM
@@ -305,7 +342,7 @@ class EnglishSupportAgentHandler:
             )
         )
 
-        prompt_context = {
+        prompt_context: PromptContext = {
             "system_prompt": system_prompt,
             "sender": payload.from_addr,
             "recipient": payload.to,
@@ -313,7 +350,7 @@ class EnglishSupportAgentHandler:
             "language": lang,
             "intent": intent.value,
             "severity": severity.value,
-            "body": payload.text_body,
+            "body": payload.text_body or "",
             "attachments": attachments_block,
         }
 

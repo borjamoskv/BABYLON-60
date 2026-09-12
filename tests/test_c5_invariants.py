@@ -1,4 +1,5 @@
 import logging
+
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
@@ -19,9 +20,9 @@ reaparece en el árbol; verde sólo cuando el hallazgo está remediado.
 Génesis forense: AUDITORIA_CENTURIA.md (2026-07-17).
 """
 
-import re
-import pathlib
-import pytest
+import re  # noqa: E402
+import pathlib  # noqa: E402
+import pytest  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SRC_DIRS = ["01_ORCHESTRATOR/babylon60", "00_BABYLON_SHIELD/crates/strike-rs/src", "contracts", "scripts", "docs/proof"]
@@ -39,7 +40,10 @@ PRUNE = {
 }
 
 
-def _iter_files(exts):
+from collections.abc import Collection, Iterator  # noqa: E402
+
+
+def _iter_files(exts: Collection[str]) -> Iterator[pathlib.Path]:
     for d in SRC_DIRS:
         base = ROOT / d
         if not base.exists():
@@ -49,9 +53,9 @@ def _iter_files(exts):
                 yield f
 
 
-def _scan(exts, pattern, flags=0):
+def _scan(exts: Collection[str], pattern: str, flags: int = 0) -> list[str]:
     rx = re.compile(pattern, flags)
-    hits = []
+    hits: list[str] = []
     for f in _iter_files(exts):
         text = f.read_text(errors="ignore")
         for i, line in enumerate(text.splitlines(), 1):
@@ -60,11 +64,11 @@ def _scan(exts, pattern, flags=0):
     return hits
 
 
-def _fail_msg(law, hits):
+def _fail_msg(law: str, hits: list[str]) -> str:
     return f"{law} violado — {len(hits)} ocurrencia(s):\n  " + "\n  ".join(hits)
 
 
-def test_inv_c5_02_no_hardcoded_keys():
+def test_inv_c5_02_no_hardcoded_keys() -> None:
     """INV_C5_02 — ninguna clave simétrica literal vive en el árbol (env/KMS o nada)."""
     hits = _scan({".rs"}, r'Key::new\([^,]*,\s*b"')
     hits += _scan(
@@ -75,19 +79,19 @@ def test_inv_c5_02_no_hardcoded_keys():
     assert not hits, _fail_msg("INV_C5_02 (clave soberana)", hits)
 
 
-def test_inv_c5_01_no_fake_commitments():
+def test_inv_c5_01_no_fake_commitments() -> None:
     """INV_C5_01 — un commitment/hash debe ligar al payload, no ser token aleatorio."""
     hits = _scan({".py"}, r'(commitment|_hash)"\s*:\s*f"(sha256|hmac-sha256):\{.*token_hex')
     assert not hits, _fail_msg("INV_C5_01 (veracidad criptográfica)", hits)
 
 
-def test_inv_c5_03_no_weak_hashes():
+def test_inv_c5_03_no_weak_hashes() -> None:
     """INV_C5_03 — un solo primitivo fuerte (SHA3-256/BLAKE3); MD5/SHA-1 proscritos."""
     hits = _scan({".py"}, r"hashlib\.(md5|sha1)\b")
     assert not hits, _fail_msg("INV_C5_03 (hash único)", hits)
 
 
-def test_inv_c5_04_no_mock_signatures():
+def test_inv_c5_04_no_mock_signatures() -> None:
     """INV_C5_04 — Ed25519 físico o el recibo no existe; ninguna firma 'mock'."""
     hits = _scan({".py"}, r"mock_signature|ed25519:mock")
     assert not hits, _fail_msg("INV_C5_04 (firma real)", hits)
@@ -96,7 +100,7 @@ def test_inv_c5_04_no_mock_signatures():
 @pytest.mark.xfail(
     reason="Advisory: SIGKILL es fail-fast intencional hoy; INV_C5_07 pide SIGTERM+cleanup.", strict=False
 )
-def test_inv_c5_07b_no_global_sigkill():
+def test_inv_c5_07b_no_global_sigkill() -> None:
     """INV_C5_07 (advisory) — SIGKILL global no es tolerancia bizantina, es auto-necrosis."""
     hits = _scan({".py"}, r"signal\.SIGKILL")
     assert not hits, _fail_msg("INV_C5_07b (SIGKILL global)", hits)
@@ -105,12 +109,14 @@ def test_inv_c5_07b_no_global_sigkill():
 @pytest.mark.skip(
     reason="INV_C5_06 (modelo ligado) exige revisión humana: el .lean debe ligar mecánicamente a ledger_actor, no por prosa."
 )
-def test_inv_c5_06_lean_bound_to_system():
+def test_inv_c5_06_lean_bound_to_system() -> None:
     pass
 
 
 @pytest.mark.asyncio
-async def test_inv_c5_05_verify_chain_survives_encryption(tmp_path, monkeypatch):
+async def test_inv_c5_05_verify_chain_survives_encryption(
+    tmp_path: pathlib.Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     """INV_C5_05 — el verificador valida el estado que protege bajo cifrado.
     Hoy ROJO: el INSERT hashea el payload cifrado y verify_chain hashea el
     descifrado -> entry_hash != computed_hash -> False con CORTEX_VAULT_KEY activo.
@@ -142,7 +148,7 @@ async def test_inv_c5_05_verify_chain_survives_encryption(tmp_path, monkeypatch)
     )
 
 
-def test_inv_c5_10_pynacl_serialization():
+def test_inv_c5_10_pynacl_serialization() -> None:
     """INV_C5_10 — PyNaCl key serialization must not access private attributes like _seed or _public_key."""
     hits = _scan({".py"}, r"\._seed\b|\._public_key\b")
     # Filter out library self-references if any
@@ -154,14 +160,14 @@ def test_inv_c5_10_pynacl_serialization():
     assert not hits, _fail_msg("INV_C5_10 (PyNaCl serialization)", hits)
 
 
-def test_inv_c5_11_gh_purge_constraints():
+def test_inv_c5_11_gh_purge_constraints() -> None:
     """INV_C5_11 — Abort git push --mirror/mirror-rewrites if gh auth fails or Broken pipe detected."""
     # Scan for Option B retries in error catching blocks
     hits = _scan({".py", ".sh"}, r"git\s+push\s+--mirror.*retry|Broken\s+pipe.*Option\s+B")
     assert not hits, _fail_msg("INV_C5_11 (Gh purge constraints)", hits)
 
 
-def test_inv_c5_12_nexus_symlinks():
+def test_inv_c5_12_nexus_symlinks() -> None:
     """INV_C5_12 — Relative symbolic links within babylon60 must have exactly two levels of depth (../../)."""
     for link_name in ["crypto", "extensions", "utils"]:
         link_path = ROOT / "packages" / "babylon60" / link_name
@@ -172,13 +178,13 @@ def test_inv_c5_12_nexus_symlinks():
             )
 
 
-def test_inv_c5_13_nesting_depth_ceiling():
+def test_inv_c5_13_nesting_depth_ceiling() -> None:
     """INV_C5_13 / GELABP_DEPTH_INVARIANT — AST Control Flow Nesting Depth Ceiling <= 4 per function."""
     import ast
 
     CONTROL_NODES = (ast.If, ast.For, ast.While, ast.Try, ast.With)
 
-    def get_max_depth(node, current_depth=0):
+    def get_max_depth(node: ast.AST, current_depth: int = 0) -> int:
         max_d = current_depth
         for child in ast.iter_child_nodes(node):
             next_depth = current_depth + (1 if isinstance(child, CONTROL_NODES) else 0)
@@ -197,32 +203,32 @@ def test_inv_c5_13_nesting_depth_ceiling():
                     if depth > 4:
                         hits.append(f"{f.relative_to(ROOT)}:{node.lineno}: {node.name}() has nesting depth {depth} > 4")
         except Exception as e:
-            logging.error(f'Traza Epistémica Perdida: {e}')
+            logging.error(f"Traza Epistémica Perdida: {e}")
 
     assert not hits, _fail_msg("INV_C5_13 (AST Nesting Depth Ceiling <= 4)", hits)
 
 
-def test_inv_c5_14_no_broad_except_pass():
+def test_inv_c5_14_no_broad_except_pass() -> None:
     """INV_C5_14 — No bare `exc ept Exception: p a s s` or swallowing exceptions silently."""
     hits = _scan({".py"}, r"exc" + r"ept\s+Exception\s*:\s*pass" + r"\b")
     hits = [h for h in hits if "test_" not in h]
     assert not hits, _fail_msg("INV_C5_14 (No Silent Broad Except Pass)", hits)
 
 
-def test_inv_c5_15_vault_sync_script():
+def test_inv_c5_15_vault_sync_script() -> None:
     """INV_C5_15 — Memory vault session synchronizer script scripts/sync_vault_uuids.py must exist."""
     script_path = ROOT / "scripts" / "c5_skills_ontology" / "sync_vault_uuids.py"
     assert script_path.exists(), "INV_C5_15: scripts/sync_vault_uuids.py is missing from project"
 
 
-def test_inv_c5_16_toolchain_fallback():
+def test_inv_c5_16_toolchain_fallback() -> None:
     """INV_C5_16 — Scripts invoking uv must provide fallback or check binary existence."""
     _ = _scan({".sh", ".py"}, r'subprocess.*["\']uv["\']\s*,')
     # Should not blindly fail if uv is absent
     assert True
 
 
-def test_inv_c5_17_sovereign_zero_cost():
+def test_inv_c5_17_sovereign_zero_cost() -> None:
     """INV_C5_17 — Todo SIEMPRE 100% gratis, libre y auto-hospedado."""
     hits = _scan(
         {".py", ".ts", ".tsx", ".toml", ".yaml"}, r"(stripe_api_key|paywall|subscription_fee|api_billing_tier)"
@@ -230,14 +236,14 @@ def test_inv_c5_17_sovereign_zero_cost():
     assert not hits, _fail_msg("INV_C5_17 (Sovereign Zero-Cost)", hits)
 
 
-def test_inv_c5_18_zero_worktree_swarm():
+def test_inv_c5_18_zero_worktree_swarm() -> None:
     """INV_C5_18 — Swarms masivos en memoria sin crear worktrees fisicos masivos."""
     hits = _scan({".py", ".sh"}, r"git\s+worktree\s+add.*agent_")
     hits = [h for h in hits if "test_" not in h]
     assert not hits, _fail_msg("INV_C5_18 (Zero-Worktree Swarm Scaling)", hits)
 
 
-def test_inv_c5_19_turing_castration_scan():
+def test_inv_c5_19_turing_castration_scan() -> None:
     """INV_C5_19 / INV_C5_TURING_CASTRATION — No unbounded while True loops without stop_event or timeout."""
     hits = _scan({".py"}, r"while\s+True\s*:\s*$")
     hits = [
@@ -246,7 +252,7 @@ def test_inv_c5_19_turing_castration_scan():
     assert not hits, _fail_msg("INV_C5_19 (Turing Castration — Unbounded while True loop)", hits)
 
 
-def test_inv_c5_20_no_placeholders():
+def test_inv_c5_20_no_placeholders() -> None:
     """INV_C5_20 — Deterministic Execution Matrix: No placeholders (# TODO, pass, ...)."""
     hits = _scan({".py", ".rs", ".ts", ".sol"}, r"(?i)#\s*TODO\b|^\s*\.\.\.\s*$")
     hits = [
@@ -257,13 +263,13 @@ def test_inv_c5_20_no_placeholders():
     assert not hits, _fail_msg("INV_C5_20 (No placeholders / TODO / ...)", hits)
 
 
-def test_inv_c5_21_eip_1153():
+def test_inv_c5_21_eip_1153() -> None:
     """INV_C5_21 — EIP-1153 strict EVM bounds: keccak256, mload(0x40), lt(gas(), 8000), revert(0x00, 0x04)."""
     hits = _scan({".sol"}, r"revert\(0,\s*0\)|revert\(0x00,\s*0x00\)")
     assert not hits, _fail_msg("INV_C5_21 (Invalid revert pattern, MUST use 0x00, 0x04)", hits)
 
 
-def test_inv_c5_22_swarm_workspace_locks():
+def test_inv_c5_22_swarm_workspace_locks() -> None:
     """INV_C5_22 — Swarm Workspace Deduplication: verify atomic lock acquisition."""
     hits = _scan({".py"}, r"os\.O_CREAT")
     bad_files = []

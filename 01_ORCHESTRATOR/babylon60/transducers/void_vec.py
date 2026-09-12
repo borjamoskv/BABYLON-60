@@ -17,7 +17,12 @@ import ctypes
 import math
 import os
 
-from babylon60.compat.optional import np  # lazy: pip install cortex-persist[compute]
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import numpy as np
+else:
+    from babylon60.compat.optional import np  # lazy: pip install cortex-persist[compute]
 
 __all__ = [
     "cosine_similarity",
@@ -87,7 +92,7 @@ def void_batch_hamming_dist(query: bytes, batch: list[bytes]) -> list[int]:
     return [void_hamming_dist(query, b) for b in batch]
 
 
-def pack_void_bit(vector: list[float] | np.ndarray) -> bytes:  # pyright: ignore[reportInvalidTypeForm]
+def pack_void_bit(vector: list[float] | np.ndarray) -> bytes:
     """
     Transforms float32/int8 vector into 1-bit packed binary representation.
 
@@ -108,7 +113,7 @@ def pack_void_bit(vector: list[float] | np.ndarray) -> bytes:  # pyright: ignore
 
     # Efficient packing using bit manipulation
     packed = np.packbits(binary)
-    return packed.tobytes()
+    return bytes(packed.tobytes())
 
 
 def void_hamming_dist(a: bytes, b: bytes) -> int:
@@ -136,7 +141,7 @@ def void_similarity(a: bytes, b: bytes, total_dim: int) -> float:
     return 1.0 - (dist / total_dim)
 
 
-def unpack_void_bit(packed: bytes, dim: int) -> np.ndarray:  # pyright: ignore[reportInvalidTypeForm]
+def unpack_void_bit(packed: bytes, dim: int) -> np.ndarray:
     """Explodes bits back into float32 [-1, 1] (Structural Loss Warning)."""
     binary = np.unpackbits(np.frombuffer(packed, dtype=np.uint8))
     # Slice to original dimension

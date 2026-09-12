@@ -29,7 +29,7 @@ TARGET_PATHS = {
     "OpenAI Codex Local": PROJECT_ROOT / ".codexrules",
 }
 
-def run_single_injection():
+def run_single_injection() -> tuple[bool, float]:
     start = time.perf_counter()
     res = subprocess.run(
         [str(INSTALL_SCRIPT)],
@@ -41,8 +41,8 @@ def run_single_injection():
     elapsed = (time.perf_counter() - start) * 1000  # ms
     return res.returncode == 0, elapsed
 
-def audit_target_integrities():
-    errors = []
+def audit_target_integrities() -> list[str]:
+    errors: list[str] = []
     
     # 1. Check Symlinks
     for name in ["Antigravity", "Claude Code", "Zed Editor"]:
@@ -67,17 +67,17 @@ def audit_target_integrities():
             
     return errors
 
-def main():
+def main() -> None:
     print("=" * 70)
     print("🔥 C5-REAL STRESS TEST & PoC v2.2: MULTI-ECOSYSTEM SHIELD INJECTION")
     print("=" * 70)
     
     if not INSTALL_SCRIPT.exists():
-        print(f"❌ Error: {INSTALL_SCRIPT} no existe.")
+        print(f"❌ Error: No se encuentra el instalador en {INSTALL_SCRIPT}")
         sys.exit(1)
         
-    print("[1] Ejecutando Stress Test de Idempotencia (100 ejecuciones consecutivas)...")
-    latencies = []
+    print("\n[1] Ejecutando 100 inyecciones secuenciales (Stress Test de Idempotencia)...")
+    latencies: list[float] = []
     failures = 0
     
     for i in range(1, 101):

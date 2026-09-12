@@ -17,7 +17,7 @@ from typing import Dict, List, Tuple, Union
 class Vector:
     """Zero-dependency dense vector wrapper based on standard library array."""
 
-    def __init__(self, data: Union[List[float], Tuple[float, ...]]):
+    def __init__(self, data: Union[List[float], Tuple[float, ...]]) -> None:
         self._data = array("d", data)
 
     def __len__(self) -> int:
@@ -50,7 +50,7 @@ class Vector:
 class Matrix:
     """Zero-dependency dense 2D matrix wrapper."""
 
-    def __init__(self, rows: int, cols: int, fill: float = 0.0):
+    def __init__(self, rows: int, cols: int, fill: float = 0.0) -> None:
         self.rows = rows
         self.cols = cols
         self._data = array("d", [fill] * (rows * cols))
@@ -65,7 +65,7 @@ class Matrix:
 
     def row(self, r: int) -> Vector:
         start = r * self.cols
-        return Vector(self._data[start : start + self.cols])
+        return Vector(self._data[start : start + self.cols].tolist())
 
     def col(self, c: int) -> Vector:
         return Vector([self._data[r * self.cols + c] for r in range(self.rows)])

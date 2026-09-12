@@ -40,7 +40,7 @@ REQUIRED_KEYS = [
 REQUIRED_META_KEYS = ["cat_id", "cat_type", "version", "reality_level", "owner", "exergy_tier"]
 
 
-def audit_and_normalize_all_agents():
+def audit_and_normalize_all_agents() -> None:
     yaml_files = sorted([f for f in DEFS_DIR.glob("*.yaml") if f.is_file()])
     total_files = len(yaml_files)
 

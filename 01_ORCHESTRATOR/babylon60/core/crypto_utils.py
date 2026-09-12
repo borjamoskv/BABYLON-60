@@ -6,7 +6,7 @@
 from __future__ import annotations
 
 import hashlib
-from typing import Any, Dict
+from typing import Dict, Mapping
 
 import cbor2
 from cryptography.exceptions import InvalidSignature
@@ -14,7 +14,7 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
 
 
-def canonicalize_cbor(data: Dict[str, Any]) -> bytes:
+def canonicalize_cbor(data: Mapping[str, object] | Dict[str, object] | object) -> bytes:
     """
     Serialización canónica determinista usando CBOR.
     Las claves del diccionario se ordenan lexicográficamente para asegurar BFT.

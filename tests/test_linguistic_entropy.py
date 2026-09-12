@@ -8,7 +8,7 @@ from babylon60.transducers.linguistic_entropy import (
 )
 
 
-def test_linguistic_entropy_detector_short_text():
+def test_linguistic_entropy_detector_short_text() -> None:
     detector = LinguisticEntropyDetector()
     text = "BABYLON-60 kernel operates deterministically in Ring-0 memory space."
     report = detector.analyze(text)
@@ -18,7 +18,7 @@ def test_linguistic_entropy_detector_short_text():
     assert report.exergy_score > 0.0
 
 
-def test_linguistic_entropy_detector_long_text_context_rot():
+def test_linguistic_entropy_detector_long_text_context_rot() -> None:
     detector = LinguisticEntropyDetector()
     # Generar texto largo (> 300 palabras) para activar _context_rot
     base_paragraph = (
@@ -34,7 +34,7 @@ def test_linguistic_entropy_detector_long_text_context_rot():
     assert report.exergy_score <= 100.0
 
 
-def test_context_rot_static_call():
+def test_context_rot_static_call() -> None:
     detector = LinguisticEntropyDetector()
     text = "sample word " * 250
     rot = detector._context_rot(text, window_size=50)

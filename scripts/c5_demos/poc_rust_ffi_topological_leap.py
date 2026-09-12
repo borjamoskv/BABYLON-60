@@ -34,18 +34,18 @@ class SharedManifest(ctypes.Structure):
 # 2. SIMULADOR DEL NÚCLEO RUST (FFI Mock)
 # =====================================================================
 class RustKernelMock:
-    def __init__(self):
+    def __init__(self) -> None:
         self.manifest = SharedManifest()
         self.manifest.seqlock = 0
         self.manifest.lamport_t = 0
         self.manifest.seq = 0
         self.manifest.halt_flag = 0
-        self._leaves = []
+        self._leaves: list[str] = []
 
-    def _seqlock_write_begin(self):
+    def _seqlock_write_begin(self) -> None:
         self.manifest.seqlock += 1
 
-    def _seqlock_write_end(self):
+    def _seqlock_write_end(self) -> None:
         self.manifest.seqlock += 1
 
     def compute_cortex_hash(self, seq: int, event_id: str, prev_hash: str) -> str:
@@ -71,7 +71,7 @@ class RustKernelMock:
         root_with_cardinal = b'\x02' + layer[0] + total_leaves.to_bytes(8, 'little')
         return hashlib.sha3_256(root_with_cardinal).hexdigest()
 
-    def append_causal_event(self, seq: int, lamport_t: int, entry_hash: str) -> dict:
+    def append_causal_event(self, seq: int, lamport_t: int, entry_hash: str) -> dict[str, str]:
         print(f"  [Rust Kernel/Ring-0] Evaluando transición: seq={seq}, lamport={lamport_t}")
         
         if self.manifest.halt_flag == 1:
@@ -99,7 +99,7 @@ class RustKernelMock:
         print(f"  [Rust Kernel/Ring-0] Transición exitosa. Raíz Merkle: {new_root[:16]}...")
         return {"status": "OK", "merkle_root": new_root}
 
-    def _trigger_fail_stop(self, reason: str):
+    def _trigger_fail_stop(self, reason: str) -> None:
         self._seqlock_write_begin()
         self.manifest.halt_flag = 1
         self._seqlock_write_end()
@@ -110,7 +110,7 @@ class RustKernelMock:
 # 3. DEMOSTRACIÓN (Python Front-End)
 # =====================================================================
 
-def run_poc():
+def run_poc() -> None:
     print("=" * 80)
     print("🚀 Iniciando PoC: BABYLON-60 Rust FFI Topological Leap")
     print("=" * 80)

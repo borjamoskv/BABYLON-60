@@ -8,7 +8,7 @@ RESET = "\033[0m"
 BOLD = "\033[1m"
 
 
-def print_slow(text, delay=0.01):
+def print_slow(text: str, delay: float = 0.01) -> None:
     for char in text:
         sys.stdout.write(char)
         sys.stdout.flush()
@@ -46,4 +46,3 @@ while awaiting_input:
             awaiting_input = False
     except KeyboardInterrupt:
         awaiting_input = False
-

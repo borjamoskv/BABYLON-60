@@ -12,7 +12,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from typing import Any
+from typing import Union
 
 import aiosqlite
 
@@ -20,13 +20,16 @@ from babylon60.database import core as database_core
 
 logger = logging.getLogger("babylon60.bft.master_ledger")
 
+SqliteParam = Union[str, int, float, bytes, None]
+SqliteParams = tuple[SqliteParam, ...]
+
 
 class MasterLedgerQueue:
-    def __init__(self, db_path: str):
+    def __init__(self, db_path: str) -> None:
         self.db_path = db_path
-        self.queue: asyncio.Queue[tuple[str, tuple[Any, ...]] | None] = asyncio.Queue(maxsize=1024)
+        self.queue: asyncio.Queue[tuple[str, SqliteParams] | None] = asyncio.Queue(maxsize=1024)
         self.db: aiosqlite.Connection | None = None
-        self._writer_task: asyncio.Task[Any] | None = None
+        self._writer_task: asyncio.Task[None] | None = None
         self._writer_failure: BaseException | None = None
 
     async def initialize(self) -> None:
@@ -36,7 +39,7 @@ class MasterLedgerQueue:
         self._writer_task.add_done_callback(self._on_writer_done)
         logger.info(f"BFT Master Ledger Queue initialized on {self.db_path} [WAL + synchronous=FULL]")
 
-    def _on_writer_done(self, task: asyncio.Task[Any]) -> None:
+    def _on_writer_done(self, task: asyncio.Task[None]) -> None:
         if task.cancelled():
             logger.warning("BFT Single-Writer Loop Cancelled (Apoptosis)")
         elif task.exception():
@@ -50,7 +53,7 @@ class MasterLedgerQueue:
             raise RuntimeError("Database not initialized")
         while not self._stop_event.is_set():
             await asyncio.sleep(0)
-            batch: list[tuple[str, tuple[Any, ...]]] = []
+            batch: list[tuple[str, SqliteParams]] = []
             while not self.queue.empty() and len(batch) < 500:
                 payload = self.queue.get_nowait()
                 if payload is None:
@@ -76,7 +79,7 @@ class MasterLedgerQueue:
                 self.queue.put_nowait(payload)
                 self.queue.task_done()
 
-    async def submit_transaction(self, query: str, parameters: tuple[Any, ...]) -> None:
+    async def submit_transaction(self, query: str, parameters: SqliteParams = ()) -> None:
         if self._writer_task is not None and self._writer_task.done() and not self._writer_task.cancelled():
             failure = self._writer_failure or self._writer_task.exception()
             raise RuntimeError(

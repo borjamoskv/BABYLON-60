@@ -50,7 +50,7 @@ class ReplayKernel:
     a ReplayKernel corresponde únicamente al almacén aislado de propuestas (model_proposals).
     """
 
-    def __init__(self, db: Any, policy_version: str):
+    def __init__(self, db: Any, policy_version: str) -> None:
         self.db = db
         self.policy_version = policy_version
 

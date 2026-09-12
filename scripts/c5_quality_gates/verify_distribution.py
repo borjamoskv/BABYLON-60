@@ -99,7 +99,7 @@ def check_workflows() -> dict:
             
     return result
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="C5-REAL Distribution Audit Gate")
     parser.add_argument("--json", action="store_true", help="Emitir resultados en formato JSON M2M")
     args = parser.parse_args()

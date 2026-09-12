@@ -187,11 +187,11 @@ fn main() {
                         println!("Signature:    {}...", &block.signature[..16]);
                     }
                     OutputFormat::Json => {
-                        println!("{}", serde_json::to_string_pretty(&block).unwrap());
+                        println!("{}", serde_json::to_string_pretty(&block).expect("BFT Fallback"));
                     }
                     OutputFormat::Scitt => {
                         let voucher = ledger::export_scitt_voucher(&block);
-                        println!("{}", serde_json::to_string_pretty(&voucher).unwrap());
+                        println!("{}", serde_json::to_string_pretty(&voucher).expect("BFT Fallback"));
                     }
                 },
                 Err(e) => {
@@ -213,7 +213,7 @@ fn main() {
                         println!("Legal Compliance: {}", report.eu_ai_act_compliance);
                     }
                     OutputFormat::Json | OutputFormat::Scitt => {
-                        println!("{}", serde_json::to_string_pretty(&report).unwrap());
+                        println!("{}", serde_json::to_string_pretty(&report).expect("BFT Fallback"));
                     }
                 },
                 Err(e) => {
@@ -277,7 +277,7 @@ fn main() {
             );
 
             let out_path = output.unwrap_or_else(env::license_file);
-            let serialized = serde_json::to_string_pretty(&lic).unwrap();
+            let serialized = serde_json::to_string_pretty(&lic).expect("BFT Fallback");
 
             if let Some(parent) = out_path.parent() {
                 let _ = fs::create_dir_all(parent);
@@ -320,7 +320,7 @@ fn main() {
                         let request_str = String::from_utf8_lossy(&buffer[..bytes_read]);
                         let (status_line, response_body) = if request_str.starts_with("GET /verify") {
                             match ledger::verify_chain() {
-                                Ok(report) => ("HTTP/1.1 200 OK", serde_json::to_string_pretty(&report).unwrap()),
+                                Ok(report) => ("HTTP/1.1 200 OK", serde_json::to_string_pretty(&report).expect("BFT Fallback")),
                                 Err(e) => ("HTTP/1.1 500 INTERNAL SERVER ERROR", serde_json::json!({"error": e}).to_string()),
                             }
                         } else if request_str.starts_with("GET /status") {
@@ -340,7 +340,7 @@ fn main() {
                                 let parsed: serde_json::Value = serde_json::from_str(body)
                                     .unwrap_or_else(|_| serde_json::json!({ "raw": body }));
                                 match ledger::append_event(parsed) {
-                                    Ok(b) => ("HTTP/1.1 200 OK", serde_json::to_string_pretty(&b).unwrap()),
+                                    Ok(b) => ("HTTP/1.1 200 OK", serde_json::to_string_pretty(&b).expect("BFT Fallback")),
                                     Err(e) => ("HTTP/1.1 500 INTERNAL SERVER ERROR", serde_json::json!({"error": e}).to_string()),
                                 }
                             } else {

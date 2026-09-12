@@ -4,7 +4,7 @@
 # ============================================================================
 # [Causal-Determinist] BFT consensus validator — Operador ortogonal (V) puro.
 # No muta disco. Solo atestación matemática.
-from typing import Any, Dict
+from typing import Dict, Mapping
 import cbor2
 import json
 from babylon60.core.crypto_utils import canonicalize_cbor, hash_sha3_256, verify_ed25519
@@ -13,7 +13,7 @@ _UNDECODABLE = object()
 
 
 class BFT_Validator:
-    def __init__(self, node_keys: Dict[str, str]):
+    def __init__(self, node_keys: Dict[str, str]) -> None:
         self._node_keys = node_keys
 
     def verify_signature(self, node_id: str, data_hash: str, sig: str) -> bool:
@@ -22,7 +22,9 @@ class BFT_Validator:
             return False
         return verify_ed25519(public_key_hex, data_hash, sig)
 
-    def validate_votes(self, payload: Dict[str, Any], f: int, swarm_signatures: Dict[str, str]) -> str:
+    def validate_votes(
+        self, payload: Mapping[str, object] | Dict[str, object], f: int, swarm_signatures: Dict[str, str]
+    ) -> str:
         required_votes = (2 * f) + 1
         mutation_hash = hash_sha3_256(canonicalize_cbor(payload))
         valid_votes = sum(
@@ -45,22 +47,24 @@ class BFT_Validator:
         return swarm.logarithmic_opinion_pool(opinions, weights)
 
     @staticmethod
-    def decode_payload(payload_bytes: Any) -> Any:
+    def decode_payload(payload_bytes: bytes | memoryview | str | object) -> object:
         if isinstance(payload_bytes, memoryview):
             payload_bytes = payload_bytes.tobytes()
-        try:
-            return cbor2.loads(payload_bytes)
-        except (cbor2.CBORDecodeError, ValueError):
-            # Fallback to JSON payload parsing
-            _ = None
+        if isinstance(payload_bytes, (bytes, bytearray)):
+            try:
+                return cbor2.loads(payload_bytes)
+            except (cbor2.CBORDecodeError, ValueError, TypeError):
+                pass
         try:
             raw = payload_bytes.decode("utf-8") if isinstance(payload_bytes, bytes) else payload_bytes
-            return json.loads(raw)
+            if isinstance(raw, (str, bytes, bytearray)):
+                return json.loads(raw)
+            return _UNDECODABLE
         except (json.JSONDecodeError, UnicodeDecodeError, TypeError, ValueError):
             return _UNDECODABLE
 
     @staticmethod
-    def audit_payload(payload_data: Any, stored_hash: str) -> bool:
+    def audit_payload(payload_data: object, stored_hash: str) -> bool:
         if payload_data is _UNDECODABLE:
             return False
         try:

@@ -48,7 +48,7 @@ def export_single_locale(exporter, system_id, operator, locale, bundle_path, out
     return saved_file
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="BABYLON-60 Multi-Country Regulatory Compliance Exporter")
     parser.add_argument(
         "--locale",

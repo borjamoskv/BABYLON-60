@@ -13,6 +13,7 @@ Ontology Level: Causal-Determinist (Physical assertion of Yuma invariants and WA
 """
 
 import os
+from pathlib import Path
 import sqlite3
 from scripts.c5_l1_ledger.bittensor_yuma_consensus_c5 import (
     compute_yuma_consensus,
@@ -22,7 +23,7 @@ from scripts.c5_l1_ledger.bittensor_yuma_consensus_c5 import (
 )
 
 
-def test_compute_yuma_consensus_clipping_sybil():
+def test_compute_yuma_consensus_clipping_sybil() -> None:
     """
     Verifies that Sybil weight assignment (100% to a colluding miner by a minority validator)
     is clipped to 0.0 under median consensus.
@@ -44,7 +45,7 @@ def test_compute_yuma_consensus_clipping_sybil():
     assert len(state_hash) == 64, f"Invalid SHA3-256 anchor length: {len(state_hash)}"
 
 
-def test_simulate_subnet_emission_balance():
+def test_simulate_subnet_emission_balance() -> None:
     """
     Verifies exact emission balance: miner distribution + validator distribution + owner cut == block_emission.
     """
@@ -56,7 +57,7 @@ def test_simulate_subnet_emission_balance():
     assert abs(total_distributed - 10.0) < 1e-5, f"Emission leakage detected: {total_distributed} vs 10.0"
 
 
-def test_multi_epoch_and_wal_persistence(tmp_path):
+def test_multi_epoch_and_wal_persistence(tmp_path: Path) -> None:
     """
     Verifies multi-epoch simulation, stake compounding, EMA bond accumulation, and SQLite WAL ledger insertion.
     """
@@ -89,7 +90,7 @@ def test_multi_epoch_and_wal_persistence(tmp_path):
         conn.close()
 
 
-def test_adversarial_stress_matrix_suppression():
+def test_adversarial_stress_matrix_suppression() -> None:
     """
     Verifies that adversarial attack topologies (Sybil Swarm and Ouroboros)
     are successfully suppressed below security thresholds.

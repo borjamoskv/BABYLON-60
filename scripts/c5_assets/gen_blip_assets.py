@@ -29,7 +29,7 @@ def generate_square_wave(freq, duration, sample_rate=44100, volume=0.5):
     return wave_data
 
 
-def save_wav(filename, wave_data, sample_rate=44100):
+def save_wav(filename, wave_data, sample_rate=44100) -> None:
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     with wave.open(filename, "w") as f:
         f.setnchannels(1)

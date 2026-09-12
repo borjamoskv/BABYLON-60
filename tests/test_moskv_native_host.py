@@ -11,6 +11,7 @@ import io
 import json
 import logging
 import struct
+import pytest
 from scripts.c5_cli.moskv_native_host import (
     calculate_payload_commitment,
     process_extension_event,
@@ -19,14 +20,14 @@ from scripts.c5_cli.moskv_native_host import (
 )
 
 
-def test_payload_commitment():
+def test_payload_commitment() -> None:
     raw = b'{"status": "READY"}'
     hash_hex = calculate_payload_commitment(raw)
     assert len(hash_hex) == 64
     assert hash_hex == "a258bbbe3b975c9b5dded37eb0e8d77e64b7bec2c1a2f2b9247e06fecf3802a5"
 
 
-def test_read_send_message_frame_roundtrip():
+def test_read_send_message_frame_roundtrip() -> None:
     payload = {"status": "READY", "exergy": 500.0}
 
     # Test send_message_frame to in-memory buffer
@@ -51,7 +52,7 @@ def test_read_send_message_frame_roundtrip():
     assert "_hash_commitment" in read_result
 
 
-def test_read_message_frame_exceeds_max_bytes(caplog):
+def test_read_message_frame_exceeds_max_bytes(caplog: pytest.LogCaptureFixture) -> None:
     caplog.set_level(logging.ERROR)
     raw_payload = json.dumps({"data": "x" * 1000}).encode("utf-8")
     buf = io.BytesIO(struct.pack("<I", len(raw_payload)) + raw_payload)
@@ -62,7 +63,7 @@ def test_read_message_frame_exceeds_max_bytes(caplog):
     assert "Payload length" in caplog.text
 
 
-def test_read_message_frame_truncated_stream(caplog):
+def test_read_message_frame_truncated_stream(caplog: pytest.LogCaptureFixture) -> None:
     caplog.set_level(logging.ERROR)
     buf = io.BytesIO(struct.pack("<I", 100) + b"short")
     result = read_message_frame(stream=buf)
@@ -70,7 +71,7 @@ def test_read_message_frame_truncated_stream(caplog):
     assert "Truncated binary payload stream" in caplog.text
 
 
-def test_process_extension_event_dispatch(caplog):
+def test_process_extension_event_dispatch(caplog: pytest.LogCaptureFixture) -> None:
     caplog.set_level(logging.INFO)
     logger = logging.getLogger("moskv_native_host")
 

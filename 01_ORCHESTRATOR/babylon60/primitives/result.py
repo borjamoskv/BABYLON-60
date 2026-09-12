@@ -62,7 +62,7 @@ class Ok(Generic[T]):
         """Extract the value. Safe to call on Ok."""
         return self.value
 
-    def unwrap_or(self, default: T) -> T:  # type: ignore[override]
+    def unwrap_or(self, default: T) -> T:
         return self.value
 
     def map(self, fn: Callable[[T], U]) -> Result[U, Any]:
@@ -100,11 +100,11 @@ class Err(Generic[E]):
     def unwrap_or(self, default: Any) -> Any:
         return default
 
-    def map(self, _fn: Callable) -> Err[E]:
+    def map(self, _fn: Callable[[object], object]) -> Err[E]:
         """No-op on failure track."""
         return self
 
-    def flat_map(self, _fn: Callable) -> Err[E]:
+    def flat_map(self, _fn: Callable[[object], object]) -> Err[E]:
         """No-op on failure track."""
         return self
 

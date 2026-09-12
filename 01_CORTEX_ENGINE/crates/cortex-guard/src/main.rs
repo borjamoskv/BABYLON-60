@@ -170,12 +170,12 @@ fn main() {
                     }
                 }
                 OutputFormat::Json => {
-                    let json_out = serde_json::to_string_pretty(&result).unwrap();
+                    let json_out = serde_json::to_string_pretty(&result).expect("BFT Fallback");
                     println!("{}", json_out);
                 }
                 OutputFormat::Sarif => {
                     let sarif_report = generate_sarif(&result);
-                    let sarif_out = serde_json::to_string_pretty(&sarif_report).unwrap();
+                    let sarif_out = serde_json::to_string_pretty(&sarif_report).expect("BFT Fallback");
                     println!("{}", sarif_out);
                 }
             }

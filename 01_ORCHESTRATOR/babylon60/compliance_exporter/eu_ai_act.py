@@ -16,7 +16,7 @@ import hashlib
 import json
 import os
 import time
-from typing import Any, Dict, Optional, List
+from typing import Any, Dict, cast, Optional, List
 from .i18n import get_translation
 from babylon60.attestation.merkle_anchor import MerkleCausalAnchor
 
@@ -34,7 +34,7 @@ class EUAIActComplianceExporter:
     into legal compliance certificates for EU AI Act auditing, with localized legal templates.
     """
 
-    def __init__(self, artifact_bundle_path: str = "artifact_bundle_v3", ledger_path: Optional[str] = None):
+    def __init__(self, artifact_bundle_path: str = "artifact_bundle_v3", ledger_path: Optional[str] = None) -> None:
         self.bundle_path = artifact_bundle_path
         self.ledger_path = ledger_path
 
@@ -94,7 +94,7 @@ class EUAIActComplianceExporter:
                 f"No valid artifact bundle or manifest found at '{self.bundle_path}'. "
                 "Compliance certificates cannot be generated without an audited evidence bundle."
             )
-        return self.redact_sensitive_data(data)
+        return cast(dict[str, object], self.redact_sensitive_data(data))
 
     # ------------------------------------------------------------------
     # FIX B-3: real evidence verification (fail-closed)
@@ -135,7 +135,7 @@ class EUAIActComplianceExporter:
         try:
             from ..bft.cortex_persist_ledger import CortexPersistLedger
         except ImportError:  # pragma: no cover - package-layout fallback
-            from babylon60.bft.cortex_persist_ledger import CortexPersistLedger  # type: ignore
+            from babylon60.bft.cortex_persist_ledger import CortexPersistLedger
 
         try:
             ledger = CortexPersistLedger(resolved)
@@ -222,9 +222,7 @@ class EUAIActComplianceExporter:
         verified = verification["verified"]
 
         timestamp_iso = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-        valid_until_iso = time.strftime(
-            "%Y-%m-%dT%H:%M:%SZ", time.gmtime(time.time() + validity_days * 86400)
-        )
+        valid_until_iso = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(time.time() + validity_days * 86400))
 
         # Compute certificate fingerprint
         cert_data = f"{system_id}|{operator_name}|{global_hash}|{timestamp_iso}|{locale}"
@@ -343,8 +341,10 @@ class EUAIActComplianceExporter:
                         "status": "EXPIRED",
                         "reason": f"Certificate expired on {valid_until}",
                     }
-            except Exception:
-                pass
+            except Exception as e:
+                import logging
+
+                logging.error(f"Ignored error parsing expiration date: {e}")
 
         return {
             "valid": True,
@@ -481,7 +481,10 @@ class EUAIActComplianceExporter:
             status_str = str(art_val["status"])
             status_badge = (
                 '<span class="badge badge-success">✅ ' + status_str + "</span>"
-                if "PASS" in status_str or "CUMPLIDO" in status_str or status_str == "CONFORME" or status_str == "COMPLIANT"
+                if "PASS" in status_str
+                or "CUMPLIDO" in status_str
+                or status_str == "CONFORME"
+                or status_str == "COMPLIANT"
                 else '<span class="badge badge-danger">❌ ' + status_str + "</span>"
             )
             rows += f"""
@@ -671,9 +674,8 @@ class EUAIActComplianceExporter:
         return output_filepath
 
 
-def main_cli():
+def main_cli() -> int:
     import argparse
-    import sys
 
     parser = argparse.ArgumentParser(description="BABYLON-60 EU AI Act Compliance Certificate Exporter")
     parser.add_argument("--bundle", default="artifact_bundle_v3", help="Ruta al paquete de artefactos/evidencia")

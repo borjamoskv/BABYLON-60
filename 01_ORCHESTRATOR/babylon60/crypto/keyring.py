@@ -15,15 +15,19 @@ import base64
 import binascii
 import logging
 import os
-
-try:
-    import keyring
-except ImportError:  # pragma: no cover - exercised via blocked-import tests
-    keyring = None  # type: ignore[assignment]
+from types import ModuleType
 
 from cryptography.exceptions import InvalidTag
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.primitives.kdf.argon2 import Argon2id
+
+keyring: ModuleType | None
+try:
+    import keyring as _keyring_module
+
+    keyring = _keyring_module
+except ImportError:  # pragma: no cover - exercised via blocked-import tests
+    keyring = None
 
 _AES_KEY_LENGTH = 32  # 256 bits
 _SALT_LENGTH = 16
@@ -48,14 +52,15 @@ def _get_passphrase() -> bytes:
     # In CORTEX_TESTING, we default to a predictable passphrase to avoid breaking existing pipelines
     # that don't pass the env variable. In production, it must be set.
     if os.environ.get("CORTEX_TESTING"):
-        pp = os.environ.get("CORTEX_KDF_PASSPHRASE", "c5_real_test_passphrase")
-    else:
-        pp = os.environ.get("CORTEX_KDF_PASSPHRASE")  # type: ignore[assignment]
-        if not pp:
-            raise ValueError(
-                "KDF-0 Violation: CORTEX_KDF_PASSPHRASE environment variable is required "
-                "to cryptographically unwrap the L0 Master Key."
-            )
+        pp_test = os.environ.get("CORTEX_KDF_PASSPHRASE", "c5_real_test_passphrase")
+        return pp_test.encode("utf-8")
+
+    pp = os.environ.get("CORTEX_KDF_PASSPHRASE")
+    if not pp:
+        raise ValueError(
+            "KDF-0 Violation: CORTEX_KDF_PASSPHRASE environment variable is required "
+            "to cryptographically unwrap the L0 Master Key."
+        )
     return pp.encode("utf-8")
 
 

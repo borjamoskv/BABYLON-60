@@ -79,7 +79,7 @@ class SovereignBinaryAnalyzer:
     # ELF Constants
     ELF_MAGIC = b"\x7fELF"
 
-    def __init__(self, filepath: str):
+    def __init__(self, filepath: str) -> None:
         self.filepath = os.path.abspath(filepath)
         if not os.path.isfile(self.filepath):
             raise FileNotFoundError(f"Binary file not found: {self.filepath}")

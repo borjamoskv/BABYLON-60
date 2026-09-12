@@ -28,7 +28,7 @@ from agents_archi import (
 )
 
 
-def test_swarm_config_pxs_and_routing():
+def test_swarm_config_pxs_and_routing() -> None:
     """Validates PxS ARM64 scaling and dynamic backend URLs."""
     cfg = SwarmConfig(p_cores=8, s_threads=2, backend=InferenceBackend.MOONSHOT_REMOTE)
     assert cfg.max_concurrent == 16
@@ -41,12 +41,12 @@ def test_swarm_config_pxs_and_routing():
 
 
 @pytest.mark.asyncio
-async def test_agent_pager_futex_synchronization():
+async def test_agent_pager_futex_synchronization() -> None:
     """Validates zero-CPU O(1) awakening across parallel agents."""
     pager = AgentPager()
     awoken = []
 
-    async def _worker(idx: int):
+    async def _worker(idx: int) -> None:
         await pager.wait_for_beep()
         awoken.append(idx)
 
@@ -59,7 +59,7 @@ async def test_agent_pager_futex_synchronization():
     assert len(awoken) == 5
 
 
-def test_dynamic_lifecycle_transitions_and_deadlock():
+def test_dynamic_lifecycle_transitions_and_deadlock() -> None:
     """Validates FSM invariants, forbidden transitions, and watchdog deadlock detection."""
     mgr = DynamicLifecycleManager(default_timeout_s=0.05)
     agent = mgr.spawn("worker_01", role="verifier", timeout_s=0.05)
@@ -83,7 +83,7 @@ def test_dynamic_lifecycle_transitions_and_deadlock():
     assert agent.current_state == SubagentState.DEADLOCKED
 
 
-def test_swarm_router_typo_tolerance():
+def test_swarm_router_typo_tolerance() -> None:
     """Validates Levenshtein fuzzy matching and typo tolerance for user triggers."""
     # Exact triggers
     target, conf = SwarmRouter.route_query("por favor ejecutar legion audit")
@@ -107,7 +107,7 @@ def test_swarm_router_typo_tolerance():
 
 
 @pytest.mark.asyncio
-async def test_centuria_parallel_verification_topology():
+async def test_centuria_parallel_verification_topology() -> None:
     """Validates Centuria 100-worker batch execution and barrier aggregation."""
     centuria = CenturiaTopology(worker_count=50, max_batch_concurrency=10)
     items = [f"item_{i}" for i in range(25)]
@@ -122,7 +122,7 @@ async def test_centuria_parallel_verification_topology():
     assert report["throughput_items_per_sec"] > 0
 
 
-def test_aof_humes_guillotine():
+def test_aof_humes_guillotine() -> None:
     """Enforces Hume's Guillotine: Deontic conclusions require deontic premises."""
     p_is1 = Proposition("CPU load is 98%", Modality.EPISTEMIC)
     p_is2 = Proposition("Thermodynamic dissipation limit reached", Modality.EPISTEMIC)
@@ -137,7 +137,7 @@ def test_aof_humes_guillotine():
     assert AOFValidator.enforce_humes_guillotine([p_is1, p_norm], c_ought) is True
 
 
-def test_attestation_envelope_integrity_and_tamper_detection():
+def test_attestation_envelope_integrity_and_tamper_detection() -> None:
     """Verifies SCITT cryptographic attestation and tamper resistance."""
     payload = {"task_id": "tx_99", "action": "bft_commit", "data": {"nonce": 42}}
     envelope = AttestationEnvelope.create(
@@ -158,7 +158,7 @@ def test_attestation_envelope_integrity_and_tamper_detection():
     assert envelope.verify(expected_key="SecretKey123") is False
 
 
-def test_client_adapters_safeguard():
+def test_client_adapters_safeguard() -> None:
     """Validates unconfigured air-gap safeguards for Kimi and OpenRouter clients."""
     kimi = KimiClient(api_key="")
     assert not kimi.is_configured()

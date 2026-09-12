@@ -25,12 +25,12 @@ from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
 from babylon60.utils.hygiene import run_exergy_optimizer
 
 
-def _ensure_main():
+def _ensure_main() -> None:
     subprocess.run(["git", "checkout", "main"], check=True)
     subprocess.run(["git", "reset", "--hard", "origin/main"], check=True)
 
 
-def _create_callback():
+def _create_callback() -> None:
     callback = """
 def message_callback(message, metadata):
     lower = message.lower()
@@ -50,7 +50,7 @@ def message_callback(message, metadata):
         f.write(callback)
 
 
-def _run_filter_repo():
+def _run_filter_repo() -> None:
     subprocess.run(
         [
             "git",
@@ -63,7 +63,7 @@ def _run_filter_repo():
     )
 
 
-async def _record_events():
+async def _record_events() -> None:
     async with connect("cortex.db") as conn:
         actor = BFTLedgerActor(conn)
         out = subprocess.check_output(["git", "log", "--pretty=%H %P"], text=True)
@@ -83,7 +83,7 @@ async def _record_events():
             await actor.append(event)
 
 
-def main():
+def main() -> None:
     _ensure_main()
     _create_callback()
     _run_filter_repo()

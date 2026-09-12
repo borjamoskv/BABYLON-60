@@ -66,7 +66,7 @@ def run_prigogine_brusselator(
     return history
 
 
-def main():
+def main() -> None:
     random.seed(42)  # Determinism anchor
 
     # Run Boltzmann

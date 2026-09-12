@@ -18,6 +18,16 @@ import shutil
 import tempfile
 import subprocess
 from pathlib import Path
+from typing import TypedDict
+
+class AgentAction(TypedDict):
+    agent_id: str
+    framework: str
+    action: str
+    target: str
+    amount_eur: int
+    risk_score: float
+    policy_check: str
 
 # Paths
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -26,6 +36,7 @@ BINARY_PATH = REPO_ROOT / "target" / "release" / "babylon-attest"
 if not BINARY_PATH.exists():
     BINARY_PATH = REPO_ROOT / "target" / "debug" / "babylon-attest"
 
+# ANSI Colors
 RESET = "\033[0m"
 BOLD = "\033[1m"
 GREEN = "\033[0;32m"
@@ -34,18 +45,18 @@ CYAN = "\033[0;36m"
 YELLOW = "\033[0;33m"
 MAGENTA = "\033[0;35m"
 
-def log_step(step: int, title: str):
+def log_step(step: int, title: str) -> None:
     print(f"\n{CYAN}{BOLD}[PASO {step}/5] {title}{RESET}")
     print("─" * 70)
 
-def run_cmd(args, env_vars=None):
+def run_cmd(args: list[str], env_vars: dict[str, str] | None = None) -> tuple[int, str, str]:
     env = os.environ.copy()
     if env_vars:
         env.update(env_vars)
     res = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, env=env)
     return res.returncode, res.stdout, res.stderr
 
-def main():
+def main() -> None:
     print(f"\n{MAGENTA}{BOLD}")
     print("╔══════════════════════════════════════════════════════════════════════╗")
     print("║   AGENTS.ARCHI / BABYLON-60 — LIVE ENTERPRISE PROOF OF CONCEPT      ║")
@@ -82,7 +93,7 @@ def main():
 
         # STEP 2: LEGITIMATE AGENT ACTION (ATTESTATION)
         log_step(2, "Ejecución de Agente Autónomo: Acción Legítima Atestada")
-        legit_action = {
+        legit_action: AgentAction = {
             "agent_id": "RiskAnalyzer-Agent-01",
             "framework": "LangChain/Custom",
             "action": "execute_treasury_rebalance",
@@ -103,7 +114,7 @@ def main():
 
         # STEP 3: MALICIOUS / HALLUCINATED ACTION (CIRCUIT BREAKER)
         log_step(3, "Detección de Violación de Política: Disyuntor de Seguridad (Halt)")
-        malicious_action = {
+        malicious_action: AgentAction = {
             "agent_id": "RiskAnalyzer-Agent-01",
             "framework": "LangChain/Custom",
             "action": "exfiltrate_internal_credentials",

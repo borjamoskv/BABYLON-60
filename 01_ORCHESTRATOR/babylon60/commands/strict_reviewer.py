@@ -74,7 +74,7 @@ def _run_mypy(files: List[Path]) -> int:
     return exit_code
 
 
-def _record_event(actor: BFTLedgerActor, event_type: str, payload: dict) -> None:
+def _record_event(actor: BFTLedgerActor, event_type: str, payload: dict[str, object]) -> None:
     """Append a ledger event with proper UUIDv5 and lamport ordering."""
     timestamp = datetime.utcnow().isoformat() + "Z"
     event_id = uuid.uuid5(uuid.NAMESPACE_URL, f"{event_type}:{timestamp}")
@@ -90,7 +90,10 @@ def _record_event(actor: BFTLedgerActor, event_type: str, payload: dict) -> None
     )
     import asyncio
 
-    asyncio.run(actor.append(event))
+    async def _do_append() -> None:
+        await actor.append(event)
+
+    asyncio.run(_do_append())
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -116,26 +119,30 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     db_path = Path.cwd() / "cortex.db"
 
-    async def _record():
-        async with connect(db_path) as conn:
-            actor = BFTLedgerActor(conn)
-            payload = {
-                "files": [str(f) for f in changed],
-                "fixes_applied": fixes,
-                "timestamp": datetime.utcnow().isoformat(),
-            }
-            await actor.append(
-                LedgerEvent(
-                    stream="audit",
-                    entity_id=str(uuid.uuid4()),
-                    event_type="code_review",
-                    payload=payload,
-                    cortex_taint="strict_reviewer",
-                    source_db="cortex.db",
-                    source_table="events",
-                    source_pk="",
+    async def _record() -> None:
+        async with await connect(db_path):
+            actor = BFTLedgerActor(db_path)
+            await actor.start()
+            try:
+                payload = {
+                    "files": [str(f) for f in changed],
+                    "fixes_applied": fixes,
+                    "timestamp": datetime.utcnow().isoformat(),
+                }
+                await actor.append(
+                    LedgerEvent(
+                        stream="audit",
+                        entity_id=str(uuid.uuid4()),
+                        event_type="code_review",
+                        payload=payload,
+                        cortex_taint="strict_reviewer",
+                        source_db="cortex.db",
+                        source_table="events",
+                        source_pk="",
+                    )
                 )
-            )
+            finally:
+                await actor.stop()
 
     import asyncio
 

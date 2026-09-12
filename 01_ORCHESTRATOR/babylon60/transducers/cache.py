@@ -20,11 +20,19 @@ import time
 from collections import OrderedDict
 from collections.abc import Callable
 from enum import Enum
-from typing import Any, Generic, TypeVar, final
+from typing import Generic, TypeVar, TypedDict, final
 
 from babylon60.crypto.hash_registry import cortex_hash
 
 T = TypeVar("T")
+
+
+class ForgettingProof(TypedDict):
+    tip: str
+    count: int
+    capacity: int
+    utilization: int
+
 
 logger = logging.getLogger("babylon60.utils.cache")
 
@@ -65,7 +73,7 @@ class SovereignCache(Generic[T]):
         self,
         maxsize: int = 1000,
         ttl: float = 3600.0,
-        on_evict: Callable[[str, T, str, int], Any] | None = None,
+        on_evict: Callable[[str, T, str, int], object] | None = None,
     ) -> None:
         """
         Args:
@@ -78,7 +86,7 @@ class SovereignCache(Generic[T]):
         self._ttl = ttl
         self._on_evict = on_evict
         self._lock = asyncio.Lock()
-        self._eviction_tasks: set[asyncio.Task[Any]] = set()
+        self._eviction_tasks: set[asyncio.Task[object]] = set()
 
         # Sovereign Evidence Chain (Ω₀)
         self._evidence_hash = cortex_hash(b"CORTEX_GENESIS_VOID")
@@ -138,7 +146,7 @@ class SovereignCache(Generic[T]):
         else:
             self._on_evict(key, value, self._evidence_hash, self._eviction_count)
 
-    def get_forgetting_proof(self) -> dict[str, Any]:
+    def get_forgetting_proof(self) -> ForgettingProof:
         """Returns the current state of the evidence chain."""
         return {
             "tip": self._evidence_hash,

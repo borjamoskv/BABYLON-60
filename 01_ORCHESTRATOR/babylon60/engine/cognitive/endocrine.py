@@ -59,7 +59,7 @@ class EndocrineState:
 class EndocrineEngine:
     """Motor global/singleton para gestionar estados endocrinos de la legión."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self._state = EndocrineState()
 
     def modulate_llm_params(self) -> Dict[str, float]:

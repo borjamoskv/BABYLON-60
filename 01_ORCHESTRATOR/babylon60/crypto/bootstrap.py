@@ -9,8 +9,8 @@ Generates Ed25519 identity and auto-signs the GENESIS block.
 """
 
 import logging
-from typing import Any
 
+import aiosqlite
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
 
@@ -40,11 +40,12 @@ class IdentityBootstrap:
         return private_key, priv_bytes, pub_bytes
 
     @staticmethod
-    async def bootstrap_genesis(conn: Any, tenant_id: str = "cortex-swarm-0") -> None:
+    async def bootstrap_genesis(conn: aiosqlite.Connection, tenant_id: str = "cortex-swarm-0") -> None:
         """Inject the GENESIS block if cortex_ledger is empty."""
         # Assume cortex_ledger is already created by migration
         async with conn.execute("SELECT COUNT(*) FROM cortex_ledger") as cursor:
-            count = (await cursor.fetchone())[0]
+            row = await cursor.fetchone()
+            count = int(row[0]) if row else 0
 
         if count > 0:
             return  # Already bootstrapped

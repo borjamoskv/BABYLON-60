@@ -63,7 +63,7 @@ async def execute_vector_agent(agent_id: int, vector: dict[str, str], actor: BFT
     }
 
 
-async def main():
+async def main() -> None:
     logger.info("⚡ [CENTURIA SWARM RUNNER] Initiating Orquestación de 100 Agentes ULTRATHINK...")
 
     if not SHARDS_FILE.exists():

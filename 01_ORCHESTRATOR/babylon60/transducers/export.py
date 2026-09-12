@@ -14,14 +14,19 @@ from __future__ import annotations
 import csv
 import io
 import json
-from typing import TYPE_CHECKING
+from typing import Protocol
 
-__all__ = ["export_facts"]
+__all__ = ["Fact", "export_facts"]
 
-if TYPE_CHECKING:
-    from typing import Any
 
-    Fact = Any  # type: ignore
+class Fact(Protocol):
+    project: str
+    fact_type: str | None
+    tags: list[str]
+    content: str
+    confidence: float
+
+    def to_dict(self) -> dict[str, object]: ...
 
 
 def export_facts(facts: list[Fact], fmt: str = "json") -> str:
@@ -116,7 +121,11 @@ def _export_csv(facts: list[Fact]) -> str:
     for f in facts:
         d = f.to_dict()
         # Flatten tags list to semicolon-separated string
-        d["tags"] = ";".join(d.get("tags", []))
+        raw_tags = d.get("tags")
+        if isinstance(raw_tags, list):
+            d["tags"] = ";".join(str(t) for t in raw_tags)
+        else:
+            d["tags"] = ""
         writer.writerow({k: d.get(k, "") for k in fieldnames})
 
     return output.getvalue()

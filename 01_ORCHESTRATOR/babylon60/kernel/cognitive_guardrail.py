@@ -17,14 +17,14 @@ class CognitiveGuardrail:
     o acumula demasiada anergía epistémica.
     """
 
-    def __init__(self, exergy_threshold: float = 0.5, max_steps: int = 100):
+    def __init__(self, exergy_threshold: float = 0.5, max_steps: int = 100) -> None:
         self.exergy_threshold = exergy_threshold
         self.max_steps = max_steps
         self.current_step = 0
         self.start_time = time.time()
         self.accumulated_anergy = 0.0
 
-    def record_step(self, exergy_score: float):
+    def record_step(self, exergy_score: float) -> None:
         """Registra un paso de computación cognitiva y evalúa la homeostasis."""
         self.current_step += 1
 
@@ -33,7 +33,7 @@ class CognitiveGuardrail:
 
         self._check_circuit_breaker()
 
-    def _check_circuit_breaker(self):
+    def _check_circuit_breaker(self) -> None:
         """Comprueba si se han violado las invariantes C5-REAL."""
         if self.current_step > self.max_steps:
             logger.critical("[GUARDRAIL] Intent Decay detectado: Límite de pasos cognitivos excedido.")
@@ -45,7 +45,7 @@ class CognitiveGuardrail:
             )
             raise CognitiveGuardrailError("Excessive cognitive anergy. Forcing halt to prevent corruption.")
 
-    def reset(self):
+    def reset(self) -> None:
         """Restablece el cortacircuitos."""
         self.current_step = 0
         self.start_time = time.time()

@@ -24,7 +24,7 @@ class AgentPager(Generic[T]):
     Zero-Task Allocation: Cero creación de sub-tareas en Event Loop.
     Permite instanciar y sincronizar 1,000,000+ de subagentes en < 0.1s.
     """
-    def __init__(self):
+    def __init__(self) -> None:
         self._unicast_events: Dict[int, asyncio.Event] = {}
         self._unicast_payloads: Dict[int, T] = {}
         self._global_event: asyncio.Event = asyncio.Event()
@@ -60,6 +60,8 @@ class AgentPager(Generic[T]):
             
         # Fast-path 2: Pulso Global previo
         if self._global_event.is_set():
+            if self._global_payload is None:
+                raise RuntimeError("Global event set without payload")
             return self._global_payload
             
         # Zero-Task Allocation await: Suspensión directa sobre la Primitiva C
@@ -67,6 +69,8 @@ class AgentPager(Generic[T]):
         
         if tenant_id in self._unicast_payloads:
             return self._unicast_payloads.pop(tenant_id)
+        if self._global_payload is None:
+            raise RuntimeError("Agent woke up without payload")
         return self._global_payload
 
     def beep_agent(self, tenant_id: int, payload: T) -> None:

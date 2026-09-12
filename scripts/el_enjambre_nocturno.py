@@ -56,7 +56,7 @@ def send_whatsapp_message(jid: str, text: str) -> bool:
         return False
 
 
-async def main():
+async def main() -> None:
     if len(sys.argv) > 1:
         prompt = " ".join(sys.argv[1:])
     else:

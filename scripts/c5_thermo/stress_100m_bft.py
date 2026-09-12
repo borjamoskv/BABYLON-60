@@ -66,7 +66,7 @@ def run_stress_chunk(ledger: CortexPersistLedger, chunk_size: int, chunk_idx: in
     }
 
 
-def main():
+def main() -> None:
     logger.info("⚡ [MEGA STRESS 100M] Initiating Suite de Estrés Masivo Causal-Determinist...")
 
     if DB_STRESS_PATH.exists():

@@ -31,17 +31,17 @@ class L5Attestor:
     Atestación determinista L5 (Nivel de Seguridad y Trazabilidad C5-REAL).
     """
 
-    def __init__(self, target_dir: str):
+    def __init__(self, target_dir: str) -> None:
         self.target_dir = target_dir
 
-    def _acquire_lock(self):
+    def _acquire_lock(self) -> None:
         """Protección candado .lock para exclusión mutua durante atestación."""
         if os.path.exists(LOCK_FILE):
             raise AttestationError("Attestation is currently locked by another process.")
         with open(LOCK_FILE, "w") as f:
             f.write(str(time.time()))
 
-    def _release_lock(self):
+    def _release_lock(self) -> None:
         if os.path.exists(LOCK_FILE):
             os.remove(LOCK_FILE)
 
@@ -56,7 +56,7 @@ class L5Attestor:
         }
         return payload
 
-    def anchor_to_bitcoin(self, payload: Dict[str, Any]):
+    def anchor_to_bitcoin(self, payload: Dict[str, Any]) -> None:
         """
         Anclaje asíncrono a Bitcoin (Simulado).
         En un entorno real usaría OpenTimestamps u otra red L1.
@@ -68,7 +68,7 @@ class L5Attestor:
         time.sleep(1.0)
         logger.info("[L5-ATTEST] Anclaje completado exitosamente.")
 
-    def run_attestation(self):
+    def run_attestation(self) -> None:
         self._acquire_lock()
         try:
             payload = self.generate_attestation_payload()

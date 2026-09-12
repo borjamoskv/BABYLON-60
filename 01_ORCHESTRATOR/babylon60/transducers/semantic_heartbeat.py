@@ -14,7 +14,6 @@ from __future__ import annotations
 
 import json
 import logging
-from typing import Any
 
 from babylon60.crypto.hash_registry import cortex_hash
 
@@ -24,23 +23,26 @@ logger = logging.getLogger("babylon60.heartbeat.semantic")
 class SemanticHeartbeat:
     """Calculates the metastate drift of system hygiene."""
 
-    def __init__(self, threshold: float = 0.1):
+    def __init__(self, threshold: float = 0.1) -> None:
         self.threshold = threshold
         self.last_entropy_hash = ""
-        self.last_report: dict[str, Any] = {}
+        self.last_report: dict[str, object] = {}
 
-    def _hash_payload(self, payload: dict[str, Any]) -> str:
+    def _hash_payload(self, payload: dict[str, object]) -> str:
         """Serializes and hashes the health report."""
-        # Normalize: round floats to 1 decimal to avoid jitter
-        normalized = {k: round(v, 1) if isinstance(v, float) else v for k, v in payload.items()}
-        # Handle load_average tuple
-        if "load_average" in normalized:
-            normalized["load_average"] = [round(x, 1) for x in normalized["load_average"]]  # type: ignore[union-attr]
+        normalized: dict[str, object] = {}
+        for k, v in payload.items():
+            if isinstance(v, float):
+                normalized[k] = round(v, 1)
+            elif k == "load_average" and isinstance(v, (list, tuple)):
+                normalized[k] = [round(float(x), 1) for x in v]
+            else:
+                normalized[k] = v
 
         dump = json.dumps(normalized, sort_keys=True)
-        return cortex_hash(dump.encode())
+        return str(cortex_hash(dump.encode()))
 
-    def calculate_drift(self, current_report: dict[str, Any]) -> float:
+    def calculate_drift(self, current_report: dict[str, object]) -> float:
         """
         Calculates the semantic drift (asymmetry) between states.
 
@@ -60,7 +62,11 @@ class SemanticHeartbeat:
         drift = diff / len(current_hash)
 
         # High-weight semantic triggers: if orphans appeared, bypass hash and spike drift
-        if current_report.get("orphans", 0) > self.last_report.get("orphans", 0):
+        curr_orphans = current_report.get("orphans", 0)
+        last_orphans = self.last_report.get("orphans", 0)
+        c_orphans = int(curr_orphans) if isinstance(curr_orphans, (int, float)) else 0
+        l_orphans = int(last_orphans) if isinstance(last_orphans, (int, float)) else 0
+        if c_orphans > l_orphans:
             drift = max(drift, 0.9)  # CRITICAL DRIFT
 
         self.last_entropy_hash = current_hash

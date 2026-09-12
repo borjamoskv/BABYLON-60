@@ -30,7 +30,7 @@ class FrameChunkPayload:
 class AgencyHypervisor:
     """Virtual In-memory Swarm Orchestrator for Remotion Parallel Rendering."""
 
-    def __init__(self, swarm_size: int):
+    def __init__(self, swarm_size: int) -> None:
         self.swarm_size = swarm_size
         self.frame_registry: Dict[int, str] = {}  # frame_idx -> payload_hash
 
@@ -54,7 +54,7 @@ class AgencyHypervisor:
         self.frame_registry[frame_idx] = payload_hash
 
 
-def simulate_swarm_render():
+def simulate_swarm_render() -> None:
     hypervisor = AgencyHypervisor(SWARM_SIZE)
     chunks = hypervisor.allocate_chunks()
 

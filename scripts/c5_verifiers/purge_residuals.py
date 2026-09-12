@@ -17,7 +17,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
-def purge_repository_residuals():
+def purge_repository_residuals() -> None:
     print("======================================================================")
     print(" 🧹 ANERGY PURGE ENGINE — PURGA DE RESIDUOS & ENTROPÍA TEMPORAL")
     print("======================================================================")

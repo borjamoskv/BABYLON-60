@@ -1,14 +1,14 @@
 from babylon60.genomics.vsa_oncology import OncologyOntologyVSA, BFOCategory, HyperVector
 
 
-def test_vsa_primitives_loaded():
+def test_vsa_primitives_loaded() -> None:
     engine = OncologyOntologyVSA()
     assert len(engine.primitives) == 300
     assert "ONC-001" in engine.primitives
     assert "ONC-300" in engine.primitives
 
 
-def test_vsa_bfo_classification():
+def test_vsa_bfo_classification() -> None:
     engine = OncologyOntologyVSA()
     assert engine.classify_bfo("ONC-017") == BFOCategory.CONTINUANT  # KRAS
     assert engine.classify_bfo("ONC-047") == BFOCategory.CONTINUANT  # TP53
@@ -16,7 +16,7 @@ def test_vsa_bfo_classification():
     assert engine.classify_bfo("ONC-145") == BFOCategory.INFORMATIONAL  # TMB
 
 
-def test_hypervector_binding_orthogonality():
+def test_hypervector_binding_orthogonality() -> None:
     v1 = HyperVector.from_seed("SEED_A")
     v2 = HyperVector.from_seed("SEED_B")
     bound = v1.bind(v2)
@@ -30,7 +30,7 @@ def test_hypervector_binding_orthogonality():
     assert v1.similarity(v1) == 1.0
 
 
-def test_waddington_trajectory_bifurcation():
+def test_waddington_trajectory_bifurcation() -> None:
     engine = OncologyOntologyVSA()
     traj_active = engine.simulate_waddington_trajectory("ONC-017", inhibited=False, steps=60)
     traj_inhibited = engine.simulate_waddington_trajectory("ONC-017", inhibited=True, steps=60)

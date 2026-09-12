@@ -55,10 +55,16 @@ pub struct SovereignManifest64 {
     pub sep_ed25519_sig: [u8; 8],
 }
 
+impl Default for SovereignManifest64 {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SovereignManifest64 {
     pub fn new() -> Self {
         Self {
-            magic: 0xC5_B60_0000_0060,
+            magic: 0x000C_5B60_0000_0060,
             timestamp_tick60: 0,
             entropy_bits_erased: 0,
             proof_digest: [0u8; 32],
@@ -76,6 +82,12 @@ pub struct F60VM {
     pub worm_ledger: Vec<[u8; 32]>,
     pub is_halted: bool,
     pub exit_code: u8,
+}
+
+impl Default for F60VM {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl F60VM {
@@ -167,7 +179,7 @@ impl F60VM {
                         let ast_delta = bytecode[self.pc + 1] as u64;
                         self.pc += 2;
 
-                        let ratio = if ast_delta > 0 { reasoning_len / ast_delta } else { 999 };
+                        let ratio = reasoning_len.checked_div(ast_delta).unwrap_or(999);
                         if ratio > 60 {
                             self.is_halted = true;
                             self.exit_code = 2;

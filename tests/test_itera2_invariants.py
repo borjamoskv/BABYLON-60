@@ -11,12 +11,17 @@ import asyncio
 import importlib.util
 import json
 import sys
+import types
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from babylon60.core.crypto_utils import Ed25519Signer, canonicalize_cbor, hash_sha3_256
 from babylon60.database import core as dbcore
+
+if TYPE_CHECKING:
+    from babylon60.bft.consensus_ledger import BFT_Ledger, StateMutation
 
 
 # ── INV_BFT_02: el módulo fantasma ahora es físico y aplica los pragmas ────────
@@ -52,7 +57,7 @@ def test_database_core_rechaza_durabilidad_ilegal(tmp_path: Path) -> None:
 # ── INV_C5_04: el contador de votos BFT verifica firmas Ed25519 REALES ─────────
 
 
-def _quorum_fixture(tmp_path: Path, n: int = 4):
+def _quorum_fixture(tmp_path: Path, n: int = 4) -> tuple[BFT_Ledger, StateMutation, str, dict[str, Ed25519Signer]]:
     from babylon60.bft.consensus_ledger import BFT_Ledger, StateMutation
 
     signers = {f"node_{i}": Ed25519Signer() for i in range(n)}
@@ -141,7 +146,7 @@ async def test_master_ledger_queue_durabilidad_full(tmp_path: Path) -> None:
 # ── INV_C5_03: el par attest/verify converge en SHA3-256 ───────────────────────
 
 
-def _load_cli(name: str, filename: str):
+def _load_cli(name: str, filename: str) -> types.ModuleType:
     root = Path(__file__).resolve().parent.parent
     path = root / "01_ORCHESTRATOR" / "babylon60" / "cli" / filename
     if not path.exists():

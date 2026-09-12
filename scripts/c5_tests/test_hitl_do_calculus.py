@@ -9,9 +9,16 @@ from pathlib import Path
 import sys
 import json
 
-# MOCK para el entorno roto
+# MOCK para el entorno de BABYLON-60
 from types import ModuleType
-paths_mock = ModuleType("babylon60.core.paths")
+
+class MockPaths(ModuleType):
+    AGENT_DIR: Path
+    CORTEX_DIR: Path
+    MEMORY_DIR: Path
+    SYNC_STATE_FILE: Path
+
+paths_mock = MockPaths("babylon60.core.paths")
 paths_mock.AGENT_DIR = Path(".agent")
 paths_mock.CORTEX_DIR = Path(".cortex")
 paths_mock.MEMORY_DIR = Path(".agent/memory")
@@ -24,18 +31,25 @@ from babylon60.extensions.swarm.verification_gate import VerificationGate, RiskL
 
 logging.basicConfig(level=logging.DEBUG)
 
+class DummyCursor:
+    async def fetchall(self) -> list[object]:
+        return []
+
+class DummySession:
+    async def __aenter__(self) -> "DummySession":
+        return self
+
+    async def __aexit__(self, *args: object) -> None:
+        pass
+
+    async def execute(self, *args: object) -> DummyCursor:
+        return DummyCursor()
+
 class DummyEngine:
-    async def session(self):
-        class DummySession:
-            async def __aenter__(self): return self
-            async def __aexit__(self, *args): pass
-            async def execute(self, *args):
-                class DummyCursor:
-                    async def fetchall(self): return []
-                return DummyCursor()
+    async def session(self) -> DummySession:
         return DummySession()
 
-async def test_do_calculus_surgery():
+async def test_do_calculus_surgery() -> None:
     print("\n--- INICIANDO TEST DE CIRUGÍA DO-CALCULUS (HITL) ---")
     
     MEMORY_DIR.mkdir(parents=True, exist_ok=True)

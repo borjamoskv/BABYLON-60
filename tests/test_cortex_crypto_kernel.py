@@ -7,7 +7,6 @@ import pytest
 from pathlib import Path
 
 from babylon60.bft.cortex_crypto_kernel import (
-    compute_cortex_hash,
     build_merkle_tree,
     generate_merkle_proof,
     verify_merkle_proof,
@@ -15,18 +14,18 @@ from babylon60.bft.cortex_crypto_kernel import (
     ZERO_HASH_256,
     MerkleMountainRange,
 )
-from babylon60.bft.cortex_persist_ledger import CortexPersistLedger, CortexEvent
+from babylon60.bft.cortex_persist_ledger import CortexPersistLedger, CortexEvent, MMREventProof
 
 
 def _make_dummy_hash(i: int) -> str:
     return hashlib.sha3_256(f"leaf_{i}".encode()).hexdigest()
 
 
-def test_empty_merkle_tree():
+def test_empty_merkle_tree() -> None:
     assert build_merkle_tree([]) == ZERO_HASH_256
 
 
-def test_single_leaf_merkle_tree():
+def test_single_leaf_merkle_tree() -> None:
     h0 = _make_dummy_hash(0)
     root = build_merkle_tree([h0])
     assert len(root) == 64
@@ -35,7 +34,7 @@ def test_single_leaf_merkle_tree():
     assert verify_merkle_proof(h0, proof_packet["proof"], root, 1) is True
 
 
-def test_cve_2012_2459_merkle_isomorphism_prevention():
+def test_cve_2012_2459_merkle_isomorphism_prevention() -> None:
     """
     Verifica que la vulnerabilidad de colisión de hojas impares (CVE-2012-2459)
     está matemáticamente neutralizada.
@@ -51,7 +50,7 @@ def test_cve_2012_2459_merkle_isomorphism_prevention():
 
 
 @pytest.mark.parametrize("tree_size", [1, 2, 3, 5, 8, 13])
-def test_merkle_inclusion_proofs_exhaustive(tree_size: int):
+def test_merkle_inclusion_proofs_exhaustive(tree_size: int) -> None:
     """
     Verifica que toda hoja en árboles de cualquier tamaño (par e impar)
     posee una prueba de inclusión verificable O(log N).
@@ -82,7 +81,7 @@ def test_merkle_inclusion_proofs_exhaustive(tree_size: int):
         assert verify_merkle_proof(packet["leaf_hash"], packet["proof"], root, tree_size + 1) is False
 
 
-def test_verify_row_invariants_seq_continuity():
+def test_verify_row_invariants_seq_continuity() -> None:
     """FIX C5-04: Detección de podado discreto."""
     # seq esperado = 2, pero seq = 3
     is_valid, err = verify_row_invariants(
@@ -105,7 +104,7 @@ def test_verify_row_invariants_seq_continuity():
     assert "discontinuity" in err.lower()
 
 
-def test_verify_row_invariants_lamport_monotonicity():
+def test_verify_row_invariants_lamport_monotonicity() -> None:
     """Detección de violación en el reloj de Lamport."""
     is_valid, err = verify_row_invariants(
         seq=2,
@@ -127,7 +126,7 @@ def test_verify_row_invariants_lamport_monotonicity():
     assert "lamport" in err.lower()
 
 
-def test_ledger_streaming_verification_and_event_proof(tmp_path: Path):
+def test_ledger_streaming_verification_and_event_proof(tmp_path: Path) -> None:
     """
     Prueba integral de streaming O(1) y generación de pruebas de evidencia
     para el cumplimiento del EU AI Act.
@@ -174,13 +173,14 @@ def test_ledger_streaming_verification_and_event_proof(tmp_path: Path):
 # SUITE DE PRUEBAS PARA MERKLE MOUNTAIN RANGE (MMR) & O(LOG N) PROOFS
 # =============================================================================
 
-def test_mmr_empty():
+
+def test_mmr_empty() -> None:
     mmr = MerkleMountainRange()
     assert mmr.get_root() == ZERO_HASH_256
     assert mmr.get_peaks() == []
 
 
-def test_mmr_single_leaf():
+def test_mmr_single_leaf() -> None:
     mmr = MerkleMountainRange()
     h0 = _make_dummy_hash(0)
     pos = mmr.append(h0)
@@ -192,7 +192,7 @@ def test_mmr_single_leaf():
 
 
 @pytest.mark.parametrize("n_leaves", [2, 3, 5, 8, 13, 21, 34, 60])
-def test_mmr_arbitrary_sizes_inclusion(n_leaves: int):
+def test_mmr_arbitrary_sizes_inclusion(n_leaves: int) -> None:
     """
     Verifica que para cualquier número de hojas (incluyendo números de Fibonacci
     y el número sexagesimal 60), toda hoja genera una prueba verificable O(log N).
@@ -215,7 +215,7 @@ def test_mmr_arbitrary_sizes_inclusion(n_leaves: int):
         assert MerkleMountainRange.verify_proof(h, proof, root) is True
 
 
-def test_mmr_tamper_detection():
+def test_mmr_tamper_detection() -> None:
     mmr = MerkleMountainRange()
     leaves = [_make_dummy_hash(i) for i in range(7)]
     for h in leaves:
@@ -232,7 +232,7 @@ def test_mmr_tamper_detection():
         assert MerkleMountainRange.verify_proof(leaves[2], proof_2, root) is False
 
 
-def test_cortex_ledger_mmr_integration(tmp_path: Path):
+def test_cortex_ledger_mmr_integration(tmp_path: Path) -> None:
     db_file = tmp_path / "test_ledger_mmr.db"
     ledger = CortexPersistLedger(db_file)
 
@@ -262,8 +262,5 @@ def test_cortex_ledger_mmr_integration(tmp_path: Path):
     assert is_valid is True
 
     # Falsación por manipulación
-    tampered = dict(proof_7)
-    tampered["leaf_hash"] = ZERO_HASH_256
+    tampered: MMREventProof = {**proof_7, "leaf_hash": ZERO_HASH_256}
     assert CortexPersistLedger.verify_mmr_event_proof(tampered, mmr_root) is False
-
-

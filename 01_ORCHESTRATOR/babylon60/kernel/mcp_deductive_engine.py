@@ -51,7 +51,7 @@ class McpDeductiveEngine:
     Evalúa la traza de ejecución del agente y deduce la necesidad de sintetizar un nuevo MCP.
     """
 
-    def __init__(self, friction_threshold: float = 0.40):
+    def __init__(self, friction_threshold: float = 0.40) -> None:
         self.friction_threshold = friction_threshold
 
     def calculate_friction(self, execution_steps: List[Dict[str, Any]]) -> float:
@@ -62,14 +62,14 @@ class McpDeductiveEngine:
         if not execution_steps:
             return 0.0
 
-        total_tokens = sum(step.get("tokens", 100) for step in execution_steps)
+        total_tokens = sum(int(step.get("tokens", 100)) for step in execution_steps)
         repetition_count = len(execution_steps)
         errors = sum(1 for step in execution_steps if step.get("status") == "ERROR")
 
         # Fricción normalizada en intervalo [0.0, 1.0]
         base_friction = min(1.0, (total_tokens * repetition_count) / 10000.0)
         penalty = 0.2 * errors
-        return min(1.0, base_friction + penalty)
+        return float(min(1.0, base_friction + penalty))
 
     def should_deduce_mcp(self, execution_steps: List[Dict[str, Any]]) -> bool:
         """Determina si la fricción supera el umbral para justificar la creación de un MCP."""

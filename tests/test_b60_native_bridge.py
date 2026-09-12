@@ -6,20 +6,20 @@ import pytest
 from babylon60.bft.b60_native import B60NativeBridge
 
 
-def test_native_dylib_loaded():
+def test_native_dylib_loaded() -> None:
     assert B60NativeBridge.is_available() is True
     ver = B60NativeBridge.version()
     assert ver == "1.0.0-omega"
 
 
-def test_native_sexa_add():
+def test_native_sexa_add() -> None:
     # 10s + 6,480,000 u  (10.5 s) + 5s + 6,480,000 u (5.5 s) = 16s + 0 u
     s, f = B60NativeBridge.sexa_add(10, 6480000, 5, 6480000)
     assert s == 16
     assert f == 0
 
 
-def test_native_fisher_distance():
+def test_native_fisher_distance() -> None:
     p = [0.5, 0.5]
     q = [0.5, 0.5]
     dist_same = B60NativeBridge.fisher_distance(p, q)
@@ -31,7 +31,7 @@ def test_native_fisher_distance():
     assert dist_ortho == pytest.approx(3.141592653589793, abs=1e-5)
 
 
-def test_native_kullback_leibler():
+def test_native_kullback_leibler() -> None:
     p = [0.7, 0.3]
     q = [0.7, 0.3]
     kl_zero = B60NativeBridge.kullback_leibler(p, q)
@@ -43,7 +43,7 @@ def test_native_kullback_leibler():
     assert kl_val > 0.0
 
 
-def test_native_eval_agent_intent_admitted():
+def test_native_eval_agent_intent_admitted() -> None:
     verdict, root = B60NativeBridge.eval_agent_intent(
         agent_id="ULTRATHINK-APEX",
         tool_name="commit_proof",
@@ -55,7 +55,7 @@ def test_native_eval_agent_intent_admitted():
     assert len(root) == 64
 
 
-def test_native_eval_agent_intent_cheap_talk_rejected():
+def test_native_eval_agent_intent_cheap_talk_rejected() -> None:
     verdict, root = B60NativeBridge.eval_agent_intent(
         agent_id="HALLUCINATING-BOT",
         tool_name="noop",
@@ -67,7 +67,7 @@ def test_native_eval_agent_intent_cheap_talk_rejected():
     assert root == ""
 
 
-def test_native_eval_agent_intent_budget_overflow():
+def test_native_eval_agent_intent_budget_overflow() -> None:
     verdict, root = B60NativeBridge.eval_agent_intent(
         agent_id="GREEDY-BOT",
         tool_name="infinite",
@@ -79,7 +79,7 @@ def test_native_eval_agent_intent_budget_overflow():
     assert root == ""
 
 
-def test_native_validate_causal_dag():
+def test_native_validate_causal_dag() -> None:
     nodes = [(1, 10), (2, 20), (3, 20), (4, 30)]
     edges = [(1, 2), (1, 3), (2, 4), (3, 4)]
     res, stages = B60NativeBridge.validate_causal_dag(nodes, edges)
@@ -87,9 +87,8 @@ def test_native_validate_causal_dag():
     assert stages == 3  # Onda 0: [1], Onda 1: [2, 3], Onda 2: [4]
 
 
-def test_native_validate_causal_dag_temporal_inversion():
+def test_native_validate_causal_dag_temporal_inversion() -> None:
     nodes = [(1, 50), (2, 20)]
     edges = [(1, 2)]  # Inversión: Lamport(1)=50 > Lamport(2)=20
     res, stages = B60NativeBridge.validate_causal_dag(nodes, edges)
     assert res == 2  # Temporal inversion detected!
-

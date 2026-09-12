@@ -6,7 +6,7 @@ Strict C5-REAL Structural Invariants.
 TOL = 1e-12
 
 
-def support(dist: dict) -> set:
+def support(dist: dict[str, float]) -> set[str]:
     """
     supp(μ) = {i : μ[i] > TOL}
     Returns the support of a probability distribution.
@@ -14,7 +14,7 @@ def support(dist: dict) -> set:
     return {k for k, v in dist.items() if v > TOL}
 
 
-def pushforward(p: dict, F: dict) -> dict:
+def pushforward(p: dict[str, float], F: dict[str, dict[str, float]]) -> dict[str, float]:
     """
     q = f_* p
     Calculates the pushforward distribution q(y) = Σ_x p(x) * F[x,y].
@@ -30,7 +30,7 @@ def pushforward(p: dict, F: dict) -> dict:
     return q
 
 
-def disintegrate(p: dict, F: dict, y) -> dict:
+def disintegrate(p: dict[str, float], F: dict[str, dict[str, float]], y: str) -> dict[str, float]:
     """
     f†_p(y)(x) = p(x)·F[x,y] / Σ_x' p(x')·F[x',y]
     Computes the posterior distribution.
@@ -63,7 +63,9 @@ def disintegrate(p: dict, F: dict, y) -> dict:
     return posterior
 
 
-def disintegration_matrix(p: dict, F: dict, strict: bool = True) -> dict:
+def disintegration_matrix(
+    p: dict[str, float], F: dict[str, dict[str, float]], strict: bool = True
+) -> dict[str, dict[str, float]]:
     """
     Returns the full kernel D: Y → X.
     D[y][x] = posterior for observation y.
@@ -82,7 +84,9 @@ def disintegration_matrix(p: dict, F: dict, strict: bool = True) -> dict:
     return D
 
 
-def verify_symmetry(p: dict, F: dict, D: dict, tol: float = 1e-6) -> bool:
+def verify_symmetry(
+    p: dict[str, float], F: dict[str, dict[str, float]], D: dict[str, dict[str, float]], tol: float = 1e-6
+) -> bool:
     """
     Verifies the Joint Probability Symmetry (AX-BD-1):
     p ⊗ f = (p·f) ⊗ f†_p

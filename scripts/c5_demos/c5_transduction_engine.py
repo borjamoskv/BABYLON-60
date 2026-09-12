@@ -40,7 +40,7 @@ class Storyboard(BaseModel):
 # 2. MOTOR DEL AGENTE DIRECTOR (Gemini 3.8 Flash con Fallback)
 # ==============================================================================
 class DirectorAgent:
-    def __init__(self, api_key: str, model: str = 'gemini-3.8-flash'):
+    def __init__(self, api_key: str, model: str = 'gemini-3.8-flash') -> None:
         self.client = genai.Client(api_key=api_key)
         self.primary_model = model
         self.fallback_model = 'gemini-3.6-flash'
@@ -75,7 +75,7 @@ class DirectorAgent:
                 contents=prompt,
                 config=config,
             )
-            return Storyboard.model_validate_json(response.text)
+            return Storyboard.model_validate_json(response.text or "{}")
         except Exception as e:
             logging.warning(f"Clúster {self.primary_model} saturado ({e}). Conmutando a {self.fallback_model}...")
             response = self.client.models.generate_content(
@@ -83,13 +83,13 @@ class DirectorAgent:
                 contents=prompt,
                 config=config,
             )
-            return Storyboard.model_validate_json(response.text)
+            return Storyboard.model_validate_json(response.text or "{}")
 
 # ==============================================================================
 # 3. SOUND DESIGN DSP & BRIDGE A REMOTION SOTA (1080p 60fps)
 # ==============================================================================
 class SotaCompiler:
-    def __init__(self, voice: str = "Mónica"):
+    def __init__(self, voice: str = "Mónica") -> None:
         self.voice = voice
 
     def get_audio_duration(self, audio_path: str) -> float:
@@ -97,12 +97,12 @@ class SotaCompiler:
         result = subprocess.run(cmd, stdout=subprocess.PIPE, text=True)
         return float(result.stdout.strip())
 
-    def compile(self, storyboard: Storyboard, output_mp4: str):
+    def compile(self, storyboard: Storyboard, output_mp4: str) -> None:
         out_dir = "/tmp/c5_render"
         os.makedirs(out_dir, exist_ok=True)
         
-        remotion_scenes = []
-        audio_tracks = []
+        remotion_scenes: list[dict[str, object]] = []
+        audio_tracks: list[str] = []
         
         total_duration = 0.0
         
@@ -199,7 +199,7 @@ class SotaCompiler:
 # ==============================================================================
 # ENTRYPOINT
 # ==============================================================================
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Babylon60 Remotion Transducer SOTA 2026")
     parser.add_argument("--corpus", type=str, default=None, help="Texto o paper a falsar")
     parser.add_argument("--file", type=str, default=None, help="Archivo de texto del paper")

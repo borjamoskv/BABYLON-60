@@ -249,7 +249,7 @@ class ASTSandbox:
         max_nodes: int = 500,
         max_depth: int = 20,
         timeout_seconds: int = 5,
-    ):
+    ) -> None:
         self._max_nodes = max_nodes
         self._max_depth = max_depth
         self._timeout = timeout_seconds
@@ -397,7 +397,7 @@ class ASTSandbox:
             # Set timeout (Unix only; no-op on Windows)
             if hasattr(signal, "SIGALRM"):
 
-                def _timeout_handler(signum, frame):
+                def _timeout_handler(signum: int, frame: object) -> None:
                     raise TimeoutError(f"Execution exceeded {self._timeout}s")
 
                 old_handler = signal.signal(signal.SIGALRM, _timeout_handler)

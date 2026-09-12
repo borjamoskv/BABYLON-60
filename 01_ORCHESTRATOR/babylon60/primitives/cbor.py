@@ -12,7 +12,7 @@ binary encoding/decoding for BFT consensus ledgers under C5-REAL nesting ceiling
 
 import io
 import struct
-from typing import Any
+from typing import Any, cast
 
 MAJOR_UNSIGNED = 0
 MAJOR_NEGATIVE = 1
@@ -50,7 +50,7 @@ def _encode_sequence(obj: Any) -> bytes:
     return hdr + b"".join(dumps(item) for item in obj)
 
 
-def _encode_map(obj: dict) -> bytes:
+def _encode_map(obj: dict[object, object]) -> bytes:
     encoded_pairs = []
     for k, v in obj.items():
         k_bytes = dumps(k)
@@ -95,11 +95,11 @@ def _read_additional(additional: int, stream: io.BytesIO) -> int:
     if additional == 24:
         return stream.read(1)[0]
     if additional == 25:
-        return struct.unpack(">H", stream.read(2))[0]
+        return cast(int, struct.unpack(">H", stream.read(2))[0])
     if additional == 26:
-        return struct.unpack(">I", stream.read(4))[0]
+        return cast(int, struct.unpack(">I", stream.read(4))[0])
     if additional == 27:
-        return struct.unpack(">Q", stream.read(8))[0]
+        return cast(int, struct.unpack(">Q", stream.read(8))[0])
     return additional
 
 
@@ -115,7 +115,7 @@ def _decode_simple(additional: int, val: int) -> Any:
     raise ValueError(f"Unsupported simple value/float additional info: {additional}")
 
 
-def _decode_map(val: int, stream: io.BytesIO) -> dict:
+def _decode_map(val: int, stream: io.BytesIO) -> dict[object, object]:
     res = {}
     for _ in range(val):
         k = _decode_stream(stream)

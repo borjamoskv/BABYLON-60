@@ -18,7 +18,7 @@ CACHE_DB_PATH = str(ROOT_DIR / "data" / "cortex_memory.db")
 class CortexInferenceEngine:
     """High-exergy inference engine adapter with L3 memoization."""
 
-    def __init__(self, db_path: str = CACHE_DB_PATH):
+    def __init__(self, db_path: str = CACHE_DB_PATH) -> None:
         self.db_path = db_path
         self._init_db()
 

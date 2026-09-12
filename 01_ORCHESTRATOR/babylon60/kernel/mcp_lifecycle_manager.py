@@ -19,11 +19,11 @@ class McpLifecycleManager:
     Inscribe los metadatos en causal_gate.db.
     """
 
-    def __init__(self, db_path: str = "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/causal_gate.db"):
+    def __init__(self, db_path: str = "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/causal_gate.db") -> None:
         self.db_path = db_path
         self._init_db()
 
-    def _init_db(self):
+    def _init_db(self) -> None:
         """Asegura la existencia de la tabla mcp_registry en causal_gate.db."""
         try:
             with sqlite3.connect(self.db_path) as conn:

@@ -4,11 +4,12 @@
 # ============================================================================
 import pathlib
 import sys
+import pytest
 
 # Basic sanity checks for the Continuous Commit Polisher daemon
 
 
-def test_constants():
+def test_constants() -> None:
     from scripts.c5_git_utils.commit_polisher import POLL_INTERVAL, DEBOUNCE_TIME, REPO_ROOT
 
     assert isinstance(POLL_INTERVAL, int) and POLL_INTERVAL > 0
@@ -18,7 +19,7 @@ def test_constants():
     assert REPO_ROOT == expected_root
 
 
-def test_main_entrypoint(monkeypatch):
+def test_main_entrypoint(monkeypatch: pytest.MonkeyPatch) -> None:
     # Ensure that running the script as __main__ does not raise immediately
     from importlib import reload
 
@@ -29,7 +30,7 @@ def test_main_entrypoint(monkeypatch):
 
     # Do not actually start the infinite loop in test
     # Verify that main can be called and will raise SystemExit if not a git repo (mocking)
-    def mock_exists(path):
+    def mock_exists(path: pathlib.Path) -> bool:
         return False
 
     monkeypatch.setattr(pathlib.Path, "exists", mock_exists)

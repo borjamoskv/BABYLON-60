@@ -7,52 +7,52 @@ from babylon60.cortex.cortex_chaos_monad import validate_ast_markov_blanket, run
 
 
 class TestASTMarkovBlanketEvasion:
-    def test_basic_dunder_blocking(self):
+    def test_basic_dunder_blocking(self) -> None:
         with pytest.raises(SecurityError, match="Acceso a atributo dunder prohibido"):
             validate_ast_markov_blanket("().__class__")
 
-    def test_string_concatenation_bypass(self):
+    def test_string_concatenation_bypass(self) -> None:
         with pytest.raises(SecurityError):
             validate_ast_markov_blanket("getattr((), '__' + 'class' + '__')")
 
-    def test_exception_based_type_extraction(self):
+    def test_exception_based_type_extraction(self) -> None:
         payload = "try:\n    1 / 0\nexcept Exception as e:\n    t = e.__class__.__base__"
         with pytest.raises(SecurityError, match="Acceso a atributo dunder prohibido"):
             validate_ast_markov_blanket(payload)
 
-    def test_subclass_hunting_comprehension(self):
+    def test_subclass_hunting_comprehension(self) -> None:
         payload = "[c for c in ().__class__.__base__.__subclasses__() if c.__name__ == 'BuiltinImporter']"
         with pytest.raises(SecurityError, match="Acceso a atributo dunder prohibido"):
             validate_ast_markov_blanket(payload)
 
-    def test_fstring_attribute_bypass(self):
+    def test_fstring_attribute_bypass(self) -> None:
         with pytest.raises(SecurityError):
             validate_ast_markov_blanket("getattr((), f'__{'class'}__')")
 
-    def test_import_star_evasion(self):
+    def test_import_star_evasion(self) -> None:
         with pytest.raises(SecurityError, match="Importacion no permitida"):
             validate_ast_markov_blanket("from os import *")
 
     @pytest.mark.asyncio
-    async def test_execution_success(self):
+    async def test_execution_success(self) -> None:
         result = await run_chaos_monad("print('hello world')")
         assert result["status"] == "Success"
         assert result["stdout"].strip() == "hello world"
 
     @pytest.mark.asyncio
-    async def test_execution_timeout(self):
+    async def test_execution_timeout(self) -> None:
         # A while True loop should trigger Timeout_Entropy_Death
         result = await run_chaos_monad("while True: pass", timeout_ms=100)
         assert result["status"] == "Timeout_Entropy_Death"
 
     @pytest.mark.asyncio
-    async def test_execution_security_error(self):
+    async def test_execution_security_error(self) -> None:
         result = await run_chaos_monad("import os")
         assert result["status"] == "SecurityError"
         assert "Importacion no permitida" in result["error"]
 
     @pytest.mark.asyncio
-    async def test_execution_memory_isolation(self):
+    async def test_execution_memory_isolation(self) -> None:
         # Even if AST passed, process should not have access to standard libraries or parent globals
         result = await run_chaos_monad("import sys")  # blocked by AST
         assert result["status"] == "SecurityError"
@@ -63,7 +63,7 @@ class TestASTMarkovBlanketEvasion:
         assert result["status"] == "SecurityError"
 
     @pytest.mark.asyncio
-    async def test_execution_dynamic_getattr(self):
+    async def test_execution_dynamic_getattr(self) -> None:
         # Bypass AST using f-strings and dynamic composition to call getattr
         # Since getattr is removed from safe_builtins, it should fail at runtime
         code = """
@@ -75,7 +75,7 @@ getattr((), f"__{x+y}__")
         assert result["status"] in ["SecurityError", "RuntimeError"]
 
     @pytest.mark.asyncio
-    async def test_execution_memory_exhaustion(self):
+    async def test_execution_memory_exhaustion(self) -> None:
         # Try to OOM the node. The resource RLIMIT_AS should kill it with MemoryError
         code = """
 a = [1]
@@ -89,7 +89,7 @@ while True:
             assert "MemoryError" in result["error"]
 
     @pytest.mark.asyncio
-    async def test_execution_stdout_flood(self):
+    async def test_execution_stdout_flood(self) -> None:
         # Try to flood STDOUT buffer and cause pipe deadlock
         code = "print('A' * (2 * 1024 * 1024))"
         result = await run_chaos_monad(code)

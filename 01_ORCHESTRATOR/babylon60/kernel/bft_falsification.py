@@ -11,7 +11,7 @@ logger = logging.getLogger("bft_falsification")
 DB_PATH = "falsification_test.db"
 
 
-def init_db():
+def init_db() -> None:
     if os.path.exists(DB_PATH):
         os.remove(DB_PATH)
     conn = sqlite3.connect(DB_PATH)
@@ -20,7 +20,7 @@ def init_db():
     conn.close()
 
 
-def bft_worker(thread_id: int):
+def bft_worker(thread_id: int) -> None:
     """Trabajador que intenta violar la exclusión mutua de la base de datos."""
     db = BFTSQLite(DB_PATH, max_retries=10, base_delay=0.1, max_delay=1.0)
     query = "INSERT INTO bft_log (thread_id, timestamp) VALUES (?, ?)"
@@ -33,7 +33,7 @@ def bft_worker(thread_id: int):
         logger.critical(f"Fallo anómalo que viola invariantes C5-REAL: {e}")
 
 
-def run_falsification_siege(num_threads: int = 20):
+def run_falsification_siege(num_threads: int = 20) -> None:
     """
     Ejecuta un asedio termodinámico de N hilos sobre la DB SQLite
     para falsar la resiliencia del Exponential Backoff.

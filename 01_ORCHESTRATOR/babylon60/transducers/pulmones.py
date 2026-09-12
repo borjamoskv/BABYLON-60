@@ -14,8 +14,6 @@ import time
 from collections.abc import Awaitable, Callable
 from functools import wraps
 from pathlib import Path
-from typing import Any
-
 import os
 
 logger = logging.getLogger("BABYLON60.PULMONES")
@@ -24,7 +22,7 @@ logger = logging.getLogger("BABYLON60.PULMONES")
 class PulmonesQueue:
     """Cola SQLite ACID para persistir tareas fallidas (Zero-Trust Queue)."""
 
-    def __init__(self, db_path: Path | None = None):
+    def __init__(self, db_path: Path | None = None) -> None:
         if db_path is None:
             base_dir = Path(os.getenv("BABYLON_HOME", str(Path.home() / ".babylon60")))
             db_path = base_dir / "pulmones.db"
@@ -75,7 +73,13 @@ class PulmonesQueue:
             # Índice para O(1) fetch de la próxima tarea
             conn.execute("CREATE INDEX IF NOT EXISTS idx_next_retry ON fallback_queue(next_retry_at)")
 
-    def enqueue(self, func_name: str, args: tuple, kwargs: dict, delay: float = 60.0) -> None:
+    def enqueue(
+        self,
+        func_name: str,
+        args: tuple[object, ...],
+        kwargs: dict[str, object],
+        delay: float = 60.0,
+    ) -> None:
         if not self._available:
             logger.warning("🫁 [PULMONES] Queue unavailable, dropping payload for %s.", func_name)
             return
@@ -116,21 +120,21 @@ class PulmonesQueue:
 class CircuitBreaker:
     """Implementa estados Closed, Open, Half-Open para proteger el Event Loop."""
 
-    def __init__(self, failure_threshold: int = 3, recovery_timeout: float = 30.0):
+    def __init__(self, failure_threshold: int = 3, recovery_timeout: float = 30.0) -> None:
         self.failure_threshold = failure_threshold
         self.recovery_timeout = recovery_timeout
         self.failure_count = 0
         self.state = "CLOSED"  # CLOSED | OPEN | HALF_OPEN
         self.last_failure_time = 0.0
 
-    def record_failure(self):
+    def record_failure(self) -> None:
         self.failure_count += 1
         self.last_failure_time = time.monotonic()
         if self.failure_count >= self.failure_threshold:
             self.state = "OPEN"
             logger.error("🔌 [PULMONES] Circuit Breaker ABIERTO. Fallos: %s", self.failure_count)
 
-    def record_success(self):
+    def record_success(self) -> None:
         if self.state != "CLOSED":
             logger.info("🔌 [PULMONES] Circuit Breaker CERRADO. Conexión restaurada.")
         self.failure_count = 0
@@ -148,7 +152,9 @@ class CircuitBreaker:
         return True  # HALF_OPEN permite 1 intento
 
 
-def sovereign_circuit_breaker(timeout: float = 10.0, max_retries: int = 2, threshold: int = 3):
+def sovereign_circuit_breaker(
+    timeout: float = 10.0, max_retries: int = 2, threshold: int = 3
+) -> Callable[[Callable[..., Awaitable[object]]], Callable[..., Awaitable[dict[str, object]]]]:
     """
     Decorador Mágico:
     1. Limita el tiempo de ejecución (asyncio.wait_for).
@@ -169,9 +175,11 @@ def sovereign_circuit_breaker(timeout: float = 10.0, max_retries: int = 2, thres
             queue = None
         return queue
 
-    def decorator(func: Callable[..., Awaitable[Any]]):
+    def decorator(
+        func: Callable[..., Awaitable[object]],
+    ) -> Callable[..., Awaitable[dict[str, object]]]:
         @wraps(func)
-        async def markov_blanket(*args, **kwargs):
+        async def markov_blanket(*args: object, **kwargs: object) -> dict[str, object]:
             target_name = f"{func.__module__}.{func.__name__}"
             if not cb.can_execute():
                 logger.warning("🛡️ [PULMONES] Circuito Abierto. Bloqueando llamada a %s", func.__name__)
@@ -210,6 +218,8 @@ def sovereign_circuit_breaker(timeout: float = 10.0, max_retries: int = 2, thres
                         str(e),
                     )
                     raise e
+
+            return {"status": "queued", "reason": "max_retries_exceeded"}
 
         return markov_blanket
 

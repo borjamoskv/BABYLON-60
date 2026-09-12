@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..",
 from babylon60.verifiable_inference import verify_payload, generate_proof
 
 
-def test_verifiable_inference_valid():
+def test_verifiable_inference_valid() -> None:
     payload = b"Syntactic Hologram Hypothesis #42"
     nonce = 1337
     proof = generate_proof(payload, nonce)
@@ -18,7 +18,7 @@ def test_verifiable_inference_valid():
     assert verify_payload(payload, nonce, proof) is True
 
 
-def test_verifiable_inference_invalid():
+def test_verifiable_inference_invalid() -> None:
     payload = b"Syntactic Hologram Hypothesis #42"
     nonce = 1337
     invalid_proof = b"deadbeef_invalid_hash_proof_00000000000000000000000000000000"

@@ -1,12 +1,19 @@
 import torch
 
+import os
+from typing import IO, Callable
+
 # [BYPASS] PyTorch 2.6 weights_only security patch para Coqui TTS
-original_load = torch.load
+original_load: Callable[..., object] = torch.load
 
 
-def bypass_load(*args, **kwargs):
+def bypass_load(
+    f: str | os.PathLike[str] | IO[bytes],
+    *args: object,
+    **kwargs: object,
+) -> object:
     kwargs["weights_only"] = False
-    return original_load(*args, **kwargs)
+    return original_load(f, *args, **kwargs)
 
 
 torch.load = bypass_load

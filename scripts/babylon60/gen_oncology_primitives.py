@@ -62,7 +62,7 @@ def parse_primitives():
                 
     return primitives
 
-def export_json(primitives, json_path):
+def export_json(primitives, json_path) -> None:
     json_path.parent.mkdir(parents=True, exist_ok=True)
     with json_path.open('w', encoding='utf-8') as fh:
         json.dump({
@@ -73,7 +73,7 @@ def export_json(primitives, json_path):
         }, fh, indent=2, ensure_ascii=False)
     print(f"✅ Exportado JSON ({len(primitives)} primitivas) en: {json_path}")
 
-def export_lean4(primitives, lean_path):
+def export_lean4(primitives, lean_path) -> None:
     lean_path.parent.mkdir(parents=True, exist_ok=True)
     
     lean_code = """-- OncologyOntology.lean: Tipos Inductivos y Definición de las 300 Primitivas de Oncología
@@ -152,7 +152,7 @@ def totalPrimitives : Nat := 300
     lean_path.write_text(lean_code, encoding='utf-8')
     print(f"✅ Exportado Lean 4 (`OncologyOntology.lean`) en: {lean_path}")
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Generador y Exportador Ontológico de 300 Primitivas de Oncología")
     parser.add_argument("--json-out", type=Path, default=DEFAULT_JSON_OUT, help="Ruta de salida JSON")
     parser.add_argument("--export-lean4", action="store_true", help="Generar archivo Lean 4")

@@ -17,6 +17,7 @@ import re
 import sys
 import time
 from pathlib import Path
+from typing import Any, NotRequired, TypedDict
 
 MYTHOLOGICAL_TERMS: dict[str, str] = {
     r"Ineficiencia": "Ineficiencia",
@@ -42,6 +43,14 @@ AUDIT_EXTENSIONS = frozenset({".py", ".rs", ".md", ".b60", ".toml", ".yaml", ".y
 MAX_FILE_BYTES = 2 * 1024 * 1024  # 2 MiB guard — skip oversized files
 
 
+class AuditFileResult(TypedDict):
+    path: str
+    status: str
+    matches: int
+    reason: NotRequired[str]
+    error: NotRequired[str]
+
+
 def collect_targets(root: Path) -> list[Path]:
     """Walk directory tree, filtering by extension and skip-dirs."""
     targets: list[Path] = []
@@ -58,9 +67,9 @@ async def audit_file(
     semaphore: asyncio.Semaphore,
     dry_run: bool = False,
     logger: logging.Logger | None = None,
-) -> dict:
+) -> AuditFileResult:
     """Audit a single file for mythological term violations."""
-    result: dict = {"path": str(filepath), "status": "CLEAN", "matches": 0}
+    result: AuditFileResult = {"path": str(filepath), "status": "CLEAN", "matches": 0}
     async with semaphore:
         try:
             stat = filepath.stat()
@@ -185,7 +194,7 @@ async def run_swarm(args: argparse.Namespace) -> int:
     skipped = [r for r in results if r["status"] == "SKIPPED"]
     total_matches = sum(r["matches"] for r in results)
 
-    report = {
+    report: dict[str, Any] = {
         "total_files": len(targets),
         "modified": len(modified),
         "errors": len(errors),

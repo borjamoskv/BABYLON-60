@@ -5,9 +5,12 @@
 # [Causal-Determinist] BFT consensus ledger — Fachada Causal.
 # Redirige el flujo $\Omega = C \circ V \circ T \circ O$.
 # Delega la Verificación (V) a BFT_Validator y el Commit (C) a BFT_Committer.
+import sqlite3
 from typing import Dict, Optional
 from babylon60.bft.consensus_validator import BFT_Validator
-from babylon60.bft.consensus_committer import BFT_Committer, StateMutation
+from babylon60.bft.consensus_committer import BFT_Committer, StateMutation as StateMutation
+
+__all__ = ["BFT_Ledger", "StateMutation"]
 
 
 class BFT_Ledger:
@@ -16,7 +19,7 @@ class BFT_Ledger:
         self.committer = BFT_Committer(db_path)
 
     @property
-    def conn(self):
+    def conn(self) -> sqlite3.Connection:
         return self.committer.conn
 
     def invoke_subagent(self, mutation: StateMutation, f: int, swarm_signatures: Dict[str, str]) -> bool:

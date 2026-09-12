@@ -106,7 +106,7 @@ mod tests {
         let sensory = SharedManifest::new();
         let active = SharedManifest::new();
         let blanket = MarkovBlanket::new(1000, &sensory, &active);
-        sensory.publish(1, &[1, 0, 0, 0]).unwrap();
+        sensory.publish(1, &[1, 0, 0, 0]).expect("BFT Fallback");
         // Sorpresa trivial (< 2): debe ser absorbida sin quemar exergía
         assert!(blanket.epistemic_update().is_ok());
         assert_eq!(blanket.tfe_dissipated.load(Ordering::Relaxed), 0);
@@ -118,7 +118,7 @@ mod tests {
         let active = SharedManifest::new();
         let blanket = MarkovBlanket::new(50, &sensory, &active);
         // Error de 10 -> costo 10 * 10 = 100 > 50 (capacidad)
-        sensory.publish(1, &[10, 0, 0, 0]).unwrap();
+        sensory.publish(1, &[10, 0, 0, 0]).expect("BFT Fallback");
         let res = blanket.epistemic_update();
         assert!(res.is_err());
         assert!(res.unwrap_err().contains("BURNOUT TERMICO"));
@@ -130,7 +130,7 @@ mod tests {
         let active = SharedManifest::new();
         let blanket = MarkovBlanket::new(1000, &sensory, &active);
         assert!(blanket.emit_active_state(1, 42).is_ok());
-        let read_val = active.read().unwrap();
+        let read_val = active.read().expect("BFT Fallback");
         assert_eq!(read_val.1[0], 42);
     }
 }

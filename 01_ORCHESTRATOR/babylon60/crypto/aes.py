@@ -16,7 +16,7 @@ import json
 import logging
 import os
 import threading
-from typing import Any
+from typing import Mapping, cast
 
 from cryptography.exceptions import InvalidKey, InvalidTag
 from cryptography.hazmat.primitives import hashes
@@ -54,6 +54,7 @@ class CortexEncrypter:
             self.hkdf_salt = hkdf_salt
         # Cache of derived keys per tenant
         self._tenant_keys: dict[str, bytes] = {}
+        self._shredded_facts: set[str] = set()
 
     @property
     def is_active(self) -> bool:
@@ -131,21 +132,21 @@ class CortexEncrypter:
         except (ValueError, TypeError, binascii.Error) as e:
             raise ValueError(f"AES-GCM Decryption Failed (Data tampered?): {e}") from e
 
-    def encrypt_json(self, data: dict[str, Any] | None, tenant_id: str = "default") -> str | None:
+    def encrypt_json(
+        self, data: Mapping[str, object] | dict[str, object] | None, tenant_id: str = "default"
+    ) -> str | None:
         """Encrypts a JSON dictionary."""
         if not data:
             return None
         return self.encrypt_str(json.dumps(data), tenant_id=tenant_id)
 
-    def decrypt_json(self, encrypted_data: str | None, tenant_id: str = "default") -> dict[str, Any] | None:
+    def decrypt_json(self, encrypted_data: str | None, tenant_id: str = "default") -> dict[str, object] | None:
         """Decrypts back into a JSON dictionary."""
         plain = self.decrypt_str(encrypted_data, tenant_id=tenant_id)
         if not plain:
             return None
         try:
-            from typing import cast
-
-            return cast(dict[str, Any], json.loads(plain))
+            return cast(dict[str, object], json.loads(plain))
         except json.JSONDecodeError:
             logger.warning("decrypt_json: invalid JSON after decryption, returning empty dict")
             return {}

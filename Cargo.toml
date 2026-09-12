@@ -99,3 +99,19 @@ path = "src/babylon60.rs"
 [[bin]]
 name = "poc_epistemic_lease"
 path = "src/bin/poc_epistemic_lease.rs"
+
+[[bin]]
+name = "poc_bifurcation_4_structs"
+path = "src/bin/poc_bifurcation_4_structs.rs"
+
+[[bin]]
+name = "poc_bifurcation_5_lifetimes"
+path = "src/bin/poc_bifurcation_5_lifetimes.rs"
+
+[[bin]]
+name = "poc_bifurcation_6_parser"
+path = "src/bin/poc_bifurcation_6_parser.rs"
+
+[[bin]]
+name = "poc_bifurcation_8_baremetal"
+path = "src/bin/poc_bifurcation_8_baremetal.rs"

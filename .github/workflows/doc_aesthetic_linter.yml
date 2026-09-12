@@ -4,11 +4,11 @@ on:
   push:
     paths:
       - 'docs/**/*.md'
-      - 'scripts/lint_doc_aesthetics.py'
+      - 'scripts/c5_quality_gates/lint_doc_aesthetics.py'
   pull_request:
     paths:
       - 'docs/**/*.md'
-      - 'scripts/lint_doc_aesthetics.py'
+      - 'scripts/c5_quality_gates/lint_doc_aesthetics.py'
 
 jobs:
   audit-documentation-aesthetics:
@@ -26,4 +26,4 @@ jobs:
 
       - name: Execute C5-REAL Documentation Aesthetic Linter
         run: |
-          python3 scripts/lint_doc_aesthetics.py
+          python3 scripts/c5_quality_gates/lint_doc_aesthetics.py

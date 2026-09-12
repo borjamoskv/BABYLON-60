@@ -22,7 +22,7 @@ except ImportError:
     sys.exit(1)
 
 
-def build_dataset(raw_audio_dir: str, output_dir: str = "dataset_xtts"):
+def build_dataset(raw_audio_dir: str, output_dir: str = "dataset_xtts") -> None:
     raw_path = Path(raw_audio_dir).expanduser()
     out_path = Path(output_dir)
     wavs_path = out_path / "wavs"

@@ -87,7 +87,7 @@ def generate_reply(user_msg):
         print(f"[LLM ERROR] {e}")
         return None
 
-def send_to_whatsapp_group(text):
+def send_to_whatsapp_group(text) -> None:
     p = subprocess.Popen(["pbcopy"], stdin=subprocess.PIPE)
     p.communicate(text.encode("utf-8"))
     
@@ -103,7 +103,7 @@ def send_to_whatsapp_group(text):
     subprocess.run(["osascript", "-e", scpt])
     print("[C5-REAL SENT] Mensaje inyectado en WhatsApp")
 
-def main():
+def main() -> None:
     print("[DAEMON ACTIVADO] Moskv-1 vigilando BABYLON-60 | Executive Command...")
     last_row = query_chat_latest()
     last_pk = last_row[0] if last_row else 0

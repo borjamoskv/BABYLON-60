@@ -22,7 +22,7 @@ import signal
 import struct
 import sys
 from pathlib import Path
-from typing import Any, BinaryIO, Optional
+from typing import Any, BinaryIO, Optional, cast
 
 DEFAULT_MAX_PAYLOAD_BYTES = 1024 * 1024  # 1 MiB Chrome Native Messaging ceiling
 RUNNING = True
@@ -84,7 +84,10 @@ def read_message_frame(
             raise EOFError("Truncated binary payload stream")
 
         commitment = calculate_payload_commitment(raw_payload)
-        payload = json.loads(raw_payload.decode("utf-8"))
+        loaded = json.loads(raw_payload.decode("utf-8"))
+        if not isinstance(loaded, dict):
+            raise ValueError("Payload must be a JSON object")
+        payload: dict[str, Any] = loaded
         payload["_hash_commitment"] = commitment
         return payload
     except (struct.error, json.JSONDecodeError, ValueError, EOFError) as exc:

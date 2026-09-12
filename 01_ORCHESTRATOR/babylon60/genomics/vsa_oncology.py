@@ -35,7 +35,7 @@ class HyperVector:
 
     __slots__ = ("data",)
 
-    def __init__(self, data: Optional[List[int]] = None):
+    def __init__(self, data: Optional[List[int]] = None) -> None:
         if data is None:
             self.data = [1] * DIMENSION
         else:
@@ -45,7 +45,7 @@ class HyperVector:
     def from_seed(cls, seed_str: str) -> HyperVector:
         """Genera un vector hiperdimensional determinista e insesgado mediante Keccak SHAKE-256."""
         raw_bytes = hashlib.shake_256(seed_str.encode("utf-8")).digest((DIMENSION + 7) // 8)
-        vec = []
+        vec: list[int] = []
         for b in raw_bytes:
             for i in range(8):
                 if len(vec) < DIMENSION:
@@ -76,7 +76,7 @@ class HyperVector:
 class OncologyOntologyVSA:
     """Motor ontológico VSA para las 300 primitivas oncológicas."""
 
-    def __init__(self, json_path: Optional[Path] = None):
+    def __init__(self, json_path: Optional[Path] = None) -> None:
         if json_path is None:
             repo_root = Path(__file__).resolve().parent.parent.parent.parent
             json_path = repo_root / "data" / "oncology_300.json"

@@ -17,10 +17,21 @@ from __future__ import annotations
 
 import logging
 import struct
+from typing import TypedDict
 
-__all__ = ["compression_ratio", "dequantize_int8", "quantize_int8"]
+__all__ = ["CompressionRatioResult", "compression_ratio", "dequantize_int8", "quantize_int8"]
 
 logger = logging.getLogger("babylon60.embeddings.compression")
+
+
+class CompressionRatioResult(TypedDict):
+    dim: int
+    float32_bytes: int
+    json_approx_bytes: int
+    int8_bytes: int
+    ratio_vs_float32: float
+    ratio_vs_json: float
+
 
 try:
     import numpy as np
@@ -69,10 +80,11 @@ def dequantize_int8(data: bytes) -> list[float]:
 
     scale = struct.unpack("f", data[:4])[0]
     quantized = np.frombuffer(data[4:], dtype=np.int8)
-    return (quantized.astype(np.float32) * scale / 127.0).tolist()
+    reconstructed = quantized.astype(np.float32) * scale / 127.0
+    return [float(x) for x in reconstructed]
 
 
-def compression_ratio(dim: int = 384) -> dict:
+def compression_ratio(dim: int = 384) -> CompressionRatioResult:
     """Report compression statistics for a given embedding dimension.
 
     Returns:

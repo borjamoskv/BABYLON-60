@@ -4,7 +4,7 @@
 # ============================================================================
 
 
-def test_f60_fixed_point_exactness():
+def test_f60_fixed_point_exactness() -> None:
     """Verifica que la escala de representación Q32.32 F60 no acumule deriva."""
     SCALE = 1 << 32
     ten_seconds_fixed = 10 * SCALE
@@ -15,7 +15,7 @@ def test_f60_fixed_point_exactness():
     assert (ten_seconds_fixed + five_seconds_fixed) // SCALE == 15
 
 
-def test_f60_fractional_precision():
+def test_f60_fractional_precision() -> None:
     """Verifica la resolución sub-segundo en el dominio F60."""
     SCALE = 1 << 32
     half_second_fixed = SCALE // 2

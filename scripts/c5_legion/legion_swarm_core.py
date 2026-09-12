@@ -15,7 +15,7 @@ la divergencia entrópica.
 import asyncio
 import time
 import logging
-from typing import List, Dict, Any
+from typing import Any, TypedDict
 
 from agent_beeper import AgentPager
 
@@ -27,7 +27,18 @@ logging.basicConfig(
 )
 logger = logging.getLogger("SWARM-CORE")
 
-async def _tenant_execution_cycle(tenant_id: int, semaphore: asyncio.Semaphore, pager: AgentPager) -> Dict[str, Any]:
+
+class TenantResult(TypedDict):
+    tenant_id: int
+    status: str
+    exergy_consumed: float
+    manifest_integrity: bool
+    payload_received: str
+
+
+async def _tenant_execution_cycle(
+    tenant_id: int, semaphore: asyncio.Semaphore, pager: AgentPager[str]
+) -> TenantResult:
     """
     Representa el ciclo de vida de un único agente dentro del enjambre.
     El registro y la espera del Beeper ocurren de forma asíncrona fuera del semáforo.
@@ -68,10 +79,10 @@ async def run_legion_swarm(num_tenants: int = 10000, concurrency_limit: int = 50
     
     # 1. Instanciación del Semáforo de Concurrencia y el Pager
     semaphore = asyncio.Semaphore(concurrency_limit)
-    pager = AgentPager()
+    pager: AgentPager[str] = AgentPager()
     
     # 2. Generación del campo de onda (Tareas)
-    tasks: List[asyncio.Task] = [
+    tasks: list[asyncio.Task[TenantResult]] = [
         asyncio.create_task(_tenant_execution_cycle(i, semaphore, pager))
         for i in range(num_tenants)
     ]
@@ -87,7 +98,7 @@ async def run_legion_swarm(num_tenants: int = 10000, concurrency_limit: int = 50
     
     # 3. Colapso Cuántico (Barrier Event)
     # Todos los resultados convergen en este punto monótono (Teorema CALM)
-    results = await asyncio.gather(*tasks)
+    results: list[TenantResult] = await asyncio.gather(*tasks)
     
     total_time = time.perf_counter() - start_time
     

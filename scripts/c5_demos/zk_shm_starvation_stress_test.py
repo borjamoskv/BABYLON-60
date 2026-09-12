@@ -4,7 +4,7 @@ import hashlib
 
 ITERATIONS = 50000
 
-def simulate_syscall_overhead():
+def simulate_syscall_overhead() -> None:
     """Simula el costo termodinámico de un context switch del kernel (Syscall)."""
     for _ in range(200):
         pass
@@ -25,7 +25,7 @@ def simulate_shm_starvation(payload: bytes) -> bool:
         return False # Rechazo pasivo: se ignora el puntero
     return True
 
-def stress_test():
+def stress_test() -> None:
     print("🔥 C5-REAL: Iniciando Auditoría Termodinámica (ZK-SHM vs eBPF) 🔥")
     print(f"Iteraciones (Mensajes de Ataque): {ITERATIONS}\n")
 

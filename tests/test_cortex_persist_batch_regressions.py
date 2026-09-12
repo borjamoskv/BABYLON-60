@@ -13,7 +13,9 @@ Regresiones del audit independiente 2026-09-10:
 
 Estos tests fallan contra la versión previa al fix y pasan con ella.
 """
+
 import sqlite3
+from pathlib import Path
 
 import pytest
 
@@ -24,7 +26,7 @@ def _ev(tag: str, n: int = 1) -> CortexEvent:
     return CortexEvent(event_type="AGENT_ACTION", payload={"tag": tag, "n": n}, cortex_taint=f"taint:{tag}")
 
 
-def test_batch_mixed_committed_duplicate_preserves_chain(tmp_path):
+def test_batch_mixed_committed_duplicate_preserves_chain(tmp_path: Path) -> None:
     """B-1: [nuevo, duplicado-comprometido, nuevo] no debe romper la cadena."""
     ledger = CortexPersistLedger(tmp_path / "b1.db")
     ev_a = _ev("A")
@@ -37,9 +39,7 @@ def test_batch_mixed_committed_duplicate_preserves_chain(tmp_path):
 
     # La fila seq=3 debe encadenar con seq=2 (B), NO con seq=1 (A, el duplicado)
     conn = sqlite3.connect(tmp_path / "b1.db")
-    rows = conn.execute(
-        "SELECT seq, prev_hash, entry_hash FROM cortex_ledger ORDER BY seq"
-    ).fetchall()
+    rows = conn.execute("SELECT seq, prev_hash, entry_hash FROM cortex_ledger ORDER BY seq").fetchall()
     conn.close()
     by_seq = {seq: (ph, eh) for seq, ph, eh in rows}
     assert by_seq[3][0] == by_seq[2][1], "seq3.prev_hash debe ser seq2.entry_hash"
@@ -47,7 +47,7 @@ def test_batch_mixed_committed_duplicate_preserves_chain(tmp_path):
     assert ledger.verify_integrity() is True
 
 
-def test_batch_intra_batch_duplicate_no_crash(tmp_path):
+def test_batch_intra_batch_duplicate_no_crash(tmp_path: Path) -> None:
     """B-2: [A, B, A, C] en un solo lote -> DUPLICATE_IGNORED, sin IntegrityError."""
     ledger = CortexPersistLedger(tmp_path / "b2.db")
     ev_a = _ev("A")
@@ -69,7 +69,7 @@ def test_batch_intra_batch_duplicate_no_crash(tmp_path):
     assert count == 3  # solo A, B, C — el duplicado nunca se inserta
 
 
-def test_batch_full_replay_is_idempotent(tmp_path):
+def test_batch_full_replay_is_idempotent(tmp_path: Path) -> None:
     """Re-ejecutar el MISMO lote completo: todo DUPLICATE_IGNORED y cadena íntegra."""
     ledger = CortexPersistLedger(tmp_path / "replay.db")
     batch = [_ev("X"), _ev("Y"), _ev("Z")]
@@ -83,7 +83,7 @@ def test_batch_full_replay_is_idempotent(tmp_path):
     assert ledger.verify_integrity() is True
 
 
-def test_append_event_quickstart_api(tmp_path):
+def test_append_event_quickstart_api(tmp_path: Path) -> None:
     """Paridad con el quick-start del README: append_event + verify + merkle."""
     ledger = CortexPersistLedger(tmp_path / "qs.db")
     result = ledger.append_event(
@@ -99,7 +99,7 @@ def test_append_event_quickstart_api(tmp_path):
     assert len(ledger.get_merkle_root()) == 64
 
 
-def test_batch_empty_and_taint_invariant(tmp_path):
+def test_batch_empty_and_taint_invariant(tmp_path: Path) -> None:
     """Lote vacío -> []; taint vacío dentro de lote -> ValueError (INV_BFT_03)."""
     ledger = CortexPersistLedger(tmp_path / "edge.db")
     assert ledger.append_batch([]) == []

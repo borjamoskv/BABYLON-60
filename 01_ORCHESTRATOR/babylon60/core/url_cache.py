@@ -17,6 +17,7 @@ from __future__ import annotations
 import hashlib
 import time
 from typing import Optional
+import aiosqlite
 from babylon60.database.core import connect_sync, connect
 
 DB_NAME = "browser_url_cache.db"
@@ -40,7 +41,7 @@ def hash_url(url: str) -> str:
 class URLCacheSync:
     """Synchronous URL Cache interface for CLI tools and scripts."""
 
-    def __init__(self, db_name: str = DB_NAME):
+    def __init__(self, db_name: str = DB_NAME) -> None:
         self.conn = connect_sync(db_name, synchronous="NORMAL")
         self.conn.execute(_INIT_SQL)
 
@@ -57,7 +58,7 @@ class URLCacheSync:
         if time.time() - created_at > max_age_seconds:
             # Expired cache entry
             return None
-        return payload
+        return str(payload)
 
     def put(self, url: str, payload: str, causal_taint: str) -> None:
         """Store payload with causal_taint audit metadata (INV_BFT_03)."""
@@ -78,10 +79,10 @@ class URLCacheSync:
 class URLCacheAsync:
     """Async URL Cache interface for event loops."""
 
-    def __init__(self, db_name: str = DB_NAME):
+    def __init__(self, db_name: str = DB_NAME) -> None:
         self.db_name = db_name
 
-    async def _init_db(self, conn):
+    async def _init_db(self, conn: "aiosqlite.Connection") -> None:
         await conn.execute(_INIT_SQL)
 
     async def get(self, url: str, max_age_seconds: int = 86400) -> Optional[str]:
@@ -98,7 +99,7 @@ class URLCacheAsync:
                 payload, created_at = row
                 if time.time() - created_at > max_age_seconds:
                     return None
-                return payload
+                return str(payload)
         finally:
             await conn.close()
 

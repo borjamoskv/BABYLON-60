@@ -568,7 +568,7 @@ def evaluate_specialist(agent_meta: Dict[str, Any]) -> SpecialistResult:
 # RUNNER PRINCIPAL CONCURRENTE (233 ESPECIALISTAS)
 # ============================================================================
 
-def main():
+def main() -> None:
     if RICH_AVAILABLE:
         console = Console()
         console.print(Panel.fit(

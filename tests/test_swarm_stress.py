@@ -12,7 +12,15 @@ import os
 # Añadir el path para importar el orquestador
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from typing import TypedDict
 from babylon60.kernel.swarm_orchestrator import AgentPager
+
+
+class StressResult(TypedDict):
+    agent_id: int
+    delta_x: int
+    status: str
+
 
 # Configuración del Stress Test
 N_AGENTS = 500  # Enjambre Masivo
@@ -22,10 +30,10 @@ pager = AgentPager()
 semaphore = asyncio.Semaphore(MAX_CONCURRENCY)
 
 
-async def stress_agent(agent_id: int, tenant_id: str, inject_fault: bool = False):
+async def stress_agent(agent_id: int, tenant_id: str, inject_fault: bool = False) -> StressResult:
     """Subagente simulado en modo letargo para el test de estrés."""
     # Fase 1: Letargo (0% CPU)
-    _payload = await pager.wait_for_beep()
+    await pager.wait_for_beep()
 
     # Fase 2: Ejecución Acotada
     async with semaphore:
@@ -39,7 +47,7 @@ async def stress_agent(agent_id: int, tenant_id: str, inject_fault: bool = False
         return {"agent_id": agent_id, "delta_x": 0, "status": "SUCCESS"}
 
 
-async def run_stress_test():
+async def run_stress_test() -> None:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
     tenant_id = "babylon-60-stress-test"
 

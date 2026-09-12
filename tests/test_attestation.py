@@ -5,7 +5,7 @@ import json
 
 
 @pytest.mark.asyncio
-async def test_attestation():
+async def test_attestation() -> None:
 
     with open("scripts/c5_isomorphisms/cancer_isomorphism_pipeline.py", "r") as f:
         payload_code = f.read()

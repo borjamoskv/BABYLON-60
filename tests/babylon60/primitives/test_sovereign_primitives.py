@@ -15,7 +15,7 @@ from babylon60.primitives import (
 )
 
 
-def test_cbor_bft_canonical_serialization():
+def test_cbor_bft_canonical_serialization() -> None:
     # Test primitive types
     data = {
         "b": 2,
@@ -43,7 +43,7 @@ def test_cbor_bft_canonical_serialization():
 
 
 @pytest.mark.asyncio
-async def test_async_db_sovereign_wrapper():
+async def test_async_db_sovereign_wrapper() -> None:
     with tempfile.NamedTemporaryFile(suffix=".db", delete=False) as tmp:
         db_path = tmp.name
 
@@ -56,13 +56,13 @@ async def test_async_db_sovereign_wrapper():
             cursor = await db.execute("SELECT tx FROM ledger WHERE id = 1")
             row = await cursor.fetchone()
             assert row is not None
-            assert row[0] == "genesis" or row["tx"] == "genesis"
+            assert row[0] == "genesis"
     finally:
         if os.path.exists(db_path):
             os.remove(db_path)
 
 
-def test_yaml_parser_sovereign():
+def test_yaml_parser_sovereign() -> None:
     yaml_text = """
     name: BABYLON-60
     version: 4.0
@@ -84,7 +84,7 @@ def test_yaml_parser_sovereign():
     assert "active: true" in dumped
 
 
-def test_matrix_vector_sovereign():
+def test_matrix_vector_sovereign() -> None:
     v1 = Vector([1.0, 2.0, 3.0])
     v2 = Vector([4.0, 5.0, 6.0])
     assert v1.dot(v2) == 1.0 * 4.0 + 2.0 * 5.0 + 3.0 * 6.0

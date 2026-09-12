@@ -52,7 +52,7 @@ class BPETokenizer:
                 break
 
             # Find most frequent pair
-            best_pair = max(stats, key=stats.get)  # type: ignore
+            best_pair = max(stats, key=stats.__getitem__)
             new_token_str = best_pair[0] + best_pair[1]
 
             # Register merge

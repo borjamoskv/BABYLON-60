@@ -7,14 +7,15 @@ import threading
 import random
 
 STATE_FILE = ".cortex/topology_state.json"
+_STOP_EVENT = threading.Event()
 
-def simulate_dynamic_routing():
+def simulate_dynamic_routing() -> None:
     """Simulates the Swarm Router dynamically changing the topology."""
     models = [
         {"active_model": "Gemini 3.8 Flash", "regime": "Low", "thermodynamic_state": "tau_fast", "color": "BLUE"},
         {"active_model": "Gemini 3.1 Pro", "regime": "High", "thermodynamic_state": "tau_slow", "color": "RED"}
     ]
-    while True:
+    while not _STOP_EVENT.is_set():
         m = random.choice(models)
         state = {
             "topology": {
@@ -31,9 +32,9 @@ def simulate_dynamic_routing():
             json.dump(state, f)
         time.sleep(2.5)
 
-def main(stdscr):
+def main(stdscr: curses.window) -> None:
     curses.curs_set(0)
-    stdscr.nodelay(1)
+    stdscr.nodelay(True)
     
     curses.start_color()
     curses.init_pair(1, curses.COLOR_CYAN, curses.COLOR_BLACK)
@@ -44,7 +45,7 @@ def main(stdscr):
     t = threading.Thread(target=simulate_dynamic_routing, daemon=True)
     t.start()
 
-    while True:
+    while not _STOP_EVENT.is_set():
         stdscr.clear()
         stdscr.addstr(1, 2, "=== CORTEX-TOP: MONITOR DE EXERGÍA (TUI) ===", curses.A_BOLD)
         

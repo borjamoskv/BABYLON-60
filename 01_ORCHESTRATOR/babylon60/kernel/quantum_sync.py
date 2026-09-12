@@ -16,7 +16,7 @@ from typing import Any, Dict
 class QuantumSyncEngine:
     """Atomic VCS state sync engine supporting Jujutsu (jj) and Git DAGs."""
 
-    def __init__(self, repo_root: str | None = None):
+    def __init__(self, repo_root: str | None = None) -> None:
         self.repo_root = repo_root or os.getcwd()
 
     def check_vcs_status(self) -> Dict[str, Any]:
@@ -43,13 +43,13 @@ class QuantumSyncEngine:
     def sync(self, track_bookmark: str = "main@origin") -> Dict[str, Any]:
         """Execute atomic sync operation using jj or git."""
         vcs = self.check_vcs_status()
-        results = {"status": vcs, "actions": []}
+        actions: list[Dict[str, Any]] = []
 
         if vcs["is_jj"] and vcs["jj_installed"]:
             # Perform Jujutsu sync
             cmd = ["jj", "git", "fetch"]
             res = subprocess.run(cmd, cwd=self.repo_root, capture_output=True, text=True)
-            results["actions"].append(
+            actions.append(
                 {
                     "vcs": "jj",
                     "command": "jj git fetch",
@@ -61,7 +61,7 @@ class QuantumSyncEngine:
             # Track bookmark if requested
             cmd_track = ["jj", "bookmark", "track", track_bookmark]
             res_track = subprocess.run(cmd_track, cwd=self.repo_root, capture_output=True, text=True)
-            results["actions"].append(
+            actions.append(
                 {
                     "vcs": "jj",
                     "command": f"jj bookmark track {track_bookmark}",
@@ -73,7 +73,7 @@ class QuantumSyncEngine:
             # Fallback to standard git fetch
             cmd = ["git", "fetch", "--all"]
             res = subprocess.run(cmd, cwd=self.repo_root, capture_output=True, text=True)
-            results["actions"].append(
+            actions.append(
                 {
                     "vcs": "git",
                     "command": "git fetch --all",
@@ -82,12 +82,12 @@ class QuantumSyncEngine:
                 }
             )
         else:
-            results["actions"].append({"error": "No valid VCS workspace or executable found."})
+            actions.append({"error": "No valid VCS workspace or executable found."})
 
-        return results
+        return {"status": vcs, "actions": actions}
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="BABYLON-60 Native Quantum Sync Engine")
     parser.add_argument("--status", action="store_true", help="Audit local VCS status")
     parser.add_argument("--sync", action="store_true", help="Execute atomic fetch and bookmark sync")

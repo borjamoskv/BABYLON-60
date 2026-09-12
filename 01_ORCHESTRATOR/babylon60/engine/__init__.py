@@ -9,12 +9,12 @@ from typing import Any, Dict, List, Optional
 
 
 class CortexEngine:
-    def __init__(self, capacity: int = 10000):
+    def __init__(self, capacity: int = 10000) -> None:
         self.capacity = capacity
         self._store: Dict[str, Dict[str, Any]] = {}
         self._keys: List[str] = []
 
-    def store_sync(self, key: Optional[str] = None, payload: Any = None, **kwargs) -> str:
+    def store_sync(self, key: Optional[str] = None, payload: Any = None, **kwargs: Any) -> str:
         """
         Stores an item synchronously with a deterministic SHA-256 digest key.
         """
@@ -33,7 +33,7 @@ class CortexEngine:
         self._keys.append(record_key)
         return record_key
 
-    def query(self, pattern: Optional[str] = None, limit: int = 50, *args, **kwargs) -> List[Dict[str, Any]]:
+    def query(self, pattern: Optional[str] = None, limit: int = 50, *args: Any, **kwargs: Any) -> List[Dict[str, Any]]:
         """
         Queries stored epistemic records matching pattern or returns recent entries.
         """

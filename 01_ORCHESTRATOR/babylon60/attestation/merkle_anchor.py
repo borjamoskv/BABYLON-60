@@ -6,11 +6,15 @@ and external P2P notary checkpoints with network outage Grace Period protection.
 """
 
 import hashlib
+import logging
 import os
+from pathlib import Path
 import platform
 import subprocess
 import time
-from typing import Dict, Optional
+from typing import Dict, Optional, Tuple
+
+logger = logging.getLogger("babylon60.attestation.merkle_anchor")
 
 
 class MerkleCausalAnchor:
@@ -24,10 +28,48 @@ class MerkleCausalAnchor:
         self,
         tpm_pcr_index: int = 10,
         grace_period_seconds: int = 604800,  # 7-day grace period for network outages
-    ):
+    ) -> None:
         self.pcr_index = tpm_pcr_index
         self.grace_period = grace_period_seconds
         self._cached_hardware_id: Optional[Dict[str, str]] = None
+
+    @staticmethod
+    def _extract_darwin_uuid() -> Optional[str]:
+        try:
+            out = subprocess.check_output(
+                ["ioreg", "-rd1", "-c", "IOPlatformExpertDevice"],
+                stderr=subprocess.DEVNULL,
+                timeout=2,
+            ).decode("utf-8")
+        except (subprocess.SubprocessError, OSError) as exc:
+            logger.debug("Failed to extract Darwin UUID: %s", exc)
+            return None
+
+        for line in out.splitlines():
+            if "IOPlatformUUID" not in line:
+                continue
+            parts = line.split("=")
+            if len(parts) >= 2:
+                return parts[1].strip().strip('"')
+        return None
+
+    @staticmethod
+    def _extract_linux_uuid() -> Tuple[Optional[str], Optional[str]]:
+        dmi_path = Path("/sys/class/dmi/id/product_uuid")
+        if dmi_path.exists():
+            try:
+                return dmi_path.read_text().strip(), "LINUX_DMI_HARDWARE_BOUND"
+            except OSError as exc:
+                logger.debug("Failed to read Linux product_uuid: %s", exc)
+
+        mid_path = Path("/etc/machine-id")
+        if mid_path.exists():
+            try:
+                return mid_path.read_text().strip(), "LINUX_MACHINE_ID_BOUND"
+            except OSError as exc:
+                logger.debug("Failed to read Linux machine-id: %s", exc)
+
+        return None, None
 
     def get_hardware_identity(self) -> Dict[str, str]:
         """
@@ -45,31 +87,17 @@ class MerkleCausalAnchor:
             "enclave_type": "GENERIC_HOST",
         }
 
-        try:
-            if platform.system() == "Darwin":
-                out = subprocess.check_output(
-                    ["ioreg", "-rd1", "-c", "IOPlatformExpertDevice"],
-                    stderr=subprocess.DEVNULL,
-                    timeout=2,
-                ).decode("utf-8")
-                for line in out.splitlines():
-                    if "IOPlatformUUID" in line:
-                        parts = line.split("=")
-                        if len(parts) >= 2:
-                            hw_info["uuid"] = parts[1].strip().strip('"')
-                            hw_info["enclave_type"] = "APPLE_SILICON_SEP_BOUND"
-                            break
-            elif platform.system() == "Linux":
-                if os.path.exists("/sys/class/dmi/id/product_uuid"):
-                    with open("/sys/class/dmi/id/product_uuid", "r") as f:
-                        hw_info["uuid"] = f.read().strip()
-                        hw_info["enclave_type"] = "LINUX_DMI_HARDWARE_BOUND"
-                elif os.path.exists("/etc/machine-id"):
-                    with open("/etc/machine-id", "r") as f:
-                        hw_info["uuid"] = f.read().strip()
-                        hw_info["enclave_type"] = "LINUX_MACHINE_ID_BOUND"
-        except Exception:
-            pass
+        sys_name = platform.system()
+        if sys_name == "Darwin":
+            uuid = self._extract_darwin_uuid()
+            if uuid:
+                hw_info["uuid"] = uuid
+                hw_info["enclave_type"] = "APPLE_SILICON_SEP_BOUND"
+        elif sys_name == "Linux":
+            uuid, enclave = self._extract_linux_uuid()
+            if uuid and enclave:
+                hw_info["uuid"] = uuid
+                hw_info["enclave_type"] = enclave
 
         self._cached_hardware_id = hw_info
         return hw_info

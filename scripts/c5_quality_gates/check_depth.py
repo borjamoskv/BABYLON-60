@@ -8,11 +8,11 @@ import os
 
 
 class DepthVisitor(ast.NodeVisitor):
-    def __init__(self):
+    def __init__(self) -> None:
         self.max_depth = 0
         self.current_depth = 0
 
-    def visit(self, node):
+    def visit(self, node) -> None:
         if isinstance(node, (ast.If, ast.For, ast.While, ast.Try, ast.With, ast.FunctionDef, ast.ClassDef)):
             self.current_depth += 1
             if self.current_depth > self.max_depth:
@@ -23,7 +23,7 @@ class DepthVisitor(ast.NodeVisitor):
             super().generic_visit(node)
 
 
-def check_file(path):
+def check_file(path) -> None:
     with open(path, "r", encoding="utf-8") as f:
         try:
             tree = ast.parse(f.read(), filename=path)

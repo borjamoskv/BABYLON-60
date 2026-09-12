@@ -17,6 +17,7 @@ import json
 import time
 import re
 from pathlib import Path
+from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 DB_PATH = REPO_ROOT / "data" / "cortex_memory.db"
@@ -60,7 +61,7 @@ def compute_sha256(data: str) -> str:
     return hashlib.sha256(data.encode("utf-8")).hexdigest()
 
 
-def _process_transcript_step(step: dict) -> tuple[int, int, int, list[str], int]:
+def _process_transcript_step(step: dict[str, Any]) -> tuple[int, int, int, list[str], int]:
     tool_errs = 1 if step.get("status") == "ERROR" else 0
     struct_toks = 0
     narr_toks = 0

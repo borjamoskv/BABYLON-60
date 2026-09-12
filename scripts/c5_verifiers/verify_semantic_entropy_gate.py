@@ -97,7 +97,7 @@ def neuro_symbolic_gate(prompt_id: str, samples: List[str], max_entropy: float =
 # 3. TEST DE ESTRÉS EMPÍRICO (100 Iteraciones - Invariante PoC)
 # ----------------------------------------------------------------------------
 
-def run_stress_test():
+def run_stress_test() -> None:
     print("=== INICIANDO AUDITORÍA NEURO-SIMBÓLICA: SEMANTIC ENTROPY GATE ===")
     print("Métrica: Cota de Entropía Semántica (K=5). Límite de Confabulación: H(X) <= 1.5\n")
     

@@ -19,7 +19,7 @@ import os
 from enum import Enum
 
 from babylon60.crypto.hash_registry import cortex_hash, cortex_hmac, get_active_algorithm
-from babylon60.utils.base60 import bytes_to_base60
+from babylon60.primitives.base60 import bytes_to_base60
 
 
 class SignatureAlgorithm(Enum):
@@ -52,7 +52,7 @@ class KMSProvider(abc.ABC):
 class AWSKMSProvider(KMSProvider):
     """AWS KMS Implementation."""
 
-    def __init__(self, key_id: str):
+    def __init__(self, key_id: str) -> None:
         self.key_id = key_id
 
     def encrypt(self, plaintext: bytes) -> bytes:
@@ -65,7 +65,7 @@ class AWSKMSProvider(KMSProvider):
 class VaultKMSProvider(KMSProvider):
     """Hashicorp Vault Transit Secrets Engine Implementation."""
 
-    def __init__(self, vault_url: str, token: str, key_name: str):
+    def __init__(self, vault_url: str, token: str, key_name: str) -> None:
         self.vault_url = vault_url
         self.token = token
         self.key_name = key_name

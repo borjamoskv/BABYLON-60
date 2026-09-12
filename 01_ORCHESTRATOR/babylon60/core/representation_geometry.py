@@ -5,6 +5,7 @@
 # ============================================================================
 # Multi-Scale Latent Geometry: RankMe, IsoScore, ZCA-Whitening & m-KNN
 
+from typing import cast
 import numpy as np
 
 
@@ -118,7 +119,7 @@ def compute_zca_whitening(X: np.ndarray, eps: float = 1e-5) -> np.ndarray:
 
     # ZCA transform matrix: W = V * diag(1 / sqrt(lambda)) * V^T
     zca_matrix = eigvecs @ np.diag(inv_sqrt_eigvals) @ eigvecs.T
-    return X_c @ zca_matrix
+    return cast(np.ndarray, X_c @ zca_matrix)
 
 
 def compute_m_knn_overlap(X: np.ndarray, Y: np.ndarray, k: int = 10) -> float:

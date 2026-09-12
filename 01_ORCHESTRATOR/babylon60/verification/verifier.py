@@ -18,7 +18,7 @@ class SovereignVerifier:
     Formal verification engine for C5-REAL state transitions and proof IRs.
     """
 
-    def __init__(self, exergy_threshold: float = 23.0):
+    def __init__(self, exergy_threshold: float = 23.0) -> None:
         self.exergy_threshold = exergy_threshold
 
     def verify_payload(self, payload: Dict[str, Any]) -> bool:

@@ -31,7 +31,7 @@ def verify_exergy() -> bool:
         print("  🟢 Exergy Score verified.")
     else:
         print("  🔴 Exergy Score below threshold! Aborting push.", file=sys.stderr)
-    return ok
+    return True if ok else False
 
 
 def verify_invariants() -> bool:

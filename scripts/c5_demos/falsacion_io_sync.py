@@ -30,7 +30,7 @@ os.remove(db_path)
 
 # 2. Ruta de Alta Exergía (INV_C5_SHM): Memoria Compartida Lock-Free / Ring Buffer
 # (Simulado en Python mediante una estructura en memoria contigua o Deque de alto rendimiento)
-ring_buffer = deque(maxlen=iterations)
+ring_buffer: deque[str] = deque(maxlen=iterations)
 
 start_mem = time.time()
 for i in range(iterations):

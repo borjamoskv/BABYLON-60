@@ -165,7 +165,7 @@ if mcp_app:
         return json.dumps({"code": code, "verdict": verdict, "scitt_receipt": receipt}, indent=2)
 
 
-def main():
+def main() -> None:
     """Main entrypoint for running Gemini Labs Nexus server in stdio mode."""
     if mcp_app:
         mcp_app.run(transport="stdio")

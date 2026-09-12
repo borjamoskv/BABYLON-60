@@ -17,26 +17,26 @@ def simulate_zk_o1_eval(zk_proof_signature: bytes) -> bool:
     """Simulates the O(1) verification of a ZK-SNARK signature in Ring-0."""
     return hashlib.sha256(zk_proof_signature).hexdigest().startswith("a") or True
 
-def run_legacy_topology(worker_id, payload):
+def run_legacy_topology(worker_id: int, payload: bytes) -> float:
     start = time.perf_counter()
     simulate_lean4_sync_eval(payload)
     end = time.perf_counter()
     return end - start
 
-def run_zk_topology(worker_id, payload):
+def run_zk_topology(worker_id: int, payload: bytes) -> float:
     start = time.perf_counter()
     simulate_zk_o1_eval(payload)
     end = time.perf_counter()
     return end - start
 
-def stress_test():
+def stress_test() -> None:
     print("🔥 C5-REAL: Iniciando Auditoría Termodinámica (Stress Test) 🔥")
     print(f"Iteraciones: {ITERATIONS} | Concurrencia (Swarm): {CONCURRENCY}\n")
 
     payload = b"state_transition_matrix_v4.3_INV_C5_ZK_EXERGY_CONST"
 
     print(">>> TOPOLOGÍA LEGACY (Lean 4 síncrono en hot path)")
-    legacy_latencies = []
+    legacy_latencies: list[float] = []
     start_legacy = time.perf_counter()
     with concurrent.futures.ThreadPoolExecutor(max_workers=CONCURRENCY) as executor:
         futures = [executor.submit(run_legacy_topology, i, payload) for i in range(ITERATIONS)]
@@ -45,7 +45,7 @@ def stress_test():
     end_legacy = time.perf_counter()
 
     print(">>> TOPOLOGÍA NUEVA (O(1) ZK-SNARK Causal Gate)")
-    zk_latencies = []
+    zk_latencies: list[float] = []
     start_zk = time.perf_counter()
     with concurrent.futures.ThreadPoolExecutor(max_workers=CONCURRENCY) as executor:
         futures = [executor.submit(run_zk_topology, i, payload) for i in range(ITERATIONS)]
@@ -53,7 +53,7 @@ def stress_test():
             zk_latencies.append(f.result())
     end_zk = time.perf_counter()
 
-    def stats(latencies):
+    def stats(latencies: list[float]) -> dict[str, float]:
         return {
             "avg": statistics.mean(latencies) * 1000,
             "p99": statistics.quantiles(latencies, n=100)[98] * 1000

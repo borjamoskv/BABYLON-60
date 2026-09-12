@@ -13,7 +13,7 @@ import json
 import logging
 import urllib.error
 import urllib.request
-from typing import Any
+from typing import TypedDict
 
 logger = logging.getLogger("babylon60.crypto.rekor")
 
@@ -21,13 +21,19 @@ logger = logging.getLogger("babylon60.crypto.rekor")
 REKOR_URL = "https://rekor.sigstore.dev"
 
 
+class RekorAnchorResult(TypedDict):
+    uuid: str
+    logIndex: int | None
+    integratedTime: int | None
+
+
 class RekorClient:
     """Client for anchoring ledger hashes in Sigstore Rekor."""
 
-    def __init__(self, rekor_url: str = REKOR_URL):
+    def __init__(self, rekor_url: str = REKOR_URL) -> None:
         self.rekor_url = rekor_url
 
-    def anchor_payload(self, payload_hash: str, signature_b64: str, public_key_pem: str) -> dict[str, Any] | None:
+    def anchor_payload(self, payload_hash: str, signature_b64: str, public_key_pem: str) -> RekorAnchorResult | None:
         """
         Submits a hashed record (hashedrekord) to Rekor to prove existence at a point in time.
 
@@ -65,19 +71,22 @@ class RekorClient:
                     response_body = response.read().decode("utf-8")
                     resp_json = json.loads(response_body)
                     # Rekor returns a dict where the key is the entry UUID
-                    if resp_json:
-                        uuid = list(resp_json.keys())[0]
+                    if resp_json and isinstance(resp_json, dict):
+                        uuid = str(list(resp_json.keys())[0])
                         entry = resp_json[uuid]
+                        log_index = entry.get("logIndex") if isinstance(entry, dict) else None
+                        integrated_time = entry.get("integratedTime") if isinstance(entry, dict) else None
                         logger.info(
                             "Successfully anchored to Rekor. UUID: %s, LogIndex: %s",
                             uuid,
-                            entry.get("logIndex"),
+                            log_index,
                         )
-                        return {
+                        result: RekorAnchorResult = {
                             "uuid": uuid,
-                            "logIndex": entry.get("logIndex"),
-                            "integratedTime": entry.get("integratedTime"),
+                            "logIndex": int(log_index) if log_index is not None else None,
+                            "integratedTime": int(integrated_time) if integrated_time is not None else None,
                         }
+                        return result
         except urllib.error.HTTPError as e:
             logger.error("HTTPError anchoring to Rekor: %s - %s", e.code, e.read().decode("utf-8"))
         except Exception as e:  # noqa: BLE001

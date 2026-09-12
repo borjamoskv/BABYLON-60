@@ -1,7 +1,7 @@
 import os
 
 
-def trigger_aggressive_alert():
+def trigger_aggressive_alert() -> None:
     # 1. Alerta de Voz Inmediata (Asíncrona)
     os.system("say 'Critical failure detected in Babylon 60 core. Epistemic Halt activated.' &")
 

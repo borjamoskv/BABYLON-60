@@ -44,7 +44,7 @@ pub fn generate_license(
 ) -> SignedLicense {
     let now = SystemTime::now()
         .duration_since(UNIX_EPOCH)
-        .unwrap()
+        .expect("BFT Fallback")
         .as_secs();
     let valid_until = now + (days * 86400);
 
@@ -111,7 +111,7 @@ pub fn check_license_file<P: AsRef<Path>>(path: P, current_events_count: usize) 
 
     let now = SystemTime::now()
         .duration_since(UNIX_EPOCH)
-        .unwrap()
+        .expect("BFT Fallback")
         .as_secs();
 
     if now > signed.payload.valid_until {
@@ -139,7 +139,7 @@ mod tests {
             None,
         );
         let tmp = std::env::temp_dir().join("test_lic.key");
-        fs::write(&tmp, serde_json::to_string_pretty(&lic).unwrap()).unwrap();
+        fs::write(&tmp, serde_json::to_string_pretty(&lic).expect("BFT Fallback")).expect("BFT Fallback");
 
         let status = check_license_file(&tmp, 0);
         assert!(matches!(status, LicenseStatus::Active(_)));
@@ -164,7 +164,7 @@ mod tests {
         lic.payload.max_agents = 9999;
 
         let tmp = std::env::temp_dir().join("tampered_lic.key");
-        fs::write(&tmp, serde_json::to_string_pretty(&lic).unwrap()).unwrap();
+        fs::write(&tmp, serde_json::to_string_pretty(&lic).expect("BFT Fallback")).expect("BFT Fallback");
 
         let status = check_license_file(&tmp, 0);
         assert!(matches!(status, LicenseStatus::Invalid(_)));

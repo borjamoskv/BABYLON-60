@@ -46,7 +46,7 @@ def json_to_graph(json_data: Any) -> Tuple[List[str], List[Tuple[str, str]]]:
     nodes: Set[str] = set()
     edges: Set[Tuple[str, str]] = set()
 
-    def traverse(obj: Any, parent_id: str = "ROOT"):
+    def traverse(obj: Any, parent_id: str = "ROOT") -> None:
         nodes.add(parent_id)
 
         if isinstance(obj, dict):

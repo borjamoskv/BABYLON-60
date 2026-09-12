@@ -4,7 +4,7 @@ from babylon60.primitives.tonnetz_monitor import (
 )
 
 
-def test_ax_tz_1_homeostatic_triadic_compliance():
+def test_ax_tz_1_homeostatic_triadic_compliance() -> None:
     """Verify AX-TZ-1: Zero anergy produces pure C major triad with 0 cents detuning."""
     trace = [1.0, 0.0, 0.0]
     entropy = compute_shannon_entropy(trace)
@@ -19,7 +19,7 @@ def test_ax_tz_1_homeostatic_triadic_compliance():
     assert telemetry.eu_ai_act_status == "OVERSIGHT_ACTIVE_STABLE"
 
 
-def test_ax_tz_2_dissonance_alert_trigger():
+def test_ax_tz_2_dissonance_alert_trigger() -> None:
     """Verify AX-TZ-2: High entropy and exergy trigger microtonal detuning and alert status."""
     trace = [0.25, 0.25, 0.25, 0.25]
     entropy = compute_shannon_entropy(trace)  # 2.0 bits

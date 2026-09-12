@@ -8,7 +8,7 @@ from babylon60.compliance_exporter import EUAIActComplianceExporter
 from babylon60.attestation import MerkleCausalAnchor
 
 
-def test_eu_ai_act_compliance_exporter_locales():
+def test_eu_ai_act_compliance_exporter_locales() -> None:
     import pytest
 
     exporter_fail = EUAIActComplianceExporter(artifact_bundle_path="/tmp/non_existent_bundle_12345")
@@ -56,7 +56,7 @@ def test_eu_ai_act_compliance_exporter_locales():
                 assert len(content) > 100
 
 
-def test_merkle_causal_anchor_tpm_quote():
+def test_merkle_causal_anchor_tpm_quote() -> None:
     anchor = MerkleCausalAnchor(tpm_pcr_index=10)
     root_hash = "a3f8c1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0"
     quote = anchor.generate_hardware_pcr_quote(root_hash)
@@ -66,7 +66,7 @@ def test_merkle_causal_anchor_tpm_quote():
     assert len(quote["tpm_quote_signature"]) == 64
 
 
-def test_merkle_causal_anchor_checkpoint():
+def test_merkle_causal_anchor_checkpoint() -> None:
     anchor = MerkleCausalAnchor()
     root_hash = "a3f8c1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0"
     chk = anchor.generate_notary_checkpoint(root_hash, "ethereum_l2_sepolia")

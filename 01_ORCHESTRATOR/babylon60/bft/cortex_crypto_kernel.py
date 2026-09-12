@@ -1,18 +1,49 @@
 import hashlib
 import json
 import uuid
-from typing import List, Any, Tuple, Dict
+from typing import Dict, List, Mapping, Tuple, TypedDict
 
 NAMESPACE_CORTEX = uuid.UUID("a291bb18-79ad-4fc7-94e6-e6060ffd51f1")
 ZERO_HASH_256 = "0" * 64
 
-def _canonical_json(data: Any) -> str:
+
+class MerkleProofStep(TypedDict):
+    sibling: str
+    position: str
+    level: int
+
+
+class MerkleProof(TypedDict):
+    target_index: int
+    leaf_hash: str
+    total_leaves: int
+    proof: List[MerkleProofStep]
+
+
+class MMRProofStep(TypedDict):
+    sibling: str
+    position: str
+    level: int
+
+
+class MMRProofPacket(TypedDict):
+    leaf_index: int
+    total_leaves: int
+    peak_index: int
+    inner_proof: List[MMRProofStep]
+    other_peaks: List[str]
+    mmr_root: str
+
+
+def _canonical_json(data: object) -> str:
     """Serialización canónica determinista."""
     return json.dumps(data, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
 
-def compute_envelope_hash(envelope: Dict[str, Any]) -> str:
+
+def compute_envelope_hash(envelope: Mapping[str, object] | Dict[str, object]) -> str:
     """Computa el digest criptográfico SHA3-256 inmutable de cualquier sobre canónico."""
     return hashlib.sha3_256(_canonical_json(envelope).encode("utf-8")).hexdigest()
+
 
 def compute_cortex_hash(
     seq: int,
@@ -41,7 +72,8 @@ def compute_cortex_hash(
     }
     return compute_envelope_hash(body)
 
-def build_merkle_tree(entry_hashes: List[str]) -> str:
+
+def build_merkle_tree(entry_hashes: list[str]) -> str:
     """
     Construye Merkle tree con Domain Separation (FIX C5-05).
     Entrada: lista de hashes SHA3-256 (hex strings).
@@ -49,31 +81,28 @@ def build_merkle_tree(entry_hashes: List[str]) -> str:
     """
     if not entry_hashes:
         return ZERO_HASH_256
-    
+
     total_leaves = len(entry_hashes)
     layer = [bytes.fromhex(h) for h in entry_hashes]
     level = 0
-    
+
     while len(layer) > 1:
         if len(layer) % 2 != 0:
             layer.append(layer[-1])
-        
+
         next_layer = []
         for i in range(0, len(layer), 2):
             combined = layer[i] + layer[i + 1]
-            domain_tag = b'\x00' if level == 0 else b'\x01'
+            domain_tag = b"\x00" if level == 0 else b"\x01"
             next_layer.append(hashlib.sha3_256(domain_tag + combined).digest())
         layer = next_layer
         level += 1
-    
-    root_with_cardinality = (
-        b'\x02' +
-        layer[0] +
-        total_leaves.to_bytes(8, 'little')
-    )
+
+    root_with_cardinality = b"\x02" + layer[0] + total_leaves.to_bytes(8, "little")
     return hashlib.sha3_256(root_with_cardinality).hexdigest()
 
-def generate_merkle_proof(entry_hashes: List[str], target_index: int) -> Dict[str, Any]:
+
+def generate_merkle_proof(entry_hashes: List[str], target_index: int) -> MerkleProof:
     """
     Genera una prueba de inclusión de Merkle O(log N) con separación de dominio.
     """
@@ -81,7 +110,7 @@ def generate_merkle_proof(entry_hashes: List[str], target_index: int) -> Dict[st
         raise IndexError("target_index fuera de rango o lista vacía")
 
     total_leaves = len(entry_hashes)
-    proof: List[Dict[str, Any]] = []
+    proof: List[MerkleProofStep] = []
     layer = [bytes.fromhex(h) for h in entry_hashes]
     idx = target_index
     level = 0
@@ -90,20 +119,22 @@ def generate_merkle_proof(entry_hashes: List[str], target_index: int) -> Dict[st
         if len(layer) % 2 != 0:
             layer.append(layer[-1])
 
-        is_right_child = (idx % 2 == 1)
+        is_right_child = idx % 2 == 1
         sibling_idx = idx - 1 if is_right_child else idx + 1
         sibling_bytes = layer[sibling_idx]
 
-        proof.append({
-            "sibling": sibling_bytes.hex(),
-            "position": "left" if is_right_child else "right",
-            "level": level,
-        })
+        proof.append(
+            {
+                "sibling": sibling_bytes.hex(),
+                "position": "left" if is_right_child else "right",
+                "level": level,
+            }
+        )
 
         next_layer = []
         for i in range(0, len(layer), 2):
             combined = layer[i] + layer[i + 1]
-            domain_tag = b'\x00' if level == 0 else b'\x01'
+            domain_tag = b"\x00" if level == 0 else b"\x01"
             next_layer.append(hashlib.sha3_256(domain_tag + combined).digest())
         layer = next_layer
         idx = idx // 2
@@ -116,9 +147,10 @@ def generate_merkle_proof(entry_hashes: List[str], target_index: int) -> Dict[st
         "proof": proof,
     }
 
+
 def verify_merkle_proof(
     leaf_hash: str,
-    proof: List[Dict[str, Any]],
+    proof: List[MerkleProofStep],
     expected_root: str,
     total_leaves: int,
 ) -> bool:
@@ -133,7 +165,7 @@ def verify_merkle_proof(
     for step in proof:
         sibling = bytes.fromhex(step["sibling"])
         level = step.get("level", 0)
-        domain_tag = b'\x00' if level == 0 else b'\x01'
+        domain_tag = b"\x00" if level == 0 else b"\x01"
 
         if step["position"] == "left":
             combined = domain_tag + sibling + current
@@ -142,13 +174,10 @@ def verify_merkle_proof(
 
         current = hashlib.sha3_256(combined).digest()
 
-    root_with_cardinality = (
-        b'\x02' +
-        current +
-        total_leaves.to_bytes(8, 'little')
-    )
+    root_with_cardinality = b"\x02" + current + total_leaves.to_bytes(8, "little")
     computed_root = hashlib.sha3_256(root_with_cardinality).hexdigest()
     return computed_root == expected_root
+
 
 def verify_row_invariants(
     seq: int,
@@ -173,13 +202,13 @@ def verify_row_invariants(
     """
     if seq != expected_seq:
         return False, f"Seq discontinuity: expected {expected_seq}, got {seq}"
-    
+
     if lamport_t <= last_lamport:
         return False, f"Lamport violation: {lamport_t} <= {last_lamport}"
-    
+
     if prev_hash != expected_prev_hash:
         return False, f"Hash chain broken: expected {expected_prev_hash}, got {prev_hash}"
-    
+
     computed = compute_cortex_hash(
         seq=seq,
         event_id=event_id,
@@ -194,7 +223,7 @@ def verify_row_invariants(
     )
     if computed != entry_hash:
         return False, f"Entry hash mismatch: computed {computed}, stored {entry_hash}"
-    
+
     return True, ""
 
 
@@ -207,12 +236,14 @@ DOMAIN_MMR_LEAF = b"\x00"
 DOMAIN_MMR_NODE = b"\x01"
 DOMAIN_MMR_PEAKS = b"\x02"
 
+
 class MerkleMountainRange:
     """
     Acumulador append-only inmutable Merkle Mountain Range (MMR).
     Resuelve la ineficiencia O(N) de árboles estáticos para flujos agénticos continuos.
     Genera pruebas de inclusión O(log N) para expedientes forenses del EU AI Act.
     """
+
     def __init__(self) -> None:
         self.leaves: List[str] = []
 
@@ -234,21 +265,21 @@ class MerkleMountainRange:
             bit >>= 1
         return slices
 
-    def _build_subtree_root_and_proof(self, leaf_slice: List[str], target_idx: int = -1) -> Tuple[bytes, List[Dict[str, Any]]]:
+    def _build_subtree_root_and_proof(
+        self, leaf_slice: List[str], target_idx: int = -1
+    ) -> Tuple[bytes, List[MMRProofStep]]:
         layer = [bytes.fromhex(h) for h in leaf_slice]
-        proof: List[Dict[str, Any]] = []
+        proof: List[MMRProofStep] = []
         idx = target_idx
         level = 0
 
         while len(layer) > 1:
             if idx >= 0:
-                is_right = (idx % 2 == 1)
+                is_right = idx % 2 == 1
                 sibling_idx = idx - 1 if is_right else idx + 1
-                proof.append({
-                    "sibling": layer[sibling_idx].hex(),
-                    "position": "left" if is_right else "right",
-                    "level": level
-                })
+                proof.append(
+                    {"sibling": layer[sibling_idx].hex(), "position": "left" if is_right else "right", "level": level}
+                )
                 idx //= 2
 
             next_layer = []
@@ -275,7 +306,7 @@ class MerkleMountainRange:
         bag = DOMAIN_MMR_PEAKS + b"".join(peaks) + len(self.leaves).to_bytes(8, "little")
         return hashlib.sha3_256(bag).hexdigest()
 
-    def generate_proof(self, target_index: int) -> Dict[str, Any]:
+    def generate_proof(self, target_index: int) -> MMRProofPacket:
         if target_index < 0 or target_index >= len(self.leaves):
             raise IndexError("target_index fuera de rango")
         slices = self._get_peak_slices()
@@ -304,7 +335,7 @@ class MerkleMountainRange:
         }
 
     @staticmethod
-    def verify_proof(leaf_hash: str, proof_packet: Dict[str, Any], expected_root: str) -> bool:
+    def verify_proof(leaf_hash: str, proof_packet: MMRProofPacket, expected_root: str) -> bool:
         curr = bytes.fromhex(leaf_hash)
         for step in proof_packet["inner_proof"]:
             sibling = bytes.fromhex(step["sibling"])
@@ -320,4 +351,3 @@ class MerkleMountainRange:
         bag = DOMAIN_MMR_PEAKS + b"".join(all_peaks) + total_leaves.to_bytes(8, "little")
         computed_root = hashlib.sha3_256(bag).hexdigest()
         return computed_root == expected_root
-

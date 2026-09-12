@@ -16,6 +16,7 @@ import ast
 import re
 from pathlib import Path
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
+from typing import TypedDict
 
 WORKSPACE_DIR = str(Path.home() / "10_PROJECTS")
 
@@ -28,10 +29,19 @@ BANNED_PATTERNS = [
 SKIP_DIRS = {".git", ".venv", "node_modules", "__pycache__", "target", "dist", "build", ".cortex", "vendor"}
 
 
-def audit_file_worker(filepath: str, agent_id: int) -> dict:
+class FileAuditResult(TypedDict):
+    agent: str
+    file: str
+    repo: str
+    ast_ok: bool
+    shebang_ok: bool
+    violations: list[str]
+
+
+def audit_file_worker(filepath: str, agent_id: int) -> FileAuditResult:
     rel_path = os.path.relpath(filepath, WORKSPACE_DIR)
     agent_name = f"LEGION-AGENT-{agent_id:04d}"
-    res = {
+    res: FileAuditResult = {
         "agent": agent_name,
         "file": rel_path,
         "repo": rel_path.split(os.sep)[0],
@@ -72,8 +82,8 @@ def audit_file_worker(filepath: str, agent_id: int) -> dict:
     return res
 
 
-def process_subagent_chunk(chunk: list[tuple[str, int]], thread_concurrency: int = 100) -> list[dict]:
-    results = []
+def process_subagent_chunk(chunk: list[tuple[str, int]], thread_concurrency: int = 100) -> list[FileAuditResult]:
+    results: list[FileAuditResult] = []
     with ThreadPoolExecutor(max_workers=min(thread_concurrency, len(chunk) or 1)) as tex:
         futures = [tex.submit(audit_file_worker, filepath, agent_id) for filepath, agent_id in chunk]
         for fut in as_completed(futures):
@@ -81,14 +91,14 @@ def process_subagent_chunk(chunk: list[tuple[str, int]], thread_concurrency: int
     return results
 
 
-def ignite_1000_agent_legion(total_agents: int = 1000, process_workers: int = 10):
+def ignite_1000_agent_legion(total_agents: int = 1000, process_workers: int = 10) -> None:
     print("============================================================")
     print(" 🛡️  LEGION 1000-AGENT PARALLEL WORKSPACE AUDITOR ENGINE")
     print(f" █ TOPOLOGY: {process_workers} Process Workers × {total_agents // process_workers} Subagent Threads")
     print("============================================================")
 
     # 1. Collect all target files across the 10 repos
-    all_files = []
+    all_files: list[str] = []
     for repo_dir in sorted(glob.glob(os.path.join(WORKSPACE_DIR, "*"))):
         if os.path.isdir(os.path.join(repo_dir, ".git")):
             for root, dirs, files in os.walk(repo_dir):
@@ -114,7 +124,7 @@ def ignite_1000_agent_legion(total_agents: int = 1000, process_workers: int = 10
     u_child_b = resource.getrusage(resource.RUSAGE_CHILDREN)
     t0 = time.perf_counter()
 
-    all_results = []
+    all_results: list[FileAuditResult] = []
     with ProcessPoolExecutor(max_workers=process_workers) as pex:
         futures = [pex.submit(process_subagent_chunk, chunk, threads_per_process) for chunk in chunks]
         for fut in as_completed(futures):

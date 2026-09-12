@@ -15,8 +15,10 @@ import asyncio
 import json
 import os
 import time
+from collections.abc import Coroutine
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Any
 
 HOME = Path.home()
 
@@ -37,12 +39,13 @@ class SwarmReport:
     candidates: list[AnergyCandidate] = field(default_factory=list)
     agent_logs: list[str] = field(default_factory=list)
 
-def human_size(size_bytes: int) -> str:
+def human_size(size_bytes: int | float) -> str:
+    sz = float(size_bytes)
     for unit in ['B', 'KB', 'MB', 'GB', 'TB']:
-        if abs(size_bytes) < 1024.0:
-            return f"{size_bytes:.1f} {unit}"
-        size_bytes /= 1024.0
-    return f"{size_bytes:.1f} PB"
+        if abs(sz) < 1024.0:
+            return f"{sz:.1f} {unit}"
+        sz /= 1024.0
+    return f"{sz:.1f} PB"
 
 def get_dir_size(path: Path, max_depth: int = 4) -> int:
     total = 0
@@ -67,7 +70,7 @@ def get_dir_size(path: Path, max_depth: int = 4) -> int:
     return total
 
 async def audit_sector_projects(agent_id: int, project_path: Path) -> list[AnergyCandidate]:
-    candidates = []
+    candidates: list[AnergyCandidate] = []
     if not project_path.exists():
         return candidates
 
@@ -117,7 +120,7 @@ async def audit_sector_projects(agent_id: int, project_path: Path) -> list[Anerg
     return candidates
 
 async def audit_sector_caches(agent_id: int, cache_path: Path) -> list[AnergyCandidate]:
-    candidates = []
+    candidates: list[AnergyCandidate] = []
     if not cache_path.exists():
         return candidates
 
@@ -136,7 +139,7 @@ async def audit_sector_caches(agent_id: int, cache_path: Path) -> list[AnergyCan
     return candidates
 
 async def audit_dormant_project(agent_id: int, repo_path: Path) -> list[AnergyCandidate]:
-    candidates = []
+    candidates: list[AnergyCandidate] = []
     if not repo_path.exists() or not repo_path.is_dir():
         return candidates
 
@@ -154,14 +157,14 @@ async def audit_dormant_project(agent_id: int, repo_path: Path) -> list[AnergyCa
     return candidates
 
 async def audit_large_media(agent_id: int, search_path: Path) -> list[AnergyCandidate]:
-    candidates = []
+    candidates: list[AnergyCandidate] = []
     if not search_path.exists():
         return candidates
 
     media_extensions = {".wav", ".mp4", ".mov", ".flac", ".aif", ".aiff", ".tar", ".zip", ".iso", ".dmg"}
     
-    def scan_files():
-        found = []
+    def scan_files() -> list[tuple[str, int, str]]:
+        found: list[tuple[str, int, str]] = []
         try:
             for root, dirs, files in os.walk(search_path):
                 if any(skip in root for skip in [".git", "Library", ".cache"]):
@@ -194,7 +197,7 @@ async def audit_large_media(agent_id: int, search_path: Path) -> list[AnergyCand
     return candidates
 
 async def audit_app_support(agent_id: int, app_dir: Path) -> list[AnergyCandidate]:
-    candidates = []
+    candidates: list[AnergyCandidate] = []
     if not app_dir.exists():
         return candidates
     
@@ -211,7 +214,12 @@ async def audit_app_support(agent_id: int, app_dir: Path) -> list[AnergyCandidat
         ))
     return candidates
 
-async def main():
+async def sentinel_standby() -> list[AnergyCandidate]:
+    await asyncio.sleep(0.01)
+    return []
+
+
+async def main() -> None:
     print("======================================================================")
     print(" 🚀 INICIANDO LEGION-100 SWARM: AUDITORÍA FORENSE DE DISCO LOCAL")
     print("======================================================================")
@@ -223,7 +231,7 @@ async def main():
     report = SwarmReport()
     
     # Define tasks across 100 agents
-    tasks = []
+    tasks: list[Coroutine[Any, Any, list[AnergyCandidate]]] = []
     agent_id = 1
 
     # Sector 1: Projects build artifacts (Agents 1-25)
@@ -302,7 +310,7 @@ async def main():
 
     # Sector 6: Fill up to 100 agents with deep workspace sweeps
     while agent_id <= 100:
-        tasks.append(asyncio.sleep(0.01))  # Sentinel standby agents
+        tasks.append(sentinel_standby())  # Sentinel standby agents
         agent_id += 1
 
     print(f" [*] Disparando enjambre de {len(tasks)} agentes paralelos...")
@@ -311,11 +319,10 @@ async def main():
     # Process all findings
     all_candidates: list[AnergyCandidate] = []
     for res in results:
-        if isinstance(res, list):
-            all_candidates.extend(res)
+        all_candidates.extend(res)
 
     # Deduplicate by path
-    dedup = {}
+    dedup: dict[str, AnergyCandidate] = {}
     for c in all_candidates:
         dedup[c.path] = c
     final_candidates = sorted(dedup.values(), key=lambda x: x.size_bytes, reverse=True)

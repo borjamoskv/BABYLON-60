@@ -14,6 +14,12 @@ pub struct B60Repl {
     gate: EpistemicGate,
 }
 
+impl Default for B60Repl {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl B60Repl {
     pub fn new() -> Self {
         Self {

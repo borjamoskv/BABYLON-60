@@ -22,9 +22,9 @@ circuit Polynomial {
 "#;
 
     let (_, arkworks_code) = compile_nul_source(source).expect("Failed to compile nul source");
-    let out_dir = env::var_os("OUT_DIR").unwrap();
+    let out_dir = env::var_os("OUT_DIR").expect("BFT Fallback");
     let dest_path = Path::new(&out_dir).join("circuit.rs");
-    fs::write(&dest_path, arkworks_code).unwrap();
+    fs::write(&dest_path, arkworks_code).expect("BFT Fallback");
     
     println!("cargo:rerun-if-changed=build.rs");
 }

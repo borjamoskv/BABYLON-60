@@ -21,7 +21,16 @@ import re
 import statistics
 from collections import Counter
 from dataclasses import asdict, dataclass, field
-from typing import Any
+from typing import TypedDict
+
+
+class SlopInstance(TypedDict):
+    pattern: str
+    matched_text: str
+    start: int
+    end: int
+    severity_weight: float
+
 
 # ─── Slop patterns corpus ────────────────────────────────────────────────────
 
@@ -105,14 +114,14 @@ class LinguisticEntropyReport:
 
     # Slop
     slop_weight_total: float = 0.0
-    slop_instances: list[dict[str, Any]] = field(default_factory=list)
+    slop_instances: list[SlopInstance] = field(default_factory=list)
     slop_density: float = 0.0  # slop_weight / word_count
 
     # Final composite
     exergy_score: float = 0.0  # 0.0 = pure anergy, 1.0 = max exergy
 
-    def to_dict(self) -> dict[str, Any]:
-        d = asdict(self)
+    def to_dict(self) -> dict[str, object]:
+        d: dict[str, object] = asdict(self)
         # Round floats for clean output
         for k, v in d.items():
             if isinstance(v, float):
@@ -263,8 +272,8 @@ class LinguisticEntropyDetector:
 
     # ── Slop detection ──────────────────────────────────────────────────
 
-    def detect_slop(self, text: str) -> list[dict[str, Any]]:
-        results: list[dict[str, Any]] = []
+    def detect_slop(self, text: str) -> list[SlopInstance]:
+        results: list[SlopInstance] = []
         for pattern, weight in self._compiled_slop:
             for match in pattern.finditer(text):
                 results.append(

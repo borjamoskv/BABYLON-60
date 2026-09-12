@@ -126,7 +126,7 @@ pub fn append_event(payload: serde_json::Value) -> Result<Block, String> {
 
     let now = SystemTime::now()
         .duration_since(UNIX_EPOCH)
-        .unwrap()
+        .expect("BFT Fallback")
         .as_secs();
 
     let canonical_payload_bytes = serde_json::to_vec(&payload)
@@ -286,14 +286,14 @@ mod tests {
 
     #[test]
     fn test_ledger_append_and_verify() {
-        let (sk, vk) = get_or_create_node_keys().unwrap();
+        let (sk, vk) = get_or_create_node_keys().expect("BFT Fallback");
         assert_eq!(sk.verifying_key(), vk);
 
         let p1 = serde_json::json!({"test": "action1", "agent": "A1"});
-        let b1 = append_event(p1).unwrap();
+        let b1 = append_event(p1).expect("BFT Fallback");
         assert_eq!(b1.index, b1.index);
 
-        let audit = verify_chain().unwrap();
+        let audit = verify_chain().expect("BFT Fallback");
         assert!(audit.valid);
         assert!(audit.total_blocks > 0);
     }

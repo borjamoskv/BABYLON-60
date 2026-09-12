@@ -5,7 +5,7 @@
 # [Causal-Determinist] BFT consensus committer — Operador ortogonal (C) puro.
 # No valida matemáticamente. Solo muta disco y persiste ledger (WAL).
 import sqlite3
-from typing import Any, Dict
+from typing import Dict, Mapping
 from dataclasses import dataclass
 from babylon60.database import core as database_core
 from babylon60.core.crypto_utils import canonicalize_cbor
@@ -14,7 +14,7 @@ from babylon60.core.crypto_utils import canonicalize_cbor
 @dataclass(frozen=True)
 class StateMutation:
     agent_id: str
-    payload: Dict[str, Any]
+    payload: Mapping[str, object] | Dict[str, object]
     timestamp: float
     signature: str
     causal_taint: str = "BFT_Consensus_Init"
@@ -63,7 +63,7 @@ class BFT_Committer:
                 )
             return True
 
-    def get_audit_rows(self):
+    def get_audit_rows(self) -> list[tuple[int, str, bytes]] | None:
         cursor = self.conn.cursor()
         try:
             cursor.execute("SELECT id, mutation_hash, payload FROM state_log")

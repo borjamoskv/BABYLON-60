@@ -38,7 +38,7 @@ def get_ledger() -> CortexPersistLedger:
     return CortexPersistLedger(MAIL_DB_PATH)
 
 
-def cmd_status():
+def cmd_status() -> None:
     if not account_file.exists():
         user = os.environ.get("USER", "borja")
         profile = {
@@ -70,7 +70,7 @@ def cmd_status():
     print("=" * 50 + "\n")
 
 
-def cmd_send(to: str, subject: str, body: str):
+def cmd_send(to: str, subject: str, body: str) -> None:
     ledger = get_ledger()
     user = os.environ.get("USER", "borja")
     from_email = f"{user}@babylon60.com"
@@ -89,7 +89,7 @@ def cmd_send(to: str, subject: str, body: str):
     print(f"🟢 [SENT] Correo enviado a {to} | BFT Seq: {ack['seq']} | Hash: {ack['entry_hash'][:12]}...")
 
 
-def cmd_list():
+def cmd_list() -> None:
     ledger = get_ledger()
     with ledger._get_connection() as conn:
         cursor = conn.cursor()
@@ -106,7 +106,7 @@ def cmd_list():
         print("-" * 60)
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="BabylonMail Sovereign CLI")
     subparsers = parser.add_subparsers(dest="command")
 

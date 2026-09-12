@@ -8,7 +8,7 @@ import subprocess
 import time
 import resource
 import math
-from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
+from concurrent.futures import Future, ProcessPoolExecutor, ThreadPoolExecutor, as_completed
 
 
 # LEGION MÁXIMO COGNITIVO - 222 Agentes Organizados
@@ -17,11 +17,11 @@ P_CORES = 11  # 11 Procesos
 S_THREADS = 20 # 20 Hilos por proceso
 # Total = 220 agentes enjambre + 1 Orquestador P + 1 Orquestador S = 222 Agentes
 
-REPO_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+REPO_PATH: str = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 import shlex
 
-def run_cmd(cmd, cwd=REPO_PATH):
+def run_cmd(cmd: str | list[str], cwd: str = REPO_PATH) -> tuple[bool, str]:
     try:
         # Convertir comando de string a lista para evitar shell=True
         cmd_list = shlex.split(cmd) if isinstance(cmd, str) else cmd
@@ -30,7 +30,7 @@ def run_cmd(cmd, cwd=REPO_PATH):
     except Exception as e:
         return False, str(e)
 
-def agent_task(agent_id, task_type):
+def agent_task(agent_id: int, task_type: str) -> str:
     """
     Simulación de estrés termodinámico y verificación formal.
     Cada agente bombardea un vector específico del kernel C5-REAL.
@@ -58,11 +58,11 @@ def agent_task(agent_id, task_type):
     else:
         return f"[Agente {agent_id:03d} | IDLE] Esperando vector..."
 
-def process_chunk(chunk_id, agent_ids, s_threads):
+def process_chunk(chunk_id: int, agent_ids: list[int], s_threads: int) -> list[str]:
     print(f"🌀 [AIC-{chunk_id:02d}] Desplegando Enjambre Local (N={len(agent_ids)})")
-    results = []
+    results: list[str] = []
     with ThreadPoolExecutor(max_workers=s_threads) as tex:
-        futures = []
+        futures: list[Future[str]] = []
         for a_id in agent_ids:
             # Distribución topológica: 40% Loom, 40% Fuzz, 20% Thermo
             ttype = "LOOM" if a_id % 5 < 2 else ("FUZZ" if a_id % 5 < 4 else "THERMO")
@@ -72,7 +72,7 @@ def process_chunk(chunk_id, agent_ids, s_threads):
             results.append(f.result())
     return results
 
-def ignite_legion():
+def ignite_legion() -> None:
     print("🔥 INICIANDO LEGIÓN MÁXIMO COGNITIVO (222 Agentes Organizados) 🔥")
     print(f"Topología C5-REAL: {P_CORES} Procesos × {S_THREADS} Hilos (+ 2 Orquestadores)")
     

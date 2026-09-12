@@ -157,7 +157,7 @@ class StateRootAccumulator:
     O(1) tamper-detection for the current state root.
     """
 
-    def __init__(self, conn: sqlite3.Connection):
+    def __init__(self, conn: sqlite3.Connection) -> None:
         self.conn = conn
 
     def get_latest_root(self) -> tuple[int, bytes]:
@@ -247,7 +247,7 @@ class IdentityAnchorManager:
     Enforces the single-genesis constraint for the Sovereign Ledger.
     """
 
-    def __init__(self, conn: sqlite3.Connection):
+    def __init__(self, conn: sqlite3.Connection) -> None:
         self.conn = conn
 
     def is_anchored(self) -> bool:

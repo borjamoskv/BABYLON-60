@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../.
 from babylon60.compliance_exporter.eu_ai_act import EUAIActComplianceExporter
 from babylon60.bft.cortex_persist_ledger import CortexPersistLedger, CortexEvent
 
-def test_b3():
+def test_b3() -> None:
     # Setup dummy bundle
     bundle_path = "poc_bundle"
     os.makedirs(bundle_path, exist_ok=True)

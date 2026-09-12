@@ -18,12 +18,12 @@ from babylon60.kernel.sovereign_binary_analyzer import SovereignBinaryAnalyzer, 
 
 
 class TestSovereignBinaryAnalyzer(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         # Locate a system executable e.g. /bin/ls or /usr/bin/login
         self.test_binary = "/bin/ls" if os.path.exists("/bin/ls") else "/usr/bin/login"
         self.assertTrue(os.path.exists(self.test_binary), "No suitable system binary found for test.")
 
-    def test_metadata_parsing(self):
+    def test_metadata_parsing(self) -> None:
         """Verify binary format and architecture detection."""
         analyzer = SovereignBinaryAnalyzer(self.test_binary)
         meta = analyzer.metadata
@@ -32,7 +32,7 @@ class TestSovereignBinaryAnalyzer(unittest.TestCase):
         self.assertIn(meta.architecture, ("arm64", "x86_64", "multi", "unknown"))
         self.assertEqual(meta.filename, os.path.basename(self.test_binary))
 
-    def test_disassembly_and_cfg_building(self):
+    def test_disassembly_and_cfg_building(self) -> None:
         """Verify section disassembly and Basic Block construction."""
         analyzer = SovereignBinaryAnalyzer(self.test_binary)
         instructions = analyzer.disassemble_section(max_instructions=50)
@@ -52,7 +52,7 @@ class TestSovereignBinaryAnalyzer(unittest.TestCase):
             first_block = blocks[first_block_id]
             self.assertIsInstance(first_block, BasicBlock)
 
-    def test_render_mermaid_html(self):
+    def test_render_mermaid_html(self) -> None:
         """Verify HTML rendering with Mermaid diagram."""
         analyzer = SovereignBinaryAnalyzer(self.test_binary)
         instructions = analyzer.disassemble_section(max_instructions=30)

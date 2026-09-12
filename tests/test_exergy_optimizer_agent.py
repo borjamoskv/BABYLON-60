@@ -1,14 +1,14 @@
-import logging
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 import os
+from pathlib import Path
 from scripts.c5_thermo.exergy_optimizer_agent import evaluate_gelabp, ExergyFailed, ComplexityVisitor
 import ast
 
 
-def test_complexity_visitor_pass():
+def test_complexity_visitor_pass() -> None:
     code = """
 def simple_func():
     if True:
@@ -21,7 +21,7 @@ def simple_func():
     assert visitor.max_depth == 3
 
 
-def test_complexity_visitor_fail():
+def test_complexity_visitor_fail() -> None:
     code = """
 def deep_func():
     if True:
@@ -39,7 +39,7 @@ def deep_func():
     assert visitor.max_depth == 6
 
 
-def test_evaluate_gelabp_algebraic_limit(tmp_path):
+def test_evaluate_gelabp_algebraic_limit(tmp_path: Path) -> None:
     code = """
 def deep_func():
     if True:

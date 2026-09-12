@@ -36,7 +36,10 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
-from typing import Any
+from typing import TYPE_CHECKING, Mapping
+
+if TYPE_CHECKING:
+    import httpx
 
 logger = logging.getLogger("babylon60.http")
 
@@ -57,6 +60,9 @@ class HttpRetryMixin:
     - `self._provider`: `str` (used in log messages only)
     """
 
+    # Subclass contract
+    _client: httpx.AsyncClient
+
     # Override in subclass if needed
     _max_retries: int = _DEFAULT_MAX_RETRIES
     _base_delay: float = _DEFAULT_BASE_DELAY
@@ -70,9 +76,9 @@ class HttpRetryMixin:
         self,
         url: str,
         headers: dict[str, str],
-        payload: dict[str, Any],
+        payload: Mapping[str, object],
         label: str = "POST",
-    ) -> dict[str, Any]:
+    ) -> dict[str, object]:
         """POST with exponential backoff on 429.
 
         Args:
@@ -95,7 +101,7 @@ class HttpRetryMixin:
         url: str,
         headers: dict[str, str],
         label: str = "GET",
-    ) -> dict[str, Any]:
+    ) -> dict[str, object]:
         """GET with exponential backoff on 429."""
         return await self._request_with_retry("GET", url, headers, payload=None, label=label)
 
@@ -104,24 +110,23 @@ class HttpRetryMixin:
         method: str,
         url: str,
         headers: dict[str, str],
-        payload: dict[str, Any] | None,
+        payload: Mapping[str, object] | None,
         label: str,
-    ) -> dict[str, Any] | Exception:
+    ) -> dict[str, object] | Exception:
         """Execute HTTP request and parse JSON. Returns Exception on 429 instead of raising."""
         import httpx
 
         if method == "POST":
-            response = await self._client.post(  # type: ignore[attr-defined]
-                url, headers=headers, json=payload
-            )
+            response = await self._client.post(url, headers=headers, json=payload)
         else:
-            response = await self._client.get(  # type: ignore[attr-defined]
-                url, headers=headers
-            )
+            response = await self._client.get(url, headers=headers)
 
         try:
             response.raise_for_status()
-            return response.json()
+            data = response.json()
+            if isinstance(data, dict):
+                return data
+            return {"data": data}
         except httpx.HTTPStatusError as exc:
             return exc
         except (KeyError, IndexError, json.JSONDecodeError) as exc:
@@ -132,9 +137,9 @@ class HttpRetryMixin:
         method: str,
         url: str,
         headers: dict[str, str],
-        payload: dict[str, Any] | None = None,
+        payload: Mapping[str, object] | None = None,
         label: str = "",
-    ) -> dict[str, Any]:
+    ) -> dict[str, object]:
         """Core retry engine - exponential backoff on HTTP 429.
 
         Zero-trust: only retries on 429. Everything else raises immediately.
@@ -181,19 +186,22 @@ class HttpRetryMixin:
 
 
 async def _do_standalone_post(
-    client: Any,
+    client: httpx.AsyncClient,
     url: str,
     headers: dict[str, str],
-    payload: dict[str, Any],
+    payload: Mapping[str, object],
     provider: str,
     label: str,
-) -> dict[str, Any] | Exception:
+) -> dict[str, object] | Exception:
     import httpx
 
     response = await client.post(url, headers=headers, json=payload)
     try:
         response.raise_for_status()
-        return response.json()
+        data = response.json()
+        if isinstance(data, dict):
+            return data
+        return {"data": data}
     except httpx.HTTPStatusError as exc:
         return exc
     except (KeyError, IndexError, json.JSONDecodeError) as exc:
@@ -201,15 +209,15 @@ async def _do_standalone_post(
 
 
 async def post_with_retry(
-    client: Any,
+    client: httpx.AsyncClient,
     url: str,
     headers: dict[str, str],
-    payload: dict[str, Any],
+    payload: Mapping[str, object],
     provider: str = "unknown",
     label: str = "POST",
     max_retries: int = _DEFAULT_MAX_RETRIES,
     base_delay: float = _DEFAULT_BASE_DELAY,
-) -> dict[str, Any]:
+) -> dict[str, object]:
     """Standalone retry helper - no inheritance needed.
 
     Args:

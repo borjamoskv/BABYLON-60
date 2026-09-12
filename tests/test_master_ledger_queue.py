@@ -3,12 +3,13 @@
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 import os
+from pathlib import Path
 import pytest
 from babylon60.bft.master_ledger_queue import MasterLedgerQueue
 
 
 @pytest.mark.asyncio
-async def test_master_ledger_queue_single_writer(tmp_path) -> None:
+async def test_master_ledger_queue_single_writer(tmp_path: Path) -> None:
     db_file = os.path.join(tmp_path, "test_bft_queue.db")
     queue = MasterLedgerQueue(db_file)
     await queue.initialize()

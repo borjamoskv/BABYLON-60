@@ -18,7 +18,7 @@ import httpx
 import os
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Callable, Optional
+from typing import Any, Callable, Optional
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -46,7 +46,7 @@ def _get_default_moonshot_url() -> str:
 
 
 def _get_default_moonshot_key() -> str:
-    return os.getenv("KIMI_API_KEY") or os.getenv("MOONSHOT_API_KEY", "")
+    return os.getenv("KIMI_API_KEY") or os.getenv("MOONSHOT_API_KEY") or ""
 
 
 def _get_default_openrouter_url() -> str:
@@ -131,16 +131,16 @@ class AgentPager:
     Los subagentes duermen en futex (0% CPU) hasta recibir la señal.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self._event = asyncio.Event()
 
-    async def wait_for_beep(self):
+    async def wait_for_beep(self) -> None:
         await self._event.wait()
 
-    def beep(self):
+    def beep(self) -> None:
         self._event.set()
 
-    def reset(self):
+    def reset(self) -> None:
         self._event.clear()
 
 
@@ -162,7 +162,7 @@ class KernelTelemetry:
         """Umbral empírico de thrashing para macOS ARM64 (del protocolo swarm-quantum-collapse)."""
         return self.involuntary_cs > threshold
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "wall_time_s": round(self.wall_time_s, 3),
             "involuntary_cs": self.involuntary_cs,
@@ -182,14 +182,19 @@ class KernelTelemetry:
         )
 
 
-def capture_kernel_snapshot():
+def capture_kernel_snapshot() -> tuple[resource.struct_rusage, resource.struct_rusage]:
     """Captura snapshot de rusage (self + children)."""
     u_self = resource.getrusage(resource.RUSAGE_SELF)
     u_child = resource.getrusage(resource.RUSAGE_CHILDREN)
     return u_self, u_child
 
 
-def compute_telemetry(t0, t1, before, after) -> KernelTelemetry:
+def compute_telemetry(
+    t0: float,
+    t1: float,
+    before: tuple[resource.struct_rusage, resource.struct_rusage],
+    after: tuple[resource.struct_rusage, resource.struct_rusage],
+) -> KernelTelemetry:
     """Calcula delta de telemetría entre dos snapshots."""
     (s0, c0) = before
     (s1, c1) = after
@@ -213,21 +218,26 @@ class InferenceClient:
     """
 
 
-async def _http_post_single_attempt(url: str, payload: dict, headers: dict, timeout: float) -> dict:
+async def _http_post_single_attempt(
+    url: str, payload: dict[str, Any], headers: dict[str, str], timeout: float
+) -> dict[str, Any]:
     async with httpx.AsyncClient(timeout=timeout) as client:
         response = await client.post(url, json=payload, headers=headers)
         response.raise_for_status()
-        return response.json()
+        data = response.json()
+        if isinstance(data, dict):
+            return data
+        return {"response": data}
 
 
 class RobustLLMClient:
     """Cliente HTTP resiliente con circuit breaker y retries."""
 
-    def __init__(self, config: SwarmConfig):
+    def __init__(self, config: SwarmConfig) -> None:
         self.config = config
         self._consecutive_failures = 0
 
-    async def call(self, messages: list) -> str:
+    async def call(self, messages: list[dict[str, Any]]) -> str:
         if self._consecutive_failures >= self.config.circuit_breaker_threshold:
             return f"🔴 Circuit breaker abierto: {self._consecutive_failures} fallos consecutivos. Backend: {self.config.backend.value}"
 
@@ -243,7 +253,8 @@ class RobustLLMClient:
                     self.config.api_url, payload, headers, self.config.request_timeout_s
                 )
                 self._consecutive_failures = 0
-                return data["choices"][0]["message"]["content"]
+                content = data["choices"][0]["message"]["content"]
+                return str(content) if content is not None else ""
             except httpx.HTTPStatusError as e:
                 if e.response.status_code != 429:
                     self._consecutive_failures += 1
@@ -270,7 +281,7 @@ class RobustLLMClient:
 # ─────────────────────────────────────────────────────────
 
 
-async def task_decomposer(client: RobustLLMClient, prompt: str, max_tasks: int) -> list:
+async def task_decomposer(client: RobustLLMClient, prompt: str, max_tasks: int) -> list[str]:
     """
     Fase 1: TaskDecomposer (Planner).
     Toma un prompt complejo y genera hasta max_tasks subtareas JSON.
@@ -320,8 +331,8 @@ async def execute_subagent(
     pager: AgentPager,
     semaphore: asyncio.Semaphore,
     mcts_delay: float,
-    on_progress: Optional[Callable] = None,
-) -> dict:
+    on_progress: Optional[Callable[[int, str, float], None]] = None,
+) -> dict[str, Any]:
     """
     Fase 2: Ejecución de un nodo del enjambre.
     Respeta invariantes:
@@ -370,7 +381,7 @@ async def execute_subagent(
         }
 
 
-async def anergy_reducer(client: RobustLLMClient, original_prompt: str, results: list) -> str:
+async def anergy_reducer(client: RobustLLMClient, original_prompt: str, results: list[dict[str, Any]]) -> str:
     """
     Fase 3: AnergyReducer (Síntesis).
     Unifica los reportes eliminando redundancia y entropía discursiva.
@@ -418,7 +429,7 @@ class SwarmResult:
 
     prompt: str
     synthesis: str
-    subtask_results: list
+    subtask_results: list[dict[str, Any]]
     telemetry: KernelTelemetry
     config: SwarmConfig
     n_subtasks: int = 0
@@ -439,7 +450,11 @@ class SwarmResult:
 
 
 async def run_swarm_orchestrator(
-    prompt: str, p_cores: int = 4, s_threads: int = 1, backend: str = "moonshot", on_progress: Optional[Callable] = None
+    prompt: str,
+    p_cores: int = 4,
+    s_threads: int = 1,
+    backend: str = "moonshot",
+    on_progress: Optional[Callable[[int, str, float], None]] = None,
 ) -> str:
     """
     Punto de entrada principal del Kimi Swarm Soberano.
@@ -500,16 +515,16 @@ async def run_swarm_orchestrator(
     results = await asyncio.gather(*tasks, return_exceptions=True)
 
     # Normalizar excepciones
-    clean_results = []
+    clean_results: list[dict[str, Any]] = []
     for i, r in enumerate(results):
-        if isinstance(r, Exception):
+        if isinstance(r, BaseException):
             clean_results.append(
                 {
                     "task_id": i,
                     "task_desc": subtasks[i] if i < len(subtasks) else "?",
                     "status": "ERROR",
                     "result": str(r),
-                    "elapsed_s": 0,
+                    "elapsed_s": 0.0,
                 }
             )
         else:

@@ -7,7 +7,7 @@ import json
 
 
 class MockQuarantineSnapshot:
-    def __init__(self, timestamp: int, causal_hash: str, payload: dict):
+    def __init__(self, timestamp: int, causal_hash: str, payload: dict[str, object]) -> None:
         self.timestamp = timestamp
         self.causal_hash = causal_hash
         self.payload = payload
@@ -21,7 +21,7 @@ class MockQuarantineSnapshot:
         return self._compute_checksum() == self.checksum
 
 
-def test_quarantine_snapshot_integrity_pass():
+def test_quarantine_snapshot_integrity_pass() -> None:
     snapshot = MockQuarantineSnapshot(
         timestamp=1000,
         causal_hash="0000000000000000000000000000000000000000000000000000000000000000",
@@ -30,7 +30,7 @@ def test_quarantine_snapshot_integrity_pass():
     assert snapshot.verify_integrity() is True
 
 
-def test_quarantine_snapshot_integrity_fail_on_tampering():
+def test_quarantine_snapshot_integrity_fail_on_tampering() -> None:
     snapshot = MockQuarantineSnapshot(
         timestamp=1000,
         causal_hash="0000000000000000000000000000000000000000000000000000000000000000",

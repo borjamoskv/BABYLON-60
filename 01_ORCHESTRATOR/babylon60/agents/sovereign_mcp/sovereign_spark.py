@@ -7,7 +7,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - [%(levelname)s] - 
 
 
 class SovereignSparkAgent:
-    def __init__(self, model_name="llama3.1"):
+    def __init__(self, model_name: str = "llama3.1") -> None:
         """
         Inicializa el Agente Soberano.
         Asume que Ollama está ejecutándose en localhost:11434 (Fricción Cero de red).
@@ -19,7 +19,7 @@ class SovereignSparkAgent:
         Prioriza la Navaja de Ockham. No incurras en redundancias semánticas.
         """
 
-    async def _execute_tool(self, server_name: str, tool_name: str, arguments: dict):
+    async def _execute_tool(self, server_name: str, tool_name: str, arguments: dict[str, object]) -> dict[str, str]:
         """Simula la ejecución en caliente de una herramienta a través del protocolo MCP"""
         logging.info(f"[MCP] Delegando tarea a servidor '{server_name}' -> Tool: {tool_name} | Args: {arguments}")
 
@@ -27,7 +27,7 @@ class SovereignSparkAgent:
         # Aquí se abstrae la topología causal (Stage 1).
         return {"status": "success", "data": f"Ejecución simulada exitosa de {tool_name}"}
 
-    async def process_task(self, prompt: str):
+    async def process_task(self, prompt: str) -> None:
         """
         Bucle agéntico asíncrono (Event-Loop).
         1. Abducción del contexto (Prompt).
@@ -93,7 +93,7 @@ class SovereignSparkAgent:
         logging.info("Transición Cognitiva Finalizada.\n" + "-" * 50)
 
 
-async def main():
+async def main() -> None:
     # Instanciación con modelo cuantizado estándar
     agent = SovereignSparkAgent(model_name="llama3.1")
 

@@ -18,9 +18,23 @@ import math
 import random
 import sys
 import time
-from pathlib import Path
-from typing import List, Tuple
+from typing import List, Tuple, TypedDict
 
+class BundlingResult(TypedDict):
+    k: int
+    mean_signal: float
+    mean_noise: float
+    std_noise: float
+    snr_db: float
+    accuracy: float
+
+class OncologyNoiseResult(TypedDict):
+    noise_level: float
+    accuracy: float
+    latency_us: float
+    total_queries: int
+
+from pathlib import Path
 import numpy as np
 
 # Insert repo root to import babylon60
@@ -30,7 +44,7 @@ sys.path.insert(0, str(REPO_ROOT / "01_ORCHESTRATOR"))
 from babylon60.genomics.vsa_oncology import OncologyOntologyVSA, HyperVector, DIMENSION
 
 
-def flush_print(msg: str = ""):
+def flush_print(msg: str = "") -> None:
     print(msg)
     sys.stdout.flush()
 
@@ -88,9 +102,9 @@ def test_orthogonality_distribution(num_samples: int = 300) -> Tuple[float, floa
     return mean_sim, std_dev, expected_std
 
 
-def test_bundling_capacity_curve(k_values: List[int]) -> List[dict]:
+def test_bundling_capacity_curve(k_values: List[int]) -> List[BundlingResult]:
     """Mide la saturación de la memoria hiperdimensional al superponer K vectores."""
-    results = []
+    results: List[BundlingResult] = []
     max_k = max(k_values)
     base_vectors = [HyperVector.from_seed(f"BASE_VEC_{i}") for i in range(max_k)]
     noise_vectors = [HyperVector.from_seed(f"NOISE_VEC_{i}") for i in range(100)]
@@ -133,9 +147,9 @@ def test_bundling_capacity_curve(k_values: List[int]) -> List[dict]:
     return results
 
 
-def test_oncology_associative_memory_noise(engine: OncologyOntologyVSA, noise_levels: List[float]) -> List[dict]:
+def test_oncology_associative_memory_noise(engine: OncologyOntologyVSA, noise_levels: List[float]) -> List[OncologyNoiseResult]:
     """Evalúa la robustez de recuperación asociativa de las 300 primitivas oncológicas con ruido."""
-    results = []
+    results: List[OncologyNoiseResult] = []
     p_ids = list(engine.primitives.keys())
     total_prims = len(p_ids)
 
@@ -171,7 +185,7 @@ def test_oncology_associative_memory_noise(engine: OncologyOntologyVSA, noise_le
     return results
 
 
-def main():
+def main() -> None:
     flush_print("╔═══════════════════════════════════════════════════════════════════════════╗")
     flush_print("║     BABYLON-60 :: VSA HYPERDIMENSIONAL SATURATION STRESS TEST (C5-REAL)   ║")
     flush_print("╚═══════════════════════════════════════════════════════════════════════════╝\n")
@@ -219,8 +233,8 @@ def main():
     flush_print("  ┌─────────────┬─────────────────┬───────────────────┐")
     flush_print("  │ Ruido (Flip)│ Fidelidad Recall│ Latencia Consulta │")
     flush_print("  ├─────────────┼─────────────────┼───────────────────┤")
-    for r in recall_results:
-        flush_print(f"  │    {r['noise_level']*100:>4.1f}%    │     {r['accuracy']:>6.2f}%     │    {r['latency_us']:>7.1f} µs     │")
+    for rec in recall_results:
+        flush_print(f"  │    {rec['noise_level']*100:>4.1f}%    │     {rec['accuracy']:>6.2f}%     │    {rec['latency_us']:>7.1f} µs     │")
     flush_print("  └─────────────┴─────────────────┴───────────────────┘")
 
     assert recall_results[0]["accuracy"] == 100.0, "Fallo: Ruido 0% no alcanzó 100% exactitud"

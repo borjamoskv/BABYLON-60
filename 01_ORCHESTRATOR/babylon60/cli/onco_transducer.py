@@ -24,9 +24,12 @@ try:
     import networkx as nx
     import pandas as pd
 except ImportError as _exc:  # extra 'onco' no instalado
-    np = None  # type: ignore[assignment]
-    nx = None  # type: ignore[assignment]
-    pd = None  # type: ignore[assignment]
+    import types
+    from typing import cast
+
+    np = cast(types.ModuleType, None)
+    nx = cast(types.ModuleType, None)
+    pd = cast(types.ModuleType, None)
     _ONCO_IMPORT_ERROR = _exc
 else:
     _ONCO_IMPORT_ERROR = None

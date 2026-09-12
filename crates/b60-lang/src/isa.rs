@@ -81,7 +81,7 @@ pub enum SexaOpCode {
 impl SexaOpCode {
     pub fn from_u8(v: u8) -> Option<Self> {
         if v < 60 {
-            Some(unsafe { std::mem::transmute(v) })
+            Some(unsafe { std::mem::transmute::<u8, SexaOpCode>(v) })
         } else {
             None
         }

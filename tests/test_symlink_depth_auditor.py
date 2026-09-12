@@ -3,10 +3,11 @@
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 import os
+from pathlib import Path
 from scripts.c5_quality_gates.symlink_depth_auditor import audit_symlinks, main
 
 
-def test_audit_symlinks_valid(tmp_path):
+def test_audit_symlinks_valid(tmp_path: Path) -> None:
     # Create valid symlink with ../..
     target = "../../sibling/path"
     link = tmp_path / "link1"
@@ -15,7 +16,7 @@ def test_audit_symlinks_valid(tmp_path):
     assert len(violations) == 0
 
 
-def test_audit_symlinks_invalid(tmp_path):
+def test_audit_symlinks_invalid(tmp_path: Path) -> None:
     # Create invalid symlink with ../
     target = "../sibling/path"
     link = tmp_path / "link2"
@@ -25,7 +26,7 @@ def test_audit_symlinks_invalid(tmp_path):
     assert violations[0][0] == link
 
 
-def test_main_pass(tmp_path):
+def test_main_pass(tmp_path: Path) -> None:
     valid_link = tmp_path / "link_valid"
     os.symlink("../../sibling/file", valid_link)
     # Mock REPO_ROOT in script

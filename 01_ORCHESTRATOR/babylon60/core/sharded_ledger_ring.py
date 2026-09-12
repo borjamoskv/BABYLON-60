@@ -14,13 +14,13 @@ from collections import deque
 
 
 class ShardedLedgerRing:
-    def __init__(self, shards: int = 16, capacity_per_shard: int = 10000):
-        self.shards = [deque(maxlen=capacity_per_shard) for _ in range(shards)]
+    def __init__(self, shards: int = 16, capacity_per_shard: int = 10000) -> None:
+        self.shards: list[deque[dict[str, object]]] = [deque(maxlen=capacity_per_shard) for _ in range(shards)]
         self.num_shards = shards
         self.lamport_clock = 0
         self.prev_hash = "0" * 64
 
-    def append(self, agent_id: str, payload: str) -> dict:
+    def append(self, agent_id: str, payload: str) -> dict[str, object]:
         self.lamport_clock += 1
         shard_idx = hash(agent_id) % self.num_shards
 

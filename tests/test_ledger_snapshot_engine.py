@@ -3,17 +3,18 @@
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 import json
+from pathlib import Path
 import sqlite3
 from unittest.mock import patch
 from scripts.c5_l1_ledger.ledger_snapshot_engine import compute_sha256, create_snapshot, main, AUTHOR
 
 
-def test_author_identity():
+def test_author_identity() -> None:
     assert "Telmo Dinámico de Moskv" in AUTHOR
     assert "borjamoskv" in AUTHOR
 
 
-def test_compute_sha256(tmp_path):
+def test_compute_sha256(tmp_path: Path) -> None:
     f = tmp_path / "sample.txt"
     f.write_text("Causal-Determinist-ledger-data")
     digest = compute_sha256(f)
@@ -21,7 +22,7 @@ def test_compute_sha256(tmp_path):
     assert len(digest) == 64
 
 
-def test_create_snapshot(tmp_path):
+def test_create_snapshot(tmp_path: Path) -> None:
     db_file = tmp_path / "cortex.db"
     conn = sqlite3.connect(db_file)
     conn.execute("CREATE TABLE test (id INT)")
@@ -42,12 +43,12 @@ def test_create_snapshot(tmp_path):
             assert (snap_dir / data["snapshot_file"]).exists()
 
 
-def test_main_success(tmp_path):
+def test_main_success(tmp_path: Path) -> None:
     snap_dir = tmp_path / "audit" / "snapshots"
     db_file = tmp_path / "cortex.db"
     sqlite3.connect(db_file).close()
 
-    async def mock_record(manifest_path):
+    async def mock_record(manifest_path: Path) -> None:
         pass
 
     with (

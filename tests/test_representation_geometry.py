@@ -16,7 +16,7 @@ from babylon60.core.representation_geometry import (
 )
 
 
-def test_isotropic_vs_anisotropic_geometry():
+def test_isotropic_vs_anisotropic_geometry() -> None:
     """Falsates that isotropic representations exhibit higher RankMe and IsoScore."""
     np.random.seed(42)
     N, d = 500, 32
@@ -44,7 +44,7 @@ def test_isotropic_vs_anisotropic_geometry():
     assert pc1_iso < 0.20
 
 
-def test_zca_whitening_eradicates_anisotropy():
+def test_zca_whitening_eradicates_anisotropy() -> None:
     """Verifies that ZCA whitening restores covariance identity on anisotropic features."""
     np.random.seed(42)
     N, d = 400, 16
@@ -63,7 +63,7 @@ def test_zca_whitening_eradicates_anisotropy():
     assert compute_isoscore(X_white) > 0.90
 
 
-def test_m_knn_structural_neighborhood_alignment():
+def test_m_knn_structural_neighborhood_alignment() -> None:
     """Tests that mutual-kNN captures local neighborhood topologies invariant to orthogonal rotations."""
     np.random.seed(42)
     N, d = 200, 16
@@ -89,7 +89,7 @@ def test_m_knn_structural_neighborhood_alignment():
     assert unrelated_overlap < 0.15
 
 
-def test_whitened_cka_metric():
+def test_whitened_cka_metric() -> None:
     """Verifies that Whitened CKA yields 1.0 for identical representations."""
     np.random.seed(42)
     N, d = 100, 8

@@ -100,7 +100,7 @@ def calibrate_operator(X_raw, Y_compressed, f_reconstruct, design_temp_k=320.0, 
         "design_temp_k": design_temp_k,
     }
 
-def emit_rust_constants(calib_data, output_filepath):
+def emit_rust_constants(calib_data, output_filepath) -> None:
     """
     Emite el archivo .rs con la implementación de TopologicalCompressorFixed.
     """
@@ -125,7 +125,7 @@ impl TopologicalCompressorFixed for SheafFusionOperator {{
         f.write(code)
     print(f"[✓] Constantes Rust emitidas exitosamente en: {output_filepath}")
 
-def main():
+def main() -> None:
     np.random.seed(42)
     # Generar nube de datos de prueba isomórfica al corpus (1000 muestras, d=64)
     N = 1000

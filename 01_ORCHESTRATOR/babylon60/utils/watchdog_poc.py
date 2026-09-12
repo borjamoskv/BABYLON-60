@@ -19,7 +19,7 @@ POISONED_STATE = 0xDEAD6060
 current_state = 0x00000001
 
 
-def trigger_macos_alert():
+def trigger_macos_alert() -> None:
     os.system(
         'osascript -e \'display notification "ALERTA BIZANTINA: El Kernel BABYLON-60 ha invocado un Epistemic Halt (0xDEAD_6060). Recibo SCITT emitido." with title "💥 BABYLON-60 KERNEL PANIC" sound name "Basso"\''
     )

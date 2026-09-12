@@ -24,11 +24,11 @@ import uuid
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict
+from typing import Dict, List, Optional, Tuple, TypedDict
 
 from babylon60.bft.cortex_crypto_kernel import (
     _canonical_json,
-    compute_cortex_hash,
+    compute_cortex_hash as compute_cortex_hash,
     build_merkle_tree,
     generate_merkle_proof,
     verify_merkle_proof,
@@ -36,15 +36,56 @@ from babylon60.bft.cortex_crypto_kernel import (
     ZERO_HASH_256,
     NAMESPACE_CORTEX,
     MerkleMountainRange,
+    MerkleProof,
+    MMRProofStep,
 )
 
 logger = logging.getLogger("babylon60.bft.cortex_persist")
+
+CortexLedgerRow = Tuple[str, str, str, str, str, str, int, str, str, str]
+
+
+class EventResult(TypedDict):
+    seq: int
+    event_id: str
+    entry_hash: str
+    lamport_t: int
+    status: str
+
+
+class BatchProcessResult(TypedDict):
+    seq: int
+    event_id: str
+    entry_hash: str
+    lamport_t: int
+    status: str
+    row: Optional[CortexLedgerRow]
+
+
+class MMREventProof(TypedDict):
+    leaf_index: int
+    total_leaves: int
+    peak_index: int
+    inner_proof: list[MMRProofStep]
+    other_peaks: list[str]
+    mmr_root: str
+    leaf_hash: str
+
+
+class StateAttestation(TypedDict):
+    total_entries: int
+    max_lamport: int
+    max_seq: int
+    merkle_root: str
+    mmr_root: str
+    integrity_verified: bool
+    attested_at: str
 
 
 @dataclass(frozen=True)
 class CortexEvent:
     event_type: str
-    payload: Dict[str, Any]
+    payload: Dict[str, object]
     cortex_taint: str
     agent_id: str = "ULTRATHINK-APEX"
     domain: str = "babylon60.com"
@@ -102,7 +143,7 @@ class CortexPersistLedger:
             )
             conn.commit()
 
-    def append_event(self, event: CortexEvent) -> Dict[str, Any]:
+    def append_event(self, event: CortexEvent) -> EventResult:
         """
         Inserta un evento en el ledger BFT inmutable calculando Lamport y SHA3-256.
         Garantiza idempotencia vía UUID v5. Utiliza BEGIN IMMEDIATE (FIX C5-06).
@@ -133,7 +174,7 @@ class CortexPersistLedger:
                 raise
 
     @staticmethod
-    def _check_existing_event(cursor: sqlite3.Cursor, event_id: str) -> Dict[str, Any] | None:
+    def _check_existing_event(cursor: sqlite3.Cursor, event_id: str) -> Optional[EventResult]:
         cursor.execute("SELECT seq, entry_hash, lamport_t FROM cortex_ledger WHERE event_id = ?", (event_id,))
         row = cursor.fetchone()
         if not row:
@@ -154,7 +195,7 @@ class CortexPersistLedger:
         event_id: str,
         payload_json: str,
         timestamp: str,
-    ) -> Dict[str, Any]:
+    ) -> EventResult:
         cursor.execute("SELECT MAX(lamport_t), entry_hash FROM cortex_ledger ORDER BY seq DESC LIMIT 1")
         last_row = cursor.fetchone()
         last_lamport = last_row[0] if (last_row and last_row[0] is not None) else 0
@@ -213,8 +254,8 @@ class CortexPersistLedger:
         prev_hash: str,
         current_seq: int,
         timestamp: str,
-        batch_index: dict[str, tuple[int, str, int]] | None = None,
-    ) -> dict[str, Any]:
+        batch_index: Dict[str, Tuple[int, str, int]] | None = None,
+    ) -> BatchProcessResult:
         if not ev.cortex_taint:
             raise ValueError("INV_BFT_03: cortex_taint es obligatorio")
 
@@ -265,7 +306,7 @@ class CortexPersistLedger:
             domain=ev.domain,
         )
 
-        row = (
+        row: CortexLedgerRow = (
             event_id,
             ev.event_type,
             payload_json,
@@ -290,20 +331,27 @@ class CortexPersistLedger:
 
     def _build_batch_rows(
         self,
-        events: list[CortexEvent],
+        events: List[CortexEvent],
         cursor: sqlite3.Cursor,
         last_lamport: int,
         prev_hash: str,
         current_seq: int,
         timestamp: str,
-    ) -> tuple[list[dict[str, Any]], list[tuple]]:
-        results = []
-        rows_to_insert = []
-        batch_index: dict[str, tuple[int, str, int]] = {}
+    ) -> Tuple[List[EventResult], List[CortexLedgerRow]]:
+        results: List[EventResult] = []
+        rows_to_insert: List[CortexLedgerRow] = []
+        batch_index: Dict[str, Tuple[int, str, int]] = {}
         for ev in events:
             res = self._process_batch_event(ev, cursor, last_lamport, prev_hash, current_seq, timestamp, batch_index)
-            row = res.pop("row")
-            results.append(res)
+            row = res["row"]
+            event_res: EventResult = {
+                "seq": res["seq"],
+                "event_id": res["event_id"],
+                "entry_hash": res["entry_hash"],
+                "lamport_t": res["lamport_t"],
+                "status": res["status"],
+            }
+            results.append(event_res)
             if row:
                 rows_to_insert.append(row)
                 prev_hash = row[8]
@@ -316,7 +364,7 @@ class CortexPersistLedger:
             # intervención de ningún atacante.
         return results, rows_to_insert
 
-    def append_batch(self, events: list[CortexEvent]) -> list[Dict[str, Any]]:
+    def append_batch(self, events: List[CortexEvent]) -> List[EventResult]:
         """
         Inserta un lote masivo de eventos en una única transacción BFT atómica.
         Throughput medido: ~26,000 eventos/s por lote en hardware CI estándar
@@ -360,9 +408,12 @@ class CortexPersistLedger:
             return results
 
     @staticmethod
-    def _check_duplicate(cursor: sqlite3.Cursor, event_id: str) -> Any:
+    def _check_duplicate(cursor: sqlite3.Cursor, event_id: str) -> Optional[Tuple[int, str, int]]:
         cursor.execute("SELECT seq, entry_hash, lamport_t FROM cortex_ledger WHERE event_id = ?", (event_id,))
-        return cursor.fetchone()
+        row = cursor.fetchone()
+        if row is None:
+            return None
+        return (int(row[0]), str(row[1]), int(row[2]))
 
     def verify_integrity(self, chunk_size: int = 1000) -> bool:
         """
@@ -379,11 +430,7 @@ class CortexPersistLedger:
             last_lamport = 0
             expected_seq = 1
 
-            while True:
-                rows = cursor.fetchmany(chunk_size)
-                if not rows:
-                    break
-
+            while rows := cursor.fetchmany(chunk_size):
                 for row in rows:
                     (
                         seq,
@@ -438,7 +485,7 @@ class CortexPersistLedger:
 
         return build_merkle_tree(entry_hashes)
 
-    def get_event_proof(self, seq: int) -> Dict[str, Any]:
+    def get_event_proof(self, seq: int) -> MerkleProof:
         """
         Genera una prueba de inclusión de Merkle O(log N) para un evento específico por seq.
         Cumple con el estándar de evidencia verificable del EU AI Act.
@@ -455,7 +502,7 @@ class CortexPersistLedger:
         return generate_merkle_proof(leaves, target_index)
 
     @staticmethod
-    def verify_event_proof(proof_packet: Dict[str, Any], merkle_root: str) -> bool:
+    def verify_event_proof(proof_packet: MerkleProof, merkle_root: str) -> bool:
         """
         Verifica una prueba de inclusión de Merkle O(log N) sin requerir acceso a la base de datos.
         """
@@ -486,7 +533,7 @@ class CortexPersistLedger:
         """
         return self.get_mmr().get_root()
 
-    def get_mmr_event_proof(self, seq: int) -> Dict[str, Any]:
+    def get_mmr_event_proof(self, seq: int) -> MMREventProof:
         """
         Genera una prueba de inclusión MMR O(log N) para un evento específico por seq.
         Cumple con el estándar de evidencia forense append-only (arXiv:2609.04017 / EU AI Act).
@@ -505,11 +552,19 @@ class CortexPersistLedger:
 
         target_index = seq - 1
         proof = mmr.generate_proof(target_index)
-        proof["leaf_hash"] = leaves[target_index]
-        return proof
+        event_proof: MMREventProof = {
+            "leaf_index": proof["leaf_index"],
+            "total_leaves": proof["total_leaves"],
+            "peak_index": proof["peak_index"],
+            "inner_proof": proof["inner_proof"],
+            "other_peaks": proof["other_peaks"],
+            "mmr_root": proof["mmr_root"],
+            "leaf_hash": leaves[target_index],
+        }
+        return event_proof
 
     @staticmethod
-    def verify_mmr_event_proof(proof_packet: Dict[str, Any], mmr_root: str) -> bool:
+    def verify_mmr_event_proof(proof_packet: MMREventProof, mmr_root: str) -> bool:
         """
         Verifica una prueba de inclusión MMR O(log N) contra una raíz MMR esperada.
         """
@@ -519,7 +574,7 @@ class CortexPersistLedger:
             expected_root=mmr_root,
         )
 
-    def get_state_attestation(self) -> Dict[str, Any]:
+    def get_state_attestation(self) -> StateAttestation:
         """
         Retorna un manifiesto de atestación del estado actual del ledger (Causal-Determinist).
         """

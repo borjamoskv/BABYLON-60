@@ -22,7 +22,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
         
     - name: Install uv
-      uses: astral-sh/setup-uv@f94ec08e8a939077271e16104c9ff09d13e3bc3f
+      uses: astral-sh/setup-uv@v5
         
     - name: Install dependencies
       run: |
@@ -34,4 +34,4 @@ jobs:
     - name: Run tests with pytest
       run: |
         source .venv/bin/activate
-        pytest tests/ || echo "No tests found or tests failed, please check."
+        pytest tests/

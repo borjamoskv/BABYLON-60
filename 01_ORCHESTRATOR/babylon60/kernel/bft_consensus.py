@@ -3,8 +3,10 @@ BABYLON-60 BFT Consensus Module
 Resuelve fallas Bizantinas y evalúa el Principio de Energía Libre.
 """
 
+from typing import Any
 
-def evaluate_thermodynamic_invariants(ast_tree: dict, dependencies: list) -> dict:
+
+def evaluate_thermodynamic_invariants(ast_tree: dict[str, Any], dependencies: list[str]) -> dict[str, Any]:
     """
     Auditoría estricta BFT.
     - Calcula el Semantic Anergy Ratio (SAR).

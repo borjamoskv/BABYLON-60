@@ -5,8 +5,8 @@ logger = logging.getLogger("bft_db_async")
 
 
 async def persist_bft_event(
-    db_path: str, event_id: str, payload: str, lamport_t: int, cortex_taint: str, prev_hash: str = None
-):
+    db_path: str, event_id: str, payload: str, lamport_t: int, cortex_taint: str, prev_hash: str | None = None
+) -> None:
     """
     Persiste un colapso de estado BFT en cortex.db de manera asíncrona.
     """

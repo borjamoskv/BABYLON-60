@@ -63,7 +63,7 @@ def generate_dry_run_tx(merkle_root_hex: str) -> str:
     return version + input_count + tx_in + output_count + tx_out + locktime
 
 
-def main():
+def main() -> None:
     # Control Flow Depth: 1 (FunctionDef)
     parser = argparse.ArgumentParser(description="Bitcoin L1 Thermodynamic Anchor (BABYLON-60)")
     parser.add_argument(

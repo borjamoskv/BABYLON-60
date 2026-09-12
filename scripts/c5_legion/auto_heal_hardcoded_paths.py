@@ -16,7 +16,7 @@ WORKSPACE_DIR = Path(__file__).resolve().parent.parent.parent
 class HardcodedPathRemediator(ast.NodeTransformer):
     """AST Transformer that converts string literals containing user home paths to Path.home() calls."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.modified = False
         self.needs_pathlib = False
 

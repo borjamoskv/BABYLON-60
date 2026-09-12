@@ -84,7 +84,7 @@ def scan_file(filepath: str) -> list:
 # ENJAMBRE LEGIÓN-100
 # ----------------------------------------------------------------------------
 
-def main():
+def main() -> None:
     target_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     
     if RICH_AVAILABLE:

@@ -24,7 +24,7 @@ import urllib.parse
 from urllib.error import HTTPError
 
 
-def log(msg):
+def log(msg) -> None:
     print(f"[Moskv-PoC] {msg}")
 
 
@@ -73,7 +73,7 @@ def _poll_single(base_url, headers, task_id):
         return None
 
 
-def run_fsm(bearer_token, cookie_str, prompt):
+def run_fsm(bearer_token, cookie_str, prompt) -> None:
     base_url = "https://labs.google/fx/api/trpc"
     headers = {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",

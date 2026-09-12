@@ -28,7 +28,6 @@ ENV PATH="/root/.local/bin:/opt/cargo/bin:$PATH"
 
 COPY pyproject.toml uv.lock Cargo.toml Cargo.lock* ./
 COPY crates ./crates
-COPY packages ./packages
 COPY src ./src
 COPY experiments ./experiments
 COPY README.md LICENSE ./

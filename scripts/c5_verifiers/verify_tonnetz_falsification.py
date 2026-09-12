@@ -26,7 +26,7 @@ def landauer_exergy_dissipation(d_kl_bits: float) -> float:
     """Calcula la disipación exergética mínima irreversible ΔΞ."""
     return LANDAUER_UNIT * d_kl_bits
 
-def verify_falsification_vector():
+def verify_falsification_vector() -> None:
     print("============================================================")
     print("  BABYLON-60 — VERIFICADOR DE FALSACIÓN TERMODINÁMICA")
     print("============================================================")

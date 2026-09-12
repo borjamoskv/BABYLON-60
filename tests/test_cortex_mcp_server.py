@@ -11,21 +11,23 @@ Authorship: Telmo Dinámico de Moskv (borjamoskv)
 
 import json
 from pathlib import Path
+from typing import Any, cast
 from babylon60.mcp.cortex_mcp_server import CortexMCPServer
 
 
-def test_mcp_initialize(tmp_path: Path):
+def test_mcp_initialize(tmp_path: Path) -> None:
     server = CortexMCPServer(ledger_path=tmp_path / "ledger.db", mail_ledger_path=tmp_path / "mail.db")
     request = {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {}}
     response = server.process_request(request)
     assert response is not None
     assert response["jsonrpc"] == "2.0"
     assert response["id"] == 1
-    assert "protocolVersion" in response["result"]
-    assert response["result"]["serverInfo"]["name"] == "cortex-persist-bft"
+    result = cast(dict[str, Any], response["result"])
+    assert "protocolVersion" in result
+    assert result["serverInfo"]["name"] == "cortex-persist-bft"
 
 
-def test_mcp_tools_list(tmp_path: Path):
+def test_mcp_tools_list(tmp_path: Path) -> None:
     server = CortexMCPServer(
         ledger_path=tmp_path / "ledger.db",
         mail_ledger_path=tmp_path / "mail.db",
@@ -34,7 +36,8 @@ def test_mcp_tools_list(tmp_path: Path):
     request = {"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}}
     response = server.process_request(request)
     assert response is not None
-    tools = response["result"]["tools"]
+    result = cast(dict[str, Any], response["result"])
+    tools = result["tools"]
     tool_names = [t["name"] for t in tools]
     assert "bft_append_event" in tool_names
     assert "bft_query_ledger" in tool_names
@@ -45,7 +48,7 @@ def test_mcp_tools_list(tmp_path: Path):
     assert "causal_verify_ledger" in tool_names
 
 
-def test_mcp_resources_list(tmp_path: Path):
+def test_mcp_resources_list(tmp_path: Path) -> None:
     server = CortexMCPServer(
         ledger_path=tmp_path / "ledger.db",
         mail_ledger_path=tmp_path / "mail.db",
@@ -54,14 +57,15 @@ def test_mcp_resources_list(tmp_path: Path):
     request = {"jsonrpc": "2.0", "id": 3, "method": "resources/list", "params": {}}
     response = server.process_request(request)
     assert response is not None
-    resources = response["result"]["resources"]
+    result = cast(dict[str, Any], response["result"])
+    resources = result["resources"]
     uris = [r["uri"] for r in resources]
     assert "bft://ledger/status" in uris
     assert "bft://merkle/attestation" in uris
     assert "bft://causal/ledger" in uris
 
 
-def test_mcp_tool_bft_append_and_query(tmp_path: Path):
+def test_mcp_tool_bft_append_and_query(tmp_path: Path) -> None:
     server = CortexMCPServer(
         ledger_path=tmp_path / "ledger.db",
         mail_ledger_path=tmp_path / "mail.db",
@@ -80,8 +84,9 @@ def test_mcp_tool_bft_append_and_query(tmp_path: Path):
     }
     res_append = server.process_request(req_append)
     assert res_append is not None
-    assert not res_append["result"]["isError"]
-    content = res_append["result"]["content"][0]["text"]
+    result_append = cast(dict[str, Any], res_append["result"])
+    assert not result_append["isError"]
+    content = result_append["content"][0]["text"]
     assert "🟢 Event appended to BFT Ledger" in content
     assert "Status:     C5_PERMANENT" in content
 
@@ -94,14 +99,15 @@ def test_mcp_tool_bft_append_and_query(tmp_path: Path):
     }
     res_query = server.process_request(req_query)
     assert res_query is not None
-    assert not res_query["result"]["isError"]
-    query_text = res_query["result"]["content"][0]["text"]
+    result_query = cast(dict[str, Any], res_query["result"])
+    assert not result_query["isError"]
+    query_text = result_query["content"][0]["text"]
     query_data = json.loads(query_text)
     assert query_data["total_returned"] == 1
     assert query_data["entries"][0]["event_type"] == "TEST_EVENT"
 
 
-def test_mcp_causal_tools_and_resources(tmp_path: Path):
+def test_mcp_causal_tools_and_resources(tmp_path: Path) -> None:
     server = CortexMCPServer(
         ledger_path=tmp_path / "ledger.db",
         mail_ledger_path=tmp_path / "mail.db",
@@ -117,7 +123,8 @@ def test_mcp_causal_tools_and_resources(tmp_path: Path):
     }
     res_eval = server.process_request(req_eval)
     assert res_eval is not None
-    assert "CRITICAL" in res_eval["result"]["content"][0]["text"]
+    res_eval_res = cast(dict[str, Any], res_eval["result"])
+    assert "CRITICAL" in res_eval_res["content"][0]["text"]
 
     # 2. Register sign-off
     req_sign = {
@@ -131,7 +138,8 @@ def test_mcp_causal_tools_and_resources(tmp_path: Path):
     }
     res_sign = server.process_request(req_sign)
     assert res_sign is not None
-    assert "SHA256 Recpt" in res_sign["result"]["content"][0]["text"]
+    res_sign_res = cast(dict[str, Any], res_sign["result"])
+    assert "SHA256 Recpt" in res_sign_res["content"][0]["text"]
 
     # 3. Verify causal ledger tool
     req_verify = {
@@ -142,18 +150,20 @@ def test_mcp_causal_tools_and_resources(tmp_path: Path):
     }
     res_verify = server.process_request(req_verify)
     assert res_verify is not None
-    assert "VERIFIED OK" in res_verify["result"]["content"][0]["text"]
+    res_verify_res = cast(dict[str, Any], res_verify["result"])
+    assert "VERIFIED OK" in res_verify_res["content"][0]["text"]
 
     # 4. Read causal resource
     req_res = {"jsonrpc": "2.0", "id": 13, "method": "resources/read", "params": {"uri": "bft://causal/ledger"}}
     res_res = server.process_request(req_res)
     assert res_res is not None
-    data = json.loads(res_res["result"]["contents"][0]["text"])
+    res_res_res = cast(dict[str, Any], res_res["result"])
+    data = json.loads(res_res_res["contents"][0]["text"])
     assert data["causal_gate_status"] == "ACTIVE"
     assert data["scitt_integrity_verified"] is True
 
 
-def test_mcp_resource_read(tmp_path: Path):
+def test_mcp_resource_read(tmp_path: Path) -> None:
     server = CortexMCPServer(
         ledger_path=tmp_path / "ledger.db",
         mail_ledger_path=tmp_path / "mail.db",
@@ -162,7 +172,8 @@ def test_mcp_resource_read(tmp_path: Path):
     request = {"jsonrpc": "2.0", "id": 6, "method": "resources/read", "params": {"uri": "bft://merkle/attestation"}}
     response = server.process_request(request)
     assert response is not None
-    contents = response["result"]["contents"]
+    result = cast(dict[str, Any], response["result"])
+    contents = result["contents"]
     assert len(contents) == 1
     assert contents[0]["uri"] == "bft://merkle/attestation"
     data = json.loads(contents[0]["text"])

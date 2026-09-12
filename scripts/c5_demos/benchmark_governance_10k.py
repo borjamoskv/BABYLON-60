@@ -25,7 +25,20 @@ import struct
 import threading
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
-from typing import List, Dict, Any
+from typing import List, Dict, Any, TypedDict
+
+class DisseqtSpan(TypedDict):
+    span_id: str
+    agent_id: int
+    tool: str
+    status: str
+    timestamp: float
+
+class HitlMetrics(TypedDict):
+    escalated_requests: int
+    human_pool_size: int
+    backlog_clearing_time_hours: float
+    blocked_agents_percent: float
 
 TOTAL_AGENTS = 10_000
 ACTIONS_PER_AGENT = 2
@@ -42,16 +55,16 @@ class DisseqtTraceBufferSimulator:
     - Si len(buffer) >= max_batch_size, invoca _flush_locked() MIENTRAS SOSTIENE EL LOCK
     - self.transport.send_spans_with_failures() ejecuta HTTP POST síncrono bajo el lock
     """
-    def __init__(self, max_batch_size: int = 100, max_retained: int = 1000, network_latency_sec: float = 0.005):
+    def __init__(self, max_batch_size: int = 100, max_retained: int = 1000, network_latency_sec: float = 0.005) -> None:
         self.lock = threading.Lock()
-        self.buffer: List[Dict[str, Any]] = []
+        self.buffer: List[DisseqtSpan] = []
         self.max_batch_size = max_batch_size
         self.max_retained = max_retained
         self.network_latency_sec = network_latency_sec # 5ms por batch (altamente optimista)
         self.dropped_spans = 0
         self.flushed_spans = 0
 
-    def add_span(self, span: Dict[str, Any]):
+    def add_span(self, span: DisseqtSpan) -> None:
         with self.lock:
             # Drop si excede retención máxima
             if len(self.buffer) >= self.max_retained:
@@ -75,13 +88,13 @@ class HitlSaturationSimulator:
     Simula una tasa de escalación del 1% hacia revisión humana obligatoria
     sobre 10.000 agentes concurrentes.
     """
-    def __init__(self, escalation_rate: float = 0.01, human_review_sec: float = 15.0, human_pool: int = 5):
+    def __init__(self, escalation_rate: float = 0.01, human_review_sec: float = 15.0, human_pool: int = 5) -> None:
         self.escalation_rate = escalation_rate
         self.human_review_sec = human_review_sec
         self.human_pool = human_pool
         self.escalated_cases = 0
 
-    def process_actions(self, total_actions: int) -> Dict[str, Any]:
+    def process_actions(self, total_actions: int) -> HitlMetrics:
         escalated = int(total_actions * self.escalation_rate)
         # Capacidad del equipo: human_pool revisores atendiendo a human_review_sec por ticket
         throughput_per_sec = self.human_pool / self.human_review_sec
@@ -112,7 +125,7 @@ class C5RealSovereignGate:
     - Anillo de telemetría sin locks (Atomic Increment simulado por array estático).
     - Cero serialización JSON, cero asignaciones de memoria dinámicas.
     """
-    def __init__(self, capacity: int = 50_000):
+    def __init__(self, capacity: int = 50_000) -> None:
         self.capacity = capacity
         # Buffer de telemetría binaria compacta (16 bytes por evento: agent_id (4B), tool_id (2B), decision (2B), timestamp_us (8B))
         self.telemetry_buffer = bytearray(capacity * 16)
@@ -138,7 +151,7 @@ class C5RealSovereignGate:
 # ============================================================================
 # 4. EJECUCIÓN EXPERIMENTAL DEL BENCHMARK
 # ============================================================================
-def run_benchmark():
+def run_benchmark() -> None:
     print("=" * 80)
     print(f"BABYLON-60 v4.0 | FALSIFICACIÓN EMPÍRICA DE GOBERNANZA DE AGENTES")
     print(f"Carga de Trabajo: {TOTAL_AGENTS:,} Agentes Concurrentes × {ACTIONS_PER_AGENT} ops = {TOTAL_OPERATIONS:,} ops")
@@ -150,7 +163,7 @@ def run_benchmark():
     
     t0 = time.perf_counter()
     with ThreadPoolExecutor(max_workers=32) as executor:
-        def agent_disseqt_task(a_id):
+        def agent_disseqt_task(a_id: int) -> None:
             for op in range(ACTIONS_PER_AGENT):
                 disseqt_sim.add_span({
                     "span_id": f"span_{a_id}_{op}",
@@ -196,7 +209,7 @@ def run_benchmark():
     
     t0 = time.perf_counter()
     with ThreadPoolExecutor(max_workers=32) as executor:
-        def agent_c5_task(a_id):
+        def agent_c5_task(a_id: int) -> None:
             # Asignar capacidades según ID
             agent_caps = CAP_READ_FS | CAP_NET_HTTP if (a_id % 2 == 0) else CAP_READ_FS
             required_caps = CAP_READ_FS

@@ -17,7 +17,7 @@ class ConflictReport:
     severity: str = "none"
     conflicts: List[str] = field(default_factory=list)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if self.conflicts is None:
             self.conflicts = []
 

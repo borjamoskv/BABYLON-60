@@ -2,7 +2,7 @@ import pytest
 from babylon60.primitives.disintegration_matrix import disintegrate, disintegration_matrix, pushforward, verify_symmetry
 
 
-def test_bayesian_disintegration_valid():
+def test_bayesian_disintegration_valid() -> None:
     p = {"state_A": 0.7, "state_B": 0.3, "state_C": 0.0}
     F = {
         "state_A": {"obs_1": 0.8, "obs_2": 0.2},
@@ -26,7 +26,7 @@ def test_bayesian_disintegration_valid():
     assert verify_symmetry(p, F, D) is True
 
 
-def test_hallucination_prevention():
+def test_hallucination_prevention() -> None:
     p = {"A": 1.0, "B": 0.0}
     F = {"A": {"y1": 1.0, "y2": 0.0}, "B": {"y1": 0.0, "y2": 1.0}}
 

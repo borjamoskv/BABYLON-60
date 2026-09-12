@@ -14,6 +14,8 @@ romper el tiempo de importación global.
 """
 
 import logging
+import types
+from typing import cast
 
 logger = logging.getLogger("BABYLON-60.COMPAT")
 
@@ -21,23 +23,25 @@ logger = logging.getLogger("BABYLON-60.COMPAT")
 class MissingOptionalDependency:
     """Mock object that raises an error only when accessed/called."""
 
-    def __init__(self, name: str, pip_package: str):
+    def __init__(self, name: str, pip_package: str) -> None:
         self._name = name
         self._pip_package = pip_package
 
-    def __getattr__(self, item):
+    def __getattr__(self, item: str) -> object:
         raise ImportError(
             f"❌ Dependencia Opcional Faltante: El ecosistema requiere '{self._name}' "
             f"para colapsar esta función matemática. Ejecuta: pip install {self._pip_package}"
         )
 
-    def __call__(self, *args, **kwargs):
+    def __call__(self, *args: object, **kwargs: object) -> None:
         self.__getattr__("__call__")
 
 
-# Intento de importación local de NumPy (Lazy Compute Bridge)
 try:
-    import numpy as np
+    import numpy as _real_np
+
+    np: types.ModuleType = _real_np
 except ImportError:
-    logger.debug("NumPy no detectado. Degradación a proxy pasivo (requiere cortex-persist[compute]).")
-    np = MissingOptionalDependency("numpy", "numpy")
+    np = cast(types.ModuleType, MissingOptionalDependency("numpy", "numpy"))
+
+__all__ = ["np", "MissingOptionalDependency"]

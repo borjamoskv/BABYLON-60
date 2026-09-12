@@ -24,13 +24,13 @@ class SharedManifestCTypes(ctypes.Structure):
     ]
 
 
-def verify_manifest_struct_alignment():
+def verify_manifest_struct_alignment() -> None:
     size = ctypes.sizeof(SharedManifestCTypes)
     print(f"[*] CTypes SharedManifest Size: {size} bytes")
     assert size == 64, f"Error: tamaño de SharedManifestCTypes es {size} bytes, se requerían 64"
     print("[✓] Alineación e isomorfismo de memoria C-ABI verificado (64 Bytes).")
 
-def main():
+def main() -> None:
     print("=== BABYLON-60 Python Zero-Copy Multiprocess Reader Bridge ===")
     verify_manifest_struct_alignment()
 

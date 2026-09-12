@@ -21,7 +21,7 @@ def run_command(cmd, cwd=None):
         sys.exit(result.returncode)
     return result.stdout
 
-def main():
+def main() -> None:
     workspace_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     test_src = os.path.join(workspace_dir, "tests", "cache_kinetic_benchmark.cpp")
     test_bin = os.path.join(workspace_dir, "tests", "cache_kinetic_benchmark_bin")

@@ -26,7 +26,7 @@ def generate_microtonal_sine_wave(freq_hz: float, duration_s: float, sample_rate
     return bytes(buf)
 
 
-def render_fallback_harmonic_loop(output_path: Path, note_freq: float = 130.81):  # C3 note
+def render_fallback_harmonic_loop(output_path: Path, note_freq: float = 130.81) -> None:  # C3 note
     audio_data = generate_microtonal_sine_wave(note_freq, duration_s=2.0)
     with wave.open(str(output_path), "wb") as wf:
         wf.setnchannels(1)

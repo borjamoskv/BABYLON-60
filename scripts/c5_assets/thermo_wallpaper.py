@@ -36,7 +36,7 @@ def compute_entropy(metrics):
     return -np.sum(probs * np.log2(probs + 1e-12))
 
 
-def generate_wallpaper(entropy):
+def generate_wallpaper(entropy) -> None:
     # Create a gradient based on entropy value (0-1 normalized)
     norm_entropy = min(max(entropy / 10.0, 0), 1)  # assume max entropy ~10
     cmap = plt.get_cmap("coolwarm")
@@ -53,7 +53,7 @@ def generate_wallpaper(entropy):
     print(f"Wallpaper saved to {out_path}")
 
 
-def main():
+def main() -> None:
     metrics = load_metrics()
     entropy = compute_entropy(metrics)
     print(f"Computed entropy: {entropy:.4f}")

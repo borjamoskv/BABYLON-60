@@ -5,7 +5,7 @@ and Hybrid License Verification.
 """
 
 
-def test_redaction_layer_sanitizes_pii_and_secrets():
+def test_redaction_layer_sanitizes_pii_and_secrets() -> None:
     _raw_data = {
         "user_email": "admin@company.com",
         "api_key": "api_key_secret_1234567890_super_secret",

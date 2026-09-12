@@ -1,10 +1,11 @@
+from collections.abc import Callable
 import os
 import tkinter as tk
 from tkinter import font
 
 
 class EpistemicHaltUI:
-    def __init__(self):
+    def __init__(self) -> None:
         self.root = tk.Tk()
         self.root.title("BABYLON-60 CORE INTERRUPT")
         self.root.geometry("800x500")
@@ -45,31 +46,29 @@ class EpistemicHaltUI:
         btn_frame = tk.Frame(self.root, bg="#050505")
         btn_frame.pack(pady=20)
 
-        def on_click(action):
+        def on_click(action: str) -> None:
             print(f"Resolución de operador: {action}")
             self.root.destroy()
 
-        btn_style = {
-            "bg": "#1a1a1a",
-            "fg": "#ffffff",
-            "font": btn_font,
-            "activebackground": "#ff3333",
-            "activeforeground": "#ffffff",
-            "bd": 1,
-            "relief": "solid",
-            "padx": 10,
-            "pady": 5,
-        }
+        def create_button(text: str, cmd: Callable[[], None], fg: str = "#ffffff") -> tk.Button:
+            return tk.Button(
+                btn_frame,
+                text=text,
+                command=cmd,
+                bg="#1a1a1a",
+                fg=fg,
+                font=btn_font,
+                activebackground="#ff3333",
+                activeforeground="#ffffff",
+                bd=1,
+                relief="solid",
+                padx=10,
+                pady=5,
+            )
 
-        tk.Button(btn_frame, text="[F-1] FORZAR CLAUDE 4.6", command=lambda: on_click("Claude"), **btn_style).grid(
-            row=0, column=0, padx=10
-        )
-        tk.Button(btn_frame, text="[F-2] DEGRADAR 3.8 FLASH", command=lambda: on_click("Flash"), **btn_style).grid(
-            row=0, column=1, padx=10
-        )
-
-        btn_style["fg"] = "#ff3333"
-        tk.Button(btn_frame, text="[F-3] PURGA TERMODINÁMICA", command=lambda: on_click("Kill"), **btn_style).grid(
+        create_button("[F-1] FORZAR CLAUDE 4.6", lambda: on_click("Claude")).grid(row=0, column=0, padx=10)
+        create_button("[F-2] DEGRADAR 3.8 FLASH", lambda: on_click("Flash")).grid(row=0, column=1, padx=10)
+        create_button("[F-3] PURGA TERMODINÁMICA", lambda: on_click("Kill"), fg="#ff3333").grid(
             row=0, column=2, padx=10
         )
 
@@ -77,7 +76,7 @@ class EpistemicHaltUI:
         self.root.lift()
         self.root.attributes("-topmost", True)
 
-    def run(self):
+    def run(self) -> None:
         # Voz de alerta
         os.system("say -v 'Mónica' 'Colapso epistémico crítico. Alerta termodinámica.' &")
         self.root.mainloop()

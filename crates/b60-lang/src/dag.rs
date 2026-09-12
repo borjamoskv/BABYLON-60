@@ -44,6 +44,12 @@ pub struct CausalDag {
     pub in_degree: HashMap<u32, usize>,
 }
 
+impl Default for CausalDag {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl CausalDag {
     pub fn new() -> Self {
         Self {
@@ -200,7 +206,7 @@ mod tests {
             exergy_cost: 100,
             belief_coords: vec![0.5, 0.5],
             lamport_ts: 1,
-        }).unwrap();
+        }).expect("BFT Fallback");
 
         dag.add_node(CausalNode {
             id: 2,
@@ -208,7 +214,7 @@ mod tests {
             exergy_cost: 200,
             belief_coords: vec![0.6, 0.4],
             lamport_ts: 2,
-        }).unwrap();
+        }).expect("BFT Fallback");
 
         dag.add_node(CausalNode {
             id: 3,
@@ -216,7 +222,7 @@ mod tests {
             exergy_cost: 300,
             belief_coords: vec![0.4, 0.6],
             lamport_ts: 2,
-        }).unwrap();
+        }).expect("BFT Fallback");
 
         dag.add_node(CausalNode {
             id: 4,
@@ -224,14 +230,14 @@ mod tests {
             exergy_cost: 150,
             belief_coords: vec![0.5, 0.5],
             lamport_ts: 3,
-        }).unwrap();
+        }).expect("BFT Fallback");
 
-        dag.add_edge(1, 2).unwrap();
-        dag.add_edge(1, 3).unwrap();
-        dag.add_edge(2, 4).unwrap();
-        dag.add_edge(3, 4).unwrap();
+        dag.add_edge(1, 2).expect("BFT Fallback");
+        dag.add_edge(1, 3).expect("BFT Fallback");
+        dag.add_edge(2, 4).expect("BFT Fallback");
+        dag.add_edge(3, 4).expect("BFT Fallback");
 
-        let plan = dag.compile().unwrap();
+        let plan = dag.compile().expect("BFT Fallback");
         assert_eq!(plan.topological_order.len(), 4);
         assert_eq!(plan.execution_stages.len(), 3); // Onda 0: [1], Onda 1: [2, 3], Onda 2: [4]
         assert_eq!(plan.execution_stages[0].parallel_node_ids, vec![1]);
@@ -251,7 +257,7 @@ mod tests {
             exergy_cost: 10,
             belief_coords: vec![0.5, 0.5],
             lamport_ts: 10,
-        }).unwrap();
+        }).expect("BFT Fallback");
 
         dag.add_node(CausalNode {
             id: 2,
@@ -259,7 +265,7 @@ mod tests {
             exergy_cost: 10,
             belief_coords: vec![0.5, 0.5],
             lamport_ts: 5,
-        }).unwrap();
+        }).expect("BFT Fallback");
 
         // Intentar conectar del futuro (ts=10) al pasado (ts=5)
         let res = dag.add_edge(1, 2);

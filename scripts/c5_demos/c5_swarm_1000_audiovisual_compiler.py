@@ -21,7 +21,7 @@ import logging
 import resource
 import subprocess
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import List, Dict, Any
+from typing import List, Dict, Any, TypedDict, cast
 from pydantic import BaseModel, Field
 from google import genai
 from google.genai import types
@@ -42,6 +42,23 @@ class AgentReport(BaseModel):
     verdict: str
     metric: float
     payload_hash: str
+
+class ScenePhysics(TypedDict):
+    mass: float
+    damping: float
+    stiffness: float
+
+class SynthesisScene(TypedDict):
+    id: int
+    phase_title: str
+    voiceover_text: str
+    physics: ScenePhysics
+
+class SynthesisResult(TypedDict):
+    title: str
+    session_hash: str
+    falsification_vector: str
+    scenes: list[SynthesisScene]
 
 # ==============================================================================
 # 2. MOTOR DE AGENTES DE LA LEGIÓN (1.000 AGENTES EN MEMORIA - INV_C5_18)
@@ -105,12 +122,12 @@ def deploy_1000_agent_swarm(corpus: str, total_agents: int = 1000, concurrency: 
 # 3. SÍNTESIS HIPER-EXÉRGICA CON GEMINI 3.8 FLASH (Swarm Queen)
 # ==============================================================================
 class SwarmCoordinator:
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str) -> None:
         self.client = genai.Client(api_key=api_key)
         self.model = "gemini-3.8-flash"
         self.fallback = "gemini-3.6-flash"
 
-    def synthesize(self, corpus: str, swarm_reports: List[AgentReport]) -> Dict[str, Any]:
+    def synthesize(self, corpus: str, swarm_reports: List[AgentReport]) -> SynthesisResult:
         logging.info("Swarm Coordinator (Gemini 3.8 Flash): Colapsando veredictos de los 1.000 agentes...")
         
         cohort1_sample = [r.verdict for r in swarm_reports if r.cohort.startswith("COHORTE I")][:3]
@@ -168,13 +185,14 @@ class SwarmCoordinator:
                 try:
                     logging.info(f"Intentando inferencia de consenso en nodo {m} (Intento {attempt + 1})...")
                     resp = self.client.models.generate_content(model=m, contents=prompt, config=config)
-                    return json.loads(resp.text)
+                    parsed: SynthesisResult = cast(SynthesisResult, json.loads(resp.text or "{}"))
+                    return parsed
                 except Exception as e:
                     logging.warning(f"Nodo {m} con fricción ({e}). Probando siguiente...")
             time.sleep(2)
 
         logging.warning("Clústeres remotos en contención temporal (503). Activando Cristal de Consenso Inmutable (Map == Territory)...")
-        return {
+        fallback_res: SynthesisResult = {
             "title": "AUDITORÍA POPPERIANA: arXiv:2606.19404",
             "session_hash": "AX-LEGIÓN-1000",
             "falsification_vector": "Softmax disipativo no preserva balance detallado",
@@ -199,12 +217,13 @@ class SwarmCoordinator:
                 }
             ]
         }
+        return fallback_res
 
 # ==============================================================================
 # 4. COMPILADOR AUDIOVISUAL SOTA (BINAURAL THETA + REMOTION 60FPS)
 # ==============================================================================
 class SwarmAudiovisualRenderer:
-    def __init__(self, voice: str = "Mónica"):
+    def __init__(self, voice: str = "Mónica") -> None:
         self.voice = voice
 
     def get_audio_duration(self, audio_path: str) -> float:
@@ -212,10 +231,10 @@ class SwarmAudiovisualRenderer:
         result = subprocess.run(cmd, stdout=subprocess.PIPE, text=True)
         return float(result.stdout.strip())
 
-    def render_swarm_masterpiece(self, synthesis: Dict[str, Any], output_path: str):
+    def render_swarm_masterpiece(self, synthesis: SynthesisResult, output_path: str) -> None:
         os.makedirs(OUTPUT_DIR, exist_ok=True)
-        remotion_scenes = []
-        audio_tracks = []
+        remotion_scenes: list[dict[str, object]] = []
+        audio_tracks: list[str] = []
         
         logging.info("Masterizando Audio Estéreo Binaural Theta (50Hz L / 54Hz R) + Compresión Vocal...")
         for scene in synthesis["scenes"]:
@@ -308,7 +327,7 @@ class SwarmAudiovisualRenderer:
 # ==============================================================================
 # ENTRYPOINT
 # ==============================================================================
-def main():
+def main() -> None:
     API_KEY = os.environ.get("GEMINI_API_KEY")
     if not API_KEY:
         raise ValueError("GEMINI_API_KEY no definida.")

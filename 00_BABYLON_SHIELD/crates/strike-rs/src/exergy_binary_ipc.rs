@@ -129,14 +129,14 @@ mod tests {
             lamport_t: 1337,
         };
 
-        let raw = packet.pack().unwrap();
-        let unpacked = ExergyPacket::unpack(&raw).unwrap();
+        let raw = packet.pack().expect("BFT Fallback");
+        let unpacked = ExergyPacket::unpack(&raw).expect("BFT Fallback");
 
         assert_eq!(unpacked.sender, "agent_alpha");
         assert_eq!(unpacked.recipient, "agent_omega");
         assert_eq!(unpacked.lamport_t, 1337);
         assert_eq!(
-            unpacked.payload.get("command").unwrap(),
+            unpacked.payload.get("command").expect("BFT Fallback"),
             &Value::Text("deploy".to_string())
         );
     }

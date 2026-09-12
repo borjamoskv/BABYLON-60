@@ -18,15 +18,8 @@ import logging
 import os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from typing import Any, NamedTuple, cast
+from typing import NamedTuple, Protocol, TypedDict, cast
 
-try:
-    if os.environ.get("CORTEX_TESTING"):
-        keyring = None  # type: ignore[no-redef]
-    else:
-        import keyring  # type: ignore[no-redef]
-except ImportError:
-    keyring = None
 from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
@@ -34,6 +27,28 @@ from cryptography.hazmat.primitives.asymmetric import ed25519
 # from babylon60.crypto.vault import Vault  # purgado por anergía
 
 logger = logging.getLogger("babylon60.crypto.keys")
+
+
+class KeyringBackend(Protocol):
+    def set_password(self, servicename: str, username: str, password: str) -> None: ...
+    def get_password(self, servicename: str, username: str) -> str | None: ...
+    def delete_password(self, servicename: str, username: str) -> None: ...
+
+
+keyring: KeyringBackend | None = None
+if not os.environ.get("CORTEX_TESTING"):
+    try:
+        import keyring as _keyring_module
+
+        keyring = _keyring_module
+    except ImportError:
+        keyring = None
+
+
+class KeyMetadataRecord(TypedDict, total=False):
+    public_key_b64: str
+    expires_at: str | None
+    revoked: bool
 
 
 class AgentKeyPair(NamedTuple):
@@ -52,18 +67,18 @@ class KeyManager:
 
     _fallback_keyring: dict[str, dict[str, str]] = {}  # service_name -> {actor_id: private_pem}
 
-    def __init__(self, service_name: str = "cortex_persist_enterprise"):
+    def __init__(self, service_name: str = "cortex_persist_enterprise") -> None:
         self.service_name = service_name
         base_dir = Path(os.environ.get("CORTEX_DB_PATH", "~/.babylon60")).expanduser()
         if base_dir.suffix:
             base_dir = base_dir.parent
         self.db_path = base_dir / "keys" / f"{self.service_name}_metadata.json"
-        self._metadata = self._load_metadata()
+        self._metadata: dict[str, KeyMetadataRecord] = self._load_metadata()
 
-    def _load_metadata(self) -> dict[str, Any]:
+    def _load_metadata(self) -> dict[str, KeyMetadataRecord]:
         if self.db_path.exists():
             with open(self.db_path, encoding="utf-8") as f:
-                return cast(dict[str, Any], json.load(f))
+                return cast(dict[str, KeyMetadataRecord], json.load(f))
         return {}
 
     def _save_metadata(self) -> None:
@@ -376,7 +391,7 @@ class ZKSwarmIdentity:
 class KeyLifecycleManager:
     """Legacy Compatibility."""
 
-    def __init__(self, storage_path: str | Path | None = None, vault: Any = None):
+    def __init__(self, storage_path: str | Path | None = None, vault: object = None) -> None:
         self.km = KeyManager()
 
     def get_or_create_identity(self) -> AgentKeyPair:

@@ -65,26 +65,26 @@ class CodexVirtualHUD(App):
         # Start the global pynput listener in a background thread
         self.start_global_listener()
 
-    def increase_depth(self):
+    def increase_depth(self) -> None:
         if self.thermal_depth < 3:
             self.thermal_depth += 1
         self.update_thermal_status()
 
-    def decrease_depth(self):
+    def decrease_depth(self) -> None:
         if self.thermal_depth > 1:
             self.thermal_depth -= 1
         self.update_thermal_status()
 
-    def switch_agent(self):
+    def switch_agent(self) -> None:
         self.active_agent_idx = (self.active_agent_idx + 1) % 3
         self.highlight_active_agent()
 
-    def update_thermal_status(self):
+    def update_thermal_status(self) -> None:
         depth_map = {1: "L1 - FLASH LITE (Fast)", 2: "L2 - FLASH (Balanced)", 3: "L3 - PRO (Deep Reasoning)"}
         label = depth_map.get(self.thermal_depth, "MAX DEPTH")
         self.query_one("#thermal_status", Static).update(f"ROTARY DIAL [Depth]: {label}")
 
-    def highlight_active_agent(self):
+    def highlight_active_agent(self) -> None:
         for i in range(3):
             widget = self.query_one(f"#agent_{i}", AgentStatusWidget)
             if i == self.active_agent_idx:
@@ -94,17 +94,17 @@ class CodexVirtualHUD(App):
                 widget.styles.border = ("solid", "green")
                 widget.status = "⚪ IDLE"
 
-    def start_global_listener(self):
-        def on_activate_dial_up():
+    def start_global_listener(self) -> None:
+        def on_activate_dial_up() -> None:
             self.call_from_thread(self.increase_depth)
 
-        def on_activate_dial_down():
+        def on_activate_dial_down() -> None:
             self.call_from_thread(self.decrease_depth)
 
-        def on_activate_joystick():
+        def on_activate_joystick() -> None:
             self.call_from_thread(self.switch_agent)
 
-        def run_listener():
+        def run_listener() -> None:
             # These global hotkeys require macOS Accessibility Permissions when run outside of active terminal
             with keyboard.GlobalHotKeys(
                 {

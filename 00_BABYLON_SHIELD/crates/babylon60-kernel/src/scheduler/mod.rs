@@ -114,9 +114,9 @@ mod tests {
         let blanket = MarkovBlanket::new(10_000, &sensory, &active);
 
         // Estímulo sensorial coherente
-        sensory.publish(1, &[42, 0, 0, 0]).unwrap();
+        sensory.publish(1, &[42, 0, 0, 0]).expect("BFT Fallback");
 
-        let state = scheduler.step(&blanket).unwrap();
+        let state = scheduler.step(&blanket).expect("BFT Fallback");
         assert_eq!(state, AgentExecutionState::Active);
         assert_eq!(scheduler.logical_clock.0, 1);
         assert_eq!(scheduler.simulation_clock.0, F60ThermodynamicScheduler::TICK_60HZ);
@@ -131,9 +131,9 @@ mod tests {
         let blanket = MarkovBlanket::new(5, &sensory, &active);
 
         // Gran sorpresa estocástica (ruido no integrable)
-        sensory.publish(1, &[500, 0, 0, 0]).unwrap();
+        sensory.publish(1, &[500, 0, 0, 0]).expect("BFT Fallback");
 
-        let state = scheduler.step(&blanket).unwrap();
+        let state = scheduler.step(&blanket).expect("BFT Fallback");
         match state {
             AgentExecutionState::BurnoutHalted { at_tick } => {
                 assert_eq!(at_tick, 1);

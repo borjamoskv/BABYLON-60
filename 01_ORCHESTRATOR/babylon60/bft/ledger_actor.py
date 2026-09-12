@@ -9,7 +9,7 @@ import uuid
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Dict, Mapping, Optional, TypedDict
 from cryptography.fernet import Fernet
 import aiosqlite
 
@@ -18,10 +18,16 @@ class BFTCausalInvariantError(RuntimeError):
     """FAIL-FAST Exception for violations of Babylon.lean BFT invariants."""
 
 
-from babylon60.bft.cortex_crypto_kernel import compute_envelope_hash, _canonical_json  # noqa: E402
+from babylon60.bft.cortex_crypto_kernel import _canonical_json, compute_envelope_hash  # noqa: E402
 
 NAMESPACE_UUID = uuid.UUID("9897d6fd-d6a7-4fe9-86bc-f0c312886d5d")
 ZERO_HASH = "0" * 64
+
+
+class LedgerEntryResult(TypedDict):
+    seq: int
+    event_id: str
+    entry_hash: str
 
 
 def _compute_entry_hash(
@@ -60,7 +66,7 @@ class LedgerEvent:
     stream: str
     entity_id: str
     event_type: str
-    payload: Dict[str, Any]
+    payload: Mapping[str, object] | Dict[str, object]
     cortex_taint: str
     source_db: str
     source_table: str
@@ -101,7 +107,7 @@ def _compute_entry_hash_wrapper(
 class BFTLedgerActor:
     def __init__(self, db_path: Path) -> None:
         self._db_path = db_path
-        self._queue: asyncio.Queue[tuple[LedgerEvent, asyncio.Future[Dict[str, Any]]]] = asyncio.Queue(maxsize=4096)
+        self._queue: asyncio.Queue[tuple[LedgerEvent, asyncio.Future[LedgerEntryResult]]] = asyncio.Queue(maxsize=4096)
         self._task: Optional[asyncio.Task[None]] = None
         self._stop_event: asyncio.Event = asyncio.Event()
 
@@ -116,7 +122,7 @@ class BFTLedgerActor:
             self._task.cancel()
             await asyncio.gather(self._task, return_exceptions=True)
 
-    def append(self, event: LedgerEvent) -> asyncio.Future[Dict[str, Any]]:
+    def append(self, event: LedgerEvent) -> asyncio.Future[LedgerEntryResult]:
         if self._task is None:
             raise RuntimeError("BFTLedgerActor: actor not started")
         if self._task.done():
@@ -125,7 +131,7 @@ class BFTLedgerActor:
                 f"Zombie Actor Prevention triggered: worker task terminated unexpectedly. Exception: {exc}"
             ) from exc
         loop = asyncio.get_running_loop()
-        future: asyncio.Future[Dict[str, Any]] = loop.create_future()
+        future: asyncio.Future[LedgerEntryResult] = loop.create_future()
         self._queue.put_nowait((event, future))
         return future
 
@@ -291,7 +297,7 @@ class BFTLedgerActor:
         return int(db_row[0]), str(db_row[1])
 
     async def _process(
-        self, db: aiosqlite.Connection, event: LedgerEvent, future: asyncio.Future[Dict[str, Any]]
+        self, db: aiosqlite.Connection, event: LedgerEvent, future: asyncio.Future[LedgerEntryResult]
     ) -> None:
         if not event.cortex_taint or not isinstance(event.cortex_taint, str):
             raise ValueError("INV_BFT_03: cortex_taint must be a non-empty string representing the causal trace")

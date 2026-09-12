@@ -7,12 +7,13 @@ evidence hash computation, and Markdown/HTML output formatting.
 import json
 import os
 import tempfile
+from collections.abc import Iterator
 import pytest
 from babylon60.compliance_exporter.eu_ai_act import EUAIActComplianceExporter
 
 
 @pytest.fixture
-def temp_bundle_dir():
+def temp_bundle_dir() -> Iterator[str]:
     with tempfile.TemporaryDirectory() as tmpdir:
         manifest_path = os.path.join(tmpdir, "manifest.json")
         sample_manifest = {
@@ -27,7 +28,7 @@ def temp_bundle_dir():
         yield tmpdir
 
 
-def test_redact_sensitive_data():
+def test_redact_sensitive_data() -> None:
     raw_data = {
         "user_email": "operator@company.com",
         "api_key": "secret_token_1234567890",
@@ -39,7 +40,7 @@ def test_redact_sensitive_data():
     assert redacted["nested"]["safe_val"] == "hello_world"
 
 
-def test_generate_certificate(temp_bundle_dir):
+def test_generate_certificate(temp_bundle_dir: str) -> None:
     exporter = EUAIActComplianceExporter(artifact_bundle_path=temp_bundle_dir)
     cert = exporter.generate_certificate(system_id="SYS-TEST-99", operator_name="Acme Corp", locale="es")
 
@@ -51,7 +52,7 @@ def test_generate_certificate(temp_bundle_dir):
     assert len(cert["articles_compliance"]["Article_9_Risk_Management"]["evidence_hash"]) == 64
 
 
-def test_export_markdown_and_html(temp_bundle_dir):
+def test_export_markdown_and_html(temp_bundle_dir: str) -> None:
     exporter = EUAIActComplianceExporter(artifact_bundle_path=temp_bundle_dir)
     cert = exporter.generate_certificate(system_id="SYS-TEST-99", operator_name="Acme Corp", locale="es")
 
@@ -77,7 +78,7 @@ def test_export_markdown_and_html(temp_bundle_dir):
             assert "Matriz de Cumplimiento Normativo EU AI Act" in html_content
 
 
-def test_certificate_lifecycle_and_expiration(temp_bundle_dir):
+def test_certificate_lifecycle_and_expiration(temp_bundle_dir: str) -> None:
     """Verifica que el certificado incluye valid_until, hardware_anchor y validación de ciclo de vida."""
     exporter = EUAIActComplianceExporter(artifact_bundle_path=temp_bundle_dir)
     cert = exporter.generate_certificate(
@@ -106,7 +107,7 @@ def test_certificate_lifecycle_and_expiration(temp_bundle_dir):
     assert status_expired["status"] == "EXPIRED"
 
 
-def test_certificate_revocation(temp_bundle_dir):
+def test_certificate_revocation(temp_bundle_dir: str) -> None:
     """Verifica el mecanismo de revocación de certificados contra lista CRL."""
     exporter = EUAIActComplianceExporter(artifact_bundle_path=temp_bundle_dir)
     cert = exporter.generate_certificate(system_id="SYS-REVOKE-01", operator_name="Acme Corp")
@@ -123,7 +124,7 @@ def test_certificate_revocation(temp_bundle_dir):
     assert cert_id in revocation_check["reason"]
 
 
-def test_decision_evidence_packet_dep(temp_bundle_dir):
+def test_decision_evidence_packet_dep(temp_bundle_dir: str) -> None:
     """Verifica la emisión de un Decision-Evidence Packet (DEP) con prueba de Merkle O(log N)."""
     from babylon60.bft.cortex_persist_ledger import CortexPersistLedger, CortexEvent
 

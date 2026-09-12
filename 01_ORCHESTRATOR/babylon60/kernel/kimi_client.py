@@ -22,7 +22,7 @@ class KimiClient:
 
     BASE_URL = "https://api.moonshot.cn/v1"
 
-    def __init__(self, api_key: Optional[str] = None, model: str = "kimi-k3-preview"):
+    def __init__(self, api_key: Optional[str] = None, model: str = "kimi-k3-preview") -> None:
         self.api_key = api_key or os.environ.get("KIMI_API_KEY") or os.environ.get("MOONSHOT_API_KEY")
         self.model = model
 
@@ -71,7 +71,7 @@ class KimiClient:
             }
 
 
-def run_standalone_demo():
+def run_standalone_demo() -> None:
     client = KimiClient()
     if not client.is_configured():
         print("[KIMI_CLIENT] Unconfigured (KIMI_API_KEY missing). Ready for environment injection.")

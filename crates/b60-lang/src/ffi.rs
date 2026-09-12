@@ -20,8 +20,11 @@ pub extern "C" fn b60_version() -> *const c_char {
 }
 
 /// Suma exacta sexagesimal en base 60^4 con cero deriva
+///
+/// # Safety
+/// `out_s` y `out_f` deben ser punteros válidos y alineados para escribir `u64`.
 #[no_mangle]
-pub extern "C" fn b60_sexa_add(
+pub unsafe extern "C" fn b60_sexa_add(
     s1: u64,
     f1: u64,
     s2: u64,
@@ -35,33 +38,37 @@ pub extern "C" fn b60_sexa_add(
     let total_frac = f1 + f2;
     let carry = total_frac / FRACTION_BASE;
     let rem = total_frac % FRACTION_BASE;
-    unsafe {
-        *out_s = s1 + s2 + carry;
-        *out_f = rem;
-    }
+    *out_s = s1 + s2 + carry;
+    *out_f = rem;
     0
 }
 
 /// Calcula la distancia geodésica de Fisher-Rao entre dos distribuciones de probabilidad
+///
+/// # Safety
+/// `p_ptr` y `q_ptr` deben apuntar a bloques válidos de al menos `dim` elementos `f64`.
 #[no_mangle]
-pub extern "C" fn b60_fisher_distance(dim: usize, p_ptr: *const f64, q_ptr: *const f64) -> f64 {
+pub unsafe extern "C" fn b60_fisher_distance(dim: usize, p_ptr: *const f64, q_ptr: *const f64) -> f64 {
     if p_ptr.is_null() || q_ptr.is_null() || dim == 0 {
         return -1.0;
     }
-    let p = unsafe { slice::from_raw_parts(p_ptr, dim) };
-    let q = unsafe { slice::from_raw_parts(q_ptr, dim) };
+    let p = slice::from_raw_parts(p_ptr, dim);
+    let q = slice::from_raw_parts(q_ptr, dim);
 
     FisherSimplex::fisher_rao_distance(p, q)
 }
 
 /// Calcula la divergencia de Kullback-Leibler (entropía relativa) entre dos distribuciones
+///
+/// # Safety
+/// `p_ptr` y `q_ptr` deben apuntar a bloques válidos de al menos `dim` elementos `f64`.
 #[no_mangle]
-pub extern "C" fn b60_kullback_leibler(dim: usize, p_ptr: *const f64, q_ptr: *const f64) -> f64 {
+pub unsafe extern "C" fn b60_kullback_leibler(dim: usize, p_ptr: *const f64, q_ptr: *const f64) -> f64 {
     if p_ptr.is_null() || q_ptr.is_null() || dim == 0 {
         return -1.0;
     }
-    let p = unsafe { slice::from_raw_parts(p_ptr, dim) };
-    let q = unsafe { slice::from_raw_parts(q_ptr, dim) };
+    let p = slice::from_raw_parts(p_ptr, dim);
+    let q = slice::from_raw_parts(q_ptr, dim);
 
     FisherSimplex::relative_entropy_kl(p, q)
 }
@@ -72,8 +79,12 @@ pub extern "C" fn b60_kullback_leibler(dim: usize, p_ptr: *const f64, q_ptr: *co
 ///   2 = Rechazado por Cheap Talk
 ///   3 = Rechazado por Presupuesto Exergético Excedido
 ///  -1 = Error de punteros o argumentos inválidos
+///
+/// # Safety
+/// `agent_id_ptr` y `tool_ptr` deben ser cadenas C válidas terminadas en nulo.
+/// Si no es nulo, `out_root_buf` debe apuntar a un buffer de al menos `out_root_len` bytes.
 #[no_mangle]
-pub extern "C" fn b60_eval_agent_intent(
+pub unsafe extern "C" fn b60_eval_agent_intent(
     agent_id_ptr: *const c_char,
     tool_ptr: *const c_char,
     reasoning_len: usize,
@@ -86,12 +97,12 @@ pub extern "C" fn b60_eval_agent_intent(
         return -1;
     }
 
-    let agent_id = match unsafe { CStr::from_ptr(agent_id_ptr) }.to_str() {
+    let agent_id = match CStr::from_ptr(agent_id_ptr).to_str() {
         Ok(s) => s.to_string(),
         Err(_) => return -1,
     };
 
-    let tool_name = match unsafe { CStr::from_ptr(tool_ptr) }.to_str() {
+    let tool_name = match CStr::from_ptr(tool_ptr).to_str() {
         Ok(s) => s.to_string(),
         Err(_) => return -1,
     };
@@ -112,9 +123,7 @@ pub extern "C" fn b60_eval_agent_intent(
             if !out_root_buf.is_null() && out_root_len > mmr_root.len() {
                 if let Ok(c_str) = CString::new(mmr_root) {
                     let bytes = c_str.as_bytes_with_nul();
-                    unsafe {
-                        std::ptr::copy_nonoverlapping(bytes.as_ptr() as *const c_char, out_root_buf, bytes.len());
-                    }
+                    std::ptr::copy_nonoverlapping(bytes.as_ptr() as *const c_char, out_root_buf, bytes.len());
                 }
             }
             0
@@ -126,8 +135,12 @@ pub extern "C" fn b60_eval_agent_intent(
 }
 
 /// Ejecuta una tira de bytecode sexagesimal en la VM F60
+///
+/// # Safety
+/// `bytecode_ptr` debe apuntar a un slice legible de al menos `bytecode_len` bytes.
+/// Si no es nulo, `out_cycles` debe ser válido para escribir un `u64`.
 #[no_mangle]
-pub extern "C" fn b60_run_bytecode(
+pub unsafe extern "C" fn b60_run_bytecode(
     bytecode_ptr: *const u8,
     bytecode_len: usize,
     out_cycles: *mut u64,
@@ -135,15 +148,13 @@ pub extern "C" fn b60_run_bytecode(
     if bytecode_ptr.is_null() || bytecode_len == 0 {
         return -1;
     }
-    let bytecode = unsafe { slice::from_raw_parts(bytecode_ptr, bytecode_len) };
+    let bytecode = slice::from_raw_parts(bytecode_ptr, bytecode_len);
     let mut vm = F60VM::new();
 
     match vm.execute(bytecode) {
         Ok(()) => {
             if !out_cycles.is_null() {
-                unsafe {
-                    *out_cycles = vm.pc as u64;
-                }
+                *out_cycles = vm.pc as u64;
             }
             0
         }
@@ -157,8 +168,13 @@ pub extern "C" fn b60_run_bytecode(
 ///   1 = Paradoja Cíclica (Contiene ciclos dirigidos)
 ///   2 = Inversión Temporal de Lamport (from_ts >= to_ts)
 ///  -1 = Punteros inválidos
+///
+/// # Safety
+/// `node_ids` y `lamport_ts` deben apuntar a bloques válidos de longitud `num_nodes`.
+/// Si `num_edges > 0`, `edge_from` y `edge_to` deben apuntar a bloques válidos de longitud `num_edges`.
+/// Si no es nulo, `out_num_stages` debe ser válido para escribir un `usize`.
 #[no_mangle]
-pub extern "C" fn b60_dag_validate(
+pub unsafe extern "C" fn b60_dag_validate(
     num_nodes: usize,
     node_ids: *const u32,
     lamport_ts: *const u64,
@@ -174,10 +190,10 @@ pub extern "C" fn b60_dag_validate(
         return -1;
     }
 
-    let ids = unsafe { slice::from_raw_parts(node_ids, num_nodes) };
-    let ts = unsafe { slice::from_raw_parts(lamport_ts, num_nodes) };
-    let e_from = if num_edges > 0 { unsafe { slice::from_raw_parts(edge_from, num_edges) } } else { &[] };
-    let e_to = if num_edges > 0 { unsafe { slice::from_raw_parts(edge_to, num_edges) } } else { &[] };
+    let ids = slice::from_raw_parts(node_ids, num_nodes);
+    let ts = slice::from_raw_parts(lamport_ts, num_nodes);
+    let e_from = if num_edges > 0 { slice::from_raw_parts(edge_from, num_edges) } else { &[] };
+    let e_to = if num_edges > 0 { slice::from_raw_parts(edge_to, num_edges) } else { &[] };
 
     let mut dag = crate::dag::CausalDag::new();
 
@@ -205,9 +221,7 @@ pub extern "C" fn b60_dag_validate(
     match dag.compile() {
         Ok(plan) => {
             if !out_num_stages.is_null() {
-                unsafe {
-                    *out_num_stages = plan.execution_stages.len();
-                }
+                *out_num_stages = plan.execution_stages.len();
             }
             0
         }
@@ -225,14 +239,14 @@ mod tests {
     fn test_ffi_version() {
         let v_ptr = b60_version();
         let c_str = unsafe { CStr::from_ptr(v_ptr) };
-        assert_eq!(c_str.to_str().unwrap(), "1.0.0-omega");
+        assert_eq!(c_str.to_str().expect("BFT Fallback"), "1.0.0-omega");
     }
 
     #[test]
     fn test_ffi_sexa_add() {
         let mut s: u64 = 0;
         let mut f: u64 = 0;
-        let ret = b60_sexa_add(10, 6480000, 5, 6480000, &mut s, &mut f);
+        let ret = unsafe { b60_sexa_add(10, 6480000, 5, 6480000, &mut s, &mut f) };
         assert_eq!(ret, 0);
         assert_eq!(s, 16); // 10 + 5 + 1 carry
         assert_eq!(f, 0);
@@ -242,24 +256,28 @@ mod tests {
     fn test_ffi_fisher_distance() {
         let p = [0.5, 0.5];
         let q = [0.5, 0.5];
-        let dist = b60_fisher_distance(2, p.as_ptr(), q.as_ptr());
+        let dist = unsafe { b60_fisher_distance(2, p.as_ptr(), q.as_ptr()) };
         assert!(dist.abs() < 1e-12);
     }
 
     #[test]
     fn test_ffi_eval_agent_intent() {
-        let agent = CString::new("AGENT-TEST").unwrap();
-        let tool = CString::new("tool_action").unwrap();
+        let agent = CString::new("AGENT-TEST").expect("BFT Fallback");
+        let tool = CString::new("tool_action").expect("BFT Fallback");
         let mut buf = [0 as c_char; 128];
 
         // Valid call
-        let ret = b60_eval_agent_intent(agent.as_ptr(), tool.as_ptr(), 100, 50, 1000, buf.as_mut_ptr(), buf.len());
+        let ret = unsafe {
+            b60_eval_agent_intent(agent.as_ptr(), tool.as_ptr(), 100, 50, 1000, buf.as_mut_ptr(), buf.len())
+        };
         assert_eq!(ret, 0);
-        let root_str = unsafe { CStr::from_ptr(buf.as_ptr()) }.to_str().unwrap();
+        let root_str = unsafe { CStr::from_ptr(buf.as_ptr()) }.to_str().expect("BFT Fallback");
         assert_eq!(root_str.len(), 64);
 
         // Cheap talk call
-        let ret_cheap = b60_eval_agent_intent(agent.as_ptr(), tool.as_ptr(), 4000, 10, 1000, buf.as_mut_ptr(), buf.len());
+        let ret_cheap = unsafe {
+            b60_eval_agent_intent(agent.as_ptr(), tool.as_ptr(), 4000, 10, 1000, buf.as_mut_ptr(), buf.len())
+        };
         assert_eq!(ret_cheap, 2);
     }
 
@@ -271,15 +289,17 @@ mod tests {
         let edge_to = [2u32, 3];
         let mut stages: usize = 0;
 
-        let ret = b60_dag_validate(
-            3,
-            node_ids.as_ptr(),
-            lamport_ts.as_ptr(),
-            2,
-            edge_from.as_ptr(),
-            edge_to.as_ptr(),
-            &mut stages,
-        );
+        let ret = unsafe {
+            b60_dag_validate(
+                3,
+                node_ids.as_ptr(),
+                lamport_ts.as_ptr(),
+                2,
+                edge_from.as_ptr(),
+                edge_to.as_ptr(),
+                &mut stages,
+            )
+        };
         assert_eq!(ret, 0);
         assert_eq!(stages, 3);
     }

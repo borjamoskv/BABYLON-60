@@ -3,7 +3,7 @@ import sys
 import subprocess
 import os
 
-def main():
+def main() -> None:
     # Simulamos el entrypoint del paquete instalado por pip (babylon60)
     args = sys.argv[1:]
     

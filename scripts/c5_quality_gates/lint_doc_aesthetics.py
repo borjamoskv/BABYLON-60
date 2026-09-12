@@ -19,20 +19,20 @@ REQUIRED_BADGE_PATTERN = r"img\.shields\.io/badge/"
 UNCONVERTED_BLOCKQUOTE = r"^>\s*\*\*(Theorem|Teorema|Definition|Definición|Warning|Advertencia|Important|Importante)\*\*"
 
 class AestheticLinter:
-    def __init__(self, target_dir):
+    def __init__(self, target_dir) -> None:
         self.target_dir = target_dir
         self.errors = []
         self.warnings = []
 
-    def log_error(self, filepath, line_num, code, msg):
+    def log_error(self, filepath, line_num, code, msg) -> None:
         rel_path = os.path.relpath(filepath, self.target_dir)
         self.errors.append(f"❌ [ERROR] [{code}] {rel_path}:{line_num} -> {msg}")
 
-    def log_warning(self, filepath, line_num, code, msg):
+    def log_warning(self, filepath, line_num, code, msg) -> None:
         rel_path = os.path.relpath(filepath, self.target_dir)
         self.warnings.append(f"⚠️ [WARN]  [{code}] {rel_path}:{line_num} -> {msg}")
 
-    def audit_file(self, filepath):
+    def audit_file(self, filepath) -> None:
         with open(filepath, "r", encoding="utf-8", errors="replace") as f:
             lines = f.readlines()
 
@@ -88,7 +88,7 @@ class AestheticLinter:
         if in_mermaid_block:
             self.log_error(filepath, mermaid_start_line, "UNCLOSED_MERMAID", "Bloque de diagrama Mermaid sin cerrar con ```.")
 
-    def run(self):
+    def run(self) -> int:
         md_files = []
         for root, _, files in os.walk(self.target_dir):
             for file in files:
@@ -120,7 +120,7 @@ class AestheticLinter:
             print("\n✅ VERDICTO: AUDITORÍA COMPLETADA EXITOSAMENTE — 100% Conformidad Visual C5-REAL.")
             return 0
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Linter de Estética y Rigor de Documentación C5-REAL")
     parser.add_argument("--dir", default=DOCS_DIR, help="Directorio objetivo de documentación")
     args = parser.parse_args()

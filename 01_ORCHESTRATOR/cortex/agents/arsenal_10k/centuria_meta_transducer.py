@@ -31,7 +31,7 @@ class CenturiaMetaTransducer:
 
     def __init__(
         self, db_path: str = "packages/cortex/engine/nexus_anchors.db", audit_path: str = "packages/cortex/audits/centuria_10k_ultrathink_consolidation.yaml"
-    ):
+    ) -> None:
         self.db_path = db_path
         self.audit_path = audit_path
         self.operator = "borjamoskv"
@@ -185,7 +185,7 @@ class CenturiaMetaTransducer:
         return current_level[0].hex()
 
 
-async def main():
+async def main() -> None:
     print("💥 [CENTURIA_META_TRANSDUCER] Iniciando reescritura retroactiva ULTRATHINK (10000 primitivas)...")
     transducer = CenturiaMetaTransducer()
     report = await transducer.execute_retroactive_rewrite()

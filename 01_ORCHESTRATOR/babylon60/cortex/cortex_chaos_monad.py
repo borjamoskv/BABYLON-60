@@ -1,4 +1,3 @@
-import logging
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
@@ -205,18 +204,23 @@ async def run_chaos_monad(
             '(version 1)(deny default)(allow file-read* (subpath "/System"))(allow file-read* (subpath "/Library"))(allow file-read* (subpath "/usr/lib"))',
         ] + cmd
 
-    kwargs = {}
     if sys.platform != "win32":
-        kwargs["start_new_session"] = True
-
-    process = await asyncio.create_subprocess_exec(
-        *cmd,
-        stdin=asyncio.subprocess.PIPE,
-        stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.PIPE,
-        env={},
-        **kwargs,
-    )
+        process = await asyncio.create_subprocess_exec(
+            *cmd,
+            stdin=asyncio.subprocess.PIPE,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+            env={},
+            start_new_session=True,
+        )
+    else:
+        process = await asyncio.create_subprocess_exec(
+            *cmd,
+            stdin=asyncio.subprocess.PIPE,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+            env={},
+        )
 
     try:
         try:

@@ -31,21 +31,25 @@ def _latest_commit_hash() -> str:
     return result.stdout.strip()
 
 
-def _record_event(event_type: str, payload: dict) -> None:
+def _record_event(event_type: str, payload: dict[str, object]) -> None:
     async def _inner() -> None:
-        async with connect("cortex.db") as conn:
-            actor = BFTLedgerActor(conn)
-            event = LedgerEvent(
-                stream="audit",
-                entity_id=str(uuid.uuid5(uuid.NAMESPACE_URL, f"{event_type}:{datetime.utcnow().isoformat()}")),
-                event_type=event_type,
-                payload=payload,
-                cortex_taint="commit_polisher",
-                source_db="cortex.db",
-                source_table="events",
-                source_pk=str(uuid.uuid4()),
-            )
-            await actor.append(event)
+        async with (await connect("cortex.db")):
+            actor = BFTLedgerActor(Path("cortex.db"))
+            await actor.start()
+            try:
+                event = LedgerEvent(
+                    stream="audit",
+                    entity_id=str(uuid.uuid5(uuid.NAMESPACE_URL, f"{event_type}:{datetime.utcnow().isoformat()}")),
+                    event_type=event_type,
+                    payload=payload,
+                    cortex_taint="commit_polisher",
+                    source_db="cortex.db",
+                    source_table="events",
+                    source_pk=str(uuid.uuid4()),
+                )
+                await actor.append(event)
+            finally:
+                await actor.stop()
 
     import asyncio
 

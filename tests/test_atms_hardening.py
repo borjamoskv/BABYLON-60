@@ -5,10 +5,11 @@
 # Causal-Determinist: TEST_ATMS_HARDENING
 # [CORTEX-TAINT:borjamoskv:test_atms_hardening:2026-07-18T05:00:00Z]
 
+from pathlib import Path
 import pytest
 
 try:
-    from strike_rs import CortexKernel  # type: ignore[attr-defined]
+    from strike_rs import CortexKernel
 except ImportError:
     # El núcleo Rust (PyO3) es opcional por diseño: solo existe si se compiló
     # e instaló strike_rs en el entorno. En CI limpio no está -> skip honesto.
@@ -18,7 +19,7 @@ except ImportError:
     )
 
 
-def test_python_cortex_kernel_atms_hardening_and_replay(tmp_path):
+def test_python_cortex_kernel_atms_hardening_and_replay(tmp_path: Path) -> None:
     """
     Test suite verifying that CortexKernel exposed via PyO3 to Python correctly:
     1. Asserts empirical knowledge and checks ATMS fixpoint beliefs.

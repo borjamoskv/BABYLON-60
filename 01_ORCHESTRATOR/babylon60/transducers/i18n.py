@@ -21,7 +21,7 @@ from contextlib import contextmanager
 from enum import Enum
 from functools import lru_cache
 from pathlib import Path
-from typing import Any, Final, NamedTuple
+from typing import Final, NamedTuple
 
 logger = logging.getLogger(__name__)
 
@@ -201,7 +201,7 @@ def _trigger_adaptive_repair(key: str, lang: Lang) -> None:
     pass
 
 
-def get_trans(key: TranslationKey, lang: Lang | str | None = None, **kwargs: Any) -> str:
+def get_trans(key: TranslationKey, lang: Lang | str | None = None, **kwargs: object) -> str:
     """Retrieve localized string formatted with variables.
 
     O(1) lookup via LRU. Supports dynamic string interpolation.

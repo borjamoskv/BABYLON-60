@@ -16,7 +16,7 @@ except ImportError as e:
     sys.exit(1)
 
 
-def main():
+def main() -> None:
     print(" 🚀  MOSKV-1 APEX :: 100,000 NODE SINGULARITY STRESS TEST")
     print("=" * 80)
     sys.stdout.flush()

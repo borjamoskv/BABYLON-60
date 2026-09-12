@@ -37,12 +37,12 @@ def check_ast_nesting(filepath: str) -> List[Dict[str, Any]]:
         return [{"type": "ASTReadError", "details": str(e)}]
 
     class NestingVisitor(ast.NodeVisitor):
-        def __init__(self):
+        def __init__(self) -> None:
             self.max_depth = 0
             self.current_depth = 0
             self.violations = []
 
-        def generic_visit(self, node):
+        def generic_visit(self, node) -> None:
             increases_depth = isinstance(
                 node,
                 (ast.If, ast.For, ast.While, ast.Try, ast.With, ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef),
@@ -98,7 +98,7 @@ def scan_file(filepath: str) -> Dict[str, Any]:
     return {}
 
 
-def main():
+def main() -> None:
     report = []
     ignore_dirs = {".git", ".venv", "__pycache__", "target", ".pytest_cache", ".ruff_cache", "scratch"}
 

@@ -1,11 +1,17 @@
 // ============================================================================
-// BABYLON-60 v4.0 Sovereign Hardened
-// █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+// BABYLON-60 v4.0 Sovereign Hardened (FRENTE SEMÁNTICO)
 // ============================================================================
-use kernel::isa::Instruction;
 use std::vec::Vec;
+use std::string::String;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum Stmt {
+    LetAlloc(String, String), // let x = alloc Struct;
+    AssignField(String, String, i64), // x.field = 42;
+    Free(String), // free x;
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct AST {
-    pub instructions: Vec<Instruction>,
+    pub statements: Vec<Stmt>,
 }

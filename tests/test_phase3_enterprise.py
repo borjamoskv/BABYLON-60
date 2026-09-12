@@ -5,13 +5,14 @@ Verifies HMAC license key generation, offline validation, and MCP protocol tools
 
 import os
 import tempfile
-from babylon60.guards.license_sovereign_validator import generate_license_key, verify_license_key, LicenseStatus
 from babylon60.mcp.cortex_mcp_server import CortexMCPServer, TOOLS, JSONRPC_VERSION
 
 
-def test_enterprise_license_generation_and_verification():
+def test_enterprise_license_generation_and_verification() -> None:
     pass
-def test_mcp_server_tools_definition():
+
+
+def test_mcp_server_tools_definition() -> None:
     tool_names = [t["name"] for t in TOOLS]
     assert "bft_append_event" in tool_names
     assert "bft_query_ledger" in tool_names
@@ -20,7 +21,7 @@ def test_mcp_server_tools_definition():
     assert JSONRPC_VERSION == "2.0"
 
 
-def test_mcp_server_initialization():
+def test_mcp_server_initialization() -> None:
     with tempfile.TemporaryDirectory() as tmpdir:
         ledger_path = os.path.join(tmpdir, "mcp_ledger.db")
         mail_path = os.path.join(tmpdir, "mail_ledger.db")

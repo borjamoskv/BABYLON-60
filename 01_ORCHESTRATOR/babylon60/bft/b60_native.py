@@ -5,11 +5,10 @@
 
 import ctypes
 import math
-import os
 from pathlib import Path
 from typing import List, Optional, Tuple
 
-_LIB_CACHE = None
+_LIB_CACHE: Optional[ctypes.CDLL] = None
 
 
 def _find_b60_dylib() -> Optional[Path]:
@@ -141,7 +140,7 @@ class B60NativeBridge:
             c_q = arr_type(*q)
             dist = lib.b60_fisher_distance(len(p), c_p, c_q)
             if dist >= 0.0:
-                return dist
+                return float(dist)
 
         # Pure Python fallback
         bc = sum(math.sqrt(pi * qi) for pi, qi in zip(p, q))
@@ -159,7 +158,7 @@ class B60NativeBridge:
             c_q = arr_type(*q)
             kl = lib.b60_kullback_leibler(len(p), c_p, c_q)
             if kl >= 0.0:
-                return kl
+                return float(kl)
 
         # Pure Python fallback
         d_kl = 0.0
@@ -256,4 +255,3 @@ class B60NativeBridge:
             if ts_map.get(u, 0) >= ts_map.get(v, 0):
                 return 2, 0
         return 0, 1
-

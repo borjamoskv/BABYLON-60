@@ -17,7 +17,9 @@ class McpCodeScaffolder:
     Sintetiza el código ejecutable de un servidor MCP a partir de un candidato McpCandidateContract.
     """
 
-    def __init__(self, output_dir: str = "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scratch/dynamic_mcps"):
+    def __init__(
+        self, output_dir: str = "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scratch/dynamic_mcps"
+    ) -> None:
         self.output_dir = output_dir
         os.makedirs(self.output_dir, exist_ok=True)
 

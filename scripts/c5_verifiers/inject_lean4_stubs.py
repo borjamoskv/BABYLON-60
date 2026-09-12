@@ -119,7 +119,7 @@ def process_file(filepath: Path, export_lean: bool = False, dry_run: bool = Fals
     except Exception as e:
         return f"❌ [{filepath.name}] Error: {str(e)}"
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Orquestador Dinámico de Stubs en Lean 4 para BABYLON-60")
     parser.add_argument("--export-lean", action="store_true", help="Genera archivos .lean independientes en proof/lean/")
     parser.add_argument("--dry-run", action="store_true", help="Modo simulación sin escribir cambios a disco")

@@ -37,6 +37,9 @@ class McpSandboxValidator:
             stderr=asyncio.subprocess.PIPE,
         )
 
+        if proc.stdin is None or proc.stdout is None:
+            raise RuntimeError("Subprocess stdin/stdout streams failed to initialize.")
+
         try:
             # 1. Enviar petición 'initialize'
             init_req = {

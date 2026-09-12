@@ -27,7 +27,7 @@ def compute_signature(secret: str, payload_bytes: bytes) -> str:
     return hmac.new(secret.encode("utf-8"), payload_bytes, hashlib.sha256).hexdigest()
 
 
-def test_hmac_signature_verification():
+def test_hmac_signature_verification() -> None:
     raw_body = b'{"from":"test@example.com","to":"borja@babylon60.com"}'
     valid_sig = compute_signature(SECRET, raw_body)
 
@@ -36,10 +36,10 @@ def test_hmac_signature_verification():
     assert verify_hmac_signature("wrong_secret", raw_body, valid_sig) is False
 
 
-def test_intent_and_severity_classification():
+def test_intent_and_severity_classification() -> None:
     # Security Incident
-    sec_payload = InboundEmailPayload(
-        **{
+    sec_payload = InboundEmailPayload.model_validate(
+        {
             "from": "security@cert.org",
             "to": "security@babylon60.com",
             "subject": "CVE Vulnerability Report",
@@ -52,8 +52,8 @@ def test_intent_and_severity_classification():
     assert severity == EmailSeverity.URGENT
 
     # Bug Report
-    bug_payload = InboundEmailPayload(
-        **{
+    bug_payload = InboundEmailPayload.model_validate(
+        {
             "from": "qa@client.org",
             "to": "borja@babylon60.com",
             "subject": "Crash in parser module",
@@ -66,7 +66,7 @@ def test_intent_and_severity_classification():
     assert severity == EmailSeverity.HIGH
 
 
-def test_attachment_base64_decoding():
+def test_attachment_base64_decoding() -> None:
     sample_log = "ERROR [2026-08-11] Kernel panic at 0x7fff"
     log_b64 = base64.b64encode(sample_log.encode("utf-8")).decode("utf-8")
 
@@ -81,10 +81,10 @@ def test_attachment_base64_decoding():
     assert decoded == sample_log
 
 
-def test_idempotency_tracker():
+def test_idempotency_tracker() -> None:
     processor = InboundEmailProcessor(secret=SECRET)
-    payload = InboundEmailPayload(
-        **{
+    payload = InboundEmailPayload.model_validate(
+        {
             "from": "user@domain.com",
             "to": "borja@babylon60.com",
             "subject": "Unique message",
@@ -102,7 +102,7 @@ def test_idempotency_tracker():
     assert res2["status"] == "duplicate_skipped"
 
 
-def test_fastapi_webhook_full_pipeline():
+def test_fastapi_webhook_full_pipeline() -> None:
     processor = InboundEmailProcessor(secret=SECRET)
     handler = EnglishSupportAgentHandler()
     processor.register_handler(handler.handle)

@@ -38,9 +38,62 @@ import json
 import logging
 import os
 import sys
+from collections.abc import Mapping
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Callable, TextIO, TypedDict, cast
+
+
+class TextContent(TypedDict):
+    type: str
+    text: str
+
+
+class ToolResult(TypedDict, total=False):
+    content: list[TextContent]
+    isError: bool
+
+
+class JsonRpcError(TypedDict):
+    code: int
+    message: str
+
+
+class JsonRpcResponse(TypedDict, total=False):
+    jsonrpc: str
+    id: object
+    result: object
+    error: JsonRpcError
+
+
+class ResourceContent(TypedDict, total=False):
+    uri: str
+    mimeType: str
+    text: str
+
+
+class ResourceReadResult(TypedDict):
+    contents: list[ResourceContent]
+
+
+class ToolInputSchema(TypedDict, total=False):
+    type: str
+    properties: dict[str, object]
+    required: list[str]
+
+
+class ToolDefinition(TypedDict):
+    name: str
+    description: str
+    inputSchema: ToolInputSchema
+
+
+class ResourceDefinition(TypedDict):
+    uri: str
+    name: str
+    description: str
+    mimeType: str
+
 
 # Ensure project root on path for standalone execution
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -73,7 +126,7 @@ MCP_PROTOCOL_VERSION = "2025-03-26"
 # ---------------------------------------------------------------------------
 # Tool & Resource Definitions
 # ---------------------------------------------------------------------------
-TOOLS: list[dict[str, Any]] = [
+TOOLS: list[dict[str, object]] = [
     {
         "name": "bft_append_event",
         "description": (
@@ -224,7 +277,7 @@ TOOLS: list[dict[str, Any]] = [
     },
 ]
 
-RESOURCES: list[dict[str, Any]] = [
+RESOURCES: list[dict[str, object]] = [
     {
         "uri": "bft://ledger/status",
         "name": "BFT Ledger Status",
@@ -269,7 +322,7 @@ class CortexMCPServer:
         self.mail_ledger = CortexPersistLedger(mail_ledger_path)
         self.verification_gate = VerificationGate(db_path=str(causal_gate_path))
         self._running = False
-        self._request_handlers: dict[str, Any] = {
+        self._request_handlers: dict[str, Callable[[dict[str, object]], dict[str, object]]] = {
             "initialize": self._handle_initialize,
             "initialized": self._handle_initialized,
             "tools/list": self._handle_tools_list,
@@ -283,7 +336,7 @@ class CortexMCPServer:
     # JSON-RPC I/O (stdio transport)
     # -----------------------------------------------------------------------
 
-    def _read_message(self, input_stream: Any = None) -> dict[str, Any] | None:
+    def _read_message(self, input_stream: TextIO | None = None) -> dict[str, object] | None:
         """Read a single JSON-RPC message from stdin."""
         stream = input_stream or sys.stdin
         line = stream.readline()
@@ -292,18 +345,21 @@ class CortexMCPServer:
         line = line.strip()
         if not line:
             return None
-        return json.loads(line)
+        parsed = json.loads(line)
+        if isinstance(parsed, dict):
+            return cast(dict[str, object], parsed)
+        return None
 
-    def _write_message(self, message: dict[str, Any], output_stream: Any = None) -> None:
+    def _write_message(self, message: Mapping[str, object], output_stream: TextIO | None = None) -> None:
         """Write a single JSON-RPC message to stdout."""
         stream = output_stream or sys.stdout
         stream.write(json.dumps(message, separators=(",", ":"), ensure_ascii=False) + "\n")
         stream.flush()
 
-    def _make_response(self, request_id: Any, result: Any) -> dict[str, Any]:
+    def _make_response(self, request_id: object, result: object) -> JsonRpcResponse:
         return {"jsonrpc": JSONRPC_VERSION, "id": request_id, "result": result}
 
-    def _make_error(self, request_id: Any, code: int, message: str) -> dict[str, Any]:
+    def _make_error(self, request_id: object, code: int, message: str) -> JsonRpcResponse:
         return {
             "jsonrpc": JSONRPC_VERSION,
             "id": request_id,
@@ -314,7 +370,7 @@ class CortexMCPServer:
     # MCP Protocol Handlers
     # -----------------------------------------------------------------------
 
-    def _handle_initialize(self, params: dict[str, Any]) -> dict[str, Any]:
+    def _handle_initialize(self, params: dict[str, object]) -> dict[str, object]:
         return {
             "protocolVersion": MCP_PROTOCOL_VERSION,
             "capabilities": {
@@ -327,20 +383,21 @@ class CortexMCPServer:
             },
         }
 
-    def _handle_initialized(self, params: dict[str, Any]) -> dict[str, Any]:
+    def _handle_initialized(self, params: dict[str, object]) -> dict[str, object]:
         return {}
 
-    def _handle_ping(self, params: dict[str, Any]) -> dict[str, Any]:
+    def _handle_ping(self, params: dict[str, object]) -> dict[str, object]:
         return {}
 
-    def _handle_tools_list(self, params: dict[str, Any]) -> dict[str, Any]:
+    def _handle_tools_list(self, params: dict[str, object]) -> dict[str, object]:
         return {"tools": TOOLS}
 
-    def _handle_tools_call(self, params: dict[str, Any]) -> dict[str, Any]:
-        tool_name = params.get("name", "")
-        arguments = params.get("arguments", {})
+    def _handle_tools_call(self, params: dict[str, object]) -> dict[str, object]:
+        tool_name = str(params.get("name", ""))
+        arguments_raw = params.get("arguments", {})
+        arguments: dict[str, object] = arguments_raw if isinstance(arguments_raw, dict) else {}
 
-        dispatch: dict[str, Any] = {
+        dispatch: dict[str, Callable[[dict[str, object]], dict[str, object]]] = {
             "bft_append_event": self._tool_append_event,
             "bft_query_ledger": self._tool_query_ledger,
             "bft_verify_merkle_root": self._tool_verify_merkle_root,
@@ -359,10 +416,10 @@ class CortexMCPServer:
 
         return handler(arguments)
 
-    def _handle_resources_list(self, params: dict[str, Any]) -> dict[str, Any]:
+    def _handle_resources_list(self, params: dict[str, object]) -> dict[str, object]:
         return {"resources": RESOURCES}
 
-    def _handle_resources_read(self, params: dict[str, Any]) -> dict[str, Any]:
+    def _handle_resources_read(self, params: dict[str, object]) -> dict[str, object]:
         uri = params.get("uri", "")
 
         if uri == "bft://ledger/status":
@@ -427,12 +484,14 @@ class CortexMCPServer:
     # Tool Implementations
     # -----------------------------------------------------------------------
 
-    def _tool_append_event(self, args: dict[str, Any]) -> dict[str, Any]:
+    def _tool_append_event(self, args: dict[str, object]) -> dict[str, object]:
+        raw_payload = args.get("payload", {})
+        payload = raw_payload if isinstance(raw_payload, dict) else {}
         event = CortexEvent(
-            event_type=args["event_type"],
-            payload=args["payload"],
-            cortex_taint=args["cortex_taint"],
-            agent_id=args.get("agent_id", "MCP-CLIENT"),
+            event_type=str(args["event_type"]),
+            payload=payload,
+            cortex_taint=str(args["cortex_taint"]),
+            agent_id=str(args.get("agent_id", "MCP-CLIENT")),
         )
         ack = self.ledger.append_event(event)
         text = (
@@ -445,17 +504,19 @@ class CortexMCPServer:
         )
         return {"content": [{"type": "text", "text": text}], "isError": False}
 
-    def _tool_query_ledger(self, args: dict[str, Any]) -> dict[str, Any]:
+    def _tool_query_ledger(self, args: dict[str, object]) -> dict[str, object]:
         event_type = args.get("event_type")
-        limit = args.get("limit", 10)
+        event_type_str = str(event_type) if event_type is not None else None
+        raw_limit = args.get("limit", 10)
+        limit = int(raw_limit) if isinstance(raw_limit, (int, str)) else 10
 
         with self.ledger._get_connection() as conn:
             cursor = conn.cursor()
-            if event_type:
+            if event_type_str:
                 cursor.execute(
                     "SELECT seq, event_type, payload_json, cortex_taint, lamport_t, entry_hash, timestamp "
                     "FROM cortex_ledger WHERE event_type = ? ORDER BY seq DESC LIMIT ?",
-                    (event_type, limit),
+                    (event_type_str, limit),
                 )
             else:
                 cursor.execute(
@@ -482,7 +543,7 @@ class CortexMCPServer:
         text = json.dumps({"total_returned": len(entries), "entries": entries}, indent=2)
         return {"content": [{"type": "text", "text": text}], "isError": False}
 
-    def _tool_verify_merkle_root(self, args: dict[str, Any]) -> dict[str, Any]:
+    def _tool_verify_merkle_root(self, args: dict[str, object]) -> dict[str, object]:
         merkle_root = self.ledger.get_merkle_root()
         integrity = self.ledger.verify_integrity()
         attestation = self.ledger.get_state_attestation()
@@ -497,15 +558,15 @@ class CortexMCPServer:
         )
         return {"content": [{"type": "text", "text": text}], "isError": False}
 
-    def _tool_send_sovereign_mail(self, args: dict[str, Any]) -> dict[str, Any]:
+    def _tool_send_sovereign_mail(self, args: dict[str, object]) -> dict[str, object]:
         user = os.environ.get("USER", "operator")
         from_email = f"{user}@babylon60.com"
 
-        payload = {
+        payload: dict[str, object] = {
             "from": from_email,
-            "to": args["to"],
-            "subject": args["subject"],
-            "body": args["body"],
+            "to": str(args["to"]),
+            "subject": str(args["subject"]),
+            "body": str(args["body"]),
             "timestamp": datetime.now(timezone.utc).isoformat(),
         }
 
@@ -527,23 +588,25 @@ class CortexMCPServer:
         )
         return {"content": [{"type": "text", "text": text}], "isError": False}
 
-    def _tool_causal_evaluate_task_risk(self, args: dict[str, Any]) -> dict[str, Any]:
-        task_payload = args.get("task_payload", {})
+    def _tool_causal_evaluate_task_risk(self, args: dict[str, object]) -> dict[str, object]:
+        task_payload_raw = args.get("task_payload", {})
+        task_payload = task_payload_raw if isinstance(task_payload_raw, dict) else {}
         risk = self.verification_gate.evaluate_task(task_payload)
         is_allowed = self.verification_gate.is_allowed(task_payload)
+        action_name = task_payload.get("action", "N/A") if isinstance(task_payload, dict) else "N/A"
         text = (
             f"⚖️ Causal Task Risk Evaluation\n"
             f"  Evaluated Risk: {risk.name}\n"
             f"  Execution Allowed: {'🟢 YES' if is_allowed else '🔴 PAUSED (Requires Human Sign-off)'}\n"
-            f"  Action: {task_payload.get('action', 'N/A')}"
+            f"  Action: {action_name}"
         )
         return {"content": [{"type": "text", "text": text}], "isError": False}
 
-    def _tool_causal_register_sign_off(self, args: dict[str, Any]) -> dict[str, Any]:
-        execution_id = args["execution_id"]
-        action_name = args["action_name"]
-        decision = args["decision"]
-        risk_str = args.get("risk_level", "CRITICAL").upper()
+    def _tool_causal_register_sign_off(self, args: dict[str, object]) -> dict[str, object]:
+        execution_id = str(args["execution_id"])
+        action_name = str(args["action_name"])
+        decision = str(args["decision"])
+        risk_str = str(args.get("risk_level", "CRITICAL")).upper()
         try:
             risk_level = RiskLevel[risk_str]
         except KeyError:
@@ -560,7 +623,7 @@ class CortexMCPServer:
         )
         return {"content": [{"type": "text", "text": text}], "isError": False}
 
-    def _tool_causal_verify_ledger(self, args: dict[str, Any]) -> dict[str, Any]:
+    def _tool_causal_verify_ledger(self, args: dict[str, object]) -> dict[str, object]:
         integrity = self.verification_gate.verify_ledger_integrity()
         text = (
             f"🔐 Causal Audit Ledger Merkle Integrity Verification\n"
@@ -573,10 +636,11 @@ class CortexMCPServer:
     # Process a single JSON-RPC request (used for testing and stdio loop)
     # -----------------------------------------------------------------------
 
-    def process_request(self, request: dict[str, Any]) -> dict[str, Any] | None:
+    def process_request(self, request: dict[str, object]) -> JsonRpcResponse | None:
         """Process a single JSON-RPC request and return the response."""
-        method = request.get("method", "")
-        params = request.get("params", {})
+        method = str(request.get("method", ""))
+        params_raw = request.get("params", {})
+        params: dict[str, object] = params_raw if isinstance(params_raw, dict) else {}
         request_id = request.get("id")
 
         handler = self._request_handlers.get(method)

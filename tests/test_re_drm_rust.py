@@ -11,11 +11,15 @@ import sqlite3
 import sys
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-import pytest
+import tempfile  # noqa: E402
+import pytest  # noqa: E402
+
+PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+DB_PATH = os.path.join(tempfile.gettempdir(), "test_re_drm_bft_ledger.db")
 
 
 @pytest.mark.skip(reason="Legacy binary c5_p2p_bft purged in AX-7 workspace stabilization")
-def test_re_drm_rust_bft_verification():
+def test_re_drm_rust_bft_verification() -> None:
     """
     Test suite validating that the strike_rs Rust binary compiles and runs,
     completing P2P BFT consensus across 10000 RE/DRM primitives in < 150ms

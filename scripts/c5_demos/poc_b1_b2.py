@@ -6,7 +6,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../.
 
 from babylon60.bft.cortex_persist_ledger import CortexPersistLedger, CortexEvent
 
-def test_b1_b2():
+def test_b1_b2() -> None:
     db_path = "poc_ledger.db"
     if os.path.exists(db_path):
         os.remove(db_path)

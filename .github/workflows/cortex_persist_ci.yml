@@ -6,4 +6,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: for f in $(find . -name "*.json" -not -path "./.git/*"); do python3 -m json.tool "$f" > /dev/null || exit 1; done
-      - run: test -f AGENTS.md && test -d skills && test -d rules && test -d plugins
+      - run: test -f AGENTS.md && test -d .agents/skills

@@ -55,7 +55,7 @@ class VerificationGate:
     Conforme a RULE[human_in_the_loop_causal_governance] y RULE[c5_real_invariants].
     """
 
-    def __init__(self, db_path: str = ":memory:", default_risk: RiskLevel = RiskLevel.LOW):
+    def __init__(self, db_path: str = ":memory:", default_risk: RiskLevel = RiskLevel.LOW) -> None:
         self.db_path = db_path
         self.default_risk = default_risk
         self._conn = sqlite3.connect(self.db_path)

@@ -14,11 +14,22 @@ import argparse
 import subprocess
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
+from typing import TypedDict
 
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 
 
-def run_agent_task(agent_id: int, squad: str, name: str, command: list[str], env: dict) -> dict:
+class AgentTaskResult(TypedDict):
+    agent_id: str
+    squad: str
+    name: str
+    status: str
+    duration_s: float
+    stdout: str
+    stderr: str
+
+
+def run_agent_task(agent_id: int, squad: str, name: str, command: list[str], env: dict[str, str]) -> AgentTaskResult:
     start_time = time.monotonic()
     try:
         res = subprocess.run(
@@ -52,7 +63,7 @@ def run_agent_task(agent_id: int, squad: str, name: str, command: list[str], env
         }
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Enjambre de 21 Agentes Paralelizados BABYLON-60")
     parser.add_argument("--json", action="store_true", help="Emitir telemetría nativa M2M en JSON")
     args = parser.parse_args()
@@ -107,7 +118,7 @@ def main():
     print("=================================================================")
 
     start_swarm_time = time.monotonic()
-    results = []
+    results: list[AgentTaskResult] = []
 
     with ThreadPoolExecutor(max_workers=21) as executor:
         futures = {

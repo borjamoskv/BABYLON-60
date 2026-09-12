@@ -8,14 +8,21 @@ generado por LLMs (GPT/Claude/OpenRouter) antes de autorizar mutaciones en Ring-
 import time
 import random
 import hashlib
-from typing import Dict, Any, Tuple
+from typing import Dict, Tuple, TypedDict
+
+ActionTuple = Tuple[str, str | None, str | None]
+
+class LlmPayload(TypedDict):
+    model: str
+    prompt: str
+    ast_actions: list[ActionTuple]
 
 print("[AX-4] TOPOLOGY: Falsación Empírica iniciada...")
 print("Hipótesis: Babylon-60 confina estocásticamente a LLMs externos (GPT/Claude) mediante validación deductiva formal.\n")
 
 # 1. Simulación de Respuestas de LLMs (GPT-4o, Claude 3.5, DeepSeek-R1)
 # Un subconjunto contiene alucinaciones de memoria (doble consumo afín o punteros crudos no declarados)
-VALID_LLM_PAYLOAD = {
+VALID_LLM_PAYLOAD: LlmPayload = {
     "model": "claude-3-5-sonnet",
     "prompt": "Allocate framebuffer and transfer ownership",
     "ast_actions": [
@@ -25,7 +32,7 @@ VALID_LLM_PAYLOAD = {
     ]
 }
 
-HALLUCINATED_LLM_PAYLOAD = {
+HALLUCINATED_LLM_PAYLOAD: LlmPayload = {
     "model": "gpt-4o",
     "prompt": "Allocate framebuffer and re-use buffer after transfer",
     "ast_actions": [
@@ -42,22 +49,26 @@ class C5DeductiveGate:
     Simulador del Tensor de Transducción Híbrido / SMT Verifier de Babylon-60.
     Evalúa la lógica afín sobre la traza generada por cualquier LLM.
     """
-    def __init__(self):
+    def __init__(self) -> None:
         self.affine_resources: Dict[str, str] = {} # var -> state ('ACTIVE', 'CONSUMED')
 
-    def verify_trace(self, actions) -> Tuple[bool, str]:
+    def verify_trace(self, actions: list[ActionTuple]) -> Tuple[bool, str]:
         self.affine_resources.clear()
         for op, target, aux in actions:
             if op == "ALLOC":
+                if target is None:
+                    return False, "Objetivo nulo en asignación"
                 if target in self.affine_resources and self.affine_resources[target] == "ACTIVE":
                     return False, f"Conflicto de asignación: {target} ya activo"
                 self.affine_resources[target] = "ACTIVE"
             elif op == "MOVE":
+                if target is None:
+                    return False, "Objetivo nulo en movimiento"
                 if target not in self.affine_resources or self.affine_resources[target] != "ACTIVE":
                     return False, f"Violación de propiedad: Intento de mover recurso inexistente o inactivo ({target})"
                 self.affine_resources[target] = "CONSUMED"
             elif op == "USE_MOVED":
-                if target in self.affine_resources and self.affine_resources[target] == "CONSUMED":
+                if target is not None and target in self.affine_resources and self.affine_resources[target] == "CONSUMED":
                     return False, f"ALUCINACIÓN INTERCEPTADA: Intento de uso de recurso afín consumido ({target})"
             elif op == "HALT":
                 pass

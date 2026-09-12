@@ -34,19 +34,19 @@ else:
 
 
 class ExergyDashboardHandler(SimpleHTTPRequestHandler):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         # Serve static files from apps/ExergyDashboard/public
         public_dir = PROJECT_ROOT / "apps" / "ExergyDashboard" / "public"
         super().__init__(*args, directory=str(public_dir), **kwargs)
 
-    def do_GET(self):
+    def do_GET(self) -> None:
         parsed = urlparse(self.path)
         if parsed.path == "/api/metrics":
             self.serve_metrics()
         else:
             super().do_GET()
 
-    def serve_metrics(self):
+    def serve_metrics(self) -> None:
         try:
             # We connect strictly read-only to avoid any lock contention (INV_BFT_02 compliance)
             # uri=True allows us to specify mode=ro
@@ -75,7 +75,7 @@ class ExergyDashboardHandler(SimpleHTTPRequestHandler):
                 conn.close()
 
 
-def main():
+def main() -> None:
     port = 8080
     server_address = ("", port)
 

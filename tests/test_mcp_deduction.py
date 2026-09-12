@@ -11,7 +11,7 @@ from babylon60.kernel.mcp_sandbox_validator import McpSandboxValidator
 from babylon60.kernel.mcp_lifecycle_manager import McpLifecycleManager
 
 
-def test_mcp_deductive_engine():
+def test_mcp_deductive_engine() -> None:
     engine = McpDeductiveEngine(friction_threshold=0.40)
 
     # 1. Sin fricción
@@ -40,7 +40,7 @@ def test_mcp_deductive_engine():
 
 
 @pytest.mark.asyncio
-async def test_full_mcp_scaffolding_sandbox_and_lifecycle():
+async def test_full_mcp_scaffolding_sandbox_and_lifecycle() -> None:
     with tempfile.TemporaryDirectory() as tmp_dir:
         db_path = os.path.join(tmp_dir, "test_causal_gate.db")
 

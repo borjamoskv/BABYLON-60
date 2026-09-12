@@ -12,7 +12,7 @@ from babylon60.verification.verification_gate import (
 )
 
 
-def test_verification_gate_risk_evaluation():
+def test_verification_gate_risk_evaluation() -> None:
     gate = VerificationGate()
 
     # Read-only task -> LOW
@@ -29,7 +29,7 @@ def test_verification_gate_risk_evaluation():
     assert gate.evaluate_task({"action": "read", "is_mutative": True}) == RiskLevel.CRITICAL
 
 
-def test_verification_gate_critical_permission():
+def test_verification_gate_critical_permission() -> None:
     gate = VerificationGate()
     exec_id = "EXEC-TEST-001"
     payload_critical = {"action": "deploy_production", "execution_id": exec_id}
@@ -51,7 +51,7 @@ def test_verification_gate_critical_permission():
     assert gate.is_allowed(payload_critical) is True
 
 
-def test_verification_gate_cryptographic_ledger_integrity():
+def test_verification_gate_cryptographic_ledger_integrity() -> None:
     gate = VerificationGate()
 
     for i in range(5):
@@ -66,7 +66,7 @@ def test_verification_gate_cryptographic_ledger_integrity():
     assert gate.verify_ledger_integrity() is True
 
 
-def test_verification_gate_snapshot_pause_resume():
+def test_verification_gate_snapshot_pause_resume() -> None:
     gate = VerificationGate()
     exec_id = "EXEC-SNAPSHOT-100"
 

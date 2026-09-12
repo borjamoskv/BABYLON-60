@@ -19,7 +19,7 @@ class CapabilityGuard:
     Enforces capability constraints and sandbox execution limits for agentic tools.
     """
 
-    def __init__(self, allowed_capabilities: List[str] | None = None):
+    def __init__(self, allowed_capabilities: List[str] | None = None) -> None:
         self.allowed_capabilities = allowed_capabilities or ["read", "compute"]
 
     def check_permission(self, action: str, risk: RiskTier = RiskTier.LOW) -> bool:

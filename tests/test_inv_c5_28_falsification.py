@@ -38,7 +38,7 @@ def test_inv_c5_28_non_isomorphic_fail_fast() -> None:
 def test_inv_c5_28_bypass_attempt_raises_error() -> None:
     """Falsification enforcement: Direct execution without WL check must raise ValueError."""
 
-    def guarded_vf2_matching(g1: dict, g2: dict, prefiltered_wl: bool = False) -> bool:
+    def guarded_vf2_matching(g1: dict[int, list[int]], g2: dict[int, list[int]], prefiltered_wl: bool = False) -> bool:
         if not prefiltered_wl:
             raise ValueError("INV_C5_28 Violation: WL Pre-Filter Bypass Attempted")
         return True

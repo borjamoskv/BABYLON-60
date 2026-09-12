@@ -12,13 +12,13 @@ and `asyncio.to_thread` for zero-anergy non-blocking ledger operations.
 
 import asyncio
 import sqlite3
-from typing import Any, List, Optional, Tuple
+from typing import Any, List, Optional, Tuple, cast
 
 
 class AsyncCursor:
     """Async wrapper for sqlite3.Cursor."""
 
-    def __init__(self, cursor: sqlite3.Cursor):
+    def __init__(self, cursor: sqlite3.Cursor) -> None:
         self._cursor = cursor
 
     async def fetchone(self) -> Optional[Tuple[Any, ...]]:
@@ -39,14 +39,18 @@ class AsyncCursor:
 class AsyncConnection:
     """Async wrapper for sqlite3.Connection."""
 
-    def __init__(self, database: str, **kwargs: Any):
+    def __init__(self, database: str, **kwargs: Any) -> None:
         self._database = database
         self._kwargs = kwargs
         self._conn: Optional[sqlite3.Connection] = None
 
     async def _connect(self) -> "AsyncConnection":
         if self._conn is None:
-            self._conn = await asyncio.to_thread(sqlite3.connect, self._database, **self._kwargs)
+
+            def _open() -> sqlite3.Connection:
+                return cast(sqlite3.Connection, sqlite3.connect(self._database, **self._kwargs))
+
+            self._conn = await asyncio.to_thread(_open)
             self._conn.row_factory = sqlite3.Row
         return self
 

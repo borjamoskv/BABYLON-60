@@ -37,7 +37,7 @@ def collect_imports_from_file(file_path: Path) -> set[str]:
         logging.error(f'Traza Epistémica Perdida: {e}')
     return imports
 
-def audit_extensions_reachability():
+def audit_extensions_reachability() -> None:
     print("======================================================================")
     print(" ✂️  BABYLON-60 APOPTOSIS ENGINE — ISSUE #5 EXTENSIONS REACHABILITY SCAN")
     print("======================================================================")

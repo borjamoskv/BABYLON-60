@@ -18,13 +18,16 @@ from __future__ import annotations
 import hashlib
 import struct
 import cbor2
-from typing import Any, Dict, Tuple
+import ctypes
+from typing import Dict, Mapping, Tuple, cast
 
 MAGIC_HEADER = b"B60IPC"
 VERSION = 1
 
 
-def pack_agent_message(sender: str, recipient: str, payload: Dict[str, Any], lamport_t: int) -> bytes:
+def pack_agent_message(
+    sender: str, recipient: str, payload: Mapping[str, object] | Dict[str, object], lamport_t: int
+) -> bytes:
     """
     Empaqueta un mensaje inter-agente en formato binario compacto Causal-Determinist.
     Fricción de parseo mínima usando CBOR puro en lugar de JSON.
@@ -44,7 +47,7 @@ def pack_agent_message(sender: str, recipient: str, payload: Dict[str, Any], lam
     return header + body + checksum
 
 
-def unpack_agent_message(raw_bytes: bytes) -> Tuple[str, str, Dict[str, Any], int]:
+def unpack_agent_message(raw_bytes: bytes) -> Tuple[str, str, Dict[str, object], int]:
     """
     Desempaqueta un mensaje binario con validación de checksum en tiempo O(1).
     """
@@ -76,6 +79,58 @@ def unpack_agent_message(raw_bytes: bytes) -> Tuple[str, str, Dict[str, Any], in
 
     sender = sender_bytes.decode("utf-8")
     recipient = recipient_bytes.decode("utf-8")
-    payload = cbor2.loads(payload_raw)
+    payload = cast(Dict[str, object], cbor2.loads(payload_raw))
 
     return sender, recipient, payload, lamport_t
+
+
+# =====================================================================
+# C-FFI BRIDGE (Límite 64B - Seqlock SPMC)
+# =====================================================================
+
+RUNNING = 0x0000_0001
+POISONED = 0xDEAD_6060
+
+
+class BountySharedManifest(ctypes.Structure):
+    """Mapeo C-ABI estricto (64 Bytes) para sincronización con babylon60-kernel."""
+
+    # Desactivamos el warning de MSVC (deprecated default) en versiones futuras:
+    # _layout_ = "ms" (solo en Python 3.19+), omitido por compatibilidad 3.10+
+    _pack_ = 1
+    _fields_ = [
+        ("status_flag", ctypes.c_uint32),
+        ("seq", ctypes.c_uint32),
+        ("epoch_id", ctypes.c_uint64),
+        ("payload_hash", ctypes.c_uint64 * 4),
+        ("_padding", ctypes.c_uint8 * 16),
+    ]
+
+
+class SharedManifestFFIWriter:
+    """Implementa escritura Seqlock SPMC lock-free desde Python al manifest C."""
+
+    def __init__(self) -> None:
+        self.manifest = BountySharedManifest()
+        self.manifest.status_flag = RUNNING
+        self.manifest.seq = 0
+        self.manifest.epoch_id = 1
+        for i in range(4):
+            self.manifest.payload_hash[i] = 0
+
+    def publish(self, epoch: int, hash_bytes: bytes) -> bool:
+        """Escribe un epoch y un hash (32 bytes) de forma atómica (Seqlock)."""
+        if self.manifest.status_flag == POISONED:
+            return False
+
+        current_seq = self.manifest.seq
+        self.manifest.seq = current_seq + 1
+
+        self.manifest.epoch_id = epoch
+
+        h_uint64 = struct.unpack("<4Q", hash_bytes)
+        for i in range(4):
+            self.manifest.payload_hash[i] = h_uint64[i]
+
+        self.manifest.seq = self.manifest.seq + 1
+        return True

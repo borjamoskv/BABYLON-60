@@ -8,12 +8,11 @@ import pytest
 from pathlib import Path
 
 from babylon60.bft.cortex_crypto_kernel import (
-    compute_cortex_hash,
     build_merkle_tree,
     generate_merkle_proof,
     verify_merkle_proof,
     verify_row_invariants,
-    ZERO_HASH_256,
+    MerkleProofStep,
 )
 from babylon60.bft.cortex_persist_ledger import CortexPersistLedger, CortexEvent
 
@@ -26,7 +25,7 @@ def _make_dummy_hash(seed: str) -> str:
 # CICLOS 1–25: ATAQUES DE PODADO DISCRETO (SEQ CONTINUITY FUZZING)
 # ----------------------------------------------------------------------------
 @pytest.mark.parametrize("cycle", range(1, 26))
-def test_cycle_seq_continuity_fuzzing(cycle: int):
+def test_cycle_seq_continuity_fuzzing(cycle: int) -> None:
     """
     Ciclos 1-25: Fuzzing de discontinuidad secuencial.
     En cada ciclo se prueba una posición de podado aleatoria en una cadena simulada.
@@ -60,7 +59,7 @@ def test_cycle_seq_continuity_fuzzing(cycle: int):
 # CICLOS 26–50: ATAQUES DE ISOMORFISMO MERKLE (CVE-2012-2459 MUTATION)
 # ----------------------------------------------------------------------------
 @pytest.mark.parametrize("cycle", range(26, 51))
-def test_cycle_merkle_isomorphism_fuzzing(cycle: int):
+def test_cycle_merkle_isomorphism_fuzzing(cycle: int) -> None:
     """
     Ciclos 26-50: Fuzzing de árboles impares y colisión de duplicación.
     Comprueba que árboles de longitud impar jamás colisionan con árboles extendidos.
@@ -81,7 +80,7 @@ def test_cycle_merkle_isomorphism_fuzzing(cycle: int):
 # CICLOS 51–75: FUZZING DE PRUEBAS DE INCLUSIÓN O(log N) Y ADULTERACIÓN DE NODOS
 # ----------------------------------------------------------------------------
 @pytest.mark.parametrize("cycle", range(51, 76))
-def test_cycle_merkle_proof_fuzzing(cycle: int):
+def test_cycle_merkle_proof_fuzzing(cycle: int) -> None:
     """
     Ciclos 51-75: Generación y falsación de pruebas de inclusión.
     En cada ciclo se muta un parámetro del paquete de prueba.
@@ -96,15 +95,20 @@ def test_cycle_merkle_proof_fuzzing(cycle: int):
     packet = generate_merkle_proof(leaves, target_idx)
 
     # 1. Prueba válida debe pasar
-    assert verify_merkle_proof(
-        leaf_hash=packet["leaf_hash"],
-        proof=packet["proof"],
-        expected_root=merkle_root,
-        total_leaves=tree_size,
-    ) is True
+    assert (
+        verify_merkle_proof(
+            leaf_hash=packet["leaf_hash"],
+            proof=packet["proof"],
+            expected_root=merkle_root,
+            total_leaves=tree_size,
+        )
+        is True
+    )
 
     # 2. Inyectar mutación adversaria efectiva
-    tampered_proof = [dict(step) for step in packet["proof"]]
+    tampered_proof: list[MerkleProofStep] = [
+        {"position": step["position"], "sibling": step["sibling"], "level": step["level"]} for step in packet["proof"]
+    ]
     mutation_type = cycle % 3
 
     if mutation_type == 0 and tampered_proof:
@@ -122,19 +126,22 @@ def test_cycle_merkle_proof_fuzzing(cycle: int):
         # Corromper cardinalidad esperada
         check_size = tree_size + 1
 
-    assert verify_merkle_proof(
-        leaf_hash=packet["leaf_hash"],
-        proof=tampered_proof,
-        expected_root=merkle_root,
-        total_leaves=check_size,
-    ) is False, f"Ciclo {cycle}: Prueba adulterada fue aceptada incorrectamente"
+    assert (
+        verify_merkle_proof(
+            leaf_hash=packet["leaf_hash"],
+            proof=tampered_proof,
+            expected_root=merkle_root,
+            total_leaves=check_size,
+        )
+        is False
+    ), f"Ciclo {cycle}: Prueba adulterada fue aceptada incorrectamente"
 
 
 # ----------------------------------------------------------------------------
 # CICLOS 76–100: CONCURRENCIA, STREAMING O(1) E IDEMPOTENCIA TRANSACCIONAL
 # ----------------------------------------------------------------------------
 @pytest.mark.parametrize("cycle", range(76, 101))
-def test_cycle_concurrency_and_streaming_stress(cycle: int, tmp_path: Path):
+def test_cycle_concurrency_and_streaming_stress(cycle: int, tmp_path: Path) -> None:
     """
     Ciclos 76-100: Inserción por lotes masivos, streaming O(1) con chunk_size variable
     y atestación completa de estado.

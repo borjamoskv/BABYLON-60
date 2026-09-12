@@ -34,14 +34,26 @@ import sqlite3
 import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import TYPE_CHECKING, Any
+from typing import TypedDict
 
-if TYPE_CHECKING:
-    import aiosqlite
+import aiosqlite
 
 logger = logging.getLogger("babylon60.crypto.shredder")
 
-__all__ = ["CryptoShredder", "ShredBatchResult", "ShredResult"]
+__all__ = ["CryptoShredder", "ShredAuditReport", "ShredBatchResult", "ShredReasonStats", "ShredResult"]
+
+
+class ShredReasonStats(TypedDict):
+    count: int
+    earliest: str | None
+    latest: str | None
+
+
+class ShredAuditReport(TypedDict):
+    total_shredded: int
+    by_reason: dict[str, ShredReasonStats]
+    compliant: bool
+    audit_timestamp: str
 
 
 @dataclass
@@ -74,9 +86,21 @@ class CryptoShredder:
     The immutable ledger hash chain remains intact for EU AI Act compliance.
     """
 
-    def __init__(self, conn: aiosqlite.Connection | sqlite3.Connection):
+    def __init__(self, conn: aiosqlite.Connection | sqlite3.Connection) -> None:
         self._conn = conn
         self._ensure_schema()
+
+    @property
+    def _sync_conn(self) -> sqlite3.Connection:
+        if isinstance(self._conn, sqlite3.Connection):
+            return self._conn
+        raise TypeError("Use async methods for aiosqlite connections")
+
+    @property
+    def _async_conn(self) -> aiosqlite.Connection:
+        if isinstance(self._conn, sqlite3.Connection):
+            raise TypeError("Use sync methods for sqlite3 connections")
+        return self._conn
 
     def _ensure_schema(self) -> None:
         """Create shredded_keys table if it doesn't exist."""
@@ -112,16 +136,14 @@ class CryptoShredder:
             );
         """
         try:
-            await __import__("typing").cast(__import__("typing").Any, self._conn).execute(sql)
-            await __import__("typing").cast(__import__("typing").Any, self._conn).commit()
+            await self._async_conn.execute(sql)
+            await self._async_conn.commit()
         except (sqlite3.Error, OSError) as e:
             logger.warning("Async schema creation skipped: %s", e)
 
     def is_shredded(self, fact_id: int, tenant_id: str = "default") -> bool:
         """Check if a fact's key has been shredded (sync)."""
-        if not isinstance(self._conn, sqlite3.Connection):
-            raise TypeError("Use is_shredded_async for async connections")
-        cursor = self._conn.execute(
+        cursor = self._sync_conn.execute(
             "SELECT 1 FROM shredded_keys WHERE fact_id = ? AND tenant_id = ?",
             (fact_id, tenant_id),
         )
@@ -129,38 +151,28 @@ class CryptoShredder:
 
     async def is_shredded_async(self, fact_id: int, tenant_id: str = "default") -> bool:
         """Check if a fact's key has been shredded (async)."""
-        cursor = (
-            await __import__("typing")
-            .cast(__import__("typing").Any, self._conn)
-            .execute(
-                "SELECT 1 FROM shredded_keys WHERE fact_id = ? AND tenant_id = ?",
-                (fact_id, tenant_id),
-            )
+        cursor = await self._async_conn.execute(
+            "SELECT 1 FROM shredded_keys WHERE fact_id = ? AND tenant_id = ?",
+            (fact_id, tenant_id),
         )
         return (await cursor.fetchone()) is not None
 
     def get_shredded_fact_ids(self, tenant_id: str = "default") -> set[int]:
         """Return all shredded fact IDs for a tenant (sync)."""
-        if not isinstance(self._conn, sqlite3.Connection):
-            raise TypeError("Use get_shredded_fact_ids_async for async")
-        cursor = self._conn.execute(
+        cursor = self._sync_conn.execute(
             "SELECT fact_id FROM shredded_keys WHERE tenant_id = ?",
             (tenant_id,),
         )
-        return {row[0] for row in cursor.fetchall()}
+        return {int(row[0]) for row in cursor.fetchall()}
 
     async def get_shredded_fact_ids_async(self, tenant_id: str = "default") -> set[int]:
         """Return all shredded fact IDs for a tenant (async)."""
-        cursor = (
-            await __import__("typing")
-            .cast(__import__("typing").Any, self._conn)
-            .execute(
-                "SELECT fact_id FROM shredded_keys WHERE tenant_id = ?",
-                (tenant_id,),
-            )
+        cursor = await self._async_conn.execute(
+            "SELECT fact_id FROM shredded_keys WHERE tenant_id = ?",
+            (tenant_id,),
         )
         rows = await cursor.fetchall()
-        return {row[0] for row in rows}
+        return {int(row[0]) for row in rows}
 
     def shred_fact(
         self,
@@ -252,20 +264,16 @@ class CryptoShredder:
 
         try:
             ts = datetime.fromtimestamp(time.time(), tz=timezone.utc).isoformat()
-            await (
-                __import__("typing")
-                .cast(__import__("typing").Any, self._conn)
-                .execute(
-                    "INSERT INTO shredded_keys "
-                    "(fact_id, tenant_id, reason, shredded_by, shredded_at) "
-                    "VALUES (?, ?, ?, ?, ?)",
-                    (fact_id, tenant_id, reason, shredded_by, ts),
-                )
+            await self._async_conn.execute(
+                "INSERT INTO shredded_keys "
+                "(fact_id, tenant_id, reason, shredded_by, shredded_at) "
+                "VALUES (?, ?, ?, ?, ?)",
+                (fact_id, tenant_id, reason, shredded_by, ts),
             )
 
             self._invalidate_fact_key(fact_id, tenant_id)
 
-            await __import__("typing").cast(__import__("typing").Any, self._conn).commit()
+            await self._async_conn.commit()
             logger.info(
                 "Crypto-shredded fact #%d (tenant=%s, reason=%s)",
                 fact_id,
@@ -304,16 +312,12 @@ class CryptoShredder:
         shredded_by: str | None = None,
     ) -> ShredBatchResult:
         """Shred all facts in a project."""
-        cursor = (
-            await __import__("typing")
-            .cast(__import__("typing").Any, self._conn)
-            .execute(
-                "SELECT id FROM facts WHERE project = ? AND tenant_id = ?",
-                (project, tenant_id),
-            )
+        cursor = await self._async_conn.execute(
+            "SELECT id FROM facts WHERE project = ? AND tenant_id = ?",
+            (project, tenant_id),
         )
         rows = await cursor.fetchall()
-        fact_ids = [row[0] for row in rows]
+        fact_ids = [int(row[0]) for row in rows]
 
         return await self._shred_batch(fact_ids, tenant_id, reason, shredded_by)
 
@@ -355,29 +359,27 @@ class CryptoShredder:
             # but we mark this fact_id as shredded so the decrypt
             # path can check before attempting HKDF derivation.
             cache_key = f"{tenant_id}:fact:{fact_id}"
-            if not hasattr(enc, "_shredded_facts"):
-                enc._shredded_facts = set()  # type: ignore
-            __import__("typing").cast(set, enc._shredded_facts).add(cache_key)  # type: ignore
+            enc._shredded_facts.add(cache_key)
         except (ImportError, RuntimeError) as e:
             logger.debug("Key invalidation skipped: %s", e)
 
-    def audit_shredding(self) -> dict[str, Any]:
+    def audit_shredding(self) -> ShredAuditReport:
         """Report on all shredded facts for compliance auditing.
 
         Returns aggregate statistics without revealing content.
         """
-        if not isinstance(self._conn, sqlite3.Connection):
-            raise TypeError("Use audit_shredding_async for async")
-
-        cursor = self._conn.execute(
+        cursor = self._sync_conn.execute(
             "SELECT COUNT(*), reason, MIN(shredded_at), MAX(shredded_at) FROM shredded_keys GROUP BY reason"
         )
         rows = cursor.fetchall()
 
-        reasons = {}
+        reasons: dict[str, ShredReasonStats] = {}
         total = 0
         for row in rows:
-            count, reason, earliest, latest = row
+            count = int(row[0])
+            reason = str(row[1])
+            earliest = str(row[2]) if row[2] is not None else None
+            latest = str(row[3]) if row[3] is not None else None
             total += count
             reasons[reason] = {
                 "count": count,

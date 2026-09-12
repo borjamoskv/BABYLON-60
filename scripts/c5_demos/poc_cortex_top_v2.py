@@ -6,6 +6,7 @@ import random
 import threading
 import os
 import signal
+from types import FrameType
 
 STATE_FILE = ".cortex/topology_state.json"
 
@@ -24,7 +25,9 @@ CURSOR_SHOW = "\033[?25h"
 CURSOR_HOME = "\033[H"
 CLEAR_SCREEN = "\033[2J"
 
-def simulate_swarm():
+_STOP_EVENT = threading.Event()
+
+def simulate_swarm() -> None:
     os.makedirs(os.path.dirname(STATE_FILE), exist_ok=True)
     models = [
         ("Gemini 3.8 Flash", "Low", "tau_fast", C_BLUE),
@@ -32,7 +35,7 @@ def simulate_swarm():
         ("GPT-OSS 120B", "Medium", "tau_med", C_CYAN)
     ]
     
-    while True:
+    while not _STOP_EVENT.is_set():
         active_workers = random.randint(1, 15)
         dominant_model = random.choice(models)
         brake_active = random.random() > 0.9 
@@ -56,19 +59,20 @@ def simulate_swarm():
             json.dump(state, f)
         time.sleep(1.5)
 
-def cleanup(signum=None, frame=None):
+def cleanup(signum: int | None = None, frame: FrameType | None = None) -> None:
+    _STOP_EVENT.set()
     sys.stdout.write(ALT_SCREEN_OFF + CURSOR_SHOW)
     sys.stdout.flush()
     if signum:
         sys.exit(0)
 
-def render_tui():
+def render_tui() -> None:
     sys.stdout.write(ALT_SCREEN_ON + CURSOR_HIDE)
     sys.stdout.flush()
     signal.signal(signal.SIGINT, cleanup)
     signal.signal(signal.SIGTERM, cleanup)
     
-    while True:
+    while not _STOP_EVENT.is_set():
         try:
             with open(STATE_FILE, "r") as f:
                 data = json.load(f).get("topology", {})

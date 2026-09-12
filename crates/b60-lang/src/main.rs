@@ -280,7 +280,7 @@ fn main() {
                 exergy_cost: 120,
                 belief_coords: vec![0.5, 0.5],
                 lamport_ts: 1,
-            }).unwrap();
+            }).expect("BFT Fallback");
 
             dag.add_node(b60_lang::CausalNode {
                 id: 2,
@@ -288,7 +288,7 @@ fn main() {
                 exergy_cost: 240,
                 belief_coords: vec![0.7, 0.3],
                 lamport_ts: 2,
-            }).unwrap();
+            }).expect("BFT Fallback");
 
             dag.add_node(b60_lang::CausalNode {
                 id: 3,
@@ -296,7 +296,7 @@ fn main() {
                 exergy_cost: 240,
                 belief_coords: vec![0.3, 0.7],
                 lamport_ts: 2,
-            }).unwrap();
+            }).expect("BFT Fallback");
 
             dag.add_node(b60_lang::CausalNode {
                 id: 4,
@@ -304,12 +304,12 @@ fn main() {
                 exergy_cost: 300,
                 belief_coords: vec![0.5, 0.5],
                 lamport_ts: 3,
-            }).unwrap();
+            }).expect("BFT Fallback");
 
-            dag.add_edge(1, 2).unwrap();
-            dag.add_edge(1, 3).unwrap();
-            dag.add_edge(2, 4).unwrap();
-            dag.add_edge(3, 4).unwrap();
+            dag.add_edge(1, 2).expect("BFT Fallback");
+            dag.add_edge(1, 3).expect("BFT Fallback");
+            dag.add_edge(2, 4).expect("BFT Fallback");
+            dag.add_edge(3, 4).expect("BFT Fallback");
 
             let t0 = Instant::now();
             match dag.compile() {

@@ -29,18 +29,19 @@ class BrowserResearchAgent:
     and records BFT Ledger attestations with Lamport ordering.
     """
 
-    def __init__(self, db_name: str = "browser_url_cache.db"):
+    def __init__(self, db_name: str = "browser_url_cache.db") -> None:
         self.cache = URLCacheSync(db_name)
         self._init_attestation_ledger()
 
-    def _init_attestation_ledger(self):
+    def _init_attestation_ledger(self) -> None:
         self.cache.conn.execute(_ATTESTATION_INIT_SQL)
 
     def _next_lamport_t(self) -> int:
         """Returns MAX(lamport_t) + 1 for BFT ordering invariant."""
         cursor = self.cache.conn.cursor()
         cursor.execute("SELECT COALESCE(MAX(lamport_t), 0) + 1 FROM bft_attestations")
-        return cursor.fetchone()[0]
+        row = cursor.fetchone()
+        return int(row[0]) if row else 1
 
     def _record_attestation(self, url: str, payload: str, anchors: list[str], causal_taint: str) -> Dict[str, Any]:
         """Emits an immutable BFT Attestation into the ledger (INV_INGESTA_08)."""

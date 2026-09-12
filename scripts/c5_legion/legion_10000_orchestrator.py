@@ -22,6 +22,7 @@ import math
 import logging
 import asyncio
 import random
+from typing import Any
 
 # Anergy Block: Reject execution if imported in a DAG flow
 if __name__ != "__main__":
@@ -33,26 +34,26 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 class CognitiveTransitionLedger:
     """Event Sourced WAL for 10k nodes (Zero-Anergy BFT Ledger)"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         base_dir = Path(os.getenv("BABYLON_HOME", str(Path.home() / ".babylon60")))
         base_dir.mkdir(parents=True, exist_ok=True)
         self.wal_path = str(base_dir / "legion_10k.wal")
         self.total_exergy_loss = 0.0
         # In a real C5-REAL system, this connects to the Rust FFI (libverifiable_inference_engine.dylib)
 
-    def project_context(self, node_id: str) -> dict:
+    def project_context(self, node_id: str) -> dict[str, Any]:
         """Operator P (Projection): Extracts only required invariant subgraph for the transition"""
         return {"node_id": node_id, "delta_i": 0.0, "sub_graph": []}
 
-    def append_result(self, node_id: str, effect: dict):
+    def append_result(self, node_id: str, effect: dict[str, Any]) -> None:
         """Appends raw semantic deltas, tracking global Exergy bounds"""
-        self.total_exergy_loss += effect.get("entropy_loss", 0.0)
+        self.total_exergy_loss += float(effect.get("entropy_loss", 0.0))
 
 
 class SwarmMCTS:
     """UCB-based Multi-Armed Bandit for Semantic Transitions and Exergy Optimization"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.c_puct = 1.0
         self.lambda_decay = 0.05
 
@@ -61,7 +62,7 @@ class SwarmMCTS:
         return node_entropy * math.exp(-self.lambda_decay * node_visits)
 
 
-async def transition_operator(ledger: CognitiveTransitionLedger, mcts: SwarmMCTS, node_idx: int):
+async def transition_operator(ledger: CognitiveTransitionLedger, mcts: SwarmMCTS, node_idx: int) -> None:
     """
     The True 'Agent'. It is just an asynchronous operator mapping a projection
     into an effect under GKAT thermodynamic boundaries.
@@ -92,7 +93,7 @@ async def transition_operator(ledger: CognitiveTransitionLedger, mcts: SwarmMCTS
     ledger.append_result(node_id, effect)
 
 
-async def orchestrate_legion_10k():
+async def orchestrate_legion_10k() -> None:
     ledger = CognitiveTransitionLedger()
     mcts = SwarmMCTS()
 

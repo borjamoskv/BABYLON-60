@@ -15,16 +15,21 @@ from __future__ import annotations
 import logging
 from collections.abc import Sequence
 
-from babylon60.compat.optional import np  # lazy: pip install cortex-persist[compute]
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import numpy as np
+else:
+    from babylon60.compat.optional import np  # lazy: pip install cortex-persist[compute]
 from babylon60.utils import void_vec
 
 logger = logging.getLogger("babylon60.utils.turboquant")
 
 # Static RAM cache to avoid wasting exergy recalculating QR(R) O(D^3)
-_ROTATION_CACHE: dict[int, np.ndarray] = {}  # pyright: ignore[reportInvalidTypeForm]
+_ROTATION_CACHE: dict[int, np.ndarray] = {}
 
 
-def _get_rotation_matrix(dim: int) -> np.ndarray:  # pyright: ignore[reportInvalidTypeForm]
+def _get_rotation_matrix(dim: int) -> np.ndarray:
     """Obtains and packs the orthogonal isometric matrix Q."""
     if dim not in _ROTATION_CACHE:
         # We use the dimension as seed for deterministic isometry
@@ -57,10 +62,14 @@ def optimize_vector_qjl(
 
         # Stage 1: Fast Walsh-Hadamard Transform O(D log D)
         try:
-            from scipy.fft import fwht  # type: ignore[reportAttributeAccessIssue]
+            import scipy.fft
 
-            rotated = fwht(arr, norm="ortho")
-        except ImportError:
+            fwht = getattr(scipy.fft, "fwht", None)
+            if callable(fwht):
+                rotated = fwht(arr, norm="ortho")
+            else:
+                raise ImportError("fwht unavailable")
+        except (ImportError, AttributeError):
             q = _get_rotation_matrix(dim)
             rotated = np.matmul(arr, q.T)
 
@@ -69,7 +78,7 @@ def optimize_vector_qjl(
             # Shift to bit-packed binary representation
             v_bits = void_vec.pack_void_bit(rotated[0] if not is_2d else rotated)
             # In VOID-VEC mode, we return the packed bytes directly.
-            return v_bits
+            return bytes(v_bits)
 
         # Stage 2: MSE Level Quantizer
         levels = int(2**effective_bits)
@@ -95,7 +104,7 @@ def optimize_vector_qjl(
 
         if not is_2d:
             return [float(x) for x in int8_scaled[0]]
-        return int8_scaled.tolist()
+        return [float(x) for x in int8_scaled.flatten()]
 
     except Exception as e:  # noqa: BLE001
         logger.error("TurboQuant failure (Exergy Shield bypassed): %s", e)
@@ -116,16 +125,20 @@ def encode_query_qjl(vector: list[float]) -> list[float]:
         dim = arr.shape[1]
         # Stage 1 Query Match: FWHT O(D log D)
         try:
-            from scipy.fft import fwht  # type: ignore[reportAttributeAccessIssue]
+            import scipy.fft
 
-            rotated = fwht(arr, norm="ortho")
-        except ImportError:
+            fwht = getattr(scipy.fft, "fwht", None)
+            if callable(fwht):
+                rotated = fwht(arr, norm="ortho")
+            else:
+                raise ImportError("fwht unavailable")
+        except (ImportError, AttributeError):
             q = _get_rotation_matrix(dim)
             rotated = np.matmul(arr, q.T)
 
         if not is_2d:
             return [float(x) for x in rotated[0]]
-        return rotated.tolist()
+        return [float(x) for x in rotated.flatten()]
     except Exception as e:  # noqa: BLE001
         logger.error("TurboQuant query encoding failure: %s", e)
         return vector

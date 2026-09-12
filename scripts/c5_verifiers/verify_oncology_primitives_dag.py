@@ -31,7 +31,7 @@ except ImportError:
 class OncologyDagVerifier:
     """Causal DAG verifier for the 300 Molecular Oncology Primitives."""
 
-    def __init__(self, primitives):
+    def __init__(self, primitives) -> None:
         self.primitives = primitives
         self.results = []
 

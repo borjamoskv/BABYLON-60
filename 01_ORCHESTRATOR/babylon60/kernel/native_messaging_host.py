@@ -9,22 +9,26 @@ import struct
 import json
 import logging
 import os
+from typing import Any
 
 # Toda traza o log DEBE ir a stderr o archivo, nunca a stdout, ya que arruina el túnel IPC
 LOG_FILE = os.path.join(os.path.dirname(__file__), "native_host.log")
 logging.basicConfig(filename=LOG_FILE, level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
 
-def get_message():
+def get_message() -> dict[str, Any] | None:
     raw_length = sys.stdin.buffer.read(4)
     if len(raw_length) == 0:
         return None
-    message_length = struct.unpack("@I", raw_length)[0]
+    message_length: int = struct.unpack("@I", raw_length)[0]
     message = sys.stdin.buffer.read(message_length).decode("utf-8")
-    return json.loads(message)
+    data = json.loads(message)
+    if isinstance(data, dict):
+        return data
+    return None
 
 
-def send_message(message_dict):
+def send_message(message_dict: dict[str, Any]) -> None:
     message = json.dumps(message_dict)
     encoded_message = message.encode("utf-8")
     sys.stdout.buffer.write(struct.pack("@I", len(encoded_message)))
@@ -32,7 +36,7 @@ def send_message(message_dict):
     sys.stdout.buffer.flush()
 
 
-def main():
+def main() -> None:
     logging.info("=======================================")
     logging.info("BABYLON-60 NATIVE HOST ACTIVE (Ring-0)")
     logging.info("=======================================")

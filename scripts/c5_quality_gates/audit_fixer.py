@@ -36,7 +36,7 @@ MYTHOLOGICAL_REPLACEMENTS = {
 }
 
 
-def fix_file(filepath, issues):
+def fix_file(filepath, issues) -> bool:
     try:
         with open(filepath, "r", encoding="utf-8") as f:
             content = f.read()
@@ -74,7 +74,7 @@ def fix_file(filepath, issues):
         return False
 
 
-def main():
+def main() -> None:
     report_path = os.path.join(REPO_ROOT, "scratch", "audit_report.json")
     with open(report_path, "r", encoding="utf-8") as f:
         report = json.load(f)

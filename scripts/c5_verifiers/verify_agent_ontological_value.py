@@ -20,7 +20,7 @@ if packages_dir not in sys.path:
 if repo_root not in sys.path:
     sys.path.insert(0, repo_root)
 
-def verify_va():
+def verify_va() -> bool:
     print("=== ORÁCULO DE VERIFICACIÓN: VALOR ONTOLÓGICO PARA EL AGENTE (V_A) ===")
     
     # Check 1: ADTs

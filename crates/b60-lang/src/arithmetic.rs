@@ -24,7 +24,7 @@ impl Tick60 {
     }
 
     pub fn from_rational(seconds: u64, num: u64, denom: u64) -> Self {
-        assert!(FRACTION_BASE % denom == 0, "Denominador no admisible en Q60");
+        assert!(FRACTION_BASE.is_multiple_of(denom), "Denominador no admisible en Q60");
         let factor = FRACTION_BASE / denom;
         Tick60 {
             seconds,

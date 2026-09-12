@@ -6,7 +6,7 @@
 import networkx as nx
 from babylon60.core.discrete_curvature import get_structural_debt_triple
 
-def test_topologies():
+def test_topologies() -> None:
     print("--- PRUEBA C5-REAL: TRIPLE DEL RIGOR ---")
     
     # 1. Grafo Estrella (alta centralización, cuello de botella)
