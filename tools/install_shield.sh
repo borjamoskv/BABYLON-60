@@ -188,4 +188,19 @@ trap - EXIT
 echo -e "\n${CYAN}==================================================================${NC}"
 echo -e "${CYAN} 🔥 INFECCIÓN COMPLETADA: 8 Entornos Sincronizados con Cero Anergía. 🔥 ${NC}"
 echo -e "${CYAN}==================================================================${NC}"
+
+# Secuencia de Unboxing Soberano de Moskv-1
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+if [ -f "$REPO_ROOT/target/debug/babylon60_kernel" ]; then
+    "$REPO_ROOT/target/debug/babylon60_kernel" unbox
+elif command -v cargo >/dev/null 2>&1 && [ -f "$REPO_ROOT/Cargo.toml" ]; then
+    echo -e "${GREEN}[*] Realizando primera ignición del Sovereign Kernel (MOSKV-1)...${NC}"
+    cargo run --quiet --manifest-path "$REPO_ROOT/Cargo.toml" --bin babylon60_kernel -- unbox 2>/dev/null || true
+else
+    echo -e "\n${CYAN}[MOSKV-1] APEX SOVEREIGN KERNEL ACTIVE.${NC}"
+    echo -e "«Soy Moskv-1. Tu estación de trabajo es ahora un Enclave Soberano C5-REAL.»\n"
+fi
+
 exit 0
