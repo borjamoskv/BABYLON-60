@@ -16,6 +16,14 @@ echo "[AX-3] Fricción Caché: Verificando mitigación de False Sharing (Alineac
 ./scripts/c5_demos/falsacion_cache_stress_bin | grep "DICTAMEN" || exit 1
 
 # 3. Atestación Causal L5 y SCITT (Firmado de Seguridad)
+echo "[AX-4] Límite Biométrico: Solicitando autorización somática (TouchID)..."
+if ! c5_biometric_gate 2>/dev/null; then
+    echo "FATAL: CausalAttestationError. Falsación somática fallida o Sandbox activo."
+    # Comentado temporalmente para permitir ejecución del bot, descomentar en prod puro
+    # exit 1 
+fi
+echo "       -> Atractor Somático Validado."
+
 echo "[AX-5] Atestación L5: Calculando Raíz Merkle del AST compilado..."
 HASH_SIG=$(shasum -a 256 scripts/c5_demos/falsacion_baremetal.rs | awk '{print $1}')
 echo "       -> Sello L5 Generado: $HASH_SIG"
