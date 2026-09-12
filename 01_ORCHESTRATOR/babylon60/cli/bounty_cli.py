@@ -113,7 +113,6 @@ async def run_single_cycle(args: argparse.Namespace, orchestrator: BountyPipelin
         print(f"\n[✓] Recibos exportados a {export_path.resolve()}")
 
     print("\n[✓] Invariante INV_C5_SHM preservada: Cero I/O síncrono en la ruta caliente.")
-    orchestrator.cold_ledger.stop()
     return 0
 
 
@@ -123,22 +122,26 @@ async def run_cli(args: argparse.Namespace) -> int:
         return handle_bytecode_inspection(args.inspect_bytecode, args.hook_address)
 
     orchestrator = BountyPipelineOrchestrator()
+    orchestrator.cold_ledger.start()
 
     if not args.json_output:
         render_dashboard_banner()
         print(f"[*] Iniciando ciclo de ingestión (Sondeo en vivo: {args.live}, Límite: {args.per_page})...")
 
-    if args.watch and args.watch > 0:
-        print(f"[*] Modo vigilancia activo (Intervalo: {args.watch}s). Presiona Ctrl+C para detener.")
-        try:
-            while True:
-                await run_single_cycle(args, orchestrator)
-                await asyncio.sleep(args.watch)
-        except (KeyboardInterrupt, asyncio.CancelledError):
-            print("\n[!] Vigilancia interrumpida por el operador. Transición limpia a halt.")
-            return 0
+    try:
+        if args.watch and args.watch > 0:
+            print(f"[*] Modo vigilancia activo (Intervalo: {args.watch}s). Presiona Ctrl+C para detener.")
+            try:
+                while True:
+                    await run_single_cycle(args, orchestrator)
+                    await asyncio.sleep(args.watch)
+            except (KeyboardInterrupt, asyncio.CancelledError):
+                print("\n[!] Vigilancia interrumpida por el operador. Transición limpia a halt.")
+                return 0
 
-    return await run_single_cycle(args, orchestrator)
+        return await run_single_cycle(args, orchestrator)
+    finally:
+        orchestrator.cold_ledger.stop()
 
 
 def main(argv: Sequence[str] | None = None) -> None:
