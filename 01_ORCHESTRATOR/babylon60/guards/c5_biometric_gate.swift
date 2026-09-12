@@ -23,6 +23,7 @@ func main() {
     }
 
     let context = LAContext()
+    context.touchIDAuthenticationAllowableReuseDuration = 0
     var error: NSError?
 
     guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {

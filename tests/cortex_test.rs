@@ -24,8 +24,15 @@ fn new_manifest() -> &'static SharedManifest {
 
 #[test]
 fn test_cortex_persist_stress() {
-    let db_path = "test_cortex.db";
-    let _ = fs::remove_file(db_path); // Limpiar tests previos
+    let tmp = std::env::temp_dir();
+    let db_file = tmp.join("test_cortex.db");
+    let db_path = db_file.to_str().unwrap();
+    let clean_db = |path: &str| {
+        let _ = fs::remove_file(path);
+        let _ = fs::remove_file(format!("{}-wal", path));
+        let _ = fs::remove_file(format!("{}-shm", path));
+    };
+    clean_db(db_path); // Limpiar tests previos
     
     let persister = CortexPersister::new(db_path).expect("No se pudo inicializar Cortex");
     let manifest = new_manifest();
@@ -59,5 +66,5 @@ fn test_cortex_persist_stress() {
     
     assert!(btc_anchor.starts_with("OP_RETURN "));
     // Limpiar al final
-    let _ = fs::remove_file(db_path);
+    clean_db(db_path);
 }

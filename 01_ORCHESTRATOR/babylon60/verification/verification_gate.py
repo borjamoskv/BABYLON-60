@@ -192,14 +192,20 @@ class VerificationGate:
         causal_hash = hashlib.sha256(raw_pre_hash.encode("utf-8")).hexdigest()
 
         script_path = Path(__file__).parent.parent / "guards" / "c5_biometric_gate"
-        if not script_path.exists():
-            print(f"[!] Binario no encontrado: {script_path}")
+        swift_script = Path(__file__).parent.parent / "guards" / "c5_biometric_gate.swift"
+
+        if script_path.exists():
+            cmd = [str(script_path), "--causal-hash", causal_hash, "--message", description]
+        elif swift_script.exists():
+            cmd = ["swift", str(swift_script), "--causal-hash", causal_hash, "--message", description]
+        else:
+            print(f"[!] Binario/script no encontrado: {script_path}")
             return False
 
         try:
             print(f"\n[🛡️ C5-REAL] Solicitando firma biométrica para: {action_name}")
             result = subprocess.run(
-                [str(script_path), "--causal-hash", causal_hash, "--message", description],
+                cmd,
                 capture_output=True,
                 text=True,
                 check=True,
