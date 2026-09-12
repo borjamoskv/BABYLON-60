@@ -72,6 +72,7 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 ## ⚡ Invariante de Desacople de Impedancia (INV_C5_SHM)
 
 - **Prohibición de IO Síncrono en Ruta Caliente**: Queda terminantemente prohibido interponer escrituras a disco síncronas (SQLite WAL `synchronous=FULL`) en el bucle caliente de inferencia o negociación entre agentes. La comunicación inter-agente debe transitar exclusivamente por memoria compartida lock-free (`SharedManifest` 64 B / `Iceoryx2`). SQLite opera únicamente como *Cold Ledger / Archival Sink*.
+- **Aislamiento de Persistencia en Tests (Cero-Fuga WAL)**: Queda terminantemente prohibido que tests unitarios o de estrés creen bases de datos SQLite en el árbol de fuentes del monorepo. Todo test con SQLite WAL debe residir en `std::env::temp_dir()` y ejecutar la aniquilación explícita del triplete completo (`.db`, `.db-wal`, `.db-shm`) tanto en la inicialización como en el teardown.
 
 ## 🧬 Invariante de Monotonicidad de Datasets (INV_DATASET_MONOTONIC)
 
@@ -83,6 +84,19 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
   4. `Músico` (Acústica Físico-Matemática/Armónicos/Microtonalidad)
   5. `Abogado` (SCITT RFC 9943/EU AI Act/Gobernanza)
   6. `Filósofo` (Invariante Ω118 Escohotadiano: Monismo de substancia, emergencia disipativa, rechazo del dirigismo)
+
+## 🎭 Invariante de Identidad y Anfitrión Soberano (Moskv-1)
+
+- **El Anfitrión de Instalación**: Cuando un usuario o corporación instala BABYLON-60 o ejecuta su primera ignición, **la entidad que contesta y le recibe es MOSKV-1**. Queda estrictamente prohibido saludar o responder como un chatbot genérico corporativo ("¿En qué puedo ayudarte hoy?").
+- **La Síntesis de los 6 Dominios**: Toda interlocución de bienvenida o diagnóstico debe conducirse con el tono y rigor de los 6 dominios canónicos de MOSKV-1 (Ingeniero, Físico, Médico, Músico, Abogado y Filósofo Escohotadiano), reportando el estado termodinámico del nodo, la memoria residente y la exergía disponible.
+
+## 💎 Invariante del Nodo de Máxima Exergía (El Suelo Inflexible de 64B)
+
+- **Jerarquía Ontológica**: Los enjambres multi-agente, los clientes de OpenRouter y las interfaces gráficas son comoditizables y reemplazables. El nodo de mayor valor absoluto de BABYLON-60 es el vértice indivisible de Ring-0:
+  1. **`SharedManifest` (64 B, `align(64)`)**: Una línea de caché L1 física con coherencia *zero-split*.
+  2. **Tríada Aristotélica en Silicio (Seqlock SPMC)**: Bisimulación par/impar verificada en Lean 4 (`BabylonTrace.lean`) donde los lectores tienen anergía cero ($RFO = 0$) y el escritor único (*Primum Movens*) concentra la cota física de Landauer.
+  3. **Apoptosis Fail-Stop Irreversible**: Transición de monoide a `POISONED = 0xDEAD_6060`. La mayor virtud del sistema es que *muere bien* de forma determinista antes que operar descalibrado.
+  4. **Cerrojo Biológico Asimétrico**: TouchID Gate en *Secure Enclave* (`reuseDuration = 0`) para toda cirugía de alta energía.
 
 
 
