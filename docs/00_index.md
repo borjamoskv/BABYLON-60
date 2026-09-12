@@ -19,8 +19,6 @@
 
 | Documento | Ruta / Archivo | Título Principal / Propósito |
 | :--- | :--- | :--- |
-| [`00_MANIFESTO.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/00_MANIFESTO.md) | `00_MANIFESTO.md` | 📜 FOUNDATIONAL MANIFESTO: BABYLON-60 |
-| [`00_MANIFESTO_ES.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/00_MANIFESTO_ES.md) | `00_MANIFESTO_ES.md` | 📜 MANIFIESTO FUNDACIONAL: BABYLON-60 |
 | [`05_compliance_eu_ai_act.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/05_compliance_eu_ai_act.md) | `05_compliance_eu_ai_act.md` | ⚖️ Guía de Cumplimiento Normativo: EU AI Act en BABYLON-60 |
 | [`10_legion_swarm_cta_spec.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/10_legion_swarm_cta_spec.md) | `10_legion_swarm_cta_spec.md` | Especificación Axiomática: Legion 10k Swarm (CTA) |
 | [`CANARY_TOKENS.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/CANARY_TOKENS.md) | `CANARY_TOKENS.md` | Canary Tokens — Ω-11 (Honeypot) |
@@ -116,8 +114,6 @@
 | [`AUDIT_AXIOMS_2026.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_AXIOMS_2026.md) | `06_theory/AUDIT_AXIOMS_2026.md` | 🛡️ Dictamen de Auditoría Epistémica: Axiomatización C5-REAL |
 | [`AUDIT_VERDICT_C5_REAL.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md) | `06_theory/AUDIT_VERDICT_C5_REAL.md` | 🛡️ Dictamen de Verificación Independiente: Colapso del Holograma C4-SIM |
 | [`AXIOMATIZATION_C5_REAL.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md) | `06_theory/AXIOMATIZATION_C5_REAL.md` | ⚖️ Base Axiomática Sellada C5-REAL |
-| [`ETHOS.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/ETHOS.md) | `06_theory/ETHOS.md` | 📜 ETHOS — APEX-SINGULARITY |
-| [`MANIFIESTO_CENTURIA.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/MANIFIESTO_CENTURIA.md) | `06_theory/MANIFIESTO_CENTURIA.md` | 🔥 CENTURIA MANIFESTO — OMEGA Causal-Determinist |
 | [`MOSKV_1_APEX_BLUEPRINT.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/MOSKV_1_APEX_BLUEPRINT.md) | `06_theory/MOSKV_1_APEX_BLUEPRINT.md` | 🚀 Motor Causal-1-APEX: Manifiesto y Arquitectura Consolidada |
 | [`STATUS_THEORY.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS_THEORY.md) | `06_theory/STATUS_THEORY.md` | 📈 STATUS — Single Source of Truth |
 | [`TOPOLOGIA_MAESTRA.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/TOPOLOGIA_MAESTRA.md) | `06_theory/TOPOLOGIA_MAESTRA.md` | 🌌 Topología Maestra C5-REAL (BABYLON-60 / CORTEX) |
