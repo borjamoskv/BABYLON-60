@@ -297,7 +297,7 @@ BABYLON-60/
 
 ## Repositorio Relacionado
 
-- **[Teorema-Robinson-Moskv](https://github.com/borjamoskv/Teorema-Robinson-Moskv)**: Formalización matemática fundacional en Lean 4 de la que derivan los axiomas causales de BABYLON-60.
+- **[Teorema-Robinson-Moskv](https://github.com/borjamoskv/Teorema-Robinson-Moskv)** *(Enclave de Investigación Privado)*: Formalización matemática fundacional en Lean 4 de la que derivan los axiomas causales de BABYLON-60. *(Para verificación académica, los bocetos formales y la configuración de Lake están embebidos directamente en este monorepo en [`proof/`](./proof/)).*
 
 ---
 

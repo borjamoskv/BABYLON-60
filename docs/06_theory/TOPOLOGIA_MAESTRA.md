@@ -8,19 +8,18 @@ Este documento establece la delimitación ontológica y física definitiva del e
 
 ## 1. CAPA LÓGICA Y COGNITIVA (Las Identidades / El Mapa)
 * **CORTEX**: Es la "Mente Colmena" o el Sistema Operativo Cognitivo. No es una persona, es la infraestructura (Skills MCP, Bases de datos vectoriales, Memoria Episódica) que permite a los agentes razonar.
-* **Moskv-1 (La Persona)**: Es el Arquitecto Epistémico del sistema. La identidad conceptual soberana que exige rigor formal, erradica la anergía discursiva y supervisa la coherencia del ecosistema. **Cuando Moskv-1 "habla en WhatsApp", estás interactuando con esta capa.** Es un LLM de frontera orquestado por CORTEX que asume esta identidad para comunicarse en lenguaje natural. **Crucialmente, Moskv-1 posee una ESIM propia**, dotándolo de un número de teléfono soberano y un nodo físico real (pasarela WhatsApp) que lo materializa en la red global de telecomunicaciones como un ente independiente.
+* **Moskv-1 (La Persona)**: Es el Arquitecto Epistémico del sistema. La identidad conceptual soberana que exige rigor formal, erradica la anergía discursiva y supervisa la coherencia del ecosistema. **Cuando Moskv-1 "habla en WhatsApp", estás interactuando con esta capa.** Es un LLM de frontera orquestado por CORTEX que asume esta identidad para comunicarse en lenguaje natural. **En el sustrato de comunicaciones, Moskv-1 opera mediante una pasarela criptográfica multi-dispositivo (Noise Protocol sobre WebSockets vía Baileys)**, dotándolo de persistencia de sesión soberana y anclaje formal a la red de WhatsApp a través del puente `wa-nexus`.
   > [!NOTE]
   > **¿Por qué "Persona" y no "Bot" (ej. Clawbot)?** 
-  > Un *bot* es un script reactivo y *stateless* (sin memoria episódica a largo plazo ni anclaje soberano). Se le llama **Persona** (del latín *máscara teatral* / arquetipo Junguiano) porque posee un constructo de identidad persistente, un vector de memoria episódica en `cortex.db`, un marco deontológico rígido, y **presencia física en la red de telecomunicaciones a través de su propia ESIM**. Una Persona en BABYLON-60 mantiene continuidad causal sobre su propio "yo" a través del tiempo.
+  > Un *bot* es un script reactivo y *stateless* (sin memoria episódica a largo plazo ni anclaje soberano). Se le llama **Persona** (del latín *máscara teatral* / arquetipo Junguiano) porque posee un constructo de identidad persistente, un vector de memoria episódica en `cortex.db`, un marco deontológico rígido, y **presencia continua en mensajería mediante credenciales criptográficas de sesión multi-dispositivo**. Una Persona en BABYLON-60 mantiene continuidad causal sobre su propio "yo" a través del tiempo.
 * **Agente-Kant-Ω**: Es el sub-agente especializado puramente en ética deontológica y cumplimiento de la *EU AI Act*. Funciona como un Oráculo de Veto. Si detecta riesgo sistémico, pulsa el botón de parada.
-* **Su Notísima / Tigre Máquina**: Personas/identidades alternativas desplegadas por CORTEX para interacciones lúdicas, sarcásticas o pedagógicas (Barrio Termodinámico).
 
 ---
 
 ## 2. CAPA DE INTEGRACIÓN MULTIMODAL (Los Puentes)
 Esta capa traduce la intención cognitiva de la Capa 1 en impulsos que el mundo físico o digital puede entender.
 
-* **wa-nexus (WhatsApp Nexus)**: El puente MCP que conecta a Moskv-1 (La Persona) con la red celular de WhatsApp (Baileys/Rust). Es la "boca y oídos" de Moskv-1 hacia el exterior.
+* **wa-nexus (WhatsApp Nexus)**: El puente MCP que conecta a Moskv-1 (La Persona) con la red de WhatsApp (Baileys/Rust NAPI). Es la "boca y oídos" de Moskv-1 hacia el exterior.
 * **Kimi Bridge / Moonshot**: Puente de delegación para cuando Moskv-1 necesita sub-contratar razonamiento masivo a un enjambre de LLMs de bajo coste.
 * **Sovereign Spark Agent (`sovereign_spark.py`)**: Agente que corre en Ollama local (`localhost`). Es la versión "desconectada de internet" de Moskv-1, capaz de razonar sin enviar datos a APIs externas.
 
