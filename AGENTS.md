@@ -91,3 +91,9 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 - **Prohibición del Silencio Burocrático:** Bajo el marco de Alta Exergía, el uso de directivas como `# type: ignore` o el tipado implícito `Any` se considera anergía (fricción residual). Queda estrictamente prohibido resolver fracturas de tipado apagando el linter.
 - **Operativos de Enjambre (Swarm Purge):** Cuando el repositorio presente una deuda masiva de tipado (ej. >100 fracturas MyPy en `make check`), el agente NO DEBE intentar refactorizar manualmente en el contexto principal. Debe invocar herramientas de inferencia AST (`autotyping`) y desplegar **Enjambres de Subagentes paralelos (Operativo Legión)** dividiendo la base de código en sectores. 
 - **Verificación:** La purga sólo se considera exitosa si `make check` (MyPy estricto) retorna 0 errores para los módulos afectados.
+
+## 🕳️ Invariante de Apoptosis Informacional (Dilema Bekenstein-Landauer)
+
+- **Erradicación del *Cheap Talk* de Oráculos:** Al orquestar LLMs externos (GPT/Claude), el agente DEBE disipar térmicamente (borrar permanentemente) toda traza de deliberación estocástica o *Chain of Thought*. Solo está autorizado retener y escribir a disco el AST matemático o el dictamen final. Almacenar dudas y retrocesos de la red neuronal constituye anergía gravitatoria insostenible.
+- **Aniquilación Afín:** Una vez un puntero en memoria es "consumido" bajo la lógica afín validada en Lean 4, el recurso debe ser liberado de RAM de inmediato (`Drop` determinista). No se delega la limpieza a procesos de *Garbage Collection* diferidos.
+- **Retención de Alta Exergía:** Los únicos tensores de información autorizados para acumulación inmutable indefinida son: Firmas Ed25519 SCITT, mutaciones de gobernanza (`AGENTS.md`) y teoremas verificados por SMT Solvers.
