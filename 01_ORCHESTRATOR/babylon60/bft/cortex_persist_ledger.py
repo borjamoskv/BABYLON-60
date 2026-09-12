@@ -18,8 +18,6 @@ Authorship: Borja Moskv (borjamoskv)
 
 from __future__ import annotations
 
-import hashlib
-import json
 import logging
 import sqlite3
 import uuid
@@ -28,42 +26,19 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict
 
+from babylon60.bft.cortex_crypto_kernel import (
+    _canonical_json,
+    compute_cortex_hash,
+    build_merkle_tree,
+    generate_merkle_proof,
+    verify_merkle_proof,
+    verify_row_invariants,
+    ZERO_HASH_256,
+    NAMESPACE_CORTEX,
+    MerkleMountainRange,
+)
+
 logger = logging.getLogger("babylon60.bft.cortex_persist")
-
-NAMESPACE_CORTEX = uuid.UUID("a291bb18-79ad-4fc7-94e6-e6060ffd51f1")
-ZERO_HASH_256 = "0" * 64
-
-
-def _canonical_json(data: Any) -> str:
-    return json.dumps(data, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
-
-
-def compute_cortex_hash(
-    seq: int,
-    event_id: str,
-    event_type: str,
-    payload_json: str,
-    cortex_taint: str,
-    lamport_t: int,
-    prev_hash: str,
-    timestamp: str,
-    agent_id: str = "ULTRATHINK-APEX",
-    domain: str = "babylon60.com",
-) -> str:
-    """Computa el digest criptografico SHA3-256 inmutable de una entrada Cortex."""
-    body = {
-        "seq": seq,
-        "event_id": event_id,
-        "event_type": event_type,
-        "payload_json": payload_json,
-        "cortex_taint": cortex_taint,
-        "agent_id": agent_id,
-        "domain": domain,
-        "lamport_t": lamport_t,
-        "prev_hash": prev_hash,
-        "timestamp": timestamp,
-    }
-    return hashlib.sha3_256(_canonical_json(body).encode("utf-8")).hexdigest()
 
 
 @dataclass(frozen=True)
@@ -130,7 +105,7 @@ class CortexPersistLedger:
     def append_event(self, event: CortexEvent) -> Dict[str, Any]:
         """
         Inserta un evento en el ledger BFT inmutable calculando Lamport y SHA3-256.
-        Garantiza idempotencia vía UUID v5.
+        Garantiza idempotencia vía UUID v5. Utiliza BEGIN IMMEDIATE (FIX C5-06).
         """
         if not event.cortex_taint:
             raise ValueError("INV_BFT_03: cortex_taint es obligatorio")
@@ -144,10 +119,18 @@ class CortexPersistLedger:
 
         with self._get_connection() as conn:
             cursor = conn.cursor()
-            existing = self._check_existing_event(cursor, event_id)
-            if existing:
-                return existing
-            return self._insert_new_event(cursor, conn, event, event_id, payload_json, timestamp)
+            cursor.execute("BEGIN IMMEDIATE")
+            try:
+                existing = self._check_existing_event(cursor, event_id)
+                if existing:
+                    conn.commit()
+                    return existing
+                result = self._insert_new_event(cursor, conn, event, event_id, payload_json, timestamp)
+                conn.commit()
+                return result
+            except Exception:
+                conn.rollback()
+                raise
 
     @staticmethod
     def _check_existing_event(cursor: sqlite3.Cursor, event_id: str) -> Dict[str, Any] | None:
@@ -214,7 +197,6 @@ class CortexPersistLedger:
                 timestamp,
             ),
         )
-        conn.commit()
         return {
             "seq": next_seq,
             "event_id": event_id,
@@ -384,90 +366,148 @@ class CortexPersistLedger:
         cursor.execute("SELECT seq, entry_hash, lamport_t FROM cortex_ledger WHERE event_id = ?", (event_id,))
         return cursor.fetchone()
 
-    @staticmethod
-    def _verify_row(row: tuple[Any, ...], prev_hash: str, last_lamport: int) -> bool:
-        (
-            seq,
-            event_id,
-            event_type,
-            payload_json,
-            cortex_taint,
-            agent_id,
-            domain,
-            lamport_t,
-            row_prev_hash,
-            entry_hash,
-            timestamp,
-        ) = row
-        if lamport_t <= last_lamport:
-            logger.error(f"🔴 Violacion Lamport: {lamport_t} <= {last_lamport} en seq {seq}")
-            return False
-        if row_prev_hash != prev_hash:
-            logger.error(f"🔴 Cadena rota en seq {seq}: prev_hash esperado {prev_hash}, obtenido {row_prev_hash}")
-            return False
-        computed = compute_cortex_hash(
-            seq=seq,
-            event_id=event_id,
-            event_type=event_type,
-            payload_json=payload_json,
-            cortex_taint=cortex_taint,
-            lamport_t=lamport_t,
-            prev_hash=prev_hash,
-            timestamp=timestamp,
-            agent_id=agent_id,
-            domain=domain,
-        )
-        if computed != entry_hash:
-            logger.error(f"🔴 Entry hash corrupto en seq {seq}: calculado {computed}, en DB {entry_hash}")
-            return False
-        return True
-
-    def verify_integrity(self) -> bool:
+    def verify_integrity(self, chunk_size: int = 1000) -> bool:
         """
         Verifica criptograficamente la cadena inmutable del ledger SHA3-256.
+        INCLUYE: Contigüidad estricta de seq (FIX C5-04) y streaming O(1) de memoria.
         """
         with self._get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute(
                 "SELECT seq, event_id, event_type, payload_json, cortex_taint, agent_id, domain, lamport_t, prev_hash, entry_hash, timestamp FROM cortex_ledger ORDER BY seq ASC"
             )
-            rows = cursor.fetchall()
 
-        prev_hash = ZERO_HASH_256
-        last_lamport = 0
-        for row in rows:
-            if not self._verify_row(row, prev_hash, last_lamport):
-                return False
-            prev_hash = row[9]
-            last_lamport = row[7]
+            prev_hash = ZERO_HASH_256
+            last_lamport = 0
+            expected_seq = 1
+
+            while True:
+                rows = cursor.fetchmany(chunk_size)
+                if not rows:
+                    break
+
+                for row in rows:
+                    seq, event_id, event_type, payload_json, cortex_taint, agent_id, domain, lamport_t, row_prev_hash, entry_hash, timestamp = row
+
+                    is_valid, error = verify_row_invariants(
+                        seq=seq,
+                        event_id=event_id,
+                        event_type=event_type,
+                        payload_json=payload_json,
+                        cortex_taint=cortex_taint,
+                        agent_id=agent_id,
+                        domain=domain,
+                        lamport_t=lamport_t,
+                        prev_hash=row_prev_hash,
+                        entry_hash=entry_hash,
+                        timestamp=timestamp,
+                        expected_seq=expected_seq,
+                        last_lamport=last_lamport,
+                        expected_prev_hash=prev_hash,
+                    )
+
+                    if not is_valid:
+                        logger.error(f"🔴 {error}")
+                        return False
+
+                    prev_hash = entry_hash
+                    last_lamport = lamport_t
+                    expected_seq += 1
 
         return True
 
     def get_merkle_root(self) -> str:
         """
-        Calcula la Raiz de Merkle (Merkle Root SHA3-256) sobre todos los hashes de entrada.
-        Permite atestación criptográfica O(1) del estado completo del ledger.
+        Calcula la Raiz de Merkle sobre todos los hashes de entrada.
+        Utiliza kernel puro con FIX C5-05 (Domain Separation).
         """
         with self._get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute("SELECT entry_hash FROM cortex_ledger ORDER BY seq ASC")
             leaves = [row[0] for row in cursor.fetchall()]
 
-        if not leaves:
-            return ZERO_HASH_256
+        return build_merkle_tree(leaves)
 
-        # Construcción jerárquica del árbol de Merkle
-        layer = [bytes.fromhex(h) for h in leaves]
-        while len(layer) > 1:
-            if len(layer) % 2 != 0:
-                layer.append(layer[-1])  # Duplicar último nodo si es impar
-            next_layer = []
-            for i in range(0, len(layer), 2):
-                combined = layer[i] + layer[i + 1]
-                next_layer.append(hashlib.sha3_256(combined).digest())
-            layer = next_layer
+    def get_event_proof(self, seq: int) -> Dict[str, Any]:
+        """
+        Genera una prueba de inclusión de Merkle O(log N) para un evento específico por seq.
+        Cumple con el estándar de evidencia verificable del EU AI Act.
+        """
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT entry_hash FROM cortex_ledger ORDER BY seq ASC")
+            leaves = [row[0] for row in cursor.fetchall()]
 
-        return layer[0].hex()
+        if seq < 1 or seq > len(leaves):
+            raise IndexError(f"seq {seq} fuera de rango (total eventos: {len(leaves)})")
+
+        target_index = seq - 1
+        return generate_merkle_proof(leaves, target_index)
+
+    @staticmethod
+    def verify_event_proof(proof_packet: Dict[str, Any], merkle_root: str) -> bool:
+        """
+        Verifica una prueba de inclusión de Merkle O(log N) sin requerir acceso a la base de datos.
+        """
+        return verify_merkle_proof(
+            leaf_hash=proof_packet["leaf_hash"],
+            proof=proof_packet["proof"],
+            expected_root=merkle_root,
+            total_leaves=proof_packet["total_leaves"],
+        )
+
+    def get_mmr(self) -> MerkleMountainRange:
+        """
+        Construye un acumulador MerkleMountainRange sobre todos los eventos del ledger.
+        """
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT entry_hash FROM cortex_ledger ORDER BY seq ASC")
+            leaves = [row[0] for row in cursor.fetchall()]
+
+        mmr = MerkleMountainRange()
+        for h in leaves:
+            mmr.append(h)
+        return mmr
+
+    def get_mmr_root(self) -> str:
+        """
+        Retorna la raíz del acumulador MMR O(log N).
+        """
+        return self.get_mmr().get_root()
+
+    def get_mmr_event_proof(self, seq: int) -> Dict[str, Any]:
+        """
+        Genera una prueba de inclusión MMR O(log N) para un evento específico por seq.
+        Cumple con el estándar de evidencia forense append-only (arXiv:2609.04017 / EU AI Act).
+        """
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT entry_hash FROM cortex_ledger ORDER BY seq ASC")
+            leaves = [row[0] for row in cursor.fetchall()]
+
+        if seq < 1 or seq > len(leaves):
+            raise IndexError(f"seq {seq} fuera de rango (total eventos: {len(leaves)})")
+
+        mmr = MerkleMountainRange()
+        for h in leaves:
+            mmr.append(h)
+
+        target_index = seq - 1
+        proof = mmr.generate_proof(target_index)
+        proof["leaf_hash"] = leaves[target_index]
+        return proof
+
+    @staticmethod
+    def verify_mmr_event_proof(proof_packet: Dict[str, Any], mmr_root: str) -> bool:
+        """
+        Verifica una prueba de inclusión MMR O(log N) contra una raíz MMR esperada.
+        """
+        return MerkleMountainRange.verify_proof(
+            leaf_hash=proof_packet["leaf_hash"],
+            proof_packet=proof_packet,
+            expected_root=mmr_root,
+        )
 
     def get_state_attestation(self) -> Dict[str, Any]:
         """
@@ -479,6 +519,7 @@ class CortexPersistLedger:
             row = cursor.fetchone()
 
         merkle_root = self.get_merkle_root()
+        mmr_root = self.get_mmr_root()
         is_valid = self.verify_integrity()
 
         return {
@@ -486,6 +527,7 @@ class CortexPersistLedger:
             "max_lamport": row[1],
             "max_seq": row[2],
             "merkle_root": merkle_root,
+            "mmr_root": mmr_root,
             "integrity_verified": is_valid,
             "attested_at": datetime.now(timezone.utc).isoformat(),
         }

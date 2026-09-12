@@ -1,0 +1,22 @@
+[package]
+name = "b60-lang"
+version = "1.0.0"
+edition = "2021"
+description = "Sovereign Base-60 Programming Language Engine for BABYLON-60 & Robinson-Moskv"
+authors = ["Borja Moskv <borjamoskv@github.com>"]
+license = "Apache-2.0 OR MIT"
+
+[[bin]]
+name = "b60"
+path = "src/main.rs"
+
+[lib]
+name = "b60_lang"
+path = "src/lib.rs"
+
+[dependencies]
+clap = { version = "4.5", features = ["derive"] }
+sha3 = "0.12.0"
+ed25519-dalek = { version = "2.1", features = ["rand_core"] }
+hex = "0.4"
+rand = "0.8"

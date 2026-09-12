@@ -20,12 +20,10 @@ class BFTCausalInvariantError(RuntimeError):
     """FAIL-FAST Exception for violations of Babylon.lean BFT invariants."""
 
 
+from babylon60.bft.cortex_crypto_kernel import compute_envelope_hash, _canonical_json
+
 NAMESPACE_UUID = uuid.UUID("9897d6fd-d6a7-4fe9-86bc-f0c312886d5d")
 ZERO_HASH = "0" * 64
-
-
-def _canonical_json(data: Any) -> str:
-    return json.dumps(data, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
 
 
 def _compute_entry_hash(
@@ -56,7 +54,7 @@ def _compute_entry_hash(
         "prev_hash": prev_hash,
         "created_at": created_at,
     }
-    return hashlib.sha3_256(_canonical_json(envelope).encode("utf-8")).hexdigest()
+    return compute_envelope_hash(envelope)
 
 
 @dataclass(frozen=True)

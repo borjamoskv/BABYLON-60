@@ -16,8 +16,9 @@ import hashlib
 import json
 import os
 import time
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, List
 from .i18n import get_translation
+from babylon60.attestation.merkle_anchor import MerkleCausalAnchor
 
 STATUS_UNVERIFIED = "UNVERIFIED_NO_LEDGER"
 STATUS_MISMATCH = "EVIDENCE_MISMATCH_NON_COMPLIANT"
@@ -209,6 +210,7 @@ class EUAIActComplianceExporter:
         operator_name: str,
         locale: str = "es",
         ledger_path: Optional[str] = None,
+        validity_days: int = 90,
     ) -> Dict[str, Any]:
         """Generates a structured compliance certificate localized for target locale/country."""
         t = get_translation(locale)
@@ -220,6 +222,9 @@ class EUAIActComplianceExporter:
         verified = verification["verified"]
 
         timestamp_iso = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        valid_until_iso = time.strftime(
+            "%Y-%m-%dT%H:%M:%SZ", time.gmtime(time.time() + validity_days * 86400)
+        )
 
         # Compute certificate fingerprint
         cert_data = f"{system_id}|{operator_name}|{global_hash}|{timestamp_iso}|{locale}"
@@ -256,10 +261,18 @@ class EUAIActComplianceExporter:
             "system_identifier": system_id,
             "operator": operator_name,
             "issued_at": timestamp_iso,
+            "valid_until": valid_until_iso,
+            "validity_days": validity_days,
             "global_merkle_root": global_hash,
             "quarantine_status": status_str,
             "legal_disclaimer": t["legal_disclaimer"],
             "evidence_verification": verification,
+            "revocation": {
+                "status": "ACTIVE",
+                "check_hash": hashlib.sha256(f"{cert_fingerprint}:ACTIVE".encode()).hexdigest(),
+                "revocation_authority": f"urn:babylon60:revocation:{operator_name}",
+            },
+            "hardware_anchor": MerkleCausalAnchor().generate_hardware_pcr_quote(global_hash),
             "articles_compliance": {
                 "Article_9_Risk_Management": {
                     "title": t["article_titles"]["Article_9"],
@@ -303,11 +316,84 @@ class EUAIActComplianceExporter:
 
     generate_report = generate_certificate
 
+    @staticmethod
+    def verify_certificate_lifecycle(cert: Dict[str, Any], crl: Optional[List[str]] = None) -> Dict[str, Any]:
+        """
+        Verifies certificate lifecycle status (expiration and revocation).
+        Returns: { 'valid': bool, 'status': str, 'reason': str }
+        """
+        cert_id = cert.get("certificate_id", "")
+        valid_until = cert.get("valid_until")
+
+        # 1. Check revocation list
+        if crl and cert_id in crl:
+            return {
+                "valid": False,
+                "status": "REVOKED",
+                "reason": f"Certificate {cert_id} is present in Certificate Revocation List (CRL)",
+            }
+
+        # 2. Check expiration date
+        if valid_until:
+            try:
+                exp_ts = time.mktime(time.strptime(valid_until, "%Y-%m-%dT%H:%M:%SZ"))
+                if time.time() > exp_ts:
+                    return {
+                        "valid": False,
+                        "status": "EXPIRED",
+                        "reason": f"Certificate expired on {valid_until}",
+                    }
+            except Exception:
+                pass
+
+        return {
+            "valid": True,
+            "status": "ACTIVE",
+            "reason": "Certificate is active, unexpired, and not revoked",
+        }
+
+    def create_decision_evidence_packet(
+        self,
+        seq: int,
+        decision_data: Dict[str, Any],
+        ledger: Any,
+        operator_name: str = "SOVEREIGN_OPERATOR",
+    ) -> Dict[str, Any]:
+        """
+        Generates a Decision-Evidence Packet (DEP) conforming to Causal Evidentiary
+        Governance (CEG / arXiv:2609.01040), cryptographically binding a specific
+        agent action to the ledger root via an O(log N) Merkle inclusion proof.
+        """
+        merkle_root = ledger.get_merkle_root()
+        proof_packet = ledger.get_event_proof(seq)
+        hw_quote = MerkleCausalAnchor().generate_hardware_pcr_quote(merkle_root)
+
+        timestamp_iso = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        leaf_h = proof_packet.get("leaf_hash", "")
+        dep_id = f"DEP-{hashlib.sha256(f'{seq}:{leaf_h}:{timestamp_iso}'.encode()).hexdigest()[:16].upper()}"
+
+        packet: Dict[str, Any] = {
+            "dep_id": dep_id,
+            "seq": seq,
+            "decision_data": self.redact_sensitive_data(decision_data),
+            "merkle_inclusion_proof": proof_packet,
+            "global_merkle_root": merkle_root,
+            "hardware_anchor": hw_quote,
+            "issued_at": timestamp_iso,
+            "operator": operator_name,
+            "compliance_binding": "EU_AI_ACT_ART12_CAUSAL_TRACEABILITY",
+        }
+
+        packet["signature"] = self.sign_certificate(packet)
+        return packet
+
     def export_markdown_report(self, cert: Dict[str, Any], output_filepath: str, locale: str = "es") -> str:
         """Exports localized self-assessment report into human-readable Markdown format."""
         t = get_translation(locale)
         v = cert.get("evidence_verification", {})
         sig = cert.get("signature", {})
+        hw = cert.get("hardware_anchor", {})
+        rev = cert.get("revocation", {})
 
         md = f"""# {cert["title"]}
 **{t["compliance_standard"]}**  
@@ -339,6 +425,22 @@ class EUAIActComplianceExporter:
 | Merkle root recomputado | `{v.get("ledger_merkle_root")}` |
 | Coincide con global_hash del manifiesto | `{v.get("evidence_match")}` |
 | **Veredicto** | **{v.get("detail")}** |
+
+---
+
+## Anclaje Criptográfico de Hardware y Ciclo de Vida
+
+| Parámetro | Valor |
+| :--- | :--- |
+| Enclave de Hardware | `{hw.get("hardware_enclave")}` |
+| Hardware UUID | `{hw.get("hardware_uuid")}` |
+| Plataforma / Modelo | `{hw.get("platform")}` |
+| Válido Hasta (Expiración 90d) | `{cert.get("valid_until")}` |
+| Estado de Revocación | `{rev.get("status")}` |
+| Hash de Verificación de Revocación | `{rev.get("check_hash")}` |
+| Autoridad de Revocación | `{rev.get("revocation_authority")}` |
+
+---
 
 ## Firma Ed25519 del Certificado
 

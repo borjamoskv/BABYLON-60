@@ -38,6 +38,7 @@ web/dist/
 web/.wrangler/
 
 # Temporary Artifacts & System Files
+artifact_bundle*
 proof_artifact.json
 .DS_Store
 *.log
@@ -111,7 +112,8 @@ docs/05_gtm/
 docs/pitch/
 docs/sources/
 docs/aie-book/
-docs/audits/
+docs/audits/*
+!docs/audits/COMPLIANCE_CERTIFICATE_*.md
 archive/
 *.pdf
 *.docx

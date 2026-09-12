@@ -1,7 +1,8 @@
 [workspace]
 members = [
     "00_BABYLON_SHIELD/crates/*",
-    "01_CORTEX_ENGINE/crates/*"
+    "01_CORTEX_ENGINE/crates/*",
+    "crates/*"
 ]
 exclude = [
     "packages/*",
