@@ -159,7 +159,7 @@ impl B60Repl {
         let stdin = io::stdin();
         loop {
             print!("b60> ");
-            io::stdout().flush().unwrap();
+            let _ = io::stdout().flush();
 
             let mut buffer = String::new();
             if stdin.read_line(&mut buffer).is_err() {

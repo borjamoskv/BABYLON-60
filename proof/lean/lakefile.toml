@@ -1,4 +1,5 @@
 name = "babylon"
+version = "0.1.0"
 defaultTargets = ["Babylon", "BabylonOracle"]
 
 [[lean_lib]]
@@ -6,3 +7,27 @@ name = "BabylonOracle"
 
 [[lean_lib]]
 name = "Babylon"
+
+# 1. Base C5-REAL (Estructuras de Datos y Concurrencia)
+[[require]]
+name = "batteries"
+git = "https://github.com/leanprover-community/batteries"
+rev = "main"
+
+# 2. Automatización de Pruebas de Sesión
+[[require]]
+name = "aesop"
+git = "https://github.com/leanprover-community/aesop"
+rev = "master"
+
+# 3. FFI C-Inline Zero-Copy
+[[require]]
+name = "alloy"
+git = "https://github.com/tydeu/lean4-alloy"
+rev = "master"
+
+# 4. Telemetría de IDE (React/HTML en VSCode)
+[[require]]
+name = "proofwidgets"
+git = "https://github.com/leanprover-community/ProofWidgets4"
+rev = "main" # Usualmente se requiere un tag o main

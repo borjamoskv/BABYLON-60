@@ -116,17 +116,20 @@ impl CausalDag {
             let mut stage_budget = 0u64;
 
             for _ in 0..stage_size {
-                let u = queue.pop_front().unwrap();
+                let Some(u) = queue.pop_front() else { break; };
                 topological_order.push(u);
                 current_parallel_nodes.push(u);
-                stage_budget += self.nodes[&u].exergy_cost;
+                if let Some(node) = self.nodes.get(&u) {
+                    stage_budget += node.exergy_cost;
+                }
 
                 if let Some(neighbors) = self.adj.get(&u) {
                     for &v in neighbors {
-                        let deg = in_deg.get_mut(&v).unwrap();
-                        *deg -= 1;
-                        if *deg == 0 {
-                            queue.push_back(v);
+                        if let Some(deg) = in_deg.get_mut(&v) {
+                            *deg = deg.saturating_sub(1);
+                            if *deg == 0 {
+                                queue.push_back(v);
+                            }
                         }
                     }
                 }
@@ -157,12 +160,14 @@ impl CausalDag {
         }
 
         for (&from_id, neighbors) in &self.adj {
-            let p = &self.nodes[&from_id].belief_coords;
-            let from_t = self.nodes[&from_id].lamport_ts;
+            let Some(from_node) = self.nodes.get(&from_id) else { continue; };
+            let p = &from_node.belief_coords;
+            let from_t = from_node.lamport_ts;
 
             for &to_id in neighbors {
-                let q = &self.nodes[&to_id].belief_coords;
-                let to_t = self.nodes[&to_id].lamport_ts;
+                let Some(to_node) = self.nodes.get(&to_id) else { continue; };
+                let q = &to_node.belief_coords;
+                let to_t = to_node.lamport_ts;
                 let delta_t = if to_t > from_t { (to_t - from_t) as f64 } else { 1.0 };
 
                 if !p.is_empty() && !q.is_empty() && p.len() == q.len() {
