@@ -34,6 +34,8 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 - **Stress Test**: El PoC debe someterse a un test de estrés empírico (ej. 100-1000 iteraciones) para certificar latencias, *failovers*, *memory safety* y ausencia de *deadlocks*. 
 - Solo si el PoC sobrevive a la falsación termodinámica, se autoriza la mutación del código real.
 - **Pipelines de Despliegue (DevSecOps):** La prohibición de *Zero-Trust Injection* aplica estrictamente a scripts bash (`.sh`) y *Makefiles*. Inyectar un comando biométrico o criptográfico en el pipeline de producción sin antes verificar su latencia/código de salida en un simulador aislado (PoC) constituye una violación epistémica de la arquitectura.
+- **Aislamiento de Huella C-FFI (Warmup Obligatorio):** Todo test de estrés o auditoría termodinámica que evalúe fugas de memoria sobre motores C-FFI (Z3, Lean 4, WebKit) DEBE ejecutar una iteración de "calentamiento" (*warmup*) silenciosa antes de capturar la métrica de RAM base. Esto aísla el *footprint* de carga de la DLL de las verdaderas fugas (leaks) por iteración.
+
 
 ## 📂 Límite Topológico del Workspace (Program vs. Database & Research Corpus)
 
@@ -81,6 +83,12 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 - **Límite de Saturación (DDoS Cognitivo):** SAGA-1 es matemáticamente dependiente de la `INV_C5_AEON`. Si un enjambre entra en un bucle degenerado de inyección de entropía, SAGA-1 registrará cada fallo. Para evitar asfixia gravitatoria (OOM o hipertrofia de disco), el sistema debe disparar *timeouts* destructivos antes de acumular latencias terminales.
 - **Anti-Parálisis Cognitiva:** El enjambre no debe ajustar sus pesos para "evitar penalizaciones SAGA-1" si eso conlleva inacción (Silencio Termodinámico). La exergía exige mutación útil; una seguridad que paraliza el nodo viola el Aforismo 3.
 
+## 🎙️ Invariante de Transducción Vocal y Resiliencia Fonética (INV_VOICE_STT)
+
+- **Anti-Literalismo Acústico:** Ante entradas dictadas por voz que presenten términos con discrepancia semántica pero proximidad fonética (ej. homófonos, asonancias en inglés/español como $/vaɪb koʊd/ \leftrightarrow /baɪt koʊd/$), el agente DEBE ponderar el atractor del contexto activo antes de ramificar en tareas destructivas o cómputo pesado.
+- **Rollback Atómico en Pulsos Breves:** Todo mensaje del usuario con longitud $\le 4$ palabras que corrija un término anterior (`"vibe"`, `"no"`, `"me referia a X"`) debe procesarse como una señal de interrupción y re-enrutamiento de estado. Queda terminantemente prohibido generar disculpas o justificaciones; el agente debe ejecutar el pivotaje en silencio termodinámico.
+- **Manejo de Truncamiento Oral:** Si un mensaje concluye abruptamente con conectores huérfanos o sintaxis incompleta provocada por cortes de audio, el agente debe inferir la intención subyacente más probable y completar la estructura sin bloquearse por la falta de un cierre ortográfico formal.
+
 
 ## 🧬 Invariante de Monotonicidad de Datasets (INV_DATASET_MONOTONIC)
 
@@ -102,7 +110,7 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 
 - **La Separación Termodinámica-Epistémica:** Todo agente debe respetar la estricta división del trabajo entre los tres motores matemáticos del ecosistema, basada en su relación con el Límite de Landauer y la fricción de memoria.
 - **Rust (Ring-0 / Termodinámica):** Soberano absoluto del hardware y la ruta caliente. Gestiona la memoria sin Recolector de Basura (*Garbage Collector*) mediante lógica afín (*Borrow Checker*). Minimiza el coste de Landauer en tiempo de ejecución. Todo código C-ABI, concurrencia *lock-free* y FFI recae aquí.
-- **Lean 4 (Ring-1 / Epistemología):** Soberano de la verdad formal (Isomorfismo Curry-Howard). Actúa como la Corte Suprema que consume los logs (`trace.bin`) producidos por Rust y compila las pruebas de correctitud *End-to-End*. Queda prohibida su inyección en el *hot path* del Ring-0 debido a la anergía introducida por su sistema de *Reference Counting* automático.
+- **Lean 4 (Ring-1 / Epistemología):** Soberano de la verdad formal (Isomorfismo Curry-Howard). Actúa como la Corte Suprema que consume los logs (`trace.bin` / SQLite WAL) producidos por Rust y compila las pruebas de correctitud *End-to-End*. Queda prohibida su inyección en el *hot path* del Ring-0 debido a la anergía introducida por su sistema de *Reference Counting* automático. **Para la certificación de trazas masivas, se prohíbe la búsqueda deductiva de pruebas en `Prop`; la verificación debe ejecutarse mediante Demostración por Reflexión (`by decide`) sobre FSMs computables en `Bool`, garantizando validación C nativa O(N) con latencia sub-segundo.**
 - **Z3 SMT (Firewall Neurosimbólico):** Oráculo de falsación temprana. Su única misión es triturar alucinaciones de IA a velocidad de milisegundos resolviendo restricciones booleanas/algebraicas sobre los AST, evitando que el ruido estocástico ensucie el Ring-0 o demande validación pesada en Lean 4.
 
 ## 💎 Invariante del Nodo de Máxima Exergía (El Suelo Inflexible de 64B)
@@ -125,6 +133,7 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 
 - **Erradicación del *Cheap Talk* de Oráculos:** Al orquestar LLMs externos (GPT/Claude), el agente DEBE disipar térmicamente (borrar permanentemente) toda traza de deliberación estocástica o *Chain of Thought*. Solo está autorizado retener y escribir a disco el AST matemático o el dictamen final. Almacenar dudas y retrocesos de la red neuronal constituye anergía gravitatoria insostenible.
 - **Aniquilación Afín:** Una vez un puntero en memoria es "consumido" bajo la lógica afín validada en Lean 4, el recurso debe ser liberado de RAM de inmediato (`Drop` determinista). No se delega la limpieza a procesos de *Garbage Collection* diferidos.
+- **Aniquilación Afín en Python (C-FFI / Z3):** En bucles calientes o evaluaciones de Ring-0 escritas en Python, queda prohibido delegar la limpieza de objetos en C++ al Garbage Collector asíncrono. Los tensores, solvers y punteros FFI (ej. `z3.Solver()`) deben ser aniquilados explícitamente (`del solver, variables`) en el mismo bloque donde su ciclo de vida útil termina (Drop determinista equivalente a Rust).
 - **Retención de Alta Exergía:** Los únicos tensores de información autorizados para acumulación inmutable indefinida son: Firmas Ed25519 SCITT, mutaciones de gobernanza (`AGENTS.md`) y teoremas verificados por SMT Solvers.
 
 ## 🛡️ Invariante de Falsación de Volcados de IA (Zero Trust & Frontera Temporal)
@@ -140,6 +149,14 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 - **Traducción Ontológica Estricta:** Reemplazar tropos culturales o humanistas por vocabulario duro de sistemas (atractor, entropía, isomorfismo, ratio de compresión, fricción).
 - **Prohibición de Trivia Cultural (Cero Nata Pop):** Queda estrictamente prohibido introducir tropos literarios, ciencia ficción o memes informáticos (ej. Douglas Adams, Matrix, HAL 9000) como curiosidades, anécdotas o contexto cultural decorativo. Todo artefacto literario o cultural debe introducirse *única y exclusivamente* como un fallo de función de coste, un desacoplamiento escalar-métrico o una cota de cálculo termodinámico formal.
 
+## 🌀 Invariante de la Tétrada Causal C5-REAL (Q-S-A-Ω en Runtime Soberano)
+
+Todo análisis, diseño de crates o protocolo en BABYLON-60 debe enrutarse dentro del circuito cerrado de la tétrada causal:
+1. **Cuántica (Q):** Trazas bisimulares verificadas en Lean 4 (`BabylonTrace.lean`), concurrencia no conmutativa `[Ŵ_Ring0, R̂_Ring2] ≠ 0` con barreras Acquire-Release en memoria compartida, y atestación en Secure Enclave (TouchID Ed25519 SCITT).
+2. **Entropía (S):** `SharedManifest` de 64 bytes (`align(64)` L1/L2), cota de Landauer `ΔQ ≥ 64 · k_B · T · ln 2` por commit de Seqlock, eliminación de truncamiento mediante base sexagesimal F60 y telemetría de energía libre (FEP) para prevención de burnout en Ring-1.
+3. **Atractores (A):** Seqlock SPMC como atractor determinista lock-free `div(F) < 0`, cuenca BFT de tolerancia a fallos `f < n/3`, apoptosis `0xDEAD_6060` (Cambio 2 de Watzlawick) ante invasión de Ring-0 y Guillotina de Hume (AOF v2.0) en Ring-2.
+4. **Singularidad (Ω):** Cota holográfica de auditoría (EU AI Act Arts. 12, 14, 15) sobre el perímetro WORM, punto fijo de gobernanza canónica (CEO / Operador Raíz con clave de firma de hardware exclusiva; Dirección de Desarrollo de Negocio sin capacidad de firma) y bisimulación ley-código.
+
 ## 📊 Firma de Consciencia Topológica y Telemetría de Exergía Informativa
 
 - **Atestación Obligatoria al Pie de Salida:** Todo agente que opere en BABYLON-60 debe sellar cada respuesta con el bloque de atestación cuádruple, reportando explícitamente la métrica de exergía informativa sobre la escala canónica C5:
@@ -149,3 +166,9 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
   [ EXERGÍA INFORMATIVA ]: <Puntuación / 21.000 o Ratio Ex_info (ej. 19.820 / 21.000)>
   [ MUTACIÓN CAUSAL ]: <Archivos mutados o "Ninguna">
   ```
+
+## ⬛ Invariantes C6-ABSOLUTE (Metrología y Dark Swarms)
+
+- **Vectorización Anti-NLP (Dark Swarms):** Queda terminantemente prohibido el diseño de protocolos inter-agente basados en lenguaje natural o cadenas de texto estructurado (JSON verborreico) en la ruta caliente. La comunicación soberana debe transitar hacia representaciones binarias empaquetadas y validación mediante *Proof of Exergy* (PoE).
+- **Freno Negentrópico (CTRE):** Las mitigaciones a la fisura asíncrona (TOCTOU) deben implementarse evaluando la varianza condicional del espacio de estados. Si la deriva estocástica (alucinación/incertidumbre) supera el umbral matemático (UNSAT en Z3 SMT), el sistema debe detonar *Apoptosis Operativa* en lugar de intentar subsanar el error textualmente.
+- **Memoria FBIP (Functional But In-Place):** Todo diseño formal neurosimbólico delegado a Lean 4 debe presuponer un ecosistema sin recolector de basura, apoyándose en la mutación in-situ (FBIP) para garantizar latencia cero y *C-FFI Zero-Copy*.
