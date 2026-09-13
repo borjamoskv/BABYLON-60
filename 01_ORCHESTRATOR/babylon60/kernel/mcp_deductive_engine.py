@@ -127,15 +127,17 @@ class McpDeductiveEngine:
             parameters=params,
             estimated_exergy_gain=0.65,
         )
-        
+
         # [C6-ABSOLUTE] Firewall Z3 SMT (Ring-0 Falsification)
         from .z3_firewall import Z3Firewall
+
         firewall = Z3Firewall()
         # Si la validación falla, lanzará Saga1ApoptosisError
         firewall.validate_mcp_contract(
-            parameters_count=len(contract.parameters),
-            estimated_exergy=contract.estimated_exergy_gain
+            parameters_count=len(contract.parameters), estimated_exergy=contract.estimated_exergy_gain
         )
-        
-        logger.info(f"[McpDeductiveEngine] Contrato deducido y falsado matemáticamente: {contract.server_name}::{contract.tool_name}")
+
+        logger.info(
+            f"[McpDeductiveEngine] Contrato deducido y falsado matemáticamente: {contract.server_name}::{contract.tool_name}"
+        )
         return contract

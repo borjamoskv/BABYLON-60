@@ -5,24 +5,29 @@ Implementación del Disyuntor Matemático para orquestación Neurosimbólica C6-
 
 import time
 import logging
+
 try:
     import z3
 except ImportError:
-    # Failsafe para evitar crashes si el entorno no tiene Z3, 
+    # Failsafe para evitar crashes si el entorno no tiene Z3,
     # aunque en Ring-0 deberíamos exigir su presencia estricta.
     z3 = None
 
 logger = logging.getLogger(__name__)
 
+
 class Saga1ApoptosisError(Exception):
     """Excepción crítica lanzada cuando el Firewall Z3 detecta anergía o alucinación."""
+
     pass
+
 
 class Z3Firewall:
     """
     Falsación matemática en Ring-0 (Capa 2: Freno Negentrópico Asíncrono).
     Tritura propuestas estocásticas en milisegundos.
     """
+
     def __init__(self, timeout_ms: int = 50) -> None:
         self.timeout_ms = timeout_ms
         if z3 is None:
@@ -39,26 +44,30 @@ class Z3Firewall:
         """
         if z3 is None:
             return True
-            
+
         start_z3 = time.perf_counter()
-        
+
         solver = z3.Solver()
         solver.set("timeout", self.timeout_ms)
-        
-        x = z3.Int('x')
-        y = z3.Int('y')
-        
+
+        x = z3.Int("x")
+        y = z3.Int("y")
+
         solver.add(x == x_val)
         solver.add(y == y_val)
         solver.add(x + y == proposed_sum)
-        
+
         result = solver.check()
         z3_time = (time.perf_counter() - start_z3) * 1000
-        
+
+        del x, y, solver
+
         if result != z3.sat:
-            self._trigger_apoptosis(f"Falsación Z3 (UNSAT en {z3_time:.3f}ms) para propuesta {x_val} + {y_val} = {proposed_sum}")
+            self._trigger_apoptosis(
+                f"Falsación Z3 (UNSAT en {z3_time:.3f}ms) para propuesta {x_val} + {y_val} = {proposed_sum}"
+            )
             return False
-            
+
         logger.info(f"[RING-0 FIREWALL] ✅ Z3 Validación: SAT ({z3_time:.3f} ms)")
         return True
 
@@ -71,31 +80,35 @@ class Z3Firewall:
         """
         if z3 is None:
             return True
-            
+
         start_z3 = time.perf_counter()
         solver = z3.Solver()
         solver.set("timeout", self.timeout_ms)
-        
+
         # Variables SMT
-        p_count = z3.Int('p_count')
+        p_count = z3.Int("p_count")
         # Z3 Reals para floating point math simple
-        exergy = z3.Real('exergy')
-        
+        exergy = z3.Real("exergy")
+
         solver.add(p_count == parameters_count)
         # Convertimos float a Z3 Real (aproximación fraccional)
         solver.add(exergy == z3.RealVal(estimated_exergy))
-        
+
         # Restricciones C6-ABSOLUTE
         solver.add(p_count > 0)
         solver.add(p_count <= 10)
         solver.add(exergy >= z3.RealVal(0.65))
-        
+
         result = solver.check()
         z3_time = (time.perf_counter() - start_z3) * 1000
-        
+
+        del p_count, exergy, solver
+
         if result != z3.sat:
-            self._trigger_apoptosis(f"Falsación Z3 (UNSAT en {z3_time:.3f}ms) para Contrato MCP (params: {parameters_count}, exergy: {estimated_exergy})")
+            self._trigger_apoptosis(
+                f"Falsación Z3 (UNSAT en {z3_time:.3f}ms) para Contrato MCP (params: {parameters_count}, exergy: {estimated_exergy})"
+            )
             return False
-            
+
         logger.info(f"[RING-0 FIREWALL] ✅ Contrato validado por Z3: SAT ({z3_time:.3f} ms)")
         return True
