@@ -30,10 +30,11 @@ version: 4.3.0
 | **Entropía Documental** | Alta | **Eliminada** | Fusión de especificaciones redundantes (`semantics.md` $\rightarrow$ `01_spec/spec_babylon60.md`, `proof_ir.md` $\rightarrow$ `01_spec/spec_proof_ir.md`) |
 
 ### 🚀 Camino hacia el A+ Absoluto (Roadmap v4.3+)
-Para que las dimensiones pendientes alcancen la calificación **A+**, se requiere materializar los siguientes hitos de hardware y consenso:
+Para que las dimensiones pendientes alcancen la calificación **A+** (y reducir el Riesgo Científico a su mínima expresión termodinámica), se requiere materializar los siguientes hitos:
 
 1. **Demostrabilidad Formal (A $\rightarrow$ A+):** Consolidar el **Proof IR Pipeline end-to-end**. El compilador debe emitir automáticamente las obligaciones Lean 4 (`.lean`) desde el DAG Ledger sin intervención humana, validando el isomorfismo Curry-Howard completo.
 2. **Preparación para Producción (A− $\rightarrow$ A+):** Transicionar de SQLite/WAL Single-Writer a un **Consenso Multi-Writer BFT en Vivo**. Además, requiere atestación transparente vía **SCITT L5** y aislamiento termodinámico mediante despliegue *Bare-Metal* puro.
+3. **Riesgo Científico (Baja-Controlado $\rightarrow$ Cero-Matemático):** Verificación formal estricta de la aritmética `F60` en Lean 4. Se debe demostrar matemáticamente que las rutinas Rust de reducción GCD y el *truncation firewall* jamás pueden emitir un estado aproximado, acoplando el AST de `arithmetic.rs` a teoremas de geometría algebraica constructiva.
 
 ---
 
