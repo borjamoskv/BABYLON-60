@@ -19,7 +19,6 @@ Enjambre soberano de 1000 agentes bounty que procesan advisories sintéticos
 
 from __future__ import annotations
 
-import asyncio
 import concurrent.futures
 import math
 import os
@@ -27,7 +26,7 @@ import random
 import sys
 import time
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 # ── PYTHONPATH ────────────────────────────────────────────────────────────
 _ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -282,7 +281,7 @@ def run_legion_omega_1000() -> None:
                 print(f"      Lote {batch_id:02d} ✗  ERROR: {exc}")
 
     # 3. Agregación BayesianSwarm (LogOP)
-    print(f"\n[3/5] Convergencia BayesianSwarm — Logarithmic Opinion Pool...")
+    print("\n[3/5] Convergencia BayesianSwarm — Logarithmic Opinion Pool...")
     all_opinions: Dict[str, Dict[str, float]] = {}
     for br in batch_results:
         all_opinions.update(br.domain_opinions)
@@ -297,7 +296,7 @@ def run_legion_omega_1000() -> None:
     print(f"      Entropia Shannon = {-(p_high*math.log2(max(p_high,1e-9)) + p_low*math.log2(max(p_low,1e-9))):.4f} bits")
 
     # 4. Persistencia SCITT → Cold Ledger
-    print(f"\n[4/5] Persistiendo atestaciones SCITT en Cold Ledger...")
+    print("\n[4/5] Persistiendo atestaciones SCITT en Cold Ledger...")
     cold_ledger = BountyColdLedger()
     cold_ledger.start()
 
@@ -345,7 +344,7 @@ def run_legion_omega_1000() -> None:
     except Exception as e:
         print(f"  [!] No se pudo leer el ledger: {e}")
 
-    print(f"\n✅ OPERATIVO LEGIÓN Ω-1000 COMPLETADO")
+    print("\n✅ OPERATIVO LEGIÓN Ω-1000 COMPLETADO")
 
 
 if __name__ == "__main__":

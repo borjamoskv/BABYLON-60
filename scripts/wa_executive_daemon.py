@@ -5,7 +5,6 @@ import time
 import subprocess
 import urllib.request
 import json
-import re
 
 DB_PATH = os.path.expanduser("~/Library/Group Containers/group.net.whatsapp.WhatsApp.shared/ChatStorage.sqlite")
 CHAT_NAME = "BABYLON-60 | Executive Command"

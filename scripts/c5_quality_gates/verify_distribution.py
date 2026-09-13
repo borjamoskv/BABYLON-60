@@ -16,7 +16,7 @@ ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 def check_python_distribution() -> dict:
     result = {"status": "PASS", "details": [], "artifacts": []}
     try:
-        res = subprocess.run(["uv", "build"], cwd=ROOT_DIR, capture_output=True, text=True, check=True)
+        subprocess.run(["uv", "build"], cwd=ROOT_DIR, capture_output=True, text=True, check=True)
         dist_dir = ROOT_DIR / "dist"
         if not dist_dir.exists():
             result["status"] = "FAIL"

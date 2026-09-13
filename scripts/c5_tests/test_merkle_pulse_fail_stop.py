@@ -62,7 +62,7 @@ async def test_fail_stop() -> None:
     
     # Calculamos hashes reales
     real_merkle = file_hash(ghosts_file)
-    real_wl = topological_file_hash(ghosts_file)
+    topological_file_hash(ghosts_file)
     
     # FORZAMOS LA ASIMETRÍA IMPOSIBLE (WL cambió, Merkle intacto)
     print(f"\n[+] Inyectando estado corrupto en {SYNC_STATE_FILE}")

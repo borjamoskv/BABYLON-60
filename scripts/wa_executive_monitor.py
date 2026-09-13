@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
 import sqlite3
 import os
-import time
-import subprocess
-import urllib.request
-import json
-from datetime import datetime, timezone, timedelta
 
 DB_PATH = os.path.expanduser("~/Library/Group Containers/group.net.whatsapp.WhatsApp.shared/ChatStorage.sqlite")
 CHAT_NAME = "BABYLON-60 | Executive Command"

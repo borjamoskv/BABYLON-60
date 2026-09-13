@@ -14,7 +14,7 @@ Directs natural language user intents to optimal agent execution topologies:
 """
 
 from enum import Enum
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Tuple
 
 
 class TopologyTarget(Enum):

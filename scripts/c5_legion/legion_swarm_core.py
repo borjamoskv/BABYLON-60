@@ -15,7 +15,7 @@ la divergencia entrópica.
 import asyncio
 import time
 import logging
-from typing import Any, TypedDict
+from typing import TypedDict
 
 from agent_beeper import AgentPager
 

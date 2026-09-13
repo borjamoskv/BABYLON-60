@@ -21,10 +21,10 @@ def main() -> None:
     action_name = "PURGE_LEGACY_MODULE"
     description = "Eliminación irreversible del directorio apps/babylon60-ide (Migración a LSP Paracortex)"
     
-    print(f"\n[!] El agente autónomo propone la siguiente acción destructiva:")
+    print("\n[!] El agente autónomo propone la siguiente acción destructiva:")
     print(f"    - Acción: {action_name}")
     print(f"    - Descripción: {description}")
-    print(f"    - Riesgo: CRITICAL")
+    print("    - Riesgo: CRITICAL")
     print("\nInvocando Secure Enclave (TouchID / Password) para atestación de firma...\n")
     
     success = gate.enforce_biometric_sign_off(execution_id, action_name, description)

@@ -16,7 +16,6 @@ import ctypes
 import hashlib
 import struct
 import time
-from typing import Tuple
 
 # Invariantes del Kernel (babylon60-kernel/src/shared_manifest.rs)
 RUNNING = 0x0000_0001

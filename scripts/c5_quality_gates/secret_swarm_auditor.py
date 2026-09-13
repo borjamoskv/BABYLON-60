@@ -5,14 +5,6 @@
 # ============================================================================
 # Causal-Determinist: Swarm Thread Dispatcher for TOP SECRET Auditing (ULTRATHINK P0 - ITERATION 3)
 # Vector: BFT_STATE_LOOP, SARIF Integration, Delta Scanning, Zero-Anergy Whitelisting
-import os
-import re
-import math
-import hashlib
-import json
-import argparse
-from concurrent.futures import ProcessPoolExecutor, as_completed
-from typing import List, Dict, Any
 
 # Exclusión de Ineficiencia (Directorios ruidosos o binarios)
 EXCLUDE_DIRS = {

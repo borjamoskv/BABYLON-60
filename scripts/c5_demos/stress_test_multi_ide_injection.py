@@ -7,7 +7,6 @@ Verifica idempotencia, integridad de enlaces simbólicos, ausencia de duplicidad
 y tiempo de ejecución en 8 entornos (Antigravity, Claude Code, Cursor, Windsurf, Aider, Zed, Codex CLI, ChatGPT Local).
 """
 
-import os
 import sys
 import time
 import subprocess
@@ -90,7 +89,7 @@ def main() -> None:
     min_latency = min(latencies)
     max_latency = max(latencies)
     
-    print(f"  └─ Completadas 100/100 iteraciones.")
+    print("  └─ Completadas 100/100 iteraciones.")
     print(f"  └─ Fallos de ejecución: {failures}")
     print(f"  └─ Latencia Media: {avg_latency:.2f} ms (Min: {min_latency:.2f} ms, Max: {max_latency:.2f} ms)")
     

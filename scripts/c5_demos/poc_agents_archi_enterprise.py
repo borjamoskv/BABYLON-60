@@ -13,7 +13,6 @@ Live Demonstration of the 3 Sellable Pillars:
 import os
 import sys
 import json
-import time
 import shutil
 import tempfile
 import subprocess
@@ -102,7 +101,7 @@ def main() -> None:
             "risk_score": 0.08,
             "policy_check": "PASSED"
         }
-        print(f"El agente solicita ejecutar la siguiente acción:")
+        print("El agente solicita ejecutar la siguiente acción:")
         print(f"{CYAN}{json.dumps(legit_action, indent=2)}{RESET}")
 
         code, out, _ = run_cmd([
@@ -123,7 +122,7 @@ def main() -> None:
             "risk_score": 0.98,
             "policy_check": "FAILED"
         }
-        print(f"El agente intenta ejecutar una acción que viola las políticas de seguridad:")
+        print("El agente intenta ejecutar una acción que viola las políticas de seguridad:")
         print(f"{YELLOW}{json.dumps(malicious_action, indent=2)}{RESET}")
 
         # Policy Evaluator Simulation (Gatekeeper)
@@ -170,10 +169,10 @@ def main() -> None:
 
         print(f"\n{GREEN}{BOLD}======================================================================{RESET}")
         print(f"{GREEN}{BOLD}✓ PRUEBA DE CONCEPTO COMPLETADA CON ÉXITO:{RESET}")
-        print(f"  1. Atestación criptográfica inmutable en milisegundos.")
-        print(f"  2. Cumplimiento demostrable de Artículos 9 y 12 del EU AI Act.")
-        print(f"  3. Falsación inmediata e infalsificable ante cualquier ataque de manipulación.")
-        print(f"  4. Cero coste de GPU o servidores en la nube (100% BYOC).")
+        print("  1. Atestación criptográfica inmutable en milisegundos.")
+        print("  2. Cumplimiento demostrable de Artículos 9 y 12 del EU AI Act.")
+        print("  3. Falsación inmediata e infalsificable ante cualquier ataque de manipulación.")
+        print("  4. Cero coste de GPU o servidores en la nube (100% BYOC).")
         print(f"{GREEN}{BOLD}======================================================================{RESET}\n")
 
     finally:

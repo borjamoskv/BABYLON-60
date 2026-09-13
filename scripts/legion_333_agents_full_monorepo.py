@@ -180,7 +180,7 @@ def main() -> None:
             sys.exit(0)
     else:
         print("\n================================================================")
-        print(f" SITREP: REPORTE DE ESTABILIDAD TERMODINÁMICA")
+        print(" SITREP: REPORTE DE ESTABILIDAD TERMODINÁMICA")
         print("================================================================")
         print(f"Archivos escaneados : {len(files_to_scan)}")
         print(f"Tiempo de ejecución : {elapsed:.3f} segundos")

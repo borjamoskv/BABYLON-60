@@ -12,7 +12,7 @@ Enforces:
   - Prevents hallucinated normative imperatives from ungrounded observations
 """
 
-from typing import Dict, List, Any, Optional, Callable
+from typing import Dict, List, Any, Callable
 from dataclasses import dataclass, field
 from enum import Enum
 

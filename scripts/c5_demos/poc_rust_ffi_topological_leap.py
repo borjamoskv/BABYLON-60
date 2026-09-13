@@ -104,7 +104,7 @@ class RustKernelMock:
         self.manifest.halt_flag = 1
         self._seqlock_write_end()
         print(f"  [Rust Kernel/Ring-0] ⚡ CIRCUIT BREAKER ACTIVADO. Razón: {reason}")
-        print(f"  [Rust Kernel/Ring-0] Emisión de recibo forense COSE_Sign1...")
+        print("  [Rust Kernel/Ring-0] Emisión de recibo forense COSE_Sign1...")
 
 # =====================================================================
 # 3. DEMOSTRACIÓN (Python Front-End)

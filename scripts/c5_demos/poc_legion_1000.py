@@ -16,11 +16,8 @@ INVARIANTE: Este script NO toca bounty_ledger.db de producción.
 
 from __future__ import annotations
 
-import asyncio
-import hashlib
 import os
 import random
-import string
 import sys
 import tempfile
 import time
@@ -36,7 +33,6 @@ from babylon60.bft.defi_bytecode_scraper import DeFiBytecodeScraper
 from babylon60.bft.saga1_ml_sentinel import Saga1MlSentinel
 from babylon60.bft.webkit_memory_connector import WebKitMemoryConnector
 from babylon60.transducers.bounty_feed_transducer import (
-    BountyAdvisory,
     BountyDomain,
     BountyFeedTransducer,
 )

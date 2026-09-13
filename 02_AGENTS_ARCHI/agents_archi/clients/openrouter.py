@@ -12,7 +12,7 @@ import logging
 import os
 import urllib.request
 import urllib.error
-from typing import Any, Dict, Optional, List
+from typing import Any, Dict, Optional
 
 logger = logging.getLogger("agents_archi.clients.openrouter")
 

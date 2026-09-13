@@ -13,7 +13,7 @@ enforcing deterministic barrier synchronization and attestation aggregation.
 import asyncio
 import inspect
 import time
-from typing import List, Dict, Any, Callable, Optional
+from typing import List, Dict, Any, Callable
 
 
 class CenturiaTopology:

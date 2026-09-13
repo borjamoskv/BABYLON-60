@@ -22,7 +22,7 @@ import signal
 import struct
 import sys
 from pathlib import Path
-from typing import Any, BinaryIO, Optional, cast
+from typing import Any, BinaryIO, Optional
 
 DEFAULT_MAX_PAYLOAD_BYTES = 1024 * 1024  # 1 MiB Chrome Native Messaging ceiling
 RUNNING = True

@@ -16,10 +16,9 @@ import sys
 import json
 import time
 import ast
-import subprocess
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, asdict
-from typing import List, Dict, Any, Tuple, Optional
+from typing import List, Dict, Any, Optional
 
 try:
     from rich.console import Console
@@ -641,7 +640,7 @@ def main() -> None:
         json.dump(report_data, f, indent=2, ensure_ascii=False)
         
     print(f"\n[+] Telemetría registrada en: {telemetry_path}")
-    print(f"================================================================================")
+    print("================================================================================")
     print(f" RESULTADO GLOBAL: {passed_count}/{total_agents} AGENTES VERIFICADOS ({elapsed:.3f}s)")
     if failed_count == 0:
         print(" [✓] DICTAMEN: ESTADO ÓMEGA CONFIRMADO — COHERENCIA C5-REAL ASINTÓTICA (100%)")

@@ -68,7 +68,7 @@ def run_falsification_stress_test() -> None:
     print("\n--- RESULTADOS DEL STRESS TEST ---")
     print(f"✅ Iteraciones completadas: {ITERATIONS}")
     print(f"⏱️ Tiempo de ejecución (Fricción Térmica): {(end_time - start_time) * 1000:.2f} ms")
-    print(f"💾 Entropía Física Acumulada:")
+    print("💾 Entropía Física Acumulada:")
     print(f"   - DB Core: {db_size} bytes")
     print(f"   - WAL File: {wal_size} bytes")
     print(f"   - SHM File: {shm_size} bytes")

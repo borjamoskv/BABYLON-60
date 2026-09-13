@@ -13,7 +13,6 @@ Orquesta 1.000 Agentes Virtuales especializados distribuidos en 4 Cohortes:
 """
 
 import os
-import sys
 import time
 import json
 import hashlib
@@ -21,8 +20,8 @@ import logging
 import resource
 import subprocess
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import List, Dict, Any, TypedDict, cast
-from pydantic import BaseModel, Field
+from typing import List, TypedDict, cast
+from pydantic import BaseModel
 from google import genai
 from google.genai import types
 
@@ -239,7 +238,7 @@ class SwarmAudiovisualRenderer:
         logging.info("Masterizando Audio Estéreo Binaural Theta (50Hz L / 54Hz R) + Compresión Vocal...")
         for scene in synthesis["scenes"]:
             raw_audio = os.path.join(OUTPUT_DIR, f"swarm_audio_{scene['id']}.aiff")
-            clean_text = scene["voiceover_text"].replace('"', '\\"')
+            scene["voiceover_text"].replace('"', '\\"')
             
             cmd_say = ["say", "-v", self.voice, "-o", raw_audio, scene["voiceover_text"]]
             if subprocess.run(cmd_say).returncode != 0:

@@ -228,7 +228,7 @@ async def main() -> None:
     print("----------------------------------------------------------------------")
 
     start_time = time.perf_counter()
-    report = SwarmReport()
+    SwarmReport()
     
     # Define tasks across 100 agents
     tasks: list[Coroutine[Any, Any, list[AnergyCandidate]]] = []

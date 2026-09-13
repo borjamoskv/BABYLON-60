@@ -25,7 +25,7 @@ AUDIT_DIR = REPO_ROOT / "cortex" / "audits"
 
 
 def get_conversation_id() -> tuple[str, Path]:
-    cid = os.getenv("ANTIGRAVITY_CONVERSATION_ID") or os.getenv("CONVERSATION_ID")
+    os.getenv("ANTIGRAVITY_CONVERSATION_ID") or os.getenv("CONVERSATION_ID")
     uuid_pattern = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
     
     brain_dirs = [

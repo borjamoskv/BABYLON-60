@@ -6,7 +6,7 @@ import json
 import logging
 import argparse
 import subprocess
-from typing import List, Optional
+from typing import List
 from pydantic import BaseModel, Field
 from google import genai
 from google.genai import types
@@ -110,7 +110,7 @@ class SotaCompiler:
         for scene in storyboard.scenes:
             logging.info(f"Sintetizando Audio Fase 0{scene.id} ({scene.phase_title})...")
             raw_audio = os.path.join(out_dir, f"raw_audio_{scene.id}.aiff")
-            clean_text = scene.voiceover_text.replace('"', '\\"')
+            scene.voiceover_text.replace('"', '\\"')
             
             # Síntesis TTS nativa macOS
             cmd_say = ["say", "-v", self.voice, "-o", raw_audio, scene.voiceover_text]

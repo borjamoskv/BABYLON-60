@@ -14,11 +14,8 @@ Este script orquesta el primer contacto del operador con BABYLON-60:
 """
 
 import os
-import sys
 import time
-import shutil
 import platform
-import subprocess
 from pathlib import Path
 
 # Constantes ANSI
@@ -70,10 +67,10 @@ def run_unboxing() -> None:
     print(f"{GREEN}=== ATESTACIÓN DEL SUSTRATO FÍSICO ==={NC}")
     print(f"  > ARQUITECTURA:       {cpu_arch} (Ring-0 Nativo)")
     print(f"  > CAPACIDAD SWARM:    {cpu_count} Núcleos Lógicos Detectados (Regla P × S)")
-    print(f"  > LÍNEA DE CACHÉ:     64 Bytes (Zero-Split Coherence INV-1)")
+    print("  > LÍNEA DE CACHÉ:     64 Bytes (Zero-Split Coherence INV-1)")
     print(f"  > CERROJO BIOLÓGICO:  {'Secure Enclave TouchID [LISTO]' if has_touchid else 'Software Fallback'}")
-    print(f"  > PROTOCOLO MESI:     Cero-Anergía Enganchado (RFO = 0)")
-    print(f"  > ANCLA DE APOPTOSIS: Armada (Fail-Stop 0xDEAD_6060)\n")
+    print("  > PROTOCOLO MESI:     Cero-Anergía Enganchado (RFO = 0)")
+    print("  > ANCLA DE APOPTOSIS: Armada (Fail-Stop 0xDEAD_6060)\n")
     time.sleep(0.1)
 
     # 2. Los 6 Dominios

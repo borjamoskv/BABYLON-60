@@ -7,7 +7,6 @@ generado por LLMs (GPT/Claude/OpenRouter) antes de autorizar mutaciones en Ring-
 
 import time
 import random
-import hashlib
 from typing import Dict, Tuple, TypedDict
 
 ActionTuple = Tuple[str, str | None, str | None]
@@ -80,12 +79,12 @@ gate = C5DeductiveGate()
 print("--- Test 1: Carga válida generada por Claude 3.5 ---")
 ok, msg = gate.verify_trace(VALID_LLM_PAYLOAD["ast_actions"])
 print(f"Estado: {'APROBADO' if ok else 'RECHAZADO'} | Diagnóstico: {msg}")
-assert ok == True, "La carga válida debió ser aprobada"
+assert ok, "La carga válida debió ser aprobada"
 
 print("\n--- Test 2: Carga alucinada generada por GPT-4o ---")
 ok, msg = gate.verify_trace(HALLUCINATED_LLM_PAYLOAD["ast_actions"])
 print(f"Estado: {'APROBADO' if ok else 'RECHAZADO'} | Diagnóstico: {msg}")
-assert ok == False, "La carga con alucinación debió ser rechazada"
+assert not ok, "La carga con alucinación debió ser rechazada"
 
 # 3. Stress Test Termodinámico: 5,000 Invocaciones Estocásticas
 print("\n--- Test 3: Stress Test de Contención (5,000 inferencias LLM mixtas) ---")

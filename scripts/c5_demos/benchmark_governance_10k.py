@@ -24,8 +24,7 @@ import time
 import struct
 import threading
 from concurrent.futures import ThreadPoolExecutor
-from dataclasses import dataclass
-from typing import List, Dict, Any, TypedDict
+from typing import List, TypedDict
 
 class DisseqtSpan(TypedDict):
     span_id: str
@@ -153,7 +152,7 @@ class C5RealSovereignGate:
 # ============================================================================
 def run_benchmark() -> None:
     print("=" * 80)
-    print(f"BABYLON-60 v4.0 | FALSIFICACIÓN EMPÍRICA DE GOBERNANZA DE AGENTES")
+    print("BABYLON-60 v4.0 | FALSIFICACIÓN EMPÍRICA DE GOBERNANZA DE AGENTES")
     print(f"Carga de Trabajo: {TOTAL_AGENTS:,} Agentes Concurrentes × {ACTIONS_PER_AGENT} ops = {TOTAL_OPERATIONS:,} ops")
     print("=" * 80)
 
@@ -227,8 +226,8 @@ def run_benchmark() -> None:
 
     print(f"  » Tiempo total C5-REAL: {c5_time:.3f} s ({c5_ops_sec:,.0f} ops/sec)")
     print(f"  » Latencia media por op: {(c5_time / TOTAL_OPERATIONS) * 1e6:.2f} microsegundos")
-    print(f"  » Pérdida de telemetría: 0.0% (Zero Spans Dropped)")
-    print(f"  » Coste en tokens:       $0.00 (Zero Token Inflation)")
+    print("  » Pérdida de telemetría: 0.0% (Zero Spans Dropped)")
+    print("  » Coste en tokens:       $0.00 (Zero Token Inflation)")
 
     print("\n" + "=" * 80)
     print("SÍNTESIS DE LA DISRUPCIÓN (C5-REAL vs ENFOQUES CONVENCIONALES):")
