@@ -10,7 +10,7 @@ author: borjamoskv
 <div align="center">
 
 [![EU AI Act Compliant](https://img.shields.io/badge/EU_AI_Act-Art._9--14_Verified-00F0FF?style=for-the-badge&logo=shield)](../01_ORCHESTRATOR/babylon60/compliance_exporter/eu_ai_act.py)
-[![Autoridad](https://img.shields.io/badge/Supervisión-AESIA_/_BSI_/_NIST-7B1FA2?style=for-the-badge)](./00_MANIFESTO_ES.md)
+[![Autoridad](https://img.shields.io/badge/Supervisión-AESIA_/_BSI_/_NIST-7B1FA2?style=for-the-badge)](./04_research/eu_ai_act_compliance_whitepaper.md)
 
 </div>
 

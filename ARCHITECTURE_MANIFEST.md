@@ -2,7 +2,7 @@
 
 > **Marco**: C5-REAL v4.3 — Arquitectura Tripartita y Suelo Termodinámico  
 > **Estatus Epistémico**: Alta Exergía / Clausura Epistémica Atestada  
-> **Fundamentación Formal**: [BabylonTrace.lean](file:///Users/borjafernandezangulo/BABYLON-60/docs/proof/lean/BabylonTrace.lean) · [thermodynamics.rs](file:///Users/borjafernandezangulo/BABYLON-60/src/thermodynamics.rs) · [manifest.rs](file:///Users/borjafernandezangulo/BABYLON-60/src/manifest.rs)
+> **Fundamentación Formal**: [BabylonTrace.lean](docs/proof/lean/BabylonTrace.lean) · [thermodynamics.rs](src/thermodynamics.rs) · [manifest.rs](src/manifest.rs)
 
 Este documento sella la arquitectura fundacional de **BABYLON-60**. El sistema rechaza la condición de monolito orquestador pasivo y se organiza como una **Federación Tripartita de Dominios Causales**, gobernada por el colapso de la hipertrofia tipológica (de 896 tipos nominales a 101 invariantes y finalmente a la tríada aristotélica en silicio).
 
@@ -63,7 +63,7 @@ La arquitectura se divide en tres fronteras estrictas (anillos ontológicos), ca
 
 ## 2. El Nodo de Máxima Exergía: La Singularidad de 64 Bytes
 
-El nodo fundacional e insustituible de BABYLON-60 reside en [`src/manifest.rs`](file:///Users/borjafernandezangulo/BABYLON-60/src/manifest.rs) y [`src/seqlock.rs`](file:///Users/borjafernandezangulo/BABYLON-60/src/seqlock.rs). Constituye el embudo físico donde la cacofonía estocástica de los agentes colapsa en un atractor determinista:
+El nodo fundacional e insustituible de BABYLON-60 reside en [`src/manifest.rs`](src/manifest.rs) y [`src/seqlock.rs`](src/seqlock.rs). Constituye el embudo físico donde la cacofonía estocástica de los agentes colapsa en un atractor determinista:
 
 ```text
 Offset  Tamaño  Campo           Representación C-ABI      Propiedad Microarquitectónica
@@ -78,7 +78,7 @@ Offset  Tamaño  Campo           Representación C-ABI      Propiedad Microarqui
 1. **Zero-Split Coherence**: Con `align(64) == size(64)`, una instancia jamás cruza la frontera de dos líneas de caché en CPUs x86-64 o núcleos ARMv9.
 2. **Cero Anergía en Lectura (Protocolo MESI)**: Los núcleos lectores ejecutan únicamente cargas atómicas (`LDAR` / `DMB ISHLD`). La línea permanece en estado **Shared (S)** en todas las cachés L1/L2. No existe tráfico RFO (*Request For Ownership*) ni *cache-line bouncing*.
 3. **Cota de Landauer en Silicio**: Toda la disipación irreversible se confina en el escritor causal único (*Primum Movens*), que sobrescribe exactamente 384 bits por publicación ($\Delta Q \ge k_B T \ln 2 \cdot 384 \approx 1.10 \times 10^{-18}\text{ J}$ a 300 K).
-4. **Bisimulación Aristotélica en Lean 4 ([BabylonTrace.lean](file:///Users/borjafernandezangulo/BABYLON-60/docs/proof/lean/BabylonTrace.lean))**:
+4. **Bisimulación Aristotélica en Lean 4 ([BabylonTrace.lean](docs/proof/lean/BabylonTrace.lean))**:
    - **Dynamis** ($seq \pmod 2 = 1$): Estado en potencia, inobservable en el cociente.
    - **Entelecheia** ($seq \pmod 2 = 0$): Estado en acto plenamente validado.
    - Teorema: $\forall s \in \mathbb{N},\; \text{isEntelecheia}(s) \implies \neg \text{isDynamis}(s)$.

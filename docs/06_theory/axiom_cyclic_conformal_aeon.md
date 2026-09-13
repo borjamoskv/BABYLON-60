@@ -18,7 +18,7 @@ version: 1.0.0
 
 > [!NOTE]
 > **Contexto del Teorema**  
-> Formalizado mecánicamente en Lean 4 ([`proof/lean/Babylon.lean`](file:///Users/borjafernandezangulo/BABYLON-60/proof/lean/Babylon.lean)). Resuelve la paradoja del crecimiento entrópico de los ledgers *append-only* aplicando la **Cosmología Cíclica Conforme (CCC)** de Roger Penrose al **Límite de Disipación de Landauer** en memoria compartida (SharedManifest 64 B).
+> Formalizado mecánicamente en Lean 4 ([`proof/lean/Babylon.lean`](../proof/lean/BabylonTrace.lean)). Resuelve la paradoja del crecimiento entrópico de los ledgers *append-only* aplicando la **Cosmología Cíclica Conforme (CCC)** de Roger Penrose al **Límite de Disipación de Landauer** en memoria compartida (SharedManifest 64 B).
 
 ---
 
