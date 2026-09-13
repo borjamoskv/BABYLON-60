@@ -392,4 +392,4 @@ See [SECURITY.md](./SECURITY.md).
 
 ---
 
-<sub>BABYLON-60 v4.0.0 · Tamper-Evident Cryptographic Ledger for AI Agents · Borja Moskv</sub>
+<sub>BABYLON-60 v4.3.0 · Tamper-Evident Cryptographic Ledger for AI Agents · Borja Moskv</sub>

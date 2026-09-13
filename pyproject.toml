@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "babylon60"
-version = "4.0.0"
+version = "4.3.0"
 license = { file = "LICENSE" }
 description = "CORTEX C5-REAL execution kernel (BABYLON-60): BFT ledgers, onco-transducer, exergy pipelines"
 readme = "README.md"
