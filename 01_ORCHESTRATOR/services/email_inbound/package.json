@@ -1,6 +1,6 @@
 {
   "name": "email_inbound",
-  "version": "1.0.0",
+  "version": "4.3.0",
   "description": "",
   "main": "worker.js",
   "scripts": {

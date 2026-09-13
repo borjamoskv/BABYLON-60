@@ -1,6 +1,6 @@
 [package]
 name = "b60-lang"
-version = "1.0.0"
+version = "4.3.0"
 edition = "2021"
 description = "Sovereign Base-60 Programming Language Engine for BABYLON-60 & Robinson-Moskv"
 authors = ["Borja Moskv <borjamoskv@github.com>"]

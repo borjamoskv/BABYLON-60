@@ -116,12 +116,12 @@ DEFAULT_CAUSAL_GATE_PATH = BABYLON_BASE_PATH / "causal_gate.db"
 # ---------------------------------------------------------------------------
 # MCP Protocol Constants (JSON-RPC 2.0)
 # ---------------------------------------------------------------------------
-JSONRPC_VERSION = "2.0"
+JSONRPC_VERSION = "4.3.0"
 MCP_SERVER_NAME = "cortex-persist-bft"
-MCP_SERVER_VERSION = "1.2.0"
+MCP_SERVER_VERSION = "4.3.0"
 
 # MCP Protocol version
-MCP_PROTOCOL_VERSION = "2025-03-26"
+MCP_PROTOCOL_VERSION = "4.3.0"
 
 # ---------------------------------------------------------------------------
 # Tool & Resource Definitions

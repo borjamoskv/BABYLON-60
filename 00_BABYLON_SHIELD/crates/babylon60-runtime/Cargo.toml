@@ -1,6 +1,6 @@
 [package]
 name = "babylon60-runtime"
-version = "0.1.0"
+version = "4.3.0"
 edition = "2021"
 license = "Apache-2.0 OR MIT"
 description = "F60 Rational Arithmetic and Coroutine Runtime for BABYLON-60"

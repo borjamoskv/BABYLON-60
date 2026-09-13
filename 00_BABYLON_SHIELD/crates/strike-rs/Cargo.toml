@@ -1,6 +1,6 @@
 [package]
 name = "strike_rs"
-version = "0.1.0"
+version = "4.3.0"
 edition = "2024"
 license = "Apache-2.0 OR MIT"
 description = "High-performance I/O and cryptographic primitives for BABYLON-60"

@@ -1,6 +1,6 @@
 [package]
 name = "babylon60-proof-ir"
-version = "0.1.0"
+version = "4.3.0"
 edition = "2021"
 license = "Apache-2.0 OR MIT"
 description = "Intermediate Representation and Proof Obligation Generator for BABYLON-60"

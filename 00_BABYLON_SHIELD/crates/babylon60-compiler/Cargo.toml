@@ -1,6 +1,6 @@
 [package]
 name = "babylon60-compiler"
-version = "0.1.0"
+version = "4.3.0"
 edition = "2021"
 license = "Apache-2.0 OR MIT"
 description = "SSA Compiler and Lean 4 Proof Backend for BABYLON-60"
@@ -8,8 +8,8 @@ repository = "https://github.com/borjamoskv/BABYLON-60"
 authors = ["Borja Moskv <borjamoskv@github.com>"]
 
 [dependencies]
-kernel = { package = "babylon60-kernel", path = "../babylon60-kernel", version = "0.1.0" }
-proof_ir = { package = "babylon60-proof-ir", path = "../babylon60-proof-ir", version = "0.1.0" }
+kernel = { package = "babylon60-kernel", path = "../babylon60-kernel", version = "4.3.0" }
+proof_ir = { package = "babylon60-proof-ir", path = "../babylon60-proof-ir", version = "4.3.0" }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 sha2 = "0.10"

@@ -378,7 +378,7 @@ dependencies = [
 
 [[package]]
 name = "b60-lang"
-version = "1.0.0"
+version = "4.3.0"
 dependencies = [
  "clap",
  "ed25519-dalek",
@@ -389,7 +389,7 @@ dependencies = [
 
 [[package]]
 name = "babylon-attest"
-version = "1.0.0"
+version = "4.3.0"
 dependencies = [
  "base64",
  "clap",
@@ -403,7 +403,7 @@ dependencies = [
 
 [[package]]
 name = "babylon60-compiler"
-version = "0.1.0"
+version = "4.3.0"
 dependencies = [
  "babylon60-kernel",
  "babylon60-proof-ir",
@@ -414,7 +414,7 @@ dependencies = [
 
 [[package]]
 name = "babylon60-fuzz"
-version = "0.1.0"
+version = "4.3.0"
 dependencies = [
  "babylon60-compiler",
  "babylon60-kernel",
@@ -423,7 +423,7 @@ dependencies = [
 
 [[package]]
 name = "babylon60-kernel"
-version = "0.1.0"
+version = "4.3.0"
 dependencies = [
  "ciborium-ll",
  "criterion",
@@ -434,11 +434,11 @@ dependencies = [
 
 [[package]]
 name = "babylon60-proof-ir"
-version = "0.1.0"
+version = "4.3.0"
 
 [[package]]
 name = "babylon60-runtime"
-version = "0.1.0"
+version = "4.3.0"
 dependencies = [
  "num-bigint",
  "num-integer",
@@ -450,7 +450,7 @@ dependencies = [
 
 [[package]]
 name = "babylon60_root"
-version = "4.0.0"
+version = "4.3.0"
 dependencies = [
  "ciborium",
  "coset",
@@ -590,7 +590,7 @@ checksum = "fc652a48c352aef3ea3aed32080501cf3ef6ed5da78602a020c991775b0aff04"
 
 [[package]]
 name = "c5_compiler"
-version = "0.1.0"
+version = "4.3.0"
 
 [[package]]
 name = "cast"
@@ -737,7 +737,7 @@ checksum = "3d52eff69cd5e647efe296129160853a42795992097e8af39800e1060caeea9b"
 
 [[package]]
 name = "cortex-guard"
-version = "0.1.0"
+version = "4.3.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -750,7 +750,7 @@ dependencies = [
 
 [[package]]
 name = "cortex-lsp"
-version = "0.1.0"
+version = "4.3.0"
 dependencies = [
  "anyhow",
  "hex",
@@ -2096,7 +2096,7 @@ dependencies = [
 
 [[package]]
 name = "nul-zk"
-version = "0.1.0"
+version = "4.3.0"
 dependencies = [
  "anyhow",
  "ark-bls12-381",
@@ -3145,7 +3145,7 @@ checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 
 [[package]]
 name = "strike_rs"
-version = "0.1.0"
+version = "4.3.0"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -3696,7 +3696,7 @@ checksum = "accd4ea62f7bb7a82fe23066fb0957d48ef677f6eeb8215f372f52e48bb32426"
 
 [[package]]
 name = "verifiable_inference_engine"
-version = "0.1.0"
+version = "4.3.0"
 dependencies = [
  "ark-bls12-381",
  "ark-ff",

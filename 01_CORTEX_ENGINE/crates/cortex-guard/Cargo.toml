@@ -1,6 +1,6 @@
 [package]
 name = "cortex-guard"
-version = "0.1.0"
+version = "4.3.0"
 edition = "2021"
 description = "Deterministic Architectural Verification CLI & SARIF Generator for agents.archi"
 authors = ["Borja Moskv <borjamoskv@github.com>"]
