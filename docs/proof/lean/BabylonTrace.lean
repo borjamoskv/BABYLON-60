@@ -5,7 +5,7 @@
 namespace Babylon60
 
 /-- Sequence counter state type -/
-def SeqState : Type := Nat
+abbrev SeqState : Type := Nat
 
 /-- Entelecheia (Actualized / Validated State): seq is even -/
 def isEntelecheia (s : SeqState) : Prop :=
@@ -22,7 +22,8 @@ theorem entelecheia_dynamis_disjoint (s : SeqState) :
   unfold isEntelecheia at h_ent
   unfold isDynamis at h_dyn
   rw [h_ent] at h_dyn
-  contradiction
+  revert h_dyn
+  decide
 
 /-- Valid writer transition: s1 (even) -> s1 + 1 (odd/in-flight) -> s1 + 2 (even/published) -/
 def isValidWriterStep (s1 s2 : SeqState) : Prop :=
@@ -72,7 +73,7 @@ theorem poison_state_is_irreversible (code : Nat) (halted : Bool) :
 
 /-- Theorem: WORM Quarantine Immutability (Pillar 1)
     A critical halt (quarantine) prevents any further mutation of the causal trace. -/
-theorem quarantine_immutability (code : Nat) (h_halt : true = true) (step_halted : Bool) :
+theorem quarantine_immutability (code : Nat) (_h_halt : true = true) (step_halted : Bool) :
     stepKernel (KernelState.Poisoned code) step_halted = KernelState.Poisoned code := by
   rfl
 
