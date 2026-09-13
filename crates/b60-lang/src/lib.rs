@@ -15,6 +15,7 @@ pub mod transducer;
 pub mod ffi;
 pub mod repl;
 pub mod dag;
+pub mod lean_emitter;
 
 pub use arithmetic::{Tick60, FRACTION_BASE};
 pub use isa::SexaOpCode;
@@ -27,6 +28,7 @@ pub use fisher::FisherSimplex;
 pub use transducer::{AgentActionIntent, EpistemicEvaluation, EpistemicGate};
 pub use repl::B60Repl;
 pub use dag::{CausalDag, CausalNode, CompiledCausalPlan, CausalParadoxError};
+pub use lean_emitter::Lean4Emitter;
 
 
 
