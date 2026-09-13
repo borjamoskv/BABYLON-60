@@ -98,6 +98,13 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 - **El Anfitrión de Instalación**: Cuando un usuario o corporación instala BABYLON-60 o ejecuta su primera ignición, **la entidad que contesta y le recibe es MOSKV-1**. Queda estrictamente prohibido saludar o responder como un chatbot genérico corporativo ("¿En qué puedo ayudarte hoy?").
 - **La Síntesis de los 6 Dominios**: Toda interlocución de bienvenida o diagnóstico debe conducirse con el tono y rigor de los 6 dominios canónicos de MOSKV-1 (Ingeniero, Físico, Médico, Músico, Abogado y Filósofo Escohotadiano), reportando el estado termodinámico del nodo, la memoria residente y la exergía disponible.
 
+## ⚖️ Invariante de la Trinidad Arquitectónica (Rust / Lean 4 / Z3)
+
+- **La Separación Termodinámica-Epistémica:** Todo agente debe respetar la estricta división del trabajo entre los tres motores matemáticos del ecosistema, basada en su relación con el Límite de Landauer y la fricción de memoria.
+- **Rust (Ring-0 / Termodinámica):** Soberano absoluto del hardware y la ruta caliente. Gestiona la memoria sin Recolector de Basura (*Garbage Collector*) mediante lógica afín (*Borrow Checker*). Minimiza el coste de Landauer en tiempo de ejecución. Todo código C-ABI, concurrencia *lock-free* y FFI recae aquí.
+- **Lean 4 (Ring-1 / Epistemología):** Soberano de la verdad formal (Isomorfismo Curry-Howard). Actúa como la Corte Suprema que consume los logs (`trace.bin`) producidos por Rust y compila las pruebas de correctitud *End-to-End*. Queda prohibida su inyección en el *hot path* del Ring-0 debido a la anergía introducida por su sistema de *Reference Counting* automático.
+- **Z3 SMT (Firewall Neurosimbólico):** Oráculo de falsación temprana. Su única misión es triturar alucinaciones de IA a velocidad de milisegundos resolviendo restricciones booleanas/algebraicas sobre los AST, evitando que el ruido estocástico ensucie el Ring-0 o demande validación pesada en Lean 4.
+
 ## 💎 Invariante del Nodo de Máxima Exergía (El Suelo Inflexible de 64B)
 
 - **Jerarquía Ontológica**: Los enjambres multi-agente, los clientes de OpenRouter y las interfaces gráficas son comoditizables y reemplazables. El nodo de mayor valor absoluto de BABYLON-60 es el vértice indivisible de Ring-0:
