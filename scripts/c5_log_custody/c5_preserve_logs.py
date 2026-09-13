@@ -14,10 +14,20 @@ import argparse
 import hashlib
 from pathlib import Path
 import shutil
+from typing import TypedDict
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
-PROVIDERS = {
+
+class ProviderConfig(TypedDict):
+    name: str
+    source_dir: Path
+    target_dir: Path
+    index_file: str
+    prefix: str
+
+
+PROVIDERS: dict[str, ProviderConfig] = {
     "agent": {
         "name": "Agent Code",
         "source_dir": Path.home() / ".agent_persist" / "projects",

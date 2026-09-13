@@ -30,7 +30,7 @@ import sqlite3
 import sys
 import time
 from dataclasses import dataclass, field
-from typing import Dict, List
+from typing import Any, Dict, List, Sequence
 
 # ── PYTHONPATH ────────────────────────────────────────────────────────────
 _ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -210,32 +210,32 @@ def process_batch(
                 )
             )
 
-    for res in nat_results:
-        if res.risk_score >= risk_threshold:
+    for nat_res in nat_results:
+        if nat_res.risk_score >= risk_threshold:
             receipts.append(
                 attester.generate_receipt(
-                    advisory_id=res.advisory_id,
+                    advisory_id=nat_res.advisory_id,
                     domain="DOMAIN_NATIVE",
-                    finding_summary=f"{res.vulnerability_class} @ {res.affected_subsystems}",
-                    risk_score=res.risk_score,
-                    raw_payload=res.to_dict(),
+                    finding_summary=f"{nat_res.vulnerability_class} @ {nat_res.affected_subsystems}",
+                    risk_score=nat_res.risk_score,
+                    raw_payload=nat_res.to_dict(),
                 )
             )
 
-    for res in ai_results:
-        if res.risk_score >= risk_threshold:
+    for ai_res in ai_results:
+        if ai_res.risk_score >= risk_threshold:
             receipts.append(
                 attester.generate_receipt(
-                    advisory_id=res.advisory_id,
+                    advisory_id=ai_res.advisory_id,
                     domain="DOMAIN_AI",
-                    finding_summary=f"{res.vulnerability_class.value} [{res.taint_level}]",
-                    risk_score=res.risk_score,
-                    raw_payload=res.to_dict(),
+                    finding_summary=f"{ai_res.vulnerability_class.value} [{ai_res.taint_level}]",
+                    risk_score=ai_res.risk_score,
+                    raw_payload=ai_res.to_dict(),
                 )
             )
 
     # 4. Construir opiniones de dominio para BayesianSwarm
-    def _opinion(results: list[object]) -> Dict[str, float]:
+    def _opinion(results: Sequence[Any]) -> Dict[str, float]:
         if not results:
             return {"HIGH": 0.5, "LOW": 0.5}
         high_risk = [r for r in results if getattr(r, "risk_score", 0.0) >= risk_threshold]

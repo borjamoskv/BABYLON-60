@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# ruff: noqa: E402
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
@@ -34,8 +35,9 @@ class JournalEntry:
         pass
 
 
-async def autoconsolidate(batch_size: int = 500) -> None:
-    async with connect() as db:
+async def autoconsolidate(batch_size: int = 500, db_path: str = "journal.db") -> None:
+    db = await connect(db_path)
+    try:
         cursor = await db.execute("SELECT id FROM journal ORDER BY lamport_t")
         rows = await cursor.fetchall()
         ids = [row[0] for row in rows]
@@ -48,6 +50,8 @@ async def autoconsolidate(batch_size: int = 500) -> None:
             placeholders = ",".join("?" for _ in batch)
             await db.execute(f"DELETE FROM journal WHERE id IN ({placeholders})", tuple(batch))
         await db.commit()
+    finally:
+        await db.close()
 
 
 if __name__ == "__main__":

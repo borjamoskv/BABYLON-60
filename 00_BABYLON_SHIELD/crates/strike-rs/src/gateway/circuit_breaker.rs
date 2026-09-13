@@ -138,6 +138,12 @@ pub struct CognitiveGateway {
     t2_timeout_ms: u64,
 }
 
+impl Default for CognitiveGateway {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl CognitiveGateway {
     pub fn new() -> Self {
         Self {

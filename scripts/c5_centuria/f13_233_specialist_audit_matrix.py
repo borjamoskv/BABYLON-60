@@ -22,9 +22,9 @@ from typing import List, Dict, Any, Optional
 
 try:
     from rich.console import Console
-    from rich.table import Table
+    from rich.table import Table  # noqa: F401
     from rich.panel import Panel
-    from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn, TimeElapsedColumn
+    from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn, TimeElapsedColumn  # noqa: F401
     RICH_AVAILABLE = True
 except ImportError:
     RICH_AVAILABLE = False
@@ -603,7 +603,7 @@ def main() -> None:
     failed_count = sum(1 for r in results if not r.passed)
     
     # Agrupar por cluster
-    clusters_summary = {}
+    clusters_summary: dict[str, list[Any]] = {}
     for r in results:
         clusters_summary.setdefault(r.cluster, []).append(r)
 

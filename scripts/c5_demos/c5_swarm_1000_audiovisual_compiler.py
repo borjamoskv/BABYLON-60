@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# ruff: noqa: E402
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened | C5-REAL | SOTA 2026
 # █ LEGIÓN-1000: ENJAMBRE DE 1.000 AGENTES PARA TRANSDUCCIÓN AUDIOVISUAL

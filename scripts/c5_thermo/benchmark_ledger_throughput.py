@@ -43,7 +43,7 @@ async def run_benchmark(iterations: int = 10000) -> None:
     ]
 
     # Encolar todo de golpe
-    futures: list[asyncio.Future[dict[str, Any]]] = [actor.append(event) for event in events]
+    futures: list[asyncio.Future[Any]] = [actor.append(event) for event in events]
 
     # Esperar resolución
     results: list[dict[str, Any] | BaseException] = await asyncio.gather(*futures, return_exceptions=True)

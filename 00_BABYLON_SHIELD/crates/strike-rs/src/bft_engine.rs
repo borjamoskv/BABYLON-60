@@ -192,8 +192,8 @@ impl BftAsyncEngine {
                 if let Ok(Some(sample)) = result_sub.subscriber.receive() {
                     if sample.verify(&worker_pub_key) && sample.view == 1 {
                         let seq_num = sample.seq_num;
-                        if let Some(n_id) = id_to_node.get(&seq_num) {
-                            if completed.insert(n_id.clone()) {
+                        if let Some(n_id) = id_to_node.get(&seq_num)
+                            && completed.insert(n_id.clone()) {
                                 let _ = tx_completed.blocking_send(n_id.clone());
                                 if let Some(kids) = children_map.get(n_id) {
                                     for kid in kids {
@@ -205,7 +205,6 @@ impl BftAsyncEngine {
                                     }
                                 }
                             }
-                        }
                     }
                 } else {
                     thread::sleep(Duration::from_micros(10));

@@ -30,7 +30,7 @@ def test_b3() -> None:
     ledger.append_event(CortexEvent(event_type="SYS", payload={"a": 1}, cortex_taint="T0"))
     
     print("\n[*] Test 2: Valid ledger DB provided (Should PASS Art 12)")
-    cert_valid_db = exporter.generate_certificate("SYS-1", "OP-1", ledger_db_path=db_path)
+    cert_valid_db = exporter.generate_certificate("SYS-1", "OP-1", ledger_path=db_path)
     print(f"Art 12 Status: {cert_valid_db['articles_compliance']['Article_12_Record_Keeping_Logging']['status']}")
     print(f"Global Merkle Root (overwritten by real DB): {cert_valid_db['global_merkle_root']}")
 

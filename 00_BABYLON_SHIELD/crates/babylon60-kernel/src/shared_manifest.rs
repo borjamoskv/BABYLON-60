@@ -45,8 +45,8 @@ impl SharedManifest {
         
         // 2. Escritura de payload sin locks.
         self.epoch_id.store(epoch, Ordering::Relaxed);
-        for i in 0..4 {
-            self.payload_hash[i].store(hash[i], Ordering::Relaxed);
+        for (slot, &val) in self.payload_hash.iter().zip(hash.iter()) {
+            slot.store(val, Ordering::Relaxed);
         }
         
         // 3. Writer Release: Incrementamos la secuencia a par.
@@ -67,7 +67,7 @@ impl SharedManifest {
             
             // Acquire barrera para leer la secuencia de inicio
             let s1 = self.seq.load(Ordering::Acquire);
-            if s1 % 2 != 0 {
+            if !s1.is_multiple_of(2) {
                 // Escritura en progreso: Backoff exponencial para enfriamiento MESI
                 let spins = 1 << retries.min(7);
                 for _ in 0..spins {
@@ -79,8 +79,8 @@ impl SharedManifest {
             
             let epoch = self.epoch_id.load(Ordering::Relaxed);
             let mut hash = [0u64; 4];
-            for i in 0..4 {
-                hash[i] = self.payload_hash[i].load(Ordering::Relaxed);
+            for (slot, val) in self.payload_hash.iter().zip(hash.iter_mut()) {
+                *val = slot.load(Ordering::Relaxed);
             }
             
             // Acquire barrera para verificar si hubo mutación durante la lectura

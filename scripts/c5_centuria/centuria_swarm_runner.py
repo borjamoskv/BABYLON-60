@@ -81,7 +81,7 @@ async def main() -> None:
     vectors_100 = all_vectors[:100]
     logger.info(f"📊 {len(vectors_100)} vectores cargados de Shards.")
 
-    actor = BFTLedgerActor(db_path=str(DB_PATH))
+    actor = BFTLedgerActor(db_path=DB_PATH)
     await actor.start()
 
     try:

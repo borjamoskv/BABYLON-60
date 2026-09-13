@@ -10,11 +10,12 @@ import json
 import argparse
 import subprocess
 from pathlib import Path
+from typing import Any
 
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 
-def check_python_distribution() -> dict:
-    result = {"status": "PASS", "details": [], "artifacts": []}
+def check_python_distribution() -> dict[str, Any]:
+    result: dict[str, Any] = {"status": "PASS", "details": [], "artifacts": []}
     try:
         subprocess.run(["uv", "build"], cwd=ROOT_DIR, capture_output=True, text=True, check=True)
         dist_dir = ROOT_DIR / "dist"
@@ -39,8 +40,8 @@ def check_python_distribution() -> dict:
     
     return result
 
-def check_rust_distribution() -> dict:
-    result = {"status": "PASS", "details": []}
+def check_rust_distribution() -> dict[str, Any]:
+    result: dict[str, Any] = {"status": "PASS", "details": []}
     try:
         res = subprocess.run(
             ["cargo", "check", "--workspace"],
@@ -59,8 +60,8 @@ def check_rust_distribution() -> dict:
     
     return result
 
-def check_dockerfile() -> dict:
-    result = {"status": "PASS", "details": []}
+def check_dockerfile() -> dict[str, Any]:
+    result: dict[str, Any] = {"status": "PASS", "details": []}
     dockerfile_path = ROOT_DIR / "Dockerfile"
     if not dockerfile_path.exists():
         result["status"] = "FAIL"
@@ -84,8 +85,8 @@ def check_dockerfile() -> dict:
             
     return result
 
-def check_workflows() -> dict:
-    result = {"status": "PASS", "details": []}
+def check_workflows() -> dict[str, Any]:
+    result: dict[str, Any] = {"status": "PASS", "details": []}
     wf_dir = ROOT_DIR / ".github" / "workflows"
     required_workflows = ["pypi-publish.yml", "crates-publish.yml", "docker-ghcr.yml"]
     

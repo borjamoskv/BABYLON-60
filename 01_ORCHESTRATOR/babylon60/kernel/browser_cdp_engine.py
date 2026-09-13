@@ -17,6 +17,7 @@ import shutil
 import subprocess
 import tempfile
 import urllib.request
+import urllib.parse
 from typing import Type, Any, Dict, List, Optional
 from types import TracebackType
 

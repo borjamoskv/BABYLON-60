@@ -32,6 +32,12 @@ pub struct LayoutEngine {
     pub structs: HashMap<String, StructLayout>,
 }
 
+impl Default for LayoutEngine {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl LayoutEngine {
     pub fn new() -> Self {
         Self { structs: HashMap::new() }
@@ -124,6 +130,12 @@ pub struct X86Backend {
     asm: String,
     stack_offsets: HashMap<usize, usize>,
     next_offset: usize,
+}
+
+impl Default for X86Backend {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl X86Backend {

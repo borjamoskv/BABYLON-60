@@ -75,7 +75,7 @@ def cmd_send(to: str, subject: str, body: str) -> None:
     user = os.environ.get("USER", "borja")
     from_email = f"{user}@babylon60.com"
 
-    payload = {
+    payload: dict[str, object] = {
         "from": from_email,
         "to": to,
         "subject": subject,

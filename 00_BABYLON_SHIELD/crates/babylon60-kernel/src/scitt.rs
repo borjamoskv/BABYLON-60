@@ -4,7 +4,6 @@ use ed25519_dalek::{Signature, Signer, SigningKey, VerifyingKey};
 /// Estructura conceptual CBOR COSE_Sign1: [protected, unprotected, payload, signature]
 /// En esta implementación C5-REAL, retornamos la firma cruda Ed25519 (64 bytes)
 /// sobre el Hash SHA-256 o estado del epoch envenenado.
-
 pub struct ScittReceipt {
     pub epoch_halted: u64,
     pub signature: [u8; 64],

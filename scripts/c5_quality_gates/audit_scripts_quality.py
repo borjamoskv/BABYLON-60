@@ -16,6 +16,7 @@ import ast
 import re
 import sys
 from pathlib import Path
+from typing import Any
 
 SCRIPTS_DIR = Path(__file__).resolve().parent.parent
 REPO_ROOT = SCRIPTS_DIR.parent
@@ -85,7 +86,7 @@ def audit_scripts(auto_fix: bool = False, json_output: bool = False) -> bool:
     passed_shebang = 0
     passed_ast = 0
     passed_patterns = 0
-    violations = []
+    violations: list[dict[str, Any]] = []
     remediated_count = 0
 
     for py_file in py_files:

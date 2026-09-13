@@ -17,6 +17,7 @@ Usage:
   python3 tools/codex_tunnel.py test-roundtrip
   python3 tools/codex_tunnel.py mcp-server
 """
+# ruff: noqa: E402
 
 from __future__ import annotations
 

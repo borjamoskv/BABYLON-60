@@ -233,7 +233,7 @@ def cmd_update_status(args: argparse.Namespace) -> None:
 def _update_milestone_commit(m: dict[str, Any]) -> None:
     if m.get("status") == "DONE" or not m.get("commit_hash"):
         return
-    h = m.get("commit_hash")
+    h = str(m.get("commit_hash"))
     try:
         res = subprocess.run(["git", "cat-file", "-t", h], cwd=WORKSPACE_DIR, capture_output=True, text=True)
         if res.returncode == 0 and res.stdout.strip() == "commit":

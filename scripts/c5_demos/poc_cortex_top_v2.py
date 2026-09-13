@@ -118,7 +118,8 @@ if __name__ == "__main__":
             render_tui()
         else:
             print("Headless mode.")
-            while True: time.sleep(1)
+            while True:
+                time.sleep(1)
     except KeyboardInterrupt:
         pass
     finally:

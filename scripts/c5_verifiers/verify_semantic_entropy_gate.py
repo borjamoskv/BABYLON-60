@@ -35,8 +35,8 @@ def compute_jaccard_similarity(text1: str, text2: str) -> float:
 
 def cluster_samples(samples: List[str], similarity_threshold: float = 0.3) -> List[int]:
     """Agrupa las K muestras en clústeres de equivalencia semántica."""
-    clusters = []
-    cluster_map = []
+    clusters: List[str] = []
+    cluster_map: List[int] = []
     
     for sample in samples:
         assigned = False

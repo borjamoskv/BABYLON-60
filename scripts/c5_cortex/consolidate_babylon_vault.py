@@ -213,7 +213,6 @@ def consolidate_vault(json_output: bool = False) -> None:
     conn.close()
 
     if json_output:
-        import json
         payload = {
             "schema_version": "1.0",
             "type": "C5_VAULT_CONSOLIDATION",

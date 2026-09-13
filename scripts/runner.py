@@ -241,8 +241,10 @@ def main() -> None:
 
     if args.command == "audit":
         cmd_args = []
-        if getattr(args, "fix", False): cmd_args.append("--fix")
-        if getattr(args, "json", False): cmd_args.append("--json")
+        if getattr(args, "fix", False):
+            cmd_args.append("--fix")
+        if getattr(args, "json", False):
+            cmd_args.append("--json")
         sys.exit(run_subcommand("c5_quality_gates/audit_scripts_quality.py", cmd_args + unknown))
     elif args.command == "fast-smt":
         cmd_args = ["--json"] if getattr(args, "json", False) else []

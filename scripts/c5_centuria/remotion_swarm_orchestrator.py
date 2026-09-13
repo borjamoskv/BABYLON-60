@@ -12,7 +12,7 @@ Enforces:
 
 import hashlib
 import dataclasses
-from typing import List, Dict
+from typing import List, Dict, Any
 
 TOTAL_FRAMES = 72000  # 20 minutos @ 60 FPS
 SWARM_SIZE = 10000  # 10,000 Agentes
@@ -34,7 +34,7 @@ class AgencyHypervisor:
         self.swarm_size = swarm_size
         self.frame_registry: Dict[int, str] = {}  # frame_idx -> payload_hash
 
-    def allocate_chunks(self) -> List[Dict[str, int]]:
+    def allocate_chunks(self) -> List[Dict[str, Any]]:
         chunks = []
         for i in range(self.swarm_size):
             start = int(i * FRAMES_PER_AGENT)

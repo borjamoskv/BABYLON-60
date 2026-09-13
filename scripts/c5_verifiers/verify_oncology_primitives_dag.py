@@ -16,6 +16,7 @@ Audits the 300 Molecular Oncology Primitives ontology against the 4 C5-REAL Axio
 
 import sys
 from pathlib import Path
+from typing import Any
 
 WORKSPACE_DIR = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(WORKSPACE_DIR))
@@ -31,18 +32,18 @@ except ImportError:
 class OncologyDagVerifier:
     """Causal DAG verifier for the 300 Molecular Oncology Primitives."""
 
-    def __init__(self, primitives) -> None:
+    def __init__(self, primitives: Any) -> None:
         self.primitives = primitives
-        self.results = []
+        self.results: list[tuple[str, bool, str]] = []
 
     def record(self, name: str, passed: bool, detail: str) -> None:
         self.results.append((name, passed, detail))
 
-    def verify_a1_primacy_uniqueness() -> None:
+    def verify_a1_primacy_uniqueness(self) -> None:
         pass
 
-    def verify_all() -> int:
-        pass
+    def verify_all(self) -> int:
+        return 0
 
 
 def main() -> None:

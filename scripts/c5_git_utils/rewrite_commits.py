@@ -20,7 +20,7 @@ The script performs:
 import subprocess
 import sys
 import uuid
-from babylon60.database.core import connect
+from pathlib import Path
 from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
 from babylon60.utils.hygiene import run_exergy_optimizer
 
@@ -64,8 +64,9 @@ def _run_filter_repo() -> None:
 
 
 async def _record_events() -> None:
-    async with connect("cortex.db") as conn:
-        actor = BFTLedgerActor(conn)
+    actor = BFTLedgerActor(db_path=Path("cortex.db"))
+    await actor.start()
+    try:
         out = subprocess.check_output(["git", "log", "--pretty=%H %P"], text=True)
         for line in out.splitlines():
             new_sha, parents = line.split(" ", 1)
@@ -81,6 +82,8 @@ async def _record_events() -> None:
                 source_pk=str(uuid.uuid4()),
             )
             await actor.append(event)
+    finally:
+        await actor.stop()
 
 
 def main() -> None:

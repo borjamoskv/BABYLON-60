@@ -40,7 +40,7 @@ def _get_default_moonshot_url() -> str:
 
 
 def _get_default_moonshot_key() -> str:
-    return os.getenv("KIMI_API_KEY") or os.getenv("MOONSHOT_API_KEY", "")
+    return os.getenv("KIMI_API_KEY") or os.getenv("MOONSHOT_API_KEY") or ""
 
 
 def _get_default_openrouter_url() -> str:

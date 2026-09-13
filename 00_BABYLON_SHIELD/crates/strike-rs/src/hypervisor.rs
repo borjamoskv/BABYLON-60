@@ -100,11 +100,10 @@ impl ZeroCopyPublisher {
         keypair: &SigningKey
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut payload_hash = [0u8; 32];
-        if payload_hash_hex.len() == 64 {
-            if let Ok(bytes) = hex::decode(payload_hash_hex) {
+        if payload_hash_hex.len() == 64
+            && let Ok(bytes) = hex::decode(payload_hash_hex) {
                 payload_hash.copy_from_slice(&bytes);
             }
-        }
 
         let msg = BftMessage::sign(sender_id, view, seq_num, payload_hash, keypair);
 
@@ -151,6 +150,12 @@ pub struct SwarmTenant {
 /// Agency Hypervisor Kernel Core in Rust
 pub struct SwarmHypervisor {
     pub tenants: Arc<DashMap<String, SwarmTenant>>,
+}
+
+impl Default for SwarmHypervisor {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl SwarmHypervisor {
@@ -362,7 +367,7 @@ mod tests {
                 
                 for i in 0..100 {
                     let tenant_id = format!("agent_concurrent_{}_{}", thread_idx, i);
-                    hyper_clone.register_tenant(&tenant_id, 1024, vk.clone());
+                    hyper_clone.register_tenant(&tenant_id, 1024, vk);
                 }
             });
             handles.push(handle);

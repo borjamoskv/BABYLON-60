@@ -44,14 +44,14 @@ impl ActionEngine {
             "c5.biometricSignOff" => {
                 let action = args
                     .as_ref()
-                    .and_then(|a| a.get(0))
+                    .and_then(|a| a.first())
                     .and_then(|v| v.get("action"))
                     .and_then(|v| v.as_str())
                     .unwrap_or("GENERIC_MUTATION");
 
                 let description = args
                     .as_ref()
-                    .and_then(|a| a.get(0))
+                    .and_then(|a| a.first())
                     .and_then(|v| v.get("description"))
                     .and_then(|v| v.as_str())
                     .unwrap_or("Modificación de código soberano");

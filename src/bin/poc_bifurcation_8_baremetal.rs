@@ -9,6 +9,12 @@ pub struct BareMetalBackend {
     pub asm: String,
 }
 
+impl Default for BareMetalBackend {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl BareMetalBackend {
     pub fn new() -> Self {
         Self { asm: String::new() }

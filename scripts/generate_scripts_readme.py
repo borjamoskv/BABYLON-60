@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# ruff: noqa: E402
 from __future__ import annotations
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
@@ -56,8 +57,8 @@ def extract_docstring_smart(py_path: Path) -> str:
                 tree = ast.parse(content)
                 doc = ast.get_docstring(tree)
                 if doc:
-                    lines = [l.strip() for l in doc.splitlines() if l.strip()]
-                    meaningful = [l for l in lines if not l.startswith("BABYLON-60") and not l.startswith("█") and not l.startswith("=") and len(l) > 3]
+                    lines = [ln.strip() for ln in doc.splitlines() if ln.strip()]
+                    meaningful = [ln for ln in lines if not ln.startswith("BABYLON-60") and not ln.startswith("█") and not ln.startswith("=") and len(ln) > 3]
                     if meaningful:
                         return meaningful[0].replace("|", "\\|")
             except Exception as e:

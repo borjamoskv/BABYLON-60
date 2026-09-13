@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# ruff: noqa: E402
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
@@ -203,26 +204,26 @@ def run_poc() -> None:
             ledger.enqueue_receipt(r)
             receipts_generated += 1
 
-    for res in nat_results:
-        if res.risk_score >= 0.5:
+    for nat_res in nat_results:
+        if nat_res.risk_score >= 0.5:
             r = attester.generate_receipt(
-                advisory_id=res.advisory_id,
+                advisory_id=nat_res.advisory_id,
                 domain="DOMAIN_NATIVE",
-                finding_summary=f"{res.vulnerability_class} @ {res.affected_subsystems}",
-                risk_score=res.risk_score,
-                raw_payload=res.to_dict(),
+                finding_summary=f"{nat_res.vulnerability_class} @ {nat_res.affected_subsystems}",
+                risk_score=nat_res.risk_score,
+                raw_payload=nat_res.to_dict(),
             )
             ledger.enqueue_receipt(r)
             receipts_generated += 1
 
-    for res in ai_results:
-        if res.risk_score >= 0.5:
+    for ai_res in ai_results:
+        if ai_res.risk_score >= 0.5:
             r = attester.generate_receipt(
-                advisory_id=res.advisory_id,
+                advisory_id=ai_res.advisory_id,
                 domain="DOMAIN_AI",
-                finding_summary=f"{res.vulnerability_class.value} [{res.taint_level}]",
-                risk_score=res.risk_score,
-                raw_payload=res.to_dict(),
+                finding_summary=f"{ai_res.vulnerability_class.value} [{ai_res.taint_level}]",
+                risk_score=ai_res.risk_score,
+                raw_payload=ai_res.to_dict(),
             )
             ledger.enqueue_receipt(r)
             receipts_generated += 1

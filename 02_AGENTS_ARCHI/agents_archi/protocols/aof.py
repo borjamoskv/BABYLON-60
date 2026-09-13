@@ -12,7 +12,7 @@ Enforces:
   - Prevents hallucinated normative imperatives from ungrounded observations
 """
 
-from typing import Dict, List, Any, Callable
+from typing import Dict, List, Any, Callable, Optional
 from dataclasses import dataclass, field
 from enum import Enum
 
@@ -54,7 +54,7 @@ class AOFValidator:
     def validate_tool_action(
         tool_name: str,
         arguments: Dict[str, Any],
-        preconditions: List[Callable[[Dict[str, Any]], bool]] = None,
+        preconditions: Optional[List[Callable[[Dict[str, Any]], bool]]] = None,
     ) -> bool:
         """
         Enforces tool execution preconditions before dispatch.

@@ -178,7 +178,7 @@ async fn main() {
     let successes = all_metrics.iter().filter(|m| m.success).count();
     let failures = all_metrics.iter().filter(|m| !m.success).count();
     let cooldowns = all_metrics.iter()
-        .filter(|m| m.error.as_ref().map_or(false, |e| e.contains("Cooldown")))
+        .filter(|m| m.error.as_ref().is_some_and(|e| e.contains("Cooldown")))
         .count();
 
     let success_latencies: Vec<u64> = all_metrics.iter()

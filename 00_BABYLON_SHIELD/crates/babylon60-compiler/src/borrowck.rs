@@ -24,6 +24,12 @@ pub struct BorrowChecker {
     pub reference_map: HashMap<Reg, Reg>,
 }
 
+impl Default for BorrowChecker {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl BorrowChecker {
     pub fn new() -> Self {
         Self {
@@ -114,9 +120,8 @@ impl BorrowChecker {
                                 refs.retain(|&r| r != *ptr);
                                 if refs.is_empty() { *state = BorrowState::Unborrowed; }
                             }
-                            BorrowState::Mut(r) => {
-                                if *r == *ptr { *state = BorrowState::Unborrowed; }
-                            }
+                            BorrowState::Mut(r)
+                                if *r == *ptr => { *state = BorrowState::Unborrowed; }
                             _ => {}
                         }
                     }

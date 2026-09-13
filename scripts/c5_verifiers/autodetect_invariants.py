@@ -30,10 +30,12 @@ def main() -> None:
     test_file = os.path.join(root_dir, "tests", "test_c5_invariants.py")
 
     if not os.path.exists(agents_file):
-        if not args.json: print(f"❌ Rules file not found at: {agents_file}")
+        if not args.json:
+            print(f"❌ Rules file not found at: {agents_file}")
         sys.exit(1)
     if not os.path.exists(test_file):
-        if not args.json: print(f"❌ Test file not found at: {test_file}")
+        if not args.json:
+            print(f"❌ Test file not found at: {test_file}")
         sys.exit(1)
 
     # 1. Parse rule definitions from AGENTS.md

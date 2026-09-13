@@ -236,7 +236,7 @@ class CausalStateActor:
                 )
                 seq_id = cursor.lastrowid
                 conn.commit()
-                return StateCrystallized(seq_id, proof, now)
+                return StateCrystallized(seq_id or 0, proof, now)
             except sqlite3.IntegrityError:
                 cursor = conn.execute("SELECT payload_hash FROM master_ledger WHERE taint_hash = ?", (taint_hash,))
                 row = cursor.fetchone()

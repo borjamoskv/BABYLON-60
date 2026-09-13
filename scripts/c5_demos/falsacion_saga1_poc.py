@@ -16,7 +16,7 @@ import sys
 # Parámetros del test de estrés
 ITERATIONS = 100000
 
-def run_falsification_stress_test() -> None:
+def run_falsification_stress_test() -> int:
     print(f"🔥 [C5-REAL] Iniciando PoC Termodinámico: DDoS Cognitivo sobre SAGA-1 ({ITERATIONS} iteraciones)")
     
     # INV_C5_SHM: Persistencia aislada en directorio temporal
@@ -79,11 +79,15 @@ def run_falsification_stress_test() -> None:
     # Limpieza determinista Cero-Fuga
     print("🧹 Aniquilando triplete SQLite (Cero-Fuga WAL)...")
     conn.close()
-    if os.path.exists(db_path): os.remove(db_path)
-    if os.path.exists(wal_path): os.remove(wal_path)
-    if os.path.exists(shm_path): os.remove(shm_path)
+    if os.path.exists(db_path):
+        os.remove(db_path)
+    if os.path.exists(wal_path):
+        os.remove(wal_path)
+    if os.path.exists(shm_path):
+        os.remove(shm_path)
     os.rmdir(temp_dir)
     print("✅ Purga finalizada. Termodinámica restaurada.")
+    return 0
 
 if __name__ == "__main__":
     sys.exit(run_falsification_stress_test())

@@ -63,7 +63,7 @@ class AntigravityMcpServer:
         self._stdout = stdout
         self._bus = bus or TunnelBus()
         self._running = False
-        self._handlers: dict[str, Callable[[dict[str, Any]], dict[str, Any]]] = {
+        self._handlers: dict[str, Callable[[dict[str, Any]], dict[str, Any] | ToolResult]] = {
             "initialize": self._handle_initialize,
             "notifications/initialized": self._handle_initialized,
             "ping": self._handle_ping,

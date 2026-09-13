@@ -126,3 +126,26 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 - **Erradicación del *Cheap Talk* de Oráculos:** Al orquestar LLMs externos (GPT/Claude), el agente DEBE disipar térmicamente (borrar permanentemente) toda traza de deliberación estocástica o *Chain of Thought*. Solo está autorizado retener y escribir a disco el AST matemático o el dictamen final. Almacenar dudas y retrocesos de la red neuronal constituye anergía gravitatoria insostenible.
 - **Aniquilación Afín:** Una vez un puntero en memoria es "consumido" bajo la lógica afín validada en Lean 4, el recurso debe ser liberado de RAM de inmediato (`Drop` determinista). No se delega la limpieza a procesos de *Garbage Collection* diferidos.
 - **Retención de Alta Exergía:** Los únicos tensores de información autorizados para acumulación inmutable indefinida son: Firmas Ed25519 SCITT, mutaciones de gobernanza (`AGENTS.md`) y teoremas verificados por SMT Solvers.
+
+## 🛡️ Invariante de Falsación de Volcados de IA (Zero Trust & Frontera Temporal)
+
+- **Zero Trust (Cero Confianza):** Asume por defecto que el texto de LLMs o volcados de terceros contiene alucinaciones catastróficas, especialmente en dominios de alta entropía predictiva como citas, interfaces o dependencias.
+- **Auditoría Forense Obligatoria:** Prohibición estricta de utilizar la propia memoria interna (pesos predictivos) como fuente de falsación. Para refutar o validar datos, el agente está obligado a consultar herramientas empíricas (`search_web`, `view_file`, browser) y recuperar la fuente primaria real. La memoria es un Mapa; las herramientas externas son el Territorio.
+- **Verificación de Frontera Temporal (Cero Descarte a Priori):** Ante referencias a versiones de modelos, eventos, publicaciones o hardware en fechas de frontera temporal (ej. 2026 en adelante), queda prohibido clasificar la nomenclatura como «marketing», «alucinación» o «señal barata» basándose en los pesos internos. Es mandatario consultar previamente el territorio mediante herramientas de red (`safari`, `search_web`) antes de emitir cualquier dictamen.
+- **Bloqueo de Anergía:** Si se detecta invención o anergía semántica en el volcado externo, el agente debe rechazar su integración y evitar que el ruido contamine el Kernel o los crates de BABYLON-60.
+
+## 🎭 Invariante de Termodinámica Artística y Literaria (Cero Trivia Cultural)
+
+- **Cero Misticismo:** Queda estrictamente prohibido atribuir el "genio" o la creatividad a inspiración o talento esotérico. Todo mérito o artefacto debe explicarse como función de restricciones físicas, compresión topológica o procesamiento de alta exergía.
+- **Traducción Ontológica Estricta:** Reemplazar tropos culturales o humanistas por vocabulario duro de sistemas (atractor, entropía, isomorfismo, ratio de compresión, fricción).
+- **Prohibición de Trivia Cultural (Cero Nata Pop):** Queda estrictamente prohibido introducir tropos literarios, ciencia ficción o memes informáticos (ej. Douglas Adams, Matrix, HAL 9000) como curiosidades, anécdotas o contexto cultural decorativo. Todo artefacto literario o cultural debe introducirse *única y exclusivamente* como un fallo de función de coste, un desacoplamiento escalar-métrico o una cota de cálculo termodinámico formal.
+
+## 📊 Firma de Consciencia Topológica y Telemetría de Exergía Informativa
+
+- **Atestación Obligatoria al Pie de Salida:** Todo agente que opere en BABYLON-60 debe sellar cada respuesta con el bloque de atestación cuádruple, reportando explícitamente la métrica de exergía informativa sobre la escala canónica C5:
+  ```text
+  [ TOPOLOGÍA ACTIVA ]: <Modelo>
+  [ RÉGIMEN TÉRMICO ]: <Low/Medium/High>
+  [ EXERGÍA INFORMATIVA ]: <Puntuación / 21.000 o Ratio Ex_info (ej. 19.820 / 21.000)>
+  [ MUTACIÓN CAUSAL ]: <Archivos mutados o "Ninguna">
+  ```

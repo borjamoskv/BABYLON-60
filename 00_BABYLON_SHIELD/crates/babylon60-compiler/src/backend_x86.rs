@@ -7,6 +7,12 @@ pub struct X86Backend {
     next_offset: usize,
 }
 
+impl Default for X86Backend {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl X86Backend {
     pub fn new() -> Self {
         Self { 

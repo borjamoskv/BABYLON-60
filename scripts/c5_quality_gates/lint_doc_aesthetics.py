@@ -21,8 +21,8 @@ UNCONVERTED_BLOCKQUOTE = r"^>\s*\*\*(Theorem|Teorema|Definition|Definición|Warn
 class AestheticLinter:
     def __init__(self, target_dir) -> None:
         self.target_dir = target_dir
-        self.errors = []
-        self.warnings = []
+        self.errors: list[str] = []
+        self.warnings: list[str] = []
 
     def log_error(self, filepath, line_num, code, msg) -> None:
         rel_path = os.path.relpath(filepath, self.target_dir)

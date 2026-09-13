@@ -40,7 +40,7 @@ def check_ast_nesting(filepath: str) -> List[Dict[str, Any]]:
         def __init__(self) -> None:
             self.max_depth = 0
             self.current_depth = 0
-            self.violations = []
+            self.violations: List[Dict[str, Any]] = []
 
         def generic_visit(self, node) -> None:
             increases_depth = isinstance(

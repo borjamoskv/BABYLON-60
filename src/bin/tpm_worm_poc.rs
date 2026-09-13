@@ -98,7 +98,7 @@ impl WormLedger {
 
         let prev_hash = self.chain.last().expect("BFT Fallback").hash;
         let mut hasher = Sha256::new();
-        hasher.update(&prev_hash);
+        hasher.update(prev_hash);
         hasher.update(payload);
         hasher.update(signature);
         let new_hash: [u8; 32] = hasher.finalize().into();
@@ -122,7 +122,7 @@ impl WormLedger {
             let curr = &self.chain[i];
             
             let mut hasher = Sha256::new();
-            hasher.update(&prev.hash);
+            hasher.update(prev.hash);
             hasher.update(&curr.payload);
             hasher.update(&curr.signature);
             let expected_hash: [u8; 32] = hasher.finalize().into();

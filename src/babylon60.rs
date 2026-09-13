@@ -156,7 +156,7 @@ fn parse_b60_number(b60_str: &str) -> i128 {
     let mut power = (places.len() - 1) as u32;
     for p in places {
         total += parse_b60_digit(p) * 60_i128.pow(power);
-        if power > 0 { power -= 1; }
+        power = power.saturating_sub(1);
     }
     total
 }

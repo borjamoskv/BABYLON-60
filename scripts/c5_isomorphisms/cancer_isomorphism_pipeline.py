@@ -11,10 +11,11 @@ Supports --json for Machine-to-Machine orchestration.
 
 import argparse
 import json
+from typing import Any
 
 
 def run_cancer_isomorphism_pipeline(json_output: bool = False) -> None:
-    payload = {
+    payload: dict[str, Any] = {
         "schema_version": "1.0",
         "type": "C5_CANCER_ISOMORPHISM_PIPELINE",
         "category": "Cat(CellularDynamics)",

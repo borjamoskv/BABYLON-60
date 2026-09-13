@@ -44,6 +44,32 @@ class TunnelMessage:
         return asdict(self)
 
 
+def _row_to_tunnel_message(row: Any) -> TunnelMessage:
+    try:
+        payload = json.loads(row["payload"])
+    except Exception:
+        payload = {"raw": row["payload"]}
+
+    resp_payload = None
+    if row["response_payload"]:
+        try:
+            resp_payload = json.loads(row["response_payload"])
+        except Exception:
+            resp_payload = {"raw": row["response_payload"]}
+
+    return TunnelMessage(
+        id=row["id"],
+        source=row["source"],
+        destination=row["destination"],
+        msg_type=row["msg_type"],
+        correlation_id=row["correlation_id"],
+        payload=payload,
+        created_at_ms=row["created_at_ms"],
+        status=row["status"],
+        response_payload=resp_payload,
+    )
+
+
 class TunnelBus:
     """Persistent bidirectional SQLite message broker."""
 
@@ -194,32 +220,6 @@ class TunnelBus:
                 (status, resp_str, msg_id),
             )
             conn.commit()
-
-
-def _row_to_tunnel_message(row: Any) -> TunnelMessage:
-    try:
-        payload = json.loads(row["payload"])
-    except Exception:
-        payload = {"raw": row["payload"]}
-
-    resp_payload = None
-    if row["response_payload"]:
-        try:
-            resp_payload = json.loads(row["response_payload"])
-        except Exception:
-            resp_payload = {"raw": row["response_payload"]}
-
-    return TunnelMessage(
-        id=row["id"],
-        source=row["source"],
-        destination=row["destination"],
-        msg_type=row["msg_type"],
-        correlation_id=row["correlation_id"],
-        payload=payload,
-        created_at_ms=row["created_at_ms"],
-        status=row["status"],
-        response_payload=resp_payload,
-    )
 
     def wait_for_reply(
         self,
