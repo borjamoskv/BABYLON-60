@@ -3,6 +3,7 @@ use tokio::time::{sleep, timeout};
 use rand::Rng;
 
 #[derive(Debug, Clone)]
+#[allow(dead_code)]
 struct Metric {
     iteration: usize,
     t3_latency_ms: u128,

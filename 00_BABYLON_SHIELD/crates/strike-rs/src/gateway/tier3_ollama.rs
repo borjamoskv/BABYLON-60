@@ -35,6 +35,7 @@ struct OllamaOptions {
 }
 
 #[derive(Deserialize, Debug)]
+#[allow(dead_code)]
 struct OllamaGenerateResponse {
     response: String,
     done: bool,

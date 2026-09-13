@@ -21,6 +21,7 @@ use strike_rs::gateway::tier3::{
 };
 
 #[derive(Debug)]
+#[allow(dead_code)]
 struct IterationMetric {
     iteration: usize,
     success: bool,

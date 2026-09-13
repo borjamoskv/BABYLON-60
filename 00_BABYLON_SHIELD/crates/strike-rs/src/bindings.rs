@@ -224,7 +224,7 @@ impl BftWorkerNode {
 
 /// A Python module implemented in Rust.
 
-use crate::bft_iceoryx2::{publish_exergy_packet, subscribe_exergy_packet};
+use crate::bft_iceoryx2::{publish_exergy_packet,  };
 use crate::exergy_binary_ipc::ExergyPacket;
 use std::collections::BTreeMap;
 use ciborium::Value;
