@@ -326,7 +326,8 @@ async def run_cli(args: argparse.Namespace) -> int:
         if args.watch and args.watch > 0:
             print(f"[*] Modo vigilancia activo (Intervalo: {args.watch}s). Presiona Ctrl+C para detener.")
             try:
-                while True:
+                is_watching = True
+                while is_watching:
                     await run_single_cycle(args, orchestrator)
                     await asyncio.sleep(args.watch)
             except (KeyboardInterrupt, asyncio.CancelledError):

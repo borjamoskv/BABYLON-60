@@ -295,21 +295,25 @@ class BountyFeedTransducer:
         frames: List[bytes] = []
         try:
             response = await client.get(url, headers=headers, timeout=10.0)
-            if response.status_code == 200:
-                data = response.json()
-                if isinstance(data, list):
-                    for item in data:
-                        if isinstance(item, dict):
-                            repo_name = str(item.get("name", ""))
-                            repo_url = str(item.get("html_url", ""))
-                            desc = str(item.get("description", "")) if item.get("description") else ""
-                            advisory = self.normalize_contest_repository(
-                                repo_name=repo_name, repo_url=repo_url, description=desc, source="code4rena"
-                            )
-                            if advisory is not None:
-                                frames.append(self.pack_advisory_to_b60ipc(advisory, recipient=recipient))
-            else:
+            if response.status_code != 200:
                 logger.warning("Fallo en sondeo Code4rena: HTTP %s", response.status_code)
+                return frames
+
+            data = response.json()
+            if not isinstance(data, list):
+                return frames
+
+            for item in data:
+                if not isinstance(item, dict):
+                    continue
+                repo_name = str(item.get("name", ""))
+                repo_url = str(item.get("html_url", ""))
+                desc = str(item.get("description", "")) if item.get("description") else ""
+                advisory = self.normalize_contest_repository(
+                    repo_name=repo_name, repo_url=repo_url, description=desc, source="code4rena"
+                )
+                if advisory is not None:
+                    frames.append(self.pack_advisory_to_b60ipc(advisory, recipient=recipient))
         except Exception as exc:  # noqa: BLE001
             logger.error("Error termodinámico en sondeo de Code4rena: %s", exc)
         return frames

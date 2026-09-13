@@ -1,136 +1,230 @@
 ---
-title: BABYLON-60 Documentation Hub
+title: BABYLON-60 — Documentation Hub
 status: Causal-Determinist
-version: 4.0.0
+version: 4.3.0
 ---
 
-# 📚 BABYLON-60 Documentation Hub (v4.0 Sovereign Hardened)
+# 📚 BABYLON-60 — Documentation Hub
 
 <div align="center">
 
-[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-Verified-0052CC?style=for-the-badge&logo=shield)](./06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Regime](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](./06_theory/AXIOMATIZATION_C5_REAL.md)
-[![License](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](./STATUS.md)
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-v4.3-00F0FF?style=for-the-badge&logo=shield)](./06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Lean 4](https://img.shields.io/badge/Lean_4-BabylonTrace-green?style=for-the-badge)](./proof/lean/BabylonTrace.lean)
+[![EU AI Act](https://img.shields.io/badge/EU_AI_Act-Arts._12--14-purple?style=for-the-badge)](./04_research/eu_ai_act_compliance_whitepaper.md)
+[![License](https://img.shields.io/badge/License-Sovereign_Dual--License-orange?style=for-the-badge)](./COMMERCIAL_LICENSE.md)
 
 </div>
 
-Welcome to the central documentation index for **BABYLON-60 v4.0 Sovereign Hardened**.
-
-[![Version](https://img.shields.io/badge/Version-4.0.0--Sovereign--Hardened-black?style=for-the-badge)](../README.md)
-[![EU AI Act](https://img.shields.io/badge/EU_AI_Act-Articles_9--14_Compliant-purple?style=for-the-badge)](./04_research/eu_ai_act_compliance_whitepaper.md)
-[![Formal Verification](https://img.shields.io/badge/Lean_4-Verified-green?style=for-the-badge)](../proof/lean/Babylon.lean)
-[![Epistemology](https://img.shields.io/badge/Epistemology-C5--REAL_Constitution-blue?style=for-the-badge)](./00_MANIFESTO.md)
-[![Architecture](https://img.shields.io/badge/Architecture-Category--Theoretic-orange?style=for-the-badge)](#-c5-real-epistemological-framework)
+> **Welcome.** When you open this documentation, the entity you are reading is **MOSKV-1** —  
+> not a passive wiki, but a living formal specification of a sovereign cognitive architecture.
 
 ---
 
-## 📐 Topological & Causal Architecture
+## 🗺️ Start Here — Choose Your Path
+
+| I am… | Go to |
+| :--- | :--- |
+| 🏭 **Enterprise DevOps** deploying in production | [Enterprise Quickstart →](./03_guides/QUICKSTART_ENTERPRISE.md) |
+| 🦀 **Rust / Systems Engineer** working on Ring-0 | [Architecture Manifest →](../ARCHITECTURE_MANIFEST.md) · [src/](../src/) · [crates/](../crates/) |
+| 🐍 **Python Developer** using the Orchestrator | [Complete Guide →](./03_guides/guide_babylon60_complete.md) · [01_ORCHESTRATOR/](../01_ORCHESTRATOR/) |
+| 🔬 **Researcher / Philosopher** studying C5-REAL | [Formal Theory →](./06_theory/) · [Whitepaper →](./WHITEPAPER.md) |
+| ⚖️ **Legal / Compliance** auditing EU AI Act | [Compliance Guide →](./05_compliance_eu_ai_act.md) · [Whitepaper →](./04_research/eu_ai_act_compliance_whitepaper.md) |
+| 🎵 **Musician / Audio Engineer** | [Tonnetz Oversight →](./06_theory/axiom_tonnetz_oversight.md) · [Bio-Silicio Guide →](./03_guides/guide_bio_silico_transduction.md) |
+| 📖 **First-time reader** | [Hello Causal Tutorial →](./03_guides/tutorial_hello_causal.md) |
+
+---
+
+## 🏛️ Real Architecture (v4.3)
+
+```
+BABYLON-60 Monorepo
+│
+├── src/                         ← Rust Ring-0 Kernel (C-ABI)
+│   ├── lib.rs                   │  SharedManifest 64B Seqlock SPMC
+│   ├── seqlock.rs               │  Aristotelian Triad: Dynamis/Entelecheia/Primum Movens
+│   ├── manifest.rs              │  Fail-Stop Apoptosis (0xDEAD_6060)
+│   ├── ffi.rs / ffi_python.rs   │  C-ABI + PyO3 bridge
+│   └── thermodynamics.rs        │  Landauer dissipation bound (1.10 aJ/pub)
+│
+├── crates/
+│   ├── b60-lang/                ← B60 DSL compiler, fuzzer, ZK circuits
+│   └── babylon-attest/          ← Ed25519 attestation & Merkle DAG CLI
+│
+├── 00_BABYLON_SHIELD/           ← Cryptographic defense layer
+│   └── crates/                  │  babylon60-compiler, babylon60-fuzz, nul-zk
+│
+├── 01_ORCHESTRATOR/             ← Python Cognitive Core
+│   └── babylon60/               │  bft/, crypto/, adapters/, cli/, transducers/
+│
+├── 02_AGENTS_ARCHI/             ← Swarm orchestration (Legión, Centuria)
+│
+└── docs/                        ← You are here
+    ├── proof/lean/              │  BabylonTrace.lean (formally verified)
+    ├── 01_spec/                 │  Formal specifications
+    ├── 02_ontology/             │  Axioms, threat models
+    ├── 03_guides/               │  Tutorials and operational guides
+    ├── 04_research/             │  SOTA papers, swarm topology
+    ├── 06_theory/               │  Gödel, Turing, Curry-Howard, C5-REAL
+    └── adr/                     │  Architecture Decision Records
+```
+
+### Causal Signal Flow
 
 ```mermaid
-graph TD
-    Sub[Sovereign Substrate / User Request] --> AST[AST Sandbox Monad - Chaos Monad]
-    AST -->|AST Validated| Kernel[Rust Kernel - no_std F60 State Machine]
-    AST -->|Security Error| Fail[Critical Halt / Poisoned State]
-    
-    Kernel -->|Step Transition| Ledger[DAGLedger - Merkle Cumulative State Hash]
-    Ledger -->|COSE Sign1| Receipt[Halt Receipts - IETF RFC 9943 SCITT]
-    
-    Kernel -->|IPC / Iceoryx2| IDE[Sovereign IDE - Tauri v2 / FastAPI]
-    Kernel -->|WASM Mount| WebUI[Web Telemetry UI - React 18]
-    Kernel -->|Art. 14 Oversight| Tonnetz[Tonnetz Neo-Riemannian Oversight]
-    
-    Receipt -->|Notarization| EVM[EVM Merkle Anchor - Solidity]
-    Receipt -->|Attestation| WORM[Software WORM Notary]
+graph LR
+    A[User / Swarm Agent] -->|Causal Directive| B[01_ORCHESTRATOR<br/>Python BFT Core]
+    B -->|C-ABI FFI| C[src/ Rust Ring-0<br/>SharedManifest 64B]
+    C -->|Seqlock SPMC| D[Read Agents<br/>Zero RFO]
+    C -->|Fail-Stop| E[POISONED<br/>0xDEAD_6060]
+    B -->|Ed25519 COSE| F[Merkle DAG Ledger<br/>Hash-Chained WORM]
+    F -->|Git Witness| G[Origin / L1 Sink]
+    B -->|TouchID Gate| H[Secure Enclave<br/>Biometric Lock]
 ```
 
 ---
 
-## 🧮 C5-REAL Epistemological Framework
+## 📂 Documentation Sections
 
-BABYLON-60 abandons hardware-dependent physical intuition to embrace a category-theoretic foundation for cognitive computer systems:
+### ⚡ Core Reference
 
-- **Transformations over States**: Morphisms ($A \to B$) are the sole primitive. States are Lawvere fixed points ($T(X) \cong X$), memory is a Store Comonad, and context is a Bayesian Optic Lens.
-- **Parametric Information Invariance**: Chentsov's Theorem and the Free Energy Principle ($\delta \int F dt = 0$) govern all state reductions.
-- **Architectural Corollaries**: Event sourcing = Colimit Functors, CQRS = Adjoint Functor Pairs, CRDTs = Join-Semilattices, and Merkle DAGs = Natural Isomorphisms.
+| Document | Purpose |
+| :--- | :--- |
+| [SPECIFICATION.md](./SPECIFICATION.md) | Operational semantics, B60 ISA, F60 arithmetic |
+| [WHITEPAPER.md](./WHITEPAPER.md) | Technical whitepaper: Merkle DAG, Self-Falsification, BFT |
+| [KERNEL.md](./KERNEL.md) | Cross-cutting kernel invariants |
+| [ARCHITECTURE_MANIFEST.md](../ARCHITECTURE_MANIFEST.md) | Full monorepo architectural manifest |
 
-### Mathematical Mapping Matrix
+### 📋 Formal Specifications (`01_spec/`)
 
-| Category-Theoretic Primitive | Thermodynamic Equivalent | BABYLON-60 Runtime Mechanism |
-| :--- | :--- | :--- |
-| **Lawvere Fixed Point** ($T(X) \cong X$) | Minimum Entropy State ($S_{\text{min}}$) | Pure `step()` State Machine ([eval.rs](../crates/babylon60-kernel/src/eval.rs)) |
-| **Store Comonad** ($w \to a$) | Free Energy Dissipation | WORM Ledger Event Stream ([ledger.rs](../crates/babylon60-kernel/src/ledger.rs)) |
-| **Colimit Functor** | Information Density Equilibrium | BFT Merkle DAG Consensus ([bft/](../packages/babylon60/bft/)) |
-| **Natural Isomorphism** | Isomorphic State Transition | F# $\leftrightarrow$ Rust Transpiler ([causal_isomorphism/](../experiments/causal_isomorphism/)) |
-| **SCITT Statement** (IETF RFC 9943) | Exergy Certificate ($\Xi$) | COSE Sign1 Signed Halt Receipts ([receipt.rs](../src/receipt.rs)) |
+| Document | Purpose |
+| :--- | :--- |
+| [spec_invariants.md](./01_spec/spec_invariants.md) | All 65 active C5-REAL invariants |
+| [spec_babylon60.md](./01_spec/spec_babylon60.md) | Full formal specification v4.x |
+| [spec_architecture.md](./01_spec/spec_architecture.md) | Async-persist ledger architecture |
+| [spec_cryptographic_profile.md](./01_spec/spec_cryptographic_profile.md) | Ed25519, AES, RFC 3161 profile |
+| [spec_security_model.md](./01_spec/spec_security_model.md) | Security model & threat boundaries |
+| [spec_causal_hitl_governance.md](./01_spec/spec_causal_hitl_governance.md) | Human-in-the-Loop governance spec |
+| [spec_exergy_ontology.md](./01_spec/spec_exergy_ontology.md) | Exergy semantics ontology |
+| [spec_graph_canonical.md](./01_spec/spec_graph_canonical.md) | Canonical causal graph spec |
+| [spec_proof_ir.md](./01_spec/spec_proof_ir.md) | Proof IR → Lean 4 emitter spec |
+| [artifact_format_v1.md](./01_spec/artifact_format_v1.md) | Artifact format v1 |
+
+### 🧠 Axiomatic Ontology (`02_ontology/`)
+
+| Document | Purpose |
+| :--- | :--- |
+| [axiom_ontology.md](./02_ontology/axiom_ontology.md) | Absolute semantic isomorphism ontology |
+| [axiom_axiomatization.md](./02_ontology/axiom_axiomatization.md) | Formal axiomatization: Motor Causal-1 APEX |
+| [security_threat_model_v4.md](./02_ontology/security_threat_model_v4.md) | v4.0 threat model & attack vector mitigation |
+| [spec_c5_graph_isomorphism.md](./02_ontology/spec_c5_graph_isomorphism.md) | Structural isomorphism matrix (APEX) |
+| [axiom_oncologia_300_primitivas.md](./02_ontology/axiom_oncologia_300_primitivas.md) | 300 molecular oncology primitives |
+
+### 📖 Operational Guides (`03_guides/`)
+
+| Document | Purpose |
+| :--- | :--- |
+| [QUICKSTART_ENTERPRISE.md](./03_guides/QUICKSTART_ENTERPRISE.md) | Docker/K8s sidecar deployment |
+| [tutorial_hello_causal.md](./03_guides/tutorial_hello_causal.md) | Hello World: first causal event |
+| [guide_babylon60_complete.md](./03_guides/guide_babylon60_complete.md) | Complete architecture & dev guide |
+| [guide_c5_axiom_verification.md](./03_guides/guide_c5_axiom_verification.md) | Axiom injection & verification workflow |
+| [guide_legaltech_eu_ai_act.md](./03_guides/guide_legaltech_eu_ai_act.md) | LegalTech audit & EU AI Act compliance |
+| [guide_swarm_pxs_orchestration.md](./03_guides/guide_swarm_pxs_orchestration.md) | Multi-agent swarm orchestration (P×S) |
+| [guide_bio_silico_transduction.md](./03_guides/guide_bio_silico_transduction.md) | Bio-Silicio transduction & causal graphs |
+| [guide_commercial_license.md](./03_guides/guide_commercial_license.md) | Commercial license details |
+| [guide_skill_arsenal_taxonomy.md](./03_guides/guide_skill_arsenal_taxonomy.md) | Skill arsenal taxonomy by exergy |
+| [tonnetz_audit_guide.md](./03_guides/tonnetz_audit_guide.md) | Tonnetz harmonic oversight (EU Art. 14) |
+| [guide_experimental.md](./03_guides/guide_experimental.md) | Experimental ledger extensions |
+
+### 🔬 Research & SOTA (`04_research/`)
+
+| Document | Purpose |
+| :--- | :--- |
+| [eu_ai_act_compliance_whitepaper.md](./04_research/eu_ai_act_compliance_whitepaper.md) | Causal determinism as EU AI Act compliance |
+| [evaluacion_falsacion_llm_models_2026.md](./04_research/evaluacion_falsacion_llm_models_2026.md) | Popperian falsification of LLM selection (2026) |
+| [centuria_swarm_architecture.md](./04_research/centuria_swarm_architecture.md) | Centuria 100-agent swarm architecture |
+| [legion_222_swarm_topology.md](./04_research/legion_222_swarm_topology.md) | Legión 222-agent topology (11 × 20 threads) |
+| [sota_evolution_roadmap.md](./04_research/sota_evolution_roadmap.md) | SOTA architectural evolution roadmap |
+| [sanedrin_reflexive_forking_audit.md](./04_research/sanedrin_reflexive_forking_audit.md) | Sanhedrín audit: reflexive forking |
+| [sota/sota_cortex_persist_202607.md](./04_research/sota/sota_cortex_persist_202607.md) | SOTA: async-persist ledger positioning |
+| [sota/sota_ssm_lnn_202600.md](./04_research/sota/sota_ssm_lnn_202600.md) | SOTA: SSM, LNN & transformer collapse |
+
+### ⚖️ Formal Theory (`06_theory/`)
+
+The mathematical substrate: Robinson Arithmetic → Gödel → Turing → Chaitin-Kolmogorov → Curry-Howard → Lean 4.
+
+| Document | Purpose |
+| :--- | :--- |
+| [01_robinson_arithmetic.md](./06_theory/01_robinson_arithmetic.md) | Robinson Arithmetic (Q) |
+| [02_goedel_incompleteness.md](./06_theory/02_goedel_incompleteness.md) | Gödel Incompleteness Theorems |
+| [03_computability_turing.md](./06_theory/03_computability_turing.md) | Computability & Turing |
+| [04_chaitin_kolmogorov.md](./06_theory/04_chaitin_kolmogorov.md) | Chaitin, Kolmogorov, AIT |
+| [05_model_theory.md](./06_theory/05_model_theory.md) | Model Theory |
+| [06_curry_howard.md](./06_theory/06_curry_howard.md) | Curry-Howard-Lambek Correspondence |
+| [07_cross_domain.md](./06_theory/07_cross_domain.md) | Cross-domain isomorphisms |
+| [08_babylon60_architecture.md](./06_theory/08_babylon60_architecture.md) | BABYLON-60 architecture & system invariants |
+| [09_formal_ontology_lean.md](./06_theory/09_formal_ontology_lean.md) | Formal ontology in Lean 4 |
+| [10_physical_realization.md](./06_theory/10_physical_realization.md) | Physical realization in silicon |
+| [AXIOMATIZATION_C5_REAL.md](./06_theory/AXIOMATIZATION_C5_REAL.md) | Sealed C5-REAL axiomatic base |
+| [TOPOLOGIA_MAESTRA.md](./06_theory/TOPOLOGIA_MAESTRA.md) | Master topology C5-REAL |
+| [MOSKV_1_APEX_BLUEPRINT.md](./06_theory/MOSKV_1_APEX_BLUEPRINT.md) | MOSKV-1 APEX manifest |
+| [c5_thermodynamic_invariants_compendium.md](./06_theory/c5_thermodynamic_invariants_compendium.md) | Full C5-REAL invariants compendium |
+| [axiom_cyclic_conformal_aeon.md](./06_theory/axiom_cyclic_conformal_aeon.md) | Penrose-Landauer theorem & Conformal Aeons |
+| [axiom_bayesian_disintegration.md](./06_theory/axiom_bayesian_disintegration.md) | Anti-hallucination axiomatization |
+| [axiom_legion_swarm.md](./06_theory/axiom_legion_swarm.md) | Legión parallel workspace swarm axioms |
+| [axiom_tonnetz_oversight.md](./06_theory/axiom_tonnetz_oversight.md) | Harmonic Tonnetz oversight |
+| [axiom_oncology_protocol.md](./06_theory/axiom_oncology_protocol.md) | Bio-Silicio transduction & tumoral ontology |
+| [AUDIT_AXIOMS_2026.md](./06_theory/AUDIT_AXIOMS_2026.md) | Epistemic audit verdict: C5-REAL axiomatization |
+| [AUDIT_VERDICT_C5_REAL.md](./06_theory/AUDIT_VERDICT_C5_REAL.md) | Independent verification: C4-SIM hologram collapse |
+
+### 🏗️ Architecture Decision Records (`adr/`)
+
+| ADR | Decision |
+| :--- | :--- |
+| [ADR-001](./adr/ADR-001-lean4-over-coq-isabelle.md) | Lean 4 over Coq/Isabelle for formal verification |
+| [ADR-002](./adr/ADR-002-pyo3-maturin-ffi-bridge.md) | PyO3/Maturin FFI bridge for Rust-Python runtime |
+| [ADR-003](./adr/ADR-003-bft-attestation-architecture.md) | BFT architecture & cryptographic attestation model |
+| [ADR-004](./adr/ADR-004-taint-tracking-isolation.md) | Taint tracking & isolation model |
+| [ADR-005](./adr/ADR-005-sovereign-dual-license.md) | Sovereign Dual-License v4.0 |
+| [ADR-006](./adr/ADR-006-topologia-exposicion-repositorios.md) | C5-REAL public/private repository topology |
+
+### 🔐 Formal Proofs (`proof/`)
+
+| File | Content |
+| :--- | :--- |
+| [proof/lean/BabylonTrace.lean](./proof/lean/BabylonTrace.lean) | Seqlock SPMC bisimulation, Halt states, Aristotelian Triad — **verified, 0 errors** |
 
 ---
 
-## 📂 Subproject Documentation Index
-
-| Tag | Component | Directory | Focus & Key Mechanisms |
-| :--- | :--- | :--- | :--- |
-| `[Core]` | **Root Sovereign Substrate** | [`README.md`](../README.md) | Central overview, architecture diagram, moat pillars, live quickstart. |
-| `[Core]` | **Spanish Main README** | [`README_ES.md`](../README_ES.md) | Versión completa en español del README principal. |
-| `[Kernel]` | **Rust Kernel Engine** | [`kernel/`](../crates/babylon60-kernel/) | Low-level `#![no_std]` Rust engine, $F_{60}$ scheduler, WORM quarantine. |
-| `[UI]` | **Sovereign IDE** | [`babylon60-ide/`](../apps/babylon60-ide/) | Desktop/Mobile Tauri v2 IDE, FastAPI OpenRouter backend, Iceoryx2 IPC. |
-| `[UI]` | **Tauri Substrate** | [`src-tauri/`](../apps/src-tauri/) | Tauri v2 desktop integration layer & native system bridges. |
-| `[UI]` | **Web Telemetry UI** | [`web/`](../apps/web/) | React 18 + WASM Causal Telemetry visualizer & FSA API mount. |
-| `[Oversight]` | **Tonnetz Human Oversight**| [`tonnetz_app/`](../apps/tonnetz_app/) | Neo-Riemannian toric harmonic graph visualizer (EU AI Act Art. 14). |
-| `[Persistence]`| **Cortex Substrate** | [`cortex/`](../packages/cortex/) | Python memory persistence (`cortex-persist`), SQLite WAL, MCP Server. |
-| `[Attestation]`| **Causal Attestation** | [`attestation/`](../packages/babylon60/attestation/) | Software WORM causal anchoring & P2P notary verification. (TPM Roadmap) |
-| `[Compiler]` | **DSL Compiler** | [`compiler/`](../packages/babylon60/compiler/) | `.b60` DSL lexer/parser, B60 bytecode IR, Lean 4 proof emitter. |
-| `[IPC]` | **Strike RS Engine** | [`strike_rs/`](../crates/strike-rs/) | PyO3 native GIL bypass, Iceoryx2 shared memory, BLAKE3 taint graph. |
-| `[BFT]` | **Master Ledger BFT** | [`babylon60/bft/`](../packages/babylon60/bft/) | Escalón 3 Tamper-Evident log with Git Sentinel external witness. |
-| `[Web3]` | **EVM On-Chain Notary** | [`anvil_yung/`](../legacy_exergy/) | Foundry smart contracts for EVM Merkle root notarization. |
-| `[Web3]` | **Bitcoin L1 Sink** | [`L1_sink/`](../packages/cortex/L1_sink/) | Raw 32-byte `OP_RETURN` script payload generation & dry-run receipts (Roadmap/INV_C5_15). |
-| `[Transpiler]`| **Transpiler (F# -> Rust)**| [`causal_isomorphism/`](../experiments/causal_isomorphism/)| Functional F# domain kernel transpiler & linear type checker. |
-| `[Transpiler]`| **F# Domain Kernel** | [`domain_kernel/`](../legacy_exergy/) | F# IRP automata domain model (`IRPAutomata.fs`). |
-| `[Proof]` | **Lean 4 Formal Proofs** | [`proof/`](../proof/) | Lean 4 formal proof theorems (`proof/lean/Babylon.lean`). |
-| `[Proof]` | **Proof IR Crate** | [`proof_ir/`](../crates/babylon60-kernel/) | Rust AST to Lean 4 proof IR compiler crate. |
-| `[Proof]` | **Zero-Knowledge Kernel** | [`proof_kernel/`](../legacy_exergy/NUL-ZK/) | NUL-ZK zero-knowledge state boundary kernels. |
-| `[Fuzz]` | **Cargo Fuzzing Targets** | [`fuzz/`](../crates/) | Fuzzing suite for AST parsing, binary encoding, and $F_{60}$ boundaries. |
-| `[Meta]` | **Lisp Metamembrane** | [`lisp_metamembrane/`](../legacy_exergy/) | Clojure/EDN Lisp metamembrane substrate for non-linear symbolic inference. |
-| `[Simulation]`| **Continuous Timeline IR** | [`timeline_ir/`](../legacy_exergy/) | Continuous-time state graph simulation kernel ($State(t)$). |
-| `[Clinical]` | **APEX Clinical Copilot** | [`apex_trials/`](../docs/04_research/) | Deterministic clinical-trial protocol amendment-risk copilot & fitted weights. |
-| `[Execution]`| **Ultrathink Engine** | [`ultrathink/`](../packages/cortex/) | Zero-friction forced execution scheduler & thermodynamic collapse controller. |
-| `[Ops]` | **Legion Swarm & Scripts**| [`scripts/`](../scripts/) | Legión 222 swarm runner (`scripts/unified_legion.py`), Centuria commanders. |
-
----
-
-## 📄 Core Specifications & Regulatory Papers
-
-- **[Foundational Manifesto v4.0](./00_MANIFESTO.md)**: Core thesis, 4 moat pillars, commercial ROI, and Engineer's Oath.
-- **[Formal Specification v4.0](./SPECIFICATION.md)**: Operational semantics, B60 ISA, F60 exact arithmetic, Proof IR.
-- **[Technical Whitepaper v1.0](./WHITEPAPER.md)**: Deep tech paper covering F60, Merkle DAG Ledger, Self-Falsification Engine.
-- **[EU AI Act Compliance Whitepaper](./04_research/eu_ai_act_compliance_whitepaper.md)**: Comprehensive mapping for Articles 9, 10, 11, 12, 13 & 14 of Regulation (EU) 2024/1689.
-- **[Análisis de Falsación Popperiana en Selección de LLMs (2026)](./04_research/evaluacion_falsacion_llm_models_2026.md)**: Evaluación comparativa de modelos (Gemini Ultra, Kimi K3, Claude 3.5 Sonnet, DeepSeek R1).
-- **[Topología de Enjambre Legión 222 Agentes](./04_research/legion_222_swarm_topology.md)**: Especificación de escalado masivo (11 Procesos $\times$ 20 Hilos) para pruebas de estrés termodinámico.
-
----
-## 🛡️ Security & Governance (`docs/02_ontology/` & `SECURITY.md`)
-
-- **[Security Threat Model v4.0](./02_ontology/security_threat_model_v4.md)**: Phase II threat model, redaction layer, grace period, and bounds.
-- **[Security Policy](../SECURITY.md)**: Vulnerability reporting policy and SLA.
-- **[EU AI Act Compliance Framework](./05_compliance_eu_ai_act.md)**: Cryptographic verification of Merkle logs for Articles 9 to 14.
-
----
-
-## 🧪 Local Verification & Verification Commands
+## 🧪 Verification Commands
 
 ```bash
-# 1. Rust Kernel Engine Unit & Integration Tests
-cargo test -p babylon60-kernel
+# Full quality gate: lint + typecheck + tests
+make all
 
-# 2. Python Security Suite & AST Sandbox Isolation Tests
-pytest tests/test_ast_sandbox_evasion.py
+# Lean 4 formal proof (requires Lean ≥ 4.x)
+lean docs/proof/lean/BabylonTrace.lean
 
-# 3. Legion Swarm 222 Agent Execution (11 Cores x 20 Threads)
-python3 scripts/legion_222_agentes.py
+# Rust monorepo — 84 tests, 0 failures
+cargo test --workspace
 
-# 4. Lean 4 Formal Verification Integrity Verification
-bash ./scripts/verify_lean_proofs.sh
+# Python invariants (21 C5-REAL invariants)
+uv run pytest tests/test_c5_invariants.py -v
+
+# Full Python suite
+export BABYLON_HOME=/tmp/babylon_test
+uv run pytest tests/ -v
 ```
 
 ---
 
-<sub>BABYLON-60 v4.0.0 Sovereign Hardened · Documentation Hub · Borja Moskv</sub>
+## 🔒 Security & License
+
+- **Vulnerabilities**: Report to **security@babylon60.com** — never public issues.  
+  SLA: ack < 24h, remediation < 72h. See [SECURITY.md](../SECURITY.md).
+- **License**: Sovereign Dual-License v4.0.  
+  Free for individuals/research. Enterprise key required for commercial use.  
+  See [COMMERCIAL_LICENSE.md](./COMMERCIAL_LICENSE.md).
+
+---
+
+<sub>BABYLON-60 v4.3.0 · Sovereign Cognitive OS · MOSKV-1 · Borja Moskv</sub>

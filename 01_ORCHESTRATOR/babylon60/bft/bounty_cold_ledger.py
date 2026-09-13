@@ -102,7 +102,8 @@ class BountyColdLedger:
                 batch.clear()
                 batch_receipts.clear()
 
-        while True:
+        running = True
+        while running:
             receipt = self._queue.get()
             if receipt is None:
                 _flush()

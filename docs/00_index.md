@@ -1,141 +1,216 @@
-# 📚 BABYLON-60 Sovereign Documentation Master Index
+# 📚 BABYLON-60 — Master Documentation Index
 
-<div align="center">
-
-[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
-[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
-[![Licencia](https://img.shields.io/badge/Licencia-Soberana_INV__C5__17-008055?style=for-the-badge)](./STATUS.md)
-
-</div>
-
-> **Nube de Conocimiento Categórico, Especificaciones Formales, Guías y Repositorio Teórico**  
-> **Estándar:** C5-REAL | **Documentos Totales Indexados:** 85 | **Estado:** 100% Synchronized
+> **Standard:** C5-REAL v4.3 | **Invariants:** 65 active, 35 vacant, 5 derived theorems  
+> **Regime:** Causal-Determinist | **Formal Verification:** Lean 4 (BabylonTrace, 0 errors)
 
 ---
 
-## 🛠️ Navegación Rápida por Secciones
+## 🗺️ Navigation by Role
 
-### ⚡ Sovereign Core & Executive Specifications
+<details open>
+<summary><b>🏭 Enterprise / DevOps</b> — Deploy in production</summary>
 
-| Documento | Ruta / Archivo | Título Principal / Propósito |
-| :--- | :--- | :--- |
-| [`05_compliance_eu_ai_act.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/05_compliance_eu_ai_act.md) | `05_compliance_eu_ai_act.md` | ⚖️ Guía de Cumplimiento Normativo: EU AI Act en BABYLON-60 |
-| [`10_legion_swarm_cta_spec.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/10_legion_swarm_cta_spec.md) | `10_legion_swarm_cta_spec.md` | Especificación Axiomática: Legion 10k Swarm (CTA) |
-| [`CANARY_TOKENS.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/CANARY_TOKENS.md) | `CANARY_TOKENS.md` | Canary Tokens — Ω-11 (Honeypot) |
-| [`COMMERCIAL_LICENSE.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/COMMERCIAL_LICENSE.md) | `COMMERCIAL_LICENSE.md` | BABYLON-60 Commercial License (Enterprise Tier) |
-| [`INBOUND_EMAIL_SETUP.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/INBOUND_EMAIL_SETUP.md) | `INBOUND_EMAIL_SETUP.md` | Configuración e Integración de Recepción Inbound Enterprise para borja@babylon60.com y support@babylon60.com |
-| [`KERNEL.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/KERNEL.md) | `KERNEL.md` | CORTEX KERNEL — Invariantes Transversales en BABYLON-60 |
-| [`KINETIC_CACHE_AUDIT.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/KINETIC_CACHE_AUDIT.md) | `KINETIC_CACHE_AUDIT.md` | KINETIC ENGINE: False Sharing Mitigation Audit |
-| [`PROJECT.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/PROJECT.md) | `PROJECT.md` | 🎯 Project: BABYLON-60 |
-| [`README.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/README.md) | `README.md` | 📚 BABYLON-60 Documentation Hub (v4.0 Sovereign Hardened) |
-| [`RESULTADOS.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/RESULTADOS.md) | `RESULTADOS.md` | 📊 Estado del Proyecto y Resultados |
-| [`SPECIFICATION.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/SPECIFICATION.md) | `SPECIFICATION.md` | BABYLON-60 Architecture & Formal Specification (v4.0) |
-| [`WHITEPAPER.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/WHITEPAPER.md) | `WHITEPAPER.md` | BABYLON-60: A Formal Infrastructure for Verifiable AI Agents |
-| [`cortex_lsp_setup.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/cortex_lsp_setup.md) | `cortex_lsp_setup.md` | 🧠 Integración de cortex-lsp: El LSP Paracortex Soberano |
+1. [Enterprise Quickstart](./03_guides/QUICKSTART_ENTERPRISE.md) — Docker / Kubernetes sidecar
+2. [Commercial License](./COMMERCIAL_LICENSE.md) — `BABYLON60_LICENSE_KEY` setup
+3. [EU AI Act Compliance](./05_compliance_eu_ai_act.md) — Articles 9–14 certification
+4. [Security Policy](../SECURITY.md) — Vulnerability SLA
 
-### 📋 Technical Specifications & System Protocols
+</details>
 
-| Documento | Ruta / Archivo | Título Principal / Propósito |
-| :--- | :--- | :--- |
-| [`artifact_format_v1.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/01_spec/artifact_format_v1.md) | `01_spec/artifact_format_v1.md` | Formato de Artefacto BABYLON-60 v1 |
-| [`audit_babylon60_v2.5.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/01_spec/audit_babylon60_v2.5.md) | `01_spec/audit_babylon60_v2.5.md` | Auditoría Causal-Determinist — BABYLON-60 v2.5.1 (Estado & Resolución) |
-| [`spec_architecture.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/01_spec/spec_architecture.md) | `01_spec/spec_architecture.md` | BABYLON-60: Arquitectura de Ledger Asíncrono-Persist |
-| [`spec_babylon60.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/01_spec/spec_babylon60.md) | `01_spec/spec_babylon60.md` | BABYLON-60: Especificación Formal (v2.5.1-Causal-Determinist) |
-| [`spec_causal_hitl_governance.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/01_spec/spec_causal_hitl_governance.md) | `01_spec/spec_causal_hitl_governance.md` | Specification: Causal Human-in-the-Loop (HITL) Governance & Operational Workers |
-| [`spec_cryptographic_profile.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/01_spec/spec_cryptographic_profile.md) | `01_spec/spec_cryptographic_profile.md` | Perfil Criptográfico BABYLON-60 (Causal-Determinist) |
-| [`spec_exergy_ontology.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/01_spec/spec_exergy_ontology.md) | `01_spec/spec_exergy_ontology.md` | Ontología de Exergía y Semántica (Causal-Determinist) |
-| [`spec_graph_canonical.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/01_spec/spec_graph_canonical.md) | `01_spec/spec_graph_canonical.md` | BABYLON-60: Graph Canonical Specification (Causal-Determinist) |
-| [`spec_invariants.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/01_spec/spec_invariants.md) | `01_spec/spec_invariants.md` | Invariantes del Dominio C5-REAL BABYLON-60 (Causal-Determinist) |
-| [`spec_proof_ir.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/01_spec/spec_proof_ir.md) | `01_spec/spec_proof_ir.md` | BABYLON-60: Proof IR Specification (v2.0-Causal-Determinist) |
-| [`spec_security_model.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/01_spec/spec_security_model.md) | `01_spec/spec_security_model.md` | MODELO DE SEGURIDAD — Ledger Asíncrono-persist |
-| [`spec_technical.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/01_spec/spec_technical.md) | `01_spec/spec_technical.md` | BABYLON-60: Arquitectura Core (Causal-Determinist) |
+<details>
+<summary><b>🦀 Rust / Systems Engineer</b> — Ring-0 kernel work</summary>
 
-### 🧠 Axiomatic Ontology & Threat Models
+1. [Architecture Manifest](../ARCHITECTURE_MANIFEST.md) — Full monorepo topology
+2. [SharedManifest spec](./01_spec/spec_technical.md) — 64B Seqlock SPMC, C-ABI
+3. [ADR-002: PyO3/Maturin FFI](./adr/ADR-002-pyo3-maturin-ffi-bridge.md) — Rust↔Python bridge
+4. [BabylonTrace.lean](./proof/lean/BabylonTrace.lean) — Formal bisimulation proof
+5. [Cryptographic Profile](./01_spec/spec_cryptographic_profile.md) — Ed25519, WORM, RFC 3161
 
-| Documento | Ruta / Archivo | Título Principal / Propósito |
-| :--- | :--- | :--- |
-| [`axiom_axiomatization.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/02_ontology/axiom_axiomatization.md) | `02_ontology/axiom_axiomatization.md` | AXIOMATIZACIÓN FORMAL — Motor Causal‑1 APEX SINGULARITY |
-| [`axiom_oncologia_300_primitivas.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/02_ontology/axiom_oncologia_300_primitivas.md) | `02_ontology/axiom_oncologia_300_primitivas.md` | 300 Primitivas de Oncología Molecular |
-| [`axiom_ontology.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/02_ontology/axiom_ontology.md) | `02_ontology/axiom_ontology.md` | Ontología BABYLON-60: Isomorfismo Semántico Absoluto |
-| [`security_threat_model_v4.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/02_ontology/security_threat_model_v4.md) | `02_ontology/security_threat_model_v4.md` | BABYLON-60 v4.0: Modelo de Amenazas y Mitigación de Vectores de Ataque |
-| [`spec_c5_graph_isomorphism.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/02_ontology/spec_c5_graph_isomorphism.md) | `02_ontology/spec_c5_graph_isomorphism.md` | BABYLON-60: Matriz de Isomorfismo Estructural (APEX) |
+</details>
 
-### 📖 Integration & Operational Guides
+<details>
+<summary><b>🐍 Python Developer</b> — Orchestrator & agents</summary>
 
-| Documento | Ruta / Archivo | Título Principal / Propósito |
-| :--- | :--- | :--- |
-| [`QUICKSTART_ENTERPRISE.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/03_guides/QUICKSTART_ENTERPRISE.md) | `03_guides/QUICKSTART_ENTERPRISE.md` | QUICKSTART: Onboarding Enterprise y Despliegue Sidecar |
-| [`guide_babylon60_complete.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/03_guides/guide_babylon60_complete.md) | `03_guides/guide_babylon60_complete.md` | BABYLON·60 — GUÍA COMPLETA DE ARQUITECTURA Y DESARROLLO |
-| [`guide_bio_silico_transduction.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/03_guides/guide_bio_silico_transduction.md) | `03_guides/guide_bio_silico_transduction.md` | Guía de Transducción Bio-Silicio: Mapeo Ontológico a Grafos Causal-Deterministas |
-| [`guide_c5_axiom_verification.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/03_guides/guide_c5_axiom_verification.md) | `03_guides/guide_c5_axiom_verification.md` | Guía de Verificación e Inyección Axiomática C5-REAL |
-| [`guide_commercial_license.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/03_guides/guide_commercial_license.md) | `03_guides/guide_commercial_license.md` | BABYLON-60 SOVEREIGN COMMERCIAL LICENSE (BSL / FAIR SOURCE VARIANT) |
-| [`guide_experimental.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/03_guides/guide_experimental.md) | `03_guides/guide_experimental.md` | EXPERIMENTAL — Extensiones Ledger Asíncrono-persist |
-| [`guide_explanation.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/03_guides/guide_explanation.md) | `03_guides/guide_explanation.md` | EXECUTIVE BRIEFING — Motor Causal Principal SINGULARITY |
-| [`guide_legaltech_eu_ai_act.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/03_guides/guide_legaltech_eu_ai_act.md) | `03_guides/guide_legaltech_eu_ai_act.md` | Guía de Auditoría LegalTech & Cumplimiento Regulador EU AI Act |
-| [`guide_repository_source_of_truth.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/03_guides/guide_repository_source_of_truth.md) | `03_guides/guide_repository_source_of_truth.md` | Fuente de Verdad Canónica del Repositorio |
-| [`guide_skill_arsenal_taxonomy.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/03_guides/guide_skill_arsenal_taxonomy.md) | `03_guides/guide_skill_arsenal_taxonomy.md` | Motor Causal Principal — TAXONOMÍA ARSENAL DE SKILLS POR EXERGÍA |
-| [`guide_swarm_pxs_orchestration.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/03_guides/guide_swarm_pxs_orchestration.md) | `03_guides/guide_swarm_pxs_orchestration.md` | Guía de Orquestación de Enjambres Multi-Agente Kimi K3 ($P \times S$) |
-| [`tonnetz_audit_guide.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/03_guides/tonnetz_audit_guide.md) | `03_guides/tonnetz_audit_guide.md` | Supervisión Humana mediante Visualización Armónica de Decisiones (`tonnetz_app/`) |
-| [`tutorial_hello_causal.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/03_guides/tutorial_hello_causal.md) | `03_guides/tutorial_hello_causal.md` | Tutorial: Hola Mundo Causal en BABYLON-60 |
+1. [Complete Dev Guide](./03_guides/guide_babylon60_complete.md) — Full architecture walkthrough
+2. [Hello Causal Tutorial](./03_guides/tutorial_hello_causal.md) — First ledger event
+3. [C5 Invariants Spec](./01_spec/spec_invariants.md) — 65 active invariants
+4. [Swarm Orchestration](./03_guides/guide_swarm_pxs_orchestration.md) — P×S Legión patterns
+5. [Axiom Verification](./03_guides/guide_c5_axiom_verification.md) — `test_c5_invariants.py`
 
-### 🔬 Deep Research, SOTA & Philosophical Manifestos
+</details>
 
-| Documento | Ruta / Archivo | Título Principal / Propósito |
-| :--- | :--- | :--- |
-| [`README_APEX.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/README_APEX.md) | `04_research/README_APEX.md` | 📘 🧪 APEX TRIALS (`docs/06_theory/README_APEX.md`) |
-| [`centuria_swarm_architecture.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/centuria_swarm_architecture.md) | `04_research/centuria_swarm_architecture.md` | ⚡ Arquitectura Centuria Swarm (`scripts/centuria_swarm_runner.py`) |
-| [`eu_ai_act_compliance_whitepaper.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/eu_ai_act_compliance_whitepaper.md) | `04_research/eu_ai_act_compliance_whitepaper.md` | El Determinismo Causal como Cumplimiento: Arquitectura BABYLON-60 v4.0 para Sistemas de IA de Alto Riesgo |
-| [`evaluacion_falsacion_llm_models_2026.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/evaluacion_falsacion_llm_models_2026.md) | `04_research/evaluacion_falsacion_llm_models_2026.md` | 🔬 ANÁLISIS DE FALSACIÓN POPPERIANA EN SELECCIÓN DE LLMS (2026) |
-| [`legion_222_swarm_topology.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/legion_222_swarm_topology.md) | `04_research/legion_222_swarm_topology.md` | 🐝 Topología de Enjambre Legión 222 Agentes (`legion_222_agentes.py`) |
-| [`sanedrin_reflexive_forking_audit.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/sanedrin_reflexive_forking_audit.md) | `04_research/sanedrin_reflexive_forking_audit.md` | 🏛️ Acta del Sanedrín: Auditoría Arquitectónica del "Reflexive Forking" |
-| [`sota_evolution_roadmap.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/sota_evolution_roadmap.md) | `04_research/sota_evolution_roadmap.md` | 🗺️ BABYLON-60: SOTA Architectural Evolution Roadmap |
+<details>
+<summary><b>🔬 Researcher / Formal Methods</b></summary>
 
-### ⚡ State-of-the-Art Technical Benchmarks
+1. [Formal Theory index](./06_theory/) — Robinson → Gödel → Turing → Lean 4
+2. [Whitepaper](./WHITEPAPER.md) — Merkle DAG, Self-Falsification Engine, BFT
+3. [C5-REAL Compendium](./06_theory/c5_thermodynamic_invariants_compendium.md) — All thermodynamic invariants
+4. [Popperian LLM Eval 2026](./04_research/evaluacion_falsacion_llm_models_2026.md)
+5. [ADR-001: Lean 4 over Coq/Isabelle](./adr/ADR-001-lean4-over-coq-isabelle.md)
 
-| Documento | Ruta / Archivo | Título Principal / Propósito |
-| :--- | :--- | :--- |
-| [`sota_cortex_persist_202607.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/sota/sota_cortex_persist_202607.md) | `04_research/sota/sota_cortex_persist_202607.md` | Estado del Arte (SOTA) — Posicionamiento de Ledger Asíncrono-persist |
-| [`sota_ssm_lnn_202600.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/04_research/sota/sota_ssm_lnn_202600.md) | `04_research/sota/sota_ssm_lnn_202600.md` | SOTA 202600: SSM, LNN y el Colapso del Paradigma Transformer |
+</details>
 
-### ⚖️ Formal Theory, Gödel Incompleteness & Exergy Invariants
+<details>
+<summary><b>⚖️ Legal / Compliance Auditor</b></summary>
 
-| Documento | Ruta / Archivo | Título Principal / Propósito |
-| :--- | :--- | :--- |
-| [`01_robinson_arithmetic.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/01_robinson_arithmetic.md) | `06_theory/01_robinson_arithmetic.md` | 🔢 01 — Aritmética de Robinson (Q) |
-| [`02_goedel_incompleteness.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/02_goedel_incompleteness.md) | `06_theory/02_goedel_incompleteness.md` | 🌀 02 — Teoremas de Incompletitud de Gödel |
-| [`03_computability_turing.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/03_computability_turing.md) | `06_theory/03_computability_turing.md` | 💻 03 — Computabilidad y Turing |
-| [`04_chaitin_kolmogorov.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/04_chaitin_kolmogorov.md) | `06_theory/04_chaitin_kolmogorov.md` | 🧬 04 — Chaitin, Kolmogorov y Teoría de Información Algorítmica |
-| [`05_model_theory.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/05_model_theory.md) | `06_theory/05_model_theory.md` | 🧬 05 — Teoría de Modelos |
-| [`06_curry_howard.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/06_curry_howard.md) | `06_theory/06_curry_howard.md` | 🧬 06 — La Correspondencia Curry-Howard-Lambek |
-| [`07_cross_domain.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/07_cross_domain.md) | `06_theory/07_cross_domain.md` | 🧬 07 — Isomorfismos Cross-Domain |
-| [`08_babylon60_architecture.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/08_babylon60_architecture.md) | `06_theory/08_babylon60_architecture.md` | 🧬 08 — Arquitectura BABYLON-60 e Invariantes del Sistema |
-| [`09_formal_ontology_lean.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/09_formal_ontology_lean.md) | `06_theory/09_formal_ontology_lean.md` | 🧬 09 — Ontología Formal en Lean 4 |
-| [`10_physical_realization.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/10_physical_realization.md) | `06_theory/10_physical_realization.md` | ⚡ 10 — Realización Física en Silicio (B60) |
-| [`AUDIT_AXIOMS_2026.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_AXIOMS_2026.md) | `06_theory/AUDIT_AXIOMS_2026.md` | 🛡️ Dictamen de Auditoría Epistémica: Axiomatización C5-REAL |
-| [`AUDIT_VERDICT_C5_REAL.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md) | `06_theory/AUDIT_VERDICT_C5_REAL.md` | 🛡️ Dictamen de Verificación Independiente: Colapso del Holograma C4-SIM |
-| [`AXIOMATIZATION_C5_REAL.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/AXIOMATIZATION_C5_REAL.md) | `06_theory/AXIOMATIZATION_C5_REAL.md` | ⚖️ Base Axiomática Sellada C5-REAL |
-| [`MOSKV_1_APEX_BLUEPRINT.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/MOSKV_1_APEX_BLUEPRINT.md) | `06_theory/MOSKV_1_APEX_BLUEPRINT.md` | 🚀 Motor Causal-1-APEX: Manifiesto y Arquitectura Consolidada |
-| [`STATUS_THEORY.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/STATUS_THEORY.md) | `06_theory/STATUS_THEORY.md` | 📈 STATUS — Single Source of Truth |
-| [`TOPOLOGIA_MAESTRA.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/TOPOLOGIA_MAESTRA.md) | `06_theory/TOPOLOGIA_MAESTRA.md` | 🌌 Topología Maestra C5-REAL (BABYLON-60 / CORTEX) |
-| [`VECTOR_A_MASTER_LEDGER_DESIGN.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/VECTOR_A_MASTER_LEDGER_DESIGN.md) | `06_theory/VECTOR_A_MASTER_LEDGER_DESIGN.md` | 🗂️ VECTOR A — Master Ledger & ATMS Persistence · Diseño |
-| [`axiom_bayesian_disintegration.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/axiom_bayesian_disintegration.md) | `06_theory/axiom_bayesian_disintegration.md` | 🧬 Axiomatización Formal: Desintegración Bayesiana y No-Alucinación |
-| [`axiom_cyclic_conformal_aeon.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/axiom_cyclic_conformal_aeon.md) | `06_theory/axiom_cyclic_conformal_aeon.md` | 🌀 Axiomatización Formal: Teorema de Penrose-Landauer y Motor de Aeones Conformes (INV_C5_AEON / INV-3) |
-| [`axiom_legion_swarm.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/axiom_legion_swarm.md) | `06_theory/axiom_legion_swarm.md` | ⚡ Axiomatización Formal: Legion Parallel Workspace Swarm |
-| [`axiom_oncology_protocol.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/axiom_oncology_protocol.md) | `06_theory/axiom_oncology_protocol.md` | 🧬 Axiomatización Formal: Transducción Bio-Silicio y Ontología Tumoral |
-| [`axiom_tonnetz_oversight.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/axiom_tonnetz_oversight.md) | `06_theory/axiom_tonnetz_oversight.md` | 🎵 Axiomatización Formal: Monitor Armónico Tonnetz |
-| [`c5_thermodynamic_invariants_compendium.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/06_theory/c5_thermodynamic_invariants_compendium.md) | `06_theory/c5_thermodynamic_invariants_compendium.md` | 🌡️ Compendio de Invariantes Termodinámicas C5-REAL y Capas de Exergía |
+1. [EU AI Act Whitepaper](./04_research/eu_ai_act_compliance_whitepaper.md) — Arts. 9–14 full mapping
+2. [LegalTech Audit Guide](./03_guides/guide_legaltech_eu_ai_act.md)
+3. [Compliance Framework](./05_compliance_eu_ai_act.md) — Cryptographic Merkle log verification
+4. [Security Threat Model v4](./02_ontology/security_threat_model_v4.md)
+5. [ADR-005: Sovereign Dual-License](./adr/ADR-005-sovereign-dual-license.md)
 
-### 📁 Adr
-
-| Documento | Ruta / Archivo | Título Principal / Propósito |
-| :--- | :--- | :--- |
-| [`ADR-001-lean4-over-coq-isabelle.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/ADR-001-lean4-over-coq-isabelle.md) | `adr/ADR-001-lean4-over-coq-isabelle.md` | ADR-001: Lean 4 sobre Coq/Isabelle para Verificación Formal |
-| [`ADR-002-pyo3-maturin-ffi-bridge.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/ADR-002-pyo3-maturin-ffi-bridge.md) | `adr/ADR-002-pyo3-maturin-ffi-bridge.md` | ADR-002: Puente FFI PyO3/Maturin para Runtime Híbrido Rust-Python |
-| [`ADR-003-bft-attestation-architecture.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/ADR-003-bft-attestation-architecture.md) | `adr/ADR-003-bft-attestation-architecture.md` | ADR-003: Arquitectura BFT y Modelo de Atestación Criptográfica |
-| [`ADR-004-taint-tracking-isolation.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/ADR-004-taint-tracking-isolation.md) | `adr/ADR-004-taint-tracking-isolation.md` | ADR-004: Modelo de Aislamiento y Tracking de Taint |
-| [`ADR-005-sovereign-dual-license.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/ADR-005-sovereign-dual-license.md) | `adr/ADR-005-sovereign-dual-license.md` | ADR-005: Sovereign Dual-License v4.0 |
-| [`ADR-006-topologia-exposicion-repositorios.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/ADR-006-topologia-exposicion-repositorios.md) | `adr/ADR-006-topologia-exposicion-repositorios.md` | ADR-006: Topología C5-REAL de Exposición Pública y Privada |
-| [`README.md`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/adr/README.md) | `adr/README.md` | Architecture Decision Records (ADR) |
+</details>
 
 ---
-*Índice maestro autogenerado y sincronizado autónomamente por `sync_docs_index.py` bajo estándar C5-REAL.*
+
+## ⚡ Sovereign Core & Executive
+
+| Document | Purpose |
+| :--- | :--- |
+| [SPECIFICATION.md](./SPECIFICATION.md) | Operational semantics, B60 ISA, F60 exact arithmetic, Proof IR |
+| [WHITEPAPER.md](./WHITEPAPER.md) | Deep tech: F60, Merkle DAG Ledger, Self-Falsification Engine |
+| [KERNEL.md](./KERNEL.md) | Cross-cutting kernel invariants (transversal) |
+| [COMMERCIAL_LICENSE.md](./COMMERCIAL_LICENSE.md) | Enterprise Tier commercial license |
+| [CANARY_TOKENS.md](./CANARY_TOKENS.md) | Canary Tokens — Ω-11 honeypot |
+| [KINETIC_CACHE_AUDIT.md](./KINETIC_CACHE_AUDIT.md) | False sharing mitigation audit |
+| [cortex_lsp_setup.md](./cortex_lsp_setup.md) | LSP Paracortex sovereign integration |
+| [RESULTADOS.md](./RESULTADOS.md) | Project status & results |
+
+---
+
+## 📋 Technical Specifications (`01_spec/`)
+
+| Document | Purpose |
+| :--- | :--- |
+| [spec_invariants.md](./01_spec/spec_invariants.md) | 65 active C5-REAL domain invariants |
+| [spec_babylon60.md](./01_spec/spec_babylon60.md) | Full formal specification v4.x Causal-Determinist |
+| [spec_architecture.md](./01_spec/spec_architecture.md) | Async-persist ledger architecture |
+| [spec_technical.md](./01_spec/spec_technical.md) | SharedManifest 64B, Seqlock SPMC, Ring-0 core |
+| [spec_cryptographic_profile.md](./01_spec/spec_cryptographic_profile.md) | Ed25519, AES-GCM, RFC 3161 timestamp profile |
+| [spec_security_model.md](./01_spec/spec_security_model.md) | Security model & attack boundary definitions |
+| [spec_causal_hitl_governance.md](./01_spec/spec_causal_hitl_governance.md) | Human-in-the-Loop governance & operational workers |
+| [spec_exergy_ontology.md](./01_spec/spec_exergy_ontology.md) | Exergy semantics & ontology |
+| [spec_graph_canonical.md](./01_spec/spec_graph_canonical.md) | Canonical causal graph spec |
+| [spec_proof_ir.md](./01_spec/spec_proof_ir.md) | Proof IR → Lean 4 emitter specification |
+| [artifact_format_v1.md](./01_spec/artifact_format_v1.md) | Artifact format v1 |
+| [audit_babylon60_v2.5.md](./01_spec/audit_babylon60_v2.5.md) | Causal-Determinist audit — v2.5.1 |
+
+---
+
+## 🧠 Axiomatic Ontology & Threat Models (`02_ontology/`)
+
+| Document | Purpose |
+| :--- | :--- |
+| [axiom_ontology.md](./02_ontology/axiom_ontology.md) | Absolute semantic isomorphism ontology |
+| [axiom_axiomatization.md](./02_ontology/axiom_axiomatization.md) | Motor Causal-1 APEX formal axiomatization |
+| [security_threat_model_v4.md](./02_ontology/security_threat_model_v4.md) | v4.0 threat model & attack vector mitigation |
+| [spec_c5_graph_isomorphism.md](./02_ontology/spec_c5_graph_isomorphism.md) | APEX structural isomorphism matrix |
+| [axiom_oncologia_300_primitivas.md](./02_ontology/axiom_oncologia_300_primitivas.md) | 300 molecular oncology primitives |
+
+---
+
+## 📖 Guides & Tutorials (`03_guides/`)
+
+| Document | Audience | Purpose |
+| :--- | :--- | :--- |
+| [QUICKSTART_ENTERPRISE.md](./03_guides/QUICKSTART_ENTERPRISE.md) | DevOps | Docker/K8s sidecar deployment |
+| [tutorial_hello_causal.md](./03_guides/tutorial_hello_causal.md) | Developer | First causal ledger event |
+| [guide_babylon60_complete.md](./03_guides/guide_babylon60_complete.md) | Developer | Full architecture & dev guide |
+| [guide_c5_axiom_verification.md](./03_guides/guide_c5_axiom_verification.md) | Developer | Axiom injection & invariant verification |
+| [guide_legaltech_eu_ai_act.md](./03_guides/guide_legaltech_eu_ai_act.md) | Legal | LegalTech audit & EU AI Act |
+| [guide_swarm_pxs_orchestration.md](./03_guides/guide_swarm_pxs_orchestration.md) | Developer | Kimi K3 multi-agent swarm (P×S) |
+| [guide_bio_silico_transduction.md](./03_guides/guide_bio_silico_transduction.md) | Researcher | Bio-Silicio transduction & causal graphs |
+| [guide_commercial_license.md](./03_guides/guide_commercial_license.md) | Enterprise | License setup & enforcement |
+| [guide_experimental.md](./03_guides/guide_experimental.md) | Developer | Experimental ledger extensions |
+| [guide_explanation.md](./03_guides/guide_explanation.md) | All | Executive briefing: Motor Causal SINGULARITY |
+| [guide_skill_arsenal_taxonomy.md](./03_guides/guide_skill_arsenal_taxonomy.md) | Developer | Skill arsenal taxonomy by exergy |
+| [tonnetz_audit_guide.md](./03_guides/tonnetz_audit_guide.md) | Legal / Music | Harmonic oversight (EU Art. 14) |
+| [guide_repository_source_of_truth.md](./03_guides/guide_repository_source_of_truth.md) | Developer | Repository canonical source of truth |
+
+---
+
+## 🔬 Research & SOTA (`04_research/`)
+
+| Document | Purpose |
+| :--- | :--- |
+| [eu_ai_act_compliance_whitepaper.md](./04_research/eu_ai_act_compliance_whitepaper.md) | Causal determinism as EU AI Act compliance framework |
+| [evaluacion_falsacion_llm_models_2026.md](./04_research/evaluacion_falsacion_llm_models_2026.md) | Popperian falsification of LLM model selection (2026) |
+| [centuria_swarm_architecture.md](./04_research/centuria_swarm_architecture.md) | Centuria 100-agent swarm architecture |
+| [legion_222_swarm_topology.md](./04_research/legion_222_swarm_topology.md) | Legión 222-agent topology (11 cores × 20 threads) |
+| [sota_evolution_roadmap.md](./04_research/sota_evolution_roadmap.md) | SOTA architectural evolution roadmap |
+| [sanedrin_reflexive_forking_audit.md](./04_research/sanedrin_reflexive_forking_audit.md) | Sanhedrín audit: reflexive forking |
+| [sota/sota_cortex_persist_202607.md](./04_research/sota/sota_cortex_persist_202607.md) | SOTA: async-persist ledger positioning |
+| [sota/sota_ssm_lnn_202600.md](./04_research/sota/sota_ssm_lnn_202600.md) | SOTA: SSM, LNN & transformer collapse |
+| [README_APEX.md](./04_research/README_APEX.md) | APEX Trials index |
+
+---
+
+## ⚖️ Formal Theory (`06_theory/`)
+
+Mathematical substrate from first principles to silicon realization.
+
+| Document | Level | Purpose |
+| :--- | :--- | :--- |
+| [01_robinson_arithmetic.md](./06_theory/01_robinson_arithmetic.md) | Foundations | Robinson Arithmetic (Q) |
+| [02_goedel_incompleteness.md](./06_theory/02_goedel_incompleteness.md) | Foundations | Gödel's Incompleteness Theorems |
+| [03_computability_turing.md](./06_theory/03_computability_turing.md) | Foundations | Computability & Turing halting |
+| [04_chaitin_kolmogorov.md](./06_theory/04_chaitin_kolmogorov.md) | Foundations | Chaitin, Kolmogorov & AIT |
+| [05_model_theory.md](./06_theory/05_model_theory.md) | Foundations | Model Theory |
+| [06_curry_howard.md](./06_theory/06_curry_howard.md) | Foundations | Curry-Howard-Lambek Correspondence |
+| [07_cross_domain.md](./06_theory/07_cross_domain.md) | Synthesis | Cross-domain isomorphisms |
+| [08_babylon60_architecture.md](./06_theory/08_babylon60_architecture.md) | Applied | BABYLON-60 system invariants |
+| [09_formal_ontology_lean.md](./06_theory/09_formal_ontology_lean.md) | Applied | Formal ontology in Lean 4 |
+| [10_physical_realization.md](./06_theory/10_physical_realization.md) | Applied | Physical realization in silicon |
+| [AXIOMATIZATION_C5_REAL.md](./06_theory/AXIOMATIZATION_C5_REAL.md) | Core | Sealed C5-REAL axiomatic base |
+| [TOPOLOGIA_MAESTRA.md](./06_theory/TOPOLOGIA_MAESTRA.md) | Core | Master topology C5-REAL (BABYLON-60/CORTEX) |
+| [MOSKV_1_APEX_BLUEPRINT.md](./06_theory/MOSKV_1_APEX_BLUEPRINT.md) | Core | MOSKV-1 APEX manifest & consolidated architecture |
+| [c5_thermodynamic_invariants_compendium.md](./06_theory/c5_thermodynamic_invariants_compendium.md) | Reference | All C5-REAL thermodynamic invariants & exergy layers |
+| [axiom_cyclic_conformal_aeon.md](./06_theory/axiom_cyclic_conformal_aeon.md) | Theory | Penrose-Landauer theorem & Conformal Aeons (INV_C5_AEON) |
+| [axiom_bayesian_disintegration.md](./06_theory/axiom_bayesian_disintegration.md) | Theory | Anti-hallucination formal axiomatization |
+| [axiom_legion_swarm.md](./06_theory/axiom_legion_swarm.md) | Theory | Legión parallel workspace swarm |
+| [axiom_tonnetz_oversight.md](./06_theory/axiom_tonnetz_oversight.md) | Theory | Neo-Riemannian Tonnetz harmonic oversight |
+| [axiom_oncology_protocol.md](./06_theory/axiom_oncology_protocol.md) | Theory | Bio-Silicio transduction & tumoral ontology |
+| [AUDIT_AXIOMS_2026.md](./06_theory/AUDIT_AXIOMS_2026.md) | Audit | Epistemic audit: C5-REAL axiomatization verdict |
+| [AUDIT_VERDICT_C5_REAL.md](./06_theory/AUDIT_VERDICT_C5_REAL.md) | Audit | C4-SIM hologram collapse verification |
+| [VECTOR_A_MASTER_LEDGER_DESIGN.md](./06_theory/VECTOR_A_MASTER_LEDGER_DESIGN.md) | Design | VECTOR A — Master Ledger & ATMS persistence |
+| [STATUS_THEORY.md](./06_theory/STATUS_THEORY.md) | Status | Single Source of Truth — theory status |
+
+---
+
+## 🏗️ Architecture Decision Records (`adr/`)
+
+| ADR | Status | Decision |
+| :--- | :--- | :--- |
+| [ADR-001](./adr/ADR-001-lean4-over-coq-isabelle.md) | ✅ Accepted | Lean 4 over Coq/Isabelle for formal verification |
+| [ADR-002](./adr/ADR-002-pyo3-maturin-ffi-bridge.md) | ✅ Accepted | PyO3/Maturin FFI bridge for Rust↔Python runtime |
+| [ADR-003](./adr/ADR-003-bft-attestation-architecture.md) | ✅ Accepted | BFT architecture & cryptographic attestation model |
+| [ADR-004](./adr/ADR-004-taint-tracking-isolation.md) | ✅ Accepted | Taint tracking & isolation model |
+| [ADR-005](./adr/ADR-005-sovereign-dual-license.md) | ✅ Accepted | Sovereign Dual-License v4.0 |
+| [ADR-006](./adr/ADR-006-topologia-exposicion-repositorios.md) | ✅ Accepted | C5-REAL public/private repository topology |
+
+---
+
+## 🔐 Formal Proofs (`proof/`)
+
+| File | Status | Content |
+| :--- | :--- | :--- |
+| [proof/lean/BabylonTrace.lean](./proof/lean/BabylonTrace.lean) | ✅ **0 errors, 0 warnings** | Seqlock SPMC bisimulation · Halt states · Aristotelian Triad in silicon |
+
+---
+
+## 📊 C5-REAL System State
+
+| Dimension | Value |
+| :--- | :--- |
+| Active Invariants | **65** |
+| Vacant slots | 35 |
+| Derived Theorems | 5 (incl. Landauer Theorem) |
+| Lean 4 formal proofs | ✅ Clean (`BabylonTrace.lean`) |
+| Rust tests | ✅ 84 passed, 0 failed |
+| Python C5 invariants | ✅ 19 passed, 1 skipped, 1 xfailed |
+| Ruff (lint + format) | ✅ 0 errors |
+| MyPy strict | ✅ 0 errors (272 files) |
+
+---
+
+<sub>Index maintained under C5-REAL standard. All paths are relative to `docs/`. Last sync: v4.3.0</sub>
