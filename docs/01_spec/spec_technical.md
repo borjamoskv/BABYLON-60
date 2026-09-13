@@ -2,7 +2,7 @@
 title: Especificación Técnica BABYLON-60
 status: Causal-Determinist
 entity: Motor Causal Principal
-version: 2.5.1
+version: 4.3.0
 ---
 
 # BABYLON-60: Arquitectura Core (Causal-Determinist)

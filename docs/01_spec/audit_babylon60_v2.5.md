@@ -1,7 +1,7 @@
 ---
 title: Auditoría BABYLON-60 v2.5.1
 status: Causal-Determinist
-version: 2.5.1
+version: 4.3.0
 ---
 
 # Auditoría Causal-Determinist — BABYLON-60 v2.5.1 (Estado & Resolución)

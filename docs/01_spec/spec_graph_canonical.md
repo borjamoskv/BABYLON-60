@@ -1,7 +1,7 @@
 ---
 title: Especificación de Serialización Canónica de Grafos
 status: Causal-Determinist
-version: 1.0.0
+version: 4.3.0
 ---
 
 # BABYLON-60: Graph Canonical Specification (Causal-Determinist)

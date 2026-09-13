@@ -1,7 +1,7 @@
 ---
 title: Especificación de Ontología, Nombrado y Semántica Exergética
 status: Causal-Determinist
-version: 1.0.0
+version: 4.3.0
 ---
 
 # Ontología de Exergía y Semántica (Causal-Determinist)

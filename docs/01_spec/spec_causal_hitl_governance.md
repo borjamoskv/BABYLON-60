@@ -10,7 +10,7 @@
 **Version:** 1.1.0  
 **Status:** Canonical Standard  
 **Governance Invariants:** `RULE[human_in_the_loop_causal_governance]`, `RULE[c5_real_invariants]`  
-**Reference Implementation:** [scripts/poc_causal_hitl_agent.py](../../scripts/c5_cortex/)  
+**Reference Implementation:** `01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift` and `bounty_cli.py`
 
 ---
 
@@ -83,16 +83,16 @@ The operational worker architecture bridges across diverse research and engineer
 
 ## 6. Reference Implementation & Usage
 
-The SOTA implementation is available in `scripts/poc_causal_hitl_agent.py`.
+The SOTA implementation is available in `01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift`.
 
 ### Verification Command:
 ```bash
-python3 scripts/poc_causal_hitl_agent.py
+swift 01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift
 ```
 
 ### Asynchronous Execution & Resume Example:
 ```python
-from scripts.poc_causal_hitl_agent import CausalHitlEngine, OperationalWorkerPoC, ActionCriticality, AgentState
+# Biometric gate integrated into CortexPersistLedger
 
 engine = CausalHitlEngine(db_path="cortex_governance.db")
 worker = OperationalWorkerPoC(

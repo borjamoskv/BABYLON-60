@@ -1,7 +1,7 @@
 ---
 title: Modelo de Seguridad BABYLON-60
 status: Causal-Determinist
-version: 1.0.0
+version: 4.3.0
 ---
 
 # MODELO DE SEGURIDAD — Ledger Asíncrono-persist

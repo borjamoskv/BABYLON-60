@@ -1,7 +1,7 @@
 ---
 title: Invariantes del Dominio C5-REAL BABYLON-60
 status: Causal-Determinist
-version: 1.0.0
+version: 4.3.0
 ---
 
 # Invariantes del Dominio C5-REAL BABYLON-60 (Causal-Determinist)

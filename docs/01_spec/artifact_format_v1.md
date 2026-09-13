@@ -1,7 +1,7 @@
 ---
 title: Formato de Artefacto BABYLON-60 v1
 status: Causal-Determinist
-version: 1.0.0
+version: 4.3.0
 ---
 
 # Formato de Artefacto BABYLON-60 v1
