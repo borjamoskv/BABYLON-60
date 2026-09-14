@@ -9,6 +9,7 @@ use rusqlite::{params, Connection};
 use signal_hook::consts::signal::{SIGINT, SIGTERM};
 use signal_hook::iterator::Signals;
 use std::env;
+#[cfg(target_os = "linux")]
 use std::path::Path;
 use std::process::{Command, Stdio};
 use std::sync::atomic::{AtomicBool, Ordering};
