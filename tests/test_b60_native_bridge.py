@@ -5,6 +5,11 @@
 import pytest
 from babylon60.bft.b60_native import B60NativeBridge
 
+pytestmark = pytest.mark.skipif(
+    not B60NativeBridge.is_available(),
+    reason="libb60_lang no compilada en target/ (requiere cargo build previo)"
+)
+
 
 def test_native_dylib_loaded() -> None:
     assert B60NativeBridge.is_available() is True
