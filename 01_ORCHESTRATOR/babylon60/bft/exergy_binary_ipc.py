@@ -199,7 +199,7 @@ class SharedManifestFFIWriter:
             self._manifest_struct = BountySharedManifest()
             self._manifest_struct.status_flag = RUNNING
             self._manifest_struct.seq = 0
-            self._manifest_struct.epoch_id = 1
+            self._manifest_struct.epoch_id = 0
             for i in range(4):
                 self._manifest_struct.payload_hash[i] = 0
             self._ptr = ctypes.c_void_p(ctypes.addressof(self._manifest_struct))
