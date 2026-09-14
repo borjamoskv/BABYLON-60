@@ -10,7 +10,8 @@ import logging
 import base64
 import time
 from enum import Enum
-from typing import List, Optional, Callable, Dict, Set, TypedDict
+from typing import List, Optional, Callable, Dict, Set
+from typing_extensions import TypedDict
 from pydantic import BaseModel, Field, ConfigDict
 from fastapi import APIRouter, Request, Header, HTTPException, status
 

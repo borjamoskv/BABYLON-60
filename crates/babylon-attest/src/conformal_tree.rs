@@ -253,10 +253,10 @@ mod tests {
         assert_eq!(tree.depth(), 3);
         assert!(!tree.root().is_empty());
 
-        for i in 0..leaves.len() {
+        for (i, leaf) in leaves.iter().enumerate() {
             let proof = tree.get_inclusion_proof(i).expect("Failed to get proof");
             assert!(ConformalMerkleTree::verify_inclusion_proof(
-                &leaves[i],
+                leaf,
                 &proof,
                 tree.root()
             ));

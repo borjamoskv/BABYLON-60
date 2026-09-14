@@ -11,7 +11,8 @@ import urllib.request
 import urllib.error
 
 # Forzar resolución del FFI compilado
-sys.path.insert(0, '/Users/borjafernandezangulo/BABYLON-60/target/release')
+_ROOT = os.environ.get("BABYLON_HOME", os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))))
+sys.path.insert(0, os.path.join(_ROOT, "target", "release"))
 import strike_rs
 
 def query_ollama(prompt: str) -> str:

@@ -22,7 +22,7 @@ from typing import Optional
 
 import unicodedata
 
-BABYLON_ROOT = Path("/Users/borjafernandezangulo/BABYLON-60")
+BABYLON_ROOT = Path(os.environ.get("BABYLON_HOME", Path(__file__).resolve().parent.parent.parent))
 SAMPLES_DIR = BABYLON_ROOT / "assets" / "voice_samples"
 MODELS_CACHE_DIR = SAMPLES_DIR / "models"
 REF_AUDIO = SAMPLES_DIR / "borja_sample.wav"
@@ -165,7 +165,7 @@ def main() -> None:
         if args.path:
             p = Path(args.path)
         else:
-            base = Path("/Users/borjafernandezangulo/.gemini/antigravity/brain")
+            base = Path.home() / ".gemini" / "antigravity" / "brain"
             conv_id = "b6e348e5-5c68-4b43-bcab-8e3abcd8cad5"
             p = base / conv_id / ".system_generated" / "logs" / "transcript.jsonl"
 

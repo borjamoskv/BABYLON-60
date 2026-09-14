@@ -606,6 +606,12 @@ pub struct SimulationDiagnostics {
     pub bkm_accumulated: f64,
     /// Indicador de regularidad suave (sin blowup singular detectado)
     pub is_regular: bool,
+    /// Paso temporal adaptativo computado por el controlador CFL dual
+    pub adaptive_dt: f64,
+    /// Constante de Lipschitz de dirección de vórtice regularizada de Constantin-Fefferman
+    pub vortex_direction_smoothness: f64,
+    /// Radio efectivo del núcleo de vorticidad (segundo momento espacial de enstrofía)
+    pub effective_vortex_radius: f64,
 }
 
 /// Integrador Mimético de Navier-Stokes / Euler 3D sobre Complejos de De Rham.
@@ -626,6 +632,14 @@ pub struct MimeticNavierStokes {
     pub bkm_accumulated: f64,
     /// Umbral de detección de explosión en tiempo finito
     pub bkm_threshold: f64,
+    /// Parámetro de seguridad CFL advectivo
+    pub cfl_advective: f64,
+    /// Parámetro de seguridad CFL difusivo
+    pub cfl_diffusive: f64,
+    /// Espaciado espacial de malla $h = 2\pi / n$
+    pub grid_spacing_h: f64,
+    /// Parámetro de regularización $\epsilon$ para evitar singularidad 0/0
+    pub epsilon_reg: f64,
 }
 
 impl MimeticNavierStokes {
@@ -633,6 +647,7 @@ impl MimeticNavierStokes {
     pub fn new(n: usize, viscosity: f64) -> Self {
         let mesh = CubicMesh3D::new(n);
         let num_edges = mesh.num_edges;
+        let grid_spacing_h = 2.0 * std::f64::consts::PI / n as f64;
         Self {
             mesh,
             u: vec![0.0; num_edges],
@@ -641,6 +656,10 @@ impl MimeticNavierStokes {
             step_count: 0,
             bkm_accumulated: 0.0,
             bkm_threshold: 1000.0,
+            cfl_advective: 0.5,
+            cfl_diffusive: 0.2,
+            grid_spacing_h,
+            epsilon_reg: 1.0 / (60.0 * 60.0 * 60.0 * 60.0), // 60^-4 sexagesimal
         }
     }
 
@@ -828,6 +847,120 @@ impl MimeticNavierStokes {
         diag
     }
 
+    /// Calcula el paso temporal óptimo mediante el criterio CFL dual (advectivo y difusivo).
+    pub fn compute_adaptive_dt(&self) -> f64 {
+        let max_u = self.u.iter().map(|&v| v.abs()).fold(0.0f64, f64::max);
+        let dt_adv = self.cfl_advective * self.grid_spacing_h / (max_u + 1e-8);
+        let dt_diff = if self.viscosity > 1e-12 {
+            self.cfl_diffusive * self.grid_spacing_h * self.grid_spacing_h / self.viscosity
+        } else {
+            dt_adv
+        };
+        dt_adv.min(dt_diff).clamp(1e-5, 0.05)
+    }
+
+    /// Calcula la constante de suavidad direccional Lipschitz de Constantin-Fefferman con regularización $\epsilon$-suave.
+    pub fn compute_regularized_cf_smoothness(&self, omega: &[f64]) -> f64 {
+        let mut xi = vec![[0.0f64; 3]; self.mesh.num_vertices];
+
+        for z in 0..self.mesh.n {
+            for y in 0..self.mesh.n {
+                for x in 0..self.mesh.n {
+                    let prev_x = if x == 0 { self.mesh.n - 1 } else { x - 1 };
+                    let prev_y = if y == 0 { self.mesh.n - 1 } else { y - 1 };
+                    let prev_z = if z == 0 { self.mesh.n - 1 } else { z - 1 };
+
+                    let wx = 0.5 * (omega[self.mesh.face_idx(x, y, z, 0)] + omega[self.mesh.face_idx(prev_x, y, z, 0)]);
+                    let wy = 0.5 * (omega[self.mesh.face_idx(x, y, z, 1)] + omega[self.mesh.face_idx(x, prev_y, z, 1)]);
+                    let wz = 0.5 * (omega[self.mesh.face_idx(x, y, z, 2)] + omega[self.mesh.face_idx(x, y, prev_z, 2)]);
+
+                    let norm_sq = wx * wx + wy * wy + wz * wz + self.epsilon_reg * self.epsilon_reg;
+                    let norm = norm_sq.sqrt();
+                    let v = self.mesh.vertex_idx(x, y, z);
+                    xi[v] = [wx / norm, wy / norm, wz / norm];
+                }
+            }
+        }
+
+        let mut max_lip = 0.0f64;
+        let h = self.grid_spacing_h;
+        for z in 0..self.mesh.n {
+            for y in 0..self.mesh.n {
+                for x in 0..self.mesh.n {
+                    let v = self.mesh.vertex_idx(x, y, z);
+                    let vx_next = self.mesh.vertex_idx(x + 1, y, z);
+                    let vy_next = self.mesh.vertex_idx(x, y + 1, z);
+                    let vz_next = self.mesh.vertex_idx(x, y, z + 1);
+
+                    for &nbr in &[vx_next, vy_next, vz_next] {
+                        let d_xi = (
+                            (xi[v][0] - xi[nbr][0]).powi(2) +
+                            (xi[v][1] - xi[nbr][1]).powi(2) +
+                            (xi[v][2] - xi[nbr][2]).powi(2)
+                        ).sqrt();
+                        let lip = d_xi / h;
+                        if lip > max_lip {
+                            max_lip = lip;
+                        }
+                    }
+                }
+            }
+        }
+        max_lip
+    }
+
+    /// Calcula el radio efectivo del núcleo de vorticidad (segundo momento espacial de enstrofía en el toro periódico).
+    pub fn compute_effective_vortex_radius(&self, omega: &[f64]) -> f64 {
+        let mut max_idx = 0;
+        let mut max_val = 0.0f64;
+        for (i, &w) in omega.iter().enumerate() {
+            if w.abs() > max_val {
+                max_val = w.abs();
+                max_idx = i;
+            }
+        }
+
+        let v0 = max_idx / 3;
+        let x0 = v0 % self.mesh.n;
+        let y0 = (v0 / self.mesh.n) % self.mesh.n;
+        let z0 = v0 / (self.mesh.n * self.mesh.n);
+
+        let mut total_enstrophy = 0.0f64;
+        let mut moment_2 = 0.0f64;
+        let n = self.mesh.n as f64;
+        let h = self.grid_spacing_h;
+
+        for z in 0..self.mesh.n {
+            for y in 0..self.mesh.n {
+                for x in 0..self.mesh.n {
+                    let dx = ((x as isize - x0 as isize).abs() as f64).min(n - (x as isize - x0 as isize).abs() as f64) * h;
+                    let dy = ((y as isize - y0 as isize).abs() as f64).min(n - (y as isize - y0 as isize).abs() as f64) * h;
+                    let dz = ((z as isize - z0 as isize).abs() as f64).min(n - (z as isize - z0 as isize).abs() as f64) * h;
+                    let dist_sq = dx * dx + dy * dy + dz * dz;
+
+                    for dir in 0..3 {
+                        let w = omega[self.mesh.face_idx(x, y, z, dir)];
+                        let enst = w * w;
+                        total_enstrophy += enst;
+                        moment_2 += dist_sq * enst;
+                    }
+                }
+            }
+        }
+
+        if total_enstrophy < 1e-14 {
+            0.0
+        } else {
+            (moment_2 / total_enstrophy).sqrt()
+        }
+    }
+
+    /// Avanza un paso temporal adaptativo mediante RK4 garantizando estabilidad CFL.
+    pub fn step_adaptive_rk4(&mut self) -> SimulationDiagnostics {
+        let dt = self.compute_adaptive_dt();
+        self.step_rk4(dt)
+    }
+
     /// Diagnósticos instantáneos de energía, enstrofía, helicidad y BKM.
     pub fn diagnostics(&self) -> SimulationDiagnostics {
         let omega = self.compute_vorticity(&self.u);
@@ -845,6 +978,10 @@ impl MimeticNavierStokes {
         let max_div = div.iter().map(|&d| d.abs()).fold(0.0f64, f64::max);
         let is_reg = max_vorticity < self.bkm_threshold;
 
+        let adaptive_dt = self.compute_adaptive_dt();
+        let cf_smooth = self.compute_regularized_cf_smoothness(&omega);
+        let eff_radius = self.compute_effective_vortex_radius(&omega);
+
         SimulationDiagnostics {
             time: self.time,
             step: self.step_count,
@@ -855,6 +992,9 @@ impl MimeticNavierStokes {
             max_divergence: max_div,
             bkm_accumulated: self.bkm_accumulated,
             is_regular: is_reg,
+            adaptive_dt,
+            vortex_direction_smoothness: cf_smooth,
+            effective_vortex_radius: eff_radius,
         }
     }
 }
@@ -1083,6 +1223,29 @@ mod tests {
         let final_diag = sim.diagnostics();
         assert!(final_diag.kinetic_energy < initial_diag.kinetic_energy);
         assert!(final_diag.bkm_accumulated > 0.0);
+    }
+
+    #[test]
+    fn test_adaptive_cfl_and_regularized_cf_smoothness() {
+        // LEY FUNDAMENTAL 8: Mitigación de Falsación (CFL adaptativo y suavidad Constantin-Fefferman regularizada)
+        let mut sim = MimeticNavierStokes::new(4, 0.05);
+        sim.init_taylor_green(1.0);
+
+        for step in 1..=15 {
+            let diag = sim.step_adaptive_rk4();
+
+            // 1. Paso adaptativo acotado por CFL
+            assert!(diag.adaptive_dt > 1e-4 && diag.adaptive_dt <= 0.05, "Paso {}: dt fuera de cotas CFL: {}", step, diag.adaptive_dt);
+
+            // 2. Incompresibilidad exacta
+            assert!(diag.max_divergence < 1e-10, "Paso {}: divergencia excedida: {}", step, diag.max_divergence);
+
+            // 3. Suavidad de Constantin-Fefferman regularizada (<60.0 en flujo regular suave)
+            assert!(diag.vortex_direction_smoothness < 60.0, "Paso {}: CF smoothness rota: {}", step, diag.vortex_direction_smoothness);
+
+            // 4. Radio efectivo de vórtice positivo y finito (ausencia de colapso a volumen cero)
+            assert!(diag.effective_vortex_radius > 0.1, "Paso {}: radio efectivo colapsado a cero", step);
+        }
     }
 }
 

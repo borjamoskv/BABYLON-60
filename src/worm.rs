@@ -51,7 +51,7 @@ impl WormLedger {
         // Hash-Chaining: H(prev_hash || payload || signature)
         let prev_hash = self.chain.last().unwrap().hash;
         let mut hasher = Sha256::new();
-        hasher.update(&prev_hash);
+        hasher.update(prev_hash);
         hasher.update(payload);
         hasher.update(signature);
         let new_hash: [u8; 32] = hasher.finalize().into();
@@ -71,12 +71,12 @@ impl WormLedger {
 
     /// Audita toda la cadena criptográfica
     pub fn audit_integrity(&self) -> bool {
-        for i in 1..self.chain.len() {
-            let prev = &self.chain[i - 1];
-            let curr = &self.chain[i];
+        for window in self.chain.windows(2) {
+            let prev = &window[0];
+            let curr = &window[1];
             
             let mut hasher = Sha256::new();
-            hasher.update(&prev.hash);
+            hasher.update(prev.hash);
             hasher.update(&curr.payload);
             hasher.update(&curr.signature);
             let expected_hash: [u8; 32] = hasher.finalize().into();

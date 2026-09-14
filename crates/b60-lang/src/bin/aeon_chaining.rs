@@ -148,7 +148,13 @@ fn generate_aeon(aeon_index: usize, start_seq: u64, n_transactions: usize) -> Ae
 }
 
 fn main() {
-    let lean_workspace = "/Users/borjafernandezangulo/BABYLON-60/proof/lean";
+    let default_lean = if std::path::Path::new("proof/lean").exists() {
+        "proof/lean".to_string()
+    } else {
+        format!("{}/proof/lean", std::env::var("BABYLON_HOME").unwrap_or_else(|_| ".".to_string()))
+    };
+    let lean_workspace = std::env::var("BABYLON_LEAN_WORKSPACE").unwrap_or(default_lean);
+    let lean_workspace = lean_workspace.as_str();
     println!("================================================================================");
     println!("🌀 [AEON CHAINING] PROOF BY REFLECTION CONFORME (INV_C5_AEON)");
     println!("================================================================================");
@@ -168,7 +174,7 @@ fn main() {
     println!("Demostrando la historia de {} Aeones encadenados ({} eventos en total)...",
         n_aeons, n_aeons * tx_per_aeon * 3);
 
-    match AeonChainingPipeline::verify_aeons(&aeons, lean_workspace, "BabylonAeonChain.lean") {
+    match AeonChainingPipeline::verify_aeons(&aeons, &lean_workspace, "BabylonAeonChain.lean") {
         Ok((success, emit_sec, lean_sec, stderr)) => {
             if success {
                 println!("✅ ÉXITO TOTAL: {} Aeones verificados formalmente en cadena.", n_aeons);

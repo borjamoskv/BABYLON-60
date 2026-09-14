@@ -12,10 +12,11 @@ from __future__ import annotations
 
 import subprocess
 import unicodedata
+import os
 import re
 from pathlib import Path
 
-BABYLON_ROOT = Path("/Users/borjafernandezangulo/BABYLON-60")
+BABYLON_ROOT = Path(os.environ.get("BABYLON_HOME", Path(__file__).resolve().parent.parent.parent))
 SAMPLES_DIR = BABYLON_ROOT / "assets" / "voice_samples"
 MODELS_CACHE_DIR = SAMPLES_DIR / "models"
 REF_AUDIO = SAMPLES_DIR / "borja_sample.wav"

@@ -6,7 +6,7 @@
     },
     "filesystem": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs"]
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "./docs"]
     }
   }
 }

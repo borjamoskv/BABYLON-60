@@ -93,8 +93,8 @@ clean_transcript*.txt
 transcript*.vtt
 docs/04_research/transcripts/
 sample_toxic_chat.txt
-assets/voice_samples/*.wav
-assets/voice_samples/models/
+assets/voice_samples/
+assets/*whatsapp*
 
 .xtts_venv/
 

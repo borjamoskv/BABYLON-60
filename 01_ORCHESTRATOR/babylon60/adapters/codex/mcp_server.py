@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -24,7 +25,7 @@ from .tunnel_bus import TunnelBus
 
 logger = logging.getLogger("codex_tunnel.mcp")
 
-WORKSPACE_ROOT = Path("/Users/borjafernandezangulo/BABYLON-60")
+WORKSPACE_ROOT = Path(os.environ.get("BABYLON_HOME", Path(__file__).resolve().parents[4]))
 ANTIGRAVITY_BRAIN = Path.home() / ".gemini" / "antigravity" / "brain"
 
 

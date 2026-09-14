@@ -364,51 +364,49 @@ fn main() {
                 }
             };
 
-            for stream in listener.incoming() {
-                if let Ok(mut stream) = stream {
-                    let mut buffer = [0u8; 8192];
-                    if let Ok(bytes_read) = stream.read(&mut buffer) {
-                        let request_str = String::from_utf8_lossy(&buffer[..bytes_read]);
-                        let (status_line, response_body) = if request_str.starts_with("GET /verify") {
-                            match ledger::verify_chain() {
-                                Ok(report) => ("HTTP/1.1 200 OK", serde_json::to_string_pretty(&report).expect("BFT Fallback")),
+            for mut stream in listener.incoming().flatten() {
+                let mut buffer = [0u8; 8192];
+                if let Ok(bytes_read) = stream.read(&mut buffer) {
+                    let request_str = String::from_utf8_lossy(&buffer[..bytes_read]);
+                    let (status_line, response_body) = if request_str.starts_with("GET /verify") {
+                        match ledger::verify_chain() {
+                            Ok(report) => ("HTTP/1.1 200 OK", serde_json::to_string_pretty(&report).expect("BFT Fallback")),
+                            Err(e) => ("HTTP/1.1 500 INTERNAL SERVER ERROR", serde_json::json!({"error": e}).to_string()),
+                        }
+                    } else if request_str.starts_with("GET /status") {
+                        let blocks_count = ledger::get_chain_blocks().map(|b| b.len()).unwrap_or(0);
+                        let lic_status = format!("{:?}", license::check_license_file(env::license_file(), blocks_count));
+                        let status_json = serde_json::json!({
+                            "status": "ONLINE",
+                            "engine": "BABYLON-60 Sovereign Ledger",
+                            "blocks": blocks_count,
+                            "license": lic_status
+                        });
+                        ("HTTP/1.1 200 OK", status_json.to_string())
+                    } else if request_str.starts_with("POST /attest") {
+                        // Extract body
+                        if let Some(body_start) = request_str.find("\r\n\r\n") {
+                            let body = &request_str[body_start + 4..];
+                            let parsed: serde_json::Value = serde_json::from_str(body)
+                                .unwrap_or_else(|_| serde_json::json!({ "raw": body }));
+                            match ledger::append_event(parsed) {
+                                Ok(b) => ("HTTP/1.1 200 OK", serde_json::to_string_pretty(&b).expect("BFT Fallback")),
                                 Err(e) => ("HTTP/1.1 500 INTERNAL SERVER ERROR", serde_json::json!({"error": e}).to_string()),
                             }
-                        } else if request_str.starts_with("GET /status") {
-                            let blocks_count = ledger::get_chain_blocks().map(|b| b.len()).unwrap_or(0);
-                            let lic_status = format!("{:?}", license::check_license_file(env::license_file(), blocks_count));
-                            let status_json = serde_json::json!({
-                                "status": "ONLINE",
-                                "engine": "BABYLON-60 Sovereign Ledger",
-                                "blocks": blocks_count,
-                                "license": lic_status
-                            });
-                            ("HTTP/1.1 200 OK", status_json.to_string())
-                        } else if request_str.starts_with("POST /attest") {
-                            // Extract body
-                            if let Some(body_start) = request_str.find("\r\n\r\n") {
-                                let body = &request_str[body_start + 4..];
-                                let parsed: serde_json::Value = serde_json::from_str(body)
-                                    .unwrap_or_else(|_| serde_json::json!({ "raw": body }));
-                                match ledger::append_event(parsed) {
-                                    Ok(b) => ("HTTP/1.1 200 OK", serde_json::to_string_pretty(&b).expect("BFT Fallback")),
-                                    Err(e) => ("HTTP/1.1 500 INTERNAL SERVER ERROR", serde_json::json!({"error": e}).to_string()),
-                                }
-                            } else {
-                                ("HTTP/1.1 400 BAD REQUEST", "{\"error\": \"Empty Body\"}".to_string())
-                            }
                         } else {
-                            ("HTTP/1.1 404 NOT FOUND", "{\"error\": \"Not Found\"}".to_string())
-                        };
+                            ("HTTP/1.1 400 BAD REQUEST", "{\"error\": \"Empty Body\"}".to_string())
+                        }
+                    } else {
+                        ("HTTP/1.1 404 NOT FOUND", "{\"error\": \"Not Found\"}".to_string())
+                    };
 
-                        let response = format!(
-                            "{}\r\nContent-Type: application/json\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{}",
-                            status_line,
-                            response_body.len(),
-                            response_body
-                        );
-                        let _ = stream.write_all(response.as_bytes());
-                    }
+                    let response = format!(
+                        "{}\r\nContent-Type: application/json\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{}",
+                        status_line,
+                        response_body.len(),
+                        response_body
+                    );
+                    let _ = stream.write_all(response.as_bytes());
                 }
             }
         }

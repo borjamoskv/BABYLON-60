@@ -18,8 +18,11 @@ class McpCodeScaffolder:
     """
 
     def __init__(
-        self, output_dir: str = "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scratch/dynamic_mcps"
+        self, output_dir: Optional[str] = None
     ) -> None:
+        if output_dir is None:
+            base = os.environ.get("BABYLON_HOME", os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+            output_dir = os.path.join(base, "scratch", "dynamic_mcps")
         self.output_dir = output_dir
         os.makedirs(self.output_dir, exist_ok=True)
 

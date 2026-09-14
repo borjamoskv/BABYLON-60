@@ -10,9 +10,9 @@
 
 | Fichero | Descripción Técnica |
 |---|---|
-| [`sovereign_spark.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/src/agents/sovereign_mcp/sovereign_spark.py) | **`SovereignSparkAgent`**: Bucle de eventos asíncrono para inferencia agéntica local en `localhost:11434` con auto-llamada a herramientas MCP (`read_filesystem`, `query_sqlite`). |
-| [`mcp_config.json`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/src/agents/sovereign_mcp/mcp_config.json) | Esquemática de servidores MCP estándar (`@modelcontextprotocol/server-sqlite` y `@modelcontextprotocol/server-filesystem`). |
-| [`Makefile`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/src/agents/sovereign_mcp/Makefile) | Automatización de instalación (`make setup`) e inicio del agente (`make start-agent`). |
+| [`sovereign_spark.py`](sovereign_spark.py) | **`SovereignSparkAgent`**: Bucle de eventos asíncrono para inferencia agéntica local en `localhost:11434` con auto-llamada a herramientas MCP (`read_filesystem`, `query_sqlite`). |
+| [`mcp_config.json`](mcp_config.json) | Esquemática de servidores MCP estándar (`@modelcontextprotocol/server-sqlite` y `@modelcontextprotocol/server-filesystem`). |
+| [`Makefile`](Makefile) | Automatización de instalación (`make setup`) e inicio del agente (`make start-agent`). |
 
 ---
 

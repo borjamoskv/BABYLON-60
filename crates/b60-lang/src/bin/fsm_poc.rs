@@ -150,8 +150,15 @@ impl PhysicalLimitPipeline {
 }
 
 fn main() {
-    let lean_workspace = "/Users/borjafernandezangulo/BABYLON-60/proof/lean";
-    let oracle_bin = "/Users/borjafernandezangulo/BABYLON-60/proof/lean/.lake/build/bin/oracle";
+    let default_lean = if std::path::Path::new("proof/lean").exists() {
+        "proof/lean".to_string()
+    } else {
+        format!("{}/proof/lean", std::env::var("BABYLON_HOME").unwrap_or_else(|_| ".".to_string()))
+    };
+    let lean_workspace = std::env::var("BABYLON_LEAN_WORKSPACE").unwrap_or(default_lean);
+    let oracle_bin = std::env::var("BABYLON_ORACLE_BIN").unwrap_or_else(|_| format!("{}/.lake/build/bin/oracle", lean_workspace));
+    let lean_workspace = lean_workspace.as_str();
+    let oracle_bin = oracle_bin.as_str();
 
     // =========================================================================
     // VUELO 1: LA REALIDAD PERFECTA (JIT Reflection - Proof by Reflection)
@@ -165,7 +172,7 @@ fn main() {
         Event { thread_id: 2, seq: 2, action: Action::Read },
     ];
 
-    match ProofPipeline::verify_end_to_end(&pure_trace, lean_workspace, "BabylonAutoTrace.lean") {
+    match ProofPipeline::verify_end_to_end(&pure_trace, &lean_workspace, "BabylonAutoTrace.lean") {
         Ok(true) => println!("🚀 BUCLE CERRADO: BABYLON-60 ha emitido su propia prueba formal.\n"),
         _ => eprintln!("🔥 Error inesperado en flujo nominal.\n"),
     }
@@ -182,7 +189,7 @@ fn main() {
         Event { thread_id: 1, seq: 2, action: Action::WriteEnd },
     ];
 
-    match ProofPipeline::verify_end_to_end(&corrupt_trace, lean_workspace, "BabylonAutoTrace.lean") {
+    match ProofPipeline::verify_end_to_end(&corrupt_trace, &lean_workspace, "BabylonAutoTrace.lean") {
         Ok(false) => println!("🛡️ DEFENSA ACTIVA: El Oráculo detectó la violación física y abortó.\n"),
         _ => eprintln!("🔥 Error crítico: La paradoja ha escapado a la verificación.\n"),
     }
@@ -205,7 +212,7 @@ fn main() {
     }
 
     let trace_file = "/tmp/b60_1M_trace.csv";
-    let ok = PhysicalLimitPipeline::verify_massive_trace(&million_trace, oracle_bin, trace_file);
+    let ok = PhysicalLimitPipeline::verify_massive_trace(&million_trace, &oracle_bin, trace_file);
     assert!(ok, "Fallo: El vuelo 3 nominal debe ser válido");
 
     // =========================================================================
@@ -223,7 +230,7 @@ fn main() {
     };
 
     let corrupt_file = "/tmp/b60_1M_corrupt.csv";
-    let caught = !PhysicalLimitPipeline::verify_massive_trace(&corrupt_million, oracle_bin, corrupt_file);
+    let caught = !PhysicalLimitPipeline::verify_massive_trace(&corrupt_million, &oracle_bin, corrupt_file);
     assert!(caught, "Fallo: La paradoja masiva debió ser interceptada");
     println!("🛡️ DEFENSA ACTIVA COMPLETA: El Oráculo AOT neutralizó la paradoja masiva.");
 }

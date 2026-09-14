@@ -55,19 +55,19 @@ fn stress_test_10k_swarm_thermodynamic_limits() {
 
     for tick in 1..=NUM_TICKS {
         // Inyectar gradientes sensoriales estocásticos según el régimen del agente
-        for i in 0..NUM_AGENTS {
+        for (i, pipe) in sensory_pipes.iter().enumerate().take(NUM_AGENTS) {
             if i < 7000 {
                 // Régimen 1: Variación mínima (Coarse-Graining laminar, sin sorpresa)
                 let value = (i as u64 % 2) + 1;
-                sensory_pipes[i].publish(tick, &[value, 0, 0, 0]).unwrap();
+                pipe.publish(tick, &[value, 0, 0, 0]).unwrap();
             } else if i < 9000 {
                 // Régimen 2: Salto dinámico moderado (Langevin relaxation)
                 let value = (tick * 3 + (i as u64 % 5)) % 20;
-                sensory_pipes[i].publish(tick, &[value, 0, 0, 0]).unwrap();
+                pipe.publish(tick, &[value, 0, 0, 0]).unwrap();
             } else {
                 // Régimen 3: Shock adversarial de alta entropía (Inducción forzada de colapso)
                 let value = tick * 1000 + (i as u64 * 77);
-                sensory_pipes[i].publish(tick, &[value, 0, 0, 0]).unwrap();
+                pipe.publish(tick, &[value, 0, 0, 0]).unwrap();
             }
         }
 
@@ -75,8 +75,8 @@ fn stress_test_10k_swarm_thermodynamic_limits() {
         active_count = 0;
         burnout_count = 0;
 
-        for i in 0..NUM_AGENTS {
-            match scheduler.step(&blankets[i]) {
+        for (i, blanket) in blankets.iter().enumerate().take(NUM_AGENTS) {
+            match scheduler.step(blanket) {
                 Ok(AgentExecutionState::Active) => {
                     active_count += 1;
                 }
