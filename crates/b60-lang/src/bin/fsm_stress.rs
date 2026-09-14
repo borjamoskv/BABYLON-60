@@ -123,7 +123,7 @@ fn main() {
         let trace = generate_valid_trace(n_tx);
         print!("Probando N = {} txs ({} eventos)... ", n_tx, total_events);
 
-        match ProofPipeline::verify(&trace, &lean_workspace, "BabylonStressTrace.lean") {
+        match ProofPipeline::verify(&trace, lean_workspace, "BabylonStressTrace.lean") {
             Ok((success, emit_sec, lean_sec, stderr)) => {
                 if success {
                     println!("✅ ÉXITO | Emit: {:.4}s | Lean: {:.4}s | Total: {:.4}s",
@@ -150,7 +150,7 @@ fn main() {
         action: Action::Read,
     });
 
-    match ProofPipeline::verify(&corrupted_trace, &lean_workspace, "BabylonStressCorrupt.lean") {
+    match ProofPipeline::verify(&corrupted_trace, lean_workspace, "BabylonStressCorrupt.lean") {
         Ok((success, _emit_sec, lean_sec, _)) => {
             if !success {
                 println!(

@@ -144,7 +144,7 @@ fn main() {
         let aeon = generate_aeon(0, 0, n_tx);
         print!("  Aeón individual: {} txs ({} eventos)... ", n_tx, total_events);
 
-        match verify_single(&aeon, &lean_dir) {
+        match verify_single(&aeon, lean_dir) {
             Ok((_ok, t_emit, t_lean)) => {
                 let rate = total_events as f64 / t_lean;
                 println!(
@@ -181,7 +181,7 @@ fn main() {
         let t_total = Instant::now();
         let mut all_ok = true;
         for aeon in &aeons {
-            match verify_single(aeon, &lean_dir) {
+            match verify_single(aeon, lean_dir) {
                 Ok(_) => {}
                 Err(e) => {
                     println!("❌ Aeón {} falló: {}", aeon.aeon_index, &e[..e.len().min(200)]);

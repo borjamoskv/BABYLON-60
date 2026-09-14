@@ -13,7 +13,10 @@ Verifica:
 """
 
 import os
+import shutil
 import subprocess
+
+import pytest
 
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 LEAN_DIR = os.path.join(REPO_ROOT, "proof", "lean")
@@ -55,6 +58,8 @@ def test_transduction_tensor_defined() -> None:
 
 def test_lake_build_clean_compilation() -> None:
     """Verifica que lake build compile el proyecto Lean 4 sin fallos."""
+    if shutil.which("lake") is None:
+        pytest.skip("lake (Lean 4 build tool) not found in PATH — skipped in Python-only CI runners")
     cmd = ["lake", "build"]
     result = subprocess.run(cmd, cwd=LEAN_DIR, capture_output=True, text=True)
     assert result.returncode == 0, f"lake build falló:\nSTDOUT:\n{result.stdout}\nSTDERR:\n{result.stderr}"

@@ -7,6 +7,7 @@ use inotify::{Inotify, WatchMask};
 use ring::hmac;
 use rusqlite::{params, Connection};
 use signal_hook::consts::signal::{SIGINT, SIGTERM};
+#[cfg(not(target_os = "windows"))]
 use signal_hook::iterator::Signals;
 use std::env;
 #[cfg(target_os = "linux")]

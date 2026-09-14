@@ -174,7 +174,7 @@ fn main() {
     println!("Demostrando la historia de {} Aeones encadenados ({} eventos en total)...",
         n_aeons, n_aeons * tx_per_aeon * 3);
 
-    match AeonChainingPipeline::verify_aeons(&aeons, &lean_workspace, "BabylonAeonChain.lean") {
+    match AeonChainingPipeline::verify_aeons(&aeons, lean_workspace, "BabylonAeonChain.lean") {
         Ok((success, emit_sec, lean_sec, stderr)) => {
             if success {
                 println!("✅ ÉXITO TOTAL: {} Aeones verificados formalmente en cadena.", n_aeons);

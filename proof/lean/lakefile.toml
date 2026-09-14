@@ -41,3 +41,8 @@ rev = "main" # Usualmente se requiere un tag o main
 [[lean_exe]]
 name = "oracle"
 root = "BabylonOracle"
+
+[[lean_exe]]
+name = "navier_stokes_oracle"
+root = "NavierStokesOracle"
+
