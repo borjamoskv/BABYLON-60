@@ -53,12 +53,17 @@ def step (state : LockState) (event : Event) : Option LockState :=
       else 
         none
 
--- 3. INGESTA ESTRICTA FUNCIONAL O(N)
--- Una función recursiva de cola. Consume la traza empírica como una cascada de tiempo.
-def validateTraceRecursive : Option LockState → List Event → Bool
-  | none, _ => false -- La paradoja es retroactiva y colapsa la traza entera
-  | some _, [] => true -- El vacío temporal o el fin de la historia sin errores
-  | some state, ev :: rest => validateTraceRecursive (step state ev) rest
+-- 3. INGESTA ESTRICTA FUNCIONAL O(N) Y ENCADENAMIENTO DE AEONES
+-- `runAeon` propaga el estado exacto del LockState al finalizar el bloque de eventos.
+def runAeon : Option LockState → List Event → Option LockState
+  | none, _ => none
+  | some state, [] => some state
+  | some state, ev :: rest => runAeon (step state ev) rest
+
+def validateTraceRecursive (s : Option LockState) (trace : List Event) : Bool :=
+  match runAeon s trace with
+  | some _ => true
+  | none => false
 
 def validateTrace (trace : List Event) : Bool :=
   validateTraceRecursive (some { seq := 0, writer := none }) trace

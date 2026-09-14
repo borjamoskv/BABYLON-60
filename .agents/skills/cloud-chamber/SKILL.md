@@ -1,7 +1,12 @@
 ---
 name: cloud-chamber
-description: Ejecuta la Metodología de Cámara de Niebla forzando síntesis de alta densidad topológica.
+display_name: "Cámara de Niebla y Síntesis de Máxima Densidad Topológica"
+description: "Ejecuta la Metodología de Cámara de Niebla forzando síntesis de alta densidad topológica (MDL / Invariantes C5-REAL). Dispara con \"/cloud-chamber\", \"cámara de niebla\", \"máxima densidad topológica\", \"colapso mdl\"."
 ---
+
+## Composición Funtorial (MASS Stage 2)
+- PRE-REQUISITO: [autodidact-omega-deep-research]
+- POST-CADENA: [polymath-concept-synthesis]
 
 # Directiva cloud-chamber
 

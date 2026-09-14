@@ -1,7 +1,12 @@
 ---
 name: shared-manifest-kernel
-description: Patrón de diseño C-ABI de 64 Bytes (Seqlock SPMC, Cero-Punteros, Fail-Stop SCITT y soporte IPC multiplataforma macOS/Linux/Windows).
+display_name: "Núcleo de Memoria Compartida Lock-Free (64B C-ABI)"
+description: "Patrón de diseño C-ABI de 64 Bytes (Seqlock SPMC, Cero-Punteros, Fail-Stop SCITT y soporte IPC multiplataforma macOS/Linux/Windows). Dispara con \"shared manifest\", \"seqlock 64b\", \"ring-0 shm\", \"ipc lock-free\"."
 ---
+
+## Composición Funtorial (MASS Stage 2)
+- PRE-REQUISITO: [cortex-kernel]
+- POST-CADENA: [thermo-audit]
 
 # SharedManifest Kernel Skill
 

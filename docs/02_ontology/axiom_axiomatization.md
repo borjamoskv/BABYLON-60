@@ -4,7 +4,7 @@ status: Causal-Determinist
 version: 2.5.1
 ---
 
-# AXIOMATIZACIÓN FORMAL — Motor Causal‑1 APEX SINGULARITY
+# AXIOMATIZACIÓN FORMAL — Motor Causal‑1 APEX BABYLON-60
 
 <div align="center">
 

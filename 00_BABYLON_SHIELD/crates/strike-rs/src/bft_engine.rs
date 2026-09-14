@@ -111,8 +111,15 @@ impl BftAsyncEngine {
         use rand::rngs::OsRng;
         use std::thread;
 
-        let svc_tasks = "c5_bft_tasks";
-        let svc_results = "c5_bft_results";
+        let unique_suffix = {
+            use std::sync::atomic::{AtomicU64, Ordering};
+            static COUNTER: AtomicU64 = AtomicU64::new(1);
+            format!("{}_{}", std::process::id(), COUNTER.fetch_add(1, Ordering::Relaxed))
+        };
+        let svc_tasks = format!("c5_bft_tasks_{}", unique_suffix);
+        let svc_results = format!("c5_bft_results_{}", unique_suffix);
+        let svc_tasks_worker = svc_tasks.clone();
+        let svc_results_worker = svc_results.clone();
 
         let mut csprng = OsRng;
         let orch_keys = SigningKey::generate(&mut csprng);
@@ -133,8 +140,8 @@ impl BftAsyncEngine {
         let stop_worker_clone = stop_worker.clone();
         
         let worker_handle = thread::spawn(move || {
-            let task_sub = ZeroCopySubscriber::new(svc_tasks).expect("C5-REAL: Failed to bind ZeroCopy Subscriber");
-            let result_pub = ZeroCopyPublisher::new(svc_results).expect("C5-REAL: Failed to bind ZeroCopy Publisher");
+            let task_sub = ZeroCopySubscriber::new(&svc_tasks_worker).expect("C5-REAL: Failed to bind ZeroCopy Subscriber");
+            let result_pub = ZeroCopyPublisher::new(&svc_results_worker).expect("C5-REAL: Failed to bind ZeroCopy Publisher");
             
             while !stop_worker_clone.load(std::sync::atomic::Ordering::Relaxed) {
                 if let Ok(Some(sample)) = task_sub.subscriber.receive() {
@@ -178,8 +185,8 @@ impl BftAsyncEngine {
         
         let orch_keys_clone = orch_keys.clone();
         thread::spawn(move || {
-            let task_pub = ZeroCopyPublisher::new(svc_tasks).expect("C5-REAL: Failed to bind ZeroCopy Publisher");
-            let result_sub = ZeroCopySubscriber::new(svc_results).expect("C5-REAL: Failed to bind ZeroCopy Subscriber");
+            let task_pub = ZeroCopyPublisher::new(&svc_tasks).expect("C5-REAL: Failed to bind ZeroCopy Publisher");
+            let result_sub = ZeroCopySubscriber::new(&svc_results).expect("C5-REAL: Failed to bind ZeroCopy Subscriber");
             let mut completed = HashSet::new();
             
             while completed.len() < num_nodes {

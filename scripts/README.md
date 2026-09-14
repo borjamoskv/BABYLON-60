@@ -55,7 +55,6 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | :--- | :--- | :--- | :--- |
 | [`c5_cli/babylon_mail_cli.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cli/babylon_mail_cli.py) | `Python` | `898105df2cc7` | BABYLONMAIL CLI & SUBAGENT INTERFACE |
 | [`c5_cli/codex_virtual_hud.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cli/codex_virtual_hud.py) | `Python` | `feef27f04d3b` | Codex Virtual Hud Utility |
-| [`c5_cli/demo_handoff.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cli/demo_handoff.py) | `Python` | `e7ed9c244985` | Simulamos el entrypoint del paquete instalado por pip (babylon60) |
 | [`c5_cli/moskv_native_host.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cli/moskv_native_host.py) | `Python` | `38bc450b229c` | MOSKV-1 APEX: Native Messaging Transducer (INV_C5_18 / INV_C5_THERMO_VALVE) |
 | [`c5_cli/opsec_sentinel_c5.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cli/opsec_sentinel_c5.py) | `Python` | `234a7f0f8ae8` | Opsec Sentinel C5 Utility |
 | [`c5_cli/pty_tmux_bridge.sh`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cli/pty_tmux_bridge.sh) | `Shell` | `26f72663e5fb` | 🛡️ TMUX-PTY-Bridge-OMEGA (C5-REAL v2.0) |
@@ -214,10 +213,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | :--- | :--- | :--- | :--- |
 | [`c5_utils/ddd_strangler.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_utils/ddd_strangler.py) | `Python` | `975ea8dac24b` | Utils |
 | [`c5_utils/export_country_compliance.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_utils/export_country_compliance.py) | `Python` | `4990f9e54e21` | Generates localized EU AI Act / NIST AI RMF compliance reports for target countries. |
-| [`c5_utils/fetch_missing_dates.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_utils/fetch_missing_dates.py) | `Python` | `e7b4a6d36bdf` | fetch_missing_dates.py — batch update dataset.json with enrollment_velocity. |
-| [`c5_utils/financial_extractor.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_utils/financial_extractor.py) | `Python` | `5cb8b69f44a4` | Financial Extractor Utility |
 | [`c5_utils/python_spsc_reader.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_utils/python_spsc_reader.py) | `Python` | `d4efc03306eb` | python_spsc_reader.py — Consumidor Multiproceso Python Zero-Copy (C-ABI FFI) |
-| [`c5_utils/quadrilingual_enforcer.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_utils/quadrilingual_enforcer.py) | `Python` | `2206fd22a86b` | Quadrilingual Enforcer Utility |
 
 ### ⚖️ Formal Verification & Axiom Oracles
 

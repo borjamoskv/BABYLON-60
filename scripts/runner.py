@@ -182,6 +182,13 @@ def main() -> None:
     sync_parser = subparsers.add_parser("sync", help="Synchronize physical skills with docs/skills.json")
     sync_parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
 
+    # skills
+    skills_parser = subparsers.add_parser("skills", help="Sovereign Skill Router, Status and Linter")
+    skills_parser.add_argument("--status", action="store_true", help="Emit cluster health status")
+    skills_parser.add_argument("--route", type=str, default=None, help="Route prompt to canonical functorial chain")
+    skills_parser.add_argument("--lint", action="store_true", help="Run strict linter on skills cluster")
+    skills_parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
+
     # catalog
     catalog_parser = subparsers.add_parser("catalog", help="Generate or display scripts catalog")
     catalog_parser.add_argument("--json", action="store_true", help="Emit catalog JSON to stdout")
@@ -285,6 +292,17 @@ def main() -> None:
             rc1 = run_subcommand("c5_skills_ontology/sync_skills_registry.py", unknown)
             rc2 = run_subcommand("c5_quality_gates/sync_docs_index.py", [])
             sys.exit(rc1 if rc1 != 0 else rc2)
+    elif args.command == "skills":
+        cmd_args = []
+        if getattr(args, "status", False):
+            cmd_args.append("--status")
+        if getattr(args, "route", None):
+            cmd_args += ["--route", args.route]
+        if getattr(args, "lint", False):
+            cmd_args.append("--lint")
+        if getattr(args, "json", False):
+            cmd_args.append("--json")
+        sys.exit(run_subcommand("c5_skills_ontology/c5_skill_router.py", cmd_args + unknown))
     elif args.command == "catalog":
         if getattr(args, "json", False):
             sys.exit(run_subcommand("generate_scripts_readme.py", ["--json"]))

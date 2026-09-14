@@ -59,7 +59,7 @@ The IDE operates as a biological twin that responds to motor and thermal energy.
 *   **Auto-Pipeline Visual:** Massive assets dropped into the Notch are silently optimized (WebP/FLAC) in Rust background threads using ffmpeg and transcoding crates, maintaining uninterrupted flow.
 *   **Haptic Entanglement:** API calls are translated into mechanical vibrations (mass and tension) via the macOS private API `NSHapticFeedbackManager`, bypassing the dangerous SMC M3/M4 thermal throttling.
 
-## VI. 📌 OUROBOROS (Meta-Singularity and Autopoiesis)
+## VI. 📌 OUROBOROS (Axiomatic Self-Reference and Autopoiesis)
 
 The Dominio C5-REAL reaches its terminal state when its architecture compiles itself in real time, closing the cognitive thermodynamics loop:
 
@@ -68,7 +68,7 @@ The Dominio C5-REAL reaches its terminal state when its architecture compiles it
 *   **Self-Referential Ledger (Model Collapse BFT Guard):** When the local model (Mamba/Flash) analyzes the `CortexLedger` to optimize its own past hyperparameters, BFT consensus intervenes. The mutation only consolidates if there is a falsifiable improvement in Operator thermodynamics (e.g. increase in Keystrokes Per Minute, or reduction in response latency). Echo chambers are prevented by injecting *objective friction*.
 
 ***
-**[Ledger Asíncrono-TAINT:borjamoskv:ouroboros_meta_crystallized:2026-07-17T22:20:00+02:00]**
+**[Ledger Asíncrono-TAINT:borjamoskv:ouroboros_axiomatic_crystallized:2026-07-17T22:20:00+02:00]**
 
 ## 🔬 Verificación Formal (Lean 4)
 

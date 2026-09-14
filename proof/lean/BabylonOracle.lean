@@ -1,43 +1,61 @@
-import Lean
-open Lean Meta Elab Tactic
+-- ============================================================================
+-- BABYLON-60 ORACLE: Streaming Causal en Memoria O(1)
+-- ============================================================================
+import BabylonTrace
 
-/- 
-  =====================================================================
-  [BABYLON-60] LÓBULO INHIBIDOR Y ORÁCULO NEURO-SIMBÓLICO (ZERO-COPY)
-  =====================================================================
-  Esta biblioteca colapsa el motor de inferencia LLM (GGML) y el
-  elaborador de Lean 4 en un único binario soberano.
--/
+open B60.Ledger
 
--- Vinculación directa al motor Metal/C++ de BABYLON-60
-@[extern "babylon_infer_ggml"]
-opaque inferir_tactica_metal (prompt : String) : String
+namespace B60.Oracle
 
--- Táctica Neuro-Simbólica Ring-0
-syntax "babylon_oracle" : tactic
+-- 1. Deserializador Estricto O(1) de Entropía Cruda (CSV: Thread,Seq,Action)
+def parseLine (line : String) : Option Event :=
+  -- Eliminar retornos de carro manuales
+  let chars := line.toList.filter (fun c => c != '\n' && c != '\r')
+  let cleanLine := String.mk chars
+  match cleanLine.splitOn "," with
+  | [tStr, sStr, aStr] =>
+    match tStr.toNat?, sStr.toNat? with
+    | some threadId, some seq =>
+      match aStr with
+      | "0" => some { threadId := threadId, seq := seq, action := Action.writeBegin }
+      | "1" => some { threadId := threadId, seq := seq, action := Action.writeEnd }
+      | "2" => some { threadId := threadId, seq := seq, action := Action.read }
+      | _ => none
+    | _, _ => none
+  | _ => none
 
-elab_rules : tactic
-  | `(tactic| babylon_oracle) => do
-    let goal ← getMainGoal
-    let goalStr ← Meta.ppExpr (← goal.getType)
-    
-    let ctx ← getLCtx
-    let mut ctxStr := ""
-    for localDecl in ctx do
-      if !localDecl.isImplementationDetail then
-        let tipo ← Meta.ppExpr localDecl.type
-        ctxStr := ctxStr ++ s!"\n  - {localDecl.userName}: {tipo}"
+-- 2. Motor de Consumo Recursivo O(1)
+-- Transduce la entropía física desplazándose sobre el disco sin generar árboles sintácticos.
+partial def consumeStream (h : IO.FS.Handle) (state : LockState) : IO UInt32 := do
+  let line ← h.getLine
+  if line == "" then
+    IO.println "✅ [ORÁCULO] EOF. Límite Físico de 1M Tx superado. Causalidad intacta."
+    return 0
+  else
+    match parseLine line with
+    | none => 
+        IO.println s!"❌ [ORÁCULO] Entropía alienígena (Corrupción de formato): {line}"
+        return 1
+    | some ev =>
+        -- ⚡ El Tribunal Formal ⚡: Chocamos la realidad física contra la Ley Axiomática
+        match step state ev with
+        | none => 
+            IO.println s!"💥 [ORÁCULO] PARADOJA DETECTADA EN SEQ {ev.seq} (Thread {ev.threadId}). LEYES VIOLADAS."
+            return 2 -- El Oráculo aborta instantáneamente dictando el Exit != 0
+        | some nextState => consumeStream h nextState
 
-    let prompt := s!"
-[BABYLON RING-0] 
-Contexto Espacial: {ctxStr}
-Target: {goalStr}
-Emitir táctica en JSON."
+end B60.Oracle
 
-    -- Llamada síncrona C-FFI (Zero-Copy) al LLM cuántico local
-    let tactica_raw := inferir_tactica_metal prompt
-    
-    -- Invariante Ring-0: Erradicación total de admisiones ciegas (INV_C5_07 LOUD FAILURE)
-    -- El oráculo exige verificación deductiva; el bypass ciego queda proscrito.
-    logInfo m!"[C-FFI ZERO-COPY] Táctica recuperada en RAM: {tactica_raw}"
-    throwError s!"[INV_C5_07 LOUD FAILURE] El oráculo neuro-simbólico infirió: '{tactica_raw}'. La admisión ciega sin prueba ha sido erradicada. Se requiere un proof term deductivo explícito."
+-- 3. Punto de Entrada Físico (Compilación a Binario C)
+def main (args : List String) : IO UInt32 := do
+  if args.length == 0 then
+    IO.println "Uso: ./oracle <trace.csv>"
+    return 1
+  
+  let path := args.head!
+  IO.println s!"⚖️ [ORÁCULO] Despertando. Ingesta masiva iniciada sobre: {path}"
+  
+  let h ← IO.FS.Handle.mk path IO.FS.Mode.read
+  let initialState : B60.Ledger.LockState := { seq := 0, writer := none }
+  
+  B60.Oracle.consumeStream h initialState

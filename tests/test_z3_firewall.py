@@ -37,12 +37,17 @@ def test_z3_firewall_mcp_contract_validation() -> None:
     assert "Apoptosis Triggered" in str(exc_info.value)
 
 
-def test_z3_firewall_bypass_without_z3(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Prueba que el sistema no colapsa en seco si Z3 no está instalado."""
+def test_z3_firewall_apoptosis_without_z3(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Prueba que el sistema aplica apoptosis determinista (SAGA-1) si Z3 no está instalado."""
     import babylon60.kernel.z3_firewall as z3f
 
     monkeypatch.setattr(z3f, "z3", None)
 
     firewall = Z3Firewall()
-    assert firewall.falsify_algebraic_proposal(10, 5, 999) is True
-    assert firewall.validate_mcp_contract(15, 0.1) is True
+    with pytest.raises(Saga1ApoptosisError) as exc_info:
+        firewall.falsify_algebraic_proposal(10, 5, 999)
+    assert "SAGA-1" in str(exc_info.value)
+
+    with pytest.raises(Saga1ApoptosisError) as exc_info:
+        firewall.validate_mcp_contract(15, 0.1)
+    assert "SAGA-1" in str(exc_info.value)

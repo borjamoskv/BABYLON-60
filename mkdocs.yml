@@ -45,10 +45,14 @@ nav:
   - Home: README.md
   - Architecture:
     - Specification: SPECIFICATION.md
+    - Architecture Model: 01_spec/spec_architecture.md
+    - System Invariants: 01_spec/spec_invariants.md
     - Threat Model v4.0: 02_ontology/security_threat_model_v4.md
   - Enterprise:
     - Quickstart DevOps: 03_guides/QUICKSTART_ENTERPRISE.md
   - Compliance (EU AI Act):
     - Whitepaper: 04_research/eu_ai_act_compliance_whitepaper.md
     - Compliance Framework: 05_compliance_eu_ai_act.md
-  - Theory & Axioms: 06_theory/00_index.md
+  - Theory & Axioms:
+    - Index: 06_theory/00_index.md
+    - Tétrada Causal C5-REAL: 06_theory/TETRADA_CAUSAL_BABYLON60.md

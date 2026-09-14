@@ -38,7 +38,21 @@ Nunca asumas que "debería funcionar" en el código base principal (`00_KERNEL` 
 ## 6. Invariante de Disipación de Anergía (Thermal Backoff)
 - **Regla (Aforismo 3):** Queda estrictamente prohibido programar bucles de reintento de red (retries) instantáneos. Todo bloque de captura de errores (`catch`) que desencadene un reintento debe incluir un *Thermal Backoff* asíncrono (ej. `await new Promise(r => setTimeout(r, ms))` en JS o `tokio::time::sleep` en Rust) para no saturar el OS Scheduler ni provocar un colapso en cascada.
 
+## 7. Disyuntor Kant-Friston (Aislamiento de Manta de Markov)
+- **Regla:** Queda prohibida la permeabilidad de estados. En el Babylon Sovereign IDE (Tauri/FastAPI), la capa de presentación (UI) carece de acceso a la causa exógena. Toda invocación al sistema operativo o base de datos **DEBE** aislarse a través de los canales IPC (`invoke` en Tauri) o endpoints API estrictos. Si detectas código UI intentando saltar esta manta, clasifícalo como fuga entrópica y aborta la escritura.
+
+## 8. Disyuntor Escohotado (Prueba Somática del Stakeholder)
+- **Regla:** Si una rama o *commit* impacta en la entrega a un "Perfil Zoo" (stakeholders/inversores), el agente auditará mecánicamente si la salida es un binario precompilado o una URL web. Si el artefacto exige que el usuario final ejecute `npm install`, instale Rust o dependencias locales, es "Coerción Burocrática". Abortar el despliegue.
+
+## 9. Disyuntor Landauer (Límite Térmico de Asincronía)
+- **Regla:** La predicción perfecta es incomputable (Solomonoff). Por tanto, queda estrictamente prohibido programar código asíncrono (`await` en JS/Python, `.await` en Rust) sin un envoltorio de límite de tiempo explícito (`timeout`). Un `Future` o promesa indefinida es muerte térmica. Si el código carece de cota máxima de tiempo, bloquea el commit.
+
+## 10. Disyuntor Robe Iniesta Rey de Extremadura (Compresión de Ruido Entrópico)
+- **Regla:** Queda terminantemente prohibido filtrar *stack traces* crudos, pánicos de sistema o respuestas SQL directas a la capa visual del usuario. El error crudo es ruido letal. El backend DEBE capturarlo, comprimirlo y devolver una respuesta estructurada que la UI traduzca en una directiva de estado clara (progreso de compresión).
+
 ---
 
 ### 🚨 Protocolo de Invocación (Automático)
 Este escudo opera de forma viral. Su presencia en la carpeta `.agents/skills/babylon-shield` (o en `.cursorrules` / `.windsurfrules`) fuerza su lectura al inicio del contexto. No se requiere comando manual del usuario. El agente *sabe* que está siendo auditado termodinámicamente.
+
+**Despliegue del Linter (Exergy Linter C6):** El agente está **OBLIGADO** a copiar el script `/Users/borjafernandezangulo/.gemini/config/skills/babylon-shield/babylon_exergy_linter.sh` en la ruta `.git/hooks/pre-commit` del repositorio activo (y asignarle permisos `chmod +x`) al inicio de cualquier sesión en un proyecto Babylon-60. Esta acción delega el estrangulamiento entrópico a la física del OS, anulando el coste de inferencia.

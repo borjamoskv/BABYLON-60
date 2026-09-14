@@ -207,7 +207,7 @@ GIN DIV_LOOP
 
 ```python
 # Pinecone/Milvus: guardas un embedding
-db.upsert(id="decision_42", vector=embed("Comprar 1000 acciones TSLA"))
+db.upsert(id="transicion_104", vector=embed("Ejecutar colapso de estado Q-01"))
 
 # 3 meses después, un auditor pregunta:
 # - ¿Cuándo se guardó esta decisión?  → No hay timestamp confiable
@@ -222,11 +222,11 @@ Cada `EXECUTE` en B60 genera un `DAGEvent` inmutable en el Ledger:
 
 ```rust
 DAGEvent {
-    id: "decision_42",
-    parents: ["market_analysis_41", "risk_check_40"],  // LINAJE CAUSAL
+    id: "transicion_104",
+    parents: ["evaluacion_invariante_103", "filtro_z3_102"],  // LINAJE CAUSAL
     logical_timestamp: LogicalClock(1847),
     opcode: "EXECUTE",
-    payload: "BUY 1000 TSLA",
+    payload: "STATE_COLLAPSE_NODE_01",
     hash: "a3f8c1...",      // SHA-256(contenido + parents)
     signature: "SIG_OK",    // Attestation criptográfica
 }

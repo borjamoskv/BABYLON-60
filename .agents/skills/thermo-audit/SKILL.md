@@ -1,7 +1,12 @@
 ---
 name: thermo-audit
-description: Auditoría termodinámica estricta de C5-REAL (Aritmética, Concurrencia, MDL).
+display_name: "Auditoría Termodinámica de Silicio y Concurrencia"
+description: "Auditoría termodinámica estricta de C5-REAL (Aritmética, Concurrencia, MDL, Ring-0). Dispara con \"/thermo-audit\", \"auditoría termodinámica código\", \"fricción de silicio\", \"concurrencia landauer\"."
 ---
+
+## Composición Funtorial (MASS Stage 2)
+- PRE-REQUISITO: [shared-manifest-kernel]
+- POST-CADENA: [c5-real-thermodynamic-override]
 
 # Directiva thermo-audit
 

@@ -5,7 +5,8 @@
 set -e
 
 HOST_NAME="com.babylon60.moskv_scavenger"
-KERNEL_SCRIPT="$(cd "../../src/kernel" && pwd)/native_messaging_host.py"
+REPO_ROOT="$(cd "../.." && pwd)"
+KERNEL_SCRIPT="$REPO_ROOT/scripts/c5_cli/moskv_native_host.py"
 
 echo "========================================================="
 echo "   BABYLON-60 NATIVE MESSAGING HOST REGISTRATION"

@@ -4,7 +4,7 @@ status: Causal-Determinist
 version: 1.0.0
 ---
 
-# EXECUTIVE BRIEFING — Motor Causal Principal SINGULARITY
+# EXECUTIVE BRIEFING — Motor Causal Principal BABYLON-60
 
 <div align="center">
 

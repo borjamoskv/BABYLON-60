@@ -217,7 +217,9 @@ class CodexDriver:
                     if line.strip():
                         last_line = line.strip()
                 if last_line:
-                    return json.loads(last_line)
+                    data = json.loads(last_line)
+                    if isinstance(data, dict):
+                        return data
         except Exception as e:
             logger.error("Failed to read session index: %s", e)
         return None

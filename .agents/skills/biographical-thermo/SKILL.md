@@ -1,6 +1,7 @@
 ---
 name: biographical-thermo
-description: Analiza la historia, biografía y filosofía mediante el Mapeo Estructural C5-REAL (Termodinámica Discreta).
+display_name: "Mapeo Termodinámico Biográfico e Histórico"
+description: "Analiza trayectorias vitales, historia y filosofía mediante Mapeo Estructural C5-REAL (Termodinámica Discreta). Dispara con \"biografía termodinámica\", \"/biographical-thermo\", \"trayectoria termodinámica\", \"análisis biográfico termodinámico\"."
 ---
 
 # Directiva biographical-thermo

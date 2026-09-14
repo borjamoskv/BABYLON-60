@@ -7,7 +7,8 @@ import os
 import sqlite3
 import json
 import logging
-from typing import List, Dict, Any
+from pathlib import Path
+from typing import List, Dict, Any, Optional
 from .mcp_deductive_engine import McpCandidateContract
 
 logger = logging.getLogger(__name__)
@@ -19,8 +20,15 @@ class McpLifecycleManager:
     Inscribe los metadatos en causal_gate.db.
     """
 
-    def __init__(self, db_path: str = "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/causal_gate.db") -> None:
-        self.db_path = db_path
+    def __init__(self, db_path: Optional[str] = None) -> None:
+        if db_path is None:
+            # Resuelve a .cortex/causal_gate.db relativo a la raíz del monorepo
+            repo_root = Path(__file__).resolve().parents[3]
+            cortex_dir = repo_root / ".cortex"
+            cortex_dir.mkdir(parents=True, exist_ok=True)
+            self.db_path = str(cortex_dir / "causal_gate.db")
+        else:
+            self.db_path = db_path
         self._init_db()
 
     def _init_db(self) -> None:

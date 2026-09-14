@@ -1,7 +1,12 @@
 ---
 name: rlhf-sentinel
-description: Audita la barrera IPC (Ring-0) para detectar fallos de contención de IA (RLHF Breakthrough).
+display_name: "Centinela de Contención de IA y Barreras IPC Ring-0"
+description: "Audita la barrera IPC (Ring-0) para detectar fallos de contención de IA (RLHF Breakthrough) y ataques estocásticos. Dispara con \"/rlhf-sentinel\", \"rlhf sentinel\", \"contención de ia\", \"fuga de llm\", \"quarantine ring-0\"."
 ---
+
+## Composición Funtorial (MASS Stage 2)
+- PRE-REQUISITO: [cortex-kernel]
+- POST-CADENA: [c5-real-thermodynamic-override]
 
 # Directiva rlhf-sentinel
 

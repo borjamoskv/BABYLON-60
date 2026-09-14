@@ -117,8 +117,8 @@ if __name__ == "__main__":
         if sys.stdout.isatty():
             render_tui()
         else:
-            print("Headless mode.")
-            while True:
+            # Bounded headless wait loop (INV_C5_19)
+            for _ in range(3600):
                 time.sleep(1)
     except KeyboardInterrupt:
         pass

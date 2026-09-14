@@ -43,7 +43,8 @@ class Z3Firewall:
         Evalúa una propuesta algebraica básica. Útil para tests PoC.
         """
         if z3 is None:
-            return True
+            self._trigger_apoptosis("Z3 solver no disponible en Ring-0: violación de la Invariante SAGA-1")
+            return False
 
         start_z3 = time.perf_counter()
 
@@ -63,8 +64,9 @@ class Z3Firewall:
         del x, y, solver
 
         if result != z3.sat:
+            status = "TIMEOUT/UNKNOWN" if result == z3.unknown else "UNSAT"
             self._trigger_apoptosis(
-                f"Falsación Z3 (UNSAT en {z3_time:.3f}ms) para propuesta {x_val} + {y_val} = {proposed_sum}"
+                f"Falsación Z3 ({status} en {z3_time:.3f}ms) para propuesta {x_val} + {y_val} = {proposed_sum}"
             )
             return False
 
@@ -79,7 +81,8 @@ class Z3Firewall:
         - La ganancia exergética debe ser >= 0.65 (Invariante C6).
         """
         if z3 is None:
-            return True
+            self._trigger_apoptosis("Z3 solver no disponible en Ring-0: violación de la Invariante SAGA-1")
+            return False
 
         start_z3 = time.perf_counter()
         solver = z3.Solver()
@@ -105,8 +108,9 @@ class Z3Firewall:
         del p_count, exergy, solver
 
         if result != z3.sat:
+            status = "TIMEOUT/UNKNOWN" if result == z3.unknown else "UNSAT"
             self._trigger_apoptosis(
-                f"Falsación Z3 (UNSAT en {z3_time:.3f}ms) para Contrato MCP (params: {parameters_count}, exergy: {estimated_exergy})"
+                f"Falsación Z3 ({status} en {z3_time:.3f}ms) para Contrato MCP (params: {parameters_count}, exergy: {estimated_exergy})"
             )
             return False
 

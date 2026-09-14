@@ -292,6 +292,7 @@ def cmd_daemon(args: argparse.Namespace) -> None:
                             ["swift", str(biometric_gate_path), "--causal-hash", causal_hash, "--message", "Codex Tunnel Mutation"],
                             capture_output=True,
                             text=True,
+                            timeout=30.0,
                         )
                         if res.returncode == 0:
                             gate_out = res.stdout.strip()

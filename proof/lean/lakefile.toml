@@ -34,3 +34,7 @@ rev = "master"
 name = "proofwidgets"
 git = "https://github.com/leanprover-community/ProofWidgets4"
 rev = "main" # Usualmente se requiere un tag o main
+
+[[lean_exe]]
+name = "oracle"
+root = "BabylonOracle"

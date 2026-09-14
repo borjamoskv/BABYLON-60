@@ -78,13 +78,6 @@ voice-full = [
     "mlx-lm>=0.21; platform_machine=='arm64' and sys_platform=='darwin'",
     "kokoro>=0.9",
 ]
-apex = [
-    "numpy>=1.24",
-    "scikit-learn>=1.3",
-    "scipy>=1.11",
-    "yfinance>=1.6.0",
-]
-
 [project.scripts]
 babylon60 = "babylon60.cli.onco_transducer:main"
 babylon60-compliance = "babylon60.compliance_exporter.eu_ai_act:main_cli"
@@ -94,7 +87,6 @@ babylon60-dashboard = "scripts.c5_thermo.exergy_dashboard_server:main"
 babylon60-bridge = "babylon60.cli.bridge:main"
 babylon60-onco = "babylon60.cli.onco_transducer:main"
 babylon60-attest = "babylon60.cli.llm_attest:main"
-apex = "apex_trials.cli:main"
 cortex-compliance = "babylon60.compliance_exporter.eu_ai_act:main_cli"
 cortex-license = "babylon60.cli.license_cli:main"
 cortex-mcp = "babylon60.mcp.cortex_mcp_server:main"
@@ -110,11 +102,9 @@ cortex-char-attest = "babylon60.cli.attest_character_count:main"
 [tool.hatch.build.targets.wheel]
 packages = [
     "01_ORCHESTRATOR/babylon60",
-    "01_ORCHESTRATOR/apex_trials",
     "02_AGENTS_ARCHI/agents_archi"
 ]
 exclude = [
-    "01_ORCHESTRATOR/babylon60/extensions",
     "01_ORCHESTRATOR/babylon60/utils"
 ]
 
@@ -133,7 +123,6 @@ extend-exclude = [
     "L1_sink",
     "BABYLON-60-fixes",
     "c5_remotion_video",
-    "01_ORCHESTRATOR/babylon60/extensions",
 ]
 
 [tool.ruff.lint]
@@ -144,14 +133,8 @@ ignore = ["E743"]
 python_version = "3.12"
 explicit_package_bases = true
 disallow_any_generics = false
-exclude = ["^scratch/", "^01_ORCHESTRATOR/babylon60/extensions/"]
+exclude = ["^scratch/"]
 ignore_missing_imports = true
-
-# Legacy vendorizado (babylon60/extensions): excluido de packaging y lint.
-# Se trata como Any hasta su poda/tipado — deuda registrada en el issue tracker.
-[[tool.mypy.overrides]]
-module = ["babylon60.extensions.*"]
-follow_imports = "skip"
 
 [dependency-groups]
 dev = [

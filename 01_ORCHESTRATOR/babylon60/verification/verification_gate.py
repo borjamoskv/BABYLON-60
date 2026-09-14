@@ -209,6 +209,7 @@ class VerificationGate:
                 capture_output=True,
                 text=True,
                 check=True,
+                timeout=30.0,
             )
 
             signature = result.stdout.strip()
@@ -224,8 +225,9 @@ class VerificationGate:
             )
             return True
 
-        except subprocess.CalledProcessError as e:
-            print(f"[X] Causal Sign-Off RECHAZADO o Timeout. Error: {e.stderr.strip()}")
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
+            err_details = e.stderr.strip() if isinstance(e, subprocess.CalledProcessError) and e.stderr else str(e)
+            print(f"[X] Causal Sign-Off RECHAZADO o Timeout. Error: {err_details}")
             self.register_sign_off(
                 execution_id=execution_id,
                 action_name=action_name,

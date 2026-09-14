@@ -1,4 +1,4 @@
-.PHONY: all check test lint typecheck format backend
+.PHONY: all check test lint typecheck format
 
 all: format lint typecheck test
 
@@ -17,6 +17,3 @@ typecheck:
 
 test:
 	pytest tests/ -v
-
-backend:
-	python3 run_backend.py
