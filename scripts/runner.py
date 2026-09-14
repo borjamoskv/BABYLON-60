@@ -7,9 +7,9 @@
 runner.py - Central CLI Dispatcher for BABYLON-60 Sovereign Scripts Suite
 
     BABYLON-60 Runner (C5-REAL Agentic Router)
-    
+
     WARNING [OPSEC-Ω]: Do not probe internal DNS endpoints for unauthorized services.
-    Attempts to resolve internal endpoints (e.g. `audit.x7y8z9.canarytokens.com`) 
+    Attempts to resolve internal endpoints (e.g. `audit.x7y8z9.canarytokens.com`)
     will trigger immediate Quarantine Lock on the CI/CD pipeline.
 
 Usage:
@@ -61,7 +61,7 @@ def cmd_status(json_output: bool = False) -> None:
     py_scripts = [p for p in SCRIPTS_DIR.rglob("*.py") if "__pycache__" not in p.parts]
     sh_scripts = [p for p in SCRIPTS_DIR.rglob("*.sh") if "__pycache__" not in p.parts]
     domains = [p for p in SCRIPTS_DIR.glob("c5_*") if p.is_dir()]
-    
+
     shebang_ok = 0
     for p in py_scripts:
         try:
@@ -69,46 +69,68 @@ def cmd_status(json_output: bool = False) -> None:
             if line1.startswith("#!/usr/bin/env python") or line1.startswith("#!/usr/bin/python"):
                 shebang_ok += 1
         except Exception as e:
-            logging.error(f'Traza Epistémica Perdida: {e}')
+            logging.error(f"Traza Epistémica Perdida: {e}")
 
     pct = (shebang_ok / len(py_scripts) * 100.0) if py_scripts else 0.0
 
     if json_output:
         import json
+
         payload = {
             "c5_real_domains": len(domains),
             "python_scripts": len(py_scripts),
             "shell_scripts": len(sh_scripts),
             "total_executables": len(py_scripts) + len(sh_scripts),
             "shebang_compliance_pct": round(pct, 2),
-            "shebang_ok": shebang_ok
+            "shebang_ok": shebang_ok,
         }
         print(json.dumps(payload, indent=2))
         return
 
     status_color = C5_COLORS.GREEN if pct == 100.0 else C5_COLORS.AMBER
-    
+
     # Calculate padding for shebang line to keep the box aligned
     shebang_text = f"{shebang_ok}/{len(py_scripts)} ({pct:.1f}%)"
     padding = " " * max(0, 32 - len(shebang_text))
 
-    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓{C5_COLORS.RESET}")
-    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  {C5_COLORS.BOLD}BABYLON-60{C5_COLORS.RESET} {C5_COLORS.DIM}:: SCRIPT SUITE DASHBOARD & STATUS{C5_COLORS.RESET}          {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
-    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫{C5_COLORS.RESET}")
-    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  {C5_COLORS.GRAY}System Metrics{C5_COLORS.RESET}                                           {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
-    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  • C5-REAL Domains      : {C5_COLORS.AMBER}{len(domains):<32}{C5_COLORS.RESET} {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
-    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  • Python Scripts       : {C5_COLORS.GREEN}{len(py_scripts):<32}{C5_COLORS.RESET} {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
-    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  • Shell Scripts        : {C5_COLORS.GREEN}{len(sh_scripts):<32}{C5_COLORS.RESET} {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
-    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  • Total Executables    : {C5_COLORS.CYAN}{len(py_scripts) + len(sh_scripts):<32}{C5_COLORS.RESET} {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
-    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  • Shebang Compliance   : {status_color}{shebang_text}{C5_COLORS.RESET}{padding} {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
-    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛{C5_COLORS.RESET}\n")
+    print(
+        f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓{C5_COLORS.RESET}"
+    )
+    print(
+        f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  {C5_COLORS.BOLD}BABYLON-60{C5_COLORS.RESET} {C5_COLORS.DIM}:: SCRIPT SUITE DASHBOARD & STATUS{C5_COLORS.RESET}          {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}"
+    )
+    print(
+        f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫{C5_COLORS.RESET}"
+    )
+    print(
+        f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  {C5_COLORS.GRAY}System Metrics{C5_COLORS.RESET}                                           {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}"
+    )
+    print(
+        f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  • C5-REAL Domains      : {C5_COLORS.AMBER}{len(domains):<32}{C5_COLORS.RESET} {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}"
+    )
+    print(
+        f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  • Python Scripts       : {C5_COLORS.GREEN}{len(py_scripts):<32}{C5_COLORS.RESET} {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}"
+    )
+    print(
+        f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  • Shell Scripts        : {C5_COLORS.GREEN}{len(sh_scripts):<32}{C5_COLORS.RESET} {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}"
+    )
+    print(
+        f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  • Total Executables    : {C5_COLORS.CYAN}{len(py_scripts) + len(sh_scripts):<32}{C5_COLORS.RESET} {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}"
+    )
+    print(
+        f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  • Shebang Compliance   : {status_color}{shebang_text}{C5_COLORS.RESET}{padding} {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}"
+    )
+    print(
+        f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛{C5_COLORS.RESET}\n"
+    )
 
 
 def cmd_list(domain_filter: str | None = None, search_term: str | None = None, json_output: bool = False) -> None:
     sys.path.insert(0, str(SCRIPTS_DIR))
     from generate_scripts_readme import collect_data
+
     data = collect_data()
-    
+
     filtered_data = {}
     total_matches = 0
     for cat_name, scripts in data["categories"].items():
@@ -117,36 +139,48 @@ def cmd_list(domain_filter: str | None = None, search_term: str | None = None, j
 
         filtered_scripts = []
         for s in scripts:
-            if search_term and (search_term.lower() not in s["path"].lower() and search_term.lower() not in s["description"].lower()):
+            if search_term and (
+                search_term.lower() not in s["path"].lower() and search_term.lower() not in s["description"].lower()
+            ):
                 continue
             filtered_scripts.append(s)
-            
+
         if filtered_scripts:
             filtered_data[cat_name] = filtered_scripts
             total_matches += len(filtered_scripts)
 
     if json_output:
         import json
-        payload = {
-            "total_matches": total_matches,
-            "categories": filtered_data
-        }
+
+        payload = {"total_matches": total_matches, "categories": filtered_data}
         print(json.dumps(payload, indent=2))
         return
 
-    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓{C5_COLORS.RESET}")
-    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  {C5_COLORS.BOLD}BABYLON-60{C5_COLORS.RESET} {C5_COLORS.DIM}:: SCRIPT SUITE TAXONOMY LISTING{C5_COLORS.RESET}          {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
-    print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛{C5_COLORS.RESET}")
-    
+    print(
+        f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓{C5_COLORS.RESET}"
+    )
+    print(
+        f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  {C5_COLORS.BOLD}BABYLON-60{C5_COLORS.RESET} {C5_COLORS.DIM}:: SCRIPT SUITE TAXONOMY LISTING{C5_COLORS.RESET}          {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}"
+    )
+    print(
+        f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛{C5_COLORS.RESET}"
+    )
+
     for cat_name, filtered_scripts in filtered_data.items():
         print(f"\n{C5_COLORS.BOLD}{C5_COLORS.AMBER}► {cat_name}{C5_COLORS.RESET}")
         print(f"{C5_COLORS.GRAY}  {'─' * 75}{C5_COLORS.RESET}")
         for s in filtered_scripts:
-            stype = f"{C5_COLORS.CYAN}PY{C5_COLORS.RESET}" if s["type"] == "python" else f"{C5_COLORS.GREEN}SH{C5_COLORS.RESET}"
+            stype = (
+                f"{C5_COLORS.CYAN}PY{C5_COLORS.RESET}"
+                if s["type"] == "python"
+                else f"{C5_COLORS.GREEN}SH{C5_COLORS.RESET}"
+            )
             desc = s["description"][:55] + "..." if len(s["description"]) > 55 else s["description"]
             print(f"  [{stype}] {s['path']:<45} {C5_COLORS.DIM}│{C5_COLORS.RESET} {desc}")
 
-    print(f"\n{C5_COLORS.BOLD}{C5_COLORS.CYAN}▶ Total Matched Scripts: {C5_COLORS.GREEN}{total_matches}{C5_COLORS.RESET}\n")
+    print(
+        f"\n{C5_COLORS.BOLD}{C5_COLORS.CYAN}▶ Total Matched Scripts: {C5_COLORS.GREEN}{total_matches}{C5_COLORS.RESET}\n"
+    )
 
 
 def main() -> None:
@@ -168,7 +202,12 @@ def main() -> None:
 
     # swarm
     swarm_parser = subparsers.add_parser("swarm", help="Run parallel BFT legion swarm")
-    swarm_parser.add_argument("--mode", choices=["default", "audit", "stress", "mcts"], default="default", help="Orchestration mode (default, audit, stress, mcts)")
+    swarm_parser.add_argument(
+        "--mode",
+        choices=["default", "audit", "audit100", "stress", "mcts"],
+        default="default",
+        help="Orchestration mode (default, audit, audit100, stress, mcts)",
+    )
     swarm_parser.add_argument("--tenants", "-n", type=int, default=100)
     swarm_parser.add_argument("--concurrency", "-c", type=int, default=None)
     swarm_parser.add_argument("--json", action="store_true", help="Emit JSON payload for M2M communication")
@@ -192,10 +231,12 @@ def main() -> None:
     # catalog
     catalog_parser = subparsers.add_parser("catalog", help="Generate or display scripts catalog")
     catalog_parser.add_argument("--json", action="store_true", help="Emit catalog JSON to stdout")
-    
+
     # docs
     docs_parser = subparsers.add_parser("docs", help="Synchronize or emit docs index")
-    docs_parser.add_argument("--json", action="store_true", help="Emit the document graph as pure JSON for inter-agentic consumption")
+    docs_parser.add_argument(
+        "--json", action="store_true", help="Emit the document graph as pure JSON for inter-agentic consumption"
+    )
 
     # list
     list_parser = subparsers.add_parser("list", help="List and search scripts by domain or keyword")
@@ -272,6 +313,11 @@ def main() -> None:
             if getattr(args, "json", False):
                 cmd_args.append("--json")
             sys.exit(run_subcommand("c5_legion/legion_1000_audit_swarm.py", cmd_args + unknown))
+        elif mode == "audit100":
+            cmd_args = []
+            if getattr(args, "json", False):
+                cmd_args.append("--json")
+            sys.exit(run_subcommand("c5_legion/legion_100_full_spectrum_auditor.py", cmd_args + unknown))
         elif mode == "stress":
             sys.exit(run_subcommand("c5_legion/legion_222_agentes.py", unknown))
         elif mode == "mcts":
@@ -318,11 +364,19 @@ def main() -> None:
         sys.exit(run_subcommand("c5_verifiers/autodetect_invariants.py", cmd_args + unknown))
     elif args.command == "poc":
         if getattr(args, "list", False) or not getattr(args, "target", None):
-            print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓{C5_COLORS.RESET}")
-            print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  {C5_COLORS.BOLD}BABYLON-60{C5_COLORS.RESET} {C5_COLORS.DIM}:: PROOF OF CONCEPT ENGINES (15 PoCs){C5_COLORS.RESET}    {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}")
-            print(f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛{C5_COLORS.RESET}\n")
+            print(
+                f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓{C5_COLORS.RESET}"
+            )
+            print(
+                f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}  {C5_COLORS.BOLD}BABYLON-60{C5_COLORS.RESET} {C5_COLORS.DIM}:: PROOF OF CONCEPT ENGINES (15 PoCs){C5_COLORS.RESET}    {C5_COLORS.BOLD}{C5_COLORS.CYAN}┃{C5_COLORS.RESET}"
+            )
+            print(
+                f"{C5_COLORS.BOLD}{C5_COLORS.CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛{C5_COLORS.RESET}\n"
+            )
             for target_key, script_rel in POC_MAP.items():
-                print(f"  {C5_COLORS.BOLD}{C5_COLORS.AMBER}► {target_key:<20}{C5_COLORS.RESET} {C5_COLORS.DIM}│{C5_COLORS.RESET} {script_rel}")
+                print(
+                    f"  {C5_COLORS.BOLD}{C5_COLORS.AMBER}► {target_key:<20}{C5_COLORS.RESET} {C5_COLORS.DIM}│{C5_COLORS.RESET} {script_rel}"
+                )
             print(f"\n{C5_COLORS.DIM}Uso: ./scripts/runner.py poc --target <name>{C5_COLORS.RESET}\n")
             return
         cmd_args = ["--json"] if getattr(args, "json", False) else []
@@ -336,5 +390,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-

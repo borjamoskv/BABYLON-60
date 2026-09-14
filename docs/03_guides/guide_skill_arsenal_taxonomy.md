@@ -17,12 +17,13 @@ version: 26.200
 > Los skills se definen por la exergía que producen.
 
 ```yaml
-Date: 2026-09-14T07:00:00+02:00
-Operator: borjamoskv
-Total_Physical_Skills: 105
-Average_Exergy_Density: 18684.57 / 23.000
-Classification: Thermodynamic Exergy Tiers (S → D)
-Collision_State: 0 Residual Collisions (Absolute Orthogonality)
+Fecha: 2026-09-14T07:00:00+02:00
+Operador: borjamoskv
+Total_Skills_Fisicos: 105
+Densidad_Exergia_Promedio: 18684.57 / 23.000
+Clasificacion: Niveles de Exergía Termodinámica (S → D)
+Estado_Colisiones: 0 Colisiones Residuales (Ortogonalidad Absoluta)
+Regla_Linguistica: Soberanía Lingüística Total (C5-REAL en Español / GitHub Estrictamente en Inglés)
 ```
 
 ---
@@ -57,7 +58,21 @@ graph TD
 
 ---
 
-## TIER S — SOVEREIGN KERNEL & META-KERNEL (≥ 21.000)
+## 2. Invariante de Frontera Lingüística (Soberanía C5-REAL vs. Ecosistema GitHub)
+
+El arsenal de skills opera bajo una demarcación ontológica estricta de dos canales lingüísticos:
+
+1. **Soberanía Lingüística Total (Territorio C5-REAL — Español):**
+   - Todo el razonamiento ontológico, epistemología polímata, fundamentación matemática en Lean 4, medicina, física teórica, arquitectura de software interna y guías de gobernanza residen en español técnico soberano de alta densidad exérgica.
+   - Las descripciones, metadatos y árboles de inferencia del clúster de skills garantizan cero dependencia colonial lingüística interna.
+
+2. **Invariante Canónica de Superficie Pública (GitHub — Strict English Invariant):**
+   - **GitHub siempre en inglés**: Toda superficie expuesta al ecosistema internacional de código abierto (repositorios públicos de GitHub, READMEs de cara al exterior, mensajes de commit en repositorios abiertos, issues, pull requests, especificaciones de pipelines de CI/CD y el skill `github-architect`) DEBE redactarse y ejecutarse **estrictamente en inglés**.
+   - Esta separación previene la fricción comunicativa en la red global de colaboradores y herramientas externas sin adulterar la soberanía del núcleo interior.
+
+---
+
+## NIVEL S — KERNEL SOBERANO Y META-KERNEL (TIER S, ≥ 21.000)
 
 > Skills que mutan directamente el estado determinista causal, hacen cumplir invariantes BFT o blindan el núcleo de hardware y silicio.
 
@@ -75,7 +90,7 @@ graph TD
 
 ---
 
-## TIER A — OPERATIONAL WEAPONS & INFERENCE NUCLEUS (18.000 — 20.999)
+## NIVEL A — ARMAMENTO OPERATIVO Y NÚCLEO DE INFERENCIA (TIER A, 18.000 — 20.999)
 
 > Habilidades de alta densidad ontológica: investigación profunda, oráculos Popperianos, ingeniería inversa y gobernanza DevSecOps.
 
@@ -153,7 +168,7 @@ graph TD
 
 ---
 
-## TIER B — DOMAIN OPERATIONS & SYSTEM ENGINEERING (15.000 — 17.999)
+## NIVEL B — OPERACIONES DE DOMINIO E INGENIERÍA DE SISTEMAS (TIER B, 15.000 — 17.999)
 
 > Producción audiovisual DSP, análisis de series temporales, compiladores DAG y automatización de infraestructura.
 
@@ -182,7 +197,7 @@ graph TD
 
 ---
 
-## TIER C — FORENSIC DIAGNOSTICS & HARDENING (12.000 — 14.999)
+## NIVEL C — DIAGNÓSTICO FORENSE Y ENDURECIMIENTO (TIER C, 12.000 — 14.999)
 
 > Diagnóstico de red, firewall LuLu, colisiones ASAR, empaquetado Electron y análisis de memoria.
 
@@ -196,7 +211,7 @@ graph TD
 
 ---
 
-## TIER D — UTILITIES & PROTOCOL TRANSDUCERS (< 12.000)
+## NIVEL D — UTILIDADES Y TRANSDUCTORES DE PROTOCOLO (TIER D, < 12.000)
 
 > Transductores de rate limits, tagged brackets, utilidades de handoff inter-sesión y generación de sátira.
 

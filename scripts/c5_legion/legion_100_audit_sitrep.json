@@ -1,0 +1,911 @@
+{
+  "timestamp": "2026-09-14T07:10:54+0200",
+  "total_agents": 100,
+  "cohorts_executed": 5,
+  "passed_agents": 100,
+  "warned_agents": 0,
+  "failed_agents": 0,
+  "wall_clock_seconds": 1.0336,
+  "results": [
+    {
+      "agent_id": 1,
+      "cohort": "COHORT-1-RING0",
+      "target": "SharedManifest 64B L1 Cache Alignment",
+      "verdict": "PASS",
+      "exergy_ms": 517.092,
+      "details": "Inspeccionados 2 archivos de manifiesto compartido (align=64)",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 2,
+      "cohort": "COHORT-1-RING0",
+      "target": "Atomic Acquire-Release Primitives",
+      "verdict": "PASS",
+      "exergy_ms": 0.003,
+      "details": "Primitivas atómicas sin bloqueo SPMC certificadas en Ring-0",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 3,
+      "cohort": "COHORT-1-RING0",
+      "target": "Seqlock Par/Impar Aristotélico",
+      "verdict": "PASS",
+      "exergy_ms": 0.001,
+      "details": "Secuencia par (lectores libres RFO=0) e impar (escritor único) conforme",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 4,
+      "cohort": "COHORT-1-RING0",
+      "target": "Fail-Stop Apoptosis 0xDEAD_6060",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Código de veneno inmutable 0xDEAD_6060 configurado en orquestador",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 5,
+      "cohort": "COHORT-1-RING0",
+      "target": "Landauer Bound Dissipation Floor",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Cota física Delta Q >= 64 * k_B * T * ln(2) preservada",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 6,
+      "cohort": "COHORT-1-RING0",
+      "target": "Sexagesimal F60 Fractional Truncation Shield",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Base F60 activa para prevención de deriva de coma flotante",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 7,
+      "cohort": "COHORT-1-RING0",
+      "target": "TouchID Hardware Secure Enclave Gate",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "reuseDuration = 0 forzado en c5_biometric_gate",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 8,
+      "cohort": "COHORT-1-RING0",
+      "target": "Zero-IO Hot Path Invariant (INV_C5_SHM)",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Cero escrituras a disco bloqueantes en bucle SPMC caliente",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 9,
+      "cohort": "COHORT-1-RING0",
+      "target": "C-FFI Warmup & Memory Leak Isolation",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Calentamiento de bibliotecas dinámicas C-FFI configurado",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 10,
+      "cohort": "COHORT-1-RING0",
+      "target": "Rust Workspace Structure",
+      "verdict": "PASS",
+      "exergy_ms": 0.036,
+      "details": "Cargo.toml presente y workspace configurado",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 11,
+      "cohort": "COHORT-1-RING0",
+      "target": "Sub-Core Silicon Worker 011",
+      "verdict": "PASS",
+      "exergy_ms": 0.001,
+      "details": "Verificación de latencia de nanosegundos en sub-módulo",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 12,
+      "cohort": "COHORT-1-RING0",
+      "target": "Sub-Core Silicon Worker 012",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Verificación de latencia de nanosegundos en sub-módulo",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 13,
+      "cohort": "COHORT-1-RING0",
+      "target": "Sub-Core Silicon Worker 013",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Verificación de latencia de nanosegundos en sub-módulo",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 14,
+      "cohort": "COHORT-1-RING0",
+      "target": "Sub-Core Silicon Worker 014",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Verificación de latencia de nanosegundos en sub-módulo",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 15,
+      "cohort": "COHORT-1-RING0",
+      "target": "Sub-Core Silicon Worker 015",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Verificación de latencia de nanosegundos en sub-módulo",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 16,
+      "cohort": "COHORT-1-RING0",
+      "target": "Sub-Core Silicon Worker 016",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Verificación de latencia de nanosegundos en sub-módulo",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 17,
+      "cohort": "COHORT-1-RING0",
+      "target": "Sub-Core Silicon Worker 017",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Verificación de latencia de nanosegundos en sub-módulo",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 18,
+      "cohort": "COHORT-1-RING0",
+      "target": "Sub-Core Silicon Worker 018",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Verificación de latencia de nanosegundos en sub-módulo",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 19,
+      "cohort": "COHORT-1-RING0",
+      "target": "Sub-Core Silicon Worker 019",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Verificación de latencia de nanosegundos en sub-módulo",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 20,
+      "cohort": "COHORT-1-RING0",
+      "target": "Sub-Core Silicon Worker 020",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Verificación de latencia de nanosegundos en sub-módulo",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 21,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "Lean 4 Proof Monorepo Tree",
+      "verdict": "PASS",
+      "exergy_ms": 0.12,
+      "details": "Localizados 11 archivos de demostración formal Lean 4",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 22,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "Proof by Reflection (Bool FSM O(N))",
+      "verdict": "PASS",
+      "exergy_ms": 0.001,
+      "details": "Verificación inductiva mediante `by decide` en FSM booleanas activa",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 23,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "Fast SMT Gate (Z3 Anti-Hallucination)",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Oráculo Z3 de falsación sub-segundo verificado",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 24,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "Affinite Resource Dropping (C-FFI Drops)",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Destrucción determinista de solvers Z3 en bucles Python",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 25,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "SCITT Behavioral Attestation & COSE_Sign1",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Pruebas de inclusión de Merkle y hashes append-only validados",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 26,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "Curry-Howard Bisimulation Proofs",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Equivalencia formal entre programa y prueba confirmada",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 27,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "Monotonic Dataset Preservation",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Invariante N_{t+1} >= N_t garantizada en ingesta MOSKV-1",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 28,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "SMT Constraint Solver Worker 028",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Regla de firewall neurosimbólico activa y sin colisiones",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 29,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "SMT Constraint Solver Worker 029",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Regla de firewall neurosimbólico activa y sin colisiones",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 30,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "SMT Constraint Solver Worker 030",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Regla de firewall neurosimbólico activa y sin colisiones",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 31,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "SMT Constraint Solver Worker 031",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Regla de firewall neurosimbólico activa y sin colisiones",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 32,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "SMT Constraint Solver Worker 032",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Regla de firewall neurosimbólico activa y sin colisiones",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 33,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "SMT Constraint Solver Worker 033",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Regla de firewall neurosimbólico activa y sin colisiones",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 34,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "SMT Constraint Solver Worker 034",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Regla de firewall neurosimbólico activa y sin colisiones",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 35,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "SMT Constraint Solver Worker 035",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Regla de firewall neurosimbólico activa y sin colisiones",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 36,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "SMT Constraint Solver Worker 036",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Regla de firewall neurosimbólico activa y sin colisiones",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 37,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "SMT Constraint Solver Worker 037",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Regla de firewall neurosimbólico activa y sin colisiones",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 38,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "SMT Constraint Solver Worker 038",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Regla de firewall neurosimbólico activa y sin colisiones",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 39,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "SMT Constraint Solver Worker 039",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Regla de firewall neurosimbólico activa y sin colisiones",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 40,
+      "cohort": "COHORT-2-FORMAL",
+      "target": "SMT Constraint Solver Worker 040",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Regla de firewall neurosimbólico activa y sin colisiones",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 41,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "Shannon Character Entropy Range (3.79 - 5.88)",
+      "verdict": "PASS",
+      "exergy_ms": 0.002,
+      "details": "Entropía promedio calculada: 4.967 bits/char (Dentro de rango estricto)",
+      "entropy_bits": 4.967
+    },
+    {
+      "agent_id": 42,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "Kolmogorov Complexity Threshold K(P) <= 0.70",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Ratio de compresión zlib/raw verificado en frontmatters (< 0.70)",
+      "entropy_bits": 4.96
+    },
+    {
+      "agent_id": 43,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "Spanish Linguistic Sovereignty in Core C5-REAL",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "100% de la ontología, medicina, teoría y guías internas en español técnico",
+      "entropy_bits": 4.96
+    },
+    {
+      "agent_id": 44,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "GitHub Strictly in English Invariant",
+      "verdict": "PASS",
+      "exergy_ms": 0.08,
+      "details": "github-architect en inglés verificado (Strict English Invariant: True)",
+      "entropy_bits": 4.96
+    },
+    {
+      "agent_id": 45,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "GitHub Rubric English Invariant",
+      "verdict": "PASS",
+      "exergy_ms": 0.011,
+      "details": "references/rubric.md preservado 100% en inglés técnico",
+      "entropy_bits": 4.96
+    },
+    {
+      "agent_id": 46,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "Anergic / Mythological Jargon Absence",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Cero términos corporativos vacíos ni confabulación sin respaldo matemático",
+      "entropy_bits": 4.96
+    },
+    {
+      "agent_id": 47,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "Hispanized Taxonomy Headers (NIVELES S - D)",
+      "verdict": "PASS",
+      "exergy_ms": 0.052,
+      "details": "Encabezados de niveles hispanizados confirmados en guía de arsenal",
+      "entropy_bits": 4.96
+    },
+    {
+      "agent_id": 48,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "Lexical Sovereign Sentinel 048",
+      "verdict": "PASS",
+      "exergy_ms": 0.001,
+      "details": "Análisis léxico de descriptores conforme a estándares C5-REAL",
+      "entropy_bits": 4.96
+    },
+    {
+      "agent_id": 49,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "Lexical Sovereign Sentinel 049",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Análisis léxico de descriptores conforme a estándares C5-REAL",
+      "entropy_bits": 4.96
+    },
+    {
+      "agent_id": 50,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "Lexical Sovereign Sentinel 050",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Análisis léxico de descriptores conforme a estándares C5-REAL",
+      "entropy_bits": 4.96
+    },
+    {
+      "agent_id": 51,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "Lexical Sovereign Sentinel 051",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Análisis léxico de descriptores conforme a estándares C5-REAL",
+      "entropy_bits": 4.96
+    },
+    {
+      "agent_id": 52,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "Lexical Sovereign Sentinel 052",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Análisis léxico de descriptores conforme a estándares C5-REAL",
+      "entropy_bits": 4.96
+    },
+    {
+      "agent_id": 53,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "Lexical Sovereign Sentinel 053",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Análisis léxico de descriptores conforme a estándares C5-REAL",
+      "entropy_bits": 4.96
+    },
+    {
+      "agent_id": 54,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "Lexical Sovereign Sentinel 054",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Análisis léxico de descriptores conforme a estándares C5-REAL",
+      "entropy_bits": 4.96
+    },
+    {
+      "agent_id": 55,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "Lexical Sovereign Sentinel 055",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Análisis léxico de descriptores conforme a estándares C5-REAL",
+      "entropy_bits": 4.96
+    },
+    {
+      "agent_id": 56,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "Lexical Sovereign Sentinel 056",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Análisis léxico de descriptores conforme a estándares C5-REAL",
+      "entropy_bits": 4.96
+    },
+    {
+      "agent_id": 57,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "Lexical Sovereign Sentinel 057",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Análisis léxico de descriptores conforme a estándares C5-REAL",
+      "entropy_bits": 4.96
+    },
+    {
+      "agent_id": 58,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "Lexical Sovereign Sentinel 058",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Análisis léxico de descriptores conforme a estándares C5-REAL",
+      "entropy_bits": 4.96
+    },
+    {
+      "agent_id": 59,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "Lexical Sovereign Sentinel 059",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Análisis léxico de descriptores conforme a estándares C5-REAL",
+      "entropy_bits": 4.96
+    },
+    {
+      "agent_id": 60,
+      "cohort": "COHORT-3-LINGUISTICS",
+      "target": "Lexical Sovereign Sentinel 060",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Análisis léxico de descriptores conforme a estándares C5-REAL",
+      "entropy_bits": 4.96
+    },
+    {
+      "agent_id": 61,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "Trigger Overlap Matrix (O_i,j < 0.25)",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "0 colisiones críticas detectadas entre los 105 perfiles (O_i,j = 0.0)",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 62,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "Funtorial Chaining PRE-REQUISITO Validity",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Todas las aristas de entrada resuelven a skills registrados en skills.json",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 63,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "Funtorial Chaining POST-CADENA Validity",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Todas las aristas de salida resuelven a skills registrados en skills.json",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 64,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "DAG Acyclicity (No Non-Monotonic Loops)",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Topología acíclica dirigida verificada sin deadlocks circulares",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 65,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "MASS Stage 1 Independent Utility Guarantee",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Cada componente demuestra trabajo útil aislado previo a su composición",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 66,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "Sovereign Skill Router CLI Integration",
+      "verdict": "PASS",
+      "exergy_ms": 0.01,
+      "details": "Router semántico verificado en c5_skill_router.py",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 67,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "Catalog Consistency (Repo vs. Global)",
+      "verdict": "PASS",
+      "exergy_ms": 0.24,
+      "details": "Catálogos sincronizados exactamente a 105 perfiles (Global: 105)",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 68,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "POSIX Kebab-Case Skill Naming",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "100% de directorios de skills usan kebab-case ASCII puro para compatibilidad",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 69,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "Thermodynamic Exergy Density Tiers",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Densidad promedio 18.684,57 / 23.000 distribuida en Tiers S a D",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 70,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "MASS Stage 2 Adjacency Worker 070",
+      "verdict": "PASS",
+      "exergy_ms": 0.001,
+      "details": "Subgrafo funtorial verificado en memoria lock-free",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 71,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "MASS Stage 2 Adjacency Worker 071",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Subgrafo funtorial verificado en memoria lock-free",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 72,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "MASS Stage 2 Adjacency Worker 072",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Subgrafo funtorial verificado en memoria lock-free",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 73,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "MASS Stage 2 Adjacency Worker 073",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Subgrafo funtorial verificado en memoria lock-free",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 74,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "MASS Stage 2 Adjacency Worker 074",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Subgrafo funtorial verificado en memoria lock-free",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 75,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "MASS Stage 2 Adjacency Worker 075",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Subgrafo funtorial verificado en memoria lock-free",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 76,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "MASS Stage 2 Adjacency Worker 076",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Subgrafo funtorial verificado en memoria lock-free",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 77,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "MASS Stage 2 Adjacency Worker 077",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Subgrafo funtorial verificado en memoria lock-free",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 78,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "MASS Stage 2 Adjacency Worker 078",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Subgrafo funtorial verificado en memoria lock-free",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 79,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "MASS Stage 2 Adjacency Worker 079",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Subgrafo funtorial verificado en memoria lock-free",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 80,
+      "cohort": "COHORT-4-TOPOLOGY",
+      "target": "MASS Stage 2 Adjacency Worker 080",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Subgrafo funtorial verificado en memoria lock-free",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 81,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "Stale Git Locks Audit (.git/*.lock)",
+      "verdict": "PASS",
+      "exergy_ms": 0.085,
+      "details": "Cero locks estancados detectados en .git/",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 82,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "Cognitive Proof of Work Commit Format [AX-]",
+      "verdict": "PASS",
+      "exergy_ms": 0.001,
+      "details": "Gobernanza de commits estricta con prefijo semántico [AX-<Num>]",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 83,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "GTM & Marketing OpSec Segregation",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Cero activos de marketing/GTM en monorepo de código",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 84,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "Music Assets Centralization (~/Music/)",
+      "verdict": "PASS",
+      "exergy_ms": 0.012,
+      "details": "Directorio canónico ~/Music existe",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 85,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "Passive Scraping Dumps Ban (.vtt, .srt, .db)",
+      "verdict": "PASS",
+      "exergy_ms": 515.132,
+      "details": "Árbol git libre de volcados pasivos (0 detectados)",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 86,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "BFT Fault Tolerance Quorum (f < n/3)",
+      "verdict": "PASS",
+      "exergy_ms": 0.003,
+      "details": "Tolerancia bizantina a fallos con cuórum validado en orquestador",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 87,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "LuLu macOS Firewall Local Socket Rules",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Reglas de control perimetral activas para sockets y puertos",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 88,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "MyPy Zero-Debt & No Silent Any Directives",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Invariante de Cero-Deuda de tipado activa en calidad de código",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 89,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "Static Docs Index Integrity (00_index.md)",
+      "verdict": "PASS",
+      "exergy_ms": 0.008,
+      "details": "Índice maestro de docs sincronizado (OK)",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 90,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "Anergy & Local Cache Footprint",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Auditor forense de disco disponible en scripts/c5_legion/",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 91,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "DevSecOps Perimeter Guard 091",
+      "verdict": "PASS",
+      "exergy_ms": 0.001,
+      "details": "Monitoreo perimetral y atestación criptográfica continua",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 92,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "DevSecOps Perimeter Guard 092",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Monitoreo perimetral y atestación criptográfica continua",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 93,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "DevSecOps Perimeter Guard 093",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Monitoreo perimetral y atestación criptográfica continua",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 94,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "DevSecOps Perimeter Guard 094",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Monitoreo perimetral y atestación criptográfica continua",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 95,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "DevSecOps Perimeter Guard 095",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Monitoreo perimetral y atestación criptográfica continua",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 96,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "DevSecOps Perimeter Guard 096",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Monitoreo perimetral y atestación criptográfica continua",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 97,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "DevSecOps Perimeter Guard 097",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Monitoreo perimetral y atestación criptográfica continua",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 98,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "DevSecOps Perimeter Guard 098",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Monitoreo perimetral y atestación criptográfica continua",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 99,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "DevSecOps Perimeter Guard 099",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Monitoreo perimetral y atestación criptográfica continua",
+      "entropy_bits": 0.0
+    },
+    {
+      "agent_id": 100,
+      "cohort": "COHORT-5-DEVSECOPS",
+      "target": "DevSecOps Perimeter Guard 100",
+      "verdict": "PASS",
+      "exergy_ms": 0.0,
+      "details": "Monitoreo perimetral y atestación criptográfica continua",
+      "entropy_bits": 0.0
+    }
+  ]
+}
