@@ -1,0 +1,701 @@
+{
+  "version": "26.200",
+  "updated_at": "2026-09-14T06:55:00Z",
+  "total_skills": 105,
+  "average_exergy_density": 18684.57,
+  "description": "Grafo de adyacencia y topología conectada de las 105 habilidades del ecosistema CORTEX Engine integrado en BABYLON-60 (0 colisiones críticas)",
+  "entries": [
+    {
+      "name": "cortex-kernel",
+      "tier": 23000,
+      "category": "Kernel"
+    },
+    {
+      "name": "shared-manifest-kernel",
+      "tier": 22000,
+      "category": "Kernel",
+      "display_name": "Núcleo de Memoria Compartida Lock-Free (64B C-ABI)"
+    },
+    {
+      "name": "cortex-skill-composer",
+      "tier": 21500,
+      "category": "Meta-Kernel",
+      "display_name": "Componedor & Orquestador de Cadenas de Skills"
+    },
+    {
+      "name": "thermo-audit",
+      "tier": 21500,
+      "category": "Kernel",
+      "display_name": "Auditoría Termodinámica de Silicio y Concurrencia"
+    },
+    {
+      "name": "cortex-skill-auditor",
+      "tier": 21200,
+      "category": "Meta-Kernel",
+      "display_name": "Auditor Exergético de Skills CORTEX Engine"
+    },
+    {
+      "name": "rlhf-sentinel",
+      "tier": 21200,
+      "category": "Governance",
+      "display_name": "Centinela de Contención de IA y Barreras IPC Ring-0"
+    },
+    {
+      "name": "c5-scientific-problem-selection",
+      "tier": 21000,
+      "category": "Meta-Kernel",
+      "display_name": "Selección Estratégica de Problemas Científicos"
+    },
+    {
+      "name": "cortex-skill-genesis",
+      "tier": 21000,
+      "category": "Meta-Kernel",
+      "display_name": "Génesis Autónoma de Skills CORTEX"
+    },
+    {
+      "name": "c5-lean4-neurosymbolic-architect",
+      "tier": 21000,
+      "category": "Nucleus",
+      "display_name": "Arquitecto Neuro-Simbólico Soberano en Lean 4"
+    },
+    {
+      "name": "epistemic-extinction-protocol",
+      "tier": 20980,
+      "category": "Nucleus",
+      "display_name": "Protocolo de Extinción Epistémica (Punto Fijo Ω)"
+    },
+    {
+      "name": "cta-cognitive-transition-algebra",
+      "tier": 20950,
+      "category": "Nucleus",
+      "display_name": "Álgebra de Transiciones Cognitivas & Event-Sourcing Comonádico"
+    },
+    {
+      "name": "c5-lean4-axiomatic-orchestrator",
+      "tier": 20900,
+      "category": "Nucleus",
+      "display_name": "Orquestador Axiomático y Verificación Formal en Lean 4"
+    },
+    {
+      "name": "agentic-protocol-axiomatization",
+      "tier": 20800,
+      "category": "Nucleus",
+      "display_name": "Axiomatización de Protocolos Agénticos C5 & Generación DAC"
+    },
+    {
+      "name": "categorical-hallucination-audit",
+      "tier": 20700,
+      "category": "Nucleus",
+      "display_name": "Auditoría Categórica de Alucinación & Cota Kl(D)"
+    },
+    {
+      "name": "existence-gap-audit",
+      "tier": 20600,
+      "category": "Nucleus",
+      "display_name": "Auditoría de Huecos de Existencia & Supply-Chain Slop"
+    },
+    {
+      "name": "c5-academic-peer-reviewer",
+      "tier": 20500,
+      "category": "Nucleus",
+      "display_name": "Simulador de Revisión Académica por Pares"
+    },
+    {
+      "name": "c5-axiomatic-kernel",
+      "tier": 20500,
+      "category": "Nucleus"
+    },
+    {
+      "name": "c5-dialectical-pipeline",
+      "tier": 20500,
+      "category": "Nucleus"
+    },
+    {
+      "name": "c5-epistemic-dissemination-engine",
+      "tier": 20500,
+      "category": "Nucleus",
+      "display_name": "Motor de Difusión Epistémica Multicanal y Oratoria Retórica"
+    },
+    {
+      "name": "polymath-concept-synthesis",
+      "tier": 20500,
+      "category": "Nucleus",
+      "display_name": "Síntesis Polímata Interdisciplinar (Modo ULTRATHINK)"
+    },
+    {
+      "name": "c5-popperian-falsification-auditor",
+      "tier": 20500,
+      "category": "Nucleus",
+      "display_name": "Auditor de Falsación Empírica de Documentos"
+    },
+    {
+      "name": "c5-sci-paper-architect",
+      "tier": 20400,
+      "category": "Nucleus",
+      "display_name": "Arquitecto de Publicaciones Científicas, Traducción & Citas SOTA"
+    },
+    {
+      "name": "c5-ultrathink-epistemic-audit",
+      "tier": 20400,
+      "category": "Nucleus",
+      "display_name": "Auditoría Epistémica y Postmortem ULTRATHINK"
+    },
+    {
+      "name": "c5-real-thermodynamic-override",
+      "tier": 20400,
+      "category": "Governance",
+      "display_name": "Override Termodinámico & Prompt Engineering de Frontera"
+    },
+    {
+      "name": "cct-cognitive-theory-advisor",
+      "tier": 20300,
+      "category": "Nucleus",
+      "display_name": "Asesoría en Teoría Cognitiva CCT & Límite Gödel-Turing"
+    },
+    {
+      "name": "ultrathink",
+      "tier": 20300,
+      "category": "Nucleus",
+      "display_name": "Generador de Prompts Ómega C5-REAL & Catálogo ULTRATHINK"
+    },
+    {
+      "name": "autodidact-omega-deep-research",
+      "tier": 20200,
+      "category": "Nucleus",
+      "display_name": "Motor Autodidact-Ω de Investigación Profunda y Falsación Popperiana"
+    },
+    {
+      "name": "cloud-chamber",
+      "tier": 20200,
+      "category": "Nucleus",
+      "display_name": "Cámara de Niebla y Síntesis de Máxima Densidad Topológica"
+    },
+    {
+      "name": "grill-me-v2",
+      "tier": 19900,
+      "category": "Governance"
+    },
+    {
+      "name": "c5-real-devsecops-scaffold",
+      "tier": 19850,
+      "category": "Governance",
+      "display_name": "Scaffold DevSecOps & Endurecimiento Zero-Trust CI/CD"
+    },
+    {
+      "name": "c5-sovereign-identity-hardening",
+      "tier": 19800,
+      "category": "Governance",
+      "display_name": "Protocolo C5-REAL de Defensa e Inmunidad de Identidad Soberana"
+    },
+    {
+      "name": "apple-bypass",
+      "tier": 19800,
+      "category": "Operations"
+    },
+    {
+      "name": "c5-2e-affective-decoupling",
+      "tier": 19800,
+      "category": "Nucleus",
+      "display_name": "Desacoplamiento Afectivo & Soberanía Vincular 2e (AACC + TDAH)"
+    },
+    {
+      "name": "c5-real-legaltech-analysis",
+      "tier": 19700,
+      "category": "Governance",
+      "display_name": "Auditoría LegalTech & Cumplimiento EU AI Act Art. 9-14"
+    },
+    {
+      "name": "wait-what",
+      "tier": 19600,
+      "category": "Nucleus",
+      "display_name": "Freno Epistémico & Traducción Simplificada (STE)"
+    },
+    {
+      "name": "c5-2e-neuropharmacological-sovereignty",
+      "tier": 19500,
+      "category": "Systems",
+      "display_name": "Soberanía Neurofarmacológica & Desacople de Parches (TDAH + AACC)"
+    },
+    {
+      "name": "c5-sovereign-binary-architect",
+      "tier": 19500,
+      "category": "Systems",
+      "display_name": "Arquitecto de Binarios Soberanos C5-REAL"
+    },
+    {
+      "name": "c5-sre-postmortem-architect",
+      "tier": 19500,
+      "category": "Governance",
+      "display_name": "Arquitecto de Postmortems e Incidentes SRE"
+    },
+    {
+      "name": "adaptive-cron",
+      "tier": 19500,
+      "category": "Governance"
+    },
+    {
+      "name": "symbiotic-cognitive-architecture",
+      "tier": 19400,
+      "category": "Governance",
+      "display_name": "Arquitectura Cognitiva Simbiótica & Autopoiesis (Tú & Yo)"
+    },
+    {
+      "name": "anergy-purge-protocol",
+      "tier": 19300,
+      "category": "Governance",
+      "display_name": "Motor de Purga de Código Muerto y Redundancias (Dead Code & Artifact Cleanup)"
+    },
+    {
+      "name": "c5-browser-forensics-and-extension-triage",
+      "tier": 19200,
+      "category": "SOCINT & Web"
+    },
+    {
+      "name": "c5-design-system-extractor",
+      "tier": 19200,
+      "category": "Governance",
+      "display_name": "Extractor de Sistemas de Diseño e Interfaz UI"
+    },
+    {
+      "name": "c5-socint-extraction-suite",
+      "tier": 19200,
+      "category": "SOCINT & Web",
+      "display_name": "Suite Soberana de Inteligencia Social (SOCINT C5-REAL)"
+    },
+    {
+      "name": "safari-browser-agent",
+      "tier": 19200,
+      "category": "SOCINT & Web",
+      "display_name": "Agente Autónomo de Navegación Safari (MCP Dual-Engine v2.0)"
+    },
+    {
+      "name": "ai-comparative-evaluation",
+      "tier": 19200,
+      "category": "Operations"
+    },
+    {
+      "name": "swarm-quantum-collapse",
+      "tier": 19100,
+      "category": "Governance",
+      "display_name": "Sincronización Swarm & Colapso Cuántico Multi-Repositorio"
+    },
+    {
+      "name": "c5-spatial-audio-architect",
+      "tier": 19000,
+      "category": "Multimedia & DSP"
+    },
+    {
+      "name": "c5-video-quality-audit",
+      "tier": 19000,
+      "category": "Multimedia & DSP",
+      "display_name": "Auditoría de Calidad y Compresión de Video (PSNR/SSIM/VMAF)"
+    },
+    {
+      "name": "pika-generative-video-pipeline",
+      "tier": 19000,
+      "category": "Multimedia & DSP",
+      "display_name": "Pipeline de Generación y Control Parámetrico en Pika Art (A/V)"
+    },
+    {
+      "name": "remotion-audio-reactive-video",
+      "tier": 19000,
+      "category": "Multimedia & DSP",
+      "display_name": "Síntesis de Vídeo Reactivo a Audio & Música (Remotion + DSP)"
+    },
+    {
+      "name": "soulseek-p2p-audio-acquisition",
+      "tier": 19000,
+      "category": "Multimedia & DSP"
+    },
+    {
+      "name": "babylon60-architecture",
+      "tier": 19000,
+      "category": "Governance"
+    },
+    {
+      "name": "whatsapp-nexus-protocol",
+      "tier": 18900,
+      "category": "Governance",
+      "display_name": "Pasarela Soberana de Mensajería WhatsApp (Baileys v7 / Rust NAPI-RS / C5-REAL v2.6)"
+    },
+    {
+      "name": "legion-audit",
+      "tier": 18800,
+      "category": "Operations"
+    },
+    {
+      "name": "dynamic-subagent-lifecycle",
+      "tier": 18600,
+      "category": "Governance",
+      "display_name": "Supervisión del Ciclo de Vida de Subagentes Dinámicos"
+    },
+    {
+      "name": "babylon-shield",
+      "tier": 18500,
+      "category": "Specialized"
+    },
+    {
+      "name": "c5-barrio-termodinamico-persona",
+      "tier": 18500,
+      "category": "Specialized"
+    },
+    {
+      "name": "c5-causal-graph-auditor",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Auditor de Grafos Causales C5-REAL (Mermaid)"
+    },
+    {
+      "name": "c5-codebase-valuation-audit",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Auditoría & Valoración Económica Empírica de Codebases e IP"
+    },
+    {
+      "name": "c5-ctm-formal-architect",
+      "tier": 18500,
+      "category": "Specialized"
+    },
+    {
+      "name": "c5-editorial-magazine-architect",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Arquitecto de Diseño Editorial, Revistas y Presentaciones"
+    },
+    {
+      "name": "c5-equity-research",
+      "tier": 18500,
+      "category": "Governance",
+      "display_name": "Investigación Financiera Institucional & Análisis Cuantitativo C5"
+    },
+    {
+      "name": "c5-exergy-scale-evaluator",
+      "tier": 18500,
+      "category": "Specialized"
+    },
+    {
+      "name": "c5-gemini-api-2026-standards",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Estándares Gemini API 2026 & Tensor de Transducción"
+    },
+    {
+      "name": "c5-media-platform-epistemology",
+      "tier": 18500,
+      "category": "Specialized"
+    },
+    {
+      "name": "c5-ontological-translator",
+      "tier": 18500,
+      "category": "Specialized"
+    },
+    {
+      "name": "c5-pedagogical-translator",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Traductor Pedagógico C5-REAL (Modo Fácil)"
+    },
+    {
+      "name": "c5-solar-thermodynamic-architecture",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Arquitectura Helio-Termodinámica y Confort Bioclimático"
+    },
+    {
+      "name": "c5-somatic-panic-deescalation",
+      "tier": 18500,
+      "category": "Specialized"
+    },
+    {
+      "name": "c5-systemic-dissection-protocol",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Protocolo de Disección Sistémica y Termodinámica"
+    },
+    {
+      "name": "webkit-memory-audit",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Auditoría de Memoria WebKit (Vector 21)"
+    },
+    {
+      "name": "biographical-thermo",
+      "tier": 18500,
+      "category": "Nucleus",
+      "display_name": "Mapeo Termodinámico Biográfico e Histórico"
+    },
+    {
+      "name": "browser-subagent-orchestrator",
+      "tier": 18200,
+      "category": "Governance",
+      "display_name": "Orquestador CDP de Subagente de Navegador Web"
+    },
+    {
+      "name": "c5-venture-pitch-architect",
+      "tier": 18200,
+      "category": "Governance",
+      "display_name": "Arquitecto de Pitch Decks, Deal Memos & Investor Relations C5"
+    },
+    {
+      "name": "c5-weighted-decision-matrix",
+      "tier": 18200,
+      "category": "Governance",
+      "display_name": "Matriz de Decisión Ponderada y Estimación PERT"
+    },
+    {
+      "name": "lora-swarm-pipeline",
+      "tier": 18200,
+      "category": "Operations"
+    },
+    {
+      "name": "swarm-router",
+      "tier": 18100,
+      "category": "Governance",
+      "display_name": "Enrutador Maestro y Despachador Inteligente de Enjambres"
+    },
+    {
+      "name": "discourse-popperian-falsification",
+      "tier": 17900,
+      "category": "Operations",
+      "display_name": "Falsación Popperiana & Auditoría Discursiva de Hipótesis"
+    },
+    {
+      "name": "c5-spaced-repetition-architect",
+      "tier": 17800,
+      "category": "Operations",
+      "display_name": "Arquitecto de Repetición Espaciada, Anki & Control Entrópico Cognitivo C5"
+    },
+    {
+      "name": "ghidra-ida-binary-audit",
+      "tier": 17800,
+      "category": "Operations",
+      "display_name": "Auditoría de Binarios Crudos & Descompilación Ghidra/IDA"
+    },
+    {
+      "name": "electron-asar-forensic-audit",
+      "tier": 17700,
+      "category": "Operations"
+    },
+    {
+      "name": "c5-career-and-interview-architect",
+      "tier": 17600,
+      "category": "Operations",
+      "display_name": "Arquitecto de CV, Compatibilidad ATS & Ensayos de Entrevista STAR C5"
+    },
+    {
+      "name": "jujutsu-vcs-management",
+      "tier": 17600,
+      "category": "Operations",
+      "display_name": "Control de Versiones Determinista Jujutsu VCS (jj)"
+    },
+    {
+      "name": "c5-interactive-gantt-planner",
+      "tier": 17500,
+      "category": "Operations",
+      "display_name": "Planificador Interactivo Gantt y Ruta Crítica"
+    },
+    {
+      "name": "c5-lexicon-enforcer",
+      "tier": 17500,
+      "category": "Operations"
+    },
+    {
+      "name": "cortex-telemetry",
+      "tier": 17500,
+      "category": "Operations",
+      "display_name": "Inspección & Telemetría Runtime de Transcripciones CORTEX"
+    },
+    {
+      "name": "homebrew-ecosystem-management",
+      "tier": 17200,
+      "category": "Operations",
+      "display_name": "Gestión & Auditoría de Paquetes Homebrew en macOS"
+    },
+    {
+      "name": "github-architect",
+      "tier": 17000,
+      "category": "Operations"
+    },
+    {
+      "name": "wizard",
+      "tier": 17000,
+      "category": "Utilities",
+      "display_name": "Asistente Secuencial Determinista (Máquina de Estados)"
+    },
+    {
+      "name": "flstudio-mcp-production",
+      "tier": 17000,
+      "category": "Operations",
+      "display_name": "Producción Nativa MCP FL Studio 2025 & DSP Microtonal"
+    },
+    {
+      "name": "youtube-remotion-sota",
+      "tier": 16800,
+      "category": "Operations",
+      "display_name": "Síntesis Programática SOTA de Vídeo React/Remotion"
+    },
+    {
+      "name": "audiovisual-sota",
+      "tier": 16800,
+      "category": "Operations"
+    },
+    {
+      "name": "writing-for-agents",
+      "tier": 16500,
+      "category": "Utilities",
+      "display_name": "Redacción M2M de Alta Exergía & Sanitización C5"
+    },
+    {
+      "name": "youtube-analysis-pipeline",
+      "tier": 16400,
+      "category": "Operations",
+      "display_name": "Pipeline de Análisis Visual & Transcripción de YouTube"
+    },
+    {
+      "name": "kimi-mcp-orchestrator",
+      "tier": 16000,
+      "category": "Operations"
+    },
+    {
+      "name": "cloudflare-mcp-usage",
+      "tier": 15800,
+      "category": "Operations",
+      "display_name": "Automatización & Operaciones Cloudflare MCP"
+    },
+    {
+      "name": "opentimestamps-l5-diagnostics",
+      "tier": 15000,
+      "category": "Diagnostics",
+      "display_name": "Atestación Criptográfica & Diagnóstico Bitcoin L5 (OpenTimestamps)"
+    },
+    {
+      "name": "electron-mac-bundle-collision-diagnostics",
+      "tier": 14800,
+      "category": "Diagnostics",
+      "display_name": "Diagnóstico de Crashes & Colisiones Electron en macOS"
+    },
+    {
+      "name": "vscode-git-packed-refs-diagnostics",
+      "tier": 14600,
+      "category": "Diagnostics",
+      "display_name": "Reparación de Corruptelas Git & Packed-Refs en VS Code"
+    },
+    {
+      "name": "macos-lulu-firewall-diagnostics",
+      "tier": 14200,
+      "category": "Diagnostics",
+      "display_name": "Diagnóstico de Firewall & Sockets macOS (LuLu / Little Snitch)"
+    },
+    {
+      "name": "github-api-rate-limit-optimization",
+      "tier": 13900,
+      "category": "Utilities",
+      "display_name": "Optimización Resiliente de Tasa API GitHub (Error 429)"
+    },
+    {
+      "name": "suno-bracket-tagging",
+      "tier": 12800,
+      "category": "Utilities",
+      "display_name": "Protocolo de Ingeniería Acústica y Control Causal para Audio AI (Suno/Udio/YuE)"
+    },
+    {
+      "name": "ironic-content-generator",
+      "tier": 11200,
+      "category": "Utilities",
+      "display_name": "Generador de Narrativa Satírica Industrial Noir"
+    },
+    {
+      "name": "handoff",
+      "tier": 10500,
+      "category": "Utilities",
+      "display_name": "Protocolo Soberano de Traspaso de Contexto C5-REAL"
+    }
+  ],
+  "adjacency": [
+    {
+      "source": "cortex-kernel",
+      "target": "shared-manifest-kernel",
+      "relation": "enforces_hardware_invariants"
+    },
+    {
+      "source": "shared-manifest-kernel",
+      "target": "thermo-audit",
+      "relation": "bounds_concurrency"
+    },
+    {
+      "source": "rlhf-sentinel",
+      "target": "c5-real-thermodynamic-override",
+      "relation": "guards_ring0_boundary"
+    },
+    {
+      "source": "c5-lean4-neurosymbolic-architect",
+      "target": "c5-lean4-axiomatic-orchestrator",
+      "relation": "orchestrates_theorems"
+    },
+    {
+      "source": "ultrathink",
+      "target": "c5-ultrathink-epistemic-audit",
+      "relation": "postmortem_trace"
+    },
+    {
+      "source": "cloud-chamber",
+      "target": "polymath-concept-synthesis",
+      "relation": "crystallizes_ontology"
+    },
+    {
+      "source": "adaptive-cron",
+      "target": "cortex-telemetry",
+      "relation": "meters_cognitive_dissipation"
+    },
+    {
+      "source": "categorical-hallucination-audit",
+      "target": "agentic-protocol-axiomatization",
+      "relation": "audits_axioms"
+    },
+    {
+      "source": "existence-gap-audit",
+      "target": "c5-real-devsecops-scaffold",
+      "relation": "audits_codebase"
+    },
+    {
+      "source": "swarm-quantum-collapse",
+      "target": "dynamic-subagent-lifecycle",
+      "relation": "orchestrates_swarm"
+    },
+    {
+      "source": "c5-real-thermodynamic-override",
+      "target": "anergy-purge-protocol",
+      "relation": "overrides_anergy"
+    },
+    {
+      "source": "cct-cognitive-theory-advisor",
+      "target": "cta-cognitive-transition-algebra",
+      "relation": "advises"
+    },
+    {
+      "source": "frontier-prompting",
+      "target": "autodidact-omega-deep-research",
+      "relation": "prompts_frontier"
+    },
+    {
+      "source": "flstudio-mcp-production",
+      "target": "youtube-remotion-sota",
+      "relation": "provides_audio"
+    },
+    {
+      "source": "opentimestamps-l5-diagnostics",
+      "target": "c5-real-legaltech-analysis",
+      "relation": "attests_l5"
+    },
+    {
+      "source": "whatsapp-nexus-protocol",
+      "target": "dynamic-subagent-lifecycle",
+      "relation": "gateways_messaging"
+    },
+    {
+      "source": "handoff",
+      "target": "cortex-telemetry",
+      "relation": "persists_session_state"
+    }
+  ]
+}

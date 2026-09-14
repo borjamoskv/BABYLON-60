@@ -13,12 +13,11 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import re
 import subprocess
-import sys
 import time
 from pathlib import Path
+from typing import Optional
 
 
 import unicodedata
@@ -68,11 +67,16 @@ def speak_cloned(text: str, blocking: bool = False) -> None:
         print(f"[*] Sintetizando clon de Borja para: '{text}'...")
         cmd_synth = [
             F5_BIN,
-            "--ref_audio", str(REF_AUDIO),
-            "--ref_text", REF_TEXT,
-            "--gen_text", text,
-            "--output_dir", str(MODELS_CACHE_DIR),
-            "--output_file", f"{slug}.wav",
+            "--ref_audio",
+            str(REF_AUDIO),
+            "--ref_text",
+            REF_TEXT,
+            "--gen_text",
+            text,
+            "--output_dir",
+            str(MODELS_CACHE_DIR),
+            "--output_file",
+            f"{slug}.wav",
         ]
         res = subprocess.run(cmd_synth, capture_output=True, text=True)
         if res.returncode == 0 and cached_wav.exists():
