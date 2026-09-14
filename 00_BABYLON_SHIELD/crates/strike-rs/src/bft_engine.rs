@@ -421,7 +421,7 @@ mod tests {
             });
         }
 
-        let params = ExergyParams { g: 50.0, l: 50.0, a: 1.0, b: 1.0, p: 1.0, e_base: 0.04 };
+        let params = ExergyParams { g: 1000.0, l: 1000.0, a: 1.0, b: 1.0, p: 1.0, e_base: 0.04 };
         let res = engine.run_dag(mem.clone(), params, "").await;
         assert!(res.is_ok(), "Test failed: {:?}", res);
 

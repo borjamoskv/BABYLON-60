@@ -125,13 +125,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let shutdown_flag = Arc::new(AtomicBool::new(false));
 
     // 1. Manejador de señales (Graceful SIGTERM/SIGINT)
-    let mut signals = Signals::new([SIGINT, SIGTERM])?;
-    let sf = Arc::clone(&shutdown_flag);
-    thread::spawn(move || {
-        if signals.forever().next().is_some() {
-            sf.store(true, Ordering::SeqCst);
-        }
-    });
+    #[cfg(not(target_os = "windows"))]
+    {
+        let mut signals = Signals::new([SIGINT, SIGTERM])?;
+        let sf = Arc::clone(&shutdown_flag);
+        thread::spawn(move || {
+            if signals.forever().next().is_some() {
+                sf.store(true, Ordering::SeqCst);
+            }
+        });
+    }
 
     // 2. Monitoreo inotify de ~/.agent_persist (Linux)
     #[cfg(target_os = "linux")]

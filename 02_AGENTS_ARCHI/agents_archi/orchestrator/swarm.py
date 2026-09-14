@@ -75,10 +75,11 @@ class SwarmConfig:
     mcts_delay_s: float = 0.05
     request_timeout_s: float = 60.0
 
-    # Resilience
+    # Resilience & Ring-0 Governance
     max_retries: int = 3
     retry_base_delay_s: float = 0.5
     circuit_breaker_threshold: int = 5
+    delegate_circuit_breaker: bool = False  # INV_C5_CB_SUBORDINATION: Delega el CB a Ring-0 / Gateway
 
     @property
     def max_concurrent(self) -> int:
@@ -177,8 +178,19 @@ class RobustLLMClient:
         self.config = config
         self._consecutive_failures = 0
 
+    def reset_circuit_breaker(self) -> None:
+        """Resetea el contador de fallos consecutivos en Python."""
+        self._consecutive_failures = 0
+
+    @property
+    def is_circuit_breaker_tripped(self) -> bool:
+        """Indica si el circuit breaker local está abierto (anulado si está subordinado a Ring-0)."""
+        if self.config.delegate_circuit_breaker:
+            return False
+        return self._consecutive_failures >= self.config.circuit_breaker_threshold
+
     async def call(self, messages: List[Dict[str, str]]) -> str:
-        if self._consecutive_failures >= self.config.circuit_breaker_threshold:
+        if self.is_circuit_breaker_tripped:
             return f"Circuit breaker open: {self._consecutive_failures} failures. Backend: {self.config.backend.value}"
 
         # If air-gapped / unconfigured, return deterministic mock output in tests

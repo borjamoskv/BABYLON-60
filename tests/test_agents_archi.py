@@ -25,6 +25,7 @@ from agents_archi import (
     AttestationEnvelope,
     KimiClient,
     OpenRouterClient,
+    RobustLLMClient,
 )
 
 
@@ -171,3 +172,19 @@ def test_client_adapters_safeguard() -> None:
     res2 = openrouter.query("test query")
     assert res2["success"] is False
     assert "Missing OPENROUTER_API_KEY" in res2["error"]
+
+
+def test_circuit_breaker_subordination() -> None:
+    """Validates INV_C5_CB_SUBORDINATION: Subordinating CB to Ring-0 eliminates false trips."""
+    # Standard non-delegated client
+    cfg_std = SwarmConfig(circuit_breaker_threshold=2, delegate_circuit_breaker=False)
+    client_std = RobustLLMClient(cfg_std)
+    client_std._consecutive_failures = 2
+    assert client_std.is_circuit_breaker_tripped is True
+
+    # Delegated client (subordinated to Ring-0)
+    cfg_del = SwarmConfig(circuit_breaker_threshold=2, delegate_circuit_breaker=True)
+    client_del = RobustLLMClient(cfg_del)
+    client_del._consecutive_failures = 10
+    assert client_del.is_circuit_breaker_tripped is False
+
