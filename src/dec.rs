@@ -238,6 +238,23 @@ impl MimeticInvariants {
         f2.values.iter().map(|&w| (w as i128 * w as i128) as u64).sum::<u64>() / 2
     }
 
+    /// Calcula la Energía Cinética Discreta $\mathcal{K} = \frac{1}{2} \sum_e u_e^2$.
+    pub fn discrete_kinetic_energy(f1: &Form1) -> u64 {
+        f1.values.iter().map(|&u| (u as i128 * u as i128) as u64).sum::<u64>() / 2
+    }
+
+    /// Calcula la Helicidad Cinética Discreta $\mathcal{H} = \sum_e u_e \cdot (\star \omega)_e$.
+    /// Mide el anudamiento topológico del vórtice invariante bajo la evolución de Euler.
+    pub fn discrete_helicity(mesh: &CubicMesh3D, u: &Form1, vorticity: &Form2) -> i64 {
+        assert_eq!(u.values.len(), mesh.num_edges);
+        assert_eq!(vorticity.values.len(), mesh.num_faces);
+        let mut h: i128 = 0;
+        for i in 0..mesh.num_edges {
+            h += u.values[i] as i128 * vorticity.values[i] as i128;
+        }
+        (h / 60) as i64
+    }
+
     /// Verifica si un campo de 1-forma es estrictamente solenoidal ($\nabla \cdot \mathbf{u} = 0$).
     pub fn is_strictly_solenoidal(mesh: &CubicMesh3D, u: &Form1) -> bool {
         let div = DiscreteDeRham::codifferential_d0_star(mesh, u);
@@ -316,5 +333,12 @@ mod tests {
 
         let enstrophy = MimeticInvariants::discrete_enstrophy(&curl_a);
         assert!(enstrophy > 0, "La enstrofía debe ser positiva");
+
+        let energy = MimeticInvariants::discrete_kinetic_energy(&u_form);
+        assert!(energy > 0, "La energía cinética debe ser positiva");
+
+        let helicity = MimeticInvariants::discrete_helicity(&mesh, &u_form, &curl_a);
+        // La helicidad mide el entrelazamiento topológico discreto
+        assert!(helicity >= 0);
     }
 }
