@@ -22,6 +22,10 @@ class Saga1ApoptosisError(Exception):
     pass
 
 
+# Alias canónico de Ontología Babilónica C5-REAL (Ring-0 / Beso de Apoptosis)
+MushushuApoptosisError = Saga1ApoptosisError
+
+
 class Z3Firewall:
     """
     Falsación matemática en Ring-0 (Capa 2: Freno Negentrópico Asíncrono).

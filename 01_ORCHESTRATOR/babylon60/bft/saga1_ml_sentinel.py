@@ -130,3 +130,8 @@ class Saga1MlSentinel:
             if adv.domain == BountyDomain.DOMAIN_AI:
                 results.append(self.audit_advisory(adv))
         return results
+
+
+# Aliases canónicos de Ontología Babilónica C5-REAL (Ring-0)
+MushushuMlSentinel = Saga1MlSentinel
+MushushuSentinelResult = Saga1SentinelResult
