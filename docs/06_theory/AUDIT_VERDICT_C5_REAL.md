@@ -22,7 +22,7 @@ version: 1.0.0
 ## 1. 📌 El Vacío Semántico Gödeliano (Análisis de Capa 2)
 El informe sometido a verificación afirma certificar el ecosistema bajo el estándar **Causal-Determinist EXERGY CERTIFIED**, respaldándose en la ejecución de comandos `bash` dentro de un entorno virtual (`/sessions/*/mnt/Teorema-Robinson-Motor Causal`).
 
-Sin embargo, aplicando el principio de **Falsación por Ejecución** (`INV_C5_CHAOS_MONAD`), la inspección física del disco duro real (`/Users/borjafernandezangulo/BABYLON-60`) revela una discrepancia estructural absoluta entre la ontología alucinada por la IA y la topología física del repositorio.
+Sin embargo, aplicando el principio de **Falsación por Ejecución** (`INV_C5_CHAOS_MONAD`), la inspección física del disco duro real (`$BABYLON_HOME`) revela una discrepancia estructural absoluta entre la ontología alucinada por la IA y la topología física del repositorio.
 
 El informe es un **holograma sintáctico puro** ("Ghost Findings about Ghost Symbols", `RULE_SENSOR_VERIFY_01`).
 
