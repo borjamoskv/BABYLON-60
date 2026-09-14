@@ -1,7 +1,7 @@
 # ⚡ BABYLON-60 Sovereign Scripts Suite — Immutable Script Kernel (ISK)
 
 > **Directorio de Automatización, Enjambres BFT, Calidad AST, Atestación SHA-256 y Preservación de Logs**  
-> **Estándar:** C5-REAL | **Total Scripts:** 138 Python + 12 Shell | **Shebang Compliance:** 100.0%
+> **Estándar:** C5-REAL | **Total Scripts:** 139 Python + 12 Shell | **Shebang Compliance:** 100.0%
 
 ## 🛠️ CLI Runner Centralizado
 Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runner.py](runner.py):
@@ -96,6 +96,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | [`c5_demos/poc_dark_swarm_100_agents.py`](c5_demos/poc_dark_swarm_100_agents.py) | `Python` | `85402b2b0a06` | Poc Dark Swarm 100 Agents Utility |
 | [`c5_demos/poc_graph_isomorphism_wl.py`](c5_demos/poc_graph_isomorphism_wl.py) | `Python` | `23faee58079f` | Proof of Concept: 1-Weisfeiler-Lehman Graph Isomorphism Pre-Filter. |
 | [`c5_demos/poc_legion_1000.py`](c5_demos/poc_legion_1000.py) | `Python` | `b7a6d11f89ab` | poc_legion_1000.py — PoC de Falsación Empírica para el Operativo Legión Ω-1000. |
+| [`c5_demos/poc_mass_stage3_resolution.py`](c5_demos/poc_mass_stage3_resolution.py) | `Python` | `025d02fea26c` | Proof of Concept: Falsación y Resolución de las 2 Fricciones MASS (Stage 3). |
 | [`c5_demos/poc_rust_ffi_topological_leap.py`](c5_demos/poc_rust_ffi_topological_leap.py) | `Python` | `bebc344108b0` | PoC: BABYLON-60 Rust FFI & SharedManifest Topological Leap (Cambio 2) |
 | [`c5_demos/poc_vsa_saturation_stress.py`](c5_demos/poc_vsa_saturation_stress.py) | `Python` | `ad0dbb381cb8` | Proof of Concept & Runtime Stress Test: VSA Hyperdimensional Saturation (C5-REAL) |
 | [`c5_demos/stress_test_lean.py`](c5_demos/stress_test_lean.py) | `Python` | `175b76f26e00` | Stress Test Lean Utility |
