@@ -13,7 +13,7 @@ cargo build --release -p cortex-lsp
 ```
 El binario ejecutable quedará en:
 ```text
-/Users/borjafernandezangulo/BABYLON-60/target/release/cortex-lsp
+$BABYLON_HOME/target/release/cortex-lsp
 ```
 
 ---
@@ -27,7 +27,7 @@ Añade la definición del servidor LSP en tu configuración de Zed:
   "lsp": {
     "cortex-lsp": {
       "binary": {
-        "path": "/Users/borjafernandezangulo/BABYLON-60/target/release/cortex-lsp"
+        "path": "cortex-lsp"
       }
     }
   },
