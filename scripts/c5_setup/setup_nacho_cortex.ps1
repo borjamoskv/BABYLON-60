@@ -1,11 +1,11 @@
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
-# █ CORTEX FULL ENVIRONMENT SETUP FOR NACHO (WINDOWS POWERSHELL)
+# █ CORTEX FULL ENVIRONMENT SETUP (WINDOWS POWERSHELL)
 # ============================================================================
 
 $ErrorActionPreference = "Stop"
 
-Write-Host "[CORTEX-SETUP-WIN] Instalando entorno agéntico completo CORTEX para Nacho en Windows 10..." -ForegroundColor Cyan
+Write-Host "[CORTEX-SETUP-WIN] Instalando entorno agéntico completo CORTEX en Windows..." -ForegroundColor Cyan
 
 # 1. Rutas de configuración
 $UserProfile = $env:USERPROFILE
@@ -57,4 +57,4 @@ if (-not $env:KIMI_API_KEY) {
     Write-Host '     $env:KIMI_API_KEY="tu_clave_moonshot"' -ForegroundColor Gray
 }
 
-Write-Host "`n✅ [CORTEX-SETUP-WIN] ¡Entorno Windows 10 preparado con éxito!" -ForegroundColor Cyan
+Write-Host "`n✅ [CORTEX-SETUP-WIN] ¡Entorno Windows preparado con éxito!" -ForegroundColor Cyan
