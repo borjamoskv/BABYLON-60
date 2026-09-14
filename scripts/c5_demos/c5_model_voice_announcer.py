@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import subprocess
 import time
@@ -55,6 +56,13 @@ def speak_cloned(text: str, blocking: bool = False) -> None:
     target_wav = cached_wav if cached_wav.exists() else (direct_wav if direct_wav.exists() else None)
 
     if target_wav and target_wav.exists():
+        # Despachar notificación nativa visual en macOS
+        cmd_banner = [
+            "osascript", "-e",
+            f'display notification "{text}" with title "Antigravity Topology" subtitle "Soberanía C5-REAL"'
+        ]
+        subprocess.Popen(cmd_banner, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
         cmd = ["afplay", str(target_wav)]
         if blocking:
             subprocess.run(cmd, check=False)

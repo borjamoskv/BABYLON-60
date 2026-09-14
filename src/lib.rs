@@ -63,6 +63,8 @@ pub mod f60;
 pub mod dec;
 /// Módulo de Termodinámica de la Información y Cota de Landauer para Navier-Stokes (Iteraciones 81-90).
 pub mod fluid_thermo;
+/// Módulo de Síntesis Soberana, SCITT L5 y Punto Fijo Omega (Iteraciones 91-100).
+pub mod omega_synthesis;
 
 /// Módulo de interfaz C-ABI (FFI) para integración C/C++.
 pub mod ffi;
