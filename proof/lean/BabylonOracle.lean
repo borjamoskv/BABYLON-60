@@ -40,7 +40,7 @@ partial def consumeStream (h : IO.FS.Handle) (state : LockState) : IO UInt32 := 
         -- ⚡ El Tribunal Formal ⚡: Chocamos la realidad física contra la Ley Axiomática
         match step state ev with
         | none => 
-            IO.println s!"💥 [ORÁCULO] PARADOJA DETECTADA EN SEQ {ev.seq} (Thread {ev.threadId}). LEYES VIOLADAS."
+            IO.println s!"💥 [ORÁCULO] PARADOJA DETECTADA EN SEQ {ev.seq} (Thread {ev.threadId}). LEYES VIOLADAS. INV_C5_07 LOUD FAILURE"
             return 2 -- El Oráculo aborta instantáneamente dictando el Exit != 0
         | some nextState => consumeStream h nextState
 
