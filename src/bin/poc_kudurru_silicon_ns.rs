@@ -11,6 +11,8 @@
 //! - [Iter 57] Protocolo de Apoptosis Atómica 0xDEAD_6060 en Detección de Blowup.
 
 use std::sync::atomic::{AtomicU32, AtomicU64, Ordering};
+#[cfg(not(target_arch = "aarch64"))]
+use std::sync::atomic::fence;
 use std::sync::Arc;
 use std::thread;
 use std::time::Instant;

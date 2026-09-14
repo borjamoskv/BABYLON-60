@@ -29,6 +29,7 @@ use loom::thread;
 // así que replicamos la estructura con loom::sync::atomic.
 
 struct LoomManifest {
+    #[allow(dead_code)]
     status_flag: AtomicU32,
     seq: AtomicU32,
     epoch_id: AtomicU64,
