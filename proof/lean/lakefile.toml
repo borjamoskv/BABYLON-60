@@ -1,6 +1,6 @@
 name = "babylon"
 version = "0.1.0"
-defaultTargets = ["Babylon", "BabylonOracle", "BabylonTrace"]
+defaultTargets = ["Babylon", "BabylonOracle", "BabylonTrace", "NavierStokesBKM"]
 
 [[lean_lib]]
 name = "BabylonOracle"
@@ -10,6 +10,9 @@ name = "Babylon"
 
 [[lean_lib]]
 name = "BabylonTrace"
+
+[[lean_lib]]
+name = "NavierStokesBKM"
 
 # 1. Base C5-REAL (Estructuras de Datos y Concurrencia)
 [[require]]
