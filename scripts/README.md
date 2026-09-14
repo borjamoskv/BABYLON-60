@@ -187,7 +187,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | [`c5_setup/unboxing_moskv1.py`](c5_setup/unboxing_moskv1.py) | `Python` | `4692d611e372` | MOSKV-1 APEX: SECUENCIA MAESTRA DE UNBOXING Y PRIMERA EXPERIENCIA (C5-REAL) |
 | [`c5_setup/install_host.sh`](c5_setup/install_host.sh) | `Shell` | `71b8228b6009` | Registra moskv_native_host.py en Chrome/Brave en macOS |
 | [`c5_setup/install_into_repo.sh`](c5_setup/install_into_repo.sh) | `Shell` | `05132535692a` | install_into_repo.sh |
-| [`c5_setup/setup_nacho_cortex.sh`](c5_setup/setup_nacho_cortex.sh) | `Shell` | `35f722c7dca1` | █ CORTEX FULL ENVIRONMENT SETUP FOR NACHO \| STATE: C5-REAL |
+| [`c5_setup/setup_nacho_cortex.sh`](c5_setup/setup_nacho_cortex.sh) | `Shell` | `a2b10b3bd255` | █ CORTEX FULL ENVIRONMENT SETUP \| STATE: C5-REAL |
 
 ### ♾️ Autopoiesis & System Simulations
 
