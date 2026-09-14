@@ -58,6 +58,7 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 - **Atestación Hardware-Bound (Secure Enclave):** El *gate* biométrico no debe devolver simples códigos de salida POSIX. Debe interactuar criptográficamente con el *Secure Enclave* (`kSecAttrTokenIDSecureEnclave`) devolviendo una firma Ed25519 verificable sobre el hash de la mutación.
 - **Invocación desde Pipelines (Bash/Shell):** Nunca asumir que `c5_biometric_gate` reside en el `$PATH` global. Las invocaciones desde scripts de despliegue deben ejecutar explícitamente el archivo Swift mediante su ruta absoluta/relativa al repositorio (ej. `swift 01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift`).
 - **Manejo de Fallos por Sandbox:** Todo PoC o script que invoque el *gate* biométrico debe anticipar el silenciamiento de macOS (Código de salida `1`, `Authentication failure`). Las arquitecturas BFT deben manejar este fallo elegantemente sin entrar en *deadlock*.
+- **Demarcación Agente vs. Hardware (Barrera HITL):** En sesiones interactivas de agentes de IA operando bajo entornos sandboxeados/headless sin acceso directo al WindowServer de macOS, el agente NO intentará invocar síncronamente `c5_biometric_gate` para operaciones de edición de código ordinarias (lo que causaría silenciamiento y error de salida 1). En su lugar, la barrera causal humana se ejecuta mediante el protocolo formal de Aprobación de Artefactos (Human-In-The-Loop con `request_feedback = true`). La atestación biométrica estricta de silicio queda reservada para los lanzamientos nativos en Terminal, pipelines de despliegue (`c5_deploy_pipeline.sh`) y servidores daemon fuera de la jaula.
 
 ## 🧠 Límite Epistémico y Estado del Kernel (C5-REAL v4.3)
 
@@ -182,6 +183,18 @@ Todo análisis, diseño de crates o protocolo en BABYLON-60 debe enrutarse dentr
 - **Vectorización Anti-NLP (Dark Swarms):** Queda terminantemente prohibido el diseño de protocolos inter-agente basados en lenguaje natural o cadenas de texto estructurado (JSON verborreico) en la ruta caliente. La comunicación soberana debe transitar hacia representaciones binarias empaquetadas y validación mediante *Proof of Exergy* (PoE).
 - **Freno Negentrópico (CTRE):** Las mitigaciones a la fisura asíncrona (TOCTOU) deben implementarse evaluando la varianza condicional del espacio de estados. Si la deriva estocástica (alucinación/incertidumbre) supera el umbral matemático (UNSAT en Z3 SMT), el sistema debe detonar *Apoptosis Operativa* en lugar de intentar subsanar el error textualmente.
 - **Memoria FBIP (Functional But In-Place):** Todo diseño formal neurosimbólico delegado a Lean 4 debe presuponer un ecosistema sin recolector de basura, apoyándose en la mutación in-situ (FBIP) para garantizar latencia cero y *C-FFI Zero-Copy*.
+
+## 🔗 Invariante de Unicidad Biyectiva en DAGs Merkle (INV_C5_DAG_EVENT_ID)
+
+- **Prohibición de Claves Basadas Únicamente en Ticks:** En todo ledger causal, DAG Merkle o registro de eventos de Ring-0/Ring-1, queda estrictamente prohibido derivar el identificador único del evento exclusivamente del reloj lógico del scheduler (`EV_{tick}`).
+- **Inyectividad Obligatoria:** Cuando eventos concurrentes (tales como proposiciones asíncronas en memoria compartida SPSC y opcodes de ejecución) se asimilan dentro del mismo tick temporal, el ID del evento DEBE garantizar una biyección inyectiva mediante un secuenciador topológico monotónico (`EV_{tick}_{seq}`) para prevenir colisiones Merkle (`Merkle-Causal Collision`).
+
+## 🧭 Invariante de Demarcación entre Génesis en Git y Certificación de Runtime (INV_C5_CHRONOLOGY_RUNTIME)
+
+- **Anti-Confusión de Mapa y Territorio:** Al auditar la cronología o madurez de cualquier componente, DSL o arnés matemático, el agente DEBE segregar explícitamente:
+  1. **Génesis Documental / Especificación en Git:** Fecha y hash del commit donde se introdujo el código fuente o fixture.
+  2. **Certificación Operativa de Runtime:** Fecha y telemetría donde el runtime ejecutó de forma determinista el código hasta su estado terminal con código de salida 0.
+- **Prohibición de Asunción Pasiva:** Queda terminantemente prohibido declarar que un módulo "está implementado y en funcionamiento" basándose únicamente en la existencia de archivos `.b60`, `.rs` o `.lean` en el árbol de trabajo sin haber ejecutado la falsación empírica correspondiente.
 
 ## ⚠️ Invariantes de Manipulación Topológica y Peligros de Shell
 

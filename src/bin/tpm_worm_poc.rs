@@ -7,7 +7,7 @@ use std::time::{Duration, Instant};
 /// =========================================================================
 /// [AX-?] TOPOLOGY: Hardware Enclave & WORM Ledger PoC
 /// =========================================================================
-
+///
 /// Invariante de Hardware (Falsacion de TEE)
 pub trait HardwareEnclave {
     fn sign(&self, payload: &[u8]) -> Vec<u8>;
@@ -144,7 +144,7 @@ impl WormLedger {
 /// =========================================================================
 /// Falsacion Termodinamica (PoC & Stress Testing Invariant)
 /// =========================================================================
-
+///
 fn run_stress_test(iterations: usize) {
     println!("> Iniciando Prueba de Estres TEE / WORM...");
     println!("> Iteraciones objetivo: {}", iterations);

@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BABYLON IDE — The Larsa Triad & F60 Sexagesimal Kernel</title>
+  <style>
+    :root {
+      --bg-base: #08090c;
+      --bg-window: rgba(12, 14, 19, 0.96);
+      --bg-card: rgba(19, 22, 30, 0.88);
+      --border-card: rgba(255, 255, 255, 0.08);
+      --text-main: #f5f7fa;
+      --text-sub: #9499a8;
+      --text-dim: #595e6d;
+
+      /* Imperial Babylonian Gold & Lapis Lazuli */
+      --gold-light: #f7e7c6;
+      --gold-mid: #dfba63;
+      --gold-deep: #be8e2b;
+      --gold-dark: #0f1115;
+      --gold-glow: rgba(223, 186, 99, 0.52);
+      --gold-glow-subtle: rgba(223, 186, 99, 0.14);
+      --lapis-blue: #22436d;
+      --lapis-deep: #0e1b2c;
+
+      /* Terminal & BFT Colors */
+      --term-bg: rgba(10, 11, 15, 0.95);
+      --term-text: #eedcb0;
+      --term-dim: #7a7056;
+      --term-green: #5cdb95;
+      --term-cyan: #64d2ff;
+      --term-red: #ff5f56;
+
+      --mouse-x: 50%;
+      --mouse-y: 50%;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 6%, #151824 0%, #040507 100%);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      overflow: hidden;
+    }
+
+    /* Particle Canvas */
+    #particleCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Outer Window Frame */
+    .ide-window {
+      width: 100%;
+      max-width: 1200px;
+      height: 720px;
+      background: var(--bg-window);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 16px;
+      box-shadow: 
+        0 50px 140px rgba(0, 0, 0, 0.96),
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        0 0 60px rgba(223, 186, 99, 0.1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(50px);
+      -webkit-backdrop-filter: blur(50px);
+      z-index: 1;
+    }
+
+    /* Titlebar */
+    .titlebar {
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      z-index: 10;
+    }
+    .traffic-lights {
+      display: flex;
+      gap: 8px;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .dot-close { background: #ff5f56; border: 1px solid #e0443e; }
+    .dot-min { background: #ffbd2e; border: 1px solid #dea123; }
+    .dot-max { background: #27c93f; border: 1px solid #1aab29; }
+
+    .window-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-sub);
+      letter-spacing: 0.02em;
+    }
+    .window-title em {
+      font-style: italic;
+      color: var(--gold-mid);
+    }
+
+    .top-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .f60-badge {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 3px 10px;
+      font-size: 10.5px;
+      font-family: monospace;
+      color: var(--gold-light);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .f60-badge:hover {
+      border-color: var(--gold-mid);
+      color: #fff;
+    }
+
+    .louvre-badge-btn {
+      background: rgba(223, 186, 99, 0.1);
+      border: 1px solid rgba(223, 186, 99, 0.25);
+      border-radius: 14px;
+      padding: 3px 10px;
+      font-size: 11px;
+      color: var(--gold-mid);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+    .louvre-badge-btn:hover {
+      background: rgba(223, 186, 99, 0.2);
+      color: #fff;
+    }
+
+    .omega-pill {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      padding: 3px 12px 3px 8px;
+    }
+    .omega-pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold-mid);
+      box-shadow: 0 0 10px var(--gold-mid);
+      animation: pulse 2.2s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.25); }
+    }
+    .omega-select {
+      background: none;
+      border: none;
+      color: var(--text-main);
+      font-size: 11px;
+      font-weight: 500;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      outline: none;
+      cursor: pointer;
+    }
+    .omega-select option {
+      background: #14161c;
+      color: #fff;
+    }
+
+    /* Stage Layout */
+    .stage {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 24px;
+      padding: 18px 28px;
+      align-items: center;
+      position: relative;
+    }
+
+    .setup-flow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Emblem Header */
+    .emblem-header {
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .ibex-svg {
+      width: 78px;
+      height: 78px;
+      filter: drop-shadow(0 6px 30px var(--gold-glow));
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .emblem-header:hover .ibex-svg {
+      transform: scale(1.08) translateY(-2px);
+      filter: drop-shadow(0 14px 40px var(--gold-glow)) brightness(1.12);
+    }
+
+    .emblem-cuneiform {
+      font-size: 11px;
+      font-family: serif;
+      color: var(--gold-mid);
+      letter-spacing: 0.25em;
+      margin-top: 2px;
+      opacity: 0.95;
+    }
+    .emblem-caption {
+      font-size: 9px;
+      font-family: ui-monospace, monospace;
+      color: var(--text-dim);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* Stepper Tabs */
+    .step-tabs {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 24px;
+      padding: 3px;
+      margin-bottom: 14px;
+      gap: 4px;
+    }
+    .step-tab {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 18px;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-sub);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .step-tab.active {
+      background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold-mid) 100%);
+      color: var(--gold-dark);
+      font-weight: 600;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Setup Card */
+    .flow-card {
+      position: relative;
+      width: 100%;
+      max-width: 460px;
+      background: var(--bg-card);
+      border-radius: 14px;
+      padding: 20px 22px;
+      border: 1px solid var(--border-card);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      min-height: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Raycast Specular Glow Border */
+    .flow-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: 15px;
+      background: radial-gradient(
+        260px circle at var(--mouse-x) var(--mouse-y),
+        rgba(255, 255, 255, 0.3),
+        transparent 65%
+      );
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.8;
+    }
+    .flow-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 13px;
+      background: var(--bg-card);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      z-index: 2;
+    }
+
+    .flow-content {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Step 1: TouchID Halo */
+    .biometric-halo {
+      position: relative;
+      width: 105px;
+      height: 105px;
+      margin: 6px 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .halo-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px dashed rgba(223, 186, 99, 0.5);
+      animation: spin 16s linear infinite;
+    }
+    .halo-ring-inner {
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: var(--gold-light);
+      border-bottom-color: var(--gold-deep);
+      animation: spinReverse 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    @keyframes spinReverse { 100% { transform: rotate(-360deg); } }
+
+    .fingerprint-icon {
+      width: 42px;
+      height: 42px;
+      color: var(--gold-light);
+      filter: drop-shadow(0 0 14px var(--gold-glow));
+      transition: transform 0.25s;
+    }
+    .biometric-halo:hover .fingerprint-icon {
+      transform: scale(1.1);
+    }
+
+    /* Auth Providers */
+    .auth-pills {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+      margin-bottom: 12px;
+    }
+    .auth-pill {
+      flex: 1;
+      height: 34px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 8px;
+      color: #c0c4ce;
+      font-size: 11.5px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .auth-pill:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.14);
+    }
+
+    .btn-gold-action {
+      position: relative;
+      width: 100%;
+      height: 40px;
+      background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold-mid) 55%, var(--gold-deep) 100%);
+      color: var(--gold-dark);
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.4),
+        0 4px 18px var(--gold-glow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.65),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+    .btn-gold-action::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 50%;
+      height: 200%;
+      background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+      transform: rotate(25deg);
+      pointer-events: none;
+    }
+    .btn-gold-action:hover::after {
+      left: 130%;
+      transition: left 0.7s ease-in-out;
+    }
+    .btn-gold-action:hover {
+      transform: translateY(-1px);
+      box-shadow: 
+        0 6px 26px var(--gold-glow),
+        0 2px 6px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      filter: brightness(1.02);
+    }
+    .btn-gold-action:active { transform: translateY(1px) scale(0.99); }
+
+    .link-bypass {
+      margin-top: 10px;
+      font-size: 11px;
+      color: var(--text-dim);
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .link-bypass:hover {
+      color: var(--gold-mid);
+      text-decoration: underline;
+    }
+
+    /* Step 2: BFT Triad Simulator & Hypervisor */
+    .bft-triad-box {
+      width: 100%;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(223, 186, 99, 0.2);
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .triad-nodes {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    .node-chip {
+      flex: 1;
+      padding: 6px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px;
+      text-align: center;
+      font-size: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .node-chip.healthy {
+      border-color: rgba(92, 219, 149, 0.4);
+      color: var(--term-green);
+    }
+    .node-chip.faulted {
+      border-color: rgba(255, 95, 86, 0.4);
+      color: var(--term-red);
+      text-decoration: line-through;
+    }
+    .bft-status-line {
+      font-size: 9.5px;
+      color: var(--term-cyan);
+      font-family: monospace;
+      text-align: center;
+    }
+
+    /* Terminal Panel */
+    .terminal-panel {
+      height: 100%;
+      background: var(--term-bg);
+      border: 1px solid rgba(223, 186, 99, 0.16);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+    }
+    .term-header {
+      height: 34px;
+      background: rgba(255, 255, 255, 0.03);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--gold-mid);
+    }
+    .term-actions {
+      display: flex;
+      gap: 6px;
+    }
+    .term-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      color: var(--text-dim);
+      font-size: 9.5px;
+      padding: 2px 6px;
+      cursor: pointer;
+    }
+    .term-btn:hover { color: #fff; }
+
+    .term-logs {
+      flex: 1;
+      padding: 12px 10px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 10.5px;
+      line-height: 1.6;
+      color: var(--term-text);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .log-line {
+      display: flex;
+      gap: 6px;
+      word-break: break-all;
+    }
+    .log-tag {
+      color: var(--gold-mid);
+      flex-shrink: 0;
+    }
+    .log-ok { color: var(--term-green); }
+    .log-cyan { color: var(--term-cyan); }
+    .log-eme { color: #f5b0a3; }
+    .log-ak { color: #e2c275; }
+
+    /* Footer */
+    .telemetry-footer {
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.035);
+      font-size: 10.5px;
+      color: var(--text-dim);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      z-index: 2;
+    }
+    .tele-tag { color: var(--gold-mid); }
+
+    /* Modal Arqueológico Louvre */
+    .louvre-modal {
+      position: absolute;
+      inset: 0;
+      background: rgba(6, 7, 10, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .louvre-modal.active { display: flex; }
+    .modal-card {
+      width: 100%;
+      max-width: 680px;
+      background: #141720;
+      border: 1px solid rgba(223, 186, 99, 0.3);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+      position: relative;
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.06);
+      border: none;
+      color: #fff;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .modal-content {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+    .modal-img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid rgba(223, 186, 99, 0.2);
+    }
+    .modal-info h3 {
+      font-size: 16px;
+      color: var(--gold-mid);
+      margin-bottom: 8px;
+    }
+    .modal-info p {
+      font-size: 12px;
+      color: var(--text-sub);
+      line-height: 1.55;
+      margin-bottom: 8px;
+    }
+    .modal-specs {
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--term-text);
+      background: rgba(0,0,0,0.4);
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Canvas Particle Mesh -->
+  <canvas id="particleCanvas"></canvas>
+
+  <div class="ide-window">
+    <!-- Titlebar -->
+    <div class="titlebar">
+      <div class="traffic-lights">
+        <span class="dot dot-close" title="Cerrar (Esc)" onclick="handleBypass()"></span>
+        <span class="dot dot-min" title="Minimizar"></span>
+        <span class="dot dot-max" title="Maximizar"></span>
+      </div>
+
+      <div class="window-title">
+        BABYLON IDE &mdash; <em>The Larsa Triad &amp; F60 Sexagesimal Kernel</em>
+      </div>
+
+      <div class="top-controls">
+        <!-- F60 Sexagesimal Indicator -->
+        <button class="f60-badge" onclick="cycleF60Exergy()">
+          <span style="color: var(--gold-mid);">F60:</span>
+          <span id="f60Display">[5, 50, 0]&sub6;&sub0;</span>
+        </button>
+
+        <button class="louvre-badge-btn" onclick="openLouvreModal()">
+          <span>🏛️ Louvre AO</span>
+          <span>(Larsa, 18th c. BC)</span>
+        </button>
+
+        <div class="omega-pill">
+          <div class="omega-pulse" id="omegaDot"></div>
+          <select class="omega-select" id="omegaSelect" onchange="switchOmegaState(this.value)">
+            <option value="omega24">Ω24 Soberanía ULTRATHINK (Ξ=21.000)</option>
+            <option value="omega2">Ω2 Isomorfismo Ring-0 (Bit-Perfect)</option>
+            <option value="omega3">Ω3 Equilibrio Negentrópico</option>
+            <option value="omega1">Ω1 Síntesis Ontológica</option>
+            <option value="omega4">Ω4 Ruptura D.I.V.A.G.A.T.O.R.</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Stage -->
+    <div class="stage">
+      <!-- Left: Multi-Step Setup Flow -->
+      <div class="setup-flow">
+        <!-- The Sacred Triad of Larsa (Tres Íbices a 120°) -->
+        <div class="emblem-header" onclick="openLouvreModal()">
+          <svg class="ibex-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="ibexGoldGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#C49635" />
+                <stop offset="30%" stop-color="#DFBA63" />
+                <stop offset="70%" stop-color="#F7E7C6" />
+                <stop offset="100%" stop-color="#ECCF82" />
+              </linearGradient>
+              <linearGradient id="lapisGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#24446C" />
+                <stop offset="100%" stop-color="#0E1A2C" />
+              </linearGradient>
+            </defs>
+
+            <!-- Outer Hexagonal Sexagesimal Shield -->
+            <polygon points="60,6 108,32 108,88 60,114 12,88 12,32" stroke="url(#ibexGoldGrad)" stroke-width="2.2" fill="rgba(223, 186, 99, 0.04)" />
+
+            <!-- Triad Cup Ring (Base de la Copa de Larsa a 120°) -->
+            <circle cx="60" cy="50" r="16" stroke="url(#ibexGoldGrad)" stroke-width="2" stroke-dasharray="3 3"/>
+
+            <!-- Center Standing Sacred Ibex -->
+            <path d="M58 54 C54 36, 44 14, 24 18 C18 20, 20 28, 28 32 C42 40, 50 56, 52 64 Z" fill="url(#ibexGoldGrad)" />
+            <path d="M62 54 C66 36, 76 14, 96 18 C102 20, 100 28, 92 32 C78 40, 70 56, 68 64 Z" fill="url(#ibexGoldGrad)" />
+
+            <!-- Left & Right Supporting Ibexes (120° Symmetrical Vectors) -->
+            <path d="M34 68 C22 56, 16 38, 22 28 C26 26, 32 30, 32 38 C34 50, 42 62, 46 68 Z" fill="url(#ibexGoldGrad)" opacity="0.65"/>
+            <path d="M86 68 C98 56, 104 38, 98 28 C94 26, 88 30, 88 38 C86 50, 78 62, 74 68 Z" fill="url(#ibexGoldGrad)" opacity="0.65"/>
+
+            <!-- Head of Central Ibex (Lapis and Gold) -->
+            <polygon points="52,58 68,58 72,68 48,68" fill="url(#ibexGoldGrad)"/>
+            <polygon points="48,68 72,68 64,96 56,96" fill="url(#lapisGrad)" stroke="url(#ibexGoldGrad)" stroke-width="1.2"/>
+            <path d="M56 96 L64 96 L62 106 L58 106 Z" fill="url(#ibexGoldGrad)"/>
+            <polygon points="58,74 62,72 64,75 60,77" fill="#FFEBB8"/>
+            <circle cx="61" cy="74.5" r="1.2" fill="#121419"/>
+          </svg>
+          <div class="emblem-cuneiform">𒀭 𒂗 𒆠 &bull; 𒆍 𒀭 𒊏 𒆠</div>
+          <div class="emblem-caption">THE THREE IBEXES OF LARSA &bull; 120&deg; BFT CONSENSUS</div>
+        </div>
+
+        <!-- Step Tabs -->
+        <div class="step-tabs">
+          <button class="step-tab active" id="tab1" onclick="setStep(1)"><span>1. Identity</span></button>
+          <button class="step-tab" id="tab2" onclick="setStep(2)"><span>2. Larsa Triad &amp; IPC</span></button>
+          <button class="step-tab" id="tab3" onclick="setStep(3)"><span>3. SCITT Attestation</span></button>
+        </div>
+
+        <!-- Flow Card -->
+        <div class="flow-card" id="flowCard">
+          <!-- Step 1: Biometrics & Identity -->
+          <div class="flow-content" id="step1">
+            <div class="biometric-halo" onclick="authenticateBiometrics()">
+              <div class="halo-ring"></div>
+              <div class="halo-ring-inner"></div>
+              <svg class="fingerprint-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                <path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 3" />
+                <path d="M14 13.12c0 2.38 0 6.38-1 8.88" />
+                <path d="M2 12a10 10 0 0 1 18-6" />
+                <path d="M2 16a14 14 0 0 1 4-10" />
+                <path d="M6 18a16.9 16.9 0 0 1-1-6 8 8 0 0 1 15-4" />
+                <path d="M20 12c0 3-.5 6-2 9" />
+                <path d="M9 13a4.6 4.6 0 0 0 3-4" />
+                <path d="M16.5 10c.5 1.5.5 3.5.5 5 0 2-.5 4-1 5" />
+              </svg>
+            </div>
+
+            <div class="auth-pills">
+              <button class="auth-pill" onclick="handleProvider('Google')">
+                <svg width="13" height="13" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.13C3.26 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.58H1.24C.45 8.15 0 9.99 0 12s.45 3.85 1.24 5.42l4.04-3.13z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.24 6.58l4.04 3.13c.95-2.83 3.6-4.96 6.72-4.96z"/></svg>
+                <span>Google</span>
+              </button>
+              <button class="auth-pill" onclick="handleProvider('GitHub')">GitHub</button>
+              <button class="auth-pill" onclick="handleProvider('SSO')">Enterprise</button>
+            </div>
+
+            <button class="btn-gold-action" onclick="authenticateBiometrics()">
+              <span>Authenticate with TouchID Biometrics</span>
+            </button>
+          </div>
+
+          <!-- Step 2: Larsa Triad Simulator & Hypervisor -->
+          <div class="flow-content" id="step2" style="display: none;">
+            <div style="font-size: 12px; font-weight: 600; color: var(--gold-mid); margin: 2px 0 8px;">
+              TRÍADA DE LARSA BFT (TOLERANCIA 3f + 1 A 120&deg;)
+            </div>
+
+            <div class="bft-triad-box">
+              <div class="triad-nodes">
+                <div class="node-chip healthy" id="nodeA" onclick="toggleNodeFault('A')">
+                  <strong>Íbice &alpha; (Rust)</strong><br/><span id="lblA">ONLINE 0&deg;</span>
+                </div>
+                <div class="node-chip healthy" id="nodeB" onclick="toggleNodeFault('B')">
+                  <strong>Íbice &beta; (Lean 4)</strong><br/><span id="lblB">ONLINE 120&deg;</span>
+                </div>
+                <div class="node-chip healthy" id="nodeC" onclick="toggleNodeFault('C')">
+                  <strong>Íbice &gamma; (Z3 SMT)</strong><br/><span id="lblC">ONLINE 240&deg;</span>
+                </div>
+              </div>
+              <div class="bft-status-line" id="bftStatus">Consenso Bizantino: 3/3 Votos Activos &bull; Cero Tensión Estructural</div>
+            </div>
+
+            <div style="width: 100%; display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px;">
+              <select class="config-select" id="modelSelect" onchange="onModelChange(this.value)" style="width: 100%; height: 32px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; color: #fff; padding: 0 8px; font-size: 11px;">
+                <option value="deepseek">DeepSeek-R1 (Distill Qwen-32B) &bull; 85 tps</option>
+                <option value="claude">Claude 3.5 Sonnet (Direct Gateway) &bull; 75 tps</option>
+                <option value="mistral">Mistral Large 2 (Sovereign Dual) &bull; 90 tps</option>
+                <option value="metal">Apple Silicon Metal C-ABI (Local) &bull; 120 tps</option>
+              </select>
+
+              <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--term-cyan); background: rgba(0,0,0,0.4); padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                <span>SharedManifest: 64B L1 Slot</span>
+                <span id="benchResult">Latencia IPC: 12.4 ns</span>
+              </div>
+            </div>
+
+            <button class="btn-gold-action" onclick="setStep(3)">
+              <span>Certify Consensus &amp; Proceed to SCITT &rarr;</span>
+            </button>
+          </div>
+
+          <!-- Step 3: SCITT Attestation -->
+          <div class="flow-content" id="step3" style="display: none;">
+            <div style="font-size: 12px; font-weight: 600; color: var(--gold-mid); margin: 4px 0 8px;">
+              EU AI ACT COMPLIANCE CERTIFICATE
+            </div>
+            <div style="width: 100%; background: rgba(0,0,0,0.55); border: 1px dashed rgba(223,186,99,0.35); border-radius: 8px; padding: 8px 10px; font-family: monospace; font-size: 10px; color: var(--gold-light); margin-bottom: 8px; word-break: break-all;">
+              <div style="color: var(--term-green); font-size: 9px; margin-bottom: 3px;">RFC 9942 COSE_Sign1 Verified:</div>
+              <span id="scittToken">B60-TOKEN-7F89-A92B-SCITT-ED25519-VERIFIED</span>
+            </div>
+            <p style="font-size: 10.5px; color: var(--text-sub); text-align: center; margin-bottom: 12px; line-height: 1.4;">
+              Firma hardware inmutable anclada en el Secure Enclave. Trazabilidad WORM L1 y cero alucinaciones en Ring-0.
+            </p>
+
+            <button class="btn-gold-action" onclick="launchWorkbench()">
+              <span>🚀 Ignition: Launch BABYLON IDE</span>
+            </button>
+          </div>
+
+          <a class="link-bypass" onclick="handleBypass()">Omitir por ahora (Modo Soberano Local Ring-0) &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Right: Live Ring-0 Terminal with Eme-gir & Akkadû logs -->
+      <div class="terminal-panel">
+        <div class="term-header">
+          <span>&gt;_ RING-0 C-ABI TELEMETRY</span>
+          <div class="term-actions">
+            <button class="term-btn" onclick="clearLogs()">Clear</button>
+            <span style="color: var(--term-green); font-size: 10px; margin-left: 4px;">● 60 FPS</span>
+          </div>
+        </div>
+        <div class="term-logs" id="termLogs">
+          <div class="log-line"><span class="log-tag">[BOOT]</span><span>BABYLON-60 Kernel v4.3.0 initialized</span></div>
+          <div class="log-line"><span class="log-tag">[EME-GIR]</span><span class="log-eme">DINGIR ENKI KI-&Aacute;G: 64B Seqlock ba-du&sub3;</span></div>
+          <div class="log-line"><span class="log-tag">[AKKAD&Ucirc;]</span><span class="log-ak">&Scaron;ar m&#257;t &Scaron;umeri u Akkadi: MOSKV-1 qer&#275;bu</span></div>
+          <div class="log-line"><span class="log-tag">[RING-0]</span><span class="log-ok">64B Seqlock Locked (L1 0x1000_6060)</span></div>
+          <div class="log-line"><span class="log-tag">[LARSA_AO]</span><span class="log-ok">Triad of 3 Ibexes (18th c. BC) Attested</span></div>
+          <div class="log-line"><span class="log-tag">[C-ABI]</span><span>Epoch-Based Reclamation (EBR) armed</span></div>
+          <div class="log-line"><span class="log-tag">[SEC_ENC]</span><span>TouchID Enclave bound to ARM64 SEP</span></div>
+          <div class="log-line"><span class="log-tag">[SCITT]</span><span>EU AI Act Art. 12/14 Verifier Ready</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Telemetry Footer -->
+    <div class="telemetry-footer">
+      <div>
+        <span>HYPERVISOR: <span class="tele-tag">MOSKV-1</span></span> &nbsp;&bull;&nbsp;
+        <span>CONSENSUS: <span class="tele-tag">Larsa Triad 120&deg;</span></span> &nbsp;&bull;&nbsp;
+        <span>IPC: <span class="tele-tag">64B Seqlock</span></span> &nbsp;&bull;&nbsp;
+        <span>SECURITY: <span class="tele-tag">SCITT Signed</span></span>
+      </div>
+      <div>
+        <span>EXERG&Iacute;A: <span class="tele-tag" id="exergyVal">21.000 / 21.000</span></span>
+      </div>
+    </div>
+
+    <!-- Modal Arqueológico Louvre -->
+    <div class="louvre-modal" id="louvreModal" onclick="closeLouvreModal(event)">
+      <div class="modal-card" onclick="event.stopPropagation()">
+        <button class="modal-close-btn" onclick="closeLouvreModal()">✕</button>
+        <div class="modal-content">
+          <img src="assets/louvre_larsa_three_ibex_stand.jpg" alt="Soporte de copa de tres cabras íbices de Larsa (Museo del Louvre)" class="modal-img" />
+          <div class="modal-info">
+            <h3>Soporte de Copa de Tres Íbices</h3>
+            <p><strong>Ubicación:</strong> Museo del Louvre, París (Département des Antiquités orientales).</p>
+            <p><strong>Procedencia:</strong> Larsa (Tell Senkereh, sur de Irak).</p>
+            <p><strong>Datación:</strong> Siglo XVIII a.C. &bull; Primera Dinastía de Babilonia (Época de Hammurabi y Rim-Sin de Larsa).</p>
+            <p><strong>Materiales:</strong> Plata, bronce y láminas de oro batido.</p>
+            <div class="modal-specs">
+              Isomorfismo C5-REAL: Trípode BFT no destructivo a 120°. Tres cabras salvajes entrelazan sus cuernos en espiral logarítmica para sostener el cáliz del Kernel.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 1. Interactive Canvas Particle Mesh
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    const NUM_PARTICLES = 45;
+    for (let i = 0; i < NUM_PARTICLES; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        radius: Math.random() * 1.6 + 0.6,
+        alpha: Math.random() * 0.4 + 0.1
+      });
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      const card = document.getElementById('flowCard');
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+      card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+    });
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height;
+        if (p.y > height) p.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(223, 186, 99, ${p.alpha})`;
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 110) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(223, 186, 99, ${0.08 * (1 - dist / 110)})`;
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(drawParticles);
+    }
+    requestAnimationFrame(drawParticles);
+
+    // 2. Web Audio Synthesizer
+    let audioCtx = null;
+    function getAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      return audioCtx;
+    }
+
+    function playIbexChime() {
+      try {
+        const ctx = getAudio();
+        [293.66, 369.99, 440.0, 587.33].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(freq * 0.5, ctx.currentTime + 0.3);
+          gain.gain.setValueAtTime(0.05 / (idx + 1), ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.3);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.3);
+        });
+      } catch (e) {}
+    }
+
+    function playHapticPulse() {
+      try {
+        const ctx = getAudio();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(80, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(25, ctx.currentTime + 0.12);
+        gain.gain.setValueAtTime(0.25, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.12);
+      } catch (e) {}
+    }
+
+    // 3. Step Navigation
+    function setStep(stepNum) {
+      playIbexChime();
+      document.querySelectorAll('.step-tab').forEach((t, i) => {
+        t.classList.toggle('active', i + 1 === stepNum);
+      });
+      document.getElementById('step1').style.display = stepNum === 1 ? 'flex' : 'none';
+      document.getElementById('step2').style.display = stepNum === 2 ? 'flex' : 'none';
+      document.getElementById('step3').style.display = stepNum === 3 ? 'flex' : 'none';
+
+      appendLog(`STEP_${stepNum}`, `Entered Onboarding Phase ${stepNum}`);
+    }
+
+    function appendLog(tag, msg) {
+      const logs = document.getElementById('termLogs');
+      const div = document.createElement('div');
+      div.className = 'log-line';
+      div.innerHTML = `<span class="log-tag">[${tag}]</span><span>${msg}</span>`;
+      logs.appendChild(div);
+      logs.scrollTop = logs.scrollHeight;
+    }
+
+    function clearLogs() {
+      document.getElementById('termLogs').innerHTML = '<div class="log-line"><span class="log-tag">[RESET]</span><span>Terminal logs flushed</span></div>';
+    }
+
+    function authenticateBiometrics() {
+      playHapticPulse();
+      appendLog('SEC_ENCLAVE', 'TouchID verification validated in ARM64 SEP');
+      appendLog('SCITT', 'Identity Hash attested in Ring-0 Memory');
+      setTimeout(() => { setStep(2); }, 380);
+    }
+
+    function handleProvider(p) {
+      playIbexChime();
+      appendLog('AUTH_FED', `Federated token verified with ${p}`);
+      setStep(2);
+    }
+
+    function handleBypass() {
+      playIbexChime();
+      appendLog('LOCAL_SOV', 'Local bypass active. Cero network footprint.');
+      setStep(2);
+    }
+
+    function onModelChange(val) {
+      playIbexChime();
+      appendLog('ROUTER', `Gateway re-routed to model: ${val}`);
+    }
+
+    // 4. Larsa Triad Interactive BFT Simulator
+    const nodeState = { A: true, B: true, C: true };
+    function toggleNodeFault(id) {
+      nodeState[id] = !nodeState[id];
+      const chip = document.getElementById(`node${id}`);
+      const lbl = document.getElementById(`lbl${id}`);
+      playHapticPulse();
+
+      chip.classList.toggle('healthy', nodeState[id]);
+      chip.classList.toggle('faulted', !nodeState[id]);
+
+      const degMap = { A: '0°', B: '120°', C: '240°' };
+      lbl.innerText = nodeState[id] ? `ONLINE ${degMap[id]}` : `FAULT ${degMap[id]}`;
+
+      const activeCount = Object.values(nodeState).filter(Boolean).length;
+      const status = document.getElementById('bftStatus');
+
+      if (activeCount === 3) {
+        status.innerHTML = `<span style="color: var(--term-green);">Consenso Bizantino: 3/3 Votos Activos &bull; Cero Tensión Estructural</span>`;
+        appendLog('BFT_3F1', 'All 3 Ibex nodes verified healthy at 120° intervals');
+      } else if (activeCount === 2) {
+        status.innerHTML = `<span style="color: var(--gold-mid);">Tolerancia Activa (n &ge; 3f+1): 2/3 Nodos &bull; Trípode Isostático Estable</span>`;
+        appendLog('BFT_WARN', `Node ${id} offline. Quorum 2/3 maintained without split`);
+      } else {
+        status.innerHTML = `<span style="color: var(--term-red);">¡ALERTA BIZANTINA! Quórum Insuficiente (&lt; 2/3) &bull; Fail-Stop 0xDEAD_6060</span>`;
+        appendLog('APOPTOSIS', 'Fail-stop triggered: insufficient BFT quorum');
+      }
+    }
+
+    // 5. F60 Sexagesimal Converter Interactive
+    let f60Idx = 0;
+    const f60Samples = [
+      { num: 21000, str: "[5, 50, 0]₆₀" },
+      { num: 64, str: "[1, 4]₆₀" },
+      { num: 3600, str: "[1, 0, 0]₆₀" },
+      { num: 86400, str: "[24, 0, 0]₆₀" }
+    ];
+    function cycleF60Exergy() {
+      playIbexChime();
+      f60Idx = (f60Idx + 1) % f60Samples.length;
+      const sample = f60Samples[f60Idx];
+      document.getElementById('f60Display').innerText = sample.str;
+      appendLog('F60_MATH', `Decomposed ${sample.num} into sexagesimal orders: ${sample.str}`);
+    }
+
+    function launchWorkbench() {
+      playHapticPulse();
+      playIbexChime();
+      appendLog('IGNITION', 'BABYLON IDE Ready. Ring-0 Workspace mounted.');
+      alert('[BABYLON IDE]: ¡Ignición de Silicio completada con éxito!\nBienvenido al Workbench de BABYLON-60 en Ring-0.');
+    }
+
+    function switchOmegaState(state) {
+      playIbexChime();
+      const exergy = document.getElementById('exergyVal');
+      const map = {
+        omega24: "21.000 / 21.000",
+        omega2: "19.500 / 21.000",
+        omega3: "17.400 / 21.000",
+        omega1: "14.200 / 21.000",
+        omega4: "11.800 / 21.000"
+      };
+      exergy.innerText = map[state] || "21.000 / 21.000";
+      appendLog('OMEGA_STATE', `Cognitive transition to ${state.toUpperCase()}`);
+    }
+
+    // 6. Louvre Modal
+    function openLouvreModal() {
+      playIbexChime();
+      document.getElementById('louvreModal').classList.add('active');
+      appendLog('ARCHAEOLOGY', 'Louvre Museum AO-20138 (Larsa, 18th c. BC) inspected');
+    }
+    function closeLouvreModal() {
+      document.getElementById('louvreModal').classList.remove('active');
+    }
+  </script>
+</body>
+</html>

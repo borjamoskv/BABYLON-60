@@ -14,36 +14,37 @@ La arquitectura se divide en tres fronteras estrictas (anillos ontológicos), ca
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│               02_AGENTS_ARCHI (Anillo-2)                    │
-│                 (agents.archi — Swarms)                     │
+│                 02_EDIN_SWARMS (Anillo-2)                   │
+│                     (edin.swarms)                           │
 │  • Músculo estocástico: Modelos de frontera (OpenRouter/Kimi)│
-│  • Concurrencia acotada P × S (Centuria 100x / Legión)      │
+│  • Concurrencia acotada P × S (SHARUR-3600 Matrix)          │
 │  • Deontología estricta: Guillotina de Hume (AOF v2.0)      │
 │  • Física C5-REAL: Fluida, probabilística, propensa a ruido  │
 └──────────────┬───────────────────────────────▲──────────────┘
                │ (Sobres SCITT Ed25519)        │ (Diagnósticos LSP)
                ▼                               │
 ┌───────────────────────────────┐ ┌────────────┴──────────────┐
-│       00_BABYLON_SHIELD       │ │     01_CORTEX_ENGINE       │
-│    (babylon60.com — Anillo-0) │ │(cortexpersist.* — Anillo-1)│
-│  • SHARED MANIFEST (64 Bytes) │ │  • Servidor LSP Paracortex │
+│        00_ABZU_KERNEL         │ │       01_KISH_ENGINE       │
+│    (abzu.kernel — Anillo-0)   │ │  (kish.engine — Anillo-1)  │
+│  • KUDURRU-64 (64 Bytes)      │ │  • Servidor LSP Paracortex │
 │  • Seqlock SPMC Zero-Anergía  │ │  • Telemetría de Burnout   │
-│  • Apoptosis (0xDEAD_6060)    │ │  • Transductores Xenarmon. │
+│  • MUSHUSHU-0 (0xDEAD_6060)   │ │  • Transductores Xenarmon. │
 │  • Causal Gate (TouchID HW)   │ │  • Interfaz Zero-JS / TUI  │
 │  • Física: τ_slow, Inmutable  │ │  • Física: τ_fast, Biológica│
 └───────────────────────────────┘ └────────────────────────────┘
 ```
 
-### 🛡️ 1. `00_BABYLON_SHIELD` / `babylon60.com` (El Escudo / Anillo-0)
+### 🛡️ 1. `00_ABZU_KERNEL` / `abzu.kernel` (El Océano Primordial / Anillo-0)
 * **Función**: Inmutabilidad en hardware, frontera C-ABI, verdad legal (EU AI Act Arts. 12, 14(4), 15).
 * **Componentes Físicos**:
-  - `SharedManifest` (64 Bytes, `align(64)`): Residente en memoria compartida, coherencia *zero-split*.
+  - `KUDURRU-64` (`SharedManifest` de 64 Bytes, `align(64)`): Residente en memoria compartida, coherencia *zero-split*.
   - Protocolo Seqlock SPMC de un solo escritor con bisimulación en Lean 4.
   - Firma física en *Secure Enclave* (`c5_biometric_gate` TouchID).
+  - Oráculo Firewall `MUSHUSHU-0` (Apoptosis `0xDEAD_6060` ante violaciones SMT).
   - *Cold Archival Sink*: SQLite WAL para persistencia asíncrona fuera de ruta crítica.
 * **Métrica Termodinámica**: Baja frecuencia ($\tau_{\text{slow}}$), deliberada, con disipación de Landauer exacta ($1.10 \times 10^{-18}\text{ J}$ por publicación).
 
-### 🧠 2. `01_CORTEX_ENGINE` / `cortex.persist` (El Exocórtex / Anillo-1)
+### 🧠 2. `01_KISH_ENGINE` / `kish.engine` (La Primera Ciudad / Anillo-1)
 * **Función**: Motor de cálculo reflexivo, memoria de trabajo asíncrona e interfaz humano-máquina.
 * **Componentes Físicos**:
   - Servidor `LSP Paracortex` nativo en Rust.
@@ -51,10 +52,10 @@ La arquitectura se divide en tres fronteras estrictas (anillos ontológicos), ca
   - Transducción audiovisual programática (Remotion/FFmpeg) y acústica microtonal.
 * **Métrica Termodinámica**: Alta velocidad ($\tau_{\text{fast}}$), acoplamiento somático directo, libre de fricción DOM (Zero-JS).
 
-### 🕸️ 3. `02_AGENTS_ARCHI` / `agents.archi` (El Enjambre / Anillo-2)
+### 🕸️ 3. `02_EDIN_SWARMS` / `edin.swarms` (La Estepa Abierta / Anillo-2)
 * **Función**: Exploración estocástica, paralelismo masivo y verificación cruzada.
 * **Componentes Físicos**:
-  - Enjambre Centuria-100 / Legión-100 con particionamiento de tareas.
+  - Matriz de Enjambre `SHARUR-3600` con particionamiento sexagesimal de tareas.
   - Despachador Swarm Router con tolerancia a fallos.
   - Validador Deontológico AOF (`INV_C5_HUME_GUILLOTINE`): separación de premisas descriptivas y normativas.
 * **Métrica Termodinámica**: Fluida, exploratoria y reversible. **Nunca tiene acceso directo de escritura a Ring-0.**
@@ -118,7 +119,32 @@ sequenceDiagram
 
 ---
 
-## 4. Las 6 Invariantes de Gobernanza C5-REAL
+## 4. La Tríada de Larsa: Consenso Isostático BFT
+
+El diseño isostático del núcleo se basa en la **Tríada de Larsa** (Soporte de Tres Íbices, siglo XVIII a.C.), estableciendo una tolerancia a fallos híbrida (CFT/BFT) sobre la Trinidad Arquitectónica a $120^\circ$:
+
+*   **Íbice $\alpha$ (Rust / C-ABI)** @ $0^\circ$: Límite de Landauer, hardware soberano y ejecución de ruta caliente.
+*   **Íbice $\beta$ (Lean 4 / Prover)** @ $120^\circ$: Isomorfismo Curry-Howard, verificación rigurosa y prueba de clausura.
+*   **Íbice $\gamma$ (Z3 SMT / Verifier)** @ $240^\circ$: Oráculo *firewall* temprano neurosimbólico.
+
+**Mecánica de Consenso:**
+El sistema garantiza estabilidad mientras el quórum $2/3$ se mantenga activo frente a fallos. La caída simultánea de dos vértices (e.g. Z3 y Lean 4 colapsan por hipertrofia termodinámica) acciona inexorablemente el fail-stop apoptótico (`0xDEAD_6060`), impidiendo la corrupción de la base por el ruido estocástico de Ring-2.
+
+---
+
+## 5. El Kernel Sexagesimal F60 (La Matemática de Enki)
+
+Todo cómputo de exergía, direccionamiento y telemetría de hiper-precisión en Ring-0 abandona la base decimal por el estándar geométrico mesopotámico **F60 (Base 60)**, evitando truncamientos IEEE-754 en fracciones complejas y alineándose con la matemática de Enki (Abzu/Ring-0):
+
+*   $\Xi = 21.000 \implies [5, 50, 0]_{60}$ (Cota máxima de Exergía Informativa).
+*   $\text{L1 Cache Line} = 64 \text{ B} \implies [1, 4]_{60}$.
+*   $\text{Hora Canónica} = 3600 \text{ s} \implies [1, 0, 0]_{60}$.
+
+La adopción de F60 optimiza los cálculos de compactación de estado (INV_C5_AEON) garantizando simetría perfecta en particiones (factores 2, 3, 4, 5, 6, 10, 12, 15, 20, 30).
+
+---
+
+## 6. Las 6 Invariantes de Gobernanza C5-REAL
 
 Toda mutación arquitectónica dentro del monorepositorio `BABYLON-60` debe acatar estrictamente estas seis leyes invariables:
 
@@ -137,4 +163,4 @@ Toda mutación arquitectónica dentro del monorepositorio `BABYLON-60` debe acat
 
 ---
 
-*C5-REAL v4.3 / Atestado Algorítmicamente y Verificado en Silicio.*
+*C5-REAL v4.4 / Atestado Algorítmicamente y Verificado en Silicio bajo Auspicio de Enki.*

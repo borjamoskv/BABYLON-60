@@ -50,6 +50,10 @@ pub mod generated_aphairesis_constants;
 pub mod spsc_ring;
 /// Módulo de Telemetría Termodinámica y medición de ciclos de reloj.
 pub mod telemetry;
+/// Módulo de Consenso Isostático BFT de la Tríada de Larsa (Ring-0).
+pub mod larsa_bft;
+/// Módulo del Kernel Matemático Sexagesimal F60 (Matemática de Enki).
+pub mod f60;
 
 /// Módulo de interfaz C-ABI (FFI) para integración C/C++.
 pub mod ffi;
@@ -63,4 +67,5 @@ pub mod cortex;
 pub use seqlock::{publish, read};
 
 #[cfg(feature = "python")]
+/// FFI bridge for Python (PyO3). Exposed when `python` feature is enabled.
 pub mod ffi_python;

@@ -12,9 +12,9 @@ use std::fs;
 #[derive(Clone, Debug, PartialEq)]
 enum B60Type {
     I64,
-    TIME,
+    Time,
     F60, // F60 exact sexagesimal arithmetic (Scheduler/Ledger metadata scope)
-    UNALLOCATED,
+    Unallocated,
 }
 
 #[derive(Clone, Debug)]
@@ -73,8 +73,13 @@ impl DAGLedger {
         Self { events: HashMap::new(), latest: Vec::new() }
     }
     
-    fn append(&mut self, id: String, opcode: String, payload: String, logical_time: LogicalClock) {
+    fn append(&mut self, base_id: String, opcode: String, payload: String, logical_time: LogicalClock) {
         let parents = self.latest.clone();
+        let id = if self.events.contains_key(&base_id) {
+            format!("{}_{}", base_id, self.events.len())
+        } else {
+            base_id
+        };
         let mut ev = DAGEvent {
             id: id.clone(),
             parents,
@@ -85,15 +90,6 @@ impl DAGLedger {
             signature: "SIG_OK".to_string(),
         };
         ev.hash = ev.compute_hash();
-        
-        // Fail-fast collision check
-        if let Some(existing) = self.events.get(&id) {
-            if existing.hash != ev.hash {
-                panic!("Fail-fast: Merkle-Causal Collision: payload_hash differs for id {}", id);
-            } else {
-                return; // INSERT OR IGNORE safe
-            }
-        }
         
         self.events.insert(id.clone(), ev);
         self.latest = vec![id];
@@ -186,8 +182,8 @@ fn format_b60(mut val: i128) -> String {
 }
 
 fn get_reg_index(reg_str: &str) -> usize {
-    if reg_str.starts_with('R') {
-        reg_str[1..].parse().unwrap_or(0)
+    if let Some(stripped) = reg_str.strip_prefix('R') {
+        stripped.parse().unwrap_or(0)
     } else {
         0
     }
@@ -214,6 +210,23 @@ fn eval_expr(expr: &str, unit: &str, registers: &[Register]) -> i128 {
     }
 }
 
+fn parse_operand(token: &str, rest: &str, regs: &[Register]) -> i128 {
+    let trimmed = rest.trim();
+    if trimmed.starts_with('[') {
+        if let Some(end_idx) = trimmed.find(']') {
+            let b60_slice = &trimmed[..=end_idx];
+            let after_bracket = trimmed[end_idx + 1..].trim();
+            let unit_token = after_bracket.split_whitespace().next().unwrap_or("");
+            return parse_b60_number(b60_slice) * parse_unit(unit_token);
+        }
+    }
+    if token.starts_with('R') {
+        let idx = get_reg_index(token);
+        return regs[idx].val;
+    }
+    0
+}
+
 pub fn run_program(source: &str, verification_ring: &babylon60::spsc_ring::SpscRingBuffer<String, 1024>) {
     let lines = B60Compiler::compile(source);
     let mut labels = HashMap::new();
@@ -232,7 +245,7 @@ pub fn run_program(source: &str, verification_ring: &babylon60::spsc_ring::SpscR
     queue.push_back(Coroutine {
         id: 0,
         pc: 0,
-        regs: vec![Register { val: 0, typ: B60Type::UNALLOCATED, scale: 0 }; 32],
+        regs: vec![Register { val: 0, typ: B60Type::Unallocated, scale: 0 }; 32],
         state: CoroutineState::Ready,
     });
 
@@ -241,6 +254,7 @@ pub fn run_program(source: &str, verification_ring: &babylon60::spsc_ring::SpscR
 
     let mut is_halting = false;
     let mut is_quarantined = false;
+    let mut next_coroutine_id = 1;
 
     while let Some(mut co) = queue.pop_front() {
         // [C5-REAL] Consumir proposiciones formales sin bloqueo (Manta de Markov)
@@ -248,8 +262,26 @@ pub fn run_program(source: &str, verification_ring: &babylon60::spsc_ring::SpscR
             println!("[MOSKV APEX] Formal Proposition Verified via Lock-Free IPC: {}", prop);
             ledger.append(format!("EV_{}_PROOF", clock.0), "VERIFY".to_string(), prop, clock);
         }
-        if co.state == CoroutineState::Halted || co.state == CoroutineState::Quarantined || is_halting {
-            continue;
+        if is_halting {
+            break;
+        }
+
+        match co.state {
+            CoroutineState::Halted | CoroutineState::Quarantined | CoroutineState::Completed => continue,
+            CoroutineState::WaitingTimer(target_tick) => {
+                if clock.0 < target_tick.0 {
+                    queue.push_back(co);
+                    clock.0 += 1;
+                    continue;
+                } else {
+                    co.state = CoroutineState::Ready;
+                }
+            }
+            CoroutineState::Waiting(_) => {
+                queue.push_back(co);
+                continue;
+            }
+            CoroutineState::Ready | CoroutineState::Running => {}
         }
 
         if co.pc >= clean_code.len() {
@@ -267,10 +299,52 @@ pub fn run_program(source: &str, verification_ring: &babylon60::spsc_ring::SpscR
         }
 
         match tokens[0] {
+            "ALLOC" => {
+                let typ_str = tokens[1];
+                let idx = get_reg_index(tokens[2]);
+                co.regs[idx].typ = match typ_str {
+                    "TIME" => B60Type::Time,
+                    "F60" => B60Type::F60,
+                    _ => B60Type::I64,
+                };
+            }
+            "NIG" => {
+                let dest = get_reg_index(tokens[1]);
+                let rest = line[line.find(tokens[1]).unwrap() + tokens[1].len()..].trim();
+                let src_token = tokens.get(2).unwrap_or(&"0");
+                let val = parse_operand(src_token, rest, &co.regs);
+                co.regs[dest].val = val;
+                ledger.append(format!("EV_{}", clock.0), "NIG".to_string(), format!("R{}={}", dest, val), clock);
+            }
+            "DAH" => {
+                let dest = get_reg_index(tokens[1]);
+                let rest = line[line.find(tokens[1]).unwrap() + tokens[1].len()..].trim();
+                let src_token = tokens.get(2).unwrap_or(&"0");
+                let val = parse_operand(src_token, rest, &co.regs);
+                co.regs[dest].val += val;
+                ledger.append(format!("EV_{}", clock.0), "DAH".to_string(), format!("R{}+={}", dest, val), clock);
+            }
+            "LAL" => {
+                let dest = get_reg_index(tokens[1]);
+                let rest = line[line.find(tokens[1]).unwrap() + tokens[1].len()..].trim();
+                let src_token = tokens.get(2).unwrap_or(&"0");
+                let val = parse_operand(src_token, rest, &co.regs);
+                co.regs[dest].val -= val;
+                ledger.append(format!("EV_{}", clock.0), "LAL".to_string(), format!("R{}-={}", dest, val), clock);
+            }
+            "NU" => {
+                let reg_idx = get_reg_index(tokens[1]);
+                let target_label = tokens[2];
+                if co.regs[reg_idx].val == 0 {
+                    co.pc = *labels.get(target_label).unwrap_or(&0);
+                    ledger.append(format!("EV_{}", clock.0), "NU_BRANCH".to_string(), format!("R{}==0->{}", reg_idx, target_label), clock);
+                }
+            }
             "FORK" => {
                 let target = tokens[1];
                 let new_pc = *labels.get(target).unwrap_or(&0);
-                let new_id = queue.len() + 1;
+                let new_id = next_coroutine_id;
+                next_coroutine_id += 1;
                 queue.push_back(Coroutine {
                     id: new_id,
                     pc: new_pc,
@@ -286,45 +360,50 @@ pub fn run_program(source: &str, verification_ring: &babylon60::spsc_ring::SpscR
                 co.pc = *labels.get(target).unwrap_or(&0);
                 ledger.append(format!("EV_{}", clock.0), "AWAIT".to_string(), symbol.to_string(), clock);
             }
-            "AFTER" => {
-                let idx = get_reg_index(tokens[1]);
-                let target = tokens[2];
-                let ticks = co.regs[idx].val as u64;
-                co.state = CoroutineState::WaitingTimer(LogicalClock(clock.0 + ticks));
-                co.pc = *labels.get(target).unwrap_or(&0);
-                ledger.append(format!("EV_{}", clock.0), "AFTER".to_string(), format!("{}", ticks), clock);
-            }
             "EXECUTE" => {
                 let action = tokens[1].trim_matches('"');
                 let ev_id = format!("EV_{}", clock.0);
                 ledger.append(ev_id, "EXECUTE".to_string(), action.to_string(), clock);
+
+                for other in queue.iter_mut() {
+                    if let CoroutineState::Waiting(ref s) = other.state {
+                        if s == action {
+                            other.state = CoroutineState::Ready;
+                        }
+                    }
+                }
+
                 if action.starts_with("CRITICAL_HALT") {
                     is_halting = true;
                     is_quarantined = true;
                     co.state = CoroutineState::Quarantined;
                 }
             }
-            "CRITICAL" => {
-                if tokens.get(1).copied() == Some("HALT") {
-                    co.state = CoroutineState::Quarantined;
-                    is_halting = true;
-                    is_quarantined = true;
-                }
+            "AFTER" => {
+                let idx = get_reg_index(tokens[1]);
+                let target = tokens[2];
+                let ticks = (co.regs[idx].val as u64).max(1);
+                co.state = CoroutineState::WaitingTimer(LogicalClock(clock.0 + ticks));
+                co.pc = *labels.get(target).unwrap_or(&0);
+                ledger.append(format!("EV_{}", clock.0), "AFTER".to_string(), format!("{}", ticks), clock);
             }
-            "ALLOC" => {
-                let typ_str = tokens[1];
-                let idx = get_reg_index(tokens[2]);
-                co.regs[idx].typ = match typ_str {
-                    "TIME" => B60Type::TIME,
-                    "F60" => B60Type::F60,
-                    _ => B60Type::I64,
-                };
+            "HALT" => {
+                co.state = CoroutineState::Halted;
+                ledger.append(format!("EV_{}", clock.0), "HALT".to_string(), format!("CO_{}", co.id), clock);
+                continue;
+            }
+            "CRITICAL" if tokens.get(1).copied() == Some("HALT") => {
+                co.state = CoroutineState::Quarantined;
+                is_halting = true;
+                is_quarantined = true;
             }
             _ => {}
         }
         
         clock.0 += 1;
-        queue.push_back(co);
+        if co.state != CoroutineState::Halted && co.state != CoroutineState::Quarantined {
+            queue.push_back(co);
+        }
     }
 
     if is_quarantined {

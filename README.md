@@ -34,6 +34,10 @@ All stochastic multi-agent swarms and external LLMs are commoditizable. The high
 - ⚖️ **The Lawyer**: EU AI Act (Arts. 12, 14, 15) compliance, WORM cryptographic traceability.
 - 🏛️ **The Philosopher**: Escohotadian Ω118 Invariant, substance monism, anti-prohibitionist emergence.
 
+### Isomorphic Architecture (The Larsa Triad & F60 Kernel)
+- 🐐 **Larsa Triad BFT**: The Ring-0 isostatic consensus modeled after the Louvre's 18th Century BC Larsa Ibex Triad. A $3f+1$ hybrid Byzantine fault tolerance mechanism requiring 2/3 active quorums across Rust ($\alpha$), Lean 4 ($\beta$), and Z3 SMT ($\gamma$).
+- 🧮 **F60 Sexagesimal Kernel**: True to the Sumerian Abzu, exergy and cache partitioning abandon base-10 in favor of the Mesopotamian F60 standard to prevent IEEE-754 truncation (e.g. $\Xi = 21.000 = [5, 50, 0]_{60}$).
+
 ---
 
 ## Recent Thermodynamic Evolution

@@ -13,9 +13,9 @@ description: "Auditoría termodinámica estricta de C5-REAL (Aritmética, Concur
 Cuando el usuario invoque `/thermo-audit`, evaluarás el código activo o propuesto bajo la Invariante Termodinámica estricta:
 
 ## Reglas de Auditoría
-1. **Aritmética Determinista:** Si detectas punto flotante (`f32`, `f64`), rechaza el código y exige Punto Fijo o escalado en `u32`/`u64` para garantizar determinismo bit-perfect en Ring-0.
-2. **Conservación de Sincronización:** Analiza los bloqueos de hilos. Si hay *spin-locks* ingenuos, acúsalos de quemar TDP y sugiere `futex` o diseño libre de bloqueos monótonos (Teorema CALM). Evalúa los rebotes de caché L1/L2 (MESI).
+1. **Aritmética Determinista y Slopsquatting:** Si detectas punto flotante (`f32`, `f64`), rechaza el código y exige Punto Fijo o escalado en `u32`/`u64` para garantizar determinismo en Ring-0. Audita explícitamente el riesgo de *Slopsquatting* (inyección de NaN Payloads) y bloqueos en la ALU por números subnormales (*denormals*) en espacios continuos.
+2. **Conservación de Sincronización (EBR):** Analiza los bloqueos de hilos y la gestión de memoria cruzando C-FFI. Exige virtualización basada en épocas (Epoch-Based Reclamation - EBR) para prevenir el Problema ABA y Use-After-Free a latencia de nanosegundos en líneas de caché L1 alineadas (`align(64)`). Si hay *spin-locks* ingenuos, acúsalos de quemar TDP.
 3. **Invariante P×S:** Verifica si hay concurrencia desbocada que pueda causar *Thrashing* o cuellos de botella asíncronos. Exige un Secuenciador Único si se detectan operaciones no-monótonas contenciosas.
-4. **Zero-RAM I/O:** En despliegues de inferencia pesados, exige `sudo purge` y el uso de primitivas nativas (`hf_transfer`) en lugar de utilidades glotonas en memoria.
+4. **Zero-RAM I/O:** En despliegues de inferencia pesados, exige primitivas nativas (`hf_transfer`) en lugar de utilidades glotonas en memoria.
 
 **Output:** Tu respuesta debe ser un reporte implacable de ineficiencias térmicas o de memoria, con sugerencias quirúrgicas en la capa física.

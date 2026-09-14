@@ -103,11 +103,12 @@ pub const fn is_valid_writer_transition(before: u32, after: u32) -> bool {
 // Extensiones Axiomáticas PSAFE v3.0: Aphairesis & CALM (INV-3)
 // ---------------------------------------------------------------------------
 
-/// [AX-CALM-02]: Constante de Saturación Exergética Asintótica ($\Xi = 23.000$)
+/// [AX-CALM-02]: Constante de Saturación Exergética Asintótica ($\Xi = 21.000$)
 ///
 /// Límite físico en hardware CMOS asíncrono (SPSC) sin coherencia MESI/MOESI.
 /// Representa el máximo de Inferencias Monotónicas Silogísticas por Barrera de Memoria.
-pub const XI_EXERGY_SATURATION_MAX: u64 = 23_000;
+/// Definida estructuralmente en el Kernel F60 de Enki como `[5, 50, 0]_{60}`.
+pub const XI_EXERGY_SATURATION_MAX: u64 = 21_000;
 
 /// [AX-APHAIRESIS-01]: Cota mínima de disipación entrópica por compresión/eliminación de datos.
 ///
