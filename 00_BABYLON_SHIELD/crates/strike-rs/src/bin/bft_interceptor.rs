@@ -2,6 +2,7 @@
 // BABYLON-60 v4.0 Sovereign Hardened
 // █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 // ============================================================================
+#[cfg(target_os = "linux")]
 use inotify::{Inotify, WatchMask};
 use ring::hmac;
 use rusqlite::{params, Connection};
@@ -130,37 +131,40 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     });
 
-    // 2. Monitoreo inotify de ~/.agent_persist
-    let home = env::var("HOME").unwrap_or_else(|_| "/root".to_string());
-    let agent_dir = format!("{}/.agent_persist", home);
-    
-    let l_fs = Arc::clone(&ledger);
-    let s_fs = Arc::clone(&shutdown_flag);
-    
-    if Path::new(&agent_dir).exists() {
-        thread::spawn(move || {
-            if let Ok(mut inotify) = Inotify::init() {
-                let _ = inotify.watches().add(
-                    Path::new(&agent_dir),
-                    WatchMask::MODIFY | WatchMask::CREATE | WatchMask::DELETE,
-                );
-                
-                let mut buffer = [0; 1024];
-                while !s_fs.load(Ordering::SeqCst) {
-                    if let Ok(events) = inotify.read_events(&mut buffer) {
-                        for event in events {
-                            if let Some(name) = event.name {
-                                let payload = name.to_string_lossy().to_string();
-                                if let Ok(mut l) = l_fs.lock() {
-                                    let _ = l.insert("FS_EVENT", &payload);
+    // 2. Monitoreo inotify de ~/.agent_persist (Linux)
+    #[cfg(target_os = "linux")]
+    {
+        let home = env::var("HOME").unwrap_or_else(|_| "/root".to_string());
+        let agent_dir = format!("{}/.agent_persist", home);
+        
+        let l_fs = Arc::clone(&ledger);
+        let s_fs = Arc::clone(&shutdown_flag);
+        
+        if Path::new(&agent_dir).exists() {
+            thread::spawn(move || {
+                if let Ok(mut inotify) = Inotify::init() {
+                    let _ = inotify.watches().add(
+                        Path::new(&agent_dir),
+                        WatchMask::MODIFY | WatchMask::CREATE | WatchMask::DELETE,
+                    );
+                    
+                    let mut buffer = [0; 1024];
+                    while !s_fs.load(Ordering::SeqCst) {
+                        if let Ok(events) = inotify.read_events(&mut buffer) {
+                            for event in events {
+                                if let Some(name) = event.name {
+                                    let payload = name.to_string_lossy().to_string();
+                                    if let Ok(mut l) = l_fs.lock() {
+                                        let _ = l.insert("FS_EVENT", &payload);
+                                    }
                                 }
                             }
                         }
+                        thread::sleep(std::time::Duration::from_millis(50));
                     }
-                    thread::sleep(std::time::Duration::from_millis(50));
                 }
-            }
-        });
+            });
+        }
     }
 
     // 3. Subproceso CLI (Bypass de recursión infinita)

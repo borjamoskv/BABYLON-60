@@ -11,7 +11,7 @@ namespace B60.Oracle
 def parseLine (line : String) : Option Event :=
   -- Eliminar retornos de carro manuales
   let chars := line.toList.filter (fun c => c != '\n' && c != '\r')
-  let cleanLine := String.mk chars
+  let cleanLine := String.ofList chars
   match cleanLine.splitOn "," with
   | [tStr, sStr, aStr] =>
     match tStr.toNat?, sStr.toNat? with
