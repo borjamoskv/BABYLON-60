@@ -28,19 +28,19 @@ tests/
 ## 🔍 Taxonomía de las Suites Principales
 
 ### 1. Invariantes C5-REAL & Falsación Popperiana
-* **[`test_c5_invariants.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_c5_invariants.py)** & **[`test_axioms_hypothesis.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_axioms_hypothesis.py)**: Validación de invariantes de alta exergía y pruebas basadas en propiedades con Hypothesis.
-* **[`test_inv_c5_28_falsification.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_inv_c5_28_falsification.py)**: Test de falsación de proposiciones en tiempo de ejecución.
+* **[`test_c5_invariants.py`](test_c5_invariants.py)** & **[`test_axioms_hypothesis.py`](test_axioms_hypothesis.py)**: Validación de invariantes de alta exergía y pruebas basadas en propiedades con Hypothesis.
+* **[`test_inv_c5_28_falsification.py`](test_inv_c5_28_falsification.py)**: Test de falsación de proposiciones en tiempo de ejecución.
 
 ### 2. Consenso BFT & Resiliencia de Ledger
-* **[`test_hotstuff_consensus.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_hotstuff_consensus.py)**, **[`test_raft_consensus.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_raft_consensus.py)** & **[`test_bittensor_yuma_consensus.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_bittensor_yuma_consensus.py)**: Simulación de algoritmos de consenso tolerantes a fallos bizantinos.
-* **[`test_ledger_resilience.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_ledger_resilience.py)** & **[`test_master_ledger_queue.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_master_ledger_queue.py)**: Prueba de concurrencia y recuperación ante desastres.
+* **[`test_hotstuff_consensus.py`](test_hotstuff_consensus.py)**, **[`test_raft_consensus.py`](test_raft_consensus.py)** & **[`test_bittensor_yuma_consensus.py`](test_bittensor_yuma_consensus.py)**: Simulación de algoritmos de consenso tolerantes a fallos bizantinos.
+* **[`test_ledger_resilience.py`](test_ledger_resilience.py)** & **[`test_master_ledger_queue.py`](test_master_ledger_queue.py)**: Prueba de concurrencia y recuperación ante desastres.
 
 ### 3. Kernel Nativo & Inferencia Verificable
-* **[`test_kernel_native_modules.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_kernel_native_modules.py)**: Verificación del motor CDP de navegador, cliente Kimi y sincronización QuantumSync.
-* **[`test_verifiable_inference.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_verifiable_inference.py)** & **[`test_mcp_deduction.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_mcp_deduction.py)**: Test de firmas criptográficas de inferencia y oráculos deductivos MCP.
+* **[`test_kernel_native_modules.py`](test_kernel_native_modules.py)**: Verificación del motor CDP de navegador, cliente Kimi y sincronización QuantumSync.
+* **[`test_verifiable_inference.py`](test_verifiable_inference.py)** & **[`test_mcp_deduction.py`](test_mcp_deduction.py)**: Test de firmas criptográficas de inferencia y oráculos deductivos MCP.
 
 ### 4. Primitivas C5 & Aritmética Base-60
-* **[`test_base60.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_base60.py)** & **[`test_f60_arithmetic.py`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_f60_arithmetic.py)**: Verificación de las operaciones aritméticas sexagesimales babilónicas.
+* **[`test_base60.py`](test_base60.py)** & **[`test_f60_arithmetic.py`](test_f60_arithmetic.py)**: Verificación de las operaciones aritméticas sexagesimales babilónicas.
 
 ---
 
