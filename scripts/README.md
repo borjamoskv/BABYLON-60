@@ -146,7 +146,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | [`c5_legion/legion_1000_audit_swarm.py`](c5_legion/legion_1000_audit_swarm.py) | `Python` | `191047a6d664` | MOSKV-1: Legion 1000 Audit Swarm Engine (INV_C5_18) |
 | [`c5_legion/legion_100_disk_forensic_auditor.py`](c5_legion/legion_100_disk_forensic_auditor.py) | `Python` | `a4433b231af8` | legion_100_disk_forensic_auditor.py — 100-Agent Parallel Swarm for Local Disk & Anergy Audit |
 | [`c5_legion/legion_100_full_spectrum_auditor.py`](c5_legion/legion_100_full_spectrum_auditor.py) | `Python` | `8feed5a9f210` | legion_100_full_spectrum_auditor.py — 100-Agent Full Spectrum Swarm Auditor |
-| [`c5_legion/legion_21_agentes.py`](c5_legion/legion_21_agentes.py) | `Python` | `3fd06007c527` | MOSKV-1: Enjambre de 21 Agentes Paralelizados (C5-REAL Execution Engine) |
+| [`c5_legion/legion_21_agentes.py`](c5_legion/legion_21_agentes.py) | `Python` | `37344969c5e8` | MOSKV-1: Enjambre de 21 Agentes Paralelizados (C5-REAL Execution Engine) |
 | [`c5_legion/legion_222_agentes.py`](c5_legion/legion_222_agentes.py) | `Python` | `69192c75c6b9` | ruff: noqa: E402 |
 | [`c5_legion/legion_master_swarm_runner.py`](c5_legion/legion_master_swarm_runner.py) | `Python` | `24434f5dfcf9` | legion_master_swarm_runner.py - Orchestrator for Phase 4 Swarm Collapse |
 | [`c5_legion/legion_swarm.py`](c5_legion/legion_swarm.py) | `Python` | `ebd798a50d5d` | legion_swarm.py - Unified Sovereign Swarm Orchestrator CLI |
@@ -178,7 +178,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | [`c5_quality_gates/swarm_lock_guard.py`](c5_quality_gates/swarm_lock_guard.py) | `Python` | `77dee64125a3` | MOSKV-1 APEX: Swarm Workspace Lock Guard (INV_C5_22) |
 | [`c5_quality_gates/symlink_depth_auditor.py`](c5_quality_gates/symlink_depth_auditor.py) | `Python` | `150933d36465` | Symlink Depth Auditor (INV_C5_12 Enforcer). |
 | [`c5_quality_gates/sync_docs_index.py`](c5_quality_gates/sync_docs_index.py) | `Python` | `ded06d68ff15` | ruff: noqa: E402 |
-| [`c5_quality_gates/verify_distribution.py`](c5_quality_gates/verify_distribution.py) | `Python` | `32b29938d898` | C5-REAL Distribution Quality Gate: verify_distribution.py |
+| [`c5_quality_gates/verify_distribution.py`](c5_quality_gates/verify_distribution.py) | `Python` | `1fdc12bf90e6` | C5-REAL Distribution Quality Gate: verify_distribution.py |
 
 ### 🚀 Host & Repository Setup Scripts
 

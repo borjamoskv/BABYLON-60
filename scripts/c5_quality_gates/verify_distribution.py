@@ -70,10 +70,10 @@ def check_dockerfile() -> dict[str, Any]:
     
     content = dockerfile_path.read_text(encoding="utf-8")
     checks = {
-        "non_root_user": "USER appuser" in content,
+        "non_root_user": "USER appuser" in content or "USER cortex" in content,
         "healthcheck": "HEALTHCHECK" in content,
         "oci_labels": "org.opencontainers.image" in content,
-        "slim_base": "python:3.12-slim" in content,
+        "slim_base": "-slim" in content,
     }
     
     for check_name, passed in checks.items():

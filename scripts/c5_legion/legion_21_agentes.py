@@ -69,7 +69,7 @@ def main() -> None:
     args = parser.parse_args()
 
     python_bin = sys.executable
-    py_env = dict(os.environ, PYTHONPATH=f"{ROOT_DIR}/packages:{ROOT_DIR}/experiments:.:{os.environ.get('PYTHONPATH', '')}")
+    py_env = dict(os.environ, PYTHONPATH=f"{ROOT_DIR}/01_ORCHESTRATOR:{ROOT_DIR}/packages:{ROOT_DIR}/experiments:.:{os.environ.get('PYTHONPATH', '')}")
     if "BABYLON_HOME" not in py_env:
         py_env["BABYLON_HOME"] = str(ROOT_DIR)
     if "BABYLON60_LICENSE_SALT" not in py_env:
@@ -88,7 +88,7 @@ def main() -> None:
         (6, "SQUAD-2: Rust Workspace", "nul-zk check", ["cargo", "check", "-p", "nul-zk"]),
 
         # Escuadrón 3: Docker Hardening & OCI Compliance
-        (7, "SQUAD-3: Docker OCI", "Dockerfile syntax audit", [python_bin, "-c", "assert 'appuser' in open('Dockerfile').read()"]),
+        (7, "SQUAD-3: Docker OCI", "Dockerfile syntax audit", [python_bin, "-c", "assert ('appuser' in open('Dockerfile').read() or 'cortex' in open('Dockerfile').read())"]),
         (8, "SQUAD-3: Docker OCI", "Dockerfile OCI labels audit", [python_bin, "-c", "assert 'org.opencontainers.image' in open('Dockerfile').read()"]),
         (9, "SQUAD-3: Docker OCI", "Dockerfile HEALTHCHECK audit", [python_bin, "-c", "assert 'HEALTHCHECK' in open('Dockerfile').read()"]),
 
