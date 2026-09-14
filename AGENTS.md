@@ -121,6 +121,19 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 - **Lean 4 (Ring-1 / Epistemología):** Soberano de la verdad formal (Isomorfismo Curry-Howard). Actúa como la Corte Suprema que consume los logs (`trace.bin` / SQLite WAL) producidos por Rust y compila las pruebas de correctitud *End-to-End*. Queda prohibida su inyección en el *hot path* del Ring-0 debido a la anergía introducida por su sistema de *Reference Counting* automático. **Para la certificación de trazas masivas, se prohíbe la búsqueda deductiva de pruebas en `Prop`; la verificación debe ejecutarse mediante Demostración por Reflexión (`by decide`) sobre FSMs computables en `Bool`, garantizando validación C nativa O(N) con latencia sub-segundo.**
 - **Z3 SMT (Firewall Neurosimbólico):** Oráculo de falsación temprana. Su única misión es triturar alucinaciones de IA a velocidad de milisegundos resolviendo restricciones booleanas/algebraicas sobre los AST, evitando que el ruido estocástico ensucie el Ring-0 o demande validación pesada en Lean 4.
 
+## 🌊 Invariante Mimético DEC & Consenso LARSA-120 (INV_C5_DEC_MIMETIC)
+
+- **Nilpotencia Exacta a Nivel de Bit:** Todo operador diferencial sobre formas discretas implementado en Ring-0 (`src/dec.rs`) DEBE satisfacer las identidades topológicas algebraicas exactas sin error de truncamiento ni punto flotante:
+  1. $d_1 \circ d_0 \equiv 0$ ($\operatorname{rot} \circ \operatorname{grad} \equiv 0$).
+  2. $d_2 \circ d_1 \equiv 0$ ($\operatorname{div} \circ \operatorname{rot} \equiv 0$).
+  Queda prohibido el uso de esquemas de diferencias finitas estándar que generen monopolos de vorticidad o viscosidad numérica artificial.
+- **Invariantes Topológicos de Fluidos:** Los campos solenoidalmente exactos ($u = \operatorname{rot} A$) deben verificar divergencia nula ($\nabla \cdot \mathbf{u} = 0$) mediante el codiferencial discreto $d_0^*$, preservando energía cinética y helicidad topológica.
+- **Consenso LARSA-120 en Arbitraje de Singularidades:** Toda evaluación de candidatos a blowup en tiempo finito (Navier-Stokes / Euler) debe someterse a la Tríada Isostática a 120º:
+  - Vértice $\alpha$ (Rust / `F60Ball`): Integración de vorticidad y BKM con propagación monotónica de radio.
+  - Vértice $\beta$ (Lean 4): Certificación formal de suavidad geométrica de Constantin-Fefferman por reflexión computacional (`by decide`).
+  - Vértice $\gamma$ (Z3 SMT): Poda booleana sub-milisegundo de falsos blowups.
+  Solo si el quórum $2/3$ certifica la fractura de suavidad Lipschitz y la divergencia BKM simultáneamente, se autoriza el aislamiento del candidato en cuarentena inmutable (`quarantine_immutability`).
+
 ## 💎 Invariante del Nodo de Máxima Exergía (El Suelo Inflexible de 64B)
 
 - **Jerarquía Ontológica**: Los enjambres multi-agente, los clientes de OpenRouter y las interfaces gráficas son comoditizables y reemplazables. El nodo de mayor valor absoluto de BABYLON-60 es el vértice indivisible de Ring-0:

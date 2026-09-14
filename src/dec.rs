@@ -262,6 +262,182 @@ impl MimeticInvariants {
     }
 }
 
+/// Resultado de la Descomposición Ortogonal de Helmholtz-Hodge
+#[derive(Debug, Clone)]
+pub struct HelmholtzResult {
+    /// Componente solenoidal incompresible ($\nabla \cdot \mathbf{u}_{\text{sol}} = 0$)
+    pub u_solenoidal: Vec<f64>,
+    /// Componente irrotacional de gradiente de potencial ($\mathbf{u}_{\text{irrot}} = \nabla \phi$)
+    pub u_irrotational: Vec<f64>,
+    /// Campo escalar de potencial/presión $\phi$ solución de $\Delta \phi = \operatorname{div}(\mathbf{u})$
+    pub phi_pressure: Vec<f64>,
+    /// Iteraciones del solucionador de Gradientes Conjugados (CG)
+    pub cg_iterations: usize,
+    /// Residuo de Poisson final alcanzado en $L^2$
+    pub poisson_residual: f64,
+    /// Divergencia máxima residual en vértices
+    pub max_solenoidal_divergence: f64,
+    /// Error de ortogonalidad $L^2$: $|\langle \mathbf{u}_{\text{sol}}, \mathbf{u}_{\text{irrot}} \rangle|$
+    pub l2_orthogonality_error: f64,
+}
+
+/// Descomposición de Helmholtz-Hodge Discreta (Iteraciones 41-44 de la Matriz Maestra)
+/// Proyecta cualquier 1-forma arbitraria $u \in \Omega^1$ sobre su componente solenoidal incompresible:
+/// $u = d_0 \phi + u_{\text{solenoidal}}$ con $d_0^* u_{\text{solenoidal}} \equiv 0$
+pub struct HelmholtzHodgeDecomposition;
+
+impl HelmholtzHodgeDecomposition {
+    /// Aplica el Laplaciano discreto 0-forma $(\Delta_0 \phi)_v = \sum_{w \sim v} (\phi_v - \phi_w)$.
+    /// Corresponde a $d_0^* (d_0 \phi)$.
+    pub fn laplacian_0(mesh: &CubicMesh3D, phi: &[f64]) -> Vec<f64> {
+        let mut lap = vec![0.0; mesh.num_vertices];
+        for z in 0..mesh.n {
+            for y in 0..mesh.n {
+                for x in 0..mesh.n {
+                    let v = mesh.vertex_idx(x, y, z);
+                    let val_v = phi[v];
+
+                    let vx_next = phi[mesh.vertex_idx(x + 1, y, z)];
+                    let vx_prev = phi[mesh.vertex_idx(if x == 0 { mesh.n - 1 } else { x - 1 }, y, z)];
+                    let vy_next = phi[mesh.vertex_idx(x, y + 1, z)];
+                    let vy_prev = phi[mesh.vertex_idx(x, if y == 0 { mesh.n - 1 } else { y - 1 }, z)];
+                    let vz_next = phi[mesh.vertex_idx(x, y, z + 1)];
+                    let vz_prev = phi[mesh.vertex_idx(x, y, if z == 0 { mesh.n - 1 } else { z - 1 })];
+
+                    // 6 vecinos en la red cúbica 3D: \Delta \phi = 6 \phi - \sum vecinos
+                    lap[v] = 6.0 * val_v - (vx_next + vx_prev + vy_next + vy_prev + vz_next + vz_prev);
+                }
+            }
+        }
+        lap
+    }
+
+    /// Resuelve la ecuación de Poisson $\Delta_0 \phi = \operatorname{div}(u)$ mediante Gradientes Conjugados (CG).
+    pub fn solve_poisson_cg(mesh: &CubicMesh3D, rhs: &[f64], max_iter: usize, tol: f64) -> (Vec<f64>, usize, f64) {
+        let mut x = vec![0.0; mesh.num_vertices];
+        let mut r = rhs.to_vec();
+
+        // Proyección sobre subespacio ortogonal a constantes: sum(rhs) = 0
+        let mean = r.iter().sum::<f64>() / mesh.num_vertices as f64;
+        for val in r.iter_mut() {
+            *val -= mean;
+        }
+
+        let mut p = r.clone();
+        let mut rs_old: f64 = r.iter().map(|&v| v * v).sum();
+
+        if rs_old.sqrt() < tol {
+            return (x, 0, rs_old.sqrt());
+        }
+
+        let mut iters = 0;
+        for i in 0..max_iter {
+            iters = i + 1;
+            let ap = Self::laplacian_0(mesh, &p);
+            let p_dot_ap: f64 = p.iter().zip(ap.iter()).map(|(&a, &b)| a * b).sum();
+
+            if p_dot_ap.abs() < 1e-15 {
+                break;
+            }
+
+            let alpha = rs_old / p_dot_ap;
+            for j in 0..mesh.num_vertices {
+                x[j] += alpha * p[j];
+                r[j] -= alpha * ap[j];
+            }
+
+            let rs_new: f64 = r.iter().map(|&v| v * v).sum();
+            if rs_new.sqrt() < tol {
+                return (x, iters, rs_new.sqrt());
+            }
+
+            let beta = rs_new / rs_old;
+            for j in 0..mesh.num_vertices {
+                p[j] = r[j] + beta * p[j];
+            }
+            rs_old = rs_new;
+        }
+
+        (x, iters, rs_old.sqrt())
+    }
+
+    /// Descomposición completa de Helmholtz-Hodge:
+    /// Retorna un `HelmholtzResult` con componentes ortogonales y residuales.
+    pub fn decompose(mesh: &CubicMesh3D, u: &Form1) -> HelmholtzResult {
+        // 1. Calcular divergencia de u en vértices
+        let div = DiscreteDeRham::codifferential_d0_star(mesh, u);
+        // L_graph \phi = - div(u), asegurando que div(d0 \phi) = - L \phi = div(u)
+        let rhs: Vec<f64> = div.values.iter().map(|&v| -(v as f64)).collect();
+
+        // 2. Resolver Poisson: \Delta_0 \phi = - div(u)
+        let (phi_vals, iters, res_norm) = Self::solve_poisson_cg(mesh, &rhs, 300, 1e-10);
+
+        // 3. Gradiente discreto: u_irrotational = d0(phi)
+        let mut u_irrot = vec![0.0f64; mesh.num_edges];
+        for z in 0..mesh.n {
+            for y in 0..mesh.n {
+                for x in 0..mesh.n {
+                    let v = mesh.vertex_idx(x, y, z);
+                    let val_v = phi_vals[v];
+
+                    let v_x = mesh.vertex_idx(x + 1, y, z);
+                    u_irrot[mesh.edge_idx(x, y, z, 0)] = phi_vals[v_x] - val_v;
+
+                    let v_y = mesh.vertex_idx(x, y + 1, z);
+                    u_irrot[mesh.edge_idx(x, y, z, 1)] = phi_vals[v_y] - val_v;
+
+                    let v_z = mesh.vertex_idx(x, y, z + 1);
+                    u_irrot[mesh.edge_idx(x, y, z, 2)] = phi_vals[v_z] - val_v;
+                }
+            }
+        }
+
+        // 4. Campo solenoidal u_sol = u - u_irrot
+        let mut u_sol = vec![0.0f64; mesh.num_edges];
+        for i in 0..mesh.num_edges {
+            u_sol[i] = u.values[i] as f64 - u_irrot[i];
+        }
+
+        // 5. Verificar ortogonalidad exacta en L2: <u_sol, u_irrot> == 0
+        let dot_product: f64 = u_sol.iter().zip(u_irrot.iter()).map(|(&s, &ir)| s * ir).sum();
+
+        // 6. Verificar divergencia residual máxima de u_sol
+        let mut max_div = 0.0f64;
+        for z in 0..mesh.n {
+            for y in 0..mesh.n {
+                for x in 0..mesh.n {
+                    let ex = u_sol[mesh.edge_idx(x, y, z, 0)];
+                    let ey = u_sol[mesh.edge_idx(x, y, z, 1)];
+                    let ez = u_sol[mesh.edge_idx(x, y, z, 2)];
+
+                    let prev_x = if x == 0 { mesh.n - 1 } else { x - 1 };
+                    let prev_y = if y == 0 { mesh.n - 1 } else { y - 1 };
+                    let prev_z = if z == 0 { mesh.n - 1 } else { z - 1 };
+
+                    let ex_prev = u_sol[mesh.edge_idx(prev_x, y, z, 0)];
+                    let ey_prev = u_sol[mesh.edge_idx(x, prev_y, z, 1)];
+                    let ez_prev = u_sol[mesh.edge_idx(x, y, prev_z, 2)];
+
+                    let d = ((ex - ex_prev) + (ey - ey_prev) + (ez - ez_prev)).abs();
+                    if d > max_div {
+                        max_div = d;
+                    }
+                }
+            }
+        }
+
+        HelmholtzResult {
+            u_solenoidal: u_sol,
+            u_irrotational: u_irrot,
+            phi_pressure: phi_vals,
+            cg_iterations: iters,
+            poisson_residual: res_norm,
+            max_solenoidal_divergence: max_div,
+            l2_orthogonality_error: dot_product.abs(),
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -340,5 +516,57 @@ mod tests {
         let helicity = MimeticInvariants::discrete_helicity(&mesh, &u_form, &curl_a);
         // La helicidad mide el entrelazamiento topológico discreto
         assert!(helicity >= 0);
+    }
+
+    #[test]
+    fn test_helmholtz_hodge_orthogonal_projection() {
+        // LEY FUNDAMENTAL 4: Descomposición ortogonal u = u_sol + d0(phi) con <u_sol, d0(phi)> = 0 y div(u_sol) = 0
+        let mesh = CubicMesh3D::new(4);
+        let mut u_vals = vec![0i64; mesh.num_edges];
+        for (i, val) in u_vals.iter_mut().enumerate().take(mesh.num_edges) {
+            // Flujo arbitrario con divergencia no nula
+            *val = ((i as i64 * 41 + 7) % 60) - 30;
+        }
+        let u = Form1 { values: u_vals };
+
+        // Verificar que u inicial tiene divergencia no nula
+        let initial_div = DiscreteDeRham::codifferential_d0_star(&mesh, &u);
+        let max_initial_div = initial_div.values.iter().map(|&v| v.abs()).max().unwrap();
+        assert!(max_initial_div > 0, "El campo de prueba debe tener divergencia");
+
+        let result = HelmholtzHodgeDecomposition::decompose(&mesh, &u);
+
+        // 1. Convergencia del solver de Poisson CG
+        assert!(
+            result.poisson_residual < 1e-9,
+            "Residuo de Poisson CG demasiado alto: {}",
+            result.poisson_residual
+        );
+
+        // 2. Incompresibilidad estricta de la componente solenoidal
+        assert!(
+            result.max_solenoidal_divergence < 1e-8,
+            "Divergencia solenoidal residual excedida: {}",
+            result.max_solenoidal_divergence
+        );
+
+        // 3. Ortogonalidad L2 entre solenoidal e irrotacional
+        assert!(
+            result.l2_orthogonality_error < 1e-8,
+            "Error de ortogonalidad L2 excedido: {}",
+            result.l2_orthogonality_error
+        );
+
+        // 4. Reconstrucción exacta u = u_sol + u_irrot
+        for i in 0..mesh.num_edges {
+            let reconstructed = result.u_solenoidal[i] + result.u_irrotational[i];
+            let diff = (reconstructed - u.values[i] as f64).abs();
+            assert!(
+                diff < 1e-9,
+                "Error de reconstrucción en arista {}: diff = {}",
+                i,
+                diff
+            );
+        }
     }
 }
