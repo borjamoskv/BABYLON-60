@@ -10,7 +10,12 @@ import sys
 import os
 
 # Añadir el path para importar el orquestador
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.extend([
+    root_dir,
+    os.path.join(root_dir, "01_ORCHESTRATOR"),
+    os.path.join(root_dir, "02_AGENTS_ARCHI"),
+])
 
 from typing import TypedDict
 from babylon60.kernel.swarm_orchestrator import AgentPager

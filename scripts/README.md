@@ -267,7 +267,7 @@ Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runne
 | :--- | :--- | :--- | :--- |
 | [`generate_scripts_readme.py`](generate_scripts_readme.py) | `Python` | `ffc873d2f475` | ruff: noqa: E402 |
 | [`runner.py`](runner.py) | `Python` | `8ea6e5f36d47` | runner.py - Central CLI Dispatcher for BABYLON-60 Sovereign Scripts Suite |
-| [`c5_deploy_pipeline.sh`](c5_deploy_pipeline.sh) | `Shell` | `aaae8c049120` | 1. Verificación Estructural |
+| [`c5_deploy_pipeline.sh`](c5_deploy_pipeline.sh) | `Shell` | `33fc79592a4c` | 1. Verificación Estructural |
 | [`enforce_c5_rules.sh`](enforce_c5_rules.sh) | `Shell` | `382a23cde402` | Apply branch protection via GitHub API |
 | [`preflight.sh`](preflight.sh) | `Shell` | `f3e15916a937` | Preflight Utility |
 

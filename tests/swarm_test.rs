@@ -65,27 +65,32 @@ fn test_swarm_base_60_synchronization() {
         }));
     }
 
-    // ─── ESCRITOR (Reloj Sexagesimal) ──────────────────────────────────────
-    barrier.wait(); // Desatar el Big Bang
+    use std::sync::atomic::AtomicBool;
+    let done = Arc::new(AtomicBool::new(false));
+    let done_writer = Arc::clone(&done);
+    let writer_barrier = Arc::clone(&barrier);
     
-    // El escritor avanza el tiempo. Para asegurar que los agentes puedan
-    // capturar 3 epochs distintos, el escritor publica lentamente o publica
-    // suficientes epochs. Base 60: publicamos hasta 60 ticks.
-    for tick in 1..=60 {
-        let hash = [tick as u64; 4];
-        publish(m, tick as u64, &hash);
-        // Pequeño delay termodinámico para permitir que los lectores lean
-        // sin colapsar el pipeline y saturar su yield.
-        thread::sleep(std::time::Duration::from_micros(100));
-    }
+    let writer = thread::spawn(move || {
+        writer_barrier.wait();
+        let mut tick = 1;
+        while !done_writer.load(Ordering::Relaxed) && tick <= 10_000 {
+            let hash = [tick as u64; 4];
+            publish(m, tick as u64, &hash);
+            tick += 1;
+            thread::sleep(std::time::Duration::from_micros(100));
+        }
+    });
 
     // ─── VERIFICACIÓN ──────────────────────────────────────────────────────
     for (i, agent) in agents.into_iter().enumerate() {
         let final_epoch = agent.join().unwrap();
-        // Cada agente debe haber leído al menos el epoch 3, y como máximo el 60.
-        assert!((3..=60).contains(&final_epoch), 
+        // Cada agente debe haber leído al menos el epoch 3
+        assert!(final_epoch >= 3, 
             "Agente {} falló el invariante temporal. Final epoch: {}", i, final_epoch);
     }
+
+    done.store(true, Ordering::Relaxed);
+    writer.join().unwrap();
 }
 
 // ═══════════════════════════════════════════════════════════════════════

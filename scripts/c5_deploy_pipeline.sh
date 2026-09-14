@@ -18,17 +18,18 @@ echo "[AX-3] Fricción Caché: Verificando mitigación de False Sharing (Alineac
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 # 3. Atestación Causal L5 y SCITT (Firmado de Seguridad)
-echo "[AX-4] Límite Biométrico: Solicitando autorización somática (TouchID)..."
-if [ -f "$REPO_ROOT/01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift" ]; then
-    if ! swift "$REPO_ROOT/01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift" --causal-hash dummy --message "Atestación Causal" 2>/dev/null; then
-        echo "FATAL: CausalAttestationError. Falsación somática fallida o Sandbox activo."
-    fi
-fi
-echo "       -> Atractor Somático Validado."
-
 echo "[AX-5] Atestación L5: Calculando Raíz Merkle del AST compilado..."
 HASH_SIG=$(shasum -a 256 scripts/c5_demos/falsacion_baremetal.rs | awk '{print $1}')
 echo "       -> Sello L5 Generado: $HASH_SIG"
+
+echo "[AX-4] Límite Biométrico: Solicitando autorización somática (TouchID)..."
+if [ -f "$REPO_ROOT/01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift" ]; then
+    if ! swift "$REPO_ROOT/01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift" --causal-hash "$HASH_SIG" --message "Despliegue C5-REAL" 2>/dev/null; then
+        echo "FATAL: CausalAttestationError. Falsación somática fallida o Sandbox activo."
+        exit 1
+    fi
+fi
+echo "       -> Atractor Somático Validado."
 echo "       -> Inyectando firma criptográfica SCITT en la sección .rodata del ELF."
 
 # 4. Limpieza (Aniquilación Entrópica)

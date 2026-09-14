@@ -60,6 +60,7 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 - **Invocación desde Pipelines (Bash/Shell):** Nunca asumir que `c5_biometric_gate` reside en el `$PATH` global. Las invocaciones desde scripts de despliegue deben ejecutar explícitamente el archivo Swift mediante su ruta absoluta/relativa al repositorio (ej. `swift 01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift`).
 - **Manejo de Fallos por Sandbox:** Todo PoC o script que invoque el *gate* biométrico debe anticipar el silenciamiento de macOS (Código de salida `1`, `Authentication failure`). Las arquitecturas BFT deben manejar este fallo elegantemente sin entrar en *deadlock*.
 - **Demarcación Agente vs. Hardware (Barrera HITL):** En sesiones interactivas de agentes de IA operando bajo entornos sandboxeados/headless sin acceso directo al WindowServer de macOS, el agente NO intentará invocar síncronamente `c5_biometric_gate` para operaciones de edición de código ordinarias (lo que causaría silenciamiento y error de salida 1). En su lugar, la barrera causal humana se ejecuta mediante el protocolo formal de Aprobación de Artefactos (Human-In-The-Loop con `request_feedback = true`). La atestación biométrica estricta de silicio queda reservada para los lanzamientos nativos en Terminal, pipelines de despliegue (`c5_deploy_pipeline.sh`) y servidores daemon fuera de la jaula.
+- **Alineamiento de Flags CLI y Cómputo Previo de Hash (INV_C5_BIOMETRIC_CLI_ALIGNMENT):** Al invocar scripts o ejecutables de atestación física de silicio (`c5_biometric_gate.swift`), los llamadores en Rust (`AsyncCommand`) o scripts Bash DEBEN calcular la raíz Merkle o hash SHA-256 del artefacto compilado ANTES de invocar el sensor biométrico. Queda prohibido el paso de hashes ficticios (`dummy`) o argumentos posicionales implícitos. La invocación debe estructurar explícitamente `--causal-hash <hash>` y `--message <descripción>`, y todo rechazo o fallo en el Secure Enclave debe provocar un aborto determinista (`exit 1`).
 
 ## 🧠 Límite Epistémico y Estado del Kernel (C5-REAL v4.3)
 
@@ -70,6 +71,7 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 
 - **Invariante Clone & Run:** La instalación de BABYLON-60 en servidores empresariales o entornos locales de terceros no puede depender de fricciones burocráticas como la inyección manual de variables de entorno globales (`export BABYLON_HOME=...`).
 - **Soberanía del Repositorio:** El sistema debe resolver sus dependencias topológicas internamente (`cwd` o directorios relativos en `.cortex/`). Los *fallbacks* automáticos que deleguen la configuración al usuario final son considerados **anergía** y deben ser purgados.
+- **Normalización Minúscula de Imágenes OCI (INV_C5_OCI_LOWERCASE):** Todo pipeline de CI/CD que compile, etiquete o publique artefactos en registros compatibles con OCI (GitHub Packages / GHCR, Docker Hub) DEBE sanitizar y normalizar el nombre del repositorio a minúsculas estrictas (`tr '[:upper:]' '[:lower:]'`). Queda prohibido inyectar `${{ github.repository }}` sin sanitizar cuando la organización o el proyecto contengan caracteres en mayúsculas.
 
 ## 🌀 Invariante de Ciclo de Aeones Conformes (INV_C5_AEON)
 
@@ -135,6 +137,7 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
   - Vértice $\beta$ (Lean 4): Certificación formal de suavidad geométrica de Constantin-Fefferman por reflexión computacional (`by decide`).
   - Vértice $\gamma$ (Z3 SMT): Poda booleana sub-milisegundo de falsos blowups.
   Solo si el quórum $2/3$ certifica la fractura de suavidad Lipschitz y la divergencia BKM simultáneamente, se autoriza el aislamiento del candidato en cuarentena inmutable (`quarantine_immutability`).
+- **Poda Neurosimbólica Z3 Temprana (INV_C5_Z3_SMT_PRE_LEAN):** En el consenso BFT isostático LARSA-120, toda traza física de simulación DEBE someterse prioritariamente al filtro SMT del Vértice $\gamma$ (Z3 SMT, `ns_z3_firewall.py`) para verificar funciones de Lyapunov cuadráticas y certificados SOS en tiempo sub-milisegundo. Únicamente las trayectorias cuya acotación sea certificada por Z3 (sin singularidades en el UNSAT Core) son transferidas al Vértice $\beta$ (Lean 4) para demostración por reflexión formal, garantizando el aislamiento de exergía en Ring-1.
 
 ## 💎 Invariante del Nodo de Máxima Exergía (El Suelo Inflexible de 64B)
 

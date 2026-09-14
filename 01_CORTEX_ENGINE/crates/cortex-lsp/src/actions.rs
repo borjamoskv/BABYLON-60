@@ -77,7 +77,9 @@ impl ActionEngine {
                 // Invoke the Swift LocalAuthentication daemon
                 let output = AsyncCommand::new("swift")
                     .arg(&script_path)
+                    .arg("--message")
                     .arg(format!("{} - {}", action, description))
+                    .arg("--causal-hash")
                     .arg(&causal_hash)
                     .stdout(Stdio::piped())
                     .stderr(Stdio::piped())

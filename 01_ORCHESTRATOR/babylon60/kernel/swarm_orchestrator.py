@@ -85,10 +85,11 @@ class SwarmConfig:
     mcts_delay_s: float = 2.8  # Postulado MCTS (futex sleep)
     request_timeout_s: float = 120.0
 
-    # Resiliencia
+    # Resiliencia & Ring-0 Governance
     max_retries: int = 3
     retry_base_delay_s: float = 1.0
     circuit_breaker_threshold: int = 5  # Fallos consecutivos antes de abortar
+    delegate_circuit_breaker: bool = False  # INV_C5_CB_SUBORDINATION: Delega el CB a Ring-0 / Gateway
 
     @property
     def max_concurrent(self) -> int:
@@ -237,8 +238,19 @@ class RobustLLMClient:
         self.config = config
         self._consecutive_failures = 0
 
+    def reset_circuit_breaker(self) -> None:
+        """Resetea el contador de fallos consecutivos en Python."""
+        self._consecutive_failures = 0
+
+    @property
+    def is_circuit_breaker_tripped(self) -> bool:
+        """Indica si el circuit breaker local está abierto (anulado si está subordinado a Ring-0)."""
+        if self.config.delegate_circuit_breaker:
+            return False
+        return self._consecutive_failures >= self.config.circuit_breaker_threshold
+
     async def call(self, messages: list[dict[str, Any]]) -> str:
-        if self._consecutive_failures >= self.config.circuit_breaker_threshold:
+        if self.is_circuit_breaker_tripped:
             return f"🔴 Circuit breaker abierto: {self._consecutive_failures} fallos consecutivos. Backend: {self.config.backend.value}"
 
         headers = {"Content-Type": "application/json"}
