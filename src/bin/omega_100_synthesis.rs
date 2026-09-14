@@ -16,7 +16,6 @@
 
 use std::time::Instant;
 use babylon60::dec::MimeticNavierStokes;
-use babylon60::f60::{F60Ball, Sexagesimal};
 use babylon60::fluid_thermo::{
     compute_kolmogorov_sinai_entropy, compute_rankme_dimension,
     fisher_rao_geodesic_distance, leray_projection_landauer_floor_joules,
