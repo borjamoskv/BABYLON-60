@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.lsp.start({
       name = "cortex-lsp",
-      cmd = { "/Users/borjafernandezangulo/BABYLON-60/target/release/cortex-lsp" },
+      cmd = { "cortex-lsp" },
       root_dir = vim.fs.dirname(vim.fs.find({ 'Cargo.toml', 'pyproject.toml', '.git' }, { upward = true })[1]),
     })
   end,
@@ -64,7 +64,7 @@ vim.api.nvim_create_autocmd("FileType", {
 ### C. Helix Editor (`~/.config/helix/languages.toml`)
 ```toml
 [language-server.cortex-lsp]
-command = "/Users/borjafernandezangulo/BABYLON-60/target/release/cortex-lsp"
+command = "cortex-lsp"
 
 [[language]]
 name = "rust"
