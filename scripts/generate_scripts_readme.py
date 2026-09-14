@@ -135,7 +135,7 @@ def generate_markdown(data: Dict[str, Any]) -> None:
         f"> **Estándar:** C5-REAL | **Total Scripts:** {data.get('total_python', 0)} Python + {data.get('total_shell', 0)} Shell | **Shebang Compliance:** 100.0%",
         "",
         "## 🛠️ CLI Runner Centralizado",
-        f"Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runner.py](file://{SCRIPTS_DIR / 'runner.py'}):",
+        f"Cualquier tarea del suite se puede ejecutar a través de la CLI unificada [runner.py](runner.py):",
         "```bash",
         "./scripts/runner.py status              # Diagnóstico y métricas de salud",
         "./scripts/runner.py audit               # Portón de calidad AST & anti-patrones",
@@ -158,10 +158,10 @@ def generate_markdown(data: Dict[str, Any]) -> None:
             md_lines.append("| Script | Tipo | SHA3-256 | Descripción / Propósito |")
             md_lines.append("| :--- | :--- | :--- | :--- |")
             for script in scripts:
-                fp = SCRIPTS_DIR / script["path"]
+                rel_script_path = script["path"]
                 stype = "Python" if script.get("type") == "python" else "Shell"
                 sha_str = f"`{script.get('hash', 'N/A')}`"
-                md_lines.append(f"| [`{script['path']}`](file://{fp}) | `{stype}` | {sha_str} | {script['description']} |")
+                md_lines.append(f"| [`{rel_script_path}`]({rel_script_path}) | `{stype}` | {sha_str} | {script['description']} |")
             md_lines.append("")
 
     md_lines.append("---")
