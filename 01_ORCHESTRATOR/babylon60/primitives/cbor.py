@@ -75,7 +75,7 @@ def dumps(obj: Any) -> bytes:
     if isinstance(obj, int):
         return _encode_int(obj)
     if isinstance(obj, float):
-        return struct.pack(">BD", (MAJOR_SIMPLE << 5) | 27, obj)
+        return struct.pack(">Bd", (MAJOR_SIMPLE << 5) | 27, obj)
     if isinstance(obj, (bytes, bytearray)):
         data = bytes(obj)
         return _encode_header(MAJOR_BYTES, len(data)) + data
