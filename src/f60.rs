@@ -123,10 +123,9 @@ impl F60Ball {
     /// Radio relativo en tantos por mil respecto al punto medio (permille).
     pub fn relative_error_permille(&self) -> u32 {
         let dec = self.mid.to_decimal();
-        if dec == 0 {
-            if self.rad == 0 { 0 } else { 1000 }
-        } else {
-            ((self.rad as u64 * 1000) / dec).min(1000) as u32
+        match (self.rad as u64 * 1000).checked_div(dec) {
+            Some(res) => res.min(1000) as u32,
+            None => if self.rad == 0 { 0 } else { 1000 },
         }
     }
 }

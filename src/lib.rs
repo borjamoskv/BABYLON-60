@@ -54,6 +54,8 @@ pub mod telemetry;
 pub mod larsa_bft;
 /// Módulo del Kernel Matemático Sexagesimal F60 (Matemática de Enki).
 pub mod f60;
+/// Módulo de Cálculo Exterior Discreto (DEC) y Complejo de De Rham (Iteraciones 31-32).
+pub mod dec;
 
 /// Módulo de interfaz C-ABI (FFI) para integración C/C++.
 pub mod ffi;
