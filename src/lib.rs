@@ -61,9 +61,15 @@ pub mod larsa_bft;
 pub mod f60;
 /// Módulo de Cálculo Exterior Discreto (DEC) y Complejo de De Rham (Iteraciones 31-32).
 pub mod dec;
+/// Módulo de Termodinámica de la Información y Cota de Landauer para Navier-Stokes (Iteraciones 81-90).
+pub mod fluid_thermo;
 
 /// Módulo de interfaz C-ABI (FFI) para integración C/C++.
 pub mod ffi;
+
+/// Módulo de atestación física biométrica (Apple Secure Enclave).
+#[cfg(feature = "std")]
+pub mod enclave;
 
 pub use manifest::{HaltReason, SharedManifest, POISONED, RUNNING, MAX_RETRIES};
 pub use spsc_ring::SpscRingBuffer;

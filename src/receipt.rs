@@ -73,7 +73,7 @@ use crate::manifest::{SharedManifest, HaltReason};
 /// En tests, se puede usar una clave hardcoded.
 pub trait Signer {
     /// Firma `to_sign` y retorna la firma en formato específico del algoritmo.
-    fn sign(&self, to_sign: &[u8]) -> Vec<u8>;
+    fn sign(&self, to_sign: &[u8]) -> Result<Vec<u8>, alloc::string::String>;
     /// Verifica la firma del payload (WORM / TEE).
     fn verify(&self, payload: &[u8], signature: &[u8]) -> bool;
     /// Retorna la clave pública del Enclave
@@ -85,10 +85,10 @@ pub trait Signer {
 pub struct NullSigner;
 
 impl Signer for NullSigner {
-    fn sign(&self, _to_sign: &[u8]) -> Vec<u8> {
+    fn sign(&self, _to_sign: &[u8]) -> Result<Vec<u8>, alloc::string::String> {
         // En producción: firmar con Ed25519 o equivalente.
         // Retorna firma vacía para satisfacer la estructura COSE_Sign1.
-        alloc::vec![0u8; 64]
+        Ok(alloc::vec![0u8; 64])
     }
     
     fn verify(&self, _payload: &[u8], signature: &[u8]) -> bool {

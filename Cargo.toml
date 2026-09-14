@@ -115,3 +115,7 @@ path = "src/bin/poc_bifurcation_6_parser.rs"
 [[bin]]
 name = "poc_bifurcation_8_baremetal"
 path = "src/bin/poc_bifurcation_8_baremetal.rs"
+
+[[bin]]
+name = "biometric_test"
+path = "src/bin/biometric_test.rs"
