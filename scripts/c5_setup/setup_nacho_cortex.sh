@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
-# █ CORTEX FULL ENVIRONMENT SETUP FOR NACHO | STATE: C5-REAL
+# █ CORTEX FULL ENVIRONMENT SETUP | STATE: C5-REAL
 # ============================================================================
 
 set -e
 
-echo "[CORTEX-SETUP] Instalando entorno agéntico completo CORTEX para Nacho..."
+echo "[CORTEX-SETUP] Instalando entorno agéntico completo CORTEX..."
 
 # 1. Crear directorios de configuración de CORTEX
 HOME_DIR="${HOME}"
@@ -39,4 +39,4 @@ if [ -z "$KIMI_API_KEY" ]; then
     echo "   export KIMI_API_KEY='tu_clave_moonshot'"
 fi
 
-echo "✅ [CORTEX-SETUP] ¡Entorno preparado! Nacho ya dispone de la infraestructura CORTEX en su máquina."
+echo "✅ [CORTEX-SETUP] ¡Entorno preparado! La estación ya dispone de la infraestructura CORTEX."
