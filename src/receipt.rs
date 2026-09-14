@@ -74,6 +74,10 @@ use crate::manifest::{SharedManifest, HaltReason};
 pub trait Signer {
     /// Firma `to_sign` y retorna la firma en formato específico del algoritmo.
     fn sign(&self, to_sign: &[u8]) -> Vec<u8>;
+    /// Verifica la firma del payload (WORM / TEE).
+    fn verify(&self, payload: &[u8], signature: &[u8]) -> bool;
+    /// Retorna la clave pública del Enclave
+    fn get_public_key(&self) -> Vec<u8>;
 }
 
 /// Signer nulo para entornos sin firma real (devuelve firma vacía).
@@ -85,6 +89,14 @@ impl Signer for NullSigner {
         // En producción: firmar con Ed25519 o equivalente.
         // Retorna firma vacía para satisfacer la estructura COSE_Sign1.
         alloc::vec![0u8; 64]
+    }
+    
+    fn verify(&self, _payload: &[u8], signature: &[u8]) -> bool {
+        signature.len() == 64 && signature.iter().all(|&b| b == 0)
+    }
+    
+    fn get_public_key(&self) -> Vec<u8> {
+        alloc::vec![0u8; 32]
     }
 }
 

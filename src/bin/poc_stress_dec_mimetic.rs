@@ -33,13 +33,13 @@ fn main() {
     println!("  [✓] Warmup completado. Líneas de caché L1/L2 estabilizadas.\n");
 
     // =========================================================================
-    // [FASE 2/4] STRESS TEST DEC: 10.000 CICLOS EN MALLA 3D (N=8 -> 512 celdas)
+    // [FASE 2/6] STRESS TEST DEC: 10.000 CICLOS EN MALLA 3D (N=8 -> 512 celdas)
     // =========================================================================
     let mesh_dim = 8;
     let mesh = CubicMesh3D::new(mesh_dim);
     let dec_iterations = 10_000;
     println!(
-        "[2/4] Ejecutando Stress Test DEC ({} iteraciones sobre malla {}x{}x{})...",
+        "[2/6] Ejecutando Stress Test DEC ({} iteraciones sobre malla {}x{}x{})...",
         dec_iterations, mesh_dim, mesh_dim, mesh_dim
     );
     println!("  > Vértices por ciclo:       {}", mesh.num_vertices);
@@ -104,10 +104,10 @@ fn main() {
     println!("  [✓] DEC Invariante Certificada: 100% Nilpotencia Exacta a Nivel de Bit.\n");
 
     // =========================================================================
-    // [FASE 3/4] STRESS TEST F60BALL: 1.000.000 OPERACIONES DE ARITMÉTICA DE BOLAS
+    // [FASE 3/6] STRESS TEST F60BALL: 1.000.000 OPERACIONES DE ARITMÉTICA DE BOLAS
     // =========================================================================
     let ball_iterations = 1_000_000u64;
-    println!("[3/4] Ejecutando Stress Test F60Ball ({} operaciones de bolas)...", ball_iterations);
+    println!("[3/6] Ejecutando Stress Test F60Ball ({} operaciones de bolas)...", ball_iterations);
 
     let t0_ball = Instant::now();
     let mut acc_ball = F60Ball::exact(Sexagesimal::new(0, 0, 0));
@@ -132,10 +132,10 @@ fn main() {
     println!("  [✓] F60Ball Certificado: Cero fuga de cotas y contención estricta 100%.\n");
 
     // =========================================================================
-    // [FASE 4/4] STRESS TEST CONSENSO LARSA-120: 1.000 CICLOS DE QUÓRUM BFT
+    // [FASE 4/6] STRESS TEST CONSENSO LARSA-120: 1.000 CICLOS DE QUÓRUM BFT
     // =========================================================================
     let larsa_iterations = 1_000u64;
-    println!("[4/4] Ejecutando Stress Test Consenso LARSA-120 ({} ciclos BFT)...", larsa_iterations);
+    println!("[4/6] Ejecutando Stress Test Consenso LARSA-120 ({} ciclos BFT)...", larsa_iterations);
 
     let t0_larsa = Instant::now();
     let triad = LarsaTriadConsensus::new();
@@ -168,9 +168,9 @@ fn main() {
     println!("  [✓] LARSA-120 Certificado: 100% Estabilidad BFT Isostática sin Deadlocks.\n");
 
     // =========================================================================
-    // [FASE 5/5] STRESS TEST HELMHOLTZ-HODGE: SOLVER CG & ORTOGONALIDAD EXACTA
+    // [FASE 5/6] STRESS TEST HELMHOLTZ-HODGE: SOLVER CG & ORTOGONALIDAD EXACTA
     // =========================================================================
-    println!("[5/5] Ejecutando Stress Test Helmholtz-Hodge (Descomposición Ortogonal)...");
+    println!("[5/6] Ejecutando Stress Test Helmholtz-Hodge (Descomposición Ortogonal)...");
     let hodge_mesh = CubicMesh3D::new(4);
     let mut arbitrary_flow = Form1 { values: vec![0i64; hodge_mesh.num_edges] };
     for i in 0..hodge_mesh.num_edges {
