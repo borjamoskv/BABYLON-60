@@ -22,6 +22,7 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 ## 🦀 Rust Build Governance & Thermodynamic Purges
 
 - **Workspace Topology Shifts**: Tras cualquier movimiento estructural, renombramiento o eliminación de crates dentro de un workspace, el agente DEBE ejecutar `cargo clean` antes de lanzar `cargo check`, `cargo build` o `cargo test`. Esto destruye los punteros incrementales corruptos y previene falsos positivos bizantinos (e.g. `os error 2` o bloqueos de `cc-rs`).
+- **Provisionamiento Obligatorio de Protoc en CI (INV_C5_PROTOC_CI):** Todo pipeline de CI o runner que ejecute `cargo check` o `cargo test` sobre workspaces con dependencias de compilación de Protobuf (`prost-build`, `strike-rs`) DEBE provisionar previamente el compilador `protoc` mediante la acción estándar `arduino/setup-protoc@v3` (o `apt-get install -y protobuf-compiler`).
 
 ## 🕸️ Web UI & Topological Fidelity (Zero-JS)
 
@@ -83,6 +84,12 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
 - **Límite de Saturación (DDoS Cognitivo):** MUSHUSHU-0 es matemáticamente dependiente de la `INV_C5_AEON`. Si un enjambre entra en un bucle degenerado de inyección de entropía, MUSHUSHU-0 registrará cada fallo. Para evitar asfixia gravitatoria (OOM o hipertrofia de disco), el sistema debe disparar *timeouts* destructivos antes de acumular latencias terminales.
 - **Anti-Parálisis Cognitiva:** El enjambre no debe ajustar sus pesos para "evitar penalizaciones MUSHUSHU-0" si eso conlleva inacción (Silencio Termodinámico). La exergía exige mutación útil; una seguridad que paraliza el nodo viola el Aforismo 3.
 
+## 🛡️ Invariante de Calibración de Escáneres OPSEC (INV_C5_OPSEC_CALIBRATION)
+
+- **Discriminación de Hashes Git:** Todo script de auditoría de secretos que emplee expresiones regulares para tokens o claves de 40 caracteres DEBE descartar cadenas puramente hexadecimales (`^[0-9a-fA-F]{40}$`), reconociéndolas como hashes de commit SHA-1 de Git.
+- **Exclusión de Loopback en Firmas C2:** Queda prohibido clasificar interfaces de loopback local (`127.0.0.1`, `0.0.0.0`, `localhost`) como endpoints de comando y control (C2). Las conexiones locales de depuración (CDP, IPC, sockets locales) son parte del runtime legítimo.
+- **Exclusión Determinista de Cachés:** Los directorios de cachés de compilación pesados (`target/`, `.lake/`, `.jj/`, `.hypothesis/`, `.audit/`, `site/`, `assets/`) deben figurar en las listas de exclusión de los escáneres para prevenir degradación de exergía y bloqueos de memoria.
+
 ## 🎙️ Invariante de Transducción Vocal y Resiliencia Fonética (INV_VOICE_STT)
 
 - **Anti-Literalismo Acústico:** Ante entradas dictadas por voz que presenten términos con discrepancia semántica pero proximidad fonética (ej. homófonos, asonancias en inglés/español como $/vaɪb koʊd/ \leftrightarrow /baɪt koʊd/$), el agente DEBE ponderar el atractor del contexto activo antes de ramificar en tareas destructivas o cómputo pesado.
@@ -121,7 +128,10 @@ See [Workspace AGENTS.md]($BABYLON_HOME/ENV/.agents/AGENTS.md)
   3. **Apoptosis Fail-Stop Irreversible**: Transición de monoide a `POISONED = 0xDEAD_6060`. La mayor virtud del sistema es que *muere bien* de forma determinista antes que operar descalibrado.
   4. **Cerrojo Biológico Asimétrico**: TouchID Gate en *Secure Enclave* (`reuseDuration = 0`) para toda cirugía de alta energía.
 
+## 🔢 Invariante de Serialización Canónica CBOR/IEEE 754 (INV_C5_CBOR_STRUCT)
 
+- **Empaquetado Estricto >Bd:** Todo serializador binario o puente C-ABI en Python que manipule números de coma flotante de 64 bits para CBOR o memoria compartida DEBE utilizar estrictamente el formato `>Bd` en `struct.pack`.
+- **Prohibición de Formatos Experimentales:** Queda terminantemente prohibido el uso de caracteres de formato no estándar o introducidos en versiones experimentales de Python (como `'D'` de Python 3.14) que rompan la retrocompatibilidad con las versiones LTS soportadas (Python 3.10–3.13).
 
 ## 🧹 Invariante de Purga Epistémica (MyPy & Linter Zero-Debt)
 
