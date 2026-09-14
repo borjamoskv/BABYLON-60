@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to Antigravity — Champagne Gold Edition</title>
+  <style>
+    :root {
+      --bg-base: #14151a;
+      --bg-surface: rgba(30, 32, 38, 0.78);
+      --border-subtle: rgba(255, 255, 255, 0.07);
+      --border-focus: rgba(226, 194, 117, 0.4);
+      --text-primary: #f0f2f5;
+      --text-secondary: #8c919d;
+      --text-muted: #585d68;
+      
+      /* Gold Palette (High Exergy) */
+      --gold-light: #eedcb0;
+      --gold-mid: #dfbe6f;
+      --gold-deep: #ca9f4a;
+      --gold-dark-text: #131519;
+      --gold-glow: rgba(223, 190, 111, 0.38);
+      
+      --radius-window: 14px;
+      --radius-card: 12px;
+      --radius-btn: 7px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 25%, #1d1f27 0%, #111215 100%);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    /* macOS Window Frame */
+    .window {
+      width: 100%;
+      max-width: 960px;
+      height: 600px;
+      background: rgba(20, 21, 26, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: var(--radius-window);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Traffic Lights */
+    .titlebar {
+      height: 38px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      gap: 7px;
+      z-index: 10;
+    }
+    .traffic-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot-close { background: #ff5f56; border: 1px solid #e0443e; }
+    .dot-min { background: #ffbd2e; border: 1px solid #dea123; }
+    .dot-max { background: #27c93f; border: 1px solid #1aab29; }
+
+    /* Content Stage */
+    .stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+    }
+
+    /* Ambient Warm Glow behind Logo */
+    .ambient-glow {
+      position: absolute;
+      top: 14%;
+      width: 220px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(226, 185, 95, 0.22) 0%, rgba(240, 140, 80, 0.08) 45%, transparent 70%);
+      filter: blur(28px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Antigravity Isotype */
+    .logo-container {
+      position: relative;
+      z-index: 2;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .antigravity-arch {
+      width: 54px;
+      height: 54px;
+      filter: drop-shadow(0 4px 18px rgba(223, 190, 111, 0.42));
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .logo-container:hover .antigravity-arch {
+      transform: scale(1.06);
+    }
+
+    /* Title */
+    .headline {
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      color: var(--text-primary);
+      margin-bottom: 28px;
+      z-index: 2;
+    }
+
+    /* Auth Card */
+    .auth-card {
+      width: 100%;
+      max-width: 320px;
+      background: var(--bg-surface);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 22px 20px 20px;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    /* Gold Primary Button */
+    .btn-google-gold {
+      width: 100%;
+      height: 38px;
+      background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold-mid) 60%, var(--gold-deep) 100%);
+      border: none;
+      border-radius: var(--radius-btn);
+      color: var(--gold-dark-text);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      cursor: pointer;
+      box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .btn-google-gold:hover {
+      box-shadow: 
+        0 3px 18px var(--gold-glow),
+        0 1px 4px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      filter: brightness(1.03);
+      transform: translateY(-1px);
+    }
+    .btn-google-gold:active {
+      transform: translateY(0.5px) scale(0.995);
+      filter: brightness(0.98);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(0, 0, 0, 0.2);
+    }
+
+    .google-g-icon {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    /* Secondary Button */
+    .btn-business {
+      width: 100%;
+      height: 38px;
+      margin-top: 10px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.075);
+      border-radius: var(--radius-btn);
+      color: #b3b7c2;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-business:hover {
+      background: rgba(255, 255, 255, 0.075);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Help Link */
+    .help-link {
+      margin-top: 16px;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.18s ease;
+      cursor: pointer;
+    }
+    .help-link:hover {
+      color: var(--text-secondary);
+      text-decoration: underline;
+    }
+
+    /* Footer / Pager */
+    .footer-nav {
+      height: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      z-index: 2;
+    }
+    .btn-prev {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 12px;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+    .btn-prev:hover {
+      color: var(--text-secondary);
+    }
+    .btn-next-disabled {
+      width: 180px;
+      height: 28px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.045);
+      border-radius: 5px;
+      color: #4a4e58;
+      font-size: 12px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="window">
+    <!-- macOS Window Bar -->
+    <div class="titlebar">
+      <span class="traffic-dot dot-close"></span>
+      <span class="traffic-dot dot-min"></span>
+      <span class="traffic-dot dot-max"></span>
+    </div>
+
+    <!-- Main Content -->
+    <div class="stage">
+      <div class="ambient-glow"></div>
+
+      <!-- Isotype: Glowing Arch in Warm Rose/Amber Gold -->
+      <div class="logo-container">
+        <svg class="antigravity-arch" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="warmGoldGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#E59A5A" />
+              <stop offset="35%" stop-color="#F3B765" />
+              <stop offset="70%" stop-color="#ECD087" />
+              <stop offset="100%" stop-color="#E2BE68" />
+            </linearGradient>
+          </defs>
+          <!-- Antigravity continuous parabolic loop path -->
+          <path 
+            d="M25 80 C23 60, 36 34, 50 20 C64 34, 77 60, 75 80 C74 85, 69 86, 66 81 C60 67, 52 48, 50 48 C48 48, 40 67, 34 81 C31 86, 26 85, 25 80 Z" 
+            fill="url(#warmGoldGrad)" 
+          />
+        </svg>
+      </div>
+
+      <h1 class="headline">Welcome to Antigravity</h1>
+
+      <!-- Sign In Card -->
+      <div class="auth-card">
+        <span class="card-title">Sign in</span>
+
+        <!-- Champagne Gold Primary CTA -->
+        <button class="btn-google-gold" id="btnGoogle" onclick="handleSignIn()">
+          <!-- Authentic Google Icon -->
+          <svg class="google-g-icon" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z"/>
+            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.13C3.26 21.36 7.33 24 12 24z"/>
+            <path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.58H1.24C.45 8.15 0 9.99 0 12s.45 3.85 1.24 5.42l4.04-3.13z"/>
+            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.24 6.58l4.04 3.13c.95-2.83 3.6-4.96 6.72-4.96z"/>
+          </svg>
+          <span>Continue with Google</span>
+        </button>
+
+        <button class="btn-business" onclick="handleBusiness()">Use business account</button>
+
+        <a class="help-link" href="#" onclick="return false;">Having trouble? Let us know</a>
+      </div>
+    </div>
+
+    <!-- Pager Navigation -->
+    <div class="footer-nav">
+      <button class="btn-prev">Previous</button>
+      <div class="btn-next-disabled">Next</div>
+    </div>
+  </div>
+
+  <script>
+    function handleSignIn() {
+      const btn = document.getElementById('btnGoogle');
+      btn.style.filter = 'brightness(1.15)';
+      console.log('Initiating Google Authentication flow with Champagne Gold token...');
+      setTimeout(() => {
+        btn.style.filter = '';
+      }, 300);
+    }
+    function handleBusiness() {
+      console.log('Opening Business SSO provider modal...');
+    }
+  </script>
+</body>
+</html>
