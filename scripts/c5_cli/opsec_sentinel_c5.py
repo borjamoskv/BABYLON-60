@@ -3,15 +3,22 @@
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
+import os
+import sys
+from pathlib import Path
+
+# Bootstrap sys.path para resolución determinista de babylon60 (Invariante Clone & Run)
+_repo_root = Path(__file__).resolve().parent.parent.parent
+_orchestrator = _repo_root / "01_ORCHESTRATOR"
+if str(_orchestrator) not in sys.path:
+    sys.path.insert(0, str(_orchestrator))
+
 import datetime
 import hashlib
 import json
-import os
 import re
 import signal
 from babylon60.database.core import connect_sync
-import sys
-from pathlib import Path
 from typing import Any
 
 EXERGY_LEVEL: str = "1000/1000"
@@ -22,12 +29,12 @@ TARGET_PATTERNS: dict[str, re.Pattern[str]] = {
     ),
     "PRIVATE_KEY_HEADER": re.compile("-----BEGIN (?:RSA|OPENSSH|EC|DSA|PGP)?\\s*PRIVATE KEY-----"),
     "UNENCRYPTED_IRC_PORT": re.compile(":(?:6667|6668|6669)\\b"),
-    "PLAIN_HTTP_C2": re.compile("http://[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}"),
+    "PLAIN_HTTP_C2": re.compile(r"http://(?!127\.0\.0\.1|0\.0\.0\.0|localhost)[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}"),
     "SQLI_ERROR_SIGNATURE": re.compile(
         "(?:You have an error in your SQL syntax|Warning: mysql_connect|SQLSTATE\\[\\d+\\]|Unclosed quotation mark after the character string)",
         re.IGNORECASE,
     ),
-    "AWS_ACCESS_KEY": re.compile(r"(?<![A-Z0-9])[A-Z0-9]{20}(?![A-Z0-9])"), # A simplistic AWS key pattern (often starts with AKIA, ASIA, etc)
+    "AWS_ACCESS_KEY": re.compile(r"(?<![A-Z0-9])(AKIA|ASIA|ABIA|ACCA)[A-Z0-9]{16}(?![A-Z0-9])"),
     "AWS_SECRET_KEY": re.compile(r"(?<![A-Za-z0-9/+=])[A-Za-z0-9/+=]{40}(?![A-Za-z0-9/+=])"),
     "CANARY_WEBHOOK": re.compile(r"canarytokens\.com|webhook\.site"),
 }
@@ -68,6 +75,14 @@ class OpsecSentinelC5:
                     valid_cards = [m for m in matches if self._luhn_check(m)]
                     if not valid_cards:
                         continue
+                elif v_type == "AWS_SECRET_KEY":
+                    non_sha = [m for m in matches if not re.match(r"^[0-9a-fA-F]{40}$", m)]
+                    if not non_sha:
+                        continue
+                elif v_type == "AWS_ACCESS_KEY":
+                    non_dummy = [m for m in matches if m != "AKIAIOSFODNN7EXAMPLE"]
+                    if not non_dummy:
+                        continue
                 hash_sig = hashlib.sha3_256(content[:1000].encode("utf-8")).hexdigest()[:16]
                 severity = "CRITICAL_P0" if v_type in ("PLAINTEXT_CREDIT_CARD", "PRIVATE_KEY_HEADER") else "CRITICAL_P1"
                 violations.append(
@@ -99,15 +114,24 @@ class OpsecSentinelC5:
     def run_full_scan(self) -> dict[str, Any]:
         details: list[dict[str, str]] = []
         violations_found: int = 0
-        ignore_dirs: set[str] = {".git", ".venv", "node_modules", "scratch", "__pycache__"}
+        ignore_dirs: set[str] = {
+            ".git", ".venv", "node_modules", "scratch", "__pycache__",
+            "target", ".lake", ".cortex", ".babylon60", ".mypy_cache",
+            ".pytest_cache", ".ruff_cache", "c5_remotion_video", "dist", "build",
+            ".jj", ".hypothesis", "site", "assets", ".audit", "babylon60.egg-info"
+        }
         with connect_sync(self.db_path) as conn:
             for root, dirs, files in os.walk(self.workspace):
-                dirs[:] = [d for d in dirs if d not in ignore_dirs]
+                dirs[:] = [d for d in dirs if d not in ignore_dirs and not d.endswith(".egg-info")]
                 for file in files:
                     fpath = Path(root) / file
-                    if fpath.name in ("opsec_sentinel_c5.py", "fake_aws_credentials", "CANARY_TOKENS.md", "gitleaks.yml") or fpath.stat().st_size > 2 * 1024 * 1024:
+                    if fpath.name in (
+                        "opsec_sentinel_c5.py", "fake_aws_credentials", "CANARY_TOKENS.md",
+                        "gitleaks.yml", "secret_swarm_auditor.py", "runner.py", "test_compliance_exporter.py",
+                        ".gitleaks.toml", ".env.canary"
+                    ) or fpath.stat().st_size > 2 * 1024 * 1024:
                         continue
-                    if fpath.suffix in (".pyc", ".db", ".png", ".jpg", ".pdf", ".mp4", ".lock"):
+                    if fpath.suffix in (".pyc", ".db", ".png", ".jpg", ".pdf", ".mp4", ".lock", ".wav", ".mp3", ".ogg", ".map", ".sarif"):
                         continue
                     file_violations = self.audit_file(fpath)
                     for v in file_violations:

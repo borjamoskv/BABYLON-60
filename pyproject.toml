@@ -48,6 +48,8 @@ dev = [
     "uvicorn>=0.30.0",
     "jinja2>=3.1.4",
     "urllib3>=2.2.2",
+    "hypothesis>=6.100.0",
+    "z3-solver>=4.12.0",
 ]
 embeddings = [
     "numpy>=1.24",

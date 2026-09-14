@@ -28,8 +28,7 @@ jobs:
       run: |
         uv venv
         uv pip install -e ".[dev]"
-        # Si no hay pyproject.toml con dev dependencies, podemos forzar pytest
-        uv pip install pytest
+        uv pip install pytest hypothesis z3-solver
         
     - name: Run tests with pytest
       run: |

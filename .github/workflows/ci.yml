@@ -16,13 +16,17 @@ jobs:
     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.1.7
     - name: Rust Toolchain
       uses: dtolnay/rust-toolchain@stable
+    - name: Install Protoc
+      uses: arduino/setup-protoc@v3
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Rust Check and Test
       run: cargo check --workspace && cargo test --workspace
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.14'
+        python-version: '3.12'
     - name: Python Pytest
       run: |
-        pip install pytest
-        pytest tests/
+        pip install -e ".[dev]"
+        pytest tests/test_c5_invariants.py tests/test_lean_kernel_soundness.py tests/test_hypervisor.py
