@@ -92,7 +92,7 @@ def test_replay_corruption() -> None:
     # Generar data
     mutation = StateMutation(agent_id="test_agent", payload={"test": "data"}, timestamp=1000, signature="mock")
     # Valid signatures are checked in invoke_subagent, but we just insert manually or use mock
-    from babylon60.core.crypto import canonicalize_cbor, hash_sha3_256
+    from babylon60.core.crypto_utils import canonicalize_cbor, hash_sha3_256
 
     m_hash: str = hash_sha3_256(canonicalize_cbor(mutation.payload))
     ledger.conn.execute(

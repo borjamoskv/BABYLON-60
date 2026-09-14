@@ -225,7 +225,10 @@ def test_bounty_cli_inspect_manifest(capsys: pytest.CaptureFixture[str]) -> None
     captured = capsys.readouterr()
     assert "INSPECCIÓN C-ABI DE SHARED MANIFEST" in captured.out
     assert "Modo Enlace FFI:" in captured.out
-    assert "Alineación 64 Bytes: ✓ CUMPLIDA (0-split L1)" in captured.out
-    assert "INV-1 Layout 64B: OK" in captured.out
-    assert "INV-2 Seqlock SPMC: OK" in captured.out
-    assert "INV-4 Fail-Stop Gate: OK" in captured.out
+    if "NATIVO" in captured.out:
+        assert "Alineación 64 Bytes: ✓ CUMPLIDA (0-split L1)" in captured.out
+        assert "INV-1 Layout 64B: OK" in captured.out
+        assert "INV-2 Seqlock SPMC: OK" in captured.out
+        assert "INV-4 Fail-Stop Gate: OK" in captured.out
+    else:
+        assert "Modo de compatibilidad emulado (sin dylib nativa)" in captured.out

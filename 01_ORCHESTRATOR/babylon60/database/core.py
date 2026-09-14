@@ -10,8 +10,10 @@ from __future__ import annotations
 
 import sqlite3
 from pathlib import Path
+from typing import TYPE_CHECKING
 
-import aiosqlite
+if TYPE_CHECKING:
+    import aiosqlite
 
 _ALLOWED_SYNCHRONOUS = frozenset({"FULL", "NORMAL"})
 _BUSY_TIMEOUT_MS = 5000
@@ -44,6 +46,8 @@ def resolve_db_path(db_path: str | Path) -> Path:
 
 async def connect(db_path: str | Path, *, synchronous: str = "FULL") -> aiosqlite.Connection:
     """Conexión async (aiosqlite) con los pragmas de INV_BFT_02 aplicados."""
+    import aiosqlite
+
     mode = _validate_synchronous(synchronous)
     resolved_path = resolve_db_path(db_path)
     db = await aiosqlite.connect(str(resolved_path), isolation_level=None, timeout=5.0)
