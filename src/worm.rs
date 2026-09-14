@@ -6,19 +6,28 @@ use alloc::vec::Vec;
 use alloc::vec;
 
 #[derive(Clone, Debug)]
+/// Entrada individual inmutable de la cadena WORM.
 pub struct WormEntry {
+    /// Índice monótono de la entrada.
     pub index: u64,
+    /// Carga útil (Halt payload o SCITT receipt).
     pub payload: Vec<u8>,
+    /// Firma asimétrica (EdDSA / Ed25519) del enclave.
     pub signature: Vec<u8>,
+    /// Hash encadenado de la entrada.
     pub hash: [u8; 32],
 }
 
+/// Registro WORM (Write Once Read Many) respaldado por Hash-Chaining.
 pub struct WormLedger {
     chain: Vec<WormEntry>,
-    enclave_pubkey: Vec<u8>,
+    /// Clave pública del hardware enclave, utilizada para certificar la estructura (SCITT).
+    #[allow(dead_code)]
+    pub enclave_pubkey: Vec<u8>,
 }
 
 impl WormLedger {
+    /// Crea un nuevo WORM Ledger con su bloque génesis.
     pub fn new(enclave_pubkey: Vec<u8>) -> Self {
         let genesis = WormEntry {
             index: 0,

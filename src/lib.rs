@@ -37,9 +37,14 @@
 pub mod halt;
 /// Módulo de definición del layout C-ABI `SharedManifest`.
 pub mod manifest;
+
 /// Módulo de generación de recibos COSE_Sign1.
 #[cfg(feature = "halt-receipt")]
 pub mod receipt;
+
+/// Módulo de integridad criptográfica Append-Only (WORM Ledger).
+#[cfg(feature = "cortex-persist")]
+pub mod worm;
 /// Módulo de sincronización lock-free seqlock SPMC.
 pub mod seqlock;
 /// Módulo de invariantes termodinámicos y bisimulación.
