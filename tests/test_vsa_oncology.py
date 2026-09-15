@@ -1,7 +1,18 @@
+import pathlib
+import pytest
 from babylon60.genomics.vsa_oncology import OncologyOntologyVSA, BFOCategory, HyperVector
+
+_CATALOG = pathlib.Path(__file__).resolve().parent.parent / "data" / "oncology_300.json"
+_SKIP_MSG = "oncology_300.json catalog not provisioned in this environment"
+
+
+def _skip_if_no_catalog() -> None:
+    if not _CATALOG.exists():
+        pytest.skip(_SKIP_MSG)
 
 
 def test_vsa_primitives_loaded() -> None:
+    _skip_if_no_catalog()
     engine = OncologyOntologyVSA()
     assert len(engine.primitives) == 300
     assert "ONC-001" in engine.primitives
@@ -9,6 +20,7 @@ def test_vsa_primitives_loaded() -> None:
 
 
 def test_vsa_bfo_classification() -> None:
+    _skip_if_no_catalog()
     engine = OncologyOntologyVSA()
     assert engine.classify_bfo("ONC-017") == BFOCategory.CONTINUANT  # KRAS
     assert engine.classify_bfo("ONC-047") == BFOCategory.CONTINUANT  # TP53
@@ -31,6 +43,7 @@ def test_hypervector_binding_orthogonality() -> None:
 
 
 def test_waddington_trajectory_bifurcation() -> None:
+    _skip_if_no_catalog()
     engine = OncologyOntologyVSA()
     traj_active = engine.simulate_waddington_trajectory("ONC-017", inhibited=False, steps=60)
     traj_inhibited = engine.simulate_waddington_trajectory("ONC-017", inhibited=True, steps=60)

@@ -68,7 +68,8 @@ impl BftAsyncEngine {
     /// Si la termodinámica falla (Score < 700) aborta y hace Rollback (Ultrathink).
     pub async fn run_dag(&self, memory: Arc<RwLock<KdaMemoryBuffer>>, params: ExergyParams, db_path: &str) -> Result<(), String> {
         let lock_path = if db_path.is_empty() {
-            format!("/tmp/.cortex_thermal_lock_{}_{}.lock", std::process::id(), std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap_or_default().as_nanos())
+            let tmp = std::env::temp_dir();
+            format!("{}/.cortex_thermal_lock_{}_{}.lock", tmp.display(), std::process::id(), std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap_or_default().as_nanos())
         } else {
             format!("{}.lock", db_path)
         };
