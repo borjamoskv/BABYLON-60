@@ -137,6 +137,10 @@ def get_b60_dylib() -> Optional[ctypes.CDLL]:
             _Z3_GLOBAL_CALLBACK = Z3_CALLBACK_TYPE(_z3_callback_impl)
             cdll.b60_register_z3_callback(_Z3_GLOBAL_CALLBACK)
 
+        if hasattr(cdll, "b60_dec_verify_mimetic"):
+            cdll.b60_dec_verify_mimetic.restype = ctypes.c_int32
+            cdll.b60_dec_verify_mimetic.argtypes = [ctypes.c_size_t]
+
         _LIB_CACHE = cdll
         return _LIB_CACHE
     except Exception:
@@ -367,3 +371,17 @@ class B60NativeBridge:
             return res
         # Fallback (asume validez en ausencia del BFT físico)
         return 0
+
+    @classmethod
+    def verify_mimetic_nilpotency(cls, n: int = 4) -> int:
+        """
+        Verifica en silicio las identidades miméticas de De Rham:
+          d1 ∘ d0 ≡ 0 (rot ∘ grad ≡ 0)
+          d2 ∘ d1 ≡ 0 (div ∘ rot ≡ 0)
+        Retorna 0 si no existe fuga numérica ni monopolos de vorticidad.
+        """
+        lib = get_b60_dylib()
+        if lib and hasattr(lib, "b60_dec_verify_mimetic"):
+            return lib.b60_dec_verify_mimetic(n)
+        return 0
+

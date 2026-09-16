@@ -999,6 +999,48 @@ impl MimeticNavierStokes {
     }
 }
 
+/// Verifica formalmente las identidades de nilpotencia mimética de De Rham en silicio:
+/// - `d1 ∘ d0 ≡ 0` (rot ∘ grad ≡ 0)
+/// - `d2 ∘ d1 ≡ 0` (div ∘ rot ≡ 0)
+///
+/// Retornos:
+/// - `0`: Nilpotencia exacta verificada a nivel de bit
+/// - `1`: Violación en `d1 ∘ d0`
+/// - `2`: Violación en `d2 ∘ d1`
+/// - `-1`: Dimensión inválida (`n < 2` o `n > 60`)
+pub fn verify_mimetic_nilpotency(n: usize) -> i32 {
+    if !(2..=60).contains(&n) {
+        return -1;
+    }
+    let mesh = CubicMesh3D::new(n);
+
+    // 1. Probar d1 ∘ d0 ≡ 0 sobre potencial escalar pseudoaleatorio no trivial
+    let mut p_vals = Vec::with_capacity(mesh.num_vertices);
+    for i in 0..mesh.num_vertices {
+        p_vals.push(((i as i64 * 13 + 7) % 60) - 30);
+    }
+    let phi = Form0 { values: p_vals };
+    let grad_phi = DiscreteDeRham::d0(&mesh, &phi);
+    let curl_grad = DiscreteDeRham::d1(&mesh, &grad_phi);
+    if !curl_grad.values.iter().all(|&v| v == 0) {
+        return 1;
+    }
+
+    // 2. Probar d2 ∘ d1 ≡ 0 sobre campo de velocidad arbitrario no trivial
+    let mut u_vals = Vec::with_capacity(mesh.num_edges);
+    for i in 0..mesh.num_edges {
+        u_vals.push(((i as i64 * 37 + 19) % 60) - 30);
+    }
+    let u = Form1 { values: u_vals };
+    let vorticity = DiscreteDeRham::d1(&mesh, &u);
+    let div_vort = DiscreteDeRham::d2(&mesh, &vorticity);
+    if !div_vort.values.iter().all(|&v| v == 0) {
+        return 2;
+    }
+
+    0
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -1246,6 +1288,14 @@ mod tests {
             // 4. Radio efectivo de vórtice positivo y finito (ausencia de colapso a volumen cero)
             assert!(diag.effective_vortex_radius > 0.1, "Paso {}: radio efectivo colapsado a cero", step);
         }
+    }
+
+    #[test]
+    fn test_verify_mimetic_nilpotency_entrypoint() {
+        assert_eq!(verify_mimetic_nilpotency(3), 0);
+        assert_eq!(verify_mimetic_nilpotency(4), 0);
+        assert_eq!(verify_mimetic_nilpotency(1), -1);
+        assert_eq!(verify_mimetic_nilpotency(61), -1);
     }
 }
 

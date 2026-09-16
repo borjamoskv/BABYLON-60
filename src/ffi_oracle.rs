@@ -355,3 +355,11 @@ pub unsafe extern "C" fn b60_dag_validate(
 
     0
 }
+
+/// Verifica las identidades miméticas de De Rham (d1 ∘ d0 ≡ 0 y d2 ∘ d1 ≡ 0) a través del C-ABI
+/// Retorna 0 si las identidades topológicas se satisfacen exactamente sin residuo numérico.
+#[no_mangle]
+pub extern "C" fn b60_dec_verify_mimetic(n: usize) -> i32 {
+    crate::dec::verify_mimetic_nilpotency(n)
+}
+

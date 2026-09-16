@@ -153,3 +153,12 @@ def test_native_bft_eval_trace_aot() -> None:
     
     res_bad_time = B60NativeBridge.eval_trace_aot(bad_time_bytes)
     assert res_bad_time == 0xDEAD6060 # Colapsa Gamma. Quorum = 1 (Alpha vivo). BFT POISONED!
+
+
+def test_native_verify_mimetic_nilpotency() -> None:
+    # Probar que las identidades miméticas d1 ∘ d0 ≡ 0 y d2 ∘ d1 ≡ 0 son 0 exacto
+    res = B60NativeBridge.verify_mimetic_nilpotency(4)
+    assert res == 0
+    # Dimensión inválida
+    res_inv = B60NativeBridge.verify_mimetic_nilpotency(1)
+    assert res_inv == -1
