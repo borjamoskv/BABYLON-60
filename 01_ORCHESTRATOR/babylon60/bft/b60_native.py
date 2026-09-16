@@ -15,11 +15,11 @@ def _find_b60_dylib() -> Optional[Path]:
     """Busca la librería compartida libb60_lang (.dylib / .so) en el workspace."""
     base_dir = Path(__file__).resolve().parents[3]
     candidate_paths = [
-        base_dir / "target" / "release" / "libb60_lang.dylib",
-        base_dir / "target" / "debug" / "libb60_lang.dylib",
-        base_dir / "target" / "release" / "libb60_lang.so",
-        base_dir / "target" / "debug" / "libb60_lang.so",
-        Path("/usr/local/lib/libb60_lang.dylib"),
+        base_dir / "target" / "release" / "libbabylon60.dylib",
+        base_dir / "target" / "debug" / "libbabylon60.dylib",
+        base_dir / "target" / "release" / "libbabylon60.so",
+        base_dir / "target" / "debug" / "libbabylon60.so",
+        Path("/usr/local/lib/libbabylon60.dylib"),
     ]
     for p in candidate_paths:
         if p.exists():
@@ -39,55 +39,92 @@ def get_b60_dylib() -> Optional[ctypes.CDLL]:
 
     try:
         cdll = ctypes.CDLL(str(lib_path))
-        # Configuración de tipos C-ABI
-        cdll.b60_version.restype = ctypes.c_char_p
-        cdll.b60_version.argtypes = []
+        # Configuración de tipos C-ABI (Ignorando silenciosamente si no existen en esta versión de la lib)
+        if hasattr(cdll, "b60_version"):
+            cdll.b60_version.restype = ctypes.c_char_p
+            cdll.b60_version.argtypes = []
 
-        cdll.b60_sexa_add.restype = ctypes.c_int32
-        cdll.b60_sexa_add.argtypes = [
-            ctypes.c_uint64,
-            ctypes.c_uint64,
-            ctypes.c_uint64,
-            ctypes.c_uint64,
-            ctypes.POINTER(ctypes.c_uint64),
-            ctypes.POINTER(ctypes.c_uint64),
-        ]
+        if hasattr(cdll, "b60_sexa_add"):
+            cdll.b60_sexa_add.restype = ctypes.c_int32
+            cdll.b60_sexa_add.argtypes = [
+                ctypes.c_uint64,
+                ctypes.c_uint64,
+                ctypes.c_uint64,
+                ctypes.c_uint64,
+                ctypes.POINTER(ctypes.c_uint64),
+                ctypes.POINTER(ctypes.c_uint64),
+            ]
 
-        cdll.b60_fisher_distance.restype = ctypes.c_double
-        cdll.b60_fisher_distance.argtypes = [
-            ctypes.c_size_t,
-            ctypes.POINTER(ctypes.c_double),
-            ctypes.POINTER(ctypes.c_double),
-        ]
+        if hasattr(cdll, "b60_fisher_distance"):
+            cdll.b60_fisher_distance.restype = ctypes.c_double
+            cdll.b60_fisher_distance.argtypes = [
+                ctypes.c_size_t,
+                ctypes.POINTER(ctypes.c_double),
+                ctypes.POINTER(ctypes.c_double),
+            ]
 
-        cdll.b60_kullback_leibler.restype = ctypes.c_double
-        cdll.b60_kullback_leibler.argtypes = [
-            ctypes.c_size_t,
-            ctypes.POINTER(ctypes.c_double),
-            ctypes.POINTER(ctypes.c_double),
-        ]
+        if hasattr(cdll, "b60_kullback_leibler"):
+            cdll.b60_kullback_leibler.restype = ctypes.c_double
+            cdll.b60_kullback_leibler.argtypes = [
+                ctypes.c_size_t,
+                ctypes.POINTER(ctypes.c_double),
+                ctypes.POINTER(ctypes.c_double),
+            ]
 
-        cdll.b60_eval_agent_intent.restype = ctypes.c_int32
-        cdll.b60_eval_agent_intent.argtypes = [
-            ctypes.c_char_p,
-            ctypes.c_char_p,
-            ctypes.c_size_t,
-            ctypes.c_size_t,
-            ctypes.c_uint64,
-            ctypes.c_char_p,
-            ctypes.c_size_t,
-        ]
+        if hasattr(cdll, "b60_eval_agent_intent"):
+            cdll.b60_eval_agent_intent.restype = ctypes.c_int32
+            cdll.b60_eval_agent_intent.argtypes = [
+                ctypes.c_char_p,
+                ctypes.c_char_p,
+                ctypes.c_size_t,
+                ctypes.c_size_t,
+                ctypes.c_uint64,
+                ctypes.c_char_p,
+                ctypes.c_size_t,
+            ]
 
-        cdll.b60_dag_validate.restype = ctypes.c_int32
-        cdll.b60_dag_validate.argtypes = [
-            ctypes.c_size_t,
-            ctypes.POINTER(ctypes.c_uint32),
-            ctypes.POINTER(ctypes.c_uint64),
-            ctypes.c_size_t,
-            ctypes.POINTER(ctypes.c_uint32),
-            ctypes.POINTER(ctypes.c_uint32),
-            ctypes.POINTER(ctypes.c_size_t),
-        ]
+        if hasattr(cdll, "b60_dag_validate"):
+            cdll.b60_dag_validate.restype = ctypes.c_int32
+            cdll.b60_dag_validate.argtypes = [
+                ctypes.c_size_t,
+                ctypes.POINTER(ctypes.c_uint32),
+                ctypes.POINTER(ctypes.c_uint64),
+                ctypes.c_size_t,
+                ctypes.POINTER(ctypes.c_uint32),
+                ctypes.POINTER(ctypes.c_uint32),
+                ctypes.POINTER(ctypes.c_size_t),
+            ]
+
+        if hasattr(cdll, "b60_eval_trace"):
+            cdll.b60_eval_trace.restype = ctypes.c_uint32
+            cdll.b60_eval_trace.argtypes = [
+                ctypes.POINTER(ctypes.c_uint8),
+                ctypes.c_size_t,
+            ]
+
+        if hasattr(cdll, "b60_register_z3_callback"):
+            # Tipo del puntero a función C: uint32 (*)(const uint8*, size_t)
+            Z3_CALLBACK_TYPE = ctypes.CFUNCTYPE(ctypes.c_uint32, ctypes.POINTER(ctypes.c_uint8), ctypes.c_size_t)
+            cdll.b60_register_z3_callback.argtypes = [Z3_CALLBACK_TYPE]
+            
+            # Definir la función Python a inyectar (Global para evitar GC)
+            global _Z3_GLOBAL_CALLBACK
+            def _z3_callback_impl(trace_ptr, trace_len):
+                try:
+                    import sys
+                    from pathlib import Path
+                    sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "01_ORCHESTRATOR"))
+                    from babylon60.kernel.ns_z3_firewall import NavierStokesZ3Firewall
+                    
+                    trace_bytes = bytes(trace_ptr[:trace_len])
+                    res = NavierStokesZ3Firewall.eval_trace_bytes(trace_bytes)
+                    return res
+                except Exception as e:
+                    print(f"Error in Z3 callback: {e}")
+                    return 1
+            
+            _Z3_GLOBAL_CALLBACK = Z3_CALLBACK_TYPE(_z3_callback_impl)
+            cdll.b60_register_z3_callback(_Z3_GLOBAL_CALLBACK)
 
         _LIB_CACHE = cdll
         return _LIB_CACHE
@@ -255,3 +292,17 @@ class B60NativeBridge:
             if ts_map.get(u, 0) >= ts_map.get(v, 0):
                 return 2, 0
         return 0, 1
+
+    @classmethod
+    def eval_trace_aot(cls, trace_bytes: bytes) -> int:
+        """
+        Somete una traza causal a la Tríada de Larsa (Ring-0) y al Lóbulo Inhibidor (Lean 4).
+        Retorna 1 (RUNNING) si sobrevive (ya sea por validez o por quórum). Retorna 3735930976 (0xDEAD_6060) si colapsa.
+        """
+        lib = get_b60_dylib()
+        if lib:
+            buf = (ctypes.c_uint8 * len(trace_bytes)).from_buffer_copy(trace_bytes)
+            res = lib.b60_eval_trace(buf, len(trace_bytes))
+            return res
+        # Fallback (asume validez en ausencia del BFT físico)
+        return 0

@@ -119,3 +119,11 @@ path = "src/bin/poc_bifurcation_8_baremetal.rs"
 [[bin]]
 name = "biometric_test"
 path = "src/bin/biometric_test.rs"
+
+[[bin]]
+name = "poc_lean4_emitter"
+path = "src/bin/poc_lean4_emitter.rs"
+
+[[bin]]
+name = "poc_lean4_aot_emitter"
+path = "src/bin/poc_lean4_aot_emitter.rs"

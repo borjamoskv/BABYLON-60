@@ -57,6 +57,8 @@ pub mod spsc_ring;
 pub mod telemetry;
 /// Módulo de Consenso Isostático BFT de la Tríada de Larsa (Ring-0).
 pub mod larsa_bft;
+pub mod aot_oracle;
+pub mod z3_oracle;
 /// Módulo del Kernel Matemático Sexagesimal F60 (Matemática de Enki).
 pub mod f60;
 /// Módulo de Cálculo Exterior Discreto (DEC) y Complejo de De Rham (Iteraciones 31-32).
@@ -68,6 +70,7 @@ pub mod omega_synthesis;
 
 /// Módulo de interfaz C-ABI (FFI) para integración C/C++.
 pub mod ffi;
+pub mod ffi_oracle;
 
 /// Módulo de atestación física biométrica (Apple Secure Enclave).
 #[cfg(feature = "std")]

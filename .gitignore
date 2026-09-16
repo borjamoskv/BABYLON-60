@@ -51,6 +51,9 @@ yt-dlp
 *.db-shm
 *.sqlite
 *.cortex_thermal_lock
+scripts/c5_demos/*.bin
+scripts/c5_demos/*.csv
+scripts/c5_demos/lean_chunks/
 
 # Added by Antigravity C5-REAL Audit
 .vercel

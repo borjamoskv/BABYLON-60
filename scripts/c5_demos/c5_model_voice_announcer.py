@@ -56,18 +56,29 @@ def speak_cloned(text: str, blocking: bool = False) -> None:
     target_wav = cached_wav if cached_wav.exists() else (direct_wav if direct_wav.exists() else None)
 
     if target_wav and target_wav.exists():
-        # Despachar notificación nativa visual en macOS
-        cmd_banner = [
-            "osascript", "-e",
-            f'display notification "{text}" with title "Antigravity Topology" subtitle "Soberanía C5-REAL"'
-        ]
-        subprocess.Popen(cmd_banner, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        # Cerrojo de serialización para prevenir colisiones acústicas
+        lock_file = Path("/tmp/c5_voice_playback.lock")
+        try:
+            import fcntl
+            with open(lock_file, "w") as lf:
+                fcntl.flock(lf, fcntl.LOCK_EX)
+                # Despachar notificación nativa visual en macOS
+                cmd_banner = [
+                    "osascript", "-e",
+                    f'display notification "{text}" with title "Antigravity Topology" subtitle "Soberanía C5-REAL" sound name "Tink"'
+                ]
+                subprocess.Popen(cmd_banner, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-        cmd = ["afplay", str(target_wav)]
-        if blocking:
-            subprocess.run(cmd, check=False)
-        else:
-            subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                # Sound Design C5: Ping acústico previo a la voz
+                ping_wav = SAMPLES_DIR / "c5_ping.wav"
+                if ping_wav.exists():
+                    subprocess.run(["afplay", str(ping_wav)], check=False)
+
+                cmd = ["afplay", str(target_wav)]
+                subprocess.run(cmd, check=False)
+                fcntl.flock(lf, fcntl.LOCK_UN)
+        except Exception:
+            subprocess.run(["afplay", str(target_wav)], check=False)
         return
 
     # Caso 2: Síntesis neuronal mediante F5-TTS

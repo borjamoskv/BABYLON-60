@@ -391,4 +391,89 @@ class NavierStokesZ3Firewall:
                 "MUSHUSHU-0 Apoptosis: Violación de la norma L2. Energía cinética negativa propuesta."
             )
 
-        return True, "CLAIM_VALIDATED_PHYSICALLY"
+    # -----------------------------------------------------------------------
+    # [Iter 71] Verificación SMT de Causalidad de Traza (MUSHUSHU-0 para Seqlock)
+    # -----------------------------------------------------------------------
+    def verify_causality_trace(self, events: List[Tuple[int, int, int]]) -> SmtProofCertificate:
+        """
+        [Iter 71] Evalúa una traza causal [thread_id, seq, action].
+        Usa Z3 para demostrar formalmente que no existe inversión temporal (seq_i > seq_{i+1}).
+        """
+        t0 = time.perf_counter()
+        solver = self._create_solver()
+
+        # En Z3, declaramos las secuencias y forzamos monotonía
+        seq_vars = []
+        for i, (tid, seq, action) in enumerate(events):
+            s_var = z3.Int(f"seq_{i}")
+            solver.add(s_var == seq)
+            seq_vars.append(s_var)
+
+            # Monotonía causal estricta: un evento posterior no puede tener un reloj Lamport menor
+            if i > 0:
+                solver.assert_and_track(seq_vars[i-1] <= seq_vars[i], f"causality_link_{i-1}_{i}")
+
+        res = solver.check()
+        elapsed = (time.perf_counter() - t0) * 1000.0
+
+        if res == z3.sat:
+            return SmtProofCertificate(
+                theorem="CAUSALITY_LAMPORT_MONOTONICITY",
+                status="VALID_PROOF",
+                elapsed_ms=elapsed,
+            )
+        else:
+            core = [str(x) for x in solver.unsat_core()]
+            return SmtProofCertificate(
+                theorem="CAUSALITY_LAMPORT_MONOTONICITY",
+                status="FALSIFIED_UNSAT",
+                elapsed_ms=elapsed,
+                unsat_core=core,
+            )
+
+    # -----------------------------------------------------------------------
+    # CLI entrypoint para integración con Rust BFT
+    # -----------------------------------------------------------------------
+    @classmethod
+    def eval_trace_bytes(cls, trace_bytes: bytes):
+        import struct
+        events = []
+        try:
+            length = len(trace_bytes)
+            offset = 0
+            while offset + 8 <= length:
+                chunk = trace_bytes[offset:offset+8]
+                offset += 8
+                packed = struct.unpack("<Q", chunk)[0]
+                action = packed & 0xFF
+                thread_id = (packed >> 8) & 0xFFFFFF
+                seq = (packed >> 32) & 0xFFFFFFFF
+                events.append((thread_id, seq, action))
+            
+            fw = cls()
+            cert = fw.verify_causality_trace(events)
+            
+            if cert.status == "VALID_PROOF":
+                print("Z3_OK")
+                return 0
+            else:
+                print(f"Z3_PARADOX: {','.join(cert.unsat_core)}")
+                return 2
+        except Exception as e:
+            print(f"Z3_ERROR: {e}")
+            return 1
+
+    @classmethod
+    def cli_eval_trace(cls, bin_path: str):
+        try:
+            with open(bin_path, "rb") as f:
+                trace_bytes = f.read()
+            return cls.eval_trace_bytes(trace_bytes)
+        except Exception as e:
+            print(f"Z3_ERROR: {e}")
+            return 1
+
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] == "--verify-causality":
+        sys.exit(NavierStokesZ3Firewall.cli_eval_trace(sys.argv[2]))

@@ -46,6 +46,10 @@ name = "oracle"
 root = "BabylonOracle"
 
 [[lean_exe]]
+name = "babylon_aot_oracle"
+root = "BabylonAOTOracle"
+
+[[lean_exe]]
 name = "navier_stokes_oracle"
 root = "NavierStokesOracle"
 

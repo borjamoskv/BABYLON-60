@@ -14,7 +14,7 @@ pytestmark = pytest.mark.skipif(
 def test_native_dylib_loaded() -> None:
     assert B60NativeBridge.is_available() is True
     ver = B60NativeBridge.version()
-    assert ver == "1.0.0-omega"
+    assert ver == "4.3.0"
 
 
 def test_native_sexa_add() -> None:
@@ -97,3 +97,35 @@ def test_native_validate_causal_dag_temporal_inversion() -> None:
     edges = [(1, 2)]  # Inversión: Lamport(1)=50 > Lamport(2)=20
     res, stages = B60NativeBridge.validate_causal_dag(nodes, edges)
     assert res == 2  # Temporal inversion detected!
+
+def pack_event(thread_id: int, seq: int, action: int) -> bytes:
+    # [ seq (32) | thread_id (24) | action (8) ]
+    packed = (action & 0xFF) | ((thread_id & 0xFFFFFF) << 8) | ((seq & 0xFFFFFFFF) << 32)
+    return packed.to_bytes(8, byteorder='little')
+
+def test_native_bft_eval_trace_aot() -> None:
+    # 1. Crear traza válida
+    valid_bytes = b""
+    valid_bytes += pack_event(1, 1, 0) # WriteBegin
+    valid_bytes += pack_event(1, 2, 1) # WriteEnd
+    valid_bytes += pack_event(1, 3, 0) # WriteBegin
+    valid_bytes += pack_event(1, 4, 1) # WriteEnd
+    
+    res_valid = B60NativeBridge.eval_trace_aot(valid_bytes)
+    assert res_valid == 1  # 1 = RUNNING
+    
+    # 2. Crear traza corrupta
+    bad_bytes = b""
+    bad_bytes += pack_event(1, 1, 0) # WriteBegin
+    bad_bytes += pack_event(1, 2, 0) # WriteBegin de nuevo (Paradoja)
+    
+    res_bad = B60NativeBridge.eval_trace_aot(bad_bytes)
+    assert res_bad == 1 # Aún RUNNING (Quorum 2/3) 
+
+    # 3. Crear traza corrupta temporalmente (Inversión Lamport)
+    bad_time_bytes = b""
+    bad_time_bytes += pack_event(1, 5, 0) # WriteBegin
+    bad_time_bytes += pack_event(1, 2, 1) # WriteEnd con seq menor (Paradoja SMT)
+    
+    res_bad_time = B60NativeBridge.eval_trace_aot(bad_time_bytes)
+    assert res_bad_time == 0xDEAD6060 # Colapsa Gamma. Quorum = 1 (Alpha vivo). BFT POISONED!

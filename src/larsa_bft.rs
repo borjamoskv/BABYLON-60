@@ -104,6 +104,40 @@ impl LarsaTriadConsensus {
             RUNNING
         }
     }
+
+    /// Somete una traza causal a la Tríada de Larsa.
+    /// Según INV_C5_Z3_SMT_PRE_LEAN, primero pasa por MUSHUSHU-0 (Z3 / Vértice Gamma) para poda booleana.
+    /// Solo si Z3 certifica la traza sin contradicción matemática, se escala al Lóbulo Inhibidor (Lean 4 / Vértice Beta).
+    pub fn evaluate_trace<P: core::convert::AsRef<std::path::Path>>(&self, trace_path: P) -> u32 {
+        use crate::aot_oracle::{AotOracleClient, OracleVerdict};
+        use crate::z3_oracle::Z3FirewallClient;
+        
+        let path_ref = trace_path.as_ref();
+        
+        // 1. VÉRTICE GAMMA (Z3 SMT - Poda rápida Booleana)
+        match Z3FirewallClient::verify_causality(path_ref) {
+            OracleVerdict::Validated => {
+                self.restore_vertex(LarsaVertex::Gamma);
+            }
+            OracleVerdict::ParadoxDetected | OracleVerdict::SystemFailure => {
+                self.report_failure(LarsaVertex::Gamma);
+                // MUSHUSHU-0 aborta y colapsa la evaluación. No se llega a invocar Lean 4.
+                return self.evaluate_quorum();
+            }
+        }
+
+        // 2. VÉRTICE BETA (Lean 4 - Reflejo Isomórfico)
+        match AotOracleClient::verify_trace(path_ref) {
+            OracleVerdict::Validated => {
+                self.restore_vertex(LarsaVertex::Beta);
+            }
+            OracleVerdict::ParadoxDetected | OracleVerdict::SystemFailure => {
+                self.report_failure(LarsaVertex::Beta);
+            }
+        }
+        
+        self.evaluate_quorum()
+    }
 }
 
 #[cfg(test)]
