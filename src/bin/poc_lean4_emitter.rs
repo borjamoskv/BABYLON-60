@@ -4,7 +4,6 @@ use std::time::Instant;
 
 /// PoC: Emisor Chunked y Orquestación de Lean 4
 /// Superando el "AST Explosion Limit" dividiendo el log en lotes (Chunking)
-
 const CHUNK_SIZE: usize = 5000;
 const LEAN_OUTPUT_DIR: &str = "scripts/c5_demos/lean_chunks";
 
@@ -17,7 +16,7 @@ impl Lean4Emitter {
         
         fs::create_dir_all(LEAN_OUTPUT_DIR).map_err(|e| e.to_string())?;
 
-        let num_chunks = (total_events + CHUNK_SIZE - 1) / CHUNK_SIZE;
+        let num_chunks = total_events.div_ceil(CHUNK_SIZE);
         
         for chunk_idx in 0..num_chunks {
             let start = chunk_idx * CHUNK_SIZE;

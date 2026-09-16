@@ -15,7 +15,7 @@ fn test_bft_aot_oracle_integration() {
 
     // 2. Crear una traza válida (pequeña traza binaria Zero-Copy).
     let trace_path = "target/valid_trace.bin";
-    let valid_events = vec![
+    let valid_events = [
         pack_event(1, 1, 0),
         pack_event(1, 2, 1),
         pack_event(1, 3, 0),
@@ -32,7 +32,7 @@ fn test_bft_aot_oracle_integration() {
     // 4. Crear una traza PARADÓJICA de Estado (doble WriteBegin). 
     // Z3 la dejará pasar (seq es monótono), pero Lean 4 la aniquilará.
     let bad_state_trace_path = "target/corrupt_state.bin";
-    let bad_state_events = vec![
+    let bad_state_events = [
         pack_event(1, 1, 0),
         pack_event(1, 2, 0), // Paradoja de estado
     ];
@@ -50,7 +50,7 @@ fn test_bft_aot_oracle_integration() {
     // 6. Crear una traza PARADÓJICA Temporal (Inversión Lamport).
     // MUSHUSHU-0 (Z3) debe aniquilarla al instante.
     let bad_time_trace_path = "target/corrupt_time.bin";
-    let bad_time_events = vec![
+    let bad_time_events = [
         pack_event(1, 5, 0),
         pack_event(1, 2, 1), // Paradoja temporal (5 > 2)
     ];

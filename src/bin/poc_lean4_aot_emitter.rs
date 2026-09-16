@@ -4,7 +4,6 @@ use std::time::Instant;
 
 /// PoC: AOT Emitter y Orquestación Hacia Silicio O(1)
 /// Generación de un millón de eventos y evaluación O(1) nativa en C (Lean).
-
 const TRACE_FILE: &str = "scripts/c5_demos/trace_1M.bin";
 const TOTAL_EVENTS: usize = 1_000_000; // Un millón de transacciones
 

@@ -13,7 +13,7 @@ use std::slice;
 static BFT_CONSENSUS: std::sync::OnceLock<LarsaTriadConsensus> = std::sync::OnceLock::new();
 
 fn get_bft() -> &'static LarsaTriadConsensus {
-    BFT_CONSENSUS.get_or_init(|| LarsaTriadConsensus::new())
+    BFT_CONSENSUS.get_or_init(LarsaTriadConsensus::new)
 }
 
 /// Somete una traza binaria en memoria a la Tríada de Larsa y Lean 4 desde el entorno C/Python.
@@ -60,7 +60,7 @@ pub fn get_z3_callback() -> Option<Z3Callback> {
     if ptr.is_null() {
         None
     } else {
-        Some(unsafe { std::mem::transmute(ptr) })
+        Some(unsafe { std::mem::transmute::<*mut std::ffi::c_void, Z3Callback>(ptr) })
     }
 }
 
@@ -167,7 +167,7 @@ pub unsafe extern "C" fn b60_eval_agent_intent(
         let agent_bytes = unsafe { CStr::from_ptr(agent_id_ptr).to_bytes() };
         let mut hasher = Sha256::new();
         hasher.update(agent_bytes);
-        hasher.update(&budget.to_le_bytes());
+        hasher.update(budget.to_le_bytes());
         let hex_hash = format!("{:064x}", hasher.finalize());
         let c_str = std::ffi::CString::new(hex_hash).unwrap();
         let bytes = c_str.as_bytes_with_nul();
