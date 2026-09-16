@@ -217,11 +217,60 @@ pub unsafe extern "C" fn b60_dag_validate(
         let e_from = unsafe { slice::from_raw_parts(edge_from, num_edges) };
         let e_to = unsafe { slice::from_raw_parts(edge_to, num_edges) };
 
+        // 1. Verificar existencia de nodos en el mapa
         for i in 0..num_edges {
             let u = e_from[i];
             let v = e_to[i];
-            let u_ts = ts_map.get(&u).copied().unwrap_or(0);
-            let v_ts = ts_map.get(&v).copied().unwrap_or(0);
+            if !ts_map.contains_key(&u) || !ts_map.contains_key(&v) {
+                return -1;
+            }
+        }
+
+        // 2. Detección formal de ciclos (Algoritmo de Kahn)
+        let mut in_degree: HashMap<u32, usize> = HashMap::with_capacity(num_nodes);
+        let mut adj: HashMap<u32, Vec<u32>> = HashMap::with_capacity(num_nodes);
+        for &id in ids {
+            in_degree.insert(id, 0);
+            adj.insert(id, Vec::new());
+        }
+        for i in 0..num_edges {
+            let u = e_from[i];
+            let v = e_to[i];
+            adj.get_mut(&u).unwrap().push(v);
+            *in_degree.get_mut(&v).unwrap() += 1;
+        }
+
+        let mut queue: std::collections::VecDeque<u32> = in_degree
+            .iter()
+            .filter(|(_, &deg)| deg == 0)
+            .map(|(&id, _)| id)
+            .collect();
+
+        let mut visited_count = 0;
+        while let Some(u) = queue.pop_front() {
+            visited_count += 1;
+            if let Some(neighbors) = adj.get(&u) {
+                for &v in neighbors {
+                    if let Some(deg) = in_degree.get_mut(&v) {
+                        *deg -= 1;
+                        if *deg == 0 {
+                            queue.push_back(v);
+                        }
+                    }
+                }
+            }
+        }
+
+        if visited_count != num_nodes {
+            return 1; // Paradoja Cíclica
+        }
+
+        // 3. Verificación de Inversión Temporal de Lamport (from_ts < to_ts)
+        for i in 0..num_edges {
+            let u = e_from[i];
+            let v = e_to[i];
+            let u_ts = ts_map[&u];
+            let v_ts = ts_map[&v];
             if u_ts >= v_ts {
                 return 2; // Inversión temporal de Lamport
             }

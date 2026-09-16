@@ -289,7 +289,26 @@ class B60NativeBridge:
         # Pure Python fallback
         ts_map = {nid: ts for nid, ts in nodes}
         for u, v in edges:
-            if ts_map.get(u, 0) >= ts_map.get(v, 0):
+            if u not in ts_map or v not in ts_map:
+                return -1, 0
+        in_degree = {nid: 0 for nid, _ in nodes}
+        adj = {nid: [] for nid, _ in nodes}
+        for u, v in edges:
+            adj[u].append(v)
+            in_degree[v] += 1
+        queue = [nid for nid, deg in in_degree.items() if deg == 0]
+        visited = 0
+        while queue:
+            u = queue.pop(0)
+            visited += 1
+            for v in adj[u]:
+                in_degree[v] -= 1
+                if in_degree[v] == 0:
+                    queue.append(v)
+        if visited != len(nodes):
+            return 1, 0
+        for u, v in edges:
+            if ts_map[u] >= ts_map[v]:
                 return 2, 0
         return 0, 1
 

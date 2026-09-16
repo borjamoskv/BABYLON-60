@@ -98,6 +98,13 @@ def test_native_validate_causal_dag_temporal_inversion() -> None:
     res, stages = B60NativeBridge.validate_causal_dag(nodes, edges)
     assert res == 2  # Temporal inversion detected!
 
+
+def test_native_validate_causal_dag_cyclic_paradox() -> None:
+    nodes = [(1, 10), (2, 20), (3, 30)]
+    edges = [(1, 2), (2, 3), (3, 1)]  # Ciclo cerrado 1 -> 2 -> 3 -> 1
+    res, stages = B60NativeBridge.validate_causal_dag(nodes, edges)
+    assert res == 1  # Cyclic paradox detected via Kahn's algorithm!
+
 def pack_event(thread_id: int, seq: int, action: int) -> bytes:
     # [ seq (32) | thread_id (24) | action (8) ]
     packed = (action & 0xFF) | ((thread_id & 0xFFFFFF) << 8) | ((seq & 0xFFFFFFFF) << 32)
