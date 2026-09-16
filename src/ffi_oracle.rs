@@ -88,12 +88,58 @@ pub unsafe extern "C" fn b60_sexa_add(
         return -1;
     }
     let fraction_base: u64 = 12_960_000; // 60^4
+    if f1 >= fraction_base || f2 >= fraction_base {
+        return -2;
+    }
     let total_frac = f1 + f2;
     let carry = total_frac / fraction_base;
     let rem = total_frac % fraction_base;
+    let Some(total_s) = s1.checked_add(s2).and_then(|s| s.checked_add(carry)) else {
+        return -3;
+    };
     unsafe {
-        *out_s = s1 + s2 + carry;
+        *out_s = total_s;
         *out_f = rem;
+    }
+    0
+}
+
+/// Resta exacta sexagesimal en base 60^4 con cero deriva (borrow a s)
+/// Retorna:
+///   0: Éxito (resultado en out_s y out_f)
+///   1: Underflow temporal ((s1, f1) < (s2, f2))
+///  -1: Punteros nulos
+///  -2: Violación de precondición (f >= 60^4)
+///
+/// # Safety
+/// `out_s` y `out_f` deben ser punteros válidos para escribir `u64`.
+#[no_mangle]
+pub unsafe extern "C" fn b60_sexa_sub(
+    s1: u64,
+    f1: u64,
+    s2: u64,
+    f2: u64,
+    out_s: *mut u64,
+    out_f: *mut u64,
+) -> i32 {
+    if out_s.is_null() || out_f.is_null() {
+        return -1;
+    }
+    let fraction_base: u64 = 12_960_000; // 60^4
+    if f1 >= fraction_base || f2 >= fraction_base {
+        return -2;
+    }
+    if s1 < s2 || (s1 == s2 && f1 < f2) {
+        return 1; // Underflow
+    }
+    let (res_s, res_f) = if f1 >= f2 {
+        (s1 - s2, f1 - f2)
+    } else {
+        (s1 - s2 - 1, (fraction_base + f1) - f2)
+    };
+    unsafe {
+        *out_s = res_s;
+        *out_f = res_f;
     }
     0
 }

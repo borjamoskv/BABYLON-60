@@ -55,6 +55,17 @@ def get_b60_dylib() -> Optional[ctypes.CDLL]:
                 ctypes.POINTER(ctypes.c_uint64),
             ]
 
+        if hasattr(cdll, "b60_sexa_sub"):
+            cdll.b60_sexa_sub.restype = ctypes.c_int32
+            cdll.b60_sexa_sub.argtypes = [
+                ctypes.c_uint64,
+                ctypes.c_uint64,
+                ctypes.c_uint64,
+                ctypes.c_uint64,
+                ctypes.POINTER(ctypes.c_uint64),
+                ctypes.POINTER(ctypes.c_uint64),
+            ]
+
         if hasattr(cdll, "b60_fisher_distance"):
             cdll.b60_fisher_distance.restype = ctypes.c_double
             cdll.b60_fisher_distance.argtypes = [
@@ -154,17 +165,48 @@ class B60NativeBridge:
     def sexa_add(cls, s1: int, f1: int, s2: int, f2: int) -> Tuple[int, int]:
         """Suma sexagesimal exacta en base 60^4 (12,960,000)."""
         lib = get_b60_dylib()
-        if lib:
+        if lib and hasattr(lib, "b60_sexa_add"):
             out_s = ctypes.c_uint64()
             out_f = ctypes.c_uint64()
             res = lib.b60_sexa_add(s1, f1, s2, f2, ctypes.byref(out_s), ctypes.byref(out_f))
             if res == 0:
                 return out_s.value, out_f.value
+            if res == -2:
+                raise ValueError("Violación de precondición: fracción >= 12,960,000")
+            if res == -3:
+                raise OverflowError("Desbordamiento aritmético en suma sexagesimal")
 
         # Pure Python fallback
         base = 12960000
+        if f1 >= base or f2 >= base:
+            raise ValueError("Violación de precondición: fracción >= 12,960,000")
         tot = f1 + f2
         return (s1 + s2 + (tot // base)), (tot % base)
+
+    @classmethod
+    def sexa_sub(cls, s1: int, f1: int, s2: int, f2: int) -> Tuple[int, int]:
+        """Resta sexagesimal exacta en base 60^4 (12,960,000) con borrow."""
+        lib = get_b60_dylib()
+        if lib and hasattr(lib, "b60_sexa_sub"):
+            out_s = ctypes.c_uint64()
+            out_f = ctypes.c_uint64()
+            res = lib.b60_sexa_sub(s1, f1, s2, f2, ctypes.byref(out_s), ctypes.byref(out_f))
+            if res == 0:
+                return out_s.value, out_f.value
+            if res == 1:
+                raise ValueError("Underflow sexagesimal: el tiempo no puede ser negativo")
+            if res == -2:
+                raise ValueError("Violación de precondición: fracción >= 12,960,000")
+
+        # Pure Python fallback
+        base = 12960000
+        if f1 >= base or f2 >= base:
+            raise ValueError("Violación de precondición: fracción >= 12,960,000")
+        if s1 < s2 or (s1 == s2 and f1 < f2):
+            raise ValueError("Underflow sexagesimal: el tiempo no puede ser negativo")
+        if f1 >= f2:
+            return s1 - s2, f1 - f2
+        return s1 - s2 - 1, (base + f1) - f2
 
     @classmethod
     def fisher_distance(cls, p: List[float], q: List[float]) -> float:

@@ -24,6 +24,23 @@ def test_native_sexa_add() -> None:
     assert f == 0
 
 
+def test_native_sexa_sub() -> None:
+    # 16s + 0 u - 5s + 6,480,000 u (5.5 s) = 10s + 6,480,000 u
+    s, f = B60NativeBridge.sexa_sub(16, 0, 5, 6480000)
+    assert s == 10
+    assert f == 6480000
+
+
+def test_native_sexa_sub_underflow() -> None:
+    with pytest.raises(ValueError, match="Underflow sexagesimal"):
+        B60NativeBridge.sexa_sub(5, 0, 10, 0)
+
+
+def test_native_sexa_precondition() -> None:
+    with pytest.raises(ValueError, match="Violación de precondición"):
+        B60NativeBridge.sexa_add(1, 15000000, 1, 0)
+
+
 def test_native_fisher_distance() -> None:
     p = [0.5, 0.5]
     q = [0.5, 0.5]
