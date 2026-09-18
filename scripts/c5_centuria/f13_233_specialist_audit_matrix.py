@@ -409,9 +409,20 @@ def evaluate_specialist(agent_meta: Dict[str, Any]) -> SpecialistResult:
                 details = "babylon_tensor.c ausente"
 
         elif aid == "A038": # SQLite WAL Mode
-            target_path = os.path.join(ROOT_DIR, "causal_gate.db")
-            passed = os.path.exists(target_path)
-            details = "Base de datos causal_gate.db presente y verificada."
+            target_path = os.path.join(ROOT_DIR, ".cortex", "causal_gate.db")
+            if not os.path.exists(target_path):
+                target_path = os.path.join(ROOT_DIR, "causal_gate.db")
+            if os.path.exists(target_path):
+                import sqlite3
+                con = sqlite3.connect(target_path)
+                cur = con.cursor()
+                jm = cur.execute("PRAGMA journal_mode;").fetchone()[0].lower()
+                con.close()
+                passed = (jm == "wal")
+                details = f"SQLite {os.path.basename(target_path)}: journal_mode={jm} (WAL persistente en header)"
+            else:
+                passed = False
+                details = "causal_gate.db ausente"
 
         elif aid == "A069": # Cargo Workspace
             target_path = os.path.join(ROOT_DIR, "Cargo.toml")
@@ -526,7 +537,9 @@ def evaluate_specialist(agent_meta: Dict[str, Any]) -> SpecialistResult:
                 details = "src/lib.rs ausente"
 
         elif aid == "A216": # Manifest Sealed JSON
-            target_path = os.path.join(ROOT_DIR, "manifest_v4.2.0_sealed.json")
+            target_path = os.path.join(ROOT_DIR, "deploy", "manifests", "manifest_v4.2.0_sealed.json")
+            if not os.path.exists(target_path):
+                target_path = os.path.join(ROOT_DIR, "manifest_v4.2.0_sealed.json")
             if os.path.exists(target_path):
                 with open(target_path, "r") as f:
                     mj = json.load(f)

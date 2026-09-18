@@ -94,28 +94,41 @@ class SubagentHandle:
 
 
 class DynamicLifecycleManager:
-    """Supervisory controller managing a swarm of subagent handles."""
+    """
+    Orchestration manager for dynamic subagent lifecycles.
+    Maintains active subagent registries, lifecycle transitions, and deadlock watchdog scanning.
+    """
 
     def __init__(self, default_timeout_s: float = 30.0):
         self.default_timeout_s = default_timeout_s
-        self.agents: Dict[str, SubagentHandle] = {}
+        self._agents: Dict[str, SubagentHandle] = {}
 
-    def spawn(self, agent_id: str, role: str, timeout_s: Optional[float] = None) -> SubagentHandle:
-        """Registers and spawns a new managed subagent handle."""
-        handle = SubagentHandle(agent_id, role, timeout_s or self.default_timeout_s)
-        self.agents[agent_id] = handle
+    def spawn(self, agent_id: str, role: str = "generalist", timeout_s: Optional[float] = None) -> SubagentHandle:
+        """Spawns and registers a new subagent with bounded state duration."""
+        effective_timeout = timeout_s if timeout_s is not None else self.default_timeout_s
+        handle = SubagentHandle(agent_id=agent_id, role=role, max_state_duration_s=effective_timeout)
+        self._agents[agent_id] = handle
         return handle
 
     def get(self, agent_id: str) -> Optional[SubagentHandle]:
-        return self.agents.get(agent_id)
+        """Retrieves an existing subagent handle by its identifier."""
+        return self._agents.get(agent_id)
 
     def scan_deadlocks(self, now: Optional[float] = None) -> List[str]:
-        """Scans all active agents for watchdog timeouts and flags deadlocks."""
-        deadlocked = []
-        for aid, handle in self.agents.items():
-            if handle.check_watchdog(now=now):
+        """
+        Executes an O(N) sweep across all registered subagents,
+        tripping deadlocks if active state thresholds are exceeded.
+        Returns a list of deadlocked agent IDs.
+        """
+        deadlocked: List[str] = []
+        for aid, handle in self._agents.items():
+            if handle.check_watchdog(now=now) or handle.current_state == SubagentState.DEADLOCKED:
                 deadlocked.append(aid)
         return deadlocked
 
-    def active_count(self) -> int:
-        return sum(1 for a in self.agents.values() if a.current_state not in (SubagentState.COMPLETED, SubagentState.DEADLOCKED, SubagentState.POISONED))
+    def list_active(self) -> List[SubagentHandle]:
+        """Returns all agents not in terminal states."""
+        return [h for h in self._agents.values() if h.current_state != SubagentState.POISONED]
+
+
+

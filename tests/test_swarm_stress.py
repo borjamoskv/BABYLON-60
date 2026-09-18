@@ -13,8 +13,8 @@ import os
 root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.extend([
     root_dir,
-    os.path.join(root_dir, "01_ORCHESTRATOR"),
-    os.path.join(root_dir, "02_AGENTS_ARCHI"),
+    os.path.join(root_dir, "01_KISH_ENGINE"),
+    os.path.join(root_dir, "02_EDIN_SWARMS"),
 ])
 
 from typing import TypedDict
@@ -98,6 +98,10 @@ async def run_stress_test() -> None:
         logging.error("⚡ APLICANDO THERMODYNAMIC OVERRIDE: Abortando colapso de estado y purgando contexto.")
     else:
         logging.info("🌟 [BFT SUCCESS] Enjambre ejecutado con Cero Anergía. Estado colapsado con éxito.")
+
+
+def test_swarm_stress_execution() -> None:
+    asyncio.run(run_stress_test())
 
 
 if __name__ == "__main__":

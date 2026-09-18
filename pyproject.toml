@@ -103,24 +103,24 @@ cortex-char-attest = "babylon60.cli.attest_character_count:main"
 
 [tool.hatch.build.targets.wheel]
 packages = [
-    "01_ORCHESTRATOR/babylon60",
-    "02_AGENTS_ARCHI/agents_archi"
+    "01_KISH_ENGINE/babylon60",
+    "02_EDIN_SWARMS/agents_archi"
 ]
 exclude = [
-    "01_ORCHESTRATOR/babylon60/utils"
+    "01_KISH_ENGINE/babylon60/utils"
 ]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-x --tb=short"
 asyncio_mode = "auto"
-pythonpath = [".", "01_ORCHESTRATOR", "02_AGENTS_ARCHI"]
+pythonpath = [".", "01_KISH_ENGINE", "02_EDIN_SWARMS"]
 
 [tool.ruff]
 target-version = "py310"
 line-length = 120
 extend-exclude = [
-    "00_BABYLON_SHIELD/crates/strike-rs",
+    "00_ABZU_KERNEL/crates/strike-rs",
     "src",
     "L1_sink",
     "BABYLON-60-fixes",

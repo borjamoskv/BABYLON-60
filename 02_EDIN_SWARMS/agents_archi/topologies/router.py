@@ -7,7 +7,7 @@
 Swarm Topology Router & Typo-Tolerant Dispatcher (INV_C5_ROUTER_LEVENSHTEIN).
 
 Directs natural language user intents to optimal agent execution topologies:
-  - CENTURIA_100: Mass parallel verification
+  - SHARUR_3600: Mass parallel verification
   - SOCRATIC_GRILL: Deep design interview / assumption falsification
   - SOTA_MEDIA: High-exergy audiovisual & DSP processing
   - SPRINT_DEV: Rapid deterministic code mutations
@@ -18,8 +18,8 @@ from typing import Dict, List, Tuple
 
 
 class TopologyTarget(Enum):
-    CENTURIA_100 = "centuria_100"
-    LEGION_SWARM = "legion_swarm"
+    SHARUR_3600 = "sharur_3600"
+    EDIN_SWARM = "edin_swarm"
     SOCRATIC_GRILL = "socratic_grill"
     SOTA_MEDIA = "sota_media"
     AXIOMATIC_PROTOCOL = "axiomatic_protocol"
@@ -50,11 +50,11 @@ class SwarmRouter:
     """Fuzzy matching dispatcher for agentic swarm topologies."""
 
     TARGET_TRIGGERS: Dict[TopologyTarget, List[str]] = {
-        TopologyTarget.CENTURIA_100: [
-            "centuria", "enjambre 100", "legion-100", "auditoría paralela", "mass parallel", "100 workers"
+        TopologyTarget.SHARUR_3600: [
+            "sharur", "enjambre 100", "sharur-3600", "auditoría paralela", "mass parallel", "100 workers"
         ],
-        TopologyTarget.LEGION_SWARM: [
-            "legion", "legion audit", "enjambre", "enjmabres", "swarm", "swarms", "orquestar enjambre"
+        TopologyTarget.EDIN_SWARM: [
+            "edin", "edin audit", "enjambre", "enjmabres", "swarm", "swarms", "orquestar enjambre"
         ],
         TopologyTarget.SOCRATIC_GRILL: [
             "grill-me", "interrogatorio", "socratic", "falsar asunciones", "socrate"

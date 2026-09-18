@@ -87,19 +87,19 @@ def test_dynamic_lifecycle_transitions_and_deadlock() -> None:
 def test_swarm_router_typo_tolerance() -> None:
     """Validates Levenshtein fuzzy matching and typo tolerance for user triggers."""
     # Exact triggers
-    target, conf = SwarmRouter.route_query("por favor ejecutar legion audit")
-    assert target == TopologyTarget.LEGION_SWARM
+    target, conf = SwarmRouter.route_query("por favor ejecutar edin audit")
+    assert target == TopologyTarget.EDIN_SWARM
     assert conf == 1.0
 
-    target, _ = SwarmRouter.route_query("desplegar centuria")
-    assert target == TopologyTarget.CENTURIA_100
+    target, _ = SwarmRouter.route_query("desplegar sharur-3600")
+    assert target == TopologyTarget.SHARUR_3600
 
     target, _ = SwarmRouter.route_query("vamos a grill-me con este diseño")
     assert target == TopologyTarget.SOCRATIC_GRILL
 
-    # Typo tolerance: "enjmabres" -> LEGION_SWARM
+    # Typo tolerance: "enjmabres" -> EDIN_SWARM
     target, conf = SwarmRouter.route_query("lanza los enjmabres")
-    assert target == TopologyTarget.LEGION_SWARM
+    assert target == TopologyTarget.EDIN_SWARM
     assert conf >= 0.5
 
     # Typo tolerance: "axiomatizacion" -> AXIOMATIC_PROTOCOL

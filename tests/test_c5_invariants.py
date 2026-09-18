@@ -25,7 +25,15 @@ import pathlib  # noqa: E402
 import pytest  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-SRC_DIRS = ["01_ORCHESTRATOR/babylon60", "00_BABYLON_SHIELD/crates/strike-rs/src", "contracts", "scripts", "docs/proof"]
+SRC_DIRS = [
+    "01_KISH_ENGINE/babylon60",
+    "00_ABZU_KERNEL/crates/strike-rs/src",
+    "02_EDIN_SWARMS/agents_archi",
+    "crates",
+    "contracts",
+    "scripts",
+    "docs/proof",
+]
 PRUNE = {
     "target",
     "__pycache__",

@@ -148,7 +148,9 @@ async def test_master_ledger_queue_durabilidad_full(tmp_path: Path) -> None:
 
 def _load_cli(name: str, filename: str) -> types.ModuleType:
     root = Path(__file__).resolve().parent.parent
-    path = root / "01_ORCHESTRATOR" / "babylon60" / "cli" / filename
+    path = root / "01_KISH_ENGINE" / "babylon60" / "cli" / filename
+    if not path.exists():
+        path = root / "01_ORCHESTRATOR" / "babylon60" / "cli" / filename
     if not path.exists():
         path = root / "packages" / "babylon60" / "cli" / filename
     spec = importlib.util.spec_from_file_location(name, path)
