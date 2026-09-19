@@ -18,6 +18,6 @@ anyhow = "1.0"
 ark-ff = "0.4.2"
 ark-relations = { version = "0.4.0", default-features = false, features = ["std"] }
 ark-bls12-381 = "0.4.0"
-ark-groth16 = "0.4.0"
+ark-groth16 = "0.6.0"
 ark-snark = "0.4.0"
 rand = "0.8.5"
