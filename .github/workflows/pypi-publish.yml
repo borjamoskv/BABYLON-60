@@ -39,7 +39,7 @@ jobs:
         run: twine check dist/*
 
       - name: Generate Build Attestation (SLSA Provenance)
-        uses: actions/attest-build-provenance@v1
+        uses: actions/attest-build-provenance@v4
         with:
           subject-path: 'dist/*'
 
