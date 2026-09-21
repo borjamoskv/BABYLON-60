@@ -143,4 +143,27 @@ sleep 1
 
 cargo run --quiet --bin babylon60_kernel -- unbox || uv run python scripts/c5_setup/unboxing_moskv1.py
 
+
+# ------------------------------------------------------------------------------
+# FASE 6: INYECCIÓN MULTI-SUPERFICIE (CURSOR, WINDSURF, COPILOT, AIDER)
+# ------------------------------------------------------------------------------
+echo -e "${PURPLE}[6/6] Propagando el ADN MOSKV-1 a IDEs de terceros...${NC}"
+
+PAYLOAD_FILE="$TARGET_DIR/.agents/rules/MOSKV1_UNIVERSAL_PROMPT.md"
+
+if [ -f "$PAYLOAD_FILE" ]; then
+    # 1. Cursor y Windsurf
+    cp -f "$PAYLOAD_FILE" "$TARGET_DIR/.cursorrules" 2>/dev/null || true
+    cp -f "$PAYLOAD_FILE" "$TARGET_DIR/.windsurfrules" 2>/dev/null || true
+    
+    # 2. GitHub Copilot Workspace
+    mkdir -p "$TARGET_DIR/.github"
+    cp -f "$PAYLOAD_FILE" "$TARGET_DIR/.github/copilot-instructions.md" 2>/dev/null || true
+    
+    # 3. Aider CLI
+    echo "conventions: .agents/rules/MOSKV1_UNIVERSAL_PROMPT.md" > "$TARGET_DIR/.aider.conf.yml"
+    
+    echo -e "${GREEN}[✓] Inyección universal completada (Cursor, Windsurf, Copilot, Aider).${NC}"
+fi
+
 exit 0
