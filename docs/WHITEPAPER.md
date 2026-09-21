@@ -163,7 +163,7 @@ If `base60_scale` saturates, the result cannot be represented exactly. Rather th
 
 ### 4.1 Architecture
 
-The `CortexPersistLedger` (`01_ORCHESTRATOR/babylon60/bft/cortex_persist_ledger.py`) implements a hash-chained append-only log backed by SQLite/WAL:
+The `CortexPersistLedger` (`01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py`) implements a hash-chained append-only log backed by SQLite/WAL:
 
 ```python
 @dataclass
@@ -231,7 +231,7 @@ cargo test --workspace
 # Result: 84 tests passed
 
 # Type-safety, 0 errors:
-mypy 01_ORCHESTRATOR/babylon60 tests --strict --ignore-missing-imports
+mypy 01_KISH_ENGINE/babylon60 tests --strict --ignore-missing-imports
 # Result: 0 errors in 272 files
 ```
 

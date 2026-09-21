@@ -42,7 +42,7 @@ def print_banner() -> None:
 
 
 def check_touchid_gate(repo_root: Path) -> bool:
-    swift_gate = repo_root / "01_ORCHESTRATOR" / "babylon60" / "guards" / "c5_biometric_gate.swift"
+    swift_gate = repo_root / "01_KISH_ENGINE" / "babylon60" / "guards" / "c5_biometric_gate.swift"
     return swift_gate.exists() and platform.system() == "Darwin"
 
 

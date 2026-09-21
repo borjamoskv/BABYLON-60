@@ -19,7 +19,7 @@ raw_pre_hash = f"poc_execution|test_action|{time.time()}"
 causal_hash = hashlib.sha256(raw_pre_hash.encode("utf-8")).hexdigest()
 
 _root = Path(os.environ.get("BABYLON_HOME", Path(__file__).resolve().parent.parent.parent))
-script_path = _root / "01_ORCHESTRATOR" / "babylon60" / "guards" / "c5_biometric_gate.swift"
+script_path = _root / "01_KISH_ENGINE" / "babylon60" / "guards" / "c5_biometric_gate.swift"
 
 print("\n--- Ejecutando Falsación Biométrica ---")
 try:

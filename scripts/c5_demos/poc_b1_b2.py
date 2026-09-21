@@ -2,7 +2,7 @@
 
 import sys
 import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../01_ORCHESTRATOR")))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../01_KISH_ENGINE")))
 
 from babylon60.bft.cortex_persist_ledger import CortexPersistLedger, CortexEvent
 

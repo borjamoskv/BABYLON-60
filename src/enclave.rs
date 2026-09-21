@@ -18,7 +18,7 @@ impl AppleSecureEnclave {
     /// Crea una nueva instancia de `AppleSecureEnclave` resolviendo la ruta del gate biométrico.
     pub fn new() -> Self {
         let path = env::var("C5_BIOMETRIC_GATE_PATH")
-            .unwrap_or_else(|_| "01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift".into());
+            .unwrap_or_else(|_| "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift".into());
         Self { gate_path: path }
     }
 }

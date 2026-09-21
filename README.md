@@ -44,7 +44,7 @@ All stochastic multi-agent swarms and external LLMs are commoditizable. The high
 
 The BABYLON-60 core has undergone a major topological phase transition (High Exergy) in the last 200 hours:
 
-- **Sovereign Triad Consolidation**: The monorepo has physically partitioned into `00_BABYLON_SHIELD` (Cryptography/Defense), `01_CORTEX_ENGINE` (Inference/BFT), and `02_AGENTS_ARCHI` (Interface/Swarms), tearing down legacy SPA/Cloudflare friction.
+- **Sovereign Triad Consolidation**: The monorepo has physically partitioned into `00_ABZU_KERNEL` (Immutability/C-ABI/Ring-0), `01_KISH_ENGINE` (Exocortex/LSP/Ring-1), and `02_EDIN_SWARMS` (Stochastic Swarms/Ring-2), tearing down legacy SPA/Cloudflare friction.
 - **Zero-Copy IPC & Lock-Free Bus**: Migration of the asynchronous core to a shared-memory *Zero-Copy* bus (`iceoryx2`), coupling Python Swarm Workers to the C-ABI bus via PyO3 for sub-millisecond exergy packet flow. BFT consensus was collapsed into strict lock-free concurrency (`DashMap`).
 - **Epistemic Purge & GTM Honesty**: Strict reconciliation of marketing claims with the physical territory. TPM 2.0 hardware enclave attestation and Lean 4 "formal verification" claims were downgraded to "roadmap" and "axiomatized" respectively, transitioning to a pure software WORM and Ed25519 `Fail-Stop` cryptography.
 - **Transduction & Paracortex**: Bootstrapping of `Legión-1000` for Remotion SOTA 1080p60 audiovisual transduction and the deployment of `cortex-lsp` (LSP Paracortex).
@@ -161,21 +161,21 @@ cargo run --bin babylon60_kernel -- unbox
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│               02_AGENTS_ARCHI (Anillo-2)                    │
-│                 (agents.archi — Swarms)                     │
-│  • Músculo estocástico: Modelos de frontera (OpenRouter/Kimi)│
-│  • Concurrencia acotada P × S (Centuria 100x / Legión)      │
-│  • Deontología estricta: Guillotina de Hume (AOF v2.0)      │
+│               02_EDIN_SWARMS (Ring-2)                       │
+│                 (edin.swarms — Stochastic Matrix)            │
+│  • Stochastic muscle: Frontier models (OpenRouter/Kimi)     │
+│  • Bounded concurrency P × S (SHARUR-3600)                  │
+│  • Strict deontology: Hume's Guillotine (AOF v2.0)          │
 └──────────────┬───────────────────────────────▲──────────────┘
-               │ (Sobres SCITT Ed25519)        │ (Diagnósticos LSP)
+               │ (SCITT Ed25519 Envelopes)     │ (LSP Diagnostics)
                ▼                               │
 ┌───────────────────────────────┐ ┌────────────┴──────────────┐
-│       00_BABYLON_SHIELD       │ │     01_CORTEX_ENGINE       │
-│    (babylon60.com — Anillo-0) │ │(cortexpersist.* — Anillo-1)│
-│  • SHARED MANIFEST (64 Bytes) │ │  • Servidor LSP Paracortex │
-│  • Seqlock SPMC Zero-Anergía  │ │  • Telemetría de Burnout   │
-│  • Apoptosis (0xDEAD_6060)    │ │  • Transductores Xenarmon. │
-│  • Causal Gate (TouchID HW)   │ │  • Interfaz Zero-JS / TUI  │
+│       00_ABZU_KERNEL          │ │     01_KISH_ENGINE         │
+│    (abzu.kernel — Ring-0)     │ │  (kish.engine — Ring-1)    │
+│  • SHARED MANIFEST (64 Bytes) │ │  • Paracortex LSP Server   │
+│  • Seqlock SPMC Zero-Anergy   │ │  • Burnout Telemetry       │
+│  • Apoptosis (0xDEAD_6060)    │ │  • Xenarmonics Transducers │
+│  • Causal Gate (TouchID HW)   │ │  • Zero-JS / TUI Interface │
 └───────────────────────────────┘ └────────────────────────────┘
 ```
 
@@ -188,17 +188,34 @@ cargo run --bin babylon60_kernel -- unbox
 - [uv](https://docs.astral.sh/uv/) (recommended) or pip
 - Rust ≥ 1.80 (for the kernel crate)
 
-### Setup
+### 1-Click Sovereign Ignition (Recommended)
+
+Double-click the native installer for your platform:
+
+| Platform | Installer |
+| :--- | :--- |
+| **macOS / Linux** | `Instalar-Babylon60.command` |
+| **Windows** | `Instalar-Babylon60.bat` |
+
+The installer automatically: verifies `cargo` and `uv` → compiles the full Rust workspace → syncs Python dependencies → hands off control to MOSKV-1.
+
+### Manual Setup
 
 ```bash
 git clone https://github.com/borjamoskv/BABYLON-60.git
 cd BABYLON-60
 
-# Run the master unboxing sequence
-python3 scripts/c5_setup/unboxing_moskv1.py
+# Build Ring-0 (Rust)
+cargo build --workspace
 
-# Or launch the native kernel directly
+# Sync Ring-1 (Python)
+uv sync
+
+# Launch the Sovereign Kernel
 cargo run --bin babylon60_kernel -- unbox
+
+# Or run the Python ignition sequence
+uv run python scripts/c5_setup/unboxing_moskv1.py
 ```
 
 ---
@@ -304,8 +321,8 @@ attestation = ledger.get_state_attestation()
 make check
 
 # Or individually:
-ruff check 01_ORCHESTRATOR/babylon60 tests
-mypy 01_ORCHESTRATOR/babylon60 tests --strict --ignore-missing-imports
+ruff check 01_KISH_ENGINE/babylon60 02_EDIN_SWARMS/agents_archi tests
+mypy 01_KISH_ENGINE/babylon60 02_EDIN_SWARMS/agents_archi tests --strict --ignore-missing-imports
 ```
 
 ---
@@ -331,24 +348,15 @@ make all
 ```
 BABYLON-60/
 ├── src/                          # Rust root crate (SharedManifest, seqlock, halt)
-├── 00_BABYLON_SHIELD/            # Defense and Verification 
-│   ├── crates/                   #   #![no_std] execution engines, ZK circuits
+├── 00_ABZU_KERNEL/               # Ring-0: Immutability in silicon, C-ABI, formal proof
+│   ├── crates/                   #   #![no_std] execution engines, ZK circuits, kernel
 │   └── formal_verification/      #   Proof IR → Lean 4 emitter
-├── 01_CORTEX_ENGINE/             # Cognitive Memory Substrate
-│   ├── crates/                   #   Runtime executor, native bridge
-│   └── transducers/              #   Data processing transducers
-├── 01_ORCHESTRATOR/              # Python Core
-│   ├── babylon60/                #   Core Python package
-│   │   ├── bft/                  #     Hash-chained ledger (CortexPersistLedger)
-│   │   ├── crypto/               #     Hash registry, AES, Ed25519, RFC 3161
-│   │   ├── database/             #     Centralized SQLite/WAL connector
-│   │   ├── guards/               #     URL/path/license validation
-│   │   ├── attestation/          #     Merkle DAG anchoring
-│   │   └── compliance_exporter/  #     EU AI Act certificate generator
-│   ├── cortex/                   #   Cortex cognitive memory python substrate
-│   └── services/                 #   Core services
-├── 02_AGENTS_ARCHI/              # Python Agents
-│   └── agents_archi/             #   Agents configuration and tools
+├── 01_KISH_ENGINE/               # Ring-1: Exocortex, cognitive memory, services
+│   ├── babylon60/                #   Core Python package (bft, crypto, database, guards)
+│   ├── cortex/                   #   Reflexive compute substrate (Rust crates + transducers)
+│   └── services/                 #   Core services and daemons
+├── 02_EDIN_SWARMS/               # Ring-2: Stochastic swarms and massive exploration
+│   └── agents_archi/             #   Swarm orchestration, clients (OpenRouter/Kimi)
 ├── proof/                        # Lean 4 axiomatic sketch (lake build)
 ├── scripts/                      # CLI tools, demos, verifiers
 ├── tests/                        # Python + Rust test suites
@@ -368,9 +376,9 @@ BABYLON-60/
 
 1. **Tamper-evident, not tamper-proof.** The hash chain detects modifications but cannot prevent an attacker with direct filesystem access from rewriting the database.
 2. **No live distributed consensus.** The BFT module name is aspirational; the current architecture uses single-writer local persistence with external Git witnesses (Escalón 3). Live BFT (Escalón 4) is a future target.
-3. **`except Exception` technical debt.** Several modules in `01_ORCHESTRATOR/babylon60/` and `scripts/` use broad exception handlers. These are tracked and being narrowed incrementally.
+3. **`except Exception` technical debt.** Several modules in `01_KISH_ENGINE/babylon60/` and `scripts/` use broad exception handlers. These are tracked and being narrowed incrementally.
 4. **Direct `sqlite3.connect` in scripts.** Some scripts bypass the centralized `database/core.py` connector. Migration is in progress.
-5. **`BABYLON_HOME` required.** The system will not start without this environment variable — `Path.home()` fallbacks have been removed by policy.
+5. **`BABYLON_HOME` optional.** The system resolves data paths relative to the repository root (`.cortex/`) or falls back to `~/.babylon60`. Setting `BABYLON_HOME` explicitly is supported but not required (Clone & Run invariant).
 6. **Two ledger implementations coexist.** The synchronous `CortexPersistLedger` (README quick-start) and the async `BFTLedgerActor` (used by the resilience tests) share semantics but not code. Consolidation is tracked as follow-up work.
 
 ---

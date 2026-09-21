@@ -20,7 +20,7 @@ Materializar una arquitectura de compilador de sistemas operativos *bare-metal* 
 
 ## 🧠 Matriz de Gotchas
 - **El Sandbox de TouchID:** Si el script `/scripts/c5_deploy_pipeline.sh` se invoca desde el interior de VS Code / Cursor o subagentes, la API de `LocalAuthentication` no arroja prompt visual y devuelve exit code `1` silenciosamente. Para pruebas reales, lanzar siempre desde `Terminal.app` o `iTerm2`.
-- **Ruta de Swift:** La invocación del Gate biométrico exige el comando `swift` seguido de la ruta absoluta `01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift` (no es un binario global).
+- **Ruta de Swift:** La invocación del Gate biométrico exige el comando `swift` seguido de la ruta absoluta `01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift` (no es un binario global).
 - **Invariante PoC Estricto:** Prohibido modificar el código de orquestación BFT sin aislarlo en la carpeta `scripts/c5_demos/` primero, como se hizo en `poc_biometric_gate.py`.
 
 ## 🚀 Grafo de Acción (Próxima Sesión)

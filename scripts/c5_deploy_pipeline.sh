@@ -23,8 +23,8 @@ HASH_SIG=$(shasum -a 256 scripts/c5_demos/falsacion_baremetal.rs | awk '{print $
 echo "       -> Sello L5 Generado: $HASH_SIG"
 
 echo "[AX-4] Límite Biométrico: Solicitando autorización somática (TouchID)..."
-if [ -f "$REPO_ROOT/01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift" ]; then
-    if ! swift "$REPO_ROOT/01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift" --causal-hash "$HASH_SIG" --message "Despliegue C5-REAL" 2>/dev/null; then
+if [ -f "$REPO_ROOT/01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift" ]; then
+    if ! swift "$REPO_ROOT/01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift" --causal-hash "$HASH_SIG" --message "Despliegue C5-REAL" 2>/dev/null; then
         echo "FATAL: CausalAttestationError. Falsación somática fallida o Sandbox activo."
         exit 1
     fi

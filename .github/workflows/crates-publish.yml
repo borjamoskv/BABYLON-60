@@ -33,15 +33,15 @@ jobs:
         run: |
           set -e
           echo "==> Publishing independent base crates..."
-          cargo publish --p babylon60-proof-ir --allow-dirty || true
-          cargo publish --p babylon60-kernel --allow-dirty || true
-          cargo publish --p babylon60-runtime --allow-dirty || true
-          cargo publish --p nul-zk --allow-dirty || true
+          cargo publish -p babylon60-proof-ir --allow-dirty || true
+          cargo publish -p babylon60-kernel --allow-dirty || true
+          cargo publish -p babylon60-runtime --allow-dirty || true
+          cargo publish -p nul-zk --allow-dirty || true
           
           echo "==> Waiting for index propagation..."
           sleep 15
 
           echo "==> Publishing dependent crates..."
-          cargo publish --p babylon60-compiler --allow-dirty || true
-          cargo publish --p babylon60-fuzz --allow-dirty || true
-          cargo publish --p strike_rs --allow-dirty || true
+          cargo publish -p babylon60-compiler --allow-dirty || true
+          cargo publish -p babylon60-fuzz --allow-dirty || true
+          cargo publish -p strike_rs --allow-dirty || true

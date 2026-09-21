@@ -18,4 +18,4 @@ rand = "0.8.5"
 rand_chacha = "0.9.0"
 
 [build-dependencies]
-nul-zk = { path = "../../../00_BABYLON_SHIELD/crates/nul-zk" }
+nul-zk = { path = "../../../00_ABZU_KERNEL/crates/nul-zk" }

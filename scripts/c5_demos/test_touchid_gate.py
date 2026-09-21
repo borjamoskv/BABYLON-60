@@ -4,7 +4,7 @@ import uuid
 from pathlib import Path
 
 # Add the parent directory to the python path so we can import babylon60
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "01_ORCHESTRATOR"))
+sys.path.insert(0, str(Path(__file__).parent.parent.parent / "01_KISH_ENGINE"))
 
 from babylon60.verification.verification_gate import VerificationGate
 

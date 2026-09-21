@@ -37,7 +37,7 @@ def run_existence_scan(target_dir: str) -> dict:
 
     def exists_locally(mod_name: str) -> bool:
         parts = mod_name.split(".")
-        candidate_roots = [repo, repo / "02_CORTEX_ENGINE"]
+        candidate_roots = [repo, repo / "01_KISH_ENGINE"]
         for r in candidate_roots:
             if not r.exists():
                 continue

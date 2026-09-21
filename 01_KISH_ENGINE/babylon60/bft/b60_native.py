@@ -124,7 +124,7 @@ def get_b60_dylib() -> Optional[ctypes.CDLL]:
                 try:
                     import sys
                     from pathlib import Path
-                    sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "01_ORCHESTRATOR"))
+                    sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "01_KISH_ENGINE"))
                     from babylon60.kernel.ns_z3_firewall import NavierStokesZ3Firewall
                     
                     trace_bytes = bytes(trace_ptr[:trace_len])

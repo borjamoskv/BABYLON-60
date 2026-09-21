@@ -29,7 +29,7 @@ from typing import Any, Dict, List
 
 # ── PYTHONPATH ────────────────────────────────────────────────────────────
 _ROOT = Path(__file__).resolve().parent.parent.parent
-sys.path.insert(0, str(_ROOT / "01_ORCHESTRATOR"))
+sys.path.insert(0, str(_ROOT / "01_KISH_ENGINE"))
 
 from babylon60.attestation import (  # noqa: E402
     ConformalMerkleTree,

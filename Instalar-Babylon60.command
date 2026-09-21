@@ -13,39 +13,37 @@ echo "      Hypervisor: MOSKV-1 | Ring-0 C-ABI Runtime"
 echo "============================================================"
 echo ""
 
-# Función de auto-recuperación determinista
-fallback_to_standalone() {
-    echo "[FALLBACK SOBERANO]: Iniciando en Modo Standalone de Alta Fidelidad..."
-    if command -v open >/dev/null 2>&1; then
-        open "$DIR/ui/index.html"
-    elif command -v xdg-open >/dev/null 2>&1; then
-        xdg-open "$DIR/ui/index.html"
-    fi
-    exit 0
-}
+echo "[1/4] Verificando dependencias del sistema (Rust y uv)..."
 
-# Verificación de herramientas del sistema
-echo "[1/3] Verificando sustrato de ejecución..."
-
-# Si no hay Node.js o falla, conmutar a Standalone Zero-Errors
-if ! command -v node >/dev/null 2>&1; then
-    echo "[!] Node.js no detectado en el PATH global."
-    echo "[+] Conmutando proactivamente a Modo Navegador Standalone (0 errores garantizado)..."
-    fallback_to_standalone
-fi
-
-echo "[✓] Node.js detectado: $(node -v)"
-
-# Comprobación de UI local
-if [ -f "$DIR/ui/index.html" ]; then
-    echo "[2/3] Interfaz Soberana (Ibex Edition) localizada en ui/index.html"
-    echo "[3/3] Desplegando banco de trabajo..."
-    open "$DIR/ui/index.html"
-    echo ""
-    echo "============================================================"
-    echo "  [OK] BABYLON IDE ha arrancado con éxito en Ring-0."
-    echo "============================================================"
-else
-    echo "[!] Error crítico: ui/index.html no encontrado."
+if ! command -v cargo >/dev/null 2>&1; then
+    echo "[!] Error: 'cargo' (Rust) no detectado en el PATH."
+    echo "[+] Instala Rust con: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
     exit 1
 fi
+
+if ! command -v uv >/dev/null 2>&1; then
+    echo "[!] Error: 'uv' (Python package manager) no detectado en el PATH."
+    echo "[+] Instala uv con: curl -LsSf https://astral.sh/uv/install.sh | sh"
+    exit 1
+fi
+
+echo "[2/4] Aprovisionando Ring-0 (Silicio / Rust)..."
+cargo build --workspace
+if [ $? -ne 0 ]; then
+    echo "[!] Error en la compilación del Ring-0. Abortando."
+    exit 1
+fi
+
+echo "[3/4] Aprovisionando Ring-1 (Exocórtex / Python)..."
+uv sync
+if [ $? -ne 0 ]; then
+    echo "[!] Error en la sincronización de dependencias Python. Abortando."
+    exit 1
+fi
+
+echo "[4/4] Transfiriendo control a MOSKV-1..."
+echo "============================================================"
+echo ""
+
+# El kernel C-ABI toma el control
+cargo run --bin babylon60_kernel -- unbox || uv run python scripts/c5_setup/unboxing_moskv1.py

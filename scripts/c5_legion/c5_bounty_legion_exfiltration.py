@@ -28,7 +28,7 @@ from typing import Any, Dict, List, Optional
 
 # ── PYTHONPATH ────────────────────────────────────────────────────────────
 _ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-sys.path.insert(0, os.path.join(_ROOT, "01_ORCHESTRATOR"))
+sys.path.insert(0, os.path.join(_ROOT, "01_KISH_ENGINE"))
 
 try:
     from babylon60.kernel.kimi_client import KimiClient

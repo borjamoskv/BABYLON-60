@@ -34,7 +34,7 @@ from typing import Any, Dict, List, Sequence
 
 # ── PYTHONPATH ────────────────────────────────────────────────────────────
 _ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-sys.path.insert(0, os.path.join(_ROOT, "01_ORCHESTRATOR"))
+sys.path.insert(0, os.path.join(_ROOT, "01_KISH_ENGINE"))
 
 from babylon60.bft.bayesian_swarm import BayesianSwarm  # noqa: E402
 from babylon60.bft.bounty_claim_attester import BountyClaimAttester, BountyClaimReceipt  # noqa: E402

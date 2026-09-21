@@ -29,7 +29,7 @@ from google.genai import types
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [SWARM-1000] %(levelname)s: %(message)s')
 
 from pathlib import Path
-REMOTION_DIR = str(Path.home() / "BABYLON-60" / "01_CORTEX_ENGINE" / "transducers" / "video_remotion")
+REMOTION_DIR = str(Path.home() / "BABYLON-60" / "01_KISH_ENGINE" / "transducers" / "video_remotion")
 OUTPUT_DIR = "/tmp/c5_render"
 
 # ==============================================================================

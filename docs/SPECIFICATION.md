@@ -39,7 +39,7 @@ graph TD
 
 > [!NOTE]
 > El diagrama anterior corresponde al pipeline objetivo (roadmap v5.0). En la v4.0 implementada,
-> la persistencia Merkle-causal reside en `01_ORCHESTRATOR/babylon60/bft/` (Python, SQLite WAL)
+> la persistencia Merkle-causal reside en `01_KISH_ENGINE/babylon60/bft/` (Python, SQLite WAL)
 > y el slot IPC fail-stop en `src/` (Rust); los directorios `compiler/` y `kernel/` como tales
 > aún no existen en el árbol.
 
@@ -148,7 +148,7 @@ BABYLON-60 Monorepo Topology (v5.0 TARGET — partially implemented)
    │   └── forensic_quarantine/        # [ROADMAP] Immutable WORM Forensic Quarantine (State Seal)
 
 2. VERIFIABILITY & SECURITY LAYER
-   ├── attestation/                    # Merkle Root Anchoring & OIDC Identity Cryptography [parcial: 01_ORCHESTRATOR/babylon60/attestation]
+   ├── attestation/                    # Merkle Root Anchoring & OIDC Identity Cryptography [parcial: 01_KISH_ENGINE/babylon60/attestation]
    ├── compiler/                       # [ROADMAP] Fail-Closed Compiler (AST Parser & IR Generator)
    ├── proof_ir/                       # [ROADMAP] Formal Verification IR Schema
    └── fuzz/                           # Proptest & libFuzzer Differential Security Harnesses [parcial: tests/fuzz]
@@ -161,7 +161,7 @@ BABYLON-60 Monorepo Topology (v5.0 TARGET — partially implemented)
    └── ultrathink/                     # Dynamic Resource & Workload Optimizer
 
 4. PERSISTENCE & ML LAYER (Python)
-   └── 01_ORCHESTRATOR/babylon60/      # [IMPLEMENTADO] Core Python SDK (`cortex-persist`)
+   └── 01_KISH_ENGINE/babylon60/       # [IMPLEMENTADO] Core Python SDK (`cortex-persist`)
        ├── bft/                        #   Hash-chained ledger (CortexPersistLedger, BFTLedgerActor)
        └── compliance_exporter/        #   EU AI Act certificates (fail-closed + Ed25519)
 

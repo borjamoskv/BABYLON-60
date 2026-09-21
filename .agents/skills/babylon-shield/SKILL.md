@@ -23,7 +23,7 @@ Todo cambio permanente en el repositorio debe ser atestado bajo el formato de *P
 - Si se modifica la estructura del *workspace* de Rust, el agente DEBE ejecutar `cargo clean` antes de reintentar validaciones (Destrucción de punteros muertos).
 
 ## 3. Cero-Trust Injections (Test Empírico Obligatorio)
-Nunca asumas que "debería funcionar" en el código base principal (`00_KERNEL` / `01_ORCHESTRATOR`).
+Nunca asumas que "debería funcionar" en el código base principal (`00_KERNEL` / `01_KISH_ENGINE`).
 - **Regla:** Toda mutación estructural asíncrona o de concurrencia debe probarse en un PoC (Proof of Concept) aislado (ej. un script en `scripts/c5_demos/`) y someterse a un *Stress Test* antes de integrarse.
 - **Verificación Empírica por Defecto:** Si el usuario cuestiona la funcionalidad de un módulo o pide pruebas (ej. "prueba que funcione", "verifica esto"), el agente tiene PROHIBIDO responder con teoría o simulación. **DEBE** ejecutar inmediatamente la suite de pruebas real correspondiente (`uv run pytest` para el backend Python, `cargo test` para el core de Rust) y devolver el código de salida y la salida del terminal como única prueba válida.
 

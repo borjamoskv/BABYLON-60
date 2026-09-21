@@ -30,7 +30,7 @@ repos:
     hooks:
       - id: canary-guard
         name: canary tokens present in tree
-        entry: python3 scripts/canary_check.py
+        entry: python3 scripts/c5_quality_gates/canary_check.py
         language: system
         pass_filenames: false
 

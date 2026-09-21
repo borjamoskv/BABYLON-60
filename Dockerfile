@@ -29,10 +29,9 @@ ENV PATH="/root/.local/bin:/opt/cargo/bin:$PATH"
 COPY pyproject.toml uv.lock Cargo.toml Cargo.lock* ./
 COPY crates ./crates
 COPY src ./src
-COPY 00_BABYLON_SHIELD ./00_BABYLON_SHIELD
-COPY 01_CORTEX_ENGINE ./01_CORTEX_ENGINE
-COPY 01_ORCHESTRATOR ./01_ORCHESTRATOR
-COPY 02_AGENTS_ARCHI ./02_AGENTS_ARCHI
+COPY 00_ABZU_KERNEL ./00_ABZU_KERNEL
+COPY 01_KISH_ENGINE ./01_KISH_ENGINE
+COPY 02_EDIN_SWARMS ./02_EDIN_SWARMS
 COPY README.md LICENSE ./
 
 RUN uv venv \
@@ -58,7 +57,7 @@ COPY --from=builder /root/.local /home/cortex/.local
 
 ENV PATH="/home/cortex/.local/bin:/app/.venv/bin:$PATH" \
     PYTHONUNBUFFERED=1 \
-    PYTHONPATH="/app/packages:/app:."
+    PYTHONPATH="/app/01_KISH_ENGINE:/app/02_EDIN_SWARMS:/app:."
 
 USER cortex
 

@@ -1,6 +1,6 @@
 # 🧠 Integración de cortex-lsp: El LSP Paracortex Soberano
 
-`cortex-lsp` es un servidor Language Server Protocol (LSP 3.17) nativo en Rust ubicado en `01_CORTEX_ENGINE/crates/cortex-lsp`.  
+`cortex-lsp` es un servidor Language Server Protocol (LSP 3.17) nativo en Rust ubicado en `01_KISH_ENGINE/crates/cortex-lsp`.  
 Permite transformar cualquier editor tonto (VS Code, Zed, Neovim, Helix) en un **Babylon IDE Soberano** con diagnósticos C5-REAL en tiempo real y atestación biométrica por hardware (TouchID).
 
 ---

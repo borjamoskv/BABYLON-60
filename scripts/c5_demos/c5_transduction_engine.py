@@ -16,7 +16,7 @@ from google.genai import types
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [AX-SOTA] %(levelname)s: %(message)s')
 
 from pathlib import Path
-REMOTION_DIR = str(Path(__file__).resolve().parent.parent / "01_CORTEX_ENGINE" / "transducers" / "video_remotion")
+REMOTION_DIR = str(Path(__file__).resolve().parent.parent / "01_KISH_ENGINE" / "transducers" / "video_remotion")
 
 # ==============================================================================
 # 1. TOPOLOGÍA PYDANTIC (Protocolo LAMP & Falsación Popperiana)

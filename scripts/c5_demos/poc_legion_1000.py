@@ -25,7 +25,7 @@ import time
 
 # ── Resolver PYTHONPATH ────────────────────────────────────────────────────
 _ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-sys.path.insert(0, os.path.join(_ROOT, "01_ORCHESTRATOR"))
+sys.path.insert(0, os.path.join(_ROOT, "01_KISH_ENGINE"))
 
 from babylon60.bft.bounty_claim_attester import BountyClaimAttester
 from babylon60.bft.bounty_cold_ledger import BountyColdLedger

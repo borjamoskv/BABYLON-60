@@ -29,7 +29,7 @@ impl Z3FirewallClient {
 
         // 2. Slow Path (Subproceso) para Tests Nativos Puros
         let status = Command::new("python3")
-            .arg("01_ORCHESTRATOR/babylon60/kernel/ns_z3_firewall.py")
+            .arg("01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py")
             .arg("--verify-causality")
             .arg(path_ref.as_os_str())
             .status();

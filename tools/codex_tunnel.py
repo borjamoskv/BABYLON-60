@@ -32,7 +32,7 @@ from pathlib import Path
 # Ensure BABYLON-60 root and orchestrator are in sys.path
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
-ORCHESTRATOR_DIR = REPO_ROOT / "01_ORCHESTRATOR"
+ORCHESTRATOR_DIR = REPO_ROOT / "01_KISH_ENGINE"
 
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
@@ -271,7 +271,7 @@ def cmd_daemon(args: argparse.Namespace) -> None:
     print(f"[*] Bus Path: {bus.db_path}")
     print("-" * 65)
     
-    biometric_gate_path = REPO_ROOT / "01_ORCHESTRATOR" / "babylon60" / "guards" / "c5_biometric_gate.swift"
+    biometric_gate_path = REPO_ROOT / "01_KISH_ENGINE" / "babylon60" / "guards" / "c5_biometric_gate.swift"
     
     try:
         while True:

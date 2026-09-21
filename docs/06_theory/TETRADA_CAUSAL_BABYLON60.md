@@ -69,7 +69,7 @@ El sistema computacional sexagesimal implementado en BABYLON-60 optimiza la dens
   Las divisiones por 3, 4 y 6 en base decimal generan expansiones periódicas infinitas (0.333..., 0.1666...), inyectando ruido entrópico de truncamiento en aritmética IEEE 754 de coma flotante. En aritmética sexagesimal F60, estas operaciones son enteros finitos directos (20/60, 15/60, 10/60), preservando la clausura exacta del cálculo con cero dispersión.
 
 ### 3.3. Telemetría de Burnout y Energía Libre (FEP)
-En Ring-1 (`01_CORTEX_ENGINE`), el sistema monitoriza al operador humano:
+En Ring-1 (`01_KISH_ENGINE`), el sistema monitoriza al operador humano:
 * **Fórmula de Energía Libre del Operador:**
   F_wetware = D_KL( q(atención) || p(estado_sistema) ) - ln p(estímulos)
 * **Protección Homeostática:**

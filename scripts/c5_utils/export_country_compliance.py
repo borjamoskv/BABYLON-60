@@ -19,7 +19,7 @@ import sys
 import os
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
-sys.path.insert(0, os.path.join(PROJECT_ROOT, "01_ORCHESTRATOR"))
+sys.path.insert(0, os.path.join(PROJECT_ROOT, "01_KISH_ENGINE"))
 sys.path.insert(0, PROJECT_ROOT)
 
 from babylon60.compliance_exporter import EUAIActComplianceExporter

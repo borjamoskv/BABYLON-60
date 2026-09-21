@@ -69,7 +69,7 @@ def main() -> None:
     args = parser.parse_args()
 
     python_bin = sys.executable
-    py_env = dict(os.environ, PYTHONPATH=f"{ROOT_DIR}/01_ORCHESTRATOR:{ROOT_DIR}/packages:{ROOT_DIR}/experiments:.:{os.environ.get('PYTHONPATH', '')}")
+    py_env = dict(os.environ, PYTHONPATH=f"{ROOT_DIR}/01_KISH_ENGINE:{ROOT_DIR}/packages:{ROOT_DIR}/experiments:.:{os.environ.get('PYTHONPATH', '')}")
     if "BABYLON_HOME" not in py_env:
         py_env["BABYLON_HOME"] = str(ROOT_DIR)
     if "BABYLON60_LICENSE_SALT" not in py_env:

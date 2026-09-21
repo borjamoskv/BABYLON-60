@@ -4,6 +4,6 @@ if babylonHome is "" then
 end if
 tell application "Terminal"
     activate
-    do script "python3 " & quoted form of (babylonHome & "/01_ORCHESTRATOR/babylon60/utils/watchdog_tui.py")
+    do script "python3 " & quoted form of (babylonHome & "/01_KISH_ENGINE/babylon60/utils/watchdog_tui.py")
     set the bounds of the first window to {0, 0, 1000, 800}
 end tell

@@ -3,7 +3,7 @@
 import sys
 import os
 import json
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../01_ORCHESTRATOR")))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../01_KISH_ENGINE")))
 
 from babylon60.compliance_exporter.eu_ai_act import EUAIActComplianceExporter
 from babylon60.bft.cortex_persist_ledger import CortexPersistLedger, CortexEvent

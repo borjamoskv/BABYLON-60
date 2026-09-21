@@ -40,7 +40,7 @@ import numpy as np
 
 # Insert repo root to import babylon60
 REPO_ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(REPO_ROOT / "01_ORCHESTRATOR"))
+sys.path.insert(0, str(REPO_ROOT / "01_KISH_ENGINE"))
 
 from babylon60.genomics.vsa_oncology import OncologyOntologyVSA, HyperVector, DIMENSION
 

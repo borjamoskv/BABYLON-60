@@ -1,5 +1,5 @@
 "engine: rust":
-  - "strike_rs/**/*"
+  - "00_ABZU_KERNEL/crates/strike-rs/**/*"
 
 "engine: python":
   - "**/*.py"

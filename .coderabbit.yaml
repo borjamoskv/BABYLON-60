@@ -23,4 +23,5 @@ reviews:
     - "!**/*.pt"
     - "!**/*.safetensors"
     - "!**/*.onnx"
-    - "!cortex/training/baby-long/data/**"
+    - "!01_KISH_ENGINE/cortex/**"
+    - "!uv.lock"

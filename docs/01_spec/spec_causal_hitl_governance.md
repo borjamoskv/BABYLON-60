@@ -10,7 +10,7 @@
 **Version:** 1.1.0  
 **Status:** Canonical Standard  
 **Governance Invariants:** `RULE[human_in_the_loop_causal_governance]`, `RULE[c5_real_invariants]`  
-**Reference Implementation:** `01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift` and `bounty_cli.py`
+**Reference Implementation:** `01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift` and `bounty_cli.py`
 
 ---
 
@@ -83,11 +83,11 @@ The operational worker architecture bridges across diverse research and engineer
 
 ## 6. Reference Implementation & Usage
 
-The SOTA implementation is available in `01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift`.
+The SOTA implementation is available in `01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift`.
 
 ### Verification Command:
 ```bash
-swift 01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift
+swift 01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift
 ```
 
 ### Asynchronous Execution & Resume Example:

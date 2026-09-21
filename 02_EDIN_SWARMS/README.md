@@ -1,6 +1,6 @@
-# 🛡️ 02_AGENTS_ARCHI — Swarm Topologies & Agentic Architecture
+# 🌿 02_EDIN_SWARMS — Swarm Topologies & Agentic Architecture
 
-> **DOMINIO SOBERANO: `agents.archi`**  
+> **DOMINIO SOBERANO: `edin.swarms`**  
 > Invariante: **INV_C5_18 / Zero-Worktree Swarm Scaling / Manta de Markov**  
 > Estatus Epistémico: **Alta Exergía (C5-REAL)**
 
@@ -8,12 +8,12 @@
 
 ## 1. Misión y Límite Epistémico (Markov Blanket)
 
-`02_AGENTS_ARCHI` constituye la tercera cámara del monorepositorio **BABYLON-60**, dedicada exclusivamente a la orquestación distribuida de enjambres multi-agente, topologías de verificación masiva (Centuria 100x / Legión) y protocolos de transducción agéntica.
+`02_EDIN_SWARMS` constituye la tercera cámara del monorepositorio **BABYLON-60**, dedicada exclusivamente a la orquestación distribuida de enjambres multi-agente, topologías de verificación masiva (Centuria 100x / Legión) y protocolos de transducción agéntica.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    02_AGENTS_ARCHI                          │
-│               (agents.archi — Swarms)                       │
+│                    02_EDIN_SWARMS                           │
+│               (edin.swarms — Swarms)                        │
 │  • Swarm Orchestrators (Kimi K3 / OpenRouter / vLLM / MLX)  │
 │  • Dynamic Subagent Lifecycle & Deadlock Mitigation         │
 │  • Topologies (Centuria 100x, Swarm Router, PxS Tuning)     │
@@ -22,7 +22,7 @@
                │ (Firma Ed25519)               │ (Diagnósticos)
                ▼                               │
 ┌───────────────────────────────┐ ┌────────────┴──────────────┐
-│       00_BABYLON_SHIELD       │ │     01_CORTEX_ENGINE       │
+│        00_ABZU_KERNEL         │ │      01_KISH_ENGINE        │
 │     (babylon60.com — Ring-0)  │ │ (cortexpersist.* — Cortex) │
 │  • BFT Consensus Ledger       │ │  • LSP Paracortex Server   │
 │  • C-ABI SharedManifest 64B   │ │  • Verifiable Inference    │
@@ -31,7 +31,7 @@
 ```
 
 ### Invariantes Estructurales de Aislamiento
-1. **Aislamiento de Ring-0:** Los agentes estocásticos (LLMs) **NUNCA** tienen acceso directo de mutación sobre las estructuras de memoria del kernel (`00_BABYLON_SHIELD`).
+1. **Aislamiento de Ring-0:** Los agentes estocásticos (LLMs) **NUNCA** tienen acceso directo de mutación sobre las estructuras de memoria del kernel (`00_ABZU_KERNEL`).
 2. **Barrera BFT Mandatoria:** Toda propuesta de estado o resultado generado por un worker de un enjambre debe empaquetarse en un `AttestationEnvelope` firmado y pasar por el consenso BFT antes de persistirse.
 3. **Topología PxS Anti-Thrashing:** En hardware Apple Silicon (ARM64), la concurrencia de hilos se fija a la regla empírica $P \times S$ para impedir el estrangulamiento por cambios de contexto involuntarios (`ru_nivcsw`).
 

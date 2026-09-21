@@ -26,14 +26,18 @@ DAEMON_STATUS_FILE = DAEMON_DIR / "status.json"
 SYNC_STATE_FILE = CORTEX_DIR / "sync_state.json"
 CORTEX_DB = CORTEX_DIR / "cortex.db"
 
-# Monorepo root paths
+# Monorepo root paths (Sexagesimal Canonical Topology)
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 DOCS_DIR = REPO_ROOT / "docs"
-SHIELD_DIR = REPO_ROOT / "00_BABYLON_SHIELD"
-CORTEX_ENGINE_DIR = REPO_ROOT / "01_CORTEX_ENGINE"
-AGENTS_ARCHI_DIR = REPO_ROOT / "02_AGENTS_ARCHI"
-KERNEL_DIR = SHIELD_DIR / "crates" / "babylon60-kernel"
-STRIKE_DIR = SHIELD_DIR / "crates" / "strike-rs"
+ABZU_KERNEL_DIR = REPO_ROOT / "00_ABZU_KERNEL"
+KISH_ENGINE_DIR = REPO_ROOT / "01_KISH_ENGINE"
+EDIN_SWARMS_DIR = REPO_ROOT / "02_EDIN_SWARMS"
+KERNEL_DIR = ABZU_KERNEL_DIR / "crates" / "babylon60-kernel"
+STRIKE_DIR = ABZU_KERNEL_DIR / "crates" / "strike-rs"
+# Legacy aliases (backward compat — will be purged in v5.0)
+SHIELD_DIR = ABZU_KERNEL_DIR
+CORTEX_ENGINE_DIR = KISH_ENGINE_DIR
+AGENTS_ARCHI_DIR = EDIN_SWARMS_DIR
 
 # Agent State Directory with Environmental Override
 _env_agent_dir = os.environ.get("BABYLON_AGENT_DIR") or os.environ.get("CORTEX_AGENT_DIR")

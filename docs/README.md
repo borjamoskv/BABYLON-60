@@ -26,7 +26,7 @@ version: 4.3.0
 | :--- | :--- |
 | 🏭 **Enterprise DevOps** deploying in production | [Enterprise Quickstart →](./03_guides/QUICKSTART_ENTERPRISE.md) |
 | 🦀 **Rust / Systems Engineer** working on Ring-0 | [Architecture Manifest →](../ARCHITECTURE_MANIFEST.md) · [src/](../src/) · [crates/](../crates/) |
-| 🐍 **Python Developer** using the Orchestrator | [Complete Guide →](./03_guides/guide_babylon60_complete.md) · [01_ORCHESTRATOR/](../01_ORCHESTRATOR/) |
+| 🐍 **Python Developer** using the Orchestrator | [Complete Guide →](./03_guides/guide_babylon60_complete.md) · [01_KISH_ENGINE/](../01_KISH_ENGINE/) |
 | 🔬 **Researcher / Philosopher** studying C5-REAL | [Formal Theory →](./06_theory/) · [Whitepaper →](./WHITEPAPER.md) |
 | ⚖️ **Legal / Compliance** auditing EU AI Act | [Compliance Guide →](./05_compliance_eu_ai_act.md) · [Whitepaper →](./04_research/eu_ai_act_compliance_whitepaper.md) |
 | 🎵 **Musician / Audio Engineer** | [Tonnetz Oversight →](./06_theory/axiom_tonnetz_oversight.md) · [Bio-Silicio Guide →](./03_guides/guide_bio_silico_transduction.md) |
@@ -50,13 +50,13 @@ BABYLON-60 Monorepo
 │   ├── b60-lang/                ← B60 DSL compiler, fuzzer, ZK circuits
 │   └── babylon-attest/          ← Ed25519 attestation & Merkle DAG CLI
 │
-├── 00_BABYLON_SHIELD/           ← Cryptographic defense layer
+├── 00_ABZU_KERNEL/              ← Cryptographic defense layer
 │   └── crates/                  │  babylon60-compiler, babylon60-fuzz, nul-zk
 │
-├── 01_ORCHESTRATOR/             ← Python Cognitive Core
+├── 01_KISH_ENGINE/              ← Python Cognitive Core
 │   └── babylon60/               │  bft/, crypto/, adapters/, cli/, transducers/
 │
-├── 02_AGENTS_ARCHI/             ← Swarm orchestration (Legión, Centuria)
+├── 02_EDIN_SWARMS/              ← Swarm orchestration (Legión, Centuria)
 │
 └── docs/                        ← You are here
     ├── proof/lean/              │  BabylonTrace.lean (formally verified)
@@ -72,7 +72,7 @@ BABYLON-60 Monorepo
 
 ```mermaid
 graph LR
-    A[User / Swarm Agent] -->|Causal Directive| B[01_ORCHESTRATOR<br/>Python BFT Core]
+    A[User / Swarm Agent] -->|Causal Directive| B[01_KISH_ENGINE<br/>Python BFT Core]
     B -->|C-ABI FFI| C[src/ Rust Ring-0<br/>SharedManifest 64B]
     C -->|Seqlock SPMC| D[Read Agents<br/>Zero RFO]
     C -->|Fail-Stop| E[POISONED<br/>0xDEAD_6060]

@@ -9,7 +9,7 @@ from pathlib import Path
 
 # Bootstrap sys.path para resolución determinista de babylon60 (Invariante Clone & Run)
 _repo_root = Path(__file__).resolve().parent.parent.parent
-_orchestrator = _repo_root / "01_ORCHESTRATOR"
+_orchestrator = _repo_root / "01_KISH_ENGINE"
 if str(_orchestrator) not in sys.path:
     sys.path.insert(0, str(_orchestrator))
 

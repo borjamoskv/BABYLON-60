@@ -68,7 +68,7 @@ impl ActionEngine {
 
                 // Locate the Swift biometric gate script
                 let root_dir = std::env::current_dir().unwrap_or_default();
-                let script_path = root_dir.join("01_ORCHESTRATOR/babylon60/guards/c5_biometric_gate.swift");
+                let script_path = root_dir.join("01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift");
 
                 if !script_path.exists() {
                     return Err(format!("Gate script no encontrado en: {}", script_path.display()));
