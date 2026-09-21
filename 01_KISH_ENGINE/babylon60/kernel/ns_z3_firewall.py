@@ -16,11 +16,10 @@ Bloque VII de la Matriz Maestra (Iteraciones 61–70):
 from __future__ import annotations
 
 import hashlib
-import json
 import math
 import time
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 try:
     import z3
@@ -148,15 +147,8 @@ class NavierStokesZ3Firewall:
         t0 = time.perf_counter()
         solver = self._create_solver()
 
-        e_curr = z3.RealVal(str(energy_current))
-        e_next = z3.RealVal(str(energy_next))
-        ens = z3.RealVal(str(enstrophy))
-        nu = z3.RealVal(str(viscosity))
-        delta_t = z3.RealVal(str(dt))
-
         # Cota de disipación exacta de Leray-Hopf
         dissipation_bound = 2.0 * viscosity * enstrophy * dt
-        delta_e = energy_next - energy_current
 
         # El solver busca si es posible violar la disipación: delta_e > -dissipation_bound + 1e-12
         # Para probar la cota, afirmamos delta_e <= -dissipation + tolerancia

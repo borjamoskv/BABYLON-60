@@ -17,8 +17,8 @@ sys.path.extend([
     os.path.join(root_dir, "02_EDIN_SWARMS"),
 ])
 
-from typing import TypedDict
-from babylon60.kernel.swarm_orchestrator import AgentPager
+from typing import TypedDict  # noqa: E402
+from babylon60.kernel.swarm_orchestrator import AgentPager  # noqa: E402
 
 
 class StressResult(TypedDict):

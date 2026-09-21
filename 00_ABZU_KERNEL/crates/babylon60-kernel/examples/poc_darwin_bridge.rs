@@ -16,7 +16,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // We set a max capacity of 50 to easily demonstrate Burnout when high FS entropy hits
     let blanket = MarkovBlanket::new(50, &sensory, &active);
 
-    // Setup FSEvents listener (simulating the C/PyO3 bridge from 01_CORTEX_ENGINE)
+    // Setup FSEvents listener (simulating the C/PyO3 bridge from 01_KISH_ENGINE)
     let (tx, rx) = channel();
     let mut watcher = notify::recommended_watcher(move |res: notify::Result<Event>| {
         if let Ok(event) = res {

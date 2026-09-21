@@ -7,7 +7,6 @@ import pytest
 from babylon60.kernel.ns_z3_firewall import (
     NavierStokesZ3Firewall,
     SmtApoptosisError,
-    SmtProofCertificate,
 )
 
 
