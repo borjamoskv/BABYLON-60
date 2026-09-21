@@ -240,7 +240,7 @@ DOMAIN_MMR_PEAKS = b"\x02"
 class MerkleMountainRange:
     """
     Acumulador append-only inmutable Merkle Mountain Range (MMR).
-    Resuelve la ineficiencia O(N) de árboles estáticos para flujos agénticos continuos.
+    Resuelve la Ineficiencia O(N) de árboles estáticos para flujos agénticos continuos.
     Genera pruebas de inclusión O(log N) para expedientes forenses del EU AI Act.
     """
 

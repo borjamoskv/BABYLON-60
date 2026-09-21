@@ -22,13 +22,14 @@ import resource
 import time
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Callable, List, Dict, Any, Optional
+from typing import Callable, List, Dict, Any, Optional, Tuple
 
 logger = logging.getLogger("agents_archi.orchestrator.swarm")
 
 
 class InferenceBackend(Enum):
     """Supported inference execution backends."""
+
     MOONSHOT_REMOTE = "moonshot"
     OPENROUTER_REMOTE = "openrouter"
     LOCAL_VLLM = "local_vllm"
@@ -54,6 +55,7 @@ def _get_default_openrouter_key() -> str:
 @dataclass
 class SwarmConfig:
     """Deterministic configuration for Swarm execution."""
+
     p_cores: int = 4
     s_threads: int = 1
     backend: InferenceBackend = InferenceBackend.MOONSHOT_REMOTE
@@ -133,6 +135,7 @@ class AgentPager:
 @dataclass
 class KernelTelemetry:
     """Operating system telemetry snapshot for thrashing detection."""
+
     wall_time_s: float = 0.0
     involuntary_cs: int = 0
     voluntary_cs: int = 0
@@ -152,14 +155,19 @@ class KernelTelemetry:
         }
 
 
-def capture_kernel_snapshot():
+def capture_kernel_snapshot() -> Tuple[resource.struct_rusage, resource.struct_rusage]:
     """Captures rusage for self and children."""
     u_self = resource.getrusage(resource.RUSAGE_SELF)
     u_child = resource.getrusage(resource.RUSAGE_CHILDREN)
     return u_self, u_child
 
 
-def compute_telemetry(t0: float, t1: float, before, after) -> KernelTelemetry:
+def compute_telemetry(
+    t0: float,
+    t1: float,
+    before: Tuple[resource.struct_rusage, resource.struct_rusage],
+    after: Tuple[resource.struct_rusage, resource.struct_rusage],
+) -> KernelTelemetry:
     """Computes telemetry delta between snapshots."""
     (s0, c0) = before
     (s1, c1) = after
@@ -194,7 +202,10 @@ class RobustLLMClient:
             return f"Circuit breaker open: {self._consecutive_failures} failures. Backend: {self.config.backend.value}"
 
         # If air-gapped / unconfigured, return deterministic mock output in tests
-        if not self.config.api_key and self.config.backend in (InferenceBackend.MOONSHOT_REMOTE, InferenceBackend.OPENROUTER_REMOTE):
+        if not self.config.api_key and self.config.backend in (
+            InferenceBackend.MOONSHOT_REMOTE,
+            InferenceBackend.OPENROUTER_REMOTE,
+        ):
             return "[AIR-GAP MOCK] Deterministic response for swarm execution"
 
         import urllib.request
@@ -218,7 +229,7 @@ class RobustLLMClient:
                 with urllib.request.urlopen(req, timeout=self.config.request_timeout_s) as resp:
                     res = json.loads(resp.read().decode("utf-8"))
                     self._consecutive_failures = 0
-                    return res["choices"][0]["message"]["content"]
+                    return str(res["choices"][0]["message"]["content"])
             except urllib.error.HTTPError as e:
                 err_text = e.read().decode("utf-8") if e.fp else str(e)
                 if e.code == 429:
@@ -259,14 +270,17 @@ class SwarmOrchestrator:
         t0 = time.perf_counter()
         snap_before = capture_kernel_snapshot()
 
-        async def _run_single(task_id: int, desc: str):
+        async def _run_single(task_id: int, desc: str) -> Dict[str, Any]:
             await self.pager.wait_for_beep()
             async with semaphore:
                 if self.config.mcts_delay_s > 0:
                     await asyncio.sleep(self.config.mcts_delay_s)
                 sub_t0 = time.perf_counter()
                 messages = [
-                    {"role": "system", "content": "You are a specialized swarm subagent. Provide direct, concise results."},
+                    {
+                        "role": "system",
+                        "content": "You are a specialized swarm subagent. Provide direct, concise results.",
+                    },
                     {"role": "user", "content": desc},
                 ]
                 output = await self.client.call(messages)

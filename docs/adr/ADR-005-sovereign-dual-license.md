@@ -1,5 +1,8 @@
 # ADR-005: Sovereign Dual-License v4.0
 
+![Status: C5-REAL](https://img.shields.io/badge/Status-C5--REAL-black?style=flat-square&logo=rust&logoColor=white)
+
+
 - **Estado:** Aceptada
 - **Fecha:** 2026-08-06
 - **Autor:** Borja Moskv (borjamoskv)

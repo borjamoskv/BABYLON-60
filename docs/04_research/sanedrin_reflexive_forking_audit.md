@@ -1,5 +1,8 @@
 # 🏛️ Acta del Sanedrín: Auditoría Arquitectónica del "Reflexive Forking"
 
+![Status: C5-REAL](https://img.shields.io/badge/Status-C5--REAL-black?style=flat-square&logo=rust&logoColor=white)
+
+
 **Fecha de Convocatoria:** 2026-08-13
 **Materia de Debate:** Viabilidad estructural y termodinámica del Hito 5.2 (Bucle de Implementación Reflexiva / Auto-actualización SOTA).
 **Régimen:** Dialéctica Causal-Determinist

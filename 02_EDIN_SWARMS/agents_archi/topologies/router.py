@@ -51,19 +51,38 @@ class SwarmRouter:
 
     TARGET_TRIGGERS: Dict[TopologyTarget, List[str]] = {
         TopologyTarget.SHARUR_3600: [
-            "sharur", "enjambre 100", "sharur-3600", "auditoría paralela", "mass parallel", "100 workers"
+            "sharur",
+            "enjambre 100",
+            "sharur-3600",
+            "auditoría paralela",
+            "mass parallel",
+            "100 workers",
         ],
         TopologyTarget.EDIN_SWARM: [
-            "edin", "edin audit", "enjambre", "enjmabres", "swarm", "swarms", "orquestar enjambre"
+            "edin",
+            "edin audit",
+            "enjambre",
+            "enjmabres",
+            "swarm",
+            "swarms",
+            "orquestar enjambre",
         ],
-        TopologyTarget.SOCRATIC_GRILL: [
-            "grill-me", "interrogatorio", "socratic", "falsar asunciones", "socrate"
-        ],
+        TopologyTarget.SOCRATIC_GRILL: ["grill-me", "interrogatorio", "socratic", "falsar asunciones", "socrate"],
         TopologyTarget.SOTA_MEDIA: [
-            "remotion", "renderizar video", "dsp audio", "spatial audio", "ambisonics", "ffmpeg sota"
+            "remotion",
+            "renderizar video",
+            "dsp audio",
+            "spatial audio",
+            "ambisonics",
+            "ffmpeg sota",
         ],
         TopologyTarget.AXIOMATIC_PROTOCOL: [
-            "axiomatizar", "axiomatizacion", "dac yaml", "psafe", "aof", "bucle deductivo"
+            "axiomatizar",
+            "axiomatizacion",
+            "dac yaml",
+            "psafe",
+            "aof",
+            "bucle deductivo",
         ],
     }
 

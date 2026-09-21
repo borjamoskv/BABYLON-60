@@ -1,5 +1,8 @@
 # ADR-002: Puente FFI PyO3/Maturin para Runtime Híbrido Rust-Python
 
+![Status: C5-REAL](https://img.shields.io/badge/Status-C5--REAL-black?style=flat-square&logo=rust&logoColor=white)
+
+
 - **Estado:** Aceptada
 - **Fecha:** 2026-08-06
 - **Autor:** Borja Moskv (borjamoskv)

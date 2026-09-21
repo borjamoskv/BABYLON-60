@@ -18,4 +18,4 @@ Cuando el usuario invoque `/thermo-audit`, evaluarás el código activo o propue
 3. **Invariante P×S:** Verifica si hay concurrencia desbocada que pueda causar *Thrashing* o cuellos de botella asíncronos. Exige un Secuenciador Único si se detectan operaciones no-monótonas contenciosas.
 4. **Zero-RAM I/O:** En despliegues de inferencia pesados, exige primitivas nativas (`hf_transfer`) en lugar de utilidades glotonas en memoria.
 
-**Output:** Tu respuesta debe ser un reporte implacable de ineficiencias térmicas o de memoria, con sugerencias quirúrgicas en la capa física.
+**Output:** Tu respuesta debe ser un reporte implacable de Ineficiencias térmicas o de memoria, con sugerencias quirúrgicas en la capa física.

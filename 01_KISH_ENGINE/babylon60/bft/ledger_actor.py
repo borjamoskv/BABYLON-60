@@ -230,9 +230,9 @@ class BFTLedgerActor:
                         f"FAIL-FAST: General Exception intercepted on process: {process_res[0]}"
                     ) from process_res[0]
                 self._queue.task_done()
-                
+
                 # INV_C5_AEON: Límite de Acumulación Entrópica (Transición Conforme)
-                # Purga agresiva termodinámica para compactar el Hot Ledger (WAL) 
+                # Purga agresiva termodinámica para compactar el Hot Ledger (WAL)
                 # y sellarlo contra el L1 Sink (Main DB) previniendo Asfixia Gravitatoria.
                 try:
                     # En modo NORMAL, el WAL crece asintóticamente. Forzamos un TRUNCATE
@@ -240,6 +240,7 @@ class BFTLedgerActor:
                     await db.execute("PRAGMA wal_checkpoint(TRUNCATE)")
                 except Exception as e:
                     import logging
+
                     logging.warning(f"INV_C5_AEON: Fricción termodinámica en reciclaje de Aeon: {e}")
 
     async def _init_db(self, db: aiosqlite.Connection) -> None:

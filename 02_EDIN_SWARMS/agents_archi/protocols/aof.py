@@ -19,7 +19,7 @@ from enum import Enum
 
 class Modality(Enum):
     EPISTEMIC = "epistemic"  # Descriptive: "System CPU is at 90%"
-    DEONTIC = "deontic"      # Normative: "You must throttle the swarm"
+    DEONTIC = "deontic"  # Normative: "You must throttle the swarm"
 
 
 @dataclass
@@ -62,7 +62,5 @@ class AOFValidator:
         if preconditions:
             for i, check in enumerate(preconditions):
                 if not check(arguments):
-                    raise PermissionError(
-                        f"AOF Precondition #{i} failed for tool '{tool_name}' with args {arguments}"
-                    )
+                    raise PermissionError(f"AOF Precondition #{i} failed for tool '{tool_name}' with args {arguments}")
         return True

@@ -1,4 +1,7 @@
 # TÉTRADA CAUSAL C5-REAL APLICADA A BABYLON-60
+
+![Status: C5-REAL](https://img.shields.io/badge/Status-C5--REAL-black?style=flat-square&logo=rust&logoColor=white)
+
 ## Cuántica, Entropía, Atractores y Singularidad en el Runtime Soberano Sexagesimal
 
 > **Nivel de Realidad:** #C6-ABSOLUTE / C5-REAL  

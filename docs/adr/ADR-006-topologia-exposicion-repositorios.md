@@ -1,5 +1,8 @@
 # Auditoría de Exposición Topológica (Repositorios Públicos vs. Privados)
 
+![Status: C5-REAL](https://img.shields.io/badge/Status-C5--REAL-black?style=flat-square&logo=rust&logoColor=white)
+
+
 **Fecha de Fijación Causal:** 2026-09-12  
 **Marco Epistémico:** C5-REAL v4.3 / Zero-Trust Architecture / Open-Core Sovereignty  
 **Objetivo:** Determinar la política estricta de visibilidad (Público/Privado) para el ecosistema de repositorios del usuario, minimizando la superficie de ataque y garantizando la verificabilidad de los axiomas.

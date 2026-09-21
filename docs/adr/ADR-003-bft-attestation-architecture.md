@@ -1,5 +1,8 @@
 # ADR-003: Arquitectura BFT y Modelo de Atestación Criptográfica
 
+![Status: C5-REAL](https://img.shields.io/badge/Status-C5--REAL-black?style=flat-square&logo=rust&logoColor=white)
+
+
 - **Estado:** Aceptada
 - **Fecha:** 2026-08-08
 - **Autor:** Borja Moskv (borjamoskv)

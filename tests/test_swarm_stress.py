@@ -11,11 +11,13 @@ import os
 
 # Añadir el path para importar el orquestador
 root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.extend([
-    root_dir,
-    os.path.join(root_dir, "01_KISH_ENGINE"),
-    os.path.join(root_dir, "02_EDIN_SWARMS"),
-])
+sys.path.extend(
+    [
+        root_dir,
+        os.path.join(root_dir, "01_KISH_ENGINE"),
+        os.path.join(root_dir, "02_EDIN_SWARMS"),
+    ]
+)
 
 from typing import TypedDict  # noqa: E402
 from babylon60.kernel.swarm_orchestrator import AgentPager  # noqa: E402

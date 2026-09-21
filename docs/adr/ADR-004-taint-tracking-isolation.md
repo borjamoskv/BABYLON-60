@@ -1,5 +1,8 @@
 # ADR-004: Modelo de Aislamiento y Tracking de Taint
 
+![Status: C5-REAL](https://img.shields.io/badge/Status-C5--REAL-black?style=flat-square&logo=rust&logoColor=white)
+
+
 - **Estado:** Aceptada
 - **Fecha:** 2026-08-10
 - **Autor:** Borja Moskv (borjamoskv)

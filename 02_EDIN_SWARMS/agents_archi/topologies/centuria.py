@@ -51,9 +51,19 @@ class CenturiaTopology:
                     else:
                         status = "VERIFIED"
 
-                    return {"item": item, "status": status, "result": res, "elapsed_s": round(time.perf_counter() - w_t0, 4)}
+                    return {
+                        "item": item,
+                        "status": status,
+                        "result": res,
+                        "elapsed_s": round(time.perf_counter() - w_t0, 4),
+                    }
                 except Exception as e:
-                    return {"item": item, "status": "FAILED", "error": str(e), "elapsed_s": round(time.perf_counter() - w_t0, 4)}
+                    return {
+                        "item": item,
+                        "status": "FAILED",
+                        "error": str(e),
+                        "elapsed_s": round(time.perf_counter() - w_t0, 4),
+                    }
 
         tasks = [_worker(t) for t in targets]
         results = await asyncio.gather(*tasks)

@@ -19,6 +19,7 @@ from typing import Dict, List, Any, Optional
 
 class SubagentState(Enum):
     """Observable states of a sovereign subagent."""
+
     IDLE = "idle"
     PLANNING = "planning"
     EXECUTING = "executing"
@@ -32,10 +33,31 @@ class SubagentState(Enum):
 # Valid state transition graph
 VALID_TRANSITIONS = {
     SubagentState.IDLE: {SubagentState.PLANNING, SubagentState.EXECUTING, SubagentState.POISONED},
-    SubagentState.PLANNING: {SubagentState.EXECUTING, SubagentState.WAITING_FOR_INPUT, SubagentState.DEADLOCKED, SubagentState.POISONED},
-    SubagentState.EXECUTING: {SubagentState.VERIFYING, SubagentState.WAITING_FOR_INPUT, SubagentState.DEADLOCKED, SubagentState.POISONED},
-    SubagentState.VERIFYING: {SubagentState.COMPLETED, SubagentState.PLANNING, SubagentState.EXECUTING, SubagentState.DEADLOCKED, SubagentState.POISONED},
-    SubagentState.WAITING_FOR_INPUT: {SubagentState.PLANNING, SubagentState.EXECUTING, SubagentState.DEADLOCKED, SubagentState.POISONED},
+    SubagentState.PLANNING: {
+        SubagentState.EXECUTING,
+        SubagentState.WAITING_FOR_INPUT,
+        SubagentState.DEADLOCKED,
+        SubagentState.POISONED,
+    },
+    SubagentState.EXECUTING: {
+        SubagentState.VERIFYING,
+        SubagentState.WAITING_FOR_INPUT,
+        SubagentState.DEADLOCKED,
+        SubagentState.POISONED,
+    },
+    SubagentState.VERIFYING: {
+        SubagentState.COMPLETED,
+        SubagentState.PLANNING,
+        SubagentState.EXECUTING,
+        SubagentState.DEADLOCKED,
+        SubagentState.POISONED,
+    },
+    SubagentState.WAITING_FOR_INPUT: {
+        SubagentState.PLANNING,
+        SubagentState.EXECUTING,
+        SubagentState.DEADLOCKED,
+        SubagentState.POISONED,
+    },
     SubagentState.COMPLETED: {SubagentState.IDLE},
     SubagentState.DEADLOCKED: {SubagentState.POISONED, SubagentState.IDLE},
     SubagentState.POISONED: set(),  # Terminal fail-stop
@@ -48,7 +70,7 @@ class SubagentHandle:
     def __init__(self, agent_id: str, role: str, max_state_duration_s: float = 30.0):
         self.agent_id = agent_id
         self.role = role
-        self.current_state = SubagentState.IDLE
+        self.current_state: SubagentState = SubagentState.IDLE
         self.state_entered_at = time.time()
         self.max_state_duration_s = max_state_duration_s
         self.history: List[Dict[str, Any]] = [
@@ -66,13 +88,15 @@ class SubagentHandle:
             )
 
         now = time.time()
-        self.history.append({
-            "from": self.current_state.value,
-            "to": new_state.value,
-            "timestamp": now,
-            "duration_s": round(now - self.state_entered_at, 4),
-            "reason": reason,
-        })
+        self.history.append(
+            {
+                "from": self.current_state.value,
+                "to": new_state.value,
+                "timestamp": now,
+                "duration_s": round(now - self.state_entered_at, 4),
+                "reason": reason,
+            }
+        )
         self.current_state = new_state
         self.state_entered_at = now
         return True
@@ -88,7 +112,10 @@ class SubagentHandle:
         # Only check active/transient states
         if self.current_state in (SubagentState.PLANNING, SubagentState.EXECUTING, SubagentState.VERIFYING):
             if duration > self.max_state_duration_s:
-                self.transition_to(SubagentState.DEADLOCKED, reason=f"Watchdog timeout ({duration:.1f}s > {self.max_state_duration_s}s)")
+                self.transition_to(
+                    SubagentState.DEADLOCKED,
+                    reason=f"Watchdog timeout ({duration:.1f}s > {self.max_state_duration_s}s)",
+                )
                 return True
         return False
 
@@ -129,6 +156,3 @@ class DynamicLifecycleManager:
     def list_active(self) -> List[SubagentHandle]:
         """Returns all agents not in terminal states."""
         return [h for h in self._agents.values() if h.current_state != SubagentState.POISONED]
-
-
-

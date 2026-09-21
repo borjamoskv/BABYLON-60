@@ -1,5 +1,8 @@
 # 🌌 Topología Maestra C5-REAL (BABYLON-60 / CORTEX)
 
+![Status: C5-REAL](https://img.shields.io/badge/Status-C5--REAL-black?style=flat-square&logo=rust&logoColor=white)
+
+
 > **"El Mapa no es el Territorio, pero el Isomorfismo debe ser Perfecto."**
 
 Este documento establece la delimitación ontológica y física definitiva del ecosistema BABYLON-60. Define qué es una abstracción cognitiva (Persona), qué es ejecución termodinámica (Hardware) y cómo se comunican.

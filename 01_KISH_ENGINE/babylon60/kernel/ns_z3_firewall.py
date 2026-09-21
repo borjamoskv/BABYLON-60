@@ -29,12 +29,14 @@ except ImportError:
 
 class SmtApoptosisError(Exception):
     """Excepción irrecuperable lanzada cuando Z3 detecta violación de invariantes físicos o alucinación."""
+
     pass
 
 
 @dataclass
 class SmtProofCertificate:
     """Certificado formal de decisión SMT con atestación criptográfica (Iteración 70)."""
+
     theorem: str
     status: str  # "VALID_PROOF" | "FALSIFIED_UNSAT" | "COUNTEREXAMPLE_FOUND" | "APOPTOSIS_TRIGGERED"
     elapsed_ms: float
@@ -98,9 +100,7 @@ class NavierStokesZ3Firewall:
         det_1 = m_xx
         det_2 = m_xx * m_yy - m_xy * m_xy
         det_3 = (
-            m_xx * (m_yy * m_zz - m_yz * m_yz)
-            - m_xy * (m_xy * m_zz - m_xz * m_yz)
-            + m_xz * (m_xy * m_yz - m_xz * m_yy)
+            m_xx * (m_yy * m_zz - m_yz * m_yz) - m_xy * (m_xy * m_zz - m_xz * m_yz) + m_xz * (m_xy * m_yz - m_xz * m_yy)
         )
 
         solver.assert_and_track(z3.RealVal(str(det_1)) >= 0, "minor_1_pos")
@@ -155,7 +155,9 @@ class NavierStokesZ3Firewall:
         tolerance = 1e-9 * (1.0 + abs(energy_current))
         max_allowed_energy = energy_current - dissipation_bound + tolerance
 
-        solver.assert_and_track(z3.RealVal(str(energy_next)) <= z3.RealVal(str(max_allowed_energy)), "leray_energy_monotone")
+        solver.assert_and_track(
+            z3.RealVal(str(energy_next)) <= z3.RealVal(str(max_allowed_energy)), "leray_energy_monotone"
+        )
         solver.assert_and_track(z3.RealVal(str(energy_next)) >= 0, "energy_non_negative")
 
         res = solver.check()
@@ -382,6 +384,7 @@ class NavierStokesZ3Firewall:
             raise SmtApoptosisError(
                 "MUSHUSHU-0 Apoptosis: Violación de la norma L2. Energía cinética negativa propuesta."
             )
+        return True, "OK"
 
     # -----------------------------------------------------------------------
     # [Iter 71] Verificación SMT de Causalidad de Traza (MUSHUSHU-0 para Seqlock)
@@ -403,7 +406,7 @@ class NavierStokesZ3Firewall:
 
             # Monotonía causal estricta: un evento posterior no puede tener un reloj Lamport menor
             if i > 0:
-                solver.assert_and_track(seq_vars[i-1] <= seq_vars[i], f"causality_link_{i-1}_{i}")
+                solver.assert_and_track(seq_vars[i - 1] <= seq_vars[i], f"causality_link_{i - 1}_{i}")
 
         res = solver.check()
         elapsed = (time.perf_counter() - t0) * 1000.0
@@ -427,24 +430,25 @@ class NavierStokesZ3Firewall:
     # CLI entrypoint para integración con Rust BFT
     # -----------------------------------------------------------------------
     @classmethod
-    def eval_trace_bytes(cls, trace_bytes: bytes):
+    def eval_trace_bytes(cls, trace_bytes: bytes) -> int:
         import struct
+
         events = []
         try:
             length = len(trace_bytes)
             offset = 0
             while offset + 8 <= length:
-                chunk = trace_bytes[offset:offset+8]
+                chunk = trace_bytes[offset : offset + 8]
                 offset += 8
                 packed = struct.unpack("<Q", chunk)[0]
                 action = packed & 0xFF
                 thread_id = (packed >> 8) & 0xFFFFFF
                 seq = (packed >> 32) & 0xFFFFFFFF
                 events.append((thread_id, seq, action))
-            
+
             fw = cls()
             cert = fw.verify_causality_trace(events)
-            
+
             if cert.status == "VALID_PROOF":
                 print("Z3_OK")
                 return 0
@@ -456,7 +460,7 @@ class NavierStokesZ3Firewall:
             return 1
 
     @classmethod
-    def cli_eval_trace(cls, bin_path: str):
+    def cli_eval_trace(cls, bin_path: str) -> int:
         try:
             with open(bin_path, "rb") as f:
                 trace_bytes = f.read()
@@ -465,7 +469,9 @@ class NavierStokesZ3Firewall:
             print(f"Z3_ERROR: {e}")
             return 1
 
+
 if __name__ == "__main__":
     import sys
+
     if len(sys.argv) > 1 and sys.argv[1] == "--verify-causality":
         sys.exit(NavierStokesZ3Firewall.cli_eval_trace(sys.argv[2]))

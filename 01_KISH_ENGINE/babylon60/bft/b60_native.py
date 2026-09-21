@@ -6,7 +6,9 @@
 import ctypes
 import math
 from pathlib import Path
-from typing import List, Optional, Tuple
+from typing import List, Optional, Tuple, Any
+
+_Z3_GLOBAL_CALLBACK: Any = None
 
 _LIB_CACHE: Optional[ctypes.CDLL] = None
 
@@ -117,23 +119,26 @@ def get_b60_dylib() -> Optional[ctypes.CDLL]:
             # Tipo del puntero a función C: uint32 (*)(const uint8*, size_t)
             Z3_CALLBACK_TYPE = ctypes.CFUNCTYPE(ctypes.c_uint32, ctypes.POINTER(ctypes.c_uint8), ctypes.c_size_t)
             cdll.b60_register_z3_callback.argtypes = [Z3_CALLBACK_TYPE]
-            
+
             # Definir la función Python a inyectar (Global para evitar GC)
             global _Z3_GLOBAL_CALLBACK
-            def _z3_callback_impl(trace_ptr, trace_len):
+            pass
+
+            def _z3_callback_impl(trace_ptr: Any, trace_len: int) -> int:
                 try:
                     import sys
                     from pathlib import Path
+
                     sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "01_KISH_ENGINE"))
                     from babylon60.kernel.ns_z3_firewall import NavierStokesZ3Firewall
-                    
+
                     trace_bytes = bytes(trace_ptr[:trace_len])
                     res = NavierStokesZ3Firewall.eval_trace_bytes(trace_bytes)
                     return res
                 except Exception as e:
                     print(f"Error in Z3 callback: {e}")
                     return 1
-            
+
             _Z3_GLOBAL_CALLBACK = Z3_CALLBACK_TYPE(_z3_callback_impl)
             cdll.b60_register_z3_callback(_Z3_GLOBAL_CALLBACK)
 
@@ -338,7 +343,7 @@ class B60NativeBridge:
             if u not in ts_map or v not in ts_map:
                 return -1, 0
         in_degree = {nid: 0 for nid, _ in nodes}
-        adj = {nid: [] for nid, _ in nodes}
+        adj: Any = {nid: [] for nid, _ in nodes}
         for u, v in edges:
             adj[u].append(v)
             in_degree[v] += 1
@@ -367,7 +372,7 @@ class B60NativeBridge:
         lib = get_b60_dylib()
         if lib:
             buf = (ctypes.c_uint8 * len(trace_bytes)).from_buffer_copy(trace_bytes)
-            res = lib.b60_eval_trace(buf, len(trace_bytes))
+            res = int(lib.b60_eval_trace(buf, len(trace_bytes)))
             return res
         # Fallback (asume validez en ausencia del BFT físico)
         return 0
@@ -382,6 +387,5 @@ class B60NativeBridge:
         """
         lib = get_b60_dylib()
         if lib and hasattr(lib, "b60_dec_verify_mimetic"):
-            return lib.b60_dec_verify_mimetic(n)
+            return int(lib.b60_dec_verify_mimetic(n))
         return 0
-

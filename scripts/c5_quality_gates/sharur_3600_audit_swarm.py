@@ -4,7 +4,7 @@
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 """
-MOSKV-1: Legion 1000 Audit Swarm Engine (INV_C5_18)
+MOSKV-1: SHARUR-3600 Audit Swarm Engine (INV_C5_18)
 Async file auditor with bounded concurrency (INV_C5_THERMO_VALVE).
 Scans workspace for mythological term violations and emits structured telemetry.
 """
@@ -126,7 +126,7 @@ async def audit_file(
 def parse_args() -> argparse.Namespace:
     """Parse CLI arguments."""
     parser = argparse.ArgumentParser(
-        description="Legion 1000 Audit Swarm — async file auditor with bounded concurrency.",
+        description="SHARUR-3600 Audit Swarm — async file auditor with bounded concurrency.",
     )
     parser.add_argument(
         "--target-dir",

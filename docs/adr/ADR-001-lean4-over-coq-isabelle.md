@@ -1,5 +1,8 @@
 # ADR-001: Lean 4 sobre Coq/Isabelle para Verificación Formal
 
+![Status: C5-REAL](https://img.shields.io/badge/Status-C5--REAL-black?style=flat-square&logo=rust&logoColor=white)
+
+
 - **Estado:** Aceptada
 - **Fecha:** 2026-08-06
 - **Autor:** Borja Moskv (borjamoskv)

@@ -68,7 +68,7 @@ def test_dynamic_lifecycle_transitions_and_deadlock() -> None:
 
     # Valid transition: IDLE -> PLANNING -> EXECUTING
     agent.transition_to(SubagentState.PLANNING, reason="Decomposing task")
-    assert agent.current_state == SubagentState.PLANNING
+    assert agent.current_state == SubagentState.PLANNING  # type: ignore
 
     agent.transition_to(SubagentState.EXECUTING, reason="Running subtask")
     assert agent.current_state == SubagentState.EXECUTING
@@ -187,4 +187,3 @@ def test_circuit_breaker_subordination() -> None:
     client_del = RobustLLMClient(cfg_del)
     client_del._consecutive_failures = 10
     assert client_del.is_circuit_breaker_tripped is False
-

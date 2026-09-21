@@ -1,5 +1,8 @@
 # BABYLON-60: ARQUITECTURA DE EJECUCIÓN CON PRUEBA INTEGRADA (PROOF-CARRYING EXECUTION)
 
+![Status: C5-REAL](https://img.shields.io/badge/Status-C5--REAL-black?style=flat-square&logo=rust&logoColor=white)
+
+
 ## 1. RESUMEN EJECUTIVO Y TELEMETRÍA DE PRODUCCIÓN
 
 La integración formal entre el tiempo de ejecución en Rust (Ring-0) y el sustrato axiomático en Lean 4 (Ring-1) ha completado su ciclo de verificación empírica. El sistema opera bajo dos regímenes complementarios:

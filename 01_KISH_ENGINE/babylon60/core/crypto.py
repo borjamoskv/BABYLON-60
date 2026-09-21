@@ -8,7 +8,6 @@ from babylon60.core.crypto_utils import (
     Ed25519Signer,
     canonicalize_cbor,
     hash_sha3_256,
-    hash_sha256,
     verify_ed25519,
 )
 
@@ -16,6 +15,5 @@ __all__ = [
     "Ed25519Signer",
     "canonicalize_cbor",
     "hash_sha3_256",
-    "hash_sha256",
     "verify_ed25519",
 ]

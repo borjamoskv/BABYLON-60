@@ -1,5 +1,8 @@
 # Architecture Decision Records (ADR)
 
+![Status: C5-REAL](https://img.shields.io/badge/Status-C5--REAL-black?style=flat-square&logo=rust&logoColor=white)
+
+
 Este directorio contiene las decisiones arquitectónicas clave del proyecto BABYLON-60,
 documentadas siguiendo el formato [MADR](https://adr.github.io/madr/).
 

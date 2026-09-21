@@ -19,8 +19,12 @@ def test_sos_strain_relaxation_valid_and_invalid(firewall: NavierStokesZ3Firewal
     """[Iter 61/62] Verifica la cota SOS y la programación semidefinida (SDP)."""
     # 1. Caso Válido: lambda_max = 5.0 domina los autovalores del tensor
     cert_valid = firewall.verify_strain_sos_bound(
-        s_xx=1.0, s_yy=1.0, s_zz=-2.0,  # Traza cero (incompresible)
-        s_xy=0.5, s_xz=0.0, s_yz=0.5,
+        s_xx=1.0,
+        s_yy=1.0,
+        s_zz=-2.0,  # Traza cero (incompresible)
+        s_xy=0.5,
+        s_xz=0.0,
+        s_yz=0.5,
         lambda_max=5.0,
     )
     assert cert_valid.status == "VALID_PROOF"
@@ -28,8 +32,12 @@ def test_sos_strain_relaxation_valid_and_invalid(firewall: NavierStokesZ3Firewal
 
     # 2. Caso Inválido: lambda_max = 0.5 subestima el autovalor máximo (~2.0)
     cert_invalid = firewall.verify_strain_sos_bound(
-        s_xx=2.0, s_yy=1.0, s_zz=-3.0,
-        s_xy=0.0, s_xz=0.0, s_yz=0.0,
+        s_xx=2.0,
+        s_yy=1.0,
+        s_zz=-3.0,
+        s_xy=0.0,
+        s_xz=0.0,
+        s_yz=0.0,
         lambda_max=1.0,
     )
     assert cert_invalid.status == "FALSIFIED_UNSAT"
