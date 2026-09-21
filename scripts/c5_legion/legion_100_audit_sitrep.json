@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-09-14T07:10:54+0200",
+  "timestamp": "2026-09-21T19:28:04+0200",
   "total_agents": 100,
   "cohorts_executed": 5,
   "passed_agents": 100,
   "warned_agents": 0,
   "failed_agents": 0,
-  "wall_clock_seconds": 1.0336,
+  "wall_clock_seconds": 1.267,
   "results": [
     {
       "agent_id": 1,
       "cohort": "COHORT-1-RING0",
       "target": "SharedManifest 64B L1 Cache Alignment",
       "verdict": "PASS",
-      "exergy_ms": 517.092,
+      "exergy_ms": 636.254,
       "details": "Inspeccionados 2 archivos de manifiesto compartido (align=64)",
       "entropy_bits": 0.0
     },
@@ -21,7 +21,7 @@
       "cohort": "COHORT-1-RING0",
       "target": "Atomic Acquire-Release Primitives",
       "verdict": "PASS",
-      "exergy_ms": 0.003,
+      "exergy_ms": 0.004,
       "details": "Primitivas atómicas sin bloqueo SPMC certificadas en Ring-0",
       "entropy_bits": 0.0
     },
@@ -93,7 +93,7 @@
       "cohort": "COHORT-1-RING0",
       "target": "Rust Workspace Structure",
       "verdict": "PASS",
-      "exergy_ms": 0.036,
+      "exergy_ms": 0.044,
       "details": "Cargo.toml presente y workspace configurado",
       "entropy_bits": 0.0
     },
@@ -192,8 +192,8 @@
       "cohort": "COHORT-2-FORMAL",
       "target": "Lean 4 Proof Monorepo Tree",
       "verdict": "PASS",
-      "exergy_ms": 0.12,
-      "details": "Localizados 11 archivos de demostración formal Lean 4",
+      "exergy_ms": 0.127,
+      "details": "Localizados 14 archivos de demostración formal Lean 4",
       "entropy_bits": 0.0
     },
     {
@@ -255,7 +255,7 @@
       "cohort": "COHORT-2-FORMAL",
       "target": "SMT Constraint Solver Worker 028",
       "verdict": "PASS",
-      "exergy_ms": 0.0,
+      "exergy_ms": 0.001,
       "details": "Regla de firewall neurosimbólico activa y sin colisiones",
       "entropy_bits": 0.0
     },
@@ -390,7 +390,7 @@
       "cohort": "COHORT-3-LINGUISTICS",
       "target": "Spanish Linguistic Sovereignty in Core C5-REAL",
       "verdict": "PASS",
-      "exergy_ms": 0.0,
+      "exergy_ms": 0.001,
       "details": "100% de la ontología, medicina, teoría y guías internas en español técnico",
       "entropy_bits": 4.96
     },
@@ -399,7 +399,7 @@
       "cohort": "COHORT-3-LINGUISTICS",
       "target": "GitHub Strictly in English Invariant",
       "verdict": "PASS",
-      "exergy_ms": 0.08,
+      "exergy_ms": 0.1,
       "details": "github-architect en inglés verificado (Strict English Invariant: True)",
       "entropy_bits": 4.96
     },
@@ -408,7 +408,7 @@
       "cohort": "COHORT-3-LINGUISTICS",
       "target": "GitHub Rubric English Invariant",
       "verdict": "PASS",
-      "exergy_ms": 0.011,
+      "exergy_ms": 0.032,
       "details": "references/rubric.md preservado 100% en inglés técnico",
       "entropy_bits": 4.96
     },
@@ -426,7 +426,7 @@
       "cohort": "COHORT-3-LINGUISTICS",
       "target": "Hispanized Taxonomy Headers (NIVELES S - D)",
       "verdict": "PASS",
-      "exergy_ms": 0.052,
+      "exergy_ms": 0.054,
       "details": "Encabezados de niveles hispanizados confirmados en guía de arsenal",
       "entropy_bits": 4.96
     },
@@ -462,7 +462,7 @@
       "cohort": "COHORT-3-LINGUISTICS",
       "target": "Lexical Sovereign Sentinel 051",
       "verdict": "PASS",
-      "exergy_ms": 0.0,
+      "exergy_ms": 0.001,
       "details": "Análisis léxico de descriptores conforme a estándares C5-REAL",
       "entropy_bits": 4.96
     },
@@ -597,7 +597,7 @@
       "cohort": "COHORT-4-TOPOLOGY",
       "target": "Sovereign Skill Router CLI Integration",
       "verdict": "PASS",
-      "exergy_ms": 0.01,
+      "exergy_ms": 0.011,
       "details": "Router semántico verificado en c5_skill_router.py",
       "entropy_bits": 0.0
     },
@@ -606,7 +606,7 @@
       "cohort": "COHORT-4-TOPOLOGY",
       "target": "Catalog Consistency (Repo vs. Global)",
       "verdict": "PASS",
-      "exergy_ms": 0.24,
+      "exergy_ms": 0.516,
       "details": "Catálogos sincronizados exactamente a 105 perfiles (Global: 105)",
       "entropy_bits": 0.0
     },
@@ -615,7 +615,7 @@
       "cohort": "COHORT-4-TOPOLOGY",
       "target": "POSIX Kebab-Case Skill Naming",
       "verdict": "PASS",
-      "exergy_ms": 0.0,
+      "exergy_ms": 0.001,
       "details": "100% de directorios de skills usan kebab-case ASCII puro para compatibilidad",
       "entropy_bits": 0.0
     },
@@ -732,7 +732,7 @@
       "cohort": "COHORT-5-DEVSECOPS",
       "target": "Stale Git Locks Audit (.git/*.lock)",
       "verdict": "PASS",
-      "exergy_ms": 0.085,
+      "exergy_ms": 0.083,
       "details": "Cero locks estancados detectados en .git/",
       "entropy_bits": 0.0
     },
@@ -741,7 +741,7 @@
       "cohort": "COHORT-5-DEVSECOPS",
       "target": "Cognitive Proof of Work Commit Format [AX-]",
       "verdict": "PASS",
-      "exergy_ms": 0.001,
+      "exergy_ms": 0.0,
       "details": "Gobernanza de commits estricta con prefijo semántico [AX-<Num>]",
       "entropy_bits": 0.0
     },
@@ -759,8 +759,8 @@
       "cohort": "COHORT-5-DEVSECOPS",
       "target": "Music Assets Centralization (~/Music/)",
       "verdict": "PASS",
-      "exergy_ms": 0.012,
-      "details": "Directorio canónico ~/Music existe",
+      "exergy_ms": 0.039,
+      "details": "Directorio canónico ~/Music existe (True)",
       "entropy_bits": 0.0
     },
     {
@@ -768,7 +768,7 @@
       "cohort": "COHORT-5-DEVSECOPS",
       "target": "Passive Scraping Dumps Ban (.vtt, .srt, .db)",
       "verdict": "PASS",
-      "exergy_ms": 515.132,
+      "exergy_ms": 629.2,
       "details": "Árbol git libre de volcados pasivos (0 detectados)",
       "entropy_bits": 0.0
     },
@@ -804,8 +804,8 @@
       "cohort": "COHORT-5-DEVSECOPS",
       "target": "Static Docs Index Integrity (00_index.md)",
       "verdict": "PASS",
-      "exergy_ms": 0.008,
-      "details": "Índice maestro de docs sincronizado (OK)",
+      "exergy_ms": 0.04,
+      "details": "Índice maestro de docs sincronizado (existe: True)",
       "entropy_bits": 0.0
     },
     {
@@ -813,7 +813,7 @@
       "cohort": "COHORT-5-DEVSECOPS",
       "target": "Anergy & Local Cache Footprint",
       "verdict": "PASS",
-      "exergy_ms": 0.0,
+      "exergy_ms": 0.001,
       "details": "Auditor forense de disco disponible en scripts/c5_legion/",
       "entropy_bits": 0.0
     },
