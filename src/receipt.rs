@@ -56,9 +56,12 @@
 // Unprotected_Header = { &(receipts: 394) => [+ Receipt] }
 
 extern crate alloc;
+use alloc::string::ToString;
 use alloc::vec::Vec;
 
-use coset::CborSerializable;
+use coset::iana;
+use coset::{CborSerializable, CoseSign1, CoseSign1Builder, HeaderBuilder};
+use ciborium::value::Value;
 
 use crate::manifest::{SharedManifest, HaltReason};
 
@@ -86,8 +89,6 @@ pub struct NullSigner;
 
 impl Signer for NullSigner {
     fn sign(&self, _to_sign: &[u8]) -> Result<Vec<u8>, alloc::string::String> {
-        // En producción: firmar con Ed25519 o equivalente.
-        // Retorna firma vacía para satisfacer la estructura COSE_Sign1.
         Ok(alloc::vec![0u8; 64])
     }
     
@@ -97,6 +98,59 @@ impl Signer for NullSigner {
     
     fn get_public_key(&self) -> Vec<u8> {
         alloc::vec![0u8; 32]
+    }
+}
+
+/// Signer basado en Ed25519 (EdDSA RFC 8032) para atestación de hardware.
+#[derive(Clone)]
+pub struct Ed25519Signer {
+    signing_key: ed25519_dalek::SigningKey,
+    /// Clave pública de verificación.
+    pub verifying_key: ed25519_dalek::VerifyingKey,
+}
+
+impl Ed25519Signer {
+    /// Genera un nuevo par de claves Ed25519 con RNG seguro del sistema operativo.
+    pub fn new() -> Self {
+        let mut csprng = rand::rngs::OsRng;
+        let signing_key = ed25519_dalek::SigningKey::generate(&mut csprng);
+        let verifying_key = signing_key.verifying_key();
+        Self { signing_key, verifying_key }
+    }
+
+    /// Instancia el signer a partir de 32 bytes de semilla/clave privada.
+    pub fn from_bytes(bytes: &[u8; 32]) -> Self {
+        let signing_key = ed25519_dalek::SigningKey::from_bytes(bytes);
+        let verifying_key = signing_key.verifying_key();
+        Self { signing_key, verifying_key }
+    }
+}
+
+impl Default for Ed25519Signer {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl Signer for Ed25519Signer {
+    fn sign(&self, to_sign: &[u8]) -> Result<Vec<u8>, alloc::string::String> {
+        use ed25519_dalek::Signer as _;
+        Ok(self.signing_key.sign(to_sign).to_bytes().to_vec())
+    }
+
+    fn verify(&self, payload: &[u8], signature: &[u8]) -> bool {
+        use ed25519_dalek::Verifier as _;
+        if signature.len() != 64 {
+            return false;
+        }
+        let mut sig_arr = [0u8; 64];
+        sig_arr.copy_from_slice(signature);
+        let sig = ed25519_dalek::Signature::from_bytes(&sig_arr);
+        self.verifying_key.verify(payload, &sig).is_ok()
+    }
+
+    fn get_public_key(&self) -> Vec<u8> {
+        self.verifying_key.to_bytes().to_vec()
     }
 }
 
@@ -129,51 +183,75 @@ pub const ISS: &str = "urn:babylon60:operator";
 pub const SUB: &str = "urn:babylon60:shared-manifest";
 
 // ---------------------------------------------------------------------------
+// Construcción canónica del Halt_Payload CBOR
+// ---------------------------------------------------------------------------
+
+/// Construye el mapa CBOR canónico para el Halt_Payload (RFC 9942).
+pub fn build_halt_payload(epoch: u64, hash: &[u8; 32], timestamp: u64, reason: &str) -> Vec<u8> {
+    let payload_val = Value::Map(alloc::vec![
+        (Value::from(1), Value::from(epoch)),
+        (Value::from(2), Value::Bytes(hash.to_vec())),
+        (Value::from(3), Value::Text(alloc::string::String::from("RUNNING->POISONED"))),
+        (Value::from(4), Value::from(timestamp)),
+        (Value::from(5), Value::Text(alloc::string::String::from(reason))),
+    ]);
+
+    let mut buf = Vec::new();
+    ciborium::into_writer(&payload_val, &mut buf).expect("Fallo al serializar CBOR payload");
+    buf
+}
+
+// ---------------------------------------------------------------------------
 // emit_halt_receipt — ruta fría (Art. 12 + Art. 50 EU AI Act)
 // ---------------------------------------------------------------------------
 
 /// Emite un recibo COSE_Sign1 conforme al perfil BABYLON-60 sobre RFC 9942.
-///
-/// ## Cadena de inferencia jurídica
-/// - Art. 12 EU AI Act: obliga a conservar registros de incidentes.
-/// - Art. 50 EU AI Act: obligaciones de transparencia, exigibles desde ago-2026.
-/// - El recibo es prueba preconstituida oponible (Arts. 9 y 10 Dir. 2024/2853)
-///   para refutar presunciones iuris tantum ante el juez. NO neutraliza la
-///   presunción ex ante (Dir. no transpuesta en España a ago-2026).
-///
-/// ## Algoritmo
-/// SHAKE256 (COSE alg −45) como identificador de VDS/Merkle.
-/// Para la firma del sobre exterior usar EdDSA (alg −8) en producción.
-///
-/// ## Anclaje externo
-/// El recibo retornado DEBE anclarse en una TSA (RFC 3161) u OpenTimestamps
-/// con ΔT_ancla declarado. La función NO realiza el anclaje.
-///
-/// # Parámetros
-/// - `m`: referencia al `SharedManifest` en estado POISONED.
-/// - `motivo`: causa del halt, incluida en el payload del recibo.
-/// - `signer`: implementación del trait `Signer` para la firma.
-///
-/// # Retorna
-/// Bytes del `COSE_Sign1` serializado en CBOR.
 pub fn emit_halt_receipt_with_timestamp<S: Signer>(
-    _m: &SharedManifest,
-    _motivo: HaltReason,
-    _signer: &S,
-    _timestamp: u64,
+    m: &SharedManifest,
+    motivo: HaltReason,
+    signer: &S,
+    timestamp: u64,
 ) -> Vec<u8> {
-    unimplemented!("ABI canonizada a 64 bytes (PxS) - receipt requiere refactor")
+    let epoch = m.epoch_id.load(core::sync::atomic::Ordering::Acquire);
+    let mut hash = [0u8; 32];
+    for i in 0..4 {
+        let word = m.payload_hash[i].load(core::sync::atomic::Ordering::Acquire);
+        hash[i * 8..(i + 1) * 8].copy_from_slice(&word.to_le_bytes());
+    }
+
+    let payload_bytes = build_halt_payload(epoch, &hash, timestamp, motivo.as_str());
+
+    let protected = HeaderBuilder::new()
+        .algorithm(iana::Algorithm::EdDSA)
+        .content_type(CONTENT_TYPE_HALT.to_string())
+        .key_id(signer.get_public_key())
+        .build();
+
+    let sign1 = CoseSign1Builder::new()
+        .protected(protected)
+        .payload(payload_bytes)
+        .create_signature(&[], |pt| signer.sign(pt).unwrap_or_else(|_| alloc::vec![0u8; 64]))
+        .build();
+
+    sign1.to_vec().expect("Fallo al serializar COSE_Sign1")
 }
 
 /// Emite un recibo COSE Sign1 firmado criptográficamente al producirse una parada (*halt*) en la máquina de estados.
 pub fn emit_halt_receipt<S: Signer>(
-    _m: &SharedManifest,
-    _motivo: HaltReason,
-    _signer: &S,
+    m: &SharedManifest,
+    motivo: HaltReason,
+    signer: &S,
 ) -> Vec<u8> {
-    unimplemented!("ABI canonizada a 64 bytes (PxS) - receipt requiere refactor")
-}
+    #[cfg(feature = "std")]
+    let ts = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map(|d| d.as_secs())
+        .unwrap_or(0);
+    #[cfg(not(feature = "std"))]
+    let ts = 0u64;
 
+    emit_halt_receipt_with_timestamp(m, motivo, signer, ts)
+}
 
 // ---------------------------------------------------------------------------
 // Estructuras de verificación y deserialización de recibos COSE_Sign1
@@ -201,6 +279,8 @@ pub enum ReceiptError {
     InvalidCoseStructure,
     /// Payload ausente o corrupto.
     MissingPayload,
+    /// Firma criptográfica no válida.
+    InvalidSignature,
 }
 
 impl core::fmt::Display for ReceiptError {
@@ -208,6 +288,7 @@ impl core::fmt::Display for ReceiptError {
         match self {
             ReceiptError::InvalidCoseStructure => f.write_str("Estructura COSE_Sign1 no válida"),
             ReceiptError::MissingPayload => f.write_str("Payload del recibo ausente o corrupto"),
+            ReceiptError::InvalidSignature => f.write_str("Firma criptográfica no válida"),
         }
     }
 }
@@ -217,21 +298,86 @@ impl std::error::Error for ReceiptError {}
 
 /// Deserializa y valida la estructura básica de un recibo `COSE_Sign1` en formato CBOR.
 pub fn parse_halt_receipt(receipt_bytes: &[u8]) -> Result<HaltReceiptSummary, ReceiptError> {
-    use coset::CoseSign1;
     let sign1 = CoseSign1::from_slice(receipt_bytes).map_err(|_| ReceiptError::InvalidCoseStructure)?;
-    let payload = sign1.payload.ok_or(ReceiptError::MissingPayload)?;
+    let payload_bytes = sign1.payload.ok_or(ReceiptError::MissingPayload)?;
 
-    if payload.is_empty() {
+    if payload_bytes.is_empty() {
         return Err(ReceiptError::MissingPayload);
     }
 
+    let val: Value = ciborium::from_reader(&payload_bytes[..])
+        .map_err(|_| ReceiptError::InvalidCoseStructure)?;
+
+    let map = match val {
+        Value::Map(m) => m,
+        _ => return Err(ReceiptError::InvalidCoseStructure),
+    };
+
+    let mut epoch = 0u64;
+    let mut payload_hash = [0u8; 32];
+    let mut state_transition = alloc::string::String::new();
+    let mut timestamp = 0u64;
+    let mut motivo = alloc::string::String::new();
+
+    for (k, v) in map {
+        let k_int: Option<i128> = k.as_integer().and_then(|x| i128::try_from(x).ok());
+        match k_int {
+            Some(1) => {
+                if let Some(i) = v.as_integer().and_then(|x| u64::try_from(x).ok()) {
+                    epoch = i;
+                }
+            }
+            Some(2) => {
+                if let Value::Bytes(b) = v {
+                    if b.len() == 32 {
+                        payload_hash.copy_from_slice(&b);
+                    }
+                }
+            }
+            Some(3) => {
+                if let Value::Text(s) = v {
+                    state_transition = s;
+                }
+            }
+            Some(4) => {
+                if let Some(i) = v.as_integer().and_then(|x| u64::try_from(x).ok()) {
+                    timestamp = i;
+                }
+            }
+            Some(5) => {
+                if let Value::Text(s) = v {
+                    motivo = s;
+                }
+            }
+            _ => {}
+        }
+    }
+
     Ok(HaltReceiptSummary {
-        epoch: 0,
-        payload_hash: [0u8; 32],
-        state_transition: alloc::string::String::from("RUNNING->POISONED"),
-        timestamp: 0,
-        motivo: alloc::string::String::from("PARSED_RECEIPT"),
+        epoch,
+        payload_hash,
+        state_transition,
+        timestamp,
+        motivo,
     })
+}
+
+/// Verifica criptográficamente la firma del recibo COSE_Sign1 y extrae el resumen.
+pub fn verify_and_parse_halt_receipt<S: Signer>(
+    receipt_bytes: &[u8],
+    signer: &S,
+) -> Result<HaltReceiptSummary, ReceiptError> {
+    let sign1 = CoseSign1::from_slice(receipt_bytes).map_err(|_| ReceiptError::InvalidCoseStructure)?;
+
+    sign1.verify_signature(&[], |sig, data| {
+        if signer.verify(data, sig) {
+            Ok(())
+        } else {
+            Err("Firma no válida")
+        }
+    }).map_err(|_| ReceiptError::InvalidSignature)?;
+
+    parse_halt_receipt(receipt_bytes)
 }
 
 // ---------------------------------------------------------------------------
@@ -245,64 +391,55 @@ pub fn emit_halt_receipt_null(m: &SharedManifest, motivo: HaltReason) -> Vec<u8>
     emit_halt_receipt(m, motivo, &NullSigner)
 }
 
-// ---------------------------------------------------------------------------
-// Morfismos de serialización CBOR mínimos (sin ciborium para no arrastrar deps)
-// ---------------------------------------------------------------------------
-// Nota: para una implementación de producción usar ciborium correctamente.
-// Estos morfismos codifican solo los tipos necesarios para el Halt_Payload.
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use core::sync::atomic::Ordering;
+    use crate::manifest::POISONED;
 
-#[allow(dead_code)]
-fn cbor_uint(buf: &mut Vec<u8>, v: u64) {
-    if v <= 0x17 {
-        buf.push(v as u8);
-    } else if v <= 0xff {
-        buf.push(0x18);
-        buf.push(v as u8);
-    } else if v <= 0xffff {
-        buf.push(0x19);
-        buf.extend_from_slice(&(v as u16).to_be_bytes());
-    } else if v <= 0xffff_ffff {
-        buf.push(0x1a);
-        buf.extend_from_slice(&(v as u32).to_be_bytes());
-    } else {
-        buf.push(0x1b);
-        buf.extend_from_slice(&v.to_be_bytes());
+    #[test]
+    fn test_receipt_null_signer() {
+        let manifest = SharedManifest::new();
+        manifest.epoch_id.store(1, Ordering::Release);
+        manifest.status_flag.store(POISONED, Ordering::Release);
+        
+        let receipt = emit_halt_receipt_null(&manifest, HaltReason::SeqRetryExhausted);
+        assert!(!receipt.is_empty());
+        let summary = parse_halt_receipt(&receipt).expect("Fallo al parsear recibo emitido con NullSigner");
+        assert_eq!(summary.epoch, 1);
+        assert_eq!(summary.state_transition, "RUNNING->POISONED");
+        assert_eq!(summary.motivo, "SEQ_RETRY_EXHAUSTED");
     }
-}
 
-#[allow(dead_code)]
-fn cbor_bstr(buf: &mut Vec<u8>, data: &[u8]) {
-    let len = data.len() as u64;
-    if len <= 0x17 {
-        buf.push(0x40 | len as u8);
-    } else {
-        buf.push(0x58);
-        buf.push(len as u8);
+    #[test]
+    fn test_receipt_ed25519_sign_verify_cycle() {
+        let signer = Ed25519Signer::new();
+        let manifest = SharedManifest::new();
+        manifest.epoch_id.store(100, Ordering::Release);
+        manifest.status_flag.store(POISONED, Ordering::Release);
+        manifest.payload_hash[0].store(0x0102030405060708, Ordering::Release);
+
+        let receipt = emit_halt_receipt_with_timestamp(&manifest, HaltReason::HashMismatch, &signer, 1774300000);
+        assert!(!receipt.is_empty());
+
+        let summary = verify_and_parse_halt_receipt(&receipt, &signer)
+            .expect("Fallo al verificar firma y parsear recibo");
+        assert_eq!(summary.epoch, 100);
+        assert_eq!(summary.timestamp, 1774300000);
+        assert_eq!(summary.motivo, "HASH_MISMATCH");
     }
-    buf.extend_from_slice(data);
-}
 
-#[allow(dead_code)]
-fn cbor_tstr(buf: &mut Vec<u8>, s: &str) {
-    let len = s.len() as u64;
-    if len <= 0x17 {
-        buf.push(0x60 | len as u8);
-    } else {
-        buf.push(0x78);
-        buf.push(len as u8);
+    #[test]
+    fn test_receipt_tamper_rejection() {
+        let signer = Ed25519Signer::new();
+        let manifest = SharedManifest::new();
+        let mut receipt = emit_halt_receipt_with_timestamp(&manifest, HaltReason::EpochNonMonotonic, &signer, 1774300000);
+
+        // Manipular el último byte
+        let last = receipt.len() - 1;
+        receipt[last] ^= 0xFF;
+
+        let err = verify_and_parse_halt_receipt(&receipt, &signer);
+        assert_eq!(err, Err(ReceiptError::InvalidSignature));
     }
-    buf.extend_from_slice(s.as_bytes());
-}
-
-#[allow(dead_code)]
-/// Construye el mapa CWT_Claims CBOR para iss(1) y sub(2).
-/// {1: "urn:babylon60:operator", 2: "urn:babylon60:shared-manifest"}
-fn build_cwt_claims() -> Vec<u8> {
-    let mut buf = Vec::new();
-    buf.push(0xa2u8); // map(2)
-    cbor_uint(&mut buf, 1);
-    cbor_tstr(&mut buf, ISS);
-    cbor_uint(&mut buf, 2);
-    cbor_tstr(&mut buf, SUB);
-    buf
 }

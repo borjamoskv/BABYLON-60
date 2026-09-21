@@ -18,24 +18,30 @@ namespace Babylon
 # 1. Primitivas Irreducibles y Espacios Categóricos
 -/
 
-def ProbDist (A : Type) := A → Float
-def Morphism (A B : Type) := A → B → Float
+def ProbDist (A : Type) := A → Rat
+def Morphism (A B : Type) := A → B → Rat
+
+/-- Operador Constructivo de Inversión Bayesiana sobre Soporte Finito -/
+def bayesian_inverse {X Y : Type}
+    (prior : ProbDist X) (f : Morphism X Y) (pushforward : Y → Rat) (y : Y) (x : X) : Rat :=
+  if pushforward y = 0 then 0
+  else (prior x * f x y) / pushforward y
 
 /-!
 # 2. Especificación Formal de Desintegración Bayesiana y Markov
 -/
 
 /--
-Estructura acoplada de Desintegración Bayesiana.
+Estructura acoplada de Desintegración Bayesiana en Álgebra Racional Exacta (Rat / ℚ).
 Garantiza simetría de probabilidad conjunta y contención causal de soporte (No-Alucinación),
-evitando la cuantificación universal sobre funciones arbitrarias libres.
+eliminando cualquier deriva no determinista de punto flotante IEEE-754.
 -/
 structure BayesianDisintegration {X Y : Type} (p : ProbDist X) (f : Morphism X Y) where
-  pushforward : Y → Float
-  f_dag_p : Y → X → Float
-  h_symmetry : ∀ (x : X) (y : Y), p x * f x y == pushforward y * f_dag_p y x
-  h_no_hallucination : ∀ (x : X) (y : Y), p x == 0.0 → f_dag_p y x == 0.0
-  h_circuit_breaker : ∀ (x : X) (y : Y), pushforward y == 0.0 → f_dag_p y x == 0.0
+  pushforward : Y → Rat
+  f_dag_p : Y → X → Rat
+  h_symmetry : ∀ (x : X) (y : Y), p x * f x y = pushforward y * f_dag_p y x
+  h_no_hallucination : ∀ (x : X) (y : Y), p x = 0 → f_dag_p y x = 0
+  h_circuit_breaker : ∀ (x : X) (y : Y), pushforward y = 0 → f_dag_p y x = 0
 
 /-!
 # 3. Teoremas y Corolarios de la Desintegración
@@ -45,12 +51,28 @@ structure BayesianDisintegration {X Y : Type} (p : ProbDist X) (f : Morphism X Y
 > [!TIP]
 > ### Teorema 1: Extinción del Origen Espurio (Eliminación Total de Alucinación)
 > Cualquier agente acoplado mediante un operador de desintegración válido posee 
-> una tasa de confabulación originaria de exactamente 0.0 para estados fuera del soporte del prior.
+> una tasa de confabulación originaria de exactamente 0 para estados fuera del soporte del prior.
 -/
 theorem extincion_origen_espurio {X Y : Type} {p : ProbDist X} {f : Morphism X Y}
-    (bd : BayesianDisintegration p f) (x_fake : X) (y : Y) (h : p x_fake == 0.0) :
-    bd.f_dag_p y x_fake == 0.0 := by
+    (bd : BayesianDisintegration p f) (x_fake : X) (y : Y) (h : p x_fake = 0) :
+    bd.f_dag_p y x_fake = 0 := by
   exact bd.h_no_hallucination x_fake y h
+
+/--
+> [!TIP]
+> ### Teorema 1B (Constructivo Puro): Extinción Algebraica Directa en Rat
+> Demostrado por reducción directa sobre el operador bayesian_inverse sin axiomas exógenos.
+-/
+theorem extincion_origen_espurio_constructiva {X Y : Type}
+    (prior : ProbDist X) (f : Morphism X Y) (pushforward : Y → Rat)
+    (x : X) (y : Y) (h_prior : prior x = 0) :
+    bayesian_inverse prior f pushforward y x = 0 := by
+  unfold bayesian_inverse
+  split
+  · rfl
+  · rw [h_prior, Rat.zero_mul]
+    show 0 * (pushforward y)⁻¹ = 0
+    exact Rat.zero_mul _
 
 /--
 > [!TIP]
@@ -58,18 +80,31 @@ theorem extincion_origen_espurio {X Y : Type} {p : ProbDist X} {f : Morphism X Y
 > Ante una observación inconmensurable fuera de la imagen predictiva, la desintegración se extingue.
 -/
 theorem circuit_breaker_activado {X Y : Type} {p : ProbDist X} {f : Morphism X Y}
-    (bd : BayesianDisintegration p f) (x : X) (y_unseen : Y) (h : bd.pushforward y_unseen == 0.0) :
-    bd.f_dag_p y_unseen x == 0.0 := by
+    (bd : BayesianDisintegration p f) (x : X) (y_unseen : Y) (h : bd.pushforward y_unseen = 0) :
+    bd.f_dag_p y_unseen x = 0 := by
   exact bd.h_circuit_breaker x y_unseen h
 
 /--
+> [!TIP]
+> ### Teorema 2B (Constructivo Puro): Circuit Breaker Algebraico Directo
+-/
+theorem circuit_breaker_activado_constructiva {X Y : Type}
+    (prior : ProbDist X) (f : Morphism X Y) (pushforward : Y → Rat)
+    (x : X) (y_unseen : Y) (h : pushforward y_unseen = 0) :
+    bayesian_inverse prior f pushforward y_unseen x = 0 := by
+  unfold bayesian_inverse
+  split
+  · rfl
+  · contradiction
+
+/--
 > [!NOTE]
-> ### Teorema 2B: Resiliencia BFT contra Inyección Causal (Prompt Injection Immunity)
-> Toda hipótesis fuera del soporte del prior colapsa el producto conjunto a cero.
+> ### Teorema 2C: Resiliencia BFT contra Inyección Causal (Prompt Injection Immunity)
+> Toda hipótesis fuera del soporte del prior colapsa el producto conjunto a cero en ℚ.
 -/
 theorem resiliencia_bft_inyeccion {X Y : Type} {p : ProbDist X} {f : Morphism X Y}
-    (bd : BayesianDisintegration p f) (x_fake : X) (y : Y) (h_prior : p x_fake == 0.0) :
-    bd.f_dag_p y x_fake == 0.0 := by
+    (bd : BayesianDisintegration p f) (x_fake : X) (y : Y) (h_prior : p x_fake = 0) :
+    bd.f_dag_p y x_fake = 0 := by
   exact bd.h_no_hallucination x_fake y h_prior
 
 /-!
@@ -82,28 +117,28 @@ inductive TonnetzState where
   | AnergyAlertDissonant : TonnetzState
   deriving BEq, Repr
 
-/-- Monitor Tonnetz Concreto Canónico del Kernel B60 -/
-def canonical_tonnetz_monitor (entropy : Float) : TonnetzState × Float :=
-  if entropy <= 0.0 then
-    (TonnetzState.HomeostaticPure, 0.0)
-  else if entropy >= 2.0 then
+/-- Monitor Tonnetz Concreto Canónico del Kernel B60 en Racionales Exactos (Rat) -/
+def canonical_tonnetz_monitor (entropy : Rat) : TonnetzState × Rat :=
+  if entropy <= 0 then
+    (TonnetzState.HomeostaticPure, 0)
+  else if entropy >= 2 then
     (TonnetzState.AnergyAlertDissonant, entropy)
   else
     (TonnetzState.DegradedTransition, entropy)
 
-/-- Estructura de Calibración de Monitor Tonnetz -/
+/-- Estructura de Calibración de Monitor Tonnetz en Rat -/
 structure TonnetzMonitor where
-  phi : Float → Float → (TonnetzState × Float)
-  h_homeostasis : phi 0.0 0.0 = (TonnetzState.HomeostaticPure, 0.0)
-  h_critical : ∀ h ex, h > 1.0 → (phi h ex).2 > 0.0
-  h_dissonant : ∀ h ex, h >= 2.0 → (phi h ex).1 = TonnetzState.AnergyAlertDissonant
+  phi : Rat → Rat → (TonnetzState × Rat)
+  h_homeostasis : phi 0 0 = (TonnetzState.HomeostaticPure, 0)
+  h_critical : ∀ h ex, h > 1 → (phi h ex).2 > 0
+  h_dissonant : ∀ h ex, h >= 2 → (phi h ex).1 = TonnetzState.AnergyAlertDissonant
 
 /--
 ### Teorema 3: Homeostasis Tonnetz Garantizada
 En el estado fundamental de mínima entropía, el monitor calibrado permanece en armonía pura.
 -/
 theorem homeostasis_tonnetz_garantizada (m : TonnetzMonitor) :
-    m.phi 0.0 0.0 = (TonnetzState.HomeostaticPure, 0.0) := by
+    m.phi 0 0 = (TonnetzState.HomeostaticPure, 0) := by
   exact m.h_homeostasis
 
 /-!
@@ -292,7 +327,7 @@ structure TransductionTensor60 where
 
 /-- Variedad de Distribuciones de Creencia en el Símplex -/
 structure BeliefDistribution (n : Nat) where
-  mass : Nat → Float
+  mass : Nat → Rat
   dim : Nat := n
 
 /-- Métrica de Información de Fisher g_F actuando sobre vectores tangentes en el símplex -/
