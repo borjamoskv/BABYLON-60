@@ -19,7 +19,7 @@ jobs:
       url: https://pypi.org/p/babylon60
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Python & UV
         uses: actions/setup-python@v7
