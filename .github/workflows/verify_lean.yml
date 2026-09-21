@@ -21,7 +21,7 @@ jobs:
       run:
         working-directory: proof/lean
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Cache elan + toolchains
         uses: actions/cache@v4

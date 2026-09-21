@@ -4,6 +4,6 @@ jobs:
   sanity:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: for f in $(find . -name "*.json" -not -path "./.git/*"); do python3 -m json.tool "$f" > /dev/null || exit 1; done
       - run: test -f AGENTS.md && test -d .agents/skills
