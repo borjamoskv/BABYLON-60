@@ -52,6 +52,9 @@ yt-dlp
 *.sqlite
 *.cortex_thermal_lock
 scripts/c5_demos/*.bin
+scripts/c5_demos/*_bin
+scripts/c5_demos/zk_guardrail
+scripts/c5_demos/tmp_bundle/
 scripts/c5_demos/*.csv
 scripts/c5_demos/lean_chunks/
 

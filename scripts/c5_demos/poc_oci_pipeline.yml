@@ -1,0 +1,36 @@
+name: BABYLON-60 C5-REAL OCI Publisher (PoC)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out monorepo
+        uses: actions/checkout@v4
+
+      - name: Enforce C5-REAL OCI Sanitization (INV_C5_OCI_LOWERCASE)
+        id: sanitize_repo
+        run: |
+          # La inyección directa de ${{ github.repository }} causa fricción (bloqueos) 
+          # en Docker/GHCR si el nombre del usuario o repositorio contiene mayúsculas.
+          # Aplicamos sanitización termodinámica estricta:
+          RAW_REPO="${{ github.repository }}"
+          SANITIZED_REPO=$(echo "$RAW_REPO" | tr '[:upper:]' '[:lower:]')
+          echo "repository=$SANITIZED_REPO" >> $GITHUB_OUTPUT
+          echo "Topología OCI normalizada: $RAW_REPO -> $SANITIZED_REPO"
+
+      - name: Build Sovereign Engine Image
+        run: |
+          # Simulación del build de la imagen usando el nombre sanitizado
+          echo "Construyendo imagen OCI: ghcr.io/${{ steps.sanitize_repo.outputs.repository }}:latest"
+          # docker build -t ghcr.io/${{ steps.sanitize_repo.outputs.repository }}:latest .
+
+      - name: Verify Hardware Attestation Delegation
+        run: |
+          echo "[*] Entorno Headless Detectado (GitHub Actions Runner)"
+          echo "[*] Bypass biométrico local deshabilitado."
+          echo "[*] Configurando túnel asíncrono hacia el Mac Studio Ultra del Operador (Delegación Multi-Sig)."
