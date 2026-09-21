@@ -1,17 +1,17 @@
-# 🐝 Topología de Enjambre Legión 222 Agentes (`legion_222_agentes.py`)
+# 🐝 Topología de Enjambre Sharur 222 Agentes (`sharur_222_agentes.py`)
 [![Topology](https://img.shields.io/badge/Swarm-222_Agents-orange?style=for-the-badge)]()
 [![Process Architecture](https://img.shields.io/badge/Processes-11_Cores_%C3%97_20_Threads-purple?style=for-the-badge)]()
 [![Verification](https://img.shields.io/badge/Verification-LOOM_%2B_FUZZ_%2B_THERMO-brightgreen?style=for-the-badge)]()
 
-La **Topología Legión 222** es la arquitectura de escalado extremo y pruebas de estrés termodinámico para el substrato C5-REAL de BABYLON-60.
+La **Topología Sharur 222** es la arquitectura de escalado extremo y pruebas de estrés termodinámico para el substrato C5-REAL de BABYLON-60.
 
 ---
 
-## 🏗️ Estructura de la Legión (222 Agentes)
+## 🏗️ Estructura de la Sharur (222 Agentes)
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│             Legión 222 - Orquestador Principal              │
+│             Sharur 222 - Orquestador Principal              │
 ├──────────────────────────────┬──────────────────────────────┤
 │  11 Procesos de Control (P)  │  20 Hilos por Proceso (S)    │
 │  (ProcessPoolExecutor)       │  (ThreadPoolExecutor)        │
@@ -35,10 +35,10 @@ Cada agente ejecuta un vector de verificación específico sobre el kernel y el 
 ## ⚡ Ejecución CLI
 
 ```bash
-# Lanzar la Legión 222 Agentes en tiempo real
-python3 /tmp/legion_222_agentes.py
+# Lanzar la Sharur 222 Agentes en tiempo real
+python3 /tmp/sharur_222_agentes.py
 ```
 
 ---
 
-<sub>BABYLON-60 Legión Swarm · Topología C5-REAL 222 Agentes · Borja Moskv</sub>
+<sub>BABYLON-60 Sharur Swarm · Topología C5-REAL 222 Agentes · Borja Moskv</sub>

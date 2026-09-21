@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
-# █ CENTURIA 100-WORKER TOPOLOGY | DOMAIN: agents.archi | STATE: C5-REAL
+# █ EDIN 100-WORKER TOPOLOGY | DOMAIN: agents.archi | STATE: C5-REAL
 # ============================================================================
 """
-Centuria-100 Topology: Mass Parallel Verification & Audit Engine (INV_C5_CENTURIA_BARRIER).
+Edin-100 Topology: Mass Parallel Verification & Audit Engine (INV_C5_EDIN_BARRIER).
 
 Slices monolithic verification tasks into bounded worker batches (up to 100 workers),
 enforcing deterministic barrier synchronization and attestation aggregation.
@@ -16,7 +16,7 @@ import time
 from typing import List, Dict, Any, Callable
 
 
-class CenturiaTopology:
+class EdinTopology:
     """Parallel verification topology scaling from 1 to 100 concurrent workers."""
 
     def __init__(self, worker_count: int = 100, max_batch_concurrency: int = 16):

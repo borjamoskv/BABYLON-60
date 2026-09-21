@@ -20,7 +20,7 @@ sys.path.extend(
 )
 
 from typing import TypedDict  # noqa: E402
-from babylon60.kernel.swarm_orchestrator import AgentPager  # noqa: E402
+from agents_archi import AgentPager  # noqa: E402
 
 
 class StressResult(TypedDict):
@@ -34,11 +34,11 @@ N_AGENTS = 500  # Enjambre Masivo
 MAX_CONCURRENCY = 50  # Límite de semáforo
 
 pager = AgentPager()
-semaphore = asyncio.Semaphore(MAX_CONCURRENCY)
 
 
 async def stress_agent(agent_id: int, tenant_id: str, inject_fault: bool = False) -> StressResult:
     """Subagente simulado en modo letargo para el test de estrés."""
+    semaphore = asyncio.Semaphore(MAX_CONCURRENCY)
     # Fase 1: Letargo (0% CPU)
     await pager.wait_for_beep()
 

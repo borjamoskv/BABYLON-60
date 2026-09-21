@@ -103,8 +103,9 @@ cortex-char-attest = "babylon60.cli.attest_character_count:main"
 
 [tool.hatch.build.targets.wheel]
 packages = [
-    "01_KISH_ENGINE/babylon60",
-    "02_EDIN_SWARMS/agents_archi"
+  "01_KISH_ENGINE/babylon60",
+  "02_EDIN_SWARMS/agents_archi",
+  "scripts"
 ]
 exclude = [
     "01_KISH_ENGINE/babylon60/utils"

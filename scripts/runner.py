@@ -201,7 +201,7 @@ def main() -> None:
     preserve_parser.add_argument("--provider", choices=["agent", "claude", "all"], default="all")
 
     # swarm
-    swarm_parser = subparsers.add_parser("swarm", help="Run parallel BFT legion swarm")
+    swarm_parser = subparsers.add_parser("swarm", help="Run parallel BFT sharur swarm")
     swarm_parser.add_argument(
         "--mode",
         choices=["default", "audit", "audit100", "stress", "mcts"],
@@ -307,21 +307,21 @@ def main() -> None:
                 cmd_args += ["--concurrency", str(args.concurrency)]
             if getattr(args, "json", False):
                 cmd_args.append("--json")
-            sys.exit(run_subcommand("c5_legion/legion_swarm.py", cmd_args + unknown))
+            sys.exit(run_subcommand("c5_sharur/sharur_swarm.py", cmd_args + unknown))
         elif mode == "audit":
             cmd_args = []
             if getattr(args, "json", False):
                 cmd_args.append("--json")
-            sys.exit(run_subcommand("c5_legion/legion_1000_audit_swarm.py", cmd_args + unknown))
+            sys.exit(run_subcommand("c5_sharur/sharur_1000_audit_swarm.py", cmd_args + unknown))
         elif mode == "audit100":
             cmd_args = []
             if getattr(args, "json", False):
                 cmd_args.append("--json")
-            sys.exit(run_subcommand("c5_legion/legion_100_full_spectrum_auditor.py", cmd_args + unknown))
+            sys.exit(run_subcommand("c5_sharur/sharur_100_full_spectrum_auditor.py", cmd_args + unknown))
         elif mode == "stress":
-            sys.exit(run_subcommand("c5_legion/legion_222_agentes.py", unknown))
+            sys.exit(run_subcommand("c5_sharur/sharur_222_agentes.py", unknown))
         elif mode == "mcts":
-            sys.exit(run_subcommand("c5_legion/legion_10000_orchestrator.py", unknown))
+            sys.exit(run_subcommand("c5_sharur/sharur_10000_orchestrator.py", unknown))
     elif args.command == "cortex":
         mode = getattr(args, "mode", None)
         cmd_args = []

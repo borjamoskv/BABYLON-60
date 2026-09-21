@@ -83,7 +83,7 @@ cargo run --bin babylon60_kernel -- unbox
 
 === ACCIONES INMEDIATAS DE ALTA EXERGÍA ===
   • babylon60_kernel bench   -> Medir throughput local en memoria lock-free
-  • babylon60_kernel swarm   -> Desplegar enjambre concurrente Legión
+  • babylon60_kernel swarm   -> Desplegar enjambre concurrente Sharur
   • babylon60_kernel audit   -> Falsación Popperiana de invariantes
   • babylon60_kernel watch   -> Monitor de exergía en tiempo real
 
@@ -99,13 +99,13 @@ cargo run --bin babylon60_kernel -- unbox
 │               02_AGENTS_ARCHI (Anillo-2)                    │
 │                 (agents.archi — Swarms)                     │
 │  • Músculo estocástico: Modelos de frontera (OpenRouter/Kimi)│
-│  • Concurrencia acotada P × S (Centuria 100x / Legión)      │
+│  • Concurrencia acotada P × S (Edin 100x / Sharur)      │
 │  • Deontología estricta: Guillotina de Hume (AOF v2.0)      │
 └──────────────┬───────────────────────────────▲──────────────┘
                │ (Sobres SCITT Ed25519)        │ (Diagnósticos LSP)
                ▼                               │
 ┌───────────────────────────────┐ ┌────────────┴──────────────┐
-│       00_BABYLON_SHIELD       │ │     01_CORTEX_ENGINE       │
+│       00_00_ABZU_KERNEL       │ │     01_CORTEX_ENGINE       │
 │    (babylon60.com — Anillo-0) │ │(cortexpersist.* — Anillo-1)│
 │  • SHARED MANIFEST (64 Bytes) │ │  • Servidor LSP Paracortex │
 │  • Seqlock SPMC Zero-Anergía  │ │  • Telemetría de Burnout   │
@@ -267,7 +267,7 @@ make all
 ```
 BABYLON-60/
 ├── src/                          # Crate raíz Rust (SharedManifest, seqlock, halt)
-├── 00_BABYLON_SHIELD/            # Defensa y Verificación
+├── 00_00_ABZU_KERNEL/            # Defensa y Verificación
 │   ├── crates/                   #   Motores de ejecución #![no_std], circuitos ZK
 │   └── formal_verification/      #   Proof IR → emisor Lean 4
 ├── 01_CORTEX_ENGINE/             # Sustrato de Memoria Cognitiva

@@ -52,7 +52,7 @@ LABEL org.opencontainers.image.title="BABYLON-60" \
 WORKDIR /app
 RUN useradd -m -u 1000 cortex
 
-COPY --from=builder /app /app
+COPY --from=builder --chown=cortex:cortex /app /app
 COPY --from=builder /root/.local /home/cortex/.local
 
 ENV PATH="/home/cortex/.local/bin:/app/.venv/bin:$PATH" \

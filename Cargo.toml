@@ -66,6 +66,10 @@ path = "tests/differential/mod.rs"
 name = "property"
 path = "tests/property/mod.rs"
 
+[[test]]
+name = "seqlock_loom"
+path = "tests/seqlock_loom.rs"
+
 [profile.release]
 lto = "fat"
 codegen-units = 1
@@ -126,3 +130,27 @@ path = "src/bin/poc_lean4_emitter.rs"
 [[bin]]
 name = "poc_lean4_aot_emitter"
 path = "src/bin/poc_lean4_aot_emitter.rs"
+
+[[bin]]
+name = "navier_stokes_larsa_oracle"
+path = "src/bin/navier_stokes_larsa_oracle.rs"
+
+[[bin]]
+name = "poc_stress_dec_mimetic"
+path = "src/bin/poc_stress_dec_mimetic.rs"
+
+[[bin]]
+name = "omega_100_synthesis"
+path = "src/bin/omega_100_synthesis.rs"
+
+[[bin]]
+name = "poc_kudurru_silicon_ns"
+path = "src/bin/poc_kudurru_silicon_ns.rs"
+
+[[bin]]
+name = "poc_navier_stokes_hunter"
+path = "src/bin/poc_navier_stokes_hunter.rs"
+
+[[bin]]
+name = "poc_bifurcacion"
+path = "src/bin/poc_bifurcacion.rs"

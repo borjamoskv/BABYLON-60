@@ -8,7 +8,7 @@
 
 ## 1. Misión y Límite Epistémico (Markov Blanket)
 
-`02_EDIN_SWARMS` constituye la tercera cámara del monorepositorio **BABYLON-60**, dedicada exclusivamente a la orquestación distribuida de enjambres multi-agente, topologías de verificación masiva (Centuria 100x / Legión) y protocolos de transducción agéntica.
+`02_EDIN_SWARMS` constituye la tercera cámara del monorepositorio **BABYLON-60**, dedicada exclusivamente a la orquestación distribuida de enjambres multi-agente, topologías de verificación masiva (Edin 100x / Sharur) y protocolos de transducción agéntica.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -16,7 +16,7 @@
 │               (edin.swarms — Swarms)                        │
 │  • Swarm Orchestrators (Kimi K3 / OpenRouter / vLLM / MLX)  │
 │  • Dynamic Subagent Lifecycle & Deadlock Mitigation         │
-│  • Topologies (Centuria 100x, Swarm Router, PxS Tuning)     │
+│  • Topologies (Edin 100x, Swarm Router, PxS Tuning)     │
 │  • Protocols (PSAFE v3.0, AOF v2.0, SCITT Attestation)      │
 └──────────────┬───────────────────────────────▲──────────────┘
                │ (Firma Ed25519)               │ (Diagnósticos)
@@ -44,7 +44,7 @@
 | `orchestrator/swarm.py` | Orquestador multi-backend con circuit breaker y futex pager. | `INV_C5_18` (Zero-Worktree) |
 | `orchestrator/lifecycle.py` | Máquina de estados de subagentes y watchdog anti-deadlock. | `INV_C5_TURING_CASTRATION` |
 | `topologies/router.py` | Despachador central de habilidades con tolerancia a typos. | `INV_C5_ROUTER_LEVENSHTEIN` |
-| `topologies/centuria.py` | Topología de verificación paralela de 100 workers. | `INV_C5_CENTURIA_BARRIER` |
+| `topologies/edin.py` | Topología de verificación paralela de 100 workers. | `INV_C5_EDIN_BARRIER` |
 | `protocols/aof.py` | Marco Operativo Agéntico (PSAFE v3.0 / AOF v2.0 / Guillotina de Hume). | `INV_C5_HUME_GUILLOTINE` |
 | `protocols/attestation.py` | Sobres criptográficos SCITT / COSE_Sign1 para mensajería inter-agente. | `INV_C5_SCITT_RFC9942` |
 | `clients/kimi.py` | Cliente nativo Moonshot / Kimi K3 resiliente. | `INV_C5_KIMI_AIRGAP` |

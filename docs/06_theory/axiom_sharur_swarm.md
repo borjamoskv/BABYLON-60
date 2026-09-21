@@ -1,10 +1,10 @@
 ---
-title: Axiomatización Formal — Legion 10k Swarm (C5-REAL)
+title: Axiomatización Formal — Sharur 10k Swarm (C5-REAL)
 status: Causal-Determinist
 version: 1.0.0
 ---
 
-# ⚡ Axiomatización Formal: Legion Parallel Workspace Swarm
+# ⚡ Axiomatización Formal: Sharur Parallel Workspace Swarm
 
 <div align="center">
 
@@ -27,7 +27,7 @@ version: 1.0.0
 | **Espacio de Trabajo** | $\mathcal{W}$ | Hipergrafo Inmutable | Conjunto discreto de Nodos Documentales $D = \{d_1, d_2, \dots, d_n\}$. |
 | **Agente Lógico** | $\alpha$ | Función Pura $\alpha : D \to \mathcal{V}$ | Autómata determinista de estado cero donde $\mathcal{V}$ es el Espacio de Violaciones. |
 | **Oráculo Estructural** | $\mathcal{O}$ | Predicados Booleanos | Validador de esquemas (AST, Patrones Prohibidos, Shebang, Invariantes C5). |
-| **Legión** | $\Lambda$ | Pool de Concurrencia Física | Orquestador de Process/Thread Pool que inyecta $\alpha$ sobre particiones disjuntas de $\mathcal{W}$. |
+| **Sharur** | $\Lambda$ | Pool de Concurrencia Física | Orquestador de Process/Thread Pool que inyecta $\alpha$ sobre particiones disjuntas de $\mathcal{W}$. |
 
 ---
 
@@ -47,7 +47,7 @@ version: 1.0.0
 
 > [!WARNING]
 > ### AX-LS-3: Fail-Fast de Grano Fino
-> Una excepción en $\alpha_i$ evaluando $d_i$ (e.g., error de I/O o corrupción binaria non-UTF-8) no interrumpe el bucle de la Legión, sino que colapsa determinísticamente en un elemento de $\mathcal{V}$ sin propagarse topológicamente.
+> Una excepción en $\alpha_i$ evaluando $d_i$ (e.g., error de I/O o corrupción binaria non-UTF-8) no interrumpe el bucle de la Sharur, sino que colapsa determinísticamente en un elemento de $\mathcal{V}$ sin propagarse topológicamente.
 > 
 > $$ \text{Crash}(\alpha_i) \implies \alpha_i(d_i) = \{ v_{\text{crash}} \} \land \text{Alive}(\alpha_{j \neq i}) $$
 
@@ -87,18 +87,18 @@ version: 1.0.0
 flowchart TB
     %% Estilos
     classDef discovery fill:#1e1e2e,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4;
-    classDef legion fill:#313244,stroke:#f9e2af,stroke-width:2px,color:#cdd6f4;
+    classDef sharur fill:#313244,stroke:#f9e2af,stroke-width:2px,color:#cdd6f4;
     classDef oracle fill:#181825,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4;
     classDef result fill:#181825,stroke:#b4befe,stroke-width:2px,color:#cdd6f4;
 
     Start(["Exploración AST / Filesystem"]):::discovery --> Part["Partición Topológica disjunta W_k"]:::discovery
 
-    subgraph Swarm_Pool ["Orquestación Legion Parallel (P × T Pool)"]
-        Part --> Worker1["Process Worker 1"]:::legion
-        Part --> WorkerN["Process Worker N"]:::legion
+    subgraph Swarm_Pool ["Orquestación Sharur Parallel (P × T Pool)"]
+        Part --> Worker1["Process Worker 1"]:::sharur
+        Part --> WorkerN["Process Worker N"]:::sharur
         
-        Worker1 --> Agent1["Agent Thread α_1"]:::legion
-        WorkerN --> AgentM["Agent Thread α_M"]:::legion
+        Worker1 --> Agent1["Agent Thread α_1"]:::sharur
+        WorkerN --> AgentM["Agent Thread α_M"]:::sharur
     end
 
     subgraph Structural_Oracle ["Oráculo Estructural O"]
@@ -138,15 +138,15 @@ $$ \lim_{N \to \infty} t_{\text{wall}} = \mathcal{O}\left( \frac{|\mathcal{W}|}{
 
 ```lean
 /-
-  C5Real/LegionSwarm.lean — Axiomatización de Topología Causal de Enjambres
+  C5Real/SharurSwarm.lean — Axiomatización de Topología Causal de Enjambres
   
   BABYLON-60 / C5-REAL v2
 -/
 
 namespace C5Real
 
-/-- Topología Causal de la Legión P×S. -/
-structure LegionSwarm (W : Type) (V : Type) where
+/-- Topología Causal de la Sharur P×S. -/
+structure SharurSwarm (W : Type) (V : Type) where
   /-- Agente Lógico con Transición de Estado Explícita (No muta W in-place) -/
   alpha_stateful : W → W × V
   

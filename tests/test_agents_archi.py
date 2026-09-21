@@ -18,7 +18,7 @@ from agents_archi import (
     SubagentState,
     SwarmRouter,
     TopologyTarget,
-    CenturiaTopology,
+    EdinTopology,
     Modality,
     Proposition,
     AOFValidator,
@@ -108,15 +108,15 @@ def test_swarm_router_typo_tolerance() -> None:
 
 
 @pytest.mark.asyncio
-async def test_centuria_parallel_verification_topology() -> None:
-    """Validates Centuria 100-worker batch execution and barrier aggregation."""
-    centuria = CenturiaTopology(worker_count=50, max_batch_concurrency=10)
+async def test_edin_parallel_verification_topology() -> None:
+    """Validates Edin 100-worker batch execution and barrier aggregation."""
+    edin = EdinTopology(worker_count=50, max_batch_concurrency=10)
     items = [f"item_{i}" for i in range(25)]
 
     def _sync_verify(item: str) -> bool:
         return item != "item_13"
 
-    report = await centuria.execute_parallel_verification(items, _sync_verify)
+    report = await edin.execute_parallel_verification(items, _sync_verify)
     assert report["total_items"] == 25
     assert report["passed"] == 24
     assert report["failed"] == 1

@@ -1,10 +1,10 @@
 ---
-title: Especificación Axiomática Legion 10k Swarm (CTA)
+title: Especificación Axiomática Sharur 10k Swarm (CTA)
 status: Causal-Determinist
 version: 1.0.0
 ---
 
-# Especificación Axiomática: Legion 10k Swarm (CTA)
+# Especificación Axiomática: Sharur 10k Swarm (CTA)
 
 <div align="center">
 
@@ -14,8 +14,8 @@ version: 1.0.0
 </div>
 
 ## 1. Declaración de Muerte del Agente (FSM to Semantic NFA)
-En la orquestación de la Legión (10.000 subagentes), rechazamos categóricamente la arquitectura basada en DAGs y Schedulers centralizados. Un enjambre de 10k nodos colapsa bajo el modelo tradicional por saturación de contexto y bloqueos mutuos. 
-**Axioma:** El "agente" como entidad con estado no existe. La Legión es un conjunto de **10.000 Transiciones Cognitivas ($T$)** que mapean un espacio de conocimiento inmutable (Ledger) a un nuevo estado proyectado.
+En la orquestación de la Sharur (10.000 subagentes), rechazamos categóricamente la arquitectura basada en DAGs y Schedulers centralizados. Un enjambre de 10k nodos colapsa bajo el modelo tradicional por saturación de contexto y bloqueos mutuos. 
+**Axioma:** El "agente" como entidad con estado no existe. La Sharur es un conjunto de **10.000 Transiciones Cognitivas ($T$)** que mapean un espacio de conocimiento inmutable (Ledger) a un nuevo estado proyectado.
 
 ## 2. Invariante de Estado: Event Sourcing & Proyección ($\mathcal{P}$)
 - **Inmutable Ledger:** El hipervisor Moskv/Python no mantiene el estado en memoria de los 10k agentes. Todo se escribe en un *Write-Ahead Log* (WAL) estructurado.

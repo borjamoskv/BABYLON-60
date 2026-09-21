@@ -47,7 +47,7 @@ The BABYLON-60 core has undergone a major topological phase transition (High Exe
 - **Sovereign Triad Consolidation**: The monorepo has physically partitioned into `00_ABZU_KERNEL` (Immutability/C-ABI/Ring-0), `01_KISH_ENGINE` (Exocortex/LSP/Ring-1), and `02_EDIN_SWARMS` (Stochastic Swarms/Ring-2), tearing down legacy SPA/Cloudflare friction.
 - **Zero-Copy IPC & Lock-Free Bus**: Migration of the asynchronous core to a shared-memory *Zero-Copy* bus (`iceoryx2`), coupling Python Swarm Workers to the C-ABI bus via PyO3 for sub-millisecond exergy packet flow. BFT consensus was collapsed into strict lock-free concurrency (`DashMap`).
 - **Epistemic Purge & GTM Honesty**: Strict reconciliation of marketing claims with the physical territory. TPM 2.0 hardware enclave attestation and Lean 4 "formal verification" claims were downgraded to "roadmap" and "axiomatized" respectively, transitioning to a pure software WORM and Ed25519 `Fail-Stop` cryptography.
-- **Transduction & Paracortex**: Bootstrapping of `Legión-1000` for Remotion SOTA 1080p60 audiovisual transduction and the deployment of `cortex-lsp` (LSP Paracortex).
+- **Transduction & Paracortex**: Bootstrapping of `Sharur-1000` for Remotion SOTA 1080p60 audiovisual transduction and the deployment of `cortex-lsp` (LSP Paracortex).
 
 ---
 
@@ -103,7 +103,7 @@ cargo run --bin babylon60_kernel -- unbox
 
 === IMMEDIATE HIGH-EXERGY ACTIONS ===
   • babylon60_kernel bench   -> Measure local throughput in lock-free memory
-  • babylon60_kernel swarm   -> Deploy concurrent Legion swarm
+  • babylon60_kernel swarm   -> Deploy concurrent Sharur swarm
   • babylon60_kernel audit   -> Popperian falsification of invariants
   • babylon60_kernel watch   -> Real-time exergy monitor
 
@@ -147,7 +147,7 @@ cargo run --bin babylon60_kernel -- unbox
 
 === ACCIONES INMEDIATAS DE ALTA EXERGÍA ===
   • babylon60_kernel bench   -> Medir throughput local en memoria lock-free
-  • babylon60_kernel swarm   -> Desplegar enjambre concurrente Legión
+  • babylon60_kernel swarm   -> Desplegar enjambre concurrente Sharur
   • babylon60_kernel audit   -> Falsación Popperiana de invariantes
   • babylon60_kernel watch   -> Monitor de exergía en tiempo real
 

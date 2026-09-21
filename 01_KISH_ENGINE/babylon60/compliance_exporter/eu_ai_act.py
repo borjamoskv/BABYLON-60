@@ -1,6 +1,6 @@
 """
 BABYLON-60 v4.0 Compliance Exporter — Multi-Country & Multi-Locale EU AI Act Audit Generator
-Generates verifiable, cryptographically sealed compliance reports for EU AI Act Articles 9, 10, 11, 12, 14
+Generates verifiable, cryptographically sealed compliance reports for EU AI Act Articles 9, 10, 11, 12, 14, 50
 localized for target countries/jurisdictions (ES, EN, DE, FR, IT).
 
 FIX B-3 (audit 2026-09-10): the exporter no longer issues CONFORME certificates
@@ -241,6 +241,7 @@ class EUAIActComplianceExporter:
             art10_status = status_pass
             art11_status = status_pass
             art14_status = status_pass
+            art50_status = status_pass
         else:
             unverified = verification["detail"]
             art9_status = unverified
@@ -248,6 +249,7 @@ class EUAIActComplianceExporter:
             art11_status = unverified
             art12_status = unverified
             art14_status = unverified
+            art50_status = unverified
 
         cert: Dict[str, Any] = {
             "title": t["title"],
@@ -301,6 +303,12 @@ class EUAIActComplianceExporter:
                     "status": art14_status,
                     "mechanism": t["mechanisms"]["Article_14"],
                     "evidence_hash": hashlib.sha256(f"ART14:{global_hash}".encode()).hexdigest(),
+                },
+                "Article_50_Transparency": {
+                    "title": t["article_titles"].get("Article_50", "Article 50: Transparency Obligations for GPAI"),
+                    "status": art50_status,
+                    "mechanism": "Cryptographic SCITT L5 immutable attestation",
+                    "evidence_hash": hashlib.sha256(f"ART50:{global_hash}".encode()).hexdigest(),
                 },
             },
             "cryptographic_attestation": {
@@ -460,6 +468,7 @@ class EUAIActComplianceExporter:
 | **{cert["articles_compliance"]["Article_11_Technical_Documentation"]["title"]}** | {cert["articles_compliance"]["Article_11_Technical_Documentation"]["mechanism"]} | {cert["articles_compliance"]["Article_11_Technical_Documentation"]["status"]} | `{cert["articles_compliance"]["Article_11_Technical_Documentation"]["evidence_hash"][:16]}...` |
 | **{cert["articles_compliance"]["Article_12_Record_Keeping_Logging"]["title"]}** | {cert["articles_compliance"]["Article_12_Record_Keeping_Logging"]["mechanism"]} | {cert["articles_compliance"]["Article_12_Record_Keeping_Logging"]["status"]} | `{cert["articles_compliance"]["Article_12_Record_Keeping_Logging"]["evidence_hash"][:16]}...` |
 | **{cert["articles_compliance"]["Article_14_Human_Oversight"]["title"]}** | {cert["articles_compliance"]["Article_14_Human_Oversight"]["mechanism"]} | {cert["articles_compliance"]["Article_14_Human_Oversight"]["status"]} | `{cert["articles_compliance"]["Article_14_Human_Oversight"]["evidence_hash"][:16]}...` |
+| **{cert["articles_compliance"]["Article_50_Transparency"]["title"]}** | {cert["articles_compliance"]["Article_50_Transparency"]["mechanism"]} | {cert["articles_compliance"]["Article_50_Transparency"]["status"]} | `{cert["articles_compliance"]["Article_50_Transparency"]["evidence_hash"][:16]}...` |
 
 ---
 

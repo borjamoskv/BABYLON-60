@@ -23,7 +23,7 @@ from .orchestrator import (
 from .topologies import (
     SwarmRouter,
     TopologyTarget,
-    CenturiaTopology,
+    EdinTopology,
 )
 from .protocols import (
     Modality,
@@ -50,7 +50,7 @@ __all__ = [
     # Topologies
     "SwarmRouter",
     "TopologyTarget",
-    "CenturiaTopology",
+    "EdinTopology",
     # Protocols
     "Modality",
     "Proposition",

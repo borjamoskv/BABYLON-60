@@ -95,7 +95,7 @@ fn cpu_spin_yield() {
 /// La invocación concurrente desde múltiples hilos es UB.
 #[inline]
 pub fn publish(m: &SharedManifest, epoch: u64, hash: &[u64; 4]) {
-    let s = m.seq.load(Ordering::Relaxed);
+    let s = m.seq.load(Ordering::Acquire);
     m.seq.store(s.wrapping_add(1), Ordering::Relaxed);
     fence(Ordering::Release);
 
@@ -135,7 +135,7 @@ pub fn read(m: &SharedManifest) -> Option<(u64, [u64; 4])> {
         let h3 = m.payload_hash[3].load(Ordering::Relaxed);
 
         memory_barrier_acquire_read();
-        let s2 = m.seq.load(Ordering::Relaxed);
+        let s2 = m.seq.load(Ordering::Acquire);
 
         if s1 == s2 {
             return Some((epoch, [h0, h1, h2, h3]));
