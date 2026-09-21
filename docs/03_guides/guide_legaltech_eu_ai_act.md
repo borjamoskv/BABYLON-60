@@ -23,12 +23,12 @@ El motor de auditoría verifica programáticamente las 6 exigencias normativas f
 
 | Artículo | Exigencia Reguladora | Implementación C5-REAL | Invariante de Verificación |
 | :---: | :--- | :--- | :--- |
-| **Art. 9** | **Sistema de Gestión de Riesgos** | Análisis continuo de fallos y límites de entropía | `verify_score_threshold` ($Score \ge 700$) |
+| **Art. 9** | **Sistema de Gestión de Riesgos** | Análisis continuo de fallos y límites de entropía | `[OBSOLETO: verify_score_threshold]` ($Score \ge 700$) |
 | **Art. 10** | **Gobernanza de Datos & Sesgo** | Ingesta de datos de alta exergía, rechazo de *slop* | Axioma 4 ($\text{supp}(f^\dagger_p(y)) \subseteq \text{supp}(p)$) |
 | **Art. 11** | **Documentación Técnica** | Artefactos reproducibles y pruebas AST | `AXIOMATIZATION_C5_REAL.md` |
 | **Art. 12** | **Registro de Eventos (Logging)** | Historial determinista inmutable (`jsonl`) | `AX-DAG-2` (Aciclicidad y trazabilidad) |
 | **Art. 13** | **Transparencia & Explicabilidad** | Morfismos bayesianos de expectativa condicional | $f^\dagger_p$ Desintegración Bayesiana |
-| **Art. 14** | **Supervisión Humana (HITL)** | Puertas de veto humano e interrupción física | `RULE_CAUSAL_HITL_VERIFY_01` |
+| **Art. 14** | **Supervisión Humana (HITL)** | Puertas de veto humano e interrupción física | `[OBSOLETO: RULE_CAUSAL_HITL_VERIFY_01]` |
 
 ---
 

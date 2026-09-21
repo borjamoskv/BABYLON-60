@@ -57,7 +57,7 @@ Añadir la especificación en KaTeX dentro de [`docs/06_theory/AXIOMATIZATION_C5
 - Condición de fallo/falsación popperiana.
 
 ### Paso 2: Implementación en el Verificador
-Agregar el método de verificación en la clase `AxiomVerifier` en [`axiom_verifier_z3.py`](../../scripts/c5_verifiers/axiom_verifier_z3.py):
+Agregar el método de verificación en la clase `[OBSOLETO: AxiomVerifier]` en [`axiom_verifier_z3.py`](../../scripts/c5_verifiers/axiom_verifier_z3.py):
 
 ```python
 def verify_my_new_axiom(self, param1: float, param2: float) -> None:

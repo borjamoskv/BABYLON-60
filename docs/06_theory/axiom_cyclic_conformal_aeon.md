@@ -55,7 +55,7 @@ version: 1.0.0
 > 
 > $$ \Delta Q_{\text{dissipated}} \ge N \cdot k_B T \ln 2 $$
 > 
-> A altas frecuencias de inferencia ($N \to \infty$), esta disipación satura la envolvente térmica del hardware, provocando Burnout Termodinámico (`INV_C5_19`).
+> A altas frecuencias de inferencia ($N \to \infty$), esta disipación satura la envolvente térmica del hardware, provocando Burnout Termodinámico (`[OBSOLETO: INV_C5_19]`).
 
 > [!TIP]
 > ### AX-PL-4: Reseteo Conforme hacia el Estado Fundamental

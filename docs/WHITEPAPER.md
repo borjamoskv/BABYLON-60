@@ -28,7 +28,7 @@ version: 4.3.0
 > | Ring-0 SharedManifest 64B Seqlock SPMC | ✅ **Implemented** | `src/manifest.rs`, `src/seqlock.rs` — 84 tests passing |
 > | Fail-Stop Apoptosis (`0xDEAD_6060`) | ✅ **Implemented** | `src/halt.rs` |
 > | Lean 4 Bisimulation (`BabylonTrace.lean`) | ✅ **Verified** | 0 errors, 0 warnings |
-> | Hash-chained SQLite/WAL Ledger | ✅ **Implemented** | `CortexPersistLedger` — Ed25519 + Merkle |
+> | Hash-chained SQLite/WAL Ledger | ✅ **Implemented** | `[OBSOLETO: CortexPersistLedger]` — Ed25519 + Merkle |
 > | C5-REAL Invariant Suite (21 invariants) | ✅ **Implemented** | `tests/test_c5_invariants.py` — 19 pass, 1 xfail |
 > | Ed25519 EU AI Act Compliance Exporter | ✅ **Implemented** | `babylon60/compliance_exporter/` |
 > | F60 Sexagesimal Exact Arithmetic | 🔬 **Design stage** | Specification in §3 |
@@ -155,7 +155,7 @@ All temporal values are strongly typed with units (`UNIT.TICK`, `UNIT.SECOND`, `
 
 ### 3.3 Overflow Protection (Truncation Firewall)
 
-If `base60_scale` saturates, the result cannot be represented exactly. Rather than silently truncating, the system triggers `epistemic_halt(HaltReason::F60Truncation)`. The kernel refuses to emit approximate results under any circumstance.
+If `[OBSOLETO: base60_scale]` saturates, the result cannot be represented exactly. Rather than silently truncating, the system triggers `epistemic_halt(HaltReason::F60Truncation)`. The kernel refuses to emit approximate results under any circumstance.
 
 ---
 
@@ -163,7 +163,7 @@ If `base60_scale` saturates, the result cannot be represented exactly. Rather th
 
 ### 4.1 Architecture
 
-The `CortexPersistLedger` (`01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py`) implements a hash-chained append-only log backed by SQLite/WAL:
+The `[OBSOLETO: CortexPersistLedger]` (`01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py`) implements a hash-chained append-only log backed by SQLite/WAL:
 
 ```python
 @dataclass
@@ -261,7 +261,7 @@ The long-term architecture compiles execution traces to Lean 4 proof obligations
 Program → Typed SSA → Proof IR → [Lean 4 Emitter]
 ```
 
-The Proof IR contains exclusively: `State`, `Transition`, `Invariant`, `Lemma`, `Obligation`, `Witness`. The `crates/b60-lang/` crate provides the compiler scaffolding.
+The Proof IR contains exclusively: `State`, `[OBSOLETO: Transition]`, `Invariant`, `Lemma`, `[OBSOLETO: Obligation]`, `[OBSOLETO: Witness]`. The `crates/b60-lang/` crate provides the compiler scaffolding.
 
 ### 6.3 The Core Theorem (Operational Version)
 

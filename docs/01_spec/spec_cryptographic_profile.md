@@ -22,10 +22,10 @@ version: 4.3.0
 
 | Componente | Algoritmo | Entrada | Codificación | Versión |
 | :--- | :--- | :--- | :--- | :--- |
-| **ID de Objeto** | SHA3-256 | `type_prefix` + CBOR | CBOR Determinista | v1 |
+| **ID de Objeto** | SHA3-256 | `[OBSOLETO: type_prefix]` + CBOR | CBOR Determinista | v1 |
 | **ID de Evento** | SHA3-256 | Evento canónico | CBOR Determinista | v1 |
-| **Raíz de Cadena** | SHA3-256 | `previous_root` + `event_ID` | Bytes con prefijo de longitud | v1 |
-| **Padre Merkle** | SHA3-256 | `domain_tag` + `left` + `right` | Binario fijo | v1 |
+| **Raíz de Cadena** | SHA3-256 | `[OBSOLETO: previous_root]` + `[OBSOLETO: event_ID]` | Bytes con prefijo de longitud | v1 |
+| **Padre Merkle** | SHA3-256 | `[OBSOLETO: domain_tag]` + `left` + `right` | Binario fijo | v1 |
 | **Marca de Tiempo** | Entero (ms) | UTC | Entero sin signo | v1 |
 
 ## 2. Etiquetas de Separación de Dominio

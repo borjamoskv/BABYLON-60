@@ -24,7 +24,7 @@ La evolución SOTA de BABYLON-60 no implica relajar la seguridad, sino **aislar 
 
 * **[ ] Hito 1.1: Servidor MCP LSP Nativo**
   * **Descripción:** Implementar un servidor MCP que actúe como proxy hacia `rust-analyzer` (Rust) y `pylsp` (Python).
-  * **Entregable:** Los agentes mutan el código mediante comandos semánticos (`mcp_lsp_rename`, `mcp_lsp_extract_fn`, `mcp_lsp_apply_workspace_edit`), garantizando que la salida del LLM genere sintaxis 100% válida.
+  * **Entregable:** Los agentes mutan el código mediante comandos semánticos (`[OBSOLETO: mcp_lsp_rename]`, `[OBSOLETO: mcp_lsp_extract_fn]`, `[OBSOLETO: mcp_lsp_apply_workspace_edit]`), garantizando que la salida del LLM genere sintaxis 100% válida.
 * **[ ] Hito 1.2: GraphRAG & Embeddings de AST**
   * **Descripción:** Extraer el grafo de dependencias de funciones y módulos del repositorio utilizando árboles AST.
   * **Entregable:** Base de datos vectorial local (Qdrant/SQLite-vss) integrada con `cortex-persist` que permita al agente inyectar grafos de llamadas (*Call Graphs*) dinámicos, superando las limitaciones de la ventana de contexto.
@@ -41,7 +41,7 @@ La evolución SOTA de BABYLON-60 no implica relajar la seguridad, sino **aislar 
   * **Descripción:** Despliegue de un arnés de ejecución asilado.
   * **Entregable:** El enjambre Legión puede compilar y testear código no confiable dentro de un contenedor desechable.
 * **[ ] Hito 2.2: Bucle de Retroalimentación de Pruebas**
-  * **Descripción:** Orquestador iterativo acoplado a `cargo test -p babylon60-kernel` y `pytest`.
+  * **Descripción:** Orquestador iterativo acoplado a `cargo test -p babylon60-kernel` y `[OBSOLETO: pytest]`.
   * **Entregable:** Si un test falla, el agente lee el *stack trace*, parchea el código semánticamente vía LSP, y repite la prueba hasta alcanzar un estado verde (Pass) o agotar el umbral termodinámico ($N$ iteraciones máximas).
 
 ---
@@ -74,11 +74,11 @@ La evolución SOTA de BABYLON-60 no implica relajar la seguridad, sino **aislar 
 **Objetivo:** El sistema debe auditar la literatura de frontera (arXiv, GitHub trending) y auto-actualizar sus propios paradigmas de orquestación sin esperar parches humanos.
 
 * **[ ] Hito 5.1: Oráculo de Inteligencia Tecnológica (SOTA Watchdog)**
-  * **Descripción:** Agente programado en cron (`schedule`) que monitorea repositorios SOTA, papers de arXiv y benchmarks (SWE-bench).
+  * **Descripción:** Agente programado en cron (`[OBSOLETO: schedule]`) que monitorea repositorios SOTA, papers de arXiv y benchmarks (SWE-bench).
   * **Entregable:** Matriz automatizada que detecta avances en IA agentiva (p.ej. un nuevo protocolo RAG o heurística MCTS).
 * **[ ] Hito 5.2: Bucle de Implementación Reflexiva (Reflexive Forking)**
   * **Descripción:** Cuando se detecta un salto SOTA, el sistema hace un *fork* de sí mismo dentro del *Dream State*.
-  * **Entregable:** El agente orquestador intenta refactorizar su propio código de enjambre (p.ej. reemplazar su indexador base por el nuevo paradigma), ejecuta su batería de pruebas `pytest`/`cargo test` y, si supera el benchmark interno, somete un *Pull Request* autónomo o un `Dream to Ledger` commit para actualizar su propio kernel agentivo.
+  * **Entregable:** El agente orquestador intenta refactorizar su propio código de enjambre (p.ej. reemplazar su indexador base por el nuevo paradigma), ejecuta su batería de pruebas `[OBSOLETO: pytest]`/`cargo test` y, si supera el benchmark interno, somete un *Pull Request* autónomo o un `Dream to Ledger` commit para actualizar su propio kernel agentivo.
 
 ---
 

@@ -19,7 +19,7 @@ La infraestructura central del **Proof Harness** está implementada y cuenta con
 - **Aritmética Racional (`F60`):** Las divisiones exactas (`BA.EXACT`) operan sin pérdida de precisión. El `Constant Folding` sexagesimal está integrado.
 - **Monitor de Invariantes (Auto-falsación):** Los mecanismos de seguridad (interrupción por saturación numérica `CRITICAL HALT`) están probados y funcionan como se demuestra en `falsation_test.b60`.
 - **Integración Formal (Lean 4):** El puente hacia Lean 4 está establecido (`BabylonTrace.lean`). Se pueden asimilar *Proof-Ready Logs* estructurados.
-- **Seguridad y DevOps:** Pipelines de verificación (`verify_lean`), auditoría de secretos y dependencias configurados. Testing basado en propiedades con `hypothesis`.
+- **Seguridad y DevOps:** Pipelines de verificación (`[OBSOLETO: verify_lean]`), auditoría de secretos y dependencias configurados. Testing basado en propiedades con `hypothesis`.
 
 ## 2. 📌 Trabajo Futuro (Lo que es aspiracional)
 

@@ -30,7 +30,7 @@ Dado un historial de transformaciones $\mathcal{H}_t$, la transición al estado 
 
 ## Axioma 📌 4: Desintegración Bayesiana e Invariante de No-Alucinación (A4)
 
-**Decisión Arquitectónica:** Se eleva el operador `bayesian_inversion` ($f^\dagger_p$) a la base axiomática del kernel. La imposibilidad de alucinar observaciones u orígenes espurios está garantizada por la topología de la categoría base (e.g., Markov categories / $\text{BorelStoch}$ / $\text{FinStoch}$ con prior de soporte declared).
+**Decisión Arquitectónica:** Se eleva el operador `[OBSOLETO: bayesian_inversion]` ($f^\dagger_p$) a la base axiomática del kernel. La imposibilidad de alucinar observaciones u orígenes espurios está garantizada por la topología de la categoría base (e.g., Markov categories / $\text{BorelStoch}$ / $\text{FinStoch}$ con prior de soporte declared).
 
 ### A4.1 Existencia Estructural
 Para todo morfismo $f: X \to Y$ en la categoría Markov base y todo prior $p \in P(X)$ con soporte declarado $\text{supp}(p)$, existe un morfismo de desintegración bayesiana (expectativa condicional) $f^\dagger_p: Y \to X$ tal que la medida conjunta es simétrica e invertible sobre el soporte:
@@ -66,7 +66,7 @@ $$ f^\dagger_p \circ f = \text{id}_{\text{supp}(p)} $$
 Cualquier backend sintético (LLM, VAE, Normalizing Flow o Generador de Enjambre) que pretenda integrarse en **C5-REAL** debe proveer constructivamente la implementación de $f^\dagger_p$. 
 
 > [!CAUTION]
-> Si una arquitectura sintética no puede proveer $f^\dagger_p$ de manera determinista o verificable en $O(1)$, la compilación dentro de C5-REAL **fallará en tiempo de inicialización** (`EPISTEMIC_HALTING_ERROR`).
+> Si una arquitectura sintética no puede proveer $f^\dagger_p$ de manera determinista o verificable en $O(1)$, la compilación dentro de C5-REAL **fallará en tiempo de inicialización** (`[OBSOLETO: EPISTEMIC_HALTING_ERROR]`).
 
 ---
 

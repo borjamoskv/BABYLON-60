@@ -36,6 +36,6 @@ Todo output generado por un skill DEBE maximizar la densidad de información út
 
 | Cadena | Secuencia | Descripción |
 | :--- | :--- | :--- |
-| Ω-Synthesis | `deep-research` $\to$ `polymath` $\to$ `axiomatization` | Cristalización Ontológica Completa |
-| Ω-Falsification | `polymath` $\to$ `popperian-falsification` | Síntesis + Falsación Inmediata |
+| Ω-Synthesis | `deep-research` $\to$ `[OBSOLETO: polymath]` $\to$ `[OBSOLETO: axiomatization]` | Cristalización Ontológica Completa |
+| Ω-Falsification | `[OBSOLETO: polymath]` $\to$ `popperian-falsification` | Síntesis + Falsación Inmediata |
 | Ω-Babylon | `babylon60-ide-orchestrator` $\to$ `cortex-telemetry` | Visual Cortex Telemetry Flow |

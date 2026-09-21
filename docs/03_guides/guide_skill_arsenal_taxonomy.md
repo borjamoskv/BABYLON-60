@@ -112,7 +112,7 @@ El arsenal de skills opera bajo una demarcación ontológica estricta de dos can
 | 14 | `c5-ultrathink-epistemic-audit` | Nucleus | `20400` | C5-REAL Standard |
 | 15 | `c5-real-thermodynamic-override` | Governance | `20400` | C5-REAL Standard |
 | 16 | `cct-cognitive-theory-advisor` | Nucleus | `20300` | C5-REAL Standard |
-| 17 | `ultrathink` | Nucleus | `20300` | C5-REAL Standard |
+| 17 | `[OBSOLETO: ultrathink]` | Nucleus | `20300` | C5-REAL Standard |
 | 18 | `autodidact-omega-deep-research` | Nucleus | `20200` | C5-REAL Standard |
 | 19 | `cloud-chamber` | Nucleus | `20200` | C5-REAL Standard |
 | 20 | `grill-me-v2` | Governance | `19900` | C5-REAL Standard |
@@ -185,7 +185,7 @@ El arsenal de skills opera bajo una demarcación ontológica estricta de dos can
 | 9 | `cortex-telemetry` | Operations | `17500` | C5-REAL Standard |
 | 10 | `homebrew-ecosystem-management` | Operations | `17200` | C5-REAL Standard |
 | 11 | `github-architect` | Operations | `17000` | C5-REAL Standard |
-| 12 | `wizard` | Utilities | `17000` | C5-REAL Standard |
+| 12 | `[OBSOLETO: wizard]` | Utilities | `17000` | C5-REAL Standard |
 | 13 | `flstudio-mcp-production` | Operations | `17000` | C5-REAL Standard |
 | 14 | `youtube-remotion-sota` | Operations | `16800` | C5-REAL Standard |
 | 15 | `audiovisual-sota` | Operations | `16800` | C5-REAL Standard |
@@ -218,6 +218,6 @@ El arsenal de skills opera bajo una demarcación ontológica estricta de dos can
 | # | Skill | Categoría | Exergía ($\Xi$) | Ámbito de Acción |
 |:--|:------|:----------|:---------------:|:-----------------|
 | 1 | `ironic-content-generator` | Utilities | `11200` | C5-REAL Standard |
-| 2 | `handoff` | Utilities | `10500` | C5-REAL Standard |
+| 2 | `[OBSOLETO: handoff]` | Utilities | `10500` | C5-REAL Standard |
 
 ---

@@ -46,12 +46,12 @@ graph TD
 ### 2.1 Pausa Determinista MCTS (2.8s)
 Antes de emitir operaciones I/O o modificar el disco, cada subagente introduce una pausa determinista de Monte Carlo Tree Search ($2.8\,\text{s}$) para colapsar los caminos de ejecución estocásticos y seleccionar la trayectoria de máxima densidad exergética $\Xi(T)$.
 
-### 2.2 Control de Switches de Contexto (`ru_nivcsw`)
+### 2.2 Control de Switches de Contexto (`[OBSOLETO: ru_nivcsw]`)
 El monitor de kernel mide los cambios de contexto involuntarios. Si los *involuntary context switches* superan el umbral estricto:
 
 $$ \text{ru\_nivcsw} > 2132 $$
 
-El orquestador activa un **Circuit Breaker** inmediato (`SIGKILL_State_Purge`) para evitar la degradación de la memoria unificada.
+El orquestador activa un **Circuit Breaker** inmediato (`[OBSOLETO: SIGKILL_State_Purge]`) para evitar la degradación de la memoria unificada.
 
 ---
 

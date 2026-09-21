@@ -69,7 +69,7 @@ When the agent executes instructions under strict F60 exactness:
 If an ungrounded state jump occurs:
 - The lattice displays a sharp chromatic collision across non-adjacent vertices (e.g., C Major → F# Minor / Tritone jump).
 - The visualizer highlights the node in high-contrast red.
-- **Auditor action:** Pause execution or trigger `QUARANTINE_AND_FREEZE` via the IDE interface.
+- **Auditor action:** Pause execution or trigger `[OBSOLETO: QUARANTINE_AND_FREEZE]` via the IDE interface.
 
 ---
 

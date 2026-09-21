@@ -37,8 +37,8 @@ sequenceDiagram
 
 1. **Reintentos Exponenciales en Cloudflare Worker**: El Worker reintenta la entrega hasta 3 veces si la API backend está temporalmente fuera de servicio.
 2. **Extracción e Inspección de Adjuntos Base64**: Adjuntos de código, logs, archivos JSON o Markdown (hasta 2MB por adjunto) se decodifican automáticamente para que los agentes de IA de BABYLON-60 puedan analizarlos inmediatamente.
-3. **Control de Idempotencia Integrado**: Previene el procesamiento duplicado de correos reenviados mediante rastreo en memoria de `message_id`.
-4. **Clasificación de Intención y Severidad**: Categorización automática de incidentes (`SECURITY_INCIDENT`, `BUG_REPORT`, `TECHNICAL_SUPPORT`, `FEATURE_REQUEST`) y cálculo de urgencia (`URGENT`, `HIGH`, `MEDIUM`, `LOW`).
+3. **Control de Idempotencia Integrado**: Previene el procesamiento duplicado de correos reenviados mediante rastreo en memoria de `[OBSOLETO: message_id]`.
+4. **Clasificación de Intención y Severidad**: Categorización automática de incidentes (`[OBSOLETO: SECURITY_INCIDENT]`, `[OBSOLETO: BUG_REPORT]`, `[OBSOLETO: TECHNICAL_SUPPORT]`, `[OBSOLETO: FEATURE_REQUEST]`) y cálculo de urgencia (`[OBSOLETO: URGENT]`, `HIGH`, `[OBSOLETO: MEDIUM]`, `LOW`).
 
 ---
 
@@ -120,4 +120,4 @@ Añade en la consola DNS de Cloudflare para maximizar la reputación del dominio
 
 | Tipo | Nombre | Contenido | TTL |
 | :--- | :--- | :--- | :--- |
-| **TXT** | `_dmarc` | `v=DMARC1; p=none;` | Auto |
+| **TXT** | `[OBSOLETO: _dmarc]` | `v=DMARC1; p=none;` | Auto |

@@ -67,7 +67,7 @@ SAR.B60 R0
 HALT
 ```
 
-**Resultado:** `F60` mantiene `1/3` de hora como `20 minutos exactos` sin pérdida. No importa cuántas veces se itere: el resultado es siempre idéntico. El `replay_hash` nunca diverge.
+**Resultado:** `F60` mantiene `1/3` de hora como `20 minutos exactos` sin pérdida. No importa cuántas veces se itere: el resultado es siempre idéntico. El `[OBSOLETO: replay_hash]` nunca diverge.
 
 Guarda este programa como `hello_causal.b60` y ejecútalo:
 
@@ -77,7 +77,7 @@ Guarda este programa como `hello_causal.b60` y ejecútalo:
 
 ---
 
-## Lección 2: Concurrencia Causal (`FORK` + `AWAIT` vs `asyncio`)
+## Lección 2: Concurrencia Causal (`FORK` + `AWAIT` vs `[OBSOLETO: asyncio]`)
 
 ### El problema en Python (Concurrencia Causal)
 
@@ -149,7 +149,7 @@ Event 2: AGENT_A_COMPLETED      (parents: [1])
 Event 3: AGENT_B_COMPLETED_AFTER_A (parents: [2])  ← CAUSALIDAD GARANTIZADA
 ```
 
-La inversión causal es **imposible por construcción**. Si ocurriera por un bug del scheduler, el `replay_hash` diverge y el artefacto se invalida automáticamente.
+La inversión causal es **imposible por construcción**. Si ocurriera por un bug del scheduler, el `[OBSOLETO: replay_hash]` diverge y el artefacto se invalida automáticamente.
 
 ---
 
@@ -236,7 +236,7 @@ Un auditor puede verificar:
 - **Cuándo:** `logical_timestamp` + `PhysicalClock` en metadata
 - **Por qué:** `parents` = cadena causal completa hasta el génesis
 - **Integridad:** `hash` encadena con los padres. Modificar un evento rompe toda la cadena downstream
-- **Reproducibilidad:** Re-ejecutar el mismo seed produce el mismo `replay_hash` o el artefacto se invalida
+- **Reproducibilidad:** Re-ejecutar el mismo seed produce el mismo `[OBSOLETO: replay_hash]` o el artefacto se invalida
 
 ---
 

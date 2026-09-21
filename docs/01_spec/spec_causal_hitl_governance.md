@@ -26,7 +26,7 @@ Traditional LLM applications rely heavily on **Level 0 Conversational Interfaces
 | :--- | :--- | :--- | :--- |
 | **Nivel 0** | Chatbot Conversacional | Memoryless / Transient context | Open-loop, purely text-generative. |
 | **Nivel 1** | Agente No-Code Operacional | Relational Tables / Key-Value | Tool-calling with synchronous UI modals for approval. |
-| **Nivel 2** | Grafo de Estado Programático | `StateGraph`, VectorDBs, Memory Trees | Asynchronous interrupt hooks (`interrupt_before/after`). |
+| **Nivel 2** | Grafo de Estado Programático | `[OBSOLETO: StateGraph]`, VectorDBs, Memory Trees | Asynchronous interrupt hooks (`interrupt_before/after`). |
 | **Nivel 3** | Gobernanza Causal & Formal | Invariant Proofs (Lean 4), Exergy Bounds | Non-blocking state snapshotting, causal gates & C-ABI SCITT receipts. |
 
 ---
@@ -44,7 +44,7 @@ $$\text{State}_{t+1} = \begin{cases}
 \end{cases}$$
 
 ### Cryptographic Tamper-Evident SHA-256 Receipts (SCITT Profile)
-Every state decision ($\text{APPROVED}$, $\text{REJECTED}$, $\text{PAUSED}$) emits a cryptographically linked block in the `audit_ledger`:
+Every state decision ($\text{APPROVED}$, $\text{REJECTED}$, $\text{PAUSED}$) emits a cryptographically linked block in the `[OBSOLETO: audit_ledger]`:
 
 $$H_k = \text{SHA256}\Big(\text{exec\_id} \,||\, \text{action} \,||\, \text{criticality} \,||\, \text{decision} \,||\, \text{timestamp} \,||\, H_{k-1}\Big)$$
 
@@ -55,11 +55,11 @@ Where $H_0 = 0^{64}$. Any tampering or retro-active alteration of historical dec
 ## 4. Key Architectural Properties
 
 1. **Non-Blocking Suspension & Asynchronous Resume:**
-   Pausing execution does NOT hold thread execution or consume CPU cycles. The state payload is serialized to a persistent SQLite WAL snapshot buffer (`state_snapshots`). The execution can be resumed asynchronously from a different shell or process using `worker.resume_execution(execution_id, decision)`.
+   Pausing execution does NOT hold thread execution or consume CPU cycles. The state payload is serialized to a persistent SQLite WAL snapshot buffer (`[OBSOLETO: state_snapshots]`). The execution can be resumed asynchronously from a different shell or process using `worker.resume_execution(execution_id, decision)`.
 2. **Action Criticality Scoping:**
-   - `READ_ONLY`: Autonomous execution without interrupter gates.
-   - `COMPUTE`: Deterministic, reversible computation (previews, simulations).
-   - `MUTATIVE_CRITICAL`: High-impact state mutation requiring operator sign-off.
+   - `[OBSOLETO: READ_ONLY]`: Autonomous execution without interrupter gates.
+   - `[OBSOLETO: COMPUTE]`: Deterministic, reversible computation (previews, simulations).
+   - `[OBSOLETO: MUTATIVE_CRITICAL]`: High-impact state mutation requiring operator sign-off.
 
 ---
 

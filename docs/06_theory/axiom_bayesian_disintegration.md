@@ -48,7 +48,7 @@ version: 1.0.0
 > 
 > $$ \forall y \in Y, \quad \text{supp}(f^\dagger_p(y)) \subseteq \text{supp}(p) $$
 > 
-> **Mapeo en Código:** Forzado determinista de masa `0.0` fuera del soporte del prior (`prior_supp`).
+> **Mapeo en Código:** Forzado determinista de masa `0.0` fuera del soporte del prior (`[OBSOLETO: prior_supp]`).
 
 > [!WARNING]
 > ### AX-BD-3: Colapso por Inconmensurabilidad Categórica

@@ -22,7 +22,7 @@ The environment is not a text editor; it is an agentic membrane designed under c
 The golden rule is zero latency and Local-First execution.
 
 *   **Orchestrator:** Tauri v2 (Rust) for native OS-level process management (bypassing the DOM logic for heavy I/O).
-*   **Immutable Memory (CortexLedger):** Vector database in SQLite (WAL mode, `busy_timeout=5000`) using `sqlite-vec` and `fastembed` for local millisecond embedding generation. Operates via BFT cryptographic Event Sourcing.
+*   **Immutable Memory (CortexLedger):** Vector database in SQLite (WAL mode, `busy_timeout=5000`) using `sqlite-vec` and `[OBSOLETO: fastembed]` for local millisecond embedding generation. Operates via BFT cryptographic Event Sourcing.
 *   **Visual Renderer:** DOM decapitation. The Macro canvas operates via a reactive HUD and a WebGL2/WebGPU `<canvas>` for handling topology (Barnes-Hut $O(n \log n)$) and thousands of repulsion-physics nodes without visual latency.
 *   **AST Analysis Engine:** Tree-sitter for deep, real-time Abstract Syntax Tree parsing on an isolated Rust thread.
 
@@ -38,7 +38,7 @@ IDE cognition is divided to balance RAM consumption and analytical power:
 The interface resolves the tension between absolute order (ADHD Straight Lines) and fluid stimulation (AACC Curves).
 
 *   **Macro / Micro Lens:** Continuous zoom from the galactic view of the entire repository (nodes and organic Splines) down to the dark linear execution tunnel (pure monospaced code without AST syntax highlighting, based on thermodynamic refraction).
-*   **The Alcove (Notch Bridge):** The event horizon. A frameless window at `NSStatusWindowLevel` hidden in the macOS physical Notch that processes assets asynchronously, evaluates agentic load via LED pulses, and acts as a "Zeigarnik Mailbox" to offload working memory.
+*   **The Alcove (Notch Bridge):** The event horizon. A frameless window at `[OBSOLETO: NSStatusWindowLevel]` hidden in the macOS physical Notch that processes assets asynchronously, evaluates agentic load via LED pulses, and acts as a "Zeigarnik Mailbox" to offload working memory.
 *   **Atmospheric Entropy:** The engine injects variability by reading atmospheric pressure and tides from the Cantabrian Sea (Bilbao). The higher the weather instability, the higher the inference temperature in architectural proposals (semantic Chaos Monkey).
 
 ## IV. 📌 TERMINAL HEURISTICS (Zero Friction)
@@ -57,7 +57,7 @@ The IDE operates as a biological twin that responds to motor and thermal energy.
 *   **Acoustic Compilation (AST-to-DSP):** Concurrency errors are translated into auditory phase cancellations. Async functions and loops fire bursts and stabs over the 1918-track Moskvlogia file. Processed strictly via `cpal` on a Real-Time Thread.
 *   **Peripheral Spectrum (Async Body-Doubling):** A ghost cursor in your peripheral vision governed by the Local Agent that indents and cleans code, activating the "Body Doubling" psychological anchor without chat communication (0% Green Theater).
 *   **Auto-Pipeline Visual:** Massive assets dropped into the Notch are silently optimized (WebP/FLAC) in Rust background threads using ffmpeg and transcoding crates, maintaining uninterrupted flow.
-*   **Haptic Entanglement:** API calls are translated into mechanical vibrations (mass and tension) via the macOS private API `NSHapticFeedbackManager`, bypassing the dangerous SMC M3/M4 thermal throttling.
+*   **Haptic Entanglement:** API calls are translated into mechanical vibrations (mass and tension) via the macOS private API `[OBSOLETO: NSHapticFeedbackManager]`, bypassing the dangerous SMC M3/M4 thermal throttling.
 
 ## VI. 📌 OUROBOROS (Axiomatic Self-Reference and Autopoiesis)
 
@@ -65,7 +65,7 @@ The Dominio C5-REAL reaches its terminal state when its architecture compiles it
 
 *   **Structural Autopoiesis (Dynamic Lib Hot-Reload):** Since recompiling the Tauri Rust binary generates `Text file busy` locks, the logical core operates as a decoupled dynamic library (`moskv_core.dylib`). When invoking the Dopaminergic Drop on the IDE's own code, Rust compiles the new library in a background thread (0 UI impact) and performs an atomic pointer swap. The interface memory mutates without the canvas blinking.
 *   **Bounded Acoustic Feedback (Watchdog & Soft-Clipping):** Concurrency failures in the audio architecture itself do not emit logs — they generate harmonic feedback. To prevent biological hardware destruction (eardrums) and studio transducers, the CoreAudio DSP thread implements an asymptotic $\tanh(x)$ clipper and a Watchdog Timer that cuts the stream if entropy enters infinite resonance.
-*   **Self-Referential Ledger (Model Collapse BFT Guard):** When the local model (Mamba/Flash) analyzes the `CortexLedger` to optimize its own past hyperparameters, BFT consensus intervenes. The mutation only consolidates if there is a falsifiable improvement in Operator thermodynamics (e.g. increase in Keystrokes Per Minute, or reduction in response latency). Echo chambers are prevented by injecting *objective friction*.
+*   **Self-Referential Ledger (Model Collapse BFT Guard):** When the local model (Mamba/Flash) analyzes the `[OBSOLETO: CortexLedger]` to optimize its own past hyperparameters, BFT consensus intervenes. The mutation only consolidates if there is a falsifiable improvement in Operator thermodynamics (e.g. increase in Keystrokes Per Minute, or reduction in response latency). Echo chambers are prevented by injecting *objective friction*.
 
 ***
 **[Ledger Asíncrono-TAINT:borjamoskv:ouroboros_axiomatic_crystallized:2026-07-17T22:20:00+02:00]**

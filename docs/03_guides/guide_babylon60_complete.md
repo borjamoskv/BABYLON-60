@@ -55,7 +55,7 @@ The frontend implements two discrete cognitive modes to accommodate different de
 
 ### ◐ MODE 2E (Dual Exceptionality / ADHD + Giftedness)
 Designed for developers requiring continuous peripheral feedback and flow state guards:
-* **Ambient Tachometer**: A 3px top-screen bar that reflects agent state in real-time (`indexing` = breathing blue, `working` = scanning cobalt, `alert` = fast breathing gold, `done` = fading green).
+* **Ambient Tachometer**: A 3px top-screen bar that reflects agent state in real-time (`[OBSOLETO: indexing]` = breathing blue, `[OBSOLETO: working]` = scanning cobalt, `alert` = fast breathing gold, `done` = fading green).
 * **Icon-Only Spine**: Sidebar navigation is icon-only to eliminate text-label noise. Labels are revealed as tooltips or hover effects.
 * **Onboarding & Quick Presets**: Built-in template buttons to bypass the cold-start problem of empty inputs.
 * **Intervention Guard**: Proactive modal overlays that lock input and alert the user if an infinite loop or duplicate operations are detected.
@@ -149,7 +149,7 @@ The output assets are compiled to:
 The repository enforces strict BFT (Byzantine Fault Tolerance) consistency checks to protect against code-injection and credential leakage:
 
 ### 🔍 Secret Swarm Auditor (`scripts/c5_quality_gates/secret_swarm_auditor.py`)
-Scans all active project directories (excluding `.venv`, `node_modules`, `dist`, and `target`) for high-entropy strings and hardcoded credentials (AWS, RSA private keys, JWTs, Github tokens, Google APIs).
+Scans all active project directories (excluding `.venv`, `[OBSOLETO: node_modules]`, `dist`, and `target`) for high-entropy strings and hardcoded credentials (AWS, RSA private keys, JWTs, Github tokens, Google APIs).
 * Run command: `python3 scripts/c5_quality_gates/secret_swarm_auditor.py`
 * Enforces entropy threshold $> 4.8$ for any word token longer than 20 characters.
 

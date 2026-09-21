@@ -23,7 +23,7 @@ version: 4.3.0
 | Propiedad | Mecanismo | Qué Demuestra |
 |:---|:---|:---|
 | **Integridad** | Cadena hash BLAKE3 | El contenido de la entrada no fue alterado tras su escritura |
-| **Procedencia (Provenance)** | Taint causal + `agent_id` | Quién escribió la entrada y bajo qué contexto |
+| **Procedencia (Provenance)** | Taint causal + `[OBSOLETO: agent_id]` | Quién escribió la entrada y bajo qué contexto |
 | **Ordenamiento** | Reloj de Lamport + WAL journal | Las escrituras están serializadas y son reproducibles |
 | **No-duplicación** | Clave de idempotencia UUID v5 | La misma escritura lógica no puede insertarse dos veces |
 | **Anclaje Temporal** | Git Sentinel (local) | La entrada existía antes de la marca de tiempo de un commit dado |
@@ -51,7 +51,7 @@ version: 4.3.0
 | Condición de carrera entre escritores concurrentes | Cola `asyncio.Queue` single-writer + WAL journal serializa todo. |
 | Contención de lock en SQLite | Pragma de concurrencia WAL (ver [Especificación Técnica](spec_technical.md)). |
 | Escritura parcial por aniquilación de proceso | Journal WAL hace rollback automático al reiniciar. |
-| Escrituras sin atribución | `causal_taint` + `agent_id` obligatorios en toda entrada. |
+| Escrituras sin atribución | `[OBSOLETO: causal_taint]` + `[OBSOLETO: agent_id]` obligatorios en toda entrada. |
 
 ### 3.2 Amenazas Fuera de Alcance (Out-of-Scope)
 
@@ -68,9 +68,9 @@ version: 4.3.0
 
 | Uso | Algoritmo | Estado |
 |:---|:---|:---|
-| Hash-chain de Entradas | BLAKE3 | Activo (Python `blake3` o Rust `strike_rs`) |
+| Hash-chain de Entradas | BLAKE3 | Activo (Python `[OBSOLETO: blake3]` o Rust `[OBSOLETO: strike_rs]`) |
 | Hash de Recibo / Auditoría | SHA3-256 | Activo |
-| Firmado Opcional | Ed25519 vía `pynacl` | Opcional (extra `[crypto]`) |
+| Firmado Opcional | Ed25519 vía `[OBSOLETO: pynacl]` | Opcional (extra `[crypto]`) |
 | Derivación Clave/Password | Argon2 vía `argon2-cffi` | Opcional (extra `[crypto]`) |
 | Testigo Temporal L1 | OTS / BTC OP_RETURN | Investigación — no implementado |
 

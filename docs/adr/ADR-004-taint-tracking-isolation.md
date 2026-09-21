@@ -38,7 +38,7 @@ El paquete `packages/babylon60/guards/` implementa decoradores de taint:
 
 Si un componente detecta una violación de invariante:
 1. El estado transiciona a `KernelState.Poisoned(code)` (formalizado en `BabylonTrace.lean`).
-2. La transición es **irreversible** (demostrado formalmente: `poison_state_is_irreversible`).
+2. La transición es **irreversible** (demostrado formalmente: `[OBSOLETO: poison_state_is_irreversible]`).
 3. Se genera un snapshot WORM (Write Once Read Many) del estado en el momento del fallo.
 4. El pipeline de quarantine notifica vía el sistema de attestation.
 

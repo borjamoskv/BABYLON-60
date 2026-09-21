@@ -15,7 +15,7 @@ version: 1.0.0
 
 > **La Singularidad Axiomática de la Indecidibilidad Mínima**
 > [!NOTE]
-> **Modulo Teórico 01 | Proyecto BABYLON-60 | Licencia Soberana (`INV_C5_17`)**
+> **Modulo Teórico 01 | Proyecto BABYLON-60 | Licencia Soberana (`[OBSOLETO: INV_C5_17]`)**
 > Estudio formal de la Aritmética de Robinson ($Q$), la minimalidad de los 7 axiomas y la génesis de la indecidibilidad esencial.
 
 ---

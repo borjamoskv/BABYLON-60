@@ -13,7 +13,7 @@ version: 1.0.0
 
 </div>
 
-> **Módulo Teórico 10 | Proyecto BABYLON-60 | Licencia Soberana (`INV_C5_17`)**
+> **Módulo Teórico 10 | Proyecto BABYLON-60 | Licencia Soberana (`[OBSOLETO: INV_C5_17]`)**
 > Realización Física: B60 Assembly, Fuzzing de Propiedades y el Canon Criptográfico.
 
 ---
@@ -39,7 +39,7 @@ Al contar con saltos condicionales (`TUKU`) y bucles (`LOOP`), B60 alcanza el Ni
 
 ## 10.2 📌 Fuzzing Basado en Propiedades y el Determinismo Absoluto
 
-La completitud $\Sigma_1$ exige que la evaluación de una traza computacional sea $O(N)$ y 100% determinista (Invariante `INV_BFT_04`). Para garantizar que la implementación en Rust (`babylon60.rs`) no viola este principio debido a concurrencia oculta o ruido de hardware, el proyecto despliega un fuzzer paramétrico (`fuzz_b60.py`).
+La completitud $\Sigma_1$ exige que la evaluación de una traza computacional sea $O(N)$ y 100% determinista (Invariante `[OBSOLETO: INV_BFT_04]`). Para garantizar que la implementación en Rust (`babylon60.rs`) no viola este principio debido a concurrencia oculta o ruido de hardware, el proyecto despliega un fuzzer paramétrico (`fuzz_b60.py`).
 
 El fuzzer genera millones de combinaciones aleatorias de opcodes concurrentes (`FORK`, `AWAIT`, `AFTER`) y ejecuta una aserción binaria fundamental:
 ```python
@@ -78,7 +78,7 @@ MUB BLOWUP_DETECTED
 EXECUTE "CRITICAL_HALT: FINITE_TIME_BLOWUP_CANDIDATE_ISOLATED"
 HALT
 ```
-Este script ilustra por qué BABYLON-60 definió `F60_Val` como un Racional Exacto $\mathbb{Q}$ (Módulo 09). Si se usara `float64` (IEEE-754), el ruido de coma flotante asintótico en la iteración de la Malla Topológica (`ALPHA_LOOP`) podría disparar `NU R11` (salto condicional en cero) en el tick equivocado, causando una des-sincronización del enjambre (`SPATIAL_TENSOR_SYNC`). 
+Este script ilustra por qué BABYLON-60 definió `[OBSOLETO: F60_Val]` como un Racional Exacto $\mathbb{Q}$ (Módulo 09). Si se usara `[OBSOLETO: float64]` (IEEE-754), el ruido de coma flotante asintótico en la iteración de la Malla Topológica (`[OBSOLETO: ALPHA_LOOP]`) podría disparar `NU R11` (salto condicional en cero) en el tick equivocado, causando una des-sincronización del enjambre (`[OBSOLETO: SPATIAL_TENSOR_SYNC]`). 
 
 Al usar $\mathbb{Q}$, la máquina aísla la singularidad matemática pura de la singularidad computacional impura. Si ocurre el `CRITICAL_HALT`, el sistema genera una Prueba Constructiva (`proof.ir`) exacta, demostrando a la red (y a Lean 4) la topología exacta del colapso, libre de aberraciones de hardware.
 

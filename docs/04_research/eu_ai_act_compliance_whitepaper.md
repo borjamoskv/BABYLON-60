@@ -163,7 +163,7 @@ Ante un incidente en producción (ej. un intento de inyección de prompt o un fa
 1. **Detección Causal:** El Fuzzing diferencial o el Runtime Inspector detecta una inconsistencia en el DAG.
 2. **Congelación Causal (`CRITICAL HALT`):** Se congela la corrutina en estado Zombie. Se bloquea cualquier llamada a API externa.
 3. **Cuarentena Forense WORM:** El historial completo se sella en `artifact_bundle_v3/quarantine/` bajo firma criptográfica software (BLAKE3 / COSE_Sign1, con anclaje hardware TPM 2.0 en hoja de ruta). Cero datos destruidos.
-4. **Exportación de Cumplimiento:** El módulo `compliance_exporter` genera un paquete firmado en JSON/Markdown listo para ser entregado a la Autoridad de Supervisión de IA en menos de 24 horas.
+4. **Exportación de Cumplimiento:** El módulo `[OBSOLETO: compliance_exporter]` genera un paquete firmado en JSON/Markdown listo para ser entregado a la Autoridad de Supervisión de IA en menos de 24 horas.
 
 ---
 
@@ -172,7 +172,7 @@ Ante un incidente en producción (ej. un intento de inyección de prompt o un fa
 ### 6.1 Despliegue Híbrido Soberano (Local-First)
 El cliente instala el kernel de BABYLON-60 en su propia infraestructura (*on-premise*, nube privada o enclaves seguros). Los datos sensibles **nunca abandonan el perímetro del cliente**.
 
-### 6.2 La Licencia Enterprise (`BABYLON60_LICENSE_KEY`)
+### 6.2 La Licencia Enterprise (`[OBSOLETO: BABYLON60_LICENSE_KEY]`)
 - **Sovereign Tier (Open Core):** Gratuito para desarrolladores e investigación.
 - **Enterprise Tier:** Licencia comercial requerida para despliegues en producción. Se factura por **Nodo de Ejecución Verificable** o **Volumen de Eventos Causales Auditados**.
 

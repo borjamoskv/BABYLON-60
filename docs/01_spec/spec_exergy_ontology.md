@@ -23,11 +23,11 @@ version: 4.3.0
 El objetivo físico del nombrado no es la estética literaria, sino la **compresión algorítmica** y el **enrutamiento rápido de punteros en AST / caché de atención**.
 
 ### 1.1 Minimización de Fragmentación de Tokens (BPE Alignment)
-Los tokenizadores (como `cl100k_base` o los de Llama/Mamba) fragmentan identificadores largos en múltiples tokens sin significado independiente, diluyendo el peso de atención del modelo.
+Los tokenizadores (como `[OBSOLETO: cl100k_base]` o los de Llama/Mamba) fragmentan identificadores largos en múltiples tokens sin significado independiente, diluyendo el peso de atención del modelo.
 
-- **Regla**: Preferir `snake_case` con primitivas semánticas consolidadas en lugar de `camelCase` excesivamente verboso.
-  - ❌ *Entrópico (6 tokens)*: `calculateTotalRevenueFromUserTransactions`
-  - ✅ *Exergético (3 tokens)*: `calc_user_revenue_usd`
+- **Regla**: Preferir `[OBSOLETO: snake_case]` con primitivas semánticas consolidadas en lugar de `[OBSOLETO: camelCase]` excesivamente verboso.
+  - ❌ *Entrópico (6 tokens)*: `[OBSOLETO: calculateTotalRevenueFromUserTransactions]`
+  - ✅ *Exergético (3 tokens)*: `[OBSOLETO: calc_user_revenue_usd]`
 - **Regla**: Mantener los identificadores por debajo de **24 caracteres** para encajar en registros de caché cortos y líneas de inspección sin saltos visuales en buffers del IDE.
 
 ### 1.2 Prefijado por Dominio de Aislamiento (Namespace Indexing)
@@ -35,11 +35,11 @@ Permite la búsqueda e indexación en $O(1)$ sin necesidad de construir el grafo
 
 | Prefijo | Dominio de Memoria/AST | Ejemplo |
 | :--- | :--- | :--- |
-| `core_` | Primitivas puras (sin I/O, sin estado global) | `core_matrix_mul` |
-| `io_` | Operaciones de disco, red o transductores de hardware | `io_read_wal_chunk` |
-| `mut_` | Funciones impuras que modifican estado o referencias | `mut_append_ledger` |
-| `cfg_` | Estructuras inmutables de configuración o constantes | `cfg_max_timeout_ms` |
-| `test_` | Aserciones empíricas y falsación unitaria | `test_ssm_invariants` |
+| `core_` | Primitivas puras (sin I/O, sin estado global) | `[OBSOLETO: core_matrix_mul]` |
+| `io_` | Operaciones de disco, red o transductores de hardware | `[OBSOLETO: io_read_wal_chunk]` |
+| `mut_` | Funciones impuras que modifican estado o referencias | `[OBSOLETO: mut_append_ledger]` |
+| `cfg_` | Estructuras inmutables de configuración o constantes | `[OBSOLETO: cfg_max_timeout_ms]` |
+| `test_` | Aserciones empíricas y falsación unitaria | `[OBSOLETO: test_ssm_invariants]` |
 
 ---
 
@@ -48,8 +48,8 @@ Permite la búsqueda e indexación en $O(1)$ sin necesidad de construir el grafo
 Una ontología eficiente elimina dependencias implícitas, herencia profunda y bucles circulares, imponiendo una topología de **Grafo Acíclico Dirigido (DAG)** o **Conjunto Parcialmente Ordenado (Poset)**.
 
 ### 2.1 Tipado Estructural Estricto (No-Any, Strict Schemas)
-- **Regla**: Toda entidad debe tener un contrato explícito de **Entrada**, **Salida** y **Modo de Fallo**. Queda prohibido el uso de tipos genéricos (`Any`, `object`, `dict` sin tipar) que obligan al runtime o al LLM a inferir campos dinámicamente en tiempo de ejecución.
-- **Implementación (Python)**: Uso exclusivo de `dataclasses`, `Pydantic v2` (con validación en Rust) o `TypedDict` estrictos, validados en CI por `mypy --strict`.
+- **Regla**: Toda entidad debe tener un contrato explícito de **Entrada**, **Salida** y **Modo de Fallo**. Queda prohibido el uso de tipos genéricos (`Any`, `[OBSOLETO: object]`, `dict` sin tipar) que obligan al runtime o al LLM a inferir campos dinámicamente en tiempo de ejecución.
+- **Implementación (Python)**: Uso exclusivo de `[OBSOLETO: dataclasses]`, `Pydantic v2` (con validación en Rust) o `[OBSOLETO: TypedDict]` estrictos, validados en CI por `mypy --strict`.
 
 ### 2.2 Indexación por Hash (Content-Addressable Storage)
 - **Regla**: Las referencias entre nodos del sistema o artefactos no deben depender de rutas relativas frágiles (`../../data/info.json`) ni de descripciones textuales vagas ("el script de cálculo").
@@ -62,7 +62,7 @@ Una ontología eficiente elimina dependencias implícitas, herencia profunda y b
 La semántica define cómo las operaciones alteran el estado del sistema. Para maximizar la exergía, debe ser inequívoca, local y verificable.
 
 ### 3.1 Gramática Imperativa y Causal en Contratos
-- **Regla**: Los comentarios de documentación (`docstrings`) y contratos de sistema deben eliminar la prosa pasiva o descriptiva. Deben redactarse en formato de **Transición de Estado (`Precondición -> Operación -> Postcondición`)**.
+- **Regla**: Los comentarios de documentación (`[OBSOLETO: docstrings]`) y contratos de sistema deben eliminar la prosa pasiva o descriptiva. Deben redactarse en formato de **Transición de Estado (`Precondición -> Operación -> Postcondición`)**.
   - ❌ *Pasiva*: "Esta función revisa si el usuario tiene saldo y luego actualiza la base de datos."
   - ✅ *Causal*: `Pre: user_id en DB -> Exec: tx_deduct(balance) -> Post: ledger_hash actualizado || raise InsufficientFunds`
 

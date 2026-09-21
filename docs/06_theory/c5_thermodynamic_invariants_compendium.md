@@ -113,7 +113,7 @@ flowchart TB
 > - Poda sistemática de características sin retención (Tokens de Anergía).
 > - Mejora de protocolos vía Test-Time Compute (MCTS) y Tolerancia a Fallos Bizantinos (BFT).
 
-*Directiva:* Falsación absoluta. Si no funciona en la práctica, `SIGKILL_State_Purge`.
+*Directiva:* Falsación absoluta. Si no funciona en la práctica, `[OBSOLETO: SIGKILL_State_Purge]`.
 
 ## 🔬 Verificación Formal (Lean 4)
 

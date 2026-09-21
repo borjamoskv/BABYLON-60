@@ -20,7 +20,7 @@ version: 4.0.0
 
 ## Resumen Ejecutivo
 
-La Fase II de la auditoría de seguridad de BABYLON-60 evaluó la superficie de ataque externa introducida por los módulos de reporte de cumplimiento (`compliance_exporter`) y puentes de atestación externa (`attestation_bridge`).
+La Fase II de la auditoría de seguridad de BABYLON-60 evaluó la superficie de ataque externa introducida por los módulos de reporte de cumplimiento (`[OBSOLETO: compliance_exporter]`) y puentes de atestación externa (`[OBSOLETO: attestation_bridge]`).
 
 Este documento detalla el **Modelo de Amenazas**, las mitigaciones formales y los protocolos de verificación implementados en **BABYLON-60 v4.0 Sovereign Hardened** para eliminar la exfiltración de datos, ataques de denegación de servicio en red, corrupción de fronteras de memoria y alteración de licencias.
 
@@ -32,15 +32,15 @@ Este documento detalla el **Modelo de Amenazas**, las mitigaciones formales y lo
 | :--- | :--- | :--- | :--- |
 | **Vector 1: Exfiltración de Datos de Auditoría** | Prompt Injection filtra PII / API keys en metadatos de cumplimiento | **Capa de Redacción Criptográfica** (`EUAIActComplianceExporter.redact_sensitive_data`) | `babylon60/compliance_exporter/eu_ai_act.py` |
 | **Vector 2: DDoS en Red / Ataque Sybil** | DDoS a nodo de atestación crea "incertidumbre legal" si falla anclaje externo | **Periodo de Gracia (7 Días) & Fallback Local-First** con flags de advertencia | `babylon60/attestation/merkle_anchor.py` |
-| **Vector 3: Overflow en Frontera de Serialización** | Valores `F60` fuera de rango corrompen memoria GPU durante conversión a `bf16`/`f32` | **Chequeo Estricto de Cotas & Checksum SHA-256** (`SerializationBoundary`) | `babylon60/primitives/serialization_boundary.py` |
-| **Hendidura de Licencia** | Caída del servidor de licencias o forjado offline de clave de licencia | **Firma Offline Híbrida + Heartbeat de 7 Días** (`HybridLicenseVerifier`) | `babylon60/license_verifier.py` |
+| **Vector 3: Overflow en Frontera de Serialización** | Valores `F60` fuera de rango corrompen memoria GPU durante conversión a `bf16`/`f32` | **Chequeo Estricto de Cotas & Checksum SHA-256** (`[OBSOLETO: SerializationBoundary]`) | `babylon60/primitives/serialization_boundary.py` |
+| **Hendidura de Licencia** | Caída del servidor de licencias o forjado offline de clave de licencia | **Firma Offline Híbrida + Heartbeat de 7 Días** (`[OBSOLETO: HybridLicenseVerifier]`) | `babylon60/license_verifier.py` |
 
 ---
 
 ## 2. Vector 1: Mitigación de Exfiltración de Datos
 
 ### 2.1 Riesgo
-El componente `compliance_exporter` lee el DAG Ledger Causal-Merkle para emitir informes en Markdown/JSON auditables (EU AI Act). Un agente LLM comprometido (vía inyección de prompts adversarios) podría intentar incrustar claves privadas, tokens o PII en los metadatos.
+El componente `[OBSOLETO: compliance_exporter]` lee el DAG Ledger Causal-Merkle para emitir informes en Markdown/JSON auditables (EU AI Act). Un agente LLM comprometido (vía inyección de prompts adversarios) podría intentar incrustar claves privadas, tokens o PII en los metadatos.
 
 ### 2.2 Mitigación Técnica
 BABYLON-60 implementa una **Capa de Redacción Criptográfica** en `eu_ai_act.py`:
@@ -84,7 +84,7 @@ El sistema continúa ejecutando operaciones sobre el Merkle DAG local sin bloque
 La conversión de racionales sexagesimales `F60` a tensores de punto flotante IEEE (`f32`/`bf16`) para inferencia en GPU implica mapeo numérico entre fronteras de memoria. Un valor desbordado podría causar corrupción de memoria en GPU o desbordamiento de buffer.
 
 ### 4.2 Mitigación Técnica
-La clase `SerializationBoundary` impone cotas estrictas en rangos flotantes (`[-1e30, 1e30]`) y calcula un compromiso SHA-256 sobre el buffer:
+La clase `[OBSOLETO: SerializationBoundary]` impone cotas estrictas en rangos flotantes (`[-1e30, 1e30]`) y calcula un compromiso SHA-256 sobre el buffer:
 
 ```python
 packed_buffer, checksum = SerializationBoundary.convert_f60_to_float_buffer(f60_tuples)
@@ -92,17 +92,17 @@ SerializationBoundary.validate_tensor_checksum(packed_buffer, checksum)
 ```
 
 > [!CAUTION]
-> Si algún valor viola los límites o se detecta un desacoplamiento de checksum, la ejecución dispara `SerializationBoundaryError` y aborta la transferencia de datos.
+> Si algún valor viola los límites o se detecta un desacoplamiento de checksum, la ejecución dispara `[OBSOLETO: SerializationBoundaryError]` y aborta la transferencia de datos.
 
 ---
 
 ## 5. Verificación de Licencia: Protocolo Híbrido
 
 ### 5.1 Diseño del Protocolo
-Para evitar un punto único de fallo en servidores de licencias manteniendo la protección contra falsificación offline, `HybridLicenseVerifier` implementa:
+Para evitar un punto único de fallo en servidores de licencias manteniendo la protección contra falsificación offline, `[OBSOLETO: HybridLicenseVerifier]` implementa:
 
-1. **Chequeo de Firma Offline:** Valida `BABYLON60_LICENSE_KEY` mediante firmas Ed25519 (`SOVEREIGN_KEY_SIG`). Opera 100% offline.
-2. **Heartbeat Asíncrono de 7 Días:** Verifica el estado de revocación de forma asíncrona. Si se sobrepasan los 7 días sin conexión, la ejecución continúa en modo advertencia (`HEARTBEAT_WARNING_OFFLINE_GRACE_ACTIVE`) sin bloqueo duro de operaciones críticas.
+1. **Chequeo de Firma Offline:** Valida `[OBSOLETO: BABYLON60_LICENSE_KEY]` mediante firmas Ed25519 (`[OBSOLETO: SOVEREIGN_KEY_SIG]`). Opera 100% offline.
+2. **Heartbeat Asíncrono de 7 Días:** Verifica el estado de revocación de forma asíncrona. Si se sobrepasan los 7 días sin conexión, la ejecución continúa en modo advertencia (`[OBSOLETO: HEARTBEAT_WARNING_OFFLINE_GRACE_ACTIVE]`) sin bloqueo duro de operaciones críticas.
 
 ---
 

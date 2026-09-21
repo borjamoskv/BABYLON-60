@@ -31,7 +31,7 @@ El **Reglamento Europeo de Inteligencia Artificial (EU AI Act - Reglamento UE 20
 > evidencia no verificada. Con `--ledger <ruta>`, re-ejecuta `verify_integrity()` y la
 > comparación de la raíz Merkle contra el `global_hash` del manifiesto; ante cualquier fallo,
 > los artículos se degradan a `UNVERIFIED_*` / `*_NON_COMPLIANT` y el CLI retorna código 2.
-> Cada certificado se firma con Ed25519 (variable `BABYLON60_SIGNING_SEED`).
+> Cada certificado se firma con Ed25519 (variable `[OBSOLETO: BABYLON60_SIGNING_SEED]`).
 
 ---
 
@@ -72,7 +72,7 @@ cortex-compliance --bundle artifact_bundle_v3 --ledger "$BABYLON_HOME/dbs/agent_
 
 Cada certificado emitido incluye:
 - **Global Merkle Root:** La raíz del Árbol de Merkle que sella en una única impronta de 32 bytes la totalidad de los eventos ejecutados por los agentes.
-- **Bloque `evidence_verification`:** transcripción de la re-verificación fail-closed del ledger (cadena íntegra, Merkle recomputado, coincidencia con el manifiesto, veredicto).
-- **Firma Ed25519:** firma del payload canónico del certificado (clave estable vía `BABYLON60_SIGNING_SEED`; clave efímera marcada explícitamente en caso contrario).
+- **Bloque `[OBSOLETO: evidence_verification]`:** transcripción de la re-verificación fail-closed del ledger (cadena íntegra, Merkle recomputado, coincidencia con el manifiesto, veredicto).
+- **Firma Ed25519:** firma del payload canónico del certificado (clave estable vía `[OBSOLETO: BABYLON60_SIGNING_SEED]`; clave efímera marcada explícitamente en caso contrario).
 - **Fingerprint Digital (Cert SHA-256):** Un hash combinatorio del ID del sistema, el nombre del operador, la raíz global de evidencia y la marca temporal ISO 8601 UTC.
 - **Redacción Preventiva de Secretos:** Eliminación automática de claves privadas, JWTs, AWS credentials y contraseñas previo al estampado del certificado.

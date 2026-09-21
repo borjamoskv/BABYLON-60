@@ -12,7 +12,7 @@
 
 Under the **C5-REAL Epistemological Constitution**:
 - **Risk Assessment as a Bayesian Lens**: Clinical trial complexity scoring acts as a **Bayesian Optic Lens**, projecting protocol features onto substantive amendment probability spaces while preserving informational distance under Chentsov's Theorem.
-- **Deterministic Morphisms for Regulatory Provenance**: Every scoring function is a pure morphism ($A \to B$). Firing rules generate an unalterable `causal_taint` hash-chain, fulfilling FDA 21 CFR Part 11 §11.10(e) audit requirements by mathematical construction.
+- **Deterministic Morphisms for Regulatory Provenance**: Every scoring function is a pure morphism ($A \to B$). Firing rules generate an unalterable `[OBSOLETO: causal_taint]` hash-chain, fulfilling FDA 21 CFR Part 11 §11.10(e) audit requirements by mathematical construction.
 
 ---
 
@@ -20,24 +20,24 @@ Under the **C5-REAL Epistemological Constitution**:
 
 Biorce/Aika owns the data moat (~1M curated trials, enterprise sales, $60M). We do **not** compete there. We compete where a regulated sponsor actually feels pain: **provable, reproducible, tamper-evident decisions.**
 
-A clinical trial's regulator (FDA 21 CFR Part 11 §11.10(e)) requires a *computer-generated, time-stamped, independently verifiable* audit trail of every system-produced decision. A recommendation engine that emits a PDF does not satisfy that by construction. **APEX-TRIALS does**: every risk score is committed to the BABYLON-60 hash-chain with exact firing rules as `causal_taint`, reproducible byte-for-byte from the protocol input.
+A clinical trial's regulator (FDA 21 CFR Part 11 §11.10(e)) requires a *computer-generated, time-stamped, independently verifiable* audit trail of every system-produced decision. A recommendation engine that emits a PDF does not satisfy that by construction. **APEX-TRIALS does**: every risk score is committed to the BABYLON-60 hash-chain with exact firing rules as `[OBSOLETO: causal_taint]`, reproducible byte-for-byte from the protocol input.
 
 Three properties black-box models do not expose:
 
 | Property | Mechanism | Proof |
 | :--- | :--- | :--- |
 | **Determinism** | Pure feature function $\to$ weighted rules | Same protocol JSON $\to$ same score $\to$ same SHA3-256 hash |
-| **Auditability** | Ledger hash-chain (`causal_taint`, Lamport, UUIDv5) | `apex verify` recomputes the whole chain; tampering breaks it |
+| **Auditability** | Ledger hash-chain (`[OBSOLETO: causal_taint]`, Lamport, UUIDv5) | `apex verify` recomputes the whole chain; tampering breaks it |
 | **Falsifiability** | Public version-history ground-truth | `apex backtest` — Spearman $\rho$(score, real amendments) |
 
-The amendment-risk signal itself is built on a source public protocol version history (`/api/int/studies/{nct}/history`), whose `moduleLabels` separate a *substantive* protocol amendment (Eligibility / Study Design / Arms / Outcomes) from an administrative update.
+The amendment-risk signal itself is built on a source public protocol version history (`/api/int/studies/{nct}/history`), whose `[OBSOLETO: moduleLabels]` separate a *substantive* protocol amendment (Eligibility / Study Design / Arms / Outcomes) from an administrative update.
 
 ---
 
 ## 🔬 📌 Integration with Causal Motor Substrate
 
 `apex_trials.ledger.AmendmentLedger` implements the exact entry contract:
-`{ id: uuid5, prev_hash: sha3_256, payload, causal_taint, lamport_t, agent_id }`, SQLite WAL, single-writer, verified-on-read — making it **drop-in contract-compatible** with `babylon60.bft.ledger_actor`. The hash covers only deterministic decision content (never wall-clock), preserving byte-for-byte reproducibility while a sidecar `created_at` column supplies Part 11 provenance.
+`{ id: uuid5, prev_hash: sha3_256, payload, causal_taint, lamport_t, agent_id }`, SQLite WAL, single-writer, verified-on-read — making it **drop-in contract-compatible** with `babylon60.bft.ledger_actor`. The hash covers only deterministic decision content (never wall-clock), preserving byte-for-byte reproducibility while a sidecar `[OBSOLETO: created_at]` column supplies Part 11 provenance.
 
 ---
 
@@ -113,7 +113,7 @@ macro-AUC (held-out) = 0.664   ·   CV-AUC tracks held-out within ±0.01
 
 ---
 
-<sub>Titular Civil: Borja Fernández Angulo · AKA Borja Motor Causal (`borjamoskv`) · Data © ClinicalTrials.gov (Public Domain)</sub>
+<sub>Titular Civil: Borja Fernández Angulo · AKA Borja Motor Causal (`[OBSOLETO: borjamoskv]`) · Data © ClinicalTrials.gov (Public Domain)</sub>
 
 ## 🔬 Verificación Formal (Lean 4)
 

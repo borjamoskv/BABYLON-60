@@ -61,14 +61,14 @@ Review of the recent 26 unconsolidated sessions and repository state reveals key
 
 ### 1. Hardened Git Sentinel Isolation
 * **Incident**: Recent lockups occurred due to `.git/index.lock` failures during concurrent write operations.
-* **Mitigation**: Ensure you run git operations through the Git Sentinel protocols or local workspace wrappers. Add lockfile patterns and auto-cleanup tasks inside `Makefile` or build scripts to avoid terminal deadlocks.
+* **Mitigation**: Ensure you run git operations through the Git Sentinel protocols or local workspace wrappers. Add lockfile patterns and auto-cleanup tasks inside `[OBSOLETO: Makefile]` or build scripts to avoid terminal deadlocks.
 
 ### 2. Dependency Declaration Sanitation
 * **Issue**: The test collection broke because pandas and networkx dependencies were not explicitly resolved under pytest execution environments.
-* **Mitigation**: Always verify package installation via `uv sync` or `pip install -e ".[dev,onco]"` before running testing loops. Check that all test suite imports are shielded with `importorskip` or run in environments with declared extras.
+* **Mitigation**: Always verify package installation via `uv sync` or `pip install -e ".[dev,onco]"` before running testing loops. Check that all test suite imports are shielded with `[OBSOLETO: importorskip]` or run in environments with declared extras.
 
 ### 3. Separation of Big Artifacts & Index Bloat
-* **Issue**: Packfiles of `738.51 MiB` and generated ontologies (57,000+ files in `batch_100k`) slow down git operations and memory indices.
+* **Issue**: Packfiles of `738.51 MiB` and generated ontologies (57,000+ files in `[OBSOLETO: batch_100k]`) slow down git operations and memory indices.
 * **Mitigation**: Remove built binaries (`**/target/`, `**/.lake/`), database files (`*.db`), and large outputs from git index tracking. Keep these files in `.gitignore` or `.git/info/exclude`. For large structures, package them into compressed tarballs rather than versioning tens of thousands of flat YAML files.
 
 ### 4. Direct C4-SIM Mitigation

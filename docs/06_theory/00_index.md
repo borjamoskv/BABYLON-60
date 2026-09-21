@@ -22,7 +22,7 @@ version: 1.0.0
 
 ## 1. 📌 Executive Summary
 
-This documentation suite establishes the **metamathematical, information-theoretic, and proof-theoretic foundations** underlying the BABYLON-60 ecosystem. Each module provides rigorous mathematical proofs, formal domain sorts, and direct architectural mapping to the system's operational invariants (`INV_BFT_04`, `INV_C5_15`, `INV_C5_17`, `INV_C5_18`, `INV_C5_28`, `GELABP_DEPTH_INVARIANT`).
+This documentation suite establishes the **metamathematical, information-theoretic, and proof-theoretic foundations** underlying the BABYLON-60 ecosystem. Each module provides rigorous mathematical proofs, formal domain sorts, and direct architectural mapping to the system's operational invariants (`[OBSOLETO: INV_BFT_04]`, `[OBSOLETO: INV_C5_15]`, `[OBSOLETO: INV_C5_17]`, `[OBSOLETO: INV_C5_18]`, `[OBSOLETO: INV_C5_28]`, `[OBSOLETO: GELABP_DEPTH_INVARIANT]`).
 
 ---
 
@@ -77,17 +77,17 @@ flowchart TD
 | :---: | :--- | :--- | :--- | :--- |
 | **01** | [Aritmética de Robinson](./01_robinson_arithmetic.md) | Sistema Axiomático $Q$, $\Sigma_1$-completitud, indecidibilidad mínima | Core de ejecución `b60_kernel` | Indecidibilidad Esencial |
 | **02** | [Incompletitud de Gödel](./02_goedel_incompleteness.md) | Gödelización, Lema de Diagonalización, Teoremas 1º/2º, Teorema de Löb | Auto-falsación y `CRITICAL_HALT` | Diagonalización |
-| **03** | [Computabilidad y Turing](./03_computability_turing.md) | Máquinas de Turing Universales, Problema de la Parada, Teorema de Rice | Harness de pruebas y verificación estática | `GELABP_DEPTH_INVARIANT` |
+| **03** | [Computabilidad y Turing](./03_computability_turing.md) | Máquinas de Turing Universales, Problema de la Parada, Teorema de Rice | Harness de pruebas y verificación estática | `[OBSOLETO: GELABP_DEPTH_INVARIANT]` |
 | **04** | [Chaitin y Kolmogorov](./04_chaitin_kolmogorov.md) | Complejidad de Kolmogorov $K(x)$, Constante $\Omega$ de Chaitin | Escalado entero Base-60 | Principio de Cero-Anergia |
-| **05** | [Teoría de Modelos](./05_model_theory.md) | Compacidad, Löwenheim-Skolem, Teorema de Lindström, Modelos No Estándar | Aislamiento de ejecución de agentes | `INV_C5_18` |
+| **05** | [Teoría de Modelos](./05_model_theory.md) | Compacidad, Löwenheim-Skolem, Teorema de Lindström, Modelos No Estándar | Aislamiento de ejecución de agentes | `[OBSOLETO: INV_C5_18]` |
 | **06** | [Correspondencia Curry-Howard](./06_curry_howard.md) | Proposiciones-como-Tipos, Pruebas-como-Programas, Categorías Cartesianas | Exportación backend Lean 4 | `01_spec/spec_proof_ir.md` |
-| **07** | [Isomorfismos Cross-Domain](./07_cross_domain.md) | Mapeos estructurales isomorfos (Lingüística, Física, IA, Teoría de Pruebas) | Ontología Universal del Sistema | `INV_C5_28` (1-WL) |
+| **07** | [Isomorfismos Cross-Domain](./07_cross_domain.md) | Mapeos estructurales isomorfos (Lingüística, Física, IA, Teoría de Pruebas) | Ontología Universal del Sistema | `[OBSOLETO: INV_C5_28]` (1-WL) |
 | **08** | [Arquitectura BABYLON-60](./08_babylon60_architecture.md) | Matriz de mapeo metamatemático-a-código | Rust/Python Kernel | `01_spec/spec_technical.md` |
-| **09** | [Ontología Formal (Lean 4)](./09_formal_ontology_lean.md) | Semántica de pequeños pasos, Teoría de Tipos Constructiva en práctica | `proof/lean/Babylon.lean` | `INV_BFT_04` |
-| **10** | [Realización Física (B60)](./10_physical_realization.md) | B60 Assembly, completitud de Turing, fuzzing, determinismo de grafos | `fibonacci.b60`, `fuzz_b60.py` | `INV_BFT_04` |
+| **09** | [Ontología Formal (Lean 4)](./09_formal_ontology_lean.md) | Semántica de pequeños pasos, Teoría de Tipos Constructiva en práctica | `proof/lean/Babylon.lean` | `[OBSOLETO: INV_BFT_04]` |
+| **10** | [Realización Física (B60)](./10_physical_realization.md) | B60 Assembly, completitud de Turing, fuzzing, determinismo de grafos | `fibonacci.b60`, `fuzz_b60.py` | `[OBSOLETO: INV_BFT_04]` |
 | **11** | [Monitor Armónico Tonnetz](./axiom_tonnetz_oversight.md) | Sonificación de Entropía, Toro de Tonnetz, EU AI Act | Audio Engine Bi-Modal | `Art. 14 EU AI Act` |
 | **12** | [Motor de Aeones Conformes (Penrose-Landauer)](./axiom_cyclic_conformal_aeon.md) | Cosmología CCC, Suelo de Landauer, Ciclo de Fase Omega | Kernel Ring-0 / SharedManifest | `INV_C5_AEON / INV-3` |
-| **AX** | [Base Axiomática C5-REAL](./AXIOMATIZATION_C5_REAL.md) | Axiomas A1–A4 (Categorías de Markov, Inversión Bayesiana, No-Alucinación) | Motor de Verificación Axiomática | `INV_C5_REAL_A4` |
+| **AX** | [Base Axiomática C5-REAL](./AXIOMATIZATION_C5_REAL.md) | Axiomas A1–A4 (Categorías de Markov, Inversión Bayesiana, No-Alucinación) | Motor de Verificación Axiomática | `[OBSOLETO: INV_C5_REAL_A4]` |
 
 ---
 
@@ -102,7 +102,7 @@ flowchart TD
 ## 5. 📌 ⚖️ License & Sovereignty
 
 > [!TIP]
-> All theory modules in this suite are published under **`INV_C5_17`** (Sovereign Dual-Licensing Invariant): 100% free, open-source, and sovereign for individuals, independent developers, and non-commercial usage.
+> All theory modules in this suite are published under **`[OBSOLETO: INV_C5_17]`** (Sovereign Dual-Licensing Invariant): 100% free, open-source, and sovereign for individuals, independent developers, and non-commercial usage.
 
 ## 🔬 Verificación Formal (Lean 4)
 

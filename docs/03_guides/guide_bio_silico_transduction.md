@@ -19,7 +19,7 @@ Esta guía especifica la metodología para compilar y mapear ontologías complej
 
 ## 1. El Concepto de Transducción Bio-Silicio
 
-La **transducción bio-silicio** es la transformación formal que toma una entidad o proceso biológico (gen, proteína, checkpoint, vía de señalización, fármaco) y lo traduce a una especificación de nodo de estado `NodeSpec` dentro de una categoría estocástica o determinista (`FinStoch` / Markov Category).
+La **transducción bio-silicio** es la transformación formal que toma una entidad o proceso biológico (gen, proteína, checkpoint, vía de señalización, fármaco) y lo traduce a una especificación de nodo de estado `[OBSOLETO: NodeSpec]` dentro de una categoría estocástica o determinista (`[OBSOLETO: FinStoch]` / Markov Category).
 
 ```mermaid
 graph LR
@@ -37,7 +37,7 @@ Las 300 primitivas descritas en [`axiom_oncologia_300_primitivas.md`](../02_onto
 $$ \text{Primitive} = \langle \text{ID}, \text{Name}, \text{Layer}, \text{Dependencies}, \text{TransitionKernel} \rangle $$
 
 ### Ejemplo de Mapeo:
-- **Primitiva Oncogénica (`ONC-017`)**: `BRAF` (Capa: `molecular`)
+- **Primitiva Oncogénica (`ONC-017`)**: `BRAF` (Capa: `[OBSOLETO: molecular]`)
   - **Dependencies**: `{"ONC-016_EGFR", "ONC-018_KRAS"}`
   - **Morfismo $f$**: Kernels de transición de fosforilación $P(\text{MEK_active} \mid \text{BRAF_V600E})$.
 
@@ -45,7 +45,7 @@ $$ \text{Primitive} = \langle \text{ID}, \text{Name}, \text{Layer}, \text{Depend
 
 ## 3. Simulación de Intervenciones y No-Alucinación (Axioma 4)
 
-Al simular la inhibición de un oncogén (por ejemplo, aplicación de Dabrafenib sobre `BRAF_V600E`):
+Al simular la inhibición de un oncogén (por ejemplo, aplicación de Dabrafenib sobre `[OBSOLETO: BRAF_V600E]`):
 
 1. **Restricción de Soporte Prior**: Se define la medida prior $p$ sobre el espacio de estados biológicos válidos $\text{supp}(p)$.
 2. **Aplicación del Morfismo de Desintegración $f^\dagger_p$**: El efecto de la intervención se calcula usando el operador de expectativa condicional bayesiana.

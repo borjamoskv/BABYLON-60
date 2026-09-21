@@ -83,7 +83,7 @@ Estos invariantes son verificados formalmente por el kernel. Cualquier violació
 - **I3 (Inmutabilidad del Pasado):** $\mathcal{L}$ es estrictamente *append-only*.
 - **I4 (Monotonicidad Temporal):** $C.\text{now}() \le C.\text{next}()$.
 - **I5 (Ausencia de Anergía):** Toda mutación se refleja transparentemente en $\mathcal{R}$, $\mathcal{H}$ o $\mathcal{L}$.
-- *Nota: Para los invariantes arquitectónicos (`INV_BFT_04`, `INV_C5_28`, etc.) y sus mecánicas de validación cruzada, referirse a la especificación central de [Invariantes del Sistema BABYLON-60](spec_invariants.md).*
+- *Nota: Para los invariantes arquitectónicos (`[OBSOLETO: INV_BFT_04]`, `[OBSOLETO: INV_C5_28]`, etc.) y sus mecánicas de validación cruzada, referirse a la especificación central de [Invariantes del Sistema BABYLON-60](spec_invariants.md).*
 
 ### 4.1 Teorema de BABYLON (Isomorfismo Semántico-Operacional)
 

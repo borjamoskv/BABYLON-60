@@ -15,7 +15,7 @@ version: 1.0.0
 
 > **Límites Absolutos de la Formalización y Verificación Automática**
 > [!NOTE]
-> **Modulo Teórico 02 | Proyecto BABYLON-60 | Licencia Soberana (`INV_C5_17`)**
+> **Modulo Teórico 02 | Proyecto BABYLON-60 | Licencia Soberana (`[OBSOLETO: INV_C5_17]`)**
 > Formalización de Gödelización, el Lema de Diagonalización de Carnap, los Teoremas 1º y 2º de Incompletitud, el Teorema de Löb y la Lógica Modal GL.
 
 ---

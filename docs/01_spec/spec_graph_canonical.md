@@ -13,7 +13,7 @@ version: 4.3.0
 
 </div>
 
-> **Régimen Causal-Determinist | Invariante Asociado: `INV_C5_28`**
+> **Régimen Causal-Determinist | Invariante Asociado: `[OBSOLETO: INV_C5_28]`**
 > Especificación formal de la serialización canónica de grafos (`graph.canonical`), ordenamiento lexicográfico, refinamiento de color 1-WL (Weisfeiler-Lehman) y cálculo determinista de firmas.
 
 ---
@@ -37,7 +37,7 @@ EV_2|EV_0,EV_1|2|AWAIT(SIG_SYNC)|SIG_OK
 ```
 
 ### 2.1 Campos Estrictos
-1. **ID**: Identificador causal único (ej. `EV_0`, `EV_102`).
+1. **ID**: Identificador causal único (ej. `EV_0`, `[OBSOLETO: EV_102]`).
 2. **PARENTS**: Lista de IDs de nodos ancestros inmediatos, separados por comas.
    - Si el nodo es raíz, el campo DEBE estar **vacío**.
    - Los IDs de padres DEBEN estar ordenados **lexicográficamente** (ej. `EV_1,EV_2`, nunca `EV_2,EV_1`).
@@ -59,7 +59,7 @@ Para dar cumplimiento al invariante [INV_C5_28 (Invariantes BABYLON-60)](spec_in
 
 ### 3.1 Formulación Matemática de Actualización de Color
 
-Sea $c^{(0)}(v)$ el color inicial del vértice $v \in V$, determinado por el hash SHA-256 de su `PAYLOAD`. En el paso de refinamiento $k + 1$:
+Sea $c^{(0)}(v)$ el color inicial del vértice $v \in V$, determinado por el hash SHA-256 de su `[OBSOLETO: PAYLOAD]`. En el paso de refinamiento $k + 1$:
 
 $$c^{(k+1)}(v) = \text{SHA256}\left( c^{(k)}(v) \;\parallel\; \text{Sort}\Big(\big\{\!\!\{ c^{(k)}(u) : u \in \mathcal{N}(v) \}\!\!\}\Big) \right)$$
 

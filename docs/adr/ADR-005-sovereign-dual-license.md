@@ -36,7 +36,7 @@ Permisos completos (uso, copia, modificación, distribución, sublicencia) para:
 
 ### Tier Enterprise (Restricción Corporativa)
 
-Entidades con ingresos anuales > $1M USD deben obtener una clave de licencia criptográfica (`BABYLON60_LICENSE_KEY`) para:
+Entidades con ingresos anuales > $1M USD deben obtener una clave de licencia criptográfica (`[OBSOLETO: BABYLON60_LICENSE_KEY]`) para:
 - Eliminar throttling de throughput termodinámico.
 - Acceder a APIs enterprise.
 - Usar en producción SaaS.
@@ -65,6 +65,6 @@ Prohibida la ingeniería inversa, descompilación o destilación de paths causal
 
 ## Referencias
 
-- `LICENSE` en la raíz del proyecto.
+- `[OBSOLETO: LICENSE]` en la raíz del proyecto.
 - BSL (MariaDB Business Source License): https://mariadb.com/bsl11/
 - EU AI Act, Considerando 12: Transparencia y derechos de propiedad intelectual.

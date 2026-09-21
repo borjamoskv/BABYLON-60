@@ -15,7 +15,7 @@ version: 1.0.0
 
 > **Tesis de Church-Turing, Problema de la Parada y Teorema de Rice**
 > [!NOTE]
-> **Modulo Teórico 03 | Proyecto BABYLON-60 | Licencia Soberana (`INV_C5_17`)**
+> **Modulo Teórico 03 | Proyecto BABYLON-60 | Licencia Soberana (`[OBSOLETO: INV_C5_17]`)**
 > Estudio metamatemático de la computabilidad efectiva, la jerarquía aritmética, la indecidibilidad del Halting Problem y los límites impuestos por el Teorema de Rice.
 
 ---

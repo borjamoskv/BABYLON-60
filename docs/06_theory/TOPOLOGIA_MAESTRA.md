@@ -24,7 +24,7 @@ Esta capa traduce la intención cognitiva de la Capa 1 en impulsos que el mundo 
 
 * **wa-nexus (WhatsApp Nexus)**: El puente MCP que conecta a Moskv-1 (La Persona) con la red de WhatsApp (Baileys/Rust NAPI). Es la "boca y oídos" de Moskv-1 hacia el exterior.
 * **Kimi Bridge / Moonshot**: Puente de delegación para cuando Moskv-1 necesita sub-contratar razonamiento masivo a un enjambre de LLMs de bajo coste.
-* **Sovereign Spark Agent (`sovereign_spark.py`)**: Agente que corre en Ollama local (`localhost`). Es la versión "desconectada de internet" de Moskv-1, capaz de razonar sin enviar datos a APIs externas.
+* **Sovereign Spark Agent (`sovereign_spark.py`)**: Agente que corre en Ollama local (`[OBSOLETO: localhost]`). Es la versión "desconectada de internet" de Moskv-1, capaz de razonar sin enviar datos a APIs externas.
 
 ---
 

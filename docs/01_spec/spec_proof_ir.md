@@ -7,7 +7,7 @@
 
 </div>
 
-> **Régimen Causal-Determinist | Invariante Asociado: `INV_C5_15`**
+> **Régimen Causal-Determinist | Invariante Asociado: `[OBSOLETO: INV_C5_15]`**
 > Representación Intermedia (Proof IR) para la traducción determinista de trazas causales a teoremas formales verificables en Lean 4 / Coq.
 
 ---
@@ -81,7 +81,7 @@ pub struct ProofIRBundle {
 
 ---
 
-## 4. Compromiso Criptográfico en Bitcoin L1 Sink (`INV_C5_15`)
+## 4. Compromiso Criptográfico en Bitcoin L1 Sink (`[OBSOLETO: INV_C5_15]`)
 
 El conjunto completo de predicados en `proof.ir` se serializa canónicamente. Sobre este buffer se construye un Árbol de Merkle binario.
 
@@ -103,7 +103,7 @@ Bajo la correspondencia de Curry-Howard:
 
 $$\text{Proposiciones} \cong \text{Tipos} \qquad \text{Demostraciones} \cong \text{Programas} \qquad \text{Simplificación} \cong \text{Cómputo}$$
 
-Cada predicado `ProofIR` se traduce en Lean 4 a una premisa o constructor del inductivo `CausalStep`:
+Cada predicado `ProofIR` se traduce en Lean 4 a una premisa o constructor del inductivo `[OBSOLETO: CausalStep]`:
 
 ```lean
 inductive CausalStep : Type where

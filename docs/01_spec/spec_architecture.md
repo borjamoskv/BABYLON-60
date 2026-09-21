@@ -40,7 +40,7 @@ Git Sentinel (commit hook en mutación)
 
 ### 2.1 Python SDK (`babylon60/`)
 Capa de interfaz primaria. Maneja la validación, idempotencia y la gestión de la cola asíncrona.
-- `babylon60.api.client`: API pública `CortexClient`.
+- `babylon60.api.client`: API pública `[OBSOLETO: CortexClient]`.
 - `babylon60.api.server`: Servidor REST+WebSocket con FastAPI/Uvicorn.
 - `babylon60.bft.ledger_actor`: Actor single-writer que serializa todas las escrituras en base de datos.
 - `babylon60.database.core`: Pool SQLite asíncrono.
@@ -59,7 +59,7 @@ Entorno local (*local-first*) diseñado para alta inspeccionabilidad y baja late
 - **Frontera de Markov Tauri (`src-tauri/`)**: Gestiona la integración con el SO, ventanas nativas y puentea el estado de la base de datos local al hilo de renderizado vía IPC.
 - **Backend FastAPI (`backend/`)**: Expone endpoints REST y WebSocket para consultas al Ledger, búsqueda BM25, telemetría y generación de modelos locales.
 - **Frontend Vite (`frontend/`)**: Construido con Vanilla JS, estilizado con paleta neuro-inclusiva de alto contraste, navegación orientada al teclado (`Cmd+K`, `Cmd+Shift+Space`).
-- **Módulo de Inferencia Local (`inference/`)**: Confinado a endpoints de loopback (`127.0.0.1:11434` / `localhost`). Puentea el servidor FastAPI a motores locales (Ollama, MLX, Mamba SSM), garantizando *cero fugas de datos* a hyperscalers públicos.
+- **Módulo de Inferencia Local (`inference/`)**: Confinado a endpoints de loopback (`127.0.0.1:11434` / `[OBSOLETO: localhost]`). Puentea el servidor FastAPI a motores locales (Ollama, MLX, Mamba SSM), garantizando *cero fugas de datos* a hyperscalers públicos.
 
 ## 3. Contrato del Ledger
 
@@ -93,7 +93,7 @@ Toda entrada escrita en el Ledger DEBE satisfacer el siguiente esquema:
 
 ## 5. Git Sentinel y Flujo de Recuperación
 
-**Git Sentinel:** Toda mutación en disco dispara un commit automático con prefijo *Conventional Commit* y metadatos `CORTEX_TAINT` inyectados en el mensaje del commit, creando un historial auditable por humanos de los cambios de estado del agente.
+**Git Sentinel:** Toda mutación en disco dispara un commit automático con prefijo *Conventional Commit* y metadatos `[OBSOLETO: CORTEX_TAINT]` inyectados en el mensaje del commit, creando un historial auditable por humanos de los cambios de estado del agente.
 
 **Recuperación tras Colapso (Crash Recovery):**
 1. Proceso aniquilado a mitad de transacción $\rightarrow$ SQLite WAL ejecuta un rollback automático.
@@ -117,7 +117,7 @@ cbor2      ──►  babylon60.ledger (codificación binaria)
 
 ## 8. Axioma del Dominio Temporal (Teorema Robinson-Moskv)
 
-**Postulado Termodinámico:** El Motor Causal prohíbe explícitamente la lectura de relojes de Dominio C5-REAL continuos (POSIX `CLOCK_REALTIME`, NTP) para establecer el consenso de causalidad.
+**Postulado Termodinámico:** El Motor Causal prohíbe explícitamente la lectura de relojes de Dominio C5-REAL continuos (POSIX `[OBSOLETO: CLOCK_REALTIME]`, NTP) para establecer el consenso de causalidad.
 
 **Formalización:**
 Sea $E$ el conjunto de todos los eventos (Crystallized Events) en el Ledger.
@@ -127,4 +127,4 @@ Cualquier evento $e_x$ cuyo $Lamport(e_x)$ o $Hash$ rompa esta topología estric
 
 > [!CAUTION]
 > **Falsabilidad Estructural:**
-> Esta precondición causal está reforzada mecánicamente por el invariante `INV_BFT_04`. Para más detalles sobre su aplicación técnica, ver [Invariantes del Dominio C5-REAL BABYLON-60](spec_invariants.md).
+> Esta precondición causal está reforzada mecánicamente por el invariante `[OBSOLETO: INV_BFT_04]`. Para más detalles sobre su aplicación técnica, ver [Invariantes del Dominio C5-REAL BABYLON-60](spec_invariants.md).

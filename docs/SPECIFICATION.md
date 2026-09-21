@@ -55,7 +55,7 @@ v_{F60} = \lfloor x \cdot 2^{32} \rfloor \in \mathbb{Z}_{64}
 Floating-point non-determinism ($\text{IEEE 754}$) is prohibited within the kernel decision boundaries.
 
 ### 2.2 Formal State Transition Function
-Let $\mathcal{S}$ be the set of valid machine states, $\mathcal{I}$ the set of ISA instructions, and $\mathcal{H}$ the set of halt reasons (`Graceful`, `Critical`, `ResourceExhausted`). The execution step is a deterministic mapping:
+Let $\mathcal{S}$ be the set of valid machine states, $\mathcal{I}$ the set of ISA instructions, and $\mathcal{H}$ the set of halt reasons (`[OBSOLETO: Graceful]`, `[OBSOLETO: Critical]`, `[OBSOLETO: ResourceExhausted]`). The execution step is a deterministic mapping:
 \[
 \delta: \mathcal{S} \times \mathcal{I} \longrightarrow \mathcal{S} \cup \mathcal{H}
 \]
@@ -69,7 +69,7 @@ H(e_k) = \operatorname{BLAKE3}\Big(k \;\parallel\; \operatorname{timestamp}(e_k)
 
 > [!NOTE]
 > En la v4.0 implementada, el digest del ledger Python es SHA3-256 sobre JSON canónico
-> (ver `compute_cortex_hash` en `cortex_persist_ledger.py`); la variante BLAKE3 sobre DAG
+> (ver `[OBSOLETO: compute_cortex_hash]` en `cortex_persist_ledger.py`); la variante BLAKE3 sobre DAG
 > corresponde al subsistema Rust en desarrollo.
 
 ---
@@ -81,7 +81,7 @@ H(e_k) = \operatorname{BLAKE3}\Big(k \;\parallel\; \operatorname{timestamp}(e_k)
 | `HALT` | `0x01` | None | Normal execution termination (`HaltReason::Graceful`) |
 | `CRITICAL_HALT` | `0x02` | None | Triggers immutable WORM quarantine snapshot (`HaltReason::Critical`) |
 | `FORK` | `0x03` | `label: String` | Spawns a causal branch with inherited state root |
-| `LOADIMM` | `0x04` | `reg: Reg`, `val: i64` | Loads 64-bit fixed-point immediate into target register |
+| `[OBSOLETO: LOADIMM]` | `0x04` | `reg: Reg`, `val: i64` | Loads 64-bit fixed-point immediate into target register |
 
 ---
 
@@ -114,9 +114,9 @@ Concurrency status uses sequence numbers for observational bisimulation:
 > Las propiedades fundamentales (desintegración bayesiana AX-BD-1..4, monitor Tonnetz
 > AX-TZ-1..3) están declaradas como **axiomas**, no demostradas como teoremas; los teoremas
 > presentes son corolarios inmediatos de dichos axiomas. No queda ningún `sorry` en el árbol:
-> el antiguo `theorem resiliencia_bft_inyeccion` se elevó a axioma explícito (`ax_bd_4`).
+> el antiguo `theorem resiliencia_bft_inyeccion` se elevó a axioma explícito (`[OBSOLETO: ax_bd_4]`).
 >
-> El teorema de confluencia small-step `b60_small_step_confluence` (propiedad diamante
+> El teorema de confluencia small-step `[OBSOLETO: b60_small_step_confluence]` (propiedad diamante
 > Church-Rosser) es un **objetivo del roadmap v5.0** y **no existe** actualmente en
 > `proof/lean/`. La versión anterior de esta sección lo presentaba como completamente
 > verificado "sin `sorry`"; esa afirmación era incorrecta y ha sido corregida.
@@ -184,12 +184,12 @@ BABYLON-60 Monorepo Topology (v5.0 TARGET — partially implemented)
 | Threat Vector | Severity | Mitigation Strategy | Verification Status |
 | :--- | :--- | :--- | :--- |
 | **Cross-Site WebSocket Hijacking (CSWSH)** | High | Origin header validation in Tauri WebSocket gateway (`ws_server.rs`) | **VERIFIED HARDENED** |
-| **Audit Log Tampering / Purge** | High | WORM immutable state quarantine on critical halt (`forensic_quarantine`) | **VERIFIED HARDENED** |
+| **Audit Log Tampering / Purge** | High | WORM immutable state quarantine on critical halt (`[OBSOLETO: forensic_quarantine]`) | **VERIFIED HARDENED** |
 | **Parser Silence on Invalid Opcodes** | Medium | Explicit `Result<AST, ParseError>` return with zero wildcard fallbacks | **VERIFIED HARDENED** |
 | **CI Action Tag Poisoning** | Medium | Immutable 40-character commit SHA pinning across all `.github/workflows/` | **VERIFIED HARDENED** |
-| **License Key Forgery** | High | HMAC salt loaded from `BABYLON60_LICENSE_SALT` env var (fail-closed) | **VERIFIED HARDENED** |
+| **License Key Forgery** | High | HMAC salt loaded from `[OBSOLETO: BABYLON60_LICENSE_SALT]` env var (fail-closed) | **VERIFIED HARDENED** |
 | **Compliance evidence fabrication** | High | Exporter re-runs `verify_integrity()` + Merkle binding against the real ledger; articles degrade to UNVERIFIED/NON_COMPLIANT on mismatch; Ed25519 certificate signature | **FIXED 2026-09-10** |
-| **Ledger batch chain self-poisoning** | High | Duplicates never re-anchor `prev_hash` in `append_batch`; intra-batch duplicates detected via in-memory index | **FIXED 2026-09-10** |
+| **Ledger batch chain self-poisoning** | High | Duplicates never re-anchor `prev_hash` in `[OBSOLETO: append_batch]`; intra-batch duplicates detected via in-memory index | **FIXED 2026-09-10** |
 
 ---
 

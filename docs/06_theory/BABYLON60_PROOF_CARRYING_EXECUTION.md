@@ -8,7 +8,7 @@
 La integración formal entre el tiempo de ejecución en Rust (Ring-0) y el sustrato axiomático en Lean 4 (Ring-1) ha completado su ciclo de verificación empírica. El sistema opera bajo dos regímenes complementarios:
 
 1. **Régimen JIT (Proof by Reflection):** Verificación estática directa mediante la táctica `decide` del kernel de Lean 4 para micro-trazas críticas.
-2. **Régimen AOT Streaming (O(1) Memory Footprint):** Compilación nativa C/LLVM del evaluador axiomático (`b60_oracle`), superando la barrera de 1.000.000 de transacciones sin asignación dinámica acumulativa.
+2. **Régimen AOT Streaming (O(1) Memory Footprint):** Compilación nativa C/LLVM del evaluador axiomático (`[OBSOLETO: b60_oracle]`), superando la barrera de 1.000.000 de transacciones sin asignación dinámica acumulativa.
 
 ### Métricas de Validación en Banco Físico (Apple Silicon M-Series, Rust 1.97.1 / Lean 4 v4.3.0)
 
@@ -97,7 +97,7 @@ El punto de entrada unificado despacha cuatro vuelos de validación en secuencia
 
 1. **Micro-traza nominal:** Genera `BabylonAutoTrace.lean` con teorema `validateTrace auto_execution_trace = true := by decide`. Invoca `lake env lean` y recibe EXIT 0.
 2. **Micro-traza corrupta:** Inyecta lectura con secuencia impar. El compilador Lean 4 falla la táctica `decide` y rechaza la prueba con EXIT != 0.
-3. **Traza de 1.000.002 eventos:** Genera 333.334 ciclos triples (`writeBegin` -> `writeEnd` -> `read`). Volcado físico en 217,61 ms. Invocación del oráculo AOT nativo: 1.000.002 transacciones verificadas en 566,69 ms (tasa de verificación: 1.764.636 tx/seg). Retorno EXIT 0.
+3. **Traza de 1.000.002 eventos:** Genera 333.334 ciclos triples (`[OBSOLETO: writeBegin]` -> `[OBSOLETO: writeEnd]` -> `read`). Volcado físico en 217,61 ms. Invocación del oráculo AOT nativo: 1.000.002 transacciones verificadas en 566,69 ms (tasa de verificación: 1.764.636 tx/seg). Retorno EXIT 0.
 4. **Inyección de corrupción en escala:** Modifica el evento 500.000 alterando la secuencia a impar. El oráculo AOT intercepta la paradoja en secuencia 333.333 en 288,80 ms y aborta con EXIT 2.
 
 ---

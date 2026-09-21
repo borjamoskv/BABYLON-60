@@ -26,7 +26,7 @@ La **Topología Legión 222** es la arquitectura de escalado extremo y pruebas d
 
 Cada agente ejecuta un vector de verificación específico sobre el kernel y el compilador:
 
-1. **LOOM (40% de los Agentes)**: Verificación de concurrencia y ausencia de condiciones de carrera (*data races*) en estructuras de datos atómicas (`seqlock_loom`).
+1. **LOOM (40% de los Agentes)**: Verificación de concurrencia y ausencia de condiciones de carrera (*data races*) en estructuras de datos atómicas (`[OBSOLETO: seqlock_loom]`).
 2. **FUZZ (40% de los Agentes)**: Bombardeo mutacional de la sintaxis AST para validar la resiliencia del aislador de sandbox (`test_syntax_integrity.py`).
 3. **THERMO (20% de los Agentes)**: Muestreo de la cota termodinámica de Landauer y verificación del espacio de trabajo Rust (`cargo check --workspace`).
 

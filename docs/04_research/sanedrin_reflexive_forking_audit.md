@@ -19,7 +19,7 @@ Se convoca al Sanedrín Arquitectónico (modelo de enjambre simulado multiperspe
 ### 🛡️ Intervención 2: Arquitecto SRE Zero-Trust (Resiliencia y DAG Ledger)
 **Veredicto:** 🛑 *Veto de Confianza (Requiere Atestación)*
 > "Un agente auto-escribiendo su propio orquestador es la definición de una pesadilla *Supply Chain*. Si el SOTA Watchdog alucina e introduce un paquete de Python malicioso sacado de un paper falso de arXiv, el sistema se compromete a sí mismo. 
-> **Condición innegociable:** El *Reflexive Forking* debe operar en una Micro-VM de Firecracker desconectada de la red (air-gapped) durante la ejecución de los tests. La validación no puede ser solo que pasen los `pytest`; debe haber una auditoría de dependencias y una firma criptográfica TPM 2.0 que acredite la idempotencia de la mutación antes de fusionarla (merge) a la rama main."
+> **Condición innegociable:** El *Reflexive Forking* debe operar en una Micro-VM de Firecracker desconectada de la red (air-gapped) durante la ejecución de los tests. La validación no puede ser solo que pasen los `[OBSOLETO: pytest]`; debe haber una auditoría de dependencias y una firma criptográfica TPM 2.0 que acredite la idempotencia de la mutación antes de fusionarla (merge) a la rama main."
 
 ### 🔬 Intervención 3: Investigador SOTA (Vanguardia AI y Test-Time Compute)
 **Veredicto:** ✅ *Aprobación Agresiva*
@@ -29,7 +29,7 @@ Se convoca al Sanedrín Arquitectónico (modelo de enjambre simulado multiperspe
 ### ⚖️ Intervención 4: Juez Auditor (Cumplimiento EU AI Act Art. 9-14)
 **Veredicto:** ⚠️ *Alerta Regulatoria (Art. 14)*
 > "El Artículo 14 exige *Human Oversight* (Supervisión Humana) obligatoria para sistemas de IA de Alto Riesgo. Un sistema que muta su propia arquitectura de control central vulnera la capacidad de supervisión, ya que el humano pierde la trazabilidad de los pesos y de la lógica de orquestación original. 
-> **Condición innegociable:** El sistema puede escribir el código SOTA y testearlo en la Micro-VM, pero el `commit` final al DAG Ledger $F_{60}$ REQUIERE un *Halt Receipt* (Firma de Aprobación Humana). El sistema no puede hacer un auto-merge ciego. El *Reflexive Forking* debe proponer un *Pull Request* formal con un diff termodinámico claro para que el operador humano lo firme."
+> **Condición innegociable:** El sistema puede escribir el código SOTA y testearlo en la Micro-VM, pero el `[OBSOLETO: commit]` final al DAG Ledger $F_{60}$ REQUIERE un *Halt Receipt* (Firma de Aprobación Humana). El sistema no puede hacer un auto-merge ciego. El *Reflexive Forking* debe proponer un *Pull Request* formal con un diff termodinámico claro para que el operador humano lo firme."
 
 ---
 

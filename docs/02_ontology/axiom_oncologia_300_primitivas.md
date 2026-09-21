@@ -20,7 +20,7 @@ version: 1.0.0
 > [!WARNING]
 > **Aviso Médico y Legal:** Esto es una **ONTOLOGÍA DE CONOCIMIENTO** de biología molecular del cáncer y de sus dianas terapéuticas: los bloques fundamentales que la investigación oncobiológica estudia y ataca. **NO es una cura, NO es un protocolo de tratamiento y NO constituye consejo médico.** El cáncer comprende más de 200 enfermedades distintas; el diagnóstico y el tratamiento son clínicos, individualizados y competencia exclusiva de oncólogos e investigadores sanitarios.
 
-Autoría artística/arquitectónica del sustrato (AKA): **Borja Motor Causal** (`borjamoskv`).
+Autoría artística/arquitectónica del sustrato (AKA): **Borja Motor Causal** (`[OBSOLETO: borjamoskv]`).
 
 ---
 
@@ -93,7 +93,7 @@ graph TD
 ---
 
 ## Hallmarks del Cáncer
-> **Invariante C5:** `INV_BIO_01` | *Operador Transductivo:* \( H_{\text{meta}}: \mathcal{S}_{\text{bio}} \to \mathcal{S}_{\text{hallmark}} \)
+> **Invariante C5:** `[OBSOLETO: INV_BIO_01]` | *Operador Transductivo:* \( H_{\text{meta}}: \mathcal{S}_{\text{bio}} \to \mathcal{S}_{\text{hallmark}} \)
 <a id="hallmarks-del-cancer"></a>
 *Capa: meta | 16 primitivas*
 
@@ -117,7 +117,7 @@ graph TD
 | `ONC-016` | **Two-hit hypothesis (Knudson)** | proceso | Los supresores tumorales suelen requerir inactivacion bialelica para perder funcion. | Marco de riesgo hereditario (RB1, BRCA). | Knudson, PNAS 1971 |
 
 ## Oncogenes
-> **Invariante C5:** `INV_BIO_02` | *Operador Transductivo:* \( T_{\text{onc}}: \text{Gain-of-Function} \implies \text{Hyper-Activation} \)
+> **Invariante C5:** `[OBSOLETO: INV_BIO_02]` | *Operador Transductivo:* \( T_{\text{onc}}: \text{Gain-of-Function} \implies \text{Hyper-Activation} \)
 <a id="oncogenes"></a>
 *Capa: molecular | 30 primitivas*
 
@@ -155,7 +155,7 @@ graph TD
 | `ONC-046` | **CTNNB1 (beta-catenina)** | oncogen | Efector de Wnt; mutaciones lo estabilizan y activan transcripcion pro-tumoral. | Diana dificil; via Wnt en investigacion. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
 ## Genes Supresores de Tumores
-> **Invariante C5:** `INV_BIO_03` | *Operador Transductivo:* \( T_{\text{tsg}}: \text{Loss-of-Function} \implies \text{Checkpoint Collapse} \)
+> **Invariante C5:** `[OBSOLETO: INV_BIO_03]` | *Operador Transductivo:* \( T_{\text{tsg}}: \text{Loss-of-Function} \implies \text{Checkpoint Collapse} \)
 <a id="genes-supresores-de-tumores"></a>
 *Capa: molecular | 24 primitivas*
 
@@ -187,7 +187,7 @@ graph TD
 | `ONC-070` | **CDH1 (E-cadherina)** | supresor | Adhesion celula-celula; su perdida favorece invasion (gastrico difuso, lobulillar). | Biomarcador hereditario (CDH1). | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
 ## Vías de Señalización
-> **Invariante C5:** `INV_BIO_04` | *Operador Transductivo:* \( P_{\text{pathway}}: \text{RTK} \to \text{RAS} \to \text{RAF} \to \text{MEK} \to \text{ERK} \)
+> **Invariante C5:** `[OBSOLETO: INV_BIO_04]` | *Operador Transductivo:* \( P_{\text{pathway}}: \text{RTK} \to \text{RAS} \to \text{RAF} \to \text{MEK} \to \text{ERK} \)
 <a id="vias-de-senalizacion"></a>
 *Capa: pathway | 18 primitivas*
 
@@ -213,7 +213,7 @@ graph TD
 | `ONC-088` | **cGAS-STING** | proceso | Sensor de ADN citosolico que activa inmunidad innata tipo I. | Agonistas STING (investigacion inmuno). | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
 ## Ciclo Celular y Checkpoints
-> **Invariante C5:** `INV_BIO_05` | *Operador Transductivo:* \( C_{\text{cycle}}: G_1/S \to S \to G_2/M \to M \)
+> **Invariante C5:** `[OBSOLETO: INV_BIO_05]` | *Operador Transductivo:* \( C_{\text{cycle}}: G_1/S \to S \to G_2/M \to M \)
 <a id="ciclo-celular-y-checkpoints"></a>
 *Capa: cellular | 13 primitivas*
 
@@ -234,7 +234,7 @@ graph TD
 | `ONC-101` | **APC/C (anaphase-promoting complex)** | proceso | E3 ligasa que degrada ciclinas y securina para la anafase. | Objeto de estudio antimitotico. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
 ## Apoptosis y Muerte Celular Regulada
-> **Invariante C5:** `INV_BIO_06` | *Operador Transductivo:* \( A_{\text{pop}}: \text{Bax/Bak} \implies \text{MOMP} \implies \text{Caspase Cascade} \)
+> **Invariante C5:** `[OBSOLETO: INV_BIO_06]` | *Operador Transductivo:* \( A_{\text{pop}}: \text{Bax/Bak} \implies \text{MOMP} \implies \text{Caspase Cascade} \)
 <a id="apoptosis-y-muerte-celular-regulada"></a>
 *Capa: cellular | 22 primitivas*
 
@@ -264,7 +264,7 @@ graph TD
 | `ONC-123` | **Pyroptosis (gasdermin)** | proceso | Muerte inflamatoria mediada por poros de gasdermina. | Interfaz con inmunidad antitumoral. | Shi et al., Nature 2015 |
 
 ## Respuesta al Daño y Reparación de ADN (DDR)
-> **Invariante C5:** `INV_BIO_07` | *Operador Transductivo:* \( D_{\text{repair}}: \text{PARP1} \otimes \text{HRD} \implies \text{Synthetic Lethality} \)
+> **Invariante C5:** `[OBSOLETO: INV_BIO_07]` | *Operador Transductivo:* \( D_{\text{repair}}: \text{PARP1} \otimes \text{HRD} \implies \text{Synthetic Lethality} \)
 <a id="respuesta-al-dano-y-reparacion-de-adn"></a>
 *Capa: molecular | 18 primitivas*
 
@@ -290,7 +290,7 @@ graph TD
 | `ONC-141` | **BRCAness** | biomarcador | Fenotipo de deficiencia de HR sin mutacion germinal de BRCA. | Amplia la poblacion candidata a PARPi. | Lord & Ashworth, Nat Med 2013 |
 
 ## Inestabilidad Genómica y Mutagénesis
-> **Invariante C5:** `INV_BIO_08` | *Operador Transductivo:* \( G_{\text{instability}}: \text{Chromothripsis} \implies \text{Subclonal Diversity} \)
+> **Invariante C5:** `[OBSOLETO: INV_BIO_08]` | *Operador Transductivo:* \( G_{\text{instability}}: \text{Chromothripsis} \implies \text{Subclonal Diversity} \)
 <a id="inestabilidad-genomica-y-mutagenesis"></a>
 *Capa: molecular | 12 primitivas*
 
@@ -310,7 +310,7 @@ graph TD
 | `ONC-153` | **Extrachromosomal DNA (ecDNA)** | proceso | Amplicones de ADN circular sin centromero ni telomeros (tamaños de 1 a 3 Mb) que se replican y segregan de manera aleatoria y no mendeliana durante la mitosis, concentrando oncogenes (EGFR, MYC, ERBB2) en un estado de cromatina ultra-abierta. | Confieren enorme plasticidad transcripcional (hasta 100x copias de oncogene), posibilitan la adaptacion ultrarrapida bajo presion farmacologica por fluctuacion de copias y representan una diana terapeutica de vanguardia (intervencion en hubs transcripcionales). | Turner et al., Nature 2017; Wu et al., Nature 2019 |
 
 ## Telómeros, Senescencia e Inmortalidad
-> **Invariante C5:** `INV_BIO_09` | *Operador Transductivo:* \( T_{\text{elo}}: \text{TERT/ALT} \implies \text{Infinite Passage} \)
+> **Invariante C5:** `[OBSOLETO: INV_BIO_09]` | *Operador Transductivo:* \( T_{\text{elo}}: \text{TERT/ALT} \implies \text{Infinite Passage} \)
 <a id="telomeros-senescencia-e-inmortalidad"></a>
 *Capa: cellular | 8 primitivas*
 
@@ -326,7 +326,7 @@ graph TD
 | `ONC-161` | **Hayflick limit** | proceso | Numero finito de divisiones de celulas somaticas normales. | Marco conceptual de la inmortalizacion. | Hayflick & Moorhead, Exp Cell Res 1961 |
 
 ## Angiogénesis
-> **Invariante C5:** `INV_BIO_10` | *Operador Transductivo:* \( V_{\text{scular}}: \text{HIF-1\alpha} \to \text{VEGF} \implies \text{Endothelial Sprouting} \)
+> **Invariante C5:** `[OBSOLETO: INV_BIO_10]` | *Operador Transductivo:* \( V_{\text{scular}}: \text{HIF-1\alpha} \to \text{VEGF} \implies \text{Endothelial Sprouting} \)
 <a id="angiogenesis"></a>
 *Capa: cellular | 10 primitivas*
 
@@ -344,7 +344,7 @@ graph TD
 | `ONC-171` | **Anti-angiogenic therapy** | modalidad | Bloqueo del suministro vascular del tumor. | Bevacizumab, sunitinib, sorafenib. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
 ## Invasión, EMT y Metástasis
-> **Invariante C5:** `INV_BIO_11` | *Operador Transductivo:* \( E_{\text{mt}}: \text{E-cadherin}^\downarrow \to \text{N-cadherin}^\uparrow \implies \text{Motility} \)
+> **Invariante C5:** `[OBSOLETO: INV_BIO_11]` | *Operador Transductivo:* \( E_{\text{mt}}: \text{E-cadherin}^\downarrow \to \text{N-cadherin}^\uparrow \implies \text{Motility} \)
 <a id="invasion-emt-y-metastasis"></a>
 *Capa: cellular | 18 primitivas*
 
@@ -370,7 +370,7 @@ graph TD
 | `ONC-189` | **Rho/Rac cytoskeletal dynamics** | proceso | GTPasas que reorganizan el citoesqueleto para migrar. | Diana de motilidad (investigacion). | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
 ## Metabolismo Tumoral
-> **Invariante C5:** `INV_BIO_12` | *Operador Transductivo:* \( M_{\text{etab}}: \text{Glucose} \to \text{Lactate} \quad (\text{Efecto Warburg}) \)
+> **Invariante C5:** `[OBSOLETO: INV_BIO_12]` | *Operador Transductivo:* \( M_{\text{etab}}: \text{Glucose} \to \text{Lactate} \quad (\text{Efecto Warburg}) \)
 <a id="metabolismo-tumoral"></a>
 *Capa: molecular | 16 primitivas*
 
@@ -394,7 +394,7 @@ graph TD
 | `ONC-205` | **Amino-acid dependency (Asn/Arg)** | proceso | Adiccion a aminoacidos no sintetizables por ciertos tumores. | L-asparaginasa (LLA); depledores de arginina. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
 ## Epigenética y Cromatina
-> **Invariante C5:** `INV_BIO_13` | *Operador Transductivo:* \( E_{\text{pigen}}: \text{H3K27me3} \implies \text{Transcriptional Silencing} \)
+> **Invariante C5:** `[OBSOLETO: INV_BIO_13]` | *Operador Transductivo:* \( E_{\text{pigen}}: \text{H3K27me3} \implies \text{Transcriptional Silencing} \)
 <a id="epigenetica-y-cromatina"></a>
 *Capa: molecular | 15 primitivas*
 
@@ -417,7 +417,7 @@ graph TD
 | `ONC-220` | **Chromatin accessibility** | proceso | Paisaje abierto/cerrado que define programas transcripcionales. | Perfilable por ATAC-seq. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
 ## Microambiente Tumoral (TME)
-> **Invariante C5:** `INV_BIO_14` | *Operador Transductivo:* \( M_{\text{icro}}: \text{CAF} + \text{TAM (M2)} \implies \text{Immune Exclusion} \)
+> **Invariante C5:** `[OBSOLETO: INV_BIO_14]` | *Operador Transductivo:* \( M_{\text{icro}}: \text{CAF} + \text{TAM (M2)} \implies \text{Immune Exclusion} \)
 <a id="microambiente-tumoral-tme"></a>
 *Capa: tissue | 13 primitivas*
 
@@ -438,7 +438,7 @@ graph TD
 | `ONC-233` | **Metabolic competition in TME** | proceso | El tumor priva de glucosa y aminoacidos a linfocitos. | Reprogramacion metabolica inmune. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
 ## Inmuno-Oncología y Evasión Inmune
-> **Invariante C5:** `INV_BIO_15` | *Operador Transductivo:* \( I_{\text{mmune}}: \text{PD-1} \otimes \text{PD-L1} \implies T_{\text{cell}} \text{ Exhaustion} \)
+> **Invariante C5:** `[OBSOLETO: INV_BIO_15]` | *Operador Transductivo:* \( I_{\text{mmune}}: \text{PD-1} \otimes \text{PD-L1} \implies T_{\text{cell}} \text{ Exhaustion} \)
 <a id="inmuno-oncologia-y-evasion-inmune"></a>
 *Capa: tissue | 22 primitivas*
 
@@ -468,7 +468,7 @@ graph TD
 | `ONC-255` | **Immunogenic cell death (ICD)** | proceso | Muerte que libera senales de peligro y activa inmunidad. | Inducida por ciertas quimio/radio. | Galluzzi et al., Nat Rev Immunol 2017 |
 
 ## Modalidades Terapéuticas
-> **Invariante C5:** `INV_BIO_16` | *Operador Transductivo:* \( T_{\text{herapy}}: \text{ADC/PROTAC/TKI} \to \text{Target Neutralization} \)
+> **Invariante C5:** `[OBSOLETO: INV_BIO_16]` | *Operador Transductivo:* \( T_{\text{herapy}}: \text{ADC/PROTAC/TKI} \to \text{Target Neutralization} \)
 <a id="modalidades-terapeuticas"></a>
 *Capa: therapy | 18 primitivas*
 
@@ -494,7 +494,7 @@ graph TD
 | `ONC-273` | **Epigenetic therapy** | modalidad | Revierte silenciamientos aberrantes de la cromatina. | DNMTi, HDACi, EZH2i. | Weinberg RA, The Biology of Cancer, 2nd ed. 2014 |
 
 ## Primitivas Fármaco -> Diana
-> **Invariante C5:** `INV_BIO_17` | *Operador Transductivo:* \( D_{\text{rug}}: \text{Compound} \times \text{Target} \implies \mathbb{I}_{\text{inhibition}} \)
+> **Invariante C5:** `[OBSOLETO: INV_BIO_17]` | *Operador Transductivo:* \( D_{\text{rug}}: \text{Compound} \times \text{Target} \implies \mathbb{I}_{\text{inhibition}} \)
 <a id="primitivas-farmaco-diana"></a>
 *Capa: therapy | 27 primitivas*
 
@@ -562,7 +562,7 @@ Para prevenir el aplanamiento ontológico, las 300 primitivas se particionan en 
 
 * **Continuants (Entidades Materiales y Estructurales):**
   - Genes y Receptores: `KRAS`, `EGFR`, `TP53`, `BRCA1`.
-  - Compuestos Terapéuticos: `Sotorasib`, `Osimertinib`, `Trastuzumab Deruxtecan`.
+  - Compuestos Terapéuticos: `[OBSOLETO: Sotorasib]`, `[OBSOLETO: Osimertinib]`, `Trastuzumab Deruxtecan`.
   - Complejos Moleculares: Complejo MRN (`MRE11-RAD50-NBS1`), BAX/BAK.
 
 * **Occurrents (Procesos Fisiológicos y Transducción Temporal):**

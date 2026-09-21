@@ -73,7 +73,7 @@ version: 1.0.0
 > 1. Por AX-LS-2, ninguna función $\alpha$ muta el estado global de $\mathcal{W}$.
 > 2. Como cada $\alpha_i$ procesa un $d_i$ independiente de la Partición Topológica disjunta, las evaluaciones son homomorfismos aislados.
 > 3. La unión de conjuntos es conmutativa ($A \cup B = B \cup A$).
-> 4. $\therefore$ El orden de resolución de los `Future`s en el pool conmutativo no altera el vector final $\mathbf{V}$. $\blacksquare$
+> 4. $\therefore$ El orden de resolución de los `[OBSOLETO: Future]`s en el pool conmutativo no altera el vector final $\mathbf{V}$. $\blacksquare$
 
 > [!NOTE]
 > ### Corolario 1: Cota de Sobrecarga Termodinámica

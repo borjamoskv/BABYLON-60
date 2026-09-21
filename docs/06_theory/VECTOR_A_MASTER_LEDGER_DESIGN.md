@@ -99,18 +99,18 @@ CREATE TABLE support (
 
 ## 3. 📌 Invariante Ledger Asíncrono-TAINT (el eslabón causal)
 
-Reusa `TaintEngine` (lib.rs, BLAKE3 + toposort de Kahn). Cada fila que muta disco:
+Reusa `[OBSOLETO: TaintEngine]` (lib.rs, BLAKE3 + toposort de Kahn). Cada fila que muta disco:
 
 ```
 taint(rowₙ) = BLAKE3( taint(rowₙ₋₁) ‖ canonical_bytes(rowₙ) )
 taint(row₀) = BLAKE3( "GENESIS:C5_REAL" )
 ```
 
-- `canonical_bytes` = serialización determinista (campos en orden fijo, sin floats
+- `[OBSOLETO: canonical_bytes]` = serialización determinista (campos en orden fijo, sin floats
   crudos: los `f64` de confidence/quorum se codifican con `to_bits()` para evitar
   no-determinismo de formato).
-- **Boot check**: `verify_chain()` recomputa el fold sobre `belief` en orden de `id`
-  y compara con `head_taint`. Mismatch → `abort()` (la doctrina "sin hash no existe"
+- **Boot check**: `verify_chain()` recomputa el fold sobre `[OBSOLETO: belief]` en orden de `id`
+  y compara con `[OBSOLETO: head_taint]`. Mismatch → `abort()` (la doctrina "sin hash no existe"
   aplicada en la capa de almacenamiento).
 
 ## 4. 📌 API Rust (a implementar en `ledger.rs`)
@@ -131,16 +131,16 @@ impl Ledger {
 
 ## 5. 📌 Tests que lo harían Causal-Determinist (obligatorios antes de cantar victoria)
 
-1. `append` es idempotente: dos `append_belief` del mismo (S,J) → 1 fila, mismo taint.
-2. `verify_chain` verde tras N appends; y ROJO si se muta una fila a mano (tamper).
+1. `append` es idempotente: dos `[OBSOLETO: append_belief]` del mismo (S,J) → 1 fila, mismo taint.
+2. `[OBSOLETO: verify_chain]` verde tras N appends; y ROJO si se muta una fila a mano (tamper).
 3. round-trip: `load_atms(persist(atms)) ≈ atms` (labels y nogoods preservados).
-4. property: el `env_id` (blake3 de asunciones ordenadas) es estable ante permutación.
+4. property: el `[OBSOLETO: env_id]` (blake3 de asunciones ordenadas) es estable ante permutación.
 5. crash-safety: matar el proceso a mitad de un append (WAL) no corrompe la cadena.
 
 ## 6. 📌 Orden de colapso sugerido
 
-1. `ledger.rs` con `statement`/`justification`/`belief` + cadena taint (+ tests 1,2).
-2. Proyección ATMS (`environment`/`label`/`nogood`/`support`) + `load_atms` (+ tests 3,4).
+1. `ledger.rs` con `statement`/`[OBSOLETO: justification]`/`[OBSOLETO: belief]` + cadena taint (+ tests 1,2).
+2. Proyección ATMS (`[OBSOLETO: environment]`/`label`/`[OBSOLETO: nogood]`/`[OBSOLETO: support]`) + `[OBSOLETO: load_atms]` (+ tests 3,4).
 3. Integrar `Obligation::Freshness` real aquí (timestamp vs. horizonte = obligación runtime, H2).
 4. Recién entonces Vector B (Scheduler) escribe contra este ledger con escritor único.
 

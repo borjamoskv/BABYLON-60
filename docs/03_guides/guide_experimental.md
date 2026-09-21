@@ -85,7 +85,7 @@ Lean 4 mechanical proofs of core ledger invariants.
 
 ### Current State (Formal Verification)
 
-Not integrated into CI. Requires `lake build` locally. Theorem coverage is now bridged directly to the Python implementation via strictly typed `BFTCausalInvariantError` assertions in `ledger_actor.py`.
+Not integrated into CI. Requires `lake build` locally. Theorem coverage is now bridged directly to the Python implementation via strictly typed `[OBSOLETO: BFTCausalInvariantError]` assertions in `ledger_actor.py`.
 
 ---
 
@@ -159,7 +159,7 @@ Exposes metrics at `ws://localhost:8080`.
 
 ### Limitations (Node.js Daemon)
 
-- macOS-only (uses `system_profiler` and native APIs)
+- macOS-only (uses `[OBSOLETO: system_profiler]` and native APIs)
 - No authentication on WebSocket endpoint
 - Metrics schema may change between versions
 

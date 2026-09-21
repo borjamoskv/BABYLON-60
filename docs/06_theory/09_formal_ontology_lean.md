@@ -13,7 +13,7 @@ version: 1.0.0
 
 </div>
 
-> **Módulo Teórico 09 | Proyecto BABYLON-60 | Licencia Soberana (`INV_C5_17`)**
+> **Módulo Teórico 09 | Proyecto BABYLON-60 | Licencia Soberana (`[OBSOLETO: INV_C5_17]`)**
 > Ontología Formal en Lean 4: El puente constructivo entre la incompletitud metamatemática y la ejecución determinista de la máquina de estados.
 
 ---
@@ -30,7 +30,7 @@ En BABYLON-60, esta exigencia se materializa en la **Ontología Formal Causal-De
 
 ## 9.2 📌 El Dominio de Tipos y el Determinismo BFT
 
-Para que una red distribuida alcance consenso bizantino sin divergencias de estado (invariante **`INV_BFT_04`**), el cómputo subyacente debe ser matemáticamente determinista a nivel de bit, a lo largo de cualquier arquitectura hardware (x86, ARM, RISC-V).
+Para que una red distribuida alcance consenso bizantino sin divergencias de estado (invariante **`[OBSOLETO: INV_BFT_04]`**), el cómputo subyacente debe ser matemáticamente determinista a nivel de bit, a lo largo de cualquier arquitectura hardware (x86, ARM, RISC-V).
 
 ### El Problema de IEEE-754
 El coma flotante tradicional (estándar IEEE-754) es infame por su no-determinismo cruzado. Una multiplicación como `a * b` puede generar redondeos o NaNs sutilmente diferentes dependiendo de las instrucciones SSE/AVX del procesador. 
@@ -50,7 +50,7 @@ inductive B60Type where
 def F60_Val := ℚ 
 ```
 
-Al forzar `F60_Val` a ser estrictamente **$\mathbb{Q}$ (los números racionales exactos)**, el sistema elude las patologías del coma flotante. La aritmética racional se ejecuta sobre BigInts, donde la igualdad es categórica y no sujeta a tolerancias ($\epsilon$). Si `A + B = C` en una máquina, lo es en todas. Esto garantiza que la función validadora de colisiones BFT (`INV_BFT_04`) no arroje falsos positivos.
+Al forzar `[OBSOLETO: F60_Val]` a ser estrictamente **$\mathbb{Q}$ (los números racionales exactos)**, el sistema elude las patologías del coma flotante. La aritmética racional se ejecuta sobre BigInts, donde la igualdad es categórica y no sujeta a tolerancias ($\epsilon$). Si `A + B = C` en una máquina, lo es en todas. Esto garantiza que la función validadora de colisiones BFT (`[OBSOLETO: INV_BFT_04]`) no arroje falsos positivos.
 
 ---
 
@@ -101,7 +101,7 @@ Aquí es donde el isomorfismo de Curry-Howard brilla en toda su gloria:
 1. `Step` no es una "función" que muta memoria.
 2. `Step` es una **Proposición lógica** (`State → State → Prop`).
 3. Para que la red acepte que el estado ha transicionado de $s_1$ a $s_2$, el cliente no simplemente envía el nuevo estado $s_2$. Debe enviar **una prueba constructiva** (un habitante del tipo `Step s1 s2`).
-4. `assign` y `fork` son las únicas reglas de inferencia permitidas (los axiomas de mutación).
+4. `[OBSOLETO: assign]` y `fork` son las únicas reglas de inferencia permitidas (los axiomas de mutación).
 
 ### $\Sigma_1$-Completitud y el Límite Práctico
 Revisitemos el Módulo 01: la Aritmética de Robinson es $\Sigma_1$-completa. Puede verificar mecánicamente trazas finitas. 

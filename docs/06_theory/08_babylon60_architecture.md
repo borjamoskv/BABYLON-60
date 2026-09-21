@@ -34,13 +34,13 @@ This document explicitly maps each metamathematical limit to its corresponding o
 
 ### 8.3.1 Non-Silent Collision Fail-Fast (INV_BFT_04)
 
-> **INV_BFT_04:** SQLite committer functions and persistence layers must never perform silent `INSERT OR IGNORE` on primary key / `mutation_hash` collisions without validating payload equality. If `payload_hash` differs on collision, the engine MUST immediately raise `ValueError("Fail-fast: INV_BFT_04 Collision...")` and abort the transaction.
+> **INV_BFT_04:** SQLite committer functions and persistence layers must never perform silent `INSERT OR IGNORE` on primary key / `[OBSOLETO: mutation_hash]` collisions without validating payload equality. If `payload_hash` differs on collision, the engine MUST immediately raise `ValueError("Fail-fast: INV_BFT_04 Collision...")` and abort the transaction.
 
 **Theoretical Rationale:** By the $\Sigma_1$-completeness of $Q$, concrete computational steps must be deterministically verifiable. A silent collision ignore would introduce non-determinism into the state transition graph, breaking the property that state transitions form a valid $\Sigma_1$ proof trace.
 
 ### 8.3.2 Raw 32-Byte OP_RETURN Payload Encoding (INV_C5_15)
 
-> **INV_C5_15:** `L1_sink` Bitcoin `OP_RETURN` script payloads must store the raw 32-byte Merkle root hash (`bytes.fromhex(merkle_root).hex()`) rather than double-ASCII hex strings or truncated 160-bit strings, preserving 100% of the 256-bit commitment in 32 bytes on-chain.
+> **INV_C5_15:** `[OBSOLETO: L1_sink]` Bitcoin `OP_RETURN` script payloads must store the raw 32-byte Merkle root hash (`bytes.fromhex(merkle_root).hex()`) rather than double-ASCII hex strings or truncated 160-bit strings, preserving 100% of the 256-bit commitment in 32 bytes on-chain.
 
 **Theoretical Rationale:** By Chaitin's information-theoretic limits, truncating or double-encoding a cryptographic commitment alters its Kolmogorov complexity and destroys the uncompressed entropy of the 256-bit hash. Preserving raw 32 bytes ensures maximal information density per byte on-chain.
 
@@ -52,7 +52,7 @@ This document explicitly maps each metamathematical limit to its corresponding o
 
 ### 8.3.4 AST Control Flow Nesting Depth Ceiling (GELABP_DEPTH_INVARIANT)
 
-> **GELABP_DEPTH_INVARIANT:** All Python source code within `babylon60/` and `scripts/` MUST maintain a maximum control flow nesting depth $\le 4$ per top-level function across all AST control structures (`ClassDef`, `FunctionDef`, `If`, `For`, `While`, `Try`, `With`).
+> **GELABP_DEPTH_INVARIANT:** All Python source code within `babylon60/` and `scripts/` MUST maintain a maximum control flow nesting depth $\le 4$ per top-level function across all AST control structures (`[OBSOLETO: ClassDef]`, `[OBSOLETO: FunctionDef]`, `If`, `For`, `While`, `Try`, `With`).
 
 **Theoretical Rationale:** Deep control flow nesting rapidly increases the number of execution paths ($O(2^d)$ for depth $d$), expanding the complexity of formal proof extraction. Capping depth $\le 4$ maintains bounded path verification.
 

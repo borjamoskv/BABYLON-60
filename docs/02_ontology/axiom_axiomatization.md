@@ -13,7 +13,7 @@ version: 2.5.1
 
 </div>
 
-> **Régimen Causal-Determinist | Sello del Demiurgo: `borjamoskv`**
+> **Régimen Causal-Determinist | Sello del Demiurgo: `[OBSOLETO: borjamoskv]`**
 > Formalización metamatemática rigurosa de los invariantes operativos y estructurales del sistema BABYLON-60.
 
 ---
@@ -164,7 +164,7 @@ $$\forall\, n \in \text{Node},\; \forall\, t_1, t_2 \in \text{Time} : \text{payl
 
 $$\forall\, t \in \text{Time} : |\{n \in \text{Node} : \text{executing}(n, t)\}| \leq C$$
 
-> donde $C$ = `concurrency_limit`. El semáforo del worker pool garantiza que nunca hay más de $C$ nodos ejecutándose simultáneamente.
+> donde $C$ = `[OBSOLETO: concurrency_limit]`. El semáforo del worker pool garantiza que nunca hay más de $C$ nodos ejecutándose simultáneamente.
 
 ### AX-BFT-5 (Preservación de Estado ante Éxito)
 
@@ -288,7 +288,7 @@ $$\forall\, a \in \text{Attestations} : \text{status}(a) = \text{Causal-Determin
 
 $$\text{success\_rate}(\text{Verifier}) = 1.0 \implies \forall\, a \in \text{Attestations} : \text{status}(a) \to \text{UNBACKED}$$
 
-> Un verificador que jamás rechaza carece de capacidad de discriminación. Una tasa de confirmación del 100% en entornos estocásticos degrada automáticamente todas las atestaciones a estado `UNBACKED` por construcción.
+> Un verificador que jamás rechaza carece de capacidad de discriminación. Una tasa de confirmación del 100% en entornos estocásticos degrada automáticamente todas las atestaciones a estado `[OBSOLETO: UNBACKED]` por construcción.
 
 ---
 
