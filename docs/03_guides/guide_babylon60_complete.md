@@ -125,7 +125,7 @@ Accessible via **`⌘ 8`** or by clicking the diamond icon (`◈`) in the sideba
 BABYLON·60 is compiled into a standalone desktop application using **Tauri v2** and **Rust**.
 
 ### ⚙️ Build Requirements
-* The Tauri configuration is stored in [apps/babylon60-ide/src-tauri/tauri.conf.json](../../apps/babylon60-ide/src-tauri/tauri.conf.json).
+* The Tauri configuration is stored in `apps/babylon60-ide/src-tauri/tauri.conf.json`.
 * A unique bundle identifier is required: `"identifier": "com.babylon60.ide"`.
 * System icons must be generated from the square source image `public/logo_icon.jpg` using the Tauri CLI:
   ```bash

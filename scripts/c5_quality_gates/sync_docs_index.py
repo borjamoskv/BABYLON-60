@@ -111,7 +111,7 @@ def main() -> None:
         lines.append("| :--- | :--- | :--- |")
         for doc in docs:
             fp = doc["path"]
-            lines.append(f"| [`{doc['filename']}`](file://{DOCS_DIR / fp}) | `{fp}` | {doc['title']} |")
+            lines.append(f"| [`{doc['filename']}`]({fp}) | `{fp}` | {doc['title']} |")
         lines.append("")
     lines.append("---")
     lines.append("*Índice maestro autogenerado y sincronizado autónomamente por `sync_docs_index.py` bajo estándar C5-REAL.*")

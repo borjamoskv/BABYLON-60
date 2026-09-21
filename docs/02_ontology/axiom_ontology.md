@@ -45,7 +45,7 @@ Si durante la fase de orquestación (`UltraThink`), el Enjambre o el Operador du
 
 ---
 
-## 4. La Matriz de 896 Primitivas DDD (Centuria Meta-Transductora)
+## 4. La Matriz de 896 Primitivas DDD (Matriz Meta-Transductora)
 
 El sistema Motor Causal Principal aloja un repositorio semántico de **896 Primitivas de Diseño Guiado por el Dominio (DDD)**. A diferencia del DDD clásico (donde los componentes son meros objetos en memoria), en Causal-Determinist cada primitiva es un bloque termodinámico con un coste ATP, una dirección en el Grafo Causal y una representación en el Ledger BFT.
 

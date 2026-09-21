@@ -9,7 +9,7 @@ version: 4.3.0
 <div align="center">
 
 [![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-v4.3-00F0FF?style=for-the-badge&logo=shield)](./06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Lean 4](https://img.shields.io/badge/Lean_4-BabylonTrace-green?style=for-the-badge)](./proof/lean/BabylonTrace.lean)
+[![Lean 4](https://img.shields.io/badge/Lean_4-BabylonTrace-green?style=for-the-badge)](../proof/lean/BabylonTrace.lean)
 [![EU AI Act](https://img.shields.io/badge/EU_AI_Act-Arts._12--14-purple?style=for-the-badge)](./04_research/eu_ai_act_compliance_whitepaper.md)
 [![License](https://img.shields.io/badge/License-Sovereign_Dual--License-orange?style=for-the-badge)](./COMMERCIAL_LICENSE.md)
 
@@ -56,7 +56,7 @@ BABYLON-60 Monorepo
 ├── 01_KISH_ENGINE/              ← Python Cognitive Core
 │   └── babylon60/               │  bft/, crypto/, adapters/, cli/, transducers/
 │
-├── 02_EDIN_SWARMS/              ← Swarm orchestration (Legión, Centuria)
+├── 02_EDIN_SWARMS/              ← Swarm orchestration (SHARUR-3600)
 │
 └── docs/                        ← You are here
     ├── proof/lean/              │  BabylonTrace.lean (formally verified)
@@ -141,7 +141,7 @@ graph LR
 | :--- | :--- |
 | [eu_ai_act_compliance_whitepaper.md](./04_research/eu_ai_act_compliance_whitepaper.md) | Causal determinism as EU AI Act compliance |
 | [evaluacion_falsacion_llm_models_2026.md](./04_research/evaluacion_falsacion_llm_models_2026.md) | Popperian falsification of LLM selection (2026) |
-| [centuria_swarm_architecture.md](./04_research/centuria_swarm_architecture.md) | Centuria 100-agent swarm architecture |
+| [centuria_swarm_architecture.md](./04_research/centuria_swarm_architecture.md) | SHARUR-3600 swarm architecture (Legacy Centuria) |
 | [legion_222_swarm_topology.md](./04_research/legion_222_swarm_topology.md) | Legión 222-agent topology (11 × 20 threads) |
 | [sota_evolution_roadmap.md](./04_research/sota_evolution_roadmap.md) | SOTA architectural evolution roadmap |
 | [sanedrin_reflexive_forking_audit.md](./04_research/sanedrin_reflexive_forking_audit.md) | Sanhedrín audit: reflexive forking |
@@ -191,7 +191,7 @@ The mathematical substrate: Robinson Arithmetic → Gödel → Turing → Chaiti
 
 | File | Content |
 | :--- | :--- |
-| [proof/lean/BabylonTrace.lean](./proof/lean/BabylonTrace.lean) | Seqlock SPMC bisimulation, Halt states, Aristotelian Triad — **verified, 0 errors** |
+| [`proof/lean/BabylonTrace.lean`](../proof/lean/BabylonTrace.lean) | Seqlock SPMC bisimulation, Halt states, Aristotelian Triad — **verified, 0 errors** |
 
 ---
 
@@ -202,7 +202,7 @@ The mathematical substrate: Robinson Arithmetic → Gödel → Turing → Chaiti
 make all
 
 # Lean 4 formal proof (requires Lean ≥ 4.x)
-lean docs/proof/lean/BabylonTrace.lean
+lean proof/lean/BabylonTrace.lean
 
 # Rust monorepo — 84 tests, 0 failures
 cargo test --workspace

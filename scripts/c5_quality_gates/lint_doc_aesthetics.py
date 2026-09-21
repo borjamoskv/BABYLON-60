@@ -13,7 +13,7 @@ import sys
 import re
 import argparse
 
-DOCS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "docs"))
+DOCS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "docs"))
 
 REQUIRED_BADGE_PATTERN = r"img\.shields\.io/badge/"
 UNCONVERTED_BLOCKQUOTE = r"^>\s*\*\*(Theorem|Teorema|Definition|Definición|Warning|Advertencia|Important|Importante)\*\*"

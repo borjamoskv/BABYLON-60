@@ -61,10 +61,10 @@ Los registros MX de `babylon60.com` están apuntando a Cloudflare:
 
 ## 2. Despliegue del Email Worker v2
 
-El código del Worker se encuentra en [`services/email_inbound/worker.js`](../packages/services/email_inbound/worker.js).
+El código del Worker se encuentra en [`services/email_inbound/worker.js`](../01_KISH_ENGINE/services/email_inbound/worker.js).
 
 ```bash
-cd services/email_inbound
+cd 01_KISH_ENGINE/services/email_inbound
 npx wrangler deploy
 ```
 
@@ -78,7 +78,7 @@ npx wrangler secret put WEBHOOK_URL
 
 ## 3. Integración Backend en Python (FastAPI)
 
-El receptor backend se encuentra en [`babylon60/services/inbound_email.py`](../packages/babylon60/services/inbound_email.py).
+El receptor backend se encuentra en [`babylon60/services/inbound_email.py`](../01_KISH_ENGINE/babylon60/services/inbound_email.py).
 
 ### Ejemplo Completo de Uso:
 

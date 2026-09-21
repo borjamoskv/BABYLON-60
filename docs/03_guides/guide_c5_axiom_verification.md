@@ -71,4 +71,4 @@ def verify_my_new_axiom(self, param1: float, param2: float) -> None:
 ```
 
 ### Paso 3: Validación PoC
-Crear una demostración en `scripts/c5_demos/` (e.g. [`poc_axiom4_disintegration.py`](../../scripts/c5_demos/poc_axiom4_disintegration.py)) que verifique la invariante en escenarios extremos y de falsación.
+Crear una demostración en `scripts/c5_demos/` (e.g. `poc_axiom4_disintegration.py`) que verifique la invariante en escenarios extremos y de falsación.

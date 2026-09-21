@@ -9,7 +9,7 @@ version: 4.3.0
 <div align="center">
 
 [![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-v4.3-0052CC?style=for-the-badge&logo=shield)](./06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Lean 4](https://img.shields.io/badge/Lean_4-BabylonTrace_0_errors-green?style=for-the-badge)](./proof/lean/BabylonTrace.lean)
+[![Lean 4](https://img.shields.io/badge/Lean_4-BabylonTrace_0_errors-green?style=for-the-badge)](../proof/lean/BabylonTrace.lean)
 [![Tests](https://img.shields.io/badge/Tests-84_Rust_%7C_19_Python_C5-brightgreen?style=for-the-badge)](../tests/)
 [![License](https://img.shields.io/badge/License-Sovereign_Dual--License_v4.0-orange?style=for-the-badge)](../SECURITY.md)
 
@@ -102,7 +102,7 @@ The Seqlock SPMC protocol maps to the Aristotelian ontological triad:
 
 ### 2.3 Formal Verification in Lean 4
 
-The bisimulation correctness of the Seqlock — that `Dynamis` and `Entelecheia` are disjoint and that every writer transition produces a valid `Entelecheia` state — is proven in [`docs/proof/lean/BabylonTrace.lean`](./proof/lean/BabylonTrace.lean):
+The bisimulation correctness of the Seqlock — that `Dynamis` and `Entelecheia` are disjoint and that every writer transition produces a valid `Entelecheia` state — is proven in [`proof/lean/BabylonTrace.lean`](../proof/lean/BabylonTrace.lean):
 
 ```lean
 -- Formally proven: Dynamis and Entelecheia are disjoint
@@ -241,7 +241,7 @@ mypy 01_KISH_ENGINE/babylon60 tests --strict --ignore-missing-imports
 
 ### 6.1 Verified Bisimulation (Implemented)
 
-The Seqlock SPMC bisimulation — the core safety property of the Ring-0 SharedManifest — is **formally proven** in Lean 4. Key theorems in [`docs/proof/lean/BabylonTrace.lean`](./proof/lean/BabylonTrace.lean):
+The Seqlock SPMC bisimulation — the core safety property of the Ring-0 SharedManifest — is **formally proven** in Lean 4. Key theorems in [`proof/lean/BabylonTrace.lean`](../proof/lean/BabylonTrace.lean):
 
 ```lean
 -- Halt states absorb all transitions
@@ -360,7 +360,7 @@ The system's safety is not a claim but an empirical obligation: if the kernel te
 - Friston, K. (2010). "The Free-Energy Principle: A Unified Brain Theory?". *Nature Reviews Neuroscience*, 11(2), 127–138.
 - Landauer, R. (1961). "Irreversibility and Heat Generation in the Computing Process". *IBM Journal of Research and Development*, 5(3), 183–191.
 - Repository: [github.com/borjamoskv/BABYLON-60](https://github.com/borjamoskv/BABYLON-60)
-- Formal Proof: [`docs/proof/lean/BabylonTrace.lean`](./proof/lean/BabylonTrace.lean)
+- Formal Proof: [`proof/lean/BabylonTrace.lean`](../proof/lean/BabylonTrace.lean)
 - Specification: [`docs/SPECIFICATION.md`](./SPECIFICATION.md)
 - Website: [babylon60.com](https://babylon60.com)
 
