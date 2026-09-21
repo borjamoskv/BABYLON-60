@@ -88,6 +88,7 @@ WHITELIST_ENTROPY = [
     r"docs\.google\.com/[^\s]+",
     r"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuv",
     r"0123456789abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ",  # BASE60_ALPHABET (constante pública de diseño, utils/base60.py)
+    r"\b[0-9a-fA-F]{40}\b",  # INV_C5_OPSEC_CALIBRATION: Ignorar hashes de commit SHA-1 de Git
 ]
 
 # Valores literales conocidos como NO-secretos (ejemplos oficiales de documentación
