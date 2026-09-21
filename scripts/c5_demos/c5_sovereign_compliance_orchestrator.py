@@ -40,9 +40,8 @@ def main():
     print("[1/4] Disparando Sovereign Spark Daemon (Rust Baremetal)...")
     rust_bin = ROOT_DIR / "scripts" / "c5_demos" / "poc_sovereign_spark_daemon_bin"
     if not rust_bin.exists():
-        print("[!] Compilando binario de Rust...")
         subprocess.run(
-            ["rustc", str(ROOT_DIR / "scripts" / "c5_demos" / "poc_sovereign_spark_daemon.rs"), "-o", str(rust_bin)],
+            ["rustc", "-O", "-C", "opt-level=3", str(ROOT_DIR / "scripts" / "c5_demos" / "poc_sovereign_spark_daemon.rs"), "-o", str(rust_bin)],
             check=True
         )
 
@@ -90,9 +89,8 @@ def main():
     print("[4/4] Ejecutando Verificador Autónomo de Conformidad (babylon_verifier_bin)...")
     verifier_bin = ROOT_DIR / "scripts" / "c5_demos" / "babylon_verifier_bin"
     if not verifier_bin.exists():
-        print("[!] Compilando Verificador Autónomo de Rust...")
         subprocess.run(
-            ["rustc", str(ROOT_DIR / "scripts" / "c5_demos" / "c5_verifier_cli.rs"), "-o", str(verifier_bin)],
+            ["rustc", "-O", "-C", "opt-level=3", str(ROOT_DIR / "scripts" / "c5_demos" / "c5_verifier_cli.rs"), "-o", str(verifier_bin)],
             check=True
         )
     pack_path = ROOT_DIR / "scripts" / "c5_demos" / "eu_ai_act_annex_vi_pack.json"

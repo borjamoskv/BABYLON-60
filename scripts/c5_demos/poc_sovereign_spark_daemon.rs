@@ -15,6 +15,7 @@ fn compute_sha256_mock(data: &str) -> String {
     format!("{:064x}", sum ^ 0x6060_C5C5)
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Clone, PartialEq)]
 enum ScheduleType {
     CronTimer,
@@ -32,6 +33,7 @@ enum TaskState {
     Aborted,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 struct SovereignTask {
     task_id: String,
