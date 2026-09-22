@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # ============================================================================
 # BABYLON-60 v4.0 Sovereign Hardened
-# █ AGENTS.ARCHI ROOT PACKAGE | DOMAIN: agents.archi | STATE: C5-REAL
+# █ EDIN SOBERANO ROOT PACKAGE | DOMAIN: edin.swarms | STATE: C5-REAL
 # ============================================================================
 """
-agents_archi: Sovereign Swarm Topologies, Agentic Lifecycles, and Protocols.
+edin: Sovereign Ring-2 Swarm Topologies, Protocols, and Hardware Membranes.
 
-Chamber 3 of BABYLON-60 Tripartite Architecture.
+Nomenclatura Canónica Sexagesimal para 02_EDIN_SWARMS en BABYLON-60.
 """
 
-from .orchestrator import (
+from agents_archi import (
     InferenceBackend,
     SwarmConfig,
     AgentPager,
@@ -19,16 +19,12 @@ from .orchestrator import (
     SubagentState,
     SubagentHandle,
     DynamicLifecycleManager,
-)
-from .topologies import (
     SwarmRouter,
     TopologyTarget,
     EdinTopology,
     SharurSwarmTopology,
     SexagesimalScale,
     SwarmAuditSummary,
-)
-from .protocols import (
     Modality,
     Proposition,
     AOFValidator,
@@ -36,8 +32,6 @@ from .protocols import (
     KudurruGravityFilter,
     KudurruFilterResult,
     calculate_shannon_entropy,
-)
-from .clients import (
     KimiClient,
     OpenRouterClient,
     UnifiedMemoryProfiler,
@@ -47,7 +41,6 @@ from .clients import (
 )
 
 __all__ = [
-    # Orchestrator
     "InferenceBackend",
     "SwarmConfig",
     "AgentPager",
@@ -57,14 +50,12 @@ __all__ = [
     "SubagentState",
     "SubagentHandle",
     "DynamicLifecycleManager",
-    # Topologies
     "SwarmRouter",
     "TopologyTarget",
     "EdinTopology",
     "SharurSwarmTopology",
     "SexagesimalScale",
     "SwarmAuditSummary",
-    # Protocols
     "Modality",
     "Proposition",
     "AOFValidator",
@@ -72,7 +63,6 @@ __all__ = [
     "KudurruGravityFilter",
     "KudurruFilterResult",
     "calculate_shannon_entropy",
-    # Clients & Hardware
     "KimiClient",
     "OpenRouterClient",
     "UnifiedMemoryProfiler",

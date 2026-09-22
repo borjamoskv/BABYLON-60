@@ -7,10 +7,14 @@
 
 from .aof import Modality, Proposition, AOFValidator
 from .attestation import AttestationEnvelope
+from .kudurru import KudurruGravityFilter, KudurruFilterResult, calculate_shannon_entropy
 
 __all__ = [
     "Modality",
     "Proposition",
     "AOFValidator",
     "AttestationEnvelope",
+    "KudurruGravityFilter",
+    "KudurruFilterResult",
+    "calculate_shannon_entropy",
 ]

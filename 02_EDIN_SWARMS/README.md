@@ -41,12 +41,15 @@
 
 | Módulo | Propósito | Invariante Asignada |
 |---|---|---|
-| `orchestrator/swarm.py` | Orquestador multi-backend con circuit breaker y futex pager. | `INV_C5_18` (Zero-Worktree) |
-| `orchestrator/lifecycle.py` | Máquina de estados de subagentes y watchdog anti-deadlock. | `INV_C5_TURING_CASTRATION` |
-| `topologies/router.py` | Despachador central de habilidades con tolerancia a typos. | `INV_C5_ROUTER_LEVENSHTEIN` |
+| `topologies/sharur.py` | Matriz de enjambre paralelo sexagesimal SHARUR-3600 ($60^2$). | `INV_C5_SEXAGESIMAL_SCALE` |
 | `topologies/edin.py` | Topología de verificación paralela de 100 workers. | `INV_C5_EDIN_BARRIER` |
+| `topologies/router.py` | Despachador central de habilidades con tolerancia a typos. | `INV_C5_ROUTER_LEVENSHTEIN` |
+| `protocols/kudurru.py` | Filtro de gravedad KUDURRU-64 y criba anti-DDoS cognitivo. | `INV_C5_KUDURRU_64_MEMBRANE` |
 | `protocols/aof.py` | Marco Operativo Agéntico (PSAFE v3.0 / AOF v2.0 / Guillotina de Hume). | `INV_C5_HUME_GUILLOTINE` |
 | `protocols/attestation.py` | Sobres criptográficos SCITT / COSE_Sign1 para mensajería inter-agente. | `INV_C5_SCITT_RFC9942` |
+| `orchestrator/swarm.py` | Orquestador multi-backend con circuit breaker y futex pager. | `INV_C5_18` (Zero-Worktree) |
+| `orchestrator/lifecycle.py` | Máquina de estados de subagentes y watchdog anti-deadlock. | `INV_C5_TURING_CASTRATION` |
+| `clients/unified_memory.py` | Perfilador de memoria unificada Apple Silicon & Mac Studio Ultra 256GB. | `INV_C5_ZERO_SWAP_HEADROOM` |
 | `clients/kimi.py` | Cliente nativo Moonshot / Kimi K3 resiliente. | `INV_C5_KIMI_AIRGAP` |
 | `clients/openrouter.py` | Pasarela unificada hacia OpenRouter para modelos de frontera. | `INV_C5_OPENROUTER_ROUTING` |
 
@@ -55,9 +58,13 @@
 ## 3. Guía de Ejecución
 
 ```bash
-# Ejecución de tests unitarios del dominio agents_archi
-pytest tests/test_agents_archi.py -v
+# Ejecución de tests unitarios de enjambres (EDIN / SHARUR-3600 / KUDURRU-64)
+pytest tests/test_agents_archi.py tests/test_sharur_swarm_and_kudurru.py -v
 
-# Importación nativa en Python
+# Importación canónica sexagesimal
+python3 -c "from edin.swarms import SharurSwarmTopology, KudurruGravityFilter; print('edin.swarms online')"
+
+# Importación de compatibilidad con agents_archi
 python3 -c "from agents_archi import SwarmOrchestrator, SwarmConfig; print('agents_archi online')"
 ```
+

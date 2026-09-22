@@ -7,8 +7,18 @@
 
 from .kimi import KimiClient
 from .openrouter import OpenRouterClient
+from .unified_memory import (
+    UnifiedMemoryProfiler,
+    QuantizationType,
+    ModelMemoryRequirement,
+    HardwareTopologyReport,
+)
 
 __all__ = [
     "KimiClient",
     "OpenRouterClient",
+    "UnifiedMemoryProfiler",
+    "QuantizationType",
+    "ModelMemoryRequirement",
+    "HardwareTopologyReport",
 ]

@@ -22,12 +22,14 @@ from typing import Dict, Any, Optional
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from cryptography.exceptions import InvalidSignature
 
+
 def _derive_ed25519_keypair(seed_str: str) -> tuple[Ed25519PrivateKey, bytes]:
     """Derive deterministic Ed25519 keypair from a string seed."""
     seed_bytes = hashlib.sha256(seed_str.encode("utf-8")).digest()
     priv_key = Ed25519PrivateKey.from_private_bytes(seed_bytes)
     pub_bytes = priv_key.public_key().public_bytes_raw()
     return priv_key, pub_bytes
+
 
 @dataclass
 class AttestationEnvelope:
@@ -58,7 +60,7 @@ class AttestationEnvelope:
         sig_preimage = f"{sender_id}:{recipient_id}:{now_ms}:{nonce}:{payload_hash}".encode("utf-8")
         key_str = signing_key or "SovereignNodeDefaultKey"
         priv_key, _ = _derive_ed25519_keypair(key_str)
-        
+
         signature = priv_key.sign(sig_preimage).hex()
 
         return cls(
@@ -78,13 +80,16 @@ class AttestationEnvelope:
         if calc_hash != self.payload_hash:
             return False
 
-        sig_preimage = f"{self.sender_id}:{self.recipient_id}:{self.timestamp_ms}:{self.nonce}:{self.payload_hash}".encode("utf-8")
+        sig_preimage = (
+            f"{self.sender_id}:{self.recipient_id}:{self.timestamp_ms}:{self.nonce}:{self.payload_hash}".encode("utf-8")
+        )
         key_str = expected_key or "SovereignNodeDefaultKey"
         _, pub_bytes = _derive_ed25519_keypair(key_str)
-        
+
         from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+
         pub_key = Ed25519PublicKey.from_public_bytes(pub_bytes)
-        
+
         try:
             pub_key.verify(bytes.fromhex(self.signature), sig_preimage)
             return True

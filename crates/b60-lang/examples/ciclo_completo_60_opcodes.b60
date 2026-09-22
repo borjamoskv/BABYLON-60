@@ -1,0 +1,57 @@
+// ============================================================================
+// CICLO COMPLETO DE SOBERANÍA F60: 60 OPCODES SEXAGESIMALES CANÓNICOS
+// BABYLON-60 / C5-REAL Hardware Engine
+// ============================================================================
+
+// 1. Control de Flujo y Manta de Markov
+MARKOV_ENTER
+AFFINITY_PIN
+
+// 2. Aritmética Sexagesimal Racional Exacta (Q60)
+SEXA_PACK 15 30
+PUSH 0
+LOAD_REG 1
+SEXA_ADD
+SEXA_MUL 2
+SEXA_DIV 2
+SEXA_FLOOR
+SEXA_CEIL
+SEXA_ABS
+
+// 3. Auditoría de Complejidad y Límite Elemental Cuántico-Termodinámico
+KOLMOGOROV_AUDIT 12 1
+LANDAUER_RECORD
+COMPRESS_MDL
+ENTROPY_ASSERT 500
+
+// 4. Criptografía de Silicio y Encadenamiento WORM SHA3-256
+SHA3_BLOCK
+TOUCHID_SIGN
+WORM_COMMIT
+TIMESTAMP_ATTEST
+SHA3_BLOCK
+WORM_COMMIT
+COSE_RECEIPT
+
+// 5. Verificación de Árbol de Merkle Mountain Range (MMR)
+NOISE_PURGE
+MERKLE_VERIFY
+MERKLE_VERIFY
+
+// 6. Gobernanza LegalTech, Auditoría de Integridad y EU AI Act
+WORM_PROBE
+EU_AI_CHECK_RISK
+HUMAN_OVERSIGHT_PING
+VPRM_STEP_SCORE
+AUDIT_TRAIL_SNAP
+
+// 7. Consenso BFT Isostático LARSA-120 (Rust α, Lean 4 β, Z3 γ)
+PUSH 0
+LOAD_REG 0
+LOAD_REG 1
+LOAD_REG 2
+BFT_VOTE
+
+// 8. Evaluación Dinámica de Exergía y Punto Fijo Omega
+C5_EXERGY_SCORE
+OMEGA_FIXED_POINT

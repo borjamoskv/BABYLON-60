@@ -122,6 +122,7 @@ cortex-char-attest = "babylon60.cli.attest_character_count:main"
 packages = [
   "01_KISH_ENGINE/babylon60",
   "02_EDIN_SWARMS/agents_archi",
+  "02_EDIN_SWARMS/edin",
   "scripts"
 ]
 exclude = [

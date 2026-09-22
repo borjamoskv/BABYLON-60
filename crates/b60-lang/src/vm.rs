@@ -373,9 +373,9 @@ impl F60VM {
                 }
 
                 SexaOpCode::EntropyAssert => {
-                    if self.pc < bytecode.len() {
-                        let max_allowed = bytecode[self.pc] as u64;
-                        self.pc += 1;
+                    if self.pc + 2 <= bytecode.len() {
+                        let max_allowed = u16::from_le_bytes([bytecode[self.pc], bytecode[self.pc + 1]]) as u64;
+                        self.pc += 2;
                         if self.manifest.entropy_bits_erased > max_allowed {
                             self.is_halted = true;
                             self.exit_code = 4;
