@@ -9,26 +9,29 @@ Materializar una arquitectura de compilador de sistemas operativos *bare-metal* 
 | **Topología Macro:** | Definida. Análisis termodinámico y epistémico cerrado. |
 | **Lógica Afín (Borrow Checker):** | Validada mediante PoC en Rust (1000 iteraciones SMP, cero fugas). |
 | **Aislamiento Geométrico (Caché):** | Validado mediante Stress Test (reducción de fricción L1/L2 por factor de 16x). |
-| **DevSecOps (Zero-Trust):** | Pipeline de despliegue creado (`c5_deploy_pipeline.sh`) con barrera TouchID y firmado SCITT. |
-| **Cortafuegos Anti-Slopsquatting:** | Validado al 100% en modo full-repo (471 archivos escaneados, 50 dependencias auditadas, 0 trampas) e integrado en pre-commit y `runner.py audit`. |
+| **Compilador Afín & Session Types:** | `IrOp`, `backend_x86.rs` y `borrowck.rs` implementan Tipos de Sesión de Hardware; 11 unit tests verifican detección de doble adquisición, transiciones ilegales y uso post-liberación. |
+| **Teoremas Multi-Canal Lean 4:** | `C5Affine.lean` enriquecido con `MultiChannelSystem`, demostrando constructivamente `channel_isolation` e invarianza terminal (`no_livelock_in_terminal`); `lake build` (15 jobs OK). |
+| **DevSecOps CI/CD (GitHub Actions):** | `.github/workflows/ci.yml` blindado con chequeos bloqueantes de Anti-Slopsquatting y Full-Stack Health (5/5 pilares). |
+| **Cortafuegos Anti-Slopsquatting:** | Validado al 100% en modo full-repo (472 archivos escaneados, 50 dependencias auditadas, 0 trampas) e integrado en pre-commit y `runner.py audit`. |
+| **Auditoría BFT de Secretos & OPSEC:** | `secret_swarm_auditor.py` validado sobre 969 archivos/deltas (`ESTADO BFT: LIMPIO`). |
+| **Aislamiento Determinista POSIX SHM:** | `poc_shm_orchestrator.py` blindado con RAII `try...finally`, captura atómica de señales `SIGINT`/`SIGTERM`, alineación KUDURRU de 64 bytes y cero fugas en kernel Darwin. |
+| **Síntesis Acústica & Centralización:** | `poc_acoustic_exergy_dsp.py` genera afinaciones Scala no temperadas, ritmos euclidianos Bjorklund $E(k, n)$ y centraliza activos en `~/Music/BABYLON60_ACOUSTICS` (cumplimiento estricto `music_assets_centralization_invariant`). |
 | **Entropía Semántica Zero-Float (ADR-007):** | Ampliada a $N \le 16$ realizaciones mediante cascada `[u64; 4]` y LUT de orden 17; estrés 100k en 0.01s. |
-| **Demostración Lógica & Session Types:** | `C5Affine.lean` ampliado con Tipos de Sesión de Hardware (`HardwareSessionState`), sumidero terminal e invarianza de fallo; verificado con `lake build` (15 jobs OK). |
-| **Gobernanza (AGENTS.md):** | Actualizado con políticas de sandbox biométrico para pipelines de Bash. |
-| **Frontend de AST:** | *Crate* de Rust inicializada en `crates/c5_compiler/` y `00_ABZU_KERNEL/crates/babylon60-compiler/`. |
+| **Gobernanza & Biometría:** | `c5_biometric_gate.swift` y Trampolín Aqua con fallback a Apple Watch Series 7 en clamshell auditados y verificados. |
 
 ## 📍 Punto Fijo $\Omega$
-- **Estado de Compilación:** Lean 4 compila 15 targets sin advertencias; Rust Kernel compila workspace completo y pasa ~180+ tests; Python pasa verificación full-stack (5/5 pasos).
+- **Estado de Compilación:** Lean 4 compila 15 targets sin advertencias; Rust Kernel compila workspace completo y pasa ~190+ tests; Python pasa verificación full-stack (5/5 pasos).
 - **Fallo Termodinámico Anterior:** `c5_biometric_gate` sufría silenciamiento por *Sandbox* de macOS si se lanzaba mediante `subprocess.run` enjaulado. (Resuelto mediante códigos sexagesimales 60-64, doble política TouchID/Apple Watch Series 7 y Trampolín Aqua en `c5_deploy_pipeline.sh`).
 
 ## 🧠 Matriz de Gotchas
 - **El Sandbox de TouchID y Trampolín Aqua:** Se eliminó el silenciamiento (`2>/dev/null`) y el fallo ciego en código 1. Si un llamador enjaulado (Cursor, VS Code, subprocesos) recibe código `61` (`ERR_NOT_INTERACTIVE`), `c5_deploy_pipeline.sh` activa automáticamente el Trampolín GUI vía `osascript`, heredando la sesión Aqua del usuario. Si el Mac está en modo *clamshell* (tapa cerrada), conmuta a `.deviceOwnerAuthentication` para autorizar con doble pulsación en el Apple Watch Series 7.
 - **Ruta de Swift:** La invocación del Gate biométrico exige el comando `swift` seguido de la ruta absoluta `01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift` (no es un binario global).
-- **Invariante PoC Estricto:** Prohibido modificar el código de orquestación BFT sin aislarlo en la carpeta `scripts/c5_demos/` primero, como se hizo en `poc_biometric_gate.py`.
+- **Invariante PoC Estricto:** Prohibido modificar el código de orquestación BFT sin aislarlo en la carpeta `scripts/c5_demos/` primero.
 
 ## 🚀 Grafo de Acción (Próxima Sesión)
-1. **Analizador Léxico y Sintáctico del Compilador:**
-   - Expandir la *crate* `c5_compiler` / `babylon60-compiler` implementando las gramáticas en `src/lib.rs` (usando combinadores o Logos para parsing Zero-Copy).
-2. **Integración Neuro-Simbólica Rust-Lean 4:**
-   - Conectar el generador de pruebas de Rust con los tipos de sesión demostrados formalmente en `C5Affine.lean` y la entropía semántica de `SemanticEntropy.lean`.
-3. **Pipeline de Certificación Continua CI/CD:**
-   - Automatizar el disparo de `verify_full_stack_health.py` y `anti_slopsquatting_guard.py` en GitHub Actions bajo aislamiento estricto.
+1. **Push Remoto BFT:**
+   - Sincronizar la rama `feature/omega-10k` hacia `origin/feature/omega-10k` consolidando los 4 commits atestados.
+2. **Refactorización de Símbolos en `c5_tui_dashboard.py`:**
+   - Corregir los símbolos desalineados (`MultimodalTransducer` $\to$ `SotaCompiler`, `Orchestrator`) identificados en la auditoría del Agente 7.
+3. **Generación de Binarios AOT en Silicio:**
+   - Bajar el AST afín validado a código máquina nativo para la arquitectura Apple Silicon M-series.
