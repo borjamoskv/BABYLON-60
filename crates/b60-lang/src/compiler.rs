@@ -81,6 +81,9 @@ impl B60Compiler {
                 "OMEGA_FIXED_POINT" => {
                     bytecode.push(SexaOpCode::OmegaFixedPoint as u8);
                 }
+                "C5_EXERGY_SCORE" => {
+                    bytecode.push(SexaOpCode::C5RealExergyScore as u8);
+                }
                 "HALT" => {
                     bytecode.push(SexaOpCode::Halt as u8);
                 }

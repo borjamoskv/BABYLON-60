@@ -1,0 +1,37 @@
+// ============================================================================
+// DEMOSTRACIÓN: prueba_exergia_landauer.b60
+// VERIFICACIÓN FORMAL DE SILICIO (LANDAUER EXACTO + EXERGÍA EN TIEMPO DE EJECUCIÓN)
+// ============================================================================
+
+// 1. Empaquetar timestamp inicial sexagesimal: 0s + 20/60 (1/3 s) en R0
+SEXA_PACK 0 20
+
+// 2. Guardar en pila
+PUSH 0
+
+// 3. Empaquetar delta sexagesimal: 0s + 40/60 (2/3 s) en R0
+SEXA_PACK 0 40
+
+// 4. Recuperar de la pila en R1
+LOAD_REG 1
+
+// 5. Suma sexagesimal exacta: 20/60 + 40/60 = 60/60 = EXACTAMENTE 1.0s, 0 frac
+SEXA_ADD
+
+// 6. Auditoría de Kolmogorov (L=120, delta=20 -> ratio=6 <= 60: VÁLIDO)
+KOLMOGOROV_AUDIT 120 20
+
+// 7. Firma en Secure Enclave (Ed25519 sobre proof digest)
+TOUCHID_SIGN
+
+// 8. Registro de contabilidad de Landauer (384 bits = 1102 zJ = 1.102 aJ a 300K)
+LANDAUER_RECORD
+
+// 9. Inmortalización en Ledger WORM inmutable (SHA3-256 encadenado)
+WORM_COMMIT
+
+// 10. Medición dinámica de Exergía (techo Xi = [5, 50, 0]_60 = 21.000)
+C5_EXERGY_SCORE
+
+// 11. Convergencia en el Punto Fijo Omega
+OMEGA_FIXED_POINT
