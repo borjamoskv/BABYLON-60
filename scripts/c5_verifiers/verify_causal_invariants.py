@@ -15,9 +15,9 @@ import os
 import sys
 
 repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-packages_dir = os.path.join(repo_root, "packages")
-if packages_dir not in sys.path:
-    sys.path.insert(0, packages_dir)
+kish_dir = os.path.join(repo_root, "01_KISH_ENGINE")
+if kish_dir not in sys.path:
+    sys.path.insert(0, kish_dir)
 if repo_root not in sys.path:
     sys.path.insert(0, repo_root)
 
@@ -25,8 +25,8 @@ if repo_root not in sys.path:
 def verify_causal_invariants() -> bool:
     print("=== ORÁCULO DE VERIFICACIÓN: INVARIANTES DE CAUSALIDAD ROBINSON-MOSKV & CORTEX PERSIST ===")
 
-    # Check 1: Audit packages/babylon60/bft/ for illegal clock reliance
-    bft_dir = os.path.join(packages_dir, "babylon60", "bft")
+    # Check 1: Audit 01_KISH_ENGINE/babylon60/bft/ for illegal clock reliance
+    bft_dir = os.path.join(kish_dir, "babylon60", "bft")
     if not os.path.exists(bft_dir):
         print(f"  [FAIL] Directorio BFT no encontrado en {bft_dir}")
         return False
@@ -69,11 +69,12 @@ def verify_causal_invariants() -> bool:
         print(f"  [FAIL] Pilar 2: Fallo en prueba runtime de CortexPersistLedger: {e}")
         return False
 
-    # Check 3: Monorepo Structural Integrity
+    # Check 3: Monorepo Structural Integrity (Sovereign Ring Triad)
     core_components = [
+        os.path.join(repo_root, "00_ABZU_KERNEL"),
+        os.path.join(repo_root, "01_KISH_ENGINE", "babylon60"),
+        os.path.join(repo_root, "02_EDIN_SWARMS"),
         os.path.join(repo_root, "src"),
-        os.path.join(repo_root, "packages", "babylon60"),
-        os.path.join(repo_root, "apps"),
         os.path.join(repo_root, "Cargo.toml"),
         os.path.join(repo_root, "pyproject.toml")
     ]
@@ -81,7 +82,7 @@ def verify_causal_invariants() -> bool:
     if missing:
         print(f"  [FAIL] Pilar 3: Faltan componentes estructurales en Monorepo BABYLON-60: {missing}")
         return False
-    print("  [OK] Pilar 3 (Monorepo Políglota): Componentes multimodular (Rust, Python, Web) verificados.")
+    print("  [OK] Pilar 3 (Monorepo Políglota / Anillos Canónicos): Componentes (ABZU, KISH, EDIN, Rust, Python) verificados.")
 
 
     print("\n✅ INVARIANTES DE CAUSALIDAD Y MONOREPO VERIFICADOS: Teorema Robinson-Moskv & Cortex Persist activos.")

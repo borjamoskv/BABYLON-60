@@ -293,7 +293,11 @@ def main() -> None:
             cmd_args.append("--fix")
         if getattr(args, "json", False):
             cmd_args.append("--json")
-        sys.exit(run_subcommand("c5_quality_gates/audit_scripts_quality.py", cmd_args + unknown))
+        rc1 = run_subcommand("c5_quality_gates/audit_scripts_quality.py", cmd_args + unknown)
+        if rc1 != 0:
+            sys.exit(rc1)
+        rc2 = run_subcommand("c5_quality_gates/anti_slopsquatting_guard.py", ["--json"] if getattr(args, "json", False) else [])
+        sys.exit(rc2)
     elif args.command == "fast-smt":
         cmd_args = ["--json"] if getattr(args, "json", False) else []
         sys.exit(run_subcommand("c5_verifiers/fast_smt_gate.py", cmd_args + unknown))

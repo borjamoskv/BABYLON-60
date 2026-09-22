@@ -13,9 +13,15 @@ la divergencia entrópica.
 """
 
 import asyncio
-import time
 import logging
+import sys
+import time
+from pathlib import Path
 from typing import TypedDict
+
+_DIR = Path(__file__).resolve().parent
+if str(_DIR) not in sys.path:
+    sys.path.insert(0, str(_DIR))
 
 from agent_beeper import AgentPager
 

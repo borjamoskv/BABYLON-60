@@ -50,39 +50,41 @@ def run_step(step_name: str, cmd: list[str] | str, cwd: str, env: dict[str, str]
 
 def verify_full_stack():
     print("========================================================================")
-    print("  BABYLON-60 v4.0 Sovereign Hardened — AUDITORÍA DE SALUD FULL STACK")
+    print("  BABYLON-60 v4.3 Sovereign Hardened — AUDITORÍA DE SALUD FULL STACK")
     print("========================================================================")
 
     steps = [
         (
-            "1. Invariantes de Causalidad & Monorepo",
+            "1. Invariantes de Causalidad & Monorepo Canónico",
             [sys.executable, "scripts/c5_verifiers/verify_causal_invariants.py"],
             repo_root,
             None,
         ),
         (
-            "2. Rust Kernel Compilation (Cargo Check)",
-            ["cargo", "check"],
+            "2. Rust Kernel Compilation (Cargo Check Workspace)",
+            ["cargo", "check", "--workspace"],
             repo_root,
             None,
         ),
         (
-            "3. Web Frontend Production Build (Vite/React)",
-            ["npm", "run", "build"],
-            os.path.join(repo_root, "apps", "web"),
+            "3. Verificación Formal en Lean 4 (Curry-Howard / Ring-1)",
+            ["lean", "scripts/c5_demos/poc_annex_vi_compliance.lean"],
+            repo_root,
             None,
         ),
         (
-            "4. Demostración Hero Demo & Cumplimiento EU AI Act",
-            [sys.executable, "scripts/c5_demos/run_hero_demo.py"],
+            "4. Orquestador Soberano de Cumplimiento EU AI Act (Anexo VI)",
+            [sys.executable, "scripts/c5_demos/c5_sovereign_compliance_orchestrator.py"],
             repo_root,
-            {"PYTHONPATH": f"packages:{repo_root}"},
+            {"PYTHONPATH": f"01_KISH_ENGINE:{repo_root}"},
+        ),
+        (
+            "5. Oráculo de Valor Ontológico para el Agente (V_A)",
+            [sys.executable, "scripts/c5_verifiers/verify_agent_ontological_value.py"],
+            repo_root,
+            {"PYTHONPATH": f"01_KISH_ENGINE:{repo_root}"},
         ),
     ]
-
-    web_dir = os.path.join(repo_root, "apps", "web")
-    if not os.path.exists(os.path.join(web_dir, "node_modules")):
-        run_step("0. Install Web Dependencies (npm install)", ["npm", "install"], web_dir, None)
 
     all_passed = True
     for name, cmd, cwd, env in steps:

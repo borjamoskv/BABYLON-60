@@ -11,7 +11,11 @@ from rich.panel import Panel
 from rich.syntax import Syntax
 from rich.live import Live
 from rich.text import Text
-from c5_transduction_engine import DirectorAgent, MultimodalTransducer, Orchestrator
+_DIR = os.path.dirname(os.path.abspath(__file__))
+if _DIR not in sys.path:
+    sys.path.insert(0, _DIR)
+
+from c5_transduction_engine import DirectorAgent
 
 console = Console()
 

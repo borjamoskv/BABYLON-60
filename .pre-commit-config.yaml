@@ -52,6 +52,12 @@ repos:
         language: system
         pass_filenames: false
 
+      - id: anti-slopsquatting-guard
+        name: anti-slopsquatting & ghost import firewall (C5-REAL Zero-Trust)
+        entry: python3 scripts/c5_quality_gates/anti_slopsquatting_guard.py --staged
+        language: system
+        pass_filenames: false
+
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.9.9
     hooks:

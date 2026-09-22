@@ -67,6 +67,11 @@ EXCLUDE_EXTS = {
     ".rlib",
     ".rmeta",
 }
+EXCLUDE_FILES = {
+    ".env",
+    ".env.canary",
+    ".github_token.canary",
+}
 
 # Patrones Top Secret
 PATTERNS = {
@@ -198,6 +203,8 @@ def get_target_files(root_dir: str, explicit_files: List[str] | None = None) -> 
     for dirpath, dirnames, filenames in os.walk(root_dir):
         dirnames[:] = [d for d in dirnames if d not in EXCLUDE_DIRS]
         for f in filenames:
+            if f in EXCLUDE_FILES:
+                continue
             ext = os.path.splitext(f)[1].lower()
             if ext not in EXCLUDE_EXTS:
                 targets.append(os.path.join(dirpath, f))

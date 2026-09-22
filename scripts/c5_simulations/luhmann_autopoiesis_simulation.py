@@ -16,14 +16,8 @@ project_root = Path(__file__).resolve().parent.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-# Try importing the AmendmentLedger from the apex_trials module
+# Optional ledger persistence hook (set to None if no external ledger plugin installed)
 AmendmentLedgerClass = None
-try:
-    from apex_trials.ledger import AmendmentLedger
-
-    AmendmentLedgerClass = AmendmentLedger
-except ImportError:
-    _ = None
 
 
 class LuhmannAutopoiesisSimulation:

@@ -14,7 +14,14 @@ from __future__ import annotations
 
 import argparse
 import asyncio
-from legion_swarm_core import run_legion_swarm
+import sys
+from pathlib import Path
+
+_DIR = Path(__file__).resolve().parent
+if str(_DIR) not in sys.path:
+    sys.path.insert(0, str(_DIR))
+
+from sharur_swarm_core import run_legion_swarm
 
 
 def main() -> None:

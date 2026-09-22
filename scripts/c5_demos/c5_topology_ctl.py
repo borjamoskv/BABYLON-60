@@ -44,7 +44,7 @@ def cmd_status() -> None:
         print("[!] Directorio de firmas no encontrado.")
 
     # 3. Enlace en ~/Music
-    music_link = Path("/Users/borjafernandezangulo/Music/Borja_Voice_Models")
+    music_link = Path.home() / "Music" / "Borja_Voice_Models"
     music_status = "🟢 ENLAZADO" if music_link.is_symlink() or music_link.exists() else "🔴 NO ENLAZADO"
     print(f"[*] Centralización ~/Music:     {music_status} -> {music_link}")
     print("=" * 72)

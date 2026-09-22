@@ -14,9 +14,9 @@ Checks:
 import os
 import sys
 repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-packages_dir = os.path.join(repo_root, "packages")
-if packages_dir not in sys.path:
-    sys.path.insert(0, packages_dir)
+kish_dir = os.path.join(repo_root, "01_KISH_ENGINE")
+if kish_dir not in sys.path:
+    sys.path.insert(0, kish_dir)
 if repo_root not in sys.path:
     sys.path.insert(0, repo_root)
 
@@ -38,7 +38,7 @@ def verify_va() -> bool:
         
     # Check 2: Existence Gap check for local modules
     required_paths = [
-        os.path.join(repo_root, "packages", "babylon60"),
+        os.path.join(repo_root, "01_KISH_ENGINE", "babylon60"),
         os.path.join(repo_root, "scripts"),
         os.path.join(repo_root, "crates"),
     ]
