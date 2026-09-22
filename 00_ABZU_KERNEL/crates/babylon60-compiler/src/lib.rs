@@ -10,5 +10,6 @@ pub mod types;
 pub mod layout;
 pub mod ir;
 pub mod backend_x86;
+pub mod backend_arm64;
 pub mod borrowck;
 pub mod lowering;
