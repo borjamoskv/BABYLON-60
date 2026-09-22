@@ -39,3 +39,8 @@ Invocables a level de sistema (`invoke_subagent`):
 ## Directiva Operativa
 Queda strictly prohibido utilizar nomenclaturas obsoletas o mezclar nomenclaturas de otros dominios (ej. `BABYLON_SHIELD`, `CORTEX_ENGINE`, `AGENTS_ARCHI`, `Centuria`, `SAGA-1`, `LEGION`). Toda interlocución, documentación y código nuevo debe adherirse a la Nomenclatura Sexagesimal Canónica C5-REAL.
 
+
+## 6. Prohibición de Falso Isomorfismo (Anti-Mocking)
+En la frontera entre Ring-2 (Python/Enjambre) y Ring-0 (Rust/Silicio), queda **estrictamente prohibido simular o inyectar "mocks"** de variables críticas (hashes, acumuladores criptográficos, métricas de hardware) en el código de alto nivel. 
+* Si Python necesita el sello termodinámico de Rust, DEBE ejecutar el binario, leer su `stdout` y extraer la entropía real (ej. mediante RegEx). 
+* La falsificación de un isomorfismo para evitar la fricción de integración es Anergía y debe ser purgada.
