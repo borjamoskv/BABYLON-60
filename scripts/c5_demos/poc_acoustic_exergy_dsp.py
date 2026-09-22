@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-BABYLON-60 | AGENTE 9: ACOUSTIC DSP SYNTHESIZER
+BABYLON-60 | BALAG-60: SOVEREIGN ACOUSTIC & PHYSICAL RESONATOR ENGINE
 Pipeline de Síntesis Acústica Exergética, Afinaciones No Temperadas y Ritmos Euclidianos
 ================================================================================
 
@@ -13,7 +13,8 @@ Misión:
 3. Síntesis DSP de resonadores modales físicos y excitadores transitorios no lineales
    a 48.000 Hz / 16-bit PCM estéreo.
 4. Aplicación estricta de RULE[music_assets_centralization_invariant]:
-   Centralización directa y enlace simbólico canónico en ~/Music/BABYLON60_ACOUSTICS.
+   Centralización directa y enlace simbólico canónico en ~/Music/BALAG60_ACOUSTICS
+   (con alias compatible ~/Music/BABYLON60_ACOUSTICS).
 """
 
 from __future__ import annotations
@@ -34,7 +35,7 @@ import scipy.io.wavfile as wavfile
 # Configuración de Logging de Alta Exergía
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s [AGENTE-9:DSP] %(levelname)s: %(message)s",
+    format="%(asctime)s [BALAG-60:DSP] %(levelname)s: %(message)s",
     datefmt="%H:%M:%S"
 )
 
@@ -464,40 +465,44 @@ class MusicAssetsCentralizer:
     """
     Garante de RULE[music_assets_centralization_invariant]:
     Centraliza todos los artefactos de audio, presets y escalas directamente
-    en ~/Music/BABYLON60_ACOUSTICS.
+    en ~/Music/BALAG60_ACOUSTICS (con alias ~/Music/BABYLON60_ACOUSTICS).
     """
 
     def __init__(self, local_output_dir: Path) -> None:
         self.local_dir = local_output_dir.resolve()
         self.canonical_music_dir = Path.home() / "Music"
-        self.symlink_path = self.canonical_music_dir / "BABYLON60_ACOUSTICS"
+        self.balag_symlink = self.canonical_music_dir / "BALAG60_ACOUSTICS"
+        self.legacy_symlink = self.canonical_music_dir / "BABYLON60_ACOUSTICS"
+
+    def _link_path(self, target_link: Path) -> str:
+        if target_link.is_symlink():
+            if target_link.resolve() != self.local_dir:
+                target_link.unlink()
+                target_link.symlink_to(self.local_dir, target_is_directory=True)
+                return "updated"
+            return "already_configured"
+        elif target_link.exists():
+            return "path_already_exists_as_regular_file"
+        else:
+            target_link.symlink_to(self.local_dir, target_is_directory=True)
+            return "created"
 
     def ensure_centralization(self) -> Dict[str, Any]:
-        """Crea el directorio y asegura el enlace simbólico canónico en ~/Music/."""
+        """Crea el directorio y asegura los enlaces simbólicos en ~/Music/."""
         self.local_dir.mkdir(parents=True, exist_ok=True)
         self.canonical_music_dir.mkdir(parents=True, exist_ok=True)
 
-        symlink_status = "already_configured"
-        if self.symlink_path.is_symlink():
-            current_target = self.symlink_path.resolve()
-            if current_target != self.local_dir:
-                self.symlink_path.unlink()
-                self.symlink_path.symlink_to(self.local_dir, target_is_directory=True)
-                symlink_status = "updated"
-        elif self.symlink_path.exists():
-            # Si existiera como directorio regular o archivo
-            symlink_status = "path_already_exists_as_regular_file"
-        else:
-            self.symlink_path.symlink_to(self.local_dir, target_is_directory=True)
-            symlink_status = "created"
+        balag_status = self._link_path(self.balag_symlink)
+        legacy_status = self._link_path(self.legacy_symlink)
 
-        # Validación de lectura a través del enlace simbólico
-        verified_readable = self.symlink_path.exists() and self.symlink_path.is_dir()
+        verified_readable = self.balag_symlink.exists() and self.balag_symlink.is_dir()
 
         return {
             "local_storage_dir": str(self.local_dir),
-            "canonical_symlink": str(self.symlink_path),
-            "symlink_status": symlink_status,
+            "canonical_symlink": str(self.balag_symlink),
+            "legacy_symlink": str(self.legacy_symlink),
+            "balag_status": balag_status,
+            "legacy_status": legacy_status,
             "verified_readable": verified_readable,
         }
 
@@ -600,7 +605,7 @@ def run_pipeline() -> Dict[str, Any]:
 
     # 4. Telemetría y Sitrep
     sitrep = {
-        "agent": "Agente 9 (Acoustic DSP Synthesizer)",
+        "agent": "BALAG-60 (Sovereign Acoustic Resonator & Physical DSP Engine)",
         "framework": "BABYLON-60 C5-REAL",
         "centralization": centralization_info,
         "sample_rate_hz": SAMPLE_RATE,
@@ -632,15 +637,16 @@ def run_pipeline() -> Dict[str, Any]:
     sitrep_path.write_text(json.dumps(sitrep, indent=2), encoding="utf-8")
     logging.info(f"Sitrep acústico persistido: {sitrep_path.name}")
 
-    # Confirmar visibilidad a través de ~/Music/BABYLON60_ACOUSTICS
+    # Confirmar visibilidad a través de ~/Music/BALAG60_ACOUSTICS
     music_symlink = Path(centralization_info["canonical_symlink"])
     centralized_files = [f.name for f in music_symlink.iterdir()] if music_symlink.exists() else []
 
     print("\n" + "=" * 80)
-    print(" [ BABYLON-60 ] AGENTE 9: SÍNTESIS ACÚSTICA EXERGÉTICA & DSP COMPLETADA")
+    print(" [ BABYLON-60 ] BALAG-60: MOTOR ACÚSTICO & RESONADOR FÍSICO SOBERANO")
     print("=" * 80)
     print(f"[*] Repositorio Local:  {local_output_dir}")
-    print(f"[*] Enlace Centralizado: {music_symlink}  (RULE[music_assets_centralization_invariant] VALIDADA)")
+    print(f"[*] Enlace Canónico:    {centralization_info['canonical_symlink']}")
+    print(f"[*] Enlace Compatible:  {centralization_info['legacy_symlink']}")
     print(f"[*] Activos en ~/Music: {centralized_files}")
     print("\n[+] MATRIZ POLIRRÍTMICA EUCLIDIANA (Bjorklund):")
     print(grid_ascii)

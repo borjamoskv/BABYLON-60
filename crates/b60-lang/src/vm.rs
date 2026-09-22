@@ -87,6 +87,7 @@ pub struct F60VM {
     /// Disipación macroscópica de conmutación electrónica CMOS (~2870 fJ por operación).
     pub cmos_switching_dissipation_fj: u64,
     pub worm_ledger: Vec<[u8; 32]>,
+    pub persistence_path: Option<std::path::PathBuf>,
     pub is_halted: bool,
     pub exit_code: u8,
 }
@@ -108,9 +109,46 @@ impl F60VM {
             landauer_floor_zeptojoules: 0,
             cmos_switching_dissipation_fj: 0,
             worm_ledger: Vec::new(),
+            persistence_path: None,
             is_halted: false,
             exit_code: 0,
         }
+    }
+
+    /// Volcado físico inmutable al sistema de archivos (APFS/NVMe) con sincronización atómica (fsync).
+    /// Elimina el confinamiento del ledger a RAM pura.
+    pub fn flush_worm_ledger_to_disk(&self) -> std::io::Result<usize> {
+        use std::io::Write;
+        let default_path = std::path::PathBuf::from("target/worm_ledger.bin");
+        let path = self.persistence_path.as_ref().unwrap_or(&default_path);
+        if let Some(parent) = path.parent() {
+            std::fs::create_dir_all(parent)?;
+        }
+        let mut file = std::fs::OpenOptions::new()
+            .create(true)
+            .write(true)
+            .append(true)
+            .open(path)?;
+        let mut total = 0;
+        for hash in &self.worm_ledger {
+            file.write_all(hash)?;
+            total += hash.len();
+        }
+        file.sync_all()?;
+        Ok(total)
+    }
+
+    /// Verifica la integridad estructural de la cadena WORM SHA3-256 (ausencia de hashes nulos o estáticos).
+    pub fn verify_worm_chain_integrity(&self) -> bool {
+        if self.worm_ledger.is_empty() {
+            return true;
+        }
+        for i in 1..self.worm_ledger.len() {
+            if self.worm_ledger[i] == [0u8; 32] || self.worm_ledger[i] == self.worm_ledger[i - 1] {
+                return false;
+            }
+        }
+        true
     }
 
     /// Cálculo determinista de la métrica de exergía sobre el límite Xi = 21.000 ([5, 50, 0]_60).
