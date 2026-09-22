@@ -10,7 +10,7 @@ use std::time::Instant;
 
 use b60_lang::compiler::B60Compiler;
 use b60_lang::vm::F60VM;
-use b60_lang::arithmetic::{Tick60, FRACTION_BASE};
+use b60_lang::arithmetic::Tick60;
 
 #[derive(Parser)]
 #[command(name = "b60")]
@@ -101,9 +101,10 @@ fn main() {
                 Ok(_) => {
                     let elapsed = t_exec.elapsed().as_nanos();
                     println!("  [✓] Ejecución completada con éxito en {} ns ({:.2} µs)", elapsed, elapsed as f64 / 1000.0);
-                    println!("  -> R0: {}s + {}/{} unidades", vm.registers[0].seconds, vm.registers[0].sexa_fraction, FRACTION_BASE);
                     println!("  -> Bloques en Ledger WORM: {}", vm.worm_ledger.len());
-                    println!("  -> Disipación Landauer:    {} fj", vm.landauer_dissipation_fj);
+                    println!("  -> Suelo Landauer (384b):  {} zJ ({:.3} aJ)", vm.landauer_floor_zeptojoules, vm.landauer_floor_zeptojoules as f64 / 1000.0);
+                    println!("  -> Conmutación CMOS:       {} fJ ({:.3} pJ)", vm.cmos_switching_dissipation_fj, vm.cmos_switching_dissipation_fj as f64 / 1000.0);
+                    println!("  -> Métrica Exergía Real:   {}/21000 (Evaluada deterministamente)", vm.compute_exergy_metric());
                     println!("  -> Firma Enclave SEP:      {:02X?}", &vm.manifest.sep_ed25519_sig[..4]);
                     println!("==================================================================");
                 }

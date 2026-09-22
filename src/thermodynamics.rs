@@ -31,16 +31,18 @@
 //   Los estados impares no pertenecen al cociente observable.
 
 /// Cota de Landauer a T=300K en Joules por bit (aproximada).
-/// k_B × T × ln(2) = 1.380649×10⁻²³ × 300 × 0.693147 ≈ 2.87×10⁻²¹ J
-/// Expresada en attojoules × 1000 para aritmética entera verificable.
-pub const LANDAUER_FLOOR_AJ_PER_BIT_X1000: u64 = 2870; // 2.87 aJ × 1000
+/// k_B × T × ln(2) = 1.380649×10⁻²³ × 300 × 0.693147 ≈ 2.87058×10⁻²¹ J (2.87058 zJ = 0.00287058 aJ).
+/// Expresada en escala fija entera (2.87058 zJ × 1000 = 2870 sub-zeptojulios / yoctojulios × 10⁶)
+/// para aritmética entera verificable en Ring-0.
+pub const LANDAUER_FLOOR_AJ_PER_BIT_X1000: u64 = 2870; // 2.87058 zJ (factor escala x1000)
 
 /// Bits sobrescritos por publicación completa:
 /// 2 × 32 (dos transiciones de seq) + 256 (payload_hash) + 64 (epoch_id) = 384
 pub const BITS_PER_PUBLISH: u64 = 384;
 
-/// Suelo de disipación por publicación (en attojoules × 1000):
-/// 384 × 2.87 aJ ≈ 1101.88 aJ ≈ 1.10×10⁻¹⁸ J
+/// Suelo de disipación por publicación en escala fija (384 bits × 2.87058 zJ):
+/// 384 × 2.87058×10⁻²¹ J = 1.1023×10⁻¹⁸ J = 1.1023 aJ (1102.3 zJ).
+/// En escala x1000: 384 × 2870 = 1_102_080.
 pub const LANDAUER_FLOOR_TOTAL_AJ_X1000: u64 = 1_102_080;
 
 /// Cota superior de publicaciones antes del envolvimiento de epoch_id (u64).

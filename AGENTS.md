@@ -225,3 +225,20 @@ Todo script de inicialización o *setup* (Python, Bash, Rust) que genere el ento
 1. **Falsación Axiomática Dinámica (Z3):** Validar la geometría seleccionada (ej. $P \times S \le \text{Cores}$) inyectando código SMT-LIB2 en el oráculo Z3 (`check-sat` exigiendo `unsat`).
 2. **Prueba de Silicio (WORM Seal):** Ejecutar un test de estrés (ej. 1M ciclos SPMC) que acumule entropía real (`crypto_accumulator`) y emita un `C5_SILICON_SEAL`.
 3. **Escrow Biométrico:** Invocar `c5_biometric_gate.swift` para sellar la operación. Si el *setup* se ejecuta en modo desatendido o Sandbox, debe interceptar los códigos POSIX `61` (Not Interactive) o `62` (Clamshell) para ejecutar una degradación silenciosa, evitando que el pipeline colapse.
+
+## ⚡ Invariante de Monotonicidad en Benchmarks Lock-Free (INV_C5_BENCH_MONOTONIC)
+
+- **Preservación Global de Épocas:** En todo arnés de prueba de estrés, microbenchmark o harness de concurrencia que evalúe estructuras de memoria compartida *lock-free* (`SharedManifest`, Seqlock), queda estrictamente prohibido reinicializar a cero o a valores menores los contadores de época (`epoch_id`) o secuencia (`seq`) entre iteraciones o configuraciones de hilos consecutivas sin ejecutar un reciclaje físico completo de la memoria (`memset` / reapuntado).
+- **Encadenamiento Monótono:** La variable de época debe transferirse de forma estrictamente creciente ($E_{t+1} \ge E_t$) a través de toda la matriz de concurrencia para evitar falsos desgarros temporales en los lectores.
+
+## 🌀 Cota Óptima de Aeones en Reflexión Formal (INV_C5_LEAN_AEON_BOUND)
+
+- **Cota Monolítica de Transacciones:** Para la certificación formal en Lean 4 mediante Demostración por Reflexión (`by decide`), ningún archivo o bloque de verificación individual debe superar las **1.000 transacciones (3.000 eventos formales)**.
+- **Horizontalidad Conforme:** Toda traza que exceda dicha cota DEBE particionarse y encadenarse en múltiples Aeones compactados ($N \times 500\text{ txs}$), verificando inductivamente la transición de estado entre la frontera final de un Aeón y la inicial del siguiente, garantizando rendimiento $O(1)$ de memoria y tasas superiores a 650 eventos/s.
+
+## 🌡️ Demarcación Dimensional de Disipación (INV_C5_THERMO_SCALES)
+
+- **Segregación Estricta Landauer vs. CMOS:** Queda terminantemente prohibido fusionar o aproximar en una misma escala el suelo elemental de Landauer con las pérdidas térmicas macroscópicas de silicio:
+  1. **Suelo de Landauer ($10^{-21}\text{ J} = \text{zJ}$):** Cuantizado estrictamente en zeptojulios enteros por bit ($2.871\text{ zJ/bit}$ a $300\text{ K}$, $1.102\text{ zJ}$ por bloque canónico de 384 bits).
+  2. **Disipación CMOS ($10^{-15}\text{ J} = \text{fJ}$):** Medida en femtojulios de conmutación electrónica de compuertas ($\approx 2.870\text{ fJ/op}$).
+- Toda estructura, telemetría o CLI debe exponer ambos valores en campos ortogonales y tipados.

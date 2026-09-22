@@ -107,6 +107,7 @@ fn main() {
     println!("  Cada consumidor ejecuta 2,000,000 ciclos de lectura con verificación de integridad de hash.\n");
 
     let thread_configs = [1, 2, 4, 8];
+    let mut current_epoch = write_iters + 1;
     for &num_readers in &thread_configs {
         manifest.status_flag.store(RUNNING, Ordering::Release);
         compiler_fence(Ordering::SeqCst);
@@ -114,11 +115,12 @@ fn main() {
         let stop_signal = Arc::new(AtomicBool::new(false));
         let total_published = Arc::new(AtomicU64::new(0));
 
+        let start_epoch = current_epoch;
         // Lanzar hilo productor continuo
         let stop_p = Arc::clone(&stop_signal);
         let pub_count = Arc::clone(&total_published);
         let producer_handle = thread::spawn(move || {
-            let mut epoch = 1u64;
+            let mut epoch = start_epoch;
             while !stop_p.load(Ordering::Relaxed) {
                 let h = make_hash(epoch);
                 seqlock::publish(manifest, epoch, &h);
@@ -199,6 +201,7 @@ fn main() {
         producer_handle.join().expect("Producer thread panicked");
         let total_bench_time = bench_start.elapsed();
         let epochs_published = total_published.load(Ordering::Relaxed);
+        current_epoch = epochs_published;
 
         all_latency_samples.sort_unstable();
         let p50 = all_latency_samples[all_latency_samples.len() * 50 / 100];
