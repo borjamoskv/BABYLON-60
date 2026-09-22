@@ -46,10 +46,12 @@ def execute_swarm_phase_4() -> bool:
 
     # 3. Front 3: Apoptosis Graph Mapping
     print("\n--- [FRONT 3/4] MAPEO DE APOPTOSIS DE EXTENSIONS (ISSUE #5) ---")
-    ext_dir = REPO_ROOT / "babylon60" / "extensions"
+    ext_dir = REPO_ROOT / "01_KISH_ENGINE" / "extensions"
+    if not ext_dir.exists():
+        ext_dir = REPO_ROOT / "babylon60" / "extensions"
     if ext_dir.exists():
         py_files = list(ext_dir.rglob("*.py"))
-        print(f"[*] Subarbol `babylon60/extensions`: {len(py_files)} ficheros .py")
+        print(f"[*] Subarbol `{ext_dir.relative_to(REPO_ROOT)}`: {len(py_files)} ficheros .py")
         print("[✓] Modulo aislado y excluido de packaging/lint/mypy bajo regla C5-REAL.")
         ok3 = True
     else:

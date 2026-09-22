@@ -1,8 +1,8 @@
 {
   "algorithm": "Ed25519",
-  "public_key": "354dd0a6dd1138e59ea6645c3c503a21ddc5863646f8c8f6184957cc34cf6445",
-  "signature": "64f68ac74af7c0eaa31fc0ce02e5df5d061b3315cd870a42dd4d11e74c9dc9bf3b2707325723074b5105a21895ef820a83c678eea59be0fedfbc93077ee02408",
-  "signed_payload_sha256": "f550b9b014e2607f34c886057bc436874cf1e05c72fea1ada45239c45083a04f",
+  "public_key": "20406cbed30db0cb414374b19e0f364da50432b19b927f65c0c543eef5a0b71c",
+  "signature": "3cc6e958a35429fd8b4a4e5484c10095bf01959f6eb3da81d89feb24bc3dcc2e312e50528b66ee27d7efade935d449f03c30267a2d49ec32161dd1bfd9339100",
+  "signed_payload_sha256": "def9b1ab2058ff76e78fa89b16f22dcfe332979d78a94318bf6bd471b7256977",
   "canonicalization": "json(sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False)",
   "ephemeral": true
 }
