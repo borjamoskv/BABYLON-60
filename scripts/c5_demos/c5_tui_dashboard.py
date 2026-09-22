@@ -15,7 +15,7 @@ _DIR = os.path.dirname(os.path.abspath(__file__))
 if _DIR not in sys.path:
     sys.path.insert(0, _DIR)
 
-from c5_transduction_engine import DirectorAgent
+from c5_transduction_engine import DirectorAgent, SotaCompiler
 
 console = Console()
 
@@ -62,8 +62,6 @@ def main() -> None:
             "destruyendo cualquier orden molecular coherente a temperatura ambiente."
         )
 
-    override_metadata = "GLOBAL_STYLE_VECTOR: Microscopio electrónico de barrido, blanco y negro puro, texturas ruidosas, sobriedad matemática."
-
     layout = generate_layout()
     layout["header"].update(Panel(Text("TENSOR DE TRANSDUCCIÓN POPPERIANA | C5-REAL SOTA", justify="center", style="bold cyan")))
     layout["corpus"].update(Panel(corpus, title="[yellow]1. Corpus Ingresado (Territorio)[/yellow]"))
@@ -72,7 +70,7 @@ def main() -> None:
 
     with Live(layout, refresh_per_second=4, screen=True) as live:
         director = DirectorAgent(api_key=API_KEY)
-        transducer = MultimodalTransducer(voice=args.voice)
+        transducer = SotaCompiler(voice=args.voice)
         
         # Silenciar logs para preservar el buffer visual
         import logging
@@ -80,29 +78,19 @@ def main() -> None:
 
         try:
             # 1. Extracción Estructural
-            storyboard = director.extract_invariants(corpus, override_metadata)
+            storyboard = director.extract_invariants(corpus)
             json_str = storyboard.model_dump_json(indent=2)
             syntax = Syntax(json_str, "json", theme="monokai", line_numbers=True)
             layout["json_matrix"].update(Panel(syntax, title="[green]2. Colapso Estructural (JSON)[/green]"))
             layout["telemetry"].update(Panel(f"Matriz extraída: {len(storyboard.scenes)} fases causales.\nCompilando HUD Cards + Sub-Bass Drone...", title="[magenta]3. Telemetría de Renderizado & DSP[/magenta]"))
             live.refresh()
             
-            # 2. Renderizado Multimodal y Mastering
-            out_dir = "/tmp/c5_render"
-            os.makedirs(out_dir, exist_ok=True)
-            scene_paths = []
-            
-            for scene in storyboard.scenes:
-                layout["telemetry"].update(Panel(f"Compilando Fase {scene.id}/3: [{scene.voiceover_text[:40]}...]\nMastering DSP (52Hz Sub-Bass + Pink Noise + Voice Highpass)...", title="[magenta]3. Telemetría de Renderizado & DSP[/magenta]"))
-                live.refresh()
-                path = transducer.render_scene(scene, storyboard.global_style_vector, out_dir)
-                scene_paths.append(path)
-                
-            # 3. Ensamblaje Final
+            # 2. Renderizado Multimodal y Mastering (SOTA Compiler)
             output_file = "/tmp/c5_render/historia_final.mp4"
-            layout["telemetry"].update(Panel("Multiplexando escenas en contenedor MP4 sin anergía...", title="[magenta]3. Telemetría de Renderizado & DSP[/magenta]"))
+            layout["telemetry"].update(Panel("Compilando AST Visual y DSP (Remotion + FFmpeg)\nMastering DSP (52Hz Sub-Bass + Pink Noise + Voice Highpass)...", title="[magenta]3. Telemetría de Renderizado & DSP[/magenta]"))
             live.refresh()
-            Orchestrator.multiplex_scenes(scene_paths, output_file)
+            
+            transducer.compile(storyboard, output_file)
             
             layout["telemetry"].update(Panel(f"[bold green]¡Transducción Exitosa![/bold green]\nArtefacto sellado en: {output_file}\nDuración calculada: 3 Fases completas.\nCerrando en 6 segundos...", title="[bold green]3. Colapso Finalizado[/bold green]"))
             live.refresh()
