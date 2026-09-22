@@ -18,6 +18,10 @@ pub enum IrOp {
     BorrowShared { dest: Reg, src: Reg },
     BorrowMut { dest: Reg, src: Reg },
     EndBorrow { ptr: Reg },
+    // --- HARDWARE SESSION TYPES ---
+    HardwareAcquire { dest: Reg, peripheral_id: usize },
+    HardwareTransition { reg: Reg, from_channel: usize, to_channel: usize },
+    HardwareRelease { reg: Reg },
 }
 
 #[derive(Debug, Clone)]

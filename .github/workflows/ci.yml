@@ -31,3 +31,7 @@ jobs:
       run: |
         pip install -e ".[dev]"
         pytest tests/test_c5_invariants.py tests/test_lean_kernel_soundness.py tests/test_hypervisor.py
+    - name: Zero-Trust Supply Chain Validation
+      run: python3 scripts/c5_quality_gates/anti_slopsquatting_guard.py --all
+    - name: Full-Stack Health Verification
+      run: python3 scripts/c5_verifiers/verify_full_stack_health.py

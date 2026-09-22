@@ -143,6 +143,17 @@ _start:
                         self.asm.push_str(&format!("    mov rdi, qword [rbp - {}]\n", off));
                         self.asm.push_str("    call sys_free\n");
                     }
+                    IrOp::HardwareAcquire { dest, peripheral_id } => {
+                        let off = self.get_offset(*dest);
+                        self.asm.push_str(&format!("    mov qword [rbp - {}], {}  ; hw_acquire peripheral({})\n", off, peripheral_id, peripheral_id));
+                    }
+                    IrOp::HardwareTransition { reg, from_channel, to_channel } => {
+                        self.asm.push_str(&format!("    ; hw_transition Reg({}) ch {} -> {}\n", reg.0, from_channel, to_channel));
+                    }
+                    IrOp::HardwareRelease { reg } => {
+                        let off = self.get_offset(*reg);
+                        self.asm.push_str(&format!("    mov qword [rbp - {}], 0  ; hw_release Reg({})\n", off, reg.0));
+                    }
                 }
             }
 
