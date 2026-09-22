@@ -38,7 +38,7 @@ enum Commands {
         file: Option<PathBuf>,
 
         /// Output format
-        #[arg(short, long, value_enum, default_value_t = OutputFormat::Human)]
+        #[arg(short = 'o', long, value_enum, default_value_t = OutputFormat::Human)]
         format: OutputFormat,
     },
 

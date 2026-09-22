@@ -77,9 +77,30 @@ def test_kudurru_gravity_filter_high_exergy_promotion() -> None:
     assert res.digest_hex is not None
     assert len(res.digest_hex) == 64  # SHA3-256 hex
     assert "High-exergy Black Swan validated" in res.reason
+    assert res.promoted_to_ring0
 
     stats = kudurru.stats()
     assert stats["proposals_promoted"] >= 1
+
+
+def test_kudurru_anti_mocking_silicon_attestation() -> None:
+    """Validates Rule 6 (Anti-Mocking): Kudurru uses real compiled binary for Ring-0 promotion."""
+    kudurru = KudurruGravityFilter(min_exergy=0.5, auto_init_ring0=False)
+    assert kudurru.is_ring0_available(), "Debe detectar el binario babylon-attest compilado"
+
+    candidate = {
+        "event": "BLACK_SWAN_PROMOTION",
+        "axiom": "C5-REAL Zero-Mock Silicon Invariant",
+        "value": 21000,
+    }
+    res = kudurru.evaluate_and_promote(candidate=candidate, candidate_exergy=0.99)
+    assert res.accepted
+    assert res.promoted_to_ring0
+    assert "receipt" in res.telemetry
+    receipt = res.telemetry["receipt"]
+    assert "block_hash" in receipt
+    assert "signature" in receipt
+    assert receipt["block_hash"] == res.digest_hex
 
 
 @pytest.mark.asyncio

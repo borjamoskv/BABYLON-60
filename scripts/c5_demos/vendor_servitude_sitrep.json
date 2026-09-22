@@ -1,0 +1,87 @@
+{
+  "timestamp_utc": "2026-09-22T20:25:55.056851+00:00",
+  "monorepo_root": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+  "i_vendor_global": 0.5325,
+  "tolerance_threshold": 0.55,
+  "status": "PASS_UNDER_PARASITISM",
+  "findings": [
+    {
+      "vendor": "APPLE_INC",
+      "layer": "0_SILICON_AND_KERNEL",
+      "matches_count": 18,
+      "sample_files": [
+        "scripts/c5_deploy_pipeline.sh",
+        "01_KISH_ENGINE/babylon60/utils/watchdog_poc.py",
+        "01_KISH_ENGINE/babylon60/utils/watchdog_poc_v3.py",
+        "01_KISH_ENGINE/babylon60/utils/watchdog_poc_v2.py",
+        "01_KISH_ENGINE/babylon60/utils/watchdog_poc_v5.py"
+      ],
+      "i_vendor_stratum": 0.5,
+      "status": "SIMBIOSIS ASIM\u00c9TRICA"
+    },
+    {
+      "vendor": "GOOGLE_LLC",
+      "layer": "2_COGNITION_INFERENCE",
+      "matches_count": 25,
+      "sample_files": [
+        "01_KISH_ENGINE/babylon60/cortex/gemini_labs_nexus.py",
+        "01_KISH_ENGINE/babylon60/core/shadow_router.py",
+        "01_KISH_ENGINE/babylon60/cli/transduction_cli.py",
+        "scripts/c5_demos/c5_swarm_1000_audiovisual_compiler.py",
+        "scripts/c5_demos/c5_transduction_engine.py"
+      ],
+      "i_vendor_stratum": 0.61,
+      "status": "SUMISI\u00d3N / VULNERABILIDAD"
+    },
+    {
+      "vendor": "MICROSOFT_CORP",
+      "layer": "2_COGNITION_PERSISTENCE",
+      "matches_count": 572,
+      "sample_files": [
+        "Cargo.toml",
+        "pyproject.toml",
+        "tools/ignite_sovereign.sh",
+        "tests/test_bounty_end_to_end_coupling.py",
+        "tests/test_bounty_ingestion_pipeline.py"
+      ],
+      "i_vendor_stratum": 0.495,
+      "status": "SIMBIOSIS ASIM\u00c9TRICA"
+    },
+    {
+      "vendor": "IMAGE_LINE_SERATO",
+      "layer": "3_AUDIO_DAW",
+      "matches_count": 14,
+      "sample_files": [
+        "01_KISH_ENGINE/babylon60/cortex/headless_audio_dsp.py",
+        "01_KISH_ENGINE/babylon60/cli/acoustics_cli.py",
+        "scripts/c5_demos/poc_vendor_servitude_sentinel.py",
+        "scripts/c5_skills_ontology/audit_skills_execution.py",
+        "scripts/c5_skills_ontology/optimize_all_skill_triggers.py"
+      ],
+      "i_vendor_stratum": 0.25,
+      "status": "SIMBIOSIS ASIM\u00c9TRICA"
+    },
+    {
+      "vendor": "LEVIATHAN_STATE",
+      "layer": "6_JURISDICTION",
+      "matches_count": 77,
+      "sample_files": [
+        "Cargo.toml",
+        "tests/test_compliance_exporter.py",
+        "tests/test_cortex_crypto_kernel.py",
+        "src/halt.rs",
+        "src/lib.rs"
+      ],
+      "i_vendor_stratum": 0.88,
+      "status": "SUMISI\u00d3N / VULNERABILIDAD"
+    }
+  ],
+  "airgap_switch": {
+    "upstream_url": "https://generativelanguage.googleapis.com/v1beta/models",
+    "failover_latency_ns": 20625,
+    "fallback_target": "http://127.0.0.1:11434/v1/chat/completions",
+    "payload_attestation_hash": "a8d12ab8bc5affcf412446d71a53bbd3310c3ff55a6ab5d16fe2a54145daf559",
+    "sovereign_mode_active": true
+  },
+  "stress_test_avg_ms": 0.0006866100011393428
+}

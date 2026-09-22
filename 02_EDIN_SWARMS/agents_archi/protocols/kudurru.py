@@ -100,8 +100,24 @@ class KudurruGravityFilter:
     def ffi_writer(self) -> Optional[Any]:
         return self._ffi_writer
 
+    @staticmethod
+    def _find_ring0_binary() -> Optional[str]:
+        """Locates the compiled babylon-attest or b60 binary for real hardware promotion (Anti-Mocking)."""
+        import os
+        candidates = [
+            "target/release/babylon-attest",
+            "target/debug/babylon-attest",
+            "../target/release/babylon-attest",
+            "../target/debug/babylon-attest",
+            "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/target/debug/babylon-attest",
+        ]
+        for c in candidates:
+            if os.path.isfile(c) and os.access(c, os.X_OK):
+                return c
+        return None
+
     def is_ring0_available(self) -> bool:
-        return self._ffi_writer is not None
+        return self._ffi_writer is not None or self._find_ring0_binary() is not None
 
     def evaluate_and_promote(
         self,
@@ -177,17 +193,42 @@ class KudurruGravityFilter:
                 telemetry={"entropy": round(entropy, 3), "bytes": len(raw_bytes)},
             )
 
-        # 5. Promoción a Ring-0 (SharedManifest 64B Seqlock)
+        # 5. Promoción a Ring-0 (SharedManifest 64B Seqlock / WORM Attestation en Silicio)
         digest = hashlib.sha3_256(raw_bytes).digest()
         digest_hex = digest.hex()
         target_epoch = epoch if epoch is not None else int(time.time())
         promoted = False
+        receipt_data: Dict[str, Any] = {}
 
         if self._ffi_writer is not None:
             try:
                 promoted = self._ffi_writer.publish(target_epoch, digest)
             except Exception:
                 promoted = False
+        else:
+            # Fallback Anti-Mocking (Regla 6 C5-REAL): Si no hay C-ABI cargado en el proceso Python,
+            # se invoca el binario nativo babylon-attest para obtener el sello termodinámico real.
+            bin_path = self._find_ring0_binary()
+            if bin_path:
+                try:
+                    import subprocess
+                    payload_str = raw_bytes.decode("utf-8", errors="replace")
+                    proc = subprocess.run(
+                        [bin_path, "attest", payload_str, "--format", "json"],
+                        capture_output=True,
+                        text=True,
+                        timeout=5,
+                    )
+                    if proc.returncode == 0:
+                        s_idx = proc.stdout.find("{")
+                        e_idx = proc.stdout.rfind("}") + 1
+                        if s_idx != -1 and e_idx > s_idx:
+                            receipt_data = json.loads(proc.stdout[s_idx:e_idx])
+                            if "block_hash" in receipt_data:
+                                digest_hex = receipt_data["block_hash"]
+                            promoted = True
+                except Exception:
+                    promoted = False
 
         t1 = time.perf_counter_ns()
         latency_ns = t1 - t0
@@ -205,7 +246,8 @@ class KudurruGravityFilter:
                 "latency_ns": latency_ns,
                 "entropy": round(entropy, 3),
                 "bytes": len(raw_bytes),
-                "ring0_available": self._ffi_writer is not None,
+                "ring0_available": self.is_ring0_available(),
+                "receipt": receipt_data,
             },
         )
 
