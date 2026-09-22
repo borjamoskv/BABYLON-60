@@ -124,6 +124,11 @@ name = "biometric_test"
 path = "src/bin/biometric_test.rs"
 
 [[bin]]
+name = "poc_airgap_ed25519_gate"
+path = "src/bin/poc_airgap_ed25519_gate.rs"
+
+
+[[bin]]
 name = "poc_lean4_emitter"
 path = "src/bin/poc_lean4_emitter.rs"
 
