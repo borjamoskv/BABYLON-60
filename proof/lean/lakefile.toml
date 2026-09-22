@@ -1,6 +1,6 @@
 name = "babylon"
 version = "0.1.0"
-defaultTargets = ["Babylon", "BabylonOracle", "BabylonTrace", "NavierStokesBKM", "NavierStokesSobolevKato", "SemanticEntropy"]
+defaultTargets = ["Babylon", "BabylonOracle", "BabylonTrace", "NavierStokesBKM", "NavierStokesSobolevKato", "SemanticEntropy", "C5Affine"]
 
 [[lean_lib]]
 name = "BabylonOracle"
@@ -19,6 +19,9 @@ name = "NavierStokesSobolevKato"
 
 [[lean_lib]]
 name = "SemanticEntropy"
+
+[[lean_lib]]
+name = "C5Affine"
 
 # 1. Base C5-REAL (Estructuras de Datos y Concurrencia)
 [[require]]
