@@ -22,10 +22,24 @@ echo "[AX-5] Atestación L5: Calculando Raíz Merkle del AST compilado..."
 HASH_SIG=$(shasum -a 256 scripts/c5_demos/falsacion_baremetal.rs | awk '{print $1}')
 echo "       -> Sello L5 Generado: $HASH_SIG"
 
-echo "[AX-4] Límite Biométrico: Solicitando autorización somática (TouchID)..."
-if [ -f "$REPO_ROOT/01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift" ]; then
-    if ! swift "$REPO_ROOT/01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift" --causal-hash "$HASH_SIG" --message "Despliegue C5-REAL" 2>/dev/null; then
-        echo "FATAL: CausalAttestationError. Falsación somática fallida o Sandbox activo."
+echo "[AX-4] Límite Biométrico: Solicitando autorización somática (TouchID / Apple Watch)..."
+SWIFT_GATE="$REPO_ROOT/01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift"
+if [ -f "$SWIFT_GATE" ]; then
+    # Intento 1: Invocación directa capturando salida y telemetría
+    GATE_OUTPUT=$(swift "$SWIFT_GATE" --causal-hash "$HASH_SIG" --message "Despliegue C5-REAL" 2>&1)
+    GATE_STATUS=$?
+
+    # Intento 2: Si el error es falta de sesión interactiva (Código 61 o NOT_INTERACTIVE), activar Trampolín WindowServer
+    if [ $GATE_STATUS -eq 61 ] || [[ "$GATE_OUTPUT" == *"NOT_INTERACTIVE"* ]] || [[ "$GATE_OUTPUT" == *"not interactive"* ]]; then
+        echo "       [!] Detectado subproceso enjaulado sin WindowServer (Código 61)."
+        echo "       [!] Activando Trampolín Aqua vía LaunchServices/osascript..."
+        GATE_OUTPUT=$(osascript -e "do shell script \"swift '$SWIFT_GATE' --causal-hash '$HASH_SIG' --message 'Despliegue C5-REAL'\"" 2>&1)
+        GATE_STATUS=$?
+    fi
+
+    if [ $GATE_STATUS -ne 0 ]; then
+        echo "FATAL: CausalAttestationError. Falsación somática fallida (Código de salida $GATE_STATUS)."
+        echo "       Telemetría de Hardware: $GATE_OUTPUT"
         exit 1
     fi
 fi

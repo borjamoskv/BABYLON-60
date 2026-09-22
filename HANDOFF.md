@@ -16,10 +16,10 @@ Materializar una arquitectura de compilador de sistemas operativos *bare-metal* 
 
 ## 📍 Punto Fijo $\Omega$
 - **Estado de Compilación:** Lean 4 inicializado; el andamiaje del Lexer compila en Rust. Pipeline Bash de validación operativo.
-- **Fallo Termodinámico Anterior:** `c5_biometric_gate` sufre silenciamiento por *Sandbox* de macOS si se lanza mediante `subprocess.run` enjaulado. (Resuelto y documentado).
+- **Fallo Termodinámico Anterior:** `c5_biometric_gate` sufría silenciamiento por *Sandbox* de macOS si se lanzaba mediante `subprocess.run` enjaulado. (Resuelto mediante códigos sexagesimales 60-64, doble política TouchID/Apple Watch y Trampolín Aqua en `c5_deploy_pipeline.sh`).
 
 ## 🧠 Matriz de Gotchas
-- **El Sandbox de TouchID:** Si el script `/scripts/c5_deploy_pipeline.sh` se invoca desde el interior de VS Code / Cursor o subagentes, la API de `LocalAuthentication` no arroja prompt visual y devuelve exit code `1` silenciosamente. Para pruebas reales, lanzar siempre desde `Terminal.app` o `iTerm2`.
+- **El Sandbox de TouchID y Trampolín Aqua:** Se eliminó el silenciamiento (`2>/dev/null`) y el fallo ciego en código 1. Si un llamador enjaulado (Cursor, VS Code, subprocesos) recibe código `61` (`ERR_NOT_INTERACTIVE`), `c5_deploy_pipeline.sh` activa automáticamente el Trampolín GUI vía `osascript`, heredando la sesión Aqua del usuario. Si el Mac está en modo *clamshell* (tapa cerrada), conmuta a `.deviceOwnerAuthentication` para autorizar con doble pulsación en el Apple Watch Series 7.
 - **Ruta de Swift:** La invocación del Gate biométrico exige el comando `swift` seguido de la ruta absoluta `01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift` (no es un binario global).
 - **Invariante PoC Estricto:** Prohibido modificar el código de orquestación BFT sin aislarlo en la carpeta `scripts/c5_demos/` primero, como se hizo en `poc_biometric_gate.py`.
 

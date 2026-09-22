@@ -76,7 +76,14 @@ pub mod ffi_oracle;
 #[cfg(feature = "std")]
 pub mod enclave;
 
-pub use manifest::{HaltReason, SharedManifest, POISONED, RUNNING, MAX_RETRIES};
+/// Módulo de Entropía Semántica Zero-Float y Doble Cortafuegos Neurosimbólico (INV_C5_SEMANTIC_ENTROPY_DUAL_FIREWALL).
+pub mod semantic_entropy;
+
+pub use manifest::{
+    HaltReason, SharedManifest, POISONED, POISONED_CONFABULATION, POISONED_INCORRECT_BELIEF,
+    RUNNING, MAX_RETRIES,
+};
+pub use semantic_entropy::{BitmaskSemanticKernel, SemanticEntropyVerdict, TAU_SEM_Q16};
 pub use spsc_ring::SpscRingBuffer;
 
 

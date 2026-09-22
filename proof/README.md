@@ -18,20 +18,20 @@
 
 ## 📐 Contenido Actual (`proof/lean/`)
 
-### Fichero compilable: [`Babylon.lean`](./lean/Babylon.lean)
+### Ficheros compilables: [`Babylon.lean`](./lean/Babylon.lean) & [`SemanticEntropy.lean`](./lean/SemanticEntropy.lean)
 
 | Métrica | Valor |
 |:---|:---|
-| **Líneas de código** | ~490 |
+| **Líneas de código** | ~580 |
 | **Representación Aritmética** | **100% `Rat` ($\mathbb{Q}$) y `Nat` (Cero `Float`)** ✅ |
 | **Axiomas (`axiom`)** | 0 (Estructuras algebraicas y tipos inductivos) |
-| **Teoremas (`theorem`)** | 19 (Demostrados constructivamente) |
+| **Teoremas (`theorem`)** | 24 (19 en `Babylon.lean` + 5 en `SemanticEntropy.lean`) |
 | **`sorry` activos** | 0 ✅ |
-| **Build system** | Lake (Lean 4, 11 jobs compilados) |
+| **Build system** | Lake (Lean 4, 13 jobs compilados) |
 
-### Módulos Formalizados en `Babylon.lean`
+### Módulos Formalizados
 
-| Dominio | Teoremas | Descripción |
+| Archivo / Dominio | Teoremas | Descripción |
 |:---|:---|:---|
 | **Desintegración Bayesiana (Rat)** | Teoremas 1, 1B, 2, 2B, 2C | No-alucinación constructiva y circuit breaker algebraico exacto en $\mathbb{Q}$ |
 | **Monitor Tonnetz (Rat)** | Teorema 3 | Homeostasis armónica bimodal sin derivas IEEE-754 |
@@ -41,6 +41,7 @@
 | **Geometría de Chentsov-Amari** | Teoremas 10 y 11 | Descomposición pitagórica de Fisher y monotonía de Markov |
 | **Transductor Epistémico Agéntico**| Teoremas 12 y 13 | Rechazo formal de cheap-talk y cota finita de disipación |
 | **Puente C-ABI & DAG Causal** | Teoremas 14, 15, 16 y 17 | Isomorfismo C-FFI, cono de luz de Lamport y paralelismo sin colisión |
+| **Doble Cortafuegos Neurosimbólico (`SemanticEntropy.lean`)** | Teoremas 1, 2, 3, 4 y 5 | Certificación de los 4 cuadrantes (Genuine, Confabulation, IncorrectBelief, Polysemy) y no-admisión insobornable de falsedad (`by decide`) |
 
 ---
 

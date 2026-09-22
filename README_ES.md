@@ -44,7 +44,10 @@ Al instalar BABYLON-60, MOSKV-1 despierta de inmediato en tu terminal:
 # Inyección Universal de 1 Línea y Despertar de Moskv-1
 curl -fsSL https://raw.githubusercontent.com/borjamoskv/BABYLON-60/main/tools/install_shield.sh | bash
 
-# O lanza directamente la ignición del Sovereign Kernel nativo:
+# O lanza el Asistente Interactivo de Configuración Soberana:
+cargo run --bin babylon60_kernel -- setup
+
+# O inspecciona la secuencia de ignición del Sovereign Kernel nativo:
 cargo run --bin babylon60_kernel -- unbox
 ```
 

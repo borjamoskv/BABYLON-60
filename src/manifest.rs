@@ -30,6 +30,13 @@ pub const RUNNING: u32 = 0x0000_0001;
 /// Valor mnemónico: 0xDEAD_6060 (BABYLON-60 halt marker).
 pub const POISONED: u32 = 0xDEAD_6060;
 
+/// Alias canónico de envenenamiento por confabulación estocástica (H_sem > tau, UNSAT).
+pub const POISONED_CONFABULATION: u32 = 0xDEAD_6060;
+
+/// Estado envenenado por creencia errónea sistemática memorizada (H_sem <= tau, UNSAT).
+/// Interceptado deterministamente por el Firewall Neurosimbólico Z3 SMT en Ring-0.
+pub const POISONED_INCORRECT_BELIEF: u32 = 0xDEAD_6061;
+
 // ---------------------------------------------------------------------------
 // Umbral de reintentos del lector
 // ---------------------------------------------------------------------------
@@ -140,6 +147,10 @@ pub enum HaltReason {
     AlreadyPoisoned,
     /// Señal externa de interrupción (Art. 14(4) EU AI Act — botón de parada).
     ExternalSignal,
+    /// Confabulación estocástica detectada por alta entropía semántica (H_sem > tau, UNSAT).
+    Confabulation,
+    /// Creencia errónea sistemática interceptada por el oráculo SMT (H_sem <= tau, UNSAT).
+    IncorrectBelief,
 }
 
 impl HaltReason {
@@ -152,6 +163,8 @@ impl HaltReason {
             HaltReason::EpochNonMonotonic   => "EPOCH_NON_MONOTONIC",
             HaltReason::AlreadyPoisoned     => "ALREADY_POISONED",
             HaltReason::ExternalSignal      => "EXTERNAL_SIGNAL",
+            HaltReason::Confabulation       => "CONFABULATION",
+            HaltReason::IncorrectBelief     => "INCORRECT_BELIEF",
         }
     }
 }

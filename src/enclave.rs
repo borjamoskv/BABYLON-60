@@ -40,7 +40,16 @@ impl Signer for AppleSecureEnclave {
 
         if !output.status.success() {
             let stderr = String::from_utf8_lossy(&output.stderr);
-            return Err(format!("Rechazo Biometrico / Sandboxing: {}", stderr));
+            let code_str = match output.status.code() {
+                Some(60) => "ERR_CANNOT_EVALUATE (0x3C): Sin biometría ni passcode disponible",
+                Some(61) => "ERR_NOT_INTERACTIVE (0x3D): Subproceso sin sesión WindowServer (Sandbox activo)",
+                Some(62) => "ERR_CLAMSHELL_LOCKED (0x3E): Modo clamshell (portátil cerrado sin sensor TouchID)",
+                Some(63) => "ERR_OPERATOR_ABORT (0x3F): Cancelado por el operador o timeout",
+                Some(64) => "ERR_SECURE_ENCLAVE (0x40): Falla de hardware en CryptoKit/Enclave",
+                Some(c) => return Err(format!("Rechazo Biométrico [Código {}]: {}", c, stderr.trim())),
+                None => "Proceso terminado por señal del sistema",
+            };
+            return Err(format!("Rechazo Biométrico / Sandboxing ({}): {}", code_str, stderr.trim()));
         }
 
         let stdout = String::from_utf8_lossy(&output.stdout);

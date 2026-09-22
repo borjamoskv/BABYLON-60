@@ -324,6 +324,8 @@ fn inv4_halt_reason_strings() {
     assert_eq!(HaltReason::EpochNonMonotonic.as_str(), "EPOCH_NON_MONOTONIC");
     assert_eq!(HaltReason::AlreadyPoisoned.as_str(), "ALREADY_POISONED");
     assert_eq!(HaltReason::ExternalSignal.as_str(), "EXTERNAL_SIGNAL");
+    assert_eq!(HaltReason::Confabulation.as_str(), "CONFABULATION");
+    assert_eq!(HaltReason::IncorrectBelief.as_str(), "INCORRECT_BELIEF");
 }
 
 #[test]

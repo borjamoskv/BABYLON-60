@@ -59,7 +59,10 @@ Installing BABYLON-60 instantly awakens MOSKV-1 on your machine:
 # 1-Line Universal Injection & First-Boot Ignition
 curl -fsSL https://raw.githubusercontent.com/borjamoskv/BABYLON-60/main/tools/install_shield.sh | bash
 
-# Or launch the native Sovereign Kernel Ignition directly:
+# Or launch the interactive Sovereign Setup & Hardware Calibration Wizard:
+cargo run --bin babylon60_kernel -- setup
+
+# Or inspect the native Sovereign Kernel Ignition sequence directly:
 cargo run --bin babylon60_kernel -- unbox
 ```
 
