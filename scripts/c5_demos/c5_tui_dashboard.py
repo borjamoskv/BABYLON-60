@@ -15,7 +15,13 @@ _DIR = os.path.dirname(os.path.abspath(__file__))
 if _DIR not in sys.path:
     sys.path.insert(0, _DIR)
 
+_ROOT = os.path.abspath(os.path.join(_DIR, "../.."))
+_KISH = os.path.join(_ROOT, "01_KISH_ENGINE")
+if _KISH not in sys.path:
+    sys.path.insert(0, _KISH)
+
 from c5_transduction_engine import DirectorAgent, SotaCompiler
+from babylon60.c5_telemetry import SomaticMarkovBlanket, SomaticStatus
 
 console = Console()
 
@@ -23,7 +29,8 @@ def generate_layout() -> Layout:
     layout = Layout()
     layout.split_column(
         Layout(name="header", size=3),
-        Layout(name="main")
+        Layout(name="main"),
+        Layout(name="somatic", size=4)
     )
     layout["main"].split_row(
         Layout(name="corpus", ratio=1),
@@ -67,6 +74,30 @@ def main() -> None:
     layout["corpus"].update(Panel(corpus, title="[yellow]1. Corpus Ingresado (Territorio)[/yellow]"))
     layout["json_matrix"].update(Panel("Minimizando Divergencia KL... (Consultando Gemini 3.6 Flash)", title="[green]2. Colapso Estructural (JSON)[/green]"))
     layout["telemetry"].update(Panel("Iniciando Transductores...", title="[magenta]3. Telemetría de Renderizado & DSP[/magenta]"))
+
+    somatic_blanket = SomaticMarkovBlanket()
+    somatic_reading = somatic_blanket.evaluate(
+        heart_rate_bpm=64.0,
+        hrv_sdnn_ms=58.0,
+        package_temp_celsius=41.5,
+        uninterrupted_duty_cycles=1200,
+    )
+    status_style = (
+        "bold green"
+        if somatic_reading.status == SomaticStatus.OPTIMAL_THROUGHPUT
+        else "bold yellow"
+    )
+    layout["somatic"].update(
+        Panel(
+            f"[{status_style}]ESTADO SOMÁTICO:[/{status_style}] {somatic_reading.status.value}  │  "
+            f"[cyan]HR:[/cyan] {somatic_reading.heart_rate_bpm} BPM  │  "
+            f"[magenta]HRV (SDNN):[/magenta] {somatic_reading.hrv_sdnn_ms} ms  │  "
+            f"[yellow]M-Series SoC:[/yellow] {somatic_reading.package_temp_celsius}°C  │  "
+            f"[bold]Burnout Risk:[/bold] {somatic_reading.burnout_risk_score * 100:.1f}%  │  "
+            f"[blue]Token Somático:[/blue] Apple Watch Series 7 (A2473 - PAM/sudo activo)",
+            title="[bold cyan]4. Telemetría Somática del Operador Biológico (Manta de Markov / KISH)[/bold cyan]",
+        )
+    )
 
     with Live(layout, refresh_per_second=4, screen=True) as live:
         director = DirectorAgent(api_key=API_KEY)
