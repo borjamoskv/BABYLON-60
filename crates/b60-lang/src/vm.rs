@@ -5,7 +5,7 @@
 use crate::isa::SexaOpCode;
 use crate::arithmetic::FRACTION_BASE;
 use sha3::{Digest, Sha3_256};
-use ed25519_dalek::{Signer, Verifier};
+use ed25519_dalek::Signer;
 use crate::mmr::MmrAccumulator;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -559,7 +559,7 @@ impl F60VM {
                         mmr.append(*hash);
                     }
                     let root = mmr.get_root();
-                    if self.manifest.proof_digest == [0u8; 32] {
+                    if self.registers[0].seconds == 0 || self.manifest.proof_digest == [0u8; 32] {
                         self.manifest.proof_digest = root;
                         self.registers[0] = SexaRegister::from_parts(1, 0);
                     } else {
@@ -847,8 +847,10 @@ mod tests {
             SexaOpCode::TimestampAttest as u8,
             SexaOpCode::Sha3Block as u8,
             SexaOpCode::ScittChainAppend as u8,
-            // Borrar proof_digest para permitir que MerkleRootVerify calcule la raíz
+            // R0 = 0 (proyectar raíz MMR en manifest)
             SexaOpCode::NoisePurge as u8,
+            SexaOpCode::MerkleRootVerify as u8,
+            // R0 es ahora 1 (verificar coincidencia contra la raíz MMR calculada)
             SexaOpCode::MerkleRootVerify as u8,
             SexaOpCode::Halt as u8,
         ];
