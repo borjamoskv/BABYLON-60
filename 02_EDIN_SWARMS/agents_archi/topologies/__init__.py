@@ -6,10 +6,10 @@
 """Topologies package for agents.archi."""
 
 from .router import SwarmRouter, TopologyTarget
-from .centuria import CenturiaTopology
+from .edin import EdinTopology
 
 __all__ = [
     "SwarmRouter",
     "TopologyTarget",
-    "CenturiaTopology",
+    "EdinTopology",
 ]

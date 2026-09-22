@@ -1,12 +1,12 @@
 // Certified Specification — BABYLON-60 — INV-1 (layout)
-// SharedManifest: 64 B, align(128), C-ABI, AArch64/ARMv9
+// SharedManifest: 64 B, align(64), C-ABI, AArch64/ARMv9
 //
 // NOTA DE DISEÑO — Zero-Split Coherence:
-//   Con align(128)==size(64) y línea física de 64 B, ninguna instancia
+//   Con align(64)==size(64) y línea física de 64 B, ninguna instancia
 //   cruza frontera de línea de caché en arquitecturas con CWG=64 B.
 //   En Apple M1 Ultra (CWG=128 B del SoC, línea de núcleo 64 B per CTR_EL0),
 //   dos manifiestos contiguos de 64 B pueden compartir línea de coherencia
-//   de SoC → false sharing. Para portabilidad total usar align(128).
+//   de SoC → false sharing. Para portabilidad total usar align(64).
 //   Ref: Fürst et al., «Analyzing the memory ordering models of the Apple M1»,
 //   J. of Systems Architecture.
 //
@@ -40,7 +40,7 @@ pub const POISONED: u32 = 0xDEAD_6060;
 pub const MAX_RETRIES: usize = 10_000;
 
 // ---------------------------------------------------------------------------
-// INV-1: SharedManifest — C-ABI layout, 64 B, align(128)
+// INV-1: SharedManifest — C-ABI layout, 64 B, align(64)
 // ---------------------------------------------------------------------------
 
 /// Slot IPC lock-free residente en `mmap`/`static`.
@@ -62,7 +62,7 @@ pub const MAX_RETRIES: usize = 10_000;
 /// ## Prohibición de Arc en ruta caliente
 /// El refcount de `Arc` reintroduce el RMW contencioso eliminado por el
 /// diseño seqlock. Usar `mmap`, `Box::leak`, o pool estático.
-#[repr(C, align(128))]
+#[repr(C, align(64))]
 pub struct SharedManifest {
     /// Flag de estado del manifiesto compartido.
     pub status_flag: AtomicU32,

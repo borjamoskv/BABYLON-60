@@ -9,7 +9,7 @@
 [![Licencia](https://img.shields.io/badge/licencia-Sovereign_Dual--License-orange?style=flat-square)](./LICENSE)
 [![Python](https://img.shields.io/badge/python-≥3.10-blue?style=flat-square)](./pyproject.toml)
 [![Rust](https://img.shields.io/badge/rust-≥1.80-orange?style=flat-square)](./Cargo.toml)
-[![Verificación Formal](https://img.shields.io/badge/Lean_4-BabylonTrace-green?style=flat-square)](./docs/proof/lean/BabylonTrace.lean)
+[![Verificación Formal](https://img.shields.io/badge/Lean_4-BabylonTrace-green?style=flat-square)](./proof/lean/BabylonTrace.lean)
 
 ---
 
@@ -22,7 +22,7 @@ BABYLON-60 es una **arquitectura cognitiva soberana y un kernel en Ring-0** que 
 ### El Núcleo Irreducible: El Nodo de Máxima Exergía de 64 Bytes
 Todos los enjambres estocásticos y LLMs externos son comoditizables y reemplazables. El nodo de mayor valor absoluto de BABYLON-60 es su vértice C-ABI Ring-0:
 1. **`SharedManifest` (64 B, `align(64)`)**: Exactamente una línea de caché física L1 con coherencia *zero-split*.
-2. **Tríada Aristotélica en Silicio (Seqlock SPMC)**: Verificada en Lean 4 ([`BabylonTrace.lean`](./docs/proof/lean/BabylonTrace.lean)). Los lectores consumen estado con anergía cero ($RFO = 0$), mientras que el escritor único (*Primum Movens*) concentra la cota física de disipación de Landauer ($1.10 \times 10^{-18}\text{ J}$).
+2. **Tríada Aristotélica en Silicio (Seqlock SPMC)**: Verificada en Lean 4 ([`BabylonTrace.lean`](./proof/lean/BabylonTrace.lean)). Los lectores consumen estado con anergía cero ($RFO = 0$), mientras que el escritor único (*Primum Movens*) concentra la cota física de disipación de Landauer ($1.10 \times 10^{-18}\text{ J}$).
 3. **Apoptosis Fail-Stop Irreversible**: Transición de estado determinante a `POISONED = 0xDEAD_6060` ante cualquier quiebra de invariantes. El sistema prefiere morir de forma predecible antes que operar descalibrado.
 4. **Cerrojo Biológico Asimétrico**: Barrera TouchID en *Secure Enclave* de macOS (`reuseDuration = 0`), exigiendo resistencia física humana para cirugías de alta energía.
 

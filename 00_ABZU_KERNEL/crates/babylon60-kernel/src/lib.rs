@@ -17,3 +17,4 @@ pub mod eval;
 pub mod shared_manifest;
 pub mod scitt;
 pub mod thermodynamics;
+pub mod semantic_entropy;

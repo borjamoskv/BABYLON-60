@@ -30,7 +30,7 @@ from babylon60.bft.bounty_remediation import synthesize_domain_remediation
 from scripts.c5_l1_ledger.seal_bounty_aeon import (
     seal_bounty_aeon,
 )
-from scripts.c5_legion.c5_bounty_legion_exfiltration import (
+from scripts.c5_sharur.c5_bounty_sharur_exfiltration import (
     fetch_scitt_claims,
 )
 

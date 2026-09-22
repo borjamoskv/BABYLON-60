@@ -53,12 +53,15 @@ Los invariantes aquí definidos son verificados formalmente por el kernel. Cualq
 - Toda comparación entre grafos causales o de estado DEBE ejecutar un filtro 1-Weisfeiler-Lehman (1-WL) antes del algoritmo exacto.
 - Si el hash 1-WL difiere, la comprobación de isomorfismo es rechazada en $O(1)$. Solo si coinciden se procede al `VF2`.
 
-### 1.6 `[OBSOLETO: GELABP_DEPTH_INVARIANT]`: AST Control Flow Depth Ceiling
-**Propósito:** Prevenir *Spaghetti Code* y limitar la complejidad cognitiva y recursiva de los programas interpretados.
+### 1.7 `INV_C5_SEMANTIC_ENTROPY_DUAL_FIREWALL`: Zero-Float Dual-Firewall Invariant
+**Propósito:** Neutralizar la ceguera de auto-consistencia en modelos de lenguaje mediante arbitraje dual de Entropía Semántica y Oráculos SMT en silicio.
 **Mecánica:**
-- La profundidad del Árbol de Sintaxis Abstracta (AST) generada por control de flujo anidado DEBE ser validada estáticamente y ser $\le 4$.
+- Todo cálculo de incertidumbre epistémica sobre realizaciones estocásticas $N \le 8$ DEBE ejecutarse en `#![no_std]` sin operaciones de punto flotante (`ENTROPY_LUT_Q16`), empaquetando el grafo de equivalencia en un `u64`.
+- **Apoptosis Determinista:** La dispersión térmica estocástica ($H_{\text{sem}} > \tau$) detona `0xDEAD_6060` (Confabulación). Toda afirmación con $H_{\text{sem}} \le \tau$ que viole las restricciones formales de Ring-0 detona `0xDEAD_6061` (Creencia Errónea Sistemática).
+- Queda terminantemente prohibido validar claims basándose exclusivamente en la convergencia interna de la inferencia autorregresiva.
 
 ---
+
 
 ## 2. Invariantes de la Máquina Abstracta (Semántica Operacional)
 

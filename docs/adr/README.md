@@ -14,3 +14,4 @@ documentadas siguiendo el formato [MADR](https://adr.github.io/madr/).
 | [ADR-004](ADR-004-taint-tracking-isolation.md) | Modelo de aislamiento y tracking de taint | Aceptada |
 | [ADR-005](ADR-005-sovereign-dual-license.md) | Sovereign Dual-License v4.0 | Aceptada |
 | [ADR-006](ADR-006-topologia-exposicion-repositorios.md) | Topología C5-REAL de Exposición Pública y Privada | Aceptada |
+| [ADR-007](ADR-007-semantic-entropy-zero-float-firewall.md) | Entropía Semántica Zero-Float y Doble Cortafuegos Neurosimbólico en Ring-0 | Aceptada |

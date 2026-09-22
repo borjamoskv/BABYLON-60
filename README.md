@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/badge/license-Sovereign_Dual--License-orange?style=flat-square)](./LICENSE)
 [![Python](https://img.shields.io/badge/python-≥3.10-blue?style=flat-square)](./pyproject.toml)
 [![Rust](https://img.shields.io/badge/rust-≥1.80-orange?style=flat-square)](./Cargo.toml)
-[![Formal Verification](https://img.shields.io/badge/Lean_4-BabylonTrace-green?style=flat-square)](./docs/proof/lean/BabylonTrace.lean)
+[![Formal Verification](https://img.shields.io/badge/Lean_4-BabylonTrace-green?style=flat-square)](./proof/lean/BabylonTrace.lean)
 
 ---
 
@@ -22,7 +22,7 @@ BABYLON-60 is a **sovereign cognitive architecture and Ring-0 kernel** that coll
 ### The Irreducible Core: The 64-Byte Node of Maximum Exergy
 All stochastic multi-agent swarms and external LLMs are commoditizable. The highest-value node in BABYLON-60 is its indivisible C-ABI Ring-0 apex:
 1. **`SharedManifest` (64 B, `align(64)`)**: Exactly one physical L1 cache line with zero-split coherence.
-2. **Aristotelian Triad in Silicon (Seqlock SPMC)**: Verified in Lean 4 ([`BabylonTrace.lean`](./docs/proof/lean/BabylonTrace.lean)). Readers consume state with zero anergy ($RFO = 0$), while the single writer (*Primum Movens*) concentrates Landauer's physical dissipation bound ($1.10 \times 10^{-18}\text{ J}$).
+2. **Aristotelian Triad in Silicon (Seqlock SPMC)**: Verified in Lean 4 ([`BabylonTrace.lean`](./proof/lean/BabylonTrace.lean)). Readers consume state with zero anergy ($RFO = 0$), while the single writer (*Primum Movens*) concentrates Landauer's physical dissipation bound ($1.10 \times 10^{-18}\text{ J}$).
 3. **Fail-Stop Apoptosis**: Irreversible state transition to `POISONED = 0xDEAD_6060` if any invariant breaks. The system deterministically dies well rather than operating uncalibrated.
 4. **Asymmetric Biometric Lock**: macOS Secure Enclave TouchID Gate (`reuseDuration = 0`) enforcing physical human friction for high-energy state transitions.
 
