@@ -1,0 +1,102 @@
+{
+  "framework": "BABYLON-60 C5-REAL Sovereign Trust Substrate",
+  "compliance_target": "Regulation (EU) 2024/1689 (EU Artificial Intelligence Act)",
+  "attestation": {
+    "sysname": "Darwin",
+    "nodename": "MacBook-Pro-de-Borja.local",
+    "release": "25.6.0",
+    "machine": "arm64",
+    "timestamp": "2026-10-03T20:21:49.042442+00:00"
+  },
+  "summary": {
+    "articles_covered": [
+      12,
+      14,
+      15
+    ],
+    "total_evidence_points": 8,
+    "verified_points": 8,
+    "compliance_ratio": "100.0%",
+    "verdict": "COMPLIANT_IN_SILICON"
+  },
+  "sections": [
+    {
+      "article": "Article 12: Record-Keeping & Automatic Logging",
+      "legal_mandate": "High-risk and autonomous AI systems must technically enable automatic recording of events (logs) throughout lifecycle, ensuring tamper-evident traceability.",
+      "silicon_solution": "RFC 9942 COSE_Sign1 cryptographic receipts per action dispatch + WORM SQLite WAL with SHA3-256 hash chaining.",
+      "verified_evidence": [
+        {
+          "claim_id": "cose_ed25519_receipt",
+          "statement": "Receipts are formatted according to RFC 9942 and cryptographically signed with Ed25519",
+          "evidence_command": "cargo test --lib receipt::tests::test_receipt_ed25519_sign_verify_cycle",
+          "status": "verified",
+          "compliant": true
+        },
+        {
+          "claim_id": "cortex_persist_sqlite",
+          "statement": "Persistent ledger with SQLite WAL, BEGIN IMMEDIATE and SHA3-256 hash chaining",
+          "evidence_command": "pytest tests/ -k test_ledger",
+          "status": "verified",
+          "compliant": true
+        },
+        {
+          "claim_id": "merkle_attestation",
+          "statement": "Merkle state roots computed deterministically and queryable via MCP",
+          "evidence_command": "pytest tests/ -k test_merkle",
+          "status": "verified",
+          "compliant": true
+        }
+      ]
+    },
+    {
+      "article": "Article 14: Human Oversight & Capability Invariants",
+      "legal_mandate": "Natural persons must be enabled to oversee the AI system, prevent or minimize risks, and exercise an effective stop mechanism.",
+      "silicon_solution": "Apple Secure Enclave P-256 biometric friction (Touch ID with zero reuse duration) for irreversible side-effects + 64-byte SharedManifest gate.",
+      "verified_evidence": [
+        {
+          "claim_id": "secure_enclave_p256",
+          "statement": "Apple Secure Enclave bridge produces P-256 signatures with Touch ID gate",
+          "evidence_command": "cargo test --lib enclave::tests::test_enclave_cryptographic_verification_p256",
+          "status": "verified_local",
+          "compliant": true
+        },
+        {
+          "claim_id": "inv_01_manifest_layout",
+          "statement": "SharedManifest is exactly 64 bytes and 64-byte aligned (Zero-Split Coherence)",
+          "evidence_command": "cargo test --lib manifest::tests::layout_is_64_bytes_aligned_with_documented_offsets -- --exact",
+          "status": "verified",
+          "compliant": true
+        }
+      ]
+    },
+    {
+      "article": "Article 15: Accuracy, Robustness & Cybersecurity",
+      "legal_mandate": "AI systems must achieve an appropriate level of accuracy, robustness, fail-safe operation, and resilience against adversarial inputs or hallucinations.",
+      "silicon_solution": "Deterministic apoptosis (0xDEAD_6060 / Fail-Stop) on capability taint + Seqlock SPMC (RFO=0) + Lean 4 machine-checked trace induction.",
+      "verified_evidence": [
+        {
+          "claim_id": "inv_04_fail_stop_halt",
+          "statement": "Epistemic halt closes admission (POISONED, 0xDEAD_6060) and records SignedDurable / UnsignedDurable / PersistenceFailed evidence within a bounded budget; never a synthetic signature",
+          "evidence_command": "cargo test --lib halt::tests",
+          "status": "verified",
+          "compliant": true
+        },
+        {
+          "claim_id": "inv_02_seqlock_concurrency",
+          "statement": "Seqlock SPMC protocol model (loom replica of seqlock.rs, 1 writer x 1-2 readers) yields no torn read under bounded model checking (max 2 preemptions); production code is not itself model-checked",
+          "evidence_command": "LOOM_MAX_PREEMPTIONS=2 RUSTFLAGS=\\\"--cfg loom\\\" CARGO_TARGET_DIR=target/loom cargo test --test seqlock_loom --release",
+          "status": "verified",
+          "compliant": true
+        },
+        {
+          "claim_id": "lean4_formal_trace",
+          "statement": "Lean 4 machine-checks concrete execution traces and proves universal inductive soundness theorems for arbitrary traces (no torn reads and single-dispatch AX-0 invariance)",
+          "evidence_command": "lean proof/lean/BabylonTrace.lean && lean proof/lean/AX0.lean",
+          "status": "verified_local",
+          "compliant": true
+        }
+      ]
+    }
+  ],
+  "report_sha256": "4e31fed5dd856fdc157b3af24f19b62b50e0277102b1a9e94959195708704df0"
+}

@@ -1,0 +1,17 @@
+[package]
+name = "nul_zk_poc"
+version = "4.3.0"
+edition = "2021"
+description = "PoC of mathematical efficacy for nul-zk using Groth16"
+publish = false
+
+[dependencies]
+ark-ff = "0.4.2"
+ark-relations = "0.4.0"
+ark-bls12-381 = "0.4.0"
+ark-groth16 = "0.4.0"
+ark-snark = "0.4.0"
+rand = "0.8.5"
+
+[build-dependencies]
+nul-zk = { path = "../nul-zk" }

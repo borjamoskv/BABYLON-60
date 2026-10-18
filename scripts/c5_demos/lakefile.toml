@@ -1,0 +1,10 @@
+name = "poc_annex_vi_compliance"
+version = "0.1.0"
+default_target = "poc_annex_vi_compliance"
+
+[[lean_exe]]
+name = "poc_annex_vi_compliance"
+root = "poc_annex_vi_compliance"
+# Compiles the Lean 4 formal oracle directly to a standalone C native binary
+# satisfying INV_C5_LEAN_AOT_ORACLE. 
+# Rust Ring-0 will execute this binary without invoking the Lean compiler.

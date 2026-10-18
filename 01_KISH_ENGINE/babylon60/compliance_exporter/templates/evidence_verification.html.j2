@@ -1,0 +1,19 @@
+        <h2>{{ evidence_verification_title }}</h2>
+        <table>
+            <tbody>
+                <tr><td><strong>{{ ledger_label }}</strong></td><td><code>{{ verification.ledger_path }}</code></td></tr>
+                <tr><td><strong>{{ integrity_verified_label }}</strong></td><td><code>{{ verification.integrity_verified }}</code></td></tr>
+                <tr><td><strong>{{ recomputed_merkle_root_label }}</strong></td><td><code>{{ verification.ledger_merkle_root }}</code></td></tr>
+                <tr><td><strong>{{ manifest_match_label }}</strong></td><td><code>{{ verification.evidence_match }}</code></td></tr>
+                <tr>
+                    <td><strong>{{ verdict_label }}</strong></td>
+                    <td>
+                        {% if verdict_ok %}
+                        <span class="badge badge-success">✅ {{ verdict }}</span>
+                        {% else %}
+                        <span class="badge badge-danger">❌ {{ verdict }}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>

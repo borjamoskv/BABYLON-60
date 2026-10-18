@@ -1,0 +1,28 @@
+[package]
+name = "eridu-infer"
+version = "0.1.0"
+edition = "2021"
+description = "Sovereign Air-Gapped Local Inference Engine & Zero-HTTP UMA Runtime"
+authors = ["Borja Moskv <borjamoskv@github.com>"]
+license-file = "../../LICENSE"
+publish = false
+
+[lib]
+name = "eridu_infer"
+path = "src/lib.rs"
+
+[[bin]]
+name = "eridu-infer"
+path = "src/main.rs"
+
+[dependencies]
+babylon60 = { package = "babylon60_root", path = "../..", default-features = false, features = ["microkernel"] }
+axum = { version = "0.7", features = ["ws"] }
+tokio = { version = "1.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha2 = "0.10"
+hex = "0.4"
+chrono = { version = "0.4", features = ["serde"] }
+memmap2 = "0.9"
+byteorder = "1.5"

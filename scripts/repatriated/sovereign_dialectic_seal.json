@@ -1,0 +1,15 @@
+{
+  "epoch_timestamp": 1791058820,
+  "scitt_rfc9942_profile": "C5-REAL-APPLE-SILICON-NIST-P256",
+  "leaves": {
+    "DISECCION_EXIT_PIMENTO_MISTRAL_AI.md": "e94a7afbeaaff97f6098e3ec532a0c21a2e235c14c4f523a3507c33a04b94a3f",
+    "SINTESIS_TOPOLOGICA_CAMBIO2_TRAMPA_DEL_WRAPPER.md": "6a277f82a3d2bfc2496b6af68c793377115e206f194b30c2974335e1a52ce047",
+    "SINTESIS_RECURSIVA_6_NIVELES_SILICIO.md": "f156bee1584ed6925f0abae59897684e037217ffdf2768d1534e003892dbc0d1",
+    "FORMALIZACION_LEAN4_INVARIANTE_SOBERANA.md": "205b3428d685429fd6e3746b81f48e34411c75469d8b3a49e0bfb17cf9bbe365",
+    "sovereign_invariance.lean": "1f2867fc63fa85f32281fd6998edd09b78527e9e7b317b6dd84fad0ecaed8e3f"
+  },
+  "merkle_root_sha3_256": "86e12aa9a43b1236d2c2ffbd8b0d6c315909abd66706a0e2500980d784ae162a",
+  "bitcoin_l1_op_return_payload": "60608463c16a0000000086e12aa9a43b1236d2c2ffbd8b0d6c315909abd66706a0e2500980d784ae162a",
+  "payload_size_bytes": 42,
+  "hardware_root_of_trust": "Apple Silicon Secure Enclave TRNG (Mac15,6)"
+}

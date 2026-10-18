@@ -1,0 +1,10 @@
+[package]
+name = "mxc_broker_poc"
+version = "0.1.0"
+license-file = "../../LICENSE"
+publish = false
+edition = "2021"
+
+[dependencies]
+libc = "0.2"
+tempfile = "3.10"

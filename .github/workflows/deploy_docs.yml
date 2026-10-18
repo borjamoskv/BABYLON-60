@@ -1,0 +1,58 @@
+name: Deploy Documentation to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - '.github/workflows/deploy_docs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: docs-deployment
+  cancel-in-progress: true
+
+jobs:
+  deploy-docs:
+    name: Build & Deploy MkDocs Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository (Zero-Bloat Shallow Clone)
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+
+      - name: Check MkDocs configuration
+        id: check_mkdocs
+        run: |
+          if [ ! -f mkdocs.yml ]; then
+            echo "No mkdocs.yml found, skipping documentation deployment."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Set up Python
+        if: steps.check_mkdocs.outputs.skip != 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Documentation Dependencies
+        if: steps.check_mkdocs.outputs.skip != 'true'
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install mkdocs-material pymdown-extensions
+
+      - name: Build and Deploy to gh-pages
+        if: steps.check_mkdocs.outputs.skip != 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          mkdocs gh-deploy --force --clean

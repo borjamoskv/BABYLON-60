@@ -1,0 +1,89 @@
+<style>
+  #moskv-response-signature {
+    --s-paper: light-dark(#fffefa, #1c211e);
+    --s-text: light-dark(#24352b, #edf3ed);
+    --s-muted: light-dark(#58685e, #b0beb3);
+    --s-line: light-dark(#dce5db, #3d4a40);
+    --s-accent: light-dark(#365d46, #bed5bd);
+    --s-tint: light-dark(#edf3e9, #2a382d);
+    box-sizing: border-box; width: 100%; margin: 0;
+    color: var(--s-text); background: var(--s-paper);
+    border: 1px solid var(--s-line); border-radius: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px; line-height: 1.5; overflow-wrap: anywhere;
+  }
+  #moskv-response-signature * { box-sizing: border-box; }
+  #moskv-response-signature p,
+  #moskv-response-signature dl,
+  #moskv-response-signature dd { margin: 0; }
+  #moskv-response-signature .s-header {
+    display: flex; flex-wrap: wrap; align-items: center;
+    justify-content: space-between; gap: 18px; padding: 20px 22px;
+  }
+  #moskv-response-signature .s-identity { display: flex; align-items: center; gap: 12px; }
+  #moskv-response-signature .s-mark {
+    width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+    display: grid; place-items: center; color: var(--s-accent); background: var(--s-tint);
+  }
+  #moskv-response-signature .s-mark svg { width: 20px; height: 20px; }
+  #moskv-response-signature .s-name { font-size: 19px; font-weight: 500; letter-spacing: .025em; }
+  #moskv-response-signature .s-caption { font-size: 12px; color: var(--s-muted); }
+  #moskv-response-signature .s-runtime { max-width: 300px; }
+  #moskv-response-signature .s-model { font-size: 14px; font-weight: 500; }
+  #moskv-response-signature .s-model .s-caption { display: block; font-weight: 400; margin-top: 2px; }
+  #moskv-response-signature .s-effort { display: inline-block; font-size: 12px; color: var(--s-muted); margin-top: 4px; }
+  #moskv-response-signature .s-context { margin: 0 22px; border-top: 1px solid var(--s-line); }
+  #moskv-response-signature .s-row {
+    display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 14px;
+    padding: 12px 0; border-bottom: 1px solid var(--s-line);
+  }
+  #moskv-response-signature .s-row dt { font-size: 12px; color: var(--s-muted); padding-top: 1px; }
+  #moskv-response-signature .s-row dd { font-size: 14px; }
+  #moskv-response-signature details { margin: 0 22px; }
+  #moskv-response-signature summary {
+    min-height: 44px; padding: 12px 0; width: fit-content;
+    color: var(--s-accent); font-size: 12px;
+  }
+  #moskv-response-signature summary:focus-visible { outline: 2px solid var(--s-accent); outline-offset: 3px; border-radius: 3px; }
+  #moskv-response-signature .s-source {
+    display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 14px;
+    padding: 10px 0; border-top: 1px solid var(--s-line); font-size: 12px;
+  }
+  #moskv-response-signature .s-source dt { font-weight: 500; }
+  #moskv-response-signature .s-source dd { color: var(--s-muted); }
+  #moskv-response-signature .s-footer { padding: 0 22px 16px; font-size: 12px; color: var(--s-muted); }
+  @media (max-width: 520px) {
+    #moskv-response-signature .s-header { padding: 17px; gap: 14px; }
+    #moskv-response-signature .s-runtime { width: 100%; max-width: none; }
+    #moskv-response-signature .s-context,
+    #moskv-response-signature details { margin-left: 17px; margin-right: 17px; }
+    #moskv-response-signature .s-row,
+    #moskv-response-signature .s-source { grid-template-columns: 1fr; gap: 4px; }
+    #moskv-response-signature .s-footer { padding: 0 17px 16px; }
+  }
+</style>
+<article id="moskv-response-signature" aria-label="Firma de MOSKV-1" data-signature-version="2" data-signature-observed-at="{{OBSERVED_AT}}">
+  <header class="s-header">
+    <div class="s-identity">
+      <div class="s-mark"><i data-lucide="layers" aria-hidden="true"></i></div>
+      <div>
+        <div class="s-name" data-signature-field="TOPOLOGÍA ACTIVA">MOSKV-1</div>
+        <div class="s-caption">Hypervisor agéntico · Babylon</div>
+      </div>
+    </div>
+    <div class="s-runtime">
+      <div class="s-model" data-signature-field="LLM">{{MODEL}} <span class="s-caption">{{MODEL_CONTEXT}}</span></div>
+      {{EFFORT_BLOCK}}
+    </div>
+  </header>
+  {{CONTEXT_ROWS}}
+  <details>
+    <summary class="cursor-interaction">Fuentes y alcance</summary>
+    <dl>
+      <div class="s-source"><dt>Modelo</dt><dd data-signature-source="LLM">{{MODEL_SOURCE}}</dd></div>
+      {{SOURCE_ROWS}}
+      <div class="s-source"><dt>Alcance</dt><dd>Procedencia declarada; no constituye atestación del runtime.</dd></div>
+    </dl>
+  </details>
+  <footer class="s-footer"><time datetime="{{OBSERVED_AT}}">{{OBSERVED_LABEL}}</time></footer>
+</article>

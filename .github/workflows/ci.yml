@@ -1,0 +1,104 @@
+name: C5-REAL Matrix Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+
+env:
+  CARGO_INCREMENTAL: '0'
+  CARGO_PROFILE_DEV_DEBUG: '0'
+  CARGO_PROFILE_TEST_DEBUG: '0'
+
+jobs:
+  rust:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - uses: Swatinem/rust-cache@v2
+      - uses: arduino/setup-protoc@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@v7
+      - run: uv sync --locked --extra dev --extra gemini
+      - name: Check locked workspace
+        run: cargo check --workspace --locked
+      - name: Test workspace with isolated IPC scheduling
+        run: uv run --no-sync cargo test --workspace --locked -- --test-threads=1
+      - name: Clippy
+        run: cargo clippy --locked --all-targets -- -D warnings
+
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo install cargo-audit --version 0.22.2 --locked
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@v7
+      - run: uv sync --locked --extra dev --extra gemini
+      - run: uv run --no-sync make check
+      - run: uv run --no-sync make test-quality
+
+  claims:
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - uses: arduino/setup-protoc@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@v7
+      - run: uv sync --locked --extra dev --extra gemini
+      - name: Install Lean toolchain
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o "$RUNNER_TEMP/elan-init.sh"
+          sh "$RUNNER_TEMP/elan-init.sh" -y --default-toolchain none
+          "$HOME/.elan/bin/elan" default "$(cat proof/lean/lean-toolchain)"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Verify all declared claims
+        run: uv run --no-sync python scripts/c5_quality_gates/verify_claims.py
+      - name: Compile evidence for this tested source
+        run: uv run --no-sync python scripts/c5_quality_gates/compile_claims_manifest.py
+      - name: Entropy gate on the macOS substrate
+        run: uv run --no-sync python scripts/c5_quality_gates/audit_entropy_3strata.py
+      - name: Swarm concurrency stress gate
+        run: uv run --no-sync python scripts/c5_quality_gates/swarm_100_stress_campaign.py
+      - name: Preserve evidence, including failures
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: claims-macos
+          path: |
+            scripts/c5_quality_gates/claims_sitrep.json
+            evidence.json
+            claims.lock
+            RELEASE_MANIFEST.json

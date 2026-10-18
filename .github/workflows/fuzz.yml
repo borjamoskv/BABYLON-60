@@ -1,0 +1,19 @@
+name: Property Fuzzing (proptest)
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  fuzzing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Exercise the committed property-based fuzz harness
+        run: cargo test --locked -p babylon60-fuzz
+        env:
+          PROPTEST_CASES: '10000'
