@@ -16,7 +16,7 @@ crate-type = ["cdylib", "rlib"]
 blake3 = "1.8.5"
 petgraph = "0.7"
 rusqlite = { version = "0.40.1", features = ["bundled"] }
-signal-hook = "0.3.17"
+signal-hook = "0.4.5"
 pyo3 = { version = "0.29" }
 libc = "0.2.186"
 uuid = { version = "1.24.0", features = ["v5"] }
