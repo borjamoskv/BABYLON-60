@@ -799,7 +799,9 @@ class CleanRoomAotDissector:
           - `deepseek-harness`: Contenedor Electron `.asar` (`dsh` v0.2) con plugins Cordis
             (`dsh-chatgpt-sub`) y configuración de 50 subagentes concurrentes.
         """
-        norm_kind = target_kind.value if isinstance(target_kind, HarnessTargetKind) else str(target_kind).strip().lower()
+        norm_kind = (
+            target_kind.value if isinstance(target_kind, HarnessTargetKind) else str(target_kind).strip().lower()
+        )
         sovereign_ring0_source = (
             "#[repr(C, align(64))] pub struct Kudurru64Cell { "
             "pub seq: AtomicU64 /* Ordering::Acquire Ordering::Release seqlock */ }\n"
@@ -997,7 +999,9 @@ class CleanRoomAotDissector:
         manifest_txt = manifest_source if manifest_source is not None else str(fixture["manifest_source"])
         eff_cli = tuple(cli_flags) if cli_flags is not None else tuple(fixture["cli_flags"])
         eff_ipc = asar_ipc_source if asar_ipc_source is not None else str(fixture["asar_ipc_source"])
-        req_conc = int(requested_concurrency) if requested_concurrency is not None else int(fixture["requested_concurrency"])
+        req_conc = (
+            int(requested_concurrency) if requested_concurrency is not None else int(fixture["requested_concurrency"])
+        )
         eff_states = tuple(states) if states is not None else tuple(fixture["states"])
         eff_alpha = tuple(alphabet) if alphabet is not None else tuple(fixture["alphabet"])
         eff_trans = transitions if transitions is not None else fixture["transitions"]
@@ -1169,4 +1173,3 @@ class CleanRoomAotDissector:
             manifest_payload=manifest,
             bridge_digest_sha256=bridge_digest,
         )
-

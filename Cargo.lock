@@ -461,6 +461,7 @@ dependencies = [
  "clap",
  "ed25519-dalek",
  "hex",
+ "libc",
  "rand 0.8.7",
  "serde",
  "serde_json",

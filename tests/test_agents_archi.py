@@ -682,7 +682,9 @@ def test_legaltech_flash_mini_veto_and_allow_fallbacks_false(monkeypatch: pytest
         ModelFloorGuard.assert_model_allowed(allowed)
 
     # 2. SensitivePathGuard detects EU AI Act / LegalTech markers
-    assert SensitivePathGuard.is_legaltech(prompt="Redactar dictamen jurídico bajo el Reglamento (UE) 2024/1689") is True
+    assert (
+        SensitivePathGuard.is_legaltech(prompt="Redactar dictamen jurídico bajo el Reglamento (UE) 2024/1689") is True
+    )
     assert SensitivePathGuard.is_legaltech(context_paths=["docs/03_guides/guide_legaltech_eu_ai_act.md"]) is True
 
     # 3. OpenRouterClient purges mini/free models and sets allow_fallbacks=False on LegalTech / strict_model_floor
@@ -854,3 +856,19 @@ def test_moskv1_render_exergy_guard_cache_mutex_and_silicon_gate(tmp_path: Path)
     final_cmd = build_remotion_render_args("src/index.ts", "Comp", "out.mp4", "props.json", tier=RenderTier.FINAL)
     assert "--scale=0.5" not in final_cmd
 
+    # Mutex hardening: reject preexisting symlink at lock_path
+    symlink_lock = tmp_path / "symlink_render.lock"
+    target_dummy = tmp_path / "dummy_target.txt"
+    target_dummy.write_text("victim", encoding="utf-8")
+    symlink_lock.symlink_to(target_dummy)
+    bad_mutex = SingleRenderQueueMutex(lock_path=symlink_lock)
+    with pytest.raises(RuntimeError, match="MOSKV1_RENDER_LOCK_SYMLINK_REJECTED"):
+        with bad_mutex.acquire(non_blocking=True):
+            pass
+
+    # Mutex hardening: real mutual exclusion across independent descriptors
+    with mutex.acquire(non_blocking=True):
+        contending_mutex = SingleRenderQueueMutex(lock_path=tmp_path / "render.lock")
+        with pytest.raises(RuntimeError, match="MOSKV1_RENDER_QUEUE_BUSY"):
+            with contending_mutex.acquire(non_blocking=True):
+                pass

@@ -350,11 +350,59 @@ fn main() {
             {
                 use std::os::unix::fs::PermissionsExt;
                 use std::os::unix::io::AsRawFd;
-                use std::os::unix::net::UnixListener;
+                use std::os::unix::net::{UnixListener, UnixStream};
 
-                extern "C" {
-                    fn getpeereid(s: i32, euid: *mut u32, egid: *mut u32) -> i32;
-                    fn geteuid() -> u32;
+                #[cfg(target_os = "linux")]
+                fn peer_uid(stream: &UnixStream) -> Result<u32, &'static str> {
+                    let mut credentials: libc::ucred = unsafe { std::mem::zeroed() };
+                    let mut length = std::mem::size_of::<libc::ucred>() as libc::socklen_t;
+                    let rc = unsafe {
+                        libc::getsockopt(
+                            stream.as_raw_fd(),
+                            libc::SOL_SOCKET,
+                            libc::SO_PEERCRED,
+                            std::ptr::from_mut(&mut credentials).cast(),
+                            &mut length,
+                        )
+                    };
+                    if rc != 0
+                        || length as usize != std::mem::size_of::<libc::ucred>()
+                        || credentials.uid == u32::MAX
+                    {
+                        return Err("SO_PEERCRED credential lookup failed");
+                    }
+                    Ok(credentials.uid)
+                }
+
+                #[cfg(any(
+                    target_os = "macos",
+                    target_os = "ios",
+                    target_os = "freebsd",
+                    target_os = "openbsd",
+                    target_os = "netbsd",
+                    target_os = "dragonfly"
+                ))]
+                fn peer_uid(stream: &UnixStream) -> Result<u32, &'static str> {
+                    let mut uid = u32::MAX;
+                    let mut gid = u32::MAX;
+                    let rc = unsafe { libc::getpeereid(stream.as_raw_fd(), &mut uid, &mut gid) };
+                    if rc != 0 || uid == u32::MAX {
+                        return Err("getpeereid credential lookup failed");
+                    }
+                    Ok(uid)
+                }
+
+                #[cfg(not(any(
+                    target_os = "linux",
+                    target_os = "macos",
+                    target_os = "ios",
+                    target_os = "freebsd",
+                    target_os = "openbsd",
+                    target_os = "netbsd",
+                    target_os = "dragonfly"
+                )))]
+                fn peer_uid(_stream: &UnixStream) -> Result<u32, &'static str> {
+                    Err("peer credential verification unsupported on target OS (fail-closed)")
                 }
 
                 let _ = fs::remove_file(&socket);
@@ -373,11 +421,10 @@ fn main() {
                 let _ = fs::set_permissions(&socket, fs::Permissions::from_mode(0o600));
 
                 for mut stream in listener.incoming().flatten() {
-                    let mut peer_uid: u32 = u32::MAX;
-                    let mut peer_gid: u32 = u32::MAX;
-                    let peer_ok = unsafe {
-                        let rc = getpeereid(stream.as_raw_fd(), &mut peer_uid, &mut peer_gid);
-                        rc == 0 && peer_uid == geteuid()
+                    let current_euid = unsafe { libc::geteuid() };
+                    let peer_ok = match peer_uid(&stream) {
+                        Ok(uid) => uid == current_euid,
+                        Err(_) => false,
                     };
                     if !peer_ok {
                         let _ = stream.write_all(b"HTTP/1.1 403 FORBIDDEN\r\nContent-Type: application/json\r\n\r\n{\"error\":\"getpeereid UID mismatch\"}");

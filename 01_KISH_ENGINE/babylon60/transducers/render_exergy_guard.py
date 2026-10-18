@@ -119,22 +119,61 @@ def compute_render_manifest_blake3(
     return compute_blake3_hex(envelope)
 
 
+def _default_private_lock_path() -> Path:
+    base_dir = Path(os.environ.get("BABYLON60_HOME", Path.home() / ".babylon60"))
+    return base_dir / "locks" / "moskv1_render_queue.lock"
+
+
 class SingleRenderQueueMutex:
     """
     Global inter-process mutex (`fcntl.flock`) serializing heavy renders across all 13 MOSKV-1 surfaces.
     Prevents concurrent Remotion/ffmpeg jobs from thrashing unified RAM into swap.
     """
 
-    def __init__(self, lock_path: str | Path = "/tmp/moskv1_render_queue.lock") -> None:
-        self.lock_path = Path(lock_path)
+    def __init__(self, lock_path: str | Path | None = None) -> None:
+        self.lock_path = Path(lock_path) if lock_path is not None else _default_private_lock_path()
+
+    @staticmethod
+    def _ensure_private_lock_dir(lock_dir: Path, expected_uid: int) -> None:
+        import stat as stat_mod
+
+        lock_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
+        dir_st = os.lstat(str(lock_dir))
+        if not stat_mod.S_ISDIR(dir_st.st_mode) or stat_mod.S_ISLNK(dir_st.st_mode):
+            raise RuntimeError(f"MOSKV1_RENDER_LOCK_UNSAFE_DIR: Lock parent is not a regular directory ({lock_dir}).")
+        if dir_st.st_uid != expected_uid:
+            raise RuntimeError(
+                f"MOSKV1_RENDER_LOCK_UID_MISMATCH: Lock directory UID {dir_st.st_uid} != expected {expected_uid}."
+            )
+        if lock_dir == _default_private_lock_path().parent:
+            os.chmod(str(lock_dir), 0o700)
 
     @contextmanager
     def acquire(self, non_blocking: bool = False) -> Iterator[Path]:
-        # Conforms to INV_C5_22: aligns with swarm_lock_guard.py and .cortex_thermal_lock semantics
-        self.lock_path.parent.mkdir(parents=True, exist_ok=True)
-        fd = os.open(str(self.lock_path), os.O_CREAT | os.O_RDWR, 0o600)
+        # Conforms to INV_C5_22 & INV_C5_FS_DESCRIPTOR_NOFOLLOW:
+        # aligns with swarm_lock_guard.py and .cortex_thermal_lock semantics
+        import stat as stat_mod
+
+        expected_uid = os.geteuid() if hasattr(os, "geteuid") else 0
+        self._ensure_private_lock_dir(self.lock_path.parent, expected_uid)
+
+        open_flags = os.O_CREAT | os.O_RDWR | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_CLOEXEC", 0)
+        try:
+            fd = os.open(str(self.lock_path), open_flags, 0o600)
+        except OSError as exc:
+            raise RuntimeError(
+                f"MOSKV1_RENDER_LOCK_SYMLINK_REJECTED: Cannot safely open {self.lock_path}: {exc}"
+            ) from exc
+
         flags = fcntl.LOCK_EX | (fcntl.LOCK_NB if non_blocking else 0)
         try:
+            st = os.fstat(fd)
+            if not stat_mod.S_ISREG(st.st_mode):
+                raise RuntimeError(f"MOSKV1_RENDER_LOCK_NOT_REGULAR: {self.lock_path} is not a regular file.")
+            if st.st_uid != expected_uid:
+                raise RuntimeError(f"MOSKV1_RENDER_LOCK_UID_MISMATCH: File UID {st.st_uid} != expected {expected_uid}.")
+            if st.st_nlink != 1:
+                raise RuntimeError(f"MOSKV1_RENDER_LOCK_HARDLINK_DETECTED: Expected st_nlink==1, got {st.st_nlink}.")
             try:
                 fcntl.flock(fd, flags)
             except BlockingIOError as exc:
@@ -148,6 +187,8 @@ class SingleRenderQueueMutex:
         finally:
             try:
                 fcntl.flock(fd, fcntl.LOCK_UN)
+            except OSError:
+                pass
             finally:
                 os.close(fd)
 
@@ -469,9 +510,7 @@ class RenderExergyOrchestrator:
             ru_child_1 = resource.getrusage(resource.RUSAGE_CHILDREN)
 
             wall_s = max(1e-6, t1 - t0)
-            involuntary_cs = (ru_self_1.ru_nivcsw - ru_self_0.ru_nivcsw) + (
-                ru_child_1.ru_nivcsw - ru_child_0.ru_nivcsw
-            )
+            involuntary_cs = (ru_self_1.ru_nivcsw - ru_self_0.ru_nivcsw) + (ru_child_1.ru_nivcsw - ru_child_0.ru_nivcsw)
             max_rss_mb = max(ru_self_1.ru_maxrss, ru_child_1.ru_maxrss) / (1024 * 1024)
             est_joules = self.nominal_package_watts * wall_s
 
