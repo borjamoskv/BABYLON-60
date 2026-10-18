@@ -9,7 +9,7 @@ repository = "https://github.com/borjamoskv/BABYLON-60"
 authors = ["Borja Moskv <borjamoskv@github.com>"]
 
 [dependencies]
-num-bigint = { version = "0.4.6", features = ["serde"] }
+num-bigint = { version = "0.5.1", features = ["serde"] }
 num-traits = "0.2.19"
 num-integer = "0.1.46"
 serde = { version = "1.0", features = ["derive"] }
